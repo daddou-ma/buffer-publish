@@ -17,6 +17,12 @@ const generalWrapperStyle = {
   marginBottom: '0.5rem',
 };
 
+const formWrapperStyle = {
+  marginBottom: '0.5rem',
+  width: '50%',
+};
+
+
 const headerTextWrapperStyle = {
   display: 'flex',
   marginBottom: '0.5rem',
@@ -33,6 +39,12 @@ const switchStyle = {
   marginBottom: '1.5rem',
   marginTop: '1rem',
   textAlign: 'right',
+  whiteSpace: 'nowrap',
+};
+
+const switchStyleTwo = {
+  marginBottom: '1.5rem',
+  marginTop: '1rem',
   whiteSpace: 'nowrap',
 };
 
@@ -88,7 +100,7 @@ const GoogleAnalytics = ({
       </div>
     </div>
     {showGACustomizationForm &&
-      <form style={generalWrapperStyle}>
+      <form style={formWrapperStyle}>
         <div style={inputStyle}>
           <Input
             label={'Campaign Name'}
@@ -107,7 +119,7 @@ const GoogleAnalytics = ({
             placeholder={'social'}
           />
         </div>
-        <div style={switchStyle}>
+        <div style={switchStyleTwo}>
           <Button>
             Update Tracking
           </Button>
