@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
+import GoogleAnalytics from '../GoogleAnalytics';
 
 const GeneralSettings = ({
   directPostingEnabled,
@@ -27,6 +28,7 @@ const GeneralSettings = ({
       selectedShortener={selectedShortener}
     />
     <Divider />
+    <GoogleAnalytics />
   </div>
 );
 
