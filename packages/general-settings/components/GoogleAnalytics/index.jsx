@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Text, Toggle, Divider,
+  Button,
 } from '@bufferapp/components';
 
 const enableGoogleAnalyticsStyle = {
@@ -80,6 +81,9 @@ const GoogleAnalytics = ({
         />
       </div>
     </div>
+    <Button>
+      Customize Campaign Tracking
+    </Button>
   </div>
 );
 
