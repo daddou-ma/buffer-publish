@@ -21,11 +21,8 @@ export default connect(
           profileId: ownProps.profileId,
         }));
       },
-      onLinkShortenerOptionSelect: (event) => {
-        dispatch(actions.handleOnSelectLinkShortenerChange({
-          profileId: ownProps.profileId,
-          domain: event.target.value,
-        }));
+      onShowGACustomizationFormClick: () => {
+        dispatch(actions.handleShowGACustomizationFormClick());
       },
       onShowGACustomizationFormClick: () => {
         dispatch(actions.handleShowGACustomizationFormClick());

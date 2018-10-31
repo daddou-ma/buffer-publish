@@ -66,10 +66,8 @@ export const actions = {
     type: actionTypes.SET_DIRECT_POSTING,
     profileId: action.profileId,
   }),
-  handleOnSelectLinkShortenerChange: ({ profileId, domain }) => ({
-    type: actionTypes.CHANGE_SELECTED_LINK_SHORTENER,
-    profileId,
-    domain,
+  handleShowGACustomizationFormClick: () => ({
+    type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
   }),
   handleShowGACustomizationFormClick: () => ({
     type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
