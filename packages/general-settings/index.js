@@ -11,6 +11,7 @@ export default connect(
       loadingLinkShorteners: state.generalSettings.loadingLinkShorteners,
       selectedShortener: state.generalSettings.selectedShortener,
       showGACustomizationForm: state.generalSettings.showGACustomizationForm,
+      googleAnalyticsIsEnabled: state.generalSettings.googleAnalyticsIsEnabled,
     }),
     (dispatch, ownProps) => ({
       onSetUpDirectPostingClick: () => {
@@ -26,6 +27,9 @@ export default connect(
       },
       onShowGACustomizationFormClick: () => {
         dispatch(actions.handleShowGACustomizationFormClick());
+      },
+      onToggleGoogleAnalyticsClick: () => {
+        dispatch(actions.handleGoogleAnalyticsToggle());
       },
     }),
 )(GeneralSettings);

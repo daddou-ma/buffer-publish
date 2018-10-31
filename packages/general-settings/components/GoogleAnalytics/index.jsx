@@ -37,16 +37,14 @@ const switchStyle = {
 
 const inputStyle = {
   marginTop: '0.5rem',
-}
-
+};
 
 const GoogleAnalytics = ({
-  // isEnabled,
-  // transition,
-  // machineState,
+  googleAnalyticsIsEnabled,
   showGACustomizationForm,
   onShowGACustomizationFormClick,
-}) => (
+  onToggleGoogleAnalyticsClick,
+  }) => (
   <Card>
     <div style={headerTextWrapperStyle}>
       <Text
@@ -89,9 +87,8 @@ const GoogleAnalytics = ({
         <Toggle
           onText={'Campaign tracking:'}
           offText={'Campaign tracking:'}
-          on={console.log("enabled")}
-          onClick={console.log("clicked")}
-          disabled={console.log("disabled")}
+          on={googleAnalyticsIsEnabled}
+          onClick={() => { onToggleGoogleAnalyticsClick(); }}
         />
       </div>
     </div>
@@ -147,7 +144,7 @@ const GoogleAnalytics = ({
         </form>
       </div>
     }
-    {!showGACustomizationForm &&
+    {!showGACustomizationForm && googleAnalyticsIsEnabled &&
       <Button
         secondary
         onClick={() => {
@@ -163,6 +160,7 @@ const GoogleAnalytics = ({
 GoogleAnalytics.propTypes = {
   showGACustomizationForm: PropTypes.bool.isRequired,
   onShowGACustomizationFormClick: PropTypes.func.isRequired,
+  googleAnalyticsIsEnabled: PropTypes.bool.isRequired,
 };
 
 export default GoogleAnalytics;

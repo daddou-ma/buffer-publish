@@ -6,12 +6,14 @@ export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
   SET_DIRECT_POSTING: 0,
   CHANGE_SELECTED_LINK_SHORTENER: 0,
   SHOW_GA_CUSTOMIZATION_FORM: 0,
+  TOGGLE_GOOGLE_ANALYTICS: 0,
 });
 
 const initialState = {
   directPostingEnabled: false,
   profileId: null,
   showGACustomizationForm: false,
+  googleAnalyticsIsEnabled: false,
 };
 
 export default (state = initialState, action) => {
@@ -49,6 +51,11 @@ export default (state = initialState, action) => {
         ...state,
         showGACustomizationForm: true,
       };
+    case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
+      return {
+        ...state,
+        googleAnalyticsIsEnabled: !state.googleAnalyticsIsEnabled,
+      };
     default:
       return state;
   }
@@ -66,5 +73,8 @@ export const actions = {
   }),
   handleShowGACustomizationFormClick: () => ({
     type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
+  }),
+  handleGoogleAnalyticsToggle: () => ({
+    type: actionTypes.TOGGLE_GOOGLE_ANALYTICS,
   }),
 };
