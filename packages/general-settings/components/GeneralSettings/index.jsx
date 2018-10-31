@@ -42,6 +42,7 @@ const GeneralSettings = ({
         onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
       />
     }
+    <GoogleAnalytics />
   </div>
 );
 
