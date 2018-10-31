@@ -114,12 +114,16 @@ const GoogleAnalytics = ({
         </div>
       </form>
     }
-    <Button
-      secondary
-      onClick={() => { onShowGACustomizationFormClick(); }}
-    >
-      Customize Campaign Tracking
-    </Button>
+    {!showGACustomizationForm &&
+      <Button
+        secondary
+        onClick={() => {
+          onShowGACustomizationFormClick();
+        }}
+      >
+        Customize Campaign Tracking
+      </Button>
+    }
   </div>
 );
 
