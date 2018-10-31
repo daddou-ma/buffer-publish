@@ -5,11 +5,13 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
   SET_DIRECT_POSTING: 0,
   CHANGE_SELECTED_LINK_SHORTENER: 0,
+  SHOW_GA_CUSTOMIZATION_FORM: 0,
 });
 
 const initialState = {
   directPostingEnabled: false,
   profileId: null,
+  showGACustomizationForm: false,
 };
 
 export default (state = initialState, action) => {
@@ -42,6 +44,11 @@ export default (state = initialState, action) => {
         loadingLinkShorteners: false,
         selectedShortener: null,
       };
+    case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
+      return {
+        ...state,
+        showGACustomizationForm: true,
+      };
     default:
       return state;
   }
@@ -56,5 +63,8 @@ export const actions = {
     type: actionTypes.CHANGE_SELECTED_LINK_SHORTENER,
     profileId,
     domain,
+  }),
+  handleShowGACustomizationFormClick: () => ({
+    type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
   }),
 };

@@ -45,6 +45,8 @@ const GoogleAnalytics = ({
   // isEnabled,
   // transition,
   // machineState,
+  showGACustomizationForm,
+  onShowGACustomizationFormClick,
 }) => (
   <div>
     <div style={headerTextWrapperStyle}>
@@ -85,39 +87,45 @@ const GoogleAnalytics = ({
         />
       </div>
     </div>
-    <form style={generalWrapperStyle}>
-      <div style={inputStyle}>
-        <Input
-          label={'Campaign Name'}
-          placeholder={'buffer'}
-        />
-      </div>
-      <div style={inputStyle}>
-        <Input
-          label={'Campaign Source'}
-          placeholder={'bufferapp.com'}
-        />
-      </div>
-      <div style={inputStyle}>
-        <Input
-          label={'Campaign Medium'}
-          placeholder={'social'}
-        />
-      </div>
-      <div style={switchStyle}>
-        <Button>
-          Update Tracking
-        </Button>
-      </div>
-    </form>
-    <Button secondary>
+    {showGACustomizationForm &&
+      <form style={generalWrapperStyle}>
+        <div style={inputStyle}>
+          <Input
+            label={'Campaign Name'}
+            placeholder={'buffer'}
+          />
+        </div>
+        <div style={inputStyle}>
+          <Input
+            label={'Campaign Source'}
+            placeholder={'bufferapp.com'}
+          />
+        </div>
+        <div style={inputStyle}>
+          <Input
+            label={'Campaign Medium'}
+            placeholder={'social'}
+          />
+        </div>
+        <div style={switchStyle}>
+          <Button>
+            Update Tracking
+          </Button>
+        </div>
+      </form>
+    }
+    <Button
+      secondary
+      onClick={() => { onShowGACustomizationFormClick(); }}
+    >
       Customize Campaign Tracking
     </Button>
   </div>
 );
 
 GoogleAnalytics.propTypes = {
-  onSetUpDirectPostingClick: PropTypes.func.isRequired,
+  showGACustomizationForm: PropTypes.bool.isRequired,
+  onShowGACustomizationFormClick: PropTypes.func.isRequired,
 };
 
 export default GoogleAnalytics;

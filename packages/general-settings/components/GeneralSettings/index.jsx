@@ -13,6 +13,8 @@ const GeneralSettings = ({
   loadingLinkShorteners,
   onLinkShortenerOptionSelect,
   selectedShortener,
+  onShowGACustomizationFormClick,
+  showGACustomizationForm,
 }) => (
   <div>
     {!directPostingEnabled &&
@@ -28,7 +30,10 @@ const GeneralSettings = ({
       selectedShortener={selectedShortener}
     />
     <Divider />
-    <GoogleAnalytics />
+    <GoogleAnalytics
+      onShowGACustomizationFormClick={onShowGACustomizationFormClick}
+      showGACustomizationForm={showGACustomizationForm}
+    />
   </div>
 );
 
@@ -39,6 +44,7 @@ GeneralSettings.defaultProps = {
   loadingLinkShorteners: true,
   onLinkShortenerOptionSelect: null,
   selectedShortener: null,
+  showGACustomizationForm: false,
 };
 
 GeneralSettings.propTypes = {
@@ -56,6 +62,8 @@ GeneralSettings.propTypes = {
   loadingLinkShorteners: PropTypes.bool,
   profileService: PropTypes.string,
   selectedShortener: PropTypes.string,
+  onShowGACustomizationFormClick: PropTypes.func.isRequired,
+  showGACustomizationForm: PropTypes.bool.isRequired,
 };
 
 export default GeneralSettings;

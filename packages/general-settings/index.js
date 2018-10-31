@@ -10,6 +10,7 @@ export default connect(
       linkShorteners: state.generalSettings.linkShorteners,
       loadingLinkShorteners: state.generalSettings.loadingLinkShorteners,
       selectedShortener: state.generalSettings.selectedShortener,
+      showGACustomizationForm: state.generalSettings.showGACustomizationForm,
     }),
     (dispatch, ownProps) => ({
       onSetUpDirectPostingClick: () => {
@@ -22,6 +23,9 @@ export default connect(
           profileId: ownProps.profileId,
           domain: event.target.value,
         }));
+      },
+      onShowGACustomizationFormClick: () => {
+        dispatch(actions.handleShowGACustomizationFormClick());
       },
     }),
 )(GeneralSettings);
