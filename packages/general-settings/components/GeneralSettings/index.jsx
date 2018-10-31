@@ -45,6 +45,8 @@ const GeneralSettings = ({
     <GoogleAnalytics
       onShowGACustomizationFormClick={onShowGACustomizationFormClick}
       showGACustomizationForm={showGACustomizationForm}
+      googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
+      onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
     />
   </div>
 );

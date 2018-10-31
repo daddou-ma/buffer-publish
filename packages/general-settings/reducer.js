@@ -61,6 +61,11 @@ export default (state = initialState, action) => {
         ...state,
         showGACustomizationForm: true,
       };
+    case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
+      return {
+        ...state,
+        googleAnalyticsIsEnabled: !state.googleAnalyticsIsEnabled,
+      };
     default:
       return state;
   }
