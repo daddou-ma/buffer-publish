@@ -8,6 +8,11 @@ import {
 const enableGoogleAnalyticsStyle = {
   display: 'flex',
   flex: 1,
+  flexDirection: 'row',
+  marginBottom: '0.5rem',
+};
+
+const generalTextWrapperStyle = {
   flexDirection: 'column',
   marginBottom: '0.5rem',
 };
