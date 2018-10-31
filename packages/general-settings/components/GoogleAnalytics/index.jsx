@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Text, Toggle, Divider,
-  Button, Input,
+  Button, Input, Card,
 } from '@bufferapp/components';
 
 const enableGoogleAnalyticsStyle = {
   display: 'flex',
   flex: 1,
-  flexDirection: 'row',
+  flexDirection: 'column',
   marginBottom: '0.5rem',
 };
 
@@ -25,31 +25,18 @@ const formWrapperStyle = {
 
 const headerTextWrapperStyle = {
   display: 'flex',
-  marginBottom: '0.5rem',
+  marginBottom: '1rem',
   marginTop: '1rem',
-};
-
-const toggleTextWrapperStyle = {
-  display: 'flex',
-  marginBottom: '0.5rem',
-  width: '80%',
 };
 
 const switchStyle = {
-  marginBottom: '1.5rem',
-  marginTop: '1rem',
-  textAlign: 'right',
-  whiteSpace: 'nowrap',
-};
-
-const switchStyleTwo = {
   marginBottom: '1.5rem',
   marginTop: '1rem',
   whiteSpace: 'nowrap',
 };
 
 const inputStyle = {
-  marginRight: '0.5rem',
+  marginTop: '0.5rem',
 }
 
 
@@ -60,7 +47,7 @@ const GoogleAnalytics = ({
   showGACustomizationForm,
   onShowGACustomizationFormClick,
 }) => (
-  <div>
+  <Card>
     <div style={headerTextWrapperStyle}>
       <Text
         color={'black'}
@@ -70,7 +57,9 @@ const GoogleAnalytics = ({
       </Text>
     </div>
     <div style={generalWrapperStyle}>
-      <Text>
+      <Text
+        size={'small'}
+      >
         With campaign tracking enabled in Buffer, you will be able to see how much traffic
         you receive from social media posts directly inside your Google Analytics dashboard. You
         can disable this below if you'd like.
@@ -85,14 +74,21 @@ const GoogleAnalytics = ({
       </Text>
     </div>
     <div style={enableGoogleAnalyticsStyle}>
-      <div style={toggleTextWrapperStyle}>
-        <Text>
-          This enables Google Analytics Tracking via UTM parameters added to links you share.
-          (This will override any existing UTM parameters)
-        </Text>
-      </div>
+      <Text
+        size={'small'}
+      >
+        This enables Google Analytics Tracking via UTM parameters added to links you share.
+      </Text>
+      <Text
+        size={'small'}
+        weight={'bold'}
+      >
+        (This will override any existing UTM parameters)
+      </Text>
       <div style={switchStyle}>
         <Toggle
+          onText={'Campaign tracking:'}
+          offText={'Campaign tracking:'}
           on={console.log("enabled")}
           onClick={console.log("clicked")}
           disabled={console.log("disabled")}
@@ -100,31 +96,56 @@ const GoogleAnalytics = ({
       </div>
     </div>
     {showGACustomizationForm &&
-      <form style={formWrapperStyle}>
-        <div style={inputStyle}>
-          <Input
-            label={'Campaign Name'}
-            placeholder={'buffer'}
-          />
+      <div>
+        <Divider />
+        <div style={headerTextWrapperStyle}>
+          <Text
+            color={'black'}
+          >
+            Customise Campaign Tracking
+          </Text>
         </div>
-        <div style={inputStyle}>
-          <Input
-            label={'Campaign Source'}
-            placeholder={'bufferapp.com'}
-          />
-        </div>
-        <div style={inputStyle}>
-          <Input
-            label={'Campaign Medium'}
-            placeholder={'social'}
-          />
-        </div>
-        <div style={switchStyleTwo}>
-          <Button>
-            Update Tracking
-          </Button>
-        </div>
-      </form>
+        <form style={formWrapperStyle}>
+          <div style={inputStyle}>
+            <Text
+              weight={'medium'}
+              color={'black'}
+            >
+              Campaign Name
+            </Text>
+            <Input
+              placeholder={'buffer'}
+            />
+          </div>
+          <div style={inputStyle}>
+            <Text
+              weight={'medium'}
+              color={'black'}
+            >
+              Campaign Source
+            </Text>
+            <Input
+              placeholder={'bufferapp.com'}
+            />
+          </div>
+          <div style={inputStyle}>
+            <Text
+              weight={'medium'}
+              color={'black'}
+            >
+              Campaign Medium
+            </Text>
+            <Input
+              placeholder={'social'}
+            />
+          </div>
+          <div style={switchStyle}>
+            <Button>
+              Save Changes
+            </Button>
+          </div>
+        </form>
+      </div>
     }
     {!showGACustomizationForm &&
       <Button
@@ -136,7 +157,7 @@ const GoogleAnalytics = ({
         Customize Campaign Tracking
       </Button>
     }
-  </div>
+  </Card>
 );
 
 GoogleAnalytics.propTypes = {
