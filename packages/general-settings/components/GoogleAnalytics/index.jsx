@@ -22,7 +22,6 @@ const formWrapperStyle = {
   width: '50%',
 };
 
-
 const headerTextWrapperStyle = {
   display: 'flex',
   marginBottom: '1rem',
@@ -161,6 +160,7 @@ GoogleAnalytics.propTypes = {
   showGACustomizationForm: PropTypes.bool.isRequired,
   onShowGACustomizationFormClick: PropTypes.func.isRequired,
   googleAnalyticsIsEnabled: PropTypes.bool.isRequired,
+  onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
 };
 
 export default GoogleAnalytics;
