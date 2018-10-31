@@ -81,7 +81,7 @@ const GoogleAnalytics = ({
         />
       </div>
     </div>
-    <Button>
+    <Button secondary>
       Customize Campaign Tracking
     </Button>
   </div>
