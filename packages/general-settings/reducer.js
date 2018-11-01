@@ -61,6 +61,11 @@ export default (state = initialState, action) => {
         ...state,
         showGACustomizationForm: true,
       };
+    case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+        utmTrackingChoice: action.args.utmTrackingChoice,
+      };
     case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
       return {
         ...state,

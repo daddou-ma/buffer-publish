@@ -26,6 +26,12 @@ export default ({ dispatch }) => next => (action) => {
         args: {
           profileId: action.profileId,
           domain: action.domain,
+    case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
+      dispatch(asyncDataFetch.fetch({
+        name: 'toggleGoogleAnalytics',
+        args: {
+          profileId: action.profileId,
+          utmTrackingChoice: action.utmTrackingChoice,
         },
       }));
       break;
