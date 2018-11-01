@@ -30,8 +30,11 @@ export default connect(
           domain: event.target.value,
         }));
       },
-      onToggleGoogleAnalyticsClick: () => {
-        dispatch(actions.handleGoogleAnalyticsToggle());
+      onToggleGoogleAnalyticsClick: (googleAnalyticsIsEnabled) => {
+        dispatch(actions.handleGoogleAnalyticsToggle({
+          profileId: ownProps.profileId,
+          utmTrackingChoice: googleAnalyticsIsEnabled,
+        }));
       },
     }),
 )(GeneralSettings);

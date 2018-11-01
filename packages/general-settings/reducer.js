@@ -65,6 +65,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         googleAnalyticsIsEnabled: !state.googleAnalyticsIsEnabled,
+        profileId: action.profileId,
       };
     default:
       return state;
@@ -86,7 +87,9 @@ export const actions = {
     }),
     domain,
   }),
-  handleGoogleAnalyticsToggle: () => ({
+  handleGoogleAnalyticsToggle: ({ profileId, utmTrackingChoice }) => ({
     type: actionTypes.TOGGLE_GOOGLE_ANALYTICS,
+    profileId,
+    utmTrackingChoice,
   }),
 };
