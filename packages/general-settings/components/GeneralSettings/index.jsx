@@ -17,6 +17,8 @@ const GeneralSettings = ({
   showGACustomizationForm,
   googleAnalyticsIsEnabled,
   onToggleGoogleAnalyticsClick,
+  // This should be removed once Google Analytics feature is complete - Lola, Nov 2018
+  workInProgress,
 }) => (
   <div>
     {!directPostingEnabled &&
@@ -32,12 +34,14 @@ const GeneralSettings = ({
       selectedShortener={selectedShortener}
     />
     <Divider />
-    <GoogleAnalytics
-      onShowGACustomizationFormClick={onShowGACustomizationFormClick}
-      showGACustomizationForm={showGACustomizationForm}
-      googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
-      onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
-    />
+    {!workInProgress &&
+      <GoogleAnalytics
+        onShowGACustomizationFormClick={onShowGACustomizationFormClick}
+        showGACustomizationForm={showGACustomizationForm}
+        googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
+        onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
+      />
+    }
   </div>
 );
 
