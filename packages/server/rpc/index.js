@@ -34,6 +34,7 @@ const getNumberOfPostsMethod = require('./getNumberPosts');
 const featureMethod = require('./features');
 const getLinkShortener = require('./getLinkShortener');
 const changeLinkShortener = require('./changeLinkShortener');
+const toggleGoogleAnalytics = require('./toggleGoogleAnalytics');
 
 module.exports = rpc(
   profilesMethod,
@@ -70,4 +71,5 @@ module.exports = rpc(
   featureMethod,
   getLinkShortener,
   changeLinkShortener,
+  toggleGoogleAnalytics,
 );
