@@ -66,11 +66,10 @@ export default (state = initialState, action) => {
         ...state,
         utmTrackingChoice: action.args.utmTrackingChoice,
       };
-    case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
+    case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        googleAnalyticsIsEnabled: !state.googleAnalyticsIsEnabled,
-        profileId: action.profileId,
+        googleAnalyticsIsEnabled: action.result.isEnabled.utm_tracking === 'enabled' ? !!action.result.isEnabled.utm_tracking : !action.result.isEnabled.utm_tracking,
       };
     default:
       return state;

@@ -33,7 +33,7 @@ export default connect(
       onToggleGoogleAnalyticsClick: (googleAnalyticsIsEnabled) => {
         dispatch(actions.handleGoogleAnalyticsToggle({
           profileId: ownProps.profileId,
-          utmTrackingChoice: googleAnalyticsIsEnabled,
+          utmTrackingChoice: googleAnalyticsIsEnabled ? 'enabled' : 'disabled',
         }));
       },
     }),
