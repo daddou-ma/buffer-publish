@@ -7,6 +7,8 @@ describe('reducer', () => {
     const stateAfter = {
       directPostingEnabled: false,
       profileId: null,
+      googleAnalyticsIsEnabled: false,
+      showGACustomizationForm: false,
     };
     const action = {
       type: 'INIT',
@@ -23,6 +25,8 @@ describe('reducer', () => {
       profileService: 'twitter',
       loadingLinkShorteners: true,
       selectedShortener: null,
+      googleAnalyticsIsEnabled: false,
+      showGACustomizationForm: false,
     };
     const action = {
       type: actionTypes.SELECT_PROFILE,
