@@ -69,8 +69,12 @@ export const actions = {
   handleShowGACustomizationFormClick: () => ({
     type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
   }),
-  handleShowGACustomizationFormClick: () => ({
-    type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
+  handleOnSelectLinkShortenerChange: ({ profileId, domain }) => ({
+    handleShowGACustomizationFormClick: () => ({
+      type: actionTypes.CHANGE_SELECTED_LINK_SHORTENER, type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
+      profileId,
+    }),
+    domain,
   }),
   handleGoogleAnalyticsToggle: () => ({
     type: actionTypes.TOGGLE_GOOGLE_ANALYTICS,

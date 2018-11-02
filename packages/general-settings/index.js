@@ -24,8 +24,11 @@ export default connect(
       onShowGACustomizationFormClick: () => {
         dispatch(actions.handleShowGACustomizationFormClick());
       },
-      onShowGACustomizationFormClick: () => {
-        dispatch(actions.handleShowGACustomizationFormClick());
+      onLinkShortenerOptionSelect: (event) => {
+        dispatch(actions.handleOnSelectLinkShortenerChange({
+          profileId: ownProps.profileId,
+          domain: event.target.value,
+        }));
       },
       onToggleGoogleAnalyticsClick: () => {
         dispatch(actions.handleGoogleAnalyticsToggle());
