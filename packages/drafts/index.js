@@ -33,7 +33,7 @@ const getDraftDetails = ({ draft, profileTimezone, isPastDue, twentyFourHourTime
 
   return {
     via: draft.via,
-    userName: draft.user ? draft.user.name : '',
+    creatorName: draft.user ? draft.user.name : '',
     email: draft.user ? draft.user.email : '',
     avatarUrl,
     createdAt: createdAtString,
