@@ -1,6 +1,8 @@
 import middleware from './middleware';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as generalSettingsActionTypes } from './reducer';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 
 describe('middleware', () => {
   const dispatch = jest.fn();
@@ -33,4 +35,22 @@ describe('middleware', () => {
 
 
 
+  it('should run toggleGoogleAnalytics when toggled', () => {
+    const action = {
+      type: generalSettingsActionTypes.TOGGLE_GOOGLE_ANALYTICS,
+      profileId: 'test123',
+      utmTrackingChoice: 'enabled',
+    };
+    const postAction = {
+      name: 'toggleGoogleAnalytics',
+      args: {
+        profileId: action.profileId,
+        utmTrackingChoice: action.utmTrackingChoice,
+      },
+    };
+
+    middleware({ dispatch })(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(dataFetchActions.fetch(postAction));
+  });
 });
