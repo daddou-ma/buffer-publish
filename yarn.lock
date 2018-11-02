@@ -363,6 +363,14 @@
     "@bufferapp/publish-formatters" "1.9.27"
     twitter-text "3.0.0"
 
+"@bufferapp/publish-parsers@1.9.28-beta.1":
+  version "1.9.28-beta.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.9.28-beta.1.tgz#0077064d85bc1f55bb120477afe13d8e3c1e31ca"
+  integrity sha512-lJU8yndLgB3N4gDLs/X0nbKxFSeH6TgrP9nMLiFStxgDB1n34DwtdJfnEUxYlPAHa2/aIRjCWN50m0UGphNFdA==
+  dependencies:
+    "@bufferapp/publish-formatters" "1.9.27"
+    twitter-text "3.0.0"
+
 "@bufferapp/react-images-loaded@^1.1.0-fork.0":
   version "1.1.0-fork.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/react-images-loaded/-/react-images-loaded-1.1.0-fork.0.tgz#fb3e2e13df30c806cf17ebf11b19a20d32c02e46"
