@@ -37,7 +37,7 @@ const renderText = ({
     <Text
       size={'small'}
     >
-      {draftDetails.creatorName + ' created this on ' + draftDetails.createdAt}
+      {draftDetails.creatorName + ' created this ' + draftDetails.createdAt}
     </Text>
   </span>;
 
