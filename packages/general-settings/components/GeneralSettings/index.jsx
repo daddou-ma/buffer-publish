@@ -42,7 +42,7 @@ const GeneralSettings = ({
         onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
       />
     }
-    {!workInProgress &&
+    {workInProgress &&
       <GoogleAnalytics
         onShowGACustomizationFormClick={onShowGACustomizationFormClick}
         showGACustomizationForm={showGACustomizationForm}
