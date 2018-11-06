@@ -19,24 +19,10 @@ const rpcHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
 const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
+const { sendFavicon } = require('./lib/favicon.js');
 
 const app = express();
 const server = http.createServer(app);
-
-const sendFavicon = (req, res, type) => {
-  const img = fs.readFileSync(join(__dirname, `favicon/${req.path}`));
-  // Cache for 1 year
-  res.setHeader('Cache-Control', 'public, max-age=31536000');
-  res.setHeader('Expires', new Date(Date.now() + 31536000000).toUTCString());
-
-  if (type === 'ico') {
-    res.set('Content-Type', 'image/x-icon');
-  } else {
-    res.set('Content-Type', 'image/png');
-  }
-  res.send(img);
-  res.end();
-};
 
 // Favicon
 app.get(
