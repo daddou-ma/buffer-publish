@@ -8,7 +8,7 @@
   },
   "author": "hharnisc@gmail.com",
   "dependencies": {
-    "@bufferapp/app-sidebar": "1.9.23",
+    "@bufferapp/app-sidebar": "1.9.24",
     "@bufferapp/async-data-fetch": "1.9.4",
     "@bufferapp/buffermetrics": "0.5.2",
     "@bufferapp/close-account": "2.0.0",
