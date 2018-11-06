@@ -16,5 +16,4 @@ const sendFavicon = (req, res, type) => {
   res.end();
 };
 
-// exports the variables and functions above so that other modules can use them
 module.exports.sendFavicon = sendFavicon;
