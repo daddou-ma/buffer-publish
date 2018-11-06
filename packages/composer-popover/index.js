@@ -10,9 +10,8 @@ const ComposerPopover = ({
   type,
 }) => (
   <Popover
-    left={'0px'}
-    top={'73px'}
     width={'100%'}
+    top={'5rem'}
     transparentOverlay={transparentOverlay}
     onOverlayClick={onSave}
   >

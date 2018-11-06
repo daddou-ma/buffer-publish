@@ -17,7 +17,6 @@ const composerStyle = {
 
 const topBarContainerStyle = {
   display: 'flex',
-  position: 'relative'
 };
 
 const loadingContainerStyle = {
@@ -103,7 +102,6 @@ const DraftList = ({
             <ComposerPopover
               type={'drafts'}
               onSave={onComposerCreateSuccess}
-              transparentOverlay
               preserveComposerStateOnClose
             />
           }
