@@ -108,10 +108,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@bufferapp/app-sidebar@1.9.23":
-  version "1.9.23"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.9.23.tgz#65fcf879ab7a0a360a3d58f4902a4c0bfd99b22d"
-  integrity sha512-luM91K+WMv9DEAqEdEbjhPfV9hdmBY/RE1X4l9T+n7jEDclBJTty9wF6R+WW5Vzr95AgKpaefaEgwbyenks0Rw==
+"@bufferapp/app-sidebar@1.9.24":
+  version "1.9.24"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.9.24.tgz#27dcc22b481e614175a4b9e08ca9d82f56f857e9"
+  integrity sha512-zyTYF788aeM81NXueOLczl82hA83AJw221PAe7aHyfycMrJEB0W164w3NFSjk8kh9EvKjMUbA1fWYSmVTSmKHQ==
   dependencies:
     "@bufferapp/async-data-fetch" "1.9.4"
     "@bufferapp/keywrapper" "0.2.0"
