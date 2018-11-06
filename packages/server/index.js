@@ -23,6 +23,32 @@ const maintenanceHandler = require('./maintenanceHandler');
 const app = express();
 const server = http.createServer(app);
 
+const sendFavicon = (req, res, type) => {
+  const img = fs.readFileSync(join(__dirname, `favicon/${req.path}`));
+  // Cache for 1 year
+  res.setHeader('Cache-Control', 'public, max-age=31536000');
+  res.setHeader('Expires', new Date(Date.now() + 31536000000).toUTCString());
+
+  if (type === 'ico') {
+    res.set('Content-Type', 'image/x-icon');
+  } else {
+    res.set('Content-Type', 'image/png');
+  }
+  res.send(img);
+  res.end();
+};
+
+// Favicon
+app.get(
+  '/favicon.ico',
+  (req, res) => sendFavicon(req, res, 'ico'),
+);
+
+app.get(
+  /\/favicon-(16x16|32x32)\.png/,
+  (req, res) => sendFavicon(req, res, 'png'),
+);
+
 let staticAssets = {
   'bundle.js': 'https://local.buffer.com:8080/static/bundle.js',
   'bundle.css': 'https://local.buffer.com:8080/static/bundle.css',
