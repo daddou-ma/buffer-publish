@@ -105,9 +105,9 @@ TimezoneInputForm = reduxForm({
 })(TimezoneInputForm);
 
 TimezoneInputForm = connect(
-  ({ settings }) => ({
+  ({ postingSchedule }) => ({
     initialValues: {
-      timezone: settings && !settings.clearTimezoneInput ? settings.profileTimezoneCity : '',
+      timezone: postingSchedule && !postingSchedule.clearTimezoneInput ? postingSchedule.profileTimezoneCity : '',
     },
   }),
 )(TimezoneInputForm);
