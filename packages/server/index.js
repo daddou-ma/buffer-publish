@@ -31,7 +31,7 @@ app.get(
 );
 
 app.get(
-  /\/favicon-(16x16|32x32)\.png/,
+  /\/favicon-(16|32)\.png/,
   (req, res) => sendFavicon(req, res, 'png'),
 );
 
