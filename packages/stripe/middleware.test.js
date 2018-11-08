@@ -27,6 +27,7 @@ describe('middleware', () => {
       i18n,
       upgradeModal: {
         cycle: 'year',
+        source: 'source',
       },
     }),
   };
@@ -60,6 +61,7 @@ describe('middleware', () => {
           args: {
             cycle: 'year',
             token: SUCCESS_RESPONSE.id,
+            cta: 'source',
           },
         })));
       done();
