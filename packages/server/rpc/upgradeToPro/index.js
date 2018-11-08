@@ -14,7 +14,7 @@ module.exports = method(
         json: true,
         form: {
           cycle,
-          cta,
+          cta: `publish-${cta}`,
           stripeToken: token,
           access_token: session.publish.accessToken,
           product: 'publish',
