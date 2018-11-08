@@ -1,26 +1,41 @@
 import middleware from './middleware';
 import { actions } from './reducer';
 
+// jest.mock('buffermetrics');
+
 // Object.defineProperty(window.location, 'hash', {
 //   writable: true,
 //   value: '#upgrade-to-pro',
 // });
 
 describe('middleware', () => {
-  it('should show modal on APP_INIT when hash is present', () => {
-    history.replaceState(undefined, undefined, '#upgrade-to-pro');
+  it('should show and track modal when hash is present', () => {
+    history.replaceState(undefined, undefined, '#upgrade-to-pro--profile_limit');
     const next = jest.fn();
     const dispatch = jest.fn();
     const action = {
-      type: 'APP_INIT',
+      type: 'user_FETCH_SUCCESS',
     };
     middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
-      .toBeCalledWith(actions.showUpgradeModal());
+      .toBeCalledWith(actions.showUpgradeModal({ source: 'profile_limit' }));
   });
-  it('should show upgrade modal when triggered from composer', () => {
+  it('should send \'unknown\' for hash without source', () => {
+    history.replaceState(undefined, undefined, '#upgrade-to-pro');
+    const next = jest.fn();
+    const dispatch = jest.fn();
+    const action = {
+      type: 'user_FETCH_SUCCESS',
+    };
+    middleware({ dispatch })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(actions.showUpgradeModal({ source: 'unknown' }));
+  });
+  it('should show and track upgrade modal when triggered from composer', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const action = {
@@ -31,6 +46,6 @@ describe('middleware', () => {
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
-      .toBeCalledWith(actions.showUpgradeModal());
+      .toBeCalledWith(actions.showUpgradeModal({ source: 'queue_limit' }));
   });
 });

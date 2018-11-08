@@ -1,4 +1,5 @@
 import keyWrapper from '@bufferapp/keywrapper';
+import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals';
 
 export const actionTypes = keyWrapper('UPGRADE_MODAL', {
   STORE_VALUE: 0,
@@ -6,9 +7,10 @@ export const actionTypes = keyWrapper('UPGRADE_MODAL', {
   SELECT_CYCLE: 0,
 });
 
-const initialState = {
+export const initialState = {
   cycle: 'year',
   card: {},
+  source: 'unknown',
 };
 
 export default (state = initialState, action) => {
@@ -25,6 +27,16 @@ export default (state = initialState, action) => {
           ...state.card,
           [action.id]: action.value,
         },
+      };
+    case modalsActionTypes.SHOW_UPGRADE_MODAL:
+      return {
+        ...state,
+        source: action.source || 'unknown',
+      };
+    case modalsActionTypes.HIDE_UPGRADE_MODAL:
+      return {
+        ...state,
+        source: initialState.source,
       };
     default:
       return state;

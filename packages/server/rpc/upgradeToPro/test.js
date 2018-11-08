@@ -15,9 +15,10 @@ const upgradeToPro = () =>
   RPCEndpoint.fn({
     cycle: 'year',
     token: 'stripe token',
+    cta: 'source',
   }, {
-    session,
-  });
+      session,
+    });
 
 describe('rpc/upgradeToPro', () => {
   it('sends over a request to Buffer\'s API with Publish\'s access token', () => {
@@ -38,6 +39,7 @@ describe('rpc/upgradeToPro', () => {
     upgradeToPro();
     expect(rp.mock.calls[0][0].form.plan).toBe('pro');
     expect(rp.mock.calls[0][0].form.product).toBe('publish');
+    expect(rp.mock.calls[0][0].form.cta).toBe('publish-source');
   });
 
   it('an error response gets returned too', () => {
