@@ -34,22 +34,12 @@ const GeneralSettings = ({
       selectedShortener={selectedShortener}
     />
     <Divider />
-    {!workInProgress &&
-      <GoogleAnalytics
-        onShowGACustomizationFormClick={onShowGACustomizationFormClick}
-        showGACustomizationForm={showGACustomizationForm}
-        googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
-        onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
-      />
-    }
-    {workInProgress &&
-      <GoogleAnalytics
-        onShowGACustomizationFormClick={onShowGACustomizationFormClick}
-        showGACustomizationForm={showGACustomizationForm}
-        googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
-        onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
-      />
-    }
+    <GoogleAnalytics
+      onShowGACustomizationFormClick={onShowGACustomizationFormClick}
+      showGACustomizationForm={showGACustomizationForm}
+      googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
+      onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
+    />
   </div>
 );
 

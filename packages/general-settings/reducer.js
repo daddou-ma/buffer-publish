@@ -51,16 +51,11 @@ export default (state = initialState, action) => {
         ...state,
         showGACustomizationForm: true,
       };
-    case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
-      return {
-        ...state,
-        googleAnalyticsIsEnabled: !state.googleAnalyticsIsEnabled,
-      };
-    case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
-      return {
-        ...state,
-        showGACustomizationForm: true,
-      };
+    // case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
+    //   return {
+    //     ...state,
+    //     googleAnalyticsIsEnabled: !action.googleAnalyticsIsEnabled,
+    //   };
     case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
@@ -69,7 +64,7 @@ export default (state = initialState, action) => {
     case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        googleAnalyticsIsEnabled: action.result.isEnabled.utm_tracking === 'enabled',
+        googleAnalyticsIsEnabled: action.result.isEnabled === 'enabled',
       };
     default:
       return state;
@@ -85,10 +80,8 @@ export const actions = {
     type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
   }),
   handleOnSelectLinkShortenerChange: ({ profileId, domain }) => ({
-    handleShowGACustomizationFormClick: () => ({
-      type: actionTypes.CHANGE_SELECTED_LINK_SHORTENER, type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
-      profileId,
-    }),
+    type: actionTypes.CHANGE_SELECTED_LINK_SHORTENER,
+    profileId,
     domain,
   }),
   handleGoogleAnalyticsToggle: ({ profileId, utmTrackingChoice }) => ({

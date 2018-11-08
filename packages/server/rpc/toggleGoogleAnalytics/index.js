@@ -18,7 +18,7 @@ module.exports = method(
       })
         .then(result => JSON.parse(result))
         .then(result => ({
-          isEnabled: result,
+          isEnabled: result.utm_tracking,
         }));
     } catch (err) {
       if (err.error) {

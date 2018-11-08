@@ -16,7 +16,7 @@
   "dependencies": {
     "@bufferapp/publish-profile-sidebar": "2.0.0",
     "@bufferapp/publish-queue": "2.0.0",
-    "@bufferapp/publish-parsers": "1.9.26",
+    "@bufferapp/publish-parsers": "1.9.28",
     "pusher-js": "4.1.0"
   }
 }
