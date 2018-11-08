@@ -2,6 +2,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 
 export const initialState = {
   showUpgradeModal: false,
+  upgradeModalSource: null,
 };
 
 export const actionTypes = keyWrapper('MODALS', {
@@ -15,6 +16,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showUpgradeModal: true,
+        upgradeModalSource: action.source,
       };
     case actionTypes.HIDE_UPGRADE_MODAL:
       return {
@@ -27,8 +29,9 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  showUpgradeModal: () => ({
+  showUpgradeModal: ({ source }) => ({
     type: actionTypes.SHOW_UPGRADE_MODAL,
+    source,
   }),
   hideUpgradeModal: () => ({
     type: actionTypes.HIDE_UPGRADE_MODAL,
