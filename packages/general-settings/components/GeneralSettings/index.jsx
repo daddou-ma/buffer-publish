@@ -17,8 +17,6 @@ const GeneralSettings = ({
   showGACustomizationForm,
   googleAnalyticsIsEnabled,
   onToggleGoogleAnalyticsClick,
-  // This should be removed once Google Analytics feature is complete - Lola, Nov 2018
-  workInProgress,
 }) => (
   <div>
     {!directPostingEnabled &&

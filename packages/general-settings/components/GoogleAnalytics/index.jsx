@@ -87,7 +87,7 @@ const GoogleAnalytics = ({
           onText={'Campaign tracking:'}
           offText={'Campaign tracking:'}
           on={googleAnalyticsIsEnabled}
-          onClick={() => { onToggleGoogleAnalyticsClick(); }}
+          onClick={() => { onToggleGoogleAnalyticsClick(!googleAnalyticsIsEnabled); }}
         />
       </div>
     </div>

@@ -2,7 +2,6 @@ import middleware from './middleware';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actionTypes as generalSettingsActionTypes } from './reducer';
-import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 
 describe('middleware', () => {
   const dispatch = jest.fn();

@@ -51,11 +51,11 @@ export default (state = initialState, action) => {
         ...state,
         showGACustomizationForm: true,
       };
-    // case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
-    //   return {
-    //     ...state,
-    //     googleAnalyticsIsEnabled: !action.googleAnalyticsIsEnabled,
-    //   };
+    case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
+      return {
+        ...state,
+        googleAnalyticsIsEnabled: !action.googleAnalyticsIsEnabled,
+      };
     case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
