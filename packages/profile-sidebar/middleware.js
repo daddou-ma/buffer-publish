@@ -59,6 +59,13 @@ export default ({ dispatch, getState }) => next => (action) => {
       } else if (!isPreferencePage && profiles.length === 0) {
         dispatch(push('/new-connection'));
       }
+
+      if (window._notification) {
+        dispatch(notificationActions.createNotification({
+          notificationType: window._notification.type,
+          message: window._notification.message,
+        }));
+      }
       break;
     }
 

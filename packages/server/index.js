@@ -69,6 +69,20 @@ if (isProduction) {
 
 const stripePublishableKey = process.env.STRIPE_PUBLISHABLE;
 
+const notificationScript = (notification) => {
+  if (!notification) {
+    return '';
+  }
+  return `
+  <script type="text/javascript">
+      window._notification = {
+        type: '${notification.type}',
+        message: '${notification.message}'
+      };
+  </script>
+  `;
+};
+
 const stripeScript = `<script src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
     Stripe.setPublishableKey('${stripePublishableKey}');
@@ -93,7 +107,7 @@ window['_fs_namespace'] = 'FS';
 })(window,document,window['_fs_namespace'],'script','user');
 </script>`;
 
-const getHtml = () =>
+const getHtml = notification =>
   fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
@@ -101,7 +115,8 @@ const getHtml = () =>
     .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
     .replace('{{{stripeScript}}}', stripeScript)
     .replace('{{{fullStoryScript}}}', fullStoryScript)
-    .replace('{{{bugsnagScript}}}', bugsnagScript);
+    .replace('{{{bugsnagScript}}}', bugsnagScript)
+    .replace('{{{notificationScript}}}', notificationScript(notification));
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());
@@ -151,7 +166,16 @@ app.post(
   },
 );
 
-app.get('*', (req, res) => res.send(getHtml()));
+app.get('*', (req, res) => {
+  let notification = null;
+  if (req.query.n_type && req.query.n_message) {
+    notification = {
+      type: req.query.n_type,
+      message: req.query.n_message,
+    };
+  }
+  res.send(getHtml(notification));
+});
 
 app.use(apiError);
 
