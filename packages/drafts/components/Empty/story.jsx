@@ -7,13 +7,13 @@ storiesOf('Empty drafts', module)
   .addDecorator(checkA11y)
   .add('should display empty state for drafts', () => (
     <Empty
-      isManager={true}
+      isManager
       view={'drafts'}
     />
   ))
   .add('should display empty state for approval', () => (
     <Empty
-      isManager={true}
-      view={'approval'}
+      isManager
+      view={'awaitingApproval'}
     />
   ));
