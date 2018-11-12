@@ -21,7 +21,7 @@ const draftDetails = {
   email: 'ash@buffer.com',
   isRetweet: false,
   postAction: 'This post will be added to the queue',
-  userName: 'Ash',
+  creatorName: 'Ash',
   via: 'api',
 };
 

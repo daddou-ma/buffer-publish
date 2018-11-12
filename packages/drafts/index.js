@@ -21,7 +21,7 @@ const getPostActionString = ({ draft, profileTimezone, isPastDue, twentyFourHour
 };
 
 const getDraftDetails = ({ draft, profileTimezone, isPastDue, twentyFourHourTime }) => {
-  const createdAt = draft.created_at;
+  const createdAt = draft.createdAt;
   const createdAtString = getDateString(createdAt, profileTimezone, {
     createdAt,
     twentyFourHourTime,
@@ -33,7 +33,7 @@ const getDraftDetails = ({ draft, profileTimezone, isPastDue, twentyFourHourTime
 
   return {
     via: draft.via,
-    userName: draft.user ? draft.user.name : '',
+    creatorName: draft.user ? draft.user.name : '',
     email: draft.user ? draft.user.email : '',
     avatarUrl,
     createdAt: createdAtString,

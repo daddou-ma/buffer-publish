@@ -8,7 +8,7 @@ import { checkA11y } from 'storybook-addon-a11y';
 import DraftFooter from './index';
 
 const draftDetails = {
-  userName: 'Ash',
+  creatorName: 'Ash',
   avatarUrl: 'https://buffer-uploads.s3.amazonaws.com/510521020a19000b6a00001e/a476fed03b1de4e06563d6063d7d3ee0.jpg',
   email: 'ash@buffer.com',
   via: 'web',

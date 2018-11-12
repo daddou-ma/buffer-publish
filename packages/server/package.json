@@ -11,7 +11,7 @@
     "@bufferapp/buffer-rpc": "0.0.4",
     "@bufferapp/buffermetrics": "0.5.2",
     "@bufferapp/logger": "0.7.0",
-    "@bufferapp/publish-parsers": "1.9.26",
+    "@bufferapp/publish-parsers": "1.9.29",
     "@bufferapp/publish-formatters": "1.9.27",
     "@bufferapp/session-manager": "0.7.1",
     "@bufferapp/shutdown-helper": "0.2.0",
