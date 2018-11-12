@@ -355,18 +355,10 @@
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-parsers@1.9.26":
-  version "1.9.26"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.9.26.tgz#fa991d00d6070c5ddd855d02b2c82553942a906e"
-  integrity sha512-sgnrjbW11U04R+6vD399Hdnrd6swuizFmQIZyG2eGq/f0hJawqktHskBOG/lQcUpfScxVPMUhkimOvW0Okq+Xg==
-  dependencies:
-    "@bufferapp/publish-formatters" "1.9.27"
-    twitter-text "3.0.0"
-
-"@bufferapp/publish-parsers@1.9.28-beta.1":
-  version "1.9.28-beta.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.9.28-beta.1.tgz#0077064d85bc1f55bb120477afe13d8e3c1e31ca"
-  integrity sha512-lJU8yndLgB3N4gDLs/X0nbKxFSeH6TgrP9nMLiFStxgDB1n34DwtdJfnEUxYlPAHa2/aIRjCWN50m0UGphNFdA==
+"@bufferapp/publish-parsers@1.9.29":
+  version "1.9.29"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.9.29.tgz#e6d9add6a225e62a0ed510a819dd93bb391f5e4b"
+  integrity sha512-LuKFIBRe+LnExkHDv10xfbMTu+Wxs+RkWClXZkKX4u3FAzeyyRV3ptYc/4eC8bqCMvMl6dOCbnOVTOv4q3sJuA==
   dependencies:
     "@bufferapp/publish-formatters" "1.9.27"
     twitter-text "3.0.0"
