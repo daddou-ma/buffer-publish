@@ -30,7 +30,7 @@ describe('middleware', () => {
           application: 'PUBLISH',
           location: 'MODALS',
           action: 'show_upgrade_to_pro',
-          metdata: { userId: 'foo', source: 'source' },
+          metadata: { userId: 'foo', source: 'source' },
         });
     });
 
@@ -48,7 +48,7 @@ describe('middleware', () => {
           application: 'PUBLISH',
           location: 'MODALS',
           action: 'hide_upgrade_to_pro',
-          metdata: { userId: 'foo', source: 'source' },
+          metadata: { userId: 'foo', source: 'source' },
         });
     });
 
@@ -66,7 +66,7 @@ describe('middleware', () => {
           application: 'PUBLISH',
           location: 'MODALS',
           action: 'submit_upgrade_to_pro',
-          metdata: { userId: 'foo', source: 'source' },
+          metadata: { userId: 'foo', source: 'source' },
         });
     });
   });
