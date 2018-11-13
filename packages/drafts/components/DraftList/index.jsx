@@ -4,11 +4,11 @@ import {
   QueueItems,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
-import Empty from '../Empty';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import {
   Input,
 } from '@bufferapp/components';
+import Empty from '../Empty';
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -30,45 +30,7 @@ const containerStyle = {
   marginRight: '0.5rem',
 };
 
-const renderDraftList = ({
-  postLists,
-  onApproveClick,
-  onCancelConfirmClick,
-  onDeleteClick,
-  onDeleteConfirmClick,
-  onEditClick,
-  onMoveToDraftsClick,
-  onRequestApprovalClick,
-  onRescheduleClick,
-}) => {
-  return (
-    <QueueItems
-      items={postLists}
-      onApproveClick={onApproveClick}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
-      onDeleteConfirmClick={onDeleteConfirmClick}
-      onEditClick={onEditClick}
-      onMoveToDraftsClick={onMoveToDraftsClick}
-      onRequestApprovalClick={onRequestApprovalClick}
-      onRescheduleClick={onRescheduleClick}
-      draggable={false}
-      type={'drafts'}
-    />
-  );
-};
-
-const renderEmpty = ({
-  manager,
-  tabId,
-}) =>
-  <Empty
-    isManager={manager}
-    view={tabId}
-  />;
-
 const DraftList = ({
-  total,
   loading,
   postLists,
   manager,
@@ -98,7 +60,7 @@ const DraftList = ({
   return (
     <div className={containerStyle}>
       <div style={topBarContainerStyle}>
-        {tabId==='drafts' &&
+        {tabId === 'drafts' &&
           <div style={composerStyle}>
             {showComposer && !editMode &&
               <ComposerPopover
@@ -115,34 +77,35 @@ const DraftList = ({
         }
       </div>
       {showComposer && editMode &&
-        <ComposerPopover 
+        <ComposerPopover
           type={'drafts'}
-          onSave={onComposerCreateSuccess} 
+          onSave={onComposerCreateSuccess}
         />
       }
       {
         postLists.length > 0 ?
-        renderDraftList({
-          postLists,
-          onApproveClick,
-          onCancelConfirmClick,
-          onDeleteClick,
-          onDeleteConfirmClick,
-          onEditClick,
-          onMoveToDraftsClick,
-          onRequestApprovalClick,
-          onRescheduleClick,
-        }) :
-        renderEmpty({
-          manager,
-          tabId,
-        })
+          <QueueItems
+            items={postLists}
+            onApproveClick={onApproveClick}
+            onCancelConfirmClick={onCancelConfirmClick}
+            onDeleteClick={onDeleteClick}
+            onDeleteConfirmClick={onDeleteConfirmClick}
+            onEditClick={onEditClick}
+            onMoveToDraftsClick={onMoveToDraftsClick}
+            onRequestApprovalClick={onRequestApprovalClick}
+            onRescheduleClick={onRescheduleClick}
+            draggable={false}
+            type={'drafts'}
+          /> :
+          <Empty
+            isManager={manager}
+            view={tabId}
+          />
       }
     </div>
   );
 };
 
-// TODO: these need some <3, they're not complete!
 DraftList.propTypes = {
   loading: PropTypes.bool,
   postLists: PropTypes.arrayOf(
@@ -150,8 +113,7 @@ DraftList.propTypes = {
       text: PropTypes.string,
     }),
   ),
-  manager: PropTypes.bool,
-  total: PropTypes.number,
+  manager: PropTypes.bool.isRequired,
   onApproveClick: PropTypes.func.isRequired,
   onCancelConfirmClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
@@ -160,10 +122,19 @@ DraftList.propTypes = {
   onMoveToDraftsClick: PropTypes.func.isRequired,
   onRequestApprovalClick: PropTypes.func.isRequired,
   onRescheduleClick: PropTypes.func.isRequired,
+  onComposerPlaceholderClick: PropTypes.func.isRequired,
+  onComposerCreateSuccess: PropTypes.func.isRequired,
+  showComposer: PropTypes.bool,
+  editMode: PropTypes.bool,
+  tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
 };
 
 DraftList.defaultProps = {
   loading: true,
+  postLists: [],
+  showComposer: false,
+  editMode: false,
+  tabId: null,
 };
 
 export default DraftList;
