@@ -57,9 +57,12 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
         />
       );
     case 'drafts':
+    case 'awaitingApproval':
+    case 'pendingApproval':
       return (
         <DraftList
           profileId={profileId}
+          tabId={tabId}
         />
       );
     case 'settings':

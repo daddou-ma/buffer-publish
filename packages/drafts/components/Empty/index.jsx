@@ -12,7 +12,7 @@ const renderEmptyState = (isManager, view) => {
   let subtitle;
   let emoji;
 
-  if (view === 'approval') {
+  if (view === 'awaitingApproval' || view === 'pendingApproval') {
     emoji = '✨';
     title = 'Nothing to see here!';
 
@@ -51,7 +51,7 @@ const Empty = ({
 
 Empty.propTypes = {
   isManager: PropTypes.bool,
-  view: PropTypes.oneOf(['approval', 'drafts', null]),
+  view: PropTypes.oneOf(['awaitingapproval', 'pendingApproval', 'drafts', null]),
 };
 
 Empty.defaultProps = {

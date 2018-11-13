@@ -48,18 +48,24 @@ const getDraftDetails = ({ draft, profileTimezone, isPastDue, twentyFourHourTime
 };
 
 // Could export this to utils and then pull it in and pass tab depending on which package uses it
-const formatPostLists = (profile, drafts, user) => {
+const formatPostLists = (profile, drafts, user, view) => {
   const profileTimezone = profile.timezone;
-  const orderedDrafts = Object.values(drafts).sort((a, b) => a.createdAt - b.createdAt);
+  const isManager = profile.isManager;
   const twentyFourHourTime = user.twentyfour_hour_time;
+  const orderedDrafts = Object.values(drafts).sort((a, b) => a.createdAt - b.createdAt);
 
-  return orderedDrafts.reduce((acc, draft, index) => {
+  // Drafts tab only displays drafts that don't need approval.
+  // Approval tabs only display drafts that need approval.
+  const isDraftsView = view === 'drafts';
+  const draftsList = orderedDrafts.filter(draft => draft.needsApproval !== isDraftsView);
+
+  return draftsList.reduce((acc, draft, index) => {
     const isPastDue = isInThePast(draft.scheduled_at);
     acc.push({
       queueItemType: 'post',
-      hasPermission: user.id === draft.user_id || profile.isManager,
+      hasPermission: user.id === draft.user_id || isManager,
       role: profile.organizationRole,
-      manager: profile.isManager,
+      manager: isManager,
       draftDetails: getDraftDetails({
         draft,
         profileTimezone,
@@ -77,6 +83,7 @@ const formatPostLists = (profile, drafts, user) => {
 export default connect(
   (state, ownProps) => {
     const profileId = ownProps.profileId;
+    const view = ownProps.tabId;
     const currentProfile = state.drafts.byProfileId[profileId];
     if (currentProfile) {
       return {
@@ -86,6 +93,7 @@ export default connect(
           state.profileSidebar.selectedProfile,
           currentProfile.drafts,
           state.appSidebar.user,
+          view,
         ),
         loading: currentProfile.loading,
         loadingMore: currentProfile.loadingMore,

@@ -60,11 +60,11 @@ const renderDraftList = ({
 
 const renderEmpty = ({
   manager,
-  view,
+  tabId,
 }) =>
   <Empty
     isManager={manager}
-    view={'drafts'}
+    view={tabId}
   />;
 
 const DraftList = ({
@@ -84,6 +84,7 @@ const DraftList = ({
   onComposerCreateSuccess,
   showComposer,
   editMode,
+  tabId,
 
 }) => {
   if (loading) {
@@ -97,19 +98,21 @@ const DraftList = ({
   return (
     <div className={containerStyle}>
       <div style={topBarContainerStyle}>
-        <div style={composerStyle}>
-          {showComposer && !editMode &&
-            <ComposerPopover
-              type={'drafts'}
-              onSave={onComposerCreateSuccess}
-              preserveComposerStateOnClose
+        {tabId==='drafts' &&
+          <div style={composerStyle}>
+            {showComposer && !editMode &&
+              <ComposerPopover
+                type={'drafts'}
+                onSave={onComposerCreateSuccess}
+                preserveComposerStateOnClose
+              />
+            }
+            <Input
+              placeholder={'Create a new draft...'}
+              onFocus={onComposerPlaceholderClick}
             />
-          }
-          <Input
-            placeholder={'Create a new draft...'}
-            onFocus={onComposerPlaceholderClick}
-          />
-        </div>
+          </div>
+        }
       </div>
       {showComposer && editMode &&
         <ComposerPopover 
@@ -132,7 +135,7 @@ const DraftList = ({
         }) :
         renderEmpty({
           manager,
-          view: 'drafts',
+          tabId,
         })
       }
     </div>
