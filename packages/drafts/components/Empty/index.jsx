@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import {
   EmptyState,
 } from '@bufferapp/publish-shared-components';
-import {
-  Text,
-} from '@bufferapp/components';
 
 const renderEmptyState = (isManager, view) => {
   let title;
@@ -51,7 +48,7 @@ const Empty = ({
 
 Empty.propTypes = {
   isManager: PropTypes.bool,
-  view: PropTypes.oneOf(['awaitingapproval', 'pendingApproval', 'drafts', null]),
+  view: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts', null]),
 };
 
 Empty.defaultProps = {
