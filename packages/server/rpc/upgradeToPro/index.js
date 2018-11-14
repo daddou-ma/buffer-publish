@@ -4,7 +4,7 @@ const rp = require('request-promise');
 module.exports = method(
   'upgradeToPro',
   'upgrade user to the pro plan',
-  async ({ cycle, token }, { session }) => {
+  async ({ cycle, token, cta }, { session }) => {
     let result;
     try {
       result = await rp({
@@ -14,6 +14,7 @@ module.exports = method(
         json: true,
         form: {
           cycle,
+          cta: `publish-${cta}`,
           stripeToken: token,
           access_token: session.publish.accessToken,
           product: 'publish',

@@ -25,7 +25,6 @@ const composerStyle = {
 
 const topBarContainerStyle = {
   display: 'flex',
-  position: 'relative',
 };
 
 const loadingContainerStyle = {
@@ -88,7 +87,6 @@ const QueuedPosts = ({
           {showComposer && !editMode &&
             <ComposerPopover
               onSave={onComposerCreateSuccess}
-              transparentOverlay
               preserveComposerStateOnClose
               type={'queue'}
             />

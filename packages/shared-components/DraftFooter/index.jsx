@@ -276,7 +276,7 @@ DraftFooter.propTypes = {
   onRequestApprovalClick: PropTypes.func,
   onRescheduleClick: PropTypes.func,
   draftDetails: PropTypes.shape({
-    userName: PropTypes.string,
+    creatorName: PropTypes.string,
     avatarUrl: PropTypes.string,
     email: PropTypes.string,
     createdAt: PropTypes.string,

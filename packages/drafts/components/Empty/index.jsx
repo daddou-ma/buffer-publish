@@ -1,125 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button,
-  Text,
-} from '@bufferapp/components';
-import styles from './style.css';
+  EmptyState,
+} from '@bufferapp/publish-shared-components';
 
-const openWithUrl = (url) => {
-  window.open(url, '_blank');
-};
-
-const renderEmailPrompt = ({
-  isManager,
-  userMessages,
-  userNewDraftsSubscribeLink,
-  handleUserReadMessage,
-}) => {
-  const message = 'new_contributions_emails';
-  if (isManager && !userMessages.includes(message)) {
-    const emailLink = userNewDraftsSubscribeLink;
-    return (
-      <div className={styles.banner}>
-        <Text size={'small'}>{'Email me when a new draft is awaiting approval'}</Text>
-        <span className={styles['left-button']}>
-          <Button
-            quaternary
-            onClick={() => handleUserReadMessage({ message })}
-          >
-            {'No, thanks'}
-          </Button>
-        </span>
-        <span className={styles['right-button']}>
-          <Button
-            quaternary
-            onClick={() => {
-              openWithUrl(emailLink);
-              handleUserReadMessage({ message });
-            }}
-          >
-            {'Yes, please'}
-          </Button>
-        </span>
-      </div>
-    );
-  }
-  return '';
-};
-
-const renderEmptyContent = (isManager, view) => {
-  let msg;
-  if (view === 'approval') {
-    if (isManager) {
-      msg = 'Only drafts that are awaiting approval will appear here, until you approve them.';
-    } else {
-      msg = 'Create a draft in the Drafts tab and then click, \'Request Approval\' to send it here for review. Your post will be added to the queue once a manager approves it.';
-    }
-  } else if (view === 'drafts') {
-    if (isManager) {
-      msg = 'This is where drafts from your team members will appear.';
-    } else {
-      msg = 'Use this place to create some drafts — when you\'re ready click Request Approval to send them to the Pending Approval tab.';
-    }
-  }
-  return (
-    <div className={styles.text}>
-      <Text size={'small'}>{msg}</Text>
-    </div>
-  );
-};
-
-const renderEmptyHeader = (isManager, view) => {
-  let msg;
+const renderEmptyState = (isManager, view) => {
+  let title;
+  let subtitle;
   let emoji;
-  if (view === 'approval') {
+
+  if (view === 'awaitingApproval' || view === 'pendingApproval') {
     emoji = '✨';
-    msg = 'Nothing to see here!';
+    title = 'Nothing to see here!';
+
+    if (isManager) {
+      subtitle = 'Only drafts that are awaiting approval will appear here, until you approve them.';
+    } else {
+      subtitle = 'Create a draft in the Drafts tab and then click, \'Request Approval\' to send it here for review. Your post will be added to the queue once a manager approves it.';
+    }
   } else if (view === 'drafts') {
     emoji = '✍️';
-    msg = 'Looks like you don\'t have any drafts yet!';
+    title = 'Looks like you don\'t have any drafts yet!';
+
+    if (isManager) {
+      subtitle = 'This is where drafts from your team members will appear.';
+    } else {
+      subtitle = 'Use this place to create some drafts — when you\'re ready click Request Approval to send them to the Pending Approval tab.';
+    }
   }
   return (
-    <div className={styles.header}>
-      <Text size={'large'}>{emoji}</Text>
-      <br />
-      <Text weight={'bold'}>
-        {msg}
-      </Text>
-    </div>
+    <EmptyState
+      title={title}
+      subtitle={subtitle}
+      emoji={emoji}
+    />
   );
 };
 
 const Empty = ({
   isManager,
-  userMessages,
-  userNewDraftsSubscribeLink,
-  handleUserReadMessage,
   view,
 }) => (
-  <div className={styles.container}>
-    { renderEmailPrompt({
-      isManager,
-      userMessages,
-      userNewDraftsSubscribeLink,
-      handleUserReadMessage,
-    }) }
-    { renderEmptyHeader(isManager, view) }
-    { renderEmptyContent(isManager, view) }
+  <div>
+    { renderEmptyState(isManager, view) }
   </div>
   );
 
 Empty.propTypes = {
   isManager: PropTypes.bool,
-  userMessages: PropTypes.arrayOf(),
-  userNewDraftsSubscribeLink: PropTypes.string,
-  handleUserReadMessage: PropTypes.func,
-  view: PropTypes.oneOf(['approval', 'drafts', null]),
+  view: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts', null]),
 };
 
 Empty.defaultProps = {
   isManager: false,
-  userMessages: [],
 };
 
 export default Empty;

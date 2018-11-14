@@ -13,4 +13,11 @@ storiesOf('EmptyState', module)
       heroImg={'https://s3.amazonaws.com/buffer-publish/images/fresh-queue.png'}
       heroImgSize={{ width: '229px', height: '196px' }}
     />
+  ))
+  .add('with emoji', () => (
+    <EmptyState
+      title={'Looks like you don\'t have any drafts yet!'}
+      subtitle={'This is where drafts from your team members will appear.'}
+      emoji={'✍️'}
+    />
   ));

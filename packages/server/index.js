@@ -19,9 +19,21 @@ const rpcHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
 const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
+const { sendFavicon } = require('./lib/favicon.js');
 
 const app = express();
 const server = http.createServer(app);
+
+// Favicon
+app.get(
+  '/favicon.ico',
+  (req, res) => sendFavicon(req, res, 'ico'),
+);
+
+app.get(
+  /\/favicon-(16|32)\.png/,
+  (req, res) => sendFavicon(req, res, 'png'),
+);
 
 let staticAssets = {
   'bundle.js': 'https://local.buffer.com:8080/static/bundle.js',

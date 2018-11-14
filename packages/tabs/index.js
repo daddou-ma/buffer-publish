@@ -22,7 +22,7 @@ export default connect(
       tabId,
       profileId: ownProps.profileId,
     }))),
-    showUpgradeModal: () => dispatch(modalsActions.showUpgradeModal()),
+    showUpgradeModal: () => dispatch(modalsActions.showUpgradeModal({ source: 'app_header' })),
     onChildTabClick: childTabId => dispatch(push(generateChildTabRoute({
       tabId: ownProps.tabId,
       childTabId,

@@ -20,6 +20,7 @@ export default hot(module)(connect(
         posts: state[tabId].byProfileId[profileId].posts,
         total: state[tabId].byProfileId[profileId].total,
         translations: state.i18n.translations.example,
+        view: state[tabId].byProfileId[profileId].tabId || null,
       });
     }
     return {};

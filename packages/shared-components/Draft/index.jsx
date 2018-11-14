@@ -9,6 +9,7 @@ import {
   transitionAnimationType,
 } from '@bufferapp/components/style/animation';
 
+import DraftHeader from '../DraftHeader';
 import DraftFooter from '../DraftFooter';
 import RetweetPanel from '../RetweetPanel';
 
@@ -114,6 +115,9 @@ const Draft = ({
         faded={isDeleting}
         noPadding
       >
+        <DraftHeader 
+          draftDetails={draftDetails}
+        />
         {renderContent({
           children,
           retweetProfile,

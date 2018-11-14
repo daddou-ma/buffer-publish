@@ -5,7 +5,7 @@ import {
   Image,
 } from '@bufferapp/components';
 
-const EmptyState = ({ title, subtitle, heroImg, heroImgSize, height }) => {
+const EmptyState = ({ title, subtitle, emoji, heroImg, heroImgSize, height }) => {
   const containerStyle = {
     textAlign: 'center',
     width: '700px',
@@ -32,6 +32,10 @@ const EmptyState = ({ title, subtitle, heroImg, heroImgSize, height }) => {
   return (
     <div style={wrapperStyle}>
       <div style={containerStyle}>
+        {emoji &&
+          <Text size={'extra-large'}>
+            {emoji}
+          </Text>}
         {heroImg &&
           <Image marginBottom="1.5rem" alt="" src={heroImg} width={heroImgSize.width} height={heroImgSize.height} />}
         {title &&
@@ -58,8 +62,9 @@ EmptyState.propTypes = {
   heroImgSize: PropTypes.shape({
     width: PropTypes.string,
     height: PropTypes.string,
-  }).isRequired,
+  }),
   height: PropTypes.string,
+  emoji: PropTypes.string,
 };
 
 export default EmptyState;

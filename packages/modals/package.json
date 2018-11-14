@@ -10,7 +10,8 @@
   "author": "hamish@buffer.com",
   "dependencies": {
     "@bufferapp/keywrapper": "0.2.0",
-    "@bufferapp/publish-upgrade-modal": "2.0.0"
+    "@bufferapp/publish-upgrade-modal": "2.0.0",
+    "@bufferapp/buffermetrics": "0.5.2"
   },
   "devDependencies": {
     "eslint": "3.19.0"

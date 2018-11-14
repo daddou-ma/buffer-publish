@@ -4,11 +4,11 @@ import {
   QueueItems,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
-import Empty from '../Empty';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import {
   Input,
 } from '@bufferapp/components';
+import Empty from '../Empty';
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -17,7 +17,6 @@ const composerStyle = {
 
 const topBarContainerStyle = {
   display: 'flex',
-  position: 'relative'
 };
 
 const loadingContainerStyle = {
@@ -31,56 +30,10 @@ const containerStyle = {
   marginRight: '0.5rem',
 };
 
-const renderDraftList = ({
-  postLists,
-  onApproveClick,
-  onCancelConfirmClick,
-  onDeleteClick,
-  onDeleteConfirmClick,
-  onEditClick,
-  onMoveToDraftsClick,
-  onRequestApprovalClick,
-  onRescheduleClick,
-}) => {
-  return (
-    <QueueItems
-      items={postLists}
-      onApproveClick={onApproveClick}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
-      onDeleteConfirmClick={onDeleteConfirmClick}
-      onEditClick={onEditClick}
-      onMoveToDraftsClick={onMoveToDraftsClick}
-      onRequestApprovalClick={onRequestApprovalClick}
-      onRescheduleClick={onRescheduleClick}
-      draggable={false}
-      type={'drafts'}
-    />
-  );
-};
-
-const renderEmpty = ({
-  manager,
-  userMessages,
-  userNewDraftsSubscribeLink,
-  onUserReadMessage,
-  view,
-}) =>
-  <Empty
-    isManager={manager}
-    userMessages={userMessages}
-    userNewDraftsSubscribeLink={userNewDraftsSubscribeLink}
-    handleUserReadMessage={onUserReadMessage}
-    view={'drafts'}
-  />;
-
 const DraftList = ({
-  total,
   loading,
   postLists,
   manager,
-  userMessages,
-  userNewDraftsSubscribeLink,
   onApproveClick,
   onCancelConfirmClick,
   onDeleteClick,
@@ -89,11 +42,11 @@ const DraftList = ({
   onMoveToDraftsClick,
   onRequestApprovalClick,
   onRescheduleClick,
-  onUserReadMessage,
   onComposerPlaceholderClick,
   onComposerCreateSuccess,
   showComposer,
   editMode,
+  tabId,
 
 }) => {
   if (loading) {
@@ -107,53 +60,52 @@ const DraftList = ({
   return (
     <div className={containerStyle}>
       <div style={topBarContainerStyle}>
-        <div style={composerStyle}>
-          {showComposer && !editMode &&
-            <ComposerPopover
-              type={'drafts'}
-              onSave={onComposerCreateSuccess}
-              transparentOverlay
-              preserveComposerStateOnClose
+        {tabId === 'drafts' &&
+          <div style={composerStyle}>
+            {showComposer && !editMode &&
+              <ComposerPopover
+                type={'drafts'}
+                onSave={onComposerCreateSuccess}
+                preserveComposerStateOnClose
+              />
+            }
+            <Input
+              placeholder={'Create a new draft...'}
+              onFocus={onComposerPlaceholderClick}
             />
-          }
-          <Input
-            placeholder={'Create a new draft...'}
-            onFocus={onComposerPlaceholderClick}
-          />
-        </div>
+          </div>
+        }
       </div>
       {showComposer && editMode &&
-        <ComposerPopover 
+        <ComposerPopover
           type={'drafts'}
-          onSave={onComposerCreateSuccess} 
+          onSave={onComposerCreateSuccess}
         />
       }
       {
         postLists.length > 0 ?
-        renderDraftList({
-          postLists,
-          onApproveClick,
-          onCancelConfirmClick,
-          onDeleteClick,
-          onDeleteConfirmClick,
-          onEditClick,
-          onMoveToDraftsClick,
-          onRequestApprovalClick,
-          onRescheduleClick,
-        }) :
-        renderEmpty({
-          manager,
-          userMessages,
-          userNewDraftsSubscribeLink,
-          onUserReadMessage,
-          view: 'drafts',
-        })
+          <QueueItems
+            items={postLists}
+            onApproveClick={onApproveClick}
+            onCancelConfirmClick={onCancelConfirmClick}
+            onDeleteClick={onDeleteClick}
+            onDeleteConfirmClick={onDeleteConfirmClick}
+            onEditClick={onEditClick}
+            onMoveToDraftsClick={onMoveToDraftsClick}
+            onRequestApprovalClick={onRequestApprovalClick}
+            onRescheduleClick={onRescheduleClick}
+            draggable={false}
+            type={'drafts'}
+          /> :
+          <Empty
+            isManager={manager}
+            view={tabId}
+          />
       }
     </div>
   );
 };
 
-// TODO: these need some <3, they're not complete!
 DraftList.propTypes = {
   loading: PropTypes.bool,
   postLists: PropTypes.arrayOf(
@@ -161,10 +113,7 @@ DraftList.propTypes = {
       text: PropTypes.string,
     }),
   ),
-  manager: PropTypes.bool,
-  userMessages: PropTypes.arrayOf(),
-  userNewDraftsSubscribeLink: PropTypes.string,
-  total: PropTypes.number,
+  manager: PropTypes.bool.isRequired,
   onApproveClick: PropTypes.func.isRequired,
   onCancelConfirmClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
@@ -173,12 +122,19 @@ DraftList.propTypes = {
   onMoveToDraftsClick: PropTypes.func.isRequired,
   onRequestApprovalClick: PropTypes.func.isRequired,
   onRescheduleClick: PropTypes.func.isRequired,
-  onUserReadMessage: PropTypes.func.isRequired,
+  onComposerPlaceholderClick: PropTypes.func.isRequired,
+  onComposerCreateSuccess: PropTypes.func.isRequired,
+  showComposer: PropTypes.bool,
+  editMode: PropTypes.bool,
+  tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
 };
 
 DraftList.defaultProps = {
   loading: true,
-  userMessages: [],
+  postLists: [],
+  showComposer: false,
+  editMode: false,
+  tabId: null,
 };
 
 export default DraftList;

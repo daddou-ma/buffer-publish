@@ -30,7 +30,6 @@ const loadingContainerStyle = {
 
 const topBarContainerStyle = {
   display: 'flex',
-  position: 'relative',
 };
 
 const composerStyle = {
@@ -77,7 +76,6 @@ const SentPosts = ({
           {showComposer && !editMode &&
             <ComposerPopover
               onSave={onComposerCreateSuccess}
-              transparentOverlay
               type={'sent'}
             />
           }
