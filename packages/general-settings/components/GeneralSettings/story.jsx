@@ -8,8 +8,11 @@ import GeneralSettings from './index';
 storiesOf('GeneralSettings', module)
   .addDecorator(checkA11y)
   .add('default', () => (
-    <GeneralSettings directPostingEnabled={false} onSetUpDirectPostingClick={action('onSetUpDirectPosting')}/>
+    <GeneralSettings directPostingEnabled={false} onSetUpDirectPostingClick={action('onSetUpDirectPosting')} />
   ))
   .add('direct posting enabled', () => (
-    <GeneralSettings directPostingEnabled={true} onSetUpDirectPostingClick={action('onSetUpDirectPosting')}/>
+    <GeneralSettings directPostingEnabled onSetUpDirectPostingClick={action('onSetUpDirectPosting')} />
+  ))
+  .add('Google analytics enabled', () => (
+    <GeneralSettings googleAnalyticsIsEnabled onSetUpDirectPostingClick={action('onSetUpDirectPosting')} />
   ));
