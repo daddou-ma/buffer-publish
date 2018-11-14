@@ -42,6 +42,24 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
+  it('should SHOW_GA_CUSTOMIZATION_FORM', () => {
+    const stateAfter = {
+      showGACustomizationForm: false,
+      directPostingEnabled: false,
+      googleAnalyticsIsEnabled: false,
+      profileId: null,
+    };
+    const action = {
+      type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
+      profile: {
+        showGACustomizationForm: true,
+      },
+    };
+    deepFreeze(action);
+    expect(reducer(undefined, action))
+      .toEqual(stateAfter);
+  });
+
   it('should toggle GA FETCH_SUCCESS action type', () => {
     const stateAfter = {
       directPostingEnabled: false,
