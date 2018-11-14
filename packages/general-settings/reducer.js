@@ -22,6 +22,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         directPostingEnabled: action.profile.directPostingEnabled,
+        googleAnalyticsEnabled: action.profile.googleAnalyticsEnabled,
         profileId: action.profileId,
         profileService: action.profile.service,
         loadingLinkShorteners: true,
@@ -54,7 +55,6 @@ export default (state = initialState, action) => {
     case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
       return {
         ...state,
-        googleAnalyticsIsEnabled: !action.googleAnalyticsIsEnabled,
       };
     case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_START}`:
       return {
@@ -64,7 +64,7 @@ export default (state = initialState, action) => {
     case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        googleAnalyticsIsEnabled: action.result.isEnabled === 'enabled',
+        googleAnalyticsEnabled: action.result.isEnabled,
       };
     default:
       return state;
