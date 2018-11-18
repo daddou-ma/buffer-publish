@@ -8,6 +8,8 @@
   },
   "author": "hharnisc@gmail.com",
   "dependencies": {
+    "@bufferapp/analyze-date-picker": "0.65.0",
+    "@bufferapp/analyze-profile-selector": "0.65.0",
     "@bufferapp/app-sidebar": "1.9.24",
     "@bufferapp/async-data-fetch": "1.9.4",
     "@bufferapp/buffermetrics": "0.5.2",
@@ -34,7 +36,8 @@
     "@bufferapp/publish-upgrade-modal": "2.0.0",
     "@bufferapp/unauthorized-redirect": "1.9.6",
     "@bufferapp/publish-general-settings": "2.0.0",
-    "@bufferapp/publish-posting-schedule": "2.0.0"
+    "@bufferapp/publish-posting-schedule": "2.0.0",
+    "@bufferapp/report-list": "0.71.3"
   },
   "devDependencies": {
     "eslint": "3.19.0"
