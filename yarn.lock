@@ -195,10 +195,10 @@
     react-autocomplete "1.7.2"
     react-day-picker "7.2.3"
 
-"@bufferapp/composer@2.2.4":
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-2.2.4.tgz#4db2f0b0525ab5099f51ec7813a753e22698084a"
-  integrity sha512-l5yk9WqDOHdqiTNX4FK5yA4yS2+/RSo0pW/bsBC8CPvs6GDlVy46khCYunKXG21sii9/Kw1u5gJYoLSCGOiHxQ==
+"@bufferapp/composer@2.2.5":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-2.2.5.tgz#747bfbb59a9f8303ed38b9690871d74ab4722ed8"
+  integrity sha512-9d5t2NbHpuWQvEK8zKn3wKGIQKbRYHxU2HsnF0lsaCI1gqLNs67yZOSSv23YstK2D5e2CeoPr1GtbMK024GngQ==
   dependencies:
     "@bufferapp/buffer-js-api" "0.3.0"
     "@bufferapp/buffer-js-metrics" "0.2.0"
@@ -355,10 +355,10 @@
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-parsers@1.9.26":
-  version "1.9.26"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.9.26.tgz#fa991d00d6070c5ddd855d02b2c82553942a906e"
-  integrity sha512-sgnrjbW11U04R+6vD399Hdnrd6swuizFmQIZyG2eGq/f0hJawqktHskBOG/lQcUpfScxVPMUhkimOvW0Okq+Xg==
+"@bufferapp/publish-parsers@1.9.30":
+  version "1.9.30"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.9.30.tgz#48b02a4f16bbec4567b85ef302f7999fbbe29cdd"
+  integrity sha512-KrFEDaFw78J7NH1w8W0ky+i1pJ4MUathG7TmcOu60e+IYZU6rfusRgKt0F9M/80rKakICTA8vLxVc5WLqcrDBw==
   dependencies:
     "@bufferapp/publish-formatters" "1.9.27"
     twitter-text "3.0.0"

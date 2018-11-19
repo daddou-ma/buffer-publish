@@ -16,7 +16,7 @@ export default connect(
       const type = ownProps.type;
       const selectedProfileId = state.profileSidebar.selectedProfileId;
       const postId = state[type].editingPostId;
-      
+
       let options = {};
 
       switch (type) {
@@ -47,6 +47,7 @@ export default connect(
         environment: state.environment.environment,
         editMode: false,
         draftMode: null,
+        selectedProfileId,
         ...options
       });
     }
