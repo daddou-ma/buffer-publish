@@ -17,6 +17,7 @@ const analyzePackages = [
   'add-report',
   'analyze-date-picker',
   'analyze-profile-selector',
+  'micro-rpc',
 ];
 const analyzePackagesWhitelist = analyzePackages.map(imp => `(?!/@bufferapp/${imp})`).join('');
  /**
