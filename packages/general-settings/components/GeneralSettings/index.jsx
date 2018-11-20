@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
+import GoogleAnalytics from '../GoogleAnalytics';
 
 const GeneralSettings = ({
   directPostingEnabled,
@@ -12,6 +13,10 @@ const GeneralSettings = ({
   loadingLinkShorteners,
   onLinkShortenerOptionSelect,
   selectedShortener,
+  onShowGACustomizationFormClick,
+  showGACustomizationForm,
+  googleAnalyticsIsEnabled,
+  onToggleGoogleAnalyticsClick,
   onConnectBitlyURLClick,
   onDisconnectBitlyURLClick,
   isContributor,
@@ -35,6 +40,12 @@ const GeneralSettings = ({
       features={features}
     />
     <Divider />
+    <GoogleAnalytics
+      onShowGACustomizationFormClick={onShowGACustomizationFormClick}
+      showGACustomizationForm={showGACustomizationForm}
+      googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
+      onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
+    />
   </div>
 );
 
@@ -46,6 +57,8 @@ GeneralSettings.defaultProps = {
   onLinkShortenerOptionSelect: null,
   selectedShortener: null,
   isContributor: null,
+  showGACustomizationForm: false,
+  googleAnalyticsIsEnabled: false,
 };
 
 GeneralSettings.propTypes = {
@@ -66,6 +79,10 @@ GeneralSettings.propTypes = {
   loadingLinkShorteners: PropTypes.bool,
   profileService: PropTypes.string,
   selectedShortener: PropTypes.string,
+  onShowGACustomizationFormClick: PropTypes.func.isRequired,
+  showGACustomizationForm: PropTypes.bool.isRequired,
+  googleAnalyticsIsEnabled: PropTypes.bool,
+  onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
   features: PropTypes.shape({
     isFreeUser: PropTypes.func,
   }).isRequired,

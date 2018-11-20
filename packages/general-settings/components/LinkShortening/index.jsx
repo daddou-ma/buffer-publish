@@ -112,7 +112,7 @@ LinkShortening.propTypes = {
   loading: PropTypes.bool,
   selectedShortener: PropTypes.string,
   features: PropTypes.shape({
-    isFreeUser: PropTypes.func
+    isFreeUser: PropTypes.func,
   }).isRequired,
 };
 

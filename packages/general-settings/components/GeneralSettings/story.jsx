@@ -17,6 +17,13 @@ storiesOf('GeneralSettings', module)
   ))
   .add('direct posting enabled', () => (
     <GeneralSettings
+      directPostingEnabled
+      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
+      features={features}
+    />
+  ))
+  .add('Google analytics enabled', () => (
+    <GeneralSettings
       directPostingEnabled={true}
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       features={features}

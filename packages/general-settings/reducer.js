@@ -3,15 +3,19 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
+  SET_DIRECT_POSTING: 0,
   CHANGE_SELECTED_LINK_SHORTENER: 0,
+  SHOW_GA_CUSTOMIZATION_FORM: 0,
+  TOGGLE_GOOGLE_ANALYTICS: 0,
   CONNECT_BITLY: 0,
   DISCONNECT_BITLY: 0,
-  SET_DIRECT_POSTING: 0,
 });
 
 const initialState = {
   directPostingEnabled: false,
   profileId: null,
+  showGACustomizationForm: false,
+  googleAnalyticsIsEnabled: false,
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +24,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         directPostingEnabled: action.profile.directPostingEnabled,
+        googleAnalyticsEnabled: action.profile.googleAnalyticsEnabled,
         profileId: action.profileId,
         profileService: action.profile.service,
         isContributor: action.profile.isContributor,
@@ -45,6 +50,25 @@ export default (state = initialState, action) => {
         loadingLinkShorteners: false,
         selectedShortener: null,
       };
+    case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
+      return {
+        ...state,
+        showGACustomizationForm: true,
+      };
+    case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
+      return {
+        ...state,
+      };
+    case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+        utmTrackingChoice: action.args.utmTrackingChoice,
+      };
+    case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        googleAnalyticsEnabled: action.result.isEnabled,
+      };
     default:
       return state;
   }
@@ -63,9 +87,17 @@ export const actions = {
     type: actionTypes.DISCONNECT_BITLY,
     profileId: action.profileId,
   }),
+  handleShowGACustomizationFormClick: () => ({
+    type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
+  }),
   handleOnSelectLinkShortenerChange: ({ profileId, domain }) => ({
     type: actionTypes.CHANGE_SELECTED_LINK_SHORTENER,
     profileId,
     domain,
+  }),
+  handleGoogleAnalyticsToggle: ({ profileId, utmTrackingChoice }) => ({
+    type: actionTypes.TOGGLE_GOOGLE_ANALYTICS,
+    profileId,
+    utmTrackingChoice,
   }),
 };

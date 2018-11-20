@@ -1,12 +1,15 @@
 import deepFreeze from 'deep-freeze';
 import reducer from './reducer';
 import { actionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 describe('reducer', () => {
   it('should initialize default state', () => {
     const stateAfter = {
       directPostingEnabled: false,
       profileId: null,
+      googleAnalyticsIsEnabled: false,
+      showGACustomizationForm: false,
     };
     const action = {
       type: 'INIT',
@@ -23,6 +26,8 @@ describe('reducer', () => {
       profileService: 'twitter',
       loadingLinkShorteners: true,
       selectedShortener: null,
+      googleAnalyticsIsEnabled: false,
+      showGACustomizationForm: false,
     };
     const action = {
       type: actionTypes.SELECT_PROFILE,
@@ -30,6 +35,42 @@ describe('reducer', () => {
       profile: {
         directPostingEnabled: false,
         service: 'twitter',
+      },
+    };
+    deepFreeze(action);
+    expect(reducer(undefined, action))
+      .toEqual(stateAfter);
+  });
+
+  it('should SHOW_GA_CUSTOMIZATION_FORM', () => {
+    const stateAfter = {
+      showGACustomizationForm: false,
+      directPostingEnabled: false,
+      googleAnalyticsIsEnabled: false,
+      profileId: null,
+    };
+    const action = {
+      type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
+      profile: {
+        showGACustomizationForm: true,
+      },
+    };
+    deepFreeze(action);
+    expect(reducer(undefined, action))
+      .toEqual(stateAfter);
+  });
+
+  it('should toggle GA FETCH_SUCCESS action type', () => {
+    const stateAfter = {
+      directPostingEnabled: false,
+      googleAnalyticsIsEnabled: false,
+      profileId: null,
+      showGACustomizationForm: false,
+    };
+    const action = {
+      type: `toggleGoogleAnalytics_${actionTypes.FETCH_SUCCESS}`,
+      profile: {
+        googleAnalyticsEnabled: 'enabled',
       },
     };
     deepFreeze(action);

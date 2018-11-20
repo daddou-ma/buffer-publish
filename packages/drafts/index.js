@@ -48,7 +48,7 @@ const getDraftDetails = ({ draft, profileTimezone, isPastDue, twentyFourHourTime
 };
 
 // Could export this to utils and then pull it in and pass tab depending on which package uses it
-const formatPostLists = (profile, drafts, user, view) => {
+const formatPostLists = (profile, drafts, user, tabId) => {
   const profileTimezone = profile.timezone;
   const isManager = profile.isManager;
   const twentyFourHourTime = user.twentyfour_hour_time;
@@ -56,14 +56,15 @@ const formatPostLists = (profile, drafts, user, view) => {
 
   // Drafts tab only displays drafts that don't need approval.
   // Approval tabs only display drafts that need approval.
-  const isDraftsView = view === 'drafts';
+  const isDraftsView = tabId === 'drafts';
   const draftsList = orderedDrafts.filter(draft => draft.needsApproval !== isDraftsView);
+  const typeOfTab = isDraftsView ? 'drafts' : 'approval';
 
   return draftsList.reduce((acc, draft, index) => {
     const isPastDue = isInThePast(draft.scheduled_at);
     acc.push({
       queueItemType: 'post',
-      hasPermission: user.id === draft.user_id || isManager,
+      hasPermission: user.id === draft.user.id || isManager,
       role: profile.organizationRole,
       manager: isManager,
       draftDetails: getDraftDetails({
@@ -72,7 +73,7 @@ const formatPostLists = (profile, drafts, user, view) => {
         isPastDue,
         twentyFourHourTime,
       }),
-      view: 'drafts',
+      view: typeOfTab,
       index,
       ...draft,
     });
@@ -83,7 +84,7 @@ const formatPostLists = (profile, drafts, user, view) => {
 export default connect(
   (state, ownProps) => {
     const profileId = ownProps.profileId;
-    const view = ownProps.tabId;
+    const tabId = ownProps.tabId;
     const currentProfile = state.drafts.byProfileId[profileId];
     if (currentProfile) {
       return {
@@ -93,7 +94,7 @@ export default connect(
           state.profileSidebar.selectedProfile,
           currentProfile.drafts,
           state.appSidebar.user,
-          view,
+          tabId,
         ),
         loading: currentProfile.loading,
         loadingMore: currentProfile.loadingMore,

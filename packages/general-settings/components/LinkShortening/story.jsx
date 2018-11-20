@@ -6,8 +6,8 @@ import LinkShortener from './index';
 const linkList = [{ domain: 'option1', name: 'option2', selected: true }];
 const linkListMulti = [{ domain: 'option1', name: 'option2', selected: true }, { domain: 'option2', name: 'option2', selected: false }];
 
-const features = { isFreeUser: () => { return true; } };
-const featuresNotFree = { isFreeUser: () => { return false; } };
+const features = { isFreeUser: () => true };
+const featuresNotFree = { isFreeUser: () => false };
 
 storiesOf('LinkShortener', module)
   .addDecorator(checkA11y)
