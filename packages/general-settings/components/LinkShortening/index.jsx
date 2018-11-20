@@ -18,6 +18,7 @@ const pinterestSectionStyling = {
 };
 
 const LinkShortening = ({
+    features,
     onOptionSelect,
     profileService,
     linkShorteners,
@@ -32,10 +33,8 @@ const LinkShortening = ({
     name: `${ls.domain} ${ls.login ? `- ${ls.login}` : ''}`,
     selected: ls.selected,
   }));
-  const hasShortenersWithLogins = (linkShorteners &&
-    linkShorteners.filter(shortener => shortener.login)) || [];
+  const hasShortenersWithLogins = (linkShorteners && linkShorteners.filter(shortener => shortener.login)) || [];
   const isBitlyConnected = hasShortenersWithLogins.length > 0;
-  //console.log(isBitlyConnected, isContributor, hasShortenersWithLogins.length > 0);
   if (profileService === 'pinterest') {
     return (
       <LinkShorteningWrapper
@@ -63,6 +62,7 @@ const LinkShortening = ({
   }
   return (
     <LinkShorteningWrapper
+      isFreeUser={features.isFreeUser}
       loading={loading}
       startSectionStyles={{
         maxWidth: '600px',
@@ -111,6 +111,9 @@ LinkShortening.propTypes = {
   ),
   loading: PropTypes.bool,
   selectedShortener: PropTypes.string,
+  features: PropTypes.shape({
+    isFreeUser: PropTypes.func
+  }).isRequired,
 };
 
 export default LinkShortening;

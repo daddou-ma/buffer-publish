@@ -1,9 +1,9 @@
-import { Button, Text } from '@bufferapp/components';
+import { Text } from '@bufferapp/components';
 import Select from '@bufferapp/components/Select';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
-import { WithFeatureLoader } from '@bufferapp/product-features';
+import ConnectBitlyToggler from './ConnectBitlyButton';
 
 const textWrapperStyle = {
   display: 'flex',
@@ -37,59 +37,8 @@ const containerStyling = {
   alignItems: 'center',
 };
 
-const connectBitlyButton = {
-  marginTop: '0.5rem',
-  width: '100%',
-};
-
-const ConnectBitlyToggler = ({
-  features,
-  showConnectBitly,
-  isBitlyConnected,
-  onDisconnectBitlyURLClick,
-  onConnectBitlyURLClick,
-}) => {
-  if (showConnectBitly) {
-    if (!features.isFreeUser()) {
-      if (isBitlyConnected) {
-        return (
-          <div style={connectBitlyButton}>
-            <Button
-              fillContainer
-              onClick={onDisconnectBitlyURLClick}
-            >
-              Disconnect Bit.ly
-            </Button>
-          </div>
-        );
-      }
-      return (
-        <div style={connectBitlyButton}>
-          <Button
-            fillContainer
-            onClick={onConnectBitlyURLClick}
-          >
-            Connect Bit.ly
-          </Button>
-        </div>
-      );
-    }
-  }
-  return null;
-};
-
-ConnectBitlyToggler.propTypes = {
-  isBitlyConnected: PropTypes.bool.isRequired,
-  showConnectBitly: PropTypes.bool.isRequired,
-  onDisconnectBitlyURLClick: PropTypes.func.isRequired,
-  onConnectBitlyURLClick: PropTypes.func.isRequired,
-  features: PropTypes.shape({
-    isFreeUser: PropTypes.func,
-  }).isRequired,
-};
-const ConnectBitlyTogglerWithFeatureLoader = WithFeatureLoader(ConnectBitlyToggler);
-
 const LinkShorteningWrapper = ({
+    isFreeUser,
     onOptionSelect,
     children,
     linkList,
@@ -136,7 +85,8 @@ const LinkShorteningWrapper = ({
               value={selectedValue && selectedValue[0].value}
             />
           </div>
-          <ConnectBitlyTogglerWithFeatureLoader
+          <ConnectBitlyToggler
+            isFreeUser={isFreeUser}
             showConnectBitly={showConnectBitly}
             isBitlyConnected={isBitlyConnected}
             onConnectBitlyURLClick={onConnectBitlyURLClick}
@@ -184,6 +134,7 @@ LinkShorteningWrapper.propTypes = {
   selectedShortener: PropTypes.string,
   showConnectBitly: PropTypes.bool,
   isBitlyConnected: PropTypes.bool,
+  isFreeUser: PropTypes.func.isRequired,
 };
 
 export default LinkShorteningWrapper;

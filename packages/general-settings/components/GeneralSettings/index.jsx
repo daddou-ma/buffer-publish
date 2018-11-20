@@ -15,6 +15,7 @@ const GeneralSettings = ({
   onConnectBitlyURLClick,
   onDisconnectBitlyURLClick,
   isContributor,
+  features,
 }) => (
   <div>
     {!directPostingEnabled &&
@@ -31,6 +32,7 @@ const GeneralSettings = ({
       linkShorteners={linkShorteners}
       onOptionSelect={onLinkShortenerOptionSelect}
       selectedShortener={selectedShortener}
+      features={features}
     />
     <Divider />
   </div>
@@ -64,6 +66,9 @@ GeneralSettings.propTypes = {
   loadingLinkShorteners: PropTypes.bool,
   profileService: PropTypes.string,
   selectedShortener: PropTypes.string,
+  features: PropTypes.shape({
+    isFreeUser: PropTypes.func,
+  }).isRequired,
 };
 
 export default GeneralSettings;

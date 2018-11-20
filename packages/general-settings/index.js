@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import { actions } from './reducer';
 import GeneralSettings from './components/GeneralSettings';
+import { WithFeatureLoader } from '@bufferapp/product-features';
+
+export const GeneralSettingsWithFeatureLoader = WithFeatureLoader(GeneralSettings);
+
 
 export default connect(
     state => ({
@@ -35,7 +39,7 @@ export default connect(
         }));
       },
     }),
-)(GeneralSettings);
+)(GeneralSettingsWithFeatureLoader);
 
 export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';
