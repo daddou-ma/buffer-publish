@@ -12,5 +12,13 @@ storiesOf('TabNavigation', module)
     <TabNavigation
       selectedTabId={'queue'}
       onTabClick={action('tab-click')}
+      isBusinessAccount={false}
+      isManager={false}
+      shouldShowNestedSettingsTab
+      selectedChildTabId={'general-settings'}
+      onChildTabClick={action('child-tab-click')}
+      showUpgradeModal={action('show-upgrade-modal')}
+      shouldShowUpgradeCta
+      hasDraftsFeatureFlip
     />
   ));
