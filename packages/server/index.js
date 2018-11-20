@@ -73,13 +73,21 @@ const notificationScript = (notification) => {
   if (!notification) {
     return '';
   }
+
+  let variable = '';
+
+  if (notification.variable) {
+    variable = `variable: '${notification.variable}'`;
+  }
+
   return `
-  <script type="text/javascript">
-      window._notification = {
-        type: '${notification.type}',
-        message: '${notification.message}'
-      };
-  </script>
+    <script type="text/javascript">
+        window._notification = {
+          type: '${notification.type}',
+          key: '${notification.key}',
+          ${variable}
+        };
+    </script>
   `;
 };
 
@@ -168,11 +176,15 @@ app.post(
 
 app.get('*', (req, res) => {
   let notification = null;
-  if (req.query.n_type && req.query.n_message) {
+  if (req.query.nt && req.query.nk) {
     notification = {
-      type: req.query.n_type,
-      message: req.query.n_message,
+      type: req.query.nt, // Notification Type
+      key: req.query.nk, // Notification Key
     };
+
+    if (req.query.nv) {
+      notification.variable = req.query.nv; // Notification Variable
+    }
   }
   res.send(getHtml(notification));
 });

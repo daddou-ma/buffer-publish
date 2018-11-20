@@ -1,0 +1,6 @@
+{
+  "success": {
+    "connection": "You're all set! We've selected some times for you but you can tweak them in your settings",
+    "example-with-variable": "This is an example with this {{__variable__}} value"
+  }
+}

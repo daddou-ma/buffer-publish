@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux';
 import { getURL } from '@bufferapp/publish-formatters';
+import getNotificationMessage from '@bufferapp/publish-notifications-provider';
 
 import {
   generateProfilePageRoute,
@@ -61,10 +62,20 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
 
       if (window._notification) {
-        dispatch(notificationActions.createNotification({
-          notificationType: window._notification.type,
-          message: window._notification.message,
-        }));
+        const notificationType = window._notification.type;
+
+        const message = getNotificationMessage(
+          notificationType,
+          window._notification.key,
+          window._notification.variable,
+        );
+
+        if (message) {
+          dispatch(notificationActions.createNotification({
+            notificationType,
+            message,
+          }));
+        }
       }
       break;
     }
