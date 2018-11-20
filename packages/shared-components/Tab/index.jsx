@@ -17,6 +17,7 @@ const Tab = ({
   selected,
   tabId,
   onClick,
+  secondary,
 }) =>
   <div
     style={calculateStyles({
@@ -28,14 +29,18 @@ const Tab = ({
         textAlign: 'center',
       },
       selected: {
-        borderBottom: `2px solid ${curiousBlue}`,
+        borderBottom: secondary
+          ? `1px solid ${curiousBlue}`
+          : `2px solid ${curiousBlue}`,
       },
     }, {
-      selected,
-    })}
+        selected,
+      })}
   >
     <Link
-      padding="18px 13px 17px 13px"
+      padding={secondary
+        ? '12px 13px 12px 13px'
+        : '18px 13px 17px 13px'}
       block
       href={'#'}
       onClick={(e) => {
@@ -47,7 +52,7 @@ const Tab = ({
       <HoverableText
         color={selected ? 'black' : 'shuttleGray'}
         hoverColor="black"
-        size="mini"
+        size={secondary ? 'small' : 'mini'}
       >
         {children}
       </HoverableText>
@@ -59,10 +64,12 @@ Tab.propTypes = {
   selected: PropTypes.bool,
   onClick: PropTypes.func,
   tabId: PropTypes.string,
+  secondary: PropTypes.bool,
 };
 
 Tab.defaultProps = {
   selected: false,
+  secondary: false,
 };
 
 export default Tab;

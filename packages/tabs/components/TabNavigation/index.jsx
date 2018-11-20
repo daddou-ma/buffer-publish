@@ -52,24 +52,27 @@ const TabNavigation = ({
       </Tabs>
       {shouldShowUpgradeCta &&
         <div style={upgradeCtaStyle}>
-          <Text size="mini">
-            Want to see more from Buffer?{' '}
-            <Button
-              secondary
-              onClick={(e) => {
-                e.preventDefault();
-                showUpgradeModal();
-              }}
-            >
-              Upgrade to Pro
-            </Button>
+          <div style={{ paddingRight: '10px', display: 'inline-block' }}>
+            <Text size="mini">
+              Want to see more from Buffer?
           </Text>
+          </div>
+          <Button
+            secondary
+            onClick={(e) => {
+              e.preventDefault();
+              showUpgradeModal();
+            }}
+          >
+            Upgrade to Pro
+            </Button>
         </div>
       }
       {shouldShowNestedSettingsTab &&
         <Tabs
           selectedTabId={selectedChildTab}
           onTabClick={onChildTabClick}
+          secondary
         >
           <Tab tabId={'general-settings'}>General</Tab>
           <Tab tabId={'posting-schedule'}>Posting Schedule</Tab>
