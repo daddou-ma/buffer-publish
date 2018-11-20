@@ -1,5 +1,5 @@
 /* eslint-disable import/first */
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 jest.mock('micro-rpc-client');
 jest.mock('request-promise');
