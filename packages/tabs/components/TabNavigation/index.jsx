@@ -4,14 +4,16 @@ import {
   Tabs,
   Tab,
 } from '@bufferapp/publish-shared-components';
-import { Link, Text } from '@bufferapp/components';
+import { Button, Text } from '@bufferapp/components';
 
 const upgradeCtaStyle = {
   transform: 'translate(0, 1px)',
-  margin: '0 42px 0 0',
+  margin: '12px 16px',
   display: 'inline-block',
-  minWidth: '60px',
   textAlign: 'center',
+  position: 'absolute',
+  top: 0,
+  right: 0,
 };
 
 const TabNavigation = ({
@@ -28,8 +30,8 @@ const TabNavigation = ({
 }) => {
   const selectedChildTab = selectedChildTabId || 'general-settings';
   return (
-  /* wrapper div with "tabs" id necessary as a selector
-  for a11y focus after selecting profile in sidebar */
+    /* wrapper div with "tabs" id necessary as a selector
+    for a11y focus after selecting profile in sidebar */
     <div id="tabs" style={{ paddingLeft: '0.5rem' }}>
       <Tabs
         selectedTabId={selectedTabId}
@@ -38,43 +40,43 @@ const TabNavigation = ({
         <Tab tabId={'queue'}>Queue</Tab>
         <Tab tabId={'sent'}>Sent Posts</Tab>
         {hasDraftsFeatureFlip && isBusinessAccount && isManager &&
-        <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
+          <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
         }
         {hasDraftsFeatureFlip && isBusinessAccount && !isManager &&
-        <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
+          <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
         }
         {hasDraftsFeatureFlip && isBusinessAccount &&
-        <Tab tabId={'drafts'}>Drafts</Tab>
+          <Tab tabId={'drafts'}>Drafts</Tab>
         }
         <Tab tabId={'settings'}>Settings</Tab>
-        {shouldShowUpgradeCta &&
+      </Tabs>
+      {shouldShowUpgradeCta &&
         <div style={upgradeCtaStyle}>
-          <Text size="mini">
-            <Link
-              padding="18px 13px 17px 13px"
-              block
-              unstyled
-              newTab
-              href={'#'}
-              onClick={(e) => {
-                e.preventDefault();
-                showUpgradeModal();
-              }}
-            >
-              Upgrade
-            </Link>
+          <div style={{ paddingRight: '10px', display: 'inline-block' }}>
+            <Text size="mini">
+              Want to see more from Buffer?
           </Text>
+          </div>
+          <Button
+            secondary
+            onClick={(e) => {
+              e.preventDefault();
+              showUpgradeModal();
+            }}
+          >
+            Upgrade to Pro
+            </Button>
         </div>
-        }
-      </Tabs>
+      }
       {shouldShowNestedSettingsTab &&
-      <Tabs
-        selectedTabId={selectedChildTab}
-        onTabClick={onChildTabClick}
-      >
-        <Tab tabId={'general-settings'}>General</Tab>
-        <Tab tabId={'posting-schedule'}>Posting Schedule</Tab>
-      </Tabs>
+        <Tabs
+          selectedTabId={selectedChildTab}
+          onTabClick={onChildTabClick}
+          secondary
+        >
+          <Tab tabId={'general-settings'}>General</Tab>
+          <Tab tabId={'posting-schedule'}>Posting Schedule</Tab>
+        </Tabs>
       }
     </div>
   );
@@ -88,6 +90,8 @@ TabNavigation.defaultProps = {
 };
 
 TabNavigation.propTypes = {
+  isBusinessAccount: PropTypes.bool.isRequired,
+  isManager: PropTypes.bool.isRequired,
   selectedTabId: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
   shouldShowUpgradeCta: PropTypes.bool.isRequired,
