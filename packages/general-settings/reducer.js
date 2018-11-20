@@ -3,8 +3,10 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
-  SET_DIRECT_POSTING: 0,
   CHANGE_SELECTED_LINK_SHORTENER: 0,
+  CONNECT_BITLY: 0,
+  DISCONNECT_BITLY: 0,
+  SET_DIRECT_POSTING: 0,
 });
 
 const initialState = {
@@ -20,6 +22,7 @@ export default (state = initialState, action) => {
         directPostingEnabled: action.profile.directPostingEnabled,
         profileId: action.profileId,
         profileService: action.profile.service,
+        isContributor: action.profile.isContributor,
         loadingLinkShorteners: true,
         selectedShortener: null,
       };
@@ -50,6 +53,14 @@ export default (state = initialState, action) => {
 export const actions = {
   handleSetUpDirectPostingClick: action => ({
     type: actionTypes.SET_DIRECT_POSTING,
+    profileId: action.profileId,
+  }),
+  handleConnectBitlyURLClick: action => ({
+    type: actionTypes.CONNECT_BITLY,
+    profileId: action.profileId,
+  }),
+  handleDisconnectBitlyURLClick: action => ({
+    type: actionTypes.DISCONNECT_BITLY,
     profileId: action.profileId,
   }),
   handleOnSelectLinkShortenerChange: ({ profileId, domain }) => ({

@@ -10,10 +10,21 @@ export default connect(
       linkShorteners: state.generalSettings.linkShorteners,
       loadingLinkShorteners: state.generalSettings.loadingLinkShorteners,
       selectedShortener: state.generalSettings.selectedShortener,
+      isContributor: state.generalSettings.isContributor,
     }),
     (dispatch, ownProps) => ({
       onSetUpDirectPostingClick: () => {
         dispatch(actions.handleSetUpDirectPostingClick({
+          profileId: ownProps.profileId,
+        }));
+      },
+      onConnectBitlyURLClick: () => {
+        dispatch(actions.handleConnectBitlyURLClick({
+          profileId: ownProps.profileId,
+        }));
+      },
+      onDisconnectBitlyURLClick: () => {
+        dispatch(actions.handleDisconnectBitlyURLClick({
           profileId: ownProps.profileId,
         }));
       },

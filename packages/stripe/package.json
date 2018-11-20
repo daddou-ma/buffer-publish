@@ -9,7 +9,7 @@
   "author": "mike@msanroman.io",
   "dependencies": {
     "@bufferapp/keywrapper": "0.2.0",
-    "@bufferapp/publish-formatters": "1.9.27"
+    "@bufferapp/publish-formatters": "1.9.28"
   },
   "devDependencies": {
     "eslint": "3.19.0"

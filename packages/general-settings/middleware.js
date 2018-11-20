@@ -12,6 +12,12 @@ export default ({ dispatch }) => next => (action) => {
     case actionTypes.SET_DIRECT_POSTING:
       window.location = getURL.getInstagramDirectPostingURL(action.profileId);
       break;
+    case actionTypes.CONNECT_BITLY:
+      window.location = getURL.getConnectBitlyURL(action.profileId);
+      break;
+    case actionTypes.DISCONNECT_BITLY:
+      window.location = getURL.getDisconnectBitlyURL(action.profileId);
+      break;
     case profileActionTypes.SELECT_PROFILE:
       dispatch(dataFetchActions.fetch({
         name: 'getLinkShortener',

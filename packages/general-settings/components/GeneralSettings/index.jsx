@@ -12,6 +12,9 @@ const GeneralSettings = ({
   loadingLinkShorteners,
   onLinkShortenerOptionSelect,
   selectedShortener,
+  onConnectBitlyURLClick,
+  onDisconnectBitlyURLClick,
+  isContributor,
 }) => (
   <div>
     {!directPostingEnabled &&
@@ -20,6 +23,9 @@ const GeneralSettings = ({
     />
     }
     <LinkShortening
+      isContributor={isContributor}
+      onConnectBitlyURLClick={onConnectBitlyURLClick}
+      onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
       loading={loadingLinkShorteners}
       profileService={profileService}
       linkShorteners={linkShorteners}
@@ -37,10 +43,14 @@ GeneralSettings.defaultProps = {
   loadingLinkShorteners: true,
   onLinkShortenerOptionSelect: null,
   selectedShortener: null,
+  isContributor: null,
 };
 
 GeneralSettings.propTypes = {
+  isContributor: PropTypes.bool,
   directPostingEnabled: PropTypes.bool.isRequired,
+  onConnectBitlyURLClick: PropTypes.func.isRequired,
+  onDisconnectBitlyURLClick: PropTypes.func.isRequired,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
   linkShorteners: PropTypes.arrayOf(
     PropTypes.shape({
