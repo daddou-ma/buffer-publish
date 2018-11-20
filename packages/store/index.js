@@ -29,6 +29,7 @@ import { middleware as dateTimePreferencesMiddleware } from '@bufferapp/date-tim
 import { middleware as closeAccountMiddleware } from '@bufferapp/close-account';
 import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintenance-redirect';
 import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
+// Remove datePickerMiddleware when publish switches to analyze
 import { middleware as datePickerMiddleware } from '@bufferapp/analyze-date-picker';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 import reducers from './reducers';

@@ -24,6 +24,7 @@ import { reducer as changePasswordReducer } from '@bufferapp/change-password';
 import { reducer as manageAppsReducer } from '@bufferapp/manage-apps-extras';
 import { reducer as twoFactorAuthReducer } from '@bufferapp/publish-two-factor-auth';
 import { reducer as closeAccountReducer } from '@bufferapp/close-account';
+// Remove datePickerReducer when publish switches to Analyze
 import { reducer as datePickerReducer } from '@bufferapp/analyze-date-picker';
 
 export default combineReducers({
