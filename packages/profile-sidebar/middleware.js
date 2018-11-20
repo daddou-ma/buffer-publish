@@ -21,7 +21,7 @@ import {
 } from './reducer';
 
 // mirror format used in analyze
-const formatAnalyzeProfileObj = ({ id, service, timezone, service_username, avatarUrl }) => (
+const formatAnalyticsProfileObj = ({ id, service, timezone, service_username, avatarUrl }) => (
   {
     id,
     avatarUrl,
@@ -64,7 +64,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         if (params.tabId === 'analytics') {
           dispatch({
             type: 'PROFILE_SELECTOR__SELECT_PROFILE',
-            profile: formatAnalyzeProfileObj(profile),
+            profile: formatAnalyticsProfileObj(profile),
           });
         }
       } else if (!isPreferencePage && profiles.length > 0) {
