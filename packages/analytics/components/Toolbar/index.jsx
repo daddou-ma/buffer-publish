@@ -9,13 +9,11 @@ const toolbarDatePicker = {
 };
 
 const Toolbar = () => (
-  <div>
-    <AnalyticsToolbar>
-      <div style={toolbarDatePicker}>
-        <DatePicker />
-      </div>
-    </AnalyticsToolbar>
-  </div>
+  <AnalyticsToolbar>
+    <div style={toolbarDatePicker}>
+      <DatePicker />
+    </div>
+  </AnalyticsToolbar>
 );
 
 export default Toolbar;

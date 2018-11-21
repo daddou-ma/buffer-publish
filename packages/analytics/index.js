@@ -2,9 +2,7 @@ import React from 'react';
 import Toolbar from './components/Toolbar';
 
 const Analytics = () => (
-  <div>
-    <Toolbar />
-  </div>
+  <Toolbar />
 );
 
 export default Analytics;
