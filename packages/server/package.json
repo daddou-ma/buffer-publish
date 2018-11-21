@@ -9,7 +9,7 @@
   "author": "hharnisc@gmail.com",
   "dependencies": {
     "@bufferapp/buffer-rpc": "0.0.4",
-    "@bufferapp/buffermetrics": "0.5.2",
+    "@bufferapp/buffermetrics": "0.6.3-beta-06",
     "@bufferapp/logger": "0.7.0",
     "@bufferapp/publish-parsers": "1.9.33",
     "@bufferapp/publish-formatters": "1.9.29",
