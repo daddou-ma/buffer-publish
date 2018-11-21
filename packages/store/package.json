@@ -12,7 +12,7 @@
     "@bufferapp/analyze-profile-selector": "0.65.0",
     "@bufferapp/app-sidebar": "1.9.24",
     "@bufferapp/async-data-fetch": "1.9.4",
-    "@bufferapp/buffermetrics": "0.6.3",
+    "@bufferapp/buffermetrics": "0.6.3-beta-06",
     "@bufferapp/close-account": "2.0.0",
     "@bufferapp/edit-email": "2.0.0",
     "@bufferapp/environment": "1.9.4",
