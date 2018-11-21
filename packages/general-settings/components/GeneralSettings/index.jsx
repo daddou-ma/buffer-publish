@@ -17,6 +17,10 @@ const GeneralSettings = ({
   showGACustomizationForm,
   googleAnalyticsIsEnabled,
   onToggleGoogleAnalyticsClick,
+  onConnectBitlyURLClick,
+  onDisconnectBitlyURLClick,
+  isContributor,
+  features,
 }) => (
   <div>
     {!directPostingEnabled &&
@@ -25,11 +29,15 @@ const GeneralSettings = ({
     />
     }
     <LinkShortening
+      isContributor={isContributor}
+      onConnectBitlyURLClick={onConnectBitlyURLClick}
+      onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
       loading={loadingLinkShorteners}
       profileService={profileService}
       linkShorteners={linkShorteners}
       onOptionSelect={onLinkShortenerOptionSelect}
       selectedShortener={selectedShortener}
+      features={features}
     />
     <Divider />
     <GoogleAnalytics
@@ -48,12 +56,16 @@ GeneralSettings.defaultProps = {
   loadingLinkShorteners: true,
   onLinkShortenerOptionSelect: null,
   selectedShortener: null,
+  isContributor: null,
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
 };
 
 GeneralSettings.propTypes = {
+  isContributor: PropTypes.bool,
   directPostingEnabled: PropTypes.bool.isRequired,
+  onConnectBitlyURLClick: PropTypes.func.isRequired,
+  onDisconnectBitlyURLClick: PropTypes.func.isRequired,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
   linkShorteners: PropTypes.arrayOf(
     PropTypes.shape({
@@ -71,6 +83,9 @@ GeneralSettings.propTypes = {
   showGACustomizationForm: PropTypes.bool.isRequired,
   googleAnalyticsIsEnabled: PropTypes.bool,
   onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
+  features: PropTypes.shape({
+    isFreeUser: PropTypes.func,
+  }).isRequired,
 };
 
 export default GeneralSettings;

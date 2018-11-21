@@ -1,7 +1,11 @@
 jest.mock('redux');
+jest.mock('@bufferapp/product-features', () => {
+  return { WithFeatureLoader: jest.fn().mockImplementation((input) => (input)) };
+});
 
 import { createStore } from 'redux'; // eslint-disable-line import/first
 import store from './index'; // eslint-disable-line import/first
+
 
 describe('store', () => {
   it('should create a store', () => {
