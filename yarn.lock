@@ -347,20 +347,20 @@
     "@bufferapp/async-data-fetch" "0.5.36-beta01"
     "@bufferapp/chronos" "0.6.1"
 
-"@bufferapp/publish-formatters@1.9.28":
-  version "1.9.28"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-formatters/-/publish-formatters-1.9.28.tgz#9057dc05290877f8793b3e8ffd1471679678d613"
-  integrity sha512-YwEdE0+WXGllO1pJJDL98Iccg91tjM8OazKudRb3kW9R5FNffbcYCJPebN/t9Lg32XvhsURVeWs2MbWJ1bpZ6Q==
+"@bufferapp/publish-formatters@1.9.29":
+  version "1.9.29"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-formatters/-/publish-formatters-1.9.29.tgz#707d0cbf6c215a5d3c4496e80714f6da50808693"
+  integrity sha512-er1tdsoia6t6RjGy2OebIMLRFPo2utqcTYlxIohUslSX8XRDMOQWu7FW5eAwm7JgASBFfEpHcRjV+6hBf4BG3w==
   dependencies:
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-parsers@1.9.32":
-  version "1.9.32"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.9.32.tgz#22fb92286935f4deb6312c45694dc5b6a8a16f75"
-  integrity sha512-f6eevWIC245MuP7C89XJ+xjZF4JpjTPWmI7WBows6g3XzVkKVbNUnPKVCRHFqcrz8qO0GLrS3S7f4mZ4FeMq4A==
+"@bufferapp/publish-parsers@1.9.33":
+  version "1.9.33"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.9.33.tgz#ac41af09d792cb726730cacea47cda65d8902d93"
+  integrity sha512-nyVO5cSXu3DVeilTXW9nOcWu5iBlK6RXvhbj9dY2atS6rTuoXV4zOQHf+JZmwrJWrm6eAEhnIpfi0cttDAr4lw==
   dependencies:
-    "@bufferapp/publish-formatters" "1.9.28"
+    "@bufferapp/publish-formatters" "1.9.29"
     twitter-text "3.0.0"
 
 "@bufferapp/react-images-loaded@^1.1.0-fork.0":

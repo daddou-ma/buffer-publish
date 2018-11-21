@@ -11,7 +11,7 @@
   "dependencies": {
     "@bufferapp/async-data-fetch": "1.9.4",
     "@bufferapp/notifications": "1.9.4",
-    "@bufferapp/publish-formatters": "1.9.28"
+    "@bufferapp/publish-formatters": "1.9.29"
   },
   "devDependencies": {
     "eslint": "3.19.0"
