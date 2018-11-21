@@ -39,6 +39,7 @@ const TabNavigation = ({
       >
         <Tab tabId={'queue'}>Queue</Tab>
         <Tab tabId={'sent'}>Sent Posts</Tab>
+        {isBusinessAccount && <Tab tabId={'analytics'}>Analytics</Tab>}
         {hasDraftsFeatureFlip && isBusinessAccount && isManager &&
           <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
         }

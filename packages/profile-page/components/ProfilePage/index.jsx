@@ -56,6 +56,10 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
           profileId={profileId}
         />
       );
+    case 'analytics':
+      return (
+        <div>Adding component soon!</div>
+      );
     case 'drafts':
     case 'awaitingApproval':
     case 'pendingApproval':
