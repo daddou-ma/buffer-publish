@@ -1,10 +1,20 @@
 const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
+const sourceCtaMap = new Map([
+  ['app_header', 'publish-app-header-getMoreOutOfBuffer-1'],
+  ['queue_limit', 'publish-composer-notifications-queueLimitUpgrade-1'],
+  ['profile_limit', 'publish-orgAdmin-connect-profileLimitUpgrade-1'],
+  ['pinterest', 'publish-orgAdmin-connect-upgradeToConnectPinterest-1'],
+  ['org_admin', 'publish-orgAdmin-planOverview-upgradeForMore-1'],
+]);
+const getCtaFromSource = source =>
+  sourceCtaMap.get(source) || (`publish-${source || 'unknown'}`);
+
 module.exports = method(
   'upgradeToPro',
   'upgrade user to the pro plan',
-  async ({ cycle, token, cta }, { session }) => {
+  async ({ cycle, token, source }, { session }) => {
     let result;
     try {
       result = await rp({
@@ -14,8 +24,8 @@ module.exports = method(
         json: true,
         form: {
           cycle,
-          cta: `publish-${cta}`,
           stripeToken: token,
+          cta: getCtaFromSource(source),
           access_token: session.publish.accessToken,
           product: 'publish',
           plan: 'pro',
