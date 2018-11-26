@@ -87,14 +87,14 @@ module.exports = method(
       profileId,
       profileService,
       dateRange,
-      req.session.analyze.accessToken,
+      req.session.publish.accessToken,
       req.app.get('analyzeApiAddr'),
     );
     const previousPeriod = requestTotals(
       profileId,
       profileService,
       previousDateRange,
-      req.session.analyze.accessToken,
+      req.session.publish.accessToken,
       req.app.get('analyzeApiAddr'),
     );
 

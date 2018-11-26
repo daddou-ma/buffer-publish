@@ -86,13 +86,13 @@ module.exports = method(
       profileId,
       profileService,
       dateRange,
-      session.analyze.accessToken,
+      session.publish.accessToken,
     );
     const previousPeriod = requestPostsSummary(
       profileId,
       profileService,
       previousDateRange,
-      session.analyze.accessToken,
+      session.publish.accessToken,
     );
 
     return Promise

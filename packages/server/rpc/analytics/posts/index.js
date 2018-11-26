@@ -51,7 +51,7 @@ module.exports = method(
       sortBy,
       descending,
       limit,
-      session.analyze.accessToken,
+      session.publish.accessToken,
     );
 
     return Promise
