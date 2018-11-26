@@ -1,5 +1,5 @@
 ## Notifications Provider
 
-This package exports a default function ```getNotificationMessage``` to get from the notifications.json file, a message for a notification.
+This package exports a middleware to show a notification grabbing the global window._notification object set in the server. The message will be pulled from the notifications.json file.
 
-This message can contain a variable that will be replaced for the placeholder ```{{__variable__}}```. See the ./index.test.js for examples.
+This message can contain a variable that will be replaced for the placeholder ```{{__variable__}}```. See the ./utils/getNotificationMessage.test.js for examples.
