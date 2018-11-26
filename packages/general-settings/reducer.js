@@ -7,6 +7,8 @@ export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
   CHANGE_SELECTED_LINK_SHORTENER: 0,
   SHOW_GA_CUSTOMIZATION_FORM: 0,
   TOGGLE_GOOGLE_ANALYTICS: 0,
+  CONNECT_BITLY: 0,
+  DISCONNECT_BITLY: 0,
 });
 
 const initialState = {
@@ -25,6 +27,7 @@ export default (state = initialState, action) => {
         googleAnalyticsEnabled: action.profile.googleAnalyticsEnabled,
         profileId: action.profileId,
         profileService: action.profile.service,
+        isContributor: action.profile.isContributor,
         loadingLinkShorteners: true,
         selectedShortener: null,
       };
@@ -74,6 +77,14 @@ export default (state = initialState, action) => {
 export const actions = {
   handleSetUpDirectPostingClick: action => ({
     type: actionTypes.SET_DIRECT_POSTING,
+    profileId: action.profileId,
+  }),
+  handleConnectBitlyURLClick: action => ({
+    type: actionTypes.CONNECT_BITLY,
+    profileId: action.profileId,
+  }),
+  handleDisconnectBitlyURLClick: action => ({
+    type: actionTypes.DISCONNECT_BITLY,
     profileId: action.profileId,
   }),
   handleShowGACustomizationFormClick: () => ({

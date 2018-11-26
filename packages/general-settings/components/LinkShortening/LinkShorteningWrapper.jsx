@@ -1,8 +1,9 @@
-import { Button, Text } from '@bufferapp/components';
+import { Text } from '@bufferapp/components';
 import Select from '@bufferapp/components/Select';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
+import ConnectBitlyToggler from './ConnectBitlyButton';
 
 const textWrapperStyle = {
   display: 'flex',
@@ -36,12 +37,8 @@ const containerStyling = {
   alignItems: 'center',
 };
 
-const connectBitlyButton = {
-  marginTop: '0.5rem',
-  width: '100%',
-};
-
 const LinkShorteningWrapper = ({
+    isFreeUser,
     onOptionSelect,
     children,
     linkList,
@@ -49,6 +46,9 @@ const LinkShorteningWrapper = ({
     loading,
     selectedShortener,
     showConnectBitly,
+    onConnectBitlyURLClick,
+    onDisconnectBitlyURLClick,
+    isBitlyConnected,
   }) => {
   const selectedValue = selectedShortener || (linkList && linkList.filter(ll => ll.selected));
 
@@ -85,11 +85,13 @@ const LinkShorteningWrapper = ({
               value={selectedValue && selectedValue[0].value}
             />
           </div>
-          {showConnectBitly &&
-            <div style={connectBitlyButton} >
-              <Button fillContainer>Connect Bit.ly</Button>
-            </div>
-          }
+          <ConnectBitlyToggler
+            isFreeUser={isFreeUser}
+            showConnectBitly={showConnectBitly}
+            isBitlyConnected={isBitlyConnected}
+            onConnectBitlyURLClick={onConnectBitlyURLClick}
+            onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
+          />
         </div>
       }
     </div>
@@ -103,9 +105,14 @@ LinkShorteningWrapper.defaultProps = {
   loading: true,
   selectedShortener: null,
   showConnectBitly: false,
+  onConnectBitlyURLClick: null,
+  onDisconnectBitlyURLClick: null,
+  isBitlyConnected: false,
 };
 
 LinkShorteningWrapper.propTypes = {
+  onConnectBitlyURLClick: PropTypes.func,
+  onDisconnectBitlyURLClick: PropTypes.func,
   onOptionSelect: PropTypes.func,
   children: PropTypes.element.isRequired,
   loading: PropTypes.bool,
@@ -126,6 +133,8 @@ LinkShorteningWrapper.propTypes = {
   }),
   selectedShortener: PropTypes.string,
   showConnectBitly: PropTypes.bool,
+  isBitlyConnected: PropTypes.bool,
+  isFreeUser: PropTypes.func.isRequired,
 };
 
 export default LinkShorteningWrapper;

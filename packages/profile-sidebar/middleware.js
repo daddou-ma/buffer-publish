@@ -21,6 +21,18 @@ import {
   actionTypes,
 } from './reducer';
 
+// mirror format used in analyze
+const formatAnalyticsProfileObj = ({ id, service, timezone, service_username, avatarUrl }) => (
+  {
+    id,
+    avatarUrl,
+    service,
+    timezone,
+    username: service_username,
+    organizationId: '',
+  }
+);
+
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
   switch (action.type) {
@@ -45,9 +57,17 @@ export default ({ dispatch, getState }) => next => (action) => {
       });
       const profiles = getState().profileSidebar.profiles;
       if (params && params.profileId) {
+        const profile = profiles.find(profileElement => profileElement.id === params.profileId);
         dispatch(actions.selectProfile({
-          profile: profiles.find(profile => profile.id === params.profileId),
+          profile,
         }));
+        // Dispatch different select profile for components in analyze
+        if (params.tabId === 'analytics') {
+          dispatch({
+            type: 'PROFILE_SELECTOR__SELECT_PROFILE',
+            profile: formatAnalyticsProfileObj(profile),
+          });
+        }
       } else if (!isPreferencePage && profiles.length > 0) {
         const selectedProfile = profiles[0];
         dispatch(actions.selectProfile({

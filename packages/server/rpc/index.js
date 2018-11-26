@@ -35,6 +35,9 @@ const featureMethod = require('./features');
 const getLinkShortener = require('./getLinkShortener');
 const changeLinkShortener = require('./changeLinkShortener');
 const toggleGoogleAnalytics = require('./toggleGoogleAnalytics');
+// Analytics from Analyze -- Delete when we switch to Analyze
+const analyticsStartDate = require('./analytics/analyticsStartDate');
+const getReport = require('./analytics/getReport');
 
 module.exports = rpc(
   profilesMethod,
@@ -72,4 +75,6 @@ module.exports = rpc(
   getLinkShortener,
   changeLinkShortener,
   toggleGoogleAnalytics,
+  analyticsStartDate,
+  getReport,
 );
