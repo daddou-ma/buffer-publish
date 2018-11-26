@@ -1,4 +1,4 @@
-import getNotificationMessage from './index';
+import getNotificationMessage from './getNotificationMessage';
 
 describe('getNotificationMessage', () => {
   it('it should return null if key not present', () => {

@@ -15,8 +15,7 @@
     "@bufferapp/publish-formatters": "1.9.29",
     "@bufferapp/publish-routes": "2.0.0",
     "@bufferapp/publish-constants": "2.0.0",
-    "@bufferapp/publish-initial-loading": "2.0.0",
-    "@bufferapp/publish-notifications-provider": "2.0.0"
+    "@bufferapp/publish-initial-loading": "2.0.0"
   },
   "devDependencies": {
     "eslint": "3.19.0"

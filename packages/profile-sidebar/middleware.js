@@ -1,6 +1,5 @@
 import { push } from 'react-router-redux';
 import { getURL } from '@bufferapp/publish-formatters';
-import getNotificationMessage from '@bufferapp/publish-notifications-provider';
 
 import {
   generateProfilePageRoute,
@@ -79,23 +78,6 @@ export default ({ dispatch, getState }) => next => (action) => {
         })));
       } else if (!isPreferencePage && profiles.length === 0) {
         dispatch(push('/new-connection'));
-      }
-
-      if (window._notification) {
-        const notificationType = window._notification.type;
-
-        const message = getNotificationMessage(
-          notificationType,
-          window._notification.key,
-          window._notification.variable,
-        );
-
-        if (message) {
-          dispatch(notificationActions.createNotification({
-            notificationType,
-            message,
-          }));
-        }
       }
       break;
     }
