@@ -173,17 +173,7 @@
     "@bufferapp/components" "2.1.1-alpha.6"
     react-simple-dropdown "3.0.0"
 
-"@bufferapp/analyze-shared-components@0.71.3", "@bufferapp/analyze-shared-components@^0.71.3":
-  version "0.71.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-shared-components/-/analyze-shared-components-0.71.3.tgz#bf5c5e195134f5ad1b25bb32d6e1ef03aecd3772"
-  integrity sha512-3fXRV8M40DqAUVcXQBPHJYDSrsvd25uPzd9vQkaJB7H63zsb9OqaQc1Jh6b6TuqdcFzoBLvS5y7J05Bj3YRn7g==
-  dependencies:
-    "@bufferapp/components" "2.1.1-alpha.6"
-    moment "^2.18.1"
-    react-highcharts "^16.0.2"
-    styled-components "^2.2.1"
-
-"@bufferapp/analyze-shared-components@^0.64.0":
+"@bufferapp/analyze-shared-components@0.64.0", "@bufferapp/analyze-shared-components@^0.64.0":
   version "0.64.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-shared-components/-/analyze-shared-components-0.64.0.tgz#14a08b0647473bed81be6a9edec1ec4bd1188690"
   integrity sha512-5IYhJK0q8k+s9zYc8mTWWGoUGGlKV4TgD1WWCODYLwxYKMQXPuP9LqEMsuM+R5iidXCfcoBazmtxMATCNIKrWg==
@@ -494,15 +484,7 @@
     classnames "^2.1.2"
     prop-types "^15.5.8"
 
-"@bufferapp/report-list@0.71.3":
-  version "0.71.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/report-list/-/report-list-0.71.3.tgz#6ddbdf2b3fbcda883a7093d54515e2747255c222"
-  integrity sha512-A4uTavMfY9je8rrOu0YBtGlyWV70U1/6jutEweEKLVUHS+iTUKYcBMX6lguqa9Gp0JkxoF3TGgO3x+fN32cnzw==
-  dependencies:
-    "@bufferapp/analyze-shared-components" "^0.71.3"
-    styled-components "^2.2.1"
-
-"@bufferapp/report-list@^0.67.0":
+"@bufferapp/report-list@0.67.0", "@bufferapp/report-list@^0.67.0":
   version "0.67.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/report-list/-/report-list-0.67.0.tgz#19d96e5cd22956f537d1f7ae5041b134b929eaa2"
   integrity sha512-MES4WMnc1vZNT706I0dXiyVe4pEkUnxGTeJEupzyve/ZaE1Q5sCfZ1EQJW6FTT43RsjonSGFdmDEUsITmO/ULw==
