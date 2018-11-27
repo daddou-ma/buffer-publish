@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const vendor = ['react', 'react-dom', '@bufferapp/components'];
-const { analyzePackagesWhitelist, analyzeLessLoader } = require('./analyze.config.js');
+const { analyzePackagesWhitelist, analyzeLessLoader } = require('../../analyze.config.js');
 
 
 module.exports = {
