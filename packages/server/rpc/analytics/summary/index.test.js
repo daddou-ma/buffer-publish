@@ -13,7 +13,7 @@ describe('rpc/summary', () => {
   const token = 'some token';
   const mockedRequest = {
     session: {
-      analyze: {
+      publish: {
         accessToken: token,
       },
     },

@@ -20,7 +20,7 @@ describe('rpc/compare', () => {
   const token = 'some token';
   const mockedRequest = {
     session: {
-      analyze: {
+      publish: {
         accessToken: token,
       },
     },
