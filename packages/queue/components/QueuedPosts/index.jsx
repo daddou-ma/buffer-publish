@@ -67,9 +67,10 @@ const QueuedPosts = ({
   onMiniCalendarMonthChange,
   subprofiles,
   isInstagramProfile,
-  directPostingEnabled,
+  isInstagramBusiness,
   onSetUpDirectPostingClick,
 }) => {
+  console.log('onSetUpDirectPostingClick', onSetUpDirectPostingClick);
   if (loading) {
     return (
       <div style={loadingContainerStyle}>
@@ -117,7 +118,7 @@ const QueuedPosts = ({
         </FeatureLoader>
 
       </div>
-      {isInstagramProfile && !directPostingEnabled &&
+      {isInstagramProfile && !isInstagramBusiness &&
         <InstagramDirectPostingBanner onSetUpDirectPostingClick={onSetUpDirectPostingClick} />
       }
       {!!paused && <QueuePausedBar handleClickUnpause={onUnpauseClick} />}
@@ -130,7 +131,7 @@ const QueuedPosts = ({
         />
       }
       {showComposer && editMode &&
-        <ComposerPopover 
+        <ComposerPopover
           onSave={onComposerCreateSuccess}
           type={'queue'}
         />
@@ -189,14 +190,14 @@ QueuedPosts.propTypes = {
   onUnpauseClick: PropTypes.func.isRequired,
   showCalendar: PropTypes.bool,
   onCalendarToggleClick: PropTypes.func.isRequired,
-  onMiniCalendarMonthChange: PropTypes.func,
+  onMiniCalendarMonthChange: PropTypes.func.isRequired,
   numberOfPostsByDate: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
   ]),
-  IsInstagramProfile: PropTypes.bool,
-  directPostingEnabled: PropTypes.bool,
-  onSetUpDirectPostingClick: PropTypes.func,
+  isInstagramProfile: PropTypes.bool,
+  isInstagramBusiness: PropTypes.bool,
+  onSetUpDirectPostingClick: PropTypes.func.isRequired,
 };
 
 QueuedPosts.defaultProps = {
@@ -212,8 +213,8 @@ QueuedPosts.defaultProps = {
   showCalendar: false,
   numberOfPostsByDate: null,
   subprofiles: [],
-  IsInstagramProfile: false,
-  directPostingEnabled: false,
+  isInstagramProfile: false,
+  isInstagramBusiness: false,
 };
 
 export default QueuedPosts;

@@ -8,7 +8,7 @@ export const GeneralSettingsWithFeatureLoader = WithFeatureLoader(GeneralSetting
 
 export default connect(
     state => ({
-      directPostingEnabled: state.generalSettings.directPostingEnabled,
+      isInstagramBusiness: state.generalSettings.isInstagramBusiness,
       profileId: state.generalSettings.profileId,
       profileService: state.generalSettings.profileService,
       linkShorteners: state.generalSettings.linkShorteners,

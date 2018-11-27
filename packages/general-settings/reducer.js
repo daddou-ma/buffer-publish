@@ -12,7 +12,7 @@ export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
 });
 
 const initialState = {
-  directPostingEnabled: false,
+  isInstagramBusiness: false,
   profileId: null,
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
     case profileActionTypes.SELECT_PROFILE:
       return {
         ...state,
-        directPostingEnabled: action.profile.directPostingEnabled,
+        isInstagramBusiness: action.profile.isInstagramBusiness,
         googleAnalyticsEnabled: action.profile.googleAnalyticsEnabled,
         profileId: action.profileId,
         profileService: action.profile.service,
