@@ -13,6 +13,7 @@ const analyzePackages = [
   'analyze-date-picker',
   'analyze-profile-selector',
   'micro-rpc',
+  'analyze-decorators',
 ];
 
 const analyzePackagesWhitelist = analyzePackages.map(imp => `(?!/@bufferapp/${imp})`).join('');
