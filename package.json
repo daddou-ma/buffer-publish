@@ -6,8 +6,8 @@
   "scripts": {
     "bootstrap": "yarn",
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
-    "test": "if [ -n \"$CI\" ]; then yarn && jest --config --runInBand; else jest; fi",
-    "test:debug": "node --inspect node_modules/.bin/jest --config --runInBand",
+    "test": "if [ -n \"$CI\" ]; then yarn && jest --runInBand; else jest; fi",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
     "test-update": "jest -u",
     "init": "yarn",
     "start": "cd ./packages/server/ && yarn run start",
