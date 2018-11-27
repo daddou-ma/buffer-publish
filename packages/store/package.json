@@ -37,7 +37,8 @@
     "@bufferapp/publish-two-factor-auth": "2.0.0",
     "@bufferapp/publish-upgrade-modal": "2.0.0",
     "@bufferapp/publish-notifications-provider": "2.0.0",
-    "@bufferapp/report-list": "0.71.3",
+    "@bufferapp/report-list": "0.67.0",
+    "@bufferapp/summary-table": "0.67.0",
     "@bufferapp/unauthorized-redirect": "1.9.6",
     "moment": "^2.22.2"
   },

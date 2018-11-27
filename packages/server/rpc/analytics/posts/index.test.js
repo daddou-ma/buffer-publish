@@ -91,7 +91,7 @@ describe('rpc/posts', () => {
       profileId,
     }, {
       session: {
-        analyze: {
+        publish: {
           accessToken: token,
         },
       },
@@ -116,7 +116,7 @@ describe('rpc/posts', () => {
 
     const postsData = await posts.fn({ profileId }, {
       session: {
-        analyze: {
+        publish: {
           accessToken: token,
         },
       },

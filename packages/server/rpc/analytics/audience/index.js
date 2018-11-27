@@ -72,7 +72,7 @@ module.exports = method(
     return requestAudience(
       profileId,
       dateRange,
-      req.session.analyze.accessToken,
+      req.session.publish.accessToken,
       req.app.get('analyzeApiAddr'),
     )
       .then(response => formatData(

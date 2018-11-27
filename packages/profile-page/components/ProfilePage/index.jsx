@@ -10,6 +10,7 @@ import PostingSchedule from '@bufferapp/publish-posting-schedule';
 import GeneralSettings from '@bufferapp/publish-general-settings';
 import TabNavigation from '@bufferapp/publish-tabs';
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
+import Analytics from '@bufferapp/publish-analytics';
 import { ScrollableContainer } from '@bufferapp/publish-shared-components';
 
 import { LoadingAnimation } from '@bufferapp/components';
@@ -58,7 +59,7 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
       );
     case 'analytics':
       return (
-        <div>Adding component soon!</div>
+        <Analytics />
       );
     case 'drafts':
     case 'awaitingApproval':
