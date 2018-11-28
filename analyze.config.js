@@ -12,6 +12,7 @@ const analyzePackages = [
   'analyze-profile-selector',
   'analyze-shared-components',
   'average-table',
+  'compare-chart',
   'micro-rpc',
   'report-list',
   'summary-table',
