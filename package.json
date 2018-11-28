@@ -110,24 +110,6 @@
     "webpack-hot-middleware": "2.22.3",
     "webpack-merge": "4.1.3"
   },
-  "jest": {
-    "transformIgnorePatterns": [
-      "/node_modules(?!/@bufferapp/performance-tracking)(?!/@bufferapp/notifications)(?!/@bufferapp/analyze-date-picker)(?!/@bufferapp/summary-table)(?!/@bufferapp/add-report)(?!/@bufferapp/analyze-png-export)(?!/@bufferapp/analyze-csv-export)(?!/@bufferapp/analyze-decorators)(?!/@bufferapp/analyze-profile-selector)(?!/@bufferapp/average-table)(?!/@bufferapp/analyze-shared-components)(?!/@bufferapp/report-list)(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/components)(?!/@bufferapp/web-components)(?!/@bufferapp/composer)(?!\/@bufferapp\/unauthorized-redirect)/"
-    ],
-    "verbose": true,
-    "collectCoverage": true,
-    "moduleNameMapper": {
-      "\\.(css|less)$": "identity-obj-proxy"
-    },
-    "setupFiles": [
-      "<rootDir>/jest-raf-shim.js"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/setupEnzyme.js",
-    "globals": {
-      "__PACKAGES__": "../packages"
-    },
-    "testURL": "https://publish.local.buffer.com"
-  },
   "dependencies": {
     "@bufferapp/react-images-loaded": "^1.1.0-fork.0"
   },
