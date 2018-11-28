@@ -241,26 +241,26 @@ module.exports = method(
     const currentPeriodTotals = requestTotals(profileId,
       profileService,
       dateRange,
-      req.session.analyze.accessToken,
+      req.session.publish.accessToken,
       req.app.get('analyzeApiAddr'),
     );
     const pastPeriodTotals = requestTotals(profileId,
       profileService,
       pastDateRange,
-      req.session.analyze.accessToken,
+      req.session.publish.accessToken,
       req.app.get('analyzeApiAddr'),
     );
 
     const currentPeriodDailyTotals = requestDailyTotals(profileId,
       profileService,
       dateRange,
-      req.session.analyze.accessToken,
+      req.session.publish.accessToken,
       req.app.get('analyzeApiAddr'),
     );
     const pastPeriodDailyTotals = requestDailyTotals(profileId,
       profileService,
       pastDateRange,
-      req.session.analyze.accessToken,
+      req.session.publish.accessToken,
       req.app.get('analyzeApiAddr'),
     );
 

@@ -61,12 +61,10 @@ export default ({ dispatch, getState }) => next => (action) => {
           profile,
         }));
         // Dispatch different select profile for components in analyze
-        if (params.tabId === 'analytics') {
-          dispatch({
-            type: 'PROFILE_SELECTOR__SELECT_PROFILE',
-            profile: formatAnalyticsProfileObj(profile),
-          });
-        }
+        dispatch({
+          type: 'PROFILE_SELECTOR__SELECT_PROFILE',
+          profile: formatAnalyticsProfileObj(profile),
+        });
       } else if (!isPreferencePage && profiles.length > 0) {
         const selectedProfile = profiles[0];
         dispatch(actions.selectProfile({

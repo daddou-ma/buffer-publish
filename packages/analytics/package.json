@@ -9,7 +9,9 @@
   "author": "amylee@buffer.com",
   "dependencies": {
     "@bufferapp/analyze-date-picker": "0.65.0",
-    "@bufferapp/analyze-shared-components": "0.71.3",
+    "@bufferapp/analyze-shared-components": "0.64.0",
+    "@bufferapp/average-table": "0.67.0",
+    "@bufferapp/summary-table": "0.67.0",
     "numeral": "^2.0.6"
   }
 }

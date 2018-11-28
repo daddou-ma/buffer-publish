@@ -197,7 +197,7 @@ module.exports = method(
   ({ profileId, profileService, startDate, endDate }, req) => {
     const dateRange = new DateRange(startDate, endDate);
     const previousDateRange = dateRange.getPreviousDateRange();
-    const accessToken = req.session.analyze.accessToken;
+    const accessToken = req.session.publish.accessToken;
     const analyzeApiAddr = req.app.get('analyzeApiAddr');
 
     const currentPeriodDailyTotals = requestDailyTotals(

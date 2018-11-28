@@ -9,7 +9,7 @@ module.exports = method(
     method: 'GET',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
-      access_token: session.analyze.accessToken,
+      access_token: session.publish.accessToken,
     },
     json: true,
   }).then(({ response }) => response[0]),

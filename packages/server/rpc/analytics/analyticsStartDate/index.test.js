@@ -24,7 +24,7 @@ describe('rpc/analytics_start_date', () => {
     }));
     const startDate = await analyticsStartDate.fn({ profileId }, {
       session: {
-        analyze: {
+        publish: {
           accessToken,
         },
       },

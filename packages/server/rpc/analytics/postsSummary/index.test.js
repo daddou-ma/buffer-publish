@@ -32,7 +32,7 @@ describe('rpc/posts_summary', () => {
       profileService: 'instagram',
     }, {
       session: {
-        analyze: {
+        publish: {
           accessToken: token,
         },
       },
@@ -65,7 +65,7 @@ describe('rpc/posts_summary', () => {
       profileService: 'twitter',
     }, {
       session: {
-        analyze: {
+        publish: {
           accessToken: token,
         },
       },
@@ -97,7 +97,7 @@ describe('rpc/posts_summary', () => {
       profileService: 'twitter',
     }, {
       session: {
-        analyze: {
+        publish: {
           accessToken: token,
         },
       },
@@ -130,7 +130,7 @@ describe('rpc/posts_summary', () => {
       profileService: 'facebook',
     }, {
       session: {
-        analyze: {
+        publish: {
           accessToken: token,
         },
       },
