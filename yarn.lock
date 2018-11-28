@@ -275,6 +275,22 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/chronos/-/chronos-0.6.1.tgz#0213dff339459ca510103e5a72f558682a2675dd"
   integrity sha1-AhPf8zlFnKUQED5acvVYaComdd0=
 
+"@bufferapp/compare-chart@0.67.0":
+  version "0.67.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/compare-chart/-/compare-chart-0.67.0.tgz#73418b6684ed538704effb99732974859f0fc863"
+  integrity sha512-0rgCEmKPmbmc816okTIN+xbbG2io+daWV1W3Sc6SQDb+jJzcFgu6XI3zSuIWWplIUzDFCfL3tmVeQirt9HcGGw==
+  dependencies:
+    "@bufferapp/add-report" "^0.67.0"
+    "@bufferapp/analyze-csv-export" "^0.65.1"
+    "@bufferapp/analyze-date-picker" "^0.65.0"
+    "@bufferapp/analyze-decorators" "^0.15.2"
+    "@bufferapp/analyze-png-export" "^0.61.0"
+    "@bufferapp/analyze-profile-selector" "^0.65.0"
+    "@bufferapp/analyze-shared-components" "^0.64.0"
+    "@bufferapp/async-data-fetch" "0.5.36-beta01"
+    react-highcharts "^16.0.2"
+    react-simple-dropdown "3.0.0"
+
 "@bufferapp/components@2.1.1-alpha.6":
   version "2.1.1-alpha.6"
   resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-2.1.1-alpha.6.tgz#719f6f27496ad5ae63d82782fdb53662e3e95cfe"
