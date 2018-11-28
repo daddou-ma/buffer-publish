@@ -26,6 +26,7 @@ import { reducer as twoFactorAuthReducer } from '@bufferapp/publish-two-factor-a
 import { reducer as closeAccountReducer } from '@bufferapp/close-account';
 // Remove analytics reducers when publish switches to Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
+import { reducer as compareChartReducer } from '@bufferapp/compare-chart';
 import { reducer as datePickerReducer } from '@bufferapp/analyze-date-picker';
 import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
 import { reducer as reportListReducer } from '@bufferapp/report-list';
@@ -59,6 +60,7 @@ export default combineReducers({
   profiles: profileReducer,
   generalSettings: generalSettingsReducer,
   postingSchedule: postingScheduleReducer,
+  compare: compareChartReducer,
   date: datePickerReducer,
   reportList: reportListReducer,
   summary: summaryTableReducer,

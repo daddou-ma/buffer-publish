@@ -15,6 +15,7 @@
     "@bufferapp/average-table": "0.67.0",
     "@bufferapp/buffermetrics": "0.6.3-beta-06",
     "@bufferapp/close-account": "2.0.0",
+    "@bufferapp/compare-chart": "0.67.0",
     "@bufferapp/edit-email": "2.0.0",
     "@bufferapp/environment": "1.9.4",
     "@bufferapp/maintenance-redirect": "2.0.0",
