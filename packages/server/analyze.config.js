@@ -10,9 +10,9 @@ const analyzePackages = [
   'analyze-decorators',
   'analyze-png-export',
   'analyze-profile-selector',
+  'analyze-shared-components',
   'average-table',
   'micro-rpc',
-  'analyze-shared-components',
   'report-list',
   'summary-table',
 ];
