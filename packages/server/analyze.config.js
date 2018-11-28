@@ -4,16 +4,17 @@
  * @type {Array}
  */
 const analyzePackages = [
+  'add-report',
+  'analyze-csv-export',
+  'analyze-date-picker',
+  'analyze-decorators',
+  'analyze-png-export',
+  'analyze-profile-selector',
+  'average-table',
+  'micro-rpc',
+  'analyze-shared-components',
   'report-list',
   'summary-table',
-  'analyze-csv-export',
-  'analyze-png-export',
-  'analyze-shared-components',
-  'add-report',
-  'analyze-date-picker',
-  'analyze-profile-selector',
-  'micro-rpc',
-  'analyze-decorators',
 ];
 
 const analyzePackagesWhitelist = analyzePackages.map(imp => `(?!/@bufferapp/${imp})`).join('');

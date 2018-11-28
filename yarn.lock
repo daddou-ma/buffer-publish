@@ -209,6 +209,22 @@
   dependencies:
     micro-rpc-client "^0.1.4"
 
+"@bufferapp/average-table@0.67.0":
+  version "0.67.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/average-table/-/average-table-0.67.0.tgz#3d8e5a211770d738181c9d9a66e7a32275b0d5b0"
+  integrity sha512-UTlsRWtLwEPtTtZVm7odK/SynpZYrvLMwzkES/xNvatnznP7Brfu73prPI5o9PIiabkREIOrvBKLm4Nz2ZtZRQ==
+  dependencies:
+    "@bufferapp/add-report" "^0.67.0"
+    "@bufferapp/analyze-csv-export" "^0.65.1"
+    "@bufferapp/analyze-date-picker" "^0.65.0"
+    "@bufferapp/analyze-decorators" "^0.15.2"
+    "@bufferapp/analyze-png-export" "^0.61.0"
+    "@bufferapp/analyze-profile-selector" "^0.65.0"
+    "@bufferapp/analyze-shared-components" "^0.64.0"
+    "@bufferapp/async-data-fetch" "0.5.36-beta01"
+    "@bufferapp/components" "^2.1.1"
+    "@bufferapp/summary-table" "^0.67.0"
+
 "@bufferapp/buda@0.6.2-beta-02":
   version "0.6.2-beta-02"
   resolved "https://registry.yarnpkg.com/@bufferapp/buda/-/buda-0.6.2-beta-02.tgz#1622f6590e1470aca962e44e78c74e549e86ad49"
@@ -278,6 +294,16 @@
     raf "3.4.0"
     react-autocomplete "1.7.2"
     react-day-picker "7.2.3"
+
+"@bufferapp/components@^2.1.1":
+  version "2.3.8"
+  resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-2.3.8.tgz#4b1c3a788ab76d88cda35b93da862a35c4f12dbc"
+  integrity sha512-ByxGyg2XmdFCVSUT9pbvUOpqQmnO56//Fg1d0WPdlOg5qBVWWP1b6+sn28GHIcYEwdA7iSwhmnLNxlNnW4WYcw==
+  dependencies:
+    "@bufferapp/react-keyframes" "0.2.5"
+    raf "3.4.0"
+    react-autocomplete "1.7.2"
+    react-day-picker "6.2.1"
 
 "@bufferapp/composer@2.2.6":
   version "2.2.6"
@@ -506,7 +532,7 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/shutdown-helper/-/shutdown-helper-0.2.0.tgz#d43bbba845e30e411dda76a7b7629e11160e5395"
   integrity sha1-1Du7qEXjDkEd2nant2KeERYOU5U=
 
-"@bufferapp/summary-table@0.67.0":
+"@bufferapp/summary-table@0.67.0", "@bufferapp/summary-table@^0.67.0":
   version "0.67.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/summary-table/-/summary-table-0.67.0.tgz#2ae21c13fafeadaafc86500ce93f96de814ecfaa"
   integrity sha512-h0JNWcOXnn6d0X2OnOxhSI5r86RAlYn3OO5Ck/0duvV8f2do2LO/mNwaLiME8vIzsOXjmxm/EhhegairTVKW+g==

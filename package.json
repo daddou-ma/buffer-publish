@@ -112,7 +112,7 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-      "/node_modules(?!/@bufferapp/performance-tracking)(?!/@bufferapp/notifications)(?!/@bufferapp/analyze-date-picker)(?!/@bufferapp/summary-table)(?!/@bufferapp/add-report)(?!/@bufferapp/analyze-png-export)(?!/@bufferapp/analyze-csv-export)(?!/@bufferapp/analyze-decorators)(?!/@bufferapp/analyze-profile-selector)(?!/@bufferapp/analyze-shared-components)(?!/@bufferapp/report-list)(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/components)(?!/@bufferapp/web-components)(?!/@bufferapp/composer)(?!\/@bufferapp\/unauthorized-redirect)/"
+      "/node_modules(?!/@bufferapp/performance-tracking)(?!/@bufferapp/notifications)(?!/@bufferapp/analyze-date-picker)(?!/@bufferapp/summary-table)(?!/@bufferapp/add-report)(?!/@bufferapp/analyze-png-export)(?!/@bufferapp/analyze-csv-export)(?!/@bufferapp/analyze-decorators)(?!/@bufferapp/analyze-profile-selector)(?!/@bufferapp/average-table)(?!/@bufferapp/analyze-shared-components)(?!/@bufferapp/report-list)(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/components)(?!/@bufferapp/web-components)(?!/@bufferapp/composer)(?!\/@bufferapp\/unauthorized-redirect)/"
     ],
     "verbose": true,
     "collectCoverage": true,
