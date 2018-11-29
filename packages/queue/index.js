@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
+
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
+import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions } from './reducer';
+
 import QueuedPosts from './components/QueuedPosts';
 
 const formatPostLists = (posts) => {
@@ -16,33 +19,30 @@ const formatPostLists = (posts) => {
   }, []);
 };
 
-// default export = container
 export default connect(
   (state, ownProps) => {
     const profileId = ownProps.profileId;
-    const currentProfile = state.queue.byProfileId[profileId];
-    const paused =
-      (state.profileSidebar.profiles.filter(p => p.id === profileId && p.paused).length) > 0;
-    if (currentProfile) {
-      const { profileSidebar: { selectedProfile } = {} } = state;
+    const profileQueuePosts = state.queue.byProfileId[profileId];
+    const profileData = state.profileSidebar.profiles.find(p => p.id === ownProps.profileId);
+    if (profileQueuePosts && profileData) {
       return {
-        loading: currentProfile.loading,
-        loadingMore: currentProfile.loadingMore,
-        moreToLoad: currentProfile.moreToLoad,
-        page: currentProfile.page,
-        postLists: formatPostLists(currentProfile.posts),
-        total: currentProfile.total,
+        loading: profileQueuePosts.loading,
+        loadingMore: profileQueuePosts.loadingMore,
+        moreToLoad: profileQueuePosts.moreToLoad,
+        page: profileQueuePosts.page,
+        postLists: formatPostLists(profileQueuePosts.posts),
+        total: profileQueuePosts.total,
         enabledApplicationModes: state.queue.enabledApplicationModes,
         showComposer: state.queue.showComposer,
         environment: state.environment.environment,
         editMode: state.queue.editMode,
         editingPostId: state.queue.editingPostId,
-        showCalendar: currentProfile.showCalendar,
-        paused,
-        numberOfPostsByDate: currentProfile.numberOfPostsByDate,
-        subprofiles: state.profileSidebar && selectedProfile ? selectedProfile.subprofiles : [],
-        isInstagramProfile: state.profileSidebar && selectedProfile && selectedProfile.type === "instagram",
-        directPostingEnabled: state.profileSidebar && selectedProfile && selectedProfile.directPostingEnabled,
+        showCalendar: profileQueuePosts.showCalendar,
+        numberOfPostsByDate: profileQueuePosts.numberOfPostsByDate,
+        subprofiles: profileData.subprofiles || [],
+        isInstagramProfile: profileData.type === 'instagram',
+        isInstagramBusiness: profileData.isInstagramBusiness,
+        paused: profileData.paused,
       };
     }
     return {};
@@ -137,17 +137,12 @@ export default connect(
       }));
     },
     onSetUpDirectPostingClick: () => {
-      dispatch(actions.handleSetUpDirectPostingClick({
+      dispatch(generalSettingsActions.handleSetUpDirectPostingClick({
         profileId: ownProps.profileId,
       }));
     },
   }),
 )(QueuedPosts);
 
-// export reducer, actions and action types
 export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';
-/*
-a consumer of a package should be able to use the package in the following way:
-import Example, { actions, actionTypes, middleware, reducer } from '@bufferapp/publish-example';
-*/
