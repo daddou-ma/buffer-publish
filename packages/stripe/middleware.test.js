@@ -61,7 +61,7 @@ describe('middleware', () => {
           args: {
             cycle: 'year',
             token: SUCCESS_RESPONSE.id,
-            cta: 'source',
+            source: 'source',
           },
         })));
       done();
