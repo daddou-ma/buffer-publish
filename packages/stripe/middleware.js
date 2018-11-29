@@ -39,7 +39,7 @@ export default ({ dispatch, getState }) => next => (action) => {
             name: 'upgradeToPro',
             args: {
               cycle: getState().upgradeModal.cycle,
-              cta: getState().upgradeModal.source,
+              source: getState().upgradeModal.source,
               token: response.id,
             },
           }));
