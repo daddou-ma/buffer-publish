@@ -28,7 +28,6 @@ import { reducer as closeAccountReducer } from '@bufferapp/close-account';
 import { reducer as averageReducer } from '@bufferapp/average-table';
 import { reducer as compareChartReducer } from '@bufferapp/compare-chart';
 import { reducer as datePickerReducer } from '@bufferapp/analyze-date-picker';
-import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
 import { reducer as reportListReducer } from '@bufferapp/report-list';
 import { reducer as summaryTableReducer } from '@bufferapp/summary-table';
 
@@ -42,7 +41,6 @@ export default combineReducers({
   profileSidebar: profileSidebarReducer,
   appSidebar: appSidebarReducer,
   asyncDataFetch: asyncDataFetchReducer,
-  average: averageReducer,
   notifications: notificationsReducer,
   environment: environmentReducer,
   appSwitcher: appSwitcherReducer,
@@ -57,7 +55,6 @@ export default combineReducers({
   closeAccount: closeAccountReducer,
   productFeatures: productFeaturesReducer,
   drafts: draftsReducer,
-  profiles: profileReducer,
   generalSettings: generalSettingsReducer,
   postingSchedule: postingScheduleReducer,
   compare: compareChartReducer,

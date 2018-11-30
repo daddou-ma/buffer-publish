@@ -34,7 +34,6 @@ import { middleware as notificationsProviderMiddleware } from '@bufferapp/publis
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
 import { middleware as compareChartMiddleware } from '@bufferapp/compare-chart';
 import { middleware as datePickerMiddleware } from '@bufferapp/analyze-date-picker';
-import { middleware as profileSelectorMiddleware } from '@bufferapp/analyze-profile-selector';
 import { middleware as summaryTableMiddleware } from '@bufferapp/summary-table';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 import reducers from './reducers';
@@ -94,7 +93,6 @@ const configureStore = (initialstate) => {
         compareChartMiddleware,
         datePickerMiddleware,
         notificationsProviderMiddleware,
-        profileSelectorMiddleware,
         summaryTableMiddleware,
       ),
     ),

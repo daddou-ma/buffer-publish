@@ -389,7 +389,6 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.POST_CONFIRMED_DELETE:
     case actionTypes.POST_DELETED:
     case actionTypes.POST_CANCELED_DELETE:
-    case actionTypes.POST_ERROR: //eslint-disable-line
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
