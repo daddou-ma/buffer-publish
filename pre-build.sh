@@ -12,10 +12,11 @@ EOF
 echo "VERSION JSON FILE:"
 cat ./version.json
 
+yarn install --non-interactive
+
 # Notify Bugsnag of new release
 yarn run bugsnag:release
 
-yarn install --non-interactive
 yarn run build
 
 # Using alpha release of uploader to always upload map files
