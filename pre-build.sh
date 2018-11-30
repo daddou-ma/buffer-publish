@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e # fail bash script on any error below
 
-echo "ENV VARS"
-printenv
+echo "GITHASH"
+cat ./.git/HEAD
+cat /src/.git/HEAD
 
 yarn install --non-interactive
 yarn run build
