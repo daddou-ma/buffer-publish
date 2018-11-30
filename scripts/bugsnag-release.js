@@ -20,7 +20,7 @@ if (releaseData) {
     appVersion: releaseData.version,
     sourceControl: {
       provider: 'github',
-      repository: 'git+https://github.com/bufferapp/buffer-publish.git',
+      repository: 'bufferapp/buffer-publish',
       revision: releaseData.version,
     },
     builderName: releaseData.author,
