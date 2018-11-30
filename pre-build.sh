@@ -1,9 +1,15 @@
 #!/bin/bash
 set -e # fail bash script on any error below
 
-echo "GITHASH"
-cat ./.git/HEAD
-cat /src/.git/HEAD
+# Drop git hash for server to pick up
+# as the `appVersion` to give to Bugsnag
+GIT_COMMIT=`cat ./.git/HEAD`
+cat << EOF > ./version.json
+{"version": "$GIT_COMMIT"}
+EOF
+
+echo "VERSION JSON FILE:"
+cat ./version.json
 
 yarn install --non-interactive
 yarn run build

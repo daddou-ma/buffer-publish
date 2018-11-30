@@ -1,4 +1,6 @@
 const Bugsnag = require('@bugsnag/js');
+const fs = require('fs');
+const { join } = require('path');
 
 const BUGSNAG_KEY = process.env.BUGSNAG_KEY;
 const HOSTNAME = process.env.HOSTNAME;
@@ -30,13 +32,17 @@ const getReleaseStage = () => {
 
 /**
  * Get the `appVersion` for Bugsnag.
- * Just returns the HOSTNAME for now.
- *
- * @todo Use the Git commit hash instead?
  *
  * https://docs.bugsnag.com/platforms/javascript/configuration-options/#appversion
  */
-const getAppVersion = () => HOSTNAME;
+const getAppVersion = () => {
+  try {
+    const versionJson = JSON.parse(fs.readFileSync(join(__dirname, '..', 'version.json'), 'utf8'));
+    return versionJson.version;
+  } catch (e) {
+    return HOSTNAME;
+  }
+};
 
 /**
  * Return a Bugsnag config for the frontend or server.
