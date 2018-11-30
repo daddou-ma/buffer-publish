@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e # fail bash script on any error below
 
+echo "ENV VARS"
+printenv
+
 yarn install --non-interactive
 yarn run build
 
