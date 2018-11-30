@@ -79,6 +79,5 @@ module.exports = {
   getBugsnagClient,
   getBugsnagScript,
   getBugsnagConfig,
-  APP_TYPE_SERVER,
-  APP_TYPE_FRONTEND,
+  getAppVersion,
 };

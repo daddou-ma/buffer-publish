@@ -21,3 +21,6 @@ chmod +x ./buffer-static-upload
 
 FILES="vendor.js,vendor.js.map,bundle.js,bundle.js.map,bundle.css,bundle.css.map"
 ./buffer-static-upload -files "$FILES" -dir publish
+
+# Notify Bugsnag of new release
+yarn run bugsnag:release
