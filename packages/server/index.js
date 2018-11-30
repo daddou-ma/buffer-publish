@@ -1,7 +1,6 @@
 const http = require('http');
 const express = require('express');
 const logMiddleware = require('@bufferapp/logger/middleware');
-const bugsnag = require('bugsnag');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const fs = require('fs');
@@ -19,7 +18,8 @@ const rpcHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
 const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
-const { sendFavicon } = require('./lib/favicon.js');
+const { sendFavicon } = require('./lib/favicon');
+const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
 
 const app = express();
 const server = http.createServer(app);
@@ -41,10 +41,6 @@ let staticAssets = {
   'vendor.js': 'https://local.buffer.com:8080/static/vendor.js',
 };
 
-// NOTE: Bugsnag will not notify in local setup with current weback configuration
-// https://docs.bugsnag.com/platforms/browsers/faq/#4-code-generated-with-eval-e-g-from-webpack
-let bugsnagScript = '';
-
 const isProduction = process.env.NODE_ENV === 'production';
 app.set('isProduction', isProduction);
 
@@ -56,15 +52,13 @@ if (isProduction) {
     console.log('Failed loading static assets manifest file - File is empty'); // eslint-disable-line
     process.exit(1);
   }
+}
 
-  if (process.env.BUGSNAG_KEY) {
-    bugsnag.register(process.env.BUGSNAG_KEY);
-    app.set('bugsnag', bugsnag);
-    // NOTE: Bugsnag will not notify in local setup with current weback configuration
-    // https://docs.bugsnag.com/platforms/browsers/faq/#4-code-generated-with-eval-e-g-from-webpack
-    bugsnagScript = `<script src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js"
-                              data-apikey="${process.env.BUGSNAG_KEY}"></script>`;
-  }
+/**
+ * Add Bugsnag to app (see `middleware.js` for where this is used)
+ */
+if (isProduction) {
+  app.set('bugsnag', getBugsnagClient());
 }
 
 const stripePublishableKey = process.env.STRIPE_PUBLISHABLE;
@@ -115,7 +109,7 @@ window['_fs_namespace'] = 'FS';
 })(window,document,window['_fs_namespace'],'script','user');
 </script>`;
 
-const getHtml = notification =>
+const getHtml = (notification, userId) =>
   fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
@@ -123,7 +117,7 @@ const getHtml = notification =>
     .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
     .replace('{{{stripeScript}}}', stripeScript)
     .replace('{{{fullStoryScript}}}', fullStoryScript)
-    .replace('{{{bugsnagScript}}}', bugsnagScript)
+    .replace('{{{bugsnagScript}}}', isProduction ? getBugsnagScript(userId) : '')
     .replace('{{{notificationScript}}}', notificationScript(notification));
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
@@ -186,7 +180,7 @@ app.get('*', (req, res) => {
       notification.variable = req.query.nv; // Notification Variable
     }
   }
-  res.send(getHtml(notification));
+  res.send(getHtml(notification, req.session.global.userId));
 });
 
 app.use(apiError);
