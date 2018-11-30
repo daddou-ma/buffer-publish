@@ -4,12 +4,16 @@ set -e # fail bash script on any error below
 # Drop git hash for server to pick up
 # as the `appVersion` to give to Bugsnag
 GIT_COMMIT=`cat ./.git/HEAD`
+GIT_AUTHOR=`git log -1 --pretty=format:'%an'`
 cat << EOF > ./version.json
-{"version": "$GIT_COMMIT"}
+{"version": "$GIT_COMMIT", "author":"$GIT_AUTHOR"}
 EOF
 
 echo "VERSION JSON FILE:"
 cat ./version.json
+
+# Notify Bugsnag of new release
+yarn run bugsnag:release
 
 yarn install --non-interactive
 yarn run build
@@ -21,6 +25,3 @@ chmod +x ./buffer-static-upload
 
 FILES="vendor.js,vendor.js.map,bundle.js,bundle.js.map,bundle.css,bundle.css.map"
 ./buffer-static-upload -files "$FILES" -dir publish
-
-# Notify Bugsnag of new release
-yarn run bugsnag:release
