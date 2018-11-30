@@ -4,7 +4,7 @@ const common = require('./webpack.config.common.js');
 
 const merged = merge(common, {
   mode: 'production',
-  devtool: undefined,
+  devtool: 'source-map',
   optimization: {
     nodeEnv: 'production',
   },
