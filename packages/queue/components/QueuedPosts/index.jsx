@@ -70,7 +70,7 @@ const QueuedPosts = ({
   isInstagramBusiness,
   onSetUpDirectPostingClick,
 }) => {
-  console.log('onSetUpDirectPostingClick', onSetUpDirectPostingClick);
+  // console.log('onSetUpDirectPostingClick', onSetUpDirectPostingClick);
   if (loading) {
     return (
       <div style={loadingContainerStyle}>
