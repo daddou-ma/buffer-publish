@@ -24,5 +24,8 @@ UPLOADER="https://github.com/bufferapp/buffer-static-upload/releases/download/0.
 curl -L $UPLOADER > ./buffer-static-upload
 chmod +x ./buffer-static-upload
 
-FILES="vendor.js,vendor.js.map,bundle.js,bundle.js.map,bundle.css,bundle.css.map"
+FILES="vendor.js,bundle.js,bundle.css,*.map"
 ./buffer-static-upload -files "$FILES" -dir publish
+
+echo "STATIC ASSETS:"
+cat ./staticAssets.json
