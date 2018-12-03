@@ -25,7 +25,7 @@ curl -L $UPLOADER > ./buffer-static-upload
 chmod +x ./buffer-static-upload
 
 FILES="vendor.js,bundle.js,bundle.css,*.map"
-./buffer-static-upload -files "$FILES" -dir publish
+./buffer-static-upload -files "$FILES" -bucket static.buffer.com -dir publish
 
 echo "STATIC ASSETS:"
 cat ./staticAssets.json
