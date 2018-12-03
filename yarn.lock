@@ -453,6 +453,17 @@
     "@bufferapp/async-data-fetch" "1.9.4"
     "@bufferapp/session-manager" "0.7.1"
 
+"@bufferapp/hourly-chart@0.79.1":
+  version "0.79.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/hourly-chart/-/hourly-chart-0.79.1.tgz#b99ec7f7d8ea60be0bbe051564a0ee0c9b0694f2"
+  integrity sha512-cBNqYRMV3y3k3MLvA+0/f9hpIULFzwzN7CL2MTpkHgcK8v5UGGeAa1bWUkboVmJxkiQ0XyOeSM9ISp3lkoPngg==
+  dependencies:
+    "@bufferapp/add-report" "^0.79.1"
+    "@bufferapp/analyze-csv-export" "^0.79.1"
+    "@bufferapp/analyze-date-picker" "^0.79.1"
+    "@bufferapp/analyze-profile-selector" "^0.79.1"
+    "@bufferapp/analyze-shared-components" "^0.79.1"
+
 "@bufferapp/keywrapper@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/keywrapper/-/keywrapper-0.2.0.tgz#158275f0a9562cc015c44c8b73629d2526e36092"
