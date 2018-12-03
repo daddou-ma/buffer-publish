@@ -103,7 +103,7 @@ export default (state = initialState, action) => {
 export const actions = {
   selectProfile: ({ profile }) => ({
     type: actionTypes.SELECT_PROFILE,
-    profileId: profile.id,
+    profileId: profile ? profile.id : null,
     profile,
   }),
   onUnpauseClick: ({ profileId }) => ({
