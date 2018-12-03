@@ -14,6 +14,7 @@ const analyzePackages = [
   'average-table',
   'compare-chart',
   'micro-rpc',
+  'posts-table',
   'report-list',
   'summary-table',
 ];
