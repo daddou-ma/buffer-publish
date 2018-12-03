@@ -35,9 +35,11 @@ const loadingContainerStyle = {
 };
 
 const buttonStyle = {
-  height: '40px',
+  height: '37px',
   marginLeft: '1.5rem',
   minWidth: '150px',
+  alignItems: 'center',
+  display: 'flex',
 };
 
 const QueuedPosts = ({
