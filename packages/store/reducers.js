@@ -28,6 +28,7 @@ import { reducer as closeAccountReducer } from '@bufferapp/close-account';
 import { reducer as averageReducer } from '@bufferapp/average-table';
 import { reducer as compareChartReducer } from '@bufferapp/compare-chart';
 import { reducer as datePickerReducer } from '@bufferapp/analyze-date-picker';
+import { reducer as hourlyReducer } from '@bufferapp/hourly-chart';
 import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
 import { reducer as reportListReducer } from '@bufferapp/report-list';
 import { reducer as summaryTableReducer } from '@bufferapp/summary-table';
@@ -61,6 +62,7 @@ export default combineReducers({
   average: averageReducer,
   compare: compareChartReducer,
   date: datePickerReducer,
+  hourly: hourlyReducer,
   profiles: profileReducer,
   reportList: reportListReducer,
   summary: summaryTableReducer,
