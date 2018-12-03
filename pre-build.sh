@@ -19,8 +19,7 @@ yarn run bugsnag:release
 
 yarn run build
 
-# Using alpha release of uploader to always upload map files
-UPLOADER="https://github.com/bufferapp/buffer-static-upload/releases/download/0.2.2-alpha/buffer-static-upload-`uname -s`"
+UPLOADER="https://github.com/bufferapp/buffer-static-upload/releases/download/0.1.0/buffer-static-upload-`uname -s`"
 curl -L $UPLOADER > ./buffer-static-upload
 chmod +x ./buffer-static-upload
 
