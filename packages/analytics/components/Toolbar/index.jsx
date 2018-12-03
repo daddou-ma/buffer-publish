@@ -1,19 +1,25 @@
 import React from 'react';
-import { Toolbar as AnalyticsToolbar } from '@bufferapp/analyze-shared-components';
 import DatePicker from '@bufferapp/analyze-date-picker';
+import ExportPicker from '@bufferapp/analyze-export-picker';
 
-const toolbarDatePicker = {
+const toolbarExport = {
+  marginRight: '10px',
+};
+
+const toolbarRight = {
   display: 'flex',
   justifyContent: 'flex-end',
-  marginLeft: 'auto',
+  alignContent: 'center',
+  padding: '0.75rem 0',
 };
 
 const Toolbar = () => (
-  <AnalyticsToolbar>
-    <div style={toolbarDatePicker}>
+  <div style={toolbarRight}>
+    <div style={toolbarExport}>
       <DatePicker />
     </div>
-  </AnalyticsToolbar>
+    <ExportPicker filename={'buffer-analytics'} />
+  </div>
 );
 
 export default Toolbar;
