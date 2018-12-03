@@ -1,3 +1,11 @@
 header > span > button {
   display: none;
 }
+
+div > section span, button span, [data-highcharts-chart] div span  {
+  font-size: 0.75rem !important;
+}
+
+section div a {
+  padding: 5px 10px !important;
+}
