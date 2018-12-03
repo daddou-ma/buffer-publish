@@ -19,7 +19,7 @@ yarn run bugsnag:release
 
 yarn run build
 
-UPLOADER="https://github.com/bufferapp/buffer-static-upload/releases/download/0.2.0/buffer-static-upload-`uname -s`"
+UPLOADER="https://github.com/bufferapp/buffer-static-upload/releases/download/0.2.1/buffer-static-upload-`uname -s`"
 curl -L $UPLOADER > ./buffer-static-upload
 chmod +x ./buffer-static-upload
 
