@@ -34,6 +34,9 @@ import { middleware as notificationsProviderMiddleware } from '@bufferapp/publis
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
 import { middleware as compareChartMiddleware } from '@bufferapp/compare-chart';
 import { middleware as datePickerMiddleware } from '@bufferapp/analyze-date-picker';
+import { middleware as exportPickerMiddleware } from '@bufferapp/analyze-export-picker';
+import { middleware as exportToCSVMiddleware } from '@bufferapp/analyze-csv-export';
+import { middleware as exportToPNGMiddleware } from '@bufferapp/analyze-png-export';
 import { middleware as profileSelectorMiddleware } from '@bufferapp/analyze-profile-selector';
 import { middleware as summaryTableMiddleware } from '@bufferapp/summary-table';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
@@ -90,12 +93,16 @@ const configureStore = (initialstate) => {
         maintenanceRedirectMiddleware,
         bufferMetricsMiddleware,
         draftsMiddleware,
+        notificationsProviderMiddleware,
         averageMiddleware,
         compareChartMiddleware,
         datePickerMiddleware,
-        notificationsProviderMiddleware,
         profileSelectorMiddleware,
         summaryTableMiddleware,
+        // Analyze -- These need to be the last middlewares in the chain
+        exportToPNGMiddleware,
+        exportToCSVMiddleware,
+        exportPickerMiddleware,
       ),
     ),
   );
