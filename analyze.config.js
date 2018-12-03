@@ -13,6 +13,7 @@ const analyzePackages = [
   'analyze-shared-components',
   'average-table',
   'compare-chart',
+  'hourly-chart',
   'micro-rpc',
   'report-list',
   'summary-table',
