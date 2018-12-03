@@ -9,10 +9,16 @@ const merged = merge(common, {
   optimization: {
     nodeEnv: 'production',
   },
-  plugins: [new webpack.SourceMapDevToolPlugin({
-    filename: '[name].[hash].js.map',
-    exclude: ['bundle.css'],
-  })],
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].[hash].js.map',
+      exclude: ['bundle.css'],
+    }),
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].[hash].css.map',
+      test: ['bundle.css'],
+    }),
+  ],
 });
 
 module.exports = merged;
