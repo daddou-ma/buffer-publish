@@ -14,8 +14,7 @@ const getBaseURL = () => {
 };
 
 const openCalendarWindow = (profileId) => {
-  const calendarURL = `${getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/week/?calendar_only=true`;
-  openPopup(calendarURL, 'CalendarView', 800, 950);
+  window.location.href = `${getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/week/?calendar_only=true`;
 };
 
 export default openCalendarWindow;
