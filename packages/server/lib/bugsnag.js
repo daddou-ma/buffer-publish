@@ -55,7 +55,10 @@ const getBugsnagConfig = (appType, userId) => ({
   releaseStage: getReleaseStage(),
   appVersion: getAppVersion(),
   appType,
-  user: userId ? { id: userId } : null,
+  user: userId ? {
+    id: userId,
+    adminLink: `https://buffer.com/admin/user/${userId}`,
+  } : null,
 });
 
 /**
