@@ -71,14 +71,14 @@ const notificationScript = (notification) => {
   let variable = '';
 
   if (notification.variable) {
-    variable = `variable: '${notification.variable}'`;
+    variable = `variable: ${JSON.stringify(notification.variable)}`;
   }
 
   return `
     <script type="text/javascript">
         window._notification = {
-          type: '${notification.type}',
-          key: '${notification.key}',
+          type: ${JSON.stringify(notification.type)},
+          key: ${JSON.stringify(notification.key)},
           ${variable}
         };
     </script>
