@@ -31,7 +31,10 @@ import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintena
 import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
 import { middleware as notificationsProviderMiddleware } from '@bufferapp/publish-notifications-provider';
 // Remove analytics middleware when publish switches to analyze
+import { middleware as averageMiddleware } from '@bufferapp/average-table';
+import { middleware as compareChartMiddleware } from '@bufferapp/compare-chart';
 import { middleware as datePickerMiddleware } from '@bufferapp/analyze-date-picker';
+import { middleware as profileSelectorMiddleware } from '@bufferapp/analyze-profile-selector';
 import { middleware as summaryTableMiddleware } from '@bufferapp/summary-table';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 import reducers from './reducers';
@@ -87,8 +90,11 @@ const configureStore = (initialstate) => {
         maintenanceRedirectMiddleware,
         bufferMetricsMiddleware,
         draftsMiddleware,
+        averageMiddleware,
+        compareChartMiddleware,
         datePickerMiddleware,
         notificationsProviderMiddleware,
+        profileSelectorMiddleware,
         summaryTableMiddleware,
       ),
     ),
