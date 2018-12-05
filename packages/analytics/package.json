@@ -12,6 +12,7 @@
     "@bufferapp/analyze-shared-components": "0.79.1",
     "@bufferapp/average-table": "0.79.1",
     "@bufferapp/compare-chart": "0.79.1",
+    "@bufferapp/posts-table": "0.79.1",
     "@bufferapp/summary-table": "0.79.1",
     "numeral": "^2.0.6"
   }
