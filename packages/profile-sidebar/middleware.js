@@ -50,8 +50,7 @@ export default ({ dispatch, getState }) => next => (action) => {
           profile,
         }));
         // Dispatch different select profile for components in analyze
-        if (profile && profile.business &&
-          (profile.service === 'twitter' || profile.service === 'facebook')) {
+        if (canUserViewAnalytics(profile)) {
           dispatch({
             type: 'PROFILE_SELECTOR__SELECT_PROFILE',
             profile: formatAnalyticsProfileObj(profile),
@@ -62,6 +61,13 @@ export default ({ dispatch, getState }) => next => (action) => {
         dispatch(actions.selectProfile({
           profile: selectedProfile,
         }));
+        // Dispatch to fetch analytics data if no params
+        if (canUserViewAnalytics(selectedProfile)) {
+          dispatch({
+            type: 'PROFILE_SELECTOR__SELECT_PROFILE',
+            profile: formatAnalyticsProfileObj(selectedProfile),
+          });
+        }
         dispatch(push(generateProfilePageRoute({
           profileId: selectedProfile.id,
           tabId: 'queue',

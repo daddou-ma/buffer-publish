@@ -26,8 +26,8 @@ export default connect(
         dispatch(actions.selectProfile({
           profile,
         }));
-        if (profile && profile.business &&
-          (profile.service === 'twitter' || profile.service === 'facebook')) {
+        if (canUserViewAnalytics(profile)) {
+          // need to match analyze action to fetch data for new selected profile
           dispatch({
             type: 'PROFILE_SELECTOR__SELECT_PROFILE',
             profile: formatAnalyticsProfileObj(profile),
