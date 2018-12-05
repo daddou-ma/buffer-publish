@@ -23,6 +23,34 @@ export default ({ dispatch }) => next => (action) => {
         },
       }));
       break;
+
+/*
+In Classic it's REQUESTING_DRAFT_APPROVE.
+Sends draft to queue, which means approves draft
+*/
+    case actionTypes.DRAFT_APPROVE:
+      dispatch(dataFetchActions.fetch({
+        name: 'approveDraft',
+        args: {
+          updateId: action.updateId,
+        },
+      }));
+      break;
+
+/*
+In Classic it's REQUESTING_NEEDS_APPROVAL_UPDATE:
+Requests approval as a contributor (moves draft to awaiting approval tab if needsApproval is true,
+moves from approval tab to drafts if needsApproval false)
+*/
+    case actionTypes.DRAFT_NEEDS_APPROVAL:
+      dispatch(dataFetchActions.fetch({
+        name: 'changeDraftStatus',
+        args: {
+          updateId: action.updateId,
+          needsApproval: action.needsApproval,
+        },
+      }));
+      break;
     default:
       break;
   }
