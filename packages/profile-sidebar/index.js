@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import ProfileSidebar from './components/ProfileSidebar';
 import { actions } from './reducer';
 
+const { formatAnalyticsProfileObj } = require('./formats.js');
+
 export default connect(
   (state, ownProps) => ({
     loading: state.profileSidebar.loading,

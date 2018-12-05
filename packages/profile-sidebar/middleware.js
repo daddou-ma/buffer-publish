@@ -13,24 +13,13 @@ import {
 
 import { actionTypes as initialLoadingActionTypes } from '@bufferapp/publish-initial-loading';
 
-
 import { actions as notificationActions } from '@bufferapp/notifications';
 import {
   actions,
   actionTypes,
 } from './reducer';
 
-// mirror format used in analyze
-const formatAnalyticsProfileObj = ({ id, service, timezone, service_username, avatarUrl }) => (
-  {
-    id,
-    avatarUrl,
-    service,
-    timezone,
-    username: service_username,
-    organizationId: '',
-  }
-);
+const { formatAnalyticsProfileObj } = require('./formats.js');
 
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
