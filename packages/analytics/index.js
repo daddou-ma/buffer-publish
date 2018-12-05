@@ -1,19 +1,10 @@
-import React from 'react';
-import AverageTable from '@bufferapp/average-table';
-import CompareChart from '@bufferapp/compare-chart';
-import PostsTable from '@bufferapp/posts-table';
-import SummaryTable from '@bufferapp/summary-table';
-import Toolbar from './components/Toolbar';
-import './analytics.css';
+import { connect } from 'react-redux';
+import AnalyticsList from './components/AnalyticsList';
 
-const Analytics = () => (
-  <div>
-    <Toolbar />
-    <SummaryTable />
-    <AverageTable />
-    <CompareChart />
-    <PostsTable />
-  </div>
-);
-
-export default Analytics;
+export default connect(
+  state => ({
+    profileService: state.profileSidebar.selectedProfile ?
+      state.profileSidebar.selectedProfile.service :
+      null,
+  }),
+)(AnalyticsList);
