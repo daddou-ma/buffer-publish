@@ -50,10 +50,13 @@ export default ({ dispatch, getState }) => next => (action) => {
           profile,
         }));
         // Dispatch different select profile for components in analyze
-        dispatch({
-          type: 'PROFILE_SELECTOR__SELECT_PROFILE',
-          profile: formatAnalyticsProfileObj(profile),
-        });
+        if (profile && profile.business &&
+          (profile.service === 'twitter' || profile.service === 'facebook')) {
+          dispatch({
+            type: 'PROFILE_SELECTOR__SELECT_PROFILE',
+            profile: formatAnalyticsProfileObj(profile),
+          });
+        }
       } else if (!isPreferencePage && profiles.length > 0) {
         const selectedProfile = profiles[0];
         dispatch(actions.selectProfile({
