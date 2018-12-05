@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const vendor = ['react', 'react-dom', '@bufferapp/components'];
+const { analyzePackagesWhitelist, analyzeLessLoader } = require('../../analyze.config.js');
+
 
 module.exports = {
   context: __dirname,
@@ -16,7 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules(?!\/@bufferapp\/performance-tracking)(?!\/@bufferapp\/async-data-fetch)(?!\/@bufferapp\/components)(?!\/@bufferapp\/web-components)(?!\/@bufferapp\/composer)(?!\/@bufferapp\/unauthorized-redirect)/,
+        exclude: new RegExp(`/node_modules(?!/@bufferapp/performance-tracking)(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/components)(?!/@bufferapp/web-components)(?!/@bufferapp/composer)(?!/@bufferapp/unauthorized-redirect)${analyzePackagesWhitelist}/`),
         use: {
           loader: 'babel-loader',
           options: {
@@ -38,6 +40,7 @@ module.exports = {
           'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
         ],
       },
+      analyzeLessLoader,
     ],
   },
   plugins: [

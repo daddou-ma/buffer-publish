@@ -14,7 +14,7 @@
     "storybook": "start-storybook -p 9001",
     "watch": "webpack-dev-server --config ./packages/server/webpack.config.dev.js --colors --display-error-details",
     "build": "webpack --config ./packages/server/webpack.config.prod.js --output-path=`pwd`",
-    "rebuild-grpc": "docker exec -it bufferdev_publish_1 bash -c 'npm rebuild grpc --target_arch=x64 --target_platform=linux --target_libc=glibc'"
+    "bugsnag:release": "node ./packages/server/scripts/bugsnag-release.js"
   },
   "repository": {
     "type": "git",
@@ -42,6 +42,7 @@
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
     "bugsnag": "1.11.0",
+    "bugsnag-build-reporter": "^1.0.0",
     "css-loader": "0.27.3",
     "decorate-component-with-props": "1.0.2",
     "deep-freeze": "0.0.1",
@@ -58,6 +59,8 @@
     "jest": "23.4.1",
     "js-cookie": "2.1.4",
     "keymirror": "0.1.1",
+    "less": "3.8.1",
+    "less-loader": "4.1.0",
     "lodash.clonedeep": "4.5.0",
     "lodash.debounce": "4.0.8",
     "lodash.escaperegexp": "4.1.2",
@@ -69,7 +72,7 @@
     "lru-cache": "4.1.1",
     "micro-rpc-client": "0.1.4",
     "mini-css-extract-plugin": "^0.4.1",
-    "moment": "2.19.3",
+    "moment": "2.22.2",
     "moment-timezone": "0.5.13",
     "object-path": "0.11.4",
     "prop-types": "15.5.10",
@@ -107,24 +110,6 @@
     "webpack-dev-server": "3.1.5",
     "webpack-hot-middleware": "2.22.3",
     "webpack-merge": "4.1.3"
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "/node_modules(?!/@bufferapp/performance-tracking)(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/components)(?!/@bufferapp/web-components)(?!/@bufferapp/composer)(?!\/@bufferapp\/unauthorized-redirect)/"
-    ],
-    "verbose": true,
-    "collectCoverage": true,
-    "moduleNameMapper": {
-      "\\.(css|less)$": "identity-obj-proxy"
-    },
-    "setupFiles": [
-      "<rootDir>/jest-raf-shim.js"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/setupEnzyme.js",
-    "globals": {
-      "__PACKAGES__": "../packages"
-    },
-    "testURL": "https://publish.local.buffer.com"
   },
   "dependencies": {
     "@bufferapp/react-images-loaded": "^1.1.0-fork.0"

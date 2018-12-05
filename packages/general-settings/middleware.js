@@ -12,6 +12,12 @@ export default ({ dispatch }) => next => (action) => {
     case actionTypes.SET_DIRECT_POSTING:
       window.location = getURL.getInstagramDirectPostingURL(action.profileId);
       break;
+    case actionTypes.CONNECT_BITLY:
+      window.location = getURL.getConnectBitlyURL(action.profileId);
+      break;
+    case actionTypes.DISCONNECT_BITLY:
+      window.location = getURL.getDisconnectBitlyURL(action.profileId);
+      break;
     case profileActionTypes.SELECT_PROFILE:
       dispatch(dataFetchActions.fetch({
         name: 'getLinkShortener',
@@ -26,6 +32,15 @@ export default ({ dispatch }) => next => (action) => {
         args: {
           profileId: action.profileId,
           domain: action.domain,
+        },
+      }));
+      break;
+    case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
+      dispatch(asyncDataFetch.fetch({
+        name: 'toggleGoogleAnalytics',
+        args: {
+          profileId: action.profileId,
+          utmTrackingChoice: action.utmTrackingChoice,
         },
       }));
       break;

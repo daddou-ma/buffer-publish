@@ -6,13 +6,31 @@ import LinkShortener from './index';
 const linkList = [{ domain: 'option1', name: 'option2', selected: true }];
 const linkListMulti = [{ domain: 'option1', name: 'option2', selected: true }, { domain: 'option2', name: 'option2', selected: false }];
 
+const features = { isFreeUser: () => true };
+const featuresNotFree = { isFreeUser: () => false };
+
 storiesOf('LinkShortener', module)
   .addDecorator(checkA11y)
   .add('default', () => (
-    <LinkShortener />
+    <LinkShortener
+      features={features}
+    />
   ))
   .add('Show single shortener option', () => (
     <LinkShortener
+      features={features}
+      onConnectBitlyURLClick={() => {}}
+      onDisconnectBitlyURLClick={() => {}}
+      linkShorteners={linkList}
+      onOptionSelect={() => {}}
+      loading={false}
+    />
+  ))
+  .add('Show single shortener option with Connect Bitly button', () => (
+    <LinkShortener
+      features={featuresNotFree}
+      onConnectBitlyURLClick={() => {}}
+      onDisconnectBitlyURLClick={() => {}}
       linkShorteners={linkList}
       onOptionSelect={() => {}}
       loading={false}
@@ -20,6 +38,19 @@ storiesOf('LinkShortener', module)
   ))
   .add('Show multiple shortener options', () => (
     <LinkShortener
+      features={features}
+      onConnectBitlyURLClick={() => {}}
+      onDisconnectBitlyURLClick={() => {}}
+      linkShorteners={linkListMulti}
+      onOptionSelect={() => {}}
+      loading={false}
+    />
+  ))
+  .add('Show multiple shortener options with Connect Bitly button', () => (
+    <LinkShortener
+      features={featuresNotFree}
+      onConnectBitlyURLClick={() => {}}
+      onDisconnectBitlyURLClick={() => {}}
       linkShorteners={linkListMulti}
       onOptionSelect={() => {}}
       loading={false}
@@ -27,6 +58,7 @@ storiesOf('LinkShortener', module)
   ))
   .add('Show pinterest message', () => (
     <LinkShortener
+      features={features}
       profileService="pinterest"
     />
   ));

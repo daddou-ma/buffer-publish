@@ -26,12 +26,10 @@
     "proPlanScheduling": "Schedule 100 posts per social account",
     "proPlanCalendar": "Manage everything at a glance with the Social Media Calendar",
     "proPlanBitly": "Shorten your links with Bitly",
-
     "proPlanMonthlyPrice": "$15 per month",
     "proPlanMonthlyDescription": "Cancel and get a refund any time",
     "proPlanYearlyPrice": "$144 per year",
-    "proPlanYearlyDescription": "Save 15% vs paying monthly",
-
+    "proPlanYearlyDescription": "Save 20% vs paying monthly",
     "enterPaymentDetails": "Enter your payment details securely",
     "nameOnCard": "Name on card",
     "cardNumber": "Card number",
@@ -40,7 +38,6 @@
     "securityCode": "Security code",
     "zipCode": "Zip code",
     "zipLeaveBlank": "Leave blank for non-US cards",
-
     "upgradeCta": "Upgrade to the Pro Plan!",
     "validating": "One moment...",
     "stayOnFreeCta": "Stay on the Free Plan for now"

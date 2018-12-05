@@ -3,44 +3,69 @@ import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
+import GoogleAnalytics from '../GoogleAnalytics';
 
 const GeneralSettings = ({
-  directPostingEnabled,
+  isInstagramBusiness,
   onSetUpDirectPostingClick,
   linkShorteners,
   profileService,
   loadingLinkShorteners,
   onLinkShortenerOptionSelect,
   selectedShortener,
+  onShowGACustomizationFormClick,
+  showGACustomizationForm,
+  googleAnalyticsIsEnabled,
+  onToggleGoogleAnalyticsClick,
+  onConnectBitlyURLClick,
+  onDisconnectBitlyURLClick,
+  isContributor,
+  features,
 }) => (
   <div>
-    {!directPostingEnabled &&
+    {!isInstagramBusiness &&
     <InstagramDirectPosting
       onSetUpDirectPostingClick={onSetUpDirectPostingClick}
     />
     }
     <LinkShortening
+      isContributor={isContributor}
+      onConnectBitlyURLClick={onConnectBitlyURLClick}
+      onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
       loading={loadingLinkShorteners}
       profileService={profileService}
       linkShorteners={linkShorteners}
       onOptionSelect={onLinkShortenerOptionSelect}
       selectedShortener={selectedShortener}
+      features={features}
     />
     <Divider />
+    <GoogleAnalytics
+      onShowGACustomizationFormClick={onShowGACustomizationFormClick}
+      showGACustomizationForm={showGACustomizationForm}
+      googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
+      onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
+    />
   </div>
 );
 
 GeneralSettings.defaultProps = {
-  directPostingEnabled: false,
+  isInstagramBusiness: false,
   profileService: null,
   linkShorteners: null,
   loadingLinkShorteners: true,
   onLinkShortenerOptionSelect: null,
   selectedShortener: null,
+  isContributor: null,
+  showGACustomizationForm: false,
+  googleAnalyticsIsEnabled: false,
 };
 
 GeneralSettings.propTypes = {
-  directPostingEnabled: PropTypes.bool.isRequired,
+  isContributor: PropTypes.bool,
+  isInstagramBusiness: PropTypes.bool.isRequired,
+  onConnectBitlyURLClick: PropTypes.func.isRequired,
+  onDisconnectBitlyURLClick: PropTypes.func.isRequired,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
   linkShorteners: PropTypes.arrayOf(
     PropTypes.shape({
@@ -54,6 +79,13 @@ GeneralSettings.propTypes = {
   loadingLinkShorteners: PropTypes.bool,
   profileService: PropTypes.string,
   selectedShortener: PropTypes.string,
+  onShowGACustomizationFormClick: PropTypes.func.isRequired,
+  showGACustomizationForm: PropTypes.bool.isRequired,
+  googleAnalyticsIsEnabled: PropTypes.bool,
+  onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
+  features: PropTypes.shape({
+    isFreeUser: PropTypes.func,
+  }).isRequired,
 };
 
 export default GeneralSettings;

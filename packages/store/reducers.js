@@ -24,6 +24,13 @@ import { reducer as changePasswordReducer } from '@bufferapp/change-password';
 import { reducer as manageAppsReducer } from '@bufferapp/manage-apps-extras';
 import { reducer as twoFactorAuthReducer } from '@bufferapp/publish-two-factor-auth';
 import { reducer as closeAccountReducer } from '@bufferapp/close-account';
+// Remove analytics reducers when publish switches to Analyze
+import { reducer as averageReducer } from '@bufferapp/average-table';
+import { reducer as compareChartReducer } from '@bufferapp/compare-chart';
+import { reducer as datePickerReducer } from '@bufferapp/analyze-date-picker';
+import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
+import { reducer as reportListReducer } from '@bufferapp/report-list';
+import { reducer as summaryTableReducer } from '@bufferapp/summary-table';
 
 export default combineReducers({
   form: formReducer,
@@ -51,4 +58,10 @@ export default combineReducers({
   drafts: draftsReducer,
   generalSettings: generalSettingsReducer,
   postingSchedule: postingScheduleReducer,
+  average: averageReducer,
+  compare: compareChartReducer,
+  date: datePickerReducer,
+  profiles: profileReducer,
+  reportList: reportListReducer,
+  summary: summaryTableReducer,
 });

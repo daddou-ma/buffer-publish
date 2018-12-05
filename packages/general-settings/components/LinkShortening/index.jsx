@@ -18,18 +18,23 @@ const pinterestSectionStyling = {
 };
 
 const LinkShortening = ({
+    features,
     onOptionSelect,
     profileService,
     linkShorteners,
     loading,
     selectedShortener,
+    onDisconnectBitlyURLClick,
+    onConnectBitlyURLClick,
+    isContributor,
   }) => {
   const linkList = linkShorteners && linkShorteners.map(ls => ({
     value: ls.domain,
     name: `${ls.domain} ${ls.login ? `- ${ls.login}` : ''}`,
     selected: ls.selected,
   }));
-
+  const hasShortenersWithLogins = (linkShorteners && linkShorteners.filter(shortener => shortener.login)) || [];
+  const isBitlyConnected = hasShortenersWithLogins.length > 0;
   if (profileService === 'pinterest') {
     return (
       <LinkShorteningWrapper
@@ -57,6 +62,7 @@ const LinkShortening = ({
   }
   return (
     <LinkShorteningWrapper
+      isFreeUser={features.isFreeUser}
       loading={loading}
       startSectionStyles={{
         maxWidth: '600px',
@@ -64,6 +70,10 @@ const LinkShortening = ({
       onOptionSelect={onOptionSelect}
       linkList={linkList}
       selectedShortener={selectedShortener}
+      onConnectBitlyURLClick={onConnectBitlyURLClick}
+      onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
+      showConnectBitly={!isContributor}
+      isBitlyConnected={isBitlyConnected}
     >
       <div style={textWrapperStyle}>
         <Text size="mini">
@@ -82,9 +92,13 @@ LinkShortening.defaultProps = {
   loading: true,
   profileService: null,
   selectedShortener: null,
+  isContributor: false,
 };
 
 LinkShortening.propTypes = {
+  isContributor: PropTypes.bool,
+  onConnectBitlyURLClick: PropTypes.func.isRequired,
+  onDisconnectBitlyURLClick: PropTypes.func.isRequired,
   profileService: PropTypes.string,
   onOptionSelect: PropTypes.func,
   linkShorteners: PropTypes.arrayOf(
@@ -97,6 +111,9 @@ LinkShortening.propTypes = {
   ),
   loading: PropTypes.bool,
   selectedShortener: PropTypes.string,
+  features: PropTypes.shape({
+    isFreeUser: PropTypes.func,
+  }).isRequired,
 };
 
 export default LinkShortening;

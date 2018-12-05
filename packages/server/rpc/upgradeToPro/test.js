@@ -11,14 +11,12 @@ const session = {
   },
 };
 
-const upgradeToPro = () =>
+const upgradeToPro = source =>
   RPCEndpoint.fn({
     cycle: 'year',
     token: 'stripe token',
-    cta: 'source',
-  }, {
-      session,
-    });
+    source,
+  }, { session });
 
 describe('rpc/upgradeToPro', () => {
   it('sends over a request to Buffer\'s API with Publish\'s access token', () => {
@@ -34,12 +32,22 @@ describe('rpc/upgradeToPro', () => {
     expect(rp.mock.calls[0][0].form.stripeToken).toBe('stripe token');
   });
 
-  it('sets up product/plan to identify it is an upgrade to the Pro plan in Publish', () => {
+  it('it sends the correct cta for specific upgrade paths', () => {
+    rp.mockReturnValueOnce(Promise.resolve({}));
+    upgradeToPro('queue_limit');
+    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe('publish-composer-notifications-queueLimitUpgrade-1');
+  });
+
+  it('it sends a generic cta for other upgrade paths', () => {
+    rp.mockReturnValueOnce(Promise.resolve({}));
+    upgradeToPro('source');
+    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe('publish-source');
+  });
+
+  it('it sends an unknown cta for empty sources', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
     upgradeToPro();
-    expect(rp.mock.calls[0][0].form.plan).toBe('pro');
-    expect(rp.mock.calls[0][0].form.product).toBe('publish');
-    expect(rp.mock.calls[0][0].form.cta).toBe('publish-source');
+    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe('publish-unknown');
   });
 
   it('an error response gets returned too', () => {

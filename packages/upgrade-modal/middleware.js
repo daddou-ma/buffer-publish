@@ -17,7 +17,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         application: 'PUBLISH',
         location: 'MODALS',
         action: 'submit_upgrade_to_pro',
-        metdata: { userId, source },
+        metadata: { userId, source },
       });
       break;
     }
@@ -26,7 +26,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         application: 'PUBLISH',
         location: 'MODALS',
         action: 'show_upgrade_to_pro',
-        metdata: { userId, source: action.source },
+        metadata: { userId, source: action.source },
       });
       break;
     }
@@ -35,7 +35,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         application: 'PUBLISH',
         location: 'MODALS',
         action: 'hide_upgrade_to_pro',
-        metdata: { userId, source },
+        metadata: { userId, source },
       });
       break;
     }
