@@ -19,7 +19,7 @@ import {
   actionTypes,
 } from './reducer';
 
-const { formatAnalyticsProfileObj } = require('./formats.js');
+const { formatAnalyticsProfileObj, canUserViewAnalytics } = require('./analytics');
 
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
