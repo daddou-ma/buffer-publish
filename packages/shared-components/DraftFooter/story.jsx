@@ -291,7 +291,7 @@ storiesOf('DraftFooter', module)
       view={approvalView}
     />
   ))
-  .add('drafts view: isWorking', () => (
+  .add('drafts view: isMoving', () => (
     <DraftFooter
       hasPermission
       onApproveClick={action('approve-click')}
@@ -300,7 +300,7 @@ storiesOf('DraftFooter', module)
       onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
-      isWorking
+      isMoving
       view={draftsView}
     />
   ))
