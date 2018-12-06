@@ -35,6 +35,7 @@ const featureMethod = require('./features');
 const getLinkShortener = require('./getLinkShortener');
 const changeLinkShortener = require('./changeLinkShortener');
 const approveDraftMethod = require('./approveDraft');
+const changeDraftStatusMethod = require('./changeDraftStatus');
 const toggleGoogleAnalytics = require('./toggleGoogleAnalytics');
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -79,6 +80,7 @@ module.exports = rpc(
   getLinkShortener,
   changeLinkShortener,
   approveDraftMethod,
+  changeDraftStatusMethod,
   toggleGoogleAnalytics,
   analyticsStartDate,
   average,
