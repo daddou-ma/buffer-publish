@@ -13,24 +13,13 @@ import {
 
 import { actionTypes as initialLoadingActionTypes } from '@bufferapp/publish-initial-loading';
 
-
 import { actions as notificationActions } from '@bufferapp/notifications';
 import {
   actions,
   actionTypes,
 } from './reducer';
 
-// mirror format used in analyze
-const formatAnalyticsProfileObj = ({ id, service, timezone, service_username, avatarUrl }) => (
-  {
-    id,
-    avatarUrl,
-    service,
-    timezone,
-    username: service_username,
-    organizationId: '',
-  }
-);
+const { formatAnalyticsProfileObj } = require('./analytics');
 
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
@@ -61,15 +50,24 @@ export default ({ dispatch, getState }) => next => (action) => {
           profile,
         }));
         // Dispatch different select profile for components in analyze
-        dispatch({
-          type: 'PROFILE_SELECTOR__SELECT_PROFILE',
-          profile: formatAnalyticsProfileObj(profile),
-        });
+        if (profile.isAnalyticsSupported) {
+          dispatch({
+            type: 'PROFILE_SELECTOR__SELECT_PROFILE',
+            profile: formatAnalyticsProfileObj(profile),
+          });
+        }
       } else if (!isPreferencePage && profiles.length > 0) {
         const selectedProfile = profiles[0];
         dispatch(actions.selectProfile({
           profile: selectedProfile,
         }));
+        // Dispatch to fetch analytics data if no params
+        if (selectedProfile.isAnalyticsSupported) {
+          dispatch({
+            type: 'PROFILE_SELECTOR__SELECT_PROFILE',
+            profile: formatAnalyticsProfileObj(selectedProfile),
+          });
+        }
         dispatch(push(generateProfilePageRoute({
           profileId: selectedProfile.id,
           tabId: 'queue',
