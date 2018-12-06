@@ -153,6 +153,16 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-decorators/-/analyze-decorators-0.79.1.tgz#8ee1f37ae9cc7830f08691d94353ebb8d89d30c2"
   integrity sha512-SXuoRQ5df1KVZpUX9JsrVbiYi2UXXEOJL2aNMHj9GBoiZOcVo2HtQ5Yw64nsVxzhTiSnck3SGM6y0p8xwMWOyw==
 
+"@bufferapp/analyze-export-picker@0.79.1":
+  version "0.79.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-export-picker/-/analyze-export-picker-0.79.1.tgz#c2a3870c31075d74b0dd90d399c099e45624aa6d"
+  integrity sha512-I32JUwkcMYJ1OX+0vpKixj/VIL1jPIR/j/7LZoMCcPKkGN3vGFLxHXtuZ7q4sLJE/PN7CeUPwonuUVjd8VopWg==
+  dependencies:
+    "@bufferapp/analyze-csv-export" "^0.79.1"
+    "@bufferapp/analyze-png-export" "^0.79.1"
+    "@bufferapp/components" "2.1.1-alpha.6"
+    styled-components "^2.2.1"
+
 "@bufferapp/analyze-png-export@^0.79.1":
   version "0.79.1"
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-png-export/-/analyze-png-export-0.79.1.tgz#d527d132062f542752f340b4b49c1bcc0b63f18c"
@@ -173,7 +183,7 @@
     "@bufferapp/components" "2.1.1-alpha.6"
     "@bufferapp/react-simple-dropdown" "3.2.5"
 
-"@bufferapp/analyze-shared-components@0.79.1", "@bufferapp/analyze-shared-components@^0.79.1":
+"@bufferapp/analyze-shared-components@^0.79.1":
   version "0.79.1"
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-shared-components/-/analyze-shared-components-0.79.1.tgz#3a78ebef5652163c05b393a477c341f8d8f6f592"
   integrity sha512-fx908B8/q3sTsRb/Be8B3cKtSgWwG/IxdxBwgd061hMAghbDK9dYlCv9kbka/gw2dnxowYeIMDU+885YjzjMeA==
