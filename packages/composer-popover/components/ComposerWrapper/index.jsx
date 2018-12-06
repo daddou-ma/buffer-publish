@@ -40,7 +40,6 @@ export default connect(
           return;
       }
       return ({
-        ...options,
         userData: state.appSidebar.user,
         profiles: state.profileSidebar.profiles,
         enabledApplicationModes: state.enabledApplicationModes,
@@ -48,6 +47,7 @@ export default connect(
         editMode: false,
         draftMode: null,
         selectedProfileId,
+        ...options,
       });
     }
     return {};

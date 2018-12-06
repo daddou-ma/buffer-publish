@@ -42,6 +42,7 @@ const analyticsStartDate = require('./analytics/analyticsStartDate');
 const average = require('./analytics/average');
 const compare = require('./analytics/compare');
 const getReport = require('./analytics/getReport');
+const posts = require('./analytics/posts');
 const summaryMethod = require('./analytics/summary');
 
 module.exports = rpc(
@@ -86,5 +87,6 @@ module.exports = rpc(
   average,
   compare,
   getReport,
+  posts,
   summaryMethod,
 );
