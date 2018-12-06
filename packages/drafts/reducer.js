@@ -72,6 +72,11 @@ const draftReducer = (state, action) => {
         ...state,
         isWorking: true,
       };
+    case actionTypes.DRAFT_NEEDS_APPROVAL:
+      return {
+        ...state,
+        isMoving: true,
+      };
     default:
       return state;
   }
@@ -90,6 +95,7 @@ const draftsReducer = (state = {}, action) => {
     case actionTypes.DRAFT_CANCELED_DELETE:
     case actionTypes.DRAFT_CLICKED_DELETE:
     case actionTypes.DRAFT_APPROVE:
+    case actionTypes.DRAFT_NEEDS_APPROVAL:
       return {
         ...state,
         [getDraftUpdateId(action)]: draftReducer(state[getDraftUpdateId(action)], action),
@@ -126,6 +132,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.DRAFT_CANCELED_DELETE:
     case actionTypes.DRAFT_CLICKED_DELETE:
     case actionTypes.DRAFT_APPROVE:
+    case actionTypes.DRAFT_NEEDS_APPROVAL:
       return {
         ...state,
         drafts: draftsReducer(state.drafts, action),
@@ -146,6 +153,7 @@ export default (state = initialState, action) => {
     case actionTypes.DRAFT_CANCELED_DELETE:
     case actionTypes.DRAFT_CLICKED_DELETE:
     case actionTypes.DRAFT_APPROVE:
+    case actionTypes.DRAFT_NEEDS_APPROVAL:
       profileId = getProfileId(action);
       if (profileId) {
         return {
