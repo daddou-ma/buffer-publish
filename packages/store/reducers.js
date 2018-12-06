@@ -28,7 +28,11 @@ import { reducer as closeAccountReducer } from '@bufferapp/close-account';
 import { reducer as averageReducer } from '@bufferapp/average-table';
 import { reducer as compareChartReducer } from '@bufferapp/compare-chart';
 import { reducer as datePickerReducer } from '@bufferapp/analyze-date-picker';
+import { reducer as exportPickerReducer } from '@bufferapp/analyze-export-picker';
+import { reducer as exportToCSVReducer } from '@bufferapp/analyze-csv-export';
+import { reducer as exportToPNGReducer } from '@bufferapp/analyze-png-export';
 import { reducer as hourlyReducer } from '@bufferapp/hourly-chart';
+import { reducer as postsReducer } from '@bufferapp/posts-table';
 import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
 import { reducer as reportListReducer } from '@bufferapp/report-list';
 import { reducer as summaryTableReducer } from '@bufferapp/summary-table';
@@ -62,7 +66,11 @@ export default combineReducers({
   average: averageReducer,
   compare: compareChartReducer,
   date: datePickerReducer,
+  exportPicker: exportPickerReducer,
+  exportToPNG: exportToPNGReducer,
+  exportToCSV: exportToCSVReducer,
   hourly: hourlyReducer,
+  posts: postsReducer,
   profiles: profileReducer,
   reportList: reportListReducer,
   summary: summaryTableReducer,

@@ -2,11 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bufferPublishComposer as Composer } from '@bufferapp/composer';
 
-const ComposerWrapper = props => (
-  <div>
-    <Composer {...props} />
-  </div>
-);
+const ComposerWrapper = props => <Composer {...props} />;
+
 ComposerWrapper.propTypes = Composer.propTypes;
 ComposerWrapper.defaultProps = Composer.defaultProps;
 
@@ -25,20 +22,22 @@ export default connect(
             editMode: state.drafts.editMode,
             post: state.drafts.byProfileId[selectedProfileId].drafts[postId],
             draftMode: state.drafts.draftMode,
-          }
+          };
           break;
         case 'queue':
           options = {
             editMode: state.queue.editMode,
             post: state.queue.byProfileId[selectedProfileId].posts[postId],
-          }
+          };
           break;
         case 'sent':
           options = {
             editMode: state.sent.editMode,
             post: state.sent.byProfileId[selectedProfileId].posts.find(p => p.id === postId),
-          }
+          };
           break;
+        default:
+          return;
       }
       return ({
         userData: state.appSidebar.user,
@@ -48,7 +47,7 @@ export default connect(
         editMode: false,
         draftMode: null,
         selectedProfileId,
-        ...options
+        ...options,
       });
     }
     return {};

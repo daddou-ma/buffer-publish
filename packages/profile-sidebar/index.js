@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import ProfileSidebar from './components/ProfileSidebar';
 import { actions } from './reducer';
 
+const { formatAnalyticsProfileObj } = require('./analytics');
+
 export default connect(
   (state, ownProps) => ({
     loading: state.profileSidebar.loading,
@@ -24,6 +26,13 @@ export default connect(
         dispatch(actions.selectProfile({
           profile,
         }));
+        if (profile.isAnalyticsSupported) {
+          // need to match analyze action to fetch data for new selected profile
+          dispatch({
+            type: 'PROFILE_SELECTOR__SELECT_PROFILE',
+            profile: formatAnalyticsProfileObj(profile),
+          });
+        }
       }
     },
     onConnectSocialAccountClick: () => {

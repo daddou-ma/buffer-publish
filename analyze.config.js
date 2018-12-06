@@ -8,6 +8,7 @@ const analyzePackages = [
   'analyze-csv-export',
   'analyze-date-picker',
   'analyze-decorators',
+  'analyze-export-picker',
   'analyze-png-export',
   'analyze-profile-selector',
   'analyze-shared-components',
@@ -15,6 +16,7 @@ const analyzePackages = [
   'compare-chart',
   'hourly-chart',
   'micro-rpc',
+  'posts-table',
   'report-list',
   'summary-table',
 ];

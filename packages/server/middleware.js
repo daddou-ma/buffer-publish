@@ -10,6 +10,7 @@ module.exports.apiError = (err, req, res, next) => { // eslint-disable-line no-u
   } else if (req.app.get('isProduction')) {
     req.app.get('bugsnag').notify(err, {
       originalUrl: req.originalUrl,
+      user: { id: req.session.global.userId },
     });
     res.status(500).send({
       error: 'Whoops something went wrong! We\'ve been alerted and will be sure to take a look',
