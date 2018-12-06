@@ -16,6 +16,7 @@ export default connect(
     shouldShowUpgradeCta: state.appSidebar.user.is_free_user,
     hasDraftsFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('drafts_new_publish') : false,
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
+    profileId: ownProps.profileId,
   }),
   (dispatch, ownProps) => ({
     onTabClick: tabId => dispatch(push(generateProfilePageRoute({

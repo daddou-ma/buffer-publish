@@ -5,6 +5,8 @@ import {
   Tab,
 } from '@bufferapp/publish-shared-components';
 import { Button, Text } from '@bufferapp/components';
+import FeatureLoader from '@bufferapp/product-features';
+import openCalendarWindow from '../../utils';
 
 const upgradeCtaStyle = {
   transform: 'translate(0, 1px)',
@@ -27,6 +29,7 @@ const TabNavigation = ({
   shouldShowNestedSettingsTab,
   showUpgradeModal,
   hasDraftsFeatureFlip,
+  profileId,
 }) => {
   const selectedChildTab = selectedChildTabId || 'general-settings';
   return (
@@ -50,6 +53,11 @@ const TabNavigation = ({
           <Tab tabId={'drafts'}>Drafts</Tab>
         }
         <Tab tabId={'settings'}>Settings</Tab>
+        <FeatureLoader supportedFeatures={'b4b_calendar'}>
+          <Tab tabId={'b4bCalendar'} onClick={() => openCalendarWindow(profileId)}>
+            Calendar
+          </Tab>
+        </FeatureLoader>
       </Tabs>
       {shouldShowUpgradeCta &&
         <div style={upgradeCtaStyle}>
@@ -88,6 +96,7 @@ TabNavigation.defaultProps = {
   hasDraftsFeatureFlip: false,
   shouldShowNestedSettingsTab: false,
   selectedChildTabId: null,
+  profileId: null,
 };
 
 TabNavigation.propTypes = {
@@ -101,6 +110,7 @@ TabNavigation.propTypes = {
   onChildTabClick: PropTypes.func.isRequired,
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,
+  profileId: PropTypes.string,
 };
 
 export default TabNavigation;
