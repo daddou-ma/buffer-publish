@@ -50,7 +50,7 @@ export default ({ dispatch, getState }) => next => (action) => {
           profile,
         }));
         // Dispatch different select profile for components in analyze
-        if (canUserViewAnalytics(profile)) {
+        if (profile.isAnalyticsSupported) {
           dispatch({
             type: 'PROFILE_SELECTOR__SELECT_PROFILE',
             profile: formatAnalyticsProfileObj(profile),
@@ -62,7 +62,7 @@ export default ({ dispatch, getState }) => next => (action) => {
           profile: selectedProfile,
         }));
         // Dispatch to fetch analytics data if no params
-        if (canUserViewAnalytics(selectedProfile)) {
+        if (selectedProfile.isAnalyticsSupported) {
           dispatch({
             type: 'PROFILE_SELECTOR__SELECT_PROFILE',
             profile: formatAnalyticsProfileObj(selectedProfile),

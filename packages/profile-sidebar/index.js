@@ -26,7 +26,7 @@ export default connect(
         dispatch(actions.selectProfile({
           profile,
         }));
-        if (canUserViewAnalytics(profile)) {
+        if (profile.isAnalyticsSupported) {
           // need to match analyze action to fetch data for new selected profile
           dispatch({
             type: 'PROFILE_SELECTOR__SELECT_PROFILE',

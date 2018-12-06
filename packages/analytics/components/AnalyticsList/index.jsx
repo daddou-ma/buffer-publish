@@ -7,8 +7,8 @@ import SummaryTable from '@bufferapp/summary-table';
 import Toolbar from '../Toolbar';
 import './analytics.css';
 
-const AnalyticsList = ({ profileService }) => (
-  (profileService === 'twitter' || profileService === 'facebook') ?
+const AnalyticsList = ({ isAnalyticsSupported }) => (
+  isAnalyticsSupported ?
     <div>
       <Toolbar />
       <SummaryTable />
@@ -21,11 +21,11 @@ const AnalyticsList = ({ profileService }) => (
 
 
 AnalyticsList.propTypes = {
-  profileService: PropTypes.string,
+  isAnalyticsSupported: PropTypes.bool,
 };
 
 AnalyticsList.defaultProps = {
-  profileService: null,
+  isAnalyticsSupported: null,
 };
 
 export default AnalyticsList;

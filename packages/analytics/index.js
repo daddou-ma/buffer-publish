@@ -3,8 +3,8 @@ import AnalyticsList from './components/AnalyticsList';
 
 export default connect(
   state => ({
-    profileService: state.profileSidebar.selectedProfile ?
-      state.profileSidebar.selectedProfile.service :
+    isAnalyticsSupported: state.profileSidebar.selectedProfile ?
+      state.profileSidebar.selectedProfile.isAnalyticsSupported :
       null,
   }),
 )(AnalyticsList);
