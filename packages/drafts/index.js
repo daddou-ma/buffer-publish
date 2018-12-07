@@ -110,6 +110,40 @@ export default connect(
     return {};
   },
   (dispatch, ownProps) => ({
+    onApproveClick: (draft) => {
+      dispatch(
+        actions.handleApproveClick({
+          draft: draft.draft,
+          profileId: ownProps.profileId,
+        }),
+      );
+    },
+    onRequestApprovalClick: (draft) => {
+      dispatch(
+        actions.handleRequestApprovalClick({
+          draft: draft.draft,
+          profileId: ownProps.profileId,
+          needsApproval: true,
+        }),
+      );
+    },
+    onMoveToDraftsClick: (draft) => {
+      dispatch(
+        actions.handleRequestApprovalClick({
+          draft: draft.draft,
+          profileId: ownProps.profileId,
+          needsApproval: false,
+        }),
+      );
+    },
+    onRescheduleClick: (draft) => {
+      dispatch(
+        actions.handleRescheduleClick({
+          draft: draft.draft,
+          profileId: ownProps.profileId,
+        }),
+      );
+    },
     onEditClick: (draft) => {
       dispatch(
         actions.handleEditClick({

@@ -17,13 +17,13 @@ module.exports = method(
         count: 20,
       },
     })
-      .then(result => JSON.parse(result))
-      .then((parsedResult) => {
-        const drafts = parsedResult.updates.map(postParser);
-        const mappedDrafts = buildPostMap(drafts);
-        return {
-          total: parsedResult.total,
-          drafts: mappedDrafts,
-        };
-      }),
+    .then(result => JSON.parse(result))
+    .then((parsedResult) => {
+      const drafts = parsedResult.updates.map(postParser);
+      const mappedDrafts = buildPostMap(drafts);
+      return {
+        total: parsedResult.total,
+        drafts: mappedDrafts,
+      };
+    }),
 );

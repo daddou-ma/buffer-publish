@@ -169,7 +169,7 @@ const renderControls = ({
     );
   }
 
-  if (!approvalView && isWorking) {
+  if (!approvalView && isMoving) {
     return (
       <Text size={'small'}> Requesting... </Text>
     );

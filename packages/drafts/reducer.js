@@ -3,6 +3,8 @@ import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-pro
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('DRAFTS', {
+  DRAFT_APPROVE: 0,
+  DRAFT_NEEDS_APPROVAL: 0,
   DRAFT_CLICKED_DELETE: 0,
   DRAFT_CANCELED_DELETE: 0,
   DRAFT_CONFIRMED_DELETE: 0,
@@ -65,6 +67,16 @@ const draftReducer = (state, action) => {
         ...state,
         isConfirmingDelete: false,
       };
+    case actionTypes.DRAFT_APPROVE:
+      return {
+        ...state,
+        isWorking: true,
+      };
+    case actionTypes.DRAFT_NEEDS_APPROVAL:
+      return {
+        ...state,
+        isMoving: true,
+      };
     default:
       return state;
   }
@@ -82,6 +94,8 @@ const draftsReducer = (state = {}, action) => {
     case actionTypes.DRAFT_CONFIRMED_DELETE:
     case actionTypes.DRAFT_CANCELED_DELETE:
     case actionTypes.DRAFT_CLICKED_DELETE:
+    case actionTypes.DRAFT_APPROVE:
+    case actionTypes.DRAFT_NEEDS_APPROVAL:
       return {
         ...state,
         [getDraftUpdateId(action)]: draftReducer(state[getDraftUpdateId(action)], action),
@@ -117,6 +131,8 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.DRAFT_CONFIRMED_DELETE:
     case actionTypes.DRAFT_CANCELED_DELETE:
     case actionTypes.DRAFT_CLICKED_DELETE:
+    case actionTypes.DRAFT_APPROVE:
+    case actionTypes.DRAFT_NEEDS_APPROVAL:
       return {
         ...state,
         drafts: draftsReducer(state.drafts, action),
@@ -136,6 +152,8 @@ export default (state = initialState, action) => {
     case actionTypes.DRAFT_CONFIRMED_DELETE:
     case actionTypes.DRAFT_CANCELED_DELETE:
     case actionTypes.DRAFT_CLICKED_DELETE:
+    case actionTypes.DRAFT_APPROVE:
+    case actionTypes.DRAFT_NEEDS_APPROVAL:
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -166,6 +184,25 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
+  handleApproveClick: ({ draft }) => ({
+    type: actionTypes.DRAFT_APPROVE,
+    updateId: draft.id,
+    draft,
+  }),
+  handleRequestApprovalClick: ({ draft, needsApproval }) => ({
+    type: actionTypes.DRAFT_NEEDS_APPROVAL,
+    updateId: draft.id,
+    needsApproval,
+    draft,
+  }),
+  // In the future open a datepicker instead of the composer.
+  handleRescheduleClick: ({ draft, profileId }) => ({
+    type: actionTypes.OPEN_COMPOSER,
+    updateId: draft.id,
+    editMode: true,
+    draft,
+    profileId,
+  }),
   handleEditClick: ({ draft, profileId }) => ({
     type: actionTypes.OPEN_COMPOSER,
     updateId: draft.id,
