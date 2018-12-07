@@ -119,4 +119,36 @@ describe('middleware', () => {
         message: 'We\'ve successfully moved this draft!',
       }));
   });
+
+  it('should trigger a notification if there is an error approving the draft', () => {
+    const RPC_NAME = 'approveDraft';
+    const action = dataFetchActions.fetchFail({
+      name: RPC_NAME,
+    });
+    middleware({ dispatch })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(expect.objectContaining({
+        type: notificationActionTypes.CREATE_NOTIFICATION,
+        notificationType: 'error',
+        message: 'There was an error adding this draft to your queue!',
+      }));
+  });
+
+  it('should trigger a notification if there is an error moving the draft', () => {
+    const RPC_NAME = 'changeDraftStatus';
+    const action = dataFetchActions.fetchFail({
+      name: RPC_NAME,
+    });
+    middleware({ dispatch })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(expect.objectContaining({
+        type: notificationActionTypes.CREATE_NOTIFICATION,
+        notificationType: 'error',
+        message: 'There was an error moving this draft!',
+      }));
+  });
 });
