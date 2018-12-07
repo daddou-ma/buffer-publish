@@ -21,6 +21,7 @@
     "@bufferapp/compare-chart": "0.79.1",
     "@bufferapp/edit-email": "2.0.0",
     "@bufferapp/environment": "1.9.4",
+    "@bufferapp/hourly-chart": "0.79.1",
     "@bufferapp/maintenance-redirect": "2.0.0",
     "@bufferapp/manage-apps-extras": "2.0.0",
     "@bufferapp/notifications": "1.9.4",

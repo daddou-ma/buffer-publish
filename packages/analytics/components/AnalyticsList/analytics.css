@@ -1,3 +1,14 @@
+
+/* Hides the Add Report button */
 header > span > button {
   display: none;
+}
+/* With publish overriding analyze styles, this fixes the font-size of the drop-downs
+and tooltips in the components, and the compare-chart toggle */
+div > section span, button span, [data-highcharts-chart] div span  {
+  font-size: 0.75rem !important;
+}
+/* Fixes the padding of the hourly-chart dropdown  */
+section div a {
+  padding: 5px 10px !important;
 }

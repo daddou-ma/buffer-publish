@@ -34,6 +34,7 @@ import { middleware as notificationsProviderMiddleware } from '@bufferapp/publis
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
 import { middleware as compareChartMiddleware } from '@bufferapp/compare-chart';
 import { middleware as datePickerMiddleware } from '@bufferapp/analyze-date-picker';
+import { middleware as hourlyMiddleware } from '@bufferapp/hourly-chart';
 import { middleware as exportPickerMiddleware } from '@bufferapp/analyze-export-picker';
 import { middleware as exportToCSVMiddleware } from '@bufferapp/analyze-csv-export';
 import { middleware as exportToPNGMiddleware } from '@bufferapp/analyze-png-export';
@@ -98,6 +99,7 @@ const configureStore = (initialstate) => {
         averageMiddleware,
         compareChartMiddleware,
         datePickerMiddleware,
+        hourlyMiddleware,
         postsMiddleware,
         profileSelectorMiddleware,
         summaryTableMiddleware,
