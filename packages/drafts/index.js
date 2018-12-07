@@ -13,7 +13,7 @@ const getPostActionString = ({ draft, profileTimezone, isPastDue, twentyFourHour
     return `This draft ${isPastDue ? 'was' : 'will be'} scheduled for ${dateString}${
       isPastDue ? '' : ' on approval'
     }.`;
-  } else if (draft.shared_next) {
+  } else if (draft.sharedNext) {
     return 'This draft will be added to the top of the queue on approval.';
   }
 
