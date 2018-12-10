@@ -8,10 +8,10 @@ import SummaryTable from '@bufferapp/summary-table';
 import Toolbar from '../Toolbar';
 import './analytics.css';
 
-const AnalyticsList = ({ isAnalyticsSupported }) => (
+const AnalyticsList = ({ profile, isAnalyticsSupported }) => (
   isAnalyticsSupported ?
     <div>
-      <Toolbar />
+      <Toolbar profile={profile} />
       <SummaryTable />
       <CompareChart />
       <HourlyChart />
@@ -24,10 +24,16 @@ const AnalyticsList = ({ isAnalyticsSupported }) => (
 
 AnalyticsList.propTypes = {
   isAnalyticsSupported: PropTypes.bool,
+  profile: PropTypes.shape({
+    service: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }),
 };
 
 AnalyticsList.defaultProps = {
   isAnalyticsSupported: null,
+  profile: null,
 };
 
 export default AnalyticsList;
