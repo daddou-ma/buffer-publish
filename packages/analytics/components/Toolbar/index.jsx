@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DatePicker from '@bufferapp/analyze-date-picker';
 import ExportPicker from '@bufferapp/analyze-export-picker';
 import ProfileHeader from '../ProfileHeader';
@@ -33,7 +34,7 @@ const Toolbar = ({ profile }) => (
 
 
 Toolbar.propTypes = {
-  profile: ProfileHeader.defaultProps.profile,
+  profile: PropTypes.shape(ProfileHeader.propTypes),
 };
 
 Toolbar.defaultProps = {

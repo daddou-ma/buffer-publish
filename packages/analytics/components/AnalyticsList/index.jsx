@@ -6,6 +6,7 @@ import HourlyChart from '@bufferapp/hourly-chart';
 import PostsTable from '@bufferapp/posts-table';
 import SummaryTable from '@bufferapp/summary-table';
 import Toolbar from '../Toolbar';
+import ProfileHeader from '../ProfileHeader';
 import './analytics.css';
 
 const AnalyticsList = ({ profile, isAnalyticsSupported }) => (
@@ -24,11 +25,7 @@ const AnalyticsList = ({ profile, isAnalyticsSupported }) => (
 
 AnalyticsList.propTypes = {
   isAnalyticsSupported: PropTypes.bool,
-  profile: PropTypes.shape({
-    service: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  }),
+  profile: PropTypes.shape(ProfileHeader.propTypes),
 };
 
 AnalyticsList.defaultProps = {
