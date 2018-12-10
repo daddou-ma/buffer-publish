@@ -22,7 +22,6 @@ const AnalyticsList = ({ profile, isAnalyticsSupported }) => (
     <p>Whoops! Analytics are not supported for this social account.</p>
 );
 
-
 AnalyticsList.propTypes = {
   isAnalyticsSupported: PropTypes.bool,
   profile: PropTypes.shape(ProfileHeader.propTypes),

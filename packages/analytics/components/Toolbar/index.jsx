@@ -32,7 +32,6 @@ const Toolbar = ({ profile }) => (
   </div>
 );
 
-
 Toolbar.propTypes = {
   profile: PropTypes.shape(ProfileHeader.propTypes),
 };
@@ -40,6 +39,5 @@ Toolbar.propTypes = {
 Toolbar.defaultProps = {
   profile: null,
 };
-
 
 export default Toolbar;
