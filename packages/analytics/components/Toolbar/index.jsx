@@ -1,8 +1,9 @@
 import React from 'react';
 import DatePicker from '@bufferapp/analyze-date-picker';
 import ExportPicker from '@bufferapp/analyze-export-picker';
+import ProfileHeader from '../ProfileHeader';
 
-const toolbarExport = {
+const toolbarDatepicker = {
   marginRight: '10px',
 };
 
