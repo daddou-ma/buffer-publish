@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { checkA11y } from 'storybook-addon-a11y';
 import Notification from './index';
 
-storiesOf('Analytics Notification', module)
+storiesOf('Unsupported Notification', module)
   .addDecorator(checkA11y)
-  .add('should display notification if analytics are not supported', () => (
+  .add('default', () => (
     <Notification />
 ));
