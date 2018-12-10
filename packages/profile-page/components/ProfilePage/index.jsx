@@ -41,7 +41,7 @@ const loadingAnimationStyle = {
 };
 
 const tabContentStyle = {
-  maxWidth: '49rem',
+  maxWidth: '54rem',
 };
 
 
