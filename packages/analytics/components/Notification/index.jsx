@@ -29,10 +29,13 @@ const Notification = () => (
         color={'outerSpace'}
         weight={'bold'}
       >
-        Sorry we don&apos;t support this network in our Analytics</Text>
+        Sorry we don&apos;t support this network in our Analytics
+      </Text>
     </div>
     <div style={contentStyle}>
-      <Text size={'mini'}>We only support Facebook & Twitter profiles in our analytics right now.</Text>
+      <Text size={'mini'}>
+        We only support Facebook & Twitter profiles in our analytics right now.
+      </Text>
     </div>
   </Card>
 );
