@@ -2,6 +2,7 @@ const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
 const sourceCtaMap = new Map([
+  ['app_sidebar', 'publish-app-sidebar-upgradeToPro-1'],
   ['app_header', 'publish-app-header-getMoreOutOfBuffer-1'],
   ['queue_limit', 'publish-composer-notifications-queueLimitUpgrade-1'],
   ['profile_limit', 'publish-orgAdmin-connect-profileLimitUpgrade-1'],
