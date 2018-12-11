@@ -6,6 +6,7 @@ import HourlyChart from '@bufferapp/hourly-chart';
 import PostsTable from '@bufferapp/posts-table';
 import SummaryTable from '@bufferapp/summary-table';
 import Toolbar from '../Toolbar';
+import Notification from '../Notification';
 import ProfileHeader from '../ProfileHeader';
 import './analytics.css';
 
@@ -19,7 +20,7 @@ const AnalyticsList = ({ profile, isAnalyticsSupported }) => (
       <AverageTable />
       <PostsTable />
     </div> :
-    <p>Whoops! Analytics are not supported for this social account.</p>
+    <Notification />
 );
 
 AnalyticsList.propTypes = {
