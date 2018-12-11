@@ -27,7 +27,7 @@ const Notification = () => (
       </span>
       <Text
         color={'outerSpace'}
-        weight={'bold'}
+        weight={'medium'}
       >
         Sorry we don&apos;t support this network in our Analytics
       </Text>
