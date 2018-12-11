@@ -25,7 +25,7 @@ const ProfileHeader = ({ profile }) => {
           socialIconSize={15}
         />
       </div>
-      <Text color="outerSpace" size="small" weight="medium">{profile.username}</Text>
+      <Text color="outerSpace" size="small">{profile.username}</Text>
     </div>
   );
 };
