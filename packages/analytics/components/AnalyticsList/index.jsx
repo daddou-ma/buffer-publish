@@ -7,12 +7,13 @@ import PostsTable from '@bufferapp/posts-table';
 import SummaryTable from '@bufferapp/summary-table';
 import Toolbar from '../Toolbar';
 import Notification from '../Notification';
+import ProfileHeader from '../ProfileHeader';
 import './analytics.css';
 
-const AnalyticsList = ({ isAnalyticsSupported }) => (
+const AnalyticsList = ({ profile, isAnalyticsSupported }) => (
   isAnalyticsSupported ?
     <div>
-      <Toolbar />
+      <Toolbar profile={profile} />
       <SummaryTable />
       <CompareChart />
       <HourlyChart />
@@ -22,13 +23,14 @@ const AnalyticsList = ({ isAnalyticsSupported }) => (
     <Notification />
 );
 
-
 AnalyticsList.propTypes = {
   isAnalyticsSupported: PropTypes.bool,
+  profile: PropTypes.shape(ProfileHeader.propTypes),
 };
 
 AnalyticsList.defaultProps = {
   isAnalyticsSupported: null,
+  profile: null,
 };
 
 export default AnalyticsList;

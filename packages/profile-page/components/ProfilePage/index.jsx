@@ -41,9 +41,8 @@ const loadingAnimationStyle = {
 };
 
 const tabContentStyle = {
-  maxWidth: '49rem',
+  maxWidth: '864px',
 };
-
 
 const TabContent = ({ tabId, profileId, childTabId }) => {
   switch (tabId) {
