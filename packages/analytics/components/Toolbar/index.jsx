@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DatePicker from '@bufferapp/analyze-date-picker';
 import ExportPicker from '@bufferapp/analyze-export-picker';
+import ProfileHeader from '../ProfileHeader';
 
-const toolbarExport = {
+const toolbarDatepicker = {
   marginRight: '10px',
 };
 
@@ -13,13 +15,29 @@ const toolbarRight = {
   padding: '0.75rem 0',
 };
 
-const Toolbar = () => (
-  <div style={toolbarRight}>
-    <div style={toolbarExport}>
-      <DatePicker />
+const toolbarStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+};
+
+const Toolbar = ({ profile }) => (
+  <div style={toolbarStyle}>
+    <ProfileHeader profile={profile} />
+    <div style={toolbarRight}>
+      <div style={toolbarDatepicker}>
+        <DatePicker />
+      </div>
+      <ExportPicker filename={'buffer-analytics'} />
     </div>
-    <ExportPicker filename={'buffer-analytics'} />
   </div>
 );
+
+Toolbar.propTypes = {
+  profile: PropTypes.shape(ProfileHeader.propTypes),
+};
+
+Toolbar.defaultProps = {
+  profile: null,
+};
 
 export default Toolbar;
