@@ -4,23 +4,35 @@ import { actions } from './reducer';
 import DraftList from './components/DraftList';
 
 // TODO: move these to utils
-const getPostActionString = ({ draft, profileTimezone, isPastDue, twentyFourHourTime }) => {
+const getPostActionString = ({
+  draft,
+  profileTimezone,
+  isPastDue,
+  twentyFourHourTime,
+  isDraftsView,
+}) => {
   if (draft.scheduled_at) {
     const dateString = getDateString(draft.scheduled_at, profileTimezone, {
       isPastDue,
       twentyFourHourTime,
     });
-    return `This draft ${isPastDue ? 'was' : 'will be'} scheduled for ${dateString}${
-      isPastDue ? '' : ' on approval'
+    return `This ${isDraftsView ? 'draft' : 'post'} ${isPastDue ? 'was' : 'will be'} 
+      scheduled for ${dateString}${isPastDue ? '' : ' on approval'
     }.`;
-  } else if (draft.shared_next) {
-    return 'This draft will be added to the top of the queue on approval.';
+  } else if (draft.sharedNext) {
+    return `This ${isDraftsView ? 'draft' : 'post'} will be added to the top of the queue on approval.`;
   }
 
-  return 'This draft will be added to the queue on approval.';
+  return `This ${isDraftsView ? 'draft' : 'post'} will be added to the queue on approval.`;
 };
 
-const getDraftDetails = ({ draft, profileTimezone, isPastDue, twentyFourHourTime }) => {
+const getDraftDetails = ({
+  draft,
+  profileTimezone,
+  isPastDue,
+  twentyFourHourTime,
+  isDraftsView,
+}) => {
   const createdAt = draft.createdAt;
   const createdAtString = getDateString(createdAt, profileTimezone, {
     createdAt,
@@ -42,6 +54,7 @@ const getDraftDetails = ({ draft, profileTimezone, isPastDue, twentyFourHourTime
       profileTimezone,
       isPastDue,
       twentyFourHourTime,
+      isDraftsView,
     }),
     isRetweet: draft.retweet !== undefined,
   };
@@ -72,6 +85,7 @@ const formatPostLists = (profile, drafts, user, tabId) => {
         profileTimezone,
         isPastDue,
         twentyFourHourTime,
+        isDraftsView,
       }),
       view: typeOfTab,
       index,

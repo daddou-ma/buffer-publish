@@ -65,6 +65,18 @@ moves from approval tab to drafts if needsApproval false)
         message: 'We\'ve successfully moved this draft!',
       }));
       break;
+    case `approveDraft_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: 'There was an error adding this draft to your queue!',
+      }));
+      break;
+    case `changeDraftStatus_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: 'There was an error moving this draft!',
+      }));
+      break;
     default:
       break;
   }
