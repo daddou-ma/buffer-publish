@@ -6,14 +6,12 @@ import { shouldShowUpgradeModal, getSourceFromHash, shouldShowWelcomeModal } fro
 export default ({ dispatch }) => next => (action) => {
   next(action);
   switch (action.type) {
-    case 'APP_INIT':
-      if (shouldShowWelcomeModal()) {
-        dispatch(actions.showWelcomeModal());
-      }
-      break;
     case `user_${actionTypes.FETCH_SUCCESS}`: {
       if (shouldShowUpgradeModal()) {
         dispatch(actions.showUpgradeModal({ source: getSourceFromHash() }));
+      }
+      if (shouldShowWelcomeModal()) {
+        dispatch(actions.showWelcomeModal());
       }
       break;
     }
