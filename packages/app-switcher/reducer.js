@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        showGoBackToClassic: !action.result.features.includes('new_publish_new_buffer_free_users'),
+        showGoBackToClassic: !action.result.hasNewPublish, // User is not in phased rollout - so they can switch
         user: {
           ...action.result,
           loading: false,

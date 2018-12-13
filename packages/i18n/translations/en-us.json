@@ -41,5 +41,11 @@
     "upgradeCta": "Upgrade to the Pro Plan!",
     "validating": "One moment...",
     "stayOnFreeCta": "Stay on the Free Plan for now"
+  },
+  "welcome-modal": {
+    "headline": "We’ve refreshed the look of Buffer",
+    "body1": "We’ve tidied up the look of your Buffer dashboard!",
+    "body2": "We’ve kept your features and all your stuff just as it was but with a cleaner and faster experience.",
+    "cta": "Let’s Go!"
   }
 }
