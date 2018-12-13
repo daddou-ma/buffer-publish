@@ -1,14 +1,13 @@
 import Pusher from 'pusher-js';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
+import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
 import { postParser } from '@bufferapp/publish-parsers';
 
 const PUSHER_APP_KEY = 'bd9ba9324ece3341976e';
 
 const profileEventActionMap = {
-  added_update: queueActionTypes.POST_CREATED,
   sent_update: queueActionTypes.POST_SENT,
-  deleted_update: queueActionTypes.POST_DELETED,
   updated_update: queueActionTypes.POST_UPDATED,
 };
 
@@ -21,6 +20,54 @@ const bindProfileEvents = (channel, profileId, dispatch) => {
         profileId,
         post: postParser(data.update),
       });
+    });
+  });
+  // Bind added update events, both for posts and drafts
+  channel.bind('added_update', (data) => {
+    if (data.update.draft) {
+      dispatch({
+        type: draftActionTypes.DRAFT_CREATED,
+        profileId,
+        draft: data.update,
+      });
+    } else {
+      dispatch({
+        type: queueActionTypes.POST_CREATED,
+        profileId,
+        post: postParser(data.update),
+      });
+    }
+  });
+  // Bind deleted update events, both for posts and drafts
+  channel.bind('deleted_update', (data) => {
+    if (data.update.draft) {
+      dispatch({
+        type: draftActionTypes.DRAFT_DELETED,
+        profileId,
+        draft: data.update,
+      });
+    } else {
+      dispatch({
+        type: queueActionTypes.POST_DELETED,
+        profileId,
+        post: postParser(data.update),
+      });
+    }
+  });
+  // Bind approved drafts event
+  channel.bind('collaboration_draft_approved', (data) => {
+    dispatch({
+      type: draftActionTypes.DRAFT_APPROVED,
+      profileId,
+      draft: data.draft,
+    });
+  });
+  // Bind updated/ moved drafts event
+  channel.bind('collaboration_draft_updated', (data) => {
+    dispatch({
+      type: draftActionTypes.DRAFT_UPDATED,
+      profileId,
+      draft: data.draft,
     });
   });
   // Bind other events
