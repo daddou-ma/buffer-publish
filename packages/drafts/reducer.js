@@ -5,6 +5,8 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('DRAFTS', {
   DRAFT_CREATED: 0,
   DRAFT_UPDATED: 0,
+  DRAFT_DELETED: 0,
+  DRAFT_APPROVED: 0,
   DRAFT_APPROVE: 0,
   DRAFT_NEEDS_APPROVAL: 0,
   DRAFT_CLICKED_DELETE: 0,
@@ -54,7 +56,6 @@ const determineIfMoreToLoad = (action, currentPosts) => {
 const draftReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.DRAFT_CREATED:
-    case actionTypes.DRAFT_UPDATED:
       return action.draft;
     case actionTypes.DRAFT_CONFIRMED_DELETE:
       return {
@@ -96,8 +97,18 @@ const draftsReducer = (state = {}, action) => {
       }
       return drafts;
     }
-    case actionTypes.DRAFT_CREATED:
+    case actionTypes.DRAFT_DELETED: {
+      const { [getDraftUpdateId(action)]: deleted, ...currentState } = state;
+      return currentState;
+    }
+    case actionTypes.DRAFT_APPROVED: {
+      const { [getDraftUpdateId(action)]: approved, ...newState } = state;
+      return newState;
+    }
     case actionTypes.DRAFT_UPDATED:
+    case actionTypes.DRAFT_CREATED: {
+      return { ...state, [getDraftUpdateId(action)]: action.draft };
+    }
     case actionTypes.DRAFT_CONFIRMED_DELETE:
     case actionTypes.DRAFT_CANCELED_DELETE:
     case actionTypes.DRAFT_CLICKED_DELETE:
@@ -137,6 +148,8 @@ const profileReducer = (state = profileInitialState, action) => {
       };
     case actionTypes.DRAFT_CREATED:
     case actionTypes.DRAFT_UPDATED:
+    case actionTypes.DRAFT_DELETED:
+    case actionTypes.DRAFT_APPROVED:
     case actionTypes.DRAFT_CONFIRMED_DELETE:
     case actionTypes.DRAFT_CANCELED_DELETE:
     case actionTypes.DRAFT_CLICKED_DELETE:
@@ -160,6 +173,8 @@ export default (state = initialState, action) => {
     case `draftPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case actionTypes.DRAFT_CREATED:
     case actionTypes.DRAFT_UPDATED:
+    case actionTypes.DRAFT_DELETED:
+    case actionTypes.DRAFT_APPROVED:
     case actionTypes.DRAFT_CONFIRMED_DELETE:
     case actionTypes.DRAFT_CANCELED_DELETE:
     case actionTypes.DRAFT_CLICKED_DELETE:
