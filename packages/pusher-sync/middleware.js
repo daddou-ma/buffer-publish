@@ -28,7 +28,7 @@ const bindProfileEvents = (channel, profileId, dispatch) => {
       dispatch({
         type: draftActionTypes.DRAFT_CREATED,
         profileId,
-        draft: data.update,
+        draft: postParser(data.update),
       });
     } else {
       dispatch({
@@ -44,7 +44,7 @@ const bindProfileEvents = (channel, profileId, dispatch) => {
       dispatch({
         type: draftActionTypes.DRAFT_DELETED,
         profileId,
-        draft: data.update,
+        draft: postParser(data.update),
       });
     } else {
       dispatch({
@@ -59,7 +59,7 @@ const bindProfileEvents = (channel, profileId, dispatch) => {
     dispatch({
       type: draftActionTypes.DRAFT_APPROVED,
       profileId,
-      draft: data.draft,
+      draft: postParser(data.draft),
     });
   });
   // Bind updated/ moved drafts event
@@ -67,7 +67,7 @@ const bindProfileEvents = (channel, profileId, dispatch) => {
     dispatch({
       type: draftActionTypes.DRAFT_UPDATED,
       profileId,
-      draft: data.draft,
+      draft: postParser(data.draft),
     });
   });
   // Bind other events
