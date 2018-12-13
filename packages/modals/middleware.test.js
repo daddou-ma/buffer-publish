@@ -9,6 +9,19 @@ import { actions } from './reducer';
 // });
 
 describe('middleware', () => {
+  it('should show welcome modal when hash is present', () => {
+    history.replaceState(undefined, undefined, '#welcome-modal-1');
+    const next = jest.fn();
+    const dispatch = jest.fn();
+    const action = {
+      type: 'user_FETCH_SUCCESS',
+    };
+    middleware({ dispatch })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(actions.showWelcomeModal());
+  });
   it('should show and track modal when hash is present', () => {
     history.replaceState(undefined, undefined, '#upgrade-to-pro--profile_limit');
     const next = jest.fn();
