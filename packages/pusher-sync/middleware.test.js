@@ -44,18 +44,22 @@ describe('middleware', () => {
   it('should subscribe to update events', () => {
     middleware(store)(next)(selectProfileAction);
     expect(Pusher.bind.mock.calls[0][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[0][1]).toEqual('added_update');
+    expect(Pusher.bind.mock.calls[0][1]).toEqual('sent_update');
     expect(Pusher.bind.mock.calls[1][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[1][1]).toEqual('sent_update');
+    expect(Pusher.bind.mock.calls[1][1]).toEqual('updated_update');
     expect(Pusher.bind.mock.calls[2][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[2][1]).toEqual('deleted_update');
+    expect(Pusher.bind.mock.calls[2][1]).toEqual('added_update');
     expect(Pusher.bind.mock.calls[3][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[3][1]).toEqual('updated_update');
+    expect(Pusher.bind.mock.calls[3][1]).toEqual('deleted_update');
     expect(Pusher.bind.mock.calls[4][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[4][1]).toEqual('reordered_updates');
+    expect(Pusher.bind.mock.calls[4][1]).toEqual('collaboration_draft_approved');
     expect(Pusher.bind.mock.calls[5][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[5][1]).toEqual('queue_paused');
-    expect(Pusher.bind).toHaveBeenCalledTimes(6);
+    expect(Pusher.bind.mock.calls[5][1]).toEqual('collaboration_draft_updated');
+    expect(Pusher.bind.mock.calls[6][0]).toEqual('private-updates-12345');
+    expect(Pusher.bind.mock.calls[6][1]).toEqual('reordered_updates');
+    expect(Pusher.bind.mock.calls[7][0]).toEqual('private-updates-12345');
+    expect(Pusher.bind.mock.calls[7][1]).toEqual('queue_paused');
+    expect(Pusher.bind).toHaveBeenCalledTimes(8);
   });
 
   it('should dispatch when a subscribed pusher event happens', () => {
