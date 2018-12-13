@@ -1,5 +1,6 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('QUEUE', {
@@ -234,6 +235,8 @@ const handlePostsReordered = (posts, { order: newOrder }) => {
 
 const postReducer = (state, action) => {
   switch (action.type) {
+    case draftActionTypes.DRAFT_APPROVED:
+      return action.draft;
     case actionTypes.POST_CREATED:
     case actionTypes.POST_UPDATED:
       return action.post;
@@ -302,6 +305,7 @@ const postsReducer = (state = {}, action) => {
       const { [getPostUpdateId(action)]: deleted, ...currentState } = state;
       return currentState;
     }
+    case draftActionTypes.DRAFT_APPROVED:
     case actionTypes.POST_CREATED:
     case actionTypes.POST_UPDATED:
     case actionTypes.POST_CLICKED_DELETE:
@@ -395,6 +399,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.POST_IMAGE_CLICKED_PREV:
     case actionTypes.POST_SHARE_NOW:
     case actionTypes.POST_SENT:
+    case draftActionTypes.DRAFT_APPROVED:
       return {
         ...state,
         posts: postsReducer(state.posts, action),
@@ -428,6 +433,7 @@ export default (state = initialState, action) => {
     case actionTypes.POST_SHARE_NOW:
     case actionTypes.POST_SENT:
     case actionTypes.POST_COUNT_UPDATED:
+    case draftActionTypes.DRAFT_APPROVED:
     case `getNumberOfPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case actionTypes.TOGGLE_CALENDAR: {
       profileId = getProfileId(action);
