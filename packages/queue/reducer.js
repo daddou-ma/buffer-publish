@@ -63,6 +63,7 @@ const getPostUpdateId = (action) => {
   if (action.updateId) { return action.updateId; }
   if (action.args) { return action.args.updateId; }
   if (action.post) { return action.post.id; }
+  if (action.draft) { return action.draft.id; }
 };
 
 /**
