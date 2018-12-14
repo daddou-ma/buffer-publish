@@ -1,4 +1,9 @@
+const webpack = require('../node_modules/@storybook/core/node_modules/webpack');
+
 module.exports = {
+  plugins: [new webpack.DefinePlugin({
+    __PACKAGES__: JSON.stringify(`../packages/${process.env.PACKAGE || ''}`)
+  })],
   module: {
     rules: [
       {

@@ -17,11 +17,11 @@ export default ({ getState, dispatch }) => next => (action) => {
       const {
         hasPublishBeta,
         hasPublishBetaRedirect,
-        hasNewPublishNewFreeUser,
+        hasNewPublish,
       } = getState().betaRedirect;
       if (!hasPublishBeta) {
-        if (!hasNewPublishNewFreeUser) {
-          window.location = getClassicBufferURL();
+        if (!hasNewPublish) {
+          window.location.replace(getClassicBufferURL());
         }
       } else if (!hasPublishBetaRedirect) {
         dispatch(dataFetchActions.fetch({ name: 'savePublishBetaRedirect' }));

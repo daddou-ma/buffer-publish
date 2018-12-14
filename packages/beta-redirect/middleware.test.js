@@ -9,7 +9,7 @@ describe('middleware', () => {
     const betaRedirect = {
       hasPublishBeta: true,
       hasPublishBetaRedirect: false,
-      hasNewPublishNewFreeUser: false,
+      hasNewPublish: false,
     };
     const store = {
       dispatch,
@@ -29,12 +29,13 @@ describe('middleware', () => {
       }));
   });
 
-  it('if user doesn\'t have hasNewPublishNewFreeUser feature should redirect to classic Buffer', () => {
+  it('if user doesn\'t have `hasNewPublish` they should be redirected to classic Buffer', () => {
     const dispatch = jest.fn();
+    window.location.replace = jest.fn();
     const betaRedirect = {
       hasPublishBeta: false,
       hasPublishBetaRedirect: false,
-      hasNewPublishNewFreeUser: true,
+      hasNewPublish: false,
     };
     const store = {
       dispatch,
@@ -48,5 +49,7 @@ describe('middleware', () => {
     middleware(store)(next)(action);
     expect(next)
       .toBeCalledWith(action);
+    expect(window.location.replace)
+      .toHaveBeenCalledWith('https://local.buffer.com/app');
   });
 });

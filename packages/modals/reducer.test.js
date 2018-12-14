@@ -8,6 +8,18 @@ describe('reducer', () => {
   });
 
   describe('actions', () => {
+    it('should show welcome modal', () => {
+      expect(reducer(initialState, actions.showWelcomeModal()))
+        .toEqual(Object.assign(initialState, { showWelcomeModal: true }));
+    });
+    it('should hide welcome modal', () => {
+      const stateWithVisibleModal = Object.assign(
+        initialState,
+        { showWelcomeModal: true },
+      );
+      expect(reducer(stateWithVisibleModal, actions.hideWelcomeModal()))
+        .toEqual(Object.assign(initialState, { showWelcomeModal: false }));
+    });
     it('should show upgrade modal', () => {
       expect(reducer(initialState, actions.showUpgradeModal({ source: 'foo' })))
         .toEqual(Object.assign(initialState, { showUpgradeModal: true, upgradeModalSource: 'foo' }));

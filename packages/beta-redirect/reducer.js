@@ -7,19 +7,19 @@ export const actionTypes = {};
 const initialState = {
   hasPublishBeta: false,
   hasPublishBetaRedirect: false,
-  hasNewPublishNewFreeUser: false,
+  hasNewPublish: false,
   loading: true,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { result: { features = [] } } = action;
+      const { result: { hasNewPublish, features = [] } } = action;
       return {
         loading: false,
         hasPublishBeta: features.includes('new_publish_beta'),
         hasPublishBetaRedirect: features.includes('new_publish_beta_redirect'),
-        hasNewPublishNewFreeUser: features.includes('new_publish_new_buffer_free_users'),
+        hasNewPublish,
       };
     }
     default:

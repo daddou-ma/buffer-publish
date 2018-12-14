@@ -5,7 +5,7 @@ import EnsurePublishBetaUser from './components/EnsurePublishBetaUser';
 export default connect(
   state => ({
     hasPublishBeta: state.betaRedirect.hasPublishBeta,
-    hasNewPublishNewFreeUser: state.betaRedirect.hasNewPublishNewFreeUser,
+    hasNewPublish: state.betaRedirect.hasNewPublish,
     loading: state.betaRedirect.loading,
   }),
 )(EnsurePublishBetaUser);
