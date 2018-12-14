@@ -15,9 +15,8 @@ const WelcomeModal = ({
   <Popover>
     <Card>
       <div style={{ maxWidth: '380px', textAlign: 'center', margin: '10px 40px' }}>
-        <Text size="large" weight="bold" color="black">✨ {translations.headline} ✨</Text>
-        <div style={{ margin: '16px 0' }}><Text>{translations.body1}</Text></div>
-        <div style={{ margin: '16px 0 24px' }}><Text weight="medium">{translations.body2}</Text></div>
+        <Text size="large" weight="medium" color="black">✨ {translations.headline} ✨</Text>
+        <div style={{ margin: '16px 0 24px' }}><Text>{translations.body2}</Text></div>
         <Button onClick={hideModal} large>{translations.cta}</Button>
       </div>
     </Card>
