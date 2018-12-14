@@ -7,12 +7,19 @@ import { actionTypes } from './reducer';
 jest.mock('@bufferapp/buffermetrics/client');
 
 describe('middleware', () => {
+  beforeAll(() => {
+    window._bugsnagConfig = {
+      user: {
+        id: 'foo',
+      },
+    };
+  });
+
   describe('should send tracking data', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const getState = jest.fn(() => ({
       upgradeModal: { source: 'source' },
-      appSidebar: { user: { id: 'foo' } },
     }));
 
     test('when the modal opens', () => {

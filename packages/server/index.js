@@ -20,6 +20,7 @@ const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
 const { sendFavicon } = require('./lib/favicon');
 const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
+const serialize = require('serialize-javascript');
 
 const app = express();
 const server = http.createServer(app);
@@ -71,19 +72,29 @@ const notificationScript = (notification) => {
   let variable = '';
 
   if (notification.variable) {
-    variable = `variable: ${JSON.stringify(notification.variable)}`;
+    variable = `variable: ${serialize(notification.variable, { isJSON: true })}`;
   }
 
   return `
     <script type="text/javascript">
         window._notification = {
-          type: ${JSON.stringify(notification.type)},
-          key: ${JSON.stringify(notification.key)},
+          type: ${serialize(notification.type, { isJSON: true })},
+          key: ${serialize(notification.key, { isJSON: true })},
           ${variable}
         };
     </script>
   `;
 };
+
+const showModalScript = key => (
+  key ? `
+    <script type="text/javascript">
+        window._showModal = {
+          key: ${serialize(key, { isJSON: true })}
+        };
+    </script>
+  ` : ''
+);
 
 const stripeScript = `<script src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
@@ -109,7 +120,7 @@ window['_fs_namespace'] = 'FS';
 })(window,document,window['_fs_namespace'],'script','user');
 </script>`;
 
-const getHtml = (notification, userId) =>
+const getHtml = ({ notification, userId, modalKey }) =>
   fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
@@ -118,7 +129,8 @@ const getHtml = (notification, userId) =>
     .replace('{{{stripeScript}}}', stripeScript)
     .replace('{{{fullStoryScript}}}', fullStoryScript)
     .replace('{{{bugsnagScript}}}', isProduction ? getBugsnagScript(userId) : '')
-    .replace('{{{notificationScript}}}', notificationScript(notification));
+    .replace('{{{notificationScript}}}', notificationScript(notification))
+    .replace('{{{showModalScript}}}', showModalScript(modalKey));
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());
@@ -168,19 +180,29 @@ app.post(
   },
 );
 
-app.get('*', (req, res) => {
+const getNotificationFromQuery = (query) => {
   let notification = null;
-  if (req.query.nt && req.query.nk) {
+  if (query.nt && query.nk) {
     notification = {
-      type: req.query.nt, // Notification Type
-      key: req.query.nk, // Notification Key
+      type: query.nt, // Notification Type
+      key: query.nk, // Notification Key
     };
-
-    if (req.query.nv) {
-      notification.variable = req.query.nv; // Notification Variable
+    if (query.nv) {
+      notification.variable = query.nv; // Notification Variable
     }
   }
-  res.send(getHtml(notification, req.session.global.userId));
+  return notification;
+};
+
+app.get('*', (req, res) => {
+  const notification = getNotificationFromQuery(req.query);
+  const userId = req.session.global.userId;
+  const modalKey = req.query.mk ? req.query.mk : null;
+  res.send(getHtml({
+    notification,
+    userId,
+    modalKey,
+  }));
 });
 
 app.use(apiError);

@@ -1,100 +1,119 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Buffer Publish</title>
-    <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/favicon-16.png" sizes="16x16" />
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link href="//icons.buffer.com/0.16.4/buffer-icons.css" rel="stylesheet" type="text/css"/>
-    <link href="{{{bundle-css}}}" rel="stylesheet" type="text/css"/>
-    <style>
-      * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      html, body, #root {
-        height: 100%;
-        margin: 0;
-      }
-      ::-webkit-scrollbar {
-         width: 5px;
-         height: 0;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      ::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background: rgba(89, 98, 106, 0.2);
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        border-radius: 10px;
-        background: rgba(89, 98, 106, 0.4);
-      }
-      [data-hide-scrollbar] {
-        -ms-overflow-style: none;
-      }
-      [data-hide-scrollbar]::-webkit-scrollbar {
-        display: none;
+<head>
+  <title>Buffer Publish</title>
+  <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/favicon-16.png" sizes="16x16" />
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link href="//icons.buffer.com/0.16.4/buffer-icons.css" rel="stylesheet" type="text/css" />
+  <link href="{{{bundle-css}}}" rel="stylesheet" type="text/css" />
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html,
+    body,
+    #root {
+      height: 100%;
+      margin: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 0;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: rgba(89, 98, 106, 0.2);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      border-radius: 10px;
+      background: rgba(89, 98, 106, 0.4);
+    }
+
+    [data-hide-scrollbar] {
+      -ms-overflow-style: none;
+    }
+
+    [data-hide-scrollbar]::-webkit-scrollbar {
+      display: none;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    @keyframes placeHolderShimmer {
+      0% {
+        background-position: -500px 0
       }
 
-      input[type="number"] {
-        -moz-appearance:textfield;
+      100% {
+        background-position: 500px 0
       }
-      input[type="number"]::-webkit-outer-spin-button,
-      input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-      @keyframes placeHolderShimmer {
-        0% {
-          background-position: -500px 0
-        }
-        100% {
-          background-position: 500px 0
-        }
-      }
-      @keyframes fade {
-        0% {
-          opacity: 0;
-          transform: translateY(0);
-        }
+    }
 
-        15% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        25% {
-          opacity: 0;
-          transform: translateY(4px) scale(1.1);
-        }
-
-        50% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
+    @keyframes fade {
+      0% {
+        opacity: 0;
+        transform: translateY(0);
       }
-      /*
+
+      15% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      25% {
+        opacity: 0;
+        transform: translateY(4px) scale(1.1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /*
       @todo: remove this class once analyze-shared-components is fixed
       */
-      .DayPicker-Weekdays {
-        display: block;
-      }
-    </style>
-    {{{bugsnagScript}}}
-    {{{stripeScript}}}
-    {{{fullStoryScript}}}
-    {{{notificationScript}}}
-  </head>
-  <body>
-    <div id="root"></div>
-    <script crossorigin src="{{{vendor}}}"></script>
-    <script crossorigin src="{{{bundle}}}"></script>
-  </body>
+    .DayPicker-Weekdays {
+      display: block;
+    }
+  </style>
+  {{{bugsnagScript}}}
+  {{{stripeScript}}}
+  {{{fullStoryScript}}}
+  {{{notificationScript}}}
+  {{{showModalScript}}}
+</head>
+
+<body>
+  <div id="root"></div>
+  <script crossorigin src="{{{vendor}}}"></script>
+  <script crossorigin src="{{{bundle}}}"></script>
+</body>
+
 </html>

@@ -1,14 +1,16 @@
-import { actionTypes } from '@bufferapp/async-data-fetch';
-
 import { actions } from './reducer';
-import { shouldShowUpgradeModal, getSourceFromHash, shouldShowWelcomeModal } from './util/window-hash';
+import {
+  shouldShowUpgradeModal,
+  shouldShowWelcomeModal,
+  getSourceFromKey,
+} from './util/showModal';
 
 export default ({ dispatch }) => next => (action) => {
   next(action);
   switch (action.type) {
-    case `user_${actionTypes.FETCH_SUCCESS}`: {
+    case 'APP_INIT': {
       if (shouldShowUpgradeModal()) {
-        dispatch(actions.showUpgradeModal({ source: getSourceFromHash() }));
+        dispatch(actions.showUpgradeModal({ source: getSourceFromKey() }));
       }
       if (shouldShowWelcomeModal()) {
         dispatch(actions.showWelcomeModal());
