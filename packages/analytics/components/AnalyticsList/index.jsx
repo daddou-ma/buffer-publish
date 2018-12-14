@@ -12,7 +12,7 @@ import './analytics.css';
 
 const AnalyticsList = ({ profile, isAnalyticsSupported }) => (
   isAnalyticsSupported ?
-    <div>
+    <div id="analytics">
       <Toolbar profile={profile} />
       <SummaryTable />
       <CompareChart />
