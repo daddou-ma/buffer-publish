@@ -1,13 +1,6 @@
 import middleware from './middleware';
 import { actions } from './reducer';
 
-// jest.mock('buffermetrics');
-
-// Object.defineProperty(window.location, 'hash', {
-//   writable: true,
-//   value: '#upgrade-to-pro',
-// });
-
 describe('middleware', () => {
   it('should show welcome modal when key is present', () => {
     window._showModal = {
