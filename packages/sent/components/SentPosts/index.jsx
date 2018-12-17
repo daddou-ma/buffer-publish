@@ -9,11 +9,6 @@ import {
   Text,
   LoadingAnimation,
 } from '@bufferapp/components';
-import {
-  geyser,
-  fillColor,
-  curiousBlue,
-} from '@bufferapp/components/style/color';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 
 const headerStyle = {
