@@ -8,17 +8,15 @@ const formatPostLists = (posts) => {
   const postLists = [];
   let day;
   let newList;
-
-  posts.forEach((post) => {
-    if (post.day !== day) {
-      day = post.day;
-      newList = { listHeader: day, posts: [post] };
+  Object.keys(posts).forEach((key) => {
+    if (posts[key].day !== day) {
+      day = posts[key].day;
+      newList = { listHeader: day, posts: [posts[key]] };
       postLists.push(newList);
     } else { // if same day add to posts array of current list
-      newList.posts.push(post);
+      newList.posts.push(posts[key]);
     }
   });
-
   return postLists;
 };
 
