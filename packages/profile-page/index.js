@@ -41,7 +41,7 @@ export default hot(module)(connect(
           requestName = 'sent';
           break;
         default:
-          requestName = 'queue';
+          requestName = 'queued';
       }
       dispatch(
         dataFetchActions.fetch({
