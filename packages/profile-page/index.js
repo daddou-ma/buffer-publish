@@ -27,9 +27,25 @@ export default hot(module)(connect(
   },
   dispatch => ({
     onLoadMore: ({ profileId, page, tabId }) => {
+      let requestName;
+      switch (tabId) {
+        case 'queue':
+          requestName = 'queued';
+          break;
+        case 'drafts':
+        case 'awaitingApproval':
+        case 'pendingApproval':
+          requestName = 'draft';
+          break;
+        case 'sent':
+          requestName = 'sent';
+          break;
+        default:
+          requestName = 'queue';
+      }
       dispatch(
         dataFetchActions.fetch({
-          name: `${tabId === 'queue' ? 'queued' : 'sent'}Posts`,
+          name: `${requestName}Posts`,
           args: {
             profileId,
             page,
