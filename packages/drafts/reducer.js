@@ -1,7 +1,6 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
 import keyWrapper from '@bufferapp/keywrapper';
-// Adding comment to practice rollback
 
 export const actionTypes = keyWrapper('DRAFTS', {
   DRAFT_CREATED: 0,

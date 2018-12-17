@@ -6,7 +6,6 @@ import { actions } from './reducer';
 
 import QueuedPosts from './components/QueuedPosts';
 
-// Adding comment to practice rollback
 const formatPostLists = (posts) => {
   const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
   let lastHeader = null;
