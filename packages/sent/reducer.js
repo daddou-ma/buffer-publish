@@ -9,6 +9,10 @@ import {
 export const actionTypes = keyWrapper('SENT', {
   OPEN_COMPOSER: 0,
   HIDE_COMPOSER: 0,
+  POST_IMAGE_CLICKED: 0,
+  POST_IMAGE_CLICKED_NEXT: 0,
+  POST_IMAGE_CLICKED_PREV: 0,
+  POST_IMAGE_CLOSED: 0,
 });
 
 export const initialState = {
@@ -147,5 +151,29 @@ export const actions = {
   }),
   handleComposerCreateSuccess: () => ({
     type: actionTypes.HIDE_COMPOSER,
+  }),
+  handleImageClick: ({ post, profileId }) => ({
+    type: actionTypes.POST_IMAGE_CLICKED,
+    updateId: post.id,
+    post,
+    profileId,
+  }),
+  handleImageClickNext: ({ post, profileId }) => ({
+    type: actionTypes.POST_IMAGE_CLICKED_NEXT,
+    updateId: post.id,
+    post,
+    profileId,
+  }),
+  handleImageClickPrev: ({ post, profileId }) => ({
+    type: actionTypes.POST_IMAGE_CLICKED_PREV,
+    updateId: post.id,
+    post,
+    profileId,
+  }),
+  handleImageClose: ({ post, profileId }) => ({
+    type: actionTypes.POST_IMAGE_CLOSED,
+    updateId: post.id,
+    post,
+    profileId,
   }),
 };

@@ -44,6 +44,10 @@ const SentPosts = ({
   postLists,
   onEditClick,
   onShareAgainClick,
+  onImageClick,
+  onImageClickNext,
+  onImageClickPrev,
+  onImageClose,
   onComposerCreateSuccess,
   showComposer,
   editMode,
@@ -91,6 +95,10 @@ const SentPosts = ({
         postLists={postLists}
         onEditClick={onEditClick}
         onShareAgainClick={onShareAgainClick}
+        onImageClick={onImageClick}
+        onImageClickNext={onImageClickNext}
+        onImageClickPrev={onImageClickPrev}
+        onImageClose={onImageClose}
         isSent
       />
     </div>
@@ -118,6 +126,10 @@ SentPosts.propTypes = {
   onComposerCreateSuccess: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
   onShareAgainClick: PropTypes.func,
+  onImageClick: PropTypes.func,
+  onImageClickNext: PropTypes.func,
+  onImageClickPrev: PropTypes.func,
+  onImageClose: PropTypes.func,
 };
 
 SentPosts.defaultProps = {
@@ -130,6 +142,10 @@ SentPosts.defaultProps = {
   showComposer: false,
   editMode: false,
   onShareAgainClick: () => {},
+  onImageClick: () => {},
+  onImageClickNext: () => {},
+  onImageClickPrev: () => {},
+  onImageClose: () => {},
 };
 
 export default SentPosts;
