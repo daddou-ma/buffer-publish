@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import reducer, { initialState } from './reducer';
+import reducer, { initialState, actionTypes } from './reducer';
 import {
   header,
 } from './components/SentPosts/postData';
@@ -125,5 +125,45 @@ describe('reducer', () => {
 
     expect(reducer(stateComposerVisible, action))
       .toEqual(Object.assign(initialState, { showComposer: false }));
+  });
+
+  it('should handle POST_IMAGE_CLICKED action type', () => {
+    const post = { id: '12345', text: 'i heart buffer' };
+    const postAfter = { ...post, isLightboxOpen: true, currentImage: 0 };
+    const stateBefore = {
+      byProfileId: {
+        [profileId]: {
+          header: 'Your posts for the last 30 days',
+          loading: true,
+          loadingMore: false,
+          moreToLoad: false,
+          page: 1,
+          posts: { 12345: post },
+          total: 1,
+        },
+      },
+    };
+    const stateAfter = {
+      byProfileId: {
+        [profileId]: {
+          header: 'Your posts for the last 30 days',
+          loading: true,
+          loadingMore: false,
+          moreToLoad: false,
+          page: 1,
+          posts: { 12345: postAfter },
+          total: 1,
+        },
+      },
+    };
+    const action = {
+      type: actionTypes.POST_IMAGE_CLICKED,
+      profileId,
+      post: postAfter,
+      updateId: postAfter.id,
+    };
+    deepFreeze(action);
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
   });
 });
