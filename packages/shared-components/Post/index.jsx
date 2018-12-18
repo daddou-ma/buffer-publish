@@ -240,6 +240,7 @@ Post.defaultProps = {
   isWorking: false,
   fixed: false,
   isSent: false,
+  isManager: true,
 };
 
 export default Post;
