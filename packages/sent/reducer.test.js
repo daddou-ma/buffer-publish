@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import reducer, { initialState, actionTypes } from './reducer';
+import reducer, { initialState, profileInitialState, actionTypes } from './reducer';
 import {
   header,
 } from './components/SentPosts/postData';
@@ -26,7 +26,7 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          posts: [],
+          posts: {},
           total: 0,
         },
       },
@@ -83,7 +83,7 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          posts: [],
+          posts: {},
           total: 0,
         },
       },
@@ -132,32 +132,40 @@ describe('reducer', () => {
     const postAfter = { ...post, isLightboxOpen: true, currentImage: 0 };
     const stateBefore = {
       byProfileId: {
-        [profileId]: {
-          header: 'Your posts for the last 30 days',
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: { 12345: post },
-          total: 1,
-        },
+        [profileId]: Object.assign(profileInitialState, { posts: { 12345: post } }),
       },
     };
     const stateAfter = {
       byProfileId: {
-        [profileId]: {
-          header: 'Your posts for the last 30 days',
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: { 12345: postAfter },
-          total: 1,
-        },
+        [profileId]: Object.assign(profileInitialState, { posts: { 12345: postAfter } }),
       },
     };
     const action = {
       type: actionTypes.POST_IMAGE_CLICKED,
+      profileId,
+      post: postAfter,
+      updateId: postAfter.id,
+    };
+    deepFreeze(action);
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('should handle POST_IMAGE_CLOSED action type', () => {
+    const post = { id: '12345', text: 'i heart buffer' };
+    const postAfter = { ...post, isLightboxOpen: false };
+    const stateBefore = {
+      byProfileId: {
+        [profileId]: Object.assign(profileInitialState, { posts: { 12345: post } }),
+      },
+    };
+    const stateAfter = {
+      byProfileId: {
+        [profileId]: Object.assign(profileInitialState, { posts: { 12345: postAfter } }),
+      },
+    };
+    const action = {
+      type: actionTypes.POST_IMAGE_CLOSED,
       profileId,
       post: postAfter,
       updateId: postAfter.id,

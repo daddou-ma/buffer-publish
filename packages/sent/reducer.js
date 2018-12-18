@@ -23,7 +23,7 @@ export const initialState = {
   environment: 'production',
 };
 
-const profileInitialState = {
+export const profileInitialState = {
   header,
   loading: true,
   loadingMore: false,
