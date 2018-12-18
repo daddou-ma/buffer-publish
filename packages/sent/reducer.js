@@ -92,7 +92,10 @@ const postReducer = (state, action) => {
 const postsReducer = (state, action) => {
   switch (action.type) {
     case queueActionTypes.POST_SENT:
-      return [action.post, ...state];
+      return {
+        ...state,
+        [getPostUpdateId(action)]: action.post,
+      };
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
