@@ -135,6 +135,7 @@ PostFooter.defaultProps = {
   isConfirmingDelete: false,
   isWorking: false,
   dragging: false,
+  isManager: true,
 };
 
 export default PostFooter;

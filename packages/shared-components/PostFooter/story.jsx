@@ -49,6 +49,13 @@ storiesOf('PostFooter', module)
       isSent={false}
     />
   ))
+  .add('post if contributor', () => (
+    <PostFooter
+      postDetails={postDetails}
+      isSent={false}
+      isManager={false}
+    />
+  ))
   .add('sent post', () => (
     <PostFooter
       postDetails={postDetailsSent}

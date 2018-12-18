@@ -23,10 +23,13 @@ describe('Queue', () => {
         profiles: [
           { id: 'abc', paused: false },
         ],
+        selectedProfile: {
+          isManager: true,
+        },
       },
       appSidebar: {
         user: {
-          features: []
+          features: [],
         },
       },
       queue: {
