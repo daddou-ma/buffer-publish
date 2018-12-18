@@ -32,6 +32,7 @@ const VideoPost = ({
   source_url: sourceUrl,
   subprofile_id: subprofileID,
   isSent,
+  isManager,
 }) =>
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
@@ -64,6 +65,7 @@ const VideoPost = ({
     source_url={sourceUrl}
     subprofile_id={subprofileID}
     isSent={isSent}
+    isManager={isManager}
   />;
 
 VideoPost.propTypes = ImagePost.propTypes;

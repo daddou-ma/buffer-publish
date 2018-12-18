@@ -137,6 +137,7 @@ const Post = ({
   statistics,
   profileService,
   isSent,
+  isManager,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
@@ -163,6 +164,7 @@ const Post = ({
           subprofiles={subprofiles}
         />
         <PostFooter
+          isManager={isManager}
           isDeleting={isDeleting}
           isConfirmingDelete={isConfirmingDelete}
           isWorking={isWorking}

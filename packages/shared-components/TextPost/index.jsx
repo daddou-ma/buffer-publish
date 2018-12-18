@@ -42,6 +42,7 @@ const TextPost = ({
   source_url: sourceUrl,
   subprofile_id: subprofileID,
   isSent,
+  isManager,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -89,6 +90,7 @@ const TextPost = ({
       sourceUrl={sourceUrl}
       subprofileID={subprofileID}
       isSent={isSent}
+      isManager={isManager}
     >
       {children}
     </Post>
@@ -115,6 +117,7 @@ TextPost.propTypes = {
   ),
   text: PropTypes.string.isRequired,
   isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
 };
 
 TextPost.defaultProps = Post.defaultProps;
