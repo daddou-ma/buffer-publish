@@ -29,14 +29,14 @@ const profileInitialState = {
   loadingMore: false,
   moreToLoad: false,
   page: 1,
-  posts: [],
+  posts: {},
   total: 0,
 };
 
 const handlePosts = (action, currentPosts) => {
   let posts = action.result.updates;
   if (action.args.isFetchingMore) {
-    posts = [...currentPosts, ...posts];
+    posts = { ...currentPosts, ...posts };
   }
   return posts;
 };

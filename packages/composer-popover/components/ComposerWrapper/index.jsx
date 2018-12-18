@@ -33,7 +33,7 @@ export default connect(
         case 'sent':
           options = {
             editMode: state.sent.editMode,
-            post: state.sent.byProfileId[selectedProfileId].posts.find(p => p.id === postId),
+            post: state.sent.byProfileId[selectedProfileId].posts[postId],
           };
           break;
         default:
