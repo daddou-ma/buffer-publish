@@ -46,8 +46,11 @@ const increasePageCount = (page) => {
   return page;
 };
 
-const determineIfMoreToLoad = (action, currentPosts) =>
-  (action.result.total > (currentPosts.length + action.result.updates.length));
+const determineIfMoreToLoad = (action, currentPosts) => {
+  const currentPostCount = Object.keys(currentPosts).length;
+  const resultUpdatesCount = Object.keys(action.result.updates).length;
+  return (action.result.total > (currentPostCount + resultUpdatesCount));
+};
 
 const getProfileId = (action) => {
   if (action.profileId) { return action.profileId; }
