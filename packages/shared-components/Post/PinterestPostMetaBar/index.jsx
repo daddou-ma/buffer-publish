@@ -8,6 +8,7 @@ const PinterestPostMetaBar = ({
   sourceUrl,
   boardName,
   boardAvatarUrl,
+  isSent,
 }) => {
   const leftContent = { title: 'Pinned to:', text: boardName, avatarUrl: boardAvatarUrl };
   const rightContent = sourceUrl ? { title: 'Source:', text: getFormattedSourceUrl(sourceUrl) } : null;
@@ -17,6 +18,7 @@ const PinterestPostMetaBar = ({
       dragging={dragging}
       leftContent={leftContent}
       rightContent={rightContent}
+      isSent={isSent}
     />
   );
 };
@@ -26,6 +28,7 @@ PinterestPostMetaBar.propTypes = {
   sourceUrl: PropTypes.string,
   boardName: PropTypes.string,
   boardAvatarUrl: PropTypes.string,
+  isSent: PropTypes.bool,
 };
 
 export default PinterestPostMetaBar;

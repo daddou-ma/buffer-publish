@@ -44,6 +44,7 @@ RenderPostMetaBar.propTypes = {
     }),
   ),
   dragging: PropTypes.bool,
+  isSent: PropTypes.bool,
 };
 
 export default RenderPostMetaBar;
