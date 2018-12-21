@@ -581,6 +581,7 @@ describe('reducer', () => {
         type: actionTypes.OPEN_COMPOSER,
       });
     });
+    
     it('handleComposerCreateSuccess triggers a HIDE_COMPOSER action', () => {
       expect(actions.handleComposerCreateSuccess()).toEqual({
         type: actionTypes.HIDE_COMPOSER,
