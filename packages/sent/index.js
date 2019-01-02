@@ -8,7 +8,9 @@ const formatPostLists = (posts) => {
   const postLists = [];
   let day;
   let newList;
-  const orderedPosts = Object.values(posts).sort((a, b) => b.due_at - a.due_at);
+  const orderedPosts = (posts && typeof posts === 'object') ?
+    Object.values(posts).sort((a, b) => b.due_at - a.due_at) : [];
+
   orderedPosts.forEach((post) => {
     if (post.day !== day) {
       day = post.day;
