@@ -5,14 +5,14 @@ import { mystic, offWhite } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { Text, Image } from '@bufferapp/components';
 
-const getPostMetaBarStyle = dragging => ({
+const getPostMetaBarStyle = (dragging, isSent) => ({
   display: 'flex',
   padding: '0.5rem 1rem',
   backgroundColor: offWhite,
   borderTop: `${borderWidth} solid ${mystic}`,
   borderBottom: `${borderWidth} solid ${mystic}`,
   opacity: dragging ? 0 : 1,
-  marginBottom: 10,
+  marginBottom: isSent ? 0 : 10,
 });
 
 const getImageWrapperStyle = avatarUrl => ({
@@ -53,8 +53,8 @@ const renderLeftContent = leftContent => (
   </span>
 );
 
-const PostMetaBar = ({ leftContent, rightContent, dragging }) => (
-  <div style={getPostMetaBarStyle(dragging)}>
+const PostMetaBar = ({ leftContent, rightContent, dragging, isSent }) => (
+  <div style={getPostMetaBarStyle(dragging, isSent)}>
     {renderLeftContent(leftContent)}
     {rightContent &&
       <span>
@@ -71,6 +71,7 @@ const PostMetaBar = ({ leftContent, rightContent, dragging }) => (
 
 PostMetaBar.propTypes = {
   dragging: PropTypes.bool,
+  isSent: PropTypes.bool,
   leftContent: PropTypes.shape({
     title: PropTypes.string,
     text: PropTypes.string,

@@ -161,6 +161,7 @@ const Post = ({
           sourceUrl={sourceUrl}
           subprofileID={subprofileID}
           subprofiles={subprofiles}
+          isSent={isSent}
         />
         <PostFooter
           isDeleting={isDeleting}

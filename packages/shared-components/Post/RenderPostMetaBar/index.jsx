@@ -10,23 +10,27 @@ const RenderPostMetaBar = ({
   subprofileID,
   subprofiles,
   dragging,
+  isSent,
 }) => {
-  if (profileService === 'instagram' && locationName !== null) {
+  if (profileService === 'instagram' && locationName) {
     return (
       <InstagramPostMetaBar
         dragging={dragging}
         locationName={locationName}
+        isSent={isSent}
       />
     );
-  } else if (profileService === 'pinterest' && subprofileID !== null) {
+  } else if (profileService === 'pinterest' && subprofileID) {
     /*  having a subprofileID is required, sourceUrl is not */
-    const subprofile = subprofiles.find((profile => profile.id === subprofileID));
+    const subprofile = subprofiles ?
+      subprofiles.find((profile => profile.id === subprofileID)) : null;
     return (
       <PinterestPostMetaBar
         dragging={dragging}
-        boardName={subprofile.name}
-        boardAvatarUrl={subprofile.avatar}
+        boardName={subprofile ? subprofile.name : null}
+        boardAvatarUrl={subprofile ? subprofile.avatar : null}
         sourceUrl={sourceUrl}
+        isSent={isSent}
       />
     );
   }
@@ -44,6 +48,7 @@ RenderPostMetaBar.propTypes = {
     }),
   ),
   dragging: PropTypes.bool,
+  isSent: PropTypes.bool,
 };
 
 export default RenderPostMetaBar;
