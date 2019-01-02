@@ -16,7 +16,7 @@ export const actionTypes = keyWrapper('DRAFTS', {
   HIDE_COMPOSER: 0,
 });
 
-const initialState = {
+export const initialState = {
   byProfileId: {},
   showComposer: false,
   enabledApplicationModes: [],

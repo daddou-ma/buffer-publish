@@ -8,8 +8,10 @@ const formatPostLists = (posts) => {
   const postLists = [];
   let day;
   let newList;
+  const orderedPosts = (posts && typeof posts === 'object') ?
+    Object.values(posts).sort((a, b) => b.due_at - a.due_at) : [];
 
-  posts.forEach((post) => {
+  orderedPosts.forEach((post) => {
     if (post.day !== day) {
       day = post.day;
       newList = { listHeader: day, posts: [post] };
@@ -18,7 +20,6 @@ const formatPostLists = (posts) => {
       newList.posts.push(post);
     }
   });
-
   return postLists;
 };
 
@@ -51,6 +52,30 @@ export default connect(
     },
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
+    },
+    onImageClick: (post) => {
+      dispatch(actions.handleImageClick({
+        post: post.post,
+        profileId: ownProps.profileId,
+      }));
+    },
+    onImageClose: (post) => {
+      dispatch(actions.handleImageClose({
+        post: post.post,
+        profileId: ownProps.profileId,
+      }));
+    },
+    onImageClickNext: (post) => {
+      dispatch(actions.handleImageClickNext({
+        post: post.post,
+        profileId: ownProps.profileId,
+      }));
+    },
+    onImageClickPrev: (post) => {
+      dispatch(actions.handleImageClickPrev({
+        post: post.post,
+        profileId: ownProps.profileId,
+      }));
     },
   }),
 )(SentPosts);
