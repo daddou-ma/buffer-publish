@@ -6,8 +6,7 @@ import { actions } from './reducer';
 
 import QueuedPosts from './components/QueuedPosts';
 
-const formatPostLists = (profile, posts) => {
-  const isManager = profile.isManager;
+const formatPostLists = (isManager, posts) => {
   const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
   let lastHeader = null;
   return orderedPosts.reduce((acc, post, index) => {
@@ -37,13 +36,12 @@ export default connect(
     const profileData = state.profileSidebar.profiles.find(p => p.id === ownProps.profileId);
     if (profileQueuePosts && profileData) {
       return {
-        isManager: state.profileSidebar.selectedProfile.isManager,
         loading: profileQueuePosts.loading,
         loadingMore: profileQueuePosts.loadingMore,
         moreToLoad: profileQueuePosts.moreToLoad,
         page: profileQueuePosts.page,
         postLists: formatPostLists(
-          state.profileSidebar.selectedProfile,
+          profileData.isManager,
           profileQueuePosts.posts,
         ),
         total: profileQueuePosts.total,
