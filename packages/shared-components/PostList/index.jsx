@@ -11,7 +11,6 @@ import ImagePost from '../ImagePost';
 import MultipleImagesPost from '../MultipleImagesPost';
 import LinkPost from '../LinkPost';
 import VideoPost from '../VideoPost';
-import PostDragWrapper from '../PostDragWrapper';
 
 const reBufferWrapperStyle = {
   paddingLeft: '1rem',
@@ -92,6 +91,7 @@ const PostList = ({
   onDropPost,
   onShareAgainClick,
   isSent,
+  isManager,
 }) =>
   <div>
     <div style={listHeaderStyle}>
@@ -121,18 +121,20 @@ const PostList = ({
               isSent,
             })
           }
-          <FeatureLoader
-            supportedFeatures={'share_again'}
-          >
-            <div style={reBufferWrapperStyle}>
-              <Button
-                secondary
-                onClick={() => { onShareAgainClick({ post }); }}
-              >
-                Share Again
-              </Button>
-            </div>
-          </FeatureLoader>
+          {isManager &&
+            <FeatureLoader
+              supportedFeatures={'share_again'}
+            >
+              <div style={reBufferWrapperStyle}>
+                <Button
+                  secondary
+                  onClick={() => { onShareAgainClick({ post }); }}
+                >
+                  Share Again
+                </Button>
+              </div>
+            </FeatureLoader>
+          }
         </div>,
       )}
     />
@@ -157,6 +159,7 @@ PostList.propTypes = {
   onDropPost: PropTypes.func,
   onShareAgainClick: PropTypes.func,
   isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
 };
 
 PostList.defaultProps = {

@@ -39,6 +39,7 @@ export default connect(
         total: currentProfile.total,
         showComposer: state.sent.showComposer,
         editMode: state.sent.editMode,
+        isManager: state.profileSidebar.selectedProfile.isManager,
       };
     }
     return {};
