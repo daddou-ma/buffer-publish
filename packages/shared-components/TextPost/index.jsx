@@ -41,6 +41,7 @@ const TextPost = ({
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
+  serviceLink,
   isSent,
 }) => {
   const children = (
@@ -88,6 +89,7 @@ const TextPost = ({
       locationName={locationName}
       sourceUrl={sourceUrl}
       subprofileID={subprofileID}
+      serviceLink={serviceLink}
       isSent={isSent}
     >
       {children}

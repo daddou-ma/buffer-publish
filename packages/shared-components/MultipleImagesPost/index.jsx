@@ -51,6 +51,7 @@ const MultipleImagesPost = ({
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
+  serviceLink,
   isSent,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
@@ -113,6 +114,7 @@ const MultipleImagesPost = ({
       locationName={locationName}
       sourceUrl={sourceUrl}
       subprofileID={subprofileID}
+      serviceLink={serviceLink}
       isSent={isSent}
     >
       {children}

@@ -31,6 +31,7 @@ const VideoPost = ({
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
+  serviceLink,
   isSent,
 }) =>
   <ImagePost
@@ -63,6 +64,7 @@ const VideoPost = ({
     service_geolocation_name={locationName}
     source_url={sourceUrl}
     subprofile_id={subprofileID}
+    serviceLink={serviceLink}
     isSent={isSent}
   />;
 

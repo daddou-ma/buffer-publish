@@ -125,6 +125,7 @@ PostFooter.propTypes = {
   }).isRequired,
   dragging: PropTypes.bool,
   onRequeueClick: PropTypes.func,
+  serviceLink: PropTypes.string,
   isSent: PropTypes.bool,
 };
 
