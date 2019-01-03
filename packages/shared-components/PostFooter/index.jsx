@@ -5,6 +5,7 @@ import {
   WarningIcon,
   ClockIcon,
   CircleInstReminderIcon,
+  Link,
 } from '@bufferapp/components';
 import {
   borderWidth,
@@ -46,16 +47,20 @@ const postControlsStyle = {
 };
 
 /* eslint-disable react/prop-types */
+const renderPostAction = (postAction, serviceLink, isSent) => (
+  isSent ? <Link href={serviceLink} unstyled newTab>{postAction}</Link> : postAction
+);
 
-const renderText = ({ postDetails }, hasError, isSent) =>
+const renderText = ({ postDetails, serviceLink }, hasError, isSent) =>
   (<span>
     <Text
       size={'small'}
-      color={hasError ? 'torchRed' : (isSent ? 'shuttleGray': 'black')}
+      color={hasError ? 'torchRed' : (isSent ? 'shuttleGray' : 'black')}
     >
-      {hasError ? postDetails.error : postDetails.postAction}
+      {hasError ? postDetails.error : renderPostAction(postDetails.postAction, serviceLink, isSent)}
     </Text>
   </span>);
+
 
 const renderIcon = (hasError, isSent, isCustomScheduled, isInstagramReminder) => {
   if (!hasError && !isCustomScheduled && !isInstagramReminder) return;
@@ -81,15 +86,16 @@ const PostFooter = ({
   onShareNowClick,
   postDetails,
   dragging,
+  serviceLink,
   isSent,
 }) => {
   const hasError = postDetails.error && postDetails.error.length > 0;
   const isCustomScheduled = postDetails.isCustomScheduled;
   const isInstagramReminder = postDetails.isInstagramReminder;
-  return (<div style={isSent? sentPostDetailsStyle : getPostDetailsStyle(dragging)}>
+  return (<div style={isSent ? sentPostDetailsStyle : getPostDetailsStyle(dragging)}>
     <div style={postActionDetailsStyle}>
       {renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder)}
-      {renderText({ postDetails }, hasError, isSent)}
+      {renderText({ postDetails, serviceLink }, hasError, isSent)}
     </div>
     { !isSent && (
       <div style={postControlsStyle}>
