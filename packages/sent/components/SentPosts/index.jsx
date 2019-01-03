@@ -46,6 +46,7 @@ const SentPosts = ({
   onComposerCreateSuccess,
   showComposer,
   editMode,
+  isManager,
 }) => {
   if (loading) {
     return (
@@ -81,7 +82,7 @@ const SentPosts = ({
         </div>
       </div>
       {showComposer && editMode &&
-        <ComposerPopover 
+        <ComposerPopover
           onSave={onComposerCreateSuccess}
           type={'sent'}
         />
@@ -94,6 +95,7 @@ const SentPosts = ({
         onImageClickNext={onImageClickNext}
         onImageClickPrev={onImageClickPrev}
         onImageClose={onImageClose}
+        isManager={isManager}
         isSent
       />
     </div>
@@ -125,6 +127,7 @@ SentPosts.propTypes = {
   onImageClickNext: PropTypes.func,
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
+  isManager: PropTypes.bool,
 };
 
 SentPosts.defaultProps = {
@@ -136,6 +139,8 @@ SentPosts.defaultProps = {
   total: 0,
   showComposer: false,
   editMode: false,
+  isManager: true,
+  onEditClick: () => {},
   onShareAgainClick: () => {},
   onImageClick: () => {},
   onImageClickNext: () => {},

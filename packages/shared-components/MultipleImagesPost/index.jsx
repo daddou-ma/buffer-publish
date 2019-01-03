@@ -52,6 +52,7 @@ const MultipleImagesPost = ({
   source_url: sourceUrl,
   subprofile_id: subprofileID,
   isSent,
+  isManager,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
@@ -114,6 +115,7 @@ const MultipleImagesPost = ({
       sourceUrl={sourceUrl}
       subprofileID={subprofileID}
       isSent={isSent}
+      isManager={isManager}
     >
       {children}
     </Post>
@@ -139,6 +141,7 @@ MultipleImagesPost.propTypes = {
   onImageClick: PropTypes.func,
   currentImage: PropTypes.number,
   isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
 };
 
 MultipleImagesPost.defaultProps = Post.defaultProps;

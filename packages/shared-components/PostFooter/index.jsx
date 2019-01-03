@@ -51,7 +51,7 @@ const renderText = ({ postDetails }, hasError, isSent) =>
   (<span>
     <Text
       size={'small'}
-      color={hasError ? 'torchRed' : (isSent ? 'shuttleGray': 'black')}
+      color={hasError ? 'torchRed' : (isSent ? 'shuttleGray' : 'black')}
     >
       {hasError ? postDetails.error : postDetails.postAction}
     </Text>
@@ -82,16 +82,17 @@ const PostFooter = ({
   postDetails,
   dragging,
   isSent,
+  isManager,
 }) => {
   const hasError = postDetails.error && postDetails.error.length > 0;
   const isCustomScheduled = postDetails.isCustomScheduled;
   const isInstagramReminder = postDetails.isInstagramReminder;
-  return (<div style={isSent? sentPostDetailsStyle : getPostDetailsStyle(dragging)}>
+  return (<div style={isSent ? sentPostDetailsStyle : getPostDetailsStyle(dragging)}>
     <div style={postActionDetailsStyle}>
       {renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder)}
       {renderText({ postDetails }, hasError, isSent)}
     </div>
-    { !isSent && (
+    { !isSent && isManager && (
       <div style={postControlsStyle}>
         <PostFooterButtons
           error={postDetails.error}
@@ -126,6 +127,7 @@ PostFooter.propTypes = {
   dragging: PropTypes.bool,
   onRequeueClick: PropTypes.func,
   isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
 };
 
 PostFooter.defaultProps = {
@@ -133,6 +135,7 @@ PostFooter.defaultProps = {
   isConfirmingDelete: false,
   isWorking: false,
   dragging: false,
+  isManager: true,
 };
 
 export default PostFooter;

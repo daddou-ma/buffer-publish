@@ -6,15 +6,25 @@ import { actions } from './reducer';
 
 import QueuedPosts from './components/QueuedPosts';
 
-const formatPostLists = (posts) => {
+const formatPostLists = (isManager, posts) => {
   const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
   let lastHeader = null;
   return orderedPosts.reduce((acc, post, index) => {
     if (lastHeader !== post.day) {
       lastHeader = post.day;
-      acc.push({ queueItemType: 'header', text: post.day, id: `header-${index}` });
+      acc.push({
+        queueItemType: 'header',
+        text: post.day,
+        id: `header-${index}`,
+        isManager,
+      });
     }
-    acc.push({ queueItemType: 'post', index, ...post });
+    acc.push({
+      queueItemType: 'post',
+      isManager,
+      index,
+      ...post,
+    });
     return acc;
   }, []);
 };
@@ -30,7 +40,10 @@ export default connect(
         loadingMore: profileQueuePosts.loadingMore,
         moreToLoad: profileQueuePosts.moreToLoad,
         page: profileQueuePosts.page,
-        postLists: formatPostLists(profileQueuePosts.posts),
+        postLists: formatPostLists(
+          profileData.isManager,
+          profileQueuePosts.posts,
+        ),
         total: profileQueuePosts.total,
         enabledApplicationModes: state.queue.enabledApplicationModes,
         showComposer: state.queue.showComposer,
