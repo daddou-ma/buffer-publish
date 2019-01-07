@@ -28,7 +28,6 @@ const TabNavigation = ({
   shouldShowUpgradeCta,
   shouldShowNestedSettingsTab,
   showUpgradeModal,
-  hasDraftsFeatureFlip,
   profileId,
 }) => {
   const selectedChildTab = selectedChildTabId || 'general-settings';
@@ -43,13 +42,13 @@ const TabNavigation = ({
         <Tab tabId={'queue'}>Queue</Tab>
         <Tab tabId={'sent'}>Sent Posts</Tab>
         {isBusinessAccount && <Tab tabId={'analytics'}>Analytics</Tab>}
-        {hasDraftsFeatureFlip && isBusinessAccount && isManager &&
+        {isBusinessAccount && isManager &&
           <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
         }
-        {hasDraftsFeatureFlip && isBusinessAccount && !isManager &&
+        {isBusinessAccount && !isManager &&
           <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
         }
-        {hasDraftsFeatureFlip && isBusinessAccount &&
+        {isBusinessAccount &&
           <Tab tabId={'drafts'}>Drafts</Tab>
         }
         <Tab tabId={'settings'}>Settings</Tab>
@@ -93,7 +92,6 @@ const TabNavigation = ({
 
 TabNavigation.defaultProps = {
   shouldShowUpgradeCta: false,
-  hasDraftsFeatureFlip: false,
   shouldShowNestedSettingsTab: false,
   selectedChildTabId: null,
   profileId: null,
@@ -106,7 +104,6 @@ TabNavigation.propTypes = {
   onTabClick: PropTypes.func.isRequired,
   shouldShowUpgradeCta: PropTypes.bool.isRequired,
   showUpgradeModal: PropTypes.func.isRequired,
-  hasDraftsFeatureFlip: PropTypes.bool,
   onChildTabClick: PropTypes.func.isRequired,
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,

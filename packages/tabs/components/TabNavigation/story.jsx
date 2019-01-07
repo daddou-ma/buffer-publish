@@ -48,6 +48,5 @@ storiesOf('TabNavigation', module)
       onChildTabClick={action('child-tab-click')}
       showUpgradeModal={action('show-upgrade-modal')}
       shouldShowUpgradeCta
-      hasDraftsFeatureFlip
     />
   ));
