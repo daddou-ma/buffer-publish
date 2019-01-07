@@ -35,6 +35,7 @@ const LinkShortening = ({
   }));
   const hasShortenersWithLogins = (linkShorteners && linkShorteners.filter(shortener => shortener.login)) || [];
   const isBitlyConnected = hasShortenersWithLogins.length > 0;
+
   if (profileService === 'pinterest') {
     return (
       <LinkShorteningWrapper
@@ -47,7 +48,9 @@ const LinkShortening = ({
           <div
             style={pinterestSectionStyling}
           >
-            <Text>
+            <Text
+              size={'small'}
+            >
               Sadly, at the moment Pinterest does not allow posting of shortened links. <br />
               For more,
               read all about it <a
@@ -76,7 +79,7 @@ const LinkShortening = ({
       isBitlyConnected={isBitlyConnected}
     >
       <div style={textWrapperStyle}>
-        <Text size="mini">
+        <Text size="small">
           Are your links feeling a little long? Well worry no longer, choose one of our link
           shorteners or connect your own bit.ly account and Buffer will make sure that your
           links are shortened whenever you post.
