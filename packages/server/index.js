@@ -21,9 +21,12 @@ const maintenanceHandler = require('./maintenanceHandler');
 const { sendFavicon } = require('./lib/favicon');
 const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
 const serialize = require('serialize-javascript');
+const multer = require('multer');
 
 const app = express();
 const server = http.createServer(app);
+const multiBodyParser = multer();
+const composerAjaxBuffemetrics = require('./lib/composerAjaxBuffermetrics');
 
 // Favicon
 app.get(
@@ -155,6 +158,17 @@ app.use(
     debug: !isProduction,
     trackVisits: true,
   }),
+);
+
+/**
+ * The composer expects this URL to exist and accept
+ * metrics data. It does on buffer-web, but not here
+ * in publish, so we create it here.
+ */
+app.post('/ajax/buffermetrics',
+  // needed to parse the multipart FormData
+  multiBodyParser.fields([]),
+  composerAjaxBuffemetrics,
 );
 
 // make sure we have a valid session
