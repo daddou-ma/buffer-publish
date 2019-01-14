@@ -94,6 +94,7 @@ const PostFooter = ({
   dragging,
   serviceLink,
   isSent,
+  isManager,
 }) => {
   const hasError = postDetails.error && postDetails.error.length > 0;
   const isCustomScheduled = postDetails.isCustomScheduled;
@@ -103,7 +104,7 @@ const PostFooter = ({
       {renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder)}
       {renderText({ postDetails, serviceLink }, hasError, isSent)}
     </div>
-    { !isSent && (
+    { !isSent && isManager && (
       <div style={postControlsStyle}>
         <PostFooterButtons
           error={postDetails.error}
@@ -139,6 +140,7 @@ PostFooter.propTypes = {
   onRequeueClick: PropTypes.func,
   serviceLink: PropTypes.string,
   isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
 };
 
 PostFooter.defaultProps = {
@@ -146,6 +148,7 @@ PostFooter.defaultProps = {
   isConfirmingDelete: false,
   isWorking: false,
   dragging: false,
+  isManager: true,
 };
 
 export default PostFooter;

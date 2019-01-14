@@ -39,9 +39,12 @@ const InstagramDirectPosting = ({
         </Text>
         </div>
         <div style={textWrapperStyle}>
-          <Text>
-            Buffer can now post directly to Instagram, all you need to do is switch Instagram
-            profile to a business profile. We've created a guide to walk you through the process.
+          <Text
+            size={'small'}
+          >
+            Buffer can now post directly to Instagram, all you need to do is switch
+            Instagram profile to a business profile. We&rsquo;ve created a guide to
+            walk you through the process.
           </Text>
         </div>
       </div>

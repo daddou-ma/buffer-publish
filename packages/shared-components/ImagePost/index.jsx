@@ -69,6 +69,7 @@ const ImagePost = ({
   subprofiles,
   serviceLink,
   isSent,
+  isManager,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -135,6 +136,7 @@ const ImagePost = ({
       subprofiles={subprofiles}
       serviceLink={serviceLink}
       isSent={isSent}
+      isManager={isManager}
     >
       {children}
     </Post>
@@ -160,6 +162,7 @@ ImagePost.propTypes = {
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
   isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
 };
 
 ImagePost.defaultProps = ImagePost.defaultProps;

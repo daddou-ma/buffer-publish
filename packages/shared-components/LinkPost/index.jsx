@@ -8,7 +8,6 @@ import {
   Text,
 } from '@bufferapp/components';
 import Post from '../Post';
-import PostFooter from "../PostFooter";
 
 const postContentStyle = {
   display: 'flex',
@@ -67,6 +66,7 @@ const LinkPost = ({
   subprofile_id: subprofileID,
   serviceLink,
   isSent,
+  isManager,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -148,6 +148,7 @@ const LinkPost = ({
       sourceUrl={sourceUrl}
       serviceLink={serviceLink}
       isSent={isSent}
+      isManager={isManager}
     >
       {children}
     </Post>
@@ -172,6 +173,7 @@ LinkPost.propTypes = {
   }).isRequired,
   text: PropTypes.string.isRequired,
   isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
 };
 
 LinkPost.defaultProps = Post.defaultProps;

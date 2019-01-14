@@ -60,7 +60,11 @@ const LinkShorteningWrapper = ({
         style={startSectionStyles}
       >
         <div style={textWrapperStyle}>
-          <Text color={'outerSpace'}>Link Shortening</Text>
+          <Text
+            color={'black'}
+          >
+            Link Shortening
+          </Text>
         </div>
         {children}
       </div>
@@ -83,6 +87,7 @@ const LinkShorteningWrapper = ({
               options={linkList}
               onChange={onOptionSelect}
               value={selectedValue && selectedValue[0].value}
+              size={'small'}
             />
           </div>
           <ConnectBitlyToggler

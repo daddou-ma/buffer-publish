@@ -36,6 +36,11 @@ describe('Sent', () => {
           is_business_user: false,
         },
       },
+      profileSidebar: {
+        selectedProfile: {
+          isManager: true,
+        },
+      },
     });
     const wrapper = mount(
       <Provider store={store}>

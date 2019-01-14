@@ -28,6 +28,7 @@ const renderPostList = ({
   onDropPost,
   onShareAgainClick,
   isSent,
+  isManager,
 }) =>
   <div style={postListStyle}>
     <PostList
@@ -47,6 +48,7 @@ const renderPostList = ({
       onDropPost={onDropPost}
       onShareAgainClick={onShareAgainClick}
       isSent={isSent}
+      isManager={isManager}
     />
   </div>;
 
@@ -67,6 +69,7 @@ const PostLists = ({
   onDropPost,
   onShareAgainClick,
   isSent,
+  isManager,
 }) =>
   <List
     items={postLists.map((postList, index) =>
@@ -86,6 +89,7 @@ const PostLists = ({
         onDropPost,
         onShareAgainClick,
         isSent,
+        isManager,
       }),
     )}
     fillContainer
@@ -115,6 +119,7 @@ PostLists.propTypes = {
   onDropPost: PropTypes.func,
   onShareAgainClick: PropTypes.func,
   isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
 };
 
 PostLists.defaultProps = {

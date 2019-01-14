@@ -33,6 +33,7 @@ const VideoPost = ({
   subprofile_id: subprofileID,
   serviceLink,
   isSent,
+  isManager,
 }) =>
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
@@ -66,6 +67,7 @@ const VideoPost = ({
     subprofile_id={subprofileID}
     serviceLink={serviceLink}
     isSent={isSent}
+    isManager={isManager}
   />;
 
 VideoPost.propTypes = ImagePost.propTypes;

@@ -138,6 +138,7 @@ const Post = ({
   profileService,
   serviceLink,
   isSent,
+  isManager,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
@@ -165,6 +166,7 @@ const Post = ({
           isSent={isSent}
         />
         <PostFooter
+          isManager={isManager}
           isDeleting={isDeleting}
           isConfirmingDelete={isConfirmingDelete}
           isWorking={isWorking}
@@ -242,6 +244,7 @@ Post.defaultProps = {
   isWorking: false,
   fixed: false,
   isSent: false,
+  isManager: true,
 };
 
 export default Post;

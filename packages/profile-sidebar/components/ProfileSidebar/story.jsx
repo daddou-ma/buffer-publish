@@ -13,7 +13,7 @@ const lotsOfProfiles = () =>
 
 const store = createStore();
 const translations = {
-  connectButton: 'Manage Social Accounts',
+  connectButton: 'Add a Social Account',
   lockedList: 'Locked Social Accounts',
   lockedListTooltip1: 'Sorry, your current plan lets you access up to ',
   lockedListTooltip2: ' social accounts at the same time (and any business accounts you’re a team member on as long as the owner is on a Business Plan). We’ll keep these other ones safe and sound until you’re ready to upgrade!',
