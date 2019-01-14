@@ -48,7 +48,13 @@ const postControlsStyle = {
 
 /* eslint-disable react/prop-types */
 const renderPostAction = (postAction, serviceLink, isSent) => (
-  isSent ? <Link href={serviceLink} unstyled newTab>{postAction}</Link> : postAction
+  isSent ?
+    <Link href={serviceLink} unstyled newTab>
+      <Text size={'small'} color={'shuttleGray'}>
+        {postAction}
+      </Text>
+    </Link> :
+  postAction
 );
 
 const renderText = ({ postDetails, serviceLink }, hasError, isSent) =>
