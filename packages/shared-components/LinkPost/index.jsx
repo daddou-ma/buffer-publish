@@ -64,6 +64,7 @@ const LinkPost = ({
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
+  serviceLink,
   isSent,
   isManager,
 }) => {
@@ -145,6 +146,7 @@ const LinkPost = ({
       subprofiles={subprofiles}
       subprofileID={subprofileID}
       sourceUrl={sourceUrl}
+      serviceLink={serviceLink}
       isSent={isSent}
       isManager={isManager}
     >

@@ -31,6 +31,7 @@ const VideoPost = ({
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
+  serviceLink,
   isSent,
   isManager,
 }) =>
@@ -64,6 +65,7 @@ const VideoPost = ({
     service_geolocation_name={locationName}
     source_url={sourceUrl}
     subprofile_id={subprofileID}
+    serviceLink={serviceLink}
     isSent={isSent}
     isManager={isManager}
   />;

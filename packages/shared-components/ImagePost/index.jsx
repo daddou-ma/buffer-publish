@@ -67,6 +67,7 @@ const ImagePost = ({
   source_url: sourceUrl,
   subprofile_id: subprofileID,
   subprofiles,
+  serviceLink,
   isSent,
   isManager,
 }) => {
@@ -133,6 +134,7 @@ const ImagePost = ({
       sourceUrl={sourceUrl}
       subprofileID={subprofileID}
       subprofiles={subprofiles}
+      serviceLink={serviceLink}
       isSent={isSent}
       isManager={isManager}
     >

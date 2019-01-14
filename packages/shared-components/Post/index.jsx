@@ -136,6 +136,7 @@ const Post = ({
   fixed,
   statistics,
   profileService,
+  serviceLink,
   isSent,
   isManager,
 }) =>
@@ -177,6 +178,7 @@ const Post = ({
           postDetails={postDetails}
           dragging={dragging}
           onRequeueClick={onRequeueClick}
+          serviceLink={serviceLink}
           isSent={isSent}
         />
         <FeatureLoader
@@ -227,6 +229,7 @@ Post.commonPropTypes = {
   hovering: PropTypes.bool,
   fixed: PropTypes.bool,
   onDropPost: PropTypes.func,
+  serviceLink: PropTypes.string,
   isSent: PropTypes.bool,
 };
 
