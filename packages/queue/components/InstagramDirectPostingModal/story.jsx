@@ -11,13 +11,13 @@ storiesOf('InstagramDirectPostingModal', module)
     <InstagramDirectPostingModal
       hasBusinessProfile
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideModal={action('onHideModal')}
+      onHideInstagramModal={action('onHideInstagramModal')}
     />
   ))
   .add('is not IG Business Profile', () => (
     <InstagramDirectPostingModal
       hasBusinessProfile={false}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideModal={action('onHideModal')}
+      onHideInstagramModal={action('onHideInstagramModal')}
     />
   ));

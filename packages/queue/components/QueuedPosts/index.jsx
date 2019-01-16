@@ -12,11 +12,12 @@ import {
 } from '@bufferapp/publish-shared-components';
 
 import ComposerPopover from '@bufferapp/publish-composer-popover';
+import FeatureLoader from '@bufferapp/product-features';
+import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
+import InstagramDirectPostingModal from '../InstagramDirectPostingModal';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
 import MiniCalendar from '../MiniCalendar';
-import FeatureLoader from '@bufferapp/product-features';
-import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -71,6 +72,11 @@ const QueuedPosts = ({
   isInstagramProfile,
   isInstagramBusiness,
   onSetUpDirectPostingClick,
+  hasBusinessProfile,
+  showInstagramModal,
+  onDirectPostingClick,
+  onHideInstagramModal,
+
 }) => {
   if (loading) {
     return (
@@ -120,7 +126,14 @@ const QueuedPosts = ({
 
       </div>
       {isInstagramProfile && !isInstagramBusiness &&
-        <InstagramDirectPostingBanner onSetUpDirectPostingClick={onSetUpDirectPostingClick} />
+        <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
+      }
+      {showInstagramModal &&
+        <InstagramDirectPostingModal
+          hasBusinessProfile={hasBusinessProfile}
+          onSetUpDirectPostingClick={onSetUpDirectPostingClick}
+          onHideInstagramModal={onHideInstagramModal}
+        />
       }
       {!!paused && <QueuePausedBar handleClickUnpause={onUnpauseClick} />}
       {total < 1 &&
@@ -199,6 +212,10 @@ QueuedPosts.propTypes = {
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
+  hasBusinessProfile: PropTypes.bool,
+  showInstagramModal: PropTypes.bool,
+  onDirectPostingClick: PropTypes.func.isRequired,
+  onHideInstagramModal: PropTypes.func.isRequired,
 };
 
 QueuedPosts.defaultProps = {
@@ -216,6 +233,8 @@ QueuedPosts.defaultProps = {
   subprofiles: [],
   isInstagramProfile: false,
   isInstagramBusiness: false,
+  hasBusinessProfile: false,
+  showInstagramModal: false,
 };
 
 export default QueuedPosts;

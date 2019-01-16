@@ -28,8 +28,8 @@ const buttonWrapperStyle = {
 
 const InstagramDirectPostingModal = ({
   hasBusinessProfile,
-  onDirectPostingClick,
-  onHideModal,
+  onSetUpDirectPostingClick,
+  onHideInstagramModal,
 }) => (<div>
   <Popover>
     <Card noPadding>
@@ -56,10 +56,10 @@ const InstagramDirectPostingModal = ({
         }
         <Divider />
         <div style={buttonWrapperStyle}>
-          <Button onClick={onHideModal} borderless>
+          <Button onClick={onHideInstagramModal} borderless>
             No thanks, I might do it later
           </Button>
-          <Button onClick={onDirectPostingClick} disabled={!hasBusinessProfile}>
+          <Button onClick={onSetUpDirectPostingClick} disabled={!hasBusinessProfile}>
             Yes! Let&rsquo;s do it!
           </Button>
         </div>
@@ -70,8 +70,8 @@ const InstagramDirectPostingModal = ({
 
 InstagramDirectPostingModal.propTypes = {
   hasBusinessProfile: PropTypes.bool.isRequired,
-  onDirectPostingClick: PropTypes.func.isRequired,
-  onHideModal: PropTypes.func.isRequired,
+  onSetUpDirectPostingClick: PropTypes.func.isRequired,
+  onHideInstagramModal: PropTypes.func.isRequired,
 };
 
 export default InstagramDirectPostingModal;

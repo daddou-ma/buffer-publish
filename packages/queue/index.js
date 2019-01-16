@@ -56,10 +56,13 @@ export default connect(
         isInstagramProfile: profileData.type === 'instagram',
         isInstagramBusiness: profileData.isInstagramBusiness,
         paused: profileData.paused,
+        showInstagramModal: state.queue.showInstagramModal,
+        // hasBusinessProfile: //add way to tell if IG account is business or personal
       };
     }
     return {};
   },
+
   (dispatch, ownProps) => ({
     onEditClick: (post) => {
       dispatch(actions.handleEditClick({
@@ -153,6 +156,12 @@ export default connect(
       dispatch(generalSettingsActions.handleSetUpDirectPostingClick({
         profileId: ownProps.profileId,
       }));
+    },
+    onDirectPostingClick: () => {
+      dispatch(actions.handleOpenInstagramModal());
+    },
+    onHideInstagramModal: () => {
+      dispatch(actions.handleHideInstagramModal());
     },
   }),
 )(QueuedPosts);
