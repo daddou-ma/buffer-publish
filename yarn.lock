@@ -653,11 +653,12 @@
     "@bufferapp/nav-sidebar" "^0.79.1"
     numeral "2.0.6"
 
-"@bufferapp/ui@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-1.5.2.tgz#bff4cd5d3a5a73fa205df5dde57b3cbfa8b0b727"
-  integrity sha512-/AJnN+0f1ilppi0IvUNgn7I2CNVexBsJFrhLckSlBN82wu2L++sFd7JUh90xqaeDE73MLJ58KV3RZ9WQHcFGrQ==
+"@bufferapp/ui@1.6.3":
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-1.6.3.tgz#9ca3471ff04f60eb306bfc8f2b84fc15ed429c88"
+  integrity sha512-HoiDgLbN/yUDzLGG/GZ8s095pZEtOBq1TckTOyTeuQFJuqyA4yinemLQUsYLRVhfMWZWmFJbdmM3dP3lEw5ylQ==
   dependencies:
+    immutability-helper "^2.9.0"
     react "16.6.3"
     react-dom "16.6.3"
     react-hotkeys "^1.1.4"
@@ -6854,6 +6855,13 @@ immediate@~3.0.5:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
   integrity sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=
+
+immutability-helper@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.9.0.tgz#04a1c646300cd3a68aa5dc1daa7758da2ca75292"
+  integrity sha512-2LYtDuGugMLyoFV0qGvblnq39E2VVQ9m4dDktlRLVBBVV1LnUMK0rlqkbtlUjfT1UJO876OobtPlNZTEbOOYVQ==
+  dependencies:
+    invariant "^2.2.0"
 
 immutable@3.7.6, immutable@~3.7.4:
   version "3.7.6"
