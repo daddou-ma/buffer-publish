@@ -6,6 +6,7 @@ import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
 
 const GeneralSettings = ({
+  isInstagramProfile,
   isInstagramBusiness,
   onSetUpDirectPostingClick,
   linkShorteners,
@@ -23,7 +24,7 @@ const GeneralSettings = ({
   features,
 }) => (
   <div>
-    {!isInstagramBusiness &&
+    {isInstagramProfile && !isInstagramBusiness &&
     <InstagramDirectPosting
       onSetUpDirectPostingClick={onSetUpDirectPostingClick}
     />
@@ -50,6 +51,7 @@ const GeneralSettings = ({
 );
 
 GeneralSettings.defaultProps = {
+  isInstagramProfile: false,
   isInstagramBusiness: false,
   profileService: null,
   linkShorteners: null,
@@ -63,6 +65,7 @@ GeneralSettings.defaultProps = {
 
 GeneralSettings.propTypes = {
   isContributor: PropTypes.bool,
+  isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool.isRequired,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
   onDisconnectBitlyURLClick: PropTypes.func.isRequired,
