@@ -10,7 +10,7 @@ export default connect(
     (state, ownProps) => {
       const profileData = state.profileSidebar.profiles.find(p => p.id === ownProps.profileId);
       return {
-        isInstagramProfile: profileData.type === 'instagram',
+        isInstagramProfile: profileData ? profileData.type === 'instagram' : false,
         isInstagramBusiness: state.generalSettings.isInstagramBusiness,
         profileId: state.generalSettings.profileId,
         profileService: state.generalSettings.profileService,
