@@ -1,5 +1,9 @@
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const PostCSSImport = require('postcss-import');
+const PostCSSCustomProperties = require('postcss-custom-properties');
+const PostCSSCalc = require('postcss-calc');
+const PostCSSColorFunction = require('postcss-color-function');
 
 const vendor = ['react', 'react-dom', '@bufferapp/components'];
 const { analyzePackagesWhitelist, analyzeLessLoader } = require('../../analyze.config.js');
@@ -38,6 +42,7 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'postcss-loader',
         ],
       },
       analyzeLessLoader,
@@ -49,6 +54,21 @@ module.exports = {
       chunkFilename: '[name].css',
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname,
+        // PostCSS plugins
+        // Note: CSS preprocessing comes with limitations, and generally only applies to
+        // what can be determined or calculated ahead of time (e.g. what isn't dependent
+        // on the DOM or page's dimensions)
+        postcss: [
+          PostCSSImport, // Allows @import 'file.css' to be inlined
+          PostCSSCustomProperties, // Convert W3C CSS Custom Props to more compatible CSS
+          PostCSSCalc, // Convert W3C calc function to more compatible CSS
+          PostCSSColorFunction, // Convert W3C color function to more compatible CSS
+        ],
+      },
+    }),
   ],
   optimization: {
     splitChunks: {
