@@ -18,7 +18,7 @@ storiesOf('GeneralSettings', module)
   ))
   .add('direct posting enabled', () => (
     <GeneralSettings
-      isInstagramProfile={false}
+      isInstagramProfile
       isInstagramBusiness
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       features={features}
@@ -26,8 +26,8 @@ storiesOf('GeneralSettings', module)
   ))
   .add('Google analytics enabled', () => (
     <GeneralSettings
-      isInstagramProfile={false}
-      isInstagramBusiness={true}
+      isInstagramProfile
+      isInstagramBusiness
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       features={features}
     />
