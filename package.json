@@ -75,7 +75,6 @@
     "moment": "2.22.2",
     "moment-timezone": "0.5.13",
     "object-path": "0.11.4",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-calc": "5.2.0",
     "postcss-color-function": "2.0.1",
     "postcss-custom-properties": "5.0.0",
