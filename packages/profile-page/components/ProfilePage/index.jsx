@@ -72,7 +72,6 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
     case 'b4bCalendar':
     case 'settings':
       switch (childTabId) {
-        case 'b4b-billing':
         case 'posting-schedule':
           return (
             <PostingSchedule

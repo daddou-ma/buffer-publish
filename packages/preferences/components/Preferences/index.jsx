@@ -5,12 +5,15 @@ import { Link, ArrowLeftIcon, Text } from '@bufferapp/components';
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
+import FeatureLoader from '@bufferapp/product-features';
 import TabsNames from '../../constants';
 import Security from '../Security';
 import General from '../General';
+import { openBillingWindow } from '../../../tabs/utils';
 
 const PreferenceContent = ({ tabId, onUnknownTab }) => {
   switch (tabId) {
+    case TabsNames.BILLING:
     case TabsNames.GENERAL:
       return <General />;
     case TabsNames.SECURITY:
@@ -65,6 +68,11 @@ const Preferences = ({
           <Tab tabId={TabsNames.GENERAL}>General</Tab>
           <Tab tabId={TabsNames.SECURITY}>Security</Tab>
           <Tab tabId={TabsNames.APPS_EXTRAS}>Apps & Extras</Tab>
+          <FeatureLoader supportedFeatures={'b4b_billing'}>
+            <Tab tabId={'b4b-billing'} onClick={() => openBillingWindow()}>
+              Billing
+            </Tab>
+          </FeatureLoader>
         </Tabs>
       </div>
       <Link

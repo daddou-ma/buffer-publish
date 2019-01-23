@@ -6,7 +6,7 @@ import {
 } from '@bufferapp/publish-shared-components';
 import { Button, Text } from '@bufferapp/components';
 import FeatureLoader from '@bufferapp/product-features';
-import { openCalendarWindow, openBillingWindow } from '../../utils';
+import { openCalendarWindow } from '../../utils';
 
 const upgradeCtaStyle = {
   transform: 'translate(0, 1px)',
@@ -84,11 +84,6 @@ const TabNavigation = ({
         >
           <Tab tabId={'general-settings'}>General</Tab>
           <Tab tabId={'posting-schedule'}>Posting Schedule</Tab>
-          <FeatureLoader supportedFeatures={'b4b_billing'}>
-            <Tab tabId={'b4b-billing'} onClick={() => openBillingWindow()} secondary>
-              Billing
-            </Tab>
-          </FeatureLoader>
         </Tabs>
       }
     </div>
