@@ -200,13 +200,15 @@ export default (state = initialState, action) => {
 
 export const actions = {
   handleShareAgainClick: ({ post, profileId }) => {
-    post.scheduled_at = null;
-    post.due_at = null;
     return {
       type: actionTypes.OPEN_COMPOSER,
       updateId: post.id,
       editMode: false,
-      post,
+      post: {
+        ...post,
+        scheduled_at: null,
+        due_at: null,
+      },
       profileId,
     };
   },
