@@ -12,6 +12,7 @@ export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
 });
 
 const initialState = {
+  isInstagramProfile: false,
   isInstagramBusiness: false,
   profileId: null,
   showGACustomizationForm: false,
@@ -23,6 +24,7 @@ export default (state = initialState, action) => {
     case profileActionTypes.SELECT_PROFILE:
       return {
         ...state,
+        isInstagramProfile: action.profile.service === 'instagram',
         isInstagramBusiness: action.profile.isInstagramBusiness,
         googleAnalyticsEnabled: action.profile.googleAnalyticsEnabled,
         profileId: action.profileId,

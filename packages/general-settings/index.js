@@ -7,21 +7,18 @@ export const GeneralSettingsWithFeatureLoader = WithFeatureLoader(GeneralSetting
 
 
 export default connect(
-    (state, ownProps) => {
-      const profileData = state.profileSidebar.profiles.find(p => p.id === ownProps.profileId);
-      return {
-        isInstagramProfile: profileData ? profileData.type === 'instagram' : false,
-        isInstagramBusiness: state.generalSettings.isInstagramBusiness,
-        profileId: state.generalSettings.profileId,
-        profileService: state.generalSettings.profileService,
-        linkShorteners: state.generalSettings.linkShorteners,
-        loadingLinkShorteners: state.generalSettings.loadingLinkShorteners,
-        selectedShortener: state.generalSettings.selectedShortener,
-        isContributor: state.generalSettings.isContributor,
-        showGACustomizationForm: state.generalSettings.showGACustomizationForm,
-        googleAnalyticsIsEnabled: state.generalSettings.googleAnalyticsEnabled === 'enabled',
-      };
-    },
+    state => ({
+      isInstagramProfile: state.generalSettings.isInstagramProfile,
+      isInstagramBusiness: state.generalSettings.isInstagramBusiness,
+      profileId: state.generalSettings.profileId,
+      profileService: state.generalSettings.profileService,
+      linkShorteners: state.generalSettings.linkShorteners,
+      loadingLinkShorteners: state.generalSettings.loadingLinkShorteners,
+      selectedShortener: state.generalSettings.selectedShortener,
+      isContributor: state.generalSettings.isContributor,
+      showGACustomizationForm: state.generalSettings.showGACustomizationForm,
+      googleAnalyticsIsEnabled: state.generalSettings.googleAnalyticsEnabled === 'enabled',
+    }),
     (dispatch, ownProps) => ({
       onSetUpDirectPostingClick: () => {
         dispatch(actions.handleSetUpDirectPostingClick({
