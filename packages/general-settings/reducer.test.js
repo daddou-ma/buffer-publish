@@ -6,6 +6,7 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 describe('reducer', () => {
   it('should initialize default state', () => {
     const stateAfter = {
+      isInstagramProfile: false,
       isInstagramBusiness: false,
       profileId: null,
       googleAnalyticsIsEnabled: false,
@@ -21,6 +22,7 @@ describe('reducer', () => {
 
   it('should handle SELECT_PROFILE action type', () => {
     const stateAfter = {
+      isInstagramProfile: false,
       isInstagramBusiness: false,
       profileId: '123',
       profileService: 'twitter',
@@ -45,6 +47,7 @@ describe('reducer', () => {
   it('should SHOW_GA_CUSTOMIZATION_FORM', () => {
     const stateAfter = {
       showGACustomizationForm: false,
+      isInstagramProfile: false,
       isInstagramBusiness: false,
       googleAnalyticsIsEnabled: false,
       profileId: null,
@@ -62,6 +65,7 @@ describe('reducer', () => {
 
   it('should toggle GA FETCH_SUCCESS action type', () => {
     const stateAfter = {
+      isInstagramProfile: false,
       isInstagramBusiness: false,
       googleAnalyticsIsEnabled: false,
       profileId: null,
