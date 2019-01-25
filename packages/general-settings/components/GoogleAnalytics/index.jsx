@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Text, Toggle, Button, Input, Card, Divider,
 } from '@bufferapp/components';
-import LinkShortening from "../LinkShortening";
+import FeatureLoader from '@bufferapp/product-features';
 
 const googleAnalyticsWrapperStyle = {
   display: 'flex',
@@ -167,16 +167,18 @@ const GoogleAnalytics = ({
         </div>
       }
       {!showGACustomizationForm && googleAnalyticsIsEnabled &&
-        <div style={customizeButtonStyle}>
-          <Button
-            secondary
-            onClick={() => {
-              onShowGACustomizationFormClick();
-            }}
-          >
-            Customize Campaign Tracking
-          </Button>
-        </div>
+        <FeatureLoader supportedFeatures={'b4b_ga_custom_form'}>
+          <div style={customizeButtonStyle}>
+            <Button
+              secondary
+              onClick={() => {
+                onShowGACustomizationFormClick();
+              }}
+            >
+              Customize Campaign Tracking
+            </Button>
+          </div>
+        </FeatureLoader>
       }
     </div>
 );
