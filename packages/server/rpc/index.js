@@ -37,6 +37,7 @@ const changeLinkShortener = require('./changeLinkShortener');
 const approveDraftMethod = require('./approveDraft');
 const changeDraftStatusMethod = require('./changeDraftStatus');
 const toggleGoogleAnalytics = require('./toggleGoogleAnalytics');
+const checkInstagramBusinessMethod = require('./checkInstagramBusiness');
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
 const average = require('./analytics/average');
@@ -91,4 +92,5 @@ module.exports = rpc(
   hourly,
   posts,
   summaryMethod,
+  checkInstagramBusinessMethod,
 );

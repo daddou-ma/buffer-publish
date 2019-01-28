@@ -103,6 +103,14 @@ export default ({ dispatch, getState }) => next => (action) => {
         message: action.error,
       }));
       break;
+    case actionTypes.OPEN_IG_MODAL:
+      dispatch(dataFetchActions.fetch({
+        name: 'checkInstagramBusiness',
+        args: {
+          profileId: action.profileId,
+        },
+      }));
+      break;
     case actionTypes.GET_NUMBER_POSTS:
       dispatch(dataFetchActions.fetch({
         name: 'getNumberOfPosts',

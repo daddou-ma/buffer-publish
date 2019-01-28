@@ -27,7 +27,7 @@ const buttonWrapperStyle = {
 };
 
 const InstagramDirectPostingModal = ({
-  hasBusinessProfile,
+  isBusinessOnInstagram,
   onSetUpDirectPostingClick,
   onHideInstagramModal,
 }) => (<div>
@@ -43,12 +43,12 @@ const InstagramDirectPostingModal = ({
             directly from Buffer just as you can with any other network.
           </Text>
         </div>
-        {!hasBusinessProfile &&
+        {!isBusinessOnInstagram &&
           <div style={textWrapperStyle}>
             <Text size="mini" weight="medium">
               In order to set up direct posting you need to have an Instagram Business Profile. You
               can convert any profile to a Business Profile through the Instagram mobile app.&nbsp;
-              <Link newTab href="https://www.facebook.com/help/502981923235522">
+              <Link newTab href="https://faq.buffer.com/article/934-publish-instagram-direct-scheduling-set-up">
                 You can find the Instagram set up guide here.
               </Link>)
             </Text>
@@ -59,8 +59,8 @@ const InstagramDirectPostingModal = ({
           <Button onClick={onHideInstagramModal} borderless>
             No thanks, I might do it later
           </Button>
-          <Button onClick={onSetUpDirectPostingClick} disabled={!hasBusinessProfile}>
-            Yes! Let&rsquo;s do it!
+          <Button onClick={onSetUpDirectPostingClick}>
+            {!isBusinessOnInstagram ? "I've converted it to Business" : "Yes! Let's do it!"}
           </Button>
         </div>
       </div>
@@ -69,7 +69,7 @@ const InstagramDirectPostingModal = ({
 </div>);
 
 InstagramDirectPostingModal.propTypes = {
-  hasBusinessProfile: PropTypes.bool.isRequired,
+  isBusinessOnInstagram: PropTypes.bool.isRequired,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
   onHideInstagramModal: PropTypes.func.isRequired,
 };

@@ -72,10 +72,10 @@ const QueuedPosts = ({
   isInstagramProfile,
   isInstagramBusiness,
   onSetUpDirectPostingClick,
-  hasBusinessProfile,
   showInstagramModal,
   onDirectPostingClick,
   onHideInstagramModal,
+  isBusinessOnInstagram,
 
 }) => {
   if (loading) {
@@ -130,9 +130,10 @@ const QueuedPosts = ({
       }
       {showInstagramModal &&
         <InstagramDirectPostingModal
-          hasBusinessProfile={hasBusinessProfile}
           onSetUpDirectPostingClick={onSetUpDirectPostingClick}
           onHideInstagramModal={onHideInstagramModal}
+          instagramSetupURL={instagramSetupURL}
+          isBusinessOnInstagram={isBusinessOnInstagram}
         />
       }
       {!!paused && <QueuePausedBar handleClickUnpause={onUnpauseClick} />}
@@ -212,7 +213,6 @@ QueuedPosts.propTypes = {
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
-  hasBusinessProfile: PropTypes.bool,
   showInstagramModal: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,
   onHideInstagramModal: PropTypes.func.isRequired,
@@ -233,8 +233,8 @@ QueuedPosts.defaultProps = {
   subprofiles: [],
   isInstagramProfile: false,
   isInstagramBusiness: false,
-  hasBusinessProfile: false,
   showInstagramModal: false,
+  instagramSetupURL: '',
 };
 
 export default QueuedPosts;

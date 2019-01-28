@@ -38,6 +38,7 @@ export const initialState = {
   editMode: false,
   editingPostId: '',
   showInstagramModal: false,
+  isBusinessOnInstagram: null,
 };
 
 const profileInitialState = {
@@ -457,6 +458,16 @@ export default (state = initialState, action) => {
         ...state,
         enabledApplicationModes: action.result.enabledApplicationModes,
       };
+    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        isBusinessOnInstagram: action.result.is_business,
+      };
+    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        isBusinessOnInstagram: false,
+      };
     case actionTypes.OPEN_COMPOSER:
       return {
         ...state,
@@ -577,8 +588,9 @@ export const actions = {
     startDate,
     endDate,
   }),
-  handleOpenInstagramModal: () => ({
+  handleOpenInstagramModal: ({ profileId }) => ({
     type: actionTypes.OPEN_IG_MODAL,
+    profileId,
   }),
   handleHideInstagramModal: () => ({
     type: actionTypes.HIDE_IG_MODAL,

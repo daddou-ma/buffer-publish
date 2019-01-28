@@ -57,7 +57,7 @@ export default connect(
         isInstagramBusiness: profileData.isInstagramBusiness,
         paused: profileData.paused,
         showInstagramModal: state.queue.showInstagramModal,
-        // hasBusinessProfile: //add way to tell if IG account is business or personal
+        isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
       };
     }
     return {};
@@ -158,7 +158,9 @@ export default connect(
       }));
     },
     onDirectPostingClick: () => {
-      dispatch(actions.handleOpenInstagramModal());
+      dispatch(actions.handleOpenInstagramModal({
+        profileId: ownProps.profileId,
+      }));
     },
     onHideInstagramModal: () => {
       dispatch(actions.handleHideInstagramModal());
