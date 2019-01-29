@@ -32,7 +32,7 @@ const setUpDirectPostingStyle = {
 
 
 const InstagramDirectPosting = ({
-  onSetUpDirectPostingClick,
+  onDirectPostingClick,
 }) => (
   <div>
     <div style={instagramDirectPostingStyle}>
@@ -53,7 +53,7 @@ const InstagramDirectPosting = ({
       <div style={setUpDirectPostingStyle}>
         <Button
           fillContainer
-          onClick={() => { onSetUpDirectPostingClick(); }}
+          onClick={onDirectPostingClick}
         >
           Set up direct posting
         </Button>
@@ -64,7 +64,7 @@ const InstagramDirectPosting = ({
 );
 
 InstagramDirectPosting.propTypes = {
-  onSetUpDirectPostingClick: PropTypes.func.isRequired,
+  onDirectPostingClick: PropTypes.func.isRequired,
 };
 
 export default InstagramDirectPosting;
