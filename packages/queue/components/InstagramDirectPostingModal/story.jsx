@@ -9,15 +9,15 @@ storiesOf('InstagramDirectPostingModal', module)
   .addDecorator(checkA11y)
   .add('is IG Business Profile', () => (
     <InstagramDirectPostingModal
-      hasBusinessProfile
-      onDirectPostingClick={action('onDirectPostingClick')}
+      isBusinessOnInstagram
+      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onHideInstagramModal={action('onHideInstagramModal')}
     />
   ))
   .add('is not IG Business Profile', () => (
     <InstagramDirectPostingModal
-      hasBusinessProfile={false}
-      onDirectPostingClick={action('onDirectPostingClick')}
+      isBusinessOnInstagram={false}
+      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onHideInstagramModal={action('onHideInstagramModal')}
     />
   ));
