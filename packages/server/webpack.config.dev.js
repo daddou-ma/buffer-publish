@@ -12,6 +12,10 @@ const merged = merge.strategy({ plugins: 'prepend' })(
       publicPath: 'https://local.buffer.com:8080/static/',
     },
     devServer: {
+      allowedHosts: [
+        '.buffer.com',
+        '.local.buffer.com',
+      ],
       hot: true,
       publicPath: 'https://local.buffer.com:8080/static/',
       contentBase: false,
