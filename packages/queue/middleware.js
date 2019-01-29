@@ -4,6 +4,7 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
+import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes, actions } from './reducer';
 
@@ -59,6 +60,24 @@ export default ({ dispatch, getState }) => next => (action) => {
         }));
       }
       break;
+    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      if (action.args.recheck) {
+        if (action.result.is_business) {
+          dispatch(generalSettingsActions.handleSetUpDirectPostingClick({
+            profileId: action.args.profileId,
+          }));
+        } else {
+          dispatch(notificationActions.createNotification({
+            notificationType: 'error',
+            message: 'It seems you still don\'t have a Business Profile',
+          }));
+        }
+      }
+
+      if (action.args.callbackAction) {
+        dispatch(action.args.callbackAction);
+      }
+      break;
     case `deletePost_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
@@ -101,14 +120,6 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch(notificationActions.createNotification({
         notificationType: 'error',
         message: action.error,
-      }));
-      break;
-    case actionTypes.OPEN_IG_MODAL:
-      dispatch(dataFetchActions.fetch({
-        name: 'checkInstagramBusiness',
-        args: {
-          profileId: action.profileId,
-        },
       }));
       break;
     case actionTypes.GET_NUMBER_POSTS:

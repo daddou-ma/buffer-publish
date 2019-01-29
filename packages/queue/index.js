@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions } from './reducer';
 
 import QueuedPosts from './components/QueuedPosts';
@@ -158,8 +159,23 @@ export default connect(
       }));
     },
     onDirectPostingClick: () => {
-      dispatch(actions.handleOpenInstagramModal({
-        profileId: ownProps.profileId,
+      dispatch(dataFetchActions.fetch({
+        name: 'checkInstagramBusiness',
+        args: {
+          profileId: ownProps.profileId,
+          callbackAction: actions.handleOpenInstagramModal({
+            profileId: ownProps.profileId,
+          }),
+        },
+      }));
+    },
+    onCheckInstagramBusinessClick: () => {
+      dispatch(dataFetchActions.fetch({
+        name: 'checkInstagramBusiness',
+        args: {
+          profileId: ownProps.profileId,
+          recheck: true,
+        },
       }));
     },
     onHideInstagramModal: () => {

@@ -6,11 +6,9 @@ import {
   Text,
   Link,
   Divider,
-  Button,
 } from '@bufferapp/components';
-// import {
-//   Button,
-// } from '@bufferapp/ui/Button';
+
+import Button from '@bufferapp/ui/Button';
 
 const cardContentStyle = {
   maxWidth: '664px',
@@ -23,12 +21,14 @@ const textWrapperStyle = {
 };
 
 const buttonWrapperStyle = {
-  textAlign: 'right',
+  display: 'flex',
+  justifyContent: 'flex-end',
 };
 
 const InstagramDirectPostingModal = ({
   isBusinessOnInstagram,
   onSetUpDirectPostingClick,
+  onCheckInstagramBusinessClick,
   onHideInstagramModal,
 }) => (<div>
   <Popover>
@@ -56,12 +56,25 @@ const InstagramDirectPostingModal = ({
         }
         <Divider />
         <div style={buttonWrapperStyle}>
-          <Button onClick={onHideInstagramModal} borderless>
-            No thanks, I might do it later
-          </Button>
-          <Button onClick={onSetUpDirectPostingClick}>
-            {!isBusinessOnInstagram ? "I've converted it to Business" : "Yes! Let's do it!"}
-          </Button>
+          <Button
+            type="text"
+            onClick={onHideInstagramModal}
+            label="No thanks, I might do it later"
+          />
+          {isBusinessOnInstagram &&
+            <Button
+              type="primary"
+              onClick={onSetUpDirectPostingClick}
+              label="Yes! Let&rsquo;s do it!"
+            />
+          }
+          {!isBusinessOnInstagram &&
+            <Button
+              type="primary"
+              onClick={onCheckInstagramBusinessClick}
+              label="I&rsquo;ve converted it to Business"
+            />
+          }
         </div>
       </div>
     </Card>
@@ -72,6 +85,7 @@ InstagramDirectPostingModal.propTypes = {
   isBusinessOnInstagram: PropTypes.bool.isRequired,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
   onHideInstagramModal: PropTypes.func.isRequired,
+  onCheckInstagramBusinessClick: PropTypes.func.isRequired,
 };
 
 export default InstagramDirectPostingModal;
