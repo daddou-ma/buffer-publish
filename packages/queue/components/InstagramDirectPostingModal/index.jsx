@@ -6,9 +6,10 @@ import {
   Text,
   Link,
   Divider,
+  Button,
 } from '@bufferapp/components';
 
-import Button from '@bufferapp/ui/Button';
+// import Button from '@bufferapp/ui/Button';
 
 const cardContentStyle = {
   maxWidth: '664px',
@@ -21,8 +22,9 @@ const textWrapperStyle = {
 };
 
 const buttonWrapperStyle = {
-  display: 'flex',
-  justifyContent: 'flex-end',
+  textAlign: 'right',
+  // display: 'flex',
+  // justifyContent: 'flex-end',
 };
 
 const InstagramDirectPostingModal = ({
@@ -56,24 +58,18 @@ const InstagramDirectPostingModal = ({
         }
         <Divider />
         <div style={buttonWrapperStyle}>
-          <Button
-            type="text"
-            onClick={onHideInstagramModal}
-            label="No thanks, I might do it later"
-          />
+          <Button onClick={onHideInstagramModal} borderless>
+            No thanks, I might do it later
+          </Button>
           {isBusinessOnInstagram &&
-            <Button
-              type="primary"
-              onClick={onSetUpDirectPostingClick}
-              label="Yes! Let&rsquo;s do it!"
-            />
+            <Button onClick={onSetUpDirectPostingClick}>
+              Yes! Let&rsquo;s do it!
+            </Button>
           }
           {!isBusinessOnInstagram &&
-            <Button
-              type="primary"
-              onClick={onCheckInstagramBusinessClick}
-              label="I&rsquo;ve converted it to Business"
-            />
+            <Button onClick={onCheckInstagramBusinessClick}>
+              I&rsquo;ve converted it to Business
+            </Button>
           }
         </div>
       </div>
