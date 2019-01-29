@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Text, Toggle, Button, Input, Card,
+  Text, Toggle, Button, Input, Card, Divider,
 } from '@bufferapp/components';
+import FeatureLoader from '@bufferapp/product-features';
+
+const googleAnalyticsWrapperStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+};
 
 const enableGoogleAnalyticsStyle = {
   marginBottom: '0.5rem',
@@ -31,13 +37,33 @@ const headerTextWrapperStyle = {
   marginTop: '1rem',
 };
 
-const switchStyle = {
-  margin: '1.5rem 0 1rem 1.5rem',
+const rightContainerStyle = {
+  flex: 0.3,
+};
+
+const saveChangesStyle = {
   whiteSpace: 'nowrap',
+  marginTop: '1rem',
+};
+
+const switchStyle = {
+  ...rightContainerStyle,
+  whiteSpace: 'nowrap',
+  marginLeft: '1rem',
+  textAlign: 'right',
+};
+
+const textStyle = {
+  flex: 1,
 };
 
 const inputStyle = {
   marginTop: '0.5rem',
+};
+
+const customizeButtonStyle = {
+  marginTop: '0.5rem',
+  flexBasis: '170px',
 };
 
 const GoogleAnalytics = ({
@@ -46,51 +72,45 @@ const GoogleAnalytics = ({
   onShowGACustomizationFormClick,
   onToggleGoogleAnalyticsClick,
   }) => (
-    <div>
+    <div style={googleAnalyticsWrapperStyle}>
       <div style={headerTextWrapperStyle}>
-        <Text
-          color={'black'}
-        >
+        <Text color={'black'}>
           Google Analytics Campaign Tracking
         </Text>
       </div>
       <div style={generalWrapperStyle}>
-        <Text
-          size={'small'}
-        >
-          With campaign tracking enabled in Buffer, you will be able to see how much traffic
-          you receive from social media posts directly inside your Google Analytics dashboard. You
-          can disable this below if you&rsquo;d like.
-        </Text>
+        <div style={textStyle}>
+          <Text size={'small'}>
+            With campaign tracking enabled in Buffer, you will be able to see how much traffic
+            you receive from social media posts directly inside your Google Analytics dashboard. You
+            can disable this below if you&rsquo;d like.
+          </Text>
+        </div>
+        <div style={rightContainerStyle} />
       </div>
+      <Divider />
       <div style={enableCampaignWrapperStyle}>
-        <div>
+        <div style={textStyle}>
           <div style={headerTextWrapperStyle}>
-            <Text
-              color={'black'}
-              weight={'thin'}
-            >
+            <Text color={'black'} weight={'thin'}>
               Enable Campaign Tracking
             </Text>
           </div>
           <div style={enableGoogleAnalyticsStyle}>
-            <Text
-              size={'small'}
-            >
+            <Text size={'small'}>
               This enables Google Analytics Tracking via UTM parameters added to links you share.
             </Text>
-            <Text
-              size={'small'}
-              weight={'bold'}
-            >
-              &nbsp;(This will override any existing UTM parameters)
-            </Text>
+            <div>
+              <Text size={'small'}>
+                (This will override any existing UTM parameters)
+              </Text>
+            </div>
           </div>
         </div>
         <div style={switchStyle}>
           <Toggle
-            onText={'Campaign tracking:'}
-            offText={'Campaign tracking:'}
+            onText={'Enabled'}
+            offText={'Disabled'}
             on={googleAnalyticsIsEnabled}
             size={'small'}
             onClick={() => onToggleGoogleAnalyticsClick(!googleAnalyticsIsEnabled)}
@@ -99,20 +119,11 @@ const GoogleAnalytics = ({
       </div>
       {showGACustomizationForm && googleAnalyticsIsEnabled &&
         <div>
-          <Card>
-            <div style={headerTextWrapperStyle}>
-              <Text
-                color={'black'}
-                size={'mini'}
-                weight={'thin'}
-              >
-                Customise Campaign Tracking
-              </Text>
-            </div>
+          <Card noBorder noPadding>
             <form style={formWrapperStyle}>
               <div style={inputStyle}>
                 <Text
-                  weight={'thin'}
+                  weight={'semiBold'}
                   size={'small'}
                   color={'black'}
                 >
@@ -124,7 +135,7 @@ const GoogleAnalytics = ({
               </div>
               <div style={inputStyle}>
                 <Text
-                  weight={'thin'}
+                  weight={'semiBold'}
                   size={'small'}
                   color={'black'}
                 >
@@ -136,7 +147,7 @@ const GoogleAnalytics = ({
               </div>
               <div style={inputStyle}>
                 <Text
-                  weight={'thin'}
+                  weight={'semiBold'}
                   size={'small'}
                   color={'black'}
                 >
@@ -146,9 +157,9 @@ const GoogleAnalytics = ({
                   placeholder={'social'}
                 />
               </div>
-              <div style={switchStyle}>
+              <div style={saveChangesStyle}>
                 <Button>
-                  Save Changes
+                  Update tracking
                 </Button>
               </div>
             </form>
@@ -156,14 +167,18 @@ const GoogleAnalytics = ({
         </div>
       }
       {!showGACustomizationForm && googleAnalyticsIsEnabled &&
-        <Button
-          secondary
-          onClick={() => {
-            onShowGACustomizationFormClick();
-          }}
-        >
-          Customize Campaign Tracking
-        </Button>
+        <FeatureLoader supportedFeatures={'b4b_ga_custom_form'}>
+          <div style={customizeButtonStyle}>
+            <Button
+              secondary
+              onClick={() => {
+                onShowGACustomizationFormClick();
+              }}
+            >
+              Customize Campaign Tracking
+            </Button>
+          </div>
+        </FeatureLoader>
       }
     </div>
 );

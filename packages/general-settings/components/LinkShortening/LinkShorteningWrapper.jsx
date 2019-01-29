@@ -11,15 +11,16 @@ const textWrapperStyle = {
 };
 
 const bitlyWrapperSidebarStyle = {
-  flex: 'auto',
   flexDirection: 'column',
+  flex: '0.3',
+  marginLeft: '1rem',
 };
 
 const wrapperSidebarStyle = {
   textAlign: 'right',
   whiteSpace: 'nowrap',
   marginLeft: '0.5rem',
-  minWidth: '140px',
+  minWidth: '175px',
 };
 
 const loadingContainerStyle = {

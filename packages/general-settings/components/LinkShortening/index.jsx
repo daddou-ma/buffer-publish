@@ -45,12 +45,8 @@ const LinkShortening = ({
         }}
       >
         <div style={textWrapperStyle}>
-          <div
-            style={pinterestSectionStyling}
-          >
-            <Text
-              size={'small'}
-            >
+          <div style={pinterestSectionStyling}>
+            <Text size={'small'}>
               Sadly, at the moment Pinterest does not allow posting of shortened links. <br />
               For more,
               read all about it <a
@@ -68,7 +64,7 @@ const LinkShortening = ({
       isFreeUser={features.isFreeUser}
       loading={loading}
       startSectionStyles={{
-        maxWidth: '600px',
+        flex: 1,
       }}
       onOptionSelect={onOptionSelect}
       linkList={linkList}

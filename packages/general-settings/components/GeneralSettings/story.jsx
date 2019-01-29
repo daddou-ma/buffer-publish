@@ -10,6 +10,7 @@ storiesOf('GeneralSettings', module)
   .addDecorator(checkA11y)
   .add('default', () => (
     <GeneralSettings
+      isInstagramProfile={false}
       isInstagramBusiness={false}
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       features={features}
@@ -17,6 +18,7 @@ storiesOf('GeneralSettings', module)
   ))
   .add('direct posting enabled', () => (
     <GeneralSettings
+      isInstagramProfile
       isInstagramBusiness
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       features={features}
@@ -24,7 +26,8 @@ storiesOf('GeneralSettings', module)
   ))
   .add('Google analytics enabled', () => (
     <GeneralSettings
-      isInstagramBusiness={true}
+      isInstagramProfile
+      isInstagramBusiness
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       features={features}
     />

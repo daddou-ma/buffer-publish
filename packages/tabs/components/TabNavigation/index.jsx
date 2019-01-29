@@ -6,7 +6,7 @@ import {
 } from '@bufferapp/publish-shared-components';
 import { Button, Text } from '@bufferapp/components';
 import FeatureLoader from '@bufferapp/product-features';
-import openCalendarWindow from '../../utils';
+import { openCalendarWindow } from '../../utils';
 
 const upgradeCtaStyle = {
   transform: 'translate(0, 1px)',

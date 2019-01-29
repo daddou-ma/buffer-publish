@@ -199,13 +199,19 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  handleShareAgainClick: ({ post, profileId }) => ({
-    type: actionTypes.OPEN_COMPOSER,
-    updateId: post.id,
-    editMode: false,
-    post,
-    profileId,
-  }),
+  handleShareAgainClick: ({ post, profileId }) => {
+    return {
+      type: actionTypes.OPEN_COMPOSER,
+      updateId: post.id,
+      editMode: false,
+      post: {
+        ...post,
+        scheduled_at: null,
+        due_at: null,
+      },
+      profileId,
+    };
+  },
   handleComposerCreateSuccess: () => ({
     type: actionTypes.HIDE_COMPOSER,
   }),
