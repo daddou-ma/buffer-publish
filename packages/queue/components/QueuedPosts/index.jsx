@@ -81,10 +81,18 @@ const QueuedPosts = ({
   isInstagramLoading,
 
 }) => {
-  if (loading || isInstagramLoading) {
+  if (loading) {
     return (
       <div style={loadingContainerStyle}>
         <BufferLoading size={64} />
+      </div>
+    );
+  }
+
+  if (isInstagramLoading) {
+    return (
+      <div style={loadingContainerStyle}>
+        <BufferLoading size={64} fullscreen dark />
       </div>
     );
   }
