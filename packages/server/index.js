@@ -130,7 +130,7 @@ const getHtml = ({ notification, userId, modalKey }) =>
     .replace('{{{bundle}}}', staticAssets['bundle.js'])
     .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
     .replace('{{{stripeScript}}}', stripeScript)
-    .replace('{{{fullStoryScript}}}', fullStoryScript)
+    .replace('{{{fullStoryScript}}}', isProduction ? fullStoryScript : '')
     .replace('{{{bugsnagScript}}}', isProduction ? getBugsnagScript(userId) : '')
     .replace('{{{notificationScript}}}', notificationScript(notification))
     .replace('{{{showModalScript}}}', showModalScript(modalKey));
