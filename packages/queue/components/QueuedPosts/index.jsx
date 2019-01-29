@@ -77,6 +77,7 @@ const QueuedPosts = ({
   onHideInstagramModal,
   isBusinessOnInstagram,
   onCheckInstagramBusinessClick,
+  hasInstagramFeatureFlip,
 
 }) => {
   if (loading) {
@@ -126,10 +127,13 @@ const QueuedPosts = ({
         </FeatureLoader>
 
       </div>
-      {isInstagramProfile && !isInstagramBusiness &&
+      {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+        <InstagramDirectPostingBanner onDirectPostingClick={onSetUpDirectPostingClick} />
+      }
+      {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
         <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
       }
-      {showInstagramModal &&
+      {hasInstagramFeatureFlip && showInstagramModal &&
         <InstagramDirectPostingModal
           onSetUpDirectPostingClick={onSetUpDirectPostingClick}
           onHideInstagramModal={onHideInstagramModal}
@@ -219,6 +223,7 @@ QueuedPosts.propTypes = {
   onDirectPostingClick: PropTypes.func.isRequired,
   onHideInstagramModal: PropTypes.func.isRequired,
   isBusinessOnInstagram: PropTypes.bool,
+  hasInstagramFeatureFlip: PropTypes.bool,
 };
 
 QueuedPosts.defaultProps = {
@@ -238,6 +243,7 @@ QueuedPosts.defaultProps = {
   isInstagramBusiness: false,
   showInstagramModal: false,
   isBusinessOnInstagram: null,
+  hasInstagramFeatureFlip: false,
 };
 
 export default QueuedPosts;

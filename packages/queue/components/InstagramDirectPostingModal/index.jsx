@@ -9,8 +9,6 @@ import {
   Button,
 } from '@bufferapp/components';
 
-// import Button from '@bufferapp/ui/Button';
-
 const cardContentStyle = {
   maxWidth: '664px',
   textAlign: 'left',
@@ -23,8 +21,6 @@ const textWrapperStyle = {
 
 const buttonWrapperStyle = {
   textAlign: 'right',
-  // display: 'flex',
-  // justifyContent: 'flex-end',
 };
 
 const InstagramDirectPostingModal = ({
