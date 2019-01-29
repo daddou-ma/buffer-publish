@@ -59,6 +59,7 @@ export default connect(
         paused: profileData.paused,
         showInstagramModal: state.queue.showInstagramModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
+        isInstagramLoading: state.queue.isInstagramLoading,
         hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
       };
     }

@@ -25,7 +25,6 @@ export const actionTypes = keyWrapper('QUEUE', {
   POST_REQUEUE: 0,
   TOGGLE_CALENDAR: 0,
   GET_NUMBER_POSTS: 0,
-  SET_DIRECT_POSTING: 0,
   OPEN_IG_MODAL: 0,
   HIDE_IG_MODAL: 0,
 });
@@ -39,6 +38,7 @@ export const initialState = {
   editingPostId: '',
   showInstagramModal: false,
   isBusinessOnInstagram: null,
+  isInstagramLoading: false,
 };
 
 const profileInitialState = {
@@ -458,15 +458,22 @@ export default (state = initialState, action) => {
         ...state,
         enabledApplicationModes: action.result.enabledApplicationModes,
       };
+    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+        isInstagramLoading: true,
+      };
     case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         isBusinessOnInstagram: action.result.is_business,
+        isInstagramLoading: false,
       };
     case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         isBusinessOnInstagram: false,
+        isInstagramLoading: false,
       };
     case actionTypes.OPEN_COMPOSER:
       return {

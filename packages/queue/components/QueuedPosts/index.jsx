@@ -78,9 +78,10 @@ const QueuedPosts = ({
   isBusinessOnInstagram,
   onCheckInstagramBusinessClick,
   hasInstagramFeatureFlip,
+  isInstagramLoading,
 
 }) => {
-  if (loading) {
+  if (loading || isInstagramLoading) {
     return (
       <div style={loadingContainerStyle}>
         <BufferLoading size={64} />
@@ -224,6 +225,7 @@ QueuedPosts.propTypes = {
   onHideInstagramModal: PropTypes.func.isRequired,
   isBusinessOnInstagram: PropTypes.bool,
   hasInstagramFeatureFlip: PropTypes.bool,
+  isInstagramLoading: PropTypes.bool,
 };
 
 QueuedPosts.defaultProps = {
@@ -244,6 +246,7 @@ QueuedPosts.defaultProps = {
   showInstagramModal: false,
   isBusinessOnInstagram: null,
   hasInstagramFeatureFlip: false,
+  isInstagramLoading: false,
 };
 
 export default QueuedPosts;
