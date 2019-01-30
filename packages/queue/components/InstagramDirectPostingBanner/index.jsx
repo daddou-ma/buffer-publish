@@ -34,7 +34,7 @@ const bannerWrapper = {
 };
 
 const InstagramDirectPostingBanner = ({
-  onSetUpDirectPostingClick,
+  onDirectPostingClick,
 }) =>
   (<div style={bannerWrapper}>
     <CircleInstagramIcon color={'instagram'} />
@@ -42,7 +42,7 @@ const InstagramDirectPostingBanner = ({
       <Text color={'black'} size={'small'}>
         Buffer can now post directly to Instagram!
         <span style={linkWrapperStyle}>
-          <Link unstyled href="#" onClick={onSetUpDirectPostingClick}>
+          <Link unstyled href="#" onClick={onDirectPostingClick}>
             Set up Instagram direct scheduling.
           </Link>
         </span>
@@ -51,7 +51,7 @@ const InstagramDirectPostingBanner = ({
   </div>);
 
 InstagramDirectPostingBanner.propTypes = {
-  onSetUpDirectPostingClick: PropTypes.func.isRequired,
+  onDirectPostingClick: PropTypes.func.isRequired,
 };
 
 export default InstagramDirectPostingBanner;

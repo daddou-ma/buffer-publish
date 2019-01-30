@@ -32,7 +32,7 @@ const setUpDirectPostingStyle = {
 
 
 const InstagramDirectPosting = ({
-  onSetUpDirectPostingClick,
+  onDirectPostingClick,
 }) => (
   <div>
     <div style={instagramDirectPostingStyle}>
@@ -44,16 +44,15 @@ const InstagramDirectPosting = ({
         </div>
         <div style={textWrapperStyle}>
           <Text size={'small'}>
-            Buffer can now post directly to Instagram, all you need to do is switch
-            Instagram profile to a business profile. We&rsquo;ve created a guide to
-            walk you through the process.
+            Buffer can now post directly to Instagram, all
+            you need to have is an Instagram Business Profile.
           </Text>
         </div>
       </div>
       <div style={setUpDirectPostingStyle}>
         <Button
           fillContainer
-          onClick={() => { onSetUpDirectPostingClick(); }}
+          onClick={onDirectPostingClick}
         >
           Set up direct posting
         </Button>
@@ -64,7 +63,7 @@ const InstagramDirectPosting = ({
 );
 
 InstagramDirectPosting.propTypes = {
-  onSetUpDirectPostingClick: PropTypes.func.isRequired,
+  onDirectPostingClick: PropTypes.func.isRequired,
 };
 
 export default InstagramDirectPosting;

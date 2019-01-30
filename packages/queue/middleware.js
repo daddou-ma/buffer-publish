@@ -4,6 +4,7 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
+import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes, actions } from './reducer';
 
@@ -57,6 +58,24 @@ export default ({ dispatch, getState }) => next => (action) => {
           notificationType: 'success',
           message: 'We\'ve re-added this post to your queue!',
         }));
+      }
+      break;
+    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      if (action.args.recheck) {
+        if (action.result.is_business) {
+          dispatch(generalSettingsActions.handleSetUpDirectPostingClick({
+            profileId: action.args.profileId,
+          }));
+        } else {
+          dispatch(notificationActions.createNotification({
+            notificationType: 'error',
+            message: 'It seems you still don\'t have a Business Profile',
+          }));
+        }
+      }
+
+      if (action.args.callbackAction) {
+        dispatch(action.args.callbackAction);
       }
       break;
     case `deletePost_${dataFetchActionTypes.FETCH_SUCCESS}`:

@@ -22,12 +22,19 @@ const GeneralSettings = ({
   onDisconnectBitlyURLClick,
   isContributor,
   features,
+  hasInstagramFeatureFlip,
+  onDirectPostingClick,
 }) => (
   <div>
-    {isInstagramProfile && !isInstagramBusiness &&
-    <InstagramDirectPosting
-      onSetUpDirectPostingClick={onSetUpDirectPostingClick}
-    />
+    {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+      <InstagramDirectPosting
+        onDirectPostingClick={onSetUpDirectPostingClick}
+      />
+    }
+    {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+      <InstagramDirectPosting
+        onDirectPostingClick={onDirectPostingClick}
+      />
     }
     <LinkShortening
       isContributor={isContributor}
@@ -61,6 +68,7 @@ GeneralSettings.defaultProps = {
   isContributor: null,
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
+  hasInstagramFeatureFlip: false,
 };
 
 GeneralSettings.propTypes = {
@@ -89,6 +97,8 @@ GeneralSettings.propTypes = {
   features: PropTypes.shape({
     isFreeUser: PropTypes.func,
   }).isRequired,
+  hasInstagramFeatureFlip: PropTypes.bool,
+  onDirectPostingClick: PropTypes.func.isRequired,
 };
 
 export default GeneralSettings;

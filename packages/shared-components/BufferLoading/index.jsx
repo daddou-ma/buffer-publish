@@ -7,16 +7,16 @@ import {
   BufferBottomIcon,
 } from '@bufferapp/components/Icon/Icons';
 
-const loadingStyle = {
+const loadingStyle = ({ dark }) => ({
   width: '100%',
   height: '100%',
-  background: 'white',
+  background: dark ? 'rgba(50,59,67,0.8)' : 'white',
   zIndex: 12000,
   textAlign: 'center',
   position: 'fixed',
   top: 0,
   left: 0,
-};
+});
 
 const getIconContainerStyle = ({ size, fullscreen }) => ({
   display: 'inline-block',
@@ -36,17 +36,17 @@ const getIconPartStyle = delay => ({
   animation: `2s ${delay} fade infinite`,
 });
 
-const BufferLoading = ({ fullscreen, size }) =>
-  <div style={fullscreen ? loadingStyle : null}>
+const BufferLoading = ({ fullscreen, size, dark }) =>
+  <div style={fullscreen ? loadingStyle({ dark }) : null}>
     <div style={getIconContainerStyle({ size, fullscreen })}>
       <div style={getIconPartStyle('0ms')}>
-        <BufferTopIcon size={{ width: `${size}`, height: `${size}` }} />
+        <BufferTopIcon color={dark ? 'white' : 'shuttleGray'} size={{ width: `${size}`, height: `${size}` }} />
       </div>
       <div style={getIconPartStyle('150ms')}>
-        <BufferMiddleIcon size={{ width: `${size}`, height: `${size}` }} />
+        <BufferMiddleIcon color={dark ? 'white' : 'shuttleGray'} size={{ width: `${size}`, height: `${size}` }} />
       </div>
       <div style={getIconPartStyle('300ms')}>
-        <BufferBottomIcon size={{ width: `${size}`, height: `${size}` }} />
+        <BufferBottomIcon color={dark ? 'white' : 'shuttleGray'} size={{ width: `${size}`, height: `${size}` }} />
       </div>
     </div>
   </div>;
@@ -54,11 +54,13 @@ const BufferLoading = ({ fullscreen, size }) =>
 BufferLoading.propTypes = {
   fullscreen: PropTypes.bool,
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  dark: PropTypes.bool,
 };
 
 BufferLoading.defaultProps = {
   fullscreen: false,
   size: 100,
+  dark: false,
 };
 
 export default BufferLoading;

@@ -12,11 +12,12 @@ import {
 } from '@bufferapp/publish-shared-components';
 
 import ComposerPopover from '@bufferapp/publish-composer-popover';
+import FeatureLoader from '@bufferapp/product-features';
+import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
+import InstagramDirectPostingModal from '../InstagramDirectPostingModal';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
 import MiniCalendar from '../MiniCalendar';
-import FeatureLoader from '@bufferapp/product-features';
-import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -71,11 +72,27 @@ const QueuedPosts = ({
   isInstagramProfile,
   isInstagramBusiness,
   onSetUpDirectPostingClick,
+  showInstagramModal,
+  onDirectPostingClick,
+  onHideInstagramModal,
+  isBusinessOnInstagram,
+  onCheckInstagramBusinessClick,
+  hasInstagramFeatureFlip,
+  isInstagramLoading,
+
 }) => {
   if (loading) {
     return (
       <div style={loadingContainerStyle}>
         <BufferLoading size={64} />
+      </div>
+    );
+  }
+
+  if (isInstagramLoading) {
+    return (
+      <div style={loadingContainerStyle}>
+        <BufferLoading size={64} fullscreen dark />
       </div>
     );
   }
@@ -119,8 +136,19 @@ const QueuedPosts = ({
         </FeatureLoader>
 
       </div>
-      {isInstagramProfile && !isInstagramBusiness &&
-        <InstagramDirectPostingBanner onSetUpDirectPostingClick={onSetUpDirectPostingClick} />
+      {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+        <InstagramDirectPostingBanner onDirectPostingClick={onSetUpDirectPostingClick} />
+      }
+      {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+        <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
+      }
+      {hasInstagramFeatureFlip && showInstagramModal &&
+        <InstagramDirectPostingModal
+          onSetUpDirectPostingClick={onSetUpDirectPostingClick}
+          onHideInstagramModal={onHideInstagramModal}
+          isBusinessOnInstagram={isBusinessOnInstagram}
+          onCheckInstagramBusinessClick={onCheckInstagramBusinessClick}
+        />
       }
       {!!paused && <QueuePausedBar handleClickUnpause={onUnpauseClick} />}
       {total < 1 &&
@@ -184,6 +212,7 @@ QueuedPosts.propTypes = {
   onImageClickNext: PropTypes.func,
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
+  onCheckInstagramBusinessClick: PropTypes.func.isRequired,
   onDropPost: PropTypes.func.isRequired,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
@@ -199,6 +228,12 @@ QueuedPosts.propTypes = {
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
+  showInstagramModal: PropTypes.bool,
+  onDirectPostingClick: PropTypes.func.isRequired,
+  onHideInstagramModal: PropTypes.func.isRequired,
+  isBusinessOnInstagram: PropTypes.bool,
+  hasInstagramFeatureFlip: PropTypes.bool,
+  isInstagramLoading: PropTypes.bool,
 };
 
 QueuedPosts.defaultProps = {
@@ -216,6 +251,10 @@ QueuedPosts.defaultProps = {
   subprofiles: [],
   isInstagramProfile: false,
   isInstagramBusiness: false,
+  showInstagramModal: false,
+  isBusinessOnInstagram: null,
+  hasInstagramFeatureFlip: false,
+  isInstagramLoading: false,
 };
 
 export default QueuedPosts;

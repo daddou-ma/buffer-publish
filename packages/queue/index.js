@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions } from './reducer';
 
 import QueuedPosts from './components/QueuedPosts';
@@ -56,10 +57,15 @@ export default connect(
         isInstagramProfile: profileData.type === 'instagram',
         isInstagramBusiness: profileData.isInstagramBusiness,
         paused: profileData.paused,
+        showInstagramModal: state.queue.showInstagramModal,
+        isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
+        isInstagramLoading: state.queue.isInstagramLoading,
+        hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
       };
     }
     return {};
   },
+
   (dispatch, ownProps) => ({
     onEditClick: (post) => {
       dispatch(actions.handleEditClick({
@@ -153,6 +159,29 @@ export default connect(
       dispatch(generalSettingsActions.handleSetUpDirectPostingClick({
         profileId: ownProps.profileId,
       }));
+    },
+    onDirectPostingClick: () => {
+      dispatch(dataFetchActions.fetch({
+        name: 'checkInstagramBusiness',
+        args: {
+          profileId: ownProps.profileId,
+          callbackAction: actions.handleOpenInstagramModal({
+            profileId: ownProps.profileId,
+          }),
+        },
+      }));
+    },
+    onCheckInstagramBusinessClick: () => {
+      dispatch(dataFetchActions.fetch({
+        name: 'checkInstagramBusiness',
+        args: {
+          profileId: ownProps.profileId,
+          recheck: true,
+        },
+      }));
+    },
+    onHideInstagramModal: () => {
+      dispatch(actions.handleHideInstagramModal());
     },
   }),
 )(QueuedPosts);
