@@ -190,6 +190,12 @@ const handlePostDropped = (posts, action) => {
 
   return newPostsMap;
 };
+const handleInstagramLoading = (action) => {
+  if (action.args.recheck && action.result.is_business) {
+    return true;
+  }
+  return false;
+};
 
 /**
  * handlePostsReordered()
@@ -467,7 +473,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isBusinessOnInstagram: action.result.is_business,
-        isInstagramLoading: false,
+        isInstagramLoading: handleInstagramLoading(action),
       };
     case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
@@ -475,6 +481,7 @@ export default (state = initialState, action) => {
         isBusinessOnInstagram: false,
         isInstagramLoading: false,
       };
+
     case actionTypes.OPEN_COMPOSER:
       return {
         ...state,
