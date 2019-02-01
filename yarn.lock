@@ -313,16 +313,17 @@
     react-autocomplete "1.7.2"
     react-day-picker "6.2.1"
 
-"@bufferapp/composer@2.6.8":
-  version "2.6.8"
-  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-2.6.8.tgz#af5139a8d4ad4b5d3fbfb9bd2aef7c3b4c03adc1"
+"@bufferapp/composer@2.6.11":
+  version "2.6.11"
+  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-2.6.11.tgz#ad130b2c8cf52fda9c0857560dfe1a2aebf36be8"
+  integrity sha512-zd+hVZr84FuDYx8QJ+3un3rmiW928Zm7nWk/CjJ/Fy5RIadCiU4O4xgrg9R7vAgxEd0PEZ5n3bPW+2K6py1/CA==
   dependencies:
     "@bufferapp/buffer-js-api" "0.3.0"
     "@bufferapp/buffer-js-metrics" "0.2.0"
     "@bufferapp/buffer-js-request" "0.2.0"
     "@bufferapp/components" "3.0.2"
     "@bufferapp/draft-js" "0.10.1-fork.5"
-    "@bufferapp/draft-js-emoji-plugin" "^2.0.0-rc9.1"
+    "@bufferapp/draft-js-emoji-plugin" "^2.0.2"
     "@bufferapp/draft-js-mention-plugin" "2.0.0-rc8.3"
     "@bufferapp/draft-js-plugins-editor" "2.0.0-rc8.3"
     "@bufferapp/dragme" "0.2.2"
@@ -354,18 +355,18 @@
     react-dom "16.3.0"
     react-dropzone "4.2.3"
     react-test-renderer "^16.3.2"
-    react-textarea-autosize "5.1.0"
+    react-textarea-autosize "7.1.0"
     react-tooltip "3.3.0"
     rimraf "^2.6.2"
     setimmediate "^1.0.5"
     twitter-text "2.0.4"
     xss "0.3.4"
 
-"@bufferapp/draft-js-emoji-plugin@^2.0.0-rc9.1":
-  version "2.0.0-rc9.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/draft-js-emoji-plugin/-/draft-js-emoji-plugin-2.0.0-rc9.1.tgz#a9931be5e1bd8e8173adfefa477ad01d67900238"
+"@bufferapp/draft-js-emoji-plugin@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/draft-js-emoji-plugin/-/draft-js-emoji-plugin-2.0.2.tgz#a9dcf735ebff6c2e5d63a07032c01291377111d2"
+  integrity sha512-KDja7MCnGRqK7omusd/A/IHlrCSe/yj0zBlKdwSB3bmcEchHUTWm64tC4WUlI84YVtrzvsHW9rT0h+wnnAZmrw==
   dependencies:
-    "@bufferapp/draft-js" "0.10.1-fork.2"
     decorate-component-with-props "^1.0.2"
     emojione "^2.2.7"
     find-with-regex "^1.0.2"
@@ -505,9 +506,10 @@
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-parsers@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.11.0.tgz#86c505aea349fafd481cca5d985af3150f55dbee"
+"@bufferapp/publish-parsers@1.11.1":
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.11.1.tgz#f4162794c339e501106891d2ee235844f9e75b5e"
+  integrity sha512-0u1TPJv1/7LcFxYXbhh2ynxoXcre14VdA/NlCsB6cZGSuhFfa7S8WoYbcCtLVC5lByyJKMrY4XeIu3Cb9qUNrQ==
   dependencies:
     "@bufferapp/publish-formatters" "1.9.29"
     twitter-text "3.0.0"
@@ -9750,6 +9752,14 @@ react-textarea-autosize@5.1.0:
   resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-5.1.0.tgz#ffbf8164fce217c79443c1c17dedf730592df224"
   dependencies:
     prop-types "^15.5.10"
+
+react-textarea-autosize@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-7.1.0.tgz#3132cb77e65d94417558d37c0bfe415a5afd3445"
+  integrity sha512-c2FlR/fP0qbxmlrW96SdrbgP/v0XZMTupqB90zybvmDVDutytUgPl7beU35klwcTeMepUIQEpQUn3P3bdshGPg==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    prop-types "^15.6.0"
 
 react-tooltip@3.3.0:
   version "3.3.0"
