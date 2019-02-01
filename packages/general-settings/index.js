@@ -22,6 +22,9 @@ export default connect(
       isContributor: state.generalSettings.isContributor,
       showGACustomizationForm: state.generalSettings.showGACustomizationForm,
       googleAnalyticsIsEnabled: state.generalSettings.googleAnalyticsEnabled === 'enabled',
+      utmCampaign: state.generalSettings.utmCampaign,
+      utmSource: state.generalSettings.utmSource,
+      utmMedium: state.generalSettings.utmMedium,
       hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
     }),
     (dispatch, ownProps) => ({
@@ -56,7 +59,9 @@ export default connect(
         }));
       },
       onShowGACustomizationFormClick: () => {
-        dispatch(actions.handleShowGACustomizationFormClick());
+        dispatch(actions.handleShowGACustomizationFormClick({
+          profileId: ownProps.profileId,
+        }));
       },
       onLinkShortenerOptionSelect: (event) => {
         dispatch(actions.handleOnSelectLinkShortenerChange({
@@ -68,6 +73,29 @@ export default connect(
         dispatch(actions.handleGoogleAnalyticsToggle({
           profileId: ownProps.profileId,
           utmTrackingChoice: googleAnalyticsIsEnabled ? 'enabled' : 'disabled',
+        }));
+      },
+      onSaveGATrackingSettingsClick: (utmCampaign, utmSource, utmMedium) => {
+        dispatch(actions.handleSaveGATrackingSettings({
+          profileId: ownProps.profileId,
+          utmCampaign,
+          utmSource,
+          utmMedium,
+        }));
+      },
+      onChangeUtmCampaign: (event) => {
+        dispatch(actions.handleChangeUtmCampaign({
+          utmCampaign: event.target.value,
+        }));
+      },
+      onChangeUtmSource: (event) => {
+        dispatch(actions.handleChangeUtmSource({
+          utmSource: event.target.value,
+        }));
+      },
+      onChangeUtmMedium: (event) => {
+        dispatch(actions.handleChangeUtmMedium({
+          utmMedium: event.target.value,
         }));
       },
     }),

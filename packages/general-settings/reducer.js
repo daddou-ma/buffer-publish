@@ -9,6 +9,10 @@ export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
   TOGGLE_GOOGLE_ANALYTICS: 0,
   CONNECT_BITLY: 0,
   DISCONNECT_BITLY: 0,
+  SAVE_GA_CUSTOM_FORM: 0,
+  SET_UTM_CAMPAIGN: 0,
+  SET_UTM_SOURCE: 0,
+  SET_UTM_MEDIUM: 0,
 });
 
 const initialState = {
@@ -32,6 +36,7 @@ export default (state = initialState, action) => {
         isContributor: action.profile.isContributor,
         loadingLinkShorteners: true,
         selectedShortener: null,
+        trackingSettings: action.trackingSettings,
       };
     case `changeLinkShortener_${dataFetchActionTypes.FETCH_START}`:
       return {
@@ -55,7 +60,20 @@ export default (state = initialState, action) => {
     case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
       return {
         ...state,
+      };
+    case `getGATrackingSettings_${dataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+        showGACustomizationForm: false,
+      };
+    case `getGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      var trackingSettings = action.result.trackingSettings;
+      return {
+        ...state,
         showGACustomizationForm: true,
+        utmCampaign: trackingSettings ? trackingSettings.utm_campaign : '',
+        utmSource: trackingSettings ? trackingSettings.utm_source : '',
+        utmMedium: trackingSettings ? trackingSettings.utm_medium : '',
       };
     case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
       return {
@@ -70,6 +88,31 @@ export default (state = initialState, action) => {
       return {
         ...state,
         googleAnalyticsEnabled: action.result.isEnabled,
+      };
+    case actionTypes.SAVE_GA_CUSTOM_FORM:
+      return {
+        ...state,
+      };
+    case `saveGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        showGACustomizationForm: false,
+        result: action.result,
+      };
+    case actionTypes.SET_UTM_CAMPAIGN:
+      return {
+        ...state,
+        utmCampaign: action.utmCampaign,
+      };
+    case actionTypes.SET_UTM_SOURCE:
+      return {
+        ...state,
+        utmSource: action.utmSource,
+      };
+    case actionTypes.SET_UTM_MEDIUM:
+      return {
+        ...state,
+        utmMedium: action.utmMedium,
       };
     default:
       return state;
@@ -89,8 +132,9 @@ export const actions = {
     type: actionTypes.DISCONNECT_BITLY,
     profileId: action.profileId,
   }),
-  handleShowGACustomizationFormClick: () => ({
+  handleShowGACustomizationFormClick: action => ({
     type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
+    profileId: action.profileId,
   }),
   handleOnSelectLinkShortenerChange: ({ profileId, domain }) => ({
     type: actionTypes.CHANGE_SELECTED_LINK_SHORTENER,
@@ -101,5 +145,24 @@ export const actions = {
     type: actionTypes.TOGGLE_GOOGLE_ANALYTICS,
     profileId,
     utmTrackingChoice,
+  }),
+  handleSaveGATrackingSettings: ({ profileId, utmCampaign, utmSource, utmMedium }) => ({
+    type: actionTypes.SAVE_GA_CUSTOM_FORM,
+    profileId,
+    utmCampaign,
+    utmSource,
+    utmMedium,
+  }),
+  handleChangeUtmCampaign: ({ utmCampaign }) => ({
+    type: actionTypes.SET_UTM_CAMPAIGN,
+    utmCampaign,
+  }),
+  handleChangeUtmSource: ({ utmSource }) => ({
+    type: actionTypes.SET_UTM_SOURCE,
+    utmSource,
+  }),
+  handleChangeUtmMedium: ({ utmMedium }) => ({
+    type: actionTypes.SET_UTM_MEDIUM,
+    utmMedium,
   }),
 };

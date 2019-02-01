@@ -41,6 +41,13 @@ storiesOf('GoogleAnalytics', module)
       showGACustomizationForm={false}
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
+      onChangeUtmCampaign={action('onChangeUtmCampaign')}
+      onChangeUtmSource={action('onChangeUtmSource')}
+      onChangeUtmMedium={action('onChangeUtmMedium')}
+      utmCampaign={'buffer'}
+      utmSource={'source'}
+      utmMedium={'medium'}
+      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
   ))
   .add('google analytics is enabled', () => (
@@ -49,6 +56,13 @@ storiesOf('GoogleAnalytics', module)
       showGACustomizationForm={false}
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
+      onChangeUtmCampaign={action('onChangeUtmCampaign')}
+      onChangeUtmSource={action('onChangeUtmSource')}
+      onChangeUtmMedium={action('onChangeUtmMedium')}
+      utmCampaign={'buffer'}
+      utmSource={'source'}
+      utmMedium={'medium'}
+      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
   ))
   .add('the customisation form is shown', () => (
@@ -57,5 +71,12 @@ storiesOf('GoogleAnalytics', module)
       showGACustomizationForm
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
+      onChangeUtmCampaign={action('onChangeUtmCampaign')}
+      onChangeUtmSource={action('onChangeUtmSource')}
+      onChangeUtmMedium={action('onChangeUtmMedium')}
+      utmCampaign={'buffer'}
+      utmSource={'source'}
+      utmMedium={'medium'}
+      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
   ));

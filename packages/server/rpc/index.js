@@ -38,6 +38,8 @@ const approveDraftMethod = require('./approveDraft');
 const changeDraftStatusMethod = require('./changeDraftStatus');
 const toggleGoogleAnalytics = require('./toggleGoogleAnalytics');
 const checkInstagramBusinessMethod = require('./checkInstagramBusiness');
+const saveGATrackingSettings = require('./saveGATrackingSettings');
+const getGATrackingSettings = require('./getGATrackingSettings');
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
 const average = require('./analytics/average');
@@ -85,6 +87,8 @@ module.exports = rpc(
   approveDraftMethod,
   changeDraftStatusMethod,
   toggleGoogleAnalytics,
+  saveGATrackingSettings,
+  getGATrackingSettings,
   analyticsStartDate,
   average,
   compare,

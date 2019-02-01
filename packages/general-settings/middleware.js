@@ -1,8 +1,9 @@
 import { getURL } from '@bufferapp/publish-formatters';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actions as notificationActions } from '@bufferapp/notifications';
 import {
   actions as asyncDataFetch,
-  actions as dataFetchActions,
+  actions as dataFetchActions, actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
@@ -41,6 +42,33 @@ export default ({ dispatch }) => next => (action) => {
         args: {
           profileId: action.profileId,
           utmTrackingChoice: action.utmTrackingChoice,
+        },
+      }));
+      break;
+    case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
+      dispatch(asyncDataFetch.fetch({
+        name: 'getGATrackingSettings',
+        args: {
+          profileId: action.profileId,
+        },
+      }));
+      break;
+    case `saveGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      if (action.result.showNotification) {
+        dispatch(notificationActions.createNotification({
+          notificationType: 'success',
+          message: action.result.message,
+        }));
+      }
+      break;
+    case actionTypes.SAVE_GA_CUSTOM_FORM:
+      dispatch(asyncDataFetch.fetch({
+        name: 'saveGATrackingSettings',
+        args: {
+          profileId: action.profileId,
+          utmCampaign: action.utmCampaign,
+          utmSource: action.utmSource,
+          utmMedium: action.utmMedium,
         },
       }));
       break;

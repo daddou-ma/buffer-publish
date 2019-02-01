@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Text, Toggle, Button, Input, Card, Divider,
 } from '@bufferapp/components';
+import { Field, reduxForm } from 'redux-form';
 import FeatureLoader from '@bufferapp/product-features';
 
 const googleAnalyticsWrapperStyle = {
@@ -71,6 +72,13 @@ const GoogleAnalytics = ({
   showGACustomizationForm,
   onShowGACustomizationFormClick,
   onToggleGoogleAnalyticsClick,
+  onSaveGATrackingSettingsClick,
+  utmCampaign,
+  onChangeUtmCampaign,
+  utmSource,
+  onChangeUtmSource,
+  utmMedium,
+  onChangeUtmMedium,
   }) => (
     <div style={googleAnalyticsWrapperStyle}>
       <div style={headerTextWrapperStyle}>
@@ -123,42 +131,66 @@ const GoogleAnalytics = ({
             <form style={formWrapperStyle}>
               <div style={inputStyle}>
                 <Text
-                  weight={'semiBold'}
+                  weight={'semi-bold'}
                   size={'small'}
                   color={'black'}
                 >
                   Campaign Name
                 </Text>
-                <Input
+                <Field
+                  name={'utmCampaign'}
+                  component={Input}
+                  type={'text'}
                   placeholder={'buffer'}
+                  input={{
+                    value: utmCampaign,
+                    onChange: onChangeUtmCampaign,
+                  }}
                 />
               </div>
               <div style={inputStyle}>
                 <Text
-                  weight={'semiBold'}
+                  weight={'semi-bold'}
                   size={'small'}
                   color={'black'}
                 >
                   Campaign Source
                 </Text>
                 <Input
+                  type="text"
+                  input={{
+                    value: utmSource,
+                    onChange: onChangeUtmSource,
+                  }}
+                  name={'utmSource'}
                   placeholder={'bufferapp.com'}
                 />
               </div>
               <div style={inputStyle}>
                 <Text
-                  weight={'semiBold'}
+                  weight={'semi-bold'}
                   size={'small'}
                   color={'black'}
                 >
                   Campaign Medium
                 </Text>
                 <Input
+                  type="text"
+                  input={{
+                    value: utmMedium,
+                    onChange: onChangeUtmMedium,
+                  }}
+                  name={'utmMedium'}
                   placeholder={'social'}
                 />
               </div>
               <div style={saveChangesStyle}>
-                <Button>
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSaveGATrackingSettingsClick(utmCampaign, utmSource, utmMedium);
+                  }}
+                >
                   Update tracking
                 </Button>
               </div>
@@ -171,9 +203,7 @@ const GoogleAnalytics = ({
           <div style={customizeButtonStyle}>
             <Button
               secondary
-              onClick={() => {
-                onShowGACustomizationFormClick();
-              }}
+              onClick={onShowGACustomizationFormClick}
             >
               Customize Campaign Tracking
             </Button>
@@ -183,11 +213,27 @@ const GoogleAnalytics = ({
     </div>
 );
 
+GoogleAnalytics.defaultProps = {
+  trackingSettings: null,
+  utmCampaign: null,
+  utmSource: null,
+  utmMedium: null,
+};
+
 GoogleAnalytics.propTypes = {
   showGACustomizationForm: PropTypes.bool.isRequired,
   onShowGACustomizationFormClick: PropTypes.func.isRequired,
   googleAnalyticsIsEnabled: PropTypes.bool.isRequired,
   onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
+  onSaveGATrackingSettingsClick: PropTypes.func.isRequired,
+  onChangeUtmCampaign: PropTypes.func.isRequired,
+  onChangeUtmSource: PropTypes.func.isRequired,
+  onChangeUtmMedium: PropTypes.func.isRequired,
+  utmCampaign: PropTypes.string,
+  utmSource: PropTypes.string,
+  utmMedium: PropTypes.string,
 };
 
-export default GoogleAnalytics;
+export default reduxForm({
+  form: 'gaCustomForm',
+})(GoogleAnalytics);
