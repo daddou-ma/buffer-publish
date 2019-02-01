@@ -33,20 +33,20 @@ const InstagramDirectPostingModal = ({
     <Card noPadding>
       <div style={cardContentStyle}>
         <Text weight="medium" color="black">
-          Would you like to set up direct posting for Instagram?
+          Would you like to set up Direct Scheduling for Instagram?
         </Text>
         <div style={textWrapperStyle}>
           <Text size="mini">
-            Direct posting allows you to post to images and videos to Instagram
-            directly from Buffer just as you can with any other network.
+            Direct Scheduling allows you to post images and videos to Instagram
+            directly from Buffer, just as you can with any other network.
           </Text>
         </div>
         {!isBusinessOnInstagram &&
           <div style={textWrapperStyle}>
             <Text size="mini" weight="medium">
-              In order to set up direct posting you need to have an Instagram Business Profile. You
-              can convert any profile to a Business Profile through the Instagram mobile app.&nbsp;
-              <Link newTab href="https://faq.buffer.com/article/934-publish-instagram-direct-scheduling-set-up">
+              In order to set up Direct Scheduling you need to have an Instagram Business Profile. You
+              can convert any account to a Business Profile through the Instagram mobile app.&nbsp;
+              <Link newTab href="https://faq.buffer.com/article/959-publish-instagram-set-up">
                 You can find the Instagram set up guide here.
               </Link>)
             </Text>

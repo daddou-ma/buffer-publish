@@ -39,7 +39,7 @@ const InstagramDirectPosting = ({
       <div style={textStyle}>
         <div style={textWrapperStyle}>
           <Text color={'black'}>
-            Enable Direct Posting
+            Enable Direct Scheduling
           </Text>
         </div>
         <div style={textWrapperStyle}>
@@ -54,7 +54,7 @@ const InstagramDirectPosting = ({
           fillContainer
           onClick={onDirectPostingClick}
         >
-          Set up direct posting
+          Set up Direct Scheduling
         </Button>
       </div>
     </div>
