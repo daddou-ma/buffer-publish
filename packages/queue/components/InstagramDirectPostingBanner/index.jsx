@@ -43,7 +43,7 @@ const InstagramDirectPostingBanner = ({
         Buffer can now post directly to Instagram!
         <span style={linkWrapperStyle}>
           <Link unstyled href="#" onClick={onDirectPostingClick}>
-            Set up Instagram direct scheduling.
+            Set up Instagram Direct Scheduling.
           </Link>
         </span>
       </Text>
