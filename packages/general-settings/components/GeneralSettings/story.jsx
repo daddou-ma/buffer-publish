@@ -61,8 +61,6 @@ storiesOf('GeneralSettings', module)
       utmCampaign={'buffer'}
       utmSource={'source'}
       utmMedium={'medium'}
-      googleAnalyticsIsEnabled
-      showGACustomizationForm={false}
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
@@ -79,8 +77,6 @@ storiesOf('GeneralSettings', module)
       utmCampaign={'buffer'}
       utmSource={'source'}
       utmMedium={'medium'}
-      showGACustomizationForm
-      googleAnalyticsIsEnabled
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
