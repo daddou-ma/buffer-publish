@@ -18,12 +18,19 @@ const GeneralSettings = ({
   showGACustomizationForm,
   googleAnalyticsIsEnabled,
   onToggleGoogleAnalyticsClick,
+  onSaveGATrackingSettingsClick,
   onConnectBitlyURLClick,
   onDisconnectBitlyURLClick,
   isContributor,
   features,
   hasInstagramFeatureFlip,
   onDirectPostingClick,
+  utmCampaign,
+  onChangeUtmCampaign,
+  utmSource,
+  onChangeUtmSource,
+  utmMedium,
+  onChangeUtmMedium,
 }) => (
   <div>
     {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
@@ -53,6 +60,13 @@ const GeneralSettings = ({
       showGACustomizationForm={showGACustomizationForm}
       googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
       onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
+      utmCampaign={utmCampaign}
+      onChangeUtmCampaign={onChangeUtmCampaign}
+      utmSource={utmSource}
+      onChangeUtmSource={onChangeUtmSource}
+      utmMedium={utmMedium}
+      onChangeUtmMedium={onChangeUtmMedium}
+      onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
     />
   </div>
 );
@@ -69,6 +83,9 @@ GeneralSettings.defaultProps = {
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
   hasInstagramFeatureFlip: false,
+  utmCampaign: null,
+  utmSource: null,
+  utmMedium: null,
 };
 
 GeneralSettings.propTypes = {
@@ -94,11 +111,18 @@ GeneralSettings.propTypes = {
   showGACustomizationForm: PropTypes.bool.isRequired,
   googleAnalyticsIsEnabled: PropTypes.bool,
   onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
+  onSaveGATrackingSettingsClick: PropTypes.func.isRequired,
   features: PropTypes.shape({
     isFreeUser: PropTypes.func,
   }).isRequired,
   hasInstagramFeatureFlip: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,
+  utmCampaign: PropTypes.string,
+  onChangeUtmCampaign: PropTypes.func.isRequired,
+  utmSource: PropTypes.string,
+  onChangeUtmSource: PropTypes.func.isRequired,
+  utmMedium: PropTypes.string,
+  onChangeUtmMedium: PropTypes.func.isRequired,
 };
 
 export default GeneralSettings;
