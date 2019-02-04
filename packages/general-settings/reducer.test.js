@@ -102,6 +102,35 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
+  it('should get GA Tracking settings', () => {
+    const stateAfter = {
+      isInstagramProfile: false,
+      isInstagramBusiness: false,
+      googleAnalyticsIsEnabled: false,
+      profileId: null,
+      showGACustomizationForm: true,
+      utmCampaign: 'Campaign',
+      utmSource: 'Source',
+      utmMedium: 'Medium',
+    };
+    const action = {
+      type: `getGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`,
+      profile: {
+        showGACustomizationForm: true,
+      },
+      result: {
+        trackingSettings: {
+          utm_campaign: 'Campaign',
+          utm_source: 'Source',
+          utm_medium: 'Medium',
+        },
+      },
+    };
+    deepFreeze(action);
+    expect(reducer(undefined, action))
+      .toEqual(stateAfter);
+  });
+
   it('should set utm campaign value', () => {
     const stateAfter = {
       isInstagramProfile: false,
