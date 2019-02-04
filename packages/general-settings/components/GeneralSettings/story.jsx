@@ -61,6 +61,27 @@ storiesOf('GeneralSettings', module)
       utmCampaign={'buffer'}
       utmSource={'source'}
       utmMedium={'medium'}
+      googleAnalyticsIsEnabled
+      showGACustomizationForm={false}
+      onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
+      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
+    />
+  ))
+  .add('show GA customization form', () => (
+    <GeneralSettings
+      isInstagramProfile
+      isInstagramBusiness
+      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
+      features={features}
+      onChangeUtmCampaign={action('onChangeUtmCampaign')}
+      onChangeUtmSource={action('onChangeUtmSource')}
+      onChangeUtmMedium={action('onChangeUtmMedium')}
+      utmCampaign={'buffer'}
+      utmSource={'source'}
+      utmMedium={'medium'}
+      showGACustomizationForm
+      googleAnalyticsIsEnabled
+      onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
   ));
