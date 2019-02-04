@@ -48,10 +48,19 @@ export const history = createHistory();
 
 const bufferMetricsMiddleware = createBufferMetricsMiddleware({
   application: 'PUBLISH',
-  metadata: state => ({
-    userId: state.appSidebar.user.id,
-    profileId: state.profileSidebar.selectedProfileId,
-  }),
+  metadata: (state, action) => {
+    const m = {
+      userId: state.appSidebar.user.id,
+      profileId: state.profileSidebar.selectedProfileId,
+    };
+    // Add Instagram Tracking Data
+    const isInstagramAction = (action === 'OPEN_IG_MODAL' || action === 'HIDE_IG_MODAL' || action === 'SET_DIRECT_POSTING');
+    if (isInstagramAction && state.queue.isBusinessOnInstagram) {
+      m.isBusinessOnInstagram = state.queue.isBusinessOnInstagram
+        ? 'true' : 'false';
+    }
+    return m;
+  },
 });
 
 const configureStore = (initialstate) => {
