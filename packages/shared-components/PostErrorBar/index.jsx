@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { mystic, offWhite } from '@bufferapp/components/style/color';
+import { mystic, offWhite, torchRed } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { Text, WarningIcon } from '@bufferapp/components';
 
@@ -20,16 +20,24 @@ const postActionDetailsIconStyle = {
   alignItems: 'center',
 };
 
+const createMarkup = error => (
+  { __html: error }
+);
+
 const PostErrorBar = ({ dragging, error }) => (
   <div style={errorBarStyle(dragging)}>
+    <style jsx>{`
+      a { color: ${torchRed}; text-decoration: none; }
+      `}
+    </style>
     <div style={postActionDetailsIconStyle}>
       <WarningIcon color={'torchRed'} />
     </div>
     <Text
       size={'small'}
-      color={'torchRed'}
+      color={'outerspace'}
     >
-      {error}
+      <div dangerouslySetInnerHTML={createMarkup(error)} />
     </Text>
   </div>
 );
