@@ -171,6 +171,8 @@ app.post('/ajax/buffermetrics',
   composerAjaxBuffemetrics,
 );
 
+app.get('/health-check', controller.healthCheck);
+
 // make sure we have a valid session
 app.use(
   validateSessionMiddleware({
@@ -178,8 +180,6 @@ app.use(
     requiredSessionKeys: ['publish.accessToken', 'global.userId'],
   }),
 );
-
-app.get('/health-check', controller.healthCheck);
 
 // Pusher Auth
 app.post(
