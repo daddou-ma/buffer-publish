@@ -92,4 +92,38 @@ storiesOf('QueuedPosts', module)
       paused
       onUnpauseClick={action('onUnpauseClick')}
     />
+  ))
+  .add('locked profile with visible modal', () => (
+    <QueuedPosts
+      total={10}
+      loading={false}
+      postLists={postLists}
+      onCancelConfirmClick={action('onCancelConfirmClick')}
+      onDeleteClick={action('onDeleteClick')}
+      onDeleteConfirmClick={action('onDeleteConfirmClick')}
+      onEditClick={action('onEditClick')}
+      onShareNowClick={action('onShareNowClick')}
+      paused
+      onUnpauseClick={action('onUnpauseClick')}
+      isLockedProfile
+      displayLockedModal
+      onCloseLockedModal={action('onUnpauseClick')}
+    />
+  ))
+  .add('locked profile with hidden modal', () => (
+    <QueuedPosts
+      total={10}
+      loading={false}
+      postLists={postLists}
+      onCancelConfirmClick={action('onCancelConfirmClick')}
+      onDeleteClick={action('onDeleteClick')}
+      onDeleteConfirmClick={action('onDeleteConfirmClick')}
+      onEditClick={action('onEditClick')}
+      onShareNowClick={action('onShareNowClick')}
+      paused
+      onUnpauseClick={action('onUnpauseClick')}
+      isLockedProfile
+      displayLockedModal={false}
+      onCloseLockedModal={action('onUnpauseClick')}
+    />
   ));
