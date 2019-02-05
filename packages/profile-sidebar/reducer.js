@@ -85,7 +85,7 @@ export default (state = initialState, action) => {
         profiles: profilesReducer(state.profiles, action),
         lockedProfiles: profilesReducer(state.lockedProfiles, action),
         selectedProfile: action.profile,
-        isLockedProfile: action.profile.disabled,
+        isLockedProfile: action.profile ? action.profile.disabled : false,
       };
     }
     case actionTypes.PROFILE_PAUSED:
