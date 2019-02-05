@@ -431,7 +431,7 @@ export default (state = initialState, action) => {
     case profileSidebarActionTypes.SELECT_PROFILE:
       return {
         ...state,
-        displayLockedModal: action.profile.disabled,
+        displayLockedModal: action.profile ? action.profile.disabled : false,
       };
     case `queuedPosts_${dataFetchActionTypes.FETCH_START}`:
     case `queuedPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
