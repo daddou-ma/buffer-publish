@@ -11,6 +11,8 @@ describe('reducer', () => {
       loading: false,
       selectedProfileId: '',
       selectedProfile: {},
+      isBusinessAccount: false,
+      isLockedProfile: false,
     };
     const action = {
       type: 'INIT',

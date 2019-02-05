@@ -3,7 +3,8 @@ import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-si
 import { actions as notificationActions } from '@bufferapp/notifications';
 import {
   actions as asyncDataFetch,
-  actions as dataFetchActions, actionTypes as dataFetchActionTypes,
+  actions as dataFetchActions,
+  actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
