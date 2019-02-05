@@ -16,6 +16,8 @@ const initialState = {
   selectedProfileId: '',
   loading: false,
   selectedProfile: {},
+  isLockedProfile: false,
+  isBusinessAccount: false,
 };
 
 const profilesReducer = (state = [], action) => {
@@ -83,6 +85,7 @@ export default (state = initialState, action) => {
         profiles: profilesReducer(state.profiles, action),
         lockedProfiles: profilesReducer(state.lockedProfiles, action),
         selectedProfile: action.profile,
+        isLockedProfile: action.profile.disabled,
       };
     }
     case actionTypes.PROFILE_PAUSED:

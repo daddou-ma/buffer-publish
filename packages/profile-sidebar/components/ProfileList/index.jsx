@@ -18,7 +18,7 @@ const ProfileList = ({
         handle={profile.handle}
         notifications={profile.pendingCount}
         selected={profile.id === selectedProfileId}
-        locked={profile.locked}
+        locked={profile.disabled}
         onClick={() => onProfileClick(profile)}
       />,
     )}

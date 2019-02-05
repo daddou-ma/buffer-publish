@@ -29,6 +29,7 @@ const TabNavigation = ({
   shouldShowNestedSettingsTab,
   showUpgradeModal,
   profileId,
+  isLockedProfile,
 }) => {
   const selectedChildTab = selectedChildTabId || 'general-settings';
   return (
@@ -48,7 +49,7 @@ const TabNavigation = ({
         {isBusinessAccount && !isManager &&
           <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
         }
-        {isBusinessAccount &&
+        {isBusinessAccount && !isLockedProfile &&
           <Tab tabId={'drafts'}>Drafts</Tab>
         }
         <Tab tabId={'settings'}>Settings</Tab>
@@ -95,6 +96,7 @@ TabNavigation.defaultProps = {
   shouldShowNestedSettingsTab: false,
   selectedChildTabId: null,
   profileId: null,
+  isLockedProfile: false,
 };
 
 TabNavigation.propTypes = {
@@ -108,6 +110,7 @@ TabNavigation.propTypes = {
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,
   profileId: PropTypes.string,
+  isLockedProfile: PropTypes.bool,
 };
 
 export default TabNavigation;
