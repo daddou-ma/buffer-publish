@@ -18,6 +18,7 @@ import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RetweetPanel from '../RetweetPanel';
 import RenderPostMetaBar from './RenderPostMetaBar';
+import PostErrorBar from '../PostErrorBar';
 
 const getPostContainerStyle = ({ dragging, hovering }) => ({
   display: 'flex',
@@ -165,6 +166,12 @@ const Post = ({
           subprofiles={subprofiles}
           isSent={isSent}
         />
+        {postDetails.error && postDetails.error.length > 0 &&
+          <PostErrorBar
+            dragging={dragging}
+            error={postDetails.error}
+          />
+        }
         <PostFooter
           isManager={isManager}
           isDeleting={isDeleting}
