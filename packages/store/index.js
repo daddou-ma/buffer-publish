@@ -30,6 +30,9 @@ import { middleware as closeAccountMiddleware } from '@bufferapp/close-account';
 import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintenance-redirect';
 import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
 import { middleware as notificationsProviderMiddleware } from '@bufferapp/publish-notifications-provider';
+import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/publish-profiles-disconnected-modal';
+import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
+
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
 import { middleware as compareChartMiddleware } from '@bufferapp/compare-chart';
@@ -41,7 +44,7 @@ import { middleware as exportToPNGMiddleware } from '@bufferapp/analyze-png-expo
 import { middleware as postsMiddleware } from '@bufferapp/posts-table';
 import { middleware as profileSelectorMiddleware } from '@bufferapp/analyze-profile-selector';
 import { middleware as summaryTableMiddleware } from '@bufferapp/summary-table';
-import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
+
 import reducers from './reducers';
 
 export const history = createHistory();
@@ -105,6 +108,8 @@ const configureStore = (initialstate) => {
         bufferMetricsMiddleware,
         draftsMiddleware,
         notificationsProviderMiddleware,
+        profilesDisconnectedModalMiddleware,
+        // Analyze
         averageMiddleware,
         compareChartMiddleware,
         datePickerMiddleware,
@@ -112,7 +117,7 @@ const configureStore = (initialstate) => {
         postsMiddleware,
         profileSelectorMiddleware,
         summaryTableMiddleware,
-        // Analyze -- These need to be the last middlewares in the chain
+        // These need to be the last middlewares in the chain
         exportToPNGMiddleware,
         exportToCSVMiddleware,
         exportPickerMiddleware,

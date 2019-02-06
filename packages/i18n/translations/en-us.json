@@ -47,5 +47,11 @@
     "body1": "We’ve tidied up the look of your Buffer dashboard!",
     "body2": "We’ve kept your features and all your stuff just as it was but with a cleaner and faster experience.",
     "cta": "Let’s Go!"
+  },
+  "profiles-disconnected-modal": {
+    "headline": "We’ve lost access to some of your social accounts",
+    "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these acconts you will need to reconnect them.",
+    "body2": "Note: You’ll need to be logged in to the same account on the network to successfully reconnect your social account.",
+    "cta": "Reconnect"
   }
 }

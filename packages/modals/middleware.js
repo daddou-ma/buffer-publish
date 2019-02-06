@@ -1,3 +1,4 @@
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions } from './reducer';
 import {
   shouldShowUpgradeModal,
@@ -17,6 +18,11 @@ export default ({ dispatch }) => next => (action) => {
       }
       break;
     }
+    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      if (action.result && action.result.some(profile => profile.isDisconnected)) {
+        dispatch(actions.showProfilesDisconnectedModal());
+      }
+      break;
     case 'COMPOSER_EVENT':
       if (action.eventType === 'show-upgrade-modal') {
         dispatch(actions.showUpgradeModal({ source: 'queue_limit' }));
