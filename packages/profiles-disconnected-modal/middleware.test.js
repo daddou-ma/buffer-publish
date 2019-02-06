@@ -39,12 +39,6 @@ describe('middleware', () => {
   });
 
   it('should load Instagram logout img and then redirect to the reconnect URL', () => {
-    // This code ensures that we call the img.onerror right away
-    // for the sake of testing (see the code in middleware.js)
-    Object.defineProperty(global.Image.prototype, 'src', {
-      set() { this.onerror(); },
-    });
-
     middleware(store)(next)(reconnectInstagramAction);
     expect(next).toBeCalled();
     expect(window.location.assign).toHaveBeenCalledWith(
