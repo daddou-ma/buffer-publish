@@ -102,7 +102,7 @@ export default connect(
       onToggleRemindersClick: (newToggleValue) => {
         dispatch(actions.handleRemindersToggle({
           profileId: ownProps.profileId,
-          allowDirectPosting: newToggleValue,
+          allowReminders: newToggleValue,
         }));
       },
     }),

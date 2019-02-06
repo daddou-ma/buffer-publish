@@ -77,7 +77,7 @@ export default ({ dispatch }) => next => (action) => {
         name: 'toggleInstagramReminders',
         args: {
           profileId: action.profileId,
-          allowDirectPosting: action.allowDirectPosting,
+          allowReminders: action.allowReminders,
         },
       }));
       break;

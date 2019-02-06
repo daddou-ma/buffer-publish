@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
         loadingLinkShorteners: true,
         selectedShortener: null,
         trackingSettings: action.trackingSettings,
-        remindersAreEnabled: action.profile.directPostingEnabled,
+        remindersAreEnabled: !action.profile.directPostingEnabled,
       };
     case `changeLinkShortener_${dataFetchActionTypes.FETCH_START}`:
       return {
@@ -120,7 +120,7 @@ export default (state = initialState, action) => {
     case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
-        remindersAreEnabled: action.args.allowDirectPosting,
+        remindersAreEnabled: action.args.allowReminders,
       };
     case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
@@ -178,9 +178,9 @@ export const actions = {
     type: actionTypes.SET_UTM_MEDIUM,
     utmMedium,
   }),
-  handleRemindersToggle: ({ profileId, allowDirectPosting }) => ({
+  handleRemindersToggle: ({ profileId, allowReminders }) => ({
     type: actionTypes.TOGGLE_INSTAGRAM_REMINDERS,
     profileId,
-    allowDirectPosting,
+    allowReminders,
   }),
 };

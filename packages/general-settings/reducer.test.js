@@ -39,7 +39,7 @@ describe('reducer', () => {
       profile: {
         isInstagramBusiness: false,
         service: 'twitter',
-        directPostingEnabled: false,
+        directPostingEnabled: true,
       },
     };
     deepFreeze(action);
