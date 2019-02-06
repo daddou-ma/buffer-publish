@@ -14,7 +14,7 @@ const errorBarStyle = dragging => ({
   marginBottom: 10,
 });
 
-const postActionDetailsIconStyle = {
+const errorBarIconStyle = {
   marginRight: '1rem',
   display: 'flex',
   alignItems: 'center',
@@ -31,7 +31,7 @@ const PostErrorBar = ({ dragging, error }) => (
       #errorBar a { color: ${torchRed}; }
     `}
     </style>
-    <div style={postActionDetailsIconStyle}>
+    <div style={errorBarIconStyle}>
       <WarningIcon color={'torchRed'} />
     </div>
     <Text
