@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
+import { actions as modalActions } from '@bufferapp/publish-modals';
 import ProfileSidebar from './components/ProfileSidebar';
 import { actions } from './reducer';
 
@@ -37,6 +38,9 @@ export default connect(
     },
     onConnectSocialAccountClick: () => {
       dispatch(actions.handleConnectSocialAccountClick());
+    },
+    showProfilesDisconnectedModal: () => {
+      dispatch(modalActions.showProfilesDisconnectedModal());
     },
   }),
 )(ProfileSidebar);

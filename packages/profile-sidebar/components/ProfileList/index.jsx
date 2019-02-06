@@ -9,6 +9,7 @@ const ProfileList = ({
   profiles,
   selectedProfileId,
   onProfileClick,
+  showProfilesDisconnectedModal,
 }) =>
   <List
     items={profiles.map(profile =>
@@ -19,7 +20,9 @@ const ProfileList = ({
         notifications={profile.pendingCount}
         selected={profile.id === selectedProfileId}
         locked={profile.locked}
+        disconnected={profile.isDisconnected}
         onClick={() => onProfileClick(profile)}
+        showProfilesDisconnectedModal={showProfilesDisconnectedModal}
       />,
     )}
   />;
@@ -30,6 +33,7 @@ ProfileList.propTypes = {
     PropTypes.shape(ProfileListItem.propTypes),
   ),
   selectedProfileId: PropTypes.string,
+  showProfilesDisconnectedModal: PropTypes.func.isRequired,
 };
 
 ProfileList.defaultProps = {

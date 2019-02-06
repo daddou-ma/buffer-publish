@@ -8,7 +8,8 @@
   },
   "author": "hamstu@gmail.com",
   "dependencies": {
-    "@bufferapp/publish-modals": "2.0.0"
+    "@bufferapp/publish-modals": "2.0.0",
+    "@bufferapp/async-data-fetch": "1.9.4"
   },
   "devDependencies": {
     "eslint": "3.19.0"

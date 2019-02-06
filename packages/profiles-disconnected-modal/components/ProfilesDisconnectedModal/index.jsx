@@ -42,8 +42,12 @@ const ProfilesDisconnectedModal = ({
                   <Text weight="medium">{p.formatted_username}</Text>
                 </div>
               </div>
-              <Button onClick={() => reconnectProfile(p.id, p.service)} small>
-                {translations.cta}
+              <Button
+                disabled={p.reconnecting}
+                onClick={() => reconnectProfile(p.id, p.service)}
+                small
+              >
+                {p.reconnecting ? translations.reconnecting : translations.cta}
               </Button>
             </div>
           ))}

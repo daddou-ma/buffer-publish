@@ -14,20 +14,30 @@ const reducer = (state = initialState, action) => {
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       return {
         ...state,
-        disconnectedProfiles: action.result.filter(
-          profile => profile.isDisconnected,
-        ),
+        disconnectedProfiles: action.result
+          .filter(profile => profile.isDisconnected)
+          .map(profile => ({ ...profile, reconnecting: false })),
       };
     }
     case actionTypes.RECONNECT_PROFILE:
-      return state; // TODO: mark as loading in the state, middleware does redirect
+      return {
+        ...state,
+        disconnectedProfiles: state.disconnectedProfiles.map(profile => ({
+          ...profile,
+          reconnecting: profile.id === action.id,
+        })),
+      };
     default:
       return state;
   }
 };
 
 export const actions = {
-  reconnectProfile: (id, service) => ({ type: actionTypes.RECONNECT_PROFILE, id, service }),
+  reconnectProfile: (id, service) => ({
+    type: actionTypes.RECONNECT_PROFILE,
+    id,
+    service,
+  }),
 };
 
 export default reducer;
