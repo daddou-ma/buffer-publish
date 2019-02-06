@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
 
 import QueuedPosts from './components/QueuedPosts';
@@ -35,6 +36,15 @@ export default connect(
     const profileId = ownProps.profileId;
     const profileQueuePosts = state.queue.byProfileId[profileId];
     const profileData = state.profileSidebar.profiles.find(p => p.id === ownProps.profileId);
+    const isLockedProfile = state.profileSidebar.isLockedProfile;
+
+    if (isLockedProfile) {
+      return {
+        loading: false,
+        isLockedProfile,
+        displayLockedModal: state.queue.displayLockedModal,
+      };
+    }
     if (profileQueuePosts && profileData) {
       return {
         loading: profileQueuePosts.loading,
@@ -182,6 +192,12 @@ export default connect(
     },
     onHideInstagramModal: () => {
       dispatch(actions.handleHideInstagramModal());
+    },
+    onClickUpgradeToPro: () => {
+      dispatch(modalsActions.showUpgradeModal({ source: 'app_header' }));
+    },
+    onCloseLockedModal: () => {
+      dispatch(actions.handleCloseLockedModal());
     },
   }),
 )(QueuedPosts);

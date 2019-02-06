@@ -19,7 +19,7 @@ const ProfileList = ({
         handle={profile.handle}
         notifications={profile.pendingCount}
         selected={profile.id === selectedProfileId}
-        locked={profile.locked}
+        locked={profile.disabled}
         disconnected={profile.isDisconnected}
         onClick={() => onProfileClick(profile)}
         showProfilesDisconnectedModal={showProfilesDisconnectedModal}

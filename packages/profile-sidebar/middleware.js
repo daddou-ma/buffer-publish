@@ -44,8 +44,16 @@ export default ({ dispatch, getState }) => next => (action) => {
         path,
       });
       const profiles = getState().profileSidebar.profiles;
+      const lockedProfiles = getState().profileSidebar.lockedProfiles;
       if (params && params.profileId) {
-        const profile = profiles.find(profileElement => profileElement.id === params.profileId);
+        let profile = profiles.find(profileElement => profileElement.id === params.profileId);
+
+        if (!profile) {
+          if (lockedProfiles.length > 0) {
+            profile = lockedProfiles.find(profileElement => profileElement.id === params.profileId);
+          }
+        }
+
         dispatch(actions.selectProfile({
           profile,
         }));
