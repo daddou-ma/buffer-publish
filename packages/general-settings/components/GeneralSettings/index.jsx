@@ -4,6 +4,7 @@ import { Divider } from '@bufferapp/components';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
+import InstagramReminders from '../InstagramReminders';
 
 const GeneralSettings = ({
   isInstagramProfile,
@@ -31,6 +32,8 @@ const GeneralSettings = ({
   onChangeUtmSource,
   utmMedium,
   onChangeUtmMedium,
+  remindersAreEnabled,
+  onToggleRemindersClick,
 }) => (
   <div>
     {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
@@ -41,6 +44,12 @@ const GeneralSettings = ({
     {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
       <InstagramDirectPosting
         onDirectPostingClick={onDirectPostingClick}
+      />
+    }
+    {isInstagramProfile && isInstagramBusiness &&
+      <InstagramReminders
+        remindersAreEnabled={remindersAreEnabled}
+        onToggleRemindersClick={onToggleRemindersClick}
       />
     }
     <LinkShortening
@@ -86,6 +95,7 @@ GeneralSettings.defaultProps = {
   utmCampaign: null,
   utmSource: null,
   utmMedium: null,
+  remindersAreEnabled: false,
 };
 
 GeneralSettings.propTypes = {
@@ -123,6 +133,8 @@ GeneralSettings.propTypes = {
   onChangeUtmSource: PropTypes.func.isRequired,
   utmMedium: PropTypes.string,
   onChangeUtmMedium: PropTypes.func.isRequired,
+  remindersAreEnabled: PropTypes.bool,
+  onToggleRemindersClick: PropTypes.func.isRequired,
 };
 
 export default GeneralSettings;
