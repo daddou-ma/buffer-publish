@@ -27,7 +27,6 @@ export const actionTypes = keyWrapper('QUEUE', {
   GET_NUMBER_POSTS: 0,
   OPEN_IG_MODAL: 0,
   HIDE_IG_MODAL: 0,
-  HIDE_LOCKED_MODAL: 0,
 });
 
 export const initialState = {
@@ -40,7 +39,6 @@ export const initialState = {
   showInstagramModal: false,
   isBusinessOnInstagram: null,
   isInstagramLoading: false,
-  displayLockedModal: false,
 };
 
 const profileInitialState = {
@@ -429,10 +427,6 @@ export default (state = initialState, action) => {
     case actionTypes.POST_DROPPED:
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case profileSidebarActionTypes.SELECT_PROFILE:
-      return {
-        ...state,
-        displayLockedModal: action.profile ? action.profile.disabled : false,
-      };
     case `queuedPosts_${dataFetchActionTypes.FETCH_START}`:
     case `queuedPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `queuedPosts_${dataFetchActionTypes.FETCH_FAIL}`:
@@ -510,11 +504,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showInstagramModal: false,
-      };
-    case actionTypes.HIDE_LOCKED_MODAL:
-      return {
-        ...state,
-        displayLockedModal: false,
       };
     default:
       return state;
@@ -619,8 +608,5 @@ export const actions = {
   }),
   handleHideInstagramModal: () => ({
     type: actionTypes.HIDE_IG_MODAL,
-  }),
-  handleCloseLockedModal: () => ({
-    type: actionTypes.HIDE_LOCKED_MODAL,
   }),
 };

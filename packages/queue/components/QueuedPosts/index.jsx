@@ -18,7 +18,7 @@ import InstagramDirectPostingModal from '../InstagramDirectPostingModal';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
 import MiniCalendar from '../MiniCalendar';
-import Modal from '../Modal';
+import Notification from '../Notification';
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -88,9 +88,7 @@ const QueuedPosts = ({
   hasInstagramFeatureFlip,
   isInstagramLoading,
   isLockedProfile,
-  displayLockedModal,
   onClickUpgradeToPro,
-  onCloseLockedModal,
 }) => {
   if (loading) {
     return (
@@ -110,19 +108,7 @@ const QueuedPosts = ({
 
   if (isLockedProfile) {
     return (
-      <div style={lockedContainerStyle}>
-        {!displayLockedModal &&
-          <EmptyState
-            title="It looks like this account is locked"
-            subtitle="To unlock your social accounts and manage up to 8 accounts, please consider upgrading to our Pro Plan :)"
-            emoji="🔒"
-          />}
-        {displayLockedModal &&
-          <Modal
-            onClickUpgradeToPro={onClickUpgradeToPro}
-            onCloseLockedModal={onCloseLockedModal}
-          />}
-      </div>
+      <Notification onClickUpgradeToPro={onClickUpgradeToPro} />
     );
   }
 
@@ -264,9 +250,7 @@ QueuedPosts.propTypes = {
   hasInstagramFeatureFlip: PropTypes.bool,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  displayLockedModal: PropTypes.bool,
   onClickUpgradeToPro: PropTypes.func.isRequired,
-  onCloseLockedModal: PropTypes.func.isRequired,
 };
 
 QueuedPosts.defaultProps = {
@@ -289,7 +273,6 @@ QueuedPosts.defaultProps = {
   hasInstagramFeatureFlip: false,
   isInstagramLoading: false,
   isLockedProfile: false,
-  displayLockedModal: false,
 };
 
 export default QueuedPosts;

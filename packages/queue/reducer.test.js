@@ -413,21 +413,4 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
   });
-
-  it('should handle HIDE_LOCKED_MODAL action type', () => {
-    const stateAfter = {
-      ...initialState,
-      displayLockedModal: false,
-    };
-    const action = {
-      profileId,
-      type: actionTypes.HIDE_LOCKED_MODAL,
-      args: {
-        displayLockedModal: false,
-      },
-    };
-    deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
-  });
 });

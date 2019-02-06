@@ -42,7 +42,6 @@ export default connect(
       return {
         loading: false,
         isLockedProfile,
-        displayLockedModal: state.queue.displayLockedModal,
       };
     }
     if (profileQueuePosts && profileData) {
@@ -194,10 +193,7 @@ export default connect(
       dispatch(actions.handleHideInstagramModal());
     },
     onClickUpgradeToPro: () => {
-      dispatch(modalsActions.showUpgradeModal({ source: 'app_header' }));
-    },
-    onCloseLockedModal: () => {
-      dispatch(actions.handleCloseLockedModal());
+      dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
     },
   }),
 )(QueuedPosts);
