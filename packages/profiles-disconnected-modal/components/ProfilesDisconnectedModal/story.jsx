@@ -4,13 +4,17 @@ import { action } from '@storybook/addon-actions';
 import { checkA11y } from 'storybook-addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
-import WelcomeModal from './index';
+import ProfilesDisconnectedModal from './index';
 
-storiesOf('WelcomeModal', module)
+storiesOf('ProfilesDisconnectedModal', module)
   .addDecorator(checkA11y)
   .add('should show welcome modal', () => (
-    <WelcomeModal
-      translations={translations['welcome-modal']}
+    <ProfilesDisconnectedModal
+      translations={translations['profiles-disconnected-modal']}
       hideModal={action('hide-modal')}
+      reconnectProfile={action('reconnect-profile')}
+      disconnectedProfiles={[
+        { id: '1', avatar_https: '', service: 'twitter', formatted_username: '@hamstu' },
+      ]}
     />
   ));
