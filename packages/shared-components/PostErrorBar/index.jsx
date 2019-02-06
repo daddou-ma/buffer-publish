@@ -15,7 +15,7 @@ const errorBarStyle = dragging => ({
 });
 
 const postActionDetailsIconStyle = {
-  marginRight: '0.5rem',
+  marginRight: '1rem',
   display: 'flex',
   alignItems: 'center',
 };
@@ -24,18 +24,19 @@ const createMarkup = error => (
   { __html: error }
 );
 
+// Need to add <a> style because can't directly get to <a> in error html string
 const PostErrorBar = ({ dragging, error }) => (
-  <div style={errorBarStyle(dragging)}>
-    <style jsx>{`
-      a { color: ${torchRed}; text-decoration: none; }
-      `}
+  <div id="errorBar" style={errorBarStyle(dragging)}>
+    <style>{`
+      #errorBar a { color: ${torchRed}; }
+    `}
     </style>
     <div style={postActionDetailsIconStyle}>
       <WarningIcon color={'torchRed'} />
     </div>
     <Text
       size={'small'}
-      color={'outerspace'}
+      color={'torchRed'}
     >
       <div dangerouslySetInnerHTML={createMarkup(error)} />
     </Text>
