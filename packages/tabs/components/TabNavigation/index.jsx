@@ -41,20 +41,20 @@ const TabNavigation = ({
         onTabClick={onTabClick}
       >
         <Tab tabId={'queue'}>Queue</Tab>
-        <Tab tabId={'sent'}>Sent Posts</Tab>
-        {isBusinessAccount && <Tab tabId={'analytics'}>Analytics</Tab>}
+        <Tab tabId={'sent'} disabled={isLockedProfile}>Sent Posts</Tab>
+        {isBusinessAccount && <Tab tabId={'analytics'} disabled={isLockedProfile}>Analytics</Tab>}
         {isBusinessAccount && isManager &&
-          <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
+          <Tab tabId={'awaitingApproval'} disabled={isLockedProfile}>Awaiting Approval</Tab>
         }
         {isBusinessAccount && !isManager &&
-          <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
+          <Tab tabId={'pendingApproval'} disabled={isLockedProfile}>Pending Approval</Tab>
         }
-        {isBusinessAccount && !isLockedProfile &&
-          <Tab tabId={'drafts'}>Drafts</Tab>
+        {isBusinessAccount &&
+          <Tab tabId={'drafts'} disabled={isLockedProfile}>Drafts</Tab>
         }
-        <Tab tabId={'settings'}>Settings</Tab>
+        <Tab tabId={'settings'} disabled={isLockedProfile}>Settings</Tab>
         <FeatureLoader supportedFeatures={'b4b_calendar'}>
-          <Tab tabId={'b4bCalendar'} onClick={() => openCalendarWindow(profileId)}>
+          <Tab tabId={'b4bCalendar'} onClick={() => openCalendarWindow(profileId)} disabled={isLockedProfile}>
             Calendar
           </Tab>
         </FeatureLoader>
