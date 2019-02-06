@@ -9,6 +9,7 @@ import {
   EmptyState,
   PostDragLayer,
   BufferLoading,
+  LockedProfileNotification,
 } from '@bufferapp/publish-shared-components';
 
 import ComposerPopover from '@bufferapp/publish-composer-popover';
@@ -18,7 +19,6 @@ import InstagramDirectPostingModal from '../InstagramDirectPostingModal';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
 import MiniCalendar from '../MiniCalendar';
-import Notification from '../Notification';
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -34,13 +34,6 @@ const loadingContainerStyle = {
   height: '100%',
   textAlign: 'center',
   paddingTop: '5rem',
-};
-
-const lockedContainerStyle = {
-  width: '100%',
-  height: '100%',
-  textAlign: 'left',
-  paddingTop: '1rem',
 };
 
 const buttonStyle = {
@@ -108,7 +101,7 @@ const QueuedPosts = ({
 
   if (isLockedProfile) {
     return (
-      <Notification onClickUpgradeToPro={onClickUpgradeToPro} />
+      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
     );
   }
 

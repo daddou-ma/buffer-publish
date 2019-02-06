@@ -22,7 +22,7 @@ const contentStyle = {
   marginTop: '0.5rem',
 };
 
-const Notification = ({ onClickUpgradeToPro }) => (
+const LockedProfileNotification = ({ onClickUpgradeToPro }) => (
   <Card reducedPadding>
     <div style={titleStyle}>
       <span style={iconStyle}>
@@ -61,8 +61,8 @@ const Notification = ({ onClickUpgradeToPro }) => (
   </Card>
 );
 
-Notification.propTypes = {
+LockedProfileNotification.propTypes = {
   onClickUpgradeToPro: PropTypes.func.isRequired,
 };
 
-export default Notification;
+export default LockedProfileNotification;

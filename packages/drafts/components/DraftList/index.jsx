@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   QueueItems,
   BufferLoading,
+  LockedProfileNotification,
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import {
@@ -47,13 +48,20 @@ const DraftList = ({
   showComposer,
   editMode,
   tabId,
-
+  isLockedProfile,
+  onClickUpgradeToPro,
 }) => {
   if (loading) {
     return (
       <div style={loadingContainerStyle}>
         <BufferLoading size={64} />
       </div>
+    );
+  }
+
+  if (isLockedProfile) {
+    return (
+      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
     );
   }
 
@@ -127,6 +135,8 @@ DraftList.propTypes = {
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
   tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
+  isLockedProfile: PropTypes.bool,
+  onClickUpgradeToPro: PropTypes.func.isRequired,
 };
 
 DraftList.defaultProps = {
@@ -135,6 +145,7 @@ DraftList.defaultProps = {
   showComposer: false,
   editMode: false,
   tabId: null,
+  isLockedProfile: false,
 };
 
 export default DraftList;

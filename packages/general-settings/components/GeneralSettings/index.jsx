@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
+import { LockedProfileNotification } from '@bufferapp/publish-shared-components';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
@@ -31,45 +32,55 @@ const GeneralSettings = ({
   onChangeUtmSource,
   utmMedium,
   onChangeUtmMedium,
-}) => (
-  <div>
-    {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+  isLockedProfile,
+  onClickUpgradeToPro,
+}) => {
+  if (isLockedProfile) {
+    return (
+      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
+    );
+  }
+
+  return (
+    <div>
+      {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
       <InstagramDirectPosting
         onDirectPostingClick={onSetUpDirectPostingClick}
       />
-    }
-    {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+      }
+      {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
       <InstagramDirectPosting
         onDirectPostingClick={onDirectPostingClick}
       />
-    }
-    <LinkShortening
-      isContributor={isContributor}
-      onConnectBitlyURLClick={onConnectBitlyURLClick}
-      onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
-      loading={loadingLinkShorteners}
-      profileService={profileService}
-      linkShorteners={linkShorteners}
-      onOptionSelect={onLinkShortenerOptionSelect}
-      selectedShortener={selectedShortener}
-      features={features}
-    />
-    <Divider />
-    <GoogleAnalytics
-      onShowGACustomizationFormClick={onShowGACustomizationFormClick}
-      showGACustomizationForm={showGACustomizationForm}
-      googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
-      onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
-      utmCampaign={utmCampaign}
-      onChangeUtmCampaign={onChangeUtmCampaign}
-      utmSource={utmSource}
-      onChangeUtmSource={onChangeUtmSource}
-      utmMedium={utmMedium}
-      onChangeUtmMedium={onChangeUtmMedium}
-      onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
-    />
-  </div>
-);
+      }
+      <LinkShortening
+        isContributor={isContributor}
+        onConnectBitlyURLClick={onConnectBitlyURLClick}
+        onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
+        loading={loadingLinkShorteners}
+        profileService={profileService}
+        linkShorteners={linkShorteners}
+        onOptionSelect={onLinkShortenerOptionSelect}
+        selectedShortener={selectedShortener}
+        features={features}
+      />
+      <Divider/>
+      <GoogleAnalytics
+        onShowGACustomizationFormClick={onShowGACustomizationFormClick}
+        showGACustomizationForm={showGACustomizationForm}
+        googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
+        onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
+        utmCampaign={utmCampaign}
+        onChangeUtmCampaign={onChangeUtmCampaign}
+        utmSource={utmSource}
+        onChangeUtmSource={onChangeUtmSource}
+        utmMedium={utmMedium}
+        onChangeUtmMedium={onChangeUtmMedium}
+        onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
+      />
+    </div>
+  );
+};
 
 GeneralSettings.defaultProps = {
   isInstagramProfile: false,
@@ -86,6 +97,7 @@ GeneralSettings.defaultProps = {
   utmCampaign: null,
   utmSource: null,
   utmMedium: null,
+  isLockedProfile: false,
 };
 
 GeneralSettings.propTypes = {
@@ -123,6 +135,8 @@ GeneralSettings.propTypes = {
   onChangeUtmSource: PropTypes.func.isRequired,
   utmMedium: PropTypes.string,
   onChangeUtmMedium: PropTypes.func.isRequired,
+  isLockedProfile: PropTypes.bool,
+  onClickUpgradeToPro: PropTypes.func.isRequired,
 };
 
 export default GeneralSettings;

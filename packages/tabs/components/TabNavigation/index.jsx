@@ -41,20 +41,20 @@ const TabNavigation = ({
         onTabClick={onTabClick}
       >
         <Tab tabId={'queue'}>Queue</Tab>
-        <Tab tabId={'sent'} disabled={isLockedProfile}>Sent Posts</Tab>
-        {isBusinessAccount && <Tab tabId={'analytics'} disabled={isLockedProfile}>Analytics</Tab>}
+        <Tab tabId={'sent'}>Sent Posts</Tab>
+        {isBusinessAccount && <Tab tabId={'analytics'}>Analytics</Tab>}
         {isBusinessAccount && isManager &&
-          <Tab tabId={'awaitingApproval'} disabled={isLockedProfile}>Awaiting Approval</Tab>
+          <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
         }
         {isBusinessAccount && !isManager &&
-          <Tab tabId={'pendingApproval'} disabled={isLockedProfile}>Pending Approval</Tab>
+          <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
         }
         {isBusinessAccount &&
-          <Tab tabId={'drafts'} disabled={isLockedProfile}>Drafts</Tab>
+          <Tab tabId={'drafts'}>Drafts</Tab>
         }
-        <Tab tabId={'settings'} disabled={isLockedProfile}>Settings</Tab>
+        <Tab tabId={'settings'}>Settings</Tab>
         <FeatureLoader supportedFeatures={'b4b_calendar'}>
-          <Tab tabId={'b4bCalendar'} onClick={() => openCalendarWindow(profileId)} disabled={isLockedProfile}>
+          <Tab tabId={'b4bCalendar'} onClick={() => openCalendarWindow(profileId)}>
             Calendar
           </Tab>
         </FeatureLoader>
@@ -77,7 +77,7 @@ const TabNavigation = ({
             </Button>
         </div>
       }
-      {shouldShowNestedSettingsTab &&
+      {shouldShowNestedSettingsTab && !isLockedProfile &&
         <Tabs
           selectedTabId={selectedChildTab}
           onTabClick={onChildTabClick}
