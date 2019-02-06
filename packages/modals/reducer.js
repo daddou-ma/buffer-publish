@@ -1,8 +1,9 @@
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const initialState = {
-  showWelcomeModal: false,
   showUpgradeModal: false,
+  showWelcomeModal: false,
+  showProfilesDisconnectedModal: false,
   upgradeModalSource: null,
 };
 
@@ -11,20 +12,12 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_UPGRADE_MODAL: 0,
   SHOW_WELCOME_MODAL: 0,
   HIDE_WELCOME_MODAL: 0,
+  SHOW_PROFILES_DISCONNECTED_MODAL: 0,
+  HIDE_PROFILES_DISCONNECTED_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SHOW_WELCOME_MODAL:
-      return {
-        ...state,
-        showWelcomeModal: true,
-      };
-    case actionTypes.HIDE_WELCOME_MODAL:
-      return {
-        ...state,
-        showWelcomeModal: false,
-      };
     case actionTypes.SHOW_UPGRADE_MODAL:
       return {
         ...state,
@@ -36,23 +29,49 @@ export default (state = initialState, action) => {
         ...state,
         showUpgradeModal: false,
       };
+    case actionTypes.SHOW_WELCOME_MODAL:
+      return {
+        ...state,
+        showWelcomeModal: true,
+      };
+    case actionTypes.HIDE_WELCOME_MODAL:
+      return {
+        ...state,
+        showWelcomeModal: false,
+      };
+    case actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL:
+      return {
+        ...state,
+        showProfilesDisconnectedModal: true,
+      };
+    case actionTypes.HIDE_PROFILES_DISCONNECTED_MODAL:
+      return {
+        ...state,
+        showProfilesDisconnectedModal: false,
+      };
     default:
       return state;
   }
 };
 
 export const actions = {
-  showWelcomeModal: () => ({
-    type: actionTypes.SHOW_WELCOME_MODAL,
-  }),
-  hideWelcomeModal: () => ({
-    type: actionTypes.HIDE_WELCOME_MODAL,
-  }),
   showUpgradeModal: ({ source }) => ({
     type: actionTypes.SHOW_UPGRADE_MODAL,
     source,
   }),
   hideUpgradeModal: () => ({
     type: actionTypes.HIDE_UPGRADE_MODAL,
+  }),
+  showWelcomeModal: () => ({
+    type: actionTypes.SHOW_WELCOME_MODAL,
+  }),
+  hideWelcomeModal: () => ({
+    type: actionTypes.HIDE_WELCOME_MODAL,
+  }),
+  showProfilesDisconnectedModal: () => ({
+    type: actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL,
+  }),
+  hideProfilesDisconnectedModal: () => ({
+    type: actionTypes.HIDE_PROFILES_DISCONNECTED_MODAL,
   }),
 };

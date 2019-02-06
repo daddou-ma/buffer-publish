@@ -1,11 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Modals renders a connected disconnected profiles modal 1`] = `<Connect(AppModals) />`;
+
 exports[`Modals renders a connected upgrade modal 1`] = `<Connect(AppModals) />`;
+
+exports[`Modals renders a connected welcome modal 1`] = `<Connect(AppModals) />`;
+
+exports[`Modals renders disconnected profiles modal 1`] = `
+<React.Fragment>
+  <Connect(ProfilesDisconnectedModal) />
+</React.Fragment>
+`;
 
 exports[`Modals renders nothing when no modals are visible 1`] = `<React.Fragment />`;
 
 exports[`Modals renders upgrade modal 1`] = `
 <React.Fragment>
   <Connect(UpgradeModal) />
+</React.Fragment>
+`;
+
+exports[`Modals renders welcome modal 1`] = `
+<React.Fragment>
+  <Connect(WelcomeModal) />
 </React.Fragment>
 `;

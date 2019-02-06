@@ -12,29 +12,66 @@ const fakeStore = state => ({
   getState: () => ({ ...state }),
 });
 
-const renderer = new ShallowRenderer();
-
 describe('Modals', () => {
   it('renders nothing when no modals are visible', () => {
     const visibleModals = { showUpgradeModal: false };
+    const renderer = new ShallowRenderer();
     const rendered = renderer.render(
-      <AppModals {...visibleModals} />
+      <AppModals {...visibleModals} />,
     );
     expect(rendered).toMatchSnapshot();
   });
   it('renders upgrade modal', () => {
     const visibleModals = { showUpgradeModal: true };
+    const renderer = new ShallowRenderer();
     const rendered = renderer.render(
-      <AppModals {...visibleModals} />
+      <AppModals {...visibleModals} />,
     );
     expect(rendered).toMatchSnapshot();
   });
   it('renders a connected upgrade modal', () => {
     const visibleModals = { showUpgradeModal: true };
+    const renderer = new ShallowRenderer();
     const rendered = renderer.render(
       <Provider store={fakeStore({ modals: visibleModals })}>
         <AppModalsConnected />
-      </Provider>
+      </Provider>,
+    );
+    expect(rendered).toMatchSnapshot();
+  });
+  it('renders welcome modal', () => {
+    const visibleModals = { showWelcomeModal: true };
+    const renderer = new ShallowRenderer();
+    const rendered = renderer.render(
+      <AppModals {...visibleModals} />,
+    );
+    expect(rendered).toMatchSnapshot();
+  });
+  it('renders a connected welcome modal', () => {
+    const visibleModals = { showWelcomeModal: true };
+    const renderer = new ShallowRenderer();
+    const rendered = renderer.render(
+      <Provider store={fakeStore({ modals: visibleModals })}>
+        <AppModalsConnected />
+      </Provider>,
+    );
+    expect(rendered).toMatchSnapshot();
+  });
+  it('renders disconnected profiles modal', () => {
+    const visibleModals = { showProfilesDisconnectedModal: true };
+    const renderer = new ShallowRenderer();
+    const rendered = renderer.render(
+      <AppModals {...visibleModals} />,
+    );
+    expect(rendered).toMatchSnapshot();
+  });
+  it('renders a connected disconnected profiles modal', () => {
+    const visibleModals = { showProfilesDisconnectedModal: true };
+    const renderer = new ShallowRenderer();
+    const rendered = renderer.render(
+      <Provider store={fakeStore({ modals: visibleModals })}>
+        <AppModalsConnected />
+      </Provider>,
     );
     expect(rendered).toMatchSnapshot();
   });
