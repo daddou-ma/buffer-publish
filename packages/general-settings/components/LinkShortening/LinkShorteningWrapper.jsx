@@ -8,6 +8,7 @@ import ConnectBitlyToggler from './ConnectBitlyButton';
 const textWrapperStyle = {
   display: 'flex',
   marginBottom: '0.5rem',
+  marginTop: '0.5rem',
 };
 
 const bitlyWrapperSidebarStyle = {
@@ -26,16 +27,14 @@ const wrapperSidebarStyle = {
 const loadingContainerStyle = {
   ...wrapperSidebarStyle,
   paddingTop: '1.5rem',
-  textAlign: 'center',
 };
 
 const containerStyling = {
   display: 'flex',
   flex: '1 1 0%',
   flexDirection: 'row',
-  marginBottom: '0.5rem',
+  padding: '0.5rem 0',
   width: '100%',
-  alignItems: 'center',
 };
 
 const LinkShorteningWrapper = ({
