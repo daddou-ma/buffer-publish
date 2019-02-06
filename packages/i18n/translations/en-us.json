@@ -43,9 +43,16 @@
     "stayOnFreeCta": "Stay on the Free Plan for now"
   },
   "welcome-modal": {
-    "headline": "We’ve refreshed the look of Buffer",
-    "body1": "We’ve tidied up the look of your Buffer dashboard!",
-    "body2": "We’ve kept your features and all your stuff just as it was but with a cleaner and faster experience.",
-    "cta": "Let’s Go!"
+    "headline": "We've refreshed the look of Buffer",
+    "body1": "We've tidied up the look of your Buffer dashboard!",
+    "body2": "We've kept your features and all your stuff just as it was but with a cleaner and faster experience.",
+    "cta": "Let's Go!"
+  },
+  "welcome-paid-modal": {
+    "headline": "We have something for you",
+    "body1": "We've been working hard on a much improved version of Buffer.",
+    "body2": "Everything you know and love about your current Buffer experience is still there, we've just worked on making a few things easier and improving the speed and performance of your Buffer Dashboard",
+    "body3": "Don’t worry, you can switch back anytime you like.",
+    "cta": "Let's give it a go!"
   }
 }

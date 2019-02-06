@@ -13,6 +13,9 @@ const getShowModalKey = () => {
 export const shouldShowWelcomeModal = () =>
   getShowModalKey() === 'welcome-modal-1';
 
+export const shouldShowWelcomeModalPaidUsers = () =>
+  getShowModalKey() === 'welcome-modal-2';
+
 export const shouldShowUpgradeModal = () =>
   getShowModalKey().indexOf('upgrade-to-pro') === 0;
 
