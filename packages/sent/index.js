@@ -1,6 +1,7 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
 // load the presentational component
+import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
 import SentPosts from './components/SentPosts';
 
@@ -40,6 +41,7 @@ export default connect(
         showComposer: state.sent.showComposer,
         editMode: state.sent.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
+        isLockedProfile: state.profileSidebar.isLockedProfile,
       };
     }
     return {};
@@ -77,6 +79,9 @@ export default connect(
         post: post.post,
         profileId: ownProps.profileId,
       }));
+    },
+    onClickUpgradeToPro: () => {
+      dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
     },
   }),
 )(SentPosts);
