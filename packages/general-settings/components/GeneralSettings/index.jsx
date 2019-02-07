@@ -60,6 +60,7 @@ const GeneralSettings = ({
         <InstagramReminders
           remindersAreEnabled={remindersAreEnabled}
           onToggleRemindersClick={onToggleRemindersClick}
+          isContributor={isContributor}
         />
       }
       <LinkShortening

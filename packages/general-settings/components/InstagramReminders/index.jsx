@@ -41,6 +41,7 @@ const switchStyle = {
 const InstagramReminders = ({
   onToggleRemindersClick,
   remindersAreEnabled,
+  isContributor,
 }) => (
   <div>
     <div style={instagramRemindersStyle}>
@@ -75,6 +76,7 @@ const InstagramReminders = ({
           <Toggle
             onText={'Reminders only'}
             offText={'Disabled'}
+            disabled={isContributor === true}
             on={remindersAreEnabled}
             size={'small'}
             onClick={() => onToggleRemindersClick(!remindersAreEnabled)}
@@ -89,6 +91,7 @@ const InstagramReminders = ({
 InstagramReminders.propTypes = {
   onToggleRemindersClick: PropTypes.func.isRequired,
   remindersAreEnabled: PropTypes.bool.isRequired,
+  isContributor: PropTypes.bool.isRequired,
 };
 
 export default InstagramReminders;
