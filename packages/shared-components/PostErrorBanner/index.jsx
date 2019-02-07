@@ -22,9 +22,9 @@ const createMarkup = error => (
 
 // Need to add <a> style because can't directly get to <a> in error html string
 const PostErrorBanner = ({ dragging, error }) => (
-  <div id="errorBar" style={errorBannerWrapper(dragging)}>
+  <div id="errorBanner" style={errorBannerWrapper(dragging)}>
     <style>{`
-      #errorBar a { color: ${white}; }
+      #errorBanner a { color: ${white}; }
     `}
     </style>
     <Text
