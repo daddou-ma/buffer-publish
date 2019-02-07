@@ -4,7 +4,7 @@ import { Text } from '@bufferapp/components';
 import { white } from '@bufferapp/components/style/color';
 
 const errorBannerWrapper = dragging => ({
-  backgroundColor: '#E0364F', // TODO: add to buffer-components
+  backgroundColor: '#E0364F', // get color from new design system when rolled out
   padding: '8px 16px',
   color: white,
   display: 'flex',
