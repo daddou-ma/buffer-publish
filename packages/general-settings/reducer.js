@@ -13,6 +13,7 @@ export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
   SET_UTM_CAMPAIGN: 0,
   SET_UTM_SOURCE: 0,
   SET_UTM_MEDIUM: 0,
+  TOGGLE_INSTAGRAM_REMINDERS: 0,
 });
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   profileId: null,
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
+  remindersAreEnabled: false,
 };
 
 export default (state = initialState, action) => {
@@ -37,6 +39,7 @@ export default (state = initialState, action) => {
         loadingLinkShorteners: true,
         selectedShortener: null,
         trackingSettings: action.trackingSettings,
+        remindersAreEnabled: !action.profile.directPostingEnabled,
       };
     case `changeLinkShortener_${dataFetchActionTypes.FETCH_START}`:
       return {
@@ -114,6 +117,16 @@ export default (state = initialState, action) => {
         ...state,
         utmMedium: action.utmMedium,
       };
+    case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+        remindersAreEnabled: action.args.allowReminders,
+      };
+    case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        remindersAreEnabled: !state.remindersAreEnabled,
+      };
     default:
       return state;
   }
@@ -164,5 +177,10 @@ export const actions = {
   handleChangeUtmMedium: ({ utmMedium }) => ({
     type: actionTypes.SET_UTM_MEDIUM,
     utmMedium,
+  }),
+  handleRemindersToggle: ({ profileId, allowReminders }) => ({
+    type: actionTypes.TOGGLE_INSTAGRAM_REMINDERS,
+    profileId,
+    allowReminders,
   }),
 };

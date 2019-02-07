@@ -5,6 +5,7 @@ import { LockedProfileNotification } from '@bufferapp/publish-shared-components'
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
+import InstagramReminders from '../InstagramReminders';
 
 const GeneralSettings = ({
   isInstagramProfile,
@@ -32,6 +33,8 @@ const GeneralSettings = ({
   onChangeUtmSource,
   utmMedium,
   onChangeUtmMedium,
+  remindersAreEnabled,
+  onToggleRemindersClick,
   isLockedProfile,
   onClickUpgradeToPro,
 }) => {
@@ -44,14 +47,20 @@ const GeneralSettings = ({
   return (
     <div>
       {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
-      <InstagramDirectPosting
-        onDirectPostingClick={onSetUpDirectPostingClick}
-      />
+        <InstagramDirectPosting
+          onDirectPostingClick={onSetUpDirectPostingClick}
+        />
       }
       {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
-      <InstagramDirectPosting
-        onDirectPostingClick={onDirectPostingClick}
-      />
+        <InstagramDirectPosting
+          onDirectPostingClick={onDirectPostingClick}
+        />
+      }
+      {isInstagramProfile && isInstagramBusiness &&
+        <InstagramReminders
+          remindersAreEnabled={remindersAreEnabled}
+          onToggleRemindersClick={onToggleRemindersClick}
+        />
       }
       <LinkShortening
         isContributor={isContributor}
@@ -64,7 +73,7 @@ const GeneralSettings = ({
         selectedShortener={selectedShortener}
         features={features}
       />
-      <Divider/>
+      <Divider />
       <GoogleAnalytics
         onShowGACustomizationFormClick={onShowGACustomizationFormClick}
         showGACustomizationForm={showGACustomizationForm}
@@ -97,6 +106,7 @@ GeneralSettings.defaultProps = {
   utmCampaign: null,
   utmSource: null,
   utmMedium: null,
+  remindersAreEnabled: false,
   isLockedProfile: false,
 };
 
@@ -135,6 +145,8 @@ GeneralSettings.propTypes = {
   onChangeUtmSource: PropTypes.func.isRequired,
   utmMedium: PropTypes.string,
   onChangeUtmMedium: PropTypes.func.isRequired,
+  remindersAreEnabled: PropTypes.bool,
+  onToggleRemindersClick: PropTypes.func.isRequired,
   isLockedProfile: PropTypes.bool,
   onClickUpgradeToPro: PropTypes.func.isRequired,
 };

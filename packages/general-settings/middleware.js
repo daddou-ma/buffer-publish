@@ -73,6 +73,15 @@ export default ({ dispatch }) => next => (action) => {
         },
       }));
       break;
+    case actionTypes.TOGGLE_INSTAGRAM_REMINDERS:
+      dispatch(dataFetchActions.fetch({
+        name: 'toggleInstagramReminders',
+        args: {
+          profileId: action.profileId,
+          allowReminders: action.allowReminders,
+        },
+      }));
+      break;
     default:
       break;
   }

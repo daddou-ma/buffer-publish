@@ -7,14 +7,15 @@ import {
 
 const instagramDirectPostingStyle = {
   display: 'flex',
-  flex: 1,
+
   flexDirection: 'row',
-  marginBottom: '0.5rem',
+  padding: '0.5rem 0',
 };
 
 const textWrapperStyle = {
   display: 'flex',
   marginBottom: '0.5rem',
+  marginTop: '0.5rem',
 };
 
 const textStyle = {
@@ -22,12 +23,7 @@ const textStyle = {
 };
 
 const setUpDirectPostingStyle = {
-  marginBottom: '1.5rem',
   marginTop: '1rem',
-  textAlign: 'right',
-  whiteSpace: 'nowrap',
-  flex: 0.3,
-  marginLeft: '1rem',
 };
 
 
