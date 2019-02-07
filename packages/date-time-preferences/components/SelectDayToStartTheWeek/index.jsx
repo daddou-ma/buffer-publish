@@ -19,6 +19,7 @@ const DayToStartTheWeek = ({ input }) => (
       },
     ]}
     onChange={input.onChange}
+    size={'small'}
   />
 );
 
@@ -32,7 +33,7 @@ DayToStartTheWeek.propTypes = {
 const SelectDayToStartTheWeek = () => (
   <Row>
     <div>
-      <Text color={'outerSpace'}>Day to start the week</Text>
+      <Text color={'black'} size={'mini'}>Day to start the week</Text>
     </div>
     <div>
       <form style={{ minWidth: '185px' }}>

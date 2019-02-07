@@ -110,6 +110,7 @@ const Preferences = ({
         style={{
           flexGrow: 1,
           overflowY: 'auto',
+          maxWidth: '864px',
         }}
       >
         <PreferenceContent tabId={selectedTabId} onUnknownTab={onUnknownTab} />

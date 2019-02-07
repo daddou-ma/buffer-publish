@@ -11,13 +11,13 @@ const ChangePassword = ({ showModal, onRequestOpenModal, onRequestCloseModal, on
         marginRight: '1rem',
       }}
     >
-      <Text color={'outerSpace'}>Password</Text>
+      <Text color={'black'} size={'mini'}>Password</Text>
       <div
         style={{
           marginTop: '0.5rem',
         }}
       >
-        <Text size={'mini'}>
+        <Text size={'small'}>
           Use your password to sign in to Buffer on the web and mobile apps. Make it nice and
           secure!
         </Text>

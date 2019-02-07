@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Row } from '@bufferapp/publish-shared-components';
 import { Text, Button, CloseIcon } from '@bufferapp/components';
 import Modal from '../Modal';
-import { Row } from '@bufferapp/publish-shared-components';
 
 const CloseAccount = ({ showModal, onRequestOpenModal, onRequestCloseModal, onSubmit }) => (
   <Row>
@@ -11,13 +11,13 @@ const CloseAccount = ({ showModal, onRequestOpenModal, onRequestCloseModal, onSu
         marginRight: '1rem',
       }}
     >
-      <Text color={'outerSpace'}>Delete your Buffer account</Text>
+      <Text color={'black'} size={'mini'}>Delete your Buffer account</Text>
       <div
         style={{
           marginTop: '0.5rem',
         }}
       >
-        <Text size={'mini'}>If you delete your account, you will lose all your posts.</Text>
+        <Text size={'small'}>If you delete your account, you will lose all your posts.</Text>
       </div>
     </div>
     <Button onClick={onRequestOpenModal} noStyle>
@@ -33,7 +33,7 @@ const CloseAccount = ({ showModal, onRequestOpenModal, onRequestCloseModal, onSu
             marginBottom: '0.25rem',
           }}
         >
-          <Text color={'outerSpace'}>Delete Buffer Account</Text>
+          <Text color={'outerSpace'} size={'small'}>Delete Buffer Account</Text>
         </div>
         <div>
           <CloseIcon color={'torchRed'} />

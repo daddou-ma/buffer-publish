@@ -14,13 +14,13 @@ const editStyle = {
 
 const EditEmail = ({ email, onClick, displayModal, updateEmail, saveEmail, hideModal }) => (
   <Row>
-    <Text color={'outerSpace'}>Email address</Text>
+    <Text color={'black'} size={'mini'}>Email address</Text>
     <section>
       <SensitiveData>
-        <Text color={'outerSpace'}>{email}</Text>
+        <Text size={'small'} color={'outerSpace'}>{email}</Text>
       </SensitiveData>
       <span style={editStyle}>
-        <Text>
+        <Text size={'small'}>
           <Link onClick={onClick} unstyled href="#">
             Edit
           </Link>

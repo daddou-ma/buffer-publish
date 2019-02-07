@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Text,
   Button,
-  Divider,
   Link,
 } from '@bufferapp/components';
 
@@ -20,7 +19,11 @@ const rowBlockStyle = {
   display: 'block',
   justifyContent: 'space-between',
   alignItems: 'center',
+  padding: '1rem 0',
   marginRight: '1rem',
+};
+const textStyle = {
+  marginTop: '0.5rem',
 };
 
 const AppsManager = ({
@@ -34,12 +37,11 @@ const AppsManager = ({
 }) => (
   <section style={rowBlockStyle}>
     <div>
-      <Text color={'outerSpace'} size={'mini'} weight={'bold'}>Connected Apps</Text>
-      <div>
+      <Text color={'black'} size={'mini'}>Connected Apps</Text>
+      <div style={textStyle}>
         <Text size={'small'} color={'shuttleGray'}>
           Get the most out of Buffer and share from your mobile, news reader, blog or anywhere! <Link newTab href={'https://buffer.com/extras'}>Get More Apps →</Link>
         </Text>
-        <Divider />
 
         {connectedApps.map(app => (
           <div key={app.id}>
@@ -52,7 +54,6 @@ const AppsManager = ({
                 Revoke Access
               </Button>
             </div>
-            <Divider />
           </div>
         ))}
       </div>
