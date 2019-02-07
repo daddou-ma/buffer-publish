@@ -104,7 +104,7 @@ Buffer Publish is a _monorepo_. That means it's composed of several separate par
 
 No need to publish local packages anymore for deployments 🎉
 
-## Addings new Packages
+## Adding new Packages
 
 🎬 See this video http://hi.buffer.com/5be7a08fc7fc
 
