@@ -8,4 +8,9 @@ storiesOf('InstagramReminders', module)
   .addDecorator(checkA11y)
   .add('default', () => (
     <InstagramReminders />
+  ))
+  .add('if user is contributor only', () => (
+    <InstagramReminders
+      isContributor
+    />
   ));
