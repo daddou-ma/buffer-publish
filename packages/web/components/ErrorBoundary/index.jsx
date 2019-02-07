@@ -12,14 +12,15 @@ if (window._bugsnagConfig) {
   window.bugsnagClient = bugsnag({
     // Grab the config dropped in by the express server
     ...window._bugsnagConfig,
-    beforeSend: (report) => {
-      // Make sure FullStory object exists
-      if (window.FS && window.FS.getCurrentSessionURL) {
-        report.updateMetaData(
-          'fullstory', { urlAtTime: window.FS.getCurrentSessionURL(true) }
-        );
-      }
-    },
+// Remove FullStory integration for now (request from Super, Feb 6 2019)    
+//     beforeSend: (report) => {
+//       // Make sure FullStory object exists
+//       if (window.FS && window.FS.getCurrentSessionURL) {
+//         report.updateMetaData(
+//           'fullstory', { urlAtTime: window.FS.getCurrentSessionURL(true) }
+//         );
+//       }
+//     },
   });
   window.bugsnagClient.use(bugsnagReact, React);
 
