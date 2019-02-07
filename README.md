@@ -117,22 +117,25 @@ $ cp packages/example packages/your-new-package
 ```
 The name of the folder is up to you, what's more important is the name of package (in it's `package.json`).
 
-2. Update `package.json`
-  * Change the name, author, version (always `2.0.0` for local packages), and description.
-  * You can remove all the `"dependencies"` for now, and add them as you need them.
+2. **Update `package.json`**
+    * Change the name, author, version (always `2.0.0` for local packages), and description.
+    * You can remove all the `"dependencies"` for now, and add them as you need them.
 
-3. Update `README.md`
-  * Delete all the text here and just have a heading with your package name and a short description. This is also a great place to document how your package works, and how it can be used/consumed.
+3. **Update `README.md`**
+    * Delete all the text here and just have a heading with your package name and a short description. This is also a great place to document how your package works, and how it can be used/consumed.
 
-4. Cleanup: Delete the `node_modules` and `coverage` folders that came from copying `/example`.
+4. **Cleanup:** 
+    * Delete the `node_modules` and `coverage` folders that came from copying `/example`.
 
 5. Not all packages have to export a component (see for example the `maintenance-redirect` package.)
-  * This is where you'll start to make changes and add things based on the needs of your package.
-  * Look at other packages for examples!
+    * This is where you'll start to make changes and add things based on the needs of your package.
+    * Look at other packages for examples!
 
-6. If you have a reducer and/or middleware - don't forget to link those up in `packages/store/index.js` and `packages/store/reducers.js`.
+6. **Connect reducer and/or middleware**
+    * If you have a reducer and/or middleware - don't forget to link those up in `packages/store/index.js` and `packages/store/reducers.js`.
 
-7. Run `yarn` when you're done (or whenever you change the dependencies in your package or another.)
+7. **Run `yarn`**
+    * Do this when you're customizing your package, and  whenever you change the dependencies in your package or another.
 
 ## Package Scripts
 
