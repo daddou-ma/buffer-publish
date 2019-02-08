@@ -6,9 +6,8 @@ import Example, {
   reducer,
   actions,
   actionTypes,
-  middleware,
 } from './index';
-import LoggedIn from './components/LoggedIn';
+import StealProfileModal from './components/StealProfileModal';
 
 const storeFake = state => ({
   default: () => {},
@@ -17,18 +16,26 @@ const storeFake = state => ({
   getState: () => ({ ...state }),
 });
 
-describe('Example', () => {
+describe('StealProfileModal', () => {
   it('should render', () => {
     const store = storeFake({
-      example: {
-        loggedIn: false,
+      stealProfileModal: {
+        showStealProfileModal: false,
       },
       i18n: {
         translations: {
-          example: {
-            loggedIn: 'Logged In...',
-            loggedOut: 'Logged Out...',
+          'steal-profile-modal': {
+            headline1: 'headline1',
+            headline2: 'headline2',
           },
+        },
+      },
+      modals: {
+        stealProfileUsername: 'username',
+      },
+      appSidebar: {
+        user: {
+          email: 'username@mail.com',
         },
       },
     });
@@ -37,7 +44,7 @@ describe('Example', () => {
         <Example />
       </Provider>,
     );
-    expect(wrapper.find(LoggedIn).length)
+    expect(wrapper.find(StealProfileModal).length)
       .toBe(1);
   });
 
@@ -53,11 +60,6 @@ describe('Example', () => {
 
   it('should export actionTypes', () => {
     expect(actionTypes)
-      .toBeDefined();
-  });
-
-  it('should export middleware', () => {
-    expect(middleware)
       .toBeDefined();
   });
 });

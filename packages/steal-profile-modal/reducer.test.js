@@ -1,11 +1,11 @@
 import deepFreeze from 'deep-freeze';
-import { actionTypes as asyncDataFetchActions } from '@bufferapp/async-data-fetch';
+import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals';
 import reducer from './reducer';
 
 describe('reducer', () => {
   it('should initialize default state', () => {
     const stateAfter = {
-      loggedIn: false,
+      showStealProfileModal: false,
     };
     const action = {
       type: 'INIT',
@@ -15,43 +15,27 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle LOGIN_SUCCESS action type', () => {
+  it('should handle SHOW_STEAL_PROFILE_MODAL action type', () => {
     const stateAfter = {
-      loggedIn: true,
+      showStealProfileModal: true,
     };
     const action = {
-      type: `login_${asyncDataFetchActions.FETCH_SUCCESS}`,
+      type: modalsActionTypes.SHOW_STEAL_PROFILE_MODAL,
     };
     deepFreeze(action);
     expect(reducer(undefined, action))
       .toEqual(stateAfter);
   });
 
-  it('should handle `logout_FETCH_START` actionType', () => {
+  it('should handle HIDE_STEAL_PROFILE_MODAL actionType', () => {
     const stateBefore = {
-      loggedIn: true,
+      showStealProfileModal: true,
     };
     const stateAfter = {
-      loggedIn: false,
+      showStealProfileModal: false,
     };
     const action = {
-      type: `logout_${asyncDataFetchActions.FETCH_START}`,
-    };
-    deepFreeze(stateBefore);
-    deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
-  });
-
-  it('should handle login_FETCH_FAIL actionType', () => {
-    const stateBefore = {
-      loggedIn: true,
-    };
-    const stateAfter = {
-      loggedIn: false,
-    };
-    const action = {
-      type: `login_${asyncDataFetchActions.FETCH_FAIL}`,
+      type: modalsActionTypes.HIDE_STEAL_PROFILE_MODAL,
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
