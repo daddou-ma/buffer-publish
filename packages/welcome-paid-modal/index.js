@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 
+
 import WelcomePaidModal from './components/WelcomePaidModal';
+
 
 export default connect(
   state => ({

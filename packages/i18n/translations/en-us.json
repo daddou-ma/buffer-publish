@@ -49,10 +49,12 @@
     "cta": "Let's Go!"
   },
   "welcome-paid-modal": {
-    "headline": "We have something for you",
-    "body1": "We've been working hard on a much improved version of Buffer.",
-    "body2": "Everything you know and love about your current Buffer experience is still there, we've just worked on making a few things easier and improving the speed and performance of your Buffer Dashboard",
-    "body3": "Don’t worry, you can switch back anytime you like.",
-    "cta": "Let's give it a go!"
+    "headline1": "A refreshed experience",
+    "body1": "We’re working on a refreshed experience for you. The same Buffer you’ve come to love – ",
+    "body2": "now simpler, smoother, and faster.",
+    "cta1": "Continue",
+    "headline2": "Switch back at any time",
+    "body3": "Feeling nostalgic? Switch back to classic Buffer at anytime:",
+    "cta2": "Sounds Good"
   }
 }

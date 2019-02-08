@@ -10,7 +10,7 @@ storiesOf('WelcomePaidModal', module)
   .addDecorator(checkA11y)
   .add('should show welcome modal', () => (
     <WelcomePaidModal
-      translations={translations['welcome-modal']}
+      translations={translations['welcome-paid-modal']}
       hideModal={action('hide-modal')}
     />
   ));
