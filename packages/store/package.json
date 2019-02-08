@@ -13,7 +13,7 @@
     "@bufferapp/analyze-export-picker": "0.79.1",
     "@bufferapp/analyze-png-export": "^0.79.1",
     "@bufferapp/analyze-profile-selector": "0.79.1",
-    "@bufferapp/app-sidebar": "1.10.0",
+    "@bufferapp/app-sidebar": "1.10.2",
     "@bufferapp/async-data-fetch": "1.9.4",
     "@bufferapp/average-table": "0.79.1",
     "@bufferapp/buffermetrics": "0.6.3-beta-06",

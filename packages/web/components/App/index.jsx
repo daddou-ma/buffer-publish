@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import AppSidebar from '@bufferapp/app-sidebar';
+import Sidebar from '@bufferapp/publish-sidebar';
 import Notifications from '@bufferapp/notifications';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
@@ -30,7 +30,7 @@ class App extends Component { // eslint-disable-line
   render() {
     return (
       <div style={appStyle}>
-        <AppSidebar activeProduct="publish" />
+        <Sidebar activeProduct="publish" />
 
         <div style={contentStyle}>
           <EnsurePublishBetaUser>
