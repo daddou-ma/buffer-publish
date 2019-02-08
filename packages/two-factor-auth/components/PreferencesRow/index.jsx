@@ -17,7 +17,7 @@ const TwoFactorPreferencesRow = ({
   phoneNumber,
 }) => (
   <Fragment>
-    <Text size="small">
+    <Text size="mini">
       Two factor authentication adds an extra layer of security for your Buffer account.
       Whenever you log in to your account, after entering your username and password,
       you will be asked for a second authentication code that was sent to your mobile
@@ -25,19 +25,19 @@ const TwoFactorPreferencesRow = ({
     </Text>
     {method && <Fragment>
       <div style={{ margin: '16px 0 0 0' }}>
-        <Text size="small">
+        <Text size="mini">
           Method: <b>{formattedMethod[method]}</b>{' '}
           <Link href="#" onClick={() => transition('CHANGE_METHOD')}>Edit</Link>
         </Text>
       </div>
       {method === 'sms' && <div style={{ margin: '8px 0 0 0' }}>
-        <Text size="small">
+        <Text size="mini">
           Phone number: <SensitiveData><b>{phoneNumber}</b></SensitiveData>{' '}
           <Link href="#" onClick={() => transition('CHANGE_SMS')}>Edit</Link>
         </Text>
       </div>}
       <div style={{ margin: '8px 0 0 0' }}>
-        <Text size="small">
+        <Text size="mini">
           Recovery code:{' '}
           <Link href="#" onClick={() => transition('SHOW_RECOVERY')}>View</Link>
         </Text>

@@ -4,6 +4,7 @@ import {
   Text,
   Button,
   Link,
+  Divider,
 } from '@bufferapp/components';
 
 import Modal from '../Modal';
@@ -12,14 +13,14 @@ const stylesFlexRow = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  margin: '1rem 0',
+  height: '2.5rem',
 };
 
 const rowBlockStyle = {
   display: 'block',
   justifyContent: 'space-between',
   alignItems: 'center',
-  padding: '1rem 0',
+  paddingTop: '2rem',
   marginRight: '1rem',
 };
 const textStyle = {
@@ -37,12 +38,12 @@ const AppsManager = ({
 }) => (
   <section style={rowBlockStyle}>
     <div>
-      <Text color={'black'} size={'mini'}>Connected Apps</Text>
+      <Text color={'black'}>Connected Apps</Text>
       <div style={textStyle}>
-        <Text size={'small'} color={'shuttleGray'}>
+        <Text size={'mini'} color={'shuttleGray'}>
           Get the most out of Buffer and share from your mobile, news reader, blog or anywhere! <Link newTab href={'https://buffer.com/extras'}>Get More Apps →</Link>
         </Text>
-
+        <Divider />
         {connectedApps.map(app => (
           <div key={app.id}>
             <div style={stylesFlexRow}>
@@ -54,6 +55,7 @@ const AppsManager = ({
                 Revoke Access
               </Button>
             </div>
+            <Divider />
           </div>
         ))}
       </div>

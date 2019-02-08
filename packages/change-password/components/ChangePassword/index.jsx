@@ -17,7 +17,7 @@ const ChangePassword = ({ showModal, onRequestOpenModal, onRequestCloseModal, on
           marginTop: '0.5rem',
         }}
       >
-        <Text size={'small'}>
+        <Text size={'mini'}>
           Use your password to sign in to Buffer on the web and mobile apps. Make it nice and
           secure!
         </Text>

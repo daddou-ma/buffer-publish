@@ -2,25 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Link } from '@bufferapp/components';
 import {
-  Row,
   SensitiveData,
 } from '@bufferapp/publish-shared-components';
 
 import Modal from '../Modal';
 
 const editStyle = {
-  marginLeft: '1rem',
+  marginLeft: '0.5rem',
+};
+
+const rowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  height: '1.5rem',
+  padding: '1rem 0',
+  alignItems: 'center',
 };
 
 const EditEmail = ({ email, onClick, displayModal, updateEmail, saveEmail, hideModal }) => (
-  <Row>
+  <div style={rowStyle}>
     <Text color={'black'} size={'mini'}>Email address</Text>
     <section>
       <SensitiveData>
-        <Text size={'small'} color={'outerSpace'}>{email}</Text>
+        <Text size={'mini'} color={'outerSpace'}>{email}</Text>
       </SensitiveData>
       <span style={editStyle}>
-        <Text size={'small'}>
+        <Text size={'mini'}>
           <Link onClick={onClick} unstyled href="#">
             Edit
           </Link>
@@ -30,7 +37,7 @@ const EditEmail = ({ email, onClick, displayModal, updateEmail, saveEmail, hideM
     {displayModal && (
       <Modal email={email} updateEmail={updateEmail} hideModal={hideModal} saveEmail={saveEmail} />
     )}
-  </Row>
+  </div>
 );
 
 EditEmail.propTypes = {

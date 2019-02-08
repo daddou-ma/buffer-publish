@@ -72,7 +72,7 @@ const TwoFactorAuth = ({
         on={isEnabled}
         onClick={() => transition(isEnabled ? 'DISABLE' : 'ENABLE')}
         disabled={!['enabled', 'disabled'].includes(machineState)}
-        size={'small'}
+        size={'mini'}
       />
     </div>
   </Row>
