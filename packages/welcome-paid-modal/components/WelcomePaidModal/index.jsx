@@ -8,6 +8,19 @@ import {
 
 import styles from './welcomePaidModal.css';
 
+const DotsComponent = ({ step }) => (
+  <div className={styles.divDotStyle}>
+    <ul className={styles.dotstyleUl}>
+      <li className={styles.dotstyleLi}>
+        <a className={step === 1 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#">Step 1</a>
+      </li>
+      <li className={styles.dotstyleLi}>
+        <a className={step === 2 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#">Step 2</a>
+      </li>
+    </ul>
+  </div>
+);
+
 class WelcomePaidModal extends React.Component {
   constructor(props) {
     super(props);
@@ -35,16 +48,7 @@ class WelcomePaidModal extends React.Component {
               </div>
             </div>
             <div className={styles.barBottomStyle}>
-              <div className={styles.divDotStyle}>
-                <ul className={styles.dotstyleUl}>
-                  <li className={styles.dotstyleLi}>
-                    <a className={styles.dotstyleA} href="#">Step 1</a>
-                  </li>
-                  <li className={styles.dotstyleLi}>
-                    <a className={styles.dotstyleA} href="#">Step 2</a>
-                  </li>
-                </ul>
-              </div>
+              <DotsComponent step={this.state.step} />
               <div className={styles.divButton}>
                 <Button onClick={this.onClickContinue} large>{translations.cta1}</Button>
               </div>
@@ -66,16 +70,7 @@ class WelcomePaidModal extends React.Component {
                 <img src="https://s3.amazonaws.com/buffer-publish/images/go_back_to_classic.gif" alt="You can go back from the sidebar" />
               </div>
               <div className={styles.barBottomStyle}>
-                <div className={styles.divDotStyle}>
-                  <ul className={styles.dotstyleUl}>
-                    <li className={styles.dotstyleLi}>
-                      <a className={styles.dotstyleA} href="#">Step 1</a>
-                    </li>
-                    <li className={styles.dotstyleLi}>
-                      <a className={styles.dotstyleA} href="#">Step 2</a>
-                    </li>
-                  </ul>
-                </div>
+                <DotsComponent step={this.state.step} />
                 <div className={styles.divButton}>
                   <Button onClick={hideModal} large>{translations.cta2}</Button>
                 </div>
