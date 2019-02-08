@@ -149,7 +149,7 @@ const Post = ({
         draggingPlaceholder={dragging && !fixed}
         noBorder={dragging && fixed}
       >
-        {postDetails.error && postDetails.error.length > 0 &&
+        {postDetails && postDetails.error && postDetails.error.length > 0 &&
           <PostErrorBanner
             dragging={dragging}
             error={postDetails.error}
