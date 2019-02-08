@@ -8,28 +8,38 @@ import {
 
 import styles from './welcomePaidModal.css';
 
-const DotsComponent = ({ step }) => (
+const DotsComponent = ({ step, onClickCallback }) => (
   <div className={styles.divDotStyle}>
     <ul className={styles.dotstyleUl}>
       <li className={styles.dotstyleLi}>
-        <a className={step === 1 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#">Step 1</a>
+        <a className={step === 1 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#" onClick={() => onClickCallback(1)}>Step 1</a>
       </li>
       <li className={styles.dotstyleLi}>
-        <a className={step === 2 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#">Step 2</a>
+        <a className={step === 2 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#" onClick={() => onClickCallback(2)}>Step 2</a>
       </li>
     </ul>
   </div>
 );
+
+DotsComponent.propTypes = {
+  step: PropTypes.number.isRequired,
+  onClickCallback: PropTypes.func.isRequired,
+};
 
 class WelcomePaidModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = { step: 1 };
     this.onClickContinue = this.onClickContinue.bind(this);
+    this.onClickStep = this.onClickStep.bind(this);
   }
 
   onClickContinue() {
     this.setState({ step: 2 });
+  }
+
+  onClickStep(n) {
+    this.setState({ step: n });
   }
 
   render() {
@@ -48,7 +58,7 @@ class WelcomePaidModal extends React.Component {
               </div>
             </div>
             <div className={styles.barBottomStyle}>
-              <DotsComponent step={this.state.step} />
+              <DotsComponent step={this.state.step} onClickCallback={this.onClickStep} />
               <div className={styles.divButton}>
                 <Button onClick={this.onClickContinue} large>{translations.cta1}</Button>
               </div>
@@ -60,7 +70,7 @@ class WelcomePaidModal extends React.Component {
             <div className={styles.card}>
               <div className={styles.mainDiv2} >
                 <div style={{ paddingLeft: '25px', paddingTop: '25px' }}>
-                  <Text size="large" weight="medium">{translations.headline2}</Text>
+                  <Text color={'black'} size="large" weight="medium">{translations.headline2}</Text>
                   <div style={{ lineHeight: '2.5' }}>
                     <Text>{translations.body3}</Text>
                   </div>
@@ -70,7 +80,7 @@ class WelcomePaidModal extends React.Component {
                 <img src="https://s3.amazonaws.com/buffer-publish/images/go_back_to_classic.gif" alt="You can go back from the sidebar" />
               </div>
               <div className={styles.barBottomStyle}>
-                <DotsComponent step={this.state.step} />
+                <DotsComponent step={this.state.step} onClickCallback={this.onClickStep} />
                 <div className={styles.divButton}>
                   <Button onClick={hideModal} large>{translations.cta2}</Button>
                 </div>
