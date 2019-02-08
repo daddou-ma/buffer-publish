@@ -35,8 +35,8 @@
   text-indent: -999em; /* make the text accessible to screen readers */
   cursor: pointer;
   position: absolute;
-  -webkit-transition: -webkit-transform 0.3s ease, background-color 0.3s ease;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .dotstyleA:focus {
@@ -58,11 +58,9 @@
   text-indent: -999em; /* make the text accessible to screen readers */
   cursor: pointer;
   position: absolute;
-  -webkit-transition: -webkit-transform 0.3s ease, background-color 0.3s ease;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  -webkit-transition: background-color 0.3s ease;
+  transition:background-color 0.3s ease;
   background-color: black;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
 }
 
 .divDotStyle {

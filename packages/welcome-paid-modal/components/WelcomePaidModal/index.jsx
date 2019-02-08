@@ -28,14 +28,14 @@ class WelcomePaidModal extends React.Component {
   render() {
     const { translations, hideModal } = this.props;
     return (
-      <div style={{ position: 'fixed', zIndex: '3000' }}>
+      <div style={{ position: 'fixed', zIndex: '3000', borderRadius: '4px', overflow: 'hidden', boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)' }}>
         <Popover>
           { this.state.step === 1 &&
           <div className={styles.card}>
             <div className={styles.mainDivBackground} >
-              <div style={{ paddingLeft: '25px', paddingTop: '25px' }}>
+              <div style={{ padding: '32px 24px' }}>
                 <Text size="large" weight="medium" color="white">{translations.headline1}</Text>
-                <div color="white" style={{ margin: '16px 0 24px' }}>
+                <div color="white" style={{ margin: '8px 0 24px' }}>
                   <Text color={'white'}>{translations.body1}<b>{translations.body2}</b></Text>
                 </div>
               </div>

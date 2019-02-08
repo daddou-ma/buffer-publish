@@ -1,6 +1,6 @@
 .divButton {
   position: absolute;
-  right: 12px;
+  right: 16px;
   bottom: 12px;
 }
 
@@ -34,5 +34,7 @@
 .divGifHolder {
   background-color: #E0E0E0;
   text-align: center;
-  padding: 5px 0;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  line-height: 0;
 }
