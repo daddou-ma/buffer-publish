@@ -4,6 +4,7 @@ import { Tabs, Tab } from '@bufferapp/publish-shared-components';
 import { Link, ArrowLeftIcon, Text } from '@bufferapp/components';
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
+import Notifications from '@bufferapp/account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import FeatureLoader from '@bufferapp/product-features';
 import TabsNames from '../../constants';
@@ -33,6 +34,8 @@ const PreferenceContent = ({ tabId, onUnknownTab }) => {
       return <Security />;
     case TabsNames.APPS_EXTRAS:
       return <ManageAppsAndExtras />;
+    case TabsNames.NOTIFICATIONS:
+      return <Notifications />;
     default:
       onUnknownTab();
       return <Text>Redirecting...</Text>;
@@ -80,6 +83,7 @@ const Preferences = ({
         <Tabs selectedTabId={selectedTabId} onTabClick={onTabClick}>
           <Tab tabId={TabsNames.GENERAL}>General</Tab>
           <Tab tabId={TabsNames.SECURITY}>Security</Tab>
+          <Tab tabId={TabsNames.NOTIFICATIONS}>Notifications</Tab>
           <Tab tabId={TabsNames.APPS_EXTRAS}>Apps & Extras</Tab>
           <FeatureLoader supportedFeatures={'b4b_billing'}>
             <Tab tabId={'b4b-billing'} onClick={() => openBillingWindow()}>
