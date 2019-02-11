@@ -59,7 +59,7 @@ const PostErrorBanner = ({ dragging, error, errorLink }) => (
         weight={'medium'}
         color={'white'}
       >
-        { error.message }
+        { error }
       </Text>
     </div>
     {errorLink &&
