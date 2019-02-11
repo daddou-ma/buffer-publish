@@ -33,6 +33,10 @@ extraSpecs:
     type: RollingUpdate
   minReadySeconds: 10
 env:
+  - name: DD_AGENT_HOST
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
   - name: API_ADDR
     value: https://api.bufferapp.com
   - name: BUGSNAG_KEY
