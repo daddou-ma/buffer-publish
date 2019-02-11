@@ -5,8 +5,8 @@ import {
   shouldShowWelcomeModal,
   getSourceFromKey,
   shouldShowStealProfileModal,
-  getURLParameter,
   shouldShowWelcomeModalPaidUsers,
+  getShowModalValue,
 } from './util/showModal';
 
 export default ({ dispatch }) => next => (action) => {
@@ -20,7 +20,7 @@ export default ({ dispatch }) => next => (action) => {
         dispatch(actions.showWelcomeModal());
       }
       if (shouldShowStealProfileModal()) {
-        dispatch(actions.showStealProfileModal({ stealProfileUsername: getURLParameter('username') }));
+        dispatch(actions.showStealProfileModal({ stealProfileUsername: getShowModalValue() }));
       }
       if (shouldShowWelcomeModalPaidUsers()) {
         dispatch(actions.showWelcomePaidModal());

@@ -10,8 +10,15 @@ const getShowModalKey = () => {
   return '';
 };
 
+export const getShowModalValue = () => {
+  if (window._showModal && window._showModal.value) {
+    return window._showModal.value;
+  }
+  return '';
+};
+
 export const shouldShowStealProfileModal = () =>
-  window.location.hash.match(/#show-cant-transfer-profile\/?$/i);
+  getShowModalKey() === 'steal-profile-modal';
 
 export const shouldShowWelcomeModal = () =>
   getShowModalKey() === 'welcome-modal-1';
@@ -29,11 +36,4 @@ export const shouldShowUpgradeModal = () =>
 export const getSourceFromKey = () => {
   const key = getShowModalKey();
   return key.split('--')[1] || 'unknown';
-};
-
-export const getURLParameter = (name) => {
-  name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
-  const regex = new RegExp(`[?|&]${name}=([^&#]*)`);
-  const results = regex.exec(location.search);
-  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
