@@ -32,5 +32,17 @@ describe('reducer', () => {
       expect(reducer(stateWithVisibleModal, actions.hideUpgradeModal()))
         .toEqual(Object.assign(initialState, { showUpgradeModal: false, upgradeModalSource: 'foo' }));
     });
+    it('should show steal profile modal', () => {
+      expect(reducer(initialState, actions.showStealProfileModal({ stealProfileUsername: 'foo' })))
+        .toEqual(Object.assign(initialState, { showStealProfileModal: true, stealProfileUsername: 'foo' }));
+    });
+    it('should hide steal profile modal', () => {
+      const stateWithVisibleModal = Object.assign(
+        initialState,
+        { showStealProfileModal: true, stealProfileUsername: 'foo' },
+      );
+      expect(reducer(stateWithVisibleModal, actions.hideStealProfileModal()))
+        .toEqual(Object.assign(initialState, { showStealProfileModal: false }));
+    });
   });
 });

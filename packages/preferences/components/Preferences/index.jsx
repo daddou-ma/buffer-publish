@@ -11,6 +11,19 @@ import Security from '../Security';
 import General from '../General';
 import { openBillingWindow } from '../../../tabs/utils';
 
+const tabStyle = {
+  flexGrow: 1,
+  overflowY: 'auto',
+  maxWidth: '864px',
+};
+
+const generalTabStyle = {
+  ...tabStyle,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+};
+
 const PreferenceContent = ({ tabId, onUnknownTab }) => {
   switch (tabId) {
     case TabsNames.BILLING:
@@ -89,7 +102,7 @@ const Preferences = ({
         <div
           style={{
             display: 'flex',
-            margin: '1rem 0',
+            margin: '1rem 0 1rem -3px',
             alignItems: 'center',
           }}
         >
@@ -106,12 +119,7 @@ const Preferences = ({
           </div>
         </div>
       </Link>
-      <div
-        style={{
-          flexGrow: 1,
-          overflowY: 'auto',
-        }}
-      >
+      <div style={selectedTabId === 'general' ? generalTabStyle : tabStyle}>
         <PreferenceContent tabId={selectedTabId} onUnknownTab={onUnknownTab} />
       </div>
     </div>
