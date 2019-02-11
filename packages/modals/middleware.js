@@ -4,6 +4,7 @@ import {
   shouldShowUpgradeModal,
   shouldShowWelcomeModal,
   getSourceFromKey,
+  shouldShowWelcomeModalPaidUsers,
 } from './util/showModal';
 
 export default ({ dispatch }) => next => (action) => {
@@ -15,6 +16,9 @@ export default ({ dispatch }) => next => (action) => {
       }
       if (shouldShowWelcomeModal()) {
         dispatch(actions.showWelcomeModal());
+      }
+      if (shouldShowWelcomeModalPaidUsers()) {
+        dispatch(actions.showWelcomePaidModal());
       }
       break;
     }
