@@ -60,4 +60,20 @@ describe('middleware', () => {
     expect(dispatch)
       .toBeCalledWith(actions.showUpgradeModal({ source: 'queue_limit' }));
   });
+  it('should show steal profile modal when key is present', () => {
+    window._showModal = {
+      key: 'steal-profile-modal',
+      value: 'Test Profile',
+    };
+    const next = jest.fn();
+    const dispatch = jest.fn();
+    const action = {
+      type: 'APP_INIT',
+    };
+    middleware({ dispatch })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(actions.showStealProfileModal({ stealProfileUsername: 'Test Profile' }));
+  });
 });
