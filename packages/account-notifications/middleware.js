@@ -6,6 +6,20 @@ import { actionTypes } from './reducer';
 export default ({ dispatch }) => next => (action) => {
   next(action);
   switch (action.type) {
+    case actionTypes.TOGGLE_NOTIFICATIONS:
+      dispatch(dataFetchActions.fetch({
+        name: 'setNotifications',
+        args: {
+          notifications: action.notifications,
+        },
+      }));
+      break;
+    case `setNotifications_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: action.result.notice_message,
+      }));
+      break;
     default:
       break;
   }
