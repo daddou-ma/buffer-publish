@@ -15,8 +15,8 @@ const storeFake = state => ({
 const fakeUser = {
   loading: false,
   id: '1234',
-  name: 'Hamish Macpherson',
-  email: 'hamstu@gmail.com',
+  name: 'Test User',
+  email: 'test@buffer.com',
   avatar: '',
   features: ['paid_users_in_new_publish'],
 };
