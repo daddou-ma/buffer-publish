@@ -1,3 +1,16 @@
+/**
+ * Add Datadog APM in production
+ */
+const isProduction = process.env.NODE_ENV === 'production';
+if (isProduction) {
+  // This line must come before importing any instrumented module.
+  require('dd-trace').init({ // eslint-disable-line
+    env: 'production',
+    hostname: process.env.DD_AGENT_HOST,
+    port: 8126,
+  });
+}
+
 const http = require('http');
 const express = require('express');
 const logMiddleware = require('@bufferapp/logger/middleware');
@@ -45,7 +58,6 @@ let staticAssets = {
   'vendor.js': 'https://local.buffer.com:8080/static/vendor.js',
 };
 
-const isProduction = process.env.NODE_ENV === 'production';
 app.set('isProduction', isProduction);
 
 if (isProduction) {
