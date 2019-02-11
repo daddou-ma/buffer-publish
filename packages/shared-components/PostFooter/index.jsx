@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Text,
-  WarningIcon,
   ClockIcon,
   CircleInstReminderIcon,
   Link,
@@ -61,9 +60,9 @@ const renderText = ({ postDetails, serviceLink }, hasError, isSent) =>
   (<span>
     <Text
       size={'small'}
-      color={hasError ? 'torchRed' : (isSent ? 'shuttleGray' : 'black')}
+      color={isSent ? 'shuttleGray' : 'black'}
     >
-      {hasError ? postDetails.error : renderPostAction(postDetails.postAction, serviceLink, isSent)}
+      { !hasError ? renderPostAction(postDetails.postAction, serviceLink, isSent) : '' }
     </Text>
   </span>);
 
@@ -72,7 +71,6 @@ const renderIcon = (hasError, isSent, isCustomScheduled, isInstagramReminder) =>
   if (!hasError && !isCustomScheduled && !isInstagramReminder) return;
 
   return (<div style={postActionDetailsIconStyle}>
-    {hasError ? <WarningIcon color={'torchRed'} /> : null}
     {isInstagramReminder && !hasError ? <CircleInstReminderIcon color={'instagram'} /> : null}
     {isCustomScheduled && !hasError && !isInstagramReminder ? <ClockIcon color={isSent ? 'shuttleGray' : 'outerSpace'} /> : null}
   </div>);
@@ -99,28 +97,30 @@ const PostFooter = ({
   const hasError = postDetails.error && postDetails.error.length > 0;
   const isCustomScheduled = postDetails.isCustomScheduled;
   const isInstagramReminder = postDetails.isInstagramReminder;
-  return (<div style={isSent ? sentPostDetailsStyle : getPostDetailsStyle(dragging)}>
-    <div style={postActionDetailsStyle}>
-      {renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder)}
-      {renderText({ postDetails, serviceLink }, hasError, isSent)}
+  return (
+    <div style={isSent ? sentPostDetailsStyle : getPostDetailsStyle(dragging)}>
+      <div style={postActionDetailsStyle}>
+        {renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder)}
+        {renderText({ postDetails, serviceLink }, hasError, isSent)}
+      </div>
+      {!isSent && isManager && (
+        <div style={postControlsStyle}>
+          <PostFooterButtons
+            error={postDetails.error}
+            isDeleting={isDeleting}
+            isConfirmingDelete={isConfirmingDelete}
+            isWorking={isWorking}
+            onCancelConfirmClick={onCancelConfirmClick}
+            onDeleteClick={onDeleteClick}
+            onEditClick={onEditClick}
+            onDeleteConfirmClick={onDeleteConfirmClick}
+            onShareNowClick={onShareNowClick}
+            onRequeueClick={onRequeueClick}
+          />
+        </div>)
+      }
     </div>
-    { !isSent && isManager && (
-      <div style={postControlsStyle}>
-        <PostFooterButtons
-          error={postDetails.error}
-          isDeleting={isDeleting}
-          isConfirmingDelete={isConfirmingDelete}
-          isWorking={isWorking}
-          onCancelConfirmClick={onCancelConfirmClick}
-          onDeleteClick={onDeleteClick}
-          onEditClick={onEditClick}
-          onDeleteConfirmClick={onDeleteConfirmClick}
-          onShareNowClick={onShareNowClick}
-          onRequeueClick={onRequeueClick}
-        />
-      </div>)
-    }
-  </div>);
+  );
 };
 
 PostFooter.propTypes = {

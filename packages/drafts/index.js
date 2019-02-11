@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { getDateString, isInThePast } from '@bufferapp/publish-formatters';
+import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
 
@@ -119,6 +120,7 @@ export default connect(
         environment: state.environment.environment,
         editMode: state.drafts.editMode,
         editingPostId: state.drafts.editingPostId,
+        isLockedProfile: state.profileSidebar.isLockedProfile,
       };
     }
     return {};
@@ -195,6 +197,9 @@ export default connect(
     },
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
+    },
+    onClickUpgradeToPro: () => {
+      dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
     },
   }),
 )(DraftList);

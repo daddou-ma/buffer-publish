@@ -18,6 +18,7 @@ const Tab = ({
   tabId,
   onClick,
   secondary,
+  disabled,
 }) =>
   <div
     style={calculateStyles({
@@ -33,9 +34,13 @@ const Tab = ({
           ? `1px solid ${curiousBlue}`
           : `2px solid ${curiousBlue}`,
       },
+      disabled: {
+        pointerEvents: 'none',
+      },
     }, {
-        selected,
-      })}
+      selected,
+      disabled,
+    })}
   >
     <Link
       padding={secondary
@@ -65,11 +70,13 @@ Tab.propTypes = {
   onClick: PropTypes.func,
   tabId: PropTypes.string,
   secondary: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 Tab.defaultProps = {
   selected: false,
   secondary: false,
+  disabled: false,
 };
 
 export default Tab;

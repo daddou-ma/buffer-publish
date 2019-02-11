@@ -40,6 +40,7 @@ const toggleGoogleAnalytics = require('./toggleGoogleAnalytics');
 const checkInstagramBusinessMethod = require('./checkInstagramBusiness');
 const saveGATrackingSettings = require('./saveGATrackingSettings');
 const getGATrackingSettings = require('./getGATrackingSettings');
+const toggleInstagramReminders = require('./toggleInstagramReminders');
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
 const average = require('./analytics/average');
@@ -97,4 +98,5 @@ module.exports = rpc(
   posts,
   summaryMethod,
   checkInstagramBusinessMethod,
+  toggleInstagramReminders,
 );

@@ -32,7 +32,7 @@ const TwoFactorAuth = ({
         marginRight: '1rem',
       }}
     >
-      <Text color={'outerSpace'}>Two Factor Authentication</Text>
+      <Text color={'black'} size={'mini'}>Two Factor Authentication</Text>
       <div
         style={{
           marginTop: '0.5rem',
@@ -72,6 +72,7 @@ const TwoFactorAuth = ({
         on={isEnabled}
         onClick={() => transition(isEnabled ? 'DISABLE' : 'ENABLE')}
         disabled={!['enabled', 'disabled'].includes(machineState)}
+        size={'mini'}
       />
     </div>
   </Row>

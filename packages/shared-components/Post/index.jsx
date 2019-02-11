@@ -18,6 +18,7 @@ import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RetweetPanel from '../RetweetPanel';
 import RenderPostMetaBar from './RenderPostMetaBar';
+import PostErrorBanner from '../PostErrorBanner';
 
 const getPostContainerStyle = ({ dragging, hovering }) => ({
   display: 'flex',
@@ -148,6 +149,12 @@ const Post = ({
         draggingPlaceholder={dragging && !fixed}
         noBorder={dragging && fixed}
       >
+        {postDetails && postDetails.error && postDetails.error.length > 0 &&
+          <PostErrorBanner
+            dragging={dragging}
+            error={postDetails.error}
+          />
+        }
         {renderContent({
           children,
           retweetProfile,

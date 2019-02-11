@@ -49,7 +49,7 @@ const TabNavigation = ({
         {isBusinessAccount && !isManager &&
           <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
         }
-        {isBusinessAccount && !isLockedProfile &&
+        {isBusinessAccount &&
           <Tab tabId={'drafts'}>Drafts</Tab>
         }
         <Tab tabId={'settings'}>Settings</Tab>
@@ -77,7 +77,7 @@ const TabNavigation = ({
             </Button>
         </div>
       }
-      {shouldShowNestedSettingsTab &&
+      {shouldShowNestedSettingsTab && !isLockedProfile &&
         <Tabs
           selectedTabId={selectedChildTab}
           onTabClick={onChildTabClick}

@@ -22,12 +22,7 @@ const stylesFlexRow = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  margin: '1rem 0',
-};
-
-const stylesFlexRowLessMargin = {
-  ...stylesFlexRow,
-  margin: '0.6rem 0',
+  height: '2.5rem',
 };
 
 const styleBlockRow = {
@@ -35,28 +30,32 @@ const styleBlockRow = {
   justifyContent: 'space-between',
   alignItems: 'center',
   marginRight: '1rem',
+  paddingTop: '1rem',
+};
+
+const textStyle = {
+  marginTop: '0.5rem',
 };
 
 const ExtrasLinks = () => (
   <div style={styleBlockRow}>
     <div>
-      <Text color={'outerSpace'} size={'mini'} weight={'bold'}>Buffer Apps & Extras</Text>
-      <div>
-        <Text size={'small'} color={'shuttleGray'}>
-          Get the most out of Buffer with our mobile apps and browser extension
+      <Text color={'black'}>Buffer Apps & Extras</Text>
+      <div style={textStyle}>
+        <Text size={'mini'} color={'shuttleGray'}>
+          Get the most out of Buffer with our mobile apps and browser extension.
         </Text>
       </div>
     </div>
     <Divider />
-
     <div style={stylesFlexRow}>
       <Text size={'mini'}>Browser Extension</Text>
       <Button onClick={openExtensionLink}>Install the browser extension</Button>
     </div>
     <Divider />
-    <div style={stylesFlexRowLessMargin}>
+    <div style={stylesFlexRow}>
       <Text size={'mini'}>Mobile Apps</Text>
-      <div style={stylesFlexRowLessMargin}>
+      <div style={stylesFlexRow}>
         <div
           style={{
             marginRight: '0.5rem',

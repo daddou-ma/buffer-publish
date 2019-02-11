@@ -7,6 +7,7 @@ export EmptyState from './EmptyState';
 export Example from './Example';
 export ImagePost from './ImagePost';
 export LinkPost from './LinkPost';
+export LockedProfileNotification from './LockedProfileNotification';
 export MultipleImagesPost from './MultipleImagesPost';
 export PostDragLayer from './PostDragLayer';
 export PostDragWrapper from './PostDragWrapper';

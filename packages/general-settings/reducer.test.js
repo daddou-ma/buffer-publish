@@ -11,6 +11,7 @@ describe('reducer', () => {
       profileId: null,
       googleAnalyticsIsEnabled: false,
       showGACustomizationForm: false,
+      remindersAreEnabled: false,
     };
     const action = {
       type: 'INIT',
@@ -30,6 +31,7 @@ describe('reducer', () => {
       selectedShortener: null,
       googleAnalyticsIsEnabled: false,
       showGACustomizationForm: false,
+      remindersAreEnabled: false,
     };
     const action = {
       type: actionTypes.SELECT_PROFILE,
@@ -37,6 +39,7 @@ describe('reducer', () => {
       profile: {
         isInstagramBusiness: false,
         service: 'twitter',
+        directPostingEnabled: true,
       },
     };
     deepFreeze(action);
@@ -50,6 +53,7 @@ describe('reducer', () => {
       isInstagramProfile: false,
       isInstagramBusiness: false,
       googleAnalyticsIsEnabled: false,
+      remindersAreEnabled: false,
       profileId: null,
     };
     const action = {
@@ -70,6 +74,7 @@ describe('reducer', () => {
       googleAnalyticsIsEnabled: false,
       profileId: null,
       showGACustomizationForm: false,
+      remindersAreEnabled: false,
     };
     const action = {
       type: `toggleGoogleAnalytics_${actionTypes.FETCH_SUCCESS}`,
@@ -89,6 +94,7 @@ describe('reducer', () => {
       googleAnalyticsIsEnabled: false,
       profileId: null,
       showGACustomizationForm: false,
+      remindersAreEnabled: false,
     };
     const action = {
       type: `saveGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`,
@@ -112,6 +118,7 @@ describe('reducer', () => {
       utmCampaign: 'Campaign',
       utmSource: 'Source',
       utmMedium: 'Medium',
+      remindersAreEnabled: false,
     };
     const action = {
       type: `getGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`,
@@ -138,6 +145,7 @@ describe('reducer', () => {
       googleAnalyticsIsEnabled: false,
       profileId: null,
       showGACustomizationForm: false,
+      remindersAreEnabled: false,
     };
     const action = {
       type: actionTypes.SET_UTM_CAMPAIGN,
@@ -158,6 +166,7 @@ describe('reducer', () => {
       googleAnalyticsIsEnabled: false,
       profileId: null,
       showGACustomizationForm: false,
+      remindersAreEnabled: false,
     };
     const action = {
       type: actionTypes.SET_UTM_SOURCE,
@@ -178,6 +187,7 @@ describe('reducer', () => {
       googleAnalyticsIsEnabled: false,
       profileId: null,
       showGACustomizationForm: false,
+      remindersAreEnabled: false,
     };
     const action = {
       type: actionTypes.SET_UTM_MEDIUM,

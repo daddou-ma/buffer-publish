@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   PostLists,
   EmptyState,
+  LockedProfileNotification,
 } from '@bufferapp/publish-shared-components';
 import {
   Divider,
@@ -47,6 +48,8 @@ const SentPosts = ({
   showComposer,
   editMode,
   isManager,
+  isLockedProfile,
+  onClickUpgradeToPro,
 }) => {
   if (loading) {
     return (
@@ -55,6 +58,13 @@ const SentPosts = ({
       </div>
     );
   }
+
+  if (isLockedProfile) {
+    return (
+      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
+    );
+  }
+
   if (total < 1) {
     return (
       <EmptyState
@@ -128,6 +138,8 @@ SentPosts.propTypes = {
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
+  isLockedProfile: PropTypes.bool,
+  onClickUpgradeToPro: PropTypes.func.isRequired,
 };
 
 SentPosts.defaultProps = {
@@ -140,6 +152,7 @@ SentPosts.defaultProps = {
   showComposer: false,
   editMode: false,
   isManager: true,
+  isLockedProfile: false,
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onImageClick: () => {},

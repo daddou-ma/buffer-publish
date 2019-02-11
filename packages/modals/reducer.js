@@ -1,9 +1,10 @@
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const initialState = {
+  showUpgradeModal: false,
   showWelcomeModal: false,
   showWelcomePaidModal: false,
-  showUpgradeModal: false,
+  showProfilesDisconnectedModal: false,
   upgradeModalSource: null,
 };
 
@@ -14,10 +15,23 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_WELCOME_MODAL: 0,
   SHOW_WELCOME_PAID_MODAL: 0,
   HIDE_WELCOME_PAID_MODAL: 0,
+  SHOW_PROFILES_DISCONNECTED_MODAL: 0,
+  HIDE_PROFILES_DISCONNECTED_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.SHOW_UPGRADE_MODAL:
+      return {
+        ...state,
+        showUpgradeModal: true,
+        upgradeModalSource: action.source,
+      };
+    case actionTypes.HIDE_UPGRADE_MODAL:
+      return {
+        ...state,
+        showUpgradeModal: false,
+      };
     case actionTypes.SHOW_WELCOME_MODAL:
       return {
         ...state,
@@ -38,16 +52,15 @@ export default (state = initialState, action) => {
         ...state,
         showWelcomePaidModal: false,
       };
-    case actionTypes.SHOW_UPGRADE_MODAL:
+    case actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL:
       return {
         ...state,
-        showUpgradeModal: true,
-        upgradeModalSource: action.source,
+        showProfilesDisconnectedModal: true,
       };
-    case actionTypes.HIDE_UPGRADE_MODAL:
+    case actionTypes.HIDE_PROFILES_DISCONNECTED_MODAL:
       return {
         ...state,
-        showUpgradeModal: false,
+        showProfilesDisconnectedModal: false,
       };
     default:
       return state;
@@ -55,6 +68,13 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
+  showUpgradeModal: ({ source }) => ({
+    type: actionTypes.SHOW_UPGRADE_MODAL,
+    source,
+  }),
+  hideUpgradeModal: () => ({
+    type: actionTypes.HIDE_UPGRADE_MODAL,
+  }),
   showWelcomeModal: () => ({
     type: actionTypes.SHOW_WELCOME_MODAL,
   }),
@@ -67,11 +87,10 @@ export const actions = {
   hideWelcomePaidModal: () => ({
     type: actionTypes.HIDE_WELCOME_PAID_MODAL,
   }),
-  showUpgradeModal: ({ source }) => ({
-    type: actionTypes.SHOW_UPGRADE_MODAL,
-    source,
+  showProfilesDisconnectedModal: () => ({
+    type: actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL,
   }),
-  hideUpgradeModal: () => ({
-    type: actionTypes.HIDE_UPGRADE_MODAL,
+  hideProfilesDisconnectedModal: () => ({
+    type: actionTypes.HIDE_PROFILES_DISCONNECTED_MODAL,
   }),
 };

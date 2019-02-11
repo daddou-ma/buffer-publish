@@ -4,6 +4,7 @@ import { WithFeatureLoader } from '@bufferapp/product-features';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actions as queueActions } from '@bufferapp/publish-queue';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
 import GeneralSettings from './components/GeneralSettings';
 
@@ -25,7 +26,9 @@ export default connect(
       utmCampaign: state.generalSettings.utmCampaign,
       utmSource: state.generalSettings.utmSource,
       utmMedium: state.generalSettings.utmMedium,
+      remindersAreEnabled: state.generalSettings.remindersAreEnabled,
       hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
+      isLockedProfile: state.profileSidebar.isLockedProfile,
     }),
     (dispatch, ownProps) => ({
       onSetUpDirectPostingClick: () => {
@@ -96,6 +99,15 @@ export default connect(
       onChangeUtmMedium: (event) => {
         dispatch(actions.handleChangeUtmMedium({
           utmMedium: event.target.value,
+        }));
+      },
+      onClickUpgradeToPro: () => {
+        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+      },
+      onToggleRemindersClick: (newToggleValue) => {
+        dispatch(actions.handleRemindersToggle({
+          profileId: ownProps.profileId,
+          allowReminders: newToggleValue,
         }));
       },
     }),

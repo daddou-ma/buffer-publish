@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Text, Toggle, Button, Input, Card, Divider,
+  Text, Toggle, Button, Input, Card,
 } from '@bufferapp/components';
 import { Field, reduxForm } from 'redux-form';
 import FeatureLoader from '@bufferapp/product-features';
@@ -9,6 +9,7 @@ import FeatureLoader from '@bufferapp/product-features';
 const googleAnalyticsWrapperStyle = {
   display: 'flex',
   flexDirection: 'column',
+  padding: '0.5rem 0',
 };
 
 const enableGoogleAnalyticsStyle = {
@@ -34,8 +35,8 @@ const formWrapperStyle = {
 
 const headerTextWrapperStyle = {
   display: 'flex',
-  marginBottom: '1rem',
-  marginTop: '1rem',
+  marginBottom: '0.5rem',
+  marginTop: '0.5rem',
 };
 
 const rightContainerStyle = {
@@ -96,7 +97,6 @@ const GoogleAnalytics = ({
         </div>
         <div style={rightContainerStyle} />
       </div>
-      <Divider />
       <div style={enableCampaignWrapperStyle}>
         <div style={textStyle}>
           <div style={headerTextWrapperStyle}>
