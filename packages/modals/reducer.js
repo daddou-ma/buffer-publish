@@ -6,6 +6,8 @@ export const initialState = {
   showWelcomePaidModal: false,
   showProfilesDisconnectedModal: false,
   upgradeModalSource: null,
+  showStealProfileModal: false,
+  stealProfileUsername: null,
 };
 
 export const actionTypes = keyWrapper('MODALS', {
@@ -17,6 +19,8 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_WELCOME_PAID_MODAL: 0,
   SHOW_PROFILES_DISCONNECTED_MODAL: 0,
   HIDE_PROFILES_DISCONNECTED_MODAL: 0,
+  SHOW_STEAL_PROFILE_MODAL: 0,
+  HIDE_STEAL_PROFILE_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -62,6 +66,17 @@ export default (state = initialState, action) => {
         ...state,
         showProfilesDisconnectedModal: false,
       };
+    case actionTypes.SHOW_STEAL_PROFILE_MODAL:
+      return {
+        ...state,
+        showStealProfileModal: true,
+        stealProfileUsername: action.stealProfileUsername,
+      };
+    case actionTypes.HIDE_STEAL_PROFILE_MODAL:
+      return {
+        ...state,
+        showStealProfileModal: false,
+      };
     default:
       return state;
   }
@@ -92,5 +107,12 @@ export const actions = {
   }),
   hideProfilesDisconnectedModal: () => ({
     type: actionTypes.HIDE_PROFILES_DISCONNECTED_MODAL,
+  }),
+  showStealProfileModal: ({ stealProfileUsername }) => ({
+    type: actionTypes.SHOW_STEAL_PROFILE_MODAL,
+    stealProfileUsername,
+  }),
+  hideStealProfileModal: () => ({
+    type: actionTypes.HIDE_STEAL_PROFILE_MODAL,
   }),
 };

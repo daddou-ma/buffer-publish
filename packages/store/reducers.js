@@ -25,6 +25,7 @@ import { reducer as manageAppsReducer } from '@bufferapp/manage-apps-extras';
 import { reducer as twoFactorAuthReducer } from '@bufferapp/publish-two-factor-auth';
 import { reducer as closeAccountReducer } from '@bufferapp/close-account';
 import { reducer as profilesDisconnectedModalReducer } from '@bufferapp/publish-profiles-disconnected-modal';
+import { reducer as stealProfileModalReducer } from '@bufferapp/publish-steal-profile-modal';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -66,6 +67,7 @@ export default combineReducers({
   generalSettings: generalSettingsReducer,
   postingSchedule: postingScheduleReducer,
   profilesDisconnectedModal: profilesDisconnectedModalReducer,
+  stealProfileModal: stealProfileModalReducer,
 
   // Analyze
   average: averageReducer,

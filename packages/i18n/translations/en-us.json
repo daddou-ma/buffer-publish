@@ -63,5 +63,16 @@
     "body2": "Note: You’ll need to be logged in to the same account on the network to successfully reconnect your social account.",
     "cta": "Reconnect",
     "reconnecting": "Please wait..."
+  },
+  "steal-profile-modal": {
+    "headline1": "Whoops, ",
+    "headline2": "is already connected to another Buffer account.",
+    "body1": "Each social account can be tied to one Buffer account for security reasons. This Buffer account may be under a different email address that belongs to your organisation.",
+    "body2": "For us to connect",
+    "body3": "to your",
+    "body4": "Buffer account, it needs to be removed from the other account first.",
+    "notSureWhere": "Not sure where your social account has been added already?",
+    "getInTouch": "Get in touch",
+    "takeMeBack": "Take me back to Buffer"
   }
 }

@@ -10,6 +10,16 @@ const getShowModalKey = () => {
   return '';
 };
 
+export const getShowModalValue = () => {
+  if (window._showModal && window._showModal.value) {
+    return window._showModal.value;
+  }
+  return '';
+};
+
+export const shouldShowStealProfileModal = () =>
+  getShowModalKey() === 'steal-profile-modal';
+
 export const shouldShowWelcomeModal = () =>
   getShowModalKey() === 'welcome-modal-1';
 
