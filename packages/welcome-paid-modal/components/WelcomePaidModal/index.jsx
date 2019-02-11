@@ -28,7 +28,7 @@ class WelcomePaidModal extends React.Component {
   render() {
     const { translations, hideModal } = this.props;
     return (
-      <div style={{ position: 'fixed', zIndex: '3000', borderRadius: '4px', overflow: 'hidden', boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)' }}>
+      <div style={{ position: 'fixed', zIndex: '3000', borderRadius: '4px', boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)' }}>
         <Popover>
           { this.state.step === 1 &&
           <div className={styles.card}>
