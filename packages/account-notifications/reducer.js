@@ -5,7 +5,7 @@ export const actionTypes = keyWrapper('EMAIL_PREFERENCES', {
   TOGGLE_NOTIFICATIONS: 0,
 });
 
-const initialState = {
+export const initialState = {
   bufferEmpty: null,
   bufferTips: null,
   celebrations: null,
