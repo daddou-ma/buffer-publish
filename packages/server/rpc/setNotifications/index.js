@@ -11,14 +11,7 @@ module.exports = method(
       strictSSL: !(process.env.NODE_ENV === 'development'),
       form: {
         access_token: session.publish.accessToken,
-        buffer_empty: !!notifications.bufferEmpty,
-        buffer_tips: !!notifications.bufferTips,
-        update_failures: !!notifications.updateFailures,
-        update_successes: !!notifications.updateSuccesses,
-        weekly_digests: !!notifications.weeklyDigests,
-        new_contributions: !!notifications.newContributions,
-        post_moved_back_to_drafts: !!notifications.postMovedBackToDrafts,
-        celebrations: !!notifications.celebrations,
+        ...notifications,
       },
     })
     .then(data => JSON.parse(data))

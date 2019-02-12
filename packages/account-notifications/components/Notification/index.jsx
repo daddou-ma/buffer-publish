@@ -17,7 +17,7 @@ const switchStyle = {
   textAlign: 'right',
 };
 
-const Notification = ({ title, description, onToggleClick, toggleisEnabled }) => (
+const Notification = ({ title, description, onToggleClick, toggleisEnabled, type }) => (
   <Row>
     <div>
       <Text color={'black'} size={'mini'}>{title}</Text>
@@ -33,7 +33,7 @@ const Notification = ({ title, description, onToggleClick, toggleisEnabled }) =>
         offText={'Disabled'}
         on={toggleisEnabled}
         size={'mini'}
-        onClick={() => onToggleClick(!toggleisEnabled)}
+        onClick={() => onToggleClick(!toggleisEnabled, type)}
       />
     </div>
   </Row>
@@ -44,6 +44,7 @@ Notification.propTypes = {
   description: PropTypes.string,
   onToggleClick: PropTypes.func.isRequired,
   toggleisEnabled: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 Notification.defaultProps = {
