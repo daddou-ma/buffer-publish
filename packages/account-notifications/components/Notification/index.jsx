@@ -13,7 +13,7 @@ const textStyle = {
 const switchStyle = {
   flex: 0.3,
   whiteSpace: 'nowrap',
-  marginLeft: '1rem',
+  margin: '0 5px 0 1rem',
   textAlign: 'right',
 };
 

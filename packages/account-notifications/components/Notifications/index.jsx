@@ -10,7 +10,6 @@ const styleBlockRow = {
   display: 'block',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginRight: '1rem',
   paddingTop: '1rem',
 };
 
