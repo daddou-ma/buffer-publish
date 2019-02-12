@@ -9,9 +9,7 @@ export default ({ dispatch }) => next => (action) => {
     case actionTypes.TOGGLE_NOTIFICATIONS:
       dispatch(dataFetchActions.fetch({
         name: 'setNotifications',
-        args: {
-          notifications: action.notifications,
-        },
+        args: action.notifications,
       }));
       break;
     case `setNotifications_${dataFetchActionTypes.FETCH_SUCCESS}`:
