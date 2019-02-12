@@ -15,7 +15,6 @@ import { openBillingWindow } from '../../../tabs/utils';
 const tabStyle = {
   flexGrow: 1,
   overflowY: 'auto',
-  maxWidth: '864px',
 };
 
 const generalTabStyle = {
@@ -23,6 +22,10 @@ const generalTabStyle = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+};
+
+const cenas = {
+  maxWidth: '864px',
 };
 
 const PreferenceContent = ({ tabId, onUnknownTab }) => {
@@ -124,7 +127,9 @@ const Preferences = ({
         </div>
       </Link>
       <div style={selectedTabId === 'general' ? generalTabStyle : tabStyle}>
-        <PreferenceContent tabId={selectedTabId} onUnknownTab={onUnknownTab} />
+        <div style={cenas}>
+          <PreferenceContent tabId={selectedTabId} onUnknownTab={onUnknownTab} />
+        </div>
       </div>
     </div>
   </div>
