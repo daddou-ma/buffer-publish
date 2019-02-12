@@ -153,6 +153,7 @@ const Post = ({
           <PostErrorBanner
             dragging={dragging}
             error={postDetails.error}
+            errorLink={postDetails.errorLink}
           />
         }
         {renderContent({

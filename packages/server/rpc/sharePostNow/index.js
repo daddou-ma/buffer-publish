@@ -1,5 +1,10 @@
-const { method } = require('@bufferapp/buffer-rpc');
+const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
+
+const getMessage = (message) => {
+  const isObject = typeof message === 'object' && message !== null;
+  return isObject ? message.text : message;
+};
 
 module.exports = method(
   'sharePostNow',
@@ -18,7 +23,9 @@ module.exports = method(
     } catch (err) {
       if (err.error) {
         const { message } = JSON.parse(err.error);
-        throw new Error(message);
+        throw createError({
+          message: getMessage(message),
+        });
       }
       throw err;
     }
