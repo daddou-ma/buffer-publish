@@ -1,3 +1,16 @@
+/**
+ * Add Datadog APM in production
+ */
+const isProduction = process.env.NODE_ENV === 'production';
+if (isProduction) {
+  // This line must come before importing any instrumented module.
+  require('dd-trace').init({ // eslint-disable-line
+    env: 'production',
+    hostname: process.env.DD_AGENT_HOST,
+    port: 8126,
+  });
+}
+
 const http = require('http');
 const express = require('express');
 const logMiddleware = require('@bufferapp/logger/middleware');
@@ -45,7 +58,6 @@ let staticAssets = {
   'vendor.js': 'https://local.buffer.com:8080/static/vendor.js',
 };
 
-const isProduction = process.env.NODE_ENV === 'production';
 app.set('isProduction', isProduction);
 
 if (isProduction) {
@@ -89,15 +101,26 @@ const notificationScript = (notification) => {
   `;
 };
 
-const showModalScript = key => (
-  key ? `
+const showModalScript = (key, val) => {
+  if (!key) {
+    return '';
+  }
+
+  let value = '';
+
+  if (val) {
+    value = `value: ${serialize(val, { isJSON: true })}`;
+  }
+
+  return `
     <script type="text/javascript">
         window._showModal = {
-          key: ${serialize(key, { isJSON: true })}
+          key: ${serialize(key, { isJSON: true })},
+          ${value}
         };
     </script>
-  ` : ''
-);
+  `;
+};
 
 const stripeScript = `<script src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
@@ -123,7 +146,7 @@ window['_fs_namespace'] = 'FS';
 })(window,document,window['_fs_namespace'],'script','user');
 </script>`;
 
-const getHtml = ({ notification, userId, modalKey }) =>
+const getHtml = ({ notification, userId, modalKey, modalValue }) =>
   fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
@@ -133,7 +156,7 @@ const getHtml = ({ notification, userId, modalKey }) =>
     .replace('{{{fullStoryScript}}}', isProduction ? fullStoryScript : '')
     .replace('{{{bugsnagScript}}}', isProduction ? getBugsnagScript(userId) : '')
     .replace('{{{notificationScript}}}', notificationScript(notification))
-    .replace('{{{showModalScript}}}', showModalScript(modalKey));
+    .replace('{{{showModalScript}}}', showModalScript(modalKey, modalValue));
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());
@@ -212,10 +235,12 @@ app.get('*', (req, res) => {
   const notification = getNotificationFromQuery(req.query);
   const userId = req.session.global.userId;
   const modalKey = req.query.mk ? req.query.mk : null;
+  const modalValue = req.query.mv ? req.query.mv : null;
   res.send(getHtml({
     notification,
     userId,
     modalKey,
+    modalValue,
   }));
 });
 
