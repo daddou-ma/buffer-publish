@@ -31,6 +31,7 @@ import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintena
 import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
 import { middleware as notificationsProviderMiddleware } from '@bufferapp/publish-notifications-provider';
 import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/publish-profiles-disconnected-modal';
+import { middleware as accountNotificationsMiddleware } from '@bufferapp/publish-account-notifications';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 
 // Remove analytics middleware when publish switches to analyze
@@ -109,6 +110,7 @@ const configureStore = (initialstate) => {
         draftsMiddleware,
         notificationsProviderMiddleware,
         profilesDisconnectedModalMiddleware,
+        accountNotificationsMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,
