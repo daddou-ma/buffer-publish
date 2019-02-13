@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { actions as appSwitcherActions } from '@bufferapp/publish-app-switcher';
 
 import Sidebar from './components/Sidebar';
 
@@ -8,10 +9,9 @@ export default connect(
   }),
   dispatch => ({
     onReturnToClassicClick() {
-      dispatch({
-        type: 'MODAL_RETURN_TO_CLASSIC',
+      dispatch(appSwitcherActions.displayFeedbackModal({
         source: 'publish_sidebar',
-      });
+      }));
     },
   }),
 

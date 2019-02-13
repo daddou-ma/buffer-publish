@@ -11,6 +11,7 @@ import {
 } from '@bufferapp/components';
 
 import { CloseIcon } from '@bufferapp/components/Icon/Icons';
+import styles from './AppSwitcherModal.css';
 
 const getContainerStyle = hidden => ({
   position: 'absolute',
@@ -37,54 +38,51 @@ const buttonContainerStyle = {
   marginTop: '10px',
 };
 
-const modalHeaderStyle = {
-  fontSize: '1.1rem',
-  fontWeight: '600',
-};
-
 const modalInnerContainerStyle = {
   width: '410px',
   padding: '10px 30px',
   textAlign: 'center',
 };
 
-const modalInputContainerStyle = {
-  padding: '25px 0',
-};
-
 class AppSwitcher extends React.Component {
-  constructor() {
+  constructor () {
     super();
+
+    this.state = {
+      hidden: false,
+      feedbackBody: '',
+    };
+
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.onFeedbackChange = this.onFeedbackChange.bind(this);
   }
 
-  state = {
-    hidden: false,
-    showFeedbackModal: false,
-    feedbackBody: '',
+  componentDidUpdate (prevProps, prevState) {
+    if (this.props.showFeedbackModal !== prevProps.showFeedbackModal) {
+      const node = ReactDOM.findDOMNode(this);  // eslint-disable-line
+      if (node) {
+        const input = node.querySelector('input');
+        if (input) {
+          input.focus();
+        }
+      }
+    }
   }
 
-  onFeedbackChange(event) {
+  onFeedbackChange (event) {
     this.setState({ feedbackBody: event.target.value });
   }
 
-  closeModal() {
-    this.setState({
-      showFeedbackModal: false,
-    });
-  }
-
-  handleSubmit(event) {
+  handleSubmit (event) {
     event.preventDefault();
     this.props.sendFeedback(this.state.feedbackBody);
   }
 
-  renderFeedbackModal() {
+  renderFeedbackModal () {
     const { feedbackBody } = this.state;
-    const { submittingFeedback, redirecting } = this.props;
+    const { submittingFeedback, redirecting, closeFeedbackModal, translations } = this.props;
     const noTextEntered = feedbackBody === '';
+    const buttonDisabled = submittingFeedback || noTextEntered;
     if (redirecting) {
       return (
         <Popover>
@@ -98,59 +96,62 @@ class AppSwitcher extends React.Component {
         </Popover>
       );
     }
+
     return (
-      <Popover onOverlayClick={this.closeModal}>
-        <Card>
-          <div style={closeIconContainerStyle}>
-            <Button
-              borderless
-              noStyle
-              onClick={this.closeModal}
-            >
-              <CloseIcon />
-            </Button>
-          </div>
-          <div style={modalInnerContainerStyle}>
-            <Text color="black">
-              <span style={modalHeaderStyle}>
-                Would you let us know what&apos;s causing you to switch back?
-              </span>
-            </Text>
-            <form onSubmit={this.handleSubmit}>
-              <div style={modalInputContainerStyle}>
-                <Input
-                  meta={{ submitting: submittingFeedback }}
-                  input={{ value: feedbackBody, onChange: this.onFeedbackChange }}
-                  placeholder="Even a few words would be incredibly helpful :)"
-                />
+      <React.Fragment>
+        <Popover onOverlayClick={closeFeedbackModal}>
+          <div className={styles.card}>
+            <div className={styles.mainDivBackground} >
+              <div style={{ paddingLeft: '25px', paddingTop: '25px' }}>
+                <Text color="white" size="large" weight="medium">{translations.headline1}</Text>
+                <div>
+                  <Text color="white">{translations.tagline}</Text>
+                </div>
               </div>
-              <Button
-                disabled={submittingFeedback || noTextEntered}
-                small
-                onClick={this.handleSubmit}
-              >
-                {submittingFeedback
-                  ? 'Please wait...'
-                  : 'Back to classic Buffer'
-                }
-              </Button>
-            </form>
+            </div>
+            <div className={styles.barBottomStyle}>
+              <form onSubmit={this.handleSubmit}>
+                <Text size="mini" color="black">{translations.question}</Text>
+                <div style={{ padding: '5px 0' }}>
+                  <Input
+                    type="textarea"
+                    meta={{ submitting: submittingFeedback }}
+                    input={{ value: feedbackBody, onChange: this.onFeedbackChange }}
+                  />
+                </div>
+                <div style={{ textAlign: 'right' }} >
+                  <span style={{ margin: '0 5px' }} >
+                    <Button disabled={submittingFeedback} secondary onClick={closeFeedbackModal}>
+                      Cancel
+                    </Button>
+                  </span>
+                  <Button disabled={buttonDisabled} onClick={this.handleSubmit}>
+                    { submittingFeedback ? 'Please wait...' : 'Back to classic Buffer' }
+                  </Button>
+                </div>
+              </form>
+            </div>
           </div>
-        </Card>
-      </Popover>
+        </Popover>
+      </React.Fragment>
     );
   }
 
-  render() {
-    const { showGoBackToClassic } = this.props;
-    if (!showGoBackToClassic) {
+  render () {
+    const {
+      showGoBackToClassic,
+      showFeedbackModal,
+      displayFeedbackModal,
+      hidePrompt,
+    } = this.props;
+    if (!showGoBackToClassic && !hidePrompt) {
       return null;
     }
-    const { showFeedbackModal, hidden } = this.state;
+    const { hidden } = this.state;
     return (
       <div>
         {showFeedbackModal && this.renderFeedbackModal()}
-        <div style={getContainerStyle(hidden)}>
+        <div style={getContainerStyle(hidden || hidePrompt)}>
           <Card shadowHeight={1} noPadding>
             <div style={cardInnerStyle}>
               <div style={closeIconContainerStyle}>
@@ -169,15 +170,7 @@ class AppSwitcher extends React.Component {
               <div style={buttonContainerStyle}>
                 <Button
                   small
-                  onClick={() => {
-                    this.setState({ showFeedbackModal: true });
-                    setTimeout(() => {
-                      ReactDOM // eslint-disable-line
-                        .findDOMNode(this)
-                        .querySelector('input')
-                        .focus();
-                    }, 100);
-                  }}
+                  onClick={displayFeedbackModal}
                 >
                   Back to classic Buffer
                 </Button>
@@ -195,6 +188,21 @@ AppSwitcher.propTypes = {
   sendFeedback: PropTypes.func.isRequired,
   submittingFeedback: PropTypes.bool.isRequired,
   redirecting: PropTypes.bool.isRequired,
+  displayFeedbackModal: PropTypes.func.isRequired,
+  closeFeedbackModal: PropTypes.func.isRequired,
+  showFeedbackModal: PropTypes.bool.isRequired,
+  translations: PropTypes.shape({
+    headline1: PropTypes.string,
+    tagline: PropTypes.string,
+    question: PropTypes.string,
+    cancel: PropTypes.string,
+    continue: PropTypes.string,
+  }).isRequired,
+  hidePrompt: PropTypes.bool,
+};
+
+AppSwitcher.defaultProps = {
+  hidePrompt: undefined,
 };
 
 export default AppSwitcher;

@@ -8,8 +8,21 @@ export default connect(
     showGoBackToClassic: state.appSwitcher.showGoBackToClassic,
     submittingFeedback: state.appSwitcher.submittingFeedback,
     redirecting: state.appSwitcher.redirecting,
+    showFeedbackModal: state.appSwitcher.showFeedbackModal,
+    translations: state.i18n.translations['app-switcher'],
+    hidePrompt: state.appSidebar.user.features && state.appSidebar.user.features.indexOf('paid_users_in_new_publish') >= 0,
   }),
   dispatch => ({
+    closeFeedbackModal() {
+      dispatch(actions.closeFeedbackModal({
+        source: 'app-switcher',
+      }));
+    },
+    displayFeedbackModal() {
+      dispatch(actions.displayFeedbackModal({
+        source: 'app-switcher',
+      }));
+    },
     sendFeedback(feedback) {
       dispatch(actions.sendFeedback(feedback));
     },

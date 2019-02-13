@@ -2,13 +2,18 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
+import keyWrapper from '@bufferapp/keywrapper';
 
-export const actionTypes = {};
+export const actionTypes = keyWrapper('APPSWITCHER', {
+  SHOW_FEEDBACK_MODAL: 0,
+  HIDE_FEEDBACK_MODAL: 0,
+});
 
 export const initialState = {
   redirecting: false,
   showGoBackToClassic: false,
   submittingFeedback: false,
+  showFeedbackModal: false,
   user: {
     loading: true,
   },
@@ -19,7 +24,8 @@ export default (state = initialState, action) => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        showGoBackToClassic: !action.result.hasNewPublish, // User is not in phased rollout - so they can switch
+        // User is not in phased rollout - so they can switch
+        showGoBackToClassic: !action.result.hasNewPublish,
         user: {
           ...action.result,
           loading: false,
@@ -35,11 +41,22 @@ export default (state = initialState, action) => {
         ...state,
         submittingFeedback: false,
         redirecting: true,
+        showFeedbackModal: false,
       };
     case `sendFeedback_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         submittingFeedback: false,
+      };
+    case actionTypes.SHOW_FEEDBACK_MODAL:
+      return {
+        ...state,
+        showFeedbackModal: true,
+      };
+    case actionTypes.HIDE_FEEDBACK_MODAL:
+      return {
+        ...state,
+        showFeedbackModal: false,
       };
     default:
       return state;
@@ -47,6 +64,14 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
+  closeFeedbackModal: ({ source }) => ({
+    type: actionTypes.HIDE_FEEDBACK_MODAL,
+    source,
+  }),
+  displayFeedbackModal: ({ source }) => ({
+    type: actionTypes.SHOW_FEEDBACK_MODAL,
+    source,
+  }),
   sendFeedback: feedback =>
     dataFetchActions.fetch({ name: 'sendFeedback', args: { body: feedback } }),
 };
