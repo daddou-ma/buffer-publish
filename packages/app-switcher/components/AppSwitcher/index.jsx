@@ -80,23 +80,9 @@ class AppSwitcher extends React.Component {
 
   renderFeedbackModal () {
     const { feedbackBody } = this.state;
-    const { submittingFeedback, redirecting, closeFeedbackModal, translations } = this.props;
+    const { submittingFeedback, closeFeedbackModal, translations } = this.props;
     const noTextEntered = feedbackBody === '';
     const buttonDisabled = submittingFeedback || noTextEntered;
-    if (redirecting) {
-      return (
-        <Popover>
-          <Card>
-            <div style={modalInnerContainerStyle}>
-              <Text size="large">Thanks for your feedback! 👍</Text>
-              <br /><br />
-              <Text size="mini">Now taking you to classic Buffer...</Text>
-            </div>
-          </Card>
-        </Popover>
-      );
-    }
-
     return (
       <React.Fragment>
         <Popover onOverlayClick={closeFeedbackModal}>
@@ -187,7 +173,6 @@ AppSwitcher.propTypes = {
   showGoBackToClassic: PropTypes.bool.isRequired,
   sendFeedback: PropTypes.func.isRequired,
   submittingFeedback: PropTypes.bool.isRequired,
-  redirecting: PropTypes.bool.isRequired,
   displayFeedbackModal: PropTypes.func.isRequired,
   closeFeedbackModal: PropTypes.func.isRequired,
   showFeedbackModal: PropTypes.bool.isRequired,

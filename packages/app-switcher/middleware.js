@@ -12,9 +12,7 @@ export default ({ dispatch }) => next => (action) => {
       }));
       break;
     case `sendFeedback_${actionTypes.FETCH_SUCCESS}`:
-      setTimeout(() => {
-        window.location = getURL.getClassicBufferURL();
-      }, 1000);
+      window.location = getURL.getClassicBufferURL();
       break;
     default:
       break;

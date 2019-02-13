@@ -39,9 +39,7 @@ export default (state = initialState, action) => {
     case `sendFeedback_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        submittingFeedback: false,
         redirecting: true,
-        showFeedbackModal: false,
       };
     case `sendFeedback_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
