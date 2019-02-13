@@ -2,6 +2,7 @@ import deepFreeze from 'deep-freeze';
 import reducer, { initialState, profileInitialState, actionTypes } from './reducer';
 import {
   header,
+  subHeader,
 } from './components/PastRemindersList/postData';
 
 const profileId = '123456';
@@ -17,11 +18,12 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle sentPosts_FETCH_START action type', () => {
+  it('should handle pastReminders_FETCH_START action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
           header,
+          subHeader,
           loading: true,
           loadingMore: false,
           moreToLoad: false,
@@ -33,7 +35,7 @@ describe('reducer', () => {
     };
     const action = {
       profileId,
-      type: 'sentPosts_FETCH_START',
+      type: 'pastReminders_FETCH_START',
       args: {
         isFetchingMore: false,
       },
@@ -43,12 +45,13 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle sentPosts_FETCH_SUCCESS action type', () => {
+  it('should handle pastReminders_FETCH_SUCCESS action type', () => {
     const post = { id: 'foo', text: 'i love buffer' };
     const stateAfter = {
       byProfileId: {
         [profileId]: {
           header,
+          subHeader,
           loading: false,
           loadingMore: false,
           moreToLoad: false,
@@ -60,7 +63,7 @@ describe('reducer', () => {
     };
     const action = {
       profileId,
-      type: 'sentPosts_FETCH_SUCCESS',
+      type: 'pastReminders_FETCH_SUCCESS',
       result: {
         updates: [post],
         total: 1,
@@ -74,11 +77,12 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle sentPosts_FETCH_FAIL action type', () => {
+  it('should handle pastReminders_FETCH_FAIL action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
           header,
+          subHeader,
           loading: false,
           loadingMore: false,
           moreToLoad: false,
@@ -90,7 +94,7 @@ describe('reducer', () => {
     };
     const action = {
       profileId,
-      type: 'sentPosts_FETCH_FAIL',
+      type: 'pastReminders_FETCH_FAIL',
     };
     deepFreeze(action);
     expect(reducer(undefined, action))

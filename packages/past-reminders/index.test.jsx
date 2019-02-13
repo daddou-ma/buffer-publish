@@ -19,7 +19,7 @@ const storeFake = state => ({
 describe('PastReminder', () => {
   it('should render', () => {
     const store = storeFake({
-      sent: {
+      pastReminders: {
         byProfileId: {
           abc: {
             loading: true,
