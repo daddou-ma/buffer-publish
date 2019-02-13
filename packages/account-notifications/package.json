@@ -1,5 +1,5 @@
 {
-  "name": "@bufferapp/account-notifications",
+  "name": "@bufferapp/publish-account-notifications",
   "version": "2.0.0",
   "description": "Email notifications preferences component",
   "main": "index.js",

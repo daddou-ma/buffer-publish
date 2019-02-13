@@ -48,7 +48,7 @@
     "@bufferapp/summary-table": "0.79.1",
     "@bufferapp/unauthorized-redirect": "1.9.6",
     "@bufferapp/publish-profiles-disconnected-modal": "2.0.0",
-    "@bufferapp/account-notifications": "2.0.0",
+    "@bufferapp/publish-account-notifications": "2.0.0",
     "moment": "^2.22.2"
   },
   "devDependencies": {

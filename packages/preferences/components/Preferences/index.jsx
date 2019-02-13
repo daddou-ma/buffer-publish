@@ -4,7 +4,7 @@ import { Tabs, Tab } from '@bufferapp/publish-shared-components';
 import { Link, ArrowLeftIcon, Text } from '@bufferapp/components';
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
-import Notifications from '@bufferapp/account-notifications';
+import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import FeatureLoader from '@bufferapp/product-features';
 import TabsNames from '../../constants';
