@@ -4,6 +4,7 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as tabsReducer } from '@bufferapp/publish-tabs';
 import { reducer as queueReducer } from '@bufferapp/publish-queue';
 import { reducer as sentReducer } from '@bufferapp/publish-sent';
+import { reducer as pastRemindersReducer } from '@bufferapp/publish-past-reminders';
 import { reducer as draftsReducer } from '@bufferapp/publish-drafts';
 import { reducer as postingScheduleReducer } from '@bufferapp/publish-posting-schedule';
 import { reducer as generalSettingsReducer } from '@bufferapp/publish-general-settings';
@@ -46,6 +47,7 @@ export default combineReducers({
   router: routerReducer,
   queue: queueReducer,
   sent: sentReducer,
+  pastReminders: pastRemindersReducer,
   i18n: i18nReducer,
   tabs: tabsReducer,
   profileSidebar: profileSidebarReducer,

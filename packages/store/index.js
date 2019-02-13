@@ -4,6 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 import { createMiddleware as createBufferMetricsMiddleware } from '@bufferapp/buffermetrics/redux';
 import { middleware as queueMiddleware } from '@bufferapp/publish-queue';
 import { middleware as sentMiddleware } from '@bufferapp/publish-sent';
+import { middleware as pastRemindersMiddleware } from '@bufferapp/publish-past-reminders';
 import { middleware as draftsMiddleware } from '@bufferapp/publish-drafts';
 import { middleware as postingScheduleSettingsMiddleware } from '@bufferapp/publish-posting-schedule';
 import { middleware as generalSettingsMiddleware } from '@bufferapp/publish-general-settings';
@@ -87,6 +88,7 @@ const configureStore = (initialstate) => {
         productFeatureMiddleware,
         queueMiddleware,
         sentMiddleware,
+        pastRemindersMiddleware,
         postingScheduleSettingsMiddleware,
         generalSettingsMiddleware,
         pusherSyncMiddleware,

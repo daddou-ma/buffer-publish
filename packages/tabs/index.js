@@ -17,6 +17,7 @@ export default connect(
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
+    isInstagramProfile: state.generalSettings.isInstagramProfile,
   }),
   (dispatch, ownProps) => ({
     onTabClick: tabId => dispatch(push(generateProfilePageRoute({

@@ -11,6 +11,7 @@ const RenderPostMetaBar = ({
   subprofiles,
   dragging,
   isSent,
+  isPastReminder,
 }) => {
   if (profileService === 'instagram' && locationName) {
     return (
@@ -18,6 +19,7 @@ const RenderPostMetaBar = ({
         dragging={dragging}
         locationName={locationName}
         isSent={isSent}
+        isPastReminder={isPastReminder}
       />
     );
   } else if (profileService === 'pinterest' && subprofileID) {
@@ -49,6 +51,7 @@ RenderPostMetaBar.propTypes = {
   ),
   dragging: PropTypes.bool,
   isSent: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 export default RenderPostMetaBar;
