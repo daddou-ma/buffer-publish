@@ -69,7 +69,6 @@ class ProfileDragWrapper extends Component {
 
   render() {
     const {
-      isDragging,
       connectDragSource,
       connectDropTarget,
     } = this.props;
@@ -96,13 +95,11 @@ ProfileDragWrapper.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired, // eslint-disable-line
-  isDragging: PropTypes.bool.isRequired,
 };
 
 export default flow(
-  DragSource('profile', profileSource, (connect: DropTargetConnector, monitor) => ({
+  DragSource('profile', profileSource, (connect: DropTargetConnector) => ({
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
   })),
   DropTarget('profile', profileTarget, connect => ({
     connectDropTarget: connect.dropTarget(),
