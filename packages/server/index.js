@@ -35,7 +35,6 @@ const { sendFavicon } = require('./lib/favicon');
 const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
 const serialize = require('serialize-javascript');
 const multer = require('multer');
-const helmet = require('helmet');
 
 const app = express();
 const server = http.createServer(app);
@@ -161,7 +160,6 @@ const getHtml = ({ notification, userId, modalKey, modalValue }) =>
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());
-app.use(helmet.frameguard({ action: 'sameorigin' }));
 
 app.all('/maintenance', maintenanceHandler);
 
