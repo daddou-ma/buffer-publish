@@ -4,7 +4,7 @@ const rp = require('request-promise');
 module.exports = method(
   'reorderProfiles',
   'reorder profiles',
-  async ({ profileId, order }, { session }) => {
+  async ({ order }, { session }) => {
     let result;
     try {
       result = await rp({
