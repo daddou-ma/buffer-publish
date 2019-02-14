@@ -1,8 +1,8 @@
 import deepFreeze from 'deep-freeze';
-import reducer, { actions, actionTypes, initialState } from './reducer';
-import { actions as queueActions } from '@bufferapp/publish-queue';
 
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actions as queueActions } from '@bufferapp/publish-queue';
+import reducer, { actions, actionTypes, initialState as profileInitialState } from './reducer';
 import profiles from './mockData/profiles';
 
 describe('reducer', () => {
@@ -50,7 +50,7 @@ describe('reducer', () => {
     const dragIndex = 0;
     const hoverIndex = 1;
     const stateBefore = {
-      ...initialState,
+      ...profileInitialState,
       profiles,
     };
 
@@ -58,7 +58,7 @@ describe('reducer', () => {
     [profilesAfter[dragIndex], profilesAfter[hoverIndex]] = [profilesAfter[hoverIndex], profilesAfter[dragIndex]];
 
     const stateAfter = {
-      ...initialState,
+      ...profileInitialState,
       profiles: profilesAfter,
     };
 
@@ -81,22 +81,13 @@ describe('reducer', () => {
     expect(loading).toBe(true);
   });
 
-  it('should load non-locked profiles', () => {
+  it('should load all profiles', () => {
     const action = {
       type: `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`,
       result: profiles,
     };
     const { profiles: profilesInStore } = reducer(undefined, action);
-    expect(profilesInStore).toEqual([profiles[0]]);
-  });
-
-  it('should load locked profiles', () => {
-    const action = {
-      type: `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`,
-      result: profiles,
-    };
-    const { lockedProfiles } = reducer(undefined, action);
-    expect(lockedProfiles).toEqual([profiles[1]]);
+    expect(profilesInStore).toEqual(profiles);
   });
 
   it('should correctly set flags for connected accounts', () => {
