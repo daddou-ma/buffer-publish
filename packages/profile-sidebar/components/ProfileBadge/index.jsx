@@ -51,7 +51,7 @@ const profileBadgeIconMap = new Map([
   [SERVICE_INSTAGRAM, { component: CircleInstagramIcon, color: 'instagram' }],
 ]);
 
-const ProfileBadgeIcon = ({ type }) => {
+export const ProfileBadgeIcon = ({ type }) => {
   const icon = profileBadgeIconMap.get(type);
   if (icon) {
     const { component: IconComponent, color } = icon;

@@ -25,7 +25,7 @@ const DefaultPage = ({
   <div style={pageStyle}>
     <div style={defaultPageStyle}>
       <EmptyState
-        heroImg="https://s3.amazonaws.com/buffer-publish/images/buffer-social-media-management.svg"
+        heroImg="https://s3.amazonaws.com/buffer-publish/images/no-profiles-hero-img.svg"
         title={translations.defaultTitle}
         heroImgSize={{ width: '560', height: '284' }}
         height="auto"

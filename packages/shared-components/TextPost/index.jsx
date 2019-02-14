@@ -44,6 +44,7 @@ const TextPost = ({
   serviceLink,
   isSent,
   isManager,
+  isPastReminder,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -93,6 +94,7 @@ const TextPost = ({
       serviceLink={serviceLink}
       isSent={isSent}
       isManager={isManager}
+      isPastReminder={isPastReminder}
     >
       {children}
     </Post>
@@ -120,6 +122,7 @@ TextPost.propTypes = {
   text: PropTypes.string.isRequired,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 TextPost.defaultProps = Post.defaultProps;

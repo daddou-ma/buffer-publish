@@ -14,6 +14,7 @@ import { borderWidth } from '@bufferapp/components/style/border';
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
 import ProfileList from '../ProfileList';
+import ProfileConnectShortcut from '../ProfileConnectShortcut';
 
 const profileSidebarStyle = {
   display: 'flex',
@@ -44,7 +45,8 @@ const lockedAccountHeaderStyle = {
 };
 
 const buttonDividerStyle = {
-  marginBottom: '1rem',
+  margin: '1rem 0',
+
 };
 
 const renderLockedHeader = ({ translations, profileLimit }) => (
@@ -109,6 +111,11 @@ const ProfileSidebar = ({
   onConnectSocialAccountClick,
   profileLimit,
   showProfilesDisconnectedModal,
+
+  // Flags for showing connection shortcut buttons
+  hasInstagram,
+  hasFacebook,
+  hasTwitter,
 }) => (
   <div style={profileSidebarStyle}>
     {productTitle}
@@ -131,6 +138,21 @@ const ProfileSidebar = ({
       />
     </div>
     <div>
+      {!hasInstagram && <ProfileConnectShortcut
+        label="Connect Instagram"
+        network="instagram"
+        url="https://buffer.com/oauth/instagram"
+      />}
+      {!hasFacebook && <ProfileConnectShortcut
+        label="Connect Facebook"
+        network="facebook"
+        url="https://buffer.com/oauth/facebook/choose"
+      />}
+      {!hasTwitter && <ProfileConnectShortcut
+        label="Connect Twitter"
+        network="twitter"
+        url="https://buffer.com/oauth/twitter"
+      />}
       <div style={buttonDividerStyle}>
         <Divider />
       </div>
@@ -161,6 +183,9 @@ ProfileSidebar.propTypes = {
   }).isRequired,
   profileLimit: PropTypes.number,
   showProfilesDisconnectedModal: PropTypes.func.isRequired,
+  hasInstagram: PropTypes.bool.isRequired,
+  hasFacebook: PropTypes.bool.isRequired,
+  hasTwitter: PropTypes.bool.isRequired,
 };
 
 ProfileSidebar.defaultProps = {

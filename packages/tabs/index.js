@@ -17,6 +17,8 @@ export default connect(
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
+    isInstagramProfile: state.generalSettings.isInstagramProfile,
+    hasPastRemindersFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('past_reminders_in_new_publish') : false,
   }),
   (dispatch, ownProps) => ({
     onTabClick: tabId => dispatch(push(generateProfilePageRoute({
