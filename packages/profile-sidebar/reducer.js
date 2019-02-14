@@ -8,6 +8,7 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   PROFILE_PAUSED: 0,
   PUSHER_PROFILE_PAUSED_STATE: 0,
   CONNECT_SOCIAL_ACCOUNT: 0,
+  PROFILE_DROPPED: 0,
 });
 
 const initialState = {
@@ -19,6 +20,26 @@ const initialState = {
   isLockedProfile: false,
   isBusinessAccount: false,
 };
+
+const moveProfileInArray = (arr, from, to) => {
+  const clone = [...arr];
+
+  // Support passing `from` and `to` in non-sequential order (e.g., 4 and 1).
+  const fromIndex = from < to ? from : to;
+  const toIndex = to > from ? to : from;
+
+  // Generate the new array
+  Array.prototype.splice.call(clone, toIndex, 0,
+    Array.prototype.splice.call(clone, fromIndex, 1)[0],
+  );
+  return clone;
+};
+
+const handleProfileDropped = (profiles, action) => {
+  const reorderedProfiles = moveProfileInArray(profiles, action.dragIndex, action.hoverIndex);
+  return reorderedProfiles;
+};
+
 
 const profilesReducer = (state = [], action) => {
   switch (action.type) {
@@ -88,6 +109,15 @@ export default (state = initialState, action) => {
         isLockedProfile: action.profile ? action.profile.disabled : false,
       };
     }
+    case actionTypes.PROFILE_DROPPED: {
+      if (!action.commit) {
+        return {
+          ...state,
+          profiles: handleProfileDropped(state.profiles, action),
+        };
+      }
+      return state;
+    }
     case actionTypes.PROFILE_PAUSED:
     case actionTypes.PROFILE_UNPAUSED:
     case actionTypes.PUSHER_PROFILE_PAUSED_STATE:
@@ -119,5 +149,11 @@ export const actions = {
   }),
   handleConnectSocialAccountClick: () => ({
     type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
+  }),
+  onDropProfile: ({ commit, dragIndex, hoverIndex }) => ({
+    type: actionTypes.PROFILE_DROPPED,
+    commit,
+    dragIndex,
+    hoverIndex,
   }),
 };

@@ -114,6 +114,20 @@ export default ({ dispatch, getState }) => next => (action) => {
         }));
       }
       break;
+    case actionTypes.PROFILE_DROPPED: {
+      if (action.commit) {
+        const state = getState();
+        const profiles = state.profileSidebar.profiles;
+        const orderedIds = profiles.map(profile => profile.id);
+        dispatch(dataFetchActions.fetch({
+          name: 'reorderProfiles',
+          args: {
+            order: orderedIds,
+          },
+        }));
+      }
+      break;
+    }
     default:
       break;
   }

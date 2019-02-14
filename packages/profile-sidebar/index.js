@@ -36,6 +36,13 @@ export default connect(
         }
       }
     },
+    onDropProfile: ({ commit, dragIndex, hoverIndex }) => {
+      dispatch(actions.onDropProfile({
+        commit,
+        dragIndex,
+        hoverIndex,
+      }));
+    },
     onConnectSocialAccountClick: () => {
       dispatch(actions.handleConnectSocialAccountClick());
     },

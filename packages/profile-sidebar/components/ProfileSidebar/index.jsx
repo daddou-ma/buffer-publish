@@ -102,6 +102,7 @@ const ProfileSidebar = ({
   lockedProfiles,
   translations,
   onProfileClick,
+  onDropProfile,
   onConnectSocialAccountClick,
   profileLimit,
   showProfilesDisconnectedModal,
@@ -114,6 +115,7 @@ const ProfileSidebar = ({
         selectedProfileId={selectedProfileId}
         profiles={profiles}
         onProfileClick={onProfileClick}
+        onDropProfile={onDropProfile}
         showProfilesDisconnectedModal={showProfilesDisconnectedModal}
       />
       {lockedProfiles.length > 0 &&
@@ -123,6 +125,7 @@ const ProfileSidebar = ({
         selectedProfileId={selectedProfileId}
         profiles={lockedProfiles}
         onProfileClick={onProfileClick}
+        onDropProfile={onDropProfile}
         showProfilesDisconnectedModal={showProfilesDisconnectedModal}
       />
     </div>
@@ -156,6 +159,7 @@ ProfileSidebar.propTypes = {
     lockedListTooltip: PropTypes.string,
   }).isRequired,
   profileLimit: PropTypes.number,
+  onDropProfile: PropTypes.func,
   showProfilesDisconnectedModal: PropTypes.func.isRequired,
 };
 
