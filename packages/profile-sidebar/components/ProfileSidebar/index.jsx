@@ -12,6 +12,7 @@ import { borderWidth } from '@bufferapp/components/style/border';
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
 import ProfileList from '../ProfileList';
+import ProfileConnectShortcut from '../ProfileConnectShortcut';
 
 const profileSidebarStyle = {
   display: 'flex',
@@ -35,7 +36,8 @@ const profileListStyle = {
 };
 
 const buttonDividerStyle = {
-  marginBottom: '1rem',
+  margin: '1rem 0',
+
 };
 
 const DefaultFallbackType = <Text size={'large'}>Free</Text>;
@@ -47,8 +49,14 @@ const productTitle = (
         Publish
       </Text>
     </span>
-    <FeatureLoader fallback={DefaultFallbackType} supportedPlans={'pro'}>
+    <FeatureLoader supportedPlans={'free'}>
+      <Text size={'large'}>Free</Text>
+    </FeatureLoader>
+    <FeatureLoader supportedPlans={'pro'}>
       <Text size={'large'}>Pro</Text>
+    </FeatureLoader>
+    <FeatureLoader supportedPlans={'business'}>
+      <Text size={'large'}>Business</Text>
     </FeatureLoader>
     <Divider marginTop={'1rem'} />
   </div>
@@ -74,6 +82,11 @@ const ProfileSidebar = ({
   onConnectSocialAccountClick,
   profileLimit,
   showProfilesDisconnectedModal,
+
+  // Flags for showing connection shortcut buttons
+  hasInstagram,
+  hasFacebook,
+  hasTwitter,
 }) => (
   <div style={profileSidebarStyle}>
     {productTitle}
@@ -90,6 +103,21 @@ const ProfileSidebar = ({
       />
     </div>
     <div>
+      {!hasInstagram && <ProfileConnectShortcut
+        label="Connect Instagram"
+        network="instagram"
+        url="https://buffer.com/oauth/instagram"
+      />}
+      {!hasFacebook && <ProfileConnectShortcut
+        label="Connect Facebook"
+        network="facebook"
+        url="https://buffer.com/oauth/facebook/choose"
+      />}
+      {!hasTwitter && <ProfileConnectShortcut
+        label="Connect Twitter"
+        network="twitter"
+        url="https://buffer.com/oauth/twitter"
+      />}
       <div style={buttonDividerStyle}>
         <Divider />
       </div>
@@ -116,6 +144,9 @@ ProfileSidebar.propTypes = {
   profileLimit: PropTypes.number,
   onDropProfile: PropTypes.func,
   showProfilesDisconnectedModal: PropTypes.func.isRequired,
+  hasInstagram: PropTypes.bool.isRequired,
+  hasFacebook: PropTypes.bool.isRequired,
+  hasTwitter: PropTypes.bool.isRequired,
 };
 
 ProfileSidebar.defaultProps = {

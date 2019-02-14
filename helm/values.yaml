@@ -1,6 +1,6 @@
 name: buffer-publish # Override to be the name of the application
 track: stable # stable | canary
-replicaCount: 5
+replicaCount: 10
 image:
   repository: bufferapp/buffer-publish # Override with the docker image
   tag: latest # this will be overriden by the build process
@@ -8,7 +8,7 @@ image:
 resources:
   limits:
     cpu: 1000m
-    memory: 150Mi
+    memory: 512Mi
   requests:
     cpu: 100m
     memory: 50Mi

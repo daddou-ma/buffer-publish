@@ -67,6 +67,7 @@ const LinkPost = ({
   serviceLink,
   isSent,
   isManager,
+  isPastReminder,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -149,6 +150,7 @@ const LinkPost = ({
       serviceLink={serviceLink}
       isSent={isSent}
       isManager={isManager}
+      isPastReminder={isPastReminder}
     >
       {children}
     </Post>
@@ -174,6 +176,7 @@ LinkPost.propTypes = {
   text: PropTypes.string.isRequired,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 LinkPost.defaultProps = Post.defaultProps;

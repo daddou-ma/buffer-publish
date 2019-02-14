@@ -7,7 +7,7 @@ const common = require('./webpack.config.common.js');
 const merged = merge.strategy({ plugins: 'prepend' })(
   common, {
     mode: 'development',
-    devtool: 'inline-source-map',
+    devtool: 'eval',
     output: {
       publicPath: 'https://local.buffer.com:8080/static/',
     },
@@ -25,6 +25,9 @@ const merged = merge.strategy({ plugins: 'prepend' })(
       https: {
         key: fs.readFileSync('../reverseproxy/certs/local.buffer.com-wildcard.key'),
         cert: fs.readFileSync('../reverseproxy/certs/local.buffer.com-wildcard.crt'),
+      },
+      stats: {
+        children: false,
       },
     },
     plugins: [

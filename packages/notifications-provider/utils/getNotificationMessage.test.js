@@ -10,8 +10,8 @@ describe('getNotificationMessage', () => {
   });
 
   it('it should return the string if present', () => {
-    expect(getNotificationMessage('success', 'connection')).toBe(
-      "You're all set! We've selected some times for you but you can tweak them in your settings"
+    expect(getNotificationMessage('success', 'bitly-disconnect')).toBe(
+      "Okay, your bitly account has been disconnected.",
     );
   });
 
