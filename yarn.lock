@@ -240,9 +240,10 @@
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@bufferapp/buffer-rpc/-/buffer-rpc-0.0.4.tgz#8281f134fea93bd42b425968ef0a797fb8c9c45b"
 
-"@bufferapp/buffermetrics@0.6.3-beta-06":
-  version "0.6.3-beta-06"
-  resolved "https://registry.yarnpkg.com/@bufferapp/buffermetrics/-/buffermetrics-0.6.3-beta-06.tgz#6fd471b4f85d2d6c5b68b8d51e27cddca06a987c"
+"@bufferapp/buffermetrics@0.6.3-beta-07":
+  version "0.6.3-beta-07"
+  resolved "https://registry.yarnpkg.com/@bufferapp/buffermetrics/-/buffermetrics-0.6.3-beta-07.tgz#d099314729c20ec42c262ae4794efe819ceb40c3"
+  integrity sha512-vJIMiTXc6gyURcAF/xh5sC98lYnZNrhpUEgZcY0/IXBWQSA2OVuXhfvM7fSKYDVq4kuv8QMiSxY/O/LY2hu9nA==
   dependencies:
     "@bufferapp/buda" "0.6.2-beta-02"
     on-finished "^2.3.0"
