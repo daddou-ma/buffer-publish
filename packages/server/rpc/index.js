@@ -3,6 +3,7 @@ const { rpc } = require('@bufferapp/buffer-rpc');
 const profilesMethod = require('./profiles');
 const queuedPostsMethod = require('./queuedPosts');
 const sentPostsMethod = require('./sentPosts');
+const pastRemindersMethod = require('./pastReminders');
 const draftPostsMethod = require('./draftPosts');
 const userMethod = require('./user');
 const deletePostMethod = require('./deletePost');
@@ -41,6 +42,7 @@ const checkInstagramBusinessMethod = require('./checkInstagramBusiness');
 const saveGATrackingSettings = require('./saveGATrackingSettings');
 const getGATrackingSettings = require('./getGATrackingSettings');
 const toggleInstagramReminders = require('./toggleInstagramReminders');
+const setNotifications = require('./setNotifications');
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
 const average = require('./analytics/average');
@@ -54,6 +56,7 @@ module.exports = rpc(
   profilesMethod,
   queuedPostsMethod,
   sentPostsMethod,
+  pastRemindersMethod,
   draftPostsMethod,
   userMethod,
   deletePostMethod,
@@ -99,4 +102,5 @@ module.exports = rpc(
   summaryMethod,
   checkInstagramBusinessMethod,
   toggleInstagramReminders,
+  setNotifications,
 );

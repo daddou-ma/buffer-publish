@@ -29,6 +29,7 @@ const renderPostList = ({
   onShareAgainClick,
   isSent,
   isManager,
+  isPastReminder,
 }) =>
   <div style={postListStyle}>
     <PostList
@@ -49,6 +50,7 @@ const renderPostList = ({
       onShareAgainClick={onShareAgainClick}
       isSent={isSent}
       isManager={isManager}
+      isPastReminder={isPastReminder}
     />
   </div>;
 
@@ -70,6 +72,7 @@ const PostLists = ({
   onShareAgainClick,
   isSent,
   isManager,
+  isPastReminder,
 }) =>
   <List
     items={postLists.map((postList, index) =>
@@ -90,6 +93,7 @@ const PostLists = ({
         onShareAgainClick,
         isSent,
         isManager,
+        isPastReminder,
       }),
     )}
     fillContainer
@@ -120,6 +124,7 @@ PostLists.propTypes = {
   onShareAgainClick: PropTypes.func,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 PostLists.defaultProps = {

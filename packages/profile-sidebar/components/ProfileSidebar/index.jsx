@@ -69,8 +69,6 @@ const renderLockedHeader = ({ translations, profileLimit }) => (
   </div>
 );
 
-const DefaultFallbackType = <Text size={'large'}>Free</Text>;
-
 const productTitle = (
   <div>
     <span style={productTitleStyle}>
@@ -78,8 +76,14 @@ const productTitle = (
         Publish
       </Text>
     </span>
-    <FeatureLoader fallback={DefaultFallbackType} supportedPlans={'pro'}>
+    <FeatureLoader supportedPlans={'free'}>
+      <Text size={'large'}>Free</Text>
+    </FeatureLoader>
+    <FeatureLoader supportedPlans={'pro'}>
       <Text size={'large'}>Pro</Text>
+    </FeatureLoader>
+    <FeatureLoader supportedPlans={'business'}>
+      <Text size={'large'}>Business</Text>
     </FeatureLoader>
     <Divider marginTop={'1rem'} />
   </div>

@@ -1,14 +1,14 @@
 name: buffer-publish # Override to be the name of the application
 track: stable # stable | canary
-replicaCount: 5
+replicaCount: 10
 image:
   repository: bufferapp/buffer-publish # Override with the docker image
   tag: latest # this will be overriden by the build process
   pullPolicy: Always
 resources:
   limits:
-    cpu: 100m
-    memory: 150Mi
+    cpu: 1000m
+    memory: 512Mi
   requests:
     cpu: 100m
     memory: 50Mi
@@ -33,6 +33,10 @@ extraSpecs:
     type: RollingUpdate
   minReadySeconds: 10
 env:
+  - name: DD_AGENT_HOST
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
   - name: API_ADDR
     value: https://api.bufferapp.com
   - name: BUGSNAG_KEY

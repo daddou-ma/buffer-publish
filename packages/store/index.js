@@ -4,6 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 import { createMiddleware as createBufferMetricsMiddleware } from '@bufferapp/buffermetrics/redux';
 import { middleware as queueMiddleware } from '@bufferapp/publish-queue';
 import { middleware as sentMiddleware } from '@bufferapp/publish-sent';
+import { middleware as pastRemindersMiddleware } from '@bufferapp/publish-past-reminders';
 import { middleware as draftsMiddleware } from '@bufferapp/publish-drafts';
 import { middleware as postingScheduleSettingsMiddleware } from '@bufferapp/publish-posting-schedule';
 import { middleware as generalSettingsMiddleware } from '@bufferapp/publish-general-settings';
@@ -31,6 +32,7 @@ import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintena
 import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
 import { middleware as notificationsProviderMiddleware } from '@bufferapp/publish-notifications-provider';
 import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/publish-profiles-disconnected-modal';
+import { middleware as accountNotificationsMiddleware } from '@bufferapp/publish-account-notifications';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 
 // Remove analytics middleware when publish switches to analyze
@@ -86,6 +88,7 @@ const configureStore = (initialstate) => {
         productFeatureMiddleware,
         queueMiddleware,
         sentMiddleware,
+        pastRemindersMiddleware,
         postingScheduleSettingsMiddleware,
         generalSettingsMiddleware,
         pusherSyncMiddleware,
@@ -109,6 +112,7 @@ const configureStore = (initialstate) => {
         draftsMiddleware,
         notificationsProviderMiddleware,
         profilesDisconnectedModalMiddleware,
+        accountNotificationsMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

@@ -34,6 +34,7 @@ const VideoPost = ({
   serviceLink,
   isSent,
   isManager,
+  isPastReminder,
 }) =>
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
@@ -68,6 +69,7 @@ const VideoPost = ({
     serviceLink={serviceLink}
     isSent={isSent}
     isManager={isManager}
+    isPastReminder={isPastReminder}
   />;
 
 VideoPost.propTypes = ImagePost.propTypes;

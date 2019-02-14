@@ -1,0 +1,24 @@
+{
+  "name": "@bufferapp/publish-past-reminders",
+  "version": "2.0.0",
+  "description": "Past Reminders package",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "mariale.uribe@gmail.com",
+  "dependencies": {
+    "@bufferapp/async-data-fetch": "1.9.4",
+    "@bufferapp/publish-profile-sidebar": "2.0.0",
+    "@bufferapp/publish-pusher-sync": "2.0.0",
+    "@bufferapp/publish-queue": "2.0.0",
+    "@bufferapp/publish-shared-components": "2.0.0",
+    "@bufferapp/publish-composer-popover": "2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "3.19.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -4,6 +4,7 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as tabsReducer } from '@bufferapp/publish-tabs';
 import { reducer as queueReducer } from '@bufferapp/publish-queue';
 import { reducer as sentReducer } from '@bufferapp/publish-sent';
+import { reducer as pastRemindersReducer } from '@bufferapp/publish-past-reminders';
 import { reducer as draftsReducer } from '@bufferapp/publish-drafts';
 import { reducer as postingScheduleReducer } from '@bufferapp/publish-posting-schedule';
 import { reducer as generalSettingsReducer } from '@bufferapp/publish-general-settings';
@@ -25,6 +26,7 @@ import { reducer as manageAppsReducer } from '@bufferapp/manage-apps-extras';
 import { reducer as twoFactorAuthReducer } from '@bufferapp/publish-two-factor-auth';
 import { reducer as closeAccountReducer } from '@bufferapp/close-account';
 import { reducer as profilesDisconnectedModalReducer } from '@bufferapp/publish-profiles-disconnected-modal';
+import { reducer as accountNotificationsReducer } from '@bufferapp/publish-account-notifications';
 import { reducer as stealProfileModalReducer } from '@bufferapp/publish-steal-profile-modal';
 
 // Analyze
@@ -45,6 +47,7 @@ export default combineReducers({
   router: routerReducer,
   queue: queueReducer,
   sent: sentReducer,
+  pastReminders: pastRemindersReducer,
   i18n: i18nReducer,
   tabs: tabsReducer,
   profileSidebar: profileSidebarReducer,
@@ -67,6 +70,7 @@ export default combineReducers({
   generalSettings: generalSettingsReducer,
   postingSchedule: postingScheduleReducer,
   profilesDisconnectedModal: profilesDisconnectedModalReducer,
+  accountNotifications: accountNotificationsReducer,
   stealProfileModal: stealProfileModalReducer,
 
   // Analyze

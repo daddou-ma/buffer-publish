@@ -54,6 +54,7 @@ const MultipleImagesPost = ({
   serviceLink,
   isSent,
   isManager,
+  isPastReminder,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
@@ -118,6 +119,7 @@ const MultipleImagesPost = ({
       serviceLink={serviceLink}
       isSent={isSent}
       isManager={isManager}
+      isPastReminder={isPastReminder}
     >
       {children}
     </Post>
@@ -144,6 +146,7 @@ MultipleImagesPost.propTypes = {
   currentImage: PropTypes.number,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 MultipleImagesPost.defaultProps = Post.defaultProps;
