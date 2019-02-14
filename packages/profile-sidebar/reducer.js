@@ -11,7 +11,7 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   PROFILE_DROPPED: 0,
 });
 
-const initialState = {
+export const initialState = {
   profiles: [],
   selectedProfileId: '',
   loading: false,

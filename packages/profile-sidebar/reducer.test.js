@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import reducer, { actions, actionTypes } from './reducer';
+import reducer, { actions, actionTypes, initialState } from './reducer';
 
 import profiles from './mockData/profiles';
 
@@ -29,5 +29,41 @@ describe('reducer', () => {
         profileId: profile.id,
         profile,
       });
+  });
+  it('should generate a profile dropped action', () => {
+    const props = { dragIndex: 1, hoverIndex: 0 };
+    expect(actions.onDropProfile(props))
+      .toEqual({
+        type: actionTypes.PROFILE_DROPPED,
+        dragIndex: props.dragIndex,
+        hoverIndex: props.hoverIndex,
+      });
+  });
+
+  it('should reorder profiles with PROFILE_DROPPED', () => {
+    const dragIndex = 0;
+    const hoverIndex = 1;
+    const stateBefore = {
+      ...initialState,
+      profiles,
+    };
+
+    const profilesAfter = profiles.slice();
+    [profilesAfter[dragIndex], profilesAfter[hoverIndex]] = [profilesAfter[hoverIndex], profilesAfter[dragIndex]];
+
+    const stateAfter = {
+      ...initialState,
+      profiles: profilesAfter,
+    };
+
+    const action = {
+      type: actionTypes.PROFILE_DROPPED,
+      dragIndex,
+      hoverIndex,
+    };
+
+    deepFreeze(action);
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
   });
 });
