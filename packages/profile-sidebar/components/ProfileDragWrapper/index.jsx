@@ -22,7 +22,7 @@ const profileTarget = {
   },
   hover(props, monitor, component) {
     const { index: dragIndex } = monitor.getItem();
-    const { index: hoverIndex, onDropProfile } = props;
+    const { index: hoverIndex, onDropProfile, profileLimit } = props;
 
     // Don't replace profile with itself...
     if (dragIndex === hoverIndex) {
@@ -57,7 +57,7 @@ const profileTarget = {
     }
 
     // Drop!
-    onDropProfile({ dragIndex, hoverIndex });
+    onDropProfile({ dragIndex, hoverIndex, profileLimit });
 
     // We need to directly mutate the monitor state here
     // to ensure the currently dragged item index is updated.

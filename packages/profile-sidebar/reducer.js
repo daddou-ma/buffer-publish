@@ -36,10 +36,17 @@ const moveProfileInArray = (arr, from, to) => {
 };
 
 const handleProfileDropped = (profiles, action) => {
-  const reorderedProfiles = moveProfileInArray(profiles, action.dragIndex, action.hoverIndex);
+  const { profileLimit, hoverIndex, dragIndex } = action;
+  const reorderedProfiles = moveProfileInArray(profiles, dragIndex, hoverIndex);
+  // add profiles after limit as disabled
+  if (reorderedProfiles.length > profileLimit) {
+    reorderedProfiles.map((profile, index) => {
+      profile.disabled = index >= profileLimit;
+      return profile;
+    });
+  }
   return reorderedProfiles;
 };
-
 
 const profilesReducer = (state = [], action) => {
   switch (action.type) {

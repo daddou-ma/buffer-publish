@@ -36,9 +36,10 @@ export default connect(
         }
       }
     },
-    onDropProfile: ({ commit, dragIndex, hoverIndex }) => {
+    onDropProfile: ({ commit, profileLimit, dragIndex, hoverIndex }) => {
       dispatch(actions.onDropProfile({
         commit,
+        profileLimit,
         dragIndex,
         hoverIndex,
       }));
