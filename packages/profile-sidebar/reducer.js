@@ -1,9 +1,10 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
+
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   SELECT_PROFILE: 0,
-  POST_COUNT_UPDATED: 0,
   PROFILE_UNPAUSED: 0,
   PROFILE_PAUSED: 0,
   PUSHER_PROFILE_PAUSED_STATE: 0,
@@ -18,6 +19,9 @@ const initialState = {
   selectedProfile: {},
   isLockedProfile: false,
   isBusinessAccount: false,
+  hasInstagram: true,
+  hasFacebook: true,
+  hasTwitter: true,
 };
 
 const profilesReducer = (state = [], action) => {
@@ -28,7 +32,7 @@ const profilesReducer = (state = [], action) => {
           ...profile,
           open: profile.id === action.profileId,
         }));
-    case actionTypes.POST_COUNT_UPDATED:
+    case queueActionTypes.POST_COUNT_UPDATED:
       return state
         .map(profile => ({
           ...profile,
@@ -76,6 +80,9 @@ export default (state = initialState, action) => {
           .filter(profile => !profile.disabled),
         lockedProfiles: action.result
           .filter(profile => profile.disabled),
+        hasInstagram: action.result.some(p => p.service === 'instagram'),
+        hasFacebook: action.result.some(p => p.service === 'facebook'),
+        hasTwitter: action.result.some(p => p.service === 'twitter'),
       };
     }
     case actionTypes.SELECT_PROFILE: {
@@ -91,7 +98,7 @@ export default (state = initialState, action) => {
     case actionTypes.PROFILE_PAUSED:
     case actionTypes.PROFILE_UNPAUSED:
     case actionTypes.PUSHER_PROFILE_PAUSED_STATE:
-    case actionTypes.POST_COUNT_UPDATED: {
+    case queueActionTypes.POST_COUNT_UPDATED: {
       return {
         ...state,
         profiles: profilesReducer(state.profiles, action),

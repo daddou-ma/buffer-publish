@@ -3,12 +3,15 @@ const avatarUrl = 'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f000
 export default [{
   id: '1234',
   avatarUrl,
-  type: 'twitter',
+  service: 'twitter',
   handle: 'joelgascoigne',
+  open: false,
 }, {
   id: '1235',
   avatarUrl,
-  type: 'facebook',
+  service: 'facebook',
   handle: 'Joel Gascoigne',
   notifications: 1,
+  disabled: true,
+  open: false,
 }];
