@@ -9,6 +9,7 @@ export default connect(
     submittingFeedback: state.appSwitcher.submittingFeedback,
     redirecting: state.appSwitcher.redirecting,
     showFeedbackModal: state.appSwitcher.showFeedbackModal,
+    source: state.appSwitcher.source,
     translations: state.i18n.translations['app-switcher'],
     hidePrompt: state.appSidebar.user.features && state.appSidebar.user.features.indexOf('paid_users_in_new_publish') >= 0,
   }),
@@ -23,8 +24,8 @@ export default connect(
         source: 'app-switcher',
       }));
     },
-    sendFeedback(feedback) {
-      dispatch(actions.sendFeedback(feedback));
+    sendFeedback({feedback, source}) {
+      dispatch(actions.sendFeedback({ feedback, source }));
     },
   }),
 )(AppSwitcher);

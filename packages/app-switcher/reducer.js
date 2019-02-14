@@ -50,6 +50,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showFeedbackModal: true,
+        source: action.source,
       };
     case actionTypes.HIDE_FEEDBACK_MODAL:
       return {
@@ -70,6 +71,6 @@ export const actions = {
     type: actionTypes.SHOW_FEEDBACK_MODAL,
     source,
   }),
-  sendFeedback: feedback =>
-    dataFetchActions.fetch({ name: 'sendFeedback', args: { body: feedback } }),
+  sendFeedback: ({ feedback, source }) =>
+    dataFetchActions.fetch({ name: 'sendFeedback', args: { body: feedback, source } }),
 };

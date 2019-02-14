@@ -57,7 +57,7 @@ class AppSwitcher extends React.Component {
     this.onFeedbackChange = this.onFeedbackChange.bind(this);
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate (prevProps) {
     if (this.props.showFeedbackModal !== prevProps.showFeedbackModal) {
       const node = ReactDOM.findDOMNode(this);  // eslint-disable-line
       if (node) {
@@ -75,7 +75,8 @@ class AppSwitcher extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault();
-    this.props.sendFeedback(this.state.feedbackBody);
+    const { source } = this.props;
+    this.props.sendFeedback({ feedback: this.state.feedbackBody, source });
   }
 
   renderFeedbackModal () {
@@ -96,7 +97,7 @@ class AppSwitcher extends React.Component {
               </div>
             </div>
             <div className={styles.barBottomStyle}>
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={(e) => this.handleSubmit(e)}>
                 <Text size="mini" color="black">{translations.question}</Text>
                 <div style={{ padding: '5px 0' }}>
                   <Input
@@ -156,7 +157,7 @@ class AppSwitcher extends React.Component {
               <div style={buttonContainerStyle}>
                 <Button
                   small
-                  onClick={displayFeedbackModal}
+                  onClick={() => displayFeedbackModal()}
                 >
                   Back to classic Buffer
                 </Button>
@@ -184,10 +185,12 @@ AppSwitcher.propTypes = {
     continue: PropTypes.string,
   }).isRequired,
   hidePrompt: PropTypes.bool,
+  source: PropTypes.string,
 };
 
 AppSwitcher.defaultProps = {
   hidePrompt: undefined,
+  source: undefined,
 };
 
 export default AppSwitcher;

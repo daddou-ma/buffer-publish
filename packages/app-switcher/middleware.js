@@ -12,7 +12,11 @@ export default ({ dispatch }) => next => (action) => {
       }));
       break;
     case `sendFeedback_${actionTypes.FETCH_SUCCESS}`:
-      window.location = getURL.getClassicBufferURL();
+      if (action.args && action.args.source === 'publish_sidebar') {
+        window.location = getURL.getBackToClassicNewPublishBufferURL();
+      } else {
+        window.location = getURL.getClassicBufferURL();
+      }
       break;
     default:
       break;
