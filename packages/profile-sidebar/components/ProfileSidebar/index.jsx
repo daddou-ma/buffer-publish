@@ -122,7 +122,6 @@ ProfileSidebar.defaultProps = {
   onProfileClick: ProfileList.defaultProps.onProfileClick,
   selectedProfileId: ProfileList.defaultProps.selectedProfileId,
   profiles: [],
-  lockedProfiles: [],
 };
 
 export default ProfileSidebar;
