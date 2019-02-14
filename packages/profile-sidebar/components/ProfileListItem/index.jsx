@@ -69,56 +69,59 @@ const ProfileListItem = ({
     const queueTab = document.querySelector('#tabs a');
     if (queueTab) queueTab.focus();
   };
+
   return (
-    <Link
-      href={'#'}
-      onClick={e => {
-        e.preventDefault();
-        handleClick();
-      }}
-      unstyled
-    >
-      <div
-        style={calculateStyles(
-          {
-            default: {
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0.5rem',
-              justifyContent: 'space-between',
-              lineHeight: 1,
-            },
-            selected: {
-              background: curiousBlueUltraLight,
-              borderRadius: '4px',
-            },
-          },
-          {
-            selected,
-          },
-        )}
+    <div>
+      <Link
+        href={'#'}
+        onClick={e => {
+          e.preventDefault();
+          handleClick();
+        }}
+        unstyled
       >
-        <div style={profileBadgeWrapperStyle}>
-          <div style={{ marginRight: '16px' }}>
-            <ProfileBadge avatarUrl={avatarUrl} type={type} />
+        <div
+          style={calculateStyles(
+            {
+              default: {
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.5rem',
+                justifyContent: 'space-between',
+                lineHeight: 1,
+              },
+              selected: {
+                background: curiousBlueUltraLight,
+                borderRadius: '4px',
+              },
+            },
+            {
+              selected,
+            },
+          )}
+        >
+          <div style={profileBadgeWrapperStyle}>
+            <div style={{ marginRight: '16px' }}>
+              <ProfileBadge avatarUrl={avatarUrl} type={type} />
+            </div>
+            <SensitiveData>
+              <Text size={'small'} color={selected ? 'black' : 'shuttleGray'}>
+                {handle}
+              </Text>
+            </SensitiveData>
           </div>
-          <SensitiveData>
-            <Text size={'small'} color={selected ? 'black' : 'shuttleGray'}>
-              {handle}
-            </Text>
-          </SensitiveData>
+          {locked ? (
+            <LockIcon />
+          ) : disconnected ? (
+            <NewDisconnectedIcon
+              showProfilesDisconnectedModal={showProfilesDisconnectedModal}
+            />
+          ) : (
+            <Notifications notifications={notifications} />
+          )}
         </div>
-        {locked ? (
-          <LockIcon />
-        ) : disconnected ? (
-          <NewDisconnectedIcon
-            showProfilesDisconnectedModal={showProfilesDisconnectedModal}
-          />
-        ) : (
-          <Notifications notifications={notifications} />
-        )}
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

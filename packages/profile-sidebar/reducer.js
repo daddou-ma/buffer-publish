@@ -13,7 +13,6 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
 
 const initialState = {
   profiles: [],
-  lockedProfiles: [],
   selectedProfileId: '',
   loading: false,
   selectedProfile: {},
@@ -100,10 +99,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        profiles: action.result
-          .filter(profile => !profile.disabled),
-        lockedProfiles: action.result
-          .filter(profile => profile.disabled),
+        profiles: action.result,
       };
     }
     case actionTypes.SELECT_PROFILE: {
@@ -111,7 +107,6 @@ export default (state = initialState, action) => {
         ...state,
         selectedProfileId: action.profileId,
         profiles: profilesReducer(state.profiles, action),
-        lockedProfiles: profilesReducer(state.lockedProfiles, action),
         selectedProfile: action.profile,
         isLockedProfile: action.profile ? action.profile.disabled : false,
       };
@@ -132,7 +127,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         profiles: profilesReducer(state.profiles, action),
-        lockedProfiles: profilesReducer(state.lockedProfiles, action),
       };
     }
     default:
@@ -157,10 +151,11 @@ export const actions = {
   handleConnectSocialAccountClick: () => ({
     type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
   }),
-  onDropProfile: ({ commit, dragIndex, hoverIndex }) => ({
+  onDropProfile: ({ commit, dragIndex, hoverIndex, profileLimit }) => ({
     type: actionTypes.PROFILE_DROPPED,
     commit,
     dragIndex,
     hoverIndex,
+    profileLimit,
   }),
 };

@@ -7,7 +7,6 @@ describe('reducer', () => {
   it('should initialize default state', () => {
     const stateAfter = {
       profiles: [],
-      lockedProfiles: [],
       loading: false,
       selectedProfileId: '',
       selectedProfile: {},

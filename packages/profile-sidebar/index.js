@@ -13,7 +13,6 @@ export default connect(
     selectedProfile: state.profileSidebar.selectedProfile,
     selectedProfileId: ownProps.profileId,
     profiles: state.profileSidebar.profiles,
-    lockedProfiles: state.profileSidebar.lockedProfiles,
     translations: state.i18n.translations['profile-sidebar'],
     profileLimit: state.appSidebar.user.profile_limit,
   }),
