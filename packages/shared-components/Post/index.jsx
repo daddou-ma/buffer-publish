@@ -140,6 +140,7 @@ const Post = ({
   serviceLink,
   isSent,
   isManager,
+  isPastReminder,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
@@ -172,6 +173,7 @@ const Post = ({
           subprofileID={subprofileID}
           subprofiles={subprofiles}
           isSent={isSent}
+          isPastReminder={isPastReminder}
         />
         <PostFooter
           isManager={isManager}
@@ -188,6 +190,7 @@ const Post = ({
           onRequeueClick={onRequeueClick}
           serviceLink={serviceLink}
           isSent={isSent}
+          isPastReminder={isPastReminder}
         />
         <FeatureLoader
           supportedFeatures={'post_stats'}
@@ -239,6 +242,7 @@ Post.commonPropTypes = {
   onDropPost: PropTypes.func,
   serviceLink: PropTypes.string,
   isSent: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 Post.propTypes = {
@@ -253,6 +257,7 @@ Post.defaultProps = {
   fixed: false,
   isSent: false,
   isManager: true,
+  isPastReminder: true,
 };
 
 export default Post;

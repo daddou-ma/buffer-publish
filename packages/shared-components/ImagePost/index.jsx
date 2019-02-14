@@ -70,6 +70,7 @@ const ImagePost = ({
   serviceLink,
   isSent,
   isManager,
+  isPastReminder,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -137,6 +138,7 @@ const ImagePost = ({
       serviceLink={serviceLink}
       isSent={isSent}
       isManager={isManager}
+      isPastReminder={isPastReminder}
     >
       {children}
     </Post>
@@ -163,6 +165,7 @@ ImagePost.propTypes = {
   onImageClose: PropTypes.func,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 ImagePost.defaultProps = ImagePost.defaultProps;

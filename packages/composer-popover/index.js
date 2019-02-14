@@ -27,7 +27,7 @@ ComposerPopover.propTypes = {
   onSave: PropTypes.func.isRequired,
   transparentOverlay: PropTypes.bool,
   preserveComposerStateOnClose: PropTypes.bool,
-  type: PropTypes.oneOf(['queue', 'drafts', 'sent']),
+  type: PropTypes.oneOf(['queue', 'drafts', 'sent', 'pastReminders']),
 };
 
 ComposerPopover.defaultProps = {

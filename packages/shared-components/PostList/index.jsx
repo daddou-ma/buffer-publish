@@ -52,6 +52,7 @@ const renderPost = ({
   onImageClose,
   onDropPost,
   isSent,
+  isPastReminder,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -67,6 +68,7 @@ const renderPost = ({
     onImageClose: () => onImageClose({ post }),
     onDropPost,
     isSent,
+    isPastReminder,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -92,6 +94,7 @@ const PostList = ({
   onShareAgainClick,
   isSent,
   isManager,
+  isPastReminder,
 }) =>
   <div>
     <div style={listHeaderStyle}>
@@ -119,6 +122,7 @@ const PostList = ({
               onDropPost,
               onShareAgainClick,
               isSent,
+              isPastReminder,
             })
           }
           {isManager &&
@@ -160,6 +164,7 @@ PostList.propTypes = {
   onShareAgainClick: PropTypes.func,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 PostList.defaultProps = {
