@@ -27,7 +27,7 @@ const TabNavigation = ({
   onChildTabClick,
   shouldShowUpgradeCta,
   shouldShowNestedSettingsTab,
-  showUpgradeModal,
+  onUpgradeButtonClick,
   profileId,
   isLockedProfile,
   isInstagramProfile,
@@ -75,13 +75,26 @@ const TabNavigation = ({
             secondary
             onClick={(e) => {
               e.preventDefault();
-              showUpgradeModal();
+              onUpgradeButtonClick('pro');
             }}
           >
             Upgrade to Pro
             </Button>
         </div>
       }
+      <FeatureLoader supportedPlans={'pro'}>
+        <div style={upgradeCtaStyle}>
+          <Button
+            secondary
+            onClick={(e) => {
+              e.preventDefault();
+              onUpgradeButtonClick('b4b');
+            }}
+          >
+            Learn about Buffer for Business
+            </Button>
+        </div>
+      </FeatureLoader>
       {shouldShowNestedSettingsTab && !isLockedProfile &&
         <Tabs
           selectedTabId={selectedChildTab}
@@ -112,7 +125,7 @@ TabNavigation.propTypes = {
   selectedTabId: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
   shouldShowUpgradeCta: PropTypes.bool.isRequired,
-  showUpgradeModal: PropTypes.func.isRequired,
+  onUpgradeButtonClick: PropTypes.func.isRequired,
   onChildTabClick: PropTypes.func.isRequired,
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,

@@ -250,6 +250,16 @@
     useragent "^2.1.13"
     uuid "^3.0.1"
 
+"@bufferapp/buffermetrics@0.6.3-beta-07":
+  version "0.6.3-beta-07"
+  resolved "https://registry.yarnpkg.com/@bufferapp/buffermetrics/-/buffermetrics-0.6.3-beta-07.tgz#d099314729c20ec42c262ae4794efe819ceb40c3"
+  integrity sha512-vJIMiTXc6gyURcAF/xh5sC98lYnZNrhpUEgZcY0/IXBWQSA2OVuXhfvM7fSKYDVq4kuv8QMiSxY/O/LY2hu9nA==
+  dependencies:
+    "@bufferapp/buda" "0.6.2-beta-02"
+    on-finished "^2.3.0"
+    useragent "^2.1.13"
+    uuid "^3.0.1"
+
 "@bufferapp/chronos@0.6.1":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@bufferapp/chronos/-/chronos-0.6.1.tgz#0213dff339459ca510103e5a72f558682a2675dd"

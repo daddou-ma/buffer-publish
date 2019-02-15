@@ -80,6 +80,17 @@ if (isProduction) {
 
 const stripePublishableKey = process.env.STRIPE_PUBLISHABLE;
 
+/**
+ * Generate a script to pass basic user info to our React app
+ *
+ * @param {String} user
+ */
+const getUserScript = user => `
+<script type="text/javascript">
+  window._user = ${JSON.stringify(user)};
+</script>
+`;
+
 const notificationScript = (notification) => {
   if (!notification) {
     return '';
@@ -157,7 +168,8 @@ const getHtml = ({ notification, userId, modalKey, modalValue }) =>
     .replace('{{{fullStoryScript}}}', isProduction ? fullStoryScript : '')
     .replace('{{{bugsnagScript}}}', isProduction ? getBugsnagScript(userId) : '')
     .replace('{{{notificationScript}}}', notificationScript(notification))
-    .replace('{{{showModalScript}}}', showModalScript(modalKey, modalValue));
+    .replace('{{{showModalScript}}}', showModalScript(modalKey, modalValue))
+    .replace('{{{userScript}}}', getUserScript({ id: userId }));
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());

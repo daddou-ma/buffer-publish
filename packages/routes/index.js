@@ -11,7 +11,7 @@ export const getProfilePageParams = ({ path }) => {
   };
 };
 
-export const generateChildTabRoute = ({ profileId, tabId = 'queue', childTabId = 'general-settings'}) =>
+export const generateChildTabRoute = ({ profileId, tabId = 'queue', childTabId = 'general-settings' }) =>
     `/profile/${profileId}/tab/${tabId}/${childTabId}`;
 
 export const generateProfilePageRoute = ({ profileId, tabId = 'queue' }) =>
@@ -22,13 +22,11 @@ export const profilePageRoute = generateProfilePageRoute({
   tabId: ':tabId',
 });
 
-
 export const childTabRoute = generateChildTabRoute({
-    profileId: ':profileId',
-    tabId: ':tabId',
-    childTabId: ':childTabId',
+  profileId: ':profileId',
+  tabId: ':tabId',
+  childTabId: ':childTabId',
 });
-
 
 export const generatePreferencePageRoute = ({ preferenceId }) =>
   `/preferences/${preferenceId}`;

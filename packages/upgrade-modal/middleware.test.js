@@ -1,20 +1,12 @@
 import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals';
-import buffermetrics from '@bufferapp/buffermetrics/client';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import middleware from './middleware';
 import { actionTypes } from './reducer';
 
-jest.mock('@bufferapp/buffermetrics/client');
+jest.mock('@bufferapp/publish-data-tracking');
 
 describe('middleware', () => {
-  beforeAll(() => {
-    window._bugsnagConfig = {
-      user: {
-        id: 'foo',
-      },
-    };
-  });
-
   describe('should send tracking data', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
@@ -32,12 +24,11 @@ describe('middleware', () => {
       expect(next)
         .toBeCalledWith(action);
 
-      expect(buffermetrics.trackAction)
+      expect(trackAction)
         .toBeCalledWith({
-          application: 'PUBLISH',
           location: 'MODALS',
           action: 'show_upgrade_to_pro',
-          metadata: { userId: 'foo', source: 'source' },
+          metadata: { source: 'source' },
         });
     });
 
@@ -50,12 +41,12 @@ describe('middleware', () => {
       expect(next)
         .toBeCalledWith(action);
 
-      expect(buffermetrics.trackAction)
+      expect(trackAction)
         .toBeCalledWith({
           application: 'PUBLISH',
           location: 'MODALS',
           action: 'hide_upgrade_to_pro',
-          metadata: { userId: 'foo', source: 'source' },
+          metadata: { source: 'source' },
         });
     });
 
@@ -68,12 +59,11 @@ describe('middleware', () => {
       expect(next)
         .toBeCalledWith(action);
 
-      expect(buffermetrics.trackAction)
+      expect(trackAction)
         .toBeCalledWith({
-          application: 'PUBLISH',
           location: 'MODALS',
           action: 'submit_upgrade_to_pro',
-          metadata: { userId: 'foo', source: 'source' },
+          metadata: { source: 'source' },
         });
     });
   });
