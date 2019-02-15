@@ -172,9 +172,10 @@
     react-highcharts "^16.0.2"
     styled-components "^2.2.1"
 
-"@bufferapp/app-sidebar@1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.10.0.tgz#aea6d3101f6de3940316e0e299edfafbccf794c7"
+"@bufferapp/app-sidebar@1.10.3":
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.10.3.tgz#2b210d6fe3b784a70f3478993c9d59dad9373afc"
+  integrity sha512-cd+cwjUmO0KF43uZqYOWuMQ4qfQk+9B/Y1O+RERMN5uO2tXvpcjXd1ABL5RjOl3Cpwk8iodMNEqDvhjgVuAWCA==
   dependencies:
     "@bufferapp/async-data-fetch" "1.9.4"
     "@bufferapp/keywrapper" "0.2.0"
@@ -239,9 +240,10 @@
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@bufferapp/buffer-rpc/-/buffer-rpc-0.0.4.tgz#8281f134fea93bd42b425968ef0a797fb8c9c45b"
 
-"@bufferapp/buffermetrics@0.6.3-beta-06":
-  version "0.6.3-beta-06"
-  resolved "https://registry.yarnpkg.com/@bufferapp/buffermetrics/-/buffermetrics-0.6.3-beta-06.tgz#6fd471b4f85d2d6c5b68b8d51e27cddca06a987c"
+"@bufferapp/buffermetrics@0.6.3-beta-07":
+  version "0.6.3-beta-07"
+  resolved "https://registry.yarnpkg.com/@bufferapp/buffermetrics/-/buffermetrics-0.6.3-beta-07.tgz#d099314729c20ec42c262ae4794efe819ceb40c3"
+  integrity sha512-vJIMiTXc6gyURcAF/xh5sC98lYnZNrhpUEgZcY0/IXBWQSA2OVuXhfvM7fSKYDVq4kuv8QMiSxY/O/LY2hu9nA==
   dependencies:
     "@bufferapp/buda" "0.6.2-beta-02"
     on-finished "^2.3.0"
@@ -505,6 +507,22 @@
   dependencies:
     moment "2.19.3"
     moment-timezone "0.5.13"
+
+"@bufferapp/publish-formatters@1.9.30":
+  version "1.9.30"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-formatters/-/publish-formatters-1.9.30.tgz#7eb03bc4482d891c5aedbd4832a7085e2f80a3ea"
+  integrity sha512-i3vsio1Uv/UReX7ZWUFFYPIVQmaFRxhXKzIfQ/vNWQaVEeJqVsHP1LlzY/1OhowMzVjmxrR6rC7cjt1c4Z3JqA==
+  dependencies:
+    moment "2.19.3"
+    moment-timezone "0.5.13"
+
+"@bufferapp/publish-parsers@1.12.0":
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.12.0.tgz#24739a369e920cc34f77f988916ffacfa39ec9b2"
+  integrity sha512-cDNlw7Pv9QDRu/xZm+yAgJKYxdBCIZNC8y0VDGYmi5XqUTB+AGJ22m6+uFGjvI8RqZzvPFroNXM/V/7T06uUig==
+  dependencies:
+    "@bufferapp/publish-formatters" "1.9.29"
+    twitter-text "3.0.0"
 
 "@bufferapp/publish-parsers@1.12.5":
   version "1.12.5"
