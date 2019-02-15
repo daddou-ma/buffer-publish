@@ -16,7 +16,7 @@
     "@bufferapp/app-sidebar": "1.10.2",
     "@bufferapp/async-data-fetch": "1.9.4",
     "@bufferapp/average-table": "0.79.1",
-    "@bufferapp/buffermetrics": "0.6.3-beta-06",
+    "@bufferapp/buffermetrics": "0.6.3-beta-07",
     "@bufferapp/close-account": "2.0.0",
     "@bufferapp/compare-chart": "0.79.1",
     "@bufferapp/edit-email": "2.0.0",
