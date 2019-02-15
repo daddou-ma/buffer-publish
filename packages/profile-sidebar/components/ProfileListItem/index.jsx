@@ -71,57 +71,55 @@ const ProfileListItem = ({
   };
 
   return (
-    <div>
-      <Link
-        href={'#'}
-        onClick={e => {
-          e.preventDefault();
-          handleClick();
-        }}
-        unstyled
+    <Link
+      href={'#'}
+      onClick={e => {
+        e.preventDefault();
+        handleClick();
+      }}
+      unstyled
+    >
+      <div
+        style={calculateStyles(
+          {
+            default: {
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0.5rem',
+              justifyContent: 'space-between',
+              lineHeight: 1,
+            },
+            selected: {
+              background: curiousBlueUltraLight,
+              borderRadius: '4px',
+            },
+          },
+          {
+            selected,
+          },
+        )}
       >
-        <div
-          style={calculateStyles(
-            {
-              default: {
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0.5rem',
-                justifyContent: 'space-between',
-                lineHeight: 1,
-              },
-              selected: {
-                background: curiousBlueUltraLight,
-                borderRadius: '4px',
-              },
-            },
-            {
-              selected,
-            },
-          )}
-        >
-          <div style={profileBadgeWrapperStyle}>
-            <div style={{ marginRight: '16px' }}>
-              <ProfileBadge avatarUrl={avatarUrl} type={type} />
-            </div>
-            <SensitiveData>
-              <Text size={'small'} color={selected ? 'black' : 'shuttleGray'}>
-                {handle}
-              </Text>
-            </SensitiveData>
+        <div style={profileBadgeWrapperStyle}>
+          <div style={{ marginRight: '16px' }}>
+            <ProfileBadge avatarUrl={avatarUrl} type={type} />
           </div>
-          {locked ? (
-            <LockIcon />
-          ) : disconnected ? (
-            <NewDisconnectedIcon
-              showProfilesDisconnectedModal={showProfilesDisconnectedModal}
-            />
-          ) : (
-            <Notifications notifications={notifications} />
-          )}
+          <SensitiveData>
+            <Text size={'small'} color={selected ? 'black' : 'shuttleGray'}>
+              {handle}
+            </Text>
+          </SensitiveData>
         </div>
-      </Link>
-    </div>
+        {locked ? (
+          <LockIcon />
+        ) : disconnected ? (
+          <NewDisconnectedIcon
+            showProfilesDisconnectedModal={showProfilesDisconnectedModal}
+          />
+        ) : (
+          <Notifications notifications={notifications} />
+        )}
+      </div>
+    </Link>
   );
 };
 
