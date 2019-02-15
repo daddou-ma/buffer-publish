@@ -154,7 +154,7 @@ class AppSwitcher extends React.Component {
                   small
                   onClick={() => displayFeedbackModal()}
                 >
-                  Switch back to classic Buffer
+                  Back to classic Buffer
                 </Button>
               </div>
             </div>
