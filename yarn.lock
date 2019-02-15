@@ -172,10 +172,10 @@
     react-highcharts "^16.0.2"
     styled-components "^2.2.1"
 
-"@bufferapp/app-sidebar@1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.10.2.tgz#71fc8a963dde6f5f3ab0e881ca91e8220330fe14"
-  integrity sha512-pPrlC1dQvkTWNH5W5rhK2Unmy2Lygly9D+AVy6xkecNgusBwGFUNOV02dRQb2naYGCGMrn17gqTUo1vmcBJYhg==
+"@bufferapp/app-sidebar@1.10.3":
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.10.3.tgz#2b210d6fe3b784a70f3478993c9d59dad9373afc"
+  integrity sha512-cd+cwjUmO0KF43uZqYOWuMQ4qfQk+9B/Y1O+RERMN5uO2tXvpcjXd1ABL5RjOl3Cpwk8iodMNEqDvhjgVuAWCA==
   dependencies:
     "@bufferapp/async-data-fetch" "1.9.4"
     "@bufferapp/keywrapper" "0.2.0"
