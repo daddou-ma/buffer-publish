@@ -8,7 +8,7 @@
   },
   "author": "hamstu@gmail.com",
   "dependencies": {
-    "@bufferapp/buffermetrics": "0.6.3-beta-07"
+    "@bufferapp/buffermetrics": "0.6.3-beta-08"
   },
   "devDependencies": {
     "eslint": "3.19.0"
