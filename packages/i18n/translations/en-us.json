@@ -9,8 +9,7 @@
     "question": "What's the primary reason you're switching?",
     "cancel": "Cancel",
     "continue": "Continue to classic Buffer",
-    "pleaseWait": "Please wait,,,",
-
+    "pleaseWait": "Please wait..."
   },
   "profile-sidebar": {
     "connectButton": "Manage Social Accounts",
