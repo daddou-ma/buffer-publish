@@ -38,11 +38,6 @@ const buttonContainerStyle = {
   marginTop: '10px',
 };
 
-const modalInnerContainerStyle = {
-  width: '410px',
-  padding: '10px 30px',
-  textAlign: 'center',
-};
 
 class AppSwitcher extends React.Component {
   constructor () {
@@ -99,7 +94,7 @@ class AppSwitcher extends React.Component {
             <div className={styles.barBottomStyle}>
               <form onSubmit={(e) => this.handleSubmit(e)}>
                 <Text size="mini" color="black">{translations.question}</Text>
-                <div style={{ padding: '5px 0' }}>
+                <div style={{ padding: '5px 0' }} className={styles.disableResize}>
                   <Input
                     type="textarea"
                     meta={{ submitting: submittingFeedback }}

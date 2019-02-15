@@ -20,3 +20,7 @@
     width: 100%;
     box-sizing: border-box;
 }
+
+.disableResize textarea {
+    resize: none;
+}
