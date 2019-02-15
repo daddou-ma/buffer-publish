@@ -8,7 +8,7 @@
   },
   "author": "ana@buffer.com",
   "dependencies": {
-    "@bufferapp/composer": "2.6.14"
+    "@bufferapp/composer": "2.6.15"
   },
   "devDependencies": {
     "eslint": "3.19.0"
