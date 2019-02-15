@@ -104,7 +104,7 @@ class AppSwitcher extends React.Component {
                 <div style={{ textAlign: 'right' }} >
                   <span style={{ margin: '0 5px' }} >
                     <Button disabled={submittingFeedback} secondary onClick={closeFeedbackModal}>
-                      translations.cancel
+                      { translations.cancel }
                     </Button>
                   </span>
                   <Button disabled={buttonDisabled} onClick={this.handleSubmit}>
