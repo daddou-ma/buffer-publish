@@ -109,11 +109,11 @@ class AppSwitcher extends React.Component {
                 <div style={{ textAlign: 'right' }} >
                   <span style={{ margin: '0 5px' }} >
                     <Button disabled={submittingFeedback} secondary onClick={closeFeedbackModal}>
-                      Cancel
+                      translations.cancel
                     </Button>
                   </span>
                   <Button disabled={buttonDisabled} onClick={this.handleSubmit}>
-                    { submittingFeedback ? 'Please wait...' : 'Back to classic Buffer' }
+                    { submittingFeedback ? translations.pleaseWait : translations.continue }
                   </Button>
                 </div>
               </form>
@@ -159,7 +159,7 @@ class AppSwitcher extends React.Component {
                   small
                   onClick={() => displayFeedbackModal()}
                 >
-                  Back to classic Buffer
+                  Switch back to classic Buffer
                 </Button>
               </div>
             </div>
@@ -183,6 +183,7 @@ AppSwitcher.propTypes = {
     question: PropTypes.string,
     cancel: PropTypes.string,
     continue: PropTypes.string,
+    pleaseWait: PropTypes.string,
   }).isRequired,
   hidePrompt: PropTypes.bool,
   source: PropTypes.string,
