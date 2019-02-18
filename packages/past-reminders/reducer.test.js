@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import reducer, { initialState, profileInitialState, actionTypes } from './reducer';
+import reducer, { actions, initialState, profileInitialState, actionTypes } from './reducer';
 import {
   header,
   subHeader,
@@ -177,5 +177,15 @@ describe('reducer', () => {
     deepFreeze(action);
     expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
+  });
+
+  describe('actions', () => {
+    it('handleMobileClick triggers a POST_MOBILE_REMINDER action', () => {
+      const post = { id: 'id1' };
+      expect(actions.handleMobileClick({ post })).toEqual({
+        type: actionTypes.POST_MOBILE_REMINDER,
+        updateId: post.id,
+      });
+    });
   });
 });

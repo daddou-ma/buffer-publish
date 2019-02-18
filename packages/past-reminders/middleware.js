@@ -1,11 +1,12 @@
-import { actionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actions as dataFetchActions, actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { actionTypes } from './reducer';
 
 export default ({ dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
   switch (action.type) {
-    case actionTypes.SELECT_PROFILE:
+    case profileActionTypes.SELECT_PROFILE:
       dispatch(dataFetchActions.fetch({
         name: 'pastRemindersPosts',
         args: {
@@ -22,10 +23,10 @@ export default ({ dispatch }) => next => (action) => { // eslint-disable-line no
         },
       }));
       break;
-    case `mobileReminder${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `mobileReminder_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
-        message: action.message,
+        message: 'A push notification to your connected mobile devices has been sent so you can post to Instagram!',
       }));
       break;
     default:
