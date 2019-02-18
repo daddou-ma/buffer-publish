@@ -56,7 +56,7 @@ export default connect(
     },
     onMobileClick: ({ post }) => {
       dispatch(actions.handleMobileClick({
-        post: post.post,
+        post,
       }));
     },
     onComposerCreateSuccess: () => {
