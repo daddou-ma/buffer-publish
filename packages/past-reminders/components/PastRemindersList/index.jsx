@@ -41,6 +41,7 @@ const PastRemindersList = ({
   postLists,
   onEditClick,
   onShareAgainClick,
+  onMobileClick,
   onImageClick,
   onImageClickNext,
   onImageClickPrev,
@@ -105,6 +106,7 @@ const PastRemindersList = ({
         postLists={postLists}
         onEditClick={onEditClick}
         onShareAgainClick={onShareAgainClick}
+        onMobileClick={onMobileClick}
         onImageClick={onImageClick}
         onImageClickNext={onImageClickNext}
         onImageClickPrev={onImageClickPrev}
@@ -139,6 +141,7 @@ PastRemindersList.propTypes = {
   onComposerCreateSuccess: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
   onShareAgainClick: PropTypes.func,
+  onMobileClick: PropTypes.func,
   onImageClick: PropTypes.func,
   onImageClickNext: PropTypes.func,
   onImageClickPrev: PropTypes.func,
@@ -162,6 +165,7 @@ PastRemindersList.defaultProps = {
   isLockedProfile: false,
   onEditClick: () => {},
   onShareAgainClick: () => {},
+  onMobileClick: () => {},
   onImageClick: () => {},
   onImageClickNext: () => {},
   onImageClickPrev: () => {},

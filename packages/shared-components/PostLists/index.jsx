@@ -27,6 +27,7 @@ const renderPostList = ({
   onImageClose,
   onDropPost,
   onShareAgainClick,
+  onMobileClick,
   isSent,
   isManager,
   isPastReminder,
@@ -48,6 +49,7 @@ const renderPostList = ({
       onImageClose={onImageClose}
       onDropPost={onDropPost}
       onShareAgainClick={onShareAgainClick}
+      onMobileClick={onMobileClick}
       isSent={isSent}
       isManager={isManager}
       isPastReminder={isPastReminder}
@@ -70,6 +72,7 @@ const PostLists = ({
   onImageClose,
   onDropPost,
   onShareAgainClick,
+  onMobileClick,
   isSent,
   isManager,
   isPastReminder,
@@ -91,6 +94,7 @@ const PostLists = ({
         onImageClose,
         onDropPost,
         onShareAgainClick,
+        onMobileClick,
         isSent,
         isManager,
         isPastReminder,
@@ -122,6 +126,7 @@ PostLists.propTypes = {
   onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
   onShareAgainClick: PropTypes.func,
+  onMobileClick: PropTypes.func,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
   isPastReminder: PropTypes.bool,

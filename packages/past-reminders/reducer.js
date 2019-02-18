@@ -10,6 +10,7 @@ import {
 export const actionTypes = keyWrapper('PAST_REMINDERS', {
   OPEN_COMPOSER: 0,
   HIDE_COMPOSER: 0,
+  POST_MOBILE_REMINDER: 0,
   POST_IMAGE_CLICKED: 0,
   POST_IMAGE_CLICKED_NEXT: 0,
   POST_IMAGE_CLICKED_PREV: 0,
@@ -214,6 +215,11 @@ export const actions = {
       profileId,
     };
   },
+  handleMobileClick: ({ post, profileId }) => ({
+    type: actionTypes.POST_MOBILE_REMINDER,
+    post,
+    profileId,
+  }),
   handleComposerCreateSuccess: () => ({
     type: actionTypes.HIDE_COMPOSER,
   }),

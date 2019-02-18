@@ -13,6 +13,15 @@ export default ({ dispatch }) => next => (action) => { // eslint-disable-line no
         },
       }));
       break;
+    case actionTypes.POST_MOBILE_REMINDER:
+      dispatch(dataFetchActions.fetch({
+        name: 'mobileReminder',
+        args: {
+          profileId: action.profileId,
+          post: action.post,
+        },
+      }));
+      break;
     default:
       break;
   }

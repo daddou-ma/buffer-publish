@@ -54,6 +54,12 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
+    onMobileClick: ({ post }) => {
+      dispatch(actions.handleMobileClick({
+        post,
+        profileId: ownProps.profileId,
+      }));
+    },
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
     },
