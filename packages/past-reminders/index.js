@@ -56,8 +56,7 @@ export default connect(
     },
     onMobileClick: ({ post }) => {
       dispatch(actions.handleMobileClick({
-        post,
-        profileId: ownProps.profileId,
+        post: post.post,
       }));
     },
     onComposerCreateSuccess: () => {

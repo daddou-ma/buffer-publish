@@ -215,10 +215,9 @@ export const actions = {
       profileId,
     };
   },
-  handleMobileClick: ({ post, profileId }) => ({
+  handleMobileClick: ({ post }) => ({
     type: actionTypes.POST_MOBILE_REMINDER,
-    post,
-    profileId,
+    updateId: post.id,
   }),
   handleComposerCreateSuccess: () => ({
     type: actionTypes.HIDE_COMPOSER,

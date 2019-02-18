@@ -42,6 +42,7 @@ const checkInstagramBusinessMethod = require('./checkInstagramBusiness');
 const saveGATrackingSettings = require('./saveGATrackingSettings');
 const getGATrackingSettings = require('./getGATrackingSettings');
 const toggleInstagramReminders = require('./toggleInstagramReminders');
+const mobileReminder = require('./mobileReminder');
 const setNotifications = require('./setNotifications');
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -102,5 +103,6 @@ module.exports = rpc(
   summaryMethod,
   checkInstagramBusinessMethod,
   toggleInstagramReminders,
+  mobileReminder,
   setNotifications,
 );

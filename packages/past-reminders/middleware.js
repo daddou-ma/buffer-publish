@@ -1,5 +1,6 @@
 import { actionTypes } from '@bufferapp/publish-profile-sidebar';
-import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actions as dataFetchActions, actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actions as notificationActions } from '@bufferapp/notifications';
 
 export default ({ dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
@@ -17,9 +18,14 @@ export default ({ dispatch }) => next => (action) => { // eslint-disable-line no
       dispatch(dataFetchActions.fetch({
         name: 'mobileReminder',
         args: {
-          profileId: action.profileId,
-          post: action.post,
+          updateId: action.updateId,
         },
+      }));
+      break;
+    case `mobileReminder${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: action.message,
       }));
       break;
     default:
