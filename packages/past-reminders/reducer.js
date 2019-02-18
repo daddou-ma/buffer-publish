@@ -5,7 +5,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 import {
   header,
   subHeader,
-} from './components/PastRemindersList/postData';
+} from './components/PastRemindersPosts/postData';
 
 export const actionTypes = keyWrapper('PAST_REMINDERS', {
   OPEN_COMPOSER: 0,
@@ -120,13 +120,13 @@ const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
       return profileInitialState;
-    case `pastReminders_${dataFetchActionTypes.FETCH_START}`:
+    case `pastRemindersPosts_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
         loading: !action.args.isFetchingMore,
         loadingMore: action.args.isFetchingMore,
       };
-    case `pastReminders_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `pastRemindersPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         loading: false,
@@ -136,7 +136,7 @@ const profileReducer = (state = profileInitialState, action) => {
         posts: handlePosts(action, state.posts),
         total: action.result.total,
       };
-    case `pastReminders_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `pastRemindersPosts_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         loading: false,
@@ -164,9 +164,9 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
-    case `pastReminders_${dataFetchActionTypes.FETCH_START}`:
-    case `pastReminders_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `pastReminders_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `pastRemindersPosts_${dataFetchActionTypes.FETCH_START}`:
+    case `pastRemindersPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `pastRemindersPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case queueActionTypes.POST_SENT:
     case queueActionTypes.POST_COUNT_UPDATED:
     case actionTypes.POST_IMAGE_CLICKED:
@@ -207,11 +207,7 @@ export const actions = {
       type: actionTypes.OPEN_COMPOSER,
       updateId: post.id,
       editMode: false,
-      post: {
-        ...post,
-        scheduled_at: null,
-        due_at: null,
-      },
+      post: Object.assign(post, { due_at: null }),
       profileId,
     };
   },

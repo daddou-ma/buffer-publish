@@ -56,19 +56,33 @@ const renderPostAction = (postAction, serviceLink, isSent) => (
   postAction
 );
 
-const renderText = ({ postDetails, serviceLink }, hasError, isSent) =>
-  (<span>
-    <Text
-      size={'small'}
-      color={isSent ? 'shuttleGray' : 'black'}
-    >
-      { !hasError ? renderPostAction(postDetails.postAction, serviceLink, isSent) : '' }
-    </Text>
-  </span>);
+const renderText = (
+  { postDetails, serviceLink },
+  hasError,
+  isSent,
+  isPastReminder,
+  day,
+  dueTime,
+) => (
+  isPastReminder ?
+    (<span>
+      <Text size={'small'}>
+        <Text weight={'bold'} size={'small'}>{dueTime}</Text> {day}
+      </Text>
+    </span>)
+    :
+    (<span>
+      <Text
+        size={'small'}
+        color={isSent ? 'shuttleGray' : 'black'}
+      >
+        { !hasError ? renderPostAction(postDetails.postAction, serviceLink, isSent) : '' }
+      </Text>
+    </span>)
+);
 
-
-const renderIcon = (hasError, isSent, isCustomScheduled, isInstagramReminder) => {
-  if (!hasError && !isCustomScheduled && !isInstagramReminder) return;
+const renderIcon = (hasError, isSent, isCustomScheduled, isInstagramReminder, isPastReminder) => {
+  if ((!hasError && !isCustomScheduled && !isInstagramReminder) || isPastReminder) return;
 
   return (<div style={postActionDetailsIconStyle}>
     {isInstagramReminder && !hasError ? <CircleInstReminderIcon color={'instagram'} /> : null}
@@ -93,6 +107,10 @@ const PostFooter = ({
   serviceLink,
   isSent,
   isManager,
+  isPastReminder,
+  day,
+  dueTime,
+  sharedBy,
 }) => {
   const hasError = postDetails.error && postDetails.error.length > 0;
   const isCustomScheduled = postDetails.isCustomScheduled;
@@ -100,10 +118,10 @@ const PostFooter = ({
   return (
     <div style={isSent ? sentPostDetailsStyle : getPostDetailsStyle(dragging)}>
       <div style={postActionDetailsStyle}>
-        {renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder)}
-        {renderText({ postDetails, serviceLink }, hasError, isSent)}
+        {renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder, isPastReminder)}
+        {renderText({ postDetails, serviceLink }, hasError, isSent, isPastReminder, day, dueTime)}
       </div>
-      {!isSent && isManager && (
+      {!isSent && !isPastReminder && isManager && (
         <div style={postControlsStyle}>
           <PostFooterButtons
             error={postDetails.error}
@@ -141,6 +159,10 @@ PostFooter.propTypes = {
   serviceLink: PropTypes.string,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
+  day: PropTypes.string,
+  dueTime: PropTypes.string,
+  sharedBy: PropTypes.string,
 };
 
 PostFooter.defaultProps = {
@@ -149,6 +171,8 @@ PostFooter.defaultProps = {
   isWorking: false,
   dragging: false,
   isManager: true,
+  isSent: false,
+  isPastReminder: false,
 };
 
 export default PostFooter;

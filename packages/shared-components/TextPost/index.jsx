@@ -45,6 +45,9 @@ const TextPost = ({
   isSent,
   isManager,
   isPastReminder,
+  day,
+  dueTime,
+  sharedBy,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -95,6 +98,9 @@ const TextPost = ({
       isSent={isSent}
       isManager={isManager}
       isPastReminder={isPastReminder}
+      day={day}
+      dueTime={dueTime}
+      sharedBy={sharedBy}
     >
       {children}
     </Post>

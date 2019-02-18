@@ -4,7 +4,7 @@ const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
 module.exports = method(
-  'pastReminders',
+  'pastRemindersPosts',
   'fetch past reminders',
   ({ profileId, page }, { session }) =>
     rp({

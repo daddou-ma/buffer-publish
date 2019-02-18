@@ -40,6 +40,9 @@ export default hot(module)(connect(
         case 'sent':
           requestName = 'sent';
           break;
+        case 'pastReminders':
+          requestName = 'pastReminders';
+          break;
         default:
           requestName = 'queued';
       }
