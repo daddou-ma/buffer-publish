@@ -55,6 +55,9 @@ const MultipleImagesPost = ({
   isSent,
   isManager,
   isPastReminder,
+  day,
+  dueTime,
+  sharedBy,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
@@ -120,6 +123,9 @@ const MultipleImagesPost = ({
       isSent={isSent}
       isManager={isManager}
       isPastReminder={isPastReminder}
+      day={day}
+      dueTime={dueTime}
+      sharedBy={sharedBy}
     >
       {children}
     </Post>

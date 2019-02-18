@@ -6,7 +6,7 @@ export default ({ dispatch }) => next => (action) => { // eslint-disable-line no
   switch (action.type) {
     case actionTypes.SELECT_PROFILE:
       dispatch(dataFetchActions.fetch({
-        name: 'pastReminders',
+        name: 'pastRemindersPosts',
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,

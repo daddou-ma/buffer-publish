@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // load the presentational component
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
-import PastRemindersList from './components/PastRemindersList';
+import PastRemindersPosts from './components/PastRemindersPosts';
 
 const formatPostLists = (posts) => {
   const postLists = [];
@@ -85,7 +85,7 @@ export default connect(
       dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
     },
   }),
-)(PastRemindersList);
+)(PastRemindersPosts);
 
 // export reducer, actions and action types
 export reducer, { actions, actionTypes } from './reducer';

@@ -33,7 +33,7 @@ const composerStyle = {
   flexGrow: '1',
 };
 
-const PastRemindersList = ({
+const PastRemindersPosts = ({
   header,
   subHeader,
   total,
@@ -117,7 +117,7 @@ const PastRemindersList = ({
   );
 };
 
-PastRemindersList.propTypes = {
+PastRemindersPosts.propTypes = {
   header: PropTypes.string,
   subHeader: PropTypes.string,
   loading: PropTypes.bool,
@@ -148,7 +148,7 @@ PastRemindersList.propTypes = {
   onClickUpgradeToPro: PropTypes.func.isRequired,
 };
 
-PastRemindersList.defaultProps = {
+PastRemindersPosts.defaultProps = {
   header: null,
   subHeader: null,
   loading: true,
@@ -168,4 +168,4 @@ PastRemindersList.defaultProps = {
   onImageClose: () => {},
 };
 
-export default PastRemindersList;
+export default PastRemindersPosts;
