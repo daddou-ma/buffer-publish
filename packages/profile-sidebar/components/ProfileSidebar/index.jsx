@@ -40,8 +40,6 @@ const buttonDividerStyle = {
 
 };
 
-const DefaultFallbackType = <Text size={'large'}>Free</Text>;
-
 const productTitle = (
   <div>
     <span style={productTitleStyle}>
