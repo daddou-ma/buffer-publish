@@ -71,6 +71,9 @@ const ImagePost = ({
   isSent,
   isManager,
   isPastReminder,
+  day,
+  dueTime,
+  sharedBy,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -139,6 +142,9 @@ const ImagePost = ({
       isSent={isSent}
       isManager={isManager}
       isPastReminder={isPastReminder}
+      day={day}
+      dueTime={dueTime}
+      sharedBy={sharedBy}
     >
       {children}
     </Post>

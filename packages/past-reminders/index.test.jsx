@@ -7,7 +7,7 @@ import PastReminder, {
   actionTypes,
   middleware,
 } from './index';
-import PastRemindersList from './components/PastRemindersList';
+import PastRemindersPosts from './components/PastRemindersPosts';
 
 const storeFake = state => ({
   default: () => {},
@@ -50,7 +50,7 @@ describe('PastReminder', () => {
         />
       </Provider>,
     );
-    expect(wrapper.find(PastRemindersList).length)
+    expect(wrapper.find(PastRemindersPosts).length)
       .toBe(1);
   });
 

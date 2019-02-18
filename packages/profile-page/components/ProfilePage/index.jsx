@@ -126,7 +126,7 @@ const ProfilePage = ({
   moreToLoad,
   page,
 }) => {
-  const isPostsTab = ['queue', 'sent', 'drafts', 'awaitingApproval', 'pendingApproval'].includes(tabId);
+  const isPostsTab = ['queue', 'sent', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId);
   const handleScroll = (o) => {
     const reachedBottom = o.scrollHeight - o.scrollTop === o.clientHeight;
     if (reachedBottom && moreToLoad && isPostsTab && !loadingMore) {

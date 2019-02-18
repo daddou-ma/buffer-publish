@@ -141,6 +141,9 @@ const Post = ({
   isSent,
   isManager,
   isPastReminder,
+  day,
+  dueTime,
+  sharedBy,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
@@ -191,6 +194,9 @@ const Post = ({
           serviceLink={serviceLink}
           isSent={isSent}
           isPastReminder={isPastReminder}
+          day={day}
+          dueTime={dueTime}
+          sharedBy={sharedBy}
         />
         <FeatureLoader
           supportedFeatures={'post_stats'}
@@ -243,6 +249,12 @@ Post.commonPropTypes = {
   serviceLink: PropTypes.string,
   isSent: PropTypes.bool,
   isPastReminder: PropTypes.bool,
+  day: PropTypes.string,
+  dueTime: PropTypes.string,
+  sharedBy: PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+  }),
 };
 
 Post.propTypes = {
@@ -257,7 +269,10 @@ Post.defaultProps = {
   fixed: false,
   isSent: false,
   isManager: true,
-  isPastReminder: true,
+  isPastReminder: false,
+  day: null,
+  dueTime: null,
+  sharedBy: null,
 };
 
 export default Post;

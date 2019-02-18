@@ -3,7 +3,7 @@ import reducer, { initialState, profileInitialState, actionTypes } from './reduc
 import {
   header,
   subHeader,
-} from './components/PastRemindersList/postData';
+} from './components/PastRemindersPosts/postData';
 
 const profileId = '123456';
 
@@ -18,7 +18,7 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle pastReminders_FETCH_START action type', () => {
+  it('should handle pastRemindersPosts_FETCH_START action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
@@ -35,7 +35,7 @@ describe('reducer', () => {
     };
     const action = {
       profileId,
-      type: 'pastReminders_FETCH_START',
+      type: 'pastRemindersPosts_FETCH_START',
       args: {
         isFetchingMore: false,
       },
@@ -45,7 +45,7 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle pastReminders_FETCH_SUCCESS action type', () => {
+  it('should handle pastRemindersPosts_FETCH_SUCCESS action type', () => {
     const post = { id: 'foo', text: 'i love buffer' };
     const stateAfter = {
       byProfileId: {
@@ -63,7 +63,7 @@ describe('reducer', () => {
     };
     const action = {
       profileId,
-      type: 'pastReminders_FETCH_SUCCESS',
+      type: 'pastRemindersPosts_FETCH_SUCCESS',
       result: {
         updates: [post],
         total: 1,
@@ -77,7 +77,7 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle pastReminders_FETCH_FAIL action type', () => {
+  it('should handle pastRemindersPosts_FETCH_FAIL action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
@@ -94,7 +94,7 @@ describe('reducer', () => {
     };
     const action = {
       profileId,
-      type: 'pastReminders_FETCH_FAIL',
+      type: 'pastRemindersPosts_FETCH_FAIL',
     };
     deepFreeze(action);
     expect(reducer(undefined, action))
