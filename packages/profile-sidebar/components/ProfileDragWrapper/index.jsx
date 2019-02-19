@@ -34,7 +34,7 @@ const profileTarget = {
     const hoverBoundingRect = node.getBoundingClientRect();
 
     // Get vertical middle
-    const hoverThird = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 3;
+    const hoverThird = (hoverBoundingRect.bottom - hoverBoundingRect.top);
 
     // Determine mouse position
     const clientOffset = monitor.getClientOffset();
