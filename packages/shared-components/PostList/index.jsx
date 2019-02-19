@@ -127,22 +127,30 @@ const PostList = ({
               isPastReminder,
             })
           }
-          <div>
-            {isManager &&
-              <FeatureLoader
-                supportedFeatures={'share_again'}
-              >
-                <div style={reBufferWrapperStyle}>
-                  <Button
-                    secondary
-                    onClick={() => { onShareAgainClick({ post }); }}
-                  >
-                    Share Again
-                  </Button>
-                </div>
-              </FeatureLoader>
-            }
-            {isPastReminder &&
+          {isManager && !isPastReminder &&
+            <FeatureLoader
+              supportedFeatures={'share_again'}
+            >
+              <div style={reBufferWrapperStyle}>
+                <Button
+                  secondary
+                  onClick={() => { onShareAgainClick({ post }); }}
+                >
+                  Share Again
+                </Button>
+              </div>
+            </FeatureLoader>
+          }
+          {isManager && isPastReminder &&
+            <div>
+              <div style={reBufferWrapperStyle}>
+                <Button
+                  secondary
+                  onClick={() => { onShareAgainClick({ post }); }}
+                >
+                  Share Again
+                </Button>
+              </div>
               <div style={reBufferWrapperStyle}>
                 <Button
                   secondary
@@ -151,8 +159,8 @@ const PostList = ({
                   Send Mobile
                 </Button>
               </div>
-            }
-          </div>
+            </div>
+          }
         </div>,
       )}
     />

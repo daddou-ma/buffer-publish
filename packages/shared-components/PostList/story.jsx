@@ -15,6 +15,7 @@ import {
   sentPosts,
   videoPosts,
   listHeader,
+  pastRemindersPosts,
 } from './postData';
 
 const storeFake = state => ({
@@ -28,7 +29,7 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
 storiesOf('PostList', module)
@@ -67,6 +68,25 @@ storiesOf('PostList', module)
       onImageClickPrev={action('onImageClickPrev')}
       onImageClose={action('onImageClose')}
       isSent
+    />
+  ))
+  .add('past reminders', () => (
+    <PostList
+      listHeader={listHeader}
+      posts={pastRemindersPosts}
+      onCancelConfirmClick={action('onCancelConfirmClick')}
+      onDeleteClick={action('onDeleteClick')}
+      onDeleteConfirmClick={action('onDeleteConfirmClick')}
+      onEditClick={action('onEditClick')}
+      onShareNowClick={action('onShareNowClick')}
+      onImageClick={action('onImageClick')}
+      onImageClickNext={action('onImageClickNext')}
+      onImageClickPrev={action('onImageClickPrev')}
+      onImageClose={action('onImageClose')}
+      onMobileClick={action('onMobileClick')}
+      onShareAgainClick={action('onShareAgainClick')}
+      isPastReminder
+      isManager
     />
   ))
   .add('missing type', () => (
