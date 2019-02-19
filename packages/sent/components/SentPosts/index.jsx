@@ -24,15 +24,6 @@ const loadingContainerStyle = {
   paddingTop: '5rem',
 };
 
-const topBarContainerStyle = {
-  display: 'flex',
-};
-
-const composerStyle = {
-  marginBottom: '1.5rem',
-  flexGrow: '1',
-};
-
 const SentPosts = ({
   header,
   total,
@@ -80,16 +71,6 @@ const SentPosts = ({
       <div style={headerStyle}>
         <Text color={'black'}>{header}</Text>
         <Divider />
-      </div>
-      <div style={topBarContainerStyle}>
-        <div style={composerStyle}>
-          {showComposer && !editMode &&
-            <ComposerPopover
-              onSave={onComposerCreateSuccess}
-              type={'sent'}
-            />
-          }
-        </div>
       </div>
       {showComposer && editMode &&
         <ComposerPopover
