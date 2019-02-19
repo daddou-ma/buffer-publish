@@ -12,30 +12,19 @@ import {
 } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 
-import {
-  fontFamily,
-  fontSize,
-  fontWeight,
-} from '@bufferapp/components/style/font';
-
 const headerStyle = {
   marginBottom: '1.5rem',
   width: '100%',
 };
 
 const titleStyle = {
-  fontFamily,
-  fontSize,
-  fontWeight,
   color: '#000',
   marginBottom: '8px',
   display: 'block',
 };
 
 const subTitleStyle = {
-  fontFamily,
   fontSize: '14px',
-  fontWeight,
 };
 
 const loadingContainerStyle = {
@@ -50,7 +39,6 @@ const topBarContainerStyle = {
 };
 
 const composerStyle = {
-  marginBottom: '1.5rem',
   flexGrow: '1',
 };
 

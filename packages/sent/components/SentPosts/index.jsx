@@ -29,7 +29,6 @@ const topBarContainerStyle = {
 };
 
 const composerStyle = {
-  marginBottom: '1.5rem',
   flexGrow: '1',
 };
 
