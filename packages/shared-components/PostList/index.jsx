@@ -14,7 +14,8 @@ import VideoPost from '../VideoPost';
 
 const reBufferWrapperStyle = {
   paddingLeft: '1rem',
-  minWidth: '132px',
+  paddingBottom: '0.5rem',
+  minWidth: '146px',
 };
 
 const postStyle = {
@@ -92,6 +93,7 @@ const PostList = ({
   onImageClose,
   onDropPost,
   onShareAgainClick,
+  onMobileClick,
   isSent,
   isManager,
   isPastReminder,
@@ -125,7 +127,7 @@ const PostList = ({
               isPastReminder,
             })
           }
-          {isManager &&
+          {isManager && !isPastReminder &&
             <FeatureLoader
               supportedFeatures={'share_again'}
             >
@@ -138,6 +140,26 @@ const PostList = ({
                 </Button>
               </div>
             </FeatureLoader>
+          }
+          {isManager && isPastReminder &&
+            <div>
+              <div style={reBufferWrapperStyle}>
+                <Button
+                  secondary
+                  onClick={() => { onShareAgainClick({ post }); }}
+                >
+                  Share Again
+                </Button>
+              </div>
+              <div style={reBufferWrapperStyle}>
+                <Button
+                  secondary
+                  onClick={() => { onMobileClick({ post }); }}
+                >
+                  Send Mobile
+                </Button>
+              </div>
+            </div>
           }
         </div>,
       )}
@@ -162,6 +184,7 @@ PostList.propTypes = {
   onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
   onShareAgainClick: PropTypes.func,
+  onMobileClick: PropTypes.func,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
   isPastReminder: PropTypes.bool,
