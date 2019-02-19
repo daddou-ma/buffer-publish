@@ -109,14 +109,14 @@ const PastRemindersPosts = ({
         <Divider />
       </div>
       <div style={topBarContainerStyle}>
-        <div style={composerStyle}>
-          {showComposer && !editMode &&
+        {showComposer && !editMode &&
+          <div style={composerStyle}>
             <ComposerPopover
               onSave={onComposerCreateSuccess}
               type={'pastReminders'}
             />
-          }
-        </div>
+          </div>
+        }
       </div>
       {showComposer && editMode &&
         <ComposerPopover

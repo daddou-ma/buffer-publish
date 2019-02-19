@@ -82,14 +82,14 @@ const SentPosts = ({
         <Divider />
       </div>
       <div style={topBarContainerStyle}>
-        <div style={composerStyle}>
-          {showComposer && !editMode &&
+        {showComposer && !editMode &&
+          <div style={composerStyle}>
             <ComposerPopover
               onSave={onComposerCreateSuccess}
               type={'sent'}
             />
-          }
-        </div>
+          </div>
+        }
       </div>
       {showComposer && editMode &&
         <ComposerPopover
