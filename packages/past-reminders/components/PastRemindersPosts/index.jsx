@@ -12,12 +12,7 @@ import {
 } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 
-import {
-  fontFamily,
-} from '@bufferapp/components/style/font';
-
 const headerStyle = {
-  fontFamily,
   marginBottom: '1.5rem',
   width: '100%',
 };
