@@ -156,7 +156,7 @@ const PostList = ({
                   secondary
                   onClick={() => { onMobileClick({ post }); }}
                 >
-                  Send Mobile
+                  Send to Mobile
                 </Button>
               </div>
             </div>
