@@ -14,7 +14,6 @@ export default hot(module)(connect(
     selectedProfile: state.profileSidebar.selectedProfile,
     selectedProfileId: ownProps.profileId,
     profiles: state.profileSidebar.profiles,
-    lockedProfiles: state.profileSidebar.lockedProfiles,
     translations: state.i18n.translations['profile-sidebar'],
     profileLimit: state.appSidebar.user.profile_limit,
     hasInstagram: state.profileSidebar.hasInstagram,
@@ -39,6 +38,14 @@ export default hot(module)(connect(
           });
         }
       }
+    },
+    onDropProfile: ({ commit, profileLimit, dragIndex, hoverIndex }) => {
+      dispatch(actions.onDropProfile({
+        commit,
+        profileLimit,
+        dragIndex,
+        hoverIndex,
+      }));
     },
     onConnectSocialAccountClick: () => {
       dispatch(actions.handleConnectSocialAccountClick());

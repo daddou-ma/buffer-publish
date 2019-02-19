@@ -1,15 +1,14 @@
 import deepFreeze from 'deep-freeze';
+
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as queueActions } from '@bufferapp/publish-queue';
-
-import reducer, { actions, actionTypes } from './reducer';
+import reducer, { actions, actionTypes, initialState as profileInitialState } from './reducer';
 import profiles from './mockData/profiles';
 
 describe('reducer', () => {
   it('should initialize default state', () => {
     const stateAfter = {
       profiles: [],
-      lockedProfiles: [],
       loading: false,
       selectedProfileId: '',
       selectedProfile: {},
@@ -37,6 +36,43 @@ describe('reducer', () => {
       });
   });
 
+  it('should generate a profile dropped action', () => {
+    const props = { dragIndex: 1, hoverIndex: 0 };
+    expect(actions.onDropProfile(props))
+      .toEqual({
+        type: actionTypes.PROFILE_DROPPED,
+        dragIndex: props.dragIndex,
+        hoverIndex: props.hoverIndex,
+      });
+  });
+
+  it('should reorder profiles with PROFILE_DROPPED', () => {
+    const dragIndex = 0;
+    const hoverIndex = 1;
+    const stateBefore = {
+      ...profileInitialState,
+      profiles,
+    };
+
+    const profilesAfter = profiles.slice();
+    [profilesAfter[dragIndex], profilesAfter[hoverIndex]] = [profilesAfter[hoverIndex], profilesAfter[dragIndex]];
+
+    const stateAfter = {
+      ...profileInitialState,
+      profiles: profilesAfter,
+    };
+
+    const action = {
+      type: actionTypes.PROFILE_DROPPED,
+      dragIndex,
+      hoverIndex,
+    };
+
+    deepFreeze(action);
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
   it('should set loading to true when it begins the fetch', () => {
     const action = {
       type: `profiles_${dataFetchActionTypes.FETCH_START}`,
@@ -45,22 +81,13 @@ describe('reducer', () => {
     expect(loading).toBe(true);
   });
 
-  it('should load non-locked profiles', () => {
+  it('should load all profiles', () => {
     const action = {
       type: `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`,
       result: profiles,
     };
     const { profiles: profilesInStore } = reducer(undefined, action);
-    expect(profilesInStore).toEqual([profiles[0]]);
-  });
-
-  it('should load locked profiles', () => {
-    const action = {
-      type: `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`,
-      result: profiles,
-    };
-    const { lockedProfiles } = reducer(undefined, action);
-    expect(lockedProfiles).toEqual([profiles[1]]);
+    expect(profilesInStore).toEqual(profiles);
   });
 
   it('should correctly set flags for connected accounts', () => {

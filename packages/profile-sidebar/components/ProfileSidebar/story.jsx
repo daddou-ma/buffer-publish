@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { checkA11y } from 'storybook-addon-a11y';
+import TestBackend from 'react-dnd-test-backend';
+import { DragDropContext } from 'react-dnd';
 import createStore from '@bufferapp/publish-store';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
@@ -19,13 +21,26 @@ const translations = {
   lockedListTooltip2: ' social accounts at the same time (and any business accounts you’re a team member on as long as the owner is on a Business Plan). We’ll keep these other ones safe and sound until you’re ready to upgrade!',
 };
 
+/* eslint-disable react/prop-types */
+class _TestContextContainer extends Component { // eslint-disable-line
+  render() {
+    return (
+      <div>
+        {this.props.children}
+      </div>
+    );
+  }
+}
+const TestContextContainer = DragDropContext(TestBackend)(_TestContextContainer);
+
 storiesOf('ProfileSidebar', module)
   .addDecorator(checkA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
-        {getStory()}
+      {getStory()}
     </Provider>,
   )
+  .addDecorator(getStory => <TestContextContainer>{getStory()}</TestContextContainer>)
   .add('should display a list of profiles', () => (
     <ProfileSidebar
       selectedProfileId={'1234'}

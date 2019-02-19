@@ -4,8 +4,6 @@ import {
   Text,
   Button,
   Divider,
-  QuestionIcon,
-  IconArrowPopover,
 } from '@bufferapp/components';
 import FeatureLoader from '@bufferapp/product-features';
 import { offWhite, mystic } from '@bufferapp/components/style/color';
@@ -37,39 +35,10 @@ const profileListStyle = {
   overflowY: 'scroll',
 };
 
-const lockedAccountHeaderStyle = {
-  margin: '1rem 0 0.5rem 0',
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'row',
-};
-
 const buttonDividerStyle = {
   margin: '1rem 0',
 
 };
-
-const renderLockedHeader = ({ translations, profileLimit }) => (
-  <div style={lockedAccountHeaderStyle}>
-    <Text size={'small'}>{translations.lockedList}</Text>
-    <div style={{ position: 'absolute', marginLeft: '13rem' }}>
-      <IconArrowPopover
-        icon={<QuestionIcon />}
-        position="above"
-        shadow
-        oneLine={false}
-        width="320px"
-        label={translations.lockedList}
-      >
-        <div style={{ padding: '.5rem .25rem' }}>
-          {translations.lockedListTooltip1 +
-            profileLimit +
-            translations.lockedListTooltip2}
-        </div>
-      </IconArrowPopover>
-    </div>
-  </div>
-);
 
 const productTitle = (
   <div>
@@ -105,9 +74,9 @@ const ProfileSidebar = ({
   loading,
   selectedProfileId,
   profiles,
-  lockedProfiles,
   translations,
   onProfileClick,
+  onDropProfile,
   onConnectSocialAccountClick,
   profileLimit,
   showProfilesDisconnectedModal,
@@ -125,16 +94,10 @@ const ProfileSidebar = ({
         selectedProfileId={selectedProfileId}
         profiles={profiles}
         onProfileClick={onProfileClick}
+        onDropProfile={onDropProfile}
         showProfilesDisconnectedModal={showProfilesDisconnectedModal}
-      />
-      {lockedProfiles.length > 0 &&
-        renderLockedHeader({ translations, profileLimit })}
-      {lockedProfiles.length > 0 && <Divider />}
-      <ProfileList
-        selectedProfileId={selectedProfileId}
-        profiles={lockedProfiles}
-        onProfileClick={onProfileClick}
-        showProfilesDisconnectedModal={showProfilesDisconnectedModal}
+        profileLimit={profileLimit}
+        translations={translations}
       />
     </div>
     <div>
@@ -175,13 +138,9 @@ ProfileSidebar.propTypes = {
   onConnectSocialAccountClick: PropTypes.func.isRequired,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
-  lockedProfiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
-  translations: PropTypes.shape({
-    connectButton: PropTypes.string,
-    lockedList: PropTypes.string,
-    lockedListTooltip: PropTypes.string,
-  }).isRequired,
+  translations: ProfileList.propTypes.translations,
   profileLimit: PropTypes.number,
+  onDropProfile: PropTypes.func,
   showProfilesDisconnectedModal: PropTypes.func.isRequired,
   hasInstagram: PropTypes.bool.isRequired,
   hasFacebook: PropTypes.bool.isRequired,
@@ -192,7 +151,6 @@ ProfileSidebar.defaultProps = {
   onProfileClick: ProfileList.defaultProps.onProfileClick,
   selectedProfileId: ProfileList.defaultProps.selectedProfileId,
   profiles: [],
-  lockedProfiles: [],
 };
 
 export default ProfileSidebar;
