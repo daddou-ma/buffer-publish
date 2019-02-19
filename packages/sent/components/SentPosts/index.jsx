@@ -29,7 +29,6 @@ const topBarContainerStyle = {
 };
 
 const composerStyle = {
-  marginBottom: '1.5rem',
   flexGrow: '1',
 };
 
@@ -82,14 +81,14 @@ const SentPosts = ({
         <Divider />
       </div>
       <div style={topBarContainerStyle}>
-        <div style={composerStyle}>
-          {showComposer && !editMode &&
+        {showComposer && !editMode &&
+          <div style={composerStyle}>
             <ComposerPopover
               onSave={onComposerCreateSuccess}
               type={'sent'}
             />
-          }
-        </div>
+          </div>
+        }
       </div>
       {showComposer && editMode &&
         <ComposerPopover

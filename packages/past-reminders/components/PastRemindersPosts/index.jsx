@@ -17,6 +17,10 @@ const headerStyle = {
   width: '100%',
 };
 
+const titleStyle = {
+  marginBottom: '8px',
+};
+
 const loadingContainerStyle = {
   width: '100%',
   height: '100%',
@@ -29,7 +33,6 @@ const topBarContainerStyle = {
 };
 
 const composerStyle = {
-  marginBottom: '1.5rem',
   flexGrow: '1',
 };
 
@@ -80,21 +83,21 @@ const PastRemindersPosts = ({
   return (
     <div>
       <div style={headerStyle}>
-        <Text color={'black'}>{header}</Text>
-        <div>
-          <Text color={'black'}>{subHeader}</Text>
+        <div style={titleStyle}>
+          <Text color={'black'}>{header}</Text>
         </div>
+        <Text color={'shuttleGray'} size={'mini'}>{subHeader}</Text>
         <Divider />
       </div>
       <div style={topBarContainerStyle}>
-        <div style={composerStyle}>
-          {showComposer && !editMode &&
+        {showComposer && !editMode &&
+          <div style={composerStyle}>
             <ComposerPopover
               onSave={onComposerCreateSuccess}
               type={'pastReminders'}
             />
-          }
-        </div>
+          </div>
+        }
       </div>
       {showComposer && editMode &&
         <ComposerPopover
