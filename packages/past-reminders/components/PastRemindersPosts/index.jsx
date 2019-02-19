@@ -45,6 +45,15 @@ const loadingContainerStyle = {
   paddingTop: '5rem',
 };
 
+const topBarContainerStyle = {
+  display: 'flex',
+};
+
+const composerStyle = {
+  marginBottom: '1.5rem',
+  flexGrow: '1',
+};
+
 const PastRemindersPosts = ({
   header,
   subHeader,
@@ -98,6 +107,16 @@ const PastRemindersPosts = ({
           <Text color={'shuttleGray'} size={'mini'}>{subHeader}</Text>
         </div>
         <Divider />
+      </div>
+      <div style={topBarContainerStyle}>
+        <div style={composerStyle}>
+          {showComposer && !editMode &&
+            <ComposerPopover
+              onSave={onComposerCreateSuccess}
+              type={'pastReminders'}
+            />
+          }
+        </div>
       </div>
       {showComposer && editMode &&
         <ComposerPopover
