@@ -12,19 +12,18 @@ import {
 } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 
+import {
+  fontFamily,
+} from '@bufferapp/components/style/font';
+
 const headerStyle = {
+  fontFamily,
   marginBottom: '1.5rem',
   width: '100%',
 };
 
 const titleStyle = {
-  color: '#000',
   marginBottom: '8px',
-  display: 'block',
-};
-
-const subTitleStyle = {
-  fontSize: '14px',
 };
 
 const loadingContainerStyle = {
@@ -91,9 +90,7 @@ const PastRemindersPosts = ({
         <div style={titleStyle}>
           <Text color={'black'}>{header}</Text>
         </div>
-        <div style={subTitleStyle}>
-          <Text color={'shuttleGray'} size={'mini'}>{subHeader}</Text>
-        </div>
+        <Text color={'shuttleGray'} size={'mini'}>{subHeader}</Text>
         <Divider />
       </div>
       <div style={topBarContainerStyle}>
