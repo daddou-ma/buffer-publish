@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Text } from '@bufferapp/components';
 import FeatureLoader from '@bufferapp/product-features';
-import { insertIntoTranslation } from '@bufferapp/publish-i18n';
+import { TranslationReplacer } from '@bufferapp/publish-i18n';
 
 const textColor = 'white';
 
@@ -64,17 +64,16 @@ const BillingUpgradeCTABanner = ({
   );
 
   if (!trial.hasCardDetails) {
-    const planTrial = insertIntoTranslation(translations.planTrial, [
+    const planTrial = [
       { replaceString: '{plan}', replaceWith: currentPlan({ color: textColor, weight: 'bold', size: 'mini' }) },
-    ]);
+    ];
     return (
       <div style={styling}>
         <Text weight="bold" color={textColor} size="mini">
-          {
-            typeof planTrial === 'string' ?
-              planTrial :
-              planTrial.map((e, i) => <React.Fragment key={String(i)}>{e}</React.Fragment>)
-          }
+          <TranslationReplacer
+            translation={translations.planTrial}
+            replacementStrings={planTrial}
+          />
         </Text>
         <Text color={textColor} size="mini">{translations.completeBilling}</Text>
         <CTAButton
@@ -89,30 +88,28 @@ const BillingUpgradeCTABanner = ({
   const timeRemaining = <Text weight="bold" color={textColor} size="mini">{trial.trialTimeRemaining} remaining</Text>;
   const postTrialCost = <Text weight="bold" color={textColor} size="mini">{trial.postTrialCost}</Text>;
 
-  const trialRemaining = insertIntoTranslation(translations.remainingTrial, [
+  const trialRemaining = [
     { replaceString: '{remaining}', replaceWith: timeRemaining },
     { replaceString: '{plan}', replaceWith: currentPlan({ color: textColor, size: 'mini' }) },
-  ]);
+  ];
 
-  const billedAmountEnd = insertIntoTranslation(translations.billedTrialEnd, [
+  const billedAmountEnd = [
     { replaceString: '{billedAmount}', replaceWith: postTrialCost },
-  ]);
+  ];
 
   return (
     <div style={styling}>
       <Text color={textColor} size="mini">
-        {
-          typeof trialRemaining === 'string' ?
-            trialRemaining :
-            trialRemaining.map((e, i) => <React.Fragment key={String(i)}>{e}</React.Fragment>)
-        }
+        <TranslationReplacer
+          translation={translations.remainingTrial}
+          replacementStrings={trialRemaining}
+        />
       </Text>
       <Text color={textColor} size="mini">
-        {
-          typeof billedAmountEnd === 'string' ?
-            billedAmountEnd :
-            billedAmountEnd.map((e, i) => <React.Fragment key={String(i)}>{e}</React.Fragment>)
-        }
+        <TranslationReplacer
+          translation={translations.billedTrialEnd}
+          replacementStrings={billedAmountEnd}
+        />
       </Text>
       <CTAButton
         style={buttonStyle}
