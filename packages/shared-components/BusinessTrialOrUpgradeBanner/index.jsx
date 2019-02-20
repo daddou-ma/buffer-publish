@@ -20,6 +20,7 @@ const bodyStyle = {
   fontFamily: 'Roboto',
   fontSize: '16px',
   fontWeight: '500',
+  color: '#121E66',
 };
 
 const btnWrapperStyle = {
@@ -49,7 +50,8 @@ const BusinessTrialOrUpgradeBanner = ({ body, cta, subtext, onCtaClick }) => (
         <BDSButton onClick={onCtaClick}>{cta}</BDSButton>
       </div>
     </div>
-    {subtext && <div style={subtextStyle}>{subtext}</div>}
+    {subtext &&
+      <div style={subtextStyle}>{subtext}</div>}
   </div>
 );
 
