@@ -145,6 +145,7 @@ const PostList = ({
             <div>
               <div style={reBufferWrapperStyle}>
                 <Button
+                  fillContainer
                   secondary
                   onClick={() => { onShareAgainClick({ post }); }}
                 >
@@ -153,10 +154,11 @@ const PostList = ({
               </div>
               <div style={reBufferWrapperStyle}>
                 <Button
+                  fillContainer
                   secondary
                   onClick={() => { onMobileClick({ post }); }}
                 >
-                  Send Mobile
+                  Send to Mobile
                 </Button>
               </div>
             </div>
