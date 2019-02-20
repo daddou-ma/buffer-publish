@@ -5,7 +5,7 @@ import {
   Tab,
 } from '@bufferapp/publish-shared-components';
 import { Button, Text } from '@bufferapp/components';
-import FeatureLoader from '@bufferapp/product-features';
+import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
 import { openCalendarWindow } from '../../utils';
 
 const upgradeCtaStyle = {
@@ -19,6 +19,7 @@ const upgradeCtaStyle = {
 };
 
 const TabNavigation = ({
+  features,
   isBusinessAccount,
   isManager,
   selectedTabId,
@@ -47,14 +48,14 @@ const TabNavigation = ({
         {isInstagramProfile && hasPastRemindersFeatureFlip &&
           <Tab tabId={'pastReminders'}>Past Reminders</Tab>
         }
-        {isBusinessAccount && <Tab tabId={'analytics'}>Analytics</Tab>}
+        {!features.isFreeUser() && <Tab tabId={'analytics'}>Analytics</Tab>}
         {isBusinessAccount && isManager &&
           <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
         }
         {isBusinessAccount && !isManager &&
           <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
         }
-        {isBusinessAccount &&
+        {!features.isFreeUser() &&
           <Tab tabId={'drafts'}>Drafts</Tab>
         }
         <Tab tabId={'settings'}>Settings</Tab>
@@ -117,10 +118,12 @@ TabNavigation.defaultProps = {
   isLockedProfile: false,
   isInstagramProfile: false,
   hasPastRemindersFeatureFlip: false,
+  isBusinessAccount: false,
 };
 
 TabNavigation.propTypes = {
-  isBusinessAccount: PropTypes.bool.isRequired,
+  features: PropTypes.any.isRequired, // eslint-disable-line
+  isBusinessAccount: PropTypes.bool,
   isManager: PropTypes.bool.isRequired,
   selectedTabId: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
@@ -135,4 +138,4 @@ TabNavigation.propTypes = {
   hasPastRemindersFeatureFlip: PropTypes.bool,
 };
 
-export default TabNavigation;
+export default WithFeatureLoader(TabNavigation);

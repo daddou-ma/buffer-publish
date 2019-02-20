@@ -80,6 +80,9 @@ describe('Drafts', () => {
       environment: {
         environment: 'production',
       },
+      productFeatures: {
+        planName: 'pro',
+      },
     };
     it('should render', () => {
       const store = storeFake(state);

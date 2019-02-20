@@ -17,7 +17,7 @@ const getPostActionString = ({
       isPastDue,
       twentyFourHourTime,
     });
-    return `This ${isDraftsView ? 'draft' : 'post'} ${isPastDue ? 'was' : 'will be'} 
+    return `This ${isDraftsView ? 'draft' : 'post'} ${isPastDue ? 'was' : 'will be'}
       scheduled for ${dateString}${isPastDue ? '' : ' on approval'
     }.`;
   } else if (draft.sharedNext) {
@@ -121,6 +121,7 @@ export default connect(
         editMode: state.drafts.editMode,
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        canStartBusinessTrial: state.drafts.canStartBusinessTrial,
       };
     }
     return {};

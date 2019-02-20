@@ -1,4 +1,3 @@
-// if you need a component export it here
 export AutoSelectText from './AutoSelectText';
 export BufferLoading from './BufferLoading';
 export DropdownItem from './DropdownItem';
@@ -8,6 +7,7 @@ export Example from './Example';
 export ImagePost from './ImagePost';
 export LinkPost from './LinkPost';
 export LockedProfileNotification from './LockedProfileNotification';
+export BusinessTrialOrUpgradeCard from './BusinessTrialOrUpgradeCard';
 export MultipleImagesPost from './MultipleImagesPost';
 export PostDragLayer from './PostDragLayer';
 export PostDragWrapper from './PostDragWrapper';

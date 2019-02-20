@@ -9,6 +9,8 @@ export default connect(
     isAnalyticsSupported: state.profileSidebar.selectedProfile ?
       state.profileSidebar.selectedProfile.isAnalyticsSupported :
       null,
+    // TODO: Refactor so we're not pulling this state from drafts
+    canStartBusinessTrial: state.drafts.canStartBusinessTrial,
   }),
   dispatch => ({
     onClickUpgradeToPro: () => {

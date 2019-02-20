@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import FeatureLoader from '@bufferapp/product-features';
 import {
   PostLists,
   EmptyState,
   LockedProfileNotification,
-  BusinessTrialOrUpgradeBanner,
+  BufferLoading,
 } from '@bufferapp/publish-shared-components';
-import {
-  Divider,
-  Text,
-  LoadingAnimation,
-} from '@bufferapp/components';
+import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
+import BusinessUpgradeBanner from '../BusinessUpgradeBanner';
 
 const headerStyle = {
   marginBottom: '1.5rem',
@@ -56,7 +52,7 @@ const SentPosts = ({
   if (loading) {
     return (
       <div style={loadingContainerStyle}>
-        <LoadingAnimation />
+        <BufferLoading size={64} />
       </div>
     );
   }
@@ -67,65 +63,37 @@ const SentPosts = ({
     );
   }
 
-  const bannerCopy = canStartBusinessTrial ?
-  { cta: 'Learn About Buffer for Business',
-    subtext: 'TRY IT FREE FOR 14 DAYS',
-    link: 'https://buffer.com/business' } :
-  { cta: 'Upgrade to Buffer for Business',
-    link: 'https://buffer.com/app/account/receipts?content_only=true',
-  };
-
   if (total < 1) {
     return (
-      <div>
-        <FeatureLoader supportedPlans={'pro'}>
-          <BusinessTrialOrUpgradeBanner
-            body={'Get in-depth post analytics by upgrading to Buffer for Business.'}
-            cta={bannerCopy.cta}
-            subtext={bannerCopy.subtext}
-            onCtaClick={() => { window.location.assign(bannerCopy.link); }}
-          />
-        </FeatureLoader>
+      <Fragment>
+        <BusinessUpgradeBanner canStartBusinessTrial={canStartBusinessTrial} />
         <EmptyState
           title="You haven’t published any posts with this account in the past 30 days!"
           subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
           heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
           heroImgSize={{ width: '270px', height: '150px' }}
         />
-      </div>
+      </Fragment>
     );
   }
 
   return (
     <div>
-      <FeatureLoader supportedPlans={'pro'}>
-        <BusinessTrialOrUpgradeBanner
-          body={'Get in-depth post analytics by upgrading to Buffer for Business.'}
-          cta={bannerCopy.cta}
-          subtext={bannerCopy.subtext}
-          onCtaClick={() => { window.location.assign(bannerCopy.link); }}
-        />
-      </FeatureLoader>
+      <BusinessUpgradeBanner canStartBusinessTrial={canStartBusinessTrial} />
       <div style={headerStyle}>
         <Text color={'black'}>{header}</Text>
         <Divider />
       </div>
       <div style={topBarContainerStyle}>
-        {showComposer && !editMode &&
+        {showComposer && !editMode && (
           <div style={composerStyle}>
-            <ComposerPopover
-              onSave={onComposerCreateSuccess}
-              type={'sent'}
-            />
+            <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
           </div>
-        }
+        )}
       </div>
-      {showComposer && editMode &&
-        <ComposerPopover
-          onSave={onComposerCreateSuccess}
-          type={'sent'}
-        />
-      }
+      {showComposer && editMode && (
+        <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
+      )}
       <PostLists
         postLists={postLists}
         onEditClick={onEditClick}
