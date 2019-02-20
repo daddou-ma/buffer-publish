@@ -20,7 +20,7 @@ const reBufferWrapperStyle = {
 
 const postStyle = {
   display: 'flex',
-  alignItems: 'baseline',
+  alignItems: 'flex-start',
   marginBottom: '2rem',
 };
 
