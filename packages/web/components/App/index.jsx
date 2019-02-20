@@ -14,6 +14,7 @@ import EnsurePublishBetaUser from '@bufferapp/publish-beta-redirect';
 import AppModals from '@bufferapp/publish-modals';
 import InitialLoading from '@bufferapp/publish-initial-loading';
 import DefaultPage from '@bufferapp/default-page';
+import CTABanner from '@bufferapp/publish-cta-banner';
 
 const appStyle = {
   display: 'flex',
@@ -33,6 +34,7 @@ class App extends Component { // eslint-disable-line
         <Sidebar activeProduct="publish" />
 
         <div style={contentStyle}>
+          <CTABanner />
           <EnsurePublishBetaUser>
             <Switch>
               <Route
