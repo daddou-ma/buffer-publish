@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FeatureLoader from '@bufferapp/product-features';
 import {
   PostLists,
   EmptyState,
   LockedProfileNotification,
+  BusinessTrialOrUpgradeBanner,
 } from '@bufferapp/publish-shared-components';
 import {
   Divider,
@@ -49,6 +51,7 @@ const SentPosts = ({
   isManager,
   isLockedProfile,
   onClickUpgradeToPro,
+  canStartBusinessTrial,
 }) => {
   if (loading) {
     return (
@@ -64,18 +67,45 @@ const SentPosts = ({
     );
   }
 
+  const bannerCopy = canStartBusinessTrial ?
+  { cta: 'Learn About Buffer for Business',
+    subtext: 'TRY IT FREE FOR 14 DAYS',
+    link: 'https://buffer.com/business' } :
+  { cta: 'Upgrade to Buffer for Business',
+    link: 'https://buffer.com/app/account/receipts?content_only=true',
+  };
+
   if (total < 1) {
     return (
-      <EmptyState
-        title="You haven’t published any posts with this account in the past 30 days!"
-        subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
-        heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
-        heroImgSize={{ width: '270px', height: '150px' }}
-      />
+      <div>
+        <FeatureLoader supportedPlans={'pro'}>
+          <BusinessTrialOrUpgradeBanner
+            body={'Get in-depth post analytics by upgrading to Buffer for Business.'}
+            cta={bannerCopy.cta}
+            subtext={bannerCopy.subtext}
+            onCtaClick={() => { window.location.assign(bannerCopy.link); }}
+          />
+        </FeatureLoader>
+        <EmptyState
+          title="You haven’t published any posts with this account in the past 30 days!"
+          subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
+          heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
+          heroImgSize={{ width: '270px', height: '150px' }}
+        />
+      </div>
     );
   }
+
   return (
     <div>
+      <FeatureLoader supportedPlans={'pro'}>
+        <BusinessTrialOrUpgradeBanner
+          body={'Get in-depth post analytics by upgrading to Buffer for Business.'}
+          cta={bannerCopy.cta}
+          subtext={bannerCopy.subtext}
+          onCtaClick={() => { window.location.assign(bannerCopy.link); }}
+        />
+      </FeatureLoader>
       <div style={headerStyle}>
         <Text color={'black'}>{header}</Text>
         <Divider />
@@ -139,6 +169,7 @@ SentPosts.propTypes = {
   isManager: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   onClickUpgradeToPro: PropTypes.func.isRequired,
+  canStartBusinessTrial: PropTypes.bool.isRequired,
 };
 
 SentPosts.defaultProps = {

@@ -42,6 +42,7 @@ export default connect(
         editMode: state.sent.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        canStartBusinessTrial: state.appSidebar.user.canStartBusinessTrial,
       };
     }
     return {};
