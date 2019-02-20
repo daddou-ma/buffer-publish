@@ -26,6 +26,14 @@
     "noZipError": "For extra security, please add the zip code associated with this card",
     "invalidZipError": "Whoops, looks like that zip code doesn't match what your bank has on record - up for trying again?"
   },
+  "billing-upgrade-cta-banner": {
+    "remainingTrial": "You have {remaining} on your {plan} plan trial. ",
+    "billedTrialEnd": "You'll be billed {billedAmount} at the end of your trial. ",
+    "completeBilling": "Complete your billing details to make the transition smooth. ",
+    "planTrial": "You're on the {plan} trial. ",
+    "addBilling": "Add Billing Details",
+    "manageBilling": "Manage Billing"
+  },
   "upgrade-modal": {
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
     "proPlanSocialAccounts": "Connect up to 8 social accounts, including Pinterest",
