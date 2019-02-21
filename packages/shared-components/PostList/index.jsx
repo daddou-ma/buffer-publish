@@ -78,7 +78,8 @@ const renderPost = ({
   return (
     <ErrorBoundary>
       <PostComponent {...postWithEventHandlers} />
-    </ErrorBoundary>);
+    </ErrorBoundary>
+  );
 };
 
 /* eslint-enable react/prop-types */

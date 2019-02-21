@@ -1,5 +1,6 @@
 import React from 'react';
 import { RefreshIcon, Text, Button } from '@bufferapp/components';
+import { yellowUltraLight } from '@bufferapp/components/style/color';
 
 const errorBoundaryContainer = {
   alignItems: 'center',
@@ -8,6 +9,7 @@ const errorBoundaryContainer = {
   width: '100%',
   border: '0.063rem solid rgb(230, 235, 239)',
   padding: '0.8rem',
+  backgroundColor: yellowUltraLight,
 };
 
 const buttonWrapper = {
