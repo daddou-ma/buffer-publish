@@ -76,7 +76,7 @@ const renderPost = ({
   PostComponent = PostComponent || TextPost;
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundary postId={post.id}>
       <PostComponent {...postWithEventHandlers} />
     </ErrorBoundary>
   );

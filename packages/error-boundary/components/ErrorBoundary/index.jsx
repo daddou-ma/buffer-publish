@@ -1,15 +1,15 @@
 import React from 'react';
 import { RefreshIcon, Text, Button } from '@bufferapp/components';
-import { yellowUltraLight } from '@bufferapp/components/style/color';
+import PropTypes from 'prop-types';
 
 const errorBoundaryContainer = {
-  alignItems: 'center',
   display: 'flex',
+  alignItems: 'center',
   flexDirection: 'column',
   width: '100%',
-  border: '0.063rem solid rgb(230, 235, 239)',
-  padding: '0.8rem',
-  backgroundColor: yellowUltraLight,
+  padding: '16px',
+  borderRadius: '4px',
+  backgroundColor: '#E0364F',
 };
 
 const buttonWrapper = {
@@ -25,7 +25,7 @@ const errorMessage = {
   marginBottom: '0.5rem',
 };
 
-export default class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -43,26 +43,48 @@ export default class ErrorBoundary extends React.Component {
     });
   }
 
+  errorTitle() {
+    const { postId } = this.props;
+    if (postId) {
+      return 'Whoops, looks like we had some trouble with one of your posts';
+    }
+
+    return 'Well this is embarrassing...';
+  }
+
+  errorMessage() {
+    const { postId } = this.props;
+    if (postId) {
+      return `Something’s gone wrong with your post # ${postId}. I’ve notified my human creators who will fix this up shortly.`;
+    }
+
+    return 'Something’s gone wrong. I’ve notified my human creators who will fix this up shortly.';
+  }
+
+  /*
+  <Button
+    secondary
+    onClick={() => { this.onRefresh(); }}
+  >
+    <div style={buttonWrapper}>
+      <RefreshIcon color={'curiousBlue'} size={{ width: '14px' }} />
+      <span style={buttonText}>Refresh</span>
+    </div>
+  </Button>
+  */
+
   render() {
     if (this.state.hasError) {
       return (
         <div style={errorBoundaryContainer}>
-          <Text size={'large'} color={'black'}>
-            Well this is embarrassing...
+          <Text size={'large'} color={'white'}>
+            {this.errorTitle()}
           </Text>
           <div style={errorMessage}>
-            <Text size={'mini'} color={'black'}>
-              Something’s gone wrong. I’ve notified my human creators who will fix this up shortly.
+            <Text size={'mini'} color={'white'}>
+              {this.errorMessage()}
             </Text>
           </div>
-          <Button
-            secondary
-            onClick={() => { this.onRefresh(); }}
-          >
-            <div style={buttonWrapper}>
-              <RefreshIcon color={'curiousBlue'} size={{ width: '14px' }} /> <span style={buttonText}>Refresh</span>
-            </div>
-          </Button>
         </div>
       );
     }
@@ -70,3 +92,13 @@ export default class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
+
+ErrorBoundary.propTypes = {
+  postId: PropTypes.string,
+};
+
+ErrorBoundary.defaultProps = {
+  postId: null,
+};
+
+export default ErrorBoundary;
