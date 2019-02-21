@@ -1,0 +1,19 @@
+{
+  "name": "@bufferapp/publish-error-boundary",
+  "version": "2.0.0",
+  "description": "Allows to display error within Publish",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "hharnisc@gmail.com",
+  "dependencies": {
+    "@bufferapp/async-data-fetch": "1.9.4"
+  },
+  "devDependencies": {
+    "eslint": "3.19.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
