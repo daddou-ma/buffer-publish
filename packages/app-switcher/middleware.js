@@ -1,7 +1,7 @@
 import { actionTypes } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { getURL } from '@bufferapp/publish-formatters';
-import buffermetrics from '@bufferapp/buffermetrics/client';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 
 export default ({ getState, dispatch }) => next => (action) => {
   next(action);
@@ -25,7 +25,7 @@ export default ({ getState, dispatch }) => next => (action) => {
             comments: action.args.body,
           },
         };
-        buffermetrics.trackAction(metricsData, {
+        trackAction(metricsData, {
           success: () => {
             window.location = getURL.getBackToClassicNewPublishBufferURL();
           },
