@@ -14,12 +14,13 @@ import VideoPost from '../VideoPost';
 
 const reBufferWrapperStyle = {
   paddingLeft: '1rem',
-  minWidth: '132px',
+  paddingBottom: '0.5rem',
+  minWidth: '146px',
 };
 
 const postStyle = {
   display: 'flex',
-  alignItems: 'baseline',
+  alignItems: 'flex-start',
   marginBottom: '2rem',
 };
 
@@ -52,6 +53,7 @@ const renderPost = ({
   onImageClose,
   onDropPost,
   isSent,
+  isPastReminder,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -67,6 +69,7 @@ const renderPost = ({
     onImageClose: () => onImageClose({ post }),
     onDropPost,
     isSent,
+    isPastReminder,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -90,8 +93,10 @@ const PostList = ({
   onImageClose,
   onDropPost,
   onShareAgainClick,
+  onMobileClick,
   isSent,
   isManager,
+  isPastReminder,
 }) =>
   <div>
     <div style={listHeaderStyle}>
@@ -119,9 +124,10 @@ const PostList = ({
               onDropPost,
               onShareAgainClick,
               isSent,
+              isPastReminder,
             })
           }
-          {isManager &&
+          {isManager && !isPastReminder &&
             <FeatureLoader
               supportedFeatures={'share_again'}
             >
@@ -134,6 +140,28 @@ const PostList = ({
                 </Button>
               </div>
             </FeatureLoader>
+          }
+          {isManager && isPastReminder &&
+            <div>
+              <div style={reBufferWrapperStyle}>
+                <Button
+                  fillContainer
+                  secondary
+                  onClick={() => { onShareAgainClick({ post }); }}
+                >
+                  Share Again
+                </Button>
+              </div>
+              <div style={reBufferWrapperStyle}>
+                <Button
+                  fillContainer
+                  secondary
+                  onClick={() => { onMobileClick({ post }); }}
+                >
+                  Send to Mobile
+                </Button>
+              </div>
+            </div>
           }
         </div>,
       )}
@@ -158,8 +186,10 @@ PostList.propTypes = {
   onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
   onShareAgainClick: PropTypes.func,
+  onMobileClick: PropTypes.func,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 PostList.defaultProps = {

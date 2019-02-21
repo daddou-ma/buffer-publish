@@ -3,6 +3,14 @@
     "loggedIn": "Logged In...",
     "loggedOut": "Logged Out..."
   },
+  "app-switcher": {
+    "headline1": "Switch Back to Classic Buffer",
+    "tagline": "Thanks for trying out our refreshed experience",
+    "question": "What's the primary reason you're switching?",
+    "cancel": "Cancel",
+    "continue": "Continue to classic Buffer",
+    "pleaseWait": "Please wait..."
+  },
   "profile-sidebar": {
     "connectButton": "Manage Social Accounts",
     "lockedList": "Locked Social Accounts",
@@ -17,6 +25,14 @@
     "noNameError": "Uh oh, please fill out the cardholder name :)",
     "noZipError": "For extra security, please add the zip code associated with this card",
     "invalidZipError": "Whoops, looks like that zip code doesn't match what your bank has on record - up for trying again?"
+  },
+  "billing-upgrade-cta-banner": {
+    "remainingTrial": "You have {remaining} on your {plan} plan trial. ",
+    "billedTrialEnd": "You'll be billed {billedAmount} at the end of your trial. ",
+    "completeBilling": "Complete your billing details to make the transition smooth. ",
+    "planTrial": "You're on the {plan} trial. ",
+    "addBilling": "Add Billing Details",
+    "manageBilling": "Manage Billing"
   },
   "upgrade-modal": {
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
@@ -43,16 +59,36 @@
     "stayOnFreeCta": "Stay on the Free Plan for now"
   },
   "welcome-modal": {
-    "headline": "We’ve refreshed the look of Buffer",
-    "body1": "We’ve tidied up the look of your Buffer dashboard!",
-    "body2": "We’ve kept your features and all your stuff just as it was but with a cleaner and faster experience.",
-    "cta": "Let’s Go!"
+    "headline": "We've refreshed the look of Buffer",
+    "body1": "We've tidied up the look of your Buffer dashboard!",
+    "body2": "We've kept all your posts and content just as it was but with a cleaner and faster experience.",
+    "cta": "Let's Go!"
+  },
+  "welcome-paid-modal": {
+    "headline1": "A Refreshed Experience",
+    "body1": "We're working on a refreshed experience for you. The same Buffer you’ve come to love – ",
+    "body2": "now simpler, smoother, and faster.",
+    "cta1": "Continue",
+    "headline2": "Switch Back at Any Time",
+    "body3": "Feeling nostalgic? Switch back to classic Buffer at any time.",
+    "cta2": "Sounds Good"
   },
   "profiles-disconnected-modal": {
     "headline": "We’ve lost access to some of your social accounts",
-    "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these acconts you will need to reconnect them.",
+    "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these accounts you will need to reconnect them.",
     "body2": "Note: You’ll need to be logged in to the same account on the network to successfully reconnect your social account.",
     "cta": "Reconnect",
     "reconnecting": "Please wait..."
+  },
+  "steal-profile-modal": {
+    "headline1": "Whoops, ",
+    "headline2": "is already connected to another Buffer account.",
+    "body1": "Each social account can be tied to one Buffer account for security reasons. This Buffer account may be under a different email address that belongs to your organisation.",
+    "body2": "For us to connect",
+    "body3": "to your",
+    "body4": "Buffer account, it needs to be removed from the other account first.",
+    "notSureWhere": "Not sure where your social account has been added already?",
+    "getInTouch": "Get in touch",
+    "takeMeBack": "Take me back to Buffer"
   }
 }

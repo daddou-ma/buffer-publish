@@ -4,6 +4,7 @@ import { Tabs, Tab } from '@bufferapp/publish-shared-components';
 import { Link, ArrowLeftIcon, Text } from '@bufferapp/components';
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
+import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import FeatureLoader from '@bufferapp/product-features';
 import TabsNames from '../../constants';
@@ -14,7 +15,6 @@ import { openBillingWindow } from '../../../tabs/utils';
 const tabStyle = {
   flexGrow: 1,
   overflowY: 'auto',
-  maxWidth: '864px',
 };
 
 const generalTabStyle = {
@@ -22,6 +22,10 @@ const generalTabStyle = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+};
+
+const cenas = {
+  maxWidth: '864px',
 };
 
 const PreferenceContent = ({ tabId, onUnknownTab }) => {
@@ -33,6 +37,8 @@ const PreferenceContent = ({ tabId, onUnknownTab }) => {
       return <Security />;
     case TabsNames.APPS_EXTRAS:
       return <ManageAppsAndExtras />;
+    case TabsNames.NOTIFICATIONS:
+      return <Notifications />;
     default:
       onUnknownTab();
       return <Text>Redirecting...</Text>;
@@ -80,6 +86,7 @@ const Preferences = ({
         <Tabs selectedTabId={selectedTabId} onTabClick={onTabClick}>
           <Tab tabId={TabsNames.GENERAL}>General</Tab>
           <Tab tabId={TabsNames.SECURITY}>Security</Tab>
+          <Tab tabId={TabsNames.NOTIFICATIONS}>Notifications</Tab>
           <Tab tabId={TabsNames.APPS_EXTRAS}>Apps & Extras</Tab>
           <FeatureLoader supportedFeatures={'b4b_billing'}>
             <Tab tabId={'b4b-billing'} onClick={() => openBillingWindow()}>
@@ -120,7 +127,9 @@ const Preferences = ({
         </div>
       </Link>
       <div style={selectedTabId === 'general' ? generalTabStyle : tabStyle}>
-        <PreferenceContent tabId={selectedTabId} onUnknownTab={onUnknownTab} />
+        <div style={cenas}>
+          <PreferenceContent tabId={selectedTabId} onUnknownTab={onUnknownTab} />
+        </div>
       </div>
     </div>
   </div>

@@ -36,6 +36,12 @@ export default connect(
             post: state.sent.byProfileId[selectedProfileId].posts[postId],
           };
           break;
+        case 'pastReminders':
+          options = {
+            editMode: state.pastReminders.editMode,
+            post: state.pastReminders.byProfileId[selectedProfileId].posts[postId],
+          };
+          break;
         default:
           return;
       }

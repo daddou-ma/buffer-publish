@@ -5,7 +5,7 @@ import {
   Tab,
 } from '@bufferapp/publish-shared-components';
 import { Button, Text } from '@bufferapp/components';
-import FeatureLoader from '@bufferapp/product-features';
+import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
 import { openCalendarWindow } from '../../utils';
 
 const upgradeCtaStyle = {
@@ -19,6 +19,7 @@ const upgradeCtaStyle = {
 };
 
 const TabNavigation = ({
+  features,
   isBusinessAccount,
   isManager,
   selectedTabId,
@@ -27,9 +28,11 @@ const TabNavigation = ({
   onChildTabClick,
   shouldShowUpgradeCta,
   shouldShowNestedSettingsTab,
-  showUpgradeModal,
+  onUpgradeButtonClick,
   profileId,
   isLockedProfile,
+  isInstagramProfile,
+  hasPastRemindersFeatureFlip,
 }) => {
   const selectedChildTab = selectedChildTabId || 'general-settings';
   return (
@@ -42,14 +45,17 @@ const TabNavigation = ({
       >
         <Tab tabId={'queue'}>Queue</Tab>
         <Tab tabId={'sent'}>Sent Posts</Tab>
-        {isBusinessAccount && <Tab tabId={'analytics'}>Analytics</Tab>}
+        {isInstagramProfile && hasPastRemindersFeatureFlip &&
+          <Tab tabId={'pastReminders'}>Past Reminders</Tab>
+        }
+        {!features.isFreeUser() && <Tab tabId={'analytics'}>Analytics</Tab>}
         {isBusinessAccount && isManager &&
           <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
         }
         {isBusinessAccount && !isManager &&
           <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
         }
-        {isBusinessAccount &&
+        {!features.isFreeUser() &&
           <Tab tabId={'drafts'}>Drafts</Tab>
         }
         <Tab tabId={'settings'}>Settings</Tab>
@@ -70,13 +76,26 @@ const TabNavigation = ({
             secondary
             onClick={(e) => {
               e.preventDefault();
-              showUpgradeModal();
+              onUpgradeButtonClick('pro');
             }}
           >
             Upgrade to Pro
             </Button>
         </div>
       }
+      <FeatureLoader supportedPlans={'pro'}>
+        <div style={upgradeCtaStyle}>
+          <Button
+            secondary
+            onClick={(e) => {
+              e.preventDefault();
+              onUpgradeButtonClick('b4b');
+            }}
+          >
+            Learn about Buffer for Business
+            </Button>
+        </div>
+      </FeatureLoader>
       {shouldShowNestedSettingsTab && !isLockedProfile &&
         <Tabs
           selectedTabId={selectedChildTab}
@@ -97,20 +116,26 @@ TabNavigation.defaultProps = {
   selectedChildTabId: null,
   profileId: null,
   isLockedProfile: false,
+  isInstagramProfile: false,
+  hasPastRemindersFeatureFlip: false,
+  isBusinessAccount: false,
 };
 
 TabNavigation.propTypes = {
-  isBusinessAccount: PropTypes.bool.isRequired,
+  features: PropTypes.any.isRequired, // eslint-disable-line
+  isBusinessAccount: PropTypes.bool,
   isManager: PropTypes.bool.isRequired,
   selectedTabId: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
   shouldShowUpgradeCta: PropTypes.bool.isRequired,
-  showUpgradeModal: PropTypes.func.isRequired,
+  onUpgradeButtonClick: PropTypes.func.isRequired,
   onChildTabClick: PropTypes.func.isRequired,
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,
   profileId: PropTypes.string,
   isLockedProfile: PropTypes.bool,
+  isInstagramProfile: PropTypes.bool,
+  hasPastRemindersFeatureFlip: PropTypes.bool,
 };
 
-export default TabNavigation;
+export default WithFeatureLoader(TabNavigation);

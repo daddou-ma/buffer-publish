@@ -71,6 +71,11 @@ export const sentPosts = posts.map(post => ({
   sent: true,
 }));
 
+export const pastRemindersPosts = posts.map(post => ({
+  ...post,
+  day: 'Today',
+  dueTime: '10:13 pm',
+}));
 
 export const imagePosts = posts.map(post => ({
   ...post,

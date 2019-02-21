@@ -1,23 +1,54 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
+
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   SELECT_PROFILE: 0,
-  POST_COUNT_UPDATED: 0,
   PROFILE_UNPAUSED: 0,
   PROFILE_PAUSED: 0,
   PUSHER_PROFILE_PAUSED_STATE: 0,
   CONNECT_SOCIAL_ACCOUNT: 0,
+  PROFILE_DROPPED: 0,
 });
 
-const initialState = {
+export const initialState = {
   profiles: [],
-  lockedProfiles: [],
   selectedProfileId: '',
   loading: false,
   selectedProfile: {},
   isLockedProfile: false,
   isBusinessAccount: false,
+  hasInstagram: true,
+  hasFacebook: true,
+  hasTwitter: true,
+};
+
+const moveProfileInArray = (arr, from, to) => {
+  const clone = [...arr];
+
+  // Support passing `from` and `to` in non-sequential order (e.g., 4 and 1).
+  const fromIndex = from < to ? from : to;
+  const toIndex = to > from ? to : from;
+
+  // Generate the new array
+  Array.prototype.splice.call(clone, toIndex, 0,
+    Array.prototype.splice.call(clone, fromIndex, 1)[0],
+  );
+  return clone;
+};
+
+const handleProfileDropped = (profiles, action) => {
+  const { profileLimit, hoverIndex, dragIndex } = action;
+  const reorderedProfiles = moveProfileInArray(profiles, dragIndex, hoverIndex);
+  // add profiles after limit as disabled
+  if (reorderedProfiles.length > profileLimit) {
+    reorderedProfiles.map((profile, index) => {
+      profile.disabled = index >= profileLimit;
+      return profile;
+    });
+  }
+  return reorderedProfiles;
 };
 
 const profilesReducer = (state = [], action) => {
@@ -28,7 +59,7 @@ const profilesReducer = (state = [], action) => {
           ...profile,
           open: profile.id === action.profileId,
         }));
-    case actionTypes.POST_COUNT_UPDATED:
+    case queueActionTypes.POST_COUNT_UPDATED:
       return state
         .map(profile => ({
           ...profile,
@@ -72,10 +103,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        profiles: action.result
-          .filter(profile => !profile.disabled),
-        lockedProfiles: action.result
-          .filter(profile => profile.disabled),
+        profiles: action.result,
+        hasInstagram: action.result.some(p => p.service === 'instagram'),
+        hasFacebook: action.result.some(p => p.service === 'facebook'),
+        hasTwitter: action.result.some(p => p.service === 'twitter'),
       };
     }
     case actionTypes.SELECT_PROFILE: {
@@ -83,19 +114,26 @@ export default (state = initialState, action) => {
         ...state,
         selectedProfileId: action.profileId,
         profiles: profilesReducer(state.profiles, action),
-        lockedProfiles: profilesReducer(state.lockedProfiles, action),
         selectedProfile: action.profile,
         isLockedProfile: action.profile ? action.profile.disabled : false,
       };
     }
+    case actionTypes.PROFILE_DROPPED: {
+      if (!action.commit) {
+        return {
+          ...state,
+          profiles: handleProfileDropped(state.profiles, action),
+        };
+      }
+      return state;
+    }
     case actionTypes.PROFILE_PAUSED:
     case actionTypes.PROFILE_UNPAUSED:
     case actionTypes.PUSHER_PROFILE_PAUSED_STATE:
-    case actionTypes.POST_COUNT_UPDATED: {
+    case queueActionTypes.POST_COUNT_UPDATED: {
       return {
         ...state,
         profiles: profilesReducer(state.profiles, action),
-        lockedProfiles: profilesReducer(state.lockedProfiles, action),
       };
     }
     default:
@@ -119,5 +157,12 @@ export const actions = {
   }),
   handleConnectSocialAccountClick: () => ({
     type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
+  }),
+  onDropProfile: ({ commit, dragIndex, hoverIndex, profileLimit }) => ({
+    type: actionTypes.PROFILE_DROPPED,
+    commit,
+    dragIndex,
+    hoverIndex,
+    profileLimit,
   }),
 };

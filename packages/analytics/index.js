@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import AnalyticsList from './components/AnalyticsList';
 
 export default connect(
@@ -9,10 +10,16 @@ export default connect(
     isAnalyticsSupported: state.profileSidebar.selectedProfile ?
       state.profileSidebar.selectedProfile.isAnalyticsSupported :
       null,
+    // TODO: Refactor so we're not pulling this state from drafts
+    canStartBusinessTrial: state.drafts.canStartBusinessTrial,
   }),
   dispatch => ({
-    onClickUpgradeToPro: () => {
-      dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+    onClickUpgrade: (plan) => {
+      if (plan === 'free') {
+        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+      } else if (plan === 'pro') {
+        openBillingWindow();
+      }
     },
   }),
 )(AnalyticsList);

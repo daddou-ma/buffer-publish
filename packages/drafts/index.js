@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { getDateString, isInThePast } from '@bufferapp/publish-formatters';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
 
@@ -17,7 +18,7 @@ const getPostActionString = ({
       isPastDue,
       twentyFourHourTime,
     });
-    return `This ${isDraftsView ? 'draft' : 'post'} ${isPastDue ? 'was' : 'will be'} 
+    return `This ${isDraftsView ? 'draft' : 'post'} ${isPastDue ? 'was' : 'will be'}
       scheduled for ${dateString}${isPastDue ? '' : ' on approval'
     }.`;
   } else if (draft.sharedNext) {
@@ -121,6 +122,7 @@ export default connect(
         editMode: state.drafts.editMode,
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        canStartBusinessTrial: state.drafts.canStartBusinessTrial,
       };
     }
     return {};
@@ -198,8 +200,12 @@ export default connect(
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
     },
-    onClickUpgradeToPro: () => {
-      dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+    onClickUpgrade: (plan) => {
+      if (plan === 'free') {
+        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+      } else if (plan === 'pro') {
+        openBillingWindow();
+      }
     },
   }),
 )(DraftList);

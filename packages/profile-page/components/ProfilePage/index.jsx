@@ -5,6 +5,7 @@ import { Redirect } from 'react-router';
 
 import QueuedPosts from '@bufferapp/publish-queue';
 import SentPosts from '@bufferapp/publish-sent';
+import PastReminders from '@bufferapp/publish-past-reminders';
 import DraftList from '@bufferapp/publish-drafts';
 import PostingSchedule from '@bufferapp/publish-posting-schedule';
 import GeneralSettings from '@bufferapp/publish-general-settings';
@@ -53,6 +54,12 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
     case 'sent':
       return (
         <SentPosts
+          profileId={profileId}
+        />
+      );
+    case 'pastReminders':
+      return (
+        <PastReminders
           profileId={profileId}
         />
       );
@@ -119,7 +126,7 @@ const ProfilePage = ({
   moreToLoad,
   page,
 }) => {
-  const isPostsTab = ['queue', 'sent', 'drafts', 'awaitingApproval', 'pendingApproval'].includes(tabId);
+  const isPostsTab = ['queue', 'sent', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId);
   const handleScroll = (o) => {
     const reachedBottom = o.scrollHeight - o.scrollTop === o.clientHeight;
     if (reachedBottom && moreToLoad && isPostsTab && !loadingMore) {

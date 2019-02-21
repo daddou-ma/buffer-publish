@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import AppSidebar from '@bufferapp/app-sidebar';
+import Sidebar from '@bufferapp/publish-sidebar';
 import Notifications from '@bufferapp/notifications';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
@@ -14,6 +14,7 @@ import EnsurePublishBetaUser from '@bufferapp/publish-beta-redirect';
 import AppModals from '@bufferapp/publish-modals';
 import InitialLoading from '@bufferapp/publish-initial-loading';
 import DefaultPage from '@bufferapp/default-page';
+import CTABanner from '@bufferapp/publish-cta-banner';
 
 const appStyle = {
   display: 'flex',
@@ -30,9 +31,10 @@ class App extends Component { // eslint-disable-line
   render() {
     return (
       <div style={appStyle}>
-        <AppSidebar activeProduct="publish" />
+        <Sidebar activeProduct="publish" />
 
         <div style={contentStyle}>
+          <CTABanner />
           <EnsurePublishBetaUser>
             <Switch>
               <Route

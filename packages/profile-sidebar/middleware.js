@@ -44,9 +44,8 @@ export default ({ dispatch, getState }) => next => (action) => {
         path,
       });
       const profiles = getState().profileSidebar.profiles;
-      const lockedProfiles = getState().profileSidebar.lockedProfiles;
       if (params && params.profileId) {
-        const profile = [...profiles, ...lockedProfiles].find(p => p.id === params.profileId);
+        const profile = [...profiles].find(p => p.id === params.profileId);
 
         dispatch(actions.selectProfile({
           profile,
@@ -114,6 +113,20 @@ export default ({ dispatch, getState }) => next => (action) => {
         }));
       }
       break;
+    case actionTypes.PROFILE_DROPPED: {
+      if (action.commit) {
+        const state = getState();
+        const profiles = state.profileSidebar.profiles;
+        const orderedIds = profiles.map(profile => profile.id);
+        dispatch(dataFetchActions.fetch({
+          name: 'reorderProfiles',
+          args: {
+            order: orderedIds,
+          },
+        }));
+      }
+      break;
+    }
     default:
       break;
   }

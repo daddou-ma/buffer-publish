@@ -4,11 +4,13 @@ import {
   QueueItems,
   BufferLoading,
   LockedProfileNotification,
+  BusinessTrialOrUpgradeCard,
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import {
-  Input,
-} from '@bufferapp/components';
+import { WithFeatureLoader } from '@bufferapp/product-features';
+import { trackAction } from '@bufferapp/publish-data-tracking';
+import { Input } from '@bufferapp/components';
+
 import Empty from '../Empty';
 
 const composerStyle = {
@@ -32,6 +34,7 @@ const containerStyle = {
 };
 
 const DraftList = ({
+  features,
   loading,
   postLists,
   manager,
@@ -49,8 +52,39 @@ const DraftList = ({
   editMode,
   tabId,
   isLockedProfile,
-  onClickUpgradeToPro,
+  onClickUpgrade,
+  canStartBusinessTrial,
 }) => {
+  if (features.isProUser()) {
+    const startTrial = () => window.location.assign('https://buffer.com/billing/start-trial?trialType=small&next=https://publish.buffer.com');
+    const goToBilling = () => window.location.assign('https://buffer.com/app/account/receipts?content_only=true');
+    const trackAndGo = ({ location, action, afterTracked }) => {
+      trackAction({
+        location,
+        action,
+      }, {
+        success: afterTracked,
+        error: afterTracked,
+      });
+    };
+    if (canStartBusinessTrial) {
+      return (<BusinessTrialOrUpgradeCard
+        heading="Collaborate With Your Team"
+        body="Add your team to your Buffer account so you can collaborate and save even more time."
+        cta="Start a Free 14-Day Trial of the Business Plan"
+        onCtaClick={() => { trackAndGo({ location: 'drafts', action: 'collaborate_with_team_b4b_trial_start_click', afterTracked: startTrial }); }}
+        backgroundImage="squares"
+      />);
+    }
+    return (<BusinessTrialOrUpgradeCard
+      heading="Collaborate With Your Team"
+      body="Add your team to your Buffer account so you can collaborate and save even more time."
+      cta="Upgrade to Buffer for Business"
+      onCtaClick={() => { trackAndGo({ location: 'analytics', action: 'collaborate_with_team_b4b_upgrade_click', afterTracked: goToBilling }); }}
+      backgroundImage="squares"
+    />);
+  }
+
   if (loading) {
     return (
       <div style={loadingContainerStyle}>
@@ -60,9 +94,21 @@ const DraftList = ({
   }
 
   if (isLockedProfile) {
-    return (
-      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
-    );
+    if (features.isFreeUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'free'}
+        />
+      );
+    } else if (features.isProUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'pro'}
+        />
+      );
+    }
   }
 
   return (
@@ -115,6 +161,8 @@ const DraftList = ({
 };
 
 DraftList.propTypes = {
+  features: PropTypes.object.isRequired, // eslint-disable-line
+  canStartBusinessTrial: PropTypes.bool.isRequired,
   loading: PropTypes.bool,
   postLists: PropTypes.arrayOf(
     PropTypes.shape({
@@ -136,7 +184,7 @@ DraftList.propTypes = {
   editMode: PropTypes.bool,
   tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
   isLockedProfile: PropTypes.bool,
-  onClickUpgradeToPro: PropTypes.func.isRequired,
+  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 DraftList.defaultProps = {
@@ -148,4 +196,4 @@ DraftList.defaultProps = {
   isLockedProfile: false,
 };
 
-export default DraftList;
+export default WithFeatureLoader(DraftList);

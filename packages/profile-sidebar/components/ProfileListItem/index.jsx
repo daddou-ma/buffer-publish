@@ -69,6 +69,7 @@ const ProfileListItem = ({
     const queueTab = document.querySelector('#tabs a');
     if (queueTab) queueTab.focus();
   };
+
   return (
     <Link
       href={'#'}

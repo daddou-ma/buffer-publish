@@ -24,6 +24,7 @@ export const initialState = {
   editMode: false,
   editingPostId: '',
   draftMode: true,
+  canStartBusinessTrial: true,
 };
 
 const profileInitialState = {
@@ -167,6 +168,12 @@ const profileReducer = (state = profileInitialState, action) => {
 export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      return {
+        ...state,
+        canStartBusinessTrial: action.result.canStartBusinessTrial,
+      };
+    }
     case profileSidebarActionTypes.SELECT_PROFILE:
     case `draftPosts_${dataFetchActionTypes.FETCH_START}`:
     case `draftPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:

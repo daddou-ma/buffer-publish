@@ -36,12 +36,24 @@ const GeneralSettings = ({
   remindersAreEnabled,
   onToggleRemindersClick,
   isLockedProfile,
-  onClickUpgradeToPro,
+  onClickUpgrade,
 }) => {
   if (isLockedProfile) {
-    return (
-      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
-    );
+    if (features.isFreeUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'free'}
+        />
+      );
+    } else if (features.isProUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'pro'}
+        />
+      );
+    }
   }
 
   return (
@@ -149,7 +161,7 @@ GeneralSettings.propTypes = {
   remindersAreEnabled: PropTypes.bool,
   onToggleRemindersClick: PropTypes.func.isRequired,
   isLockedProfile: PropTypes.bool,
-  onClickUpgradeToPro: PropTypes.func.isRequired,
+  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 export default GeneralSettings;

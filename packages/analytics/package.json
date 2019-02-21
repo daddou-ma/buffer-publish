@@ -16,6 +16,7 @@
     "@bufferapp/hourly-chart": "0.79.1",
     "@bufferapp/posts-table": "0.79.1",
     "@bufferapp/summary-table": "0.79.1",
+    "@bufferapp/product-features": "2.0.0",
     "numeral": "^2.0.6"
   }
 }

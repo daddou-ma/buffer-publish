@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import { createMiddleware as createBufferMetricsMiddleware } from '@bufferapp/buffermetrics/redux';
+import { logTrackingMiddleware, bufferMetricsMiddleware } from '@bufferapp/publish-data-tracking';
 import { middleware as queueMiddleware } from '@bufferapp/publish-queue';
 import { middleware as sentMiddleware } from '@bufferapp/publish-sent';
+import { middleware as pastRemindersMiddleware } from '@bufferapp/publish-past-reminders';
 import { middleware as draftsMiddleware } from '@bufferapp/publish-drafts';
 import { middleware as postingScheduleSettingsMiddleware } from '@bufferapp/publish-posting-schedule';
 import { middleware as generalSettingsMiddleware } from '@bufferapp/publish-general-settings';
@@ -31,6 +32,8 @@ import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintena
 import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
 import { middleware as notificationsProviderMiddleware } from '@bufferapp/publish-notifications-provider';
 import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/publish-profiles-disconnected-modal';
+import { middleware as accountNotificationsMiddleware } from '@bufferapp/publish-account-notifications';
+import { middleware as publishCTABannerMiddleware } from '@bufferapp/publish-cta-banner';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 
 // Remove analytics middleware when publish switches to analyze
@@ -49,23 +52,6 @@ import reducers from './reducers';
 
 export const history = createHistory();
 
-const bufferMetricsMiddleware = createBufferMetricsMiddleware({
-  application: 'PUBLISH',
-  metadata: (state, action) => {
-    const m = {
-      userId: state.appSidebar.user.id,
-      profileId: state.profileSidebar.selectedProfileId,
-    };
-    // Add Instagram Tracking Data
-    const isInstagramAction = (action === 'OPEN_IG_MODAL' || action === 'HIDE_IG_MODAL' || action === 'SET_DIRECT_POSTING');
-    if (isInstagramAction && state.queue.isBusinessOnInstagram) {
-      m.isBusinessOnInstagram = state.queue.isBusinessOnInstagram
-        ? 'true' : 'false';
-    }
-    return m;
-  },
-});
-
 const configureStore = (initialstate) => {
   const composeEnhancers =
     typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -79,6 +65,8 @@ const configureStore = (initialstate) => {
       applyMiddleware(
         routerMiddleware(history),
         asyncDataFetchMiddleware,
+        logTrackingMiddleware,
+        bufferMetricsMiddleware,
         i18nMiddleware,
         profileSidebarMiddleware,
         performanceMiddleware,
@@ -86,6 +74,7 @@ const configureStore = (initialstate) => {
         productFeatureMiddleware,
         queueMiddleware,
         sentMiddleware,
+        pastRemindersMiddleware,
         postingScheduleSettingsMiddleware,
         generalSettingsMiddleware,
         pusherSyncMiddleware,
@@ -105,10 +94,11 @@ const configureStore = (initialstate) => {
         closeAccountMiddleware,
         defaultPageMiddleware,
         maintenanceRedirectMiddleware,
-        bufferMetricsMiddleware,
         draftsMiddleware,
         notificationsProviderMiddleware,
         profilesDisconnectedModalMiddleware,
+        accountNotificationsMiddleware,
+        publishCTABannerMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

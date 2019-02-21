@@ -49,4 +49,15 @@ storiesOf('ProfilePage', module)
       }}
       history={stubbedHistory}
     />
+  ))
+  .add('should render pastReminders', () => (
+    <ProfilePage
+      match={{
+        params: {
+          profileId: 'someProfileId',
+          tabId: 'pastReminders',
+        },
+      }}
+      history={stubbedHistory}
+    />
   ));

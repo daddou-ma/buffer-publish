@@ -4,6 +4,7 @@ import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sid
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 
 import QueuedPosts from './components/QueuedPosts';
@@ -192,8 +193,12 @@ export default connect(
     onHideInstagramModal: () => {
       dispatch(actions.handleHideInstagramModal());
     },
-    onClickUpgradeToPro: () => {
-      dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+    onClickUpgrade: (plan) => {
+      if (plan === 'free') {
+        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+      } else if (plan === 'pro') {
+        openBillingWindow();
+      }
     },
   }),
 )(QueuedPosts);

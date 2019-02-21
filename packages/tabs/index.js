@@ -2,6 +2,7 @@ import { push } from 'react-router-redux';
 import { generateProfilePageRoute, generateChildTabRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import TabNavigation from './components/TabNavigation';
 
@@ -17,18 +18,39 @@ export default connect(
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
+    isInstagramProfile: state.generalSettings.isInstagramProfile,
+    hasPastRemindersFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('past_reminders_in_new_publish') : false,
   }),
   (dispatch, ownProps) => ({
-    onTabClick: tabId => dispatch(push(generateProfilePageRoute({
-      tabId,
-      profileId: ownProps.profileId,
-    }))),
-    showUpgradeModal: () => dispatch(modalsActions.showUpgradeModal({ source: 'app_header' })),
-    onChildTabClick: childTabId => dispatch(push(generateChildTabRoute({
-      tabId: ownProps.tabId,
-      childTabId,
-      profileId: ownProps.profileId,
-    }))),
+    onTabClick: (tabId) => {
+      const profileId = ownProps.profileId;
+      trackAction({ location: 'tabs', action: `click_tab_${tabId}`, metadata: { profileId } });
+      dispatch(push(generateProfilePageRoute({
+        tabId,
+        profileId,
+      })));
+    },
+    onUpgradeButtonClick: (plan) => {
+      if (plan === 'pro') {
+        dispatch(modalsActions.showUpgradeModal({ source: 'app_header' }));
+      } else if (plan === 'b4b') {
+        const go = () => window.location.assign('https://buffer.com/business?utm_campaign=app_header');
+        trackAction({ location: 'header', action: 'clicked_b4b_learn_more' }, {
+          success: go,
+          error: go,
+        });
+      }
+    },
+    onChildTabClick: (childTabId) => {
+      const tabId = ownProps.tabId;
+      const profileId = ownProps.profileId;
+      trackAction({ location: 'tabs', action: `click_tab_${tabId}_${childTabId}`, metadata: { profileId } });
+      dispatch(push(generateChildTabRoute({
+        tabId,
+        childTabId,
+        profileId,
+      })));
+    },
   }),
 )(TabNavigation);
 

@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
   PostLists,
   EmptyState,
   LockedProfileNotification,
+  BufferLoading,
 } from '@bufferapp/publish-shared-components';
-import {
-  Divider,
-  Text,
-  LoadingAnimation,
-} from '@bufferapp/components';
+import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
+import { WithFeatureLoader } from '@bufferapp/product-features';
+import BusinessUpgradeBanner from '../BusinessUpgradeBanner';
 
 const headerStyle = {
   marginBottom: '1.5rem',
@@ -29,7 +28,6 @@ const topBarContainerStyle = {
 };
 
 const composerStyle = {
-  marginBottom: '1.5rem',
   flexGrow: '1',
 };
 
@@ -49,54 +47,67 @@ const SentPosts = ({
   editMode,
   isManager,
   isLockedProfile,
-  onClickUpgradeToPro,
+  onClickUpgrade,
+  features,
+  canStartBusinessTrial,
 }) => {
   if (loading) {
     return (
       <div style={loadingContainerStyle}>
-        <LoadingAnimation />
+        <BufferLoading size={64} />
       </div>
     );
   }
 
   if (isLockedProfile) {
-    return (
-      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
-    );
+    if (features.isFreeUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'free'}
+        />
+      );
+    } else if (features.isProUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'pro'}
+        />
+      );
+    }
   }
 
   if (total < 1) {
     return (
-      <EmptyState
-        title="You haven’t published any posts with this account in the past 30 days!"
-        subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
-        heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
-        heroImgSize={{ width: '270px', height: '150px' }}
-      />
+      <Fragment>
+        <BusinessUpgradeBanner canStartBusinessTrial={canStartBusinessTrial} />
+        <EmptyState
+          title="You haven’t published any posts with this account in the past 30 days!"
+          subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
+          heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
+          heroImgSize={{ width: '270px', height: '150px' }}
+        />
+      </Fragment>
     );
   }
+
   return (
     <div>
+      <BusinessUpgradeBanner canStartBusinessTrial={canStartBusinessTrial} />
       <div style={headerStyle}>
         <Text color={'black'}>{header}</Text>
         <Divider />
       </div>
       <div style={topBarContainerStyle}>
-        <div style={composerStyle}>
-          {showComposer && !editMode &&
-            <ComposerPopover
-              onSave={onComposerCreateSuccess}
-              type={'sent'}
-            />
-          }
-        </div>
+        {showComposer && !editMode && (
+          <div style={composerStyle}>
+            <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
+          </div>
+        )}
       </div>
-      {showComposer && editMode &&
-        <ComposerPopover
-          onSave={onComposerCreateSuccess}
-          type={'sent'}
-        />
-      }
+      {showComposer && editMode && (
+        <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
+      )}
       <PostLists
         postLists={postLists}
         onEditClick={onEditClick}
@@ -113,6 +124,7 @@ const SentPosts = ({
 };
 
 SentPosts.propTypes = {
+  features: PropTypes.object.isRequired, // eslint-disable-line
   header: PropTypes.string,
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
@@ -139,7 +151,8 @@ SentPosts.propTypes = {
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  onClickUpgradeToPro: PropTypes.func.isRequired,
+  onClickUpgrade: PropTypes.func.isRequired,
+  canStartBusinessTrial: PropTypes.bool.isRequired,
 };
 
 SentPosts.defaultProps = {
@@ -161,4 +174,4 @@ SentPosts.defaultProps = {
   onImageClose: () => {},
 };
 
-export default SentPosts;
+export default WithFeatureLoader(SentPosts);

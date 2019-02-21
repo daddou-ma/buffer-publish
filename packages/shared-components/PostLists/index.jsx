@@ -27,8 +27,10 @@ const renderPostList = ({
   onImageClose,
   onDropPost,
   onShareAgainClick,
+  onMobileClick,
   isSent,
   isManager,
+  isPastReminder,
 }) =>
   <div style={postListStyle}>
     <PostList
@@ -47,8 +49,10 @@ const renderPostList = ({
       onImageClose={onImageClose}
       onDropPost={onDropPost}
       onShareAgainClick={onShareAgainClick}
+      onMobileClick={onMobileClick}
       isSent={isSent}
       isManager={isManager}
+      isPastReminder={isPastReminder}
     />
   </div>;
 
@@ -68,8 +72,10 @@ const PostLists = ({
   onImageClose,
   onDropPost,
   onShareAgainClick,
+  onMobileClick,
   isSent,
   isManager,
+  isPastReminder,
 }) =>
   <List
     items={postLists.map((postList, index) =>
@@ -88,8 +94,10 @@ const PostLists = ({
         onImageClose,
         onDropPost,
         onShareAgainClick,
+        onMobileClick,
         isSent,
         isManager,
+        isPastReminder,
       }),
     )}
     fillContainer
@@ -118,8 +126,10 @@ PostLists.propTypes = {
   onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
   onShareAgainClick: PropTypes.func,
+  onMobileClick: PropTypes.func,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 PostLists.defaultProps = {

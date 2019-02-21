@@ -11,7 +11,7 @@ export const postLists = [
         links: [],
         linkAttachment: {},
         postDetails: {
-          postAction: 'This post is scheduled for May 2nd',
+          postAction: 'This post was sent May 2nd',
           isRetweet: false,
         },
         retweetCommentLinks: [],
@@ -28,7 +28,7 @@ export const postLists = [
         links: [],
         linkAttachment: {},
         postDetails: {
-          postAction: 'This post is scheduled for May 2nd',
+          postAction: 'This post was sent May 2nd',
           isRetweet: false,
         },
         retweetCommentLinks: [],
@@ -50,7 +50,7 @@ export const postLists = [
         links: [],
         linkAttachment: {},
         postDetails: {
-          postAction: 'This post is scheduled for May 3rd',
+          postAction: 'This post was sent May 3rd',
           isRetweet: false,
         },
         retweetCommentLinks: [],
@@ -67,7 +67,7 @@ export const postLists = [
         links: [],
         linkAttachment: {},
         postDetails: {
-          postAction: 'This post is scheduled for May 3rd',
+          postAction: 'This post was sent May 3rd',
           isRetweet: false,
         },
         retweetCommentLinks: [],

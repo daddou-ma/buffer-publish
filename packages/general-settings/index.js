@@ -5,6 +5,7 @@ import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actions as queueActions } from '@bufferapp/publish-queue';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import GeneralSettings from './components/GeneralSettings';
 
@@ -101,8 +102,12 @@ export default connect(
           utmMedium: event.target.value,
         }));
       },
-      onClickUpgradeToPro: () => {
-        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+      onClickUpgrade: (plan) => {
+        if (plan === 'free') {
+          dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+        } else if (plan === 'pro') {
+          openBillingWindow();
+        }
       },
       onToggleRemindersClick: (newToggleValue) => {
         dispatch(actions.handleRemindersToggle({

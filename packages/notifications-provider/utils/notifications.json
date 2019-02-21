@@ -1,12 +1,14 @@
 {
   "success": {
-    "connection": "You're all set! We've selected some times for you but you can tweak them in your settings",
+    "connection": "{{__variable__}}",
     "example-with-variable": "This is an example with this {{__variable__}} value",
     "bitly-connect": "Great, your bitly account has been linked with the profile {{__variable__}}",
     "bitly-disconnect": "Okay, your bitly account has been disconnected."
   },
   "error": {
+    "connection": "{{__variable__}}",
     "bitly-connect": "{{__variable__}}",
-    "bitly-disconnect": "{{__variable__}}"
+    "bitly-disconnect": "{{__variable__}}",
+    "connection": "{{__variable__}}"
   }
 }

@@ -1,21 +1,24 @@
 import { push } from 'react-router-redux';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
+import { hot } from 'react-hot-loader';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import ProfileSidebar from './components/ProfileSidebar';
 import { actions } from './reducer';
 
 const { formatAnalyticsProfileObj } = require('./analytics');
 
-export default connect(
+export default hot(module)(connect(
   (state, ownProps) => ({
     loading: state.profileSidebar.loading,
     selectedProfile: state.profileSidebar.selectedProfile,
     selectedProfileId: ownProps.profileId,
     profiles: state.profileSidebar.profiles,
-    lockedProfiles: state.profileSidebar.lockedProfiles,
     translations: state.i18n.translations['profile-sidebar'],
     profileLimit: state.appSidebar.user.profile_limit,
+    hasInstagram: state.profileSidebar.hasInstagram,
+    hasFacebook: state.profileSidebar.hasFacebook,
+    hasTwitter: state.profileSidebar.hasTwitter,
   }),
   (dispatch, ownProps) => ({
     onProfileClick: (profile) => {
@@ -36,6 +39,14 @@ export default connect(
         }
       }
     },
+    onDropProfile: ({ commit, profileLimit, dragIndex, hoverIndex }) => {
+      dispatch(actions.onDropProfile({
+        commit,
+        profileLimit,
+        dragIndex,
+        hoverIndex,
+      }));
+    },
     onConnectSocialAccountClick: () => {
       dispatch(actions.handleConnectSocialAccountClick());
     },
@@ -43,7 +54,7 @@ export default connect(
       dispatch(modalActions.showProfilesDisconnectedModal());
     },
   }),
-)(ProfileSidebar);
+)(ProfileSidebar));
 
 export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';

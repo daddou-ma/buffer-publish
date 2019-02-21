@@ -13,7 +13,7 @@ import {
 } from '@bufferapp/publish-shared-components';
 
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import FeatureLoader from '@bufferapp/product-features';
+import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import InstagramDirectPostingModal from '../InstagramDirectPostingModal';
 import QueueItems from '../QueueItems';
@@ -81,7 +81,8 @@ const QueuedPosts = ({
   hasInstagramFeatureFlip,
   isInstagramLoading,
   isLockedProfile,
-  onClickUpgradeToPro,
+  features,
+  onClickUpgrade,
 }) => {
   if (loading) {
     return (
@@ -100,9 +101,21 @@ const QueuedPosts = ({
   }
 
   if (isLockedProfile) {
-    return (
-      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
-    );
+    if (features.isFreeUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'free'}
+        />
+      );
+    } else if (features.isProUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'pro'}
+        />
+      );
+    }
   }
 
   return (
@@ -243,7 +256,7 @@ QueuedPosts.propTypes = {
   hasInstagramFeatureFlip: PropTypes.bool,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  onClickUpgradeToPro: PropTypes.func.isRequired,
+  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 QueuedPosts.defaultProps = {
@@ -268,4 +281,4 @@ QueuedPosts.defaultProps = {
   isLockedProfile: false,
 };
 
-export default QueuedPosts;
+export default WithFeatureLoader(QueuedPosts);

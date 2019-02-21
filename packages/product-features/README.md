@@ -2,7 +2,7 @@
 
 This component Provides the logic for supported product plans and features
 
-You can use it by importing the module and adding a `<FeatureLoader>` component surrounding the component you wish to 
+You can use it by importing the module and adding a `<FeatureLoader>` component surrounding the component you wish to
 show based on usecase
 
 This is how to import the component:
@@ -11,21 +11,21 @@ This is how to import the component:
 import FeatureLoader from '@bufferapp/product-features';
 ```
 
-So if you have a feature named `'super_mega_feature'` and you want the `<Super>` component to display for those users, 
-you would wrap the component in 
+So if you have a feature named `'super_mega_feature'` and you want the `<Super>` component to display for those users,
+you would wrap the component in
 
 ```<FeatureLoader supportedFeature={'super_mega_feature'}><Super /></FeatureLoader>```
 
-If you want to fallback to something else when the `'super_mega_feature'` isn't available then you can provide the 
+If you want to fallback to something else when the `'super_mega_feature'` isn't available then you can provide the
 `fallback={Component}` parameter.
 
-This should allow you to be able to send through some value if this feature isn't available, maybe showing a message 
+This should allow you to be able to send through some value if this feature isn't available, maybe showing a message
 saying, hey why not upgrade to enjoy this feature, or perhaps just some static text / element to hold its place in the UI
 
 To see more of the usecases supported, check out the story.jsx file...
 
-When we use this component we pass in `productFeatures: state.productFeatures` so you shouldn't pass those in as they 
-are being provided by the redux store but you can chose to send them in if you are using the component in isolation, 
+When we use this component we pass in `productFeatures: state.productFeatures` so you shouldn't pass those in as they
+are being provided by the redux store but you can chose to send them in if you are using the component in isolation,
 just like in the tests themselves
 
 ## Higher Order Component
@@ -54,9 +54,9 @@ This component exposes a features property onto its child with a list of methods
 
 You can use this in the following way:
 
-```
+```js
     import { WithFeatureLoader } from '@bufferapp/product-features';
-    
+
     // The property features gets loaded automatically from the redux state
     const TextComponent = ({ features, ...other }) => {
       if (features.isFreeUser()) {
@@ -65,14 +65,14 @@ You can use this in the following way:
       else if (features.isProUser()) {
         return (<Text {...other}>Pro User</Text>);
       }
-      
+
       return null;
     };
 
     TextComponent.propTypes = {
       features: PropTypes.any.isRequired,
     };
-    
+
     const TextComponentWithFeatureLoader = WithFeatureLoader(TextComponent);
 
     // Now when you want to use it, you can just use it like any other component
@@ -81,5 +81,5 @@ You can use this in the following way:
 ```
 
 This gives you full control of how you show data, and how you control the flow of displaying particular content, such as
-when you want to only display an icon for certain users, but its deeply nested inside your component, and creating a 
+when you want to only display an icon for certain users, but its deeply nested inside your component, and creating a
 whole new component with just a small alteration would cause too much code duplication.

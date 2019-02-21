@@ -1,11 +1,18 @@
 import 'babel-polyfill';
 import { configure } from '@storybook/react';
 
-// automatically import all story.js files
-const req = require.context(__PACKAGES__, true, /components\/.*\/*story\.jsx$/)
-
+/**
+ * `__PACKAGES__` below is dynamically pulled from the environment
+ * via the custom webpack config, allowing us to run storybook on
+ * a specific package in new publish.
+ *
+ * e.g.,
+ *
+ *   $ PACKAGE=shared-components yarn run storybook
+ *
+ */
 function loadStories() {
-  req.keys().forEach(req);
+  const req = require.context(__PACKAGES__, true, /story\.jsx$/);
+  req.keys().forEach(filename => req(filename));
 }
-
 configure(loadStories, module);

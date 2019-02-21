@@ -3,6 +3,7 @@ const { rpc } = require('@bufferapp/buffer-rpc');
 const profilesMethod = require('./profiles');
 const queuedPostsMethod = require('./queuedPosts');
 const sentPostsMethod = require('./sentPosts');
+const pastRemindersMethod = require('./pastReminders');
 const draftPostsMethod = require('./draftPosts');
 const userMethod = require('./user');
 const deletePostMethod = require('./deletePost');
@@ -14,6 +15,7 @@ const updateScheduleMethod = require('./updateSchedule');
 const getTimezonesMethod = require('./getTimezones');
 const updateTimezoneMethod = require('./updateTimezone');
 const reorderPostsMethod = require('./reorderPosts');
+const reorderProfilesMethod = require('./reorderProfiles');
 const pauseQueueMethod = require('./pauseQueue');
 const requeuePost = require('./requeuePost');
 const updatePausedSchedules = require('./updatePausedSchedules');
@@ -41,6 +43,8 @@ const checkInstagramBusinessMethod = require('./checkInstagramBusiness');
 const saveGATrackingSettings = require('./saveGATrackingSettings');
 const getGATrackingSettings = require('./getGATrackingSettings');
 const toggleInstagramReminders = require('./toggleInstagramReminders');
+const mobileReminder = require('./mobileReminder');
+const setNotifications = require('./setNotifications');
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
 const average = require('./analytics/average');
@@ -54,6 +58,7 @@ module.exports = rpc(
   profilesMethod,
   queuedPostsMethod,
   sentPostsMethod,
+  pastRemindersMethod,
   draftPostsMethod,
   userMethod,
   deletePostMethod,
@@ -65,6 +70,7 @@ module.exports = rpc(
   getTimezonesMethod,
   updateTimezoneMethod,
   reorderPostsMethod,
+  reorderProfilesMethod,
   pauseQueueMethod,
   requeuePost,
   updatePausedSchedules,
@@ -99,4 +105,6 @@ module.exports = rpc(
   summaryMethod,
   checkInstagramBusinessMethod,
   toggleInstagramReminders,
+  mobileReminder,
+  setNotifications,
 );

@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 // load the presentational component
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import SentPosts from './components/SentPosts';
 
@@ -42,6 +43,7 @@ export default connect(
         editMode: state.sent.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        canStartBusinessTrial: state.appSidebar.user.canStartBusinessTrial,
       };
     }
     return {};
@@ -80,8 +82,12 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
-    onClickUpgradeToPro: () => {
-      dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+    onClickUpgrade: (plan) => {
+      if (plan === 'free') {
+        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+      } else if (plan === 'pro') {
+        openBillingWindow();
+      }
     },
   }),
 )(SentPosts);
