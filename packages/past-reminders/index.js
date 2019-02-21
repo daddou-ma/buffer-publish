@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 // load the presentational component
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import PastRemindersPosts from './components/PastRemindersPosts';
 
@@ -86,8 +87,12 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
-    onClickUpgradeToPro: () => {
-      dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+    onClickUpgrade: (plan) => {
+      if (plan === 'free') {
+        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+      } else if (plan === 'pro') {
+        openBillingWindow();
+      }
     },
   }),
 )(PastRemindersPosts);

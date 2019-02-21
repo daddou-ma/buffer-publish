@@ -52,7 +52,7 @@ const DraftList = ({
   editMode,
   tabId,
   isLockedProfile,
-  onClickUpgradeToPro,
+  onClickUpgrade,
   canStartBusinessTrial,
 }) => {
   if (features.isProUser()) {
@@ -94,9 +94,21 @@ const DraftList = ({
   }
 
   if (isLockedProfile) {
-    return (
-      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
-    );
+    if (features.isFreeUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'free'}
+        />
+      );
+    } else if (features.isProUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'pro'}
+        />
+      );
+    }
   }
 
   return (
@@ -172,7 +184,7 @@ DraftList.propTypes = {
   editMode: PropTypes.bool,
   tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
   isLockedProfile: PropTypes.bool,
-  onClickUpgradeToPro: PropTypes.func.isRequired,
+  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 DraftList.defaultProps = {

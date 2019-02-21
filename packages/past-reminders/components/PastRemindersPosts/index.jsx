@@ -11,6 +11,7 @@ import {
   LoadingAnimation,
 } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 
 const headerStyle = {
   marginBottom: '1.5rem',
@@ -54,7 +55,8 @@ const PastRemindersPosts = ({
   editMode,
   isManager,
   isLockedProfile,
-  onClickUpgradeToPro,
+  onClickUpgrade,
+  features,
 }) => {
   if (loading) {
     return (
@@ -65,9 +67,21 @@ const PastRemindersPosts = ({
   }
 
   if (isLockedProfile) {
-    return (
-      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
-    );
+    if (features.isFreeUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'free'}
+        />
+      );
+    } else if (features.isProUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'pro'}
+        />
+      );
+    }
   }
 
   if (total < 1) {
@@ -123,6 +137,7 @@ const PastRemindersPosts = ({
 };
 
 PastRemindersPosts.propTypes = {
+  features: PropTypes.object.isRequired, // eslint-disable-line
   header: PropTypes.string,
   subHeader: PropTypes.string,
   loading: PropTypes.bool,
@@ -151,7 +166,7 @@ PastRemindersPosts.propTypes = {
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  onClickUpgradeToPro: PropTypes.func.isRequired,
+  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 PastRemindersPosts.defaultProps = {
@@ -175,4 +190,4 @@ PastRemindersPosts.defaultProps = {
   onImageClose: () => {},
 };
 
-export default PastRemindersPosts;
+export default WithFeatureLoader(PastRemindersPosts);

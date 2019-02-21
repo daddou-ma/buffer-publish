@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { getDateString, isInThePast } from '@bufferapp/publish-formatters';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
 
@@ -199,8 +200,12 @@ export default connect(
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
     },
-    onClickUpgradeToPro: () => {
-      dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+    onClickUpgrade: (plan) => {
+      if (plan === 'free') {
+        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
+      } else if (plan === 'pro') {
+        openBillingWindow();
+      }
     },
   }),
 )(DraftList);

@@ -20,7 +20,7 @@ const AnalyticsList = ({
   profile,
   isAnalyticsSupported,
   isLockedProfile,
-  onClickUpgradeToPro,
+  onClickUpgrade,
   canStartBusinessTrial,
 }) => {
   if (features.isProUser()) {
@@ -54,9 +54,21 @@ const AnalyticsList = ({
   }
 
   if (isLockedProfile) {
-    return (
-      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
-    );
+    if (features.isFreeUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'free'}
+        />
+      );
+    } else if (features.isProUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'pro'}
+        />
+      );
+    }
   }
 
   if (isAnalyticsSupported) {
@@ -81,7 +93,7 @@ AnalyticsList.propTypes = {
   isAnalyticsSupported: PropTypes.bool,
   profile: PropTypes.shape(ProfileHeader.propTypes),
   isLockedProfile: PropTypes.bool,
-  onClickUpgradeToPro: PropTypes.func.isRequired,
+  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 AnalyticsList.defaultProps = {
