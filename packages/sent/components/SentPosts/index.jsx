@@ -8,6 +8,7 @@ import {
 } from '@bufferapp/publish-shared-components';
 import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import BusinessUpgradeBanner from '../BusinessUpgradeBanner';
 
 const headerStyle = {
@@ -46,7 +47,8 @@ const SentPosts = ({
   editMode,
   isManager,
   isLockedProfile,
-  onClickUpgradeToPro,
+  onClickUpgrade,
+  features,
   canStartBusinessTrial,
 }) => {
   if (loading) {
@@ -58,9 +60,21 @@ const SentPosts = ({
   }
 
   if (isLockedProfile) {
-    return (
-      <LockedProfileNotification onClickUpgradeToPro={onClickUpgradeToPro} />
-    );
+    if (features.isFreeUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'free'}
+        />
+      );
+    } else if (features.isProUser()) {
+      return (
+        <LockedProfileNotification
+          onClickUpgrade={onClickUpgrade}
+          plan={'pro'}
+        />
+      );
+    }
   }
 
   if (total < 1) {
@@ -110,6 +124,7 @@ const SentPosts = ({
 };
 
 SentPosts.propTypes = {
+  features: PropTypes.object.isRequired, // eslint-disable-line
   header: PropTypes.string,
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
@@ -136,7 +151,7 @@ SentPosts.propTypes = {
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  onClickUpgradeToPro: PropTypes.func.isRequired,
+  onClickUpgrade: PropTypes.func.isRequired,
   canStartBusinessTrial: PropTypes.bool.isRequired,
 };
 
@@ -159,4 +174,4 @@ SentPosts.defaultProps = {
   onImageClose: () => {},
 };
 
-export default SentPosts;
+export default WithFeatureLoader(SentPosts);
