@@ -144,7 +144,7 @@ const QueuedPosts = ({
               secondary
               onClick={onCalendarToggleClick}
             >
-              {showCalendar ? 'Hide Calendar' : 'Show Calendar'}
+              {showCalendar ? 'Hide Overview' : 'Show Overview'}
             </Button>
           </div>
 
