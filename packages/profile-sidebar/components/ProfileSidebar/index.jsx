@@ -17,7 +17,7 @@ import ProfileConnectShortcut from '../ProfileConnectShortcut';
 const profileSidebarStyle = {
   display: 'flex',
   flexDirection: 'column',
-  minHeight: '100vh',
+  minHeight: '100%',
   maxHeight: '100vh',
   padding: '1rem',
   boxSizing: 'border-box',
