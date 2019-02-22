@@ -1,6 +1,6 @@
 import React from 'react';
 import { RefreshIcon, Button } from '@bufferapp/components';
-import './errorBoundary.css';
+import style from './style';
 
 class BoundaryFallback extends React.Component {
   static onRefresh() {
@@ -9,9 +9,9 @@ class BoundaryFallback extends React.Component {
 
   render() {
     return (
-      <div className="error-boundary">
-        <div className="error-boundary__title">Well this is embarrassing...</div>
-        <div className="error-boundary__message">
+      <div style={style.errorBoundary}>
+        <div style={style.errorBoundaryTitle}>Well this is embarrassing...</div>
+        <div style={style.errorBoundaryMessage}>
           Something’s gone wrong. I’ve notified my
           human<br />creators who will fix this up shortly.
         </div>
@@ -21,9 +21,9 @@ class BoundaryFallback extends React.Component {
             BoundaryFallback.onRefresh();
           }}
         >
-          <div className="button-wrapper">
+          <div style={style.buttonWrapper}>
             <RefreshIcon color={'curiousBlue'} size={{ width: '14px' }} />
-            <span className="button-text">Refresh</span>
+            <span style={style.buttonText}>Refresh</span>
           </div>
         </Button>
       </div>
