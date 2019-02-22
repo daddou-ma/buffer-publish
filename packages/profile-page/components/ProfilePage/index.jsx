@@ -13,7 +13,6 @@ import TabNavigation from '@bufferapp/publish-tabs';
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import Analytics from '@bufferapp/publish-analytics';
 import { ScrollableContainer } from '@bufferapp/publish-shared-components';
-
 import { LoadingAnimation } from '@bufferapp/components';
 
 const profilePageStyle = {

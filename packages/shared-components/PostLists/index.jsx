@@ -4,6 +4,7 @@ import {
 
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import PostList from '../PostList';
 
 /* eslint-disable react/prop-types */
