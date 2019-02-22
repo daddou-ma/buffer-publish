@@ -14,7 +14,6 @@ import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import Analytics from '@bufferapp/publish-analytics';
 import { ScrollableContainer } from '@bufferapp/publish-shared-components';
 import { LoadingAnimation } from '@bufferapp/components';
-import ErrorBoundary from '@bufferapp/publish-error-boundary';
 
 const profilePageStyle = {
   display: 'flex',
@@ -152,9 +151,7 @@ const ProfilePage = ({
           growthSpace={1}
         >
           <div style={tabContentStyle}>
-            <ErrorBoundary>
-              <TabContent tabId={tabId} profileId={profileId} childTabId={childTabId} />
-            </ErrorBoundary>
+            <TabContent tabId={tabId} profileId={profileId} childTabId={childTabId} />
             {loadingMore &&
               <div style={loadingAnimationStyle}>
                 <LoadingAnimation marginTop={'1rem'} />

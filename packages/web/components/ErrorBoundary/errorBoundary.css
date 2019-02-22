@@ -1,0 +1,40 @@
+:global(.error-boundary) {
+    font-family: "Roboto", sans-serif;
+    align-items: center;
+    background-image: radial-gradient(circle closest-side, #fffaed,#fff);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    width: 100vw;
+}
+
+:global(.error-boundary__title) {
+    color: #363c40;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+:global(.error-boundary__message) {
+    color: #898989;
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 26px;
+}
+
+:global(.error-boundary .btn span),
+:global(.error-boundary .ico-refresh),
+:global(.error-boundary .ico-ico-back) {
+    margin-right: 6px;
+}
+
+:global(.button-wrapper) {
+    display: flex;
+}
+
+:global(.button-text) {
+    margin-left: 0.5rem;
+}

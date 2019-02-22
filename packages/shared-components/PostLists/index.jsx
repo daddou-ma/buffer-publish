@@ -4,7 +4,6 @@ import {
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ErrorBoundary from '@bufferapp/publish-error-boundary';
 
 import PostList from '../PostList';
 
@@ -35,29 +34,27 @@ const renderPostList = ({
   isPastReminder,
 }) =>
   <div style={postListStyle}>
-    <ErrorBoundary>
-      <PostList
-        key={`postList-${index}`}
-        listHeader={postList.listHeader}
-        posts={postList.posts}
-        onCancelConfirmClick={onCancelConfirmClick}
-        onDeleteClick={onDeleteClick}
-        onDeleteConfirmClick={onDeleteConfirmClick}
-        onEditClick={onEditClick}
-        onShareNowClick={onShareNowClick}
-        onRequeueClick={onRequeueClick}
-        onImageClick={onImageClick}
-        onImageClickNext={onImageClickNext}
-        onImageClickPrev={onImageClickPrev}
-        onImageClose={onImageClose}
-        onDropPost={onDropPost}
-        onShareAgainClick={onShareAgainClick}
-        onMobileClick={onMobileClick}
-        isSent={isSent}
-        isManager={isManager}
-        isPastReminder={isPastReminder}
-      />
-    </ErrorBoundary>
+    <PostList
+      key={`postList-${index}`}
+      listHeader={postList.listHeader}
+      posts={postList.posts}
+      onCancelConfirmClick={onCancelConfirmClick}
+      onDeleteClick={onDeleteClick}
+      onDeleteConfirmClick={onDeleteConfirmClick}
+      onEditClick={onEditClick}
+      onShareNowClick={onShareNowClick}
+      onRequeueClick={onRequeueClick}
+      onImageClick={onImageClick}
+      onImageClickNext={onImageClickNext}
+      onImageClickPrev={onImageClickPrev}
+      onImageClose={onImageClose}
+      onDropPost={onDropPost}
+      onShareAgainClick={onShareAgainClick}
+      onMobileClick={onMobileClick}
+      isSent={isSent}
+      isManager={isManager}
+      isPastReminder={isPastReminder}
+    />
   </div>;
 
 /* eslint-enable react/prop-types */

@@ -11,7 +11,6 @@ import ImagePost from '../ImagePost';
 import MultipleImagesPost from '../MultipleImagesPost';
 import LinkPost from '../LinkPost';
 import VideoPost from '../VideoPost';
-import ErrorBoundary from '@bufferapp/publish-error-boundary';
 
 const reBufferWrapperStyle = {
   paddingLeft: '1rem',
@@ -75,11 +74,7 @@ const renderPost = ({
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
 
-  return (
-    <ErrorBoundary postId={post.id}>
-      <PostComponent {...postWithEventHandlers} />
-    </ErrorBoundary>
-  );
+  return <PostComponent {...postWithEventHandlers} />;
 };
 
 /* eslint-enable react/prop-types */

@@ -1,1 +1,0 @@
-# @bufferapp/publish-error-boundary
