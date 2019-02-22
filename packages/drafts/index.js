@@ -79,7 +79,7 @@ const formatPostLists = (profile, drafts, user, tabId) => {
     const isPastDue = isInThePast(draft.scheduled_at);
     acc.push({
       queueItemType: 'post',
-      hasPermission: user.id === draft.user.id || isManager,
+      hasPermission: isManager || (user.id === draft.user.id),
       role: profile.organizationRole,
       manager: isManager,
       draftDetails: getDraftDetails({
