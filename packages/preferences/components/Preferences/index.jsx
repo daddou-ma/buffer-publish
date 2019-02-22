@@ -61,7 +61,7 @@ const Preferences = ({
   <div
     style={{
       display: 'flex',
-      flexGrow: '1',
+      height: '100%',
     }}
   >
     <div
@@ -77,7 +77,7 @@ const Preferences = ({
       style={{
         flexGrow: 1,
         padding: '0 1rem',
-        minHeight: '100%',
+        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
       }}

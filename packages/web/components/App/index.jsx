@@ -22,9 +22,7 @@ const appStyle = {
 };
 
 const contentStyle = {
-  display: 'flex',
   flexGrow: 1,
-  flexDirection: 'column',
 };
 
 // Can't use stateless function for App since then
