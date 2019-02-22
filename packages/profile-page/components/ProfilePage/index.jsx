@@ -18,7 +18,6 @@ import { LoadingAnimation } from '@bufferapp/components';
 const profilePageStyle = {
   display: 'flex',
   flexGrow: 1,
-  height: '100%',
 };
 
 const profileSideBarStyle = {
@@ -33,7 +32,7 @@ const contentStyle = {
   flexDirection: 'column',
   marginLeft: '0.5rem',
   marginRight: '1rem',
-  height: '100vh',
+  minHeight: '100%',
 };
 
 const loadingAnimationStyle = {
