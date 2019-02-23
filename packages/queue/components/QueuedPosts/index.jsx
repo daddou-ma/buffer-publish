@@ -25,6 +25,28 @@ const composerStyle = {
   flexGrow: '1',
 };
 
+const composerInputStyle = {
+  alignItems: 'center',
+  border: '1px solid #B8B8B8',
+  borderRadius: '4px',
+  boxShadow: '0 1px 4px rgba(0,0,0,.16)',
+  color: '#999999',
+  cursor: 'pointer',
+  display: 'flex',
+  fontFamily: 'Roboto',
+  fontSize: '14px',
+  height: '48px',
+  paddingLeft: '16px',
+  paddingRight: '16px',
+};
+
+const composerInputIcoCameraStyle = {
+  background: 'url("https://s3.amazonaws.com/buffer-publish/images/ico-camera.svg") no-repeat',
+  width: '16px',
+  height: '16px',
+  marginLeft: 'auto',
+}
+
 const topBarContainerStyle = {
   display: 'flex',
 };
@@ -131,10 +153,12 @@ const QueuedPosts = ({
               type={'queue'}
             />
           }
-          <Input
-            placeholder={'What would you like to share?'}
-            onFocus={onComposerPlaceholderClick}
-          />
+          <div
+            style={composerInputStyle}
+            onClick={onComposerPlaceholderClick}>
+            What would you like to share?
+            <div style={composerInputIcoCameraStyle}></div>
+          </div>
         </div>
         <FeatureLoader
           supportedFeatures={'mini_calendar'}
