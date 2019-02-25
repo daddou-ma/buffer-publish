@@ -5,6 +5,4 @@
 ### Review
 
 #### Staging Deployment
-
-_This repo is CI/CD enabled and staging deployment should be available at:
-https://<branch_name>.publish.buffer.com :smile:_
+To visit the URL of the staging deployment, please click "Show all checks" at the bottom of this PR and click "details" next to `bufferbotbrains/cicd-buffer-publish-legacy`
