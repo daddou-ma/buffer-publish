@@ -32,7 +32,6 @@ const TabNavigation = ({
   profileId,
   isLockedProfile,
   isInstagramProfile,
-  hasPastRemindersFeatureFlip,
 }) => {
   const selectedChildTab = selectedChildTabId || 'general-settings';
   return (
@@ -45,7 +44,7 @@ const TabNavigation = ({
       >
         <Tab tabId={'queue'}>Queue</Tab>
         <Tab tabId={'sent'}>Sent Posts</Tab>
-        {isInstagramProfile && hasPastRemindersFeatureFlip &&
+        {isInstagramProfile &&
           <Tab tabId={'pastReminders'}>Past Reminders</Tab>
         }
         {!features.isFreeUser() && <Tab tabId={'analytics'}>Analytics</Tab>}
@@ -117,7 +116,6 @@ TabNavigation.defaultProps = {
   profileId: null,
   isLockedProfile: false,
   isInstagramProfile: false,
-  hasPastRemindersFeatureFlip: false,
   isBusinessAccount: false,
 };
 
@@ -135,7 +133,6 @@ TabNavigation.propTypes = {
   profileId: PropTypes.string,
   isLockedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
-  hasPastRemindersFeatureFlip: PropTypes.bool,
 };
 
 export default WithFeatureLoader(TabNavigation);
