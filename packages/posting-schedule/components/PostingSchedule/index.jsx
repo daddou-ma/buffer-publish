@@ -161,7 +161,7 @@ const PostingSchedule = ({
                 onClick={onUnpauseClick}
                 small
               >
-                Unpause Queue
+                Resume Queue
               </Button>
             </div>
           </div> :
