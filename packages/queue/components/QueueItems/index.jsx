@@ -73,7 +73,6 @@ const renderPost = ({
   const defaultStyle = {
     default: {
       marginBottom: '2rem',
-      maxHeight: '100vh',
       transition: `all ${transitionAnimationTime} ${transitionAnimationType}`,
     },
     hidden: {
