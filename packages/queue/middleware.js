@@ -25,6 +25,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         },
       }));
       break;
+    case `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `updatePausedSchedules_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(dataFetchActions.fetch({
