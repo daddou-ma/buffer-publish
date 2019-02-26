@@ -136,12 +136,10 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     case `updatePausedSchedules_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      if (action.result.showNotification) {
-        dispatch(notificationActions.createNotification({
-          notificationType: 'success',
-          message: action.result.message,
-        }));
-      }
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: 'Awesome! Your schedule has been successfully saved.',
+      }));
       break;
     case `updatePausedSchedules_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
