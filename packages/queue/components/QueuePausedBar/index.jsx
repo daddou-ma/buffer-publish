@@ -43,7 +43,7 @@ const QueuePausedBar = ({ handleClickUnpause }) => (
           small
           onClick={handleClickUnpause}
         >
-          Resume queue
+          Resume Queue
         </Button>
         <Button
           small
