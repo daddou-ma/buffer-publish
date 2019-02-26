@@ -46,7 +46,7 @@ const postingTimesSection = {
   flexWrap: 'wrap',
   marginTop: '1.5rem',
   marginBottom: '1.5rem',
-}
+};
 
 const postingTimesStyle = {
   margin: '0 auto 0 0',
@@ -76,16 +76,15 @@ const pauseButtonContainerStyle = {
 
 const tableStyle = {
   flexBasis: '100%',
-}
+};
 
 const timezoneAndPauseContainerStyle = {
   display: 'flex',
   flexDirection: 'row',
-}
+};
 
 /* eslint no-console: 0 */
 const PostingSchedule = ({
-  childTabId,
   days,
   items,
   loading,
@@ -230,9 +229,9 @@ const PostingSchedule = ({
           </Text>
         </div>
         {!emptySchedule &&
-            <Button secondary onClick={onClearAllClick}>
-              Clear all Posting Times
-            </Button>}
+          <Button secondary onClick={onClearAllClick}>
+            Clear all Posting Times
+          </Button>}
         {showClearAllModal && <Popover
           onOverlayClick={closePopover}
         >

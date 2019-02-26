@@ -54,7 +54,6 @@ const PostingTimeForm = ({
   handleSubmit,
   submitting,
   twentyfourHourTime,
-  fontSize,
 }) => (
   <form>
     <div style={editScheduleStyle}>
