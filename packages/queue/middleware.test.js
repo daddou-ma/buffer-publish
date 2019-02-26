@@ -70,6 +70,26 @@ describe('middleware', () => {
       }));
   });
 
+  it('should fetch queuedPosts if updateSchedule is successful', () => {
+    const action = {
+      type: `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`,
+      args: {
+        profileId: 'id1',
+      },
+    };
+    middleware({ dispatch })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(dataFetchActions.fetch({
+        name: 'queuedPosts',
+        args: {
+          profileId: action.args.profileId,
+          isFetchingMore: false,
+        },
+      }));
+  });
+
   it('should trigger a notification for COMPOSER_EVENT in case of success', () => {
     const action = {
       type: 'COMPOSER_EVENT',
