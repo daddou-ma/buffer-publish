@@ -561,10 +561,10 @@
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-parsers@1.13.4":
-  version "1.13.4"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.13.4.tgz#ce72126900178db823715c5fa5bc3694cea500c8"
-  integrity sha512-pEOFOqYUqkOLXbHZxvc+SWtxUiyfpNdCzv546XyUfC70w3Pv8exNyzr0a+vZDA4hIOTkwbrcph5Oz3hK8Emj+A==
+"@bufferapp/publish-parsers@1.14.1":
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.14.1.tgz#513f61a9cc5f08d988b4902fde4a6810f6bd715a"
+  integrity sha512-ugXncIg6spKoT047OZqqarbbjD2L8Wso3+kV5g/Sl9gGzwHP/9SfAM1WCWZTqagObt/sencDvdyabdsqjVOx2w==
   dependencies:
     "@bufferapp/publish-formatters" "1.9.29"
     twitter-text "3.0.0"
