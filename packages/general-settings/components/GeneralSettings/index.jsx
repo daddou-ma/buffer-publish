@@ -88,6 +88,7 @@ const GeneralSettings = ({
       />
       <Divider />
       <GoogleAnalytics
+        isContributor={isContributor}
         onShowGACustomizationFormClick={onShowGACustomizationFormClick}
         showGACustomizationForm={showGACustomizationForm}
         googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
