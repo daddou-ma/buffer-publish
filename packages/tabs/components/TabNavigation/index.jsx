@@ -57,12 +57,12 @@ const TabNavigation = ({
         {!features.isFreeUser() &&
           <Tab tabId={'drafts'}>Drafts</Tab>
         }
-        <Tab tabId={'settings'}>Settings</Tab>
         <FeatureLoader supportedFeatures={'b4b_calendar'}>
           <Tab tabId={'b4bCalendar'} onClick={() => openCalendarWindow(profileId)}>
             Calendar
           </Tab>
         </FeatureLoader>
+        <Tab tabId={'settings'}>Settings</Tab>
       </Tabs>
       {shouldShowUpgradeCta &&
         <div style={upgradeCtaStyle}>
