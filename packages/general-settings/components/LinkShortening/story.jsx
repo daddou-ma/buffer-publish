@@ -61,4 +61,15 @@ storiesOf('LinkShortener', module)
       features={features}
       profileService="pinterest"
     />
+  ))
+  .add('Options disabled if isContributor', () => (
+    <LinkShortener
+      features={features}
+      onConnectBitlyURLClick={() => {}}
+      onDisconnectBitlyURLClick={() => {}}
+      linkShorteners={linkList}
+      onOptionSelect={() => {}}
+      loading={false}
+      isContributor
+    />
   ));

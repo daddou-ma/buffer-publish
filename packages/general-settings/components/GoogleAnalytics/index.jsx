@@ -80,6 +80,7 @@ const GoogleAnalytics = ({
   onChangeUtmSource,
   utmMedium,
   onChangeUtmMedium,
+  isContributor,
   }) => (
     <div style={googleAnalyticsWrapperStyle}>
       <div style={headerTextWrapperStyle}>
@@ -117,6 +118,7 @@ const GoogleAnalytics = ({
         </div>
         <div style={switchStyle}>
           <Toggle
+            disabled={isContributor}
             onText={'Enabled'}
             offText={'Disabled'}
             on={googleAnalyticsIsEnabled}
@@ -232,6 +234,7 @@ GoogleAnalytics.propTypes = {
   utmCampaign: PropTypes.string,
   utmSource: PropTypes.string,
   utmMedium: PropTypes.string,
+  isContributor: PropTypes.bool.isRequired,
 };
 
 export default reduxForm({

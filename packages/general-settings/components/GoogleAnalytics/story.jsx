@@ -37,6 +37,7 @@ storiesOf('GoogleAnalytics', module)
   .addDecorator(UpgradeModalDecorator)
   .add('default', () => (
     <GoogleAnalytics
+      isContributor={false}
       googleAnalyticsIsEnabled={false}
       showGACustomizationForm={false}
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
@@ -50,8 +51,9 @@ storiesOf('GoogleAnalytics', module)
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
   ))
-  .add('google analytics is enabled', () => (
+  .add('is enabled', () => (
     <GoogleAnalytics
+      isContributor={false}
       googleAnalyticsIsEnabled
       showGACustomizationForm={false}
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
@@ -67,8 +69,25 @@ storiesOf('GoogleAnalytics', module)
   ))
   .add('the customisation form is shown', () => (
     <GoogleAnalytics
+      isContributor={false}
       googleAnalyticsIsEnabled
       showGACustomizationForm
+      onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
+      onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
+      onChangeUtmCampaign={action('onChangeUtmCampaign')}
+      onChangeUtmSource={action('onChangeUtmSource')}
+      onChangeUtmMedium={action('onChangeUtmMedium')}
+      utmCampaign={'buffer'}
+      utmSource={'source'}
+      utmMedium={'medium'}
+      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
+    />
+  ))
+  .add('is disabled for Contributors', () => (
+    <GoogleAnalytics
+      isContributor
+      googleAnalyticsIsEnabled
+      showGACustomizationForm={false}
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
