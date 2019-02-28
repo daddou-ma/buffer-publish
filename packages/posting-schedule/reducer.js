@@ -56,6 +56,7 @@ const initialState = {
   profileType: '',
   profileService: '',
   avatar: '',
+  isManager: null,
 };
 
 export default (state = initialState, action) => {
@@ -83,6 +84,7 @@ export default (state = initialState, action) => {
         profileType: action.profile.service_type,
         profileService: action.profile.service,
         avatar: action.profile.avatarUrl,
+        isManager: action.profile.isManager,
       };
     case profileActionTypes.PROFILE_PAUSED:
       if (action.profileId === state.profileId) {

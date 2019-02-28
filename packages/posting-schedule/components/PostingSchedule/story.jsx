@@ -35,6 +35,8 @@ storiesOf('PostingSchedule', module)
   )
   .add('default', () => (
     <PostingSchedule
+      isManager
+      scheduleLoading={false}
       postingScheduleHeader={settingsHeader}
       days={days}
       hasTwentyFourHourTimeFormat={false}
@@ -42,5 +44,52 @@ storiesOf('PostingSchedule', module)
       items={timezones}
       profileTimezone={profileTimezone}
       onUpdateTime={action('on-update-time')}
+      onRemoveTimeClick={action('on-remove-time-click')}
+      onAddPostingTime={action('on-update-time')}
+      onUpdateTimezone={action('on-update-timezone')}
+      onTimezoneInputFocus={action('on-timezone-input-focus')}
+      onTimezoneInputBlur={action('on-timezone-input-blur')}
+      onPauseToggleClick={action('on-pause-toggle-click')}
+      paused={false}
+      onPauseClick={action('on-pause-click')}
+      onUnpauseClick={action('on-unpause-click')}
+      showClearAllModal={false}
+      onClearAllClick={action('on-clear-all-click')}
+      onGetTimezones={action('on-get-timezones')}
+      profileName="Joel"
+      profileType="profile"
+      onConfirmClearClick={action('on-confirm-clear-click')}
+      onCancelClearClick={action('on-cancel-clear-click')}
+      profileService="twitter"
+    />
+  ))
+  .add('isContributor', () => (
+    <PostingSchedule
+      isManager={false}
+      scheduleLoading={false}
+      postingScheduleHeader={settingsHeader}
+      days={days}
+      hasTwentyFourHourTimeFormat={false}
+      initialValues={initialValues}
+      items={timezones}
+      profileTimezone={profileTimezone}
+      onUpdateTime={action('on-update-time')}
+      onRemoveTimeClick={action('on-remove-time-click')}
+      onAddPostingTime={action('on-update-time')}
+      onUpdateTimezone={action('on-update-timezone')}
+      onTimezoneInputFocus={action('on-timezone-input-focus')}
+      onTimezoneInputBlur={action('on-timezone-input-blur')}
+      onPauseToggleClick={action('on-pause-toggle-click')}
+      paused={false}
+      onPauseClick={action('on-pause-click')}
+      onUnpauseClick={action('on-unpause-click')}
+      showClearAllModal={false}
+      onClearAllClick={action('on-clear-all-click')}
+      onGetTimezones={action('on-get-timezones')}
+      profileName="Joel"
+      profileType="profile"
+      onConfirmClearClick={action('on-confirm-clear-click')}
+      onCancelClearClick={action('on-cancel-clear-click')}
+      profileService="twitter"
     />
   ));

@@ -52,6 +52,7 @@ let TimezoneInputForm = ({
   onTimezoneInputFocus,
   onTimezoneInputBlur,
   onTimezoneChange,
+  disabled,
 }) => (
   <form>
     <div style={editTimezoneStyle}>
@@ -70,6 +71,7 @@ let TimezoneInputForm = ({
             <Field
               name="timezone"
               component={InputAutocomplete}
+              disabled={disabled}
               items={items}
               placeholder={'Type a city...'}
               onChange={onTimezoneChange}
@@ -93,6 +95,7 @@ TimezoneInputForm.propTypes = {
   onTimezoneInputFocus: PropTypes.func.isRequired,
   onTimezoneInputBlur: PropTypes.func.isRequired,
   onTimezoneChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 TimezoneInputForm.defaultProps = {

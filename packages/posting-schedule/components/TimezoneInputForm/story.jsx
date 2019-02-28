@@ -66,18 +66,6 @@ const items = [
   'Wyoming',
 ];
 
-function sortStates(a, b, value) {
-  const aLower = a.toLowerCase();
-  const bLower = b.toLowerCase();
-  const valueLower = value.toLowerCase();
-  const queryPosA = aLower.indexOf(valueLower);
-  const queryPosB = bLower.indexOf(valueLower);
-  if (queryPosA !== queryPosB) {
-    return queryPosA - queryPosB;
-  }
-  return aLower < bLower ? -1 : 1;
-}
-
 storiesOf('TimezoneInputForm', module)
   .addDecorator(checkA11y)
   .addDecorator(getStory =>
@@ -91,6 +79,21 @@ storiesOf('TimezoneInputForm', module)
       items={items}
       onChange={action('on-change-action')}
       onSelect={action('select-action')}
-      sortItems={sortStates}
+      onTimezoneInputFocus={action('on-timezone-input-focus')}
+      onTimezoneInputBlur={action('on-timezone-input-blur')}
+      onTimezoneChange={action('on-timezone-change')}
+      disabled={false}
+    />
+  ))
+  .add('disabled', () => (
+    <TimezoneInputForm
+      handleSubmit={action('on-submit-action')}
+      items={items}
+      onChange={action('on-change-action')}
+      onSelect={action('select-action')}
+      onTimezoneInputFocus={action('on-timezone-input-focus')}
+      onTimezoneInputBlur={action('on-timezone-input-blur')}
+      onTimezoneChange={action('on-timezone-change')}
+      disabled
     />
   ));

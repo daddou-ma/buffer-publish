@@ -24,6 +24,7 @@ export default connect(
     profileType: state.postingSchedule.profileType,
     profileService: state.postingSchedule.profileService,
     avatar: state.postingSchedule.avatar,
+    isManager: state.postingSchedule.isManager,
   }),
   (dispatch, ownProps) => ({
     onRemoveTimeClick: (hours, minutes, dayName, timeIndex, paused) => {
