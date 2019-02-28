@@ -207,7 +207,7 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  // DRAFT_APPROVED
+  // DRAFT_APPROVED.
   it('should handle DRAFT_APPROVED action type', () => {
     const draft = { id: '12345', text: 'i love buffer so much' };
     const stateAfter = {
