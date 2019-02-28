@@ -24,6 +24,10 @@ const wrapperSidebarStyle = {
   minWidth: '175px',
 };
 
+const optionOnlyStyle = {
+  alignSelf: 'center',
+};
+
 const loadingContainerStyle = {
   ...wrapperSidebarStyle,
   paddingTop: '1.5rem',
@@ -49,6 +53,7 @@ const LinkShorteningWrapper = ({
     onConnectBitlyURLClick,
     onDisconnectBitlyURLClick,
     isBitlyConnected,
+    isContributor,
   }) => {
   const selectedValue = selectedShortener || (linkList && linkList.filter(ll => ll.selected));
 
@@ -79,7 +84,8 @@ const LinkShorteningWrapper = ({
         <div
           style={{
             ...wrapperSidebarStyle,
-            ...(showConnectBitly ? bitlyWrapperSidebarStyle : {}),
+            ...bitlyWrapperSidebarStyle,
+            ...((!showConnectBitly || isFreeUser) ? optionOnlyStyle : ''),
           }}
         >
           <div>
@@ -88,6 +94,7 @@ const LinkShorteningWrapper = ({
               onChange={onOptionSelect}
               value={selectedValue && selectedValue[0].value}
               size={'small'}
+              disabled={isContributor}
             />
           </div>
           <ConnectBitlyToggler
@@ -140,6 +147,7 @@ LinkShorteningWrapper.propTypes = {
   showConnectBitly: PropTypes.bool,
   isBitlyConnected: PropTypes.bool,
   isFreeUser: PropTypes.func.isRequired,
+  isContributor: PropTypes.bool.isRequired,
 };
 
 export default LinkShorteningWrapper;

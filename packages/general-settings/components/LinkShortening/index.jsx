@@ -73,6 +73,7 @@ const LinkShortening = ({
       onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
       showConnectBitly={!isContributor}
       isBitlyConnected={isBitlyConnected}
+      isContributor={isContributor}
     >
       <div style={textWrapperStyle}>
         <Text size="small">
