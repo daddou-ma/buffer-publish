@@ -14,7 +14,8 @@
     "storybook": "start-storybook -p 9001",
     "watch": "webpack-dev-server --config ./packages/server/webpack.config.dev.js --colors --display-error-details --progress",
     "build": "webpack --config ./packages/server/webpack.config.prod.js --output-path=`pwd`",
-    "bugsnag:release": "node ./packages/server/scripts/bugsnag-release.js"
+    "bugsnag:release": "node ./packages/server/scripts/bugsnag-release.js",
+    "rebuild-grpc": "docker exec -it bufferdev_publish_1 bash -c 'npm rebuild grpc --target_arch=x64 --target_platform=linux --target_libc=glibc'"
   },
   "repository": {
     "type": "git",
