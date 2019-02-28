@@ -2,6 +2,8 @@ import React from 'react';
 import bugsnag from '@bugsnag/js';
 import bugsnagReact from '@bugsnag/plugin-react';
 
+import BoundaryFallback from './errorComponent';
+
 let BugsnagErrorBoundary;
 
 /**
@@ -12,7 +14,7 @@ if (window._bugsnagConfig) {
   window.bugsnagClient = bugsnag({
     // Grab the config dropped in by the express server
     ...window._bugsnagConfig,
-// Remove FullStory integration for now (request from Super, Feb 6 2019)    
+// Remove FullStory integration for now (request from Super, Feb 6 2019)
 //     beforeSend: (report) => {
 //       // Make sure FullStory object exists
 //       if (window.FS && window.FS.getCurrentSessionURL) {
@@ -30,7 +32,11 @@ if (window._bugsnagConfig) {
 
 const getErrorBoundary = () => {
   if (BugsnagErrorBoundary) {
-    return BugsnagErrorBoundary;
+    return ({ children }) => ( // eslint-disable-line
+      <BugsnagErrorBoundary FallbackComponent={BoundaryFallback}>
+        {children}
+      </BugsnagErrorBoundary>
+    );
   }
   return React.Fragment; // no-op component
 };

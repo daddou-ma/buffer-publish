@@ -22,14 +22,47 @@ const bdsButtonStyle = {
     pointerEvents: 'none',
     color: 'rgb(119, 121, 122)',
     background: 'rgb(224, 224, 224)',
+    boxShadow: 'none',
+  },
+  focus: {
+    boxShadow: 'rgb(171, 183, 255) 0px 0px 0px 3px',
+    background: 'rgb(31, 53, 179)',
+  },
+  // Types
+  normal: {},
+  small: {
+    padding: '12px 16px',
+  },
+  textOnly: {
+    background: 'none',
+    boxShadow: 'none',
+    color: '#636363',
+  },
+  textOnly_hover: {
+    background: 'none',
+    boxShadow: 'none',
+    color: '#000',
   },
 };
-const getBdsButtonStyle = (hover, loading) => {
+const getBdsButtonStyle = ({ state, props }) => {
   let style = bdsButtonStyle.base;
-  if (hover) {
-    style = { ...style, ...bdsButtonStyle.hover };
+  if (state.focus) {
+    style = { ...style, ...bdsButtonStyle.focus };
   }
-  if (loading) {
+  if (props.type) {
+    props.type.split(' ').forEach((type) => {
+      style = { ...style, ...bdsButtonStyle[type] };
+    });
+  }
+  if (state.hover) {
+    style = { ...style, ...bdsButtonStyle.hover };
+    props.type.split(' ').forEach((type) => {
+      if (bdsButtonStyle[type] && bdsButtonStyle[`${type}_hover`]) {
+        style = { ...style, ...bdsButtonStyle[`${type}_hover`] };
+      }
+    });
+  }
+  if (state.loading) {
     style = { ...style, ...bdsButtonStyle.loading };
   }
   return style;
@@ -38,7 +71,7 @@ const getBdsButtonStyle = (hover, loading) => {
 class BDSButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hover: false, loading: false };
+    this.state = { hover: false, active: false, loading: false };
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
@@ -52,13 +85,14 @@ class BDSButton extends React.Component {
 
   render() {
     const { children } = this.props;
-    const { hover, loading } = this.state;
     return (
       <button
         onClick={this.handleOnClick}
         onMouseOver={() => this.setState({ hover: true })}
         onMouseOut={() => this.setState({ hover: false })}
-        style={getBdsButtonStyle(hover, loading)}
+        onFocus={() => this.setState({ focus: true })}
+        onBlur={() => this.setState({ focus: false })}
+        style={getBdsButtonStyle({ state: this.state, props: this.props })}
       >
         {children}
       </button>
@@ -69,6 +103,11 @@ class BDSButton extends React.Component {
 BDSButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
+  type: PropTypes.string, // eslint-disable-line
+};
+
+BDSButton.defaultProps = {
+  type: 'normal',
 };
 
 export default BDSButton;

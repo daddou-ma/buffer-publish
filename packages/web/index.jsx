@@ -6,7 +6,6 @@ import { ConnectedRouter as Router } from 'react-router-redux';
 import createStore, { history } from '@bufferapp/publish-store';
 import App from './components/App';
 import getErrorBoundary from './components/ErrorBoundary';
-import BoundaryFallback from './components/ErrorBoundary/errorComponent';
 
 const store = createStore();
 
@@ -17,7 +16,7 @@ store.dispatch({
 const ErrorBoundary = getErrorBoundary();
 
 render(
-  <ErrorBoundary FallbackComponent={BoundaryFallback}>
+  <ErrorBoundary>
     <Provider store={store}>
       <Router history={history}>
         <App />

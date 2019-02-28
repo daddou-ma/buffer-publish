@@ -45,6 +45,8 @@ const getGATrackingSettings = require('./getGATrackingSettings');
 const toggleInstagramReminders = require('./toggleInstagramReminders');
 const mobileReminder = require('./mobileReminder');
 const setNotifications = require('./setNotifications');
+const readMessage = require('./readMessage');
+
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
 const average = require('./analytics/average');
@@ -107,4 +109,5 @@ module.exports = rpc(
   toggleInstagramReminders,
   mobileReminder,
   setNotifications,
+  readMessage,
 );
