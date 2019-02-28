@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  Input,
   Button,
 } from '@bufferapp/components';
 import {
@@ -45,7 +44,7 @@ const composerInputIcoCameraStyle = {
   width: '16px',
   height: '16px',
   marginLeft: 'auto',
-}
+};
 
 const topBarContainerStyle = {
   display: 'flex',
@@ -104,6 +103,7 @@ const QueuedPosts = ({
   isInstagramLoading,
   isLockedProfile,
   features,
+  isManager,
   onClickUpgrade,
 }) => {
   if (loading) {
@@ -195,7 +195,7 @@ const QueuedPosts = ({
           onCheckInstagramBusinessClick={onCheckInstagramBusinessClick}
         />
       }
-      {!!paused && <QueuePausedBar handleClickUnpause={onUnpauseClick} />}
+      {!!paused && <QueuePausedBar isManager={isManager} handleClickUnpause={onUnpauseClick} />}
       {total < 1 &&
         <EmptyState
           title="It looks like you haven't got any posts in your queue!"
@@ -270,6 +270,7 @@ QueuedPosts.propTypes = {
     PropTypes.object,
     PropTypes.array,
   ]),
+  isManager: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,

@@ -67,6 +67,7 @@ export default connect(
         isInstagramProfile: profileData.type === 'instagram',
         isInstagramBusiness: profileData.isInstagramBusiness,
         paused: profileData.paused,
+        isManager: profileData.isManager,
         showInstagramModal: state.queue.showInstagramModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
         isInstagramLoading: state.queue.isInstagramLoading,

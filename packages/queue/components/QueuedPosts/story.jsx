@@ -79,7 +79,7 @@ storiesOf('QueuedPosts', module)
       onRequeueClick={action('onRequeueClick')}
     />
   ))
-  .add('paused', () => (
+  .add('paused if Manager', () => (
     <QueuedPosts
       total={10}
       loading={false}
@@ -91,6 +91,7 @@ storiesOf('QueuedPosts', module)
       onShareNowClick={action('onShareNowClick')}
       paused
       onUnpauseClick={action('onUnpauseClick')}
+      isManager
     />
   ))
   .add('locked profile', () => (
