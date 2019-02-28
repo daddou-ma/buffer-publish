@@ -7,6 +7,15 @@ import QueuePausedBar from './index';
 
 storiesOf('QueuePausedBar', module)
   .addDecorator(checkA11y)
-  .add('default', () => (
-    <QueuePausedBar handleClickUnpause={action('handleClickUnpause')} />
+  .add('isManager', () => (
+    <QueuePausedBar
+      isManager
+      handleClickUnpause={action('handleClickUnpause')}
+    />
+  ))
+  .add('isContributor', () => (
+    <QueuePausedBar
+      isManager={false}
+      handleClickUnpause={action('handleClickUnpause')}
+    />
   ));
