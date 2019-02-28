@@ -44,7 +44,7 @@ storiesOf('ScheduleTableColumn', module)
       onPauseToggleClick={action('on-pause-toggle-click')}
     />
   ))
-  .add('pasued', () => (
+  .add('paused', () => (
     <ScheduleTableColumn
       dayName={dayName}
       paused

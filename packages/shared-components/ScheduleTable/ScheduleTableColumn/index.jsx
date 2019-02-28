@@ -44,6 +44,7 @@ const ScheduleTableColumn = ({
 }) => (
   <div style={(times.length === 0) ? columnNoTimesStyle : columnStyle}>
     <ScheduleTableHeader
+      disabled={disabled}
       dayName={dayName}
       paused={paused}
       times={times}
