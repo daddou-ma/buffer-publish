@@ -7,6 +7,7 @@ import createStore, { history } from '@bufferapp/publish-store';
 import App from './components/App';
 import getErrorBoundary from './components/ErrorBoundary';
 import BoundaryFallback from './components/ErrorBoundary/errorComponent';
+import UnsupportedBrowserMessage from './components/UnsupportedBrowserMessage';
 
 const store = createStore();
 
@@ -16,13 +17,19 @@ store.dispatch({
 
 const ErrorBoundary = getErrorBoundary();
 
-render(
-  <ErrorBoundary FallbackComponent={BoundaryFallback}>
-    <Provider store={store}>
-      <Router history={history}>
-        <App />
-      </Router>
-    </Provider>
-  </ErrorBoundary>,
-  document.getElementById('root'),
-);
+const isIE11orLower = window.navigator.userAgent.match(/(MSIE|Trident)/);
+
+if (isIE11orLower) {
+  render(<UnsupportedBrowserMessage />, document.getElementById('root'));
+} else {
+  render(
+    <ErrorBoundary FallbackComponent={BoundaryFallback}>
+      <Provider store={store}>
+        <Router history={history}>
+          <App />
+        </Router>
+      </Provider>
+    </ErrorBoundary>,
+    document.getElementById('root'),
+  );
+}
