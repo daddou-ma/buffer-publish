@@ -93,5 +93,4 @@ storiesOf('TabNavigation', module)
       shouldShowUpgradeCta={false}
       onUpgradeButtonClick={action('on-upgrade-button-click')}
     />
-  ))
-  ;
+  ));

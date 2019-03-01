@@ -47,15 +47,19 @@ const TabNavigation = ({
         {isInstagramProfile &&
           <Tab tabId={'pastReminders'}>Past Reminders</Tab>
         }
+        {/* Pro and up users or Team Members */}
         {(!features.isFreeUser() || isBusinessAccount) &&
           <Tab tabId={'analytics'}>Analytics</Tab>
         }
+        {/* Team Members who are Managers */}
         {isBusinessAccount && isManager &&
           <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
         }
+        {/* Team Members who are Contributors */}
         {isBusinessAccount && !isManager &&
           <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
         }
+        {/* Pro and up users or Team Members */}
         {(!features.isFreeUser() || isBusinessAccount) &&
           <Tab tabId={'drafts'}>Drafts</Tab>
         }
