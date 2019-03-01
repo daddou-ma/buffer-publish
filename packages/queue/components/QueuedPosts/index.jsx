@@ -163,7 +163,7 @@ const QueuedPosts = ({
         <FeatureLoader
           supportedFeatures={'mini_calendar'}
         >
-          <div style={buttonStyle}>
+          <div style={buttonStyle} className="fs--mini-calendar">
             <Button
               secondary
               onClick={onCalendarToggleClick}
