@@ -21,7 +21,7 @@ const iconWrapperStyle = {
 
 /* eslint-disable react/prop-types */
 
-const RemoveButton = (time, onRemoveTimeClick, buttonStyle) => (
+const RemoveButton = ({ time, onRemoveTimeClick, buttonStyle }) => (
   <div style={buttonStyle}>
     <Button onClick={() => onRemoveTimeClick(time)} noStyle label="remove time">
       <div style={iconWrapperStyle}>
@@ -31,15 +31,12 @@ const RemoveButton = (time, onRemoveTimeClick, buttonStyle) => (
   </div>
 );
 
-
 const TableCellContents = ({
   disabled,
   hovered,
   select24Hours,
   time,
   onRemoveTimeClick,
-  onUpdateTime,
-  fontSize,
 }) => {
   const buttonStyle = calculateStyles({
     default: {
@@ -77,7 +74,14 @@ const TableCellContents = ({
           fontSize={'small'}
         />
       </div>
-      {RemoveButton(time, onRemoveTimeClick, buttonStyle)}
+      {!disabled &&
+        <RemoveButton
+          time={time}
+          onRemoveTimeClick={onRemoveTimeClick}
+          buttonStyle={buttonStyle}
+          disabled={disabled}
+        />
+      }
     </div>
   );
 };

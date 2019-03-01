@@ -10,6 +10,7 @@ storiesOf('ScheduleTableHeader', module)
   .add('default', () => (
     <ScheduleTableHeader
       dayName={dayName}
+      disabled={false}
       paused={false}
       onPauseToggleClick={action('on-pause-toggle-click')}
     />
@@ -17,7 +18,16 @@ storiesOf('ScheduleTableHeader', module)
   .add('paused', () => (
     <ScheduleTableHeader
       dayName={dayName}
+      disabled={false}
       paused
+      onPauseToggleClick={action('on-pause-toggle-click')}
+    />
+  ))
+  .add('disabled', () => (
+    <ScheduleTableHeader
+      dayName={dayName}
+      disabled
+      paused={false}
       onPauseToggleClick={action('on-pause-toggle-click')}
     />
   ));

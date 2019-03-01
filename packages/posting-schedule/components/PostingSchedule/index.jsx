@@ -111,6 +111,7 @@ const PostingSchedule = ({
   closePopover,
   avatar,
   profileService,
+  isManager,
 }) => {
   if (loading) {
     return (
@@ -144,9 +145,10 @@ const PostingSchedule = ({
             onTimezoneChange={debouncedOnChange}
             onTimezoneInputFocus={onTimezoneInputFocus}
             onTimezoneInputBlur={onTimezoneInputBlur}
+            disabled={!isManager}
           />
         </div>
-        {paused ?
+        {isManager && paused &&
           <div style={pauseQueueContainerStyle}>
             <Text size="small">
               Your queue has been paused&nbsp;
@@ -164,7 +166,9 @@ const PostingSchedule = ({
                 Resume Queue
               </Button>
             </div>
-          </div> :
+          </div>
+        }
+        {isManager && !paused &&
           <div style={pauseQueueContainerStyle}>
             <Text size="small">
               Stop all posts from being sent on this Social Account?&nbsp;
@@ -185,27 +189,31 @@ const PostingSchedule = ({
           </div>
         }
       </div>
-      <Divider />
-      <div style={sectionStyle}>
-        <PostingTimeForm
-          onSubmit={({ day, time }) => {
-            // spreading props so we don't modify the original object
-            let { hours, minutes } = time;
-            // check for null
-            hours = hours || 0;
-            minutes = minutes || 0;
+      {isManager &&
+        <span>
+          <Divider />
+          <div style={sectionStyle}>
+            <PostingTimeForm
+              onSubmit={({ day, time }) => {
+                // spreading props so we don't modify the original object
+                let { hours, minutes } = time;
+                // check for null
+                hours = hours || 0;
+                minutes = minutes || 0;
 
-            hours = parseInt(hours, 10) < 10 ? `0${hours}` : hours;
-            minutes = parseInt(minutes, 10) < 10 ? `0${minutes}` : minutes;
+                hours = parseInt(hours, 10) < 10 ? `0${hours}` : hours;
+                minutes = parseInt(minutes, 10) < 10 ? `0${minutes}` : minutes;
 
-            onAddPostingTime({
-              day,
-              time: { hours, minutes },
-            });
-          }}
-          twentyfourHourTime={hasTwentyFourHourTimeFormat}
-        />
-      </div>
+                onAddPostingTime({
+                  day,
+                  time: { hours, minutes },
+                });
+              }}
+              twentyfourHourTime={hasTwentyFourHourTimeFormat}
+            />
+          </div>
+        </span>
+      }
       <Divider />
       <div style={postingTimesSection}>
         <div style={postingTimesStyle}>
@@ -228,7 +236,7 @@ const PostingSchedule = ({
             </div>
           </Text>
         </div>
-        {!emptySchedule &&
+        {!emptySchedule && isManager &&
           <Button secondary onClick={onClearAllClick}>
             Clear all Posting Times
           </Button>}
@@ -261,6 +269,7 @@ const PostingSchedule = ({
             />}
           {!emptySchedule &&
             <ScheduleTable
+              disabled={!isManager}
               days={days}
               select24Hours={hasTwentyFourHourTimeFormat}
               onRemoveTimeClick={onRemoveTimeClick}
@@ -318,6 +327,7 @@ PostingSchedule.propTypes = {
   closePopover: PropTypes.func,
   avatar: PropTypes.string,
   profileService: PropTypes.string.isRequired,
+  isManager: PropTypes.bool.isRequired,
 };
 
 PostingSchedule.defaultProps = {

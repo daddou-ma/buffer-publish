@@ -10,73 +10,18 @@ import {
 
 import TimezoneInputForm from './index';
 
-const settings = (state, _) => ({ profileTimezone: 'America/Vancouver' }); // eslint-disable-line
+const settings = (state, _) => ({ profileTimezone: 'Pacific/Midway' }); // eslint-disable-line
 const store = createStore(combineReducers({ form, settings }));
 
 const items = [
-  'Alabama',
-  'Alaska',
-  'Arizona',
-  'Arkansas',
-  'California',
-  'Colorado',
-  'Connecticut',
-  'Delaware',
-  'Florida',
-  'Georgia',
-  'Hawaii',
-  'Idaho',
-  'Illinois',
-  'Indiana',
-  'Iowa',
-  'Kansas',
-  'Kentucky',
-  'Louisiana',
-  'Maine',
-  'Maryland',
-  'Massachusetts',
-  'Michigan',
-  'Minnesota',
-  'Mississippi',
-  'Missouri',
-  'Montana',
-  'Nebraska',
-  'Nevada',
-  'New Hampshire',
-  'New Jersey',
-  'New Mexico',
-  'New York',
-  'North Carolina',
-  'North Dakota',
-  'Ohio',
-  'Oklahoma',
-  'Oregon',
-  'Pennsylvania',
-  'Rhode Island',
-  'South Carolina',
-  'South Dakota',
-  'Tennessee',
-  'Texas',
-  'Utah',
-  'Vermont',
-  'Virginia',
-  'Washington',
-  'West Virginia',
-  'Wisconsin',
-  'Wyoming',
+  { label: 'Pacific/Midway', timezone: 'Pacific/Midway' },
+  { label: 'America/Adak', timezone: 'America/Adak' },
+  { label: 'America/Anchorage', timezone: 'America/Anchorage' },
+  { label: 'Pacific/Gambier', timezone: 'Pacific/Gambier' },
+  { label: 'America/Dawson_Creek', timezone: 'America/Dawson_Creek' },
+  { label: 'Pacific/Auckland', timezone: 'Pacific/Auckland' },
+  { label: 'Pacific/Chatham', timezone: 'Pacific/Chatham' },
 ];
-
-function sortStates(a, b, value) {
-  const aLower = a.toLowerCase();
-  const bLower = b.toLowerCase();
-  const valueLower = value.toLowerCase();
-  const queryPosA = aLower.indexOf(valueLower);
-  const queryPosB = bLower.indexOf(valueLower);
-  if (queryPosA !== queryPosB) {
-    return queryPosA - queryPosB;
-  }
-  return aLower < bLower ? -1 : 1;
-}
 
 storiesOf('TimezoneInputForm', module)
   .addDecorator(checkA11y)
@@ -91,6 +36,21 @@ storiesOf('TimezoneInputForm', module)
       items={items}
       onChange={action('on-change-action')}
       onSelect={action('select-action')}
-      sortItems={sortStates}
+      onTimezoneInputFocus={action('on-timezone-input-focus')}
+      onTimezoneInputBlur={action('on-timezone-input-blur')}
+      onTimezoneChange={action('on-timezone-change')}
+      disabled={false}
+    />
+  ))
+  .add('disabled', () => (
+    <TimezoneInputForm
+      handleSubmit={action('on-submit-action')}
+      items={items}
+      onChange={action('on-change-action')}
+      onSelect={action('select-action')}
+      onTimezoneInputFocus={action('on-timezone-input-focus')}
+      onTimezoneInputBlur={action('on-timezone-input-blur')}
+      onTimezoneChange={action('on-timezone-change')}
+      disabled
     />
   ));
