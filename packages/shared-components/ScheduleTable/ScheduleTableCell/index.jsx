@@ -21,15 +21,19 @@ const iconWrapperStyle = {
 
 /* eslint-disable react/prop-types */
 
-const RemoveButton = (time, onRemoveTimeClick, buttonStyle) => (
-  <div style={buttonStyle}>
-    <Button onClick={() => onRemoveTimeClick(time)} noStyle label="remove time">
-      <div style={iconWrapperStyle}>
-        <CloseIcon size={'small'} />
+const RemoveButton = (time, onRemoveTimeClick, buttonStyle, disabled) => {
+  if (!disabled) {
+    return (
+      <div style={buttonStyle}>
+        <Button onClick={() => onRemoveTimeClick(time)} noStyle label="remove time">
+          <div style={iconWrapperStyle}>
+            <CloseIcon size={'small'} />
+          </div>
+        </Button>
       </div>
-    </Button>
-  </div>
-);
+    );
+  }
+};
 
 
 const TableCellContents = ({
@@ -38,8 +42,6 @@ const TableCellContents = ({
   select24Hours,
   time,
   onRemoveTimeClick,
-  onUpdateTime,
-  fontSize,
 }) => {
   const buttonStyle = calculateStyles({
     default: {
@@ -77,7 +79,7 @@ const TableCellContents = ({
           fontSize={'small'}
         />
       </div>
-      {RemoveButton(time, onRemoveTimeClick, buttonStyle)}
+      {RemoveButton(time, onRemoveTimeClick, buttonStyle, disabled)}
     </div>
   );
 };
