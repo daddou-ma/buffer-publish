@@ -21,20 +21,15 @@ const iconWrapperStyle = {
 
 /* eslint-disable react/prop-types */
 
-const RemoveButton = (time, onRemoveTimeClick, buttonStyle, disabled) => {
-  if (!disabled) {
-    return (
-      <div style={buttonStyle}>
-        <Button onClick={() => onRemoveTimeClick(time)} noStyle label="remove time">
-          <div style={iconWrapperStyle}>
-            <CloseIcon size={'small'} />
-          </div>
-        </Button>
+const RemoveButton = ({ time, onRemoveTimeClick, buttonStyle }) => (
+  <div style={buttonStyle}>
+    <Button onClick={() => onRemoveTimeClick(time)} noStyle label="remove time">
+      <div style={iconWrapperStyle}>
+        <CloseIcon size={'small'} />
       </div>
-    );
-  }
-};
-
+    </Button>
+  </div>
+);
 
 const TableCellContents = ({
   disabled,
@@ -79,7 +74,14 @@ const TableCellContents = ({
           fontSize={'small'}
         />
       </div>
-      {RemoveButton(time, onRemoveTimeClick, buttonStyle, disabled)}
+      {!disabled &&
+        <RemoveButton
+          time={time}
+          onRemoveTimeClick={onRemoveTimeClick}
+          buttonStyle={buttonStyle}
+          disabled={disabled}
+        />
+      }
     </div>
   );
 };
