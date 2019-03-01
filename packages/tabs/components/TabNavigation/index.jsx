@@ -47,14 +47,16 @@ const TabNavigation = ({
         {isInstagramProfile &&
           <Tab tabId={'pastReminders'}>Past Reminders</Tab>
         }
-        {!features.isFreeUser() && <Tab tabId={'analytics'}>Analytics</Tab>}
+        {(!features.isFreeUser() || isBusinessAccount) &&
+          <Tab tabId={'analytics'}>Analytics</Tab>
+        }
         {isBusinessAccount && isManager &&
           <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
         }
         {isBusinessAccount && !isManager &&
           <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
         }
-        {!features.isFreeUser() &&
+        {(!features.isFreeUser() || isBusinessAccount) &&
           <Tab tabId={'drafts'}>Drafts</Tab>
         }
         <FeatureLoader supportedFeatures={'b4b_calendar'}>
