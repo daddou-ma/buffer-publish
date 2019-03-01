@@ -24,6 +24,10 @@ const profileSideBarStyle = {
   flexBasis: '16rem',
   width: '16rem',
   minWidth: '16rem',
+  position: 'sticky',
+  bottom: 0,
+  top: 0,
+  height: '100vh',
 };
 
 const contentStyle = {
