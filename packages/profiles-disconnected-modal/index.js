@@ -10,7 +10,7 @@ export default connect(
   }),
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideProfilesDisconnectedModal()),
-    reconnectProfile: (id, service, business) => dispatch(actions.reconnectProfile(id, service, business)),
+    reconnectProfile: (id, service) => dispatch(actions.reconnectProfile(id, service)),
   }),
 )(ProfilesDisconnectedModal);
 

@@ -44,7 +44,7 @@ const ProfilesDisconnectedModal = ({
               </div>
               <Button
                 disabled={p.reconnecting}
-                onClick={() => reconnectProfile(p.id, p.service, p.isInstagramBusiness)}
+                onClick={() => reconnectProfile(p.id, p.service)}
                 small
               >
                 {p.reconnecting ? translations.reconnecting : translations.cta}
