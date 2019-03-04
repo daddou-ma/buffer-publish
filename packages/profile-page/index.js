@@ -25,6 +25,7 @@ export default hot(module)(connect(
     }
     return {
       service: state.profileSidebar.selectedProfile.service,
+      userId: state.appSidebar.user.id,
     };
   },
   dispatch => ({
