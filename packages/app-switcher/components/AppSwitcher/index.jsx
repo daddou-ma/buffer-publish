@@ -19,6 +19,7 @@ const getContainerStyle = hidden => ({
   right: '16px',
   width: '260px',
   display: hidden ? 'none' : '',
+  zIndex: 2,
 });
 
 const cardInnerStyle = {
