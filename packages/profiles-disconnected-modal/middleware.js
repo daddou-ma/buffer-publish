@@ -13,12 +13,12 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
   switch (action.type) {
     case actionTypes.RECONNECT_PROFILE: {
       if (action.service === 'instagram') {
-        /**
-         * This silly looking code loads an 'img' with the
-         * Instagram logout URL, which ensures the user is
-         * logged out of Instagram before we send them to
-         * reconnect.
-         */
+          /**
+          * This silly looking code loads an 'img' with the
+          * Instagram logout URL, which ensures the user is
+          * logged out of Instagram before we send them to
+          * reconnect.
+          */
         const img = new Image();
         img.onerror = () => {
           window.location.assign(getReconnectURL(action.id));

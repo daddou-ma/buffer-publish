@@ -109,6 +109,7 @@ const TabNavigation = ({
         >
           <Tab tabId={'general-settings'}>General</Tab>
           <Tab tabId={'posting-schedule'}>Posting Schedule</Tab>
+          <Tab tabId={'reconnect'}>Reconnect</Tab>
         </Tabs>
       }
     </div>
