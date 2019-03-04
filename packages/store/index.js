@@ -34,6 +34,7 @@ import { middleware as notificationsProviderMiddleware } from '@bufferapp/publis
 import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/publish-profiles-disconnected-modal';
 import { middleware as accountNotificationsMiddleware } from '@bufferapp/publish-account-notifications';
 import { middleware as publishCTABannerMiddleware } from '@bufferapp/publish-cta-banner';
+import { middleware as publishTemporaryBannerMiddleware } from '@bufferapp/publish-temporary-banner';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 
 // Remove analytics middleware when publish switches to analyze
@@ -99,6 +100,7 @@ const configureStore = (initialstate) => {
         profilesDisconnectedModalMiddleware,
         accountNotificationsMiddleware,
         publishCTABannerMiddleware,
+        publishTemporaryBannerMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

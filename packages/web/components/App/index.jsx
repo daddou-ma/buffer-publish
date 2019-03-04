@@ -15,6 +15,7 @@ import AppModals from '@bufferapp/publish-modals';
 import InitialLoading from '@bufferapp/publish-initial-loading';
 import DefaultPage from '@bufferapp/default-page';
 import CTABanner from '@bufferapp/publish-cta-banner';
+import TemporaryBanner from '@bufferapp/publish-temporary-banner';
 
 const appStyle = {
   display: 'flex',
@@ -37,6 +38,7 @@ class App extends Component { // eslint-disable-line
 
         <div style={contentStyle}>
           <CTABanner />
+          <TemporaryBanner />
           <EnsurePublishBetaUser>
             <Switch>
               <Route
