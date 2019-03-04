@@ -13,18 +13,22 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
   switch (action.type) {
     case actionTypes.RECONNECT_PROFILE: {
       if (action.service === 'instagram') {
-        /**
-         * This silly looking code loads an 'img' with the
-         * Instagram logout URL, which ensures the user is
-         * logged out of Instagram before we send them to
-         * reconnect.
-         */
-        const img = new Image();
-        img.onerror = () => {
-          window.location.assign(getReconnectURL(action.id));
-        };
-        img.src = 'https://www.instagram.com/accounts/logoutin';
-        document.getElementsByTagName('head')[0].appendChild(img);
+        if (action.business) {
+          window.location.assign('https://faq.buffer.com/article/1149-troubleshooting-steps-for-failed-instagram-posts');
+        } else {
+          /**
+          * This silly looking code loads an 'img' with the
+          * Instagram logout URL, which ensures the user is
+          * logged out of Instagram before we send them to
+          * reconnect.
+          */
+          const img = new Image();
+          img.onerror = () => {
+            window.location.assign(getReconnectURL(action.id));
+          };
+          img.src = 'https://www.instagram.com/accounts/logoutin';
+          document.getElementsByTagName('head')[0].appendChild(img);
+        }
       } else {
         window.location.assign(getReconnectURL(action.id));
       }

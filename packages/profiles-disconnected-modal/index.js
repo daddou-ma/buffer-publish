@@ -6,11 +6,12 @@ import ProfilesDisconnectedModal from './components/ProfilesDisconnectedModal';
 export default connect(
   state => ({
     translations: state.i18n.translations['profiles-disconnected-modal'],
+    profiles: state.ProfileSidebar.profiles,
     ...state.profilesDisconnectedModal,
   }),
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideProfilesDisconnectedModal()),
-    reconnectProfile: (id, service) => dispatch(actions.reconnectProfile(id, service)),
+    reconnectProfile: (id, service, business) => dispatch(actions.reconnectProfile(id, service, business)),
   }),
 )(ProfilesDisconnectedModal);
 
