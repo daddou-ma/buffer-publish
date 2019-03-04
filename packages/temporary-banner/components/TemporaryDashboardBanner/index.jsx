@@ -2,18 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Text } from '@bufferapp/components';
-import {
-  fillColor,
-  outerSpace,
-  outerSpaceLight,
-} from '@bufferapp/components/style/color';
 
 const styling = {
-  backgroundColor: fillColor,
-  color: outerSpace,
-  padding: '5px',
-  textAlign: 'center',
-  borderBottom: `1px solid ${outerSpaceLight}`,
+  backgroundColor: 'rgba(255, 198, 171, 0.75)',
+  color: '#662D12',
+  padding: '16px',
+  textAlign: 'left',
+  lineHeight: '22px',
 };
 
 const dashboardBanner = 'temporary-dashboard-banner';
@@ -31,8 +26,8 @@ const TemporaryDashboardBanner = ({
 
   return (
     <div style={styling}>
-      <Text color={outerSpace} size="mini">
-        {temporaryDashboard.content}
+      <Text color='#662D12' size="mini">
+        <div dangerouslySetInnerHTML={{__html: temporaryDashboard.content}} />
       </Text>
     </div>
   );
