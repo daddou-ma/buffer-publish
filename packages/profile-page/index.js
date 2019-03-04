@@ -23,7 +23,9 @@ export default hot(module)(connect(
         view: state[tabId].byProfileId[profileId].tabId || null,
       });
     }
-    return {};
+    return {
+      service: state.profileSidebar.selectedProfile.service,
+    };
   },
   dispatch => ({
     onLoadMore: ({ profileId, page, tabId }) => {

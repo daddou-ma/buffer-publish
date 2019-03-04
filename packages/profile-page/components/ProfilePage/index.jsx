@@ -47,7 +47,28 @@ const tabContentStyle = {
   maxWidth: '864px',
 };
 
-const TabContent = ({ tabId, profileId, childTabId }) => {
+const getReconnectURL = (id) => {
+  if (window.location.hostname === 'publish.local.buffer.com') {
+    return `https://local.buffer.com/oauth/reconnect/${id}`;
+  }
+  return `https://buffer.com/oauth/reconnect/${id}`;
+};
+
+const reconnectProfile = (id, service) => {
+  if (service === 'instagram') {
+    const img = new Image();
+    img.onerror = () => {
+      window.location.assign(getReconnectURL(id));
+    };
+    img.src = 'https://www.instagram.com/accounts/logoutin';
+    document.getElementsByTagName('head')[0].appendChild(img);
+  } else {
+    window.location.assign(getReconnectURL(id));
+  }
+};
+
+
+const TabContent = ({ tabId, profileId, childTabId, service }) => {
   switch (tabId) {
     case 'queue':
       return (
@@ -88,6 +109,9 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
               childTabId={childTabId}
             />
           );
+        case 'reconnect':
+          reconnectProfile(profileId, service);
+          break;
         case 'general-settings':
         default:
           return (
@@ -127,6 +151,7 @@ const ProfilePage = ({
   loadingMore,
   moreToLoad,
   page,
+  service,
 }) => {
   const isPostsTab = ['queue', 'sent', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId);
   const handleScroll = (o) => {
@@ -154,7 +179,12 @@ const ProfilePage = ({
           growthSpace={1}
         >
           <div style={tabContentStyle}>
-            <TabContent tabId={tabId} profileId={profileId} childTabId={childTabId} />
+            <TabContent
+              tabId={tabId}
+              profileId={profileId}
+              childTabId={childTabId}
+              service={service}
+            />
             {loadingMore &&
               <div style={loadingAnimationStyle}>
                 <LoadingAnimation marginTop={'1rem'} />
@@ -179,6 +209,7 @@ ProfilePage.propTypes = {
   loadingMore: PropTypes.bool.isRequired,
   moreToLoad: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
+  service: PropTypes.string,
 };
 
 ProfilePage.defaultProps = {
