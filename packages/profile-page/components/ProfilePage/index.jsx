@@ -47,29 +47,15 @@ const tabContentStyle = {
   maxWidth: '864px',
 };
 
-// Refactor Reconnect tab with direct logic (currently having issues with failed to fetch)
-// const getReconnectURL = (id) => {
-//   if (window.location.hostname === 'publish.local.buffer.com') {
-//     return `https://local.buffer.com/oauth/reconnect/${id}`;
-//   }
-//   return `https://buffer.com/oauth/reconnect/${id}`;
-// };
-//
-// const reconnectProfile = (id, service) => {
-//   if (service === 'instagram') {
-//     const img = new Image();
-//     img.onerror = () => {
-//       window.location.assign(getReconnectURL(id));
-//     };
-//     img.src = 'https://www.instagram.com/accounts/logoutin';
-//     document.getElementsByTagName('head')[0].appendChild(img);
-//   } else {
-//     window.location.assign(getReconnectURL(id));
-//   }
-// };
+const reconnectProfile = () => {
+  if (window.location.hostname === 'publish.local.buffer.com') {
+    window.location.assign('https://local.buffer.com/manage/');
+  } else {
+    window.location.assign('https://buffer.com/manage/');
+  }
+};
 
-
-const TabContent = ({ tabId, profileId, childTabId, service, userId }) => {
+const TabContent = ({ tabId, profileId, childTabId }) => {
   switch (tabId) {
     case 'queue':
       return (
@@ -111,7 +97,7 @@ const TabContent = ({ tabId, profileId, childTabId, service, userId }) => {
             />
           );
         case 'reconnect':
-          window.location.assign(`https://buffer.com/manage/${userId}/accounts`);
+          reconnectProfile();
           break;
         case 'general-settings':
         default:
@@ -133,8 +119,6 @@ TabContent.propTypes = {
   tabId: PropTypes.string,
   childTabId: PropTypes.string,
   profileId: PropTypes.string.isRequired,
-  service: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
 };
 
 TabContent.defaultProps = {
@@ -154,8 +138,6 @@ const ProfilePage = ({
   loadingMore,
   moreToLoad,
   page,
-  service,
-  userId,
 }) => {
   const isPostsTab = ['queue', 'sent', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId);
   const handleScroll = (o) => {
@@ -187,8 +169,6 @@ const ProfilePage = ({
               tabId={tabId}
               profileId={profileId}
               childTabId={childTabId}
-              service={service}
-              userId={userId}
             />
             {loadingMore &&
               <div style={loadingAnimationStyle}>
@@ -214,8 +194,6 @@ ProfilePage.propTypes = {
   loadingMore: PropTypes.bool.isRequired,
   moreToLoad: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
-  service: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
 };
 
 ProfilePage.defaultProps = {
