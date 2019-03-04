@@ -2,41 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Text } from '@bufferapp/components';
-
-const textColor = 'white';
+import {
+  fillColor,
+  outerSpace,
+  outerSpaceLight,
+} from '@bufferapp/components/style/color';
 
 const styling = {
-  backgroundColor: '#1F35B3',
-  color: textColor,
+  backgroundColor: fillColor,
+  color: outerSpace,
   padding: '5px',
   textAlign: 'center',
+  borderBottom: `1px solid ${outerSpaceLight}`,
 };
 
-const buttonStyle = {
-  color: textColor,
-  cursor: 'pointer',
-  display: 'inline-block',
-  margin: '0 0 0 1rem',
-  padding: '0.5rem',
-  backgroundColor: '#121E66',
-  border: '1px solid #121E66',
-  borderRadius: '4px',
-  outline: 'none',
-};
+const dashboardBanner = 'temporary-dashboard-banner';
+
+const getEnabledApplicationMode = (tag, enabledApplicationModes) =>
+  enabledApplicationModes.filter(mode => mode.tag === tag)[0];
 
 const TemporaryDashboardBanner = ({
     enabledApplicationModes,
   }) => {
-  console.log('HERE', enabledApplicationModes);
-  const temporaryDashboard = enabledApplicationModes['temporary-dashboard-banner'];
-  if (!enabledApplicationModes || (enabledApplicationModes.length > 0 && !temporaryDashboard)) {
+  const temporaryDashboard = getEnabledApplicationMode(dashboardBanner, enabledApplicationModes);
+  if (!temporaryDashboard) {
     return null;
   }
 
   return (
     <div style={styling}>
-      <Text color={textColor} size="mini">
-        SOME TEXT
+      <Text color={outerSpace} size="mini">
+        {temporaryDashboard.content}
       </Text>
     </div>
   );

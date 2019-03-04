@@ -15,7 +15,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch(dataFetchActions.fetch({
         name: 'enabledApplicationModes',
         args: {
-          comprehensive: false,
+          comprehensive: true,
         },
       }));
       break;
