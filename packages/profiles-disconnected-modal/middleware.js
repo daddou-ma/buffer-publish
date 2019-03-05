@@ -12,9 +12,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
   next(action);
   switch (action.type) {
     case actionTypes.RECONNECT_PROFILE: {
-      if (action.isIGBusiness) {
-        window.location.assign('https://faq.buffer.com/article/1149-troubleshooting-steps-for-failed-instagram-posts');
-      } else if (action.service === 'instagram') {
+      if (action.service === 'instagram') {
           /**
           * This silly looking code loads an 'img' with the
           * Instagram logout URL, which ensures the user is
