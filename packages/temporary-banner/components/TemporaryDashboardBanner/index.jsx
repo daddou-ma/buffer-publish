@@ -8,19 +8,23 @@ const textColor = '#662D12';
 const dashboardBanner = 'temporary-dashboard-banner';
 
 const getContainerStyle = hidden => ({
+  alignItems: 'center',
   backgroundColor: 'rgba(255, 198, 171, 0.75)',
   color: textColor,
-  padding: '16px',
-  textAlign: 'left',
+  display: hidden ? 'none' : 'flex',
   lineHeight: '22px',
-  display: hidden ? 'none' : '',
+  padding: '16px',
+  position: 'relative',
+  textAlign: 'left',
   zIndex: 10,
 });
 
 const closeIconContainerStyle = {
-  position: 'absolute',
-  top: '19px',
-  right: '8px',
+  height: '16px',
+  marginLeft: '16px',
+  marginRight: '-16px',
+  padding: '16px',
+  width: '16px',
 };
 
 class TemporaryDashboardBanner extends React.Component {
@@ -54,6 +58,11 @@ class TemporaryDashboardBanner extends React.Component {
 
     return (
       <div style={getContainerStyle(hidden)}>
+        <div>
+          <Text color={textColor} size="mini">
+            <div dangerouslySetInnerHTML={{ __html: temporaryDashboard.content }} />
+          </Text>
+        </div>
         <div style={closeIconContainerStyle}>
           <Button
             borderless
@@ -62,13 +71,8 @@ class TemporaryDashboardBanner extends React.Component {
               this.setState({ hidden: true });
             }}
           >
-            <CloseIcon />
+            <CloseIcon color={textColor} />
           </Button>
-        </div>
-        <div>
-          <Text color={textColor} size="mini">
-            <div dangerouslySetInnerHTML={{ __html: temporaryDashboard.content }} />
-          </Text>
         </div>
       </div>
     );
