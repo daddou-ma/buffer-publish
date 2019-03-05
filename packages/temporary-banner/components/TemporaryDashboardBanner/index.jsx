@@ -14,6 +14,7 @@ const getContainerStyle = hidden => ({
   textAlign: 'left',
   lineHeight: '22px',
   display: hidden ? 'none' : '',
+  zIndex: 10,
 });
 
 const closeIconContainerStyle = {
