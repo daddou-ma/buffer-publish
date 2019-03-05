@@ -32,7 +32,6 @@ class TabNavigation extends React.Component {
     this.state = { loading: false };
   }
 
-
   render () {
     const {
       features,
@@ -119,29 +118,25 @@ class TabNavigation extends React.Component {
           </div>
         </FeatureLoader>
         {shouldShowNestedSettingsTab && !isLockedProfile &&
-          <div style={{ maxWidth: '864px' }}>
-            <Tabs
-              selectedTabId={selectedChildTab}
-              onTabClick={onChildTabClick}
+          <Tabs
+            selectedTabId={selectedChildTab}
+            onTabClick={onChildTabClick}
+            secondary
+          >
+            <Tab tabId={'general-settings'}>General</Tab>
+            <Tab tabId={'posting-schedule'}>Posting Schedule</Tab>
+            <Button
               secondary
+              small
+              onClick={(e) => {
+                e.preventDefault();
+                this.setState({ loading: true });
+                reconnectProfile();
+              }}
             >
-              <Tab tabId={'general-settings'}>General</Tab>
-              <Tab tabId={'posting-schedule'}>Posting Schedule</Tab>
-              <div style={{ float: 'right', padding: '12px 13px' }}>
-                <Button
-                  secondary
-                  small
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.setState({ loading: true });
-                    reconnectProfile();
-                  }}
-                >
-                  { this.state.loading ? 'Reconnecting…' : 'Reconnect' }
-                </Button>
-              </div>
-            </Tabs>
-          </div>
+              { this.state.loading ? 'Reconnecting…' : 'Reconnect' }
+            </Button>
+          </Tabs>
         }
       </div>
     );
