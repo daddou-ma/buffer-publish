@@ -73,6 +73,7 @@ const Preferences = ({
         bottom: 0,
         top: 0,
         height: '100%',
+        maxHeight: '100vh',
       }}
     >
       <ProfileSidebar />
