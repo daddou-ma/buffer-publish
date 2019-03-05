@@ -26,7 +26,10 @@ describe('middleware', () => {
       .toBeCalledWith(action);
     expect(dispatch)
       .toBeCalledWith(dataFetchActions.fetch({
-        name: 'enabledApplicationModes'
+        name: 'enabledApplicationModes',
+        args: {
+          comprehensive: true,
+        }
     }));
   });
 

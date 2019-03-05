@@ -27,7 +27,7 @@ const profileSideBarStyle = {
   position: 'sticky',
   bottom: 0,
   top: 0,
-  height: '100vh',
+  height: '100%',
 };
 
 const contentStyle = {
@@ -154,7 +154,11 @@ const ProfilePage = ({
           growthSpace={1}
         >
           <div style={tabContentStyle}>
-            <TabContent tabId={tabId} profileId={profileId} childTabId={childTabId} />
+            <TabContent
+              tabId={tabId}
+              profileId={profileId}
+              childTabId={childTabId}
+            />
             {loadingMore &&
               <div style={loadingAnimationStyle}>
                 <LoadingAnimation marginTop={'1rem'} />
