@@ -47,14 +47,6 @@ const tabContentStyle = {
   maxWidth: '864px',
 };
 
-const reconnectProfile = () => {
-  if (window.location.hostname === 'publish.local.buffer.com') {
-    window.location.assign('https://local.buffer.com/manage/');
-  } else {
-    window.location.assign('https://buffer.com/manage/');
-  }
-};
-
 const TabContent = ({ tabId, profileId, childTabId }) => {
   switch (tabId) {
     case 'queue':
@@ -96,9 +88,6 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
               childTabId={childTabId}
             />
           );
-        case 'reconnect':
-          reconnectProfile();
-          break;
         case 'general-settings':
         default:
           return (
