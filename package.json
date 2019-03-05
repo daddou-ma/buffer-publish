@@ -9,6 +9,7 @@
     "test": "if [ -n \"$CI\" ]; then yarn && jest --runInBand; else jest; fi",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
     "test-update": "jest -u",
+    "test-package": "bash ./scripts/test-package.sh",
     "init": "yarn",
     "start": "cd ./packages/server/ && yarn run start",
     "storybook": "start-storybook -p 9001",
