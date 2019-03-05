@@ -37,10 +37,15 @@ class TemporaryDashboardBanner extends React.Component {
   }
 
   render () {
+    const { hidden } = this.state;
     const { enabledApplicationModes } = this.props;
+
+    if (!enabledApplicationModes) {
+      return null;
+    }
+
     const temporaryDashboard =
       this.getEnabledApplicationMode(dashboardBanner, enabledApplicationModes);
-    const { hidden } = this.state;
 
     if (!temporaryDashboard) {
       return null;
