@@ -64,7 +64,19 @@ storiesOf('QueuedPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
+      onUnpauseClick={action('onUnpauseClick')}
       isManager
+      isBusinessAccount={false}
+      onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
+      onDropPost={action('onDropPost')}
+      onCalendarToggleClick={action('onCalendarToggleClick')}
+      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
+      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
+      onDirectPostingClick={action('onDirectPostingClick')}
+      onHideInstagramModal={action('onHideInstagramModal')}
+      onClickUpgrade={action('onClickUpgrade')}
     />
   ))
   .add('loading', () => (
@@ -78,7 +90,19 @@ storiesOf('QueuedPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
+      onUnpauseClick={action('onUnpauseClick')}
       isManager
+      isBusinessAccount={false}
+      onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
+      onDropPost={action('onDropPost')}
+      onCalendarToggleClick={action('onCalendarToggleClick')}
+      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
+      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
+      onDirectPostingClick={action('onDirectPostingClick')}
+      onHideInstagramModal={action('onHideInstagramModal')}
+      onClickUpgrade={action('onClickUpgrade')}
     />
   ))
   .add('paused if Manager', () => (
@@ -94,6 +118,44 @@ storiesOf('QueuedPosts', module)
       paused
       onUnpauseClick={action('onUnpauseClick')}
       isManager
+      isBusinessAccount={false}
+      onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
+      onDropPost={action('onDropPost')}
+      onCalendarToggleClick={action('onCalendarToggleClick')}
+      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
+      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
+      onDirectPostingClick={action('onDirectPostingClick')}
+      onHideInstagramModal={action('onHideInstagramModal')}
+      onClickUpgrade={action('onClickUpgrade')}
+      onRequeueClick={action('onRequeueClick')}
+    />
+  ))
+  .add('paused if Contributor', () => (
+    <QueuedPosts
+      total={10}
+      loading={false}
+      onCancelConfirmClick={action('onCancelConfirmClick')}
+      onDeleteClick={action('onDeleteClick')}
+      onDeleteConfirmClick={action('onDeleteConfirmClick')}
+      onEditClick={action('onEditClick')}
+      onShareNowClick={action('onShareNowClick')}
+      paused
+      onUnpauseClick={action('onUnpauseClick')}
+      isManager={false}
+      isBusinessAccount
+      onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
+      onDropPost={action('onDropPost')}
+      onCalendarToggleClick={action('onCalendarToggleClick')}
+      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
+      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
+      onDirectPostingClick={action('onDirectPostingClick')}
+      onHideInstagramModal={action('onHideInstagramModal')}
+      onClickUpgrade={action('onClickUpgrade')}
+      onRequeueClick={action('onRequeueClick')}
     />
   ))
   .add('locked profile', () => (
@@ -110,5 +172,17 @@ storiesOf('QueuedPosts', module)
       onUnpauseClick={action('onUnpauseClick')}
       isLockedProfile
       isManager
+      isBusinessAccount={false}
+      onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
+      onDropPost={action('onDropPost')}
+      onCalendarToggleClick={action('onCalendarToggleClick')}
+      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
+      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
+      onDirectPostingClick={action('onDirectPostingClick')}
+      onHideInstagramModal={action('onHideInstagramModal')}
+      onClickUpgrade={action('onClickUpgrade')}
+      onRequeueClick={action('onRequeueClick')}
     />
   ));

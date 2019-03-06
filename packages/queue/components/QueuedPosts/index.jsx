@@ -133,6 +133,7 @@ const QueuedPosts = ({
   isLockedProfile,
   features,
   isManager,
+  isBusinessAccount,
   onClickUpgrade,
 }) => {
   if (loading) {
@@ -191,7 +192,7 @@ const QueuedPosts = ({
         </div>
         <FeatureLoader
           supportedFeatures={'mini_calendar'}
-          fallback={!isManager ?
+          fallback={isBusinessAccount ?
             <OverviewCalendar
               onCalendarToggleClick={onCalendarToggleClick}
               showCalendar={showCalendar}
@@ -309,6 +310,7 @@ QueuedPosts.propTypes = {
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
+  isBusinessAccount: PropTypes.bool.isRequired,
 };
 
 QueuedPosts.defaultProps = {
