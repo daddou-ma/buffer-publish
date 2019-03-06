@@ -65,6 +65,35 @@ const buttonStyle = {
   display: 'flex',
 };
 
+/* eslint-disable react/prop-types */
+
+const OverviewCalendar = ({
+  onCalendarToggleClick,
+  showCalendar,
+  numberOfPostsByDate,
+  onMiniCalendarMonthChange,
+}) => (
+  <React.Fragment>
+    <div style={buttonStyle} className="fs--mini-calendar">
+      <Button
+        secondary
+        onClick={onCalendarToggleClick}
+      >
+        {showCalendar ? 'Hide Overview' : 'Show Overview'}
+      </Button>
+    </div>
+
+    {showCalendar &&
+      <MiniCalendar
+        numberOfPostsByDate={numberOfPostsByDate}
+        onMonthChange={onMiniCalendarMonthChange}
+      />
+    }
+  </React.Fragment>
+);
+
+/* eslint-enable react/prop-types */
+
 const QueuedPosts = ({
   total,
   loading,
@@ -104,6 +133,7 @@ const QueuedPosts = ({
   isLockedProfile,
   features,
   isManager,
+  isBusinessAccount,
   onClickUpgrade,
 }) => {
   if (loading) {
@@ -162,22 +192,20 @@ const QueuedPosts = ({
         </div>
         <FeatureLoader
           supportedFeatures={'mini_calendar'}
-        >
-          <div style={buttonStyle} className="fs--mini-calendar">
-            <Button
-              secondary
-              onClick={onCalendarToggleClick}
-            >
-              {showCalendar ? 'Hide Overview' : 'Show Overview'}
-            </Button>
-          </div>
-
-          {showCalendar &&
-            <MiniCalendar
+          fallback={isBusinessAccount ?
+            <OverviewCalendar
+              onCalendarToggleClick={onCalendarToggleClick}
+              showCalendar={showCalendar}
               numberOfPostsByDate={numberOfPostsByDate}
-              onMonthChange={onMiniCalendarMonthChange}
-            />
-          }
+              onMiniCalendarMonthChange={onMiniCalendarMonthChange}
+            /> : ''}
+        >
+          <OverviewCalendar
+            onCalendarToggleClick={onCalendarToggleClick}
+            showCalendar={showCalendar}
+            numberOfPostsByDate={numberOfPostsByDate}
+            onMiniCalendarMonthChange={onMiniCalendarMonthChange}
+          />
         </FeatureLoader>
 
       </div>
@@ -282,6 +310,7 @@ QueuedPosts.propTypes = {
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
+  isBusinessAccount: PropTypes.bool.isRequired,
 };
 
 QueuedPosts.defaultProps = {
