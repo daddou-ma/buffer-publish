@@ -64,6 +64,7 @@ storiesOf('QueuedPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
+      isManager
     />
   ))
   .add('loading', () => (
@@ -77,6 +78,7 @@ storiesOf('QueuedPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
+      isManager
     />
   ))
   .add('paused if Manager', () => (
@@ -107,5 +109,6 @@ storiesOf('QueuedPosts', module)
       paused
       onUnpauseClick={action('onUnpauseClick')}
       isLockedProfile
+      isManager
     />
   ));
