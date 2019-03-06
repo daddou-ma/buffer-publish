@@ -87,11 +87,12 @@ class TabNavigation extends React.Component {
           {(!features.isFreeUser() || isBusinessAccount) &&
             <Tab tabId={'drafts'}>Drafts</Tab>
           }
-          <FeatureLoader supportedFeatures={'b4b_calendar'}>
+          {/* Pro and up users or Team Members */}
+          {(!features.isFreeUser() || isBusinessAccount) &&
             <Tab tabId={'b4bCalendar'} onClick={() => openCalendarWindow(profileId)}>
               Calendar
             </Tab>
-          </FeatureLoader>
+          }
           <Tab tabId={'settings'}>Settings</Tab>
         </Tabs>
         {shouldShowUpgradeCta &&
