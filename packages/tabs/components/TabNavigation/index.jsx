@@ -89,7 +89,7 @@ class TabNavigation extends React.Component {
           }
           {/* Pro and up users or Team Members */}
           {(!features.isFreeUser() || isBusinessAccount) &&
-            <Tab tabId={'b4bCalendar'} onClick={() => openCalendarWindow(profileId)}>
+            <Tab onClick={() => openCalendarWindow(profileId)}>
               Calendar
             </Tab>
           }
