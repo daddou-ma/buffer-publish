@@ -331,46 +331,6 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  // TOGGLE_CALENDAR
-  it('should handle TOGGLE_CALENDAR action type', () => {
-    const post = { id: '12345', text: 'i heart buffer', isConfirmingDelete: false, isDeleting: false };
-    const stateBefore = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: { 12345: post },
-          total: 1,
-          showCalendar: false,
-        },
-      },
-    };
-    const stateAfter = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          numberOfPostsByDate: null,
-          page: 1,
-          posts: { 12345: post },
-          total: 1,
-          showCalendar: true,
-        },
-      },
-    };
-    const action = {
-      type: actionTypes.TOGGLE_CALENDAR,
-      profileId,
-      post,
-    };
-    deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
-  });
-
   // GET_NUMBER_POSTS
   it('should handle getNumberOfPosts_FETCH_SUCCESS action type', () => {
     const post = { id: '12345', text: 'i heart buffer' };

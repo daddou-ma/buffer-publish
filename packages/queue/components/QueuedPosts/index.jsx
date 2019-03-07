@@ -17,7 +17,6 @@ import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import InstagramDirectPostingModal from '../InstagramDirectPostingModal';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
-import MiniCalendar from '../MiniCalendar';
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -65,33 +64,6 @@ const buttonStyle = {
   display: 'flex',
 };
 
-/* eslint-disable react/prop-types */
-
-const OverviewCalendar = ({
-  onCalendarToggleClick,
-  showCalendar,
-  numberOfPostsByDate,
-  onMiniCalendarMonthChange,
-}) => (
-  <React.Fragment>
-    <div style={buttonStyle} className="fs--mini-calendar">
-      <Button
-        secondary
-        onClick={onCalendarToggleClick}
-      >
-        {showCalendar ? 'Hide Overview' : 'Show Overview'}
-      </Button>
-    </div>
-
-    {showCalendar &&
-      <MiniCalendar
-        numberOfPostsByDate={numberOfPostsByDate}
-        onMonthChange={onMiniCalendarMonthChange}
-      />
-    }
-  </React.Fragment>
-);
-
 /* eslint-enable react/prop-types */
 
 const QueuedPosts = ({
@@ -116,9 +88,6 @@ const QueuedPosts = ({
   editMode,
   paused,
   onUnpauseClick,
-  onCalendarToggleClick,
-  numberOfPostsByDate,
-  onMiniCalendarMonthChange,
   subprofiles,
   isInstagramProfile,
   isInstagramBusiness,
@@ -190,23 +159,6 @@ const QueuedPosts = ({
             <div style={composerInputIcoCameraStyle}></div>
           </div>
         </div>
-        <FeatureLoader
-          supportedFeatures={'mini_calendar'}
-          fallback={isBusinessAccount ?
-            <OverviewCalendar
-              onCalendarToggleClick={onCalendarToggleClick}
-              showCalendar={showCalendar}
-              numberOfPostsByDate={numberOfPostsByDate}
-              onMiniCalendarMonthChange={onMiniCalendarMonthChange}
-            /> : ''}
-        >
-          <OverviewCalendar
-            onCalendarToggleClick={onCalendarToggleClick}
-            showCalendar={showCalendar}
-            numberOfPostsByDate={numberOfPostsByDate}
-            onMiniCalendarMonthChange={onMiniCalendarMonthChange}
-          />
-        </FeatureLoader>
 
       </div>
       {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
@@ -292,12 +244,6 @@ QueuedPosts.propTypes = {
   paused: PropTypes.bool,
   onUnpauseClick: PropTypes.func.isRequired,
   showCalendar: PropTypes.bool,
-  onCalendarToggleClick: PropTypes.func.isRequired,
-  onMiniCalendarMonthChange: PropTypes.func.isRequired,
-  numberOfPostsByDate: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]),
   isManager: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
@@ -324,7 +270,6 @@ QueuedPosts.defaultProps = {
   editMode: false,
   paused: false,
   showCalendar: false,
-  numberOfPostsByDate: null,
   subprofiles: [],
   isInstagramProfile: false,
   isInstagramBusiness: false,

@@ -62,7 +62,6 @@ export default connect(
         editMode: state.queue.editMode,
         editingPostId: state.queue.editingPostId,
         showCalendar: profileQueuePosts.showCalendar,
-        numberOfPostsByDate: profileQueuePosts.numberOfPostsByDate,
         subprofiles: profileData.subprofiles || [],
         isInstagramProfile: profileData.type === 'instagram',
         isInstagramBusiness: profileData.isInstagramBusiness,
