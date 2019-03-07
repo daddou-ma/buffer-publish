@@ -8,6 +8,7 @@ import {
   shouldShowWelcomeModal,
   getSourceFromKey,
   shouldShowStealProfileModal,
+  shouldShowInstagramDirectPostingModal,
   shouldShowWelcomeModalPaidUsers,
   getShowModalValue,
 } from './util/showModal';
@@ -24,6 +25,9 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       if (shouldShowStealProfileModal()) {
         dispatch(actions.showStealProfileModal({ stealProfileUsername: getShowModalValue() }));
+      }
+      if (shouldShowInstagramDirectPostingModal()) {
+        dispatch(actions.showInstagramDirectPostingModal());
       }
       if (shouldShowWelcomeModalPaidUsers()) {
         dispatch(actions.showWelcomePaidModal());
