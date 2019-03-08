@@ -11108,13 +11108,6 @@ react-day-picker@6.2.1:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-day-picker@7.1.10:
-  version "7.1.10"
-  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.1.10.tgz#c763b1acb141ce960e25654b7033c2207f0fc1c3"
-  integrity sha512-UoI3ktYU8oN0UTxX5ZbG02TZePHh4znUGT6/h4g+tLNM1O4GGCiafqyFEIp22HYb1sCPQ4UMyw6QFcxu+lFDVQ==
-  dependencies:
-    prop-types "^15.6.1"
-
 react-day-picker@7.2.3:
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.2.3.tgz#51722dc66ae3478af2dfdb754350db6a1c521332"
