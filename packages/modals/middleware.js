@@ -12,6 +12,7 @@ import {
   shouldShowInstagramDirectPostingModal,
   shouldShowWelcomeModalPaidUsers,
   getShowModalValue,
+  resetShowModalKey,
 } from './util/showModal';
 
 export default ({ dispatch, getState }) => next => (action) => {
@@ -62,6 +63,7 @@ export default ({ dispatch, getState }) => next => (action) => {
             }),
           },
         }));
+        resetShowModalKey();
       }
       break;
     case 'COMPOSER_EVENT':

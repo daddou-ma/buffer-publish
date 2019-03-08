@@ -17,6 +17,12 @@ export const getShowModalValue = () => {
   return '';
 };
 
+export const resetShowModalKey = () => {
+  if (window._showModal && window._showModal.key) {
+    window._showModal = null;
+  }
+};
+
 export const shouldShowStealProfileModal = () =>
   getShowModalKey() === 'steal-profile-modal';
 
