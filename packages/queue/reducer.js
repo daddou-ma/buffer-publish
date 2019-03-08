@@ -23,7 +23,6 @@ export const actionTypes = keyWrapper('QUEUE', {
   POST_DROPPED: 0,
   REORDERED_UPDATES: 0,
   POST_REQUEUE: 0,
-  GET_NUMBER_POSTS: 0,
   OPEN_IG_MODAL: 0,
   HIDE_IG_MODAL: 0,
 });
@@ -383,11 +382,6 @@ const profileReducer = (state = profileInitialState, action) => {
       }
       return state;
     }
-    case `getNumberOfPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        numberOfPostsByDate: action.result.numberOfPostsByDate,
-      };
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case actionTypes.POST_ERROR:
     case actionTypes.POST_CREATED:
@@ -436,8 +430,7 @@ export default (state = initialState, action) => {
     case actionTypes.POST_SHARE_NOW:
     case actionTypes.POST_SENT:
     case actionTypes.POST_COUNT_UPDATED:
-    case draftActionTypes.DRAFT_APPROVED:
-    case `getNumberOfPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+    case draftActionTypes.DRAFT_APPROVED: {
       profileId = getProfileId(action);
       if (profileId) {
         return {

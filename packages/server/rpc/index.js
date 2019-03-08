@@ -32,7 +32,6 @@ const twoFactorRecovery = require('./twoFactorRecovery');
 const closeAccount = require('./closeAccount');
 const connectedApps = require('./connectedApps');
 const revokeConnectedApp = require('./revokeConnectedApp');
-const getNumberOfPostsMethod = require('./getNumberPosts');
 const featureMethod = require('./features');
 const getLinkShortener = require('./getLinkShortener');
 const changeLinkShortener = require('./changeLinkShortener');
@@ -89,7 +88,6 @@ module.exports = rpc(
   closeAccount,
   connectedApps,
   revokeConnectedApp,
-  getNumberOfPostsMethod,
   featureMethod,
   getLinkShortener,
   changeLinkShortener,

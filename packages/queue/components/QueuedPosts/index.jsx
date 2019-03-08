@@ -53,8 +53,6 @@ const loadingContainerStyle = {
   paddingTop: '5rem',
 };
 
-/* eslint-enable react/prop-types */
-
 const QueuedPosts = ({
   total,
   loading,

@@ -306,27 +306,6 @@ describe('middleware', () => {
     }));
   });
 
-  it('should fetch getNumberOfPosts', () => {
-    const action = {
-      type: actionTypes.GET_NUMBER_POSTS,
-      profileId: 'profileId1',
-      startDate: '1536580119',
-      endDate: '1536581119',
-    }
-    middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
-        name: 'getNumberOfPosts',
-        args: {
-          profileId: action.profileId,
-          startDate: action.startDate,
-          endDate: action.endDate,
-        },
-    }));
-  });
-
   describe('Update Post Counts', () => {
     const queue = {
       byProfileId: {
