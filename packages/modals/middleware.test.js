@@ -2,6 +2,7 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 
 import middleware from './middleware';
 import { actions } from './reducer';
@@ -133,6 +134,39 @@ describe('middleware', () => {
       .toBeCalledWith(action);
     expect(dispatch)
       .toBeCalledWith(actions.showProfilesDisconnectedModal());
+  });
+  it('should show instagram direct posting modal when key is present', () => {
+    window._showModal = {
+      key: 'ig-direct-post-modal',
+    };
+    const next = jest.fn();
+    const dispatch = jest.fn();
+    const getState = () => ({
+      profileSidebar: {
+        selectedProfileId: 'id1',
+      },
+    });
+    const action = {
+      type: profileActionTypes.SELECT_PROFILE,
+      profile: {
+        id: 'id1',
+      },
+    };
+    const nextAction = {
+      name: 'checkInstagramBusiness',
+      type: 'FETCH',
+      args: {
+        profileId: 'id1',
+        callbackAction: actions.showInstagramDirectPostingModal({
+          profileId: 'id1',
+        }),
+      },
+    };
+    middleware({ dispatch, getState })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(nextAction);
   });
   it('should ignore other actions', () => {
     const next = jest.fn();
