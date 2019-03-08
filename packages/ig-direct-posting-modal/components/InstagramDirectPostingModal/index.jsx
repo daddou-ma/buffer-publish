@@ -29,6 +29,7 @@ const InstagramDirectPostingModal = ({
   onSetUpDirectPostingClick,
   onCheckInstagramBusinessClick,
   onHideInstagramModal,
+  profileId,
 }) => (<div>
   <Popover>
     <Card noPadding>
@@ -57,12 +58,12 @@ const InstagramDirectPostingModal = ({
             {translations.dismiss}
           </Button>
           {isBusinessOnInstagram &&
-            <Button onClick={onSetUpDirectPostingClick}>
+            <Button onClick={() => onSetUpDirectPostingClick(profileId)}>
               {translations.cta1}
             </Button>
           }
           {!isBusinessOnInstagram &&
-            <Button onClick={onCheckInstagramBusinessClick}>
+            <Button onClick={() => onCheckInstagramBusinessClick(profileId)}>
               {translations.cta2}
             </Button>
           }
@@ -74,6 +75,7 @@ const InstagramDirectPostingModal = ({
 
 InstagramDirectPostingModal.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
+  profileId: PropTypes.string.isRequired,
   isBusinessOnInstagram: PropTypes.bool.isRequired,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
   onHideInstagramModal: PropTypes.func.isRequired,

@@ -11,18 +11,18 @@ export default connect(
     profileId: state.profileSidebar.selectedProfileId,
     isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
   }),
-  (dispatch, ownProps) => ({
+  dispatch => ({
     onHideInstagramModal: () => dispatch(modalsActions.hideInstagramDirectPostingModal()),
-    onSetUpDirectPostingClick: () => {
+    onSetUpDirectPostingClick: (profileId) => {
       dispatch(generalSettingsActions.handleSetUpDirectPostingClick({
-        profileId: ownProps.profileId,
+        profileId,
       }));
     },
-    onCheckInstagramBusinessClick: () => {
+    onCheckInstagramBusinessClick: (profileId) => {
       dispatch(dataFetchActions.fetch({
         name: 'checkInstagramBusiness',
         args: {
-          profileId: ownProps.profileId,
+          profileId,
           recheck: true,
         },
       }));

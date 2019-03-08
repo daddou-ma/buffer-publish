@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
-import { actions as queueActions } from '@bufferapp/publish-queue';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
@@ -46,7 +45,7 @@ export default connect(
           name: 'checkInstagramBusiness',
           args: {
             profileId: ownProps.profileId,
-            callbackAction: queueActions.handleOpenInstagramModal({
+            callbackAction: modalsActions.showInstagramDirectPostingModal({
               profileId: ownProps.profileId,
             }),
           },

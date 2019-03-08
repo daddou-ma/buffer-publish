@@ -45,6 +45,9 @@ describe('Queue', () => {
           },
         },
       },
+      modals: {
+        showInstagramDirectPostingModal: false,
+      },
       environment: {
         environment: 'production',
       },

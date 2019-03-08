@@ -141,8 +141,9 @@ export const actions = {
   hideStealProfileModal: () => ({
     type: actionTypes.HIDE_STEAL_PROFILE_MODAL,
   }),
-  showInstagramDirectPostingModal: () => ({
+  showInstagramDirectPostingModal: ({ profileId }) => ({
     type: actionTypes.SHOW_IG_DIRECT_POSTING_MODAL,
+    profileId,
   }),
   hideInstagramDirectPostingModal: () => ({
     type: actionTypes.HIDE_IG_DIRECT_POSTING_MODAL,

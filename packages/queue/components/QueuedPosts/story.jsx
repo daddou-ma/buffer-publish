@@ -69,13 +69,11 @@ storiesOf('QueuedPosts', module)
       isBusinessAccount={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onCalendarToggleClick={action('onCalendarToggleClick')}
       onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
     />
   ))
@@ -95,13 +93,11 @@ storiesOf('QueuedPosts', module)
       isBusinessAccount={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onCalendarToggleClick={action('onCalendarToggleClick')}
       onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
     />
   ))
@@ -121,13 +117,11 @@ storiesOf('QueuedPosts', module)
       isBusinessAccount={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onCalendarToggleClick={action('onCalendarToggleClick')}
       onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
       onRequeueClick={action('onRequeueClick')}
     />
@@ -147,13 +141,11 @@ storiesOf('QueuedPosts', module)
       isBusinessAccount
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onCalendarToggleClick={action('onCalendarToggleClick')}
       onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
       onRequeueClick={action('onRequeueClick')}
     />
@@ -175,13 +167,11 @@ storiesOf('QueuedPosts', module)
       isBusinessAccount={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onCalendarToggleClick={action('onCalendarToggleClick')}
       onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
       onRequeueClick={action('onRequeueClick')}
     />
