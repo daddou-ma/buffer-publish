@@ -23,7 +23,6 @@ export const actionTypes = keyWrapper('QUEUE', {
   POST_DROPPED: 0,
   REORDERED_UPDATES: 0,
   POST_REQUEUE: 0,
-  TOGGLE_CALENDAR: 0,
   GET_NUMBER_POSTS: 0,
   OPEN_IG_MODAL: 0,
   HIDE_IG_MODAL: 0,
@@ -48,7 +47,6 @@ const profileInitialState = {
   page: 1,
   posts: {},
   total: 0,
-  showCalendar: false,
 };
 
 const determineIfMoreToLoad = (action, currentPosts) => {
@@ -385,12 +383,6 @@ const profileReducer = (state = profileInitialState, action) => {
       }
       return state;
     }
-    case actionTypes.TOGGLE_CALENDAR:
-      return {
-        ...state,
-        showCalendar: !state.showCalendar,
-        numberOfPostsByDate: null,
-      };
     case `getNumberOfPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
@@ -445,8 +437,7 @@ export default (state = initialState, action) => {
     case actionTypes.POST_SENT:
     case actionTypes.POST_COUNT_UPDATED:
     case draftActionTypes.DRAFT_APPROVED:
-    case `getNumberOfPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case actionTypes.TOGGLE_CALENDAR: {
+    case `getNumberOfPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -591,16 +582,6 @@ export const actions = {
     commit,
     keyboardDirection,
     profileId,
-  }),
-  handleCalendarToggle: ({ profileId }) => ({
-    type: actionTypes.TOGGLE_CALENDAR,
-    profileId,
-  }),
-  handleMiniCalendarMonthChange: ({ profileId, startDate, endDate }) => ({
-    type: actionTypes.GET_NUMBER_POSTS,
-    profileId,
-    startDate,
-    endDate,
   }),
   handleOpenInstagramModal: ({ profileId }) => ({
     type: actionTypes.OPEN_IG_MODAL,

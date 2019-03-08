@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  Button,
-} from '@bufferapp/components';
-import {
   EmptyState,
   PostDragLayer,
   BufferLoading,
@@ -12,7 +9,7 @@ import {
 } from '@bufferapp/publish-shared-components';
 
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import InstagramDirectPostingModal from '../InstagramDirectPostingModal';
 import QueueItems from '../QueueItems';
@@ -56,14 +53,6 @@ const loadingContainerStyle = {
   paddingTop: '5rem',
 };
 
-const buttonStyle = {
-  height: '37px',
-  marginLeft: '1.5rem',
-  minWidth: '150px',
-  alignItems: 'center',
-  display: 'flex',
-};
-
 /* eslint-enable react/prop-types */
 
 const QueuedPosts = ({
@@ -84,7 +73,6 @@ const QueuedPosts = ({
   onImageClose,
   onDropPost,
   showComposer,
-  showCalendar,
   editMode,
   paused,
   onUnpauseClick,
@@ -102,7 +90,6 @@ const QueuedPosts = ({
   isLockedProfile,
   features,
   isManager,
-  isBusinessAccount,
   onClickUpgrade,
 }) => {
   if (loading) {
@@ -243,7 +230,6 @@ QueuedPosts.propTypes = {
   editMode: PropTypes.bool,
   paused: PropTypes.bool,
   onUnpauseClick: PropTypes.func.isRequired,
-  showCalendar: PropTypes.bool,
   isManager: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
@@ -256,7 +242,6 @@ QueuedPosts.propTypes = {
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
-  isBusinessAccount: PropTypes.bool.isRequired,
 };
 
 QueuedPosts.defaultProps = {
@@ -269,7 +254,6 @@ QueuedPosts.defaultProps = {
   enabledApplicationModes: [],
   editMode: false,
   paused: false,
-  showCalendar: false,
   subprofiles: [],
   isInstagramProfile: false,
   isInstagramBusiness: false,

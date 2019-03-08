@@ -25,7 +25,6 @@ describe('reducer', () => {
           page: 1,
           posts: {},
           total: 0,
-          showCalendar: false,
         },
       },
     };
@@ -53,7 +52,6 @@ describe('reducer', () => {
           page: 2,
           posts: [post],
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -84,7 +82,6 @@ describe('reducer', () => {
           page: 1,
           posts: {},
           total: 0,
-          showCalendar: false,
         },
       },
     };
@@ -106,7 +103,6 @@ describe('reducer', () => {
           loading: true,
           loadingMore: false,
           moreToLoad: false,
-          showCalendar: false,
           page: 1,
           posts: { 12345: postCreated },
           total: 0, // still 0 because counts are updated separately
@@ -135,7 +131,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
       enabledApplicationModes: [],
@@ -151,7 +146,6 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          showCalendar: false,
           posts: { 12345: postEdited },
           total: 1,
         },
@@ -185,7 +179,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -198,7 +191,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: postAfter },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -225,7 +217,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -238,7 +229,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: postAfter },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -264,7 +254,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -277,7 +266,6 @@ describe('reducer', () => {
           page: 1,
           posts: { },
           total: 1, // still 1 because counts are updated separately
-          showCalendar: false,
         },
       },
     };
@@ -304,7 +292,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -317,7 +304,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: postAfter },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -343,7 +329,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -357,7 +342,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };

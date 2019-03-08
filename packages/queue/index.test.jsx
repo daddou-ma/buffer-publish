@@ -41,7 +41,6 @@ describe('Queue', () => {
             page: 1,
             posts: [],
             total: 0,
-            showCalendar: false,
           },
         },
       },
@@ -60,7 +59,6 @@ describe('Queue', () => {
           onEditClick={jest.fn()}
           onRequeueClick={jest.fn()}
           onShareNowClick={jest.fn()}
-          onCalendarToggleClick={jest.fn()}
         />
       </Provider>,
     );
