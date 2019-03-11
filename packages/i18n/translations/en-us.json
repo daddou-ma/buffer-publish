@@ -87,6 +87,15 @@
     "cta": "Reconnect",
     "reconnecting": "Please wait..."
   },
+  "instagram-direct-posting-modal": {
+    "headline": "Would you like to set up Direct Scheduling for Instagram?",
+    "description": "Direct Scheduling allows you to post images and videos to Instagram directly from Buffer, just as you can with any other network.",
+    "instructions": "In order to set up Direct Scheduling you need to have an Instagram Business Profile. You can convert any account to a Business Profile through the Instagram mobile app. ",
+    "learnMore": "You can find the Instagram set up guide here.",
+    "dismiss": "No thanks, I might do it later",
+    "cta1": "Yes! Let's do it!",
+    "cta2": "I've converted it to Business"
+  },
   "steal-profile-modal": {
     "headline1": "Whoops, ",
     "headline2": "is already connected to another Buffer account.",

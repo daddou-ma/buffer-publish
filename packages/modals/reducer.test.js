@@ -44,6 +44,18 @@ describe('reducer', () => {
       expect(reducer(stateWithVisibleModal, actions.hideStealProfileModal()))
         .toEqual(Object.assign(initialState, { showStealProfileModal: false }));
     });
+    it('should show instagram direct posting modal', () => {
+      expect(reducer(initialState, actions.showInstagramDirectPostingModal({ profileId: 'id1' })))
+        .toEqual(Object.assign(initialState, { showInstagramDirectPostingModal: true }));
+    });
+    it('should hide instagram direct posting modal', () => {
+      const stateWithVisibleModal = Object.assign(
+        initialState,
+        { showInstagramDirectPostingModal: true },
+      );
+      expect(reducer(stateWithVisibleModal, actions.hideInstagramDirectPostingModal()))
+        .toEqual(Object.assign(initialState, { showInstagramDirectPostingModal: false }));
+    });
     it('should show welcome b4b trial modal', () => {
       expect(reducer(initialState, actions.showWelcomeB4BTrialModal()))
         .toEqual(Object.assign(initialState, { showWelcomeB4BTrialModal: true }));

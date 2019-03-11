@@ -7,11 +7,10 @@ import {
   BufferLoading,
   LockedProfileNotification,
 } from '@bufferapp/publish-shared-components';
-
+import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
-import InstagramDirectPostingModal from '../InstagramDirectPostingModal';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
 
@@ -78,11 +77,8 @@ const QueuedPosts = ({
   isInstagramProfile,
   isInstagramBusiness,
   onSetUpDirectPostingClick,
-  showInstagramModal,
+  showInstagramDirectPostingModal,
   onDirectPostingClick,
-  onHideInstagramModal,
-  isBusinessOnInstagram,
-  onCheckInstagramBusinessClick,
   hasInstagramFeatureFlip,
   isInstagramLoading,
   isLockedProfile,
@@ -152,13 +148,8 @@ const QueuedPosts = ({
       {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
         <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
       }
-      {hasInstagramFeatureFlip && showInstagramModal &&
-        <InstagramDirectPostingModal
-          onSetUpDirectPostingClick={onSetUpDirectPostingClick}
-          onHideInstagramModal={onHideInstagramModal}
-          isBusinessOnInstagram={isBusinessOnInstagram}
-          onCheckInstagramBusinessClick={onCheckInstagramBusinessClick}
-        />
+      {hasInstagramFeatureFlip && showInstagramDirectPostingModal &&
+        <InstagramDirectPostingModal />
       }
       {!!paused && <QueuePausedBar isManager={isManager} handleClickUnpause={onUnpauseClick} />}
       {total < 1 &&
@@ -222,7 +213,6 @@ QueuedPosts.propTypes = {
   onImageClickNext: PropTypes.func,
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
-  onCheckInstagramBusinessClick: PropTypes.func.isRequired,
   onDropPost: PropTypes.func.isRequired,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
@@ -232,10 +222,8 @@ QueuedPosts.propTypes = {
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
-  showInstagramModal: PropTypes.bool,
+  showInstagramDirectPostingModal: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,
-  onHideInstagramModal: PropTypes.func.isRequired,
-  isBusinessOnInstagram: PropTypes.bool,
   hasInstagramFeatureFlip: PropTypes.bool,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
@@ -255,8 +243,7 @@ QueuedPosts.defaultProps = {
   subprofiles: [],
   isInstagramProfile: false,
   isInstagramBusiness: false,
-  showInstagramModal: false,
-  isBusinessOnInstagram: null,
+  showInstagramDirectPostingModal: false,
   hasInstagramFeatureFlip: false,
   isInstagramLoading: false,
   isLockedProfile: false,

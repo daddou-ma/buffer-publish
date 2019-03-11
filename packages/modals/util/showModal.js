@@ -17,6 +17,12 @@ export const getShowModalValue = () => {
   return '';
 };
 
+export const resetShowModalKey = () => {
+  if (window._showModal && window._showModal.key) {
+    window._showModal = null;
+  }
+};
+
 export const shouldShowStealProfileModal = () =>
   getShowModalKey() === 'steal-profile-modal';
 
@@ -25,6 +31,9 @@ export const shouldShowWelcomeModal = () =>
 
 export const shouldShowWelcomeModalPaidUsers = () =>
   getShowModalKey() === 'welcome-modal-2';
+
+export const shouldShowInstagramDirectPostingModal = () =>
+  getShowModalKey() === 'ig-direct-post-modal';
 
 export const shouldShowUpgradeModal = () =>
   getShowModalKey().indexOf('upgrade-to-pro') === 0;

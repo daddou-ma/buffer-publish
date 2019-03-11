@@ -68,11 +68,9 @@ storiesOf('QueuedPosts', module)
       isManager
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
     />
   ))
@@ -91,11 +89,9 @@ storiesOf('QueuedPosts', module)
       isManager
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
     />
   ))
@@ -114,11 +110,9 @@ storiesOf('QueuedPosts', module)
       isManager
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
       onRequeueClick={action('onRequeueClick')}
     />
@@ -137,11 +131,9 @@ storiesOf('QueuedPosts', module)
       isManager={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
       onRequeueClick={action('onRequeueClick')}
     />
@@ -162,11 +154,9 @@ storiesOf('QueuedPosts', module)
       isManager
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onHideInstagramModal={action('onHideInstagramModal')}
       onClickUpgrade={action('onClickUpgrade')}
       onRequeueClick={action('onRequeueClick')}
     />

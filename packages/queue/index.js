@@ -66,7 +66,8 @@ export default connect(
         isInstagramBusiness: profileData.isInstagramBusiness,
         paused: profileData.paused,
         isManager: profileData.isManager,
-        showInstagramModal: state.queue.showInstagramModal,
+        isBusinessAccount: profileData.business,
+        showInstagramDirectPostingModal: state.modals.showInstagramDirectPostingModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
         isInstagramLoading: state.queue.isInstagramLoading,
         hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
@@ -164,7 +165,7 @@ export default connect(
         name: 'checkInstagramBusiness',
         args: {
           profileId: ownProps.profileId,
-          callbackAction: actions.handleOpenInstagramModal({
+          callbackAction: modalsActions.showInstagramDirectPostingModal({
             profileId: ownProps.profileId,
           }),
         },
