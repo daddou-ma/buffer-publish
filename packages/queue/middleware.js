@@ -127,16 +127,6 @@ export default ({ dispatch, getState }) => next => (action) => {
         message: action.error,
       }));
       break;
-    case actionTypes.GET_NUMBER_POSTS:
-      dispatch(dataFetchActions.fetch({
-        name: 'getNumberOfPosts',
-        args: {
-          profileId: action.profileId,
-          startDate: action.startDate,
-          endDate: action.endDate,
-        },
-      }));
-      break;
     case actionTypes.POST_DROPPED: {
       if (action.commit) {
         const state = getState();

@@ -61,8 +61,6 @@ export default connect(
         environment: state.environment.environment,
         editMode: state.queue.editMode,
         editingPostId: state.queue.editingPostId,
-        showCalendar: profileQueuePosts.showCalendar,
-        numberOfPostsByDate: profileQueuePosts.numberOfPostsByDate,
         subprofiles: profileData.subprofiles || [],
         isInstagramProfile: profileData.type === 'instagram',
         isInstagramBusiness: profileData.isInstagramBusiness,
@@ -156,16 +154,6 @@ export default connect(
     },
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
-    },
-    onCalendarToggleClick: () => {
-      dispatch(actions.handleCalendarToggle({ profileId: ownProps.profileId }));
-    },
-    onMiniCalendarMonthChange: (startDate, endDate) => {
-      dispatch(actions.handleMiniCalendarMonthChange({
-        profileId: ownProps.profileId,
-        startDate,
-        endDate,
-      }));
     },
     onSetUpDirectPostingClick: () => {
       dispatch(generalSettingsActions.handleSetUpDirectPostingClick({

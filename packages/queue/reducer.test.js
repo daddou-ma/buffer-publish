@@ -25,7 +25,6 @@ describe('reducer', () => {
           page: 1,
           posts: {},
           total: 0,
-          showCalendar: false,
         },
       },
     };
@@ -53,7 +52,6 @@ describe('reducer', () => {
           page: 2,
           posts: [post],
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -84,7 +82,6 @@ describe('reducer', () => {
           page: 1,
           posts: {},
           total: 0,
-          showCalendar: false,
         },
       },
     };
@@ -106,7 +103,6 @@ describe('reducer', () => {
           loading: true,
           loadingMore: false,
           moreToLoad: false,
-          showCalendar: false,
           page: 1,
           posts: { 12345: postCreated },
           total: 0, // still 0 because counts are updated separately
@@ -135,7 +131,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
       enabledApplicationModes: [],
@@ -151,7 +146,6 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          showCalendar: false,
           posts: { 12345: postEdited },
           total: 1,
         },
@@ -185,7 +179,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -198,7 +191,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: postAfter },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -225,7 +217,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -238,7 +229,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: postAfter },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -264,7 +254,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -277,7 +266,6 @@ describe('reducer', () => {
           page: 1,
           posts: { },
           total: 1, // still 1 because counts are updated separately
-          showCalendar: false,
         },
       },
     };
@@ -304,7 +292,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: post },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -317,7 +304,6 @@ describe('reducer', () => {
           page: 1,
           posts: { 12345: postAfter },
           total: 1,
-          showCalendar: false,
         },
       },
     };
@@ -325,89 +311,6 @@ describe('reducer', () => {
       type: actionTypes.POST_CANCELED_DELETE,
       profileId,
       post: postAfter,
-    };
-    deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
-  });
-
-  // TOGGLE_CALENDAR
-  it('should handle TOGGLE_CALENDAR action type', () => {
-    const post = { id: '12345', text: 'i heart buffer', isConfirmingDelete: false, isDeleting: false };
-    const stateBefore = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: { 12345: post },
-          total: 1,
-          showCalendar: false,
-        },
-      },
-    };
-    const stateAfter = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          numberOfPostsByDate: null,
-          page: 1,
-          posts: { 12345: post },
-          total: 1,
-          showCalendar: true,
-        },
-      },
-    };
-    const action = {
-      type: actionTypes.TOGGLE_CALENDAR,
-      profileId,
-      post,
-    };
-    deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
-  });
-
-  // GET_NUMBER_POSTS
-  it('should handle getNumberOfPosts_FETCH_SUCCESS action type', () => {
-    const post = { id: '12345', text: 'i heart buffer' };
-    const stateBefore = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: { 12345: post },
-          total: 1,
-          showCalendar: false,
-        },
-      },
-    };
-    const stateAfter = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          numberOfPostsByDate: { 'Tue Oct 02 2018': 1 },
-          page: 1,
-          posts: { 12345: post },
-          total: 1,
-          showCalendar: false,
-        },
-      },
-    };
-
-    const action = {
-      profileId,
-      type: 'getNumberOfPosts_FETCH_SUCCESS',
-      result: {
-        numberOfPostsByDate: { 'Tue Oct 02 2018': 1 },
-      },
     };
     deepFreeze(action);
     expect(reducer(stateBefore, action))

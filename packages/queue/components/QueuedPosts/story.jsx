@@ -66,12 +66,9 @@ storiesOf('QueuedPosts', module)
       onRequeueClick={action('onRequeueClick')}
       onUnpauseClick={action('onUnpauseClick')}
       isManager
-      isBusinessAccount={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onCalendarToggleClick={action('onCalendarToggleClick')}
-      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onClickUpgrade={action('onClickUpgrade')}
@@ -90,12 +87,9 @@ storiesOf('QueuedPosts', module)
       onRequeueClick={action('onRequeueClick')}
       onUnpauseClick={action('onUnpauseClick')}
       isManager
-      isBusinessAccount={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onCalendarToggleClick={action('onCalendarToggleClick')}
-      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onClickUpgrade={action('onClickUpgrade')}
@@ -114,12 +108,9 @@ storiesOf('QueuedPosts', module)
       paused
       onUnpauseClick={action('onUnpauseClick')}
       isManager
-      isBusinessAccount={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onCalendarToggleClick={action('onCalendarToggleClick')}
-      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onClickUpgrade={action('onClickUpgrade')}
@@ -138,12 +129,9 @@ storiesOf('QueuedPosts', module)
       paused
       onUnpauseClick={action('onUnpauseClick')}
       isManager={false}
-      isBusinessAccount
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onCalendarToggleClick={action('onCalendarToggleClick')}
-      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onClickUpgrade={action('onClickUpgrade')}
@@ -164,12 +152,9 @@ storiesOf('QueuedPosts', module)
       onUnpauseClick={action('onUnpauseClick')}
       isLockedProfile
       isManager
-      isBusinessAccount={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onCalendarToggleClick={action('onCalendarToggleClick')}
-      onMiniCalendarMonthChange={action('onMiniCalendarMonthChange')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onClickUpgrade={action('onClickUpgrade')}

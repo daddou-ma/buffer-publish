@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  Button,
-} from '@bufferapp/components';
-import {
   EmptyState,
   PostDragLayer,
   BufferLoading,
@@ -12,11 +9,10 @@ import {
 } from '@bufferapp/publish-shared-components';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
-import MiniCalendar from '../MiniCalendar';
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -56,43 +52,6 @@ const loadingContainerStyle = {
   paddingTop: '5rem',
 };
 
-const buttonStyle = {
-  height: '37px',
-  marginLeft: '1.5rem',
-  minWidth: '150px',
-  alignItems: 'center',
-  display: 'flex',
-};
-
-/* eslint-disable react/prop-types */
-
-const OverviewCalendar = ({
-  onCalendarToggleClick,
-  showCalendar,
-  numberOfPostsByDate,
-  onMiniCalendarMonthChange,
-}) => (
-  <React.Fragment>
-    <div style={buttonStyle} className="fs--mini-calendar">
-      <Button
-        secondary
-        onClick={onCalendarToggleClick}
-      >
-        {showCalendar ? 'Hide Overview' : 'Show Overview'}
-      </Button>
-    </div>
-
-    {showCalendar &&
-      <MiniCalendar
-        numberOfPostsByDate={numberOfPostsByDate}
-        onMonthChange={onMiniCalendarMonthChange}
-      />
-    }
-  </React.Fragment>
-);
-
-/* eslint-enable react/prop-types */
-
 const QueuedPosts = ({
   total,
   loading,
@@ -111,13 +70,9 @@ const QueuedPosts = ({
   onImageClose,
   onDropPost,
   showComposer,
-  showCalendar,
   editMode,
   paused,
   onUnpauseClick,
-  onCalendarToggleClick,
-  numberOfPostsByDate,
-  onMiniCalendarMonthChange,
   subprofiles,
   isInstagramProfile,
   isInstagramBusiness,
@@ -129,7 +84,6 @@ const QueuedPosts = ({
   isLockedProfile,
   features,
   isManager,
-  isBusinessAccount,
   onClickUpgrade,
 }) => {
   if (loading) {
@@ -186,23 +140,6 @@ const QueuedPosts = ({
             <div style={composerInputIcoCameraStyle}></div>
           </div>
         </div>
-        <FeatureLoader
-          supportedFeatures={'mini_calendar'}
-          fallback={isBusinessAccount ?
-            <OverviewCalendar
-              onCalendarToggleClick={onCalendarToggleClick}
-              showCalendar={showCalendar}
-              numberOfPostsByDate={numberOfPostsByDate}
-              onMiniCalendarMonthChange={onMiniCalendarMonthChange}
-            /> : ''}
-        >
-          <OverviewCalendar
-            onCalendarToggleClick={onCalendarToggleClick}
-            showCalendar={showCalendar}
-            numberOfPostsByDate={numberOfPostsByDate}
-            onMiniCalendarMonthChange={onMiniCalendarMonthChange}
-          />
-        </FeatureLoader>
 
       </div>
       {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
@@ -281,13 +218,6 @@ QueuedPosts.propTypes = {
   editMode: PropTypes.bool,
   paused: PropTypes.bool,
   onUnpauseClick: PropTypes.func.isRequired,
-  showCalendar: PropTypes.bool,
-  onCalendarToggleClick: PropTypes.func.isRequired,
-  onMiniCalendarMonthChange: PropTypes.func.isRequired,
-  numberOfPostsByDate: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]),
   isManager: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
@@ -298,7 +228,6 @@ QueuedPosts.propTypes = {
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
-  isBusinessAccount: PropTypes.bool.isRequired,
 };
 
 QueuedPosts.defaultProps = {
@@ -311,8 +240,6 @@ QueuedPosts.defaultProps = {
   enabledApplicationModes: [],
   editMode: false,
   paused: false,
-  showCalendar: false,
-  numberOfPostsByDate: null,
   subprofiles: [],
   isInstagramProfile: false,
   isInstagramBusiness: false,
