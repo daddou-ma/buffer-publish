@@ -2,14 +2,17 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actions } from './reducer';
 import {
   shouldShowUpgradeModal,
   shouldShowWelcomeModal,
   getSourceFromKey,
   shouldShowStealProfileModal,
+  shouldShowInstagramDirectPostingModal,
   shouldShowWelcomeModalPaidUsers,
   getShowModalValue,
+  resetShowModalKey,
 } from './util/showModal';
 
 export default ({ dispatch, getState }) => next => (action) => {
@@ -48,6 +51,21 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       break;
     }
+    case profileActionTypes.SELECT_PROFILE:
+      if (shouldShowInstagramDirectPostingModal()) {
+        const profileId = getState().profileSidebar.selectedProfileId;
+        dispatch(dataFetchActions.fetch({
+          name: 'checkInstagramBusiness',
+          args: {
+            profileId,
+            callbackAction: actions.showInstagramDirectPostingModal({
+              profileId,
+            }),
+          },
+        }));
+        resetShowModalKey();
+      }
+      break;
     case 'COMPOSER_EVENT':
       if (action.eventType === 'show-upgrade-modal') {
         dispatch(actions.showUpgradeModal({ source: 'queue_limit' }));

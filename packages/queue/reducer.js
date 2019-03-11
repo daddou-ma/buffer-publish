@@ -25,8 +25,6 @@ export const actionTypes = keyWrapper('QUEUE', {
   POST_REQUEUE: 0,
   TOGGLE_CALENDAR: 0,
   GET_NUMBER_POSTS: 0,
-  OPEN_IG_MODAL: 0,
-  HIDE_IG_MODAL: 0,
 });
 
 export const initialState = {
@@ -36,7 +34,6 @@ export const initialState = {
   environment: 'production',
   editMode: false,
   editingPostId: '',
-  showInstagramModal: false,
   isBusinessOnInstagram: null,
   isInstagramLoading: false,
 };
@@ -495,16 +492,6 @@ export default (state = initialState, action) => {
         showComposer: false,
         editMode: false,
       };
-    case actionTypes.OPEN_IG_MODAL:
-      return {
-        ...state,
-        showInstagramModal: true,
-      };
-    case actionTypes.HIDE_IG_MODAL:
-      return {
-        ...state,
-        showInstagramModal: false,
-      };
     default:
       return state;
   }
@@ -601,12 +588,5 @@ export const actions = {
     profileId,
     startDate,
     endDate,
-  }),
-  handleOpenInstagramModal: ({ profileId }) => ({
-    type: actionTypes.OPEN_IG_MODAL,
-    profileId,
-  }),
-  handleHideInstagramModal: () => ({
-    type: actionTypes.HIDE_IG_MODAL,
   }),
 };

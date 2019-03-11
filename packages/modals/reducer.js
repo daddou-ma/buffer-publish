@@ -8,6 +8,7 @@ export const initialState = {
   upgradeModalSource: null,
   showStealProfileModal: false,
   stealProfileUsername: null,
+  showInstagramDirectPostingModal: false,
   showWelcomeB4BTrialModal: false,
 };
 
@@ -22,6 +23,8 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_PROFILES_DISCONNECTED_MODAL: 0,
   SHOW_STEAL_PROFILE_MODAL: 0,
   HIDE_STEAL_PROFILE_MODAL: 0,
+  SHOW_IG_DIRECT_POSTING_MODAL: 0,
+  HIDE_IG_DIRECT_POSTING_MODAL: 0,
   SHOW_WELCOME_B4B_TRIAL_MODAL: 0,
   HIDE_WELCOME_B4B_TRIAL_MODAL: 0,
 });
@@ -80,6 +83,16 @@ export default (state = initialState, action) => {
         ...state,
         showStealProfileModal: false,
       };
+    case actionTypes.SHOW_IG_DIRECT_POSTING_MODAL:
+      return {
+        ...state,
+        showInstagramDirectPostingModal: true,
+      };
+    case actionTypes.HIDE_IG_DIRECT_POSTING_MODAL:
+      return {
+        ...state,
+        showInstagramDirectPostingModal: false,
+      };
     case actionTypes.SHOW_WELCOME_B4B_TRIAL_MODAL:
       return {
         ...state,
@@ -127,6 +140,13 @@ export const actions = {
   }),
   hideStealProfileModal: () => ({
     type: actionTypes.HIDE_STEAL_PROFILE_MODAL,
+  }),
+  showInstagramDirectPostingModal: ({ profileId }) => ({
+    type: actionTypes.SHOW_IG_DIRECT_POSTING_MODAL,
+    profileId,
+  }),
+  hideInstagramDirectPostingModal: () => ({
+    type: actionTypes.HIDE_IG_DIRECT_POSTING_MODAL,
   }),
   showWelcomeB4BTrialModal: () => ({
     type: actionTypes.SHOW_WELCOME_B4B_TRIAL_MODAL,
