@@ -19,7 +19,7 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
 storiesOf('PostLists', module)
