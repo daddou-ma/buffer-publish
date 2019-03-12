@@ -27,9 +27,7 @@ const store = storeFake({
   stripe: {},
   productFeatures: {
     planName: 'free',
-    features: {
-      share_again: true,
-    },
+    features: {},
   },
 });
 
@@ -55,6 +53,8 @@ storiesOf('PastRemindersPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onClickUpgrade={action('onClickUpgrade')}
     />
   ))
   .add('loading', () => (
@@ -70,13 +70,14 @@ storiesOf('PastRemindersPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onClickUpgrade={action('onClickUpgrade')}
     />
   ))
-  .add('should show past reminders', () => (
+  .add('if Manager and in Business Account', () => (
     <PastRemindersPosts
       total={5}
       loading={false}
-      isLockedProfile={false}
       header={header}
       subHeader={subHeader}
       postLists={postLists}
@@ -88,5 +89,28 @@ storiesOf('PastRemindersPosts', module)
       onRequeueClick={action('onRequeueClick')}
       onClickUpgradeToPro={action('onClickUpgradeToPro')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onClickUpgrade={action('onClickUpgrade')}
+      isBusinessAccount
+      isManager
+    />
+  ))
+  .add('if Contributor and in Business Account', () => (
+    <PastRemindersPosts
+      total={5}
+      loading={false}
+      header={header}
+      subHeader={subHeader}
+      postLists={postLists}
+      onCancelConfirmClick={action('onCancelConfirmClick')}
+      onDeleteClick={action('onDeleteClick')}
+      onDeleteConfirmClick={action('onDeleteConfirmClick')}
+      onEditClick={action('onEditClick')}
+      onShareNowClick={action('onShareNowClick')}
+      onRequeueClick={action('onRequeueClick')}
+      onClickUpgradeToPro={action('onClickUpgradeToPro')}
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onClickUpgrade={action('onClickUpgrade')}
+      isBusinessAccount
+      isManager={false}
     />
   ));

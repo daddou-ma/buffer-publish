@@ -70,6 +70,24 @@ storiesOf('PostList', module)
       isSent
     />
   ))
+  .add('sent, for a team member', () => (
+    <PostList
+      listHeader={listHeader}
+      posts={sentPosts}
+      onCancelConfirmClick={action('onCancelConfirmClick')}
+      onDeleteClick={action('onDeleteClick')}
+      onDeleteConfirmClick={action('onDeleteConfirmClick')}
+      onEditClick={action('onEditClick')}
+      onShareNowClick={action('onShareNowClick')}
+      onImageClick={action('onImageClick')}
+      onImageClickNext={action('onImageClickNext')}
+      onImageClickPrev={action('onImageClickPrev')}
+      onImageClose={action('onImageClose')}
+      onShareAgainClick={action('onShareAgainClick')}
+      isSent
+      isBusinessAccount
+    />
+  ))
   .add('past reminders', () => (
     <PostList
       listHeader={listHeader}
@@ -87,6 +105,46 @@ storiesOf('PostList', module)
       onShareAgainClick={action('onShareAgainClick')}
       isPastReminder
       isManager
+    />
+  ))
+  .add('past reminders, for a team member and manager', () => (
+    <PostList
+      listHeader={listHeader}
+      posts={pastRemindersPosts}
+      onCancelConfirmClick={action('onCancelConfirmClick')}
+      onDeleteClick={action('onDeleteClick')}
+      onDeleteConfirmClick={action('onDeleteConfirmClick')}
+      onEditClick={action('onEditClick')}
+      onShareNowClick={action('onShareNowClick')}
+      onImageClick={action('onImageClick')}
+      onImageClickNext={action('onImageClickNext')}
+      onImageClickPrev={action('onImageClickPrev')}
+      onImageClose={action('onImageClose')}
+      onMobileClick={action('onMobileClick')}
+      onShareAgainClick={action('onShareAgainClick')}
+      isPastReminder
+      isManager
+      isBusinessAccount
+    />
+  ))
+  .add('past reminders, for a team member and contributor', () => (
+    <PostList
+      listHeader={listHeader}
+      posts={pastRemindersPosts}
+      onCancelConfirmClick={action('onCancelConfirmClick')}
+      onDeleteClick={action('onDeleteClick')}
+      onDeleteConfirmClick={action('onDeleteConfirmClick')}
+      onEditClick={action('onEditClick')}
+      onShareNowClick={action('onShareNowClick')}
+      onImageClick={action('onImageClick')}
+      onImageClickNext={action('onImageClickNext')}
+      onImageClickPrev={action('onImageClickPrev')}
+      onImageClose={action('onImageClose')}
+      onMobileClick={action('onMobileClick')}
+      onShareAgainClick={action('onShareAgainClick')}
+      isPastReminder
+      isManager={false}
+      isBusinessAccount
     />
   ))
   .add('missing type', () => (
