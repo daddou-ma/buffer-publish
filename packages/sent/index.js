@@ -42,6 +42,7 @@ export default connect(
         showComposer: state.sent.showComposer,
         editMode: state.sent.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
+        isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         canStartBusinessTrial: state.appSidebar.user.canStartBusinessTrial,
       };

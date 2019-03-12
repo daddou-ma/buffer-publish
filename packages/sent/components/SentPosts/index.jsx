@@ -50,6 +50,7 @@ const SentPosts = ({
   onClickUpgrade,
   features,
   canStartBusinessTrial,
+  isBusinessAccount,
 }) => {
   if (loading) {
     return (
@@ -117,6 +118,7 @@ const SentPosts = ({
         onImageClickPrev={onImageClickPrev}
         onImageClose={onImageClose}
         isManager={isManager}
+        isBusinessAccount={isBusinessAccount}
         isSent
       />
     </div>
@@ -150,6 +152,7 @@ SentPosts.propTypes = {
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
+  isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
   canStartBusinessTrial: PropTypes.bool.isRequired,
@@ -165,6 +168,7 @@ SentPosts.defaultProps = {
   showComposer: false,
   editMode: false,
   isManager: true,
+  isBusinessAccount: false,
   isLockedProfile: false,
   onEditClick: () => {},
   onShareAgainClick: () => {},

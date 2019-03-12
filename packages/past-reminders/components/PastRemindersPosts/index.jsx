@@ -54,6 +54,7 @@ const PastRemindersPosts = ({
   showComposer,
   editMode,
   isManager,
+  isBusinessAccount,
   isLockedProfile,
   onClickUpgrade,
   features,
@@ -129,6 +130,7 @@ const PastRemindersPosts = ({
         onImageClickPrev={onImageClickPrev}
         onImageClose={onImageClose}
         isManager={isManager}
+        isBusinessAccount={isBusinessAccount}
         isSent={false}
         isPastReminder
       />
@@ -165,6 +167,7 @@ PastRemindersPosts.propTypes = {
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
+  isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
 };
@@ -180,6 +183,7 @@ PastRemindersPosts.defaultProps = {
   showComposer: false,
   editMode: false,
   isManager: true,
+  isBusinessAccount: false,
   isLockedProfile: false,
   onEditClick: () => {},
   onShareAgainClick: () => {},

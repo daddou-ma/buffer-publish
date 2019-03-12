@@ -5,7 +5,7 @@ import {
   Text,
   Button,
 } from '@bufferapp/components';
-import FeatureLoader from '@bufferapp/product-features';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import TextPost from '../TextPost';
 import ImagePost from '../ImagePost';
 import MultipleImagesPost from '../MultipleImagesPost';
@@ -97,6 +97,8 @@ const PostList = ({
   isSent,
   isManager,
   isPastReminder,
+  isBusinessAccount,
+  features,
 }) =>
   <div>
     <div style={listHeaderStyle}>
@@ -127,21 +129,17 @@ const PostList = ({
               isPastReminder,
             })
           }
-          {isManager && !isPastReminder &&
-            <FeatureLoader
-              supportedFeatures={'share_again'}
-            >
-              <div style={reBufferWrapperStyle}>
-                <Button
-                  secondary
-                  onClick={() => { onShareAgainClick({ post }); }}
-                >
-                  Share Again
-                </Button>
-              </div>
-            </FeatureLoader>
+          {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder &&
+            <div style={reBufferWrapperStyle}>
+              <Button
+                secondary
+                onClick={() => { onShareAgainClick({ post }); }}
+              >
+                Share Again
+              </Button>
+            </div>
           }
-          {isManager && isPastReminder &&
+          {(!features.isFreeUser() || isBusinessAccount) && isPastReminder &&
             <div>
               <div style={reBufferWrapperStyle}>
                 <Button
@@ -152,15 +150,17 @@ const PostList = ({
                   Share Again
                 </Button>
               </div>
-              <div style={reBufferWrapperStyle}>
-                <Button
-                  fillContainer
-                  secondary
-                  onClick={() => { onMobileClick({ post }); }}
-                >
-                  Send to Mobile
-                </Button>
-              </div>
+              {isManager &&
+                <div style={reBufferWrapperStyle}>
+                  <Button
+                    fillContainer
+                    secondary
+                    onClick={() => { onMobileClick({ post }); }}
+                  >
+                    Send to Mobile
+                  </Button>
+                </div>
+              }
             </div>
           }
         </div>,
@@ -190,10 +190,12 @@ PostList.propTypes = {
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
   isPastReminder: PropTypes.bool,
+  isBusinessAccount: PropTypes.bool,
+  features: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 PostList.defaultProps = {
   posts: [],
 };
 
-export default PostList;
+export default WithFeatureLoader(PostList);

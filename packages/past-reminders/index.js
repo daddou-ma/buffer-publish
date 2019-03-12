@@ -43,6 +43,7 @@ export default connect(
         showComposer: state.pastReminders.showComposer,
         editMode: state.pastReminders.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
+        isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
       };
     }
