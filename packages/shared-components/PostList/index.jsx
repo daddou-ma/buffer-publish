@@ -139,17 +139,19 @@ const PostList = ({
               </Button>
             </div>
           }
-          {(!features.isFreeUser() || isBusinessAccount) && isPastReminder &&
+          {isPastReminder &&
             <div>
-              <div style={reBufferWrapperStyle}>
-                <Button
-                  fillContainer
-                  secondary
-                  onClick={() => { onShareAgainClick({ post }); }}
-                >
-                  Share Again
-                </Button>
-              </div>
+              {(!features.isFreeUser() || isBusinessAccount) &&
+                <div style={reBufferWrapperStyle}>
+                  <Button
+                    fillContainer
+                    secondary
+                    onClick={() => { onShareAgainClick({ post }); }}
+                  >
+                    Share Again
+                  </Button>
+                </div>
+              }
               {isManager &&
                 <div style={reBufferWrapperStyle}>
                   <Button
