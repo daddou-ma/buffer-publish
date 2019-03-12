@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Provider } from 'react-redux';
+import { action } from '@storybook/addon-actions';
 import { checkA11y } from 'storybook-addon-a11y';
 import SentPosts from './index';
 import {
@@ -44,5 +45,22 @@ storiesOf('SentPosts', module)
       loading={false}
       header={header}
       postLists={postLists}
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onClickUpgrade={action('onClickUpgrade')}
+      onShareAgainClick={action('onShareAgainClick')}
+      canStartBusinessTrial={false}
+    />
+  ))
+  .add('if in Business Account', () => (
+    <SentPosts
+      total={1}
+      loading={false}
+      header={header}
+      postLists={postLists}
+      isBusinessAccount
+      onComposerCreateSuccess={action('onComposerCreateSuccess')}
+      onClickUpgrade={action('onClickUpgrade')}
+      onShareAgainClick={action('onShareAgainClick')}
+      canStartBusinessTrial={false}
     />
   ));

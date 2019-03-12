@@ -32,6 +32,7 @@ const renderPostList = ({
   isSent,
   isManager,
   isPastReminder,
+  isBusinessAccount,
 }) =>
   <div style={postListStyle}>
     <PostList
@@ -54,6 +55,7 @@ const renderPostList = ({
       isSent={isSent}
       isManager={isManager}
       isPastReminder={isPastReminder}
+      isBusinessAccount={isBusinessAccount}
     />
   </div>;
 
@@ -77,6 +79,7 @@ const PostLists = ({
   isSent,
   isManager,
   isPastReminder,
+  isBusinessAccount,
 }) =>
   <List
     items={postLists.map((postList, index) =>
@@ -99,6 +102,7 @@ const PostLists = ({
         isSent,
         isManager,
         isPastReminder,
+        isBusinessAccount,
       }),
     )}
     fillContainer
@@ -131,6 +135,7 @@ PostLists.propTypes = {
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
   isPastReminder: PropTypes.bool,
+  isBusinessAccount: PropTypes.bool,
 };
 
 PostLists.defaultProps = {
