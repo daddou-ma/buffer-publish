@@ -42,6 +42,7 @@ const VideoPost = ({
   commentEnabled,
   commentText,
   hasCommentEnabled,
+  hasFirstCommentFlip,
 }) =>
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
@@ -83,6 +84,7 @@ const VideoPost = ({
     commentEnabled={commentEnabled}
     commentText={commentText}
     hasCommentEnabled={hasCommentEnabled}
+    hasFirstCommentFlip={hasFirstCommentFlip}
   />;
 
 VideoPost.propTypes = ImagePost.propTypes;

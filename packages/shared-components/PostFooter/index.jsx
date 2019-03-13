@@ -77,8 +77,8 @@ const renderCommentIcon = () => (
   </span>
 );
 
-const renderActionText = (postAction, hasCommentEnabled, comment) => (
-  hasCommentEnabled && comment.commentEnabled ?
+const renderActionText = (postAction, hasCommentEnabled, comment, hasFirstCommentFlip) => (
+  hasFirstCommentFlip && hasCommentEnabled && comment.commentEnabled ?
     <span style={igCommentWrapper}>
       {postAction}
       {renderCommentIcon()}
@@ -87,14 +87,14 @@ const renderActionText = (postAction, hasCommentEnabled, comment) => (
 );
 
 /* eslint-disable react/prop-types */
-const renderPostAction = (postAction, serviceLink, isSent, hasCommentEnabled, comment) => (
+const renderPostAction = (postAction, serviceLink, isSent, hasCommentEnabled, comment, hasFirstCommentFlip) => (
   isSent ?
     <Link href={serviceLink} unstyled newTab>
       <Text size={'small'} color={'shuttleGray'}>
-        {renderActionText(postAction, hasCommentEnabled, comment)}
+        {renderActionText(postAction, hasCommentEnabled, comment, hasFirstCommentFlip)}
       </Text>
     </Link> :
-    renderActionText(postAction, hasCommentEnabled, comment)
+    renderActionText(postAction, hasCommentEnabled, comment, hasFirstCommentFlip)
 );
 
 const renderText = (
@@ -106,6 +106,7 @@ const renderText = (
   dueTime,
   hasCommentEnabled,
   comment,
+  hasFirstCommentFlip,
 ) => (
   isPastReminder ?
     (<span>
@@ -119,7 +120,7 @@ const renderText = (
         size={'small'}
         color={isSent ? 'shuttleGray' : 'black'}
       >
-        { !hasError ? renderPostAction(postDetails.postAction, serviceLink, isSent, hasCommentEnabled, comment) : '' }
+        { !hasError ? renderPostAction(postDetails.postAction, serviceLink, isSent, hasCommentEnabled, comment, hasFirstCommentFlip) : '' }
       </Text>
     </span>)
 );
@@ -157,6 +158,7 @@ const PostFooter = ({
   commentEnabled,
   commentText,
   hasCommentEnabled,
+  hasFirstCommentFlip,
 }) => {
   const hasError = postDetails.error && postDetails.error.length > 0;
   const isCustomScheduled = postDetails.isCustomScheduled;
@@ -176,6 +178,7 @@ const PostFooter = ({
           dueTime,
           hasCommentEnabled,
           comment,
+          hasFirstCommentFlip,
         )}
       </div>
       {!isSent && !isPastReminder && isManager && (
@@ -221,6 +224,7 @@ PostFooter.propTypes = {
   dueTime: PropTypes.string,
   sharedBy: PropTypes.string,
   hasCommentEnabled: PropTypes.bool,
+  hasFirstCommentFlip: PropTypes.bool,
   commentEnabled: PropTypes.bool,
   commentText: PropTypes.string,
 };
@@ -234,6 +238,7 @@ PostFooter.defaultProps = {
   isSent: false,
   isPastReminder: false,
   hasCommentEnabled: false,
+  hasFirstCommentFlip: false,
 };
 
 export default PostFooter;

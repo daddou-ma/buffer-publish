@@ -75,6 +75,7 @@ export default connect(
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
         isInstagramLoading: state.queue.isInstagramLoading,
         hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
+        hasFirstCommentFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('first_comment') : false,
       };
     }
     return {};

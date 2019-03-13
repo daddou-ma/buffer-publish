@@ -147,6 +147,7 @@ const Post = ({
   commentEnabled,
   commentText,
   hasCommentEnabled,
+  hasFirstCommentFlip,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
@@ -203,6 +204,7 @@ const Post = ({
           commentEnabled={commentEnabled}
           commentText={commentText}
           hasCommentEnabled={hasCommentEnabled}
+          hasFirstCommentFlip={hasFirstCommentFlip}
         />
         <FeatureLoader
           supportedFeatures={'post_stats'}

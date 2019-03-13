@@ -51,6 +51,7 @@ const TextPost = ({
   commentEnabled,
   commentText,
   hasCommentEnabled,
+  hasFirstCommentFlip,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -107,6 +108,7 @@ const TextPost = ({
       commentEnabled={commentEnabled}
       commentText={commentText}
       hasCommentEnabled={hasCommentEnabled}
+      hasFirstCommentFlip={hasFirstCommentFlip}
     >
       {children}
     </Post>

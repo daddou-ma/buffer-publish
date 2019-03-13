@@ -46,6 +46,7 @@ export default connect(
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         canStartBusinessTrial: state.appSidebar.user.canStartBusinessTrial,
+        hasFirstCommentFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('first_comment') : false,
       };
     }
     return {};

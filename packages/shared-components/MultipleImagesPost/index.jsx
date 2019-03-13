@@ -61,6 +61,7 @@ const MultipleImagesPost = ({
   commentEnabled,
   commentText,
   hasCommentEnabled,
+  hasFirstCommentFlip,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
@@ -132,6 +133,7 @@ const MultipleImagesPost = ({
       commentEnabled={commentEnabled}
       commentText={commentText}
       hasCommentEnabled={hasCommentEnabled}
+      hasFirstCommentFlip={hasFirstCommentFlip}
     >
       {children}
     </Post>

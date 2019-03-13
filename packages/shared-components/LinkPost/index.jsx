@@ -74,6 +74,7 @@ const LinkPost = ({
   commentEnabled,
   commentText,
   hasCommentEnabled,
+  hasFirstCommentFlip,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -163,6 +164,7 @@ const LinkPost = ({
       commentEnabled={commentEnabled}
       commentText={commentText}
       hasCommentEnabled={hasCommentEnabled}
+      hasFirstCommentFlip={hasFirstCommentFlip}
     >
       {children}
     </Post>
