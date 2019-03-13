@@ -73,7 +73,7 @@ const LinkPost = ({
   sharedBy,
   commentEnabled,
   commentText,
-  isInstagramPost,
+  hasCommentEnabled,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -162,7 +162,7 @@ const LinkPost = ({
       sharedBy={sharedBy}
       commentEnabled={commentEnabled}
       commentText={commentText}
-      isInstagramPost={isInstagramPost}
+      hasCommentEnabled={hasCommentEnabled}
     >
       {children}
     </Post>

@@ -60,7 +60,7 @@ const MultipleImagesPost = ({
   sharedBy,
   commentEnabled,
   commentText,
-  isInstagramPost,
+  hasCommentEnabled,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
@@ -131,7 +131,7 @@ const MultipleImagesPost = ({
       sharedBy={sharedBy}
       commentEnabled={commentEnabled}
       commentText={commentText}
-      isInstagramPost={isInstagramPost}
+      hasCommentEnabled={hasCommentEnabled}
     >
       {children}
     </Post>

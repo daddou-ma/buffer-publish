@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 // load the presentational component
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
+import { openBillingWindow, servicesWithCommentFeature } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import SentPosts from './components/SentPosts';
 
@@ -14,11 +14,9 @@ const formatPostLists = (posts) => {
     Object.values(posts).sort((a, b) => b.due_at - a.due_at) : [];
 
   orderedPosts.forEach((post) => {
-    let isInstagramPost = false;
-    if (post.profile_service === 'instagram') isInstagramPost = true;
+    post.hasCommentEnabled = servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
     if (post.day !== day) {
       day = post.day;
-      post.isInstagramPost = isInstagramPost;
       newList = { listHeader: day, posts: [post] };
       postLists.push(newList);
     } else { // if same day add to posts array of current list

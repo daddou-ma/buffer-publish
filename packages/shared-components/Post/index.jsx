@@ -146,7 +146,7 @@ const Post = ({
   sharedBy,
   commentEnabled,
   commentText,
-  isInstagramPost,
+  hasCommentEnabled,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
@@ -202,7 +202,7 @@ const Post = ({
           sharedBy={sharedBy}
           commentEnabled={commentEnabled}
           commentText={commentText}
-          isInstagramPost={isInstagramPost}
+          hasCommentEnabled={hasCommentEnabled}
         />
         <FeatureLoader
           supportedFeatures={'post_stats'}

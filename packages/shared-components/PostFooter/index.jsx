@@ -77,8 +77,8 @@ const renderCommentIcon = () => (
   </span>
 );
 
-const renderActionText = (postAction, isInstagramPost, comment) => (
-  isInstagramPost && comment.commentEnabled ?
+const renderActionText = (postAction, hasCommentEnabled, comment) => (
+  hasCommentEnabled && comment.commentEnabled ?
     <span style={igCommentWrapper}>
       {postAction}
       {renderCommentIcon()}
@@ -87,14 +87,14 @@ const renderActionText = (postAction, isInstagramPost, comment) => (
 );
 
 /* eslint-disable react/prop-types */
-const renderPostAction = (postAction, serviceLink, isSent, isInstagramPost, comment) => (
+const renderPostAction = (postAction, serviceLink, isSent, hasCommentEnabled, comment) => (
   isSent ?
     <Link href={serviceLink} unstyled newTab>
       <Text size={'small'} color={'shuttleGray'}>
-        {renderActionText(postAction, isInstagramPost, comment)}
+        {renderActionText(postAction, hasCommentEnabled, comment)}
       </Text>
     </Link> :
-    renderActionText(postAction, isInstagramPost, comment)
+    renderActionText(postAction, hasCommentEnabled, comment)
 );
 
 const renderText = (
@@ -104,7 +104,7 @@ const renderText = (
   isPastReminder,
   day,
   dueTime,
-  isInstagramPost,
+  hasCommentEnabled,
   comment,
 ) => (
   isPastReminder ?
@@ -119,7 +119,7 @@ const renderText = (
         size={'small'}
         color={isSent ? 'shuttleGray' : 'black'}
       >
-        { !hasError ? renderPostAction(postDetails.postAction, serviceLink, isSent, isInstagramPost, comment) : '' }
+        { !hasError ? renderPostAction(postDetails.postAction, serviceLink, isSent, hasCommentEnabled, comment) : '' }
       </Text>
     </span>)
 );
@@ -156,7 +156,7 @@ const PostFooter = ({
   sharedBy,
   commentEnabled,
   commentText,
-  isInstagramPost,
+  hasCommentEnabled,
 }) => {
   const hasError = postDetails.error && postDetails.error.length > 0;
   const isCustomScheduled = postDetails.isCustomScheduled;
@@ -174,7 +174,7 @@ const PostFooter = ({
           isPastReminder,
           day,
           dueTime,
-          isInstagramPost,
+          hasCommentEnabled,
           comment,
         )}
       </div>
@@ -220,7 +220,7 @@ PostFooter.propTypes = {
   day: PropTypes.string,
   dueTime: PropTypes.string,
   sharedBy: PropTypes.string,
-  isInstagramPost: PropTypes.bool,
+  hasCommentEnabled: PropTypes.bool,
   commentEnabled: PropTypes.bool,
   commentText: PropTypes.string,
 };
@@ -233,7 +233,7 @@ PostFooter.defaultProps = {
   isManager: true,
   isSent: false,
   isPastReminder: false,
-  isInstagramPost: false,
+  hasCommentEnabled: false,
 };
 
 export default PostFooter;

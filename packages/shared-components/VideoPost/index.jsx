@@ -41,7 +41,7 @@ const VideoPost = ({
   sharedBy,
   commentEnabled,
   commentText,
-  isInstagramPost,
+  hasCommentEnabled,
 }) =>
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
@@ -82,7 +82,7 @@ const VideoPost = ({
     sharedBy={sharedBy}
     commentEnabled={commentEnabled}
     commentText={commentText}
-    isInstagramPost={isInstagramPost}
+    hasCommentEnabled={hasCommentEnabled}
   />;
 
 VideoPost.propTypes = ImagePost.propTypes;

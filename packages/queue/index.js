@@ -4,7 +4,7 @@ import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sid
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
+import { openBillingWindow, servicesWithCommentFeature } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 
 import QueuedPosts from './components/QueuedPosts';
@@ -13,8 +13,8 @@ const formatPostLists = (isManager, posts) => {
   const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
   let lastHeader = null;
   return orderedPosts.reduce((acc, post, index) => {
-    let isInstagramPost = false;
-    if (post.profile_service === 'instagram') isInstagramPost = true;
+    const hasCommentEnabled = servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
+
     if (lastHeader !== post.day) {
       lastHeader = post.day;
       acc.push({
@@ -22,13 +22,13 @@ const formatPostLists = (isManager, posts) => {
         text: post.day,
         id: `header-${index}`,
         isManager,
-        isInstagramPost,
+        hasCommentEnabled,
       });
     }
     acc.push({
       queueItemType: 'post',
       isManager,
-      isInstagramPost,
+      hasCommentEnabled,
       index,
       ...post,
     });
