@@ -25,6 +25,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,
+          count: getState().appSidebar.user.is_free_user ? undefined : 300,
         },
       }));
       break;
@@ -36,10 +37,11 @@ export default ({ dispatch, getState }) => next => (action) => {
         args: {
           profileId: action.args.profileId,
           isFetchingMore: false,
+          count: getState().appSidebar.user.is_free_user ? undefined : 300,
         },
       }));
       break;
-    case `COMPOSER_EVENT`:
+    case 'COMPOSER_EVENT':
       if (action.eventType === 'saved-drafts') {
         dispatch(notificationActions.createNotification({
           notificationType: 'success',
@@ -54,6 +56,7 @@ export default ({ dispatch, getState }) => next => (action) => {
           profileId: action.args.profileId,
           isFetchingMore: false,
           isReordering: true,
+          count: getState().appSidebar.user.is_free_user ? undefined : 300,
         },
       }));
       break;

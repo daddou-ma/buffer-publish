@@ -6,7 +6,7 @@ const rp = require('request-promise');
 module.exports = method(
   'queuedPosts',
   'fetch queued posts',
-  ({ profileId, page }, { session }) =>
+  ({ profileId, page, count = 20 }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/profiles/${profileId}/updates/pending.json`,
       method: 'GET',
@@ -14,7 +14,7 @@ module.exports = method(
       qs: {
         access_token: session.publish.accessToken,
         page,
-        count: 20,
+        count,
       },
     })
       .then(result => JSON.parse(result))

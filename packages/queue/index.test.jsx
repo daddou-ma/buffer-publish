@@ -21,7 +21,7 @@ describe('Queue', () => {
     const store = storeFake({
       profileSidebar: {
         profiles: [
-          { id: 'abc', paused: false },
+          { id: 'abc', paused: false, schedules: [] },
         ],
         selectedProfile: {
           isManager: true,

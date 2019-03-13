@@ -27,7 +27,9 @@ export default connect(
         case 'queue':
           options = {
             editMode: state.queue.editMode,
-            post: state.queue.byProfileId[selectedProfileId].posts[postId],
+            emptySlotMode: state.queue.emptySlotMode,
+            post: state.queue.emptySlotMode ? state.queue.emptySlotData :
+              state.queue.byProfileId[selectedProfileId].posts[postId],
           };
           break;
         case 'sent':

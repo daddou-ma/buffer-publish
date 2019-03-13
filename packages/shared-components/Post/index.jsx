@@ -23,9 +23,9 @@ import PostErrorBanner from '../PostErrorBanner';
 const getPostContainerStyle = ({ dragging, hovering }) => ({
   display: 'flex',
   width: '100%',
-  boxShadow: (hovering && !dragging) ? '0 2px 4px 0 rgba(0,0,0,0.50)' : 'none',
+  // boxShadow: (hovering && !dragging) ? '0 2px 4px 0 rgba(0,0,0,0.50)' : 'none',
   transition: `box-shadow 0.1s ${transitionAnimationType}`,
-  borderRadius,
+  borderRadius: '4px',
 });
 
 const postStyle = {
@@ -110,6 +110,22 @@ const renderContent = ({
   );
 };
 
+const getBDSCardStyle = ({ faded, draggingPlaceholder, noBorder }) => ({
+  background: '#fff',
+  border: noBorder
+    ? '1px solid transparent'
+    : `1px ${draggingPlaceholder ? 'dashed' : 'solid'} #b8b8b8`,
+  borderRadius: '4px',
+  opacity: faded ? '0.5' : '1',
+  overflow: 'hidden',
+  boxShadow: (!draggingPlaceholder && !noBorder) && '0px 1px 4px rgba(0, 0, 0, 0.16)',
+});
+const BDSCard = ({ faded, draggingPlaceholder, noBorder, children }) => (
+  <div style={getBDSCardStyle({ faded, draggingPlaceholder, noBorder })}>
+    {children}
+  </div>
+);
+
 /* eslint-enable react/prop-types */
 
 const Post = ({
@@ -147,7 +163,7 @@ const Post = ({
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
-      <Card
+      <BDSCard
         faded={isDeleting}
         noPadding
         draggingPlaceholder={dragging && !fixed}
@@ -208,7 +224,7 @@ const Post = ({
             />
           }
         </FeatureLoader>
-      </Card>
+      </BDSCard>
     </div>
   </div>);
 

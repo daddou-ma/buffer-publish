@@ -65,6 +65,7 @@ storiesOf('QueuedPosts', module)
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
       onUnpauseClick={action('onUnpauseClick')}
+      onCalendarBtnClick={action('onCalendarBtnClick')}
       isManager
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
@@ -86,6 +87,7 @@ storiesOf('QueuedPosts', module)
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
       onUnpauseClick={action('onUnpauseClick')}
+      onCalendarBtnClick={action('onCalendarBtnClick')}
       isManager
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
@@ -107,6 +109,7 @@ storiesOf('QueuedPosts', module)
       onShareNowClick={action('onShareNowClick')}
       paused
       onUnpauseClick={action('onUnpauseClick')}
+      onCalendarBtnClick={action('onCalendarBtnClick')}
       isManager
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
@@ -128,6 +131,7 @@ storiesOf('QueuedPosts', module)
       onShareNowClick={action('onShareNowClick')}
       paused
       onUnpauseClick={action('onUnpauseClick')}
+      onCalendarBtnClick={action('onCalendarBtnClick')}
       isManager={false}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
@@ -150,6 +154,7 @@ storiesOf('QueuedPosts', module)
       onShareNowClick={action('onShareNowClick')}
       paused
       onUnpauseClick={action('onUnpauseClick')}
+      onCalendarBtnClick={action('onCalendarBtnClick')}
       isLockedProfile
       isManager
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}

@@ -7,6 +7,14 @@ import {
 import { actionTypes, actions } from './reducer';
 import middleware from './middleware';
 
+const getStateWithPaidUser = () => ({
+  appSidebar: {
+    user: {
+      is_free_user: false,
+    },
+  },
+});
+
 describe('middleware', () => {
   const next = jest.fn();
   const dispatch = jest.fn();
@@ -29,8 +37,8 @@ describe('middleware', () => {
         name: 'enabledApplicationModes',
         args: {
           comprehensive: true,
-        }
-    }));
+        },
+      }));
   });
 
   it('should fetch queuedPosts', () => {
@@ -39,8 +47,8 @@ describe('middleware', () => {
       profile: {
         id: 'id1',
       },
-    }
-    middleware({ dispatch })(next)(action);
+    };
+    middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -49,8 +57,9 @@ describe('middleware', () => {
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,
+          count: 300,
         },
-    }));
+      }));
   });
 
   it('should fetch queuedPosts if updatePausedSchedules is successful', () => {
@@ -60,7 +69,7 @@ describe('middleware', () => {
         profileId: 'id1',
       },
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -69,6 +78,7 @@ describe('middleware', () => {
         args: {
           profileId: action.args.profileId,
           isFetchingMore: false,
+          count: 300,
         },
       }));
   });
@@ -80,7 +90,7 @@ describe('middleware', () => {
         profileId: 'id1',
       },
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -89,6 +99,7 @@ describe('middleware', () => {
         args: {
           profileId: action.args.profileId,
           isFetchingMore: false,
+          count: 300,
         },
       }));
   });
@@ -109,7 +120,7 @@ describe('middleware', () => {
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
         message: action.data.message,
-    }));
+      }));
   });
 
   it('should fetch posts again after a post is requeued', () => {
@@ -120,7 +131,7 @@ describe('middleware', () => {
         profileId: 'id1',
       },
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -130,8 +141,9 @@ describe('middleware', () => {
           profileId: action.args.profileId,
           isFetchingMore: false,
           isReordering: true,
+          count: 300,
         },
-    }));
+      }));
   });
 
   it('should trigger a notification if post is successfully re-added to the queue', () => {
@@ -150,7 +162,7 @@ describe('middleware', () => {
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
         message: 'We\'ve re-added this post to your queue!',
-    }));
+      }));
   });
 
   it('should trigger a notification if post is successfully deleted', () => {
@@ -166,14 +178,14 @@ describe('middleware', () => {
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
         message: 'Okay, we\'ve deleted that post!',
-    }));
+      }));
   });
 
   it('should fetch deletePost', () => {
     const action = {
       type: actionTypes.POST_CONFIRMED_DELETE,
       updateId: 'id1',
-    }
+    };
     middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
@@ -183,7 +195,7 @@ describe('middleware', () => {
         args: {
           updateId: action.updateId,
         },
-    }));
+      }));
   });
 
   it('should fetch sharePostNow', () => {
@@ -193,7 +205,7 @@ describe('middleware', () => {
         id: 'id1',
       },
       profileId: 'profileId1',
-    }
+    };
     middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
@@ -204,7 +216,7 @@ describe('middleware', () => {
           updateId: action.post.id,
           profileId: action.profileId,
         },
-    }));
+      }));
   });
 
   it('should fetch requeuePost', () => {
@@ -214,7 +226,7 @@ describe('middleware', () => {
         id: 'id1',
       },
       profileId: 'profileId1',
-    }
+    };
     middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
@@ -225,7 +237,7 @@ describe('middleware', () => {
           updateId: action.post.id,
           profileId: action.profileId,
         },
-    }));
+      }));
   });
 
   it('should trigger a notification if post is successfully shared', () => {
@@ -241,7 +253,7 @@ describe('middleware', () => {
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
         message: 'Yay, your post has been shared! 🎉',
-    }));
+      }));
   });
 
   it('should trigger a notification if it fails to share a post', () => {
@@ -258,19 +270,19 @@ describe('middleware', () => {
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'error',
         message: action.error,
-    }));
+      }));
   });
 
   it('should fetch reorderPosts', () => {
     const queue = {
       byProfileId: {
-        'profileId1': {
+        profileId1: {
           posts: {
-            'post1': {
+            post1: {
               id: 'postId1',
               due_at: '1534262220',
             },
-            'post2': {
+            post2: {
               id: 'postId2',
               due_at: '1534262224',
             },
@@ -303,20 +315,20 @@ describe('middleware', () => {
           profileId: action.profileId,
           order: orderedIds,
         },
-    }));
+      }));
   });
 
   describe('Update Post Counts', () => {
     const queue = {
       byProfileId: {
-        'profileId1': {
+        profileId1: {
           total: 9,
         },
       },
     };
     const sent = {
       byProfileId: {
-        'profileId1': {
+        profileId1: {
           total: 0,
         },
       },
@@ -342,7 +354,7 @@ describe('middleware', () => {
       expect(next)
         .toBeCalledWith(action);
       expect(store.dispatch)
-        .toBeCalledWith(actions.postCountUpdated(action.profileId, newCounts)
+        .toBeCalledWith(actions.postCountUpdated(action.profileId, newCounts),
       );
     });
 
@@ -359,7 +371,7 @@ describe('middleware', () => {
       expect(next)
         .toBeCalledWith(action);
       expect(store.dispatch)
-        .toBeCalledWith(actions.postCountUpdated(action.profileId, newCounts)
+        .toBeCalledWith(actions.postCountUpdated(action.profileId, newCounts),
       );
     });
 
@@ -376,7 +388,7 @@ describe('middleware', () => {
       expect(next)
         .toBeCalledWith(action);
       expect(store.dispatch)
-        .toBeCalledWith(actions.postCountUpdated(action.profileId, newCounts)
+        .toBeCalledWith(actions.postCountUpdated(action.profileId, newCounts),
       );
     });
   });
