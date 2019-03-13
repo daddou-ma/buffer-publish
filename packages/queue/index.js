@@ -13,6 +13,8 @@ const formatPostLists = (isManager, posts) => {
   const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
   let lastHeader = null;
   return orderedPosts.reduce((acc, post, index) => {
+    let isInstagramPost = false;
+    if (post.profile_service === 'instagram') isInstagramPost = true;
     if (lastHeader !== post.day) {
       lastHeader = post.day;
       acc.push({
@@ -20,11 +22,13 @@ const formatPostLists = (isManager, posts) => {
         text: post.day,
         id: `header-${index}`,
         isManager,
+        isInstagramPost,
       });
     }
     acc.push({
       queueItemType: 'post',
       isManager,
+      isInstagramPost,
       index,
       ...post,
     });

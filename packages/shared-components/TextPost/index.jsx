@@ -48,6 +48,9 @@ const TextPost = ({
   day,
   dueTime,
   sharedBy,
+  commentEnabled,
+  commentText,
+  isInstagramPost,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -101,6 +104,9 @@ const TextPost = ({
       day={day}
       dueTime={dueTime}
       sharedBy={sharedBy}
+      commentEnabled={commentEnabled}
+      commentText={commentText}
+      isInstagramPost={isInstagramPost}
     >
       {children}
     </Post>

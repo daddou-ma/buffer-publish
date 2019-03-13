@@ -144,6 +144,9 @@ const Post = ({
   day,
   dueTime,
   sharedBy,
+  commentEnabled,
+  commentText,
+  isInstagramPost,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
@@ -197,6 +200,9 @@ const Post = ({
           day={day}
           dueTime={dueTime}
           sharedBy={sharedBy}
+          commentEnabled={commentEnabled}
+          commentText={commentText}
+          isInstagramPost={isInstagramPost}
         />
         <FeatureLoader
           supportedFeatures={'post_stats'}

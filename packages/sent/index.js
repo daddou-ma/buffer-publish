@@ -14,8 +14,11 @@ const formatPostLists = (posts) => {
     Object.values(posts).sort((a, b) => b.due_at - a.due_at) : [];
 
   orderedPosts.forEach((post) => {
+    let isInstagramPost = false;
+    if (post.profile_service === 'instagram') isInstagramPost = true;
     if (post.day !== day) {
       day = post.day;
+      post.isInstagramPost = isInstagramPost;
       newList = { listHeader: day, posts: [post] };
       postLists.push(newList);
     } else { // if same day add to posts array of current list

@@ -45,15 +45,56 @@ const postControlsStyle = {
   display: 'flex',
 };
 
+const igCommentWrapper = {
+  display: 'flex',
+  alignItems: 'center',
+};
+
+const igCommentIconWrapper = {
+  display: 'flex',
+  alignItems: 'center',
+  paddingLeft: '0.5rem',
+  marginLeft: '0.5rem',
+  borderLeft: '1px solid #cfd4d6',
+};
+
+const renderCommentIcon = () => (
+  <span style={igCommentIconWrapper}>
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        fill="#59626a"
+        d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H6c-.746 0-2.886 1.672-4.13 2.52-.457.31-.87.032-.87-.52V3z"
+      />
+    </svg>
+  </span>
+);
+
+const renderActionText = (postAction, isInstagramPost, comment) => (
+  isInstagramPost && comment.commentEnabled ?
+    <span style={igCommentWrapper}>
+      {postAction}
+      {renderCommentIcon()}
+    </span>
+    : postAction
+);
+
 /* eslint-disable react/prop-types */
-const renderPostAction = (postAction, serviceLink, isSent) => (
+const renderPostAction = (postAction, serviceLink, isSent, isInstagramPost, comment) => (
   isSent ?
     <Link href={serviceLink} unstyled newTab>
       <Text size={'small'} color={'shuttleGray'}>
-        {postAction}
+        {renderActionText(postAction, isInstagramPost, comment)}
       </Text>
     </Link> :
-  postAction
+    renderActionText(postAction, isInstagramPost, comment)
 );
 
 const renderText = (
@@ -63,6 +104,8 @@ const renderText = (
   isPastReminder,
   day,
   dueTime,
+  isInstagramPost,
+  comment,
 ) => (
   isPastReminder ?
     (<span>
@@ -76,7 +119,7 @@ const renderText = (
         size={'small'}
         color={isSent ? 'shuttleGray' : 'black'}
       >
-        { !hasError ? renderPostAction(postDetails.postAction, serviceLink, isSent) : '' }
+        { !hasError ? renderPostAction(postDetails.postAction, serviceLink, isSent, isInstagramPost, comment) : '' }
       </Text>
     </span>)
 );
@@ -111,15 +154,29 @@ const PostFooter = ({
   day,
   dueTime,
   sharedBy,
+  commentEnabled,
+  commentText,
+  isInstagramPost,
 }) => {
   const hasError = postDetails.error && postDetails.error.length > 0;
   const isCustomScheduled = postDetails.isCustomScheduled;
   const isInstagramReminder = postDetails.isInstagramReminder;
+  const comment = { commentEnabled, commentText };
+
   return (
     <div style={isSent ? sentPostDetailsStyle : getPostDetailsStyle(dragging)}>
       <div style={postActionDetailsStyle}>
         {renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder, isPastReminder)}
-        {renderText({ postDetails, serviceLink }, hasError, isSent, isPastReminder, day, dueTime)}
+        {renderText(
+          { postDetails, serviceLink },
+          hasError,
+          isSent,
+          isPastReminder,
+          day,
+          dueTime,
+          isInstagramPost,
+          comment,
+        )}
       </div>
       {!isSent && !isPastReminder && isManager && (
         <div style={postControlsStyle}>
@@ -163,6 +220,9 @@ PostFooter.propTypes = {
   day: PropTypes.string,
   dueTime: PropTypes.string,
   sharedBy: PropTypes.string,
+  isInstagramPost: PropTypes.bool,
+  commentEnabled: PropTypes.bool,
+  commentText: PropTypes.string,
 };
 
 PostFooter.defaultProps = {
@@ -173,6 +233,7 @@ PostFooter.defaultProps = {
   isManager: true,
   isSent: false,
   isPastReminder: false,
+  isInstagramPost: false,
 };
 
 export default PostFooter;
