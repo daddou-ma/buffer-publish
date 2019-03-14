@@ -21,8 +21,7 @@ const composerStyle = {
 
 const composerInputStyle = {
   alignItems: 'center',
-  width: '100%',
-  outline: 'none',
+  backgroundColor: '#ffffff',
   border: '1px solid #B8B8B8',
   borderRadius: '4px',
   boxShadow: '0 1px 4px rgba(0,0,0,.16)',
@@ -32,8 +31,10 @@ const composerInputStyle = {
   fontFamily: 'Roboto',
   fontSize: '14px',
   height: '48px',
+  outline: 'none',
   paddingLeft: '16px',
   paddingRight: '16px',
+  width: '100%',
 };
 
 const composerInputIcoCameraStyle = {
