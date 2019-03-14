@@ -2,9 +2,11 @@
 import { connect } from 'react-redux';
 // load the presentational component
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow, servicesWithCommentFeature } from '@bufferapp/publish-tabs/utils';
+import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import SentPosts from './components/SentPosts';
+
+const servicesWithCommentFeature = ['instagram'];
 
 const formatPostLists = (posts) => {
   const postLists = [];
