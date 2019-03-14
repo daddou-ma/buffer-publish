@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-} from '@bufferapp/components';
+import FeatureLoader from '@bufferapp/product-features';
+import { Button, Text } from '@bufferapp/components';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
 import {
   transitionAnimationTime,
@@ -16,12 +15,46 @@ import {
   LinkPost,
   VideoPost,
   PostDragWrapper,
+  PostEmptySlot,
+  QueueButtonGroup,
 } from '@bufferapp/publish-shared-components';
 
 const listHeaderStyle = {
   marginBottom: '1rem',
   marginTop: '1rem',
-  marginLeft: '0.5rem',
+  // marginLeft: '0.5rem',
+  display: 'flex',
+  alignItems: 'center',
+};
+
+const calendarBtnWrapperStyle = {
+  textAlign: 'center',
+  margin: '24px 0px',
+};
+
+const headerTextStyle = {
+  display: 'flex',
+  alignItems: 'baseline',
+};
+
+const headerTextDayOfWeekStyle = {
+  fontFamily: 'Roboto',
+  fontStyle: 'normal',
+  fontWeight: 'bold',
+  lineHeight: 'normal',
+  fontSize: '18px',
+  color: '#3D3D3D',
+};
+
+const headerTextDateStyle = {
+  fontFamily: 'Roboto',
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+  lineHeight: 'normal',
+  fontSize: '14px',
+  textTransform: 'uppercase',
+  color: '#636363',
+  marginLeft: '8px',
 };
 
 const postTypeComponentMap = new Map([
@@ -74,12 +107,12 @@ const renderPost = ({
 
   const defaultStyle = {
     default: {
-      marginBottom: '2rem',
+      margin: '8px 0 8px',
       transition: `all ${transitionAnimationTime} ${transitionAnimationType}`,
     },
     hidden: {
-      maxHeight: 0,
-      opacity: 0,
+      opacity: '0.5',
+      pointerEvents: 'none',
     },
   };
 
@@ -89,10 +122,7 @@ const renderPost = ({
 
   if (draggable) {
     return (
-      <div
-        style={calculateStyles(defaultStyle, hiddenStyle)}
-        key={post.id}
-      >
+      <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
         <PostDragWrapper
           id={post.id}
           index={post.index}
@@ -104,48 +134,105 @@ const renderPost = ({
   }
 
   return (
-    <div
-      style={calculateStyles(defaultStyle, hiddenStyle)}
-      key={post.id}
-    >
+    <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
       <PostComponent {...postWithEventHandlers} />
     </div>
   );
 };
 
-const renderHeader = ({ text, id }) => (
+const calendarBtns = ['Day', 'Week', 'Month'];
+
+const renderHeader = (
+  { text, dayOfWeek, date, id },
+  onCalendarClick,
+  showCalendarBtnGroup,
+) => (
   <div style={listHeaderStyle} key={id}>
-    <Text color={'black'}>
-      {text}
-    </Text>
+    <div style={headerTextStyle}>
+      {(dayOfWeek && date)
+        ? (<React.Fragment>
+          <span style={headerTextDayOfWeekStyle}>{dayOfWeek}</span>
+          <span style={headerTextDateStyle}>{date}</span>
+        </React.Fragment>)
+        : <span style={headerTextDayOfWeekStyle}>{text}</span>
+      }
+    </div>
+    {showCalendarBtnGroup && (
+      <FeatureLoader
+        supportedFeatures={'daily_view'}
+        supportedPlans={['pro', 'business']}
+      >
+        <div style={{ marginLeft: 'auto' }}>
+          <QueueButtonGroup
+            buttons={calendarBtns}
+            onClick={type => onCalendarClick(type, `daily_view_type_buttons_click_${type}`)}
+          />
+        </div>
+      </FeatureLoader>
+    )}
   </div>
+);
+
+const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
+  <PostEmptySlot
+    key={id}
+    time={slot.label}
+    service={profileService}
+    onClick={() =>
+      onEmptySlotClick({
+        dueTime: slot.label,
+        profile_service: profileService,
+        scheduled_at: slot.timestamp,
+        due_at: slot.timestamp,
+        pinned: true,
+      })
+    }
+  />
 );
 
 /* eslint-enable react/prop-types */
 
 const QueueItems = (props) => {
-  const { items, ...propsForPosts } = props;
-  const itemList = items.map((item) => {
+  const {
+    items,
+    onEmptySlotClick,
+    onCalendarClick,
+    ...propsForPosts
+  } = props;
+  const itemList = items.map((item, index) => {
     const { queueItemType, ...rest } = item;
     if (queueItemType === 'post') {
       return renderPost({ post: rest, ...propsForPosts });
     }
     if (queueItemType === 'header') {
-      return renderHeader(rest);
+      return renderHeader(rest, onCalendarClick, index === 0);
+    }
+    if (queueItemType === 'slot') {
+      return renderSlot(rest, onEmptySlotClick);
+    }
+    if (queueItemType === 'showMorePosts') {
+      return (
+        <div key={rest.id} style={calendarBtnWrapperStyle}>
+          <Text>Looking for your other posts?&nbsp;&nbsp;</Text>
+          <Button onClick={() => onCalendarClick('month', 'daily_view_show_more_view_calendar')}>
+           View Your Calendar
+          </Button>
+        </div>
+      );
     }
     return null;
   });
   return (
-    <div>
+    <Fragment>
       {itemList}
-    </div>
+    </Fragment>
   );
 };
 
 QueueItems.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      type: PropTypes.string,
+      queueItemType: PropTypes.string.isRequired,
     }),
   ),
   subprofiles: PropTypes.arrayOf(
@@ -153,10 +240,12 @@ QueueItems.propTypes = {
       type: PropTypes.string,
     }),
   ),
+  onCalendarClick: PropTypes.func,
   onCancelConfirmClick: PropTypes.func,
   onDeleteClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
+  onEmptySlotClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onRequeueClick: PropTypes.func,
   onImageClick: PropTypes.func,

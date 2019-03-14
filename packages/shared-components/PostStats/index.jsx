@@ -17,7 +17,7 @@ const statsCellStyle = {
   flexBasis: 0,
   display: 'flex',
   borderTop: `${borderWidth} solid ${mystic}`,
-  padding: '0.125rem',
+  padding: '8px',
   borderRight: `${borderWidth} solid ${mystic}`,
   alignItems: 'center',
   flexDirection: 'column',

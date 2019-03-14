@@ -4,37 +4,12 @@ import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sid
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow, servicesWithCommentFeature } from '@bufferapp/publish-tabs/utils';
+import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
+import { trackAction } from '@bufferapp/publish-data-tracking';
+
 import { actions } from './reducer';
-
+import { formatPostLists, openCalendarWindow } from './util/';
 import QueuedPosts from './components/QueuedPosts';
-
-const formatPostLists = (isManager, posts) => {
-  const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
-  let lastHeader = null;
-  return orderedPosts.reduce((acc, post, index) => {
-    const hasCommentEnabled = servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
-
-    if (lastHeader !== post.day) {
-      lastHeader = post.day;
-      acc.push({
-        queueItemType: 'header',
-        text: post.day,
-        id: `header-${index}`,
-        isManager,
-        hasCommentEnabled,
-      });
-    }
-    acc.push({
-      queueItemType: 'post',
-      isManager,
-      hasCommentEnabled,
-      index,
-      ...post,
-    });
-    return acc;
-  }, []);
-};
 
 export default connect(
   (state, ownProps) => {
@@ -55,11 +30,19 @@ export default connect(
         loadingMore: profileQueuePosts.loadingMore,
         moreToLoad: profileQueuePosts.moreToLoad,
         page: profileQueuePosts.page,
-        postLists: formatPostLists(
-          profileData.isManager,
-          profileQueuePosts.posts,
-        ),
-        total: profileQueuePosts.total,
+        postLists: formatPostLists({
+          isManager: profileData.isManager,
+          posts: profileQueuePosts.posts,
+          scheduleSlotsEnabled: !state.appSidebar.user.is_free_user,
+          schedules: profileData.schedules,
+          profileTimezone: profileData.timezone,
+          weekStartsOnMonday: state.appSidebar.user.week_starts_monday,
+          hasTwentyFourHourTimeFormat: state.appSidebar.user.hasTwentyFourHourTimeFormat,
+          profileService: profileData.service,
+          hasDailyViewFlip: state.appSidebar.user.hasDailyViewFlip,
+        }),
+        draggingEnabled: !profileData.paused && state.appSidebar.user.is_free_user,
+        showEmptyQueueMessage: profileQueuePosts.total <= 0 && state.appSidebar.user.is_free_user,
         enabledApplicationModes: state.queue.enabledApplicationModes,
         showComposer: state.queue.showComposer,
         environment: state.environment.environment,
@@ -85,6 +68,12 @@ export default connect(
     onEditClick: (post) => {
       dispatch(actions.handleEditClick({
         post: post.post,
+        profileId: ownProps.profileId,
+      }));
+    },
+    onEmptySlotClick: (post) => {
+      dispatch(actions.handleEmptySlotClick({
+        emptySlotData: post,
         profileId: ownProps.profileId,
       }));
     },
@@ -194,6 +183,17 @@ export default connect(
       } else if (plan === 'pro') {
         openBillingWindow();
       }
+    },
+    onCalendarClick: (weekOrMonth, trackingAction) => {
+      const openAfterTrack = () => {
+        if (weekOrMonth === 'week' || weekOrMonth === 'month') {
+          openCalendarWindow(ownProps.profileId, weekOrMonth);
+        }
+      };
+      trackAction({ location: 'queue', action: trackingAction }, {
+        success: openAfterTrack,
+        error: openAfterTrack,
+      });
     },
   }),
 )(QueuedPosts);

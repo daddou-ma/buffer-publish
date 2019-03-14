@@ -10,6 +10,4 @@ const openBillingWindow = () => {
   window.location.href = `${getBaseURL()}/app/account/receipts?content_only=true`;
 };
 
-const servicesWithCommentFeature = ['instagram'];
-
-export { openCalendarWindow, openBillingWindow, servicesWithCommentFeature };
+export { openCalendarWindow, openBillingWindow };

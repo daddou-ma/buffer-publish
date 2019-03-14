@@ -31,6 +31,7 @@ export const initialState = {
   enabledApplicationModes: [],
   environment: 'production',
   editMode: false,
+  emptySlotMode: false,
   editingPostId: '',
   isBusinessOnInstagram: null,
   isInstagramLoading: false,
@@ -469,12 +470,15 @@ export default (state = initialState, action) => {
         showComposer: true,
         editMode: action.editMode,
         editingPostId: action.updateId,
+        emptySlotMode: action.emptySlotMode,
+        emptySlotData: action.emptySlotData,
       };
     case actionTypes.HIDE_COMPOSER:
       return {
         ...state,
         showComposer: false,
         editMode: false,
+        emptySlotMode: false,
       };
     default:
       return state;
@@ -487,6 +491,12 @@ export const actions = {
     updateId: post.id,
     editMode: true,
     post,
+    profileId,
+  }),
+  handleEmptySlotClick: ({ profileId, emptySlotData }) => ({
+    type: actionTypes.OPEN_COMPOSER,
+    emptySlotMode: true,
+    emptySlotData,
     profileId,
   }),
   handleDeleteClick: ({ post, profileId }) => ({

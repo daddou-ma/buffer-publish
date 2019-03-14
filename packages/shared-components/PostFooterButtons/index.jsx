@@ -15,12 +15,11 @@ const postControlsStyle = {
 };
 
 const postButtonEdit = {
-  marginLeft: '0.7rem',
+  marginLeft: '16px',
 };
 
 const verticalLineStyle = {
-  marginRight: '0.7rem',
-  marginLeft: '0.7rem',
+  marginLeft: '16px',
   borderLeft: `${borderWidth} solid transparent`,
 };
 

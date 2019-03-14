@@ -21,6 +21,8 @@ const composerStyle = {
 
 const composerInputStyle = {
   alignItems: 'center',
+  width: '100%',
+  outline: 'none',
   border: '1px solid #B8B8B8',
   borderRadius: '4px',
   boxShadow: '0 1px 4px rgba(0,0,0,.16)',
@@ -53,7 +55,7 @@ const loadingContainerStyle = {
 };
 
 const QueuedPosts = ({
-  total,
+  showEmptyQueueMessage,
   loading,
   postLists,
   onComposerPlaceholderClick,
@@ -63,15 +65,19 @@ const QueuedPosts = ({
   onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
+  onEmptySlotClick,
+  onCalendarClick,
   onShareNowClick,
   onImageClick,
   onImageClickNext,
   onImageClickPrev,
   onImageClose,
   onDropPost,
+  onCalendarBtnClick,
   showComposer,
   editMode,
   paused,
+  draggingEnabled,
   onUnpauseClick,
   subprofiles,
   isInstagramProfile,
@@ -134,12 +140,13 @@ const QueuedPosts = ({
               type={'queue'}
             />
           }
-          <div
+          <button
             style={composerInputStyle}
-            onClick={onComposerPlaceholderClick}>
+            onClick={onComposerPlaceholderClick}
+          >
             What would you like to share?
-            <div style={composerInputIcoCameraStyle}></div>
-          </div>
+            <div style={composerInputIcoCameraStyle} />
+          </button>
         </div>
 
       </div>
@@ -153,7 +160,7 @@ const QueuedPosts = ({
         <InstagramDirectPostingModal />
       }
       {!!paused && <QueuePausedBar isManager={isManager} handleClickUnpause={onUnpauseClick} />}
-      {total < 1 &&
+      {showEmptyQueueMessage &&
         <EmptyState
           title="It looks like you haven't got any posts in your queue!"
           subtitle="Click the box above to add a post to your queue :)"
@@ -171,17 +178,20 @@ const QueuedPosts = ({
         items={postLists}
         subprofiles={subprofiles}
         onCancelConfirmClick={onCancelConfirmClick}
+        onCalendarClick={onCalendarClick}
         onRequeueClick={onRequeueClick}
         onDeleteClick={onDeleteClick}
         onDeleteConfirmClick={onDeleteConfirmClick}
         onEditClick={onEditClick}
+        onEmptySlotClick={onEmptySlotClick}
         onShareNowClick={onShareNowClick}
         onImageClick={onImageClick}
         onImageClickNext={onImageClickNext}
         onImageClickPrev={onImageClickPrev}
         onImageClose={onImageClose}
         onDropPost={onDropPost}
-        draggable={!paused}
+        onCalendarBtnClick={onCalendarBtnClick}
+        draggable={draggingEnabled}
         hasFirstCommentFlip={hasFirstCommentFlip}
       />
     </div>
@@ -202,7 +212,8 @@ QueuedPosts.propTypes = {
       type: PropTypes.string,
     }),
   ),
-  total: PropTypes.number,
+  features: PropTypes.object.isRequired, // eslint-disable-line
+  showEmptyQueueMessage: PropTypes.bool,
   onComposerPlaceholderClick: PropTypes.func.isRequired,
   onComposerCreateSuccess: PropTypes.func.isRequired,
   onCancelConfirmClick: PropTypes.func.isRequired,
@@ -210,15 +221,18 @@ QueuedPosts.propTypes = {
   onDeleteClick: PropTypes.func.isRequired,
   onDeleteConfirmClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
+  onEmptySlotClick: PropTypes.func.isRequired,
   onShareNowClick: PropTypes.func.isRequired,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
+  onCalendarBtnClick: PropTypes.func.isRequired,
+  onImageClick: PropTypes.func.isRequired,
+  onImageClickNext: PropTypes.func.isRequired,
+  onImageClickPrev: PropTypes.func.isRequired,
+  onImageClose: PropTypes.func.isRequired,
   onDropPost: PropTypes.func.isRequired,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
   paused: PropTypes.bool,
+  draggingEnabled: PropTypes.bool.isRequired,
   onUnpauseClick: PropTypes.func.isRequired,
   isManager: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
@@ -231,6 +245,7 @@ QueuedPosts.propTypes = {
   isLockedProfile: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
   hasFirstCommentFlip: PropTypes.bool,
+  onCalendarClick: PropTypes.func.isRequired,
 };
 
 QueuedPosts.defaultProps = {
@@ -239,7 +254,7 @@ QueuedPosts.defaultProps = {
   page: 1,
   postLists: [],
   showComposer: false,
-  total: 0,
+  showEmptyQueueMessage: false,
   enabledApplicationModes: [],
   editMode: false,
   paused: false,

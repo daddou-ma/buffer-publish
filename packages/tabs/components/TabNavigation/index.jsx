@@ -6,7 +6,6 @@ import {
 } from '@bufferapp/publish-shared-components';
 import { Button, Text } from '@bufferapp/components';
 import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
-import { openCalendarWindow } from '../../utils';
 
 const upgradeCtaStyle = {
   transform: 'translate(0, 1px)',
@@ -86,12 +85,6 @@ class TabNavigation extends React.Component {
           {/* Pro and up users or Team Members */}
           {(!features.isFreeUser() || isBusinessAccount) &&
             <Tab tabId={'drafts'}>Drafts</Tab>
-          }
-          {/* Pro and up users or Team Members */}
-          {(!features.isFreeUser() || isBusinessAccount) &&
-            <Tab onClick={() => openCalendarWindow(profileId)}>
-              Calendar
-            </Tab>
           }
           <Tab tabId={'settings'}>Settings</Tab>
         </Tabs>
