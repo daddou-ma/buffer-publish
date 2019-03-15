@@ -122,6 +122,8 @@ export default connect(
         editMode: state.drafts.editMode,
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        profileLimit: state.appSidebar.user.profile_limit,
+        isOwner: null, // TO DO
         canStartBusinessTrial: state.drafts.canStartBusinessTrial,
       };
     }
@@ -203,7 +205,7 @@ export default connect(
     onClickUpgrade: (plan) => {
       if (plan === 'free') {
         dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-      } else if (plan === 'pro') {
+      } else {
         openBillingWindow();
       }
     },

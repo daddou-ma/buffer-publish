@@ -56,6 +56,8 @@ const PastRemindersPosts = ({
   isManager,
   isBusinessAccount,
   isLockedProfile,
+  profileLimit,
+  isOwner,
   onClickUpgrade,
   features,
 }) => {
@@ -68,21 +70,36 @@ const PastRemindersPosts = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
+    if (!isOwner) {
+      return (
+        <LockedProfileNotification
+          type={'teamMember'}
+        />
+      );
+    } else if (features.isFreeUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'free'}
+          profileLimit={profileLimit}
+          type={'free'}
         />
       );
     } else if (features.isProUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
+          profileLimit={profileLimit}
+          type={'pro'}
         />
       );
     }
+    return (
+      <LockedProfileNotification
+        onClickUpgrade={onClickUpgrade}
+        profileLimit={profileLimit}
+        type={'business'}
+      />
+    );
   }
 
   if (total < 1) {
@@ -169,6 +186,8 @@ PastRemindersPosts.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
+  profileLimit: PropTypes.number.isRequired,
+  isOwner: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
 };
 
@@ -185,6 +204,7 @@ PastRemindersPosts.defaultProps = {
   isManager: true,
   isBusinessAccount: false,
   isLockedProfile: false,
+  isOwner: true,
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onMobileClick: () => {},

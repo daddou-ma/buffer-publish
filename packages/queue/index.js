@@ -17,11 +17,15 @@ export default connect(
     const profileQueuePosts = state.queue.byProfileId[profileId];
     const profileData = state.profileSidebar.profiles.find(p => p.id === ownProps.profileId);
     const isLockedProfile = state.profileSidebar.isLockedProfile;
+    const profileLimit = state.appSidebar.user.profile_limit;
+    const isOwner = null; // TO DO
 
     if (isLockedProfile) {
       return {
         loading: false,
         isLockedProfile,
+        profileLimit,
+        isOwner,
       };
     }
     if (profileQueuePosts && profileData) {
@@ -179,7 +183,7 @@ export default connect(
     onClickUpgrade: (plan) => {
       if (plan === 'free') {
         dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-      } else if (plan === 'pro') {
+      } else {
         openBillingWindow();
       }
     },

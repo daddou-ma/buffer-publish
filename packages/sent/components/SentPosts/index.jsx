@@ -47,6 +47,8 @@ const SentPosts = ({
   editMode,
   isManager,
   isLockedProfile,
+  profileLimit,
+  isOwner,
   onClickUpgrade,
   features,
   canStartBusinessTrial,
@@ -61,21 +63,36 @@ const SentPosts = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
+    if (!isOwner) {
+      return (
+        <LockedProfileNotification
+          type={'teamMember'}
+        />
+      );
+    } else if (features.isFreeUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'free'}
+          profileLimit={profileLimit}
+          type={'free'}
         />
       );
     } else if (features.isProUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
+          profileLimit={profileLimit}
+          type={'pro'}
         />
       );
     }
+    return (
+      <LockedProfileNotification
+        onClickUpgrade={onClickUpgrade}
+        profileLimit={profileLimit}
+        type={'business'}
+      />
+    );
   }
 
   if (total < 1) {
@@ -154,6 +171,8 @@ SentPosts.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
+  profileLimit: PropTypes.number.isRequired,
+  isOwner: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
   canStartBusinessTrial: PropTypes.bool.isRequired,
 };
@@ -170,6 +189,7 @@ SentPosts.defaultProps = {
   isManager: true,
   isBusinessAccount: false,
   isLockedProfile: false,
+  isOwner: true,
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onImageClick: () => {},

@@ -52,6 +52,8 @@ const DraftList = ({
   editMode,
   tabId,
   isLockedProfile,
+  profileLimit,
+  isOwner,
   onClickUpgrade,
   canStartBusinessTrial,
 }) => {
@@ -94,21 +96,36 @@ const DraftList = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
+    if (!isOwner) {
+      return (
+        <LockedProfileNotification
+          type={'teamMember'}
+        />
+      );
+    } else if (features.isFreeUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'free'}
+          profileLimit={profileLimit}
+          type={'free'}
         />
       );
     } else if (features.isProUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
+          profileLimit={profileLimit}
+          type={'pro'}
         />
       );
     }
+    return (
+      <LockedProfileNotification
+        onClickUpgrade={onClickUpgrade}
+        profileLimit={profileLimit}
+        type={'business'}
+      />
+    );
   }
 
   return (
@@ -184,6 +201,8 @@ DraftList.propTypes = {
   editMode: PropTypes.bool,
   tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
   isLockedProfile: PropTypes.bool,
+  profileLimit: PropTypes.number.isRequired,
+  isOwner: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
 };
 
@@ -194,6 +213,7 @@ DraftList.defaultProps = {
   editMode: false,
   tabId: null,
   isLockedProfile: false,
+  isOwner: true,
 };
 
 export default WithFeatureLoader(DraftList);

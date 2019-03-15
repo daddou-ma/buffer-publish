@@ -44,6 +44,8 @@ export default connect(
         isManager: state.profileSidebar.selectedProfile.isManager,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        profileLimit: state.appSidebar.user.profile_limit,
+        isOwner: null, // TO DO
         canStartBusinessTrial: state.appSidebar.user.canStartBusinessTrial,
       };
     }
@@ -86,7 +88,7 @@ export default connect(
     onClickUpgrade: (plan) => {
       if (plan === 'free') {
         dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-      } else if (plan === 'pro') {
+      } else {
         openBillingWindow();
       }
     },

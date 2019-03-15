@@ -20,6 +20,8 @@ const AnalyticsList = ({
   profile,
   isAnalyticsSupported,
   isLockedProfile,
+  profileLimit,
+  isOwner,
   onClickUpgrade,
   canStartBusinessTrial,
 }) => {
@@ -54,21 +56,36 @@ const AnalyticsList = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
+    if (!isOwner) {
+      return (
+        <LockedProfileNotification
+          type={'teamMember'}
+        />
+      );
+    } else if (features.isFreeUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'free'}
+          profileLimit={profileLimit}
+          type={'free'}
         />
       );
     } else if (features.isProUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
+          profileLimit={profileLimit}
+          type={'pro'}
         />
       );
     }
+    return (
+      <LockedProfileNotification
+        onClickUpgrade={onClickUpgrade}
+        profileLimit={profileLimit}
+        type={'business'}
+      />
+    );
   }
 
   if (isAnalyticsSupported) {
@@ -93,6 +110,8 @@ AnalyticsList.propTypes = {
   isAnalyticsSupported: PropTypes.bool,
   profile: PropTypes.shape(ProfileHeader.propTypes),
   isLockedProfile: PropTypes.bool,
+  profileLimit: PropTypes.number.isRequired,
+  isOwner: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
 };
 
@@ -100,6 +119,7 @@ AnalyticsList.defaultProps = {
   isAnalyticsSupported: null,
   profile: null,
   isLockedProfile: false,
+  isOwner: true,
 };
 
 export default WithFeatureLoader(AnalyticsList);

@@ -29,6 +29,8 @@ export default connect(
       remindersAreEnabled: state.generalSettings.remindersAreEnabled,
       hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
       isLockedProfile: state.profileSidebar.isLockedProfile,
+      profileLimit: state.appSidebar.user.profile_limit,
+      isOwner: null, // TO DO
     }),
     (dispatch, ownProps) => ({
       onSetUpDirectPostingClick: () => {
@@ -104,7 +106,7 @@ export default connect(
       onClickUpgrade: (plan) => {
         if (plan === 'free') {
           dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-        } else if (plan === 'pro') {
+        } else {
           openBillingWindow();
         }
       },

@@ -89,6 +89,8 @@ const QueuedPosts = ({
   hasInstagramFeatureFlip,
   isInstagramLoading,
   isLockedProfile,
+  profileLimit,
+  isOwner,
   features,
   isManager,
   onClickUpgrade,
@@ -110,21 +112,36 @@ const QueuedPosts = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
+    if (!isOwner) {
+      return (
+        <LockedProfileNotification
+          type={'teamMember'}
+        />
+      );
+    } else if (features.isFreeUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'free'}
+          profileLimit={profileLimit}
+          type={'free'}
         />
       );
     } else if (features.isProUser()) {
       return (
         <LockedProfileNotification
           onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
+          profileLimit={profileLimit}
+          type={'pro'}
         />
       );
     }
+    return (
+      <LockedProfileNotification
+        onClickUpgrade={onClickUpgrade}
+        profileLimit={profileLimit}
+        type={'business'}
+      />
+    );
   }
 
   return (
@@ -242,6 +259,8 @@ QueuedPosts.propTypes = {
   hasInstagramFeatureFlip: PropTypes.bool,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
+  profileLimit: PropTypes.number.isRequired,
+  isOwner: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
   onCalendarClick: PropTypes.func.isRequired,
 };
@@ -263,6 +282,7 @@ QueuedPosts.defaultProps = {
   hasInstagramFeatureFlip: false,
   isInstagramLoading: false,
   isLockedProfile: false,
+  isOwner: true,
 };
 
 export default WithFeatureLoader(QueuedPosts);

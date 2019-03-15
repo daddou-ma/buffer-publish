@@ -157,6 +157,7 @@ storiesOf('QueuedPosts', module)
       onCalendarBtnClick={action('onCalendarBtnClick')}
       isLockedProfile
       isManager
+      profileLimit={3}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
