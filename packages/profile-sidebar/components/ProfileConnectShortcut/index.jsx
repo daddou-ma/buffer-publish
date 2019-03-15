@@ -1,26 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 import { Text } from '@bufferapp/components';
 
 import { ProfileBadgeIcon } from '../ProfileBadge';
 
 const handleClick = (network, url) => {
-  if (network === 'instagram') {
-    /**
-     * This silly looking code loads an 'img' with the
-     * Instagram logout URL, which ensures the user is
-     * logged out of Instagram before we send them to
-     * reconnect.
-     */
-    const img = new Image();
-    img.onerror = () => {
+  const goConnectProfile = () => {
+    if (network === 'instagram') {
+      /**
+      * This silly looking code loads an 'img' with the
+      * Instagram logout URL, which ensures the user is
+      * logged out of Instagram before we send them to
+      * reconnect.
+      */
+      const img = new Image();
+      img.onerror = () => {
+        window.location.assign(url);
+      };
+      img.src = 'https://www.instagram.com/accounts/logoutin';
+      document.getElementsByTagName('head')[0].appendChild(img);
+    } else {
       window.location.assign(url);
-    };
-    img.src = 'https://www.instagram.com/accounts/logoutin';
-    document.getElementsByTagName('head')[0].appendChild(img);
-  } else {
-    window.location.assign(url);
-  }
+    }
+  };
+  trackAction({
+    location: 'profile_sidebar',
+    action: `connect_${network}`,
+  }, {
+    success: goConnectProfile(),
+    error: goConnectProfile(),
+  });
 };
 
 const getStyle = (hovered) => ({
