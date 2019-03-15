@@ -28,22 +28,36 @@ const formStyle = {
   justifyContent: 'center',
 };
 
-const renderParagraph = ({ plan }, paragraph) => {
+/* eslint-disable react/prop-types */
+const renderParagraph = ({ type, profileLimit }, paragraph) => {
   let paragraphText;
+  const isFirstParagraph = paragraph === 'firstParagraph';
 
-  if (plan === 'free') {
-    if (paragraph === 'firstParagraph') {
-      paragraphText = 'This social account is locked because you’re over your plan limit on the Free Plan. On this plan, you can have up to 3 social accounts that you use in total.';
-    } else if (paragraph === 'secondParagraph') {
-      paragraphText = 'To unlock your social accounts and manage up to 8 accounts, please consider upgrading to our Pro Plan.';
-    }
-  } else if (plan === 'pro') {
-    if (paragraph === 'firstParagraph') {
-      paragraphText = 'This social account is locked because you’re over your plan limit on the Pro Plan. On this plan, you can have up to 8 social accounts that you use in total.';
-    } else if (paragraph === 'secondParagraph') {
-      paragraphText = 'To unlock your social accounts and manage up to 150 accounts, please consider upgrading to one of our Business Plans.';
-    }
+  switch (type) {
+    case 'teamMember':
+      paragraphText = isFirstParagraph ?
+      'Sorry, it looks like the owner of this account has downgraded from a higher plan.' :
+      'We’re keeping this account safe and sound until they’re ready to return!';
+      break;
+    case 'free':
+      paragraphText = isFirstParagraph ?
+      `This social account is locked because you’re over your plan limit on the Free Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.` :
+      'To unlock your social accounts and manage up to 8 accounts, please consider upgrading to our Pro Plan.';
+      break;
+    case 'pro':
+      paragraphText = isFirstParagraph ?
+      `This social account is locked because you’re over your plan limit on the Pro Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.` :
+      'To unlock your social accounts and manage up to 150 accounts, please consider upgrading to one of our Business Plans.';
+      break;
+    case 'business':
+      paragraphText = isFirstParagraph ?
+      `This social account is locked because you’re over your plan limit on your Business Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.` :
+      'To unlock your social accounts, please consider upgrading to a higher Plan.';
+      break;
+    default:
+      return;
   }
+
   return (
     <Text size={'mini'}>
       {paragraphText}
@@ -51,20 +65,31 @@ const renderParagraph = ({ plan }, paragraph) => {
   );
 };
 
-const renderButton = ({ plan, onClickUpgrade }) => {
+const renderButton = ({ type, onClickUpgrade }) => {
   let buttonText;
 
-  if (plan === 'free') {
-    buttonText = 'Upgrade to Pro';
-  } else if (plan === 'pro') {
-    buttonText = 'Upgrade to Business';
+  switch (type) {
+    case 'teamMember':
+      return;
+    case 'free':
+      buttonText = 'Upgrade to Pro';
+      break;
+    case 'pro':
+      buttonText = 'Upgrade to Business';
+      break;
+    case 'business':
+      buttonText = 'See our Business Plans';
+      break;
+    default:
+      return;
   }
+
   return (
     <Button
       large
       onClick={(e) => {
         e.preventDefault();
-        onClickUpgrade(plan);
+        onClickUpgrade(type);
       }}
     >
       {buttonText}
@@ -72,7 +97,9 @@ const renderButton = ({ plan, onClickUpgrade }) => {
   );
 };
 
-const LockedProfileNotification = ({ onClickUpgrade, plan }) => (
+/* eslint-enable react/prop-types */
+
+const LockedProfileNotification = ({ onClickUpgrade, profileLimit, type }) => (
   <Card reducedPadding>
     <div style={titleStyle}>
       <span style={iconStyle}>
@@ -86,20 +113,24 @@ const LockedProfileNotification = ({ onClickUpgrade, plan }) => (
       </Text>
     </div>
     <div style={contentStyle}>
-      {renderParagraph({ plan }, 'firstParagraph')}
+      {renderParagraph({ type, profileLimit }, 'firstParagraph')}
     </div>
     <div style={contentStyle}>
-      { renderParagraph({ plan }, 'secondParagraph') }
+      { renderParagraph({ type }, 'secondParagraph') }
     </div>
     <form style={formStyle}>
-      { renderButton({ plan, onClickUpgrade }) }
+      { renderButton({ type, onClickUpgrade }) }
     </form>
   </Card>
 );
 
 LockedProfileNotification.propTypes = {
-  onClickUpgrade: PropTypes.func.isRequired,
-  plan: PropTypes.oneOf(['free', 'pro']).isRequired,
+  onClickUpgrade: PropTypes.func,
+  profileLimit: PropTypes.number,
+  type: PropTypes.oneOf(['teamMember', 'free', 'pro', 'business']).isRequired,
+};
+
+LockedProfileNotification.defaultProps = {
 };
 
 export default LockedProfileNotification;
