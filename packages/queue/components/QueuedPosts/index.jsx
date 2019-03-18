@@ -10,6 +10,7 @@ import {
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import { WithFeatureLoader } from '@bufferapp/product-features';
+
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
@@ -74,7 +75,6 @@ const QueuedPosts = ({
   onImageClickPrev,
   onImageClose,
   onDropPost,
-  onCalendarBtnClick,
   showComposer,
   editMode,
   paused,
@@ -190,7 +190,6 @@ const QueuedPosts = ({
         onImageClickPrev={onImageClickPrev}
         onImageClose={onImageClose}
         onDropPost={onDropPost}
-        onCalendarBtnClick={onCalendarBtnClick}
         draggable={draggingEnabled}
       />
     </div>
@@ -222,7 +221,6 @@ QueuedPosts.propTypes = {
   onEditClick: PropTypes.func.isRequired,
   onEmptySlotClick: PropTypes.func.isRequired,
   onShareNowClick: PropTypes.func.isRequired,
-  onCalendarBtnClick: PropTypes.func.isRequired,
   onImageClick: PropTypes.func.isRequired,
   onImageClickNext: PropTypes.func.isRequired,
   onImageClickPrev: PropTypes.func.isRequired,

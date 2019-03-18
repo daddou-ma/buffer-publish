@@ -9,11 +9,11 @@
   "author": "melissa@buffer.com",
   "dependencies": {
     "@bufferapp/async-data-fetch": "1.9.4",
-    "@bufferapp/publish-composer-popover": "2.0.0",
     "@bufferapp/keywrapper": "0.2.0",
     "@bufferapp/notifications": "1.9.4",
-    "@bufferapp/publish-profile-sidebar": "2.0.0",
+    "@bufferapp/publish-composer-popover": "2.0.0",
     "@bufferapp/publish-general-settings": "2.0.0",
+    "@bufferapp/publish-profile-sidebar": "2.0.0",
     "@bufferapp/publish-shared-components": "2.0.0",
     "@bufferapp/publish-upgrade-modal": "2.0.0"
   },
