@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import {
   QueueItems,
   BufferLoading,
-  LockedProfileNotification,
   BusinessTrialOrUpgradeCard,
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { Input } from '@bufferapp/components';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 
 import Empty from '../Empty';
 
@@ -52,9 +52,6 @@ const DraftList = ({
   editMode,
   tabId,
   isLockedProfile,
-  profileLimit,
-  isOwner,
-  onClickUpgrade,
   canStartBusinessTrial,
 }) => {
   if (features.isProUser()) {
@@ -96,36 +93,7 @@ const DraftList = ({
   }
 
   if (isLockedProfile) {
-    if (!isOwner) {
-      return (
-        <LockedProfileNotification
-          type={'teamMember'}
-        />
-      );
-    } else if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'pro'}
-        />
-      );
-    }
-    return (
-      <LockedProfileNotification
-        onClickUpgrade={onClickUpgrade}
-        profileLimit={profileLimit}
-        type={'business'}
-      />
-    );
+    return <LockedProfileNotification />;
   }
 
   return (
@@ -201,9 +169,6 @@ DraftList.propTypes = {
   editMode: PropTypes.bool,
   tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
   isLockedProfile: PropTypes.bool,
-  profileLimit: PropTypes.number.isRequired,
-  isOwner: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 DraftList.defaultProps = {
@@ -213,7 +178,6 @@ DraftList.defaultProps = {
   editMode: false,
   tabId: null,
   isLockedProfile: false,
-  isOwner: true,
 };
 
 export default WithFeatureLoader(DraftList);

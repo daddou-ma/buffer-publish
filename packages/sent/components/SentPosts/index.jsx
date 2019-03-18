@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import {
   PostLists,
   EmptyState,
-  LockedProfileNotification,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
 import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import { WithFeatureLoader } from '@bufferapp/product-features';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import BusinessUpgradeBanner from '../BusinessUpgradeBanner';
 
 const headerStyle = {
@@ -47,10 +46,6 @@ const SentPosts = ({
   editMode,
   isManager,
   isLockedProfile,
-  profileLimit,
-  isOwner,
-  onClickUpgrade,
-  features,
   canStartBusinessTrial,
   isBusinessAccount,
 }) => {
@@ -63,36 +58,7 @@ const SentPosts = ({
   }
 
   if (isLockedProfile) {
-    if (!isOwner) {
-      return (
-        <LockedProfileNotification
-          type={'teamMember'}
-        />
-      );
-    } else if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'pro'}
-        />
-      );
-    }
-    return (
-      <LockedProfileNotification
-        onClickUpgrade={onClickUpgrade}
-        profileLimit={profileLimit}
-        type={'business'}
-      />
-    );
+    return <LockedProfileNotification />;
   }
 
   if (total < 1) {
@@ -143,7 +109,6 @@ const SentPosts = ({
 };
 
 SentPosts.propTypes = {
-  features: PropTypes.object.isRequired, // eslint-disable-line
   header: PropTypes.string,
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
@@ -171,9 +136,6 @@ SentPosts.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  profileLimit: PropTypes.number.isRequired,
-  isOwner: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
   canStartBusinessTrial: PropTypes.bool.isRequired,
 };
 
@@ -189,7 +151,6 @@ SentPosts.defaultProps = {
   isManager: true,
   isBusinessAccount: false,
   isLockedProfile: false,
-  isOwner: true,
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onImageClick: () => {},
@@ -198,4 +159,4 @@ SentPosts.defaultProps = {
   onImageClose: () => {},
 };
 
-export default WithFeatureLoader(SentPosts);
+export default SentPosts;

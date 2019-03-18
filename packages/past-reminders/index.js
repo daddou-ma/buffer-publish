@@ -1,8 +1,6 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
 // load the presentational component
-import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import PastRemindersPosts from './components/PastRemindersPosts';
 
@@ -45,8 +43,6 @@ export default connect(
         isManager: state.profileSidebar.selectedProfile.isManager,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        profileLimit: state.appSidebar.user.profile_limit,
-        isOwner: null, // TO DO
       };
     }
     return {};
@@ -90,20 +86,9 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
-    onClickUpgrade: (plan) => {
-      if (plan === 'free') {
-        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-      } else {
-        openBillingWindow();
-      }
-    },
   }),
 )(PastRemindersPosts);
 
 // export reducer, actions and action types
 export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';
-/*
-a consumer of a package should be able to use the package in the following way:
-import Example, { actions, actionTypes, middleware, reducer } from '@bufferapp/publish-example';
-*/

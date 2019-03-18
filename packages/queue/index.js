@@ -4,7 +4,6 @@ import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sid
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import { actions } from './reducer';
@@ -17,15 +16,11 @@ export default connect(
     const profileQueuePosts = state.queue.byProfileId[profileId];
     const profileData = state.profileSidebar.profiles.find(p => p.id === ownProps.profileId);
     const isLockedProfile = state.profileSidebar.isLockedProfile;
-    const profileLimit = state.appSidebar.user.profile_limit;
-    const isOwner = null; // TO DO
 
     if (isLockedProfile) {
       return {
         loading: false,
         isLockedProfile,
-        profileLimit,
-        isOwner,
       };
     }
     if (profileQueuePosts && profileData) {
@@ -179,13 +174,6 @@ export default connect(
     },
     onHideInstagramModal: () => {
       dispatch(actions.handleHideInstagramModal());
-    },
-    onClickUpgrade: (plan) => {
-      if (plan === 'free') {
-        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-      } else {
-        openBillingWindow();
-      }
     },
     onCalendarClick: (weekOrMonth, trackingAction) => {
       const openAfterTrack = () => {

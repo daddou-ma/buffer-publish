@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   PostLists,
   EmptyState,
-  LockedProfileNotification,
 } from '@bufferapp/publish-shared-components';
 import {
   Divider,
@@ -11,7 +10,7 @@ import {
   LoadingAnimation,
 } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import { WithFeatureLoader } from '@bufferapp/product-features';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 
 const headerStyle = {
   marginBottom: '1.5rem',
@@ -56,10 +55,6 @@ const PastRemindersPosts = ({
   isManager,
   isBusinessAccount,
   isLockedProfile,
-  profileLimit,
-  isOwner,
-  onClickUpgrade,
-  features,
 }) => {
   if (loading) {
     return (
@@ -70,36 +65,7 @@ const PastRemindersPosts = ({
   }
 
   if (isLockedProfile) {
-    if (!isOwner) {
-      return (
-        <LockedProfileNotification
-          type={'teamMember'}
-        />
-      );
-    } else if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'pro'}
-        />
-      );
-    }
-    return (
-      <LockedProfileNotification
-        onClickUpgrade={onClickUpgrade}
-        profileLimit={profileLimit}
-        type={'business'}
-      />
-    );
+    return <LockedProfileNotification />;
   }
 
   if (total < 1) {
@@ -156,7 +122,6 @@ const PastRemindersPosts = ({
 };
 
 PastRemindersPosts.propTypes = {
-  features: PropTypes.object.isRequired, // eslint-disable-line
   header: PropTypes.string,
   subHeader: PropTypes.string,
   loading: PropTypes.bool,
@@ -186,9 +151,6 @@ PastRemindersPosts.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  profileLimit: PropTypes.number.isRequired,
-  isOwner: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 PastRemindersPosts.defaultProps = {
@@ -204,7 +166,6 @@ PastRemindersPosts.defaultProps = {
   isManager: true,
   isBusinessAccount: false,
   isLockedProfile: false,
-  isOwner: true,
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onMobileClick: () => {},
@@ -214,4 +175,4 @@ PastRemindersPosts.defaultProps = {
   onImageClose: () => {},
 };
 
-export default WithFeatureLoader(PastRemindersPosts);
+export default PastRemindersPosts;

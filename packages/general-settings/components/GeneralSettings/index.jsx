@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
-import { LockedProfileNotification } from '@bufferapp/publish-shared-components';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
@@ -36,41 +36,9 @@ const GeneralSettings = ({
   remindersAreEnabled,
   onToggleRemindersClick,
   isLockedProfile,
-  profileLimit,
-  isOwner,
-  onClickUpgrade,
 }) => {
   if (isLockedProfile) {
-    if (!isOwner) {
-      return (
-        <LockedProfileNotification
-          type={'teamMember'}
-        />
-      );
-    } else if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'pro'}
-        />
-      );
-    }
-    return (
-      <LockedProfileNotification
-        onClickUpgrade={onClickUpgrade}
-        profileLimit={profileLimit}
-        type={'business'}
-      />
-    );
+    return <LockedProfileNotification />;
   }
 
   return (
@@ -139,7 +107,6 @@ GeneralSettings.defaultProps = {
   utmMedium: null,
   remindersAreEnabled: false,
   isLockedProfile: false,
-  isOwner: true,
 };
 
 GeneralSettings.propTypes = {
@@ -180,9 +147,6 @@ GeneralSettings.propTypes = {
   remindersAreEnabled: PropTypes.bool,
   onToggleRemindersClick: PropTypes.func.isRequired,
   isLockedProfile: PropTypes.bool,
-  profileLimit: PropTypes.number.isRequired,
-  isOwner: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 export default GeneralSettings;

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { getDateString, isInThePast } from '@bufferapp/publish-formatters';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
+
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
 
@@ -122,8 +121,6 @@ export default connect(
         editMode: state.drafts.editMode,
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        profileLimit: state.appSidebar.user.profile_limit,
-        isOwner: null, // TO DO
         canStartBusinessTrial: state.drafts.canStartBusinessTrial,
       };
     }
@@ -201,13 +198,6 @@ export default connect(
     },
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
-    },
-    onClickUpgrade: (plan) => {
-      if (plan === 'free') {
-        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-      } else {
-        openBillingWindow();
-      }
     },
   }),
 )(DraftList);

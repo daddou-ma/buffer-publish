@@ -5,11 +5,10 @@ import {
   EmptyState,
   PostDragLayer,
   BufferLoading,
-  LockedProfileNotification,
 } from '@bufferapp/publish-shared-components';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import { WithFeatureLoader } from '@bufferapp/product-features';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
@@ -89,11 +88,7 @@ const QueuedPosts = ({
   hasInstagramFeatureFlip,
   isInstagramLoading,
   isLockedProfile,
-  profileLimit,
-  isOwner,
-  features,
   isManager,
-  onClickUpgrade,
 }) => {
   if (loading) {
     return (
@@ -112,36 +107,7 @@ const QueuedPosts = ({
   }
 
   if (isLockedProfile) {
-    if (!isOwner) {
-      return (
-        <LockedProfileNotification
-          type={'teamMember'}
-        />
-      );
-    } else if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          profileLimit={profileLimit}
-          type={'pro'}
-        />
-      );
-    }
-    return (
-      <LockedProfileNotification
-        onClickUpgrade={onClickUpgrade}
-        profileLimit={profileLimit}
-        type={'business'}
-      />
-    );
+    return <LockedProfileNotification />;
   }
 
   return (
@@ -228,7 +194,6 @@ QueuedPosts.propTypes = {
       type: PropTypes.string,
     }),
   ),
-  features: PropTypes.object.isRequired, // eslint-disable-line
   showEmptyQueueMessage: PropTypes.bool,
   onComposerPlaceholderClick: PropTypes.func.isRequired,
   onComposerCreateSuccess: PropTypes.func.isRequired,
@@ -259,9 +224,6 @@ QueuedPosts.propTypes = {
   hasInstagramFeatureFlip: PropTypes.bool,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  profileLimit: PropTypes.number.isRequired,
-  isOwner: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
   onCalendarClick: PropTypes.func.isRequired,
 };
 
@@ -282,7 +244,6 @@ QueuedPosts.defaultProps = {
   hasInstagramFeatureFlip: false,
   isInstagramLoading: false,
   isLockedProfile: false,
-  isOwner: true,
 };
 
-export default WithFeatureLoader(QueuedPosts);
+export default QueuedPosts;

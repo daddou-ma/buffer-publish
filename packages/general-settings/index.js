@@ -4,7 +4,6 @@ import { WithFeatureLoader } from '@bufferapp/product-features';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import GeneralSettings from './components/GeneralSettings';
 
@@ -29,8 +28,6 @@ export default connect(
       remindersAreEnabled: state.generalSettings.remindersAreEnabled,
       hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
       isLockedProfile: state.profileSidebar.isLockedProfile,
-      profileLimit: state.appSidebar.user.profile_limit,
-      isOwner: null, // TO DO
     }),
     (dispatch, ownProps) => ({
       onSetUpDirectPostingClick: () => {
@@ -102,13 +99,6 @@ export default connect(
         dispatch(actions.handleChangeUtmMedium({
           utmMedium: event.target.value,
         }));
-      },
-      onClickUpgrade: (plan) => {
-        if (plan === 'free') {
-          dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-        } else {
-          openBillingWindow();
-        }
       },
       onToggleRemindersClick: (newToggleValue) => {
         dispatch(actions.handleRemindersToggle({
