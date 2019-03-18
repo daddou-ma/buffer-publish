@@ -29,6 +29,17 @@ const store = storeFake({
     planName: 'free',
     features: {},
   },
+  appSidebar: {
+    user: {
+      profile_limit: 3,
+      id: 'id1',
+    },
+  },
+  profileSidebar: {
+    selectedProfile: {
+      ownerId: 'id1',
+    },
+  },
 });
 
 const UpgradeModalDecorator = storyFn => (
@@ -72,7 +83,6 @@ storiesOf('QueuedPosts', module)
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onClickUpgrade={action('onClickUpgrade')}
     />
   ))
   .add('loading', () => (
@@ -94,7 +104,6 @@ storiesOf('QueuedPosts', module)
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onClickUpgrade={action('onClickUpgrade')}
     />
   ))
   .add('paused if Manager', () => (
@@ -116,7 +125,6 @@ storiesOf('QueuedPosts', module)
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onClickUpgrade={action('onClickUpgrade')}
       onRequeueClick={action('onRequeueClick')}
     />
   ))
@@ -138,7 +146,6 @@ storiesOf('QueuedPosts', module)
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onClickUpgrade={action('onClickUpgrade')}
       onRequeueClick={action('onRequeueClick')}
     />
   ))
@@ -157,13 +164,11 @@ storiesOf('QueuedPosts', module)
       onCalendarBtnClick={action('onCalendarBtnClick')}
       isLockedProfile
       isManager
-      profileLimit={3}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
-      onClickUpgrade={action('onClickUpgrade')}
       onRequeueClick={action('onRequeueClick')}
     />
   ));
