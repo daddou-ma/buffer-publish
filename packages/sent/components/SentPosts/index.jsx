@@ -79,7 +79,9 @@ const SentPosts = ({
     <div>
       <BusinessUpgradeBanner canStartBusinessTrial={canStartBusinessTrial} />
       <div style={headerStyle}>
-        <Text color={'black'}>{header}</Text>
+        <div className="js-page-header">
+          <Text color={'black'}>{header}</Text>
+        </div>
         <Divider />
       </div>
       <div style={topBarContainerStyle}>
