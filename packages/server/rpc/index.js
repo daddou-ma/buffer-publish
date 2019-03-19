@@ -45,6 +45,8 @@ const toggleInstagramReminders = require('./toggleInstagramReminders');
 const mobileReminder = require('./mobileReminder');
 const setNotifications = require('./setNotifications');
 const readMessage = require('./readMessage');
+const updateRecheck = require('./bookmarklets/updateRecheck');
+const profileQuickAnalytics = require('./bookmarklets/profileQuickAnalytics');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -108,4 +110,6 @@ module.exports = rpc(
   mobileReminder,
   setNotifications,
   readMessage,
+  updateRecheck,
+  profileQuickAnalytics,
 );
