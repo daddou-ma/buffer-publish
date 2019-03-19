@@ -22,8 +22,10 @@ const AnalyticsList = ({
   isLockedProfile,
   onClickUpgrade,
   canStartBusinessTrial,
+  isBusinessAccount,
 }) => {
-  if (features.isProUser()) {
+  // user is either a free or pro and is not a team member
+  if (!isBusinessAccount && (features.isProUser() || features.isFreeUser())) {
     const startTrial = () => window.location.assign('https://buffer.com/billing/start-trial?trialType=small&next=https://publish.buffer.com');
     const goToBilling = () => window.location.assign('https://buffer.com/app/account/receipts?content_only=true');
     const trackAndGo = ({ location, action, afterTracked }) => {
@@ -94,6 +96,7 @@ AnalyticsList.propTypes = {
   profile: PropTypes.shape(ProfileHeader.propTypes),
   isLockedProfile: PropTypes.bool,
   onClickUpgrade: PropTypes.func.isRequired,
+  isBusinessAccount: PropTypes.bool.isRequired,
 };
 
 AnalyticsList.defaultProps = {
