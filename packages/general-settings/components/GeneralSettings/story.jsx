@@ -3,12 +3,33 @@ import { storiesOf } from '@storybook/react';
 import { checkA11y } from 'storybook-addon-a11y';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
-import { reducer as form } from 'redux-form';
-import { combineReducers, createStore } from 'redux';
 import GeneralSettings from './index';
 
-const store = createStore(combineReducers({ form }));
 const features = { isFreeUser: () => true };
+
+const storeFake = state => ({
+  default: () => {},
+  subscribe: () => {},
+  dispatch: () => {},
+  getState: () => ({ ...state }),
+});
+
+const store = storeFake({
+  productFeatures: {
+    planName: 'free',
+    features: {},
+  },
+  appSidebar: {
+    user: {
+      id: 'id1',
+    },
+  },
+  profileSidebar: {
+    selectedProfile: {
+      ownerId: 'id2',
+    },
+  },
+});
 
 const UpgradeModalDecorator = storyFn => (
   <Provider store={store}>
@@ -63,6 +84,23 @@ storiesOf('GeneralSettings', module)
       utmMedium={'medium'}
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
+    />
+  ))
+  .add('is locked account', () => (
+    <GeneralSettings
+      isInstagramProfile
+      isInstagramBusiness
+      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
+      features={features}
+      onChangeUtmCampaign={action('onChangeUtmCampaign')}
+      onChangeUtmSource={action('onChangeUtmSource')}
+      onChangeUtmMedium={action('onChangeUtmMedium')}
+      utmCampaign={'buffer'}
+      utmSource={'source'}
+      utmMedium={'medium'}
+      onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
+      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
+      isLockedProfile
     />
   ))
   .add('show GA customization form', () => (

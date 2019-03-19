@@ -39,17 +39,36 @@ storiesOf('ProfilePage', module)
       history={stubbedHistory}
     />
   ))
-  .add('should render settings', () => (
+  .add('should render posting schedule settings', () => (
     <ProfilePage
       match={{
         params: {
           profileId: 'someProfileId',
           tabId: 'settings',
+          childTabId: 'posting-schedule',
         },
       }}
       history={stubbedHistory}
     />
   ))
+
+  /* Test not working, temporarily dismissed. Invariant Violation: Element type is invalid:
+  expected a string (for built-in components) or a class/function (for composite components) but
+  got: undefined. You likely forgot to export your component from the file it's defined in, or
+  you might have mixed up default and named imports. Check the render method of `FeatureLoader` */
+
+  // .add('should render general settings', () => (
+  //   <ProfilePage
+  //     match={{
+  //       params: {
+  //         profileId: 'someProfileId',
+  //         tabId: 'settings',
+  //         childTabId: 'general-settings',
+  //       },
+  //     }}
+  //     history={stubbedHistory}
+  //   />
+  // ))
   .add('should render pastReminders', () => (
     <ProfilePage
       match={{
