@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 
 import LockedProfileNotification from './components/LockedProfileNotification';
+import { actions } from './actions';
 
 export default connect(
   state => ({
@@ -11,11 +11,12 @@ export default connect(
   }),
   dispatch => ({
     onClickUpgrade: (plan) => {
-      if (plan === 'free') {
-        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-      } else {
+      dispatch(actions.upgrade(plan));
+      if (plan !== 'free') {
         openBillingWindow();
       }
     },
   }),
 )(LockedProfileNotification);
+
+export { actions, actionTypes } from './actions';

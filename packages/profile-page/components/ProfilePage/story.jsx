@@ -57,18 +57,18 @@ storiesOf('ProfilePage', module)
   got: undefined. You likely forgot to export your component from the file it's defined in, or
   you might have mixed up default and named imports. Check the render method of `FeatureLoader` */
 
-  // .add('should render general settings', () => (
-  //   <ProfilePage
-  //     match={{
-  //       params: {
-  //         profileId: 'someProfileId',
-  //         tabId: 'settings',
-  //         childTabId: 'general-settings',
-  //       },
-  //     }}
-  //     history={stubbedHistory}
-  //   />
-  // ))
+  .add('should render general settings', () => (
+    <ProfilePage
+      match={{
+        params: {
+          profileId: 'someProfileId',
+          tabId: 'settings',
+          childTabId: 'general-settings',
+        },
+      }}
+      history={stubbedHistory}
+    />
+  ))
   .add('should render pastReminders', () => (
     <ProfilePage
       match={{
