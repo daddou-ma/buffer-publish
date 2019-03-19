@@ -16,6 +16,7 @@ export default connect(
     selectedChildTabId: ownProps.childTabId,
     shouldShowUpgradeCta: state.appSidebar.user.is_free_user,
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
+    shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
     isInstagramProfile: state.generalSettings.isInstagramProfile,
