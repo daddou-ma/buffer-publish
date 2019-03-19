@@ -23,7 +23,6 @@ export Tab from './Tab';
 export Tabs from './Tabs';
 export TextPost from './TextPost';
 export VideoPost from './VideoPost';
-export BusinessTrialOrUpgradeBanner from './BusinessTrialOrUpgradeBanner';
 export BDSButton from './BDSButton';
 export PostEmptySlot from './PostEmptySlot';
 export QueueButtonGroup from './QueueButtonGroup';
