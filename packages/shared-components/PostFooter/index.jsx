@@ -116,7 +116,7 @@ const PostFooter = ({
   const isInstagramReminder = postDetails.isInstagramReminder;
   return (
     <div style={isSent ? sentPostDetailsStyle : getPostDetailsStyle(dragging)}>
-      <div style={postActionDetailsStyle}>
+      <div className="meta" style={postActionDetailsStyle}>
         {renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder, isPastReminder)}
         {renderText({ postDetails, serviceLink }, hasError, isSent, isPastReminder, day, dueTime)}
       </div>

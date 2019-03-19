@@ -38,7 +38,7 @@ env:
       fieldRef:
         fieldPath: status.hostIP
   - name: API_ADDR
-    value: https://api.bufferapp.com
+    value: https://k8s-api-php71.buffer.com
   - name: BUGSNAG_KEY
     valueFrom:
       secretKeyRef:
