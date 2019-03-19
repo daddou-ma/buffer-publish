@@ -5,11 +5,10 @@ import {
   EmptyState,
   PostDragLayer,
   BufferLoading,
-  LockedProfileNotification,
 } from '@bufferapp/publish-shared-components';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import { WithFeatureLoader } from '@bufferapp/product-features';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueueItems from '../QueueItems';
@@ -89,9 +88,7 @@ const QueuedPosts = ({
   hasInstagramFeatureFlip,
   isInstagramLoading,
   isLockedProfile,
-  features,
   isManager,
-  onClickUpgrade,
 }) => {
   if (loading) {
     return (
@@ -110,21 +107,7 @@ const QueuedPosts = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
-        />
-      );
-    }
+    return <LockedProfileNotification />;
   }
 
   return (
@@ -210,7 +193,6 @@ QueuedPosts.propTypes = {
       type: PropTypes.string,
     }),
   ),
-  features: PropTypes.object.isRequired, // eslint-disable-line
   showEmptyQueueMessage: PropTypes.bool,
   onComposerPlaceholderClick: PropTypes.func.isRequired,
   onComposerCreateSuccess: PropTypes.func.isRequired,
@@ -240,7 +222,6 @@ QueuedPosts.propTypes = {
   hasInstagramFeatureFlip: PropTypes.bool,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
   onCalendarClick: PropTypes.func.isRequired,
 };
 
@@ -263,4 +244,4 @@ QueuedPosts.defaultProps = {
   isLockedProfile: false,
 };
 
-export default WithFeatureLoader(QueuedPosts);
+export default QueuedPosts;

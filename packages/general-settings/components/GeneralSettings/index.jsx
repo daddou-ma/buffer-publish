@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
-import { LockedProfileNotification } from '@bufferapp/publish-shared-components';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
@@ -36,24 +36,9 @@ const GeneralSettings = ({
   remindersAreEnabled,
   onToggleRemindersClick,
   isLockedProfile,
-  onClickUpgrade,
 }) => {
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
-        />
-      );
-    }
+    return <LockedProfileNotification />;
   }
 
   return (
@@ -162,7 +147,6 @@ GeneralSettings.propTypes = {
   remindersAreEnabled: PropTypes.bool,
   onToggleRemindersClick: PropTypes.func.isRequired,
   isLockedProfile: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 export default GeneralSettings;

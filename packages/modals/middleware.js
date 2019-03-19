@@ -3,6 +3,7 @@ import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification';
 import { actions } from './reducer';
 import {
   shouldShowUpgradeModal,
@@ -18,6 +19,11 @@ import {
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
   switch (action.type) {
+    case lockedProfileActionTypes.UPGRADE:
+      if (action.plan === 'free') {
+        dispatch(actions.showUpgradeModal({ source: 'locked_profile' }));
+      }
+      break;
     case 'APP_INIT': {
       if (shouldShowUpgradeModal()) {
         dispatch(actions.showUpgradeModal({ source: getSourceFromKey() }));

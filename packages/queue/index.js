@@ -4,7 +4,6 @@ import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sid
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import { actions } from './reducer';
@@ -175,13 +174,6 @@ export default connect(
     },
     onHideInstagramModal: () => {
       dispatch(actions.handleHideInstagramModal());
-    },
-    onClickUpgrade: (plan) => {
-      if (plan === 'free') {
-        dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-      } else if (plan === 'pro') {
-        openBillingWindow();
-      }
     },
     onCalendarClick: (weekOrMonth, trackingAction) => {
       const openAfterTrack = () => {
