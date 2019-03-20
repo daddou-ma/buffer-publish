@@ -1,6 +1,6 @@
 import { actions as fetchActions, actionTypes as fetchActionTypes } from '@bufferapp/async-data-fetch';
 import { constants as tabsNames } from '@bufferapp/publish-preferences';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as notificationActions } from '@bufferapp/notifications';
 
 import middleware from './middleware';

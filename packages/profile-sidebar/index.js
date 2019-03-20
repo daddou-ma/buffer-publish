@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader';

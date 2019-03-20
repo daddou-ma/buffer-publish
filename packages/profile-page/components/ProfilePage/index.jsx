@@ -124,7 +124,7 @@ const ProfilePage = ({
     params: {
       profileId,
       tabId,
-     childTabId,
+      childTabId,
     },
   },
   onLoadMore,
