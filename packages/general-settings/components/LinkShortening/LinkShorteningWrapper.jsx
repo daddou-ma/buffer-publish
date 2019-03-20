@@ -53,7 +53,7 @@ const LinkShorteningWrapper = ({
     onConnectBitlyURLClick,
     onDisconnectBitlyURLClick,
     isBitlyConnected,
-    isContributor,
+    isManager,
   }) => {
   const selectedValue = selectedShortener || (linkList && linkList.filter(ll => ll.selected));
 
@@ -94,7 +94,7 @@ const LinkShorteningWrapper = ({
               onChange={onOptionSelect}
               value={selectedValue && selectedValue[0].value}
               size={'small'}
-              disabled={isContributor}
+              disabled={!isManager}
             />
           </div>
           <ConnectBitlyToggler
@@ -147,7 +147,7 @@ LinkShorteningWrapper.propTypes = {
   showConnectBitly: PropTypes.bool,
   isBitlyConnected: PropTypes.bool,
   isFreeUser: PropTypes.func.isRequired,
-  isContributor: PropTypes.bool.isRequired,
+  isManager: PropTypes.bool.isRequired,
 };
 
 export default LinkShorteningWrapper;

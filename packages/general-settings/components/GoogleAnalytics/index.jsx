@@ -4,7 +4,6 @@ import {
   Text, Toggle, Button, Input, Card,
 } from '@bufferapp/components';
 import { Field, reduxForm } from 'redux-form';
-import FeatureLoader from '@bufferapp/product-features';
 
 const googleAnalyticsWrapperStyle = {
   display: 'flex',
@@ -80,7 +79,10 @@ const GoogleAnalytics = ({
   onChangeUtmSource,
   utmMedium,
   onChangeUtmMedium,
-  isContributor,
+  isManager,
+  isBusinessAccount,
+  features,
+
   }) => (
     <div style={googleAnalyticsWrapperStyle}>
       <div style={headerTextWrapperStyle}>
@@ -118,7 +120,7 @@ const GoogleAnalytics = ({
         </div>
         <div style={switchStyle}>
           <Toggle
-            disabled={isContributor}
+            disabled={!isManager}
             onText={'Enabled'}
             offText={'Disabled'}
             on={googleAnalyticsIsEnabled}
@@ -201,16 +203,15 @@ const GoogleAnalytics = ({
         </div>
       }
       {!showGACustomizationForm && googleAnalyticsIsEnabled &&
-        <FeatureLoader supportedFeatures={'b4b_ga_custom_form'}>
-          <div style={customizeButtonStyle}>
-            <Button
-              secondary
-              onClick={onShowGACustomizationFormClick}
-            >
-              Customize Campaign Tracking
-            </Button>
-          </div>
-        </FeatureLoader>
+      (!features.isFreeUser() || (isBusinessAccount && isManager)) &&
+        <div style={customizeButtonStyle}>
+          <Button
+            secondary
+            onClick={onShowGACustomizationFormClick}
+          >
+            Customize Campaign Tracking
+          </Button>
+        </div>
       }
     </div>
 );
@@ -234,7 +235,9 @@ GoogleAnalytics.propTypes = {
   utmCampaign: PropTypes.string,
   utmSource: PropTypes.string,
   utmMedium: PropTypes.string,
-  isContributor: PropTypes.bool.isRequired,
+  isManager: PropTypes.bool.isRequired,
+  isBusinessAccount: PropTypes.bool.isRequired,
+  features: PropTypes.any.isRequired, // eslint-disable-line
 };
 
 export default reduxForm({
