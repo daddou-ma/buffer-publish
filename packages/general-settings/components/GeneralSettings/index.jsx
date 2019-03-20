@@ -23,7 +23,7 @@ const GeneralSettings = ({
   onSaveGATrackingSettingsClick,
   onConnectBitlyURLClick,
   onDisconnectBitlyURLClick,
-  isContributor,
+  isManager,
   features,
   hasInstagramFeatureFlip,
   onDirectPostingClick,
@@ -36,6 +36,7 @@ const GeneralSettings = ({
   remindersAreEnabled,
   onToggleRemindersClick,
   isLockedProfile,
+  isBusinessAccount,
 }) => {
   if (isLockedProfile) {
     return <LockedProfileNotification />;
@@ -57,11 +58,11 @@ const GeneralSettings = ({
         <InstagramReminders
           remindersAreEnabled={remindersAreEnabled}
           onToggleRemindersClick={onToggleRemindersClick}
-          isContributor={isContributor}
+          isManager={isManager}
         />
       }
       <LinkShortening
-        isContributor={isContributor}
+        isManager={isManager}
         onConnectBitlyURLClick={onConnectBitlyURLClick}
         onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
         loading={loadingLinkShorteners}
@@ -73,7 +74,9 @@ const GeneralSettings = ({
       />
       <Divider />
       <GoogleAnalytics
-        isContributor={isContributor}
+        isBusinessAccount={isBusinessAccount}
+        isManager={isManager}
+        features={features}
         onShowGACustomizationFormClick={onShowGACustomizationFormClick}
         showGACustomizationForm={showGACustomizationForm}
         googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
@@ -98,7 +101,7 @@ GeneralSettings.defaultProps = {
   loadingLinkShorteners: true,
   onLinkShortenerOptionSelect: null,
   selectedShortener: null,
-  isContributor: null,
+  isManager: true,
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
   hasInstagramFeatureFlip: false,
@@ -110,7 +113,8 @@ GeneralSettings.defaultProps = {
 };
 
 GeneralSettings.propTypes = {
-  isContributor: PropTypes.bool,
+  isManager: PropTypes.bool,
+  isBusinessAccount: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool.isRequired,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
