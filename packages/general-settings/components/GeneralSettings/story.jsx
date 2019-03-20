@@ -55,7 +55,7 @@ storiesOf('GeneralSettings', module)
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
   ))
-  .add('direct posting enabled', () => (
+  .add('direct posting enabled/ reminders disabled', () => (
     <GeneralSettings
       isInstagramProfile
       isInstagramBusiness
@@ -74,6 +74,7 @@ storiesOf('GeneralSettings', module)
     <GeneralSettings
       isInstagramProfile
       isInstagramBusiness
+      googleAnalyticsIsEnabled
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       features={features}
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
@@ -108,6 +109,8 @@ storiesOf('GeneralSettings', module)
       isInstagramProfile
       isInstagramBusiness
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
+      showGACustomizationForm
+      googleAnalyticsIsEnabled
       features={features}
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}

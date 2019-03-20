@@ -11,6 +11,6 @@ storiesOf('InstagramReminders', module)
   ))
   .add('if user is contributor only', () => (
     <InstagramReminders
-      isContributor
+      isManager={false}
     />
   ));

@@ -70,6 +70,6 @@ storiesOf('LinkShortener', module)
       linkShorteners={linkList}
       onOptionSelect={() => {}}
       loading={false}
-      isContributor
+      isManager={false}
     />
   ));

@@ -14,7 +14,7 @@ const storeFake = state => ({
   getState: () => ({ ...state }),
 });
 
-const state = {
+const store = storeFake({
   appSidebar: {
     user: {
       id: 'id1',
@@ -26,11 +26,10 @@ const state = {
       ownerId: 'id2',
     },
   },
-};
+});
 
 describe('LockedProfileNotification', () => {
   it('should render', () => {
-    const store = storeFake(state);
     const wrapper = mount(
       <Provider store={store}>
         <LockedProfileNotification />
