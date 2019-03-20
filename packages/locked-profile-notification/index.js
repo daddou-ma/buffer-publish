@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 
 import LockedProfileNotification from './components/LockedProfileNotification';
-import { actions } from './actions';
+import { actions } from './reducer';
 
 export default connect(
   state => ({
@@ -19,4 +19,4 @@ export default connect(
   }),
 )(LockedProfileNotification);
 
-export { actions, actionTypes } from './actions';
+export reducer, { actions, actionTypes } from './reducer';
