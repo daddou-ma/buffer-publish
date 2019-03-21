@@ -85,7 +85,23 @@ To get started on local development and testing:
 
 ### Troubleshooting Dev Environment Issues
 
-Coming soon.
+1. **Fixing gRPC error on Dev Environment** 
+  
+  If after running the `./dev up` command you get an error specifying Publish was not able to start, it might be due to gRPC, to confirm, first:
+  
+   ```bash
+   # in ~/buffer-dev
+   $ ./dev doctor
+   ```
+   
+   That will generate a doctor.txt file in your `~/buffer-dev` directory, you can send the generated file in **#eng-local-dev** channel, or if you see is a gRPC related error in the output file, then run the following:
+   
+   ```bash
+   # in ~/buffer-dev
+   $ docker-compose -p bufferdev run --rm publish npm rebuild --update-binary
+   ```
+ 
+And finally run `./dev up` again 🎉
 
 ## The Publish Server
 
