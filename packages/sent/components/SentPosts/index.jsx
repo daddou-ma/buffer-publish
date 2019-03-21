@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import {
   PostLists,
   EmptyState,
-  LockedProfileNotification,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
 import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import { WithFeatureLoader } from '@bufferapp/product-features';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import BusinessUpgradeBanner from '../BusinessUpgradeBanner';
 
 const headerStyle = {
@@ -47,8 +46,6 @@ const SentPosts = ({
   editMode,
   isManager,
   isLockedProfile,
-  onClickUpgrade,
-  features,
   canStartBusinessTrial,
   isBusinessAccount,
   hasFirstCommentFlip,
@@ -62,21 +59,7 @@ const SentPosts = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
-        />
-      );
-    }
+    return <LockedProfileNotification />;
   }
 
   if (total < 1) {
@@ -97,7 +80,9 @@ const SentPosts = ({
     <div>
       <BusinessUpgradeBanner canStartBusinessTrial={canStartBusinessTrial} />
       <div style={headerStyle}>
-        <Text color={'black'}>{header}</Text>
+        <div className="js-page-header">
+          <Text color={'black'}>{header}</Text>
+        </div>
         <Divider />
       </div>
       <div style={topBarContainerStyle}>
@@ -128,7 +113,6 @@ const SentPosts = ({
 };
 
 SentPosts.propTypes = {
-  features: PropTypes.object.isRequired, // eslint-disable-line
   header: PropTypes.string,
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
@@ -156,7 +140,6 @@ SentPosts.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
   canStartBusinessTrial: PropTypes.bool.isRequired,
   hasFirstCommentFlip: PropTypes.bool,
 };
@@ -182,4 +165,4 @@ SentPosts.defaultProps = {
   onImageClose: () => {},
 };
 
-export default WithFeatureLoader(SentPosts);
+export default SentPosts;

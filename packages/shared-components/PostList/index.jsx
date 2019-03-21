@@ -113,7 +113,7 @@ const PostList = ({
     </div>
     <List
       items={posts.map(post =>
-        <div style={postStyle}>
+        <div id={`update-${post.id}`} className="update" style={postStyle}>
           {
             renderPost({
               post,

@@ -5,11 +5,11 @@ import {
   EmptyState,
   PostDragLayer,
   BufferLoading,
-  LockedProfileNotification,
 } from '@bufferapp/publish-shared-components';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import { WithFeatureLoader } from '@bufferapp/product-features';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
@@ -21,8 +21,7 @@ const composerStyle = {
 
 const composerInputStyle = {
   alignItems: 'center',
-  width: '100%',
-  outline: 'none',
+  backgroundColor: '#ffffff',
   border: '1px solid #B8B8B8',
   borderRadius: '4px',
   boxShadow: '0 1px 4px rgba(0,0,0,.16)',
@@ -32,8 +31,10 @@ const composerInputStyle = {
   fontFamily: 'Roboto',
   fontSize: '14px',
   height: '48px',
+  outline: 'none',
   paddingLeft: '16px',
   paddingRight: '16px',
+  width: '100%',
 };
 
 const composerInputIcoCameraStyle = {
@@ -73,7 +74,6 @@ const QueuedPosts = ({
   onImageClickPrev,
   onImageClose,
   onDropPost,
-  onCalendarBtnClick,
   showComposer,
   editMode,
   paused,
@@ -88,9 +88,7 @@ const QueuedPosts = ({
   hasInstagramFeatureFlip,
   isInstagramLoading,
   isLockedProfile,
-  features,
   isManager,
-  onClickUpgrade,
   hasFirstCommentFlip,
 }) => {
   if (loading) {
@@ -110,21 +108,7 @@ const QueuedPosts = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
-        />
-      );
-    }
+    return <LockedProfileNotification />;
   }
 
   return (
@@ -190,7 +174,6 @@ const QueuedPosts = ({
         onImageClickPrev={onImageClickPrev}
         onImageClose={onImageClose}
         onDropPost={onDropPost}
-        onCalendarBtnClick={onCalendarBtnClick}
         draggable={draggingEnabled}
         hasFirstCommentFlip={hasFirstCommentFlip}
       />
@@ -212,7 +195,6 @@ QueuedPosts.propTypes = {
       type: PropTypes.string,
     }),
   ),
-  features: PropTypes.object.isRequired, // eslint-disable-line
   showEmptyQueueMessage: PropTypes.bool,
   onComposerPlaceholderClick: PropTypes.func.isRequired,
   onComposerCreateSuccess: PropTypes.func.isRequired,
@@ -223,7 +205,6 @@ QueuedPosts.propTypes = {
   onEditClick: PropTypes.func.isRequired,
   onEmptySlotClick: PropTypes.func.isRequired,
   onShareNowClick: PropTypes.func.isRequired,
-  onCalendarBtnClick: PropTypes.func.isRequired,
   onImageClick: PropTypes.func.isRequired,
   onImageClickNext: PropTypes.func.isRequired,
   onImageClickPrev: PropTypes.func.isRequired,
@@ -243,7 +224,6 @@ QueuedPosts.propTypes = {
   hasInstagramFeatureFlip: PropTypes.bool,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
   hasFirstCommentFlip: PropTypes.bool,
   onCalendarClick: PropTypes.func.isRequired,
 };
@@ -268,4 +248,4 @@ QueuedPosts.defaultProps = {
   hasFirstCommentFlip: false,
 };
 
-export default WithFeatureLoader(QueuedPosts);
+export default QueuedPosts;

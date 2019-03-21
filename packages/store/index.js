@@ -35,6 +35,7 @@ import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/pu
 import { middleware as accountNotificationsMiddleware } from '@bufferapp/publish-account-notifications';
 import { middleware as publishCTABannerMiddleware } from '@bufferapp/publish-cta-banner';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
+import { middleware as bookmarkletsMiddleware } from '@bufferapp/publish-bookmarklets';
 
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
@@ -99,6 +100,7 @@ const configureStore = (initialstate) => {
         profilesDisconnectedModalMiddleware,
         accountNotificationsMiddleware,
         publishCTABannerMiddleware,
+        bookmarkletsMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

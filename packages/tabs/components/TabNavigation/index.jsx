@@ -153,6 +153,7 @@ TabNavigation.defaultProps = {
   isLockedProfile: false,
   isInstagramProfile: false,
   isBusinessAccount: false,
+  isManager: false,
 };
 
 TabNavigation.propTypes = {

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Text,
-  Button,
   Divider,
 } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
 import FeatureLoader from '@bufferapp/product-features';
 import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
@@ -120,14 +120,13 @@ const ProfileSidebar = ({
         <Divider />
       </div>
       <Button
-        secondary
-        fillContainer
+        label={translations.connectButton}
+        type="secondary"
+        fullWidth
         onClick={() => {
           onConnectSocialAccountClick();
         }}
-      >
-        {translations.connectButton}
-      </Button>
+      />
     </div>
   </div>
 );

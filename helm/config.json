@@ -1,8 +1,0 @@
-{
-    "config": {
-        "chart": "https://github.com/bufferapp/helm-chart-base-templates/releases/download/v0.2.1/buffer-service-0.2.1.tgz",
-        "name": "buffer-publish",
-        "namespace": "buffer",
-        "deployment_url": "publish.buffer.com"
-    }
-}

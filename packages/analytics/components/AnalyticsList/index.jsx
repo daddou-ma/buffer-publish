@@ -5,9 +5,10 @@ import CompareChart from '@bufferapp/compare-chart';
 import HourlyChart from '@bufferapp/hourly-chart';
 import PostsTable from '@bufferapp/posts-table';
 import SummaryTable from '@bufferapp/summary-table';
-import { LockedProfileNotification, BusinessTrialOrUpgradeCard } from '@bufferapp/publish-shared-components';
+import { BusinessTrialOrUpgradeCard } from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { trackAction } from '@bufferapp/publish-data-tracking';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 
 import Toolbar from '../Toolbar';
 import Notification from '../Notification';
@@ -20,7 +21,6 @@ const AnalyticsList = ({
   profile,
   isAnalyticsSupported,
   isLockedProfile,
-  onClickUpgrade,
   canStartBusinessTrial,
 }) => {
   if (features.isProUser()) {
@@ -54,21 +54,7 @@ const AnalyticsList = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
-        />
-      );
-    }
+    return <LockedProfileNotification />;
   }
 
   if (isAnalyticsSupported) {
@@ -93,7 +79,6 @@ AnalyticsList.propTypes = {
   isAnalyticsSupported: PropTypes.bool,
   profile: PropTypes.shape(ProfileHeader.propTypes),
   isLockedProfile: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 AnalyticsList.defaultProps = {

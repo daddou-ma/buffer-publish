@@ -4,7 +4,6 @@ import { WithFeatureLoader } from '@bufferapp/product-features';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
 import { actions } from './reducer';
 import GeneralSettings from './components/GeneralSettings';
 
@@ -20,7 +19,8 @@ export default connect(
       linkShorteners: state.generalSettings.linkShorteners,
       loadingLinkShorteners: state.generalSettings.loadingLinkShorteners,
       selectedShortener: state.generalSettings.selectedShortener,
-      isContributor: state.generalSettings.isContributor,
+      isManager: state.profileSidebar.selectedProfile.isManager,
+      isBusinessAccount: state.profileSidebar.selectedProfile.business,
       showGACustomizationForm: state.generalSettings.showGACustomizationForm,
       googleAnalyticsIsEnabled: state.generalSettings.googleAnalyticsEnabled === 'enabled',
       utmCampaign: state.generalSettings.utmCampaign,
@@ -100,13 +100,6 @@ export default connect(
         dispatch(actions.handleChangeUtmMedium({
           utmMedium: event.target.value,
         }));
-      },
-      onClickUpgrade: (plan) => {
-        if (plan === 'free') {
-          dispatch(modalsActions.showUpgradeModal({ source: 'locked_profile' }));
-        } else if (plan === 'pro') {
-          openBillingWindow();
-        }
       },
       onToggleRemindersClick: (newToggleValue) => {
         dispatch(actions.handleRemindersToggle({

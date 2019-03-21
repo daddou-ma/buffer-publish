@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
-import { LockedProfileNotification } from '@bufferapp/publish-shared-components';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
@@ -23,7 +23,7 @@ const GeneralSettings = ({
   onSaveGATrackingSettingsClick,
   onConnectBitlyURLClick,
   onDisconnectBitlyURLClick,
-  isContributor,
+  isManager,
   features,
   hasInstagramFeatureFlip,
   onDirectPostingClick,
@@ -36,24 +36,10 @@ const GeneralSettings = ({
   remindersAreEnabled,
   onToggleRemindersClick,
   isLockedProfile,
-  onClickUpgrade,
+  isBusinessAccount,
 }) => {
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
-        />
-      );
-    }
+    return <LockedProfileNotification />;
   }
 
   return (
@@ -72,11 +58,11 @@ const GeneralSettings = ({
         <InstagramReminders
           remindersAreEnabled={remindersAreEnabled}
           onToggleRemindersClick={onToggleRemindersClick}
-          isContributor={isContributor}
+          isManager={isManager}
         />
       }
       <LinkShortening
-        isContributor={isContributor}
+        isManager={isManager}
         onConnectBitlyURLClick={onConnectBitlyURLClick}
         onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
         loading={loadingLinkShorteners}
@@ -88,7 +74,9 @@ const GeneralSettings = ({
       />
       <Divider />
       <GoogleAnalytics
-        isContributor={isContributor}
+        isBusinessAccount={isBusinessAccount}
+        isManager={isManager}
+        features={features}
         onShowGACustomizationFormClick={onShowGACustomizationFormClick}
         showGACustomizationForm={showGACustomizationForm}
         googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
@@ -113,7 +101,7 @@ GeneralSettings.defaultProps = {
   loadingLinkShorteners: true,
   onLinkShortenerOptionSelect: null,
   selectedShortener: null,
-  isContributor: null,
+  isManager: true,
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
   hasInstagramFeatureFlip: false,
@@ -125,7 +113,8 @@ GeneralSettings.defaultProps = {
 };
 
 GeneralSettings.propTypes = {
-  isContributor: PropTypes.bool,
+  isManager: PropTypes.bool,
+  isBusinessAccount: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool.isRequired,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
@@ -162,7 +151,6 @@ GeneralSettings.propTypes = {
   remindersAreEnabled: PropTypes.bool,
   onToggleRemindersClick: PropTypes.func.isRequired,
   isLockedProfile: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 export default GeneralSettings;

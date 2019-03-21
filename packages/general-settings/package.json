@@ -9,7 +9,9 @@
   "author": "hharnisc@gmail.com",
   "dependencies": {
     "@bufferapp/async-data-fetch": "1.9.4",
-    "@bufferapp/publish-formatters": "1.9.30"
+    "@bufferapp/publish-formatters": "1.9.30",
+    "@bufferapp/publish-locked-profile-notification": "2.0.0",
+    "@bufferapp/product-features": "2.0.0"
   },
   "devDependencies": {
     "eslint": "3.19.0"

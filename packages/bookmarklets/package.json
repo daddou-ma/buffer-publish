@@ -1,0 +1,19 @@
+{
+  "name": "@bufferapp/publish-bookmarklets",
+  "version": "2.0.0",
+  "description": "New Publish Bookmarklets Update recheck and Profile quick analytics.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "mariale.uribe@gmail.com",
+  "dependencies": {
+    "@bufferapp/buffermetrics": "0.9.0"
+  },
+  "devDependencies": {
+    "eslint": "3.19.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
