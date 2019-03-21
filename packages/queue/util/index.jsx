@@ -150,6 +150,8 @@ export const getDayHeaderItem = ({ text, dayOfWeek, date }) => ({
   dayOfWeek,
   date,
 });
+
+const servicesWithCommentFeature = ['instagram'];
 /**
  * Convenience method for generating a post item for the `QueueItems` component
  */
@@ -161,6 +163,7 @@ export const getPostItem = ({
   ...post,
   isManager,
   draggable: false,
+  hasCommentEnabled: servicesWithCommentFeature.indexOf(post.profile_service) !== -1,
 });
 
 /**
@@ -361,8 +364,6 @@ export const formatPostLists = ({
     });
     return finalList;
   }
-
-  const servicesWithCommentFeature = ['instagram'];
 
   /**
    * CASE 2: Schedule Slots Disabled
