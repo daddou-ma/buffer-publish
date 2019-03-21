@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import {
   QueueItems,
   BufferLoading,
-  LockedProfileNotification,
   BusinessTrialOrUpgradeCard,
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { Input } from '@bufferapp/components';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 
 import Empty from '../Empty';
 
@@ -52,7 +52,6 @@ const DraftList = ({
   editMode,
   tabId,
   isLockedProfile,
-  onClickUpgrade,
   canStartBusinessTrial,
 }) => {
   if (features.isProUser()) {
@@ -94,21 +93,7 @@ const DraftList = ({
   }
 
   if (isLockedProfile) {
-    if (features.isFreeUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'free'}
-        />
-      );
-    } else if (features.isProUser()) {
-      return (
-        <LockedProfileNotification
-          onClickUpgrade={onClickUpgrade}
-          plan={'pro'}
-        />
-      );
-    }
+    return <LockedProfileNotification />;
   }
 
   return (
@@ -184,7 +169,6 @@ DraftList.propTypes = {
   editMode: PropTypes.bool,
   tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
   isLockedProfile: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
 };
 
 DraftList.defaultProps = {

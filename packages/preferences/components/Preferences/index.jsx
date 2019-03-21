@@ -6,7 +6,6 @@ import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
 import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
-import FeatureLoader from '@bufferapp/product-features';
 import TabsNames from '../../constants';
 import Security from '../Security';
 import General from '../General';
@@ -24,7 +23,7 @@ const generalTabStyle = {
   justifyContent: 'space-between',
 };
 
-const cenas = {
+const containerStyle = {
   maxWidth: '864px',
 };
 
@@ -93,11 +92,9 @@ const Preferences = ({
           <Tab tabId={TabsNames.SECURITY}>Security</Tab>
           <Tab tabId={TabsNames.NOTIFICATIONS}>Notifications</Tab>
           <Tab tabId={TabsNames.APPS_EXTRAS}>Apps & Extras</Tab>
-          <FeatureLoader supportedFeatures={'b4b_billing'}>
-            <Tab tabId={'b4b-billing'} onClick={() => openBillingWindow()}>
-              Billing
-            </Tab>
-          </FeatureLoader>
+          <Tab tabId={TabsNames.BILLING} onClick={() => openBillingWindow()}>
+            Billing
+          </Tab>
         </Tabs>
       </div>
       <Link
@@ -132,7 +129,7 @@ const Preferences = ({
         </div>
       </Link>
       <div style={selectedTabId === 'general' ? generalTabStyle : tabStyle}>
-        <div style={cenas}>
+        <div style={containerStyle}>
           <PreferenceContent tabId={selectedTabId} onUnknownTab={onUnknownTab} />
         </div>
       </div>

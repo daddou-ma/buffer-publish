@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import GoogleAnalytics from './index';
 
+const features = { isFreeUser: () => true };
 const storeFake = state => ({
   default: () => {},
   subscribe: () => {},
@@ -37,7 +38,7 @@ storiesOf('GoogleAnalytics', module)
   .addDecorator(UpgradeModalDecorator)
   .add('default', () => (
     <GoogleAnalytics
-      isContributor={false}
+      isManager
       googleAnalyticsIsEnabled={false}
       showGACustomizationForm={false}
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
@@ -49,11 +50,12 @@ storiesOf('GoogleAnalytics', module)
       utmSource={'source'}
       utmMedium={'medium'}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
+      features={features}
     />
   ))
   .add('is enabled', () => (
     <GoogleAnalytics
-      isContributor={false}
+      isManager
       googleAnalyticsIsEnabled
       showGACustomizationForm={false}
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
@@ -65,11 +67,12 @@ storiesOf('GoogleAnalytics', module)
       utmSource={'source'}
       utmMedium={'medium'}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
+      features={features}
     />
   ))
   .add('the customisation form is shown', () => (
     <GoogleAnalytics
-      isContributor={false}
+      isManager
       googleAnalyticsIsEnabled
       showGACustomizationForm
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
@@ -81,11 +84,12 @@ storiesOf('GoogleAnalytics', module)
       utmSource={'source'}
       utmMedium={'medium'}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
+      features={features}
     />
   ))
   .add('is disabled for Contributors', () => (
     <GoogleAnalytics
-      isContributor
+      isManager={false}
       googleAnalyticsIsEnabled
       showGACustomizationForm={false}
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
@@ -97,5 +101,6 @@ storiesOf('GoogleAnalytics', module)
       utmSource={'source'}
       utmMedium={'medium'}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
+      features={features}
     />
   ));

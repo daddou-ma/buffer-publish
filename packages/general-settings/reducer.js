@@ -35,7 +35,6 @@ export default (state = initialState, action) => {
         googleAnalyticsEnabled: action.profile.googleAnalyticsEnabled,
         profileId: action.profileId,
         profileService: action.profile.service,
-        isContributor: action.profile.isContributor,
         loadingLinkShorteners: true,
         selectedShortener: null,
         trackingSettings: action.trackingSettings,

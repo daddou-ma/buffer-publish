@@ -39,12 +39,25 @@ storiesOf('ProfilePage', module)
       history={stubbedHistory}
     />
   ))
-  .add('should render settings', () => (
+  .add('should render posting schedule settings', () => (
     <ProfilePage
       match={{
         params: {
           profileId: 'someProfileId',
           tabId: 'settings',
+          childTabId: 'posting-schedule',
+        },
+      }}
+      history={stubbedHistory}
+    />
+  ))
+  .add('should render general settings', () => (
+    <ProfilePage
+      match={{
+        params: {
+          profileId: 'someProfileId',
+          tabId: 'settings',
+          childTabId: 'general-settings',
         },
       }}
       history={stubbedHistory}

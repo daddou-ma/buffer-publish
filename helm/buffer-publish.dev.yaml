@@ -1,0 +1,9 @@
+namespace: dev
+track: staging
+replicaCount: 1
+deploymentUrl: "publish.dev.buffer.com"
+ingress:
+  enabled: true
+  path: /
+  annotations:
+    kubernetes.io/ingress.class: nginx

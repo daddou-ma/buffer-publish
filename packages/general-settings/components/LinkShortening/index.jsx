@@ -26,7 +26,7 @@ const LinkShortening = ({
     selectedShortener,
     onDisconnectBitlyURLClick,
     onConnectBitlyURLClick,
-    isContributor,
+    isManager,
   }) => {
   const linkList = linkShorteners && linkShorteners.map(ls => ({
     value: ls.domain,
@@ -71,9 +71,9 @@ const LinkShortening = ({
       selectedShortener={selectedShortener}
       onConnectBitlyURLClick={onConnectBitlyURLClick}
       onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
-      showConnectBitly={!isContributor}
+      showConnectBitly={isManager}
       isBitlyConnected={isBitlyConnected}
-      isContributor={isContributor}
+      isManager={isManager}
     >
       <div style={textWrapperStyle}>
         <Text size="small">
@@ -92,11 +92,11 @@ LinkShortening.defaultProps = {
   loading: true,
   profileService: null,
   selectedShortener: null,
-  isContributor: false,
+  isManager: true,
 };
 
 LinkShortening.propTypes = {
-  isContributor: PropTypes.bool,
+  isManager: PropTypes.bool,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
   onDisconnectBitlyURLClick: PropTypes.func.isRequired,
   profileService: PropTypes.string,
