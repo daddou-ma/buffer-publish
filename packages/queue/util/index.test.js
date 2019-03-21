@@ -421,12 +421,14 @@ describe('queue utils', () => {
       daySlot,
       posts,
       isManager: true,
+      hasCommentEnabled: false,
       profileService: 'instagram',
     });
     expect(result).toEqual({
       queueItemType: 'post',
       isManager: true,
       draggable: false,
+      hasCommentEnabled: false,
       due_at: 1552003980,
     });
   });
@@ -451,6 +453,7 @@ describe('queue utils', () => {
         daySlots,
         posts,
         isManager: true,
+        hasCommentEnabled: false,
         profileService: 'instagram',
       });
       expect(result).toEqual([
@@ -460,6 +463,7 @@ describe('queue utils', () => {
           due_at: 1552220453,
           isManager: true,
           draggable: false,
+          hasCommentEnabled: false,
         },
         {
           queueItemType: 'slot',
@@ -473,6 +477,7 @@ describe('queue utils', () => {
           due_at: 1552259693,
           isManager: true,
           draggable: false,
+          hasCommentEnabled: false,
         },
         {
           queueItemType: 'slot',
@@ -486,6 +491,7 @@ describe('queue utils', () => {
           due_at: 1552295033,
           isManager: true,
           draggable: false,
+          hasCommentEnabled: false,
         },
         {
           queueItemType: 'post',
@@ -494,6 +500,7 @@ describe('queue utils', () => {
           scheduled_at: 1552316633,
           isManager: true,
           draggable: false,
+          hasCommentEnabled: false,
         },
       ]);
     });
