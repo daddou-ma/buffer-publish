@@ -53,6 +53,7 @@ const renderPost = ({
   onImageClose,
   onDropPost,
   isSent,
+  isBusinessAccount,
   isPastReminder,
 }) => {
   const postWithEventHandlers = {
@@ -69,6 +70,7 @@ const renderPost = ({
     onImageClose: () => onImageClose({ post }),
     onDropPost,
     isSent,
+    isBusinessAccount,
     isPastReminder,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
@@ -126,6 +128,7 @@ const PostList = ({
               onDropPost,
               onShareAgainClick,
               isSent,
+              isBusinessAccount,
               isPastReminder,
             })
           }
