@@ -9,12 +9,16 @@ import { BusinessTrialOrUpgradeCard } from '@bufferapp/publish-shared-components
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+
 
 import Toolbar from '../Toolbar';
 import Notification from '../Notification';
 import ProfileHeader from '../ProfileHeader';
 
 import './analytics.css';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const AnalyticsList = ({
   features,
@@ -59,14 +63,16 @@ const AnalyticsList = ({
 
   if (isAnalyticsSupported) {
     return (
-      <div id="analytics">
-        <Toolbar profile={profile} />
-        <SummaryTable />
-        <CompareChart />
-        <HourlyChart />
-        <AverageTable />
-        <PostsTable />
-      </div>
+      <ErrorBoundary>
+        <div id="analytics">
+          <Toolbar profile={profile} />
+          <SummaryTable />
+          <CompareChart />
+          <HourlyChart />
+          <AverageTable />
+          <PostsTable />
+        </div>
+      </ErrorBoundary>
     );
   }
 

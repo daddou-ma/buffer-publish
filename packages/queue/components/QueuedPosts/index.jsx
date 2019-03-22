@@ -9,10 +9,13 @@ import {
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -111,71 +114,73 @@ const QueuedPosts = ({
   }
 
   return (
-    <div>
-      <PostDragLayer />
+    <ErrorBoundary>
+      <div>
+        <PostDragLayer />
 
-      <div style={topBarContainerStyle}>
-        <div style={composerStyle}>
-          {showComposer && !editMode &&
-            <ComposerPopover
-              onSave={onComposerCreateSuccess}
-              preserveComposerStateOnClose
-              type={'queue'}
-            />
-          }
-          <button
-            style={composerInputStyle}
-            onClick={onComposerPlaceholderClick}
-          >
-            What would you like to share?
-            <div style={composerInputIcoCameraStyle} />
-          </button>
+        <div style={topBarContainerStyle}>
+          <div style={composerStyle}>
+            {showComposer && !editMode &&
+              <ComposerPopover
+                onSave={onComposerCreateSuccess}
+                preserveComposerStateOnClose
+                type={'queue'}
+              />
+            }
+            <button
+              style={composerInputStyle}
+              onClick={onComposerPlaceholderClick}
+            >
+              What would you like to share?
+              <div style={composerInputIcoCameraStyle} />
+            </button>
+          </div>
+
         </div>
-
+        {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+          <InstagramDirectPostingBanner onDirectPostingClick={onSetUpDirectPostingClick} />
+        }
+        {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+          <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
+        }
+        {hasInstagramFeatureFlip && showInstagramDirectPostingModal &&
+          <InstagramDirectPostingModal />
+        }
+        {!!paused && <QueuePausedBar isManager={isManager} handleClickUnpause={onUnpauseClick} />}
+        {showEmptyQueueMessage &&
+          <EmptyState
+            title="It looks like you haven't got any posts in your queue!"
+            subtitle="Click the box above to add a post to your queue :)"
+            heroImg="https://s3.amazonaws.com/buffer-publish/images/fresh-queue%402x.png"
+            heroImgSize={{ width: '229px', height: '196px' }}
+          />
+        }
+        {showComposer && editMode &&
+          <ComposerPopover
+            onSave={onComposerCreateSuccess}
+            type={'queue'}
+          />
+        }
+        <QueueItems
+          items={postLists}
+          subprofiles={subprofiles}
+          onCancelConfirmClick={onCancelConfirmClick}
+          onCalendarClick={onCalendarClick}
+          onRequeueClick={onRequeueClick}
+          onDeleteClick={onDeleteClick}
+          onDeleteConfirmClick={onDeleteConfirmClick}
+          onEditClick={onEditClick}
+          onEmptySlotClick={onEmptySlotClick}
+          onShareNowClick={onShareNowClick}
+          onImageClick={onImageClick}
+          onImageClickNext={onImageClickNext}
+          onImageClickPrev={onImageClickPrev}
+          onImageClose={onImageClose}
+          onDropPost={onDropPost}
+          draggable={draggingEnabled}
+        />
       </div>
-      {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
-        <InstagramDirectPostingBanner onDirectPostingClick={onSetUpDirectPostingClick} />
-      }
-      {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
-        <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
-      }
-      {hasInstagramFeatureFlip && showInstagramDirectPostingModal &&
-        <InstagramDirectPostingModal />
-      }
-      {!!paused && <QueuePausedBar isManager={isManager} handleClickUnpause={onUnpauseClick} />}
-      {showEmptyQueueMessage &&
-        <EmptyState
-          title="It looks like you haven't got any posts in your queue!"
-          subtitle="Click the box above to add a post to your queue :)"
-          heroImg="https://s3.amazonaws.com/buffer-publish/images/fresh-queue%402x.png"
-          heroImgSize={{ width: '229px', height: '196px' }}
-        />
-      }
-      {showComposer && editMode &&
-        <ComposerPopover
-          onSave={onComposerCreateSuccess}
-          type={'queue'}
-        />
-      }
-      <QueueItems
-        items={postLists}
-        subprofiles={subprofiles}
-        onCancelConfirmClick={onCancelConfirmClick}
-        onCalendarClick={onCalendarClick}
-        onRequeueClick={onRequeueClick}
-        onDeleteClick={onDeleteClick}
-        onDeleteConfirmClick={onDeleteConfirmClick}
-        onEditClick={onEditClick}
-        onEmptySlotClick={onEmptySlotClick}
-        onShareNowClick={onShareNowClick}
-        onImageClick={onImageClick}
-        onImageClickNext={onImageClickNext}
-        onImageClickPrev={onImageClickPrev}
-        onImageClose={onImageClose}
-        onDropPost={onDropPost}
-        draggable={draggingEnabled}
-      />
-    </div>
+    </ErrorBoundary>
   );
 };
 

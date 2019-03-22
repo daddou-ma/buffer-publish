@@ -2,20 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ErrorBoundary extends React.Component {
-  static getDerivedStateFromError(error) {
-    return {
-      hasError: true,
-      error,
-    };
-  }
-
   constructor(props) {
     super(props);
     this.state = { hasError: false };
   }
 
   componentDidCatch(error, info) {
-    this.setState(ErrorBoundary.getDerivedStateFromError(error));
+    this.setState({
+      hasError: true,
+      error,
+      info,
+    });
     /* eslint-disable no-console */
     if (typeof console !== 'undefined' && typeof console.log !== 'undefined') {
       console.log({ error, info });
@@ -27,7 +24,7 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       if (this.props.fallbackComponent) {
         const FallbackComponent = this.props.fallbackComponent;
-        return <FallbackComponent />;
+        return <FallbackComponent {...this.state} />;
       }
       return <h1>Something has gone wrong. Our team has been informed of the error.</h1>;
     }

@@ -14,6 +14,9 @@ import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import Analytics from '@bufferapp/publish-analytics';
 import { ScrollableContainer } from '@bufferapp/publish-shared-components';
 import { LoadingAnimation } from '@bufferapp/components';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const profilePageStyle = {
   display: 'flex',
@@ -91,10 +94,12 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
         case 'general-settings':
         default:
           return (
-            <GeneralSettings
-              profileId={profileId}
-              childTabId={childTabId}
-            />
+            <ErrorBoundary>
+              <GeneralSettings
+                profileId={profileId}
+                childTabId={childTabId}
+              />
+            </ErrorBoundary>
           );
       }
     default:

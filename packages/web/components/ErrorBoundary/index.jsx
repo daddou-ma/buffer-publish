@@ -3,6 +3,7 @@ import bugsnag from '@bugsnag/js';
 import bugsnagReact from '@bugsnag/plugin-react';
 
 import BoundaryFallback from './errorComponent';
+import FittedFallbackComponent from './fallbackComponent';
 import SimpleErrorBoundary from './simpleErrorBoundary';
 
 let BugsnagErrorBoundary;
@@ -31,16 +32,26 @@ if (window._bugsnagConfig) {
 }
 
 
-const getErrorBoundary = () => {
+const getErrorBoundary = (fit = false) => {
   if (BugsnagErrorBoundary) {
     return ({ children, fallbackComponent }) => ( // eslint-disable-line
-      <BugsnagErrorBoundary FallbackComponent={fallbackComponent || BoundaryFallback}>
+      <BugsnagErrorBoundary
+        FallbackComponent={
+          fallbackComponent ||
+          fit ? FittedFallbackComponent : BoundaryFallback
+        }
+      >
         {children}
       </BugsnagErrorBoundary>
     );
   }
   return ({ children, fallbackComponent }) => ( // eslint-disable-line
-    <SimpleErrorBoundary fallbackComponent={fallbackComponent || BoundaryFallback}>
+    <SimpleErrorBoundary
+      fallbackComponent={
+        fallbackComponent ||
+        fit ? FittedFallbackComponent : BoundaryFallback
+      }
+    >
       {children}
     </SimpleErrorBoundary>
   );
