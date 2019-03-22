@@ -16,7 +16,7 @@ describe('middleware', () => {
     const action = {
       type: LOCATION_CHANGE,
       payload: {
-        pathname: `/preferences/${tabsNames.APPS_EXTRAS}`,
+        location: { pathname: `/preferences/${tabsNames.APPS_EXTRAS}` },
       },
     };
     middleware(store)(next)(action);
@@ -73,7 +73,7 @@ describe('middleware', () => {
     const action = {
       type: LOCATION_CHANGE,
       payload: {
-        pathname: '/preferences/test',
+        location: { pathname: '/preferences/test' },
       },
     };
     middleware(store)(next)(action);

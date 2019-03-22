@@ -5,7 +5,7 @@ import { checkA11y } from 'storybook-addon-a11y';
 import { Provider } from 'react-redux';
 import {
   ConnectedRouter as Router,
-} from 'react-router-redux';
+} from 'connected-react-router';
 import createHistory from 'history/createHashHistory';
 import createStore from '@bufferapp/publish-store';
 import Preferences from './index';
