@@ -4,7 +4,7 @@ import createStore, { history } from '@bufferapp/publish-store';
 import { Provider } from 'react-redux';
 import {
   ConnectedRouter as Router,
-} from 'react-router-redux';
+} from 'connected-react-router';
 import { checkA11y } from 'storybook-addon-a11y';
 import App from './index';
 

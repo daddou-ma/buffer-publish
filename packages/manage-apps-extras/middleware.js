@@ -1,5 +1,5 @@
 import { constants as tabsNames } from '@bufferapp/publish-preferences';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as dataFetchActions, actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 
@@ -11,7 +11,7 @@ export default ({ dispatch }) => next => (action) => {
   next(action);
   switch (action.type) {
     case LOCATION_CHANGE:
-      if (isAppsAndExtrasTab(action.payload.pathname)) {
+      if (isAppsAndExtrasTab(action.payload.location.pathname)) {
         dispatch(dataFetchActions.fetch({
           name: 'connectedApps',
         }));

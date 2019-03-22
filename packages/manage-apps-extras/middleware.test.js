@@ -1,6 +1,6 @@
 import { actions as fetchActions, actionTypes as fetchActionTypes } from '@bufferapp/async-data-fetch';
 import { constants as tabsNames } from '@bufferapp/publish-preferences';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as notificationActions } from '@bufferapp/notifications';
 
 import middleware from './middleware';
@@ -16,7 +16,7 @@ describe('middleware', () => {
     const action = {
       type: LOCATION_CHANGE,
       payload: {
-        pathname: `/preferences/${tabsNames.APPS_EXTRAS}`,
+        location: { pathname: `/preferences/${tabsNames.APPS_EXTRAS}` },
       },
     };
     middleware(store)(next)(action);
@@ -73,7 +73,7 @@ describe('middleware', () => {
     const action = {
       type: LOCATION_CHANGE,
       payload: {
-        pathname: '/preferences/test',
+        location: { pathname: '/preferences/test' },
       },
     };
     middleware(store)(next)(action);

@@ -50,13 +50,13 @@ class TabNavigation extends React.Component {
       onChildTabClick,
       shouldShowUpgradeCta,
       shouldShowNestedSettingsTab,
+      shouldShowNestedAnalyticsTab,
       onUpgradeButtonClick,
       profileId,
       isLockedProfile,
       isInstagramProfile,
     } = this.props;
 
-    const selectedChildTab = selectedChildTabId || 'general-settings';
     return (
       /* wrapper div with "tabs" id necessary as a selector
       for a11y focus after selecting profile in sidebar */
@@ -66,14 +66,10 @@ class TabNavigation extends React.Component {
           onTabClick={onTabClick}
         >
           <Tab tabId={'queue'}>Queue</Tab>
-          <Tab tabId={'sent'}>Sent Posts</Tab>
           {isInstagramProfile &&
             <Tab tabId={'pastReminders'}>Past Reminders</Tab>
           }
-          {/* Pro and up users or Team Members */}
-          {(!features.isFreeUser() || isBusinessAccount) &&
-            <Tab tabId={'analytics'}>Analytics</Tab>
-          }
+          <Tab tabId={'analytics'}>Analytics</Tab>
           {/* Team Members who are Managers */}
           {isBusinessAccount && isManager &&
             <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
@@ -116,12 +112,22 @@ class TabNavigation extends React.Component {
               }}
             >
               Learn about Buffer for Business
-              </Button>
+            </Button>
           </div>
         </FeatureLoader>
+        {shouldShowNestedAnalyticsTab && !isLockedProfile &&
+          <Tabs
+            selectedTabId={selectedChildTabId || 'posts'}
+            onTabClick={onChildTabClick}
+            secondary
+          >
+            <Tab tabId={'posts'}>Posts</Tab>
+            <Tab tabId={'overview'}>Overview</Tab>
+          </Tabs>
+        }
         {shouldShowNestedSettingsTab && !isLockedProfile &&
           <Tabs
-            selectedTabId={selectedChildTab}
+            selectedTabId={selectedChildTabId || 'general-settings'}
             onTabClick={onChildTabClick}
             secondary
           >
@@ -148,6 +154,7 @@ class TabNavigation extends React.Component {
 TabNavigation.defaultProps = {
   shouldShowUpgradeCta: false,
   shouldShowNestedSettingsTab: false,
+  shouldShowNestedAnalyticsTab: false,
   selectedChildTabId: null,
   profileId: null,
   isLockedProfile: false,
@@ -167,6 +174,7 @@ TabNavigation.propTypes = {
   onChildTabClick: PropTypes.func.isRequired,
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,
+  shouldShowNestedAnalyticsTab: PropTypes.bool,
   profileId: PropTypes.string,
   isLockedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,

@@ -54,21 +54,11 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
       return (
         <QueuedPosts profileId={profileId} />
       );
-    case 'sent':
-      return (
-        <SentPosts
-          profileId={profileId}
-        />
-      );
     case 'pastReminders':
       return (
         <PastReminders
           profileId={profileId}
         />
-      );
-    case 'analytics':
-      return (
-        <Analytics />
       );
     case 'drafts':
     case 'awaitingApproval':
@@ -79,6 +69,20 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
           tabId={tabId}
         />
       );
+    case 'analytics':
+      switch (childTabId) {
+        case 'overview':
+          return (
+            <Analytics />
+          );
+        case 'posts':
+        default:
+          return (
+            <SentPosts
+              profileId={profileId}
+            />
+          );
+      }
     case 'settings':
       switch (childTabId) {
         case 'posting-schedule':
@@ -120,7 +124,7 @@ const ProfilePage = ({
     params: {
       profileId,
       tabId,
-     childTabId,
+      childTabId,
     },
   },
   onLoadMore,
@@ -128,7 +132,7 @@ const ProfilePage = ({
   moreToLoad,
   page,
 }) => {
-  const isPostsTab = ['queue', 'sent', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId);
+  const isPostsTab = ['queue', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId);
   const handleScroll = (o) => {
     const reachedBottom = o.scrollHeight - o.scrollTop === o.clientHeight;
     if (reachedBottom && moreToLoad && isPostsTab && !loadingMore) {
