@@ -7,7 +7,8 @@ import {
 } from 'redux-form';
 import {
   ConnectedRouter as Router,
-} from 'react-router-redux';
+  connectRouter,
+} from 'connected-react-router';
 import createHistory from 'history/createHashHistory';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
@@ -22,7 +23,8 @@ import {
 
 
 const history = createHistory();
-const store = createStore(combineReducers({ form: formReducer }));
+const store = createStore(combineReducers({ form: formReducer, router: connectRouter(history) }));
+
 const avatarUrl = 'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f00002e/f49c2ff693f1c307af5e1b3d84e581ca.png';
 
 storiesOf('PostingSchedule', module)

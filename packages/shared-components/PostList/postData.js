@@ -17,6 +17,13 @@ export const posts = [
     sent: false,
     text: 'New thing',
     type: 'text',
+    statistics: {
+      retweets: 10,
+      favorites: 29,
+      mentions: 0,
+      clicks: 1,
+      reach: 3,
+    },
   },
   {
     id: '590a3693749c200e007b23c7',
@@ -36,6 +43,13 @@ export const posts = [
     sent: false,
     text: 'Another thing, that is also new',
     type: 'text',
+    statistics: {
+      retweets: 10,
+      favorites: 29,
+      mentions: 0,
+      clicks: 1,
+      reach: 3,
+    },
   },
 ];
 

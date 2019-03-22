@@ -130,28 +130,27 @@
     to-fast-properties "^2.0.0"
 
 "@babel/types@^7.0.0":
-  version "7.3.4"
-  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.3.4.tgz#bf482eaeaffb367a28abbf9357a94963235d90ed"
-  integrity sha512-WEkp8MsLftM7O/ty580wAmZzN1nDmCACc5+jFzUt+GUFNNIi3LdRlueYz0YIlmJhlZx1QYDMZL5vdWCL0fNjFQ==
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.4.0.tgz#670724f77d24cce6cc7d8cf64599d511d164894c"
+  integrity sha512-aPvkXyU2SPOnztlgo8n9cEiXW755mgyvueUPcpStqdzoSPm0fjO0vQBjLkt3JKJW7ufikfcnMTTPsN1xaTsBPA==
   dependencies:
     esutils "^2.0.2"
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bufferapp/add-report@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/add-report/-/add-report-0.79.1.tgz#3839727985bf2de3ef73fc7d12aed6887b306e67"
-  integrity sha512-Ql6r1StReYadsRiHchortBlG+lTUGyJja+gesxnJUWbD8496gyOXxgU75Fq+aDWT4ZnilONsFRIxCRq0ZuI3Pw==
+"@bufferapp/add-report@^0.87.2", "@bufferapp/add-report@^0.87.7":
+  version "0.87.7"
+  resolved "https://registry.yarnpkg.com/@bufferapp/add-report/-/add-report-0.87.7.tgz#1ca4f655e76a0b17e49577aa6622bcaae07ebe3a"
+  integrity sha512-viePz3XEhPOFAhvH7SF0SVdOuS+CHjbAfjXnVlu/Iuvx9AJ77BUZiNsGoXSY6GZEEZWj1F0fg4aN7wqjLOMs0g==
   dependencies:
-    "@bufferapp/analyze-shared-components" "^0.79.1"
+    "@bufferapp/analyze-shared-components" "^0.87.5"
     "@bufferapp/components" "2.1.1-alpha.6"
-    "@bufferapp/report-list" "^0.79.1"
-    styled-components "^2.2.1"
+    "@bufferapp/report-list" "^0.87.5"
 
-"@bufferapp/analyze-csv-export@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-csv-export/-/analyze-csv-export-0.79.1.tgz#6bf7596ae6c2808194b58b53bcea45f383a54ff4"
-  integrity sha512-8qT62xB6p2JCGggzjSrUrd4Fnj9XC6YXLFOwTWmYUCrMtuzeLYWDKDcbJ2wyc/Ch9R74XxJENJCdPfYxtiif8A==
+"@bufferapp/analyze-csv-export@0.87.2", "@bufferapp/analyze-csv-export@^0.87.2":
+  version "0.87.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-csv-export/-/analyze-csv-export-0.87.2.tgz#b6adc3782599aba27137a6e2ee667a43e3e6b722"
+  integrity sha512-sD3rHQXroU34a1g5ncFCLfiYQ5owai2nizgm+N+YPVZ5b03XqpNmIozRKLAKNIKucD/OASUu0NnivyJGhXXniA==
   dependencies:
     dataurl-to-blob "^0.0.1"
     file-saver "^1.3.3"
@@ -159,37 +158,35 @@
     jszip "^3.1.4"
     moment "^2.18.1"
 
-"@bufferapp/analyze-date-picker@0.79.1", "@bufferapp/analyze-date-picker@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-date-picker/-/analyze-date-picker-0.79.1.tgz#9cd328dc72d281aa6279ad8a5ef70d970b1c2434"
-  integrity sha512-JzI2Gth7Bs8n88ag9GLMwzPNHiv7K5SQux+OCiIv5PeaE8gnorPUP7iZlQjPhJ8SSgJ3ZR2jyg5lGWaK7x93vw==
+"@bufferapp/analyze-date-picker@0.87.7", "@bufferapp/analyze-date-picker@^0.87.2", "@bufferapp/analyze-date-picker@^0.87.7":
+  version "0.87.7"
+  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-date-picker/-/analyze-date-picker-0.87.7.tgz#29f913dbbcff337199e33f849d820c66b674161a"
+  integrity sha512-nJFoaq/Gwyhj5+bgLLaXXiSxC/AxBlijNnTaQ7NCTLhVDbYD3jKZdNH+QwRN/wrLVgNvIshFXKFe2CLw1Wd3gg==
   dependencies:
-    "@bufferapp/analyze-profile-selector" "^0.79.1"
+    "@bufferapp/analyze-profile-selector" "^0.87.5"
     "@bufferapp/async-data-fetch" "0.5.36-beta01"
     "@bufferapp/components" "2.1.1-alpha.6"
     moment "^2.18.1"
     react-tooltip "^3.3.0"
-    styled-components "^2.2.1"
 
-"@bufferapp/analyze-decorators@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-decorators/-/analyze-decorators-0.79.1.tgz#8ee1f37ae9cc7830f08691d94353ebb8d89d30c2"
-  integrity sha512-SXuoRQ5df1KVZpUX9JsrVbiYi2UXXEOJL2aNMHj9GBoiZOcVo2HtQ5Yw64nsVxzhTiSnck3SGM6y0p8xwMWOyw==
+"@bufferapp/analyze-decorators@^0.87.2":
+  version "0.87.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-decorators/-/analyze-decorators-0.87.2.tgz#4aa3b9513b61e80d527410c09000a9496460e611"
+  integrity sha512-h2ixMGZWWBbjNWJIj2InEEPTbl9cZQYTvbReu05ISVvULoOlyiz1ZipKyBGsDvSVl0UfmNW2DNVpS6eLDO31TQ==
 
-"@bufferapp/analyze-export-picker@0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-export-picker/-/analyze-export-picker-0.79.1.tgz#c2a3870c31075d74b0dd90d399c099e45624aa6d"
-  integrity sha512-I32JUwkcMYJ1OX+0vpKixj/VIL1jPIR/j/7LZoMCcPKkGN3vGFLxHXtuZ7q4sLJE/PN7CeUPwonuUVjd8VopWg==
+"@bufferapp/analyze-export-picker@0.87.2":
+  version "0.87.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-export-picker/-/analyze-export-picker-0.87.2.tgz#0d8766e5cb6f57eed44d02a3c816c24232fa67de"
+  integrity sha512-70tCtxeFQQz6J7tBB2kXlNGMqJ5GkNnnpQiHnf2Y+otDv565wS0KuEqSp54DneM6GIzcUdjyccXnX4gjOvXwng==
   dependencies:
-    "@bufferapp/analyze-csv-export" "^0.79.1"
-    "@bufferapp/analyze-png-export" "^0.79.1"
+    "@bufferapp/analyze-csv-export" "^0.87.2"
+    "@bufferapp/analyze-png-export" "^0.87.2"
     "@bufferapp/components" "2.1.1-alpha.6"
-    styled-components "^2.2.1"
 
-"@bufferapp/analyze-png-export@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-png-export/-/analyze-png-export-0.79.1.tgz#d527d132062f542752f340b4b49c1bcc0b63f18c"
-  integrity sha512-eYWLXy4dpzlvCYRBhXrx1n5V8A3FICGYH9H6INbUdlW32FeeVNwUTeRaiEoQ9FKZqk52xyw7nlenD+y97M4gjQ==
+"@bufferapp/analyze-png-export@0.87.2", "@bufferapp/analyze-png-export@^0.87.2":
+  version "0.87.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-png-export/-/analyze-png-export-0.87.2.tgz#bc353cc8229b9e9fa88ba6814547f5ae28a22e77"
+  integrity sha512-zWc/kKC1J3M0OwicQ0eFLS14q7fU539/Mp5RJa4UfqrPnGTWtS+6ViaA3WeAF0oU+QJ7Ubp/a94BZ4Y29nhRcg==
   dependencies:
     dataurl-to-blob "^0.0.1"
     file-saver "^1.3.3"
@@ -197,24 +194,24 @@
     jszip "^3.1.4"
     moment "^2.18.1"
 
-"@bufferapp/analyze-profile-selector@0.79.1", "@bufferapp/analyze-profile-selector@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-profile-selector/-/analyze-profile-selector-0.79.1.tgz#7364530f32d04cd3708de8e717e225af03a17b40"
-  integrity sha512-tKsrHT6HsWE0tBjzMxqcCOGdhWxFfl7XLsXkvo2xU9sAeezN4IrjjoptCY3E2WQ7E38fUTWwNzPzObVJFhuqww==
+"@bufferapp/analyze-profile-selector@0.87.5", "@bufferapp/analyze-profile-selector@^0.87.2", "@bufferapp/analyze-profile-selector@^0.87.5":
+  version "0.87.5"
+  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-profile-selector/-/analyze-profile-selector-0.87.5.tgz#632f2db59a37a1bcead8577367aee6c30953bc09"
+  integrity sha512-3w6NnTzpbs1hZIiVjpqjZYjPsrz+il35ZwIloHTpCLjt1PQk+BW5J1iaELVtFn54vf3CLUhHxCmOj7kllSI7eg==
   dependencies:
-    "@bufferapp/analyze-shared-components" "^0.79.1"
+    "@bufferapp/analyze-shared-components" "^0.87.5"
     "@bufferapp/components" "2.1.1-alpha.6"
     "@bufferapp/react-simple-dropdown" "3.2.5"
 
-"@bufferapp/analyze-shared-components@0.79.1", "@bufferapp/analyze-shared-components@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-shared-components/-/analyze-shared-components-0.79.1.tgz#3a78ebef5652163c05b393a477c341f8d8f6f592"
-  integrity sha512-fx908B8/q3sTsRb/Be8B3cKtSgWwG/IxdxBwgd061hMAghbDK9dYlCv9kbka/gw2dnxowYeIMDU+885YjzjMeA==
+"@bufferapp/analyze-shared-components@0.87.5", "@bufferapp/analyze-shared-components@^0.87.2", "@bufferapp/analyze-shared-components@^0.87.5":
+  version "0.87.5"
+  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-shared-components/-/analyze-shared-components-0.87.5.tgz#b4c392bc34ad1ce48c0998643f8f7856b1a864fd"
+  integrity sha512-4xqi4Hkq97dACzFxVh8GWCaEeIlTp+0YV8UAFkmERsOhhY1LsQdFrpJ7V5pVqsqjLbcsjOWAuqpHYVeIHLwwsQ==
   dependencies:
     "@bufferapp/components" "2.1.1-alpha.6"
+    immutability-helper "^2.9.0"
     moment "^2.18.1"
     react-highcharts "^16.0.2"
-    styled-components "^2.2.1"
 
 "@bufferapp/app-sidebar@1.11.0":
   version "1.11.0"
@@ -242,21 +239,21 @@
   dependencies:
     micro-rpc-client "^0.1.4"
 
-"@bufferapp/average-table@0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/average-table/-/average-table-0.79.1.tgz#1d82d21c2c67dd59bd710dda0d9241971a8a8999"
-  integrity sha512-GhR6jJ0RbK3OiR8sUYQsFvYu1yxkCIaqXo9Pq/Rz3krghJs8STwkVgGINFNMyj6aJzNCPEJm6bW4kdLqxFg36g==
+"@bufferapp/average-table@0.87.7":
+  version "0.87.7"
+  resolved "https://registry.yarnpkg.com/@bufferapp/average-table/-/average-table-0.87.7.tgz#cbe362334fe3605120afb65121f66f5ed90def0a"
+  integrity sha512-iHfHehfmziLkrRtjXWKYeDXTTiL7Vhbx1UNIFflMS5j7GNDl6n17S1D6xPAj3cBBMA7NgSfPfxz7YvcQSA+5Ng==
   dependencies:
-    "@bufferapp/add-report" "^0.79.1"
-    "@bufferapp/analyze-csv-export" "^0.79.1"
-    "@bufferapp/analyze-date-picker" "^0.79.1"
-    "@bufferapp/analyze-decorators" "^0.79.1"
-    "@bufferapp/analyze-png-export" "^0.79.1"
-    "@bufferapp/analyze-profile-selector" "^0.79.1"
-    "@bufferapp/analyze-shared-components" "^0.79.1"
+    "@bufferapp/add-report" "^0.87.7"
+    "@bufferapp/analyze-csv-export" "^0.87.2"
+    "@bufferapp/analyze-date-picker" "^0.87.7"
+    "@bufferapp/analyze-decorators" "^0.87.2"
+    "@bufferapp/analyze-png-export" "^0.87.2"
+    "@bufferapp/analyze-profile-selector" "^0.87.5"
+    "@bufferapp/analyze-shared-components" "^0.87.5"
     "@bufferapp/async-data-fetch" "0.5.36-beta01"
-    "@bufferapp/components" "^2.1.1"
-    "@bufferapp/summary-table" "^0.79.1"
+    "@bufferapp/components" "^2.1.1-alpha.6"
+    "@bufferapp/summary-table" "^0.87.7"
 
 "@bufferapp/buffer-js-api@0.3.0":
   version "0.3.0"
@@ -301,18 +298,18 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/chronos/-/chronos-0.6.1.tgz#0213dff339459ca510103e5a72f558682a2675dd"
   integrity sha1-AhPf8zlFnKUQED5acvVYaComdd0=
 
-"@bufferapp/compare-chart@0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/compare-chart/-/compare-chart-0.79.1.tgz#fa766c64cdba3e203e7ab7db4ee3c63a8ca44368"
-  integrity sha512-JsWS+SfrSnVjBmGoRkjbjy5tpflt7MPCy2Lj1KoAJGe7awX1AlHq1Uot6rokH8UdEvEL5hvx9IblKghYIJjwPw==
+"@bufferapp/compare-chart@0.87.2":
+  version "0.87.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/compare-chart/-/compare-chart-0.87.2.tgz#3af46c7ab9d3685259362d6bc2b53749fd8b818d"
+  integrity sha512-ovh7z2Gqp1QD0x+9/+cZyI38HUvrqod95jdf5WUSX3lwsqd2BSgkPBxOe/mAe4lXzgrG8saWbrIgXtHWyw077w==
   dependencies:
-    "@bufferapp/add-report" "^0.79.1"
-    "@bufferapp/analyze-csv-export" "^0.79.1"
-    "@bufferapp/analyze-date-picker" "^0.79.1"
-    "@bufferapp/analyze-decorators" "^0.79.1"
-    "@bufferapp/analyze-png-export" "^0.79.1"
-    "@bufferapp/analyze-profile-selector" "^0.79.1"
-    "@bufferapp/analyze-shared-components" "^0.79.1"
+    "@bufferapp/add-report" "^0.87.2"
+    "@bufferapp/analyze-csv-export" "^0.87.2"
+    "@bufferapp/analyze-date-picker" "^0.87.2"
+    "@bufferapp/analyze-decorators" "^0.87.2"
+    "@bufferapp/analyze-png-export" "^0.87.2"
+    "@bufferapp/analyze-profile-selector" "^0.87.2"
+    "@bufferapp/analyze-shared-components" "^0.87.2"
     "@bufferapp/async-data-fetch" "0.5.36-beta01"
     "@bufferapp/react-simple-dropdown" "3.2.5"
     react-highcharts "^16.0.2"
@@ -358,7 +355,7 @@
     react-autocomplete "1.7.2"
     react-day-picker "7.2.3"
 
-"@bufferapp/components@^2.1.1":
+"@bufferapp/components@^2.1.1-alpha.6":
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-2.3.8.tgz#4b1c3a788ab76d88cda35b93da862a35c4f12dbc"
   integrity sha512-ByxGyg2XmdFCVSUT9pbvUOpqQmnO56//Fg1d0WPdlOg5qBVWWP1b6+sn28GHIcYEwdA7iSwhmnLNxlNnW4WYcw==
@@ -489,16 +486,16 @@
     "@bufferapp/async-data-fetch" "1.9.4"
     "@bufferapp/session-manager" "0.7.1"
 
-"@bufferapp/hourly-chart@0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/hourly-chart/-/hourly-chart-0.79.1.tgz#b99ec7f7d8ea60be0bbe051564a0ee0c9b0694f2"
-  integrity sha512-cBNqYRMV3y3k3MLvA+0/f9hpIULFzwzN7CL2MTpkHgcK8v5UGGeAa1bWUkboVmJxkiQ0XyOeSM9ISp3lkoPngg==
+"@bufferapp/hourly-chart@0.87.7":
+  version "0.87.7"
+  resolved "https://registry.yarnpkg.com/@bufferapp/hourly-chart/-/hourly-chart-0.87.7.tgz#97070f5c1ac8724e1952bba115d2a4632cba4bba"
+  integrity sha512-kbXRGrfkR27HwFvQRy//ynOB2IJIxTmTmpu/5c2eyqDfTBdklCHa7cOW7tM0hPJj898hTMd/vDaqOz+cdbGAsQ==
   dependencies:
-    "@bufferapp/add-report" "^0.79.1"
-    "@bufferapp/analyze-csv-export" "^0.79.1"
-    "@bufferapp/analyze-date-picker" "^0.79.1"
-    "@bufferapp/analyze-profile-selector" "^0.79.1"
-    "@bufferapp/analyze-shared-components" "^0.79.1"
+    "@bufferapp/add-report" "^0.87.7"
+    "@bufferapp/analyze-csv-export" "^0.87.2"
+    "@bufferapp/analyze-date-picker" "^0.87.7"
+    "@bufferapp/analyze-profile-selector" "^0.87.5"
+    "@bufferapp/analyze-shared-components" "^0.87.5"
 
 "@bufferapp/keywrapper@0.2.0":
   version "0.2.0"
@@ -519,15 +516,15 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/micro-rpc/-/micro-rpc-0.1.7.tgz#a97782dc88cf476278911287728bef538adb25b9"
   integrity sha1-qXeC3IjPR2J4kRKHcovvU4rbJbk=
 
-"@bufferapp/nav-sidebar@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/nav-sidebar/-/nav-sidebar-0.79.1.tgz#2b5fd19e7740ab6c25faab3ae8d7bfd6a35f9e09"
-  integrity sha512-1etie0C7+Rs3xsBn9AKGpKdS8LC+3UGNb7z0RgBwaVemd8j2mOtXdYsQdj+fuUyv2QOv7RBKTU30ZIwW8hIwaQ==
+"@bufferapp/nav-sidebar@^0.87.2", "@bufferapp/nav-sidebar@^0.87.5":
+  version "0.87.5"
+  resolved "https://registry.yarnpkg.com/@bufferapp/nav-sidebar/-/nav-sidebar-0.87.5.tgz#145b158a59adce0fb6bbb1ef8d32a5743b425c7b"
+  integrity sha512-9GrQY+cPiyD1ylsGE37nEZER2BuFwvw5r7CZtS23NkCSoCdd5sAUBASClYxl4mLZ2V9PgyWfyeQR/W5j4n5pDg==
   dependencies:
-    "@bufferapp/analyze-profile-selector" "^0.79.1"
+    "@bufferapp/analyze-profile-selector" "^0.87.5"
     "@bufferapp/async-data-fetch" "0.5.36-beta01"
     "@bufferapp/components" "2.3.3"
-    "@bufferapp/report-list" "^0.79.1"
+    "@bufferapp/report-list" "^0.87.5"
 
 "@bufferapp/notifications@1.9.4":
   version "1.9.4"
@@ -545,21 +542,21 @@
     "@bufferapp/async-data-fetch" "0.5.36-beta01"
     "@bufferapp/chronos" "0.6.1"
 
-"@bufferapp/posts-table@0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/posts-table/-/posts-table-0.79.1.tgz#7bac3aeac433c0713757866a06c867d9b6f5461e"
-  integrity sha512-+qXH57dO5hDcbUxgDp0fbJHJa99O8sLQCysrHoFgrs85j8lmIXYIBMQN29fo7UisCZBS3vtETZPH4f9TwUVJRg==
+"@bufferapp/posts-table@0.87.2":
+  version "0.87.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/posts-table/-/posts-table-0.87.2.tgz#a3f7125b118b1dd59afd792aacd5cfdc4321daa1"
+  integrity sha512-7Vk3NA+KkQMHollde87i8PuIYrGsZOB8nIA3CRgRir9rfDkbN18dPr8iymHgZnpBFub4N8cJGAaacbTrAwOHfw==
   dependencies:
-    "@bufferapp/add-report" "^0.79.1"
-    "@bufferapp/analyze-csv-export" "^0.79.1"
-    "@bufferapp/analyze-date-picker" "^0.79.1"
-    "@bufferapp/analyze-decorators" "^0.79.1"
-    "@bufferapp/analyze-png-export" "^0.79.1"
-    "@bufferapp/analyze-profile-selector" "^0.79.1"
-    "@bufferapp/analyze-shared-components" "^0.79.1"
+    "@bufferapp/add-report" "^0.87.2"
+    "@bufferapp/analyze-csv-export" "^0.87.2"
+    "@bufferapp/analyze-date-picker" "^0.87.2"
+    "@bufferapp/analyze-decorators" "^0.87.2"
+    "@bufferapp/analyze-png-export" "^0.87.2"
+    "@bufferapp/analyze-profile-selector" "^0.87.2"
+    "@bufferapp/analyze-shared-components" "^0.87.2"
     "@bufferapp/async-data-fetch" "0.5.36-beta01"
     "@bufferapp/components" "2.1.1-alpha.6"
-    "@bufferapp/nav-sidebar" "^0.79.1"
+    "@bufferapp/nav-sidebar" "^0.87.2"
     "@storybook/addon-storyshots" "3.1.4"
     "@storybook/react" "3.1.3"
     lodash.clonedeep "4.5.0"
@@ -614,13 +611,12 @@
     classnames "^2.1.2"
     prop-types "^15.5.8"
 
-"@bufferapp/report-list@0.79.1", "@bufferapp/report-list@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/report-list/-/report-list-0.79.1.tgz#b5d182d574b15ed1a813cce25251bf8f397c6cb0"
-  integrity sha512-aH5D/qHQK39FCc8p2Do2AzCXVo0dI4TZwk0oCAebn6GIaVC5Jcfs/dAAZaL4FUMp16xOXSzHSMLj61bBpNeY1A==
+"@bufferapp/report-list@0.87.5", "@bufferapp/report-list@^0.87.5":
+  version "0.87.5"
+  resolved "https://registry.yarnpkg.com/@bufferapp/report-list/-/report-list-0.87.5.tgz#d6c4ffbf170821d4127fd4e725c07c7e4521be72"
+  integrity sha512-CS05lAGo5lGwJtCLC21QxEtirmrBPwJXsfm8Zbch1chCwcXB6lfL8NypsY+sNNaKGs94OHG9I1LrQaMEuDf48Q==
   dependencies:
-    "@bufferapp/analyze-shared-components" "^0.79.1"
-    styled-components "^2.2.1"
+    "@bufferapp/analyze-shared-components" "^0.87.5"
 
 "@bufferapp/session-manager@0.7.1":
   version "0.7.1"
@@ -636,21 +632,38 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/shutdown-helper/-/shutdown-helper-0.2.0.tgz#d43bbba845e30e411dda76a7b7629e11160e5395"
   integrity sha1-1Du7qEXjDkEd2nant2KeERYOU5U=
 
-"@bufferapp/summary-table@0.79.1", "@bufferapp/summary-table@^0.79.1":
-  version "0.79.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/summary-table/-/summary-table-0.79.1.tgz#da0d5520054ccc1c704f472ecbea177a82657bc6"
-  integrity sha512-6BRCaWIpXndRzDJN4tGuThr+hI6x1b/ZeRtWXFC8MfnMMwTk4fgv5cNxQPrc9hKW7CEKVXiUeUfq6tnUug2KXg==
+"@bufferapp/summary-table@0.87.2":
+  version "0.87.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/summary-table/-/summary-table-0.87.2.tgz#78947ebc73da22deb7267d5d49cd39ffe0d596f3"
+  integrity sha512-ES6xbC2NzNqlBC1G4IpU1A1hjjwcnhmPOhmqoJZrnosEzgIF2czBx3jztOF80TAg6/0s76x3WSR2DtHyEVme0w==
   dependencies:
-    "@bufferapp/add-report" "^0.79.1"
-    "@bufferapp/analyze-csv-export" "^0.79.1"
-    "@bufferapp/analyze-date-picker" "^0.79.1"
-    "@bufferapp/analyze-decorators" "^0.79.1"
-    "@bufferapp/analyze-png-export" "^0.79.1"
-    "@bufferapp/analyze-profile-selector" "^0.79.1"
-    "@bufferapp/analyze-shared-components" "^0.79.1"
+    "@bufferapp/add-report" "^0.87.2"
+    "@bufferapp/analyze-csv-export" "^0.87.2"
+    "@bufferapp/analyze-date-picker" "^0.87.2"
+    "@bufferapp/analyze-decorators" "^0.87.2"
+    "@bufferapp/analyze-png-export" "^0.87.2"
+    "@bufferapp/analyze-profile-selector" "^0.87.2"
+    "@bufferapp/analyze-shared-components" "^0.87.2"
     "@bufferapp/async-data-fetch" "0.5.36-beta01"
     "@bufferapp/components" "2.1.1-alpha.6"
-    "@bufferapp/nav-sidebar" "^0.79.1"
+    "@bufferapp/nav-sidebar" "^0.87.2"
+    numeral "2.0.6"
+
+"@bufferapp/summary-table@^0.87.7":
+  version "0.87.7"
+  resolved "https://registry.yarnpkg.com/@bufferapp/summary-table/-/summary-table-0.87.7.tgz#8ae8415f55741f8819b97ce08bb23ceafa2b72e4"
+  integrity sha512-C3OrzU+g4swPSzzf++6e8hBJBXIYZYOfTncsX7HQH7SzyMwOb6GpvdezBIO7zJoZRi1Uu61bFaT71NOOeRdJ/Q==
+  dependencies:
+    "@bufferapp/add-report" "^0.87.7"
+    "@bufferapp/analyze-csv-export" "^0.87.2"
+    "@bufferapp/analyze-date-picker" "^0.87.7"
+    "@bufferapp/analyze-decorators" "^0.87.2"
+    "@bufferapp/analyze-png-export" "^0.87.2"
+    "@bufferapp/analyze-profile-selector" "^0.87.5"
+    "@bufferapp/analyze-shared-components" "^0.87.5"
+    "@bufferapp/async-data-fetch" "0.5.36-beta01"
+    "@bufferapp/components" "2.1.1-alpha.6"
+    "@bufferapp/nav-sidebar" "^0.87.5"
     numeral "2.0.6"
 
 "@bufferapp/ui@^1.16.0":
@@ -4017,6 +4030,14 @@ connect-history-api-fallback@^1.3.0:
   resolved "https://registry.yarnpkg.com/connect-history-api-fallback/-/connect-history-api-fallback-1.5.0.tgz#b06873934bc5e344fef611a196a6faae0aee015a"
   integrity sha1-sGhzk0vF40T+9hGhlqb6rgruAVo=
 
+connected-react-router@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/connected-react-router/-/connected-react-router-5.0.1.tgz#8379854fad7e027b1e27652c00ad534f8ad244b3"
+  integrity sha512-0QwWYPRGZQ7f284lmqc5kwC4T3iW3zrAH3zzi6uUMzTOxbA+mn38tAgMOoVo9m3pbskvONFtXiajgVkCElE9EQ==
+  dependencies:
+    immutable "^3.8.1"
+    seamless-immutable "^7.1.3"
+
 console-browserify@1.1.x, console-browserify@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.1.0.tgz#f0241c45730a9fc6323b206dbf38edc741d0bb10"
@@ -4317,16 +4338,7 @@ css-selector-tokenizer@^0.7.0:
     fastparse "^1.1.1"
     regexpu-core "^1.0.0"
 
-css-to-react-native@^2.0.3:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-2.2.2.tgz#c077d0f7bf3e6c915a539e7325821c9dd01f9965"
-  integrity sha512-w99Fzop1FO8XKm0VpbQp3y5mnTnaS+rtCvS+ylSEOK76YXO5zoHQx/QMB1N54Cp+Ya9jB9922EHrh14ld4xmmw==
-  dependencies:
-    css-color-keywords "^1.0.0"
-    fbjs "^0.8.5"
-    postcss-value-parser "^3.3.0"
-
-css-to-react-native@^2.2.2:
+css-to-react-native@^2.0.3, css-to-react-native@^2.2.2:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-2.3.0.tgz#bf80d24ec4a08e430306ef429c0586e6ed5485f7"
   integrity sha512-IhR7bNIrCFwbJbKZOAjNDZdwpsbjTN6f1agXeELHDqg1wHPA8c2QLruttKOW7hgMGetkfraRJCIEMrptifBfVw==
@@ -5879,7 +5891,7 @@ fbjs@0.1.0-alpha.7:
     promise "^7.0.3"
     whatwg-fetch "^0.9.0"
 
-fbjs@^0.8.0, fbjs@^0.8.12, fbjs@^0.8.16, fbjs@^0.8.4, fbjs@^0.8.5, fbjs@^0.8.9:
+fbjs@^0.8.0, fbjs@^0.8.12, fbjs@^0.8.16, fbjs@^0.8.4, fbjs@^0.8.9:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -11376,7 +11388,7 @@ react-is@^16.3.0, react-is@^16.6.1, react-is@^16.6.3:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
   integrity sha512-u7FDWtthB4rWibG/+mFbVd5FvdI20yde86qKGx4lVUTWmPlSWQ4QxbBIrrs+HnXGbxOUlUzTAP/VDmvCwaP2yA==
 
-react-is@^16.6.0:
+react-is@^16.3.1, react-is@^16.6.0:
   version "16.8.4"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.4.tgz#90f336a68c3a29a096a3d648ab80e87ec61482a2"
   integrity sha512-PVadd+WaUDOAciICm/J1waJaSvgq+4rHE/K70j0PFqKhkTBsPv/82UGQJNXAngz1fOQLLxI6z1sEDmJDQhCTAA==
@@ -12393,6 +12405,11 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
+seamless-immutable@^7.1.3:
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/seamless-immutable/-/seamless-immutable-7.1.4.tgz#6e9536def083ddc4dea0207d722e0e80d0f372f8"
+  integrity sha512-XiUO1QP4ki4E2PHegiGAlu6r82o5A+6tRh7IkGGTVg/h+UoeX4nFBeCGPOhb4CYjvkqsfm/TUtvOMYC1xmV30A==
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
@@ -13145,6 +13162,21 @@ style-loader@^0.20.3:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
 
+styled-components@3.4.10:
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-3.4.10.tgz#9a654c50ea2b516c36ade57ddcfa296bf85c96e1"
+  integrity sha512-TA8ip8LoILgmSAFd3r326pKtXytUUGu5YWuqZcOQVwVVwB6XqUMn4MHW2IuYJ/HAD81jLrdQed8YWfLSG1LX4Q==
+  dependencies:
+    buffer "^5.0.3"
+    css-to-react-native "^2.0.3"
+    fbjs "^0.8.16"
+    hoist-non-react-statics "^2.5.0"
+    prop-types "^15.5.4"
+    react-is "^16.3.1"
+    stylis "^3.5.0"
+    stylis-rule-sheet "^0.0.10"
+    supports-color "^3.2.3"
+
 styled-components@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-4.1.1.tgz#943922048fae556e286bcbfdd29da4f1399446bc"
@@ -13161,26 +13193,12 @@ styled-components@4.1.1:
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
 
-styled-components@^2.2.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-2.4.1.tgz#663bd0485d4b6ab46f946210dc03d2398d1ade74"
-  integrity sha1-ZjvQSF1LarRvlGIQ3APSOY0a3nQ=
-  dependencies:
-    buffer "^5.0.3"
-    css-to-react-native "^2.0.3"
-    fbjs "^0.8.9"
-    hoist-non-react-statics "^1.2.0"
-    is-plain-object "^2.0.1"
-    prop-types "^15.5.4"
-    stylis "^3.4.0"
-    supports-color "^3.2.3"
-
 stylis-rule-sheet@^0.0.10:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/stylis-rule-sheet/-/stylis-rule-sheet-0.0.10.tgz#44e64a2b076643f4b52e5ff71efc04d8c3c4a430"
   integrity sha512-nTbZoaqoBnmK+ptANthb10ZRZOGC+EmTLLUxeYIuHNkEKcmKgXX1XWKkUBT2Ac4es3NybooPe0SmvKdhKJZAuw==
 
-stylis@^3.4.0, stylis@^3.5.0:
+stylis@^3.5.0:
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.5.4.tgz#f665f25f5e299cf3d64654ab949a57c768b73fbe"
   integrity sha512-8/3pSmthWM7lsPBKv7NXkzn2Uc9W7NotcwGNpJaa3k7WMM1XDCA4MgT5k/8BIexd5ydZdboXtU90XH9Ec4Bv/Q==

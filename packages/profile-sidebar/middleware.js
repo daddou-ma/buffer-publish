@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import { getURL } from '@bufferapp/publish-formatters';
 
 import {
