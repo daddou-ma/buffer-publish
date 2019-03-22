@@ -7,6 +7,7 @@ import {
 } from '@bufferapp/publish-shared-components';
 import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
+import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 
 const headerStyle = {
   marginBottom: '1.5rem',
