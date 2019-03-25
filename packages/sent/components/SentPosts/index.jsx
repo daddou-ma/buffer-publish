@@ -8,7 +8,6 @@ import {
 import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
-import BusinessUpgradeBanner from '../BusinessUpgradeBanner';
 
 const headerStyle = {
   marginBottom: '1.5rem',
@@ -65,7 +64,6 @@ const SentPosts = ({
   if (total < 1) {
     return (
       <Fragment>
-        <BusinessUpgradeBanner canStartBusinessTrial={canStartBusinessTrial} />
         <EmptyState
           title="You haven’t published any posts with this account in the past 30 days!"
           subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
@@ -78,7 +76,6 @@ const SentPosts = ({
 
   return (
     <div>
-      <BusinessUpgradeBanner canStartBusinessTrial={canStartBusinessTrial} />
       <div style={headerStyle}>
         <div className="js-page-header">
           <Text color={'black'}>{header}</Text>

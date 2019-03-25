@@ -67,6 +67,7 @@ const LinkPost = ({
   serviceLink,
   isSent,
   isManager,
+  isBusinessAccount,
   isPastReminder,
   day,
   dueTime,
@@ -157,6 +158,7 @@ const LinkPost = ({
       serviceLink={serviceLink}
       isSent={isSent}
       isManager={isManager}
+      isBusinessAccount={isBusinessAccount}
       isPastReminder={isPastReminder}
       day={day}
       dueTime={dueTime}

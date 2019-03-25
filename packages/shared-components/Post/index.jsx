@@ -8,12 +8,8 @@ import {
 import {
   transitionAnimationType,
 } from '@bufferapp/components/style/animation';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 
-import {
-  borderRadius,
-} from '@bufferapp/components/style/border';
-
-import FeatureLoader from '@bufferapp/product-features';
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RetweetPanel from '../RetweetPanel';
@@ -156,6 +152,7 @@ const Post = ({
   serviceLink,
   isSent,
   isManager,
+  isBusinessAccount,
   isPastReminder,
   day,
   dueTime,
@@ -164,6 +161,7 @@ const Post = ({
   commentText,
   hasCommentEnabled,
   hasFirstCommentFlip,
+  features,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
@@ -222,16 +220,14 @@ const Post = ({
           hasCommentEnabled={hasCommentEnabled}
           hasFirstCommentFlip={hasFirstCommentFlip}
         />
-        <FeatureLoader
-          supportedFeatures={'post_stats'}
-        >
-          {isSent && !postDetails.isRetweet &&
-            <PostStats
-              statistics={statistics}
-              profileService={profileService}
-            />
-          }
-        </FeatureLoader>
+        { (isBusinessAccount || !features.isFreeUser()) &&
+          isSent &&
+          !postDetails.isRetweet &&
+          <PostStats
+            statistics={statistics}
+            profileService={profileService}
+          />
+        }
       </BDSCard>
     </div>
   </div>);
@@ -240,6 +236,7 @@ Post.commonPropTypes = {
   isConfirmingDelete: PropTypes.bool,
   isDeleting: PropTypes.bool,
   isWorking: PropTypes.bool,
+  isBusinessAccount: PropTypes.bool,
   onCancelConfirmClick: PropTypes.func,
   onRequeueClick: PropTypes.func,
   onDeleteClick: PropTypes.func,
@@ -292,6 +289,7 @@ Post.defaultProps = {
   isWorking: false,
   fixed: false,
   isSent: false,
+  isBusinessAccount: false,
   isManager: true,
   isPastReminder: false,
   day: null,
@@ -299,4 +297,4 @@ Post.defaultProps = {
   sharedBy: null,
 };
 
-export default Post;
+export default WithFeatureLoader(Post);

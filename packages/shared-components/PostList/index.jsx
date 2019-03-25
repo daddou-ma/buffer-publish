@@ -53,6 +53,7 @@ const renderPost = ({
   onImageClose,
   onDropPost,
   isSent,
+  isBusinessAccount,
   isPastReminder,
   hasFirstCommentFlip,
 }) => {
@@ -70,6 +71,7 @@ const renderPost = ({
     onImageClose: () => onImageClose({ post }),
     onDropPost,
     isSent,
+    isBusinessAccount,
     isPastReminder,
     hasFirstCommentFlip,
   };
@@ -129,6 +131,7 @@ const PostList = ({
               onDropPost,
               onShareAgainClick,
               isSent,
+              isBusinessAccount,
               isPastReminder,
               hasFirstCommentFlip,
             })
