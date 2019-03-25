@@ -82,6 +82,7 @@ const renderPost = ({
   onImageClose,
   onDropPost,
   draggable,
+  hasFirstCommentFlip,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -99,6 +100,7 @@ const renderPost = ({
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
     onDropPost,
+    hasFirstCommentFlip,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;

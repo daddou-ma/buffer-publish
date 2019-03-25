@@ -72,6 +72,10 @@ const LinkPost = ({
   day,
   dueTime,
   sharedBy,
+  commentEnabled,
+  commentText,
+  hasCommentEnabled,
+  hasFirstCommentFlip,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -159,6 +163,10 @@ const LinkPost = ({
       day={day}
       dueTime={dueTime}
       sharedBy={sharedBy}
+      commentEnabled={commentEnabled}
+      commentText={commentText}
+      hasCommentEnabled={hasCommentEnabled}
+      hasFirstCommentFlip={hasFirstCommentFlip}
     >
       {children}
     </Post>

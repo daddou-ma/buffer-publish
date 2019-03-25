@@ -75,6 +75,10 @@ const ImagePost = ({
   day,
   dueTime,
   sharedBy,
+  commentEnabled,
+  commentText,
+  hasCommentEnabled,
+  hasFirstCommentFlip,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -147,6 +151,10 @@ const ImagePost = ({
       day={day}
       dueTime={dueTime}
       sharedBy={sharedBy}
+      commentEnabled={commentEnabled}
+      commentText={commentText}
+      hasCommentEnabled={hasCommentEnabled}
+      hasFirstCommentFlip={hasFirstCommentFlip}
     >
       {children}
     </Post>

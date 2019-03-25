@@ -157,6 +157,10 @@ const Post = ({
   day,
   dueTime,
   sharedBy,
+  commentEnabled,
+  commentText,
+  hasCommentEnabled,
+  hasFirstCommentFlip,
   features,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
@@ -211,6 +215,10 @@ const Post = ({
           day={day}
           dueTime={dueTime}
           sharedBy={sharedBy}
+          commentEnabled={commentEnabled}
+          commentText={commentText}
+          hasCommentEnabled={hasCommentEnabled}
+          hasFirstCommentFlip={hasFirstCommentFlip}
         />
         { (isBusinessAccount || !features.isFreeUser()) &&
           isSent &&
