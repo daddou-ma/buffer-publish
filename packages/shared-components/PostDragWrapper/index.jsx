@@ -15,6 +15,7 @@ const postSource = {
       width: component.containerNode.offsetWidth,
       onDropPost: props.postProps.onDropPost,
       profileId: props.profileId,
+      basic: props.basic,
     };
   },
 };
@@ -154,6 +155,7 @@ class PostDragWrapper extends Component {
       isDragging,
       connectDragSource,
       connectDropTarget,
+      basic,
     } = this.props;
 
     const { isHovering, isKbdGrabbed } = this.state;
@@ -178,6 +180,7 @@ class PostDragWrapper extends Component {
             dragging={isDragging}
             hovering={isHovering || isKbdGrabbed}
             fixed={postProps.isFixed}
+            basic={basic}
           />
         </div>,
       ),
@@ -195,6 +198,7 @@ PostDragWrapper.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired, // eslint-disable-line
   isDragging: PropTypes.bool.isRequired,
+  basic: PropTypes.bool,
 };
 
 export default flow(

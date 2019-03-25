@@ -40,6 +40,7 @@ const VideoPost = ({
   day,
   dueTime,
   sharedBy,
+  basic,
 }) =>
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
@@ -79,6 +80,7 @@ const VideoPost = ({
     day={day}
     dueTime={dueTime}
     sharedBy={sharedBy}
+    basic={basic}
   />;
 
 VideoPost.propTypes = ImagePost.propTypes;

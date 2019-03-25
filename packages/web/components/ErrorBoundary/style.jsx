@@ -15,7 +15,7 @@ const errorBoundary = {
   width: '100vw',
 };
 
-let errorBoundaryFit = {
+const errorBoundaryFit = {
   fontFamily,
   alignItems: 'center',
   backgroundImage: 'radial-gradient(circle closest-side, #fffaed,#fff)',
@@ -26,19 +26,46 @@ let errorBoundaryFit = {
   position: 'relative',
   textAlign: 'center',
   width: '100%',
-}
+};
+
+const errorBoundaryBordered = {
+  ...errorBoundaryFit,
+  paddingTop: '20px',
+  border: '1px solid #b8b8b8',
+  borderRadius: '4px',
+};
+
 export default {
-  errorBoundary: errorBoundary,
-  errorBoundaryFit: errorBoundaryFit,
+  errorBoundary,
+  errorBoundaryFit,
+  errorBoundaryBordered,
   errorBoundaryTitle: {
     color: '#363c40',
     fontSize: '26px',
     fontWeight: '700',
     marginBottom: '20px',
   },
+  errorSmallBoundaryTitle: {
+    color: '#363c40',
+    fontSize: '22px',
+    fontWeight: '700',
+    marginBottom: '20px',
+  },
   errorBoundaryMessage: {
     color: '#898989',
     fontSize: '18px',
+    marginBottom: '20px',
+    lineHeight: '26px',
+  },
+  errorSmallBoundaryMessage: {
+    color: '#898989',
+    fontSize: '16px',
+    marginBottom: '10px',
+    lineHeight: '22px',
+  },
+  smallErrorBoundaryMessage: {
+    color: '#898989',
+    fontSize: '12px',
     marginBottom: '20px',
     lineHeight: '26px',
   },

@@ -1,5 +1,4 @@
 import React from 'react';
-import { RefreshIcon, Button } from '@bufferapp/components';
 import style from './style';
 
 class FittedFallbackComponent extends React.Component {

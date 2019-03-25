@@ -32,6 +32,7 @@ const VideoDraft = ({
   retweetCommentLinks,
   scheduledAt,
   view,
+  basic,
 }) =>
   <ImageDraft
     hasPermission={hasPermission}
@@ -64,6 +65,7 @@ const VideoDraft = ({
     retweetCommentLinks={retweetCommentLinks}
     scheduledAt={scheduledAt}
     view={view}
+    basic={basic}
   />;
 
 VideoDraft.propTypes = ImageDraft.propTypes;

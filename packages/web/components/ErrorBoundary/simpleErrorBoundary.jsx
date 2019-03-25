@@ -26,6 +26,10 @@ class ErrorBoundary extends React.Component {
         const FallbackComponent = this.props.fallbackComponent;
         return <FallbackComponent {...this.state} />;
       }
+      if (this.props.defaultFallbackComponent) {
+        const FallbackComponent = this.props.defaultFallbackComponent;
+        return <FallbackComponent {...this.state} />;
+      }
       return <h1>Something has gone wrong. Our team has been informed of the error.</h1>;
     }
 
@@ -36,11 +40,13 @@ class ErrorBoundary extends React.Component {
 ErrorBoundary.propTypes = {
   children: PropTypes.node,
   fallbackComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  defaultFallbackComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 };
 
 ErrorBoundary.defaultProps = {
   children: null,
   fallbackComponent: null,
+  defaultFallbackComponent: null,
 };
 
 export default ErrorBoundary;

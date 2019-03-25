@@ -5,6 +5,7 @@ import {
   IdTag,
   Image,
   LinkifiedText,
+  Text,
 } from '@bufferapp/components';
 import Post from '../Post';
 
@@ -75,20 +76,31 @@ const ImagePost = ({
   day,
   dueTime,
   sharedBy,
+  basic,
 }) => {
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        <LinkifiedText
-          color={'black'}
-          links={links}
-          size={'mini'}
-          whitespace={'pre-wrap'}
-          newTab
-          unstyled
-        >
-          {text}
-        </LinkifiedText>
+        {basic ?
+          <Text
+            color="black"
+            size="mini"
+            whitespace="pre-wrap"
+          >
+            {text}
+          </Text>
+          :
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            whitespace="pre-wrap"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        }
       </span>
       <div style={imageWrapperStyle} onClick={onImageClick}>
         <Image

@@ -47,10 +47,8 @@ const getErrorBoundary = (fit = false) => {
   }
   return ({ children, fallbackComponent }) => ( // eslint-disable-line
     <SimpleErrorBoundary
-      fallbackComponent={
-        fallbackComponent ||
-        fit ? FittedFallbackComponent : BoundaryFallback
-      }
+      fallbackComponent={fallbackComponent}
+      defaultFallbackComponent={fit ? FittedFallbackComponent : BoundaryFallback}
     >
       {children}
     </SimpleErrorBoundary>
