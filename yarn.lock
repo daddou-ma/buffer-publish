@@ -344,10 +344,10 @@
     react-autocomplete "1.7.2"
     react-day-picker "7.2.3"
 
-"@bufferapp/components@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-3.1.1.tgz#ba59102c42103054eceaca7e1b7429321aef2dd0"
-  integrity sha512-MiN0+fS1PWVSpNhJEr0A8xo3x/8NBZInCklcYFQuc+zYPQKHw9okAi9e9Nwa9i5RyCA1xWBseXhN1fiZBAeNCA==
+"@bufferapp/components@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-3.2.0.tgz#8b9d71277af5ee0017161608ee96621c6b9703e6"
+  integrity sha512-+PvvFgFE7m41PCR18iNFT13v9chzVdBHSnxGn5zzRpkqN4FBw93ECUwcHocpwh5sYLHb7d9ofyETG5eNQphssQ==
   dependencies:
     "@bufferapp/react-keyframes" "0.2.5"
     moment "^2.22.2"
