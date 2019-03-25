@@ -26,3 +26,4 @@ export BusinessTrialOrUpgradeBanner from './BusinessTrialOrUpgradeBanner';
 export BDSButton from './BDSButton';
 export PostEmptySlot from './PostEmptySlot';
 export QueueButtonGroup from './QueueButtonGroup';
+export GridList from './GridList';
