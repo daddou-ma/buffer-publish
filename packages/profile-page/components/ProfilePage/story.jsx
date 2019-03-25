@@ -2,7 +2,7 @@ import React from 'react';
 import createStore from '@bufferapp/publish-store';
 import {
   ConnectedRouter as Router,
-} from 'react-router-redux';
+} from 'connected-react-router';
 import createHistory from 'history/createHashHistory';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';

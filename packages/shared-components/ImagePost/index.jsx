@@ -70,6 +70,7 @@ const ImagePost = ({
   serviceLink,
   isSent,
   isManager,
+  isBusinessAccount,
   isPastReminder,
   day,
   dueTime,
@@ -141,6 +142,7 @@ const ImagePost = ({
       serviceLink={serviceLink}
       isSent={isSent}
       isManager={isManager}
+      isBusinessAccount={isBusinessAccount}
       isPastReminder={isPastReminder}
       day={day}
       dueTime={dueTime}

@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import { generateProfilePageRoute, generateChildTabRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
@@ -16,6 +16,7 @@ export default connect(
     selectedChildTabId: ownProps.childTabId,
     shouldShowUpgradeCta: state.appSidebar.user.is_free_user,
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
+    shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
     isInstagramProfile: state.generalSettings.isInstagramProfile,

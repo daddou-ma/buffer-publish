@@ -5,9 +5,8 @@ export default connect(
   state => ({
     profile: state.profileSidebar.selectedProfile,
     isLockedProfile: state.profileSidebar.isLockedProfile,
-    isAnalyticsSupported: state.profileSidebar.selectedProfile ?
-      state.profileSidebar.selectedProfile.isAnalyticsSupported :
-      null,
+    isBusinessAccount: state.profileSidebar.selectedProfile.business,
+    isAnalyticsSupported: state.profileSidebar.selectedProfile.isAnalyticsSupported,
     // TODO: Refactor so we're not pulling this state from drafts
     canStartBusinessTrial: state.drafts.canStartBusinessTrial,
   }),

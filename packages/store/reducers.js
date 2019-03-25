@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { routerReducer } from 'react-router-redux';
 import { reducer as tabsReducer } from '@bufferapp/publish-tabs';
 import { reducer as queueReducer } from '@bufferapp/publish-queue';
 import { reducer as sentReducer } from '@bufferapp/publish-sent';
@@ -44,9 +43,8 @@ import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
 import { reducer as reportListReducer } from '@bufferapp/report-list';
 import { reducer as summaryTableReducer } from '@bufferapp/summary-table';
 
-export default combineReducers({
+export default ({
   form: formReducer,
-  router: routerReducer,
   queue: queueReducer,
   sent: sentReducer,
   grid: gridReducer,

@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import createHistory from 'history/createBrowserHistory';
 import { logTrackingMiddleware, bufferMetricsMiddleware } from '@bufferapp/publish-data-tracking';
 import { middleware as queueMiddleware } from '@bufferapp/publish-queue';
@@ -54,6 +54,13 @@ import reducers from './reducers';
 
 export const history = createHistory();
 
+const createReducer = () => (
+  combineReducers({
+    router: connectRouter(history),
+    ...reducers,
+  })
+);
+
 const configureStore = (initialstate) => {
   const composeEnhancers =
     typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -61,7 +68,7 @@ const configureStore = (initialstate) => {
       : compose;
 
   return createStore(
-    reducers,
+    createReducer(),
     initialstate,
     composeEnhancers(
       applyMiddleware(
