@@ -17,7 +17,7 @@ const urlWrapperStyle = {
 const itemStyle = index => ({
   display: 'flex',
   flexDirection: 'column',
-  margin: ((index + 1) % 3 === 0) ? '0 0 1.41% 0' : '0px 1.41% 1.41% 0px',
+  margin: ((index + 1) % 3 === 0) ? '0 0 4% 0' : '0px 1.41% 4% 0px',
   flex: '0 1 32.35%',
   border: '1px solid #B8B8B8',
   boxSizing: 'border-box',
