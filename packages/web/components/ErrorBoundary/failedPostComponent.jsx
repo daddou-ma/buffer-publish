@@ -13,8 +13,8 @@ class FailedPostComponent extends React.Component {
       <div style={style.errorBoundaryBordered}>
         <div style={style.errorSmallBoundaryTitle}>Well this is embarrassing...</div>
         <div style={style.errorSmallBoundaryMessage}>
-          Something’s gone wrong with this post. I’ve notified my human<br />
-          creators who will look into this shortly.
+          Something’s gone wrong with this post so I've informed my human creators.<br />
+          If you need further assistance please email us at <a href="mailto:hello@buffer.com">hello@buffer.com</a>.
         </div>
         <div style={style.smallErrorBoundaryMessage}>
           (Failed post Id: {this.props.postId}{post.day && post.dueTime ? ` - Post due date: ${post.day} at ${post.dueTime}` : ''})
