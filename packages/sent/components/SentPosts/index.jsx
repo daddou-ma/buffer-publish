@@ -50,6 +50,7 @@ const SentPosts = ({
   isLockedProfile,
   canStartBusinessTrial,
   isBusinessAccount,
+  hasFirstCommentFlip,
 }) => {
   if (loading) {
     return (
@@ -106,6 +107,7 @@ const SentPosts = ({
           isManager={isManager}
           isBusinessAccount={isBusinessAccount}
           isSent
+          hasFirstCommentFlip={hasFirstCommentFlip}
         />
       </div>
     </ErrorBoundary>
@@ -141,6 +143,7 @@ SentPosts.propTypes = {
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   canStartBusinessTrial: PropTypes.bool.isRequired,
+  hasFirstCommentFlip: PropTypes.bool,
 };
 
 SentPosts.defaultProps = {
@@ -154,6 +157,7 @@ SentPosts.defaultProps = {
   editMode: false,
   isManager: true,
   isBusinessAccount: false,
+  hasFirstCommentFlip: false,
   isLockedProfile: false,
   onEditClick: () => {},
   onShareAgainClick: () => {},

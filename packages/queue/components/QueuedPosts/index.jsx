@@ -92,6 +92,7 @@ const QueuedPosts = ({
   isInstagramLoading,
   isLockedProfile,
   isManager,
+  hasFirstCommentFlip,
 }) => {
   if (loading) {
     return (
@@ -178,6 +179,7 @@ const QueuedPosts = ({
           onImageClose={onImageClose}
           onDropPost={onDropPost}
           draggable={draggingEnabled}
+          hasFirstCommentFlip={hasFirstCommentFlip}
         />
       </div>
     </ErrorBoundary>
@@ -227,6 +229,7 @@ QueuedPosts.propTypes = {
   hasInstagramFeatureFlip: PropTypes.bool,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
+  hasFirstCommentFlip: PropTypes.bool,
   onCalendarClick: PropTypes.func.isRequired,
 };
 
@@ -247,6 +250,7 @@ QueuedPosts.defaultProps = {
   hasInstagramFeatureFlip: false,
   isInstagramLoading: false,
   isLockedProfile: false,
+  hasFirstCommentFlip: false,
 };
 
 export default QueuedPosts;

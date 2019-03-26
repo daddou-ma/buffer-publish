@@ -168,6 +168,10 @@ const Post = ({
   day,
   dueTime,
   sharedBy,
+  commentEnabled,
+  commentText,
+  hasCommentEnabled,
+  hasFirstCommentFlip,
   features,
   basic,
 }) =>
@@ -224,6 +228,10 @@ const Post = ({
           day={day}
           dueTime={dueTime}
           sharedBy={sharedBy}
+          commentEnabled={commentEnabled}
+          commentText={commentText}
+          hasCommentEnabled={hasCommentEnabled}
+          hasFirstCommentFlip={hasFirstCommentFlip}
         />
         { (isBusinessAccount || !features.isFreeUser()) &&
           isSent &&
