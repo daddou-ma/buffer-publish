@@ -49,6 +49,7 @@ const loadingAnimationStyle = {
 
 const tabContentStyle = {
   maxWidth: '864px',
+  height: '100%',
 };
 
 const TabContent = ({ tabId, profileId, childTabId }) => {
