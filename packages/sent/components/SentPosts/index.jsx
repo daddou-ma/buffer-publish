@@ -31,7 +31,6 @@ const composerStyle = {
 };
 
 const SentPosts = ({
-  header,
   total,
   loading,
   postLists,
@@ -65,7 +64,7 @@ const SentPosts = ({
   if (total < 1) {
     const title = isBusinessAccount || !features.isFreeUser() ?
       'You haven’t published any posts with this account!' :
-        'You haven’t published any posts with this account in the past 30 days!';
+      'You haven’t published any posts with this account in the past 30 days!';
     return (
       <Fragment>
         <EmptyState
@@ -77,7 +76,9 @@ const SentPosts = ({
       </Fragment>
     );
   }
-
+  const header = isBusinessAccount || !features.isFreeUser() ?
+    'Your sent posts' :
+    'Your sent posts for the last 30 days';
   return (
     <div>
       <div style={headerStyle}>
