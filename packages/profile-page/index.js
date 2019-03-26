@@ -11,18 +11,18 @@ export default hot(module)(connect(
     const { tabId, profileId, childTabId } =
       getProfilePageParams({ path: ownProps.history.location.pathname }) || {};
     // With analytics, the reducer state name doesnt match the tabId
-    const name = (tabId === 'analytics' && (!childTabId || childTabId === 'posts')) ?
+    const reducerName = (tabId === 'analytics' && (!childTabId || childTabId === 'posts')) ?
       'sent' : tabId;
-    if (state[name] && state[name].byProfileId && state[name].byProfileId[profileId]) {
+    if (state[reducerName] && state[reducerName].byProfileId && state[reducerName].byProfileId[profileId]) {
       return ({
-        loading: state[name].byProfileId[profileId].loading,
-        loadingMore: state[name].byProfileId[profileId].loadingMore,
-        moreToLoad: state[name].byProfileId[profileId].moreToLoad,
-        page: state[name].byProfileId[profileId].page,
-        posts: state[name].byProfileId[profileId].posts,
-        total: state[name].byProfileId[profileId].total,
+        loading: state[reducerName].byProfileId[profileId].loading,
+        loadingMore: state[reducerName].byProfileId[profileId].loadingMore,
+        moreToLoad: state[reducerName].byProfileId[profileId].moreToLoad,
+        page: state[reducerName].byProfileId[profileId].page,
+        posts: state[reducerName].byProfileId[profileId].posts,
+        total: state[reducerName].byProfileId[profileId].total,
         translations: state.i18n.translations.example,
-        view: state[name].byProfileId[profileId].tabId || null,
+        view: state[reducerName].byProfileId[profileId].tabId || null,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
       });
     }
