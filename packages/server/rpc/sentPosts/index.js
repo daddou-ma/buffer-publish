@@ -6,7 +6,7 @@ const rp = require('request-promise');
 module.exports = method(
   'sentPosts',
   'fetch sent posts',
-  ({ profileId, page, since }, { session }) =>
+  ({ profileId, page }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/profiles/${profileId}/updates/sent.json`,
       method: 'GET',
@@ -14,7 +14,6 @@ module.exports = method(
       qs: {
         access_token: session.publish.accessToken,
         page,
-        since,
         count: 20,
       },
     })

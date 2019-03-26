@@ -15,7 +15,6 @@ import Analytics from '@bufferapp/publish-analytics';
 import { ScrollableContainer } from '@bufferapp/publish-shared-components';
 import { LoadingAnimation } from '@bufferapp/components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import moment from 'moment-timezone';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -138,18 +137,16 @@ const ProfilePage = ({
   onLoadMore,
   loadingMore,
   moreToLoad,
-  isBusinessAccount,
-  features,
   page,
 }) => {
-  const isPostsTab = ['queue', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId);
-  const isChildSentTab = tabId === 'analytics' && childTabId !== 'overview';
+  // Sent component is set as default under analytics, which means it could show without
+  // a childTabId.
+  const isPostsTab = ['queue', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId) ||
+  (tabId === 'analytics' && (!childTabId || childTabId === 'sent'));
   const handleScroll = (o) => {
     const reachedBottom = o.scrollHeight - o.scrollTop === o.clientHeight;
-    const since = isBusinessAccount || !features.isFreeUser() ?
-      moment().subtract(10, 'years').unix() : null;
-    if (reachedBottom && moreToLoad && (isPostsTab || isChildSentTab) && !loadingMore) {
-      onLoadMore({ profileId, page, tabId, since });
+    if (reachedBottom && moreToLoad && isPostsTab && !loadingMore) {
+      onLoadMore({ profileId, page, tabId });
     }
   };
   return (
@@ -200,8 +197,6 @@ ProfilePage.propTypes = {
   loadingMore: PropTypes.bool.isRequired,
   moreToLoad: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
-  isBusinessAccount: PropTypes.bool.isRequired,
-  features: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 ProfilePage.defaultProps = {

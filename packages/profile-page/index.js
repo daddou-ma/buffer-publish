@@ -8,28 +8,28 @@ import ProfilePage from './components/ProfilePage';
 // default export = container
 export default hot(module)(connect(
   (state, ownProps) => {
-    let { tabId, profileId, childTabId } =
+    const { tabId, profileId, childTabId } =
       getProfilePageParams({ path: ownProps.history.location.pathname }) || {};
-
-    tabId = (tabId === 'analytics' && childTabId !== 'overview') ?
+    // With analytics, the reducer state name doesnt match the tabId
+    const name = (tabId === 'analytics' && (!childTabId || childTabId === 'posts')) ?
       'sent' : tabId;
-    if (state[tabId] && state[tabId].byProfileId && state[tabId].byProfileId[profileId]) {
+    if (state[name] && state[name].byProfileId && state[name].byProfileId[profileId]) {
       return ({
-        loading: state[tabId].byProfileId[profileId].loading,
-        loadingMore: state[tabId].byProfileId[profileId].loadingMore,
-        moreToLoad: state[tabId].byProfileId[profileId].moreToLoad,
-        page: state[tabId].byProfileId[profileId].page,
-        posts: state[tabId].byProfileId[profileId].posts,
-        total: state[tabId].byProfileId[profileId].total,
+        loading: state[name].byProfileId[profileId].loading,
+        loadingMore: state[name].byProfileId[profileId].loadingMore,
+        moreToLoad: state[name].byProfileId[profileId].moreToLoad,
+        page: state[name].byProfileId[profileId].page,
+        posts: state[name].byProfileId[profileId].posts,
+        total: state[name].byProfileId[profileId].total,
         translations: state.i18n.translations.example,
-        view: state[tabId].byProfileId[profileId].tabId || null,
+        view: state[name].byProfileId[profileId].tabId || null,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
       });
     }
     return {};
   },
   dispatch => ({
-    onLoadMore: ({ profileId, page, tabId, since }) => {
+    onLoadMore: ({ profileId, page, tabId }) => {
       let requestName;
       switch (tabId) {
         case 'queue':
@@ -56,7 +56,6 @@ export default hot(module)(connect(
             profileId,
             page,
             isFetchingMore: true,
-            since,
           },
         }),
       );

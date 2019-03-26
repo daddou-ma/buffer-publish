@@ -121,7 +121,6 @@ const SentPosts = ({
 };
 
 SentPosts.propTypes = {
-  header: PropTypes.string,
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
@@ -154,7 +153,6 @@ SentPosts.propTypes = {
 };
 
 SentPosts.defaultProps = {
-  header: null,
   loading: true,
   moreToLoad: false,
   page: 1,
