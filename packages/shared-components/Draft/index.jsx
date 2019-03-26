@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Card,
   LinkifiedText,
+  Text,
 } from '@bufferapp/components';
 
 import {
@@ -40,17 +41,26 @@ const commentStyle = {
 const renderRetweetComment = ({
   retweetComment,
   retweetCommentLinks,
+  basic,
 }) => (
   <div style={commentStyle}>
-    <LinkifiedText
-      links={retweetCommentLinks}
-      newTab
-      size={'mini'}
-      unstyled
-      color={'black'}
-    >
-      { retweetComment }
-    </LinkifiedText>
+    {basic ?
+      <Text
+        color="black"
+        size="mini"
+      >
+        {retweetComment}
+      </Text> :
+      <LinkifiedText
+        links={retweetCommentLinks}
+        newTab
+        size="mini"
+        unstyled
+        color="black"
+      >
+        {retweetComment}
+      </LinkifiedText>
+    }
   </div>
 );
 
@@ -59,11 +69,12 @@ const renderContent = ({
   retweetComment,
   retweetCommentLinks,
   retweetProfile,
+  basic,
 }) => {
   if (retweetProfile) {
     return (
       <div style={postContentStyle}>
-        { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks }) : '' }
+        { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic }) : '' }
         <Card
           color={'off-white'}
           reducedPadding
@@ -108,6 +119,7 @@ const Draft = ({
   retweetProfile,
   scheduledAt,
   view,
+  basic,
 }) =>
   (<div style={postContainerStyle}>
     <div style={postStyle}>
@@ -115,7 +127,7 @@ const Draft = ({
         faded={isDeleting}
         noPadding
       >
-        <DraftHeader 
+        <DraftHeader
           draftDetails={draftDetails}
         />
         {renderContent({
@@ -123,6 +135,7 @@ const Draft = ({
           retweetProfile,
           retweetComment,
           retweetCommentLinks,
+          basic,
         })}
         <DraftFooter
           hasPermission={hasPermission}

@@ -8,6 +8,9 @@ import {
 import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const headerStyle = {
   marginBottom: '1.5rem',
@@ -75,37 +78,39 @@ const SentPosts = ({
   }
 
   return (
-    <div>
-      <div style={headerStyle}>
-        <div className="js-page-header">
-          <Text color={'black'}>{header}</Text>
-        </div>
-        <Divider />
-      </div>
-      <div style={topBarContainerStyle}>
-        {showComposer && !editMode && (
-          <div style={composerStyle}>
-            <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
+    <ErrorBoundary>
+      <div>
+        <div style={headerStyle}>
+          <div className="js-page-header">
+            <Text color={'black'}>{header}</Text>
           </div>
+          <Divider />
+        </div>
+        <div style={topBarContainerStyle}>
+          {showComposer && !editMode && (
+            <div style={composerStyle}>
+              <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
+            </div>
+          )}
+        </div>
+        {showComposer && editMode && (
+          <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
         )}
+        <PostLists
+          postLists={postLists}
+          onEditClick={onEditClick}
+          onShareAgainClick={onShareAgainClick}
+          onImageClick={onImageClick}
+          onImageClickNext={onImageClickNext}
+          onImageClickPrev={onImageClickPrev}
+          onImageClose={onImageClose}
+          isManager={isManager}
+          isBusinessAccount={isBusinessAccount}
+          isSent
+          hasFirstCommentFlip={hasFirstCommentFlip}
+        />
       </div>
-      {showComposer && editMode && (
-        <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
-      )}
-      <PostLists
-        postLists={postLists}
-        onEditClick={onEditClick}
-        onShareAgainClick={onShareAgainClick}
-        onImageClick={onImageClick}
-        onImageClickNext={onImageClickNext}
-        onImageClickPrev={onImageClickPrev}
-        onImageClose={onImageClose}
-        isManager={isManager}
-        isBusinessAccount={isBusinessAccount}
-        isSent
-        hasFirstCommentFlip={hasFirstCommentFlip}
-      />
-    </div>
+    </ErrorBoundary>
   );
 };
 

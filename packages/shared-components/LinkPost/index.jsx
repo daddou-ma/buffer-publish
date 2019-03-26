@@ -72,6 +72,7 @@ const LinkPost = ({
   day,
   dueTime,
   sharedBy,
+  basic,
   commentEnabled,
   commentText,
   hasCommentEnabled,
@@ -80,16 +81,25 @@ const LinkPost = ({
   const children = (
     <div style={postContentStyle}>
       <div style={postContentTextStyle}>
-        <LinkifiedText
-          color={'black'}
-          links={links}
-          size={'mini'}
-          whitespace={'pre-wrap'}
-          newTab
-          unstyled
-        >
-          {text}
-        </LinkifiedText>
+        {basic ?
+          <Text
+            color="black"
+            size="mini"
+            whitespace="pre-wrap"
+          >
+            {text}
+          </Text> :
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            whitespace="pre-wrap"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        }
       </div>
       <div>
         <Link href={linkAttachment.url} unstyled newTab>
@@ -167,6 +177,7 @@ const LinkPost = ({
       commentText={commentText}
       hasCommentEnabled={hasCommentEnabled}
       hasFirstCommentFlip={hasFirstCommentFlip}
+      basic={basic}
     >
       {children}
     </Post>
