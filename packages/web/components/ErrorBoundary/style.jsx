@@ -13,6 +13,7 @@ const errorBoundary = {
   position: 'relative',
   textAlign: 'center',
   width: '100vw',
+  boxSizing: 'border-box',
 };
 
 const errorBoundaryFit = {
@@ -26,11 +27,13 @@ const errorBoundaryFit = {
   position: 'relative',
   textAlign: 'center',
   width: '100%',
+  boxSizing: 'border-box',
 };
 
 const errorBoundaryBordered = {
   ...errorBoundaryFit,
-  paddingTop: '20px',
+  backgroundImage: 'none',
+  padding: '24px 0',
   border: '1px solid #b8b8b8',
   borderRadius: '4px',
 };
@@ -49,7 +52,7 @@ export default {
     color: '#3d3d3d',
     fontSize: '22px',
     fontWeight: '700',
-    marginBottom: '20px',
+    marginBottom: '8px',
   },
   errorBoundaryMessage: {
     color: '#636363',
@@ -60,14 +63,12 @@ export default {
   errorSmallBoundaryMessage: {
     color: '#636363',
     fontSize: '16px',
-    marginBottom: '10px',
+    marginBottom: '8px',
     lineHeight: '22px',
   },
   smallErrorBoundaryMessage: {
     color: '#636363',
     fontSize: '12px',
-    marginBottom: '20px',
-    lineHeight: '26px',
   },
   buttonWrapper: {
     display: 'flex',
