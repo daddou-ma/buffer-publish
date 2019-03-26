@@ -23,7 +23,6 @@ export default connect(
     if (currentProfile) {
       const mergedPosts = orderPostLists(currentProfile.mergedPosts);
       return {
-        header: currentProfile.header,
         loading: currentProfile.loading,
         loadingMore: currentProfile.loadingMore,
         moreToLoad: currentProfile.moreToLoad,
@@ -33,6 +32,7 @@ export default connect(
         servicePosts: currentProfile.servicePosts,
         total: mergedPosts.length,
         isManager: state.profileSidebar.selectedProfile.isManager,
+        profile: state.profileSidebar.selectedProfile,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
       };
@@ -55,6 +55,11 @@ export default connect(
     onChangePostUrl: (post) => {
       dispatch(actions.handleChangePostUrl({
         post: post.post,
+        profileId: ownProps.profileId,
+      }));
+    },
+    onPreviewPageClick: () => {
+      dispatch(actions.handlePreviewClick({
         profileId: ownProps.profileId,
       }));
     },

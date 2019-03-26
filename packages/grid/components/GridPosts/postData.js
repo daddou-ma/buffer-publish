@@ -78,5 +78,3 @@ export const postLists = [
     ],
   },
 ];
-
-export const header = 'Your sent posts for the last 30 days';

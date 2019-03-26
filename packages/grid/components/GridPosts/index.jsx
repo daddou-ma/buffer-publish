@@ -5,11 +5,15 @@ import {
   EmptyState,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
-import { Divider, Text } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
+import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import { ProfileBadge } from '@bufferapp/analyze-shared-components';
 
 const headerStyle = {
-  marginBottom: '1.5rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: '1.8rem',
   width: '100%',
 };
 
@@ -20,12 +24,51 @@ const loadingContainerStyle = {
   paddingTop: '5rem',
 };
 
-const topBarContainerStyle = {
+const profileBadgeStyle = {
+  padding: '0.05rem 0.25rem',
+};
+
+const profileHeaderStyle = {
   display: 'flex',
+  alignItems: 'center',
+};
+
+const buttonsWrapperStyles = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minWidth: '290px',
+};
+
+const linkFieldStyle = {
+  marginRight: '12px',
+  width: '100%',
+};
+
+const copyLinkButtonStyle = {
+  alignItems: 'center',
+  backgroundColor: '#E0E0E0',
+  border: '1px solid #E0E0E0',
+  borderRadius: '4px',
+  color: '#636363',
+  cursor: 'pointer',
+  display: 'flex',
+  fontFamily: 'Roboto',
+  fontSize: '14px',
+  height: '40px',
+  outline: 'none',
+  paddingLeft: '16px',
+  paddingRight: '16px',
+  width: '100%',
+};
+
+const copyLinkStyle = {
+  width: '16px',
+  height: '16px',
+  marginLeft: 'auto',
 };
 
 const GridPosts = ({
-  header,
   total,
   loading,
   mergedPosts,
@@ -35,6 +78,8 @@ const GridPosts = ({
   isManager,
   isLockedProfile,
   isBusinessAccount,
+  onPreviewPageClick,
+  profile,
 }) => {
   if (loading) {
     return (
@@ -65,10 +110,36 @@ const GridPosts = ({
   return (
     <div>
       <div style={headerStyle}>
-        <div className="js-page-header">
-          <Text color={'black'}>{header}</Text>
+        <div style={profileHeaderStyle}>
+          <div style={profileBadgeStyle}>
+            <ProfileBadge
+              avatarUrl={profile.avatar_https}
+              service={profile.service}
+              avatarSize={48}
+              socialIconSize={24}
+            />
+          </div>
         </div>
-        <Divider />
+        <div style={buttonsWrapperStyles}>
+          <div style={linkFieldStyle}>
+            <button
+              style={copyLinkButtonStyle}
+              onClick={() => {}}
+            >
+              buff.ly/p/away
+              <div style={copyLinkStyle}>
+                <CopyIcon size="16" />
+              </div>
+            </button>
+          </div>
+          <Button
+            label={'Preview Page'}
+            type="secondary"
+            onClick={() => {
+              onPreviewPageClick();
+            }}
+          />
+        </div>
       </div>
       <GridList
         mergedPosts={mergedPosts}
@@ -82,7 +153,6 @@ const GridPosts = ({
 
 GridPosts.propTypes = {
   loading: PropTypes.bool,
-  header: PropTypes.string,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
   mergedPosts: PropTypes.arrayOf(
@@ -98,13 +168,13 @@ GridPosts.propTypes = {
   onChangePostUrl: PropTypes.func,
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
+  onPreviewPageClick: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
 };
 
 GridPosts.defaultProps = {
-  header: null,
   loading: true,
   moreToLoad: false,
   page: 1,
@@ -116,6 +186,7 @@ GridPosts.defaultProps = {
   onChangePostUrl: () => {},
   onImageClick: () => {},
   onImageClose: () => {},
+  onPreviewPageClick: () => {},
 };
 
 export default GridPosts;

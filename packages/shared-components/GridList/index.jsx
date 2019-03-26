@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Lightbox from 'react-images';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Input, Link } from '@bufferapp/components';
-import PostList from '../PostLists';
 
 const gridContainer = {
   display: 'flex',
