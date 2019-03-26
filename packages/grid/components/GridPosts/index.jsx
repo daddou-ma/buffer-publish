@@ -30,8 +30,6 @@ const GridPosts = ({
   loading,
   mergedPosts,
   onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
   onImageClose,
   onChangePostUrl,
   isManager,
@@ -75,6 +73,8 @@ const GridPosts = ({
       <GridList
         mergedPosts={mergedPosts}
         onChangePostUrl={onChangePostUrl}
+        onImageClick={onImageClick}
+        onImageClose={onImageClose}
       />
     </div>
   );
@@ -97,8 +97,6 @@ GridPosts.propTypes = {
   total: PropTypes.number,
   onChangePostUrl: PropTypes.func,
   onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
@@ -117,8 +115,6 @@ GridPosts.defaultProps = {
   isLockedProfile: false,
   onChangePostUrl: () => {},
   onImageClick: () => {},
-  onImageClickNext: () => {},
-  onImageClickPrev: () => {},
   onImageClose: () => {},
 };
 

@@ -5,8 +5,15 @@ import { actions } from './reducer';
 import GridPosts from './components/GridPosts';
 
 const orderPostLists = (posts) => {
-  return (posts && typeof posts === 'object') ?
+  const postLists = [];
+  const orderedPosts = (posts && typeof posts === 'object') ?
     Object.values(posts).sort((a, b) => Number(b.due_at) - Number(a.due_at)) : [];
+
+  orderedPosts.forEach((post) => {
+    postLists.push(post);
+  });
+
+  return postLists;
 };
 
 export default connect(
@@ -14,18 +21,17 @@ export default connect(
     const profileId = ownProps.profileId;
     const currentProfile = state.grid.byProfileId[profileId];
     if (currentProfile) {
+      const mergedPosts = orderPostLists(currentProfile.mergedPosts);
       return {
         header: currentProfile.header,
         loading: currentProfile.loading,
         loadingMore: currentProfile.loadingMore,
         moreToLoad: currentProfile.moreToLoad,
         page: currentProfile.page,
-        mergedPosts: orderPostLists(currentProfile.mergedPosts),
+        mergedPosts,
         pendingPosts: currentProfile.pendingPosts,
         servicePosts: currentProfile.servicePosts,
-        total: currentProfile.total,
-        showComposer: state.sent.showComposer,
-        editMode: state.sent.editMode,
+        total: mergedPosts.length,
         isManager: state.profileSidebar.selectedProfile.isManager,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
@@ -42,18 +48,6 @@ export default connect(
     },
     onImageClose: (post) => {
       dispatch(actions.handleImageClose({
-        post: post.post,
-        profileId: ownProps.profileId,
-      }));
-    },
-    onImageClickNext: (post) => {
-      dispatch(actions.handleImageClickNext({
-        post: post.post,
-        profileId: ownProps.profileId,
-      }));
-    },
-    onImageClickPrev: (post) => {
-      dispatch(actions.handleImageClickPrev({
         post: post.post,
         profileId: ownProps.profileId,
       }));

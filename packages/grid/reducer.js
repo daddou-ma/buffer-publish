@@ -8,8 +8,6 @@ import {
 
 export const actionTypes = keyWrapper('GRID', {
   POST_IMAGE_CLICKED: 0,
-  POST_IMAGE_CLICKED_NEXT: 0,
-  POST_IMAGE_CLICKED_PREV: 0,
   POST_IMAGE_CLOSED: 0,
 });
 
@@ -39,7 +37,7 @@ const handlePosts = (action, currentPosts) => {
 };
 
 const mergePosts = (pendingPosts, servicePosts) => {
-  return servicePosts.concat(pendingPosts);
+  return { ...servicePosts, ...pendingPosts };
 };
 
 const increasePageCount = (page) => {
@@ -71,22 +69,11 @@ const postReducer = (state, action) => {
       return {
         ...state,
         isLightboxOpen: true,
-        currentImage: 0,
       };
     case actionTypes.POST_IMAGE_CLOSED:
       return {
         ...state,
         isLightboxOpen: false,
-      };
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-      return {
-        ...state,
-        currentImage: state.currentImage + 1,
-      };
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
-      return {
-        ...state,
-        currentImage: state.currentImage - 1,
       };
     default:
       return state;
@@ -96,9 +83,7 @@ const postReducer = (state, action) => {
 const postsReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.POST_IMAGE_CLICKED:
-    case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV: {
+    case actionTypes.POST_IMAGE_CLOSED: {
       return {
         ...state,
         [getPostUpdateId(action)]: postReducer(state[getPostUpdateId(action)], action),
@@ -128,7 +113,7 @@ const profileReducer = (state = profileInitialState, action) => {
         loadingMore: false,
         pendingPosts,
         mergedPosts,
-        total: mergedPosts.length,
+        // total: mergedPosts.length,
         // moreToLoad: determineIfMoreToLoad(action, state.servicePosts),
         // page: increasePageCount(state.page),
       };
@@ -162,11 +147,9 @@ const profileReducer = (state = profileInitialState, action) => {
       };
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
       return {
         ...state,
-        servicePosts: postsReducer(state.servicePosts, action),
+        mergedPosts: postsReducer(state.mergedPosts, action),
       };
     default:
       return state;
@@ -186,8 +169,6 @@ export default (state = initialState, action) => {
     case queueActionTypes.POST_COUNT_UPDATED:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -206,18 +187,6 @@ export default (state = initialState, action) => {
 export const actions = {
   handleImageClick: ({ post, profileId }) => ({
     type: actionTypes.POST_IMAGE_CLICKED,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClickNext: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED_NEXT,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClickPrev: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED_PREV,
     updateId: post.id,
     post,
     profileId,

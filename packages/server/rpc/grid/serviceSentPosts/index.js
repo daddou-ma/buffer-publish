@@ -1,5 +1,6 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
+const { buildPostMap } = require('@bufferapp/publish-formatters');
 
 module.exports = method(
   'servicePosts',
@@ -18,13 +19,15 @@ module.exports = method(
     .then((parsedResult) => {
       const updates = parsedResult.updates.map((post) => {
         return {
+          id: post.id,
           thumbnail: post.thumbnail,
           buffered: post.buffered,
           due_at: post.due_at * 1000,
         };
       });
+      const mappedUpdates = buildPostMap(updates);
       return {
-        updates,
+        updates: mappedUpdates,
       };
     }),
 );

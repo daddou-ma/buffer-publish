@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Lightbox from 'react-images';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { Input } from '@bufferapp/components';
+import { Input, Link } from '@bufferapp/components';
+import PostList from '../PostLists';
 
 const gridContainer = {
   display: 'flex',
@@ -38,10 +40,21 @@ const GridListPost = ({
   post,
   index,
   onChangePostUrl,
+  onImageClick,
+  onImageClose,
 }) => {
   return (
     <div style={itemStyle(index)}>
-      <div style={imgWrapperStyle(post.thumbnail)} />
+      <Link onClick={() => onImageClick({ post })}>
+        <div style={imgWrapperStyle(post.thumbnail)} />
+      </Link>
+      <Lightbox
+        images={[{ src: `${post.thumbnail}` }]}
+        isOpen={post.isLightboxOpen || false}
+        onClose={() => onImageClose({ post })}
+        backdropClosesModal
+        showImageCount={false}
+      />
       <div style={urlWrapperStyle}>
         <Input
           type="text"
@@ -60,6 +73,8 @@ const GridListPost = ({
 const GridList = ({
   mergedPosts,
   onChangePostUrl,
+  onImageClick,
+  onImageClose,
 }) => {
   return (
     <div style={gridContainer}>
@@ -67,9 +82,12 @@ const GridList = ({
         mergedPosts.map((post, index) => {
           return (
             <GridListPost
+              key={`gridListPost-${post.id}`}
               index={index}
               post={post}
               onChangePostUrl={onChangePostUrl}
+              onImageClick={onImageClick}
+              onImageClose={onImageClose}
             />
           );
         })
@@ -79,6 +97,8 @@ const GridList = ({
 };
 
 GridList.propTypes = {
+  onImageClick: PropTypes.func,
+  onImageClose: PropTypes.func,
   onChangePostUrl: PropTypes.func,
   mergedPosts: PropTypes.arrayOf(
     PropTypes.shape({
@@ -93,6 +113,8 @@ GridList.propTypes = {
 
 GridListPost.propTypes = {
   index: PropTypes.number,
+  onImageClick: PropTypes.func,
+  onImageClose: PropTypes.func,
   onChangePostUrl: PropTypes.func,
   post: PropTypes.shape({
     text: PropTypes.string,
@@ -101,6 +123,8 @@ GridListPost.propTypes = {
 
 GridList.defaultProps = {
   mergedPosts: [],
+  onImageClick: () => {},
+  onImageClose: () => {},
   onChangePostUrl: () => {},
 };
 

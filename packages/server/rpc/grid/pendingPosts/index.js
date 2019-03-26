@@ -1,5 +1,6 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
+const { buildPostMap } = require('@bufferapp/publish-formatters');
 
 module.exports = method(
   'pendingPosts',
@@ -17,13 +18,15 @@ module.exports = method(
       .then((parsedResult) => {
         const updates = parsedResult.map((post) => {
           return {
+            id: post.id,
             thumbnail: post.thumbnail,
             buffered: post.buffered,
             due_at: parseInt(post.due_at.$date.$numberLong, 10),
           };
         });
+        const mappedUpdates = buildPostMap(updates);
         return {
-          updates,
+          updates: mappedUpdates,
         };
       }),
 );
