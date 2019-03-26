@@ -16,6 +16,10 @@ import { ScrollableContainer } from '@bufferapp/publish-shared-components';
 import { LoadingAnimation } from '@bufferapp/components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import moment from 'moment-timezone';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+
+const ErrorBoundary = getErrorBoundary(true);
+
 
 const profilePageStyle = {
   display: 'flex',
@@ -48,6 +52,7 @@ const loadingAnimationStyle = {
 
 const tabContentStyle = {
   maxWidth: '864px',
+  height: '100%',
 };
 
 const TabContent = ({ tabId, profileId, childTabId }) => {
@@ -97,10 +102,12 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
         case 'general-settings':
         default:
           return (
-            <GeneralSettings
-              profileId={profileId}
-              childTabId={childTabId}
-            />
+            <ErrorBoundary>
+              <GeneralSettings
+                profileId={profileId}
+                childTabId={childTabId}
+              />
+            </ErrorBoundary>
           );
       }
     default:

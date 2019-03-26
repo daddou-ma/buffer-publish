@@ -6,6 +6,7 @@ import {
   MultipleImages,
 } from '@bufferapp/components';
 import Draft from '../Draft';
+import Text from '@bufferapp/components/Text';
 
 const postContentStyle = {
   display: 'flex',
@@ -51,20 +52,30 @@ const MultipleImagesDraft = ({
   retweetCommentLinks,
   scheduledAt,
   view,
+  basic,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        <LinkifiedText
-          color={'black'}
-          links={links}
-          size={'mini'}
-          newTab
-          unstyled
-        >
-          {text}
-        </LinkifiedText>
+        {basic ?
+          <Text
+            color="black"
+            size="mini"
+            whitespace="pre-wrap"
+          >
+            {text}
+          </Text> :
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        }
       </span>
       <div style={imagesWrapperStyle} onClick={onImageClick}>
         <MultipleImages
@@ -112,6 +123,7 @@ const MultipleImagesDraft = ({
       retweetCommentLinks={retweetCommentLinks}
       scheduledAt={scheduledAt}
       view={view}
+      basic={basic}
     >
       {children}
     </Draft>

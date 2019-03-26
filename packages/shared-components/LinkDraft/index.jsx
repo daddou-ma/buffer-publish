@@ -65,19 +65,28 @@ const LinkDraft = ({
   retweetCommentLinks,
   scheduledAt,
   view,
+  basic,
 }) => {
   const children = (
     <div style={postContentStyle}>
       <div style={postContentTextStyle}>
-        <LinkifiedText
-          color={'black'}
-          links={links}
-          size={'mini'}
-          newTab
-          unstyled
-        >
-          {text}
-        </LinkifiedText>
+        {basic ?
+          <Text
+            color="black"
+            size="mini"
+          >
+            {text}
+          </Text> :
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        }
       </div>
       <div>
         <Link href={linkAttachment.url} unstyled newTab>
@@ -143,6 +152,7 @@ const LinkDraft = ({
       retweetCommentLinks={retweetCommentLinks}
       scheduledAt={scheduledAt}
       view={view}
+      basic={basic}
     >
       {children}
     </Draft>

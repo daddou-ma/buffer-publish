@@ -4,6 +4,7 @@ import Lightbox from 'react-images';
 import {
   LinkifiedText,
   MultipleImages,
+  Text,
 } from '@bufferapp/components';
 // import style from './style.css';
 import Post from '../Post';
@@ -59,21 +60,35 @@ const MultipleImagesPost = ({
   day,
   dueTime,
   sharedBy,
+  basic,
+  commentEnabled,
+  commentText,
+  hasCommentEnabled,
+  hasFirstCommentFlip,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        <LinkifiedText
-          color={'black'}
-          links={links}
-          size={'mini'}
-          whitespace={'pre-wrap'}
-          newTab
-          unstyled
-        >
-          {text}
-        </LinkifiedText>
+        {basic ?
+          <Text
+            color="black"
+            size="mini"
+            whitespace="pre-wrap"
+          >
+            {text}
+          </Text> :
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            whitespace="pre-wrap"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        }
       </span>
       <div style={imagesWrapperStyle} onClick={onImageClick}>
         <MultipleImages
@@ -128,6 +143,11 @@ const MultipleImagesPost = ({
       day={day}
       dueTime={dueTime}
       sharedBy={sharedBy}
+      basic={basic}
+      commentEnabled={commentEnabled}
+      commentText={commentText}
+      hasCommentEnabled={hasCommentEnabled}
+      hasFirstCommentFlip={hasFirstCommentFlip}
     >
       {children}
     </Post>

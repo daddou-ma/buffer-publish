@@ -18,6 +18,10 @@ import {
   PostEmptySlot,
   QueueButtonGroup,
 } from '@bufferapp/publish-shared-components';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import FailedPostComponent from '@bufferapp/publish-web/components/ErrorBoundary/failedPostComponent';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const listHeaderStyle = {
   marginBottom: '1rem',
@@ -82,6 +86,7 @@ const renderPost = ({
   onImageClose,
   onDropPost,
   draggable,
+  hasFirstCommentFlip,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -99,6 +104,7 @@ const renderPost = ({
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
     onDropPost,
+    hasFirstCommentFlip,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -121,19 +127,57 @@ const renderPost = ({
   if (draggable) {
     return (
       <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
-        <PostDragWrapper
-          id={post.id}
-          index={post.index}
-          postComponent={PostComponent}
-          postProps={postWithEventHandlers}
-        />
+        <ErrorBoundary
+          fallbackComponent={() => (
+            <ErrorBoundary
+              fallbackComponent={() => (
+                <FailedPostComponent
+                  key={post.id}
+                  post={post}
+                  postId={post.id}
+                />
+              )}
+            >
+              <PostDragWrapper
+                id={post.id}
+                index={post.index}
+                postComponent={PostComponent}
+                postProps={postWithEventHandlers}
+                basic
+              />
+            </ErrorBoundary>
+          )}
+        >
+          <PostDragWrapper
+            id={post.id}
+            index={post.index}
+            postComponent={PostComponent}
+            postProps={postWithEventHandlers}
+          />
+        </ErrorBoundary>
       </div>
     );
   }
 
   return (
     <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
-      <PostComponent {...postWithEventHandlers} />
+      <ErrorBoundary
+        fallbackComponent={() =>
+          <ErrorBoundary
+            fallbackComponent={() => (
+              <FailedPostComponent
+                key={post.id}
+                post={post}
+                postId={post.id}
+              />
+            )}
+          >
+            <PostComponent {...postWithEventHandlers} basic />
+          </ErrorBoundary>
+        }
+      >
+        <PostComponent {...postWithEventHandlers} />
+      </ErrorBoundary>
     </div>
   );
 };
