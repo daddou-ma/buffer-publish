@@ -2,9 +2,6 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
 import keyWrapper from '@bufferapp/keywrapper';
-import {
-  header,
-} from './components/SentPosts/postData';
 
 export const actionTypes = keyWrapper('SENT', {
   OPEN_COMPOSER: 0,
@@ -24,7 +21,6 @@ export const initialState = {
 };
 
 export const profileInitialState = {
-  header,
   loading: true,
   loadingMore: false,
   moreToLoad: false,

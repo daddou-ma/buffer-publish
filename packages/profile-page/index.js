@@ -5,22 +5,25 @@ import { getProfilePageParams } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import ProfilePage from './components/ProfilePage';
 
-
 // default export = container
 export default hot(module)(connect(
   (state, ownProps) => {
-    const { tabId, profileId } =
+    const { tabId, profileId, childTabId } =
       getProfilePageParams({ path: ownProps.history.location.pathname }) || {};
-    if (state[tabId] && state[tabId].byProfileId && state[tabId].byProfileId[profileId]) {
+    // With analytics, the reducer state name doesnt match the tabId
+    const reducerName = (tabId === 'analytics' && (!childTabId || childTabId === 'posts')) ?
+      'sent' : tabId;
+    if (state[reducerName] && state[reducerName].byProfileId && state[reducerName].byProfileId[profileId]) {
       return ({
-        loading: state[tabId].byProfileId[profileId].loading,
-        loadingMore: state[tabId].byProfileId[profileId].loadingMore,
-        moreToLoad: state[tabId].byProfileId[profileId].moreToLoad,
-        page: state[tabId].byProfileId[profileId].page,
-        posts: state[tabId].byProfileId[profileId].posts,
-        total: state[tabId].byProfileId[profileId].total,
+        loading: state[reducerName].byProfileId[profileId].loading,
+        loadingMore: state[reducerName].byProfileId[profileId].loadingMore,
+        moreToLoad: state[reducerName].byProfileId[profileId].moreToLoad,
+        page: state[reducerName].byProfileId[profileId].page,
+        posts: state[reducerName].byProfileId[profileId].posts,
+        total: state[reducerName].byProfileId[profileId].total,
         translations: state.i18n.translations.example,
-        view: state[tabId].byProfileId[profileId].tabId || null,
+        view: state[reducerName].byProfileId[profileId].tabId || null,
+        isBusinessAccount: state.profileSidebar.selectedProfile.business,
       });
     }
     return {};
@@ -37,7 +40,7 @@ export default hot(module)(connect(
         case 'pendingApproval':
           requestName = 'draft';
           break;
-        case 'sent':
+        case 'analytics':
           requestName = 'sent';
           break;
         case 'pastReminders':
