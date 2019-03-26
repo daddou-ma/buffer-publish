@@ -7,6 +7,9 @@
     "lint": "eslint . --ignore-pattern coverage node_modules"
   },
   "author": "mike@msanroman.io",
+  "dependencies": {
+    "@bufferapp/ui": "^1.16.0"
+  },
   "devDependencies": {
     "eslint": "3.19.0",
     "redux-mock-store": "^1.2.3"
