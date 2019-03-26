@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Card,
   LinkifiedText,
+  Text,
 } from '@bufferapp/components';
 
 import {
@@ -60,17 +61,26 @@ const commentStyle = {
 const renderRetweetComment = ({
   retweetComment,
   retweetCommentLinks,
+  basic
 }) => (
   <div style={commentStyle}>
-    <LinkifiedText
-      links={retweetCommentLinks}
-      newTab
-      size={'mini'}
-      unstyled
-      color={'black'}
-    >
-      { retweetComment }
-    </LinkifiedText>
+    {basic ?
+      <Text
+        color="black"
+        size="mini"
+      >
+        {retweetComment}
+      </Text> :
+      <LinkifiedText
+        color="black"
+        links={retweetCommentLinks}
+        newTab
+        size="mini"
+        unstyled
+      >
+        {retweetComment}
+      </LinkifiedText>
+    }
   </div>
 );
 
@@ -81,11 +91,12 @@ const renderContent = ({
   retweetProfile,
   draggable,
   dragging,
+  basic,
 }) => {
   if (retweetProfile) {
     return (
       <div style={getPostContentStyle({ draggable, dragging })}>
-        { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks }) : '' }
+        { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic }) : '' }
         <Card
           color={'off-white'}
           reducedPadding
@@ -157,7 +168,12 @@ const Post = ({
   day,
   dueTime,
   sharedBy,
+  commentEnabled,
+  commentText,
+  hasCommentEnabled,
+  hasFirstCommentFlip,
   features,
+  basic,
 }) =>
   (<div style={getPostContainerStyle({ dragging, hovering })}>
     <div style={postStyle}>
@@ -181,6 +197,7 @@ const Post = ({
           retweetCommentLinks,
           draggable,
           dragging,
+          basic,
         })}
         <RenderPostMetaBar
           profileService={profileService}
@@ -211,6 +228,10 @@ const Post = ({
           day={day}
           dueTime={dueTime}
           sharedBy={sharedBy}
+          commentEnabled={commentEnabled}
+          commentText={commentText}
+          hasCommentEnabled={hasCommentEnabled}
+          hasFirstCommentFlip={hasFirstCommentFlip}
         />
         { (isBusinessAccount || !features.isFreeUser()) &&
           isSent &&
@@ -268,6 +289,7 @@ Post.commonPropTypes = {
     name: PropTypes.string,
     email: PropTypes.string,
   }),
+  basic: PropTypes.bool,
 };
 
 Post.propTypes = {
@@ -287,6 +309,7 @@ Post.defaultProps = {
   day: null,
   dueTime: null,
   sharedBy: null,
+  basic: false,
 };
 
 export default WithFeatureLoader(Post);

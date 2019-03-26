@@ -5,6 +5,7 @@ import {
   IdTag,
   Image,
   LinkifiedText,
+  Text,
 } from '@bufferapp/components';
 import Draft from '../Draft';
 
@@ -68,19 +69,28 @@ const ImageDraft = ({
   retweetCommentLinks,
   scheduledAt,
   view,
+  basic,
 }) => {
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        <LinkifiedText
-          color={'black'}
-          links={links}
-          size={'mini'}
-          newTab
-          unstyled
-        >
-          {text}
-        </LinkifiedText>
+        {basic ?
+          <Text
+            color="black"
+            size="mini"
+          >
+            {text}
+          </Text> :
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        }
       </span>
       <div style={imageWrapperStyle} onClick={onImageClick}>
         <Image
@@ -131,6 +141,7 @@ const ImageDraft = ({
       retweetCommentLinks={retweetCommentLinks}
       scheduledAt={scheduledAt}
       view={view}
+      basic={basic}
     >
       {children}
     </Draft>

@@ -9,6 +9,9 @@ import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import { WithFeatureLoader } from '@bufferapp/product-features';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const headerStyle = {
   marginBottom: '1.5rem',
@@ -48,6 +51,7 @@ const SentPosts = ({
   canStartBusinessTrial,
   isBusinessAccount,
   features,
+  hasFirstCommentFlip,
 }) => {
   if (loading) {
     return (
@@ -80,36 +84,39 @@ const SentPosts = ({
     'Your sent posts' :
     'Your sent posts for the last 30 days';
   return (
-    <div>
-      <div style={headerStyle}>
-        <div className="js-page-header">
-          <Text color={'black'}>{header}</Text>
-        </div>
-        <Divider />
-      </div>
-      <div style={topBarContainerStyle}>
-        {showComposer && !editMode && (
-          <div style={composerStyle}>
-            <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
+    <ErrorBoundary>
+      <div>
+        <div style={headerStyle}>
+          <div className="js-page-header">
+            <Text color={'black'}>{header}</Text>
           </div>
+          <Divider />
+        </div>
+        <div style={topBarContainerStyle}>
+          {showComposer && !editMode && (
+            <div style={composerStyle}>
+              <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
+            </div>
+          )}
+        </div>
+        {showComposer && editMode && (
+          <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
         )}
+        <PostLists
+          postLists={postLists}
+          onEditClick={onEditClick}
+          onShareAgainClick={onShareAgainClick}
+          onImageClick={onImageClick}
+          onImageClickNext={onImageClickNext}
+          onImageClickPrev={onImageClickPrev}
+          onImageClose={onImageClose}
+          isManager={isManager}
+          isBusinessAccount={isBusinessAccount}
+          isSent
+          hasFirstCommentFlip={hasFirstCommentFlip}
+        />
       </div>
-      {showComposer && editMode && (
-        <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
-      )}
-      <PostLists
-        postLists={postLists}
-        onEditClick={onEditClick}
-        onShareAgainClick={onShareAgainClick}
-        onImageClick={onImageClick}
-        onImageClickNext={onImageClickNext}
-        onImageClickPrev={onImageClickPrev}
-        onImageClose={onImageClose}
-        isManager={isManager}
-        isBusinessAccount={isBusinessAccount}
-        isSent
-      />
-    </div>
+    </ErrorBoundary>
   );
 };
 
@@ -143,6 +150,7 @@ SentPosts.propTypes = {
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   canStartBusinessTrial: PropTypes.bool.isRequired,
+  hasFirstCommentFlip: PropTypes.bool,
 };
 
 SentPosts.defaultProps = {
@@ -156,6 +164,7 @@ SentPosts.defaultProps = {
   editMode: false,
   isManager: true,
   isBusinessAccount: false,
+  hasFirstCommentFlip: false,
   isLockedProfile: false,
   onEditClick: () => {},
   onShareAgainClick: () => {},
