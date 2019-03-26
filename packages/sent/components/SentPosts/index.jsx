@@ -8,6 +8,7 @@ import {
 import { Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 
 const headerStyle = {
   marginBottom: '1.5rem',
@@ -47,6 +48,7 @@ const SentPosts = ({
   isLockedProfile,
   canStartBusinessTrial,
   isBusinessAccount,
+  features,
 }) => {
   if (loading) {
     return (
@@ -61,10 +63,13 @@ const SentPosts = ({
   }
 
   if (total < 1) {
+    const title = isBusinessAccount || !features.isFreeUser() ?
+      'You haven’t published any posts with this account!' :
+        'You haven’t published any posts with this account in the past 30 days!';
     return (
       <Fragment>
         <EmptyState
-          title="You haven’t published any posts with this account in the past 30 days!"
+          title={title}
           subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
           heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
           heroImgSize={{ width: '270px', height: '150px' }}
@@ -112,6 +117,7 @@ SentPosts.propTypes = {
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
+  features: PropTypes.object.isRequired, // eslint-disable-line
   postLists: PropTypes.arrayOf(
     PropTypes.shape({
       listHeader: PropTypes.string,
@@ -158,4 +164,4 @@ SentPosts.defaultProps = {
   onImageClose: () => {},
 };
 
-export default SentPosts;
+export default WithFeatureLoader(SentPosts);

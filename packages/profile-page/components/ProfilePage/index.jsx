@@ -14,6 +14,8 @@ import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import Analytics from '@bufferapp/publish-analytics';
 import { ScrollableContainer } from '@bufferapp/publish-shared-components';
 import { LoadingAnimation } from '@bufferapp/components';
+import { WithFeatureLoader } from '@bufferapp/product-features';
+import moment from 'moment-timezone';
 
 const profilePageStyle = {
   display: 'flex',
@@ -130,13 +132,18 @@ const ProfilePage = ({
   onLoadMore,
   loadingMore,
   moreToLoad,
+  isBusinessAccount,
+  features,
   page,
 }) => {
   const isPostsTab = ['queue', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId);
+  const isChildSentTab = tabId === 'analytics' && childTabId !== 'overview';
   const handleScroll = (o) => {
     const reachedBottom = o.scrollHeight - o.scrollTop === o.clientHeight;
-    if (reachedBottom && moreToLoad && isPostsTab && !loadingMore) {
-      onLoadMore({ profileId, page, tabId });
+    const since = isBusinessAccount || !features.isFreeUser() ?
+      moment().subtract(10, 'years').unix() : null;
+    if (reachedBottom && moreToLoad && (isPostsTab || isChildSentTab) && !loadingMore) {
+      onLoadMore({ profileId, page, tabId, since });
     }
   };
   return (
@@ -187,6 +194,8 @@ ProfilePage.propTypes = {
   loadingMore: PropTypes.bool.isRequired,
   moreToLoad: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
+  isBusinessAccount: PropTypes.bool.isRequired,
+  features: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 ProfilePage.defaultProps = {
@@ -197,4 +206,4 @@ ProfilePage.defaultProps = {
   total: 0,
 };
 
-export default ProfilePage;
+export default WithFeatureLoader(ProfilePage);

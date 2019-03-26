@@ -5,12 +5,14 @@ import { getProfilePageParams } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import ProfilePage from './components/ProfilePage';
 
-
 // default export = container
 export default hot(module)(connect(
   (state, ownProps) => {
-    const { tabId, profileId } =
+    let { tabId, profileId, childTabId } =
       getProfilePageParams({ path: ownProps.history.location.pathname }) || {};
+
+    tabId = (tabId === 'analytics' && childTabId !== 'overview') ?
+      'sent' : tabId;
     if (state[tabId] && state[tabId].byProfileId && state[tabId].byProfileId[profileId]) {
       return ({
         loading: state[tabId].byProfileId[profileId].loading,
@@ -21,12 +23,13 @@ export default hot(module)(connect(
         total: state[tabId].byProfileId[profileId].total,
         translations: state.i18n.translations.example,
         view: state[tabId].byProfileId[profileId].tabId || null,
+        isBusinessAccount: state.profileSidebar.selectedProfile.business,
       });
     }
     return {};
   },
   dispatch => ({
-    onLoadMore: ({ profileId, page, tabId }) => {
+    onLoadMore: ({ profileId, page, tabId, since }) => {
       let requestName;
       switch (tabId) {
         case 'queue':
@@ -37,7 +40,7 @@ export default hot(module)(connect(
         case 'pendingApproval':
           requestName = 'draft';
           break;
-        case 'sent':
+        case 'analytics':
           requestName = 'sent';
           break;
         case 'pastReminders':
@@ -53,6 +56,7 @@ export default hot(module)(connect(
             profileId,
             page,
             isFetchingMore: true,
+            since,
           },
         }),
       );
