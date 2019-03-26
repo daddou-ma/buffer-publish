@@ -6,10 +6,8 @@ import {
 import middleware from './middleware';
 
 const getStateWithPaidUser = () => ({
-  appSidebar: {
-    user: {
-      is_free_user: false,
-    },
+  productFeatures: {
+    planName: 'business',
   },
   profileSidebar: {
     selectedProfile: {
@@ -19,10 +17,8 @@ const getStateWithPaidUser = () => ({
 });
 
 const getStateWithFreeUser = () => ({
-  appSidebar: {
-    user: {
-      is_free_user: true,
-    },
+  productFeatures: {
+    planName: 'free',
   },
   profileSidebar: {
     selectedProfile: {
