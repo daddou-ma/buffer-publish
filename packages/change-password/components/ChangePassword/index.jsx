@@ -26,7 +26,7 @@ const ChangePassword = ({ showModal, onRequestOpenModal, onRequestCloseModal, on
     </div>
     <Button
       label="Change Your Password"
-      onClick={() => window.location.assign('https://account.buffer.com')}
+      onClick={() => window.location.assign('https://account.buffer.com?redirect=https%3A%2F%2Fpublish.buffer.com')}
       type="secondary"
     />
     {showModal ? <Modal onRequestCloseModal={onRequestCloseModal} onSubmit={onSubmit} /> : null}
