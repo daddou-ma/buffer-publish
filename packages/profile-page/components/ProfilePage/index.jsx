@@ -142,7 +142,7 @@ const ProfilePage = ({
   // Sent component is set as default under analytics, which means it could show without
   // a childTabId.
   const isPostsTab = ['queue', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders'].includes(tabId) ||
-  (tabId === 'analytics' && (!childTabId || childTabId === 'sent'));
+  (tabId === 'analytics' && (!childTabId || childTabId === 'posts'));
   const handleScroll = (o) => {
     const reachedBottom = o.scrollHeight - o.scrollTop === o.clientHeight;
     if (reachedBottom && moreToLoad && isPostsTab && !loadingMore) {
