@@ -11,8 +11,10 @@ export default ({ dispatch, getState }) => next => (action) => { // eslint-disab
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,
-          since: getState().appSidebar.user.is_free_user &&
-            !getState().profileSidebar.selectedProfile.business ?
+          // appSidebar is sometimes still loading, so need to check
+          // free user with productFeatures
+          since: getState().productFeatures.planName === 'free' &&
+            !action.profile.business ?
             null :
             moment().subtract(10, 'years').unix(), // get all posts in the last ten years
         },

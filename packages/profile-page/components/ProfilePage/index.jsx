@@ -20,7 +20,6 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 const ErrorBoundary = getErrorBoundary(true);
 
-
 const profilePageStyle = {
   display: 'flex',
   flexGrow: 1,
