@@ -58,11 +58,6 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
-    onPreviewPageClick: () => {
-      dispatch(actions.handlePreviewClick({
-        profileId: ownProps.profileId,
-      }));
-    },
     handleCopyToClipboard: (copySuccess) => {
       dispatch(actions.handleCopyToClipboardResult({
         copySuccess,

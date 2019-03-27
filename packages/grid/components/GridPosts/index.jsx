@@ -9,6 +9,7 @@ import { Button } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import { ProfileBadge } from '@bufferapp/analyze-shared-components';
+import openPreviewPage from '../../util';
 
 const headerStyle = {
   display: 'flex',
@@ -86,7 +87,6 @@ const GridPosts = ({
   isManager,
   isLockedProfile,
   isBusinessAccount,
-  onPreviewPageClick,
   profile,
   handleCopyToClipboard,
   generatedUrl,
@@ -151,7 +151,7 @@ const GridPosts = ({
             label={'Preview Page'}
             type="secondary"
             onClick={() => {
-              onPreviewPageClick();
+              openPreviewPage(generatedUrl);
             }}
           />
         </div>
@@ -183,7 +183,6 @@ GridPosts.propTypes = {
   onChangePostUrl: PropTypes.func,
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
-  onPreviewPageClick: PropTypes.func,
   handleCopyToClipboard: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
@@ -208,7 +207,6 @@ GridPosts.defaultProps = {
   onChangePostUrl: () => {},
   onImageClick: () => {},
   onImageClose: () => {},
-  onPreviewPageClick: () => {},
   handleCopyToClipboard: () => {},
   profile: {},
 };

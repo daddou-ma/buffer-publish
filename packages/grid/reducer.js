@@ -6,7 +6,6 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('GRID', {
   POST_IMAGE_CLICKED: 0,
   POST_IMAGE_CLOSED: 0,
-  PREVIEW_BUTTON_CLICKED: 0,
   COPY_TO_CLIPBOARD_RESULT: 0,
 });
 
@@ -188,10 +187,6 @@ export const actions = {
     type: actionTypes.POST_IMAGE_CLOSED,
     updateId: post.id,
     post,
-    profileId,
-  }),
-  handlePreviewClick: ({ profileId }) => ({
-    type: actionTypes.PREVIEW_BUTTON_CLICKED,
     profileId,
   }),
   handleCopyToClipboardResult: ({ copySuccess }) => ({
