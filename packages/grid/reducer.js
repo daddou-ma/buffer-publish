@@ -21,22 +21,16 @@ export const profileInitialState = {
   moreToLoad: false,
   copySuccess: false,
   page: 1,
-  servicePosts: [],
-  pendingPosts: [],
-  mergedPosts: [],
+  gridPosts: [],
   total: 0,
 };
 
 const handlePosts = (action, currentPosts) => {
-  let servicePosts = action.result.updates;
+  let posts = action.result.updates;
   if (action.args.isFetchingMore) {
-    servicePosts = { ...currentPosts, ...servicePosts };
+    posts = { ...currentPosts, ...posts };
   }
-  return servicePosts;
-};
-
-const mergePosts = (pendingPosts, servicePosts) => {
-  return { ...servicePosts, ...pendingPosts };
+  return posts;
 };
 
 const increasePageCount = (page) => {
@@ -97,44 +91,33 @@ const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
       return profileInitialState;
-    case `pendingPosts_${dataFetchActionTypes.FETCH_START}`:
+    case `shortenUrl_${dataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+      };
+    case `shortenUrl_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        shortUrl: action.result.shortUrl,
+      };
+    case `gridPosts_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
         loading: !action.args.isFetchingMore,
         loadingMore: action.args.isFetchingMore,
       };
-    case `pendingPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      const pendingPosts = handlePosts(action, state.pendingPosts);
-      const mergedPosts = mergePosts(pendingPosts, state.servicePosts);
+    case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      const gridPosts = handlePosts(action, state.gridPosts);
       return {
         ...state,
         loading: false,
         loadingMore: false,
-        pendingPosts,
-        mergedPosts,
-        // total: mergedPosts.length,
-        // moreToLoad: determineIfMoreToLoad(action, state.servicePosts),
+        gridPosts,
+        // total: gridPosts.length,
+        // moreToLoad: determineIfMoreToLoad(action, state.gridPosts),
         // page: increasePageCount(state.page),
       };
-    case `pendingPosts_${dataFetchActionTypes.FETCH_FAIL}`:
-      return {
-        ...state,
-        loading: false,
-      };
-    case `servicePosts_${dataFetchActionTypes.FETCH_START}`:
-      return {
-        ...state,
-        loading: !action.args.isFetchingMore,
-        loadingMore: action.args.isFetchingMore,
-      };
-    case `servicePosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        loading: false,
-        loadingMore: false,
-        servicePosts: handlePosts(action, state.servicePosts),
-      };
-    case `servicePosts_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         loading: false,
@@ -148,7 +131,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.POST_IMAGE_CLOSED:
       return {
         ...state,
-        mergedPosts: postsReducer(state.mergedPosts, action),
+        gridPosts: postsReducer(state.gridPosts, action),
       };
     default:
       return state;
@@ -159,12 +142,12 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
-    case `pendingPosts_${dataFetchActionTypes.FETCH_START}`:
-    case `pendingPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `pendingPosts_${dataFetchActionTypes.FETCH_FAIL}`:
-    case `servicePosts_${dataFetchActionTypes.FETCH_START}`:
-    case `servicePosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `servicePosts_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `shortenUrl_${dataFetchActionTypes.FETCH_START}`:
+    case `shortenUrl_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `shortenUrl_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `gridPosts_${dataFetchActionTypes.FETCH_START}`:
+    case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case queueActionTypes.POST_COUNT_UPDATED:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:

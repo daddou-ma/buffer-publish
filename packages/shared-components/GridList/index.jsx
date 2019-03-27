@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Lightbox from 'react-images';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Input, Link } from '@bufferapp/components';
+import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 
 const gridContainer = {
   display: 'flex',
@@ -27,6 +28,7 @@ const itemStyle = index => ({
 });
 
 const imgWrapperStyle = thumbnail => ({
+  position: 'relative',
   width: '100%',
   height: '281.66px',
   background: 'no-repeat top',
@@ -34,6 +36,19 @@ const imgWrapperStyle = thumbnail => ({
   cursor: 'pointer',
   backgroundImage: `url(${thumbnail})`,
 });
+
+const scheduledIconStyle = {
+  position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '48px',
+  height: '40px',
+  top: '15px',
+  right: '0',
+  backgroundColor: '#FFC6AB',
+  color: '#662D12',
+};
 
 const GridListPost = ({
   post,
@@ -45,7 +60,13 @@ const GridListPost = ({
   return (
     <div style={itemStyle(index)}>
       <Link onClick={() => onImageClick({ post })}>
-        <div style={imgWrapperStyle(post.thumbnail)} />
+        <div style={imgWrapperStyle(post.thumbnail)}>
+          {post.scheduled &&
+            <div style={scheduledIconStyle}>
+              <ClockIcon size="medium" />
+            </div>
+          }
+        </div>
       </Link>
       <Lightbox
         images={[{ src: `${post.thumbnail}` }]}
@@ -70,7 +91,7 @@ const GridListPost = ({
 };
 
 const GridList = ({
-  mergedPosts,
+  gridPosts,
   onChangePostUrl,
   onImageClick,
   onImageClose,
@@ -78,7 +99,7 @@ const GridList = ({
   return (
     <div style={gridContainer}>
       {
-        mergedPosts.map((post, index) => {
+        gridPosts.map((post, index) => {
           return (
             <GridListPost
               key={`gridListPost-${post.id}`}
@@ -99,7 +120,7 @@ GridList.propTypes = {
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   onChangePostUrl: PropTypes.func,
-  mergedPosts: PropTypes.arrayOf(
+  gridPosts: PropTypes.arrayOf(
     PropTypes.shape({
       posts: PropTypes.arrayOf(
         PropTypes.shape({
@@ -121,7 +142,7 @@ GridListPost.propTypes = {
 };
 
 GridList.defaultProps = {
-  mergedPosts: [],
+  gridPosts: [],
   onImageClick: () => {},
   onImageClose: () => {},
   onChangePostUrl: () => {},

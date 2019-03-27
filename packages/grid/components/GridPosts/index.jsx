@@ -37,7 +37,7 @@ const buttonsWrapperStyles = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  minWidth: '290px',
+  minWidth: '340px',
 };
 
 const linkFieldStyle = {
@@ -79,7 +79,7 @@ const onCopyToClipboard = (text, handleCopyToClipboard) => {
 const GridPosts = ({
   total,
   loading,
-  mergedPosts,
+  gridPosts,
   onImageClick,
   onImageClose,
   onChangePostUrl,
@@ -157,7 +157,7 @@ const GridPosts = ({
         </div>
       </div>
       <GridList
-        mergedPosts={mergedPosts}
+        gridPosts={gridPosts}
         onChangePostUrl={onChangePostUrl}
         onImageClick={onImageClick}
         onImageClose={onImageClose}
@@ -170,7 +170,7 @@ GridPosts.propTypes = {
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
-  mergedPosts: PropTypes.arrayOf(
+  gridPosts: PropTypes.arrayOf(
     PropTypes.shape({
       posts: PropTypes.arrayOf(
         PropTypes.shape({
@@ -200,7 +200,7 @@ GridPosts.defaultProps = {
   moreToLoad: false,
   page: 1,
   total: 0,
-  mergedPosts: [],
+  gridPosts: [],
   isManager: true,
   generatedUrl: '',
   isBusinessAccount: false,

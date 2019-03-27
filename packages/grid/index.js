@@ -21,21 +21,20 @@ export default connect(
     const profileId = ownProps.profileId;
     const currentProfile = state.grid.byProfileId[profileId];
     if (currentProfile) {
-      const mergedPosts = orderPostLists(currentProfile.mergedPosts);
+      const gridPosts = orderPostLists(currentProfile.gridPosts);
+      const profile = state.profileSidebar.selectedProfile;
       return {
         loading: currentProfile.loading,
         loadingMore: currentProfile.loadingMore,
         moreToLoad: currentProfile.moreToLoad,
         page: currentProfile.page,
-        mergedPosts,
-        pendingPosts: currentProfile.pendingPosts,
-        servicePosts: currentProfile.servicePosts,
-        total: mergedPosts.length,
-        isManager: state.profileSidebar.selectedProfile.isManager,
-        profile: state.profileSidebar.selectedProfile,
-        isBusinessAccount: state.profileSidebar.selectedProfile.business,
+        gridPosts,
+        total: gridPosts.length,
+        isManager: profile.isManager,
+        profile,
+        isBusinessAccount: profile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        generatedUrl: 'buff.ly/p/away', // @todo: change this value with the API one
+        generatedUrl: currentProfile.shortUrl, // @todo: change this value with the API one
       };
     }
     return {};

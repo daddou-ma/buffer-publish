@@ -11,21 +11,20 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
   switch (action.type) {
     case actionTypes.SELECT_PROFILE:
       dispatch(dataFetchActions.fetch({
-        name: 'servicePosts',
+        name: 'gridPosts',
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,
-          gridView: true,
         },
       }));
       break;
 
-    case `servicePosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(dataFetchActions.fetch({
-        name: 'pendingPosts',
+        name: 'shortenUrl',
         args: {
           profileId: action.args.profileId,
-          isFetchingMore: false,
+          url: `buffer.com/p/${action.args.profileId}`,
         },
       }));
       break;

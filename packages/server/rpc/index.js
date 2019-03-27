@@ -47,8 +47,8 @@ const setNotifications = require('./setNotifications');
 const readMessage = require('./readMessage');
 const updateRecheck = require('./bookmarklets/updateRecheck');
 const profileQuickAnalytics = require('./bookmarklets/profileQuickAnalytics');
-const servicePosts = require('./grid/serviceSentPosts');
-const pendingPosts = require('./grid/pendingPosts');
+const gridPosts = require('./grid');
+const shortenUrl = require('./shortenUrl');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -114,6 +114,6 @@ module.exports = rpc(
   readMessage,
   updateRecheck,
   profileQuickAnalytics,
-  servicePosts,
-  pendingPosts,
+  gridPosts,
+  shortenUrl,
 );
