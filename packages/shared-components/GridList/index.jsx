@@ -79,8 +79,10 @@ const GridListPost = ({
         <Input
           type="text"
           input={{
-            value: 'value',
-            onChange: onChangePostUrl,
+            value: post.link,
+            onChange: (e) => {
+              onChangePostUrl(post, e.target.value);
+            },
           }}
           name={'postUrl'}
           placeholder={'bufferapp.com'}

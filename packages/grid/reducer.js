@@ -6,6 +6,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('GRID', {
   POST_IMAGE_CLICKED: 0,
   POST_IMAGE_CLOSED: 0,
+  UPDATE_POST_URL: 0,
   COPY_TO_CLIPBOARD_RESULT: 0,
 });
 
@@ -67,6 +68,11 @@ const postReducer = (state, action) => {
         ...state,
         isLightboxOpen: false,
       };
+    case actionTypes.UPDATE_POST_URL:
+      return {
+        ...state,
+        link: action.link,
+      };
     default:
       return state;
   }
@@ -74,6 +80,7 @@ const postReducer = (state, action) => {
 
 const postsReducer = (state, action) => {
   switch (action.type) {
+    case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED: {
       return {
@@ -126,6 +133,7 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         total: action.counts.sent,
       };
+    case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
       return {
@@ -148,6 +156,7 @@ export default (state = initialState, action) => {
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case queueActionTypes.POST_COUNT_UPDATED:
+    case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
       profileId = getProfileId(action);
@@ -183,11 +192,12 @@ export const actions = {
     post,
     profileId,
   }),
-  handleChangePostUrl: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLOSED,
+  handleChangePostUrl: ({ post, profileId, link }) => ({
+    type: actionTypes.UPDATE_POST_URL,
     updateId: post.id,
     post,
     profileId,
+    link,
   }),
   handleCopyToClipboardResult: ({ copySuccess }) => ({
     type: actionTypes.COPY_TO_CLIPBOARD_RESULT,

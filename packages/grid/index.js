@@ -34,7 +34,7 @@ export default connect(
         profile,
         isBusinessAccount: profile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        generatedUrl: currentProfile.shortUrl, // @todo: change this value with the API one
+        generatedUrl: currentProfile.shortUrl,
       };
     }
     return {};
@@ -52,10 +52,11 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
-    onChangePostUrl: (post) => {
+    onChangePostUrl: (post, link) => {
       dispatch(actions.handleChangePostUrl({
-        post: post.post,
+        post,
         profileId: ownProps.profileId,
+        link,
       }));
     },
     handleCopyToClipboard: (copySuccess) => {

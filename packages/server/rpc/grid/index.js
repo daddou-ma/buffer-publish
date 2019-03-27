@@ -22,6 +22,7 @@ module.exports = method(
           thumbnail: post.thumbnail,
           scheduled: post.scheduled,
           due_at: post.due_at * 1000,
+          link: post.link,
         };
       });
       const mappedUpdates = buildPostMap(updates);
