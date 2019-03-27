@@ -68,6 +68,14 @@ const copyLinkStyle = {
   marginLeft: 'auto',
 };
 
+const onCopyToClipboard = (text, handleCopyToClipboard) => {
+  navigator.clipboard.writeText(text).then(() => {
+    handleCopyToClipboard(true);
+  }, (err) => {
+    handleCopyToClipboard(false);
+  });
+};
+
 const GridPosts = ({
   total,
   loading,
@@ -80,6 +88,8 @@ const GridPosts = ({
   isBusinessAccount,
   onPreviewPageClick,
   profile,
+  handleCopyToClipboard,
+  generatedUrl,
 }) => {
   if (loading) {
     return (
@@ -124,11 +134,16 @@ const GridPosts = ({
           <div style={linkFieldStyle}>
             <button
               style={copyLinkButtonStyle}
-              onClick={() => {}}
+              onClick={() => {
+                onCopyToClipboard(
+                  generatedUrl,
+                  handleCopyToClipboard,
+                );
+              }}
             >
-              buff.ly/p/away
+              {generatedUrl}
               <div style={copyLinkStyle}>
-                <CopyIcon size="16" />
+                <CopyIcon size="medium" />
               </div>
             </button>
           </div>
@@ -169,9 +184,15 @@ GridPosts.propTypes = {
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   onPreviewPageClick: PropTypes.func,
+  handleCopyToClipboard: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
+  generatedUrl: PropTypes.string,
   isLockedProfile: PropTypes.bool,
+  profile: PropTypes.shape({
+    service: PropTypes.string,
+    avatar_https: PropTypes.string,
+  }),
 };
 
 GridPosts.defaultProps = {
@@ -181,12 +202,15 @@ GridPosts.defaultProps = {
   total: 0,
   mergedPosts: [],
   isManager: true,
+  generatedUrl: '',
   isBusinessAccount: false,
   isLockedProfile: false,
   onChangePostUrl: () => {},
   onImageClick: () => {},
   onImageClose: () => {},
   onPreviewPageClick: () => {},
+  handleCopyToClipboard: () => {},
+  profile: {},
 };
 
 export default GridPosts;

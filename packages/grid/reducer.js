@@ -7,6 +7,7 @@ export const actionTypes = keyWrapper('GRID', {
   POST_IMAGE_CLICKED: 0,
   POST_IMAGE_CLOSED: 0,
   PREVIEW_BUTTON_CLICKED: 0,
+  COPY_TO_CLIPBOARD_RESULT: 0,
 });
 
 export const initialState = {
@@ -18,6 +19,7 @@ export const profileInitialState = {
   loading: true,
   loadingMore: false,
   moreToLoad: false,
+  copySuccess: false,
   page: 1,
   servicePosts: [],
   pendingPosts: [],
@@ -176,6 +178,11 @@ export default (state = initialState, action) => {
         };
       }
       return state;
+    case actionTypes.COPY_TO_CLIPBOARD_RESULT:
+      return {
+        ...state,
+        copySuccess: action.copySuccess,
+      };
     default:
       return state;
   }
@@ -203,5 +210,9 @@ export const actions = {
   handlePreviewClick: ({ profileId }) => ({
     type: actionTypes.PREVIEW_BUTTON_CLICKED,
     profileId,
+  }),
+  handleCopyToClipboardResult: ({ copySuccess }) => ({
+    type: actionTypes.COPY_TO_CLIPBOARD_RESULT,
+    copySuccess,
   }),
 };

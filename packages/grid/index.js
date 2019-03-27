@@ -35,6 +35,7 @@ export default connect(
         profile: state.profileSidebar.selectedProfile,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        generatedUrl: 'buff.ly/p/away', // @todo: change this value with the API one
       };
     }
     return {};
@@ -61,6 +62,11 @@ export default connect(
     onPreviewPageClick: () => {
       dispatch(actions.handlePreviewClick({
         profileId: ownProps.profileId,
+      }));
+    },
+    handleCopyToClipboard: (copySuccess) => {
+      dispatch(actions.handleCopyToClipboardResult({
+        copySuccess,
       }));
     },
   }),
