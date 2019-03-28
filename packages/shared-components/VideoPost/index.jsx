@@ -1,6 +1,5 @@
 import React from 'react';
 import ImagePost from '../ImagePost';
-import Post from "../MultipleImagesPost";
 
 const VideoPost = ({
   isConfirmingDelete,
@@ -40,6 +39,11 @@ const VideoPost = ({
   day,
   dueTime,
   sharedBy,
+  basic,
+  commentEnabled,
+  commentText,
+  hasCommentEnabled,
+  hasFirstCommentFlip,
 }) =>
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
@@ -79,6 +83,11 @@ const VideoPost = ({
     day={day}
     dueTime={dueTime}
     sharedBy={sharedBy}
+    basic={basic}
+    commentEnabled={commentEnabled}
+    commentText={commentText}
+    hasCommentEnabled={hasCommentEnabled}
+    hasFirstCommentFlip={hasFirstCommentFlip}
   />;
 
 VideoPost.propTypes = ImagePost.propTypes;

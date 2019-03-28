@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { actions } from './reducer';
 import SentPosts from './components/SentPosts';
 
+const servicesWithCommentFeature = ['instagram'];
+
 const formatPostLists = (posts) => {
   const postLists = [];
   let day;
@@ -12,6 +14,7 @@ const formatPostLists = (posts) => {
     Object.values(posts).sort((a, b) => b.due_at - a.due_at) : [];
 
   orderedPosts.forEach((post) => {
+    post.hasCommentEnabled = servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
     if (post.day !== day) {
       day = post.day;
       newList = { listHeader: day, posts: [post] };
@@ -43,6 +46,7 @@ export default connect(
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         canStartBusinessTrial: state.appSidebar.user.canStartBusinessTrial,
+        hasFirstCommentFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('first_comment') : false,
       };
     }
     return {};

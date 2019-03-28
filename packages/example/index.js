@@ -16,5 +16,5 @@ export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';
 /*
 a consumer of a package should be able to use the package in the following way:
-import Example, { actions, actionTypes, middleware, reducer } from '@bufferapp/publish-example';
+import Example, { actions, actionTypes, middleware, reducer } from '@bufferapp/publish-example'
 */

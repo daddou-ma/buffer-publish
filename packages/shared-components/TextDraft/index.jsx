@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   LinkifiedText,
+  Text,
 } from '@bufferapp/components';
 import Draft from '../Draft';
 
@@ -39,18 +40,26 @@ const TextDraft = ({
   retweetCommentLinks,
   scheduledAt,
   view,
+  basic,
 }) => {
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        <LinkifiedText
-          links={links}
-          size={'mini'}
-          newTab
-          unstyled
-        >
-          {text}
-        </LinkifiedText>
+        {basic ?
+          <Text
+            size="mini"
+          >
+            {text}
+          </Text> :
+          <LinkifiedText
+            links={links}
+            size="mini"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        }
       </span>
     </div>
   );
@@ -81,6 +90,7 @@ const TextDraft = ({
       retweetCommentLinks={retweetCommentLinks}
       scheduledAt={scheduledAt}
       view={view}
+      basic={basic}
     >
       {children}
     </Draft>

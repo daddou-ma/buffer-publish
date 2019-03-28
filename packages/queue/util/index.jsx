@@ -150,6 +150,8 @@ export const getDayHeaderItem = ({ text, dayOfWeek, date }) => ({
   dayOfWeek,
   date,
 });
+
+const servicesWithCommentFeature = ['instagram'];
 /**
  * Convenience method for generating a post item for the `QueueItems` component
  */
@@ -161,6 +163,7 @@ export const getPostItem = ({
   ...post,
   isManager,
   draggable: false,
+  hasCommentEnabled: servicesWithCommentFeature.indexOf(post.profile_service) !== -1,
 });
 
 /**
@@ -368,12 +371,14 @@ export const formatPostLists = ({
    */
   let lastHeader = null;
   return orderedPosts.reduce((finalList, post, index) => {
+    const hasCommentEnabled = servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
     if (lastHeader !== post.day) {
       lastHeader = post.day;
       finalList.push({
         queueItemType: 'header',
         text: post.day,
         id: `header-${index}`,
+        hasCommentEnabled,
       });
     }
     finalList.push({
@@ -381,6 +386,7 @@ export const formatPostLists = ({
       isManager,
       index,
       ...post,
+      hasCommentEnabled,
     });
     return finalList;
   }, []);

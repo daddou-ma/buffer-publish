@@ -15,6 +15,10 @@ import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import Analytics from '@bufferapp/publish-analytics';
 import { ScrollableContainer } from '@bufferapp/publish-shared-components';
 import { LoadingAnimation } from '@bufferapp/components';
+import { WithFeatureLoader } from '@bufferapp/product-features';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const profilePageStyle = {
   display: 'flex',
@@ -47,6 +51,7 @@ const loadingAnimationStyle = {
 
 const tabContentStyle = {
   maxWidth: '864px',
+  height: '100%',
 };
 
 const TabContent = ({ tabId, profileId, childTabId }) => {
@@ -102,10 +107,12 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
         case 'general-settings':
         default:
           return (
-            <GeneralSettings
-              profileId={profileId}
-              childTabId={childTabId}
-            />
+            <ErrorBoundary>
+              <GeneralSettings
+                profileId={profileId}
+                childTabId={childTabId}
+              />
+            </ErrorBoundary>
           );
       }
     default:
@@ -139,8 +146,10 @@ const ProfilePage = ({
   moreToLoad,
   page,
 }) => {
-  const isPostsTab = ['queue', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders', 'grid'].includes(tabId);
-
+  // Sent component is set as default under analytics, which means it could show without
+  // a childTabId.
+  const isPostsTab = ['queue', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders', 'grid'].includes(tabId) ||
+  (tabId === 'analytics' && (!childTabId || childTabId === 'posts'));
   const handleScroll = (o) => {
     const reachedBottom = o.scrollHeight - o.scrollTop === o.clientHeight;
     if (reachedBottom && moreToLoad && isPostsTab && !loadingMore) {
@@ -205,4 +214,4 @@ ProfilePage.defaultProps = {
   total: 0,
 };
 
-export default ProfilePage;
+export default WithFeatureLoader(ProfilePage);

@@ -33,6 +33,7 @@ const renderPostList = ({
   isManager,
   isPastReminder,
   isBusinessAccount,
+  hasFirstCommentFlip,
 }) =>
   <div style={postListStyle}>
     <PostList
@@ -56,6 +57,7 @@ const renderPostList = ({
       isManager={isManager}
       isPastReminder={isPastReminder}
       isBusinessAccount={isBusinessAccount}
+      hasFirstCommentFlip={hasFirstCommentFlip}
     />
   </div>;
 
@@ -80,6 +82,7 @@ const PostLists = ({
   isManager,
   isPastReminder,
   isBusinessAccount,
+  hasFirstCommentFlip,
 }) =>
   <List
     items={postLists.map((postList, index) =>
@@ -103,6 +106,7 @@ const PostLists = ({
         isManager,
         isPastReminder,
         isBusinessAccount,
+        hasFirstCommentFlip,
       }),
     )}
     fillContainer
@@ -136,6 +140,7 @@ PostLists.propTypes = {
   isManager: PropTypes.bool,
   isPastReminder: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
+  hasFirstCommentFlip: PropTypes.bool,
 };
 
 PostLists.defaultProps = {
