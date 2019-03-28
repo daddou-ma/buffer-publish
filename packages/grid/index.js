@@ -25,8 +25,6 @@ export default connect(
       const profile = state.profileSidebar.selectedProfile;
       return {
         loading: currentProfile.loading,
-        loadingMore: currentProfile.loadingMore,
-        moreToLoad: currentProfile.moreToLoad,
         page: currentProfile.page,
         gridPosts,
         total: gridPosts.length,

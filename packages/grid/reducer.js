@@ -18,31 +18,9 @@ export const initialState = {
 
 export const profileInitialState = {
   loading: true,
-  loadingMore: false,
-  moreToLoad: false,
   copySuccess: false,
-  page: 1,
   gridPosts: [],
   total: 0,
-};
-
-const handlePosts = (action, currentPosts) => {
-  let posts = action.result.updates;
-  if (action.args.isFetchingMore) {
-    posts = { ...currentPosts, ...posts };
-  }
-  return posts;
-};
-
-const increasePageCount = (page) => {
-  page += 1;
-  return page;
-};
-
-const determineIfMoreToLoad = (action, currentPosts) => {
-  const currentPostCount = Object.keys(currentPosts).length;
-  const resultUpdatesCount = Object.keys(action.result.updates).length;
-  return (action.result.total > (currentPostCount + resultUpdatesCount));
 };
 
 const getProfileId = (action) => {
@@ -112,29 +90,19 @@ const profileReducer = (state = profileInitialState, action) => {
     case `gridPosts_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
-        loading: !action.args.isFetchingMore,
-        loadingMore: action.args.isFetchingMore,
       };
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      const gridPosts = handlePosts(action, state.gridPosts);
+      const gridPosts = action.result.updates;
       return {
         ...state,
         loading: false,
-        loadingMore: false,
         gridPosts,
-        // total: gridPosts.length,
-        // moreToLoad: determineIfMoreToLoad(action, state.gridPosts),
-        // page: increasePageCount(state.page),
+        total: gridPosts.length,
       };
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         loading: false,
-      };
-    case queueActionTypes.POST_COUNT_UPDATED:
-      return {
-        ...state,
-        total: action.counts.sent,
       };
     case actionTypes.SAVE_POST_URL:
     case actionTypes.UPDATE_POST_URL:
@@ -162,7 +130,6 @@ export default (state = initialState, action) => {
     case `gridPosts_${dataFetchActionTypes.FETCH_START}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
-    case queueActionTypes.POST_COUNT_UPDATED:
     case actionTypes.SAVE_POST_URL:
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:

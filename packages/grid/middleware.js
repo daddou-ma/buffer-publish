@@ -15,7 +15,6 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         name: 'gridPosts',
         args: {
           profileId: action.profile.id,
-          isFetchingMore: false,
         },
       }));
       break;

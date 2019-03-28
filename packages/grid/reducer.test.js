@@ -1,8 +1,5 @@
 import deepFreeze from 'deep-freeze';
 import reducer, { initialState, profileInitialState, actionTypes } from './reducer';
-import {
-  header,
-} from './components/GridPosts/postData';
 
 const profileId = '123456';
 
@@ -17,56 +14,44 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle sentPosts_FETCH_START action type', () => {
+  it('should handle gridPosts_FETCH_START action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
-          header,
           loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: {},
           total: 0,
+          copySuccess: false,
+          gridPosts: [],
         },
       },
     };
     const action = {
       profileId,
-      type: 'sentPosts_FETCH_START',
-      args: {
-        isFetchingMore: false,
-      },
+      type: 'gridPosts_FETCH_START',
     };
     deepFreeze(action);
     expect(reducer(undefined, action))
       .toEqual(stateAfter);
   });
 
-  it('should handle sentPosts_FETCH_SUCCESS action type', () => {
+  it('should handle gridPosts_FETCH_SUCCESS action type', () => {
     const post = { id: 'foo', text: 'i love buffer' };
     const stateAfter = {
       byProfileId: {
         [profileId]: {
-          header,
           loading: false,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 2,
-          posts: [post],
+          copySuccess: false,
+          gridPosts: [post],
           total: 1,
         },
       },
     };
     const action = {
       profileId,
-      type: 'sentPosts_FETCH_SUCCESS',
+      type: 'gridPosts_FETCH_SUCCESS',
       result: {
         updates: [post],
         total: 1,
-      },
-      args: {
-        isFetchingMore: false,
       },
     };
     deepFreeze(action);
@@ -74,70 +59,37 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle sentPosts_FETCH_FAIL action type', () => {
+  it('should handle gridPosts_FETCH_FAIL action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
-          header,
           loading: false,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: {},
+          copySuccess: false,
+          gridPosts: [],
           total: 0,
         },
       },
     };
     const action = {
       profileId,
-      type: 'sentPosts_FETCH_FAIL',
+      type: 'gridPosts_FETCH_FAIL',
     };
     deepFreeze(action);
     expect(reducer(undefined, action))
       .toEqual(stateAfter);
   });
 
-  it('should handle OPEN_COMPOSER action type', () => {
-    const stateComposerHidden = Object.assign(
-      initialState,
-      { showComposer: false },
-    );
-
-    const action = {
-      profileId,
-      type: 'OPEN_COMPOSER',
-    };
-
-    expect(reducer(stateComposerHidden, action))
-      .toEqual(Object.assign(initialState, { showComposer: true }));
-  });
-
-  it('should handle HIDE_COMPOSER action type', () => {
-    const stateComposerVisible = Object.assign(
-      initialState,
-      { showComposer: true },
-    );
-
-    const action = {
-      profileId,
-      type: 'HIDE_COMPOSER',
-    };
-
-    expect(reducer(stateComposerVisible, action))
-      .toEqual(Object.assign(initialState, { showComposer: false }));
-  });
-
   it('should handle POST_IMAGE_CLICKED action type', () => {
     const post = { id: '12345', text: 'i heart buffer' };
-    const postAfter = { ...post, isLightboxOpen: true, currentImage: 0 };
+    const postAfter = { ...post, isLightboxOpen: true };
     const stateBefore = {
       byProfileId: {
-        [profileId]: Object.assign(profileInitialState, { posts: { 12345: post } }),
+        [profileId]: Object.assign(profileInitialState, { gridPosts: { 12345: post } }),
       },
     };
     const stateAfter = {
       byProfileId: {
-        [profileId]: Object.assign(profileInitialState, { posts: { 12345: postAfter } }),
+        [profileId]: Object.assign(profileInitialState, { gridPosts: { 12345: postAfter } }),
       },
     };
     const action = {
@@ -156,12 +108,12 @@ describe('reducer', () => {
     const postAfter = { ...post, isLightboxOpen: false };
     const stateBefore = {
       byProfileId: {
-        [profileId]: Object.assign(profileInitialState, { posts: { 12345: post } }),
+        [profileId]: Object.assign(profileInitialState, { gridPosts: { 12345: post } }),
       },
     };
     const stateAfter = {
       byProfileId: {
-        [profileId]: Object.assign(profileInitialState, { posts: { 12345: postAfter } }),
+        [profileId]: Object.assign(profileInitialState, { gridPosts: { 12345: postAfter } }),
       },
     };
     const action = {

@@ -1,14 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-
-import Example, {
+import Grid, {
   reducer,
   actions,
   actionTypes,
   middleware,
 } from './index';
-import LoggedIn from './components/LoggedIn';
+import GridPosts from './components/GridPosts';
 
 const storeFake = state => ({
   default: () => {},
@@ -17,27 +16,38 @@ const storeFake = state => ({
   getState: () => ({ ...state }),
 });
 
-describe('Example', () => {
+describe('Grid', () => {
   it('should render', () => {
     const store = storeFake({
-      example: {
-        loggedIn: false,
-      },
-      i18n: {
-        translations: {
-          example: {
-            loggedIn: 'Logged In...',
-            loggedOut: 'Logged Out...',
+      grid: {
+        byProfileId: {
+          abc: {
+            loading: true,
+            gridPosts: [],
+            total: 0,
           },
+        },
+      },
+      appSidebar: {
+        user: {
+          is_business_user: false,
+        },
+      },
+      profileSidebar: {
+        selectedProfile: {
+          isManager: true,
         },
       },
     });
     const wrapper = mount(
       <Provider store={store}>
-        <Example />
+        <Grid
+          profileId="abc"
+          onShareAgainClick={jest.fn()}
+        />
       </Provider>,
     );
-    expect(wrapper.find(LoggedIn).length)
+    expect(wrapper.find(GridPosts).length)
       .toBe(1);
   });
 

@@ -1,29 +1,33 @@
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import {
+  actions as dataFetchActions,
+} from '@bufferapp/async-data-fetch';
 import middleware from './middleware';
 
 describe('middleware', () => {
-  beforeEach(() => {
-    global.console.group = jest.fn();
-    global.console.log = jest.fn();
-    global.console.groupEnd = jest.fn();
+  const next = jest.fn();
+  const dispatch = jest.fn();
+  it('should export middleware', () => {
+    expect(middleware)
+      .toBeDefined();
   });
-  it('should handle action', () => {
-    const next = jest.fn();
+
+  it('should fetch gridPosts', () => {
     const action = {
-      type: 'type',
+      type: profileActionTypes.SELECT_PROFILE,
+      profile: {
+        id: 'id1',
+      },
     };
-    middleware(undefined)(next)(action);
+    middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
-    expect(global.console.group)
-      .toHaveBeenCalled();
-    expect(global.console.log)
-      .toHaveBeenCalledWith('action', action);
-    expect(global.console.groupEnd)
-      .toHaveBeenCalled();
-  });
-  afterEach(() => {
-    global.console.group.mockRestore();
-    global.console.log.mockRestore();
-    global.console.groupEnd.mockRestore();
+    expect(dispatch)
+      .toBeCalledWith(dataFetchActions.fetch({
+        name: 'gridPosts',
+        args: {
+          profileId: action.profile.id,
+        },
+      }));
   });
 });

@@ -170,7 +170,6 @@ const GridPosts = ({
 
 GridPosts.propTypes = {
   loading: PropTypes.bool,
-  moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
   gridPosts: PropTypes.arrayOf(
     PropTypes.shape({
@@ -199,8 +198,6 @@ GridPosts.propTypes = {
 
 GridPosts.defaultProps = {
   loading: true,
-  moreToLoad: false,
-  page: 1,
   total: 0,
   gridPosts: [],
   isManager: true,
