@@ -9,7 +9,7 @@ import { Button } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import { ProfileBadge } from '@bufferapp/analyze-shared-components';
-import openPreviewPage from '../../util';
+import { openPreviewPage } from '../../util';
 
 const headerStyle = {
   display: 'flex',
@@ -84,6 +84,7 @@ const GridPosts = ({
   onImageClick,
   onImageClose,
   onChangePostUrl,
+  onSavePostUrl,
   isManager,
   isLockedProfile,
   isBusinessAccount,
@@ -159,6 +160,7 @@ const GridPosts = ({
       <GridList
         gridPosts={gridPosts}
         onChangePostUrl={onChangePostUrl}
+        onSavePostUrl={onSavePostUrl}
         onImageClick={onImageClick}
         onImageClose={onImageClose}
       />
@@ -181,6 +183,7 @@ GridPosts.propTypes = {
   ),
   total: PropTypes.number,
   onChangePostUrl: PropTypes.func,
+  onSavePostUrl: PropTypes.func,
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   handleCopyToClipboard: PropTypes.func,
@@ -205,6 +208,7 @@ GridPosts.defaultProps = {
   isBusinessAccount: false,
   isLockedProfile: false,
   onChangePostUrl: () => {},
+  onSavePostUrl: () => {},
   onImageClick: () => {},
   onImageClose: () => {},
   handleCopyToClipboard: () => {},

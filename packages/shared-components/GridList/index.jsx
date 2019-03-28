@@ -55,6 +55,7 @@ const GridListPost = ({
   post,
   index,
   onChangePostUrl,
+  onSavePostUrl,
   onImageClick,
   onImageClose,
 }) => {
@@ -82,8 +83,7 @@ const GridListPost = ({
             onChangePostUrl(post, e.target.value);
           }}
           onBlur={(e) => {
-            console.log('hereee');
-            // onChangePostUrl(post, e.target.value);
+            onSavePostUrl(post, e.target.value);
           }}
           size="small"
           name="postUrl"
@@ -98,6 +98,7 @@ const GridListPost = ({
 const GridList = ({
   gridPosts,
   onChangePostUrl,
+  onSavePostUrl,
   onImageClick,
   onImageClose,
 }) => {
@@ -111,6 +112,7 @@ const GridList = ({
               index={index}
               post={post}
               onChangePostUrl={onChangePostUrl}
+              onSavePostUrl={onSavePostUrl}
               onImageClick={onImageClick}
               onImageClose={onImageClose}
             />
@@ -125,6 +127,7 @@ GridList.propTypes = {
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   onChangePostUrl: PropTypes.func,
+  onSavePostUrl: PropTypes.func,
   gridPosts: PropTypes.arrayOf(
     PropTypes.shape({
       posts: PropTypes.arrayOf(
@@ -151,6 +154,7 @@ GridList.defaultProps = {
   onImageClick: () => {},
   onImageClose: () => {},
   onChangePostUrl: () => {},
+  onSavePostUrl: () => {},
 };
 
 export default WithFeatureLoader(GridList);

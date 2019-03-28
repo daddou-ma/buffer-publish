@@ -7,6 +7,7 @@ export const actionTypes = keyWrapper('GRID', {
   POST_IMAGE_CLICKED: 0,
   POST_IMAGE_CLOSED: 0,
   UPDATE_POST_URL: 0,
+  SAVE_POST_URL: 0,
   COPY_TO_CLIPBOARD_RESULT: 0,
 });
 
@@ -68,6 +69,7 @@ const postReducer = (state, action) => {
         ...state,
         isLightboxOpen: false,
       };
+    case actionTypes.SAVE_POST_URL:
     case actionTypes.UPDATE_POST_URL:
       return {
         ...state,
@@ -80,6 +82,7 @@ const postReducer = (state, action) => {
 
 const postsReducer = (state, action) => {
   switch (action.type) {
+    case actionTypes.SAVE_POST_URL:
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED: {
@@ -133,6 +136,7 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         total: action.counts.sent,
       };
+    case actionTypes.SAVE_POST_URL:
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
@@ -159,6 +163,7 @@ export default (state = initialState, action) => {
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case queueActionTypes.POST_COUNT_UPDATED:
+    case actionTypes.SAVE_POST_URL:
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
@@ -197,6 +202,13 @@ export const actions = {
   }),
   handleChangePostUrl: ({ post, profileId, link }) => ({
     type: actionTypes.UPDATE_POST_URL,
+    updateId: post.id,
+    post,
+    profileId,
+    link,
+  }),
+  handleSavePostUrl: ({ post, profileId, link }) => ({
+    type: actionTypes.SAVE_POST_URL,
     updateId: post.id,
     post,
     profileId,

@@ -59,6 +59,13 @@ export default connect(
         link,
       }));
     },
+    onSavePostUrl: (post, link) => {
+      dispatch(actions.handleSavePostUrl({
+        post,
+        profileId: ownProps.profileId,
+        link,
+      }));
+    },
     handleCopyToClipboard: (copySuccess) => {
       dispatch(actions.handleCopyToClipboardResult({
         copySuccess,

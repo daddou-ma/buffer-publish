@@ -5,6 +5,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes as gridActionTypes } from './reducer';
+import { isValidURL } from './util';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
@@ -43,13 +44,43 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
       }
       break;
 
-    case gridActionTypes.UPDATE_POST_URL:
-      dispatch(dataFetchActions.fetch({
-        name: 'updatePostLink',
-        args: {
-          updateId: action.updateId,
-          link: action.link,
-        },
+    case gridActionTypes.SAVE_POST_URL:
+      if (action.link) {
+        if (isValidURL(action.link)) {
+          dispatch(dataFetchActions.fetch({
+            name: 'updatePostLink',
+            args: {
+              updateId: action.updateId,
+              link: action.link,
+            },
+          }));
+        } else {
+          dispatch(notificationActions.createNotification({
+            notificationType: 'error',
+            message: 'The URL format is invalid!',
+          }));
+        }
+      }
+      break;
+
+    case `updatePostLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      if (action.result && action.result.success) {
+        dispatch(notificationActions.createNotification({
+          notificationType: 'success',
+          message: 'Nice! Your changes have been saved.',
+        }));
+      } else {
+        dispatch(notificationActions.createNotification({
+          notificationType: 'error',
+          message: 'There was an error saving your changes!',
+        }));
+      }
+      break;
+
+    case `updatePostLink_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: 'There was an error saving your changes!',
       }));
       break;
     default:
