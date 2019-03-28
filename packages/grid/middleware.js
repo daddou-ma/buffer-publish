@@ -42,6 +42,16 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         }));
       }
       break;
+
+    case gridActionTypes.UPDATE_POST_URL:
+      dispatch(dataFetchActions.fetch({
+        name: 'updatePostLink',
+        args: {
+          updateId: action.updateId,
+          link: action.link,
+        },
+      }));
+      break;
     default:
       break;
   }

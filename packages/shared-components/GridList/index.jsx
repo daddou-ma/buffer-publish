@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Lightbox from 'react-images';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { Input, Link } from '@bufferapp/components';
+import { Link } from '@bufferapp/components';
+import Input from '@bufferapp/ui/Input';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 
 const gridContainer = {
@@ -77,15 +78,17 @@ const GridListPost = ({
       />
       <div style={urlWrapperStyle}>
         <Input
-          type="text"
-          input={{
-            value: post.link,
-            onChange: (e) => {
-              onChangePostUrl(post, e.target.value);
-            },
+          onChange={(e) => {
+            onChangePostUrl(post, e.target.value);
           }}
-          name={'postUrl'}
-          placeholder={'bufferapp.com'}
+          onBlur={(e) => {
+            console.log('hereee');
+            // onChangePostUrl(post, e.target.value);
+          }}
+          size="small"
+          name="postUrl"
+          placeholder="bufferapp.com"
+          value={post.link}
         />
       </div>
     </div>

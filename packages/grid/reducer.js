@@ -149,6 +149,9 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
+    case `updatePostLink_${dataFetchActionTypes.FETCH_START}`:
+    case `updatePostLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `updatePostLink_${dataFetchActionTypes.FETCH_FAIL}`:
     case `shortenUrl_${dataFetchActionTypes.FETCH_START}`:
     case `shortenUrl_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `shortenUrl_${dataFetchActionTypes.FETCH_FAIL}`:
