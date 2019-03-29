@@ -173,7 +173,7 @@ const GridPosts = ({
           onSavePostUrl={onSavePostUrl}
           onImageClick={onImageClick}
           onImageClose={onImageClose}
-          profile={profile.timezone}
+          timezone={profile.timezone}
         />
       </div>
     </ErrorBoundary>
