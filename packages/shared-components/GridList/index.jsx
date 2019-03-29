@@ -52,6 +52,9 @@ const scheduledIconStyle = {
   color: '#662D12',
 };
 
+/*
+* Getting tooltip text
+* */
 const getTooltipText = (post, timezone) => {
   const timestamp = post.scheduled ? post.due_at : post.sent_at;
   let slotMoment = moment.unix(timestamp);
