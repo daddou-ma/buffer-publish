@@ -20,7 +20,7 @@ const profile = {
   loading: false,
   business: true,
   service: 'instagram',
-  timezone: 'London/Europe',
+  timezone: 'Europe/London',
   avatar_https: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5c829d3838da0900d16ee5e4/3a9dd6c260165524ba20b2fd174a0873.original.jpg',
 };
 
