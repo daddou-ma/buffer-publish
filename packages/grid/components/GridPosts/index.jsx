@@ -10,7 +10,10 @@ import { Button } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import { ProfileBadge } from '@bufferapp/analyze-shared-components';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { openPreviewPage } from '../../util';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const headerStyle = {
   display: 'flex',
@@ -125,53 +128,55 @@ const GridPosts = ({
   }
 
   return (
-    <div>
-      <div style={headerStyle}>
-        <div style={profileHeaderStyle}>
-          <div style={profileBadgeStyle}>
-            <ProfileBadge
-              avatarUrl={profile.avatar_https}
-              service={profile.service}
-              avatarSize={48}
-              socialIconSize={24}
+    <ErrorBoundary>
+      <div>
+        <div style={headerStyle}>
+          <div style={profileHeaderStyle}>
+            <div style={profileBadgeStyle}>
+              <ProfileBadge
+                avatarUrl={profile.avatar_https}
+                service={profile.service}
+                avatarSize={48}
+                socialIconSize={24}
+              />
+            </div>
+          </div>
+          <div style={buttonsWrapperStyles}>
+            <div style={linkFieldStyle}>
+              <button
+                style={copyLinkButtonStyle}
+                onClick={() => {
+                  onCopyToClipboard(
+                    generatedUrl,
+                    handleCopyToClipboard,
+                  );
+                }}
+              >
+                {generatedUrl}
+                <div style={copyLinkStyle}>
+                  <CopyIcon size="medium" />
+                </div>
+              </button>
+            </div>
+            <Button
+              label={'Preview Page'}
+              type="secondary"
+              onClick={() => {
+                openPreviewPage(generatedUrl);
+              }}
             />
           </div>
         </div>
-        <div style={buttonsWrapperStyles}>
-          <div style={linkFieldStyle}>
-            <button
-              style={copyLinkButtonStyle}
-              onClick={() => {
-                onCopyToClipboard(
-                  generatedUrl,
-                  handleCopyToClipboard,
-                );
-              }}
-            >
-              {generatedUrl}
-              <div style={copyLinkStyle}>
-                <CopyIcon size="medium" />
-              </div>
-            </button>
-          </div>
-          <Button
-            label={'Preview Page'}
-            type="secondary"
-            onClick={() => {
-              openPreviewPage(generatedUrl);
-            }}
-          />
-        </div>
+        <GridList
+          gridPosts={gridPosts}
+          onChangePostUrl={onChangePostUrl}
+          onSavePostUrl={onSavePostUrl}
+          onImageClick={onImageClick}
+          onImageClose={onImageClose}
+          profile={profile.timezone}
+        />
       </div>
-      <GridList
-        gridPosts={gridPosts}
-        onChangePostUrl={onChangePostUrl}
-        onSavePostUrl={onSavePostUrl}
-        onImageClick={onImageClick}
-        onImageClose={onImageClose}
-        profile={profile.timezone}
-      />
-    </div>
+    </ErrorBoundary>
   );
 };
 

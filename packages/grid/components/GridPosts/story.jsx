@@ -57,10 +57,10 @@ storiesOf('GridPosts', module)
       loading={false}
       isLockedProfile={false}
       gridPosts={gridPosts}
-      profile={profile}
       generatedUrl="https://buff.ly/2UYXSK5"
       total={2}
       features={features}
+      onChangePostUrl={action('onChangePostUrl')}
       onImageClick={action('onImageClick')}
       onImageClose={action('onImageClose')}
     />

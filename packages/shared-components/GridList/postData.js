@@ -2,7 +2,7 @@ export const gridPosts = [
   {
     id: '5c829d3e38da0900fe311142',
     thumbnail: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5c829d3838da0900d16ee5e4/3a9dd6c260165524ba20b2fd174a0873.original.jpg',
-    due_at: 1552569720,
+    sent_at: 1552569720,
     scheduled: false,
     link: null,
   },
