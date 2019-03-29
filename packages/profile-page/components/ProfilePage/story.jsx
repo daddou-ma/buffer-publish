@@ -73,4 +73,15 @@ storiesOf('ProfilePage', module)
       }}
       history={stubbedHistory}
     />
+  ))
+  .add('should render gridPosts', () => (
+    <ProfilePage
+      match={{
+        params: {
+          profileId: 'someProfileId',
+          tabId: 'grid',
+        },
+      }}
+      history={stubbedHistory}
+    />
   ));

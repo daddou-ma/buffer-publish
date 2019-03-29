@@ -36,6 +36,7 @@ export default hot(module)(connect(
           requestName = 'queued';
           break;
         case 'drafts':
+        case 'grid':
         case 'awaitingApproval':
         case 'pendingApproval':
           requestName = 'draft';

@@ -55,6 +55,7 @@ class TabNavigation extends React.Component {
       profileId,
       isLockedProfile,
       isInstagramProfile,
+      hasLinkInBioFeatureFlip,
     } = this.props;
 
     return (
@@ -81,6 +82,11 @@ class TabNavigation extends React.Component {
           {/* Pro and up users or Team Members */}
           {(!features.isFreeUser() || isBusinessAccount) &&
             <Tab tabId={'drafts'}>Drafts</Tab>
+          }
+          {/* Pro and up users or Team Members */}
+          {(!features.isFreeUser() || isBusinessAccount)
+            && isInstagramProfile && hasLinkInBioFeatureFlip &&
+            <Tab tabId={'grid'}>Grid</Tab>
           }
           <Tab tabId={'settings'}>Settings</Tab>
         </Tabs>
@@ -159,6 +165,7 @@ TabNavigation.defaultProps = {
   profileId: null,
   isLockedProfile: false,
   isInstagramProfile: false,
+  hasLinkInBioFeatureFlip: false,
   isBusinessAccount: false,
   isManager: false,
 };
@@ -178,6 +185,7 @@ TabNavigation.propTypes = {
   profileId: PropTypes.string,
   isLockedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
+  hasLinkInBioFeatureFlip: PropTypes.bool,
 };
 
 export default WithFeatureLoader(TabNavigation);
