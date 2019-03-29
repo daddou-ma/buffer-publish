@@ -54,7 +54,6 @@ storiesOf('GridPosts', module)
   .add('should show grid posts', () => (
     <GridPosts
       profileId="abc"
-      profile={profile}
       loading={false}
       isLockedProfile={false}
       gridPosts={gridPosts}
