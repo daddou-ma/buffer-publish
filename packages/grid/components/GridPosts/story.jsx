@@ -53,15 +53,18 @@ storiesOf('GridPosts', module)
   .addDecorator(UpgradeModalDecorator)
   .add('should show grid posts', () => (
     <GridPosts
-      profileId="abc"
-      loading={false}
-      isLockedProfile={false}
-      gridPosts={gridPosts}
-      generatedUrl="https://buff.ly/2UYXSK5"
       total={2}
-      features={features}
-      onChangePostUrl={action('onChangePostUrl')}
+      loading={false}
+      gridPosts={gridPosts}
+      isLockedProfile={false}
+      isManager
+      isBusinessAccount
+      profile={profile}
       onImageClick={action('onImageClick')}
       onImageClose={action('onImageClose')}
+      onChangePostUrl={action('onChangePostUrl')}
+      onSavePostUrl={action('onSavePostUrl')}
+      generatedUrl="https://buff.ly/2UYXSK5"
+      features={features}
     />
   ));

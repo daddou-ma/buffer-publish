@@ -56,12 +56,9 @@ const getTooltipText = (post, timezone) => {
   const timestamp = post.scheduled ? post.due_at : post.sent_at;
   let slotMoment = moment.unix(timestamp);
   if (timezone) slotMoment = slotMoment.tz(timezone);
-  const shouldUse24hTime = false;
-
-  const humanReadableFormat = shouldUse24hTime ? 'MMM Do YYYY [at] H:mm' : 'MMM Do YYYY [at] h:mm a';
-  const humanReadableTime = slotMoment.format(humanReadableFormat);
-
+  const humanReadableTime = slotMoment.format('MMM Do YYYY [at] h:mm a');
   const sentText = post.scheduled ? 'will be' : 'was';
+
   return `This post ${sentText} sent ${humanReadableTime}`;
 };
 
