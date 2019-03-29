@@ -8,12 +8,17 @@ import { actions } from './reducer';
 
 const { formatAnalyticsProfileObj } = require('./analytics');
 
+const reorderProfilesByUnlocked = profiles => (
+  // orders unlocked profiles first, followed by locked
+  profiles.sort((a, b) => (a.disabled - b.disabled))
+);
+
 export default hot(module)(connect(
   (state, ownProps) => ({
     loading: state.profileSidebar.loading,
     selectedProfile: state.profileSidebar.selectedProfile,
     selectedProfileId: ownProps.profileId,
-    profiles: state.profileSidebar.profiles,
+    profiles: reorderProfilesByUnlocked(state.profileSidebar.profiles),
     translations: state.i18n.translations['profile-sidebar'],
     profileLimit: state.appSidebar.user.profile_limit,
     hasInstagram: state.profileSidebar.hasInstagram,
