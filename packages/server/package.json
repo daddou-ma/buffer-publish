@@ -13,7 +13,7 @@
     "@bufferapp/logger": "0.7.0",
     "@bufferapp/micro-rpc": "0.1.7",
     "@bufferapp/publish-formatters": "1.9.30",
-    "@bufferapp/publish-parsers": "1.15.0",
+    "@bufferapp/publish-parsers": "1.15.1",
     "@bufferapp/session-manager": "0.7.1",
     "@bufferapp/shutdown-helper": "0.2.0",
     "@bugsnag/js": "^5.0.1",
