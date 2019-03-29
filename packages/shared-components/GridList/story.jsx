@@ -33,7 +33,7 @@ const store = storeFake({
   generatedUrl: 'https://buff.ly/2UYXSK5',
   profile,
   productFeatures: {
-    planName: 'free',
+    planName: 'business',
     features: {},
   },
 });
@@ -44,7 +44,7 @@ const UpgradeModalDecorator = storyFn => (
   </Provider>
 );
 
-storiesOf('GridPosts', module)
+storiesOf('GridLists', module)
   .addDecorator(checkA11y)
   .addDecorator(UpgradeModalDecorator)
   .add('should show grid list', () => (

@@ -5,6 +5,7 @@ import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Link } from '@bufferapp/components';
 import Input from '@bufferapp/ui/Input';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
+import moment from 'moment-timezone';
 
 const gridContainer = {
   display: 'flex',
@@ -51,6 +52,19 @@ const scheduledIconStyle = {
   color: '#662D12',
 };
 
+const getTooltipText = (post, timezone) => {
+  const timestamp = post.scheduled ? post.due_at : post.sent_at;
+  let slotMoment = moment.unix(timestamp);
+  if (timezone) slotMoment = slotMoment.tz(timezone);
+  const shouldUse24hTime = false;
+
+  const humanReadableFormat = shouldUse24hTime ? 'MMM Do YYYY [at] H:mm' : 'MMM Do YYYY [at] h:mm a';
+  const humanReadableTime = slotMoment.format(humanReadableFormat);
+
+  const sentText = post.scheduled ? 'will be' : 'was';
+  return `This post ${sentText} sent ${humanReadableTime}`;
+};
+
 const GridListPost = ({
   post,
   index,
@@ -58,11 +72,12 @@ const GridListPost = ({
   onSavePostUrl,
   onImageClick,
   onImageClose,
+  timezone,
 }) => {
   return (
     <div style={itemStyle(index)}>
       <Link onClick={() => onImageClick({ post })}>
-        <div style={imgWrapperStyle(post.thumbnail)}>
+        <div style={imgWrapperStyle(post.thumbnail)} title={getTooltipText(post, timezone)}>
           {post.scheduled &&
             <div style={scheduledIconStyle}>
               <ClockIcon size="medium" />
@@ -101,6 +116,7 @@ const GridList = ({
   onSavePostUrl,
   onImageClick,
   onImageClose,
+  timezone,
 }) => {
   return (
     <div style={gridContainer}>
@@ -111,6 +127,7 @@ const GridList = ({
               key={`gridListPost-${post.id}`}
               index={index}
               post={post}
+              timezone={timezone}
               onChangePostUrl={onChangePostUrl}
               onSavePostUrl={onSavePostUrl}
               onImageClick={onImageClick}
@@ -124,6 +141,7 @@ const GridList = ({
 };
 
 GridList.propTypes = {
+  timezone: PropTypes.string,
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   onChangePostUrl: PropTypes.func,
@@ -141,15 +159,18 @@ GridList.propTypes = {
 
 GridListPost.propTypes = {
   index: PropTypes.number,
+  timezone: PropTypes.string,
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   onChangePostUrl: PropTypes.func,
+  onSavePostUrl: PropTypes.func,
   post: PropTypes.shape({
     text: PropTypes.string,
   }),
 };
 
 GridList.defaultProps = {
+  timezone: '',
   gridPosts: [],
   onImageClick: () => {},
   onImageClose: () => {},

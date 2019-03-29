@@ -21,7 +21,8 @@ module.exports = method(
           id: post.id,
           thumbnail: post.thumbnail,
           scheduled: post.scheduled,
-          due_at: post.due_at * 1000,
+          due_at: post.due_at,
+          sent_at: post.sent_at,
           link: post.link,
         };
       });

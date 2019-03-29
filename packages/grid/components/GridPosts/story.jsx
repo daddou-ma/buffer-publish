@@ -18,7 +18,9 @@ const storeFake = state => ({
 const profile = {
   id: 'abc',
   loading: false,
+  business: true,
   service: 'instagram',
+  timezone: 'London/Europe',
   avatar_https: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5c829d3838da0900d16ee5e4/3a9dd6c260165524ba20b2fd174a0873.original.jpg',
 };
 
@@ -33,7 +35,7 @@ const store = storeFake({
   generatedUrl: 'https://buff.ly/2UYXSK5',
   profile,
   productFeatures: {
-    planName: 'free',
+    planName: 'business',
     features: {},
   },
 });

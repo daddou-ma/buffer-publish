@@ -5,6 +5,7 @@ import {
   EmptyState,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
@@ -91,6 +92,7 @@ const GridPosts = ({
   profile,
   handleCopyToClipboard,
   generatedUrl,
+  features,
 }) => {
   if (loading) {
     return (
@@ -102,6 +104,10 @@ const GridPosts = ({
 
   if (isLockedProfile) {
     return <LockedProfileNotification />;
+  }
+
+  if (features.isFreeUser()) {
+    return <div />;
   }
 
   if (total < 1) {
@@ -163,6 +169,7 @@ const GridPosts = ({
         onSavePostUrl={onSavePostUrl}
         onImageClick={onImageClick}
         onImageClose={onImageClose}
+        profile={profile.timezone}
       />
     </div>
   );
@@ -186,6 +193,7 @@ GridPosts.propTypes = {
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   handleCopyToClipboard: PropTypes.func,
+  features: PropTypes.object.isRequired, // eslint-disable-line
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   generatedUrl: PropTypes.string,
@@ -193,6 +201,7 @@ GridPosts.propTypes = {
   profile: PropTypes.shape({
     service: PropTypes.string,
     avatar_https: PropTypes.string,
+    timezone: PropTypes.string,
   }),
 };
 
@@ -200,8 +209,8 @@ GridPosts.defaultProps = {
   loading: true,
   total: 0,
   gridPosts: [],
-  isManager: true,
   generatedUrl: '',
+  isManager: false,
   isBusinessAccount: false,
   isLockedProfile: false,
   onChangePostUrl: () => {},
@@ -212,4 +221,4 @@ GridPosts.defaultProps = {
   profile: {},
 };
 
-export default GridPosts;
+export default WithFeatureLoader(GridPosts);
