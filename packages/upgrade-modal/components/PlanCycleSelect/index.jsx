@@ -64,18 +64,26 @@ PlanCycleButton.defaultProps = {
   first: false,
 };
 
-const PlanCycleSelect = ({ translations, cycle, selectCycle }) => (
+const getProYearlyPlan = (isNonprofit, { proPlanNonprofitYearlyPrice, proPlanYearlyPrice }) => (
+  isNonprofit ? proPlanNonprofitYearlyPrice : proPlanYearlyPrice
+);
+
+const getProMonthlyPlan = (isNonprofit, { proPlanNonprofitMonthlyPrice, proPlanMonthlyPrice }) => (
+  isNonprofit ? proPlanNonprofitMonthlyPrice : proPlanMonthlyPrice
+);
+
+const PlanCycleSelect = ({ translations, cycle, selectCycle, isNonprofit }) => (
   <div style={{ display: 'flex' }}>
     <PlanCycleButton
       first
-      label={translations.proPlanMonthlyPrice}
+      label={getProMonthlyPlan(isNonprofit, translations)}
       description={translations.proPlanMonthlyDescription}
       cycle={'month'}
       selectedCycle={cycle}
       selectCycle={selectCycle}
     />
     <PlanCycleButton
-      label={translations.proPlanYearlyPrice}
+      label={getProYearlyPlan(isNonprofit, translations)}
       description={translations.proPlanYearlyDescription}
       cycle={'year'}
       selectedCycle={cycle}
@@ -88,6 +96,7 @@ PlanCycleSelect.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   cycle: PropTypes.string.isRequired,
   selectCycle: PropTypes.func.isRequired,
+  isNonprofit: PropTypes.bool.isRequired,
 };
 
 export default PlanCycleSelect;
