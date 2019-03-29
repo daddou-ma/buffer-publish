@@ -43,7 +43,6 @@ describe('Grid', () => {
       <Provider store={store}>
         <Grid
           profileId="abc"
-          onShareAgainClick={jest.fn()}
         />
       </Provider>,
     );

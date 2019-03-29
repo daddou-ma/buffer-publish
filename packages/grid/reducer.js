@@ -90,6 +90,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case `gridPosts_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
+        loading: true,
       };
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
       const gridPosts = action.result.updates;

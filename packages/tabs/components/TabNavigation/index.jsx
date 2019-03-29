@@ -82,7 +82,8 @@ class TabNavigation extends React.Component {
           {(!features.isFreeUser() || isBusinessAccount) &&
             <Tab tabId={'drafts'}>Drafts</Tab>
           }
-          {isInstagramProfile &&
+          {/* Pro and up users or Team Members */}
+          {(!features.isFreeUser() || isBusinessAccount) && isInstagramProfile &&
             <Tab tabId={'grid'}>Grid</Tab>
           }
           <Tab tabId={'settings'}>Settings</Tab>
