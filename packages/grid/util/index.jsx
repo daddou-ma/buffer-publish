@@ -1,3 +1,7 @@
+export const getBaseURL = () => {
+  return window.location.hostname === 'publish.local.buffer.com' ? 'local.buffer.com' : 'buffer.com';
+};
+
 export const openPreviewPage = (url) => {
   window.open(url, '_blank');
 };

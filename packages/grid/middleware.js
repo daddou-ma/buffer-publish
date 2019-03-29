@@ -5,7 +5,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes as gridActionTypes } from './reducer';
-import { isValidURL } from './util';
+import { isValidURL, getBaseURL } from './util';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
@@ -24,7 +24,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         name: 'shortenUrl',
         args: {
           profileId: action.args.profileId,
-          url: `buffer.com/p/${action.args.profileId}`,
+          url: `${getBaseURL()}/p/${action.args.profileId}`,
         },
       }));
       break;
