@@ -12,4 +12,18 @@ storiesOf('UpgradeModal', module)
       translations={translations['upgrade-modal']}
       cycle="year"
     />
+  ))
+  .add('user has nonprofit status', () => (
+    <UpgradeModal
+      translations={translations['upgrade-modal']}
+      cycle="year"
+      isNonprofit
+    />
+  ))
+  .add('user does not have nonprofit status', () => (
+    <UpgradeModal
+      translations={translations['upgrade-modal']}
+      cycle="year"
+      isNonprofit={false}
+    />
   ));

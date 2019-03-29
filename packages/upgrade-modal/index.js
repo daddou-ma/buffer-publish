@@ -9,6 +9,7 @@ export default connect(
     cycle: state.upgradeModal.cycle,
     translations: state.i18n.translations['upgrade-modal'],
     validating: state.stripe.validating,
+    isNonprofit: state.appSidebar.user.isNonprofit,
   }),
   dispatch => ({
     storeValue: (id, value) => dispatch(actions.storeValue(id, value)),
