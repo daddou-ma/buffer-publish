@@ -52,7 +52,7 @@ storiesOf('GridLists', module)
   .add('should show grid list', () => (
     <GridList
       profileId="abc"
-      timezone="London/Europe"
+      timezone={profile.timezone}
       gridPosts={gridPosts}
       onChangePostUrl={action('onChangePostUrl')}
       onSavePostUrl={action('onSavePostUrl')}
