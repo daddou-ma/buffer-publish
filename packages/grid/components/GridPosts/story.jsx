@@ -40,6 +40,8 @@ const store = storeFake({
   },
 });
 
+const features = { isFreeUser: () => false };
+
 const UpgradeModalDecorator = storyFn => (
   <Provider store={store}>
     {storyFn()}
@@ -58,6 +60,7 @@ storiesOf('GridPosts', module)
       profile={profile}
       generatedUrl="https://buff.ly/2UYXSK5"
       total={2}
+      features={features}
       onImageClick={action('onImageClick')}
       onImageClose={action('onImageClose')}
     />
