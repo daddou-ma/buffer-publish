@@ -2,10 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { Text } from '@bufferapp/components';
-
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import { ProfileBadgeIcon } from '../ProfileBadge';
 
-const handleClick = (network, url) => {
+const handleProfileLimitReached = (features, showUpgradeModal, goToConnectSocialAccount) => (
+  features.isFreeUser() ? showUpgradeModal() : goToConnectSocialAccount()
+);
+
+const handleClick = (
+  network,
+  url,
+  profiles,
+  profileLimit,
+  features,
+  showUpgradeModal,
+  goToConnectSocialAccount,
+) => {
+  if (profiles.length >= profileLimit) {
+    handleProfileLimitReached(features, showUpgradeModal, goToConnectSocialAccount);
+    return;
+  }
   const goConnectProfile = () => {
     if (network === 'instagram') {
       /**
@@ -33,7 +49,7 @@ const handleClick = (network, url) => {
   });
 };
 
-const getStyle = (hovered) => ({
+const getStyle = hovered => ({
   display: 'flex',
   alignItems: 'center',
   lineHeight: 1,
@@ -55,8 +71,16 @@ class ProfileConnectShortcut extends React.Component {
     };
   }
   render() {
-    const { label, network, url } = this.props;
-
+    const {
+      label,
+      network,
+      url,
+      profiles,
+      profileLimit,
+      features,
+      showUpgradeModal,
+      goToConnectSocialAccount,
+    } = this.props;
     return (
       <a
         onMouseEnter={() => this.setState({ hovered: true })}
@@ -65,7 +89,15 @@ class ProfileConnectShortcut extends React.Component {
         href="#"
         key={`${network}-connect`}
         notifications=""
-        onClick={() => handleClick(network, url)}
+        onClick={() => handleClick(
+          network,
+          url,
+          profiles,
+          profileLimit,
+          features,
+          showUpgradeModal,
+          goToConnectSocialAccount,
+        )}
       >
         <ProfileBadgeIcon type={network} />
         <span style={{ marginLeft: '8px' }}>
@@ -80,6 +112,15 @@ ProfileConnectShortcut.propTypes = {
   label: PropTypes.string.isRequired,
   network: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+  profiles: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+    }),
+  ).isRequired,
+  profileLimit: PropTypes.number.isRequired,
+  features: PropTypes.object.isRequired, // eslint-disable-line
+  goToConnectSocialAccount: PropTypes.func.isRequired,
+  showUpgradeModal: PropTypes.func.isRequired,
 };
 
-export default ProfileConnectShortcut;
+export default WithFeatureLoader(ProfileConnectShortcut);

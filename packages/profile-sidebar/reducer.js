@@ -9,6 +9,7 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   PROFILE_PAUSED: 0,
   PUSHER_PROFILE_PAUSED_STATE: 0,
   CONNECT_SOCIAL_ACCOUNT: 0,
+  MANAGE_SOCIAL_ACCOUNT: 0,
   PROFILE_DROPPED: 0,
 });
 
@@ -155,7 +156,10 @@ export const actions = {
     type: actionTypes.PROFILE_PAUSED,
     profileId,
   }),
-  handleConnectSocialAccountClick: () => ({
+  handleManageSocialAccountClick: () => ({
+    type: actionTypes.MANAGE_SOCIAL_ACCOUNT,
+  }),
+  handleConnectSocialAccount: () => ({
     type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
   }),
   onDropProfile: ({ commit, dragIndex, hoverIndex, profileLimit }) => ({

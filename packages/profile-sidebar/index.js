@@ -47,11 +47,17 @@ export default hot(module)(connect(
         hoverIndex,
       }));
     },
-    onConnectSocialAccountClick: () => {
-      dispatch(actions.handleConnectSocialAccountClick());
+    onManageSocialAccountClick: () => {
+      dispatch(actions.handleManageSocialAccountClick());
     },
     showProfilesDisconnectedModal: () => {
       dispatch(modalActions.showProfilesDisconnectedModal());
+    },
+    showUpgradeModal: () => {
+      dispatch(modalActions.showUpgradeModal({ source: 'app_header' }));
+    },
+    goToConnectSocialAccount: () => {
+      dispatch(actions.handleConnectSocialAccount());
     },
   }),
 )(ProfileSidebar));

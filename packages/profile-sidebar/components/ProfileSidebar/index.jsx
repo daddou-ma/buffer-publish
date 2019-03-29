@@ -77,9 +77,11 @@ const ProfileSidebar = ({
   translations,
   onProfileClick,
   onDropProfile,
-  onConnectSocialAccountClick,
+  onManageSocialAccountClick,
   profileLimit,
   showProfilesDisconnectedModal,
+  showUpgradeModal,
+  goToConnectSocialAccount,
 
   // Flags for showing connection shortcut buttons
   hasInstagram,
@@ -105,16 +107,28 @@ const ProfileSidebar = ({
         label="Connect Instagram"
         network="instagram"
         url="https://buffer.com/oauth/instagram"
+        profileLimit={profileLimit}
+        profiles={profiles}
+        showUpgradeModal={showUpgradeModal}
+        goToConnectSocialAccount={goToConnectSocialAccount}
       />}
       {!hasFacebook && <ProfileConnectShortcut
         label="Connect Facebook"
         network="facebook"
         url="https://buffer.com/oauth/facebook/choose"
+        profileLimit={profileLimit}
+        profiles={profiles}
+        showUpgradeModal={showUpgradeModal}
+        goToConnectSocialAccount={goToConnectSocialAccount}
       />}
       {!hasTwitter && <ProfileConnectShortcut
         label="Connect Twitter"
         network="twitter"
         url="https://buffer.com/oauth/twitter"
+        profileLimit={profileLimit}
+        profiles={profiles}
+        showUpgradeModal={showUpgradeModal}
+        goToConnectSocialAccount={goToConnectSocialAccount}
       />}
       <div style={buttonDividerStyle}>
         <Divider />
@@ -124,7 +138,7 @@ const ProfileSidebar = ({
         type="secondary"
         fullWidth
         onClick={() => {
-          onConnectSocialAccountClick();
+          onManageSocialAccountClick();
         }}
       />
     </div>
@@ -134,7 +148,9 @@ const ProfileSidebar = ({
 ProfileSidebar.propTypes = {
   loading: PropTypes.bool.isRequired,
   onProfileClick: ProfileList.propTypes.onProfileClick,
-  onConnectSocialAccountClick: PropTypes.func.isRequired,
+  onManageSocialAccountClick: PropTypes.func.isRequired,
+  goToConnectSocialAccount: PropTypes.func.isRequired,
+  showUpgradeModal: PropTypes.func.isRequired,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
   translations: ProfileList.propTypes.translations,
