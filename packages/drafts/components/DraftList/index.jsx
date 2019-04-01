@@ -56,6 +56,7 @@ const DraftList = ({
   tabId,
   isLockedProfile,
   canStartBusinessTrial,
+  hasFirstCommentFlip,
 }) => {
   if (features.isProUser()) {
     const startTrial = () => window.location.assign('https://buffer.com/billing/start-trial?trialType=small&next=https://publish.buffer.com');
@@ -139,6 +140,7 @@ const DraftList = ({
               onRescheduleClick={onRescheduleClick}
               draggable={false}
               type={'drafts'}
+              hasFirstCommentFlip={hasFirstCommentFlip}
             /> :
             <Empty
               isManager={manager}
@@ -174,6 +176,7 @@ DraftList.propTypes = {
   editMode: PropTypes.bool,
   tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
   isLockedProfile: PropTypes.bool,
+  hasFirstCommentFlip: PropTypes.bool,
 };
 
 DraftList.defaultProps = {
@@ -183,6 +186,7 @@ DraftList.defaultProps = {
   editMode: false,
   tabId: null,
   isLockedProfile: false,
+  hasFirstCommentFlip: false,
 };
 
 export default WithFeatureLoader(DraftList);

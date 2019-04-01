@@ -41,6 +41,7 @@ const TextDraft = ({
   scheduledAt,
   view,
   basic,
+  hasFirstCommentFlip,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -91,6 +92,7 @@ const TextDraft = ({
       scheduledAt={scheduledAt}
       view={view}
       basic={basic}
+      hasFirstCommentFlip={hasFirstCommentFlip}
     >
       {children}
     </Draft>

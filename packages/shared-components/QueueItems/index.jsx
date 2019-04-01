@@ -62,6 +62,7 @@ const renderPost = ({
   onDropPost,
   draggable,
   basic,
+  hasFirstCommentFlip,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -78,6 +79,7 @@ const renderPost = ({
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
     onDropPost,
+    hasFirstCommentFlip,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -139,6 +141,7 @@ const renderDraft = ({
   onImageClickNext,
   onImageClickPrev,
   onImageClose,
+  hasFirstCommentFlip,
 }) => {
   const draftWithEventHandlers = {
     ...draft,
@@ -156,6 +159,7 @@ const renderDraft = ({
     onImageClickNext: () => onImageClickNext({ draft }),
     onImageClickPrev: () => onImageClickPrev({ draft }),
     onImageClose: () => onImageClose({ draft }),
+    hasFirstCommentFlip,
   };
   let DraftComponent = draftTypeComponentMap.get(draft.type);
   DraftComponent = DraftComponent || TextDraft;

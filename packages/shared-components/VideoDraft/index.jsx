@@ -33,6 +33,7 @@ const VideoDraft = ({
   scheduledAt,
   view,
   basic,
+  hasFirstCommentFlip,
 }) =>
   <ImageDraft
     hasPermission={hasPermission}
@@ -66,6 +67,7 @@ const VideoDraft = ({
     scheduledAt={scheduledAt}
     view={view}
     basic={basic}
+    hasFirstCommentFlip={hasFirstCommentFlip}
   />;
 
 VideoDraft.propTypes = ImageDraft.propTypes;
