@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Button } from '@bufferapp/components';
+import { Text } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
 import { Row } from '@bufferapp/publish-shared-components';
 import Modal from '../Modal';
 
@@ -23,9 +24,11 @@ const ChangePassword = ({ showModal, onRequestOpenModal, onRequestCloseModal, on
         </Text>
       </div>
     </div>
-    <Button onClick={onRequestOpenModal} tertiary>
-      Change Your Password
-    </Button>
+    <Button
+      label="Change Your Password"
+      onClick={() => window.location.assign('https://account.buffer.com?redirect=https%3A%2F%2Fpublish.buffer.com')}
+      type="secondary"
+    />
     {showModal ? <Modal onRequestCloseModal={onRequestCloseModal} onSubmit={onSubmit} /> : null}
   </Row>
 );

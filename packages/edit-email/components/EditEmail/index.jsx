@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Link } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
+import { Text } from '@bufferapp/components';
 import {
   SensitiveData,
 } from '@bufferapp/publish-shared-components';
@@ -21,17 +22,13 @@ const rowStyle = {
 
 const EditEmail = ({ email, onClick, displayModal, updateEmail, saveEmail, hideModal }) => (
   <div style={rowStyle}>
-    <Text color={'black'} size={'mini'}>Email address</Text>
+    <Text color={'black'} size={'mini'}>Email and Password</Text>
     <section>
-      <SensitiveData>
-        <Text size={'mini'} color={'outerSpace'}>{email}</Text>
-      </SensitiveData>
       <span style={editStyle}>
-        <Text size={'mini'}>
-          <Link onClick={onClick} unstyled href="#">
-            Edit
-          </Link>
-        </Text>
+        <Button
+          label="Edit"
+          onClick={() => window.location.assign('https://account.buffer.com?redirect=https%3A%2F%2Fpublish.buffer.com')}
+        />
       </span>
     </section>
     {displayModal && (
