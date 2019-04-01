@@ -16,11 +16,14 @@ import {
   EmptyState,
   SensitiveData,
 } from '@bufferapp/publish-shared-components';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 import PostingTimeForm from '../PostingTimeForm';
 import TimezoneInputForm from '../TimezoneInputForm';
 import debounce from '../../utils/debounce';
 import ConfirmClear from '../ConfirmClear';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const headerStyle = {
   marginBottom: '0.5rem',
@@ -130,155 +133,157 @@ const PostingSchedule = ({
 
   const debouncedOnChange = debounce(onGetTimezones, 500);
   return (
-    <div>
-      <div style={headerStyle}>
-        <SensitiveData>
-          <Text color="black">{postingScheduleHeader}</Text>
-        </SensitiveData>
-      </div>
-      <Divider />
-      <div style={timezoneAndPauseContainerStyle}>
-        <div style={timezoneStyle}>
-          <TimezoneInputForm
-            handleSubmit={({ city, timezone }) => onUpdateTimezone({ city, timezone })}
-            items={items}
-            onTimezoneChange={debouncedOnChange}
-            onTimezoneInputFocus={onTimezoneInputFocus}
-            onTimezoneInputBlur={onTimezoneInputBlur}
-            disabled={!isManager}
-          />
+    <ErrorBoundary>
+      <div>
+        <div style={headerStyle}>
+          <SensitiveData>
+            <Text color="black">{postingScheduleHeader}</Text>
+          </SensitiveData>
         </div>
-        {isManager && paused &&
-          <div style={pauseQueueContainerStyle}>
-            <Text size="small">
-              Your queue has been paused&nbsp;
-            </Text>
-            <Text size="small">
-              <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
-                 Learn more
-              </Link>
-            </Text>
-            <div style={pauseButtonContainerStyle}>
-              <Button
-                onClick={onUnpauseClick}
-                small
-              >
-                Resume Queue
-              </Button>
-            </div>
-          </div>
-        }
-        {isManager && !paused &&
-          <div style={pauseQueueContainerStyle}>
-            <Text size="small">
-              Stop all posts from being sent on this Social Account?&nbsp;
-            </Text>
-            <Text size="small">
-              <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
-                 Learn more
-              </Link>
-            </Text>
-            <div style={pauseButtonContainerStyle}>
-              <Button
-                onClick={onPauseClick}
-                small
-              >
-                Pause Queue
-              </Button>
-            </div>
-          </div>
-        }
-      </div>
-      {isManager &&
-        <span>
-          <Divider />
-          <div style={sectionStyle}>
-            <PostingTimeForm
-              onSubmit={({ day, time }) => {
-                // spreading props so we don't modify the original object
-                let { hours, minutes } = time;
-                // check for null
-                hours = hours || 0;
-                minutes = minutes || 0;
-
-                hours = parseInt(hours, 10) < 10 ? `0${hours}` : hours;
-                minutes = parseInt(minutes, 10) < 10 ? `0${minutes}` : minutes;
-
-                onAddPostingTime({
-                  day,
-                  time: { hours, minutes },
-                });
-              }}
-              twentyfourHourTime={hasTwentyFourHourTimeFormat}
+        <Divider />
+        <div style={timezoneAndPauseContainerStyle}>
+          <div style={timezoneStyle}>
+            <TimezoneInputForm
+              handleSubmit={({ city, timezone }) => onUpdateTimezone({ city, timezone })}
+              items={items}
+              onTimezoneChange={debouncedOnChange}
+              onTimezoneInputFocus={onTimezoneInputFocus}
+              onTimezoneInputBlur={onTimezoneInputBlur}
+              disabled={!isManager}
             />
           </div>
-        </span>
-      }
-      <Divider />
-      <div style={postingTimesSection}>
-        <div style={postingTimesStyle}>
-          <Text
-            color="black"
-            weight="thin"
-            size="small"
-          >
-            Posting times
-            {/* Need to move the tooltip a bit for visual accuracy! */}
-            <div style={{ display: 'inline-block', position: 'relative', top: '4px', left: '5px' }}>
-              <IconArrowPopover icon={<QuestionIcon />} position="below" shadow oneLine={false} width="320px" label="Posting Times">
-                <div style={{ padding: '.5rem .25rem' }}>
-                  {/* eslint-disable max-len */}
-                  Your posting schedule tells Buffer when to send out posts in your Queue. <br /><br />
-                  For example, the next 10 posts you add to your Queue will go out in the next 10 upcoming time/date slots you
-                  decide below. You can change this schedule at any time!
-                </div>
-              </IconArrowPopover>
+          {isManager && paused &&
+            <div style={pauseQueueContainerStyle}>
+              <Text size="small">
+                Your queue has been paused&nbsp;
+              </Text>
+              <Text size="small">
+                <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
+                   Learn more
+                </Link>
+              </Text>
+              <div style={pauseButtonContainerStyle}>
+                <Button
+                  onClick={onUnpauseClick}
+                  small
+                >
+                  Resume Queue
+                </Button>
+              </div>
             </div>
-          </Text>
+          }
+          {isManager && !paused &&
+            <div style={pauseQueueContainerStyle}>
+              <Text size="small">
+                Stop all posts from being sent on this Social Account?&nbsp;
+              </Text>
+              <Text size="small">
+                <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
+                   Learn more
+                </Link>
+              </Text>
+              <div style={pauseButtonContainerStyle}>
+                <Button
+                  onClick={onPauseClick}
+                  small
+                >
+                  Pause Queue
+                </Button>
+              </div>
+            </div>
+          }
         </div>
-        {!emptySchedule && isManager &&
-          <Button secondary onClick={onClearAllClick}>
-            Clear all Posting Times
-          </Button>}
-        {showClearAllModal && <Popover
-          onOverlayClick={closePopover}
-        >
-          <ConfirmClear
-            onConfirmClick={onConfirmClearClick}
-            onCancelClick={onCancelClearClick}
-            profileName={profileName}
-            profileType={profileType}
-            profileService={profileService}
-            onCloseClick={closePopover}
-            avatar={avatar}
-          />
-        </Popover>}
-        <div style={tableStyle}>
-          <Divider color="white" />
-          {scheduleLoading &&
-            <div style={scheduleLoadingContainerStyle}>
-              <LoadingAnimation />
-            </div>}
-          {!scheduleLoading && emptySchedule &&
-            <EmptyState
-              title="Looks like you don't have any posting times set!"
-              subtitle="Add a new posting time to start publishing posts from your queue."
-              heroImg="https://s3.amazonaws.com/buffer-publish/images/clock2x.png"
-              heroImgSize={{ width: '40px', height: '40px' }}
-              height={'30vh'}
-            />}
-          {!emptySchedule &&
-            <ScheduleTable
-              disabled={!isManager}
-              days={days}
-              select24Hours={hasTwentyFourHourTimeFormat}
-              onRemoveTimeClick={onRemoveTimeClick}
-              onUpdateTime={onUpdateTime}
-              onPauseToggleClick={onPauseToggleClick}
-            />}
+        {isManager &&
+          <span>
+            <Divider />
+            <div style={sectionStyle}>
+              <PostingTimeForm
+                onSubmit={({ day, time }) => {
+                  // spreading props so we don't modify the original object
+                  let { hours, minutes } = time;
+                  // check for null
+                  hours = hours || 0;
+                  minutes = minutes || 0;
+
+                  hours = parseInt(hours, 10) < 10 ? `0${hours}` : hours;
+                  minutes = parseInt(minutes, 10) < 10 ? `0${minutes}` : minutes;
+
+                  onAddPostingTime({
+                    day,
+                    time: { hours, minutes },
+                  });
+                }}
+                twentyfourHourTime={hasTwentyFourHourTimeFormat}
+              />
+            </div>
+          </span>
+        }
+        <Divider />
+        <div style={postingTimesSection}>
+          <div style={postingTimesStyle}>
+            <Text
+              color="black"
+              weight="thin"
+              size="small"
+            >
+              Posting times
+              {/* Need to move the tooltip a bit for visual accuracy! */}
+              <div style={{ display: 'inline-block', position: 'relative', top: '4px', left: '5px' }}>
+                <IconArrowPopover icon={<QuestionIcon />} position="below" shadow oneLine={false} width="320px" label="Posting Times">
+                  <div style={{ padding: '.5rem .25rem' }}>
+                    {/* eslint-disable max-len */}
+                    Your posting schedule tells Buffer when to send out posts in your Queue. <br /><br />
+                    For example, the next 10 posts you add to your Queue will go out in the next 10 upcoming time/date slots you
+                    decide below. You can change this schedule at any time!
+                  </div>
+                </IconArrowPopover>
+              </div>
+            </Text>
+          </div>
+          {!emptySchedule && isManager &&
+            <Button secondary onClick={onClearAllClick}>
+              Clear all Posting Times
+            </Button>}
+          {showClearAllModal && <Popover
+            onOverlayClick={closePopover}
+          >
+            <ConfirmClear
+              onConfirmClick={onConfirmClearClick}
+              onCancelClick={onCancelClearClick}
+              profileName={profileName}
+              profileType={profileType}
+              profileService={profileService}
+              onCloseClick={closePopover}
+              avatar={avatar}
+            />
+          </Popover>}
+          <div style={tableStyle}>
+            <Divider color="white" />
+            {scheduleLoading &&
+              <div style={scheduleLoadingContainerStyle}>
+                <LoadingAnimation />
+              </div>}
+            {!scheduleLoading && emptySchedule &&
+              <EmptyState
+                title="Looks like you don't have any posting times set!"
+                subtitle="Add a new posting time to start publishing posts from your queue."
+                heroImg="https://s3.amazonaws.com/buffer-publish/images/clock2x.png"
+                heroImgSize={{ width: '40px', height: '40px' }}
+                height={'30vh'}
+              />}
+            {!emptySchedule &&
+              <ScheduleTable
+                disabled={!isManager}
+                days={days}
+                select24Hours={hasTwentyFourHourTimeFormat}
+                onRemoveTimeClick={onRemoveTimeClick}
+                onUpdateTime={onUpdateTime}
+                onPauseToggleClick={onPauseToggleClick}
+              />}
+          </div>
         </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 };
 

@@ -49,6 +49,7 @@ const UpgradeModal = ({
   storeValue,
   selectCycle,
   hideModal,
+  isNonprofit,
 }) => (<div style={{ position: 'fixed', zIndex: '3000' }}>
   <Popover onOverlayClick={hideModal}>
     <div style={{ maxHeight: '100vh', overflow: 'auto' }}>
@@ -82,6 +83,7 @@ const UpgradeModal = ({
               translations={translations}
               cycle={cycle}
               selectCycle={selectCycle}
+              isNonprofit={isNonprofit}
             />
 
             <div style={{ textAlign: 'center', margin: '1.5rem 0 1rem' }}>
@@ -168,6 +170,7 @@ UpgradeModal.propTypes = {
   validating: PropTypes.bool.isRequired,
   selectCycle: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
+  isNonprofit: PropTypes.bool.isRequired,
 };
 
 export default UpgradeModal;

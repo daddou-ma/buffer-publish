@@ -6,6 +6,9 @@ import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
 import InstagramReminders from '../InstagramReminders';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const GeneralSettings = ({
   isInstagramProfile,
@@ -43,53 +46,55 @@ const GeneralSettings = ({
   }
 
   return (
-    <div>
-      {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
-        <InstagramDirectPosting
-          onDirectPostingClick={onSetUpDirectPostingClick}
-        />
-      }
-      {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
-        <InstagramDirectPosting
-          onDirectPostingClick={onDirectPostingClick}
-        />
-      }
-      {isInstagramProfile && isInstagramBusiness &&
-        <InstagramReminders
-          remindersAreEnabled={remindersAreEnabled}
-          onToggleRemindersClick={onToggleRemindersClick}
+    <ErrorBoundary>
+      <div>
+        {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+          <InstagramDirectPosting
+            onDirectPostingClick={onSetUpDirectPostingClick}
+          />
+        }
+        {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+          <InstagramDirectPosting
+            onDirectPostingClick={onDirectPostingClick}
+          />
+        }
+        {isInstagramProfile && isInstagramBusiness &&
+          <InstagramReminders
+            remindersAreEnabled={remindersAreEnabled}
+            onToggleRemindersClick={onToggleRemindersClick}
+            isManager={isManager}
+          />
+        }
+        <LinkShortening
           isManager={isManager}
+          onConnectBitlyURLClick={onConnectBitlyURLClick}
+          onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
+          loading={loadingLinkShorteners}
+          profileService={profileService}
+          linkShorteners={linkShorteners}
+          onOptionSelect={onLinkShortenerOptionSelect}
+          selectedShortener={selectedShortener}
+          features={features}
         />
-      }
-      <LinkShortening
-        isManager={isManager}
-        onConnectBitlyURLClick={onConnectBitlyURLClick}
-        onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
-        loading={loadingLinkShorteners}
-        profileService={profileService}
-        linkShorteners={linkShorteners}
-        onOptionSelect={onLinkShortenerOptionSelect}
-        selectedShortener={selectedShortener}
-        features={features}
-      />
-      <Divider />
-      <GoogleAnalytics
-        isBusinessAccount={isBusinessAccount}
-        isManager={isManager}
-        features={features}
-        onShowGACustomizationFormClick={onShowGACustomizationFormClick}
-        showGACustomizationForm={showGACustomizationForm}
-        googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
-        onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
-        utmCampaign={utmCampaign}
-        onChangeUtmCampaign={onChangeUtmCampaign}
-        utmSource={utmSource}
-        onChangeUtmSource={onChangeUtmSource}
-        utmMedium={utmMedium}
-        onChangeUtmMedium={onChangeUtmMedium}
-        onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
-      />
-    </div>
+        <Divider />
+        <GoogleAnalytics
+          isBusinessAccount={isBusinessAccount}
+          isManager={isManager}
+          features={features}
+          onShowGACustomizationFormClick={onShowGACustomizationFormClick}
+          showGACustomizationForm={showGACustomizationForm}
+          googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
+          onToggleGoogleAnalyticsClick={onToggleGoogleAnalyticsClick}
+          utmCampaign={utmCampaign}
+          onChangeUtmCampaign={onChangeUtmCampaign}
+          utmSource={utmSource}
+          onChangeUtmSource={onChangeUtmSource}
+          utmMedium={utmMedium}
+          onChangeUtmMedium={onChangeUtmMedium}
+          onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
+        />
+      </div>
+    </ErrorBoundary>
   );
 };
 

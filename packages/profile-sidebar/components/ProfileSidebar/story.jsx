@@ -48,7 +48,8 @@ storiesOf('ProfileSidebar', module)
       lockedProfiles={lockedProfiles}
       translations={translations}
       onProfileClick={action('profile click')}
-      onConnectSocialAccountClick={action('connect social account click')}
+      onManageSocialAccountClick={action('manage social account click')}
+      goToConnectSocialAccount={action('connect social account click')}
       profileLimit={'3'}
     />
   ))
@@ -59,7 +60,8 @@ storiesOf('ProfileSidebar', module)
       translations={translations}
       onProfileClick={action('profile click')}
       selectedProfile={profiles[0]}
-      onConnectSocialAccountClick={action('connect social account click')}
+      onManageSocialAccountClick={action('manage social account click')}
+      goToConnectSocialAccount={action('connect social account click')}
       profileLimit={'3'}
     />
   ));

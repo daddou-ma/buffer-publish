@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/bufferapp/project-donut#readme",
   "devDependencies": {
-    "@bufferapp/components": "3.1.1",
+    "@bufferapp/components": "3.2.0",
     "@storybook/addon-storyshots": "3.4.11",
     "@storybook/react": "3.4.11",
     "axe-core": "2.2.0",

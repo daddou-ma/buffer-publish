@@ -66,6 +66,19 @@ storiesOf('TabNavigation', module)
       onUpgradeButtonClick={action('on-upgrade-button-click')}
     />
   ))
+  .add('should show grid tab', () => (
+    <TabNavigation
+      selectedTabId={'grid'}
+      onTabClick={action('tab-click')}
+      isBusinessAccount
+      isManager={false}
+      isInstagramProfile
+      shouldShowNestedSettingsTab={false}
+      showUpgradeModal={action('show-upgrade-modal')}
+      shouldShowUpgradeCta
+      onUpgradeButtonClick={action('on-upgrade-button-click')}
+    />
+  ))
   .add('isContributor', () => (
     <TabNavigation
       selectedTabId={'queue'}

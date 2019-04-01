@@ -10,8 +10,11 @@ import { WithFeatureLoader } from '@bufferapp/product-features';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { Input } from '@bufferapp/components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 import Empty from '../Empty';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -97,51 +100,53 @@ const DraftList = ({
   }
 
   return (
-    <div className={containerStyle}>
-      <div style={topBarContainerStyle}>
-        {tabId === 'drafts' &&
-          <div style={composerStyle}>
-            {showComposer && !editMode &&
-              <ComposerPopover
-                type={'drafts'}
-                onSave={onComposerCreateSuccess}
-                preserveComposerStateOnClose
+    <ErrorBoundary>
+      <div className={containerStyle}>
+        <div style={topBarContainerStyle}>
+          {tabId === 'drafts' &&
+            <div style={composerStyle}>
+              {showComposer && !editMode &&
+                <ComposerPopover
+                  type={'drafts'}
+                  onSave={onComposerCreateSuccess}
+                  preserveComposerStateOnClose
+                />
+              }
+              <Input
+                placeholder={'Create a new draft...'}
+                onFocus={onComposerPlaceholderClick}
               />
-            }
-            <Input
-              placeholder={'Create a new draft...'}
-              onFocus={onComposerPlaceholderClick}
+            </div>
+          }
+        </div>
+        {showComposer && editMode &&
+          <ComposerPopover
+            type={'drafts'}
+            onSave={onComposerCreateSuccess}
+          />
+        }
+        {
+          postLists.length > 0 ?
+            <QueueItems
+              items={postLists}
+              onApproveClick={onApproveClick}
+              onCancelConfirmClick={onCancelConfirmClick}
+              onDeleteClick={onDeleteClick}
+              onDeleteConfirmClick={onDeleteConfirmClick}
+              onEditClick={onEditClick}
+              onMoveToDraftsClick={onMoveToDraftsClick}
+              onRequestApprovalClick={onRequestApprovalClick}
+              onRescheduleClick={onRescheduleClick}
+              draggable={false}
+              type={'drafts'}
+            /> :
+            <Empty
+              isManager={manager}
+              view={tabId}
             />
-          </div>
         }
       </div>
-      {showComposer && editMode &&
-        <ComposerPopover
-          type={'drafts'}
-          onSave={onComposerCreateSuccess}
-        />
-      }
-      {
-        postLists.length > 0 ?
-          <QueueItems
-            items={postLists}
-            onApproveClick={onApproveClick}
-            onCancelConfirmClick={onCancelConfirmClick}
-            onDeleteClick={onDeleteClick}
-            onDeleteConfirmClick={onDeleteConfirmClick}
-            onEditClick={onEditClick}
-            onMoveToDraftsClick={onMoveToDraftsClick}
-            onRequestApprovalClick={onRequestApprovalClick}
-            onRescheduleClick={onRescheduleClick}
-            draggable={false}
-            type={'drafts'}
-          /> :
-          <Empty
-            isManager={manager}
-            view={tabId}
-          />
-      }
-    </div>
+    </ErrorBoundary>
   );
 };
 

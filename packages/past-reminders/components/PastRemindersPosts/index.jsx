@@ -11,6 +11,9 @@ import {
 } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+
+const ErrorBoundary = getErrorBoundary(true);
 
 const headerStyle = {
   marginBottom: '1.5rem',
@@ -79,45 +82,47 @@ const PastRemindersPosts = ({
     );
   }
   return (
-    <div>
-      <div style={headerStyle}>
-        <div style={titleStyle}>
-          <Text color={'black'}>{header}</Text>
-        </div>
-        <Text color={'shuttleGray'} size={'mini'}>{subHeader}</Text>
-        <Divider />
-      </div>
-      <div style={topBarContainerStyle}>
-        {showComposer && !editMode &&
-          <div style={composerStyle}>
-            <ComposerPopover
-              onSave={onComposerCreateSuccess}
-              type={'pastReminders'}
-            />
+    <ErrorBoundary>
+      <div>
+        <div style={headerStyle}>
+          <div style={titleStyle}>
+            <Text color={'black'}>{header}</Text>
           </div>
+          <Text color={'shuttleGray'} size={'mini'}>{subHeader}</Text>
+          <Divider />
+        </div>
+        <div style={topBarContainerStyle}>
+          {showComposer && !editMode &&
+            <div style={composerStyle}>
+              <ComposerPopover
+                onSave={onComposerCreateSuccess}
+                type={'pastReminders'}
+              />
+            </div>
+          }
+        </div>
+        {showComposer && editMode &&
+          <ComposerPopover
+            onSave={onComposerCreateSuccess}
+            type={'pastReminders'}
+          />
         }
-      </div>
-      {showComposer && editMode &&
-        <ComposerPopover
-          onSave={onComposerCreateSuccess}
-          type={'pastReminders'}
+        <PostLists
+          postLists={postLists}
+          onEditClick={onEditClick}
+          onShareAgainClick={onShareAgainClick}
+          onMobileClick={onMobileClick}
+          onImageClick={onImageClick}
+          onImageClickNext={onImageClickNext}
+          onImageClickPrev={onImageClickPrev}
+          onImageClose={onImageClose}
+          isManager={isManager}
+          isBusinessAccount={isBusinessAccount}
+          isSent={false}
+          isPastReminder
         />
-      }
-      <PostLists
-        postLists={postLists}
-        onEditClick={onEditClick}
-        onShareAgainClick={onShareAgainClick}
-        onMobileClick={onMobileClick}
-        onImageClick={onImageClick}
-        onImageClickNext={onImageClickNext}
-        onImageClickPrev={onImageClickPrev}
-        onImageClose={onImageClose}
-        isManager={isManager}
-        isBusinessAccount={isBusinessAccount}
-        isSent={false}
-        isPastReminder
-      />
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 };
 

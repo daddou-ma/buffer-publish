@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import { reducer as tabsReducer } from '@bufferapp/publish-tabs';
 import { reducer as queueReducer } from '@bufferapp/publish-queue';
 import { reducer as sentReducer } from '@bufferapp/publish-sent';
+import { reducer as gridReducer } from '@bufferapp/publish-grid';
 import { reducer as pastRemindersReducer } from '@bufferapp/publish-past-reminders';
 import { reducer as draftsReducer } from '@bufferapp/publish-drafts';
 import { reducer as postingScheduleReducer } from '@bufferapp/publish-posting-schedule';
@@ -46,6 +47,7 @@ export default ({
   form: formReducer,
   queue: queueReducer,
   sent: sentReducer,
+  grid: gridReducer,
   pastReminders: pastRemindersReducer,
   i18n: i18nReducer,
   tabs: tabsReducer,

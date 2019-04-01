@@ -8,6 +8,7 @@ import {
   transitionAnimationTime,
   transitionAnimationType,
 } from '@bufferapp/components/style/animation';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 import TextPost from '../TextPost';
 import ImagePost from '../ImagePost';
@@ -21,6 +22,7 @@ import MultipleImagesDraft from '../MultipleImagesDraft';
 import LinkDraft from '../LinkDraft';
 import VideoDraft from '../VideoDraft';
 
+const ErrorBoundary = getErrorBoundary(true);
 const listHeaderStyle = {
   marginBottom: '1rem',
   marginTop: '1rem',
@@ -59,6 +61,7 @@ const renderPost = ({
   onImageClose,
   onDropPost,
   draggable,
+  basic,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -106,6 +109,7 @@ const renderPost = ({
           index={post.index}
           postComponent={PostComponent}
           postProps={postWithEventHandlers}
+          basic={basic}
         />
       </div>
     );
@@ -116,7 +120,7 @@ const renderPost = ({
       style={calculateStyles(defaultStyle, hiddenStyle)}
       key={post.id}
     >
-      <PostComponent {...postWithEventHandlers} />
+      <PostComponent {...postWithEventHandlers} basic={basic} />
     </div>
   );
 };
@@ -177,7 +181,9 @@ const renderDraft = ({
       style={calculateStyles(defaultStyle, hiddenStyle)}
       key={draft.id}
     >
-      <DraftComponent {...draftWithEventHandlers} />
+      <ErrorBoundary fallbackComponent={() => <DraftComponent {...draftWithEventHandlers} basic />}>
+        <DraftComponent {...draftWithEventHandlers} />
+      </ErrorBoundary>
     </div>
   );
 };

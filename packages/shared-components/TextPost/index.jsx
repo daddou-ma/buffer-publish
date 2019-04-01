@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   LinkifiedText,
+  Text,
 } from '@bufferapp/components';
 import Post from '../Post';
 
@@ -53,20 +54,31 @@ const TextPost = ({
   commentText,
   hasCommentEnabled,
   hasFirstCommentFlip,
+  basic,
 }) => {
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        <LinkifiedText
-          color={'black'}
-          links={links}
-          size={'mini'}
-          whitespace={'pre-wrap'}
-          newTab
-          unstyled
-        >
-          {text}
-        </LinkifiedText>
+        {basic ?
+          <Text
+            size="mini"
+            whitespace="pre-wrap"
+            color="black"
+          >
+            {text}
+          </Text> :
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            whitespace="pre-wrap"
+            newTab
+            unstyled
+            basic={basic}
+          >
+            {text}
+          </LinkifiedText>
+        }
       </span>
     </div>
   );
@@ -111,6 +123,7 @@ const TextPost = ({
       commentText={commentText}
       hasCommentEnabled={hasCommentEnabled}
       hasFirstCommentFlip={hasFirstCommentFlip}
+      basic={basic}
     >
       {children}
     </Post>
