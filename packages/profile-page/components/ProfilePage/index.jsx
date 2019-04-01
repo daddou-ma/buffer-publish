@@ -66,14 +66,14 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
           profileId={profileId}
         />
       );
-    case 'drafts':
-    case 'awaitingApproval':
     case 'grid':
       return (
         <GridPosts
           profileId={profileId}
         />
       );
+    case 'drafts':
+    case 'awaitingApproval':
     case 'pendingApproval':
       return (
         <DraftList

@@ -35,6 +35,7 @@ const getDraftDetails = ({
   isDraftsView,
 }) => {
   const createdAt = draft.createdAt;
+  const servicesWithCommentFeature = ['instagram'];
   const createdAtString = getDateString(createdAt, profileTimezone, {
     createdAt,
     twentyFourHourTime,
@@ -58,6 +59,9 @@ const getDraftDetails = ({
       isDraftsView,
     }),
     isRetweet: draft.retweet !== undefined,
+    commentText: draft.commentText,
+    commentEnabled: draft.commentEnabled,
+    hasCommentEnabled: servicesWithCommentFeature.indexOf(draft.profile_service) !== -1,
   };
 };
 
@@ -122,6 +126,7 @@ export default connect(
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         canStartBusinessTrial: state.drafts.canStartBusinessTrial,
+        hasFirstCommentFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('first_comment') : false,
       };
     }
     return {};

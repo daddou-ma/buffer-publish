@@ -53,6 +53,7 @@ const MultipleImagesDraft = ({
   scheduledAt,
   view,
   basic,
+  hasFirstCommentFlip,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
@@ -124,6 +125,7 @@ const MultipleImagesDraft = ({
       scheduledAt={scheduledAt}
       view={view}
       basic={basic}
+      hasFirstCommentFlip={hasFirstCommentFlip}
     >
       {children}
     </Draft>

@@ -49,6 +49,19 @@ const verticalLineStyle = {
   borderLeft: `${borderWidth} solid ${mystic}`,
 };
 
+const igCommentWrapper = {
+  display: 'flex',
+  alignItems: 'center',
+};
+
+const igCommentIconWrapper = {
+  display: 'flex',
+  alignItems: 'center',
+  paddingLeft: '0.5rem',
+  marginLeft: '0.5rem',
+  borderLeft: '1px solid #cfd4d6',
+};
+
 /* eslint-disable react/prop-types */
 const renderEdit = ({
   hasPermission,
@@ -110,19 +123,53 @@ const renderMoveToDrafts = ({
   </span>);
 };
 
+const renderCommentIcon = () => (
+  <span style={igCommentIconWrapper} title="Post includes a comment">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        fill="#59626a"
+        d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H6c-.746 0-2.886 1.672-4.13 2.52-.457.31-.87.032-.87-.52V3z"
+      />
+    </svg>
+  </span>
+);
+
+const renderActionText = (postAction, hasCommentEnabled, commentEnabled, hasFirstCommentFlip) => (
+  hasFirstCommentFlip && hasCommentEnabled && commentEnabled ?
+    <span style={igCommentWrapper}>
+      {postAction}
+      {renderCommentIcon()}
+    </span>
+    : postAction
+);
+
 const renderText = ({
   draftDetails,
   isPastDue,
   view,
   hasPermission,
   manager,
+  hasFirstCommentFlip,
 }) =>
   <span>
     <Text
       size={'small'}
       color={isPastDue ? 'torchRed' : undefined}
     >
-      {draftDetails.postAction}
+      {renderActionText(
+        draftDetails.postAction,
+        draftDetails.hasCommentEnabled,
+        draftDetails.commentEnabled,
+        hasFirstCommentFlip,
+      )}
     </Text>
     {
       (hasPermission || manager) && isPastDue && view === 'drafts' ?
@@ -231,11 +278,12 @@ const DraftFooter = ({
   scheduledAt,
   draftDetails,
   view,
+  hasFirstCommentFlip,
 }) =>
   <div style={postDetailsStyle}>
     <div style={postActionDetailsStyle}>
       {renderIcon({ isPastDue, scheduledAt })}
-      {renderText({ draftDetails, scheduledAt, isPastDue, view, hasPermission, manager })}
+      {renderText({ draftDetails, scheduledAt, isPastDue, view, hasPermission, manager, hasFirstCommentFlip })}
     </div>
     <div style={postControlsStyle}>
       {renderControls({

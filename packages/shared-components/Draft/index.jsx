@@ -120,6 +120,7 @@ const Draft = ({
   scheduledAt,
   view,
   basic,
+  hasFirstCommentFlip,
 }) =>
   (<div style={postContainerStyle}>
     <div style={postStyle}>
@@ -156,6 +157,7 @@ const Draft = ({
           onRescheduleClick={onRescheduleClick}
           draftDetails={draftDetails}
           view={view}
+          hasFirstCommentFlip={hasFirstCommentFlip}
         />
       </Card>
     </div>
@@ -191,6 +193,7 @@ Draft.commonPropTypes = {
       indices: PropTypes.arrayOf(PropTypes.number),
     }),
   ),
+  hasFirstCommentFlip: PropTypes.bool,
 };
 
 Draft.propTypes = {
@@ -203,6 +206,7 @@ Draft.defaultProps = {
   isConfirmingDelete: false,
   isDeleting: false,
   isWorking: false,
+  hasFirstCommentFlip: false,
 };
 
 export default Draft;

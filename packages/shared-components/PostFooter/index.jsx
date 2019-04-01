@@ -58,7 +58,7 @@ const igCommentIconWrapper = {
 };
 
 const renderCommentIcon = () => (
-  <span style={igCommentIconWrapper}>
+  <span style={igCommentIconWrapper} title="Post includes a comment">
     <svg
       width="16"
       height="16"
