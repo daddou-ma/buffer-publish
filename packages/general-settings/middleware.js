@@ -11,9 +11,6 @@ import { actionTypes } from './reducer';
 export default ({ dispatch }) => next => (action) => {
   next(action);
   switch (action.type) {
-    case actionTypes.SET_DIRECT_POSTING:
-      window.location = getURL.getInstagramDirectPostingURL(action.profileId);
-      break;
     case actionTypes.CONNECT_BITLY:
       window.location = getURL.getConnectBitlyURL(action.profileId);
       break;

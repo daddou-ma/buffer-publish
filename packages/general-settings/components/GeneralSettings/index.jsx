@@ -13,7 +13,6 @@ const ErrorBoundary = getErrorBoundary(true);
 const GeneralSettings = ({
   isInstagramProfile,
   isInstagramBusiness,
-  onSetUpDirectPostingClick,
   linkShorteners,
   profileService,
   loadingLinkShorteners,
@@ -28,7 +27,6 @@ const GeneralSettings = ({
   onDisconnectBitlyURLClick,
   isManager,
   features,
-  hasInstagramFeatureFlip,
   onDirectPostingClick,
   utmCampaign,
   onChangeUtmCampaign,
@@ -48,12 +46,7 @@ const GeneralSettings = ({
   return (
     <ErrorBoundary>
       <div>
-        {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
-          <InstagramDirectPosting
-            onDirectPostingClick={onSetUpDirectPostingClick}
-          />
-        }
-        {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+        {isInstagramProfile && !isInstagramBusiness &&
           <InstagramDirectPosting
             onDirectPostingClick={onDirectPostingClick}
           />
@@ -109,7 +102,6 @@ GeneralSettings.defaultProps = {
   isManager: true,
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
-  hasInstagramFeatureFlip: false,
   utmCampaign: null,
   utmSource: null,
   utmMedium: null,
@@ -124,7 +116,6 @@ GeneralSettings.propTypes = {
   isInstagramBusiness: PropTypes.bool.isRequired,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
   onDisconnectBitlyURLClick: PropTypes.func.isRequired,
-  onSetUpDirectPostingClick: PropTypes.func.isRequired,
   linkShorteners: PropTypes.arrayOf(
     PropTypes.shape({
       domain: PropTypes.string,
@@ -145,7 +136,6 @@ GeneralSettings.propTypes = {
   features: PropTypes.shape({
     isFreeUser: PropTypes.func,
   }).isRequired,
-  hasInstagramFeatureFlip: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,
   utmCampaign: PropTypes.string,
   onChangeUtmCampaign: PropTypes.func.isRequired,
