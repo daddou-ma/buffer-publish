@@ -10,6 +10,7 @@ export const initialState = {
   stealProfileUsername: null,
   showInstagramDirectPostingModal: false,
   showWelcomeB4BTrialModal: false,
+  showInstagramFirstCommentModal: false,
 };
 
 export const actionTypes = keyWrapper('MODALS', {
@@ -27,6 +28,8 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_IG_DIRECT_POSTING_MODAL: 0,
   SHOW_WELCOME_B4B_TRIAL_MODAL: 0,
   HIDE_WELCOME_B4B_TRIAL_MODAL: 0,
+  SHOW_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
+  HIDE_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -47,6 +50,11 @@ export default (state = initialState, action) => {
         ...state,
         showWelcomeModal: true,
       };
+    case actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_MODAL:
+      return {
+        ...state,
+        showInstagramFirstCommentModal: true,
+      };
     case actionTypes.HIDE_WELCOME_MODAL:
       return {
         ...state,
@@ -61,6 +69,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showWelcomePaidModal: false,
+      };
+    case actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_MODAL:
+      return {
+        ...state,
+        showInstagramFirstCommentModal: false,
       };
     case actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL:
       return {
@@ -116,6 +129,9 @@ export const actions = {
   hideUpgradeModal: () => ({
     type: actionTypes.HIDE_UPGRADE_MODAL,
   }),
+  showInstagramFirstCommentModal: () => ({
+    type: actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_MODAL,
+  }),
   showWelcomeModal: () => ({
     type: actionTypes.SHOW_WELCOME_MODAL,
   }),
@@ -127,6 +143,9 @@ export const actions = {
   }),
   hideWelcomePaidModal: () => ({
     type: actionTypes.HIDE_WELCOME_PAID_MODAL,
+  }),
+  hideInstagramFirstCommentModal: () => ({
+    type: actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_MODAL,
   }),
   showProfilesDisconnectedModal: () => ({
     type: actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL,

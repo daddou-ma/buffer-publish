@@ -26,6 +26,9 @@ export const resetShowModalKey = () => {
 export const shouldShowStealProfileModal = () =>
   getShowModalKey() === 'steal-profile-modal';
 
+export const shouldShowInstagramFirstCommentModal = () =>
+  getShowModalKey() === 'instagram-first-comment-modal';
+
 export const shouldShowWelcomeModal = () =>
   getShowModalKey() === 'welcome-modal-1';
 

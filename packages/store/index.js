@@ -10,6 +10,7 @@ import { middleware as draftsMiddleware } from '@bufferapp/publish-drafts';
 import { middleware as postingScheduleSettingsMiddleware } from '@bufferapp/publish-posting-schedule';
 import { middleware as generalSettingsMiddleware } from '@bufferapp/publish-general-settings';
 import { middleware as profileSidebarMiddleware } from '@bufferapp/publish-profile-sidebar';
+import { middleware as clientAccessMiddleware } from '@bufferapp/client-access';
 import { middleware as appSidebarMiddleware } from '@bufferapp/app-sidebar';
 import { middleware as productFeatureMiddleware } from '@bufferapp/product-features';
 import { middleware as i18nMiddleware } from '@bufferapp/publish-i18n';
@@ -78,6 +79,7 @@ const configureStore = (initialstate) => {
         bufferMetricsMiddleware,
         i18nMiddleware,
         profileSidebarMiddleware,
+        clientAccessMiddleware,
         performanceMiddleware,
         appSidebarMiddleware,
         productFeatureMiddleware,
