@@ -6,6 +6,7 @@ import {
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes as gridActionTypes } from './reducer';
 import { isValidURL, getBaseURL } from './util';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
@@ -64,6 +65,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
 
     case `updatePostLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.result && action.result.success) {
+        trackAction({ location: 'grid', action: 'updated_grid_post_url' });
         dispatch(notificationActions.createNotification({
           notificationType: 'success',
           message: 'Nice! Your changes have been saved.',
