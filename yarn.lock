@@ -199,6 +199,15 @@
     "@bufferapp/keywrapper" "0.2.0"
     "@bufferapp/session-manager" "0.7.1"
 
+"@bufferapp/app-sidebar@1.11.1":
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.11.1.tgz#85f21445d22ca8de32cc0be9859252e6efa1064b"
+  integrity sha512-11uSfP0vx5+qlEtushEQjezMRXS+T9FDFXPIreXkpcd5HW1eXUvOHcBL3Di3RDpuE8o6i1JpWUIBnNyTYGgVMg==
+  dependencies:
+    "@bufferapp/async-data-fetch" "1.9.4"
+    "@bufferapp/keywrapper" "0.2.0"
+    "@bufferapp/session-manager" "0.7.1"
+
 "@bufferapp/async-data-fetch@0.5.36-beta01":
   version "0.5.36-beta01"
   resolved "https://registry.yarnpkg.com/@bufferapp/async-data-fetch/-/async-data-fetch-0.5.36-beta01.tgz#684504ddc303577c42b0ba350d854990d6bd1ad1"
