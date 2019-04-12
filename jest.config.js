@@ -16,5 +16,8 @@ module.exports = {
   globals: {
     __PACKAGES__: '../packages',
   },
+  testPathIgnorePatterns: [
+    'package/sidebar/node_modules',
+  ],
   testURL: 'https://publish.local.buffer.com',
 };
