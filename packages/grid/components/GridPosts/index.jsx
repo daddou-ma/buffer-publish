@@ -12,6 +12,7 @@ import LockedProfileNotification from '@bufferapp/publish-locked-profile-notific
 import { ProfileBadge } from '@bufferapp/analyze-shared-components';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { openPreviewPage } from '../../util';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -79,6 +80,11 @@ const onCopyToClipboard = (text, handleCopyToClipboard) => {
   }, (err) => {
     handleCopyToClipboard(false);
   });
+};
+
+const onPreviewClick = (generatedUrl) => {
+  trackAction({ location: 'grid', action: 'click_preview_url' });
+  openPreviewPage(generatedUrl);
 };
 
 const GridPosts = ({
@@ -162,7 +168,7 @@ const GridPosts = ({
               label={'Preview Page'}
               type="secondary"
               onClick={() => {
-                openPreviewPage(generatedUrl);
+                onPreviewClick(generatedUrl);
               }}
             />
           </div>
