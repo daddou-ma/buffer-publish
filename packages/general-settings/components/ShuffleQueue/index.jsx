@@ -15,16 +15,13 @@ const headerTextWrapperStyle = {
   marginTop: '0.5rem',
 };
 
-const textWrapperStyle = {
-  // flex: '1 1 0%',
-};
-
 const buttonWrapperStyle = {
   textAlign: 'right',
   whiteSpace: 'nowrap',
   marginLeft: '0.5rem',
   minWidth: '175px',
   alignSelf: 'flex-end',
+  flex: '0.3 1 0%',
 };
 
 const leftContentStyle = {
@@ -37,7 +34,7 @@ const ShuffleQueue = ({
   onCloseModal,
   profileName,
   profileService,
-  avatar,
+  avatarUrl,
   showModal,
 }) => (
   <div style={shuffleQueueWrapperStyle}>
@@ -48,7 +45,7 @@ const ShuffleQueue = ({
         onConfirmClick={onConfirmShuffleQueueClick}
         onCloseModal={onCloseModal}
         profileService={profileService}
-        avatar={avatar}
+        avatar={avatarUrl}
         heading={'Are you sure?'}
         body={`Your first 200 queued updates for <span style="font-weight:bold">${profileName}</span> will be shuffled
         into a completely random order.`}
@@ -61,11 +58,9 @@ const ShuffleQueue = ({
           Shuffle Queue
         </Text>
       </div>
-      <div style={textWrapperStyle}>
-        <Text size="small">
-          Your first 200 queued updates will be shuffled into a completely random order.
-        </Text>
-      </div>
+      <Text size="small">
+        Your first 200 queued updates will be shuffled into a completely random order.
+      </Text>
     </div>
     <div style={buttonWrapperStyle}>
       <Button
@@ -80,16 +75,19 @@ const ShuffleQueue = ({
 
 ShuffleQueue.defaultProps = {
   showModal: false,
+  profileName: null,
+  profileService: null,
+  avatarUrl: null,
 };
 
 ShuffleQueue.propTypes = {
   onShuffleQueueClick: PropTypes.func.isRequired,
   onConfirmShuffleQueueClick: PropTypes.func.isRequired,
   onCloseModal: PropTypes.func.isRequired,
-  profileName: PropTypes.string.isRequired,
-  profileService: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
   showModal: PropTypes.bool,
+  profileName: PropTypes.string,
+  profileService: PropTypes.string,
+  avatarUrl: PropTypes.string,
 };
 
 export default ShuffleQueue;

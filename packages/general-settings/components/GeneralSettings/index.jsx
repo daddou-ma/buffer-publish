@@ -18,7 +18,7 @@ const GeneralSettings = ({
   linkShorteners,
   profileService,
   profileName,
-  avatar,
+  avatarUrl,
   loadingLinkShorteners,
   onLinkShortenerOptionSelect,
   selectedShortener,
@@ -99,17 +99,17 @@ const GeneralSettings = ({
           onChangeUtmMedium={onChangeUtmMedium}
           onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
         />
+        <Divider />
+        <ShuffleQueue
+          onShuffleQueueClick={onShuffleQueueClick}
+          onConfirmShuffleQueueClick={onConfirmShuffleQueueClick}
+          onCloseModal={onCloseModal}
+          showModal={showModal}
+          profileName={profileName}
+          profileService={profileService}
+          avatarUrl={avatarUrl}
+        />
       </div>
-      <Divider />
-      <ShuffleQueue
-        onShuffleQueueClick={onShuffleQueueClick}
-        onCloseModal={onCloseModal}
-        profileName={profileName}
-        profileService={profileService}
-        avatar={avatar}
-        showModal={showModal}
-        onConfirmShuffleQueueClick={onConfirmShuffleQueueClick}
-      />
     </ErrorBoundary>
   );
 };
@@ -118,6 +118,8 @@ GeneralSettings.defaultProps = {
   isInstagramProfile: false,
   isInstagramBusiness: false,
   profileService: null,
+  profileName: null,
+  avatarUrl: null,
   linkShorteners: null,
   loadingLinkShorteners: true,
   onLinkShortenerOptionSelect: null,
@@ -176,8 +178,8 @@ GeneralSettings.propTypes = {
   onConfirmShuffleQueueClick: PropTypes.func.isRequired,
   onCloseModal: PropTypes.func.isRequired,
   showModal: PropTypes.bool.isRequired,
-  profileName: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
+  profileName: PropTypes.string,
+  avatarUrl: PropTypes.string,
 };
 
 export default GeneralSettings;

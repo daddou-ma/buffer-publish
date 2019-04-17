@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
         googleAnalyticsEnabled: action.profile.googleAnalyticsEnabled,
         profileId: action.profileId,
         profileService: action.profile.service,
-        avatar: action.profile.avatarUrl,
+        avatarUrl: action.profile.avatarUrl,
         profileName: action.profile.serviceUsername,
         loadingLinkShorteners: true,
         selectedShortener: null,
@@ -74,8 +74,8 @@ export default (state = initialState, action) => {
         ...state,
         showGACustomizationForm: false,
       };
-    case `getGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      var trackingSettings = action.result.trackingSettings;
+    case `getGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const trackingSettings = action.result.trackingSettings;
       return {
         ...state,
         showGACustomizationForm: true,
@@ -83,6 +83,7 @@ export default (state = initialState, action) => {
         utmSource: trackingSettings ? trackingSettings.utm_source : '',
         utmMedium: trackingSettings ? trackingSettings.utm_medium : '',
       };
+    }
     case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
       return {
         ...state,

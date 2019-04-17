@@ -17,7 +17,7 @@ export default connect(
       profileId: state.generalSettings.profileId,
       profileService: state.generalSettings.profileService,
       profileName: state.generalSettings.profileName,
-      avatar: state.generalSettings.avatar,
+      avatarUrl: state.generalSettings.avatarUrl,
       linkShorteners: state.generalSettings.linkShorteners,
       loadingLinkShorteners: state.generalSettings.loadingLinkShorteners,
       selectedShortener: state.generalSettings.selectedShortener,

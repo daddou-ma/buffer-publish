@@ -82,7 +82,7 @@ const ConfirmModal = ({
 ConfirmModal.propTypes = {
   profileService: PropTypes.string.isRequired,
   onConfirmClick: PropTypes.func.isRequired,
-  onCloseModal: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func,
   avatar: PropTypes.string.isRequired,
   heading: PropTypes.string,
   body: PropTypes.string,

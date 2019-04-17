@@ -248,10 +248,9 @@ const PostingSchedule = ({
           >
             <ConfirmModal
               onConfirmClick={onConfirmClearClick}
-              onCancelClick={onCancelClearClick}
               profileName={profileName}
               profileService={profileService}
-              onCloseClick={closePopover}
+              onCloseModal={closePopover}
               avatar={avatar}
               heading={'Are you sure?'}
               body={`Would you like us to remove all your posting times for <span style="font-weight: bold">${profileName}</span>?`}
