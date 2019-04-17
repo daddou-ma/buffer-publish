@@ -132,7 +132,7 @@ export default (state = initialState, action) => {
         ...state,
         remindersAreEnabled: !state.remindersAreEnabled,
       };
-    case `shufflePosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         showModal: false,

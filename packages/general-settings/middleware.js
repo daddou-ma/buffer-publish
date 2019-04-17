@@ -89,7 +89,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       // only shuffle posts if more than 1
       if (postsObj && postsObj.posts && count > 1) {
         dispatch(dataFetchActions.fetch({
-          name: 'shufflePosts',
+          name: 'shuffleQueue',
           args: {
             profileId: action.profileId,
             count,
