@@ -15,13 +15,13 @@ import {
   ScheduleTable,
   EmptyState,
   SensitiveData,
+  ConfirmModal,
 } from '@bufferapp/publish-shared-components';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 import PostingTimeForm from '../PostingTimeForm';
 import TimezoneInputForm from '../TimezoneInputForm';
 import debounce from '../../utils/debounce';
-import ConfirmClear from '../ConfirmClear';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -108,7 +108,6 @@ const PostingSchedule = ({
   showClearAllModal,
   onClearAllClick,
   profileName,
-  profileType,
   onConfirmClearClick,
   onCancelClearClick,
   closePopover,
@@ -247,14 +246,16 @@ const PostingSchedule = ({
           {showClearAllModal && <Popover
             onOverlayClick={closePopover}
           >
-            <ConfirmClear
+            <ConfirmModal
               onConfirmClick={onConfirmClearClick}
               onCancelClick={onCancelClearClick}
               profileName={profileName}
-              profileType={profileType}
               profileService={profileService}
               onCloseClick={closePopover}
               avatar={avatar}
+              heading={'Are you sure?'}
+              body={`Would you like us to remove all your posting times for <span style="font-weight: bold">${profileName}</span>?`}
+              btnText={'I\'m sure, empty it'}
             />
           </Popover>}
           <div style={tableStyle}>
@@ -326,7 +327,6 @@ PostingSchedule.propTypes = {
   onClearAllClick: PropTypes.func.isRequired,
   showClearAllModal: PropTypes.bool.isRequired,
   profileName: PropTypes.string.isRequired,
-  profileType: PropTypes.string.isRequired,
   onCancelClearClick: PropTypes.func.isRequired,
   onConfirmClearClick: PropTypes.func.isRequired,
   closePopover: PropTypes.func,
