@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
 import InstagramReminders from '../InstagramReminders';
-import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import ShuffleQueue from '../ShuffleQueue';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -16,6 +17,8 @@ const GeneralSettings = ({
   onSetUpDirectPostingClick,
   linkShorteners,
   profileService,
+  profileName,
+  avatar,
   loadingLinkShorteners,
   onLinkShortenerOptionSelect,
   selectedShortener,
@@ -38,13 +41,16 @@ const GeneralSettings = ({
   onChangeUtmMedium,
   remindersAreEnabled,
   onToggleRemindersClick,
+  onShuffleQueueClick,
+  onConfirmShuffleQueueClick,
+  onCloseModal,
+  showModal,
   isLockedProfile,
   isBusinessAccount,
 }) => {
   if (isLockedProfile) {
     return <LockedProfileNotification />;
   }
-
   return (
     <ErrorBoundary>
       <div>
@@ -94,6 +100,16 @@ const GeneralSettings = ({
           onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
         />
       </div>
+      <Divider />
+      <ShuffleQueue
+        onShuffleQueueClick={onShuffleQueueClick}
+        onCloseModal={onCloseModal}
+        profileName={profileName}
+        profileService={profileService}
+        avatar={avatar}
+        showModal={showModal}
+        onConfirmShuffleQueueClick={onConfirmShuffleQueueClick}
+      />
     </ErrorBoundary>
   );
 };
@@ -156,6 +172,12 @@ GeneralSettings.propTypes = {
   remindersAreEnabled: PropTypes.bool,
   onToggleRemindersClick: PropTypes.func.isRequired,
   isLockedProfile: PropTypes.bool,
+  onShuffleQueueClick: PropTypes.func.isRequired,
+  onConfirmShuffleQueueClick: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  profileName: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
 };
 
 export default GeneralSettings;

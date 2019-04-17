@@ -8,7 +8,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch }) => next => (action) => {
+export default ({ dispatch, getState }) => next => (action) => {
   next(action);
   switch (action.type) {
     case actionTypes.SET_DIRECT_POSTING:
@@ -82,6 +82,22 @@ export default ({ dispatch }) => next => (action) => {
         },
       }));
       break;
+    case actionTypes.SHUFFLE_QUEUE: {
+      const state = getState();
+      const postsObj = state.queue.byProfileId[action.profileId];
+      const count = Object.keys(postsObj.posts).length;
+      // only shuffle posts if more than 1
+      if (postsObj && postsObj.posts && count > 1) {
+        dispatch(dataFetchActions.fetch({
+          name: 'shufflePosts',
+          args: {
+            profileId: action.profileId,
+            count,
+          },
+        }));
+      }
+      break;
+    }
     default:
       break;
   }
