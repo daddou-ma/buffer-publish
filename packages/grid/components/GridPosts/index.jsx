@@ -11,8 +11,9 @@ import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import { ProfileBadge } from '@bufferapp/analyze-shared-components';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
-import { openPreviewPage } from '../../util';
 import { trackAction } from '@bufferapp/publish-data-tracking';
+import { IconArrowPopover } from '@bufferapp/components';
+import { openPreviewPage } from '../../util';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -160,7 +161,18 @@ const GridPosts = ({
               >
                 {generatedUrl}
                 <div style={copyLinkStyle}>
-                  <CopyIcon size="medium" />
+                  <div style={{ display: 'inline-block', position: 'relative', top: '0px', left: '5px' }}>
+                    <IconArrowPopover
+                      icon={<CopyIcon size="medium" />}
+                      shadow
+                      oneLine
+                      label="Copy Page Link"
+                    >
+                      <div style={{ padding: '.25rem .10rem' }}>
+                        Copy Page Link
+                      </div>
+                    </IconArrowPopover>
+                  </div>
                 </div>
               </button>
             </div>
