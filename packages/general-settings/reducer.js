@@ -147,12 +147,12 @@ export default (state = initialState, action) => {
         showModal: false,
         loadingShuffle: false,
       };
-    case actionTypes.CONFIRM_SHUFFLE_QUEUE:
+    case actionTypes.SHUFFLE_QUEUE:
       return {
         ...state,
         showModal: true,
       };
-    case actionTypes.SHUFFLE_QUEUE:
+    case actionTypes.CONFIRM_SHUFFLE_QUEUE:
       return {
         ...state,
         loadingShuffle: true,
@@ -219,10 +219,10 @@ export const actions = {
     allowReminders,
   }),
   handleShuffleQueue: () => ({
-    type: actionTypes.CONFIRM_SHUFFLE_QUEUE,
+    type: actionTypes.SHUFFLE_QUEUE,
   }),
   handleConfirmShuffleClick: ({ profileId }) => ({
-    type: actionTypes.SHUFFLE_QUEUE,
+    type: actionTypes.CONFIRM_SHUFFLE_QUEUE,
     profileId,
   }),
   handleCloseModal: () => ({

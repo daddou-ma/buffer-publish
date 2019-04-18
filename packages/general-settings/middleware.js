@@ -82,7 +82,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         },
       }));
       break;
-    case actionTypes.SHUFFLE_QUEUE: {
+    case actionTypes.CONFIRM_SHUFFLE_QUEUE: {
       const state = getState();
       const queueObj = state.queue.byProfileId[action.profileId];
       const count = Object.keys(queueObj.posts).length;
