@@ -48,10 +48,16 @@ const postReducer = (state, action) => {
         isLightboxOpen: false,
       };
     case actionTypes.SAVE_POST_URL:
+      return {
+        ...state,
+        link: action.link,
+        oldLink: action.link,
+      };
     case actionTypes.UPDATE_POST_URL:
       return {
         ...state,
         link: action.link,
+        oldLink: action.oldLink || null,
       };
     default:
       return state;
@@ -168,12 +174,13 @@ export const actions = {
     post,
     profileId,
   }),
-  handleChangePostUrl: ({ post, profileId, link }) => ({
+  handleChangePostUrl: ({ post, profileId, link, oldLink }) => ({
     type: actionTypes.UPDATE_POST_URL,
     updateId: post.id,
     post,
     profileId,
     link,
+    oldLink,
   }),
   handleSavePostUrl: ({ post, profileId, link }) => ({
     type: actionTypes.SAVE_POST_URL,

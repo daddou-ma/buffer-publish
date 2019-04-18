@@ -98,7 +98,9 @@ const GridListPost = ({
             onChangePostUrl(post, e.target.value);
           }}
           onBlur={(e) => {
-            onSavePostUrl(post, e.target.value);
+            if (post.oldLink && (post.oldLink !== post.link)) {
+              onSavePostUrl(post, e.target.value);
+            }
           }}
           size="small"
           name="postUrl"
