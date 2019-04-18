@@ -6,9 +6,7 @@ import {
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actionTypes as gridActionTypes } from './reducer';
-import { isValidURL, getBaseURL } from './util';
-
-const urlHasProtocol = url => ((url.indexOf('https://') !== -1) || (url.indexOf('http://') !== -1));
+import { isValidURL, getBaseURL, urlHasProtocol } from './util';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
