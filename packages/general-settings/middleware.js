@@ -102,6 +102,13 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     }
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: 'Awesome! Your queue has been successfully shuffled.',
+      }));
+      break;
+    }
     default:
       break;
   }
