@@ -12,6 +12,7 @@ describe('reducer', () => {
       googleAnalyticsIsEnabled: false,
       showGACustomizationForm: false,
       remindersAreEnabled: false,
+      showModal: false,
     };
     const action = {
       type: 'INIT',
@@ -32,6 +33,10 @@ describe('reducer', () => {
       googleAnalyticsIsEnabled: false,
       showGACustomizationForm: false,
       remindersAreEnabled: false,
+      showModal: false,
+      profileName: 'buffer123',
+      avatarUrl: 'https://pbs.twimg.com/profile_images/901516345476603904/e2F5vE32_normal.jpg',
+      loadingShuffle: false,
     };
     const action = {
       type: actionTypes.SELECT_PROFILE,
@@ -40,6 +45,9 @@ describe('reducer', () => {
         isInstagramBusiness: false,
         service: 'twitter',
         directPostingEnabled: true,
+        serviceUsername: 'buffer123',
+        avatarUrl: 'https://pbs.twimg.com/profile_images/901516345476603904/e2F5vE32_normal.jpg',
+        loadingShuffle: false,
       },
     };
     deepFreeze(action);
@@ -55,6 +63,7 @@ describe('reducer', () => {
       googleAnalyticsIsEnabled: false,
       remindersAreEnabled: false,
       profileId: null,
+      showModal: false,
     };
     const action = {
       type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
@@ -75,6 +84,7 @@ describe('reducer', () => {
       profileId: null,
       showGACustomizationForm: false,
       remindersAreEnabled: false,
+      showModal: false,
     };
     const action = {
       type: `toggleGoogleAnalytics_${actionTypes.FETCH_SUCCESS}`,
@@ -95,6 +105,7 @@ describe('reducer', () => {
       profileId: null,
       showGACustomizationForm: false,
       remindersAreEnabled: false,
+      showModal: false,
     };
     const action = {
       type: `saveGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`,
@@ -119,6 +130,7 @@ describe('reducer', () => {
       utmSource: 'Source',
       utmMedium: 'Medium',
       remindersAreEnabled: false,
+      showModal: false,
     };
     const action = {
       type: `getGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`,
@@ -146,6 +158,7 @@ describe('reducer', () => {
       profileId: null,
       showGACustomizationForm: false,
       remindersAreEnabled: false,
+      showModal: false,
     };
     const action = {
       type: actionTypes.SET_UTM_CAMPAIGN,
@@ -167,6 +180,7 @@ describe('reducer', () => {
       profileId: null,
       showGACustomizationForm: false,
       remindersAreEnabled: false,
+      showModal: false,
     };
     const action = {
       type: actionTypes.SET_UTM_SOURCE,
@@ -188,6 +202,7 @@ describe('reducer', () => {
       profileId: null,
       showGACustomizationForm: false,
       remindersAreEnabled: false,
+      showModal: false,
     };
     const action = {
       type: actionTypes.SET_UTM_MEDIUM,
