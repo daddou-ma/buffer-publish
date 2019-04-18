@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Text } from '@bufferapp/ui';
+import { Button } from '@bufferapp/ui';
+import { Text, CloseIcon } from '@bufferapp/components';
 import Avatar from '@bufferapp/ui/Avatar';
-import CrossIcon from '@bufferapp/ui/Icon/Icons/Cross';
 
 const profileBadgeStyle = {
   position: 'relative',
   height: '2rem',
   width: '2rem',
   flexShrink: '0',
+  paddingRight: '10px',
 };
 
 const middleContainerStyle = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
+  marginTop: '15px',
 };
 
 const containerStyle = {
@@ -55,10 +57,10 @@ const ConfirmModal = ({
   <div style={containerStyle}>
     <span style={closeButtonStyle}>
       <a style={linkStyle} onClick={onCloseModal}>
-        <CrossIcon size="large" />
+        <CloseIcon />
       </a>
     </span>
-    <Text type="h3">{heading}</Text>
+    <Text size="large" weight="medium">{heading}</Text>
     <div style={middleContainerStyle}>
       <Text>
         <div style={textContainerStyle} dangerouslySetInnerHTML={{ __html: body }} />
