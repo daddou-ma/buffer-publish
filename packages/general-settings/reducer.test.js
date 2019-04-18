@@ -1,7 +1,7 @@
-import deepFreeze from 'deep-freeze';
-import reducer from './reducer';
-import { actionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import deepFreeze from 'deep-freeze';
+import reducer, { actionTypes } from './reducer';
 
 describe('reducer', () => {
   it('should initialize default state', () => {
@@ -39,7 +39,7 @@ describe('reducer', () => {
       loadingShuffle: false,
     };
     const action = {
-      type: actionTypes.SELECT_PROFILE,
+      type: profileActionTypes.SELECT_PROFILE,
       profileId: '123',
       profile: {
         isInstagramBusiness: false,
@@ -66,7 +66,7 @@ describe('reducer', () => {
       showModal: false,
     };
     const action = {
-      type: actionTypes.SHOW_GA_CUSTOMIZATION_FORM,
+      type: profileActionTypes.SHOW_GA_CUSTOMIZATION_FORM,
       profile: {
         showGACustomizationForm: true,
       },
@@ -87,7 +87,7 @@ describe('reducer', () => {
       showModal: false,
     };
     const action = {
-      type: `toggleGoogleAnalytics_${actionTypes.FETCH_SUCCESS}`,
+      type: `toggleGoogleAnalytics_${profileActionTypes.FETCH_SUCCESS}`,
       profile: {
         googleAnalyticsEnabled: 'enabled',
       },
@@ -161,7 +161,7 @@ describe('reducer', () => {
       showModal: false,
     };
     const action = {
-      type: actionTypes.SET_UTM_CAMPAIGN,
+      type: profileActionTypes.SET_UTM_CAMPAIGN,
       profile: {
         showGACustomizationForm: true,
         utmCampaign: 'Campaign',
@@ -183,7 +183,7 @@ describe('reducer', () => {
       showModal: false,
     };
     const action = {
-      type: actionTypes.SET_UTM_SOURCE,
+      type: profileActionTypes.SET_UTM_SOURCE,
       profile: {
         showGACustomizationForm: true,
         utmSource: 'Source',
@@ -205,7 +205,7 @@ describe('reducer', () => {
       showModal: false,
     };
     const action = {
-      type: actionTypes.SET_UTM_MEDIUM,
+      type: profileActionTypes.SET_UTM_MEDIUM,
       profile: {
         showGACustomizationForm: true,
         utmMedium: 'Medium',
@@ -214,5 +214,40 @@ describe('reducer', () => {
     deepFreeze(action);
     expect(reducer(undefined, action))
       .toEqual(stateAfter);
+  });
+  it('should set loading to false when fetch is success', () => {
+    const action = {
+      type: `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`,
+    };
+    const { loadingShuffle } = reducer(undefined, action);
+    expect(loadingShuffle).toBe(false);
+  });
+  it('should set showModal to false when fetch is success', () => {
+    const action = {
+      type: `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`,
+    };
+    const { showModal } = reducer(undefined, action);
+    expect(showModal).toBe(false);
+  });
+  it('should set showModal to true when user clicks shuffle queue', () => {
+    const action = {
+      type: actionTypes.SHUFFLE_QUEUE,
+    };
+    const { showModal } = reducer(undefined, action);
+    expect(showModal).toBe(true);
+  });
+  it('should set loading to true when user clicks shuffle queue', () => {
+    const action = {
+      type: actionTypes.CONFIRM_SHUFFLE_QUEUE,
+    };
+    const { loadingShuffle } = reducer(undefined, action);
+    expect(loadingShuffle).toBe(true);
+  });
+  it('should close confirm modal', () => {
+    const action = {
+      type: actionTypes.CLOSE_MODAL,
+    };
+    const { showModal } = reducer(undefined, action);
+    expect(showModal).toBe(false);
   });
 });

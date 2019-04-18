@@ -1,5 +1,4 @@
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
-import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import keyWrapper from '@bufferapp/keywrapper';
 
