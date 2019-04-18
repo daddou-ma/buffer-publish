@@ -68,7 +68,7 @@ const ConfirmModal = ({
       <div style={profileBadgeStyle}>
         <Avatar
           src={avatar}
-          alt=""
+          alt="avatar for social network"
           size="small"
           type="social"
           network={profileService}
