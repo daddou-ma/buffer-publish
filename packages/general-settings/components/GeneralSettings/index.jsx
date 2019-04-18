@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
 import InstagramReminders from '../InstagramReminders';
-import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import ShuffleQueue from '../ShuffleQueue';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -16,7 +17,10 @@ const GeneralSettings = ({
   onSetUpDirectPostingClick,
   linkShorteners,
   profileService,
+  profileName,
+  avatarUrl,
   loadingLinkShorteners,
+  loadingShuffle,
   onLinkShortenerOptionSelect,
   selectedShortener,
   onShowGACustomizationFormClick,
@@ -38,13 +42,16 @@ const GeneralSettings = ({
   onChangeUtmMedium,
   remindersAreEnabled,
   onToggleRemindersClick,
+  onShuffleQueueClick,
+  onConfirmShuffleQueueClick,
+  onCloseModal,
+  showModal,
   isLockedProfile,
   isBusinessAccount,
 }) => {
   if (isLockedProfile) {
     return <LockedProfileNotification />;
   }
-
   return (
     <ErrorBoundary>
       <div>
@@ -93,6 +100,17 @@ const GeneralSettings = ({
           onChangeUtmMedium={onChangeUtmMedium}
           onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
         />
+        <Divider />
+        <ShuffleQueue
+          onShuffleQueueClick={onShuffleQueueClick}
+          onConfirmShuffleQueueClick={onConfirmShuffleQueueClick}
+          onCloseModal={onCloseModal}
+          showModal={showModal}
+          profileName={profileName}
+          profileService={profileService}
+          avatarUrl={avatarUrl}
+          loading={loadingShuffle}
+        />
       </div>
     </ErrorBoundary>
   );
@@ -102,6 +120,8 @@ GeneralSettings.defaultProps = {
   isInstagramProfile: false,
   isInstagramBusiness: false,
   profileService: null,
+  profileName: null,
+  avatarUrl: null,
   linkShorteners: null,
   loadingLinkShorteners: true,
   onLinkShortenerOptionSelect: null,
@@ -115,6 +135,7 @@ GeneralSettings.defaultProps = {
   utmMedium: null,
   remindersAreEnabled: false,
   isLockedProfile: false,
+  loadingShuffle: false,
 };
 
 GeneralSettings.propTypes = {
@@ -156,6 +177,13 @@ GeneralSettings.propTypes = {
   remindersAreEnabled: PropTypes.bool,
   onToggleRemindersClick: PropTypes.func.isRequired,
   isLockedProfile: PropTypes.bool,
+  onShuffleQueueClick: PropTypes.func.isRequired,
+  onConfirmShuffleQueueClick: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  profileName: PropTypes.string,
+  avatarUrl: PropTypes.string,
+  loadingShuffle: PropTypes.bool,
 };
 
 export default GeneralSettings;

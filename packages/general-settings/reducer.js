@@ -14,6 +14,9 @@ export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
   SET_UTM_SOURCE: 0,
   SET_UTM_MEDIUM: 0,
   TOGGLE_INSTAGRAM_REMINDERS: 0,
+  SHUFFLE_QUEUE: 0,
+  CONFIRM_SHUFFLE_QUEUE: 0,
+  CLOSE_MODAL: 0,
 });
 
 const initialState = {
@@ -23,6 +26,7 @@ const initialState = {
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
   remindersAreEnabled: false,
+  showModal: false,
 };
 
 export default (state = initialState, action) => {
@@ -35,7 +39,10 @@ export default (state = initialState, action) => {
         googleAnalyticsEnabled: action.profile.googleAnalyticsEnabled,
         profileId: action.profileId,
         profileService: action.profile.service,
+        avatarUrl: action.profile.avatarUrl,
+        profileName: action.profile.serviceUsername,
         loadingLinkShorteners: true,
+        loadingShuffle: false,
         selectedShortener: null,
         trackingSettings: action.trackingSettings,
         remindersAreEnabled: !action.profile.directPostingEnabled,
@@ -68,8 +75,8 @@ export default (state = initialState, action) => {
         ...state,
         showGACustomizationForm: false,
       };
-    case `getGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      var trackingSettings = action.result.trackingSettings;
+    case `getGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const trackingSettings = action.result.trackingSettings;
       return {
         ...state,
         showGACustomizationForm: true,
@@ -77,6 +84,7 @@ export default (state = initialState, action) => {
         utmSource: trackingSettings ? trackingSettings.utm_source : '',
         utmMedium: trackingSettings ? trackingSettings.utm_medium : '',
       };
+    }
     case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
       return {
         ...state,
@@ -125,6 +133,28 @@ export default (state = initialState, action) => {
       return {
         ...state,
         remindersAreEnabled: !state.remindersAreEnabled,
+      };
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        showModal: false,
+        loadingShuffle: false,
+      };
+    case actionTypes.SHUFFLE_QUEUE:
+      return {
+        ...state,
+        showModal: true,
+      };
+    case actionTypes.CONFIRM_SHUFFLE_QUEUE:
+      return {
+        ...state,
+        loadingShuffle: true,
+      };
+    case actionTypes.CLOSE_MODAL:
+      return {
+        ...state,
+        showModal: false,
       };
     default:
       return state;
@@ -181,5 +211,15 @@ export const actions = {
     type: actionTypes.TOGGLE_INSTAGRAM_REMINDERS,
     profileId,
     allowReminders,
+  }),
+  handleShuffleQueue: () => ({
+    type: actionTypes.SHUFFLE_QUEUE,
+  }),
+  handleConfirmShuffleClick: ({ profileId }) => ({
+    type: actionTypes.CONFIRM_SHUFFLE_QUEUE,
+    profileId,
+  }),
+  handleCloseModal: () => ({
+    type: actionTypes.CLOSE_MODAL,
   }),
 };
