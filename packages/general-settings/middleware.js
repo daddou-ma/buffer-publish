@@ -84,18 +84,22 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     case actionTypes.SHUFFLE_QUEUE: {
       const state = getState();
-      const postsObj = state.queue.byProfileId[action.profileId];
-      const count = Object.keys(postsObj.posts).length;
-      // only shuffle posts if more than 1
-      if (postsObj && postsObj.posts && count > 1) {
-        dispatch(dataFetchActions.fetch({
-          name: 'shuffleQueue',
-          args: {
-            profileId: action.profileId,
-            count,
-          },
-        }));
-      }
+      const queueObj = state.queue.byProfileId[action.profileId];
+      const count = Object.keys(queueObj.posts).length;
+      dispatch(dataFetchActions.fetch({
+        name: 'shuffleQueue',
+        args: {
+          profileId: action.profileId,
+          count,
+        },
+      }));
+      break;
+    }
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_FAIL}`: {
+      dispatch(notificationActions.createNotification({
+        notificationType: 'fail',
+        message: 'Sorry! Something went wrong while shuffling your queue. Would you be up for trying again?',
+      }));
       break;
     }
     default:

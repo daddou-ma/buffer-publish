@@ -42,6 +42,7 @@ export default (state = initialState, action) => {
         avatarUrl: action.profile.avatarUrl,
         profileName: action.profile.serviceUsername,
         loadingLinkShorteners: true,
+        loadingShuffle: false,
         selectedShortener: null,
         trackingSettings: action.trackingSettings,
         remindersAreEnabled: !action.profile.directPostingEnabled,
@@ -137,11 +138,23 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showModal: false,
+        loadingShuffle: false,
+      };
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        showModal: false,
+        loadingShuffle: false,
       };
     case actionTypes.CONFIRM_SHUFFLE_QUEUE:
       return {
         ...state,
         showModal: true,
+      };
+    case actionTypes.SHUFFLE_QUEUE:
+      return {
+        ...state,
+        loadingShuffle: true,
       };
     case actionTypes.CLOSE_MODAL:
       return {

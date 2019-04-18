@@ -32,6 +32,7 @@ export default connect(
       hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
       isLockedProfile: state.profileSidebar.isLockedProfile,
       showModal: state.generalSettings.showModal,
+      loadingShuffle: state.generalSettings.loadingShuffle,
     }),
     (dispatch, ownProps) => ({
       onSetUpDirectPostingClick: () => {

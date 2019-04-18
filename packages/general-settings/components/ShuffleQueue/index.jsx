@@ -36,6 +36,7 @@ const ShuffleQueue = ({
   profileService,
   avatarUrl,
   showModal,
+  loading,
 }) => (
   <div style={shuffleQueueWrapperStyle}>
     {showModal && <Popover
@@ -49,7 +50,7 @@ const ShuffleQueue = ({
         heading={'Are you sure?'}
         body={`Your first 200 queued updates for <span style="font-weight:bold">${profileName}</span> will be shuffled
         into a completely random order.`}
-        btnText={'Shuffle Queue'}
+        btnText={loading ? 'Shuffling Queue..' : 'Shuffle Queue'}
       />
     </Popover>}
     <div style={leftContentStyle}>
@@ -78,6 +79,7 @@ ShuffleQueue.defaultProps = {
   profileName: null,
   profileService: null,
   avatarUrl: null,
+  loading: false,
 };
 
 ShuffleQueue.propTypes = {
@@ -88,6 +90,7 @@ ShuffleQueue.propTypes = {
   profileName: PropTypes.string,
   profileService: PropTypes.string,
   avatarUrl: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
 export default ShuffleQueue;

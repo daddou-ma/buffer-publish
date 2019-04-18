@@ -20,6 +20,7 @@ const GeneralSettings = ({
   profileName,
   avatarUrl,
   loadingLinkShorteners,
+  loadingShuffle,
   onLinkShortenerOptionSelect,
   selectedShortener,
   onShowGACustomizationFormClick,
@@ -108,6 +109,7 @@ const GeneralSettings = ({
           profileName={profileName}
           profileService={profileService}
           avatarUrl={avatarUrl}
+          loading={loadingShuffle}
         />
       </div>
     </ErrorBoundary>
@@ -133,6 +135,7 @@ GeneralSettings.defaultProps = {
   utmMedium: null,
   remindersAreEnabled: false,
   isLockedProfile: false,
+  loadingShuffle: false,
 };
 
 GeneralSettings.propTypes = {
@@ -180,6 +183,7 @@ GeneralSettings.propTypes = {
   showModal: PropTypes.bool.isRequired,
   profileName: PropTypes.string,
   avatarUrl: PropTypes.string,
+  loadingShuffle: PropTypes.bool,
 };
 
 export default GeneralSettings;
