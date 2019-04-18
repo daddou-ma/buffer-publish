@@ -1,7 +1,7 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
-import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
 import keyWrapper from '@bufferapp/keywrapper';
+import { isValidURL, urlHasProtocol } from './util';
 
 export const actionTypes = keyWrapper('GRID', {
   POST_IMAGE_CLICKED: 0,
@@ -36,6 +36,7 @@ const getPostUpdateId = (action) => {
 };
 
 const postReducer = (state, action) => {
+  let link = action.link;
   switch (action.type) {
     case actionTypes.POST_IMAGE_CLICKED:
       return {
@@ -48,10 +49,15 @@ const postReducer = (state, action) => {
         isLightboxOpen: false,
       };
     case actionTypes.SAVE_POST_URL:
+      if (isValidURL(action.link)) {
+        if (!urlHasProtocol(action.link)) {
+          link = `https://${link}`;
+        }
+      }
       return {
         ...state,
-        link: action.link,
-        oldLink: action.link,
+        link,
+        oldLink: link,
       };
     case actionTypes.UPDATE_POST_URL:
       return {
