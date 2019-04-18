@@ -8,6 +8,8 @@ import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actionTypes as gridActionTypes } from './reducer';
 import { isValidURL, getBaseURL } from './util';
 
+const urlHasProtocol = url => ((url.indexOf('https://') !== -1) || (url.indexOf('http://') !== -1));
+
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
   switch (action.type) {
@@ -47,11 +49,16 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
     case gridActionTypes.SAVE_POST_URL:
       if (action.link) {
         if (isValidURL(action.link)) {
+          let link = action.link;
+          if (!urlHasProtocol(action.link)) {
+            link = `https://${link}`;
+          }
+
           dispatch(dataFetchActions.fetch({
             name: 'updatePostLink',
             args: {
               updateId: action.updateId,
-              link: action.link,
+              link,
             },
           }));
         } else {
