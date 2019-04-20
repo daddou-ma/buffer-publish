@@ -26,7 +26,7 @@ const getNotificationCopy = (service, isInstagramBusiness) => {
     return (
       <div>
         We only support Instagram business profiles in our analytics right now.
-        <Link href={'https://buffer.com/oops'} unstyled newTab>
+        <Link href={'https://faq.buffer.com/article/959-publish-instagram-set-up'} unstyled newTab>
           Learn how to set your profile to business.
         </Link>
       </div>
