@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Card,
   Text,
+  Link,
   NotificationIcon,
 } from '@bufferapp/components';
 
@@ -19,7 +21,21 @@ const contentStyle = {
   marginTop: '0.5rem',
 };
 
-const Notification = () => (
+const getNotificationCopy = (service, isInstagramBusiness) => {
+  if (service === 'instagram' && !isInstagramBusiness) {
+    return (
+      <div>
+        We only support Instagram business profiles in our analytics right now.
+        <Link href={'https://buffer.com/oops'} unstyled newTab>
+          Learn how to set your profile to business.
+        </Link>
+      </div>
+    );
+  }
+  return (<div>We only support Facebook & Twitter profiles in our analytics right now.</div>);
+};
+
+const Notification = ({ isInstagramBusiness, service }) => (
   <Card reducedPadding>
     <div style={titleStyle}>
       <span style={iconStyle}>
@@ -34,10 +50,15 @@ const Notification = () => (
     </div>
     <div style={contentStyle}>
       <Text size={'mini'}>
-        We only support Facebook & Twitter profiles in our analytics right now.
+        {getNotificationCopy(service, isInstagramBusiness)}
       </Text>
     </div>
   </Card>
 );
+
+Notification.propTypes = {
+  isInstagramBusiness: PropTypes.string.isRequired,
+  service: PropTypes.string.isRequired,
+};
 
 export default Notification;
