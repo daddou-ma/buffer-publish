@@ -76,11 +76,20 @@ const copyLinkStyle = {
 };
 
 const onCopyToClipboard = (text, handleCopyToClipboard) => {
-  navigator.clipboard.writeText(text).then(() => {
+  const el = document.createElement('textarea');
+  el.value = text;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  const copied = document.execCommand('copy');
+  document.body.removeChild(el);
+  if (copied) {
     handleCopyToClipboard(true);
-  }, (err) => {
+  } else {
     handleCopyToClipboard(false);
-  });
+  }
 };
 
 const onPreviewClick = (generatedUrl) => {
