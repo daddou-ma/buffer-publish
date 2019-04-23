@@ -43,6 +43,7 @@ class TabNavigation extends React.Component {
     const {
       features,
       isBusinessAccount,
+      isBusinessUser,
       isManager,
       selectedTabId,
       selectedChildTabId,
@@ -83,9 +84,8 @@ class TabNavigation extends React.Component {
           {(!features.isFreeUser() || isBusinessAccount) &&
             <Tab tabId={'drafts'}>Drafts</Tab>
           }
-          {/* Pro and up users or Team Members */}
-          {(!features.isFreeUser() || isBusinessAccount)
-            && isInstagramProfile && hasLinkInBioFeatureFlip &&
+          {/* Business users or Team Members */}
+          {isBusinessUser && isInstagramProfile && hasLinkInBioFeatureFlip &&
             <Tab tabId={'grid'}>Shop Grid</Tab>
           }
           <Tab tabId={'settings'}>Settings</Tab>
