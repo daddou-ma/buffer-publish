@@ -104,7 +104,7 @@ const GridListPost = ({
           }}
           size="small"
           name="postUrl"
-          placeholder="bufferapp.com"
+          placeholder="Website or Product URL"
           value={post.link}
         />
       </div>
