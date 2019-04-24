@@ -145,7 +145,7 @@ export default connect(
     onComposerPlaceholderClick: () => {
       dispatch(actions.handleComposerPlaceholderClick());
     },
-    onComposerInteraction: ({message}) => {
+    onComposerInteraction: ({ message }) => {
       if (message.commentEnabled) {
         dispatch(modalsActions.showInstagramFirstCommentModal());
       }

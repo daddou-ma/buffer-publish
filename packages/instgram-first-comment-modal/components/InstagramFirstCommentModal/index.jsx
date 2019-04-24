@@ -16,7 +16,6 @@ import styles from './instagramFirstCommentModal.css';
 
 class InstagramFirstCommentModal extends React.Component {
   constructor(props) {
-    console.log('constructor');
     super(props);
     this.state = {
       authResponse: null,
@@ -36,12 +35,10 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   componentDidMount () {
-    console.log('componentDidMount');
     this.getFBLoginStatus();
   }
 
   componentDidUpdate () {
-    console.log('componentDidUpdate');
     const { profile, appId } = this.props;
     if (profile && appId) {
       const { canPostComment } = profile;
@@ -65,9 +62,12 @@ class InstagramFirstCommentModal extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('updateIFFirstCommentState', this.updateState);
+  }
+
   getFBLoginStatus () {
     /* eslint-disable no-undef */
-    console.log('getFBLoginStatus');
     window.addEventListener('updateIFFirstCommentState', this.updateState);
 
     const getLoginStatus = () => {
@@ -93,13 +93,11 @@ class InstagramFirstCommentModal extends React.Component {
       };
     } else {
       getLoginStatus();
-      console.log({ state: this.state, props: this.props });
     }
     /* eslint-enable no-undef */
   }
 
   sendStateUpdate(message) {
-    console.log('sendStateUpdate');
     window.dispatchEvent(new CustomEvent('updateIFFirstCommentState', {
       bubbles: false,
       detail: {
@@ -110,18 +108,11 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   updateState(event) {
-    console.log('updateState');
     this.setState(event.detail.message);
-  }
-
-  componentWillUnmount() {
-    console.log('componentWillUnmount');
-    window.removeEventListener('updateIFFirstCommentState', this.updateState);
   }
 
   checkServiceAccess() {
     if (!this.state.checkedServiceAccess) {
-      console.log('checkServiceAccess');
       const { profile } = this.props;
       const { serviceId } = profile;
 
@@ -130,7 +121,7 @@ class InstagramFirstCommentModal extends React.Component {
         this.sendStateUpdate({
           checkedServiceAccess: true,
         });
-        if (data.error !== 'undefined') {
+        if (data && typeof data.error !== 'undefined') {
           /*
           inform user they need to log out of FB before granting permissions and will
           need to log into "profile name" account
@@ -145,7 +136,6 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   userCanRequestMorePermissions () {
-    console.log('userCanRequestMorePermissions');
     this.sendStateUpdate({
       canRequestMorePermission: true,
       loading: false,
@@ -153,7 +143,6 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   userNeedsLogoutSignin () {
-    console.log('userNeedsLogoutSignin');
     this.sendStateUpdate({
       userNeedsLogoutSignin: true,
       loading: false,
@@ -161,7 +150,6 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   loadFB() {
-    console.log('loadFB');
     if (!this.state.loadedFB) {
       (function (d, s, id) {
         if (d.getElementById(id)) return;
@@ -176,7 +164,6 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   userNeedsSignin () {
-    console.log('userNeedsSignin');
     if (!this.state.needsSiginin) {
       this.sendStateUpdate({
         needsSiginin: true,
@@ -186,15 +173,12 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   render() {
-    console.log('render');
     const { translations, hideModal, profile, canRequestMorePermission } = this.props;
 
     if (typeof profile.canPostComment === 'undefined' || profile.canPostComment) {
-      console.log('renderCanPostCommentUndefined');
       return null;
     }
     if (this.state.loading) {
-      console.log('renderLoading');
       return (
         <div style={{ position: 'fixed', zIndex: '3000', borderRadius: '4px', boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)' }}>
           <Popover>
@@ -215,7 +199,6 @@ class InstagramFirstCommentModal extends React.Component {
       );
     }
     if (this.state.canRequestMorePermission) {
-      console.log('renderCanRequestMorePermission');
       return (
         <div style={{ position: 'fixed', zIndex: '3000', borderRadius: '4px', boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)' }}>
           <Popover>
@@ -245,7 +228,6 @@ class InstagramFirstCommentModal extends React.Component {
       );
     }
     if (this.state.userNeedsLogoutSignin) {
-      console.log('renderUserNeedsLogoutSignin');
       const profileName = [
         { replaceString: '{signout}', replaceWith: <Text weight="bold">{translations.signout}</Text> },
         { replaceString: '{profileName}', replaceWith: <Text weight="bold">{profile.service_username}</Text> },
@@ -271,8 +253,17 @@ class InstagramFirstCommentModal extends React.Component {
               </div>
               <div className={styles.barBottomStyle}>
                 <div className={styles.divButton}>
-                  <BDSButton onClick={hideModal} type="textOnly">{translations.cancel}</BDSButton>
-                  <BDSButton onClick={() => canRequestMorePermission(profile.id)}>{translations.continue}</BDSButton>
+                  <BDSButton
+                    onClick={hideModal}
+                    type="textOnly"
+                  >
+                    {translations.cancel}
+                  </BDSButton>
+                  <BDSButton
+                    onClick={() => canRequestMorePermission(profile.id)}
+                  >
+                    {translations.continue}
+                  </BDSButton>
                 </div>
               </div>
             </div>
@@ -280,7 +271,6 @@ class InstagramFirstCommentModal extends React.Component {
         </div>
       );
     }
-    console.log('renderStandard');
     return (
       <div style={{ position: 'fixed', zIndex: '3000', borderRadius: '4px', boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)' }}>
         <Popover>
@@ -298,8 +288,17 @@ class InstagramFirstCommentModal extends React.Component {
             </div>
             <div className={styles.barBottomStyle}>
               <div className={styles.divButton}>
-                <BDSButton onClick={hideModal} type="textOnly">{translations.cancel}</BDSButton>
-                <BDSButton onClick={() => canRequestMorePermission(profile.id)}>{translations.continue}</BDSButton>
+                <BDSButton
+                  onClick={hideModal}
+                  type="textOnly"
+                >
+                  {translations.cancel}
+                </BDSButton>
+                <BDSButton
+                  onClick={() => canRequestMorePermission(profile.id)}
+                >
+                  {translations.continue}
+                </BDSButton>
               </div>
             </div>
           </div>
