@@ -55,7 +55,6 @@ class TabNavigation extends React.Component {
       profileId,
       isLockedProfile,
       isInstagramProfile,
-      hasLinkInBioFeatureFlip,
     } = this.props;
 
     return (
@@ -164,7 +163,6 @@ TabNavigation.defaultProps = {
   profileId: null,
   isLockedProfile: false,
   isInstagramProfile: false,
-  hasLinkInBioFeatureFlip: false,
   isBusinessAccount: false,
   isManager: false,
 };
@@ -184,7 +182,6 @@ TabNavigation.propTypes = {
   profileId: PropTypes.string,
   isLockedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
-  hasLinkInBioFeatureFlip: PropTypes.bool,
 };
 
 export default WithFeatureLoader(TabNavigation);
