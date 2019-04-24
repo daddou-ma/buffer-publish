@@ -85,10 +85,8 @@ const QueuedPosts = ({
   subprofiles,
   isInstagramProfile,
   isInstagramBusiness,
-  onSetUpDirectPostingClick,
   showInstagramDirectPostingModal,
   onDirectPostingClick,
-  hasInstagramFeatureFlip,
   isInstagramLoading,
   isLockedProfile,
   isManager,
@@ -138,13 +136,10 @@ const QueuedPosts = ({
           </div>
 
         </div>
-        {!hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
-          <InstagramDirectPostingBanner onDirectPostingClick={onSetUpDirectPostingClick} />
-        }
-        {hasInstagramFeatureFlip && isInstagramProfile && !isInstagramBusiness &&
+        {isInstagramProfile && !isInstagramBusiness &&
           <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
         }
-        {hasInstagramFeatureFlip && showInstagramDirectPostingModal &&
+        {showInstagramDirectPostingModal &&
           <InstagramDirectPostingModal />
         }
         {!!paused && <QueuePausedBar isManager={isManager} handleClickUnpause={onUnpauseClick} />}
@@ -223,10 +218,8 @@ QueuedPosts.propTypes = {
   isManager: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
-  onSetUpDirectPostingClick: PropTypes.func.isRequired,
   showInstagramDirectPostingModal: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,
-  hasInstagramFeatureFlip: PropTypes.bool,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
@@ -247,7 +240,6 @@ QueuedPosts.defaultProps = {
   isInstagramProfile: false,
   isInstagramBusiness: false,
   showInstagramDirectPostingModal: false,
-  hasInstagramFeatureFlip: false,
   isInstagramLoading: false,
   isLockedProfile: false,
   hasFirstCommentFlip: false,

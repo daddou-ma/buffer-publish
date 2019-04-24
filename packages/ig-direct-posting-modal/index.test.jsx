@@ -1,10 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import Example, {
+import InstagramDirectPostingModal, {
+  reducer,
+  actions,
+  actionTypes,
 } from './index';
-
-import InstagramDirectPostingModal from './components/InstagramDirectPostingModal';
 
 const storeFake = state => ({
   default: () => {},
@@ -33,10 +34,25 @@ describe('InstagramDirectPostingModal', () => {
     });
     const wrapper = mount(
       <Provider store={store}>
-        <Example />
+        <InstagramDirectPostingModal />
       </Provider>,
     );
     expect(wrapper.find(InstagramDirectPostingModal).length)
       .toBe(1);
+  });
+
+  it('should export reducer', () => {
+    expect(reducer)
+      .toBeDefined();
+  });
+
+  it('should export actions', () => {
+    expect(actions)
+      .toBeDefined();
+  });
+
+  it('should export actionTypes', () => {
+    expect(actionTypes)
+      .toBeDefined();
   });
 });

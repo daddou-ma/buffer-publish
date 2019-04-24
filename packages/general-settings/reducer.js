@@ -3,7 +3,6 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
-  SET_DIRECT_POSTING: 0,
   CHANGE_SELECTED_LINK_SHORTENER: 0,
   SHOW_GA_CUSTOMIZATION_FORM: 0,
   TOGGLE_GOOGLE_ANALYTICS: 0,
@@ -162,10 +161,6 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  handleSetUpDirectPostingClick: action => ({
-    type: actionTypes.SET_DIRECT_POSTING,
-    profileId: action.profileId,
-  }),
   handleConnectBitlyURLClick: action => ({
     type: actionTypes.CONNECT_BITLY,
     profileId: action.profileId,

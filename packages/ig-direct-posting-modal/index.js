@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 // load the presentational component
 import InstagramDirectPostingModal from './components/InstagramDirectPostingModal';
+import { actions } from './reducer';
 
 export default connect(
   state => ({
@@ -14,7 +14,7 @@ export default connect(
   dispatch => ({
     onHideInstagramModal: () => dispatch(modalsActions.hideInstagramDirectPostingModal()),
     onSetUpDirectPostingClick: (profileId) => {
-      dispatch(generalSettingsActions.handleSetUpDirectPostingClick({
+      dispatch(actions.handleSetUpDirectPostingClick({
         profileId,
       }));
     },
@@ -29,3 +29,6 @@ export default connect(
     },
   }),
 )(InstagramDirectPostingModal);
+
+export reducer, { actions, actionTypes } from './reducer';
+export middleware from './middleware';

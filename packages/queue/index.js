@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
-import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { trackAction } from '@bufferapp/publish-data-tracking';
@@ -56,7 +54,6 @@ export default connect(
         showInstagramDirectPostingModal: state.modals.showInstagramDirectPostingModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
         isInstagramLoading: state.queue.isInstagramLoading,
-        hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
         hasFirstCommentFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('first_comment') : false,
       };
     }
@@ -147,11 +144,6 @@ export default connect(
     },
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
-    },
-    onSetUpDirectPostingClick: () => {
-      dispatch(generalSettingsActions.handleSetUpDirectPostingClick({
-        profileId: ownProps.profileId,
-      }));
     },
     onDirectPostingClick: () => {
       dispatch(dataFetchActions.fetch({
