@@ -167,12 +167,14 @@ TabNavigation.defaultProps = {
   isInstagramProfile: false,
   hasLinkInBioFeatureFlip: false,
   isBusinessAccount: false,
+  isBusinessUser: false,
   isManager: false,
 };
 
 TabNavigation.propTypes = {
   features: PropTypes.any.isRequired, // eslint-disable-line
   isBusinessAccount: PropTypes.bool,
+  isBusinessUser: PropTypes.bool,
   isManager: PropTypes.bool.isRequired,
   selectedTabId: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
