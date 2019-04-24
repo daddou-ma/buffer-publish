@@ -43,7 +43,6 @@ class TabNavigation extends React.Component {
     const {
       features,
       isBusinessAccount,
-      isBusinessUser,
       isManager,
       selectedTabId,
       selectedChildTabId,
@@ -85,7 +84,7 @@ class TabNavigation extends React.Component {
             <Tab tabId={'drafts'}>Drafts</Tab>
           }
           {/* Business users or Team Members */}
-          {isBusinessUser && isInstagramProfile && hasLinkInBioFeatureFlip &&
+          {isBusinessAccount && isInstagramProfile && hasLinkInBioFeatureFlip &&
             <Tab tabId={'grid'}>Shop Grid</Tab>
           }
           <Tab tabId={'settings'}>Settings</Tab>
@@ -167,14 +166,12 @@ TabNavigation.defaultProps = {
   isInstagramProfile: false,
   hasLinkInBioFeatureFlip: false,
   isBusinessAccount: false,
-  isBusinessUser: false,
   isManager: false,
 };
 
 TabNavigation.propTypes = {
   features: PropTypes.any.isRequired, // eslint-disable-line
   isBusinessAccount: PropTypes.bool,
-  isBusinessUser: PropTypes.bool,
   isManager: PropTypes.bool.isRequired,
   selectedTabId: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
