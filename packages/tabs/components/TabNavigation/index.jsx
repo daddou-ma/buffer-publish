@@ -84,7 +84,7 @@ class TabNavigation extends React.Component {
             <Tab tabId={'drafts'}>Drafts</Tab>
           }
           {/* Business users or Team Members */}
-          {isBusinessAccount && isInstagramProfile && hasLinkInBioFeatureFlip &&
+          {isBusinessAccount && isInstagramProfile &&
             <Tab tabId={'grid'}>Shop Grid</Tab>
           }
           <Tab tabId={'settings'}>Settings</Tab>
