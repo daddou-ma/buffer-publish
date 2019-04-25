@@ -73,11 +73,11 @@ const AnalyticsList = ({
           }
           <CompareChart />
           {!isInstagramBusiness &&
-            <div>
+            <React.Fragment>
               <HourlyChart />
               <AverageTable />
               <PostsTable />
-            </div>
+            </React.Fragment>
           }
         </div>
       </ErrorBoundary>
