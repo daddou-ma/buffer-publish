@@ -5,6 +5,7 @@ import { checkA11y } from 'storybook-addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import IGFirstCommentModal from './index';
+import PropTypes from 'prop-types';
 
 storiesOf('IGFirstCommentModal', module)
   .addDecorator(checkA11y)
@@ -12,5 +13,9 @@ storiesOf('IGFirstCommentModal', module)
     <IGFirstCommentModal
       translations={translations['welcome-paid-modal']}
       hideModal={action('hide-modal')}
+      canRequestMorePermission={() => {}}
+      profile={{id: 'abc', canPostComment: false}}
+      appId={'abc123'}
+      loadFacebook={() => {}}
     />
   ));

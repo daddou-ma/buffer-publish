@@ -16,6 +16,16 @@ export default connect(
   }),
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideInstagramFirstCommentModal()),
+    loadFacebook: () => {
+      (function (d, s, id) {
+        if (d.getElementById(id)) return;
+        const fjs = d.getElementsByTagName(s)[0];
+        const js = d.createElement(s);
+        js.id = id;
+        js.src = '//connect.facebook.net/en_US/sdk.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    },
     canRequestMorePermission: (profileId) => {
       const popup = window.open(`https://${getBaseURL()}/oauth/instagram/${profileId}/reconnect/auth`);
 

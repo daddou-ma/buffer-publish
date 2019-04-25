@@ -151,14 +151,7 @@ class InstagramFirstCommentModal extends React.Component {
 
   loadFB() {
     if (!this.state.loadedFB) {
-      (function (d, s, id) {
-        if (d.getElementById(id)) return;
-        const fjs = d.getElementsByTagName(s)[0];
-        const js = d.createElement(s);
-        js.id = id;
-        js.src = '//connect.facebook.net/en_US/sdk.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+      this.props.loadFacebook();
       return true;
     }
   }
@@ -309,6 +302,7 @@ class InstagramFirstCommentModal extends React.Component {
 }
 
 InstagramFirstCommentModal.propTypes = {
+  loadFacebook: PropTypes.func.isRequired,
   translations: PropTypes.object.isRequired, // eslint-disable-line
   hideModal: PropTypes.func.isRequired,
   canRequestMorePermission: PropTypes.func.isRequired,
