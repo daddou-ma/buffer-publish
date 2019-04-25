@@ -11,7 +11,6 @@ import { trackAction } from '@bufferapp/publish-data-tracking';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
-
 import Toolbar from '../Toolbar';
 import Notification from '../Notification';
 import ProfileHeader from '../ProfileHeader';
@@ -27,6 +26,7 @@ const AnalyticsList = ({
   isLockedProfile,
   canStartBusinessTrial,
   isBusinessAccount,
+  isInstagramBusiness,
 }) => {
   // user is either a free or pro and is not a team member
   if (!isBusinessAccount && (features.isProUser() || features.isFreeUser())) {
@@ -68,11 +68,17 @@ const AnalyticsList = ({
       <ErrorBoundary>
         <div id="analytics">
           <Toolbar profile={profile} />
-          <SummaryTable />
+          {!isInstagramBusiness &&
+            <SummaryTable />
+          }
           <CompareChart />
-          <HourlyChart />
-          <AverageTable />
-          <PostsTable />
+          {!isInstagramBusiness &&
+            <React.Fragment>
+              <HourlyChart />
+              <AverageTable />
+              <PostsTable />
+            </React.Fragment>
+          }
         </div>
       </ErrorBoundary>
     );
@@ -87,8 +93,8 @@ AnalyticsList.propTypes = {
   isAnalyticsSupported: PropTypes.bool,
   profile: PropTypes.shape(ProfileHeader.propTypes),
   isLockedProfile: PropTypes.bool,
-  onClickUpgrade: PropTypes.func.isRequired,
   isBusinessAccount: PropTypes.bool.isRequired,
+  isInstagramBusiness: PropTypes.bool.isRequired,
 };
 
 AnalyticsList.defaultProps = {

@@ -178,6 +178,12 @@ app.use(helmet.frameguard({ action: 'sameorigin' }));
 app.all('/maintenance', maintenanceHandler);
 
 // All routes after this have access to the user session
+app.use('*', (req, res, next) => {
+  const analyzeApiAddr = req.get('ANALYZE-API-ADDR') || process.env.ANALYZE_API_ADDR;
+  app.set('analyzeApiAddr', analyzeApiAddr);
+  next();
+});
+
 app.use(
   setRequestSessionMiddleware({
     production: isProduction,
