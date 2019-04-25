@@ -4,8 +4,9 @@ import {
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actionTypes as gridActionTypes } from './reducer';
-import { isValidURL, getBaseURL } from './util';
+import { isValidURL, getBaseURL, urlHasProtocol } from './util';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
@@ -33,12 +34,12 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
       if (action.copySuccess) {
         dispatch(notificationActions.createNotification({
           notificationType: 'success',
-          message: 'Generated URL copied to your clipboard!',
+          message: 'Copied!',
         }));
       } else {
         dispatch(notificationActions.createNotification({
           notificationType: 'error',
-          message: 'Error copying generated URL copied to your clipboard!',
+          message: 'Error copying to your clipboard!',
         }));
       }
       break;
@@ -46,11 +47,16 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
     case gridActionTypes.SAVE_POST_URL:
       if (action.link) {
         if (isValidURL(action.link)) {
+          let link = action.link;
+          if (!urlHasProtocol(action.link)) {
+            link = `https://${link}`;
+          }
+
           dispatch(dataFetchActions.fetch({
             name: 'updatePostLink',
             args: {
               updateId: action.updateId,
-              link: action.link,
+              link,
             },
           }));
         } else {
@@ -59,11 +65,20 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
             message: 'The URL format is invalid!',
           }));
         }
+      } else {
+        dispatch(dataFetchActions.fetch({
+          name: 'updatePostLink',
+          args: {
+            updateId: action.updateId,
+            link: action.link,
+          },
+        }));
       }
       break;
 
     case `updatePostLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.result && action.result.success) {
+        trackAction({ location: 'grid', action: 'updated_grid_post_url' });
         dispatch(notificationActions.createNotification({
           notificationType: 'success',
           message: 'Nice! Your changes have been saved.',

@@ -8,12 +8,9 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch }) => next => (action) => {
+export default ({ dispatch, getState }) => next => (action) => {
   next(action);
   switch (action.type) {
-    case actionTypes.SET_DIRECT_POSTING:
-      window.location = getURL.getInstagramDirectPostingURL(action.profileId);
-      break;
     case actionTypes.CONNECT_BITLY:
       window.location = getURL.getConnectBitlyURL(action.profileId);
       break;
@@ -82,6 +79,33 @@ export default ({ dispatch }) => next => (action) => {
         },
       }));
       break;
+    case actionTypes.CONFIRM_SHUFFLE_QUEUE: {
+      const state = getState();
+      const queueObj = state.queue.byProfileId[action.profileId];
+      const count = Object.keys(queueObj.posts).length;
+      dispatch(dataFetchActions.fetch({
+        name: 'shuffleQueue',
+        args: {
+          profileId: action.profileId,
+          count,
+        },
+      }));
+      break;
+    }
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_FAIL}`: {
+      dispatch(notificationActions.createNotification({
+        notificationType: 'fail',
+        message: 'Sorry! Something went wrong while shuffling your queue. Would you be up for trying again?',
+      }));
+      break;
+    }
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: 'Awesome! Your queue has been successfully shuffled.',
+      }));
+      break;
+    }
     default:
       break;
   }

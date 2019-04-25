@@ -299,7 +299,8 @@ const postReducer = (state, action) => {
 
 const postsReducer = (state = {}, action) => {
   switch (action.type) {
-    case `queuedPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+    case `queuedPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { updates } = action.result;
       if (action.args.isFetchingMore) {
         return { ...state, ...updates };
@@ -350,6 +351,11 @@ const profileReducer = (state = profileInitialState, action) => {
         page: state.page + 1,
         posts: postsReducer(state.posts, action),
         total: action.result.total,
+      };
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        posts: postsReducer(state.posts, action),
       };
     case `queuedPosts_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
@@ -414,6 +420,7 @@ export default (state = initialState, action) => {
     case `queuedPosts_${dataFetchActionTypes.FETCH_START}`:
     case `queuedPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `queuedPosts_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case actionTypes.POST_CREATED:
     case actionTypes.POST_UPDATED:
     case actionTypes.POST_CLICKED_DELETE:

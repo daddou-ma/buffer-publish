@@ -3,7 +3,7 @@ const { analyzePackagesWhitelist } = require('./analyze.config.js');
 module.exports = {
   verbose: true,
   transformIgnorePatterns: [
-    `/node_modules(?!/@bufferapp/performance-tracking)(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/components)(?!/@bufferapp/notifications)(?!/@bufferapp/web-components)(?!/@bufferapp/composer)(?!/@bufferapp/unauthorized-redirect)${analyzePackagesWhitelist}/`,
+    `/node_modules(?!/@bufferapp/performance-tracking)(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/components)(?!/@bufferapp/notifications)(?!/@bufferapp/web-components)(?!/@bufferapp/composer)(?!/@bufferapp/unauthorized-redirect)(?!/@bufferapp/app-sidebar)${analyzePackagesWhitelist}/`,
   ],
   collectCoverage: true,
   moduleNameMapper: {
@@ -16,5 +16,8 @@ module.exports = {
   globals: {
     __PACKAGES__: '../packages',
   },
+  testPathIgnorePatterns: [
+    'package/sidebar/node_modules',
+  ],
   testURL: 'https://publish.local.buffer.com',
 };

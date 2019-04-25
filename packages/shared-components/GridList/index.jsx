@@ -98,11 +98,13 @@ const GridListPost = ({
             onChangePostUrl(post, e.target.value);
           }}
           onBlur={(e) => {
-            onSavePostUrl(post, e.target.value);
+            if (typeof post.oldLink !== 'undefined' && (post.oldLink !== post.link)) {
+              onSavePostUrl(post, e.target.value);
+            }
           }}
           size="small"
           name="postUrl"
-          placeholder="bufferapp.com"
+          placeholder="Website or Product URL"
           value={post.link}
         />
       </div>

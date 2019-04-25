@@ -11,6 +11,8 @@ import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import { ProfileBadge } from '@bufferapp/analyze-shared-components';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import { trackAction } from '@bufferapp/publish-data-tracking';
+import { IconArrowPopover } from '@bufferapp/components';
 import { openPreviewPage } from '../../util';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -74,11 +76,25 @@ const copyLinkStyle = {
 };
 
 const onCopyToClipboard = (text, handleCopyToClipboard) => {
-  navigator.clipboard.writeText(text).then(() => {
+  const el = document.createElement('textarea');
+  el.value = text;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  const copied = document.execCommand('copy');
+  document.body.removeChild(el);
+  if (copied) {
     handleCopyToClipboard(true);
-  }, (err) => {
+  } else {
     handleCopyToClipboard(false);
-  });
+  }
+};
+
+const onPreviewClick = (generatedUrl) => {
+  trackAction({ location: 'grid', action: 'click_preview_url' });
+  openPreviewPage(generatedUrl);
 };
 
 const GridPosts = ({
@@ -154,7 +170,18 @@ const GridPosts = ({
               >
                 {generatedUrl}
                 <div style={copyLinkStyle}>
-                  <CopyIcon size="medium" />
+                  <div style={{ display: 'inline-block', position: 'relative', top: '0px', left: '5px' }}>
+                    <IconArrowPopover
+                      icon={<CopyIcon size="medium" />}
+                      shadow
+                      oneLine
+                      label="Copy Page Link"
+                    >
+                      <div style={{ padding: '.25rem .10rem' }}>
+                        Copy Page Link
+                      </div>
+                    </IconArrowPopover>
+                  </div>
                 </div>
               </button>
             </div>
@@ -162,7 +189,7 @@ const GridPosts = ({
               label={'Preview Page'}
               type="secondary"
               onClick={() => {
-                openPreviewPage(generatedUrl);
+                onPreviewClick(generatedUrl);
               }}
             />
           </div>

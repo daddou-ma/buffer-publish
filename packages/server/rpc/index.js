@@ -18,6 +18,7 @@ const getTimezonesMethod = require('./getTimezones');
 const updateTimezoneMethod = require('./updateTimezone');
 const reorderPostsMethod = require('./reorderPosts');
 const reorderProfilesMethod = require('./reorderProfiles');
+const shuffleQueueMethod = require('./shuffleQueue');
 const pauseQueueMethod = require('./pauseQueue');
 const requeuePost = require('./requeuePost');
 const updatePausedSchedules = require('./updatePausedSchedules');
@@ -81,6 +82,7 @@ module.exports = rpc(
   updateTimezoneMethod,
   reorderPostsMethod,
   reorderProfilesMethod,
+  shuffleQueueMethod,
   pauseQueueMethod,
   requeuePost,
   updatePausedSchedules,

@@ -22,6 +22,7 @@ import { reducer as upgradeModalReducer } from '@bufferapp/publish-upgrade-modal
 import { reducer as stripeReducer } from '@bufferapp/stripe';
 import { reducer as editEmailReducer } from '@bufferapp/edit-email';
 import { reducer as modalsReducer } from '@bufferapp/publish-modals';
+import { reducer as instagramDirectPostingModalReducer } from '@bufferapp/publish-ig-direct-posting-modal';
 import { reducer as changePasswordReducer } from '@bufferapp/change-password';
 import { reducer as manageAppsReducer } from '@bufferapp/manage-apps-extras';
 import { reducer as twoFactorAuthReducer } from '@bufferapp/publish-two-factor-auth';
@@ -73,6 +74,7 @@ export default ({
   generalSettings: generalSettingsReducer,
   postingSchedule: postingScheduleReducer,
   profilesDisconnectedModal: profilesDisconnectedModalReducer,
+  instagramDirectPostingModal: instagramDirectPostingModalReducer,
   accountNotifications: accountNotificationsReducer,
   stealProfileModal: stealProfileModalReducer,
   lockedProfileNotification: lockedProfileNotificationReducer,

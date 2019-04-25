@@ -55,6 +55,7 @@ export default connect(
         post,
         profileId: ownProps.profileId,
         link,
+        oldLink: post.link,
       }));
     },
     onSavePostUrl: (post, link) => {

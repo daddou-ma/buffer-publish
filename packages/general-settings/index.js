@@ -16,6 +16,8 @@ export default connect(
       isInstagramBusiness: state.generalSettings.isInstagramBusiness,
       profileId: state.generalSettings.profileId,
       profileService: state.generalSettings.profileService,
+      profileName: state.generalSettings.profileName,
+      avatarUrl: state.generalSettings.avatarUrl,
       linkShorteners: state.generalSettings.linkShorteners,
       loadingLinkShorteners: state.generalSettings.loadingLinkShorteners,
       selectedShortener: state.generalSettings.selectedShortener,
@@ -27,15 +29,11 @@ export default connect(
       utmSource: state.generalSettings.utmSource,
       utmMedium: state.generalSettings.utmMedium,
       remindersAreEnabled: state.generalSettings.remindersAreEnabled,
-      hasInstagramFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('new_ig_authentication') : false,
       isLockedProfile: state.profileSidebar.isLockedProfile,
+      showModal: state.generalSettings.showModal,
+      loadingShuffle: state.generalSettings.loadingShuffle,
     }),
     (dispatch, ownProps) => ({
-      onSetUpDirectPostingClick: () => {
-        dispatch(actions.handleSetUpDirectPostingClick({
-          profileId: ownProps.profileId,
-        }));
-      },
       onDirectPostingClick: () => {
         dispatch(push(generateProfilePageRoute({
           profileId: ownProps.profileId,
@@ -106,6 +104,15 @@ export default connect(
           profileId: ownProps.profileId,
           allowReminders: newToggleValue,
         }));
+      },
+      onShuffleQueueClick: () => {
+        dispatch(actions.handleShuffleQueue());
+      },
+      onConfirmShuffleQueueClick: () => {
+        dispatch(actions.handleConfirmShuffleClick({ profileId: ownProps.profileId }));
+      },
+      onCloseModal: () => {
+        dispatch(actions.handleCloseModal());
       },
     }),
 )(GeneralSettingsWithFeatureLoader);

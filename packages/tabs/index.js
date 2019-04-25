@@ -20,7 +20,6 @@ export default connect(
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
     isInstagramProfile: state.generalSettings.isInstagramProfile,
-    hasLinkInBioFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('instagram-link-bio-grid') : false,
   }),
   (dispatch, ownProps) => ({
     onTabClick: (tabId) => {
