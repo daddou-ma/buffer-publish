@@ -55,6 +55,8 @@ env:
         fieldPath: status.hostIP
   - name: API_ADDR
     value: https://k8s-api-php71.buffer.com
+  - name: ANALYZE_API_ADDR
+    value: https://analyze-api.buffer.com
   - name: BUGSNAG_KEY
     valueFrom:
       secretKeyRef:
