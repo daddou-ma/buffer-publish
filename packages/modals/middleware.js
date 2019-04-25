@@ -14,6 +14,7 @@ import {
   shouldShowWelcomeModalPaidUsers,
   getShowModalValue,
   resetShowModalKey,
+  shouldShowInstagramFirstCommentModal,
 } from './util/showModal';
 
 export default ({ dispatch, getState }) => next => (action) => {
@@ -27,6 +28,9 @@ export default ({ dispatch, getState }) => next => (action) => {
     case 'APP_INIT': {
       if (shouldShowUpgradeModal()) {
         dispatch(actions.showUpgradeModal({ source: getSourceFromKey() }));
+      }
+      if (shouldShowInstagramFirstCommentModal()) {
+        dispatch(actions.showInstagramFirstCommentModal());
       }
       if (shouldShowWelcomeModal()) {
         dispatch(actions.showWelcomeModal());

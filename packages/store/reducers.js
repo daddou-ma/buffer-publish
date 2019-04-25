@@ -10,6 +10,7 @@ import { reducer as postingScheduleReducer } from '@bufferapp/publish-posting-sc
 import { reducer as generalSettingsReducer } from '@bufferapp/publish-general-settings';
 import { reducer as i18nReducer } from '@bufferapp/publish-i18n';
 import { reducer as profileSidebarReducer } from '@bufferapp/publish-profile-sidebar';
+import { reducer as clientAccessReducer } from '@bufferapp/client-access';
 import { reducer as appSidebarReducer } from '@bufferapp/app-sidebar';
 import { reducer as productFeaturesReducer } from '@bufferapp/product-features';
 import { reducer as asyncDataFetchReducer } from '@bufferapp/async-data-fetch';
@@ -53,6 +54,7 @@ export default ({
   i18n: i18nReducer,
   tabs: tabsReducer,
   profileSidebar: profileSidebarReducer,
+  clientAccess: clientAccessReducer,
   appSidebar: appSidebarReducer,
   asyncDataFetch: asyncDataFetchReducer,
   notifications: notificationsReducer,

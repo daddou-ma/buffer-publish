@@ -82,6 +82,16 @@
     "body3": "Feeling nostalgic? Switch back to classic Buffer at any time.",
     "cta2": "Sounds Good"
   },
+  "instagram-first-comment-modal": {
+    "headline": "It looks like we’ll need permission to post an Instagram comment on your behalf. ",
+    "postOnYourBehalf": "You’ll need to allow Buffer to automatically post Instagram comments on your behalf. ",
+    "canRequestMorePermission": "We'll open up a window for you to grant us that permission now.",
+    "userNeedsLogoutSignin": "To do this, {signout}, and log into the account which corresponds with {profileName}. Then we can open up a window for you to grant us that permission by clicking continue.",
+    "signout": "please sign out of your facebook account",
+    "body": "We’ll walk you through this now – It will just take a moment.",
+    "continue": "Continue",
+    "cancel": "Cancel"
+  },
   "profiles-disconnected-modal": {
     "headline": "We’ve lost access to some of your social accounts",
     "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these accounts you will need to reconnect them.",

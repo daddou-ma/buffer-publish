@@ -30,6 +30,11 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     }
+    case 'single_profile':
+      dispatch(dataFetchActions.fetch({
+        name: 'single_profile',
+      }));
+      break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case initialLoadingActionTypes.PROFILE_LOADING_REDIRECT: {
       const profilesLoaded = getState().profileSidebar.loading === false;

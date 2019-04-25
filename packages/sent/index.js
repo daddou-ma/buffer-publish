@@ -61,6 +61,9 @@ export default connect(
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
     },
+    onComposerInteraction: (r) => {
+      console.log(r);
+    },
     onImageClick: (post) => {
       dispatch(actions.handleImageClick({
         post: post.post,
