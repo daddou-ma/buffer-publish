@@ -201,10 +201,7 @@ const renderHeader = (
       }
     </div>
     {showCalendarBtnGroup && (
-      <FeatureLoader
-        supportedFeatures={'daily_view'}
-        supportedPlans={['pro', 'business']}
-      >
+      <FeatureLoader supportedPlans={['pro', 'business']}>
         <div style={{ marginLeft: 'auto' }}>
           <QueueButtonGroup
             buttons={calendarBtns}
@@ -257,12 +254,14 @@ const QueueItems = (props) => {
     }
     if (queueItemType === 'showMorePosts') {
       return (
-        <div key={rest.id} style={calendarBtnWrapperStyle}>
-          <Text>Looking for your other posts?&nbsp;&nbsp;</Text>
-          <Button onClick={() => onCalendarClick('month', 'daily_view_show_more_view_calendar')}>
-           View Your Calendar
-          </Button>
-        </div>
+        <FeatureLoader supportedPlans={['pro', 'business']}>
+          <div key={rest.id} style={calendarBtnWrapperStyle}>
+            <Text>Looking for your other posts?&nbsp;&nbsp;</Text>
+            <Button onClick={() => onCalendarClick('month', 'daily_view_show_more_view_calendar')}>
+            View Your Calendar
+            </Button>
+          </div>
+        </FeatureLoader>
       );
     }
     return null;

@@ -68,10 +68,7 @@ const getHoverMsg = (service) => {
         <span style={iconStyle}>
           <IconComponent />
         </span>
-        <span>
-          {' '}
-          {service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post'}{' '}
-        </span>
+        <span> {service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post'} </span>
       </div>
     );
   }

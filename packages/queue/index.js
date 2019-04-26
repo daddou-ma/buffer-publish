@@ -36,7 +36,6 @@ export default connect(
           weekStartsOnMonday: state.appSidebar.user.week_starts_monday,
           hasTwentyFourHourTimeFormat: state.appSidebar.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
-          hasDailyViewFlip: state.appSidebar.user.hasDailyViewFlip,
         }),
         draggingEnabled: !profileData.paused,
         showEmptyQueueMessage: false, // @todo: Show this if they have no slots?

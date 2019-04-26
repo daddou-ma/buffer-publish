@@ -275,14 +275,13 @@ export const formatPostLists = ({
   weekStartsOnMonday,
   hasTwentyFourHourTimeFormat,
   profileService,
-  hasDailyViewFlip,
 }) => {
   const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
 
   /**
    * CASE 1: Schedule Slots Enabled
    */
-  if (scheduleSlotsEnabled && hasDailyViewFlip) {
+  if (scheduleSlotsEnabled) {
     // Get the schedule slots for each day
     const dailySlots = getDailySlotsFromProfileSchedules(schedules);
 
