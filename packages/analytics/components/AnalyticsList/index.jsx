@@ -84,7 +84,7 @@ const AnalyticsList = ({
     );
   }
 
-  return <Notification />;
+  return <Notification isInstagramBusiness={isInstagramBusiness} service={profile.service} />;
 };
 
 AnalyticsList.propTypes = {
