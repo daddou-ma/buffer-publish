@@ -63,12 +63,12 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('updateIFFirstCommentState', this.updateState);
+    window.removeEventListener('updateIGFirstCommentState', this.updateState);
   }
 
   getFBLoginStatus () {
     /* eslint-disable no-undef */
-    window.addEventListener('updateIFFirstCommentState', this.updateState);
+    window.addEventListener('updateIGFirstCommentState', this.updateState);
 
     const getLoginStatus = () => {
       FB.init({
@@ -98,7 +98,7 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   sendStateUpdate(message) {
-    window.dispatchEvent(new CustomEvent('updateIFFirstCommentState', {
+    window.dispatchEvent(new CustomEvent('updateIGFirstCommentState', {
       bubbles: false,
       detail: {
         message,
@@ -166,7 +166,7 @@ class InstagramFirstCommentModal extends React.Component {
   }
 
   render() {
-    const { translations, hideModal, profile, canRequestMorePermission } = this.props;
+    const { translations, hideModal, profile, launchRequestMorePermission } = this.props;
 
     if (typeof profile.canPostComment === 'undefined' || profile.canPostComment) {
       return null;
@@ -210,7 +210,7 @@ class InstagramFirstCommentModal extends React.Component {
               <div className={styles.barBottomStyle}>
                 <div className={styles.divButton}>
                   <BDSButton onClick={hideModal} type="textOnly">{translations.cancel}</BDSButton>
-                  <BDSButton onClick={() => canRequestMorePermission(profile.id)}>
+                  <BDSButton onClick={() => launchRequestMorePermission(profile.id)}>
                     {translations.continue}
                   </BDSButton>
                 </div>
@@ -253,7 +253,7 @@ class InstagramFirstCommentModal extends React.Component {
                     {translations.cancel}
                   </BDSButton>
                   <BDSButton
-                    onClick={() => canRequestMorePermission(profile.id)}
+                    onClick={() => launchRequestMorePermission(profile.id)}
                   >
                     {translations.continue}
                   </BDSButton>
@@ -288,7 +288,7 @@ class InstagramFirstCommentModal extends React.Component {
                   {translations.cancel}
                 </BDSButton>
                 <BDSButton
-                  onClick={() => canRequestMorePermission(profile.id)}
+                  onClick={() => launchRequestMorePermission(profile.id)}
                 >
                   {translations.continue}
                 </BDSButton>
@@ -305,7 +305,7 @@ InstagramFirstCommentModal.propTypes = {
   loadFacebook: PropTypes.func.isRequired,
   translations: PropTypes.object.isRequired, // eslint-disable-line
   hideModal: PropTypes.func.isRequired,
-  canRequestMorePermission: PropTypes.func.isRequired,
+  launchRequestMorePermission: PropTypes.func.isRequired,
   profile: PropTypes.shape({
     id: PropTypes.string,
     canPostComment: PropTypes.bool,

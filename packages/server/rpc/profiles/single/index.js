@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const { profileParser } = require('@bufferapp/publish-parsers');
 
 module.exports = method(
-  'single_profile',
+  'singleProfile',
   'fetch profiles',
   ({ profileId }, { session }) =>
     rp({

@@ -1,12 +1,10 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 
+import { actionTypes } from '@bufferapp/publish-profile-sidebar';
+import { getURL } from '@bufferapp/publish-formatters';
 
 import InstagramFirstCommentModal from './components/InstagramFirstCommentModal';
-import { bufferOrigins } from '@bufferapp/composer/composer/AppConstants';
-import { getBaseURL } from './util';
-import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-
 
 export default connect(
   state => ({
@@ -26,18 +24,16 @@ export default connect(
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     },
-    canRequestMorePermission: (profileId) => {
-      const popup = window.open(`https://${getBaseURL()}/oauth/instagram/${profileId}/reconnect/auth`);
+    launchRequestMorePermission: (profileId) => {
+      const popup = window.open(`https://${getURL.getBaseURL()}/oauth/instagram/${profileId}/reconnect/auth`);
 
       const interval = setInterval(() => {
         if (popup.closed) {
           clearInterval(interval);
-          dispatch(dataFetchActions.fetch({
-            name: 'single_profile',
-            args: {
-              profileId,
-            },
-          }));
+          dispatch({
+            type: actionTypes.SINGLE_PROFILE,
+            profileId,
+          });
           dispatch(modalsActions.hideInstagramFirstCommentModal());
         }
       }, 150);

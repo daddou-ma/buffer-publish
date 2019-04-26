@@ -11,9 +11,9 @@ storiesOf('IGFirstCommentModal', module)
   .addDecorator(checkA11y)
   .add('should show welcome modal', () => (
     <IGFirstCommentModal
-      translations={translations['welcome-paid-modal']}
+      translations={translations['instagram-first-comment-modal']}
       hideModal={action('hide-modal')}
-      canRequestMorePermission={() => {}}
+      launchRequestMorePermission={() => {}}
       profile={{id: 'abc', canPostComment: false}}
       appId={'abc123'}
       loadFacebook={() => {}}

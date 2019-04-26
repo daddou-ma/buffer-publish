@@ -1,4 +1,3 @@
-
-export reducer, { actions, actionTypes } from './reducer';
+export reducer from './reducer';
 export middleware from './middleware';
 

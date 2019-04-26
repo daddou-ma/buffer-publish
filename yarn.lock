@@ -559,10 +559,10 @@
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-formatters@1.9.30":
-  version "1.9.30"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-formatters/-/publish-formatters-1.9.30.tgz#7eb03bc4482d891c5aedbd4832a7085e2f80a3ea"
-  integrity sha512-i3vsio1Uv/UReX7ZWUFFYPIVQmaFRxhXKzIfQ/vNWQaVEeJqVsHP1LlzY/1OhowMzVjmxrR6rC7cjt1c4Z3JqA==
+"@bufferapp/publish-formatters@1.9.31":
+  version "1.9.31"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-formatters/-/publish-formatters-1.9.31.tgz#31c0fc53d1c76d64371e7d6cf85b76c28144ed8b"
+  integrity sha512-bQC+Eiyl8Nc/hq/KGBu9kB9Js/fOlGIsiAtYfXO/3dbCPifCDU0hHjShzraeok0bhxjwJpoWcEh0nhGSqXB2Eg==
   dependencies:
     moment "2.19.3"
     moment-timezone "0.5.13"

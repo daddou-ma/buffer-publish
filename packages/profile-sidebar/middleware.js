@@ -30,9 +30,12 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     }
-    case 'single_profile':
+    case actionTypes.SINGLE_PROFILE:
       dispatch(dataFetchActions.fetch({
-        name: 'single_profile',
+        name: 'singleProfile',
+        args: {
+          profileId: action.profileId,
+        },
       }));
       break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
