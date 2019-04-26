@@ -1,5 +1,6 @@
 import { getURL } from '@bufferapp/publish-formatters';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { refreshProfile } from '@bufferapp/publish-profile-sidebar/middleware';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import {
   actions as asyncDataFetch,
@@ -10,6 +11,7 @@ import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
+  let message = null;
   switch (action.type) {
     case actionTypes.CONNECT_BITLY:
       window.location = getURL.getConnectBitlyURL(action.profileId);
@@ -43,6 +45,9 @@ export default ({ dispatch, getState }) => next => (action) => {
         },
       }));
       break;
+    case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      refreshProfile(dispatch, action.args.profileId);
+      break;
     case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
       dispatch(asyncDataFetch.fetch({
         name: 'getGATrackingSettings',
@@ -53,11 +58,9 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     case `saveGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.result.showNotification) {
-        dispatch(notificationActions.createNotification({
-          notificationType: 'success',
-          message: action.result.message,
-        }));
+        message = action.result.message;
       }
+      refreshProfile(dispatch, action.args.profileId, message);
       break;
     case actionTypes.SAVE_GA_CUSTOM_FORM:
       dispatch(asyncDataFetch.fetch({
@@ -100,12 +103,13 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     }
     case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      dispatch(notificationActions.createNotification({
-        notificationType: 'success',
-        message: 'Awesome! Your queue has been successfully shuffled.',
-      }));
+      message = 'Awesome! Your queue has been successfully shuffled.';
+      refreshProfile(dispatch, action.args.profileId, message);
       break;
     }
+    case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      refreshProfile(dispatch, action.args.profileId);
+      break;
     default:
       break;
   }

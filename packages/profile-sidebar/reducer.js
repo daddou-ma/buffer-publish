@@ -119,6 +119,34 @@ export default (state = initialState, action) => {
         isLockedProfile: action.profile ? action.profile.disabled : false,
       };
     }
+    case `single_profile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      console.log('hereee');
+      let {
+        selectedProfile,
+        profiles,
+      } = state;
+
+      if (selectedProfile.id === action.result.id) {
+        selectedProfile = action.result;
+      }
+
+      if (profiles.some(p => p.id === action.result.id)) {
+        profiles = profiles.map((profile) => {
+          if (profile.id === action.result.id) {
+            return action.result;
+          }
+          return profile;
+        });
+      } else {
+        profiles = [...profiles, action.result];
+      }
+
+      return {
+        ...state,
+        profiles,
+        selectedProfile,
+      };
+    }
     case actionTypes.PROFILE_DROPPED: {
       if (!action.commit) {
         return {
