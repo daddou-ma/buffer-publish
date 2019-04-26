@@ -25,15 +25,22 @@ const getNotificationCopy = (service, isInstagramBusiness) => {
   if (service === 'instagram' && !isInstagramBusiness) {
     return (
       <div>
-        We only support Instagram business profiles in our analytics right now.
-        <Link href={'https://faq.buffer.com/article/959-publish-instagram-set-up'} unstyled newTab>
-          Learn how to set your profile to business.
+        Please convert your Instagram profile from a personal to Business account to get advanced analytics.&nbsp;
+        <Link href={'https://faq.buffer.com/article/959-publish-instagram-set-up#direct-scheduling'} unstyled newTab>
+          Please check our FAQ here for help on how to do this.
         </Link>
       </div>
     );
   }
   return (<div>We only support Facebook & Twitter profiles in our analytics right now.</div>);
 };
+
+const getTitleCopy = (service, isInstagramBusiness) => {
+  if (service === 'instagram' && !isInstagramBusiness) {
+    return (<div>Instagram advanced analytics are only available on Instagram Business profiles</div>)
+  }
+  return (<div>Sorry we don&apos;t support this network in our Analytics</div>)
+}
 
 const Notification = ({ isInstagramBusiness, service }) => (
   <Card reducedPadding>
@@ -45,7 +52,7 @@ const Notification = ({ isInstagramBusiness, service }) => (
         color={'outerSpace'}
         weight={'medium'}
       >
-        Sorry we don&apos;t support this network in our Analytics
+        {getTitleCopy(service, isInstagramBusiness)}
       </Text>
     </div>
     <div style={contentStyle}>
