@@ -1,6 +1,7 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
+import { postParser } from '@bufferapp/publish-parsers';
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('QUEUE', {
@@ -65,126 +66,6 @@ const getPostUpdateId = (action) => {
   if (action.draft) { return action.draft.id; }
 };
 
-/**
- * movePostInArray()
- *
- * Return a new array with the item at index `from` moved to index `to`.
- *
- * @param  {Array}  arr
- * @param  {Number} from
- * @param  {Number} to
- * @return {Array}
- */
-const movePostInArray = (arr, from, to) => {
-  const clone = [...arr];
-
-  // Support passing `from` and `to` in non-sequential order (e.g., 4 and 1).
-  const fromIndex = from < to ? from : to;
-  const toIndex = to > from ? to : from;
-
-  // Generate the new array
-  Array.prototype.splice.call(clone, toIndex, 0,
-    Array.prototype.splice.call(clone, fromIndex, 1)[0],
-  );
-  return clone;
-};
-
-/**
- * handlePostDropped()
- *
- * This function takes an object contaning posts keyed by ID and a `POST_DROPPED`
- * action and returns the re-ordered posts map object based on that action.
- * (This action is dispatched during a drag operation when a post hovers
- * over another post in the queue. See `PostDragLayer/index.jsx`)
- *
- * Since posts are stored in a `key: value` map we can't just reorder them like
- * an array. Instead we're just shuffling values around. This means that as you
- * drag a post it's `due_at` (and other related data in the object) is 'fixed'.
- * The result is that when we render posts ordered by their `due_at` time in the
- * queue the new order reflected.
- *
- * We also fix in place `pinned` and `scheduled_at` posts since they shouldn't
- * be able to move.
- *
- * Finally, it should be noted that this is an optimistic front-end update. The
- * actual changing of due_at times will happen on the back-end when a drop is
- * completed, at which point the below `handlePostsReordered()` method will be
- * triggered via Pusher on this and all other clients.
- *
- * @param  {Object} posts   key: value map of posts
- * @param  {Object} action  action dispatched from the drag operation
- * @return {Object}         new posts map
- */
-const handlePostDropped = (posts, action) => {
-  const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
-
-  // For keyboard moves we should skip fixed posts manually
-  const { keyboardDirection, dragIndex } = action;
-  let { hoverIndex } = action;
-
-  if (keyboardDirection) {
-    let moveToPost = orderedPosts[hoverIndex];
-
-    while (moveToPost && moveToPost.isFixed) {
-      if (keyboardDirection === 'down') {
-        hoverIndex += 1;
-      }
-      if (keyboardDirection === 'up') {
-        hoverIndex -= 1;
-      }
-      moveToPost = orderedPosts[hoverIndex];
-    }
-    // If we get to the end and can't find a slot
-    // then just stay where we are
-    if (!moveToPost) {
-      hoverIndex = dragIndex;
-    }
-  }
-
-  // Save values that should be fixed
-  const fixedValues = orderedPosts.map(p => ({
-    due_at: p.due_at,
-    postAction: p.postDetails.postAction,
-    day: p.day,
-  }));
-
-  // Store the original indexes of fixed posts (pinned, scheduled, error'd, etc.)
-  const fixedPosts = orderedPosts.reduce((acc, post, idx) => {
-    if (post.isFixed) {
-      acc.set(post.id, { originalIndex: idx });
-    }
-    return acc;
-  }, new Map());
-
-  // Move the post that is being dragged
-  const afterMovePosts = movePostInArray(
-    orderedPosts,
-    dragIndex,
-    hoverIndex,
-  );
-
-  // Put the pinned/scheduled posts back where they should be
-  const moveFixedPosts = afterMovePosts.reduce((acc, post, index) => {
-    const fixedPost = fixedPosts.get(post.id);
-    if (fixedPost && index !== fixedPost.originalIndex) {
-      return movePostInArray(acc, index, fixedPost.originalIndex);
-    }
-    return acc;
-  }, afterMovePosts);
-
-  // Finally, apply the fixed values we saved
-  const finalPosts = moveFixedPosts.map((p, idx) => {
-    p.day = fixedValues[idx].day;
-    p.postDetails.postAction = fixedValues[idx].postAction;
-    p.due_at = fixedValues[idx].due_at;
-    return p;
-  });
-
-  // Return a new post map
-  const newPostsMap = finalPosts.reduce((map, post) => { map[post.id] = post; return map; }, {});
-
-  return newPostsMap;
-};
 const handleInstagramLoading = (action) => {
   if (action.args.recheck && action.result.is_business) {
     return true;
@@ -292,6 +173,24 @@ const postReducer = (state, action) => {
         ...state,
         isWorking: false,
       };
+    case actionTypes.POST_DROPPED: {
+      const newPost = {
+        profile_timezone: state.profileTimezone,
+        pinned: true,
+        due_at: action.timestamp,
+        scheduled_at: action.timestamp,
+        // we also have the same field in camelCase for some reason...
+        scheduledAt: action.timestamp,
+        day: action.day,
+      };
+      // Generate new `postAction` text...
+      const { postDetails: { postAction } } = postParser(newPost);
+      return {
+        ...state,
+        ...newPost,
+        postDetails: { ...state.postDetails, postAction },
+      };
+    }
     default:
       return state;
   }
@@ -324,6 +223,7 @@ const postsReducer = (state = {}, action) => {
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
     case actionTypes.POST_IMAGE_CLICKED_PREV:
     case actionTypes.POST_ERROR:
+    case actionTypes.POST_DROPPED:
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
@@ -373,19 +273,6 @@ const profileReducer = (state = profileInitialState, action) => {
         posts: handlePostsReordered(state.posts, action),
       };
     }
-    case actionTypes.POST_DROPPED: {
-      // We don't handle the final step of saving to the DB
-      // (that's done in the middleware when the drop completes)
-      // we just move the posts in the front-end while the user
-      // drags and hovers.
-      if (!action.commit) {
-        return {
-          ...state,
-          posts: handlePostDropped(state.posts, action),
-        };
-      }
-      return state;
-    }
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case actionTypes.POST_ERROR:
     case actionTypes.POST_CREATED:
@@ -401,6 +288,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.POST_SHARE_NOW:
     case actionTypes.POST_SENT:
     case draftActionTypes.DRAFT_APPROVED:
+    case actionTypes.POST_DROPPED:
       return {
         ...state,
         posts: postsReducer(state.posts, action),
@@ -572,12 +460,11 @@ export const actions = {
     profileId,
     counts,
   }),
-  onDropPost: ({ dragIndex, hoverIndex, commit, keyboardDirection, profileId }) => ({
+  onDropPost: (id, timestamp, day, profileId) => ({
     type: actionTypes.POST_DROPPED,
-    dragIndex,
-    hoverIndex,
-    commit,
-    keyboardDirection,
+    updateId: id,
     profileId,
+    day,
+    timestamp,
   }),
 };

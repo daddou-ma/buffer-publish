@@ -30,7 +30,7 @@ export default connect(
         postLists: formatPostLists({
           isManager: profileData.isManager,
           posts: profileQueuePosts.posts,
-          scheduleSlotsEnabled: !state.appSidebar.user.is_free_user,
+          scheduleSlotsEnabled: true,
           schedules: profileData.schedules,
           profileTimezone: profileData.timezone,
           weekStartsOnMonday: state.appSidebar.user.week_starts_monday,
@@ -38,8 +38,8 @@ export default connect(
           profileService: profileData.service,
           hasDailyViewFlip: state.appSidebar.user.hasDailyViewFlip,
         }),
-        draggingEnabled: !profileData.paused && state.appSidebar.user.is_free_user,
-        showEmptyQueueMessage: profileQueuePosts.total <= 0 && state.appSidebar.user.is_free_user,
+        draggingEnabled: !profileData.paused,
+        showEmptyQueueMessage: false, // @todo: Show this if they have no slots?
         enabledApplicationModes: state.queue.enabledApplicationModes,
         showComposer: state.queue.showComposer,
         environment: state.environment.environment,
@@ -127,14 +127,8 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
-    onDropPost: ({ dragIndex, hoverIndex, keyboardDirection, commit }) => {
-      dispatch(actions.onDropPost({
-        dragIndex,
-        hoverIndex,
-        keyboardDirection,
-        commit,
-        profileId: ownProps.profileId,
-      }));
+    onDropPost: (id, timestamp, day) => {
+      dispatch(actions.onDropPost(id, timestamp, day, ownProps.profileId));
     },
     onUnpauseClick: () => {
       dispatch(profileSidebarActions.onUnpauseClick({ profileId: ownProps.profileId }));

@@ -8,7 +8,6 @@ export ImagePost from './ImagePost';
 export LinkPost from './LinkPost';
 export BusinessTrialOrUpgradeCard from './BusinessTrialOrUpgradeCard';
 export MultipleImagesPost from './MultipleImagesPost';
-export PostDragLayer from './PostDragLayer';
 export PostDragWrapper from './PostDragWrapper';
 export PostList from './PostList';
 export PostLists from './PostLists';

@@ -180,8 +180,7 @@ const Post = ({
       <BDSCard
         faded={isDeleting}
         noPadding
-        draggingPlaceholder={dragging && !fixed}
-        noBorder={dragging && fixed}
+        draggingPlaceholder={dragging}
       >
         {postDetails && postDetails.error && postDetails.error.length > 0 &&
           <PostErrorBanner

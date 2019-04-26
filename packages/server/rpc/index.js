@@ -53,6 +53,7 @@ const profileQuickAnalytics = require('./bookmarklets/profileQuickAnalytics');
 const gridPosts = require('./grid');
 const shortenUrl = require('./shortenUrl');
 const updatePostLink = require('./updatePostLink');
+const dropPost = require('./dropPost');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -124,4 +125,5 @@ module.exports = rpc(
   gridPosts,
   shortenUrl,
   updatePostLink,
+  dropPost,
 );

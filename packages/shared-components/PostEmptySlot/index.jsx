@@ -16,8 +16,13 @@ import {
   SERVICE_INSTAGRAM,
 } from '@bufferapp/publish-constants';
 
-const emptySlotStyle = isHovering => ({
-  background: isHovering ? '#FFFFFF' : '#F5F5F5',
+const getBgStyle = (isHovering, focus) => {
+  if (isHovering || focus) return '#FFFFFF';
+  return '#F5F5F5';
+};
+
+const emptySlotStyle = (isHovering, focus) => ({
+  background: getBgStyle(isHovering, focus),
   cursor: 'pointer',
   border: isHovering ? '1px solid #B8B8B8' : '1px solid transparent',
   borderRadius: '4px',
@@ -26,12 +31,14 @@ const emptySlotStyle = isHovering => ({
   fontWeight: '500',
   lineHeight: 'normal',
   fontSize: '14px',
-  color: '#636363',
+  color: focus ? '#3D3D3D' : '#636363',
   height: '48px',
   display: 'flex',
   justifyContent: 'center',
   transition: 'all 0.1s ease-out',
   marginBottom: '8px',
+  boxShadow: focus ? '0 0 0 3px #ABB7FF' : 'none',
+  position: 'relative',
 });
 
 const timeStyle = {
@@ -61,7 +68,10 @@ const getHoverMsg = (service) => {
         <span style={iconStyle}>
           <IconComponent />
         </span>
-        <span> { service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post' } </span>
+        <span>
+          {' '}
+          {service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post'}{' '}
+        </span>
       </div>
     );
   }
@@ -85,16 +95,16 @@ class PostEmptySlot extends Component {
   }
 
   render() {
-    const { service, time, onClick } = this.props;
-    return (
+    const { service, time, onClick, focus } = this.props;
+    return ( // eslint-disable-next-line
       <div
-        style={emptySlotStyle(this.state.isHovering)}
+        style={emptySlotStyle(this.state.isHovering, focus)}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={onClick}
       >
         <div style={timeStyle}>
-          { this.state.isHovering ? getHoverMsg(service) : time }
+          {this.state.isHovering ? getHoverMsg(service) : time}
         </div>
       </div>
     );
@@ -105,6 +115,7 @@ PostEmptySlot.propTypes = {
   time: PropTypes.string,
   service: PropTypes.string,
   onClick: PropTypes.func,
+  focus: PropTypes.bool,
 };
 
 export default PostEmptySlot;

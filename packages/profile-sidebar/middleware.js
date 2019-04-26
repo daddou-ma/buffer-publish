@@ -135,7 +135,7 @@ export default ({ dispatch, getState }) => next => (action) => {
           args: {
             profileId: action.profileId,
             isFetchingMore: false,
-            count: getState().appSidebar.user.is_free_user ? undefined : 300,
+            count: 300,
           },
         }));
       }

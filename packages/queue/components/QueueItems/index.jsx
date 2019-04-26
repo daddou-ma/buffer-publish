@@ -15,9 +15,10 @@ import {
   LinkPost,
   VideoPost,
   PostDragWrapper,
-  PostEmptySlot,
   QueueButtonGroup,
 } from '@bufferapp/publish-shared-components';
+
+import PostEmptySlot from '@bufferapp/publish-shared-components/PostEmptySlot/dropTarget';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import FailedPostComponent from '@bufferapp/publish-web/components/ErrorBoundary/failedPostComponent';
 
@@ -219,6 +220,8 @@ const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
   <PostEmptySlot
     key={id}
     time={slot.label}
+    timestamp={slot.timestamp}
+    day={slot.dayText}
     service={profileService}
     onClick={() =>
       onEmptySlotClick({
