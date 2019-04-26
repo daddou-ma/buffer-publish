@@ -3,10 +3,12 @@ import {
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { refreshProfile } from '@bufferapp/publish-profile-sidebar/middleware';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
+  let message = null;
   switch (action.type) {
     case actionTypes.UPDATE_PAUSED_SCHEDULE:
       dispatch(dataFetchActions.fetch({
@@ -112,10 +114,8 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     case `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(notificationActions.createNotification({
-        notificationType: 'success',
-        message: 'Awesome! Your schedule has been successfully saved.',
-      }));
+      message = 'Awesome! Your schedule has been successfully saved.';
+      refreshProfile(dispatch, action.args.profileId, message);
       break;
     case `updateSchedule_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
@@ -124,10 +124,8 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     case `updateTimezone_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(notificationActions.createNotification({
-        notificationType: 'success',
-        message: 'Awesome! Your schedule has been successfully saved.',
-      }));
+      message = 'Awesome! Your schedule has been successfully saved.';
+      refreshProfile(dispatch, action.args.profileId, message);
       break;
     case `updateTimezone_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
@@ -136,10 +134,8 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     case `updatePausedSchedules_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(notificationActions.createNotification({
-        notificationType: 'success',
-        message: 'Awesome! Your schedule has been successfully saved.',
-      }));
+      message = 'Awesome! Your schedule has been successfully saved.';
+      refreshProfile(dispatch, action.args.profileId, message);
       break;
     case `updatePausedSchedules_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
