@@ -2,6 +2,7 @@ const { rpc } = require('@bufferapp/buffer-rpc');
 
 const profilesMethod = require('./profiles');
 const singleProfileMethod = require('./profiles/single');
+const clientAccessMethod = require('./profiles/access');
 const queuedPostsMethod = require('./queuedPosts');
 const sentPostsMethod = require('./sentPosts');
 const pastRemindersMethod = require('./pastReminders');
@@ -65,6 +66,7 @@ const summaryMethod = require('./analytics/summary');
 module.exports = rpc(
   profilesMethod,
   singleProfileMethod,
+  clientAccessMethod,
   queuedPostsMethod,
   sentPostsMethod,
   pastRemindersMethod,

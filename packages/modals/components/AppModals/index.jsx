@@ -6,6 +6,7 @@ import WelcomeModal from '@bufferapp/publish-welcome-modal';
 import StealProfileModal from '@bufferapp/publish-steal-profile-modal';
 import ProfilesDisconnectedModal from '@bufferapp/publish-profiles-disconnected-modal';
 import WelcomePaidModal from '@bufferapp/publish-welcome-paid-modal';
+import InstagramFirstCommentModal from '@bufferapp/publish-instagram-first-comment-modal';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import WelcomeB4BTrialModal from '@bufferapp/publish-welcome-b4b-trial-modal';
 
@@ -17,10 +18,12 @@ const AppModals = ({
   showStealProfileModal,
   showInstagramDirectPostingModal,
   showWelcomeB4BTrialModal,
+  showInstagramFirstCommentModal,
 }) => (
   <React.Fragment>
     {showUpgradeModal && <UpgradeModal />}
     {showWelcomeModal && <WelcomeModal />}
+    {showInstagramFirstCommentModal && <InstagramFirstCommentModal />}
     {showWelcomePaidModal && <WelcomePaidModal />}
     {showWelcomeB4BTrialModal && <WelcomeB4BTrialModal />}
     {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
@@ -37,6 +40,7 @@ AppModals.propTypes = {
   showStealProfileModal: PropTypes.bool.isRequired,
   showInstagramDirectPostingModal: PropTypes.bool.isRequired,
   showWelcomeB4BTrialModal: PropTypes.bool.isRequired,
+  showInstagramFirstCommentModal: PropTypes.bool.isRequired,
 };
 
 export default AppModals;

@@ -18,7 +18,7 @@ class BoundaryFallback extends React.Component {
         <Button
           secondary
           onClick={() => {
-            BoundaryFallback.onRefresh();
+            this.onRefresh();
           }}
         >
           <div style={style.buttonWrapper}>

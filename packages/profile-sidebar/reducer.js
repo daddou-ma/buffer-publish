@@ -120,7 +120,6 @@ export default (state = initialState, action) => {
       };
     }
     case `single_profile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      console.log('hereee');
       let {
         selectedProfile,
         profiles,
