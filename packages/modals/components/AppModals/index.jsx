@@ -6,7 +6,7 @@ import WelcomeModal from '@bufferapp/publish-welcome-modal';
 import StealProfileModal from '@bufferapp/publish-steal-profile-modal';
 import ProfilesDisconnectedModal from '@bufferapp/publish-profiles-disconnected-modal';
 import WelcomePaidModal from '@bufferapp/publish-welcome-paid-modal';
-import InstagramFirstCommentModal from '@bufferapp/publish-instagram-first-comment-modal';
+import InstagramFirstCommentModal from '@bufferapp/publish-ig-first-comment-modal';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import WelcomeB4BTrialModal from '@bufferapp/publish-welcome-b4b-trial-modal';
 

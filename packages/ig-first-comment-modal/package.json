@@ -1,5 +1,5 @@
 {
-  "name": "@bufferapp/publish-instagram-first-comment-modal",
+  "name": "@bufferapp/publish-ig-first-comment-modal",
   "version": "2.0.0",
   "description": "A modal welcoming existing Buffer Paid users to New Publish.",
   "main": "index.js",
