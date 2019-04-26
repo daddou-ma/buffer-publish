@@ -18,15 +18,20 @@ describe('middleware', () => {
     const RPC_NAME = 'updateSchedule';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
+      args: {
+        profileId: 'abc',
+      },
     });
     middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
       .toBeCalledWith(expect.objectContaining({
-        type: notificationActionTypes.CREATE_NOTIFICATION,
-        notificationType: 'success',
-        message: 'Awesome! Your schedule has been successfully saved.',
+        type: 'FETCH',
+        args: {
+          profileId: 'abc',
+          message: 'Awesome! Your schedule has been successfully saved.',
+        },
       }));
   });
 
@@ -51,15 +56,20 @@ describe('middleware', () => {
     const RPC_NAME = 'updateTimezone';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
+      args: {
+        profileId: 'abc',
+      },
     });
     middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
       .toBeCalledWith(expect.objectContaining({
-        type: notificationActionTypes.CREATE_NOTIFICATION,
-        notificationType: 'success',
-        message: 'Awesome! Your schedule has been successfully saved.',
+        type: 'FETCH',
+        args: {
+          profileId: 'abc',
+          message: 'Awesome! Your schedule has been successfully saved.',
+        },
       }));
   });
 
@@ -84,15 +94,20 @@ describe('middleware', () => {
     const RPC_NAME = 'updatePausedSchedules';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
+      args: {
+        profileId: 'abc',
+      },
     });
     middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
       .toBeCalledWith(expect.objectContaining({
-        type: notificationActionTypes.CREATE_NOTIFICATION,
-        notificationType: 'success',
-        message: 'Awesome! Your schedule has been successfully saved.',
+        type: 'FETCH',
+        args: {
+          profileId: 'abc',
+          message: 'Awesome! Your schedule has been successfully saved.',
+        },
       }));
   });
 });

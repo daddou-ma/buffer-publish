@@ -21,6 +21,16 @@ import {
 
 const { formatAnalyticsProfileObj } = require('./analytics');
 
+export const refreshProfile = (dispatch, profileId, message) => {
+  dispatch(dataFetchActions.fetch({
+    name: 'single_profile',
+    args: {
+      profileId,
+      message,
+    },
+  }));
+};
+
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
   switch (action.type) {
@@ -37,6 +47,14 @@ export default ({ dispatch, getState }) => next => (action) => {
           profileId: action.profileId,
         },
       }));
+      break;
+    case `single_profile_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      if (action.args.message) {
+        dispatch(notificationActions.createNotification({
+          notificationType: 'success',
+          message: action.args.message,
+        }));
+      }
       break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case initialLoadingActionTypes.PROFILE_LOADING_REDIRECT: {
