@@ -27,6 +27,13 @@ const store = storeFake({
     planName: 'free',
     features: {},
   },
+  appSidebar: {
+    user: {
+      trial: {
+        onTrial: false,
+      }
+    }
+  }
 });
 
 const UpgradeModalDecorator = storyFn => (

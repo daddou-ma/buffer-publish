@@ -48,6 +48,7 @@ class TabNavigation extends React.Component {
       selectedChildTabId,
       onTabClick,
       onChildTabClick,
+      onProTrial,
       shouldShowUpgradeCta,
       shouldShowNestedSettingsTab,
       shouldShowNestedAnalyticsTab,
@@ -106,19 +107,21 @@ class TabNavigation extends React.Component {
               </Button>
           </div>
         }
-        <FeatureLoader supportedPlans={'pro'}>
-          <div style={upgradeCtaStyle}>
-            <Button
-              secondary
-              onClick={(e) => {
-                e.preventDefault();
-                onUpgradeButtonClick('b4b');
-              }}
-            >
-              Learn about Buffer for Business
-            </Button>
-          </div>
-        </FeatureLoader>
+        {!onProTrial &&
+          <FeatureLoader supportedPlans={'pro'}>
+            <div style={upgradeCtaStyle}>
+              <Button
+                secondary
+                onClick={(e) => {
+                  e.preventDefault();
+                  onUpgradeButtonClick('b4b');
+                }}
+              >
+                Learn about Buffer for Business
+              </Button>
+            </div>
+          </FeatureLoader>
+        }
         {shouldShowNestedAnalyticsTab && !isLockedProfile &&
           <Tabs
             selectedTabId={selectedChildTabId || 'posts'}
@@ -165,6 +168,7 @@ TabNavigation.defaultProps = {
   isInstagramProfile: false,
   isBusinessAccount: false,
   isManager: false,
+  onProTrial: true,
 };
 
 TabNavigation.propTypes = {
@@ -176,6 +180,7 @@ TabNavigation.propTypes = {
   shouldShowUpgradeCta: PropTypes.bool.isRequired,
   onUpgradeButtonClick: PropTypes.func.isRequired,
   onChildTabClick: PropTypes.func.isRequired,
+  onProTrial: PropTypes.bool,
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,
   shouldShowNestedAnalyticsTab: PropTypes.bool,
