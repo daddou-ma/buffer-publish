@@ -30,7 +30,7 @@ const store = storeFake({
   appSidebar: {
     user: {
       trial: {
-        onProTrial: false,
+        onTrial: false,
       }
     }
   }
