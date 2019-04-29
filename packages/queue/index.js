@@ -137,7 +137,7 @@ export default connect(
     },
     onComposerInteraction: ({ message }) => {
       if (message.commentEnabled) {
-        dispatch(modalsActions.showInstagramFirstCommentModal());
+        dispatch(modalsActions.showInstagramFirstCommentModal(message));
       }
     },
     onComposerCreateSuccess: () => {

@@ -7,11 +7,22 @@ import { getURL } from '@bufferapp/publish-formatters';
 import InstagramFirstCommentModal from './components/InstagramFirstCommentModal';
 
 export default connect(
-  state => ({
-    profile: state.profileSidebar.selectedProfile,
-    appId: state.clientAccess && state.clientAccess.appId,
-    translations: state.i18n.translations['instagram-first-comment-modal'],
-  }),
+  (state) => {
+    const profile = state.profileSidebar.selectedProfile;
+    const firstCommentIds = state.modals && state.modals.firstCommentIds;
+    let selectedProfiles = [profile];
+    if (firstCommentIds) {
+      selectedProfiles = state.profileSidebar.profiles.filter(p => firstCommentIds.includes(p.id));
+    }
+
+    return {
+      profile: state.profileSidebar.selectedProfile,
+      selectedProfiles,
+      firstCommentIds,
+      appId: state.clientAccess && state.clientAccess.appId,
+      translations: state.i18n.translations['instagram-first-comment-modal'],
+    };
+  },
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideInstagramFirstCommentModal()),
     loadFacebook: () => {
