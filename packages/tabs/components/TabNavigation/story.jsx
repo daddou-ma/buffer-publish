@@ -27,6 +27,13 @@ const store = storeFake({
     planName: 'free',
     features: {},
   },
+  appSidebar: {
+    user: {
+      trial: {
+        onProTrial: false,
+      }
+    }
+  }
 });
 
 const UpgradeModalDecorator = storyFn => (
@@ -105,5 +112,21 @@ storiesOf('TabNavigation', module)
       showUpgradeModal={action('show-upgrade-modal')}
       shouldShowUpgradeCta={false}
       onUpgradeButtonClick={action('on-upgrade-button-click')}
+    />
+  ))
+  .add('isOnProTrial', () => (
+    <TabNavigation
+      selectedTabId={'queue'}
+      onTabClick={action('tab-click')}
+      isBusinessAccount={false}
+      isManager={false}
+      isInstagramProfile
+      shouldShowNestedSettingsTab
+      selectedChildTabId={'general-settings'}
+      onChildTabClick={action('child-tab-click')}
+      showUpgradeModal={action('show-upgrade-modal')}
+      shouldShowUpgradeCta
+      onUpgradeButtonClick={action('on-upgrade-button-click')}
+      onProTrial={true}
     />
   ));
