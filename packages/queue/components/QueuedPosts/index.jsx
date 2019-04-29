@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import {
   EmptyState,
-  PostDragLayer,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
@@ -116,8 +115,6 @@ const QueuedPosts = ({
   return (
     <ErrorBoundary>
       <div>
-        <PostDragLayer />
-
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
             {showComposer && !editMode &&
@@ -217,9 +214,9 @@ QueuedPosts.propTypes = {
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
   paused: PropTypes.bool,
-  draggingEnabled: PropTypes.bool.isRequired,
+  draggingEnabled: PropTypes.bool,
   onUnpauseClick: PropTypes.func.isRequired,
-  isManager: PropTypes.bool.isRequired,
+  isManager: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
   showInstagramDirectPostingModal: PropTypes.bool,

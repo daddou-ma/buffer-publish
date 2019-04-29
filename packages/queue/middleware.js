@@ -25,7 +25,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,
-          count: getState().appSidebar.user.is_free_user ? undefined : 300,
+          count: 300,
         },
       }));
       break;
@@ -37,7 +37,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         args: {
           profileId: action.args.profileId,
           isFetchingMore: false,
-          count: getState().appSidebar.user.is_free_user ? undefined : 300,
+          count: 300,
         },
       }));
       break;
@@ -56,7 +56,7 @@ export default ({ dispatch, getState }) => next => (action) => {
           profileId: action.args.profileId,
           isFetchingMore: false,
           isReordering: true,
-          count: getState().appSidebar.user.is_free_user ? undefined : 300,
+          count: 300,
         },
       }));
       break;
@@ -131,20 +131,13 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     case actionTypes.POST_DROPPED: {
-      if (action.commit) {
-        const state = getState();
-        const posts = state.queue.byProfileId[action.profileId].posts;
-        const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
-        const orderedIds = orderedPosts.map(post => post.id);
-
-        dispatch(dataFetchActions.fetch({
-          name: 'reorderPosts',
-          args: {
-            profileId: action.profileId,
-            order: orderedIds,
-          },
-        }));
-      }
+      dispatch(dataFetchActions.fetch({
+        name: 'dropPost',
+        args: {
+          updateId: action.updateId,
+          timestamp: action.timestamp,
+        },
+      }));
       break;
     }
 

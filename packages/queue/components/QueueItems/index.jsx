@@ -15,9 +15,10 @@ import {
   LinkPost,
   VideoPost,
   PostDragWrapper,
-  PostEmptySlot,
   QueueButtonGroup,
 } from '@bufferapp/publish-shared-components';
+
+import PostEmptySlot from '@bufferapp/publish-shared-components/PostEmptySlot/dropTarget';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import FailedPostComponent from '@bufferapp/publish-web/components/ErrorBoundary/failedPostComponent';
 
@@ -200,10 +201,7 @@ const renderHeader = (
       }
     </div>
     {showCalendarBtnGroup && (
-      <FeatureLoader
-        supportedFeatures={'daily_view'}
-        supportedPlans={['pro', 'business']}
-      >
+      <FeatureLoader supportedPlans={['pro', 'business']}>
         <div style={{ marginLeft: 'auto' }}>
           <QueueButtonGroup
             buttons={calendarBtns}
@@ -219,6 +217,8 @@ const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
   <PostEmptySlot
     key={id}
     time={slot.label}
+    timestamp={slot.timestamp}
+    day={slot.dayText}
     service={profileService}
     onClick={() =>
       onEmptySlotClick({
@@ -254,12 +254,14 @@ const QueueItems = (props) => {
     }
     if (queueItemType === 'showMorePosts') {
       return (
-        <div key={rest.id} style={calendarBtnWrapperStyle}>
-          <Text>Looking for your other posts?&nbsp;&nbsp;</Text>
-          <Button onClick={() => onCalendarClick('month', 'daily_view_show_more_view_calendar')}>
-           View Your Calendar
-          </Button>
-        </div>
+        <FeatureLoader supportedPlans={['pro', 'business']}>
+          <div key={rest.id} style={calendarBtnWrapperStyle}>
+            <Text>Looking for your other posts?&nbsp;&nbsp;</Text>
+            <Button onClick={() => onCalendarClick('month', 'daily_view_show_more_view_calendar')}>
+            View Your Calendar
+            </Button>
+          </div>
+        </FeatureLoader>
       );
     }
     return null;

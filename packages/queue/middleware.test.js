@@ -273,51 +273,6 @@ describe('middleware', () => {
       }));
   });
 
-  it('should fetch reorderPosts', () => {
-    const queue = {
-      byProfileId: {
-        profileId1: {
-          posts: {
-            post1: {
-              id: 'postId1',
-              due_at: '1534262220',
-            },
-            post2: {
-              id: 'postId2',
-              due_at: '1534262224',
-            },
-          },
-        },
-      },
-    };
-    const orderedIds = [
-      'postId1',
-      'postId2',
-    ];
-    const store = {
-      dispatch: jest.fn(),
-      getState: () => ({
-        queue,
-      }),
-    };
-    const action = {
-      type: actionTypes.POST_DROPPED,
-      commit: true,
-      profileId: 'profileId1',
-    };
-    middleware(store)(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(store.dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
-        name: 'reorderPosts',
-        args: {
-          profileId: action.profileId,
-          order: orderedIds,
-        },
-      }));
-  });
-
   describe('Update Post Counts', () => {
     const queue = {
       byProfileId: {

@@ -116,7 +116,7 @@ export const getSlotsWithTimestampsForDay = ({
   hasTwentyFourHourTimeFormat,
   dailySlots,
   now,
-  day: { dayIndex, dayUnixTime },
+  day: { text: dayText, dayIndex, dayUnixTime },
 }) => {
   if (now === null) {
     now = moment.tz(profileTimezone);
@@ -137,6 +137,7 @@ export const getSlotsWithTimestampsForDay = ({
       name: slot,
       label: slotMoment.format(hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'),
       timestamp: slotMoment.unix(),
+      dayText,
     };
   }).filter(slot => slot); // gets rid of `null` slots (i.e., in the past)
 };
@@ -275,14 +276,13 @@ export const formatPostLists = ({
   weekStartsOnMonday,
   hasTwentyFourHourTimeFormat,
   profileService,
-  hasDailyViewFlip,
 }) => {
   const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
 
   /**
    * CASE 1: Schedule Slots Enabled
    */
-  if (scheduleSlotsEnabled && hasDailyViewFlip) {
+  if (scheduleSlotsEnabled) {
     // Get the schedule slots for each day
     const dailySlots = getDailySlotsFromProfileSchedules(schedules);
 
