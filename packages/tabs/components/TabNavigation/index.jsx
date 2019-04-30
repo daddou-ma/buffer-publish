@@ -165,7 +165,7 @@ TabNavigation.defaultProps = {
   shouldShowUpgradeCta: false,
   shouldShowNestedSettingsTab: false,
   shouldShowNestedAnalyticsTab: false,
-  shouldHideAnalyticsOverviewTab: true,
+  shouldHideAnalyticsOverviewTab: false,
   selectedChildTabId: null,
   profileId: null,
   isLockedProfile: false,
