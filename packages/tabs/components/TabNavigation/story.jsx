@@ -56,6 +56,7 @@ storiesOf('TabNavigation', module)
       showUpgradeModal={action('show-upgrade-modal')}
       shouldShowUpgradeCta
       onUpgradeButtonClick={action('on-upgrade-button-click')}
+      onProTrial
     />
   ))
   .add('isInstagramProfile', () => (
@@ -71,6 +72,7 @@ storiesOf('TabNavigation', module)
       showUpgradeModal={action('show-upgrade-modal')}
       shouldShowUpgradeCta
       onUpgradeButtonClick={action('on-upgrade-button-click')}
+      onProTrial
     />
   ))
   .add('should show grid tab', () => (
@@ -84,6 +86,7 @@ storiesOf('TabNavigation', module)
       showUpgradeModal={action('show-upgrade-modal')}
       shouldShowUpgradeCta
       onUpgradeButtonClick={action('on-upgrade-button-click')}
+      onProTrial
     />
   ))
   .add('isContributor', () => (
@@ -98,6 +101,7 @@ storiesOf('TabNavigation', module)
       showUpgradeModal={action('show-upgrade-modal')}
       shouldShowUpgradeCta={false}
       onUpgradeButtonClick={action('on-upgrade-button-click')}
+      onProTrial
     />
   ))
   .add('isManager, isBusinessAccount', () => (
@@ -112,5 +116,6 @@ storiesOf('TabNavigation', module)
       showUpgradeModal={action('show-upgrade-modal')}
       shouldShowUpgradeCta={false}
       onUpgradeButtonClick={action('on-upgrade-button-click')}
+      onProTrial
     />
   ));
