@@ -34,6 +34,7 @@ export default connect(
           schedules: profileData.schedules,
           profileTimezone: profileData.timezone,
           weekStartsOnMonday: state.appSidebar.user.week_starts_monday,
+          weeksToShow: profileQueuePosts.page + 1,
           hasTwentyFourHourTimeFormat: state.appSidebar.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
         }),
