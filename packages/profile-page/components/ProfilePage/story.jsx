@@ -10,7 +10,24 @@ import { checkA11y } from 'storybook-addon-a11y';
 import ProfilePage from './index';
 
 const history = createHistory();
-const store = createStore();
+
+const storeFake = state => ({
+  default: () => {},
+  subscribe: () => {},
+  dispatch: () => {},
+  getState: () => ({ ...state }),
+});
+
+const store = storeFake({
+  appSidebar: {
+    user: {
+      trial: {
+        onTrial: false,
+      }
+    }
+  }
+});
+
 const stubbedHistory = {
   location: {
     pathname: '/profile/1234/tab/queue',
