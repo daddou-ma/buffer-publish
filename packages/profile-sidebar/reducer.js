@@ -11,6 +11,7 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   CONNECT_SOCIAL_ACCOUNT: 0,
   MANAGE_SOCIAL_ACCOUNT: 0,
   PROFILE_DROPPED: 0,
+  SINGLE_PROFILE: 0,
 });
 
 export const initialState = {
@@ -119,7 +120,7 @@ export default (state = initialState, action) => {
         isLockedProfile: action.profile ? action.profile.disabled : false,
       };
     }
-    case `single_profile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+    case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       let {
         selectedProfile,
         profiles,

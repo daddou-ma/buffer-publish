@@ -54,6 +54,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showInstagramFirstCommentModal: true,
+        firstCommentIds: action.ids,
       };
     case actionTypes.HIDE_WELCOME_MODAL:
       return {
@@ -74,6 +75,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showInstagramFirstCommentModal: false,
+        firstCommentIds: null,
       };
     case actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL:
       return {
@@ -129,8 +131,9 @@ export const actions = {
   hideUpgradeModal: () => ({
     type: actionTypes.HIDE_UPGRADE_MODAL,
   }),
-  showInstagramFirstCommentModal: () => ({
+  showInstagramFirstCommentModal: ({ ids }) => ({
     type: actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_MODAL,
+    ids,
   }),
   showWelcomeModal: () => ({
     type: actionTypes.SHOW_WELCOME_MODAL,

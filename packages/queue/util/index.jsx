@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment-timezone';
+import { getURL } from '@bufferapp/publish-formatters';
 
 /**
  * Return an object containing details about daily slots based on the
@@ -392,12 +393,9 @@ export const formatPostLists = ({
   }, []);
 };
 
-const getBaseURL = () =>
-  (window.location.hostname === 'publish.local.buffer.com' ? 'https://local.buffer.com' : 'https://buffer.com');
-
 export const openCalendarWindow = (profileId, weekOrMonth) => {
   window.open(
-    `${getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/${weekOrMonth}/?content_only=true`,
+    `${getURL.getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/${weekOrMonth}/?content_only=true`,
     '_blank',
   );
 };

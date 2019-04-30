@@ -351,10 +351,10 @@
     react-autocomplete "1.7.2"
     react-day-picker "6.2.1"
 
-"@bufferapp/composer@3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-3.3.0.tgz#578577405c68acf996c97fd86c2905ecf1b145e1"
-  integrity sha512-iPI2prfC3R0vpwibhXcmoRHb00SaaREA5dpHw+x7oUyaP2eFPOdSPsKoRvNN774PoS6u9zl+HhpcgNswQfLcHA==
+"@bufferapp/composer@3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-3.3.1.tgz#08cee7a0cf8a7e431e352331fb779c521e205ba2"
+  integrity sha512-mKYSkJ1njzgXJViCOeQIf6thmn8R+nUR94vtkIE7+SDz33Umz+NJBzjzXUZ3zc3NpJ+hSnjmKc6o8HuYoFkBBA==
   dependencies:
     "@bufferapp/buffer-js-api" "0.3.0"
     "@bufferapp/buffer-js-metrics" "0.2.0"
@@ -559,10 +559,10 @@
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-formatters@1.9.30":
-  version "1.9.30"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-formatters/-/publish-formatters-1.9.30.tgz#7eb03bc4482d891c5aedbd4832a7085e2f80a3ea"
-  integrity sha512-i3vsio1Uv/UReX7ZWUFFYPIVQmaFRxhXKzIfQ/vNWQaVEeJqVsHP1LlzY/1OhowMzVjmxrR6rC7cjt1c4Z3JqA==
+"@bufferapp/publish-formatters@1.9.31":
+  version "1.9.31"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-formatters/-/publish-formatters-1.9.31.tgz#31c0fc53d1c76d64371e7d6cf85b76c28144ed8b"
+  integrity sha512-bQC+Eiyl8Nc/hq/KGBu9kB9Js/fOlGIsiAtYfXO/3dbCPifCDU0hHjShzraeok0bhxjwJpoWcEh0nhGSqXB2Eg==
   dependencies:
     moment "2.19.3"
     moment-timezone "0.5.13"

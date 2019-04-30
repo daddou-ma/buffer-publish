@@ -5,8 +5,9 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { trackAction } from '@bufferapp/publish-data-tracking';
+import { getURL } from '@bufferapp/publish-formatters';
 import { actionTypes as gridActionTypes } from './reducer';
-import { isValidURL, getBaseURL, urlHasProtocol } from './util';
+import { isValidURL, urlHasProtocol } from './util';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
@@ -25,7 +26,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         name: 'shortenUrl',
         args: {
           profileId: action.args.profileId,
-          url: `${getBaseURL()}/p/${action.args.profileId}`,
+          url: `${getURL.getBaseURL()}/p/${action.args.profileId}`,
         },
       }));
       break;
