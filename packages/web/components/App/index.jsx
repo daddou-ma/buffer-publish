@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { profilePageRoute, preferencePageRoute, childTabRoute } from '@bufferapp/publish-routes';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, withRouter } from 'react-router';
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -16,6 +16,7 @@ import InitialLoading from '@bufferapp/publish-initial-loading';
 import DefaultPage from '@bufferapp/default-page';
 import CTABanner from '@bufferapp/publish-cta-banner';
 import TemporaryBanner from '@bufferapp/publish-temporary-banner';
+import PropTypes from 'prop-types';
 
 const appStyle = {
   display: 'flex',
@@ -31,6 +32,18 @@ const contentStyle = {
 // Can't use stateless function for App since then
 // the `DragDropContext` doesn't work.
 class App extends Component { // eslint-disable-line
+  // Appcues triggers the display of content on page load.
+  // Calling the Appcues.page() method will notify Appcues that
+  // the page has changed and it should check again for content.
+  componentDidUpdate(prevProps) {
+    const { location: { pathname } } = this.props;
+    const previousLocation = prevProps.location.pathname;
+
+    if (pathname !== previousLocation) {
+      window.Appcues.page();
+    }
+  }
+
   render() {
     return (
       <div style={appStyle}>
@@ -72,4 +85,14 @@ class App extends Component { // eslint-disable-line
   }
 }
 
-export default DragDropContext(HTML5Backend)(App);
+App.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
+};
+
+App.defaultProps = {
+  location: '',
+};
+
+export default withRouter(DragDropContext(HTML5Backend)(App));
