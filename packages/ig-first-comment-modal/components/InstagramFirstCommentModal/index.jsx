@@ -63,6 +63,7 @@ class InstagramFirstCommentModal extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('updateIGFirstCommentState', this.updateState);
   }
+
   getCantPostAccounts () {
     const { selectedProfiles } = this.props;
     return selectedProfiles.filter(p => p.service === 'instagram' && p.should_post_direct &&  !p.canPostComment);
