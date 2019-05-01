@@ -150,6 +150,7 @@ function ProfilePage({
           childTabId={childTabId}
         />
         <ScrollableContainer
+          profileId={profileId}
           tabId={tabId}
           growthSpace={1}
           onReachBottom={onReachBottom}
