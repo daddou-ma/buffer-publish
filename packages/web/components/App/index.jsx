@@ -40,7 +40,7 @@ class App extends Component { // eslint-disable-line
     const previousLocation = prevProps.location.pathname;
 
     if (pathname !== previousLocation) {
-      window.Appcues.page();
+      window.Appcues && window.Appcues.page();
     }
   }
 
