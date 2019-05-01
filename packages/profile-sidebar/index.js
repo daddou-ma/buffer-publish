@@ -1,7 +1,7 @@
 import { push } from 'connected-react-router';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
-import { hot } from 'react-hot-loader';
+import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import ProfileSidebar from './components/ProfileSidebar';
 import { actions } from './reducer';
@@ -13,7 +13,7 @@ const reorderProfilesByUnlocked = profiles => (
   profiles.sort((a, b) => (a.disabled - b.disabled))
 );
 
-export default hot(module)(connect(
+export default hot(connect(
   (state, ownProps) => ({
     loading: state.profileSidebar.loading,
     selectedProfile: state.profileSidebar.selectedProfile,

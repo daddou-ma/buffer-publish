@@ -97,6 +97,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         name: 'deletePost',
         args: {
           updateId: action.updateId,
+          profileId: action.profileId,
         },
       }));
       break;
@@ -164,6 +165,18 @@ export default ({ dispatch, getState }) => next => (action) => {
         sent: currentCounts.sent + countChanges.sent,
       };
       dispatch(actions.postCountUpdated(profileId, newCounts));
+      /**
+       * We also re-fetch the queue
+       */
+      dispatch(dataFetchActions.fetch({
+        name: 'queuedPosts',
+        args: {
+          profileId,
+          isFetchingMore: false,
+          hideLoading: true,
+          count: 300,
+        },
+      }));
       break;
     }
 

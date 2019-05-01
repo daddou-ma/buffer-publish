@@ -35,6 +35,11 @@ const merged = merge.strategy({ plugins: 'prepend' })(
       new webpack.NamedModulesPlugin(),
       // new BundleAnalyzerPlugin(),
     ],
+    resolve: {
+      alias: {
+        'react-dom': '@hot-loader/react-dom',
+      },
+    },
   },
 );
 

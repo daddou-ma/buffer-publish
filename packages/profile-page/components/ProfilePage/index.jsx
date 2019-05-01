@@ -13,8 +13,10 @@ import GeneralSettings from '@bufferapp/publish-general-settings';
 import TabNavigation from '@bufferapp/publish-tabs';
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import Analytics from '@bufferapp/publish-analytics';
-import { ScrollableContainer } from '@bufferapp/publish-shared-components';
-import { LoadingAnimation } from '@bufferapp/components';
+import {
+  ScrollableContainer,
+  BufferLoading,
+} from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
@@ -47,6 +49,7 @@ const contentStyle = {
 
 const loadingAnimationStyle = {
   textAlign: 'center',
+  margin: '1rem 0',
 };
 
 const tabContentStyle = {
@@ -57,68 +60,39 @@ const tabContentStyle = {
 const TabContent = ({ tabId, profileId, childTabId }) => {
   switch (tabId) {
     case 'queue':
-      return (
-        <QueuedPosts profileId={profileId} />
-      );
+      return <QueuedPosts profileId={profileId} />;
     case 'pastReminders':
-      return (
-        <PastReminders
-          profileId={profileId}
-        />
-      );
+      return <PastReminders profileId={profileId} />;
     case 'grid':
-      return (
-        <GridPosts
-          profileId={profileId}
-        />
-      );
+      return <GridPosts profileId={profileId} />;
     case 'drafts':
     case 'awaitingApproval':
     case 'pendingApproval':
-      return (
-        <DraftList
-          profileId={profileId}
-          tabId={tabId}
-        />
-      );
+      return <DraftList profileId={profileId} tabId={tabId} />;
     case 'analytics':
       switch (childTabId) {
         case 'overview':
-          return (
-            <Analytics />
-          );
+          return <Analytics />;
         case 'posts':
         default:
-          return (
-            <SentPosts
-              profileId={profileId}
-            />
-          );
+          return <SentPosts profileId={profileId} />;
       }
     case 'settings':
       switch (childTabId) {
         case 'posting-schedule':
           return (
-            <PostingSchedule
-              profileId={profileId}
-              childTabId={childTabId}
-            />
+            <PostingSchedule profileId={profileId} childTabId={childTabId} />
           );
         case 'general-settings':
         default:
           return (
             <ErrorBoundary>
-              <GeneralSettings
-                profileId={profileId}
-                childTabId={childTabId}
-              />
+              <GeneralSettings profileId={profileId} childTabId={childTabId} />
             </ErrorBoundary>
           );
       }
     default:
-      return (
-        <Redirect to="/" />
-      );
+      return <Redirect to="/" />;
   }
 };
 
@@ -133,46 +107,53 @@ TabContent.defaultProps = {
   childTabId: '',
 };
 
-const ProfilePage = ({
+function ProfilePage({
   match: {
-    params: {
-      profileId,
-      tabId,
-      childTabId,
-    },
+    params: { profileId, tabId, childTabId },
   },
   onLoadMore,
   loadingMore,
   moreToLoad,
   page,
-}) => {
-  // Sent component is set as default under analytics, which means it could show without
-  // a childTabId.
-  const isPostsTab = ['queue', 'drafts', 'awaitingApproval', 'pendingApproval', 'pastReminders', 'grid'].includes(tabId) ||
-  (tabId === 'analytics' && (!childTabId || childTabId === 'posts'));
-  const handleScroll = (o) => {
-    const reachedBottom = o.scrollHeight - o.scrollTop === o.clientHeight;
-    if (reachedBottom && moreToLoad && isPostsTab && !loadingMore) {
+}) {
+  const isQueueTab = tabId === 'queue';
+  const isOtherPostsTab =
+    [
+      'drafts',
+      'awaitingApproval',
+      'pendingApproval',
+      'pastReminders',
+      'grid',
+    ].includes(tabId) ||
+    // analytics/posts is a child tab, so check for that too (it's the default if not present)
+    (tabId === 'analytics' && (!childTabId || childTabId === 'posts'));
+
+  const onReachBottom = () => {
+    // We don't check `moreToLoad` for the queue since it has infinite loading
+    if (isQueueTab && !loadingMore) {
+      onLoadMore({ profileId, page, tabId });
+    }
+    if (isOtherPostsTab && moreToLoad && !loadingMore) {
       onLoadMore({ profileId, page, tabId });
     }
   };
+
   return (
     <div style={profilePageStyle}>
       <div style={profileSideBarStyle}>
-        <ProfileSidebar
-          profileId={profileId}
-          tabId={tabId}
-        />
+        <ProfileSidebar profileId={profileId} tabId={tabId} />
       </div>
-      <div style={contentStyle} onScroll={e => handleScroll(e.target)}>
+      <div style={contentStyle}>
         <TabNavigation
           profileId={profileId}
           tabId={tabId}
           childTabId={childTabId}
         />
         <ScrollableContainer
+          profileId={profileId}
           tabId={tabId}
           growthSpace={1}
+          onReachBottom={onReachBottom}
         >
           <div style={tabContentStyle}>
             <TabContent
@@ -180,17 +161,17 @@ const ProfilePage = ({
               profileId={profileId}
               childTabId={childTabId}
             />
-            {loadingMore &&
+            {loadingMore && (
               <div style={loadingAnimationStyle}>
-                <LoadingAnimation marginTop={'1rem'} />
+                <BufferLoading size={32} />
               </div>
-            }
+            )}
           </div>
         </ScrollableContainer>
       </div>
     </div>
   );
-};
+}
 
 ProfilePage.propTypes = {
   match: PropTypes.shape({

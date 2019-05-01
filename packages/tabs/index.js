@@ -14,7 +14,9 @@ export default connect(
     isManager: state.profileSidebar.selectedProfile.isManager,
     selectedTabId: ownProps.tabId,
     selectedChildTabId: ownProps.childTabId,
-    onProTrial: state.appSidebar.user.trial.onTrial && !state.profileSidebar.selectedProfile.business,
+    onProTrial: state.appSidebar.user.trial && 
+                state.appSidebar.user.trial.onTrial &&
+                !state.profileSidebar.selectedProfile.business,
     shouldShowUpgradeCta: state.appSidebar.user.is_free_user,
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
