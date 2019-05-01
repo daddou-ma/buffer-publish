@@ -52,6 +52,7 @@ class TabNavigation extends React.Component {
       shouldShowUpgradeCta,
       shouldShowNestedSettingsTab,
       shouldShowNestedAnalyticsTab,
+      shouldHideAnalyticsOverviewTab,
       onUpgradeButtonClick,
       profileId,
       isLockedProfile,
@@ -129,7 +130,9 @@ class TabNavigation extends React.Component {
             secondary
           >
             <Tab tabId={'posts'}>Posts</Tab>
-            <Tab tabId={'overview'}>Overview</Tab>
+            {!shouldHideAnalyticsOverviewTab && 
+              <Tab tabId={'overview'}>Overview</Tab>
+            }
           </Tabs>
         }
         {shouldShowNestedSettingsTab && !isLockedProfile &&
@@ -162,6 +165,7 @@ TabNavigation.defaultProps = {
   shouldShowUpgradeCta: false,
   shouldShowNestedSettingsTab: false,
   shouldShowNestedAnalyticsTab: false,
+  shouldHideAnalyticsOverviewTab: false,
   selectedChildTabId: null,
   profileId: null,
   isLockedProfile: false,
@@ -184,6 +188,7 @@ TabNavigation.propTypes = {
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,
   shouldShowNestedAnalyticsTab: PropTypes.bool,
+  shouldHideAnalyticsOverviewTab: PropTypes.bool,
   profileId: PropTypes.string,
   isLockedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,

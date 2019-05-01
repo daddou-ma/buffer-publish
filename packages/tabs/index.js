@@ -14,10 +14,16 @@ export default connect(
     isManager: state.profileSidebar.selectedProfile.isManager,
     selectedTabId: ownProps.tabId,
     selectedChildTabId: ownProps.childTabId,
-    onProTrial: state.appSidebar.user.trial && state.appSidebar.user.trial.onTrial,
+    onProTrial: state.appSidebar.user.trial && 
+                state.appSidebar.user.trial.onTrial &&
+                !state.profileSidebar.selectedProfile.business,
     shouldShowUpgradeCta: state.appSidebar.user.is_free_user,
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
+    shouldHideAnalyticsOverviewTab: state.profileSidebar.selectedProfile.business && 
+                                    state.appSidebar.user.trial.onTrial && 
+                                    (state.profileSidebar.selectedProfile.type === 'linkedin' 
+                                    || state.profileSidebar.selectedProfile.type === 'pinterest'),
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
     isInstagramProfile: state.generalSettings.isInstagramProfile,
