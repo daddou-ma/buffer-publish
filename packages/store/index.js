@@ -37,6 +37,7 @@ import { middleware as notificationsProviderMiddleware } from '@bufferapp/publis
 import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/publish-profiles-disconnected-modal';
 import { middleware as accountNotificationsMiddleware } from '@bufferapp/publish-account-notifications';
 import { middleware as publishCTABannerMiddleware } from '@bufferapp/publish-cta-banner';
+import { middleware as thirdpartyMiddleware } from '@bufferapp/publish-thirdparty';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 import { middleware as bookmarkletsMiddleware } from '@bufferapp/publish-bookmarklets';
 
@@ -114,6 +115,7 @@ const configureStore = (initialstate) => {
         accountNotificationsMiddleware,
         publishCTABannerMiddleware,
         bookmarkletsMiddleware,
+        thirdpartyMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,
