@@ -1,13 +1,11 @@
-const getBaseURL = () => {
-  return window.location.hostname === 'publish.local.buffer.com' ? 'https://local.buffer.com' : 'https://buffer.com';
-};
+import { getURL } from '@bufferapp/publish-formatters';
 
 const openCalendarWindow = (profileId) => {
-  window.location.href = `${getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/week/?content_only=true`;
+  window.location.href = `${getURL.getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/week/?content_only=true`;
 };
 
 const openBillingWindow = () => {
-  window.location.href = `${getBaseURL()}/app/account/receipts?content_only=true`;
+  window.location.href = `${getURL.getBaseURL()}/app/account/receipts?content_only=true`;
 };
 
 export { openCalendarWindow, openBillingWindow };

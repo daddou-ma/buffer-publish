@@ -188,7 +188,7 @@ const postReducer = (state, action) => {
       return {
         ...state,
         ...newPost,
-        postDetails: { ...state.postDetails, postAction },
+        postDetails: { ...state.postDetails, isCustomScheduled: true, postAction },
       };
     }
     default:
@@ -239,7 +239,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case `queuedPosts_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
-        loading: !action.args.isFetchingMore && !action.args.isReordering,
+        loading: !action.args.isFetchingMore && !action.args.isReordering && !action.args.hideLoading,
         loadingMore: action.args.isFetchingMore,
       };
     case `queuedPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:

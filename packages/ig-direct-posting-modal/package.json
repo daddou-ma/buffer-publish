@@ -9,7 +9,7 @@
   "author": "ana@bufferapp.com",
   "dependencies": {
     "@bufferapp/async-data-fetch": "1.9.4",
-    "@bufferapp/publish-formatters": "1.9.30",
+    "@bufferapp/publish-formatters": "1.9.31",
     "@bufferapp/keywrapper": "0.2.0",
     "@bufferapp/publish-modals": "2.0.0"
   },

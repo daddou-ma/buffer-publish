@@ -4,7 +4,6 @@ import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-si
 import {
   actions as asyncDataFetch,
 } from '@bufferapp/async-data-fetch';
-import { actionTypes } from './reducer';
 
 export default ({ dispatch }) => next => (action) => {
   next(action);

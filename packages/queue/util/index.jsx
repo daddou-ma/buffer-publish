@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment-timezone';
+import { getURL } from '@bufferapp/publish-formatters';
 
 /**
  * Return an object containing details about daily slots based on the
@@ -273,6 +274,7 @@ export const formatPostLists = ({
   schedules,
   profileTimezone,
   weekStartsOnMonday,
+  weeksToShow,
   hasTwentyFourHourTimeFormat,
   profileService,
 }) => {
@@ -289,7 +291,7 @@ export const formatPostLists = ({
     let days = getDaysForUpcomingWeeks({
       profileTimezone,
       weekStartsOnMonday,
-      numWeeks: 2,
+      numWeeks: weeksToShow,
     });
 
     // Let's group posts by their 'day' field to make grabbing them easier
@@ -357,11 +359,6 @@ export const formatPostLists = ({
       });
     }
 
-    // For now show "Looking for your other posts? [View Your Calendar]" to all who have Daily View.
-    finalList.push({
-      queueItemType: 'showMorePosts',
-      id: 'showMorePosts-button',
-    });
     return finalList;
   }
 
@@ -392,12 +389,9 @@ export const formatPostLists = ({
   }, []);
 };
 
-const getBaseURL = () =>
-  (window.location.hostname === 'publish.local.buffer.com' ? 'https://local.buffer.com' : 'https://buffer.com');
-
 export const openCalendarWindow = (profileId, weekOrMonth) => {
   window.open(
-    `${getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/${weekOrMonth}/?content_only=true`,
+    `${getURL.getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/${weekOrMonth}/?content_only=true`,
     '_blank',
   );
 };

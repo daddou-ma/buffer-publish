@@ -169,6 +169,9 @@ describe('middleware', () => {
     const RPC_NAME = 'deletePost';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
+      args: {
+        profileId: 'foo',
+      },
     });
     middleware({ dispatch })(next)(action);
     expect(next)
@@ -178,6 +181,29 @@ describe('middleware', () => {
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
         message: 'Okay, we\'ve deleted that post!',
+      }));
+  });
+
+  it('should refetch posts when a post is successfully deleted', () => {
+    const RPC_NAME = 'deletePost';
+    const action = dataFetchActions.fetchSuccess({
+      name: RPC_NAME,
+      args: {
+        profileId: 'foo',
+      },
+    });
+    middleware({ dispatch })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(dataFetchActions.fetch({
+        name: 'queuedPosts',
+        args: {
+          profileId: 'foo',
+          isFetchingMore: false,
+          hideLoading: true,
+          count: 300,
+        },
       }));
   });
 

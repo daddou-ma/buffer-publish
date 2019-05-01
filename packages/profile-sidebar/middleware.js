@@ -23,7 +23,7 @@ const { formatAnalyticsProfileObj } = require('./analytics');
 
 export const refreshProfile = (dispatch, profileId, message) => {
   dispatch(dataFetchActions.fetch({
-    name: 'single_profile',
+    name: 'singleProfile',
     args: {
       profileId,
       message,
@@ -40,12 +40,15 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     }
-    case 'single_profile':
+    case actionTypes.SINGLE_PROFILE:
       dispatch(dataFetchActions.fetch({
-        name: 'single_profile',
+        name: 'singleProfile',
+        args: {
+          profileId: action.profileId,
+        },
       }));
       break;
-    case `single_profile_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.args.message) {
         dispatch(notificationActions.createNotification({
           notificationType: 'success',

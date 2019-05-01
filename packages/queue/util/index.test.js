@@ -524,6 +524,7 @@ describe('queue utils', () => {
         schedules,
         profileTimezone: 'America/Chicago',
         weekStartsOnMonday: false,
+        weeksToShow: 2,
         hasTwentyFourHourTimeFormat: false,
         profileService: 'facebook',
       });

@@ -91,12 +91,26 @@ export default ({ dispatch, getState }) => next => (action) => {
         notificationType: 'success',
         message: 'Okay, we\'ve deleted that post!',
       }));
+      /**
+       * We also re-fetch the queue when a post is deleted
+       * as this may have caused posts to change schedule
+       */
+      dispatch(dataFetchActions.fetch({
+        name: 'queuedPosts',
+        args: {
+          profileId: action.args.profileId,
+          isFetchingMore: false,
+          hideLoading: true,
+          count: 300,
+        },
+      }));
       break;
     case actionTypes.POST_CONFIRMED_DELETE:
       dispatch(dataFetchActions.fetch({
         name: 'deletePost',
         args: {
           updateId: action.updateId,
+          profileId: action.profileId,
         },
       }));
       break;
@@ -164,6 +178,18 @@ export default ({ dispatch, getState }) => next => (action) => {
         sent: currentCounts.sent + countChanges.sent,
       };
       dispatch(actions.postCountUpdated(profileId, newCounts));
+      /**
+       * We also re-fetch the queue
+       */
+      dispatch(dataFetchActions.fetch({
+        name: 'queuedPosts',
+        args: {
+          profileId,
+          isFetchingMore: false,
+          hideLoading: true,
+          count: 300,
+        },
+      }));
       break;
     }
 
