@@ -5,7 +5,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as stripeActions } from '@bufferapp/stripe';
 import { actions as notificationActions } from '@bufferapp/notifications';
-import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals';
+import { actionTypes as modalsActionTypes, actions as modalActions } from '@bufferapp/publish-modals';
 import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line
@@ -33,12 +33,12 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
       break;
     }
     case actionTypes.CANCEL_TRIAL: {
-      dispatch(dataFetchActions.fetch({
-        name: 'cancelTrial',
-      }));
+      dispatch(dataFetchActions.fetch({ name: 'cancelTrial' }));
+      dispatch(modalActions.hideUpgradeModal());
       trackAction({
         location: 'MODALS',
         action: 'cancel_expired_pro_trial',
+        metadata: { source },
       });
       break;
     }
@@ -51,7 +51,6 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
     }
     case modalsActionTypes.HIDE_UPGRADE_MODAL: {
       trackAction({
-        application: 'PUBLISH',
         location: 'MODALS',
         action: 'hide_upgrade_to_pro',
         metadata: { source },
