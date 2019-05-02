@@ -8,7 +8,7 @@ export default connect(
     isBusinessAccount: state.profileSidebar.selectedProfile.business,
     isInstagramBusiness: state.profileSidebar.selectedProfile.isInstagramBusiness,
     isAnalyticsSupported: state.profileSidebar.selectedProfile.isAnalyticsSupported,
-    // TODO: Refactor so we're not pulling this state from drafts
+    //  TODO: Refactor so we're not pulling this state from drafts
     canStartBusinessTrial: state.drafts.canStartBusinessTrial,
 
   }),

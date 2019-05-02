@@ -32,7 +32,7 @@ const getNotificationCopy = (service, isInstagramBusiness) => {
       </div>
     );
   }
-  return (<div>We only support Facebook & Twitter profiles in our analytics right now.</div>);
+  return (<div>We only support Facebook, Instagram, & Twitter profiles in our analytics right now.</div>);
 };
 
 const getTitleCopy = (service, isInstagramBusiness) => {

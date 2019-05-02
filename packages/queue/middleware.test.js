@@ -195,16 +195,6 @@ describe('middleware', () => {
     middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
-        name: 'queuedPosts',
-        args: {
-          profileId: 'foo',
-          isFetchingMore: false,
-          hideLoading: true,
-          count: 300,
-        },
-      }));
   });
 
   it('should fetch deletePost', () => {

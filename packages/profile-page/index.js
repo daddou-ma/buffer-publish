@@ -6,62 +6,71 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import ProfilePage from './components/ProfilePage';
 
 // default export = container
-export default hot(connect(
-  (state, ownProps) => {
-    const { tabId, profileId, childTabId } =
-      getProfilePageParams({ path: ownProps.history.location.pathname }) || {};
-    // With analytics, the reducer state name doesnt match the tabId
-    const reducerName = (tabId === 'analytics' && (!childTabId || childTabId === 'posts')) ?
-      'sent' : tabId;
-    if (state[reducerName] && state[reducerName].byProfileId && state[reducerName].byProfileId[profileId]) {
-      return ({
-        loading: state[reducerName].byProfileId[profileId].loading,
-        loadingMore: state[reducerName].byProfileId[profileId].loadingMore,
-        moreToLoad: state[reducerName].byProfileId[profileId].moreToLoad,
-        page: state[reducerName].byProfileId[profileId].page,
-        posts: state[reducerName].byProfileId[profileId].posts,
-        total: state[reducerName].byProfileId[profileId].total,
-        translations: state.i18n.translations.example,
-        view: state[reducerName].byProfileId[profileId].tabId || null,
-        isBusinessAccount: state.profileSidebar.selectedProfile.business,
-      });
-    }
-    return {};
-  },
-  dispatch => ({
-    onLoadMore: ({ profileId, page, tabId }) => {
-      let requestName;
-      switch (tabId) {
-        case 'queue':
-          requestName = 'queued';
-          break;
-        case 'drafts':
-        case 'awaitingApproval':
-        case 'pendingApproval':
-          requestName = 'draft';
-          break;
-        case 'grid':
-          requestName = 'grid';
-          break;
-        case 'analytics':
-          requestName = 'sent';
-          break;
-        case 'pastReminders':
-          requestName = 'pastReminders';
-          break;
-        default:
-          requestName = 'queued';
+export default hot(
+  connect(
+    (state, ownProps) => {
+      const { tabId, profileId, childTabId } =
+        getProfilePageParams({ path: ownProps.history.location.pathname }) ||
+        {};
+      // With analytics, the reducer state name doesnt match the tabId
+      const reducerName =
+        tabId === 'analytics' && (!childTabId || childTabId === 'posts')
+          ? 'sent'
+          : tabId;
+      if (
+        state[reducerName] &&
+        state[reducerName].byProfileId &&
+        state[reducerName].byProfileId[profileId]
+      ) {
+        return {
+          loading: state[reducerName].byProfileId[profileId].loading,
+          loadingMore: state[reducerName].byProfileId[profileId].loadingMore,
+          moreToLoad: state[reducerName].byProfileId[profileId].moreToLoad,
+          page: state[reducerName].byProfileId[profileId].page,
+          posts: state[reducerName].byProfileId[profileId].posts,
+          total: state[reducerName].byProfileId[profileId].total,
+          translations: state.i18n.translations.example,
+          view: state[reducerName].byProfileId[profileId].tabId || null,
+          isBusinessAccount: state.profileSidebar.selectedProfile.business,
+        };
       }
-      dispatch(
-        dataFetchActions.fetch({
-          name: `${requestName}Posts`,
-          args: {
-            profileId,
-            page,
-            isFetchingMore: true,
-          },
-        }),
-      );
+      return {};
     },
-  }),
-)(ProfilePage));
+    dispatch => ({
+      onLoadMore: ({ profileId, page, tabId }) => {
+        let requestName;
+        switch (tabId) {
+          case 'queue':
+            requestName = 'queued';
+            break;
+          case 'drafts':
+          case 'awaitingApproval':
+          case 'pendingApproval':
+            requestName = 'draft';
+            break;
+          case 'grid':
+            requestName = 'grid';
+            break;
+          case 'analytics':
+            requestName = 'sent';
+            break;
+          case 'pastReminders':
+            requestName = 'pastReminders';
+            break;
+          default:
+            requestName = 'queued';
+        }
+        dispatch(
+          dataFetchActions.fetch({
+            name: `${requestName}Posts`,
+            args: {
+              profileId,
+              page,
+              isFetchingMore: true,
+            },
+          }),
+        );
+      },
+    }),
+  )(ProfilePage),
+);
