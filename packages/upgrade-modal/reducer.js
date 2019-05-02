@@ -5,6 +5,7 @@ export const actionTypes = keyWrapper('UPGRADE_MODAL', {
   STORE_VALUE: 0,
   UPGRADE: 0,
   SELECT_CYCLE: 0,
+  CANCEL_TRIAL: 0,
 });
 
 export const initialState = {
@@ -55,5 +56,8 @@ export const actions = {
   selectCycle: cycle => ({
     type: actionTypes.SELECT_CYCLE,
     cycle,
+  }),
+  cancelTrial: () => ({
+    type: actionTypes.CANCEL_TRIAL,
   }),
 };

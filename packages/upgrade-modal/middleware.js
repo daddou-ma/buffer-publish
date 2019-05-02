@@ -27,6 +27,23 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
       });
       break;
     }
+    case actionTypes.CANCEL_TRIAL: {
+      dispatch(dataFetchActions.fetch({
+        name: 'cancelTrial',
+      }));
+      trackAction({
+        location: 'MODALS',
+        action: 'cancel_expired_pro_trial',
+      });
+      break;
+    }
+    case `cancelTrial_${dataFetchActionTypes.FETCH_FAIL}`: {
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      break;
+    }
     case modalsActionTypes.HIDE_UPGRADE_MODAL: {
       trackAction({
         application: 'PUBLISH',

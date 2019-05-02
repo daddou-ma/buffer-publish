@@ -51,6 +51,7 @@ const UpgradeModal = ({
   hideModal,
   isNonprofit,
   hasExpiredProTrial,
+  cancelTrial,
 }) => (<div style={{ position: 'fixed', zIndex: '3000' }}>
   <Popover onOverlayClick={hideModal}>
     <div style={{ maxHeight: '100vh', overflow: 'auto' }}>
@@ -151,7 +152,7 @@ const UpgradeModal = ({
                 {validating ? translations.validating : translations.upgradeCta}
               </Button>
               <br /><br />
-              <Button secondary large borderless onClick={hideModal}>
+              <Button secondary large borderless onClick={hasExpiredProTrial ? cancelTrial : hideModal}>
                 {
                   hasExpiredProTrial
                   ? translations.proTrialistStayOnFreeCta
@@ -174,6 +175,7 @@ UpgradeModal.propTypes = {
   validating: PropTypes.bool.isRequired,
   selectCycle: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
+  cancelTrial: PropTypes.func.isRequired,
   isNonprofit: PropTypes.bool.isRequired,
   hasExpiredProTrial: PropTypes.bool,
 };

@@ -42,6 +42,7 @@ export default (state = initialState, action) => {
         upgradeModalSource: action.source,
       };
     case actionTypes.HIDE_UPGRADE_MODAL:
+    case upgradeModalActionTypes.CANCEL_TRIAL:
       return {
         ...state,
         showUpgradeModal: false,
