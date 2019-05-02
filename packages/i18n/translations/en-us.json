@@ -36,9 +36,12 @@
   },
   "upgrade-modal": {
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
+    "proTrialistUpgradeHeader": "Complete your trial and upgrade to the Pro Plan!",
     "proPlanSocialAccounts": "Connect up to 8 social accounts, including Pinterest",
     "proPlanFiltering": "Get powerful post filtering on your recent posts",
     "proPlanCuration": "Curate your content with RSS integrations",
+    "proPlanIGCover": "Create custom covers for Instagram videos",
+    "proPlanIGFirstComment": "Add a first comment to your Instagram posts",
     "proPlanScheduling": "Schedule 100 posts per social account",
     "proPlanCalendar": "Manage everything at a glance with the Social Media Calendar",
     "proPlanBitly": "Shorten your links with Bitly",
@@ -56,9 +59,10 @@
     "securityCode": "Security code",
     "zipCode": "Zip code",
     "zipLeaveBlank": "Leave blank for non-US cards",
-    "upgradeCta": "Upgrade to the Pro Plan!",
+    "upgradeCta": "Upgrade to the Pro Plan",
     "validating": "One moment...",
-    "stayOnFreeCta": "Stay on the Free Plan for now"
+    "stayOnFreeCta": "Stay on the Free Plan for now",
+    "proTrialistStayOnFreeCta": "Downgrade to the Free Plan"
   },
   "welcome-modal": {
     "headline": "We've refreshed the look of Buffer",
