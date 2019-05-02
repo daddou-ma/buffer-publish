@@ -1,4 +1,5 @@
 import keyWrapper from '@bufferapp/keywrapper';
+import { actionTypes as upgradeModalActionTypes } from '@bufferapp/publish-upgrade-modal';
 
 export const initialState = {
   showUpgradeModal: false,
