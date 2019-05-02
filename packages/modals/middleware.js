@@ -60,7 +60,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         dispatch(dataFetchActions.fetch({ name: 'readMessage', args: { message } }));
         // if user is free, subscription hasn't been cancelled, hasExpiredProTrial
       } else if (shouldShowProTrialExpiredModal) {
-        dispatch(actions.showUpgradeModal({ source: 'pro_trial_expired_modal' }));
+        dispatch(actions.showUpgradeModal({ source: 'pro_trial_expired' }));
       }
       break;
     }
