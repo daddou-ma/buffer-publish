@@ -140,6 +140,8 @@ const stripeScript = `<script src="https://js.stripe.com/v2/"></script>
 </script>
 `;
 
+const appcuesScript = '<script src="//fast.appcues.com/49463.js"></script>';
+
 const fullStoryScript = `<script>
 window['_fs_debug'] = false;
 window['_fs_host'] = 'fullstory.com';
@@ -169,6 +171,7 @@ const getHtml = ({ notification, userId, modalKey, modalValue }) =>
     .replace('{{{bugsnagScript}}}', isProduction ? getBugsnagScript(userId) : '')
     .replace('{{{notificationScript}}}', notificationScript(notification))
     .replace('{{{showModalScript}}}', showModalScript(modalKey, modalValue))
+    .replace('{{{appcues}}}', isProduction ? appcuesScript : '')
     .replace('{{{userScript}}}', getUserScript({ id: userId }));
 
 app.use(logMiddleware({ name: 'BufferPublish' }));

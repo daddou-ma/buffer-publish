@@ -31,6 +31,7 @@ import { reducer as profilesDisconnectedModalReducer } from '@bufferapp/publish-
 import { reducer as accountNotificationsReducer } from '@bufferapp/publish-account-notifications';
 import { reducer as stealProfileModalReducer } from '@bufferapp/publish-steal-profile-modal';
 import { reducer as lockedProfileNotificationReducer } from '@bufferapp/publish-locked-profile-notification';
+import { reducer as thirdpartyReducer } from '@bufferapp/publish-thirdparty';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -78,6 +79,7 @@ export default ({
   accountNotifications: accountNotificationsReducer,
   stealProfileModal: stealProfileModalReducer,
   lockedProfileNotification: lockedProfileNotificationReducer,
+  thirdparty: thirdpartyReducer,
 
   // Analyze
   average: averageReducer,

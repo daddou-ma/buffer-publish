@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { profilePageRoute, preferencePageRoute, childTabRoute } from '@bufferapp/publish-routes';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, withRouter } from 'react-router';
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -16,6 +16,9 @@ import InitialLoading from '@bufferapp/publish-initial-loading';
 import DefaultPage from '@bufferapp/default-page';
 import CTABanner from '@bufferapp/publish-cta-banner';
 import TemporaryBanner from '@bufferapp/publish-temporary-banner';
+import ThirdParty from '@bufferapp/publish-thirdparty';
+
+const ThirdPartyWithRouter = withRouter(ThirdParty);
 
 const appStyle = {
   display: 'flex',
@@ -67,6 +70,7 @@ class App extends Component { // eslint-disable-line
         <Notifications />
         <AppSwitcher />
         <AppModals />
+        <ThirdPartyWithRouter />
       </div>
     );
   }
