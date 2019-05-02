@@ -190,19 +190,10 @@
     moment "^2.18.1"
     react-highcharts "^16.0.2"
 
-"@bufferapp/app-sidebar@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.11.0.tgz#16856890c62de18368b755e0733db3108c6bc6eb"
-  integrity sha512-ecdTn92nvDI0AmKm47+krVA/ky9w8z+mg8bar9kLaZwvHcow1wM+Q4gNmgFhCzWre9AG4nBp6E7f7a5p41guBg==
-  dependencies:
-    "@bufferapp/async-data-fetch" "1.9.4"
-    "@bufferapp/keywrapper" "0.2.0"
-    "@bufferapp/session-manager" "0.7.1"
-
-"@bufferapp/app-sidebar@1.11.2":
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.11.2.tgz#680e8c8ab3fbfd9c8f3d80a4d04b393307f2c5ee"
-  integrity sha512-hdbsEEv0XbGrNUe9l9+wOhSeTHLE1VndAsa0XTEF1y96ivZZe4dWIsE8kU0ra4VQ7PxZA9U2tH1d4qE+TRpG3Q==
+"@bufferapp/app-sidebar@1.11.4":
+  version "1.11.4"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.11.4.tgz#c77bf668d4f9385e8659be2e9ad8d8b033e2e041"
+  integrity sha512-tJ2FDUw87ruoGzOUr6ETBxSAxkqeMRyWOk8ZlE5TMkGit9yPrvAmYhX7Fw7bNRS3+08miZN4B1HBOrIJWppo9g==
   dependencies:
     "@bufferapp/async-data-fetch" "1.9.4"
     "@bufferapp/keywrapper" "0.2.0"
