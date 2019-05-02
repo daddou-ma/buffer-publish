@@ -220,7 +220,7 @@ app.get('/health-check', controller.healthCheck);
 app.use(
   validateSessionMiddleware({
     production: isProduction,
-    requiredSessionKeys: ['publish.accessToken', 'global.userId'],
+    requiredSessionKeys: ['publish.accessToken', 'publish.foreignKey'],
   }),
 );
 
@@ -253,7 +253,7 @@ const getNotificationFromQuery = (query) => {
 
 app.get('*', (req, res) => {
   const notification = getNotificationFromQuery(req.query);
-  const userId = req.session.global.userId;
+  const userId = req.session.publish.foreignKey;
   const modalKey = req.query.mk ? req.query.mk : null;
   const modalValue = req.query.mv ? req.query.mv : null;
   res.send(getHtml({
