@@ -19,7 +19,7 @@ module.exports = method(
       });
     } catch (response) {
       throw createError({
-        message: response.error,
+        message: JSON.stringify(response.error.error),
       });
     }
     return result;
