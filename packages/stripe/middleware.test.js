@@ -69,15 +69,6 @@ describe('middleware', () => {
     validateCreditCard();
   });
 
-  it('if upgraded to pro, it redirects to classic Buffer', () => {
-    window.location.assign = jest.fn();
-    const action = {
-      type: `upgradeToPro_${asyncDataFetchActionTypes.FETCH_SUCCESS}`,
-    };
-    middleware(store)(next)(action);
-    expect(window.location.assign).toHaveBeenCalledWith('https://local.buffer.com/classic');
-  });
-
   describe('error handling', () => {
     it('should trigger a throwValidationError action if response has an error message', (done) => {
       global.Stripe.createToken = (card, cb) => {
