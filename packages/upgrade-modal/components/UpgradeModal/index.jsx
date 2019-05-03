@@ -50,6 +50,8 @@ const UpgradeModal = ({
   selectCycle,
   hideModal,
   isNonprofit,
+  hasExpiredProTrial,
+  cancelTrial,
 }) => (<div style={{ position: 'fixed', zIndex: '3000' }}>
   <Popover onOverlayClick={hideModal}>
     <div style={{ maxHeight: '100vh', overflow: 'auto' }}>
@@ -57,24 +59,36 @@ const UpgradeModal = ({
         <div style={{ maxWidth: '100vw', overflow: 'auto' }}>
           <div style={{ width: '550px', padding: '0 25px' }}>
             <div style={{ textAlign: 'center', margin: '0 0 1rem 0' }}>
-              <Text size="large" color="outerSpace">{translations.proUpgradeHeader}</Text>
+              <Text size="large" color="outerSpace">
+                {hasExpiredProTrial
+                  ? translations.proTrialistUpgradeHeader
+                  : translations.proUpgradeHeader }
+              </Text>
             </div>
-
-            <div style={{ display: 'flex' }}>
-              <div style={{ flex: '1' }}>
-                <ul style={listStyleLeft}>
-                  <ListItem text={translations.proPlanSocialAccounts} />
-                  <ListItem text={translations.proPlanFiltering} />
-                  <ListItem text={translations.proPlanCuration} />
-                </ul>
-              </div>
-              <div style={{ flex: '1' }}>
-                <ul style={listStyle}>
-                  <ListItem text={translations.proPlanScheduling} />
-                  <ListItem text={translations.proPlanCalendar} />
-                  <ListItem text={translations.proPlanBitly} />
-                </ul>
-              </div>
+            <div>
+              {hasExpiredProTrial &&
+                <div style={{ textAlign: 'center' }}>
+                  <Text>{translations.proTrialistSubCopy}</Text>
+                </div>
+              }
+              {!hasExpiredProTrial &&
+                <div style={{ display: 'flex' }}>
+                  <div style={{ flex: '1' }}>
+                    <ul style={listStyleLeft}>
+                      <ListItem text={translations.proPlanSocialAccounts} />
+                      <ListItem text={translations.proPlanFiltering} />
+                      <ListItem text={translations.proPlanCuration} />
+                    </ul>
+                  </div>
+                  <div style={{ flex: '1' }}>
+                    <ul style={listStyle}>
+                      <ListItem text={translations.proPlanScheduling} />
+                      <ListItem text={translations.proPlanCalendar} />
+                      <ListItem text={translations.proPlanBitly} />
+                    </ul>
+                  </div>
+                </div>
+              }
             </div>
 
             <Divider marginTop="" marginBottom="1.5rem" />
@@ -151,8 +165,12 @@ const UpgradeModal = ({
                 {validating ? translations.validating : translations.upgradeCta}
               </Button>
               <br /><br />
-              <Button secondary large borderless onClick={hideModal}>
-                {translations.stayOnFreeCta}
+              <Button secondary large borderless onClick={hasExpiredProTrial ? cancelTrial : hideModal}>
+                {
+                  hasExpiredProTrial
+                  ? translations.proTrialistStayOnFreeCta
+                  : translations.stayOnFreeCta
+                }
               </Button>
             </div>
           </div>
@@ -170,7 +188,13 @@ UpgradeModal.propTypes = {
   validating: PropTypes.bool.isRequired,
   selectCycle: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
+  cancelTrial: PropTypes.func.isRequired,
   isNonprofit: PropTypes.bool.isRequired,
+  hasExpiredProTrial: PropTypes.bool,
+};
+
+UpgradeModal.defaultProps = {
+  hasExpiredProTrial: false,
 };
 
 export default UpgradeModal;

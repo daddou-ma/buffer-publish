@@ -47,7 +47,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       });
       break;
     case `upgradeToPro_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
-      window.location.assign(getURL.getClassicBufferURL());
+      window.location.reload();
       break;
     default:
       break;

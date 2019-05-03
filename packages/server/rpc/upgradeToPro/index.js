@@ -9,6 +9,7 @@ const sourceCtaMap = new Map([
   ['pinterest', 'publish-orgAdmin-connect-upgradeToConnectPinterest-1'],
   ['org_admin', 'publish-orgAdmin-planOverview-upgradeForMore-1'],
   ['locked_profile', 'publish-app-lockedProfileTabs-tabsLimitUpgrade-1'],
+  ['pro_trial_expired', 'publish-app-onLoad-proTrialExpired-1'],
 ]);
 const getCtaFromSource = source =>
   sourceCtaMap.get(source) || (`publish-${source || 'unknown'}`);

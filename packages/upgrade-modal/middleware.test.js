@@ -43,7 +43,6 @@ describe('middleware', () => {
 
       expect(trackAction)
         .toBeCalledWith({
-          application: 'PUBLISH',
           location: 'MODALS',
           action: 'hide_upgrade_to_pro',
           metadata: { source: 'source' },
