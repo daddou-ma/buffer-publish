@@ -59,23 +59,36 @@ const UpgradeModal = ({
         <div style={{ maxWidth: '100vw', overflow: 'auto' }}>
           <div style={{ width: '550px', padding: '0 25px' }}>
             <div style={{ textAlign: 'center', margin: '0 0 1rem 0' }}>
-              <Text size="large" color="outerSpace">{hasExpiredProTrial ? translations.proTrialistUpgradeHeader : translations.proUpgradeHeader}</Text>
+              <Text size="large" color="outerSpace">
+                {hasExpiredProTrial
+                  ? translations.proTrialistUpgradeHeader
+                  : translations.proUpgradeHeader }
+              </Text>
             </div>
-            <div style={{ display: 'flex' }}>
-              <div style={{ flex: '1' }}>
-                <ul style={listStyleLeft}>
-                  <ListItem text={translations.proPlanSocialAccounts} />
-                  <ListItem text={translations.proPlanIGFirstComment} />
-                  <ListItem text={translations.proPlanScheduling} />
-                </ul>
-              </div>
-              <div style={{ flex: '1' }}>
-                <ul style={listStyle}>
-                  <ListItem text={translations.proPlanCalendar} />
-                  <ListItem text={translations.proPlanIGCover} />
-                  <ListItem text={translations.proPlanBitly} />
-                </ul>
-              </div>
+            <div>
+              {hasExpiredProTrial &&
+                <div style={{ textAlign: 'center' }}>
+                  <Text>{translations.proTrialistSubCopy}</Text>
+                </div>
+              }
+              {!hasExpiredProTrial &&
+                <div style={{ display: 'flex' }}>
+                  <div style={{ flex: '1' }}>
+                    <ul style={listStyleLeft}>
+                      <ListItem text={translations.proPlanSocialAccounts} />
+                      <ListItem text={translations.proPlanFiltering} />
+                      <ListItem text={translations.proPlanCuration} />
+                    </ul>
+                  </div>
+                  <div style={{ flex: '1' }}>
+                    <ul style={listStyle}>
+                      <ListItem text={translations.proPlanScheduling} />
+                      <ListItem text={translations.proPlanCalendar} />
+                      <ListItem text={translations.proPlanBitly} />
+                    </ul>
+                  </div>
+                </div>
+              }
             </div>
 
             <Divider marginTop="" marginBottom="1.5rem" />
