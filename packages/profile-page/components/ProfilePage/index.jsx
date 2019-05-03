@@ -153,6 +153,7 @@ function ProfilePage({
           profileId={profileId}
           tabId={tabId}
           growthSpace={1}
+          loadingMore={loadingMore}
           moreToLoad={moreToLoad}
           onReachBottom={onReachBottom}
         >

@@ -14,6 +14,7 @@ const containerStyle = {
 function ScrollableContainer({
   tabId,
   profileId,
+  loadingMore,
   moreToLoad,
   children,
   growthSpace,
@@ -42,7 +43,7 @@ function ScrollableContainer({
       container.addEventListener('scroll', handleScroll);
       return () => container.removeEventListener('scroll', handleScroll);
     }
-  }, [profileId, tabId, moreToLoad]);
+  }, [profileId, tabId, moreToLoad, loadingMore]);
 
   return (
     <div
