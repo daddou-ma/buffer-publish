@@ -93,17 +93,18 @@ const GeneralSettings = ({
           onChangeUtmMedium={onChangeUtmMedium}
           onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
         />
-        <Divider />
-        <ShuffleQueue
-          onShuffleQueueClick={onShuffleQueueClick}
-          onConfirmShuffleQueueClick={onConfirmShuffleQueueClick}
-          onCloseModal={onCloseModal}
-          showModal={showModal}
-          profileName={profileName}
-          profileService={profileService}
-          avatarUrl={avatarUrl}
-          loading={loadingShuffle}
-        />
+        {isManager &&
+          <ShuffleQueue
+            onShuffleQueueClick={onShuffleQueueClick}
+            onConfirmShuffleQueueClick={onConfirmShuffleQueueClick}
+            onCloseModal={onCloseModal}
+            showModal={showModal}
+            profileName={profileName}
+            profileService={profileService}
+            avatarUrl={avatarUrl}
+            loading={loadingShuffle}
+          />
+        }
       </div>
     </ErrorBoundary>
   );
