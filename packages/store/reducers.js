@@ -40,7 +40,6 @@ import { reducer as datePickerReducer } from '@bufferapp/analyze-date-picker';
 import { reducer as exportPickerReducer } from '@bufferapp/analyze-export-picker';
 import { reducer as exportToCSVReducer } from '@bufferapp/analyze-csv-export';
 import { reducer as exportToPNGReducer } from '@bufferapp/analyze-png-export';
-import { reducer as hourlyReducer } from '@bufferapp/hourly-chart';
 import { reducer as postsReducer } from '@bufferapp/posts-table';
 import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
 import { reducer as reportListReducer } from '@bufferapp/report-list';
@@ -88,7 +87,6 @@ export default ({
   exportPicker: exportPickerReducer,
   exportToPNG: exportToPNGReducer,
   exportToCSV: exportToCSVReducer,
-  hourly: hourlyReducer,
   posts: postsReducer,
   profiles: profileReducer,
   reportList: reportListReducer,

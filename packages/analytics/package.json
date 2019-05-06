@@ -13,7 +13,6 @@
     "@bufferapp/analyze-shared-components": "0.87.5",
     "@bufferapp/average-table": "0.87.7",
     "@bufferapp/compare-chart": "0.87.2",
-    "@bufferapp/hourly-chart": "0.87.7",
     "@bufferapp/posts-table": "0.87.2",
     "@bufferapp/summary-table": "0.87.2",
     "@bufferapp/product-features": "2.0.0",
