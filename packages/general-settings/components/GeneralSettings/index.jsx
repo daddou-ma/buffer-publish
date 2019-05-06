@@ -93,7 +93,6 @@ const GeneralSettings = ({
           onChangeUtmMedium={onChangeUtmMedium}
           onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
         />
-        <Divider />
         {isManager &&
           <ShuffleQueue
             onShuffleQueueClick={onShuffleQueueClick}
