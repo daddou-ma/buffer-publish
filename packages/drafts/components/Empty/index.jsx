@@ -23,7 +23,7 @@ const renderEmptyState = (isManager, view) => {
     title = 'Looks like you don\'t have any drafts yet!';
 
     if (isManager) {
-      subtitle = 'This is where drafts from your team members will appear.';
+      subtitle = 'This is where drafts from your team will appear.';
     } else {
       subtitle = 'Use this place to create some drafts — when you\'re ready click Request Approval to send them to the Pending Approval tab.';
     }

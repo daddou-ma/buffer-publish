@@ -37,7 +37,7 @@ const renderParagraph = ({ type, profileLimit }, paragraph) => {
   switch (type) {
     case 'teamMember':
       paragraphText = isFirstParagraph ?
-      'Sorry, it looks like the owner of this account has downgraded from a higher plan.' :
+      'Sorry, it looks like the owner of this social account has downgraded from a higher plan.' :
       'We’re keeping this account safe and sound until they’re ready to return!';
       break;
     case 'free':
