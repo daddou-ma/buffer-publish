@@ -57,7 +57,7 @@ const tabContentStyle = {
   height: '100%',
 };
 
-const TabContent = ({ tabId, profileId, childTabId }) => {
+const TabContent = ({ tabId, profileId, childTabId, loadMore }) => {
   switch (tabId) {
     case 'queue':
       return <QueuedPosts profileId={profileId} />;
@@ -75,7 +75,7 @@ const TabContent = ({ tabId, profileId, childTabId }) => {
           return <Analytics />;
         case 'posts':
         default:
-          return <SentPosts profileId={profileId} />;
+          return <SentPosts profileId={profileId} tabId={tabId} loadMore={loadMore} />;
       }
     case 'settings':
       switch (childTabId) {
@@ -162,6 +162,7 @@ function ProfilePage({
               tabId={tabId}
               profileId={profileId}
               childTabId={childTabId}
+              loadMore={onLoadMore}
             />
             {loadingMore && (
               <div style={loadingAnimationStyle}>
