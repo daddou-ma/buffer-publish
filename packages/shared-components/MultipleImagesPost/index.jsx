@@ -22,6 +22,18 @@ const imagesWrapperStyle = {
   cursor: 'pointer',
 };
 
+const thumbnailsWrapperStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '9rem',
+  height: '9rem',
+  borderRadius: '4px',
+  border: '1px solid #B8B8B8',
+  background: '#F5F5F5',
+  boxSizing: 'border-box',
+};
+
 const MultipleImagesPost = ({
   postDetails,
   imageUrls,
@@ -93,9 +105,9 @@ const MultipleImagesPost = ({
       <div style={imagesWrapperStyle} onClick={onImageClick}>
         <MultipleImages
           border={'rounded'}
-          height={'7rem'}
+          height={'9rem'}
           urls={imageUrls}
-          width={'12rem'}
+          width={'9rem'}
         />
         <Lightbox
           images={images}
