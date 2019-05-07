@@ -57,6 +57,10 @@ const DraftList = ({
   isLockedProfile,
   canStartBusinessTrial,
   hasFirstCommentFlip,
+  onImageClick,
+  onImageClickNext,
+  onImageClickPrev,
+  onImageClose,
 }) => {
   if (features.isProUser()) {
     const startTrial = () => window.location.assign('https://buffer.com/billing/start-trial?trialType=small&next=https://publish.buffer.com');
@@ -138,6 +142,10 @@ const DraftList = ({
               onMoveToDraftsClick={onMoveToDraftsClick}
               onRequestApprovalClick={onRequestApprovalClick}
               onRescheduleClick={onRescheduleClick}
+              onImageClick={onImageClick}
+              onImageClickNext={onImageClickNext}
+              onImageClickPrev={onImageClickPrev}
+              onImageClose={onImageClose}
               draggable={false}
               type={'drafts'}
               hasFirstCommentFlip={hasFirstCommentFlip}
@@ -177,6 +185,10 @@ DraftList.propTypes = {
   tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
   isLockedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
+  onImageClick: PropTypes.func.isRequired,
+  onImageClose: PropTypes.func.isRequired,
+  onImageClickNext: PropTypes.func.isRequired,
+  onImageClickPrev: PropTypes.func.isRequired,
 };
 
 DraftList.defaultProps = {

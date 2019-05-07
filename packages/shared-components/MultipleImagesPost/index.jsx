@@ -6,7 +6,6 @@ import {
   MultipleImages,
   Text,
 } from '@bufferapp/components';
-// import style from './style.css';
 import Post from '../Post';
 
 const postContentStyle = {
@@ -20,18 +19,6 @@ const postContentTextStyle = {
 
 const imagesWrapperStyle = {
   cursor: 'pointer',
-};
-
-const thumbnailsWrapperStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '9rem',
-  height: '9rem',
-  borderRadius: '4px',
-  border: '1px solid #B8B8B8',
-  background: '#F5F5F5',
-  boxSizing: 'border-box',
 };
 
 const MultipleImagesPost = ({
