@@ -4,20 +4,22 @@ const rp = require('request-promise');
 module.exports = method(
   'composerApiProxy',
   'communicate with buffer api',
-  async ({ url, args }, { session }) => {
+  async ({ url, args, HTTPMethod = 'POST' }, { session }) => {
     let result;
     try {
-      result = await rp({
+      const fieldName = HTTPMethod === 'POST' ? 'form' : 'qs';
+      const requestParams = {
         uri: `${process.env.API_ADDR}${url}`,
-        method: 'POST',
+        method: HTTPMethod,
         strictSSL: process.env.NODE_ENV !== 'development',
-        form: Object.assign(args, {
-          access_token: session.publish.accessToken,
-        }),
+      };
+      requestParams[fieldName] = Object.assign(args, {
+        access_token: session.publish.accessToken,
       });
+
+      result = await rp(requestParams);
     } catch (err) {
       if (err.error) {
-        // debugger;
         // Catch and pass through Buffer API errors
         return Promise.resolve(JSON.parse(err.error));
       }

@@ -342,10 +342,10 @@
     react-autocomplete "1.7.2"
     react-day-picker "6.2.1"
 
-"@bufferapp/composer@3.3.1":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-3.3.1.tgz#08cee7a0cf8a7e431e352331fb779c521e205ba2"
-  integrity sha512-mKYSkJ1njzgXJViCOeQIf6thmn8R+nUR94vtkIE7+SDz33Umz+NJBzjzXUZ3zc3NpJ+hSnjmKc6o8HuYoFkBBA==
+"@bufferapp/composer@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-3.4.0.tgz#79bf90071bcb917e3b49b943b129645e22275899"
+  integrity sha512-KeEzwRSOiRWYWpv1iVx10AM9rmg1HmfhDi0OQ12nF6b3OBGHGCxtnvQjOyGyfTTWGiqn1PMNm/9yXhGBvKsssQ==
   dependencies:
     "@bufferapp/buffer-js-api" "0.3.0"
     "@bufferapp/buffer-js-metrics" "0.2.0"
