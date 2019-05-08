@@ -11,6 +11,8 @@ export const initialState = {
   showInstagramDirectPostingModal: false,
   showWelcomeB4BTrialModal: false,
   showInstagramFirstCommentModal: false,
+  showB4BTrialExpiredModal: false,
+  upgradeModalB4BSource: null,
 };
 
 export const actionTypes = keyWrapper('MODALS', {
@@ -28,6 +30,8 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_IG_DIRECT_POSTING_MODAL: 0,
   SHOW_WELCOME_B4B_TRIAL_MODAL: 0,
   HIDE_WELCOME_B4B_TRIAL_MODAL: 0,
+  SHOW_UPGRADE_B4B_MODAL: 0,
+  HIDE_UPGRADE_B4B_MODAL: 0,
   SHOW_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
   HIDE_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
 });
@@ -44,6 +48,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showUpgradeModal: false,
+      };
+    case actionTypes.SHOW_UPGRADE_B4B_MODAL:
+      return {
+        ...state,
+        showB4BTrialExpiredModal: true,
+        upgradeModalB4BSource: action.source,
+      };
+    case actionTypes.HIDE_UPGRADE_B4B_MODAL:
+      return {
+        ...state,
+        showB4BTrialExpiredModal: false,
       };
     case actionTypes.SHOW_WELCOME_MODAL:
       return {
@@ -130,6 +145,13 @@ export const actions = {
   }),
   hideUpgradeModal: () => ({
     type: actionTypes.HIDE_UPGRADE_MODAL,
+  }),
+  showB4BTrialExpiredModal: ({ source }) => ({
+    type: actionTypes.SHOW_UPGRADE_B4B_MODAL,
+    source,
+  }),
+  hideUpgradeB4BModal: () => ({
+    type: actionTypes.HIDE_UPGRADE_B4B_MODAL,
   }),
   showInstagramFirstCommentModal: ({ ids }) => ({
     type: actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_MODAL,

@@ -123,5 +123,11 @@
     "notSureWhere": "Not sure where your social account has been added already?",
     "getInTouch": "Get in touch",
     "takeMeBack": "Take me back to Buffer"
+  },
+  "b4b-trial-complete-modal": {
+    "header": "Your Buffer for Business trial is complete!",
+    "completeAndUpgrade": "Complete and Upgrade",
+    "cancelTrial": "Cancel Trial",
+    "cancelTrialAndLock": "Cancel Trial and Lock Extra Profiles"
   }
 }
