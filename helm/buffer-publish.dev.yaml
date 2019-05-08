@@ -7,3 +7,6 @@ ingress:
   path: /
   annotations:
     kubernetes.io/ingress.class: nginx
+env:
+  - name: API_ADDR
+    value: https://k8s-api-php71-dev.buffer.com
