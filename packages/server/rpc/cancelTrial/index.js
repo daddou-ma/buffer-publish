@@ -4,24 +4,21 @@ const rp = require('request-promise');
 module.exports = method(
   'cancelTrial',
   'cancel trial',
-  async ({ token }, { session }) => {
-    let result;
-    try {
-      result = await rp({
-        uri: `${process.env.API_ADDR}/1/billing/cancel-trial.json`,
-        method: 'POST',
-        strictSSL: process.env.NODE_ENV !== 'development',
-        json: true,
-        form: {
-          access_token: session.publish.accessToken,
-          product: 'publish',
-        },
-      });
-    } catch (response) {
-      throw createError({
-        message: JSON.stringify(response.error.error),
-      });
-    }
-    return result;
-  },
-);
+  ({ profileId }, { session }) =>
+    rp({
+      uri: `${process.env.API_ADDR}/1/billing/cancel-trial.json`,
+      method: 'POST',
+      strictSSL: !(process.env.NODE_ENV === 'development'),
+      qs: {
+        access_token: session.publish.accessToken,
+        product: 'publish',
+      },
+    })
+    .then(result => JSON.parse(result))
+    .catch((err) => {
+      if (err.error) {
+        const { error } = JSON.parse(err.error);
+        throw createError({ message: error });
+      }
+    }),
+  );
