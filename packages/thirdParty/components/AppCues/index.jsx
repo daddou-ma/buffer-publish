@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getProfilePageParams } from '@bufferapp/publish-routes';
 
 class AppCues extends React.Component {
   // Appcues triggers the display of content on page load.
@@ -11,6 +12,11 @@ class AppCues extends React.Component {
       const previousLocation = prevProps.location.pathname;
       if (pathname !== previousLocation && window && window.Appcues) {
         window.Appcues.page();
+
+        const { tabId } = getProfilePageParams({ path: pathname });
+        if (tabId === 'analytics') {
+          window.Appcues.track('Viewed Analytics Tab');
+        }
       }
     }
   }
