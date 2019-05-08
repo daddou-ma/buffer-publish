@@ -321,10 +321,10 @@
     react-autocomplete "1.7.2"
     react-day-picker "7.2.3"
 
-"@bufferapp/components@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-3.2.0.tgz#8b9d71277af5ee0017161608ee96621c6b9703e6"
-  integrity sha512-+PvvFgFE7m41PCR18iNFT13v9chzVdBHSnxGn5zzRpkqN4FBw93ECUwcHocpwh5sYLHb7d9ofyETG5eNQphssQ==
+"@bufferapp/components@3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-3.2.1.tgz#a9654ed3e265323d9678cd9aadf55de98ac068db"
+  integrity sha512-GDuBYvR8/HkItViqeLUUnp+zEyap8wbfSUs09G41lbSG0hQTLQqnl9S49dIJNhvAh1XNylK+Pqaukg0aZO7/BQ==
   dependencies:
     "@bufferapp/react-keyframes" "0.2.5"
     moment "^2.22.2"
@@ -342,10 +342,10 @@
     react-autocomplete "1.7.2"
     react-day-picker "6.2.1"
 
-"@bufferapp/composer@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-3.4.0.tgz#79bf90071bcb917e3b49b943b129645e22275899"
-  integrity sha512-KeEzwRSOiRWYWpv1iVx10AM9rmg1HmfhDi0OQ12nF6b3OBGHGCxtnvQjOyGyfTTWGiqn1PMNm/9yXhGBvKsssQ==
+"@bufferapp/composer@3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-3.4.2.tgz#c759dac63c48c280da3eabf6891bea5241d58a83"
+  integrity sha512-Ghqoc/v9F9CoZfWc0b7/vB9wYpgPycSwIcV/ymnbtJgoeYtVPJiheE11kM+SvcbCcXcyyp7tAHeFzgjdU37mWQ==
   dependencies:
     "@bufferapp/buffer-js-api" "0.3.0"
     "@bufferapp/buffer-js-metrics" "0.2.0"
