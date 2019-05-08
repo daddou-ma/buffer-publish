@@ -10,3 +10,39 @@ ingress:
 env:
   - name: API_ADDR
     value: https://k8s-api-php71-dev.buffer.com
+  - name: DD_AGENT_HOST
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
+  - name: ANALYZE_API_ADDR
+    value: https://analyze-api.buffer.com
+  - name: BUGSNAG_KEY
+    valueFrom:
+      secretKeyRef:
+        key: bugsnag
+        name: buffer-publish-keys
+  - name: PUSHER_APP_ID
+    valueFrom:
+      secretKeyRef:
+        key: pusher-app-id
+        name: buffer-publish-keys
+  - name: PUSHER_APP_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pusher-app-key
+        name: buffer-publish-keys
+  - name: PUSHER_APP_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: pusher-app-secret
+        name: buffer-publish-keys
+  - name: PUSHER_CLUSTER
+    valueFrom:
+      secretKeyRef:
+        key: pusher-cluster
+        name: buffer-publish-keys
+  - name: STRIPE_PUBLISHABLE
+    valueFrom:
+      secretKeyRef:
+        key: stripe-publishable
+        name: buffer-publish-keys

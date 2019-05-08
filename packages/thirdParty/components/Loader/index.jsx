@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 
 import AppCues from '../AppCues';
 
-const Loader = ({
-                    appCues,
-                    location,
-                  }) => (
-                    <AppCues appCues={appCues} location={location} />
-                  );
+const Loader = ({ appCues, location }) => (
+  <AppCues appCues={appCues} location={location} />
+);
 
 Loader.propTypes = {
   location: PropTypes.shape({
@@ -16,11 +13,10 @@ Loader.propTypes = {
   }),
   appCues: PropTypes.shape({
     loaded: PropTypes.bool,
-  }),
+  }).isRequired,
 };
 Loader.defaultProps = {
   location: {},
-}
-
+};
 
 export default Loader;
