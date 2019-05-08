@@ -9,6 +9,7 @@ import WelcomePaidModal from '@bufferapp/publish-welcome-paid-modal';
 import InstagramFirstCommentModal from '@bufferapp/publish-ig-first-comment-modal';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import WelcomeB4BTrialModal from '@bufferapp/publish-welcome-b4b-trial-modal';
+import B4bTrialCompleteModal from '@bufferapp/publish-b4b-trial-complete-modal';
 
 const AppModals = ({
   showUpgradeModal,
@@ -19,6 +20,7 @@ const AppModals = ({
   showInstagramDirectPostingModal,
   showWelcomeB4BTrialModal,
   showInstagramFirstCommentModal,
+  showB4BTrialExpiredModal,
 }) => (
   <React.Fragment>
     {showUpgradeModal && <UpgradeModal />}
@@ -29,6 +31,7 @@ const AppModals = ({
     {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
     {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
     {showStealProfileModal && <StealProfileModal />}
+    {showB4BTrialExpiredModal && <B4bTrialCompleteModal />}
   </React.Fragment>
 );
 
@@ -41,6 +44,7 @@ AppModals.propTypes = {
   showInstagramDirectPostingModal: PropTypes.bool.isRequired,
   showWelcomeB4BTrialModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentModal: PropTypes.bool.isRequired,
+  showB4BTrialExpiredModal: PropTypes.bool.isRequired,
 };
 
 export default AppModals;

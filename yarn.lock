@@ -547,10 +547,10 @@
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-parsers@1.17.1":
-  version "1.17.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.17.1.tgz#9879aed5701b948246e14cc6268e43595df98d46"
-  integrity sha512-PRN6D8dZHGN0fyE3U2f2DHkOYhukUZVj4cLwEGL26jVW75tjoAWafCG3ZCBX1WyCrCUCejAQfRcoD7S8OHSWMA==
+"@bufferapp/publish-parsers@1.17.2":
+  version "1.17.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.17.2.tgz#59923ffbfdb692a4cec4c064f9ba4c3a453c74ab"
+  integrity sha512-l9Cs5H5Nx5dmwzhATxowhCi82WvAZxkmnxZnKde8pk3ZHK3hMETxB5weUM/qTS/xV2qAjp+UajAAoK4blbFdSg==
   dependencies:
     "@bufferapp/publish-formatters" "1.9.29"
     twitter-text "3.0.0"
