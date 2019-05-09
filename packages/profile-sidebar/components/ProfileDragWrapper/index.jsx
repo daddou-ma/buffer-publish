@@ -75,38 +75,12 @@ const profileTarget = {
   },
 };
 
-
 const ProfileDragWrapper = React.forwardRef(
   ({
-    avatarUrl,
-    type,
-    handle,
-    notifications,
-    selected,
-    locked,
-    disconnected,
-    onClick,
-    profileLimit,
-    onDropProfile,
-    showProfilesDisconnectedModal,
-    id,
     connectDragSource,
     connectDropTarget,
+    ...profileProps
   }, ref) => {
-    const profileProps = {
-      avatarUrl,
-      type,
-      handle,
-      notifications,
-      selected,
-      locked,
-      disconnected,
-      onClick,
-      profileLimit,
-      onDropProfile,
-      showProfilesDisconnectedModal,
-      id,
-    };
     const elementRef = useRef(null);
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
