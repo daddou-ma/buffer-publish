@@ -6,7 +6,6 @@ import {
   MultipleImages,
   Text,
 } from '@bufferapp/components';
-// import style from './style.css';
 import Post from '../Post';
 
 const postContentStyle = {
@@ -93,9 +92,9 @@ const MultipleImagesPost = ({
       <div style={imagesWrapperStyle} onClick={onImageClick}>
         <MultipleImages
           border={'rounded'}
-          height={'7rem'}
+          height={'9rem'}
           urls={imageUrls}
-          width={'12rem'}
+          width={'9rem'}
         />
         <Lightbox
           images={images}

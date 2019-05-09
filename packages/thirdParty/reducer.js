@@ -1,5 +1,4 @@
 import keyWrapper from '@bufferapp/keywrapper';
-import { actionTypes as asyncDataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('thirdparty', {
   FULLSTORY: 0,
@@ -17,7 +16,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         appCues: { loaded: action.loaded },
-      }
+      };
     default:
       return state;
   }

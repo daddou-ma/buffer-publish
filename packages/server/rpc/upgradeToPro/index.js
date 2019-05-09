@@ -10,6 +10,7 @@ const sourceCtaMap = new Map([
   ['org_admin', 'publish-orgAdmin-planOverview-upgradeForMore-1'],
   ['locked_profile', 'publish-app-lockedProfileTabs-tabsLimitUpgrade-1'],
   ['pro_trial_expired', 'publish-app-onLoad-proTrialExpired-1'],
+  ['b4b_trial_expired', 'publish-app-onLoad-b4bTrialExpired-1'],
 ]);
 const getCtaFromSource = source =>
   sourceCtaMap.get(source) || (`publish-${source || 'unknown'}`);

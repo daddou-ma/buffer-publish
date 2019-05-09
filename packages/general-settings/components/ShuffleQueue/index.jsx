@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Button, Popover } from '@bufferapp/components';
+import { Text, Button, Popover, Divider } from '@bufferapp/components';
 import { ConfirmModal } from '@bufferapp/publish-shared-components';
 
 const shuffleQueueWrapperStyle = {
@@ -38,38 +38,41 @@ const ShuffleQueue = ({
   showModal,
   loading,
 }) => (
-  <div style={shuffleQueueWrapperStyle}>
-    {showModal && <Popover
-      onOverlayClick={onCloseModal}
-    >
-      <ConfirmModal
-        onConfirmClick={onConfirmShuffleQueueClick}
-        onCloseModal={onCloseModal}
-        profileService={profileService}
-        avatar={avatarUrl}
-        heading={'Are you sure?'}
-        body={`Your first 200 queued updates for <span style="font-weight:bold">${profileName}</span> will be shuffled
-        into a completely random order.`}
-        btnText={loading ? 'Shuffling Queue..' : 'Shuffle Queue'}
-      />
-    </Popover>}
-    <div style={leftContentStyle}>
-      <div style={headerTextWrapperStyle}>
-        <Text color={'black'}>
-          Shuffle Queue
+  <div>
+    <Divider />
+    <div style={shuffleQueueWrapperStyle}>
+      {showModal && <Popover
+        onOverlayClick={onCloseModal}
+      >
+        <ConfirmModal
+          onConfirmClick={onConfirmShuffleQueueClick}
+          onCloseModal={onCloseModal}
+          profileService={profileService}
+          avatar={avatarUrl}
+          heading={'Are you sure?'}
+          body={`Your first 200 queued updates for <span style="font-weight:bold">${profileName}</span> will be shuffled
+          into a completely random order.`}
+          btnText={loading ? 'Shuffling Queue..' : 'Shuffle Queue'}
+        />
+      </Popover>}
+      <div style={leftContentStyle}>
+        <div style={headerTextWrapperStyle}>
+          <Text color={'black'}>
+            Shuffle Queue
+          </Text>
+        </div>
+        <Text size="small">
+          Your first 200 queued updates will be shuffled into a completely random order.
         </Text>
       </div>
-      <Text size="small">
-        Your first 200 queued updates will be shuffled into a completely random order.
-      </Text>
-    </div>
-    <div style={buttonWrapperStyle}>
-      <Button
-        fillContainer
-        onClick={onShuffleQueueClick}
-      >
-        Shuffle Queue
-      </Button>
+      <div style={buttonWrapperStyle}>
+        <Button
+          fillContainer
+          onClick={onShuffleQueueClick}
+        >
+          Shuffle Queue
+        </Button>
+      </div>
     </div>
   </div>
 );

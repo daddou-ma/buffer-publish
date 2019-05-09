@@ -40,12 +40,12 @@ import { middleware as publishCTABannerMiddleware } from '@bufferapp/publish-cta
 import { middleware as thirdpartyMiddleware } from '@bufferapp/publish-thirdparty';
 import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 import { middleware as bookmarkletsMiddleware } from '@bufferapp/publish-bookmarklets';
+import { middleware as b4bTrialCompleteModalMiddleware } from '@bufferapp/publish-b4b-trial-complete-modal';
 
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
 import { middleware as compareChartMiddleware } from '@bufferapp/compare-chart';
 import { middleware as datePickerMiddleware } from '@bufferapp/analyze-date-picker';
-import { middleware as hourlyMiddleware } from '@bufferapp/hourly-chart';
 import { middleware as exportPickerMiddleware } from '@bufferapp/analyze-export-picker';
 import { middleware as exportToCSVMiddleware } from '@bufferapp/analyze-csv-export';
 import { middleware as exportToPNGMiddleware } from '@bufferapp/analyze-png-export';
@@ -116,11 +116,11 @@ const configureStore = (initialstate) => {
         publishCTABannerMiddleware,
         bookmarkletsMiddleware,
         thirdpartyMiddleware,
+        b4bTrialCompleteModalMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,
         datePickerMiddleware,
-        hourlyMiddleware,
         postsMiddleware,
         profileSelectorMiddleware,
         summaryTableMiddleware,

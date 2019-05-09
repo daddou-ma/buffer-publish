@@ -121,4 +121,20 @@ storiesOf('GeneralSettings', module)
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
+  ))
+  .add('is Contributor', () => (
+    <GeneralSettings
+      isInstagramProfile={false}
+      isInstagramBusiness={false}
+      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
+      features={features}
+      onChangeUtmCampaign={action('onChangeUtmCampaign')}
+      onChangeUtmSource={action('onChangeUtmSource')}
+      onChangeUtmMedium={action('onChangeUtmMedium')}
+      utmCampaign={'buffer'}
+      utmSource={'source'}
+      utmMedium={'medium'}
+      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
+      isManager={false}
+    />
   ));

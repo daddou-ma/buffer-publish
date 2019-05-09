@@ -32,6 +32,7 @@ import { reducer as accountNotificationsReducer } from '@bufferapp/publish-accou
 import { reducer as stealProfileModalReducer } from '@bufferapp/publish-steal-profile-modal';
 import { reducer as lockedProfileNotificationReducer } from '@bufferapp/publish-locked-profile-notification';
 import { reducer as thirdpartyReducer } from '@bufferapp/publish-thirdparty';
+import { reducer as b4bTrialCompleteReducer } from '@bufferapp/publish-b4b-trial-complete-modal';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -40,7 +41,6 @@ import { reducer as datePickerReducer } from '@bufferapp/analyze-date-picker';
 import { reducer as exportPickerReducer } from '@bufferapp/analyze-export-picker';
 import { reducer as exportToCSVReducer } from '@bufferapp/analyze-csv-export';
 import { reducer as exportToPNGReducer } from '@bufferapp/analyze-png-export';
-import { reducer as hourlyReducer } from '@bufferapp/hourly-chart';
 import { reducer as postsReducer } from '@bufferapp/posts-table';
 import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
 import { reducer as reportListReducer } from '@bufferapp/report-list';
@@ -80,6 +80,7 @@ export default ({
   stealProfileModal: stealProfileModalReducer,
   lockedProfileNotification: lockedProfileNotificationReducer,
   thirdparty: thirdpartyReducer,
+  b4bTrialComplete: b4bTrialCompleteReducer,
 
   // Analyze
   average: averageReducer,
@@ -88,7 +89,6 @@ export default ({
   exportPicker: exportPickerReducer,
   exportToPNG: exportToPNGReducer,
   exportToCSV: exportToCSVReducer,
-  hourly: hourlyReducer,
   posts: postsReducer,
   profiles: profileReducer,
   reportList: reportListReducer,

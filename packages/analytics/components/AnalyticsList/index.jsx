@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AverageTable from '@bufferapp/average-table';
 import CompareChart from '@bufferapp/compare-chart';
-import HourlyChart from '@bufferapp/hourly-chart';
 import PostsTable from '@bufferapp/posts-table';
 import SummaryTable from '@bufferapp/summary-table';
 import { BusinessTrialOrUpgradeCard } from '@bufferapp/publish-shared-components';
@@ -74,7 +73,6 @@ const AnalyticsList = ({
           <CompareChart />
           {!isInstagramBusiness &&
             <React.Fragment>
-              <HourlyChart />
               <AverageTable />
               <PostsTable />
             </React.Fragment>

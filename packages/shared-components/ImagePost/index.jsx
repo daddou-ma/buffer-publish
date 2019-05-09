@@ -23,6 +23,17 @@ const imageWrapperStyle = {
   cursor: 'pointer',
 };
 
+const thumbnailWrapperStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '9rem',
+  height: '9rem',
+  borderRadius: '4px',
+  border: '1px solid #B8B8B8',
+  background: '#F5F5F5',
+};
+
 const imageTagStyle = {
   position: 'absolute',
   bottom: '0.7rem',
@@ -107,14 +118,18 @@ const ImagePost = ({
         }
       </span>
       <div style={imageWrapperStyle} onClick={onImageClick}>
-        <Image
-          src={imageSrc}
-          width={'12rem'}
-          maxHeight={'7rem'}
-          minHeight={'5rem'}
-          border={'rounded'}
-          objectFit={'cover'}
-        />
+        <div style={thumbnailWrapperStyle}>
+          <Image
+            src={imageSrc}
+            width={'auto'}
+            height={'auto'}
+            maxWidth={'9rem'}
+            maxHeight={'9rem'}
+            minHeight={'7rem'}
+            minWidth={'7rem'}
+            objectFit={'cover'}
+          />
+        </div>
         <Lightbox
           images={[{ src: `${imageSrc}` }]}
           isOpen={isLightboxOpen}
