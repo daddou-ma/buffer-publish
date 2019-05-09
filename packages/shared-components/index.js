@@ -9,6 +9,7 @@ export LinkPost from './LinkPost';
 export BusinessTrialOrUpgradeCard from './BusinessTrialOrUpgradeCard';
 export MultipleImagesPost from './MultipleImagesPost';
 export PostDragWrapper from './PostDragWrapper';
+export PostReorderDropLineDropTarget from './PostReorderDropLine';
 export PostList from './PostList';
 export PostLists from './PostLists';
 export PostMetaBar from './PostMetaBar';

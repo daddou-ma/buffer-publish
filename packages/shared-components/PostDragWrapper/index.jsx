@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { DragSource } from 'react-dnd';
+
+import PostReorderDropLineDropTarget from '../PostReorderDropLine';
 
 const postSource = {
   canDrag(props) {
@@ -35,7 +36,8 @@ class PostDragWrapper extends Component {
 
   componentDidMount() {
     const img = new Image();
-    img.src = 'https://s3.amazonaws.com/buffer-publish/images/drag-placeholder.png';
+    img.src =
+      'https://s3.amazonaws.com/buffer-publish/images/drag-placeholder.png';
     img.onload = () => this.props.connectDragPreview(img);
   }
 
@@ -51,9 +53,9 @@ class PostDragWrapper extends Component {
    * These styles ensure we don't show the focus ring when using
    * the mouse for drag and drop.
    */
+  // eslint-disable-next-line
   getStyle() {
     const transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-    // const hideOutline = this.state.isHovering || this.props.isDragging ? { outline: 'none' } : {};
     const hideOutline = { outline: 'none' };
     return { borderRadius: '4px', transition, ...hideOutline };
   }
@@ -69,27 +71,32 @@ class PostDragWrapper extends Component {
 
     const { isHovering } = this.state;
 
-    return connectDragSource(
-      <div
-        aria-dropeffect="move"
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-        ref={(node) => {
-          this.containerNode = node;
-        }}
-        draggable
-        tabIndex={0}
-        style={this.getStyle()}
-      >
-        <PostComponent
-          {...postProps}
-          draggable={!postProps.postDetails.error}
-          dragging={isDragging}
-          hovering={isHovering}
-          fixed={postProps.isFixed}
-          basic={basic}
-        />
-      </div>,
+    return (
+      <React.Fragment>
+        {connectDragSource(
+          <div
+            aria-dropeffect="move"
+            onMouseEnter={this.onMouseEnter}
+            onMouseLeave={this.onMouseLeave}
+            ref={(node) => {
+              this.containerNode = node;
+            }}
+            draggable
+            tabIndex={0}
+            style={this.getStyle()}
+          >
+            <PostComponent
+              {...postProps}
+              draggable={!postProps.postDetails.error}
+              dragging={isDragging}
+              hovering={isHovering}
+              fixed={postProps.isFixed}
+              basic={basic}
+            />
+          </div>,
+        )}
+        <PostReorderDropLineDropTarget />
+      </React.Fragment>
     );
   }
 }
