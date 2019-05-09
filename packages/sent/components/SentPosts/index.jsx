@@ -131,7 +131,7 @@ const SentPosts = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
         />
       </div>
-      {moreToLoad && (
+      {moreToLoad && ( 
         <div style={loadMoreButtonStyle}>
           <Button onClick={loadMorePosts}>
             Load More
