@@ -1,26 +1,32 @@
-import React, { Component } from 'react';
+import React, { useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import flow from 'lodash.flow';
-import { DragSource, DropTarget, DropTargetConnector } from 'react-dnd';
+import { DragSource, DropTarget } from 'react-dnd';
 import ProfileListItem from '../ProfileListItem';
 
 const profileSource = {
-  beginDrag(props, monitor, component) {
+  beginDrag(props) {
     return {
       id: props.id,
       index: props.index,
-      width: component.containerNode.offsetWidth,
     };
   },
 };
 
 const profileTarget = {
-  drop(props, monitor, component) {
-    component.decoratedComponentInstance.containerNode.blur();
+  drop(props) {
     props.onDropProfile({ commit: true });
   },
+
   hover(props, monitor, component) {
+    if (!component) {
+      return null;
+    }
+    // node = HTML Div element from imperative API
+    const node = component.getNode();
+    if (!node) {
+      return null;
+    }
     const { index: dragIndex } = monitor.getItem();
     const { index: hoverIndex, onDropProfile, profileLimit } = props;
 
@@ -30,11 +36,11 @@ const profileTarget = {
     }
 
     // Determine rectangle on screen
-    const node = component.decoratedComponentInstance.containerNode;
     const hoverBoundingRect = node.getBoundingClientRect();
 
     // Get vertical middle
-    const hoverThird = (hoverBoundingRect.bottom - hoverBoundingRect.top);
+    const hoverMiddleY =
+    (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
     // Determine mouse position
     const clientOffset = monitor.getClientOffset();
@@ -47,12 +53,16 @@ const profileTarget = {
     // When dragging upwards, only move when the cursor is above 50%
 
     // Dragging downwards
-    if (dragIndex < hoverIndex && hoverClientY < hoverThird) {
+    // if (dragIndex < hoverIndex && hoverClientY < hoverThird) {
+    //   return;
+    // }
+
+    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
       return;
     }
 
     // Dragging upwards
-    if (dragIndex > hoverIndex && hoverClientY > hoverThird) {
+    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
       return;
     }
 
@@ -65,31 +75,56 @@ const profileTarget = {
   },
 };
 
-class ProfileDragWrapper extends Component {
 
-  render() {
-    const {
-      connectDragSource,
-      connectDropTarget,
-    } = this.props;
-    const profileProps = this.props;
-
-    return connectDragSource(
-      connectDropTarget(
-        <div
-          aria-dropeffect="move"
-          ref={(node) => { this.containerNode = node; }}
-          draggable
-          tabIndex={0}
-        >
-          <ProfileListItem
-            {...profileProps}
-          />
-        </div>,
-      ),
+const ProfileDragWrapper = React.forwardRef(
+  ({
+    avatarUrl,
+    type,
+    handle,
+    notifications,
+    selected,
+    locked,
+    disconnected,
+    onClick,
+    profileLimit,
+    onDropProfile,
+    showProfilesDisconnectedModal,
+    id,
+    connectDragSource,
+    connectDropTarget,
+  }, ref) => {
+    const profileProps = {
+      avatarUrl,
+      type,
+      handle,
+      notifications,
+      selected,
+      locked,
+      disconnected,
+      onClick,
+      profileLimit,
+      onDropProfile,
+      showProfilesDisconnectedModal,
+      id,
+    };
+    const elementRef = useRef(null);
+    connectDragSource(elementRef);
+    connectDropTarget(elementRef);
+    useImperativeHandle(ref, () => ({
+      getNode: () => elementRef.current,
+    }));
+    return (
+      <div
+        aria-dropeffect="move"
+        ref={elementRef}
+        draggable
+        tabIndex={0}
+      >
+        <ProfileListItem {...profileProps} />
+      </div>
     );
-  }
-}
+  },
+);
 
 ProfileDragWrapper.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
@@ -97,11 +132,18 @@ ProfileDragWrapper.propTypes = {
   id: PropTypes.string.isRequired, // eslint-disable-line
 };
 
-export default flow(
-  DragSource('profile', profileSource, (connect: DropTargetConnector) => ({
-    connectDragSource: connect.dragSource(),
-  })),
-  DropTarget('profile', profileTarget, connect => ({
+export default DropTarget(
+  'profile',
+  profileTarget,
+  connect => ({
     connectDropTarget: connect.dropTarget(),
-  })),
-)(ProfileDragWrapper);
+  }),
+)(
+  DragSource(
+    'profile',
+    profileSource,
+    connect => ({
+      connectDragSource: connect.dragSource(),
+    }),
+  )(ProfileDragWrapper),
+);
