@@ -13,8 +13,8 @@ class AppCues extends React.Component {
       if (pathname !== previousLocation && window && window.Appcues) {
         window.Appcues.page();
 
-        const { tabId } = getProfilePageParams({ path: pathname });
-        if (tabId === 'analytics') {
+        const profilePageParams = getProfilePageParams({ path: pathname });
+        if (profilePageParams && profilePageParams.tabId === 'analytics') {
           window.Appcues.track('Viewed Analytics Tab');
         }
       }
