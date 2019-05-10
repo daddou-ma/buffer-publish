@@ -22,6 +22,7 @@ const mockUser = {
   planCode: '100',
   trial: {},
   orgUserCount: 2,
+  profileCount: 3,
   is_business_user: true,
 };
 
@@ -116,6 +117,7 @@ describe('middleware', () => {
       trialLength: mockUser.trial.trialLength,
       trialTimeRemaining: mockUser.trial.trialTimeRemaining,
       orgUserCount: mockUser.orgUserCount,
+      profileCount: mockUser.profileCount,
     });
   });
   it('sends event to appcues when user adds a post in the composer', () => {

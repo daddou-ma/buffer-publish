@@ -64,6 +64,7 @@ export default ({ dispatch, getState }) => next => (action) => {
             planCode,
             trial,
             orgUserCount,
+            profileCount,
             is_business_user: isBusinessUser,
           } = action.result;
 
@@ -81,6 +82,7 @@ export default ({ dispatch, getState }) => next => (action) => {
               trialLength: trial.trialLength,
               trialTimeRemaining: trial.trialTimeRemaining,
               orgUserCount, // Number of users (including the account owner)
+              profileCount, // Number of profiles _owned_ by the user
             });
           }
         }
