@@ -1,13 +1,16 @@
 import keyWrapper from '@bufferapp/keywrapper';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('thirdparty', {
   FULLSTORY: 0,
   APPCUES: 0,
   APPCUES_LOADED: 0,
+  INTERCOM_LOADED: 0,
 });
 
 const initialState = {
   appCues: { loaded: false },
+  intercom: { loaded: false },
 };
 
 export default (state = initialState, action) => {
@@ -16,6 +19,22 @@ export default (state = initialState, action) => {
       return {
         ...state,
         appCues: { loaded: action.loaded },
+      };
+    case `intercom_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        intercom: {
+          ...state.intercom,
+          ...action.result,
+        },
+      };
+    case actionTypes.INTERCOM_LOADED:
+      return {
+        ...state,
+        intercom: {
+          ...state.intercom,
+          loaded: action.loaded,
+        },
       };
     default:
       return state;
