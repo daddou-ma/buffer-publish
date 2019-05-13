@@ -52,11 +52,6 @@ const profileTarget = {
     // When dragging downwards, only move when the cursor is below 50%
     // When dragging upwards, only move when the cursor is above 50%
 
-    // Dragging downwards
-    // if (dragIndex < hoverIndex && hoverClientY < hoverThird) {
-    //   return;
-    // }
-
     if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
       return;
     }
