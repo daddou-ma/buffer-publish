@@ -8,17 +8,13 @@ import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import ProfileSidebar from './index';
 import profiles from '../../mockData/profiles';
-import lockedProfiles from '../../mockData/lockedProfiles';
 
 const lotsOfProfiles = () =>
-  [...Array(10)].reduce(p => [...p, ...lockedProfiles], []);
+  [...Array(10)].reduce(p => [...p, ...profiles], []);
 
 const store = createStore();
 const translations = {
   connectButton: 'Manage Social Accounts',
-  lockedList: 'Locked Social Accounts',
-  lockedListTooltip1: 'Sorry, your current plan lets you access up to ',
-  lockedListTooltip2: ' social accounts at the same time (and any business accounts you’re a team member on as long as the owner is on a Business Plan). We’ll keep these other ones safe and sound until you’re ready to upgrade!',
 };
 
 /* eslint-disable react/prop-types */
@@ -45,23 +41,35 @@ storiesOf('ProfileSidebar', module)
     <ProfileSidebar
       selectedProfileId={'1234'}
       profiles={profiles}
-      lockedProfiles={lockedProfiles}
       translations={translations}
       onProfileClick={action('profile click')}
       onManageSocialAccountClick={action('manage social account click')}
       goToConnectSocialAccount={action('connect social account click')}
-      profileLimit={'3'}
+      profileLimit={3}
+      loading={false}
+      showUpgradeModal={action('showUpgradeModal')}
+      showProfilesDisconnectedModal={action('showProfilesDisconnectedModal')}
+      onDropProfile={action('onDropProfile')}
+      hasInstagram={false}
+      hasFacebook={false}
+      hasTwitter={false}
     />
   ))
   .add('should display a long list of profiles', () => (
     <ProfileSidebar
-      profiles={profiles}
-      lockedProfiles={lotsOfProfiles()}
+      profiles={lotsOfProfiles()}
       translations={translations}
       onProfileClick={action('profile click')}
       selectedProfile={profiles[0]}
       onManageSocialAccountClick={action('manage social account click')}
       goToConnectSocialAccount={action('connect social account click')}
-      profileLimit={'3'}
+      profileLimit={3}
+      loading={false}
+      showUpgradeModal={action('showUpgradeModal')}
+      showProfilesDisconnectedModal={action('showProfilesDisconnectedModal')}
+      onDropProfile={action('onDropProfile')}
+      hasInstagram={false}
+      hasFacebook={false}
+      hasTwitter={false}
     />
   ));
