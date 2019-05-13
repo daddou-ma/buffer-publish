@@ -153,7 +153,9 @@ ProfileSidebar.propTypes = {
   showUpgradeModal: PropTypes.func.isRequired,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
-  translations: ProfileList.propTypes.translations,
+  translations: PropTypes.shape({
+    connectButton: PropTypes.string,
+  }),
   profileLimit: PropTypes.number,
   onDropProfile: PropTypes.func,
   showProfilesDisconnectedModal: PropTypes.func.isRequired,
