@@ -76,13 +76,13 @@ const UpgradeModal = ({
                   <div style={{ flex: '1' }}>
                     <ul style={listStyleLeft}>
                       <ListItem text={translations.proPlanSocialAccounts} />
-                      <ListItem text={translations.proPlanFiltering} />
-                      <ListItem text={translations.proPlanCuration} />
+                      <ListItem text={translations.proPlanIGFirstComment} />
+                      <ListItem text={translations.proPlanAnalytics} />
                     </ul>
                   </div>
                   <div style={{ flex: '1' }}>
                     <ul style={listStyle}>
-                      <ListItem text={translations.proPlanScheduling} />
+                      <ListItem text={translations.proPlanIGVideoCover} />
                       <ListItem text={translations.proPlanCalendar} />
                       <ListItem text={translations.proPlanBitly} />
                     </ul>
