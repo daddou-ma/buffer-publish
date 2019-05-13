@@ -11,7 +11,15 @@ const containerStyle = {
   flexGrow: 0,
 };
 
-function ScrollableContainer({ tabId, profileId, children, growthSpace, onReachBottom }) {
+function ScrollableContainer({
+  tabId,
+  profileId,
+  loadingMore,
+  moreToLoad,
+  children,
+  growthSpace,
+  onReachBottom,
+}) {
   const containerEl = useRef(null);
 
   function handleScroll() {
@@ -35,7 +43,7 @@ function ScrollableContainer({ tabId, profileId, children, growthSpace, onReachB
       container.addEventListener('scroll', handleScroll);
       return () => container.removeEventListener('scroll', handleScroll);
     }
-  }, [profileId]);
+  }, [profileId, tabId, moreToLoad, loadingMore]);
 
   return (
     <div
@@ -52,6 +60,7 @@ ScrollableContainer.propTypes = {
   tabId: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   growthSpace: PropTypes.number,
+  moreToLoad: PropTypes.bool,
   onReachBottom: PropTypes.func,
 };
 

@@ -5,6 +5,7 @@ import ThirdParty from './components/Loader';
 export default connect(
   state => ({
     appCues: state.thirdparty.appCues,
+    intercom: state.thirdparty.intercom,
   }),
 )(ThirdParty);
 
