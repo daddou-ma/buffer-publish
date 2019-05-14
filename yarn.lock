@@ -640,10 +640,10 @@
     "@bufferapp/nav-sidebar" "^0.87.5"
     numeral "2.0.6"
 
-"@bufferapp/ui@^3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.5.0.tgz#651d0fa5545668b15165e9759c13f827a4f3592c"
-  integrity sha512-V1D50CrDdd4XxsHKvc5Lt2/zUH2gHnD94uZY5IzJud+UBryD78ffUwI/7/6XNjoJIcVP7ok8ST5rshokRibykA==
+"@bufferapp/ui@^3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.7.0.tgz#44ba5d7f1c97be5d65e8ac058d3e98f3de435737"
+  integrity sha512-PhxnKwejG1glNH9skdabnbsDmUjJe4QMbEoeTHR4V3uDW+s0krhZxilpfb8INTjo6OYF8JV2/6vW/zywOgC1iw==
   dependencies:
     blueimp-md5 "^2.10.0"
     immutability-helper "^2.9.0"

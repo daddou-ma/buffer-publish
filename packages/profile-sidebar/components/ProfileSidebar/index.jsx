@@ -95,12 +95,14 @@ const ProfileSidebar = ({
     {productTitle}
     {loading && renderLoadingProfiles()}
     <div style={profileListStyle} data-hide-scrollbar>
-      <ProfileSearch
-        profiles={profiles}
-        onSearchProfileChange={onSearchProfileChange}
-        isSearchPopupVisible={isSearchPopupVisible}
-        handleSubmit={({ selectedProfile }) => onProfileClick(selectedProfile)}
-      />
+      {profiles.length > 14 &&
+        <ProfileSearch
+          profiles={profiles}
+          onSearchProfileChange={onSearchProfileChange}
+          isSearchPopupVisible={isSearchPopupVisible}
+          handleSubmit={({ selectedProfile }) => onProfileClick(selectedProfile)}
+        />
+      }
       <ProfileList
         selectedProfileId={selectedProfileId}
         profiles={profiles}
