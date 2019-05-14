@@ -18,7 +18,7 @@
     "@bufferapp/publish-initial-loading": "2.0.0",
     "@bufferapp/publish-modals": "2.0.0",
     "@bufferapp/publish-queue": "2.0.0",
-    "@bufferapp/ui": "^3.2.0"
+    "@bufferapp/ui": "^3.7.0"
   },
   "devDependencies": {
     "eslint": "3.19.0"

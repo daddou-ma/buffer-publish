@@ -640,11 +640,12 @@
     "@bufferapp/nav-sidebar" "^0.87.5"
     numeral "2.0.6"
 
-"@bufferapp/ui@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.2.0.tgz#010f98ce12707a55598c1d478e4f518335c519cf"
-  integrity sha512-YxGUK9ipKZpkRJnmIt4DJv2ugMsnzR1i+rktKtO/azrPUA3B3te0uogW1Jw4acb8ETvXFoBFxAPwgTnx7PXF8w==
+"@bufferapp/ui@^3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.7.0.tgz#44ba5d7f1c97be5d65e8ac058d3e98f3de435737"
+  integrity sha512-PhxnKwejG1glNH9skdabnbsDmUjJe4QMbEoeTHR4V3uDW+s0krhZxilpfb8INTjo6OYF8JV2/6vW/zywOgC1iw==
   dependencies:
+    blueimp-md5 "^2.10.0"
     immutability-helper "^2.9.0"
     react "16.6.3"
     react-dom "16.6.3"
@@ -3088,6 +3089,11 @@ bluebird@^3.4.7, bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.3.tgz#7d01c6f9616c9a51ab0f8c549a79dfe6ec33efa7"
   integrity sha512-/qKPUQlaW1OyR51WeCPBvRnAlnZFUJkCSG5HzGnuIqhgyJtF+T94lFnn33eiazjRm2LAHVy2guNnaq48X9SJuw==
+
+blueimp-md5@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/blueimp-md5/-/blueimp-md5-2.10.0.tgz#02f0843921f90dca14f5b8920a38593201d6964d"
+  integrity sha512-EkNUOi7tpV68TqjpiUz9D9NcT8um2+qtgntmMbi5UKssVX2m/2PLqotcric0RE63pB3HPN/fjf3cKHN2ufGSUQ==
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"

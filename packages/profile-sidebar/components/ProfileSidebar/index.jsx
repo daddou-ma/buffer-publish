@@ -13,6 +13,7 @@ import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
 import ProfileList from '../ProfileList';
 import ProfileConnectShortcut from '../ProfileConnectShortcut';
+import ProfileSearch from '../ProfileSearch';
 
 const profileSidebarStyle = {
   display: 'flex',
@@ -82,6 +83,8 @@ const ProfileSidebar = ({
   showProfilesDisconnectedModal,
   showUpgradeModal,
   goToConnectSocialAccount,
+  onSearchProfileChange,
+  isSearchPopupVisible,
 
   // Flags for showing connection shortcut buttons
   hasInstagram,
@@ -92,6 +95,14 @@ const ProfileSidebar = ({
     {productTitle}
     {loading && renderLoadingProfiles()}
     <div style={profileListStyle} data-hide-scrollbar>
+      {profiles.length > 14 &&
+        <ProfileSearch
+          profiles={profiles}
+          onSearchProfileChange={onSearchProfileChange}
+          isSearchPopupVisible={isSearchPopupVisible}
+          handleSubmit={({ selectedProfile }) => onProfileClick(selectedProfile)}
+        />
+      }
       <ProfileList
         selectedProfileId={selectedProfileId}
         profiles={profiles}
@@ -162,12 +173,16 @@ ProfileSidebar.propTypes = {
   hasInstagram: PropTypes.bool.isRequired,
   hasFacebook: PropTypes.bool.isRequired,
   hasTwitter: PropTypes.bool.isRequired,
+  onSearchProfileChange: () => {},
+  isSearchPopupVisible: false,
 };
 
 ProfileSidebar.defaultProps = {
   onProfileClick: ProfileList.defaultProps.onProfileClick,
   selectedProfileId: ProfileList.defaultProps.selectedProfileId,
   profiles: [],
+  onSearchProfileChange: PropTypes.func,
+  isSearchPopupVisible: PropTypes.bool,
 };
 
 export default ProfileSidebar;
