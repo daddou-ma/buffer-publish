@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from '@bufferapp/publish-shared-components';
 import { Link, ArrowLeftIcon, Text } from '@bufferapp/components';
-import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
 import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
@@ -12,19 +11,12 @@ import General from '../General';
 import { openBillingWindow } from '../../../tabs/utils';
 
 const tabStyle = {
-  flexGrow: 1,
   overflowY: 'auto',
-};
-
-const generalTabStyle = {
-  ...tabStyle,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
 };
 
 const containerStyle = {
   maxWidth: '864px',
+  margin: '0 auto',
 };
 
 const PreferenceContent = ({ tabId, onUnknownTab }) => {
@@ -63,20 +55,6 @@ const Preferences = ({
       flexGrow: '1',
     }}
   >
-    <div
-      style={{
-        flexBasis: '16rem',
-        width: '16rem',
-        minWidth: '16rem',
-        position: 'sticky',
-        bottom: 0,
-        top: 0,
-        height: '100%',
-        maxHeight: '100vh',
-      }}
-    >
-      <ProfileSidebar />
-    </div>
     <div
       style={{
         flexGrow: 1,
@@ -128,7 +106,7 @@ const Preferences = ({
           </div>
         </div>
       </Link>
-      <div style={selectedTabId === 'general' ? generalTabStyle : tabStyle}>
+      <div style={tabStyle}>
         <div style={containerStyle}>
           <PreferenceContent tabId={selectedTabId} onUnknownTab={onUnknownTab} />
         </div>
