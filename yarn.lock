@@ -342,10 +342,10 @@
     react-autocomplete "1.7.2"
     react-day-picker "6.2.1"
 
-"@bufferapp/composer@3.4.5":
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-3.4.5.tgz#b2da7106a6d813fea307c0623af6133719528058"
-  integrity sha512-R7H090SZTQLGs6BTroTTPv4OYf0Vr8JjoFnPuhJjlXEld+DIU+aqjC51RqQH7blNvfbCU82EK/xHXhvg5BQIxQ==
+"@bufferapp/composer@3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/composer/-/composer-3.4.2.tgz#c759dac63c48c280da3eabf6891bea5241d58a83"
+  integrity sha512-Ghqoc/v9F9CoZfWc0b7/vB9wYpgPycSwIcV/ymnbtJgoeYtVPJiheE11kM+SvcbCcXcyyp7tAHeFzgjdU37mWQ==
   dependencies:
     "@bufferapp/buffer-js-api" "0.3.0"
     "@bufferapp/buffer-js-metrics" "0.2.0"
@@ -547,10 +547,10 @@
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-parsers@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.19.0.tgz#c7168f25a2d61134888c9f8bb47e679e120b6a14"
-  integrity sha512-8Ariur2/j0A9BDCXEqVJXNs6M8KUeQAevrXmsbmYhwcfY8eE2XN776PM7WDPHaNBB7jlbye87xFNabR+qVcCcQ==
+"@bufferapp/publish-parsers@1.18.0":
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.18.0.tgz#6b406c0bfa3bfbf5e0f6cecd6fcbe73cf437613a"
+  integrity sha512-m4DeKTHAO3ZSG7NsyhJi4FFEC1egpsRidMvmuJRa2jRNGgMtarxLgAwqQL9cl/Cb+aAAZx4cROWRyZjbZzBZMQ==
   dependencies:
     "@bufferapp/publish-formatters" "1.9.29"
     twitter-text "3.0.0"
@@ -640,10 +640,10 @@
     "@bufferapp/nav-sidebar" "^0.87.5"
     numeral "2.0.6"
 
-"@bufferapp/ui@^3.7.0":
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.7.0.tgz#44ba5d7f1c97be5d65e8ac058d3e98f3de435737"
-  integrity sha512-PhxnKwejG1glNH9skdabnbsDmUjJe4QMbEoeTHR4V3uDW+s0krhZxilpfb8INTjo6OYF8JV2/6vW/zywOgC1iw==
+"@bufferapp/ui@^3.2.0":
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.7.1.tgz#44b7c7d035f439fa17de8d49630e131c9a323f0c"
+  integrity sha512-1fSrvxCClkc+5Wvj+z945G3svHTFMYewGrdN5Tqg6u1BhxxX1UrFeMn30OQyce3GIEuYG/fFC0Elia1XtECMyQ==
   dependencies:
     blueimp-md5 "^2.10.0"
     immutability-helper "^2.9.0"
