@@ -17,6 +17,8 @@ describe('reducer', () => {
       hasInstagram: true,
       hasFacebook: true,
       hasTwitter: true,
+      isSearchPopupVisible: false,
+      searchText: null,
     };
     const action = {
       type: 'INIT',

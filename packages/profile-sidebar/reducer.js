@@ -12,6 +12,7 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   MANAGE_SOCIAL_ACCOUNT: 0,
   PROFILE_DROPPED: 0,
   SINGLE_PROFILE: 0,
+  HANDLE_SEARCH_PROFILE_CHANGE: 0,
 });
 
 export const initialState = {
@@ -24,6 +25,8 @@ export const initialState = {
   hasInstagram: true,
   hasFacebook: true,
   hasTwitter: true,
+  isSearchPopupVisible: false,
+  searchText: null,
 };
 
 const moveProfileInArray = (arr, from, to) => {
@@ -95,6 +98,8 @@ const profilesReducer = (state = [], action) => {
 };
 
 export default (state = initialState, action) => {
+  let isSearchPopupVisible = false;
+  let searchText = null;
   switch (action.type) {
     case `profiles_${dataFetchActionTypes.FETCH_START}`:
       return {
@@ -118,8 +123,18 @@ export default (state = initialState, action) => {
         profiles: profilesReducer(state.profiles, action),
         selectedProfile: action.profile,
         isLockedProfile: action.profile ? action.profile.disabled : false,
+        isSearchPopupVisible: false,
       };
     }
+    case actionTypes.HANDLE_SEARCH_PROFILE_CHANGE:
+      searchText = action.value;
+      isSearchPopupVisible = searchText && searchText.length > 2;
+
+      return {
+        ...state,
+        searchText,
+        isSearchPopupVisible,
+      };
     case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       let {
         selectedProfile,
@@ -196,5 +211,9 @@ export const actions = {
     dragIndex,
     hoverIndex,
     profileLimit,
+  }),
+  handleSearchProfileChange: ({ value }) => ({
+    type: actionTypes.HANDLE_SEARCH_PROFILE_CHANGE,
+    value,
   }),
 };
