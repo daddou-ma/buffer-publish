@@ -3,6 +3,7 @@ import { Divider } from '@bufferapp/components';
 import CloseAccount from '@bufferapp/close-account';
 import EditEmail from '@bufferapp/edit-email';
 import DateTimePreferences from '@bufferapp/date-time-preferences';
+import { Text } from '@bufferapp/ui';
 
 const closeStyle = {
   paddingBottom: '1rem',
@@ -10,11 +11,12 @@ const closeStyle = {
 
 const General = () => (
   <Fragment>
-    <div>
-      <EditEmail />
-      <Divider />
-      <DateTimePreferences />
-    </div>
+    <Text type="h2">General</Text>
+    <Text type="p">Change your general preferences.</Text>
+    <Divider />
+    <EditEmail />
+    <Divider />
+    <DateTimePreferences />
     <div style={closeStyle}>
       <Divider />
       <CloseAccount />
