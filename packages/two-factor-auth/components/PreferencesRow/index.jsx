@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Text, Link } from '@bufferapp/components';
+import { Link } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 import { SensitiveData } from '@bufferapp/publish-shared-components';
 
 const formattedMethod = {
@@ -17,7 +18,7 @@ const TwoFactorPreferencesRow = ({
   phoneNumber,
 }) => (
   <Fragment>
-    <Text size="mini">
+    <Text type="p">
       Two factor authentication adds an extra layer of security for your Buffer account.
       Whenever you log in to your account, after entering your username and password,
       you will be asked for a second authentication code that was sent to your mobile
@@ -25,19 +26,19 @@ const TwoFactorPreferencesRow = ({
     </Text>
     {method && <Fragment>
       <div style={{ margin: '16px 0 0 0' }}>
-        <Text size="mini">
+        <Text size="p">
           Method: <b>{formattedMethod[method]}</b>{' '}
           <Link href="#" onClick={() => transition('CHANGE_METHOD')}>Edit</Link>
         </Text>
       </div>
       {method === 'sms' && <div style={{ margin: '8px 0 0 0' }}>
-        <Text size="mini">
+        <Text size="p">
           Phone number: <SensitiveData><b>{phoneNumber}</b></SensitiveData>{' '}
           <Link href="#" onClick={() => transition('CHANGE_SMS')}>Edit</Link>
         </Text>
       </div>}
       <div style={{ margin: '8px 0 0 0' }}>
-        <Text size="mini">
+        <Text size="p">
           Recovery code:{' '}
           <Link href="#" onClick={() => transition('SHOW_RECOVERY')}>View</Link>
         </Text>
