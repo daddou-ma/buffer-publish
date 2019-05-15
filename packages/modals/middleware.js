@@ -15,6 +15,7 @@ import {
   getShowModalValue,
   resetShowModalKey,
   shouldShowInstagramFirstCommentModal,
+  shouldShowInstagramNewFirstCommentUserModal,
 } from './util/showModal';
 
 export default ({ dispatch, getState }) => next => (action) => {
@@ -31,6 +32,9 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       if (shouldShowInstagramFirstCommentModal()) {
         dispatch(actions.showInstagramFirstCommentModal());
+      }
+      if (shouldShowInstagramNewFirstCommentUserModal()) {
+        dispatch(actions.showInstagramNewFirstCommentUserModal());
       }
       if (shouldShowWelcomeModal()) {
         dispatch(actions.showWelcomeModal());
@@ -50,6 +54,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const message = 'welcome_to_business_modal';
+      const igFcMsg = 'paid_users_to_new_publish_ig_first_comment';
       const { productFeatures: { planName } } = getState();
       const {
         messages: readMessages,
@@ -59,6 +64,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       } = action.result; // user
       const hasNotReadWelcomeMessage = readMessages && !readMessages.includes(message);
       const isOnBusinessTrial = planName === 'business' && trial.onTrial;
+      const hasNotReadNewFirstCommentMessage = readMessages && !readMessages.includes(igFcMsg);
       if (isOnBusinessTrial && hasNotReadWelcomeMessage) {
         dispatch(actions.showWelcomeB4BTrialModal());
         // Mark modal as seen
@@ -68,6 +74,10 @@ export default ({ dispatch, getState }) => next => (action) => {
         dispatch(actions.showUpgradeModal({ source: 'pro_trial_expired' }));
       } else if (shouldShowBusinessTrialExpiredModal) {
         dispatch(actions.showB4BTrialExpiredModal({ source: 'b4b_trial_expired' }));
+      } else if (hasNotReadNewFirstCommentMessage) {
+        dispatch(actions.showInstagramNewFirstCommentUserModal());
+        // Mark modal as seen
+        dispatch(dataFetchActions.fetch({ name: 'readMessage', args: { message: igFcMsg } }));
       }
       break;
     }
