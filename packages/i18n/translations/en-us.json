@@ -93,6 +93,12 @@
     "continue": "Continue",
     "cancel": "Cancel"
   },
+  "instagram-new-first-comment-user-modal": {
+    "heading": "Include a first comment when you schedule a post to Instagram.",
+    "mainContent": "Want to keep hashtags out of your Instagram caption? You can now include a comment when you schedule an Instagram post, and Buffer will automatically publish it for you.",
+    "continue": "Continue",
+    "imageAlt": "Publish your first comment directly to Instagram"
+  },
   "profiles-disconnected-modal": {
     "headline": "We’ve lost access to some of your social accounts",
     "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these accounts you will need to reconnect them.",
