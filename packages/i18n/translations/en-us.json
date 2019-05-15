@@ -12,10 +12,7 @@
     "pleaseWait": "Please wait..."
   },
   "profile-sidebar": {
-    "connectButton": "Manage Social Accounts",
-    "lockedList": "Locked Social Accounts",
-    "lockedListTooltip1": "Sorry, your current plan lets you access up to ",
-    "lockedListTooltip2": " social accounts at the same time (and any social accounts from a team you’ve been added to as long as the owner is on a Business Plan). We’ll keep these other ones safe and sound until you’re ready to upgrade!"
+    "connectButton": "Manage Social Accounts"
   },
   "default-page": {
     "connectButton": "Connect your social accounts",
@@ -38,14 +35,13 @@
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
     "proTrialistUpgradeHeader": "Complete your trial and upgrade to the Pro Plan!",
     "proTrialistSubCopy": "The Pro plan includes up to 8 social accounts, custom thumbnails for Instagram videos, Instagram first comment and more.",
-    "proPlanSocialAccounts": "Connect up to 8 social accounts, including Pinterest",
-    "proPlanFiltering": "Get powerful post filtering on your recent posts",
-    "proPlanCuration": "Curate your content with RSS integrations",
-    "proPlanIGCover": "Create custom covers for Instagram videos",
-    "proPlanIGFirstComment": "Add a first comment to your Instagram posts",
+    "proPlanSocialAccounts": "Connect up to 8 social accounts (vs. 3 on Free)",
+    "proPlanIGVideoCover": "Choose a custom video thumbnail for Instagram videos",
+    "proPlanIGFirstComment": "Add a first comment for your Instagram Direct posts",
     "proPlanScheduling": "Schedule 100 posts per social account",
     "proPlanCalendar": "Manage everything at a glance with the Social Media Calendar",
-    "proPlanBitly": "Shorten your links with Bitly",
+    "proPlanBitly": "Shorten your links with Bit.ly",
+    "proPlanAnalytics": "View post-level analytics for your sent posts",
     "proPlanMonthlyPrice": "$15 per month",
     "proPlanNonprofitMonthlyPrice": "$7.50 per month",
     "proPlanMonthlyDescription": "Cancel and get a refund any time",
@@ -96,6 +92,12 @@
     "body": "We’ll walk you through this now – It will just take a moment.",
     "continue": "Continue",
     "cancel": "Cancel"
+  },
+  "instagram-new-first-comment-user-modal": {
+    "heading": "Include a first comment when you schedule a post to Instagram.",
+    "mainContent": "Want to keep hashtags out of your Instagram caption? You can now include a comment when you schedule an Instagram post, and Buffer will automatically publish it for you.",
+    "continue": "Continue",
+    "imageAlt": "Publish your first comment directly to Instagram"
   },
   "profiles-disconnected-modal": {
     "headline": "We’ve lost access to some of your social accounts",

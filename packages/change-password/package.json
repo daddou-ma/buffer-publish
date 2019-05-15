@@ -9,7 +9,7 @@
   "author": "hharnisc@gmail.com",
   "dependencies": {
     "@bufferapp/notifications": "1.9.4",
-    "@bufferapp/ui": "^3.2.0"
+    "@bufferapp/ui": "^3.7.0"
   },
   "devDependencies": {
     "eslint": "3.19.0"

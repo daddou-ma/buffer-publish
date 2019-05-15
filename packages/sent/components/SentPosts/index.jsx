@@ -5,7 +5,7 @@ import {
   EmptyState,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
-import { Divider, Text } from '@bufferapp/components';
+import { Button, Divider, Text } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import { WithFeatureLoader } from '@bufferapp/product-features';
@@ -33,6 +33,11 @@ const composerStyle = {
   flexGrow: '1',
 };
 
+const loadMoreButtonStyle = {
+  textAlign: 'center',
+  paddingBottom: '3rem',
+};
+
 const SentPosts = ({
   total,
   loading,
@@ -52,6 +57,11 @@ const SentPosts = ({
   isBusinessAccount,
   features,
   hasFirstCommentFlip,
+  moreToLoad,
+  tabId,
+  profileId,
+  page,
+  loadMore,
 }) => {
   if (loading) {
     return (
@@ -80,6 +90,11 @@ const SentPosts = ({
       </Fragment>
     );
   }
+
+  const loadMorePosts = () => {
+    loadMore({ profileId, page, tabId });
+  }
+  
   const header = isBusinessAccount || !features.isFreeUser() ?
     'Your sent posts' :
     'Your sent posts for the last 30 days';
@@ -116,6 +131,13 @@ const SentPosts = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
         />
       </div>
+      {moreToLoad && ( 
+        <div style={loadMoreButtonStyle}>
+          <Button onClick={loadMorePosts}>
+            Load More
+          </Button>
+        </div>
+      )}
     </ErrorBoundary>
   );
 };

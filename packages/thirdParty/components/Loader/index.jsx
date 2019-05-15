@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AppCues from '../AppCues';
+import RouteMonitor from '../RouteMonitor';
 
-const Loader = ({ appCues, location }) => (
-  <AppCues appCues={appCues} location={location} />
+const Loader = ({ appCues, intercom, location }) => (
+  <RouteMonitor appCues={appCues} intercom={intercom} pathname={location.pathname} />
 );
 
 Loader.propTypes = {
@@ -12,6 +12,9 @@ Loader.propTypes = {
     pathname: PropTypes.string,
   }),
   appCues: PropTypes.shape({
+    loaded: PropTypes.bool,
+  }).isRequired,
+  intercom: PropTypes.shape({
     loaded: PropTypes.bool,
   }).isRequired,
 };

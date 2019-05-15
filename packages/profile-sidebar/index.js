@@ -24,6 +24,7 @@ export default hot(connect(
     hasInstagram: state.profileSidebar.hasInstagram,
     hasFacebook: state.profileSidebar.hasFacebook,
     hasTwitter: state.profileSidebar.hasTwitter,
+    isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
   }),
   (dispatch, ownProps) => ({
     onProfileClick: (profile) => {
@@ -63,6 +64,9 @@ export default hot(connect(
     },
     goToConnectSocialAccount: () => {
       dispatch(actions.handleConnectSocialAccount());
+    },
+    onSearchProfileChange: (value) => {
+      dispatch(actions.handleSearchProfileChange({ value }));
     },
   }),
 )(ProfileSidebar));

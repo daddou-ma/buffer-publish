@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from '@bufferapp/components';
-import { Button } from '@bufferapp/ui';
+import { Button, Text } from '@bufferapp/ui';
 import { Row } from '@bufferapp/publish-shared-components';
 import Modal from '../Modal';
 
@@ -12,13 +11,13 @@ const ChangePassword = ({ showModal, onRequestOpenModal, onRequestCloseModal, on
         marginRight: '1rem',
       }}
     >
-      <Text color={'black'} size={'mini'}>Password</Text>
+      <Text type="h3">Password</Text>
       <div
         style={{
           marginTop: '0.5rem',
         }}
       >
-        <Text size={'mini'}>
+        <Text type="p">
           Use your password to sign in to Buffer on the web and mobile apps. Make it nice and
           secure!
         </Text>

@@ -11,6 +11,7 @@ export const initialState = {
   showInstagramDirectPostingModal: false,
   showWelcomeB4BTrialModal: false,
   showInstagramFirstCommentModal: false,
+  showInstagramNewFirstCommentUserModal: false,
   showB4BTrialExpiredModal: false,
   upgradeModalB4BSource: null,
 };
@@ -34,6 +35,8 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_UPGRADE_B4B_MODAL: 0,
   SHOW_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
   HIDE_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
+  SHOW_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL: 0,
+  HIDE_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -71,6 +74,11 @@ export default (state = initialState, action) => {
         showInstagramFirstCommentModal: true,
         firstCommentIds: action.ids,
       };
+    case actionTypes.SHOW_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL:
+      return {
+        ...state,
+        showInstagramNewFirstCommentUserModal: true,
+      };
     case actionTypes.HIDE_WELCOME_MODAL:
       return {
         ...state,
@@ -91,6 +99,11 @@ export default (state = initialState, action) => {
         ...state,
         showInstagramFirstCommentModal: false,
         firstCommentIds: null,
+      };
+    case actionTypes.HIDE_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL:
+      return {
+        ...state,
+        showInstagramNewFirstCommentUserModal: false,
       };
     case actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL:
       return {
@@ -157,6 +170,9 @@ export const actions = {
     type: actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_MODAL,
     ids,
   }),
+  showInstagramNewFirstCommentUserModal: () => ({
+    type: actionTypes.SHOW_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL,
+  }),
   showWelcomeModal: () => ({
     type: actionTypes.SHOW_WELCOME_MODAL,
   }),
@@ -171,6 +187,9 @@ export const actions = {
   }),
   hideInstagramFirstCommentModal: () => ({
     type: actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_MODAL,
+  }),
+  hideInstagramNewFirstCommentUserModal: () => ({
+    type: actionTypes.HIDE_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL,
   }),
   showProfilesDisconnectedModal: () => ({
     type: actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL,
