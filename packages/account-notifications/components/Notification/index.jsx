@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row } from '@bufferapp/publish-shared-components';
 import {
-  Text,
   Toggle,
 } from '@bufferapp/components';
-
-const textStyle = {
-  marginTop: '0.5rem',
-};
+import { Row } from '@bufferapp/publish-shared-components';
+import { Text } from '@bufferapp/ui';
 
 const switchStyle = {
   flex: 0.3,
@@ -20,11 +16,9 @@ const switchStyle = {
 const Notification = ({ title, description, onToggleClick, toggleisEnabled, type }) => (
   <Row>
     <div>
-      <Text color={'black'} size={'mini'}>{title}</Text>
+      <Text type="h3">{title}</Text>
       {description &&
-        <div style={textStyle}>
-          <Text size={'mini'}>{description}</Text>
-        </div>
+        <Text type="p">{description}</Text>
       }
     </div>
     <div style={switchStyle}>

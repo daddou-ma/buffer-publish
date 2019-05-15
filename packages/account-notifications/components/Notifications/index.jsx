@@ -1,21 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Text,
   Divider,
 } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 import Notification from '../Notification';
-
-const styleBlockRow = {
-  display: 'block',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  paddingTop: '1rem',
-};
-
-const textStyle = {
-  marginTop: '0.5rem',
-};
 
 const Notifications = ({
   onToggleClick,
@@ -29,17 +18,9 @@ const Notifications = ({
   celebrations,
 }) => (
   <div>
-    <div style={styleBlockRow}>
-      <div>
-        <Text color={'black'}>Email Notifications</Text>
-        <div style={textStyle}>
-          <Text size={'mini'} color={'shuttleGray'}>
-            We can remind you when one of your Buffer is looking a little empty.
-          </Text>
-        </div>
-      </div>
-      <Divider />
-    </div>
+    <Text type="h2">Email Notifications</Text>
+    <Text type="p">We can remind you when one of your Buffer is looking a little empty.</Text>
+    <Divider />
     <Notification
       title={'Empty Buffer'}
       description={'Send me an email when one of my Buffers becomes empty.'}

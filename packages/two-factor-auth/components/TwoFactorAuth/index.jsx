@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Text, Toggle } from '@bufferapp/components';
+import { Toggle } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 import { Row } from '@bufferapp/publish-shared-components';
-
 import Modal from '../Modal';
 import PreferencesRow from '../PreferencesRow';
 
@@ -32,7 +31,7 @@ const TwoFactorAuth = ({
         marginRight: '1rem',
       }}
     >
-      <Text color={'black'} size={'mini'}>Two Factor Authentication</Text>
+      <Text type="h3">Two Factor Authentication</Text>
       <div
         style={{
           marginTop: '0.5rem',
