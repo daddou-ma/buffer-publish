@@ -1,22 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row } from '@bufferapp/publish-shared-components';
-import { Text, Button } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
 import Modal from '../Modal';
 
+const rowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
 const CloseAccount = ({ showModal, onRequestOpenModal, onRequestCloseModal, onSubmit }) => (
-  <Row>
+  <div style={rowStyle}>
     <div>
-      <Text color={'black'} size={'mini'}>Delete your Buffer account</Text>
-      <div>
-        <Text size={'mini'}>If you delete your account, you will lose all your posts.</Text>
-      </div>
+      <Text type="h3">Delete your Buffer account</Text>
+      <Text type="p">If you delete your account, you will lose all your posts.</Text>
     </div>
-    <Button onClick={onRequestOpenModal} noStyle>
-      <Text color={'outerSpace'} size={'mini'}>Delete Account</Text>
-    </Button>
+    <Button
+      type="text"
+      onClick={() => onRequestOpenModal()}
+      label="Delete Account"
+    />
     {showModal ? <Modal onRequestCloseModal={onRequestCloseModal} onSubmit={onSubmit} /> : null}
-  </Row>
+  </div>
 );
 
 CloseAccount.propTypes = {
