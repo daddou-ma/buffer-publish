@@ -26,19 +26,19 @@ const TwoFactorPreferencesRow = ({
     </Text>
     {method && <Fragment>
       <div style={{ margin: '16px 0 0 0' }}>
-        <Text size="p">
+        <Text type="p">
           Method: <b>{formattedMethod[method]}</b>{' '}
           <Link href="#" onClick={() => transition('CHANGE_METHOD')}>Edit</Link>
         </Text>
       </div>
       {method === 'sms' && <div style={{ margin: '8px 0 0 0' }}>
-        <Text size="p">
+        <Text type="p">
           Phone number: <SensitiveData><b>{phoneNumber}</b></SensitiveData>{' '}
           <Link href="#" onClick={() => transition('CHANGE_SMS')}>Edit</Link>
         </Text>
       </div>}
       <div style={{ margin: '8px 0 0 0' }}>
-        <Text size="p">
+        <Text type="p">
           Recovery code:{' '}
           <Link href="#" onClick={() => transition('SHOW_RECOVERY')}>View</Link>
         </Text>
