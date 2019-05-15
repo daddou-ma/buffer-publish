@@ -20,10 +20,12 @@ const rowStyle = {
 
 const Notification = ({ title, description, onToggleClick, toggleisEnabled, type }) => (
   <div style={rowStyle}>
-    <Text type="h3">{title}</Text>
-    {description &&
-      <Text type="p">{description}</Text>
-    }
+    <div>
+      <Text type="h3">{title}</Text>
+      {description &&
+        <Text type="p">{description}</Text>
+      }
+    </div>
     <div style={switchStyle}>
       <Toggle
         onText={'Enabled'}
