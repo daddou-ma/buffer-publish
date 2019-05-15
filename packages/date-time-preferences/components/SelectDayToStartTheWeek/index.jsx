@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Select, Text } from '@bufferapp/components';
+import { Select } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 
 const rowStyle = {
   display: 'flex',
@@ -39,7 +40,7 @@ DayToStartTheWeek.propTypes = {
 const SelectDayToStartTheWeek = () => (
   <div style={rowStyle}>
     <div>
-      <Text color={'black'} size={'mini'}>Day to start the week</Text>
+      <Text type="h3">Day to start the week</Text>
     </div>
     <div>
       <form style={{ minWidth: '185px' }}>
