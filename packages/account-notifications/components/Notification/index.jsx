@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row } from '@bufferapp/publish-shared-components';
 import {
-  Text,
   Toggle,
 } from '@bufferapp/components';
-
-const textStyle = {
-  marginTop: '0.5rem',
-};
+import { Text } from '@bufferapp/ui';
 
 const switchStyle = {
   flex: 0.3,
@@ -17,16 +12,18 @@ const switchStyle = {
   textAlign: 'right',
 };
 
+const rowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
 const Notification = ({ title, description, onToggleClick, toggleisEnabled, type }) => (
-  <Row>
-    <div>
-      <Text color={'black'} size={'mini'}>{title}</Text>
-      {description &&
-        <div style={textStyle}>
-          <Text size={'mini'}>{description}</Text>
-        </div>
-      }
-    </div>
+  <div style={rowStyle}>
+    <Text type="h3">{title}</Text>
+    {description &&
+      <Text type="p">{description}</Text>
+    }
     <div style={switchStyle}>
       <Toggle
         onText={'Enabled'}
@@ -36,7 +33,7 @@ const Notification = ({ title, description, onToggleClick, toggleisEnabled, type
         onClick={() => onToggleClick(!toggleisEnabled, type)}
       />
     </div>
-  </Row>
+  </div>
 );
 
 Notification.propTypes = {
