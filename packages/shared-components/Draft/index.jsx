@@ -14,6 +14,8 @@ import DraftHeader from '../DraftHeader';
 import DraftFooter from '../DraftFooter';
 import RetweetPanel from '../RetweetPanel';
 
+import RenderPostMetaBar from '../Post/RenderPostMetaBar';
+
 const postContainerStyle = {
   display: 'flex',
   width: '100%',
@@ -121,6 +123,8 @@ const Draft = ({
   view,
   basic,
   hasFirstCommentFlip,
+  profileService,
+  geolocationName,
 }) =>
   (<div style={postContainerStyle}>
     <div style={postStyle}>
@@ -138,6 +142,10 @@ const Draft = ({
           retweetCommentLinks,
           basic,
         })}
+        <RenderPostMetaBar
+          profileService={profileService}
+          locationName={geolocationName}
+        />
         <DraftFooter
           hasPermission={hasPermission}
           isDeleting={isDeleting}

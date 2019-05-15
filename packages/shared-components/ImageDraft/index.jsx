@@ -82,6 +82,8 @@ const ImageDraft = ({
   view,
   basic,
   hasFirstCommentFlip,
+  profile_service,
+  service_geolocation_name,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -159,6 +161,8 @@ const ImageDraft = ({
       view={view}
       basic={basic}
       hasFirstCommentFlip={hasFirstCommentFlip}
+      profileService={profile_service}
+      geolocationName={service_geolocation_name}
     >
       {children}
     </Draft>
