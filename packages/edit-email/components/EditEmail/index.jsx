@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@bufferapp/ui';
-import { Text } from '@bufferapp/components';
-import {
-  SensitiveData,
-} from '@bufferapp/publish-shared-components';
-
+import { Button, Text } from '@bufferapp/ui';
 import Modal from '../Modal';
 
 const editStyle = {
@@ -22,7 +17,7 @@ const rowStyle = {
 
 const EditEmail = ({ email, onClick, displayModal, updateEmail, saveEmail, hideModal }) => (
   <div style={rowStyle}>
-    <Text color={'black'} size={'mini'}>Email and Password</Text>
+    <Text type="h3">Email and Password</Text>
     <section>
       <span style={editStyle}>
         <Button
