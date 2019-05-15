@@ -95,7 +95,7 @@ const ProfileSidebar = ({
     {productTitle}
     {loading && renderLoadingProfiles()}
     <div style={profileListStyle} data-hide-scrollbar>
-      {profiles.length > 14 &&
+      {profiles.length > 9 &&
         <ProfileSearch
           profiles={profiles}
           onSearchProfileChange={onSearchProfileChange}
