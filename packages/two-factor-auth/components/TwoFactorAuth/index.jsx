@@ -1,17 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Toggle } from '@bufferapp/components';
 import { Text } from '@bufferapp/ui';
-
+import { Row } from '@bufferapp/publish-shared-components';
 import Modal from '../Modal';
 import PreferencesRow from '../PreferencesRow';
-
-const rowStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-};
 
 const TwoFactorAuth = ({
   machineState,
@@ -32,7 +25,7 @@ const TwoFactorAuth = ({
   submitCode,
   handleRecoveryCodeSelect,
 }) => (
-  <div style={rowStyle}>
+  <Row>
     <div
       style={{
         marginRight: '1rem',
@@ -81,7 +74,7 @@ const TwoFactorAuth = ({
         size={'mini'}
       />
     </div>
-  </div>
+  </Row>
 );
 
 TwoFactorAuth.propTypes = {

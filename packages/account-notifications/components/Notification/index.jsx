@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Toggle,
 } from '@bufferapp/components';
+import { Row } from '@bufferapp/publish-shared-components';
 import { Text } from '@bufferapp/ui';
 
 const switchStyle = {
@@ -12,14 +13,8 @@ const switchStyle = {
   textAlign: 'right',
 };
 
-const rowStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-};
-
 const Notification = ({ title, description, onToggleClick, toggleisEnabled, type }) => (
-  <div style={rowStyle}>
+  <Row>
     <div>
       <Text type="h3">{title}</Text>
       {description &&
@@ -35,7 +30,7 @@ const Notification = ({ title, description, onToggleClick, toggleisEnabled, type
         onClick={() => onToggleClick(!toggleisEnabled, type)}
       />
     </div>
-  </div>
+  </Row>
 );
 
 Notification.propTypes = {

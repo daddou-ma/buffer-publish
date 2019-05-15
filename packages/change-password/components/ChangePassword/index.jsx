@@ -4,14 +4,8 @@ import { Button, Text } from '@bufferapp/ui';
 import { Row } from '@bufferapp/publish-shared-components';
 import Modal from '../Modal';
 
-const rowStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-};
-
 const ChangePassword = ({ showModal, onRequestOpenModal, onRequestCloseModal, onSubmit }) => (
-  <div style={rowStyle}>
+  <Row>
     <div
       style={{
         marginRight: '1rem',
@@ -35,7 +29,7 @@ const ChangePassword = ({ showModal, onRequestOpenModal, onRequestCloseModal, on
       type="secondary"
     />
     {showModal ? <Modal onRequestCloseModal={onRequestCloseModal} onSubmit={onSubmit} /> : null}
-  </div>
+  </Row>
 );
 
 ChangePassword.propTypes = {

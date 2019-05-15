@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Select } from '@bufferapp/components';
 import { Text } from '@bufferapp/ui';
-
-const rowStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  height: '1.5rem',
-  alignItems: 'center',
-  padding: '1rem 0',
-};
+import { Row } from '@bufferapp/publish-shared-components';
 
 const DayToStartTheWeek = ({ input }) => (
   <Select
@@ -38,7 +31,7 @@ DayToStartTheWeek.propTypes = {
 };
 
 const SelectDayToStartTheWeek = () => (
-  <div style={rowStyle}>
+  <Row>
     <div>
       <Text type="h3">Day to start the week</Text>
     </div>
@@ -47,7 +40,7 @@ const SelectDayToStartTheWeek = () => (
         <Field component={DayToStartTheWeek} name="dayToStartTheWeek" />
       </form>
     </div>
-  </div>
+  </Row>
 );
 
 SelectDayToStartTheWeek.propTypes = {

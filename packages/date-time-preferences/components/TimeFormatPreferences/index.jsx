@@ -2,17 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Text } from '@bufferapp/ui';
-
-const rowStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  height: '1.5rem',
-  alignItems: 'center',
-  padding: '1rem 0',
-};
+import { Row } from '@bufferapp/publish-shared-components';
 
 const TimeFormatPreferences = () => (
-  <div style={rowStyle}>
+  <Row>
     <Text type="h3">Time format</Text>
     <form>
       <Field component="input" type="radio" id="twelveHourFormat" name="format" value="12" />
@@ -24,7 +17,7 @@ const TimeFormatPreferences = () => (
         <Text type="label">24 hour</Text>
       </label>
     </form>
-  </div>
+  </Row>
 );
 
 TimeFormatPreferences.propTypes = {

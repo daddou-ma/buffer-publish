@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const rowStyle = {
   display: 'flex',
   justifyContent: 'space-between',
-  padding: '1rem 0',
   alignItems: 'center',
 };
 

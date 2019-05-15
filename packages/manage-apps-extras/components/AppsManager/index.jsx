@@ -4,15 +4,9 @@ import {
   Link,
   Divider,
 } from '@bufferapp/components';
+import { Row } from '@bufferapp/publish-shared-components';
 import { Button, Text } from '@bufferapp/ui';
 import Modal from '../Modal';
-
-const stylesFlexRow = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  height: '2.5rem',
-};
 
 const rowBlockStyle = {
   display: 'block',
@@ -40,14 +34,14 @@ const AppsManager = ({
       <Divider />
       {connectedApps.map(app => (
         <div key={app.id}>
-          <div style={stylesFlexRow}>
+          <Row>
             <Text type="h3">{app.name}</Text>
             <Button
               type="secondary"
               label="Revoke Access"
               onClick={() => onRequestOpenModal({ appId: app.id, appName: app.name })}
             />
-          </div>
+          </Row>
           <Divider />
         </div>
       ))}

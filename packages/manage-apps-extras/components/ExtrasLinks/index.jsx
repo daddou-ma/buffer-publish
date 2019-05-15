@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Divider,
 } from '@bufferapp/components';
-
+import { Row } from '@bufferapp/publish-shared-components';
 import { Button, Text } from '@bufferapp/ui';
 
 const openExtensionLink = () => {
@@ -18,28 +18,23 @@ const openLinkAppStore = () => {
   window.open('https://itunes.apple.com/app/apple-store/id490474324?pt=936146&ct=Web%20App%20Sidebar&mt=8', '_blank');
 };
 
-const stylesFlexRow = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-};
 
 const ExtrasLinks = () => (
   <div>
     <Text type="h2">Buffer Apps & Extras</Text>
     <Text type="p">Get the most out of Buffer with our mobile apps and browser extension.</Text>
     <Divider />
-    <div style={stylesFlexRow}>
-    <div>
-      <Text type="h3">Browser Extension</Text>
-      <Text type="p">Our browser extension lets you share content as you browse the web.</Text>
-    </div>
-    <Button
-      type="secondary"
-      label="Install the browser extension"
-      onClick={() => openExtensionLink()}
-    />
-    </div>
+    <Row>
+      <div>
+        <Text type="h3">Browser Extension</Text>
+        <Text type="p">Our browser extension lets you share content as you browse the web.</Text>
+      </div>
+      <Button
+        type="secondary"
+        label="Install the browser extension"
+        onClick={() => openExtensionLink()}
+      />
+    </Row>
     <Divider />
     <div>
       <Text type="h3">Mobile Apps</Text>
