@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Text,
-  Button,
   Link,
   Divider,
 } from '@bufferapp/components';
-
+import { Button, Text } from '@bufferapp/ui';
 import Modal from '../Modal';
 
 const stylesFlexRow = {
@@ -23,9 +21,6 @@ const rowBlockStyle = {
   paddingTop: '2rem',
   marginRight: '1rem',
 };
-const textStyle = {
-  marginTop: '0.5rem',
-};
 
 const AppsManager = ({
   connectedApps,
@@ -38,27 +33,24 @@ const AppsManager = ({
 }) => (
   <section style={rowBlockStyle}>
     <div>
-      <Text color={'black'}>Connected Apps</Text>
-      <div style={textStyle}>
-        <Text size={'mini'} color={'shuttleGray'}>
-          Get the most out of Buffer and share from your mobile, news reader, blog or anywhere! <Link newTab href={'https://buffer.com/extras'}>Get More Apps →</Link>
-        </Text>
-        <Divider />
-        {connectedApps.map(app => (
-          <div key={app.id}>
-            <div style={stylesFlexRow}>
-              <Text size={'mini'}>{app.name}</Text>
-              <Button
-                tertiary
-                onClick={() => onRequestOpenModal({ appId: app.id, appName: app.name })}
-              >
-                Revoke Access
-              </Button>
-            </div>
-            <Divider />
+      <Text type="h2">Connected Apps</Text>
+      <Text type="p">
+        Get the most out of Buffer and share from your mobile, news reader, blog or anywhere! <Link newTab href={'https://buffer.com/extras'}>Get More Apps →</Link>
+      </Text>
+      <Divider />
+      {connectedApps.map(app => (
+        <div key={app.id}>
+          <div style={stylesFlexRow}>
+            <Text type="h3">{app.name}</Text>
+            <Button
+              type="secondary"
+              label="Revoke Access"
+              onClick={() => onRequestOpenModal({ appId: app.id, appName: app.name })}
+            />
           </div>
-        ))}
-      </div>
+          <Divider />
+        </div>
+      ))}
     </div>
     {showModalAppId !== null &&
       <Modal
