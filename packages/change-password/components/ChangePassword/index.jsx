@@ -1,24 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from '@bufferapp/components';
-import { Button } from '@bufferapp/ui';
+import { Button, Text } from '@bufferapp/ui';
 import { Row } from '@bufferapp/publish-shared-components';
 import Modal from '../Modal';
 
+const rowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
 const ChangePassword = ({ showModal, onRequestOpenModal, onRequestCloseModal, onSubmit }) => (
-  <Row>
+  <div style={rowStyle}>
     <div
       style={{
         marginRight: '1rem',
       }}
     >
-      <Text color={'black'} size={'mini'}>Password</Text>
+      <Text type="h3">Password</Text>
       <div
         style={{
           marginTop: '0.5rem',
         }}
       >
-        <Text size={'mini'}>
+        <Text type="p">
           Use your password to sign in to Buffer on the web and mobile apps. Make it nice and
           secure!
         </Text>
@@ -30,7 +35,7 @@ const ChangePassword = ({ showModal, onRequestOpenModal, onRequestCloseModal, on
       type="secondary"
     />
     {showModal ? <Modal onRequestCloseModal={onRequestCloseModal} onSubmit={onSubmit} /> : null}
-  </Row>
+  </div>
 );
 
 ChangePassword.propTypes = {
