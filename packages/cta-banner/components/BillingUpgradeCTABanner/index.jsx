@@ -50,8 +50,9 @@ const BillingUpgradeCTABanner = ({
     trial,
     onClickManageBilling,
     onClickAddBilling,
+    profileCount,
   }) => {
-  if (!trial || (trial && !trial.onTrial)) {
+  if (!trial || (trial && !trial.onTrial) || profileCount == 0) {
     return null;
   }
 
@@ -140,9 +141,11 @@ BillingUpgradeCTABanner.propTypes = {
   }),
   onClickManageBilling: PropTypes.func.isRequired,
   onClickAddBilling: PropTypes.func.isRequired,
+  profileCount: PropTypes.number,
 };
 
 BillingUpgradeCTABanner.defaultProps = {
+  profileCount: 0,
   trial: {
     hasCardDetails: false,
     hasTrialExtended: false,

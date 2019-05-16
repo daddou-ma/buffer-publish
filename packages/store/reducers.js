@@ -34,6 +34,7 @@ import { reducer as lockedProfileNotificationReducer } from '@bufferapp/publish-
 import { reducer as thirdpartyReducer } from '@bufferapp/publish-thirdparty';
 import { reducer as b4bTrialCompleteReducer } from '@bufferapp/publish-b4b-trial-complete-modal';
 import { reducer as appShellReducer } from '@bufferapp/publish-app-shell';
+import { reducer as ctaBannerReducer } from '@bufferapp/publish-cta-banner';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -83,6 +84,7 @@ export default ({
   thirdparty: thirdpartyReducer,
   b4bTrialComplete: b4bTrialCompleteReducer,
   appShell: appShellReducer,
+  ctaBanner: ctaBannerReducer,
 
   // Analyze
   average: averageReducer,
