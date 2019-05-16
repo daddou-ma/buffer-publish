@@ -4,12 +4,13 @@ import {
   Tabs,
   Tab,
 } from '@bufferapp/publish-shared-components';
-import { Button, Text } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
+import { Text } from '@bufferapp/components';
 import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
 
 const upgradeCtaStyle = {
   transform: 'translate(0, 1px)',
-  margin: '12px 16px',
+  margin: '12px 0',
   display: 'inline-block',
   textAlign: 'center',
   position: 'absolute',
@@ -19,7 +20,7 @@ const upgradeCtaStyle = {
 
 const tabsStyle = {
   paddingLeft: '0.5rem',
-  position: 'sticky',
+  position: 'relative',
   top: '0',
   backgroundColor: 'white',
   zIndex: 1,
@@ -54,7 +55,6 @@ class TabNavigation extends React.Component {
       shouldShowNestedAnalyticsTab,
       shouldHideAnalyticsOverviewTab,
       onUpgradeButtonClick,
-      profileId,
       isLockedProfile,
       isInstagramProfile,
     } = this.props;
@@ -92,34 +92,34 @@ class TabNavigation extends React.Component {
         </Tabs>
         {shouldShowUpgradeCta &&
           <div style={upgradeCtaStyle}>
-            <div style={{ paddingRight: '10px', display: 'inline-block' }}>
-              <Text size="mini">
-                Want to see more from Buffer?
+            <Text size="mini">
+              Want to see more from Buffer?
             </Text>
+            <div style={{ marginLeft: '8px', display: 'inline-block' }}>
+              <Button
+                label="Upgrade to Pro"
+                type="secondary"
+                size="small"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onUpgradeButtonClick('pro');
+                }}
+              />
             </div>
-            <Button
-              secondary
-              onClick={(e) => {
-                e.preventDefault();
-                onUpgradeButtonClick('pro');
-              }}
-            >
-              Upgrade to Pro
-              </Button>
           </div>
         }
         {!onProTrial &&
           <FeatureLoader supportedPlans={'pro'}>
             <div style={upgradeCtaStyle}>
               <Button
-                secondary
+                label="Learn about Buffer for Business"
+                size="small"
+                type="secondary"
                 onClick={(e) => {
                   e.preventDefault();
                   onUpgradeButtonClick('b4b');
                 }}
-              >
-                Learn about Buffer for Business
-              </Button>
+              />
             </div>
           </FeatureLoader>
         }
@@ -130,7 +130,7 @@ class TabNavigation extends React.Component {
             secondary
           >
             <Tab tabId={'posts'}>Posts</Tab>
-            {!shouldHideAnalyticsOverviewTab && 
+            {!shouldHideAnalyticsOverviewTab &&
               <Tab tabId={'overview'}>Overview</Tab>
             }
           </Tabs>
@@ -143,17 +143,18 @@ class TabNavigation extends React.Component {
           >
             <Tab tabId={'general-settings'}>General</Tab>
             <Tab tabId={'posting-schedule'}>Posting Schedule</Tab>
-            <Button
-              secondary
-              small
-              onClick={(e) => {
-                e.preventDefault();
-                this.setState({ loading: true });
-                reconnectProfile();
-              }}
-            >
-              { this.state.loading ? 'Reconnecting…' : 'Reconnect' }
-            </Button>
+            <div style={{ display: 'inline-block' }}>
+              <Button
+                type="secondary"
+                size="small"
+                label={this.state.loading ? 'Reconnecting…' : 'Reconnect'}
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.setState({ loading: true });
+                  reconnectProfile();
+                }}
+              />
+            </div>
           </Tabs>
         }
       </div>

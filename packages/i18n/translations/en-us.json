@@ -81,7 +81,8 @@
     "cta1": "Continue",
     "headline2": "Switch Back at Any Time",
     "body3": "Feeling nostalgic? Switch back to classic Buffer at any time.",
-    "cta2": "Sounds Good"
+    "cta2": "Sounds Good",
+    "altText": "You can go back to classic Buffer from the top menu"
   },
   "instagram-first-comment-modal": {
     "headline": "It looks like we’ll need permission to post an Instagram comment on your behalf. ",

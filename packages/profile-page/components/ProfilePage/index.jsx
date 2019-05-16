@@ -34,7 +34,6 @@ const profileSideBarStyle = {
   position: 'sticky',
   bottom: 0,
   top: 0,
-  height: '100%',
   maxHeight: '100vh',
 };
 

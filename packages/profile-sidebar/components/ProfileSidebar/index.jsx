@@ -92,7 +92,6 @@ const ProfileSidebar = ({
   hasTwitter,
 }) => (
   <div style={profileSidebarStyle}>
-    {productTitle}
     {loading && renderLoadingProfiles()}
     <div style={profileListStyle} data-hide-scrollbar>
       {profiles.length > 9 &&

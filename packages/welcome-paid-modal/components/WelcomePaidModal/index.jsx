@@ -60,7 +60,10 @@ class WelcomePaidModal extends React.Component {
                 </div>
               </div>
               <div className={styles.divGifHolder}>
-                <img src="https://s3.amazonaws.com/buffer-publish/images/go_back_to_classic.gif" alt="You can go back from the sidebar" />
+                <img
+                  src="https://s3.amazonaws.com/buffer-publish/images/return_to_classic_publish.gif"
+                  alt={translations.altText}
+                />
               </div>
               <div className={styles.barBottomStyle}>
                 <DotsNavigation step={this.state.step} onClickCallback={this.onClickStep} />

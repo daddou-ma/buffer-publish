@@ -33,6 +33,7 @@ import { reducer as stealProfileModalReducer } from '@bufferapp/publish-steal-pr
 import { reducer as lockedProfileNotificationReducer } from '@bufferapp/publish-locked-profile-notification';
 import { reducer as thirdpartyReducer } from '@bufferapp/publish-thirdparty';
 import { reducer as b4bTrialCompleteReducer } from '@bufferapp/publish-b4b-trial-complete-modal';
+import { reducer as appShellReducer } from '@bufferapp/publish-app-shell';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -81,6 +82,7 @@ export default ({
   lockedProfileNotification: lockedProfileNotificationReducer,
   thirdparty: thirdpartyReducer,
   b4bTrialComplete: b4bTrialCompleteReducer,
+  appShell: appShellReducer,
 
   // Analyze
   average: averageReducer,

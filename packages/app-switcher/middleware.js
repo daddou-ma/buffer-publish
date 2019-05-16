@@ -13,7 +13,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       }));
       break;
     case `sendFeedback_${actionTypes.FETCH_SUCCESS}`:
-      if (action.args && action.args.source === 'publish_sidebar') {
+      if (action.args && action.args.source === 'app_shell') {
         const state = getState();
         const metricsData = {
           application: 'PUBLISH',

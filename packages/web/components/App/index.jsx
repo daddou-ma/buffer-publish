@@ -5,7 +5,7 @@ import { Route, Switch, withRouter } from 'react-router';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import Sidebar from '@bufferapp/publish-sidebar';
+import AppShell from '@bufferapp/publish-app-shell';
 import Notifications from '@bufferapp/notifications';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
@@ -29,6 +29,8 @@ const contentStyle = {
   display: 'flex',
   flexGrow: 1,
   flexDirection: 'column',
+  width: '100vw',
+  background: '#fff',
 };
 
 // Can't use stateless function for App since then
@@ -37,35 +39,35 @@ class App extends Component { // eslint-disable-line
   render() {
     return (
       <div style={appStyle}>
-        <Sidebar activeProduct="publish" />
-
-        <div style={contentStyle}>
-          <CTABanner />
-          <TemporaryBanner />
-          <EnsurePublishBetaUser>
-            <Switch>
-              <Route
-                path={preferencePageRoute}
-                component={Preferences}
-              />
-              <Route
-                path={childTabRoute}
-                component={ProfilePage}
-              />
-              <Route
-                path={profilePageRoute}
-                component={ProfilePage}
-              />
-              <Route
-                path="/new-connection"
-                component={DefaultPage}
-              />
-              <Route
-                component={InitialLoading}
-              />
-            </Switch>
-          </EnsurePublishBetaUser>
-        </div>
+        <AppShell>
+          <div style={contentStyle}>
+            <CTABanner />
+            <TemporaryBanner />
+            <EnsurePublishBetaUser>
+              <Switch>
+                <Route
+                  path={preferencePageRoute}
+                  component={Preferences}
+                />
+                <Route
+                  path={childTabRoute}
+                  component={ProfilePage}
+                />
+                <Route
+                  path={profilePageRoute}
+                  component={ProfilePage}
+                />
+                <Route
+                  path="/new-connection"
+                  component={DefaultPage}
+                />
+                <Route
+                  component={InitialLoading}
+                />
+              </Switch>
+            </EnsurePublishBetaUser>
+          </div>
+        </AppShell>
 
         <Notifications />
         <AppSwitcher />

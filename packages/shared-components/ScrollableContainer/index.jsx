@@ -9,6 +9,7 @@ const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
   flexGrow: 0,
+  height: '1px',
 };
 
 function ScrollableContainer({

@@ -4,9 +4,11 @@ import { Text, LockIcon, Link } from '@bufferapp/components';
 import { SensitiveData } from '@bufferapp/publish-shared-components';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
 import { curiousBlueUltraLight } from '@bufferapp/components/style/color';
+import { blue } from '@bufferapp/ui/style/colors';
+
 import ProfileBadge from '../ProfileBadge';
 
-const NewDisconnectedIcon = ({ showProfilesDisconnectedModal }) => (
+const NewDisconnectedIcon = ({ showProfilesDisconnectedModal, selected }) => (
   <Link
     unstyled
     onClick={(e) => {
@@ -25,24 +27,30 @@ const NewDisconnectedIcon = ({ showProfilesDisconnectedModal }) => (
         fillRule="evenodd"
         clipRule="evenodd"
         d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM7 4C7 3.44771 7.44772 3 8 3C8.55229 3 9 3.44771 9 4V9C9 9.55228 8.55229 10 8 10C7.44772 10 7 9.55228 7 9V4ZM8 11C7.44772 11 7 11.4477 7 12C7 12.5523 7.44772 13 8 13C8.55228 13 9 12.5523 9 12C9 11.4477 8.55228 11 8 11Z"
-        fill="#E0364F"
+        fill={selected ? 'white' : '#E0364F'}
       />
     </svg>
   </Link>
 );
 NewDisconnectedIcon.propTypes = {
   showProfilesDisconnectedModal: PropTypes.func.isRequired,
+  selected: PropTypes.bool.isRequired,
 };
 
 const profileBadgeWrapperStyle = {
   display: 'flex',
   alignItems: 'center',
-  marginRight: '16px',
 };
 
-const Notifications = ({ notifications }) => (
-  <Text size="mini">{notifications}</Text>
+const Notifications = ({ notifications, selected }) => (
+  <Text size="mini" color={selected ? 'white' : 'shuttleGray'}>{notifications}</Text>
 );
+
+const handleStyle = {
+  width: '120px',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+};
 
 Notifications.propTypes = {
   notifications: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -85,12 +93,13 @@ const ProfileListItem = ({
             default: {
               display: 'flex',
               alignItems: 'center',
-              padding: '0.5rem',
+              padding: '8px 16px',
               justifyContent: 'space-between',
               lineHeight: 1,
             },
             selected: {
-              background: curiousBlueUltraLight,
+              background: blue,
+              color: '#fff',
               borderRadius: '4px',
             },
           },
@@ -103,20 +112,23 @@ const ProfileListItem = ({
           <div style={{ marginRight: '16px' }}>
             <ProfileBadge avatarUrl={avatarUrl} type={type} />
           </div>
-          <SensitiveData>
-            <Text size={'small'} color={selected ? 'black' : 'shuttleGray'}>
-              {handle}
-            </Text>
-          </SensitiveData>
+          <span style={handleStyle}>
+            <SensitiveData>
+              <Text size={'mini'} color={selected ? 'white' : 'shuttleGray'}>
+                {handle}
+              </Text>
+            </SensitiveData>
+          </span>
         </div>
         {locked ? (
-          <LockIcon />
+          <LockIcon color={selected ? 'white' : 'shuttleGray'} />
         ) : disconnected ? (
           <NewDisconnectedIcon
             showProfilesDisconnectedModal={showProfilesDisconnectedModal}
+            selected={selected}
           />
         ) : (
-          <Notifications notifications={notifications} />
+          <Notifications notifications={notifications} selected={selected} />
         )}
       </div>
     </Link>

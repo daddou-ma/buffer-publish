@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from '@bufferapp/publish-shared-components';
-import { Link, ArrowLeftIcon, Text } from '@bufferapp/components';
+import { Text } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
+import { ArrowLeft } from '@bufferapp/ui/Icon';
+import { gray } from '@bufferapp/ui/style/colors';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
 import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
@@ -12,10 +15,12 @@ import { openBillingWindow } from '../../../tabs/utils';
 
 const tabStyle = {
   overflowY: 'auto',
+  height: 'calc(100vh - 113px)', // 56px appshell + 57px tabs
 };
 
 const containerStyle = {
   maxWidth: '864px',
+  paddingTop: '16px',
   margin: '0 auto',
 };
 
@@ -75,40 +80,24 @@ const Preferences = ({
           </Tab>
         </Tabs>
       </div>
-      <Link
-        href={'#'}
-        onClick={(e) => {
-          e.preventDefault();
-          onBackToDashboardClick({
-            selectedProfileId,
-            profiles,
-          });
-        }}
-        unstyled
-      >
-        <div
-          style={{
-            display: 'flex',
-            margin: '1rem 0 1rem -3px',
-            alignItems: 'center',
-          }}
-        >
-          <ArrowLeftIcon
-            size={{
-              width: '0.9rem',
-              height: '0.9rem',
-            }}
-          />
-          <div style={{ marginLeft: '0.5rem' }}>
-            <Text size={'mini'} color={'curiousBlue'}>
-              Back To Dashboard
-            </Text>
-          </div>
-        </div>
-      </Link>
       <div style={tabStyle}>
         <div style={containerStyle}>
-          <PreferenceContent tabId={selectedTabId} onUnknownTab={onUnknownTab} />
+          <Button
+            type="secondary"
+            size="small"
+            icon={<ArrowLeft color={gray} />}
+            label="Back to Dashboard"
+            onClick={() =>
+              onBackToDashboardClick({
+                selectedProfileId,
+                profiles,
+              })
+            }
+          />
+          <PreferenceContent
+            tabId={selectedTabId}
+            onUnknownTab={onUnknownTab}
+          />
         </div>
       </div>
     </div>

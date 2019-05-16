@@ -547,10 +547,10 @@
     moment "2.19.3"
     moment-timezone "0.5.13"
 
-"@bufferapp/publish-parsers@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.19.0.tgz#c7168f25a2d61134888c9f8bb47e679e120b6a14"
-  integrity sha512-8Ariur2/j0A9BDCXEqVJXNs6M8KUeQAevrXmsbmYhwcfY8eE2XN776PM7WDPHaNBB7jlbye87xFNabR+qVcCcQ==
+"@bufferapp/publish-parsers@1.20.0":
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.20.0.tgz#e64e0722f8f99b465d547a5fc6a187d32ba91140"
+  integrity sha512-ceFG4d1hg6DHIM7DhjuTnNeT7rjOTDxRqr6UYBs5XkEkas1P3AXvJqEo7DxfxLEl4x2+Yy6N00ifklW4dVpzLQ==
   dependencies:
     "@bufferapp/publish-formatters" "1.9.29"
     twitter-text "3.0.0"
@@ -640,12 +640,11 @@
     "@bufferapp/nav-sidebar" "^0.87.5"
     numeral "2.0.6"
 
-"@bufferapp/ui@^3.7.0":
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.7.0.tgz#44ba5d7f1c97be5d65e8ac058d3e98f3de435737"
-  integrity sha512-PhxnKwejG1glNH9skdabnbsDmUjJe4QMbEoeTHR4V3uDW+s0krhZxilpfb8INTjo6OYF8JV2/6vW/zywOgC1iw==
+"@bufferapp/ui@3.8.1":
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.8.1.tgz#083a4bf12bfb02f457e99d8d48c51e27ee82d5fc"
+  integrity sha512-HjdAUMZBV1g5Xk+PxLo8EqOUOaR+NgVrxkcKbLDwW2sMTu/DS0v4UwuN4SkYyPQOkO8uN5nhGwg6B95eOG3/gQ==
   dependencies:
-    blueimp-md5 "^2.10.0"
     immutability-helper "^2.9.0"
     react "16.6.3"
     react-dom "16.6.3"
@@ -3089,11 +3088,6 @@ bluebird@^3.4.7, bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.3.tgz#7d01c6f9616c9a51ab0f8c549a79dfe6ec33efa7"
   integrity sha512-/qKPUQlaW1OyR51WeCPBvRnAlnZFUJkCSG5HzGnuIqhgyJtF+T94lFnn33eiazjRm2LAHVy2guNnaq48X9SJuw==
-
-blueimp-md5@^2.10.0:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/blueimp-md5/-/blueimp-md5-2.10.0.tgz#02f0843921f90dca14f5b8920a38593201d6964d"
-  integrity sha512-EkNUOi7tpV68TqjpiUz9D9NcT8um2+qtgntmMbi5UKssVX2m/2PLqotcric0RE63pB3HPN/fjf3cKHN2ufGSUQ==
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
