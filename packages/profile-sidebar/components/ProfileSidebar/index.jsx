@@ -173,7 +173,7 @@ ProfileSidebar.propTypes = {
   hasFacebook: PropTypes.bool.isRequired,
   hasTwitter: PropTypes.bool.isRequired,
   onSearchProfileChange: () => {},
-  isSearchPopupVisible: false,
+  isSearchPopupVisible: PropTypes.bool,
 };
 
 ProfileSidebar.defaultProps = {
@@ -181,7 +181,7 @@ ProfileSidebar.defaultProps = {
   selectedProfileId: ProfileList.defaultProps.selectedProfileId,
   profiles: [],
   onSearchProfileChange: PropTypes.func,
-  isSearchPopupVisible: PropTypes.bool,
+  isSearchPopupVisible: false,
 };
 
 export default ProfileSidebar;
