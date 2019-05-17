@@ -1,6 +1,8 @@
 const fs = require('fs');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const path = require('path');
+
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const common = require('./webpack.config.common.js');
 
@@ -38,6 +40,8 @@ const merged = merge.strategy({ plugins: 'prepend' })(
     resolve: {
       alias: {
         'react-dom': '@hot-loader/react-dom',
+        '@bufferapp/publish-formatters': path.resolve(__dirname, './publish-formatters'),
+        '@bufferapp/publish-parsers': path.resolve(__dirname, './publish-parsers'),
       },
     },
   },

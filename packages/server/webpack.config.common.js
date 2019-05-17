@@ -4,6 +4,7 @@ const PostCSSImport = require('postcss-import');
 const PostCSSCustomProperties = require('postcss-custom-properties');
 const PostCSSCalc = require('postcss-calc');
 const PostCSSColorFunction = require('postcss-color-function');
+const path = require('path');
 
 const vendor = ['react', 'react-dom', '@bufferapp/components'];
 const { analyzePackagesWhitelist, analyzeLessLoader } = require('../../analyze.config.js');
@@ -17,6 +18,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
+    alias: {
+      '@bufferapp/publish-formatters': path.resolve(__dirname, './publish-formatters'),
+      '@bufferapp/publish-parsers': path.resolve(__dirname, './publish-parsers'),
+    },
   },
   module: {
     rules: [

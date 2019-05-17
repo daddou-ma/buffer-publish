@@ -4,6 +4,8 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
+import { HELPSCOUT_ID } from './constants';
+
 const checkExtensionInstalled = () => {
   /**
    * We place this marker in the DOM (server/index.html) and the Buffer Extension
@@ -24,6 +26,7 @@ export default ({ dispatch, getState }) => next => (action) => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({ type: actionTypes.FULLSTORY, result: action.result });
       dispatch({ type: actionTypes.APPCUES, result: action.result });
+      dispatch({ type: actionTypes.HELPSCOUT_BEACON, result: action.result });
       break;
 
     case `intercom_${dataFetchActionTypes.FETCH_SUCCESS}`: {
@@ -86,6 +89,31 @@ export default ({ dispatch, getState }) => next => (action) => {
             });
           }
         }
+      }
+      break;
+    case actionTypes.HELPSCOUT_BEACON:
+      if (window && window.Beacon) {
+        const {
+          name,
+          email,
+          helpScoutParams,
+        } = action.result;
+
+        window.Beacon('init', HELPSCOUT_ID);
+
+        window.Beacon.identify({
+          name, // current user's name
+          email, // current user's email
+        });
+        // Pass config parameters from the user object in the API.
+        window.Beacon('config', helpScoutParams);
+
+        dispatch({
+          type: actionTypes.HELPSCOUT_BEACON_LOADED,
+          loaded: true,
+        });
+
+        console.debug('HS set up and initiated');
       }
       break;
     case 'COMPOSER_EVENT': {

@@ -12,7 +12,7 @@
     "@bufferapp/keywrapper": "0.2.0",
     "@bufferapp/notifications": "1.9.4",
     "@bufferapp/product-features": "2.0.0",
-    "@bufferapp/publish-formatters": "1.9.31",
+    "@bufferapp/publish-formatters": "file:./../server/publish-formatters",
     "@bufferapp/publish-routes": "2.0.0",
     "@bufferapp/publish-constants": "2.0.0",
     "@bufferapp/publish-initial-loading": "2.0.0",

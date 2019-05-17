@@ -14,7 +14,7 @@
     "@bufferapp/publish-profile-sidebar": "2.0.0",
     "@bufferapp/publish-shared-components": "2.0.0",
     "@bufferapp/publish-composer-popover": "2.0.0",
-    "@bufferapp/publish-formatters": "1.9.31",
+    "@bufferapp/publish-formatters": "file:./../server/publish-formatters",
     "@bufferapp/product-features": "2.0.0",
     "@bufferapp/publish-locked-profile-notification": "2.0.0"
   },
