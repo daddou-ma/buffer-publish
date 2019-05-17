@@ -4,6 +4,7 @@ import { Search as SearchIcon } from '@bufferapp/ui/Icon';
 import Search from '@bufferapp/ui/Search';
 import Select from '@bufferapp/ui/Select';
 import Avatar from '@bufferapp/ui/Avatar';
+import styles from './styles.css';
 
 const wrapperStyle = {
   width: '100%',
@@ -44,7 +45,7 @@ class ProfileSearch extends React.Component {
         ...profile,
         title: profile.handle,
         icon: (
-          <div style={avatarStyle}>
+          <div className={styles.searchSidebar} style={avatarStyle}>
             <Avatar
               src={profile.avatarUrl}
               fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
