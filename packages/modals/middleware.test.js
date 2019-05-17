@@ -112,6 +112,7 @@ describe('middleware', () => {
         trial: {
           onTrial: true,
         },
+        profileCount: 1,
       },
     };
     middleware({ dispatch, getState })(next)(action);

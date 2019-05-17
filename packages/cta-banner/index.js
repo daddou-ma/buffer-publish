@@ -7,6 +7,7 @@ export default connect(
   state => ({
     trial: state.appSidebar.user && state.appSidebar.user.trial,
     translations: state.i18n.translations['billing-upgrade-cta-banner'],
+    profileCount: state.ctaBanner.profileCount,
   }),
   (dispatch) => ({
     onClickManageBilling: () => {

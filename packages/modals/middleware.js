@@ -61,11 +61,12 @@ export default ({ dispatch, getState }) => next => (action) => {
         trial,
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
+        profileCount,
       } = action.result; // user
       const hasNotReadWelcomeMessage = readMessages && !readMessages.includes(message);
       const isOnBusinessTrial = planName === 'business' && trial.onTrial;
       const hasNotReadNewFirstCommentMessage = readMessages && !readMessages.includes(igFcMsg);
-      if (isOnBusinessTrial && hasNotReadWelcomeMessage) {
+      if (isOnBusinessTrial && hasNotReadWelcomeMessage && profileCount > 0) {
         dispatch(actions.showWelcomeB4BTrialModal());
         // Mark modal as seen
         dispatch(dataFetchActions.fetch({ name: 'readMessage', args: { message } }));

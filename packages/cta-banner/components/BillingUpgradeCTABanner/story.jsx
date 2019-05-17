@@ -88,6 +88,7 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickManageBilling={action('manageBilling')}
         onClickAddBilling={action('addBilling')}
         trial={userWithoutTrial}
+        profileCount={1}
       />
     </Provider>
   ))
@@ -98,6 +99,7 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickManageBilling={action('manageBilling')}
         onClickAddBilling={action('addBilling')}
         trial={userOnTrial}
+        profileCount={1}
 
       />
     </Provider>
@@ -109,7 +111,7 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickManageBilling={action('manageBilling')}
         onClickAddBilling={action('addBilling')}
         trial={userOnTrialWithBilling}
-
+        profileCount={1}
       />
     </Provider>
   ))
@@ -120,7 +122,18 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickManageBilling={action('manageBilling')}
         onClickAddBilling={action('addBilling')}
         trial={userOnTrial}
-
+        profileCount={1}
+      />
+    </Provider>
+  ))
+  .add('pro user on business trial no billing info and no profiles connected', () => (
+    <Provider store={storeBusiness}>
+      <BillingUpgradeCTABanner
+        translations={translations['billing-upgrade-cta-banner']}
+        onClickManageBilling={action('manageBilling')}
+        onClickAddBilling={action('addBilling')}
+        trial={userOnTrial}
+        profileCount={0}
       />
     </Provider>
   ))
@@ -131,7 +144,7 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickManageBilling={action('manageBilling')}
         onClickAddBilling={action('addBilling')}
         trial={userOnTrialWithBilling}
-
+        profileCount={1}
       />
     </Provider>
   ));
