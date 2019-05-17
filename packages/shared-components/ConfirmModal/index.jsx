@@ -68,6 +68,7 @@ const ConfirmModal = ({
       <div style={profileBadgeStyle}>
         <Avatar
           src={avatar}
+          fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
           alt="avatar for social network"
           size="small"
           type="social"

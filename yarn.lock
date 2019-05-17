@@ -640,10 +640,10 @@
     "@bufferapp/nav-sidebar" "^0.87.5"
     numeral "2.0.6"
 
-"@bufferapp/ui@3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.8.1.tgz#083a4bf12bfb02f457e99d8d48c51e27ee82d5fc"
-  integrity sha512-HjdAUMZBV1g5Xk+PxLo8EqOUOaR+NgVrxkcKbLDwW2sMTu/DS0v4UwuN4SkYyPQOkO8uN5nhGwg6B95eOG3/gQ==
+"@bufferapp/ui@3.10.0":
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.10.0.tgz#1e41ad548701edf98eba3cd7091200e52815ab21"
+  integrity sha512-H6WKO/d0F0dk/qDNHmt5ohaFtWeC39LVdYFITbM6915zki98hR/42SZ9MdWyXLvJnfNLsezEzjVGVtvcpdgoAQ==
   dependencies:
     immutability-helper "^2.9.0"
     react "16.6.3"

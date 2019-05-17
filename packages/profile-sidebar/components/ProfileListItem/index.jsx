@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import { Text, LockIcon, Link } from '@bufferapp/components';
 import { SensitiveData } from '@bufferapp/publish-shared-components';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
-import { curiousBlueUltraLight } from '@bufferapp/components/style/color';
+import Avatar from '@bufferapp/ui/Avatar';
 import { blue } from '@bufferapp/ui/style/colors';
-
-import ProfileBadge from '../ProfileBadge';
 
 const NewDisconnectedIcon = ({ showProfilesDisconnectedModal, selected }) => (
   <Link
@@ -110,7 +108,14 @@ const ProfileListItem = ({
       >
         <div style={profileBadgeWrapperStyle}>
           <div style={{ marginRight: '16px' }}>
-            <ProfileBadge avatarUrl={avatarUrl} type={type} />
+            <Avatar
+              src={avatarUrl}
+              fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
+              alt={handle}
+              size="small"
+              type="social"
+              network={type}
+            />
           </div>
           <span style={handleStyle}>
             <SensitiveData>
@@ -137,7 +142,6 @@ const ProfileListItem = ({
 
 ProfileListItem.propTypes = {
   ...Notifications.propTypes,
-  ...ProfileBadge.propTypes,
   handle: PropTypes.string.isRequired,
   locked: PropTypes.bool,
   selected: PropTypes.bool,
