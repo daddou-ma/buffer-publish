@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getDateString, isInThePast } from '@bufferapp/publish-formatters';
+import { getDateString, isInThePast } from '@bufferapp/publish-server/formatters';
 
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
