@@ -47,6 +47,7 @@ class ProfileSearch extends React.Component {
           <div style={avatarStyle}>
             <Avatar
               src={profile.avatarUrl}
+              fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
               alt={profile.handle}
               size="small"
               type="social"
