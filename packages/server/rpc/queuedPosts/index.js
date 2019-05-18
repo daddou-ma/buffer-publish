@@ -1,8 +1,7 @@
-import { postParser } from './../../parsers/src/index';
-import { buildPostMap } from './../../formatters/src/index';
-
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
+const { postParser } = require('./../../parsers/src');
+const { buildPostMap } = require('./../../formatters/src');
 
 module.exports = method(
   'queuedPosts',

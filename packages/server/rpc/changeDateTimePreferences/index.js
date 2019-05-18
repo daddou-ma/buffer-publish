@@ -1,7 +1,6 @@
-import { userParser } from './../../parsers/src/index';
-
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
+const { userParser } = require('./../../parsers/src');
 
 module.exports = method(
   'changeDateTimePreferences',
