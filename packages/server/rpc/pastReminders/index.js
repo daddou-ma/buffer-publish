@@ -1,5 +1,6 @@
-const { postParser } = require('@bufferapp/publish-parsers');
-const { buildPostMap } = require('@bufferapp/publish-formatters');
+import { postParser } from './../../parsers/src/index';
+import { buildPostMap } from './../../formatters/src/index';
+
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 

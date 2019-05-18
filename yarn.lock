@@ -571,34 +571,6 @@
     storybook-addon-a11y "3.0.0"
     striptags "^3.1.0"
 
-"@bufferapp/publish-formatters@1.9.29":
-  version "1.9.29"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-formatters/-/publish-formatters-1.9.29.tgz#707d0cbf6c215a5d3c4496e80714f6da50808693"
-  integrity sha512-er1tdsoia6t6RjGy2OebIMLRFPo2utqcTYlxIohUslSX8XRDMOQWu7FW5eAwm7JgASBFfEpHcRjV+6hBf4BG3w==
-  dependencies:
-    moment "2.19.3"
-    moment-timezone "0.5.13"
-
-"@bufferapp/publish-formatters@file:./packages/server/publish-formatters":
-  version "2.0.0"
-  dependencies:
-    moment "2.19.3"
-    moment-timezone "0.5.13"
-
-"@bufferapp/publish-parsers@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/publish-parsers/-/publish-parsers-1.19.0.tgz#c7168f25a2d61134888c9f8bb47e679e120b6a14"
-  integrity sha512-8Ariur2/j0A9BDCXEqVJXNs6M8KUeQAevrXmsbmYhwcfY8eE2XN776PM7WDPHaNBB7jlbye87xFNabR+qVcCcQ==
-  dependencies:
-    "@bufferapp/publish-formatters" "1.9.29"
-    twitter-text "3.0.0"
-
-"@bufferapp/publish-parsers@file:./packages/server/publish-parsers":
-  version "2.0.0"
-  dependencies:
-    "@bufferapp/publish-formatters" "file:../../../Library/Caches/Yarn/v4/npm-@bufferapp-publish-parsers-2.0.0-fb0d042e-2ac9-47c0-9925-4ad79026ac72-1558112136572/node_modules/@bufferapp/publish-formatters"
-    twitter-text "3.0.0"
-
 "@bufferapp/react-images-loaded@^1.1.0-fork.0":
   version "1.1.0-fork.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/react-images-loaded/-/react-images-loaded-1.1.0-fork.0.tgz#fb3e2e13df30c806cf17ebf11b19a20d32c02e46"
@@ -701,7 +673,7 @@
     react-dom "16.6.3"
     styled-components "3.4.10"
 
-"@bufferapp/ui@^3.7.0":
+"@bufferapp/ui@3.10.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.10.0.tgz#1e41ad548701edf98eba3cd7091200e52815ab21"
   integrity sha512-H6WKO/d0F0dk/qDNHmt5ohaFtWeC39LVdYFITbM6915zki98hR/42SZ9MdWyXLvJnfNLsezEzjVGVtvcpdgoAQ==
@@ -9651,11 +9623,6 @@ moment-timezone@0.5.23:
   dependencies:
     moment ">= 2.9.0"
 
-moment@2.19.3:
-  version "2.19.3"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.3.tgz#bdb99d270d6d7fda78cc0fbace855e27fe7da69f"
-  integrity sha1-vbmdJw1tf9p4zA+6zoVeJ/59pp8=
-
 moment@2.22.2:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
@@ -13887,11 +13854,6 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
-twemoji-parser@^11.0.2:
-  version "11.0.2"
-  resolved "https://registry.yarnpkg.com/twemoji-parser/-/twemoji-parser-11.0.2.tgz#24e87c2008abe8544c962f193b88b331de32b446"
-  integrity sha512-5kO2XCcpAql6zjdLwRwJjYvAZyDy3+Uj7v1ipBzLthQmDL7Ce19bEqHr3ImSNeoSW2OA8u02XmARbXHaNO8GhA==
-
 twitter-text@1.14.7:
   version "1.14.7"
   resolved "https://registry.yarnpkg.com/twitter-text/-/twitter-text-1.14.7.tgz#77877342ec61bb0c5397b8163f4d5d31478a40e4"
@@ -13903,15 +13865,6 @@ twitter-text@2.0.4:
   integrity sha512-SUNLKjvp2RXUeNRZR/k5kH6DXcwWFhqdorbz6MZTuASsPRnSl1uG8IVmjlnS2d4iMbIjDa5jrOd3kvfTfXEdSg==
   dependencies:
     punycode "1.4.1"
-
-twitter-text@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/twitter-text/-/twitter-text-3.0.0.tgz#662f255b8ca12412f5b126368496e2430480eae3"
-  integrity sha512-p5/mAvsYp0ESSgKjpaytWNJxrRqM04FnF5wLtc9+U1hXBrQujh/oz+4yR45JHIJfWOKSFZ/aLGaCasNwrqkkcw==
-  dependencies:
-    babel-runtime "^6.26.0"
-    punycode "1.4.1"
-    twemoji-parser "^11.0.2"
 
 type-check@~0.3.2:
   version "0.3.2"

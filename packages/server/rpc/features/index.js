@@ -1,6 +1,7 @@
+import { featureParser } from './../../parsers/src/index';
+
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { featureParser } = require('@bufferapp/publish-parsers');
 
 module.exports = method(
   'features',

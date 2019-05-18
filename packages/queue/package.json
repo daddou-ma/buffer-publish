@@ -16,6 +16,7 @@
     "@bufferapp/publish-profile-sidebar": "2.0.0",
     "@bufferapp/publish-shared-components": "2.0.0",
     "@bufferapp/publish-upgrade-modal": "2.0.0",
+    "@bufferapp/publish-server": "2.0.0",
     "@bufferapp/publish-locked-profile-notification": "2.0.0"
   },
   "devDependencies": {

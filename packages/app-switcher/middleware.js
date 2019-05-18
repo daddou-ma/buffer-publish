@@ -1,6 +1,6 @@
 import { actionTypes } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
-import { getURL } from '@bufferapp/publish-server/formatters';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 export default ({ getState, dispatch }) => next => (action) => {

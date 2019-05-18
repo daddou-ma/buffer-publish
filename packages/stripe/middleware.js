@@ -1,6 +1,6 @@
 /* global Stripe */
 
-import { getURL } from '@bufferapp/publish-server/formatters';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions as notification } from '@bufferapp/notifications';
 import { actions as asyncDataFetchActions, actionTypes as asyncDataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions, actionTypes } from './reducer';
