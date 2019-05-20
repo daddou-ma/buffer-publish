@@ -96,24 +96,20 @@ export default ({ dispatch, getState }) => next => (action) => {
         const {
           name,
           email,
-          helpScoutParams,
+          helpScoutConfig,
         } = action.result;
 
         window.Beacon('init', HELPSCOUT_ID);
-
-        window.Beacon.identify({
+        window.Beacon('identify', {
           name, // current user's name
           email, // current user's email
         });
         // Pass config parameters from the user object in the API.
-        window.Beacon('config', helpScoutParams);
-
+        window.Beacon('config', helpScoutConfig);
         dispatch({
           type: actionTypes.HELPSCOUT_BEACON_LOADED,
           loaded: true,
         });
-
-        console.debug('HS set up and initiated');
       }
       break;
     case 'COMPOSER_EVENT': {

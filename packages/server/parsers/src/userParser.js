@@ -83,4 +83,5 @@ module.exports = userData => ({
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,
   showReturnToClassic: userData.features.includes('paid_users_in_new_publish'),
+  helpScoutConfig: userData.helpscout_beacon_params,
 })

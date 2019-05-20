@@ -23,7 +23,6 @@ function RouteMonitor({ pathname, appCues, intercom, helpScoutBeacon }) {
 
     // Let HelpScout Beacon know when we've changed pages
     if (helpScoutBeacon && helpScoutBeacon.loaded && window.Beacon) {
-      console.debug('Changed page, event sent to HS');
       window.Beacon('suggest');
     }
 

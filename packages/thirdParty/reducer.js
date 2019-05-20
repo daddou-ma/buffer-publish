@@ -13,6 +13,7 @@ export const actionTypes = keyWrapper('thirdparty', {
 const initialState = {
   appCues: { loaded: false },
   intercom: { loaded: false },
+  helpScoutBeacon: { loaded: false },
 };
 
 export default (state = initialState, action) => {
