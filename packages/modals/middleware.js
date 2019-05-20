@@ -75,7 +75,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         dispatch(actions.showUpgradeModal({ source: 'pro_trial_expired' }));
       } else if (shouldShowBusinessTrialExpiredModal) {
         dispatch(actions.showB4BTrialExpiredModal({ source: 'b4b_trial_expired' }));
-      } else if (hasNotReadNewFirstCommentMessage) {
+      } else if (hasNotReadNewFirstCommentMessage && profileCount > 0) {
         dispatch(actions.showInstagramNewFirstCommentUserModal());
         // Mark modal as seen
         dispatch(dataFetchActions.fetch({ name: 'readMessage', args: { message: igFcMsg } }));
