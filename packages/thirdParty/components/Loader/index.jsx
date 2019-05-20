@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import RouteMonitor from '../RouteMonitor';
 
-const Loader = ({ appCues, intercom, helpScoutBeacon, location }) => (
-  <RouteMonitor appCues={appCues} intercom={intercom} helpScoutBeacon={helpScoutBeacon} pathname={location.pathname} />
+const Loader = ({ appCues, intercom, location }) => (
+  <RouteMonitor appCues={appCues} intercom={intercom} pathname={location.pathname} />
 );
 
 Loader.propTypes = {
@@ -15,9 +15,6 @@ Loader.propTypes = {
     loaded: PropTypes.bool,
   }).isRequired,
   intercom: PropTypes.shape({
-    loaded: PropTypes.bool,
-  }).isRequired,
-  helpScoutBeacon: PropTypes.shape({
     loaded: PropTypes.bool,
   }).isRequired,
 };

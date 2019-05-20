@@ -2,7 +2,7 @@ import Pusher from 'pusher-js';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
-import { postParser } from '@bufferapp/publish-server/parsers/src';
+import { postParser } from '@bufferapp/publish-parsers';
 
 const PUSHER_APP_KEY = 'bd9ba9324ece3341976e';
 

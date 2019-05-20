@@ -4,7 +4,7 @@ import { Text, Link } from '@bufferapp/components';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { mystic } from '@bufferapp/components/style/color';
 import { SERVICE_NAMES } from '@bufferapp/publish-constants';
-import { abbreviateNumber } from '@bufferapp/publish-server/formatters/src';
+import { abbreviateNumber } from '@bufferapp/publish-formatters';
 
 const statsBarStyle = {
   display: 'flex',
