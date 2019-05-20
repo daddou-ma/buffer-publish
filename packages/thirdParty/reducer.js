@@ -6,11 +6,14 @@ export const actionTypes = keyWrapper('thirdparty', {
   APPCUES: 0,
   APPCUES_LOADED: 0,
   INTERCOM_LOADED: 0,
+  HELPSCOUT_BEACON: 0,
+  HELPSCOUT_BEACON_LOADED: 0,
 });
 
 const initialState = {
   appCues: { loaded: false },
   intercom: { loaded: false },
+  helpScoutBeacon: { loaded: false },
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +22,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         appCues: { loaded: action.loaded },
+      };
+
+    case actionTypes.HELPSCOUT_BEACON_LOADED:
+      return {
+        ...state,
+        helpScoutBeacon: { loaded: action.loaded },
       };
     case `intercom_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {

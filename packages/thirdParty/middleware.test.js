@@ -3,6 +3,7 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import { actionTypes } from './reducer';
 
 import middleware from './middleware';
+import { HELPSCOUT_ID } from './constants';
 
 global.FS = {
   identify: jest.fn(),
@@ -12,6 +13,8 @@ global.Appcues = {
   identify: jest.fn(),
   track: jest.fn(),
 };
+
+global.Beacon = jest.fn();
 
 global.Intercom = jest.fn();
 
@@ -24,6 +27,10 @@ const mockUser = {
   orgUserCount: 2,
   profileCount: 3,
   is_business_user: true,
+  helpScoutConfig: {
+    param1: true,
+    param2: 24
+  },
 };
 
 const mockIntercomUser = {
@@ -84,6 +91,10 @@ describe('middleware', () => {
       result: mockUser,
     });
     expect(store.dispatch).toHaveBeenCalledWith({
+      type: actionTypes.HELPSCOUT_BEACON,
+      result: mockUser,
+    });
+    expect(store.dispatch).toHaveBeenCalledWith({
       type: actionTypes.FULLSTORY,
       result: mockUser,
     });
@@ -119,6 +130,27 @@ describe('middleware', () => {
       orgUserCount: mockUser.orgUserCount,
       profileCount: mockUser.profileCount,
     });
+  });
+  it('marks HelpScout as loaded and identifies the user with HelpScout', () => {
+    const action = {
+      type: actionTypes.HELPSCOUT_BEACON,
+      result: mockUser,
+    };
+    middleware(store)(next)(action);
+    expect(store.dispatch).toHaveBeenCalledWith({
+      type: actionTypes.HELPSCOUT_BEACON_LOADED,
+      loaded: true,
+    });
+    // We call window.Beacon 3 times:
+    expect(global.Beacon.mock.calls.length).toBe(3);
+    // The first one to register us with the  ID
+    expect(global.Beacon.mock.calls[0]).toEqual(['init', HELPSCOUT_ID]);
+
+    // The second one to identify the user
+    expect(global.Beacon.mock.calls[1]).toEqual(['identify', { name: mockUser.name, email: mockUser.email } ]);
+
+    // The third one with the params obtained from the API
+    expect(global.Beacon.mock.calls[2]).toEqual(['config', mockUser.helpScoutConfig ]);
   });
   it('sends event to appcues when user adds a post in the composer', () => {
     const action = {
