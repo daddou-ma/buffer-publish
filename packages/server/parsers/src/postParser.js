@@ -1,4 +1,4 @@
-const { getDateString, isInThePast } = require('@bufferapp/publish-server/formatters/src')
+const { getDateString, isInThePast } = require('../../formatters/src')
 const { parseTwitterLinks, parseFacebookEntities } = require('./linkParsing')
 
 const getImageUrls = post => {
