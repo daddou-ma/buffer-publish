@@ -1,6 +1,6 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { profileParser } = require('@bufferapp/publish-parsers');
+const { profileParser } = require('./../../parsers/src');
 
 module.exports = method(
   'profiles',
