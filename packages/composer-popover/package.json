@@ -1,6 +1,6 @@
 {
   "name": "@bufferapp/publish-composer-popover",
-  "version": "1.15.2",
+  "version": "2.0.0",
   "description": "Composer wrapper package",
   "main": "index.js",
   "scripts": {
