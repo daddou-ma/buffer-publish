@@ -1,4 +1,4 @@
-import { getURL } from '@bufferapp/publish-formatters';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { refreshProfile } from '@bufferapp/publish-profile-sidebar/middleware';
 import { actions as notificationActions } from '@bufferapp/notifications';

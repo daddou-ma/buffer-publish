@@ -15,3 +15,4 @@ bundle.css
 vendor*.js
 vendor.css
 *.map
+*.vscode
