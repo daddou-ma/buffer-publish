@@ -1,7 +1,7 @@
-const { postParser } = require('@bufferapp/publish-parsers');
-const { buildPostMap } = require('@bufferapp/publish-formatters');
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
+const { postParser } = require('./../../parsers/src');
+const { buildPostMap } = require('./../../formatters/src');
 
 module.exports = method(
   'draftPosts',

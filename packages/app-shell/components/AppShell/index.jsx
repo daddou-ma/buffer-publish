@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getURL } from '@bufferapp/publish-formatters';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import { AppShell as BDSAppShell } from '@bufferapp/ui';
 import { Gear, Return, Plus } from '@bufferapp/ui/Icon';

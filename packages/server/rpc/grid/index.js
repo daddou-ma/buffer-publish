@@ -1,6 +1,6 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { buildPostMap } = require('@bufferapp/publish-formatters');
+const { buildPostMap } = require('./../../formatters/src');
 
 module.exports = method(
   'gridPosts',
