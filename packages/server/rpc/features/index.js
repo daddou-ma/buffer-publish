@@ -1,6 +1,6 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { featureParser } = require('./../../parsers/src/index');
+const { featureParser } = require('./../../parsers/src');
 
 module.exports = method(
   'features',
