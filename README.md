@@ -1,5 +1,4 @@
 <p align="middle"><h1 align="center"> Buffer Publish </h1></p>
-
 <p align="center" style="padding-top: -100px;">
   <a href="https://buffer.com/">
     <img src="https://rawgit.com/bufferapp/buffer-publish/master/logo.png" width="250" alt="Buffer Publish">
