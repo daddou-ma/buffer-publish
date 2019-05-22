@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import FeatureLoader from '@bufferapp/product-features';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button, Text } from '@bufferapp/components';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
 import {
@@ -187,6 +187,8 @@ const calendarBtns = ['Day', 'Week', 'Month'];
 
 const renderHeader = (
   { text, dayOfWeek, date, id },
+  features,
+  isBusinessAccount,
   onCalendarClick,
   showCalendarBtnGroup,
 ) => (
@@ -200,16 +202,14 @@ const renderHeader = (
         : <span style={headerTextDayOfWeekStyle}>{text}</span>
       }
     </div>
-    {showCalendarBtnGroup && (
-      <FeatureLoader supportedPlans={['pro', 'business']}>
-        <div style={{ marginLeft: 'auto' }}>
-          <QueueButtonGroup
-            buttons={calendarBtns}
-            onClick={type => onCalendarClick(type, `daily_view_type_buttons_click_${type}`)}
-          />
-        </div>
-      </FeatureLoader>
-    )}
+    {showCalendarBtnGroup && (!features.isFreeUser() || isBusinessAccount) &&
+      <div style={{ marginLeft: 'auto' }}>
+        <QueueButtonGroup
+          buttons={calendarBtns}
+          onClick={type => onCalendarClick(type, `daily_view_type_buttons_click_${type}`)}
+        />
+      </div>
+    }
   </div>
 );
 
@@ -239,6 +239,8 @@ const QueueItems = (props) => {
     items,
     onEmptySlotClick,
     onCalendarClick,
+    features,
+    isBusinessAccount,
     ...propsForPosts
   } = props;
   const itemList = items.map((item, index) => {
@@ -247,21 +249,19 @@ const QueueItems = (props) => {
       return renderPost({ post: rest, ...propsForPosts });
     }
     if (queueItemType === 'header') {
-      return renderHeader(rest, onCalendarClick, index === 0);
+      return renderHeader(rest, features, isBusinessAccount, onCalendarClick, index === 0);
     }
     if (queueItemType === 'slot') {
       return renderSlot(rest, onEmptySlotClick);
     }
-    if (queueItemType === 'showMorePosts') {
+    if (queueItemType === 'showMorePosts' && (!features.isFreeUser() || isBusinessAccount)) {
       return (
-        <FeatureLoader supportedPlans={['pro', 'business']}>
-          <div key={rest.id} style={calendarBtnWrapperStyle}>
-            <Text>Looking for your other posts?&nbsp;&nbsp;</Text>
-            <Button onClick={() => onCalendarClick('month', 'daily_view_show_more_view_calendar')}>
-            View Your Calendar
-            </Button>
-          </div>
-        </FeatureLoader>
+        <div key={rest.id} style={calendarBtnWrapperStyle}>
+          <Text>Looking for your other posts?&nbsp;&nbsp;</Text>
+          <Button onClick={() => onCalendarClick('month', 'daily_view_show_more_view_calendar')}>
+          View Your Calendar
+          </Button>
+        </div>
       );
     }
     return null;
@@ -306,4 +306,4 @@ QueueItems.defaultProps = {
   draggable: false,
 };
 
-export default QueueItems;
+export default WithFeatureLoader(QueueItems);
