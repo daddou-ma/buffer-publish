@@ -91,6 +91,7 @@ const QueuedPosts = ({
   isLockedProfile,
   isManager,
   hasFirstCommentFlip,
+  isBusinessAccount,
 }) => {
   if (loading) {
     return (
@@ -175,6 +176,7 @@ const QueuedPosts = ({
           onDropPost={onDropPost}
           draggable={draggingEnabled}
           hasFirstCommentFlip={hasFirstCommentFlip}
+          isBusinessAccount={isBusinessAccount}
         />
       </div>
     </ErrorBoundary>
