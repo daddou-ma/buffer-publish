@@ -55,12 +55,12 @@ module.exports = userData => ({
     celebrations: userData.email_notifications.includes('celebrations'),
   },
   canStartBusinessTrial: userData.can_start_business_trial,
-  shouldShowProTrialExpiredModal:
-    hasProTrialExpired(userData.feature_trials) &&
-    userData.plan === 'free' &&
-    !userData.has_cancelled,
-  shouldShowBusinessTrialExpiredModal:
-    isOnBusinessPlan(userData.trial_plan) && userData.trial_expired,
+  shouldShowProTrialExpiredModal: hasProTrialExpired(userData.feature_trials)
+    && userData.plan === 'free'
+    && !userData.has_cancelled,
+  shouldShowBusinessTrialExpiredModal: isOnBusinessPlan(userData.trial_plan)
+    && userData.trial_expired
+    && !userData.trial_done,
   trial: userData.on_awesome_trial
     ? {
         hasCardDetails: userData.has_card_details,
