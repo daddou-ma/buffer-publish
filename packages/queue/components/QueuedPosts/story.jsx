@@ -85,28 +85,6 @@ storiesOf('QueuedPosts', module)
       onDirectPostingClick={action('onDirectPostingClick')}
     />
   ))
-  .add('business account', () => (
-    <QueuedPosts
-      total={10}
-      loading={false}
-      postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
-      onDeleteConfirmClick={action('onDeleteConfirmClick')}
-      onEditClick={action('onEditClick')}
-      onShareNowClick={action('onShareNowClick')}
-      onRequeueClick={action('onRequeueClick')}
-      onUnpauseClick={action('onUnpauseClick')}
-      onCalendarBtnClick={action('onCalendarBtnClick')}
-      isManager
-      isBusinessAccount
-      onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
-      onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onDropPost={action('onDropPost')}
-      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
-      onDirectPostingClick={action('onDirectPostingClick')}
-    />
-  ))
   .add('loading', () => (
     <QueuedPosts
       total={0}
