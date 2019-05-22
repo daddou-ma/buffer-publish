@@ -61,6 +61,12 @@ module.exports = userData => ({
   shouldShowBusinessTrialExpiredModal: isOnBusinessPlan(userData.trial_plan)
     && userData.trial_expired
     && !userData.trial_done,
+  trialInfo: {
+    isOnBusinessPlan: isOnBusinessPlan(userData.trial_plan),
+    trial_expired: userData.trial_expired,
+    not_trial_done: !userData.trial_done,
+    trial_done_raw: userData.trial_done,
+  },
   trial: userData.on_awesome_trial
     ? {
         hasCardDetails: userData.has_card_details,
