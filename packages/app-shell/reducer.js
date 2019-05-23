@@ -23,6 +23,7 @@ export default (state = initialState, action) => {
         },
         showReturnToClassic: action.result.showReturnToClassic,
         showUpgradeToPro: action.result.is_free_user,
+        showManageTeam: !action.result.is_free_user,
       };
     default:
       return state;
