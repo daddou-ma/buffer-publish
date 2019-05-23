@@ -8,8 +8,8 @@ import {
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
+import Avatar from '@bufferapp/ui/Avatar';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
-import { ProfileBadge } from '@bufferapp/analyze-shared-components';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
@@ -149,11 +149,13 @@ const GridPosts = ({
         <div style={headerStyle}>
           <div style={profileHeaderStyle}>
             <div style={profileBadgeStyle}>
-              <ProfileBadge
-                avatarUrl={profile.avatar_https}
-                service={profile.service}
-                avatarSize={48}
-                socialIconSize={24}
+              <Avatar
+                src={profile.avatar_https}
+                fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
+                alt={profile.handle}
+                size="large"
+                type="social"
+                network={profile.service}
               />
             </div>
           </div>
