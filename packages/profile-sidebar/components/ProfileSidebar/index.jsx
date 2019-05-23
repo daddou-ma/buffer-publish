@@ -18,8 +18,7 @@ import ProfileSearch from '../ProfileSearch';
 const profileSidebarStyle = {
   display: 'flex',
   flexDirection: 'column',
-  minHeight: '100%',
-  maxHeight: '100%',
+  height: 'calc(100vh - 3.5rem)',
   padding: '1rem',
   boxSizing: 'border-box',
   background: offWhite,
