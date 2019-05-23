@@ -29,6 +29,12 @@ module.exports = {
     }
     return 'https://buffer.com/manage/own'
   },
+  getManageTeamURL: () => {
+    if (window.location.hostname === 'publish.local.buffer.com') {
+      return 'https://local.buffer.com/manage/team-members'
+    }
+    return 'https://buffer.com/manage/team-members'
+  },
   getInstagramDirectPostingURL: profileId => {
     if (window.location.hostname === 'publish.local.buffer.com') {
       return `https://local.buffer.com/instagram/setup?profile_id=${profileId}`
