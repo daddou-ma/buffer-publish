@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-
 import { AppShell as BDSAppShell } from '@bufferapp/ui';
-import { Gear, Return, Plus } from '@bufferapp/ui/Icon';
+import { Gear, Return, Plus, People } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
 
 const InvertedReturnIcon = () => (
@@ -56,6 +55,7 @@ function generateUserMenuItems({
   returnToClassic,
   upgradeToPro,
   openPreferences,
+  showManageTeam,
 }) {
   const userMenuItems = {
     top: [
@@ -66,6 +66,14 @@ function generateUserMenuItems({
         onItemClick: openPreferences,
       },
     ],
+    manageTeam: {
+      id: 'openTeam',
+      title: 'Users',
+      icon: <People color={gray} />,
+      onItemClick: () => {
+        window.location.assign(`${getURL.getManageTeamURL()}`);
+      },
+    },
     returnToClassic: {
       id: 'returnToClassic',
       title: 'Return to Classic',
@@ -81,6 +89,9 @@ function generateUserMenuItems({
     },
   };
   const extraItems = [];
+  if(showManageTeam) {
+    extraItems.push(userMenuItems.manageTeam);
+  }
   if (showReturnToClassic) {
     extraItems.push(userMenuItems.returnToClassic);
   }
@@ -95,6 +106,7 @@ const AppShell = ({
   user,
   showReturnToClassic,
   showUpgradeToPro,
+  showManageTeam,
   returnToClassic,
   upgradeToPro,
   openPreferences,
@@ -107,6 +119,7 @@ const AppShell = ({
       menuItems: generateUserMenuItems({
         showReturnToClassic,
         showUpgradeToPro,
+        showManageTeam,
         returnToClassic,
         upgradeToPro,
         openPreferences,
@@ -120,10 +133,10 @@ AppShell.propTypes = {
   children: PropTypes.node.isRequired,
   showReturnToClassic: PropTypes.bool,
   showUpgradeToPro: PropTypes.bool,
+  showManageTeam: PropTypes.bool,
   returnToClassic: PropTypes.func.isRequired,
   upgradeToPro: PropTypes.func.isRequired,
   openPreferences: PropTypes.func.isRequired,
-
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
@@ -139,6 +152,7 @@ AppShell.defaultProps = {
   },
   showReturnToClassic: false,
   showUpgradeToPro: false,
+  showManageTeam: false,
 };
 
 export default AppShell;
