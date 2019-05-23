@@ -68,7 +68,7 @@ function generateUserMenuItems({
     ],
     manageTeam: {
       id: 'openTeam',
-      title: 'Users',
+      title: 'Team',
       icon: <People color={gray} />,
       onItemClick: () => {
         window.location.assign(`${getURL.getManageTeamURL()}`);
