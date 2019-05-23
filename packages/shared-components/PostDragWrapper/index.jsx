@@ -16,6 +16,7 @@ const postSource = {
       postProps: props.postProps,
       width: component.containerNode.offsetWidth,
       onDropPost: props.postProps.onDropPost,
+      onSwapPost: props.postProps.onSwapPost,
       profileId: props.profileId,
       basic: props.basic,
     };
@@ -23,22 +24,10 @@ const postSource = {
 };
 
 const postTarget = {
-  /*
-  drop(props) {
-    props.onDropPost({ commit: true });
-  },
-   */
-
   drop(props, monitor) {
-    const { postProps: { id: postId }, onDropPost } = monitor.getItem();
-    // onDropPost(postId, props.timestamp, props.day);
-  },
-
-  hover(props, monitor, component) {
-    if (!component) {
-      return null;
-    }
-    // console.log('dragging post', sourceProps, targetProps);
+    const { onSwapPost } = monitor.getItem();
+    // postSource, postTarget
+    onSwapPost(monitor.getItem(), props);
   },
 };
 
@@ -77,31 +66,22 @@ class PostDragWrapper extends Component {
    * These styles ensure we don't show the focus ring when using
    * the mouse for drag and drop.
    */
-  getStyle(isHovering, focus) {
+  getStyle(isHovering, focus, isDragging) {
     const transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
     // const hideOutline = this.state.isHovering || this.props.isDragging ? { outline: 'none' } : {};
     const hideOutline = { outline: 'none' };
 
-    return {
-      background: getBgStyle(isHovering, focus),
-      cursor: 'pointer',
-      border: isHovering ? '1px solid #B8B8B8' : '1px solid transparent',
-      fontFamily: 'Roboto',
-      fontStyle: 'normal',
-      fontWeight: '500',
-      lineHeight: 'normal',
-      fontSize: '14px',
-      color: focus ? '#3D3D3D' : '#636363',
-      display: 'flex',
-      justifyContent: 'center',
-      marginBottom: '8px',
-      boxShadow: focus ? '0 0 0 3px #ABB7FF' : 'none',
-      position: 'relative',
-      borderRadius: '4px',
-      transition,
-      ...hideOutline,
-    };
-    // return { borderRadius: '4px', transition, ...hideOutline };
+    if (!isHovering && !isDragging) {
+      return {
+        background: getBgStyle(isHovering, focus),
+        boxShadow: focus ? '0 0 0 3px #ABB7FF' : 'none',
+        position: 'relative',
+        borderRadius: '4px',
+        transition,
+        ...hideOutline,
+      };
+    }
+    return { borderRadius: '4px', transition, ...hideOutline };
   }
 
   render() {
@@ -127,7 +107,7 @@ class PostDragWrapper extends Component {
         }}
         draggable
         tabIndex={0}
-        style={this.getStyle(isHovering, isOver)}
+        style={this.getStyle(isHovering, isOver, isDragging)}
       >
         <PostComponent
           {...postProps}

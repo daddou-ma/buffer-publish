@@ -74,6 +74,7 @@ const postTypeComponentMap = new Map([
 
 const renderPost = ({
   post,
+  index,
   subprofiles,
   onCancelConfirmClick,
   onRequeueClick,
@@ -86,12 +87,14 @@ const renderPost = ({
   onImageClickPrev,
   onImageClose,
   onDropPost,
+  onSwapPost,
   draggable,
   hasFirstCommentFlip,
 }) => {
   const postWithEventHandlers = {
     ...post,
     key: post.id,
+    index,
     postDetails: post.postDetails,
     subprofiles,
     onCancelConfirmClick: () => onCancelConfirmClick({ post }),
@@ -105,6 +108,7 @@ const renderPost = ({
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
     onDropPost,
+    onSwapPost,
     hasFirstCommentFlip,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
@@ -141,7 +145,7 @@ const renderPost = ({
             >
               <PostDragWrapper
                 id={post.id}
-                index={post.index}
+                index={index}
                 postComponent={PostComponent}
                 postProps={postWithEventHandlers}
                 basic
@@ -151,7 +155,7 @@ const renderPost = ({
         >
           <PostDragWrapper
             id={post.id}
-            index={post.index}
+            index={index}
             postComponent={PostComponent}
             postProps={postWithEventHandlers}
           />
@@ -246,7 +250,7 @@ const QueueItems = (props) => {
   const itemList = items.map((item, index) => {
     const { queueItemType, ...rest } = item;
     if (queueItemType === 'post') {
-      return renderPost({ post: rest, ...propsForPosts });
+      return renderPost({ post: rest, index, ...propsForPosts });
     }
     if (queueItemType === 'header') {
       return renderHeader(rest, features, isBusinessAccount, onCalendarClick, index === 0);
@@ -297,6 +301,7 @@ QueueItems.propTypes = {
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
+  onSwapPost: PropTypes.func,
   draggable: PropTypes.bool,
 };
 

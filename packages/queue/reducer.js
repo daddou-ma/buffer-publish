@@ -22,6 +22,7 @@ export const actionTypes = keyWrapper('QUEUE', {
   HIDE_COMPOSER: 0,
   POST_COUNT_UPDATED: 0,
   POST_DROPPED: 0,
+  POSTS_SWAPPED: 0,
   REORDERED_UPDATES: 0,
   POST_REQUEUE: 0,
 });
@@ -191,6 +192,43 @@ const postReducer = (state, action) => {
         postDetails: { ...state.postDetails, isCustomScheduled: true, postAction },
       };
     }
+    case actionTypes.POSTS_SWAPPED: {
+      const { id: targetId, postProps: postPropsTarget } = action.postTarget;
+      const { postProps: postPropsSource } = action.postSource;
+      const isTargetPost = state.id === targetId;
+      let newPost = {};
+      let isCustomScheduled;
+
+      if (isTargetPost) {
+        isCustomScheduled = postPropsSource.postDetails.isCustomScheduled;
+        newPost = {
+          profile_timezone: state.profileTimezone,
+          due_at: postPropsSource.due_at,
+          scheduled_at: postPropsSource.scheduled_at,
+          scheduledAt: postPropsSource.scheduledAt,
+          day: postPropsSource.day,
+          pinned: postPropsSource.pinned,
+        };
+      } else {
+        isCustomScheduled = postPropsTarget.postDetails.isCustomScheduled;
+        newPost = {
+          profile_timezone: state.profileTimezone,
+          due_at: postPropsTarget.due_at,
+          scheduled_at: postPropsTarget.scheduled_at,
+          scheduledAt: postPropsTarget.scheduledAt,
+          day: postPropsTarget.day,
+          pinned: postPropsTarget.pinned,
+        };
+      }
+      // Generate new `postAction` text...
+      const { postDetails: { postAction } } = postParser(newPost);
+
+      return {
+        ...state,
+        ...newPost,
+        postDetails: { ...state.postDetails, isCustomScheduled, postAction },
+      };
+    }
     default:
       return state;
   }
@@ -228,6 +266,12 @@ const postsReducer = (state = {}, action) => {
       return {
         ...state,
         [getPostUpdateId(action)]: postReducer(state[getPostUpdateId(action)], action),
+      };
+    case actionTypes.POSTS_SWAPPED:
+      return {
+        ...state,
+        [action.postSource.id]: postReducer(state[action.postSource.id], action),
+        [action.postTarget.id]: postReducer(state[action.postTarget.id], action),
       };
     default:
       return state;
@@ -289,6 +333,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.POST_SENT:
     case draftActionTypes.DRAFT_APPROVED:
     case actionTypes.POST_DROPPED:
+    case actionTypes.POSTS_SWAPPED:
       return {
         ...state,
         posts: postsReducer(state.posts, action),
@@ -303,6 +348,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.REORDERED_UPDATES:
     case actionTypes.POST_DROPPED:
+    case actionTypes.POSTS_SWAPPED:
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case profileSidebarActionTypes.SELECT_PROFILE:
     case `queuedPosts_${dataFetchActionTypes.FETCH_START}`:
@@ -466,5 +512,11 @@ export const actions = {
     profileId,
     day,
     timestamp,
+  }),
+  onSwapPost: (postSource, postTarget, profileId) => ({
+    type: actionTypes.POSTS_SWAPPED,
+    postSource,
+    postTarget,
+    profileId,
   }),
 };

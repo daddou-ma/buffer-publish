@@ -27,6 +27,7 @@ const renderPostList = ({
   onImageClickPrev,
   onImageClose,
   onDropPost,
+  onSwapPost,
   onShareAgainClick,
   onMobileClick,
   isSent,
@@ -51,6 +52,7 @@ const renderPostList = ({
       onImageClickPrev={onImageClickPrev}
       onImageClose={onImageClose}
       onDropPost={onDropPost}
+      onSwapPost={onSwapPost}
       onShareAgainClick={onShareAgainClick}
       onMobileClick={onMobileClick}
       isSent={isSent}
@@ -76,6 +78,7 @@ const PostLists = ({
   onImageClickPrev,
   onImageClose,
   onDropPost,
+  onSwapPost,
   onShareAgainClick,
   onMobileClick,
   isSent,
@@ -100,6 +103,7 @@ const PostLists = ({
         onImageClickPrev,
         onImageClose,
         onDropPost,
+        onSwapPost,
         onShareAgainClick,
         onMobileClick,
         isSent,
@@ -134,6 +138,7 @@ PostLists.propTypes = {
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
+  onSwapPost: PropTypes.func,
   onShareAgainClick: PropTypes.func,
   onMobileClick: PropTypes.func,
   isSent: PropTypes.bool,

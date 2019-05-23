@@ -77,6 +77,7 @@ const QueuedPosts = ({
   onImageClickPrev,
   onImageClose,
   onDropPost,
+  onSwapPost,
   showComposer,
   editMode,
   paused,
@@ -174,6 +175,7 @@ const QueuedPosts = ({
           onImageClickPrev={onImageClickPrev}
           onImageClose={onImageClose}
           onDropPost={onDropPost}
+          onSwapPost={onSwapPost}
           draggable={draggingEnabled}
           hasFirstCommentFlip={hasFirstCommentFlip}
           isBusinessAccount={isBusinessAccount}
@@ -213,6 +215,7 @@ QueuedPosts.propTypes = {
   onImageClickPrev: PropTypes.func.isRequired,
   onImageClose: PropTypes.func.isRequired,
   onDropPost: PropTypes.func.isRequired,
+  onSwapPost: PropTypes.func.isRequired,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
   paused: PropTypes.bool,
