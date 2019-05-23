@@ -89,7 +89,7 @@ function generateUserMenuItems({
     },
   };
   const extraItems = [];
-  if(showManageTeam) {
+  if (showManageTeam) {
     extraItems.push(userMenuItems.manageTeam);
   }
   if (showReturnToClassic) {

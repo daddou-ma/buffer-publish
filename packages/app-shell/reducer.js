@@ -19,7 +19,6 @@ export default (state = initialState, action) => {
         user: {
           email: action.result.email,
           name: action.result.name,
-          id: action.result.id,
           // We don't pass an `avatar` so it will try to get their Gravatar
         },
         showReturnToClassic: action.result.showReturnToClassic,
