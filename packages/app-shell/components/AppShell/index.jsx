@@ -89,8 +89,9 @@ function generateUserMenuItems({
     },
   };
   const extraItems = [];
+  const orgItems = [];
   if (showManageTeam) {
-    extraItems.push(userMenuItems.manageTeam);
+    orgItems.push(userMenuItems.manageTeam);
   }
   if (showReturnToClassic) {
     extraItems.push(userMenuItems.returnToClassic);
@@ -98,7 +99,7 @@ function generateUserMenuItems({
   if (showUpgradeToPro) {
     extraItems.push(userMenuItems.upgradeToPro);
   }
-  return [...userMenuItems.top, ...extraItems];
+  return [...orgItems, ...userMenuItems.top, ...extraItems];
 }
 
 const AppShell = ({
