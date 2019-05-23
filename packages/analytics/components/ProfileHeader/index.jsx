@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/components';
-import { ProfileBadge } from '@bufferapp/analyze-shared-components';
+import Avatar from '@bufferapp/ui/Avatar';
 
 const profileHeaderStyle = {
   display: 'flex',
@@ -10,6 +10,7 @@ const profileHeaderStyle = {
 
 const profileBadgeStyle = {
   padding: '0 0.25rem',
+  marginRight: '0.7rem',
 };
 
 const ProfileHeader = ({ profile }) => {
@@ -18,11 +19,13 @@ const ProfileHeader = ({ profile }) => {
   return (
     <div style={profileHeaderStyle}>
       <div style={profileBadgeStyle}>
-        <ProfileBadge
-          avatarUrl={profile.avatarUrl}
-          service={profile.service}
-          avatarSize={30}
-          socialIconSize={15}
+        <Avatar
+          src={profile.avatar_https}
+          fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
+          alt={profile.handle}
+          size="small"
+          type="social"
+          network={profile.service}
         />
       </div>
       <Text color="outerSpace" size="small">{profile.username}</Text>

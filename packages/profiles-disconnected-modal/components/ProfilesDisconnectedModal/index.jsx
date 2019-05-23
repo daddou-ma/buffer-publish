@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Popover, Card, Text, Button } from '@bufferapp/components';
-
-import ProfileBadge from '@bufferapp/publish-profile-sidebar/components/ProfileBadge';
+import Avatar from '@bufferapp/ui/Avatar';
 
 const ProfilesDisconnectedModal = ({
   translations,
@@ -37,7 +36,14 @@ const ProfilesDisconnectedModal = ({
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <ProfileBadge avatarUrl={p.avatar_https} type={p.service} />
+                <Avatar
+                  src={p.avatar_https}
+                  fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
+                  alt={p.handle}
+                  size="small"
+                  type="social"
+                  network={p.service}
+                />
                 <div style={{ marginLeft: '16px' }}>
                   <Text weight="medium">{p.formatted_username}</Text>
                 </div>
