@@ -99,7 +99,7 @@ class PostDragWrapper extends Component {
     return (
       <div style={swapWrapperStyle}>
         <RefreshIcon size={{ width: '36px' }} color="#ABB7FF" />
-        <div style={{ color: '#ABB7FF', fontSize: '13px' }}>Swap posts</div>
+        {/* <div style={{ color: '#ABB7FF', fontSize: '13px' }}>Swap posts</div> */}
       </div>
     );
   }
