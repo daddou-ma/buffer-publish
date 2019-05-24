@@ -3,8 +3,7 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
 import { DragSource, DropTarget } from 'react-dnd';
-import { ArrowUp, ArrowDown } from '@bufferapp/ui/Icon';
-import { RefreshIcon, ArrowLongUpIcon, ArrowLongDownIcon } from '@bufferapp/components';
+import { RefreshIcon } from '@bufferapp/components';
 
 const swapWrapperStyle = {
   display: 'flex',
@@ -14,10 +13,6 @@ const swapWrapperStyle = {
   justifyContent: 'center',
   width: '100%',
   height: '100%',
-};
-
-const swapIcon = {
-  transform: 'rotate(-90deg)',
 };
 
 const postSource = {
@@ -101,20 +96,9 @@ class PostDragWrapper extends Component {
   }
 
   renderSwapIcon() {
-    const old = (
-      <div style={swapWrapperStyle}>
-        <ArrowUp size="large" />
-        <ArrowDown size="large" />
-
-        <ArrowLongUpIcon size={{ width: '32px' }} color="#ABB7FF" />
-        <ArrowLongDownIcon size={{ width: '32px' }} color="#ABB7FF" />
-      </div>
-    );
     return (
       <div style={swapWrapperStyle}>
-        <div>
-          <RefreshIcon size={{ width: '36px' }} color="#ABB7FF" />
-        </div>
+        <RefreshIcon size={{ width: '36px' }} color="#ABB7FF" />
         <div style={{ color: '#ABB7FF', fontSize: '13px' }}>Swap posts</div>
       </div>
     );
@@ -146,7 +130,6 @@ class PostDragWrapper extends Component {
         style={this.getStyle(isHovering, isOver, isDragging)}
       >
         {(!isHovering && !isDragging && isOver) && this.renderSwapIcon()}
-        {/* this.renderSwapIcon() */}
         <PostComponent
           {...postProps}
           draggable={!postProps.postDetails.error}
