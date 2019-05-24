@@ -62,6 +62,7 @@ describe('Queue', () => {
           onEditClick={jest.fn()}
           onRequeueClick={jest.fn()}
           onShareNowClick={jest.fn()}
+          onSwapPosts={jest.fn()}
         />
       </Provider>,
     );

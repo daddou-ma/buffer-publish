@@ -37,7 +37,7 @@ const postSource = {
 const postTarget = {
   drop(props, monitor) {
     const { onSwapPosts } = monitor.getItem();
-    // postSource, postTarget
+    /* postSource, postTarget */
     onSwapPosts(monitor.getItem(), props);
   },
 };
@@ -79,7 +79,6 @@ class PostDragWrapper extends Component {
    */
   getStyle(isHovering, focus, isDragging) {
     const transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-    // const hideOutline = this.state.isHovering || this.props.isDragging ? { outline: 'none' } : {};
     const hideOutline = { outline: 'none' };
 
     if (!isHovering && !isDragging) {
@@ -99,7 +98,6 @@ class PostDragWrapper extends Component {
     return (
       <div style={swapWrapperStyle}>
         <RefreshIcon size={{ width: '36px' }} color="#ABB7FF" />
-        {/* <div style={{ color: '#ABB7FF', fontSize: '13px' }}>Swap posts</div> */}
       </div>
     );
   }
