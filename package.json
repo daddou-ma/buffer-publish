@@ -16,7 +16,7 @@
     "watch": "webpack-dev-server --config ./packages/server/webpack.config.dev.js --colors --display-error-details --progress",
     "build": "webpack --config ./packages/server/webpack.config.prod.js --output-path=`pwd`",
     "bugsnag:release": "node ./packages/server/scripts/bugsnag-release.js",
-    "rebuild-grpc": "docker exec -it bufferdev_publish_1 sh -c 'cd /usr/src/app && npm rebuild grpc --target_arch=x64 --target_platform=linux --target_libc=glibc --update-binary --verbose'"
+    "rebuild-grpc": "docker exec -it bufferdev_publish_1 sh -c 'cd /usr/src/app && npm rebuild grpc --target_arch=x64 --target_platform=linux --target_libc=musl --update-binary --verbose'"
   },
   "repository": {
     "type": "git",
