@@ -27,7 +27,7 @@ const postSource = {
       postProps: props.postProps,
       width: component.containerNode.offsetWidth,
       onDropPost: props.postProps.onDropPost,
-      onSwapPost: props.postProps.onSwapPost,
+      onSwapPosts: props.postProps.onSwapPosts,
       profileId: props.profileId,
       basic: props.basic,
     };
@@ -36,9 +36,9 @@ const postSource = {
 
 const postTarget = {
   drop(props, monitor) {
-    const { onSwapPost } = monitor.getItem();
+    const { onSwapPosts } = monitor.getItem();
     // postSource, postTarget
-    onSwapPost(monitor.getItem(), props);
+    onSwapPosts(monitor.getItem(), props);
   },
 };
 

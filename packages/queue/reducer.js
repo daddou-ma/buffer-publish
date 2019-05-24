@@ -511,7 +511,7 @@ export const actions = {
     day,
     timestamp,
   }),
-  onSwapPost: (postSource, postTarget, profileId) => ({
+  onSwapPosts: (postSource, postTarget, profileId) => ({
     type: actionTypes.POSTS_SWAPPED,
     postSource,
     postTarget,

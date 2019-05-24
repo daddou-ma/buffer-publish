@@ -46,7 +46,7 @@ storiesOf('QueueItems', module)
       onImageClickPrev={action('onImageClickPrev')}
       onImageClose={action('onImageClose')}
       onDropPost={action('onDropPost')}
-      onSwapPost={action('onSwapPost')}
+      onSwapPosts={action('onSwapPosts')}
       draggable={false}
     />
   ))
@@ -64,7 +64,7 @@ storiesOf('QueueItems', module)
       onImageClickPrev={action('onImageClickPrev')}
       onImageClose={action('onImageClose')}
       onDropPost={action('onDropPost')}
-      onSwapPost={action('onSwapPost')}
+      onSwapPosts={action('onSwapPosts')}
       draggable={false}
       type={'drafts'}
     />

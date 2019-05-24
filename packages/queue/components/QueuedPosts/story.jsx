@@ -81,7 +81,7 @@ storiesOf('QueuedPosts', module)
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onSwapPost={action('onSwapPost')}
+      onSwapPosts={action('onSwapPosts')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
     />
@@ -103,7 +103,7 @@ storiesOf('QueuedPosts', module)
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onSwapPost={action('onSwapPost')}
+      onSwapPosts={action('onSwapPosts')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
     />
@@ -125,7 +125,7 @@ storiesOf('QueuedPosts', module)
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onSwapPost={action('onSwapPost')}
+      onSwapPosts={action('onSwapPosts')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
@@ -147,7 +147,7 @@ storiesOf('QueuedPosts', module)
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onSwapPost={action('onSwapPost')}
+      onSwapPosts={action('onSwapPosts')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
@@ -171,7 +171,7 @@ storiesOf('QueuedPosts', module)
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-      onSwapPost={action('onSwapPost')}
+        onSwapPosts={action('onSwapPosts')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}

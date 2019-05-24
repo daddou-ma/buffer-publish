@@ -130,8 +130,8 @@ export default connect(
     onDropPost: (id, timestamp, day) => {
       dispatch(actions.onDropPost(id, timestamp, day, ownProps.profileId));
     },
-    onSwapPost: (postSource, postTarget) => {
-      dispatch(actions.onSwapPost(postSource, postTarget, ownProps.profileId));
+    onSwapPosts: (postSource, postTarget) => {
+      dispatch(actions.onSwapPosts(postSource, postTarget, ownProps.profileId));
     },
     onUnpauseClick: () => {
       dispatch(profileSidebarActions.onUnpauseClick({ profileId: ownProps.profileId }));

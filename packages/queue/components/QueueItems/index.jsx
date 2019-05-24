@@ -87,7 +87,7 @@ const renderPost = ({
   onImageClickPrev,
   onImageClose,
   onDropPost,
-  onSwapPost,
+  onSwapPosts,
   draggable,
   hasFirstCommentFlip,
 }) => {
@@ -108,7 +108,7 @@ const renderPost = ({
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
     onDropPost,
-    onSwapPost,
+    onSwapPosts,
     hasFirstCommentFlip,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
@@ -301,7 +301,7 @@ QueueItems.propTypes = {
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
-  onSwapPost: PropTypes.func,
+  onSwapPosts: PropTypes.func,
   draggable: PropTypes.bool,
 };
 
