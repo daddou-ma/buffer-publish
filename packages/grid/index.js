@@ -32,7 +32,7 @@ export default connect(
         profile,
         isBusinessAccount: profile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        generatedUrl: currentProfile.shortUrl,
+        publicGridUrl: `https://shopgr.id/${profile.serviceUsername}`,
       };
     }
     return {};

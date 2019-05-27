@@ -32,7 +32,7 @@ const store = storeFake({
   },
   upgradeModal: {},
   stripe: {},
-  generatedUrl: 'https://buff.ly/2UYXSK5',
+  publicGridUrl: 'https://shopgr.id/my-brand',
   profile,
   productFeatures: {
     planName: 'business',
@@ -64,7 +64,7 @@ storiesOf('GridPosts', module)
       onImageClose={action('onImageClose')}
       onChangePostUrl={action('onChangePostUrl')}
       onSavePostUrl={action('onSavePostUrl')}
-      generatedUrl="https://buff.ly/2UYXSK5"
+      publicGridUrl="https://shopgr.id/my-brand"
       features={features}
     />
   ));
