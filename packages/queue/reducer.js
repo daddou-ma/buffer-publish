@@ -207,6 +207,7 @@ const postReducer = (state, action) => {
           scheduled_at: postPropsSource.scheduled_at,
           scheduledAt: postPropsSource.scheduledAt,
           day: postPropsSource.day,
+          pinned: postPropsSource.pinned,
         };
       } else {
         isCustomScheduled = postPropsTarget.postDetails.isCustomScheduled;
@@ -216,6 +217,7 @@ const postReducer = (state, action) => {
           scheduled_at: postPropsTarget.scheduled_at,
           scheduledAt: postPropsTarget.scheduledAt,
           day: postPropsTarget.day,
+          pinned: postPropsTarget.pinned,
         };
       }
       // Generate new `postAction` text...
