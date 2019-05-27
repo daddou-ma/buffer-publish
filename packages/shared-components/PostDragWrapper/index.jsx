@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
 import { DragSource, DropTarget } from 'react-dnd';
-import { RefreshIcon } from '@bufferapp/components';
+import SwapIcon from '@bufferapp/ui/Icon/Icons/Swap';
 
 const swapWrapperStyle = {
   display: 'flex',
@@ -13,6 +13,22 @@ const swapWrapperStyle = {
   justifyContent: 'center',
   width: '100%',
   height: '100%',
+};
+
+const swapIconStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '10px 19px',
+  background: '#2C4BFF',
+  borderRadius: '24px',
+  color: '#FFFFFF',
+};
+
+const swapTextStyle = {
+  marginLeft: '8px',
+  fontSize: '14px',
+  fontWeight: 'bold',
 };
 
 const postSource = {
@@ -84,7 +100,8 @@ class PostDragWrapper extends Component {
     if (!isHovering && !isDragging) {
       return {
         background: getBgStyle(isHovering, focus),
-        boxShadow: focus ? '0 0 0 3px #ABB7FF' : 'none',
+        boxShadow: focus ? '0 0 2px 2px #ABB7FF' : 'none',
+        border: focus ? '1px solid #2C4BFF' : 'none',
         position: 'relative',
         borderRadius: '4px',
         transition,
@@ -97,7 +114,10 @@ class PostDragWrapper extends Component {
   renderSwapIcon() {
     return (
       <div style={swapWrapperStyle}>
-        <RefreshIcon size={{ width: '36px' }} color="#ABB7FF" />
+        <div style={swapIconStyle}>
+          <SwapIcon size="medium" color="#FFFFFF" />
+          <span style={swapTextStyle}>Swap Posts</span>
+        </div>
       </div>
     );
   }
