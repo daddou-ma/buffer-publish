@@ -1,6 +1,5 @@
 {
   "success": {
-    "connection": "{{__variable__}}",
     "example-with-variable": "This is an example with this {{__variable__}} value",
     "bitly-connect": "Great, your bitly account has been linked with the profile {{__variable__}}",
     "bitly-disconnect": "Okay, your bitly account has been disconnected."

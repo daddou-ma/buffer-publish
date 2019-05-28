@@ -18,12 +18,11 @@ import ProfileSearch from '../ProfileSearch';
 const profileSidebarStyle = {
   display: 'flex',
   flexDirection: 'column',
-  minHeight: '100%',
-  maxHeight: '100%',
   padding: '1rem',
   boxSizing: 'border-box',
   background: offWhite,
   borderRight: `${borderWidth} solid ${mystic}`,
+  height: '100%',
 };
 
 const productTitleStyle = {
@@ -32,7 +31,7 @@ const productTitleStyle = {
 };
 
 const profileListStyle = {
-  flexGrow: 1,
+  flex: 1,
   overflowY: 'scroll',
 };
 

@@ -31,6 +31,7 @@ const contentStyle = {
   flexDirection: 'column',
   width: '100vw',
   background: '#fff',
+  height: '100%',
 };
 
 // Can't use stateless function for App since then

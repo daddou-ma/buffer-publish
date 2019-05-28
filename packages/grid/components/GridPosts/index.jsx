@@ -92,9 +92,9 @@ const onCopyToClipboard = (text, handleCopyToClipboard) => {
   }
 };
 
-const onPreviewClick = (generatedUrl) => {
+const onPreviewClick = (publicGridUrl) => {
   trackAction({ location: 'grid', action: 'click_preview_url' });
-  openPreviewPage(generatedUrl);
+  openPreviewPage(publicGridUrl);
 };
 
 const GridPosts = ({
@@ -110,7 +110,7 @@ const GridPosts = ({
   isBusinessAccount,
   profile,
   handleCopyToClipboard,
-  generatedUrl,
+  publicGridUrl,
   features,
 }) => {
   if (loading) {
@@ -165,12 +165,12 @@ const GridPosts = ({
                 style={copyLinkButtonStyle}
                 onClick={() => {
                   onCopyToClipboard(
-                    generatedUrl,
+                    publicGridUrl,
                     handleCopyToClipboard,
                   );
                 }}
               >
-                {generatedUrl}
+                {publicGridUrl}
                 <div style={copyLinkStyle}>
                   <div style={{ display: 'inline-block', position: 'relative', top: '0px', left: '5px' }}>
                     <IconArrowPopover
@@ -191,7 +191,7 @@ const GridPosts = ({
               label={'Preview Page'}
               type="secondary"
               onClick={() => {
-                onPreviewClick(generatedUrl);
+                onPreviewClick(publicGridUrl);
               }}
             />
           </div>
@@ -230,7 +230,7 @@ GridPosts.propTypes = {
   features: PropTypes.object.isRequired, // eslint-disable-line
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
-  generatedUrl: PropTypes.string,
+  publicGridUrl: PropTypes.string,
   isLockedProfile: PropTypes.bool,
   profile: PropTypes.shape({
     service: PropTypes.string,
@@ -243,7 +243,7 @@ GridPosts.defaultProps = {
   loading: true,
   total: 0,
   gridPosts: [],
-  generatedUrl: '',
+  publicGridUrl: '',
   isManager: false,
   isBusinessAccount: false,
   isLockedProfile: false,

@@ -27,10 +27,7 @@ const mockUser = {
   orgUserCount: 2,
   profileCount: 3,
   is_business_user: true,
-  helpScoutConfig: {
-    param1: true,
-    param2: 24
-  },
+  helpScoutConfig: '{ "param1": true, "param2": 24 }',
 };
 
 const mockIntercomUser = {
@@ -150,7 +147,7 @@ describe('middleware', () => {
     expect(global.Beacon.mock.calls[1]).toEqual(['identify', { name: mockUser.name, email: mockUser.email } ]);
 
     // The third one with the params obtained from the API
-    expect(global.Beacon.mock.calls[2]).toEqual(['config', mockUser.helpScoutConfig ]);
+    expect(global.Beacon.mock.calls[2]).toEqual(['config', JSON.parse(mockUser.helpScoutConfig) ]);
   });
   it('sends event to appcues when user adds a post in the composer', () => {
     const action = {

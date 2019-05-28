@@ -8,7 +8,11 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 export const initialState = {
   showReturnToClassic: false,
   showUpgradeToPro: false,
-  user: {},
+  user: {
+    name: '...',
+    email: null,
+    avatar: null,
+  },
 };
 
 export default (state = initialState, action) => {
@@ -23,6 +27,7 @@ export default (state = initialState, action) => {
         },
         showReturnToClassic: action.result.showReturnToClassic,
         showUpgradeToPro: action.result.is_free_user,
+        showManageTeam: !action.result.is_free_user,
       };
     default:
       return state;

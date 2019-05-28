@@ -67,9 +67,12 @@ export default ({ dispatch, getState }) => next => (action) => {
       const isOnBusinessTrial = planName === 'business' && trial.onTrial;
       const hasNotReadNewFirstCommentMessage = readMessages && !readMessages.includes(igFcMsg);
       if (isOnBusinessTrial && hasNotReadWelcomeMessage && profileCount > 0) {
-        dispatch(actions.showWelcomeB4BTrialModal());
-        // Mark modal as seen
-        dispatch(dataFetchActions.fetch({ name: 'readMessage', args: { message } }));
+        /**
+         * TEMP - Hiding B4B Trial Modal from showing to clean up trial start experience
+         */
+        // dispatch(actions.showWelcomeB4BTrialModal());
+        // // Mark modal as seen
+        // dispatch(dataFetchActions.fetch({ name: 'readMessage', args: { message } }));
         // if user is free, subscription hasn't been cancelled, hasExpiredProTrial
       } else if (shouldShowProTrialExpiredModal) {
         dispatch(actions.showUpgradeModal({ source: 'pro_trial_expired' }));
@@ -82,9 +85,10 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       break;
     }
-    case profileActionTypes.SELECT_PROFILE:
-      if (shouldShowInstagramDirectPostingModal()) {
-        const profileId = getState().profileSidebar.selectedProfileId;
+    case profileActionTypes.SELECT_PROFILE: {
+      const profileId = getState().profileSidebar.selectedProfileId;
+      const isIGBusiness = getState().profileSidebar.selectedProfile.service_type === 'business';
+      if (shouldShowInstagramDirectPostingModal() && !isIGBusiness) {
         dispatch(dataFetchActions.fetch({
           name: 'checkInstagramBusiness',
           args: {
@@ -97,6 +101,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         resetShowModalKey();
       }
       break;
+    }
     case 'COMPOSER_EVENT':
       if (action.eventType === 'show-upgrade-modal') {
         dispatch(actions.showUpgradeModal({ source: 'queue_limit' }));

@@ -105,7 +105,7 @@ export default ({ dispatch, getState }) => next => (action) => {
           email, // current user's email
         });
         // Pass config parameters from the user object in the API.
-        window.Beacon('config', helpScoutConfig);
+        window.Beacon('config', JSON.parse(helpScoutConfig));
         dispatch({
           type: actionTypes.HELPSCOUT_BEACON_LOADED,
           loaded: true,

@@ -11,6 +11,7 @@ export default connect(
     user: state.appShell.user,
     showReturnToClassic: state.appShell.showReturnToClassic,
     showUpgradeToPro: state.appShell.showUpgradeToPro,
+    showManageTeam: state.appShell.showManageTeam,
   }),
   dispatch => ({
     openPreferences() {

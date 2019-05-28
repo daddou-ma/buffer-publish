@@ -3,24 +3,27 @@ import PropTypes from 'prop-types';
 import {
   Popover,
   Card,
-  Text,
   Link,
-  Divider,
-  Button,
 } from '@bufferapp/components';
 
+import { Text, Button } from '@bufferapp/ui';
+
 const cardContentStyle = {
-  maxWidth: '664px',
+  maxWidth: '470px',
   textAlign: 'left',
-  margin: '16px',
+  margin: '28px',
 };
 
 const textWrapperStyle = {
-  paddingTop: '16px',
 };
 
 const buttonWrapperStyle = {
-  textAlign: 'right',
+  display: 'flex',
+  marginTop: '16px',
+  paddingTop: '16px',
+  borderTop: '1px solid #eee',
+  justifyContent: 'space-between',
+  width: '100%',
 };
 
 const InstagramDirectPostingModal = ({
@@ -32,19 +35,19 @@ const InstagramDirectPostingModal = ({
   profileId,
 }) => (<div>
   <Popover>
-    <Card noPadding>
+    <Card noPadding noBorder>
       <div style={cardContentStyle}>
-        <Text weight="medium" color="black">
+        <Text type="h3">
           {translations.headline}
         </Text>
         <div style={textWrapperStyle}>
-          <Text size="mini">
+          <Text type="p">
             {translations.description}
           </Text>
         </div>
         {!isBusinessOnInstagram &&
           <div style={textWrapperStyle}>
-            <Text size="mini" weight="medium">
+            <Text type="p">
               {translations.instructions}
               <Link newTab href="https://faq.buffer.com/article/959-publish-instagram-set-up">
                 {translations.learnMore}
@@ -52,20 +55,13 @@ const InstagramDirectPostingModal = ({
             </Text>
           </div>
         }
-        <Divider />
         <div style={buttonWrapperStyle}>
-          <Button onClick={onHideInstagramModal} borderless>
-            {translations.dismiss}
-          </Button>
+          <Button onClick={onHideInstagramModal} type="text" label={translations.dismiss} />
           {isBusinessOnInstagram &&
-            <Button onClick={() => onSetUpDirectPostingClick(profileId)}>
-              {translations.cta1}
-            </Button>
+            <Button type="primary" onClick={() => onSetUpDirectPostingClick(profileId)} label={translations.cta1} />
           }
           {!isBusinessOnInstagram &&
-            <Button onClick={() => onCheckInstagramBusinessClick(profileId)}>
-              {translations.cta2}
-            </Button>
+            <Button type="primary" onClick={() => onCheckInstagramBusinessClick(profileId)} label={translations.cta2} />
           }
         </div>
       </div>
