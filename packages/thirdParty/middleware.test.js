@@ -30,6 +30,18 @@ const mockUser = {
   helpScoutConfig: '{ "param1": true, "param2": 24 }',
 };
 
+const mockFreeUser = {
+  id: 'bar',
+  createdAt: 'date',
+  plan: 'free',
+  planCode: '100',
+  trial: {},
+  orgUserCount: 2,
+  profileCount: 3,
+  is_free_user: true,
+  helpScoutConfig: '{ "param1": true, "param2": 24 }',
+};
+
 const mockIntercomUser = {
   app_id: '1234',
   id: 'foo',
@@ -105,6 +117,14 @@ describe('middleware', () => {
     expect(global.FS.identify).toHaveBeenCalledWith(mockUser.id, {
       pricingPlan_str: 'business',
     });
+  });
+  it('Fullstory does not collect free user data', () => {
+    const action = {
+      type: actionTypes.FULLSTORY,
+      result: mockFreeUser,
+    };
+    middleware(store)(next)(action);
+    expect(global.FS.identify).not.toHaveBeenCalled();
   });
   it('marks Appcues as loaded and identifies a B4B user with Appcues', () => {
     const action = {
