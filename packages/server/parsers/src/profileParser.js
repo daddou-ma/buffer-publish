@@ -35,6 +35,7 @@ module.exports = profile => ({
   googleAnalyticsEnabled: profile.preferences.utm_tracking,
   isContributor: profile.is_contributor,
   isDisconnected: profile.oauth_broken,
+  location: profile.location,
   // Remove when publish stops importing Analyze components
   organizationId: '',
   username: profile.service_username,

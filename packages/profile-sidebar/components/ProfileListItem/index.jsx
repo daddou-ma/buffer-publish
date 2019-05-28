@@ -68,6 +68,7 @@ const ProfileListItem = ({
   selected,
   onClick,
   showProfilesDisconnectedModal,
+  location,
 }) => {
   const handleClick = () => {
     onClick();
@@ -106,7 +107,7 @@ const ProfileListItem = ({
           },
         )}
       >
-        <div style={profileBadgeWrapperStyle}>
+        <div style={profileBadgeWrapperStyle} title={location}>
           <div style={{ marginRight: '16px' }}>
             <Avatar
               src={avatarUrl}
@@ -145,6 +146,7 @@ ProfileListItem.propTypes = {
   handle: PropTypes.string.isRequired,
   locked: PropTypes.bool,
   selected: PropTypes.bool,
+  location: PropTypes.string,
 };
 
 ProfileListItem.defaultProps = {

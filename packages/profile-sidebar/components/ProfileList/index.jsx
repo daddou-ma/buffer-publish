@@ -28,6 +28,7 @@ const ProfileList = ({
         showProfilesDisconnectedModal={showProfilesDisconnectedModal}
         id={profile.id}
         index={index}
+        location={profile.location}
       />,
     )}
   />
