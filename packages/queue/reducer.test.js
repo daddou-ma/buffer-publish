@@ -1,5 +1,6 @@
 import deepFreeze from 'deep-freeze';
 import reducer, { initialState, actionTypes } from './reducer';
+import { postParser } from '@bufferapp/publish-server/parsers/src';
 
 const profileId = '123456';
 
@@ -160,6 +161,130 @@ describe('reducer', () => {
       type: actionTypes.POST_UPDATED,
       profileId,
       post: postEdited,
+    };
+    deepFreeze(action);
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('should handle POSTS_SWAPPED action type', () => {
+    const postSource = {
+      id: '12345',
+      text: 'i heart buffer',
+      postProps: {
+        day: 'Tomorrow',
+        due_at: 1552044000,
+        scheduled_at: 1552044000,
+        scheduledAt: 1552044000,
+        postDetails: {
+          isCustomScheduled: true,
+          postAction: 'This post is custom scheduled for March 8th at 11:20 AM (UTC).',
+        },
+      },
+    };
+    const postTarget = {
+      id: '12346',
+      text: 'testing things around',
+      postProps: {
+        day: 'Today',
+        due_at: 1552003980,
+        scheduled_at: 1552003980,
+        scheduledAt: 1552003980,
+        postDetails: {
+          isCustomScheduled: false,
+          postAction: 'This post is custom scheduled for March 8th at 12:13 AM (UTC).',
+        },
+      },
+    };
+
+    const postSourceSwapped = {
+      day: 'Today',
+      due_at: 1552003980,
+      id: '12345',
+      postDetails: {
+        isCustomScheduled: false,
+        postAction: 'This post is custom scheduled for March 8th at 12:13 AM (UTC).',
+      },
+      postProps: {
+        day: 'Tomorrow',
+        due_at: 1552044000,
+        postDetails: {
+          isCustomScheduled: true,
+          postAction: 'This post is custom scheduled for March 8th at 11:20 AM (UTC).',
+        },
+        scheduledAt: 1552044000,
+        scheduled_at: 1552044000,
+      },
+      profile_timezone: undefined,
+      scheduledAt: 1552003980,
+      scheduled_at: 1552003980,
+      text: 'i heart buffer',
+    };
+
+    const postTargetSwapped = {
+      day: 'Tomorrow',
+      due_at: 1552044000,
+      id: '12346',
+      postDetails: {
+        isCustomScheduled: true,
+        postAction: 'This post is custom scheduled for March 8th at 11:20 AM (UTC).',
+      },
+      postProps: {
+        day: 'Today',
+        due_at: 1552003980,
+        postDetails: {
+          isCustomScheduled: false,
+          postAction: 'This post is custom scheduled for March 8th at 12:13 AM (UTC).',
+        },
+        scheduledAt: 1552003980,
+        scheduled_at: 1552003980,
+      },
+      profile_timezone: undefined,
+      scheduledAt: 1552044000,
+      scheduled_at: 1552044000,
+      text: 'testing things around',
+    };
+
+    const stateBefore = {
+      byProfileId: {
+        [profileId]: {
+          loading: true,
+          loadingMore: false,
+          moreToLoad: false,
+          page: 1,
+          posts: { 12345: postSource, 12346: postTarget },
+          total: 2,
+        },
+      },
+      enabledApplicationModes: [],
+      showComposer: false,
+      environment: 'production',
+      editMode: false,
+      editingPostId: '',
+    };
+
+    const stateAfter = {
+      byProfileId: {
+        [profileId]: {
+          loading: true,
+          loadingMore: false,
+          moreToLoad: false,
+          page: 1,
+          posts: { 12345: postSourceSwapped, 12346: postTargetSwapped },
+          total: 2,
+        },
+      },
+      enabledApplicationModes: [],
+      showComposer: false,
+      environment: 'production',
+      editMode: false,
+      editingPostId: '',
+    };
+    const action = {
+      type: actionTypes.POSTS_SWAPPED,
+      profileId,
+      postSource,
+      postTarget,
     };
     deepFreeze(action);
     expect(reducer(stateBefore, action))
