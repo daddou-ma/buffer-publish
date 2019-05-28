@@ -44,4 +44,14 @@ storiesOf('ProfileListItem', module)
       selected
       onClick={action('profile click')}
     />
+  ))
+  .add('should display location in hover state', () => (
+    <ProfileListItem
+      avatarUrl={avatarUrl}
+      type={'twitter'}
+      handle={'joelgascoigne'}
+      location={'New York'}
+      notifications={1}
+      onClick={action('profile click')}
+    />
   ));
