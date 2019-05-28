@@ -45,15 +45,18 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     }
     case actionTypes.FULLSTORY:
-      if (window) {
-        if (window.FS && window.FS.identify) {
-          const { id } = action.result;
-          const {
-            productFeatures: { planName },
-          } = getState();
-          window.FS.identify(id, {
-            pricingPlan_str: planName,
-          });
+      if (!action.result.is_free_user) {
+        if (window) {
+          console.log('got some fullstory stuff happening');
+          if (window.FS && window.FS.identify) {
+            const { id } = action.result;
+            const {
+              productFeatures: { planName },
+            } = getState();
+            window.FS.identify(id, {
+              pricingPlan_str: planName,
+            });
+          }
         }
       }
       break;
