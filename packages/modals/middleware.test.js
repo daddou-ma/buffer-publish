@@ -97,32 +97,6 @@ describe('middleware', () => {
     expect(dispatch)
       .toBeCalledWith(actions.showWelcomePaidModal());
   });
-  it('should show welcome b4b trial modal to new trialists', () => {
-    const next = jest.fn();
-    const dispatch = jest.fn();
-    const getState = () => ({
-      productFeatures: {
-        planName: 'business',
-      },
-    });
-    const action = {
-      type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
-      result: {
-        messages: [], // does not have 'welcome_to_business_modal'
-        trial: {
-          onTrial: true,
-        },
-        profileCount: 1,
-      },
-    };
-    middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(actions.showWelcomeB4BTrialModal());
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({ name: 'readMessage', args: { message: 'welcome_to_business_modal' } }));
-  });
   it('should show profiles disconnected modal when one or more is disconnected', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
@@ -145,6 +119,9 @@ describe('middleware', () => {
     const getState = () => ({
       profileSidebar: {
         selectedProfileId: 'id1',
+        selectedProfile: {
+          service_type: 'profile',
+        },
       },
     });
     const action = {

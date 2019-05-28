@@ -146,7 +146,7 @@ AppShell.propTypes = {
 
 AppShell.defaultProps = {
   user: {
-    name: null,
+    name: '...',
     email: null,
     avatar: null,
   },
