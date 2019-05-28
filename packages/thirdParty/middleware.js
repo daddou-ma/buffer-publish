@@ -47,7 +47,6 @@ export default ({ dispatch, getState }) => next => (action) => {
     case actionTypes.FULLSTORY:
       if (!action.result.is_free_user) {
         if (window) {
-          console.log('got some fullstory stuff happening');
           if (window.FS && window.FS.identify) {
             const { id } = action.result;
             const {
