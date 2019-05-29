@@ -108,6 +108,14 @@ describe('middleware', () => {
       result: mockUser,
     });
   });
+  it('Fullstory does not collect free user data', () => {
+    const action = {
+      type: actionTypes.FULLSTORY,
+      result: mockFreeUser,
+    };
+    middleware(store)(next)(action);
+    expect(global.FS.identify).not.toHaveBeenCalled();
+  });
   it('identifies the user with Fullstory', () => {
     const action = {
       type: actionTypes.FULLSTORY,
@@ -117,14 +125,6 @@ describe('middleware', () => {
     expect(global.FS.identify).toHaveBeenCalledWith(mockUser.id, {
       pricingPlan_str: 'business',
     });
-  });
-  it('Fullstory does not collect free user data', () => {
-    const action = {
-      type: actionTypes.FULLSTORY,
-      result: mockFreeUser,
-    };
-    middleware(store)(next)(action);
-    expect(global.FS.identify).not.toHaveBeenCalled();
   });
   it('marks Appcues as loaded and identifies a B4B user with Appcues', () => {
     const action = {
