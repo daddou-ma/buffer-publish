@@ -30,6 +30,18 @@ const mockUser = {
   helpScoutConfig: '{ "param1": true, "param2": 24 }',
 };
 
+const mockFreeUser = {
+  id: 'bar',
+  createdAt: 'date',
+  plan: 'free',
+  planCode: '100',
+  trial: {},
+  orgUserCount: 2,
+  profileCount: 3,
+  is_free_user: true,
+  helpScoutConfig: '{ "param1": true, "param2": 24 }',
+};
+
 const mockIntercomUser = {
   app_id: '1234',
   id: 'foo',
@@ -95,6 +107,14 @@ describe('middleware', () => {
       type: actionTypes.FULLSTORY,
       result: mockUser,
     });
+  });
+  it('Fullstory does not collect free user data', () => {
+    const action = {
+      type: actionTypes.FULLSTORY,
+      result: mockFreeUser,
+    };
+    middleware(store)(next)(action);
+    expect(global.FS.identify).not.toHaveBeenCalled();
   });
   it('identifies the user with Fullstory', () => {
     const action = {
