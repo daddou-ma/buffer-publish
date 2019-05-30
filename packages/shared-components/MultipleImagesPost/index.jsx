@@ -45,6 +45,7 @@ const MultipleImagesPost = ({
   draggable,
   dragging,
   hovering,
+  isOver,
   statistics,
   subprofiles,
   profile_service: profileService,
@@ -128,6 +129,7 @@ const MultipleImagesPost = ({
       draggable={draggable}
       dragging={dragging}
       hovering={hovering}
+      isOver={isOver}
       statistics={statistics}
       subprofiles={subprofiles}
       profileService={profileService}

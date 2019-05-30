@@ -58,6 +58,7 @@ const LinkPost = ({
   draggable,
   dragging,
   hovering,
+  isOver,
   statistics,
   subprofiles,
   profile_service: profileService,
@@ -158,6 +159,7 @@ const LinkPost = ({
       draggable={draggable}
       dragging={dragging}
       hovering={hovering}
+      isOver={isOver}
       onRequeueClick={onRequeueClick}
       statistics={statistics}
       profileService={profileService}

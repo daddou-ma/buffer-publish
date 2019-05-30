@@ -35,6 +35,7 @@ const TextPost = ({
   draggable,
   dragging,
   hovering,
+  isOver,
   fixed,
   statistics,
   subprofiles,
@@ -104,6 +105,7 @@ const TextPost = ({
       draggable={draggable}
       dragging={dragging}
       hovering={hovering}
+      isOver={isOver}
       fixed={fixed}
       statistics={statistics}
       subprofiles={subprofiles}

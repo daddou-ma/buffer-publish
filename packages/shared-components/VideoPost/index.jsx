@@ -25,6 +25,7 @@ const VideoPost = ({
   draggable,
   dragging,
   hovering,
+  isOver,
   statistics,
   subprofiles,
   profile_service: profileService,
@@ -69,6 +70,7 @@ const VideoPost = ({
     draggable={draggable}
     dragging={dragging}
     hovering={hovering}
+    isOver={isOver}
     statistics={statistics}
     subprofiles={subprofiles}
     profileService={profileService}
