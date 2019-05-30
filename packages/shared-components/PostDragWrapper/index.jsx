@@ -101,7 +101,6 @@ class PostDragWrapper extends Component {
       return {
         background: getBgStyle(isHovering, focus),
         boxShadow: focus ? '0 0 2px 2px #ABB7FF' : 'none',
-        border: focus ? '1px solid #2C4BFF' : 'none',
         position: 'relative',
         borderRadius: '4px',
         transition,
@@ -153,6 +152,7 @@ class PostDragWrapper extends Component {
           draggable={!postProps.postDetails.error}
           dragging={isDragging}
           hovering={isHovering}
+          isOver={isOver}
           fixed={postProps.isFixed}
           basic={basic}
         />

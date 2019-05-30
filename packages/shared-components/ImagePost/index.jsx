@@ -73,6 +73,7 @@ const ImagePost = ({
   draggable,
   dragging,
   hovering,
+  isOver,
   statistics,
   profile_service: profileService,
   service_geolocation_name: locationName,
@@ -164,6 +165,7 @@ const ImagePost = ({
       draggable={draggable}
       dragging={dragging}
       hovering={hovering}
+      isOver={isOver}
       statistics={statistics}
       profileService={profileService}
       locationName={locationName}

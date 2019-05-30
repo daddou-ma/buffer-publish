@@ -117,18 +117,32 @@ const renderContent = ({
   );
 };
 
-const getBDSCardStyle = ({ faded, draggingPlaceholder, noBorder }) => ({
+const getBorderStyle = ({ draggingPlaceholder, noBorder, dragging, isOver }) => {
+  const lineType = draggingPlaceholder ? 'dashed' : 'solid';
+  let color = '#b8b8b8';
+
+  if (noBorder) {
+    color = 'transparent';
+  }
+
+  if (!dragging && isOver) {
+    color = '#2C4BFF';
+  }
+
+  return `1px ${lineType} ${color}`;
+};
+
+const getBDSCardStyle = ({ faded, draggingPlaceholder, noBorder, dragging, isOver }) => ({
   background: '#fff',
-  border: noBorder
-    ? '1px solid transparent'
-    : `1px ${draggingPlaceholder ? 'dashed' : 'solid'} #b8b8b8`,
+  border: getBorderStyle({ draggingPlaceholder, noBorder, dragging, isOver }),
   borderRadius: '4px',
   opacity: faded ? '0.5' : '1',
   overflow: 'hidden',
   boxShadow: (!draggingPlaceholder && !noBorder) && '0px 1px 4px rgba(0, 0, 0, 0.16)',
 });
-const BDSCard = ({ faded, draggingPlaceholder, noBorder, children }) => (
-  <div style={getBDSCardStyle({ faded, draggingPlaceholder, noBorder })}>
+
+const BDSCard = ({ faded, draggingPlaceholder, noBorder, dragging, isOver, children }) => (
+  <div style={getBDSCardStyle({ faded, draggingPlaceholder, noBorder, dragging, isOver })}>
     {children}
   </div>
 );
@@ -157,6 +171,7 @@ const Post = ({
   draggable,
   dragging,
   hovering,
+  isOver,
   fixed,
   statistics,
   profileService,
@@ -175,12 +190,14 @@ const Post = ({
   features,
   basic,
 }) =>
-  (<div style={getPostContainerStyle({ dragging, hovering })}>
+  (<div style={getPostContainerStyle({ dragging, hovering, isOver })}>
     <div style={postStyle}>
       <BDSCard
         faded={isDeleting}
         noPadding
         draggingPlaceholder={dragging}
+        dragging={dragging}
+        isOver={isOver}
       >
         {postDetails && postDetails.error && postDetails.error.length > 0 &&
           <PostErrorBanner
@@ -277,6 +294,7 @@ Post.commonPropTypes = {
   draggable: PropTypes.bool,
   dragging: PropTypes.bool,
   hovering: PropTypes.bool,
+  isOver: PropTypes.bool,
   fixed: PropTypes.bool,
   onDropPost: PropTypes.func,
   serviceLink: PropTypes.string,
