@@ -77,7 +77,7 @@ const renderCommentIcon = () => (
 );
 
 const renderActionText = (postAction, hasCommentEnabled, comment, hasFirstCommentFlip) => (
-  hasFirstCommentFlip && hasCommentEnabled && comment.commentEnabled ?
+  hasCommentEnabled && comment.commentEnabled ?
     <span style={igCommentWrapper}>
       {postAction}
       {renderCommentIcon()}
