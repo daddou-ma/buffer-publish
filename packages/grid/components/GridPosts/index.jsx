@@ -125,7 +125,7 @@ const GridPosts = ({
     return <LockedProfileNotification />;
   }
 
-  if (features.isFreeUser()) {
+  if (features.isFreeUser() && !isBusinessAccount) {
     return <div />;
   }
 
