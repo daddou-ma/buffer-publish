@@ -23,7 +23,6 @@ import { reducer as stripeReducer } from '@bufferapp/stripe';
 import { reducer as editEmailReducer } from '@bufferapp/edit-email';
 import { reducer as modalsReducer } from '@bufferapp/publish-modals';
 import { reducer as instagramDirectPostingModalReducer } from '@bufferapp/publish-ig-direct-posting-modal';
-import { reducer as changePasswordReducer } from '@bufferapp/change-password';
 import { reducer as manageAppsReducer } from '@bufferapp/manage-apps-extras';
 import { reducer as twoFactorAuthReducer } from '@bufferapp/publish-two-factor-auth';
 import { reducer as closeAccountReducer } from '@bufferapp/close-account';
@@ -48,7 +47,7 @@ import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
 import { reducer as reportListReducer } from '@bufferapp/report-list';
 import { reducer as summaryTableReducer } from '@bufferapp/summary-table';
 
-export default ({
+export default {
   form: formReducer,
   queue: queueReducer,
   sent: sentReducer,
@@ -68,7 +67,6 @@ export default ({
   stripe: stripeReducer,
   editEmail: editEmailReducer,
   modals: modalsReducer,
-  changePassword: changePasswordReducer,
   manageAppsExtras: manageAppsReducer,
   twoFactorAuth: twoFactorAuthReducer,
   closeAccount: closeAccountReducer,
@@ -97,4 +95,4 @@ export default ({
   profiles: profileReducer,
   reportList: reportListReducer,
   summary: summaryTableReducer,
-});
+};
