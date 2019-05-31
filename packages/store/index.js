@@ -1,7 +1,10 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory as createHistory } from 'history';
-import { logTrackingMiddleware, bufferMetricsMiddleware } from '@bufferapp/publish-data-tracking';
+import {
+  logTrackingMiddleware,
+  bufferMetricsMiddleware,
+} from '@bufferapp/publish-data-tracking';
 import { middleware as queueMiddleware } from '@bufferapp/publish-queue';
 import { middleware as sentMiddleware } from '@bufferapp/publish-sent';
 import { middleware as gridMiddleware } from '@bufferapp/publish-grid';
@@ -25,7 +28,6 @@ import { middleware as upgradeModalMiddleware } from '@bufferapp/publish-upgrade
 import { middleware as editEmailMiddlware } from '@bufferapp/edit-email';
 import { middleware as stripeMiddleware } from '@bufferapp/stripe';
 import { middleware as modalsMiddleware } from '@bufferapp/publish-modals';
-import { middleware as changePasswordMiddleware } from '@bufferapp/change-password';
 import { middleware as manageAppsMiddleware } from '@bufferapp/manage-apps-extras';
 import { middleware as twoFactorAuthMiddleware } from '@bufferapp/publish-two-factor-auth';
 import { middleware as dateTimePreferencesMiddleware } from '@bufferapp/date-time-preferences';
@@ -57,14 +59,13 @@ import reducers from './reducers';
 
 export const history = createHistory();
 
-const createReducer = () => (
+const createReducer = () =>
   combineReducers({
     router: connectRouter(history),
     ...reducers,
-  })
-);
+  });
 
-const configureStore = (initialstate) => {
+const configureStore = initialstate => {
   const composeEnhancers =
     typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
@@ -98,7 +99,6 @@ const configureStore = (initialstate) => {
         appSwitcherMiddleware,
         betaRedirectMiddleware,
         upgradeModalMiddleware,
-        changePasswordMiddleware,
         manageAppsMiddleware,
         stripeMiddleware,
         modalsMiddleware,
