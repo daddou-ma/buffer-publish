@@ -23,7 +23,7 @@ const statsCellStyle = {
   flexDirection: 'column',
 };
 
-const PostStats = ({ statistics, profileService }) => {
+const PostStats = ({ statistics, profileService, showTwitterMentions }) => {
   const titles = {
     retweets: 'Retweet',
     comments: 'Comment',
@@ -31,7 +31,7 @@ const PostStats = ({ statistics, profileService }) => {
     favorites: 'Like',
     mentions: 'Mention',
     clicks: 'Click',
-    reach_twitter: 'Potential',
+    reach_twitter: 'Impressions',
     reach: 'Reach',
     shares: 'Share',
     reshares: 'Reshare',
@@ -44,9 +44,12 @@ const PostStats = ({ statistics, profileService }) => {
     let value = statistics[typeStats];
     let title = titles[typeStats];
     if (typeStats === 'reach_twitter' && profileService === 'twitter') {
-      value = statistics.reach;
+      value = statistics.impressions;
     }
     if (typeStats === 'reach' && profileService === 'twitter') {
+      return;
+    }
+    if (!showTwitterMentions && typeStats === 'mentions' && profileService === 'twitter') {
       return;
     }
     if (

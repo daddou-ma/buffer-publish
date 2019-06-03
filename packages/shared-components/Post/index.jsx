@@ -253,6 +253,7 @@ const Post = ({
           isSent &&
           !postDetails.isRetweet &&
           <PostStats
+            showTwitterMentions={!features.isFreeUser() && !features.isProUser()}
             statistics={statistics}
             profileService={profileService}
           />
