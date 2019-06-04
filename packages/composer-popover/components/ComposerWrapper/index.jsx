@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bufferPublishComposer as Composer } from '@bufferapp/composer';
+import { bufferPublishComposer as Composer } from '@bufferapp/publish-composer';
 
 const ComposerWrapper = props => <Composer {...props} />;
 
