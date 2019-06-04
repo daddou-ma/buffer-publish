@@ -26,7 +26,6 @@ const sendFeedback = require('./sendFeedback');
 const savePublishBetaRedirect = require('./savePublishBetaRedirect');
 const performanceTrackingMethod = require('./performanceTracking');
 const upgradeToPro = require('./upgradeToPro');
-const updateEmail = require('./updateEmail');
 const changeDateTimePreferences = require('./changeDateTimePreferences');
 const twoFactorUpdate = require('./twoFactorUpdate');
 const twoFactorConfirm = require('./twoFactorConfirm');
@@ -91,7 +90,6 @@ module.exports = rpc(
   savePublishBetaRedirect,
   performanceTrackingMethod,
   upgradeToPro,
-  updateEmail,
   changeDateTimePreferences,
   twoFactorUpdate,
   twoFactorConfirm,
