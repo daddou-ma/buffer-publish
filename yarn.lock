@@ -605,9 +605,10 @@
     react-dom "16.6.3"
     styled-components "3.4.10"
 
-"@bufferapp/ui@3.11.5":
-  version "3.11.5"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.11.5.tgz#8825b1007574133d71fc3a27d4cec4ee926d9c5f"
+"@bufferapp/ui@3.13.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.13.0.tgz#3ee33745b06d37bb9cf0c90a19ab0f08d1d8ad54"
+  integrity sha512-LdhKuK9YI+KlkyA0BuSYqk0B9428/IQ1UQj7cK77PcZBjCi4+h+8x3KKd8WEUQ0A/0g3QonDlvUp1jv3cezwnA==
   dependencies:
     immutability-helper "^2.9.0"
     react "16.6.3"
