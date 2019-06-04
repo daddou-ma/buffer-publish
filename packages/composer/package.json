@@ -1,7 +1,7 @@
 {
   "name": "@bufferapp/publish-composer",
   "version": "2.0.0",
-  "description": "The web composer and its interfaces",
+  "description": "The publish web composer and its interfaces",
   "main": "index.js",
   "scripts": {
     "start": "start-storybook -p 9001 -c ./composer/.storybook",
