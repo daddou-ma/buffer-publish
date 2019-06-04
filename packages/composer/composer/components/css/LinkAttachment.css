@@ -1,0 +1,150 @@
+:import('./constants.css') {
+  link-attachment-thumbnail-height: link-attachment-thumbnail-height;
+  link-attachment-thumbnail-width: link-attachment-thumbnail-width;
+  composer-inner-border-color: composer-inner-border-color;
+  tertiary-font-color: tertiary-font-color;
+  update-attachment-bg-color: update-attachment-bg-color;
+}
+
+:root {
+  --link-attachment-thumbnail-height: link-attachment-thumbnail-height;
+  --composer-inner-border-color: composer-inner-border-color;
+  --link-attachment-thumbnail-width: link-attachment-thumbnail-width;
+  --tertiary-font-color: tertiary-font-color;
+  --update-attachment-bg-color: update-attachment-bg-color;
+
+  --description-line-height: 16px;
+  --padding: 10px;
+  --border-size: 1px;
+  --border-radius: 3px;
+  --margin-x: 8px;
+  --close-button-size: 16px;
+  --url-height: 15px;
+}
+
+.linkAttachment {
+  position: relative;
+  min-height: calc(var(--link-attachment-thumbnail-height) + 2 * (var(--padding) + 1));
+  margin: 0 var(--margin-x);
+  padding: 10px 10px 0 10px;
+  border: var(--border-size) solid var(--composer-inner-border-color);
+  border-radius: var(--border-radius);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  flex-basis: 100%;
+  clear: both;
+}
+
+.linkAttachment::before {
+  content: "";
+  position: absolute;
+  top: calc(-var(--border-size) - 1);
+  left: calc(-var(--margin-x) - 1);
+  right: calc(-var(--margin-x) - 1);
+  height: 1px;
+  background: #fff;
+}
+
+.facebookLinkEditingMessage {
+  margin: 0 var(--margin-x);
+  margin-bottom: -4px;
+  padding: 5px 10px;
+  border: var(--border-size) solid var(--composer-inner-border-color);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  font-size: 11px;
+  line-height: 13px;
+  background: var(--composer-inner-border-color);
+}
+
+.facebookLinkEditingMessage a {
+  color: inherit;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  width: var(--close-button-size);
+  height: var(--close-button-size);
+  display: inline-block;
+}
+
+.urlContainer {
+  display: block;
+  height: var(--url-height);
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: var(--url-height);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--tertiary-font-color);
+}
+
+.url {
+  color: var(--tertiary-font-color);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.linkDetailsContainer {
+  float: right;
+  width: 316px;
+  padding: 24px 10px 0 10px;
+  min-height: 118px;
+  top: -10px;
+  left: 10px;
+  position: relative;
+}
+
+.thumbnail {
+  height: var(--link-attachment-thumbnail-height);
+  background-position: center;
+  background-size: cover;
+  width: var(--link-attachment-thumbnail-width);
+  border-radius: var(--border-radius);
+  position: absolute;
+  float: left;
+  border: solid 1px #e6ebef;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.thumbnailPlaceholder {
+  width: var(--link-attachment-thumbnail-width);
+  height: var(--link-attachment-thumbnail-height);
+  background: var(--update-attachment-bg-color);
+  border-radius: var(--border-radius);
+  position: absolute;
+  float: left;
+  box-sizing: border-box;
+  background-image: none;
+  border: solid 1px #e6ebef;
+}
+.loadingMessage::before {
+  content: 'Loading…';
+}
+
+.loadingMessage::before {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.loadingMessage:hover,
+.loadingMessage:focus {
+  background-color: transparent;
+}
+
+.loadingMessage {
+  display: block;
+  width: calc(100% - var(--close-button-size) - 6px);
+  margin: -6px -4px -2px -4px;
+  padding: 2px 4px;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  line-height: 18px;
+  color: #323B43;
+  cursor: default;
+}

@@ -1,0 +1,97 @@
+:import('./constants.css') {
+  medium-grey-color: medium-grey-color;
+  tertiary-font-color: tertiary-font-color;
+  twitter-retweet-color: twitter-retweet-color;
+}
+
+:root {
+  --medium-grey-color: medium-grey-color;
+  --tertiary-font-color: tertiary-font-color;
+  --twitter-retweet-color: twitter-retweet-color;
+
+  --padding: 16px;
+  --padding-top: 30px;
+  --avatar-size: 48px;
+  --border-size: 1px;
+  --margin-x: 8px;
+  --tweet-margin: 8px;
+}
+
+.retweetAttachment {
+  position: relative;
+  min-height: calc(var(--avatar-size) + 4px);
+  margin: 0 var(--margin-x);
+  padding: calc(var(--padding-top) - 4px) var(--padding) var(--padding) var(--padding);
+  padding-left: calc(var(--padding) + var(--avatar-size) + var(--tweet-margin));
+  border: var(--border-size) solid var(--medium-grey-color);
+  border-radius: 3px;
+  font-size: 12px;
+  clear: both;
+  margin-bottom: 8px;
+}
+
+.retweetAttachment::before {
+  content: "";
+  position: absolute;
+  top: calc(-var(--border-size) - 1);
+  left: calc(-var(--margin-x) - 1);
+  right: calc(-var(--margin-x) - 1);
+  height: 1px;
+  background: #fff;
+}
+
+.avatar {
+  position: absolute;
+  top: var(--padding-top);
+  left: var(--padding);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: 3px;
+}
+
+.retweetLabel {
+  position: absolute;
+  top: 8px;
+  left: 49px;
+  height: 19px;
+  line-height: 19px;
+  color: var(--tertiary-font-color);
+}
+
+.retweetIcon {
+  margin: -2px 4px 0 0;
+  display: inline-block;
+  height: 13px;
+  padding: 0 2px;
+  color: #fff;
+  border-radius: 3px;
+  background-color: var(--twitter-retweet-color);
+  font-size: 11px;
+  line-height: 10px;
+  vertical-align: middle;
+}
+
+.userDisplayName {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.userName {
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--tertiary-font-color);
+}
+
+.text {
+  margin: 3px 0 0;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}

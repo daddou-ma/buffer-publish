@@ -1,0 +1,245 @@
+:import('./constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+  primary-font-color: primary-font-color;
+  secondary-font-color: secondary-font-color;
+  composer-inner-border-color: composer-inner-border-color;
+  update-attachment-bg-color: update-attachment-bg-color;
+  composer-heading-color: composer-heading-color;
+  outerspace: outerspace;
+  geyser: geyser;
+  grey-color-primary-hue: grey-color-primary-hue;
+  video-attachment-thumbnail-selector-button-zindex: video-attachment-thumbnail-selector-button-zindex;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+  --primary-font-color: primary-font-color;
+  --secondary-font-color: secondary-font-color;
+  --composer-inner-border-color: composer-inner-border-color;
+  --box-bg-color: update-attachment-bg-color;
+  --composer-heading-color: composer-heading-color;
+  --outerspace: outerspace;
+  --geyser: geyser;
+  --grey-color-primary-hue: grey-color-primary-hue;
+  --video-attachment-thumbnail-selector-button-zindex: video-attachment-thumbnail-selector-button-zindex;
+
+  --box-padding: 10px;
+
+  --header-height: 19px;
+  --header-margin-bottom: 10px;
+
+  --thumbnail-height: 80px;
+  --thumbnail-shadow-width: 2px;
+  --thumbnail-border-radius: 3px;
+}
+
+.suggestedMediaBoxContainer {
+  position: relative;
+  min-width: 0;
+  height: 115px;
+  padding: var(--box-padding) 0 20px var(--box-padding);
+  border: 1px solid var(--composer-inner-border-color);
+  border-right: none;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  flex-grow: 1;
+  -ms-overflow-style: none;
+}
+
+.suggestedMediaBox {
+  padding: 0 4px 4px;
+  overflow: hidden;
+}
+
+.suggestedMediaBox::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--box-padding) + var(--header-height) + var(--header-margin-bottom) - var(--thumbnail-shadow-width));
+  right: 0;
+  bottom: 0;
+  width: var(--box-padding);
+  background: linear-gradient(to left, var(--box-bg-color), rgba(255, 255, 255, 0) 90%, rgba(255, 255, 255, 0));
+  pointer-events: none;
+  border-bottom-right-radius: 3px;
+}
+
+.header {
+  height: var(--header-height);
+  margin-bottom: 15px;
+  line-height: var(--header-height);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--composer-heading-color);
+  position: relative;
+  top: 5px;
+}
+
+.scrollControlsContainer {
+  position: absolute;
+  top: var(--box-padding);
+  right: var(--box-padding);
+  height: 24px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--composer-inner-border-color);
+  border-radius: 3px;
+}
+
+.scrollButton {
+	position: relative;
+	display: inline-block;
+	height: 24px;
+	width: 18px;
+	cursor: pointer;
+	color: var(--composer-heading-color);
+	font-size: 15px;
+	text-decoration: none;
+	text-align: center;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+}
+
+.scrollButton:disabled,
+.scrollButton:disabled:hover {
+  color: var(--geyser);
+}
+
+.scrollButton:focus {
+  outline: none;
+}
+
+.scrollButton:first-child {
+  border-right: 1px solid var(--composer-inner-border-color);
+}
+
+.scrollButton::before {
+  vertical-align: baseline;
+}
+
+.scrollButton:hover {
+  color: var(--blue-color-primary-hue);
+}
+
+.suggestionsContainer {
+  height: calc(var(--thumbnail-height) + var(--thumbnail-shadow-width) * 2);
+  margin: 0 calc(var(--thumbnail-shadow-width)/2) -var(--thumbnail-shadow-width) -var(--thumbnail-shadow-width);
+}
+
+.suggestionsScrollContainer {
+  position: relative;
+  top: -10px;
+  padding: 10px 0 30px;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.suggestionsContainer .suggestedMediaItem {
+  position: relative;
+  display: inline-block;
+}
+
+.suggestionsContainer .thumbnailContainer {
+	position: relative;
+	display: inline-block;
+	height: var(--thumbnail-height);
+	margin: var(--thumbnail-shadow-width) calc(var(--thumbnail-shadow-width) + 3) var(--thumbnail-shadow-width) var(--thumbnail-shadow-width);
+	border-radius: var(--thumbnail-border-radius);
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+
+.suggestionsContainer .thumbnailContainer:focus {
+	outline: none;
+	box-shadow: 0 0 0 var(--thumbnail-shadow-width) var(--blue-color-primary-hue);
+}
+
+.suggestionsContainer .thumbnailContainer:hover {
+  box-shadow: 0 0 0 var(--thumbnail-shadow-width) var(--blue-color-primary-hue);
+}
+
+.suggestionsContainer .thumbnailContainer::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 0;
+  left: 0;
+  height: 10px;
+  background: transparent;
+}
+
+.suggestionsContainer .thumbnailContainer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+}
+
+.thumbnail {
+  height: 100%;
+  border-radius: var(--thumbnail-border-radius);
+}
+
+.imgDataContainer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.imgIcon, .gifIcon {
+  display: inline-block;
+  margin-left: 4px;
+  margin-right: 4px;
+  color: white;
+}
+
+.imgIcon:before {
+  font-size: 12px;
+}
+
+.gifIcon:before {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.thumbnailInfo {
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  display: inline-block;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 17px;
+  padding: 0 5px;
+  color: #fff;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+ .thumbnailInfoText {
+   opacity: 0;
+   transition: opacity 0.4s;
+   position: relative;
+   background: var(--outerspace);
+   padding: 2px 5px 2px 2px;
+   border-radius: 3px;
+ }
+
+.imgDataContainer:hover .thumbnailInfoText {
+  opacity: 1;
+}
+
+.imgDataContainer:hover {
+  z-index: 2;
+}

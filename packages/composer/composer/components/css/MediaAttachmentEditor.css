@@ -1,0 +1,154 @@
+:import('./constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+  secondary-font-color: secondary-font-color;
+  composer-inner-border-color: composer-inner-border-color;
+  update-attachment-bg-color: update-attachment-bg-color;
+  composer-heading-color: composer-heading-color;
+  outerspace: outerspace;
+  medium-grey-color: medium-grey-color;
+  primary-bg-color: primary-bg-color;
+  video-attachment-thumbnail-selector-zindex: video-attachment-thumbnail-selector-zindex;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+  --secondary-font-color: secondary-font-color;
+  --composer-inner-border-color: composer-inner-border-color;
+  --box-bg-color: update-attachment-bg-color;
+  --composer-heading-color: composer-heading-color;
+  --outerspace: outerspace;
+  --medium-grey-color: medium-grey-color;
+  --primary-bg-color: primary-bg-color;
+  --video-attachment-thumbnail-selector-zindex: video-attachment-thumbnail-selector-zindex;
+
+  --box-padding: 10px;
+
+  --thumbnail-height: 80px;
+  --thumbnail-shadow-width: 2px;
+  --thumbnail-border-radius: 3px;
+}
+
+.container {
+  position: absolute;
+  left: 102px;
+  bottom: 12px;
+  width: 479px;
+  z-index: var(--video-attachment-thumbnail-selector-zindex);
+  margin: 0 calc(var(--thumbnail-shadow-width)/2) -var(--thumbnail-shadow-width) -var(--thumbnail-shadow-width);
+  padding: 8px;
+  background-color: var(--primary-bg-color);
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--medium-grey-color);
+
+  counter-reset: suggested-thumbnail;
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
+.header {
+  display: block;
+  height: 19px;
+  margin: 0 4px 4px;
+  line-height: 19px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #343e47;
+}
+
+.input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 8px;
+  padding: 0 8px;
+  border: 1px solid var(--medium-grey-color);
+  border-radius: 3px;
+}
+
+.scrollContainer {
+  position: relative;
+  margin-top: -7px;
+  margin-bottom: -74px;
+  padding-top: 5px;
+  padding-bottom: 70px;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.thumbnailContainer {
+	position: relative;
+	display: inline-block;
+	height: var(--thumbnail-height);
+	margin: var(--thumbnail-shadow-width) calc(var(--thumbnail-shadow-width) + 3) var(--thumbnail-shadow-width) var(--thumbnail-shadow-width);
+	border-radius: var(--thumbnail-border-radius);
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+
+.thumbnailContainer:focus {
+	outline: none;
+}
+
+.thumbnailContainer:hover {
+  box-shadow: 0 0 0 var(--thumbnail-shadow-width) var(--blue-color-primary-hue);
+}
+
+.thumbnailContainer::after {
+  counter-increment: suggested-thumbnail;
+  content: counter(suggested-thumbnail);
+  position: absolute;
+  bottom: 0px;
+  right: 3px;
+  height: 18px;
+  font-size: 11px;
+  line-height: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.selectedThumbnailContainer {
+  composes: thumbnailContainer;
+}
+
+.selectedThumbnailContainer::before {
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  color: var(--blue-color-primary-hue);
+  font-size: 13px;
+  line-height: 14px;
+  background: #fff;
+  border: 1px solid var(--blue-color-primary-hue);
+  border-radius: 50%;
+  text-align: center;
+}
+
+.thumbnail {
+  position: relative;
+  height: 100%;
+  border-radius: var(--thumbnail-border-radius);
+}
+
+.submitButton {
+  composes: button from './Button.css';
+
+  position: relative; /* Position slightly higher in the stacking context by making positioned */
+  display: block;
+  margin: 8px auto 0;
+}

@@ -1,0 +1,177 @@
+:import('./constants.css') {
+  composer-inner-border-color: composer-inner-border-color;
+  composer-text-editor-dropdowns-zindex: composer-text-editor-dropdowns-zindex;
+  composer-text-editor-zindex: composer-text-editor-zindex;
+  text-zone-placeholder-zindex: text-zone-placeholder-zindex;
+  composer-update-zone-border-radius: composer-update-zone-border-radius;
+  composer-text-zone-padding: composer-text-zone-padding;
+  composer-text-zone-line-height: composer-text-zone-line-height;
+  composer-collapsed-text-zone-height: composer-collapsed-text-zone-height;
+  composer-text-zone-attachment-glance-width: composer-text-zone-attachment-glance-width;
+  composer-text-zone-width-attachment-glance-no-thumbnail: composer-text-zone-width-attachment-glance-no-thumbnail;
+  disabled-icon-grey-color: disabled-icon-grey-color;
+  disabled-text-color: disabled-text-color;
+}
+
+:root {
+  --composer-inner-border-color: composer-inner-border-color;
+  --composer-text-editor-dropdowns-zindex: composer-text-editor-dropdowns-zindex;
+  --composer-text-editor-zindex: composer-text-editor-zindex;
+  --composer-text-zone-border-radius: composer-update-zone-border-radius;
+  --composer-text-zone-padding: composer-text-zone-padding;
+  --composer-text-zone-line-height: composer-text-zone-line-height;
+  --composer-collapsed-text-zone-height: composer-collapsed-text-zone-height;
+  --composer-text-zone-attachment-glance-width: composer-text-zone-attachment-glance-width;
+  --composer-text-zone-width-attachment-glance-no-thumbnail: composer-text-zone-width-attachment-glance-no-thumbnail;
+  --disabled-icon-grey-color: disabled-icon-grey-color;
+  --disabled-text-color: disabled-text-color;
+  --text-zone-placeholder-zindex: text-zone-placeholder-zindex;
+}
+
+.editorWrapper {
+  position: relative;
+  flex-basis: 100%;
+}
+
+.imageFirstEditorWrapper {
+  order: 2;
+  position: relative;
+  width: 100%;
+}
+
+.textZone {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--composer-text-zone-padding);
+  font-size: 14px;
+  line-height: var(--composer-text-zone-line-height);
+  color: #59626a;
+  resize: none;
+  word-break: break-word;
+  border: 0;
+}
+
+.textZone:focus {
+  outline: none;
+}
+
+.visibleTextZoneTooltip {
+  z-index: var(--composer-text-editor-dropdowns-zindex);
+  margin: var(--composer-text-zone-padding);
+}
+
+.collapsedTextZone {
+  composes: textZone;
+
+  height: 38px;
+  max-width: 608px;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: var(--composer-text-zone-padding) solid #fff; /* Clip overflow to content box */
+  border-radius: var(--composer-text-zone-border-radius);
+}
+
+.expandedTextZone {
+  composes: textZone;
+  border-radius: var(--composer-text-zone-border-radius) var(--composer-text-zone-border-radius) 0 0;
+}
+
+/**
+ * CSS pulled from draft-js's compiled Draft.css and customized
+ */
+.textZone :global(.DraftEditor-editorContainer),
+.textZone :global(.DraftEditor-root),
+.textZone :global(.public-DraftEditor-content) {
+  height: 100%;
+  text-align: initial;
+}
+
+.textZone :global(.DraftEditor-root) {
+  position: relative;
+  padding-right: 60px;
+}
+
+.collapsedTextZone :global(.DraftEditor-root) {
+  overflow: hidden;
+}
+
+.textZone :global(.DraftEditor-editorContainer) {
+  position: relative;
+  z-index: 0 !important;
+  background-color: rgba(255, 255, 255, 0);
+  border-left: .1px solid transparent;
+}
+
+.textZone :global(.public-DraftEditor-block) {
+  position: relative;
+}
+
+.textZone :global(.public-DraftEditorPlaceholder-root) {
+  position: absolute;
+  z-index: var(--text-zone-placeholder-zindex);
+  color: #ced7df;
+}
+
+.textZone :global(.DraftEditorPlaceholder-hidden) {
+  display: none;
+}
+
+.textZone :global(.public-DraftStyleDefault-block) {
+  /**
+   * Necessary for proper draft-js behavior? It's provided by default, but was
+   * making some child offset calculations harder, so disabling it for now and
+   * seeing how draft-js behaves w/o it!
+   */
+  /*position: relative;*/
+  white-space: pre-wrap;
+}
+
+.collapsedTextZone :global(.public-DraftStyleDefault-block)  {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.hasAttachmentGlance {
+  padding-right: var(--composer-text-zone-attachment-glance-width);
+}
+
+.hasAttachmentGlanceNoThumbnail {
+  padding-right: var(--composer-text-zone-width-attachment-glance-no-thumbnail);
+}
+
+.hasLinkAttachment {
+  border-bottom: none;
+}
+
+.textZone :global(.public-DraftEditor-content) {
+  min-height: 60px;
+}
+
+/**
+ * CSS pulled from draft-js's Emoji Plugin plugin.css and customized
+ */
+:global([class*='draftJsEmojiPlugin__emojiSuggestions__']) {
+  vertical-align: middle;
+  z-index: 22 !important;
+}
+
+:global([class*='draftJsEmojiPlugin__emojiSuggestionsEntryText__']) {
+  vertical-align: middle;
+}
+
+:global([class*='draftJsEmojiPlugin__emojiSelectPopoverEntry']){
+  font-size: 18px;
+  cursor: pointer;
+}
+
+:global([class*='draftJsEmojiPlugin__emojiSelectPopoverNavEntry']){
+  cursor: pointer;
+}
+
+:global([class*='draftJsEmojiPlugin__emojiSelectButton']){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

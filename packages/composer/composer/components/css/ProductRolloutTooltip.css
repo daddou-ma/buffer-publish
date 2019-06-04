@@ -1,0 +1,67 @@
+:import('./constants.css') {
+  tooltip-bg-color: tooltip-bg-color;
+  top-level-notifications-zindex: top-level-notifications-zindex;
+}
+
+:root {
+  --tooltip-bg-color: tooltip-bg-color;
+  --top-level-notifications-zindex: top-level-notifications-zindex;
+}
+
+.container {
+  position: absolute;
+  top: 47px;
+  left: -47px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.3em;
+  z-index: var(--top-level-notifications-zindex);
+  cursor: default;
+}
+
+.bottomPositionedContained {
+  composes: container;
+  top: 124px;
+  left: 95px;
+}
+
+.tooltip {
+  padding: 16px;
+  background-color: var(--tooltip-bg-color);
+}
+
+.tooltip::before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: -8px;
+  left: 17px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--tooltip-bg-color);
+}
+
+.bottomPositionedContained .tooltip::before {
+  top: 17px;
+  right: -8px;
+  left: auto;
+  border-top: 8px solid transparent;
+  border-left: 8px solid var(--tooltip-bg-color);
+  border-bottom: 8px solid transparent;
+  border-right: 0;
+}
+
+.tooltip :global(h4) {
+  margin: 0 0 0.8em;
+  font-weight: 600;
+}
+
+.button {
+  composes: button from './Button.css';
+
+  margin: 14px 14px 0 0;
+}

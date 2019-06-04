@@ -1,0 +1,42 @@
+
+:global(#instagramThumbnail) > div > div {
+  width: 525px;
+}
+
+.modalStyles {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.media {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.mediaContainer {
+  order: 1;
+  position: relative;
+  text-align: center;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.mediaContainer::after {
+  background: black;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.5;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}

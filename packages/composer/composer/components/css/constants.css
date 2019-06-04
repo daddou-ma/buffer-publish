@@ -1,0 +1,107 @@
+/**
+ * Store of style constants to import into other modules
+ */
+
+:export {
+  primary-font-color: #59626a;
+  secondary-font-color: #627785;
+  tertiary-font-color: color(#59626a lightness(60%));
+  app-border-color: #d5dce3;
+  app-secondary-border-color: #f8f8f8;
+  blue-color-primary-hue: #168eea;
+  blue-color-darker-hue: #0f63a4;
+  blue-color-secondary-hue: #137ac9;
+  green-color: #2FD566;
+  grey-color-primary-hue: #d1d1d1;
+  grey-color-lighter-hue: #f4f7f9;
+  grey-color-lightest-hue: color(#f4f7f9 lightness(98%));
+  error-color-primary-hue: #ee4f4f;
+  error-color-secondary-hue: #FA5050;
+  error-color-lighter-hue: color(#ee4f4f lightness(75%));
+  error-color-darker-hue: #E04848;
+  primary-bg-color: #fff;
+  primary-bg-hover-color: #f9f9f9;
+  secondary-bg-hover-color: #f8f8f8;
+  disabled-icon-grey-color: #E6E6E6;
+  success-notification-bg-color: #2FD566;
+  unselected-profile-avatar-color: #CED7DF;
+  composer-notice-feedback-bg-color: rgba(240, 203, 57, 0.2);
+  composer-notice-icon-color: #5E656C;
+  composer-notice-feedback-border-color: #f1cb3a;
+  composer-notice-feedback-font-color: #343E47;
+  composer-notice-info-bg-color: color(#e6ebef alpha(50%));
+  composer-notice-info-border-color: color(#ced7df alpha(50%));
+  disabled-text-color: #ABB3BA;
+  outerspace: #323b43;
+  geyser: #ced7df;
+
+  /**
+   * These z-index constants also serve as an "inventory" of all z-indexes
+   * used troughout the app: this list should be exhaustive
+   */
+  upload-button-icon-zindex: -1;
+  close-button-background-zindex: -1;
+  hidden-tooltip-zindex: -1;
+  text-zone-placeholder-zindex: 0;
+  profile-dropdowns-triangle-shape-zindex: 1;
+  profile-container-zindex: 10;
+  profile-scroll-container-zindex: 10;
+  link-attachment-thumbnail-upload-progress-indicator-zindex: 10;
+  link-attachment-thumbnail-upload-zone-zindex: 10;
+  link-attachment-thumbnail-scroll-button-zindex: 10;
+  link-attachment-thumbnail-upload-disabled-overlay-zindex: 11;
+  composer-section-zindex: 20;
+  composer-text-editor-zindex: 20;
+  composer-text-editor-overlay-zindex: 30;
+  attachment-glance-zindex: 30;
+  video-attachment-thumbnail-selector-zindex: 30;
+  video-attachment-thumbnail-selector-button-zindex: 30;
+  composer-notice-icon-zindex: 40;
+  saved-composer-feedback-zindex: 40;
+  app-close-button-zindex: 50;
+  media-attachment-upload-replace-button-zindex: 50;
+  media-attachment-upload-zone-zindex: 60;
+  media-attachment-thumbnail-close-button-zindex: 61;
+  composer-text-editor-dropdowns-zindex: 70;
+  locked-composer-overlay-zindex: 80;
+  locked-composer-overlay-message-zindex: 90;
+  profile-dropdowns-zindex: 100;
+  top-level-notifications-zindex: 150;
+
+
+  composer-inner-border-color: #E6EBEF;
+  medium-grey-color: #ced7df;
+  light-grey-color: #E6EBEF;
+  composer-heading-color: #343E47;
+  pinterest-composer-bar-bg: #f8f8f8;
+  missing-avatar-bg-color: #f8f8f8;
+  update-attachment-bg-color: #f8f8f8;
+  tooltip-bg-color: #323b43;
+
+  large-box-shadow: 0 2px 3px rgba(0, 0, 0, .08);
+  small-box-shadow: 0 1px 1px rgba(0, 0, 0, .08);
+
+  appdotnet-color: #4a484c;
+  facebook-color: #3b5998;
+  twitter-color: #55acee;
+  twitter-retweet-color: #19cf86;
+  linkedin-color: #007bb6;
+  google-color: #dd4b39;
+  pinterest-color: #bd081c;
+  instagram-color: #E53C5F;
+
+  link-attachment-thumbnail-width: 243px;
+  link-attachment-thumbnail-height: 128px;
+  profile-picture-size: 40px;
+  profile-picture-margin-right: 18px;
+  profile-picture-margin-bottom: 10px;
+  profile-picture-container-total-height: 50px; /* calc(profile-picture-size + profile-picture-margin-bottom) */
+  composer-update-zone-border-radius: 3px;
+  composer-text-zone-padding: 8px;
+  composer-text-zone-line-height: 24px;
+  composer-text-zone-icon-width: 16px;
+  composer-text-zone-attachment-glance-width: 65px;
+  composer-collapsed-text-zone-height: 38px;
+  composer-text-zone-width-attachment-glance: 72px;
+  composer-text-zone-width-attachment-glance-no-thumbnail: 34px;
+}

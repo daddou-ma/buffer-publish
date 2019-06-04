@@ -1,0 +1,19 @@
+.customizeButton {
+  composes: secondaryButton from './Button.css';
+  float: right;
+  line-height: 30px;
+}
+
+.startOverButton {
+  composes: secondaryButton from './Button.css';
+  float: left;
+  line-height: 30px;
+}
+
+.rightArrow{
+  margin-left: 4px;
+}
+
+.leftArrow {
+  margin-right: 4px;
+}

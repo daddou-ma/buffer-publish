@@ -1,0 +1,12 @@
+:import('../../../components/css/constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+}
+
+.link {
+  position: relative;
+  color: var(--blue-color-primary-hue);
+}

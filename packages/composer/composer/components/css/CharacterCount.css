@@ -1,0 +1,11 @@
+:import('./constants.css') {
+  error-color-lighter-hue: error-color-lighter-hue;
+}
+
+:root {
+  --error-color-lighter-hue: error-color-lighter-hue;
+}
+
+.aboveMaxCharacterCount {
+  color: var(--error-color-lighter-hue);
+}

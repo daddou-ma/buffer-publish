@@ -1,0 +1,93 @@
+:import('../../../components/css/constants.css') {
+  secondary-font-color: secondary-font-color;
+  medium-grey-color: medium-grey-color;
+  primary-bg-hover-color: primary-bg-hover-color;
+  primary-bg-color: primary-bg-color;
+  hidden-tooltip-zindex: hidden-tooltip-zindex;
+}
+
+:root {
+  --secondary-font-color: secondary-font-color;
+  --medium-grey-color: medium-grey-color;
+  --primary-bg-hover-color: primary-bg-hover-color;
+  --primary-bg-color: primary-bg-color;
+  --hidden-tooltip-zindex: hidden-tooltip-zindex;
+
+  --tooltip-translate-x: translateX(-50%);
+  --tooltip-padding: 3px;
+  --tooltip-initial-y-translate: -1px;
+  --tooltip-y-translate: 4px;
+  --button-width: 80px;
+}
+
+.tooltip {
+  position: absolute;
+  box-sizing: border-box;
+  max-width: 100%;
+  height: 32px;
+  padding: var(--tooltip-padding) calc(var(--button-width) + var(--tooltip-padding) * 2 + 3) var(--tooltip-padding) 8px;
+  transform: var(--tooltip-translate-x) translateY(var(--tooltip-initial-y-translate));
+  opacity: 0;
+  border: 1px solid var(--medium-grey-color);
+  border-radius: 2px;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 24px;
+  color: var(--secondary-font-color);
+  background: var(--primary-bg-color);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .08);
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: -var(--tooltip-y-translate);
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: transparent;
+}
+
+.hiddenTooltip {
+  composes: tooltip;
+
+  left: 50%;
+  z-index: var(--hidden-tooltip-zindex);
+}
+
+.visibleTooltip {
+  composes: tooltip;
+
+  opacity: 1;
+  transform: var(--tooltip-translate-x) translateY(3px);
+  transition: opacity .1s linear, transform .3s ease;
+  transition-delay: 200ms;
+}
+
+.tooltipContent {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.button {
+  position: absolute;
+  top: var(--tooltip-padding);
+  right: var(--tooltip-padding);
+  box-sizing: border-box;
+  height: 24px;
+  width: var(--button-width);
+  padding: 0;
+  font-size: 13px;
+  line-height: 22px;
+  text-align: center;
+  background: transparent;
+  border: 1px solid var(--medium-grey-color);
+  border-radius: 3px;
+  color: var(--secondary-font-color);
+}
+
+.button:hover {
+  background: var(--primary-bg-hover-color);
+}

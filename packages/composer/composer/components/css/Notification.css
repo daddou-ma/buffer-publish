@@ -1,0 +1,118 @@
+:import('./constants.css') {
+  error-color-primary-hue: error-color-primary-hue;
+  locked-composer-overlay-message-zindex: locked-composer-overlay-message-zindex;
+  success-notification-bg-color: success-notification-bg-color;
+  blue-color-primary-hue: blue-color-primary-hue;
+}
+
+:root {
+  --error-color-primary-hue: error-color-primary-hue;
+  --locked-composer-overlay-message-zindex: locked-composer-overlay-message-zindex;
+  --success-notification-bg-color: success-notification-bg-color;
+  --blue-color-primary-hue: blue-color-primary-hue;
+
+  --notification-border-radius: 3px;
+  --hard-close-checkbox-added-height: 28px;
+}
+
+.notification {
+  display: inline-block;
+  border-radius: var(--notification-border-radius);
+  padding: 6px;
+  color: #fff;
+  font-weight: 400;
+}
+
+.notification a {
+  color: #fff;
+  position: relative;
+  z-index: var(--locked-composer-overlay-message-zindex);
+}
+
+.notification pre {
+  margin: 0;
+  padding: 0;
+  white-space: normal;
+}
+
+.notificationWithCloseButton {
+  composes: notification;
+
+  position: relative;
+  padding-right: 26px;
+}
+
+.successNotification {
+  background-color: var(--success-notification-bg-color);
+}
+
+.errorNotification {
+  background-color: var(--error-color-primary-hue);
+}
+
+/*.infoNotification {
+  background-color: var(--blue-color-primary-hue);
+}*/
+
+.notificationWithCloseButton .closeButton {
+  position: absolute;
+  right: 6px;
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+  color: #343e47;
+  background: transparent;
+  opacity: .75;
+}
+
+.notificationWithCloseButton .closeButton::after {
+  vertical-align: top;
+}
+
+.notificationWithCloseButtonAndCheckbox {
+  composes: notificationWithCloseButton;
+
+  margin-bottom: var(--hard-close-checkbox-added-height);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/**
+ * Note: this was added as a reusable option that can be toggled on/off for all
+ * notifications, but styling was only implemented for a singe use-case, so it's
+ * expected that styling (esp. border and background color) will have to evolve
+ * as this options is used in more instances.
+ */
+.hardCloseCheckboxContainer {
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: -var(--hard-close-checkbox-added-height);
+  box-sizing: border-box;
+  height: 27px;
+  padding: 6px 6px 6px 33px;
+  background: #fff;
+  border: 1px solid #ced7df;
+  border-top: 0;
+  border-radius: var(--notification-border-radius);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  line-height: 14px;
+}
+
+.hardCloseCheckbox {
+  position: absolute;
+  top: 4px;
+  left: 9px;
+}
+
+.ctaContainer {
+  float: right;
+  margin: 6px 0 0 12px;
+}
+
+.cta {
+  composes: button from './Button.css';
+  padding: 0 40px;
+  font-size: 12px;
+}

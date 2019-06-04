@@ -1,0 +1,19 @@
+:import('./constants.css') {
+  primary-font-color: primary-font-color;
+}
+
+:root {
+  --primary-font-color: primary-font-color;
+}
+
+.profileGroups {
+  margin: 0 0px 14px -6px;
+}
+
+.createEditGroupButton {
+  composes: unselectedGroupBtn from './ProfileGroupItem.css';
+}
+
+.createEditGroupButtonCopy {
+  composes: groupName from './ProfileGroupItem.css';
+}

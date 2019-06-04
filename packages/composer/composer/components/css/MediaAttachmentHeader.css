@@ -1,0 +1,17 @@
+:import('./constants.css') {
+  secondary-font-color: secondary-font-color;
+}
+
+:root {
+  --secondary-font-color: secondary-font-color;
+
+  --header-height: 19px;
+}
+
+.mediaAttachmentHeader {
+  height: var(--header-height);
+  line-height: var(--header-height);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--secondary-font-color);
+}

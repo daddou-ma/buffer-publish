@@ -1,0 +1,48 @@
+:import('./constants.css') {
+  primary-bg-color: primary-bg-color;
+}
+
+:root {
+  --primary-bg-color: primary-bg-color;
+}
+
+.createNewBoard {
+  padding: 16px 16px 0 16px;
+  box-shadow: inset 0 1px 0 0 #f4f7f9;
+  margin-bottom: 8px
+}
+
+.newBoardName {
+  padding-left: 11px;
+  box-sizing: border-box;
+  width: 183px;
+  height: 32px;
+  border-radius: 2px;
+  background-color: var(--primary-bg-color);
+  border: solid 1px #ced7df;
+}
+
+.newBoardName:focus {
+  border-color: #8a99a3;
+  outline: none;
+}
+
+.createBoardButton {
+  box-sizing: border-box;
+  width: 77px;
+  height: 32px;
+  margin-left: 8px;
+  border-radius: 3px;
+  border: solid 1px #ced7df;
+  background-color: white;
+}
+
+.createBoardForm {
+  margin-bottom: 16px;
+}
+
+.disabledCreateButton {
+  composes: createBoardButton;
+  opacity: 0.2;
+    cursor: not-allowed;
+}

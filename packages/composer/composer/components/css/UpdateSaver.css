@@ -1,0 +1,231 @@
+:import('./constants.css') {
+  app-border-color: app-border-color;
+  primary-bg-color: primary-bg-color;
+  primary-font-color: primary-font-color;
+  primary-bg-hover-color: primary-bg-hover-color;
+  composer-section-zindex: composer-section-zindex;
+  blue-color-darker-hue: blue-color-darker-hue;
+}
+
+:root {
+  --app-border-color: app-border-color;
+  --primary-bg-color: primary-bg-color;
+  --primary-font-color: primary-font-color;
+  --primary-bg-hover-color: primary-bg-hover-color;
+  --composer-section-zindex: composer-section-zindex;
+  --blue-color-darker-hue: blue-color-darker-hue;
+
+  --button-height: 31px;
+}
+
+.section {
+  composes: clearfix from './utils.css';
+
+  position: relative;
+  padding: 0 19px 19px;
+  margin: 0 -20px -21px -20px;
+}
+
+.button {
+  composes: button from './Button.css';
+}
+
+.secondaryButton {
+  composes: secondaryButton from './Button.css';
+}
+
+.tertiaryButton {
+  composes: tertiaryButton from './Button.css';
+}
+
+.button[disabled],
+[data-disabled=true] .button, /* Hack to style buttons from external components whose attributes can't be extended */
+[data-disabled=true] .secondaryButton {
+  opacity: 1;
+  pointer-events: none; /* Allow events to propagate from disabled button */
+}
+
+.buttonsWrapper {
+	position: relative;
+	float: right;
+}
+
+.buttonsWrapper > .button:first-child:not(:last-child) {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.dropdownTrigger {
+  composes: button;
+
+  padding-left: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  left: -1px;
+  position: relative;
+  border-left: 1px solid #137ac9;
+  width: 40px;
+  box-sizing: border-box;
+}
+
+.dropdownTrigger::before {
+  position: relative;
+  top: -1px;
+  font-size: 18px;
+}
+
+.buttonsWrapper {
+  position: relative;
+  float: right;
+}
+
+.buttonsWrapper[data-disabled=true] {
+  opacity: 0.25;
+}
+
+.stackedButtonsWrapper,
+.inlineButtonsWrapper,
+.savePendingStackedButtonsWrapper,
+.savePendingInlineButtonsWrapper {
+  composes: buttonsWrapper;
+}
+
+.inlineButtonsWrapper .button,
+.inlineButtonsWrapper .secondaryButton,
+.savePendingInlineButtonsWrapper .button,
+.savePendingInlineButtonsWrapper .secondaryButton {
+  margin-left: 8px;
+}
+
+.savePendingStackedButtonsWrapper[data-disabled=true],
+.savePendingInlineButtonsWrapper[data-disabled=true] {
+  opacity: 1;
+}
+
+.savePendingStackedButtonsWrapper .addToQueueButton,
+.savePendingStackedButtonsWrapper .addToQueueButton:hover {
+  background-color: var(--blue-color-darker-hue);
+  border-radius: calc(var(--button-height) / 2);
+  opacity: 1;
+  cursor: default;
+}
+
+.savePendingInlineButtonsWrapper .button,
+.savePendingInlineButtonsWrapper .button:hover,
+.savePendingInlineButtonsWrapper .secondaryButton,
+.savePendingInlineButtonsWrapper .secondaryButton:hover {
+  opacity: 1;
+  cursor: default;
+}
+
+/**
+ * Use same z-index as composers displayed above so that the dropdown's contents
+ * take precedence in the stacking context as a result of appearance order.
+ */
+.dropdownContent {
+  top: calc(var(--button-height) + 3);
+  right: 0;
+  left: 0;
+  z-index: var(--composer-section-zindex);
+  padding: 5px 0;
+  background: var(--primary-bg-color);
+  border: 1px solid var(--app-border-color);
+}
+
+.rightAlignedDropdownContent {
+  composes: dropdownContent;
+
+  top: -210px;
+  right: auto;
+  left: 100%;
+  margin-left: 10px;
+}
+
+.dropdownMenuItem {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--button-height);
+  padding: 0 15px;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  line-height: var(--button-height);
+  font-size: 14px;
+}
+
+.dropdownMenuItem:hover {
+  background: var(--primary-bg-hover-color);
+}
+
+.inlineDropdownContainer {
+  position: relative;
+  top: -1px;
+  margin-left: 6px;
+}
+
+.dropdownContainerAsMenuItem {
+  display: block;
+  position: relative;
+}
+
+.dropdownTriggerAsMenuItem {
+  composes: dropdownMenuItem;
+
+  color: var(--primary-font-color);
+}
+
+.dropdownContentAsMenuItem {
+  composes: dropdownContent;
+
+  top: -367px;
+  right: 100%;
+  left: auto;
+  margin-right: 10px;
+}
+
+.inlineScheduler {
+  float: left;
+  margin-top: 5px;
+}
+
+.notificationContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* At most one notification is displayed there at once */
+.notification {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.circularIndicatorContainer {
+  position: absolute;
+  right: 23px;
+}
+
+.circularIndicatorContainer::before {
+  border: 4px solid rgba(0, 0, 0, 0.12);
+}
+
+.circularIndicatorCircle {
+  stroke: rgba(255, 255, 255, 0.9);
+}
+
+.humanReadableScheduledAt {
+  font-weight: bold;
+}

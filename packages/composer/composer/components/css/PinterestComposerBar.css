@@ -1,0 +1,26 @@
+:import('./constants.css') {
+  pinterest-composer-bar-bg: pinterest-composer-bar-bg;
+}
+:root {
+  --pinterest-composer-bar-bg: pinterest-composer-bar-bg;
+}
+
+.pinterestComposerBar {
+  padding:10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.inlineSubprofileDropdown {
+  margin-left: 7px;
+}
+
+.inlineSubprofileDropdownContent {
+  margin: 3px 0 0 10px;
+}
+
+.tertiaryButton {
+  composes: tertiaryButton from './Button.css';
+}

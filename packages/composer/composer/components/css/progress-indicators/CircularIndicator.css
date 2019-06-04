@@ -1,0 +1,48 @@
+:import('../constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+}
+
+.container {
+  position: relative;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 2px solid #f8f8f8;
+  border-radius: 50%;
+}
+
+.svg {
+  transform: rotate(-90deg);
+}
+
+.circle {
+  stroke: var(--blue-color-primary-hue);
+  transition: stroke-dashoffset .5s linear;
+  fill: transparent;
+}
+
+.progressText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 20px;
+  margin: -10px 0 0 -25px;
+  font-size: 10px;
+  text-align: center;
+  color: var(--blue-color-primary-hue);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 10px;
+}

@@ -1,0 +1,28 @@
+:import('../../../components/css/constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+}
+
+.link {
+  position: relative;
+  color: var(--blue-color-primary-hue);
+}
+
+/**
+* Wrapping would lead to an inaccurate bounding box and throw off current
+* tooltip positioning calculations. Short links inherit from the parent's
+* `white-space: pre-wrap`. On Chrome they don't wrap, but on Firefox they
+* do wrap, hence the Firefox specific CSS `nowrap` below. It would be preferable
+* to set `nowrap` for all browsers, but Chrome (currently?) has caret positioning
+* issues when whitespace and `pre-wrap` + `wrap` inline elements are mixed. Hence
+* having `nowrap` set only for Firefox is currently the only way to prevent short
+* links from wrapping *and* prevent any caret rendering issues :)
+*/
+@-moz-document url-prefix() {
+  .link {
+    white-space: nowrap;
+  }
+}

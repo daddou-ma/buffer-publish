@@ -1,0 +1,34 @@
+:import('./constants.css') {
+  primary-bg-color: primary-bg-color;
+}
+
+:root {
+  --primary-bg-color: primary-bg-color;
+}
+.powerSchedulerButton {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 1;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  height: 31px;
+  min-height: 31px;
+  line-height: 31px;
+  font-size: 13px;
+  background-color: rgb(255, 255, 255);
+  color: #59626a;
+  padding: 6px 13px;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
+}
+
+.powerSchedulerButton:hover {
+  color: rgb(50, 59, 67);
+}
+
+.newTabIcon {
+  margin-right: 4px;
+  font-size: 14px;
+}

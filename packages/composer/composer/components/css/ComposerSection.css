@@ -1,0 +1,68 @@
+:import('./constants.css') {
+  composer-section-zindex: composer-section-zindex;
+  composer-notice-feedback-bg-color: composer-notice-feedback-bg-color;
+  composer-notice-feedback-border-color: composer-notice-feedback-border-color;
+  geyser: geyser;
+  primary-font-color: primary-font-color;
+  grey-color-lightest-hue: grey-color-lightest-hue;
+}
+
+:root {
+  --composer-section-zindex: composer-section-zindex;
+  --composer-notice-feedback-bg-color: composer-notice-feedback-bg-color;
+  --composer-notice-feedback-border-color: composer-notice-feedback-border-color;
+  --geyser: geyser;
+  --primary-font-color: primary-font-color;
+  --grey-color-lightest-hue: grey-color-lightest-hue;
+}
+
+.composerSection {
+  padding: 10px 0 20px 0;
+  /**
+   * Create stacking context as a safety net for negative-zindex
+   * positioned elements in the composers, so that they don't
+   * disappear behind the App's opaque background.
+   */
+  position: relative;
+  z-index: var(--composer-section-zindex);
+}
+
+.emptyState {
+  padding: 8px;
+  background-color: var(--composer-notice-feedback-bg-color);
+  border: solid 1px var(--composer-notice-feedback-border-color);
+  border-radius: 3px;
+  text-align: center;
+  line-height: 22px;
+}
+
+.twitterMaxProfileNotificationContainer {
+  margin-bottom: 14px;
+}
+
+.twitterMaxProfileNotification.twitterMaxProfileNotification {
+  padding-left: 33px;
+  border: 1px solid var(--geyser);
+  background-color: var(--grey-color-lightest-hue);
+  color: var(--primary-font-color);
+}
+
+.twitterMaxProfileNotification::before {
+  position: absolute;
+  top: 6px;
+  left: 9px;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 15px;
+}
+
+.twitterMaxProfileNotification.twitterMaxProfileNotification a,
+.twitterMaxProfileNotification.twitterMaxProfileNotification label {
+  color: var(--primary-font-color);
+}
+
+/* Specificity hack */
+.twitterMaxProfileNotificationCloseButton.twitterMaxProfileNotificationCloseButton {
+  top: 6px;
+  background: transparent;
+}

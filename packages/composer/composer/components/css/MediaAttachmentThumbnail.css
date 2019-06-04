@@ -1,0 +1,144 @@
+:import('./constants.css') {
+  media-attachment-thumbnail-close-button-zindex: media-attachment-thumbnail-close-button-zindex;
+  close-button-background-zindex: close-button-background-zindex;
+  outerspace: outerspace;
+}
+
+:root {
+  --media-attachment-thumbnail-close-button-zindex: media-attachment-thumbnail-close-button-zindex;
+  --close-button-background-zindex: close-button-background-zindex;
+  --outerspace: outerspace;
+
+  --thumbnail-width: 80px;
+  --thumbnail-height: var(--thumbnail-width);
+  --img-border-radius: 3px;
+}
+
+.thumbnail {
+  position: relative;
+  width: var(--thumbnail-width);
+  height: var(--thumbnail-height);
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--img-border-radius);
+  overflow: hidden;
+  border: none;
+  background-size: cover;
+  background: #F5F5F5;
+  padding: 0;
+  margin: 0;
+}
+
+.thumbnailImage {
+  max-width: 5rem;
+  max-height: 5rem;
+  height: auto;
+  object-fit: cover;
+  min-width: 4rem;
+  min-height: 4rem;
+  width: auto;
+}
+
+.imageContainer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--img-border-radius);
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 5px solid transparent;
+  /* fixes safari rendering issue */
+  padding-left: 1px;
+  border-radius: 0;
+  z-index: var(--media-attachment-thumbnail-close-button-zindex);
+  background: transparent;
+}
+
+.closeButton::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  left: 1px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: var(--close-button-background-zindex);
+}
+
+.thumbnailFooterItem {
+  position: absolute;
+  bottom: 4px;
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  color: #fff;
+  background: var(--outerspace);
+  border-radius: 3px;
+  border-width: 0;
+}
+
+.thumbnailFooterItem::before {
+  position: relative;
+  top: -1px;
+}
+
+.editButton {
+  composes: thumbnailFooterItem;
+
+  left: 14px;
+  bottom: 14px;
+  z-index: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  font-size: 12px;
+  text-align: center;
+  text-indent: 1px;
+  line-height: 23px;
+}
+
+.editButton:hover {
+  transform: scale(1.15);
+}
+
+.videoThumbnail {
+  composes: thumbnailFooterItem;
+  left: 4px;
+}
+
+.editableVideoThumbnail {
+  composes: videoThumbnail;
+
+  left: 27px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.buttonWrapper {
+  height: 5rem;
+  width: 5rem;
+  border: 1px solid #B8B8B8;
+  border-radius: 4px;
+}

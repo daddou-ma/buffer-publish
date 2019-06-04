@@ -1,0 +1,28 @@
+.mention {
+  composes: mention from './AutocompleteComposableStyles.css';
+}
+
+.mentionSuggestions {
+  composes: mentionSuggestions from './AutocompleteComposableStyles.css';
+}
+
+.mentionSuggestionsEntry {
+  composes: mentionSuggestionsEntry from './AutocompleteComposableStyles.css';
+
+  height: 24px;
+  padding: 0 5px;
+  line-height: 24px;
+}
+
+.mentionSuggestionsEntryFocused {
+  composes: mentionSuggestionsEntry;
+  composes: mentionSuggestionsEntryFocused from './AutocompleteComposableStyles.css';
+}
+
+.mentionSuggestionsEntryText {
+  composes: mentionSuggestionsEntryText from './AutocompleteComposableStyles.css';
+}
+
+.mentionSuggestionsEntryName {
+  composes: mentionSuggestionsEntryName from './AutocompleteComposableStyles.css';
+}

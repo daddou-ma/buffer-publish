@@ -1,0 +1,111 @@
+:import('./constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+  blue-color-secondary-hue: blue-color-secondary-hue;
+  grey-color-primary-hue: grey-color-primary-hue;
+  grey-color-lighter-hue: grey-color-lighter-hue;
+  grey-color-lightest-hue: grey-color-lightest-hue;
+  primary-font-color: primary-font-color;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+  --blue-color-secondary-hue: blue-color-secondary-hue;
+  --grey-color-primary-hue: grey-color-primary-hue;
+  --grey-color-lighter-hue: grey-color-lighter-hue;
+  --grey-color-lightest-hue: grey-color-lightest-hue;
+  --primary-font-color: primary-font-color;
+
+  --button-height: 31px;
+  --line-height: 29px;
+}
+
+.button {
+  /* Ensure base styles specificity is always lower by appearing higher in the source */
+  composes: specificityAnchor from "./BaseButton.css";
+
+  box-sizing: border-box;
+  height: var(--button-height);
+  padding: 0 15px;
+  line-height: var(--line-height);
+  border-radius: calc(var(--button-height) / 2);
+  font-size: 14px;
+  /*
+   * Note: the specificity trick in .button didn't work in Publish for a reason I couldn't
+   * identify, the use of !important below is a quick fix and is meant to be refactored.
+   */
+  color: #fff !important;
+  background: var(--blue-color-primary-hue);
+  border: 1px solid transparent;
+  font-weight: 400;
+}
+
+.button:hover {
+  background: #2d99ec;
+}
+
+.button:focus {
+	outline: none;
+	background: #2d99ec;
+}
+
+.secondaryButton {
+  composes: button;
+
+  background: white;
+  border-color: var(--blue-color-primary-hue);
+  /*
+   * Note: the specificity trick in .button didn't work in Publish for a reason I couldn't
+   * identify, the use of !important below is a quick fix and is meant to be refactored.
+   */
+  color: var(--blue-color-primary-hue) !important;
+}
+
+.secondaryButton:hover {
+  background: white;
+}
+
+.secondaryButton:focus {
+  outline: none;
+  background: white;
+}
+
+.tertiaryButton {
+  composes: button;
+
+  height: 27px;
+  line-height: 25px;
+  font-size: 13px;
+  background: var(--grey-color-lighter-hue);
+  border-color: var(--grey-color-primary-hue);
+  /*
+   * Note: the specificity trick in .button didn't work in Publish for a reason I couldn't
+   * identify, the use of !important below is a quick fix and is meant to be refactored.
+   */
+  color: var(--primary-font-color) !important;
+}
+
+.tertiaryButton:hover,
+.tertiaryButton:focus {
+  background: var(--grey-color-lightest-hue);
+}
+
+.button[disabled],
+[data-disabled=true] .button, /* Hack to style buttons from external components whose attributes can't be extended */
+[data-disabled=true] .secondaryButton,
+[data-disabled=true] .tertiaryButton {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.button[disabled],
+[data-disabled=true] .button { /* Hack to style buttons from external components whose attributes can't be extended */
+  background-color: var(--blue-color-primary-hue);
+}
+
+[data-disabled=true] .secondaryButton {
+  background: white;
+}
+
+[data-disabled=true] .tertiaryButton {
+  background: var(--grey-color-lighter-hue);
+}

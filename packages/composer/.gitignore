@@ -1,0 +1,11 @@
+dist
+node_modules
+npm-debug.log
+lerna-debug.log
+yarn-error.log
+coverage
+*.sublime*
+.cache-loader
+.DS_Store
+.vscode/
+.idea/
