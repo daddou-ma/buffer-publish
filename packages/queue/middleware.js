@@ -95,7 +95,6 @@ export default ({ dispatch, getState }) => next => (action) => {
        * We also re-fetch the queue when a post is deleted
        * as this may have caused posts to change schedule
        */
-      console.log(action);
       dispatch(dataFetchActions.fetch({
         name: 'queuedPosts',
         args: {
