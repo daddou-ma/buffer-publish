@@ -23,10 +23,12 @@ class SlotPicker extends React.Component {
     slot: PropTypes.instanceOf(moment),
     timezone: PropTypes.string,
     className: PropTypes.string,
+    emptyByDefault: PropTypes.bool,
   };
 
   static defaultProps = {
     metaData: undefined,
+    emptyByDefault: false,
   };
 
   onSlotChange = (e) => {
@@ -68,7 +70,7 @@ class SlotPicker extends React.Component {
   };
 
   render() {
-    const { slots, slot, className } = this.props;
+    const { slots, slot, className, emptyByDefault } = this.props;
     const EMPTY_OPTION_VALUE = 'empty';
 
     const slotTimestamp = slot.unix();
@@ -80,7 +82,8 @@ class SlotPicker extends React.Component {
       (isSlotTimeInFuture &&
         slots.some(({ timestamp, isSlotFree }) => timestamp === slotTimestamp && isSlotFree))
     );
-    const selectedSlot = isSlotTimestampAvailable ? slotTimestamp : EMPTY_OPTION_VALUE;
+    const selectedSlot = isSlotTimestampAvailable && !emptyByDefault ?
+      slotTimestamp : EMPTY_OPTION_VALUE;
 
     const hasSlots = slots.length > 0;
 

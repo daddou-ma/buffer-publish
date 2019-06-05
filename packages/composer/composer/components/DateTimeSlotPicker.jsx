@@ -14,12 +14,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
+import { InputDate } from '@bufferapp/components';
+
 import TimePicker from '../components/TimePicker';
 import SlotPicker from '../components/SlotPicker';
 import Button from '../components/Button';
 import Select from '../components/Select';
 
-import { InputDate } from '@bufferapp/components';
 import styles from './css/DateTimeSlotPicker.css';
 
 class DateTimeSlotPicker extends React.Component {
@@ -38,6 +39,7 @@ class DateTimeSlotPicker extends React.Component {
       today,
       selectedDateTime,
       shouldDisplaySlotPicker,
+      emptyByDefault: false,
     };
   }
 
@@ -128,7 +130,10 @@ class DateTimeSlotPicker extends React.Component {
   };
 
   onTimePickerChange = this.updateTime;
-  onSlotPickerChange = this.updateTime;
+  onSlotPickerChange = (time) => {
+    this.updateTime(time);
+    this.setState({ emptyByDefault: false });
+  };
 
   onSwitchToSlotPickerClick = () => {
     // Update UI state
@@ -149,6 +154,8 @@ class DateTimeSlotPicker extends React.Component {
 
     const isPinnedToSlot = hasSlotAvailableForSelectedDateTime;
     this.props.onChange(this.state.selectedDateTime, isPinnedToSlot);
+
+    this.setState({ emptyByDefault: true });
   };
 
   onSwitchToTimePickerClick = () => {
@@ -206,7 +213,7 @@ class DateTimeSlotPicker extends React.Component {
   }
 
   render() {
-    const { today, selectedDateTime, shouldDisplaySlotPicker } = this.state;
+    const { today, selectedDateTime, shouldDisplaySlotPicker, emptyByDefault } = this.state;
     const {
       metaData, timezone, shouldUse24hTime, submitButtonCopy, isSlotPickingAvailable,
       availableSchedulesSlotsForDay,
@@ -265,6 +272,7 @@ class DateTimeSlotPicker extends React.Component {
             slot={selectedDateTime}
             onChange={this.onSlotPickerChange}
             className={styles.slotPicker}
+            emptyByDefault={emptyByDefault}
           /> :
           <Select disabled className={styles.slotPicker} value="">
             <option value="">Loading slots…</option>
