@@ -31,7 +31,7 @@ const rpcHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
 const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
-const { sendFavicon } = require('./lib/favicon');
+const { getFaviconCode, setupFaviconRoutes } = require('./lib/favicon');
 const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
 const serialize = require('serialize-javascript');
 const multer = require('multer');
@@ -43,15 +43,7 @@ const multiBodyParser = multer();
 const composerAjaxBuffemetrics = require('./lib/composerAjaxBuffermetrics');
 
 // Favicon
-app.get(
-  '/favicon.ico',
-  (req, res) => sendFavicon(req, res, 'ico'),
-);
-
-app.get(
-  /\/favicon-(16|32)\.png/,
-  (req, res) => sendFavicon(req, res, 'png'),
-);
+setupFaviconRoutes(app, isProduction);
 
 let staticAssets = {
   'bundle.js': 'https://local.buffer.com:8080/static/bundle.js',
@@ -187,7 +179,8 @@ const getHtml = ({ notification, userId, modalKey, modalValue }) =>
     .replace('{{{appcues}}}', isProduction ? appcuesScript : '')
     .replace('{{{intercomScript}}}', intercomScript)
     .replace('{{{helpScoutScript}}}', helpScoutScript)
-    .replace('{{{userScript}}}', getUserScript({ id: userId }));
+    .replace('{{{userScript}}}', getUserScript({ id: userId }))
+    .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }));
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());

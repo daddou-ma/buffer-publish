@@ -557,10 +557,10 @@
     react-dom "16.6.3"
     styled-components "3.4.10"
 
-"@bufferapp/ui@3.13.0":
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.13.0.tgz#3ee33745b06d37bb9cf0c90a19ab0f08d1d8ad54"
-  integrity sha512-LdhKuK9YI+KlkyA0BuSYqk0B9428/IQ1UQj7cK77PcZBjCi4+h+8x3KKd8WEUQ0A/0g3QonDlvUp1jv3cezwnA==
+"@bufferapp/ui@3.13.1":
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.13.1.tgz#b785690bad92bead4cdaefcc08493fa3bbeaeff1"
+  integrity sha512-Eu3yCR6yX2K9tJkWeI5fNQtERxtkYNF+ooJYH2nEuU51yRlo4wN3yl/lpLWTmodc619YokSWsJgwoB2KKoR1+Q==
   dependencies:
     immutability-helper "^2.9.0"
     react "16.6.3"

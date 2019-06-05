@@ -10,6 +10,7 @@ const containerStyle = {
   flexDirection: 'column',
   flexGrow: 0,
   height: '1px',
+  scrollbarColor: 'rgba(89, 98, 106, 0.4) transparent', // firefox
 };
 
 function ScrollableContainer({
