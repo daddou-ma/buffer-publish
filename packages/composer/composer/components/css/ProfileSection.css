@@ -1,0 +1,76 @@
+:import('./constants.css') {
+  profile-section-border-color: app-secondary-border-color;
+  profile-picture-container-total-height: profile-picture-container-total-height;
+  profile-scroll-container-zindex: profile-scroll-container-zindex;
+
+  primary-bg-color: primary-bg-color;
+  app-border-color: app-border-color;
+  medium-grey-color: medium-grey-color;
+}
+
+:root {
+  --profile-section-border-color: profile-section-border-color;
+  --profile-picture-container-total-height: profile-picture-container-total-height;
+  --profile-scroll-container-zindex: profile-scroll-container-zindex;
+
+  --primary-bg-color: primary-bg-color;
+  --app-border-color: app-border-color;
+  --medium-grey-color: medium-grey-color;
+}
+
+.header {
+  composes: appHeader from './App.css';
+}
+
+.profilesContainer {
+  position: relative;
+}
+
+.profilesScrollContainer {
+  max-height: calc(3 * var(--profile-picture-container-total-height) - 15px);
+  overflow-y: auto;
+  margin: -8px -12px 0 -4px;
+  padding: 8px 1px 0 4px;
+}
+
+.profilesScrollContainer::before,
+.profilesScrollContainer::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: var(--profile-scroll-container-zindex);
+  height: 10px;
+  pointer-events: none;
+}
+
+.profilesScrollContainer::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--primary-bg-color), rgba(255, 255, 255, 0) 90%, rgba(255, 255, 255, 0));
+}
+
+.profilesScrollContainer::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--primary-bg-color), rgba(255, 255, 255, 0) 90%, rgba(255, 255, 255, 0));
+}
+
+.profile:last-child {
+  /**
+   * It would have been easier to set padding-bottom to 8px on .profilesScrollContainer,
+   * but the browser implementation differences for padding-bottom w/ scrolling involved
+   * as mentioned in https://github.com/w3c/csswg-drafts/issues/129 make it necessary
+   * to use another approach. Bottom margin on the last child works great as an alternative.
+   */
+  margin-bottom: 10px;
+}
+
+.profilesToggler {
+  composes: unselectedGroupBtn from './ProfileGroupItem.css';
+
+  float: right;
+  margin: 0;
+}
+
+.profilesTogglerCopy {
+  composes: groupName from './ProfileGroupItem.css';
+}

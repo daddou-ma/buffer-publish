@@ -1,0 +1,14 @@
+.tooltipUL {
+  margin: 3px 0 5px 0;
+  padding-left: 0;
+}
+
+.tooltipItem {
+  margin-left: 15px;
+  line-height: 15px;
+  text-indent: -5px;
+}
+
+.title {
+  margin: 0 0 5px 0;
+}

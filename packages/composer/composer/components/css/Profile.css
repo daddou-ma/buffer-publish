@@ -1,0 +1,224 @@
+:import('./constants.css') {
+  appdotnet-color: appdotnet-color;
+  facebook-color: facebook-color;
+  twitter-color: twitter-color;
+  linkedin-color: linkedin-color;
+  google-color: google-color;
+  pinterest-color: pinterest-color;
+  instagram-color: instagram-color;
+  missing-avatar-bg-color: missing-avatar-bg-color;
+  profile-picture-size: profile-picture-size;
+  profile-picture-margin-right: profile-picture-margin-right;
+  profile-picture-margin-bottom: profile-picture-margin-bottom;
+  profile-dropdowns-zindex: profile-dropdowns-zindex;
+  unselected-profile-avatar-color: unselected-profile-avatar-color;
+  primary-bg-color: primary-bg-color;
+  profile-container-zindex: profile-container-zindex;
+}
+
+:root {
+  --appdotnet-color: appdotnet-color;
+  --facebook-color: facebook-color;
+  --twitter-color: twitter-color;
+  --linkedin-color: linkedin-color;
+  --unselected-profile-avatar-color: unselected-profile-avatar-color;
+  --google-color: google-color;
+  --pinterest-color: pinterest-color;
+  --instagram-color: instagram-color;
+  --missing-avatar-bg-color: missing-avatar-bg-color;
+  --profile-picture-size: profile-picture-size;
+  --profile-picture-margin-right: profile-picture-margin-right;
+  --profile-picture-margin-bottom: profile-picture-margin-bottom;
+  --profile-dropdowns-zindex: profile-dropdowns-zindex;
+  --profile-container-zindex: profile-container-zindex;
+  --primary-bg-color: primary-bg-color;
+  --profile-border-color: #989da1;
+}
+
+.profileContainer {
+  display: inline-block;
+  float: left;
+  width: var(--profile-picture-size);
+  height: var(--profile-picture-size);
+  margin: 0 var(--profile-picture-margin-right) var(--profile-picture-margin-bottom) 0;
+  z-index: var(--profile-container-zindex);
+}
+
+.profile {
+  position: relative;
+  display: inline-block;
+  width: var(--profile-picture-size);
+  height: var(--profile-picture-size);
+  border-radius: 50%;
+  padding: 0px;
+  box-sizing: content-box;
+  transition: padding .5s ease;
+  background-color: transparent;
+  border: none;
+}
+
+.profile:focus,
+.profileDropdownTrigger:focus {
+  outline: none;
+}
+
+.profile::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  left: -1px;
+  top: -1px;
+}
+
+.profileContainer:hover .profile::before,
+.expandedProfileDropdownTrigger .profile::before {
+  border: 1px solid var(--profile-border-color);
+}
+
+/* Those dynamic classes are being used below as part of dynamic selectors */
+.selectedProfile,
+.unselectedProfile{
+  composes: profile;
+}
+
+.selectedProfilePicture {
+  width: var(--profile-picture-size);
+  height: var(--profile-picture-size);
+  border-radius: 50%;
+  box-shadow: 0px 0px 1px #999;
+  display: inline-block;
+  background-size: cover;
+  background-color: var(--missing-avatar-bg-color);
+}
+
+.unselectedProfilePicture {
+  composes: selectedProfilePicture;
+
+  filter: grayscale(1);
+}
+
+.unselectedProfilePictureContainer {
+  opacity: 0.3;
+}
+
+.socialNetworkIcon {
+  position: absolute;
+  right: -4px;
+  bottom: -1px;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  border: 0px solid #fff;
+  border-radius: 50%;
+  background: var(--primary-bg-color);
+  color: var(--unselected-profile-avatar-color);
+}
+
+.socialNetworkIcon::before {
+  vertical-align: top;
+}
+
+.appdotnetIcon,
+.facebookIcon,
+.twitterIcon,
+.linkedinIcon,
+.googleIcon,
+.pinterestIcon,
+.instagramIcon {
+  composes: socialNetworkIcon;
+}
+
+.profileContainer:hover .unselectedProfilePicture  {
+  filter: none;
+}
+
+.profileContainer:hover .unselectedProfilePictureContainer {
+  opacity: 1;
+}
+
+.profileContainer:hover .appdotnetIcon,
+.selectedProfile .appdotnetIcon,
+.expandedProfileDropdownTrigger .appdotnetIcon {
+  color: var(--appdotnet-color);
+}
+
+.profileContainer:hover .facebookIcon,
+.selectedProfile .facebookIcon,
+.expandedProfileDropdownTrigger .facebookIcon {
+  color: var(--facebook-color);
+}
+
+.profileContainer:hover .twitterIcon,
+.selectedProfile .twitterIcon,
+.expandedProfileDropdownTrigger .twitterIcon {
+  color: var(--twitter-color);
+}
+
+.profileContainer:hover .linkedinIcon,
+.selectedProfile .linkedinIcon,
+.expandedProfileDropdownTrigger .linkedinIcon {
+  color: var(--linkedin-color);
+}
+
+.profileContainer:hover .googleIcon,
+.selectedProfile .googleIcon,
+.expandedProfileDropdownTrigger .googleIcon {
+  color: var(--google-color);
+}
+
+.profileContainer:hover .pinterestIcon,
+.selectedProfile .pinterestIcon,
+.expandedProfileDropdownTrigger .pinterestIcon {
+  color: var(--pinterest-color);
+}
+
+.profileContainer:hover .instagramIcon,
+.selectedProfile .instagramIcon,
+.expandedProfileDropdownTrigger .instagramIcon {
+  color: var(--instagram-color);
+}
+
+.profileDropdownTrigger {}
+
+.expandedProfileDropdownTrigger {
+  composes: profileDropdownTrigger;
+}
+
+.lockedProfileDropdownTrigger {
+  composes: profileDropdownTrigger;
+  cursor: not-allowed;
+}
+
+.dropdownContent {
+  z-index: var(--profile-dropdowns-zindex);
+  margin-left: -7px;
+}
+
+.lockedProfileContainer {
+  composes: profileContainer;
+  position: relative;
+}
+
+.lockedProfileContainer::before {
+  /* content property is inherited from external bi-lock class */
+  position: absolute;
+  z-index: var(--profile-container-zindex);
+  left: 15px;
+  top: 14px;
+  pointer-events: none;
+  cursor: not-allowed;
+  color: #343e47;
+  font-size: 10px;
+}
+
+.lockedProfileContainer button[disabled] {
+  cursor: not-allowed;
+}
+
+.lockedProfileContainer:hover .socialNetworkIcon {
+  color: var(--unselected-profile-avatar-color);
+  transform: none;
+}

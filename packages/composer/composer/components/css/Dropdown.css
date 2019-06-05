@@ -1,0 +1,29 @@
+:import('./constants.css') {
+  small-box-shadow: small-box-shadow
+}
+
+:root {
+  --small-box-shadow: small-box-shadow;
+}
+
+.dropdown {
+  display: inline-block;
+}
+
+.dropdownTrigger {
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dropdownContent {
+  position: absolute;
+  display: none;
+  border-radius: 3px;
+  box-shadow: var(--small-box-shadow);
+}
+
+.visibleDropdownContent {
+  composes: dropdownContent;
+  display: block;
+}

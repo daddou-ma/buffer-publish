@@ -1,0 +1,628 @@
+:import('./constants.css') {
+  primary-font-color: primary-font-color;
+  blue-color-primary-hue: blue-color-primary-hue;
+  composer-inner-border-color: composer-inner-border-color;
+  composer-text-editor-overlay-zindex: composer-text-editor-overlay-zindex;
+  locked-composer-overlay-zindex: locked-composer-overlay-zindex;
+  composer-update-zone-border-radius: composer-update-zone-border-radius;
+  composer-text-zone-padding: composer-text-zone-padding;
+  composer-text-zone-line-height: composer-text-zone-line-height;
+  composer-collapsed-text-zone-height: composer-collapsed-text-zone-height;
+  composer-text-zone-width-attachment-glance: composer-text-zone-width-attachment-glance;
+  composer-text-zone-width-attachment-glance-no-thumbnail: composer-text-zone-width-attachment-glance-no-thumbnail;
+  large-box-shadow: large-box-shadow;
+  error-color-secondary-hue: error-color-secondary-hue;
+  error-color-darker-hue: error-color-darker-hue;
+  disabled-icon-grey-color: disabled-icon-grey-color;
+  green-color: green-color;
+  light-grey-color: light-grey-color;
+  medium-grey-color: medium-grey-color;
+  primary-bg-color: primary-bg-color;
+  composer-notice-feedback-bg-color: composer-notice-feedback-bg-color;
+  composer-notice-feedback-border-color: composer-notice-feedback-border-color;
+  composer-notice-feedback-font-color: composer-notice-feedback-font-color;
+  composer-notice-info-bg-color: composer-notice-info-bg-color;
+  composer-notice-info-border-color: composer-notice-info-border-color;
+  unselected-profile-avatar-color: unselected-profile-avatar-color;
+  saved-composer-feedback-zindex: saved-composer-feedback-zindex;
+  composer-notice-icon-color: composer-notice-icon-color;
+
+  appdotnet-color: appdotnet-color;
+  facebook-color: facebook-color;
+  twitter-color: twitter-color;
+  linkedin-color: linkedin-color;
+  google-color: google-color;
+  pinterest-color: pinterest-color;
+  instagram-color: instagram-color;
+  composer-notice-icon-zindex: composer-notice-icon-zindex;
+}
+
+:root {
+  --primary-font-color: primary-font-color;
+  --composer-inner-border-color: composer-inner-border-color;
+  --blue-color-primary-hue: blue-color-primary-hue;
+  --composer-text-editor-overlay-zindex: composer-text-editor-overlay-zindex;
+  --locked-composer-overlay-zindex: locked-composer-overlay-zindex;
+  --composer-update-zone-border-radius: composer-update-zone-border-radius;
+  --composer-collapsed-text-zone-height: composer-collapsed-text-zone-height;
+  --composer-text-zone-width-attachment-glance: composer-text-zone-width-attachment-glance;
+  --composer-text-zone-width-attachment-glance-no-thumbnail: composer-text-zone-width-attachment-glance-no-thumbnail;
+  --large-box-shadow: large-box-shadow;
+  --error-color-secondary-hue: error-color-secondary-hue;
+  --error-color-darker-hue: error-color-darker-hue;
+  --light-grey-color: light-grey-color;
+  --medium-grey-color: medium-grey-color;
+  --disabled-icon-grey-color: disabled-icon-grey-color;
+  --green-color: green-color;
+  --primary-bg-color: primary-bg-color;
+  --composer-notice-feedback-bg-color: composer-notice-feedback-bg-color;
+  --composer-notice-feedback-border-color: composer-notice-feedback-border-color;
+  --composer-notice-feedback-font-color: composer-notice-feedback-font-color;
+  --composer-notice-info-bg-color: composer-notice-info-bg-color;
+  --composer-notice-info-border-color: composer-notice-info-border-color;
+  --unselected-profile-avatar-color: unselected-profile-avatar-color;
+  --saved-composer-feedback-zindex: saved-composer-feedback-zindex;
+  --composer-notice-icon-color: composer-notice-icon-color;
+
+  --appdotnet-color: appdotnet-color;
+  --facebook-color: facebook-color;
+  --twitter-color: twitter-color;
+  --linkedin-color: linkedin-color;
+  --google-color: google-color;
+  --pinterest-color: pinterest-color;
+  --instagram-color: instagram-color;
+
+  --composer-active-border-color: medium-grey-color;
+
+  --media-attachment-switch-height: 15px;
+
+  --footer-elements-margin: 8px;
+  --footer-elements-height: 40px;
+  --image-first-thumbnail-dimension: 144px;
+  --composer-notice-icon-zindex: composer-notice-icon-zindex;
+}
+
+.composer {
+  position: relative;
+  margin: 0 0 10px 0;
+  padding: 0 0 0 34px;
+}
+
+.omnibox {
+  padding: 0;
+}
+
+.composer .imageFirstMediaAttachment {
+  order: 1;
+  padding: 0;
+  margin: 10px 12px 10px 10px;
+  align-self: flex-start;
+  flex-basis: 100%;
+  max-width: var(--image-first-thumbnail-dimension);
+}
+
+.mediaAttachmentWithSuggestedMedia {
+  padding-bottom: 20px;
+}
+
+.imageFirstSuggestedMediaBox {
+  order: 3;
+  flex-basis: 100%;
+  border-radius: 0;
+  border-left: 0;
+  border-bottom: 0;
+  clear: both;
+}
+
+.suggestedMediaBoxAlignedBottom {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+}
+
+.composerFooter {
+  flex-grow: 1;
+  display: block;
+  order: 4;
+  flex-basis: 100%;
+}
+
+.imageFirstFooter {
+  composes: composerFooter;
+  clear: both;
+}
+
+.imageFirstFooter:not(:empty) {
+  border-top: 1px solid var(--composer-inner-border-color);
+}
+
+.imageFirstWrapper {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+}
+
+.imageFirstContainer {
+  flex-basis: 100%;
+}
+
+.mediaWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-basis: 100%;
+  clear: both;
+  z-index: 20;
+  position: relative;
+}
+
+
+.composer:last-child {
+  margin-bottom: 0;
+}
+
+.lockedComposer:before {
+  width: 100%;
+  background: white;
+  opacity: 0.3;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  cursor: default;
+  z-index: var(--locked-composer-overlay-zindex);
+}
+
+.composerDisplayedBehindAnother {
+  composes: composer;
+  z-index: 0;
+}
+
+.socialNetworkIcon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 0;
+  top: 8px;
+  width: 24px;
+  font-size: 24px;
+  border-radius: 50%;
+  background: var(--primary-bg-color);
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.iconWithProfileCount::after {
+  content: attr(data-profile-count);
+  display: inline-block;
+  position: absolute;;
+  bottom: -4px;
+  right: -2px;
+  background: white;
+  border-radius: 50%;
+  border: 1px solid;
+  padding: 2px 3px;
+  font-size: 10px;
+  line-height: 8px;
+  height: 15px;
+  min-width: 15px;
+  font-weight: 600;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.socialNetworkIcon::before {
+  vertical-align: top;
+}
+
+.lockedNetworkIcon {
+  composes: socialNetworkIcon;
+  color: var(--unselected-profile-avatar-color);
+}
+
+.appdotnetIcon {
+  composes: socialNetworkIcon;
+  color: var(--appdotnet-color);
+}
+
+.appdotnetIcon::after {
+  border-color: var(--appdotnet-color);
+}
+
+.facebookIcon {
+  composes: socialNetworkIcon;
+  color: var(--facebook-color);
+}
+
+.facebookIcon::after {
+  border-color: var(--facebook-color);
+}
+
+.twitterIcon {
+  composes: socialNetworkIcon;
+  color: var(--twitter-color);
+}
+
+.twitterIcon::after {
+  border-color: var(--twitter-color);
+}
+
+.linkedinIcon {
+  composes: socialNetworkIcon;
+  color: var(--linkedin-color);
+}
+
+.linkedinIcon::after {
+  border-color: var(--linkedin-color);
+}
+
+.googleIcon {
+  composes: socialNetworkIcon;
+  color: var(--google-color);
+}
+
+.googleIcon::after {
+  border-color: var(--google-color);
+}
+
+.pinterestIcon {
+  composes: socialNetworkIcon;
+  color: var(--pinterest-color);
+}
+
+.pinterestIcon::after {
+  border-color: var(--pinterest-color);
+}
+
+.instagramIcon {
+  composes: socialNetworkIcon;
+  color: var(--instagram-color);
+}
+
+.instagramIcon::after {
+  border-color: var(--instagram-color);
+}
+
+.updateZone {
+  composes: clearfix from './utils.css';
+  position: relative;
+  border: 1px solid var(--composer-inner-border-color);
+  border-radius: var(--composer-update-zone-border-radius);
+}
+
+.updateZone:hover {
+  border-color: var(--composer-active-border-color);
+}
+
+.updateZone::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: var(--composer-text-editor-overlay-zindex);
+  display: block;
+  width: 0;
+  height: 38px;
+  background: var(--primary-bg-color);
+  border-radius: 0 var(--composer-update-zone-border-radius) var(--composer-update-zone-border-radius) 0;
+}
+
+.expandedUpdateZone {
+  composes: updateZone;
+  border-color: var(--composer-active-border-color);
+}
+
+.updateZoneWithNotice {
+  display: flex;
+  overflow: hidden;
+}
+
+.updateZoneWithAttachmentGlance::before {
+  width: var(--composer-text-zone-width-attachment-glance);
+}
+
+.updateZoneAttachmentGlanceNoThumbnail::before {
+  width: var(--composer-text-zone-width-attachment-glance-no-thumbnail);
+}
+.displayedBehindAnotherUpdateZone {
+  position: relative;
+  border-color: var(--composer-active-border-color);
+  cursor: pointer;
+}
+
+.displayedBehindAnotherUpdateZone::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  display: block;
+  background: hsla(0, 0%, 100%, .5);
+  z-index: var(--composer-text-editor-overlay-zindex);
+}
+
+.displayedBehindAnotherUpdateZone:hover::after {
+  background: transparent;
+}
+
+.lockedDisplayedBehindAnotherZone {
+  composes: displayedBehindAnotherUpdateZone;
+}
+
+.displayedBehindAnotherUpdateZone:hover::after {
+  background: hsla(0, 0%, 100%, .5);
+}
+.errorUpdateZone {
+  border-radius: var(--composer-update-zone-border-radius);
+  border-color: var(--error-color-secondary-hue);
+  cursor: default;
+}
+
+.errorUpdateZone:hover {
+  border-color: var(--error-color-secondary-hue);
+}
+
+.attachmentTogglesContainer {
+  position: absolute;
+  top: 10px;
+  right: 9px;
+  z-index: var(--composer-text-editor-overlay-zindex);
+}
+
+.attachmentSwitch {
+  margin-left: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #323b43;
+  font-size: 12px;
+  line-height: 36px;
+}
+
+.attachmentSwitch:hover {
+  color: var(--blue-color-primary-hue);
+}
+
+.attachmentSwitchIcon {
+  display: inline-block;
+  height: var(--media-attachment-switch-height);
+  margin-right: 9px;
+  line-height: var(--media-attachment-switch-height);
+  font-size: 14px;
+  vertical-align: baseline;
+}
+
+.doneButton {
+  composes: button from './Button.css';
+  float: right;
+  margin: var(--footer-elements-margin);
+}
+
+.characterCount {
+  padding: 3px;
+  margin: 0 10px 10px 0;
+  font-size: 12px;
+  line-height: 12px;
+  float: right;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: var(--light-grey-color);
+  border-radius: 3px;
+}
+
+.toggleCommentContainer {
+  display: flex;
+  align-items: center;
+  line-height: 26px;
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  line-height: 26px;
+}
+
+.togglePosition {
+  margin-left: -0.5rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.characterCountComment {
+  padding: 3px;
+  font-size: 12px;
+  line-height: 12px;
+  float: right;
+  position: absolute;
+  right: 0;
+  background-color: var(--light-grey-color);
+  border-radius: 3px;
+}
+
+.aboveAttachmentCharCount,
+.imageFirstCharacterCount {
+  composes: characterCount;
+  position: static;
+}
+
+.editorMediaContainer {
+  position: relative;
+  flex-basis: 100%;
+}
+
+.charCountNoMediaAttachment {
+  composes: characterCount;
+  position: relative;
+  margin-top: 10px;
+}
+
+.inlineError {
+  width: 100%;
+  color: white;
+  padding: 8px;
+  box-sizing: border-box;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.editableErrorUpdateZone {
+  border: 1px solid var(--error-color-secondary-hue);
+}
+
+.editableErrorUpdateZone:hover {
+  border: 1px solid var(--error-color-darker-hue);
+}
+
+.editableErrorUpdateZone:hover .inlineError {
+  background: var(--error-color-darker-hue);
+}
+
+.composerNotice {
+  /*height: 30px;*/
+  border-radius: 3px;
+  margin: 10px 10px 10px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  font-size: 12px;
+  line-height: 20px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.composerNotice:not(:first-child) {
+  margin-top: 6px;
+}
+
+.composerInfoMessageContainer {
+  composes: composerNotice;
+
+  background-color: var(--composer-notice-info-bg-color);
+  border-color: var(--composer-notice-info-border-color);
+}
+
+.composerInfoMessage {
+  width: 100%;
+  padding: 0;
+  color: var(--primary-font-color);
+  background-color: transparent;
+}
+
+.composerInfoMessage a {
+  color: var(--primary-font-color);
+}
+
+.composerInfoMessageCloseButton {
+  top: 3px;
+  right: 0;
+  color: var(--primary-font-color);
+}
+
+.composerFeedbackMessage {
+  composes: composerNotice;
+  border-color: var(--composer-notice-feedback-border-color);
+  background-color: var(--composer-notice-feedback-bg-color);
+  color: var(--composer-notice-feedback-font-color);
+}
+
+.hiddenA11yText {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  width: 1px;
+  position: absolute;
+}
+
+.savedComposerFeedback {
+  background: white;
+  position: absolute;
+  height: 38px;
+  border-radius: 3px;
+  width: 100%;
+  z-index: var(--saved-composer-feedback-zindex);
+  color: #abb3ba;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  box-sizing: border-box;
+  font-weight: 400;
+}
+
+.savedComposerFeedback::before {
+  color: white;
+  background: var(--green-color);
+  position: absolute;
+  right: 10px;
+  border-radius: 50%;
+  padding: 2px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.savedUpdateZone {
+  composes: updateZone;
+  border: solid 1px #e6ebef;
+}
+.savedUpdateZone:hover {
+  border: solid 1px #e6ebef;
+}
+
+.noticeIcon {
+  margin-left: 8px;
+  color: var(--composer-notice-icon-color);
+  align-self: center;
+  font-size: 18px;
+  position: relative;
+  top: -2px;
+  z-index: var(--composer-notice-icon-zindex);
+}
+
+.alertIcon {
+  margin-left: 8px;
+  color: var(--error-color-secondary-hue);
+  align-self: center;
+  font-size: 18px;
+  position: relative;
+  top: -2px;
+  z-index: var(--composer-notice-icon-zindex);
+}
+
+.removeNoticeIcon {
+  opacity: 0;
+  color: var(--composer-notice-icon-color);
+  position: absolute;
+  left: -7px;
+  top: -1px;
+  background: white;
+  border: none;
+}
+
+.removeNoticeIcon:hover {
+  opacity: 1;
+}
+
+.expandedFirstComment {
+  resize: none;
+  border: 1px solid var(--composer-active-border-color);
+  border-radius: 3px;
+  padding: 5px 10px;
+  width: calc(100% - 22px);
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+.questionIcon {
+  display: flex;
+  align-items: center;
+  margin-left: 9px;
+}

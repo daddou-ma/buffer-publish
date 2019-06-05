@@ -1,0 +1,209 @@
+:import('./constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+  secondary-font-color: secondary-font-color;
+  composer-inner-border-color: composer-inner-border-color;
+  update-attachment-bg-color: update-attachment-bg-color;
+  link-attachment-thumbnail-width: link-attachment-thumbnail-width;
+  link-attachment-thumbnail-height: link-attachment-thumbnail-height;
+  primary-bg-color: primary-bg-color;
+  primary-font-color: primary-font-color;
+  link-attachment-thumbnail-upload-progress-indicator-zindex: link-attachment-thumbnail-upload-progress-indicator-zindex;
+  link-attachment-thumbnail-upload-zone-zindex: link-attachment-thumbnail-upload-zone-zindex;
+  link-attachment-thumbnail-upload-disabled-overlay-zindex: link-attachment-thumbnail-upload-disabled-overlay-zindex;
+  link-attachment-thumbnail-scroll-button-zindex: link-attachment-thumbnail-scroll-button-zindex;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+  --secondary-font-color: secondary-font-color;
+  --composer-inner-border-color: composer-inner-border-color;
+  --update-attachment-bg-color: update-attachment-bg-color;
+  --link-attachment-thumbnail-width: link-attachment-thumbnail-width;
+  --link-attachment-thumbnail-height: link-attachment-thumbnail-height;
+  --link-attachment-thumbnail-upload-progress-indicator-zindex: link-attachment-thumbnail-upload-progress-indicator-zindex;
+  --link-attachment-thumbnail-scroll-button-zindex: link-attachment-thumbnail-scroll-button-zindex;
+  --link-attachment-thumbnail-upload-zone-zindex: link-attachment-thumbnail-upload-zone-zindex;
+  --link-attachment-thumbnail-upload-disabled-overlay-zindex: link-attachment-thumbnail-upload-disabled-overlay-zindex;
+  --primary-bg-color: primary-bg-color;
+  --primary-font-color: primary-font-color;
+  --border-radius: 3px;
+
+
+}
+
+.thumbnailEditorContainer {
+  position: absolute;;
+  height: var(--link-attachment-thumbnail-height);
+  width: var(--link-attachment-thumbnail-width);
+  top: 0;
+  left: 0;
+  border-radius: var(--border-radius);
+  background: var(--update-attachment-bg-color);
+  margin: 10px;
+  border: 1px solid var(--composer-inner-border-color);
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+}
+
+.scrollButton {
+	position: absolute;
+	display: inline-block;
+	height: 38px;
+	width: 25px;
+  top: 46px;
+	cursor: pointer;
+	color: var(--secondary-font-color);
+	font-size: 14px;
+	text-decoration: none;
+	text-align: center;
+  z-index: var(--link-attachment-thumbnail-scroll-button-zindex);
+  background-color: var(--primary-bg-color);
+  box-sizing: border-box;
+  border: solid 1px #e6ebef;
+  border-radius: 0;
+}
+
+.scrollButton::before {
+  vertical-align: baseline;
+}
+
+.scrollButton:hover {
+  color: var(--blue-color-primary-hue);
+}
+
+.scrollButton:focus {
+  outline: none;
+}
+
+.scrollLeftButton {
+  composes: scrollButton;
+
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-left: none;
+  left: 0;
+}
+
+.scrollRightButton {
+  composes: scrollButton;
+
+  right: 0px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-right: none;
+}
+
+.scrollLeftButton::before {
+  right: 2px;
+  position: relative;
+}
+
+.thumbnail {
+  height: var(--link-attachment-thumbnail-height);
+  background-position: center;
+  background-size: cover;
+  width: var(--link-attachment-thumbnail-width);
+  position: relative;
+}
+
+.uploadingThumbnail {
+  composes: thumbnail;
+  opacity: 0.1;
+}
+
+.thumbnailPlaceholder {
+  width: var(--link-attachment-thumbnail-width);
+  height: var(--link-attachment-thumbnail-height);
+  background: var(--update-attachment-bg-color);
+  border-radius: var(--border-radius);
+  position: absolute;
+  float: left;
+  box-sizing: border-box;
+}
+
+
+.progressIndicator {
+  display: inline-block;
+  top: 40px;
+  left: 94px;
+  z-index: var(--link-attachment-thumbnail-upload-progress-indicator-zindex);
+  position: absolute !important;
+}
+
+.noSuggestedImages {
+  opacity: 0.9;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.noSuggestedImages:hover::after {
+  color: var(--blue-color-primary-hue);
+}
+
+.noSuggestedImages::after {
+  content: "Upload Image";
+  font-size: 12px;
+  color: var(--primary-font-color);
+  display: block;
+  top: 44px;
+  position: relative;
+}
+
+.noSuggestedImages::before {
+  color: var(--primary-font-color);
+}
+
+.noSuggestedImages:hover::before {
+  color: var(--blue-color-primary-hue);
+}
+
+.uploadZone {
+  left: 0;
+  top: 0;
+  z-index: var(--link-attachment-thumbnail-upload-zone-zindex);
+  color: transparent;
+}
+
+.uploadZone:hover {
+  background: white;
+  opacity: 0.9;
+  color: var(--blue-color-primary-hue);
+}
+
+.uploadZone::before {
+  font-size: 16px;
+  top: 43px;
+  position: relative;
+  left: 5px;
+}
+
+.uploadInProgress::before,
+.uploadInProgress::after {
+  visibility: hidden;
+}
+
+.uploadInProgress:hover {
+  background: transparent;
+  opacity: 1;
+}
+
+.uploadZone:hover::after,
+.uploadZoneActive::after {
+  content: "Upload Image";
+  font-size: 12px;
+  display: block;
+  top: 44px;
+  position: relative;
+}
+
+.uploadZoneActive {
+  background: white;
+  opacity: 0.9;
+  color: var(--blue-color-primary-hue);
+}
+
+.uploadZoneDisabled {
+  z-index: var(--link-attachment-thumbnail-upload-disabled-overlay-zindex);
+  cursor: not-allowed;
+}

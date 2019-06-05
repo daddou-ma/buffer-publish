@@ -1,0 +1,53 @@
+:root {
+  --description-line-height: 16px;
+  --close-button-size: 16px;
+}
+
+.editableField {
+  border: none;
+  resize: none;
+  cursor: text;
+  color: inherit; /* normalize.css: correct color not being inherited */
+  font: inherit; /* normalize.css: correct font properties not being inherited */
+  overflow: auto; /* normalize.css: remove default vertical scrollbar in IE 8/9/10/11 */
+}
+
+.editableField:hover,
+.editableField:focus{
+  background-color: #f8f8f8;
+  outline: none;
+}
+
+.title {
+  display: block;
+  width: calc(100% - var(--close-button-size) - 28px);
+  margin: -6px -4px -2px -4px;
+  padding: 2px 4px;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  line-height: 18px;
+  color: #323B43;
+}
+
+.title::placeholder {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.description {
+  display: block;
+  width: 100%;
+  margin: 6px -4px -2px -4px;
+  padding: 2px 4px;
+  font-size: 12px;
+  line-height: var(--description-line-height);
+  max-height: 156px;
+}
+
+.editableTitle {
+  composes: editableField title;
+}
+
+.editableDescription {
+  composes: editableField description;
+}

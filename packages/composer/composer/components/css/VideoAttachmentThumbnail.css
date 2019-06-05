@@ -1,0 +1,90 @@
+:import('./constants.css') {
+  outerspace: outerspace;
+  geyser: geyser;
+}
+
+:root {
+  --outerspace: outerspace;
+  --geyser: geyser;
+}
+
+.videoSize, .videoDuration {
+  display: inline-block;
+}
+.videoSize {
+  border-right: 1px solid var(--geyser);
+  margin-right: 3px;
+  padding-right: 2px;
+  line-height: 12px;
+}
+
+.videoData {
+  color: #fff;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 700;
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.65);
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.videoDataContainer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.videoIcon {
+  display: inline-block;
+  margin-right: 4px;
+  bottom: 4px;
+  left: 4px;
+  height: 21px;
+  box-sizing: border-box;
+  position: absolute;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 4px 4px 0px 5px;
+  background: var(--outerspace);
+  color: white;
+  border-radius: 3px;
+}
+
+.thumbnailInfo {
+  left: 21px;
+  bottom: 4px;
+  position: absolute;
+  display: inline-block;
+  color: #eee;
+  font-size: 12px;
+  line-height: 17px;
+  overflow: hidden;
+}
+
+.thumbnailInfoText {
+  display: inline-block;
+  padding: 2px 5px;
+  background: var(--outerspace);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.videoDataContainer:hover .thumbnailInfoText {
+  opacity: 1;
+}
+
+.videoDataContainer:hover {
+  z-index: 2;
+}

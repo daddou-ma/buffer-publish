@@ -1,0 +1,51 @@
+:import('./constants.css') {
+  link-attachment-thumbnail-width: link-attachment-thumbnail-width;
+  link-attachment-thumbnail-height: link-attachment-thumbnail-height;
+  update-attachment-bg-color: update-attachment-bg-color;
+}
+
+:root {
+  --link-attachment-thumbnail-width: link-attachment-thumbnail-width;
+  --link-attachment-thumbnail-height: link-attachment-thumbnail-height;
+  --update-attachment-bg-color: update-attachment-bg-color;
+  --border-radius: 3px;
+}
+
+.thumbnail {
+  height: var(--link-attachment-thumbnail-height);
+  background-position: center;
+  background-size: cover;
+  width: var(--link-attachment-thumbnail-width);
+  border-radius: var(--border-radius);
+  position: absolute;
+  float: left;
+  border: solid 1px #e6ebef;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.thumbnailPlaceholder {
+  width: var(--link-attachment-thumbnail-width);
+  height: var(--link-attachment-thumbnail-height);
+  background: var(--update-attachment-bg-color);
+  border-radius: var(--border-radius);
+  position: absolute;
+  float: left;
+  box-sizing: border-box;
+  background-image: none;
+  border: solid 1px #e6ebef;
+}
+
+
+/**
+ * Transparent overlay to prevent image-hover buttons from extensions such as
+ * Pinterest's "Save" button from being added on top of thumbnails
+ */
+.thumbnail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

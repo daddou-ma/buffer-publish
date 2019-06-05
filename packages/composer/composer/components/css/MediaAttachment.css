@@ -1,0 +1,219 @@
+:import('./constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+  medium-grey-color: medium-grey-color;
+  media-attachment-upload-zone-zindex: media-attachment-upload-zone-zindex;
+  media-attachment-upload-replace-button-zindex: media-attachment-upload-replace-button-zindex;
+  upload-button-icon-zindex: upload-button-icon-zindex;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+  --medium-grey-color: medium-grey-color;
+  --media-attachment-upload-zone-zindex: media-attachment-upload-zone-zindex;
+  --media-attachment-upload-replace-button-zindex: media-attachment-upload-replace-button-zindex;
+  --upload-button-icon-zindex: upload-button-icon-zindex;
+
+  --upload-button-ui-width: 80px;
+  --upload-button-ui-height: var(--upload-button-ui-width);
+  --upload-button-ui-color: #b0bbc2;
+  --upload-button-ui-padding: 4px;
+  --upload-button-ui-border-width: 1px;
+
+  --media-attachment-padding: 10px;
+
+  --media-attachment-thumbnail-spacing: 9px;
+
+  --temp-img-border-radius: 3px;
+  --image-first-dimension: 144px;
+}
+
+.mediaAttachment {
+  composes: clearfix from './utils.css';
+  position: relative;
+  padding: 8px 20px var(--media-attachment-padding) var(--media-attachment-padding);
+  display: flex;
+  align-self: flex-end;
+  flex-direction: row;
+  flex-shrink: 0;
+}
+
+.uploadButtonUI {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--upload-button-ui-padding);
+  width: var(--upload-button-ui-width);
+  height: var(--upload-button-ui-height);
+  cursor: pointer;
+  text-align: center;
+  border-width: var(--upload-button-ui-border-width);
+  border-style: dashed;
+  border-radius: 3px;
+}
+
+.uploadButtonUI::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--upload-button-icon-zindex);
+  color: #343E47;
+  font-size: 20px;
+  line-height: calc(var(--upload-button-ui-height) - var(--upload-button-ui-border-width) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploadButtonUIActiveDrop {
+  composes: uploadButtonUI;
+  position: absolute;
+  margin: 0;
+  background: white;
+  opacity: 0.9;
+  bottom: 0px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: inherit;
+  height: inherit;
+}
+
+.uploadButtonUI:hover,
+.uploadButtonUIActiveDrop {
+  border-color: var(--blue-color-primary-hue);
+}
+
+.uploadButtonUI:hover::before,
+.uploadButtonUIActiveDrop::before {
+  color: var(--blue-color-primary-hue);
+}
+
+.uploadButtonUI:focus {
+	outline: none;
+	border-color: var(--blue-color-primary-hue);
+}
+
+.uploadButtonUI:hover::before {
+	color: var(--blue-color-primary-hue);
+}
+
+.uploadNewButtonUI {
+  composes: uploadButtonUI;
+
+  border-color: var(--upload-button-ui-color);
+}
+
+.uploadNewButtonUI::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: var(--upload-button-ui-padding) solid #fff;
+}
+
+.uploadButtonUIDisabled {
+  cursor: not-allowed;
+}
+
+.tempImageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--temp-img-border-radius);
+  overflow: hidden;
+}
+
+.tempImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--temp-img-border-radius);
+}
+
+.uploadNewButtonUIWithTempImage {
+  composes: uploadNewButtonUI;
+  overflow: hidden;
+}
+
+.uploadNewButtonUIWithTempImage::before {
+  content: none;
+}
+
+.uploadZone {
+  z-index: var(--media-attachment-upload-zone-zindex);
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 3px;
+}
+
+.uploadButtonUIIsUploading {
+  border-color: var(--blue-color-primary-hue);
+}
+
+.uploadButtonUIIsUploading::before {
+  content: none;
+}
+
+.uploadNewButtonUIIsUploading {
+  composes: uploadNewButtonUI;
+  composes: uploadButtonUIIsUploading;
+}
+
+.thumbnail {
+  margin-right: var(--media-attachment-thumbnail-spacing);
+}
+
+
+.mediaAttachment .imageFirstThumbnail {
+  height: var(--image-first-dimension);
+  width: var(--image-first-dimension);
+}
+
+.mediaAttachment .imageFirstUploadButtonUI {
+  height: var(--image-first-dimension);
+  width: var(--image-first-dimension);
+  margin: 0;
+}
+
+.editButtonContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.editButton {
+  composes: editButton from './MediaAttachmentThumbnail.css';
+}
+
+.editDropdownContent {
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.activeUploadsCount {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--blue-color-primary-hue);
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 13px;
+  text-align: center;
+  text-indent: 1px;
+}

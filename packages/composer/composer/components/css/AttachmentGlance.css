@@ -1,0 +1,148 @@
+:import('./constants.css') {
+  attachment-glance-zindex: attachment-glance-zindex;
+}
+
+:root {
+  --attachment-glance-zindex: attachment-glance-zindex;
+}
+
+.container {
+  position: absolute;
+  right: 3px;
+  top: 0px;
+  z-index: var(--attachment-glance-zindex);
+}
+
+.attachmentIcon {
+  width: 32px;
+  height: 32px;
+  background-color: #edf2f5;
+  border-radius: 2px;
+  text-align: center;
+  margin-top: 3px;
+  float: left;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.attachmentIcon:before {
+  top: 4px;
+  position: relative;
+}
+
+.thumbnailContainer {
+  width: 32px;
+  height: 32px;
+  margin-top: 3px;
+  display: inline-block;
+  background-color: #edf2f5;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.containerNoThumbnail .attachmentIcon {
+  border-radius: 2px;
+}
+
+.thumbnail {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius:2px;
+  background-size: cover;
+  background-position: center;
+  display: inline-block;
+  box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.singleThumbnailContainer .thumbnail {
+  width: 32px;
+  height: 32px;
+}
+
+.twoThumbnailContainer .thumbnail {
+  width: 15px;
+  height: 32px;
+}
+
+.twoThumbnailContainer .thumbnail:first-child {
+  margin-right: 2px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.twoThumbnailContainer .thumbnail:last-child {
+  border-radius: 2px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.threeThumbnailContainer {
+  display: inline-block;
+}
+
+.threeThumbnailContainer .thumbnail:first-child {
+  width: 15px;
+  height: 32px;
+  float: left;
+  margin-right: 2px;
+  display: inline-block;
+  border-radius: 0;
+}
+
+.threeThumbnailContainer .thumbnail:nth-child(2) {
+  position: relative;
+  top: -1px;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.threeThumbnailContainer .thumbnail:nth-child(3) {
+  top: -6px;
+  position: relative;
+  margin-top: 2px;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.fourThumbnailContainer .thumbnail {
+  width: 15px;
+  height: 15px;
+}
+
+.fourThumbnailContainer .thumbnail:first-child {
+  margin-right: 2px;
+  top: -1px;
+  position: relative;
+  border-radius: 0;
+}
+
+.fourThumbnailContainer .thumbnail:nth-child(2) {
+  top: -1px;
+  position: relative;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.fourThumbnailContainer .thumbnail:nth-child(3) {
+  top: -5px;
+  margin-right: 2px;
+  position: relative;
+  border-radius: 0;
+}
+
+.fourThumbnailContainer .thumbnail:last-child {
+  top: -5px;
+  position: relative;
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+}

@@ -1,0 +1,72 @@
+:import('./constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+}
+
+:global(#videoControls){
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  bottom: 62px;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+:global(#videoControls) input[type="range"] {
+  -webkit-appearance: none;
+  width: 95%;
+  height: 18px;
+  background: #afa7a7;
+  outline: none;
+  opacity: 0.8;
+  overflow: hidden;
+}
+/* Chrome & Safari */
+:global(#videoControls) input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  box-shadow: -100vw 0 0 100vw var(--blue-color-primary-hue);
+  width: 18px;
+  height: 18px;
+  background: white;
+  cursor: pointer;
+}
+
+:global(#videoControls) input[type=range]:focus {
+  outline: none;
+}
+/* Firefox */
+:global(#videoControls) input[type=range]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  box-shadow: -100vw 0 0 100vw var(--blue-color-primary-hue);
+}
+
+/*hide the outline behind the border*/
+:global(#videoControls) input[type=range]:-moz-focusring{
+  outline: none;
+}
+
+/* IE & EDGE */
+:global(#videoControls) input[type=range]::-ms-fill-lower {
+  background-color: var(--blue-color-primary-hue);
+}
+:global(#videoControls) input[type=range]::-ms-fill-upper {
+  background-color: #afa7a7;
+}
+
+:global(#videoControls) input[type=range]::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  cursor: hand;
+  background-color: white;
+}

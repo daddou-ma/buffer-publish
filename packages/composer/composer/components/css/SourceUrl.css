@@ -1,0 +1,15 @@
+.sourceUrlContainer {
+  float: right;
+}
+
+.sourceUrlInput {
+  border-radius: 4px;
+  border: 1px solid #ced7df;
+  padding: 6px;
+  margin-left: 4px;
+}
+
+.sourceUrlLabel {
+  font-weight: 600;
+  font-size: 12px;
+}

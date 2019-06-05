@@ -1,0 +1,106 @@
+:import('../../../components/css/constants.css') {
+  blue-color-primary-hue: blue-color-primary-hue;
+  secondary-font-color: secondary-font-color;
+  medium-grey-color: medium-grey-color;
+  composer-text-editor-dropdowns-zindex: composer-text-editor-dropdowns-zindex;
+  primary-bg-color: primary-bg-color;
+}
+
+:root {
+  --blue-color-primary-hue: blue-color-primary-hue;
+  --secondary-font-color: secondary-font-color;
+  --medium-grey-color: medium-grey-color;
+  --composer-text-editor-dropdowns-zindex: composer-text-editor-dropdowns-zindex;
+  --primary-bg-color: primary-bg-color;
+}
+
+.mention {
+  color: var(--blue-color-primary-hue);
+}
+
+.mentionSuggestions {
+  position: absolute;
+  z-index: var(--composer-text-editor-dropdowns-zindex);
+  padding: 3px 0;
+  border: 1px solid var(--medium-grey-color);
+  border-radius: 2px;
+  white-space: nowrap;
+  font-size: 12px;
+  color: var(--secondary-font-color);
+  background: var(--primary-bg-color);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .08);
+}
+
+/**
+ * A small issue with draft-js-mention-plugin@2.0.0-beta10 makes the suggestions
+ * box visible even though it's empty sometimes. Remove any padding and border
+ * when that's the case so that no visual artifact remains. TODO: Remove when fixed.
+ * See https://github.com/draft-js-plugins/draft-js-plugins/issues/687
+ */
+.mentionSuggestions:empty {
+  padding: 0;
+  border: 0;
+}
+
+.mentionSuggestions:global([data-suggestions-count="0"]:not([data-notice])),
+.mentionSuggestions:global([data-suggestions-count="0"][data-notice=""]) {
+  padding: 0;
+  border: 0;
+}
+
+.mentionSuggestions:global([data-suggestions-count="0"][data-notice]:not([data-notice=""])) {
+  padding-bottom: 0;
+}
+
+.mentionSuggestions:global([data-notice]:not([data-notice=""]))::before {
+  content: attr(data-notice);
+  display: block;
+  margin-top: -3px;
+  padding: 5px;
+  font-size: 10px;
+  font-style: italic;
+  line-height: 13px;
+  white-space: pre-line;
+  background: #fafafa;
+}
+
+.mentionSuggestions:global([data-notice]:not([data-notice=""]):not([data-suggestions-count="0"]))::before {
+  border-bottom: 1px solid rgba(206, 215, 223, 0.5);
+}
+
+.mentionSuggestionsEntry {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+:global([data-notice]:not([data-notice=""])) .mentionSuggestionsEntry:first-child {
+  margin-top: 3px;
+}
+
+.mentionSuggestionsEntryFocused {
+  composes: mentionSuggestionsEntry;
+
+  background-color: #f4f7f9;
+}
+
+.mentionSuggestionsEntryText {
+  display: inline-block;
+  min-width: 150px;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mentionSuggestionsEntryName {
+  font-weight: 600;
+}
+
+.mentionSuggestionsEntryAvatar {
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, .25);
+  border-radius: 3px;
+}

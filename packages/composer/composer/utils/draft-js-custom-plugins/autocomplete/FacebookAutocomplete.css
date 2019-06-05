@@ -1,0 +1,41 @@
+.mention {
+  composes: mention from './AutocompleteComposableStyles.css';
+}
+
+.mentionSuggestions {
+  composes: mentionSuggestions from './AutocompleteComposableStyles.css';
+}
+
+.mentionSuggestionsEntry {
+  composes: mentionSuggestionsEntry from './AutocompleteComposableStyles.css';
+  padding: 6px 8px 6px 12px;
+  line-height: 16px;
+}
+
+.mentionSuggestionsEntryFocused {
+  composes: mentionSuggestionsEntry;
+  composes: mentionSuggestionsEntryFocused from './AutocompleteComposableStyles.css';
+}
+
+.mentionSuggestionsEntryText {
+  composes: mentionSuggestionsEntryText from './AutocompleteComposableStyles.css';
+}
+
+.mentionSuggestionsEntryName {
+  composes: mentionSuggestionsEntryName from './AutocompleteComposableStyles.css';
+}
+
+.mentionSuggestionsEntryAvatar {
+  /*composes: mentionSuggestionsEntryAvatar from './AutocompleteComposableStyles.css';
+
+  width: 24px;
+  height: 24px;*/
+  display: none;
+}
+
+.mentionSuggestionsEntryCategory {
+  display: block;
+  font-size: 12px;
+  padding: 4px 0 0;
+  opacity: 0.9;
+}

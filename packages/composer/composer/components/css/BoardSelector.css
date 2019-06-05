@@ -1,0 +1,85 @@
+:import('./constants.css') {
+  primary-bg-color: primary-bg-color;
+  profile-dropdowns-triangle-shape-zindex: profile-dropdowns-triangle-shape-zindex;
+}
+
+:root {
+  --primary-bg-color: primary-bg-color;
+  --profile-dropdowns-triangle-shape-zindex: profile-dropdowns-triangle-shape-zindex;
+}
+
+
+.boardSelector {
+  position: absolute;
+  background-color: var(--primary-bg-color);
+  top: 8px;
+  display: inline-block;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid #CED7DF;
+}
+
+.subprofilesContainer {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.boardSearchContainer {
+  padding: 16px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.boardSearchInput {
+  width: 268px;
+  height: 32px;
+  padding-left: 30px;
+  border-radius: 2px;
+  background-color: var(--primary-bg-color);
+  border: solid 1px #ced7df;
+  box-sizing: border-box;
+}
+
+.boardSearchInput:focus {
+  border-color: #8a99a3;
+  outline: none;
+}
+
+.boardTriangle {
+  position: absolute;
+  z-index: var(--profile-dropdowns-triangle-shape-zindex);
+  top: -16px;
+  left: 12px;
+  height: 16px;
+  width: 28px;
+  overflow: hidden;
+  display: inline-block;
+  color: #fff;
+}
+
+.boardTriangle::before {
+  content: "";
+  position: relative;
+  top: 9px;
+  left: 7px;
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: white;
+  transform: rotateZ(45deg);
+  border: 1px solid #ced7df;
+  box-shadow: -1px -1px 4px 0 rgba(0, 0, 0, .1);
+}
+
+.searchBoardIcon {
+  position: absolute;
+  top: 20px;
+  left: 23px;
+  font-size: 16px;
+  color: #ced7df;
+}
+
+.emptySearchResults {
+  padding: 16px;
+}
