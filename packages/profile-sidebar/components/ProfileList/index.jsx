@@ -18,7 +18,7 @@ const ProfileList = ({
         avatarUrl={profile.avatarUrl}
         type={profile.type}
         handle={profile.handle}
-        notifications={profile.pendingCount}
+        pendingCount={profile.pendingCount}
         selected={profile.id === selectedProfileId}
         locked={profile.disabled}
         disconnected={profile.isDisconnected}

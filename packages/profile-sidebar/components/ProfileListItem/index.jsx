@@ -40,8 +40,10 @@ const profileBadgeWrapperStyle = {
   alignItems: 'center',
 };
 
-const Notifications = ({ notifications, selected }) => (
-  <Text size="mini" color={selected ? 'white' : 'shuttleGray'}>{notifications}</Text>
+const PendingCountNotification = ({ pendingCount, selected }) => (
+  <Text size="mini" color={selected ? 'white' : 'shuttleGray'}>
+    {pendingCount < 0 ? 0 : pendingCount}
+  </Text>
 );
 
 const handleStyle = {
@@ -50,18 +52,18 @@ const handleStyle = {
   textOverflow: 'ellipsis',
 };
 
-Notifications.propTypes = {
-  notifications: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+PendingCountNotification.propTypes = {
+  pendingCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-Notifications.defaultProps = {
-  notifications: null,
+PendingCountNotification.defaultProps = {
+  pendingCount: null,
 };
 
 const ProfileListItem = ({
   avatarUrl,
   type,
-  notifications,
+  pendingCount,
   handle,
   locked,
   disconnected,
@@ -134,7 +136,7 @@ const ProfileListItem = ({
             selected={selected}
           />
         ) : (
-          <Notifications notifications={notifications} selected={selected} />
+          <PendingCountNotification pendingCount={pendingCount} selected={selected} />
         )}
       </div>
     </Link>
@@ -142,7 +144,7 @@ const ProfileListItem = ({
 };
 
 ProfileListItem.propTypes = {
-  ...Notifications.propTypes,
+  ...PendingCountNotification.propTypes,
   handle: PropTypes.string.isRequired,
   locked: PropTypes.bool,
   selected: PropTypes.bool,
