@@ -22,7 +22,6 @@
     "@bufferapp/maintenance-redirect": "2.0.0",
     "@bufferapp/manage-apps-extras": "2.0.0",
     "@bufferapp/notifications": "1.9.4",
-    "@bufferapp/performance-tracking": "0.43.5",
     "@bufferapp/posts-table": "0.87.2",
     "@bufferapp/publish-app-switcher": "2.0.0",
     "@bufferapp/publish-beta-redirect": "2.0.0",
