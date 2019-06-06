@@ -8,7 +8,7 @@ module.exports = method(
     let result;
     try {
       result = await rp({
-        uri: `${process.env.API_ADDR}/1/updates/${updateId}/update.json`,
+        uri: `${process.env.API_ADDR}/1/updates/${updateId}/update_link.json`,
         method: 'POST',
         strictSSL: !(process.env.NODE_ENV === 'development'),
         form: {
