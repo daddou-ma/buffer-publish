@@ -52,6 +52,7 @@ const gridPosts = require('./grid');
 const shortenUrl = require('./shortenUrl');
 const updatePostLink = require('./updatePostLink');
 const dropPost = require('./dropPost');
+const swapPosts = require('./swapPosts');
 const cancelTrial = require('./cancelTrial');
 const intercom = require('./intercom');
 
@@ -122,6 +123,7 @@ module.exports = rpc(
   shortenUrl,
   updatePostLink,
   dropPost,
+  swapPosts,
   cancelTrial,
   intercom,
 );

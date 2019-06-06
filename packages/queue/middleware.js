@@ -154,6 +154,21 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     }
+    case actionTypes.POSTS_SWAPPED: {
+      dispatch(dataFetchActions.fetch({
+        name: 'swapPosts',
+        args: {
+          updateSourceId: action.postSource.id,
+          sourcePinned: action.postTarget.postProps.pinned,
+          sourceDueAt: action.postTarget.postProps.due_at,
+
+          updateTargetId: action.postTarget.id,
+          targetPinned: action.postSource.postProps.pinned,
+          targetDueAt: action.postSource.postProps.due_at,
+        },
+      }));
+      break;
+    }
 
     /**
      * Watch for Pusher events to keep post counts up-to-date throughout the app.
