@@ -73,7 +73,7 @@ export default ({ dispatch, getState }) => next => (action) => {
             is_business_user: isBusinessUser,
           } = action.result;
 
-          if (isBusinessUser) {
+          if (isBusinessUser || plan === 'pro') {
             dispatch({
               type: actionTypes.APPCUES_LOADED,
               loaded: true,
