@@ -118,7 +118,7 @@ const PostList = ({
     </div>
     <List
       items={posts.map(post =>
-        <div id={`update-${post.id}`} className="update" style={postStyle}>
+        <div id={`update-${post.id}`} className={`update post_${post.profile_service}`} style={postStyle}>
           {
             renderPost({
               post,
