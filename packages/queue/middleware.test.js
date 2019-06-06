@@ -256,6 +256,43 @@ describe('middleware', () => {
       }));
   });
 
+  it('should swap posts', () => {
+    const action = {
+      type: actionTypes.POSTS_SWAPPED,
+      postSource: {
+        id: 'id1',
+        postProps: {
+          pinned: true,
+          due_at: 234,
+        },
+      },
+      postTarget: {
+        id: 'id2',
+        postProps: {
+          pinned: false,
+          due_at: 564,
+        },
+      },
+      profileId: 'profileId1',
+    };
+    middleware({ dispatch })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(dataFetchActions.fetch({
+        name: 'swapPosts',
+        args: {
+          updateSourceId: action.postSource.id,
+          sourcePinned: action.postTarget.postProps.pinned,
+          sourceDueAt: action.postTarget.postProps.due_at,
+
+          updateTargetId: action.postTarget.id,
+          targetPinned: action.postSource.postProps.pinned,
+          targetDueAt: action.postSource.postProps.due_at,
+        },
+      }));
+  });
+
   it('should trigger a notification if post is successfully shared', () => {
     const RPC_NAME = 'sharePostNow';
     const action = dataFetchActions.fetchSuccess({
