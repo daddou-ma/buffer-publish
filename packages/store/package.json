@@ -9,10 +9,11 @@
   "author": "hharnisc@gmail.com",
   "dependencies": {
     "@bufferapp/analyze-csv-export": "0.87.2",
-    "@bufferapp/analyze-date-picker": "0.87.7",
+    "@bufferapp/analyze-date-picker": "0.93.8",
+    "@bufferapp/analytics-middleware": "0.91.2",
     "@bufferapp/analyze-export-picker": "0.87.2",
     "@bufferapp/analyze-png-export": "0.87.2",
-    "@bufferapp/analyze-profile-selector": "0.87.5",
+    "@bufferapp/analyze-profile-selector": "0.93.8",
     "@bufferapp/app-sidebar": "1.11.4",
     "@bufferapp/async-data-fetch": "1.9.4",
     "@bufferapp/average-table": "0.87.7",

@@ -8,7 +8,7 @@
   },
   "author": "amylee@buffer.com",
   "dependencies": {
-    "@bufferapp/analyze-date-picker": "0.87.7",
+    "@bufferapp/analyze-date-picker": "0.93.8",
     "@bufferapp/analyze-export-picker": "0.87.2",
     "@bufferapp/analyze-shared-components": "0.87.5",
     "@bufferapp/average-table": "0.87.7",
