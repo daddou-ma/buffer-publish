@@ -31,52 +31,14 @@ import events from '../utils/Events';
 
 import ValidationSuccess from '../lib/validation/ValidationSuccess';
 import validateDraft from '../lib/validation/ValidateDraft';
+import Draft from '../entities/Draft';
 
 // import { registerStore, sendToMonitor } from '../utils/devtools';
 
 const CHANGE_EVENT = 'change';
 
-const getNewDraft = (service) => ({
-  id: service.name, // Unique identifier; currently that's the service name
-  service, // Service data structure in AppConstants.js
-  editorState: EditorState.createEmpty(),
-  urls: [], // Urls contained in the text
-  unshortenedUrls: [], // Urls unshortened by user
-  link: null, // Link Attachment; data structure in getNewLink()
-  tempImage: null, // Thumbnail of media actively considered for Media Attachment
-  images: [], // Media Attachment (type: image), data structure in getNewImage()
-  availableImages: [],
-  video: null, // Media Attachment (type: video); data structure in getNewVideo()
-  attachedMediaEditingPayload: null, // Referrence to the media object being actively edited
-  gif: null, // Media Attachment (type: gif); data structure in getNewGif()
-  retweet: null, // Data structure in getNewRetweet()
-  characterCount: service.charLimit === null ? null : 0, // Only updated for services w/ char limit
-  characterCommentCount: service.commentCharLimit === null ? null : 0, // Only updated for services w/ comment char limit
-  isEnabled: false,
-  filesUploadProgress: new Map(), // Map of uploaderInstance <> integer(0-100)
-  enabledAttachmentType:
-    (service.canHaveAttachmentType(AttachmentTypes.MEDIA) &&
-     !service.canHaveAttachmentType(AttachmentTypes.LINK)) ?
-       AttachmentTypes.MEDIA : null,
-  sourceLink: null, // Source url and page metadata; data structure in getNewSourceLink()
-  isSaved: false,
-  hasSavingError: false,
-  shortLinkLongLinkMap: new Map(),
-  scheduledAt: null,
-  isPinnedToSlot: null, // null when scheduledAt is null, true/false otherwise
-  instagramFeedback: [],
-  locationId: null,
-  locationName: null,
-});
-
-const isDraftEmpty = (draft) => (
-  draft.editorState.getCurrentContent().getPlainText().length === 0 &&
-  (draft.enabledAttachmentType !== AttachmentTypes.LINK || draft.link === null) &&
-  (draft.enabledAttachmentType !== AttachmentTypes.MEDIA || draft.images.length === 0) &&
-  (draft.enabledAttachmentType !== AttachmentTypes.MEDIA || draft.video === null) &&
-  (draft.enabledAttachmentType !== AttachmentTypes.MEDIA || draft.gif === null) &&
-  (draft.enabledAttachmentType !== AttachmentTypes.RETWEET || draft.retweet === null) &&
-  draft.sourceLink === null
+const getNewDraft = service => (
+  new Draft(service, EditorState.createEmpty())
 );
 
 // Link Attachment factory
@@ -133,7 +95,7 @@ const getNewInstagramFeedbackObj = ({ message, composerId = 'instagram', code = 
   ({ message, composerId, code });
 
 const getInitialState = () => ({
-  drafts: Services.map((service) => getNewDraft(service)),
+  drafts: Services.map(service => getNewDraft(service)),
   draftsSharedData: {
     uploadedImages: [],
     uploadedGifs: [],
@@ -215,7 +177,6 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
       if (draft.service.maxHashtagsInText !== null) {
         const text = contentState.getPlainText();
         const matches = text.match(HASHTAG_REGEX);
-
         hasTooManyHashtags = (
           matches !== null &&
           matches.length > draft.service.maxHashtagsInText
@@ -449,7 +410,7 @@ const enableDraft = monitorComposerLastInteractedWith(
       if (!isOmniboxEnabled) {
         const enabledDrafts = ComposerStore.getEnabledDrafts();
         const hasOneEmptyEnabledDraft =
-          enabledDrafts.length === 1 && isDraftEmpty(enabledDrafts[0]);
+          enabledDrafts.length === 1 && enabledDrafts[0].isEmpty();
 
         if (hasOneEmptyEnabledDraft) {
           AppActionCreators.updateOmniboxState(true);

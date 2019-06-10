@@ -2,19 +2,6 @@ import { AttachmentTypes } from '../../AppConstants';
 import ValidationSuccess from './ValidationSuccess';
 import ValidationFail from './ValidationFail';
 
-function validateDraft(draft) {
-  let validationResult = new ValidationSuccess();
-
-  const hasVideoAttached =
-        draft.enabledAttachmentType === AttachmentTypes.MEDIA && draft.video !== null;
-
-  if (hasVideoAttached) {
-    validationResult = validateVideoForService(draft.video, draft.service);
-  }
-
-  return validationResult;
-}
-
 function validateVideoForService(video, service) {
   // TODO: Refactor this method to be used only for reminders once back end is updated
   if (service.videoMaxSize && video.size > service.videoMaxSize) {
@@ -27,10 +14,11 @@ function validateVideoForService(video, service) {
   }
 
   if (service.videoMaxDurationMs
-      && video.durationMs > service.videoMaxDurationMs) {
+    && video.durationMs > service.videoMaxDurationMs) {
     return new ValidationFail(`Please shorten your video and try again. Videos need to be under ${service.videoMaxDurationMs / 1000} seconds long`);
   }
 
+  // Context: https://github.com/bufferapp/buffer-composer/pull/134
   // if (service.videoMinAspectRatio && service.videoMaxAspectRatio) {
   //   const aspectRatio = video.width / video.height;
   //   if (aspectRatio < service.videoMinAspectRatio ||
@@ -40,6 +28,19 @@ function validateVideoForService(video, service) {
   // }
 
   return new ValidationSuccess();
+}
+
+function validateDraft(draft) {
+  let validationResult = new ValidationSuccess();
+
+  const hasVideoAttached =
+        draft.enabledAttachmentType === AttachmentTypes.MEDIA && draft.video !== null;
+
+  if (hasVideoAttached) {
+    validationResult = validateVideoForService(draft.video, draft.service);
+  }
+
+  return validationResult;
 }
 
 export default validateDraft;
