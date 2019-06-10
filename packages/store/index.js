@@ -39,7 +39,6 @@ import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/pu
 import { middleware as accountNotificationsMiddleware } from '@bufferapp/publish-account-notifications';
 import { middleware as publishCTABannerMiddleware } from '@bufferapp/publish-cta-banner';
 import { middleware as thirdpartyMiddleware } from '@bufferapp/publish-thirdparty';
-import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 import { middleware as bookmarkletsMiddleware } from '@bufferapp/publish-bookmarklets';
 import { middleware as b4bTrialCompleteModalMiddleware } from '@bufferapp/publish-b4b-trial-complete-modal';
 
@@ -82,7 +81,6 @@ const configureStore = initialstate => {
         i18nMiddleware,
         profileSidebarMiddleware,
         clientAccessMiddleware,
-        performanceMiddleware,
         appSidebarMiddleware,
         productFeatureMiddleware,
         queueMiddleware,

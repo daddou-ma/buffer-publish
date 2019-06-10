@@ -12,6 +12,7 @@ const analyzePackages = [
   'analyze-png-export',
   'analyze-profile-selector',
   'analyze-shared-components',
+  'analytics-middleware',
   'average-table',
   'compare-chart',
   'micro-rpc',

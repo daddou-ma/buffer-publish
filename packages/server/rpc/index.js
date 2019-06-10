@@ -24,7 +24,6 @@ const requeuePost = require('./requeuePost');
 const updatePausedSchedules = require('./updatePausedSchedules');
 const sendFeedback = require('./sendFeedback');
 const savePublishBetaRedirect = require('./savePublishBetaRedirect');
-const performanceTrackingMethod = require('./performanceTracking');
 const upgradeToPro = require('./upgradeToPro');
 const changeDateTimePreferences = require('./changeDateTimePreferences');
 const twoFactorUpdate = require('./twoFactorUpdate');
@@ -89,7 +88,6 @@ module.exports = rpc(
   updatePausedSchedules,
   sendFeedback,
   savePublishBetaRedirect,
-  performanceTrackingMethod,
   upgradeToPro,
   changeDateTimePreferences,
   twoFactorUpdate,
