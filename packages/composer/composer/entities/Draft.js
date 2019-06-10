@@ -51,6 +51,10 @@ class Draft {
   canHaveMedia() {
     return (this.enabledAttachmentType !== AttachmentTypes.MEDIA);
   }
+
+  hasVideoAttached() {
+    return (this.enabledAttachmentType === AttachmentTypes.MEDIA && this.video !== null);
+  }
 }
 
 export default Draft;

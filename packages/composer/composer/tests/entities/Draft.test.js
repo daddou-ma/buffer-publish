@@ -152,3 +152,30 @@ describe('isEmpty', () => {
     expect(draft.isEmpty()).toBeTruthy();
   });
 });
+
+describe('hasVideoAttached', () => {
+  const editorState = EditorState.createEmpty();
+
+  it('returns true if media attachment is possible and video is set', () => {
+    const exampleService = Services.get('twitter');
+    exampleService.unavailableAttachmentTypes = [AttachmentTypes.LINK];
+    const draft = new Draft(exampleService, editorState);
+    draft.video = 'https://example.com/video';
+    expect(draft.hasVideoAttached()).toBeTruthy();
+  });
+
+  it('returns false if media attachment is not possible', () => {
+    const exampleService = Services.get('twitter');
+    exampleService.unavailableAttachmentTypes = [AttachmentTypes.MEDIA];
+    const draft = new Draft(exampleService, editorState);
+    draft.video = 'https://example.com/video';
+    expect(draft.hasVideoAttached()).toBeFalsy();
+  });
+
+  it('returns false if media attachment is possible but video is not set', () => {
+    const exampleService = Services.get('twitter');
+    exampleService.unavailableAttachmentTypes = [AttachmentTypes.LINK];
+    const draft = new Draft(exampleService, editorState);
+    expect(draft.hasVideoAttached()).toBeFalsy();
+  });
+});

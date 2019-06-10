@@ -1,4 +1,3 @@
-import { AttachmentTypes } from '../../AppConstants';
 import ValidationSuccess from './ValidationSuccess';
 import ValidationFail from './ValidationFail';
 
@@ -33,10 +32,7 @@ function validateVideoForService(video, service) {
 function validateDraft(draft) {
   let validationResult = new ValidationSuccess();
 
-  const hasVideoAttached =
-        draft.enabledAttachmentType === AttachmentTypes.MEDIA && draft.video !== null;
-
-  if (hasVideoAttached) {
+  if (draft.hasVideoAttached()) {
     validationResult = validateVideoForService(draft.video, draft.service);
   }
 
