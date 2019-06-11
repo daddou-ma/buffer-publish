@@ -30,8 +30,8 @@ export default hot(connect(
     onProfileClick: (profile) => {
       if (profile.id !== ownProps.profileId) {
         let tabId = ownProps.tabId;
-        if ((ownProps.tabId === 'pastReminders' || ownProps.tabId === 'grid')
-            && profile.service !== 'instagram') {
+        if (profile.service !== 'instagram' &&
+           (ownProps.tabId === 'pastReminders' || ownProps.tabId === 'grid')) {
           tabId = 'queue';
         }
         dispatch(push(generateProfilePageRoute({
