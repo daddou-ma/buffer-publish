@@ -118,7 +118,17 @@ const PostList = ({
     </div>
     <List
       items={posts.map(post =>
-        <div id={`update-${post.id}`} className={`update post_${post.profile_service}`} style={postStyle}>
+        <div
+          id={`update-${post.id}`}
+          className={[
+            'update',
+            `post_${post.profile_service}`,
+            post.postDetails && post.postDetails.isRetweet ?
+              'is_retweet' :
+              'not_retweet',
+          ].join(' ')}
+          style={postStyle}
+        >
           {
             renderPost({
               post,
