@@ -185,6 +185,9 @@ describe('When validateDraft is called with draft', () => {
     expect(validateDraft(draft)).toEqual(new ValidationSuccess());
   });
 
+  // draft.characterCommentCount is updated in the ComposerStore when the text changes
+  // in updateDraftCommentCharacterCount but we can force the value
+  // here to make sure the validation is ok.
   it('returns max characters error in comment if they exceed the amount allowed', () => {
     const service = Services.get('instagram');
     service.commentCharLimit = 10;

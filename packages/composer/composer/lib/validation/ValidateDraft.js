@@ -7,6 +7,10 @@ import { MENTION_REGEX } from '../../utils/draft-js-custom-plugins/mention';
 function validateVideoForInstagram(video) {
   const instagramService = Services.get('instagram');
 
+  if (video === null) {
+    return new ValidationSuccess();
+  }
+
   // TODO: Refactor this method to be used only for reminders once back end is updated
   if (instagramService.videoMaxSize && video.size > instagramService.videoMaxSize) {
     const maxFileSizeInMb = instagramService.videoMaxSize / 1024 / 1024;
