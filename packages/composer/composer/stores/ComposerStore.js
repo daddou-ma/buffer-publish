@@ -20,8 +20,6 @@ import { prepopulatedMentionStrategy, addPrepopulatedMention as addEditorPrepopu
   from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-mention';
 import { prepopulatedHashtagStrategy, addPrepopulatedHashtag as addEditorPrepopulatedHashtag }
   from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-hashtag';
-import { HASHTAG_REGEX } from '../utils/draft-js-custom-plugins/hashtag';
-import { MENTION_REGEX } from '../utils/draft-js-custom-plugins/mention';
 import { addImportedMention as addEditorImportedFacebookMention }
   from '../utils/draft-js-custom-plugins/imported-facebook-mention-entities';
 import removeFacebookAutocompleteEntities
@@ -30,7 +28,7 @@ import { resetEditorContents } from '../utils/draft-js-custom-plugins/editor-con
 import events from '../utils/Events';
 
 import ValidationSuccess from '../lib/validation/ValidationSuccess';
-import validateDraft from '../lib/validation/ValidateDraft';
+import { validateDraft, validateVideoForInstagram } from '../lib/validation/ValidateDraft';
 import Draft from '../entities/Draft';
 
 // import { registerStore, sendToMonitor } from '../utils/devtools';
@@ -173,44 +171,6 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
       const hasRequiredText =
         !draft.service.requiresText || hasText;
 
-      let hasTooManyHashtags = false;
-      if (draft.service.maxHashtagsInText !== null) {
-        const text = contentState.getPlainText();
-        const matches = text.match(HASHTAG_REGEX);
-        hasTooManyHashtags = (
-          matches !== null &&
-          matches.length > draft.service.maxHashtagsInText
-        );
-      }
-
-      let hasTooManyHashtagsInComment = false;
-      if (draft.service.maxHashtagsInText !== null) {
-        const text = draft.commentText || '';
-        const matches = text.match(HASHTAG_REGEX);
-
-        hasTooManyHashtagsInComment = (
-          matches !== null &&
-          matches.length > draft.service.maxHashtagsInText
-        );
-      }
-
-      let hasTooManyMentionsInComment = false;
-      if (draft.service.maxMentionsInComment !== null) {
-        const text = draft.commentText || '';
-        const matches = text.match(MENTION_REGEX);
-
-        hasTooManyMentionsInComment = (
-          matches !== null &&
-          matches.length > draft.service.maxMentionsInComment
-        );
-      }
-
-      let hasCommentAboveCharLimit = false;
-      if (draft.service.commentCharLimit !== null) {
-        const commentCount = draft.characterCommentCount;
-        hasCommentAboveCharLimit = commentCount > draft.service.commentCharLimit;
-      }
-
       // For now only validate with validateDraft method the Instagram w/ video drafts.
       // Although in the future we can move all the validation there and remove it
       // from ComposerStore.
@@ -218,11 +178,16 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
 
       // Only validate videos if they have the IG Direct Video feature
       // and there is at least one IG business profile selected
-      if (draft.service.name === 'instagram' &&
+      const shouldValidateVideoForInstagram = (
+        draft.service.name === 'instagram' &&
         hasIGDirectVideoFlip &&
-        hasSomeIGDirectProfilesSelected) {
-        validationResult = validateDraft(draft);
+        hasSomeIGDirectProfilesSelected);
+
+      if (shouldValidateVideoForInstagram) {
+        validationResult = validateVideoForInstagram(draft.video);
       }
+
+      validationResult = validateDraft(draft);
 
       const isIGDraft = draft.service.name === 'instagram';
       const hasRequiredComment =
@@ -233,10 +198,6 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
         !hasRequiredAttachmentAttached ||
         !hasRequiredText ||
         !isSourceUrlUnrequiredOrValid ||
-        hasTooManyHashtags ||
-        hasTooManyHashtagsInComment ||
-        hasTooManyMentionsInComment ||
-        hasCommentAboveCharLimit ||
         !hasRequiredComment ||
         validationResult.isInvalid();
 
@@ -285,24 +246,8 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
           messages.push('Please include a valid source url or leave the source url blank');
         }
 
-        if (hasTooManyHashtags) {
-          messages.push(`At most ${draft.service.maxHashtagsInText} hashtags can be used`);
-        }
-
-        if (hasTooManyHashtagsInComment) {
-          messages.push(`At most ${draft.service.maxHashtagsInText} hashtags can be used for comments`);
-        }
-
-        if (hasTooManyMentionsInComment) {
-          messages.push(`At most ${draft.service.maxMentionsInComment} mentions can be used for comments`);
-        }
-
         if (validationResult.isInvalid()) {
           messages.push(validationResult.message);
-        }
-
-        if (hasCommentAboveCharLimit) {
-          messages.push(`We can only fit ${draft.service.commentCharLimit} characters for comments`);
         }
 
         if (!hasRequiredComment) {
