@@ -57,7 +57,23 @@ const tabContentStyle = {
   height: '100%',
 };
 
-const handleTabChange = (tabId, profileId, selectedProfile, features, onChangeTab) => {
+/**
+ * Verifies if the user can access to the current tabId
+ * and changes the tab only if validTabId is different from current tabId
+ *
+ * @param tabId
+ * @param profileId
+ * @param selectedProfile
+ * @param isFreeUser
+ * @param onChangeTab method to change tab
+ */
+const handleTabChange = (
+  tabId,
+  profileId,
+  selectedProfile,
+  isFreeUser,
+  onChangeTab,
+) => {
   let isInstagramProfile = false;
   let isBusinessAccount = false;
   let isManager = false;
@@ -68,8 +84,9 @@ const handleTabChange = (tabId, profileId, selectedProfile, features, onChangeTa
     isManager = selectedProfile.isManager;
 
     const validTabId =
-      getValidTab(tabId, isBusinessAccount, isInstagramProfile, isManager, features.isFreeUser());
+      getValidTab(tabId, isBusinessAccount, isInstagramProfile, isManager, isFreeUser);
 
+    // if current tabId is not valid, redirect to the queue
     if (tabId !== validTabId) {
       onChangeTab(validTabId, profileId);
     }
@@ -77,7 +94,9 @@ const handleTabChange = (tabId, profileId, selectedProfile, features, onChangeTa
 };
 
 const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, features, onChangeTab }) => {
-  handleTabChange(tabId, profileId, selectedProfile, features, onChangeTab);
+  // if current tabId is not valid, redirect to the queue
+  handleTabChange(tabId, profileId, selectedProfile, features.isFreeUser(), onChangeTab);
+
   switch (tabId) {
     case 'queue':
       return <QueuedPosts profileId={profileId} />;
@@ -120,11 +139,20 @@ TabContent.propTypes = {
   tabId: PropTypes.string,
   childTabId: PropTypes.string,
   profileId: PropTypes.string.isRequired,
+  onChangeTab: PropTypes.func,
+  selectedProfile: PropTypes.shape({
+    service: PropTypes.string,
+    business: PropTypes.bool,
+    isManager: PropTypes.bool,
+  }),
+  features: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 TabContent.defaultProps = {
   tabId: '',
   childTabId: '',
+  onChangeTab: () => {},
+  selectedProfile: {},
 };
 
 function ProfilePage({
@@ -215,6 +243,12 @@ ProfilePage.propTypes = {
   moreToLoad: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
   onChangeTab: PropTypes.func,
+  selectedProfile: PropTypes.shape({
+    service: PropTypes.string,
+    business: PropTypes.bool,
+    isManager: PropTypes.bool,
+  }),
+  features: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 ProfilePage.defaultProps = {
@@ -224,6 +258,7 @@ ProfilePage.defaultProps = {
   posts: [],
   total: 0,
   onChangeTab: () => {},
+  selectedProfile: null,
 };
 
 export default WithFeatureLoader(ProfilePage);
