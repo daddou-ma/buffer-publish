@@ -67,7 +67,7 @@ const tabContentStyle = {
  * @param isFreeUser
  * @param onChangeTab method to change tab
  */
-const handleTabChange = (
+const verifyTab = (
   tabId,
   profileId,
   selectedProfile,
@@ -95,7 +95,7 @@ const handleTabChange = (
 
 const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, features, onChangeTab }) => {
   // if current tabId is not valid, redirect to the queue
-  handleTabChange(tabId, profileId, selectedProfile, features.isFreeUser(), onChangeTab);
+  verifyTab(tabId, profileId, selectedProfile, features.isFreeUser(), onChangeTab);
 
   switch (tabId) {
     case 'queue':
