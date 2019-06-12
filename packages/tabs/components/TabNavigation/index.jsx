@@ -7,6 +7,7 @@ import {
 import { Button } from '@bufferapp/ui';
 import { Text } from '@bufferapp/components';
 import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
+import { getValidTab } from '../../utils';
 
 const upgradeCtaStyle = {
   transform: 'translate(0, 1px)',
@@ -38,13 +39,28 @@ class TabNavigation extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loading: false };
+
+    this.isValidTab = this.isValidTab.bind(this);
   }
 
-  render () {
+  isValidTab (tabId) {
     const {
       features,
       isBusinessAccount,
       isManager,
+      isInstagramProfile,
+    } = this.props;
+
+    return tabId === getValidTab(
+      tabId,
+      isBusinessAccount,
+      isInstagramProfile,
+      isManager,
+      features.isFreeUser());
+  }
+
+  render () {
+    const {
       selectedTabId,
       selectedChildTabId,
       onTabClick,
@@ -56,7 +72,6 @@ class TabNavigation extends React.Component {
       shouldHideAnalyticsOverviewTab,
       onUpgradeButtonClick,
       isLockedProfile,
-      isInstagramProfile,
     } = this.props;
 
     return (
@@ -68,24 +83,24 @@ class TabNavigation extends React.Component {
           onTabClick={onTabClick}
         >
           <Tab tabId={'queue'}>Queue</Tab>
-          {isInstagramProfile &&
+          {this.isValidTab('pastReminders') &&
             <Tab tabId={'pastReminders'}>Past Reminders</Tab>
           }
           <Tab tabId={'analytics'}>Analytics</Tab>
           {/* Team Members who are Managers */}
-          {isBusinessAccount && isManager &&
+          {this.isValidTab('awaitingApproval') &&
             <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
           }
           {/* Team Members who are Contributors */}
-          {isBusinessAccount && !isManager &&
+          {this.isValidTab('pendingApproval') &&
             <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
           }
           {/* Pro and up users or Team Members */}
-          {(!features.isFreeUser() || isBusinessAccount) &&
+          {this.isValidTab('drafts') &&
             <Tab tabId={'drafts'}>Drafts</Tab>
           }
           {/* Business users or Team Members */}
-          {isBusinessAccount && isInstagramProfile &&
+          {this.isValidTab('grid') &&
             <Tab tabId={'grid'}>Shop Grid</Tab>
           }
           <Tab tabId={'settings'}>Settings</Tab>

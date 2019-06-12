@@ -19,6 +19,7 @@ import {
 } from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import { getValidTab } from '@bufferapp/publish-tabs/utils';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -56,7 +57,27 @@ const tabContentStyle = {
   height: '100%',
 };
 
-const TabContent = ({ tabId, profileId, childTabId, loadMore }) => {
+const handleTabChange = (tabId, profileId, selectedProfile, features, onChangeTab) => {
+  let isInstagramProfile = false;
+  let isBusinessAccount = false;
+  let isManager = false;
+
+  if (selectedProfile) {
+    isInstagramProfile = selectedProfile.service === 'instagram';
+    isBusinessAccount = selectedProfile.business;
+    isManager = selectedProfile.isManager;
+
+    const validTabId =
+      getValidTab(tabId, isBusinessAccount, isInstagramProfile, isManager, features.isFreeUser());
+
+    if (tabId !== validTabId) {
+      onChangeTab(validTabId, profileId);
+    }
+  }
+};
+
+const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, features, onChangeTab }) => {
+  handleTabChange(tabId, profileId, selectedProfile, features, onChangeTab);
   switch (tabId) {
     case 'queue':
       return <QueuedPosts profileId={profileId} />;
@@ -114,6 +135,9 @@ function ProfilePage({
   loadingMore,
   moreToLoad,
   page,
+  selectedProfile,
+  features,
+  onChangeTab,
 }) {
   const isQueueTab = tabId === 'queue';
   const isOtherPostsTab =
@@ -162,6 +186,9 @@ function ProfilePage({
               profileId={profileId}
               childTabId={childTabId}
               loadMore={onLoadMore}
+              selectedProfile={selectedProfile}
+              features={features}
+              onChangeTab={onChangeTab}
             />
             {loadingMore && (
               <div style={loadingAnimationStyle}>
@@ -187,6 +214,7 @@ ProfilePage.propTypes = {
   loadingMore: PropTypes.bool.isRequired,
   moreToLoad: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
+  onChangeTab: PropTypes.func,
 };
 
 ProfilePage.defaultProps = {
@@ -195,6 +223,7 @@ ProfilePage.defaultProps = {
   page: 1,
   posts: [],
   total: 0,
+  onChangeTab: () => {},
 };
 
 export default WithFeatureLoader(ProfilePage);

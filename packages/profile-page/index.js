@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { getProfilePageParams } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actions } from '@bufferapp/publish-tabs';
 import ProfilePage from './components/ProfilePage';
 
 // default export = container
@@ -32,11 +33,18 @@ export default hot(
           translations: state.i18n.translations.example,
           view: state[reducerName].byProfileId[profileId].tabId || null,
           isBusinessAccount: state.profileSidebar.selectedProfile.business,
+          selectedProfile: state.profileSidebar.selectedProfile,
         };
       }
       return {};
     },
     dispatch => ({
+      onChangeTab: (tabId, profileId) => {
+        dispatch(actions.selectTab({
+          tabId,
+          profileId,
+        }));
+      },
       onLoadMore: ({ profileId, page, tabId }) => {
         let requestName;
         switch (tabId) {

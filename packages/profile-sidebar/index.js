@@ -3,6 +3,7 @@ import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
+import { actions as tabsActions } from '@bufferapp/publish-tabs';
 import ProfileSidebar from './components/ProfileSidebar';
 import { actions } from './reducer';
 
@@ -29,15 +30,10 @@ export default hot(connect(
   (dispatch, ownProps) => ({
     onProfileClick: (profile) => {
       if (profile.id !== ownProps.profileId) {
-        let tabId = ownProps.tabId;
-        if (profile.service !== 'instagram' &&
-           (ownProps.tabId === 'pastReminders' || ownProps.tabId === 'grid')) {
-          tabId = 'queue';
-        }
-        dispatch(push(generateProfilePageRoute({
+        dispatch(tabsActions.selectTab({
+          tabId: ownProps.tabId,
           profileId: profile.id,
-          tabId,
-        })));
+        }));
         dispatch(actions.selectProfile({
           profile,
         }));
