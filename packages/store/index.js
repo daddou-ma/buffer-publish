@@ -41,6 +41,7 @@ import { middleware as publishCTABannerMiddleware } from '@bufferapp/publish-cta
 import { middleware as thirdpartyMiddleware } from '@bufferapp/publish-thirdparty';
 import { middleware as bookmarkletsMiddleware } from '@bufferapp/publish-bookmarklets';
 import { middleware as b4bTrialCompleteModalMiddleware } from '@bufferapp/publish-b4b-trial-complete-modal';
+import { middleware as tabsMiddleware } from '@bufferapp/publish-tabs';
 
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
@@ -113,6 +114,7 @@ const configureStore = initialstate => {
         bookmarkletsMiddleware,
         thirdpartyMiddleware,
         b4bTrialCompleteModalMiddleware,
+        tabsMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,
