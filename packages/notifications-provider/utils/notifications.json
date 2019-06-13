@@ -11,7 +11,7 @@
     "bitly-disconnect": "{{__variable__}}",
     "connection": "{{__variable__}}",
     "trial-extended": "{{__variable__}}",
-    "trial-already-extended": "Ups, it seems you already extended your trial once.",
-    "trial-extension-not-available": "Ups, it seems you might not be eligible for a trial extension."
+    "trial-already-extended": "Oops, it seems you already extended your trial once.",
+    "trial-extension-not-available": "Oops, it seems you might not be eligible for a trial extension."
   }
 }
