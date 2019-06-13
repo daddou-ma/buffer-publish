@@ -19,6 +19,7 @@ import {
 } from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import { getValidTab } from '@bufferapp/publish-tabs/utils';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -56,7 +57,46 @@ const tabContentStyle = {
   height: '100%',
 };
 
-const TabContent = ({ tabId, profileId, childTabId, loadMore }) => {
+/**
+ * Verifies if the user can access to the current tabId
+ * and changes the tab only if validTabId is different from current tabId
+ *
+ * @param tabId
+ * @param profileId
+ * @param selectedProfile
+ * @param isFreeUser
+ * @param onChangeTab method to change tab
+ */
+const verifyTab = (
+  tabId,
+  profileId,
+  selectedProfile,
+  isFreeUser,
+  onChangeTab,
+) => {
+  let isInstagramProfile = false;
+  let isBusinessAccount = false;
+  let isManager = false;
+
+  if (selectedProfile) {
+    isInstagramProfile = selectedProfile.service === 'instagram';
+    isBusinessAccount = selectedProfile.business;
+    isManager = selectedProfile.isManager;
+
+    const validTabId =
+      getValidTab(tabId, isBusinessAccount, isInstagramProfile, isManager, isFreeUser);
+
+    // if current tabId is not valid, redirect to the queue
+    if (tabId !== validTabId) {
+      onChangeTab(validTabId, profileId);
+    }
+  }
+};
+
+const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, features, onChangeTab }) => {
+  // if current tabId is not valid, redirect to the queue
+  verifyTab(tabId, profileId, selectedProfile, features.isFreeUser(), onChangeTab);
+
   switch (tabId) {
     case 'queue':
       return <QueuedPosts profileId={profileId} />;
@@ -99,11 +139,20 @@ TabContent.propTypes = {
   tabId: PropTypes.string,
   childTabId: PropTypes.string,
   profileId: PropTypes.string.isRequired,
+  onChangeTab: PropTypes.func,
+  selectedProfile: PropTypes.shape({
+    service: PropTypes.string,
+    business: PropTypes.bool,
+    isManager: PropTypes.bool,
+  }),
+  features: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 TabContent.defaultProps = {
   tabId: '',
   childTabId: '',
+  onChangeTab: () => {},
+  selectedProfile: {},
 };
 
 function ProfilePage({
@@ -114,6 +163,9 @@ function ProfilePage({
   loadingMore,
   moreToLoad,
   page,
+  selectedProfile,
+  features,
+  onChangeTab,
 }) {
   const isQueueTab = tabId === 'queue';
   const isOtherPostsTab =
@@ -162,6 +214,9 @@ function ProfilePage({
               profileId={profileId}
               childTabId={childTabId}
               loadMore={onLoadMore}
+              selectedProfile={selectedProfile}
+              features={features}
+              onChangeTab={onChangeTab}
             />
             {loadingMore && (
               <div style={loadingAnimationStyle}>
@@ -187,6 +242,13 @@ ProfilePage.propTypes = {
   loadingMore: PropTypes.bool.isRequired,
   moreToLoad: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
+  onChangeTab: PropTypes.func,
+  selectedProfile: PropTypes.shape({
+    service: PropTypes.string,
+    business: PropTypes.bool,
+    isManager: PropTypes.bool,
+  }),
+  features: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 ProfilePage.defaultProps = {
@@ -195,6 +257,8 @@ ProfilePage.defaultProps = {
   page: 1,
   posts: [],
   total: 0,
+  onChangeTab: () => {},
+  selectedProfile: null,
 };
 
 export default WithFeatureLoader(ProfilePage);

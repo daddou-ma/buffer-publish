@@ -39,9 +39,9 @@ import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/pu
 import { middleware as accountNotificationsMiddleware } from '@bufferapp/publish-account-notifications';
 import { middleware as publishCTABannerMiddleware } from '@bufferapp/publish-cta-banner';
 import { middleware as thirdpartyMiddleware } from '@bufferapp/publish-thirdparty';
-import performanceMiddleware from '@bufferapp/performance-tracking/middleware';
 import { middleware as bookmarkletsMiddleware } from '@bufferapp/publish-bookmarklets';
 import { middleware as b4bTrialCompleteModalMiddleware } from '@bufferapp/publish-b4b-trial-complete-modal';
+import { middleware as tabsMiddleware } from '@bufferapp/publish-tabs';
 
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
@@ -82,7 +82,6 @@ const configureStore = initialstate => {
         i18nMiddleware,
         profileSidebarMiddleware,
         clientAccessMiddleware,
-        performanceMiddleware,
         appSidebarMiddleware,
         productFeatureMiddleware,
         queueMiddleware,
@@ -115,6 +114,7 @@ const configureStore = initialstate => {
         bookmarkletsMiddleware,
         thirdpartyMiddleware,
         b4bTrialCompleteModalMiddleware,
+        tabsMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

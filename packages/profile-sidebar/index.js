@@ -3,6 +3,7 @@ import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
+import { actions as tabsActions } from '@bufferapp/publish-tabs';
 import ProfileSidebar from './components/ProfileSidebar';
 import { actions } from './reducer';
 
@@ -29,10 +30,10 @@ export default hot(connect(
   (dispatch, ownProps) => ({
     onProfileClick: (profile) => {
       if (profile.id !== ownProps.profileId) {
-        dispatch(push(generateProfilePageRoute({
-          profileId: profile.id,
+        dispatch(tabsActions.selectTab({
           tabId: ownProps.tabId,
-        })));
+          profileId: profile.id,
+        }));
         dispatch(actions.selectProfile({
           profile,
         }));
