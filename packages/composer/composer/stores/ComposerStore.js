@@ -202,7 +202,7 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
         validationResults.isInvalid();
 
       if (isInvalid) {
-        const messages = [];
+        let messages = [];
         let requiredAttachmentCopy;
         let canHaveImageOrGifAttachment;
         let canHaveVideoAttachment;
@@ -251,7 +251,7 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
         }
 
         if (validationResults.isInvalid()) {
-          messages.push(validationResults.getErrorMessages());
+          messages = messages.concat(validationResults.getErrorMessages());
         }
 
         if (!hasRequiredComment) {
