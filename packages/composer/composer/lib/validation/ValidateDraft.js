@@ -2,7 +2,7 @@ import ValidationSuccess from './ValidationSuccess';
 import ValidationFail from './ValidationFail';
 import { Services } from '../../AppConstants';
 import { HASHTAG_REGEX } from '../../utils/draft-js-custom-plugins/hashtag';
-import { MENTION_REGEX } from '../../utils/draft-js-custom-plugins/mention';
+import ValidationResults from './ValidationResults';
 
 function validateVideoForInstagram(video) {
   const instagramService = Services.get('instagram');
@@ -64,39 +64,30 @@ const validateDraftFunctions = [
     return new ValidationSuccess();
   },
 
-  function maxMentionsInComment(draft) {
-    if (draft.service.maxMentionsInComment !== null) {
-      const text = draft.commentText || '';
-      const matches = text.match(MENTION_REGEX);
-
-      if (matches !== null && matches.length > draft.service.maxMentionsInComment) {
-        return new ValidationFail(`At most ${draft.service.maxMentionsInComment} mentions can be used for comments`);
-      }
+  function maxMentions(draft) {
+    if (draft.service.maxMentions !== null &&
+        draft.getNumberOfMentions() > draft.service.maxMentions) {
+      return new ValidationFail(`At most ${draft.service.maxMentions} mentions can be used for caption and comments`);
     }
     return new ValidationSuccess();
   },
 
   function maxCharactersInComment(draft) {
-    if (draft.service.commentCharLimit !== null) {
-      const commentCount = draft.characterCommentCount;
-      if (commentCount > draft.service.commentCharLimit) {
-        return new ValidationFail(`We can only fit ${draft.service.commentCharLimit} characters for comments`);
-      }
+    if (draft.service.commentCharLimit !== null &&
+        draft.characterCommentCount > draft.service.commentCharLimit) {
+      return new ValidationFail(`We can only fit ${draft.service.commentCharLimit} characters for comments`);
     }
     return new ValidationSuccess();
-  }
+  },
 ];
 
 function validateDraft(draft) {
-  let validationResult = new ValidationSuccess();
+  const validationResults = [];
   for (let i = 0; i < validateDraftFunctions.length; i += 1) {
-    validationResult = validateDraftFunctions[i](draft);
-    if (validationResult.isInvalid()) {
-      return validationResult;
-    }
+    validationResults.push(validateDraftFunctions[i](draft));
   }
 
-  return validationResult;
+  return new ValidationResults(validationResults);
 }
 
 export { validateDraft, validateVideoForInstagram };

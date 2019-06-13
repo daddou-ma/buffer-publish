@@ -179,3 +179,24 @@ describe('hasVideoAttached', () => {
     expect(draft.hasVideoAttached()).toBeFalsy();
   });
 });
+
+
+describe('getNumberOfMentions', () => {
+  it('returns 0 if there are none', () => {
+    const exampleService = Services.get('twitter');
+    const editorState = EditorState.createWithContent(ContentState.createFromText('Test example'));
+
+    const draft = new Draft(exampleService, editorState);
+    draft.commentText = 'text example';
+    expect(draft.getNumberOfMentions()).toBe(0);
+  });
+
+  it('returns the number of mentions in the text and comment', () => {
+    const exampleService = Services.get('twitter');
+    const editorState = EditorState.createWithContent(ContentState.createFromText('Test example @one @two @three'));
+    const draft = new Draft(exampleService, editorState);
+    draft.commentText = 'text example @four @five text';
+
+    expect(draft.getNumberOfMentions()).toBe(5);
+  });
+});

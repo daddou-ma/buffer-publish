@@ -124,7 +124,8 @@ describe('When validateVideoForInstagram is called with draft with video', () =>
 describe('When validateDraft is called with draft', () => {
   it('returns ValidationSuccess if state is empty', () => {
     const draft = new Draft(Services.get('instagram'), EditorState.createEmpty());
-    expect(validateDraft(draft)).toEqual(new ValidationSuccess());
+    const results = validateDraft(draft);
+    expect(results.isValid()).toBeTruthy();
   });
 
   it('returns max hashtags error in text if they exceed the amount allowed', () => {
@@ -134,7 +135,11 @@ describe('When validateDraft is called with draft', () => {
     const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four #five'));
 
     const draft = new Draft(service, editorState);
-    expect(validateDraft(draft)).toEqual(new ValidationFail('At most 4 hashtags can be used'));
+
+    const results = validateDraft(draft);
+
+    expect(results.isInvalid()).toBeTruthy();
+    expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used');
   });
 
   it('does not return max hashtags error in text if they do not exceed the amount allowed', () => {
@@ -144,7 +149,8 @@ describe('When validateDraft is called with draft', () => {
     const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four'));
 
     const draft = new Draft(service, editorState);
-    expect(validateDraft(draft)).toEqual(new ValidationSuccess());
+    const results = validateDraft(draft);
+    expect(results.isValid()).toBeTruthy();
   });
 
   it('returns max hashtags error in comment if they exceed the amount allowed', () => {
@@ -154,7 +160,11 @@ describe('When validateDraft is called with draft', () => {
     const draft = new Draft(service, EditorState.createEmpty());
 
     draft.commentText = '#one #two #three #four #five';
-    expect(validateDraft(draft)).toEqual(new ValidationFail('At most 4 hashtags can be used for comments'));
+
+    const results = validateDraft(draft);
+
+    expect(results.isInvalid()).toBeTruthy();
+    expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used for comments');
   });
 
   it('does not return max hashtags error in comment if they do not exceed the amount allowed', () => {
@@ -163,26 +173,46 @@ describe('When validateDraft is called with draft', () => {
     const draft = new Draft(service, EditorState.createEmpty());
     draft.commentText = '#one #two #three #four';
 
-    expect(validateDraft(draft)).toEqual(new ValidationSuccess());
+    const results = validateDraft(draft);
+
+    expect(results.isValid()).toBeTruthy();
   });
 
-  it('returns max mentions error in comment if they exceed the amount allowed', () => {
+  it('returns max mentions error if they exceed the amount allowed in comment', () => {
     const service = Services.get('instagram');
-    service.maxMentionsInComment = 4;
+    service.maxMentions = 4;
 
     const draft = new Draft(service, EditorState.createEmpty());
 
     draft.commentText = '@one @two @three @four @five';
-    expect(validateDraft(draft)).toEqual(new ValidationFail('At most 4 mentions can be used for comments'));
+
+    const results = validateDraft(draft);
+
+    expect(results.isInvalid()).toBeTruthy();
+    expect(results.getErrorMessages()).toContain('At most 4 mentions can be used for caption and comments');
   });
 
-  it('does not return max comments error in comment if they do not exceed the amount allowed', () => {
+  it('returns max mentions error if they exceed the amount allowed in text', () => {
     const service = Services.get('instagram');
-    service.maxMentionsInComment = 4;
+    service.maxMentions = 4;
+    const editorState = EditorState.createWithContent(ContentState.createFromText('@one @two @three @four @five'));
+    const draft = new Draft(service, editorState);
+
+    const results = validateDraft(draft);
+
+    expect(results.isInvalid()).toBeTruthy();
+    expect(results.getErrorMessages()).toContain('At most 4 mentions can be used for caption and comments');
+  });
+
+  it('does not return max comments error if they do not exceed the amount allowed', () => {
+    const service = Services.get('instagram');
+    service.maxMentions = 4;
     const draft = new Draft(service, EditorState.createEmpty());
     draft.commentText = '@one @two @three @four';
 
-    expect(validateDraft(draft)).toEqual(new ValidationSuccess());
+    const results = validateDraft(draft);
+
+    expect(results.isValid()).toBeTruthy();
   });
 
   // draft.characterCommentCount is updated in the ComposerStore when the text changes
@@ -191,21 +221,32 @@ describe('When validateDraft is called with draft', () => {
   it('returns max characters error in comment if they exceed the amount allowed', () => {
     const service = Services.get('instagram');
     service.commentCharLimit = 10;
-
     const draft = new Draft(service, EditorState.createEmpty());
-
     draft.characterCommentCount = 11;
-    expect(validateDraft(draft)).toEqual(new ValidationFail('We can only fit 10 characters for comments'));
+
+    const results = validateDraft(draft);
+
+    expect(results.isInvalid()).toBeTruthy();
+    expect(results.getErrorMessages()).toContain('We can only fit 10 characters for comments');
   });
 
   it('does not return max characters error in comment if they do not exceed the amount allowed', () => {
     const service = Services.get('instagram');
     service.commentCharLimit = 10;
-
     const draft = new Draft(service, EditorState.createEmpty());
-
     draft.characterCommentCount = 10;
 
-    expect(validateDraft(draft)).toEqual(new ValidationSuccess());
+    const results = validateDraft(draft);
+
+    expect(results.isValid()).toBeTruthy();
+  });
+
+  it('returns max hashtags error combined for comment and text if they exceed the amount allowed', () => {
+    const service = Services.get('instagram');
+    service.maxHashtagsInText = 4;
+
+    const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four #five'));
+
+    const draft = new Draft(service, editorState);
   });
 });

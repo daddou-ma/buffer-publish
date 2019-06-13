@@ -30,6 +30,7 @@ import events from '../utils/Events';
 import ValidationSuccess from '../lib/validation/ValidationSuccess';
 import { validateDraft, validateVideoForInstagram } from '../lib/validation/ValidateDraft';
 import Draft from '../entities/Draft';
+import ValidationResults from '../lib/validation/ValidationResults';
 
 // import { registerStore, sendToMonitor } from '../utils/devtools';
 
@@ -171,10 +172,8 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
       const hasRequiredText =
         !draft.service.requiresText || hasText;
 
-      // For now only validate with validateDraft method the Instagram w/ video drafts.
-      // Although in the future we can move all the validation there and remove it
-      // from ComposerStore.
-      let validationResult = new ValidationSuccess();
+
+      let validationResultVideo = new ValidationSuccess();
 
       // Only validate videos if they have the IG Direct Video feature
       // and there is at least one IG business profile selected
@@ -184,10 +183,10 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
         hasSomeIGDirectProfilesSelected);
 
       if (shouldValidateVideoForInstagram) {
-        validationResult = validateVideoForInstagram(draft.video);
+        validationResultVideo = validateVideoForInstagram(draft.video);
       }
 
-      validationResult = validateDraft(draft);
+      const validationResults = validateDraft(draft);
 
       const isIGDraft = draft.service.name === 'instagram';
       const hasRequiredComment =
@@ -199,7 +198,8 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
         !hasRequiredText ||
         !isSourceUrlUnrequiredOrValid ||
         !hasRequiredComment ||
-        validationResult.isInvalid();
+        validationResultVideo.isInvalid() ||
+        validationResults.isInvalid();
 
       if (isInvalid) {
         const messages = [];
@@ -246,8 +246,12 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
           messages.push('Please include a valid source url or leave the source url blank');
         }
 
-        if (validationResult.isInvalid()) {
-          messages.push(validationResult.message);
+        if (validationResultVideo.isInvalid()) {
+          messages.push(validationResultVideo.message);
+        }
+
+        if (validationResults.isInvalid()) {
+          messages.push(validationResults.getErrorMessages());
         }
 
         if (!hasRequiredComment) {

@@ -1,4 +1,5 @@
 import { AttachmentTypes } from '../AppConstants';
+import { MENTION_REGEX } from '../utils/draft-js-custom-plugins/mention';
 
 class Draft {
   constructor(service, editorState) {
@@ -54,6 +55,23 @@ class Draft {
 
   hasVideoAttached() {
     return (this.enabledAttachmentType === AttachmentTypes.MEDIA && this.video !== null);
+  }
+
+  getNumberOfMentionsInText() {
+    const contentState = this.editorState.getCurrentContent();
+    const captionText = contentState.getPlainText();
+    const matchesInCaption = captionText.match(MENTION_REGEX);
+    return matchesInCaption !== null ? matchesInCaption.length : 0;
+  }
+
+  getNumberOfMentionsInComment() {
+    const commentText = this.commentText || '';
+    const matchesInComment = commentText.match(MENTION_REGEX);
+    return matchesInComment !== null ? matchesInComment.length : 0;
+  }
+
+  getNumberOfMentions() {
+    return this.getNumberOfMentionsInText() + this.getNumberOfMentionsInComment();
   }
 }
 
