@@ -30,7 +30,6 @@ import events from '../utils/Events';
 import ValidationSuccess from '../lib/validation/ValidationSuccess';
 import { validateDraft, validateVideoForInstagram } from '../lib/validation/ValidateDraft';
 import Draft from '../entities/Draft';
-import ValidationResults from '../lib/validation/ValidationResults';
 
 // import { registerStore, sendToMonitor } from '../utils/devtools';
 

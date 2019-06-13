@@ -200,3 +200,24 @@ describe('getNumberOfMentions', () => {
     expect(draft.getNumberOfMentions()).toBe(5);
   });
 });
+
+
+describe('getNumberOfHashtags', () => {
+  it('returns 0 if there are none', () => {
+    const exampleService = Services.get('twitter');
+    const editorState = EditorState.createWithContent(ContentState.createFromText('Test example'));
+
+    const draft = new Draft(exampleService, editorState);
+    draft.commentText = 'text example';
+    expect(draft.getNumberOfHashtags()).toBe(0);
+  });
+
+  it('returns the number of hashtags in the text and comment', () => {
+    const exampleService = Services.get('twitter');
+    const editorState = EditorState.createWithContent(ContentState.createFromText('Test example #one #two #three'));
+    const draft = new Draft(exampleService, editorState);
+    draft.commentText = 'text example #four #five text';
+
+    expect(draft.getNumberOfHashtags()).toBe(5);
+  });
+});

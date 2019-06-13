@@ -7,7 +7,7 @@ import ValidationFail from '../../../lib/validation/ValidationFail';
 import { Services, AttachmentTypes } from '../../../AppConstants';
 import Draft from '../../../entities/Draft';
 
-describe('When validateVideoForInstagram is called with draft with video', () => {
+describe('validateVideoForInstagram', () => {
   it('returns ValidationFail if video too big', () => {
     const instagramService = Services.get('instagram');
 
@@ -121,132 +121,144 @@ describe('When validateVideoForInstagram is called with draft with video', () =>
 //   });
 });
 
-describe('When validateDraft is called with draft', () => {
-  it('returns ValidationSuccess if state is empty', () => {
+describe('validateDraft', () => {
+  it('returns success if state is empty', () => {
     const draft = new Draft(Services.get('instagram'), EditorState.createEmpty());
     const results = validateDraft(draft);
     expect(results.isValid()).toBeTruthy();
   });
 
-  it('returns max hashtags error in text if they exceed the amount allowed', () => {
-    const service = Services.get('instagram');
-    service.maxHashtagsInText = 4;
+  describe('hashtags validation', () => {
+    it('returns max hashtags error in text if they exceed the amount allowed', () => {
+      const service = Services.get('instagram');
+      service.maxHashtags = 4;
 
-    const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four #five'));
+      const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four #five'));
 
-    const draft = new Draft(service, editorState);
+      const draft = new Draft(service, editorState);
 
-    const results = validateDraft(draft);
+      const results = validateDraft(draft);
 
-    expect(results.isInvalid()).toBeTruthy();
-    expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used');
+      expect(results.isInvalid()).toBeTruthy();
+      expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used for caption and comment');
+    });
+
+    it('does not return max hashtags error in text if they do not exceed the amount allowed', () => {
+      const service = Services.get('instagram');
+      service.maxHashtags = 4;
+
+      const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four'));
+
+      const draft = new Draft(service, editorState);
+      const results = validateDraft(draft);
+      expect(results.isValid()).toBeTruthy();
+    });
+
+    it('returns max hashtags error in comment if they exceed the amount allowed', () => {
+      const service = Services.get('instagram');
+      service.maxHashtags = 4;
+
+      const draft = new Draft(service, EditorState.createEmpty());
+
+      draft.commentText = '#one #two #three #four #five';
+
+      const results = validateDraft(draft);
+
+      expect(results.isInvalid()).toBeTruthy();
+      expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used for caption and comment');
+    });
+
+    it('does not return max hashtags error in comment if they do not exceed the amount allowed', () => {
+      const service = Services.get('instagram');
+      service.maxHashtags = 4;
+      const draft = new Draft(service, EditorState.createEmpty());
+      draft.commentText = '#one #two #three #four';
+
+      const results = validateDraft(draft);
+
+      expect(results.isValid()).toBeTruthy();
+    });
+
+    it('returns max hashtags error combined for comment and text if they exceed the amount allowed', () => {
+      const service = Services.get('instagram');
+      service.maxHashtags = 4;
+
+      const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three'));
+      const draft = new Draft(service, editorState);
+      draft.commentText = '#four #five';
+
+      const results = validateDraft(draft);
+
+      expect(results.isInvalid()).toBeTruthy();
+      expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used for caption and comment');
+    });
   });
 
-  it('does not return max hashtags error in text if they do not exceed the amount allowed', () => {
-    const service = Services.get('instagram');
-    service.maxHashtagsInText = 4;
+  describe('mentions validation', () => {
+    it('returns max mentions error if they exceed the amount allowed in comment', () => {
+      const service = Services.get('instagram');
+      service.maxMentions = 4;
 
-    const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four'));
+      const draft = new Draft(service, EditorState.createEmpty());
 
-    const draft = new Draft(service, editorState);
-    const results = validateDraft(draft);
-    expect(results.isValid()).toBeTruthy();
+      draft.commentText = '@one @two @three @four @five';
+
+      const results = validateDraft(draft);
+
+      expect(results.isInvalid()).toBeTruthy();
+      expect(results.getErrorMessages()).toContain('At most 4 mentions can be used for caption and comment');
+    });
+
+    it('returns max mentions error if they exceed the amount allowed in text', () => {
+      const service = Services.get('instagram');
+      service.maxMentions = 4;
+      const editorState = EditorState.createWithContent(ContentState.createFromText('@one @two @three @four @five'));
+      const draft = new Draft(service, editorState);
+
+      const results = validateDraft(draft);
+
+      expect(results.isInvalid()).toBeTruthy();
+      expect(results.getErrorMessages()).toContain('At most 4 mentions can be used for caption and comment');
+    });
+
+    it('does not return max mentions error if they do not exceed the amount allowed', () => {
+      const service = Services.get('instagram');
+      service.maxMentions = 4;
+      const draft = new Draft(service, EditorState.createEmpty());
+      draft.commentText = '@one @two @three @four';
+
+      const results = validateDraft(draft);
+
+      expect(results.isValid()).toBeTruthy();
+    });
   });
 
-  it('returns max hashtags error in comment if they exceed the amount allowed', () => {
-    const service = Services.get('instagram');
-    service.maxHashtagsInText = 4;
 
-    const draft = new Draft(service, EditorState.createEmpty());
+  describe('characters validation', () => {
+    // draft.characterCommentCount is updated in the ComposerStore when the text changes
+    // in updateDraftCommentCharacterCount but we can force the value
+    // here to make sure the validation is ok.
+    it('returns max characters error in comment if they exceed the amount allowed', () => {
+      const service = Services.get('instagram');
+      service.commentCharLimit = 10;
+      const draft = new Draft(service, EditorState.createEmpty());
+      draft.characterCommentCount = 11;
 
-    draft.commentText = '#one #two #three #four #five';
+      const results = validateDraft(draft);
 
-    const results = validateDraft(draft);
+      expect(results.isInvalid()).toBeTruthy();
+      expect(results.getErrorMessages()).toContain('We can only fit 10 characters for comments');
+    });
 
-    expect(results.isInvalid()).toBeTruthy();
-    expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used for comments');
-  });
+    it('does not return max characters error in comment if they do not exceed the amount allowed', () => {
+      const service = Services.get('instagram');
+      service.commentCharLimit = 10;
+      const draft = new Draft(service, EditorState.createEmpty());
+      draft.characterCommentCount = 10;
 
-  it('does not return max hashtags error in comment if they do not exceed the amount allowed', () => {
-    const service = Services.get('instagram');
-    service.maxHashtagsInText = 4;
-    const draft = new Draft(service, EditorState.createEmpty());
-    draft.commentText = '#one #two #three #four';
+      const results = validateDraft(draft);
 
-    const results = validateDraft(draft);
-
-    expect(results.isValid()).toBeTruthy();
-  });
-
-  it('returns max mentions error if they exceed the amount allowed in comment', () => {
-    const service = Services.get('instagram');
-    service.maxMentions = 4;
-
-    const draft = new Draft(service, EditorState.createEmpty());
-
-    draft.commentText = '@one @two @three @four @five';
-
-    const results = validateDraft(draft);
-
-    expect(results.isInvalid()).toBeTruthy();
-    expect(results.getErrorMessages()).toContain('At most 4 mentions can be used for caption and comments');
-  });
-
-  it('returns max mentions error if they exceed the amount allowed in text', () => {
-    const service = Services.get('instagram');
-    service.maxMentions = 4;
-    const editorState = EditorState.createWithContent(ContentState.createFromText('@one @two @three @four @five'));
-    const draft = new Draft(service, editorState);
-
-    const results = validateDraft(draft);
-
-    expect(results.isInvalid()).toBeTruthy();
-    expect(results.getErrorMessages()).toContain('At most 4 mentions can be used for caption and comments');
-  });
-
-  it('does not return max comments error if they do not exceed the amount allowed', () => {
-    const service = Services.get('instagram');
-    service.maxMentions = 4;
-    const draft = new Draft(service, EditorState.createEmpty());
-    draft.commentText = '@one @two @three @four';
-
-    const results = validateDraft(draft);
-
-    expect(results.isValid()).toBeTruthy();
-  });
-
-  // draft.characterCommentCount is updated in the ComposerStore when the text changes
-  // in updateDraftCommentCharacterCount but we can force the value
-  // here to make sure the validation is ok.
-  it('returns max characters error in comment if they exceed the amount allowed', () => {
-    const service = Services.get('instagram');
-    service.commentCharLimit = 10;
-    const draft = new Draft(service, EditorState.createEmpty());
-    draft.characterCommentCount = 11;
-
-    const results = validateDraft(draft);
-
-    expect(results.isInvalid()).toBeTruthy();
-    expect(results.getErrorMessages()).toContain('We can only fit 10 characters for comments');
-  });
-
-  it('does not return max characters error in comment if they do not exceed the amount allowed', () => {
-    const service = Services.get('instagram');
-    service.commentCharLimit = 10;
-    const draft = new Draft(service, EditorState.createEmpty());
-    draft.characterCommentCount = 10;
-
-    const results = validateDraft(draft);
-
-    expect(results.isValid()).toBeTruthy();
-  });
-
-  it('returns max hashtags error combined for comment and text if they exceed the amount allowed', () => {
-    const service = Services.get('instagram');
-    service.maxHashtagsInText = 4;
-
-    const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four #five'));
-
-    const draft = new Draft(service, editorState);
+      expect(results.isValid()).toBeTruthy();
+    });
   });
 });

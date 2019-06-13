@@ -40,26 +40,10 @@ function validateVideoForInstagram(video) {
 }
 
 const validateDraftFunctions = [
-  function maxHashtagsInText(draft) {
-    if (draft.service.maxHashtagsInText !== null) {
-      const contentState = draft.editorState.getCurrentContent();
-      const text = contentState.getPlainText();
-      const matches = text.match(HASHTAG_REGEX);
-      if (matches !== null && matches.length > draft.service.maxHashtagsInText) {
-        return new ValidationFail(`At most ${draft.service.maxHashtagsInText} hashtags can be used`);
-      }
-    }
-    return new ValidationSuccess();
-  },
-
-  function maxHashtagsInComment(draft) {
-    if (draft.service.maxHashtagsInText !== null) {
-      const text = draft.commentText || '';
-      const matches = text.match(HASHTAG_REGEX);
-
-      if (matches !== null && matches.length > draft.service.maxHashtagsInText) {
-        return new ValidationFail(`At most ${draft.service.maxHashtagsInText} hashtags can be used for comments`);
-      }
+  function maxHashtags(draft) {
+    if (draft.service.maxHashtags !== null &&
+        draft.getNumberOfHashtags() > draft.service.maxHashtags) {
+      return new ValidationFail(`At most ${draft.service.maxHashtags} hashtags can be used for caption and comment`);
     }
     return new ValidationSuccess();
   },
@@ -67,7 +51,7 @@ const validateDraftFunctions = [
   function maxMentions(draft) {
     if (draft.service.maxMentions !== null &&
         draft.getNumberOfMentions() > draft.service.maxMentions) {
-      return new ValidationFail(`At most ${draft.service.maxMentions} mentions can be used for caption and comments`);
+      return new ValidationFail(`At most ${draft.service.maxMentions} mentions can be used for caption and comment`);
     }
     return new ValidationSuccess();
   },

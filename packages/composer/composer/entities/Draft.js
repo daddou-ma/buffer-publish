@@ -1,5 +1,6 @@
 import { AttachmentTypes } from '../AppConstants';
 import { MENTION_REGEX } from '../utils/draft-js-custom-plugins/mention';
+import { HASHTAG_REGEX } from '../utils/draft-js-custom-plugins/hashtag';
 
 class Draft {
   constructor(service, editorState) {
@@ -72,6 +73,23 @@ class Draft {
 
   getNumberOfMentions() {
     return this.getNumberOfMentionsInText() + this.getNumberOfMentionsInComment();
+  }
+
+  getNumberOfHashtagsInText() {
+    const contentState = this.editorState.getCurrentContent();
+    const captionText = contentState.getPlainText();
+    const matchesInCaption = captionText.match(HASHTAG_REGEX);
+    return matchesInCaption !== null ? matchesInCaption.length : 0;
+  }
+
+  getNumberOfHashtagsInComment() {
+    const commentText = this.commentText || '';
+    const matchesInComment = commentText.match(HASHTAG_REGEX);
+    return matchesInComment !== null ? matchesInComment.length : 0;
+  }
+
+  getNumberOfHashtags() {
+    return this.getNumberOfHashtagsInText() + this.getNumberOfHashtagsInComment();
   }
 }
 
