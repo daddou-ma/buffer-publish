@@ -1,7 +1,6 @@
 import ValidationSuccess from './ValidationSuccess';
 import ValidationFail from './ValidationFail';
 import { Services } from '../../AppConstants';
-import { HASHTAG_REGEX } from '../../utils/draft-js-custom-plugins/hashtag';
 import ValidationResults from './ValidationResults';
 
 function validateVideoForInstagram(video) {
