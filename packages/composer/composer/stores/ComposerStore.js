@@ -20,8 +20,6 @@ import { prepopulatedMentionStrategy, addPrepopulatedMention as addEditorPrepopu
   from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-mention';
 import { prepopulatedHashtagStrategy, addPrepopulatedHashtag as addEditorPrepopulatedHashtag }
   from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-hashtag';
-import { HASHTAG_REGEX } from '../utils/draft-js-custom-plugins/hashtag';
-import { MENTION_REGEX } from '../utils/draft-js-custom-plugins/mention';
 import { addImportedMention as addEditorImportedFacebookMention }
   from '../utils/draft-js-custom-plugins/imported-facebook-mention-entities';
 import removeFacebookAutocompleteEntities
@@ -30,53 +28,15 @@ import { resetEditorContents } from '../utils/draft-js-custom-plugins/editor-con
 import events from '../utils/Events';
 
 import ValidationSuccess from '../lib/validation/ValidationSuccess';
-import validateDraft from '../lib/validation/ValidateDraft';
+import { validateDraft, validateVideoForInstagram } from '../lib/validation/ValidateDraft';
+import Draft from '../entities/Draft';
 
 // import { registerStore, sendToMonitor } from '../utils/devtools';
 
 const CHANGE_EVENT = 'change';
 
-const getNewDraft = (service) => ({
-  id: service.name, // Unique identifier; currently that's the service name
-  service, // Service data structure in AppConstants.js
-  editorState: EditorState.createEmpty(),
-  urls: [], // Urls contained in the text
-  unshortenedUrls: [], // Urls unshortened by user
-  link: null, // Link Attachment; data structure in getNewLink()
-  tempImage: null, // Thumbnail of media actively considered for Media Attachment
-  images: [], // Media Attachment (type: image), data structure in getNewImage()
-  availableImages: [],
-  video: null, // Media Attachment (type: video); data structure in getNewVideo()
-  attachedMediaEditingPayload: null, // Referrence to the media object being actively edited
-  gif: null, // Media Attachment (type: gif); data structure in getNewGif()
-  retweet: null, // Data structure in getNewRetweet()
-  characterCount: service.charLimit === null ? null : 0, // Only updated for services w/ char limit
-  characterCommentCount: service.commentCharLimit === null ? null : 0, // Only updated for services w/ comment char limit
-  isEnabled: false,
-  filesUploadProgress: new Map(), // Map of uploaderInstance <> integer(0-100)
-  enabledAttachmentType:
-    (service.canHaveAttachmentType(AttachmentTypes.MEDIA) &&
-     !service.canHaveAttachmentType(AttachmentTypes.LINK)) ?
-       AttachmentTypes.MEDIA : null,
-  sourceLink: null, // Source url and page metadata; data structure in getNewSourceLink()
-  isSaved: false,
-  hasSavingError: false,
-  shortLinkLongLinkMap: new Map(),
-  scheduledAt: null,
-  isPinnedToSlot: null, // null when scheduledAt is null, true/false otherwise
-  instagramFeedback: [],
-  locationId: null,
-  locationName: null,
-});
-
-const isDraftEmpty = (draft) => (
-  draft.editorState.getCurrentContent().getPlainText().length === 0 &&
-  (draft.enabledAttachmentType !== AttachmentTypes.LINK || draft.link === null) &&
-  (draft.enabledAttachmentType !== AttachmentTypes.MEDIA || draft.images.length === 0) &&
-  (draft.enabledAttachmentType !== AttachmentTypes.MEDIA || draft.video === null) &&
-  (draft.enabledAttachmentType !== AttachmentTypes.MEDIA || draft.gif === null) &&
-  (draft.enabledAttachmentType !== AttachmentTypes.RETWEET || draft.retweet === null) &&
-  draft.sourceLink === null
+const getNewDraft = service => (
+  new Draft(service, EditorState.createEmpty())
 );
 
 // Link Attachment factory
@@ -133,7 +93,7 @@ const getNewInstagramFeedbackObj = ({ message, composerId = 'instagram', code = 
   ({ message, composerId, code });
 
 const getInitialState = () => ({
-  drafts: Services.map((service) => getNewDraft(service)),
+  drafts: Services.map(service => getNewDraft(service)),
   draftsSharedData: {
     uploadedImages: [],
     uploadedGifs: [],
@@ -211,57 +171,21 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
       const hasRequiredText =
         !draft.service.requiresText || hasText;
 
-      let hasTooManyHashtags = false;
-      if (draft.service.maxHashtagsInText !== null) {
-        const text = contentState.getPlainText();
-        const matches = text.match(HASHTAG_REGEX);
 
-        hasTooManyHashtags = (
-          matches !== null &&
-          matches.length > draft.service.maxHashtagsInText
-        );
-      }
-
-      let hasTooManyHashtagsInComment = false;
-      if (draft.service.maxHashtagsInText !== null) {
-        const text = draft.commentText || '';
-        const matches = text.match(HASHTAG_REGEX);
-
-        hasTooManyHashtagsInComment = (
-          matches !== null &&
-          matches.length > draft.service.maxHashtagsInText
-        );
-      }
-
-      let hasTooManyMentionsInComment = false;
-      if (draft.service.maxMentionsInComment !== null) {
-        const text = draft.commentText || '';
-        const matches = text.match(MENTION_REGEX);
-
-        hasTooManyMentionsInComment = (
-          matches !== null &&
-          matches.length > draft.service.maxMentionsInComment
-        );
-      }
-
-      let hasCommentAboveCharLimit = false;
-      if (draft.service.commentCharLimit !== null) {
-        const commentCount = draft.characterCommentCount;
-        hasCommentAboveCharLimit = commentCount > draft.service.commentCharLimit;
-      }
-
-      // For now only validate with validateDraft method the Instagram w/ video drafts.
-      // Although in the future we can move all the validation there and remove it
-      // from ComposerStore.
-      let validationResult = new ValidationSuccess();
+      let validationResultVideo = new ValidationSuccess();
 
       // Only validate videos if they have the IG Direct Video feature
       // and there is at least one IG business profile selected
-      if (draft.service.name === 'instagram' &&
+      const shouldValidateVideoForInstagram = (
+        draft.service.name === 'instagram' &&
         hasIGDirectVideoFlip &&
-        hasSomeIGDirectProfilesSelected) {
-        validationResult = validateDraft(draft);
+        hasSomeIGDirectProfilesSelected);
+
+      if (shouldValidateVideoForInstagram) {
+        validationResultVideo = validateVideoForInstagram(draft.video);
       }
+
+      const validationResults = validateDraft(draft);
 
       const isIGDraft = draft.service.name === 'instagram';
       const hasRequiredComment =
@@ -272,15 +196,12 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
         !hasRequiredAttachmentAttached ||
         !hasRequiredText ||
         !isSourceUrlUnrequiredOrValid ||
-        hasTooManyHashtags ||
-        hasTooManyHashtagsInComment ||
-        hasTooManyMentionsInComment ||
-        hasCommentAboveCharLimit ||
         !hasRequiredComment ||
-        validationResult.isInvalid();
+        validationResultVideo.isInvalid() ||
+        validationResults.isInvalid();
 
       if (isInvalid) {
-        const messages = [];
+        let messages = [];
         let requiredAttachmentCopy;
         let canHaveImageOrGifAttachment;
         let canHaveVideoAttachment;
@@ -324,24 +245,12 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
           messages.push('Please include a valid source url or leave the source url blank');
         }
 
-        if (hasTooManyHashtags) {
-          messages.push(`At most ${draft.service.maxHashtagsInText} hashtags can be used`);
+        if (validationResultVideo.isInvalid()) {
+          messages.push(validationResultVideo.message);
         }
 
-        if (hasTooManyHashtagsInComment) {
-          messages.push(`At most ${draft.service.maxHashtagsInText} hashtags can be used for comments`);
-        }
-
-        if (hasTooManyMentionsInComment) {
-          messages.push(`At most ${draft.service.maxMentionsInComment} mentions can be used for comments`);
-        }
-
-        if (validationResult.isInvalid()) {
-          messages.push(validationResult.message);
-        }
-
-        if (hasCommentAboveCharLimit) {
-          messages.push(`We can only fit ${draft.service.commentCharLimit} characters for comments`);
+        if (validationResults.isInvalid()) {
+          messages = messages.concat(validationResults.getErrorMessages());
         }
 
         if (!hasRequiredComment) {
@@ -449,7 +358,7 @@ const enableDraft = monitorComposerLastInteractedWith(
       if (!isOmniboxEnabled) {
         const enabledDrafts = ComposerStore.getEnabledDrafts();
         const hasOneEmptyEnabledDraft =
-          enabledDrafts.length === 1 && isDraftEmpty(enabledDrafts[0]);
+          enabledDrafts.length === 1 && enabledDrafts[0].isEmpty();
 
         if (hasOneEmptyEnabledDraft) {
           AppActionCreators.updateOmniboxState(true);

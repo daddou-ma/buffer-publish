@@ -71,8 +71,8 @@ const Services = (() => {
         requiredAttachmentType: null,
         unavailableMediaAttachmentTypes: [],
         maxAttachableImagesCount: 1,
-        maxHashtagsInText: null, // No maximum by default
-        maxMentionsInComment: null, // No maximum by default
+        maxHashtags: null, // No maximum by default
+        maxMentions: null, // No maximum by default
         profileType: null,
         nativeVideoSizeLimit: null,
         nativeVideoDurationLimit: null,
@@ -169,8 +169,8 @@ const Services = (() => {
       unavailableMediaAttachmentTypes: [MediaTypes.GIF],
       profileType: ProfileTypes.ACCOUNT,
       usesImageFirstLayout: true,
-      maxHashtagsInText: 30,
-      maxMentionsInComment: 5,
+      maxHashtags: 30,
+      maxMentions: 5,
       canHaveLocation: true,
       canEditVideoAttachment: false,
     }),
