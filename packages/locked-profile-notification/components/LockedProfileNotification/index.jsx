@@ -1,11 +1,8 @@
 import React from 'react';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import {
-  Card,
-  Text,
-  Button,
-  NotificationIcon,
-} from '@bufferapp/components';
+import { Card } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
+import WarningIcon from '@bufferapp/ui/Icon/Icons/Warning';
 
 import PropTypes from 'prop-types';
 
@@ -17,10 +14,6 @@ const iconStyle = {
   display: 'flex',
   alignItems: 'center',
   paddingRight: '0.5rem',
-};
-
-const contentStyle = {
-  marginTop: '0.5rem',
 };
 
 const formStyle = {
@@ -60,7 +53,7 @@ const renderParagraph = ({ type, profileLimit }, paragraph) => {
   }
 
   return (
-    <Text size={'mini'}>
+    <Text type="p">
       {paragraphText}
     </Text>
   );
@@ -87,14 +80,13 @@ const renderButton = ({ type, onClickUpgrade }) => {
 
   return (
     <Button
-      large
+      type="primary"
       onClick={(e) => {
         e.preventDefault();
         onClickUpgrade(type);
       }}
-    >
-      {buttonText}
-    </Button>
+      label={buttonText}
+    />
   );
 };
 
@@ -123,21 +115,16 @@ const LockedProfileNotification = ({
     <Card reducedPadding>
       <div style={titleStyle}>
         <span style={iconStyle}>
-          <NotificationIcon />
+          <WarningIcon />
         </span>
         <Text
-          color={'outerSpace'}
-          weight={'medium'}
+          type="h3"
         >
           Whoops, this social account is locked
         </Text>
       </div>
-      <div style={contentStyle}>
-        {renderParagraph({ type, profileLimit }, 'firstParagraph')}
-      </div>
-      <div style={contentStyle}>
-        { renderParagraph({ type }, 'secondParagraph') }
-      </div>
+      { renderParagraph({ type, profileLimit }, 'firstParagraph')}
+      { renderParagraph({ type }, 'secondParagraph') }
       <form style={formStyle}>
         { renderButton({ type, onClickUpgrade }) }
       </form>
