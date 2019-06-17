@@ -28,10 +28,8 @@ const rightContentStyle = {
 // Not able to use the Text component because of white-space: nowrap; style
 const rightContentTitleStyle = {
   color: '#3D3D3D',
-  fontFamily: 'Roboto,sans-serif',
   fontSize: '14px',
   fontWeight: '500',
-  lineHeight: '16px',
   marginBottom: '28px',
 };
 
@@ -66,6 +64,7 @@ const buttonStyle = {
   justifyContent: 'center',
 };
 
+// Not using Text component because smallest font size is 14px
 const buttonSubCopyStyle = {
   fontWeight: 'bold',
   fontSize: '10px',
@@ -135,7 +134,7 @@ const InstagramFirstCommentStartTrialModal = ({ translations, hideModal }) => (
                 style={imageStyle}
                 src="https://buffer.com/images/modals/instagram/ig_first_comment.gif"
                 alt={translations.imageAlt}
-                />
+              />
             </div>
           </div>
 
