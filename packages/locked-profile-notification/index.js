@@ -8,6 +8,7 @@ export default connect(
   state => ({
     profileLimit: state.appSidebar.user.profile_limit,
     isOwner: state.appSidebar.user.id === state.profileSidebar.selectedProfile.ownerId,
+    canStartProTrial: state.appSidebar.user.canStartProTrial,
   }),
   dispatch => ({
     onClickUpgrade: (plan) => {
