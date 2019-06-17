@@ -137,6 +137,36 @@ class Composer extends React.Component {
     ComposerActionCreators.toggleAttachment(this.props.draft.id, AttachmentTypes.RETWEET);
   }
 
+  onToggleComment = (e, commentEnabled) => {
+    e.preventDefault();
+    const { userShouldSeeProTrialModal } = this.props;
+    const userShouldSeeProUpgradeModal = this.props.isFreeUser && !userShouldSeeProTrialModal;
+    debugger;
+    if (userShouldSeeProTrialModal) {
+      AppActionCreators.triggerInteraction({
+        message: {
+          action: 'SHOW_IG_FIRST_COMMENT_START_PRO_TRIAL_MODAL',
+        },
+      });
+    } else if (userShouldSeeProUpgradeModal) {
+      AppActionCreators.triggerInteraction({
+        message: {
+          action: 'SHOW_PRO_UPGRADE_MODAL',
+        },
+      });
+    } else {
+      AppActionCreators.triggerInteraction({
+        message: {
+          id: this.props.draft.id,
+          ids: this.props.selectedProfiles.map(profile => profile.id),
+          action: commentEnabled ? 'COMMENT_ENABLED' : null,
+        },
+      });
+      ComposerActionCreators.updateToggleComment(this.props.draft.id, commentEnabled);
+    }
+  };
+
+
   onMediaAttachmentSwitchClick = () => {
     const replacedAttachment =
       this.isLinkAttachmentEnabled() && this.hasLinkAttachment() ? AttachmentTypes.LINK :
@@ -396,18 +426,6 @@ class Composer extends React.Component {
     ev.stopPropagation();
     NotificationActionCreators.removeComposerOmniboxNotices(this.props.draft.id);
     ReactTooltip.hide(this.noticeTooltip);
-  };
-
-  onToggleComment = (e, commentEnabled) => {
-    e.preventDefault();
-    AppActionCreators.triggerInteraction({
-      message: {
-        id: this.props.draft.id,
-        ids: this.props.selectedProfiles.map((profile) => profile.id),
-        commentEnabled,
-      },
-    });
-    ComposerActionCreators.updateToggleComment(this.props.draft.id, commentEnabled);
   };
 
   onCommentChange = (e) => {

@@ -227,6 +227,7 @@ const AppStateless = ({
         hasFirstCommentFlip={userData.hasFirstCommentFlip || false}
         isFreeUser={userData.isFreeUser || false}
         isBusinessUser={userData.isBusinessUser || false}
+        userShouldSeeProTrialModal={userData.canStartProTrial || false}
       />
 
       <UpdateSaver

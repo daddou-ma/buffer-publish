@@ -70,6 +70,7 @@ class App extends React.Component {
         signature: PropTypes.string.isRequired,
         successActionStatus: PropTypes.string.isRequired,
       }).isRequired,
+      userShouldSeeProTrialModal: PropTypes.bool.isRequired,
       uses24hTime: PropTypes.bool.isRequired,
       weekStartsMonday: PropTypes.bool.isRequired,
       isFreeUser: PropTypes.bool.isRequired,

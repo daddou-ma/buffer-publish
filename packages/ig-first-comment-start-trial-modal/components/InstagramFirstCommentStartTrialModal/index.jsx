@@ -114,7 +114,7 @@ const proTrialFeatureItem = text => (
   </div>
 );
 
-const InstagramFirstCommentStartTrialModal = ({ translations, hideModal }) => (
+const InstagramFirstCommentStartTrialModal = ({ translations, hideModal, startTrial }) => (
   <div>
     <Popover>
       <div style={cardStyle}>
@@ -144,6 +144,7 @@ const InstagramFirstCommentStartTrialModal = ({ translations, hideModal }) => (
               label={translations.buttonCopy}
               type="primary"
               fullWidth
+              onClick={startTrial}
             />
           </div>
           <div style={buttonSubCopyStyle}>
