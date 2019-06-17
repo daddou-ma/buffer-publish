@@ -9,6 +9,7 @@ import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-mo
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import InstagramFirstCommentStartTrialModal from '@bufferapp/publish-ig-first-comment-start-trial-modal';
 
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueueItems from '../QueueItems';
@@ -117,6 +118,7 @@ const QueuedPosts = ({
   return (
     <ErrorBoundary>
       <div>
+        <InstagramFirstCommentStartTrialModal />
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
             {showComposer && !editMode &&
