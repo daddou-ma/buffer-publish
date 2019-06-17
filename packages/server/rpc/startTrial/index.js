@@ -4,7 +4,7 @@ const rp = require('request-promise');
 module.exports = method(
   'startTrial',
   'start trial',
-  ({ profileId }, { session }) =>
+  (_, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/billing/start-trial.json`,
       method: 'POST',
@@ -20,7 +20,6 @@ module.exports = method(
     .catch((err) => {
       if (err.error) {
         const { error } = JSON.parse(err.error);
-        console.debug({error});
         throw createError({ message: error });
       }
     }),
