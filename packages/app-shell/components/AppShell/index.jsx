@@ -169,6 +169,7 @@ AppShell.defaultProps = {
   showReturnToClassic: false,
   showUpgradeToPro: false,
   showManageTeam: false,
+  showStartProTrial: false,
 };
 
 export default AppShell;
