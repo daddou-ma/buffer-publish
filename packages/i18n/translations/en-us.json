@@ -100,6 +100,29 @@
     "continue": "Continue",
     "imageAlt": "Publish your first comment directly to Instagram"
   },
+  "instagram-first-comment-start-trial-modal": {
+    "heading": "Go Pro to include a first comment on scheduled Instagram posts.",
+    "heading2": "Access all Pro features right now with a free 7-day trial.",
+    "body": "Prefer to keep hashtags out of your Instagram captions? Save time by scheduling them as a first comment instead.",
+    "buttonCopy": "Start a Free 7-Day Pro Trial",
+    "buttonSubCopy": "NO CREDIT CARD REQUIRED",
+    "imageAlt": "Publish your first comment directly to Instagram",
+    "proTrialFeatures": {
+      "connectAccounts": "Connect up to",
+      "connectAccountsBold": " 8 social accounts",
+      "schedulePosts": "Schedule up to",
+      "schedulePostsBold": " 100 posts",
+      "schedulePosts2": " per social account",
+      "support": "Access fast, helpful email and social media",
+      "supportBold": " support",
+      "firstComment": "Schedule first comments on Instagram posts",
+      "report": "Optimize your content with a",
+      "reportBold": " 30-day posting report",
+      "integrations": "Utilize",
+      "integrationsBold": " 60+ third-party integrations",
+      "integrations2": " to connect with Zapier, IFTTT, Quuu, Pocket, Feedly, and more."
+    }
+  },
   "profiles-disconnected-modal": {
     "headline": "We’ve lost access to some of your social accounts",
     "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these accounts you will need to reconnect them.",
