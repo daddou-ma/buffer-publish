@@ -14,6 +14,7 @@ export const initialState = {
   showInstagramNewFirstCommentUserModal: false,
   showB4BTrialExpiredModal: false,
   upgradeModalB4BSource: null,
+  showInstagramFirstCommentProTrialModal: false,
 };
 
 export const actionTypes = keyWrapper('MODALS', {
@@ -37,8 +38,8 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
   SHOW_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL: 0,
   HIDE_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL: 0,
-  SHOW_INSTAGRAM_FIRST_COMMENT_START_TRIAL_MODAL: 0,
-  HIDE_INSTAGRAM_FIRST_COMMENT_START_TRIAL_MODAL: 0,
+  SHOW_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
+  HIDE_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -148,15 +149,15 @@ export default (state = initialState, action) => {
         ...state,
         showWelcomeB4BTrialModal: false,
       };
-    case actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_START_TRIAL_MODAL:
+    case actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL:
       return {
         ...state,
-        showInstagramFirstCommentStartTrialModal: false,
+        showInstagramFirstCommentProTrialModal: false,
       };
-    case actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_START_TRIAL_MODAL:
+    case actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL:
       return {
         ...state,
-        showInstagramFirstCommentStartTrialModal: true,
+        showInstagramFirstCommentProTrialModal: true,
       };
 
     default:
@@ -204,11 +205,11 @@ export const actions = {
   hideInstagramNewFirstCommentUserModal: () => ({
     type: actionTypes.HIDE_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL,
   }),
-  hideInstagramFirstCommentStartTrialModal: () => ({
-    type: actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_START_TRIAL_MODAL,
+  hideInstagramFirstCommentProTrialModal: () => ({
+    type: actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL,
   }),
-  showInstagramFirstCommentStartTrialModal: () => ({
-    type: actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_START_TRIAL_MODAL,
+  showInstagramFirstCommentProTrialModal: () => ({
+    type: actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL,
   }),
   showProfilesDisconnectedModal: () => ({
     type: actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL,

@@ -144,11 +144,11 @@ export default connect(
         case 'COMMENT_ENABLED':
           dispatch(modalsActions.showInstagramFirstCommentModal(message));
           break;
-        case 'SHOW_IG_FIRST_COMMENT_START_PRO_TRIAL_MODAL':
-          dispatch(modalsActions.showInstagramFirstCommentStartProTrialModal())
+        case 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL':
+          dispatch(modalsActions.showInstagramFirstCommentProTrialModal());
           break;
         case 'SHOW_PRO_UPGRADE_MODAL':
-          dispatch(modalsActions.showUpgradeModal())
+          dispatch(modalsActions.showUpgradeModal());
           break;
         default: break;
       }

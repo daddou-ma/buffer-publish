@@ -53,6 +53,7 @@ class Composer extends React.Component {
     composerPosition: PropTypes.object,
     hasIGDirectFlip: PropTypes.bool,
     hasIGLocationTaggingFeature: PropTypes.bool,
+    canStartProTrial: PropTypes.bool,
     hasIGDirectVideoFlip: PropTypes.bool,
     hasFirstCommentFlip: PropTypes.bool,
     isFreeUser: PropTypes.bool,
@@ -63,6 +64,7 @@ class Composer extends React.Component {
     children: null,
     composerPosition: null,
     hasIGLocationTaggingFeature: false,
+    canStartProTrial: false,
   };
 
   constructor(props) {
@@ -139,16 +141,16 @@ class Composer extends React.Component {
 
   onToggleComment = (e, commentEnabled) => {
     e.preventDefault();
-    const { userShouldSeeProTrialModal } = this.props;
-    const userShouldSeeProUpgradeModal = this.props.isFreeUser && !userShouldSeeProTrialModal;
+    const { canStartProTrial } = this.props;
+    const showProUpgradeModal = this.props.isFreeUser && !canStartProTrial;
     debugger;
-    if (userShouldSeeProTrialModal) {
+    if (canStartProTrial) {
       AppActionCreators.triggerInteraction({
         message: {
-          action: 'SHOW_IG_FIRST_COMMENT_START_PRO_TRIAL_MODAL',
+          action: 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL',
         },
       });
-    } else if (userShouldSeeProUpgradeModal) {
+    } else if (showProUpgradeModal) {
       AppActionCreators.triggerInteraction({
         message: {
           action: 'SHOW_PRO_UPGRADE_MODAL',

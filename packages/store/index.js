@@ -42,7 +42,7 @@ import { middleware as thirdpartyMiddleware } from '@bufferapp/publish-thirdpart
 import { middleware as bookmarkletsMiddleware } from '@bufferapp/publish-bookmarklets';
 import { middleware as b4bTrialCompleteModalMiddleware } from '@bufferapp/publish-b4b-trial-complete-modal';
 import { middleware as tabsMiddleware } from '@bufferapp/publish-tabs';
-import { middleware as igFirstCommentStartTrialModalMiddleware } from '@bufferapp/publish-ig-first-comment-start-trial-modal';
+import { middleware as igFirstCommentProTrialModalMiddleware } from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
@@ -116,7 +116,7 @@ const configureStore = initialstate => {
         thirdpartyMiddleware,
         b4bTrialCompleteModalMiddleware,
         tabsMiddleware,
-        igFirstCommentStartTrialModalMiddleware,
+        igFirstCommentProTrialModalMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

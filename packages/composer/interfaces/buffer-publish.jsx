@@ -27,6 +27,7 @@ const ComposerWrapper = ({
   draftMode,
   emptySlotMode,
   selectedProfileId,
+
 }) => {
   const getSaveButtons = () => {
     if (editMode) return ['SAVE'];
@@ -75,6 +76,7 @@ const ComposerWrapper = ({
       userData.features && userData.features.includes('instagram-location-tagging'),
     // TODO: make should_use_new_twitter_autocomplete dynamic based on the
     // value of enabledApplicationModes.includes('web-twitter-typeahead-autocomplete')
+    canStartProTrial: userData.canStartProTrial,
     should_use_new_twitter_autocomplete: true,
     updateId: post ? post.id : undefined,
     update: { ...post, images: post.imageUrls },

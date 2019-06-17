@@ -8,7 +8,7 @@ import {
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
-import InstagramFirstCommentStartTrialModal from '@bufferapp/publish-ig-first-comment-start-trial-modal';
+import InstagramFirstCommentProTrialModal from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
