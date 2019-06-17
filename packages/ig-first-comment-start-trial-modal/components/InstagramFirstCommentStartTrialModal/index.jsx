@@ -8,7 +8,6 @@ import { Button, Text } from '@bufferapp/ui';
 import { Cross, Checkmark } from '@bufferapp/ui/Icon';
 
 const cardStyle = {
-  maxWidth: '718px',
   border: '1px solid #B8B8B8',
   boxShadow: '0px 1px 4px #00000029',
   borderRadius: '4px',
@@ -17,7 +16,6 @@ const cardStyle = {
 
 const leftContentStyle = {
   background: 'white',
-  padding: '24px 24px 0px',
   maxWidth: '432px',
 };
 
@@ -63,7 +61,7 @@ const lineStyle = {
 };
 
 const buttonStyle = {
-  padding: '16px 0px 8px',
+  padding: '16px 24px 8px',
   display: 'flex',
   justifyContent: 'center',
 };
@@ -122,22 +120,25 @@ const InstagramFirstCommentStartTrialModal = ({ translations, hideModal }) => (
     <Popover>
       <div style={cardStyle}>
         <div style={leftContentStyle}>
-          <div style={proTagStyle}>
-            <span style={proTagSpanStyle}>
-              PRO
-            </span>
+          <div style={{ padding: '24px 24px 0px' }}>
+            <div style={proTagStyle}>
+              <span style={proTagSpanStyle}>
+                PRO
+              </span>
+            </div>
+            <Text type="h2">{translations.heading}</Text>
+            <div style={{ marginBottom: '24px' }}>
+              <Text type="p">{translations.body}</Text>
+            </div>
+            <div>
+              <img
+                style={imageStyle}
+                src="https://buffer.com/images/modals/instagram/ig_first_comment.gif"
+                alt={translations.imageAlt}
+                />
+            </div>
           </div>
-          <Text type="h2">{translations.heading}</Text>
-          <div style={{ marginBottom: '24px' }}>
-            <Text type="p">{translations.body}</Text>
-          </div>
-          <div>
-            <img
-              style={imageStyle}
-              src="https://buffer.com/images/modals/instagram/ig_first_comment.gif"
-              alt={translations.imageAlt}
-            />
-          </div>
+
           <div style={lineStyle} />
           <div style={buttonStyle}>
             <Button
