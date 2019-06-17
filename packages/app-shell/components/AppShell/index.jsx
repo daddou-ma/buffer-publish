@@ -52,6 +52,7 @@ const helpMenuItems = [
 function generateUserMenuItems({
   showReturnToClassic,
   showUpgradeToPro,
+  showStartProTrial,
   returnToClassic,
   upgradeToPro,
   openPreferences,
@@ -81,6 +82,14 @@ function generateUserMenuItems({
       hasDivider: true,
       onItemClick: returnToClassic,
     },
+    startProTrial: {
+      id: 'startProTrial',
+      title: 'Start Pro Trial',
+      icon: <Plus color={gray} />,
+      onItemClick: () => {
+        window.location.assign(`${getURL.getStartTrialURL('pro')}`);
+      },
+    },
     upgradeToPro: {
       id: 'upgradeToPro',
       title: 'Upgrade to Pro',
@@ -96,7 +105,11 @@ function generateUserMenuItems({
     extraItems.push(userMenuItems.returnToClassic);
   }
   if (showUpgradeToPro) {
-    extraItems.push(userMenuItems.upgradeToPro);
+    if (showStartProTrial) {
+      extraItems.push(userMenuItems.startProTrial);
+    } else {
+      extraItems.push(userMenuItems.upgradeToPro);
+    }
   }
   return [...userMenuItems.top, ...extraItems];
 }
@@ -107,6 +120,7 @@ const AppShell = ({
   showReturnToClassic,
   showUpgradeToPro,
   showManageTeam,
+  showStartProTrial,
   returnToClassic,
   upgradeToPro,
   openPreferences,
@@ -120,6 +134,7 @@ const AppShell = ({
         showReturnToClassic,
         showUpgradeToPro,
         showManageTeam,
+        showStartProTrial,
         returnToClassic,
         upgradeToPro,
         openPreferences,
@@ -134,6 +149,7 @@ AppShell.propTypes = {
   showReturnToClassic: PropTypes.bool,
   showUpgradeToPro: PropTypes.bool,
   showManageTeam: PropTypes.bool,
+  showStartProTrial: PropTypes.bool,
   returnToClassic: PropTypes.func.isRequired,
   upgradeToPro: PropTypes.func.isRequired,
   openPreferences: PropTypes.func.isRequired,
