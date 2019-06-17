@@ -112,7 +112,7 @@ class TabNavigation extends React.Component {
                 onClick={(e) => {
                   e.preventDefault();
                   if (canStartProTrial) {
-                    window.location = getURL.getStartTrialURL('pro');
+                    window.location.assign(`${getURL.getStartTrialURL('pro')}`);
                   } else {
                     onUpgradeButtonClick('pro');
                   }
@@ -164,7 +164,7 @@ class TabNavigation extends React.Component {
                 onClick={(e) => {
                   e.preventDefault();
                   this.setState({ loading: true });
-                  window.location = getURL.getManageURL();
+                  window.location.assign(`${getURL.getManageURL()}`);
                 }}
               />
             </div>
