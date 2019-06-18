@@ -75,6 +75,21 @@ storiesOf('TabNavigation', module)
       onProTrial
     />
   ))
+  .add('should show start pro trial', () => (
+    <TabNavigation
+      selectedTabId={'queue'}
+      onTabClick={action('tab-click')}
+      isBusinessAccount={false}
+      isManager={false}
+      shouldShowNestedSettingsTab
+      selectedChildTabId={'general-settings'}
+      onChildTabClick={action('child-tab-click')}
+      showUpgradeModal={action('show-upgrade-modal')}
+      shouldShowUpgradeCta
+      canStartProTrial
+      onUpgradeButtonClick={action('on-upgrade-button-click')}
+    />
+  ))
   .add('should show grid tab', () => (
     <TabNavigation
       selectedTabId={'grid'}

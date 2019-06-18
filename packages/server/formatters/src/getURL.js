@@ -61,7 +61,7 @@ module.exports = {
   },
   getStartTrialURL: (trialType) => {
     if (window.location.hostname === 'publish.local.buffer.com') {
-      return `https://local.buffer.com/billing/start-trial?trialType=${trialType}&next=https://publish.buffer.com`;
+      return `https://local.buffer.com/billing/start-trial?trialType=${trialType}&next=https://publish.local.buffer.com`;
     }
     return `https://buffer.com/billing/start-trial?trialType=${trialType}&next=https://publish.buffer.com`;
   },

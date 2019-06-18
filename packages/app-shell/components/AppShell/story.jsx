@@ -39,4 +39,22 @@ storiesOf('AppShell', module)
     >
       This is my content
     </AppShell>
+  ))
+  .add('with start a pro trial link', () => (
+    <AppShell
+      showStartProTrial
+      showUpgradeToPro
+      user={{
+        name: 'Tom Redman',
+        email: 'tom.redman@buffer.com',
+        avatar:
+          'https://pbs.twimg.com/profile_images/988599738315423745/epPuqmx4_400x400.jpg',
+      }}
+      returnToClassic={action('return-to-classic')}
+      openAccount={action('open-account')}
+      openPreferences={action('open-preferences')}
+      openLogout={action('open-logout')}
+    >
+      This is my content
+    </AppShell>
   ));

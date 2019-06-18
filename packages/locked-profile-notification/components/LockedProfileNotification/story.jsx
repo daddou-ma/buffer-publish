@@ -61,4 +61,13 @@ storiesOf('Locked Profile Notification', module)
         isOwner={false}
       />
     </Provider>
+  ))
+  .add('show start Pro trial', () => (
+    <Provider store={storeFree}>
+      <LockedProfileNotification
+        canStartProTrial
+        profileLimit={3}
+        isOwner
+      />
+    </Provider>
   ));

@@ -187,7 +187,7 @@ TabNavigation.defaultProps = {
   isBusinessAccount: false,
   isManager: false,
   onProTrial: true,
-  canStartProTrial: true,
+  canStartProTrial: false,
 };
 
 TabNavigation.propTypes = {
