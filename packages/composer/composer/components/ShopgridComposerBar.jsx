@@ -5,31 +5,22 @@ import styles from './css/ShopgridComposerBar.css';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 
 class ShopgridComposerBar extends React.Component {
-  static propTypes = {
-    draftId: PropTypes.string.isRequired,
-    shopgridLink: PropTypes.string,
-    hasShopgridFlip: PropTypes.bool.isRequired,
-    isInstagram: PropTypes.bool.isRequired,
-    selectedInstagramProfiles: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    isBusinessUser: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    locationName: '',
-    locationId: null,
-    instagramProfileId: null,
-    places: [],
-    shopgridLink: null,
-  };
-
   constructor(props) {
     super(props);
     this.state = {
       shopgridLink: props.shopgridLink,
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.shouldShowShopgridBar = this.shouldShowShopgridBar.bind(this);
   }
 
-  shouldShowShopgridBar = () => {
+  onChange(event) {
+    this.setState({ shopgridLink: event.target.value });
+    ComposerActionCreators.updateDraftShopgridLink(this.props.draftId, event.target.value);
+  }
+
+  shouldShowShopgridBar() {
     const {
       isInstagram,
       hasShopgridFlip,
@@ -40,12 +31,7 @@ class ShopgridComposerBar extends React.Component {
     const hasInstagramSelected = selectedInstagramProfiles && selectedInstagramProfiles.length >= 1;
 
     return hasInstagramSelected && isInstagram && hasShopgridFlip && isBusinessUser;
-  };
-
-  onChange = (event) => {
-    this.setState({ shopgridLink: event.target.value });
-    ComposerActionCreators.updateDraftShopgridLink(this.props.draftId, event.target.value);
-  };
+  }
 
   render () {
     return (
@@ -68,5 +54,23 @@ class ShopgridComposerBar extends React.Component {
     );
   }
 }
+
+ShopgridComposerBar.propTypes = {
+  draftId: PropTypes.string.isRequired,
+  shopgridLink: PropTypes.string,
+  hasShopgridFlip: PropTypes.bool.isRequired,
+  isInstagram: PropTypes.bool.isRequired,
+  selectedInstagramProfiles: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  isBusinessUser: PropTypes.bool.isRequired,
+};
+
+ShopgridComposerBar.defaultProps = {
+  locationName: '',
+  locationId: null,
+  instagramProfileId: null,
+  places: [],
+  shopgridLink: null,
+};
+
 
 export default ShopgridComposerBar;
