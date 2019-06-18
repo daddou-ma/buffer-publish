@@ -386,6 +386,7 @@ const ActionTypes = keyMirror({
   EVENT_SHOW_UPGRADE_MODAL: null,
   COMPOSER_UPDATE_INSTAGRAM_DRAFT_THUMBNAIL: null,
   APP_SET_THUMBNAIL_LOADING: null,
+  RESET_USER_DATA: null,
 });
 
 const AsyncOperationStates = keyMirror({

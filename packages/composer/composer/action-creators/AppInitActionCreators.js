@@ -343,7 +343,7 @@ const AppInitActionCreators = {
 
   resetUserData: (userData) => {
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.USER_RESET,
+      actionType: ActionTypes.RESET_USER_DATA,
       userData,
     });
   },

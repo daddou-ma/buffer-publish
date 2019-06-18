@@ -1143,7 +1143,7 @@ const onDispatchedPayload = (payload) => {
       markAppAsNotLoaded();
       break;
 
-    case ActionTypes.RESET_USER:
+    case ActionTypes.RESET_USER_DATA:
       resetUser(action.userData);
       break;
 
