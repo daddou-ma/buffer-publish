@@ -5,12 +5,13 @@ export const actionTypes = keyWrapper('IG_FIRST_COMMENT_PRO_TRIAL_MODAL', {
   START_PRO_TRIAL: 0,
 });
 
-export default (state = {}, action) => {
+export default (state = { startedTrial: false }, action) => {
   switch (action.type) {
     case `startTrial_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         loading: false,
+        startedTrial: true,
       };
     case `startTrial_${dataFetchActionTypes.FETCH_FAIL}`:
       return {

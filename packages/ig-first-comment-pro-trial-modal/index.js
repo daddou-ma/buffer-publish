@@ -7,6 +7,7 @@ export default connect(
   state => ({
     translations: state.i18n.translations['instagram-first-comment-start-trial-modal'],
     loading: state.igFirstCommentProTrialModal.loading,
+    startedTrial: state.igFirstCommentProTrialModal.startedTrial,
   }),
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideInstagramFirstCommentProTrialModal()),

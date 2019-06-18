@@ -143,7 +143,6 @@ class Composer extends React.Component {
     e.preventDefault();
     const { canStartProTrial } = this.props;
     const showProUpgradeModal = this.props.isFreeUser && !canStartProTrial;
-    debugger;
     if (canStartProTrial) {
       AppActionCreators.triggerInteraction({
         message: {

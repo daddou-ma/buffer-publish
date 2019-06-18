@@ -807,6 +807,14 @@ const markAppAsNotLoaded = () => {
   state.appState.isLoaded = false;
 };
 
+const resetUser = (userData) => {
+  Object.keys(userData).forEach((key) => {
+    if (key !== 's3UploadSignature' || key !== 's3_upload_signature') {
+      state.userData[key] = userData[key];
+    }
+  });
+};
+
 const updateOmniboxState = (isEnabled) => {
   state.appState.isOmniboxEnabled = isEnabled;
 };
@@ -1133,6 +1141,10 @@ const onDispatchedPayload = (payload) => {
 
     case ActionTypes.APP_NOT_LOADED:
       markAppAsNotLoaded();
+      break;
+
+    case ActionTypes.RESET_USER:
+      resetUser(action.userData);
       break;
 
     /**

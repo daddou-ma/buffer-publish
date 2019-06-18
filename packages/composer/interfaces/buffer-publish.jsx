@@ -172,6 +172,12 @@ events.on('saved-drafts', () => {
   publishComposerOnSaveCallback();
 });
 
+events.on('start-trial', (message) => {
+  const userData = DataImportUtils.formatUserData(null, { userData: message });
+  AppInitActionCreators.resetUserData(userData);
+  // onToggleComment(e, true);
+});
+
 events.on('action-taken', (message) => {
   publishComposerOnInteractionCallback(message);
 });
