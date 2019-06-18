@@ -128,6 +128,57 @@ describe('validateDraft', () => {
     expect(results.isValid()).toBeTruthy();
   });
 
+  describe('shopgridLink', () => {
+    it('return error for invalid url in shopgrid link', () => {
+      const service = Services.get('instagram');
+
+      const draft = new Draft(service, EditorState.createEmpty());
+
+      draft.shopgridLink = 'blahblahblah';
+
+      const results = validateDraft(draft);
+
+      expect(results.isInvalid()).toBeTruthy();
+      expect(results.getErrorMessages()).toContain('The link URL format is invalid');
+    });
+
+    it('return success for valid url in shopgrid link', () => {
+      const service = Services.get('instagram');
+
+      const draft = new Draft(service, EditorState.createEmpty());
+
+      draft.shopgridLink = 'buffer.com';
+
+      const results = validateDraft(draft);
+
+      expect(results.isValid()).toBeTruthy();
+    });
+
+    it('return success for valid https url in shopgrid link', () => {
+      const service = Services.get('instagram');
+
+      const draft = new Draft(service, EditorState.createEmpty());
+
+      draft.shopgridLink = 'https://buffer.com';
+
+      const results = validateDraft(draft);
+
+      expect(results.isValid()).toBeTruthy();
+    });
+
+    it('return success for empty string in shopgrid link', () => {
+      const service = Services.get('instagram');
+
+      const draft = new Draft(service, EditorState.createEmpty());
+
+      draft.shopgridLink = 'https://buffer.com';
+
+      const results = validateDraft(draft);
+
+      expect(results.isValid()).toBeTruthy();
+    });
+  });
+
   describe('hashtags validation', () => {
     it('returns max hashtags error in text if they exceed the amount allowed', () => {
       const service = Services.get('instagram');

@@ -794,6 +794,14 @@ const updateDraftComment = monitorComposerLastInteractedWith(
   }
 );
 
+const updateShopgridLink = monitorComposerLastInteractedWith(
+  (id, shopgridLink) => {
+    const draft = ComposerStore.getDraft(id);
+    if (draft.service.name !== 'instagram') return;
+    draft.shopgridLink = shopgridLink;
+  },
+);
+
 const updateDraftCommentCharacterCount = monitorComposerLastInteractedWith(
   (id, didEditorStateChange) => {
     const draft = ComposerStore.getDraft(id);
@@ -1771,8 +1779,16 @@ const onDispatchedPayload = (payload) => {
       updateDraftComment(action.id, action.commentText);
       break;
 
+    case ActionTypes.COMPOSER_UPDATE_DRAFT_SHOPGRID_LINK:
+      updateShopgridLink(action.id, action.shopgridLink);
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_SHOPGRID_LINK:
+      state.drafts.forEach(draft => updateShopgridLink(draft.id, action.shopgridLink));
+      break;
+
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_COMMENT:
-      state.drafts.forEach((draft) => updateDraftComment(draft.id, action.commentText));
+      state.drafts.forEach(draft => updateDraftComment(draft.id, action.commentText));
       break;
 
     case ActionTypes.COMPOSER_UPDATE_TOGGLE_COMMENT:
@@ -1780,7 +1796,7 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT:
-      state.drafts.forEach((draft) => updateToggleComment(draft.id, action.commentEnabled));
+      state.drafts.forEach(draft => updateToggleComment(draft.id, action.commentEnabled));
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_COMMENT_CHARACTER_COUNT:
