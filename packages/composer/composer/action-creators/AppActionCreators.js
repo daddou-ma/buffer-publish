@@ -208,14 +208,14 @@ const AppActionCreators = {
                   const { environment } = AppStore.getMetaData();
                   if (isFreeUser) {
                     if (AppStore.isExtension()) {
-                      window.open(`${bufferOrigins.get(environment)}/pro/`);
+                      window.open(`${bufferOrigins.get(environment)}/pricing`);
                     } else {
                       AppDispatcher.handleViewAction({
                         actionType: ActionTypes.EVENT_SHOW_UPGRADE_MODAL,
                       });
                     }
                   } else if (!isBusinessUser) {
-                    window.open(`${bufferOrigins.get(environment)}/business/`);
+                    window.open(`${bufferOrigins.get(environment)}/pricing`);
                   } else {
                     window.open(`${bufferOrigins.get(environment)}/app/account/receipts?content_only=true`);
                   }
