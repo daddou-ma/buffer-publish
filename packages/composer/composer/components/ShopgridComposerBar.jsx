@@ -8,7 +8,7 @@ class ShopgridComposerBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      shopgridLink: props.shopgridLink,
+      shopgridLink: props.shopgridLink || '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -16,7 +16,7 @@ class ShopgridComposerBar extends React.Component {
   }
 
   onChange(event) {
-    this.setState({ shopgridLink: event.target.value });
+    this.setState({ shopgridLink: event.target.value || ''});
     ComposerActionCreators.updateDraftShopgridLink(this.props.draftId, event.target.value);
   }
 
