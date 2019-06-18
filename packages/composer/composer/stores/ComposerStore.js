@@ -117,12 +117,9 @@ const softResetState = () => {
   // The only data to preserve is the enabled state of each draft
   newState.drafts = newState.drafts.map((newDraft) => {
     const { isEnabled, editorState } = state.drafts.find(({ id }) => id === newDraft.id);
-
-    return {
-      ...newDraft,
-      isEnabled,
-      editorState: resetEditorContents(editorState),
-    };
+    newDraft.isEnabled = isEnabled;
+    newDraft.editorState = resetEditorContents(editorState);
+    return newDraft;
   });
 
   state = newState;
