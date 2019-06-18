@@ -37,6 +37,7 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
   SHOW_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL: 0,
   HIDE_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL: 0,
+  HIDE_INSTAGRAM_FIRST_COMMENT_START_TRIAL_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -190,6 +191,9 @@ export const actions = {
   }),
   hideInstagramNewFirstCommentUserModal: () => ({
     type: actionTypes.HIDE_INSTAGRAM_NEW_FIRST_COMMENT_USER_MODAL,
+  }),
+  hideInstagramFirstCommentStartTrialModal: () => ({
+    type: actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_START_TRIAL_MODAL,
   }),
   showProfilesDisconnectedModal: () => ({
     type: actionTypes.SHOW_PROFILES_DISCONNECTED_MODAL,
