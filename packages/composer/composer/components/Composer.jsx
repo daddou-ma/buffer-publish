@@ -614,14 +614,12 @@ class Composer extends React.Component {
     const shouldDisplayFirstCommentSection = (commentEnabled) => {
       const hasSelectedSomeInstagramDirectProfiles =
         this.props.selectedProfiles.some((profile) => profile.instagramDirectEnabled);
-
       return (
         commentEnabled || (
         hasSelectedSomeInstagramDirectProfiles &&
         this.isInstagram() &&
         this.isExpanded() &&
         hasFirstCommentFlip &&
-        userHasBusinessOrProPlan &&
         !appState.isOmniboxEnabled
         )
       );
