@@ -53,6 +53,12 @@ describe('ComposerStore', () => {
     },
   };
 
+  const actionSoftReset = {
+    action: {
+      actionType: ActionTypes.APP_SOFT_RESET,
+    },
+  };
+
   const actionSelectProfile = {
     action: {
       actionType: ActionTypes.COMPOSER_SELECT_PROFILE,
@@ -219,5 +225,19 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionUpdateInstaState);
     const characterCommentCount = ComposerStore.getDraftCharacterCount(id, commentText);
     expect(characterCommentCount).toEqual(7);
+  });
+
+  describe('soft reset state', () => {
+    it('returns the drafts objects', () => {
+      AppDispatcher.dispatch(actionAddProfiles);
+      AppDispatcher.dispatch(actionSelectProfile);
+      AppDispatcher.dispatch(actionEnableInstagramDraft);
+      AppDispatcher.dispatch(actionAddImage);
+      AppDispatcher.dispatch(actionSoftReset);
+      const draftsAfterReset = ComposerStore.default.getDrafts();
+
+      expect(draftsAfterReset.length).toBeGreaterThan(0);
+      expect(draftsAfterReset[0].constructor.name).toEqual('Draft');
+    });
   });
 });
