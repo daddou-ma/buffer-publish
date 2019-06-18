@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './css/shopgridComposerBar.css';
+import styles from './css/ShopgridComposerBar.css';
 
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import Input from '@bufferapp/ui/Input';
 
 class ShopgridComposerBar extends React.Component {
   static propTypes = {
