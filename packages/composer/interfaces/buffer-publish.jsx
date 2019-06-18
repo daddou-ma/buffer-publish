@@ -6,6 +6,8 @@ import AppInitActionCreators from '../composer/action-creators/AppInitActionCrea
 import AppActionCreators from '../composer/action-creators/AppActionCreators';
 import AppStore from '../composer/stores/AppStore';
 import events from '../composer/utils/Events';
+import AppDispatcher from '../composer/dispatcher';
+import { ActionTypes } from '../composer/AppConstants';
 
 let publishComposerOnSaveCallback;
 let publishComposerOnInteractionCallback;
@@ -175,7 +177,10 @@ events.on('saved-drafts', () => {
 events.on('start-trial', (message) => {
   const userData = DataImportUtils.formatUserData(null, { userData: message });
   AppInitActionCreators.resetUserData(userData);
-  // onToggleComment(e, true);
+  AppDispatcher.handleViewAction({
+    actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT,
+    commentEnabled: true,
+  });
 });
 
 events.on('action-taken', (message) => {
