@@ -190,6 +190,9 @@ const AppActionCreators = {
           // Did we get an error because the user reached a limit and could upgrade?
           // Don't show it as an 'error' in that case
           if (unsuccessfulResponse.code === UpgradeErrorCodes.queueLimit) {
+            const userData = AppStore.getUserData();
+            const { isFreeUser, isBusinessUser, canStartProTrial } = userData;
+
             NotificationActionCreators.queueInfo({
               scope: `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${unsuccessfulResponse.serviceName}`,
               // Remove the <a> from the response message for now until the backend stops returning it
@@ -202,11 +205,14 @@ const AppActionCreators = {
               ),
               isUnique: true,
               cta: {
-                label: 'Show Paid Plans',
+                label: isFreeUser && canStartProTrial ? 'Start Pro Trial' : 'Show Paid Plans',
                 action: () => {
-                  const { isFreeUser, isBusinessUser } = AppStore.getUserData();
                   const { environment } = AppStore.getMetaData();
                   if (isFreeUser) {
+                    if (canStartProTrial) {
+                      window.open(`${bufferOrigins.get(environment)}/billing/start-trial?trialType=pro`);
+                      return;
+                    }
                     if (AppStore.isExtension()) {
                       window.open(`${bufferOrigins.get(environment)}/pricing`);
                     } else {

@@ -152,6 +152,7 @@ const getNewUserData = (data) => ({
   hasIGLocationTaggingFeature: data.hasIGLocationTaggingFeature,
   hasIGDirectVideoFlip: data.hasIGDirectVideoFlip,
   hasFirstCommentFlip: data.hasFirstCommentFlip,
+  canStartProTrial: data.canStartProTrial,
 });
 
 const getNewSubprofile = ({ avatar, id, name, isShared }) =>
