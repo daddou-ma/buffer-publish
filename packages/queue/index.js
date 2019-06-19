@@ -145,10 +145,10 @@ export default connect(
           dispatch(modalsActions.showInstagramFirstCommentModal(message));
           break;
         case 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL':
-          dispatch(modalsActions.showInstagramFirstCommentProTrialModal());
+          dispatch(modalsActions.showInstagramFirstCommentProTrialModal({ source: 'ig_first_comment_toggle' }));
           break;
         case 'SHOW_PRO_UPGRADE_MODAL':
-          dispatch(modalsActions.showUpgradeModal());
+          dispatch(modalsActions.showUpgradeModal({ source: 'ig_first_comment_toggle' }));
           break;
         default: break;
       }
