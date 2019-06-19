@@ -92,5 +92,17 @@ describe('reducer', () => {
       expect(reducer(stateWithVisibleModal, actions.hideWelcomePaidModal()))
         .toEqual(Object.assign(initialState, { showWelcomePaidModal: false }));
     });
+    it('should show instagram first comment start trial modal', () => {
+      expect(reducer(initialState, actions.showInstagramFirstCommentProTrialModal({ source: 'foo' })))
+        .toEqual(Object.assign(initialState, { showInstagramFirstCommentProTrialModal: true }));
+    });
+    it('should hide instatgram first comment start trial modal', () => {
+      const stateWithVisibleModal = Object.assign(
+        initialState,
+        { showInstagramFirstCommentProTrialModal: true },
+      );
+      expect(reducer(stateWithVisibleModal, actions.hideInstagramFirstCommentProTrialModal()))
+        .toEqual(Object.assign(initialState, { showInstagramFirstCommentProTrialModal: false }));
+    });
   });
 });

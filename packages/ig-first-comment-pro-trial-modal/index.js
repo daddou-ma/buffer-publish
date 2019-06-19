@@ -5,7 +5,7 @@ import InstagramFirstCommentProTrialModal from './components/InstagramFirstComme
 
 export default connect(
   state => ({
-    translations: state.i18n.translations['instagram-first-comment-start-trial-modal'],
+    translations: state.i18n.translations['instagram-first-comment-pro-trial-modal'],
     loading: state.igFirstCommentProTrialModal.loading,
     startedTrial: state.igFirstCommentProTrialModal.startedTrial,
   }),
