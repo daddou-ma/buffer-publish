@@ -9,8 +9,8 @@ const AppHooks = {
     events.emit('loaded', { isFreeUser, shouldDisplayHelpButton });
   },
 
-  handleSavedDrafts: (message = {}) => {
-    events.emit('saved-drafts', message);
+  handleSavedDrafts: ({ message } = {}) => {
+    events.emit('saved-drafts', { message });
   },
 
   handleBackdropClicked: () => {
