@@ -159,6 +159,7 @@ const DataImportUtils = {
           hasSimplifiedFreePlanUX: userData.has_simplified_free_plan_ux,
           hasIGLocationTaggingFeature: userData.hasIGLocationTaggingFeature,
           canStartProTrial: userData.canStartProTrial,
+          isOnProTrial: userData.isOnProTrial,
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasFirstCommentFlip: userData.features ? userData.features.includes('first_comment') : false,
           profileGroups: userData.profile_groups ?

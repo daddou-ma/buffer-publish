@@ -153,6 +153,7 @@ const getNewUserData = (data) => ({
   hasIGDirectVideoFlip: data.hasIGDirectVideoFlip,
   hasFirstCommentFlip: data.hasFirstCommentFlip,
   canStartProTrial: data.canStartProTrial,
+  isOnProTrial: data.isOnProTrial,
 });
 
 const getNewSubprofile = ({ avatar, id, name, isShared }) =>

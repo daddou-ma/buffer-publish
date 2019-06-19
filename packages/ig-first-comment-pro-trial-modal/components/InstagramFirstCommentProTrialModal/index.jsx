@@ -6,6 +6,7 @@ import {
 
 import { Button, Text } from '@bufferapp/ui';
 import { Cross, Checkmark } from '@bufferapp/ui/Icon';
+import { ProTag } from '@bufferapp/publish-shared-components';
 
 const cardStyle = {
   border: '1px solid #B8B8B8',
@@ -31,21 +32,6 @@ const rightContentTitleStyle = {
   fontSize: '14px',
   fontWeight: '500',
   marginBottom: '28px',
-};
-
-const proTagStyle = {
-  width: '40px',
-  height: '16px',
-  background: '#87C221',
-  borderRadius: '23px',
-  textAlign: 'center',
-  lineHeight: '13px',
-};
-
-const proTagSpanStyle = {
-  fontWeight: 'bold',
-  fontSize: '11px',
-  color: 'white',
 };
 
 const imageStyle = {
@@ -121,15 +107,11 @@ const InstagramFirstCommentProTrialModal = ({
   loading,
 }) => (
   <div>
-    <Popover>
+    <Popover onOverlayClick={hideModal}>
       <div style={cardStyle}>
         <div style={leftContentStyle}>
           <div style={{ padding: '24px 24px 0px' }}>
-            <div style={proTagStyle}>
-              <span style={proTagSpanStyle}>
-                PRO
-              </span>
-            </div>
+            <ProTag />
             <Text type="h2">{translations.heading}</Text>
             <div style={{ marginBottom: '24px' }}>
               <Text type="p">{translations.body}</Text>

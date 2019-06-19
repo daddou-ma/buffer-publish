@@ -31,6 +31,7 @@ class ComposerSection extends React.Component {
     hasIGDirectFlip: PropTypes.bool.isRequired,
     hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
     canStartProTrial: PropTypes.bool.isRequired,
+    isOnProTrial: PropTypes.bool.isRequired,
     hasIGDirectVideoFlip: PropTypes.bool.isRequired,
     isFreeUser: PropTypes.bool.isRequired,
     hasFirstCommentFlip: PropTypes.bool,
@@ -62,6 +63,7 @@ class ComposerSection extends React.Component {
       shouldEnableFacebookAutocomplete, shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled, composerPosition, hasIGDirectFlip, hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip, isFreeUser, hasFirstCommentFlip, isBusinessUser, canStartProTrial,
+      isOnProTrial,
     } = this.props;
 
     const hasEnabledDrafts = enabledDrafts.length > 0 || isOmniboxEnabled;
@@ -108,6 +110,7 @@ class ComposerSection extends React.Component {
           forceEditorFocus={forceEditorInstanceFocus}
           hasIGLocationTaggingFeature={hasIGLocationTaggingFeature}
           canStartProTrial={canStartProTrial}
+          isOnProTrial={isOnProTrial}
           hasIGDirectVideoFlip={hasIGDirectVideoFlip}
           hasFirstCommentFlip={hasFirstCommentFlip}
           isFreeUser={isFreeUser}
