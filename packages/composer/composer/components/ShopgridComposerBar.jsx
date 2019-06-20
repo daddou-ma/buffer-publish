@@ -52,6 +52,7 @@ class ShopgridComposerBar extends React.Component {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.questionIcon}
+              title="Learn more about Shop Grid"
               onClick={this.openHelp}
             >
               <QuestionIcon />
