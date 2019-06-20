@@ -175,8 +175,10 @@ events.on('saved-drafts', () => {
 });
 
 events.on('start-trial', (message) => {
+  // reformat new userData
   const userData = DataImportUtils.formatUserData(null, { userData: message });
   AppInitActionCreators.resetUserData(userData);
+  // Trigger the comment toggle
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT,
     commentEnabled: true,

@@ -96,7 +96,7 @@ describe('reducer', () => {
       expect(reducer(initialState, actions.showInstagramFirstCommentProTrialModal({ source: 'foo' })))
         .toEqual(Object.assign(initialState, { showInstagramFirstCommentProTrialModal: true }));
     });
-    it('should hide instatgram first comment start trial modal', () => {
+    it('should hide instagram first comment start trial modal', () => {
       const stateWithVisibleModal = Object.assign(
         initialState,
         { showInstagramFirstCommentProTrialModal: true },

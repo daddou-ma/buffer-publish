@@ -614,18 +614,20 @@ class Composer extends React.Component {
     );
 
     const shouldDisplayFirstCommentSection = (commentEnabled) => {
+      const freeUserNotEligibleToStartTrial = this.props.isFreeUser && !this.props.canStartProTrial;
       const hasSelectedSomeInstagramDirectProfiles =
-        this.props.selectedProfiles.some((profile) => profile.instagramDirectEnabled);
+        this.props.selectedProfiles.some(profile => profile.instagramDirectEnabled);
       return (
         commentEnabled || (
         hasSelectedSomeInstagramDirectProfiles &&
         this.isInstagram() &&
+        !freeUserNotEligibleToStartTrial && // Add this temporarily until we remove refresh on upgrade
         this.isExpanded() &&
         hasFirstCommentFlip &&
         !appState.isOmniboxEnabled
         )
       );
-    }
+    };
 
     const shouldShowTwitterDuplicateContentWarningNotice =
       this.isExpanded() &&

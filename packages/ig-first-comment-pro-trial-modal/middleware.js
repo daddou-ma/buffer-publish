@@ -36,6 +36,7 @@ export default ({ dispatch, getState }) => next => (action) => { // eslint-disab
       }));
       break;
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      // only reset composer userData if the user just started a trial
       if (getState().igFirstCommentProTrialModal.startedTrial) {
         const userData = getState().appSidebar.user;
         AppHooks.handleStartTrial({
