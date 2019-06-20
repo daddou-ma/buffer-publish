@@ -82,6 +82,6 @@ module.exports = userData => ({
   isNonprofit: userData.billing_status_nonprofit,
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,
-  showReturnToClassic: userData.features.includes('paid_users_in_new_publish'),
+  showReturnToClassic: userData.has_np_app_switcher,
   helpScoutConfig: userData.helpscout_beacon_params,
 })

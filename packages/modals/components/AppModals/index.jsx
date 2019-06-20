@@ -25,13 +25,13 @@ const AppModals = ({
   showB4BTrialExpiredModal,
 }) => (
   <React.Fragment>
+    {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
     {showUpgradeModal && <UpgradeModal />}
     {showWelcomeModal && <WelcomeModal />}
     {showInstagramFirstCommentModal && <InstagramFirstCommentModal />}
     {showInstagramNewFirstCommentUserModal && <InstagramNewFirstCommentUserModal />}
     {showWelcomePaidModal && <WelcomePaidModal />}
     {showWelcomeB4BTrialModal && <WelcomeB4BTrialModal />}
-    {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
     {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
     {showStealProfileModal && <StealProfileModal />}
     {showB4BTrialExpiredModal && <B4bTrialCompleteModal />}
