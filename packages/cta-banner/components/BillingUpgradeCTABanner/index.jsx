@@ -50,7 +50,7 @@ const BillingUpgradeCTABanner = ({
     onClickManageBilling,
     onClickAddBilling,
     profileCount,
-    plan,
+    isBusinessUser,
   }) => {
   if (!trial || (trial && !trial.onTrial) || profileCount == 0) {
     return null;
@@ -58,7 +58,7 @@ const BillingUpgradeCTABanner = ({
 // removed feature loader because user data wasn't getting updated on fetch
   const currentPlan = styles => (
     <Text {...styles}>
-      { plan === 'pro' ? 'Pro' : 'Business' }
+      { isBusinessUser ? 'Business' : 'Pro' }
     </Text>
   );
 
@@ -140,7 +140,7 @@ BillingUpgradeCTABanner.propTypes = {
   onClickManageBilling: PropTypes.func.isRequired,
   onClickAddBilling: PropTypes.func.isRequired,
   profileCount: PropTypes.number,
-  plan: PropTypes.string.isRequired,
+  isBusinessUser: PropTypes.bool.isRequired,
 };
 
 BillingUpgradeCTABanner.defaultProps = {
