@@ -2,55 +2,14 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import Modals from '../components/Modals';
-import PowerSchedulerButton from '../components/PowerSchedulerButton';
 import NotificationContainer from '../components/NotificationContainer';
-import CloseButton from '../components/CloseButton';
 import ProfileSection from '../components/ProfileSection';
 import ComposerSection from '../components/ComposerSection';
 import UpdateSaver from '../components/UpdateSaver';
 import { AppEnvironments } from '../AppConstants';
 import styles from './css/App.css';
-
-const draggingAnchorClassName = [
-  'bi bi-drag',
-  styles.draggingAnchor,
-].join(' ');
-
-const closeButtonClassName = [
-  'bi bi-x',
-  styles.closeButton,
-].join(' ');
-
-const appClassName = [
-  styles.app,
-  'js-enable-dragging',
-].join(' ');
-
-const ExtensionComponents = ({
-  draggingAnchorRef,
-  onCloseButtonClick,
-}) => (
-  <Fragment>
-    <span
-      className={draggingAnchorClassName}
-      ref={draggingAnchorRef}
-    />
-    <CloseButton
-      className={closeButtonClassName}
-      onClick={onCloseButtonClick}
-    />
-  </Fragment>
-);
-
-ExtensionComponents.propTypes = {
-  draggingAnchorRef: PropTypes.func.isRequired,
-  onCloseButtonClick: PropTypes.func.isRequired,
-};
-
-const isOnExtension = ({ metaData }) =>
-  metaData.appEnvironment === AppEnvironments.EXTENSION;
-
-const showPowerSchedulerButton = ({ metaData }) => isOnExtension({ metaData });
+import ExtensionComponents from '../components/ExtensionComponents';
+import { isOnExtension } from '../utils/extension';
 
 const shouldEnableFacebookAutocomplete = ({ metaData }) =>
   metaData.shouldEnableFacebookAutocomplete;
@@ -111,7 +70,7 @@ const notificationsContainerClassNames = ({
 }) => ({
   container: (
     onNewPublish ? styles.floatingNotificationsContainerOnPublish :
-      isOnExtension({ metaData }) ? styles.floatingNotificationsContainerOnExtension :
+      isOnExtension(metaData) ? styles.floatingNotificationsContainerOnExtension :
         styles.floatingNotificationsContainerOnLegacyWeb
   ),
   notification: styles.floatingNotification,
@@ -165,12 +124,6 @@ const AppStateless = ({
     onClick={onAppWrapperClick}
   >
     <Modals />
-    {showPowerSchedulerButton({ metaData }) &&
-      <PowerSchedulerButton
-        selectedProfiles={selectedProfiles({ profiles })}
-        visibleNotifications={visibleNotifications}
-      />
-    }
 
     <NotificationContainer
       visibleNotifications={visibleNotifications}
@@ -189,15 +142,18 @@ const AppStateless = ({
     />
 
     <div
-      className={appClassName}
+      className={[
+        styles.app,
+        'js-enable-dragging',
+      ].join(' ')}
       style={appDynamicStyles({ position })}
       onClick={onAppClick}
     >
-      {isOnExtension({ metaData }) ?
-        <ExtensionComponents
-          draggingAnchorRef={draggingAnchorRef}
-          onCloseButtonClick={onCloseButtonClick}
-        /> : null}
+      <ExtensionComponents
+        draggingAnchorRef={draggingAnchorRef}
+        onCloseButtonClick={onCloseButtonClick}
+        metadata={metaData}
+      />
 
       {canSelectProfiles ?
         <ProfileSection
@@ -225,6 +181,7 @@ const AppStateless = ({
         hasIGLocationTaggingFeature={userData.hasIGLocationTaggingFeature || false}
         hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
         hasFirstCommentFlip={userData.hasFirstCommentFlip || false}
+        hasShopgridFlip={userData.hasShopgridFlip || false}
         isFreeUser={userData.isFreeUser || false}
         isBusinessUser={userData.isBusinessUser || false}
       />

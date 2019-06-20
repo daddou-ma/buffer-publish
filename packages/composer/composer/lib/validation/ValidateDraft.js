@@ -2,6 +2,7 @@ import ValidationSuccess from './ValidationSuccess';
 import ValidationFail from './ValidationFail';
 import { Services } from '../../AppConstants';
 import ValidationResults from './ValidationResults';
+import { isValidURL } from '@bufferapp/publish-grid/util';
 
 function validateVideoForInstagram(video) {
   const instagramService = Services.get('instagram');
@@ -62,6 +63,20 @@ const validateDraftFunctions = [
     }
     return new ValidationSuccess();
   },
+
+  function isValidShopgridUrl(draft) {
+    if (draft.service.name === 'instagram') {
+      const shopgridLink = draft.shopgridLink;
+
+      if (typeof shopgridLink !== 'undefined' && shopgridLink !== null) {
+        if (shopgridLink.replace(/\s+/g, '') !== '' && !isValidURL(shopgridLink)) {
+          return new ValidationFail('The link URL format is invalid');
+        }
+      }
+    }
+    return new ValidationSuccess();
+  },
+
 ];
 
 function validateDraft(draft) {
