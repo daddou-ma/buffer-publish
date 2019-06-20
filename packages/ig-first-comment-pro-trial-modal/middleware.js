@@ -43,6 +43,8 @@ export default ({ dispatch, getState }) => next => (action) => { // eslint-disab
         AppHooks.handleStartTrial({
           message: userData,
         });
+        const textareaElement = document.querySelector("[class^='Composer__expandedFirstComment']");
+        if (textareaElement) textareaElement.focus();
       }
       break;
     }
