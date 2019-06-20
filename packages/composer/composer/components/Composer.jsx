@@ -977,7 +977,7 @@ class Composer extends React.Component {
                 />
               </div>
               <div
-                style={{ display: 'flex', alignItems: 'center', marginLeft: '9px' }}
+                style={{ display: 'flex', alignItems: 'center', marginLeft: '8px' }}
                 onClick={this.onCommentClick}
               >
                 <Text weight="medium" color="black" size="small">
