@@ -65,10 +65,6 @@ ShopgridComposerBar.propTypes = {
 };
 
 ShopgridComposerBar.defaultProps = {
-  locationName: '',
-  locationId: null,
-  instagramProfileId: null,
-  places: [],
   shopgridLink: null,
 };
 

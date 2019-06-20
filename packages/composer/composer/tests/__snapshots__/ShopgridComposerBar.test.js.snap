@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Whole component doesn't render for non business users 1`] = `null`;
+
+exports[`Whole component doesn't render when shopgrid flip is not set 1`] = `null`;
+
+exports[`Whole component renders default state 1`] = `
+<div
+  className="shopgridComposerBar"
+>
+  <div
+    className="shopgridFieldContainer"
+  >
+    <span
+      className="shopgridFieldLabel"
+    >
+      Link 
+    </span>
+    <span
+      className="shopgridAutocompleteContainer"
+    >
+      <input
+        className="shopgridFieldInput"
+        name="shopgridLink"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Website or Product URL"
+        value=""
+      />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Whole component renders with shopgrid link when set 1`] = `
+<div
+  className="shopgridComposerBar"
+>
+  <div
+    className="shopgridFieldContainer"
+  >
+    <span
+      className="shopgridFieldLabel"
+    >
+      Link 
+    </span>
+    <span
+      className="shopgridAutocompleteContainer"
+    >
+      <input
+        className="shopgridFieldInput"
+        name="shopgridLink"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Website or Product URL"
+        value="test"
+      />
+    </span>
+  </div>
+</div>
+`;
