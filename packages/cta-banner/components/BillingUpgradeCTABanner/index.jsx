@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Text } from '@bufferapp/components';
-import FeatureLoader from '@bufferapp/product-features';
 import { TranslationReplacer } from '@bufferapp/publish-i18n';
 
 const textColor = 'white';
@@ -51,16 +50,15 @@ const BillingUpgradeCTABanner = ({
     onClickManageBilling,
     onClickAddBilling,
     profileCount,
+    plan,
   }) => {
   if (!trial || (trial && !trial.onTrial) || profileCount == 0) {
     return null;
   }
-
+// removed feature loader because user data wasn't getting updated on fetch
   const currentPlan = styles => (
     <Text {...styles}>
-      <FeatureLoader supportedPlans="free">Free</FeatureLoader>
-      <FeatureLoader supportedPlans="pro">Pro</FeatureLoader>
-      <FeatureLoader supportedPlans="business">Business</FeatureLoader>
+      { plan === 'pro' ? 'Pro' : 'Business' }
     </Text>
   );
 
@@ -142,6 +140,7 @@ BillingUpgradeCTABanner.propTypes = {
   onClickManageBilling: PropTypes.func.isRequired,
   onClickAddBilling: PropTypes.func.isRequired,
   profileCount: PropTypes.number,
+  plan: PropTypes.string.isRequired,
 };
 
 BillingUpgradeCTABanner.defaultProps = {

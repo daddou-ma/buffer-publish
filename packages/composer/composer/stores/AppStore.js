@@ -1147,7 +1147,7 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.RESET_USER_DATA:
-      resetUser(action.userData);
+      resetUser(state);
       break;
 
     /**

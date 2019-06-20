@@ -21,7 +21,7 @@ export default ({ dispatch, getState }) => next => (action) => { // eslint-disab
         metadata: { source: 'ig_first_comment_toggle' },
       });
       break;
-    case `startTrial_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `startTrial_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
         message: 'Awesome! You’re now starting your free 7-day Pro trial',
@@ -29,6 +29,7 @@ export default ({ dispatch, getState }) => next => (action) => { // eslint-disab
       dispatch(dataFetchActions.fetch({ name: 'user' }));
       dispatch(modalActions.hideInstagramFirstCommentProTrialModal());
       break;
+    }
     case `startTrial_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'error',
