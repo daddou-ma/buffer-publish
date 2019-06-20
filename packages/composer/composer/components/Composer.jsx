@@ -958,69 +958,69 @@ class Composer extends React.Component {
         </div>
 
         {shouldDisplayFirstCommentSection(draft.commentEnabled) &&
-          <div>
-            <div className={styles.toggleCommentContainer}>
-              { (this.props.isOnProTrial || this.props.isFreeUser) &&
-                <div style={{ marginRight: '8px' }}>
-                  <ProTag />
-                </div>
-              }
-              <div className={styles.toggleWrapper}>
-                <div className={styles.togglePosition}>
-                  <Toggle
-                    disabled={false}
-                    onText=""
-                    offText=""
-                    on={draft.commentEnabled}
-                    size={'small'}
-                    onClick={e => this.onToggleComment(e, !draft.commentEnabled)}
-                  />
-                </div>
-                <div
-                  style={{ display: 'flex', alignItems: 'center', marginLeft: '8px' }}
-                  onClick={this.onCommentClick} id='textareaWrapper'
-                >
-                  <Text weight="medium" color="black" size="small">
-                    Include a comment with this post
-                  </Text>
-                </div>
-                <div
-                  className={styles.questionIcon}
-                  onClick={this.onCommentClick}
-                >
-                  <IconArrowPopover
-                    icon={<QuestionIcon />}
-                    shadow
-                    position="below"
-                    oneLine
-                    label="Enable comments"
-                  >
-                    Enabling this option will allow you to include a comment for your post!
-                  </IconArrowPopover>
-                </div>
-              </div>
-              {shouldShowCommentCharacterCount &&
-              <CharacterCount
-                count={draft.characterCommentCount}
-                maxCount={draft.service.commentCharLimit}
-                className={styles.characterCountComment}
-              />
-              }
-            </div>
-            {
-              draft.commentEnabled &&
-              <div>
-                <Textarea
-                  minRows={4}
-                  className={styles.expandedFirstComment}
-                  placeholder={'Your comment'}
-                  value={draft.commentText}
-                  onChange={this.onCommentChange}
-                  onClick={this.onCommentClick}
-                />
+        <div>
+          <div className={styles.toggleCommentContainer}>
+            { (this.props.isOnProTrial || this.props.isFreeUser) &&
+              <div style={{ marginRight: '8px' }}>
+                <ProTag />
               </div>
             }
+            <div className={styles.toggleWrapper}>
+              <div className={styles.togglePosition}>
+                <Toggle
+                  disabled={false}
+                  onText=""
+                  offText=""
+                  on={draft.commentEnabled}
+                  size={'small'}
+                  onClick={(e) => this.onToggleComment(e, !draft.commentEnabled)}
+                />
+              </div>
+              <div
+                style={{ display: 'flex', alignItems: 'center', marginLeft: '9px' }}
+                onClick={this.onCommentClick}
+              >
+                <Text weight="medium" color="black" size="small">
+                  Include a comment with this post
+                </Text>
+              </div>
+              <div
+                className={styles.questionIcon}
+                onClick={this.onCommentClick}
+              >
+                <IconArrowPopover
+                  icon={<QuestionIcon />}
+                  shadow
+                  position="below"
+                  oneLine
+                  label="Enable comments"
+                >
+                  Enabling this option will allow you to include a comment for your post!
+                </IconArrowPopover>
+              </div>
+            </div>
+            {shouldShowCommentCharacterCount &&
+            <CharacterCount
+              count={draft.characterCommentCount}
+              maxCount={draft.service.commentCharLimit}
+              className={styles.characterCountComment}
+            />
+            }
           </div>
+          {
+            draft.commentEnabled &&
+            <div>
+              <Textarea
+                minRows={4}
+                className={styles.expandedFirstComment}
+                placeholder={'Your comment'}
+                value={draft.commentText}
+                onChange={this.onCommentChange}
+                onClick={this.onCommentClick}
+              />
+            </div>
+          }
+        </div>
         }
       </div>
     );
