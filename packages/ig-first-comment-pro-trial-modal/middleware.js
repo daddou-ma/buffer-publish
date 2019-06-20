@@ -43,6 +43,7 @@ export default ({ dispatch, getState }) => next => (action) => { // eslint-disab
         AppHooks.handleStartTrial({
           message: userData,
         });
+        // focus instagram first comment text area after starting trial
         const textareaElement = document.querySelector("[class^='Composer__expandedFirstComment']");
         if (textareaElement) textareaElement.focus();
       }

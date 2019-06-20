@@ -810,7 +810,7 @@ const markAppAsNotLoaded = () => {
 
 // There's a CORS error when trying to reset the s3UploadSignature. Leaving signature
 // as is until refresh
-const resetUser = (userData) => {
+const resetUserData = (userData) => {
   Object.keys(userData).forEach((key) => {
     if (key !== 's3UploadSignature' || key !== 's3_upload_signature') {
       state.userData[key] = userData[key];
@@ -1147,7 +1147,7 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.RESET_USER_DATA:
-      resetUser(state);
+      resetUserData(state);
       break;
 
     /**
