@@ -89,7 +89,6 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickAddBilling={action('addBilling')}
         trial={userWithoutTrial}
         profileCount={1}
-        isBusinessUser
       />
     </Provider>
   ))
@@ -101,7 +100,6 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickAddBilling={action('addBilling')}
         trial={userOnTrial}
         profileCount={1}
-        isBusinessUser={false}
 
       />
     </Provider>
@@ -114,7 +112,6 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickAddBilling={action('addBilling')}
         trial={userOnTrialWithBilling}
         profileCount={1}
-        isBusinessUser={false}
       />
     </Provider>
   ))
@@ -126,7 +123,6 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickAddBilling={action('addBilling')}
         trial={userOnTrial}
         profileCount={1}
-        isBusinessUser
       />
     </Provider>
   ))
@@ -138,7 +134,6 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickAddBilling={action('addBilling')}
         trial={userOnTrial}
         profileCount={0}
-        isBusinessUser
       />
     </Provider>
   ))
@@ -150,7 +145,6 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickAddBilling={action('addBilling')}
         trial={userOnTrialWithBilling}
         profileCount={1}
-        isBusinessUser
       />
     </Provider>
   ));

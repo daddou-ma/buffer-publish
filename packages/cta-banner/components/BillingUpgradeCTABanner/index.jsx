@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Text } from '@bufferapp/components';
 import { TranslationReplacer } from '@bufferapp/publish-i18n';
+import FeatureLoader from '@bufferapp/product-features';
 
 const textColor = 'white';
 
@@ -50,7 +51,6 @@ const BillingUpgradeCTABanner = ({
     onClickManageBilling,
     onClickAddBilling,
     profileCount,
-    isBusinessUser,
   }) => {
   if (!trial || (trial && !trial.onTrial) || profileCount == 0) {
     return null;
@@ -58,7 +58,9 @@ const BillingUpgradeCTABanner = ({
 // removed feature loader because user data wasn't getting updated on fetch
   const currentPlan = styles => (
     <Text {...styles}>
-      { isBusinessUser ? 'Business' : 'Pro' }
+      <FeatureLoader supportedPlans="free">Free</FeatureLoader>
+      <FeatureLoader supportedPlans="pro">Pro</FeatureLoader>
+      <FeatureLoader supportedPlans="business">Business</FeatureLoader>
     </Text>
   );
 
@@ -140,7 +142,7 @@ BillingUpgradeCTABanner.propTypes = {
   onClickManageBilling: PropTypes.func.isRequired,
   onClickAddBilling: PropTypes.func.isRequired,
   profileCount: PropTypes.number,
-  isBusinessUser: PropTypes.bool.isRequired,
+  plan: PropTypes.string.isRequired,
 };
 
 BillingUpgradeCTABanner.defaultProps = {
