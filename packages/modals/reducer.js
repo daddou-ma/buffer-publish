@@ -186,8 +186,6 @@ export const actions = {
   hideInstagramFirstCommentModal: () => ({
     type: actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_MODAL,
   }),
-  hideInstagramFirstCommentStartTrialModal: () => ({
-    type: actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_START_TRIAL_MODAL,
   hideInstagramFirstCommentProTrialModal: () => ({
     type: actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL,
   }),
