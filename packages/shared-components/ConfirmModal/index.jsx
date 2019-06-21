@@ -73,7 +73,7 @@ const ConfirmModal = ({
     </div>
     <div style={buttonsStyle}>
       <Button type="Text" onClick={onCloseModal} label="Cancel" />
-      <Button type="secondary" onClick={onConfirmClick} label={btnText} />
+      <Button type="primary" onClick={onConfirmClick} label={btnText} />
     </div>
   </div>);
 

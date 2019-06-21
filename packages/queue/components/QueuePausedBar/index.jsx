@@ -55,7 +55,7 @@ const QueuePausedBar = ({ handleClickUnpause, isManager }) => (
           <Button
             type="primary"
             size="small"
-            onClick={() => { handleClickUnpause(); }}
+            onClick={handleClickUnpause}
             label="Resume Queue"
           />
         }
