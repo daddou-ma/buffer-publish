@@ -812,7 +812,9 @@ const markAppAsNotLoaded = () => {
 // as is until refresh
 const resetUserData = (userData) => {
   Object.keys(userData).forEach((key) => {
-    if (key !== 's3UploadSignature' || key !== 's3_upload_signature') {
+    if (key === 'profileGroups' && userData[key].isArray()) {
+      state.userData[key] = userData[key].map(getNewProfileGroup);
+    } else if (key !== 's3UploadSignature' || key !== 's3_upload_signature') {
       state.userData[key] = userData[key];
     }
   });
