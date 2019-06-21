@@ -1,0 +1,51 @@
+.shopgridComposerBar {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    float: left;
+}
+
+.shopgridFieldContainer {
+    float: left;
+    padding-top: 1px;
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.shopgridFieldLabel {
+    font-weight: 600;
+    font-size: 12px;
+    color: #343e47;
+    min-width: 80px;
+    padding-top: 6px;
+    position: relative;
+}
+
+.shopgridAutocompleteContainer {
+    flex-grow: 1;
+}
+
+.shopgridFieldInput {
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 50px;
+    margin-left: 4px;
+    border: 1px solid #E6EBEF;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-size: 12px;
+    width: 100%;
+}
+
+.questionIcon {
+    display: inline;
+    float: right;
+    margin-top: 2px;
+    margin-right: 3px;
+    cursor: pointer;
+}

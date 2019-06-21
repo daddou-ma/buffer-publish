@@ -131,6 +131,14 @@ const ComposerActionCreators = {
     });
   },
 
+  updateDraftShopgridLink: (id, shopgridLink) => {
+    AppDispatcher.handleViewAction({
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_SHOPGRID_LINK,
+      id,
+      shopgridLink,
+    });
+  },
+
   updateToggleComment: (id, commentEnabled) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_TOGGLE_COMMENT,

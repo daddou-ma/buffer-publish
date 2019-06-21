@@ -140,8 +140,17 @@ export default connect(
       dispatch(actions.handleComposerPlaceholderClick());
     },
     onComposerInteraction: ({ message }) => {
-      if (message.commentEnabled) {
-        dispatch(modalsActions.showInstagramFirstCommentModal(message));
+      switch (message.action) {
+        case 'COMMENT_ENABLED':
+          dispatch(modalsActions.showInstagramFirstCommentModal(message));
+          break;
+        case 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL':
+          dispatch(modalsActions.showInstagramFirstCommentProTrialModal({ source: 'ig_first_comment_toggle' }));
+          break;
+        case 'SHOW_PRO_UPGRADE_MODAL':
+          dispatch(modalsActions.showUpgradeModal({ source: 'ig_first_comment_toggle' }));
+          break;
+        default: break;
       }
     },
     onComposerCreateSuccess: () => {

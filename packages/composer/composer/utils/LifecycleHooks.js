@@ -17,6 +17,11 @@ const AppHooks = {
     events.emit('backdrop-clicked');
   },
 
+  // after a user starts a trial, send message with updated userData
+  handleStartTrial: ({ message }) => {
+    events.emit('start-trial', message);
+  },
+
   handleActionTaken: (message = {}) => {
     events.emit('action-taken', message);
   },
