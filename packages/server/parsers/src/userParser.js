@@ -56,6 +56,7 @@ module.exports = userData => ({
   },
   canStartBusinessTrial: userData.can_start_business_trial,
   canStartProTrial: userData.can_start_pro_trial,
+  isOnProTrial: userData.on_awesome_trial,
   shouldShowProTrialExpiredModal: hasProTrialExpired(userData.feature_trials)
     && userData.plan === 'free'
     && !userData.has_cancelled,
@@ -63,22 +64,23 @@ module.exports = userData => ({
     && userData.trial_expired
     && !userData.trial_done,
   trial: userData.on_awesome_trial
-  ? {
-    hasCardDetails: userData.has_card_details,
-    hasTrialExtended: userData.has_trial_extended,
-    onTrial: userData.on_awesome_trial,
-    postTrialCost: '',
-    trialLength: userData.awesome_trial_length,
-    trialTimeRemaining: userData.awesome_trial_time_remaining,
-  }
-  : {
-    hasCardDetails: userData.has_card_details,
-    hasTrialExtended: userData.has_trial_extended,
-    onTrial: userData.on_trial,
-    postTrialCost: userData.post_trial_cost,
-    trialLength: userData.trial_length,
-    trialTimeRemaining: userData.trial_time_remaining,
-  },
+    ? {
+        hasCardDetails: userData.has_card_details,
+        hasTrialExtended: userData.has_trial_extended,
+        onTrial: userData.on_awesome_trial,
+        postTrialCost: '',
+        trialLength: userData.awesome_trial_length,
+        trialTimeRemaining: userData.awesome_trial_time_remaining,
+      }
+    : {
+        hasCardDetails: userData.has_card_details,
+        hasTrialExtended: userData.has_trial_extended,
+        onTrial: userData.on_trial,
+        postTrialCost: userData.post_trial_cost,
+        trialLength: userData.trial_length,
+        trialTimeRemaining: userData.trial_time_remaining,
+      },
+  messages: userData.messages,
   isNonprofit: userData.billing_status_nonprofit,
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,

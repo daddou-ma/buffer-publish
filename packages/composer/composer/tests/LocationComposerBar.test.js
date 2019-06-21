@@ -17,6 +17,15 @@ import debounce from 'lodash.debounce';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import LocationFinder from '../utils/LocationFinder';
 
+const showLocationBar = {
+  selectedProfiles: [{ instagramDirectEnabled: true }],
+  isInstagram: true,
+  hasIGLocationTaggingFeature: true,
+  hasIGDirectVideoFlip: true,
+  hasVideo: true,
+  withMediaAttachment: false,
+};
+
 describe('Whole component', () => {
   it('renders correctly', () => {
     const sl = new ServiceLocation(
@@ -29,6 +38,8 @@ describe('Whole component', () => {
 
     const tree = renderer.create(
       <LocationComposerBar
+        {...showLocationBar}
+
         draftId={'123'}
         locationName={'New York'}
         locationId={'123123'}
@@ -42,6 +53,7 @@ describe('Whole component', () => {
   it('renders with location name when set', () => {
     const tree = renderer.create(
       <LocationComposerBar
+        {...showLocationBar}
         draftId={'123'}
         locationName={'New York'}
         instagramProfileId={'333'}
@@ -53,6 +65,7 @@ describe('Whole component', () => {
   it('renders with cross to remove location when set', () => {
     const tree = renderer.create(
       <LocationComposerBar
+        {...showLocationBar}
         draftId={'123'}
         locationName={'New York'}
         locationId={'123123'}
@@ -72,7 +85,7 @@ const setup = (propOverrides) => {
     places: [],
   }, propOverrides);
 
-  const wrapper = shallow(<LocationComposerBar {...props} />);
+  const wrapper = shallow(<LocationComposerBar {...props} {...showLocationBar} />);
 
   return {
     props,

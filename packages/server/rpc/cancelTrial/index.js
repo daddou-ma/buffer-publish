@@ -4,7 +4,7 @@ const rp = require('request-promise');
 module.exports = method(
   'cancelTrial',
   'cancel trial',
-  ({ profileId }, { session }) =>
+  (_, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/billing/cancel-trial.json`,
       method: 'POST',
