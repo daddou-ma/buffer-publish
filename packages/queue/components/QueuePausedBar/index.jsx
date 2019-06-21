@@ -2,40 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  Text,
   Card,
-  Button,
   Link,
 } from '@bufferapp/components';
+
+import {
+  Text,
+  Button,
+} from '@bufferapp/ui';
 
 const pausedBarInnerStyle = {
   display: 'flex',
   justifyContent: 'space-between',
+  padding: '0 1rem 1rem',
 };
 
 const pausedTextContainer = {
-  marginBottom: '.5rem',
-};
-
-const pausedSubTextContainer = {
-  marginBottom: '1rem',
+  marginTop: 0,
 };
 
 const QueuePausedBar = ({ handleClickUnpause, isManager }) => (
   <Card
-    reducedPadding
+    noPadding
     color="off-white"
   >
     <div style={pausedBarInnerStyle}>
       <div>
         <div style={pausedTextContainer}>
-          <Text weight="bold">
+          <Text type="h3">
             Your queue is currently paused.
           </Text>
         </div>
-        <div style={pausedSubTextContainer}>
+        <div>
           {isManager &&
-            <Text size="mini">
+            <Text type="p">
               None of your posts will go out, and you can&apos;t re-order posts in your queue.&nbsp;
               <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
                 Learn more
@@ -43,7 +43,7 @@ const QueuePausedBar = ({ handleClickUnpause, isManager }) => (
             </Text>
           }
           {!isManager &&
-            <Text size="mini">
+            <Text size="p">
               Unfortunately you don&apos;t have permission to unpause it.&nbsp;
               <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
                 Learn more
@@ -53,11 +53,11 @@ const QueuePausedBar = ({ handleClickUnpause, isManager }) => (
         </div>
         {isManager &&
           <Button
-            small
-            onClick={handleClickUnpause}
-          >
-            Resume Queue
-          </Button>
+            type="primary"
+            size="small"
+            onClick={() => { handleClickUnpause(); }}
+            label="Resume Queue"
+          />
         }
       </div>
     </div>
