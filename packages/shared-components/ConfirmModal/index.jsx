@@ -1,23 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button } from '@bufferapp/ui';
-import { Text, CloseIcon } from '@bufferapp/components';
+import { Button, Text } from '@bufferapp/ui';
+import CrossIcon from '@bufferapp/ui/Icon/Icons/Cross';
 import Avatar from '@bufferapp/ui/Avatar';
 
 const profileBadgeStyle = {
-  position: 'relative',
-  height: '2rem',
-  width: '2rem',
-  flexShrink: '0',
   paddingRight: '10px',
 };
 
 const middleContainerStyle = {
   display: 'flex',
-  flexDirection: 'row',
   justifyContent: 'space-between',
-  marginTop: '15px',
+  alignItems: 'center',
 };
 
 const containerStyle = {
@@ -29,7 +24,7 @@ const containerStyle = {
 const buttonsStyle = {
   marginTop: '20px',
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'flex-end',
 };
 
 const closeButtonStyle = {
@@ -57,12 +52,12 @@ const ConfirmModal = ({
   <div style={containerStyle}>
     <span style={closeButtonStyle}>
       <a style={linkStyle} onClick={onCloseModal}>
-        <CloseIcon />
+        <CrossIcon size="large" />
       </a>
     </span>
-    <Text size="large" weight="medium">{heading}</Text>
+    <Text type="h3">{heading}</Text>
     <div style={middleContainerStyle}>
-      <Text>
+      <Text type="p">
         <div style={textContainerStyle} dangerouslySetInnerHTML={{ __html: body }} />
       </Text>
       <div style={profileBadgeStyle}>
@@ -77,8 +72,8 @@ const ConfirmModal = ({
       </div>
     </div>
     <div style={buttonsStyle}>
-      <Button tertiary onClick={onCloseModal} label="Cancel" />
-      <Button tertiary onClick={onConfirmClick} label={btnText} />
+      <Button type="Text" onClick={onCloseModal} label="Cancel" />
+      <Button type="secondary" onClick={onConfirmClick} label={btnText} />
     </div>
   </div>);
 
