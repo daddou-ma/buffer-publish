@@ -146,18 +146,21 @@ class Composer extends React.Component {
     const { canStartProTrial } = this.props;
     const showProUpgradeModal = this.props.isFreeUser && !canStartProTrial;
     if (canStartProTrial) {
+      // display pro trial modal if user can start trial
       AppActionCreators.triggerInteraction({
         message: {
           action: 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL',
         },
       });
     } else if (showProUpgradeModal) {
+      // display upgrade modal if user isn't able to start trial
       AppActionCreators.triggerInteraction({
         message: {
           action: 'SHOW_PRO_UPGRADE_MODAL',
         },
       });
     } else {
+      // show input if user already has access to first comment
       AppActionCreators.triggerInteraction({
         message: {
           id: this.props.draft.id,
@@ -961,7 +964,7 @@ class Composer extends React.Component {
         <div>
           <div className={styles.toggleCommentContainer}>
             { (this.props.isOnProTrial || this.props.isFreeUser) &&
-              <div style={{ marginRight: '8px' }}>
+              <div className={styles.proTagWrapper}>
                 <ProTag />
               </div>
             }
@@ -977,7 +980,7 @@ class Composer extends React.Component {
                 />
               </div>
               <div
-                style={{ display: 'flex', alignItems: 'center', marginLeft: '8px' }}
+                className={styles.toggleTextWrapper}
                 onClick={this.onCommentClick}
               >
                 <Text weight="medium" color="black" size="small">

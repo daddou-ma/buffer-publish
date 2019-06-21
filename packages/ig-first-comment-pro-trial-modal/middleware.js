@@ -27,6 +27,7 @@ export default ({ dispatch, getState }) => next => (action) => { // eslint-disab
         message: 'Awesome! You’re now starting your free 7-day Pro trial',
       }));
       dispatch(dataFetchActions.fetch({ name: 'user' }));
+      dispatch(dataFetchActions.fetch({ name: 'features' }));
       dispatch(modalActions.hideInstagramFirstCommentProTrialModal());
       break;
     }

@@ -625,3 +625,13 @@
   align-items: center;
   margin-left: 9px;
 }
+
+.toggleTextWrapper {
+   display: flex;
+   align-items: center;
+   margin-left: 8px;
+}
+
+.proTagWrapper {
+  margin-right: 8px;
+}
