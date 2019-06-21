@@ -10,7 +10,7 @@ jest.mock('lodash.debounce', () => jest.fn(fn => fn));
 const showShopgridBar = {
   isInstagram: true,
   hasShopgridFlip: true,
-  selectedInstagramProfiles: [{},{}],
+  selectedInstagramProfiles: [{ instagramDirectEnabled: true },{ instagramDirectEnabled: true }],
   isBusinessUser: true,
 };
 

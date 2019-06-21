@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './css/ShopgridComposerBar.css';
 
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import { IconArrowPopover } from '@bufferapp/components';
 import QuestionIcon from './QuestionIcon';
 
 class ShopgridComposerBar extends React.Component {
@@ -11,6 +10,7 @@ class ShopgridComposerBar extends React.Component {
     super(props);
     this.state = {
       shopgridLink: props.shopgridLink || '',
+      helpUrl: 'https://faq.buffer.com/article/1164-publish-instagram-shop-grid'
     };
 
     this.onChange = this.onChange.bind(this);
@@ -31,14 +31,16 @@ class ShopgridComposerBar extends React.Component {
       isBusinessUser,
     } = this.props;
 
-    const hasInstagramSelected = selectedInstagramProfiles && selectedInstagramProfiles.length >= 1;
+    const hasInstagramSelected = selectedInstagramProfiles
+      && selectedInstagramProfiles.length >= 1
+      && selectedInstagramProfiles.some(profile => profile.instagramDirectEnabled);
 
     return hasInstagramSelected && isInstagram && hasShopgridFlip && isBusinessUser;
   }
 
   openHelp(e) {
     e.preventDefault();
-    window.open('https://faq.buffer.com/article/1164-publish-instagram-shop-grid', '_blank');
+    window.open(this.state.helpUrl, '_blank');
   }
 
   render () {
@@ -47,12 +49,15 @@ class ShopgridComposerBar extends React.Component {
       <div className={styles.shopgridComposerBar}>
         <div className={styles.shopgridFieldContainer}>
           <span className={styles.shopgridFieldLabel}>
-            Link
+            Shop Grid Link
+          </span>
+          <span className={styles.shopgridHelpIcon}>
             <a
               target="_blank"
               rel="noopener noreferrer"
               className={styles.questionIcon}
               title="Learn more about Shop Grid"
+              href={this.state.helpUrl}
               onClick={this.openHelp}
             >
               <QuestionIcon />
@@ -79,7 +84,9 @@ ShopgridComposerBar.propTypes = {
   shopgridLink: PropTypes.string,
   hasShopgridFlip: PropTypes.bool.isRequired,
   isInstagram: PropTypes.bool.isRequired,
-  selectedInstagramProfiles: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selectedInstagramProfiles: PropTypes.arrayOf(PropTypes.shape({
+    instagramDirectEnabled: PropTypes.bool,
+  })).isRequired,
   isBusinessUser: PropTypes.bool.isRequired,
 };
 

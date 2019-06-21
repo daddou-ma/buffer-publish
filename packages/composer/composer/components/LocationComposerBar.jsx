@@ -89,7 +89,7 @@ class LocationComposerBar extends React.Component {
       this.shouldShowLocationBar() &&
       <div className={this.props.withMediaAttachment ? styles.locationComposerBarWithMedia : styles.locationComposerBar}>
         <div className={styles.locationFieldContainer}>
-          <span className={styles.locationFieldLabel}>Add location </span>
+          <span className={styles.locationFieldLabel}>Location </span>
           <span className={styles.locationAutocompleteContainer}>
             {this.isLocationSet() &&
             <span className={styles.locationFieldRemoveInput} onClick={this.removeLocation}/>
