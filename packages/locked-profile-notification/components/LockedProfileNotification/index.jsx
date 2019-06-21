@@ -1,6 +1,5 @@
 import React from 'react';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 import {
   Card,
   Text,
@@ -67,18 +66,14 @@ const renderParagraph = ({ type, profileLimit }, paragraph) => {
   );
 };
 
-const renderButton = ({ type, onClickUpgrade, canStartProTrial }) => {
+const renderButton = ({ type, onClickUpgrade }) => {
   let buttonText;
 
   switch (type) {
     case 'teamMember':
       return;
     case 'free':
-      if (canStartProTrial) {
-        buttonText = 'Start a 7 day Pro trial';
-      } else {
-        buttonText = 'Upgrade to Pro';
-      }
+      buttonText = 'Upgrade to Pro';
       break;
     case 'pro':
       buttonText = 'Upgrade to Business';
@@ -95,11 +90,7 @@ const renderButton = ({ type, onClickUpgrade, canStartProTrial }) => {
       large
       onClick={(e) => {
         e.preventDefault();
-        if (canStartProTrial) {
-          window.location.assign(`${getURL.getManageURL()}`);
-        } else {
-          onClickUpgrade(type);
-        }
+        onClickUpgrade(type);
       }}
     >
       {buttonText}
@@ -125,7 +116,6 @@ const LockedProfileNotification = ({
   isOwner,
   onClickUpgrade,
   profileLimit,
-  canStartProTrial,
 }) => {
   const type = selectedLockedType(isOwner, features);
 
@@ -149,7 +139,7 @@ const LockedProfileNotification = ({
         { renderParagraph({ type }, 'secondParagraph') }
       </div>
       <form style={formStyle}>
-        { renderButton({ type, onClickUpgrade, canStartProTrial }) }
+        { renderButton({ type, onClickUpgrade }) }
       </form>
     </Card>
   );
@@ -160,11 +150,6 @@ LockedProfileNotification.propTypes = {
   onClickUpgrade: PropTypes.func,
   profileLimit: PropTypes.number,
   isOwner: PropTypes.bool.isRequired,
-  canStartProTrial: PropTypes.bool,
-};
-
-LockedProfileNotification.defaultProps = {
-  canStartProTrial: false,
 };
 
 export default WithFeatureLoader(LockedProfileNotification);
