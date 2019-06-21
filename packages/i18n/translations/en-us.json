@@ -94,12 +94,6 @@
     "continue": "Continue",
     "cancel": "Cancel"
   },
-  "instagram-new-first-comment-user-modal": {
-    "heading": "Include a first comment when you schedule a post to Instagram.",
-    "mainContent": "Want to keep hashtags out of your Instagram caption? You can now include a comment when you schedule an Instagram post, and Buffer will automatically publish it for you.",
-    "continue": "Continue",
-    "imageAlt": "Publish your first comment directly to Instagram"
-  },
   "instagram-first-comment-pro-trial-modal": {
     "heading": "Go Pro to include a first comment on scheduled Instagram posts.",
     "heading2": "Access all Pro features right now with a free 7-day trial.",
