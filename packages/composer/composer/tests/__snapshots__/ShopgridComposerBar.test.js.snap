@@ -14,9 +14,14 @@ exports[`Whole component renders default state 1`] = `
     <span
       className="shopgridFieldLabel"
     >
-      Link
+      Shop Grid Link
+    </span>
+    <span
+      className="shopgridHelpIcon"
+    >
       <a
         className="questionIcon"
+        href="https://faq.buffer.com/article/1164-publish-instagram-shop-grid"
         onClick={[Function]}
         rel="noopener noreferrer"
         target="_blank"
@@ -58,7 +63,7 @@ exports[`Whole component renders default state 1`] = `
         name="shopgridLink"
         onBlur={[Function]}
         onChange={[Function]}
-        placeholder="URL for Shop Grid"
+        placeholder="Website or Product URL"
         value=""
       />
     </span>
@@ -76,9 +81,14 @@ exports[`Whole component renders with shopgrid link when set 1`] = `
     <span
       className="shopgridFieldLabel"
     >
-      Link
+      Shop Grid Link
+    </span>
+    <span
+      className="shopgridHelpIcon"
+    >
       <a
         className="questionIcon"
+        href="https://faq.buffer.com/article/1164-publish-instagram-shop-grid"
         onClick={[Function]}
         rel="noopener noreferrer"
         target="_blank"
@@ -120,7 +130,7 @@ exports[`Whole component renders with shopgrid link when set 1`] = `
         name="shopgridLink"
         onBlur={[Function]}
         onChange={[Function]}
-        placeholder="URL for Shop Grid"
+        placeholder="Website or Product URL"
         value="test"
       />
     </span>
