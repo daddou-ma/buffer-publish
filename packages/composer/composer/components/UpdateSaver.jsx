@@ -226,10 +226,7 @@ class UpdateSaver extends React.Component {
         {!isOmniboxEnabled && (
           <div className={styles.inlineScheduler}>
             Post Schedule:
-            {
-              shouldDisplayInlineScheduler &&
-              <span className={styles.humanReadableScheduledAt}> {humanReadableScheduledAt}</span>
-            }
+            <span className={styles.humanReadableScheduledAt}> {shouldDisplayInlineScheduler ? humanReadableScheduledAt : 'No Time Set'}</span>
             <Dropdown
               isDropdownExpanded={isInlineSchedulerDropdownExpanded}
               onHide={this.collapseInlineSchedulerDropdown}

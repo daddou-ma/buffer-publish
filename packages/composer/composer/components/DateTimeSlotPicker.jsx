@@ -82,7 +82,6 @@ class DateTimeSlotPicker extends React.Component {
   static defaultProps = {
     shouldUse24hTime: false,
     isSlotPickingAvailable: false,
-    scheduleSlotsIsAvailable: false,
     onClick: () => {},
     onChange: () => {},
     timezone: 'Europe/Paris',
@@ -166,7 +165,12 @@ class DateTimeSlotPicker extends React.Component {
     this.props.onChange(this.state.selectedDateTime, isPinnedToSlot);
   };
 
-  onSubmit = () => this.props.onSubmit(this.state.selectedDateTime.unix());
+  onSubmit = () => {
+    if (!this.props.initialDateTime) {
+      this.props.onChange(this.state.selectedDateTime, false);
+    }
+    this.props.onSubmit(this.state.selectedDateTime.unix());
+  };
 
   componentWillReceiveProps(nextProps) {
     const { today, selectedDateTime, shouldDisplaySlotPicker } = this.state;
@@ -213,6 +217,11 @@ class DateTimeSlotPicker extends React.Component {
     }
   }
 
+  static scheduleSlotsIsAvailable(selectedProfiles) {
+    return selectedProfiles && selectedProfiles.length === 1 &&
+      selectedProfiles[0].scheduleSlotsIsAvailable;
+  }
+
   render() {
     const { today, selectedDateTime, shouldDisplaySlotPicker, emptyByDefault } = this.state;
     const {
@@ -220,8 +229,7 @@ class DateTimeSlotPicker extends React.Component {
       availableSchedulesSlotsForDay, selectedProfiles,
     } = this.props;
 
-    const scheduleSlotsIsAvailable = selectedProfiles && selectedProfiles.length === 1 &&
-                                     selectedProfiles[0].scheduleSlotsIsAvailable;
+    const scheduleSlotsIsAvailable = DateTimeSlotPicker.scheduleSlotsIsAvailable(selectedProfiles);
 
     const hasAvailableSchedulesSlotsInfoForDay =
       typeof availableSchedulesSlotsForDay !== 'undefined';
