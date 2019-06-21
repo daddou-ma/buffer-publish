@@ -6,6 +6,8 @@ import AppInitActionCreators from '../composer/action-creators/AppInitActionCrea
 import AppActionCreators from '../composer/action-creators/AppActionCreators';
 import AppStore from '../composer/stores/AppStore';
 import events from '../composer/utils/Events';
+import AppDispatcher from '../composer/dispatcher';
+import { ActionTypes } from '../composer/AppConstants';
 
 let publishComposerOnSaveCallback;
 let publishComposerOnInteractionCallback;
@@ -27,6 +29,7 @@ const ComposerWrapper = ({
   draftMode,
   emptySlotMode,
   selectedProfileId,
+
 }) => {
   const getSaveButtons = () => {
     if (editMode) return ['SAVE'];
@@ -75,6 +78,7 @@ const ComposerWrapper = ({
       userData.features && userData.features.includes('instagram-location-tagging'),
     // TODO: make should_use_new_twitter_autocomplete dynamic based on the
     // value of enabledApplicationModes.includes('web-twitter-typeahead-autocomplete')
+    isOnProTrial: userData.isOnProTrial,
     should_use_new_twitter_autocomplete: true,
     updateId: post ? post.id : undefined,
     update: { ...post, images: post.imageUrls },
@@ -169,6 +173,17 @@ ComposerWrapper.defaultProps = {
 events.on('saved-drafts', () => {
   AppInitActionCreators.softResetData();
   publishComposerOnSaveCallback();
+});
+
+events.on('start-trial', (message) => {
+  // reformat new userData
+  const userData = DataImportUtils.formatUserData(null, { userData: message });
+  AppInitActionCreators.resetUserData(userData);
+  // Trigger the comment toggle
+  AppDispatcher.handleViewAction({
+    actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT,
+    commentEnabled: true,
+  });
 });
 
 events.on('action-taken', (message) => {

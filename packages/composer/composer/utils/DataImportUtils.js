@@ -159,6 +159,8 @@ const DataImportUtils = {
           shouldAlwaysSkipEmptyTextAlert: userData.skip_empty_text_alert,
           hasSimplifiedFreePlanUX: userData.has_simplified_free_plan_ux,
           hasIGLocationTaggingFeature: userData.hasIGLocationTaggingFeature,
+          canStartProTrial: userData.canStartProTrial,
+          isOnProTrial: userData.isOnProTrial,
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasFirstCommentFlip: hasFeature(userData.features, 'first_comment'),
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),

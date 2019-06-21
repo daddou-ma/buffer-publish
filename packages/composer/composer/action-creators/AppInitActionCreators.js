@@ -348,6 +348,13 @@ const AppInitActionCreators = {
     });
   },
 
+  resetUserData: (userData) => {
+    AppDispatcher.handleViewAction({
+      actionType: ActionTypes.RESET_USER_DATA,
+      userData,
+    });
+  },
+
   /**
    * The dispatching of success notifications is delayed by two cycles in
    * AppActionCreators.js#saveDrafts, so we need to delay the resetting by two

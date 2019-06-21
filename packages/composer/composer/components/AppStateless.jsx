@@ -184,6 +184,8 @@ const AppStateless = ({
         hasShopgridFlip={userData.hasShopgridFlip || false}
         isFreeUser={userData.isFreeUser || false}
         isBusinessUser={userData.isBusinessUser || false}
+        canStartProTrial={userData.canStartProTrial || false}
+        isOnProTrial={userData.isOnProTrial || false}
       />
 
       <UpdateSaver

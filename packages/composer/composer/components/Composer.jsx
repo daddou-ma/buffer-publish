@@ -8,6 +8,7 @@ import ReactTooltip from 'react-tooltip';
 import ReactDOMServer from 'react-dom/server';
 import uniqBy from 'lodash.uniqby';
 import { Toggle, Text, IconArrowPopover } from '@bufferapp/components';
+import { ProTag } from '@bufferapp/publish-shared-components';
 import Textarea from 'react-textarea-autosize';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
@@ -156,6 +157,8 @@ class Composer extends React.Component {
       right: PropTypes.number,
     }),
     hasIGLocationTaggingFeature: PropTypes.bool,
+    canStartProTrial: PropTypes.bool,
+    isOnProTrial: PropTypes.bool,
     hasIGDirectVideoFlip: PropTypes.bool,
     hasFirstCommentFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
@@ -167,6 +170,8 @@ class Composer extends React.Component {
     children: null,
     composerPosition: null,
     hasIGLocationTaggingFeature: false,
+    canStartProTrial: false,
+    isOnProTrial: false,
     hasIGDirectVideoFlip: false,
     hasFirstCommentFlip: false,
     hasShopgridFlip: false,
@@ -246,6 +251,38 @@ class Composer extends React.Component {
 
     ComposerActionCreators.toggleAttachment(this.props.draft.id, AttachmentTypes.RETWEET);
   }
+
+  onToggleComment = (e, commentEnabled) => {
+    e.preventDefault();
+    const { canStartProTrial } = this.props;
+    const showProUpgradeModal = this.props.isFreeUser && !canStartProTrial;
+    if (canStartProTrial) {
+      // display pro trial modal if user can start trial
+      AppActionCreators.triggerInteraction({
+        message: {
+          action: 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL',
+        },
+      });
+    } else if (showProUpgradeModal) {
+      // display upgrade modal if user isn't able to start trial
+      AppActionCreators.triggerInteraction({
+        message: {
+          action: 'SHOW_PRO_UPGRADE_MODAL',
+        },
+      });
+    } else {
+      // show input if user already has access to first comment
+      AppActionCreators.triggerInteraction({
+        message: {
+          id: this.props.draft.id,
+          ids: this.props.selectedProfiles.map(profile => profile.id),
+          action: commentEnabled ? 'COMMENT_ENABLED' : null,
+        },
+      });
+      ComposerActionCreators.updateToggleComment(this.props.draft.id, commentEnabled);
+    }
+  };
+
 
   onMediaAttachmentSwitchClick = () => {
     const replacedAttachment =
@@ -507,18 +544,6 @@ class Composer extends React.Component {
     ReactTooltip.hide(this.noticeTooltip);
   };
 
-  onToggleComment = (e, commentEnabled) => {
-    e.preventDefault();
-    AppActionCreators.triggerInteraction({
-      message: {
-        id: this.props.draft.id,
-        ids: this.props.selectedProfiles.map((profile) => profile.id),
-        commentEnabled,
-      },
-    });
-    ComposerActionCreators.updateToggleComment(this.props.draft.id, commentEnabled);
-  };
-
   onCommentChange = (e) => {
     ComposerActionCreators.updateDraftComment(this.props.draft.id, e.target.value);
     ComposerActionCreators.updateDraftCommentCharacterCount(this.props.draft.id);
@@ -700,20 +725,20 @@ class Composer extends React.Component {
     );
 
     const shouldDisplayFirstCommentSection = (commentEnabled) => {
+      const freeUserNotEligibleToStartTrial = this.props.isFreeUser && !this.props.canStartProTrial;
       const hasSelectedSomeInstagramDirectProfiles =
-        this.props.selectedProfiles.some((profile) => profile.instagramDirectEnabled);
-
+        this.props.selectedProfiles.some(profile => profile.instagramDirectEnabled);
       return (
         commentEnabled || (
         hasSelectedSomeInstagramDirectProfiles &&
         this.isInstagram() &&
+        !freeUserNotEligibleToStartTrial && // Add this temporarily until we remove refresh on upgrade
         this.isExpanded() &&
         hasFirstCommentFlip &&
-        userHasBusinessOrProPlan &&
         !appState.isOmniboxEnabled
         )
       );
-    }
+    };
 
     const shouldShowTwitterDuplicateContentWarningNotice =
       this.isExpanded() &&
@@ -1058,6 +1083,11 @@ class Composer extends React.Component {
         {shouldDisplayFirstCommentSection(draft.commentEnabled) &&
         <div>
           <div className={styles.toggleCommentContainer}>
+            { (this.props.isOnProTrial || this.props.isFreeUser) &&
+              <div className={styles.proTagWrapper}>
+                <ProTag />
+              </div>
+            }
             <div className={styles.toggleWrapper}>
               <div className={styles.togglePosition}>
                 <Toggle
@@ -1070,7 +1100,7 @@ class Composer extends React.Component {
                 />
               </div>
               <div
-                style={{ display: 'flex', alignItems: 'center', marginLeft: '9px' }}
+                className={styles.toggleTextWrapper}
                 onClick={this.onCommentClick}
               >
                 <Text weight="medium" color="black" size="small">
