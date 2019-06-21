@@ -82,6 +82,7 @@ class DateTimeSlotPicker extends React.Component {
   static defaultProps = {
     shouldUse24hTime: false,
     isSlotPickingAvailable: false,
+    scheduleSlotsIsAvailable: false,
     onClick: () => {},
     onChange: () => {},
     timezone: 'Europe/Paris',
@@ -216,8 +217,11 @@ class DateTimeSlotPicker extends React.Component {
     const { today, selectedDateTime, shouldDisplaySlotPicker, emptyByDefault } = this.state;
     const {
       metaData, timezone, shouldUse24hTime, submitButtonCopy, isSlotPickingAvailable,
-      availableSchedulesSlotsForDay,
+      availableSchedulesSlotsForDay, selectedProfiles,
     } = this.props;
+
+    const scheduleSlotsIsAvailable = selectedProfiles && selectedProfiles.length === 1 &&
+                                     selectedProfiles[0].scheduleSlotsIsAvailable;
 
     const hasAvailableSchedulesSlotsInfoForDay =
       typeof availableSchedulesSlotsForDay !== 'undefined';
@@ -254,7 +258,7 @@ class DateTimeSlotPicker extends React.Component {
             className={styles.timePicker}
           />}
 
-        {shouldDisplayTimePicker && isSlotPickingAvailable &&
+        {shouldDisplayTimePicker && isSlotPickingAvailable && scheduleSlotsIsAvailable &&
           <Button
             className={styles.pickerSwitchButton}
             onClick={this.onSwitchToSlotPickerClick}

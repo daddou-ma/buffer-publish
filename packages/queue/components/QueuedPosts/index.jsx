@@ -93,6 +93,7 @@ const QueuedPosts = ({
   isManager,
   hasFirstCommentFlip,
   isBusinessAccount,
+  scheduleSlotsIsAvailable,
 }) => {
   if (loading) {
     return (
@@ -179,6 +180,7 @@ const QueuedPosts = ({
           draggable={draggingEnabled}
           hasFirstCommentFlip={hasFirstCommentFlip}
           isBusinessAccount={isBusinessAccount}
+          scheduleSlotsIsAvailable={scheduleSlotsIsAvailable}
         />
       </div>
     </ErrorBoundary>
@@ -230,6 +232,8 @@ QueuedPosts.propTypes = {
   isLockedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   onCalendarClick: PropTypes.func.isRequired,
+  isBusinessAccount: PropTypes.bool,
+  scheduleSlotsIsAvailable: PropTypes.bool,
 };
 
 QueuedPosts.defaultProps = {
@@ -251,6 +255,8 @@ QueuedPosts.defaultProps = {
   hasFirstCommentFlip: false,
   draggingEnabled: false,
   isManager: false,
+  isBusinessAccount: false,
+  scheduleSlotsIsAvailable: false,
 };
 
 export default QueuedPosts;

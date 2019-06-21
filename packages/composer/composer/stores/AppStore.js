@@ -127,6 +127,7 @@ const getNewProfile = (data) => ({
   subprofilesOrignatedFromAPI: null,
   instagramDirectEnabled: data.instagramDirectEnabled && data.serviceName === 'instagram',
   canPostComment: data.canPostComment,
+  scheduleSlotsIsAvailable: data.scheduleSlotsIsAvailable,
   // Profile-specific app state
   appState: {
     isSubprofileCreationPending: false,
