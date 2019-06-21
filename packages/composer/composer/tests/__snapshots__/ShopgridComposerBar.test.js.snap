@@ -63,7 +63,7 @@ exports[`Whole component renders default state 1`] = `
         name="shopgridLink"
         onBlur={[Function]}
         onChange={[Function]}
-        placeholder="URL for Shop Grid"
+        placeholder="Website or Product URL"
         value=""
       />
     </span>
@@ -130,7 +130,7 @@ exports[`Whole component renders with shopgrid link when set 1`] = `
         name="shopgridLink"
         onBlur={[Function]}
         onChange={[Function]}
-        placeholder="URL for Shop Grid"
+        placeholder="Website or Product URL"
         value="test"
       />
     </span>

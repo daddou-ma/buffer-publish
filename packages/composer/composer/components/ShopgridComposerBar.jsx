@@ -69,7 +69,7 @@ class ShopgridComposerBar extends React.Component {
               onChange={this.onChange}
               onBlur={this.onChange}
               name="shopgridLink"
-              placeholder="URL for Shop Grid"
+              placeholder="Website or Product URL"
               value={this.state.shopgridLink}
             />
           </span>
