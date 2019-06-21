@@ -51,6 +51,11 @@ class UpdateSaver extends React.Component {
     isPinnedToSlot: null,
   };
 
+  static profileHasPostingSchedule(selectedProfiles) {
+    return selectedProfiles && selectedProfiles.length === 1 &&
+      selectedProfiles[0].profileHasPostingSchedule;
+  }
+
   state = getUpdateSaverState();
 
   getFormattedWhatPreventsSavingMessages = () => {
@@ -115,6 +120,8 @@ class UpdateSaver extends React.Component {
     const {
       isSavingPossible, isDraftsSavePending, draftSaveQueueingType, isOmniboxEnabled,
     } = appState;
+
+    const profileHasPostingSchedule = UpdateSaver.profileHasPostingSchedule(selectedProfiles);
 
     const { isInlineSchedulerDropdownExpanded } = this.state;
 
@@ -217,13 +224,15 @@ class UpdateSaver extends React.Component {
       const humanReadableFormat = userData.uses24hTime ? 'MMM D, H:mm' : 'MMM D, h:mm A';
       humanReadableScheduledAt = scheduledAtMoment.format(humanReadableFormat);
     }
+    const isDraft = firstStackedButtonCopy === saveButtonsCopy.get(SaveButtonTypes.ADD_TO_DRAFTS);
 
     return (
       <div className={styles.section}>
         {isOmniboxEnabled &&
           <OmniboxButtons />}
 
-        {!isOmniboxEnabled && (
+        {!isOmniboxEnabled && (shouldDisplayInlineScheduler || !profileHasPostingSchedule) &&
+        !isDraft && (
           <div className={styles.inlineScheduler}>
             Post Schedule:
             <span className={styles.humanReadableScheduledAt}> {shouldDisplayInlineScheduler ? humanReadableScheduledAt : 'No Time Set'}</span>
@@ -250,7 +259,7 @@ class UpdateSaver extends React.Component {
                   isPinnedToSlot={isPinnedToSlot}
                   metaData={metaData}
                   submitButtonCopy="Done"
-                  selectedProfiles={selectedProfiles}
+                  profileHasPostingSchedule={profileHasPostingSchedule}
                 />
               </DropdownContent>
             </Dropdown>
