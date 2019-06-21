@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Popover, Card, Text, Button } from '@bufferapp/components';
+import { Popover, Card } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
 
 const Modal = ({
   onConfirmClick,
@@ -10,27 +11,29 @@ const Modal = ({
   appName,
 }) => (
   <Popover onOverlayClick={() => onCancelClick()}>
-    <div style={{ width: '30rem', margin: '0 25px' }}>
-      <Card doublePadding>
+    <div style={{ width: '30rem' }}>
+      <Card reducedPadding>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-            <Text size={'large'} color={'outerSpace'}>Are you sure?</Text>
-          </div>
-          <div style={{ margin: '0 2.5rem', textAlign: 'center' }}>
-            <Text size={'small'} color={'shuttleGray'}>
-              You're about to revoke access to <b>{appName}</b>.
-              This will prevent the app from working with your Buffer account.
-              Are you sure you want to continue?
-            </Text>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-            <Button tertiary disabled={submitting} onClick={onCancelClick}>
-              Cancel
-            </Button>
+          <Text type="h3">Are you sure?</Text>
+          <Text type="p">
+            You are about to revoke access to <b>{appName}</b>.
+            This will prevent the app from working with your Buffer account.
+            Are you sure you want to continue?
+          </Text>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+            <Button
+              type="text"
+              disabled={submitting}
+              onClick={onCancelClick}
+              label="Cancel"
+            />
             <div style={{ margin: '0.5rem' }} />
-            <Button onClick={() => onConfirmClick({ appId })} disabled={submitting}>
-              Yes, revoke access
-            </Button>
+            <Button
+              type="primary"
+              onClick={() => onConfirmClick({ appId })}
+              disabled={submitting}
+              label="Yes, revoke access"
+            />
           </div>
         </div>
       </Card>
