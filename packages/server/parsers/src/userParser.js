@@ -55,6 +55,8 @@ module.exports = userData => ({
     celebrations: userData.email_notifications.includes('celebrations'),
   },
   canStartBusinessTrial: userData.can_start_business_trial,
+  canStartProTrial: userData.can_start_pro_trial,
+  isOnProTrial: userData.on_awesome_trial,
   shouldShowProTrialExpiredModal: hasProTrialExpired(userData.feature_trials)
     && userData.plan === 'free'
     && !userData.has_cancelled,

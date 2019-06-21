@@ -430,7 +430,6 @@
 
 .togglePosition {
   margin-left: -0.5rem;
-  margin-right: 0.5rem;
   display: flex;
   align-items: center;
 }
@@ -625,4 +624,14 @@
   display: flex;
   align-items: center;
   margin-left: 9px;
+}
+
+.toggleTextWrapper {
+   display: flex;
+   align-items: center;
+   margin-left: 8px;
+}
+
+.proTagWrapper {
+  margin-right: 8px;
 }

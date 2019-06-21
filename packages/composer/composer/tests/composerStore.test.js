@@ -74,6 +74,14 @@ describe('ComposerStore', () => {
     },
   });
 
+  const actionUpdateDraftShopgridLink = (id, shopgridLink) => ({
+    action: {
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_SHOPGRID_LINK,
+      id,
+      shopgridLink,
+    },
+  });
+
   const actionUpdateDraftComment = (id, commentText) => ({
     action: {
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_COMMENT,
