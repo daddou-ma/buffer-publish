@@ -177,6 +177,7 @@ module.exports = post => {
     isPastDue,
     imageSrc: isVideo ? media.thumbnail : media.picture,
     imageUrls: getImageUrls(post),
+    shopgridLink: post.link,
     links: canHaveLinks ? links : [],
     profileTimezone: post.profile_timezone,
     linkAttachment: {
@@ -214,5 +215,5 @@ module.exports = post => {
     sharedBy: post.shared_by,
     commentEnabled: post.comment_enabled,
     commentText: post.comment_text,
-  }
-}
+  };
+};

@@ -154,6 +154,7 @@ class App extends React.Component {
       locationName: PropTypes.string,
       commentEnabled: PropTypes.bool,
       commentText: PropTypes.string,
+      shopgridLink: PropTypes.string,
     }).isRequired,
 
     csrfToken: PropTypes.string.isRequired,

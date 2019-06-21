@@ -90,6 +90,7 @@ const ComposerWrapper = ({
     should_show_rollout_tooltip: false,
     commentEnabled: post.commentEnabled,
     commentText: post.commentText,
+    shopgridLink: post.shopgridLink,
   };
   const formattedData = DataImportUtils.formatInputData({
     env: metaData.application,

@@ -265,6 +265,13 @@ const loadInitialMetaData = (metaData) => {
     });
   }
 
+  if (metaData.shopgridLink) {
+    AppDispatcher.handleViewAction({
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_SHOPGRID_LINK,
+      shopgridLink: metaData.shopgridLink,
+    });
+  }
+
   if (metaData.images) {
     const dispatches = metaData.images.map((image) => dispatchAutoUploadedImage(image));
 

@@ -709,6 +709,7 @@ function getFormattedAPIData(serviceName, unformattedData) {
       conditionalFields = Object.assign(conditionalFields, {
         comment_enabled: serviceDraft.commentEnabled,
         comment_text: serviceDraft.commentText,
+        link: serviceDraft.shopgridLink,
       });
     }
 
