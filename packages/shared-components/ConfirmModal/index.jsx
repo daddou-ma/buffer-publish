@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button, Text } from '@bufferapp/ui';
-import CrossIcon from '@bufferapp/ui/Icon/Icons/Cross';
 import Avatar from '@bufferapp/ui/Avatar';
 
 const profileBadgeStyle = {
@@ -27,17 +26,8 @@ const buttonsStyle = {
   justifyContent: 'flex-end',
 };
 
-const closeButtonStyle = {
-  position: 'absolute',
-  right: '15px',
-};
-
 const textContainerStyle = {
   marginRight: '15px',
-};
-
-const linkStyle = {
-  cursor: 'pointer',
 };
 
 const ConfirmModal = ({
@@ -50,11 +40,6 @@ const ConfirmModal = ({
   btnText,
 }) => (
   <div style={containerStyle}>
-    <span style={closeButtonStyle}>
-      <a style={linkStyle} onClick={onCloseModal}>
-        <CrossIcon size="large" />
-      </a>
-    </span>
     <Text type="h3">{heading}</Text>
     <div style={middleContainerStyle}>
       <Text type="p">
