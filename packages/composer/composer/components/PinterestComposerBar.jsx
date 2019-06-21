@@ -13,6 +13,7 @@ class PinterestComposerBar extends React.Component {
     visibleNotifications: PropTypes.array.isRequired,
     sourceUrl: PropTypes.string,
     profiles: PropTypes.array,
+    serviceName: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -35,6 +36,9 @@ class PinterestComposerBar extends React.Component {
     this.setState({ isInlineSubprofileDropdownExpanded: false });
   };
 
+  isPinterest = () => this.props.serviceName === 'pinterest';
+
+
   render() {
     const {
       profiles, draftId, sourceUrl,
@@ -49,6 +53,7 @@ class PinterestComposerBar extends React.Component {
     const hasUniqueSelectedProfile = uniqueSelectedProfile !== null;
 
     return (
+      this.isPinterest() &&
       <div className={styles.pinterestComposerBar}>
         <PinterestSelectedBoards profiles={profiles} />
 

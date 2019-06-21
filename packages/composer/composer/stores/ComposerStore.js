@@ -117,12 +117,9 @@ const softResetState = () => {
   // The only data to preserve is the enabled state of each draft
   newState.drafts = newState.drafts.map((newDraft) => {
     const { isEnabled, editorState } = state.drafts.find(({ id }) => id === newDraft.id);
-
-    return {
-      ...newDraft,
-      isEnabled,
-      editorState: resetEditorContents(editorState),
-    };
+    newDraft.isEnabled = isEnabled;
+    newDraft.editorState = resetEditorContents(editorState);
+    return newDraft;
   });
 
   state = newState;
@@ -792,6 +789,14 @@ const updateDraftComment = monitorComposerLastInteractedWith(
     // to false using the draft reference.
     if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
   }
+);
+
+const updateShopgridLink = monitorComposerLastInteractedWith(
+  (id, shopgridLink) => {
+    const draft = ComposerStore.getDraft(id);
+    if (draft.service.name !== 'instagram') return;
+    draft.shopgridLink = shopgridLink;
+  },
 );
 
 const updateDraftCommentCharacterCount = monitorComposerLastInteractedWith(
@@ -1771,8 +1776,16 @@ const onDispatchedPayload = (payload) => {
       updateDraftComment(action.id, action.commentText);
       break;
 
+    case ActionTypes.COMPOSER_UPDATE_DRAFT_SHOPGRID_LINK:
+      updateShopgridLink(action.id, action.shopgridLink);
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_SHOPGRID_LINK:
+      state.drafts.forEach(draft => updateShopgridLink(draft.id, action.shopgridLink));
+      break;
+
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_COMMENT:
-      state.drafts.forEach((draft) => updateDraftComment(draft.id, action.commentText));
+      state.drafts.forEach(draft => updateDraftComment(draft.id, action.commentText));
       break;
 
     case ActionTypes.COMPOSER_UPDATE_TOGGLE_COMMENT:
@@ -1780,7 +1793,7 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT:
-      state.drafts.forEach((draft) => updateToggleComment(draft.id, action.commentEnabled));
+      state.drafts.forEach(draft => updateToggleComment(draft.id, action.commentEnabled));
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_COMMENT_CHARACTER_COUNT:
