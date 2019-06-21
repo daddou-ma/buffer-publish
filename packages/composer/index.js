@@ -1,2 +1,2 @@
-export { bufferPublishComposer } from './interfaces';
+export { bufferPublishComposer, AppHooks } from './interfaces';
 export { bufferWebUtils } from './interfaces/utils';

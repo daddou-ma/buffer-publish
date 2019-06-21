@@ -153,6 +153,9 @@ const getNewUserData = (data) => ({
   hasIGLocationTaggingFeature: data.hasIGLocationTaggingFeature,
   hasIGDirectVideoFlip: data.hasIGDirectVideoFlip,
   hasFirstCommentFlip: data.hasFirstCommentFlip,
+  canStartProTrial: data.canStartProTrial,
+  isOnProTrial: data.isOnProTrial,
+  hasShopgridFlip: data.hasShopgridFlip,
 });
 
 const getNewSubprofile = ({ avatar, id, name, isShared }) =>
@@ -807,6 +810,16 @@ const markAppAsNotLoaded = () => {
   state.appState.isLoaded = false;
 };
 
+// There's a CORS error when trying to reset the s3UploadSignature. Leaving signature
+// as is until refresh
+const resetUserData = (userData) => {
+  Object.keys(userData).forEach((key) => {
+    if (key !== 's3UploadSignature' || key !== 's3_upload_signature') {
+      state.userData[key] = userData[key];
+    }
+  });
+};
+
 const updateOmniboxState = (isEnabled) => {
   state.appState.isOmniboxEnabled = isEnabled;
 };
@@ -1133,6 +1146,10 @@ const onDispatchedPayload = (payload) => {
 
     case ActionTypes.APP_NOT_LOADED:
       markAppAsNotLoaded();
+      break;
+
+    case ActionTypes.RESET_USER_DATA:
+      resetUserData(action.userData);
       break;
 
     /**

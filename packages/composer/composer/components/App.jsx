@@ -71,6 +71,8 @@ class App extends React.Component {
         signature: PropTypes.string.isRequired,
         successActionStatus: PropTypes.string.isRequired,
       }).isRequired,
+      canStartProTrial: PropTypes.bool.isRequired,
+      isOnProTrial: PropTypes.bool.isRequired,
       uses24hTime: PropTypes.bool.isRequired,
       weekStartsMonday: PropTypes.bool.isRequired,
       isFreeUser: PropTypes.bool.isRequired,
@@ -153,6 +155,7 @@ class App extends React.Component {
       locationName: PropTypes.string,
       commentEnabled: PropTypes.bool,
       commentText: PropTypes.string,
+      shopgridLink: PropTypes.string,
     }).isRequired,
 
     csrfToken: PropTypes.string.isRequired,
@@ -180,6 +183,8 @@ class App extends React.Component {
       profileSchedulesSlots: undefined,
       onNewPublish: false,
       hasIGLocationTaggingFeature: false,
+      canStartProTrial: false,
+      isOnProTrial: false,
       hasIGDirectVideoFlip: false,
     },
     options: {
