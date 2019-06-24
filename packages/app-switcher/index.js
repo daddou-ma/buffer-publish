@@ -11,7 +11,7 @@ export default connect(
     showFeedbackModal: state.appSwitcher.showFeedbackModal,
     source: state.appSwitcher.source,
     translations: state.i18n.translations['app-switcher'],
-    hidePrompt: state.appSidebar.user.features && state.appSidebar.user.features.indexOf('paid_users_in_new_publish') >= 0,
+    hidePrompt: state.appSidebar.user.showReturnToClassic,
   }),
   dispatch => ({
     closeFeedbackModal() {

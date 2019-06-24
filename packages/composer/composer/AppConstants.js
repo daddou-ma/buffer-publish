@@ -71,8 +71,8 @@ const Services = (() => {
         requiredAttachmentType: null,
         unavailableMediaAttachmentTypes: [],
         maxAttachableImagesCount: 1,
-        maxHashtagsInText: null, // No maximum by default
-        maxMentionsInComment: null, // No maximum by default
+        maxHashtags: null, // No maximum by default
+        maxMentions: null, // No maximum by default
         profileType: null,
         nativeVideoSizeLimit: null,
         nativeVideoDurationLimit: null,
@@ -169,8 +169,8 @@ const Services = (() => {
       unavailableMediaAttachmentTypes: [MediaTypes.GIF],
       profileType: ProfileTypes.ACCOUNT,
       usesImageFirstLayout: true,
-      maxHashtagsInText: 30,
-      maxMentionsInComment: 5,
+      maxHashtags: 30,
+      maxMentions: 5,
       canHaveLocation: true,
       canEditVideoAttachment: false,
     }),
@@ -274,6 +274,7 @@ const ActionTypes = keyMirror({
   COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT: null,
   COMPOSER_UPDATE_DRAFT_CHARACTER_COUNT: null,
   COMPOSER_UPDATE_DRAFT_COMMENT: null,
+  COMPOSER_UPDATE_DRAFT_SHOPGRID_LINK: null,
   COMPOSER_UPDATE_DRAFT_COMMENT_CHARACTER_COUNT: null,
   COMPOSER_UPDATE_DRAFT_SOURCE_LINK: null,
   COMPOSER_UPDATE_DRAFTS_SOURCE_LINK: null,
@@ -284,6 +285,7 @@ const ActionTypes = keyMirror({
   COMPOSER_UPDATE_DRAFTS_LOCATION: null,
   COMPOSER_UPDATE_DRAFT_LIST_PLACES: null,
   COMPOSER_UPDATE_DRAFTS_COMMENT: null,
+  COMPOSER_UPDATE_DRAFTS_SHOPGRID_LINK: null,
   COMPOSER_ADD_DRAFT_IMAGE: null,
   COMPOSER_ADD_DRAFTS_IMAGE: null,
   COMPOSER_DRAFT_IMAGE_ADDED: null,
@@ -386,6 +388,7 @@ const ActionTypes = keyMirror({
   EVENT_SHOW_UPGRADE_MODAL: null,
   COMPOSER_UPDATE_INSTAGRAM_DRAFT_THUMBNAIL: null,
   APP_SET_THUMBNAIL_LOADING: null,
+  RESET_USER_DATA: null,
 });
 
 const AsyncOperationStates = keyMirror({

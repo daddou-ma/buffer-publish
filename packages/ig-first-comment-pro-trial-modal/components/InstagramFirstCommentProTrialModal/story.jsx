@@ -4,13 +4,13 @@ import { action } from '@storybook/addon-actions';
 import { checkA11y } from 'storybook-addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
-import InstagramNewFirstCommentUserModal from './index';
+import InstagramFirstCommentProTrialModal from './index';
 
-storiesOf('IGNewFirstCommentUserModal', module)
+storiesOf('InstagramFirstCommentProTrialModal', module)
   .addDecorator(checkA11y)
   .add('should show instagram modal', () => (
-    <InstagramNewFirstCommentUserModal
-      translations={translations['instagram-new-first-comment-user-modal']}
+    <InstagramFirstCommentProTrialModal
+      translations={translations['instagram-first-comment-pro-trial-modal']}
       hideModal={action('hide-modal')}
     />
   ));
