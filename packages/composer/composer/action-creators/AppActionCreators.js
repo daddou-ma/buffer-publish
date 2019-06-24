@@ -192,9 +192,10 @@ const AppActionCreators = {
           if (unsuccessfulResponse.code === UpgradeErrorCodes.queueLimit) {
             const userData = AppStore.getUserData();
             const { isFreeUser, isBusinessUser, canStartProTrial } = userData;
+            const scope = `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${unsuccessfulResponse.serviceName}`;
 
             NotificationActionCreators.queueInfo({
-              scope: `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${unsuccessfulResponse.serviceName}`,
+              scope,
               // Remove the <a> from the response message for now until the backend stops returning it
               // since we already have a special setup for showing a `cta` button in the notification
               // TODO: Replace below with just `unsuccessfulResponse.message` when the API has removed
@@ -206,11 +207,19 @@ const AppActionCreators = {
               isUnique: true,
               cta: {
                 label: isFreeUser && canStartProTrial ? 'Start Pro Trial' : 'Show Paid Plans',
-                action: () => {
+                action: (event) => {
                   const { environment } = AppStore.getMetaData();
                   if (isFreeUser) {
                     if (canStartProTrial) {
-                      window.open(`${bufferOrigins.get(environment)}/billing/start-trial?trialType=pro`);
+                      if (event && event.target && !event.target.disabled) {
+                        event.target.disabled = true;
+                      }
+                      AppActionCreators.triggerInteraction({
+                        message: {
+                          action: 'START_PRO_TRIAL',
+                          scope,
+                        },
+                      });
                       return;
                     }
                     if (AppStore.isExtension()) {

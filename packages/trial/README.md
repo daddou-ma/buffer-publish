@@ -1,0 +1,3 @@
+# @bufferapp/publish-trial
+
+A package to handle trial interactions, starting, stopping, cancelling, etc...

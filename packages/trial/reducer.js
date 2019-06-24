@@ -1,26 +1,30 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
-export const actionTypes = keyWrapper('IG_FIRST_COMMENT_PRO_TRIAL_MODAL', {
-  IG_FIRST_COMMENT_PRO_TRIAL: 0,
+export const actionTypes = keyWrapper('TRIAL', {
+  START_PRO_TRIAL: 0,
+  CLEAR_SCOPE: 0,
 });
 
 export default (state = { startedTrial: false }, action) => {
   switch (action.type) {
+    case actionTypes.START_PRO_TRIAL:
+      if (action.scope) {
+        return {
+          ...state,
+          scope: action.scope,
+        };
+      }
+      return state;
     case `startTrial_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        loading: false,
+        startedTrial: true,
       };
-    case `startTrial_${dataFetchActionTypes.FETCH_FAIL}`:
+    case actionTypes.CLEAR_SCOPE:
       return {
         ...state,
-        loading: false,
-      };
-    case `startTrial_${dataFetchActionTypes.FETCH_START}`:
-      return {
-        ...state,
-        loading: true,
+        scope: null,
       };
     default:
       return state;
@@ -28,7 +32,8 @@ export default (state = { startedTrial: false }, action) => {
 };
 
 export const actions = {
-  handleStartProTrial: () => ({
-    type: actionTypes.IG_FIRST_COMMENT_PRO_TRIAL,
+  handleStartProTrial: (scope) => ({
+    type: actionTypes.START_PRO_TRIAL,
+    scope,
   }),
 };
