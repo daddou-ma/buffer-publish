@@ -60,12 +60,12 @@ const DataImportUtils = {
 
     if (saveButtons === undefined) saveButtons = defaultSaveButtons;
 
-    const formattedMetaData = DataImportUtils.formatMetaData(dataImportEnv, data);
+    const metaData = DataImportUtils.formatMetaData(dataImportEnv, data);
 
     return {
-      profilesData: DataImportUtils.formatProfilesData(dataImportEnv, data, formattedMetaData),
+      profilesData: DataImportUtils.formatProfilesData(dataImportEnv, data, metaData),
       userData,
-      metaData: formattedMetaData,
+      metaData,
       options: { canSelectProfiles, saveButtons, ...restOptions },
       csrfToken: data.csrfToken,
       imageDimensionsKey: data.imageDimensionsKey,
@@ -137,6 +137,7 @@ const DataImportUtils = {
     let data = {};
 
     if (userData !== null) {
+      const hasFeature = (featureList, feature) => featureList && featureList.includes(feature);
       data = Object.assign(
         {
           id: userData.id,
@@ -158,8 +159,11 @@ const DataImportUtils = {
           shouldAlwaysSkipEmptyTextAlert: userData.skip_empty_text_alert,
           hasSimplifiedFreePlanUX: userData.has_simplified_free_plan_ux,
           hasIGLocationTaggingFeature: userData.hasIGLocationTaggingFeature,
+          canStartProTrial: userData.canStartProTrial,
+          isOnProTrial: userData.isOnProTrial,
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
-          hasFirstCommentFlip: userData.features ? userData.features.includes('first_comment') : false,
+          hasFirstCommentFlip: hasFeature(userData.features, 'first_comment'),
+          hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
           profileGroups: userData.profile_groups ?
             userData.profile_groups.map((group) => ({
               name: group.name,
@@ -269,6 +273,7 @@ const DataImportUtils = {
           facebookMentionEntities: update.entities || null,
           commentEnabled: update.commentEnabled,
           commentText: update.commentText || null,
+          shopgridLink: update.shopgridLink || null,
         });
         break;
       }
@@ -350,6 +355,7 @@ const DataImportUtils = {
         existingUpdateProfileService: meta.existingUpdateProfileService,
         commentEnabled: meta.commentEnabled,
         commentText: meta.commentText || null,
+        shopgridLink: meta.shopgridLink || null,
       };
     }
 

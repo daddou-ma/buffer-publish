@@ -14,6 +14,15 @@ class LocationComposerBar extends React.Component {
     locationId: PropTypes.string,
     places: PropTypes.array,
     instagramProfileId: PropTypes.string,
+
+    selectedProfiles: PropTypes.arrayOf(PropTypes.shape({
+      instagramDirectEnabled: PropTypes.bool,
+    })).isRequired,
+    isInstagram: PropTypes.bool.isRequired,
+    hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
+    hasIGDirectVideoFlip: PropTypes.bool.isRequired,
+    hasVideo: PropTypes.bool.isRequired,
+    withMediaAttachment: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -21,6 +30,23 @@ class LocationComposerBar extends React.Component {
     locationId: null,
     instagramProfileId: null,
     places: [],
+    withMediaAttachment: false,
+  };
+
+  shouldShowLocationBar = () => {
+    const {
+      selectedProfiles,
+      isInstagram,
+      hasIGLocationTaggingFeature,
+      hasIGDirectVideoFlip,
+      hasVideo,
+  } = this.props;
+    return (
+      isInstagram &&
+      selectedProfiles.some((profile) => profile.instagramDirectEnabled) &&
+      hasIGLocationTaggingFeature &&
+      ((hasVideo && hasIGDirectVideoFlip) || !hasVideo)
+    );
   };
 
   onChange = (event, value) => {
@@ -52,7 +78,7 @@ class LocationComposerBar extends React.Component {
   removeLocation = (e) => {
     e.preventDefault();
     this.resetInput();
-  }
+  };
 
   resetInput = () => ComposerActionCreators.updateDraftLocation(this.props.draftId, null, '');
 
@@ -60,44 +86,47 @@ class LocationComposerBar extends React.Component {
 
   render() {
     return (
-      <div className={styles.locationComposerBar}>
+      this.shouldShowLocationBar() &&
+      <div className={this.props.withMediaAttachment ? styles.locationComposerBarWithMedia : styles.locationComposerBar}>
         <div className={styles.locationFieldContainer}>
-          <span className={styles.locationFieldLabel}>Add location </span>
-          {this.isLocationSet() &&
-            <span className={styles.locationFieldRemoveInput} onClick={this.removeLocation} />
-          }
-          <Autocomplete
-            wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-            value={this.props.locationName}
-            items={this.props.places}
-            inputProps={{
-              className: styles.locationFieldInput,
-              placeholder: 'Start typing a location...',
-            }}
-            getItemValue={(item) => item.name}
-            onSelect={(value, place) => {
-              this.saveLocation(place);
-            }}
-            onChange={this.onChange}
-            onMenuVisibilityChange={this.onMenuVisibilityChange}
-            renderMenu={(children) => (
-              <div className={styles.locationMenu}>
-                {children}
-              </div>
-            )}
-            renderItem={(item, highlighted) => {
-              const classHighlighted = highlighted ? styles.optionRowHighlighted : '';
-              return (<div key={item.id} className={`${styles.optionRow} ${classHighlighted}`}>
-                <img className={styles.optionImage} alt={item.name} src={item.pictureUrl} />
-                <div className={styles.optionTextDescription}>
-                  <p className={styles.optionTitle}>{item.name}</p>
-                  <p>
-                    {item.formattedAddressWithCheckins}
-                  </p>
+          <span className={styles.locationFieldLabel}>Location </span>
+          <span className={styles.locationAutocompleteContainer}>
+            {this.isLocationSet() &&
+            <span className={styles.locationFieldRemoveInput} onClick={this.removeLocation}/>
+            }
+            <Autocomplete
+              wrapperStyle={{ width: '100%' }}
+              value={this.props.locationName}
+              items={this.props.places}
+              inputProps={{
+                className: styles.locationFieldInput,
+                placeholder: 'Start typing a location...',
+              }}
+              getItemValue={(item) => item.name}
+              onSelect={(value, place) => {
+                this.saveLocation(place);
+              }}
+              onChange={this.onChange}
+              onMenuVisibilityChange={this.onMenuVisibilityChange}
+              renderMenu={(children) => (
+                <div className={styles.locationMenu}>
+                  {children}
                 </div>
-              </div>);
-            }}
-          />
+              )}
+              renderItem={(item, highlighted) => {
+                const classHighlighted = highlighted ? styles.optionRowHighlighted : '';
+                return (<div key={item.id} className={`${styles.optionRow} ${classHighlighted}`}>
+                  <img className={styles.optionImage} alt={item.name} src={item.pictureUrl} />
+                  <div className={styles.optionTextDescription}>
+                    <p className={styles.optionTitle}>{item.name}</p>
+                    <p>
+                      {item.formattedAddressWithCheckins}
+                    </p>
+                  </div>
+                </div>);
+              }}
+            />
+          </span>
         </div>
       </div>
     );

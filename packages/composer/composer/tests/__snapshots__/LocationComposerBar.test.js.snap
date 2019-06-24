@@ -10,35 +10,38 @@ exports[`Whole component renders correctly 1`] = `
     <span
       className="locationFieldLabel"
     >
-      Add location 
+      Location 
     </span>
     <span
-      className="locationFieldRemoveInput"
-      onClick={[Function]}
-    />
-    <div
-      style={
-        Object {
-          "display": "inline-block",
-          "position": "relative",
-        }
-      }
+      className="locationAutocompleteContainer"
     >
-      <input
-        aria-autocomplete="list"
-        aria-expanded={false}
-        autoComplete="off"
-        className="locationFieldInput"
-        onBlur={[Function]}
-        onChange={[Function]}
+      <span
+        className="locationFieldRemoveInput"
         onClick={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        placeholder="Start typing a location..."
-        role="combobox"
-        value="New York"
       />
-    </div>
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <input
+          aria-autocomplete="list"
+          aria-expanded={false}
+          autoComplete="off"
+          className="locationFieldInput"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Start typing a location..."
+          role="combobox"
+          value="New York"
+        />
+      </div>
+    </span>
   </div>
 </div>
 `;
@@ -53,35 +56,38 @@ exports[`Whole component renders with cross to remove location when set 1`] = `
     <span
       className="locationFieldLabel"
     >
-      Add location 
+      Location 
     </span>
     <span
-      className="locationFieldRemoveInput"
-      onClick={[Function]}
-    />
-    <div
-      style={
-        Object {
-          "display": "inline-block",
-          "position": "relative",
-        }
-      }
+      className="locationAutocompleteContainer"
     >
-      <input
-        aria-autocomplete="list"
-        aria-expanded={false}
-        autoComplete="off"
-        className="locationFieldInput"
-        onBlur={[Function]}
-        onChange={[Function]}
+      <span
+        className="locationFieldRemoveInput"
         onClick={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        placeholder="Start typing a location..."
-        role="combobox"
-        value="New York"
       />
-    </div>
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <input
+          aria-autocomplete="list"
+          aria-expanded={false}
+          autoComplete="off"
+          className="locationFieldInput"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Start typing a location..."
+          role="combobox"
+          value="New York"
+        />
+      </div>
+    </span>
   </div>
 </div>
 `;
@@ -96,31 +102,34 @@ exports[`Whole component renders with location name when set 1`] = `
     <span
       className="locationFieldLabel"
     >
-      Add location 
+      Location 
     </span>
-    <div
-      style={
-        Object {
-          "display": "inline-block",
-          "position": "relative",
-        }
-      }
+    <span
+      className="locationAutocompleteContainer"
     >
-      <input
-        aria-autocomplete="list"
-        aria-expanded={false}
-        autoComplete="off"
-        className="locationFieldInput"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        placeholder="Start typing a location..."
-        role="combobox"
-        value="New York"
-      />
-    </div>
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <input
+          aria-autocomplete="list"
+          aria-expanded={false}
+          autoComplete="off"
+          className="locationFieldInput"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Start typing a location..."
+          role="combobox"
+          value="New York"
+        />
+      </div>
+    </span>
   </div>
 </div>
 `;
