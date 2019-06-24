@@ -252,11 +252,11 @@ class Composer extends React.Component {
     ComposerActionCreators.toggleAttachment(this.props.draft.id, AttachmentTypes.RETWEET);
   }
 
-  onToggleComment = (e, commentEnabled) => {
+  onToggleComment = (e, commentEnabled, userHasBusinessOrProPlan) => {
     e.preventDefault();
     const { canStartProTrial } = this.props;
-    const showProUpgradeModal = this.props.isFreeUser && !canStartProTrial;
-    if (canStartProTrial) {
+    const showProUpgradeModal = !userHasBusinessOrProPlan && !canStartProTrial;
+    if (canStartProTrial && !userHasBusinessOrProPlan) {
       // display pro trial modal if user can start trial
       AppActionCreators.triggerInteraction({
         message: {
@@ -725,7 +725,7 @@ class Composer extends React.Component {
     );
 
     const shouldDisplayFirstCommentSection = (commentEnabled) => {
-      const freeUserNotEligibleToStartTrial = this.props.isFreeUser && !this.props.canStartProTrial;
+      const freeUserNotEligibleToStartTrial = !userHasBusinessOrProPlan && !this.props.canStartProTrial;
       const hasSelectedSomeInstagramDirectProfiles =
         this.props.selectedProfiles.some(profile => profile.instagramDirectEnabled);
       return (
@@ -1096,7 +1096,7 @@ class Composer extends React.Component {
                   offText=""
                   on={draft.commentEnabled}
                   size={'small'}
-                  onClick={(e) => this.onToggleComment(e, !draft.commentEnabled)}
+                  onClick={(e) => this.onToggleComment(e, !draft.commentEnabled, userHasBusinessOrProPlan)}
                 />
               </div>
               <div
