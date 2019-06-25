@@ -19,7 +19,6 @@ const iconStyle = {
 const formStyle = {
   paddingTop: '1rem',
   display: 'flex',
-  justifyContent: 'center',
 };
 
 /* eslint-disable react/prop-types */
