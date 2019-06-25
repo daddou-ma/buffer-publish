@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 
 import LinkShorteningWrapper from './LinkShorteningWrapper';
-
-const textWrapperStyle = {
-  display: 'flex',
-  marginBottom: '0.5rem',
-};
 
 const pinterestSectionStyling = {
   padding: '10px',
@@ -44,9 +39,9 @@ const LinkShortening = ({
           width: '100%',
         }}
       >
-        <div style={textWrapperStyle}>
+        <div>
           <div style={pinterestSectionStyling}>
-            <Text size={'small'}>
+            <Text type="p">
               Sadly, at the moment Pinterest does not allow posting of shortened links. <br />
               For more,
               read all about it <a
@@ -75,8 +70,8 @@ const LinkShortening = ({
       isBitlyConnected={isBitlyConnected}
       isManager={isManager}
     >
-      <div style={textWrapperStyle}>
-        <Text size="small">
+      <div>
+        <Text type="p">
           Are your links feeling a little long? Well worry no longer, choose one of our link
           shorteners or connect your own bit.ly account and Buffer will make sure that your
           links are shortened whenever you post.

@@ -1,31 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Divider } from '@bufferapp/components';
 import {
-  Button, Divider,
+  Button,
   Text,
-} from '@bufferapp/components';
+} from '@bufferapp/ui';
 
 const instagramDirectPostingStyle = {
   display: 'flex',
-
+  alignItems: 'center',
   flexDirection: 'row',
-  padding: '0.5rem 0',
-};
-
-const textWrapperStyle = {
-  display: 'flex',
-  marginBottom: '0.5rem',
-  marginTop: '0.5rem',
 };
 
 const textStyle = {
   flex: 1,
 };
 
-const setUpDirectPostingStyle = {
-  marginTop: '1rem',
+const buttonWrapperStyle = {
+  marginLeft: '0.5rem',
+  flex: '0.3 1 0%',
 };
-
 
 const InstagramDirectPosting = ({
   onDirectPostingClick,
@@ -33,25 +27,21 @@ const InstagramDirectPosting = ({
   <div>
     <div style={instagramDirectPostingStyle}>
       <div style={textStyle}>
-        <div style={textWrapperStyle}>
-          <Text color={'black'}>
-            Enable Direct Scheduling
-          </Text>
-        </div>
-        <div style={textWrapperStyle}>
-          <Text size={'small'}>
-            Buffer can now post directly to Instagram, all
-            you need to have is an Instagram Business Profile.
-          </Text>
-        </div>
+        <Text type="h3">
+          Enable Direct Scheduling
+        </Text>
+        <Text type="p">
+          Buffer can now post directly to Instagram, all
+          you need to have is an Instagram Business Profile.
+        </Text>
       </div>
-      <div style={setUpDirectPostingStyle}>
+      <div style={buttonWrapperStyle}>
         <Button
-          fillContainer
+          fullWidth
+          type="primary"
+          label="Set up Direct Scheduling"
           onClick={onDirectPostingClick}
-        >
-          Set up Direct Scheduling
-        </Button>
+        />
       </div>
     </div>
     <Divider />

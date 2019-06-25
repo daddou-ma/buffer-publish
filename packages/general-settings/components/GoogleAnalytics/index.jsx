@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Text, Toggle, Button, Input, Card,
+  Toggle, Input, Card,
 } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
 import { Field, reduxForm } from 'redux-form';
 
 const googleAnalyticsWrapperStyle = {
@@ -34,8 +35,6 @@ const formWrapperStyle = {
 
 const headerTextWrapperStyle = {
   display: 'flex',
-  marginBottom: '0.5rem',
-  marginTop: '0.5rem',
 };
 
 const rightContainerStyle = {
@@ -86,13 +85,13 @@ const GoogleAnalytics = ({
   }) => (
     <div style={googleAnalyticsWrapperStyle}>
       <div style={headerTextWrapperStyle}>
-        <Text color={'black'}>
+        <Text type="h3">
           Google Analytics Campaign Tracking
         </Text>
       </div>
       <div style={generalWrapperStyle}>
         <div style={textStyle}>
-          <Text size={'small'}>
+          <Text type="p">
             With campaign tracking enabled in Buffer, you will be able to see how much traffic
             you receive from social media posts directly inside your Google Analytics dashboard. You
             can disable this below if you&rsquo;d like.
@@ -103,16 +102,16 @@ const GoogleAnalytics = ({
       <div style={enableCampaignWrapperStyle}>
         <div style={textStyle}>
           <div style={headerTextWrapperStyle}>
-            <Text color={'black'} weight={'thin'}>
-              Enable Campaign Tracking
+            <Text type="p">
+              <strong>Enable Campaign Tracking</strong>
             </Text>
           </div>
           <div style={enableGoogleAnalyticsStyle}>
-            <Text size={'small'}>
+            <Text type="p">
               This enables Google Analytics Tracking via UTM parameters added to links you share.
             </Text>
             <div>
-              <Text size={'small'}>
+              <Text type="p">
                 (This will override any existing UTM parameters)
               </Text>
             </div>
@@ -134,11 +133,7 @@ const GoogleAnalytics = ({
           <Card noBorder noPadding>
             <form style={formWrapperStyle}>
               <div style={inputStyle}>
-                <Text
-                  weight={'semi-bold'}
-                  size={'small'}
-                  color={'black'}
-                >
+                <Text type="label">
                   Campaign Name
                 </Text>
                 <Field
@@ -153,11 +148,7 @@ const GoogleAnalytics = ({
                 />
               </div>
               <div style={inputStyle}>
-                <Text
-                  weight={'semi-bold'}
-                  size={'small'}
-                  color={'black'}
-                >
+                <Text type="label">
                   Campaign Source
                 </Text>
                 <Input
@@ -171,11 +162,7 @@ const GoogleAnalytics = ({
                 />
               </div>
               <div style={inputStyle}>
-                <Text
-                  weight={'semi-bold'}
-                  size={'small'}
-                  color={'black'}
-                >
+                <Text type="label">
                   Campaign Medium
                 </Text>
                 <Input
@@ -190,13 +177,13 @@ const GoogleAnalytics = ({
               </div>
               <div style={saveChangesStyle}>
                 <Button
+                  type="primary"
+                  label="Update tracking"
                   onClick={(e) => {
                     e.preventDefault();
                     onSaveGATrackingSettingsClick(utmCampaign, utmSource, utmMedium);
                   }}
-                >
-                  Update tracking
-                </Button>
+                />
               </div>
             </form>
           </Card>
@@ -206,11 +193,10 @@ const GoogleAnalytics = ({
       (!features.isFreeUser() || (isBusinessAccount && isManager)) &&
         <div style={customizeButtonStyle}>
           <Button
-            secondary
+            type="secondary"
+            label="Customize Campaign Tracking"
             onClick={onShowGACustomizationFormClick}
-          >
-            Customize Campaign Tracking
-          </Button>
+          />
         </div>
       }
     </div>

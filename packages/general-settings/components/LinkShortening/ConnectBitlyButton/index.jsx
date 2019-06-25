@@ -1,4 +1,4 @@
-import { Button } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -20,22 +20,22 @@ const ConnectBitlyToggler = ({
         return (
           <div style={connectBitlyButton}>
             <Button
-              fillContainer
+              fullWidth
+              type="primary"
+              label="Disconnect Bit.ly"
               onClick={onDisconnectBitlyURLClick}
-            >
-              Disconnect Bit.ly
-            </Button>
+            />
           </div>
         );
       }
       return (
         <div style={connectBitlyButton}>
           <Button
-            fillContainer
+            fullWidth
+            type="primary"
+            label="Connect Bit.ly"
             onClick={onConnectBitlyURLClick}
-          >
-            Connect Bit.ly
-          </Button>
+          />
         </div>
       );
     }
