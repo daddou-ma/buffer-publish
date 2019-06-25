@@ -28,6 +28,7 @@ export default connect(
     isLockedProfile: state.profileSidebar.isLockedProfile,
     isInstagramProfile: state.generalSettings.isInstagramProfile,
     selectedProfile: state.profileSidebar.selectedProfile,
+    canStartProTrial: state.appSidebar.user.canStartProTrial,
   }),
   (dispatch, ownProps) => ({
     onTabClick: (tabId) => {

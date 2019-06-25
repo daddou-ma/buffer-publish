@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as trialActions } from '@bufferapp/publish-trial';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import { actions } from './reducer';
@@ -149,6 +150,9 @@ export default connect(
           break;
         case 'SHOW_PRO_UPGRADE_MODAL':
           dispatch(modalsActions.showUpgradeModal({ source: 'ig_first_comment_toggle' }));
+          break;
+        case 'START_PRO_TRIAL':
+          dispatch(trialActions.handleStartProTrial(message.scope));
           break;
         default: break;
       }

@@ -7,6 +7,7 @@ import {
 import { Button } from '@bufferapp/ui';
 import { Text } from '@bufferapp/components';
 import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { getValidTab } from '../../utils';
 
 const upgradeCtaStyle = {
@@ -25,14 +26,6 @@ const tabsStyle = {
   top: '0',
   backgroundColor: 'white',
   zIndex: 1,
-};
-
-const reconnectProfile = () => {
-  if (window.location.hostname === 'publish.local.buffer.com') {
-    window.location.assign('https://local.buffer.com/manage/');
-  } else {
-    window.location.assign('https://buffer.com/manage/');
-  }
 };
 
 class TabNavigation extends React.Component {
@@ -72,6 +65,7 @@ class TabNavigation extends React.Component {
       shouldHideAnalyticsOverviewTab,
       onUpgradeButtonClick,
       isLockedProfile,
+      canStartProTrial,
     } = this.props;
 
     return (
@@ -112,12 +106,16 @@ class TabNavigation extends React.Component {
             </Text>
             <div style={{ marginLeft: '8px', display: 'inline-block' }}>
               <Button
-                label="Upgrade to Pro"
+                label={canStartProTrial ? 'Start a 7 day Pro Trial' : 'Upgrade to Pro'}
                 type="secondary"
                 size="small"
                 onClick={(e) => {
                   e.preventDefault();
-                  onUpgradeButtonClick('pro');
+                  if (canStartProTrial) {
+                    window.location.assign(`${getURL.getStartTrialURL('pro')}`);
+                  } else {
+                    onUpgradeButtonClick('pro');
+                  }
                 }}
               />
             </div>
@@ -166,7 +164,7 @@ class TabNavigation extends React.Component {
                 onClick={(e) => {
                   e.preventDefault();
                   this.setState({ loading: true });
-                  reconnectProfile();
+                  window.location.assign(`${getURL.getManageURL()}`);
                 }}
               />
             </div>
@@ -189,6 +187,7 @@ TabNavigation.defaultProps = {
   isBusinessAccount: false,
   isManager: false,
   onProTrial: true,
+  canStartProTrial: false,
 };
 
 TabNavigation.propTypes = {
@@ -199,6 +198,7 @@ TabNavigation.propTypes = {
   onTabClick: PropTypes.func.isRequired,
   shouldShowUpgradeCta: PropTypes.bool.isRequired,
   onUpgradeButtonClick: PropTypes.func.isRequired,
+  canStartProTrial: PropTypes.bool,
   onChildTabClick: PropTypes.func.isRequired,
   onProTrial: PropTypes.bool,
   selectedChildTabId: PropTypes.string,

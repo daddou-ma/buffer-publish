@@ -9,7 +9,8 @@
   "author": "hamstu@gmail.com",
   "dependencies": {
     "@bufferapp/async-data-fetch": "1.9.4",
-    "@bufferapp/product-features": "2.0.0"
+    "@bufferapp/product-features": "2.0.0",
+    "@bufferapp/publish-server": "2.0.0"
   },
   "devDependencies": {
     "eslint": "3.19.0"

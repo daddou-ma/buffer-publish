@@ -190,8 +190,12 @@ const AppActionCreators = {
           // Did we get an error because the user reached a limit and could upgrade?
           // Don't show it as an 'error' in that case
           if (unsuccessfulResponse.code === UpgradeErrorCodes.queueLimit) {
+            const userData = AppStore.getUserData();
+            const { isFreeUser, isBusinessUser, canStartProTrial } = userData;
+            const scope = `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${unsuccessfulResponse.serviceName}`;
+
             NotificationActionCreators.queueInfo({
-              scope: `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${unsuccessfulResponse.serviceName}`,
+              scope,
               // Remove the <a> from the response message for now until the backend stops returning it
               // since we already have a special setup for showing a `cta` button in the notification
               // TODO: Replace below with just `unsuccessfulResponse.message` when the API has removed
@@ -202,20 +206,31 @@ const AppActionCreators = {
               ),
               isUnique: true,
               cta: {
-                label: 'Show Paid Plans',
-                action: () => {
-                  const { isFreeUser, isBusinessUser } = AppStore.getUserData();
+                label: isFreeUser && canStartProTrial ? 'Start Pro Trial' : 'Show Paid Plans',
+                action: (event) => {
                   const { environment } = AppStore.getMetaData();
                   if (isFreeUser) {
+                    if (canStartProTrial) {
+                      if (event && event.target && !event.target.disabled) {
+                        event.target.disabled = true;
+                      }
+                      AppActionCreators.triggerInteraction({
+                        message: {
+                          action: 'START_PRO_TRIAL',
+                          scope,
+                        },
+                      });
+                      return;
+                    }
                     if (AppStore.isExtension()) {
-                      window.open(`${bufferOrigins.get(environment)}/pro/`);
+                      window.open(`${bufferOrigins.get(environment)}/pricing`);
                     } else {
                       AppDispatcher.handleViewAction({
                         actionType: ActionTypes.EVENT_SHOW_UPGRADE_MODAL,
                       });
                     }
                   } else if (!isBusinessUser) {
-                    window.open(`${bufferOrigins.get(environment)}/business/`);
+                    window.open(`${bufferOrigins.get(environment)}/pricing`);
                   } else {
                     window.open(`${bufferOrigins.get(environment)}/app/account/receipts?content_only=true`);
                   }

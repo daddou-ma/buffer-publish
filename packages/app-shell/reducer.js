@@ -30,6 +30,7 @@ export default (state = initialState, action) => {
         showReturnToClassic: action.result.showReturnToClassic,
         showUpgradeToPro: action.result.is_free_user,
         showManageTeam: !action.result.is_free_user,
+        showStartProTrial: action.result.canStartProTrial,
       };
     case actionTypes.SET_BANNER_OPTIONS:
       return {

@@ -1,10 +1,10 @@
 const hasProTrialExpired = trials =>
-  trials.some(trial => trial.is_awesome && trial.status === 'expired')
+  trials.some(trial => trial.is_awesome && trial.status === 'expired');
 
 const isOnBusinessPlan = trialPlan =>
   ['business', 'agency', 'small', 'premium_business'].some(
     plan => plan === trialPlan,
-  )
+  );
 
 module.exports = userData => ({
   id: userData.id,
@@ -86,4 +86,4 @@ module.exports = userData => ({
   profileCount: userData.profile_usage,
   showReturnToClassic: userData.has_np_app_switcher,
   helpScoutConfig: userData.helpscout_beacon_params,
-})
+});

@@ -765,7 +765,9 @@ const updateDraftCharacterCount = monitorComposerLastInteractedWith(
 const updateToggleComment = monitorComposerLastInteractedWith(
   (id, commentEnabled, didEditorStateChange) => {
     const draft = ComposerStore.getDraft(id);
-    draft.commentEnabled = commentEnabled;
+    if (draft.service.name === 'instagram') {
+      draft.commentEnabled = commentEnabled;
+    }
 
     // If the character count was updated as a result of a change that didn't
     // originate from the editor itself, we need to give the editor an opportunity

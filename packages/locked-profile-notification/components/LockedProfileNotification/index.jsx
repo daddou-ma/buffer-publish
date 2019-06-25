@@ -138,7 +138,4 @@ LockedProfileNotification.propTypes = {
   isOwner: PropTypes.bool.isRequired,
 };
 
-LockedProfileNotification.defaultProps = {
-};
-
 export default WithFeatureLoader(LockedProfileNotification);

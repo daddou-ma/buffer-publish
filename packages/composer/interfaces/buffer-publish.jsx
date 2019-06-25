@@ -8,6 +8,7 @@ import AppStore from '../composer/stores/AppStore';
 import events from '../composer/utils/Events';
 import AppDispatcher from '../composer/dispatcher';
 import { ActionTypes } from '../composer/AppConstants';
+import NotificationActionCreators from '../composer/action-creators/NotificationActionCreators';
 
 let publishComposerOnSaveCallback;
 let publishComposerOnInteractionCallback;
@@ -175,11 +176,17 @@ events.on('saved-drafts', () => {
   publishComposerOnSaveCallback();
 });
 
-events.on('start-trial', (message) => {
+events.on('start-trial', ({message, removeScope}) => {
   // reformat new userData
   const userData = DataImportUtils.formatUserData(null, { userData: message });
   AppInitActionCreators.resetUserData(userData);
-  // Trigger the comment toggle
+
+  if (removeScope) {
+    NotificationActionCreators.removeAllNotificationsByScope(removeScope);
+  }
+
+  // Trigger the comment toggle as the commentEnabled property
+  // will not be updated until the composer is reopened
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT,
     commentEnabled: true,
