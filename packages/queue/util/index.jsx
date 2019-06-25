@@ -264,6 +264,9 @@ export const getDaysToAddForPastPosts = ({ posts, profileTimezone, now }) => {
   });
 };
 
+export const postHasCommentEnabled = post =>
+  servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
+
 /**
  * This method formats a list of posts into a list that contains day headings,
  * posts and optionally queue slots (if supported by the plan.)
@@ -371,7 +374,7 @@ export const formatPostLists = ({
    */
   let lastHeader = null;
   return orderedPosts.reduce((finalList, post, index) => {
-    const hasCommentEnabled = servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
+    const hasCommentEnabled = postHasCommentEnabled(post);
     if (lastHeader !== post.day) {
       lastHeader = post.day;
       finalList.push({

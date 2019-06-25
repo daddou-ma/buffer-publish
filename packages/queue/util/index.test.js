@@ -9,6 +9,7 @@ import {
   getSlotOrPostItem,
   formatPostLists,
   isScheduleSlotsAvailable,
+  postHasCommentEnabled,
 } from './index';
 
 const profileTimezone = 'America/Vancouver';
@@ -562,6 +563,24 @@ describe('queue utils', () => {
       });
       // since all the child methods are tested above let's just expect anything for now
       expect(result).toBeDefined();
+    });
+  });
+  describe('check for post comment enabled', () => {
+    it('should return true if is an instagram post', () => {
+      const post = {
+        id: 'abc',
+        profile_service: 'instagram',
+      };
+      const hasCommentEnabled = postHasCommentEnabled(post);
+      expect(hasCommentEnabled).toBeTruthy();
+    });
+    it('should return true if is not an instagram post', () => {
+      const post = {
+        id: 'abc',
+        profile_service: 'facebook',
+      };
+      const hasCommentEnabled = postHasCommentEnabled(post);
+      expect(hasCommentEnabled).toBeFalsy();
     });
   });
   describe('check for schedules', () => {
