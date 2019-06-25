@@ -15,7 +15,7 @@
     "connectButton": "Manage Social Accounts"
   },
   "default-page": {
-    "connectButton": "Connect your social accounts",
+    "connectButton": "Connect Your Social Accounts",
     "defaultTitle": "Let's get your account set up!"
   },
   "stripe": {
@@ -132,7 +132,7 @@
     "learnMore": "You can find the Instagram set up guide here.",
     "dismiss": "No thanks, I might do it later",
     "cta1": "Yes! Let's do it!",
-    "cta2": "I've converted it to Business"
+    "cta2": "I've Converted It to Business"
   },
   "steal-profile-modal": {
     "headline1": "Whoops, ",
@@ -143,7 +143,7 @@
     "body4": "Buffer account, it needs to be removed from the other account first.",
     "notSureWhere": "Not sure where your social account has been added already?",
     "getInTouch": "Get in touch",
-    "takeMeBack": "Take me back to Buffer"
+    "takeMeBack": "Take Me Back to Buffer"
   },
   "b4b-trial-complete-modal": {
     "header": "Your Buffer for Business trial is complete!",

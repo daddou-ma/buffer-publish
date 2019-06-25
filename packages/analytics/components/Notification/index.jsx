@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  Text,
-  Link,
-  NotificationIcon,
-} from '@bufferapp/components';
+import { Card, Link } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
+import WarningIcon from '@bufferapp/ui/Icon/Icons/Warning';
 
 const titleStyle = {
   display: 'flex',
@@ -17,49 +14,43 @@ const iconStyle = {
   paddingRight: '0.5rem',
 };
 
-const contentStyle = {
-  marginTop: '0.5rem',
-};
-
 const getNotificationCopy = (service, isInstagramBusiness) => {
   if (service === 'instagram' && !isInstagramBusiness) {
     return (
       <div>
-        Please convert your Instagram profile from a personal to Business account to get advanced analytics.&nbsp;
+        Please convert your Instagram profile from a personal to
+        Business account to get advanced analytics.&nbsp;
         <Link href={'https://faq.buffer.com/article/959-publish-instagram-set-up#direct-scheduling'} unstyled newTab>
           Please check our FAQ here for help on how to do this.
         </Link>
       </div>
     );
   }
-  return (<div>We only support Facebook, Instagram, & Twitter profiles in our analytics right now.</div>);
+  return ('We only support Facebook, Instagram, & Twitter profiles in our analytics right now.');
 };
 
 const getTitleCopy = (service, isInstagramBusiness) => {
   if (service === 'instagram' && !isInstagramBusiness) {
-    return (<div>Instagram advanced analytics are only available on Instagram Business profiles</div>)
+    return ('Instagram advanced analytics are only available on Instagram Business profiles');
   }
-  return (<div>Sorry we don&apos;t support this network in our Analytics</div>)
-}
+  return ('Sorry we don\'t support this network in our Analytics');
+};
 
 const Notification = ({ isInstagramBusiness, service }) => (
   <Card reducedPadding>
     <div style={titleStyle}>
       <span style={iconStyle}>
-        <NotificationIcon />
+        <WarningIcon />
       </span>
       <Text
-        color={'outerSpace'}
-        weight={'medium'}
+        type="h3"
       >
         {getTitleCopy(service, isInstagramBusiness)}
       </Text>
     </div>
-    <div style={contentStyle}>
-      <Text size={'mini'}>
-        {getNotificationCopy(service, isInstagramBusiness)}
-      </Text>
-    </div>
+    <Text type="p">
+      {getNotificationCopy(service, isInstagramBusiness)}
+    </Text>
   </Card>
 );
 

@@ -29,17 +29,19 @@ export default ({ dispatch, getState }) => next => (action) => {
       if (shouldShowUpgradeModal()) {
         dispatch(actions.showUpgradeModal({ source: getSourceFromKey() }));
       }
-      if (shouldShowInstagramFirstCommentModal()) {
-        dispatch(actions.showInstagramFirstCommentModal());
-      }
-      if (shouldShowWelcomeModal()) {
-        dispatch(actions.showWelcomeModal());
-      }
       if (shouldShowStealProfileModal()) {
         dispatch(actions.showStealProfileModal({ stealProfileUsername: getShowModalValue() }));
       }
       if (shouldShowWelcomeModalPaidUsers()) {
         dispatch(actions.showWelcomePaidModal());
+        // Don't overwhelm new users with lots of modals.
+        return;
+      }
+      if (shouldShowInstagramFirstCommentModal()) {
+        dispatch(actions.showInstagramFirstCommentModal());
+      }
+      if (shouldShowWelcomeModal()) {
+        dispatch(actions.showWelcomeModal());
       }
       break;
     }

@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import {
   Popover,
   Card,
-  Text,
-  Button,
   Link,
-  NotificationIcon,
 } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
+import WarningIcon from '@bufferapp/ui/Icon/Icons/Warning';
 
 const titleStyle = {
   display: 'flex',
@@ -17,10 +16,6 @@ const iconStyle = {
   display: 'flex',
   alignItems: 'center',
   paddingRight: '0.5rem',
-};
-
-const contentStyle = {
-  marginTop: '0.8rem',
 };
 
 const StealProfileModal = ({
@@ -35,46 +30,38 @@ const StealProfileModal = ({
         <div style={{ maxWidth: '580px', margin: '10px 20px' }}>
           <div style={titleStyle}>
             <span style={iconStyle}>
-              <NotificationIcon size={12} />
+              <WarningIcon />
             </span>
-            <Text
-              color={'outerSpace'}
-              weight={'medium'}
-            >
+            <Text type="h3">
               {translations.headline1} {stealProfileUsername} {translations.headline2}
             </Text>
           </div>
-          <div style={contentStyle}>
-            <Text size={'mini'}>
-              {translations.body1}
-            </Text>
-          </div>
-          <div style={contentStyle}>
-            <Text size={'mini'} weight={'medium'}>
+          <Text type="p">
+            {translations.body1}
+          </Text>
+          <Text type="p">
+            <strong>
               {
-                `${translations.body2} ${stealProfileUsername} ${translations.body3}
-                 ${email} ${translations.body4}
-                `
+              `${translations.body2} ${stealProfileUsername} ${translations.body3}
+               ${email} ${translations.body4}
+              `
               }
-            </Text>
-          </div>
-          <div style={contentStyle}>
-            <Text size={'mini'} weight={'medium'}>
+            </strong>
+          </Text>
+          <Text type="p">
+            <strong>
               {translations.notSureWhere}&nbsp;
-              <Link newTab href="https://buffer.com/support">
-                {translations.getInTouch}
-              </Link>
-            </Text>
-          </div>
-          <form style={{ paddingTop: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+            </strong>
+            <Link newTab href="https://buffer.com/support">
+              {translations.getInTouch}
+            </Link>
+          </Text>
+          <form style={{ paddingTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
             <Button
+              type="primary"
               onClick={hideModal}
-              large
-            >
-              <Text size={'mini'} weight={'medium'} color={'white'}>
-                {translations.takeMeBack}
-              </Text>
-            </Button>
+              label={translations.takeMeBack}
+            />
           </form>
         </div>
       </Card>

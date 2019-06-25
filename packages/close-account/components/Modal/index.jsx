@@ -1,12 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Popover, Card, Text, Input, Button } from '@bufferapp/components';
-import { yellowLight, yellowUltraLight } from '@bufferapp/components/style/color';
+import { Popover, Card, Input } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
 import formName from '../../symbols';
 
 const inputStyle = {
   marginTop: '1.5rem',
+  marginBottom: '1rem',
+};
+
+const boxStyle = {
+  background: '#F5F5F5',
+  width: '100%',
+  padding: '16px',
+  boxSizing: 'border-box',
 };
 
 const SubmitError = ({ error }) => (
@@ -16,7 +24,12 @@ const SubmitError = ({ error }) => (
       textAlign: 'center',
     }}
   >
-    <Text color={'torchRed'}>{error}</Text>
+    <Text
+      type="help"
+      hasError
+    >
+      {error}
+    </Text>
   </div>
 );
 
@@ -39,51 +52,43 @@ const Modal = ({ handleSubmit, submitting, error, onRequestCloseModal }) => (
             flexDirection: 'column',
           }}
         >
-          <div
-            style={{
-              textAlign: 'center',
-            }}
-          >
-            <Text size={'large'} color={'outerSpace'}>
-              You are about to delete your Buffer account.
-            </Text>
-          </div>
+          <Text type="h2">
+           You are about to delete your Buffer account
+          </Text>
           <form>
             <div style={inputStyle}>
+              <Text type="p">
+                If you have a moment, please let us know why you are leaving (optional):
+              </Text>
               <Field
                 component={Input}
                 type={'textarea'}
                 name={'feedback'}
-                label={"If you have a moment, please let us know why you're leaving (optional)"}
                 placeholder={'Add your brutally honest feedback here :)'}
               />
             </div>
-            <div
-              style={{
-                margin: '1rem',
-              }}
-            />
-            <Card backgroundColor={yellowUltraLight} borderColor={yellowLight} reducedPadding>
+            <div style={boxStyle}>
               <Text>
-                Please keep in mind that <strong>deleting your Buffer account is permanent</strong>{' '}
+                Please keep in mind that <strong>deleting your Buffer account is permanent </strong>
                 and will remove all of your stored tweets, posts, analytics and accounts forever.
               </Text>
-            </Card>
-            {error ? SubmitError({ error }) : null}
+            </div>
+            {error ? SubmitError({ error }) : null }
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'flex-end',
                 marginTop: '2rem',
               }}
             >
               <Button
-                tertiary
+                type="text"
                 disabled={submitting}
                 onClick={(e) => {
                   e.preventDefault();
                   onRequestCloseModal();
                 }}
+                label="Cancel"
               >
                 Cancel
               </Button>
@@ -92,9 +97,12 @@ const Modal = ({ handleSubmit, submitting, error, onRequestCloseModal }) => (
                   margin: '0.5rem',
                 }}
               />
-              <Button warning onClick={handleSubmit} disabled={submitting}>
-                Delete Your Account
-              </Button>
+              <Button
+                type="secondary"
+                onClick={() => { handleSubmit(); }}
+                disabled={submitting}
+                label="Delete Your Account"
+              />
             </div>
           </form>
         </div>
