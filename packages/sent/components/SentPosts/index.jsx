@@ -5,7 +5,8 @@ import {
   EmptyState,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
-import { Button, Divider, Text } from '@bufferapp/components';
+import { Divider, Text } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import { WithFeatureLoader } from '@bufferapp/product-features';
@@ -131,11 +132,13 @@ const SentPosts = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
         />
       </div>
-      {moreToLoad && ( 
+      {moreToLoad && (
         <div style={loadMoreButtonStyle}>
-          <Button onClick={loadMorePosts}>
-            Load More
-          </Button>
+          <Button
+            type="primary"
+            label="Load More"
+            onClick={loadMorePosts}
+          />
         </div>
       )}
     </ErrorBoundary>
