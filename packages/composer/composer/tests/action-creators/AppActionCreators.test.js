@@ -117,4 +117,18 @@ describe('AppActionCreators', () => {
       });
     });
   });
+  describe('displayModals', () => {
+    it('triggers SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL event message ', async () => {
+      await AppActionCreators.triggerInteraction({ message: { action: 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL' } });
+      expect(AppHooks.handleActionTaken).toHaveBeenCalledWith({
+        message: { action: 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL' },
+      });
+    });
+    it('triggers HIDE_IG_FIRST_COMMENT_PRO_TRIAL_MODAL event message ', async () => {
+      await AppActionCreators.triggerInteraction({ message: { action: 'HIDE_IG_FIRST_COMMENT_PRO_TRIAL_MODAL' } });
+      expect(AppHooks.handleActionTaken).toHaveBeenCalledWith({
+        message: { action: 'HIDE_IG_FIRST_COMMENT_PRO_TRIAL_MODAL' },
+      });
+    });
+  });
 });

@@ -88,6 +88,7 @@
     "events": "1.1.1",
     "fetch-jsonp": "1.0.3",
     "flux": "2.1.1",
+    "hashtag-regex": "^2.0.0",
     "immutable": "3.7.6",
     "keymirror": "0.1.1",
     "lodash.clonedeep": "4.3.2",

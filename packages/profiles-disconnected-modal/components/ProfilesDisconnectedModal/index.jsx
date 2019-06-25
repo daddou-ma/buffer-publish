@@ -14,7 +14,7 @@ const ProfilesDisconnectedModal = ({
   <div style={{ position: 'fixed', zIndex: '3000' }}>
     <Popover onOverlayClick={hideModal}>
       <Card>
-        <div style={{ maxWidth: '580px', margin: '0 16px' }}>
+        <div style={{ maxWidth: '470px', margin: '0 16px' }}>
           <Text type="h3">
             {translations.headline}
           </Text>

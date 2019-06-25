@@ -55,6 +55,8 @@ module.exports = userData => ({
     celebrations: userData.email_notifications.includes('celebrations'),
   },
   canStartBusinessTrial: userData.can_start_business_trial,
+  canStartProTrial: userData.can_start_pro_trial,
+  isOnProTrial: userData.on_awesome_trial,
   shouldShowProTrialExpiredModal: hasProTrialExpired(userData.feature_trials)
     && userData.plan === 'free'
     && !userData.has_cancelled,
@@ -82,6 +84,6 @@ module.exports = userData => ({
   isNonprofit: userData.billing_status_nonprofit,
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,
-  showReturnToClassic: userData.features.includes('paid_users_in_new_publish'),
+  showReturnToClassic: userData.has_np_app_switcher,
   helpScoutConfig: userData.helpscout_beacon_params,
 })

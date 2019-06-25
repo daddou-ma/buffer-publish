@@ -33,6 +33,7 @@ import { reducer as thirdpartyReducer } from '@bufferapp/publish-thirdparty';
 import { reducer as b4bTrialCompleteReducer } from '@bufferapp/publish-b4b-trial-complete-modal';
 import { reducer as appShellReducer } from '@bufferapp/publish-app-shell';
 import { reducer as ctaBannerReducer } from '@bufferapp/publish-cta-banner';
+import { reducer as igFirstCommentProTrialModalReducer } from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -81,6 +82,7 @@ export default {
   b4bTrialComplete: b4bTrialCompleteReducer,
   appShell: appShellReducer,
   ctaBanner: ctaBannerReducer,
+  igFirstCommentProTrialModal: igFirstCommentProTrialModalReducer,
 
   // Analyze
   average: averageReducer,

@@ -53,6 +53,7 @@ const updatePostLink = require('./updatePostLink');
 const dropPost = require('./dropPost');
 const swapPosts = require('./swapPosts');
 const cancelTrial = require('./cancelTrial');
+const startTrial = require('./startTrial');
 const intercom = require('./intercom');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
@@ -123,5 +124,6 @@ module.exports = rpc(
   dropPost,
   swapPosts,
   cancelTrial,
+  startTrial,
   intercom,
 );
