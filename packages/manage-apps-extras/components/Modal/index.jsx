@@ -32,7 +32,7 @@ const Modal = ({
               type="primary"
               onClick={() => onConfirmClick({ appId })}
               disabled={submitting}
-              label="Yes, revoke access"
+              label="Yes, Revoke Access"
             />
           </div>
         </div>

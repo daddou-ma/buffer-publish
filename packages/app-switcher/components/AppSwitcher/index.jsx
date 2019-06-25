@@ -32,8 +32,8 @@ const cardInnerStyle = {
 
 const closeIconContainerStyle = {
   position: 'absolute',
-  top: '8px',
-  right: '8px',
+  top: '-6px',
+  right: '-6px',
 };
 
 const buttonContainerStyle = {
@@ -145,12 +145,12 @@ class AppSwitcher extends React.Component {
           <Card shadowHeight={1} noPadding>
             <div style={cardInnerStyle}>
               <div style={closeIconContainerStyle}>
-                <button
-                  className={styles.button}
+                <Button
+                  type="text"
+                  hasIconOnly
+                  icon={<CloseIcon />}
                   onClick={() => { this.setState({ hidden: true }); }}
-                >
-                  <CloseIcon />
-                </button>
+                />
               </div>
               <Text size="small">
                 Thanks for using our beta!
@@ -159,6 +159,7 @@ class AppSwitcher extends React.Component {
               <div style={buttonContainerStyle}>
                 <Button
                   type="primary"
+                  fullWidth
                   size="small"
                   label="Back to classic Buffer"
                   onClick={() => displayFeedbackModal()}
