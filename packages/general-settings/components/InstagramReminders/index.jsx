@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Divider, Text, Toggle,
+  Divider, Toggle,
 } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 
 const instagramRemindersStyle = {
   display: 'flex',
@@ -12,8 +13,6 @@ const instagramRemindersStyle = {
 
 const textWrapperStyle = {
   display: 'flex',
-  marginBottom: '0.5rem',
-  marginTop: '0.5rem',
 };
 
 const textStyle = {
@@ -25,10 +24,6 @@ const enableRemindersWrapperStyle = {
   flexDirection: 'row',
   alignItems: 'center',
   flex: '1 1 0%',
-};
-
-const enableRemindersStyle = {
-  marginBottom: '0.5rem',
 };
 
 const switchStyle = {
@@ -47,12 +42,12 @@ const InstagramReminders = ({
     <div style={instagramRemindersStyle}>
       <div style={textStyle}>
         <div style={textWrapperStyle}>
-          <Text color={'black'}>
+          <Text type="h3">
             Instagram Reminders
           </Text>
         </div>
         <div style={textWrapperStyle}>
-          <Text size={'small'}>
+          <Text type="p">
             You can ensure all your Instagram posts will be sent
             out as a Reminder in the settings below. This means that
             Buffer will not post directly to Instagram for you.
@@ -62,15 +57,13 @@ const InstagramReminders = ({
       <div style={enableRemindersWrapperStyle}>
         <div style={textStyle}>
           <div style={textWrapperStyle}>
-            <Text color={'black'} weight={'thin'}>
-              Set Instagram Reminders for all posts
+            <Text type="p">
+              <strong>Set Instagram Reminders for all posts</strong>
             </Text>
           </div>
-          <div style={enableRemindersStyle}>
-            <Text size={'small'}>
-              All your posts will be sent as Reminders (not posted directly) if this is turned on.
-            </Text>
-          </div>
+          <Text type="p">
+            All your posts will be sent as Reminders (not posted directly) if this is turned on.
+          </Text>
         </div>
         <div style={switchStyle}>
           <Toggle

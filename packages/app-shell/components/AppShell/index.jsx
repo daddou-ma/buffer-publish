@@ -124,6 +124,9 @@ const AppShell = ({
   returnToClassic,
   upgradeToPro,
   openPreferences,
+  bannerOptions,
+  onCloseBanner,
+  bannerKey,
 }) => (
   <BDSAppShell
     content={children}
@@ -141,6 +144,10 @@ const AppShell = ({
       }),
     }}
     helpMenuItems={helpMenuItems}
+    bannerOptions={bannerOptions ? {
+      ...bannerOptions,
+      onCloseBanner: () => onCloseBanner({ key: bannerKey }),
+    } : null}
   />
 );
 
@@ -158,6 +165,14 @@ AppShell.propTypes = {
     email: PropTypes.string.isRequired,
     avatar: PropTypes.string,
   }).isRequired,
+  bannerKey: PropTypes.string,
+  onCloseBanner: PropTypes.func,
+  bannerOptions: PropTypes.shape({
+    themeColor: PropTypes.string,
+    customHTML: PropTypes.shape({
+      __html: PropTypes.string,
+    }),
+  }),
 };
 
 AppShell.defaultProps = {
@@ -169,6 +184,7 @@ AppShell.defaultProps = {
   showReturnToClassic: false,
   showUpgradeToPro: false,
   showManageTeam: false,
+  bannerOptions: null,
   showStartProTrial: false,
 };
 

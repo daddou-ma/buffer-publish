@@ -97,9 +97,6 @@ export default connect(
     onConfirmClearClick: () => {
       dispatch(actions.handleConfirmClearClick({ profileId: ownProps.profileId }));
     },
-    onCancelClearClick: () => {
-      dispatch(actions.handleCancelClearClick());
-    },
     closePopover: () => {
       dispatch(actions.handleClosePopover());
     },

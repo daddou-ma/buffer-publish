@@ -31,7 +31,7 @@ const ExtrasLinks = () => (
       </div>
       <Button
         type="secondary"
-        label="Install the browser extension"
+        label="Install the Browser extension"
         onClick={() => openExtensionLink()}
       />
     </Row>

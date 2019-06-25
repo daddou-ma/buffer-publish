@@ -2,16 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import {
-  InputAutocomplete,
-  Text,
-} from '@bufferapp/components';
+import { InputAutocomplete } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 
 const editTimezoneStyle = {
   display: 'flex',
   flex: 1,
   flexDirection: 'column',
-  marginBottom: '0.5rem',
   width: '200px',
 };
 
@@ -57,11 +54,7 @@ let TimezoneInputForm = ({
   <form>
     <div style={editTimezoneStyle}>
       <div style={textWrapperStyle}>
-        <Text
-          size="small"
-          color="black"
-          weight="thin"
-        >
+        <Text type="label">
           Timezone
         </Text>
       </div>

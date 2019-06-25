@@ -1,15 +1,9 @@
-import { Text } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 import Select from '@bufferapp/components/Select';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 import ConnectBitlyToggler from './ConnectBitlyButton';
-
-const textWrapperStyle = {
-  display: 'flex',
-  marginBottom: '0.5rem',
-  marginTop: '0.5rem',
-};
 
 const bitlyWrapperSidebarStyle = {
   flexDirection: 'column',
@@ -64,13 +58,9 @@ const LinkShorteningWrapper = ({
       <div
         style={startSectionStyles}
       >
-        <div style={textWrapperStyle}>
-          <Text
-            color={'black'}
-          >
-            Link Shortening
-          </Text>
-        </div>
+        <Text type="h3">
+          Link Shortening
+        </Text>
         {children}
       </div>
       {loading &&

@@ -62,7 +62,6 @@ storiesOf('PostingSchedule', module)
       profileName="Joel"
       profileType="profile"
       onConfirmClearClick={action('on-confirm-clear-click')}
-      onCancelClearClick={action('on-cancel-clear-click')}
       profileService="twitter"
     />
   ))
@@ -92,7 +91,6 @@ storiesOf('PostingSchedule', module)
       profileName="Joel"
       profileType="profile"
       onConfirmClearClick={action('on-confirm-clear-click')}
-      onCancelClearClick={action('on-cancel-clear-click')}
       profileService="twitter"
     />
   ))
@@ -122,7 +120,6 @@ storiesOf('PostingSchedule', module)
       profileName="Joel"
       profileType="profile"
       onConfirmClearClick={action('on-confirm-clear-click')}
-      onCancelClearClick={action('on-cancel-clear-click')}
       profileService="twitter"
       avatar={avatarUrl}
     />
@@ -153,7 +150,6 @@ storiesOf('PostingSchedule', module)
       profileName="Joel"
       profileType="profile"
       onConfirmClearClick={action('on-confirm-clear-click')}
-      onCancelClearClick={action('on-cancel-clear-click')}
       profileService="twitter"
     />
   ));

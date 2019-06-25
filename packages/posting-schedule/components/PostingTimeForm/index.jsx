@@ -4,11 +4,14 @@ import moment from 'moment-timezone';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import {
-  Button,
   InputTime,
   InputWeekday,
-  Text,
 } from '@bufferapp/components';
+
+import {
+  Button,
+  Text,
+} from '@bufferapp/ui';
 
 const editScheduleStyle = {
   display: 'flex',
@@ -58,11 +61,7 @@ const PostingTimeForm = ({
   <form>
     <div style={editScheduleStyle}>
       <div style={textWrapperStyle}>
-        <Text
-          size={'small'}
-          color={'black'}
-          weight={'thin'}
-        >
+        <Text type="label">
           Add a new posting time
         </Text>
       </div>
@@ -75,11 +74,7 @@ const PostingTimeForm = ({
               fontSize={'small'}
             />
           </div>
-          <Text
-            size={'small'}
-            color={'black'}
-            weight={'thin'}
-          >
+          <Text type="label">
             Choose times
           </Text>
           <div style={inputTimeWrapper}>
@@ -92,12 +87,11 @@ const PostingTimeForm = ({
           </div>
           <div style={addPostingTimeStyle}>
             <Button
-              onClick={handleSubmit}
+              type="primary"
+              label="Add Posting Time"
               disabled={submitting}
-              primary
-            >
-              Add Posting Time
-            </Button>
+              onClick={handleSubmit}
+            />
           </div>
         </div>
       </div>

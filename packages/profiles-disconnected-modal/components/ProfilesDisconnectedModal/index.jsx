@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Popover, Card, Text, Button } from '@bufferapp/components';
+import { Popover, Card } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
 import Avatar from '@bufferapp/ui/Avatar';
 
 const ProfilesDisconnectedModal = ({
@@ -13,16 +14,12 @@ const ProfilesDisconnectedModal = ({
   <div style={{ position: 'fixed', zIndex: '3000' }}>
     <Popover onOverlayClick={hideModal}>
       <Card>
-        <div style={{ maxWidth: '580px', margin: '0 16px' }}>
-          <Text size="large" weight="medium" color="black">
+        <div style={{ maxWidth: '470px', margin: '0 16px' }}>
+          <Text type="h3">
             {translations.headline}
           </Text>
-          <div style={{ margin: '16px 0 16px' }}>
-            <Text>{translations.body1}</Text>
-          </div>
-          <div style={{ margin: '16px 0 16px' }}>
-            <Text>{translations.body2}</Text>
-          </div>
+          <Text type="p">{translations.body1}</Text>
+          <Text type="p">{translations.body2}</Text>
           {disconnectedProfiles.map(p => (
             <div
               key={p.id}
@@ -51,10 +48,10 @@ const ProfilesDisconnectedModal = ({
               <Button
                 disabled={p.reconnecting}
                 onClick={() => reconnectProfile(p.id, p.service)}
-                small
-              >
-                {p.reconnecting ? translations.reconnecting : translations.cta}
-              </Button>
+                size="small"
+                type="primary"
+                label={p.reconnecting ? translations.reconnecting : translations.cta}
+              />
             </div>
           ))}
         </div>

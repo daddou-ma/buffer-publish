@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import {
   Popover,
   Card,
-  Text,
-  Button,
 } from '@bufferapp/components';
+
+import { Text, Button } from '@bufferapp/ui';
 
 const WelcomeModal = ({
   translations,
@@ -14,10 +14,16 @@ const WelcomeModal = ({
 }) => (<div style={{ position: 'fixed', zIndex: '3000' }}>
   <Popover>
     <Card>
-      <div style={{ maxWidth: '380px', textAlign: 'center', margin: '10px 40px' }}>
-        <Text size="large" weight="medium" color="black">✨ {translations.headline} ✨</Text>
-        <div style={{ margin: '16px 0 24px' }}><Text>{translations.body2}</Text></div>
-        <Button onClick={hideModal} large>{translations.cta}</Button>
+      <div style={{ maxWidth: '380px', display: 'flex', flexDirection: 'column' }}>
+        <Text type="h3">✨ {translations.headline} ✨</Text>
+        <Text type="p">{translations.body2}</Text>
+        <div style={{ alignSelf: 'flex-end' }}>
+          <Button
+            type="primary"
+            label={translations.cta}
+            onClick={hideModal}
+          />
+        </div>
       </div>
     </Card>
   </Popover>

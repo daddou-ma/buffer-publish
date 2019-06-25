@@ -42,6 +42,7 @@ import { middleware as thirdpartyMiddleware } from '@bufferapp/publish-thirdpart
 import { middleware as bookmarkletsMiddleware } from '@bufferapp/publish-bookmarklets';
 import { middleware as b4bTrialCompleteModalMiddleware } from '@bufferapp/publish-b4b-trial-complete-modal';
 import { middleware as tabsMiddleware } from '@bufferapp/publish-tabs';
+import { middleware as appShellMiddleware } from '@bufferapp/publish-app-shell';
 import { middleware as igFirstCommentProTrialModalMiddleware } from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 import { middleware as trialMiddleware } from '@bufferapp/publish-trial';
 
@@ -117,6 +118,7 @@ const configureStore = initialstate => {
         thirdpartyMiddleware,
         b4bTrialCompleteModalMiddleware,
         tabsMiddleware,
+        appShellMiddleware,
         igFirstCommentProTrialModalMiddleware,
         trialMiddleware,
         // Analyze

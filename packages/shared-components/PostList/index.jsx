@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {
   List,
   Text,
-  Button,
 } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import TextPost from '../TextPost';
 import ImagePost from '../ImagePost';
@@ -153,11 +153,10 @@ const PostList = ({
           {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder &&
             <div style={reBufferWrapperStyle}>
               <Button
-                secondary
+                type="secondary"
+                label="Share Again"
                 onClick={() => { onShareAgainClick({ post }); }}
-              >
-                Share Again
-              </Button>
+              />
             </div>
           }
           {isPastReminder &&
@@ -165,23 +164,21 @@ const PostList = ({
               {(!features.isFreeUser() || isBusinessAccount) &&
                 <div style={reBufferWrapperStyle}>
                   <Button
-                    fillContainer
-                    secondary
+                    fullWidth
+                    type="secondary"
+                    label="Share Again"
                     onClick={() => { onShareAgainClick({ post }); }}
-                  >
-                    Share Again
-                  </Button>
+                  />
                 </div>
               }
               {isManager &&
                 <div style={reBufferWrapperStyle}>
                   <Button
-                    fillContainer
-                    secondary
+                    fullWidth
+                    type="secondary"
+                    label="Send to Mobile"
                     onClick={() => { onMobileClick({ post }); }}
-                  >
-                    Send to Mobile
-                  </Button>
+                  />
                 </div>
               }
             </div>

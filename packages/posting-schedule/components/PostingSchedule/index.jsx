@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Divider,
-  Text,
-  QuestionIcon,
   IconArrowPopover,
   LoadingAnimation,
   Link,
-  Button,
   Popover,
 } from '@bufferapp/components';
+
+import {
+  Text,
+  Button,
+} from '@bufferapp/ui';
+
+import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 
 import {
   ScheduleTable,
@@ -49,6 +53,7 @@ const postingTimesSection = {
   flexWrap: 'wrap',
   marginTop: '1.5rem',
   marginBottom: '1.5rem',
+  alignItems: 'center',
 };
 
 const postingTimesStyle = {
@@ -67,6 +72,7 @@ const scheduleLoadingContainerStyle = {
 };
 
 const pauseQueueContainerStyle = {
+  fontSize: ' 0.75rem',
   marginBottom: '1.5rem',
   marginTop: '1rem',
   textAlign: 'right',
@@ -75,6 +81,8 @@ const pauseQueueContainerStyle = {
 
 const pauseButtonContainerStyle = {
   margin: '1rem 0 .25rem',
+  display: 'flex',
+  justifyContent: 'flex-end',
 };
 
 const tableStyle = {
@@ -109,7 +117,6 @@ const PostingSchedule = ({
   onClearAllClick,
   profileName,
   onConfirmClearClick,
-  onCancelClearClick,
   closePopover,
   avatar,
   profileService,
@@ -136,7 +143,7 @@ const PostingSchedule = ({
       <div>
         <div style={headerStyle}>
           <SensitiveData>
-            <Text color="black">{postingScheduleHeader}</Text>
+            <Text type="h3">{postingScheduleHeader}</Text>
           </SensitiveData>
         </div>
         <Divider />
@@ -151,43 +158,23 @@ const PostingSchedule = ({
               disabled={!isManager}
             />
           </div>
-          {isManager && paused &&
+          {isManager &&
             <div style={pauseQueueContainerStyle}>
-              <Text size="small">
-                Your queue has been paused&nbsp;
-              </Text>
-              <Text size="small">
+              <Text>
+                {paused
+                ? 'Your queue has been paused! '
+                : 'Stop all posts from being sent on this Social Account? '}
                 <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
-                   Learn more
+                  Learn more
                 </Link>
               </Text>
               <div style={pauseButtonContainerStyle}>
                 <Button
-                  onClick={onUnpauseClick}
-                  small
-                >
-                  Resume Queue
-                </Button>
-              </div>
-            </div>
-          }
-          {isManager && !paused &&
-            <div style={pauseQueueContainerStyle}>
-              <Text size="small">
-                Stop all posts from being sent on this Social Account?&nbsp;
-              </Text>
-              <Text size="small">
-                <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
-                   Learn more
-                </Link>
-              </Text>
-              <div style={pauseButtonContainerStyle}>
-                <Button
-                  onClick={onPauseClick}
-                  small
-                >
-                  Pause Queue
-                </Button>
+                  type="primary"
+                  size="small"
+                  label={paused ? 'Resume Queue' : 'Pause Queue'}
+                  onClick={paused ? onUnpauseClick : onPauseClick}
+                />
               </div>
             </div>
           }
@@ -220,15 +207,11 @@ const PostingSchedule = ({
         <Divider />
         <div style={postingTimesSection}>
           <div style={postingTimesStyle}>
-            <Text
-              color="black"
-              weight="thin"
-              size="small"
-            >
+            <Text type="h3">
               Posting times
               {/* Need to move the tooltip a bit for visual accuracy! */}
-              <div style={{ display: 'inline-block', position: 'relative', top: '4px', left: '5px' }}>
-                <IconArrowPopover icon={<QuestionIcon />} position="below" shadow oneLine={false} width="320px" label="Posting Times">
+              <div style={{ display: 'inline-block', position: 'relative', top: '2px', left: '5px' }}>
+                <IconArrowPopover icon={<InfoIcon />} position="below" shadow oneLine={false} width="320px" label="Posting Times">
                   <div style={{ padding: '.5rem .25rem' }}>
                     {/* eslint-disable max-len */}
                     Your posting schedule tells Buffer when to send out posts in your Queue. <br /><br />
@@ -240,9 +223,11 @@ const PostingSchedule = ({
             </Text>
           </div>
           {!emptySchedule && isManager &&
-            <Button secondary onClick={onClearAllClick}>
-              Clear all Posting Times
-            </Button>}
+            <Button
+              type="secondary"
+              label="Clear all Posting Times"
+              onClick={onClearAllClick}
+            />}
           {showClearAllModal && <Popover
             onOverlayClick={closePopover}
           >
@@ -254,7 +239,7 @@ const PostingSchedule = ({
               avatar={avatar}
               heading={'Are you sure?'}
               body={`Would you like us to remove all your posting times for <span style="font-weight: bold">${profileName}</span>?`}
-              btnText={'I\'m sure, empty it'}
+              btnText={'I\'m Sure, Empty It'}
             />
           </Popover>}
           <div style={tableStyle}>
@@ -326,7 +311,6 @@ PostingSchedule.propTypes = {
   onClearAllClick: PropTypes.func.isRequired,
   showClearAllModal: PropTypes.bool.isRequired,
   profileName: PropTypes.string.isRequired,
-  onCancelClearClick: PropTypes.func.isRequired,
   onConfirmClearClick: PropTypes.func.isRequired,
   closePopover: PropTypes.func,
   avatar: PropTypes.string,
