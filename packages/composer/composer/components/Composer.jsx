@@ -252,25 +252,10 @@ class Composer extends React.Component {
     ComposerActionCreators.toggleAttachment(this.props.draft.id, AttachmentTypes.RETWEET);
   }
 
-  onToggleComment = (e, commentEnabled) => {
+  onToggleComment = (e, commentEnabled, userHasBusinessOrProPlan) => {
     e.preventDefault();
     const { canStartProTrial } = this.props;
-    const showProUpgradeModal = this.props.isFreeUser && !canStartProTrial;
-    if (canStartProTrial) {
-      // display pro trial modal if user can start trial
-      AppActionCreators.triggerInteraction({
-        message: {
-          action: 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL',
-        },
-      });
-    } else if (showProUpgradeModal) {
-      // display upgrade modal if user isn't able to start trial
-      AppActionCreators.triggerInteraction({
-        message: {
-          action: 'SHOW_PRO_UPGRADE_MODAL',
-        },
-      });
-    } else {
+    if (userHasBusinessOrProPlan) {
       // show input if user already has access to first comment
       AppActionCreators.triggerInteraction({
         message: {
@@ -280,9 +265,20 @@ class Composer extends React.Component {
         },
       });
       ComposerActionCreators.updateToggleComment(this.props.draft.id, commentEnabled);
+    } else if (canStartProTrial) {
+      AppActionCreators.triggerInteraction({
+        message: {
+          action: 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL',
+        },
+      });
+    } else {
+      AppActionCreators.triggerInteraction({
+        message: {
+          action: 'SHOW_PRO_UPGRADE_MODAL',
+        },
+      });
     }
   };
-
 
   onMediaAttachmentSwitchClick = () => {
     const replacedAttachment =
@@ -724,15 +720,20 @@ class Composer extends React.Component {
       !isIE() // not compatible with IE for first version
     );
 
+    const shouldDisplayProTag = (
+      !userHasBusinessOrProPlan ||
+      this.props.isOnProTrial
+    );
+
     const shouldDisplayFirstCommentSection = (commentEnabled) => {
-      const freeUserNotEligibleToStartTrial = this.props.isFreeUser && !this.props.canStartProTrial;
       const hasSelectedSomeInstagramDirectProfiles =
         this.props.selectedProfiles.some(profile => profile.instagramDirectEnabled);
       return (
         commentEnabled || (
         hasSelectedSomeInstagramDirectProfiles &&
         this.isInstagram() &&
-        !freeUserNotEligibleToStartTrial && // Add this temporarily until we remove refresh on upgrade
+        (userHasBusinessOrProPlan ||
+          this.props.canStartProTrial) &&
         this.isExpanded() &&
         hasFirstCommentFlip &&
         !appState.isOmniboxEnabled
@@ -1083,7 +1084,7 @@ class Composer extends React.Component {
         {shouldDisplayFirstCommentSection(draft.commentEnabled) &&
         <div>
           <div className={styles.toggleCommentContainer}>
-            { (this.props.isOnProTrial || this.props.isFreeUser) &&
+            {shouldDisplayProTag &&
               <div className={styles.proTagWrapper}>
                 <ProTag />
               </div>
@@ -1096,7 +1097,7 @@ class Composer extends React.Component {
                   offText=""
                   on={draft.commentEnabled}
                   size={'small'}
-                  onClick={(e) => this.onToggleComment(e, !draft.commentEnabled)}
+                  onClick={(e) => this.onToggleComment(e, !draft.commentEnabled, userHasBusinessOrProPlan)}
                 />
               </div>
               <div
