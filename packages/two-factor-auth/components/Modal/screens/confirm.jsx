@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Text, Button, Input } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
+import { Input } from '@bufferapp/components';
 
 class Confirm extends React.Component {
   constructor() {
@@ -32,23 +33,25 @@ class Confirm extends React.Component {
     } = this.props;
     return (
       <Fragment>
-        <div style={{ textAlign: 'center' }}>
-          <Text size="large">Enter confirmation code</Text>
-          <div style={{ margin: '12px 0 8px' }}>
-            <Text size="mini" weight="medium">
-              Awesome! Now we just need to confirm everything.{' '}
-            </Text>
-            {updateMethod === 'app' && <Text size="mini">
+        <Text type="h3">Enter confirmation code</Text>
+        <div style={{ margin: '12px 0 8px' }}>
+          <Text type="p">
+            Awesome! Now we just need to confirm everything.{' '}
+          </Text>
+          {updateMethod === 'app' &&
+            <Text type="p">
               Open your authenticator app and input the generated code.
-            </Text>}
-            {updateMethod === 'sms' && <Text size="mini">
+            </Text>
+          }
+          {updateMethod === 'sms' &&
+            <Text type="p">
               Please input the code that we just texted you.
-            </Text>}
-          </div>
+            </Text>
+          }
         </div>
         <div style={{ padding: '0 0 24px' }} ref={(el) => { this.inputContainer = el; }}>
           <div style={{ paddingBottom: '4px' }}>
-            <Text size="mini" weight="medium">Code</Text>
+            <Text type="label">Code</Text>
           </div>
           <Input
             type="text"
@@ -63,13 +66,18 @@ class Confirm extends React.Component {
             }}
           />
         </div>
-        <div style={{ textAlign: 'center', paddingTop: '8px' }}>
-          <div style={{ display: 'inline', paddingRight: '20px' }}>
-            <Button tertiary onClick={() => transition('BACK')}>Back</Button>
-          </div>
-          <Button onClick={this.handleSubmit} disabled={loading}>
-            {loading ? 'Please wait…' : 'Next'}
-          </Button>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button
+            type="text"
+            label="Back"
+            onClick={() => transition('BACK')}
+          />
+          <Button
+            type="primary"
+            label={loading ? 'Please wait…' : 'Next'}
+            onClick={this.handleSubmit}
+            disabled={loading}
+          />
         </div>
       </Fragment>
     );
