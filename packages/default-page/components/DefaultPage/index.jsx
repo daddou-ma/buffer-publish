@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Button,
-} from '@bufferapp/components';
+} from '@bufferapp/ui';
 import { EmptyState } from '@bufferapp/publish-shared-components';
 
 const pageStyle = {
@@ -17,6 +17,10 @@ const defaultPageStyle = {
   flex: '1',
   marginTop: '10vh',
 };
+const buttonStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+};
 
 const DefaultPage = ({
   onConnectSocialAccountClick,
@@ -30,11 +34,13 @@ const DefaultPage = ({
         heroImgSize={{ width: '560', height: '284' }}
         height="auto"
       />
-      <Button
-        onClick={() => { onConnectSocialAccountClick(); }}
-      >
-        {translations.connectButton}
-      </Button>
+      <div style={buttonStyle}>
+        <Button
+          onClick={() => { onConnectSocialAccountClick(); }}
+          type="primary"
+          label={translations.connectButton}
+        />
+      </div>
     </div>
   </div>
 );

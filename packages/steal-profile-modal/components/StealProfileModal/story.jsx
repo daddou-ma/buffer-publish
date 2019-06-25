@@ -11,5 +11,7 @@ storiesOf('StealProfileModal', module)
     <StealProfileModal
       translations={translations['steal-profile-modal']}
       hideModal={action('hide-modal')}
+      stealProfileUsername={'Joel'}
+      email={'joel@buffer.com'}
     />
   ));
