@@ -110,6 +110,12 @@ class UpdateSaver extends React.Component {
   // Determine if it is displayed as "behind" an active composer
   isDisplayedBehind = () => this.props.appState.expandedComposerId !== null;
 
+  getSaveButton = (saveButtons) => {
+    const [inlineSaveButtonTypes, stackedSaveButtonTypes] =
+      partition(saveButtons, button => InlineSaveButtonTypes.includes(button));
+    return [inlineSaveButtonTypes, stackedSaveButtonTypes];
+  };
+
   render() {
     const {
       appState, userData, metaData, visibleNotifications, timezone, moreThanOneProfileSelected,
@@ -195,8 +201,18 @@ class UpdateSaver extends React.Component {
       saveButtonsCopy.get(buttonType)
     );
 
+    const profilesWithPostingSchedule =
+      () => selectedProfiles.some(profile => profile.profileHasPostingSchedule);
+    // if the user doesn't have any slots available, then they will
+    // only see these two buttons in the composer.
+    const newSaveButtons = ['SHARE_NOW', 'SCHEDULE_POST'];
+    const shouldUpdateButtons = saveButtons &&
+        ((saveButtons[0] !== SaveButtonTypes.ADD_TO_DRAFTS) &&
+         (saveButtons[0] !== SaveButtonTypes.SAVE) &&
+         !profilesWithPostingSchedule());
+
     const [inlineSaveButtonTypes, stackedSaveButtonTypes] =
-      partition(saveButtons, (button) => InlineSaveButtonTypes.includes(button));
+      this.getSaveButton(shouldUpdateButtons ? newSaveButtons : saveButtons);
 
     const displayInlineSaveButtons = inlineSaveButtonTypes.length > 0;
     const displayStackedSaveButtons = stackedSaveButtonTypes.length > 0;
