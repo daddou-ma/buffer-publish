@@ -51,9 +51,8 @@ class UpdateSaver extends React.Component {
     isPinnedToSlot: null,
   };
 
-  static profileHasPostingSchedule(selectedProfiles) {
-    return selectedProfiles && selectedProfiles.length === 1 &&
-      selectedProfiles[0].profileHasPostingSchedule;
+  static checkProfileHasPostingSchedule(selectedProfiles) {
+    return selectedProfiles.some(profile => profile.profileHasPostingSchedule);
   }
 
   state = getUpdateSaverState();
@@ -127,7 +126,7 @@ class UpdateSaver extends React.Component {
       isSavingPossible, isDraftsSavePending, draftSaveQueueingType, isOmniboxEnabled,
     } = appState;
 
-    const profileHasPostingSchedule = UpdateSaver.profileHasPostingSchedule(selectedProfiles);
+    const profileHasPostingSchedule = UpdateSaver.checkProfileHasPostingSchedule(selectedProfiles);
 
     const { isInlineSchedulerDropdownExpanded } = this.state;
 
@@ -201,18 +200,16 @@ class UpdateSaver extends React.Component {
       saveButtonsCopy.get(buttonType)
     );
 
-    const profilesWithPostingSchedule =
-      () => selectedProfiles.some(profile => profile.profileHasPostingSchedule);
     // if the user doesn't have any slots available, then they will
     // only see these two buttons in the composer.
-    const newSaveButtons = ['SHARE_NOW', 'SCHEDULE_POST'];
     const shouldUpdateButtons = saveButtons &&
         ((saveButtons[0] !== SaveButtonTypes.ADD_TO_DRAFTS) &&
          (saveButtons[0] !== SaveButtonTypes.SAVE) &&
-         !profilesWithPostingSchedule());
+         !profileHasPostingSchedule);
+    const buttons = shouldUpdateButtons ? ['SHARE_NOW', 'SCHEDULE_POST'] : saveButtons;
 
     const [inlineSaveButtonTypes, stackedSaveButtonTypes] =
-      this.getSaveButton(shouldUpdateButtons ? newSaveButtons : saveButtons);
+      this.getSaveButton(buttons);
 
     const displayInlineSaveButtons = inlineSaveButtonTypes.length > 0;
     const displayStackedSaveButtons = stackedSaveButtonTypes.length > 0;
@@ -241,13 +238,15 @@ class UpdateSaver extends React.Component {
       humanReadableScheduledAt = scheduledAtMoment.format(humanReadableFormat);
     }
     const isDraft = firstStackedButtonCopy === saveButtonsCopy.get(SaveButtonTypes.ADD_TO_DRAFTS);
+    const isEditPost = buttons && buttons[0] === SaveButtonTypes.SAVE;
+    const shouldDisplayTime = isEditPost && !profileHasPostingSchedule;
 
     return (
       <div className={styles.section}>
         {isOmniboxEnabled &&
           <OmniboxButtons />}
 
-        {!isOmniboxEnabled && (shouldDisplayInlineScheduler || !profileHasPostingSchedule) &&
+        {!isOmniboxEnabled && (shouldDisplayInlineScheduler || shouldDisplayTime) &&
         !isDraft && (
           <div className={styles.inlineScheduler}>
             Post Schedule:
@@ -259,7 +258,7 @@ class UpdateSaver extends React.Component {
               className={styles.inlineDropdownContainer}
             >
               <DropdownTrigger className={styles.tertiaryButton}>
-                {shouldDisplayInlineScheduler ? 'Edit' : 'Add'}
+                {shouldDisplayInlineScheduler ? 'Edit' : 'Set Time'}
               </DropdownTrigger>
               <DropdownContent className={styles.rightAlignedDropdownContent}>
                 <DateTimeSlotPicker
