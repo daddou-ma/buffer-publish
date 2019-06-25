@@ -24,3 +24,20 @@
 .disableResize textarea {
     resize: none;
 }
+
+.button {
+    display: unset;
+    line-height: unset;
+    margin: unset;
+    padding: 0;
+    font-family: unset;
+    font-size: unset;
+    font-weight: unset;
+    color: unset;
+    background-color: unset;
+    background: none;
+    border: none;
+    border-radius: unset;
+    outline: none;
+    transition: unset;
+}

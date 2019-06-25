@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import {
   Text,
   Card,
-  Button,
   Popover,
   Input,
 } from '@bufferapp/components';
+
+import { Button } from '@bufferapp/ui';
 
 import { CloseIcon } from '@bufferapp/components/Icon/Icons';
 import styles from './AppSwitcherModal.css';
@@ -102,15 +103,21 @@ class AppSwitcher extends React.Component {
                     input={{ value: feedbackBody, onChange: this.onFeedbackChange }}
                   />
                 </div>
-                <div style={{ textAlign: 'right' }} >
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
                   <span style={{ margin: '0 5px' }} >
-                    <Button disabled={submittingFeedback} secondary onClick={closeFeedbackModal}>
-                      { translations.cancel }
-                    </Button>
+                    <Button
+                      type="secondary"
+                      label={translations.cancel}
+                      disabled={submittingFeedback}
+                      onClick={closeFeedbackModal}
+                    />
                   </span>
-                  <Button disabled={buttonDisabled} onClick={this.handleSubmit}>
-                    { submittingFeedback ? translations.pleaseWait : translations.continue }
-                  </Button>
+                  <Button
+                    type="primary"
+                    label={submittingFeedback ? translations.pleaseWait : translations.continue}
+                    disabled={buttonDisabled}
+                    onClick={this.handleSubmit}
+                  />
                 </div>
               </form>
             </div>
@@ -138,13 +145,12 @@ class AppSwitcher extends React.Component {
           <Card shadowHeight={1} noPadding>
             <div style={cardInnerStyle}>
               <div style={closeIconContainerStyle}>
-                <Button
-                  borderless
-                  noStyle
+                <button
+                  className={styles.button}
                   onClick={() => { this.setState({ hidden: true }); }}
                 >
                   <CloseIcon />
-                </Button>
+                </button>
               </div>
               <Text size="small">
                 Thanks for using our beta!
@@ -152,11 +158,11 @@ class AppSwitcher extends React.Component {
               </Text>
               <div style={buttonContainerStyle}>
                 <Button
-                  small
+                  type="primary"
+                  size="small"
+                  label="Back to classic Buffer"
                   onClick={() => displayFeedbackModal()}
-                >
-                  Back to classic Buffer
-                </Button>
+                />
               </div>
             </div>
           </Card>
