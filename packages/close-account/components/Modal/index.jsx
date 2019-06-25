@@ -89,9 +89,7 @@ const Modal = ({ handleSubmit, submitting, error, onRequestCloseModal }) => (
                   onRequestCloseModal();
                 }}
                 label="Cancel"
-              >
-                Cancel
-              </Button>
+              />
               <div
                 style={{
                   margin: '0.5rem',
