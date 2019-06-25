@@ -161,7 +161,7 @@ class AppSwitcher extends React.Component {
                   type="primary"
                   fullWidth
                   size="small"
-                  label="Back to classic Buffer"
+                  label="Back to Classic Buffer"
                   onClick={() => displayFeedbackModal()}
                 />
               </div>

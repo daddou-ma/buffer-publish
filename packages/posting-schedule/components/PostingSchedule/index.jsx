@@ -53,6 +53,7 @@ const postingTimesSection = {
   flexWrap: 'wrap',
   marginTop: '1.5rem',
   marginBottom: '1.5rem',
+  alignItems: 'center',
 };
 
 const postingTimesStyle = {
