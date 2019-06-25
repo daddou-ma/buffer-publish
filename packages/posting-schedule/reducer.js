@@ -303,9 +303,6 @@ export const actions = {
     type: actionTypes.CLEAR_ALL_TIMES,
     profileId,
   }),
-  handleCancelClearClick: () => ({
-    type: actionTypes.CLOSE_POPOVER,
-  }),
   handleClosePopover: () => ({
     type: actionTypes.CLOSE_POPOVER,
   }),

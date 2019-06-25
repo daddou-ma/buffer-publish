@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Popover,
-  Text,
-  Button,
-} from '@bufferapp/components';
+import { Popover, Text } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
 
 import styles from './welcomePaidModal.css';
 import DotsNavigation from '../DotsNavigation';
@@ -43,7 +40,11 @@ class WelcomePaidModal extends React.Component {
             <div className={styles.barBottomStyle}>
               <DotsNavigation step={this.state.step} onClickCallback={this.onClickStep} />
               <div className={styles.divButton}>
-                <Button onClick={this.onClickContinue} large>{translations.cta1}</Button>
+                <Button
+                  type="primary"
+                  label={translations.cta1}
+                  onClick={this.onClickContinue}
+                />
               </div>
             </div>
           </div>
@@ -68,7 +69,11 @@ class WelcomePaidModal extends React.Component {
               <div className={styles.barBottomStyle}>
                 <DotsNavigation step={this.state.step} onClickCallback={this.onClickStep} />
                 <div className={styles.divButton}>
-                  <Button onClick={hideModal} large>{translations.cta2}</Button>
+                  <Button
+                    type="primary"
+                    label={translations.cta2}
+                    onClick={hideModal}
+                  />
                 </div>
               </div>
             </div>

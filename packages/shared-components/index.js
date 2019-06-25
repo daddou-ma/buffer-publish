@@ -1,7 +1,5 @@
 export AutoSelectText from './AutoSelectText';
 export BufferLoading from './BufferLoading';
-export DropdownItem from './DropdownItem';
-export DropdownTab from './DropdownTab';
 export EmptyState from './EmptyState';
 export Example from './Example';
 export ImagePost from './ImagePost';

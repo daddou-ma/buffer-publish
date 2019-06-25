@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Button, Popover, Divider } from '@bufferapp/components';
+import { Popover, Divider } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
 import { ConfirmModal } from '@bufferapp/publish-shared-components';
 
 const shuffleQueueWrapperStyle = {
@@ -9,18 +10,10 @@ const shuffleQueueWrapperStyle = {
   padding: '0.5rem 0px',
 };
 
-const headerTextWrapperStyle = {
-  display: 'flex',
-  marginBottom: '0.5rem',
-  marginTop: '0.5rem',
-};
-
 const buttonWrapperStyle = {
-  textAlign: 'right',
-  whiteSpace: 'nowrap',
   marginLeft: '0.5rem',
   minWidth: '175px',
-  alignSelf: 'flex-end',
+  alignSelf: 'center',
   flex: '0.3 1 0%',
 };
 
@@ -56,22 +49,20 @@ const ShuffleQueue = ({
         />
       </Popover>}
       <div style={leftContentStyle}>
-        <div style={headerTextWrapperStyle}>
-          <Text color={'black'}>
-            Shuffle Queue
-          </Text>
-        </div>
-        <Text size="small">
+        <Text type="h3">
+          Shuffle Queue
+        </Text>
+        <Text type="p">
           Your first 200 queued updates will be shuffled into a completely random order.
         </Text>
       </div>
       <div style={buttonWrapperStyle}>
         <Button
-          fillContainer
+          fullWidth
+          type="primary"
+          label="Shuffle Queue"
           onClick={onShuffleQueueClick}
-        >
-          Shuffle Queue
-        </Button>
+        />
       </div>
     </div>
   </div>
