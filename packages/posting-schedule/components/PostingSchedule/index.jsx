@@ -254,7 +254,7 @@ const PostingSchedule = ({
               avatar={avatar}
               heading={'Are you sure?'}
               body={`Would you like us to remove all your posting times for <span style="font-weight: bold">${profileName}</span>?`}
-              btnText={'I\'m sure, empty it'}
+              btnText={'I\'m Sure, Empty It'}
             />
           </Popover>}
           <div style={tableStyle}>
