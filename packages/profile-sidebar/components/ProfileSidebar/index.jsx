@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-  Divider,
-} from '@bufferapp/components';
+import { Divider } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
-import FeatureLoader from '@bufferapp/product-features';
 import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 
@@ -23,11 +19,7 @@ const profileSidebarStyle = {
   background: offWhite,
   borderRight: `${borderWidth} solid ${mystic}`,
   height: '100%',
-};
-
-const productTitleStyle = {
-  marginRight: '0.25rem',
-  letterSpacing: '-0.01rem',
+  justifyContent: 'flex-start',
 };
 
 const profileListStyle = {
@@ -35,30 +27,17 @@ const profileListStyle = {
   overflowY: 'scroll',
 };
 
+const manageSocialAccountsStyle = {
+  marginTop: 'auto',
+  position: 'sticky',
+  bottom: '15px',
+  backgroundColor: '#fcfcfc',
+};
+
 const buttonDividerStyle = {
   margin: '1rem 0',
 
 };
-
-const productTitle = (
-  <div>
-    <span style={productTitleStyle}>
-      <Text color={'curiousBlue'} weight={'bold'} size={'large'}>
-        Publish
-      </Text>
-    </span>
-    <FeatureLoader supportedPlans={'free'}>
-      <Text size={'large'}>Free</Text>
-    </FeatureLoader>
-    <FeatureLoader supportedPlans={'pro'}>
-      <Text size={'large'}>Pro</Text>
-    </FeatureLoader>
-    <FeatureLoader supportedPlans={'business'}>
-      <Text size={'large'}>Business</Text>
-    </FeatureLoader>
-    <Divider marginTop={'1rem'} />
-  </div>
-);
 
 const renderLoadingProfiles = () => (
   <div>
@@ -111,7 +90,7 @@ const ProfileSidebar = ({
         translations={translations}
       />
     </div>
-    <div>
+    <div style={manageSocialAccountsStyle}>
       {!hasInstagram && <ProfileConnectShortcut
         label="Connect Instagram"
         network="instagram"
