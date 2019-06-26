@@ -38,7 +38,6 @@ export const actionTypes = keyWrapper('MODALS', {
   SHOW_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
   HIDE_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
   SAVE_MODAL_TO_SHOW_LATER: 0,
-  SHOW_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -233,11 +232,6 @@ export const actions = {
     params: {
       profileId,
     },
-  }),
-  showModal: ({ id, params }) => ({
-    type: actionTypes.SHOW_MODAL,
-    id,
-    params,
   }),
   showWelcomeB4BTrialModal: () => ({
     type: actionTypes.SHOW_WELCOME_B4B_TRIAL_MODAL,
