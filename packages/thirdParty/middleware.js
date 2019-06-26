@@ -74,7 +74,6 @@ export default ({ dispatch, getState }) => next => (action) => {
           } = action.result;
 
           if (isBusinessUser || plan === 'pro') {
-            console.debug('Dispatched APPCUES_LOADED');
             dispatch({
               type: actionTypes.APPCUES_LOADED,
               loaded: true,
