@@ -239,15 +239,14 @@ class UpdateSaver extends React.Component {
     }
     const isDraft = firstStackedButtonCopy === saveButtonsCopy.get(SaveButtonTypes.ADD_TO_DRAFTS);
     const isEditPost = buttons && buttons[0] === SaveButtonTypes.SAVE;
-    const shouldDisplayTime = isEditPost && !profileHasPostingSchedule;
+    const shouldDisplayTime = isEditPost && !profileHasPostingSchedule && !isDraft;
 
     return (
       <div className={styles.section}>
         {isOmniboxEnabled &&
           <OmniboxButtons />}
 
-        {!isOmniboxEnabled && (shouldDisplayInlineScheduler || shouldDisplayTime) &&
-        !isDraft && (
+        {!isOmniboxEnabled && (shouldDisplayInlineScheduler || shouldDisplayTime) && (
           <div className={styles.inlineScheduler}>
             Post Schedule:
             <span className={styles.humanReadableScheduledAt}> {shouldDisplayInlineScheduler ? humanReadableScheduledAt : 'No Time Set'}</span>
