@@ -6,37 +6,13 @@ import {
   Tab,
   QueueButtonGroup,
   PostEmptySlot,
+  ComposerInput,
 } from '@bufferapp/publish-shared-components';
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 
 const composerStyle = {
   marginBottom: '1.5rem',
   flexGrow: '1',
-};
-
-const composerInputStyle = {
-  alignItems: 'center',
-  backgroundColor: '#ffffff',
-  border: '1px solid #B8B8B8',
-  borderRadius: '4px',
-  boxShadow: '0 1px 4px rgba(0,0,0,.16)',
-  color: '#999999',
-  cursor: 'pointer',
-  display: 'flex',
-  fontFamily: 'Roboto',
-  fontSize: '14px',
-  height: '48px',
-  outline: 'none',
-  paddingLeft: '16px',
-  paddingRight: '16px',
-  width: '100%',
-};
-
-const composerInputIcoCameraStyle = {
-  background: 'url("https://s3.amazonaws.com/buffer-publish/images/ico-camera.svg") no-repeat',
-  width: '16px',
-  height: '16px',
-  marginLeft: 'auto',
 };
 
 const topBarContainerStyle = {
@@ -140,13 +116,10 @@ const DisabledQueue = () => (
       <div style={tabContentStyle}>
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
-            <button
-              style={composerInputStyle}
-              disabled
-            >
-              What would you like to share?
-              <div style={composerInputIcoCameraStyle} />
-            </button>
+            <ComposerInput
+              isDisabled
+              Placeholder={'What would you like to share?'}
+            />
           </div>
         </div>
         <div style={listHeaderStyle}>
@@ -165,8 +138,7 @@ const DisabledQueue = () => (
       </div>
     </div>
   </div>
-  );
-
+);
 
 DisabledQueue.propTypes = {
 };
