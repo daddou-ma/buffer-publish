@@ -51,10 +51,6 @@ class UpdateSaver extends React.Component {
     isPinnedToSlot: null,
   };
 
-  static checkProfileHasPostingSchedule(selectedProfiles) {
-    return selectedProfiles.some(profile => profile.profileHasPostingSchedule);
-  }
-
   state = getUpdateSaverState();
 
   getFormattedWhatPreventsSavingMessages = () => {
@@ -126,7 +122,8 @@ class UpdateSaver extends React.Component {
       isSavingPossible, isDraftsSavePending, draftSaveQueueingType, isOmniboxEnabled,
     } = appState;
 
-    const profileHasPostingSchedule = UpdateSaver.checkProfileHasPostingSchedule(selectedProfiles);
+    const doSelectedProfilesHaveSlots =
+      selectedProfiles.some(profile => profile.profileHasPostingSchedule);
 
     const { isInlineSchedulerDropdownExpanded } = this.state;
 
@@ -205,7 +202,7 @@ class UpdateSaver extends React.Component {
     const shouldUpdateButtons = saveButtons &&
         ((saveButtons[0] !== SaveButtonTypes.ADD_TO_DRAFTS) &&
          (saveButtons[0] !== SaveButtonTypes.SAVE) &&
-         !profileHasPostingSchedule);
+         !doSelectedProfilesHaveSlots);
     const buttons = shouldUpdateButtons ? ['SHARE_NOW', 'SCHEDULE_POST'] : saveButtons;
 
     const [inlineSaveButtonTypes, stackedSaveButtonTypes] =
@@ -239,7 +236,7 @@ class UpdateSaver extends React.Component {
     }
     const isDraft = firstStackedButtonCopy === saveButtonsCopy.get(SaveButtonTypes.ADD_TO_DRAFTS);
     const isEditPost = buttons && buttons[0] === SaveButtonTypes.SAVE;
-    const shouldDisplayTime = isEditPost && !profileHasPostingSchedule && !isDraft;
+    const shouldDisplayTime = isEditPost && !doSelectedProfilesHaveSlots && !isDraft;
 
     return (
       <div className={styles.section}>
@@ -273,7 +270,7 @@ class UpdateSaver extends React.Component {
                   isPinnedToSlot={isPinnedToSlot}
                   metaData={metaData}
                   submitButtonCopy="Done"
-                  profileHasPostingSchedule={profileHasPostingSchedule}
+                  doSelectedProfilesHaveSlots={doSelectedProfilesHaveSlots}
                 />
               </DropdownContent>
             </Dropdown>
