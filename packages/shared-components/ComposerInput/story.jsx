@@ -11,13 +11,13 @@ storiesOf('ComposerInput', module)
   .add('default', () => (
     <ComposerInput
       onPlaceholderClick={action('placeholder-click')}
-      Placeholder={'What would you like to share?'}
+      placeholder={'What would you like to share?'}
     />
   ))
   .add('disabled', () => (
     <ComposerInput
       onPlaceholderClick={action('placeholder-click')}
-      Placeholder={'What would you like to share?'}
+      placeholder={'What would you like to share?'}
       isDisabled
     />
   ));

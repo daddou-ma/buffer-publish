@@ -118,7 +118,7 @@ const DisabledQueue = () => (
           <div style={composerStyle}>
             <ComposerInput
               isDisabled
-              Placeholder={'What would you like to share?'}
+              placeholder={'What would you like to share?'}
             />
           </div>
         </div>

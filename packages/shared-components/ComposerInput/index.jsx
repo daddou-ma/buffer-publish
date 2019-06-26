@@ -28,7 +28,7 @@ const composerInputIcoCameraStyle = {
 
 const ComposerInput = ({
   onPlaceholderClick,
-  Placeholder,
+  placeholder,
   isDisabled,
 }) =>
   <button
@@ -36,7 +36,7 @@ const ComposerInput = ({
     onClick={onPlaceholderClick}
     disabled={isDisabled}
   >
-    {Placeholder}
+    {placeholder}
     <div style={composerInputIcoCameraStyle}>
       <CameraIcon />
     </div>
@@ -45,7 +45,7 @@ const ComposerInput = ({
 
 ComposerInput.propTypes = {
   onPlaceholderClick: PropTypes.func,
-  Placeholder: PropTypes.string,
+  placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
 };
 

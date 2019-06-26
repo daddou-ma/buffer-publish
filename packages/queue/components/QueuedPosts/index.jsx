@@ -105,7 +105,7 @@ const QueuedPosts = ({
             }
             <ComposerInput
               onPlaceholderClick={onComposerPlaceholderClick}
-              Placeholder={'What would you like to share?'}
+              placeholder={'What would you like to share?'}
             />
           </div>
         </div>
