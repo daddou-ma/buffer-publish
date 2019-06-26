@@ -121,6 +121,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showInstagramDirectPostingModal: true,
+        modalToShowLater: null,
       };
     case actionTypes.HIDE_IG_DIRECT_POSTING_MODAL:
       return {
@@ -134,11 +135,6 @@ export default (state = initialState, action) => {
           id: action.modalId,
           params: action.params,
         },
-      };
-    case actionTypes.SHOW_MODAL:
-      return {
-        ...state,
-        modalToShowLater: null,
       };
     case actionTypes.SHOW_WELCOME_B4B_TRIAL_MODAL:
       return {
