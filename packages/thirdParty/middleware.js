@@ -4,7 +4,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
-import { HELPSCOUT_ID } from './constants';
+import { HELPSCOUT_ID, APPCUES_PRO_TRIAL_FLOW_ID } from './constants';
 
 const checkExtensionInstalled = () => {
   /**
@@ -74,6 +74,7 @@ export default ({ dispatch, getState }) => next => (action) => {
           } = action.result;
 
           if (isBusinessUser || plan === 'pro') {
+            console.debug('Dispatched APPCUES_LOADED');
             dispatch({
               type: actionTypes.APPCUES_LOADED,
               loaded: true,
@@ -89,6 +90,29 @@ export default ({ dispatch, getState }) => next => (action) => {
               orgUserCount, // Number of users (including the account owner)
               profileCount, // Number of profiles _owned_ by the user
             });
+
+            // Only dispatch event for a particular Appcues flow
+            const shouldDispatchEvent = event => (event.flowId === APPCUES_PRO_TRIAL_FLOW_ID);
+
+            window.Appcues.on('flow_started', (event) => {
+              if (shouldDispatchEvent(event)) {
+                dispatch({
+                  type: actionTypes.APPCUES_STARTED,
+                });
+              }
+            });
+
+            const dispatchAppcuesFinished = (event) => {
+              if (shouldDispatchEvent(event)) {
+                dispatch({
+                  type: actionTypes.APPCUES_FINISHED,
+                });
+              }
+            };
+
+            window.Appcues.on('flow_completed', dispatchAppcuesFinished);
+            window.Appcues.on('flow_skipped', dispatchAppcuesFinished);
+            window.Appcues.on('flow_aborted', dispatchAppcuesFinished);
           }
         }
       }
