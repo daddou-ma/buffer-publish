@@ -23,20 +23,21 @@ const profileSidebarStyle = {
 };
 
 const profileListStyle = {
-  flex: 1,
   overflowY: 'scroll',
 };
 
 const manageSocialAccountsStyle = {
-  marginTop: 'auto',
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  flex: 1,
   position: 'sticky',
   bottom: '15px',
   backgroundColor: '#fcfcfc',
 };
 
 const buttonDividerStyle = {
-  margin: '1rem 0',
-
+  marginTop: 'auto',
+  marginBottom: '0.5rem',
 };
 
 const renderLoadingProfiles = () => (
@@ -119,7 +120,7 @@ const ProfileSidebar = ({
         goToConnectSocialAccount={goToConnectSocialAccount}
       />}
       <div style={buttonDividerStyle}>
-        <Divider />
+        <Divider marginTop="1rem" />
       </div>
       <Button
         label={translations.connectButton}
