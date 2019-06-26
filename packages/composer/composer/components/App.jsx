@@ -48,6 +48,7 @@ class App extends React.Component {
       isBusinessProfile: PropTypes.bool.isRequired,
       isContributor: PropTypes.bool,
       isManager: PropTypes.bool.isRequired,
+      profileHasPostingSchedule: PropTypes.bool,
       subprofiles: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         profileId: PropTypes.string.isRequired,
@@ -192,6 +193,7 @@ class App extends React.Component {
     profilesData: {
       isContributor: false,
       canPostComment: false,
+      profileHasPostingSchedule: false,
     },
   };
 

@@ -8,6 +8,8 @@ import {
   getQueueItemsForDay,
   getSlotOrPostItem,
   formatPostLists,
+  isScheduleSlotsAvailable,
+  postHasCommentEnabled,
 } from './index';
 
 const profileTimezone = 'America/Vancouver';
@@ -41,6 +43,37 @@ const schedules = [
   {
     days: ['sat'],
     times: ['06:02', '12:35', '20:07'],
+  },
+];
+
+const schedulesNotSet = [
+  {
+    days: ['sun'],
+    times: [],
+  },
+  {
+    days: ['mon'],
+    times: [],
+  },
+  {
+    days: ['tue'],
+    times: [],
+  },
+  {
+    days: ['wed'],
+    times: [],
+  },
+  {
+    days: ['thu'],
+    times: [],
+  },
+  {
+    days: ['fri'],
+    times: [],
+  },
+  {
+    days: ['sat'],
+    times: [],
   },
 ];
 
@@ -530,6 +563,38 @@ describe('queue utils', () => {
       });
       // since all the child methods are tested above let's just expect anything for now
       expect(result).toBeDefined();
+    });
+  });
+  describe('check for post comment enabled', () => {
+    it('should return true if is an instagram post', () => {
+      const post = {
+        id: 'abc',
+        profile_service: 'instagram',
+      };
+      const hasCommentEnabled = postHasCommentEnabled(post);
+      expect(hasCommentEnabled).toBeTruthy();
+    });
+    it('should return true if is not an instagram post', () => {
+      const post = {
+        id: 'abc',
+        profile_service: 'facebook',
+      };
+      const hasCommentEnabled = postHasCommentEnabled(post);
+      expect(hasCommentEnabled).toBeFalsy();
+    });
+  });
+  describe('check for schedules', () => {
+    it('should return true if current profile has schedules', () => {
+      const hasSlotSchedules = isScheduleSlotsAvailable(schedules);
+      expect(hasSlotSchedules).toBeTruthy();
+    });
+    it('should return false if current profile doesn\'t have schedules', () => {
+      const hasSlotSchedules = isScheduleSlotsAvailable(schedulesNotSet);
+      expect(hasSlotSchedules).toBeFalsy();
+    });
+    it('should return false if current profile schedules is empty', () => {
+      const hasSlotSchedules = isScheduleSlotsAvailable([]);
+      expect(hasSlotSchedules).toBeFalsy();
     });
   });
 });

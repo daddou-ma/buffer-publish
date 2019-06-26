@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { Button, Text } from '@bufferapp/components';
+import { Button, Link, Text } from '@bufferapp/components';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
 import {
   transitionAnimationTime,
   transitionAnimationType,
 } from '@bufferapp/components/style/animation';
+import { noScheduledDate } from '../../util';
 
 import {
   TextPost,
@@ -189,6 +190,24 @@ const renderPost = ({
 
 const calendarBtns = ['Day', 'Week', 'Month'];
 
+const getText = (text) => {
+  if (text === noScheduledDate) {
+    return (
+      <div>
+        <span style={{ marginRight: '8px' }}>
+          {text}
+        </span>
+        <Link href="settings/posting-schedule" unstyled newTab>
+          <span style={{ fontSize: '14px', fontWeight: 'normal' }}>
+            (Keen to add some?)
+          </span>
+        </Link>
+      </div>
+    );
+  }
+  return text;
+};
+
 const renderHeader = (
   { text, dayOfWeek, date, id },
   features,
@@ -203,7 +222,7 @@ const renderHeader = (
           <span style={headerTextDayOfWeekStyle}>{dayOfWeek}</span>
           <span style={headerTextDateStyle}>{date}</span>
         </React.Fragment>)
-        : <span style={headerTextDayOfWeekStyle}>{text}</span>
+        : <span style={headerTextDayOfWeekStyle}>{getText(text)}</span>
       }
     </div>
     {showCalendarBtnGroup && (!features.isFreeUser() || isBusinessAccount) &&

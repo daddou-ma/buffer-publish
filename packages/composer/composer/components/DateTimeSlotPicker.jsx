@@ -62,6 +62,7 @@ class DateTimeSlotPicker extends React.Component {
     shouldUse24hTime: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
     isSlotPickingAvailable: PropTypes.bool,
+    doSelectedProfilesHaveSlots: PropTypes.bool,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
     timezone: PropTypes.string,
@@ -82,6 +83,7 @@ class DateTimeSlotPicker extends React.Component {
   static defaultProps = {
     shouldUse24hTime: false,
     isSlotPickingAvailable: false,
+    doSelectedProfilesHaveSlots: false,
     onClick: () => {},
     onChange: () => {},
     timezone: 'Europe/Paris',
@@ -165,7 +167,12 @@ class DateTimeSlotPicker extends React.Component {
     this.props.onChange(this.state.selectedDateTime, isPinnedToSlot);
   };
 
-  onSubmit = () => this.props.onSubmit(this.state.selectedDateTime.unix());
+  onSubmit = () => {
+    if (!this.props.initialDateTime) {
+      this.props.onChange(this.state.selectedDateTime, false);
+    }
+    this.props.onSubmit(this.state.selectedDateTime.unix());
+  };
 
   componentWillReceiveProps(nextProps) {
     const { today, selectedDateTime, shouldDisplaySlotPicker } = this.state;
@@ -216,7 +223,7 @@ class DateTimeSlotPicker extends React.Component {
     const { today, selectedDateTime, shouldDisplaySlotPicker, emptyByDefault } = this.state;
     const {
       metaData, timezone, shouldUse24hTime, submitButtonCopy, isSlotPickingAvailable,
-      availableSchedulesSlotsForDay,
+      availableSchedulesSlotsForDay, doSelectedProfilesHaveSlots,
     } = this.props;
 
     const hasAvailableSchedulesSlotsInfoForDay =
@@ -254,7 +261,7 @@ class DateTimeSlotPicker extends React.Component {
             className={styles.timePicker}
           />}
 
-        {shouldDisplayTimePicker && isSlotPickingAvailable &&
+        {shouldDisplayTimePicker && isSlotPickingAvailable && doSelectedProfilesHaveSlots &&
           <Button
             className={styles.pickerSwitchButton}
             onClick={this.onSwitchToSlotPickerClick}

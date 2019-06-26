@@ -84,6 +84,13 @@ storiesOf('QueuedPosts', module)
       onSwapPosts={action('onSwapPosts')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
+      onCalendarClick={action('onCalendarClick')}
+      onComposerInteraction={action('onComposerInteraction')}
+      onEmptySlotClick={action('onEmptySlotClick')}
+      onImageClick={action('onImageClick')}
+      onImageClickNext={action('onImageClickNext')}
+      onImageClickPrev={action('onImageClickPrev')}
+      onImageClose={action('onImageClose')}
     />
   ))
   .add('loading', () => (
@@ -106,6 +113,13 @@ storiesOf('QueuedPosts', module)
       onSwapPosts={action('onSwapPosts')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
+      onCalendarClick={action('onCalendarClick')}
+      onComposerInteraction={action('onComposerInteraction')}
+      onEmptySlotClick={action('onEmptySlotClick')}
+      onImageClick={action('onImageClick')}
+      onImageClickNext={action('onImageClickNext')}
+      onImageClickPrev={action('onImageClickPrev')}
+      onImageClose={action('onImageClose')}
     />
   ))
   .add('paused if Manager', () => (
@@ -129,6 +143,13 @@ storiesOf('QueuedPosts', module)
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
+      onCalendarClick={action('onCalendarClick')}
+      onComposerInteraction={action('onComposerInteraction')}
+      onEmptySlotClick={action('onEmptySlotClick')}
+      onImageClick={action('onImageClick')}
+      onImageClickNext={action('onImageClickNext')}
+      onImageClickPrev={action('onImageClickPrev')}
+      onImageClose={action('onImageClose')}
     />
   ))
   .add('paused if Contributor', () => (
@@ -151,6 +172,13 @@ storiesOf('QueuedPosts', module)
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
+      onCalendarClick={action('onCalendarClick')}
+      onComposerInteraction={action('onComposerInteraction')}
+      onEmptySlotClick={action('onEmptySlotClick')}
+      onImageClick={action('onImageClick')}
+      onImageClickNext={action('onImageClickNext')}
+      onImageClickPrev={action('onImageClickPrev')}
+      onImageClose={action('onImageClose')}
     />
   ))
   .add('locked profile', () => (
@@ -171,9 +199,16 @@ storiesOf('QueuedPosts', module)
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
-        onSwapPosts={action('onSwapPosts')}
+      onSwapPosts={action('onSwapPosts')}
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
+      onCalendarClick={action('onCalendarClick')}
+      onComposerInteraction={action('onComposerInteraction')}
+      onEmptySlotClick={action('onEmptySlotClick')}
+      onImageClick={action('onImageClick')}
+      onImageClickNext={action('onImageClickNext')}
+      onImageClickPrev={action('onImageClickPrev')}
+      onImageClose={action('onImageClose')}
     />
   ));

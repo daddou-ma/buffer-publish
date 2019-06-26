@@ -105,16 +105,25 @@ class UpdateSaver extends React.Component {
   // Determine if it is displayed as "behind" an active composer
   isDisplayedBehind = () => this.props.appState.expandedComposerId !== null;
 
+  getSaveButton = (saveButtons) => {
+    const [inlineSaveButtonTypes, stackedSaveButtonTypes] =
+      partition(saveButtons, button => InlineSaveButtonTypes.includes(button));
+    return [inlineSaveButtonTypes, stackedSaveButtonTypes];
+  };
+
   render() {
     const {
       appState, userData, metaData, visibleNotifications, timezone, moreThanOneProfileSelected,
       areAllDraftsSaved, saveButtons, scheduledAt, isSlotPickingAvailable,
-      availableSchedulesSlotsForDay, isPinnedToSlot,
+      availableSchedulesSlotsForDay, isPinnedToSlot, selectedProfiles,
     } = this.props;
 
     const {
       isSavingPossible, isDraftsSavePending, draftSaveQueueingType, isOmniboxEnabled,
     } = appState;
+
+    const doSelectedProfilesHaveSlots =
+      selectedProfiles.some(profile => profile.profileHasPostingSchedule);
 
     const { isInlineSchedulerDropdownExpanded } = this.state;
 
@@ -188,8 +197,16 @@ class UpdateSaver extends React.Component {
       saveButtonsCopy.get(buttonType)
     );
 
+    // if the user doesn't have any slots available, then they will
+    // only see these two buttons in the composer.
+    const shouldUpdateButtons = saveButtons &&
+        ((saveButtons[0] !== SaveButtonTypes.ADD_TO_DRAFTS) &&
+         (saveButtons[0] !== SaveButtonTypes.SAVE) &&
+         !doSelectedProfilesHaveSlots);
+    const buttons = shouldUpdateButtons ? ['SHARE_NOW', 'SCHEDULE_POST'] : saveButtons;
+
     const [inlineSaveButtonTypes, stackedSaveButtonTypes] =
-      partition(saveButtons, (button) => InlineSaveButtonTypes.includes(button));
+      this.getSaveButton(buttons);
 
     const displayInlineSaveButtons = inlineSaveButtonTypes.length > 0;
     const displayStackedSaveButtons = stackedSaveButtonTypes.length > 0;
@@ -217,23 +234,28 @@ class UpdateSaver extends React.Component {
       const humanReadableFormat = userData.uses24hTime ? 'MMM D, H:mm' : 'MMM D, h:mm A';
       humanReadableScheduledAt = scheduledAtMoment.format(humanReadableFormat);
     }
+    const isDraft = firstStackedButtonCopy === saveButtonsCopy.get(SaveButtonTypes.ADD_TO_DRAFTS);
+    const isEditPost = buttons && buttons[0] === SaveButtonTypes.SAVE;
+    const shouldDisplayTime = isEditPost && !doSelectedProfilesHaveSlots && !isDraft;
 
     return (
       <div className={styles.section}>
         {isOmniboxEnabled &&
           <OmniboxButtons />}
 
-        {!isOmniboxEnabled && shouldDisplayInlineScheduler && (
+        {!isOmniboxEnabled && (shouldDisplayInlineScheduler || shouldDisplayTime) && (
           <div className={styles.inlineScheduler}>
             Post Schedule:
-            <span className={styles.humanReadableScheduledAt}> {humanReadableScheduledAt}</span>
+            <span className={styles.humanReadableScheduledAt}> {shouldDisplayInlineScheduler ? humanReadableScheduledAt : 'No Time Set'}</span>
             <Dropdown
               isDropdownExpanded={isInlineSchedulerDropdownExpanded}
               onHide={this.collapseInlineSchedulerDropdown}
               onShow={this.expandInlineSchedulerDropdown}
               className={styles.inlineDropdownContainer}
             >
-              <DropdownTrigger className={styles.tertiaryButton}>Edit</DropdownTrigger>
+              <DropdownTrigger className={styles.tertiaryButton}>
+                {shouldDisplayInlineScheduler ? 'Edit' : 'Set Time'}
+              </DropdownTrigger>
               <DropdownContent className={styles.rightAlignedDropdownContent}>
                 <DateTimeSlotPicker
                   onClick={this.onDateTimeSlotPickerClick}
@@ -248,6 +270,7 @@ class UpdateSaver extends React.Component {
                   isPinnedToSlot={isPinnedToSlot}
                   metaData={metaData}
                   submitButtonCopy="Done"
+                  doSelectedProfilesHaveSlots={doSelectedProfilesHaveSlots}
                 />
               </DropdownContent>
             </Dropdown>
@@ -266,6 +289,7 @@ class UpdateSaver extends React.Component {
                 weekStartsMonday={weekStartsMonday}
                 isInlineSchedulerDisplayed={shouldDisplayInlineScheduler}
                 isSecondaryItem={i < inlineSaveButtonTypes.length - 1}
+                selectedProfiles={selectedProfiles}
               >
                 {(
                   draftSaveQueueingType === saveButtonType ?

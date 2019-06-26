@@ -127,6 +127,7 @@ const DataImportUtils = {
         instagramDirectEnabled: importedProfile.should_post_direct,
         subprofiles,
         canPostComment: importedProfile.canPostComment,
+        profileHasPostingSchedule: importedProfile.schedules.some(item => item.times.length > 0),
       });
     });
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment-timezone';
 
+export const noScheduledDate = 'No scheduled days or times';
+
 /**
  * Return an object containing details about daily slots based on the
  * profile's schedules.
@@ -262,6 +264,9 @@ export const getDaysToAddForPastPosts = ({ posts, profileTimezone, now }) => {
   });
 };
 
+export const postHasCommentEnabled = post =>
+  servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
+
 /**
  * This method formats a list of posts into a list that contains day headings,
  * posts and optionally queue slots (if supported by the plan.)
@@ -311,27 +316,29 @@ export const formatPostLists = ({
     // Now let's add the posts for the Daily View weeks
     days.forEach((day) => {
       const dayHeader = getDayHeaderItem(day);
-      const daySlots = getSlotsWithTimestampsForDay({
-        profileTimezone,
-        hasTwentyFourHourTimeFormat,
-        dailySlots,
-        day,
-      });
-      const postsForDay = postsByDay[day.text] || [];
-      const queueItemsForDay = getQueueItemsForDay({
-        daySlots,
-        posts: postsForDay,
-        isManager,
-        profileService,
-      });
+      if (day.dayIndex !== -1) {
+        const daySlots = getSlotsWithTimestampsForDay({
+          profileTimezone,
+          hasTwentyFourHourTimeFormat,
+          dailySlots,
+          day,
+        });
+        const postsForDay = postsByDay[day.text] || [];
+        const queueItemsForDay = getQueueItemsForDay({
+          daySlots,
+          posts: postsForDay,
+          isManager,
+          profileService,
+        });
 
-      // Check for length here so we don't add a dayHeader when there are no slots or posts
-      if (queueItemsForDay.length) {
-        finalList = [
-          ...finalList,
-          dayHeader,
-          ...queueItemsForDay,
-        ];
+        // Check for length here so we don't add a dayHeader when there are no slots or posts
+        if (queueItemsForDay.length) {
+          finalList = [
+            ...finalList,
+            dayHeader,
+            ...queueItemsForDay,
+          ];
+        }
       }
     });
     /**
@@ -341,12 +348,12 @@ export const formatPostLists = ({
      *   a) The post was going to be sent, but the profile was paused (so we set the time to `0`) OR
      *   b) The user has no times set in their posting schedule.
     */
-    if (postsByDay['No scheduled days or times']) {
+    if (postsByDay[noScheduledDate]) {
       const isPaused = schedules.some(item => item.times.length > 0);
-      const headerText = isPaused ? 'Paused posts' : 'No scheduled days or times';
+      const headerText = isPaused ? 'Paused posts' : noScheduledDate;
 
       finalList = [
-        ...postsByDay['No scheduled days or times']
+        ...postsByDay[noScheduledDate]
           .map(post => getPostItem({ isManager, post })),
         ...finalList,
       ];
@@ -367,7 +374,7 @@ export const formatPostLists = ({
    */
   let lastHeader = null;
   return orderedPosts.reduce((finalList, post, index) => {
-    const hasCommentEnabled = servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
+    const hasCommentEnabled = postHasCommentEnabled(post);
     if (lastHeader !== post.day) {
       lastHeader = post.day;
       finalList.push({
@@ -397,3 +404,5 @@ export const openCalendarWindow = (profileId, weekOrMonth) => {
     '_blank',
   );
 };
+
+export const isScheduleSlotsAvailable = schedules => schedules.some(item => item.times.length > 0);

@@ -230,6 +230,7 @@ QueuedPosts.propTypes = {
   isLockedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   onCalendarClick: PropTypes.func.isRequired,
+  isBusinessAccount: PropTypes.bool,
 };
 
 QueuedPosts.defaultProps = {
@@ -251,6 +252,7 @@ QueuedPosts.defaultProps = {
   hasFirstCommentFlip: false,
   draggingEnabled: false,
   isManager: false,
+  isBusinessAccount: false,
 };
 
 export default QueuedPosts;

@@ -203,6 +203,7 @@ const AppStateless = ({
         areAllDraftsSaved={areAllDraftsSaved}
         whatPreventsSavingMessages={appState.whatPreventsSaving}
         isOmniboxEnabled={isOmniboxEnabled({ appState })}
+        selectedProfiles={selectedProfiles({ profiles })}
       />
       <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
     </div>

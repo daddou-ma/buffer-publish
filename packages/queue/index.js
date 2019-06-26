@@ -6,7 +6,7 @@ import { actions as trialActions } from '@bufferapp/publish-trial';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import { actions } from './reducer';
-import { formatPostLists, openCalendarWindow } from './util/';
+import { formatPostLists, openCalendarWindow, isScheduleSlotsAvailable } from './util/';
 import QueuedPosts from './components/QueuedPosts';
 
 export default connect(
@@ -39,6 +39,7 @@ export default connect(
           hasTwentyFourHourTimeFormat: state.appSidebar.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
         }),
+        scheduleSlotsIsAvailable: isScheduleSlotsAvailable(profileData.schedules),
         draggingEnabled: !profileData.paused,
         showEmptyQueueMessage: false, // @todo: Show this if they have no slots?
         enabledApplicationModes: state.queue.enabledApplicationModes,

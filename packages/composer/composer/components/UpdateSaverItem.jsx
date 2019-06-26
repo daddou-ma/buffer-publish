@@ -76,7 +76,7 @@ class UpdateSaverItem extends React.Component {
   render() {
     const {
       type, children, userData, disabled, timezone, isMenuItem,
-      isSecondaryItem, weekStartsMonday, isInlineSchedulerDisplayed,
+      isSecondaryItem, weekStartsMonday, isInlineSchedulerDisplayed, selectedProfiles,
     } = this.props;
 
     const buttonClassName =
@@ -107,6 +107,7 @@ class UpdateSaverItem extends React.Component {
                 shouldUse24hTime={userData.uses24hTime}
                 timezone={timezone}
                 weekStartsMonday={weekStartsMonday}
+                selectedProfiles={selectedProfiles}
               />
             </DropdownContent>
           </Dropdown>
