@@ -71,6 +71,10 @@ const getHoverMsg = (service) => {
         <span> {service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post'} </span>
       </div>
     );
+  } else if (service === 'noProfile') {
+    return (
+      <span>Connect a social account to schedule posts to your queue</span>
+    );
   }
 };
 
