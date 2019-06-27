@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment-timezone';
+import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
 import {
   Tabs,
@@ -8,7 +9,8 @@ import {
   PostEmptySlot,
   ComposerInput,
 } from '@bufferapp/publish-shared-components';
-import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
+import ProfileSidebar from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 const composerStyle = {
   marginBottom: '1.5rem',
@@ -81,21 +83,38 @@ const calendarBtns = ['Day', 'Week', 'Month'];
 
 const getCurrentDay = () => moment().format('MMMM D');
 
-const DisabledQueue = () => (
+const onManageSocialAccountClick = () => {
+  window.location = getURL.getManageSocialAccountURL();
+};
+
+const goToConnectSocialAccount = () => {
+  window.location = getURL.getConnectSocialAccountURL();
+};
+
+const DisabledQueue = ({ translations }) => (
   <div style={profilePageStyle}>
     <div style={profileSideBarStyle}>
-      <ProfileSidebar profileId="5b3a241e1264ba18008b456a" />
+      <ProfileSidebar
+        translations={translations}
+        goToConnectSocialAccount={goToConnectSocialAccount}
+        onManageSocialAccountClick={onManageSocialAccountClick}
+        loading={false}
+        hasInstagram={false}
+        hasFacebook={false}
+        hasTwitter={false}
+      />
     </div>
     <div style={contentStyle}>
       <div id="tabs" style={tabsStyle}>
         <Tabs
           selectedTabId={'disabledTab'}
+          onTabClick={() => {}}
         >
-          <Tab tabId={'disabledTab'}>Queue</Tab>
-          <Tab tabId={'disabledTab2'}>Analytics</Tab>
-          <Tab tabId={'disabledTab3'}>Awaiting Approval</Tab>
-          <Tab tabId={'disabledTab4'}>Drafts</Tab>
-          <Tab tabId={'disabledTab5'}>Settings</Tab>
+          <Tab tabId={'disabledTab'}>{translations.queueTab}</Tab>
+          <Tab tabId={'disabledTab2'}>{translations.analyticsTab}</Tab>
+          <Tab tabId={'disabledTab3'}>{translations.awaitingTab}</Tab>
+          <Tab tabId={'disabledTab4'}>{translations.draftsTab}</Tab>
+          <Tab tabId={'disabledTab5'}>{translations.settingsTab}</Tab>
         </Tabs>
       </div>
       <div style={tabContentStyle}>
@@ -103,13 +122,13 @@ const DisabledQueue = () => (
           <div style={composerStyle}>
             <ComposerInput
               isDisabled
-              placeholder={'What would you like to share?'}
+              placeholder={translations.composerInput}
             />
           </div>
         </div>
         <div style={listHeaderStyle}>
           <div style={headerTextStyle}>
-            <Text type="h3">Today</Text>
+            <Text type="h3">{translations.currentDay}</Text>
             <span style={headerTextDateStyle}>
               <Text>{getCurrentDay()}</Text>
             </span>
@@ -117,6 +136,7 @@ const DisabledQueue = () => (
           <div style={{ marginLeft: 'auto' }}>
             <QueueButtonGroup
               buttons={calendarBtns}
+              onClick={() => {}}
             />
           </div>
         </div>
@@ -134,5 +154,18 @@ const DisabledQueue = () => (
     </div>
   </div>
 );
+
+DisabledQueue.propTypes = {
+  translations: PropTypes.shape({
+    connectButton: PropTypes.string,
+    queueTab: PropTypes.string,
+    analyticsTab: PropTypes.string,
+    awaitingTab: PropTypes.string,
+    draftsTab: PropTypes.string,
+    settingsTab: PropTypes.string,
+    composerInput: PropTypes.string,
+    currentDay: PropTypes.string,
+  }).isRequired,
+};
 
 export default DisabledQueue;
