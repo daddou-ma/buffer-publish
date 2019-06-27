@@ -9,6 +9,13 @@ import {
   PostEmptySlot,
   ComposerInput,
 } from '@bufferapp/publish-shared-components';
+/*
+  Using the component directly instead of the Higher-order
+  component, to avoid having to deal with the state and api
+  requests to the profiles endpoint, since in this case we
+  don't have profiles and the ProfileSidebar is not set to
+  accomodate this edge case.
+*/
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 
