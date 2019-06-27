@@ -70,6 +70,9 @@ export default ({ dispatch, getState }) => next => (action) => {
         path,
       });
       const profiles = getState().profileSidebar.profiles;
+      const { productFeatures: { planName } } = getState();
+      const onTrial = getState().appSidebar.user.trial.onTrial;
+      const isOnBusinessTrial = planName === 'business' && onTrial;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
 
@@ -99,9 +102,11 @@ export default ({ dispatch, getState }) => next => (action) => {
           profileId: selectedProfile.id,
           tabId: 'queue',
         })));
+      } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial) {
+        dispatch(push('/new-connection-business-trialists'));
       } else if (!isPreferencePage && profiles.length === 0) {
         dispatch(push('/new-connection'));
-      }
+      } 
       break;
     }
 
