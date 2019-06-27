@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import moment from 'moment-timezone';
 import { Text } from '@bufferapp/ui';
 import {
   Tabs,
@@ -79,6 +79,8 @@ const headerTextStyle = {
 
 const calendarBtns = ['Day', 'Week', 'Month'];
 
+const getCurrentDay = () => moment().format('MMMM D');
+
 const DisabledQueue = () => (
   <div style={profilePageStyle}>
     <div style={profileSideBarStyle}>
@@ -109,7 +111,7 @@ const DisabledQueue = () => (
           <div style={headerTextStyle}>
             <Text type="h3">Today</Text>
             <span style={headerTextDateStyle}>
-              <Text>7 March</Text>
+              <Text>{getCurrentDay()}</Text>
             </span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
@@ -132,12 +134,5 @@ const DisabledQueue = () => (
     </div>
   </div>
 );
-
-DisabledQueue.propTypes = {
-};
-
-DisabledQueue.defaultProps = {
-
-};
 
 export default DisabledQueue;
