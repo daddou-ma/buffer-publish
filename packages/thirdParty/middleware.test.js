@@ -12,6 +12,7 @@ global.FS = {
 global.Appcues = {
   identify: jest.fn(),
   track: jest.fn(),
+  on: jest.fn(),
 };
 
 global.Beacon = jest.fn();
