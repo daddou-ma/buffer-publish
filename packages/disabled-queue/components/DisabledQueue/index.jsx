@@ -58,9 +58,7 @@ const tabContentStyle = {
 };
 
 const listHeaderStyle = {
-  marginBottom: '1rem',
-  marginTop: '1rem',
-  marginLeft: '0.5rem',
+  margin: '1rem 0 1rem 0.5rem',
   display: 'flex',
   alignItems: 'center',
 };
@@ -80,10 +78,6 @@ const headerTextStyle = {
 };
 
 const calendarBtns = ['Day', 'Week', 'Month'];
-const twitterPost = {
-  time: '08:33 am',
-  service: 'twitter',
-};
 
 const DisabledQueue = () => (
   <div style={profilePageStyle}>
@@ -124,8 +118,16 @@ const DisabledQueue = () => (
             />
           </div>
         </div>
-        <PostEmptySlot onClick={() => {}} {...twitterPost} />
-        <PostEmptySlot onClick={() => {}} {...twitterPost} />
+        <PostEmptySlot
+          time="08:33 am"
+          service="noProfile"
+          onClick={() => {}}
+        />
+        <PostEmptySlot
+          time="5:33 pm"
+          service="noProfile"
+          onClick={() => {}}
+        />
       </div>
     </div>
   </div>
