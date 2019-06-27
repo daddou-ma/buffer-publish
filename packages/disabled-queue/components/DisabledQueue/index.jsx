@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Text } from '@bufferapp/ui';
 import {
   Tabs,
   Tab,
@@ -65,18 +65,7 @@ const listHeaderStyle = {
   alignItems: 'center',
 };
 
-const headerTextDayOfWeekStyle = {
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  lineHeight: 'normal',
-  fontSize: '18px',
-  color: '#3D3D3D',
-};
-
 const headerTextDateStyle = {
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
   fontWeight: 'normal',
   lineHeight: 'normal',
   fontSize: '14px',
@@ -124,8 +113,10 @@ const DisabledQueue = () => (
         </div>
         <div style={listHeaderStyle}>
           <div style={headerTextStyle}>
-            <span style={headerTextDayOfWeekStyle}>Today</span>
-            <span style={headerTextDateStyle}>7 March</span>
+            <Text type="h3">Today</Text>
+            <span style={headerTextDateStyle}>
+              <Text>7 March</Text>
+            </span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
             <QueueButtonGroup
