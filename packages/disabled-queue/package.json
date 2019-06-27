@@ -1,5 +1,5 @@
 {
-  "name": "@bufferapp/disabled-queue",
+  "name": "@bufferapp/publish-disabled-queue",
   "version": "2.0.0",
   "description": "disabled queue package",
   "main": "index.js",
