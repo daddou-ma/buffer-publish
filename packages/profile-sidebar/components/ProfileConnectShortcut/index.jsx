@@ -60,6 +60,7 @@ const getStyle = hovered => ({
   margin: '8px 0 0 0',
   textDecoration: 'none',
   padding: '14px',
+  flexShrink: 0,
 });
 
 class ProfileConnectShortcut extends React.Component {

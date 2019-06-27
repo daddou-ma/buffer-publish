@@ -28,16 +28,29 @@ const profileListStyle = {
 
 const manageSocialAccountsStyle = {
   display: 'flex',
+  flexGrow: 1,
+  flexShrink: 0,
   flexFlow: 'column nowrap',
-  flex: 1,
   position: 'sticky',
   bottom: '15px',
   backgroundColor: '#fcfcfc',
 };
 
-const buttonDividerStyle = {
+const socialButtonsWrapperStyle = {
+  display: 'flex',
+  flex: 1,
+  flexFlow: 'column nowrap',
   marginTop: 'auto',
+};
+
+const buttonDividerStyle = {
   marginBottom: '0.5rem',
+};
+
+const bottomSectionStyle = {
+  marginTop: 'auto',
+  display: 'flex',
+  flexFlow: 'column nowrap',
 };
 
 const renderLoadingProfiles = () => (
@@ -92,44 +105,48 @@ const ProfileSidebar = ({
       />
     </div>
     <div style={manageSocialAccountsStyle}>
-      {!hasInstagram && <ProfileConnectShortcut
-        label="Connect Instagram"
-        network="instagram"
-        url="https://buffer.com/oauth/instagram"
-        profileLimit={profileLimit}
-        profiles={profiles}
-        showUpgradeModal={showUpgradeModal}
-        goToConnectSocialAccount={goToConnectSocialAccount}
-      />}
-      {!hasFacebook && <ProfileConnectShortcut
-        label="Connect Facebook"
-        network="facebook"
-        url="https://buffer.com/oauth/facebook/choose"
-        profileLimit={profileLimit}
-        profiles={profiles}
-        showUpgradeModal={showUpgradeModal}
-        goToConnectSocialAccount={goToConnectSocialAccount}
-      />}
-      {!hasTwitter && <ProfileConnectShortcut
-        label="Connect Twitter"
-        network="twitter"
-        url="https://buffer.com/oauth/twitter"
-        profileLimit={profileLimit}
-        profiles={profiles}
-        showUpgradeModal={showUpgradeModal}
-        goToConnectSocialAccount={goToConnectSocialAccount}
-      />}
-      <div style={buttonDividerStyle}>
-        <Divider marginTop="1rem" />
+      <div style={socialButtonsWrapperStyle}>
+        {!hasInstagram && <ProfileConnectShortcut
+          label="Connect Instagram"
+          network="instagram"
+          url="https://buffer.com/oauth/instagram"
+          profileLimit={profileLimit}
+          profiles={profiles}
+          showUpgradeModal={showUpgradeModal}
+          goToConnectSocialAccount={goToConnectSocialAccount}
+        />}
+        {!hasFacebook && <ProfileConnectShortcut
+          label="Connect Facebook"
+          network="facebook"
+          url="https://buffer.com/oauth/facebook/choose"
+          profileLimit={profileLimit}
+          profiles={profiles}
+          showUpgradeModal={showUpgradeModal}
+          goToConnectSocialAccount={goToConnectSocialAccount}
+        />}
+        {!hasTwitter && <ProfileConnectShortcut
+          label="Connect Twitter"
+          network="twitter"
+          url="https://buffer.com/oauth/twitter"
+          profileLimit={profileLimit}
+          profiles={profiles}
+          showUpgradeModal={showUpgradeModal}
+          goToConnectSocialAccount={goToConnectSocialAccount}
+        />}
+        <div style={bottomSectionStyle}>
+          <div style={buttonDividerStyle}>
+            <Divider marginTop="1rem" />
+          </div>
+          <Button
+            label={translations.connectButton}
+            type="secondary"
+            fullWidth
+            onClick={() => {
+              onManageSocialAccountClick();
+            }}
+          />
+        </div>
       </div>
-      <Button
-        label={translations.connectButton}
-        type="secondary"
-        fullWidth
-        onClick={() => {
-          onManageSocialAccountClick();
-        }}
-      />
     </div>
   </div>
 );
