@@ -54,7 +54,6 @@ const SentPosts = ({
   editMode,
   isManager,
   isLockedProfile,
-  canStartBusinessTrial,
   isBusinessAccount,
   features,
   hasFirstCommentFlip,
@@ -94,8 +93,8 @@ const SentPosts = ({
 
   const loadMorePosts = () => {
     loadMore({ profileId, page, tabId });
-  }
-  
+  };
+
   const header = isBusinessAccount || !features.isFreeUser() ?
     'Your sent posts' :
     'Your sent posts for the last 30 days';
@@ -173,7 +172,6 @@ SentPosts.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
-  canStartBusinessTrial: PropTypes.bool.isRequired,
   hasFirstCommentFlip: PropTypes.bool,
 };
 
