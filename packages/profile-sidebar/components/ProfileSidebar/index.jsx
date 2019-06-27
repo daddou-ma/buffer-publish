@@ -85,25 +85,27 @@ const ProfileSidebar = ({
 }) => (
   <div style={profileSidebarStyle}>
     {loading && renderLoadingProfiles()}
-    <div style={profileListStyle} data-hide-scrollbar>
-      {profiles.length > 9 &&
-        <ProfileSearch
+    {profiles.length > 0 &&
+      <div style={profileListStyle} data-hide-scrollbar>
+        {profiles.length > 9 &&
+          <ProfileSearch
+            profiles={profiles}
+            onSearchProfileChange={onSearchProfileChange}
+            isSearchPopupVisible={isSearchPopupVisible}
+            handleSubmit={({ selectedProfile }) => onProfileClick(selectedProfile)}
+          />
+        }
+        <ProfileList
+          selectedProfileId={selectedProfileId}
           profiles={profiles}
-          onSearchProfileChange={onSearchProfileChange}
-          isSearchPopupVisible={isSearchPopupVisible}
-          handleSubmit={({ selectedProfile }) => onProfileClick(selectedProfile)}
+          onProfileClick={onProfileClick}
+          onDropProfile={onDropProfile}
+          showProfilesDisconnectedModal={showProfilesDisconnectedModal}
+          profileLimit={profileLimit}
+          translations={translations}
         />
-      }
-      <ProfileList
-        selectedProfileId={selectedProfileId}
-        profiles={profiles}
-        onProfileClick={onProfileClick}
-        onDropProfile={onDropProfile}
-        showProfilesDisconnectedModal={showProfilesDisconnectedModal}
-        profileLimit={profileLimit}
-        translations={translations}
-      />
-    </div>
+      </div>
+    }
     <div style={manageSocialAccountsStyle}>
       <div style={socialButtonsWrapperStyle}>
         {!hasInstagram && <ProfileConnectShortcut
@@ -156,7 +158,7 @@ ProfileSidebar.propTypes = {
   onProfileClick: ProfileList.propTypes.onProfileClick,
   onManageSocialAccountClick: PropTypes.func.isRequired,
   goToConnectSocialAccount: PropTypes.func.isRequired,
-  showUpgradeModal: PropTypes.func.isRequired,
+  showUpgradeModal: PropTypes.func,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
   translations: PropTypes.shape({
@@ -164,7 +166,7 @@ ProfileSidebar.propTypes = {
   }),
   profileLimit: PropTypes.number,
   onDropProfile: PropTypes.func,
-  showProfilesDisconnectedModal: PropTypes.func.isRequired,
+  showProfilesDisconnectedModal: PropTypes.func,
   hasInstagram: PropTypes.bool.isRequired,
   hasFacebook: PropTypes.bool.isRequired,
   hasTwitter: PropTypes.bool.isRequired,

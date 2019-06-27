@@ -45,7 +45,6 @@ export default connect(
         isManager: state.profileSidebar.selectedProfile.isManager,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        canStartBusinessTrial: state.appSidebar.user.canStartBusinessTrial,
         hasFirstCommentFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('first_comment') : false,
       };
     }
@@ -60,9 +59,6 @@ export default connect(
     },
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
-    },
-    onComposerInteraction: (r) => {
-      console.log(r);
     },
     onImageClick: (post) => {
       dispatch(actions.handleImageClick({

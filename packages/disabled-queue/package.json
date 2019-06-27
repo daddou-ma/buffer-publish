@@ -1,0 +1,21 @@
+{
+  "name": "@bufferapp/publish-disabled-queue",
+  "version": "2.0.0",
+  "description": "disabled queue package",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "ana@buffer.com",
+  "dependencies": {
+    "@bufferapp/publish-profile-sidebar": "2.0.0",
+    "@bufferapp/publish-shared-components": "2.0.0",
+    "@bufferapp/publish-store": "2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "3.19.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
