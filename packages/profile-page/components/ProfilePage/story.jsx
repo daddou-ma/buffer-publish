@@ -115,7 +115,7 @@ storiesOf('ProfilePage', module)
       history={stubbedHistory}
     />
   ))
-  .add('should render two profiles', () => (
+  .add('should render profiles in sidebar', () => (
     <Provider store={storeProfiles}>
       <ProfilePage
         selectedProfile="1234"
