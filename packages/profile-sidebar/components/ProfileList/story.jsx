@@ -5,7 +5,7 @@ import { checkA11y } from 'storybook-addon-a11y';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
 import ProfileList from './index';
-import profiles from '../../mockData/profiles';
+import { profiles } from '../../mockData/profiles';
 /* eslint-disable react/prop-types */
 class _TestContextContainer extends Component { // eslint-disable-line
   render() {

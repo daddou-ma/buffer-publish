@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from 'storybook-addon-a11y';
 import ProfileSearch from './index';
-import profiles from '../../mockData/profiles';
+import { profiles } from '../../mockData/profiles';
 
 const lotsOfProfiles = () =>
   [...Array(10)].reduce(p => [...p, ...profiles], []);
