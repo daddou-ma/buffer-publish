@@ -18,6 +18,16 @@
     "connectButton": "Connect Your Social Accounts",
     "defaultTitle": "Let's get your account set up!"
   },
+  "disabled-queue": {
+    "connectButton": "Manage Social Accounts",
+    "queueTab": "Queue",
+    "analyticsTab": "Analytics",
+    "awaitingTab": "Awaiting Approval",
+    "draftsTab": "Drafts",
+    "settingsTab": "Settings",
+    "composerInput": "What would you like to share?",
+    "currentDay": "Today"
+  },
   "stripe": {
     "noNameError": "Uh oh, please fill out the cardholder name :)",
     "noZipError": "For extra security, please add the zip code associated with this card",

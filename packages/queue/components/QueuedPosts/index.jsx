@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   EmptyState,
   BufferLoading,
+  ComposerInput,
 } from '@bufferapp/publish-shared-components';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
@@ -19,31 +20,6 @@ const ErrorBoundary = getErrorBoundary(true);
 const composerStyle = {
   marginBottom: '1.5rem',
   flexGrow: '1',
-};
-
-const composerInputStyle = {
-  alignItems: 'center',
-  backgroundColor: '#ffffff',
-  border: '1px solid #B8B8B8',
-  borderRadius: '4px',
-  boxShadow: '0 1px 4px rgba(0,0,0,.16)',
-  color: '#999999',
-  cursor: 'pointer',
-  display: 'flex',
-  fontFamily: 'Roboto',
-  fontSize: '14px',
-  height: '48px',
-  outline: 'none',
-  paddingLeft: '16px',
-  paddingRight: '16px',
-  width: '100%',
-};
-
-const composerInputIcoCameraStyle = {
-  background: 'url("https://s3.amazonaws.com/buffer-publish/images/ico-camera.svg") no-repeat',
-  width: '16px',
-  height: '16px',
-  marginLeft: 'auto',
 };
 
 const topBarContainerStyle = {
@@ -127,15 +103,11 @@ const QueuedPosts = ({
                 type={'queue'}
               />
             }
-            <button
-              style={composerInputStyle}
-              onClick={onComposerPlaceholderClick}
-            >
-              What would you like to share?
-              <div style={composerInputIcoCameraStyle} />
-            </button>
+            <ComposerInput
+              onPlaceholderClick={onComposerPlaceholderClick}
+              placeholder={'What would you like to share?'}
+            />
           </div>
-
         </div>
         {isInstagramProfile && !isInstagramBusiness &&
           <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
