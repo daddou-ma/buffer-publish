@@ -127,6 +127,18 @@ describe('middleware', () => {
       pricingPlan_str: 'business',
     });
   });
+
+  it('does not interact with Appcues if user is not business or pro', () => {
+    const action = {
+      type: actionTypes.APPCUES,
+      result: mockFreeUser,
+    };
+    middleware(store)(next)(action);
+
+    expect(global.Appcues.identify).not.toHaveBeenCalled();
+    expect(global.Appcues.on).not.toHaveBeenCalled();
+  });
+
   it('marks Appcues as loaded and identifies a B4B user with Appcues', () => {
     const action = {
       type: actionTypes.APPCUES,
@@ -148,7 +160,15 @@ describe('middleware', () => {
       orgUserCount: mockUser.orgUserCount,
       profileCount: mockUser.profileCount,
     });
+
+    expect(global.Appcues.on.mock.calls).toEqual([
+      ['flow_started', expect.any(Function)],
+      ['flow_completed', expect.any(Function)],
+      ['flow_skipped', expect.any(Function)],
+      ['flow_aborted', expect.any(Function)],
+    ]);
   });
+
   it('marks HelpScout as loaded and identifies the user with HelpScout', () => {
     const action = {
       type: actionTypes.HELPSCOUT_BEACON,

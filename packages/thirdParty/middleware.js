@@ -78,6 +78,7 @@ export default ({ dispatch, getState }) => next => (action) => {
               type: actionTypes.APPCUES_LOADED,
               loaded: true,
             });
+
             window.Appcues.identify(id, {
               name: id, // current user's name
               createdAt, // Unix timestamp of user signup date
@@ -93,13 +94,15 @@ export default ({ dispatch, getState }) => next => (action) => {
             // Only dispatch event for a particular Appcues flow
             const shouldDispatchEvent = event => (event.flowId === APPCUES_PRO_TRIAL_FLOW_ID);
 
-            window.Appcues.on('flow_started', (event) => {
+            const dispatchAppcuesStartedIfProTrialFlow = (event) => {
               if (shouldDispatchEvent(event)) {
                 dispatch({
                   type: actionTypes.APPCUES_STARTED,
                 });
               }
-            });
+            };
+
+            window.Appcues.on('flow_started', dispatchAppcuesStartedIfProTrialFlow);
 
             const dispatchAppcuesFinished = (event) => {
               if (shouldDispatchEvent(event)) {
