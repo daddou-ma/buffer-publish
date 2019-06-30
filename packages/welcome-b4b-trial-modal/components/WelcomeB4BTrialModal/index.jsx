@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Popover } from '@bufferapp/components';
-import { BDSButton } from '@bufferapp/publish-shared-components';
+import { Popover, Divider } from '@bufferapp/components';
+import { Button, Text } from '@bufferapp/ui';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 const modalStyle = {
@@ -23,9 +23,9 @@ const modalContentStyle = {
 };
 
 const modalActionsStyle = {
-  borderTop: '1px solid #E0E0E0',
   padding: '16px 24px',
-  textAlign: 'right',
+  display: 'flex',
+  alignSelf: 'flex-end',
 };
 
 const trialLabelStyle = {
@@ -36,26 +36,6 @@ const trialLabelStyle = {
   lineHeight: 'normal',
   fontSize: '12px',
   textTransform: 'uppercase',
-  marginBottom: '8px',
-};
-
-const headerStyle = {
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  lineHeight: '24px',
-  fontSize: '24px',
-  color: '#3D3D3D',
-  marginBottom: '8px',
-};
-
-const subHeaderStyle = {
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: 'normal',
-  lineHeight: 'normal',
-  fontSize: '16px',
-  color: '#636363',
 };
 
 const showGettingStarted = () => {
@@ -89,12 +69,21 @@ const WelcomeB4BTrialModal = ({
     <div style={modalStyle}>
       <div style={modalContentStyle}>
         <div style={trialLabelStyle}>{translations.trialLabel}</div>
-        <div style={headerStyle}>{translations.header}</div>
-        <div style={subHeaderStyle}>{translations.subHeader}</div>
+        <Text type="h2">{translations.header}</Text>
+        <Text>{translations.subHeader}</Text>
       </div>
+      <Divider />
       <div style={modalActionsStyle}>
-        <BDSButton onClick={() => maybeLater({ hideModal })} type="small textOnly">{translations.cancelCta}</BDSButton>
-        <BDSButton onClick={() => showGettingStarted()} type="small">{translations.cta}</BDSButton>
+        <Button
+          type="text"
+          label={translations.cancelCta}
+          onClick={() => maybeLater({ hideModal })}
+        />
+        <Button
+          type="primary"
+          label={translations.cta}
+          onClick={() => showGettingStarted()}
+        />
       </div>
     </div>
   </Popover>
