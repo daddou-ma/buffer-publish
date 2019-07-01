@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { mystic } from '@bufferapp/components/style/color';
-import { Text, Button } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
 
 const headerStyle = {
   paddingTop: '1rem',
@@ -23,6 +23,11 @@ const dayMap = {
   Sunday: 'sun',
 };
 
+const buttonStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+};
+
 const ScheduleTableHeader = ({
   dayName,
   paused,
@@ -30,16 +35,18 @@ const ScheduleTableHeader = ({
   disabled,
 }) => (
   <div style={headerStyle} tabIndex="0">
-    <Text
-      color={'outerSpace'}
-      size={'small'}
-    >
+    <Text type="label">
       {dayName}
     </Text>
     {!disabled &&
-      <Button linkStyle onClick={() => onPauseToggleClick(dayMap[dayName], paused)}>
-        {`Turn ${paused ? 'on' : 'off'}`}
-      </Button>
+    <div style={buttonStyle}>
+      <Button
+        type="link"
+        size="small"
+        label={`Turn ${paused ? 'on' : 'off'}`}
+        onClick={() => onPauseToggleClick(dayMap[dayName], paused)}
+      />
+    </div>
     }
   </div>
 );
