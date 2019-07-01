@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Text } from '@bufferapp/components';
-import { CloseIcon } from '@bufferapp/components/Icon/Icons';
+import { Button, Text } from '@bufferapp/ui';
+import CrossIcon from '@bufferapp/ui/Icon/Icons/Cross';
 
 const textColor = '#662D12';
 const dashboardBanner = 'temporary-dashboard-banner';
@@ -25,6 +25,8 @@ const closeIconContainerStyle = {
   marginRight: '-16px',
   padding: '16px',
   width: '16px',
+  display: 'flex',
+  alignItems: 'center',
 };
 
 class TemporaryDashboardBanner extends React.Component {
@@ -59,20 +61,19 @@ class TemporaryDashboardBanner extends React.Component {
     return (
       <div style={getContainerStyle(hidden)}>
         <div>
-          <Text color={textColor} size="mini">
+          <Text color={textColor}>
             <div dangerouslySetInnerHTML={{ __html: temporaryDashboard.content }} />
           </Text>
         </div>
         <div style={closeIconContainerStyle}>
           <Button
-            borderless
-            noStyle
+            type="text"
+            hasIconOnly
+            icon={<CrossIcon />}
             onClick={() => {
               this.setState({ hidden: true });
             }}
-          >
-            <CloseIcon color={textColor} />
-          </Button>
+          />
         </div>
       </div>
     );
