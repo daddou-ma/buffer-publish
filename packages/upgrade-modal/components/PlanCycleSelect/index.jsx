@@ -6,11 +6,6 @@ import {
 } from '@bufferapp/components';
 
 import {
-  curiousBlue,
-  mystic,
-} from '@bufferapp/components/style/color';
-
-import {
   borderRadius,
 } from '@bufferapp/components/style/border';
 
@@ -23,9 +18,8 @@ const getPlanCycleStyle = (selected, first) => ({
   borderRadius,
   cursor: 'pointer',
   position: 'relative',
-
-  background: selected ? curiousBlue : 'white',
-  border: selected ? '1px solid transparent' : `1px solid ${mystic}`,
+  background: selected ? '#2C4BFF' : 'white',
+  border: selected ? '1px solid transparent' : '1px solid #ABB7FF',
   marginRight: first ? '25px' : 0,
 });
 
@@ -40,11 +34,23 @@ const PlanCycleButton = ({ first, label, description, cycle, selectedCycle, sele
   const selected = selectedCycle === cycle;
   return (
     <button style={getPlanCycleStyle(selected, first)} onClick={() => selectCycle(cycle)}>
-      <Text color={selected ? 'white' : 'nevada'} size="large" weight="bold">{label}</Text><br />
-      <Text color={selected ? 'white' : 'nevada'} size="small">{description}</Text>
+      <Text
+        size="large"
+        weight="bold"
+        color={selected ? 'white' : 'black'}
+      >
+        {label}
+      </Text>
+      <br />
+      <Text
+        size="small"
+        color={selected ? 'white' : 'black'}
+      >
+        {description}
+      </Text>
       {selected &&
         <div style={checkmarkContainerStyle}>
-          <CircleCheckmarkIcon size={{ width: '22px' }} color="white" />
+          <CircleCheckmarkIcon color="white" size={{ width: '22px' }} />
         </div>
       }
     </button>
