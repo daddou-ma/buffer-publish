@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from '@bufferapp/ui';
 import style from './style';
 
 class FittedFallbackComponent extends React.Component {
@@ -9,7 +10,7 @@ class FittedFallbackComponent extends React.Component {
   render() {
     return (
       <div style={style.errorBoundaryFit}>
-        <div style={style.errorBoundaryTitle}>Well this is embarrassing...</div>
+        <Text type="h2">Well this is embarrassing...</Text>
         <div style={style.errorBoundaryMessage}>
           Something’s gone wrong. I’ve notified my human<br />
           creators who will look into this shortly.

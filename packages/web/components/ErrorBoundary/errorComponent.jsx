@@ -1,31 +1,29 @@
 import React from 'react';
-import { RefreshIcon, Button } from '@bufferapp/components';
+import { Text, Button } from '@bufferapp/ui';
+import RefreshIcon from '@bufferapp/ui/Icon/Icons/Refresh';
 import style from './style';
 
 class BoundaryFallback extends React.Component {
   static onRefresh() {
-    location.reload();
+    return location.reload();
   }
 
   render() {
     return (
       <div style={style.errorBoundary}>
-        <div style={style.errorBoundaryTitle}>Well this is embarrassing...</div>
+        <Text type="h2">Well this is embarrassing...</Text>
         <div style={style.errorBoundaryMessage}>
           Something’s gone wrong. I’ve notified my
           human<br />creators who will fix this up shortly.
         </div>
         <Button
-          secondary
+          type="secondary"
+          label="Refresh"
+          icon={<RefreshIcon />}
           onClick={() => {
-            this.onRefresh();
+            BoundaryFallback.onRefresh();
           }}
-        >
-          <div style={style.buttonWrapper}>
-            <RefreshIcon color={'curiousBlue'} size={{ width: '14px' }} />
-            <span style={style.buttonText}>Refresh</span>
-          </div>
-        </Button>
+        />
       </div>
     );
   }
