@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button,
-  CloseIcon,
   InputTime,
 } from '@bufferapp/components';
+import CrossIcon from '@bufferapp/ui/Icon/Icons/Cross';
+import { Button } from '@bufferapp/ui';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
 import TableCell from '../../TableCell';
 
@@ -15,19 +15,17 @@ const style = {
   alignItems: 'center',
 };
 
-const iconWrapperStyle = {
-  marginTop: '0.1rem',
-};
-
 /* eslint-disable react/prop-types */
 
 const RemoveButton = ({ time, onRemoveTimeClick, buttonStyle }) => (
   <div style={buttonStyle}>
-    <Button onClick={() => onRemoveTimeClick(time)} noStyle label="remove time">
-      <div style={iconWrapperStyle}>
-        <CloseIcon size={'small'} />
-      </div>
-    </Button>
+    <Button
+      type="text"
+      hasIconOnly
+      label="remove time"
+      icon={<CrossIcon />}
+      onClick={() => onRemoveTimeClick(time)}
+    />
   </div>
 );
 
@@ -42,7 +40,8 @@ const TableCellContents = ({
     default: {
       opacity: 0,
       position: 'absolute',
-      right: '0.5rem',
+      right: '-4px',
+      top: '-2px',
     },
     hovered: {
       opacity: '1',
