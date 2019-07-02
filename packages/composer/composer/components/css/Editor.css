@@ -155,6 +155,7 @@
 :global([class*='draftJsEmojiPlugin__emojiSuggestions__']) {
   vertical-align: middle;
   z-index: 22 !important;
+  box-shadow: none !important;
 }
 
 :global([class*='draftJsEmojiPlugin__emojiSuggestionsEntryText__']) {
