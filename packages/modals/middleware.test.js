@@ -97,6 +97,7 @@ describe('middleware', () => {
     expect(dispatch)
       .toBeCalledWith(actions.showWelcomePaidModal());
   });
+
   it('should show profiles disconnected modal when one or more is disconnected', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
@@ -110,6 +111,7 @@ describe('middleware', () => {
     expect(dispatch)
       .toBeCalledWith(actions.showProfilesDisconnectedModal());
   });
+
   it('should show instagram direct posting modal when key is present', () => {
     window._showModal = {
       key: 'ig-direct-post-modal',
@@ -121,6 +123,11 @@ describe('middleware', () => {
         selectedProfileId: 'id1',
         selectedProfile: {
           service_type: 'profile',
+        },
+      },
+      thirdparty: {
+        appCues: {
+          inProgress: false,
         },
       },
     });
