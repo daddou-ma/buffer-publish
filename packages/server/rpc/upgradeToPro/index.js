@@ -1,5 +1,4 @@
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
-
+const { SEGMENT_NAMES } = require('@bufferapp/publish-constants');
 const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
