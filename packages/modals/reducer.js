@@ -14,6 +14,7 @@ export const initialState = {
   showB4BTrialExpiredModal: false,
   upgradeModalB4BSource: null,
   showInstagramFirstCommentProTrialModal: false,
+  modalToShowLater: null,
 };
 
 export const actionTypes = keyWrapper('MODALS', {
