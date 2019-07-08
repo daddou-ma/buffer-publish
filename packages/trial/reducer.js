@@ -32,9 +32,9 @@ export default (state = { startedTrial: false }, action) => {
 };
 
 export const actions = {
-  handleStartProTrial: ({ scope, cta }) => ({
+  handleStartProTrial: ({ scope, source }) => ({
     type: actionTypes.START_PRO_TRIAL,
     scope,
-    cta,
+    source,
   }),
 };
