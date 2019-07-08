@@ -1,10 +1,18 @@
 const { method, createError } = require('@bufferapp/buffer-rpc');
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 const rp = require('request-promise');
+
+const sourceCtaMap = new Map([
+  ['ig_first_comment', SEGMENT_NAMES.IG_FIRST_COMMENT_PRO_TRIAL],
+  ['queue_limit', SEGMENT_NAMES.QUEUE_LIMIT_PRO_TRIAL],
+]);
+const getCtaFromSource = source =>
+  sourceCtaMap.get(source) || null;
 
 module.exports = method(
   'startTrial',
   'start trial',
-  (_, { session }) =>
+  ({ source, plan = 'pro' }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/billing/start-trial.json`,
       method: 'POST',
@@ -12,8 +20,9 @@ module.exports = method(
       qs: {
         access_token: session.publish.accessToken,
         product: 'publish',
-        plan: 'pro',
+        plan,
         cycle: 'month',
+        cta: getCtaFromSource(source),
       },
     })
     .then(result => JSON.parse(result))

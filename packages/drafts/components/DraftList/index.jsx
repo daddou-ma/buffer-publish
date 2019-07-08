@@ -11,6 +11,8 @@ import { trackAction } from '@bufferapp/publish-data-tracking';
 import { Input } from '@bufferapp/components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import Empty from '../Empty';
 
@@ -63,8 +65,17 @@ const DraftList = ({
   onImageClose,
 }) => {
   if (features.isProUser()) {
-    const startTrial = () => window.location.assign('https://buffer.com/billing/start-trial?trialType=small&next=https://publish.buffer.com');
-    const goToBilling = () => window.location.assign('https://buffer.com/app/account/receipts?content_only=true');
+    const startTrial = () =>
+      window.location.assign(`${getURL.getStartTrialURL({
+        trialType: 'small',
+        cta: SEGMENT_NAMES.DRAFTS_SBP_TRIAL,
+        nextUrl: 'https://publish.buffer.com',
+      })}`);
+    const goToBilling = () =>
+      window.location.assign(`${getURL.getBillingURL({
+        cta: SEGMENT_NAMES.DRAFTS_BUSINESS_UPGRADE,
+      })
+    }`);
     const trackAndGo = ({ location, action, afterTracked }) => {
       trackAction({
         location,

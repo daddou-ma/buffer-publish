@@ -9,6 +9,8 @@ import { WithFeatureLoader } from '@bufferapp/product-features';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import Toolbar from '../Toolbar';
 import Notification from '../Notification';
@@ -29,8 +31,15 @@ const AnalyticsList = ({
 }) => {
   // user is either a free or pro and is not a team member
   if (!isBusinessAccount && (features.isProUser() || features.isFreeUser())) {
-    const startTrial = () => window.location.assign('https://buffer.com/billing/start-trial?trialType=small&next=https://publish.buffer.com');
-    const goToBilling = () => window.location.assign('https://buffer.com/app/account/receipts?content_only=true');
+    const startTrial = () =>
+      window.location.assign(`${getURL.getStartTrialURL({
+        trialType: 'small',
+        cta: SEGMENT_NAMES.ANALYTICS_OVERVIEW_SBP_TRIAL,
+        nextUrl: 'https://publish.buffer.com',
+      })}`);
+    const goToBilling = () => window.location.assign(`${getURL.getBillingURL({
+      cta: SEGMENT_NAMES.ANALYTICS_OVERVIEW_BUSINESS_UPGRADE,
+    })}`);
     const trackAndGo = ({ location, action, afterTracked }) => {
       trackAction({
         location,
@@ -45,7 +54,13 @@ const AnalyticsList = ({
         heading="Unlock Great Insights"
         body="Gain a deeper understanding of how you are performing on social media with advanced analytics."
         cta="Start a Free 14-Day Trial of the Business Plan"
-        onCtaClick={() => { trackAndGo({ location: 'analytics', action: 'unlock_insights_b4b_trial_start_click', afterTracked: startTrial }); }}
+        onCtaClick={() => {
+          trackAndGo({
+            location: 'analytics',
+            action: 'unlock_insights_b4b_trial_start_click',
+            afterTracked: startTrial,
+          });
+        }}
         backgroundImage="circles"
       />);
     }
@@ -53,7 +68,13 @@ const AnalyticsList = ({
       heading="Unlock Great Insights"
       body="Gain a deeper understanding of how you are performing on social media with advanced analytics."
       cta="Upgrade to Buffer for Business"
-      onCtaClick={() => { trackAndGo({ location: 'analytics', action: 'unlock_insights_b4b_upgrade_click', afterTracked: goToBilling }); }}
+      onCtaClick={() => {
+        trackAndGo({
+          location: 'analytics',
+          action: 'unlock_insights_b4b_upgrade_click',
+          afterTracked: goToBilling,
+        });
+      }}
       backgroundImage="circles"
     />);
   }

@@ -53,6 +53,7 @@ describe('ig first comment pro trial modal middleware', () => {
     test('when start pro trial button is clicked', () => {
       const action = {
         type: actionTypes.IG_FIRST_COMMENT_PRO_TRIAL,
+        source: 'ig_first_comment',
       };
       middleware({ dispatch })(next)(action);
 

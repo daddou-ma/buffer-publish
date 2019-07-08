@@ -4,6 +4,7 @@ import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { AppShell as BDSAppShell } from '@bufferapp/ui';
 import { Gear, Return, Plus, People } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 const InvertedReturnIcon = () => (
   <span style={{ transform: 'scaleX(-1)', height: '16px' }}>
@@ -87,7 +88,10 @@ function generateUserMenuItems({
       title: 'Start Pro Trial',
       icon: <Plus color={gray} />,
       onItemClick: () => {
-        window.location.assign(`${getURL.getStartTrialURL('pro')}`);
+        window.location.assign(`${getURL.getStartTrialURL({
+          trialType: 'pro',
+          cta: SEGMENT_NAMES.APP_SHELL_PRO_TRIAL,
+        })}`);
       },
     },
     upgradeToPro: {

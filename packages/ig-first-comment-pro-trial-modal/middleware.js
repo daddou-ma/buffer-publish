@@ -1,12 +1,10 @@
 import {
   actionTypes as dataFetchActionTypes,
-  actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
 import {
   actionTypes as modalsActionTypes, actions as modalActions,
 } from '@bufferapp/publish-modals';
 import { actions as trialActions } from '@bufferapp/publish-trial';
-import { actions as notificationActions } from '@bufferapp/notifications';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actionTypes } from './reducer';
 
@@ -14,7 +12,9 @@ export default ({ dispatch, getState }) => next => (action) => { // eslint-disab
   next(action);
   switch (action.type) {
     case actionTypes.IG_FIRST_COMMENT_PRO_TRIAL:
-      dispatch(trialActions.handleStartProTrial());
+      dispatch(trialActions.handleStartProTrial({
+        source: 'ig_first_comment',
+      }));
       trackAction({
         location: 'MODALS',
         action: 'start_pro_trial',

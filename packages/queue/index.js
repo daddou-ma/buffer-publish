@@ -153,7 +153,10 @@ export default connect(
           dispatch(modalsActions.showUpgradeModal({ source: 'ig_first_comment_toggle' }));
           break;
         case 'START_PRO_TRIAL':
-          dispatch(trialActions.handleStartProTrial(message.scope));
+          dispatch(trialActions.handleStartProTrial({
+            scope: message.scope,
+            source: message.source,
+          }));
           break;
         default: break;
       }
