@@ -71,8 +71,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       });
       const profiles = getState().profileSidebar.profiles;
       const { productFeatures: { planName } } = getState();
-      const onTrial = getState().appSidebar.user.trial.onTrial;
-      const isOnBusinessTrial = planName === 'business' && onTrial;
+      const isOnBusinessTrial = getState().appSidebar.user.isOnBusinessTrial;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
 

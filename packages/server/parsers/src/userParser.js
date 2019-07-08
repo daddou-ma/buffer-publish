@@ -60,6 +60,7 @@ module.exports = userData => ({
   shouldShowProTrialExpiredModal: hasProTrialExpired(userData.feature_trials)
     && userData.plan === 'free'
     && !userData.has_cancelled,
+  isOnBusinessTrial: isOnBusinessPlan(userData.trial_plan),
   shouldShowBusinessTrialExpiredModal: isOnBusinessPlan(userData.trial_plan)
     && userData.trial_expired
     && !userData.trial_done,
