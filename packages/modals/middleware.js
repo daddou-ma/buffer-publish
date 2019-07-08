@@ -4,7 +4,8 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification';
-import { actions } from './reducer';
+import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty';
+import { actions, actionTypes } from './reducer';
 import {
   shouldShowUpgradeModal,
   shouldShowWelcomeModal,
@@ -77,19 +78,51 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       break;
     }
+
+    case thirdPartyActionTypes.APPCUES_FINISHED: {
+      const modalToShow = getState().modals.modalToShowLater;
+      if (!modalToShow) {
+        return;
+      }
+
+      if (modalToShow.id === actionTypes.SHOW_IG_DIRECT_POSTING_MODAL) {
+        dispatch(actions.showInstagramDirectPostingModal({
+          profileId: modalToShow.params.profileId,
+        }));
+      }
+
+      break;
+    }
+
     case profileActionTypes.SELECT_PROFILE: {
       const profileId = getState().profileSidebar.selectedProfileId;
       const isIGBusiness = getState().profileSidebar.selectedProfile.service_type === 'business';
+      const tourInProgress = getState().thirdparty.appCues.inProgress;
+
       if (shouldShowInstagramDirectPostingModal() && !isIGBusiness) {
-        dispatch(dataFetchActions.fetch({
-          name: 'checkInstagramBusiness',
-          args: {
-            profileId,
-            callbackAction: actions.showInstagramDirectPostingModal({
+        if (tourInProgress) {
+          dispatch(dataFetchActions.fetch({
+            name: 'checkInstagramBusiness',
+            args: {
               profileId,
-            }),
-          },
-        }));
+              callbackAction: actions.saveModalToShowLater({
+                modalId: actionTypes.SHOW_IG_DIRECT_POSTING_MODAL,
+                profileId,
+              }),
+            },
+          }));
+        } else {
+          dispatch(dataFetchActions.fetch({
+            name: 'checkInstagramBusiness',
+            args: {
+              profileId,
+              callbackAction: actions.showInstagramDirectPostingModal({
+                profileId,
+              }),
+            },
+          }));
+        }
+
         resetShowModalKey();
       }
       break;

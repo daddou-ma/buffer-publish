@@ -155,22 +155,27 @@
 :global([class*='draftJsEmojiPlugin__emojiSuggestions__']) {
   vertical-align: middle;
   z-index: 22 !important;
+  box-shadow: none !important;
 }
 
 :global([class*='draftJsEmojiPlugin__emojiSuggestionsEntryText__']) {
   vertical-align: middle;
 }
 
-:global([class*='draftJsEmojiPlugin__emojiSelectPopoverEntry']){
+:global([class*='draftJsEmojiPlugin__emojiSelectPopover']) {
+  box-shadow: none !important;
+}
+
+:global([class*='draftJsEmojiPlugin__emojiSelectPopoverEntry']) {
   font-size: 18px;
   cursor: pointer;
 }
 
-:global([class*='draftJsEmojiPlugin__emojiSelectPopoverNavEntry']){
+:global([class*='draftJsEmojiPlugin__emojiSelectPopoverNavEntry']) {
   cursor: pointer;
 }
 
-:global([class*='draftJsEmojiPlugin__emojiSelectButton']){
+:global([class*='draftJsEmojiPlugin__emojiSelectButton']) {
   display: flex;
   justify-content: center;
   align-items: center;

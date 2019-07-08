@@ -14,6 +14,7 @@ export const initialState = {
   showB4BTrialExpiredModal: false,
   upgradeModalB4BSource: null,
   showInstagramFirstCommentProTrialModal: false,
+  modalToShowLater: null,
 };
 
 export const actionTypes = keyWrapper('MODALS', {
@@ -37,6 +38,7 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
   SHOW_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
   HIDE_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
+  SAVE_MODAL_TO_SHOW_LATER: 0,
 });
 
 export default (state = initialState, action) => {
@@ -120,11 +122,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showInstagramDirectPostingModal: true,
+        modalToShowLater: null,
       };
     case actionTypes.HIDE_IG_DIRECT_POSTING_MODAL:
       return {
         ...state,
         showInstagramDirectPostingModal: false,
+      };
+    case actionTypes.SAVE_MODAL_TO_SHOW_LATER:
+      return {
+        ...state,
+        modalToShowLater: {
+          id: action.modalId,
+          params: action.params,
+        },
       };
     case actionTypes.SHOW_WELCOME_B4B_TRIAL_MODAL:
       return {
@@ -211,6 +222,13 @@ export const actions = {
   }),
   hideInstagramDirectPostingModal: () => ({
     type: actionTypes.HIDE_IG_DIRECT_POSTING_MODAL,
+  }),
+  saveModalToShowLater: ({ modalId, profileId }) => ({
+    type: actionTypes.SAVE_MODAL_TO_SHOW_LATER,
+    modalId,
+    params: {
+      profileId,
+    },
   }),
   showWelcomeB4BTrialModal: () => ({
     type: actionTypes.SHOW_WELCOME_B4B_TRIAL_MODAL,

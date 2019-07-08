@@ -35,7 +35,7 @@ const PostStats = ({ statistics, profileService, showTwitterMentions }) => {
     reach: 'Reach',
     shares: 'Share',
     reshares: 'Reshare',
-    repins: 'Repin',
+    repins: 'Save',
     plusOne: '+1',
   };
 

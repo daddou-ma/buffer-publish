@@ -7,7 +7,7 @@ import createStore from '@bufferapp/publish-store';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import ProfileSidebar from './index';
-import profiles from '../../mockData/profiles';
+import { profiles } from '../../mockData/profiles';
 
 const lotsOfProfiles = () =>
   [...Array(10)].reduce(p => [...p, ...profiles], []);

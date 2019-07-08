@@ -3,7 +3,7 @@ import deepFreeze from 'deep-freeze';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as queueActions } from '@bufferapp/publish-queue';
 import reducer, { actions, actionTypes, initialState as profileInitialState } from './reducer';
-import profiles from './mockData/profiles';
+import { profiles } from './mockData/profiles';
 
 describe('reducer', () => {
   it('should initialize default state', () => {

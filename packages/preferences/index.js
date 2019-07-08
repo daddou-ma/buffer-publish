@@ -34,14 +34,18 @@ export default connect(
     // go back to the last selected profile
     onBackToDashboardClick: ({ selectedProfileId, profiles }) => {
       trackAction({ location: 'preferences', action: 'return_to_dashboard' });
-      const profileId = selectedProfileId || profiles[0].id;
-      const profile = profiles.find(p => p.id === profileId);
-      dispatch(profileSidebarActions.selectProfile({
-        profile,
-      }));
-      dispatch(push(generateProfilePageRoute({
-        profileId,
-      })));
+      if (profiles.length > 0) {
+        const profileId = selectedProfileId || profiles[0].id;
+        const profile = profiles.find(p => p.id === profileId);
+        dispatch(profileSidebarActions.selectProfile({
+          profile,
+        }));
+        dispatch(push(generateProfilePageRoute({
+          profileId,
+        })));
+      } else {
+        dispatch(push('/'));
+      }
     },
   }),
 )(Preferences);
