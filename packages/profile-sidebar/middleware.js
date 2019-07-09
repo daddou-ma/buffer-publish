@@ -36,6 +36,9 @@ export default ({ dispatch, getState }) => next => (action) => {
   switch (action.type) {
     case 'APP_INIT': {
       dispatch(dataFetchActions.fetch({
+        name: 'user',
+      }));
+      dispatch(dataFetchActions.fetch({
         name: 'profiles',
       }));
       break;
