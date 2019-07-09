@@ -4,6 +4,8 @@ jest.mock('request-promise');
 import rp from 'request-promise';
 import RPCEndpoint from './';
 
+const { SEGMENT_NAMES } = require('@bufferapp/publish-constants');
+
 const accessToken = 'AN ACCESS TOKEN';
 const session = {
   publish: {

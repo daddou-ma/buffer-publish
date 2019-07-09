@@ -13,7 +13,7 @@ export default connect(
   dispatch => ({
     onClickUpgrade: (plan) => {
       if (plan === 'free') {
-        dispatch(actions.upgrade({ plan }));
+        dispatch(actions.upgrade(plan));
       } else {
         window.location.assign(`${getURL.getBillingURL({
           cta: SEGMENT_NAMES.LOCKED_PROFILE_BUSINESS_UPGRADE,
