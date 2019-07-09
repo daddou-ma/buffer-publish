@@ -34,10 +34,7 @@ export const refreshProfile = (dispatch, profileId, message) => {
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
   switch (action.type) {
-    case 'APP_INIT': {
-      dispatch(dataFetchActions.fetch({
-        name: 'user',
-      }));
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(dataFetchActions.fetch({
         name: 'profiles',
       }));
@@ -73,7 +70,6 @@ export default ({ dispatch, getState }) => next => (action) => {
         path,
       });
       const profiles = getState().profileSidebar.profiles;
-      const { productFeatures: { planName } } = getState();
       const isOnBusinessTrial = getState().appSidebar.user.isOnBusinessTrial;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
