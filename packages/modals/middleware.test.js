@@ -2,10 +2,17 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
+
+import {
+  actionTypes as thirdPartyActionTypes,
+} from '@bufferapp/publish-thirdparty';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 
 import middleware from './middleware';
-import { actions } from './reducer';
+import {
+  actions,
+  actionTypes as modalsActionTypes,
+} from './reducer';
 
 describe('middleware', () => {
   it('should show welcome modal when key is present', () => {
@@ -153,6 +160,41 @@ describe('middleware', () => {
     expect(dispatch)
       .toBeCalledWith(nextAction);
   });
+
+  it('should hide instagram direct posting modal if AppCues tour starts', () => {
+    window._showModal = {
+      key: 'ig-direct-post-modal',
+    };
+    const next = jest.fn();
+    const dispatch = jest.fn();
+    const getState = () => ({
+      profileSidebar: {
+        selectedProfileId: 'id1',
+        selectedProfile: {
+          service_type: 'profile',
+        },
+      },
+      thirdparty: {
+        appCues: {
+          inProgress: true,
+        },
+      },
+    });
+
+    const action = {
+      type: thirdPartyActionTypes.APPCUES_STARTED,
+    };
+
+    const nextAction = {
+      type: modalsActionTypes.HIDE_IG_DIRECT_POSTING_MODAL,
+    };
+    middleware({ dispatch, getState })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(nextAction);
+  });
+
   it('should ignore other actions', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
