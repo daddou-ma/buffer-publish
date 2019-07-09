@@ -4,7 +4,11 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
-import { HELPSCOUT_ID, APPCUES_PRO_TRIAL_FLOW_ID } from './constants';
+import {
+  HELPSCOUT_ID,
+  APPCUES_PRO_TRIAL_FLOW_ID,
+  APPCUES_PRO_TRIAL_TEST_FLOW_ID,
+} from './constants';
 
 const checkExtensionInstalled = () => {
   /**
@@ -92,7 +96,10 @@ export default ({ dispatch, getState }) => next => (action) => {
             });
 
             // Only dispatch event for a particular Appcues flow
-            const shouldDispatchEvent = event => (event.flowId === APPCUES_PRO_TRIAL_FLOW_ID);
+            const shouldDispatchEvent = event => (
+              event.flowId === APPCUES_PRO_TRIAL_FLOW_ID ||
+              event.flowId === APPCUES_PRO_TRIAL_TEST_FLOW_ID
+            );
 
             const dispatchAppcuesStartedIfProTrialFlow = (event) => {
               if (shouldDispatchEvent(event)) {
