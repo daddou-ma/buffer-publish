@@ -37,19 +37,13 @@ describe('rpc/upgradeToPro', () => {
   it('it sends the correct cta for specific upgrade paths', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
     upgradeToPro('queue_limit');
-    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe('publish-composer-notifications-queueLimitUpgrade-1');
+    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe(SEGMENT_NAMES.QUEUE_LIMIT_PRO_UPGRADE);
   });
 
-  it('it sends a generic cta for other upgrade paths', () => {
-    rp.mockReturnValueOnce(Promise.resolve({}));
-    upgradeToPro('source');
-    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe('publish-source');
-  });
-
-  it('it sends an unknown cta for empty sources', () => {
+  it('it sends null for empty sources', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
     upgradeToPro();
-    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe('publish-unknown');
+    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe(null);
   });
 
   it('an error response gets returned too', () => {
