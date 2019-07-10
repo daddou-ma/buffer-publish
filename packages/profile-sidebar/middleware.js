@@ -69,8 +69,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       const isPreferencePage = !!getPreferencePageParams({
         path,
       });
-      const profiles = getState().profileSidebar.profiles;
-      const isOnBusinessTrial = getState().appSidebar.user.isOnBusinessTrial;
+      const { profiles, isOnBusinessTrial } = getState().profileSidebar;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
 

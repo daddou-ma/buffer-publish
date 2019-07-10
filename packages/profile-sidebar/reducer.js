@@ -180,6 +180,12 @@ export default (state = initialState, action) => {
         profiles: profilesReducer(state.profiles, action),
       };
     }
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      return {
+        ...state,
+        isOnBusinessTrial: action.result.isOnBusinessTrial,
+      };
+    }
     default:
       return state;
   }
