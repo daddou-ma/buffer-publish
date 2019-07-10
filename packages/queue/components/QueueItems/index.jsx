@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { Button, Link, Text } from '@bufferapp/components';
+import { Button, Text } from '@bufferapp/ui';
+import { Link } from '@bufferapp/components';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
 import {
   transitionAnimationTime,
@@ -280,10 +281,14 @@ const QueueItems = (props) => {
     if (queueItemType === 'showMorePosts' && (!features.isFreeUser() || isBusinessAccount)) {
       return (
         <div key={rest.id} style={calendarBtnWrapperStyle}>
-          <Text>Looking for your other posts?&nbsp;&nbsp;</Text>
-          <Button onClick={() => onCalendarClick('month', 'daily_view_show_more_view_calendar')}>
-          View Your Calendar
-          </Button>
+          <Text type="p">Looking for your other posts?</Text>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              type="primary"
+              label="View Your Calendar"
+              onClick={() => onCalendarClick('month', 'daily_view_show_more_view_calendar')}
+            />
+          </div>
         </div>
       );
     }

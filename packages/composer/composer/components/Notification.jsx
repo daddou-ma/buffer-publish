@@ -2,12 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '@bufferapp/ui';
 import { NotificationTypes } from '../AppConstants';
 import CloseButton from '../components/CloseButton';
 import styles from './css/Notification.css';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
-
-import Button from '../components/Button';
 
 class Notification extends React.Component {
   static propTypes = {
@@ -102,9 +101,7 @@ class Notification extends React.Component {
       <div className={notificationClassName}>
         {cta &&
           <div className={styles.ctaContainer}>
-            <Button onClick={cta.action} className={styles.cta}>
-              {cta.label}
-            </Button>
+            <Button type="primary" size="small" label={cta.label} onClick={cta.action} />
           </div>
         }
         <div dangerouslySetInnerHTML={htmlMessage} />
