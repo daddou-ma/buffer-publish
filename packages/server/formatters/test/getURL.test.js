@@ -1,13 +1,12 @@
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import getURL from '../src/getURL';
-
-const { SEGMENT_NAMES } = require('@bufferapp/publish-constants');
 
 describe('getURL', () => {
   const { IG_FIRST_COMMENT_PRO_TRIAL } = SEGMENT_NAMES;
 
   describe('getBillingURL', () => {
     it('should include cta param', () => {
-      const result = getURL.getBillingURL({ cta: SEGMENT_NAMES.IG_FIRST_COMMENT_PRO_TRIAL });
+      const result = getURL.getBillingURL({ cta: IG_FIRST_COMMENT_PRO_TRIAL });
       expect(result).toEqual(`https://${getURL.getBaseURL()}/app/account/receipts?content_only=true&cta=${IG_FIRST_COMMENT_PRO_TRIAL}`);
     });
     it('should not include cta param', () => {

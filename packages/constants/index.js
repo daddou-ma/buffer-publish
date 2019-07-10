@@ -23,6 +23,8 @@ const LOCKED_PROFILE_BUSINESS_UPGRADE = 'publish-profiles-lockedProfileUpgradeCa
 const PROFILE_LIMIT_PRO_UPGRADE = 'publish-orgAdminConnect-profileLimitUpgrade-proUpgrade-1';
 const QUEUE_LIMIT_PRO_TRIAL = 'publish-composer-queueLimitNotification-proTrial-1';
 const QUEUE_LIMIT_PRO_UPGRADE = 'publish-composer-queueLimitNotification-proUpgrade-1';
+const PINTEREST_PRO_UPGRADE = 'publish-orgAdminConnect-upgradeToConnectPinterest-proUpgrade-1';
+const PLAN_OVERVIEW_PRO_UPGRADE = 'publish-orgAdminConnect-planOverview-proUpgrade-1';
 
 module.exports = {
   SERVICE_NAMES: [
@@ -54,6 +56,8 @@ module.exports = {
     IG_FIRST_COMMENT_PRO_UPGRADE,
     LOCKED_PROFILE_PRO_UPGRADE,
     LOCKED_PROFILE_BUSINESS_UPGRADE,
+    PINTEREST_PRO_UPGRADE,
+    PLAN_OVERVIEW_PRO_UPGRADE,
     PROFILE_LIMIT_PRO_UPGRADE,
     QUEUE_LIMIT_PRO_TRIAL,
     QUEUE_LIMIT_PRO_UPGRADE,

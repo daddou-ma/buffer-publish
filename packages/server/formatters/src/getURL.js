@@ -59,13 +59,13 @@ module.exports = {
     }
     return `https://buffer.com/profile/disconnect_bitly_auth/${profileId}`;
   },
-  getStartTrialURL: ({ trialType, cta, nextUrl = null }) => {
-    const next = nextUrl ? `&next=${nextUrl}` : '';
+  getStartTrialURL: ({ trialType, cta, nextUrl }) => {
+    const nextParam = nextUrl ? `&next=${nextUrl}` : '';
     const ctaParam = cta ? `&cta=${cta}` : '';
     if (window.location.hostname === 'publish.local.buffer.com') {
-      return `https://local.buffer.com/billing/start-trial?trialType=${trialType}${ctaParam}${next}`;
+      return `https://local.buffer.com/billing/start-trial?trialType=${trialType}${ctaParam}${nextParam}`;
     }
-    return `https://buffer.com/billing/start-trial?trialType=${trialType}${ctaParam}${next}`;
+    return `https://buffer.com/billing/start-trial?trialType=${trialType}${ctaParam}${nextParam}`;
   },
   getBillingURL: ({ cta }) => {
     const ctaParam = cta ? `&cta=${cta}` : '';
