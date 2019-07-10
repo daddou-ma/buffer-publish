@@ -37,9 +37,10 @@ const AnalyticsList = ({
         cta: SEGMENT_NAMES.ANALYTICS_OVERVIEW_SBP_TRIAL,
         nextUrl: 'https://publish.buffer.com',
       })}`);
-    const goToBilling = () => window.location.assign(`${getURL.getBillingURL({
-      cta: SEGMENT_NAMES.ANALYTICS_OVERVIEW_BUSINESS_UPGRADE,
-    })}`);
+    const goToBilling = () =>
+      window.location.assign(`${getURL.getBillingURL({
+        cta: SEGMENT_NAMES.ANALYTICS_OVERVIEW_BUSINESS_UPGRADE,
+      })}`);
     const trackAndGo = ({ location, action, afterTracked }) => {
       trackAction({
         location,
