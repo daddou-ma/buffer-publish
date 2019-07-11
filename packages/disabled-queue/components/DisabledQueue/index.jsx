@@ -86,6 +86,10 @@ const headerTextStyle = {
   alignItems: 'baseline',
 };
 
+const tabStyle = {
+  display: 'inline-block',
+};
+
 const calendarBtns = ['Day', 'Week', 'Month'];
 
 const getCurrentDay = () => moment().format('MMMM D');
@@ -118,26 +122,34 @@ const DisabledQueue = ({ translations }) => (
           onTabClick={() => {}}
         >
           <Tab tabId={'disabledTab'}>{translations.queueTab}</Tab>
-          <Tab tabId={'disabledTab2'}>
+          <div style={tabStyle}>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <div style={{ display: 'inline-block' }}>{translations.analyticsTab}</div>
+              <Tab tabId={'disabledTab2'} disabled>
+                {translations.analyticsTab}
+              </Tab>
             </Tooltip>
-          </Tab>
-          <Tab tabId={'disabledTab3'}>
+          </div>
+          <div style={tabStyle}>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <div style={{ display: 'inline-block' }}>{translations.awaitingTab}</div>
+              <Tab tabId={'disabledTab3'} disabled>
+                {translations.awaitingTab}
+              </Tab>
             </Tooltip>
-          </Tab>
-          <Tab tabId={'disabledTab4'}>
+          </div>
+          <div style={tabStyle}>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <div style={{ display: 'inline-block' }}>{translations.draftsTab}</div>
+              <Tab tabId={'disabledTab4'} disabled>
+                {translations.draftsTab}
+              </Tab>
             </Tooltip>
-          </Tab>
-          <Tab tabId={'disabledTab5'}>
+          </div>
+          <div style={tabStyle}>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <div style={{ display: 'inline-block' }}>{translations.settingsTab}</div>
+              <Tab tabId={'disabledTab5'} disabled>
+                {translations.settingsTab}
+              </Tab>
             </Tooltip>
-          </Tab>
+          </div>
         </Tabs>
       </div>
       <div style={tabContentStyle}>
@@ -163,6 +175,7 @@ const DisabledQueue = ({ translations }) => (
               <QueueButtonGroup
                 buttons={calendarBtns}
                 onClick={() => {}}
+                disabled
               />
             </Tooltip>
           </div>
