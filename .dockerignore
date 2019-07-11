@@ -1,5 +1,6 @@
 .git
 node_modules
+helm/
 packages/**/node_modules
 packages/**/__mocks__
 packages/**/__snapshots__
