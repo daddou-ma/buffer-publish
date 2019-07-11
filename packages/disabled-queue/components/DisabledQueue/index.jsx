@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
-import { Text } from '@bufferapp/ui';
+import { Text, Tooltip } from '@bufferapp/ui';
 import {
   Tabs,
   Tab,
@@ -118,19 +118,37 @@ const DisabledQueue = ({ translations }) => (
           onTabClick={() => {}}
         >
           <Tab tabId={'disabledTab'}>{translations.queueTab}</Tab>
-          <Tab tabId={'disabledTab2'}>{translations.analyticsTab}</Tab>
-          <Tab tabId={'disabledTab3'}>{translations.awaitingTab}</Tab>
-          <Tab tabId={'disabledTab4'}>{translations.draftsTab}</Tab>
-          <Tab tabId={'disabledTab5'}>{translations.settingsTab}</Tab>
+          <Tab tabId={'disabledTab2'}>
+            <Tooltip label="Connect a social account to explore this tab" position="bottom">
+              <div style={{ display: 'inline-block' }}>{translations.analyticsTab}</div>
+            </Tooltip>
+          </Tab>
+          <Tab tabId={'disabledTab3'}>
+            <Tooltip label="Connect a social account to explore this tab" position="bottom">
+              <div style={{ display: 'inline-block' }}>{translations.awaitingTab}</div>
+            </Tooltip>
+          </Tab>
+          <Tab tabId={'disabledTab4'}>
+            <Tooltip label="Connect a social account to explore this tab" position="bottom">
+              <div style={{ display: 'inline-block' }}>{translations.draftsTab}</div>
+            </Tooltip>
+          </Tab>
+          <Tab tabId={'disabledTab5'}>
+            <Tooltip label="Connect a social account to explore this tab" position="bottom">
+              <div style={{ display: 'inline-block' }}>{translations.settingsTab}</div>
+            </Tooltip>
+          </Tab>
         </Tabs>
       </div>
       <div style={tabContentStyle}>
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
-            <ComposerInput
-              isDisabled
-              placeholder={translations.composerInput}
-            />
+            <Tooltip label="Connect a social account to start sharing content" position="bottom">
+              <ComposerInput
+                isDisabled
+                placeholder={translations.composerInput}
+              />
+            </Tooltip>
           </div>
         </div>
         <div style={listHeaderStyle}>
@@ -141,10 +159,12 @@ const DisabledQueue = ({ translations }) => (
             </span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
-            <QueueButtonGroup
-              buttons={calendarBtns}
-              onClick={() => {}}
-            />
+            <Tooltip label="Connect a social account to see calendar views of your posts" position="top">
+              <QueueButtonGroup
+                buttons={calendarBtns}
+                onClick={() => {}}
+              />
+            </Tooltip>
           </div>
         </div>
         <PostEmptySlot
