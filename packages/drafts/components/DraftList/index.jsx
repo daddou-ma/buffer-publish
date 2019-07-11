@@ -4,11 +4,11 @@ import {
   QueueItems,
   BufferLoading,
   BusinessTrialOrUpgradeCard,
+  ComposerInput,
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { trackAction } from '@bufferapp/publish-data-tracking';
-import { Input } from '@bufferapp/components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -128,9 +128,9 @@ const DraftList = ({
                   preserveComposerStateOnClose
                 />
               }
-              <Input
+              <ComposerInput
                 placeholder={'Create a new draft...'}
-                onFocus={onComposerPlaceholderClick}
+                onPlaceholderClick={onComposerPlaceholderClick}
               />
             </div>
           }

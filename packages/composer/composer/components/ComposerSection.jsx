@@ -34,7 +34,6 @@ class ComposerSection extends React.Component {
     isOnProTrial: PropTypes.bool.isRequired,
     hasIGDirectVideoFlip: PropTypes.bool.isRequired,
     isFreeUser: PropTypes.bool.isRequired,
-    hasFirstCommentFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
     isBusinessUser: PropTypes.bool,
   };
@@ -42,7 +41,6 @@ class ComposerSection extends React.Component {
   static defaultProps = {
     isOmniboxEnabled: null,
     composerPosition: null,
-    hasFirstCommentFlip: false,
     hasShopgridFlip: false,
     isBusinessUser: false,
   };
@@ -64,7 +62,7 @@ class ComposerSection extends React.Component {
       appState, profiles, visibleNotifications, areAllDraftsSaved, selectedProfiles,
       shouldEnableFacebookAutocomplete, shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled, composerPosition, hasIGDirectFlip, hasIGLocationTaggingFeature,
-      hasIGDirectVideoFlip, isFreeUser, hasFirstCommentFlip, isBusinessUser, canStartProTrial,
+      hasIGDirectVideoFlip, isFreeUser, isBusinessUser, canStartProTrial,
       isOnProTrial, hasShopgridFlip,
     } = this.props;
 
@@ -114,7 +112,6 @@ class ComposerSection extends React.Component {
           canStartProTrial={canStartProTrial}
           isOnProTrial={isOnProTrial}
           hasIGDirectVideoFlip={hasIGDirectVideoFlip}
-          hasFirstCommentFlip={hasFirstCommentFlip}
           hasShopgridFlip={hasShopgridFlip}
           isFreeUser={isFreeUser}
           isBusinessUser={isBusinessUser}

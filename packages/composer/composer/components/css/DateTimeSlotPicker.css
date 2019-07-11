@@ -9,16 +9,11 @@
 }
 
 .pickerSwitchButton {
-  composes: tertiaryButton from './Button.css';
-
-  display: block;
   margin: 8px auto 0;
 }
 
 .submitButton {
-  composes: button from './Button.css';
-
-  margin-top: 16px;
+  margin: 16px auto 0;
 }
 
 .timezone {

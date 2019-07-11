@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Popover } from '@bufferapp/components';
+import { Popover, Divider } from '@bufferapp/components';
 import { BDSButton } from '@bufferapp/publish-shared-components';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import { Button } from '@bufferapp/ui';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 
 const modalStyle = {
   borderRadius: '4px',
@@ -32,9 +34,9 @@ const headerStyle = {
 };
 
 const modalActionsStyle = {
-  borderTop: '1px solid #E0E0E0',
   padding: '16px 24px',
-  textAlign: 'right',
+  display: 'flex',
+  justifyContent: 'flex-end',
 };
 
 const completeAndUpgrade = () => {
@@ -53,9 +55,18 @@ const B4bTrialCompleteModal = ({
         <div style={modalContentStyle}>
           <div style={headerStyle}>{translations.header}</div>
         </div>
+        <Divider marginBottom={0}/>
         <div style={modalActionsStyle}>
-          <BDSButton onClick={cancelTrial} type="small textOnly">{translations.cancelTrial}</BDSButton>
-          <BDSButton onClick={() => completeAndUpgrade()} type="small">{translations.completeAndUpgrade}</BDSButton>
+          <Button
+            type="text"
+            label={translations.cancelTrial}
+            onClick={cancelTrial}
+          />
+          <Button
+            type="primary"
+            label={translations.completeAndUpgrade}
+            onClick={() => completeAndUpgrade()}
+          />
         </div>
       </div>
     </Popover>
