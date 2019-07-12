@@ -160,7 +160,6 @@ class Composer extends React.Component {
     canStartProTrial: PropTypes.bool,
     isOnProTrial: PropTypes.bool,
     hasIGDirectVideoFlip: PropTypes.bool,
-    hasFirstCommentFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
@@ -173,7 +172,6 @@ class Composer extends React.Component {
     canStartProTrial: false,
     isOnProTrial: false,
     hasIGDirectVideoFlip: false,
-    hasFirstCommentFlip: false,
     hasShopgridFlip: false,
     profiles: [],
     expandedComposerId: null,
@@ -564,7 +562,6 @@ class Composer extends React.Component {
       composerPosition,
       hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip,
-      hasFirstCommentFlip,
       hasShopgridFlip,
     } = this.props;
 
@@ -735,7 +732,6 @@ class Composer extends React.Component {
         (userHasBusinessOrProPlan ||
           this.props.canStartProTrial) &&
         this.isExpanded() &&
-        hasFirstCommentFlip &&
         !appState.isOmniboxEnabled
         )
       );

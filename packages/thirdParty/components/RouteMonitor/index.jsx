@@ -34,6 +34,7 @@ RouteMonitor.propTypes = {
   pathname: PropTypes.string,
   appCues: PropTypes.shape({
     loaded: PropTypes.bool,
+    inProgress: PropTypes.bool,
   }),
   intercom: PropTypes.shape({
     loaded: PropTypes.bool,
@@ -47,6 +48,7 @@ RouteMonitor.defaultProps = {
   pathname: '',
   appCues: {
     loaded: false,
+    inProgress: false,
   },
   intercom: {
     loaded: false,

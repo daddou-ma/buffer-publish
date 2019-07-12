@@ -4,7 +4,11 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
-import { HELPSCOUT_ID } from './constants';
+import {
+  HELPSCOUT_ID,
+  APPCUES_PRO_TRIAL_FLOW_ID,
+  APPCUES_PRO_TRIAL_TEST_FLOW_ID,
+} from './constants';
 
 const checkExtensionInstalled = () => {
   /**
@@ -78,6 +82,7 @@ export default ({ dispatch, getState }) => next => (action) => {
               type: actionTypes.APPCUES_LOADED,
               loaded: true,
             });
+
             window.Appcues.identify(id, {
               name: id, // current user's name
               createdAt, // Unix timestamp of user signup date
@@ -89,6 +94,34 @@ export default ({ dispatch, getState }) => next => (action) => {
               orgUserCount, // Number of users (including the account owner)
               profileCount, // Number of profiles _owned_ by the user
             });
+
+            // Only dispatch event for a particular Appcues flow
+            const shouldDispatchEvent = event => (
+              event.flowId === APPCUES_PRO_TRIAL_FLOW_ID ||
+              event.flowId === APPCUES_PRO_TRIAL_TEST_FLOW_ID
+            );
+
+            const dispatchAppcuesStartedIfProTrialFlow = (event) => {
+              if (shouldDispatchEvent(event)) {
+                dispatch({
+                  type: actionTypes.APPCUES_STARTED,
+                });
+              }
+            };
+
+            window.Appcues.on('flow_started', dispatchAppcuesStartedIfProTrialFlow);
+
+            const dispatchAppcuesFinished = (event) => {
+              if (shouldDispatchEvent(event)) {
+                dispatch({
+                  type: actionTypes.APPCUES_FINISHED,
+                });
+              }
+            };
+
+            window.Appcues.on('flow_completed', dispatchAppcuesFinished);
+            window.Appcues.on('flow_skipped', dispatchAppcuesFinished);
+            window.Appcues.on('flow_aborted', dispatchAppcuesFinished);
           }
         }
       }

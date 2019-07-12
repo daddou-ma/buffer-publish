@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import {
   Popover,
   Card,
-  Text,
   Divider,
-  Button,
 } from '@bufferapp/components';
 
-import { LockIcon } from '@bufferapp/components/Icon/Icons';
+import {
+  Button,
+  Text,
+} from '@bufferapp/ui';
+import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
 
 import InputText from '../InputText';
 import PlanCycleSelect from '../PlanCycleSelect';
@@ -28,9 +30,17 @@ const listItemStyle = {
   marginBottom: '0.75rem',
 };
 
+const buttonStyle = {
+  textAlign: 'center',
+  margin: '2rem 0 0',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
+
 const ListItem = ({ text }) =>
   <li style={listItemStyle}>
-    <Text>
+    <Text type="p">
       {text}
     </Text>
   </li>;
@@ -38,7 +48,7 @@ const ListItem = ({ text }) =>
 ListItem.propTypes = { text: PropTypes.string.isRequired };
 
 const currentYear = new Date().getFullYear();
-const creditCardSvg = '<svg width="31" height="21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="%23fff" d="M0 0h31v21H0z"/><rect width="31" height="21" rx="3" fill="%232D98C8"/><path fill="%23343E47" d="M0 3h31v3H0z"/><path fill="%23fff" d="M6 9h20v4H6z"/><path fill="%23FD232B" d="M20 10h5v2h-5z"/></svg>';
+const creditCardSvg = `<svg width="31" height="21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="%23fff" d="M0 0h31v21H0z"/><rect width="31" height="21" rx="3" fill="%232D98C8"/><path fill="%23343E47" d="M0 3h31v3H0z"/><path fill="%23fff" d="M6 9h20v4H6z"/><path fill="%23FD232B" d="M20 10h5v2h-5z"/></svg>`;
 const creditCardBackground = `right 6px center no-repeat url('data:image/svg+xml;utf8,${creditCardSvg}')`;
 
 const UpgradeModal = ({
@@ -58,8 +68,8 @@ const UpgradeModal = ({
       <Card>
         <div style={{ maxWidth: '100vw', overflow: 'auto' }}>
           <div style={{ width: '550px', padding: '0 25px' }}>
-            <div style={{ textAlign: 'center', margin: '0 0 1rem 0' }}>
-              <Text size="large" color="outerSpace">
+            <div style={{ textAlign: 'center' }}>
+              <Text type="h2">
                 {hasExpiredProTrial
                   ? translations.proTrialistUpgradeHeader
                   : translations.proUpgradeHeader }
@@ -101,7 +111,7 @@ const UpgradeModal = ({
             />
 
             <div style={{ textAlign: 'center', margin: '1.5rem 0 1rem' }}>
-              <Text>{translations.enterPaymentDetails} <LockIcon color="shamrock" /></Text>
+              <Text type="h3">{translations.enterPaymentDetails} <LockedIcon /></Text>
             </div>
 
             <div style={{ display: 'flex' }}>
@@ -160,18 +170,24 @@ const UpgradeModal = ({
               </div>
             </div>
 
-            <div style={{ textAlign: 'center', margin: '2rem 0 0' }}>
-              <Button large disabled={validating} onClick={upgradePlan}>
-                {validating ? translations.validating : translations.upgradeCta}
-              </Button>
-              <br /><br />
-              <Button secondary large borderless onClick={hasExpiredProTrial ? cancelTrial : hideModal}>
-                {
+            <div style={buttonStyle}>
+              <Button
+                type="primary"
+                size="large"
+                label={validating ? translations.validating : translations.upgradeCta}
+                disabled={validating}
+                onClick={upgradePlan}
+              />
+              <Button
+                type="link"
+                size="large"
+                label={
                   hasExpiredProTrial
                   ? translations.proTrialistStayOnFreeCta
                   : translations.stayOnFreeCta
                 }
-              </Button>
+                onClick={hasExpiredProTrial ? cancelTrial : hideModal}
+              />
             </div>
           </div>
         </div>

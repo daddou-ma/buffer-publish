@@ -18,6 +18,16 @@
     "connectButton": "Connect Your Social Accounts",
     "defaultTitle": "Let's get your account set up!"
   },
+  "disabled-queue": {
+    "connectButton": "Manage Social Accounts",
+    "queueTab": "Queue",
+    "analyticsTab": "Analytics",
+    "awaitingTab": "Awaiting Approval",
+    "draftsTab": "Drafts",
+    "settingsTab": "Settings",
+    "composerInput": "What would you like to share?",
+    "currentDay": "Today"
+  },
   "stripe": {
     "noNameError": "Uh oh, please fill out the cardholder name :)",
     "noZipError": "For extra security, please add the zip code associated with this card",
@@ -71,7 +81,7 @@
     "trialLabel": "14-day Free trial",
     "header": "Welcome to Buffer for Business",
     "subHeader": "Get the most out of Buffer for Business with our getting started guide.",
-    "cta": "Go to our Getting Started Guide",
+    "cta": "Go to Our Getting Started Guide",
     "cancelCta": "Maybe Later"
   },
   "welcome-paid-modal": {

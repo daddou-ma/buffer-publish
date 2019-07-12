@@ -23,20 +23,34 @@ const profileSidebarStyle = {
 };
 
 const profileListStyle = {
-  flex: 1,
   overflowY: 'scroll',
 };
 
 const manageSocialAccountsStyle = {
-  marginTop: 'auto',
+  display: 'flex',
+  flexGrow: 1,
+  flexShrink: 0,
+  flexFlow: 'column nowrap',
   position: 'sticky',
   bottom: '15px',
   backgroundColor: '#fcfcfc',
 };
 
-const buttonDividerStyle = {
-  margin: '1rem 0',
+const socialButtonsWrapperStyle = {
+  display: 'flex',
+  flex: 1,
+  flexFlow: 'column nowrap',
+  marginTop: 'auto',
+};
 
+const buttonDividerStyle = {
+  marginBottom: '0.5rem',
+};
+
+const bottomSectionStyle = {
+  marginTop: 'auto',
+  display: 'flex',
+  flexFlow: 'column nowrap',
 };
 
 const renderLoadingProfiles = () => (
@@ -71,64 +85,70 @@ const ProfileSidebar = ({
 }) => (
   <div style={profileSidebarStyle}>
     {loading && renderLoadingProfiles()}
-    <div style={profileListStyle} data-hide-scrollbar>
-      {profiles.length > 9 &&
-        <ProfileSearch
+    {profiles.length > 0 &&
+      <div style={profileListStyle} data-hide-scrollbar>
+        {profiles.length > 9 &&
+          <ProfileSearch
+            profiles={profiles}
+            onSearchProfileChange={onSearchProfileChange}
+            isSearchPopupVisible={isSearchPopupVisible}
+            handleSubmit={({ selectedProfile }) => onProfileClick(selectedProfile)}
+          />
+        }
+        <ProfileList
+          selectedProfileId={selectedProfileId}
           profiles={profiles}
-          onSearchProfileChange={onSearchProfileChange}
-          isSearchPopupVisible={isSearchPopupVisible}
-          handleSubmit={({ selectedProfile }) => onProfileClick(selectedProfile)}
+          onProfileClick={onProfileClick}
+          onDropProfile={onDropProfile}
+          showProfilesDisconnectedModal={showProfilesDisconnectedModal}
+          profileLimit={profileLimit}
+          translations={translations}
         />
-      }
-      <ProfileList
-        selectedProfileId={selectedProfileId}
-        profiles={profiles}
-        onProfileClick={onProfileClick}
-        onDropProfile={onDropProfile}
-        showProfilesDisconnectedModal={showProfilesDisconnectedModal}
-        profileLimit={profileLimit}
-        translations={translations}
-      />
-    </div>
-    <div style={manageSocialAccountsStyle}>
-      {!hasInstagram && <ProfileConnectShortcut
-        label="Connect Instagram"
-        network="instagram"
-        url="https://buffer.com/oauth/instagram"
-        profileLimit={profileLimit}
-        profiles={profiles}
-        showUpgradeModal={showUpgradeModal}
-        goToConnectSocialAccount={goToConnectSocialAccount}
-      />}
-      {!hasFacebook && <ProfileConnectShortcut
-        label="Connect Facebook"
-        network="facebook"
-        url="https://buffer.com/oauth/facebook/choose"
-        profileLimit={profileLimit}
-        profiles={profiles}
-        showUpgradeModal={showUpgradeModal}
-        goToConnectSocialAccount={goToConnectSocialAccount}
-      />}
-      {!hasTwitter && <ProfileConnectShortcut
-        label="Connect Twitter"
-        network="twitter"
-        url="https://buffer.com/oauth/twitter"
-        profileLimit={profileLimit}
-        profiles={profiles}
-        showUpgradeModal={showUpgradeModal}
-        goToConnectSocialAccount={goToConnectSocialAccount}
-      />}
-      <div style={buttonDividerStyle}>
-        <Divider />
       </div>
-      <Button
-        label={translations.connectButton}
-        type="secondary"
-        fullWidth
-        onClick={() => {
-          onManageSocialAccountClick();
-        }}
-      />
+    }
+    <div style={manageSocialAccountsStyle}>
+      <div style={socialButtonsWrapperStyle}>
+        {!hasInstagram && <ProfileConnectShortcut
+          label="Connect Instagram"
+          network="instagram"
+          url="https://buffer.com/oauth/instagram"
+          profileLimit={profileLimit}
+          profiles={profiles}
+          showUpgradeModal={showUpgradeModal}
+          goToConnectSocialAccount={goToConnectSocialAccount}
+        />}
+        {!hasFacebook && <ProfileConnectShortcut
+          label="Connect Facebook"
+          network="facebook"
+          url="https://buffer.com/oauth/facebook/choose"
+          profileLimit={profileLimit}
+          profiles={profiles}
+          showUpgradeModal={showUpgradeModal}
+          goToConnectSocialAccount={goToConnectSocialAccount}
+        />}
+        {!hasTwitter && <ProfileConnectShortcut
+          label="Connect Twitter"
+          network="twitter"
+          url="https://buffer.com/oauth/twitter"
+          profileLimit={profileLimit}
+          profiles={profiles}
+          showUpgradeModal={showUpgradeModal}
+          goToConnectSocialAccount={goToConnectSocialAccount}
+        />}
+        <div style={bottomSectionStyle}>
+          <div style={buttonDividerStyle}>
+            <Divider marginTop="1rem" />
+          </div>
+          <Button
+            label={translations.connectButton}
+            type="secondary"
+            fullWidth
+            onClick={() => {
+              onManageSocialAccountClick();
+            }}
+          />
+        </div>
+      </div>
     </div>
   </div>
 );
@@ -138,7 +158,7 @@ ProfileSidebar.propTypes = {
   onProfileClick: ProfileList.propTypes.onProfileClick,
   onManageSocialAccountClick: PropTypes.func.isRequired,
   goToConnectSocialAccount: PropTypes.func.isRequired,
-  showUpgradeModal: PropTypes.func.isRequired,
+  showUpgradeModal: PropTypes.func,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
   translations: PropTypes.shape({
@@ -146,7 +166,7 @@ ProfileSidebar.propTypes = {
   }),
   profileLimit: PropTypes.number,
   onDropProfile: PropTypes.func,
-  showProfilesDisconnectedModal: PropTypes.func.isRequired,
+  showProfilesDisconnectedModal: PropTypes.func,
   hasInstagram: PropTypes.bool.isRequired,
   hasFacebook: PropTypes.bool.isRequired,
   hasTwitter: PropTypes.bool.isRequired,

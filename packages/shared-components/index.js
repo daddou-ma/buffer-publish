@@ -24,4 +24,5 @@ export PostEmptySlot from './PostEmptySlot';
 export QueueButtonGroup from './QueueButtonGroup';
 export GridList from './GridList';
 export ConfirmModal from './ConfirmModal';
+export ComposerInput from './ComposerInput';
 export ProTag from './ProTag';
