@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
-import { Text } from '@bufferapp/ui';
+import { Text, Tooltip } from '@bufferapp/ui';
 import {
   Tabs,
   Tab,
@@ -86,6 +86,10 @@ const headerTextStyle = {
   alignItems: 'baseline',
 };
 
+const tabStyle = {
+  display: 'inline-block',
+};
+
 const calendarBtns = ['Day', 'Week', 'Month'];
 
 const getCurrentDay = () => moment().format('MMMM D');
@@ -118,19 +122,37 @@ const DisabledQueue = ({ translations }) => (
           onTabClick={() => {}}
         >
           <Tab tabId={'disabledTab'}>{translations.queueTab}</Tab>
-          <Tab tabId={'disabledTab2'}>{translations.analyticsTab}</Tab>
-          <Tab tabId={'disabledTab3'}>{translations.awaitingTab}</Tab>
-          <Tab tabId={'disabledTab4'}>{translations.draftsTab}</Tab>
-          <Tab tabId={'disabledTab5'}>{translations.settingsTab}</Tab>
+          <div style={tabStyle}>
+            <Tooltip label="Connect a social account to explore this tab" position="bottom">
+              <Tab tabId={'disabledTab2'} disabled>{translations.analyticsTab}</Tab>
+            </Tooltip>
+          </div>
+          <div style={tabStyle}>
+            <Tooltip label="Connect a social account to explore this tab" position="bottom">
+              <Tab tabId={'disabledTab3'} disabled>{translations.awaitingTab}</Tab>
+            </Tooltip>
+          </div>
+          <div style={tabStyle}>
+            <Tooltip label="Connect a social account to explore this tab" position="bottom">
+              <Tab tabId={'disabledTab4'} disabled>{translations.draftsTab}</Tab>
+            </Tooltip>
+          </div>
+          <div style={tabStyle}>
+            <Tooltip label="Connect a social account to explore this tab" position="bottom">
+              <Tab tabId={'disabledTab5'} disabled>{translations.settingsTab}</Tab>
+            </Tooltip>
+          </div>
         </Tabs>
       </div>
       <div style={tabContentStyle}>
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
-            <ComposerInput
-              isDisabled
-              placeholder={translations.composerInput}
-            />
+            <Tooltip label="Connect a social account to start sharing content" position="bottom">
+              <ComposerInput
+                isDisabled
+                placeholder={translations.composerInput}
+              />
+            </Tooltip>
           </div>
         </div>
         <div style={listHeaderStyle}>
@@ -141,10 +163,13 @@ const DisabledQueue = ({ translations }) => (
             </span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
-            <QueueButtonGroup
-              buttons={calendarBtns}
-              onClick={() => {}}
-            />
+            <Tooltip label="Connect a social account to see calendar views of your posts" position="top">
+              <QueueButtonGroup
+                buttons={calendarBtns}
+                onClick={() => {}}
+                disabled
+              />
+            </Tooltip>
           </div>
         </div>
         <PostEmptySlot

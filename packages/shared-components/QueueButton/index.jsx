@@ -8,7 +8,7 @@ const getBorderRadius = (index) => {
 };
 
 // refactor when new design system is used
-const btnStyle = (index, isHovering, isSelected) => ({
+const btnStyle = (index, isHovering, isSelected, disabled) => ({
   fontFamily: 'Roboto',
   fontWeight: 500,
   color: isSelected || isHovering ? '#3D3D3D' : '#636363',
@@ -23,6 +23,7 @@ const btnStyle = (index, isHovering, isSelected) => ({
   outline: 'none',
   position: (index !== 1) ? 'relative' : 'initial',
   margin: (index !== 1) ? 'auto -1px' : 'initial',
+  pointerEvents: disabled ? 'none' : 'auto',
 });
 
 const getWeekOrMonth = (index) => {
@@ -54,10 +55,10 @@ class QueueButton extends Component {
   }
 
   render() {
-    const { onClick, index, text } = this.props;
+    const { onClick, index, text, disabled } = this.props;
     return (
       <button
-        style={btnStyle(index, this.state.isHovering, this.state.selectedIndex === index)}
+        style={btnStyle(index, this.state.isHovering, this.state.selectedIndex === index, disabled)}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={(e) => {
@@ -76,6 +77,11 @@ QueueButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
+};
+
+QueueButton.defaultProps = {
+  disabled: false,
 };
 
 export default QueueButton;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import QueueButton from '../QueueButton';
 
-const QueueButtonGroup = ({ onClick, buttons }) => (
+const QueueButtonGroup = ({ onClick, buttons, disabled }) => (
   <div>
     { buttons.map((text, index) => (
       <QueueButton
@@ -10,6 +10,7 @@ const QueueButtonGroup = ({ onClick, buttons }) => (
         text={text}
         index={index}
         onClick={onClick}
+        disabled={disabled}
       />
     ))}
   </div>
@@ -18,6 +19,11 @@ const QueueButtonGroup = ({ onClick, buttons }) => (
 QueueButtonGroup.propTypes = {
   onClick: PropTypes.func.isRequired,
   buttons: PropTypes.arrayOf(PropTypes.string).isRequired,
+  disabled: PropTypes.bool,
+};
+
+QueueButtonGroup.defaultProps = {
+  disabled: false,
 };
 
 export default QueueButtonGroup;
