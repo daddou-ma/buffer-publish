@@ -46,14 +46,53 @@ const moveProfileInArray = (arr, from, to) => {
 const handleProfileDropped = (profiles, action) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
   const reorderedProfiles = moveProfileInArray(profiles, dragIndex, hoverIndex);
-  // add profiles after limit as disabled
-  if (reorderedProfiles.length > profileLimit) {
-    reorderedProfiles.map((profile, index) => {
-      profile.disabled = index >= profileLimit;
-      return profile;
-    });
-  }
-  return reorderedProfiles;
+    /* The reducer will return an object with 3 properties, each of them an array of profiles.
+  For each profile reduced, we will need to spread the ACC object,
+  changing only 1 property, i.e., adding the profile to only 1 array */
+  const {
+    enabledProfiles,
+    lockedProfiles,
+    teamProfiles,
+  } = reorderedProfiles.reduce(
+    (acc, cur) => {
+      /* If the profile has organization members (team members) it can't be unlocked,
+      it goes to the teamProfiles array. */
+      if (cur.hasOrganizationMembers) {
+        return { ...acc, teamProfiles: [...acc.teamProfiles, cur] };
+      }
+
+      /* If it's not a team profile, figure out if the enabledProfiles array
+      in ACC is already full i.e. if the user has surpassed the profile limit.
+      In that case, the profile must go into the lockedProfiles.
+      If not, then the profile belongs in the enabledProfiles. */
+      return acc.enabledProfiles.length >= profileLimit
+      ? {
+        ...acc,
+        lockedProfiles: [
+          ...acc.lockedProfiles,
+          { ...cur, disabled: true },
+        ],
+      }
+      : {
+        ...acc,
+        enabledProfiles: [
+          ...acc.enabledProfiles,
+          { ...cur, disabled: false },
+        ],
+      };
+    },
+  { enabledProfiles: [], lockedProfiles: [], teamProfiles: [] },
+
+  );
+
+  // Final list of profiles
+  const sortedProfiles = [
+    ...enabledProfiles,
+    ...lockedProfiles,
+    ...teamProfiles,
+  ];
+
+  return sortedProfiles;
 };
 
 const profilesReducer = (state = [], action) => {
