@@ -21,9 +21,9 @@ const getBgStyle = (isHovering, focus) => {
   return '#F5F5F5';
 };
 
-const emptySlotStyle = (isHovering, focus) => ({
+const emptySlotStyle = (isHovering, focus, service) => ({
   background: getBgStyle(isHovering, focus),
-  cursor: 'pointer',
+  cursor: service === 'noProfile' ? 'auto' : 'pointer',
   border: isHovering ? '1px solid #B8B8B8' : '1px solid transparent',
   borderRadius: '4px',
   fontFamily: 'Roboto',
@@ -99,7 +99,7 @@ class PostEmptySlot extends Component {
     const { service, time, onClick, focus } = this.props;
     return ( // eslint-disable-next-line
       <div
-        style={emptySlotStyle(this.state.isHovering, focus)}
+        style={emptySlotStyle(this.state.isHovering, focus, service)}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={onClick}
