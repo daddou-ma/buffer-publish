@@ -297,6 +297,10 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
 
   // scheduledAt and isPinnedToSlot are the same across all drafts
   getScheduledAt: () => state.drafts[0].scheduledAt,
+  isSentPost: () => {
+    const { sentPost } = AppStore.getOptions();
+    return sentPost;
+  },
   isPinnedToSlot: () => state.drafts[0].isPinnedToSlot,
 
   getMeta: () => state.meta,
@@ -305,8 +309,8 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
    * Do not use: synchronous "dispatches" go against Flux's ideas, this method
    * is only used in a single place to prevent a race condition.
    */
-   // eslint-disable-next-line no-use-before-define
-  _syncDispatch: (payload) => onDispatchedPayload(payload),
+  // eslint-disable-next-line no-use-before-define
+  _syncDispatch: payload => onDispatchedPayload(payload),
 });
 
 // Should be used for composition with functions that are passed a draft id as first argument.
@@ -1818,7 +1822,7 @@ const onDispatchedPayload = (payload) => {
       handleRemovedDraftLinks(action.id, action.removedUrls);
       break;
 
-    case ActionTypes.COMPOSER_UPDATE_DRAFTS_SCHEDULED_AT:
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_SCHEDULED_AT:-
       state.drafts.forEach((draft) => {
         updateDraftScheduledAt(draft.id, action.scheduledAt, action.isPinnedToSlot);
       });

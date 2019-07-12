@@ -576,7 +576,7 @@ const checkIfSavingPossible = () => {
 
   // Enabled drafts shouldn't be above the optional character limit
   const enabledDrafts = ComposerStore.getEnabledDrafts();
-  const enabledDraftsAboveCharLimit = enabledDrafts.filter((draft) =>
+  const enabledDraftsAboveCharLimit = enabledDrafts.filter(draft =>
     draft.characterCount > draft.service.charLimit);
   const hasEnabledDraftsAboveCharLimit = enabledDraftsAboveCharLimit.length > 0;
 
@@ -584,29 +584,30 @@ const checkIfSavingPossible = () => {
     return {
       isSavingPossible: false,
       whatPreventsSaving: Array.prototype.concat.call(
-        enabledDraftsAboveCharLimit.map((draft) => ({
+        enabledDraftsAboveCharLimit.map(draft => ({
           message: `We can only fit ${draft.service.charLimit} characters in this post`,
           composerId: draft.id,
           code: 1,
         })),
         ...invalidEnabledDraftsInfo.map(({ draft, messages }) => (
-          messages.map((message) => ({
+          messages.map(message => ({
             message,
             composerId: draft.id,
           }))
-        ))
+        )),
       ),
     };
   }
 
   // Enabled drafts, if scheduled, should be scheduled for a time in the future
-  const scheduledAt = ComposerStore.getScheduledAt();
+  const isSentPost = ComposerStore.isSentPost();
+  const scheduledAt = isSentPost ? null : ComposerStore.getScheduledAt();
   const currentTimestampSeconds = Math.floor(Date.now() / 1000);
   if (scheduledAt !== null && scheduledAt <= currentTimestampSeconds) {
     return {
       isSavingPossible: false,
       whatPreventsSaving: [{
-        message: 'The scheduled time seems to be in the past',
+        message: 'The scheduled time seems to be in the past asd',
       }],
     };
   }

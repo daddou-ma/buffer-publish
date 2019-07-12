@@ -45,10 +45,12 @@ class UpdateSaver extends React.Component {
       })),
     ]),
     isPinnedToSlot: PropTypes.bool,
+    sentPost: PropTypes.bool,
   };
 
   static defaultProps = {
     isPinnedToSlot: null,
+    sentPost: false,
   };
 
   state = getUpdateSaverState();
@@ -114,9 +116,10 @@ class UpdateSaver extends React.Component {
   render() {
     const {
       appState, userData, metaData, visibleNotifications, timezone, moreThanOneProfileSelected,
-      areAllDraftsSaved, saveButtons, scheduledAt, isSlotPickingAvailable,
-      availableSchedulesSlotsForDay, isPinnedToSlot, selectedProfiles,
+      areAllDraftsSaved, saveButtons, isSlotPickingAvailable,
+      availableSchedulesSlotsForDay, isPinnedToSlot, selectedProfiles, sentPost,
     } = this.props;
+    let { scheduledAt } = this.props;
 
     const {
       isSavingPossible, isDraftsSavePending, draftSaveQueueingType, isOmniboxEnabled,
@@ -223,6 +226,7 @@ class UpdateSaver extends React.Component {
         getActiveSaveButtonCopy(firstStackedButtonType, draftSaveQueueingType);
     }
 
+    if (sentPost) scheduledAt = null;
     const shouldDisplayInlineScheduler = scheduledAt !== null;
     let scheduledAtMoment;
     let humanReadableScheduledAt;
