@@ -15,10 +15,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import { InputDate } from '@bufferapp/components';
+import { Button } from '@bufferapp/ui';
 
 import TimePicker from '../components/TimePicker';
 import SlotPicker from '../components/SlotPicker';
-import Button from '../components/Button';
 import Select from '../components/Select';
 
 import styles from './css/DateTimeSlotPicker.css';
@@ -256,18 +256,23 @@ class DateTimeSlotPicker extends React.Component {
 
         {shouldDisplayTimePicker &&
           <TimePicker
-            shouldUse24hTime={shouldUse24hTime} time={selectedDateTime}
-            timezone={timezone} onChange={this.onTimePickerChange}
+            shouldUse24hTime={shouldUse24hTime}
+            time={selectedDateTime}
+            timezone={timezone}
+            onChange={this.onTimePickerChange}
             className={styles.timePicker}
-          />}
+          />
+        }
 
         {shouldDisplayTimePicker && isSlotPickingAvailable && doSelectedProfilesHaveSlots &&
           <Button
+            type="secondary"
+            size="small"
+            label="Switch to schedule slots"
             className={styles.pickerSwitchButton}
             onClick={this.onSwitchToSlotPickerClick}
-          >
-            Switch to schedule slots
-          </Button>}
+          />
+        }
 
         {shouldDisplaySlotPicker && isSlotPickingAvailable &&
         (hasAvailableSchedulesSlotsInfoForDay ?
@@ -283,25 +288,31 @@ class DateTimeSlotPicker extends React.Component {
           /> :
           <Select disabled className={styles.slotPicker} value="">
             <option value="">Loading slots…</option>
-          </Select>)}
+          </Select>)
+        }
 
         {shouldDisplaySlotPicker && isSlotPickingAvailable &&
           <Button
+            type="secondary"
+            size="small"
+            label="Switch to custom time"
             className={styles.pickerSwitchButton}
             onClick={this.onSwitchToTimePickerClick}
-          >
-            Switch to custom time
-          </Button>}
+          />
+        }
 
         <Button
-          onClick={this.onSubmit} className={styles.submitButton}
+          type="primary"
+          size="small"
+          label={submitButtonCopy}
+          onClick={this.onSubmit}
+          className={styles.submitButton}
           disabled={!isTimeInFuture}
-        >
-          {submitButtonCopy}
-        </Button>
+        />
 
         {shouldDisplayTimezone &&
-          <div className={styles.timezone}>{formattedTimezone}</div>}
+          <div className={styles.timezone}>{formattedTimezone}</div>
+        }
       </div>
     );
   }

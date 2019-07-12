@@ -180,7 +180,6 @@ const AppStateless = ({
         hasIGDirectFlip={userData.hasIGDirectFlip || false}
         hasIGLocationTaggingFeature={userData.hasIGLocationTaggingFeature || false}
         hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
-        hasFirstCommentFlip={userData.hasFirstCommentFlip || false}
         hasShopgridFlip={userData.hasShopgridFlip || false}
         isFreeUser={userData.isFreeUser || false}
         isBusinessUser={userData.isBusinessUser || false}

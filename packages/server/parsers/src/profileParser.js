@@ -1,5 +1,5 @@
 const isInstagramAnalyticsSupported = profile =>
-  profile.service === 'instagram' && profile.is_instagram_business
+  profile.service === 'instagram' && profile.is_instagram_business;
 
 module.exports = profile => ({
   id: profile.id,
@@ -10,6 +10,7 @@ module.exports = profile => ({
   handle: profile.service_username,
   isManager: profile.organization_role === 1,
   ownerId: profile.user_id,
+  hasOrganizationMembers: profile.has_organization_members,
   pendingCount: profile.counts.pending,
   sentCount: profile.counts.sent,
   timezone: profile.timezone,
@@ -45,4 +46,4 @@ module.exports = profile => ({
     (profile.service === 'twitter' ||
       profile.service === 'facebook' ||
       isInstagramAnalyticsSupported(profile)),
-})
+});

@@ -92,6 +92,20 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     }
 
+    case thirdPartyActionTypes.APPCUES_STARTED: {
+      const tourInProgress = getState().thirdparty.appCues.inProgress;
+      const selectedProfileId = getState().profileSidebar.selectedProfileId;
+
+      if (tourInProgress) {
+        dispatch(actions.hideInstagramDirectPostingModal());
+        dispatch(actions.saveModalToShowLater({
+          modalId: actionTypes.SHOW_IG_DIRECT_POSTING_MODAL,
+          selectedProfileId,
+        }));
+      }
+      break;
+    }
+
     case profileActionTypes.SELECT_PROFILE: {
       const profileId = getState().profileSidebar.selectedProfileId;
       const isIGBusiness = getState().profileSidebar.selectedProfile.service_type === 'business';

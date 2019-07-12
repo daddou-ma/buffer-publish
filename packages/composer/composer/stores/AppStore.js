@@ -152,7 +152,6 @@ const getNewUserData = (data) => ({
   hasIGDirectFlip: data.hasIGDirectFlip,
   hasIGLocationTaggingFeature: data.hasIGLocationTaggingFeature,
   hasIGDirectVideoFlip: data.hasIGDirectVideoFlip,
-  hasFirstCommentFlip: data.hasFirstCommentFlip,
   canStartProTrial: data.canStartProTrial,
   isOnProTrial: data.isOnProTrial,
   hasShopgridFlip: data.hasShopgridFlip,
