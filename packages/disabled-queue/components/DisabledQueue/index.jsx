@@ -124,30 +124,22 @@ const DisabledQueue = ({ translations }) => (
           <Tab tabId={'disabledTab'}>{translations.queueTab}</Tab>
           <div style={tabStyle}>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId={'disabledTab2'} disabled>
-                {translations.analyticsTab}
-              </Tab>
+              <Tab tabId={'disabledTab2'} disabled>{translations.analyticsTab}</Tab>
             </Tooltip>
           </div>
           <div style={tabStyle}>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId={'disabledTab3'} disabled>
-                {translations.awaitingTab}
-              </Tab>
+              <Tab tabId={'disabledTab3'} disabled>{translations.awaitingTab}</Tab>
             </Tooltip>
           </div>
           <div style={tabStyle}>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId={'disabledTab4'} disabled>
-                {translations.draftsTab}
-              </Tab>
+              <Tab tabId={'disabledTab4'} disabled>{translations.draftsTab}</Tab>
             </Tooltip>
           </div>
           <div style={tabStyle}>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId={'disabledTab5'} disabled>
-                {translations.settingsTab}
-              </Tab>
+              <Tab tabId={'disabledTab5'} disabled>{translations.settingsTab}</Tab>
             </Tooltip>
           </div>
         </Tabs>
