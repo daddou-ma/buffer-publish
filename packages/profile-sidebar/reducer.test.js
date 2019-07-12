@@ -11,6 +11,7 @@ describe('reducer', () => {
       profiles: [],
       loading: false,
       selectedProfileId: '',
+      userId: null,
       selectedProfile: {},
       isBusinessAccount: false,
       isLockedProfile: false,
