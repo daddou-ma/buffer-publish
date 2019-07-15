@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isValidURL, urlHasProtocol } from '@bufferapp/publish-grid/util';
 import styles from './css/ShopgridComposerBar.css';
 
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
@@ -14,13 +15,25 @@ class ShopgridComposerBar extends React.Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onBlur = this.onBlur.bind(this);
     this.shouldShowShopgridBar = this.shouldShowShopgridBar.bind(this);
     this.openHelp = this.openHelp.bind(this);
   }
 
   onChange(event) {
-    this.setState({ shopgridLink: event.target.value || ''});
+    this.setState({ shopgridLink: event.target.value || '' });
     ComposerActionCreators.updateDraftShopgridLink(this.props.draftId, event.target.value);
+  }
+
+  onBlur(event) {
+    let shopgridLink = event.target.value || '';
+    if (isValidURL(event.target.value)) {
+      if (!urlHasProtocol(event.target.value)) {
+        shopgridLink = `https://${event.target.value}`;
+      }
+    }
+    this.setState({ shopgridLink });
+    ComposerActionCreators.updateDraftShopgridLink(this.props.draftId, shopgridLink);
   }
 
   shouldShowShopgridBar() {
@@ -67,7 +80,7 @@ class ShopgridComposerBar extends React.Component {
             <input
               className={styles.shopgridFieldInput}
               onChange={this.onChange}
-              onBlur={this.onChange}
+              onBlur={this.onBlur}
               name="shopgridLink"
               placeholder="Website or Product URL"
               value={this.state.shopgridLink}

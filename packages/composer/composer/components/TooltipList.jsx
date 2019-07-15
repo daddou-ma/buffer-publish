@@ -11,7 +11,7 @@ const TooltipList = (props) => {
 
   return (
     <ul className={tooltipListClassName}>
-      {props.messages.map((message) => (
+      {props.messages.map(message => (
         <li className={styles.tooltipListItem} key={message}>
           {message}
         </li>

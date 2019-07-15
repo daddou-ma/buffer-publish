@@ -1,8 +1,8 @@
+import { isValidURL } from '@bufferapp/publish-grid/util';
 import ValidationSuccess from './ValidationSuccess';
 import ValidationFail from './ValidationFail';
 import { Services } from '../../AppConstants';
 import ValidationResults from './ValidationResults';
-import { isValidURL } from '@bufferapp/publish-grid/util';
 
 function validateVideoForInstagram(video) {
   const instagramService = Services.get('instagram');

@@ -278,7 +278,13 @@ class UpdateSaver extends React.Component {
         )}
 
         {!isOmniboxEnabled && displayInlineSaveButtons && (
-          <div className={inlineButtonsWrapperClassName} data-disabled={isDisabled}>
+          <div
+            className={inlineButtonsWrapperClassName}
+            data-disabled={isDisabled}
+            data-tip={this.getFormattedWhatPreventsSavingMessages()}
+            data-html
+            data-place="left"
+          >
             {inlineSaveButtonTypes.map((saveButtonType, i) => (
               <UpdateSaverItem
                 key={saveButtonType}
@@ -303,8 +309,11 @@ class UpdateSaver extends React.Component {
 
         {!isOmniboxEnabled && displayStackedSaveButtons && (
           <div
-            className={stackedButtonsWrapperClassName} data-disabled={isDisabled}
-            data-tip={this.getFormattedWhatPreventsSavingMessages()} data-html data-place="left"
+            className={stackedButtonsWrapperClassName}
+            data-disabled={isDisabled}
+            data-tip={this.getFormattedWhatPreventsSavingMessages()}
+            data-html
+            data-place="left"
           >
             <UpdateSaverItem
               type={firstStackedButtonType}

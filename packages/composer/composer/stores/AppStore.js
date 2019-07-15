@@ -576,7 +576,7 @@ const checkIfSavingPossible = () => {
 
   // Enabled drafts shouldn't be above the optional character limit
   const enabledDrafts = ComposerStore.getEnabledDrafts();
-  const enabledDraftsAboveCharLimit = enabledDrafts.filter((draft) =>
+  const enabledDraftsAboveCharLimit = enabledDrafts.filter(draft =>
     draft.characterCount > draft.service.charLimit);
   const hasEnabledDraftsAboveCharLimit = enabledDraftsAboveCharLimit.length > 0;
 
@@ -584,17 +584,17 @@ const checkIfSavingPossible = () => {
     return {
       isSavingPossible: false,
       whatPreventsSaving: Array.prototype.concat.call(
-        enabledDraftsAboveCharLimit.map((draft) => ({
+        enabledDraftsAboveCharLimit.map(draft => ({
           message: `We can only fit ${draft.service.charLimit} characters in this post`,
           composerId: draft.id,
           code: 1,
         })),
         ...invalidEnabledDraftsInfo.map(({ draft, messages }) => (
-          messages.map((message) => ({
+          messages.map(message => ({
             message,
             composerId: draft.id,
           }))
-        ))
+        )),
       ),
     };
   }
@@ -619,7 +619,7 @@ const updateIsSavingPossible = () => {
 
   state.appState.isSavingPossible = isSavingPossible;
   state.appState.whatPreventsSaving =
-    whatPreventsSaving.map((what) => getNewPreventsSavingObj(what));
+    whatPreventsSaving.map(what => getNewPreventsSavingObj(what));
 };
 
 const getExpandedComposerId = () => state.appState.expandedComposerId;
