@@ -94,11 +94,17 @@ const calendarBtns = ['Day', 'Week', 'Month'];
 
 const getCurrentDay = () => moment().format('MMMM D');
 
-const DisabledQueue = ({ translations }) => (
+const DisabledQueue = ({
+  translations,
+  onManageSocialAccountClick,
+  goToConnectSocialAccount,
+}) => (
   <div style={profilePageStyle}>
     <div style={profileSideBarStyle}>
       <ProfileSidebar
         translations={translations}
+        onManageSocialAccountClick={onManageSocialAccountClick}
+        goToConnectSocialAccount={goToConnectSocialAccount}
         loading={false}
       />
     </div>
@@ -185,6 +191,8 @@ DisabledQueue.propTypes = {
     composerInput: PropTypes.string,
     currentDay: PropTypes.string,
   }).isRequired,
+  onManageSocialAccountClick: PropTypes.func.isRequired,
+  goToConnectSocialAccount: PropTypes.func.isRequired,
 };
 
 export default DisabledQueue;
