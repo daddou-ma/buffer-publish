@@ -1,5 +1,5 @@
-const { SEGMENT_NAMES } = require('@bufferapp/publish-constants');
 const { method, createError } = require('@bufferapp/buffer-rpc');
+const { SEGMENT_NAMES } = require('@bufferapp/publish-constants');
 const rp = require('request-promise');
 
 const sourceCtaMap = new Map([
