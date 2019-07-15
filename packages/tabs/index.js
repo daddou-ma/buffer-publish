@@ -17,7 +17,7 @@ export default connect(
     onProTrial: state.appSidebar.user.trial &&
                 state.appSidebar.user.trial.onTrial &&
                 !state.profileSidebar.selectedProfile.business,
-    shouldShowUpgradeCta: state.appSidebar.user.is_free_user,
+    shouldShowUpgradeCta: state.appSidebar.user.is_free_user && !state.appSidebar.user.isBusinessTeamMember,
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
     shouldHideAnalyticsOverviewTab: state.profileSidebar.selectedProfile.business &&
