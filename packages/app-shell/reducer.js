@@ -28,9 +28,9 @@ export default (state = initialState, action) => {
           name: action.result.name,
         },
         showReturnToClassic: action.result.showReturnToClassic,
-        showUpgradeToPro: action.result.is_free_user,
+        showUpgradeToPro: action.result.is_free_user && !action.result.isBusinessTeamMember,
         showManageTeam: !action.result.is_free_user,
-        showStartProTrial: action.result.canStartProTrial,
+        showStartProTrial: action.result.canStartProTrial && !action.result.isBusinessTeamMember,
       };
     case actionTypes.SET_BANNER_OPTIONS:
       return {
