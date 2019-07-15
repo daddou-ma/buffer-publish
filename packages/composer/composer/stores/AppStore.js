@@ -607,7 +607,7 @@ const checkIfSavingPossible = () => {
     return {
       isSavingPossible: false,
       whatPreventsSaving: [{
-        message: 'The scheduled time seems to be in the past asd',
+        message: 'The scheduled time seems to be in the past',
       }],
     };
   }
@@ -620,7 +620,7 @@ const updateIsSavingPossible = () => {
 
   state.appState.isSavingPossible = isSavingPossible;
   state.appState.whatPreventsSaving =
-    whatPreventsSaving.map((what) => getNewPreventsSavingObj(what));
+    whatPreventsSaving.map(what => getNewPreventsSavingObj(what));
 };
 
 const getExpandedComposerId = () => state.appState.expandedComposerId;
