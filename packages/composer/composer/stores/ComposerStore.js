@@ -1822,7 +1822,7 @@ const onDispatchedPayload = (payload) => {
       handleRemovedDraftLinks(action.id, action.removedUrls);
       break;
 
-    case ActionTypes.COMPOSER_UPDATE_DRAFTS_SCHEDULED_AT:-
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_SCHEDULED_AT:
       state.drafts.forEach((draft) => {
         updateDraftScheduledAt(draft.id, action.scheduledAt, action.isPinnedToSlot);
       });
