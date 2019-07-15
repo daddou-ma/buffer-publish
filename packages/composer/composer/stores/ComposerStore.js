@@ -790,14 +790,16 @@ const updateDraftComment = monitorComposerLastInteractedWith(
     // the editor to re-render decorators. The editor itself sets that prop back
     // to false using the draft reference.
     if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
-  }
+  },
 );
 
 const updateShopgridLink = monitorComposerLastInteractedWith(
-  (id, shopgridLink) => {
+  (id, shopgridLink, didEditorStateChange) => {
     const draft = ComposerStore.getDraft(id);
     if (draft.service.name !== 'instagram') return;
     draft.shopgridLink = shopgridLink;
+
+    if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
   },
 );
 

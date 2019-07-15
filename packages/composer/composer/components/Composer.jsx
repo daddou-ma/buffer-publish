@@ -379,7 +379,7 @@ class Composer extends React.Component {
 
     return (
       ReactDOMServer.renderToStaticMarkup(
-        <TooltipList messages={messages} />
+        <TooltipList messages={messages} />,
       )
     );
   };
