@@ -15,3 +15,6 @@ export default connect(
     },
   }),
 )(DisabledQueue);
+
+export { actions, actionTypes } from './reducer';
+export middleware from './middleware';

@@ -35,6 +35,7 @@ import { reducer as appShellReducer } from '@bufferapp/publish-app-shell';
 import { reducer as ctaBannerReducer } from '@bufferapp/publish-cta-banner';
 import { reducer as igFirstCommentProTrialModalReducer } from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 import { reducer as trialReducer } from '@bufferapp/publish-trial';
+import { reducer as disabledQueueReducer } from '@bufferapp/publish-disabled-queue';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -85,6 +86,7 @@ export default {
   ctaBanner: ctaBannerReducer,
   igFirstCommentProTrialModal: igFirstCommentProTrialModalReducer,
   trial: trialReducer,
+  disabledQueue: disabledQueueReducer,
 
   // Analyze
   average: averageReducer,
