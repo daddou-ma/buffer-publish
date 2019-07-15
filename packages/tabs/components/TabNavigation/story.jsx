@@ -31,9 +31,9 @@ const store = storeFake({
     user: {
       trial: {
         onTrial: false,
-      }
-    }
-  }
+      },
+    },
+  },
 });
 
 const UpgradeModalDecorator = storyFn => (
