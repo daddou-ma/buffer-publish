@@ -94,25 +94,12 @@ const calendarBtns = ['Day', 'Week', 'Month'];
 
 const getCurrentDay = () => moment().format('MMMM D');
 
-const onManageSocialAccountClick = () => {
-  window.location = getURL.getManageSocialAccountURL();
-};
-
-const goToConnectSocialAccount = () => {
-  window.location = getURL.getConnectSocialAccountURL();
-};
-
 const DisabledQueue = ({ translations }) => (
   <div style={profilePageStyle}>
     <div style={profileSideBarStyle}>
       <ProfileSidebar
         translations={translations}
-        goToConnectSocialAccount={goToConnectSocialAccount}
-        onManageSocialAccountClick={onManageSocialAccountClick}
         loading={false}
-        hasInstagram={false}
-        hasFacebook={false}
-        hasTwitter={false}
       />
     </div>
     <div style={contentStyle}>
