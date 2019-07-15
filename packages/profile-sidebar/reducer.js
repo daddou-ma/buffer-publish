@@ -44,7 +44,7 @@ const moveProfileInArray = (arr, from, to) => {
   return clone;
 };
 
-const handleProfileDropped = (profiles, action, userId) => {
+const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
   const reorderedProfiles = moveProfileInArray(profiles, dragIndex, hoverIndex);
     /* The reducer will return an object with 3 properties, each of them an array of profiles.
@@ -53,16 +53,17 @@ const handleProfileDropped = (profiles, action, userId) => {
   const {
     enabledProfiles,
     lockedProfiles,
-    teamProfiles,
+    blockedProfiles,
   } = reorderedProfiles.reduce(
     (acc, cur) => {
       /* If the user is not the owner it can't be unlocked,
-      it goes to the teamProfiles array. */
-      if (cur.ownerId !== userId) {
-        return { ...acc, teamProfiles: [...acc.teamProfiles, cur] };
+      the same happens for pinterest accounts if the user is on a free plan:
+      it goes to the blockedProfiles array. */
+      if (cur.ownerId !== userId || (cur.service === 'pinterest' && isFreeUser)) {
+        return { ...acc, blockedProfiles: [...acc.blockedProfiles, cur] };
       }
 
-      /* If it's not a team profile, figure out if the enabledProfiles array
+      /* If it's not a blocked profile, figure out if the enabledProfiles array
       in ACC is already full i.e. if the user has surpassed the profile limit.
       In that case, the profile must go into the lockedProfiles.
       If not, then the profile belongs in the enabledProfiles. */
@@ -82,7 +83,7 @@ const handleProfileDropped = (profiles, action, userId) => {
         ],
       };
     },
-  { enabledProfiles: [], lockedProfiles: [], teamProfiles: [] },
+  { enabledProfiles: [], lockedProfiles: [], blockedProfiles: [] },
 
   );
 
@@ -90,7 +91,7 @@ const handleProfileDropped = (profiles, action, userId) => {
   const sortedProfiles = [
     ...enabledProfiles,
     ...lockedProfiles,
-    ...teamProfiles,
+    ...blockedProfiles,
   ];
 
   return sortedProfiles;
@@ -206,7 +207,7 @@ export default (state = initialState, action) => {
       if (!action.commit) {
         return {
           ...state,
-          profiles: handleProfileDropped(state.profiles, action, state.userId),
+          profiles: handleProfileDropped(state.profiles, action, state.userId, state.isFreeUser),
         };
       }
       return state;
@@ -224,6 +225,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userId: action.result.id,
+        isFreeUser: action.result.is_free_user,
       };
     }
     default:
