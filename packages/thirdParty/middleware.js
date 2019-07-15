@@ -6,8 +6,6 @@ import { actionTypes } from './reducer';
 
 import {
   HELPSCOUT_ID,
-  APPCUES_PRO_TRIAL_FLOW_ID,
-  APPCUES_PRO_TRIAL_TEST_FLOW_ID,
 } from './constants';
 
 const checkExtensionInstalled = () => {
@@ -76,7 +74,6 @@ export default ({ dispatch, getState }) => next => (action) => {
             profileCount,
             is_business_user: isBusinessUser,
           } = action.result;
-
           if (isBusinessUser || plan === 'pro') {
             dispatch({
               type: actionTypes.APPCUES_LOADED,
@@ -95,28 +92,18 @@ export default ({ dispatch, getState }) => next => (action) => {
               profileCount, // Number of profiles _owned_ by the user
             });
 
-            // Only dispatch event for a particular Appcues flow
-            const shouldDispatchEvent = event => (
-              event.flowId === APPCUES_PRO_TRIAL_FLOW_ID ||
-              event.flowId === APPCUES_PRO_TRIAL_TEST_FLOW_ID
-            );
-
-            const dispatchAppcuesStartedIfProTrialFlow = (event) => {
-              if (shouldDispatchEvent(event)) {
-                dispatch({
-                  type: actionTypes.APPCUES_STARTED,
-                });
-              }
+            const dispatchAppcuesStarted = () => {
+              dispatch({
+                type: actionTypes.APPCUES_STARTED,
+              });
             };
 
-            window.Appcues.on('flow_started', dispatchAppcuesStartedIfProTrialFlow);
+            window.Appcues.on('flow_started', dispatchAppcuesStarted);
 
-            const dispatchAppcuesFinished = (event) => {
-              if (shouldDispatchEvent(event)) {
-                dispatch({
-                  type: actionTypes.APPCUES_FINISHED,
-                });
-              }
+            const dispatchAppcuesFinished = () => {
+              dispatch({
+                type: actionTypes.APPCUES_FINISHED,
+              });
             };
 
             window.Appcues.on('flow_completed', dispatchAppcuesFinished);
@@ -125,6 +112,13 @@ export default ({ dispatch, getState }) => next => (action) => {
           }
         }
       }
+      break;
+    case actionTypes.APPCUES_STARTED:
+      const beaconDiv = document.querySelector('beacon-container');
+      beaconDiv.style.display = 'none';
+      break;
+    case actionTypes.APPCUES_FINISHED:
+      beaconDiv.style.display = '';
       break;
     case actionTypes.HELPSCOUT_BEACON:
       if (window && window.Beacon) {
