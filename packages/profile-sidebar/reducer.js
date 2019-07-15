@@ -27,6 +27,7 @@ export const initialState = {
   hasTwitter: true,
   isSearchPopupVisible: false,
   searchText: null,
+  userId: null,
 };
 
 const moveProfileInArray = (arr, from, to) => {
@@ -43,17 +44,57 @@ const moveProfileInArray = (arr, from, to) => {
   return clone;
 };
 
-const handleProfileDropped = (profiles, action) => {
+const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
   const reorderedProfiles = moveProfileInArray(profiles, dragIndex, hoverIndex);
-  // add profiles after limit as disabled
-  if (reorderedProfiles.length > profileLimit) {
-    reorderedProfiles.map((profile, index) => {
-      profile.disabled = index >= profileLimit;
-      return profile;
-    });
-  }
-  return reorderedProfiles;
+    /* The reducer will return an object with 3 properties, each of them an array of profiles.
+  For each profile reduced, we will need to spread the ACC object,
+  changing only 1 property, i.e., adding the profile to only 1 array */
+  const {
+    enabledProfiles,
+    lockedProfiles,
+    blockedProfiles,
+  } = reorderedProfiles.reduce(
+    (acc, cur) => {
+      /* If the user is not the owner it can't be unlocked,
+      the same happens for pinterest accounts if the user is on a free plan:
+      it goes to the blockedProfiles array. */
+      if (cur.ownerId !== userId || (cur.service === 'pinterest' && isFreeUser)) {
+        return { ...acc, blockedProfiles: [...acc.blockedProfiles, cur] };
+      }
+
+      /* If it's not a blocked profile, figure out if the enabledProfiles array
+      in ACC is already full i.e. if the user has surpassed the profile limit.
+      In that case, the profile must go into the lockedProfiles.
+      If not, then the profile belongs in the enabledProfiles. */
+      return acc.enabledProfiles.length >= profileLimit
+      ? {
+        ...acc,
+        lockedProfiles: [
+          ...acc.lockedProfiles,
+          { ...cur, disabled: true },
+        ],
+      }
+      : {
+        ...acc,
+        enabledProfiles: [
+          ...acc.enabledProfiles,
+          { ...cur, disabled: false },
+        ],
+      };
+    },
+  { enabledProfiles: [], lockedProfiles: [], blockedProfiles: [] },
+
+  );
+
+  // Final list of profiles
+  const sortedProfiles = [
+    ...enabledProfiles,
+    ...lockedProfiles,
+    ...blockedProfiles,
+  ];
+
+  return sortedProfiles;
 };
 
 const profilesReducer = (state = [], action) => {
@@ -166,7 +207,7 @@ export default (state = initialState, action) => {
       if (!action.commit) {
         return {
           ...state,
-          profiles: handleProfileDropped(state.profiles, action),
+          profiles: handleProfileDropped(state.profiles, action, state.userId, state.isFreeUser),
         };
       }
       return state;
@@ -184,6 +225,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isOnBusinessTrial: action.result.isOnBusinessTrial,
+        userId: action.result.id,
+        isFreeUser: action.result.is_free_user,
       };
     }
     default:
