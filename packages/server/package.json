@@ -39,4 +39,8 @@
   "publishConfig": {
     "access": "public"
   }
+  "workspaces": [
+    "packages/constants"
+  ],
+  "private":true
 }
