@@ -457,6 +457,11 @@
     storybook-addon-a11y "3.0.0"
     striptags "^3.1.0"
 
+"@bufferapp/profile-loader@0.99.0":
+  version "0.99.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/profile-loader/-/profile-loader-0.99.0.tgz#d768610632920bd34f0b0f035cd4561addd2c0d9"
+  integrity sha512-emDd6XrLjBs/pi9RwEulN9S5NxzQ3xOuZe0bOoSKcAkmA77oTEYW5+CJM1uV+ljLmr+sGm7IzPBo1qgBMKgmhg==
+
 "@bufferapp/react-images-loaded@^1.1.0-fork.0":
   version "1.1.0-fork.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/react-images-loaded/-/react-images-loaded-1.1.0-fork.0.tgz#fb3e2e13df30c806cf17ebf11b19a20d32c02e46"
