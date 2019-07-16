@@ -21,6 +21,7 @@ const ComposerWrapper = ({
   enabledApplicationModes,
   environment,
   editMode,
+  sentPost,
   post,
   onSave,
   preserveStateOnClose,
@@ -65,6 +66,7 @@ const ComposerWrapper = ({
     position: { margin: '0 auto' },
     onSave,
     preserveStateOnClose: emptySlotMode ? false : preserveStateOnClose,
+    sentPost,
   };
 
   const subprofileId = post ? post.subprofile_id : undefined;
@@ -149,6 +151,7 @@ ComposerWrapper.propTypes = {
   preserveStateOnClose: PropTypes.bool.isRequired,
   environment: PropTypes.string.isRequired,
   editMode: PropTypes.bool.isRequired,
+  sentPost: PropTypes.bool,
   emptySlotMode: PropTypes.bool,
   post: PropTypes.shape({}).isRequired,
   csrfToken: PropTypes.string.isRequired,
@@ -167,6 +170,7 @@ ComposerWrapper.defaultProps = {
   csrfToken: '1234', // dummy string for now since MC requires csrfToken
   post: {},
   editMode: false,
+  sentPost: false,
   emptySlotMode: false,
   selectedProfileId: null,
   onInteraction: () => {},

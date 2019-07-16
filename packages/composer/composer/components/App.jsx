@@ -161,12 +161,11 @@ class App extends React.Component {
     csrfToken: PropTypes.string.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
     onNewPublish: PropTypes.bool,
-
     options: PropTypes.shape({
       canSelectProfiles: PropTypes.bool.isRequired,
       preserveStateOnClose: PropTypes.bool.isRequired,
       saveButtons: PropTypes.arrayOf(
-        PropTypes.oneOf(Object.keys(SaveButtonTypes))
+        PropTypes.oneOf(Object.keys(SaveButtonTypes)),
       ).isRequired,
       updateId: PropTypes.string,
       position: PropTypes.shape({
@@ -175,6 +174,7 @@ class App extends React.Component {
         margin: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       }),
       onSave: PropTypes.func,
+      sentPost: PropTypes.bool,
     }).isRequired,
   };
 
@@ -189,6 +189,7 @@ class App extends React.Component {
     },
     options: {
       onSave: () => {},
+      sentPost: false,
     },
     profilesData: {
       isContributor: false,
@@ -381,6 +382,7 @@ class App extends React.Component {
         saveButtons={saveButtons}
         isPinnedToSlot={this.state.isPinnedToSlot}
         availableSchedulesSlotsForDay={this.state.availableSchedulesSlotsForDay}
+        sentPost={this.props.options.sentPost}
       />
     );
   }

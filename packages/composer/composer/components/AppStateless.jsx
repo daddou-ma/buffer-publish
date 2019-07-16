@@ -117,6 +117,7 @@ const AppStateless = ({
   saveButtons,
   isPinnedToSlot,
   availableSchedulesSlotsForDay,
+  sentPost,
 }) => (
   <div
     ref={appElementRef}
@@ -203,6 +204,7 @@ const AppStateless = ({
         whatPreventsSavingMessages={appState.whatPreventsSaving}
         isOmniboxEnabled={isOmniboxEnabled({ appState })}
         selectedProfiles={selectedProfiles({ profiles })}
+        sentPost={sentPost}
       />
       <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
     </div>
@@ -230,12 +232,14 @@ AppStateless.propTypes = {
   saveButtons: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
   availableSchedulesSlotsForDay: PropTypes.any, // eslint-disable-line
   isPinnedToSlot: PropTypes.bool,
+  sentPost: PropTypes.bool,
 };
 
 AppStateless.defaultProps = {
   onNewPublish: false,
   scheduledAt: null,
   isPinnedToSlot: false,
+  sentPost: false,
 };
 
 export default AppStateless;

@@ -207,7 +207,6 @@ export const actions = {
       type: actionTypes.OPEN_COMPOSER,
       updateId: post.id,
       editMode: false,
-      post: Object.assign(post, { due_at: null, scheduled_at: null }),
       profileId,
     };
   },

@@ -600,7 +600,8 @@ const checkIfSavingPossible = () => {
   }
 
   // Enabled drafts, if scheduled, should be scheduled for a time in the future
-  const scheduledAt = ComposerStore.getScheduledAt();
+  const isSentPost = ComposerStore.isSentPost();
+  const scheduledAt = isSentPost ? null : ComposerStore.getScheduledAt();
   const currentTimestampSeconds = Math.floor(Date.now() / 1000);
   if (scheduledAt !== null && scheduledAt <= currentTimestampSeconds) {
     return {
