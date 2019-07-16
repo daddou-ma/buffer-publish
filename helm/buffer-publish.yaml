@@ -87,6 +87,8 @@ env:
       secretKeyRef:
         key: stripe-publishable
         name: buffer-publish-keys
+  - name: RELEASE_STAGE
+    value: production
 healthcheck: # checkout https://github.com/bufferapp/EKG for complete docs
   enabled: false
   config:

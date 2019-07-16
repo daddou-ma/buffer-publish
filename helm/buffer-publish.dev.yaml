@@ -46,3 +46,5 @@ env:
       secretKeyRef:
         key: stripe-publishable
         name: buffer-publish-keys
+  - name: RELEASE_STAGE
+    value: staging
