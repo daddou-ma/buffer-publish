@@ -19,6 +19,7 @@ const analyzePackages = [
   'posts-table',
   'report-list',
   'summary-table',
+  'profile-loader',
 ];
 
 const analyzePackagesWhitelist = analyzePackages.map(imp => `(?!/@bufferapp/${imp})`).join('');

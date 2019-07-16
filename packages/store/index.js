@@ -55,6 +55,7 @@ import { middleware as exportPickerMiddleware } from '@bufferapp/analyze-export-
 import { middleware as exportToCSVMiddleware } from '@bufferapp/analyze-csv-export';
 import { middleware as exportToPNGMiddleware } from '@bufferapp/analyze-png-export';
 import { middleware as postsMiddleware } from '@bufferapp/posts-table';
+import { middleware as profileLoaderMiddleware } from '@bufferapp/profile-loader';
 import { middleware as profileSelectorMiddleware } from '@bufferapp/analyze-profile-selector';
 import { middleware as summaryTableMiddleware } from '@bufferapp/summary-table';
 
@@ -128,6 +129,7 @@ const configureStore = initialstate => {
         compareChartMiddleware,
         datePickerMiddleware,
         postsMiddleware,
+        profileLoaderMiddleware,
         profileSelectorMiddleware,
         summaryTableMiddleware,
         // These need to be the last middlewares in the chain

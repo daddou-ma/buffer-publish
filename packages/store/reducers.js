@@ -48,6 +48,7 @@ import { reducer as postsReducer } from '@bufferapp/posts-table';
 import { reducer as profileReducer } from '@bufferapp/analyze-profile-selector';
 import { reducer as reportListReducer } from '@bufferapp/report-list';
 import { reducer as summaryTableReducer } from '@bufferapp/summary-table';
+import { reducer as profileLoaderReducer } from '@bufferapp/profile-loader';
 
 export default {
   form: formReducer,
@@ -96,6 +97,7 @@ export default {
   exportToPNG: exportToPNGReducer,
   exportToCSV: exportToCSVReducer,
   posts: postsReducer,
+  profileLoader: profileLoaderReducer,
   profiles: profileReducer,
   reportList: reportListReducer,
   summary: summaryTableReducer,
