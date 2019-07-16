@@ -1,7 +1,7 @@
 const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
-const { SEGMENT_NAMES } = require('./../../constants');
+const { SEGMENT_NAMES } = require('@bufferapp/publish-constants');
 
 const sourceCtaMap = new Map([
   ['app_shell', SEGMENT_NAMES.APP_SHELL_PRO_UPGRADE],
