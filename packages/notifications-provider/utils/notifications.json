@@ -8,9 +8,9 @@
   },
   "error": {
     "connection": "{{__variable__}}",
+    "connection-instagram-wrong-account": "Oh, sorry! You're logged in on Instagram as {{__variable__}}. Could you log out on Instagram and try again?",
     "bitly-connect": "{{__variable__}}",
     "bitly-disconnect": "{{__variable__}}",
-    "connection": "{{__variable__}}",
     "trial-extended": "{{__variable__}}",
     "trial-already-extended": "Oops, it seems you already extended your trial once.",
     "trial-extension-not-available": "Oops, it seems you might not be eligible for a trial extension.",
