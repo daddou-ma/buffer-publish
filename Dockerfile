@@ -11,6 +11,7 @@ RUN yarn install --non-interactive
 COPY packages/server /usr/src/app
 COPY staticAssets.json /usr/src/app
 COPY version.json /usr/src/app
+COPY packages/constants /usr/src/app/packages/constants
 
 EXPOSE 80
 
