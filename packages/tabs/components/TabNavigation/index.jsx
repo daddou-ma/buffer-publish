@@ -8,6 +8,7 @@ import { Button } from '@bufferapp/ui';
 import { Text } from '@bufferapp/components';
 import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { getValidTab } from '../../utils';
 
 const upgradeCtaStyle = {
@@ -112,7 +113,10 @@ class TabNavigation extends React.Component {
                 onClick={(e) => {
                   e.preventDefault();
                   if (canStartProTrial) {
-                    window.location.assign(`${getURL.getStartTrialURL('pro')}`);
+                    window.location.assign(`${getURL.getStartTrialURL({
+                      trialType: 'pro',
+                      cta: SEGMENT_NAMES.HEADER_PRO_TRIAL,
+                    })}`);
                   } else {
                     onUpgradeButtonClick('pro');
                   }

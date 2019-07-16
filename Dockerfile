@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 
 ENV NODE_ENV production
 
+COPY packages/constants /usr/src/app/packages/constants
 COPY packages/server/package.json /usr/src/app
 RUN yarn install --non-interactive
 

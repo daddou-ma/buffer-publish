@@ -42,6 +42,7 @@ const server = http.createServer(app);
 const multiBodyParser = multer();
 const composerAjaxBuffemetrics = require('./lib/composerAjaxBuffermetrics');
 
+let segmentKey = 'qsP2UfgODyoJB3px9SDkGX5I6wDtdQ6a';
 // Favicon
 setupFaviconRoutes(app, isProduction);
 
@@ -55,18 +56,15 @@ app.set('isProduction', isProduction);
 
 if (isProduction) {
   staticAssets = JSON.parse(fs.readFileSync(join(__dirname, 'staticAssets.json'), 'utf8'));
-
+  segmentKey = '9Plsiyvw9NEgXEN7eSBwiAGlHD3DHp0A';
   // Ensure that static assets is not empty
   if (Object.keys(staticAssets).length === 0) {
     console.log('Failed loading static assets manifest file - File is empty'); // eslint-disable-line
     process.exit(1);
   }
-}
-
-/**
- * Add Bugsnag to app (see `middleware.js` for where this is used)
- */
-if (isProduction) {
+  /**
+   * Add Bugsnag to app (see `middleware.js` for where this is used)
+   */
   app.set('bugsnag', getBugsnagClient());
 }
 
@@ -165,6 +163,14 @@ const helpScoutScript = `
 </script>
 `;
 
+const segmentScript = `<script>
+      window.PRODUCT_TRACKING_KEY = 'publish';
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+        analytics.load("${segmentKey}");
+        analytics.page();
+      }}();
+    </script>`;
+
 const qualarooScript = userId => {
   return `<!-- Qualaroo for buffer.com -->
     <script type="text/javascript">
@@ -199,7 +205,8 @@ const getHtml = ({ notification, userId, modalKey, modalValue }) =>
     .replace('{{{qualarooScript}}}', isProduction ? qualarooScript(userId) : '')
     .replace('{{{helpScoutScript}}}', helpScoutScript)
     .replace('{{{userScript}}}', getUserScript({ id: userId }))
-    .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }));
+    .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
+    .replace('{{{segmentScript}}}', segmentScript);
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());

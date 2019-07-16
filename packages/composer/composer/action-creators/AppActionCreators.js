@@ -193,7 +193,7 @@ const AppActionCreators = {
             const userData = AppStore.getUserData();
             const { isFreeUser, isBusinessUser, canStartProTrial } = userData;
             const scope = `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${unsuccessfulResponse.serviceName}`;
-
+            const source = 'queue_limit';
             NotificationActionCreators.queueInfo({
               scope,
               // Remove the <a> from the response message for now until the backend stops returning it
@@ -218,6 +218,7 @@ const AppActionCreators = {
                         message: {
                           action: 'START_PRO_TRIAL',
                           scope,
+                          source,
                         },
                       });
                       return;

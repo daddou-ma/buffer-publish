@@ -91,7 +91,7 @@ const handleInstagramLoading = (action) => {
 const handlePostsReordered = (posts, { order: newOrder }) => {
   const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
 
-  // Save values that should be fixed
+  //  Save values that should be fixed
   const fixedValues = orderedPosts.map(p => ({
     due_at: p.due_at,
     postAction: p.postDetails.postAction,

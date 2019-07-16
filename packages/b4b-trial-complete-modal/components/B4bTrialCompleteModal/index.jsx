@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { Popover, Divider } from '@bufferapp/components';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { Button } from '@bufferapp/ui';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 
 const modalStyle = {
   borderRadius: '4px',
@@ -37,12 +39,9 @@ const modalActionsStyle = {
 };
 
 const completeAndUpgrade = () => {
-  // Redirect users to Billing page so they can complete their upgrade
-  if (window.location.hostname === 'publish.local.buffer.com') {
-    window.location.assign('https://local.buffer.com/app/account/receipts?content_only=true');
-  } else {
-    window.location.assign('https://buffer.com/app/account/receipts?content_only=true');
-  }
+  window.location.assign(`${getURL.getBillingURL({
+    cta: SEGMENT_NAMES.EXPIRED_TRIAL_BUSINESS_UPGRADE,
+  })}`);
 };
 
 const B4bTrialCompleteModal = ({
