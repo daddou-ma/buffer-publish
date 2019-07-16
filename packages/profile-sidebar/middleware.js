@@ -34,7 +34,7 @@ export const refreshProfile = (dispatch, profileId, message) => {
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
   switch (action.type) {
-    case 'APP_INIT': {
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(dataFetchActions.fetch({
         name: 'profiles',
       }));
@@ -69,7 +69,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       const isPreferencePage = !!getPreferencePageParams({
         path,
       });
-      const profiles = getState().profileSidebar.profiles;
+      const { profiles, isOnBusinessTrial } = getState().profileSidebar;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
 
@@ -99,9 +99,11 @@ export default ({ dispatch, getState }) => next => (action) => {
           profileId: selectedProfile.id,
           tabId: 'queue',
         })));
+      } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial) {
+        dispatch(push('/new-connection-business-trialists'));
       } else if (!isPreferencePage && profiles.length === 0) {
         dispatch(push('/new-connection'));
-      }
+      } 
       break;
     }
 

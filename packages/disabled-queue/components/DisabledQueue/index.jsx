@@ -94,25 +94,18 @@ const calendarBtns = ['Day', 'Week', 'Month'];
 
 const getCurrentDay = () => moment().format('MMMM D');
 
-const onManageSocialAccountClick = () => {
-  window.location = getURL.getManageSocialAccountURL();
-};
-
-const goToConnectSocialAccount = () => {
-  window.location = getURL.getConnectSocialAccountURL();
-};
-
-const DisabledQueue = ({ translations }) => (
+const DisabledQueue = ({
+  translations,
+  onManageSocialAccountClick,
+  goToConnectSocialAccount,
+}) => (
   <div style={profilePageStyle}>
     <div style={profileSideBarStyle}>
       <ProfileSidebar
         translations={translations}
-        goToConnectSocialAccount={goToConnectSocialAccount}
         onManageSocialAccountClick={onManageSocialAccountClick}
+        goToConnectSocialAccount={goToConnectSocialAccount}
         loading={false}
-        hasInstagram={false}
-        hasFacebook={false}
-        hasTwitter={false}
       />
     </div>
     <div style={contentStyle}>
@@ -198,6 +191,8 @@ DisabledQueue.propTypes = {
     composerInput: PropTypes.string,
     currentDay: PropTypes.string,
   }).isRequired,
+  onManageSocialAccountClick: PropTypes.func.isRequired,
+  goToConnectSocialAccount: PropTypes.func.isRequired,
 };
 
 export default DisabledQueue;

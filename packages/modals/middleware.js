@@ -53,16 +53,14 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const message = 'welcome_to_business_modal';
-      const { productFeatures: { planName } } = getState();
       const {
         messages: readMessages,
-        trial,
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
         profileCount,
+        isOnBusinessTrial
       } = action.result; // user
       const hasNotReadWelcomeMessage = readMessages && !readMessages.includes(message);
-      const isOnBusinessTrial = planName === 'business' && trial.onTrial;
       if (isOnBusinessTrial && hasNotReadWelcomeMessage && profileCount > 0) {
         /**
          * TEMP - Hiding B4B Trial Modal from showing to clean up trial start experience
