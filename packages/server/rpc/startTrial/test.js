@@ -3,7 +3,7 @@ jest.mock('micro-rpc-client');
 jest.mock('request-promise');
 import rp from 'request-promise';
 import RPCEndpoint from './';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import { SEGMENT_NAMES } from './../../constants';
 
 const accessToken = 'AN ACCESS TOKEN';
 const session = {

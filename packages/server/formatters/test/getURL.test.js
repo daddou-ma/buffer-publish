@@ -1,4 +1,4 @@
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import { SEGMENT_NAMES } from '../../constants';
 import getURL from '../src/getURL';
 
 describe('getURL', () => {
