@@ -4,14 +4,7 @@ const { join } = require('path');
 
 const BUGSNAG_KEY = process.env.BUGSNAG_KEY;
 const HOSTNAME = process.env.HOSTNAME;
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-/**
- * String is used to detect what kind of server we're on
- * format was pulled from the current setup in k8s.
- */
-const PROD_HOSTNAME_PREFIX = 'buffer-publish-master';
+const RELEASE_STAGE = process.env.RELEASE_STAGE;
 
 const APP_TYPE_SERVER = 'express-server';
 const APP_TYPE_FRONTEND = 'frontend';
@@ -20,15 +13,9 @@ const APP_TYPE_FRONTEND = 'frontend';
  * Get the current `releaseStage` for Bugsnag
  * https://docs.bugsnag.com/platforms/javascript/configuration-options/#releasestage
  */
-const getReleaseStage = () => {
-  if (HOSTNAME && isProduction) {
-    if (HOSTNAME.startsWith(PROD_HOSTNAME_PREFIX)) {
-      return 'production';
-    }
-    return 'staging';
-  }
-  return 'development';
-};
+const getReleaseStage = () => (
+  RELEASE_STAGE || 'development'
+);
 
 /**
  * Get the `appVersion` for Bugsnag.
