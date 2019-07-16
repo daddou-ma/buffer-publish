@@ -1,6 +1,6 @@
 const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { SEGMENT_NAMES } = require('./../../constants');
+const { SEGMENT_NAMES } = require('@bufferapp/publish-constants');
 
 const sourceCtaMap = new Map([
   ['ig_first_comment', SEGMENT_NAMES.IG_FIRST_COMMENT_PRO_TRIAL],

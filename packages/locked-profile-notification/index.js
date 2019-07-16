@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { SEGMENT_NAMES } from '@bufferapp/publish-server/constants';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import LockedProfileNotification from './components/LockedProfileNotification';
 import { actions } from './reducer';

@@ -8,7 +8,7 @@ import { Button } from '@bufferapp/ui';
 import { Text } from '@bufferapp/components';
 import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { SEGMENT_NAMES } from '@bufferapp/publish-server/constants';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { getValidTab } from '../../utils';
 
 const upgradeCtaStyle = {

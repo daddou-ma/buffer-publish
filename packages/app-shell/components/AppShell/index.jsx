@@ -4,7 +4,7 @@ import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { AppShell as BDSAppShell } from '@bufferapp/ui';
 import { Gear, Return, Plus, People } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
-import { SEGMENT_NAMES } from '@bufferapp/publish-server/constants';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 const InvertedReturnIcon = () => (
   <span style={{ transform: 'scaleX(-1)', height: '16px' }}>

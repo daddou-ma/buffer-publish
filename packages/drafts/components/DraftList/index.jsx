@@ -12,7 +12,7 @@ import { trackAction } from '@bufferapp/publish-data-tracking';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { SEGMENT_NAMES } from '@bufferapp/publish-server/constants';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import Empty from '../Empty';
 

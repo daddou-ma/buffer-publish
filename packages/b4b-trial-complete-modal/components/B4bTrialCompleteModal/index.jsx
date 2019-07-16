@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Popover, Divider } from '@bufferapp/components';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { SEGMENT_NAMES } from '@bufferapp/publish-server/constants';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { Button } from '@bufferapp/ui';
 
 const modalStyle = {
