@@ -782,6 +782,23 @@ const updateToggleComment = monitorComposerLastInteractedWith(
   }
 );
 
+const updateToggleSidebarVisibility = monitorComposerLastInteractedWith(
+  (id, composerSidebarVisible, didEditorStateChange) => {
+    const draft = ComposerStore.getDraft(id);
+
+    if (draft.service.name === 'instagram') {
+      draft.composerSidebarVisible = composerSidebarVisible;
+    }
+
+    // If the character count was updated as a result of a change that didn't
+    // originate from the editor itself, we need to give the editor an opportunity
+    // to re-render the highlighter's decorator ourselves. A prop is used to tell
+    // the editor to re-render decorators. The editor itself sets that prop back
+    // to false using the draft reference.
+    if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
+  },
+);
+
 const updateDraftComment = monitorComposerLastInteractedWith(
   (id, commentText, didEditorStateChange) => {
     const draft = ComposerStore.getDraft(id);
@@ -1802,6 +1819,14 @@ const onDispatchedPayload = (payload) => {
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT:
       state.drafts.forEach(draft => updateToggleComment(draft.id, action.commentEnabled));
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR:
+      updateToggleSidebarVisibility(action.id, action.composerSidebarVisible);
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_SIDEBAR:
+      state.drafts.forEach(draft => updateToggleSidebarVisibility(draft.id, action.composerSidebarVisible));
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_COMMENT_CHARACTER_COUNT:

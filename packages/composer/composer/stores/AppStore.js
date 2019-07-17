@@ -43,6 +43,7 @@ const getInitialState = () => ({
 
     // Only show this notif once per session if soft-closed
     wasTwitterMaxOneProfileSelectedNotifClosedOnce: false,
+    composerSidebarVisible: false,
   },
 
   userData: {}, // Data structure in getNewUserData()
@@ -1170,6 +1171,10 @@ const onDispatchedPayload = (payload) => {
       isPayloadInteresting = true;
       break;
 
+    case ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR:
+      state.appState.composerSidebarVisible = action.composerSidebarVisible;
+      isPayloadInteresting = true;
+      break;
     default:
       isPayloadInteresting = false;
       break;

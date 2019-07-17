@@ -9,6 +9,7 @@ import ReactDOMServer from 'react-dom/server';
 import uniqBy from 'lodash.uniqby';
 import { Toggle, Text, IconArrowPopover } from '@bufferapp/components';
 import { ProTag } from '@bufferapp/publish-shared-components';
+import LinkIcon from '@bufferapp/ui/Icon/Icons/Link';
 import Textarea from 'react-textarea-autosize';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
@@ -181,6 +182,7 @@ class Composer extends React.Component {
   constructor(props) {
     super(props);
     this.onToggleComment = this.onToggleComment.bind(this);
+    this.onToggleSidebarVisibility = this.onToggleSidebarVisibility.bind(this);
   }
 
   state = {
@@ -276,6 +278,12 @@ class Composer extends React.Component {
         },
       });
     }
+  };
+
+  onToggleSidebarVisibility = (e, composerSidebarVisible) => {
+    e.preventDefault();
+    ComposerActionCreators.updateToggleSidebarVisibility(
+      this.props.draft.id, composerSidebarVisible);
   };
 
   onMediaAttachmentSwitchClick = () => {
@@ -1117,6 +1125,13 @@ class Composer extends React.Component {
                 >
                   Enabling this option will allow you to include a comment for your post!
                 </IconArrowPopover>
+              </div>
+              {/* @todo: Change Icon to the hashtag icon, and move it to the first comment section */}
+              <div
+                style={{ marginLeft: 'auto', display: 'flex' }}
+                onClick={(e) => this.onToggleSidebarVisibility(e, !draft.composerSidebarVisible)}
+              >
+                <LinkIcon size="medium" />
               </div>
             </div>
             {shouldShowCommentCharacterCount &&
