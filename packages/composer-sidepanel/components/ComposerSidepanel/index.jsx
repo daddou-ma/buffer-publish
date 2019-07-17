@@ -5,10 +5,10 @@ import { Cross } from '@bufferapp/ui/Icon';
 
 const sidepanelWrapperStyle = {
   position: 'absolute',
-  width: '200px',
+  width: '300px',
   backgroundColor: 'white',
   top: 0,
-  right: '-210px',
+  right: '-310px',
   height: '100%',
   display: 'none',
   borderRadius: '3px',
@@ -17,8 +17,8 @@ const sidepanelWrapperStyle = {
 const closeIconStyle = {
   position: 'absolute',
   cursor: 'pointer',
-  top: '15px',
-  right: '15px',
+  top: '10px',
+  right: '10px',
 };
 
 const ComposerSidepanel = ({ isVisible, onClose, children }) =>
