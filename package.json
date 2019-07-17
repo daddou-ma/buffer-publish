@@ -122,7 +122,8 @@
   },
   "dependencies": {
     "@bufferapp/react-images-loaded": "^1.1.0-fork.0",
-    "@hot-loader/react-dom": "^16.8.6"
+    "@hot-loader/react-dom": "^16.8.6",
+    "hashtag-regex": "^2.0.0"
   },
   "workspaces": [
     "packages/*"
