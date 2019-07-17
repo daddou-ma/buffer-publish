@@ -1,32 +1,23 @@
-const { method } = require('@bufferapp/micro-rpc');
+const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 const DateRange = require('../utils/DateRange');
 
-const mergeStatsWithUpdates = (stats, updates) => {
-  const updateList = [];
-  const updateIds = Object.keys(stats);
+const RPC_NAME = 'posts';
 
-  for (let i = 0; i < updateIds.length; i += 1) {
-    const updateId = updateIds[i];
-    const update = updates[updateId];
-    if (update) {
-      updateList.push({
-        id: updateId,
-        type: update.type,
-        text: update.text_formatted,
-        date: update.sent_at * 1000,
-        serviceLink: update.service_link,
-        statistics: stats[updateId],
-        media: update.media,
-      });
-    }
-  }
-  return updateList;
-};
+const postsRPCAnalyzeApi = require('../postsAnalyzeApi');
 
-const fetchTopPosts = (profileId, dateRange, sortBy, descending, limit, accessToken) =>
+const fetchTopPosts = (
+  profileId,
+  dateRange,
+  sortBy,
+  descending,
+  limit,
+  searchTerms,
+  accessToken,
+  apiAddr,
+) =>
   rp({
-    uri: `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/all_posts.json`,
+    uri: `${apiAddr}/1/profiles/${profileId}/analytics/all_posts.json`,
     method: 'GET',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
@@ -34,32 +25,55 @@ const fetchTopPosts = (profileId, dateRange, sortBy, descending, limit, accessTo
       start_date: dateRange.start,
       end_date: dateRange.end,
       sort_by: sortBy,
+      search_terms: searchTerms,
       descending,
       limit,
     },
     json: true,
   });
 
+const parsePosts = updates => (
+  updates.map(update => ({
+    id: update._id,
+    type: update.type,
+    text: update.text_formatted,
+    date: update.sent_at * 1000,
+    serviceLink: update.service_link,
+    statistics: update.stats,
+    media: update.media,
+  }))
+);
+
 module.exports = method(
-  'posts',
+  RPC_NAME,
   'fetch analytics posts for profiles and pages',
-  ({ profileId, startDate, endDate, sortBy, descending, limit }, { session }) => {
+  async ({ profileId, profileService, startDate, endDate, sortBy, descending, limit, searchTerms },
+    req) => {
+    if (profileService !== 'twitter') {
+      return postsRPCAnalyzeApi.fn({
+        profileId,
+        profileService,
+        startDate,
+        endDate,
+        sortBy,
+        descending,
+        limit,
+        searchTerms,
+      }, req)
+        .then(result => result);
+    }
     const dateRange = new DateRange(startDate, endDate);
-    const posts = fetchTopPosts(
+    const posts = await fetchTopPosts(
       profileId,
       dateRange,
       sortBy,
       descending,
       limit,
-      session.publish.accessToken,
+      searchTerms,
+      req.session.publish.accessToken,
+      req.app.get('analyzeApiAddr'),
     );
 
-    return Promise
-      .all([posts])
-      .then((response) => {
-        const { updates, stats } = response[0];
-        return mergeStatsWithUpdates(stats, updates);
-      })
-      .catch(() => []);
+    return parsePosts(Object.values(posts.updates_with_stats));
   },
 );
