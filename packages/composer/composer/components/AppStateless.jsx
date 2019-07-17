@@ -11,6 +11,7 @@ import { AppEnvironments } from '../AppConstants';
 import styles from './css/App.css';
 import ExtensionComponents from '../components/ExtensionComponents';
 import { isOnExtension } from '../utils/extension';
+import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 
 const shouldEnableFacebookAutocomplete = ({ metaData }) =>
   metaData.shouldEnableFacebookAutocomplete;
@@ -98,6 +99,10 @@ const isSlotPickingAvailable = ({ profiles }) =>
 const moreThanOneProfileSelected = ({ profiles }) =>
   selectedProfiles({ profiles }).length > 1;
 
+const onCloseSidepanel = () => {
+  ComposerActionCreators.updateToggleSidebarVisibility(null, false);
+};
+
 const shouldShowSidepanel = (
   omniboxEnabled,
   expandedComposerId,
@@ -136,7 +141,8 @@ const AppStateless = ({
   const allSelectedProfiles = selectedProfiles({ profiles });
   const omniboxEnabled = isOmniboxEnabled({ appState });
   const isSidepanelVisible = shouldShowSidepanel(
-    omniboxEnabled, appState.expandedComposerId,
+    omniboxEnabled,
+    appState.expandedComposerId,
     appState.composerSidebarVisible,
     allSelectedProfiles,
   );
@@ -231,7 +237,7 @@ const AppStateless = ({
         />
         <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
       </div>
-      <ComposerSidepanel isVisible={isSidepanelVisible}>
+      <ComposerSidepanel isVisible={isSidepanelVisible} onClose={() => onCloseSidepanel()}>
         Sidepanel
       </ComposerSidepanel>
     </div>

@@ -784,18 +784,27 @@ const updateToggleComment = monitorComposerLastInteractedWith(
 
 const updateToggleSidebarVisibility = monitorComposerLastInteractedWith(
   (id, composerSidebarVisible, didEditorStateChange) => {
-    const draft = ComposerStore.getDraft(id);
+    let draft;
+    if (id) {
+      draft = ComposerStore.getDraft(id);
 
-    if (draft.service.name === 'instagram') {
-      draft.composerSidebarVisible = composerSidebarVisible;
+      if (draft.service.name === 'instagram') {
+        draft.composerSidebarVisible = composerSidebarVisible;
+      }
+
+      // If the character count was updated as a result of a change that didn't
+      // originate from the editor itself, we need to give the editor an opportunity
+      // to re-render the highlighter's decorator ourselves. A prop is used to tell
+      // the editor to re-render decorators. The editor itself sets that prop back
+      // to false using the draft reference.
+      if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
+    } else {
+      const enabledDrafts = ComposerStore.getEnabledDrafts();
+
+      enabledDrafts.forEach((enabledDraft) => {
+        enabledDraft.composerSidebarVisible = composerSidebarVisible;
+      });
     }
-
-    // If the character count was updated as a result of a change that didn't
-    // originate from the editor itself, we need to give the editor an opportunity
-    // to re-render the highlighter's decorator ourselves. A prop is used to tell
-    // the editor to re-render decorators. The editor itself sets that prop back
-    // to false using the draft reference.
-    if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
   },
 );
 
@@ -1691,7 +1700,7 @@ const clearOmniboxDraftWhenEnabling = (willBeEnabled) => {
 
 const parseDraftsTextLinks = () => {
   const enabledDrafts = ComposerStore.getEnabledDrafts();
-  enabledDrafts.forEach((draft) => parseDraftTextLinks(draft.id));
+  enabledDrafts.forEach(draft => parseDraftTextLinks(draft.id));
 };
 
 const passesImageAspectRatioTest = (image) => {

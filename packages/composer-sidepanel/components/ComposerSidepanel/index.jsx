@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
+import { Cross } from '@bufferapp/ui/Icon';
 
 const sidepanelWrapperStyle = {
   position: 'absolute',
@@ -10,9 +11,17 @@ const sidepanelWrapperStyle = {
   right: '-210px',
   height: '100%',
   display: 'none',
+  borderRadius: '3px',
 };
 
-const ComposerSidepanel = ({ isVisible, children }) =>
+const closeIconStyle = {
+  position: 'absolute',
+  cursor: 'pointer',
+  top: '15px',
+  right: '15px',
+};
+
+const ComposerSidepanel = ({ isVisible, onClose, children }) =>
   <div
     id="composer-sidepanel"
     style={calculateStyles(
@@ -27,16 +36,21 @@ const ComposerSidepanel = ({ isVisible, children }) =>
       },
     )}
   >
+    <div style={closeIconStyle}>
+      <Cross size="medium" onClick={onClose} />
+    </div>
     {children}
   </div>;
 
 ComposerSidepanel.propTypes = {
   isVisible: PropTypes.bool,
   children: PropTypes.node.isRequired,
+  onClose: PropTypes.func,
 };
 
 ComposerSidepanel.defaultProps = {
   isVisible: false,
+  onClose: () => {},
 };
 
 export default ComposerSidepanel;
