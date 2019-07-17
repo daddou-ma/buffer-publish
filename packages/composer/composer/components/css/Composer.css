@@ -621,6 +621,21 @@
   font-size: 14px;
 }
 
+.firstCommentWrapper {
+  position: relative;
+}
+
+.hashtagIcon {
+  position: absolute;
+  cursor: pointer;
+  top: 10px;
+  right: 10px;
+}
+
+.hashtagIcon:focus {
+  outline: none;
+}
+
 .questionIcon {
   display: flex;
   align-items: center;

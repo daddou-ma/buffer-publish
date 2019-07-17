@@ -1126,13 +1126,6 @@ class Composer extends React.Component {
                   Enabling this option will allow you to include a comment for your post!
                 </IconArrowPopover>
               </div>
-              {/* @todo: Change Icon to the hashtag icon, and move it to the first comment section */}
-              <div
-                style={{ marginLeft: 'auto', display: 'flex' }}
-                onClick={(e) => this.onToggleSidebarVisibility(e, !draft.composerSidebarVisible)}
-              >
-                <LinkIcon size="medium" />
-              </div>
             </div>
             {shouldShowCommentCharacterCount &&
             <CharacterCount
@@ -1144,7 +1137,15 @@ class Composer extends React.Component {
           </div>
           {
             draft.commentEnabled &&
-            <div>
+            <div className={styles.firstCommentWrapper}>
+              <div
+                className={styles.hashtagIcon}
+                onClick={e => this.onToggleSidebarVisibility(e, !draft.composerSidebarVisible)}
+                role="button"
+                tabIndex={0}
+              >
+                <LinkIcon size="medium" />
+              </div>
               <Textarea
                 minRows={4}
                 className={styles.expandedFirstComment}
