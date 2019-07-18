@@ -103,6 +103,15 @@ const onCloseSidepanel = () => {
   ComposerActionCreators.updateToggleSidebarVisibility(null, false);
 };
 
+/**
+ * Verifies if the sidebar should be visible by checking
+ * that the current selected profile (s) is an instagram account
+ *
+ * @param bool omniboxEnabled
+ * @param string expandedComposerId
+ * @param bool composerSidebarVisible
+ * @param array allSelectedProfiles
+ */
 const shouldShowSidepanel = (
   omniboxEnabled,
   expandedComposerId,
@@ -111,9 +120,8 @@ const shouldShowSidepanel = (
 ) => {
   const otherNetworkSelected = omniboxEnabled && allSelectedProfiles.some(profile => profile.service.name !== 'instagram');
   const shouldShowSidebar = !(otherNetworkSelected || expandedComposerId !== 'instagram');
-  const sidebarVisible = shouldShowSidebar ? composerSidebarVisible : false;
 
-  return sidebarVisible;
+  return shouldShowSidebar ? composerSidebarVisible : false;
 };
 
 const AppStateless = ({

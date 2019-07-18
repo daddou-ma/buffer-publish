@@ -1144,18 +1144,18 @@ class Composer extends React.Component {
           {
             draft.commentEnabled &&
             <div className={styles.firstCommentWrapper}>
-              <div
-                className={styles.hashtagIcon}
-                onClick={e => this.onToggleSidebarVisibility(e, !draft.composerSidebarVisible)}
-                role="button"
-                tabIndex={0}
-              >
-                {hasHashtagGroupsFlip &&
+              {hasHashtagGroupsFlip &&
+                <div
+                  className={styles.hashtagIcon}
+                  onClick={e => this.onToggleSidebarVisibility(e, !draft.composerSidebarVisible)}
+                  role="button"
+                  tabIndex={0}
+                >
                   <Tooltip label="Hashtag Manager" position="top">
                     <HashtagIcon size="medium" color="#B8B8B8" />
                   </Tooltip>
-                }
-              </div>
+                </div>
+              }
               <Textarea
                 minRows={4}
                 className={styles.expandedFirstComment}
