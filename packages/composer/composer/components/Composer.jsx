@@ -163,6 +163,7 @@ class Composer extends React.Component {
     isOnProTrial: PropTypes.bool,
     hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
+    hasHashtagGroupsFlip: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
   };
@@ -175,6 +176,7 @@ class Composer extends React.Component {
     isOnProTrial: false,
     hasIGDirectVideoFlip: false,
     hasShopgridFlip: false,
+    hasHashtagGroupsFlip: false,
     profiles: [],
     expandedComposerId: null,
     selectedProfiles: [],
@@ -572,6 +574,7 @@ class Composer extends React.Component {
       hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip,
       hasShopgridFlip,
+      hasHashtagGroupsFlip,
     } = this.props;
 
     let composerFeedbackMessages = this.getComposerFeedbackMessages();
@@ -1147,9 +1150,11 @@ class Composer extends React.Component {
                 role="button"
                 tabIndex={0}
               >
-                <Tooltip label="Hashtag Manager" position="top">
-                  <HashtagIcon size="medium" color="#B8B8B8" />
-                </Tooltip>
+                {hasHashtagGroupsFlip &&
+                  <Tooltip label="Hashtag Manager" position="top">
+                    <HashtagIcon size="medium" color="#B8B8B8" />
+                  </Tooltip>
+                }
               </div>
               <Textarea
                 minRows={4}

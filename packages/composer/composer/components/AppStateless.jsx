@@ -211,6 +211,7 @@ const AppStateless = ({
           hasIGLocationTaggingFeature={userData.hasIGLocationTaggingFeature || false}
           hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
           hasShopgridFlip={userData.hasShopgridFlip || false}
+          hasHashtagGroupsFlip={userData.hasHashtagGroupsFlip || false}
           isFreeUser={userData.isFreeUser || false}
           isBusinessUser={userData.isBusinessUser || false}
           canStartProTrial={userData.canStartProTrial || false}
