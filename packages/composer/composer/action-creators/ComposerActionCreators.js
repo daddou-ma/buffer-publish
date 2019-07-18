@@ -146,6 +146,7 @@ const ComposerActionCreators = {
       composerSidebarVisible,
     });
 
+    // @todo: add tracking option here
     // const toggleAction = composerSidebarVisible ? 'enabled' : 'disabled';
     // AppActionCreators.trackUserAction(['composer', 'toggle_hashtag_group', toggleAction]);
   },

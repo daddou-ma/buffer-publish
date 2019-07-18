@@ -1175,6 +1175,7 @@ const onDispatchedPayload = (payload) => {
       state.appState.composerSidebarVisible = action.composerSidebarVisible;
       isPayloadInteresting = true;
       break;
+
     default:
       isPayloadInteresting = false;
       break;
