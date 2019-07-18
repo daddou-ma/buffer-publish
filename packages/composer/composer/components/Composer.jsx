@@ -1158,7 +1158,10 @@ class Composer extends React.Component {
               }
               <Textarea
                 minRows={4}
-                className={styles.expandedFirstComment}
+                className={[
+                  styles.expandedFirstComment,
+                  hasHashtagGroupsFlip ? styles.firstCommentWithIcon : '',
+                ].join(' ')}
                 placeholder={'Your comment'}
                 value={draft.commentText}
                 onChange={this.onCommentChange}

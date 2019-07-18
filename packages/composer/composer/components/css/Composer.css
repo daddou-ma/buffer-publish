@@ -621,6 +621,11 @@
   font-size: 14px;
 }
 
+.firstCommentWithIcon {
+  padding-right: 30px;
+  width: calc(100% - 42px);
+}
+
 .firstCommentWrapper {
   position: relative;
 }
