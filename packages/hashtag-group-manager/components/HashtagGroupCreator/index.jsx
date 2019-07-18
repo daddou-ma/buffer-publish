@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button, Tooltip } from '@bufferapp/ui';
-import { grayLight, redLight, red, grayDark } from '@bufferapp/ui/style/colors';
+import { grayLight, redLight, red, grayDark, boxShadow, blue } from '@bufferapp/ui/style/colors';
 import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import Input from '@bufferapp/ui/Input';
@@ -38,6 +38,19 @@ const textareaWrapperStyle = {
   boxSizing: 'border-box',
   border: `1px solid ${grayLight}`,
   borderRadius,
+};
+
+const textareaWrapperFocusStyle = {
+  boxShadow: `0px 0px 0px 3px ${boxShadow}`,
+  border: `1px solid ${blue}`,
+};
+
+const getTextareaWrapperStyle = ({ state }) => {
+  let style = textareaWrapperStyle;
+  if (state.focus) {
+    style = { ...style, ...textareaWrapperFocusStyle };
+  }
+  return style;
 };
 
 const counterLabelStyle = hasError => ({
@@ -118,7 +131,7 @@ class HashtagGroupCreator extends Component {
                 Hashtag Group Content
               </Text>
             </div>
-            <div style={textareaWrapperStyle}>
+            <div style={getTextareaWrapperStyle({ state: this.state })}>
               <textarea
                 style={textareaStyle}
                 placeholder="Your hashtags"
@@ -126,6 +139,8 @@ class HashtagGroupCreator extends Component {
                 name="hashtagGroupContent"
                 value={this.state.textareaValue}
                 onChange={this.handleTextareaChange}
+                onFocus={() => this.setState({ focus: true })}
+                onBlur={() => this.setState({ focus: false })}
               />
               <div style={counterLabelStyle(this.state.numberHashtagsLeft < 0)}>
                 <Tooltip
