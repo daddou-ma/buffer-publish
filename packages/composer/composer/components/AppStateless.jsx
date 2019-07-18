@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
-import ComposerSidepanel from '@bufferapp/publish-composer-sidepanel';
+import { ComposerSidepanel } from '@bufferapp/publish-shared-components';
 import Modals from '../components/Modals';
 import NotificationContainer from '../components/NotificationContainer';
 import ProfileSection from '../components/ProfileSection';
