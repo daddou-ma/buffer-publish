@@ -7,9 +7,14 @@ import { borderRadius } from '@bufferapp/ui/style/borders';
 import Input from '@bufferapp/ui/Input';
 import countHashtagsInText from '../../utils/HashtagCounter';
 
+const wrapperStyle = {
+  margin: '0 16px',
+};
+
 const buttonStyle = {
   display: 'flex',
   alignSelf: 'flex-end',
+  margin: '0 16px',
 };
 
 const textareaStyle = {
@@ -113,7 +118,7 @@ class HashtagGroupCreator extends Component {
 
     return (
       <Fragment>
-        <div>
+        <div style={wrapperStyle}>
           <Text type="h3">Create Hashtag Group</Text>
           <div>
             <Input

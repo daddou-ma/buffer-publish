@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { fontSize, fontWeightBold } from '@bufferapp/ui/style/fonts';
 import { gray, grayDark } from '@bufferapp/ui/style/colors';
+import HashtagGroupItem from './../HashtagGroupItem';
+
+const wrapperStyle = {
+  margin: '0 16px',
+};
 
 const emptyHeaderStyle = {
   paddingTop: '130px',
@@ -20,34 +25,38 @@ const emptyParagraphStyle = {
 };
 
 const HashtagGroupManager = ({ onCreateHashtagGroup, hashtagGroups }) => (
-  <React.Fragment>
+  <Fragment>
     <div>
-      <Text type="h3">Hashtag Manager</Text>
-      <Text type="p">Create, save and organize hashtags to use in Instagram first comments.</Text>
-      {hashtagGroups.length === 0 &&
-        <div>
-          <div style={emptyHeaderStyle}>
-            <Text>No hashtag groups yet!</Text>
+      <div style={wrapperStyle}>
+        <Text type="h3">Hashtag Manager</Text>
+        <Text type="p">Create, save and organize hashtags to use in Instagram first comments.</Text>
+        {hashtagGroups.length === 0 &&
+          <div>
+            <div style={emptyHeaderStyle}>
+              <Text>No hashtag groups yet!</Text>
+            </div>
+            <div style={emptyParagraphStyle}>
+              <Text>
+                Save and reuse your favorite hashtags by creating a hashtag group.
+                Click the button bellow to get started.
+              </Text>
+            </div>
           </div>
-          <div style={emptyParagraphStyle}>
-            <Text>
-              Save and reuse your favorite hashtags by creating a hashtag group.
-              Click the button bellow to get started.
-            </Text>
-          </div>
-        </div>
-      }
-      {hashtagGroups.lenght > 0 &&
-        <div /> // INSERT HASHTAG GROUP ITEMS
+        }
+      </div>
+      {hashtagGroups.length > 0 &&
+        <HashtagGroupItem /> // INSERT HASHTAG GROUP ITEMS MAP
       }
     </div>
-    <Button
-      type="secondary"
-      label="Create Hashtag Group"
-      fullWidth
-      onClick={onCreateHashtagGroup}
-    />
-  </React.Fragment>
+    <div style={wrapperStyle}>
+      <Button
+        type="secondary"
+        label="Create Hashtag Group"
+        fullWidth
+        onClick={onCreateHashtagGroup}
+      />
+    </div>
+  </Fragment>
 );
 
 HashtagGroupManager.propTypes = {
