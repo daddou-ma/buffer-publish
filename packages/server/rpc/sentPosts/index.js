@@ -7,7 +7,7 @@ module.exports = method(
   'sentPosts',
   'fetch sent posts',
   ({ profileId, page }, { session }) => {
-    if (typeof page !== 'number') {
+    if (typeof page !== 'number' || isNaN(page)) {
       page = 1;
     }
 
