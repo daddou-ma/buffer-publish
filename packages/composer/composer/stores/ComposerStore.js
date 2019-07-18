@@ -1214,8 +1214,10 @@ const updateUploadedImageDimensions = (url, width, height) => {
     image = imageCollection.find((uploadedImage) => uploadedImage.url === url)
   ));
 
-  image.width = width;
-  image.height = height;
+  if (image) {
+    image.width = width;
+    image.height = height;
+  }
 };
 
 /**
