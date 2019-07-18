@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button, Tooltip } from '@bufferapp/ui';
 import Input from '@bufferapp/ui/Input';
@@ -22,6 +22,7 @@ const textareaStyle = {
   height: '270px',
   padding: '0 16px',
 };
+
 const textareaLabelStyle = {
   margin: '16px 0 8px',
 };
@@ -49,51 +50,56 @@ const counterLabelStyle = hasError => ({
   padding: '4px',
 });
 
-const isHashtagContentEmpty = () => {
-  const element = document.getElementById('hashtagGroupContent');
-  if (!element || (element && element.value === '')) {
-    return true;
-  }
-  return false;
-};
+const HASHTAG_LIMIT = 30;
 
-const getNumberOfHashtagsLeft = () => {
-  const element = document.getElementById('hashtagGroupContent');
-  const contentText = element ? element.value : '';
-  const currentHashtags = countHashtagsInText(contentText);
-  if (currentHashtags > 0) {
-    return (30 - currentHashtags);
-  }
-  return 30;
-};
-
-class CreateHashtagGroup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: '' };
-
-    this.handleChange = this.handleChange.bind(this);
+class CreateHashtagGroup extends Component {
+  state = {
+    textareaValue: '',
+    inputValue: '',
+    numberHashtagsLeft: HASHTAG_LIMIT,
+    isSaveButtonDisabled: true,
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-    isHashtagContentEmpty();
-    getNumberOfHashtagsLeft();
+  handleTextareaChange = (event) => {
+    const value = event.target.value;
+    this.setState({
+      textareaValue: value,
+      numberHashtagsLeft: HASHTAG_LIMIT - countHashtagsInText(value),
+    }, this.disableSaveButton);
+  }
+
+  handleInputChange = (event) => {
+    this.setState({
+      inputValue: event.target.value,
+    }, this.disableSaveButton);
+  }
+
+  disableSaveButton = () => {
+    const { numberHashtagsLeft, textareaValue, inputValue } = this.state;
+    const isSaveButtonDisabled = numberHashtagsLeft < 0 || !textareaValue.trim() || !inputValue.trim();
+    this.setState({ isSaveButtonDisabled });
+  }
+
+  handleSubmit = () => {
+    const { onSaveHashtagGroup } = this.props;
+    const { inputValue, textareaValue } = this.state;
+    if (onSaveHashtagGroup) {
+      onSaveHashtagGroup({ inputValue, textareaValue });
+    }
   }
 
   render() {
     const {
       onCancelHashtagGroup,
-      onSaveHashtagGroup,
     } = this.props;
 
     return (
-      <React.Fragment>
+      <Fragment>
         <div>
           <Text type="h3">Create Hashtag Group</Text>
           <div>
             <Input
-              onChange={() => {}}
+              onChange={this.handleInputChange}
               name="hashtagGroupName"
               label="Hashtag Group Name"
               placeholder="Your hashtag group name"
@@ -113,12 +119,15 @@ class CreateHashtagGroup extends React.Component {
                 placeholder="Your hashtags"
                 id="hashtagGroupContent"
                 name="hashtagGroupContent"
-                value={this.state.value}
-                onChange={this.handleChange}
+                value={this.state.textareaValue}
+                onChange={this.handleTextareaChange}
               />
-              <div style={counterLabelStyle(getNumberOfHashtagsLeft() < 0)}>
-                <Tooltip label="Instagram will reject posts containing over 30 hashtags" position="top">
-                  <Text># Remaining: {getNumberOfHashtagsLeft()}</Text>
+              <div style={counterLabelStyle(this.state.numberHashtagsLeft < 0)}>
+                <Tooltip
+                  label="Instagram will reject posts containing over 30 hashtags"
+                  position="top"
+                >
+                  <Text># Remaining: {this.state.numberHashtagsLeft}</Text>
                 </Tooltip>
               </div>
             </div>
@@ -133,11 +142,11 @@ class CreateHashtagGroup extends React.Component {
           <Button
             type="secondary"
             label="Save Hashtag Group"
-            disabled={isHashtagContentEmpty()}
-            onClick={onSaveHashtagGroup}
+            disabled={this.state.isSaveButtonDisabled}
+            onClick={this.handleSubmit}
           />
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
@@ -149,6 +158,5 @@ CreateHashtagGroup.propTypes = {
 
 CreateHashtagGroup.defaultProps = {
 };
-
 
 export default CreateHashtagGroup;
