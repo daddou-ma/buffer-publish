@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
+import { fontSize, fontWeightBold } from '@bufferapp/ui/style/fonts';
+import { gray, grayDark } from '@bufferapp/ui/style/colors';
 
 const emptyHeaderStyle = {
   paddingTop: '130px',
   paddingBottom: '8px',
-  fontSize: '14px',
-  fontWeight: 'bold',
-  color: '#636363',
+  fontSize,
+  fontWeight: fontWeightBold,
+  color: grayDark,
   textAlign: 'center',
 };
 
 const emptyParagraphStyle = {
-  fontSize: '14px',
-  color: '#B8B8B8',
+  fontSize,
+  color: gray,
   textAlign: 'center',
 };
 

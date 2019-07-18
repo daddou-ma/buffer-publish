@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button, Tooltip } from '@bufferapp/ui';
+import { grayLight, redLight, red, grayDark } from '@bufferapp/ui/style/colors';
+import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
+import { borderRadius } from '@bufferapp/ui/style/borders';
 import Input from '@bufferapp/ui/Input';
 import countHashtagsInText from '../../utils/HashtagCounter';
 
@@ -12,10 +15,10 @@ const buttonStyle = {
 const textareaStyle = {
   resize: 'none',
   outline: 'none',
-  borderRadius: '4px',
-  fontSize: '14px',
+  borderRadius,
+  fontSize,
   lineHeight: '20px',
-  fontFamily: 'Roboto',
+  fontFamily,
   width: '100%',
   boxSizing: 'border-box',
   border: 'none',
@@ -33,8 +36,8 @@ const textareaWrapperStyle = {
   padding: '16px 0 52px',
   width: '100%',
   boxSizing: 'border-box',
-  border: '1px solid #E0E0E0',
-  borderRadius: '4px',
+  border: `1px solid ${grayLight}`,
+  borderRadius,
 };
 
 const counterLabelStyle = hasError => ({
@@ -44,8 +47,8 @@ const counterLabelStyle = hasError => ({
   fontSize: '10px',
   lineHeight: '12px',
   textAlign: 'center',
-  background: hasError ? '#FDF2F4' : '#E0E0E0',
-  color: hasError ? '#9D2637' : '#636363',
+  background: hasError ? redLight : grayLight,
+  color: hasError ? red : grayDark,
   borderRadius: '2px',
   padding: '4px',
 });
