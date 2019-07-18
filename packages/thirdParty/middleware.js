@@ -29,6 +29,14 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch({ type: actionTypes.FULLSTORY, result: action.result });
       dispatch({ type: actionTypes.APPCUES, result: action.result });
       dispatch({ type: actionTypes.HELPSCOUT_BEACON, result: action.result });
+      dispatch({ type: actionTypes.QUALAROO, result: action.result });
+      break;
+
+    case actionTypes.QUALAROO:
+      if (window && window._kiq) {
+        const { id } = action.result;
+        window._kiq.push(['identify', id]);
+      }
       break;
 
     case `intercom_${dataFetchActionTypes.FETCH_SUCCESS}`: {
