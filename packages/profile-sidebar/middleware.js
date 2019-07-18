@@ -11,8 +11,6 @@ import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
 
-import { actionTypes as initialLoadingActionTypes } from '@bufferapp/publish-initial-loading';
-
 import { actions as notificationActions } from '@bufferapp/notifications';
 import {
   actions,
@@ -56,8 +54,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         }));
       }
       break;
-    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case initialLoadingActionTypes.PROFILE_LOADING_REDIRECT: {
+    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const profilesLoaded = getState().profileSidebar.loading === false;
       if (!profilesLoaded) {
         break;
@@ -103,7 +100,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         dispatch(push('/new-connection-business-trialists'));
       } else if (!isPreferencePage && profiles.length === 0) {
         dispatch(push('/new-connection'));
-      } 
+      }
       break;
     }
 
