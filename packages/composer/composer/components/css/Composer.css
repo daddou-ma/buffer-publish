@@ -426,6 +426,7 @@
   display: flex;
   align-items: center;
   line-height: 26px;
+  flex: 1;
 }
 
 .togglePosition {
@@ -620,10 +621,35 @@
   font-size: 14px;
 }
 
+.firstCommentWithIcon {
+  padding-right: 30px;
+  width: calc(100% - 42px);
+}
+
+.firstCommentWrapper {
+  position: relative;
+}
+
+.hashtagIcon {
+  position: absolute;
+  cursor: pointer;
+  top: 10px;
+  right: 10px;
+}
+
+.hashtagIcon:focus {
+  outline: none;
+}
+
 .questionIcon {
   display: flex;
   align-items: center;
   margin-left: 9px;
+}
+
+.questionIcon > div > div {
+  display: flex;
+  align-items: center;
 }
 
 .toggleTextWrapper {
