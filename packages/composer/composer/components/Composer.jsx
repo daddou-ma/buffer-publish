@@ -7,9 +7,11 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import ReactDOMServer from 'react-dom/server';
 import uniqBy from 'lodash.uniqby';
-import { Toggle, Text, IconArrowPopover } from '@bufferapp/components';
+import { Toggle, Text } from '@bufferapp/components';
 import { ProTag } from '@bufferapp/publish-shared-components';
-import LinkIcon from '@bufferapp/ui/Icon/Icons/Link';
+import HashtagIcon from '@bufferapp/ui/Icon/Icons/Hashtag';
+import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
+import { Tooltip } from '@bufferapp/ui';
 import Textarea from 'react-textarea-autosize';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
@@ -33,7 +35,6 @@ import { AttachmentTypes, MediaTypes, NotificationScopes, ErrorTypes, QueueingTy
 import InstagramFeedback from '../components/InstagramFeedback';
 import InstagramThumbnailButton from '../components/InstagramThumbnailButton';
 import { isIE } from '../utils/DOMUtils';
-import QuestionIcon from './QuestionIcon';
 
 import styles from './css/Composer.css';
 
@@ -1101,12 +1102,15 @@ class Composer extends React.Component {
                   offText=""
                   on={draft.commentEnabled}
                   size={'small'}
-                  onClick={(e) => this.onToggleComment(e, !draft.commentEnabled, userHasBusinessOrProPlan)}
+                  onClick={e => this.onToggleComment(
+                    e, !draft.commentEnabled, userHasBusinessOrProPlan)}
                 />
               </div>
               <div
                 className={styles.toggleTextWrapper}
                 onClick={this.onCommentClick}
+                role="button"
+                tabIndex={0}
               >
                 <Text weight="medium" color="black" size="small">
                   Include a comment with this post
@@ -1115,16 +1119,15 @@ class Composer extends React.Component {
               <div
                 className={styles.questionIcon}
                 onClick={this.onCommentClick}
+                role="button"
+                tabIndex={0}
               >
-                <IconArrowPopover
-                  icon={<QuestionIcon />}
-                  shadow
-                  position="below"
-                  oneLine
-                  label="Enable comments"
+                <Tooltip
+                  label="Enabling this option will allow you to include a comment for your post!"
+                  position="right"
                 >
-                  Enabling this option will allow you to include a comment for your post!
-                </IconArrowPopover>
+                  <InfoIcon size="medium" />
+                </Tooltip>
               </div>
             </div>
             {shouldShowCommentCharacterCount &&
@@ -1144,7 +1147,9 @@ class Composer extends React.Component {
                 role="button"
                 tabIndex={0}
               >
-                <LinkIcon size="medium" />
+                <Tooltip label="Hashtag Manager" position="top">
+                  <HashtagIcon size="medium" color="#B8B8B8" />
+                </Tooltip>
               </div>
               <Textarea
                 minRows={4}

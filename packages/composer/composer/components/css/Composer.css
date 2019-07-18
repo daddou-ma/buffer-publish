@@ -642,6 +642,11 @@
   margin-left: 9px;
 }
 
+.questionIcon > div > div {
+  display: flex;
+  align-items: center;
+}
+
 .toggleTextWrapper {
    display: flex;
    align-items: center;
