@@ -11,7 +11,7 @@ module.exports = method(
       page = 1;
     }
 
-    rp({
+    return rp({
       uri: `${process.env.API_ADDR}/1/profiles/${profileId}/updates/sent.json`,
       method: 'GET',
       strictSSL: !(process.env.NODE_ENV === 'development'),
