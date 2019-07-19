@@ -109,7 +109,7 @@ class HashtagGroupItem extends Component {
                   },
                 ]}
                 hasIconOnly
-                xPosition="left"
+                xPosition="right"
                 yPosition="bottom"
                 hideSearch
               />
