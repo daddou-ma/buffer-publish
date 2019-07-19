@@ -540,10 +540,10 @@
     react-dom "16.8.6"
     styled-components "3.4.10"
 
-"@bufferapp/ui@3.17.0":
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.17.0.tgz#9c5f18bda03dadfa3850244d5f1cbfe89faf22e0"
-  integrity sha512-dNntH8/D7iN+5lpfCctLqWqXFF1dfuKSf76t/413t8P4OAhlDju3YyztJOQbh9+2xC29sx7U/xO5laygyiJ0HQ==
+"@bufferapp/ui@3.18.1":
+  version "3.18.1"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-3.18.1.tgz#ffe660b6dad097b9bbf95b84c7f7007d9a229663"
+  integrity sha512-1IIvQpWsxSo3vSb7nH48NxQDIhtcpTyZTre6i4nZMsmmoAF7grspUMHxsCr5u5uvNRMgC25K3zYSFUQSrBYq+w==
   dependencies:
     "@reach/tooltip" "0.2.2"
     immutability-helper "^2.9.0"

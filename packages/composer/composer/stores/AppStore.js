@@ -43,6 +43,7 @@ const getInitialState = () => ({
 
     // Only show this notif once per session if soft-closed
     wasTwitterMaxOneProfileSelectedNotifClosedOnce: false,
+    composerSidebarVisible: false,
   },
 
   userData: {}, // Data structure in getNewUserData()
@@ -155,6 +156,7 @@ const getNewUserData = (data) => ({
   canStartProTrial: data.canStartProTrial,
   isOnProTrial: data.isOnProTrial,
   hasShopgridFlip: data.hasShopgridFlip,
+  hasHashtagGroupsFlip: data.hasHashtagGroupsFlip,
 });
 
 const getNewSubprofile = ({ avatar, id, name, isShared }) =>
@@ -1167,6 +1169,11 @@ const onDispatchedPayload = (payload) => {
     case ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK_DATA:
     case ActionTypes.PROFILE_DROPDOWN_HIDDEN:
     case ActionTypes.UPDATE_DRAFT_HAS_SAVING_ERROR:
+      isPayloadInteresting = true;
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR:
+      state.appState.composerSidebarVisible = action.composerSidebarVisible;
       isPayloadInteresting = true;
       break;
 

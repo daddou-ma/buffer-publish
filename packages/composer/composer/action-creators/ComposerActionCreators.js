@@ -139,6 +139,18 @@ const ComposerActionCreators = {
     });
   },
 
+  updateToggleSidebarVisibility: (id, composerSidebarVisible) => {
+    AppDispatcher.handleViewAction({
+      actionType: ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR,
+      id,
+      composerSidebarVisible,
+    });
+
+    // @todo: add tracking option here
+    // const toggleAction = composerSidebarVisible ? 'enabled' : 'disabled';
+    // AppActionCreators.trackUserAction(['composer', 'toggle_hashtag_group', toggleAction]);
+  },
+
   updateToggleComment: (id, commentEnabled) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_TOGGLE_COMMENT,

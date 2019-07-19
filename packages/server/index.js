@@ -171,8 +171,8 @@ const segmentScript = `<script>
       }}();
     </script>`;
 
-const qualarooScript = userId => {
-  return `<!-- Qualaroo for buffer.com -->
+const qualarooScript = 
+  `<!-- Qualaroo for buffer.com -->
     <script type="text/javascript">
       var _kiq = _kiq || [];
       (function(){
@@ -181,13 +181,7 @@ const qualarooScript = userId => {
         s.async = true; s.src = '//s3.amazonaws.com/ki.js/50685/d9G.js'; f.parentNode.insertBefore(s, f);
         }, 1);
       })();
-    </script>
-
-    <script> type="text/javascript" charset="utf-8">
-    _kiq.push(['identify', '${userId}']);
-    <script>
-    `;
-};
+    </script>`;
 
 const getHtml = ({ notification, userId, modalKey, modalValue }) =>
   fs
@@ -202,7 +196,7 @@ const getHtml = ({ notification, userId, modalKey, modalValue }) =>
     .replace('{{{showModalScript}}}', showModalScript(modalKey, modalValue))
     .replace('{{{appcues}}}', isProduction ? appcuesScript : '')
     .replace('{{{intercomScript}}}', intercomScript)
-    .replace('{{{qualarooScript}}}', isProduction ? qualarooScript(userId) : '')
+    .replace('{{{qualarooScript}}}', isProduction ? qualarooScript : '')
     .replace('{{{helpScoutScript}}}', helpScoutScript)
     .replace('{{{userScript}}}', getUserScript({ id: userId }))
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))

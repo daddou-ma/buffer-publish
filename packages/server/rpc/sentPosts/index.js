@@ -6,8 +6,12 @@ const { buildPostMap } = require('./../../formatters/src');
 module.exports = method(
   'sentPosts',
   'fetch sent posts',
-  ({ profileId, page }, { session }) =>
-    rp({
+  ({ profileId, page }, { session }) => {
+    if (typeof page !== 'number' || isNaN(page)) {
+      page = 1;
+    }
+
+    return rp({
       uri: `${process.env.API_ADDR}/1/profiles/${profileId}/updates/sent.json`,
       method: 'GET',
       strictSSL: !(process.env.NODE_ENV === 'development'),
@@ -25,5 +29,6 @@ module.exports = method(
           total: parsedResult.total,
           updates: mappedUpdates,
         };
-      }),
+      });
+  },
 );

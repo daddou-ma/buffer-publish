@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
+import { ComposerSidepanel } from '@bufferapp/publish-shared-components';
 import Modals from '../components/Modals';
 import NotificationContainer from '../components/NotificationContainer';
 import ProfileSection from '../components/ProfileSection';
@@ -10,6 +11,7 @@ import { AppEnvironments } from '../AppConstants';
 import styles from './css/App.css';
 import ExtensionComponents from '../components/ExtensionComponents';
 import { isOnExtension } from '../utils/extension';
+import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 
 const shouldEnableFacebookAutocomplete = ({ metaData }) =>
   metaData.shouldEnableFacebookAutocomplete;
@@ -97,6 +99,31 @@ const isSlotPickingAvailable = ({ profiles }) =>
 const moreThanOneProfileSelected = ({ profiles }) =>
   selectedProfiles({ profiles }).length > 1;
 
+const onCloseSidepanel = () => {
+  ComposerActionCreators.updateToggleSidebarVisibility(null, false);
+};
+
+/**
+ * Verifies if the sidebar should be visible by checking
+ * that the current selected profile (s) is an instagram account
+ *
+ * @param bool omniboxEnabled
+ * @param string expandedComposerId
+ * @param bool composerSidebarVisible
+ * @param array allSelectedProfiles
+ */
+const shouldShowSidepanel = (
+  omniboxEnabled,
+  expandedComposerId,
+  composerSidebarVisible,
+  allSelectedProfiles,
+) => {
+  const otherNetworkSelected = omniboxEnabled && allSelectedProfiles.some(profile => profile.service.name !== 'instagram');
+  const shouldShowSidebar = !(otherNetworkSelected || expandedComposerId !== 'instagram');
+
+  return shouldShowSidebar ? composerSidebarVisible : false;
+};
+
 const AppStateless = ({
   onAppWrapperClick,
   onAppClick,
@@ -118,98 +145,113 @@ const AppStateless = ({
   isPinnedToSlot,
   availableSchedulesSlotsForDay,
   sentPost,
-}) => (
-  <div
-    ref={appElementRef}
-    className={styles.appWrapper}
-    onClick={onAppWrapperClick}
-  >
-    <Modals />
+}) => {
+  const allSelectedProfiles = selectedProfiles({ profiles });
+  const omniboxEnabled = isOmniboxEnabled({ appState });
+  const isSidepanelVisible = shouldShowSidepanel(
+    omniboxEnabled,
+    appState.expandedComposerId,
+    appState.composerSidebarVisible,
+    allSelectedProfiles,
+  );
 
-    <NotificationContainer
-      visibleNotifications={visibleNotifications}
-      classNames={notificationsContainerClassNames({
-        onNewPublish,
-        metaData,
-      })}
-      style={notificationContainerDynamicStyles({
-        metaData,
-        onNewPublish,
-        position,
-        appDynamicStyles,
-      })}
-      notScopes={topLevelNotificationContainerExcludedScopes}
-      showCloseIcon
-    />
-
+  return (
     <div
-      className={[
-        styles.app,
-        'js-enable-dragging',
-      ].join(' ')}
-      style={appDynamicStyles({ position })}
-      onClick={onAppClick}
+      ref={appElementRef}
+      className={styles.appWrapper}
+      onClick={onAppWrapperClick}
     >
-      <ExtensionComponents
-        draggingAnchorRef={draggingAnchorRef}
-        onCloseButtonClick={onCloseButtonClick}
-        metadata={metaData}
+      <Modals />
+
+      <NotificationContainer
+        visibleNotifications={visibleNotifications}
+        classNames={notificationsContainerClassNames({
+          onNewPublish,
+          metaData,
+        })}
+        style={notificationContainerDynamicStyles({
+          metaData,
+          onNewPublish,
+          position,
+          appDynamicStyles,
+        })}
+        notScopes={topLevelNotificationContainerExcludedScopes}
+        showCloseIcon
       />
 
-      {canSelectProfiles ?
-        <ProfileSection
+      <div
+        className={[
+          styles.app,
+          'js-enable-dragging',
+        ].join(' ')}
+        style={appDynamicStyles({ position })}
+        onClick={onAppClick}
+      >
+        <ExtensionComponents
+          draggingAnchorRef={draggingAnchorRef}
+          onCloseButtonClick={onCloseButtonClick}
+          metadata={metaData}
+        />
+
+        {canSelectProfiles ?
+          <ProfileSection
+            appState={appState}
+            profiles={profiles}
+            userData={userData}
+            visibleNotifications={visibleNotifications}
+          /> : null}
+
+        <ComposerSection
+          isOmniboxEnabled={omniboxEnabled}
           appState={appState}
           profiles={profiles}
-          userData={userData}
+          shouldShowInlineSubprofileDropdown={
+            shouldShowInlineSubprofileDropdown({ canSelectProfiles, profiles })
+          }
           visibleNotifications={visibleNotifications}
-        /> : null}
+          areAllDraftsSaved={areAllDraftsSaved}
+          selectedProfiles={allSelectedProfiles}
+          shouldEnableFacebookAutocomplete={
+            shouldEnableFacebookAutocomplete({ metaData })
+          }
+          composerPosition={position}
+          hasIGDirectFlip={userData.hasIGDirectFlip || false}
+          hasIGLocationTaggingFeature={userData.hasIGLocationTaggingFeature || false}
+          hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
+          hasShopgridFlip={userData.hasShopgridFlip || false}
+          hasHashtagGroupsFlip={userData.hasHashtagGroupsFlip || false}
+          isFreeUser={userData.isFreeUser || false}
+          isBusinessUser={userData.isBusinessUser || false}
+          canStartProTrial={userData.canStartProTrial || false}
+          isOnProTrial={userData.isOnProTrial || false}
+        />
 
-      <ComposerSection
-        isOmniboxEnabled={isOmniboxEnabled({ appState })}
-        appState={appState}
-        profiles={profiles}
-        shouldShowInlineSubprofileDropdown={
-          shouldShowInlineSubprofileDropdown({ canSelectProfiles, profiles })
-        }
-        visibleNotifications={visibleNotifications}
-        areAllDraftsSaved={areAllDraftsSaved}
-        selectedProfiles={selectedProfiles({ profiles })}
-        shouldEnableFacebookAutocomplete={
-          shouldEnableFacebookAutocomplete({ metaData })
-        }
-        composerPosition={position}
-        hasIGDirectFlip={userData.hasIGDirectFlip || false}
-        hasIGLocationTaggingFeature={userData.hasIGLocationTaggingFeature || false}
-        hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
-        hasShopgridFlip={userData.hasShopgridFlip || false}
-        isFreeUser={userData.isFreeUser || false}
-        isBusinessUser={userData.isBusinessUser || false}
-        canStartProTrial={userData.canStartProTrial || false}
-        isOnProTrial={userData.isOnProTrial || false}
-      />
-
-      <UpdateSaver
-        appState={appState}
-        metaData={metaData}
-        userData={userData}
-        timezone={firstSelectedProfileTimezone({ profiles })}
-        saveButtons={saveButtons}
-        scheduledAt={scheduledAt}
-        isSlotPickingAvailable={isSlotPickingAvailable({ profiles })}
-        isPinnedToSlot={isPinnedToSlot}
-        availableSchedulesSlotsForDay={availableSchedulesSlotsForDay}
-        visibleNotifications={visibleNotifications}
-        moreThanOneProfileSelected={moreThanOneProfileSelected({ profiles })}
-        areAllDraftsSaved={areAllDraftsSaved}
-        whatPreventsSavingMessages={appState.whatPreventsSaving}
-        isOmniboxEnabled={isOmniboxEnabled({ appState })}
-        selectedProfiles={selectedProfiles({ profiles })}
-        sentPost={sentPost}
-      />
-      <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
+        <UpdateSaver
+          appState={appState}
+          metaData={metaData}
+          userData={userData}
+          timezone={firstSelectedProfileTimezone({ profiles })}
+          saveButtons={saveButtons}
+          scheduledAt={scheduledAt}
+          isSlotPickingAvailable={isSlotPickingAvailable({ profiles })}
+          isPinnedToSlot={isPinnedToSlot}
+          availableSchedulesSlotsForDay={availableSchedulesSlotsForDay}
+          visibleNotifications={visibleNotifications}
+          moreThanOneProfileSelected={moreThanOneProfileSelected({ profiles })}
+          areAllDraftsSaved={areAllDraftsSaved}
+          whatPreventsSavingMessages={appState.whatPreventsSaving}
+          isOmniboxEnabled={omniboxEnabled}
+          selectedProfiles={allSelectedProfiles}
+          sentPost={sentPost}
+        />
+        <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
+      </div>
+      <ComposerSidepanel isVisible={isSidepanelVisible} onClose={() => onCloseSidepanel()}>
+        Sidepanel
+      </ComposerSidepanel>
     </div>
-  </div>
-);
+  );
+};
 
 // TODO: use objectOf with shape for eslint disabled lines
 AppStateless.propTypes = {

@@ -156,6 +156,7 @@ class App extends React.Component {
       commentEnabled: PropTypes.bool,
       commentText: PropTypes.string,
       shopgridLink: PropTypes.string,
+      composerSidebarVisible: PropTypes.bool,
     }).isRequired,
 
     csrfToken: PropTypes.string.isRequired,
