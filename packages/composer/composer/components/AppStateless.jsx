@@ -248,7 +248,7 @@ const AppStateless = ({
         <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
       </div>
       <ComposerSidepanel isVisible={isSidepanelVisible} onClose={() => onCloseSidepanel()}>
-        <HashtagGroupWrapper />
+        <HashtagGroupWrapper viewMode={'createHashtag'} hashtagGroups={[]} />
       </ComposerSidepanel>
     </div>
   );
