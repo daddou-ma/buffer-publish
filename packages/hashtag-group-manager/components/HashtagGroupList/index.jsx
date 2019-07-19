@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HashtagGroupItem from './../HashtagGroupItem';
 
+const contentStyle = {
+  flex: '1',
+  overflow: 'scroll',
+  paddingBottom: '16px',
+};
+
 const HashtagGroupList = ({
   hashtagGroups,
   onInsertHashtagGroupClick,
@@ -25,7 +31,7 @@ const HashtagGroupList = ({
     ),
   );
   return (
-    <div>
+    <div style={contentStyle}>
       {children}
     </div>
   );
