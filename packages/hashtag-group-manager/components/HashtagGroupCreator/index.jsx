@@ -151,6 +151,7 @@ class HashtagGroupCreator extends Component {
                 placeholder="Your hashtags"
                 id="hashtagGroupContent"
                 name="hashtagGroupContent"
+                maxLength="2000"
                 value={this.state.textareaValue}
                 onChange={this.handleTextareaChange}
                 onFocus={() => this.setState({ focus: true })}
