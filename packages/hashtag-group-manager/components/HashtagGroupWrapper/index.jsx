@@ -57,7 +57,14 @@ class HashtagGroupWrapper extends React.Component {
 
 HashtagGroupWrapper.propTypes = {
   viewMode: PropTypes.string,
-  hashtagGroups: PropTypes.arrayOf(PropTypes.shape({})),
+  hashtagGroups: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      numberOfHashtags: PropTypes.string.isRequired,
+      hashtags: PropTypes.string.isRequired,
+      id: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 HashtagGroupWrapper.defaultProps = {

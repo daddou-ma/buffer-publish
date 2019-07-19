@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Text, Button } from '@bufferapp/ui';
+import { Text, Button, Tooltip } from '@bufferapp/ui';
 import Select from '@bufferapp/ui/Select';
 import MoreIcon from '@bufferapp/ui/Icon/Icons/More';
 import TrashIcon from '@bufferapp/ui/Icon/Icons/Trash';
@@ -56,9 +56,11 @@ class HashtagGroupItem extends Component {
 
   render() {
     const {
-      hashtagGroupItem,
-      onInsertClick,
-      onDeleteClick,
+      name,
+      numberOfHashtags,
+      hashtags,
+      onInsertHashtagGroupClick,
+      onDeleteHashtagGroupClick,
     } = this.props;
 
     return (
@@ -69,15 +71,21 @@ class HashtagGroupItem extends Component {
           style={getItemWrapperStyle({ state: this.state })}
         >
           <div style={{ flex: '1', overflow: 'hidden' }}>
-            <div style={{ display: 'flex' }}>
-              <span style={nameWrapperStyles}>
-                <Text type="label">Woofers-Booping Snoots & Doing Friday</Text>
-              </span>
-              <Text type="label" color={gray}>17</Text>
-            </div>
-            <div style={getHashtagsStyles(this.state.hover)}>
-              <Text>#Woofers #Bigwoofer #Woofpack</Text>
-            </div>
+
+            <Tooltip
+              label={hashtags}
+              position="top"
+            >
+              <div style={{ display: 'flex' }}>
+                <span style={nameWrapperStyles}>
+                  <Text type="label">{name}</Text>
+                </span>
+                <Text type="label" color={gray}>{numberOfHashtags}</Text>
+              </div>
+              <div style={getHashtagsStyles(this.state.hover)}>
+                <Text>{hashtags}</Text>
+              </div>
+            </Tooltip>
           </div>
           {this.state.hover &&
             <div style={buttonWrapperStyle}>
@@ -85,7 +93,7 @@ class HashtagGroupItem extends Component {
                 type="primary"
                 size="small"
                 label="Insert"
-                onClick={onInsertClick}
+                onClick={onInsertHashtagGroupClick}
               />
               <Select
                 onSelectClick={() => true}
@@ -97,7 +105,7 @@ class HashtagGroupItem extends Component {
                     id: 'deleteHashtagGroup',
                     title: 'Delete Hashtag Group',
                     icon: <TrashIcon color="gray" />,
-                    onItemClick: () => onDeleteClick(),
+                    onItemClick: () => onDeleteHashtagGroupClick(),
                   },
                 ]}
                 hasIconOnly
@@ -109,8 +117,8 @@ class HashtagGroupItem extends Component {
           }
         </div>
         <Divider
-          marginTop={0}
-          marginBottom={0}
+          marginTop={'0'}
+          marginBottom={'0'}
         />
       </Fragment>
     );
@@ -119,9 +127,11 @@ class HashtagGroupItem extends Component {
 }
 
 HashtagGroupItem.propTypes = {
-  onInsertClick: PropTypes.func.isRequired,
-  onDeleteClick: PropTypes.func.isRequired,
-  hashtagGroupItem: PropTypes.object.isRequired,
+  onInsertHashtagGroupClick: PropTypes.func.isRequired,
+  onDeleteHashtagGroupClick: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  numberOfHashtags: PropTypes.string.isRequired,
+  hashtags: PropTypes.string.isRequired,
 };
 
 HashtagGroupItem.defaultProps = {

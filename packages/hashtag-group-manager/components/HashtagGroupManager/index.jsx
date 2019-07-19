@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { fontSize, fontWeightBold } from '@bufferapp/ui/style/fonts';
 import { gray, grayDark } from '@bufferapp/ui/style/colors';
-import HashtagGroupItem from './../HashtagGroupItem';
+import HashtagGroupList from './../HashtagGroupList';
 
 const wrapperStyle = {
   margin: '0 16px',
@@ -24,7 +24,12 @@ const emptyParagraphStyle = {
   textAlign: 'center',
 };
 
-const HashtagGroupManager = ({ onCreateHashtagGroup, hashtagGroups }) => (
+const HashtagGroupManager = ({
+  onCreateHashtagGroup,
+  hashtagGroups,
+  onInsertHashtagGroupClick,
+  onDeleteHashtagGroupClick,
+}) => (
   <Fragment>
     <div>
       <div style={wrapperStyle}>
@@ -45,7 +50,11 @@ const HashtagGroupManager = ({ onCreateHashtagGroup, hashtagGroups }) => (
         }
       </div>
       {hashtagGroups.length > 0 &&
-        <HashtagGroupItem /> // INSERT HASHTAG GROUP ITEMS MAP
+        <HashtagGroupList
+          hashtagGroups={hashtagGroups}
+          onInsertHashtagGroupClick={onInsertHashtagGroupClick}
+          onDeleteHashtagGroupClick={onDeleteHashtagGroupClick}
+        />
       }
     </div>
     <div style={wrapperStyle}>
@@ -61,7 +70,16 @@ const HashtagGroupManager = ({ onCreateHashtagGroup, hashtagGroups }) => (
 
 HashtagGroupManager.propTypes = {
   onCreateHashtagGroup: PropTypes.func.isRequired,
-  hashtagGroups: PropTypes.arrayOf(PropTypes.shape({})),
+  hashtagGroups: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      numberOfHashtags: PropTypes.string.isRequired,
+      hashtags: PropTypes.string.isRequired,
+      id: PropTypes.string,
+    }),
+  ).isRequired,
+  onInsertHashtagGroupClick: PropTypes.func.isRequired,
+  onDeleteHashtagGroupClick: PropTypes.func.isRequired,
 };
 
 HashtagGroupManager.defaultProps = {
