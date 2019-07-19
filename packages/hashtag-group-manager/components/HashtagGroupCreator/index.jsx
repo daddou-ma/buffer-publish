@@ -81,7 +81,16 @@ class HashtagGroupCreator extends Component {
     isSaveButtonDisabled: true,
   }
 
-  handleTextareaChange = (event) => {
+  constructor () {
+    super();
+
+    this.handleTextareaChange = this.handleTextareaChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.disableSaveButton = this.disableSaveButton.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleTextareaChange(event) {
     const value = event.target.value;
     this.setState({
       textareaValue: value,
@@ -89,13 +98,13 @@ class HashtagGroupCreator extends Component {
     }, this.disableSaveButton);
   }
 
-  handleInputChange = (event) => {
+  handleInputChange(event) {
     this.setState({
       inputValue: event.target.value,
     }, this.disableSaveButton);
   }
 
-  disableSaveButton = () => {
+  disableSaveButton() {
     const { numberHashtagsLeft, textareaValue, inputValue } = this.state;
     const isSaveButtonDisabled = numberHashtagsLeft < 0 ||
       !textareaValue.trim() ||
@@ -103,7 +112,7 @@ class HashtagGroupCreator extends Component {
     this.setState({ isSaveButtonDisabled });
   }
 
-  handleSubmit = () => {
+  handleSubmit() {
     const { onSaveHashtagGroup } = this.props;
     const { inputValue, textareaValue } = this.state;
     if (onSaveHashtagGroup) {

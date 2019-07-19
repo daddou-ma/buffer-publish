@@ -40,7 +40,9 @@ class HashtagGroupWrapper extends React.Component {
     return (
       <div style={boxStyle}>
         {viewMode === CREATE_MODE &&
-          <HashtagGroupCreator />
+          <HashtagGroupCreator
+            onCancelHashtagGroup={() => this.onSwitchMode(MANAGE_MODE)}
+          />
         }
         {viewMode === MANAGE_MODE &&
           <HashtagGroupManager
