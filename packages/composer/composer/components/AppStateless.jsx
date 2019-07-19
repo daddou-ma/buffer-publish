@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { ComposerSidepanel } from '@bufferapp/publish-shared-components';
+import HashtagGroupWrapper from '@bufferapp/publish-hashtag-group-manager';
 import Modals from '../components/Modals';
 import NotificationContainer from '../components/NotificationContainer';
 import ProfileSection from '../components/ProfileSection';
@@ -247,7 +248,7 @@ const AppStateless = ({
         <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
       </div>
       <ComposerSidepanel isVisible={isSidepanelVisible} onClose={() => onCloseSidepanel()}>
-        Sidepanel
+        <HashtagGroupWrapper />
       </ComposerSidepanel>
     </div>
   );
