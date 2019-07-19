@@ -4,9 +4,7 @@ import HashtagGroupCreator from './../HashtagGroupCreator';
 import HashtagGroupManager from './../HashtagGroupManager';
 
 const boxStyle = {
-  width: '300px', // temporary
-  height: '600px', // temporary
-  border: '1px solid black', // temporary
+  height: 'calc(100% - 16px)',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
