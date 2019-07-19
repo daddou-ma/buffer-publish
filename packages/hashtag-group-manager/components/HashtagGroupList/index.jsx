@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import HashtagGroupItem from './../HashtagGroupItem';
+import countHashtagsInText from '../../utils/HashtagCounter';
+
 
 const contentStyle = {
   flex: '1',
@@ -17,14 +19,14 @@ const HashtagGroupList = ({
     ({
       name,
       numberOfHashtags,
-      hashtags,
+      text,
       id,
     }) => (
       <HashtagGroupItem
         key={id}
         name={name}
-        numberOfHashtags={numberOfHashtags}
-        hashtags={hashtags}
+        numberOfHashtags={countHashtagsInText(text)}
+        hashtags={text}
         onInsertHashtagGroupClick={onInsertHashtagGroupClick}
         onDeleteHashtagGroupClick={onDeleteHashtagGroupClick}
       />
@@ -41,8 +43,7 @@ HashtagGroupList.propTypes = {
   hashtagGroups: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      numberOfHashtags: PropTypes.string.isRequired,
-      hashtags: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
       id: PropTypes.string,
     }),
   ).isRequired,

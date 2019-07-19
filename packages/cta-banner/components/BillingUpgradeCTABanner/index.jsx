@@ -142,7 +142,6 @@ BillingUpgradeCTABanner.propTypes = {
   onClickManageBilling: PropTypes.func.isRequired,
   onClickAddBilling: PropTypes.func.isRequired,
   profileCount: PropTypes.number,
-  plan: PropTypes.string.isRequired,
 };
 
 BillingUpgradeCTABanner.defaultProps = {

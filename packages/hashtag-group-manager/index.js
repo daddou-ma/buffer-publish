@@ -4,6 +4,7 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
+    hashtagGroups: state.hashtagGroups.groups,
   }),
   dispatch => ({
     onCancelHashtagGroup: () => {
@@ -15,5 +16,5 @@ export default connect(
   }),
 )(HashtagGroupWrapper);
 
-export { actions, actionTypes } from './reducer';
+export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';
