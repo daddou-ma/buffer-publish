@@ -55,6 +55,7 @@ const swapPosts = require('./swapPosts');
 const cancelTrial = require('./cancelTrial');
 const startTrial = require('./startTrial');
 const intercom = require('./intercom');
+const hashtagGroups = require('./hashtagGroups');
 const v1ToV2UpgradeDetails = require('./v1ToV2UpgradeDetails');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
@@ -127,5 +128,6 @@ module.exports = rpc(
   cancelTrial,
   startTrial,
   intercom,
+  hashtagGroups,
   v1ToV2UpgradeDetails,
 );
