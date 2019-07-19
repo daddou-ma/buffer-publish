@@ -7,7 +7,6 @@ const boxStyle = {
   height: 'calc(100% - 16px)',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
   padding: '0 0 16px',
 };
 

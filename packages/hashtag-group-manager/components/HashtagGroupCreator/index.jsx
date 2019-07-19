@@ -7,28 +7,32 @@ import { borderRadius } from '@bufferapp/ui/style/borders';
 import Input from '@bufferapp/ui/Input';
 import countHashtagsInText from '../../utils/HashtagCounter';
 
-const wrapperStyle = {
-  margin: '0 16px',
-};
-
 const buttonStyle = {
   display: 'flex',
   alignSelf: 'flex-end',
   margin: '0 16px',
 };
 
+const headerStyle = {
+  margin: '0 16px',
+};
+
+const contentStyle = {
+  margin: '0 16px 16px',
+  flex: '1',
+  display: 'flex',
+  flexDirection: 'column',
+};
+
 const textareaStyle = {
   resize: 'none',
   outline: 'none',
-  borderRadius,
   fontSize,
   lineHeight: '20px',
   fontFamily,
   width: '100%',
-  boxSizing: 'border-box',
+  height: '100%',
   border: 'none',
-  height: '270px',
-  padding: '0 16px',
 };
 
 const textareaLabelStyle = {
@@ -37,8 +41,8 @@ const textareaLabelStyle = {
 
 const textareaWrapperStyle = {
   position: 'relative',
-  overflow: 'auto',
-  padding: '16px 0 52px',
+  flex: 1,
+  padding: '16px 16px 52px',
   width: '100%',
   boxSizing: 'border-box',
   border: `1px solid ${grayLight}`,
@@ -127,8 +131,10 @@ class HashtagGroupCreator extends Component {
 
     return (
       <Fragment>
-        <div style={wrapperStyle}>
+        <div style={headerStyle}>
           <Text type="h3">Create Hashtag Group</Text>
+        </div>
+        <div style={contentStyle}>
           <div>
             <Input
               onChange={this.handleInputChange}
@@ -145,26 +151,26 @@ class HashtagGroupCreator extends Component {
                 Hashtag Group Content
               </Text>
             </div>
-            <div style={getTextareaWrapperStyle({ state: this.state })}>
-              <textarea
-                style={textareaStyle}
-                placeholder="Your hashtags"
-                id="hashtagGroupContent"
-                name="hashtagGroupContent"
-                maxLength="2000"
-                value={this.state.textareaValue}
-                onChange={this.handleTextareaChange}
-                onFocus={() => this.setState({ focus: true })}
-                onBlur={() => this.setState({ focus: false })}
-              />
-              <div style={counterLabelStyle(this.state.numberHashtagsLeft < 0)}>
-                <Tooltip
-                  label="Instagram will reject posts containing over 30 hashtags"
-                  position="top"
-                >
-                  <Text># Remaining: {this.state.numberHashtagsLeft}</Text>
-                </Tooltip>
-              </div>
+          </div>
+          <div style={getTextareaWrapperStyle({ state: this.state })}>
+            <textarea
+              style={textareaStyle}
+              placeholder="Your hashtags"
+              id="hashtagGroupContent"
+              name="hashtagGroupContent"
+              maxLength="2000"
+              value={this.state.textareaValue}
+              onChange={this.handleTextareaChange}
+              onFocus={() => this.setState({ focus: true })}
+              onBlur={() => this.setState({ focus: false })}
+            />
+            <div style={counterLabelStyle(this.state.numberHashtagsLeft < 0)}>
+              <Tooltip
+                label="Instagram will reject posts containing over 30 hashtags"
+                position="top"
+              >
+                <Text># Remaining: {this.state.numberHashtagsLeft}</Text>
+              </Tooltip>
             </div>
           </div>
         </div>
