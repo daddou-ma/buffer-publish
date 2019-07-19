@@ -9,19 +9,22 @@ const wrapperStyle = {
   margin: '0 16px',
 };
 
+const emptyContentStyle = {
+  flex: 1,
+  margin: '0 16px',
+  textAlign: 'center',
+  fontSize,
+};
+
 const emptyHeaderStyle = {
   paddingTop: '130px',
   paddingBottom: '8px',
-  fontSize,
   fontWeight: fontWeightBold,
   color: grayDark,
-  textAlign: 'center',
 };
 
 const emptyParagraphStyle = {
-  fontSize,
   color: gray,
-  textAlign: 'center',
 };
 
 const HashtagGroupManager = ({
@@ -31,32 +34,30 @@ const HashtagGroupManager = ({
   onDeleteHashtagGroupClick,
 }) => (
   <Fragment>
-    <div>
-      <div style={wrapperStyle}>
-        <Text type="h3">Hashtag Manager</Text>
-        <Text type="p">Create, save and organize hashtags to use in Instagram first comments.</Text>
-        {hashtagGroups.length === 0 &&
-          <div>
-            <div style={emptyHeaderStyle}>
-              <Text>No hashtag groups yet!</Text>
-            </div>
-            <div style={emptyParagraphStyle}>
-              <Text>
-                Save and reuse your favorite hashtags by creating a hashtag group.
-                Click the button bellow to get started.
-              </Text>
-            </div>
-          </div>
-        }
-      </div>
-      {hashtagGroups.length > 0 &&
-        <HashtagGroupList
-          hashtagGroups={hashtagGroups}
-          onInsertHashtagGroupClick={onInsertHashtagGroupClick}
-          onDeleteHashtagGroupClick={onDeleteHashtagGroupClick}
-        />
-      }
+    <div style={wrapperStyle}>
+      <Text type="h3">Hashtag Manager</Text>
+      <Text type="p">Create, save and organize hashtags to use in Instagram first comments.</Text>
     </div>
+    {hashtagGroups.length === 0 &&
+      <div style={emptyContentStyle}>
+        <div style={emptyHeaderStyle}>
+          <Text>No hashtag groups yet!</Text>
+        </div>
+        <div style={emptyParagraphStyle}>
+          <Text>
+            Save and reuse your favorite hashtags by creating a hashtag group.
+            Click the button bellow to get started.
+          </Text>
+        </div>
+      </div>
+    }
+    {hashtagGroups.length > 0 &&
+      <HashtagGroupList
+        hashtagGroups={hashtagGroups}
+        onInsertHashtagGroupClick={onInsertHashtagGroupClick}
+        onDeleteHashtagGroupClick={onDeleteHashtagGroupClick}
+      />
+    }
     <div style={wrapperStyle}>
       <Button
         type="secondary"
