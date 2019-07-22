@@ -826,7 +826,7 @@ const updateDraftComment = monitorComposerLastInteractedWith(
       const enabledDrafts = ComposerStore.getEnabledDrafts();
 
       enabledDrafts.forEach((enabledDraft) => {
-        const comment = `${enabledDraft.commentText} ${commentText}`;
+        const comment = `${enabledDraft.commentText || ''} ${commentText}`;
         // console.log('draft -> ', enabledDraft.commentText);
         // console.log('hashtags -> ', commentText);
         enabledDraft.commentText = comment;
