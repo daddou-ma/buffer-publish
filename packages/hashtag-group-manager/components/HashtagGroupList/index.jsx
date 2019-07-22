@@ -6,8 +6,8 @@ import countHashtagsInText from '../../utils/HashtagCounter';
 
 const contentStyle = {
   flex: '1',
-  overflow: 'scroll',
-  paddingBottom: '16px',
+  overflowY: 'scroll',
+  paddingBottom: '46px',
 };
 
 const HashtagGroupList = ({

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React  from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { ComposerSidepanel } from '@bufferapp/publish-shared-components';
@@ -125,6 +125,8 @@ const shouldShowSidepanel = (
   return shouldShowSidebar ? composerSidebarVisible : false;
 };
 
+const composerSidebarVisible = ({appState, omniboxEnabled}) => appState.composerSidebarVisible && !omniboxEnabled && appState.expandedComposerId === 'instagram';
+
 const AppStateless = ({
   onAppWrapperClick,
   onAppClick,
@@ -156,6 +158,8 @@ const AppStateless = ({
     allSelectedProfiles,
   );
 
+  const sidebarVisible = composerSidebarVisible({appState, omniboxEnabled});
+
   return (
     <div
       ref={appElementRef}
@@ -183,6 +187,7 @@ const AppStateless = ({
       <div
         className={[
           styles.app,
+          sidebarVisible ? styles.sidebarVisible : styles.sidebarNotVisible,
           'js-enable-dragging',
         ].join(' ')}
         style={appDynamicStyles({ position })}

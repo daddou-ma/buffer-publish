@@ -8,7 +8,7 @@ const sidepanelWrapperStyle = {
   width: '300px',
   backgroundColor: 'white',
   top: 0,
-  right: '-310px',
+  right: '0',
   height: '100%',
   display: 'none',
   borderRadius: '3px',
