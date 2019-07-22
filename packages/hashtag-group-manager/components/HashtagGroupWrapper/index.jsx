@@ -22,6 +22,8 @@ class HashtagGroupWrapper extends React.Component {
     };
 
     this.onSwitchMode = this.onSwitchMode.bind(this);
+    this.onSaveHashtagGroup = this.onSaveHashtagGroup.bind(this);
+    this.onDeleteHashtagGroupClick = this.onDeleteHashtagGroupClick.bind(this);
   }
 
   componentDidMount() {
@@ -32,8 +34,18 @@ class HashtagGroupWrapper extends React.Component {
     this.setState({ viewMode });
   }
 
+  // @todo: create implementation for save group
+  onSaveHashtagGroup() {
+    console.log('Save Hashtag Group');
+  }
+
+  // @todo: create implementation for delete group
+  onDeleteHashtagGroupClick() {
+    console.log('Save Hashtag Group');
+  }
+
   render() {
-    const { hashtagGroups } = this.props;
+    const { hashtagGroups, onInsertHashtagGroupClick } = this.props;
     const { viewMode } = this.state;
 
     return (
@@ -41,12 +53,15 @@ class HashtagGroupWrapper extends React.Component {
         {viewMode === CREATE_MODE &&
           <HashtagGroupCreator
             onCancelHashtagGroup={() => this.onSwitchMode(MANAGE_MODE)}
+            onSaveHashtagGroup={() => this.onSaveHashtagGroup()}
           />
         }
         {viewMode === MANAGE_MODE &&
           <HashtagGroupManager
             hashtagGroups={hashtagGroups}
             onCreateHashtagGroup={() => this.onSwitchMode(CREATE_MODE)}
+            onInsertHashtagGroupClick={onInsertHashtagGroupClick}
+            onDeleteHashtagGroupClick={() => this.onDeleteHashtagGroupClick()}
           />
         }
       </div>
@@ -56,11 +71,11 @@ class HashtagGroupWrapper extends React.Component {
 
 HashtagGroupWrapper.propTypes = {
   viewMode: PropTypes.string,
+  onInsertHashtagGroupClick: PropTypes.func,
   hashtagGroups: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      numberOfHashtags: PropTypes.string.isRequired,
-      hashtags: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
       id: PropTypes.string,
     }),
   ).isRequired,
@@ -68,6 +83,7 @@ HashtagGroupWrapper.propTypes = {
 
 HashtagGroupWrapper.defaultProps = {
   viewMode: 'createHashtag',
+  onInsertHashtagGroupClick: () => {},
   hashtagGroups: [],
 };
 

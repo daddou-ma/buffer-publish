@@ -2,7 +2,7 @@
  * Component that displays a composer
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import ReactDOMServer from 'react-dom/server';
@@ -558,6 +558,32 @@ class Composer extends React.Component {
     e.preventDefault();
   };
 
+  renderCharacterCount(draft, characterCountClassName, shouldShowCharacterCount) {
+    const shouldShowHashtagCount =
+      this.isExpanded() &&
+      this.props.hasHashtagGroupsFlip && // @todo: remove this validation
+      draft.service.name === 'instagram' &&
+      draft.service.maxHashtags !== null;
+
+    return (
+      <div className={characterCountClassName}>
+        {shouldShowCharacterCount &&
+          <CharacterCount
+            count={draft.characterCount}
+            maxCount={draft.service.charLimit}
+            className={styles.characterCountBox}
+          />}
+        {shouldShowHashtagCount &&
+          <CharacterCount
+            count={draft.getNumberOfHashtags()}
+            maxCount={draft.service.maxHashtags}
+            className={styles.characterCountBox}
+            type="hashtag"
+          />}
+      </div>
+    );
+  }
+
   render() {
     if (!this.isEnabled()) return <div />;
 
@@ -868,7 +894,7 @@ class Composer extends React.Component {
     const characterCountClassName =
       shouldDisplayCharCountAboveAttachment ? styles.aboveAttachmentCharCount :
         !shouldShowMediaAttachment ? styles.charCountNoMediaAttachment :
-          styles.characterCount;
+          styles.characterCountWrapper;
 
     return (
       <div className={composerClassName} onClick={this.onComposerClick}>
@@ -941,12 +967,7 @@ class Composer extends React.Component {
             <div className={styles.editorMediaContainer}>
               {composerEditor}
 
-              {shouldShowCharacterCount &&
-              <CharacterCount
-                count={draft.characterCount}
-                maxCount={draft.service.charLimit}
-                className={characterCountClassName}
-              />}
+              {this.renderCharacterCount(draft, characterCountClassName, shouldShowCharacterCount)}
 
               {shouldShowMediaAttachment &&
               <div className={styles.mediaWrapper}>
@@ -966,12 +987,7 @@ class Composer extends React.Component {
                 {composerEditor}
               </div>
 
-              {shouldShowCharacterCount &&
-              <CharacterCount
-                count={draft.characterCount}
-                maxCount={draft.service.charLimit}
-                className={styles.imageFirstCharacterCount}
-              />}
+              {this.renderCharacterCount(draft, styles.imageFirstCharacterCount, shouldShowCharacterCount)}
 
               {shouldDisplayEditThumbnailBtn &&
               instagramThumbnailButton

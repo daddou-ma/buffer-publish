@@ -10,6 +10,7 @@ import styles from './css/CharacterCount.css';
 const CharacterCount = (props) => {
   const left = props.maxCount - props.count;
   const isAboveMax = left < 0;
+  const ariaLabel = props.type === 'hashtag' ? `${left} Hashtags left` : `${left} Characters left`;
 
   const className = [
     isAboveMax ? styles.aboveMaxCharacterCount : null,
@@ -17,12 +18,14 @@ const CharacterCount = (props) => {
   ].join(' ');
 
   return (
-    <span
-      className={className}
-      aria-label={`${left} Characters left`}
-    >
-      {left}
-    </span>
+    <div>
+      <span
+        className={className}
+        aria-label={ariaLabel}
+      >
+        {props.type === 'hashtag' ? `# Remaining: ${left}` : left}
+      </span>
+    </div>
   );
 };
 
@@ -30,6 +33,12 @@ CharacterCount.propTypes = {
   count: PropTypes.number.isRequired,
   maxCount: PropTypes.number.isRequired,
   className: PropTypes.string,
+  type: PropTypes.string,
+};
+
+CharacterCount.defaultProps = {
+  className: null,
+  type: 'character',
 };
 
 export default CharacterCount;

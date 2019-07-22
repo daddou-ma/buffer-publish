@@ -74,8 +74,7 @@ HashtagGroupManager.propTypes = {
   hashtagGroups: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      numberOfHashtags: PropTypes.string.isRequired,
-      hashtags: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
       id: PropTypes.string,
     }),
   ).isRequired,
