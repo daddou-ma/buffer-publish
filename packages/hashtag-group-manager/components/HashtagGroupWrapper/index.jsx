@@ -41,7 +41,7 @@ class HashtagGroupWrapper extends React.Component {
 
   // @todo: create implementation for delete group
   onDeleteHashtagGroupClick() {
-    console.log('Save Hashtag Group');
+    console.log('Delete Hashtag Group');
   }
 
   render() {

@@ -466,6 +466,7 @@
 .imageFirstCharacterCount {
   composes: characterCount;
   position: static;
+  background-color: white;
 }
 
 .editorMediaContainer {
