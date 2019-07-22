@@ -63,11 +63,17 @@ HashtagGroupWrapper.propTypes = {
       id: PropTypes.string,
     }),
   ).isRequired,
+  profiles: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    canPostComment: PropTypes.bool,
+    isSelected: PropTypes.bool,
+  })),
 };
 
 HashtagGroupWrapper.defaultProps = {
   viewMode: 'createHashtag',
   hashtagGroups: [],
+  profiles: null,
 };
 
 export default HashtagGroupWrapper;

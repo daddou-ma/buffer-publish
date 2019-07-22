@@ -286,7 +286,9 @@ class Composer extends React.Component {
   onToggleSidebarVisibility = (e, composerSidebarVisible) => {
     e.preventDefault();
     ComposerActionCreators.updateToggleSidebarVisibility(
-      this.props.draft.id, composerSidebarVisible);
+      this.props.draft.id,
+      composerSidebarVisible,
+    );
   };
 
   onMediaAttachmentSwitchClick = () => {
