@@ -3,7 +3,7 @@ const rp = require('request-promise');
 
 module.exports = method(
   'deleteHashtagGroup',
-  'fetch hashtag groups',
+  'delete hashtag group by id',
   ({ organizationId, snippetId }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/snippet_groups/delete.json`,
