@@ -1,4 +1,5 @@
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actions as analyticsActions } from '@bufferapp/analytics-middleware';
 
 import {
   actions as dataFetchActions,
@@ -7,8 +8,19 @@ import {
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch }) => next => (action) => {
+const getTrackingData = ({ post = {}, channel = {} }) => ({
+  postId: post.id,
+  channelId: channel.id,
+  mediaType: post.type,
+  product: 'publish',
+  channelType: channel.service_type,
+  channelNetwork: channel.service,
+});
+
+export default ({ dispatch, getState }) => next => (action) => {
   next(action);
+  const state = getState();
+
   switch (action.type) {
     case profileActionTypes.SELECT_PROFILE:
       dispatch(dataFetchActions.fetch({
@@ -19,14 +31,18 @@ export default ({ dispatch }) => next => (action) => {
         },
       }));
       break;
-    case actionTypes.DRAFT_CONFIRMED_DELETE:
+    case actionTypes.DRAFT_CONFIRMED_DELETE: {
       dispatch(dataFetchActions.fetch({
         name: 'deletePost',
         args: {
           updateId: action.updateId,
         },
       }));
+      const channel = state.profileSidebar.selectedProfile;
+      const metadata = getTrackingData({ post: action.draft, channel });
+      dispatch(analyticsActions.trackEvent('Draft Deleted', metadata));
       break;
+    }
 /*
 In Classic it's REQUESTING_DRAFT_APPROVE.
 Sends draft to queue, which means approves draft
@@ -53,18 +69,32 @@ moves from approval tab to drafts if needsApproval false)
         },
       }));
       break;
-    case `approveDraft_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `approveDraft_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
         message: 'We\'ve added this draft to your queue!',
       }));
+      const post = action.result.update;
+      const channel = state.profileSidebar.selectedProfile;
+      const metadata = getTrackingData({ post, channel });
+      dispatch(analyticsActions.trackEvent('Draft Approved', metadata));
       break;
-    case `changeDraftStatus_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    }
+    case `changeDraftStatus_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
         message: 'We\'ve successfully moved this draft!',
       }));
+      // free - drafts, request approval -- "Awesome! Your draft has been moved.
+      //  TO-DO: Don't track for move to drafts , free - pending approval, move to drafts - "Awesome! Your draft has been moved.
+      if (action.result.message === 'Awesome! The draft is now pending approval.') {
+        const post = action.result.draft;
+        const channel = state.profileSidebar.selectedProfile;
+        const metadata = getTrackingData({ post, channel });
+        dispatch(analyticsActions.trackEvent('Draft Submitted', metadata));
+      }
       break;
+    }
     case `approveDraft_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'error',
