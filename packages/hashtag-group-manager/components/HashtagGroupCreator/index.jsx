@@ -134,7 +134,7 @@ class HashtagGroupCreator extends Component {
         <div style={headerStyle}>
           <Text type="h3">Create Hashtag Group</Text>
         </div>
-        <div style={contentStyle}>
+        <form style={contentStyle} autoComplete="off">
           <div>
             <Input
               onChange={this.handleInputChange}
@@ -173,7 +173,7 @@ class HashtagGroupCreator extends Component {
               </Tooltip>
             </div>
           </div>
-        </div>
+        </form>
         <div style={buttonStyle}>
           <Button
             type="text"

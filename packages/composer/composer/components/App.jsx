@@ -173,6 +173,8 @@ class App extends React.Component {
         top: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         left: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         margin: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        marginLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        transition: PropTypes.string,
       }),
       onSave: PropTypes.func,
       sentPost: PropTypes.bool,
