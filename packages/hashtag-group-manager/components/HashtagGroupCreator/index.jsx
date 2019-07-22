@@ -39,6 +39,10 @@ const labelStyle = {
   margin: '16px 0 8px',
 };
 
+const inputLabelStyle = {
+  margin: '0 0 8px',
+};
+
 const textareaWrapperStyle = {
   position: 'relative',
   flex: 1,
@@ -175,7 +179,7 @@ class HashtagGroupCreator extends Component {
         </div>
         <form style={contentStyle} autoComplete="off">
           <div>
-            <div style={labelStyle}>
+            <div style={inputLabelStyle}>
               <Text
                 htmlFor="hashtagGroupName"
                 type="label"
