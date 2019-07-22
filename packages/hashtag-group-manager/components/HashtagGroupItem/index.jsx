@@ -71,7 +71,6 @@ class HashtagGroupItem extends Component {
           style={getItemWrapperStyle({ state: this.state })}
         >
           <div style={{ flex: '1', overflow: 'hidden' }}>
-
             <Tooltip
               label={hashtags}
               position="top"
@@ -130,7 +129,7 @@ HashtagGroupItem.propTypes = {
   onInsertHashtagGroupClick: PropTypes.func.isRequired,
   onDeleteHashtagGroupClick: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  numberOfHashtags: PropTypes.string.isRequired,
+  numberOfHashtags: PropTypes.number.isRequired,
   hashtags: PropTypes.string.isRequired,
 };
 

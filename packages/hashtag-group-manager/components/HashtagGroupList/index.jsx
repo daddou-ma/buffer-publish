@@ -18,7 +18,6 @@ const HashtagGroupList = ({
   const children = hashtagGroups.map(
     ({
       name,
-      numberOfHashtags,
       text,
       id,
     }) => (

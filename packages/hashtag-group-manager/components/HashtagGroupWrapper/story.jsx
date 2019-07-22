@@ -6,13 +6,13 @@ import HashtagGroupWrapper from './index';
 const hashtagGroups = [
   {
     name: 'Woofers-Booping Snoots & Doing Friday',
-    numberOfHashtags: '17',
-    hashtags: '#Woofers #Bigwoofer #Woofpack',
+    id: '1',
+    text: '#Woofers #Bigwoofer #Woofpack',
   },
   {
     name: 'Woofers-Booping Snoots & Doing Friday',
-    numberOfHashtags: '17',
-    hashtags: '#Woofers #Bigwoofer #Woofpack',
+    id: '2',
+    text: '#Woofers #Bigwoofer #Woofpack',
   },
 ];
 
