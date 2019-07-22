@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button, Tooltip } from '@bufferapp/ui';
-import { grayLight, redLight, red, grayDark, boxShadow, blue } from '@bufferapp/ui/style/colors';
-import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
+import { grayLight, redLight, red, grayDark, boxShadow, blue, grayDarker } from '@bufferapp/ui/style/colors';
+import { fontFamily, fontSize, lineHeight } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
-import Input from '@bufferapp/ui/Input';
 import countHashtagsInText from '../../utils/HashtagCounter';
 
 const buttonStyle = {
@@ -32,10 +31,11 @@ const textareaStyle = {
   fontFamily,
   width: '100%',
   height: '100%',
+  color: grayDarker,
   border: 'none',
 };
 
-const textareaLabelStyle = {
+const labelStyle = {
   margin: '16px 0 8px',
 };
 
@@ -49,15 +49,52 @@ const textareaWrapperStyle = {
   borderRadius,
 };
 
-const textareaWrapperFocusStyle = {
+const textareaWrapperFocusedStyle = {
   boxShadow: `0px 0px 0px 3px ${boxShadow}`,
   border: `1px solid ${blue}`,
 };
 
-const getTextareaWrapperStyle = ({ state }) => {
-  let style = textareaWrapperStyle;
-  if (state.focus) {
-    style = { ...style, ...textareaWrapperFocusStyle };
+const inputStyle = {
+  color: grayDarker,
+  padding: '13px 16px 12px',
+  outline: 'none',
+  width: '100%',
+  boxSizing: 'border-box',
+  border: `1px solid ${grayLight}`,
+  margin: '8px 0px',
+  borderRadius,
+  fontSize,
+  lineHeight,
+  fontFamily,
+};
+
+const inputFocusedStyle = {
+  boxShadow: `0px 0px 0px 3px ${boxShadow}`,
+  border: `1px solid ${blue}`,
+};
+
+
+const getElementStyle = ({ state }, type) => {
+  let style;
+  let focusedStyle;
+  let focusedState;
+  switch (type) {
+    case 'textareaWrapper':
+      style = textareaWrapperStyle;
+      focusedStyle = textareaWrapperFocusedStyle;
+      focusedState = state.textareaFocused;
+      break;
+    case 'input':
+      style = inputStyle;
+      focusedStyle = inputFocusedStyle;
+      focusedState = state.inputFocused;
+      break;
+    default:
+      break;
+  }
+
+  if (focusedState) {
+    style = { ...style, ...focusedStyle };
   }
   return style;
 };
@@ -80,7 +117,9 @@ const HASHTAG_LIMIT = 30;
 class HashtagGroupCreator extends Component {
   state = {
     textareaValue: '',
+    textareaFocused: false,
     inputValue: '',
+    inputFocused: false,
     numberHashtagsLeft: HASHTAG_LIMIT,
     isSaveButtonDisabled: true,
   }
@@ -136,14 +175,26 @@ class HashtagGroupCreator extends Component {
         </div>
         <form style={contentStyle} autoComplete="off">
           <div>
-            <Input
-              onChange={this.handleInputChange}
-              name="hashtagGroupName"
-              label="Hashtag Group Name"
+            <div style={labelStyle}>
+              <Text
+                htmlFor="hashtagGroupName"
+                type="label"
+              >
+                Hashtag Group Name
+              </Text>
+            </div>
+            <input
+              style={getElementStyle({ state: this.state }, 'input')}
               placeholder="Your hashtag group name"
-              size="tall"
+              id="hashtagGroupName"
+              maxLength="200"
+              type="text"
+              value={this.state.inputValue}
+              onChange={this.handleInputChange}
+              onFocus={() => this.setState({ inputFocused: true })}
+              onBlur={() => this.setState({ inputFocused: false })}
             />
-            <div style={textareaLabelStyle}>
+            <div style={labelStyle}>
               <Text
                 htmlFor="hashtagGroupContent"
                 type="label"
@@ -152,17 +203,16 @@ class HashtagGroupCreator extends Component {
               </Text>
             </div>
           </div>
-          <div style={getTextareaWrapperStyle({ state: this.state })}>
+          <div style={getElementStyle({ state: this.state }, 'textareaWrapper')}>
             <textarea
               style={textareaStyle}
               placeholder="Your hashtags"
               id="hashtagGroupContent"
-              name="hashtagGroupContent"
               maxLength="2000"
               value={this.state.textareaValue}
               onChange={this.handleTextareaChange}
-              onFocus={() => this.setState({ focus: true })}
-              onBlur={() => this.setState({ focus: false })}
+              onFocus={() => this.setState({ textareaFocused: true })}
+              onBlur={() => this.setState({ textareaFocused: false })}
             />
             <div style={counterLabelStyle(this.state.numberHashtagsLeft < 0)}>
               <Tooltip
