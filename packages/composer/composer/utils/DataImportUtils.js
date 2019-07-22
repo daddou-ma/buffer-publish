@@ -276,6 +276,8 @@ const DataImportUtils = {
           commentEnabled: update.commentEnabled,
           commentText: update.commentText || null,
           shopgridLink: update.shopgridLink || null,
+          tabId: metaData.tabId || null,
+          emptySlotMode: metaData.emptySlotMode || false,
         });
         break;
       }
@@ -358,6 +360,8 @@ const DataImportUtils = {
         commentEnabled: meta.commentEnabled,
         commentText: meta.commentText || null,
         shopgridLink: meta.shopgridLink || null,
+        tabId: meta.tabId || null,
+        emptySlotMode: meta.emptySlotMode || false,
       };
     }
 

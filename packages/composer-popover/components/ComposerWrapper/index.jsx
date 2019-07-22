@@ -57,6 +57,7 @@ export default connect(
         editMode: false,
         draftMode: null,
         selectedProfileId,
+        tabId: state.tabs.tabId,
         ...options,
       });
     }

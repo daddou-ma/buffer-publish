@@ -157,6 +157,8 @@ class App extends React.Component {
       commentText: PropTypes.string,
       shopgridLink: PropTypes.string,
       composerSidebarVisible: PropTypes.bool,
+      tabId: PropTypes.string,
+      emptySlotMode: PropTypes.bool,
     }).isRequired,
 
     csrfToken: PropTypes.string.isRequired,

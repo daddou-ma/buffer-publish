@@ -453,6 +453,10 @@ const AppActionCreators = {
     Metrics.trackAction(scope, extraData);
   },
 
+  trackSegmentAction: ({ eventName, metadata }) => {
+    AppDispatcher.handleTrackingAction(analyticsActions.trackEvent(eventName, metadata));
+  },
+
   toggleAllProfiles: () => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.APP_TOGGLE_ALL_PROFILES,
