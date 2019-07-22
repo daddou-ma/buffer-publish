@@ -1,6 +1,8 @@
 import { actionTypes } from './actions';
 
-export default store => next => (action) => { // eslint-disable-line no-unused-vars
+export default store => next => (action) => {
+  // eslint-disable-line no-unused-vars
+  next(action);
   switch (action.type) {
     case actionTypes.INIT:
       if (window.analytics) {
@@ -28,5 +30,4 @@ export default store => next => (action) => { // eslint-disable-line no-unused-v
     default:
       break;
   }
-  return next(action);
 };

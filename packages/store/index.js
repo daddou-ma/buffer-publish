@@ -124,6 +124,7 @@ const configureStore = initialstate => {
         appShellMiddleware,
         igFirstCommentProTrialModalMiddleware,
         trialMiddleware,
+        segmentTrackingMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,
