@@ -810,16 +810,28 @@ const updateToggleSidebarVisibility = monitorComposerLastInteractedWith(
 
 const updateDraftComment = monitorComposerLastInteractedWith(
   (id, commentText, didEditorStateChange) => {
-    const draft = ComposerStore.getDraft(id);
-    if (draft.service.name !== 'instagram') return;
-    draft.commentText = commentText;
+    let draft;
+    if (id) {
+      draft = ComposerStore.getDraft(id);
+      if (draft.service.name !== 'instagram') return;
+      draft.commentText = commentText;
 
-    // If the character count was updated as a result of a change that didn't
-    // originate from the editor itself, we need to give the editor an opportunity
-    // to re-render the highlighter's decorator ourselves. A prop is used to tell
-    // the editor to re-render decorators. The editor itself sets that prop back
-    // to false using the draft reference.
-    if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
+      // If the character count was updated as a result of a change that didn't
+      // originate from the editor itself, we need to give the editor an opportunity
+      // to re-render the highlighter's decorator ourselves. A prop is used to tell
+      // the editor to re-render decorators. The editor itself sets that prop back
+      // to false using the draft reference.
+      if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
+    } else {
+      const enabledDrafts = ComposerStore.getEnabledDrafts();
+
+      enabledDrafts.forEach((enabledDraft) => {
+        const comment = `${enabledDraft.commentText} ${commentText}`;
+        // console.log('draft -> ', enabledDraft.commentText);
+        // console.log('hashtags -> ', commentText);
+        enabledDraft.commentText = comment;
+      });
+    }
   },
 );
 
@@ -835,19 +847,32 @@ const updateShopgridLink = monitorComposerLastInteractedWith(
 
 const updateDraftCommentCharacterCount = monitorComposerLastInteractedWith(
   (id, didEditorStateChange) => {
-    const draft = ComposerStore.getDraft(id);
-    if (draft.service.name !== 'instagram') return;
-    if (draft.service.commentCharLimit === null) return;
+    let draft;
+    if (id) {
+      draft = ComposerStore.getDraft(id);
+      if (draft.service.name !== 'instagram') return;
+      if (draft.service.commentCharLimit === null) return;
 
-    draft.characterCommentCount = getDraftCharacterCount(id, draft.commentText);
+      draft.characterCommentCount = getDraftCharacterCount(id, draft.commentText);
 
-    // If the character count was updated as a result of a change that didn't
-    // originate from the editor itself, we need to give the editor an opportunity
-    // to re-render the highlighter's decorator ourselves. A prop is used to tell
-    // the editor to re-render decorators. The editor itself sets that prop back
-    // to false using the draft reference.
-    if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
-  }
+      // If the character count was updated as a result of a change that didn't
+      // originate from the editor itself, we need to give the editor an opportunity
+      // to re-render the highlighter's decorator ourselves. A prop is used to tell
+      // the editor to re-render decorators. The editor itself sets that prop back
+      // to false using the draft reference.
+      if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
+    } else {
+      const enabledDrafts = ComposerStore.getEnabledDrafts();
+
+      enabledDrafts.forEach((enabledDraft) => {
+        if (enabledDraft.service.commentCharLimit === null) return;
+        enabledDraft.characterCommentCount =
+          getDraftCharacterCount(enabledDraft.id, enabledDraft.commentText);
+
+        if (!didEditorStateChange) enabledDraft.forceDecoratorsRerender = true;
+      });
+    }
+  },
 );
 
 const mapShortLinkWithLongLink = (id, shortLink, longLink) => {

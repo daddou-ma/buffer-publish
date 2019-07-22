@@ -104,6 +104,11 @@ const onCloseSidepanel = () => {
   ComposerActionCreators.updateToggleSidebarVisibility(null, false);
 };
 
+const onInsertHashtagGroupClick = (text) => {
+  ComposerActionCreators.updateDraftComment(null, text);
+  ComposerActionCreators.updateDraftCommentCharacterCount(null);
+};
+
 /**
  * Verifies if the sidebar should be visible by checking
  * that the current selected profile (s) is an instagram account
@@ -165,6 +170,8 @@ const AppStateless = ({
       ref={appElementRef}
       className={styles.appWrapper}
       onClick={onAppWrapperClick}
+      role="button"
+      tabIndex={0}
     >
       <Modals />
 
@@ -192,6 +199,8 @@ const AppStateless = ({
         ].join(' ')}
         style={appDynamicStyles({ position })}
         onClick={onAppClick}
+        role="button"
+        tabIndex={0}
       >
         <ExtensionComponents
           draggingAnchorRef={draggingAnchorRef}
@@ -253,10 +262,17 @@ const AppStateless = ({
         <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
       </div>
       <ComposerSidepanel isVisible={isSidepanelVisible} onClose={() => onCloseSidepanel()}>
-        <HashtagGroupWrapper
-          viewMode={'manageHashtag'}
-          hashtagGroups={[]}
-        />
+        {isSidepanelVisible &&
+          <HashtagGroupWrapper
+            viewMode={'manageHashtag'}
+            onInsertHashtagGroupClick={text => onInsertHashtagGroupClick(text)}
+            hashtagGroups={
+              [{
+                name: 'Name',
+                text: '#Beagle #GoodBoi',
+              }]
+            }
+          />}
       </ComposerSidepanel>
     </div>
   );

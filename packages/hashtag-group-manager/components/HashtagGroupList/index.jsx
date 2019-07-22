@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import HashtagGroupItem from './../HashtagGroupItem';
 import countHashtagsInText from '../../utils/HashtagCounter';
 
-
 const contentStyle = {
   flex: '1',
   overflowY: 'scroll',
@@ -24,9 +23,9 @@ const HashtagGroupList = ({
       <HashtagGroupItem
         key={id}
         name={name}
-        numberOfHashtags={countHashtagsInText(text)}
+        numberOfHashtags={countHashtagsInText(text).toString()}
         hashtags={text}
-        onInsertHashtagGroupClick={onInsertHashtagGroupClick}
+        onInsertHashtagGroupClick={() => onInsertHashtagGroupClick(text)}
         onDeleteHashtagGroupClick={onDeleteHashtagGroupClick}
       />
     ),
