@@ -14,5 +14,11 @@ module.exports = method(
         organization_id: organizationId,
       },
     })
-    .then(result => JSON.parse(result)),
+    .then(result => JSON.parse(result))
+    .catch((err) => {
+      if (err.error) {
+        const { error } = JSON.parse(err.error);
+        throw createError({ message: error });
+      }
+    }),
 );
