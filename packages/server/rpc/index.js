@@ -57,6 +57,9 @@ const startTrial = require('./startTrial');
 const intercom = require('./intercom');
 const hashtagGroups = require('./hashtagGroups');
 const v1ToV2UpgradeDetails = require('./v1ToV2UpgradeDetails');
+const createHashtagGroup = require('./createHashtagGroup');
+const deleteHashtagGroup = require('./deleteHashtagGroup');
+const getHashtagGroups = require('./getHashtagGroups');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -130,4 +133,7 @@ module.exports = rpc(
   intercom,
   hashtagGroups,
   v1ToV2UpgradeDetails,
+  createHashtagGroup,
+  deleteHashtagGroup,
+  getHashtagGroups,
 );
