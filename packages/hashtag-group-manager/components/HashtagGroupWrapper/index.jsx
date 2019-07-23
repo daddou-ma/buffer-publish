@@ -41,7 +41,7 @@ class HashtagGroupWrapper extends React.Component {
     const { viewMode } = this.state;
     const {
       hashtagGroups,
-      onInsertHashtagGroupClick,
+      onHandleInsertHashtagGroupClick,
       name,
       text,
       onChangeGroupName,
@@ -52,22 +52,22 @@ class HashtagGroupWrapper extends React.Component {
     return (
       <div style={boxStyle}>
         {viewMode === CREATE_MODE &&
-          <HashtagGroupCreator
-            name={name}
-            text={text}
-            onChangeGroupName={onChangeGroupName}
-            onChangeGroupText={onChangeGroupText}
-            onSaveHashtagGroup={onSaveHashtagGroup}
-            onCancelHashtagGroup={() => this.onSwitchMode(MANAGE_MODE)}
-          />
+        <HashtagGroupCreator
+          name={name}
+          text={text}
+          onChangeGroupName={onChangeGroupName}
+          onChangeGroupText={onChangeGroupText}
+          onSaveHashtagGroup={onSaveHashtagGroup}
+          onCancelHashtagGroup={() => this.onSwitchMode(MANAGE_MODE)}
+        />
         }
         {viewMode === MANAGE_MODE &&
-          <HashtagGroupManager
-            hashtagGroups={hashtagGroups}
-            onCreateHashtagGroup={() => this.onSwitchMode(CREATE_MODE)}
-            onInsertHashtagGroupClick={onInsertHashtagGroupClick}
-            onDeleteHashtagGroupClick={groupId => this.onDeleteHashtagGroupClick(groupId)}
-          />
+        <HashtagGroupManager
+          hashtagGroups={hashtagGroups}
+          onCreateHashtagGroup={() => this.onSwitchMode(CREATE_MODE)}
+          onInsertHashtagGroupClick={onHandleInsertHashtagGroupClick}
+          onDeleteHashtagGroupClick={groupId => this.onDeleteHashtagGroupClick(groupId)}
+        />
         }
       </div>
     );
@@ -79,6 +79,7 @@ HashtagGroupWrapper.propTypes = {
   name: PropTypes.string,
   text: PropTypes.string,
   onInsertHashtagGroupClick: PropTypes.func,
+  onHandleInsertHashtagGroupClick: PropTypes.func,
   onDeleteHashtagGroup: PropTypes.func,
   onSaveHashtagGroup: PropTypes.func,
   onChangeGroupName: PropTypes.func,
@@ -104,6 +105,7 @@ HashtagGroupWrapper.defaultProps = {
   hashtagGroups: [],
   profiles: null,
   onInsertHashtagGroupClick: () => {},
+  onHandleInsertHashtagGroupClick: () => {},
   onDeleteHashtagGroup: () => {},
   onSaveHashtagGroup: () => {},
   onChangeGroupName: () => {},

@@ -88,4 +88,5 @@ module.exports = userData => ({
   showReturnToClassic: userData.has_np_app_switcher,
   helpScoutConfig: userData.helpscout_beacon_params,
   isBusinessTeamMember: userData.is_business_team_member,
+  orgProfileFeatures: userData.org_profile_features,
 });

@@ -9,7 +9,7 @@ export default connect(
     text: state.hashtagGroups.text,
     organizationId: state.profileSidebar.selectedProfile.organizationId,
   }),
-  dispatch => ({
+  (dispatch, ownProps) => ({
     onCancelHashtagGroup: () => {
       dispatch(actions.handleCancelHashtagGroupClick());
     },
@@ -30,6 +30,12 @@ export default connect(
       dispatch(actions.handleChangeGroupText({
         text,
       }));
+    },
+    onHandleInsertHashtagGroupClick: (text) => {
+      if (ownProps.onInsertHashtagGroupClick) {
+        ownProps.onInsertHashtagGroupClick(text);
+      }
+      dispatch(actions.handleInsertHashtagGroupClick());
     },
   }),
 )(HashtagGroupWrapper);
