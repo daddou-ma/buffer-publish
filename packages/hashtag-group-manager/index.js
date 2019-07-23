@@ -5,6 +5,9 @@ import { actions } from './reducer';
 export default connect(
   state => ({
     hashtagGroups: state.hashtagGroups.groups,
+    name: state.hashtagGroups.name,
+    text: state.hashtagGroups.text,
+    organizationId: state.profileSidebar.selectedProfile.organizationId,
   }),
   dispatch => ({
     onCancelHashtagGroup: () => {
@@ -12,6 +15,16 @@ export default connect(
     },
     onSaveHashtagGroup: () => {
       dispatch(actions.handleSaveHashtagGroupClick());
+    },
+    onChangeGroupName: (name) => {
+      dispatch(actions.handleChangeGroupName({
+        name,
+      }));
+    },
+    onChangeGroupText: (text) => {
+      dispatch(actions.handleChangeGroupText({
+        text,
+      }));
     },
   }),
 )(HashtagGroupWrapper);

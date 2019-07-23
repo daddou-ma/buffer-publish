@@ -7,9 +7,13 @@ import {
 export const actionTypes = keyWrapper('HASHTAG_GROUP_MANAGER', {
   CANCEL_HASHTAG_GROUP: 0,
   SAVE_HASHTAG_GROUP: 0,
+  ON_CHANGE_HASHTAG_GROUP_NAME: 0,
+  ON_CHANGE_HASHTAG_GROUP_TEXT: 0,
 });
 
 export const initialState = {
+  name: '',
+  text: '',
 };
 
 export default (state = initialState, action) => {
@@ -17,8 +21,18 @@ export default (state = initialState, action) => {
     case `hashtagGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        groups: action.result,
-      }
+        groups: action.result.data.snippets,
+      };
+    case actionTypes.ON_CHANGE_HASHTAG_GROUP_NAME:
+      return {
+        ...state,
+        name: action.name,
+      };
+    case actionTypes.ON_CHANGE_HASHTAG_GROUP_TEXT:
+      return {
+        ...state,
+        text: action.text,
+      };
     default:
       return state;
   }
@@ -31,5 +45,13 @@ export const actions = {
   }),
   handleSaveHashtagGroupClick: () => ({
     type: actionTypes.SAVE_HASHTAG_GROUP,
+  }),
+  handleChangeGroupName: ({ name }) => ({
+    type: actionTypes.ON_CHANGE_HASHTAG_GROUP_NAME,
+    name,
+  }),
+  handleChangeGroupText: ({ text }) => ({
+    type: actionTypes.ON_CHANGE_HASHTAG_GROUP_TEXT,
+    text,
   }),
 };

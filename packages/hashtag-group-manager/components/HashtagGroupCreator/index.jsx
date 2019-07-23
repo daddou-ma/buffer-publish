@@ -134,43 +134,55 @@ class HashtagGroupCreator extends Component {
     this.handleTextareaChange = this.handleTextareaChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.disableSaveButton = this.disableSaveButton.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleTextareaChange(event) {
     const value = event.target.value;
     this.setState({
-      textareaValue: value,
+      /* textareaValue: value, */
       numberHashtagsLeft: HASHTAG_LIMIT - countHashtagsInText(value),
     }, this.disableSaveButton);
+    this.props.onChangeGroupText(value);
+    this.disableSaveButton();
   }
 
   handleInputChange(event) {
+    /*
     this.setState({
       inputValue: event.target.value,
     }, this.disableSaveButton);
+    */
+    this.props.onChangeGroupName(event.target.value);
+    this.disableSaveButton();
   }
 
   disableSaveButton() {
-    const { numberHashtagsLeft, textareaValue, inputValue } = this.state;
+    const { numberHashtagsLeft } = this.state;
+    const { name, text } = this.props;
     const isSaveButtonDisabled = numberHashtagsLeft < 0 ||
-      !textareaValue.trim() ||
-      !inputValue.trim();
+      !text.trim() ||
+      !name.trim();
     this.setState({ isSaveButtonDisabled });
   }
-
+/*
   handleSubmit() {
-    const { onSaveHashtagGroup } = this.props;
-    const { inputValue, textareaValue } = this.state;
+    const { onSaveHashtagGroup, name, text } = this.props;
+    // const { inputValue, textareaValue } = this.state;
+    console.log('SAVE', 'name', name, 'text', text);
     if (onSaveHashtagGroup) {
-      onSaveHashtagGroup({ inputValue, textareaValue });
+      onSaveHashtagGroup(name, text);
     }
   }
-
+*/
   render() {
     const {
+      name,
+      text,
       onCancelHashtagGroup,
+      onSaveHashtagGroup,
     } = this.props;
+    console.log('name', name, 'text', text);
 
     return (
       <Fragment>
@@ -193,7 +205,7 @@ class HashtagGroupCreator extends Component {
               id="hashtagGroupName"
               maxLength="200"
               type="text"
-              value={this.state.inputValue}
+              value={name}
               onChange={this.handleInputChange}
               onFocus={() => this.setState({ inputFocused: true })}
               onBlur={() => this.setState({ inputFocused: false })}
@@ -213,7 +225,7 @@ class HashtagGroupCreator extends Component {
               placeholder="Your hashtags"
               id="hashtagGroupContent"
               maxLength="2000"
-              value={this.state.textareaValue}
+              value={text}
               onChange={this.handleTextareaChange}
               onFocus={() => this.setState({ textareaFocused: true })}
               onBlur={() => this.setState({ textareaFocused: false })}
@@ -238,7 +250,7 @@ class HashtagGroupCreator extends Component {
             type="secondary"
             label="Save Hashtag Group"
             disabled={this.state.isSaveButtonDisabled}
-            onClick={this.handleSubmit}
+            onClick={onSaveHashtagGroup}
           />
         </div>
       </Fragment>
@@ -247,8 +259,17 @@ class HashtagGroupCreator extends Component {
 }
 
 HashtagGroupCreator.propTypes = {
+  name: PropTypes.func.string,
+  text: PropTypes.func.string,
+  onChangeGroupName: PropTypes.func.isRequired,
+  onChangeGroupText: PropTypes.func.isRequired,
   onCancelHashtagGroup: PropTypes.func.isRequired,
   onSaveHashtagGroup: PropTypes.func.isRequired,
+};
+
+HashtagGroupCreator.defaultProps = {
+  name: null,
+  text: null,
 };
 
 export default HashtagGroupCreator;

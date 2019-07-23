@@ -22,7 +22,7 @@ class HashtagGroupWrapper extends React.Component {
     };
 
     this.onSwitchMode = this.onSwitchMode.bind(this);
-    this.onSaveHashtagGroup = this.onSaveHashtagGroup.bind(this);
+    // this.onSaveHashtagGroup = this.onSaveHashtagGroup.bind(this);
     this.onDeleteHashtagGroupClick = this.onDeleteHashtagGroupClick.bind(this);
   }
 
@@ -35,25 +35,39 @@ class HashtagGroupWrapper extends React.Component {
   }
 
   // @todo: create implementation for save group
+  /*
   onSaveHashtagGroup() {
-    console.log('Save Hashtag Group');
+    const { name, text } = this.props;
+    this.props.onSaveHashtagGroup(name, text);
   }
-
+*/
   // @todo: create implementation for delete group
   onDeleteHashtagGroupClick() {
     console.log('Delete Hashtag Group');
   }
 
   render() {
-    const { hashtagGroups, onInsertHashtagGroupClick } = this.props;
     const { viewMode } = this.state;
+    const {
+      hashtagGroups,
+      onInsertHashtagGroupClick,
+      name,
+      text,
+      onChangeGroupName,
+      onChangeGroupText,
+      onSaveHashtagGroup,
+    } = this.props;
 
     return (
       <div style={boxStyle}>
         {viewMode === CREATE_MODE &&
           <HashtagGroupCreator
+            name={name}
+            text={text}
+            onChangeGroupName={onChangeGroupName}
+            onChangeGroupText={onChangeGroupText}
+            onSaveHashtagGroup={onSaveHashtagGroup}
             onCancelHashtagGroup={() => this.onSwitchMode(MANAGE_MODE)}
-            onSaveHashtagGroup={() => this.onSaveHashtagGroup()}
           />
         }
         {viewMode === MANAGE_MODE &&
@@ -71,7 +85,12 @@ class HashtagGroupWrapper extends React.Component {
 
 HashtagGroupWrapper.propTypes = {
   viewMode: PropTypes.string,
+  name: PropTypes.string,
+  text: PropTypes.string,
   onInsertHashtagGroupClick: PropTypes.func,
+  onSaveHashtagGroup: PropTypes.func,
+  onChangeGroupName: PropTypes.func,
+  onChangeGroupText: PropTypes.func,
   hashtagGroups: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -88,9 +107,14 @@ HashtagGroupWrapper.propTypes = {
 
 HashtagGroupWrapper.defaultProps = {
   viewMode: 'createHashtag',
-  onInsertHashtagGroupClick: () => {},
+  name: null,
+  text: '',
   hashtagGroups: [],
   profiles: null,
+  onInsertHashtagGroupClick: () => {},
+  onSaveHashtagGroup: () => {},
+  onChangeGroupName: () => {},
+  onChangeGroupText: () => {},
 };
 
 export default HashtagGroupWrapper;

@@ -18,10 +18,10 @@ const HashtagGroupList = ({
     ({
       name,
       text,
-      id,
+      _id,
     }) => (
       <HashtagGroupItem
-        key={id}
+        key={_id}
         name={name}
         numberOfHashtags={countHashtagsInText(text).toString()}
         hashtags={text}
@@ -42,7 +42,7 @@ HashtagGroupList.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
-      id: PropTypes.string,
+      _id: PropTypes.string,
     }),
   ).isRequired,
   onDeleteHashtagGroupClick: PropTypes.func.isRequired,
