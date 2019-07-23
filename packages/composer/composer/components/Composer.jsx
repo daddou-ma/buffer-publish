@@ -565,7 +565,8 @@ class Composer extends React.Component {
       this.isExpanded() &&
       this.props.hasHashtagGroupsFlip && // @todo: remove this validation
       draft.service.name === 'instagram' &&
-      draft.service.maxHashtags !== null;
+      draft.service.maxHashtags !== null &&
+      draft.service.maxHashtags - draft.getNumberOfHashtags() <= 10;
 
     return (
       <div className={characterCountClassName}>
