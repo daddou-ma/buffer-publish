@@ -49,6 +49,8 @@ extraSpecs:
     type: RollingUpdate
   minReadySeconds: 10
 env:
+  - name: AUTH_SVC_ADDR
+    value: http://authentication-service.core
   - name: DD_AGENT_HOST
     valueFrom:
       fieldRef:
