@@ -22,7 +22,6 @@ class HashtagGroupWrapper extends React.Component {
     };
 
     this.onSwitchMode = this.onSwitchMode.bind(this);
-    // this.onSaveHashtagGroup = this.onSaveHashtagGroup.bind(this);
     this.onDeleteHashtagGroupClick = this.onDeleteHashtagGroupClick.bind(this);
   }
 
@@ -34,9 +33,8 @@ class HashtagGroupWrapper extends React.Component {
     this.setState({ viewMode });
   }
 
-  // @todo: create implementation for delete group
-  onDeleteHashtagGroupClick() {
-    console.log('Delete Hashtag Group');
+  onDeleteHashtagGroupClick(groupId) {
+    this.props.onDeleteHashtagGroup(groupId);
   }
 
   render() {
@@ -68,7 +66,7 @@ class HashtagGroupWrapper extends React.Component {
             hashtagGroups={hashtagGroups}
             onCreateHashtagGroup={() => this.onSwitchMode(CREATE_MODE)}
             onInsertHashtagGroupClick={onInsertHashtagGroupClick}
-            onDeleteHashtagGroupClick={() => this.onDeleteHashtagGroupClick()}
+            onDeleteHashtagGroupClick={groupId => this.onDeleteHashtagGroupClick(groupId)}
           />
         }
       </div>
@@ -81,6 +79,7 @@ HashtagGroupWrapper.propTypes = {
   name: PropTypes.string,
   text: PropTypes.string,
   onInsertHashtagGroupClick: PropTypes.func,
+  onDeleteHashtagGroup: PropTypes.func,
   onSaveHashtagGroup: PropTypes.func,
   onChangeGroupName: PropTypes.func,
   onChangeGroupText: PropTypes.func,
@@ -105,6 +104,7 @@ HashtagGroupWrapper.defaultProps = {
   hashtagGroups: [],
   profiles: null,
   onInsertHashtagGroupClick: () => {},
+  onDeleteHashtagGroup: () => {},
   onSaveHashtagGroup: () => {},
   onChangeGroupName: () => {},
   onChangeGroupText: () => {},

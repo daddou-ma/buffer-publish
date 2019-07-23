@@ -7,6 +7,7 @@ import {
 export const actionTypes = keyWrapper('HASHTAG_GROUP_MANAGER', {
   CANCEL_HASHTAG_GROUP: 0,
   SAVE_HASHTAG_GROUP: 0,
+  DELETE_HASHTAG_GROUP: 0,
   ON_CHANGE_HASHTAG_GROUP_NAME: 0,
   ON_CHANGE_HASHTAG_GROUP_TEXT: 0,
 });
@@ -51,6 +52,10 @@ export const actions = {
   }),
   handleSaveHashtagGroupClick: () => ({
     type: actionTypes.SAVE_HASHTAG_GROUP,
+  }),
+  handleDeleteHashtagGroup: ({ groupId }) => ({
+    type: actionTypes.DELETE_HASHTAG_GROUP,
+    groupId,
   }),
   handleChangeGroupName: ({ name }) => ({
     type: actionTypes.ON_CHANGE_HASHTAG_GROUP_NAME,

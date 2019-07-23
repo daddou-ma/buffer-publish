@@ -56,6 +56,7 @@ class HashtagGroupItem extends Component {
 
   render() {
     const {
+      snippetId,
       name,
       numberOfHashtags,
       hashtags,
@@ -104,7 +105,7 @@ class HashtagGroupItem extends Component {
                     id: 'deleteHashtagGroup',
                     title: 'Delete Hashtag Group',
                     icon: <TrashIcon color="gray" />,
-                    onItemClick: () => onDeleteHashtagGroupClick(),
+                    onItemClick: () => onDeleteHashtagGroupClick(snippetId),
                   },
                 ]}
                 hasIconOnly

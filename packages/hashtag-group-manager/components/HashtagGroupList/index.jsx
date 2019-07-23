@@ -22,6 +22,7 @@ const HashtagGroupList = ({
     }) => (
       <HashtagGroupItem
         key={_id}
+        snippetId={_id}
         name={name}
         numberOfHashtags={countHashtagsInText(text).toString()}
         hashtags={text}

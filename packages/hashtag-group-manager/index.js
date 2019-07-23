@@ -16,6 +16,11 @@ export default connect(
     onSaveHashtagGroup: () => {
       dispatch(actions.handleSaveHashtagGroupClick());
     },
+    onDeleteHashtagGroup: (groupId) => {
+      dispatch(actions.handleDeleteHashtagGroup({
+        groupId,
+      }));
+    },
     onChangeGroupName: (name) => {
       dispatch(actions.handleChangeGroupName({
         name,

@@ -2,6 +2,7 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
+import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
 const refreshHashtagGroups = (dispatch, organizationId) => {
@@ -33,8 +34,24 @@ export default ({ getState, dispatch }) => next => (action) => {
         },
       }));
       break;
+    case actionTypes.DELETE_HASHTAG_GROUP:
+      dispatch(dataFetchActions.fetch({
+        name: 'deleteHashtagGroup',
+        args: {
+          organizationId,
+          snippetId: action.groupId,
+        },
+      }));
+      break;
+    case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.result.message,
+      }));
+      break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       refreshHashtagGroups(dispatch, organizationId);
       break;
     default:
