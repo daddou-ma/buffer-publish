@@ -55,11 +55,9 @@ export default ({ getState, dispatch }) => next => (action) => {
       refreshHashtagGroups(dispatch, organizationId);
       break;
     case actionTypes.INSERT_HASHTAG_GROUP:
-      console.log('this');
       trackAction({ location: 'hashtagManager', action: 'hashtag_inserted', metadata: { organizationId } });
       break;
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      console.log('that');
       refreshHashtagGroups(dispatch, organizationId);
       trackAction({ location: 'hashtagManager', action: 'hashtag_created', metadata: { organizationId } });
       break;    default:
