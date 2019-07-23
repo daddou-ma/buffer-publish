@@ -55,7 +55,6 @@ const swapPosts = require('./swapPosts');
 const cancelTrial = require('./cancelTrial');
 const startTrial = require('./startTrial');
 const intercom = require('./intercom');
-const hashtagGroups = require('./hashtagGroups');
 const v1ToV2UpgradeDetails = require('./v1ToV2UpgradeDetails');
 const createHashtagGroup = require('./createHashtagGroup');
 const deleteHashtagGroup = require('./deleteHashtagGroup');
@@ -131,7 +130,6 @@ module.exports = rpc(
   cancelTrial,
   startTrial,
   intercom,
-  hashtagGroups,
   v1ToV2UpgradeDetails,
   createHashtagGroup,
   deleteHashtagGroup,

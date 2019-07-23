@@ -4,6 +4,17 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
+const refreshHashtagGroups = (dispatch, organizationId) => {
+  if (organizationId) {
+    dispatch(dataFetchActions.fetch({
+      name: 'hashtagGroups',
+      args: {
+        organizationId,
+      },
+    }));
+  }
+};
+
 export default ({ getState, dispatch }) => next => (action) => {
   next(action);
   const { organizationId } = getState().profileSidebar.selectedProfile;
@@ -14,7 +25,7 @@ export default ({ getState, dispatch }) => next => (action) => {
     case actionTypes.SAVE_HASHTAG_GROUP:
       const { name, text } = getState().hashtagGroups;
       dispatch(dataFetchActions.fetch({
-        name: 'createHashtag',
+        name: 'createHashtagGroup',
         args: {
           organizationId,
           name,
@@ -23,14 +34,8 @@ export default ({ getState, dispatch }) => next => (action) => {
       }));
       break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      if (organizationId) {
-        dispatch(dataFetchActions.fetch({
-          name: 'hashtagGroups',
-          args: {
-            organizationId,
-          },
-        }));
-      }
+    case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      refreshHashtagGroups(dispatch, organizationId);
       break;
     default:
       break;

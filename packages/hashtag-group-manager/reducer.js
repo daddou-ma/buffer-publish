@@ -28,6 +28,12 @@ export default (state = initialState, action) => {
         ...state,
         name: action.name,
       };
+    case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        name: '',
+        text: '',
+      };
     case actionTypes.ON_CHANGE_HASHTAG_GROUP_TEXT:
       return {
         ...state,

@@ -34,13 +34,6 @@ class HashtagGroupWrapper extends React.Component {
     this.setState({ viewMode });
   }
 
-  // @todo: create implementation for save group
-  /*
-  onSaveHashtagGroup() {
-    const { name, text } = this.props;
-    this.props.onSaveHashtagGroup(name, text);
-  }
-*/
   // @todo: create implementation for delete group
   onDeleteHashtagGroupClick() {
     console.log('Delete Hashtag Group');
