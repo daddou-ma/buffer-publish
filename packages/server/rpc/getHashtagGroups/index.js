@@ -1,4 +1,4 @@
-const { method } = require('@bufferapp/buffer-rpc');
+const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
 module.exports = method(
