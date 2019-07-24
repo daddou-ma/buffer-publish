@@ -120,9 +120,7 @@ const HASHTAG_LIMIT = 30;
 
 class HashtagGroupCreator extends Component {
   state = {
-    textareaValue: '',
     textareaFocused: false,
-    inputValue: '',
     inputFocused: false,
     numberHashtagsLeft: HASHTAG_LIMIT,
     isSaveButtonDisabled: true,
@@ -137,24 +135,23 @@ class HashtagGroupCreator extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.name !== this.props.name || prevProps.text !== this.props.text) {
+      this.disableSaveButton();
+    }
+  }
+
   handleTextareaChange(event) {
     const value = event.target.value;
     this.setState({
-      /* textareaValue: value, */
       numberHashtagsLeft: HASHTAG_LIMIT - countHashtagsInText(value),
-    }, this.disableSaveButton);
+    });
+
     this.props.onChangeGroupText(value);
-    this.disableSaveButton();
   }
 
   handleInputChange(event) {
-    /*
-    this.setState({
-      inputValue: event.target.value,
-    }, this.disableSaveButton);
-    */
     this.props.onChangeGroupName(event.target.value);
-    this.disableSaveButton();
   }
 
   disableSaveButton() {

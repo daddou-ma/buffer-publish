@@ -100,7 +100,7 @@ HashtagGroupWrapper.propTypes = {
 HashtagGroupWrapper.defaultProps = {
   viewMode: 'createHashtag',
   name: null,
-  text: '',
+  text: null,
   hashtagGroups: [],
   profiles: null,
   onInsertHashtagGroupClick: () => {},
