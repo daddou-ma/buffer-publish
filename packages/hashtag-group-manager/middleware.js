@@ -2,6 +2,7 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
@@ -50,11 +51,16 @@ export default ({ getState, dispatch }) => next => (action) => {
       }));
       break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       refreshHashtagGroups(dispatch, organizationId);
       break;
-    default:
+    case actionTypes.INSERT_HASHTAG_GROUP:
+      trackAction({ location: 'hashtagManager', action: 'hashtag_inserted', metadata: { organizationId } });
+      break;
+    case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      refreshHashtagGroups(dispatch, organizationId);
+      trackAction({ location: 'hashtagManager', action: 'hashtag_created', metadata: { organizationId } });
+      break;    default:
       break;
   }
 };
