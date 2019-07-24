@@ -1,5 +1,6 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actions as analyticsActions } from '@bufferapp/analytics-middleware';
 import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
@@ -9,13 +10,16 @@ import middleware from './middleware';
 describe('middleware', () => {
   const next = jest.fn();
   const dispatch = jest.fn();
-  const getState = jest.fn(() => state);
-
   const state = {
     profileSidebar: {
-      selectedProfile: {},
-    }
-  }
+      selectedProfile: {
+        service_type: 'personal_profile',
+        service: 'twitter',
+        id: 'bar',
+      },
+    },
+  };
+  const getState = jest.fn(() => state);
 
   it('should export middleware', () => {
     expect(middleware)
@@ -99,7 +103,7 @@ describe('middleware', () => {
     const RPC_NAME = 'approveDraft';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
-      result: { update: {}, message: '' },
+      result: { update: {}, draft: {} },
     });
     middleware({ dispatch, getState })(next)(action);
     expect(next)
@@ -116,7 +120,7 @@ describe('middleware', () => {
     const RPC_NAME = 'changeDraftStatus';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
-      result: { update: {}, message: '' },
+      result: { update: {}, draft: {} },
     });
     middleware({ dispatch, getState })(next)(action);
     expect(next)
@@ -160,4 +164,69 @@ describe('middleware', () => {
         message: 'There was an error moving this draft!',
       }));
   });
+  describe('segment tracking', () => {
+    const expectedTrackingObj = {
+      postId: 'foo',
+      channelId: 'bar',
+      mediaType: 'text',
+      product: 'publish',
+      channelType: 'personal_profile',
+      channelNetwork: 'twitter',
+    };
+    it('it should track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to approval', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const RPC_NAME = 'changeDraftStatus';
+      const action = dataFetchActions.fetchSuccess({
+        name: RPC_NAME,
+        result: {
+          update: {}, draft: { needs_approval: true, id: 'foo', type: 'text' },
+        },
+      });
+
+      middleware({ dispatch, getState })(next)(action);
+      expect(analyticsActions.trackEvent)
+      .toHaveBeenCalledWith('Draft Submitted', expectedTrackingObj);
+    });
+    it('it should not track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to drafts', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const RPC_NAME = 'changeDraftStatus';
+      const action = dataFetchActions.fetchSuccess({
+        name: RPC_NAME,
+        result: {
+          update: {}, draft: { needs_approval: false },
+        },
+      });
+
+      middleware({ dispatch, getState })(next)(action);
+      expect(analyticsActions.trackEvent).not.toHaveBeenCalled();
+    });
+
+    it('it should track analytics-middleware on deletePost', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const action = {
+        type: actionTypes.DRAFT_CONFIRMED_DELETE,
+        updateId: 'updateId1',
+        draft: { id: 'foo', type: 'text' },
+      };
+      middleware({ dispatch, getState })(next)(action);
+      expect(analyticsActions.trackEvent)
+      .toHaveBeenCalledWith('Draft Deleted', expectedTrackingObj);
+    });
+
+    it('it should track analytics-middleware on approveDraft', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const RPC_NAME = 'approveDraft';
+      const action = dataFetchActions.fetchSuccess({
+        name: RPC_NAME,
+        result: {
+          update: { id: 'foo', type: 'text' },
+        },
+      });
+
+      middleware({ dispatch, getState })(next)(action);
+      expect(analyticsActions.trackEvent)
+      .toHaveBeenCalledWith('Draft Approved', expectedTrackingObj);
+    });
+  });
+
 });

@@ -85,10 +85,12 @@ moves from approval tab to drafts if needsApproval false)
         notificationType: 'success',
         message: 'We\'ve successfully moved this draft!',
       }));
-      if (action.result.message === 'Awesome! The draft is now pending approval.') {
-        const post = action.result.draft;
+      const draft = action.result ? action.result.draft : {};
+      /* this is also called when a draft in approval is moved back into drafts, which
+       is why we need to check the needs_approval bool */
+      if (draft.needs_approval) {
         const channel = state.profileSidebar.selectedProfile;
-        const metadata = getTrackingData({ post, channel });
+        const metadata = getTrackingData({ post: draft, channel });
         dispatch(analyticsActions.trackEvent('Draft Submitted', metadata));
       }
       break;
