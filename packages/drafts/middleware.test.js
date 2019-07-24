@@ -171,7 +171,7 @@ describe('middleware', () => {
       mediaType: 'text',
       product: 'publish',
       channelType: 'personal_profile',
-      channelNetwork: 'twitter',
+      channel: 'twitter',
     };
     it('it should track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to approval', () => {
       analyticsActions.trackEvent = jest.fn();
