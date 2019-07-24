@@ -85,8 +85,6 @@ moves from approval tab to drafts if needsApproval false)
         notificationType: 'success',
         message: 'We\'ve successfully moved this draft!',
       }));
-      // free - drafts, request approval -- "Awesome! Your draft has been moved.
-      //  TO-DO: Don't track for move to drafts , free - pending approval, move to drafts - "Awesome! Your draft has been moved.
       if (action.result.message === 'Awesome! The draft is now pending approval.') {
         const post = action.result.draft;
         const channel = state.profileSidebar.selectedProfile;

@@ -9,6 +9,13 @@ import middleware from './middleware';
 describe('middleware', () => {
   const next = jest.fn();
   const dispatch = jest.fn();
+  const getState = jest.fn(() => state);
+
+  const state = {
+    profileSidebar: {
+      selectedProfile: {},
+    }
+  }
 
   it('should export middleware', () => {
     expect(middleware)
@@ -22,7 +29,7 @@ describe('middleware', () => {
         id: 'id1',
       },
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -40,7 +47,7 @@ describe('middleware', () => {
       type: actionTypes.DRAFT_CONFIRMED_DELETE,
       updateId: 'updateId1',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -57,7 +64,7 @@ describe('middleware', () => {
       type: actionTypes.DRAFT_APPROVE,
       updateId: 'updateId1',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -75,7 +82,7 @@ describe('middleware', () => {
       needsApproval: true,
       updateId: 'updateId1',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -92,8 +99,9 @@ describe('middleware', () => {
     const RPC_NAME = 'approveDraft';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
+      result: { update: {}, message: '' },
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -108,8 +116,9 @@ describe('middleware', () => {
     const RPC_NAME = 'changeDraftStatus';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
+      result: { update: {}, message: '' },
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -125,7 +134,7 @@ describe('middleware', () => {
     const action = dataFetchActions.fetchFail({
       name: RPC_NAME,
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -141,7 +150,7 @@ describe('middleware', () => {
     const action = dataFetchActions.fetchFail({
       name: RPC_NAME,
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
