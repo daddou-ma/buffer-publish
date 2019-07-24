@@ -96,7 +96,7 @@ const WebAPIUtils = {
           if (!updatePost) {
             const post = response && response.updates ? response.updates[0] : {};
             const profile = profiles.reduce(profileItem => profileItem.id === post.profile_id);
-            const composerSource = getComposerSource({ tabId, emptySlotMode, profile });
+            const composerSource = getComposerSource({ tabId, emptySlotMode });
             const metadata = getSegmentMetadata({ post, profile, composerSource });
             AppActionCreators.trackSegmentAction({ eventName: 'Post Created', metadata });
           }
