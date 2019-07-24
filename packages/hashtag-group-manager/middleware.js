@@ -21,9 +21,6 @@ export default ({ getState, dispatch }) => next => (action) => {
   next(action);
   const { organizationId } = getState().profileSidebar.selectedProfile;
   switch (action.type) {
-    case actionTypes.CANCEL_HASHTAG_GROUP:
-      //
-      break;
     case actionTypes.SAVE_HASHTAG_GROUP:
       const { name, text } = getState().hashtagGroups;
       dispatch(dataFetchActions.fetch({
@@ -44,10 +41,11 @@ export default ({ getState, dispatch }) => next => (action) => {
         },
       }));
       break;
+    case `createHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
     case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'error',
-        message: action.result.message,
+        message: action.error,
       }));
       break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
@@ -60,7 +58,8 @@ export default ({ getState, dispatch }) => next => (action) => {
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       refreshHashtagGroups(dispatch, organizationId);
       trackAction({ location: 'hashtagManager', action: 'hashtag_created', metadata: { organizationId } });
-      break;    default:
+      break;
+    default:
       break;
   }
 };

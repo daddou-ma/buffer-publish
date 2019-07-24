@@ -1,4 +1,4 @@
-const { method } = require('@bufferapp/buffer-rpc');
+const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
 module.exports = method(
@@ -17,9 +17,9 @@ module.exports = method(
     })
     .then(result => JSON.parse(result))
     .catch((err) => {
-        if (err.error) {
-          const { error } = JSON.parse(err.error);
-          throw createError({ message: error });
-        }
-      }),
+      if (err.error) {
+        const error = JSON.parse(err.error);
+        throw createError({ message: error.message });
+      }
+    }),
 );
