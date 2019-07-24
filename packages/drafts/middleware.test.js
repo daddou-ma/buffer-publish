@@ -1,6 +1,6 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
-import { actions as analyticsActions } from '@bufferapp/analytics-middleware';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';

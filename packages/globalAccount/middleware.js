@@ -2,7 +2,7 @@ import {
   actions as asyncDataFetch,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { actions as analyticsActions } from '@bufferapp/analytics-middleware';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);

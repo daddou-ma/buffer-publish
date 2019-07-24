@@ -1,5 +1,5 @@
 import { actionTypes as fetchActions } from '@bufferapp/async-data-fetch';
-import { actions as analyticsActions } from '@bufferapp/analytics-middleware';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 import middleware from './middleware';
 

@@ -1,5 +1,5 @@
 {
-  "name": "@bufferapp/analytics-middleware",
+  "name": "@bufferapp/publish-analytics-middleware",
   "version": "2.0.0",
   "description": "Publish Demographic Data Store",
   "main": "index.js",
