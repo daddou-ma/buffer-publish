@@ -40,6 +40,12 @@ export default (state = initialState, action) => {
         ...state,
         text: action.text,
       };
+    case actionTypes.CANCEL_HASHTAG_GROUP:
+      return {
+        ...state,
+        name: '',
+        text: '',
+      };
     default:
       return state;
   }

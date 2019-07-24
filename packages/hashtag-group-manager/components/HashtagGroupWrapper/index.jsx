@@ -31,6 +31,7 @@ class HashtagGroupWrapper extends React.Component {
 
   onSwitchMode(viewMode) {
     this.setState({ viewMode });
+    this.props.onCancelHashtagGroup();
   }
 
   onDeleteHashtagGroupClick(groupId) {
@@ -84,6 +85,7 @@ HashtagGroupWrapper.propTypes = {
   onSaveHashtagGroup: PropTypes.func,
   onChangeGroupName: PropTypes.func,
   onChangeGroupText: PropTypes.func,
+  onCancelHashtagGroup: PropTypes.func,
   hashtagGroups: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -110,6 +112,7 @@ HashtagGroupWrapper.defaultProps = {
   onSaveHashtagGroup: () => {},
   onChangeGroupName: () => {},
   onChangeGroupText: () => {},
+  onCancelHashtagGroup: () => {},
 };
 
 export default HashtagGroupWrapper;
