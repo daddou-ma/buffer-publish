@@ -26,7 +26,6 @@ export default hot(connect(
     hasFacebook: state.profileSidebar.hasFacebook,
     hasTwitter: state.profileSidebar.hasTwitter,
     isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
-    globalUser: state.globalUser,
   }),
   (dispatch, ownProps) => ({
     onProfileClick: (profile) => {
