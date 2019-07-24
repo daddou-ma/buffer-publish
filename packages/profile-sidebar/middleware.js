@@ -34,6 +34,9 @@ export default ({ dispatch, getState }) => next => (action) => {
   switch (action.type) {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(dataFetchActions.fetch({
+        name: 'globalUser',
+      }));
+      dispatch(dataFetchActions.fetch({
         name: 'profiles',
       }));
       break;

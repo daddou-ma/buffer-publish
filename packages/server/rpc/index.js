@@ -56,6 +56,7 @@ const cancelTrial = require('./cancelTrial');
 const startTrial = require('./startTrial');
 const intercom = require('./intercom');
 const v1ToV2UpgradeDetails = require('./v1ToV2UpgradeDetails');
+const globalAccount = require('./globalAccount');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -128,4 +129,5 @@ module.exports = rpc(
   startTrial,
   intercom,
   v1ToV2UpgradeDetails,
+  globalAccount,
 );
