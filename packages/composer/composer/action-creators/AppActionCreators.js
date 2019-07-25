@@ -202,27 +202,14 @@ const AppActionCreators = {
               // the link.
               message: removeLinkFromErrorMessageText(
                 unsuccessfulResponse.message,
-                'embedded-cta-link'
+                'embedded-cta-link',
               ),
               isUnique: true,
               cta: {
-                label: isFreeUser && canStartProTrial ? 'Start Pro Trial' : 'Show Paid Plans',
-                action: (event) => {
+                label: 'Show Paid Plans',
+                action: () => {
                   const { environment } = AppStore.getMetaData();
                   if (isFreeUser) {
-                    if (canStartProTrial) {
-                      if (event && event.target && !event.target.disabled) {
-                        event.target.disabled = true;
-                      }
-                      AppActionCreators.triggerInteraction({
-                        message: {
-                          action: 'START_PRO_TRIAL',
-                          scope,
-                          source,
-                        },
-                      });
-                      return;
-                    }
                     if (AppStore.isExtension()) {
                       window.open(`${bufferOrigins.get(environment)}/pricing`);
                     } else {

@@ -109,11 +109,7 @@ function generateUserMenuItems({
     extraItems.push(userMenuItems.returnToClassic);
   }
   if (showUpgradeToPro) {
-    if (showStartProTrial) {
-      extraItems.push(userMenuItems.startProTrial);
-    } else {
-      extraItems.push(userMenuItems.upgradeToPro);
-    }
+    extraItems.push(userMenuItems.upgradeToPro);
   }
   return [...userMenuItems.top, ...extraItems];
 }
