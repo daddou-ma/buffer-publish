@@ -19,7 +19,7 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `hashtagGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getHashtagGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         groups: action.result.data.snippets,
@@ -32,6 +32,7 @@ export default (state = initialState, action) => {
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
+        groups: action.result.data.snippets,
         name: '',
         text: '',
       };
