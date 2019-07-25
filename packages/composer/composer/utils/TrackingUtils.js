@@ -21,15 +21,16 @@ const getComposerSource = ({ tabId, emptySlotMode }) => {
 };
 
 const getSegmentMetadata = ({ post = {}, profile = {}, formattedData = {}, composerSource }) => ({
+  channel: post.profile_service,
   channelId: post.profile_id,
-  channelNetwork: post.profile_service,
+  channelServiceId: profile.serviceId,
   channelType: profile.serviceType,
-  client: post.client ? post.client.website : null,
+  client: post.client ? post.client.name : null,
   composerSource,
-  hasFirstComment: !!post.comment_text,
-  hasLocation: !!post.service_geolocation_id,
+  hasFirstComment: !!formattedData.comment_text,
+  hasLocation: !!formattedData.service_geolocation_id,
   hasShopGridLink: !!formattedData.link,
-  isDraft: !!post.commentText,
+  isDraft: !!post.draft,
   mediaType: post.type,
   postId: post.id,
   product: 'publish',
