@@ -29,7 +29,7 @@
   "homepage": "https://github.com/bufferapp/project-donut#readme",
   "devDependencies": {
     "@bufferapp/components": "3.2.1",
-    "@bufferapp/ui": "3.18.1",
+    "@bufferapp/ui": "3.18.2",
     "@storybook/addon-storyshots": "3.4.11",
     "@storybook/react": "3.4.11",
     "axe-core": "2.2.0",
@@ -122,7 +122,8 @@
   },
   "dependencies": {
     "@bufferapp/react-images-loaded": "^1.1.0-fork.0",
-    "@hot-loader/react-dom": "^16.8.6"
+    "@hot-loader/react-dom": "^16.8.6",
+    "hashtag-regex": "^2.0.0"
   },
   "workspaces": [
     "packages/*"

@@ -45,6 +45,7 @@ import { middleware as b4bTrialCompleteModalMiddleware } from '@bufferapp/publis
 import { middleware as tabsMiddleware } from '@bufferapp/publish-tabs';
 import { middleware as appShellMiddleware } from '@bufferapp/publish-app-shell';
 import { middleware as igFirstCommentProTrialModalMiddleware } from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
+import { middleware as hashtagGroupsMiddleware } from '@bufferapp/publish-hashtag-group-manager';
 import { middleware as trialMiddleware } from '@bufferapp/publish-trial';
 
 // Remove analytics middleware when publish switches to analyze
@@ -123,6 +124,7 @@ const configureStore = initialstate => {
         tabsMiddleware,
         appShellMiddleware,
         igFirstCommentProTrialModalMiddleware,
+        hashtagGroupsMiddleware,
         trialMiddleware,
         // Analyze
         averageMiddleware,
