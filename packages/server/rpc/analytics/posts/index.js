@@ -14,10 +14,9 @@ const fetchTopPosts = (
   limit,
   searchTerms,
   accessToken,
-  apiAddr,
 ) =>
   rp({
-    uri: `${apiAddr}/1/profiles/${profileId}/analytics/all_posts.json`,
+    uri: `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/all_posts.json`,
     method: 'GET',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
@@ -71,7 +70,6 @@ module.exports = method(
       limit,
       searchTerms,
       req.session.publish.accessToken,
-      req.app.get('analyzeApiAddr'),
     );
 
     return parsePosts(Object.values(posts.updates_with_stats));
