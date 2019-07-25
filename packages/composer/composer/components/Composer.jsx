@@ -2,7 +2,7 @@
  * Component that displays a composer
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import ReactDOMServer from 'react-dom/server';
