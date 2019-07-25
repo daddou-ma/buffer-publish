@@ -2,6 +2,8 @@ const getComposerSource = ({ tabId, emptySlotMode }) => {
   let sourceName = null;
   switch (tabId) {
     case 'queue':
+      /* emptyslotmode is true when a user opens the composer from an empty slot,
+      which allows us to know the source is queue_list */
       sourceName = emptySlotMode ? 'queue_list' : 'queue';
       break;
     case 'awaitingApproval':
