@@ -170,7 +170,6 @@ describe('middleware', () => {
       postId: 'foo',
       channelId: 'bar',
       mediaType: 'text',
-      product: 'publish',
       channelType: 'personal_profile',
       channel: 'twitter',
       channelServiceId: 'foo123',
