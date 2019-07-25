@@ -220,7 +220,10 @@ class App extends React.Component {
     window.addEventListener('drop', (e) => e.preventDefault());
     window.addEventListener('dragover', (e) => e.preventDefault());
 
+    /* Load metadata for cases where the metadata could change (ex. tabId)
+       every time composer opens */
     if (!this.isInitialized) this.init();
+    else AppInitActionCreators.loadInitialMetaData(this.props.metaData);
 
     AppActionCreators.trackUserAction(['viewed'], {
       timeToRender: (new Date() - window.pageStartTime),
