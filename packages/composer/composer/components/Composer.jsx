@@ -763,17 +763,25 @@ class Composer extends React.Component {
       this.props.isOnProTrial
     );
 
+    const areAllSelectedProfilesIG = () => {
+      const notInstagram = this.props.selectedProfiles.some(profile => profile.service.name !== 'instagram');
+
+      return !notInstagram || appState.expandedComposerId === 'instagram';
+    };
+
     const shouldDisplayFirstCommentSection = (commentEnabled) => {
       const hasSelectedSomeInstagramDirectProfiles =
         this.props.selectedProfiles.some(profile => profile.instagramDirectEnabled);
       return (
-        commentEnabled || (
-        hasSelectedSomeInstagramDirectProfiles &&
-        this.isInstagram() &&
-        (userHasBusinessOrProPlan ||
-          this.props.canStartProTrial) &&
-        this.isExpanded() &&
-        !appState.isOmniboxEnabled
+        areAllSelectedProfilesIG() && (
+          commentEnabled || (
+            hasSelectedSomeInstagramDirectProfiles &&
+            this.isInstagram() &&
+            (userHasBusinessOrProPlan ||
+              this.props.canStartProTrial) &&
+            this.isExpanded() &&
+            !appState.isOmniboxEnabled
+          )
         )
       );
     };
