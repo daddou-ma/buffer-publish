@@ -14,20 +14,25 @@ const getHashtagsStyles = hover => ({
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
   overflow: 'hidden',
+  transition: 'color 0.3s',
 });
 
 const nameWrapperStyles = {
   paddingRight: '8px',
-  flex: 1,
+  flex: '0 1 auto',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
   overflow: 'hidden',
+};
+const counterWrapperStyles = {
+  flex: '0 1 auto',
 };
 
 const cardStyle = {
   padding: '16px',
   display: 'flex',
   alignItems: 'center',
+  transition: 'background-color 0.3s',
 };
 
 const cardHoverStyle = {
@@ -80,7 +85,9 @@ class HashtagGroupItem extends Component {
                 <span style={nameWrapperStyles}>
                   <Text type="label">{name}</Text>
                 </span>
-                <Text type="label" color={gray}>{numberOfHashtags}</Text>
+                <span style={counterWrapperStyles}>
+                  <Text type="label" color={gray}>{numberOfHashtags}</Text>
+                </span>
               </div>
               <div style={getHashtagsStyles(this.state.hover)}>
                 <Text>{hashtags}</Text>
@@ -103,7 +110,7 @@ class HashtagGroupItem extends Component {
                 items={[
                   {
                     id: 'deleteHashtagGroup',
-                    title: 'Delete Hashtag Group',
+                    title: 'Delete Group',
                     icon: <TrashIcon color="gray" />,
                     onItemClick: () => onDeleteHashtagGroupClick(snippetId),
                   },

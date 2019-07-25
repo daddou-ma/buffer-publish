@@ -5,7 +5,7 @@ import countHashtagsInText from '../../utils/HashtagCounter';
 
 const contentStyle = {
   flex: '1',
-  overflowY: 'scroll',
+  overflowY: 'auto',
   paddingBottom: '46px',
 };
 

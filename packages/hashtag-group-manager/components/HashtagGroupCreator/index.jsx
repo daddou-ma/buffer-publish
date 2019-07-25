@@ -12,6 +12,10 @@ const buttonStyle = {
   margin: '0 16px',
 };
 
+const cancelButtonStyle = {
+  margin: '0 10px',
+};
+
 const headerStyle = {
   margin: '0 16px',
 };
@@ -235,11 +239,13 @@ class HashtagGroupCreator extends Component {
           </div>
         </form>
         <div style={buttonStyle}>
-          <Button
-            type="text"
-            label="Cancel"
-            onClick={onCancelHashtagGroup}
-          />
+          <span style={cancelButtonStyle}>
+            <Button
+              type="text"
+              label="Cancel"
+              onClick={onCancelHashtagGroup}
+            />
+          </span>
           <Button
             type="secondary"
             label="Save Hashtag Group"
