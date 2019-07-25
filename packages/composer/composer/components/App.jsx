@@ -45,6 +45,7 @@ class App extends React.Component {
       isDisabled: PropTypes.bool.isRequired,
       disabledMessage: PropTypes.string,
       serviceType: PropTypes.string.isRequired,
+      serviceId: PropTypes.string.isRequired,
       isBusinessProfile: PropTypes.bool.isRequired,
       isContributor: PropTypes.bool,
       isManager: PropTypes.bool.isRequired,

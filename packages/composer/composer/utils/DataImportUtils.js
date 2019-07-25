@@ -121,6 +121,7 @@ const DataImportUtils = {
         disabledMessage: (isDisabled && isTwitterPostingRestrictedForProfile) ?
           'due to recent Twitter changes, the same tweet cannot be re-buffered to any Twitter account' : null,
         serviceType: importedProfile.service_type,
+        serviceId: importedProfile.serviceId,
         isBusinessProfile: importedProfile.business,
         isContributor: importedProfile.isContributor || importedProfile.is_contributor,
         isManager: importedProfile.isManager || (importedProfile.organization_role === 1),

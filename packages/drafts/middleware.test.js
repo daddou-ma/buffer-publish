@@ -16,6 +16,7 @@ describe('middleware', () => {
         service_type: 'personal_profile',
         service: 'twitter',
         id: 'bar',
+        serviceId: 'foo123',
       },
     },
   };
@@ -172,6 +173,7 @@ describe('middleware', () => {
       product: 'publish',
       channelType: 'personal_profile',
       channel: 'twitter',
+      channelServiceId: 'foo123',
     };
     it('it should track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to approval', () => {
       analyticsActions.trackEvent = jest.fn();
