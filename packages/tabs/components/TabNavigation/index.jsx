@@ -107,19 +107,12 @@ class TabNavigation extends React.Component {
             </Text>
             <div style={{ marginLeft: '8px', display: 'inline-block' }}>
               <Button
-                label={canStartProTrial ? 'Start a 7 day Pro Trial' : 'Upgrade to Pro'}
+                label={'Upgrade for more'}
                 type="secondary"
                 size="small"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (canStartProTrial) {
-                    window.location.assign(`${getURL.getStartTrialURL({
-                      trialType: 'pro',
-                      cta: SEGMENT_NAMES.HEADER_PRO_TRIAL,
-                    })}`);
-                  } else {
-                    onUpgradeButtonClick('pro');
-                  }
+                  onUpgradeButtonClick('pro');
                 }}
               />
             </div>
