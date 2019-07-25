@@ -29,7 +29,7 @@
   "homepage": "https://github.com/bufferapp/project-donut#readme",
   "devDependencies": {
     "@bufferapp/components": "3.2.1",
-    "@bufferapp/ui": "3.18.1",
+    "@bufferapp/ui": "5.0.0",
     "@storybook/addon-storyshots": "3.4.11",
     "@storybook/react": "3.4.11",
     "axe-core": "2.2.0",
@@ -108,7 +108,7 @@
     "request-promise": "4.2.1",
     "storybook-addon-a11y": "3.1.9",
     "style-loader": "0.19.0",
-    "styled-components": "3.4.10",
+    "styled-components": "4.3.2",
     "test-listen": "1.0.2",
     "then-sleep": "1.0.1",
     "twitter-text": "1.14.7",
