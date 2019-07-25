@@ -13,6 +13,9 @@ const boxStyle = {
 const CREATE_MODE = 'createHashtag';
 const MANAGE_MODE = 'manageHashtag';
 
+/*
+ * Wrapper to make sure to display group creator or manager
+ */
 class HashtagGroupWrapper extends React.Component {
   constructor () {
     super();
