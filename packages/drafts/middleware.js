@@ -15,7 +15,6 @@ const getTrackingData = ({ post = {}, channel = {} }) => ({
   channelServiceId: channel.serviceId,
   postId: post.id,
   mediaType: post.type,
-  product: 'publish',
 });
 
 export default ({ dispatch, getState }) => next => (action) => {

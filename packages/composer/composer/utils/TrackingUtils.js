@@ -35,7 +35,6 @@ const getSegmentMetadata = ({ post = {}, profile = {}, formattedData = {}, compo
   isDraft: !!post.draft,
   mediaType: post.type,
   postId: post.id,
-  product: 'publish',
   shareDate: post.due_at,
 });
 
