@@ -29,6 +29,16 @@ export default (state = initialState, action) => {
         ...state,
         name: action.name,
       };
+    case actionTypes.SAVE_HASHTAG_GROUP:
+      const newGroups = [
+        ...state.groups,
+        { _id: 'temp', name: state.name, text: state.text },
+      ].sort((a, b) => (a.name < b.name ? -1 : 1));
+
+      return {
+        ...state,
+        groups: newGroups,
+      };
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
