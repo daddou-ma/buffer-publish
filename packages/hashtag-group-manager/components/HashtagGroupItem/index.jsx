@@ -86,7 +86,7 @@ class HashtagGroupItem extends Component {
                   <Text type="label">{name}</Text>
                 </span>
                 <span style={counterWrapperStyles}>
-                  <Text type="label" color={gray}>{numberOfHashtags}</Text>
+                  <Text type="label" color="gray">{numberOfHashtags}</Text>
                 </span>
               </div>
               <div style={getHashtagsStyles(this.state.hover)}>
