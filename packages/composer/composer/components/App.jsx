@@ -15,7 +15,6 @@ import { observeStore } from '../utils/StoreUtils';
 import AppHooks from '../utils/LifecycleHooks';
 import AppStateless from './AppStateless';
 import AppDispatcher from '../dispatcher';
-
 function getState() {
   const scheduledAt = ComposerStore.getScheduledAt();
 

@@ -25,7 +25,6 @@ var METHODS = {
   'handleRouterAction': 'ROUTER_ACTION',
   'handleApiAction': 'API_ACTION',
   'handlePusherAction': 'PUSHER_ACTION',
-  'handleTrackingAction': 'TRACKING_ACTION',
 };
 
 var createHandler = function(source) {

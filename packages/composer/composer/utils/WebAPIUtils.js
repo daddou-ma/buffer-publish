@@ -98,7 +98,13 @@ const WebAPIUtils = {
             const profile = profiles.reduce(profileItem => profileItem.id === post.profile_id);
             const composerSource = getComposerSource({ tabId, emptySlotMode });
             const metadata = getSegmentMetadata({ post, profile, formattedData, composerSource });
-            AppActionCreators.trackSegmentAction({ eventName: 'Post Created', metadata });
+            AppActionCreators.triggerInteraction({
+              message: {
+                action: 'SEGMENT_TRACKING',
+                event: 'Post Created',
+                metadata,
+              },
+            });
           }
           return Object.assign(response, { serviceName });
         });

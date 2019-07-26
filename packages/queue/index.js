@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { actions as trialActions } from '@bufferapp/publish-trial';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import { actions } from './reducer';
@@ -140,26 +139,6 @@ export default connect(
     },
     onComposerPlaceholderClick: () => {
       dispatch(actions.handleComposerPlaceholderClick());
-    },
-    onComposerInteraction: ({ message }) => {
-      switch (message.action) {
-        case 'COMMENT_ENABLED':
-          dispatch(modalsActions.showInstagramFirstCommentModal(message));
-          break;
-        case 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL':
-          dispatch(modalsActions.showInstagramFirstCommentProTrialModal({ source: 'ig_first_comment_toggle' }));
-          break;
-        case 'SHOW_PRO_UPGRADE_MODAL':
-          dispatch(modalsActions.showUpgradeModal({ source: 'ig_first_comment_toggle' }));
-          break;
-        case 'START_PRO_TRIAL':
-          dispatch(trialActions.handleStartProTrial({
-            scope: message.scope,
-            source: message.source,
-          }));
-          break;
-        default: break;
-      }
     },
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
