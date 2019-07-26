@@ -8,6 +8,8 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
 env:
+  - name: AUTH_SVC_ADDR
+    value: http://authentication-service.core
   - name: API_ADDR
     value: https://k8s-api-php71-dev.buffer.com
   - name: DD_AGENT_HOST

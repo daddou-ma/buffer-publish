@@ -1,0 +1,6 @@
+window.analytics = {
+  identify: jest.fn(),
+  track: jest.fn(),
+  page: jest.fn(),
+};
+

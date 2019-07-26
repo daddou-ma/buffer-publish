@@ -1,4 +1,5 @@
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 import {
   actions as dataFetchActions,
@@ -7,8 +8,19 @@ import {
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch }) => next => (action) => {
+const getTrackingData = ({ post = {}, channel = {} }) => ({
+  channel: channel.service,
+  channelId: channel.id,
+  channelType: channel.service_type,
+  channelServiceId: channel.serviceId,
+  postId: post.id,
+  mediaType: post.type,
+});
+
+export default ({ dispatch, getState }) => next => (action) => {
   next(action);
+  const state = getState();
+
   switch (action.type) {
     case profileActionTypes.SELECT_PROFILE:
       dispatch(dataFetchActions.fetch({
@@ -19,14 +31,18 @@ export default ({ dispatch }) => next => (action) => {
         },
       }));
       break;
-    case actionTypes.DRAFT_CONFIRMED_DELETE:
+    case actionTypes.DRAFT_CONFIRMED_DELETE: {
       dispatch(dataFetchActions.fetch({
         name: 'deletePost',
         args: {
           updateId: action.updateId,
         },
       }));
+      const channel = state.profileSidebar.selectedProfile;
+      const metadata = getTrackingData({ post: action.draft, channel });
+      dispatch(analyticsActions.trackEvent('Draft Deleted', metadata));
       break;
+    }
 /*
 In Classic it's REQUESTING_DRAFT_APPROVE.
 Sends draft to queue, which means approves draft
@@ -53,18 +69,32 @@ moves from approval tab to drafts if needsApproval false)
         },
       }));
       break;
-    case `approveDraft_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `approveDraft_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
         message: 'We\'ve added this draft to your queue!',
       }));
+      const post = action.result.update;
+      const channel = state.profileSidebar.selectedProfile;
+      const metadata = getTrackingData({ post, channel });
+      dispatch(analyticsActions.trackEvent('Draft Approved', metadata));
       break;
-    case `changeDraftStatus_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    }
+    case `changeDraftStatus_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
         message: 'We\'ve successfully moved this draft!',
       }));
+      const draft = action.result ? action.result.draft : {};
+      /* this is also called when a draft in approval is moved back into drafts, which
+       is why we need to check the needs_approval bool */
+      if (draft.needs_approval) {
+        const channel = state.profileSidebar.selectedProfile;
+        const metadata = getTrackingData({ post: draft, channel });
+        dispatch(analyticsActions.trackEvent('Draft Submitted', metadata));
+      }
       break;
+    }
     case `approveDraft_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'error',

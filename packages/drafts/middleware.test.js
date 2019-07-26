@@ -1,5 +1,6 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
@@ -9,6 +10,17 @@ import middleware from './middleware';
 describe('middleware', () => {
   const next = jest.fn();
   const dispatch = jest.fn();
+  const state = {
+    profileSidebar: {
+      selectedProfile: {
+        service_type: 'personal_profile',
+        service: 'twitter',
+        id: 'bar',
+        serviceId: 'foo123',
+      },
+    },
+  };
+  const getState = jest.fn(() => state);
 
   it('should export middleware', () => {
     expect(middleware)
@@ -22,7 +34,7 @@ describe('middleware', () => {
         id: 'id1',
       },
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -40,7 +52,7 @@ describe('middleware', () => {
       type: actionTypes.DRAFT_CONFIRMED_DELETE,
       updateId: 'updateId1',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -57,7 +69,7 @@ describe('middleware', () => {
       type: actionTypes.DRAFT_APPROVE,
       updateId: 'updateId1',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -75,7 +87,7 @@ describe('middleware', () => {
       needsApproval: true,
       updateId: 'updateId1',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -92,8 +104,9 @@ describe('middleware', () => {
     const RPC_NAME = 'approveDraft';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
+      result: { update: {}, draft: {} },
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -108,8 +121,9 @@ describe('middleware', () => {
     const RPC_NAME = 'changeDraftStatus';
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
+      result: { update: {}, draft: {} },
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -125,7 +139,7 @@ describe('middleware', () => {
     const action = dataFetchActions.fetchFail({
       name: RPC_NAME,
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -141,7 +155,7 @@ describe('middleware', () => {
     const action = dataFetchActions.fetchFail({
       name: RPC_NAME,
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -151,4 +165,69 @@ describe('middleware', () => {
         message: 'There was an error moving this draft!',
       }));
   });
+  describe('segment tracking', () => {
+    const expectedTrackingObj = {
+      postId: 'foo',
+      channelId: 'bar',
+      mediaType: 'text',
+      channelType: 'personal_profile',
+      channel: 'twitter',
+      channelServiceId: 'foo123',
+    };
+    it('it should track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to approval', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const RPC_NAME = 'changeDraftStatus';
+      const action = dataFetchActions.fetchSuccess({
+        name: RPC_NAME,
+        result: {
+          update: {}, draft: { needs_approval: true, id: 'foo', type: 'text' },
+        },
+      });
+
+      middleware({ dispatch, getState })(next)(action);
+      expect(analyticsActions.trackEvent)
+      .toHaveBeenCalledWith('Draft Submitted', expectedTrackingObj);
+    });
+    it('it should not track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to drafts', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const RPC_NAME = 'changeDraftStatus';
+      const action = dataFetchActions.fetchSuccess({
+        name: RPC_NAME,
+        result: {
+          update: {}, draft: { needs_approval: false },
+        },
+      });
+
+      middleware({ dispatch, getState })(next)(action);
+      expect(analyticsActions.trackEvent).not.toHaveBeenCalled();
+    });
+
+    it('it should track analytics-middleware on deletePost', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const action = {
+        type: actionTypes.DRAFT_CONFIRMED_DELETE,
+        updateId: 'updateId1',
+        draft: { id: 'foo', type: 'text' },
+      };
+      middleware({ dispatch, getState })(next)(action);
+      expect(analyticsActions.trackEvent)
+      .toHaveBeenCalledWith('Draft Deleted', expectedTrackingObj);
+    });
+
+    it('it should track analytics-middleware on approveDraft', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const RPC_NAME = 'approveDraft';
+      const action = dataFetchActions.fetchSuccess({
+        name: RPC_NAME,
+        result: {
+          update: { id: 'foo', type: 'text' },
+        },
+      });
+
+      middleware({ dispatch, getState })(next)(action);
+      expect(analyticsActions.trackEvent)
+      .toHaveBeenCalledWith('Draft Approved', expectedTrackingObj);
+    });
+  });
+
 });

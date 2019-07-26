@@ -15,6 +15,7 @@ import WebSocket from '../utils/WebSocket';
 import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
 import { removeLinkFromErrorMessageText } from '../utils/StringUtils';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 const getDefaultQueueingType = () => {
   const { saveButtons } = AppStore.getOptions();

@@ -47,6 +47,8 @@ import { middleware as appShellMiddleware } from '@bufferapp/publish-app-shell';
 import { middleware as igFirstCommentProTrialModalMiddleware } from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 import { middleware as hashtagGroupsMiddleware } from '@bufferapp/publish-hashtag-group-manager';
 import { middleware as trialMiddleware } from '@bufferapp/publish-trial';
+import { middleware as segmentTrackingMiddleware } from '@bufferapp/publish-analytics-middleware';
+import { middleware as globalAccountMiddleware } from '@bufferapp/global-account';
 
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
@@ -126,6 +128,8 @@ const configureStore = initialstate => {
         igFirstCommentProTrialModalMiddleware,
         hashtagGroupsMiddleware,
         trialMiddleware,
+        segmentTrackingMiddleware,
+        globalAccountMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

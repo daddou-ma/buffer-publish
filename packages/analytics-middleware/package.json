@@ -1,0 +1,28 @@
+{
+  "name": "@bufferapp/publish-analytics-middleware",
+  "version": "2.0.0",
+  "description": "Publish Demographic Data Store",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules",
+    "test": "sh ../../package_test.sh",
+    "test-watch": "jest --watch"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!@bufferapp/*)"
+    ],
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  },
+  "author": "federicoweber@gmail.com",
+  "devDependencies": {
+    "eslint": "3.19.0",
+    "jest": "19.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

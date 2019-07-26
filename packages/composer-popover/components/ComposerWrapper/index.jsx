@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bufferPublishComposer as Composer } from '@bufferapp/publish-composer';
+import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as trialActions } from '@bufferapp/publish-trial';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 const ComposerWrapper = props => <Composer {...props} />;
 
@@ -57,6 +60,7 @@ export default connect(
         editMode: false,
         draftMode: null,
         selectedProfileId,
+        tabId: state.tabs.tabId,
         ...options,
       });
     }
@@ -65,6 +69,29 @@ export default connect(
   dispatch => ({
     onEvent: (type, data) => {
       dispatch({ type: 'COMPOSER_EVENT', eventType: type, data });
+    },
+    onInteraction: ({ message }) => {
+      switch (message.action) {
+        case 'COMMENT_ENABLED':
+          dispatch(modalsActions.showInstagramFirstCommentModal(message));
+          break;
+        case 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL':
+          dispatch(modalsActions.showInstagramFirstCommentProTrialModal({ source: 'ig_first_comment_toggle' }));
+          break;
+        case 'SHOW_PRO_UPGRADE_MODAL':
+          dispatch(modalsActions.showUpgradeModal({ source: 'ig_first_comment_toggle' }));
+          break;
+        case 'START_PRO_TRIAL':
+          dispatch(trialActions.handleStartProTrial({
+            scope: message.scope,
+            source: message.source,
+          }));
+          break;
+        case 'SEGMENT_TRACKING':
+          dispatch(analyticsActions.trackEvent(message.eventName, message.metadata));
+          break;
+        default: break;
+      }
     },
   }),
 )(ComposerWrapper);

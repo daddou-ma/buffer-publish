@@ -122,6 +122,7 @@ const getNewProfile = (data) => ({
   subprofiles: data.subprofiles, // Data structure in getNewSubprofile()
   selectedSubprofileId: null,
   serviceType: data.serviceType,
+  serviceId: data.serviceId,
   isBusinessProfile: data.isBusinessProfile,
   isContributor: data.isContributor,
   isManager: data.isManager,

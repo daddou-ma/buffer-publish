@@ -8,6 +8,7 @@ import AppStore from '../stores/AppStore';
 import API from './API';
 import { observeStore } from '../utils/StoreUtils';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
+import { getComposerSource, getSegmentMetadata } from '../utils/TrackingUtils';
 
 import getFacebookAutocompleteEntities
   from '../utils/draft-js-custom-plugins/autocomplete/utils/getFacebookAutocompleteEntities';
@@ -32,9 +33,8 @@ const WebAPIUtils = {
    * }
    */
   saveDrafts: ({ queueingType, customScheduleTime, profiles, drafts }) => {
-    const { updateId } = AppStore.getMetaData();
+    const { updateId, tabId, emptySlotMode } = AppStore.getMetaData();
     const { partiallySavedDraftsProfilesIds } = AppStore.getAppState();
-
     // Transform each draft's data to match the API's format
     const draftsDataToSave = drafts.map((draft) => ({
       serviceName: draft.service.name,
@@ -79,10 +79,12 @@ const WebAPIUtils = {
      * for Promise.all() to not fail early
      */
     const savePromises = splitDraftsDataToSave.map(({ serviceName, formattedData }) => {
+      const updatePost = (queueingType === QueueingTypes.SAVE ||
+        queueingType === QueueingTypes.SAVE_AND_APPROVE);
       const endpoint =
-        (queueingType === QueueingTypes.SAVE || queueingType === QueueingTypes.SAVE_AND_APPROVE) ?
-        `updates/${updateId}/update.json` :
-        'updates/create.json';
+        updatePost ?
+          `updates/${updateId}/update.json` :
+          'updates/create.json';
 
       return API.post(endpoint, formattedData)
         .catch(() => ({
@@ -90,7 +92,22 @@ const WebAPIUtils = {
           message: `Whoops, Buffer's servers couldn't be reached to save the
             update, sorry about that. Would you be up for trying again?`,
         }))
-        .then((response) => Object.assign(response, { serviceName }));
+        .then((response) => {
+          if (!updatePost) {
+            const post = response && response.updates ? response.updates[0] : {};
+            const profile = profiles.reduce(profileItem => profileItem.id === post.profile_id);
+            const composerSource = getComposerSource({ tabId, emptySlotMode });
+            const metadata = getSegmentMetadata({ post, profile, formattedData, composerSource });
+            AppActionCreators.triggerInteraction({
+              message: {
+                action: 'SEGMENT_TRACKING',
+                eventName: 'Post Created',
+                metadata,
+              },
+            });
+          }
+          return Object.assign(response, { serviceName });
+        });
     });
 
     return Promise.all(savePromises)

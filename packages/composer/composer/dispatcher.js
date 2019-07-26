@@ -24,7 +24,7 @@ var METHODS = {
   'handleViewAction': 'VIEW_ACTION',
   'handleRouterAction': 'ROUTER_ACTION',
   'handleApiAction': 'API_ACTION',
-  'handlePusherAction': 'PUSHER_ACTION'
+  'handlePusherAction': 'PUSHER_ACTION',
 };
 
 var createHandler = function(source) {

@@ -15,7 +15,6 @@ import { observeStore } from '../utils/StoreUtils';
 import AppHooks from '../utils/LifecycleHooks';
 import AppStateless from './AppStateless';
 import AppDispatcher from '../dispatcher';
-
 function getState() {
   const scheduledAt = ComposerStore.getScheduledAt();
 
@@ -45,6 +44,7 @@ class App extends React.Component {
       isDisabled: PropTypes.bool.isRequired,
       disabledMessage: PropTypes.string,
       serviceType: PropTypes.string.isRequired,
+      serviceId: PropTypes.string.isRequired,
       isBusinessProfile: PropTypes.bool.isRequired,
       isContributor: PropTypes.bool,
       isManager: PropTypes.bool.isRequired,
@@ -157,6 +157,8 @@ class App extends React.Component {
       commentText: PropTypes.string,
       shopgridLink: PropTypes.string,
       composerSidebarVisible: PropTypes.bool,
+      tabId: PropTypes.string,
+      emptySlotMode: PropTypes.bool,
     }).isRequired,
 
     csrfToken: PropTypes.string.isRequired,
@@ -219,7 +221,10 @@ class App extends React.Component {
     window.addEventListener('drop', (e) => e.preventDefault());
     window.addEventListener('dragover', (e) => e.preventDefault());
 
+    /* Load metadata for cases where the metadata could change (ex. tabId)
+       every time composer opens */
     if (!this.isInitialized) this.init();
+    else AppInitActionCreators.loadInitialMetaData(this.props.metaData);
 
     AppActionCreators.trackUserAction(['viewed'], {
       timeToRender: (new Date() - window.pageStartTime),

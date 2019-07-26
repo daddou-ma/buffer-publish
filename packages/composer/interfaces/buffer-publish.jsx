@@ -31,7 +31,7 @@ const ComposerWrapper = ({
   draftMode,
   emptySlotMode,
   selectedProfileId,
-
+  tabId,
 }) => {
   const getSaveButtons = () => {
     if (editMode) return ['SAVE'];
@@ -95,6 +95,8 @@ const ComposerWrapper = ({
     commentEnabled: post.commentEnabled,
     commentText: post.commentText,
     shopgridLink: post.shopgridLink,
+    tabId,
+    emptySlotMode,
   };
   const formattedData = DataImportUtils.formatInputData({
     env: metaData.application,
@@ -158,6 +160,7 @@ ComposerWrapper.propTypes = {
   onEvent: PropTypes.func,
   selectedProfileId: PropTypes.string,
   onInteraction: PropTypes.func,
+  tabId: PropTypes.string.isRequired,
 };
 
 ComposerWrapper.defaultProps = {
