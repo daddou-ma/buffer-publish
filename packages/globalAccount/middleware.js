@@ -9,7 +9,7 @@ export default ({ dispatch, getState }) => next => (action) => {
   const state = getState();
 
   switch (action.type) {
-    case 'APP_INIT':
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(asyncDataFetch.fetch({
         name: 'globalAccount',
       }));
