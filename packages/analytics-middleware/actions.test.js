@@ -25,7 +25,7 @@ describe('actions', () => {
     const pageName = 'page 1';
     const payload = { foo: 'foo' };
     expect(actions.pageChange(pageName, payload)).toEqual({
-      type: actionTypes.PAGE_CHANGE,
+      type: actionTypes.PUBLISH_PAGE_CHANGE,
       pageName,
       payload,
     });
