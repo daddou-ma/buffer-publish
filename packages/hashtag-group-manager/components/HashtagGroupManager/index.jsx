@@ -36,7 +36,7 @@ const HashtagGroupManager = ({
   <Fragment>
     <div style={wrapperStyle}>
       <Text type="h3">Hashtag Manager</Text>
-      <Text type="p">Create, save and organize hashtags to use in Instagram first comments.</Text>
+      <Text type="p">Create, save, and organize hashtags for Instagram. </Text>
     </div>
     {hashtagGroups.length === 0 &&
       <div style={emptyContentStyle}>
