@@ -88,7 +88,7 @@ export default connect(
           }));
           break;
         case 'SEGMENT_TRACKING':
-          dispatch(analyticsActions.trackEvent(message.event, message.metadata));
+          dispatch(analyticsActions.trackEvent(message.eventName, message.metadata));
           break;
         default: break;
       }

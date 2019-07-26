@@ -101,7 +101,7 @@ const WebAPIUtils = {
             AppActionCreators.triggerInteraction({
               message: {
                 action: 'SEGMENT_TRACKING',
-                event: 'Post Created',
+                eventName: 'Post Created',
                 metadata,
               },
             });
