@@ -57,9 +57,9 @@ describe('middleware', () => {
       });
   });
 
-  it(`On ${actionTypes.PUBLISH_PAGE_CHANGE} should push a page change to segment`, () => {
+  it(`On ${actionTypes.PAGE_CHANGE} should push a page change to segment`, () => {
     const action = {
-      type: actionTypes.PUBLISH_PAGE_CHANGE,
+      type: actionTypes.PAGE_CHANGE,
       pageName: 'page foo',
       payload: {
         bar: 'bar',

@@ -18,7 +18,7 @@ export default store => next => (action) => {
           }, action.payload));
       }
       break;
-    case actionTypes.PUBLISH_PAGE_CHANGE:
+    case actionTypes.PAGE_CHANGE:
       if (window.analytics) {
         window.analytics.page(
           action.pageName,
