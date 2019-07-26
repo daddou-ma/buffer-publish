@@ -2,7 +2,6 @@ import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('ANALYTICS', {
   INIT: 'INIT',
-  PAGE_CHANGE: 'PAGE_CHANGE',
   TRACK_EVENT: 'TRACK_EVENT',
 });
 
@@ -15,16 +14,10 @@ export const actions = {
     };
   },
   trackEvent(eventName, payload) {
+    console.log('eventName action', eventName, payload);
     return {
       type: actionTypes.TRACK_EVENT,
       eventName,
-      payload,
-    };
-  },
-  pageChange(pageName, payload) {
-    return {
-      type: actionTypes.PAGE_CHANGE,
-      pageName,
       payload,
     };
   },
