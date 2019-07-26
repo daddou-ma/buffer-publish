@@ -8,6 +8,13 @@ export const actionTypes = keyWrapper('DISABLED_QUEUE', {
 export const initialState = {
 };
 
+export default (state = initialState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
 export const actions = {
   handleManageSocialAccountClick: () => ({
     type: actionTypes.MANAGE_SOCIAL_ACCOUNT,
