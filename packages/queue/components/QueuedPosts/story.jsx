@@ -85,7 +85,6 @@ storiesOf('QueuedPosts', module)
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onCalendarClick={action('onCalendarClick')}
-      onComposerInteraction={action('onComposerInteraction')}
       onEmptySlotClick={action('onEmptySlotClick')}
       onImageClick={action('onImageClick')}
       onImageClickNext={action('onImageClickNext')}
@@ -114,7 +113,6 @@ storiesOf('QueuedPosts', module)
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onDirectPostingClick={action('onDirectPostingClick')}
       onCalendarClick={action('onCalendarClick')}
-      onComposerInteraction={action('onComposerInteraction')}
       onEmptySlotClick={action('onEmptySlotClick')}
       onImageClick={action('onImageClick')}
       onImageClickNext={action('onImageClickNext')}
@@ -144,7 +142,6 @@ storiesOf('QueuedPosts', module)
       onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
-      onComposerInteraction={action('onComposerInteraction')}
       onEmptySlotClick={action('onEmptySlotClick')}
       onImageClick={action('onImageClick')}
       onImageClickNext={action('onImageClickNext')}
@@ -173,7 +170,6 @@ storiesOf('QueuedPosts', module)
       onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
-      onComposerInteraction={action('onComposerInteraction')}
       onEmptySlotClick={action('onEmptySlotClick')}
       onImageClick={action('onImageClick')}
       onImageClickNext={action('onImageClickNext')}
@@ -204,7 +200,6 @@ storiesOf('QueuedPosts', module)
       onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
-      onComposerInteraction={action('onComposerInteraction')}
       onEmptySlotClick={action('onEmptySlotClick')}
       onImageClick={action('onImageClick')}
       onImageClickNext={action('onImageClickNext')}

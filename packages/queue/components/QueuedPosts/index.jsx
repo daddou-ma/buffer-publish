@@ -39,7 +39,6 @@ const QueuedPosts = ({
   postLists,
   onComposerPlaceholderClick,
   onComposerCreateSuccess,
-  onComposerInteraction,
   onCancelConfirmClick,
   onRequeueClick,
   onDeleteClick,
@@ -98,7 +97,6 @@ const QueuedPosts = ({
             {showComposer && !editMode &&
               <ComposerPopover
                 onSave={onComposerCreateSuccess}
-                onInteraction={onComposerInteraction}
                 preserveComposerStateOnClose
                 type={'queue'}
               />
@@ -127,7 +125,6 @@ const QueuedPosts = ({
         {showComposer && editMode &&
           <ComposerPopover
             onSave={onComposerCreateSuccess}
-            onInteraction={onComposerInteraction}
             type={'queue'}
           />
         }
@@ -174,7 +171,6 @@ QueuedPosts.propTypes = {
   showEmptyQueueMessage: PropTypes.bool,
   onComposerPlaceholderClick: PropTypes.func.isRequired,
   onComposerCreateSuccess: PropTypes.func.isRequired,
-  onComposerInteraction: PropTypes.func.isRequired,
   onCancelConfirmClick: PropTypes.func.isRequired,
   onRequeueClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
