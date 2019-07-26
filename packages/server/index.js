@@ -204,7 +204,6 @@ const getHtml = ({ notification, userId, modalKey, modalValue }) =>
 app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());
 app.use(helmet.frameguard({ action: 'sameorigin' }));
-app.use(verifyAccessToken);
 
 app.all('/maintenance', maintenanceHandler);
 
@@ -223,6 +222,7 @@ app.use(
 );
 
 app.use(bodyParser.json());
+app.use(verifyAccessToken);
 
 app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
 

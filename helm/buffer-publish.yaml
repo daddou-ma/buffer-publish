@@ -59,6 +59,16 @@ env:
     value: https://k8s-api-php71.buffer.com
   - name: ANALYZE_API_ADDR
     value: https://analyze-api.buffer.com
+  - name: CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        key: client-id
+        name: buffer-publish-keys
+  - name: CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: client-secret
+        name: buffer-publish-keys
   - name: BUGSNAG_KEY
     valueFrom:
       secretKeyRef:

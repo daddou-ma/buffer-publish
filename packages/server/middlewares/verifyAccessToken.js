@@ -14,7 +14,7 @@ function isAccessTokenValid(req) {
   }
 
   return rp({
-    uri: `${req.app.get('apiAddr')}/1/user/convert_access_token.json`,
+    uri: `${process.env.API_ADDR}/1/user/convert_access_token.json`,
     method: 'POST',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
@@ -23,8 +23,8 @@ function isAccessTokenValid(req) {
       client_secret: process.env.CLIENT_SECRET,
     },
   })
-    .then(r => true)
-    .catch(r => false);
+    .then(r => r)
+    .catch(r => r);
 }
 
 module.exports = async (req, res, next) => {
@@ -32,6 +32,7 @@ module.exports = async (req, res, next) => {
   // before the app is rendered, we are processing it only on the first request.
   if (isRequestingApp(req)) {
     const isValid = await isAccessTokenValid(req);
+    res.send(isValid);
     if (!isValid) {
       return redirect(res, 'https://login.buffer.com/login?redirect=https://publish.buffer.com');
     }
