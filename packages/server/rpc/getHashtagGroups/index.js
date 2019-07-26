@@ -2,7 +2,7 @@ const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
 module.exports = method(
-  'hashtagGroups',
+  'getHashtagGroups',
   'fetch hashtag groups',
   ({ organizationId }, { session }) =>
     rp({

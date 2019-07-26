@@ -19,7 +19,7 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `hashtagGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getHashtagGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         groups: action.result.data.snippets,
@@ -29,9 +29,20 @@ export default (state = initialState, action) => {
         ...state,
         name: action.name,
       };
+    case actionTypes.SAVE_HASHTAG_GROUP:
+      const newGroups = [
+        ...state.groups,
+        { _id: 'temp', name: state.name, text: state.text },
+      ].sort((a, b) => (a.name < b.name ? -1 : 1));
+
+      return {
+        ...state,
+        groups: newGroups,
+      };
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
+        groups: action.result.data.snippets,
         name: '',
         text: '',
       };
@@ -45,6 +56,11 @@ export default (state = initialState, action) => {
         ...state,
         name: '',
         text: '',
+      };
+    case actionTypes.DELETE_HASHTAG_GROUP:
+      return {
+        ...state,
+        groups: state.groups.filter(group => group._id !== action.groupId),
       };
     default:
       return state;

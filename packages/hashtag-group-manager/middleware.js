@@ -9,7 +9,7 @@ import { actionTypes } from './reducer';
 const refreshHashtagGroups = (dispatch, organizationId) => {
   if (organizationId) {
     dispatch(dataFetchActions.fetch({
-      name: 'hashtagGroups',
+      name: 'getHashtagGroups',
       args: {
         organizationId,
       },
@@ -42,21 +42,25 @@ export default ({ getState, dispatch }) => next => (action) => {
       }));
       break;
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
-    case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'error',
         message: action.error,
       }));
       break;
+    case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      refreshHashtagGroups(dispatch, organizationId);
+      break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       refreshHashtagGroups(dispatch, organizationId);
       break;
     case actionTypes.INSERT_HASHTAG_GROUP:
       trackAction({ location: 'hashtagManager', action: 'hashtag_inserted', metadata: { organizationId } });
       break;
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      refreshHashtagGroups(dispatch, organizationId);
       trackAction({ location: 'hashtagManager', action: 'hashtag_created', metadata: { organizationId } });
       break;
     default:
