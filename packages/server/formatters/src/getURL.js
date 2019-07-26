@@ -61,7 +61,8 @@ module.exports = {
   },
   getStartTrialURL: ({ trialType, cta, nextUrl }) => {
     const nextParam = nextUrl ? `&next=${nextUrl}` : '';
-    const ctaParam = cta ? `&cta=${cta}` : '';
+    // temporarily adding to rule out that unknown ctas are not coming from publish
+    const ctaParam = cta ? `&cta=${cta}` : `&cta=publish-test-getStartTrialUrl-start${trialType}Trial-1`;
     if (window.location.hostname === 'publish.local.buffer.com') {
       return `https://local.buffer.com/billing/start-trial?trialType=${trialType}${ctaParam}${nextParam}`;
     }
