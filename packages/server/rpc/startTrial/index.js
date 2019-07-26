@@ -6,8 +6,9 @@ const sourceCtaMap = new Map([
   ['ig_first_comment', SEGMENT_NAMES.IG_FIRST_COMMENT_PRO_TRIAL],
   ['queue_limit', SEGMENT_NAMES.QUEUE_LIMIT_PRO_TRIAL],
 ]);
+// temporarily adding test cta to rule out that unknown ctas are not coming from publish
 const getCtaFromSource = source =>
-  sourceCtaMap.get(source) || null;
+  sourceCtaMap.get(source) || 'publish-test-rpcTrialStart-proTrial-1';
 
 module.exports = method(
   'startTrial',
