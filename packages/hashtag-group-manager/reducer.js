@@ -47,6 +47,11 @@ export default (state = initialState, action) => {
         name: '',
         text: '',
       };
+    case actionTypes.DELETE_HASHTAG_GROUP:
+      return {
+        ...state,
+        groups: state.groups.filter(group => group._id !== action.groupId),
+      };
     default:
       return state;
   }

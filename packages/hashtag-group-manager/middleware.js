@@ -42,14 +42,19 @@ export default ({ getState, dispatch }) => next => (action) => {
       }));
       break;
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
-    case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'error',
         message: action.error,
       }));
       break;
+    case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      refreshHashtagGroups(dispatch, organizationId);
+      break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       refreshHashtagGroups(dispatch, organizationId);
       break;
     case actionTypes.INSERT_HASHTAG_GROUP:
