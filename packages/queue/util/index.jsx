@@ -316,7 +316,7 @@ export const formatPostLists = ({
     // Now let's add the posts for the Daily View weeks
     days.forEach((day) => {
       const dayHeader = getDayHeaderItem(day);
-      if (day.dayIndex !== -1) {
+      if (dayHeader.id !== noScheduledDate) {
         const daySlots = getSlotsWithTimestampsForDay({
           profileTimezone,
           hasTwentyFourHourTimeFormat,
