@@ -51,6 +51,7 @@ const formatShareDate = (shareDate) => {
     const jsDate = new Date(shareDate * 1000);
     return jsDate ? jsDate.toISOString() : null;
   }
+  return null;
 };
 
 const getSegmentMetadata = ({
