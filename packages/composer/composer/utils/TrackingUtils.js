@@ -39,6 +39,15 @@ const getPostShareType = (type) => {
     case QueueingTypes.CUSTOM:
       shareType = 'custom';
       break;
+    case QueueingTypes.ADD_DRAFT:
+      shareType = 'draft';
+      break;
+    case QueueingTypes.NEXT_DRAFT:
+      shareType = 'draft_share_next';
+      break;
+    case QueueingTypes.CUSTOM_DRAFT:
+      shareType = 'draft_custom';
+      break;
     default:
       shareType = type;
       break;
