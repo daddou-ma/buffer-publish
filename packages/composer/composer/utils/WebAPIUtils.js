@@ -94,17 +94,25 @@ const WebAPIUtils = {
         }))
         .then((response) => {
           if (!updatePost) {
-            const post = response && response.updates ? response.updates[0] : {};
-            const profile = profiles.reduce(profileItem => profileItem.id === post.profile_id);
-            const composerSource = getComposerSource({ tabId, emptySlotMode });
-            const metadata = getSegmentMetadata({ post, profile, formattedData, composerSource });
-            AppActionCreators.triggerInteraction({
-              message: {
-                action: 'SEGMENT_TRACKING',
-                eventName: 'Post Created',
-                metadata,
-              },
-            });
+            const post = response && response.updates ? response.updates[0] : null;
+            if (post) {
+              const profile = profiles.reduce(profileItem => profileItem.id === post.profile_id);
+              const composerSource = getComposerSource({ tabId, emptySlotMode });
+              const metadata = getSegmentMetadata({
+                post,
+                profile,
+                formattedData,
+                composerSource,
+                queueingType,
+              });
+              AppActionCreators.triggerInteraction({
+                message: {
+                  action: 'SEGMENT_TRACKING',
+                  eventName: 'Post Created',
+                  metadata,
+                },
+              });
+            }
           }
           return Object.assign(response, { serviceName });
         });

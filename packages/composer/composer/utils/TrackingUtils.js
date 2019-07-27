@@ -1,3 +1,5 @@
+import { QueueingTypes } from '../AppConstants';
+
 const getComposerSource = ({ tabId, emptySlotMode }) => {
   let sourceName = null;
   switch (tabId) {
@@ -22,7 +24,42 @@ const getComposerSource = ({ tabId, emptySlotMode }) => {
   return sourceName;
 };
 
-const getSegmentMetadata = ({ post = {}, profile = {}, formattedData = {}, composerSource }) => ({
+const getPostShareType = (type) => {
+  let shareType = null;
+  switch (type) {
+    case QueueingTypes.QUEUE:
+      shareType = 'queue';
+      break;
+    case QueueingTypes.NEXT:
+      shareType = 'share_next';
+      break;
+    case QueueingTypes.NOW:
+      shareType = 'share_now';
+      break;
+    case QueueingTypes.CUSTOM:
+      shareType = 'custom';
+      break;
+    default:
+      shareType = type;
+      break;
+  }
+  return shareType;
+};
+
+const formatShareDate = (shareDate) => {
+  if (shareDate) {
+    const jsDate = new Date(shareDate * 1000);
+    return jsDate ? jsDate.toISOString() : null;
+  }
+};
+
+const getSegmentMetadata = ({
+  post = {},
+  profile = {},
+  formattedData = {},
+  composerSource,
+  queueingType,
+}) => ({
   channel: post.profile_service,
   channelId: post.profile_id,
   channelServiceId: profile.serviceId,
@@ -35,7 +72,8 @@ const getSegmentMetadata = ({ post = {}, profile = {}, formattedData = {}, compo
   isDraft: !!post.draft,
   mediaType: post.type,
   postId: post.id,
-  shareDate: post.due_at,
+  shareDate: formatShareDate(post.due_at),
+  shareType: getPostShareType(queueingType),
 });
 
 export { getComposerSource, getSegmentMetadata };
