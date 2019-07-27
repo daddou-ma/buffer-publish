@@ -222,7 +222,6 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.use(verifyAccessToken);
 
 app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
 
@@ -254,6 +253,8 @@ app.use(
     requiredSessionKeys: ['publish.accessToken', 'publish.foreignKey'],
   }),
 );
+
+app.use(verifyAccessToken);
 
 // Pusher Auth
 app.post(
