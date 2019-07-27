@@ -23,8 +23,8 @@ function isAccessTokenValid(req) {
       client_secret: process.env.CLIENT_SECRET,
     },
   })
-    .then(r => r)
-    .catch(r => r);
+    .then(r => true)
+    .catch(r => false);
 }
 
 module.exports = async (req, res, next) => {
@@ -32,7 +32,6 @@ module.exports = async (req, res, next) => {
   // before the app is rendered, we are processing it only on the first request.
   if (isRequestingApp(req)) {
     const isValid = await isAccessTokenValid(req);
-    res.send(isValid);
     if (!isValid) {
       return redirect(res, 'https://login.buffer.com/login?redirect=https://publish.buffer.com');
     }
