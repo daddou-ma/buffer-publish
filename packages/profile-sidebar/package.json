@@ -20,7 +20,7 @@
     "@bufferapp/publish-queue": "2.0.0"
   },
   "devDependencies": {
-    "eslint": "3.19.0"
+    "eslint": "^5.3.0"
   },
   "publishConfig": {
     "access": "public"
