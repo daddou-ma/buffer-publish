@@ -37,7 +37,7 @@ module.exports = async (req, res, next) => {
   if (isRequestingApp(req) && shouldCheckToken(req)) {
     const isValid = await isAccessTokenValid(req);
     if (!isValid) {
-      return redirect(res, 'https://login.buffer.com/login?redirect=https://publish.buffer.com?skipImpersonation=true');
+      return redirect(res, 'https://login.buffer.com/login?skipImpersonation=true&redirect=https%3A%2F%2Fpublish.buffer.com%3FskipTokenCheck%3Dtrue');
     }
   }
 
