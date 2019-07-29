@@ -36,11 +36,11 @@ const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
 const serialize = require('serialize-javascript');
 const multer = require('multer');
 const helmet = require('helmet');
-
 const app = express();
 const server = http.createServer(app);
 const multiBodyParser = multer();
 const composerAjaxBuffemetrics = require('./lib/composerAjaxBuffermetrics');
+const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
 let segmentKey = 'qsP2UfgODyoJB3px9SDkGX5I6wDtdQ6a';
 // Favicon
@@ -253,6 +253,8 @@ app.use(
     requiredSessionKeys: ['publish.accessToken', 'publish.foreignKey'],
   }),
 );
+
+app.use(verifyAccessToken);
 
 // Pusher Auth
 app.post(
