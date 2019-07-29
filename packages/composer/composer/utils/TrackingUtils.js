@@ -70,20 +70,20 @@ const getSegmentMetadata = ({
   composerSource,
   queueingType,
 }) => ({
-  channel: post.profile_service,
-  channelId: post.profile_id,
-  channelServiceId: profile.serviceId,
-  channelType: profile.serviceType,
+  channel: post.profile_service || null,
+  channelId: post.profile_id || null,
+  channelServiceId: profile.serviceId || null,
+  channelType: profile.serviceType || null,
   client: post.client ? post.client.name : null,
-  composerSource,
+  composerSource: composerSource || null,
   hasFirstComment: !!formattedData.comment_text,
   hasLocation: !!formattedData.service_geolocation_id,
   hasShopGridLink: !!formattedData.link,
   isDraft: !!post.draft,
-  mediaType: post.type,
-  postId: post.id,
+  mediaType: post.type || null,
+  postId: post.id || null,
   shareDate: formatShareDate(post.due_at),
-  shareType: getPostShareType(queueingType),
+  shareType: getPostShareType(queueingType) || null,
 });
 
 export { getComposerSource, getSegmentMetadata };

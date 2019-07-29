@@ -9,12 +9,12 @@ import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
 const getTrackingData = ({ post = {}, channel = {} }) => ({
-  channel: channel.service,
-  channelId: channel.id,
-  channelType: channel.service_type,
-  channelServiceId: channel.serviceId,
-  postId: post.id,
-  mediaType: post.type,
+  channel: channel.service || null,
+  channelId: channel.id || null,
+  channelType: channel.service_type || null,
+  channelServiceId: channel.serviceId || null,
+  postId: post.id || null,
+  mediaType: post.type || null,
 });
 
 export default ({ dispatch, getState }) => next => (action) => {
