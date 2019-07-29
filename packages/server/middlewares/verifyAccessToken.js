@@ -8,6 +8,10 @@ function isRequestingApp(req) {
   return req.method === 'GET' && req.accepts('text/html');
 }
 
+function shouldCheckToken(req) {
+  return !req.query.skipTokenCheck;
+}
+
 function isAccessTokenValid(req) {
   if (!req.session.publish.accessToken) {
     return true;
@@ -30,7 +34,7 @@ function isAccessTokenValid(req) {
 module.exports = async (req, res, next) => {
   // As this is a quite expensive check to perform, and we want the redirect to happen
   // before the app is rendered, we are processing it only on the first request.
-  if (isRequestingApp(req)) {
+  if (isRequestingApp(req) && shouldCheckToken(req)) {
     const isValid = await isAccessTokenValid(req);
     if (!isValid) {
       return redirect(res, 'https://login.buffer.com/login?redirect=https://publish.buffer.com?skipImpersonation=true');
