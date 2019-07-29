@@ -50,13 +50,3 @@ env:
         name: buffer-publish-keys
   - name: RELEASE_STAGE
     value: staging
-  - name: CLIENT_ID
-    valueFrom:
-      secretKeyRef:
-        key: client-id
-        name: buffer-publish-keys
-  - name: CLIENT_SECRET
-    valueFrom:
-      secretKeyRef:
-        key: client-secret
-        name: buffer-publish-keys
