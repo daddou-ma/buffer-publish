@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
       };
     case actionTypes.SAVE_HASHTAG_GROUP:
       const newGroups = [
-        ...state.groups,
+        ...(state.groups || []),
         { _id: 'temp', name: state.name, text: state.text },
       ].sort((a, b) => (a.name < b.name ? -1 : 1));
 
