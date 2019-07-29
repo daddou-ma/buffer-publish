@@ -19,7 +19,7 @@
   },
   "author": "federicoweber@gmail.com",
   "devDependencies": {
-    "eslint": "3.19.0",
+    "eslint": "^5.3.0",
     "jest": "19.0.2"
   },
   "publishConfig": {
