@@ -33,7 +33,7 @@ module.exports = async (req, res, next) => {
   if (isRequestingApp(req)) {
     const isValid = await isAccessTokenValid(req);
     if (!isValid) {
-      return redirect(res, 'https://login.buffer.com/login?redirect=https://publish.buffer.com');
+      return redirect(res, 'https://login.buffer.com/login?redirect=https://publish.buffer.com?skipImpersonation=true');
     }
   }
 
