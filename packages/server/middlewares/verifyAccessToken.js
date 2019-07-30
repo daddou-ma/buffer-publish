@@ -9,7 +9,9 @@ function isRequestingApp(req) {
 }
 
 function shouldCheckToken(req) {
-  return !req.query.skipTokenCheck;
+  return !req.query.skipTokenCheck
+    || req.query.skipTokenCheck === 'true'
+    || parseInt(req.query.skipTokenCheck, 10) <= 3;
 }
 
 function isAccessTokenValid(req) {
@@ -37,7 +39,19 @@ module.exports = async (req, res, next) => {
   if (isRequestingApp(req) && shouldCheckToken(req)) {
     const isValid = await isAccessTokenValid(req);
     if (!isValid) {
-      return redirect(res, 'https://login.buffer.com/login?skipImpersonation=true&redirect=https%3A%2F%2Fpublish.buffer.com%3FskipTokenCheck%3Dtrue');
+      let skipTokenCheck;
+      if (req.query.skipTokenCheck === 'true') { // Unblock people with skipTokenCheck=true
+        skipTokenCheck = 2;
+      } else if (req.query.skipTokenCheck) {
+        skipTokenCheck = parseInt(req.query.skipTokenCheck, 10) + 1;
+      } else skipTokenCheck = 1;
+      if (skipTokenCheck > 3) {
+        return redirect(res, 'https://login.buffer.com/logout');
+      }
+      return redirect(
+        res,
+        `https://login.buffer.com/login?skipImpersonation=true&redirect=https%3A%2F%2Fpublish.buffer.com%3FskipTokenCheck%3D${skipTokenCheck}`,
+      );
     }
   }
 
