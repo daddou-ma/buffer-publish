@@ -4,7 +4,9 @@ export default (state = {}, action) => {
   switch (action.type) {
     case `globalAccount_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
       return {
-        ...action.result,
+        ...state,
+        email: action.result.email,
+        _id: action.result._id,
       };
     default:
       return state;
