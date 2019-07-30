@@ -96,7 +96,7 @@ const WebAPIUtils = {
           if (!updatePost) {
             const post = response && response.updates ? response.updates[0] : null;
             if (post) {
-              const profile = profiles.reduce(profileItem => profileItem.id === post.profile_id);
+              const profile = profiles.find(profileItem => profileItem.id === post.profile_id);
               const composerSource = getComposerSource({ tabId, emptySlotMode });
               const metadata = getSegmentMetadata({
                 post,
