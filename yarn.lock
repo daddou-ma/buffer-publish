@@ -641,6 +641,17 @@
     react-dom "16.8.6"
     styled-components "4.3.2"
 
+"@bufferapp/ui@5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.2.0.tgz#d987d582dd7f1c2145a9dddf03db30639829a4c6"
+  integrity sha512-5X/aWOf33zv1W8qNPoevNzL/2fIL/VR55JNG3IFI26vksqpca6aEg829jhb0KcBku28wHOBMks/FHsNFaDyONw==
+  dependencies:
+    "@reach/tooltip" "0.2.2"
+    immutability-helper "^2.9.0"
+    react "16.8.6"
+    react-dom "16.8.6"
+    styled-components "4.3.2"
+
 "@bufferapp/unauthorized-redirect@1.9.6":
   version "1.9.6"
   resolved "https://registry.yarnpkg.com/@bufferapp/unauthorized-redirect/-/unauthorized-redirect-1.9.6.tgz#feeed857314143f3b0b05b05108555cce3ba6190"
