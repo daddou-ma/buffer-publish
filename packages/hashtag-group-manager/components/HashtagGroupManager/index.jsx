@@ -46,7 +46,7 @@ const HashtagGroupManager = ({
         <div style={emptyParagraphStyle}>
           <Text>
             Save and reuse your favorite hashtags by creating a hashtag group.
-            Click the button bellow to get started.
+            Click the button below to get started.
           </Text>
         </div>
       </div>
