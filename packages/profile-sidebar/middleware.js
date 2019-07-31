@@ -1,5 +1,6 @@
 import { push } from 'connected-react-router';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { actions as tabsActions } from '@bufferapp/publish-tabs';
 
 import {
   generateProfilePageRoute,
@@ -79,6 +80,15 @@ export default ({ dispatch, getState }) => next => (action) => {
             type: 'PROFILE_SELECTOR__SELECT_PROFILE',
             profile: formatAnalyticsProfileObj(profile),
           });
+        }
+
+        // When the page has just loaded or is refreshed,
+        // we want to be able to update the actual selected tab
+        if (getState().tabs.tabId !== params.tabId) {
+          dispatch(tabsActions.selectTab({
+            tabId: params.tabId,
+            profileId: profile.id,
+          }));
         }
       } else if (!isPreferencePage && profiles.length > 0) {
         const selectedProfile = profiles[0];

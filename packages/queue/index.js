@@ -154,6 +154,9 @@ export default connect(
         },
       }));
     },
+    onComposerOverlayClick: () => {
+      dispatch(modalsActions.showCloseComposerConfirmationModal());
+    },
     onCheckInstagramBusinessClick: () => {
       dispatch(dataFetchActions.fetch({
         name: 'checkInstagramBusiness',
