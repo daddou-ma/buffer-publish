@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Modal } from '@bufferapp/ui';
+import { Modal } from '@bufferapp/ui';
 
 import * as Styles from './style';
 
@@ -13,8 +13,8 @@ const CloseComposerConfirmationModal = ({
     action={{ label: translations.sure, callback: onCloseComposerAndConfirmationModal }}
     secondaryAction={{ label: translations.cancel, callback: onCloseComposerModal }}
   >
-    <Styles.ModalBody>
-      <Text type="span">{translations.text}</Text>
+    <Styles.ModalBody type="p">
+      {translations.text}
     </Styles.ModalBody>
   </Modal>
 );

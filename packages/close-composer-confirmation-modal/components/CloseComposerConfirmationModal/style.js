@@ -1,8 +1,7 @@
 import styled from 'styled-components';
+import { Text } from '@bufferapp/ui';
 
-export const ModalBody = styled.div`
-  width: 100%;
+export const ModalBody = styled(Text)`
   padding: 16px 16px 0 16px;
-  font-size: 14px;
-  box-sizing: border-box;
+  margin: 0;
 `;
