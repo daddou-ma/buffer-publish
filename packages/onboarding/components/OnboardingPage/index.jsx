@@ -27,7 +27,7 @@ import {
   Footer,
 } from './style';
 
-const OnboardingPage = ({ onConnectSocialAccountClick }) => (
+const OnboardingPage = ({ onConnectSocialAccountClick, translations }) => (
   <Wrapper>
     <LeftColumn>
       <LogoWrapper>
@@ -35,32 +35,32 @@ const OnboardingPage = ({ onConnectSocialAccountClick }) => (
       </LogoWrapper>
       <LeftContentWrapper>
         <LeftContentContainer>
-          <Text type="h1">Your account has been setup!</Text>
-          <Text type="p">Now let's connect a social account so you can begin publishing content.</Text>
+          <Text type="h1">{translations.title}</Text>
+          <Text type="p">{translations.description}</Text>
           <SocialButtonWrapper>
             <SocialButton channel="instagram" onClick={onConnectSocialAccountClick} />
             <SocialButton channel="facebook" onClick={onConnectSocialAccountClick} />
             <SocialButton channel="twitter" onClick={onConnectSocialAccountClick} />
           </SocialButtonWrapper>
           <TextWithStyles type="p">
-            You can also connect your
+            {translations.cta1}
             <LinkWithStyles
               type="link"
               onClick={() => {}}
-              label="Linkedin"
+              label={translations.ctaChannel1}
             />
-            and
+            {translations.cta2}
             <LinkWithStyles
               type="link"
               onClick={() => {}}
-              label="Pinterest"
+              label={translations.ctaChannel2}
             />
-            accounts.
+            {translations.cta3}
           </TextWithStyles>
           <ButtonWithStyles
             type="text"
             onClick={() => {}}
-            label="Or skip this step"
+            label={translations.skipStep}
           />
           <ProgressBarWrapper>
             <ProgressBar progress="75%" />
@@ -71,11 +71,15 @@ const OnboardingPage = ({ onConnectSocialAccountClick }) => (
     </LeftColumn>
     <RightColumn>
       <RightContentContainer>
-        <Phrase>"Publish helps us build a better model of content that generates more engagement."</Phrase>
+        <Phrase>
+          &quot;
+          {translations.testemonial}
+          &quot;
+        </Phrase>
         <Avatar src="https://s3.amazonaws.com/static.buffer.com/login/public/img/signup-avatar-publish.png" />
-        <Name>Justin Ozanich</Name>
-        <Data>Marketing Manager</Data>
-        <Data>Foster Coffee Company</Data>
+        <Name>{translations.name}</Name>
+        <Data>{translations.role}</Data>
+        <Data>{translations.company}</Data>
       </RightContentContainer>
     </RightColumn>
   </Wrapper>
@@ -83,6 +87,20 @@ const OnboardingPage = ({ onConnectSocialAccountClick }) => (
 
 OnboardingPage.propTypes = {
   onConnectSocialAccountClick: PropTypes.func.isRequired,
+  translations: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    cta1: PropTypes.string,
+    ctaChannel1: PropTypes.string,
+    cta2: PropTypes.string,
+    ctaChannel2: PropTypes.string,
+    cta3: PropTypes.string,
+    skipStep: PropTypes.string,
+    testemonial: PropTypes.string,
+    name: PropTypes.string,
+    role: PropTypes.string,
+    company: PropTypes.string,
+  }).isRequired,
 };
 
 export default OnboardingPage;

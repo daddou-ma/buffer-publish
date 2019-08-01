@@ -18,6 +18,20 @@
     "connectButton": "Connect Your Social Accounts",
     "defaultTitle": "Let's get your account set up!"
   },
+  "onboarding-page": {
+    "title": "Your account has been setup!",
+    "description": "Now let's connect a social account so you can begin publishing content.",
+    "cta1": "You can also connect your",
+    "ctaChannel1": "Linkedin",
+    "cta2": "and",
+    "ctaChannel2": "Pinterest",
+    "cta3": "accounts.",
+    "skipStep": "Or skip this step",
+    "testemonial": "Publish helps us build a better model of content that generates more engagement.",
+    "name": "Justin Ozanich",
+    "role": "Marketing Manager",
+    "company": "Foster Coffee Company"
+  },
   "disabled-queue": {
     "connectButton": "Manage Social Accounts",
     "queueTab": "Queue",
