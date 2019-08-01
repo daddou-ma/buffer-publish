@@ -60,7 +60,7 @@
     position: absolute;
     margin-left: 5px;
     overflow: auto;
-    width: 220%;
+    width: 600px;
     z-index: 100;
     font-size: 12px;
 }
