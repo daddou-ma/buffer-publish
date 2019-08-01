@@ -6,7 +6,7 @@ import CloseComposerConfirmationModal from './index';
 const translations = {
   text: 'Are you sure you want to close the composer? You will lose your progress if you continue!',
   sure: 'Yes, I\'m sure',
-  cancel: 'Cancel'
+  cancel: 'Cancel',
 };
 
 storiesOf('CloseComposerConfirmationModal', module)
@@ -16,6 +16,6 @@ storiesOf('CloseComposerConfirmationModal', module)
       translations={translations}
       onCloseComposerAndConfirmationModal={() => {}}
       onCloseComposerModal={() => {}}
-      type={'queue'}
+      type="queue"
     />
   ));

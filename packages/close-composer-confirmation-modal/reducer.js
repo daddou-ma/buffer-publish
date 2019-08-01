@@ -1,5 +1,4 @@
 import keyWrapper from '@bufferapp/keywrapper';
-import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
 
 export const initialState = {
   closeComposerConfirmationModal: false,

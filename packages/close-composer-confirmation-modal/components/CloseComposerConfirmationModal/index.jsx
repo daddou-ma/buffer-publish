@@ -20,7 +20,7 @@ const CloseComposerConfirmationModal = ({
 );
 
 CloseComposerConfirmationModal.propTypes = {
-  translations: PropTypes.object.isRequired,
+  translations: PropTypes.object.isRequired,  // eslint-disable-line
   onCloseComposerAndConfirmationModal: PropTypes.func.isRequired,
   onCloseComposerModal: PropTypes.func.isRequired,
 };
