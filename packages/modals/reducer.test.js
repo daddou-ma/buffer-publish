@@ -112,5 +112,25 @@ describe('reducer', () => {
       expect(reducer(initialState, actions.hideCloseComposerConfirmationModal()))
         .toEqual(Object.assign(initialState, { showCloseComposerConfirmationModal: false }));
     });
+    it('should show instagram first comment modal', () => {
+      expect(reducer(initialState, actions.showInstagramFirstCommentModal({ ids: 'ids' })))
+        .toEqual(Object.assign(initialState,
+          { showInstagramFirstCommentModal: true, firstCommentIds: 'ids' }));
+    });
+    it('should hide instagram first comment modal', () => {
+      expect(reducer(initialState, actions.hideInstagramFirstCommentModal()))
+        .toEqual(Object.assign(initialState,
+          { showInstagramFirstCommentModal: false, firstCommentIds: null }));
+    });
+    it('should show upgrade b4b modal', () => {
+      expect(reducer(initialState, actions.showB4BTrialExpiredModal({ source: 'source' })))
+        .toEqual(Object.assign(initialState,
+          { showB4BTrialExpiredModal: true, upgradeModalB4BSource: 'source' }));
+    });
+    it('should hide upgrade b4b modal', () => {
+      expect(reducer(initialState, actions.hideUpgradeB4BModal()))
+        .toEqual(Object.assign(initialState,
+          { showB4BTrialExpiredModal: false }));
+    });
   });
 });
