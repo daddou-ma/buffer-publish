@@ -8,6 +8,8 @@ Tracking is provided in the `publish-analytics-middleware` package. There are th
 
 We added a segment script in the `server/index.js` and imported it in the `server/index.html`.
 
+[An engineering guide](https://www.notion.so/buffer/How-to-implement-tracking-with-Segment-An-Engineering-guide-da75fcd8a464456dba1cf80a529f9121)
+
 ## Plan the event and properties to track
 You'll want to work with the data team when planning out a new event. You can do this by starting a PR with the [tracking-plan](https://github.com/bufferapp/tracking-plan) repo. Go through the steps of [this notion guide](https://www.notion.so/buffer/Editing-Tracking-Plan-definitions-and-updating-Segment-Protocols-29cd5c7c27824a1cba9285b2a11e761f).
 
@@ -53,7 +55,9 @@ onInteraction: ({ message }) => {
 
 ## Test your changes
 
-[Step 4 in this notion guide](https://www.notion.so/buffer/How-to-implement-tracking-with-Segment-An-Engineering-guide-da75fcd8a464456dba1cf80a529f9121) is how you can test your local & production changes. It's important to check that there are no violations in the violation tab.
+[Follow step 4 in this notion guide](https://www.notion.so/buffer/How-to-implement-tracking-with-Segment-An-Engineering-guide-da75fcd8a464456dba1cf80a529f9121) to test your local & production changes. It's important to check that there are no violations in the violation tab.
+
+Work with Dan or Michael to get the changes integrated with Mixpanel.
 
 ## Notes
 - You may need to add changes to this package to fit different cases that come up.
