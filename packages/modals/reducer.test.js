@@ -132,5 +132,16 @@ describe('reducer', () => {
         .toEqual(Object.assign(initialState,
           { showB4BTrialExpiredModal: false }));
     });
+    it('should save modal to show later', () => {
+      expect(reducer(initialState, actions.saveModalToShowLater({ modalId: 'modalId', profileId: 'profileId' })))
+        .toEqual(Object.assign(initialState, {
+          modalToShowLater: {
+            id: 'modalId',
+            params: {
+              profileId: 'profileId',
+            },
+          },
+        }));
+    });
   });
 });
