@@ -104,5 +104,13 @@ describe('reducer', () => {
       expect(reducer(stateWithVisibleModal, actions.hideInstagramFirstCommentProTrialModal()))
         .toEqual(Object.assign(initialState, { showInstagramFirstCommentProTrialModal: false }));
     });
+    it('should show close composer confirmation modal', () => {
+      expect(reducer(initialState, actions.showCloseComposerConfirmationModal()))
+        .toEqual(Object.assign(initialState, { showCloseComposerConfirmationModal: true }));
+    });
+    it('should hide close composer confirmation modal', () => {
+      expect(reducer(initialState, actions.hideCloseComposerConfirmationModal()))
+        .toEqual(Object.assign(initialState, { showCloseComposerConfirmationModal: false }));
+    });
   });
 });

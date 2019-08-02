@@ -74,13 +74,6 @@ export default ({ dispatch, getState }) => next => (action) => {
         dispatch(actions.selectProfile({
           profile,
         }));
-        // Dispatch different select profile for components in analyze
-        if (profile.isAnalyticsSupported) {
-          dispatch({
-            type: 'PROFILE_SELECTOR__SELECT_PROFILE',
-            profile: formatAnalyticsProfileObj(profile),
-          });
-        }
 
         // When the page has just loaded or is refreshed,
         // we want to be able to update the actual selected tab
@@ -89,6 +82,14 @@ export default ({ dispatch, getState }) => next => (action) => {
             tabId: params.tabId,
             profileId: profile.id,
           }));
+        }
+
+        // Dispatch different select profile for components in analyze
+        if (profile.isAnalyticsSupported) {
+          dispatch({
+            type: 'PROFILE_SELECTOR__SELECT_PROFILE',
+            profile: formatAnalyticsProfileObj(profile),
+          });
         }
       } else if (!isPreferencePage && profiles.length > 0) {
         const selectedProfile = profiles[0];
