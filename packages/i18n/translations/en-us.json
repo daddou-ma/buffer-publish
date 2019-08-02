@@ -160,5 +160,10 @@
     "completeAndUpgrade": "Complete and Upgrade",
     "cancelTrial": "Cancel Trial",
     "cancelTrialAndLock": "Cancel Trial and Lock Extra Profiles"
+  },
+  "close-composer-confirmation-modal": {
+    "text": "Are you sure you want to close the composer? You will lose any unsaved changes.",
+    "sure": "Yes, Close Composer",
+    "cancel": "Cancel"
   }
 }

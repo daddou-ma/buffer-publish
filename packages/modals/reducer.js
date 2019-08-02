@@ -14,6 +14,7 @@ export const initialState = {
   showB4BTrialExpiredModal: false,
   upgradeModalB4BSource: null,
   showInstagramFirstCommentProTrialModal: false,
+  showCloseComposerConfirmationModal: false,
   modalToShowLater: null,
 };
 
@@ -39,6 +40,8 @@ export const actionTypes = keyWrapper('MODALS', {
   SHOW_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
   HIDE_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
   SAVE_MODAL_TO_SHOW_LATER: 0,
+  HIDE_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
+  SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -157,7 +160,16 @@ export default (state = initialState, action) => {
         ...state,
         showInstagramFirstCommentProTrialModal: true,
       };
-
+    case actionTypes.HIDE_CLOSE_COMPOSER_CONFIRMATION_MODAL:
+      return {
+        ...state,
+        showCloseComposerConfirmationModal: false,
+      };
+    case actionTypes.SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL:
+      return {
+        ...state,
+        showCloseComposerConfirmationModal: true,
+      };
     default:
       return state;
   }
@@ -235,5 +247,11 @@ export const actions = {
   }),
   hideWelcomeB4BTrialModal: () => ({
     type: actionTypes.HIDE_WELCOME_B4B_TRIAL_MODAL,
+  }),
+  hideCloseComposerConfirmationModal: () => ({
+    type: actionTypes.HIDE_CLOSE_COMPOSER_CONFIRMATION_MODAL,
+  }),
+  showCloseComposerConfirmationModal: () => ({
+    type: actionTypes.SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL,
   }),
 };

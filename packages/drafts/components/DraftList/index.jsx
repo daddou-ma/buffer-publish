@@ -63,6 +63,7 @@ const DraftList = ({
   onImageClickNext,
   onImageClickPrev,
   onImageClose,
+  onComposerOverlayClick,
 }) => {
   if (features.isProUser()) {
     const startTrial = () =>
@@ -126,6 +127,8 @@ const DraftList = ({
                   type={'drafts'}
                   onSave={onComposerCreateSuccess}
                   preserveComposerStateOnClose
+                  onComposerOverlayClick={onComposerOverlayClick}
+                  editMode={editMode}
                 />
               }
               <ComposerInput
@@ -139,6 +142,8 @@ const DraftList = ({
           <ComposerPopover
             type={'drafts'}
             onSave={onComposerCreateSuccess}
+            onComposerOverlayClick={onComposerOverlayClick}
+            editMode={editMode}
           />
         }
         {
@@ -200,6 +205,7 @@ DraftList.propTypes = {
   onImageClose: PropTypes.func.isRequired,
   onImageClickNext: PropTypes.func.isRequired,
   onImageClickPrev: PropTypes.func.isRequired,
+  onComposerOverlayClick: PropTypes.func.isRequired,
 };
 
 DraftList.defaultProps = {

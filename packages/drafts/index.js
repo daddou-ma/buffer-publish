@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { getDateString, isInThePast } from '@bufferapp/publish-server/formatters/src';
+import { actions as modalsActions } from '@bufferapp/publish-modals';
 
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
@@ -228,6 +229,9 @@ export default connect(
         draft: draft.draft,
         profileId: ownProps.profileId,
       }));
+    },
+    onComposerOverlayClick: () => {
+      dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
   }),
 )(DraftList);

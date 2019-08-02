@@ -104,5 +104,44 @@ describe('reducer', () => {
       expect(reducer(stateWithVisibleModal, actions.hideInstagramFirstCommentProTrialModal()))
         .toEqual(Object.assign(initialState, { showInstagramFirstCommentProTrialModal: false }));
     });
+    it('should show close composer confirmation modal', () => {
+      expect(reducer(initialState, actions.showCloseComposerConfirmationModal()))
+        .toEqual(Object.assign(initialState, { showCloseComposerConfirmationModal: true }));
+    });
+    it('should hide close composer confirmation modal', () => {
+      expect(reducer(initialState, actions.hideCloseComposerConfirmationModal()))
+        .toEqual(Object.assign(initialState, { showCloseComposerConfirmationModal: false }));
+    });
+    it('should show instagram first comment modal', () => {
+      expect(reducer(initialState, actions.showInstagramFirstCommentModal({ ids: 'ids' })))
+        .toEqual(Object.assign(initialState,
+          { showInstagramFirstCommentModal: true, firstCommentIds: 'ids' }));
+    });
+    it('should hide instagram first comment modal', () => {
+      expect(reducer(initialState, actions.hideInstagramFirstCommentModal()))
+        .toEqual(Object.assign(initialState,
+          { showInstagramFirstCommentModal: false, firstCommentIds: null }));
+    });
+    it('should show upgrade b4b modal', () => {
+      expect(reducer(initialState, actions.showB4BTrialExpiredModal({ source: 'source' })))
+        .toEqual(Object.assign(initialState,
+          { showB4BTrialExpiredModal: true, upgradeModalB4BSource: 'source' }));
+    });
+    it('should hide upgrade b4b modal', () => {
+      expect(reducer(initialState, actions.hideUpgradeB4BModal()))
+        .toEqual(Object.assign(initialState,
+          { showB4BTrialExpiredModal: false }));
+    });
+    it('should save modal to show later', () => {
+      expect(reducer(initialState, actions.saveModalToShowLater({ modalId: 'modalId', profileId: 'profileId' })))
+        .toEqual(Object.assign(initialState, {
+          modalToShowLater: {
+            id: 'modalId',
+            params: {
+              profileId: 'profileId',
+            },
+          },
+        }));
+    });
   });
 });

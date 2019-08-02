@@ -38,6 +38,7 @@ import { reducer as trialReducer } from '@bufferapp/publish-trial';
 import { reducer as hashtagGroupsReducer } from '@bufferapp/publish-hashtag-group-manager';
 import { reducer as disabledQueueReducer } from '@bufferapp/publish-disabled-queue';
 import { reducer as globalAccountReducer } from '@bufferapp/global-account';
+import { reducer as closeComposerModalReducer } from '@bufferapp/publish-close-composer-confirmation-modal';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -92,6 +93,7 @@ export default {
   hashtagGroups: hashtagGroupsReducer,
   disabledQueue: disabledQueueReducer,
   globalAccount: globalAccountReducer,
+  closeComposerModal: closeComposerModalReducer,
 
   // Analyze
   average: averageReducer,
