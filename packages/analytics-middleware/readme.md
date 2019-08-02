@@ -9,7 +9,7 @@ Tracking is provided in the `publish-analytics-middleware` package. There are th
 We added a segment script in the `server/index.js` and imported it in the `server/index.html`.
 
 ## Plan the event and properties to track
-You'll want to work with the data team when planning out a new event. You can do this by starting a PR with the `tracking-plan` repo. Go through the steps of [this notion guide](https://www.notion.so/buffer/Editing-Tracking-Plan-definitions-and-updating-Segment-Protocols-29cd5c7c27824a1cba9285b2a11e761f).
+You'll want to work with the data team when planning out a new event. You can do this by starting a PR with the [tracking-plan](https://github.com/bufferapp/tracking-plan) repo. Go through the steps of [this notion guide](https://www.notion.so/buffer/Editing-Tracking-Plan-definitions-and-updating-Segment-Protocols-29cd5c7c27824a1cba9285b2a11e761f).
 
 [Here is a great example](https://paper.dropbox.com/doc/Writeup-Implementing-the-Churn-Survey-Completed-Event--AiFrc1XIQsFN4TiqjyVM4epkAg-K6hwGXHhGYIOmU5j5q7xk) of implementing a new event from an end-to-end perspective.
 
