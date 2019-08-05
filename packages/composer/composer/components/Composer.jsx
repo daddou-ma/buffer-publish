@@ -166,6 +166,7 @@ class Composer extends React.Component {
     hasHashtagGroupsFlip: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
+    draftMode: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -180,6 +181,7 @@ class Composer extends React.Component {
     profiles: [],
     expandedComposerId: null,
     selectedProfiles: [],
+    draftMode: false,
   };
 
   constructor(props) {
@@ -604,6 +606,7 @@ class Composer extends React.Component {
       hasIGDirectVideoFlip,
       hasShopgridFlip,
       hasHashtagGroupsFlip,
+      draftMode,
     } = this.props;
 
     let composerFeedbackMessages = this.getComposerFeedbackMessages();
@@ -613,7 +616,11 @@ class Composer extends React.Component {
     const hasComposerBeenCollapsed = appState.composersWhichHaveBeenCollapsed.has(draft.id);
     const isLocked = draft.isSaved;
 
-    const editorPlaceholder = shouldShowRetweetAttachment ? 'Add a comment…' : undefined;
+    const editorPlaceholder = () => {
+      if (shouldShowRetweetAttachment) return 'Add a comment…';
+      return undefined;
+    };
+
     const savedComposer = draft.isSaved;
     const attachmentGlanceHasNoThumbnail = this.getAttachmentThumbnails() === null;
     const hasOmniboxNotices = this.hasOmniboxNotices();
@@ -846,7 +853,7 @@ class Composer extends React.Component {
         draft={draft}
         profiles={profiles}
         onFocus={this.onEditorFocus}
-        placeholder={editorPlaceholder}
+        placeholder={editorPlaceholder()}
         isComposerExpanded={this.isExpanded()}
         shouldAutoFocus={this.state.shouldAutoFocusEditor}
         hasAttachmentGlance={this.hasAttachment()}
