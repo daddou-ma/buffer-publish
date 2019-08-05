@@ -176,7 +176,7 @@ ComposerWrapper.defaultProps = {
   csrfToken: '1234', // dummy string for now since MC requires csrfToken
   post: {},
   editMode: false,
-  // draftMode: false,
+  draftMode: false,
   sentPost: false,
   emptySlotMode: false,
   selectedProfileId: null,
