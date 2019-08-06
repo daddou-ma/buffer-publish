@@ -10,9 +10,7 @@ const CloseAccount = ({ showModal, onRequestOpenModal, onRequestCloseModal, onSu
     <div>
       <Text type="h3">Delete your Buffer account</Text>
       <Text type="p">
-        <Link href="https://buffer.com/support" newTab>
-        Please contact support to delete your account
-        </Link>
+        Please contact <Link href="https://buffer.com/support" newTab>support</Link> to delete your account
       </Text>
     </div>
 
