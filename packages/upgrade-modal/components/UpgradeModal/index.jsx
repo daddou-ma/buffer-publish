@@ -10,6 +10,7 @@ import {
 import {
   Button,
   Text,
+  Modal,
 } from '@bufferapp/ui';
 import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
 

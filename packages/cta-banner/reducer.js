@@ -14,7 +14,10 @@ export const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {...state, profileCount: action.result.profileCount};
+      return {
+        ...state,
+        profileCount: action.result.profileCount,
+      };
     default:
       return state;
   }

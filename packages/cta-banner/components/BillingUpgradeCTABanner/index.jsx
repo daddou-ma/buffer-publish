@@ -27,16 +27,23 @@ const buttonStyle = {
 };
 
 // TODO: Replace this with new UI component buttons
-const CTAButton = ({ style, label, text, onClick }) => (
+const CTAButton = ({
+  style,
+  label,
+  text,
+  onClick,
+}) => (
   <button
     style={style}
     aria-label={label}
     onClick={onClick}
+    type="button"
   >
     <Text color={textColor} size="mini">
       {text}
     </Text>
-  </button>);
+  </button>
+);
 
 CTAButton.propTypes = {
   style: PropTypes.object.isRequired, // eslint-disable-line
@@ -46,16 +53,17 @@ CTAButton.propTypes = {
 };
 
 const BillingUpgradeCTABanner = ({
-    translations,
-    trial,
-    onClickManageBilling,
-    onClickAddBilling,
-    profileCount,
-  }) => {
-  if (!trial || (trial && !trial.onTrial) || profileCount == 0) {
+  translations,
+  trial,
+  onClickManageBilling,
+  onClickAddBilling,
+  profileCount,
+}) => {
+  if (!trial || (trial && !trial.onTrial) || profileCount === 0) {
     return null;
   }
-// removed feature loader because user data wasn't getting updated on fetch
+  console.log('trial', trial);
+  // removed feature loader because user data wasn't getting updated on fetch
   const currentPlan = styles => (
     <Text {...styles}>
       <FeatureLoader supportedPlans="free">Free</FeatureLoader>
@@ -83,7 +91,8 @@ const BillingUpgradeCTABanner = ({
           text={translations.addBilling}
           onClick={() => onClickManageBilling()}
         />
-      </div>);
+      </div>
+    );
   }
 
   const timeRemaining = <Text weight="bold" color={textColor} size="mini">{trial.trialTimeRemaining} remaining</Text>;
