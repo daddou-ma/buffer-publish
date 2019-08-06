@@ -113,6 +113,7 @@
     "rimraf": "^2.6.2",
     "setimmediate": "^1.0.5",
     "twitter-text": "2.0.4",
-    "xss": "0.3.4"
+    "xss": "0.3.4",
+    "@toast-ui/react-image-editor": "1.0.1"
   }
 }

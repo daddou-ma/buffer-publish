@@ -1,6 +1,7 @@
 import React from 'react';
 import EmptyTextAlert from '../components/EmptyTextAlert';
 import MediaZoomBox from '../components/MediaZoomBox';
+import ImageEditorWrapper from '../components/ImageEditorWrapper';
 import InstagramThumbnailEditor from '../components/InstagramThumbnailEditor';
 import Store from '../__legacy-buffer-web-shared-components__/modal/store.js';
 
@@ -10,6 +11,7 @@ const ModalComponents = {
   EmptyTextAlert,
   MediaZoomBox,
   InstagramThumbnailEditor,
+  ImageEditorWrapper,
 };
 
 class Modals extends React.Component {

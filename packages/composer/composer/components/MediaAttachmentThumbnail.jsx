@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import CloseButton from '../components/CloseButton';
@@ -24,10 +25,38 @@ class MediaAttachmentThumbnail extends React.Component {
     canEditVideoAttachment: null,
   };
 
-  onClick = () => {
+  onClickVideo = () => {
     const { media, draftId, showTwitterImageDescription, composerPosition } = this.props;
+    console.debug("Open modal of video");
+
+
     ModalActionCreators.openModal('MediaZoomBox', {
       media, draftId, showTwitterImageDescription, composerPosition,
+    });
+  }
+
+  onClickImage = () => {
+    const { media, draftId, showTwitterImageDescription, composerPosition } = this.props;
+    console.debug("Open modal of image");
+    console.debug(media);
+    // const image = document.getElementById('image');
+    // const cropper = new Cropper(image, {
+    //   aspectRatio: 16 / 9,
+    //   crop(event) {
+    //     console.log(event.detail.x);
+    //     console.log(event.detail.y);
+    //     console.log(event.detail.width);
+    //     console.log(event.detail.height);
+    //     console.log(event.detail.rotate);
+    //     console.log(event.detail.scaleX);
+    //     console.log(event.detail.scaleY);
+    //   },
+    // });
+    // console.debug(cropper);
+    ModalActionCreators.openModal('ImageEditorWrapper', {
+      src: media.url,
+      height: media.height,
+      width: media.width,
     });
   }
 
@@ -75,6 +104,8 @@ class MediaAttachmentThumbnail extends React.Component {
       'Select to expand image and add image description' :
       `Select to expand ${isVideo ? 'video' : 'image'}`;
 
+    const onClickCallback = isVideo ? this.onClickVideo : this.onClickImage;
+
     return (
       <div className={thumbnailClassName}>
         <div className={styles.buttonWrapper}>
@@ -82,7 +113,7 @@ class MediaAttachmentThumbnail extends React.Component {
             className={styles.imageContainer}
             aria-label={ariaLabel}
             data-tip={tooltipCopy}
-            onClick={this.onClick}
+            onClick={onClickCallback}
           >
             <img
               alt=""

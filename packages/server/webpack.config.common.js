@@ -35,8 +35,15 @@ module.exports = {
         loaders: ['style-loader', 'css-loader'],
       },
       {
+        test: /node_modules\/tui-image-editor\/dist\/tui-image-editor\.css/,
+        loaders: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.css$/,
-        exclude: /node_modules\/@bufferapp\/draft-js-emoji-plugin\/lib\/plugin\.css/,
+        exclude: [
+          /node_modules\/@bufferapp\/draft-js-emoji-plugin\/lib\/plugin\.css/,
+          /node_modules\/tui-image-editor\/dist\/tui-image-editor\.css/,
+        ],
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
