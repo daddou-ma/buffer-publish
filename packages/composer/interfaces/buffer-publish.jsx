@@ -98,6 +98,7 @@ const ComposerWrapper = ({
     shopgridLink: post.shopgridLink,
     tabId,
     emptySlotMode,
+    draftMode,
   };
   const formattedData = DataImportUtils.formatInputData({
     env: metaData.application,
@@ -130,6 +131,7 @@ const ComposerWrapper = ({
       hasIGDirectFlip={formattedData.userData.has_ig_direct_flip}
       isFreeUser={formattedData.userData.isFreeUser}
       csrfToken={csrfToken}
+      draftMode={draftMode}
     />
   );
 };
@@ -154,6 +156,7 @@ ComposerWrapper.propTypes = {
   preserveStateOnClose: PropTypes.bool.isRequired,
   environment: PropTypes.string.isRequired,
   editMode: PropTypes.bool.isRequired,
+  draftMode: PropTypes.bool.isRequired,
   sentPost: PropTypes.bool,
   emptySlotMode: PropTypes.bool,
   post: PropTypes.shape({}).isRequired,
@@ -174,6 +177,7 @@ ComposerWrapper.defaultProps = {
   csrfToken: '1234', // dummy string for now since MC requires csrfToken
   post: {},
   editMode: false,
+  draftMode: false,
   sentPost: false,
   emptySlotMode: false,
   selectedProfileId: null,
@@ -185,7 +189,7 @@ events.on('saved-drafts', () => {
   publishComposerOnSaveCallback();
 });
 
-events.on('start-trial', ({message, removeScope}) => {
+events.on('start-trial', ({ message, removeScope }) => {
   // reformat new userData
   const userData = DataImportUtils.formatUserData(null, { userData: message });
   AppInitActionCreators.resetUserData(userData);

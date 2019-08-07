@@ -15,6 +15,7 @@ import { observeStore } from '../utils/StoreUtils';
 import AppHooks from '../utils/LifecycleHooks';
 import AppStateless from './AppStateless';
 import AppDispatcher from '../dispatcher';
+
 function getState() {
   const scheduledAt = ComposerStore.getScheduledAt();
 
@@ -91,8 +92,8 @@ class App extends React.Component {
           PropTypes.arrayOf(PropTypes.shape({
             isSlotFree: PropTypes.bool.isRequired,
             timestamp: PropTypes.number.isRequired,
-          }))
-        )
+          })),
+        ),
       ),
     }).isRequired,
 
@@ -162,6 +163,7 @@ class App extends React.Component {
     }).isRequired,
 
     csrfToken: PropTypes.string.isRequired,
+    draftMode: PropTypes.bool.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
     onNewPublish: PropTypes.bool,
     options: PropTypes.shape({
@@ -218,8 +220,8 @@ class App extends React.Component {
     AppStore.addChangeListener(this.onStoreChange);
     NotificationStore.addChangeListener(this.onStoreChange);
     // prevent drop/dragover behavior when dropping a file not in the dropzone
-    window.addEventListener('drop', (e) => e.preventDefault());
-    window.addEventListener('dragover', (e) => e.preventDefault());
+    window.addEventListener('drop', e => e.preventDefault());
+    window.addEventListener('dragover', e => e.preventDefault());
 
     /* Load metadata for cases where the metadata could change (ex. tabId)
        every time composer opens */
@@ -232,7 +234,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    observeStore(AppStore, (store) => store.getAppState().isLoaded)
+    observeStore(AppStore, store => store.getAppState().isLoaded)
       .then(() => {
         if (this.state.metaData.appEnvironment === AppEnvironments.EXTENSION) {
           this.dragMe = new DragMe(document.querySelector('.js-enable-dragging'), {
@@ -256,8 +258,8 @@ class App extends React.Component {
   componentWillUnmount() {
     AppStore.removeChangeListener(this.onStoreChange);
     NotificationStore.removeChangeListener(this.onStoreChange);
-    window.removeEventListener('drop', (e) => e.preventDefault());
-    window.removeEventListener('dragover', (e) => e.preventDefault());
+    window.removeEventListener('drop', e => e.preventDefault());
+    window.removeEventListener('dragover', e => e.preventDefault());
 
     if (this.dragMe) this.dragMe.cleanup();
 
@@ -295,6 +297,7 @@ class App extends React.Component {
       userData,
       metaData,
       csrfToken,
+      draftMode,
       imageDimensionsKey,
       options,
       onNewPublish,
@@ -330,6 +333,7 @@ class App extends React.Component {
         userData,
         metaData,
         csrfToken,
+        draftMode,
         imageDimensionsKey,
         options,
         onNewPublish,
@@ -356,12 +360,12 @@ class App extends React.Component {
       NotificationScopes.MC_ROLLOUT_INFO,
       NotificationScopes.TWITTER_MAX_ONE_PROFILE_SELECTED,
       NotificationScopes.TWITTER_DUPLICATE_CONTENT_WARNING,
-      ...Services.map((service) => `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${service.name}`),
-      ...Services.map((service) => `${NotificationScopes.UPDATE_SAVING}-${service.name}`),
-      ...Services.map((service) => (
+      ...Services.map(service => `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${service.name}`),
+      ...Services.map(service => `${NotificationScopes.UPDATE_SAVING}-${service.name}`),
+      ...Services.map(service => (
         `${NotificationScopes.UPDATE_SAVING}-${ErrorTypes.INLINE}-${service.name}`
       )),
-      ...Services.map((service) => (
+      ...Services.map(service => (
         `${NotificationScopes.COMPOSER_NOTICE_NOT_PREFILLED}-${service.name}`
       )),
       NotificationScopes.COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED,
@@ -391,6 +395,7 @@ class App extends React.Component {
         isPinnedToSlot={this.state.isPinnedToSlot}
         availableSchedulesSlotsForDay={this.state.availableSchedulesSlotsForDay}
         sentPost={this.props.options.sentPost}
+        draftMode={this.props.draftMode}
       />
     );
   }

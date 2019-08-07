@@ -9,8 +9,6 @@ import Composer from '../components/Composer';
 import ProductRolloutTooltip from '../components/ProductRolloutTooltip';
 import NotificationContainer from '../components/NotificationContainer';
 import styles from './css/ComposerSection.css';
-import { ComposerSidepanel } from '@bufferapp/publish-shared-components';
-import HashtagGroupWrapper from '@bufferapp/publish-hashtag-group-manager';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 
 const getComposerState = () => ({
@@ -20,6 +18,7 @@ const getComposerState = () => ({
   forceEditorFocus: ComposerStore.getMeta().forceEditorFocus,
 });
 
+/* eslint-disable react/prop-types */
 const ComposerComponent = ({
     draft,
     index,
@@ -46,6 +45,7 @@ const ComposerComponent = ({
     isFreeUser,
     isBusinessUser,
     hasRestoreComposerDataFlip,
+    draftMode,
   }) => {
   const canUserPostToMultipleNetworks = uniqBy(profiles, (p) => p.service.name).length > 1;
   const showRolloutTooltip = (
@@ -96,11 +96,13 @@ const ComposerComponent = ({
       isBusinessUser={isBusinessUser}
       editMode={editMode}
       hasRestoreComposerDataFlip={hasRestoreComposerDataFlip}
+      draftMode={draftMode}
     >
       {children}
     </Composer>
   );
 };
+/* eslint-enable react/prop-types */
 
 class ComposerSection extends React.Component {
   constructor(props) {
@@ -136,7 +138,7 @@ class ComposerSection extends React.Component {
       shouldEnableFacebookAutocomplete, shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled, composerPosition, hasIGDirectFlip, hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip, isFreeUser, isBusinessUser, canStartProTrial,
-      isOnProTrial, hasShopgridFlip, hasHashtagGroupsFlip, hasRestoreComposerDataFlip,
+      isOnProTrial, hasShopgridFlip, hasHashtagGroupsFlip, draftMode, hasRestoreComposerDataFlip,
     } = this.props;
 
     const hasEnabledDrafts = enabledDrafts.length > 0 || isOmniboxEnabled;
@@ -194,8 +196,9 @@ class ComposerSection extends React.Component {
               hasRestoreComposerDataFlip,
               isFreeUser,
               isBusinessUser,
+              draftMode,
             }
-          }
+            }
           />
         }
 
@@ -229,8 +232,9 @@ class ComposerSection extends React.Component {
                 hasRestoreComposerDataFlip,
                 isFreeUser,
                 isBusinessUser,
+                draftMode,
               }
-            }
+              }
             />),
           )}
       </div>
@@ -258,6 +262,7 @@ ComposerSection.propTypes = {
   hasHashtagGroupsFlip: PropTypes.bool,
   hasRestoreComposerDataFlip: PropTypes.bool,
   isBusinessUser: PropTypes.bool,
+  draftMode: PropTypes.bool,
 };
 
 ComposerSection.defaultProps = {
@@ -267,6 +272,7 @@ ComposerSection.defaultProps = {
   hasHashtagGroupsFlip: false,
   hasRestoreComposerDataFlip: false,
   isBusinessUser: false,
+  draftMode: false,
 };
 
 

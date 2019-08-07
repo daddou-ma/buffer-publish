@@ -156,6 +156,7 @@ class AppStateless extends React.Component {
       isPinnedToSlot,
       availableSchedulesSlotsForDay,
       sentPost,
+      draftMode,
     } = this.props;
 
     const allSelectedProfiles = this.selectedProfiles(profiles);
@@ -241,6 +242,7 @@ class AppStateless extends React.Component {
             isBusinessUser={userData.isBusinessUser || false}
             canStartProTrial={userData.canStartProTrial || false}
             isOnProTrial={userData.isOnProTrial || false}
+            draftMode={draftMode}
           />
 
           <UpdateSaver
@@ -297,6 +299,7 @@ AppStateless.propTypes = {
   availableSchedulesSlotsForDay: PropTypes.any, // eslint-disable-line
   isPinnedToSlot: PropTypes.bool,
   sentPost: PropTypes.bool,
+  draftMode: PropTypes.bool,
 };
 
 AppStateless.defaultProps = {
@@ -304,6 +307,7 @@ AppStateless.defaultProps = {
   scheduledAt: null,
   isPinnedToSlot: false,
   sentPost: false,
+  draftMode: false,
 };
 
 export default AppStateless;

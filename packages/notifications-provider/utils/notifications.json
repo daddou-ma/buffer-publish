@@ -3,8 +3,7 @@
     "example-with-variable": "This is an example with this {{__variable__}} value",
     "bitly-connect": "Great, your bitly account has been linked with the profile {{__variable__}}",
     "bitly-disconnect": "Okay, your bitly account has been disconnected.",
-    "trial-extended": "Great! We’ve extended your free trial.",
-    "trial-pro-started":"Great! You've started your Pro trial."
+    "trial-extended": "Great! We’ve extended your free trial."
   },
   "error": {
     "connection": "{{__variable__}}",
