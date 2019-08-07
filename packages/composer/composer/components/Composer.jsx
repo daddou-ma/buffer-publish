@@ -166,6 +166,8 @@ class Composer extends React.Component {
     hasHashtagGroupsFlip: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
+    hasRestoreComposerDataFlip: PropTypes.bool,
+    editMode: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -177,9 +179,11 @@ class Composer extends React.Component {
     hasIGDirectVideoFlip: false,
     hasShopgridFlip: false,
     hasHashtagGroupsFlip: false,
+    hasRestoreComposerDataFlip: false,
     profiles: [],
     expandedComposerId: null,
     selectedProfiles: [],
+    editMode: false,
   };
 
   constructor(props) {
@@ -604,6 +608,7 @@ class Composer extends React.Component {
       hasIGDirectVideoFlip,
       hasShopgridFlip,
       hasHashtagGroupsFlip,
+      hasRestoreComposerDataFlip,
     } = this.props;
 
     let composerFeedbackMessages = this.getComposerFeedbackMessages();
@@ -856,6 +861,8 @@ class Composer extends React.Component {
         shouldEnableFacebookAutocomplete={shouldEnableFacebookAutocomplete}
         visibleNotifications={this.props.visibleNotifications}
         forceDecoratorsRerender={draft.forceDecoratorsRerender}
+        editMode={this.props.editMode}
+        hasRestoreComposerDataFlip={hasRestoreComposerDataFlip}
       />
     );
 

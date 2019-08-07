@@ -75,6 +75,24 @@ const ComposerActionCreators = {
     });
   },
 
+  getEnabledDraftsFromStorage: () => {
+    ComposerStore._syncDispatch({
+      action: {
+        actionType: ActionTypes.COMPOSER_GET_ENABLED_DRAFTS_FROM_STORAGE,
+      },
+    });
+  },
+
+  saveDraftToStorage: (id, editorState) => {
+    ComposerStore._syncDispatch({
+      action: {
+        actionType: ActionTypes.COMPOSER_SAVE_DRAFT_TO_STORAGE,
+        id,
+        editorState,
+      },
+    });
+  },
+
   updateDraftSourceLink: (id, url) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK,

@@ -8,6 +8,7 @@ import ProfileGroups from '../components/ProfileGroups';
 import Button from '../components/Button';
 import styles from './css/ProfileSection.css';
 import AppActionCreators from '../action-creators/AppActionCreators';
+import AppInitActionCreators from '../action-creators/AppInitActionCreators';
 
 class ProfileSection extends React.Component {
   static propTypes = {
@@ -25,6 +26,11 @@ class ProfileSection extends React.Component {
   };
 
   onProfilesToggleClick = () => AppActionCreators.toggleAllProfiles();
+  clearDraftFromLocalStorage = () => {
+    AppInitActionCreators.softResetData();
+    localStorage.removeItem('np-selected-profiles');
+    localStorage.removeItem('np-enabled-drafts');
+  };
 
   addContainerScrollHandler = (handler) => {
     this.scrollHandlers.add(handler);
@@ -68,6 +74,19 @@ class ProfileSection extends React.Component {
             selectedProfilesIds={selectedProfilesIds}
             onNewPublish={onNewPublish}
           />}
+
+        {userData.hasRestoreComposerDataFlip &&
+          <div className={styles.clearComposerDataButton}>
+            <Button
+              className={profilesTogglerClassName}
+              onClick={this.clearDraftFromLocalStorage}
+            >
+              <span className={styles.profilesTogglerCopy}>
+                Clear Composer
+              </span>
+            </Button>
+          </div>
+        }
 
         <div className={styles.profilesContainer}>
           <div

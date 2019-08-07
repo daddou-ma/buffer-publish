@@ -67,6 +67,7 @@ const ComposerWrapper = ({
     onSave,
     preserveStateOnClose: emptySlotMode ? false : preserveStateOnClose,
     sentPost,
+    editMode,
   };
 
   const subprofileId = post ? post.subprofile_id : undefined;

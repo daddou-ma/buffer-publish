@@ -11,13 +11,21 @@ class ShopgridComposerBar extends React.Component {
     super(props);
     this.state = {
       shopgridLink: props.shopgridLink || '',
-      helpUrl: 'https://faq.buffer.com/article/1164-publish-instagram-shop-grid'
+      helpUrl: 'https://faq.buffer.com/article/1164-publish-instagram-shop-grid',
     };
 
     this.onChange = this.onChange.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.shouldShowShopgridBar = this.shouldShowShopgridBar.bind(this);
     this.openHelp = this.openHelp.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.shopgridLink !== nextProps.shopgridLink) {
+      this.state = {
+        shopgridLink: nextProps.shopgridLink || '',
+      };
+    }
   }
 
   onChange(event) {

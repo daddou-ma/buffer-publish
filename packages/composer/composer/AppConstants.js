@@ -391,6 +391,9 @@ const ActionTypes = keyMirror({
   COMPOSER_UPDATE_INSTAGRAM_DRAFT_THUMBNAIL: null,
   APP_SET_THUMBNAIL_LOADING: null,
   RESET_USER_DATA: null,
+  COMPOSER_GET_DRAFT_FROM_STORAGE: null,
+  COMPOSER_SAVE_DRAFT_TO_STORAGE: null,
+  COMPOSER_SAVE_DRAFTS_TO_STORAGE: null,
 });
 
 const AsyncOperationStates = keyMirror({
@@ -417,6 +420,7 @@ const NotificationScopes = keyMirror({
   TWITTER_DUPLICATE_CONTENT_WARNING: null,
   COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED: null,
   PROFILE_QUEUE_LIMIT: null,
+  DRAFT_STORAGE_FOUND: null,
 });
 
 /**

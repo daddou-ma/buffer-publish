@@ -34,6 +34,8 @@ class UpdateSaverItem extends React.Component {
 
     AppActionCreators.saveDrafts(queuingType, { shouldSkipEmptyTextAlert: false });
 
+    this.clearDraftFromLocalStorage();
+
     e.stopPropagation();
   };
 
@@ -59,6 +61,8 @@ class UpdateSaverItem extends React.Component {
       customScheduleTime: timestamp,
       shouldSkipEmptyTextAlert: false,
     });
+
+    this.clearDraftFromLocalStorage();
   };
 
   onMouseEnter = () => {
@@ -72,6 +76,11 @@ class UpdateSaverItem extends React.Component {
       AppActionCreators.trackUserAction(['composer', 'clicked_on_disabled_add_to_queue']);
     }
   };
+
+  clearDraftFromLocalStorage = () => {
+    localStorage.removeItem('np-selected-profiles');
+    localStorage.removeItem('np-enabled-drafts');
+  }
 
   render() {
     const {

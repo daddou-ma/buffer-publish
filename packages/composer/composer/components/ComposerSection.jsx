@@ -45,6 +45,7 @@ const ComposerComponent = ({
     hasHashtagGroupsFlip,
     isFreeUser,
     isBusinessUser,
+    hasRestoreComposerDataFlip,
   }) => {
   const canUserPostToMultipleNetworks = uniqBy(profiles, (p) => p.service.name).length > 1;
   const showRolloutTooltip = (
@@ -52,6 +53,7 @@ const ComposerComponent = ({
     canUserPostToMultipleNetworks &&
     (isOmniboxEnabled || index === enabledDrafts.length - 1)
   );
+  const { editMode } = AppStore.getOptions();
 
   const children =
     showRolloutTooltip ?
@@ -92,6 +94,8 @@ const ComposerComponent = ({
       hasHashtagGroupsFlip={hasHashtagGroupsFlip}
       isFreeUser={isFreeUser}
       isBusinessUser={isBusinessUser}
+      editMode={editMode}
+      hasRestoreComposerDataFlip={hasRestoreComposerDataFlip}
     >
       {children}
     </Composer>
@@ -99,6 +103,21 @@ const ComposerComponent = ({
 };
 
 class ComposerSection extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { editMode, sentPost } = AppStore.getOptions();
+    const { hasRestoreComposerDataFlip } = AppStore.getUserData();
+    const selectedProfiles = JSON.parse(localStorage.getItem('np-selected-profiles'));
+    if (hasRestoreComposerDataFlip && (!sentPost && editMode === false)) {
+      if (selectedProfiles && selectedProfiles.profiles) {
+        AppActionCreators.selectProfiles(selectedProfiles.profiles.map(profile => profile.id),
+          false, false);
+      }
+      ComposerActionCreators.getEnabledDraftsFromStorage();
+    }
+  }
+
   state = getComposerState();
 
   componentDidMount = () => ComposerStore.addChangeListener(this.onStoreChange);
@@ -117,7 +136,7 @@ class ComposerSection extends React.Component {
       shouldEnableFacebookAutocomplete, shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled, composerPosition, hasIGDirectFlip, hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip, isFreeUser, isBusinessUser, canStartProTrial,
-      isOnProTrial, hasShopgridFlip, hasHashtagGroupsFlip,
+      isOnProTrial, hasShopgridFlip, hasHashtagGroupsFlip, hasRestoreComposerDataFlip,
     } = this.props;
 
     const hasEnabledDrafts = enabledDrafts.length > 0 || isOmniboxEnabled;
@@ -172,6 +191,7 @@ class ComposerSection extends React.Component {
               hasIGDirectVideoFlip,
               hasShopgridFlip,
               hasHashtagGroupsFlip,
+              hasRestoreComposerDataFlip,
               isFreeUser,
               isBusinessUser,
             }
@@ -206,6 +226,7 @@ class ComposerSection extends React.Component {
                 hasIGDirectVideoFlip,
                 hasShopgridFlip,
                 hasHashtagGroupsFlip,
+                hasRestoreComposerDataFlip,
                 isFreeUser,
                 isBusinessUser,
               }
@@ -235,6 +256,7 @@ ComposerSection.propTypes = {
   isFreeUser: PropTypes.bool.isRequired,
   hasShopgridFlip: PropTypes.bool,
   hasHashtagGroupsFlip: PropTypes.bool,
+  hasRestoreComposerDataFlip: PropTypes.bool,
   isBusinessUser: PropTypes.bool,
 };
 
@@ -243,6 +265,7 @@ ComposerSection.defaultProps = {
   composerPosition: null,
   hasShopgridFlip: false,
   hasHashtagGroupsFlip: false,
+  hasRestoreComposerDataFlip: false,
   isBusinessUser: false,
 };
 

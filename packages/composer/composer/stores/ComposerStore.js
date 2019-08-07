@@ -336,6 +336,112 @@ const clearDraftInlineErrors = (id) => {
   notifications.forEach((notif) => NotificationActionCreators.removeNotification(notif.id));
 };
 
+const replacer = function (key, value) {
+  if (key === 'editorState') {
+    const editorState = value.getCurrentContent().getPlainText();
+    return editorState;
+  }
+
+  return value;
+};
+
+const getJsonDraftFromStorage = (id) => {
+  const enabledDraftsStr = localStorage.getItem('np-enabled-drafts');
+  if (enabledDraftsStr) {
+    let jsonDraft = {};
+    JSON.parse(enabledDraftsStr).forEach((draft) => {
+      draft.service = Services.find(service => service.name === draft.id);
+      if (draft.id === id) {
+        jsonDraft = draft;
+      }
+    });
+    return jsonDraft;
+  }
+};
+
+const hasDraftChanged = (id) => {
+  const storedDraft = getJsonDraftFromStorage(id);
+  const storedDraftStr = JSON.stringify(storedDraft);
+  const stateDraftStr = JSON.stringify(ComposerStore.getDraft(id), replacer);
+
+  if (storedDraft && (storedDraftStr !== stateDraftStr)) {
+    console.log('hasDraftChanged ->', id, storedDraft.id, storedDraftStr !== stateDraftStr);
+    console.log(storedDraftStr);
+    console.log('------------');
+    console.log(stateDraftStr);
+    console.log('------------');
+    console.log('----- END -------');
+  }
+
+  return storedDraftStr !== stateDraftStr;
+};
+
+const selectedDraftProfiles = enabledDraft =>
+  AppStore.getSelectedProfilesForService(enabledDraft.service.name);
+
+const getJsonProfilesFromStorage = () => {
+  const profilesStorage = localStorage.getItem('np-selected-profiles');
+  return JSON.parse(profilesStorage);
+};
+
+const getSelectedProfiles = (draft) => {
+  const enabledDrafts = ComposerStore.getEnabledDrafts();
+  let profiles = [];
+
+  if (draft.service.isOmni) {
+    // Several profiles, from different services selected, same content
+    profiles = enabledDrafts.map(enabledDraft =>
+      selectedDraftProfiles(enabledDraft).map(profile => profile)).flat(1);
+  } else if (enabledDrafts.length > 1) {
+    profiles = enabledDrafts.map(enabledDraft =>
+      selectedDraftProfiles(enabledDraft).map(profile => profile)).flat(1);
+  } else if (enabledDrafts.length === 1) {
+    // Single profile selected
+    profiles = draft.isEnabled ?
+      AppStore.getSelectedProfilesForService(draft.service.name) :
+      [];
+  }
+  return profiles;
+};
+
+const profilesChanged = (selectedProfiles) => {
+  const storedProfiles = getJsonProfilesFromStorage();
+  const storedProfilesStr = JSON.stringify(storedProfiles);
+  const stateProfilesStr = JSON.stringify(selectedProfiles);
+
+  return ((storedProfilesStr !== stateProfilesStr) ||
+    (selectedProfiles.isOmniboxEnabled !== storedProfiles.isOmniboxEnabled));
+};
+
+const saveToLocalStorage = (id) => {
+  const { hasRestoreComposerDataFlip } = AppStore.getUserData();
+  const { editMode, sentPost } = AppStore.getOptions();
+
+  if (!id) return;
+  if (!hasRestoreComposerDataFlip) return;
+
+  const draft = ComposerStore.getDraft(id);
+  const enabledDrafts = ComposerStore.getEnabledDrafts();
+  const isOmniboxEnabled = draft.service.isOmni;
+  const profiles = getSelectedProfiles(draft);
+
+  if (hasDraftChanged(id) && (!sentPost && editMode === false)) {
+    const enabledDraftsStr = JSON.stringify(enabledDrafts, replacer);
+    localStorage.setItem('np-enabled-drafts', enabledDraftsStr);
+    // console.log('*** SAVE TO STORAGE ***', enabledDraftsStr);
+  }
+
+  const selectedProfiles = {
+    profiles,
+    isOmniboxEnabled,
+  };
+
+  if (profilesChanged(selectedProfiles)) {
+    const profilesStr = JSON.stringify(selectedProfiles);
+    localStorage.setItem('np-selected-profiles', profilesStr);
+  }
+};
+
 const enableDraft = monitorComposerLastInteractedWith(
   (id, markAppAsLoadedWhenDone) => {
     let shouldPreventRerender = false;
@@ -374,6 +480,7 @@ const enableDraft = monitorComposerLastInteractedWith(
     }
 
     ComposerStore.getDraft(id).isEnabled = true;
+    // saveToLocalStorage(id);
     ComposerActionCreators.updateInstagramState();
     if (markAppAsLoadedWhenDone) AppActionCreators.markAppAsLoaded();
 
@@ -386,6 +493,7 @@ const disableDraft = (id) => {
 
   if (ComposerStore.isDraftLocked(id)) return !shouldPreventRerender;
   ComposerStore.getDraft(id).isEnabled = false;
+  // saveToLocalStorage(id);
 
   // Disable omnibox mode if needed
   const { isOmniboxEnabled } = AppStore.getAppState();
@@ -456,8 +564,10 @@ const setDraftInitialText = ({
   composerInitiator,
   isPrefillingExistingUpdate,
   isEditing,
+  loadedFromLocalStorage,
+  storedDraft,
 }) => {
-  const draft = ComposerStore.getDraft(id);
+  let draft = ComposerStore.getDraft(id);
 
   if (draft.enabledAttachmentType === AttachmentTypes.RETWEET) {
     const retweetMark = 'RT @';
@@ -561,6 +671,11 @@ const setDraftInitialText = ({
   }
 
   ComposerActionCreators.updateDraftCharacterCount(id);
+
+  if (loadedFromLocalStorage && storedDraft) {
+    draft = Object.assign(draft, storedDraft);
+    draft.editorState = editorState;
+  }
 };
 
 const setDraftsInitialText = ({
@@ -582,16 +697,34 @@ const setDraftsInitialText = ({
       composerInitiator,
       isPrefillingExistingUpdate,
       isEditing,
+      loadedFromLocalStorage: false,
+      storedDraft: null,
     })
   );
 };
 
-const setDraftEditorState = monitorComposerLastInteractedWith(
+const saveDraftIntoStorage = monitorComposerLastInteractedWith(
   (id, editorState) => {
+    saveToLocalStorage(id);
+
     ComposerStore.getDraft(id).editorState = editorState;
     ComposerActionCreators.updateDraftCharacterCount(id);
     ComposerActionCreators.updateDraftCommentCharacterCount(id);
-  }
+  },
+);
+
+const setDraftEditorState = monitorComposerLastInteractedWith(
+  (id, editorState) => {
+    const { editMode, sentPost } = AppStore.getOptions();
+    // Save to store
+    if (hasDraftChanged(id) && (!sentPost && editMode === false)) {
+      saveDraftIntoStorage(id, editorState);
+    }
+
+    ComposerStore.getDraft(id).editorState = editorState;
+    ComposerActionCreators.updateDraftCharacterCount(id);
+    ComposerActionCreators.updateDraftCommentCharacterCount(id);
+  },
 );
 
 const updateDraftIsSaved = (id) => {
@@ -646,7 +779,9 @@ const updateDraftLocation = monitorComposerLastInteractedWith(
 
     draft.locationId = locationId;
     draft.locationName = locationName;
-  }
+
+    saveToLocalStorage(id);
+  },
 );
 
 const updateDraftScheduledAt = monitorComposerLastInteractedWith(
@@ -757,6 +892,8 @@ const updateDraftCharacterCount = monitorComposerLastInteractedWith(
     const draftText = ComposerStore.getDraftText(id);
     draft.characterCount = getDraftCharacterCount(id, draftText);
 
+    saveToLocalStorage(id);
+
     // If the character count was updated as a result of a change that didn't
     // originate from the editor itself, we need to give the editor an opportunity
     // to re-render the highlighter's decorator ourselves. A prop is used to tell
@@ -816,6 +953,8 @@ const updateDraftComment = monitorComposerLastInteractedWith(
       if (draft.service.name !== 'instagram') return;
       draft.commentText = commentText;
 
+      saveToLocalStorage(id);
+
       // If the character count was updated as a result of a change that didn't
       // originate from the editor itself, we need to give the editor an opportunity
       // to re-render the highlighter's decorator ourselves. A prop is used to tell
@@ -829,6 +968,8 @@ const updateDraftComment = monitorComposerLastInteractedWith(
         const currentText = enabledDraft.commentText ? `${enabledDraft.commentText} ` : '';
         const comment = `${currentText}${commentText}`;
         enabledDraft.commentText = comment;
+
+        saveToLocalStorage(enabledDraft.id);
       });
     }
   },
@@ -839,6 +980,8 @@ const updateShopgridLink = monitorComposerLastInteractedWith(
     const draft = ComposerStore.getDraft(id);
     if (draft.service.name !== 'instagram') return;
     draft.shopgridLink = shopgridLink;
+
+    saveToLocalStorage(id);
 
     if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
   },
@@ -854,6 +997,8 @@ const updateDraftCommentCharacterCount = monitorComposerLastInteractedWith(
 
       draft.characterCommentCount = getDraftCharacterCount(id, draft.commentText);
 
+      saveToLocalStorage(id);
+
       // If the character count was updated as a result of a change that didn't
       // originate from the editor itself, we need to give the editor an opportunity
       // to re-render the highlighter's decorator ourselves. A prop is used to tell
@@ -867,6 +1012,8 @@ const updateDraftCommentCharacterCount = monitorComposerLastInteractedWith(
         if (enabledDraft.service.commentCharLimit === null) return;
         enabledDraft.characterCommentCount =
           getDraftCharacterCount(enabledDraft.id, enabledDraft.commentText);
+
+        saveToLocalStorage(enabledDraft.id);
 
         if (!didEditorStateChange) enabledDraft.forceDecoratorsRerender = true;
       });
@@ -1102,6 +1249,8 @@ const addDraftImage = monitorComposerLastInteractedWith(
 
     draft.images.push(image);
 
+    saveToLocalStorage(id);
+
     ComposerActionCreators.draftImageAdded(id, image.url);
     ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
     if (draft.id === 'instagram') ComposerActionCreators.updateInstagramState();
@@ -1115,6 +1264,8 @@ const updateDraftVideoThumbnail = monitorComposerLastInteractedWith(
 
     draft.video.thumbnail = thumbnail;
     draft.video.wasEdited = true;
+
+    saveToLocalStorage(id);
   }
 );
 
@@ -1125,6 +1276,8 @@ const updateDraftVideoTitle = monitorComposerLastInteractedWith(
 
     draft.video.name = title;
     draft.video.wasEdited = true;
+
+    saveToLocalStorage(id);
   }
 );
 
@@ -1293,6 +1446,8 @@ const addDraftVideo = monitorComposerLastInteractedWith(
 
     draft.video = cloneDeep(video);
 
+    saveToLocalStorage(id);
+
     ComposerActionCreators.draftVideoAdded(id, video);
     ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
     if (draft.id === 'instagram') ComposerActionCreators.updateInstagramState();
@@ -1429,6 +1584,7 @@ const disableDraftAttachment = (id) => {
   const draft = ComposerStore.getDraft(id);
   draft.enabledAttachmentType = null;
 
+  saveToLocalStorage(id);
   ComposerActionCreators.attachmentToggled(id);
   ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
 };
@@ -1450,6 +1606,7 @@ const enableDraftAttachment = (id, attachmentType) => {
   }
 
   draft.enabledAttachmentType = attachmentType;
+  saveToLocalStorage(id);
 
   ComposerActionCreators.attachmentToggled(id);
   ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
@@ -1810,6 +1967,47 @@ const updateInstagramDraftsFeedback = () => {
   }
 };
 
+const getDraftFromStorage = monitorComposerLastInteractedWith(
+  (storedDraft) => {
+    if (!storedDraft) return;
+
+    // Save to store
+    if (hasDraftChanged(storedDraft.id)) {
+      const metaData = AppStore.getMetaData();
+
+      setDraftInitialText({
+        id: storedDraft.id,
+        text: storedDraft.editorState,
+        url: metaData.url,
+        facebookMentionEntities: metaData.facebookMentionEntities,
+        via: metaData.via,
+        composerInitiator: metaData.composerInitiator,
+        isPrefillingExistingUpdate: metaData.isPrefillingExistingUpdate,
+        isEditing: false,
+        loadedFromLocalStorage: true,
+        storedDraft,
+      });
+    }
+  },
+);
+
+const getEnabledDraftsFromStorage = () => {
+  const enabledDraftsStr = localStorage.getItem('np-enabled-drafts');
+  const selectedProfiles = JSON.parse(localStorage.getItem('np-selected-profiles'));
+  const { editMode, sentPost } = AppStore.getOptions();
+
+  if (enabledDraftsStr && (!sentPost && editMode === false)) {
+    const enabledDrafts = JSON.parse(enabledDraftsStr);
+    console.log('*** GET FROM STORAGE ***', enabledDrafts);
+
+    enabledDrafts.forEach((draft) => {
+      draft.service = Services.find(service => service.name === draft.id);
+      draft.service.isOmni = selectedProfiles.isOmniboxEnabled;
+      getDraftFromStorage(draft);
+    });
+  }
+};
+
 const onDispatchedPayload = (payload) => {
   const action = payload.action;
   let shouldEmitChange = true;
@@ -1822,6 +2020,14 @@ const onDispatchedPayload = (payload) => {
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_EDITOR_STATE:
       setDraftEditorState(action.id, action.editorState);
+      break;
+
+    case ActionTypes.COMPOSER_GET_ENABLED_DRAFTS_FROM_STORAGE:
+      getEnabledDraftsFromStorage();
+      break;
+
+    case ActionTypes.COMPOSER_SAVE_DRAFT_TO_STORAGE:
+      saveDraftIntoStorage(action.id, action.editorState);
       break;
 
     case ActionTypes.UPDATE_DRAFT_IS_SAVED:

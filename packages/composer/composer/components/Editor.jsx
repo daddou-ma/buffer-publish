@@ -60,10 +60,14 @@ class Editor extends React.Component {
     hasLinkAttachment: PropTypes.bool,
     usesImageFirstLayout: PropTypes.bool,
     readOnly: PropTypes.bool,
+    editMode: PropTypes.bool,
+    hasRestoreComposerDataFlip: PropTypes.bool,
   };
 
   static defaultProps = {
     shouldAutoFocus: false,
+    hasRestoreComposerDataFlip: false,
+    editMode: false,
     onFocus: () => {},
     placeholder: 'What would you like to share?',
   };
@@ -137,7 +141,7 @@ class Editor extends React.Component {
       return;
     }
 
-    ComposerActionCreators.updateDraftEditorState(this.props.draft.id, editorState);
+    ComposerActionCreators.updateDraftEditorState(this.props.draft.id, editorState, this.props.editMode);
   };
 
   onFocus = (e) => this.props.onFocus(e);
@@ -493,6 +497,7 @@ class Editor extends React.Component {
       draft, isComposerExpanded, placeholder, usesImageFirstLayout,
       attachmentGlanceHasNoThumbnail, readOnly,
     } = this.props;
+    // console.log('draft', draft);
 
     const {
       ShortLinkTooltip, UnshortenedLinkTooltip, AutocompleteSuggestions,

@@ -74,3 +74,16 @@
 .profilesTogglerCopy {
   composes: groupName from './ProfileGroupItem.css';
 }
+
+.clearComposerDataButton {
+  display: flex;
+  margin-bottom: 15px;
+  padding: 0;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.clearComposerDataButton > button {
+  margin-bottom: 0!important;
+  margin-top: -13px!important;
+}
