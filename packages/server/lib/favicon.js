@@ -12,6 +12,12 @@ const resources = [
   { path: '/android-chrome-512x512.png', contentType: 'image/png' },
   { path: '/mstile-150x150.png', contentType: 'image/png' },
 
+
+  { path: '/toast-image-editor-icon-a.svg', contentType: 'image/svg+xml' },
+  { path: '/toast-image-editor-icon-b.svg', contentType: 'image/svg+xml' },
+  { path: '/toast-image-editor-icon-c.svg', contentType: 'image/svg+xml' },
+  { path: '/toast-image-editor-icon-d.svg', contentType: 'image/svg+xml' },
+
   { path: '/site.webmanifest', contentType: 'application/manifest+json' },
   { path: '/browserconfig.xml', contentType: 'application/xml' },
 ];
