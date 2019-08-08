@@ -141,7 +141,7 @@ class Editor extends React.Component {
       return;
     }
 
-    ComposerActionCreators.updateDraftEditorState(this.props.draft.id, editorState, this.props.editMode);
+    ComposerActionCreators.updateDraftEditorState(this.props.draft.id, editorState);
   };
 
   onFocus = (e) => this.props.onFocus(e);

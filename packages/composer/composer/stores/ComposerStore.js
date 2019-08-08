@@ -30,10 +30,13 @@ import events from '../utils/Events';
 import ValidationSuccess from '../lib/validation/ValidationSuccess';
 import { validateDraft, validateVideoForInstagram } from '../lib/validation/ValidateDraft';
 import Draft from '../entities/Draft';
+import { enabledDraftStorageName, selectedProfileStorageName } from '../utils/StringUtils';
 
 // import { registerStore, sendToMonitor } from '../utils/devtools';
 
 const CHANGE_EVENT = 'change';
+const NP_ENABLED_DRAFTS = enabledDraftStorageName;
+const NP_SELECTED_PROFILES = selectedProfileStorageName;
 
 const getNewDraft = service => (
   new Draft(service, EditorState.createEmpty())
@@ -101,6 +104,7 @@ const getInitialState = () => ({
     uploadedVideos: [],
   },
   meta: {
+    loadedFromLocalStorage: false,
     lastInteractedWithComposerId: null,
     forceEditorFocus: false,
   },
@@ -346,7 +350,7 @@ const replacer = function (key, value) {
 };
 
 const getJsonDraftFromStorage = (id) => {
-  const enabledDraftsStr = localStorage.getItem('np-enabled-drafts');
+  const enabledDraftsStr = localStorage.getItem(NP_ENABLED_DRAFTS);
   if (enabledDraftsStr) {
     let jsonDraft = {};
     JSON.parse(enabledDraftsStr).forEach((draft) => {
@@ -364,15 +368,6 @@ const hasDraftChanged = (id) => {
   const storedDraftStr = JSON.stringify(storedDraft);
   const stateDraftStr = JSON.stringify(ComposerStore.getDraft(id), replacer);
 
-  if (storedDraft && (storedDraftStr !== stateDraftStr)) {
-    console.log('hasDraftChanged ->', id, storedDraft.id, storedDraftStr !== stateDraftStr);
-    console.log(storedDraftStr);
-    console.log('------------');
-    console.log(stateDraftStr);
-    console.log('------------');
-    console.log('----- END -------');
-  }
-
   return storedDraftStr !== stateDraftStr;
 };
 
@@ -380,7 +375,7 @@ const selectedDraftProfiles = enabledDraft =>
   AppStore.getSelectedProfilesForService(enabledDraft.service.name);
 
 const getJsonProfilesFromStorage = () => {
-  const profilesStorage = localStorage.getItem('np-selected-profiles');
+  const profilesStorage = localStorage.getItem(NP_SELECTED_PROFILES);
   return JSON.parse(profilesStorage);
 };
 
@@ -413,6 +408,16 @@ const profilesChanged = (selectedProfiles) => {
     (selectedProfiles.isOmniboxEnabled !== storedProfiles.isOmniboxEnabled));
 };
 
+const saveDraftLocally = (enabledDrafts) => {
+  const enabledDraftsStr = JSON.stringify(enabledDrafts, replacer);
+  localStorage.setItem(NP_ENABLED_DRAFTS, enabledDraftsStr);
+};
+
+const saveProfilesLocally = (selectedProfiles) => {
+  const profilesStr = JSON.stringify(selectedProfiles);
+  localStorage.setItem(NP_SELECTED_PROFILES, profilesStr);
+};
+
 const saveToLocalStorage = (id) => {
   const { hasRestoreComposerDataFlip } = AppStore.getUserData();
   const { editMode, sentPost } = AppStore.getOptions();
@@ -425,20 +430,18 @@ const saveToLocalStorage = (id) => {
   const isOmniboxEnabled = draft.service.isOmni;
   const profiles = getSelectedProfiles(draft);
 
-  if (hasDraftChanged(id) && (!sentPost && editMode === false)) {
-    const enabledDraftsStr = JSON.stringify(enabledDrafts, replacer);
-    localStorage.setItem('np-enabled-drafts', enabledDraftsStr);
-    // console.log('*** SAVE TO STORAGE ***', enabledDraftsStr);
-  }
-
   const selectedProfiles = {
     profiles,
     isOmniboxEnabled,
   };
 
-  if (profilesChanged(selectedProfiles)) {
-    const profilesStr = JSON.stringify(selectedProfiles);
-    localStorage.setItem('np-selected-profiles', profilesStr);
+  const shouldSaveDraftToStorage = hasDraftChanged(id) && (!sentPost && editMode === false);
+  const shouldSaveProfileToStorage = profilesChanged(selectedProfiles);
+  const meta = ComposerStore.getMeta();
+
+  if (shouldSaveDraftToStorage || shouldSaveProfileToStorage) {
+    saveDraftLocally(enabledDrafts);
+    saveProfilesLocally(selectedProfiles);
   }
 };
 
@@ -471,10 +474,19 @@ const enableDraft = monitorComposerLastInteractedWith(
           AppActionCreators.updateOmniboxState(true);
           shouldPreventRerender = true;
         } else if (enabledDrafts.length >= 1) {
-          copyDraftContents({
-            draftFrom: ComposerStore.getDraft(state.meta.lastInteractedWithComposerId),
-            draftsTo: [ComposerStore.getDraft(id)],
-          });
+          const meta = ComposerStore.getMeta();
+
+          // @todo: make sure to prevent copying drafts only on start
+          // improve this logic, right now when there are more than 2 profiles selected
+          // in the composer, it's copying the content from the active to the rest
+          if (!meta.loadedFromLocalStorage) {
+            copyDraftContents({
+              draftFrom: ComposerStore.getDraft(state.meta.lastInteractedWithComposerId),
+              draftsTo: [ComposerStore.getDraft(id)],
+            });
+          } else {
+            ComposerActionCreators.setDraftsLoadedFromStorage(false);
+          }
         }
       }
     }
@@ -673,8 +685,35 @@ const setDraftInitialText = ({
   ComposerActionCreators.updateDraftCharacterCount(id);
 
   if (loadedFromLocalStorage && storedDraft) {
-    draft = Object.assign(draft, storedDraft);
-    draft.editorState = editorState;
+    // draft = Object.assign(draft, storedDraft);
+    // draft.editorState = editorState;
+    const {
+      images,
+      characterCount,
+      locationId,
+      locationName,
+      shopgridLink,
+      commentEnabled,
+      characterCommentCount,
+      commentText,
+      isEnabled,
+      enabledAttachmentType,
+    } = storedDraft;
+
+    draft.images = images;
+    draft.isEnabled = isEnabled;
+    draft.enabledAttachmentType = enabledAttachmentType;
+    draft.characterCount = characterCount;
+    // draft.service.isOmni = selectedProfiles.isOmniboxEnabled;
+    // Instagram
+    if (draft.service.name === 'instagram') {
+      draft.locationId = locationId;
+      draft.locationName = locationName;
+      draft.commentEnabled = commentEnabled;
+      draft.commentText = commentText;
+      draft.characterCommentCount = characterCommentCount;
+      draft.shopgridLink = shopgridLink;
+    }
   }
 };
 
@@ -1211,6 +1250,8 @@ const updateDraftLinkData = monitorComposerLastInteractedWith(
           comesFromDirectUserAction || !!(draft.link && draft.link.wasEdited)),
     });
 
+    saveToLocalStorage(id);
+
     // If the link is missing some data that we could retrieve by scraping it, do so
     const scrapableProps = ['title', 'description', 'availableThumbnails'];
     const isAnyScrapablePropMissing = scrapableProps.some((prop) => draft.link[prop] === null);
@@ -1289,6 +1330,8 @@ const updateDraftLinkThumbnail = monitorComposerLastInteractedWith(
 
     // TODO: merge updateDraftLinkThumbnail() into updateDraftLinkData()
     draft.link.wasEdited = true;
+
+    saveToLocalStorage(id);
   }
 );
 
@@ -1992,13 +2035,12 @@ const getDraftFromStorage = monitorComposerLastInteractedWith(
 );
 
 const getEnabledDraftsFromStorage = () => {
-  const enabledDraftsStr = localStorage.getItem('np-enabled-drafts');
-  const selectedProfiles = JSON.parse(localStorage.getItem('np-selected-profiles'));
+  const enabledDraftsStr = localStorage.getItem(NP_ENABLED_DRAFTS);
+  const selectedProfiles = JSON.parse(localStorage.getItem(NP_SELECTED_PROFILES));
   const { editMode, sentPost } = AppStore.getOptions();
 
   if (enabledDraftsStr && (!sentPost && editMode === false)) {
     const enabledDrafts = JSON.parse(enabledDraftsStr);
-    console.log('*** GET FROM STORAGE ***', enabledDrafts);
 
     enabledDrafts.forEach((draft) => {
       draft.service = Services.find(service => service.name === draft.id);
@@ -2007,6 +2049,13 @@ const getEnabledDraftsFromStorage = () => {
     });
   }
 };
+
+const setLoadedFromStorage = monitorComposerLastInteractedWith(
+  (loadedFromLocalStorage) => {
+    const meta = ComposerStore.getMeta();
+    meta.loadedFromLocalStorage = loadedFromLocalStorage;
+  },
+);
 
 const onDispatchedPayload = (payload) => {
   const action = payload.action;
@@ -2024,6 +2073,10 @@ const onDispatchedPayload = (payload) => {
 
     case ActionTypes.COMPOSER_GET_ENABLED_DRAFTS_FROM_STORAGE:
       getEnabledDraftsFromStorage();
+      break;
+
+    case ActionTypes.DRAFT_LOADED_FROM_STORAGE:
+      setLoadedFromStorage(action.loadedFromLocalStorage);
       break;
 
     case ActionTypes.COMPOSER_SAVE_DRAFT_TO_STORAGE:

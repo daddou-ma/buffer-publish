@@ -93,6 +93,15 @@ const ComposerActionCreators = {
     });
   },
 
+  setDraftsLoadedFromStorage: (loadedFromLocalStorage) => {
+    ComposerStore._syncDispatch({
+      action: {
+        actionType: ActionTypes.DRAFT_LOADED_FROM_STORAGE,
+        loadedFromLocalStorage,
+      },
+    });
+  },
+
   updateDraftSourceLink: (id, url) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK,

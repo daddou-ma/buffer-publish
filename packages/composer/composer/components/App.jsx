@@ -80,6 +80,7 @@ class App extends React.Component {
       hasIGDirectFlip: PropTypes.bool.isRequired,
       hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
       hasIGDirectVideoFlip: PropTypes.bool.isRequired,
+      hasRestoreComposerDataFlip: PropTypes.bool,
       isBusinessUser: PropTypes.bool.isRequired,
       shouldAlwaysSkipEmptyTextAlert: PropTypes.bool.isRequired,
       profileGroups: PropTypes.arrayOf(PropTypes.shape({
@@ -193,6 +194,7 @@ class App extends React.Component {
       canStartProTrial: false,
       isOnProTrial: false,
       hasIGDirectVideoFlip: false,
+      hasRestoreComposerDataFlip: false,
     },
     options: {
       onSave: () => {},

@@ -9,6 +9,7 @@ import Button from '../components/Button';
 import styles from './css/ProfileSection.css';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import AppInitActionCreators from '../action-creators/AppInitActionCreators';
+import { enabledDraftStorageName, selectedProfileStorageName } from '../utils/StringUtils';
 
 class ProfileSection extends React.Component {
   static propTypes = {
@@ -28,8 +29,8 @@ class ProfileSection extends React.Component {
   onProfilesToggleClick = () => AppActionCreators.toggleAllProfiles();
   clearDraftFromLocalStorage = () => {
     AppInitActionCreators.softResetData();
-    localStorage.removeItem('np-selected-profiles');
-    localStorage.removeItem('np-enabled-drafts');
+    localStorage.removeItem(selectedProfileStorageName);
+    localStorage.removeItem(enabledDraftStorageName);
   };
 
   addContainerScrollHandler = (handler) => {

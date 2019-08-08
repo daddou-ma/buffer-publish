@@ -5,8 +5,12 @@ import { SaveButtonTypes, ButtonsQueuingTypesMap } from '../AppConstants';
 import Dropdown, { DropdownTrigger, DropdownContent } from '../components/Dropdown';
 import DateTimeSlotPicker from '../components/DateTimeSlotPicker';
 import Button from '../components/Button';
+import { enabledDraftStorageName, selectedProfileStorageName } from '../utils/StringUtils';
 
 import styles from './css/UpdateSaver.css';
+
+const NP_ENABLED_DRAFTS = enabledDraftStorageName;
+const NP_SELECTED_PROFILES = selectedProfileStorageName;
 
 class UpdateSaverItem extends React.Component {
   static propTypes = {
@@ -78,8 +82,8 @@ class UpdateSaverItem extends React.Component {
   };
 
   clearDraftFromLocalStorage = () => {
-    localStorage.removeItem('np-selected-profiles');
-    localStorage.removeItem('np-enabled-drafts');
+    localStorage.removeItem(NP_SELECTED_PROFILES);
+    localStorage.removeItem(NP_ENABLED_DRAFTS);
   }
 
   render() {

@@ -10,6 +10,7 @@ import ProductRolloutTooltip from '../components/ProductRolloutTooltip';
 import NotificationContainer from '../components/NotificationContainer';
 import styles from './css/ComposerSection.css';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
+import { selectedProfileStorageName } from '../utils/StringUtils';
 
 const getComposerState = () => ({
   enabledDrafts: ComposerStore.getEnabledDrafts(),
@@ -110,8 +111,10 @@ class ComposerSection extends React.Component {
 
     const { editMode, sentPost } = AppStore.getOptions();
     const { hasRestoreComposerDataFlip } = AppStore.getUserData();
-    const selectedProfiles = JSON.parse(localStorage.getItem('np-selected-profiles'));
-    if (hasRestoreComposerDataFlip && (!sentPost && editMode === false)) {
+    const selectedProfiles = JSON.parse(localStorage.getItem(selectedProfileStorageName));
+    const shouldLoadFromStorage = hasRestoreComposerDataFlip && (!sentPost && editMode === false);
+
+    if (shouldLoadFromStorage) {
       if (selectedProfiles && selectedProfiles.profiles) {
         AppActionCreators.selectProfiles(selectedProfiles.profiles.map(profile => profile.id),
           false, false);

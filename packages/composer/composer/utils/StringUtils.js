@@ -70,6 +70,11 @@ const getBaseUrl = () => (
   (window.location.hostname === 'publish.local.buffer.com') ? 'https://local.buffer.com' : 'https://buffer.com'
 );
 
+const isLocalEnvironment = () => (window.location.hostname === 'publish.local.buffer.com');
+
+const enabledDraftStorageName = isLocalEnvironment() ? 'np-local-enabled-drafts' : 'np-enabled-drafts';
+const selectedProfileStorageName = isLocalEnvironment() ? 'np-local-selected-profiles' : 'np-selected-profiles';
+
 const removeLinkFromErrorMessageText = (text, linkClass) => {
   const rx = new RegExp(`<a class="${linkClass}".*?<\/a>`)
   return text.replace(rx, '');
@@ -79,4 +84,5 @@ export {
   getHumanReadableSize, getHumanReadableTime, getFileTypeFromPath, escapeParens,
   getAbsoluteUrl, generateUniqueId, getUnicodeAwareLength, makeUnicodeAwareIndexUnaware,
   getDomainFromUrl, removeLinkFromErrorMessageText, getBaseUrl,
+  enabledDraftStorageName, selectedProfileStorageName,
 };

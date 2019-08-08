@@ -8,6 +8,7 @@ import NotificationActionCreators from '../action-creators/NotificationActionCre
 import { getFileTypeFromPath } from '../utils/StringUtils';
 import { getStillDataUriFromGif } from '../utils/DOMUtils';
 import AppStore from '../stores/AppStore';
+import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import { observeStore } from '../utils/StoreUtils';
 import WebAPIUtils from '../utils/WebAPIUtils';
 
@@ -86,6 +87,13 @@ const loadInitialProfilesData = (profilesData, options) => {
 };
 
 const loadInitialUserData = (userData) => {
+  const { editMode, sentPost } = AppStore.getOptions();
+  const shouldLoadFromStorage = userData.hasRestoreComposerDataFlip &&
+    (!sentPost && editMode === false);
+  if (shouldLoadFromStorage) {
+    ComposerActionCreators.setDraftsLoadedFromStorage(true);
+  }
+
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.APP_RECEIVE_USER_DATA,
     userData,

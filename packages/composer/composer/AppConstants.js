@@ -394,6 +394,7 @@ const ActionTypes = keyMirror({
   COMPOSER_GET_DRAFT_FROM_STORAGE: null,
   COMPOSER_SAVE_DRAFT_TO_STORAGE: null,
   COMPOSER_SAVE_DRAFTS_TO_STORAGE: null,
+  DRAFT_LOADED_FROM_STORAGE: null,
 });
 
 const AsyncOperationStates = keyMirror({
