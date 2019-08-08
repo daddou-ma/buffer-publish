@@ -435,11 +435,12 @@ const saveToLocalStorage = (id) => {
     isOmniboxEnabled,
   };
 
-  const shouldSaveDraftToStorage = hasDraftChanged(id) && (!sentPost && editMode === false);
+  const shouldSaveDraftToStorage = hasDraftChanged(id);
   const shouldSaveProfileToStorage = profilesChanged(selectedProfiles);
+  const isDraftValidToSave = (!sentPost && editMode === false);
   const meta = ComposerStore.getMeta();
 
-  if (shouldSaveDraftToStorage || shouldSaveProfileToStorage) {
+  if (isDraftValidToSave && (shouldSaveDraftToStorage || shouldSaveProfileToStorage)) {
     saveDraftLocally(enabledDrafts);
     saveProfilesLocally(selectedProfiles);
   }
