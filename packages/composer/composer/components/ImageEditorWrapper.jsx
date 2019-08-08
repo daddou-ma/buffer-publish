@@ -18,64 +18,50 @@ class ImageEditorWrapper extends React.Component {
     this.editorRef = React.createRef();
   }
 
-  // componentDidMount() {
-  //   const rootElement = this.editorRef.current.getRootElement();
+  componentDidMount() {
+    const rootElement = this.editorRef.current.getInstance();
+    console.debug(rootElement);
 
-  //   rootElement.loadImageFromURL = (function () {
-  //     const cachedFunction = rootElement.loadImageFromURL;
-  //     function waitUntilImageEditorIsUnlocked(imageEditor) {
-  //       return new Promise((resolve, reject) => {
-  //         const interval = setInterval(() => {
-  //           if (!imageEditor._invoker._isLocked) {
-  //             clearInterval(interval);
-  //             resolve();
-  //           }
-  //         }, 100);
-  //       });
-  //     }
-  //     return function () {
-  //       return waitUntilImageEditorIsUnlocked(rootElement).then(() => cachedFunction.apply(this));
-  //     };
-  //   }());
+    rootElement.loadImageFromURL = (function () {
+      const cachedFunction = rootElement.loadImageFromURL;
+      function waitUntilImageEditorIsUnlocked(imageEditor) {
+        return new Promise((resolve, reject) => {
+          const interval = setInterval(() => {
+            if (!imageEditor._invoker._isLocked) {
+              clearInterval(interval);
+              resolve();
+            }
+          }, 100);
+        });
+      }
+      return function () {
+        return waitUntilImageEditorIsUnlocked(rootElement).then(() => cachedFunction.apply(this, arguments));
+      };
+    }());
 
-  //   // Load an image and tell our tui imageEditor instance the new and the old image size:
-  //   rootElement.loadImageFromURL(this.src, 'SampleImage').then((result) => {
-  //     rootElement.ui.resizeEditor({
-  //       imageSize: {
-  //         oldWidth: result.oldWidth,
-  //         oldHeight: result.oldHeight,
-  //         newWidth: result.newWidth,
-  //         newHeight: result.newHeight,
-  //       },
-  //     });
-  //   }).catch((err) => {
-  //     console.error('Something went wrong:', err);
-  //   });
+    // It works with a sample image like:
+    // https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/526px-Wikipedia-logo-v2.svg.png
+    // Load an image and tell our tui imageEditor instance the new and the old image size:
+    rootElement.loadImageFromURL(this.props.src, 'SampleImage').then((result) => {
+      console.log('old : ' + result.oldWidth + ', ' + result.oldHeight);
+      console.log('new : ' + result.newWidth + ', ' + result.newHeight);
+      rootElement.ui.resizeEditor({
+        imageSize: {
+          oldWidth: result.oldWidth,
+          oldHeight: result.oldHeight,
+          newWidth: result.newWidth,
+          newHeight: result.newHeight,
+        },
+      });
+    }).catch((err) => {
+      console.debug(err);
+      console.error('Something went wrong:', err);
+    });
 
-  //   window.addEventListener('resize', () => {
-  //     rootElement.ui.resizeEditor();
-  //   });
-  // }
-
-
-
-
-  // imageEditor.loadImageFromURL = (function () {
-  //   var cached_function = imageEditor.loadImageFromURL;
-  //   function waitUntilImageEditorIsUnlocked(imageEditor) {
-  //     return new Promise((resolve, reject) => {
-  //       const interval = setInterval(() => {
-  //         if (!imageEditor._invoker._isLocked) {
-  //           clearInterval(interval);
-  //           resolve();
-  //         }
-  //       }, 100);
-  //     })
-  //   }
-  //   return function () {
-  //     return waitUntilImageEditorIsUnlocked(imageEditor).then(() => cached_function.apply(this, arguments));
-  //   };
-  // })();
+    window.addEventListener('resize', () => {
+      rootElement.ui.resizeEditor();
+    });
+  }
 
   render() {
     const { src, height, width } = this.props;
