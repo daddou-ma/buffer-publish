@@ -7,7 +7,7 @@ import Modal from '../Modal';
 const CloseAccount = ({ showModal, onRequestOpenModal, onRequestCloseModal, onSubmit }) => (
   <Row>
     <div>
-      <Text type="h3">Delete your Buffer account</Text>
+      <Text type="h3">Request to delete my Buffer account</Text>
       <Text type="p">If you delete your account, you will lose all your posts.</Text>
     </div>
     <Button
