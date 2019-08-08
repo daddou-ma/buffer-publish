@@ -53,7 +53,7 @@ const Modal = ({ handleSubmit, submitting, error, onRequestCloseModal }) => (
           }}
         >
           <Text type="h2">
-           You are about to delete your Buffer account
+           Request to Delete my Account
           </Text>
           <form>
             <div style={inputStyle}>
@@ -69,8 +69,7 @@ const Modal = ({ handleSubmit, submitting, error, onRequestCloseModal }) => (
             </div>
             <div style={boxStyle}>
               <Text>
-                Please keep in mind that <strong>deleting your Buffer account is permanent </strong>
-                and will remove all of your stored tweets, posts, analytics and accounts forever.
+                We will process your request to delete your account and all associated Personally Identifiable Information (PII) within the next 30 days. Deleting your Buffer account is permanent and will remove all of your stored tweets, posts, analytics and accounts forever. Once you submit this request we will immediately begin working on permanently deleting your account.
               </Text>
             </div>
             {error ? SubmitError({ error }) : null }
@@ -99,7 +98,7 @@ const Modal = ({ handleSubmit, submitting, error, onRequestCloseModal }) => (
                 type="secondary"
                 onClick={() => { handleSubmit(); }}
                 disabled={submitting}
-                label="Delete Your Account"
+                label="Got it! Delete My Account"
               />
             </div>
           </form>
