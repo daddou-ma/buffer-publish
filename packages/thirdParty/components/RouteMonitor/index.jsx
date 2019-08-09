@@ -14,6 +14,10 @@ function RouteMonitor({ pathname, appCues, intercom, helpScoutBeacon }) {
       if (profilePageParams && profilePageParams.tabId === 'analytics') {
         window.Appcues.track('Viewed Analytics Tab');
       }
+
+      if (profilePageParams && profilePageParams.tabId === 'grid') {
+        window.Appcues.track('Viewed Shop Grid Tab');
+      }
     }
 
     // Let Intercom know when we've changed pages
