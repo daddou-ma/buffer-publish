@@ -13,6 +13,7 @@ import {
 import {
   curiousBlue,
   geyser,
+  torchRed,
 } from '@bufferapp/components/style/color';
 
 import {
@@ -24,14 +25,19 @@ const formLabelStyle = {
   padding: '0 0 0.25rem 0',
 };
 
-const getInputStyle = (focused, backgroundStyle) => ({
+const getBorderColor = (focused, hasError) => {
+  if (focused) return curiousBlue;
+  if (hasError) return torchRed;
+
+  return geyser;
+};
+
+const getInputStyle = (focused, hasError, backgroundStyle) => ({
   fontFamily,
   fontSize,
   padding: '0.5rem',
   borderRadius,
-  border: focused
-    ? `1px solid ${curiousBlue}`
-    : `1px solid ${geyser}`,
+  border: `1px solid ${getBorderColor(focused, hasError)}`,
   width: '100%',
   boxSizing: 'border-box',
   outline: 0,
@@ -48,15 +54,27 @@ class InputText extends React.Component {
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
   }
+
   onFocus() {
     this.setState({ focused: true });
   }
+
   onBlur() {
     this.setState({ focused: false });
   }
+
   render() {
-    const { id, label, autoComplete, note, backgroundStyle, store } = this.props;
     const { focused } = this.state;
+    const {
+      id,
+      label,
+      autoComplete,
+      note,
+      backgroundStyle,
+      store,
+      hasError,
+    } = this.props;
+
     return (
       <div>
         <label htmlFor={id} style={formLabelStyle}>
@@ -65,7 +83,7 @@ class InputText extends React.Component {
         <input
           id={id}
           type="text"
-          style={getInputStyle(focused, backgroundStyle)}
+          style={getInputStyle(focused, hasError, backgroundStyle)}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           autoComplete={autoComplete}
@@ -84,12 +102,14 @@ InputText.propTypes = {
   note: PropTypes.string,
   backgroundStyle: PropTypes.string,
   store: PropTypes.func.isRequired,
+  hasError: PropTypes.bool,
 };
 
 InputText.defaultProps = {
   autoComplete: 'off',
   note: null,
   backgroundStyle: null,
+  hasError: false,
 };
 
 export default InputText;
