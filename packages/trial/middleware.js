@@ -25,6 +25,18 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       dispatch(dataFetchActions.fetch({ name: 'user' }));
       dispatch(dataFetchActions.fetch({ name: 'features' }));
+
+      if (action.source === 'ig_first_comment') {
+        const {
+          thirdparty: {
+            appCues: { loaded: appCuesLoaded },
+          },
+        } = getState();
+
+        if (appCuesLoaded && window && window.Appcues) {
+          window.Appcues.track('Started a trial via First Comment');
+        }
+      }
       break;
     }
 
