@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import {
-  Text,
-} from '@bufferapp/components';
+import styled from 'styled-components';
+import { Text } from '@bufferapp/ui';
 
 import {
   fontFamily,
@@ -13,21 +11,27 @@ import {
 import {
   curiousBlue,
   geyser,
-  torchRed,
+  darkRed,
 } from '@bufferapp/components/style/color';
 
 import {
   borderRadius,
 } from '@bufferapp/components/style/border';
 
+export const ExtraSmallText = styled(Text)`
+  font-size: 0.5rem;
+`;
+
 const formLabelStyle = {
   display: 'block',
   padding: '0 0 0.25rem 0',
 };
 
+const ERROR = 'Required field';
+
 const getBorderColor = (focused, hasError) => {
   if (focused) return curiousBlue;
-  if (hasError) return torchRed;
+  if (hasError) return darkRed;
 
   return geyser;
 };
@@ -78,7 +82,7 @@ class InputText extends React.Component {
     return (
       <div>
         <label htmlFor={id} style={formLabelStyle}>
-          <Text size="small">{label}</Text>
+          <Text type="label">{label}</Text>
         </label>
         <input
           id={id}
@@ -89,7 +93,8 @@ class InputText extends React.Component {
           autoComplete={autoComplete}
           onKeyUp={ev => store(id, ev.target.value.trim())}
         />
-        {note && <Text size="extra-small">{note}</Text>}
+        {note && <ExtraSmallText type="label">{note}</ExtraSmallText>}
+        {hasError && <div><Text hasError type="help">{ERROR}</Text></div>}
       </div>
     );
   }

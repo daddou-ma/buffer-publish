@@ -3,7 +3,7 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
-import { actions as stripeActions } from '@bufferapp/stripe';
+import { actions as stripeActions, actionTypes as stripeActionTypes } from '@bufferapp/stripe';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes as modalsActionTypes, actions as modalActions } from '@bufferapp/publish-modals';
 import { actionTypes } from './reducer';

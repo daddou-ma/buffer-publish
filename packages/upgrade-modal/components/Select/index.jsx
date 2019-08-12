@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {
   Text,
-} from '@bufferapp/components';
+} from '@bufferapp/ui';
 
 import {
   fontFamily,
@@ -11,9 +11,8 @@ import {
 } from '@bufferapp/components/style/font';
 
 import {
-  curiousBlue,
   geyser,
-  torchRed,
+  darkRed,
 } from '@bufferapp/components/style/color';
 
 import {
@@ -27,10 +26,12 @@ const formLabelStyle = {
 };
 
 const getBorderColor = (hasError) => {
-  if (hasError) return torchRed;
+  if (hasError) return darkRed;
 
   return geyser;
 };
+
+const ERROR = 'Required field';
 
 const getSelectStyle = hasError => ({
   fontFamily,
@@ -52,7 +53,7 @@ const Select = ({
 }) => (
   <div>
     <label htmlFor={id} style={formLabelStyle}>
-      <Text size="small">{label}</Text>
+      <Text type="label">{label}</Text>
     </label>
     <select
       name={id}
@@ -62,6 +63,7 @@ const Select = ({
     >
       {children}
     </select>
+    {hasError && <Text hasError type="help">{ERROR}</Text>}
   </div>
 );
 

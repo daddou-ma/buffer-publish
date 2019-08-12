@@ -49,8 +49,43 @@ class UpgradeModal extends React.Component {
     this.state = {
       errors: {
         name: false,
+        number: false,
+        expMonth: false,
+        expYear: false,
+        cvc: false,
+        addressZip: false,
       },
     };
+
+    this.onSecondaryAction = this.onSecondaryAction.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+  }
+
+  onSecondaryAction() {
+    const {
+      hideModal,
+      cancelTrial,
+      clearCardInfo,
+      hasExpiredProTrial,
+    } = this.props;
+
+    clearCardInfo();
+    if (hasExpiredProTrial) {
+      cancelTrial();
+    } else {
+      hideModal();
+    }
+  }
+
+  submitForm() {
+    const {
+      card,
+      upgradePlan,
+    } = this.props;
+
+    if (this.isCardValid(card)) {
+      upgradePlan();
+    }
   }
 
   isCardValid(card) {
@@ -62,7 +97,7 @@ class UpgradeModal extends React.Component {
       cvc,
       addressZip,
     } = card;
-    console.log('storeValue ->', card, isEmptyCard(card));
+
     let nameHasError = false;
     let numberHasError = false;
     let expMonthHasError = false;
@@ -97,19 +132,8 @@ class UpgradeModal extends React.Component {
       },
     });
 
-    // check setting month and year last
-
-    return false;
-  }
-
-  submitForm({
-    card,
-    upgradePlan,
-  }) {
-    console.log('card ->', card);
-    if (this.isCardValid(card)) {
-      upgradePlan();
-    }
+    return !nameHasError && !numberHasError && !expMonthHasError
+           && !expYearHasError && !cvcHasError && !addressZipHasError;
   }
 
   render() {
@@ -121,11 +145,10 @@ class UpgradeModal extends React.Component {
       upgradePlan,
       storeValue,
       selectCycle,
-      hideModal,
       isNonprofit,
       hasExpiredProTrial,
-      cancelTrial,
       card,
+      dismissible,
     } = this.props;
 
     return (
@@ -139,9 +162,9 @@ class UpgradeModal extends React.Component {
         secondaryAction={{
           label: hasExpiredProTrial ? translations.proTrialistStayOnFreeCta
             : translations.stayOnFreeCta,
-          callback: hasExpiredProTrial ? cancelTrial : hideModal,
+          callback: this.onSecondaryAction,
         }}
-        dismissible={false}
+        dismissible={dismissible}
       >
         <div style={{ overflow: 'auto', height: 'auto' }}>
           <div style={{ width: '600px', padding: '0px 20px 25px' }}>
@@ -286,12 +309,15 @@ UpgradeModal.propTypes = {
   selectCycle: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
   cancelTrial: PropTypes.func.isRequired,
+  clearCardInfo: PropTypes.func.isRequired,
   isNonprofit: PropTypes.bool.isRequired,
   hasExpiredProTrial: PropTypes.bool,
+  dismissible: PropTypes.bool,
 };
 
 UpgradeModal.defaultProps = {
   hasExpiredProTrial: false,
+  dismissible: false,
   card: {},
 };
 

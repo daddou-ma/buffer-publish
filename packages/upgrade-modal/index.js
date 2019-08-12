@@ -8,6 +8,7 @@ export default connect(
   state => ({
     cycle: state.upgradeModal.cycle,
     card: state.upgradeModal.card,
+    dismissible: state.upgradeModal.dismissible,
     translations: state.i18n.translations['upgrade-modal'],
     validating: state.stripe.validating,
     isNonprofit: state.appSidebar.user.isNonprofit,
@@ -19,6 +20,7 @@ export default connect(
     selectCycle: cycle => dispatch(actions.selectCycle(cycle)),
     hideModal: () => dispatch(modalsActions.hideUpgradeModal()),
     cancelTrial: () => dispatch(actions.cancelTrial()),
+    clearCardInfo: () => dispatch(actions.clearCardInfo()),
   }),
 )(UpgradeModal);
 
