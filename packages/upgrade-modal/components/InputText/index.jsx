@@ -11,7 +11,6 @@ import {
 import {
   curiousBlue,
   geyser,
-  darkRed,
 } from '@bufferapp/components/style/color';
 
 import {
@@ -27,6 +26,7 @@ const formLabelStyle = {
   padding: '0 0 0.25rem 0',
 };
 
+const darkRed = '#9D2637';
 const ERROR = 'Required field';
 
 const getBorderColor = (focused, hasError) => {

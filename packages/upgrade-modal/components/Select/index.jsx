@@ -12,7 +12,6 @@ import {
 
 import {
   geyser,
-  darkRed,
 } from '@bufferapp/components/style/color';
 
 import {
@@ -25,13 +24,14 @@ const formLabelStyle = {
   padding: '0 0 0.25rem 0',
 };
 
+const ERROR = 'Required field';
+const darkRed = '#9D2637';
+
 const getBorderColor = (hasError) => {
   if (hasError) return darkRed;
 
   return geyser;
 };
-
-const ERROR = 'Required field';
 
 const getSelectStyle = hasError => ({
   fontFamily,
