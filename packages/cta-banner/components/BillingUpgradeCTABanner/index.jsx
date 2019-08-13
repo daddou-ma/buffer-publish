@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-
+import { Button } from '@bufferapp/ui';
 import { Text } from '@bufferapp/components';
 import { TranslationReplacer } from '@bufferapp/publish-i18n';
 import FeatureLoader from '@bufferapp/product-features';
@@ -8,48 +8,16 @@ import FeatureLoader from '@bufferapp/product-features';
 const textColor = 'white';
 
 const styling = {
-  backgroundColor: '#1F35B3',
+  backgroundColor: '#121E66',
   color: textColor,
   padding: '5px',
-  textAlign: 'center',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 };
 
-const buttonStyle = {
-  color: textColor,
-  cursor: 'pointer',
-  display: 'inline-block',
-  margin: '0 0 0 1rem',
-  padding: '0.5rem',
-  backgroundColor: '#121E66',
-  border: '1px solid #121E66',
-  borderRadius: '4px',
-  outline: 'none',
-};
-
-// TODO: Replace this with new UI component buttons
-const CTAButton = ({
-  style,
-  label,
-  text,
-  onClick,
-}) => (
-  <button
-    style={style}
-    aria-label={label}
-    onClick={onClick}
-    type="button"
-  >
-    <Text color={textColor} size="mini">
-      {text}
-    </Text>
-  </button>
-);
-
-CTAButton.propTypes = {
-  style: PropTypes.object.isRequired, // eslint-disable-line
-  label: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+const textStyle = {
+  marginRight: '10px',
 };
 
 const BillingUpgradeCTABanner = ({
@@ -70,29 +38,6 @@ const BillingUpgradeCTABanner = ({
     </Text>
   );
 
-  if (!trial.hasCardDetails) {
-    const planTrial = [
-      { replaceString: '{plan}', replaceWith: currentPlan({ color: textColor, weight: 'bold', size: 'mini' }) },
-    ];
-    return (
-      <div style={styling}>
-        <Text weight="bold" color={textColor} size="mini">
-          <TranslationReplacer
-            translation={translations.planTrial}
-            replacementStrings={planTrial}
-          />
-        </Text>
-        <Text color={textColor} size="mini">{translations.completeBilling}</Text>
-        <CTAButton
-          style={buttonStyle}
-          label={translations.startSubscription}
-          text={translations.startSubscription}
-          onClick={() => onClickStartSubscription()}
-        />
-      </div>
-    );
-  }
-
   const timeRemaining = <Text weight="bold" color={textColor} size="mini">{trial.trialTimeRemaining} remaining</Text>;
   const postTrialCost = <Text weight="bold" color={textColor} size="mini">{trial.postTrialCost}</Text>;
 
@@ -105,25 +50,51 @@ const BillingUpgradeCTABanner = ({
     { replaceString: '{billedAmount}', replaceWith: postTrialCost },
   ];
 
+  let BannerText;
+  if (!trial.hasCardDetails) {
+    const planTrial = [
+      { replaceString: '{plan}', replaceWith: currentPlan({ color: textColor, weight: 'bold', size: 'mini' }) },
+    ];
+    BannerText = (
+      <Fragment>
+        <Text weight="bold" color={textColor} size="mini">
+          <TranslationReplacer
+            translation={translations.planTrial}
+            replacementStrings={planTrial}
+          />
+        </Text>
+        <Text color={textColor} size="mini">{translations.completeBilling}</Text>
+      </Fragment>
+    );
+  } else {
+    BannerText = (
+      <Fragment>
+        <Text color={textColor} size="mini">
+          <TranslationReplacer
+            translation={translations.remainingTrial}
+            replacementStrings={trialRemaining}
+          />
+        </Text>
+        <Text color={textColor} size="mini">
+          <TranslationReplacer
+            translation={translations.billedTrialEnd}
+            replacementStrings={billedAmountEnd}
+          />
+        </Text>
+      </Fragment>
+    );
+  }
+
   return (
     <div style={styling}>
-      <Text color={textColor} size="mini">
-        <TranslationReplacer
-          translation={translations.remainingTrial}
-          replacementStrings={trialRemaining}
-        />
-      </Text>
-      <Text color={textColor} size="mini">
-        <TranslationReplacer
-          translation={translations.billedTrialEnd}
-          replacementStrings={billedAmountEnd}
-        />
-      </Text>
-      <CTAButton
-        style={buttonStyle}
-        label={translations.startSubscription}
-        text={translations.startSubscription}
+      <div style={textStyle}>
+        {BannerText}
+      </div>
+      <Button
+        type="primary"
+        size="small"
         onClick={() => onClickStartSubscription()}
+        label={translations.startSubscription}
       />
     </div>
   );

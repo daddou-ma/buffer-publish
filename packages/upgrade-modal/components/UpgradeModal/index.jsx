@@ -154,8 +154,7 @@ class UpgradeModal extends React.Component {
           callback: () => this.submitForm({ card, upgradePlan }),
         }}
         secondaryAction={{
-          label: hasExpiredProTrial ? translations.proTrialistStayOnFreeCta
-            : translations.stayOnFreeCta,
+          label: translations.close,
           callback: this.onSecondaryAction,
         }}
         dismissible={dismissible}
@@ -169,37 +168,28 @@ class UpgradeModal extends React.Component {
                   : translations.proUpgradeHeader }
               </Text>
             </div>
-            <div>
-              {hasExpiredProTrial && (
-                <div style={{ textAlign: 'center' }}>
-                  <Text>{translations.proTrialistSubCopy}</Text>
-                </div>
-              )}
-              {!hasExpiredProTrial && (
-                <div style={{ display: 'flex' }}>
-                  <div style={{ flex: '1' }}>
-                    <Text type="h3">{translations.freePlan}</Text>
-                    <ul style={listStyleLeft}>
-                      <ListItem text={translations.freeConnect} />
-                      <ListItem text={translations.freeSchedule} />
-                      <ListItem text={translations.freePostHistory} />
-                    </ul>
-                  </div>
-                  <div style={{ flex: '1' }}>
-                    <Text type="h3">
-                      {translations.proPlan}
-                      <span role="img" aria-label="pro">  ✅</span>
-                    </Text>
-                    <ul style={listStyle}>
-                      <ListItem text={translations.proConnect} />
-                      <ListItem text={translations.proSchedule} />
-                      <ListItem text={translations.proIGFirstComment} />
-                      <ListItem text={translations.proCalendarView} />
-                      <ListItem text={translations.proReviewHistory} />
-                    </ul>
-                  </div>
-                </div>
-              )}
+            <div style={{ display: 'flex' }}>
+              <div style={{ flex: '1' }}>
+                <Text type="h3">{translations.freePlan}</Text>
+                <ul style={listStyleLeft}>
+                  <ListItem text={translations.freeConnect} />
+                  <ListItem text={translations.freeSchedule} />
+                  <ListItem text={translations.freePostHistory} />
+                </ul>
+              </div>
+              <div style={{ flex: '1' }}>
+                <Text type="h3">
+                  {translations.proPlan}
+                  <span role="img" aria-label="pro">  ✅</span>
+                </Text>
+                <ul style={listStyle}>
+                  <ListItem text={translations.proConnect} />
+                  <ListItem text={translations.proSchedule} />
+                  <ListItem text={translations.proIGFirstComment} />
+                  <ListItem text={translations.proCalendarView} />
+                  <ListItem text={translations.proReviewHistory} />
+                </ul>
+              </div>
             </div>
 
             <Divider marginTop="" marginBottom="1.5rem" />
