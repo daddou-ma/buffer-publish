@@ -27,7 +27,7 @@ import {
   Footer,
 } from './style';
 
-const OnboardingPage = ({ onConnectSocialAccountClick, translations }) => (
+const OnboardingPage = ({ onConnectSocialAccountClick, translations, onSkipStep }) => (
   <Wrapper>
     <LeftColumn>
       <LogoWrapper>
@@ -59,7 +59,7 @@ const OnboardingPage = ({ onConnectSocialAccountClick, translations }) => (
           </TextWithStyles>
           <ButtonWithStyles
             type="text"
-            onClick={() => {}}
+            onClick={onSkipStep}
             label={translations.skipStep}
           />
           <ProgressBarWrapper>
@@ -87,6 +87,7 @@ const OnboardingPage = ({ onConnectSocialAccountClick, translations }) => (
 
 OnboardingPage.propTypes = {
   onConnectSocialAccountClick: PropTypes.func.isRequired,
+  onSkipStep: PropTypes.func.isRequired,
   translations: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,

@@ -14,7 +14,7 @@ import EnsurePublishBetaUser from '@bufferapp/publish-beta-redirect';
 import AppModals from '@bufferapp/publish-modals';
 import InitialLoading from '@bufferapp/publish-initial-loading';
 import DefaultPage from '@bufferapp/default-page';
-import DisabledQueue from '@bufferapp/publish-disabled-queue';
+import OnboardingManager from '@bufferapp/publish-onboarding';
 import CTABanner from '@bufferapp/publish-cta-banner';
 import TemporaryBanner from '@bufferapp/publish-temporary-banner';
 import ThirdParty from '@bufferapp/publish-thirdparty';
@@ -65,7 +65,7 @@ class App extends Component { // eslint-disable-line
                 />
                 <Route
                   path="/new-connection-business-trialists"
-                  component={DisabledQueue}
+                  component={OnboardingManager}
                 />
                 <Route
                   component={InitialLoading}
