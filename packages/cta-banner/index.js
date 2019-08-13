@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actions } from './reducer'
+import { actions } from './reducer';
 
 import BillingUpdateCTABanner from './components/BillingUpgradeCTABanner';
 
@@ -9,12 +9,9 @@ export default connect(
     translations: state.i18n.translations['billing-upgrade-cta-banner'],
     profileCount: state.ctaBanner.profileCount,
   }),
-  (dispatch) => ({
-    onClickManageBilling: () => {
-      dispatch(actions.handleManageBillingClick());
-    },
-    onClickAddBilling: () => {
-      dispatch(actions.handleAddBillingClick());
+  dispatch => ({
+    onClickStartSubscription: () => {
+      dispatch(actions.handleStartSubscription());
     },
   }),
 )(BillingUpdateCTABanner);
