@@ -24,21 +24,29 @@ class WelcomePaidModal extends React.Component {
 
   render() {
     const { translations, hideModal } = this.props;
+
+    const { step } = this.state;
     return (
-      <div style={{ position: 'fixed', zIndex: '3000', borderRadius: '4px', boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)' }}>
+      <div style={{
+        position: 'fixed',
+        zIndex: '3000',
+        borderRadius: '4px',
+        boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)',
+      }}
+      >
         <Popover>
-          { this.state.step === 1 &&
+          { step === 1 && (
           <div className={styles.card}>
-            <div className={styles.mainDivBackground} >
+            <div className={styles.mainDivBackground}>
               <div style={{ padding: '32px 24px' }}>
                 <Text size="large" weight="medium" color="white">{translations.headline1}</Text>
                 <div color="white" style={{ margin: '8px 0 24px' }}>
-                  <Text color={'white'}>{translations.body1}<b>{translations.body2}</b></Text>
+                  <Text color="white">{translations.body1}<b>{translations.body2}</b></Text>
                 </div>
               </div>
             </div>
             <div className={styles.barBottomStyle}>
-              <DotsNavigation step={this.state.step} onClickCallback={this.onClickStep} />
+              <DotsNavigation step={step} onClickCallback={this.onClickStep} />
               <div className={styles.divButton}>
                 <Button
                   type="primary"
@@ -48,13 +56,13 @@ class WelcomePaidModal extends React.Component {
               </div>
             </div>
           </div>
-          }
+          )}
 
-          {this.state.step === 2 &&
+          {step === 2 && (
             <div className={styles.card}>
               <div className={styles.mainDiv2} >
                 <div style={{ paddingLeft: '25px', paddingTop: '25px' }}>
-                  <Text color={'black'} size="large" weight="medium">{translations.headline2}</Text>
+                  <Text color="black" size="large" weight="medium">{translations.headline2}</Text>
                   <div style={{ lineHeight: '2.5' }}>
                     <Text>{translations.body3}</Text>
                   </div>
@@ -67,7 +75,7 @@ class WelcomePaidModal extends React.Component {
                 />
               </div>
               <div className={styles.barBottomStyle}>
-                <DotsNavigation step={this.state.step} onClickCallback={this.onClickStep} />
+                <DotsNavigation step={step} onClickCallback={this.onClickStep} />
                 <div className={styles.divButton}>
                   <Button
                     type="primary"
@@ -77,7 +85,7 @@ class WelcomePaidModal extends React.Component {
                 </div>
               </div>
             </div>
-          }
+          )}
         </Popover>
       </div>
     );
