@@ -53,7 +53,6 @@ class UpgradeModal extends React.Component {
         expMonth: false,
         expYear: false,
         cvc: false,
-        addressZip: false,
       },
     };
 
@@ -95,7 +94,6 @@ class UpgradeModal extends React.Component {
       expMonth,
       expYear,
       cvc,
-      addressZip,
     } = card;
 
     let nameHasError = false;
@@ -103,7 +101,6 @@ class UpgradeModal extends React.Component {
     let expMonthHasError = false;
     let expYearHasError = false;
     let cvcHasError = false;
-    let addressZipHasError = false;
 
     if (isEmptyCard(card)) {
       nameHasError = true;
@@ -111,7 +108,6 @@ class UpgradeModal extends React.Component {
       expMonthHasError = true;
       expYearHasError = true;
       cvcHasError = true;
-      addressZipHasError = true;
     }
 
     if (!name || name === '') nameHasError = true;
@@ -119,7 +115,6 @@ class UpgradeModal extends React.Component {
     if (!expMonth || expMonth === '') expMonthHasError = true;
     if (!expYear || expYear === '') expYearHasError = true;
     if (!cvc || cvc === '') cvcHasError = true;
-    if (!addressZip || addressZip === '') addressZipHasError = true;
 
     this.setState({
       errors: {
@@ -128,12 +123,11 @@ class UpgradeModal extends React.Component {
         expMonth: expMonthHasError,
         expYear: expYearHasError,
         cvc: cvcHasError,
-        addressZip: addressZipHasError,
       },
     });
 
     return !nameHasError && !numberHasError && !expMonthHasError
-           && !expYearHasError && !cvcHasError && !addressZipHasError;
+           && !expYearHasError && !cvcHasError;
   }
 
   render() {
@@ -281,7 +275,6 @@ class UpgradeModal extends React.Component {
                   label={translations.zipCode}
                   note={translations.zipLeaveBlank}
                   store={storeValue}
-                  hasError={errors.addressZip}
                 />
               </div>
             </div>
