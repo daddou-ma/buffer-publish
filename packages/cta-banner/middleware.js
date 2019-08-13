@@ -5,8 +5,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
   next(action);
 
   switch (action.type) {
-    case actionTypes.MANAGE_BILLING:
-    case actionTypes.ADD_BILLING:
+    case actionTypes.START_SUBSCRIPTION:
       dispatch(modalsActions.showUpgradeModal({ source: 'cta_banner_upgrade' }));
       break;
     default:

@@ -36,10 +36,9 @@
   "billing-upgrade-cta-banner": {
     "remainingTrial": "You have {remaining} on your {plan} plan trial. ",
     "billedTrialEnd": "You'll be billed {billedAmount} at the end of your trial. ",
-    "completeBilling": "Complete your billing details to make the transition smooth. ",
+    "completeBilling": "Add your billing details now to start your subscription. ",
     "planTrial": "You're on the {plan} trial. ",
-    "addBilling": "Add Billing Details",
-    "manageBilling": "Manage Billing"
+    "startSubscription": "Start Subscription"
   },
   "upgrade-modal": {
     "proUpgradeHeader": "Upgrade to the Pro Plan!",

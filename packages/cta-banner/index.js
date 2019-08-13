@@ -10,11 +10,8 @@ export default connect(
     profileCount: state.ctaBanner.profileCount,
   }),
   dispatch => ({
-    onClickManageBilling: () => {
-      dispatch(actions.handleManageBillingClick());
-    },
-    onClickAddBilling: () => {
-      dispatch(actions.handleAddBillingClick());
+    onClickStartSubscription: () => {
+      dispatch(actions.handleStartSubscription());
     },
   }),
 )(BillingUpdateCTABanner);

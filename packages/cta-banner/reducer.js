@@ -3,8 +3,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('CTA_BANNER', {
-  MANAGE_BILLING: 0,
-  ADD_BILLING: 0,
+  START_SUBSCRIPTION: 0,
 });
 
 export const initialState = {
@@ -24,10 +23,7 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  handleManageBillingClick: () => ({
-    type: actionTypes.MANAGE_BILLING,
-  }),
-  handleAddBillingClick: () => ({
-    type: actionTypes.ADD_BILLING,
+  handleStartSubscription: () => ({
+    type: actionTypes.START_SUBSCRIPTION,
   }),
 };

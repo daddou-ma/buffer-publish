@@ -55,8 +55,7 @@ CTAButton.propTypes = {
 const BillingUpgradeCTABanner = ({
   translations,
   trial,
-  onClickManageBilling,
-  onClickAddBilling,
+  onClickStartSubscription,
   profileCount,
 }) => {
   if (!trial || (trial && !trial.onTrial) || profileCount === 0) {
@@ -86,9 +85,9 @@ const BillingUpgradeCTABanner = ({
         <Text color={textColor} size="mini">{translations.completeBilling}</Text>
         <CTAButton
           style={buttonStyle}
-          label={translations.addBilling}
-          text={translations.addBilling}
-          onClick={() => onClickManageBilling()}
+          label={translations.startSubscription}
+          text={translations.startSubscription}
+          onClick={() => onClickStartSubscription()}
         />
       </div>
     );
@@ -122,9 +121,9 @@ const BillingUpgradeCTABanner = ({
       </Text>
       <CTAButton
         style={buttonStyle}
-        label={translations.manageBilling}
-        text={translations.manageBilling}
-        onClick={() => onClickAddBilling()}
+        label={translations.startSubscription}
+        text={translations.startSubscription}
+        onClick={() => onClickStartSubscription()}
       />
     </div>
   );
@@ -136,8 +135,7 @@ BillingUpgradeCTABanner.propTypes = {
     billedTrialEnd: PropTypes.string,
     completeBilling: PropTypes.string,
     planTrial: PropTypes.string,
-    addBilling: PropTypes.string,
-    manageBilling: PropTypes.string,
+    startSubscription: PropTypes.string,
   }).isRequired, // eslint-disable-line
   trial: PropTypes.shape({
     hasCardDetails: PropTypes.bool,
@@ -147,8 +145,7 @@ BillingUpgradeCTABanner.propTypes = {
     trialLength: PropTypes.number,
     trialTimeRemaining: PropTypes.string,
   }),
-  onClickManageBilling: PropTypes.func.isRequired,
-  onClickAddBilling: PropTypes.func.isRequired,
+  onClickStartSubscription: PropTypes.func.isRequired,
   profileCount: PropTypes.number,
 };
 
