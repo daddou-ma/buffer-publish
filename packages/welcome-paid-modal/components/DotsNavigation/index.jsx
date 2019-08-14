@@ -3,28 +3,39 @@ import PropTypes from 'prop-types';
 
 import styles from './dotsNavigation.css';
 
-const DotsNavigation = ({ step, onClickCallback }) => (
+const createSteps = (currentStep, nSteps, onClickCallback) => {
+  let ul = [];
+
+  for (let i = 1; i <= nSteps; i += 1) {
+    ul.push(
+      <li className={styles.dotstyleLi} key={i}>
+        <a
+          key={i}
+          className={currentStep === i ? styles.dotstyleLiCurrentA : styles.dotstyleA}
+          href="#"
+          onClick={() => onClickCallback(i)}
+        >
+          Step {i}
+        </a>
+      </li>,
+    );
+  }
+  return ul;
+};
+
+
+const DotsNavigation = ({ currentStep, onClickCallback, nSteps }) => (
   <div className={styles.divDotStyle}>
     <ul className={styles.dotstyleUl}>
-      <li className={styles.dotstyleLi}>
-        <a className={step === 1 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#" onClick={() => onClickCallback(1)}>Step 1</a>
-      </li>
-      <li className={styles.dotstyleLi}>
-        <a className={step === 2 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#" onClick={() => onClickCallback(2)}>Step 2</a>
-      </li>
-      <li className={styles.dotstyleLi}>
-        <a className={step === 3 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#" onClick={() => onClickCallback(3)}>Step 2</a>
-      </li>
-      <li className={styles.dotstyleLi}>
-        <a className={step === 4 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#" onClick={() => onClickCallback(4)}>Step 2</a>
-      </li>
+      {createSteps(currentStep, nSteps, onClickCallback) }
     </ul>
   </div>
 );
 
 DotsNavigation.propTypes = {
-  step: PropTypes.number.isRequired,
+  currentStep: PropTypes.number.isRequired,
   onClickCallback: PropTypes.func.isRequired,
+  nSteps: PropTypes.number.isRequired,
 };
 
 

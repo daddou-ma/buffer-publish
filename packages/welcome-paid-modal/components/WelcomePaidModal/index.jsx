@@ -7,11 +7,13 @@ import styles from './welcomePaidModal.css';
 import DotsNavigation from '../DotsNavigation';
 
 class WelcomePaidModal extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = { step: 1 };
     this.onClickContinue = this.onClickContinue.bind(this);
     this.onClickStep = this.onClickStep.bind(this);
+    this.N_STEPS = 4;
   }
 
   onClickContinue() {
@@ -50,7 +52,7 @@ class WelcomePaidModal extends React.Component {
               </div>
             </div>
             <div className={styles.barBottomStyle}>
-              <DotsNavigation step={step} onClickCallback={this.onClickStep} />
+              <DotsNavigation currentStep={step} onClickCallback={this.onClickStep} nSteps={this.N_STEPS} />
               <div className={styles.divButton}>
                 <Button
                   type="primary"
@@ -80,7 +82,7 @@ class WelcomePaidModal extends React.Component {
                 />
               </div>
               <div className={styles.barBottomStyle}>
-                <DotsNavigation step={step} onClickCallback={this.onClickStep} />
+                <DotsNavigation currentStep={step} onClickCallback={this.onClickStep} nSteps={this.N_STEPS} />
                 <div className={styles.divButton}>
                   <Button
                     type="primary"
@@ -110,7 +112,7 @@ class WelcomePaidModal extends React.Component {
                 />
               </div>
               <div className={styles.barBottomStyle}>
-                <DotsNavigation step={step} onClickCallback={this.onClickStep} />
+                <DotsNavigation currentStep={step} onClickCallback={this.onClickStep} nSteps={this.N_STEPS} />
                 <div className={styles.divButton}>
                   <Button
                     type="primary"
@@ -139,7 +141,7 @@ class WelcomePaidModal extends React.Component {
                 />
               </div>
               <div className={styles.barBottomStyle}>
-                <DotsNavigation step={step} onClickCallback={this.onClickStep} />
+                <DotsNavigation currentStep={step} onClickCallback={this.onClickStep} nSteps={this.N_STEPS} />
                 <div className={styles.divButton}>
                   <Button
                     type="primary"
