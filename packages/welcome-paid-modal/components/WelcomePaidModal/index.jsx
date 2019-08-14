@@ -64,10 +64,10 @@ class WelcomePaidModal extends React.Component {
 
           {step === 2 && (
             <div className={styles.card}>
-              <div className={styles.mainDiv2} >
-                <div style={{ paddingLeft: '25px', paddingTop: '25px' }}>
+              <div className={styles.mainDiv2}>
+                <div className={styles.divText}>
                   <Text color="black" size="large" weight="medium">{translations.step2.headline}</Text>
-                  <div>
+                  <div style={{ paddingTop: '5px' }}>
                     <Text>{translations.step2.body}</Text>
                   </div>
                 </div>
@@ -94,10 +94,10 @@ class WelcomePaidModal extends React.Component {
 
           {step === 3 && (
             <div className={styles.card}>
-              <div className={styles.mainDiv2} >
-                <div style={{ paddingLeft: '25px', paddingTop: '25px' }}>
+              <div className={styles.mainDiv2}>
+                <div className={styles.divText}>
                   <Text color="black" size="large" weight="medium">{translations.step3.headline}</Text>
-                  <div>
+                  <div style={{ paddingTop: '5px' }}>
                     <Text>{translations.step3.body}</Text>
                   </div>
                 </div>

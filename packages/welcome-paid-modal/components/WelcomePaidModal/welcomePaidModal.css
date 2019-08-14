@@ -44,3 +44,9 @@
   text-align: center;
   line-height: 0;
 }
+
+.divText {
+  padding-left: 25px;
+  padding-top: 25px;
+  margin-bottom: 10px;
+}
