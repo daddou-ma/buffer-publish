@@ -133,6 +133,7 @@ class UpgradeModal extends React.Component {
   render() {
     const { errors } = this.state;
     const {
+      plan,
       translations,
       cycle,
       validating,
@@ -195,6 +196,7 @@ class UpgradeModal extends React.Component {
             <Divider marginTop="" marginBottom="1.5rem" />
 
             <PlanCycleSelect
+              plan={plan}
               translations={translations}
               cycle={cycle}
               selectCycle={selectCycle}

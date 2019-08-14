@@ -19,9 +19,9 @@ const getCtaFromSource = source =>
   sourceCtaMap.get(source) || null;
 
 module.exports = method(
-  'upgradeToPro',
-  'upgrade user to the pro plan',
-  async ({ cycle, token, source }, { session }) => {
+  'upgradePlan',
+  'upgrade user plan',
+  async ({ cycle, token, source, plan }, { session }) => {
     let result;
     try {
       result = await rp({
@@ -35,7 +35,7 @@ module.exports = method(
           cta: getCtaFromSource(source),
           access_token: session.publish.accessToken,
           product: 'publish',
-          plan: 'pro',
+          plan,
         },
       });
     } catch (response) {

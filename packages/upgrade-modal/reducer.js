@@ -11,6 +11,7 @@ export const actionTypes = keyWrapper('UPGRADE_MODAL', {
 });
 
 export const initialState = {
+  plan: 'unknown',
   cycle: 'year',
   card: {},
   source: 'unknown',

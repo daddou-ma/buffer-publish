@@ -6,6 +6,7 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
+    plan: state.upgradeModal.plan,
     cycle: state.upgradeModal.cycle,
     card: state.upgradeModal.card,
     dismissible: state.upgradeModal.dismissible,

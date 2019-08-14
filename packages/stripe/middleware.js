@@ -36,8 +36,9 @@ export default ({ dispatch, getState }) => next => (action) => {
           }));
         } else {
           dispatch(asyncDataFetchActions.fetch({
-            name: 'upgradeToPro',
+            name: 'upgradePlan',
             args: {
+              plan: getState().upgradeModal.plan,
               cycle: getState().upgradeModal.cycle,
               source: getState().upgradeModal.source,
               token: response.id,
@@ -46,7 +47,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         }
       });
       break;
-    case `upgradeToPro_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
+    case `upgradePlan_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
       window.location.reload();
       break;
     default:
