@@ -60,6 +60,7 @@ module.exports = userData => ({
   shouldShowProTrialExpiredModal: hasProTrialExpired(userData.feature_trials)
     && userData.plan === 'free'
     && !userData.has_cancelled,
+  trialPlan: userData.trial_plan,
   isOnBusinessTrial: isOnBusinessPlan(userData.trial_plan),
   shouldShowBusinessTrialExpiredModal: isOnBusinessPlan(userData.trial_plan)
     && userData.trial_expired
@@ -72,6 +73,8 @@ module.exports = userData => ({
         postTrialCost: '',
         trialLength: userData.awesome_trial_length,
         trialTimeRemaining: userData.awesome_trial_time_remaining,
+        trialExpired: userData.trial_expired,
+        trialDone: userData.trial_done,
       }
     : {
         hasCardDetails: userData.has_card_details,
@@ -80,6 +83,8 @@ module.exports = userData => ({
         postTrialCost: userData.post_trial_cost,
         trialLength: userData.trial_length,
         trialTimeRemaining: userData.trial_time_remaining,
+        trialExpired: userData.trial_expired,
+        trialDone: userData.trial_done,
       },
   messages: userData.messages,
   isNonprofit: userData.billing_status_nonprofit,
