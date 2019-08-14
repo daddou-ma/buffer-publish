@@ -52,24 +52,10 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       break;
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const message = 'welcome_to_business_modal';
       const {
-        messages: readMessages,
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
-        profileCount,
-        isOnBusinessTrial
-      } = action.result; // user
-      const hasNotReadWelcomeMessage = readMessages && !readMessages.includes(message);
-      if (isOnBusinessTrial && hasNotReadWelcomeMessage && profileCount > 0) {
-        /**
-         * TEMP - Hiding B4B Trial Modal from showing to clean up trial start experience
-         */
-        // dispatch(actions.showWelcomeB4BTrialModal());
-        // // Mark modal as seen
-        // dispatch(dataFetchActions.fetch({ name: 'readMessage', args: { message } }));
-        // if user is free, subscription hasn't been cancelled, hasExpiredProTrial
-      }
+      } = action.result; // userData
       if (shouldShowProTrialExpiredModal) {
         dispatch(actions.showUpgradeModal({ source: 'pro_trial_expired' }));
       } else if (shouldShowBusinessTrialExpiredModal) {
