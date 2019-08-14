@@ -38,3 +38,9 @@
   padding-bottom: 16px;
   line-height: 0;
 }
+
+.divImageHolder {
+  background-color: #E0E0E0;
+  text-align: center;
+  line-height: 0;
+}

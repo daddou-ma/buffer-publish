@@ -12,6 +12,12 @@ const DotsNavigation = ({ step, onClickCallback }) => (
       <li className={styles.dotstyleLi}>
         <a className={step === 2 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#" onClick={() => onClickCallback(2)}>Step 2</a>
       </li>
+      <li className={styles.dotstyleLi}>
+        <a className={step === 3 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#" onClick={() => onClickCallback(3)}>Step 2</a>
+      </li>
+      <li className={styles.dotstyleLi}>
+        <a className={step === 4 ? styles.dotstyleLiCurrentA : styles.dotstyleA} href="#" onClick={() => onClickCallback(4)}>Step 2</a>
+      </li>
     </ul>
   </div>
 );
