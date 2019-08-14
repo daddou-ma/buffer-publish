@@ -1,23 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './dotsNavigation.css';
+import { DotstyleUl,
+  DotstyleA,
+  DotstyleLi,
+  DotstyleLiCurrentA,
+  DivDotStyle,
+} from './style';
 
 const createSteps = (currentStep, nSteps, onClickCallback) => {
-  let ul = [];
+  const ul = [];
 
   for (let i = 1; i <= nSteps; i += 1) {
     ul.push(
-      <li className={styles.dotstyleLi} key={i}>
-        <a
-          key={i}
-          className={currentStep === i ? styles.dotstyleLiCurrentA : styles.dotstyleA}
-          href="#"
-          onClick={() => onClickCallback(i)}
-        >
-          Step {i}
-        </a>
-      </li>,
+      <DotstyleLi key={i}>
+        {currentStep === i && (
+          <DotstyleLiCurrentA
+            key={i}
+            href="#"
+            onClick={() => onClickCallback(i)}
+          >
+            Step {i}
+          </DotstyleLiCurrentA>
+        )}
+
+        {currentStep !== i && (
+          <DotstyleA
+            key={i}
+            href="#"
+            onClick={() => onClickCallback(i)}
+          >
+            Step {i}
+          </DotstyleA>
+        )}
+
+      </DotstyleLi>,
     );
   }
   return ul;
@@ -25,11 +42,11 @@ const createSteps = (currentStep, nSteps, onClickCallback) => {
 
 
 const DotsNavigation = ({ currentStep, onClickCallback, nSteps }) => (
-  <div className={styles.divDotStyle}>
-    <ul className={styles.dotstyleUl}>
+  <DivDotStyle>
+    <DotstyleUl>
       {createSteps(currentStep, nSteps, onClickCallback) }
-    </ul>
-  </div>
+    </DotstyleUl>
+  </DivDotStyle>
 );
 
 DotsNavigation.propTypes = {

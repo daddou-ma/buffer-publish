@@ -1,4 +1,7 @@
-.dotstyleUl {
+import styled from 'styled-components';
+
+
+export const DotstyleUl = styled.ul`
   position: relative;
   display: inline-block;
   margin: 0;
@@ -11,9 +14,9 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
+`;
 
-.dotstyleLi {
+export const DotstyleLi = styled.li`
   position: relative;
   display: block;
   float: left;
@@ -21,9 +24,9 @@
   width: 8px;
   height: 8px;
   cursor: pointer;
-}
+`;
 
-.dotstyleA {
+export const DotstyleA = styled.a`
   top: 0;
   left: 0;
   width: 100%;
@@ -37,18 +40,18 @@
   position: absolute;
   -webkit-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
-}
 
-.dotstyleA:focus {
-  outline: none;
-}
+  &:focus {
+    outline: none;
+  }
 
-.dotstyleA:hover,
-.dotstyleA:focus {
+  &:hover,
+  &:focus {
   background-color: black;
-}
+  }
+`;
 
-.dotstyleLiCurrentA {
+export const DotstyleLiCurrentA = styled.a`
   top: 0;
   left: 0;
   width: 100%;
@@ -61,9 +64,9 @@
   -webkit-transition: background-color 0.3s ease;
   transition:background-color 0.3s ease;
   background-color: black;
-}
+`;
 
-.divDotStyle {
+export const DivDotStyle = styled.div`
   text-align: center;
   vertical-align: top;
-}
+`;
