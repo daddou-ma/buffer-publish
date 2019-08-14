@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { trackAction } from '@bufferapp/publish-data-tracking';
 import {
   Text,
   ProgressBar,
@@ -27,6 +28,40 @@ import {
   Footer,
 } from './style';
 
+
+const handleConnectSocialAccountClick = (
+  channel,
+  url,
+  onConnectSocialAccountClick,
+) => {
+  const goConnectProfile = () => {
+    if (channel === 'instagram') {
+      /**
+      * This silly looking code loads an 'img' with the
+      * Instagram logout URL, which ensures the user is
+      * logged out of Instagram before we send them to
+      * reconnect.
+      */
+      const img = new Image();
+      img.onerror = () => {
+        window.location.assign(url);
+      };
+      img.src = 'https://www.instagram.com/accounts/logoutin';
+      document.getElementsByTagName('head')[0].appendChild(img);
+    } else {
+      window.location.assign(url);
+    }
+    // onConnectSocialAccountClick();
+  };
+  trackAction({
+    location: 'onboarding_page',
+    action: `connect_${channel}`,
+  }, {
+    success: goConnectProfile(),
+    error: goConnectProfile(),
+  });
+};
+
 const OnboardingPage = ({ onConnectSocialAccountClick, translations, onSkipStep }) => (
   <Wrapper>
     <LeftColumn>
@@ -38,21 +73,50 @@ const OnboardingPage = ({ onConnectSocialAccountClick, translations, onSkipStep 
           <Text type="h1">{translations.title}</Text>
           <Text type="p">{translations.description}</Text>
           <SocialButtonWrapper>
-            <SocialButton channel="instagram" onClick={onConnectSocialAccountClick} />
-            <SocialButton channel="facebook" onClick={onConnectSocialAccountClick} />
-            <SocialButton channel="twitter" onClick={onConnectSocialAccountClick} />
+            <SocialButton
+              channel="instagram"
+              onClick={() => handleConnectSocialAccountClick(
+                'instagram',
+                'https://buffer.com/oauth/instagram',
+                onConnectSocialAccountClick,
+              )}
+            />
+            <SocialButton
+              channel="facebook"
+              onClick={() => handleConnectSocialAccountClick(
+                'facebook',
+                'https://buffer.com/oauth/facebook/choose',
+                onConnectSocialAccountClick,
+              )}
+            />
+            <SocialButton
+              channel="twitter"
+              onClick={() => handleConnectSocialAccountClick(
+                'twitter',
+                'https://buffer.com/oauth/twitter',
+                onConnectSocialAccountClick,
+              )}
+            />
           </SocialButtonWrapper>
           <TextWithStyles type="p">
             {translations.cta1}
             <LinkWithStyles
               type="link"
-              onClick={() => {}}
+              onClick={() => handleConnectSocialAccountClick(
+                'linkedin',
+                'https://buffer.com/oauth/linkedin',
+                onConnectSocialAccountClick,
+              )}
               label={translations.ctaChannel1}
             />
             {translations.cta2}
             <LinkWithStyles
               type="link"
-              onClick={() => {}}
+              onClick={() => handleConnectSocialAccountClick(
+                'pinterest',
+                'https://buffer.com/oauth/pinterest',
+                onConnectSocialAccountClick,
+              )}
               label={translations.ctaChannel2}
             />
             {translations.cta3}
