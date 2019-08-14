@@ -9,8 +9,7 @@ import { actionTypes as modalsActionTypes, actions as modalActions } from '@buff
 import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line
-  const card = getState().upgradeModal.card;
-  const source = getState().upgradeModal.source;
+  const { card, source } = getState().upgradeModal;
 
   next(action);
 
