@@ -37,6 +37,10 @@ const ListItem = ({ text }) => (
 
 ListItem.propTypes = { text: PropTypes.string.isRequired };
 
+const isPro = plan => plan === 'pro';
+const isPremium = plan => plan === 'premium';
+const isSmallBusiness = plan => plan === 'small';
+
 const currentYear = new Date().getFullYear();
 const creditCardSvg = `<svg width="31" height="21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="%23fff" d="M0 0h31v21H0z"/><rect width="31" height="21" rx="3" fill="%232D98C8"/><path fill="%23343E47" d="M0 3h31v3H0z"/><path fill="%23fff" d="M6 9h20v4H6z"/><path fill="%23FD232B" d="M20 10h5v2h-5z"/></svg>`;
 const creditCardBackground = `right 6px center no-repeat url('data:image/svg+xml;utf8,${creditCardSvg}')`;
@@ -162,36 +166,102 @@ class UpgradeModal extends React.Component {
       >
         <div style={{ overflow: 'auto', height: 'auto' }}>
           <div style={{ width: '600px', padding: '0px 20px 25px' }}>
-            <div style={{ textAlign: 'center' }}>
-              <Text type="h2">
-                {hasExpiredProTrial
-                  ? translations.proTrialistUpgradeHeader
-                  : translations.proUpgradeHeader }
-              </Text>
-            </div>
-            <div style={{ display: 'flex' }}>
-              <div style={{ flex: '1' }}>
-                <Text type="h3">{translations.freePlan}</Text>
-                <ul style={listStyleLeft}>
-                  <ListItem text={translations.freeConnect} />
-                  <ListItem text={translations.freeSchedule} />
-                  <ListItem text={translations.freePostHistory} />
-                </ul>
-              </div>
-              <div style={{ flex: '1' }}>
-                <Text type="h3">
-                  {translations.proPlan}
-                  <span role="img" aria-label="pro">  ✅</span>
+            {isPro('premium') && <div>
+              <div style={{ textAlign: 'center' }}>
+                <Text type="h2">
+                  {hasExpiredProTrial
+                    ? translations.proTrialistUpgradeHeader
+                    : translations.proUpgradeHeader }
                 </Text>
-                <ul style={listStyle}>
-                  <ListItem text={translations.proConnect} />
-                  <ListItem text={translations.proSchedule} />
-                  <ListItem text={translations.proIGFirstComment} />
-                  <ListItem text={translations.proCalendarView} />
-                  <ListItem text={translations.proReviewHistory} />
-                </ul>
               </div>
-            </div>
+              <div style={{ display: 'flex' }}>
+                <div style={{ flex: '1' }}>
+                  <Text type="h3">{translations.freePlan}</Text>
+                  <ul style={listStyleLeft}>
+                    <ListItem text={translations.freeConnect} />
+                    <ListItem text={translations.freeSchedule} />
+                    <ListItem text={translations.freePostHistory} />
+                  </ul>
+                </div>
+                <div style={{ flex: '1' }}>
+                  <Text type="h3">
+                    {translations.proPlan}
+                    <span role="img" aria-label="pro">  ✅</span>
+                  </Text>
+                  <ul style={listStyle}>
+                    <ListItem text={translations.proConnect} />
+                    <ListItem text={translations.proSchedule} />
+                    <ListItem text={translations.proIGFirstComment} />
+                    <ListItem text={translations.proCalendarView} />
+                    <ListItem text={translations.proReviewHistory} />
+                  </ul>
+                </div>
+              </div>
+            </div>}
+
+            {isPremium('premium') && <div>
+              <div style={{ textAlign: 'center' }}>
+                <Text type="h2">
+                  {translations.premiumSwitchHeader}
+                </Text>
+              </div>
+              <div style={{ display: 'flex' }}>
+                <div style={{ flex: '1' }}>
+                  <Text type="h3">{translations.freePlan}</Text>
+                  <ul style={listStyleLeft}>
+                    <ListItem text={translations.freeConnect} />
+                    <ListItem text={translations.freeSchedule} />
+                    <ListItem text={translations.freePostHistory} />
+                  </ul>
+                </div>
+                <div style={{ flex: '1' }}>
+                  <Text type="h3">
+                    {translations.proPlan}
+                    <span role="img" aria-label="pro">  ✅</span>
+                  </Text>
+                  <ul style={listStyle}>
+                    <ListItem text={translations.proConnect} />
+                    <ListItem text={translations.proSchedule} />
+                    <ListItem text={translations.proIGFirstComment} />
+                    <ListItem text={translations.proCalendarView} />
+                    <ListItem text={translations.proReviewHistory} />
+                  </ul>
+                </div>
+              </div>
+            </div>}
+
+            {isSmallBusiness('premium') && <div>
+              <div style={{ textAlign: 'center' }}>
+                <Text type="h2">
+                  {hasExpiredProTrial
+                    ? translations.proTrialistUpgradeHeader
+                    : translations.proUpgradeHeader }
+                </Text>
+              </div>
+              <div style={{ display: 'flex' }}>
+                <div style={{ flex: '1' }}>
+                  <Text type="h3">{translations.freePlan}</Text>
+                  <ul style={listStyleLeft}>
+                    <ListItem text={translations.freeConnect} />
+                    <ListItem text={translations.freeSchedule} />
+                    <ListItem text={translations.freePostHistory} />
+                  </ul>
+                </div>
+                <div style={{ flex: '1' }}>
+                  <Text type="h3">
+                    {translations.proPlan}
+                    <span role="img" aria-label="pro">  ✅</span>
+                  </Text>
+                  <ul style={listStyle}>
+                    <ListItem text={translations.proConnect} />
+                    <ListItem text={translations.proSchedule} />
+                    <ListItem text={translations.proIGFirstComment} />
+                    <ListItem text={translations.proCalendarView} />
+                    <ListItem text={translations.proReviewHistory} />
+                  </ul>
+                </div>
+              </div>
+            </div>}
 
             <Divider marginTop="" marginBottom="1.5rem" />
 

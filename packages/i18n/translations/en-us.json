@@ -60,7 +60,7 @@
     "securityCode": "Security code",
     "zipCode": "Zip code",
     "zipLeaveBlank": "Leave blank for non-US cards",
-    "upgradeCta": "Upgrade to the Pro Plan",
+    "upgradeCta": "Switch to the Pro Plan",
     "validating": "One moment...",
     "close": "Close",
     "freePlan": "Free Plan",
@@ -71,7 +71,8 @@
     "proConnect": "Connect up to eight social accounts including Pinterest",
     "proSchedule": "Schedule up to 100 posts per account",
     "proCalendarView": "Get a calendar view of your publishing schedule",
-    "proReviewHistory": "Review a 30-day history of your posts"
+    "proReviewHistory": "Review a 30-day history of your posts",
+    "premiumSwitchHeader": "Switch to the Premium Plan!"
   },
   "welcome-modal": {
     "headline": "We've refreshed the look of Buffer",
