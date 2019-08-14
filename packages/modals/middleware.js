@@ -69,7 +69,8 @@ export default ({ dispatch, getState }) => next => (action) => {
         // // Mark modal as seen
         // dispatch(dataFetchActions.fetch({ name: 'readMessage', args: { message } }));
         // if user is free, subscription hasn't been cancelled, hasExpiredProTrial
-      } else if (shouldShowProTrialExpiredModal) {
+      }
+      if (shouldShowProTrialExpiredModal) {
         dispatch(actions.showUpgradeModal({ source: 'pro_trial_expired' }));
       } else if (shouldShowBusinessTrialExpiredModal) {
         dispatch(actions.showB4BTrialExpiredModal({ source: 'b4b_trial_expired' }));
