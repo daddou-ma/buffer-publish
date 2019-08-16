@@ -37,6 +37,7 @@ import { reducer as igFirstCommentProTrialModalReducer } from '@bufferapp/publis
 import { reducer as trialReducer } from '@bufferapp/publish-trial';
 import { reducer as hashtagGroupsReducer } from '@bufferapp/publish-hashtag-group-manager';
 import { reducer as disabledQueueReducer } from '@bufferapp/publish-disabled-queue';
+import { reducer as onboardingReducer } from '@bufferapp/publish-onboarding';
 import { reducer as globalAccountReducer } from '@bufferapp/global-account';
 import { reducer as closeComposerModalReducer } from '@bufferapp/publish-close-composer-confirmation-modal';
 
@@ -90,6 +91,7 @@ export default {
   ctaBanner: ctaBannerReducer,
   igFirstCommentProTrialModal: igFirstCommentProTrialModalReducer,
   trial: trialReducer,
+  onboarding: onboardingReducer,
   hashtagGroups: hashtagGroupsReducer,
   disabledQueue: disabledQueueReducer,
   globalAccount: globalAccountReducer,
