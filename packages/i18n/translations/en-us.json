@@ -255,5 +255,39 @@
     "text": "Are you sure you want to close the composer? You will lose any unsaved changes.",
     "sure": "Yes, Close Composer",
     "cancel": "Cancel"
+  },
+  "plans-page": {
+    "buttonDashboardText": "Back to Dashboard",
+    "headerText": "Choose your Buffer Publish plan",
+    "pro": {
+      "title": "Pro",
+      "cost": "$15",
+      "subtitle": "Commit to a social strategy",
+      "plan": "pro",
+      "features": ["8 social accounts", "1 user", "Instagram first comment"],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly"
+    },
+    "premium": {
+      "title": "Premium",
+      "cost": "$65",
+      "subtitle": "Unlock advanced IG features",
+      "plan": "premium_business",
+      "features": ["8 social accounts", "2 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly"
+    },
+    "small": {
+      "title": "Business",
+      "cost": "$99",
+      "subtitle": "Built for teams building brands",
+      "plan": "small",
+      "features": ["25 social accounts", "6 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly"
+    }
   }
 }

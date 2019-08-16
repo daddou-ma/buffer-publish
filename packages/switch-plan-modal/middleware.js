@@ -9,8 +9,7 @@ import { actionTypes as modalsActionTypes, actions as modalActions } from '@buff
 import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line
-  const { card, source } = getState().switchPlanModal;
-
+  const { card, source, plan } = getState().switchPlanModal;
   next(action);
 
   switch (action.type) {

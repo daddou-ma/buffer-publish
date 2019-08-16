@@ -6,6 +6,7 @@ import {
   generateProfilePageRoute,
   getProfilePageParams,
   getPreferencePageParams,
+  getPlansPageParams,
 } from '@bufferapp/publish-routes';
 import {
   actionTypes as dataFetchActionTypes,
@@ -67,6 +68,9 @@ export default ({ dispatch, getState }) => next => (action) => {
       const isPreferencePage = !!getPreferencePageParams({
         path,
       });
+      const isPlansPage = !!getPlansPageParams({
+        path,
+      });
       const { profiles, isOnBusinessTrial, hasOnboardingFeatureFlip } = getState().profileSidebar;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
@@ -91,7 +95,7 @@ export default ({ dispatch, getState }) => next => (action) => {
             profile: formatAnalyticsProfileObj(profile),
           });
         }
-      } else if (!isPreferencePage && profiles.length > 0) {
+      } else if (!isPreferencePage && !isPlansPage && profiles.length > 0) {
         const selectedProfile = profiles[0];
         dispatch(actions.selectProfile({
           profile: selectedProfile,

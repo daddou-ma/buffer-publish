@@ -1,7 +1,6 @@
 import { push } from 'connected-react-router';
-import { generateChildTabRoute } from '@bufferapp/publish-routes';
+import { generateChildTabRoute, plansPageRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import TabNavigation from './components/TabNavigation';
@@ -18,6 +17,9 @@ export default connect(
                 state.appSidebar.user.trial.onTrial &&
                 !state.profileSidebar.selectedProfile.business,
     shouldShowUpgradeCta: state.appSidebar.user.is_free_user && !state.appSidebar.user.isBusinessTeamMember,
+    shouldShowUpgradeButton: state.appSidebar.user.plan === 'free'
+                             || state.appSidebar.user.plan === 'pro'
+                             || state.appSidebar.user.plan === 'premium_business',
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
     shouldHideAnalyticsOverviewTab: state.profileSidebar.selectedProfile.type === 'linkedin'
@@ -37,16 +39,12 @@ export default connect(
         profileId,
       }));
     },
-    onUpgradeButtonClick: (plan) => {
-      if (plan === 'pro') {
-        dispatch(modalsActions.showSwitchPlanModal({ source: 'app_header', plan }));
-      } else if (plan === 'b4b') {
-        const go = () => window.location.assign('https://buffer.com/business?utm_campaign=app_header');
-        trackAction({ location: 'header', action: 'clicked_b4b_learn_more' }, {
-          success: go,
-          error: go,
-        });
-      }
+    onUpgradeButtonClick: () => {
+      dispatch(
+        push(
+          plansPageRoute,
+        ),
+      );
     },
     onChildTabClick: (childTabId) => {
       const tabId = ownProps.tabId;

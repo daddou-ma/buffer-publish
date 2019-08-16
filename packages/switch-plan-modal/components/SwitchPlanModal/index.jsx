@@ -30,7 +30,7 @@ const ListItem = ({ text }) => (
 ListItem.propTypes = { text: PropTypes.string.isRequired };
 
 const isPro = plan => plan === 'pro';
-const isPremium = plan => plan === 'premium';
+const isPremium = plan => plan === 'premium_business';
 const isSmallBusiness = plan => plan === 'small';
 
 const currentYear = new Date().getFullYear();

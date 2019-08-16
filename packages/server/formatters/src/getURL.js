@@ -75,4 +75,10 @@ module.exports = {
     }
     return `https://buffer.com/app/account/receipts?content_only=true${ctaParam}`;
   },
+  getPublishUrl: () => {
+    if (window.location.hostname === 'publish.local.buffer.com') {
+      return 'https://publish.local.buffer.com';
+    }
+    return 'https://publish.buffer.com';
+  },
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { profilePageRoute, preferencePageRoute, childTabRoute } from '@bufferapp/publish-routes';
+import { profilePageRoute, preferencePageRoute, childTabRoute, plansPageRoute } from '@bufferapp/publish-routes';
 import { Route, Switch, withRouter } from 'react-router';
 
 import { DragDropContext } from 'react-dnd';
@@ -9,6 +9,7 @@ import AppShell from '@bufferapp/publish-app-shell';
 import Notifications from '@bufferapp/notifications';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
+import Plans from '@bufferapp/publish-plans';
 import AppSwitcher from '@bufferapp/publish-app-switcher';
 import EnsurePublishBetaUser from '@bufferapp/publish-beta-redirect';
 import AppModals from '@bufferapp/publish-modals';
@@ -51,6 +52,10 @@ class App extends Component { // eslint-disable-line
                 <Route
                   path={preferencePageRoute}
                   component={Preferences}
+                />
+                <Route
+                  path={plansPageRoute}
+                  component={Plans}
                 />
                 <Route
                   path={childTabRoute}

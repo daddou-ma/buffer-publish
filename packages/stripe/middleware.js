@@ -48,7 +48,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       });
       break;
     case `switchPlan_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
-      window.location.reload();
+      window.location = getURL.getPublishUrl();
       break;
     default:
       break;
