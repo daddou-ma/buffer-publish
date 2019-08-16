@@ -61,7 +61,7 @@ export default hot(connect(
       dispatch(modalActions.showProfilesDisconnectedModal());
     },
     showSwitchPlanModal: () => {
-      dispatch(modalActions.showSwitchPlanModal({ source: 'app_header' }));
+      dispatch(modalActions.showSwitchPlanModal({ source: 'app_header', plan: 'pro' }));
     },
     goToConnectSocialAccount: () => {
       dispatch(actions.handleConnectSocialAccount());

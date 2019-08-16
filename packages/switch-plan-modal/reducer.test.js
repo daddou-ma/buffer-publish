@@ -25,7 +25,7 @@ describe('reducer', () => {
     expect(state.cycle).toEqual('monthly');
   });
   it('stores the value of the source when modal is shown', () => {
-    state = reducer(undefined, modalsActions.showSwitchPlanModal({ source: 'lisbon2018' }));
+    state = reducer(undefined, modalsActions.showSwitchPlanModal({ source: 'lisbon2018', plan: 'pro' }));
     expect(state.source).toEqual('lisbon2018');
   });
   it('resets the value of the source when modal is closed', () => {

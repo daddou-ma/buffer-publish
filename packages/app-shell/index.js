@@ -35,7 +35,7 @@ export default connect(
       );
     },
     upgradeToPro() {
-      dispatch(modalActions.showSwitchPlanModal({ source: 'app_shell' }));
+      dispatch(modalActions.showSwitchPlanModal({ source: 'app_shell', plan: 'pro' }));
     },
     onCloseBanner({ key }) {
       dispatch(actions.onCloseBanner({ key }));

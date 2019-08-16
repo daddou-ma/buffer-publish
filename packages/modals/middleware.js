@@ -23,12 +23,12 @@ export default ({ dispatch, getState }) => next => (action) => {
   switch (action.type) {
     case lockedProfileActionTypes.UPGRADE:
       if (action.plan === 'free') {
-        dispatch(actions.showSwitchPlanModal({ source: 'locked_profile' }));
+        dispatch(actions.showSwitchPlanModal({ source: 'locked_profile', plan: 'pro' }));
       }
       break;
     case 'APP_INIT': {
       if (shouldShowSwitchPlanModal()) {
-        dispatch(actions.showSwitchPlanModal({ source: getSourceFromKey() }));
+        dispatch(actions.showSwitchPlanModal({ source: getSourceFromKey(), plan: 'pro' }));
       }
       if (shouldShowStealProfileModal()) {
         dispatch(actions.showStealProfileModal({ stealProfileUsername: getShowModalValue() }));
@@ -57,7 +57,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         shouldShowBusinessTrialExpiredModal,
       } = action.result; // userData
       if (shouldShowProTrialExpiredModal) {
-        dispatch(actions.showSwitchPlanModal({ source: 'pro_trial_expired' }));
+        dispatch(actions.showSwitchPlanModal({ source: 'pro_trial_expired', plan: 'pro' }));
       } else if (shouldShowBusinessTrialExpiredModal) {
         dispatch(actions.showB4BTrialExpiredModal({ source: 'b4b_trial_expired' }));
       }
@@ -128,7 +128,7 @@ export default ({ dispatch, getState }) => next => (action) => {
     }
     case 'COMPOSER_EVENT':
       if (action.eventType === 'show-switch-plan-modal') {
-        dispatch(actions.showSwitchPlanModal({ source: 'queue_limit' }));
+        dispatch(actions.showSwitchPlanModal({ source: 'queue_limit', plan: 'pro' }));
       }
       break;
     default:
