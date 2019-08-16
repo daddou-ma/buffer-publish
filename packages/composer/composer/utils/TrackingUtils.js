@@ -24,36 +24,15 @@ const getComposerSource = ({ tabId, emptySlotMode }) => {
   return sourceName;
 };
 
-const getPostShareType = (type) => {
-  let shareType = null;
-  switch (type) {
-    case QueueingTypes.QUEUE:
-      shareType = 'queue';
-      break;
-    case QueueingTypes.NEXT:
-      shareType = 'share_next';
-      break;
-    case QueueingTypes.NOW:
-      shareType = 'share_now';
-      break;
-    case QueueingTypes.CUSTOM:
-      shareType = 'custom';
-      break;
-    case QueueingTypes.ADD_DRAFT:
-      shareType = 'draft';
-      break;
-    case QueueingTypes.NEXT_DRAFT:
-      shareType = 'draft_share_next';
-      break;
-    case QueueingTypes.CUSTOM_DRAFT:
-      shareType = 'draft_custom';
-      break;
-    default:
-      shareType = type;
-      break;
-  }
-  return shareType;
-};
+const trackingShareTypeMap = new Map([
+  [QueueingTypes.QUEUE, 'queue'],
+  [QueueingTypes.NEXT, 'share_next'],
+  [QueueingTypes.NOW, 'share_now'],
+  [QueueingTypes.CUSTOM, 'custom'],
+  [QueueingTypes.ADD_DRAFT, 'draft'],
+  [QueueingTypes.NEXT_DRAFT, 'draft_share_next'],
+  [QueueingTypes.CUSTOM_DRAFT, 'draft_custom'],
+]);
 
 const formatShareDate = (shareDate) => {
   if (shareDate) {
@@ -83,7 +62,7 @@ const getSegmentMetadata = ({
   mediaType: post.type || null,
   postId: post.id || null,
   shareDate: formatShareDate(post.due_at),
-  shareType: getPostShareType(queueingType) || null,
+  shareType: trackingShareTypeMap.get(queueingType) || null,
 });
 
 export { getComposerSource, getSegmentMetadata };

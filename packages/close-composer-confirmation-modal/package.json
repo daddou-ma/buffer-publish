@@ -1,0 +1,22 @@
+{
+  "name": "@bufferapp/publish-close-composer-confirmation-modal",
+  "version": "2.0.0",
+  "description": "Confirmation modal for closing the composer",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "maria.u@bufferapp.com",
+  "dependencies": {
+    "@bufferapp/async-data-fetch": "1.9.4",
+    "@bufferapp/publish-server": "2.0.0",
+    "@bufferapp/keywrapper": "0.2.0",
+    "@bufferapp/publish-modals": "2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

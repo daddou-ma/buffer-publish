@@ -68,6 +68,7 @@ const QueuedPosts = ({
   isManager,
   hasFirstCommentFlip,
   isBusinessAccount,
+  onComposerOverlayClick,
 }) => {
   if (loading) {
     return (
@@ -99,6 +100,8 @@ const QueuedPosts = ({
                 onSave={onComposerCreateSuccess}
                 preserveComposerStateOnClose
                 type={'queue'}
+                onComposerOverlayClick={onComposerOverlayClick}
+                editMode={editMode}
               />
             }
             <ComposerInput
@@ -126,6 +129,8 @@ const QueuedPosts = ({
           <ComposerPopover
             onSave={onComposerCreateSuccess}
             type={'queue'}
+            onComposerOverlayClick={onComposerOverlayClick}
+            editMode={editMode}
           />
         }
         <QueueItems
@@ -171,6 +176,7 @@ QueuedPosts.propTypes = {
   showEmptyQueueMessage: PropTypes.bool,
   onComposerPlaceholderClick: PropTypes.func.isRequired,
   onComposerCreateSuccess: PropTypes.func.isRequired,
+  onComposerOverlayClick: PropTypes.func.isRequired,
   onCancelConfirmClick: PropTypes.func.isRequired,
   onRequeueClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,

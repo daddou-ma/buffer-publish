@@ -20,13 +20,14 @@ function isAccessTokenValid(req) {
   }
 
   return rp({
-    uri: `${process.env.API_ADDR}/1/user/convert_access_token.json`,
-    method: 'POST',
+    uri: `${process.env.API_ADDR}/1/user.json`,
+    method: 'GET',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
-      access_token: req.session.publish.accessToken,
       client_id: process.env.CLIENT_ID,
       client_secret: process.env.CLIENT_SECRET,
+      access_token: req.session.publish.accessToken,
+      simplified_response: true,
     },
   })
     .then(r => true)
@@ -39,6 +40,9 @@ module.exports = async (req, res, next) => {
   if (isRequestingApp(req) && shouldCheckToken(req)) {
     const isValid = await isAccessTokenValid(req);
     if (!isValid) {
+      const loginServiceUrl = process.env.NODE_ENV !== 'production'
+        ? 'https://login.local.buffer.com'
+        : 'https://login.buffer.com';
       let skipTokenCheck;
       if (req.query.skipTokenCheck === 'true') { // Unblock people with skipTokenCheck=true
         skipTokenCheck = 2;
@@ -46,11 +50,11 @@ module.exports = async (req, res, next) => {
         skipTokenCheck = parseInt(req.query.skipTokenCheck, 10) + 1;
       } else skipTokenCheck = 1;
       if (skipTokenCheck > 3) {
-        return redirect(res, 'https://login.buffer.com/logout');
+        return redirect(res, `${loginServiceUrl}/logout`);
       }
       return redirect(
         res,
-        `https://login.buffer.com/login?skipImpersonation=true&redirect=https%3A%2F%2Fpublish.buffer.com%3FskipTokenCheck%3D${skipTokenCheck}`,
+        `${loginServiceUrl}/login?skipImpersonation=true&redirect=https%3A%2F%2Fpublish.buffer.com%3FskipTokenCheck%3D${skipTokenCheck}`,
       );
     }
   }

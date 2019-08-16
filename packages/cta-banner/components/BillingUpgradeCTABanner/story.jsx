@@ -85,8 +85,7 @@ storiesOf('BillingUpgradeCTABanner', module)
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner
         translations={translations['billing-upgrade-cta-banner']}
-        onClickManageBilling={action('manageBilling')}
-        onClickAddBilling={action('addBilling')}
+        onClickStartSubscription={action('startSubscription')}
         trial={userWithoutTrial}
         profileCount={1}
       />
@@ -96,8 +95,7 @@ storiesOf('BillingUpgradeCTABanner', module)
     <Provider store={storePro}>
       <BillingUpgradeCTABanner
         translations={translations['billing-upgrade-cta-banner']}
-        onClickManageBilling={action('manageBilling')}
-        onClickAddBilling={action('addBilling')}
+        onClickStartSubscription={action('startSubscription')}
         trial={userOnTrial}
         profileCount={1}
 
@@ -108,8 +106,7 @@ storiesOf('BillingUpgradeCTABanner', module)
     <Provider store={storePro}>
       <BillingUpgradeCTABanner
         translations={translations['billing-upgrade-cta-banner']}
-        onClickManageBilling={action('manageBilling')}
-        onClickAddBilling={action('addBilling')}
+        onClickStartSubscription={action('startSubscription')}
         trial={userOnTrialWithBilling}
         profileCount={1}
       />
@@ -119,8 +116,7 @@ storiesOf('BillingUpgradeCTABanner', module)
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner
         translations={translations['billing-upgrade-cta-banner']}
-        onClickManageBilling={action('manageBilling')}
-        onClickAddBilling={action('addBilling')}
+        onClickStartSubscription={action('startSubscription')}
         trial={userOnTrial}
         profileCount={1}
       />
@@ -130,8 +126,7 @@ storiesOf('BillingUpgradeCTABanner', module)
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner
         translations={translations['billing-upgrade-cta-banner']}
-        onClickManageBilling={action('manageBilling')}
-        onClickAddBilling={action('addBilling')}
+        onClickStartSubscription={action('startSubscription')}
         trial={userOnTrial}
         profileCount={0}
       />
@@ -141,8 +136,7 @@ storiesOf('BillingUpgradeCTABanner', module)
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner
         translations={translations['billing-upgrade-cta-banner']}
-        onClickManageBilling={action('manageBilling')}
-        onClickAddBilling={action('addBilling')}
+        onClickStartSubscription={action('startSubscription')}
         trial={userOnTrialWithBilling}
         profileCount={1}
       />

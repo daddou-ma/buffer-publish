@@ -163,6 +163,28 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       break;
     }
+
+    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const profilesLoaded = getState().profileSidebar.loading === false;
+      if (!profilesLoaded) {
+        break;
+      }
+
+      const {
+        thirdparty: {
+          appCues: { loaded: appCuesLoaded },
+        },
+      } = getState();
+
+      if (appCuesLoaded && window && window.Appcues) {
+        const { profiles } = getState().profileSidebar;
+        if (profiles.find(profile => (profile.service === 'instagram' && profile.isInstagramBusiness))) {
+          window.Appcues.track('Has Instagram Business profile');
+        }
+      }
+
+      break;
+    }
     default:
       break;
   }

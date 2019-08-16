@@ -50,6 +50,7 @@ import { middleware as trialMiddleware } from '@bufferapp/publish-trial';
 import { middleware as segmentTrackingMiddleware } from '@bufferapp/publish-analytics-middleware';
 import { middleware as onboardingMiddleware } from '@bufferapp/publish-onboarding';
 import { middleware as globalAccountMiddleware } from '@bufferapp/global-account';
+import { middleware as closeComposerModalMiddleware } from '@bufferapp/publish-close-composer-confirmation-modal';
 
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
@@ -132,6 +133,7 @@ const configureStore = initialstate => {
         segmentTrackingMiddleware,
         onboardingMiddleware,
         globalAccountMiddleware,
+        closeComposerModalMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

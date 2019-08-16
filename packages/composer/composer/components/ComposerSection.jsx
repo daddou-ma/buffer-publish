@@ -9,9 +9,6 @@ import Composer from '../components/Composer';
 import ProductRolloutTooltip from '../components/ProductRolloutTooltip';
 import NotificationContainer from '../components/NotificationContainer';
 import styles from './css/ComposerSection.css';
-import { ComposerSidepanel } from '@bufferapp/publish-shared-components';
-import HashtagGroupWrapper from '@bufferapp/publish-hashtag-group-manager';
-import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 
 const getComposerState = () => ({
   enabledDrafts: ComposerStore.getEnabledDrafts(),
@@ -20,33 +17,35 @@ const getComposerState = () => ({
   forceEditorFocus: ComposerStore.getMeta().forceEditorFocus,
 });
 
+/* eslint-disable react/prop-types */
 const ComposerComponent = ({
-    draft,
-    index,
-    state,
-    profiles,
-    isOmniboxEnabled,
-    enabledDrafts,
-    AppStore,
-    visibleNotifications,
-    appState,
-    draftsSharedData,
-    areAllDraftsSaved,
-    selectedProfiles,
-    shouldEnableFacebookAutocomplete,
-    shouldShowInlineSubprofileDropdown,
-    composerPosition,
-    hasIGDirectFlip,
-    hasIGLocationTaggingFeature,
-    canStartProTrial,
-    isOnProTrial,
-    hasIGDirectVideoFlip,
-    hasShopgridFlip,
-    hasHashtagGroupsFlip,
-    isFreeUser,
-    isBusinessUser,
-  }) => {
-  const canUserPostToMultipleNetworks = uniqBy(profiles, (p) => p.service.name).length > 1;
+  draft,
+  index,
+  state,
+  profiles,
+  isOmniboxEnabled,
+  enabledDrafts,
+  AppStore,
+  visibleNotifications,
+  appState,
+  draftsSharedData,
+  areAllDraftsSaved,
+  selectedProfiles,
+  shouldEnableFacebookAutocomplete,
+  shouldShowInlineSubprofileDropdown,
+  composerPosition,
+  hasIGDirectFlip,
+  hasIGLocationTaggingFeature,
+  canStartProTrial,
+  isOnProTrial,
+  hasIGDirectVideoFlip,
+  hasShopgridFlip,
+  hasHashtagGroupsFlip,
+  isFreeUser,
+  isBusinessUser,
+  draftMode,
+}) => {
+  const canUserPostToMultipleNetworks = uniqBy(profiles, p => p.service.name).length > 1;
   const showRolloutTooltip = (
     AppStore.getOptions().canSelectProfiles &&
     canUserPostToMultipleNetworks &&
@@ -92,11 +91,13 @@ const ComposerComponent = ({
       hasHashtagGroupsFlip={hasHashtagGroupsFlip}
       isFreeUser={isFreeUser}
       isBusinessUser={isBusinessUser}
+      draftMode={draftMode}
     >
       {children}
     </Composer>
   );
 };
+/* eslint-enable react/prop-types */
 
 class ComposerSection extends React.Component {
   state = getComposerState();
@@ -117,7 +118,7 @@ class ComposerSection extends React.Component {
       shouldEnableFacebookAutocomplete, shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled, composerPosition, hasIGDirectFlip, hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip, isFreeUser, isBusinessUser, canStartProTrial,
-      isOnProTrial, hasShopgridFlip, hasHashtagGroupsFlip,
+      isOnProTrial, hasShopgridFlip, hasHashtagGroupsFlip, draftMode,
     } = this.props;
 
     const hasEnabledDrafts = enabledDrafts.length > 0 || isOmniboxEnabled;
@@ -174,8 +175,9 @@ class ComposerSection extends React.Component {
               hasHashtagGroupsFlip,
               isFreeUser,
               isBusinessUser,
+              draftMode,
             }
-          }
+            }
           />
         }
 
@@ -208,8 +210,9 @@ class ComposerSection extends React.Component {
                 hasHashtagGroupsFlip,
                 isFreeUser,
                 isBusinessUser,
+                draftMode,
               }
-            }
+              }
             />),
           )}
       </div>
@@ -236,6 +239,7 @@ ComposerSection.propTypes = {
   hasShopgridFlip: PropTypes.bool,
   hasHashtagGroupsFlip: PropTypes.bool,
   isBusinessUser: PropTypes.bool,
+  draftMode: PropTypes.bool,
 };
 
 ComposerSection.defaultProps = {
@@ -244,6 +248,7 @@ ComposerSection.defaultProps = {
   hasShopgridFlip: false,
   hasHashtagGroupsFlip: false,
   isBusinessUser: false,
+  draftMode: false,
 };
 
 

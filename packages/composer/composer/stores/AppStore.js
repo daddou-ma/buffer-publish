@@ -417,7 +417,7 @@ const selectProfile = (
   originatedFromGroupSelection = false
 ) => {
   const profile = AppStore.getProfile(id);
-  if (profile.isSelected) {
+  if (profile && profile.isSelected) {
     if (markAppAsLoadedWhenDone) AppActionCreators.markAppAsLoaded();
     return;
   }
