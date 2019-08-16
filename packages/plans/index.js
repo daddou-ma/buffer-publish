@@ -14,7 +14,7 @@ export default connect(
   }),
   dispatch => ({
     onChoosePlanClick: ({ source, plan }) => {
-      dispatch(modalsActions.showUpgradeModal({ source, plan }));
+      dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
     },
     onBackToDashboardClick: ({ selectedProfileId, profiles }) => {
       if (profiles.length > 0) {
