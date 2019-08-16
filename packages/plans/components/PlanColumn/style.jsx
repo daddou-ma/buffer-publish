@@ -9,6 +9,7 @@ export const ColumnStyle = styled.div`
   padding: 45px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 25px;
 `;
 
 export const SubtitleStyle = styled.div`

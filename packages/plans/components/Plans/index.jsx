@@ -21,6 +21,10 @@ const HeaderStyle = styled(Text)`
   margin-top: 0px;
 `;
 
+const ContainerStyle = styled.div`
+  overflow-y: auto;
+`;
+
 const Plans = ({
   onChoosePlanClick,
   currentPlan,
@@ -28,8 +32,9 @@ const Plans = ({
   selectedProfileId,
   profiles,
   translations,
+  isNonprofit,
 }) => (
-  <div>
+  <ContainerStyle>
     <ButtonStyle>
       <Button
         type="secondary"
@@ -53,6 +58,7 @@ const Plans = ({
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
           source={getSource({ newPlan: 'pro', currentPlan })}
+          isNonprofit={isNonprofit}
         />
         <PlanColumn
           {...translations.premium}
@@ -60,6 +66,7 @@ const Plans = ({
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
           source={getSource({ newPlan: 'premium_business', currentPlan })}
+          isNonprofit={isNonprofit}
         />
         <PlanColumn
           {...translations.small}
@@ -67,10 +74,11 @@ const Plans = ({
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
           source={getSource({ newPlan: 'small', currentPlan })}
+          isNonprofit={isNonprofit}
         />
       </ColumnContainerStyle>
     </div>
-  </div>
+  </ContainerStyle>
 );
 
 Plans.propTypes = {
@@ -80,6 +88,7 @@ Plans.propTypes = {
   selectedProfileId: ProfileSidebarComponent.propTypes.selectedProfileId,
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
   translations: PropTypes.object.isRequired,  // eslint-disable-line
+  isNonprofit: PropTypes.bool.isRequired,
 };
 
 export default Plans;

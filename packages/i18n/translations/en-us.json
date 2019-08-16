@@ -262,6 +262,7 @@
     "pro": {
       "title": "Pro",
       "cost": "$15",
+      "nonProfitCost": "$7.50",
       "subtitle": "Commit to a social strategy",
       "plan": "pro",
       "features": ["8 social accounts", "1 user", "Instagram first comment"],
@@ -272,6 +273,7 @@
     "premium": {
       "title": "Premium",
       "cost": "$65",
+      "nonProfitCost": "$32.50",
       "subtitle": "Unlock advanced IG features",
       "plan": "premium_business",
       "features": ["8 social accounts", "2 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
@@ -282,6 +284,7 @@
     "small": {
       "title": "Business",
       "cost": "$99",
+      "nonProfitCost": "$49.50",
       "subtitle": "Built for teams building brands",
       "plan": "small",
       "features": ["25 social accounts", "6 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
