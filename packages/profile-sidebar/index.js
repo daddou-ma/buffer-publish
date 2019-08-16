@@ -26,6 +26,7 @@ export default hot(connect(
     hasFacebook: state.profileSidebar.hasFacebook,
     hasTwitter: state.profileSidebar.hasTwitter,
     isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
+    hasOnboardingFeatureFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('onboarding_new_business_trialists ') : false,
   }),
   (dispatch, ownProps) => ({
     onProfileClick: (profile) => {

@@ -48,6 +48,7 @@ import { middleware as igFirstCommentProTrialModalMiddleware } from '@bufferapp/
 import { middleware as hashtagGroupsMiddleware } from '@bufferapp/publish-hashtag-group-manager';
 import { middleware as trialMiddleware } from '@bufferapp/publish-trial';
 import { middleware as segmentTrackingMiddleware } from '@bufferapp/publish-analytics-middleware';
+import { middleware as onboardingMiddleware } from '@bufferapp/publish-onboarding';
 import { middleware as globalAccountMiddleware } from '@bufferapp/global-account';
 import { middleware as closeComposerModalMiddleware } from '@bufferapp/publish-close-composer-confirmation-modal';
 
@@ -130,6 +131,7 @@ const configureStore = initialstate => {
         hashtagGroupsMiddleware,
         trialMiddleware,
         segmentTrackingMiddleware,
+        onboardingMiddleware,
         globalAccountMiddleware,
         closeComposerModalMiddleware,
         // Analyze

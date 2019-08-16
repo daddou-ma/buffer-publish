@@ -18,6 +18,20 @@
     "connectButton": "Connect Your Social Accounts",
     "defaultTitle": "Let's get your account set up!"
   },
+  "onboarding-page": {
+    "title": "Your account has been setup!",
+    "description": "Now let's connect a social account so you can begin publishing content.",
+    "cta1": "You can also connect your",
+    "ctaChannel1": "Linkedin",
+    "cta2": "and",
+    "ctaChannel2": "Pinterest",
+    "cta3": "accounts.",
+    "skipStep": "Or skip this step",
+    "testemonial": "Publish helps us build a better model of content that generates more engagement.",
+    "name": "Justin Ozanich",
+    "role": "Marketing Manager",
+    "company": "Foster Coffee Company"
+  },
   "disabled-queue": {
     "connectButton": "Manage Social Accounts",
     "queueTab": "Queue",
@@ -145,14 +159,30 @@
     "cancelCta": "Maybe Later"
   },
   "welcome-paid-modal": {
-    "headline1": "A Refreshed Experience",
-    "body1": "We're working on a refreshed experience for you. The same Buffer you’ve come to love – ",
-    "body2": "now simpler, smoother, and faster.",
-    "cta1": "Continue",
-    "headline2": "Switch Back at Any Time",
-    "body3": "Feeling nostalgic? Switch back to classic Buffer at any time.",
-    "cta2": "Sounds Good",
-    "altText": "You can go back to classic Buffer from the top menu"
+    "step1": {
+      "headline": "A Better Buffer Experience",
+      "body1": "It's the same Buffer you’ve come to love – now simpler and faster, with ",
+      "body2": "advanced Instagram features to help you grow your reach.",
+      "cta": "Learn More"
+    },
+    "step2": {
+      "headline": "Turn Instagram Posts Into Sales",
+      "body": "Seamlessly transition your Instagram audience to your online store by linking your profile to a shoppable page, powered by your Instagram grid.",
+      "altText": "Instagram Grid Shop with custom URLs",
+      "cta": "Continue"
+    },
+    "step3": {
+      "headline": "Include a First Comment with Saved Hashtags",
+      "body": "Optimize your reach by including a first comment on Instagram posts. Insert custom saved hashtag groups with Hashtag Manager.",
+      "altText": "Hashtag Manager for Instagram",
+      "cta": "Continue"
+    },
+    "step4": {
+      "headline": "Switch Back at Any Time",
+      "body": "Feeling nostalgic? Switch back to classic Buffer at any time.",
+      "cta": "Sounds Good",
+      "altText": "You can go back to classic Buffer from the top menu"
+    }
   },
   "instagram-first-comment-modal": {
     "headline": "It looks like we’ll need permission to post an Instagram comment on your behalf. ",
