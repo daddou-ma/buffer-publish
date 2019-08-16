@@ -27,7 +27,7 @@ const PlanFeatureList = ({
 }) => (
   <FeatureWrapperStyle key={feature}>
     <IconStyle>
-      <CheckmarkIcon size="medium" />
+      <CheckmarkIcon />
     </IconStyle>
     <Text>{feature}</Text>
   </FeatureWrapperStyle>

@@ -1,4 +1,4 @@
-import { grayDarker } from '@bufferapp/ui/style/colors';
+import { grayDarker, blue } from '@bufferapp/ui/style/colors';
 import { Text } from '@bufferapp/ui';
 import styled from 'styled-components';
 
@@ -12,7 +12,7 @@ export const ColumnStyle = styled.div`
 `;
 
 export const SubtitleStyle = styled.div`
-  color: #2C4BFF;
+  color: ${blue};
   font-weight: 700;
   margin: 22px 0px;
 `;
@@ -35,9 +35,9 @@ export const FooterStyle = styled.div`
 `;
 
 export const ImageWrapperStyle = styled.div`
-  margin: 0px auto 30px
+  margin: 0px auto 30px;
 `;
 
 export const TopContentStyle = styled.div`
-  textAlign: center;
+  text-align: center;
 `;

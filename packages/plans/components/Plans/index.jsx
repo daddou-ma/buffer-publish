@@ -35,7 +35,7 @@ const Plans = ({
         type="secondary"
         size="small"
         icon={<ArrowLeft color={gray} />}
-        label="Back to Dashboard"
+        label={translations.buttonDashboardText}
         onClick={() =>
           onBackToDashboardClick({
             selectedProfileId,
@@ -45,22 +45,25 @@ const Plans = ({
       />
     </ButtonStyle>
     <div style={{ textAlign: 'center' }}>
-      <HeaderStyle type="h1"> Choose your Buffer Publish plan </HeaderStyle>
+      <HeaderStyle type="h1">{ translations.headerText }</HeaderStyle>
       <ColumnContainerStyle>
         <PlanColumn
           {...translations.pro}
+          imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
           source={getSource({ newPlan: 'pro', currentPlan })}
         />
         <PlanColumn
           {...translations.premium}
+          imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
           source={getSource({ newPlan: 'premium', currentPlan })}
         />
         <PlanColumn
           {...translations.small}
+          imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-business@2x.jpeg"
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
           source={getSource({ newPlan: 'small', currentPlan })}

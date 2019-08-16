@@ -24,6 +24,9 @@ const PlanColumn = ({
   source,
   onChoosePlanClick,
   features,
+  buttonText,
+  buttonCurrentPlanText,
+  billingText,
 }) => (
   <ColumnStyle>
     <TopContentStyle>
@@ -36,7 +39,7 @@ const PlanColumn = ({
         />
       </ImageWrapperStyle>
       <Text type="h1">{ cost }/mo</Text>
-      <Text>Billed Monthly</Text>
+      <Text>{ billingText }</Text>
       <SubtitleStyle>
         <Text>{ subtitle }</Text>
       </SubtitleStyle>
@@ -48,7 +51,7 @@ const PlanColumn = ({
       <ButtonWrapperStyle>
         <Button
           type="primary"
-          label="Choose Plan"
+          label={currentPlan === plan ? buttonCurrentPlanText : buttonText}
           fullWidth
           disabled={currentPlan === plan}
           onClick={() => onChoosePlanClick({ source, plan })}
@@ -71,6 +74,9 @@ PlanColumn.propTypes = {
   currentPlan: PropTypes.string.isRequired,
   source: PropTypes.string.isRequired,
   onChoosePlanClick: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  buttonCurrentPlanText: PropTypes.string.isRequired,
+  billingText: PropTypes.string.isRequired,
   features: PropTypes.array.isRequired,
 };
 

@@ -169,29 +169,37 @@
     "cancel": "Cancel"
   },
   "plans-page": {
+    "buttonDashboardText": "Back to Dashboard",
+    "headerText": "Choose your Buffer Publish plan",
     "pro": {
       "title": "Pro",
       "cost": "$15",
       "subtitle": "Commit to a social strategy",
       "plan": "pro",
-      "imageSrc": "https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg",
-      "features": ["8 social accounts", "1 user", "Instagram first comment"]
+      "features": ["8 social accounts", "1 user", "Instagram first comment"],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly"
     },
     "premium": {
       "title": "Premium",
       "cost": "$65",
       "subtitle": "Unlock advanced IG features",
       "plan": "premium",
-      "imageSrc": "https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg",
-      "features": ["8 social accounts", "2 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"]
+      "features": ["8 social accounts", "2 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly"
     },
     "small": {
       "title": "Business",
       "cost": "$99",
       "subtitle": "Built for teams building brands",
       "plan": "small",
-      "imageSrc": "https://static.buffer.com/marketing/static/illustrations/publish-pricing-business@2x.jpeg",
-      "features": ["25 social accounts", "6 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"]
+      "features": ["25 social accounts", "6 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly"
     }
   }
 }
