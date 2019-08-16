@@ -167,5 +167,31 @@
     "text": "Are you sure you want to close the composer? You will lose any unsaved changes.",
     "sure": "Yes, Close Composer",
     "cancel": "Cancel"
+  },
+  "plans-page": {
+    "pro": {
+      "title": "Pro",
+      "cost": "$15",
+      "subtitle": "Commit to a social strategy",
+      "plan": "pro",
+      "imageSrc": "https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg",
+      "features": ["8 social accounts", "1 user", "Instagram first comment"]
+    },
+    "premium": {
+      "title": "Premium",
+      "cost": "$65",
+      "subtitle": "Unlock advanced IG features",
+      "plan": "premium",
+      "imageSrc": "https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg",
+      "features": ["8 social accounts", "2 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"]
+    },
+    "small": {
+      "title": "Business",
+      "cost": "$99",
+      "subtitle": "Built for teams building brands",
+      "plan": "small",
+      "imageSrc": "https://static.buffer.com/marketing/static/illustrations/publish-pricing-business@2x.jpeg",
+      "features": ["25 social accounts", "6 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"]
+    }
   }
 }

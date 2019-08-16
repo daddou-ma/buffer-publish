@@ -31,6 +31,8 @@ export const childTabRoute = generateChildTabRoute({
 export const generatePreferencePageRoute = ({ preferenceId }) =>
   `/preferences/${preferenceId}`;
 
+export const plansPageRoute = '/plans';
+
 export const preferencePageRoute = generatePreferencePageRoute({
   preferenceId: ':preferenceId',
 });
