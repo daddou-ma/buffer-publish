@@ -9,17 +9,23 @@ import { Text } from '@bufferapp/components';
 import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import styled from 'styled-components';
 import { getValidTab } from '../../utils';
 
-const upgradeCtaStyle = {
-  transform: 'translate(0, 1px)',
-  margin: '12px 0',
-  display: 'inline-block',
-  textAlign: 'center',
-  position: 'absolute',
-  top: 0,
-  right: 0,
-};
+const UpgradeCtaStyle = styled.div`
+  transform: translate(0, 1px);
+  margin: 12px 0;
+  display: inline-block;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-left: 8px;
+  display: inline-block;
+`;
 
 const tabsStyle = {
   paddingLeft: '0.5rem',
@@ -100,39 +106,19 @@ class TabNavigation extends React.Component {
           }
           <Tab tabId={'settings'}>Settings</Tab>
         </Tabs>
-        {shouldShowUpgradeCta &&
-          <div style={upgradeCtaStyle}>
-            <Text size="mini">
-              Want to see more from Buffer?
-            </Text>
-            <div style={{ marginLeft: '8px', display: 'inline-block' }}>
-              <Button
-                label={'Upgrade for more'}
-                type="secondary"
-                size="small"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onUpgradeButtonClick('pro');
-                }}
-              />
-            </div>
-          </div>
-        }
-        {!onProTrial &&
-          <FeatureLoader supportedPlans={'pro'}>
-            <div style={upgradeCtaStyle}>
-              <Button
-                label="Learn about Buffer for Business"
-                size="small"
-                type="secondary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onUpgradeButtonClick('b4b');
-                }}
-              />
-            </div>
-          </FeatureLoader>
-        }
+        <UpgradeCtaStyle>
+          <ButtonWrapper>
+            <Button
+              label="Upgrade"
+              type="secondary"
+              size="small"
+              onClick={(e) => {
+                e.preventDefault();
+                onUpgradeButtonClick();
+              }}
+            />
+          </ButtonWrapper>
+        </UpgradeCtaStyle>
         {shouldShowNestedAnalyticsTab && !isLockedProfile &&
           <Tabs
             selectedTabId={selectedChildTabId || 'posts'}
