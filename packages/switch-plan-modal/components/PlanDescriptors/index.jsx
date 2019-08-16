@@ -17,19 +17,14 @@ const listItemStyle = {
   fontSize: '14px',
 };
 
-const ListItem = ({ text }) => (
-  <li style={listItemStyle}>
-    <Text> { text } </Text>
-  </li>
-);
-
 const getListItems = (translations) => {
-  const descriptions = [];
-  Object.keys(translations).forEach((key) => {
-    descriptions.push(translations[key]);
-  });
-  return (descriptions.map(description =>
-    <ListItem text={description} key={description} />));
+  return (Object.keys(translations).forEach((key) => {
+    return (
+      <li style={listItemStyle} key={key}>
+        <Text>{translations[key]}</Text>
+      </li>
+    );
+  }));
 };
 
 const PlanDescriptors = translations => (
@@ -53,7 +48,5 @@ const PlanDescriptors = translations => (
     </div>
   </div>
 );
-
-ListItem.propTypes = { text: PropTypes.string.isRequired };
 
 export default PlanDescriptors;
