@@ -51,19 +51,19 @@ const Plans = ({
           {...translations.pro}
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
-          source={getSource('pro', currentPlan)}
+          source={getSource({ newPlan: 'pro', currentPlan })}
         />
         <PlanColumn
           {...translations.premium}
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
-          source={getSource('premium', currentPlan)}
+          source={getSource({ newPlan: 'premium', currentPlan })}
         />
         <PlanColumn
           {...translations.small}
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
-          source={getSource('small', currentPlan)}
+          source={getSource({ newPlan: 'small', currentPlan })}
         />
       </ColumnContainerStyle>
     </div>

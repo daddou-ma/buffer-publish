@@ -1,4 +1,4 @@
-const getSource = (newPlan, currentPlan) => {
+const getSource = ({ newPlan, currentPlan }) => {
   let source = null;
   switch (newPlan) {
     case 'pro':
