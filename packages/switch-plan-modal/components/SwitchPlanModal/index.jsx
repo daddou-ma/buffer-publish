@@ -279,6 +279,7 @@ SwitchPlanModal.propTypes = {
     addressZip: PropTypes.string,
   }),
   cycle: PropTypes.string.isRequired,
+  plan: PropTypes.string,
   upgradePlan: PropTypes.func.isRequired,
   storeValue: PropTypes.func.isRequired,
   validating: PropTypes.bool.isRequired,
@@ -295,6 +296,7 @@ SwitchPlanModal.defaultProps = {
   hasExpiredProTrial: false,
   dismissible: false,
   card: {},
+  plan: 'pro',
 };
 
 export default SwitchPlanModal;
