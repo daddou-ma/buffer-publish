@@ -52,12 +52,12 @@ describe('middleware', () => {
     expect(Stripe.createToken).toHaveBeenCalledWith(CREDIT_CARD, expect.any(Function));
   });
 
-  it('should trigger an upgradeToPro call on success', (done) => {
+  it('should trigger an switchPlan call on success', (done) => {
     global.Stripe.createToken = (card, cb) => {
       cb(null, SUCCESS_RESPONSE);
       expect(store.dispatch)
         .toHaveBeenCalledWith(asyncDataFetchActions.fetch(({
-          name: 'upgradeToPro',
+          name: 'switchPlan',
           args: {
             cycle: 'year',
             token: SUCCESS_RESPONSE.id,

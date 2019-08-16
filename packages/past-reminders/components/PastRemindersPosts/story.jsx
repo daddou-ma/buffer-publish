@@ -87,7 +87,7 @@ storiesOf('PastRemindersPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
-      onClickUpgradeToPro={action('onClickUpgradeToPro')}
+      onClickSwitchPlan={action('onClickSwitchPlan')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       isBusinessAccount
@@ -107,7 +107,7 @@ storiesOf('PastRemindersPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
-      onClickUpgradeToPro={action('onClickUpgradeToPro')}
+      onClickSwitchPlan={action('onClickSwitchPlan')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       isBusinessAccount

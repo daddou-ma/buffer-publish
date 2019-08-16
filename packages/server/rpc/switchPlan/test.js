@@ -13,36 +13,36 @@ const session = {
   },
 };
 
-const upgradeToPro = source =>
+const switchPlan = source =>
   RPCEndpoint.fn({
     cycle: 'year',
     token: 'stripe token',
     source,
   }, { session });
 
-describe('rpc/upgradeToPro', () => {
+describe('rpc/switchPlan', () => {
   it('sends over a request to Buffer\'s API with Publish\'s access token', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
-    upgradeToPro();
+    switchPlan();
     expect(rp.mock.calls[0][0].form.access_token).toBe(accessToken);
   });
 
   it('sends over the selected cycle and current stripe token', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
-    upgradeToPro();
+    switchPlan();
     expect(rp.mock.calls[0][0].form.cycle).toBe('year');
     expect(rp.mock.calls[0][0].form.stripeToken).toBe('stripe token');
   });
 
   it('it sends the correct cta for specific upgrade paths', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
-    upgradeToPro('queue_limit');
+    switchPlan('queue_limit');
     expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe(SEGMENT_NAMES.QUEUE_LIMIT_PRO_UPGRADE);
   });
 
   it('it sends null for empty sources', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
-    upgradeToPro();
+    switchPlan();
     expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe(null);
   });
 
@@ -51,6 +51,6 @@ describe('rpc/upgradeToPro', () => {
       error: 'Something went wrong!',
     }));
 
-    return upgradeToPro().catch(result => expect(result.message).toBe('Something went wrong!'));
+    return switchPlan().catch(result => expect(result.message).toBe('Something went wrong!'));
   });
 });

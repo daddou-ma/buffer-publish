@@ -13,7 +13,7 @@ export default connect(
     bannerOptions: state.appShell.bannerOptions,
     bannerKey: state.appShell.bannerKey,
     showReturnToClassic: state.appShell.showReturnToClassic,
-    showUpgradeToPro: state.appShell.showUpgradeToPro,
+    showSwitchPlan: state.appShell.showSwitchPlan,
     showManageTeam: state.appShell.showManageTeam,
     showStartProTrial: state.appShell.showStartProTrial,
   }),
