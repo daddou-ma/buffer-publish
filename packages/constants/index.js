@@ -26,11 +26,11 @@ const QUEUE_LIMIT_PRO_UPGRADE = 'publish-composer-queueLimitNotification-proUpgr
 const PINTEREST_PRO_UPGRADE = 'publish-orgAdminConnect-upgradeToConnectPinterest-proUpgrade-1';
 const PLAN_OVERVIEW_PRO_UPGRADE = 'publish-orgAdminConnect-planOverview-proUpgrade-1';
 const PLANS_PRO_UPGRADE = 'publish-plansPage-switchPlansModal-proUpgrade-1';
-const PLANS_PRO_DOWNGRADE = 'publish-plansPage-switchPlansModal-proDowngrade-1';
-const PLANS_PREMIUM_UPGRADE = 'publish-plansPage-switchPlansModal-premiumUpgrade-1';
-const PLANS_PREMIUM_DOWNGRADE = 'publish-plansPage-switchPlansModal-premiumDowngrade-1';
-const PLANS_SMALL_UPGRADE = 'publish-plansPage-switchPlansModal-smallUpgrade-1';
-const PLANS_SMALL_DOWNGRADE = 'publish-plansPage-switchPlansModal-smallDowngrade-1';
+const PLANS_PRO_DOWNGRADE = 'publish-plans-switchPlansModal-proDowngrade-1';
+const PLANS_PREMIUM_UPGRADE = 'publish-plans-switchPlansModal-premiumUpgrade-1';
+const PLANS_PREMIUM_DOWNGRADE = 'publish-plans-switchPlansModal-premiumDowngrade-1';
+const PLANS_SMALL_UPGRADE = 'publish-plans-switchPlansModal-smallUpgrade-1';
+const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
 
 module.exports = {
   SERVICE_NAMES: [
