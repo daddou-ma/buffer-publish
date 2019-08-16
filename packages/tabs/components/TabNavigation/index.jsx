@@ -5,10 +5,8 @@ import {
   Tab,
 } from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
-import { Text } from '@bufferapp/components';
-import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import styled from 'styled-components';
 import { getValidTab } from '../../utils';
 
@@ -67,6 +65,7 @@ class TabNavigation extends React.Component {
       onChildTabClick,
       onProTrial,
       shouldShowUpgradeCta,
+      shouldShowUpgradeButton,
       shouldShowNestedSettingsTab,
       shouldShowNestedAnalyticsTab,
       shouldHideAnalyticsOverviewTab,
@@ -106,19 +105,21 @@ class TabNavigation extends React.Component {
           }
           <Tab tabId={'settings'}>Settings</Tab>
         </Tabs>
-        <UpgradeCtaStyle>
-          <ButtonWrapper>
-            <Button
-              label="Upgrade"
-              type="secondary"
-              size="small"
-              onClick={(e) => {
-                e.preventDefault();
-                onUpgradeButtonClick();
-              }}
-            />
-          </ButtonWrapper>
-        </UpgradeCtaStyle>
+        { shouldShowUpgradeButton && (
+          <UpgradeCtaStyle>
+            <ButtonWrapper>
+              <Button
+                label="Upgrade"
+                type="secondary"
+                size="small"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onUpgradeButtonClick();
+                }}
+              />
+            </ButtonWrapper>
+          </UpgradeCtaStyle>
+        )}
         {shouldShowNestedAnalyticsTab && !isLockedProfile &&
           <Tabs
             selectedTabId={selectedChildTabId || 'posts'}
@@ -163,6 +164,7 @@ TabNavigation.defaultProps = {
   shouldShowNestedSettingsTab: false,
   shouldShowNestedAnalyticsTab: false,
   shouldHideAnalyticsOverviewTab: false,
+  shouldShowUpgradeButton: false,
   selectedChildTabId: null,
   profileId: null,
   isLockedProfile: false,
@@ -191,6 +193,7 @@ TabNavigation.propTypes = {
   profileId: PropTypes.string,
   isLockedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
+  shouldShowUpgradeButton: PropTypes.bool,
 };
 
 export default WithFeatureLoader(TabNavigation);
