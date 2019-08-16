@@ -19,10 +19,10 @@ const storeFake = state => ({
 const store = storeFake({
   i18n: {
     translations: {
-      'upgrade-modal': {},
+      'switch-plan-modal': {},
     },
   },
-  upgradeModal: {},
+  switchPlanModal: {},
   stripe: {},
   productFeatures: {
     planName: 'free',

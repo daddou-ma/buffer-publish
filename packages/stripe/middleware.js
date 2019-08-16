@@ -36,17 +36,18 @@ export default ({ dispatch, getState }) => next => (action) => {
           }));
         } else {
           dispatch(asyncDataFetchActions.fetch({
-            name: 'upgradeToPro',
+            name: 'switchPlan',
             args: {
-              cycle: getState().upgradeModal.cycle,
-              source: getState().upgradeModal.source,
+              plan: getState().switchPlanModal.plan,
+              cycle: getState().switchPlanModal.cycle,
+              source: getState().switchPlanModal.source,
               token: response.id,
             },
           }));
         }
       });
       break;
-    case `upgradeToPro_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
+    case `switchPlan_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
       window.location.reload();
       break;
     default:

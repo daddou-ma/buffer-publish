@@ -13,7 +13,7 @@ export default connect(
     bannerOptions: state.appShell.bannerOptions,
     bannerKey: state.appShell.bannerKey,
     showReturnToClassic: state.appShell.showReturnToClassic,
-    showUpgradeToPro: state.appShell.showUpgradeToPro,
+    showSwitchPlan: state.appShell.showSwitchPlan,
     showManageTeam: state.appShell.showManageTeam,
     showStartProTrial: state.appShell.showStartProTrial,
   }),
@@ -34,8 +34,8 @@ export default connect(
         }),
       );
     },
-    upgradeToPro() {
-      dispatch(modalActions.showUpgradeModal({ source: 'app_shell' }));
+    switchPlan() {
+      dispatch(modalActions.showSwitchPlanModal({ source: 'app_shell', plan: 'pro' }));
     },
     onCloseBanner({ key }) {
       dispatch(actions.onCloseBanner({ key }));
