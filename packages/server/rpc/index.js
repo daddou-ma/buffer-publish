@@ -24,7 +24,7 @@ const requeuePost = require('./requeuePost');
 const updatePausedSchedules = require('./updatePausedSchedules');
 const sendFeedback = require('./sendFeedback');
 const savePublishBetaRedirect = require('./savePublishBetaRedirect');
-const upgradePlan = require('./upgradePlan');
+const switchPlan = require('./switchPlan');
 const changeDateTimePreferences = require('./changeDateTimePreferences');
 const twoFactorUpdate = require('./twoFactorUpdate');
 const twoFactorConfirm = require('./twoFactorConfirm');
@@ -94,7 +94,7 @@ module.exports = rpc(
   updatePausedSchedules,
   sendFeedback,
   savePublishBetaRedirect,
-  upgradePlan,
+  switchPlan,
   changeDateTimePreferences,
   twoFactorUpdate,
   twoFactorConfirm,

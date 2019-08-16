@@ -13,6 +13,7 @@ import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
 
 import InputText from '../InputText';
 import PlanCycleSelect from '../PlanCycleSelect';
+import PlanDescriptors from '../PlanDescriptors';
 import Select from '../Select';
 
 const listStyle = {
@@ -154,7 +155,7 @@ class UpgradeModal extends React.Component {
       <Modal
         wide
         action={{
-          label: validating ? translations.validating : translations.upgradeCta,
+          label: validating ? translations.validating : translations.switchCta,
           disabled: validating,
           callback: () => this.submitForm({ card, upgradePlan }),
         }}
@@ -166,112 +167,35 @@ class UpgradeModal extends React.Component {
       >
         <div style={{ overflow: 'auto', height: 'auto' }}>
           <div style={{ width: '600px', padding: '0px 20px 25px' }}>
-            {isPro('premium') && <div>
-              <div style={{ textAlign: 'center' }}>
-                <Text type="h2">
-                  {hasExpiredProTrial
-                    ? translations.proTrialistUpgradeHeader
-                    : translations.proUpgradeHeader }
-                </Text>
-              </div>
-              <div style={{ display: 'flex' }}>
-                <div style={{ flex: '1' }}>
-                  <Text type="h3">{translations.freePlan}</Text>
-                  <ul style={listStyleLeft}>
-                    <ListItem text={translations.freeConnect} />
-                    <ListItem text={translations.freeSchedule} />
-                    <ListItem text={translations.freePostHistory} />
-                  </ul>
-                </div>
-                <div style={{ flex: '1' }}>
-                  <Text type="h3">
-                    {translations.proPlan}
-                    <span role="img" aria-label="pro">  ✅</span>
-                  </Text>
-                  <ul style={listStyle}>
-                    <ListItem text={translations.proConnect} />
-                    <ListItem text={translations.proSchedule} />
-                    <ListItem text={translations.proIGFirstComment} />
-                    <ListItem text={translations.proCalendarView} />
-                    <ListItem text={translations.proReviewHistory} />
-                  </ul>
-                </div>
-              </div>
-            </div>}
-
-            {isPremium('premium') && <div>
-              <div style={{ textAlign: 'center' }}>
-                <Text type="h2">
-                  {translations.premiumSwitchHeader}
-                </Text>
-              </div>
-              <div style={{ display: 'flex' }}>
-                <div style={{ flex: '1' }}>
-                  <Text type="h3">{translations.freePlan}</Text>
-                  <ul style={listStyleLeft}>
-                    <ListItem text={translations.freeConnect} />
-                    <ListItem text={translations.freeSchedule} />
-                    <ListItem text={translations.freePostHistory} />
-                  </ul>
-                </div>
-                <div style={{ flex: '1' }}>
-                  <Text type="h3">
-                    {translations.proPlan}
-                    <span role="img" aria-label="pro">  ✅</span>
-                  </Text>
-                  <ul style={listStyle}>
-                    <ListItem text={translations.proConnect} />
-                    <ListItem text={translations.proSchedule} />
-                    <ListItem text={translations.proIGFirstComment} />
-                    <ListItem text={translations.proCalendarView} />
-                    <ListItem text={translations.proReviewHistory} />
-                  </ul>
-                </div>
-              </div>
-            </div>}
-
-            {isSmallBusiness('premium') && <div>
-              <div style={{ textAlign: 'center' }}>
-                <Text type="h2">
-                  {hasExpiredProTrial
-                    ? translations.proTrialistUpgradeHeader
-                    : translations.proUpgradeHeader }
-                </Text>
-              </div>
-              <div style={{ display: 'flex' }}>
-                <div style={{ flex: '1' }}>
-                  <Text type="h3">{translations.freePlan}</Text>
-                  <ul style={listStyleLeft}>
-                    <ListItem text={translations.freeConnect} />
-                    <ListItem text={translations.freeSchedule} />
-                    <ListItem text={translations.freePostHistory} />
-                  </ul>
-                </div>
-                <div style={{ flex: '1' }}>
-                  <Text type="h3">
-                    {translations.proPlan}
-                    <span role="img" aria-label="pro">  ✅</span>
-                  </Text>
-                  <ul style={listStyle}>
-                    <ListItem text={translations.proConnect} />
-                    <ListItem text={translations.proSchedule} />
-                    <ListItem text={translations.proIGFirstComment} />
-                    <ListItem text={translations.proCalendarView} />
-                    <ListItem text={translations.proReviewHistory} />
-                  </ul>
-                </div>
-              </div>
-            </div>}
+            {isPro(plan) && <PlanDescriptors translations={translations.proDescriptors} />}
+            {isPremium(plan) && <PlanDescriptors translations={translations.premiumDescriptors} />}
+            {isSmallBusiness(plan) && <PlanDescriptors translations={translations.businessDescriptors} />}
 
             <Divider marginTop="" marginBottom="1.5rem" />
 
-            <PlanCycleSelect
+            {isPro(plan) && <PlanCycleSelect
               plan={plan}
-              translations={translations}
+              translations={translations.proDescriptors}
               cycle={cycle}
               selectCycle={selectCycle}
               isNonprofit={isNonprofit}
-            />
+            />}
+
+            {isPremium(plan) && <PlanCycleSelect
+              plan={plan}
+              translations={translations.premiumDescriptors}
+              cycle={cycle}
+              selectCycle={selectCycle}
+              isNonprofit={isNonprofit}
+            />}
+
+            {isSmallBusiness(plan) && <PlanCycleSelect
+              plan={plan}
+              translations={translations.businessDescriptors}
+              cycle={cycle}
+              selectCycle={selectCycle}
+              isNonprofit={isNonprofit}
+            />}
 
             <div style={{ textAlign: 'center', margin: '1.5rem 0 1rem' }}>
               <Text type="h3">

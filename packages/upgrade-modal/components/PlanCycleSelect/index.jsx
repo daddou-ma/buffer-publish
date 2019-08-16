@@ -70,27 +70,27 @@ PlanCycleButton.defaultProps = {
   first: false,
 };
 
-const getProYearlyPlan = (isNonprofit, { proPlanNonprofitYearlyPrice, proPlanYearlyPrice }) => (
-  isNonprofit ? proPlanNonprofitYearlyPrice : proPlanYearlyPrice
+const getYearlyPlan = (isNonprofit, { nonprofitYearlyPrice, planYearlyPrice }) => (
+  isNonprofit ? nonprofitYearlyPrice : planYearlyPrice
 );
 
-const getProMonthlyPlan = (isNonprofit, { proPlanNonprofitMonthlyPrice, proPlanMonthlyPrice }) => (
-  isNonprofit ? proPlanNonprofitMonthlyPrice : proPlanMonthlyPrice
+const getMonthlyPlan = (isNonprofit, { nonprofitMonthlyPrice, planMonthlyPrice }) => (
+  isNonprofit ? nonprofitMonthlyPrice : planMonthlyPrice
 );
 
 const PlanCycleSelect = ({ translations, cycle, selectCycle, isNonprofit }) => (
   <div style={{ display: 'flex' }}>
     <PlanCycleButton
       first
-      label={getProMonthlyPlan(isNonprofit, translations)}
-      description={translations.proPlanMonthlyDescription}
+      label={getMonthlyPlan(isNonprofit, translations)}
+      description={translations.planMonthlyDescription}
       cycle={'month'}
       selectedCycle={cycle}
       selectCycle={selectCycle}
     />
     <PlanCycleButton
-      label={getProYearlyPlan(isNonprofit, translations)}
-      description={translations.proPlanYearlyDescription}
+      label={getYearlyPlan(isNonprofit, translations)}
+      description={translations.planYearlyDescription}
       cycle={'year'}
       selectedCycle={cycle}
       selectCycle={selectCycle}

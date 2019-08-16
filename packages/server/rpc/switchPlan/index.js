@@ -19,8 +19,8 @@ const getCtaFromSource = source =>
   sourceCtaMap.get(source) || null;
 
 module.exports = method(
-  'upgradePlan',
-  'upgrade user plan',
+  'switchPlan',
+  'switch user plan',
   async ({ cycle, token, source, plan }, { session }) => {
     let result;
     try {

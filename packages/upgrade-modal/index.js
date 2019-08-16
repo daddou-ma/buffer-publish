@@ -10,7 +10,7 @@ export default connect(
     cycle: state.upgradeModal.cycle,
     card: state.upgradeModal.card,
     dismissible: state.upgradeModal.dismissible,
-    translations: state.i18n.translations['upgrade-modal'],
+    translations: state.i18n.translations['switch-plan-modal'],
     validating: state.stripe.validating,
     isNonprofit: state.appSidebar.user.isNonprofit,
     hasExpiredProTrial: state.appSidebar.user.shouldShowProTrialExpiredModal,

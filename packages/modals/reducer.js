@@ -176,8 +176,9 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  showUpgradeModal: ({ source }) => ({
+  showUpgradeModal: ({ plan, source }) => ({
     type: actionTypes.SHOW_UPGRADE_MODAL,
+    plan,
     source,
   }),
   hideUpgradeModal: () => ({

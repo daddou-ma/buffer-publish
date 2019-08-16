@@ -11,7 +11,7 @@ export const actionTypes = keyWrapper('UPGRADE_MODAL', {
 });
 
 export const initialState = {
-  plan: 'unknown',
+  plan: 'pro',
   cycle: 'year',
   card: {},
   source: 'unknown',
@@ -44,6 +44,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         source: action.source || 'unknown',
+        plan: action.plan || 'pro',
       };
     case modalsActionTypes.HIDE_UPGRADE_MODAL:
       return {
