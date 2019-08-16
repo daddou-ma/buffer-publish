@@ -45,7 +45,7 @@ const PlanColumn = ({
       </SubtitleStyle>
     </TopContentStyle>
     {features.map(feature => (
-      <PlanFeatureList feature={feature} />
+      <PlanFeatureList feature={feature} key={feature} />
     ))}
     <FooterStyle>
       <ButtonWrapperStyle>

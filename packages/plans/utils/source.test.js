@@ -11,7 +11,7 @@ describe('Plans Utils', () => {
       expect(source).toEqual('plans-pro-downgrade');
     });
     it('returns premium upgrade source', () => {
-      const source = getSource({ newPlan: 'premium', currentPlan: 'pro' });
+      const source = getSource({ newPlan: 'premium_business', currentPlan: 'pro' });
       expect(source).toEqual('plans-premium-upgrade');
     });
   });
