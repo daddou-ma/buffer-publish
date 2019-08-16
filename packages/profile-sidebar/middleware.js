@@ -67,7 +67,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       const isPreferencePage = !!getPreferencePageParams({
         path,
       });
-      const { profiles, isOnBusinessTrial } = getState().profileSidebar;
+      const { profiles, isOnBusinessTrial, hasOnboardingFeatureFlip } = getState().profileSidebar;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
 
@@ -107,6 +107,9 @@ export default ({ dispatch, getState }) => next => (action) => {
           profileId: selectedProfile.id,
           tabId: 'queue',
         })));
+      // With a feature flip, temporary
+      } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial && hasOnboardingFeatureFlip) {
+        dispatch(push('/new-business-trialists'));
       } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial) {
         dispatch(push('/new-connection-business-trialists'));
       } else if (!isPreferencePage && profiles.length === 0) {

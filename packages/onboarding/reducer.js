@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
         ...state,
         canSeeOnboardingPage: !action.result.messages.includes('user_saw_onboarding_page'),
       };
+    case actionTypes.CONNECT_SOCIAL_ACCOUNT:
     case actionTypes.SKIP_STEP:
       return {
         ...state,
