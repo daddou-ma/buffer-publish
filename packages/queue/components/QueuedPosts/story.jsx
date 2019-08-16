@@ -23,7 +23,7 @@ const store = storeFake({
       'switch-plan-modal': {},
     },
   },
-  upgradeModal: {},
+  switchPlanModal: {},
   stripe: {},
   productFeatures: {
     planName: 'free',

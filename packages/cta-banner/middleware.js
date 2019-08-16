@@ -11,7 +11,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
       if (user && user.is_business_user) {
         openBillingWindow();
       } else {
-        dispatch(modalsActions.showUpgradeModal({ source: 'cta_banner_upgrade' }));
+        dispatch(modalsActions.showSwitchPlanModal({ source: 'cta_banner_upgrade' }));
       }
       break;
     default:

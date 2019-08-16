@@ -6,10 +6,10 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
-    plan: state.upgradeModal.plan,
-    cycle: state.upgradeModal.cycle,
-    card: state.upgradeModal.card,
-    dismissible: state.upgradeModal.dismissible,
+    plan: state.switchPlanModal.plan,
+    cycle: state.switchPlanModal.cycle,
+    card: state.switchPlanModal.card,
+    dismissible: state.switchPlanModal.dismissible,
     translations: state.i18n.translations['switch-plan-modal'],
     validating: state.stripe.validating,
     isNonprofit: state.appSidebar.user.isNonprofit,

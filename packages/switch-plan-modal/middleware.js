@@ -9,7 +9,7 @@ import { actionTypes as modalsActionTypes, actions as modalActions } from '@buff
 import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line
-  const { card, source } = getState().upgradeModal;
+  const { card, source } = getState().switchPlanModal;
 
   next(action);
 
@@ -23,7 +23,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
       });
       break;
     }
-    case modalsActionTypes.SHOW_UPGRADE_MODAL: {
+    case modalsActionTypes.SHOW_SWITCH_PLAN_MODAL: {
       trackAction({
         location: 'MODALS',
         action: 'show_upgrade_to_pro',
@@ -48,7 +48,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
       }));
       break;
     }
-    case modalsActionTypes.HIDE_UPGRADE_MODAL: {
+    case modalsActionTypes.HIDE_SWITCH_PLAN_MODAL: {
       trackAction({
         location: 'MODALS',
         action: 'hide_upgrade_to_pro',

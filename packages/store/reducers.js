@@ -69,7 +69,7 @@ export default {
   environment: environmentReducer,
   appSwitcher: appSwitcherReducer,
   betaRedirect: betaRedirectReducer,
-  upgradeModal: switchPlanModalReducer,
+  switchPlanModal: switchPlanModalReducer,
   stripe: stripeReducer,
   modals: modalsReducer,
   manageAppsExtras: manageAppsReducer,

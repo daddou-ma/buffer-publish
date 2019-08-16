@@ -11,12 +11,12 @@ describe('middleware', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const getState = jest.fn(() => ({
-      upgradeModal: { source: 'source' },
+      switchPlanModal: { source: 'source' },
     }));
 
     test('when the modal opens', () => {
       const action = {
-        type: modalsActionTypes.SHOW_UPGRADE_MODAL,
+        type: modalsActionTypes.SHOW_SWITCH_PLAN_MODAL,
         source: 'source',
       };
       middleware({ dispatch, getState })(next)(action);
@@ -34,7 +34,7 @@ describe('middleware', () => {
 
     test('when the modal closes', () => {
       const action = {
-        type: modalsActionTypes.HIDE_UPGRADE_MODAL,
+        type: modalsActionTypes.HIDE_SWITCH_PLAN_MODAL,
       };
       middleware({ dispatch, getState })(next)(action);
 

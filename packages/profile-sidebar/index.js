@@ -60,8 +60,8 @@ export default hot(connect(
     showProfilesDisconnectedModal: () => {
       dispatch(modalActions.showProfilesDisconnectedModal());
     },
-    showUpgradeModal: () => {
-      dispatch(modalActions.showUpgradeModal({ source: 'app_header' }));
+    showSwitchPlanModal: () => {
+      dispatch(modalActions.showSwitchPlanModal({ source: 'app_header' }));
     },
     goToConnectSocialAccount: () => {
       dispatch(actions.handleConnectSocialAccount());

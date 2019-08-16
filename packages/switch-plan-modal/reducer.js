@@ -40,13 +40,13 @@ export default (state = initialState, action) => {
         cycle: 'year',
         source: 'unknown',
       };
-    case modalsActionTypes.SHOW_UPGRADE_MODAL:
+    case modalsActionTypes.SHOW_SWITCH_PLAN_MODAL:
       return {
         ...state,
         source: action.source || 'unknown',
         plan: action.plan || 'pro',
       };
-    case modalsActionTypes.HIDE_UPGRADE_MODAL:
+    case modalsActionTypes.HIDE_SWITCH_PLAN_MODAL:
       return {
         ...state,
         source: initialState.source,

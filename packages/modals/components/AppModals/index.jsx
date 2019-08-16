@@ -14,7 +14,7 @@ import InstagramFirstCommentProTrialModal from '@bufferapp/publish-ig-first-comm
 import CloseComposerConfirmationModal from '@bufferapp/publish-close-composer-confirmation-modal';
 
 const AppModals = ({
-  showUpgradeModal,
+  showSwitchPlanModal,
   showWelcomeModal,
   showWelcomePaidModal,
   showProfilesDisconnectedModal,
@@ -28,7 +28,7 @@ const AppModals = ({
 }) => (
   <React.Fragment>
     {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
-    {showUpgradeModal && <SwitchPlanModal />}
+    {showSwitchPlanModal && <SwitchPlanModal />}
     {showWelcomeModal && <WelcomeModal />}
     {showInstagramFirstCommentModal && <InstagramFirstCommentModal />}
     {showWelcomePaidModal && <WelcomePaidModal />}
@@ -42,7 +42,7 @@ const AppModals = ({
 );
 
 AppModals.propTypes = {
-  showUpgradeModal: PropTypes.bool.isRequired,
+  showSwitchPlanModal: PropTypes.bool.isRequired,
   showWelcomeModal: PropTypes.bool.isRequired,
   showWelcomePaidModal: PropTypes.bool.isRequired,
   showProfilesDisconnectedModal: PropTypes.bool.isRequired,

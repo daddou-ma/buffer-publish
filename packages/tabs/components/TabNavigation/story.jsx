@@ -18,10 +18,10 @@ const storeFake = state => ({
 const store = storeFake({
   i18n: {
     translations: {
-      'upgrade-modal': {},
+      'switch-plan-modal': {},
     },
   },
-  upgradeModal: {},
+  switchPlanModal: {},
   stripe: {},
   productFeatures: {
     planName: 'free',
@@ -53,7 +53,7 @@ storiesOf('TabNavigation', module)
       shouldShowNestedSettingsTab
       selectedChildTabId={'general-settings'}
       onChildTabClick={action('child-tab-click')}
-      showUpgradeModal={action('show-upgrade-modal')}
+      showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta
       onUpgradeButtonClick={action('on-upgrade-button-click')}
       onProTrial
@@ -69,7 +69,7 @@ storiesOf('TabNavigation', module)
       shouldShowNestedSettingsTab
       selectedChildTabId={'general-settings'}
       onChildTabClick={action('child-tab-click')}
-      showUpgradeModal={action('show-upgrade-modal')}
+      showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta
       onUpgradeButtonClick={action('on-upgrade-button-click')}
       onProTrial
@@ -84,7 +84,7 @@ storiesOf('TabNavigation', module)
       shouldShowNestedSettingsTab
       selectedChildTabId={'general-settings'}
       onChildTabClick={action('child-tab-click')}
-      showUpgradeModal={action('show-upgrade-modal')}
+      showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta
       canStartProTrial
       onUpgradeButtonClick={action('on-upgrade-button-click')}
@@ -98,7 +98,7 @@ storiesOf('TabNavigation', module)
       isManager={false}
       isInstagramProfile
       shouldShowNestedSettingsTab={false}
-      showUpgradeModal={action('show-upgrade-modal')}
+      showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta
       onUpgradeButtonClick={action('on-upgrade-button-click')}
       onProTrial
@@ -113,7 +113,7 @@ storiesOf('TabNavigation', module)
       shouldShowNestedSettingsTab
       selectedChildTabId={'general-settings'}
       onChildTabClick={action('child-tab-click')}
-      showUpgradeModal={action('show-upgrade-modal')}
+      showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta={false}
       onUpgradeButtonClick={action('on-upgrade-button-click')}
       onProTrial
@@ -128,7 +128,7 @@ storiesOf('TabNavigation', module)
       shouldShowNestedSettingsTab
       selectedChildTabId={'general-settings'}
       onChildTabClick={action('child-tab-click')}
-      showUpgradeModal={action('show-upgrade-modal')}
+      showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta={false}
       onUpgradeButtonClick={action('on-upgrade-button-click')}
       onProTrial

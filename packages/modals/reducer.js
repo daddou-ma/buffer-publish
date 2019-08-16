@@ -1,11 +1,11 @@
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const initialState = {
-  showUpgradeModal: false,
+  showSwitchPlanModal: false,
   showWelcomeModal: false,
   showWelcomePaidModal: false,
   showProfilesDisconnectedModal: false,
-  upgradeModalSource: null,
+  switchPlanModalSource: null,
   showStealProfileModal: false,
   stealProfileUsername: null,
   showInstagramDirectPostingModal: false,
@@ -19,8 +19,8 @@ export const initialState = {
 };
 
 export const actionTypes = keyWrapper('MODALS', {
-  SHOW_UPGRADE_MODAL: 0,
-  HIDE_UPGRADE_MODAL: 0,
+  SHOW_SWITCH_PLAN_MODAL: 0,
+  HIDE_SWITCH_PLAN_MODAL: 0,
   SHOW_WELCOME_MODAL: 0,
   HIDE_WELCOME_MODAL: 0,
   SHOW_WELCOME_PAID_MODAL: 0,
@@ -46,16 +46,16 @@ export const actionTypes = keyWrapper('MODALS', {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SHOW_UPGRADE_MODAL:
+    case actionTypes.SHOW_SWITCH_PLAN_MODAL:
       return {
         ...state,
-        showUpgradeModal: true,
-        upgradeModalSource: action.source,
+        showSwitchPlanModal: true,
+        switchPlanModalSource: action.source,
       };
-    case actionTypes.HIDE_UPGRADE_MODAL:
+    case actionTypes.HIDE_SWITCH_PLAN_MODAL:
       return {
         ...state,
-        showUpgradeModal: false,
+        showSwitchPlanModal: false,
       };
     case actionTypes.SHOW_UPGRADE_B4B_MODAL:
       return {
@@ -176,13 +176,13 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  showUpgradeModal: ({ plan, source }) => ({
-    type: actionTypes.SHOW_UPGRADE_MODAL,
+  showSwitchPlanModal: ({ plan, source }) => ({
+    type: actionTypes.SHOW_SWITCH_PLAN_MODAL,
     plan,
     source,
   }),
   hideUpgradeModal: () => ({
-    type: actionTypes.HIDE_UPGRADE_MODAL,
+    type: actionTypes.HIDE_SWITCH_PLAN_MODAL,
   }),
   showB4BTrialExpiredModal: ({ source }) => ({
     type: actionTypes.SHOW_UPGRADE_B4B_MODAL,

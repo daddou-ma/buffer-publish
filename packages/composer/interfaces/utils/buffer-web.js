@@ -278,7 +278,7 @@ const onIframeMessage = (e) => {
       break;
     }
 
-    case 'click-upgrade-modal': {
+    case 'click-switch-plan-modal': {
       if (buffer.AppDispatcher) {
         buffer.AppDispatcher.handleViewAction({
           actionType: buffer.ModalActionTypes.OPEN_MODAL,

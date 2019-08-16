@@ -39,7 +39,7 @@ export default connect(
     },
     onUpgradeButtonClick: (plan) => {
       if (plan === 'pro') {
-        dispatch(modalsActions.showUpgradeModal({ source: 'app_header' }));
+        dispatch(modalsActions.showSwitchPlanModal({ source: 'app_header' }));
       } else if (plan === 'b4b') {
         const go = () => window.location.assign('https://buffer.com/business?utm_campaign=app_header');
         trackAction({ location: 'header', action: 'clicked_b4b_learn_more' }, {

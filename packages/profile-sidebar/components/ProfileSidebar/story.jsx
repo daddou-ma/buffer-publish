@@ -47,7 +47,7 @@ storiesOf('ProfileSidebar', module)
       goToConnectSocialAccount={action('connect social account click')}
       profileLimit={3}
       loading={false}
-      showUpgradeModal={action('showUpgradeModal')}
+      showSwitchPlanModal={action('showSwitchPlanModal')}
       showProfilesDisconnectedModal={action('showProfilesDisconnectedModal')}
       onDropProfile={action('onDropProfile')}
       hasInstagram={false}
@@ -65,7 +65,7 @@ storiesOf('ProfileSidebar', module)
       goToConnectSocialAccount={action('connect social account click')}
       profileLimit={3}
       loading={false}
-      showUpgradeModal={action('showUpgradeModal')}
+      showSwitchPlanModal={action('showSwitchPlanModal')}
       showProfilesDisconnectedModal={action('showProfilesDisconnectedModal')}
       onDropProfile={action('onDropProfile')}
       hasInstagram={false}

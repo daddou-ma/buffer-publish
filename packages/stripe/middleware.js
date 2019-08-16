@@ -38,9 +38,9 @@ export default ({ dispatch, getState }) => next => (action) => {
           dispatch(asyncDataFetchActions.fetch({
             name: 'switchPlan',
             args: {
-              plan: getState().upgradeModal.plan,
-              cycle: getState().upgradeModal.cycle,
-              source: getState().upgradeModal.source,
+              plan: getState().switchPlanModal.plan,
+              cycle: getState().switchPlanModal.cycle,
+              source: getState().switchPlanModal.source,
               token: response.id,
             },
           }));

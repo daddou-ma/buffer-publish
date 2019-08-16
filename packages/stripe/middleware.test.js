@@ -25,7 +25,7 @@ describe('middleware', () => {
     dispatch: jest.fn(),
     getState: () => ({
       i18n,
-      upgradeModal: {
+      switchPlanModal: {
         cycle: 'year',
         source: 'source',
       },

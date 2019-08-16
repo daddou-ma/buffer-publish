@@ -215,7 +215,7 @@ const AppActionCreators = {
                       window.open(`${bufferOrigins.get(environment)}/pricing`);
                     } else {
                       AppDispatcher.handleViewAction({
-                        actionType: ActionTypes.EVENT_SHOW_UPGRADE_MODAL,
+                        actionType: ActionTypes.EVENT_SHOW_SWITCH_PLAN_MODAL,
                       });
                     }
                   } else if (!isBusinessUser) {

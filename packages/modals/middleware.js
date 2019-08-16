@@ -7,7 +7,7 @@ import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-lock
 import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty';
 import { actions, actionTypes } from './reducer';
 import {
-  shouldShowUpgradeModal,
+  shouldShowSwitchPlanModal,
   shouldShowWelcomeModal,
   getSourceFromKey,
   shouldShowStealProfileModal,
@@ -23,12 +23,12 @@ export default ({ dispatch, getState }) => next => (action) => {
   switch (action.type) {
     case lockedProfileActionTypes.UPGRADE:
       if (action.plan === 'free') {
-        dispatch(actions.showUpgradeModal({ source: 'locked_profile' }));
+        dispatch(actions.showSwitchPlanModal({ source: 'locked_profile' }));
       }
       break;
     case 'APP_INIT': {
-      if (shouldShowUpgradeModal()) {
-        dispatch(actions.showUpgradeModal({ source: getSourceFromKey() }));
+      if (shouldShowSwitchPlanModal()) {
+        dispatch(actions.showSwitchPlanModal({ source: getSourceFromKey() }));
       }
       if (shouldShowStealProfileModal()) {
         dispatch(actions.showStealProfileModal({ stealProfileUsername: getShowModalValue() }));
@@ -57,7 +57,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         shouldShowBusinessTrialExpiredModal,
       } = action.result; // userData
       if (shouldShowProTrialExpiredModal) {
-        dispatch(actions.showUpgradeModal({ source: 'pro_trial_expired' }));
+        dispatch(actions.showSwitchPlanModal({ source: 'pro_trial_expired' }));
       } else if (shouldShowBusinessTrialExpiredModal) {
         dispatch(actions.showB4BTrialExpiredModal({ source: 'b4b_trial_expired' }));
       }
@@ -127,8 +127,8 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     }
     case 'COMPOSER_EVENT':
-      if (action.eventType === 'show-upgrade-modal') {
-        dispatch(actions.showUpgradeModal({ source: 'queue_limit' }));
+      if (action.eventType === 'show-switch-plan-modal') {
+        dispatch(actions.showSwitchPlanModal({ source: 'queue_limit' }));
       }
       break;
     default:
