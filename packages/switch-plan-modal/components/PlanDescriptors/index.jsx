@@ -17,36 +17,40 @@ const listItemStyle = {
   fontSize: '14px',
 };
 
-const getListItems = (translations) => {
-  return (Object.keys(translations).forEach((key) => {
-    return (
-      <li style={listItemStyle} key={key}>
-        <Text>{translations[key]}</Text>
-      </li>
-    );
-  }));
+const getListItems = (list) => {
+  return Object.keys(list).map(key => (
+    <li style={listItemStyle} key={key}>
+      <Text>{list[key]}</Text>
+    </li>
+  ));
 };
 
-const PlanDescriptors = translations => (
+const PlanDescriptors = ({ left, right, plan }) => (
   <div>
     <div style={{ textAlign: 'center' }}>
       <Text type="h2">
-        {translations.translations.plan}
+        {plan}
       </Text>
     </div>
     <div style={{ display: 'flex' }}>
       <div style={{ flex: '1' }}>
         <ul style={listStyleLeft}>
-          {getListItems(translations.translations.left)}
+          {getListItems(left)}
         </ul>
       </div>
       <div style={{ flex: '1' }}>
         <ul style={listStyle}>
-          {getListItems(translations.translations.right)}
+          {getListItems(right)}
         </ul>
       </div>
     </div>
   </div>
 );
+
+PlanDescriptors.propTypes = {
+  left: PropTypes.object.isRequired, // eslint-disable-line
+  right: PropTypes.object.isRequired, // eslint-disable-line
+  plan: PropTypes.string.isRequired,
+};
 
 export default PlanDescriptors;

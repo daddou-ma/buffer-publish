@@ -158,16 +158,16 @@ class SwitchPlanModal extends React.Component {
       >
         <div style={{ overflow: 'auto', height: 'auto' }}>
           <div style={{ width: '600px', padding: '0px 20px 25px' }}>
-            {isPro(plan) && <PlanDescriptors translations={translations.proDescriptors} />}
-            {isPremium(plan) && <PlanDescriptors translations={translations.premiumDescriptors} />}
-            {isSmallBusiness(plan) && <PlanDescriptors translations={translations.businessDescriptors} />}
+            {isPro(plan) && <PlanDescriptors {...translations.proDescriptors} />}
+            {isPremium(plan) && <PlanDescriptors {...translations.premiumDescriptors} />}
+            {isSmallBusiness(plan) && <PlanDescriptors {...translations.businessDescriptors} />}
 
             <Divider marginTop="" marginBottom="1.5rem" />
 
             {isPro(plan) && (
               <PlanCycleSelect
-                plan={plan}
                 translations={translations.proDescriptors}
+                plan={plan}
                 cycle={cycle}
                 selectCycle={selectCycle}
                 isNonprofit={isNonprofit}
