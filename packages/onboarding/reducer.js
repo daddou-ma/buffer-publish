@@ -6,7 +6,7 @@ export const actionTypes = keyWrapper('ONBOARDING_MANAGER', {
   SKIP_STEP: 0,
 });
 
-const initialState = {
+export const initialState = {
   canSeeOnboardingPage: true,
 };
 
