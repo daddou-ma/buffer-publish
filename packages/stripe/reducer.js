@@ -24,6 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         validating: true,
         card: action.card,
+        plan: action.plan,
       };
     case actionTypes.CREDIT_CARD_ERROR:
       return {
@@ -48,9 +49,10 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  validateCreditCard: card => ({
+  validateCreditCard: ({ card, plan }) => ({
     type: actionTypes.CREDIT_CARD_VALIDATING,
     card,
+    plan,
   }),
   throwValidationError: error => ({
     type: actionTypes.CREDIT_CARD_ERROR,

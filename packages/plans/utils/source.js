@@ -6,13 +6,13 @@ const getSource = ({ newPlan, currentPlan }) => {
         ? 'plans-pro-upgrade'
         : 'plans-pro-downgrade';
       break;
-    case 'premium':
+    case 'premium_business':
       source = currentPlan === 'free' || currentPlan === 'pro'
         ? 'plans-premium-upgrade'
         : 'plans-premium-downgrade';
       break;
     case 'small':
-      source = currentPlan === 'free' || currentPlan === 'pro' || currentPlan === 'premium'
+      source = currentPlan === 'free' || currentPlan === 'pro' || currentPlan === 'premium_business'
         ? 'plans-small-upgrade'
         : 'plans-small-downgrade';
       break;

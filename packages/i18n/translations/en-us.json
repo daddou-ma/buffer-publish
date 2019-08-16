@@ -273,7 +273,7 @@
       "title": "Premium",
       "cost": "$65",
       "subtitle": "Unlock advanced IG features",
-      "plan": "premium",
+      "plan": "premium_business",
       "features": ["8 social accounts", "2 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
       "buttonText": "Choose Plan",
       "buttonCurrentPlanText": "Current Plan",

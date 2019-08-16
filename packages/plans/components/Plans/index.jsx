@@ -59,7 +59,7 @@ const Plans = ({
           imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
           currentPlan={currentPlan}
           onChoosePlanClick={onChoosePlanClick}
-          source={getSource({ newPlan: 'premium', currentPlan })}
+          source={getSource({ newPlan: 'premium_business', currentPlan })}
         />
         <PlanColumn
           {...translations.small}
