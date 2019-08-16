@@ -51,7 +51,7 @@ const handleConnectSocialAccountClick = (
     } else {
       window.location.assign(url);
     }
-    // onConnectSocialAccountClick();
+    onConnectSocialAccountClick();
   };
   trackAction({
     location: 'onboarding_page',
