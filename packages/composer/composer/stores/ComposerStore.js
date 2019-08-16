@@ -125,8 +125,8 @@ const softResetState = () => {
   state = newState;
 };
 
-const eventShowUpgradeModal = () => {
-  events.trigger('show-upgrade-modal');
+const eventShowSwitchPlanModal = () => {
+  events.trigger('show-switch-plan-modal');
 }
 
 const ComposerStore = Object.assign({}, EventEmitter.prototype, {
@@ -2151,8 +2151,8 @@ const onDispatchedPayload = (payload) => {
       softResetState();
       break;
 
-    case ActionTypes.EVENT_SHOW_UPGRADE_MODAL:
-      eventShowUpgradeModal();
+    case ActionTypes.EVENT_SHOW_SWITCH_PLAN_MODAL:
+      eventShowSwitchPlanModal();
       break;
 
     default:

@@ -20,10 +20,10 @@ const storeFake = state => ({
 const store = storeFake({
   i18n: {
     translations: {
-      'upgrade-modal': {},
+      'switch-plan-modal': {},
     },
   },
-  upgradeModal: {},
+  switchPlanModal: {},
   stripe: {},
   productFeatures: {
     planName: 'free',
@@ -87,7 +87,7 @@ storiesOf('PastRemindersPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
-      onClickUpgradeToPro={action('onClickUpgradeToPro')}
+      onClickSwitchPlan={action('onClickSwitchPlan')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       isBusinessAccount
@@ -107,7 +107,7 @@ storiesOf('PastRemindersPosts', module)
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
-      onClickUpgradeToPro={action('onClickUpgradeToPro')}
+      onClickSwitchPlan={action('onClickSwitchPlan')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       isBusinessAccount
