@@ -1,44 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-    Text,
-  } from '@bufferapp/ui';
+import { Text } from '@bufferapp/ui';
 
 const listStyle = {
-    padding: '0 1rem',
+  padding: '0 1rem',
 };
-  
+
 const listStyleLeft = {
-...listStyle,
-marginRight: '1.2rem',
+  ...listStyle,
+  marginRight: '1.2rem',
 };
 
 const listItemStyle = {
-marginBottom: '0.75rem',
-fontSize: '14px',
+  marginBottom: '0.75rem',
+  fontSize: '14px',
 };
 
 const ListItem = ({ text }) => (
-<li style={listItemStyle}>
-    <Text>{text}</Text>
-</li>
+  <li style={listItemStyle}>
+    <Text> { text } </Text>
+  </li>
 );
-  
-ListItem.propTypes = { text: PropTypes.string.isRequired };
 
-const getListItems = translations => {
-    var descriptions = [];
-    Object.keys(translations).forEach(function(key) {
-        descriptions.push(translations[key]);
-    })
-    return (descriptions.map((description, _) => {
-        return <ListItem text={description} />;
-    })
-    )
+const getListItems = (translations) => {
+  const descriptions = [];
+  Object.keys(translations).forEach((key) => {
+    descriptions.push(translations[key]);
+  });
+  return (descriptions.map(description =>
+    <ListItem text={description} key={description} />));
 };
 
-const PlanDescriptors = (translations) => (<div>
+const PlanDescriptors = translations => (
+  <div>
     <div style={{ textAlign: 'center' }}>
       <Text type="h2">
         {translations.translations.plan}
@@ -56,6 +51,9 @@ const PlanDescriptors = (translations) => (<div>
         </ul>
       </div>
     </div>
-</div>);
+  </div>
+);
+
+ListItem.propTypes = { text: PropTypes.string.isRequired };
 
 export default PlanDescriptors;
