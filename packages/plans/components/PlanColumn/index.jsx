@@ -17,6 +17,8 @@ import {
 const PlanColumn = ({
   title,
   cost,
+  nonProfitCost,
+  isNonprofit,
   subtitle,
   imageSrc,
   plan,
@@ -38,7 +40,9 @@ const PlanColumn = ({
           height="130px"
         />
       </ImageWrapperStyle>
-      <Text type="h1">{ cost }/mo</Text>
+      <Text type="h1">
+        { isNonprofit ? nonProfitCost : cost }/mo
+      </Text>
       <Text>{ billingText }</Text>
       <SubtitleStyle>
         <Text>{ subtitle }</Text>
@@ -68,6 +72,7 @@ const PlanColumn = ({
 PlanColumn.propTypes = {
   title: PropTypes.string.isRequired,
   cost: PropTypes.string.isRequired,
+  nonProfitCost: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   imageSrc: PropTypes.string.isRequired,
   plan: PropTypes.string.isRequired,
@@ -78,6 +83,7 @@ PlanColumn.propTypes = {
   buttonCurrentPlanText: PropTypes.string.isRequired,
   billingText: PropTypes.string.isRequired,
   features: PropTypes.array.isRequired,
+  isNonprofit: PropTypes.bool.isRequired,
 };
 
 export default PlanColumn;
