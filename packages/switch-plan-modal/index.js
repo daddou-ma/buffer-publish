@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 
-import UpgradeModal from './components/UpgradeModal';
+import SwitchPlanModal from './components/SwitchPlanModal';
 import { actions } from './reducer';
 
 export default connect(
@@ -23,7 +23,7 @@ export default connect(
     cancelTrial: () => dispatch(actions.cancelTrial()),
     clearCardInfo: () => dispatch(actions.clearCardInfo()),
   }),
-)(UpgradeModal);
+)(SwitchPlanModal);
 
 export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';

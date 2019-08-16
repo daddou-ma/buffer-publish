@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import UpgradeModal from '@bufferapp/publish-upgrade-modal';
+import SwitchPlanModal from '@bufferapp/publish-switch-plan-modal';
 import WelcomeModal from '@bufferapp/publish-welcome-modal';
 import StealProfileModal from '@bufferapp/publish-steal-profile-modal';
 import ProfilesDisconnectedModal from '@bufferapp/publish-profiles-disconnected-modal';
@@ -28,7 +28,7 @@ const AppModals = ({
 }) => (
   <React.Fragment>
     {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
-    {showUpgradeModal && <UpgradeModal />}
+    {showUpgradeModal && <SwitchPlanModal />}
     {showWelcomeModal && <WelcomeModal />}
     {showInstagramFirstCommentModal && <InstagramFirstCommentModal />}
     {showWelcomePaidModal && <WelcomePaidModal />}

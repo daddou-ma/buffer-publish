@@ -24,7 +24,7 @@ import { middleware as environmentMiddleware } from '@bufferapp/environment';
 import { middleware as unauthorizedRedirectMiddleware } from '@bufferapp/unauthorized-redirect';
 import { middleware as appSwitcherMiddleware } from '@bufferapp/publish-app-switcher';
 import { middleware as betaRedirectMiddleware } from '@bufferapp/publish-beta-redirect';
-import { middleware as upgradeModalMiddleware } from '@bufferapp/publish-upgrade-modal';
+import { middleware as switchPlanModalMiddleware } from '@bufferapp/publish-switch-plan-modal';
 import { middleware as stripeMiddleware } from '@bufferapp/stripe';
 import { middleware as modalsMiddleware } from '@bufferapp/publish-modals';
 import { middleware as manageAppsMiddleware } from '@bufferapp/manage-apps-extras';
@@ -105,7 +105,7 @@ const configureStore = initialstate => {
         unauthorizedRedirectMiddleware,
         appSwitcherMiddleware,
         betaRedirectMiddleware,
-        upgradeModalMiddleware,
+        switchPlanModalMiddleware,
         manageAppsMiddleware,
         stripeMiddleware,
         modalsMiddleware,

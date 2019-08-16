@@ -16,15 +16,6 @@ import PlanCycleSelect from '../PlanCycleSelect';
 import PlanDescriptors from '../PlanDescriptors';
 import Select from '../Select';
 
-const listStyle = {
-  padding: '0 1rem',
-};
-
-const listStyleLeft = {
-  ...listStyle,
-  marginRight: '1.2rem',
-};
-
 const listItemStyle = {
   marginBottom: '0.75rem',
   fontSize: '14px',
@@ -43,12 +34,12 @@ const isPremium = plan => plan === 'premium';
 const isSmallBusiness = plan => plan === 'small';
 
 const currentYear = new Date().getFullYear();
-const creditCardSvg = `<svg width="31" height="21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="%23fff" d="M0 0h31v21H0z"/><rect width="31" height="21" rx="3" fill="%232D98C8"/><path fill="%23343E47" d="M0 3h31v3H0z"/><path fill="%23fff" d="M6 9h20v4H6z"/><path fill="%23FD232B" d="M20 10h5v2h-5z"/></svg>`;
+const creditCardSvg = '<svg width="31" height="21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="%23fff" d="M0 0h31v21H0z"/><rect width="31" height="21" rx="3" fill="%232D98C8"/><path fill="%23343E47" d="M0 3h31v3H0z"/><path fill="%23fff" d="M6 9h20v4H6z"/><path fill="%23FD232B" d="M20 10h5v2h-5z"/></svg>';
 const creditCardBackground = `right 6px center no-repeat url('data:image/svg+xml;utf8,${creditCardSvg}')`;
 
 const isEmptyCard = card => Object.keys(card).length === 0 && card.constructor === Object;
 
-class UpgradeModal extends React.Component {
+class SwitchPlanModal extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -173,29 +164,35 @@ class UpgradeModal extends React.Component {
 
             <Divider marginTop="" marginBottom="1.5rem" />
 
-            {isPro(plan) && <PlanCycleSelect
-              plan={plan}
-              translations={translations.proDescriptors}
-              cycle={cycle}
-              selectCycle={selectCycle}
-              isNonprofit={isNonprofit}
-            />}
+            {isPro(plan) && (
+              <PlanCycleSelect
+                plan={plan}
+                translations={translations.proDescriptors}
+                cycle={cycle}
+                selectCycle={selectCycle}
+                isNonprofit={isNonprofit}
+              />
+            )}
 
-            {isPremium(plan) && <PlanCycleSelect
-              plan={plan}
-              translations={translations.premiumDescriptors}
-              cycle={cycle}
-              selectCycle={selectCycle}
-              isNonprofit={isNonprofit}
-            />}
+            {isPremium(plan) && (
+              <PlanCycleSelect
+                plan={plan}
+                translations={translations.premiumDescriptors}
+                cycle={cycle}
+                selectCycle={selectCycle}
+                isNonprofit={isNonprofit}
+              />
+            )}
 
-            {isSmallBusiness(plan) && <PlanCycleSelect
-              plan={plan}
-              translations={translations.businessDescriptors}
-              cycle={cycle}
-              selectCycle={selectCycle}
-              isNonprofit={isNonprofit}
-            />}
+            {isSmallBusiness(plan) && (
+              <PlanCycleSelect
+                plan={plan}
+                translations={translations.businessDescriptors}
+                cycle={cycle}
+                selectCycle={selectCycle}
+                isNonprofit={isNonprofit}
+              />
+            )}
 
             <div style={{ textAlign: 'center', margin: '1.5rem 0 1rem' }}>
               <Text type="h3">
@@ -271,7 +268,7 @@ class UpgradeModal extends React.Component {
   }
 }
 
-UpgradeModal.propTypes = {
+SwitchPlanModal.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   card: PropTypes.shape({
     name: PropTypes.string,
@@ -294,10 +291,10 @@ UpgradeModal.propTypes = {
   dismissible: PropTypes.bool,
 };
 
-UpgradeModal.defaultProps = {
+SwitchPlanModal.defaultProps = {
   hasExpiredProTrial: false,
   dismissible: false,
   card: {},
 };
 
-export default UpgradeModal;
+export default SwitchPlanModal;

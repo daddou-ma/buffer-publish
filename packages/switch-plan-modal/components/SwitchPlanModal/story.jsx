@@ -3,26 +3,26 @@ import { storiesOf } from '@storybook/react';
 import { checkA11y } from 'storybook-addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
-import UpgradeModal from './index';
+import SwitchPlanModal from './index';
 
-storiesOf('UpgradeModal', module)
+storiesOf('SwitchPlanModal', module)
   .addDecorator(checkA11y)
   .add('default', () => (
-    <UpgradeModal
-      translations={translations['upgrade-modal']}
+    <SwitchPlanModal
+      translations={translations['switch-plan-modal']}
       cycle="year"
     />
   ))
   .add('user has nonprofit status', () => (
-    <UpgradeModal
-      translations={translations['upgrade-modal']}
+    <SwitchPlanModal
+      translations={translations['switch-plan-modal']}
       cycle="year"
       isNonprofit
     />
   ))
   .add('user does not have nonprofit status', () => (
-    <UpgradeModal
-      translations={translations['upgrade-modal']}
+    <SwitchPlanModal
+      translations={translations['switch-plan-modal']}
       cycle="year"
       isNonprofit={false}
     />
