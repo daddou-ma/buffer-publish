@@ -22,14 +22,16 @@ export default ({ dispatch, getState }) => next => (action) => {
   const state = getState();
 
   switch (action.type) {
-    case profileActionTypes.SELECT_PROFILE:
-      dispatch(dataFetchActions.fetch({
-        name: 'draftPosts',
-        args: {
-          profileId: action.profile.id,
-          isFetchingMore: false,
-        },
-      }));
+    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      if (state.profileSidebar.selectedProfileId) {
+        dispatch(dataFetchActions.fetch({
+          name: 'draftPosts',
+          args: {
+            profileId: state.profileSidebar.selectedProfileId,
+            isFetchingMore: false,
+          },
+        }));
+      }
       break;
     case actionTypes.DRAFT_CONFIRMED_DELETE: {
       dispatch(dataFetchActions.fetch({
