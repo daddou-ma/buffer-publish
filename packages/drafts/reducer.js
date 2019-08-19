@@ -121,7 +121,7 @@ const draftsReducer = (state = {}, action) => {
       if (action.args.isFetchingMore) {
         return { ...state, ...drafts };
       }
-      if (Object.values(state).length > Object.values(drafts).length) {
+      if (Object.keys(state).length > Object.keys(drafts).length) {
         return state;
       }
       return drafts;
