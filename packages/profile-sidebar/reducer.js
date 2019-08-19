@@ -28,6 +28,7 @@ export const initialState = {
   isSearchPopupVisible: false,
   searchText: null,
   userId: null,
+  hasOnboardingFeatureFlip: false,
 };
 
 const moveProfileInArray = (arr, from, to) => {
@@ -227,6 +228,7 @@ export default (state = initialState, action) => {
         isOnBusinessTrial: action.result.isOnBusinessTrial,
         userId: action.result.id,
         isFreeUser: action.result.is_free_user,
+        hasOnboardingFeatureFlip: action.result.features ? action.result.features.includes('onboarding_new_business_trialists') : false,
       };
     }
     default:
