@@ -121,6 +121,9 @@ const draftsReducer = (state = {}, action) => {
       if (action.args.isFetchingMore) {
         return { ...state, ...drafts };
       }
+      if (Object.values(state).length > Object.values(drafts).length) {
+        return state;
+      }
       return drafts;
     }
     case actionTypes.DRAFT_DELETED: {

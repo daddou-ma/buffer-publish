@@ -22,16 +22,14 @@ export default ({ dispatch, getState }) => next => (action) => {
   const state = getState();
 
   switch (action.type) {
-    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      if (state.profileSidebar.selectedProfileId) {
-        dispatch(dataFetchActions.fetch({
-          name: 'draftPosts',
-          args: {
-            profileId: state.profileSidebar.selectedProfileId,
-            isFetchingMore: false,
-          },
-        }));
-      }
+    case profileActionTypes.SELECT_PROFILE:
+      dispatch(dataFetchActions.fetch({
+        name: 'draftPosts',
+        args: {
+          profileId: action.profile.id,
+          isFetchingMore: false,
+        },
+      }));
       break;
     case actionTypes.DRAFT_CONFIRMED_DELETE: {
       dispatch(dataFetchActions.fetch({
@@ -45,10 +43,10 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch(analyticsActions.trackEvent('Draft Deleted', metadata));
       break;
     }
-/*
-In Classic it's REQUESTING_DRAFT_APPROVE.
-Sends draft to queue, which means approves draft
-*/
+    /*
+    In Classic it's REQUESTING_DRAFT_APPROVE.
+    Sends draft to queue, which means approves draft
+    */
     case actionTypes.DRAFT_APPROVE:
       dispatch(dataFetchActions.fetch({
         name: 'approveDraft',
