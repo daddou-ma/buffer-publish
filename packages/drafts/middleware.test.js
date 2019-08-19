@@ -12,6 +12,7 @@ describe('middleware', () => {
   const dispatch = jest.fn();
   const state = {
     profileSidebar: {
+      selectedProfileId: 'id1',
       selectedProfile: {
         service_type: 'personal_profile',
         service: 'twitter',
@@ -29,7 +30,7 @@ describe('middleware', () => {
 
   it('should fetch draftPosts', () => {
     const action = {
-      type: profileActionTypes.SELECT_PROFILE,
+      type: 'profiles_FETCH_SUCCESS',
       profile: {
         id: 'id1',
       },
