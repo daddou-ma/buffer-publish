@@ -1,5 +1,3 @@
-import { push } from 'connected-react-router';
-import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
@@ -47,7 +45,12 @@ export default hot(connect(
         }
       }
     },
-    onDropProfile: ({ commit, profileLimit, dragIndex, hoverIndex }) => {
+    onDropProfile: ({
+      commit,
+      profileLimit,
+      dragIndex,
+      hoverIndex,
+    }) => {
       dispatch(actions.onDropProfile({
         commit,
         profileLimit,
