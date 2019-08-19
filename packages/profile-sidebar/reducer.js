@@ -28,6 +28,7 @@ export const initialState = {
   isSearchPopupVisible: false,
   searchText: null,
   userId: null,
+  hasOnboardingFeatureFlip: false,
 };
 
 const moveProfileInArray = (arr, from, to) => {
@@ -142,6 +143,11 @@ export default (state = initialState, action) => {
   let isSearchPopupVisible = false;
   let searchText = null;
   switch (action.type) {
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        hasOnboardingFeatureFlip: action.result.features ? action.result.features.includes('onboarding_new_business_trialists') : false,
+      };
     case `profiles_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
