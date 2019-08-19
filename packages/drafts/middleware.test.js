@@ -30,7 +30,7 @@ describe('middleware', () => {
 
   it('should fetch draftPosts', () => {
     const action = {
-      type: 'profiles_FETCH_SUCCESS',
+      type: profileActionTypes.SELECT_PROFILE,
       profile: {
         id: 'id1',
       },
