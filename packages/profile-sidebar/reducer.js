@@ -143,11 +143,6 @@ export default (state = initialState, action) => {
   let isSearchPopupVisible = false;
   let searchText = null;
   switch (action.type) {
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        hasOnboardingFeatureFlip: action.result.features ? action.result.features.includes('onboarding_new_business_trialists') : false,
-      };
     case `profiles_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
@@ -233,6 +228,7 @@ export default (state = initialState, action) => {
         isOnBusinessTrial: action.result.isOnBusinessTrial,
         userId: action.result.id,
         isFreeUser: action.result.is_free_user,
+        hasOnboardingFeatureFlip: action.result.features ? action.result.features.includes('onboarding_new_business_trialists') : false,
       };
     }
     default:
