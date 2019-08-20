@@ -1,5 +1,6 @@
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { getProfilePageParams } from '@bufferapp/publish-routes';
 
 import {
   actions as dataFetchActions,
@@ -20,16 +21,24 @@ const getTrackingData = ({ post = {}, channel = {} }) => ({
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
   const state = getState();
+  const path = getState().router.location.pathname;
+  const { tabId } = getProfilePageParams({ path }) || {};
+  const needsApproval = tabId === 'awaitingApproval' || tabId === 'pendingApproval';
+  const isDraft = ['awaitingApproval', 'pendingApproval', 'drafts'].indexOf(action.tabId) !== -1;
 
   switch (action.type) {
-    case profileActionTypes.SELECT_PROFILE:
-      dispatch(dataFetchActions.fetch({
-        name: 'draftPosts',
-        args: {
-          profileId: action.profile.id,
-          isFetchingMore: false,
-        },
-      }));
+    case tabsActionTypes.SELECT_TAB:
+      if (isDraft) {
+        dispatch(dataFetchActions.fetch({
+          name: 'draftPosts',
+          args: {
+            profileId: action.profileId,
+            isFetchingMore: false,
+            needsApproval,
+            clear: true,
+          },
+        }));
+      }
       break;
     case actionTypes.DRAFT_CONFIRMED_DELETE: {
       dispatch(dataFetchActions.fetch({
@@ -55,11 +64,11 @@ export default ({ dispatch, getState }) => next => (action) => {
         },
       }));
       break;
-/*
-In Classic it's REQUESTING_NEEDS_APPROVAL_UPDATE:
-Requests approval as a contributor (moves draft to awaiting approval tab if needsApproval is true,
-moves from approval tab to drafts if needsApproval false)
-*/
+    /*
+    In Classic it's REQUESTING_NEEDS_APPROVAL_UPDATE:
+    Requests approval as a contributor (moves draft to awaiting approval tab if needsApproval is true,
+    moves from approval tab to drafts if needsApproval false)
+    */
     case actionTypes.DRAFT_NEEDS_APPROVAL:
       dispatch(dataFetchActions.fetch({
         name: 'changeDraftStatus',
