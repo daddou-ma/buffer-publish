@@ -14,10 +14,10 @@ export default hot(
         getProfilePageParams({ path: ownProps.history.location.pathname }) ||
         {};
       // With analytics, the reducer state name doesnt match the tabId
-      let reducerName = tabId === 'analytics' && (!childTabId || childTabId === 'posts')
-        ? 'sent'
-        : tabId;
-      if (tabId === 'awaitingApproval' || tabId === 'pendingApproval') reducerName = 'drafts';
+      const reducerName =
+        tabId === 'analytics' && (!childTabId || childTabId === 'posts')
+          ? 'sent'
+          : tabId;
       if (
         state[reducerName] &&
         state[reducerName].byProfileId &&

@@ -118,7 +118,7 @@ const draftsReducer = (state = {}, action) => {
   switch (action.type) {
     case `draftPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { drafts } = action.result;
-      if (action.args.isFetchingMore || Object.keys(state).length > Object.keys(drafts).length) {
+      if (action.args.isFetchingMore) {
         return { ...state, ...drafts };
       }
       return drafts;
