@@ -71,15 +71,13 @@ export default ({ dispatch, getState }) => next => (action) => {
       const isPlansPage = !!getPlansPageParams({
         path,
       });
-      const { profiles, isOnBusinessTrial, hasOnboardingFeatureFlip, selectedProfileId } = getState().profileSidebar;
+      const { profiles, isOnBusinessTrial, hasOnboardingFeatureFlip } = getState().profileSidebar;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
 
-        if (selectedProfileId !== params.profileId) {
-          dispatch(actions.selectProfile({
-            profile,
-          }));
-        }
+        dispatch(actions.selectProfile({
+          profile,
+        }));
 
         // When the page has just loaded or is refreshed,
         // we want to be able to update the actual selected tab
