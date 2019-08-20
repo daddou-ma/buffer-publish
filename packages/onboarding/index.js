@@ -15,6 +15,12 @@ export default connect(
     onSkipStep: () => {
       dispatch(actions.handleSkipStep());
     },
+    onManageSocialAccountClick: () => {
+      dispatch(actions.handleManageSocialAccountClick());
+    },
+    goToConnectSocialAccount: () => {
+      dispatch(actions.handleConnectSocialAccount());
+    },
   }),
 )(OnboardingManager);
 

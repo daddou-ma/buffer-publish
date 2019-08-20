@@ -30,7 +30,15 @@
     "testemonial": "Publish helps us build a better model of content that generates more engagement.",
     "name": "Justin Ozanich",
     "role": "Marketing Manager",
-    "company": "Foster Coffee Company"
+    "company": "Foster Coffee Company",
+    "connectButton": "Manage Social Accounts",
+    "queueTab": "Queue",
+    "analyticsTab": "Analytics",
+    "awaitingTab": "Awaiting Approval",
+    "draftsTab": "Drafts",
+    "settingsTab": "Settings",
+    "composerInput": "What would you like to share?",
+    "currentDay": "Today"
   },
   "disabled-queue": {
     "connectButton": "Manage Social Accounts",
