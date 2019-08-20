@@ -6,7 +6,7 @@ const { buildPostMap } = require('./../../formatters/src');
 module.exports = method(
   'draftPosts',
   'fetch posts with status set as draft',
-  ({ profileId, page, needsApproval }, { session }) =>
+  ({ profileId, page }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/profiles/${profileId}/updates/drafts.json`,
       method: 'GET',
@@ -15,7 +15,6 @@ module.exports = method(
         access_token: session.publish.accessToken,
         page,
         count: 20,
-        needs_approval: needsApproval,
       },
     })
     .then(result => JSON.parse(result))
