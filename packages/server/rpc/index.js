@@ -60,6 +60,7 @@ const globalAccount = require('./globalAccount');
 const createHashtagGroup = require('./createHashtagGroup');
 const deleteHashtagGroup = require('./deleteHashtagGroup');
 const getHashtagGroups = require('./getHashtagGroups');
+const createSetupIntent = require('./createSetupIntent')
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -136,4 +137,5 @@ module.exports = rpc(
   createHashtagGroup,
   deleteHashtagGroup,
   getHashtagGroups,
+  createSetupIntent
 );
