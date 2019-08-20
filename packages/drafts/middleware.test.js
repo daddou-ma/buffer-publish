@@ -1,6 +1,5 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
-import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import {
   actions as dataFetchActions,
@@ -21,12 +20,6 @@ describe('middleware', () => {
         serviceId: 'foo123',
       },
     },
-    profile: {
-      id: 'id1',
-    },
-    router: {
-      location: { pathname: '/preferences/test' },
-    },
   };
   const getState = jest.fn(() => state);
 
@@ -37,10 +30,10 @@ describe('middleware', () => {
 
   it('should fetch draftPosts', () => {
     const action = {
-      type: tabsActionTypes.SELECT_TAB,
-      profileId: 'id1',
-      tabId: 'drafts',
-      location: { pathname: '/preferences/test' },
+      type: profileActionTypes.SELECT_PROFILE,
+      profile: {
+        id: 'id1',
+      },
     };
     middleware({ dispatch, getState })(next)(action);
     expect(next)
@@ -49,10 +42,8 @@ describe('middleware', () => {
       .toBeCalledWith(dataFetchActions.fetch({
         name: 'draftPosts',
         args: {
-          profileId: action.profileId,
+          profileId: action.profile.id,
           isFetchingMore: false,
-          needsApproval: false,
-          clear: true,
         },
       }));
   });
