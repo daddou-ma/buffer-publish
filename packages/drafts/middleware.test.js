@@ -12,6 +12,7 @@ describe('middleware', () => {
   const dispatch = jest.fn();
   const state = {
     profileSidebar: {
+      selectedProfileId: 'id1',
       selectedProfile: {
         service_type: 'personal_profile',
         service: 'twitter',
