@@ -28,6 +28,7 @@ export const initialState = {
   isSearchPopupVisible: false,
   searchText: null,
   userId: null,
+  hasOnboardingFeatureFlip: false,
 };
 
 const moveProfileInArray = (arr, from, to) => {
@@ -47,7 +48,7 @@ const moveProfileInArray = (arr, from, to) => {
 const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
   const reorderedProfiles = moveProfileInArray(profiles, dragIndex, hoverIndex);
-    /* The reducer will return an object with 3 properties, each of them an array of profiles.
+  /* The reducer will return an object with 3 properties, each of them an array of profiles.
   For each profile reduced, we will need to spread the ACC object,
   changing only 1 property, i.e., adding the profile to only 1 array */
   const {
@@ -68,22 +69,22 @@ const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
       In that case, the profile must go into the lockedProfiles.
       If not, then the profile belongs in the enabledProfiles. */
       return acc.enabledProfiles.length >= profileLimit
-      ? {
-        ...acc,
-        lockedProfiles: [
-          ...acc.lockedProfiles,
-          { ...cur, disabled: true },
-        ],
-      }
-      : {
-        ...acc,
-        enabledProfiles: [
-          ...acc.enabledProfiles,
-          { ...cur, disabled: false },
-        ],
-      };
+        ? {
+          ...acc,
+          lockedProfiles: [
+            ...acc.lockedProfiles,
+            { ...cur, disabled: true },
+          ],
+        }
+        : {
+          ...acc,
+          enabledProfiles: [
+            ...acc.enabledProfiles,
+            { ...cur, disabled: false },
+          ],
+        };
     },
-  { enabledProfiles: [], lockedProfiles: [], blockedProfiles: [] },
+    { enabledProfiles: [], lockedProfiles: [], blockedProfiles: [] },
 
   );
 
@@ -227,6 +228,7 @@ export default (state = initialState, action) => {
         isOnBusinessTrial: action.result.isOnBusinessTrial,
         userId: action.result.id,
         isFreeUser: action.result.is_free_user,
+        hasOnboardingFeatureFlip: action.result.features ? action.result.features.includes('onboarding_new_business_trialists') : false,
       };
     }
     default:
@@ -254,7 +256,12 @@ export const actions = {
   handleConnectSocialAccount: () => ({
     type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
   }),
-  onDropProfile: ({ commit, dragIndex, hoverIndex, profileLimit }) => ({
+  onDropProfile: ({
+    commit,
+    dragIndex,
+    hoverIndex,
+    profileLimit,
+  }) => ({
     type: actionTypes.PROFILE_DROPPED,
     commit,
     dragIndex,
