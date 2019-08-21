@@ -82,7 +82,7 @@
     "freeSchedule": "Schedule up to 10 posts per account",
     "freePostHistory": "No post history",
     "proDescriptors": {
-      "plan": "Switch to the Pro plan!",
+      "plan": "Subscribe to the Pro plan!",
       "left": {
         "connect": "Connect 8 social accounts",
         "users": "1 user",
@@ -101,7 +101,7 @@
       "planYearlyDescription": "Save 20% vs paying monthly"
     },
     "premiumDescriptors": {
-      "plan": "Switch to the Premium plan!",
+      "plan": "Subscribe to the Premium plan!",
       "left": {
         "connect": "Connect 8 social accounts",
         "users": "Collaborate with 2 users",
@@ -120,7 +120,7 @@
       "planYearlyDescription": "Save 15% vs paying monthly"
     },
     "businessDescriptors": {
-      "plan": "Switch to the Small Business plan!",
+      "plan": "Subscribe to the Small Business plan!",
       "left": {
         "businessConnect": "Connect 25 social accounts",
         "businessUsers": "Collaborate with 6 users",
