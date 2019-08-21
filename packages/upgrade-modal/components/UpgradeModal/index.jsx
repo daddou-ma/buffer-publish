@@ -14,7 +14,7 @@ import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
 import InputText from '../InputText';
 import PlanCycleSelect from '../PlanCycleSelect';
 import Select from '../Select';
-import { default as StripeCreditCardForm } from './stripeCreditCardWrapper';
+import StripeCreditCardForm from '../CreditCardForm';
 
 const listStyle = {
   padding: '0 1rem',
