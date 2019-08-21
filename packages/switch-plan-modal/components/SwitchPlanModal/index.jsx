@@ -11,11 +11,7 @@ import {
 } from '@bufferapp/ui';
 import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
 
-import InputText from '../InputText';
-import PlanCycleSelect from '../PlanCycleSelect';
-import PlanDescriptors from '../PlanDescriptors';
-import Select from '../Select';
-import StripeCreditCardForm from '../CreditCardForm';
+import StripeCreditCardForm from "@bufferapp/credit-card-form";
 
 const listItemStyle = {
   marginBottom: '0.75rem',
