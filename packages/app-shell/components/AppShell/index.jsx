@@ -52,10 +52,10 @@ const helpMenuItems = [
 
 function generateUserMenuItems({
   showReturnToClassic,
-  showUpgradeToPro,
+  showSwitchPlan,
   showStartProTrial,
   returnToClassic,
-  upgradeToPro,
+  switchPlan,
   openPreferences,
   showManageTeam,
 }) {
@@ -94,11 +94,11 @@ function generateUserMenuItems({
         })}`);
       },
     },
-    upgradeToPro: {
-      id: 'upgradeToPro',
+    switchPlan: {
+      id: 'switchPlan',
       title: 'Upgrade to Pro',
       icon: <Plus color={gray} />,
-      onItemClick: upgradeToPro,
+      onItemClick: switchPlan,
     },
   };
   const extraItems = [];
@@ -108,8 +108,8 @@ function generateUserMenuItems({
   if (showReturnToClassic) {
     extraItems.push(userMenuItems.returnToClassic);
   }
-  if (showUpgradeToPro) {
-    extraItems.push(userMenuItems.upgradeToPro);
+  if (showSwitchPlan) {
+    extraItems.push(userMenuItems.switchPlan);
   }
   return [...userMenuItems.top, ...extraItems];
 }
@@ -118,11 +118,11 @@ const AppShell = ({
   children,
   user,
   showReturnToClassic,
-  showUpgradeToPro,
+  showSwitchPlan,
   showManageTeam,
   showStartProTrial,
   returnToClassic,
-  upgradeToPro,
+  switchPlan,
   openPreferences,
   bannerOptions,
   onCloseBanner,
@@ -135,11 +135,11 @@ const AppShell = ({
       ...user,
       menuItems: generateUserMenuItems({
         showReturnToClassic,
-        showUpgradeToPro,
+        showSwitchPlan,
         showManageTeam,
         showStartProTrial,
         returnToClassic,
-        upgradeToPro,
+        switchPlan,
         openPreferences,
       }),
     }}
@@ -154,11 +154,11 @@ const AppShell = ({
 AppShell.propTypes = {
   children: PropTypes.node.isRequired,
   showReturnToClassic: PropTypes.bool,
-  showUpgradeToPro: PropTypes.bool,
+  showSwitchPlan: PropTypes.bool,
   showManageTeam: PropTypes.bool,
   showStartProTrial: PropTypes.bool,
   returnToClassic: PropTypes.func.isRequired,
-  upgradeToPro: PropTypes.func.isRequired,
+  switchPlan: PropTypes.func.isRequired,
   openPreferences: PropTypes.func.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -182,7 +182,7 @@ AppShell.defaultProps = {
     avatar: null,
   },
   showReturnToClassic: false,
-  showUpgradeToPro: false,
+  showSwitchPlan: false,
   showManageTeam: false,
   bannerOptions: null,
   showStartProTrial: false,

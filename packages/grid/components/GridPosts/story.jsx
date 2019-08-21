@@ -27,10 +27,10 @@ const profile = {
 const store = storeFake({
   i18n: {
     translations: {
-      'upgrade-modal': {},
+      'switch-plan-modal': {},
     },
   },
-  upgradeModal: {},
+  switchPlanModal: {},
   stripe: {},
   publicGridUrl: 'https://shopgr.id/my-brand',
   profile,

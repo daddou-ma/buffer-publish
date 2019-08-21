@@ -24,7 +24,7 @@ const requeuePost = require('./requeuePost');
 const updatePausedSchedules = require('./updatePausedSchedules');
 const sendFeedback = require('./sendFeedback');
 const savePublishBetaRedirect = require('./savePublishBetaRedirect');
-const upgradeToPro = require('./upgradeToPro');
+const switchPlan = require('./switchPlan');
 const changeDateTimePreferences = require('./changeDateTimePreferences');
 const twoFactorUpdate = require('./twoFactorUpdate');
 const twoFactorConfirm = require('./twoFactorConfirm');
@@ -60,6 +60,7 @@ const globalAccount = require('./globalAccount');
 const createHashtagGroup = require('./createHashtagGroup');
 const deleteHashtagGroup = require('./deleteHashtagGroup');
 const getHashtagGroups = require('./getHashtagGroups');
+const createSetupIntent = require('./createSetupIntent')
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -94,7 +95,7 @@ module.exports = rpc(
   updatePausedSchedules,
   sendFeedback,
   savePublishBetaRedirect,
-  upgradeToPro,
+  switchPlan,
   changeDateTimePreferences,
   twoFactorUpdate,
   twoFactorConfirm,
@@ -136,4 +137,5 @@ module.exports = rpc(
   createHashtagGroup,
   deleteHashtagGroup,
   getHashtagGroups,
+  createSetupIntent
 );

@@ -73,7 +73,7 @@ const ProfileSidebar = ({
   onManageSocialAccountClick,
   profileLimit,
   showProfilesDisconnectedModal,
-  showUpgradeModal,
+  showSwitchPlanModal,
   goToConnectSocialAccount,
   onSearchProfileChange,
   isSearchPopupVisible,
@@ -114,7 +114,7 @@ const ProfileSidebar = ({
           url="https://buffer.com/oauth/instagram"
           profileLimit={profileLimit}
           profiles={profiles}
-          showUpgradeModal={showUpgradeModal}
+          showSwitchPlanModal={showSwitchPlanModal}
           goToConnectSocialAccount={goToConnectSocialAccount}
         />}
         {!hasFacebook && <ProfileConnectShortcut
@@ -123,7 +123,7 @@ const ProfileSidebar = ({
           url="https://buffer.com/oauth/facebook/choose"
           profileLimit={profileLimit}
           profiles={profiles}
-          showUpgradeModal={showUpgradeModal}
+          showSwitchPlanModal={showSwitchPlanModal}
           goToConnectSocialAccount={goToConnectSocialAccount}
         />}
         {!hasTwitter && <ProfileConnectShortcut
@@ -132,7 +132,7 @@ const ProfileSidebar = ({
           url="https://buffer.com/oauth/twitter"
           profileLimit={profileLimit}
           profiles={profiles}
-          showUpgradeModal={showUpgradeModal}
+          showSwitchPlanModal={showSwitchPlanModal}
           goToConnectSocialAccount={goToConnectSocialAccount}
         />}
         <div style={bottomSectionStyle}>
@@ -158,7 +158,7 @@ ProfileSidebar.propTypes = {
   onProfileClick: ProfileList.propTypes.onProfileClick,
   onManageSocialAccountClick: PropTypes.func.isRequired,
   goToConnectSocialAccount: PropTypes.func.isRequired,
-  showUpgradeModal: PropTypes.func,
+  showSwitchPlanModal: PropTypes.func,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
   translations: PropTypes.shape({

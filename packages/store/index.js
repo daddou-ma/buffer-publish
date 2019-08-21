@@ -24,7 +24,7 @@ import { middleware as environmentMiddleware } from '@bufferapp/environment';
 import { middleware as unauthorizedRedirectMiddleware } from '@bufferapp/unauthorized-redirect';
 import { middleware as appSwitcherMiddleware } from '@bufferapp/publish-app-switcher';
 import { middleware as betaRedirectMiddleware } from '@bufferapp/publish-beta-redirect';
-import { middleware as upgradeModalMiddleware } from '@bufferapp/publish-upgrade-modal';
+import { middleware as switchPlanModalMiddleware } from '@bufferapp/publish-switch-plan-modal';
 import { middleware as stripeMiddleware } from '@bufferapp/stripe';
 import { middleware as modalsMiddleware } from '@bufferapp/publish-modals';
 import { middleware as manageAppsMiddleware } from '@bufferapp/manage-apps-extras';
@@ -48,6 +48,7 @@ import { middleware as igFirstCommentProTrialModalMiddleware } from '@bufferapp/
 import { middleware as hashtagGroupsMiddleware } from '@bufferapp/publish-hashtag-group-manager';
 import { middleware as trialMiddleware } from '@bufferapp/publish-trial';
 import { middleware as segmentTrackingMiddleware } from '@bufferapp/publish-analytics-middleware';
+import { middleware as onboardingMiddleware } from '@bufferapp/publish-onboarding';
 import { middleware as globalAccountMiddleware } from '@bufferapp/global-account';
 import { middleware as closeComposerModalMiddleware } from '@bufferapp/publish-close-composer-confirmation-modal';
 
@@ -105,7 +106,7 @@ const configureStore = initialstate => {
         unauthorizedRedirectMiddleware,
         appSwitcherMiddleware,
         betaRedirectMiddleware,
-        upgradeModalMiddleware,
+        switchPlanModalMiddleware,
         manageAppsMiddleware,
         stripeMiddleware,
         modalsMiddleware,
@@ -130,6 +131,7 @@ const configureStore = initialstate => {
         hashtagGroupsMiddleware,
         trialMiddleware,
         segmentTrackingMiddleware,
+        onboardingMiddleware,
         globalAccountMiddleware,
         closeComposerModalMiddleware,
         // Analyze

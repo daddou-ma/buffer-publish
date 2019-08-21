@@ -43,7 +43,7 @@ storiesOf('AppShell', module)
   .add('with start a pro trial link', () => (
     <AppShell
       showStartProTrial
-      showUpgradeToPro
+      showSwitchPlan
       user={{
         name: 'Tom Redman',
         email: 'tom.redman@buffer.com',

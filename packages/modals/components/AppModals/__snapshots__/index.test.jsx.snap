@@ -16,7 +16,7 @@ exports[`Modals renders nothing when no modals are visible 1`] = `<React.Fragmen
 
 exports[`Modals renders upgrade modal 1`] = `
 <React.Fragment>
-  <Connect(UpgradeModal) />
+  <Connect(SwitchPlanModal) />
 </React.Fragment>
 `;
 

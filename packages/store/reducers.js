@@ -18,7 +18,7 @@ import { reducer as notificationsReducer } from '@bufferapp/notifications';
 import { reducer as environmentReducer } from '@bufferapp/environment';
 import { reducer as appSwitcherReducer } from '@bufferapp/publish-app-switcher';
 import { reducer as betaRedirectReducer } from '@bufferapp/publish-beta-redirect';
-import { reducer as upgradeModalReducer } from '@bufferapp/publish-upgrade-modal';
+import { reducer as switchPlanModalReducer } from '@bufferapp/publish-switch-plan-modal';
 import { reducer as stripeReducer } from '@bufferapp/stripe';
 import { reducer as modalsReducer } from '@bufferapp/publish-modals';
 import { reducer as instagramDirectPostingModalReducer } from '@bufferapp/publish-ig-direct-posting-modal';
@@ -37,6 +37,7 @@ import { reducer as igFirstCommentProTrialModalReducer } from '@bufferapp/publis
 import { reducer as trialReducer } from '@bufferapp/publish-trial';
 import { reducer as hashtagGroupsReducer } from '@bufferapp/publish-hashtag-group-manager';
 import { reducer as disabledQueueReducer } from '@bufferapp/publish-disabled-queue';
+import { reducer as onboardingReducer } from '@bufferapp/publish-onboarding';
 import { reducer as globalAccountReducer } from '@bufferapp/global-account';
 import { reducer as closeComposerModalReducer } from '@bufferapp/publish-close-composer-confirmation-modal';
 
@@ -69,7 +70,7 @@ export default {
   environment: environmentReducer,
   appSwitcher: appSwitcherReducer,
   betaRedirect: betaRedirectReducer,
-  upgradeModal: upgradeModalReducer,
+  switchPlanModal: switchPlanModalReducer,
   stripe: stripeReducer,
   modals: modalsReducer,
   manageAppsExtras: manageAppsReducer,
@@ -90,6 +91,7 @@ export default {
   ctaBanner: ctaBannerReducer,
   igFirstCommentProTrialModal: igFirstCommentProTrialModalReducer,
   trial: trialReducer,
+  onboarding: onboardingReducer,
   hashtagGroups: hashtagGroupsReducer,
   disabledQueue: disabledQueueReducer,
   globalAccount: globalAccountReducer,

@@ -79,7 +79,7 @@ export default connect(
           dispatch(modalsActions.showInstagramFirstCommentProTrialModal({ source: 'ig_first_comment_toggle' }));
           break;
         case 'SHOW_PRO_UPGRADE_MODAL':
-          dispatch(modalsActions.showUpgradeModal({ source: 'ig_first_comment_toggle' }));
+          dispatch(modalsActions.showSwitchPlanModal({ source: 'ig_first_comment_toggle', plan: 'pro' }));
           break;
         case 'START_PRO_TRIAL':
           dispatch(trialActions.handleStartProTrial({

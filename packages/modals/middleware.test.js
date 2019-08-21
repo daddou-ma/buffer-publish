@@ -43,7 +43,7 @@ describe('middleware', () => {
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
-      .toBeCalledWith(actions.showUpgradeModal({ source: 'profile_limit' }));
+      .toBeCalledWith(actions.showSwitchPlanModal({ source: 'profile_limit', plan: 'pro' }));
   });
   it('should send \'unknown\' for key without source', () => {
     window._showModal = {
@@ -58,20 +58,20 @@ describe('middleware', () => {
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
-      .toBeCalledWith(actions.showUpgradeModal({ source: 'unknown' }));
+      .toBeCalledWith(actions.showSwitchPlanModal({ source: 'unknown', plan: 'pro' }));
   });
   it('should show and track upgrade modal when triggered from composer', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const action = {
       type: 'COMPOSER_EVENT',
-      eventType: 'show-upgrade-modal',
+      eventType: 'show-switch-plan-modal',
     };
     middleware({ dispatch })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
-      .toBeCalledWith(actions.showUpgradeModal({ source: 'queue_limit' }));
+      .toBeCalledWith(actions.showSwitchPlanModal({ source: 'queue_limit', plan: 'pro' }));
   });
   it('should show steal profile modal when key is present', () => {
     window._showModal = {
