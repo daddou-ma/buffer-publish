@@ -6,6 +6,7 @@ import { Redirect } from 'react-router';
 import QueuedPosts from '@bufferapp/publish-queue';
 import SentPosts from '@bufferapp/publish-sent';
 import GridPosts from '@bufferapp/publish-grid';
+import StoriesPosts from '@bufferapp/publish-stories';
 import PastReminders from '@bufferapp/publish-past-reminders';
 import DraftList from '@bufferapp/publish-drafts';
 import PostingSchedule from '@bufferapp/publish-posting-schedule';
@@ -104,6 +105,8 @@ const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, f
       return <PastReminders profileId={profileId} />;
     case 'grid':
       return <GridPosts profileId={profileId} />;
+    case 'stories':
+      return <StoriesPosts profileId={profileId} />;
     case 'drafts':
     case 'awaitingApproval':
     case 'pendingApproval':
@@ -239,9 +242,9 @@ ProfilePage.propTypes = {
     }),
   }).isRequired,
   onLoadMore: PropTypes.func.isRequired,
-  loadingMore: PropTypes.bool.isRequired,
-  moreToLoad: PropTypes.bool.isRequired,
-  page: PropTypes.number.isRequired,
+  loadingMore: PropTypes.bool,
+  moreToLoad: PropTypes.bool,
+  page: PropTypes.number,
   onChangeTab: PropTypes.func,
   selectedProfile: PropTypes.shape({
     service: PropTypes.string,
@@ -256,7 +259,6 @@ ProfilePage.defaultProps = {
   moreToLoad: false,
   page: 1,
   posts: [],
-  total: 0,
   onChangeTab: () => {},
   selectedProfile: null,
 };

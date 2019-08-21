@@ -47,8 +47,12 @@ const getValidTab = (selectedTab, isBusinessAccount, isInstagramProfile, isManag
       validTabId = (!isFreeUser || isBusinessAccount) ? 'drafts' : 'queue';
       break;
     case 'grid':
-      /* Business users or Team Members */
+      /* IG, Business users or Team Members */
       validTabId = (isBusinessAccount && isInstagramProfile) ? 'grid' : 'queue';
+      break;
+    case 'stories':
+      /* IG, Business users or Team Members */
+      validTabId = (isBusinessAccount && isInstagramProfile) ? 'stories' : 'queue';
       break;
     case 'settings':
       validTabId = 'settings';

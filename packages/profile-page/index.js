@@ -69,6 +69,9 @@ export default hot(
           case 'pastReminders':
             requestName = 'pastReminders';
             break;
+          case 'stories':
+            requestName = 'grid'; // change to the RPC name
+            break;
           default:
             requestName = 'queued';
         }
