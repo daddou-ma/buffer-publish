@@ -13,7 +13,10 @@
 }
 
 .hiddenA11yButton {
-  border: none;
-  background: none;
-  position: absolute;
+  color: transparent !important;
+  background: transparent !important;;
+  border: 0 !important;
+  position: absolute !important;
+  width: 0;
+  height: 0;
 }

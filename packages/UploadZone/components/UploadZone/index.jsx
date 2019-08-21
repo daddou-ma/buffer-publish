@@ -13,8 +13,8 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import preventXss from 'xss';
 import { Button } from '@bufferapp/ui';
-import styles from './css/UploadZone.css';
-import { getHumanReadableSize, getFileTypeFromPath } from '../utils/StringUtils';
+import styles from './uploadZone.css';
+import { getHumanReadableSize, getFileTypeFromPath } from '@bufferapp/publish-composer/composer/utils/StringUtils';
 
 const ContentTypeMediaTypeMap = new Map([
   ['JPG', 'IMAGE'],

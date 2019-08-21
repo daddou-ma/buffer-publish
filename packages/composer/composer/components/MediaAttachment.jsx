@@ -4,14 +4,17 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FileUploadFormatsConfigs, MediaTypes, UploadTypes } from '../AppConstants';
+import { UploadTypes } from '@bufferapp/publish-constants';
+import { FileUploadFormatsConfigs, MediaTypes, NotificationScopes } from '../AppConstants';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import MediaAttachmentThumbnail from '../components/MediaAttachmentThumbnail';
 import MediaAttachmentEditor from '../components/MediaAttachmentEditor';
-import UploadZone from '../components/UploadZone';
+import UploadZone from '@bufferapp/publish-upload-zone';
 import CircularUploadIndicator from '../components/progress-indicators/CircularUploadIndicator';
 import Dropdown, { DropdownTrigger, DropdownContent } from '../components/Dropdown';
 import styles from './css/MediaAttachment.css';
+import NotificationActionCreators from '../action-creators/NotificationActionCreators';
+import FileUploader from '../file-uploads/FileUploader';
 
 class MediaAttachment extends React.Component {
   static propTypes = {
@@ -165,6 +168,14 @@ class MediaAttachment extends React.Component {
               </div>}
 
             <UploadZone
+              mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+              notifiers={ComposerActionCreators.notifiers}
+              uploadDraftFile={ComposerActionCreators.uploadDraftFile}
+              removeAllNotifications={() => NotificationActionCreators.removeAllNotificationsByScope(NotificationScopes.FILE_UPLOAD)}
+              queueError={({message}) => NotificationActionCreators.queueError({
+                scope: NotificationScopes.FILE_UPLOAD,
+                message
+              })}
               classNames={uploadZoneClassNames}
               draftId={draftId}
               uploadFormatsConfig={uploadFormatsConfig}

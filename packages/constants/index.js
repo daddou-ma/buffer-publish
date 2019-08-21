@@ -1,3 +1,5 @@
+import keyMirror from 'keymirror';
+
 const SERVICE_TWITTER = 'twitter';
 const SERVICE_FACEBOOK = 'facebook';
 const SERVICE_LINKEDIN = 'linkedin';
@@ -31,6 +33,11 @@ const PLANS_PREMIUM_UPGRADE = 'publish-plans-switchPlansModal-premiumUpgrade-1';
 const PLANS_PREMIUM_DOWNGRADE = 'publish-plans-switchPlansModal-premiumDowngrade-1';
 const PLANS_SMALL_UPGRADE = 'publish-plans-switchPlansModal-smallUpgrade-1';
 const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
+
+const UploadTypes = keyMirror({
+  LINK_THUMBNAIL: null,
+  MEDIA: null,
+});
 
 module.exports = {
   SERVICE_NAMES: [
@@ -74,4 +81,5 @@ module.exports = {
     PLANS_SMALL_UPGRADE,
     PLANS_SMALL_DOWNGRADE,
   },
+  UploadTypes,
 };

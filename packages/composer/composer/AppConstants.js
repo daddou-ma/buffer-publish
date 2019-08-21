@@ -54,11 +54,6 @@ const ComposerInitiators = {
   ],
 };
 
-const UploadTypes = keyMirror({
-  LINK_THUMBNAIL: null,
-  MEDIA: null,
-});
-
 const Services = (() => {
   const Service = class {
     constructor(config) {
@@ -463,17 +458,6 @@ const FileUploadFormatsConfigs = (() => {
   return FileUploadFormatsConfigsMap;
 })();
 
-const ContentTypeMediaTypeMap = new Map([
-  ['JPG', 'IMAGE'],
-  ['JPEG', 'IMAGE'],
-  ['PNG', 'IMAGE'],
-  ['GIF', 'GIF'],
-  ['MOV', 'VIDEO'],
-  ['MP4', 'VIDEO'],
-  ['M4V', 'VIDEO'],
-  ['AVI', 'VIDEO'],
-]);
-
 const MediaUploadConfig = {
   endpoint: '/upload/media',
 };
@@ -495,8 +479,8 @@ const InstagramThumbnailMaxSize = 500;
 export {
   Services, AttachmentTypes, QueueingTypes, ActionTypes, AsyncOperationStates,
   NotificationTypes, NotificationScopes, FileUploadFormatsConfigs, MediaUploadConfig,
-  MediaTypes, AppEnvironments, UploadTypes, ComposerInitiators, LinkAttachmentTextFieldTypes,
+  MediaTypes, AppEnvironments, ComposerInitiators, LinkAttachmentTextFieldTypes,
   FloatingErrorCodes, UpgradeErrorCodes, ErrorTypes, SaveButtonTypes, InlineSaveButtonTypes, ButtonsQueuingTypesMap,
-  DataImportEnvironments, ContentTypeMediaTypeMap, bufferOrigins, bufferOriginRegex,
+  DataImportEnvironments, bufferOrigins, bufferOriginRegex,
   InstagramAspectRatioLimits, InstagramThumbnailMaxSize,
 };
