@@ -1,5 +1,4 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import {
