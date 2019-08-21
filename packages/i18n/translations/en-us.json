@@ -98,7 +98,8 @@
       "nonprofitMonthlyPrice": "$7.50 per month",
       "planMonthlyPrice": "$15 per month",
       "planMonthlyDescription": "Cancel and get a refund any time",
-      "planYearlyDescription": "Save 20% vs paying monthly"
+      "planYearlyDescription": "Save 20% vs paying monthly",
+      "buttonText": "Subscribe to Pro Plan"
     },
     "premiumDescriptors": {
       "plan": "Subscribe to the Premium plan!",
@@ -117,7 +118,8 @@
       "nonprofitMonthlyPrice": "$32.50 per month",
       "planMonthlyPrice": "$65 per month",
       "planMonthlyDescription": "Cancel and get a refund any time",
-      "planYearlyDescription": "Save 15% vs paying monthly"
+      "planYearlyDescription": "Save 15% vs paying monthly",
+      "buttonText": "Subscribe to Premium Plan"
     },
     "businessDescriptors": {
       "plan": "Subscribe to the Small Business plan!",
@@ -136,7 +138,8 @@
       "nonprofitMonthlyPrice": "$49.50 per month",
       "planMonthlyPrice": "$99 per month",
       "planMonthlyDescription": "Cancel and get a refund any time",
-      "planYearlyDescription": "Save 15% vs paying monthly"
+      "planYearlyDescription": "Save 15% vs paying monthly",
+      "buttonText": "Subscribe to Small Business Plan"
     },
     "proPlan": "Pro Plan",
     "proConnect": "Connect up to eight social accounts including Pinterest",
