@@ -52,10 +52,10 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch(analyticsActions.trackEvent('Draft Deleted', metadata));
       break;
     }
-/*
-In Classic it's REQUESTING_DRAFT_APPROVE.
-Sends draft to queue, which means approves draft
-*/
+    /*
+    In Classic it's REQUESTING_DRAFT_APPROVE.
+    Sends draft to queue, which means approves draft
+    */
     case actionTypes.DRAFT_APPROVE:
       dispatch(dataFetchActions.fetch({
         name: 'approveDraft',
