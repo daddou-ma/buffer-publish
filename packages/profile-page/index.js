@@ -47,14 +47,18 @@ export default hot(
       },
       onLoadMore: ({ profileId, page, tabId }) => {
         let requestName;
+        let needsApproval = false;
         switch (tabId) {
           case 'queue':
             requestName = 'queued';
             break;
           case 'drafts':
+            requestName = 'draft';
+            break;
           case 'awaitingApproval':
           case 'pendingApproval':
             requestName = 'draft';
+            needsApproval = true;
             break;
           case 'grid':
             requestName = 'grid';
@@ -75,6 +79,7 @@ export default hot(
               profileId,
               page,
               isFetchingMore: true,
+              needsApproval,
             },
           }),
         );
