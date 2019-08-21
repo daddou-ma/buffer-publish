@@ -14,10 +14,10 @@ export default hot(
         getProfilePageParams({ path: ownProps.history.location.pathname }) ||
         {};
       // With analytics, the reducer state name doesnt match the tabId
-      const reducerName =
-        tabId === 'analytics' && (!childTabId || childTabId === 'posts')
-          ? 'sent'
-          : tabId;
+      let reducerName = tabId === 'analytics' && (!childTabId || childTabId === 'posts')
+        ? 'sent'
+        : tabId;
+      if (tabId === 'awaitingApproval' || tabId === 'pendingApproval') reducerName = 'drafts';
       if (
         state[reducerName] &&
         state[reducerName].byProfileId &&
@@ -47,14 +47,18 @@ export default hot(
       },
       onLoadMore: ({ profileId, page, tabId }) => {
         let requestName;
+        let needsApproval = false;
         switch (tabId) {
           case 'queue':
             requestName = 'queued';
             break;
           case 'drafts':
+            requestName = 'draft';
+            break;
           case 'awaitingApproval':
           case 'pendingApproval':
             requestName = 'draft';
+            needsApproval = true;
             break;
           case 'grid':
             requestName = 'grid';
@@ -75,6 +79,7 @@ export default hot(
               profileId,
               page,
               isFetchingMore: true,
+              needsApproval,
             },
           }),
         );
