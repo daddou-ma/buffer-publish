@@ -3,6 +3,14 @@
     "loggedIn": "Logged In...",
     "loggedOut": "Logged Out..."
   },
+  "upload-zone": {
+    "buttonTitle": "Upload media",
+    "invalidFormatCantUseAnyFiles": "We can't quite use any of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
+    "invalidFormatCantUseSomeFiles": "We can't quite use some of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
+    "invalidFormatCantOneOfFiles": "We can't quite use some of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
+    "invalidFormatCantSingleFile": "We can't quite use that type of file. Could you try one of the following instead: {acceptedFilesText}?",
+    "invalidFileSize": "We can't upload \"{fileName}\" because it's too large: we can only handle files of that type up to {formattedMaxSize}. Could you try a smaller file?"
+  },
   "app-switcher": {
     "headline1": "Switch Back to Classic Buffer",
     "tagline": "Thanks for trying out our refreshed experience",

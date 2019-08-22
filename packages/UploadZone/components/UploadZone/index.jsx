@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import preventXss from 'xss';
 import { Button } from '@bufferapp/ui';
+import { stringTokenizer } from '@bufferapp/publish-i18n';
+
 import styles from './uploadZone.css';
 import { getHumanReadableSize, getFileTypeFromPath } from '@bufferapp/publish-composer/composer/utils/StringUtils';
 
@@ -45,7 +47,7 @@ class UploadZone extends React.Component {
   };
 
   getUploadableNewFiles = (files) => {
-    const {uploadFormatsConfig, queueError} = this.props;
+    const {uploadFormatsConfig, queueError, translations} = this.props;
 
     let invalidFormatFilesCount = 0;
 
@@ -60,11 +62,11 @@ class UploadZone extends React.Component {
       const uploadFormatConfig = uploadFormatsConfig.get(fileFormat);
       if (file.size > uploadFormatConfig.maxSize) {
         const formattedMaxSize = getHumanReadableSize(uploadFormatConfig.maxSize);
-        queueError({
-          message: `We can't upload "${preventXss(file.name)}" because it's too large: we can
-                    only handle files of that type up to ${formattedMaxSize}. Could you try
-                    a smaller file?`,
-        });
+        let message = translations.invalidFileSize;
+        message = stringTokenizer(message, '{fileName}', preventXss(file.name));
+        message = stringTokenizer(message, '{formattedMaxSize}', formattedMaxSize);
+
+        queueError({ message });
         return false;
       }
 
@@ -77,25 +79,22 @@ class UploadZone extends React.Component {
 
       if (invalidFormatFilesCount > 1) {
         if (invalidFormatFilesCount === files.length) {
-          message = `We can't quite use any of the selected types of files. Could you try one
-                    of the following instead: ${acceptedFilesText}?`;
+          message = translations.invalidFormatCantUseAnyFiles
         } else {
-          message = `We can't quite use some of the selected types of files. Could you try one
-                    of the following instead: ${acceptedFilesText}?`;
+          message = translations.invalidFormatCantUseSomeFiles;
         }
       } else if (invalidFormatFilesCount === 1) {
         if (files.length > 1) {
-          message = `We can't quite use one of the selected types of files. Could you try one
-                    of the following instead: ${acceptedFilesText}?`;
+          message = translations.invalidFormatCantOneOfFiles;
         } else {
-          message = `We can't quite use that type of file. Could you try one of the
-                    following instead: ${acceptedFilesText}?`;
+          message = translations.invalidFormatCantSingleFile;
         }
       }
 
-      queueError({
-        message,
-      });
+      //we want to insert our tokenized accepedFilesText string into our message where appropriate
+      message = stringTokenizer(message, '{acceptedFilesText}', acceptedFilesText);
+
+      queueError({ message });
     }
 
     return validFiles;
@@ -142,6 +141,7 @@ class UploadZone extends React.Component {
   };
 
   render () {
+    const { translations } = this.props;
     const transparentClickZoneClassName =
       [styles.transparentClickZone, this.props.classNames.uploadZone].join(' ');
 
@@ -164,7 +164,7 @@ class UploadZone extends React.Component {
         <Button
           className={styles.hiddenA11yButton}
           onClick={this.onHiddenA11yButtonClick}
-          title="Upload media"
+          title={translations.buttonTitle}
         />
       </div>
 
@@ -202,6 +202,14 @@ UploadZone.propTypes = {
     queueError: PropTypes.func,
     monitorFileUploadProgress: PropTypes.func,
   }).isRequired,
+  translations: PropTypes.shape({
+    invalidFormatCantUseAnyFiles: PropTypes.string,
+    invalidFormatCantUseSomeFiles: PropTypes.string,
+    invalidFormatCantOneOfFiles: PropTypes.string,
+    invalidFormatCantSingleFile: PropTypes.string,
+    invalidFileSize: PropTypes.string,
+    buttonTitle: PropTypes.string,
+  }).isRequired
 };
 
 UploadZone.defaultProps = {

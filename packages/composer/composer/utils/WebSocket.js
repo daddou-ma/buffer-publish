@@ -11,7 +11,6 @@
 
 import InternalPusher from 'pusher-js';
 import ServerActionCreators from '../action-creators/ServerActionCreators';
-import AppStore from '../stores/AppStore';
 import { AppEnvironments } from '../AppConstants';
 
 const handleTranscodedVideo = (data) => {
@@ -67,10 +66,8 @@ class WebSocket {
   static init = (() => {
     let hasWebSocketConnectionOpen = false; // Only one connection's necessary
 
-    return () => {
+    return ({ userId }) => {
       if (hasWebSocketConnectionOpen) return;
-
-      const userId = AppStore.getUserData().id;
 
       Pusher.channel_auth_endpoint = WebSocket.PUSHER_AUTH_ENDPOINT;
       const pusher = new Pusher(WebSocket.PUSHER_API_KEY, {
@@ -82,8 +79,7 @@ class WebSocket {
     };
   })();
 
-  static cleanUp = () => {
-    const { appEnvironment } = AppStore.getMetaData();
+  static cleanUp = (appEnvironment) => {
     const isDashboardEnv = appEnvironment === AppEnvironments.WEB_DASHBOARD;
     let pusherInstance;
 

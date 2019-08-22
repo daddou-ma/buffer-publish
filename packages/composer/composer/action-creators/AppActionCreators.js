@@ -487,7 +487,7 @@ const AppActionCreators = {
   },
 
   listenToChangeEventsForGroups: () => {
-    WebSocket.init();
+    WebSocket.init({userId: AppStore.getUserData().id});
   },
 
   resetSelectedProfiles: (profilesData) => {

@@ -5,7 +5,9 @@ import UploadZone from './components/UploadZone';
 
 // default export = container
 export default connect(
-  state => ({}),
+  state => ({
+    translations: state.i18n.translations['upload-zone'],
+  }),
 )(UploadZone);
 
 // export reducer, actions and action types

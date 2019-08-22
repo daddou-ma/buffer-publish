@@ -262,8 +262,8 @@ class App extends React.Component {
     window.removeEventListener('dragover', e => e.preventDefault());
 
     if (this.dragMe) this.dragMe.cleanup();
-
-    WebSocket.cleanUp();
+    const { appEnvironment } = AppStore.getMetaData();
+    WebSocket.cleanUp(appEnvironment);
   }
 
   onStoreChange = () => this.setState(getState());

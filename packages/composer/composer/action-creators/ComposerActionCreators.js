@@ -6,8 +6,8 @@ import ComposerStore from '../stores/ComposerStore';
 import Scraper from '../utils/Scraper';
 import Shortener from '../utils/Shortener';
 import Uploader from '../utils/Uploader';
-import NotificationActionCreators from '../action-creators/NotificationActionCreators';
-import AppActionCreators from '../action-creators/AppActionCreators';
+import NotificationActionCreators from './NotificationActionCreators';
+import AppActionCreators from './AppActionCreators';
 import { getStillDataUriFromGif } from '../utils/DOMUtils';
 import { getFileTypeFromPath } from '../utils/StringUtils';
 import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
@@ -482,7 +482,16 @@ const ComposerActionCreators = {
   },
 
   uploadInstagramDraftThumbnail: (id, imageFile, video) => {
-    const uploader = new Uploader();
+    const { id: userId, s3UploadSignature } = AppStore.getUserData();
+    const uploader = new Uploader({
+      csrf_token: AppStore.getCsrfToken(),
+      userId,
+      s3UploadSignature,
+      errorNotifier: ({ message }) => NotificationActionCreators.queueError({
+        scope: NotificationScopes.FILE_UPLOAD,
+        message,
+      }),
+    });
     uploader.upload(imageFile)
       .then((uploadedFile) => {
         const thumbOffset = video.currentTime * 1000;
@@ -609,7 +618,13 @@ const ComposerActionCreators = {
     },
   },
   uploadDraftFile: (id, file, uploadType, notifiers) => {
-    const uploader = new Uploader();
+    const { id: userId, s3UploadSignature } = AppStore.getUserData();
+    const uploader = new Uploader({
+      csrf_token: AppStore.getCsrfToken(),
+      userId,
+      s3UploadSignature,
+      errorNotifier: notifiers.queueError,
+    });
 
     notifiers.uploadStarted({ id, uploaderInstance: uploader });
 
