@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 
-import StoriesPosts from './components/StoriesPosts';
 import { actions } from './reducer';
+import StoriesPosts from './components/StoriesPosts';
 import storiesPosts from './components/StoriesPosts/storiesData';
+import formatPostLists from './util';
 
 export default connect(
   (state, ownProps) => {
@@ -11,20 +12,30 @@ export default connect(
     if (currentProfile) {
       return {
         loading: currentProfile.loading,
+        loadingMore: currentProfile.loadingMore,
+        moreToLoad: currentProfile.moreToLoad,
         page: currentProfile.page,
-        storiesPosts,
+        storiesPosts: formatPostLists({
+          posts: storiesPosts,
+        }),
+        showStoriesComposer: state.stories.showStoriesComposer,
+        editMode: state.stories.editMode,
       };
     }
+    return {};
   },
   (dispatch, ownProps) => ({
-    onSlotClick: () => {
-      dispatch(actions.handleSlotClick({
+    onEmptySlotClick: (post) => {
+      dispatch(actions.handleEmptySlotClick({
+        emptySlotData: post,
         profileId: ownProps.profileId,
       }));
+    },
+    onComposerPlaceholderClick: () => {
+      dispatch(actions.handleComposerPlaceholderClick());
     },
   }),
 )(StoriesPosts);
 
-// export reducer, actions and action types
 export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';

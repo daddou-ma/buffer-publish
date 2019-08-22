@@ -10,6 +10,7 @@ import { middleware as sentMiddleware } from '@bufferapp/publish-sent';
 import { middleware as gridMiddleware } from '@bufferapp/publish-grid';
 import { middleware as pastRemindersMiddleware } from '@bufferapp/publish-past-reminders';
 import { middleware as draftsMiddleware } from '@bufferapp/publish-drafts';
+import { middleware as storiesMiddleware } from '@bufferapp/publish-stories';
 import { middleware as postingScheduleSettingsMiddleware } from '@bufferapp/publish-posting-schedule';
 import { middleware as generalSettingsMiddleware } from '@bufferapp/publish-general-settings';
 import { middleware as profileSidebarMiddleware } from '@bufferapp/publish-profile-sidebar';
@@ -134,6 +135,7 @@ const configureStore = initialstate => {
         onboardingMiddleware,
         globalAccountMiddleware,
         closeComposerModalMiddleware,
+        storiesMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

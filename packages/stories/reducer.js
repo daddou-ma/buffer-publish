@@ -3,18 +3,24 @@ import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-pro
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('STORIES', {
-  SLOT_CLICKED: 0,
+  OPEN_STORIES_COMPOSER: 0,
 });
 
 export const initialState = {
   byProfileId: {},
   environment: 'production',
+  showStoriesComposer: false,
+  editMode: false,
+  emptySlotMode: false,
+  editingPostId: '',
 };
 
 export const profileInitialState = {
   loading: true,
-  copySuccess: false,
-  gridPosts: [],
+  loadingMore: false,
+  moreToLoad: false,
+  page: 1,
+  posts: {},
   total: 0,
 };
 
@@ -24,9 +30,49 @@ const getProfileId = (action) => {
   if (action.profile) { return action.profile.id; }
 };
 
+const determineIfMoreToLoad = (action, currentPosts) => {
+  const currentPostCount = Object.keys(currentPosts).length;
+  const resultUpdatesCount = Object.keys(action.result.updates).length;
+  return (action.result.total > (currentPostCount + resultUpdatesCount));
+};
+
+const postsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case `storiesPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { updates } = action.result;
+      if (action.args.isFetchingMore) {
+        return { ...state, ...updates };
+      }
+      return updates;
+    }
+    default:
+      return state;
+  }
+};
 
 const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
+    case `storiesPosts_${dataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+        loading: !action.args.isFetchingMore && !action.args.hideLoading,
+        loadingMore: action.args.isFetchingMore,
+      };
+    case `storiesPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        loading: false,
+        loadingMore: false,
+        moreToLoad: determineIfMoreToLoad(action, state.posts),
+        page: state.page + 1,
+        posts: postsReducer(state.posts, action),
+        total: action.result.total,
+      };
+    case `storiesPosts_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        loading: false,
+      };
     case profileSidebarActionTypes.SELECT_PROFILE:
       return profileInitialState;
     default:
@@ -38,7 +84,9 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
-    case actionTypes.SLOT_CLICKED:
+    case `storiesPosts_${dataFetchActionTypes.FETCH_START}`:
+    case `storiesPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `storiesPosts_${dataFetchActionTypes.FETCH_FAIL}`:
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -49,14 +97,28 @@ export default (state = initialState, action) => {
         };
       }
       return state;
+    case actionTypes.OPEN_STORIES_COMPOSER:
+      return {
+        ...state,
+        showStoriesComposer: true,
+        editMode: action.editMode,
+        editingPostId: action.updateId,
+        emptySlotMode: action.emptySlotMode,
+        emptySlotData: action.emptySlotData,
+      };
     default:
       return state;
   }
 };
 
 export const actions = {
-  handleSlotClick: ({ profileId }) => ({
-    type: actionTypes.SLOT_CLICKED,
+  handleEmptySlotClick: ({ profileId, emptySlotData }) => ({
+    type: actionTypes.OPEN_STORIES_COMPOSER,
+    emptySlotMode: true,
+    emptySlotData,
     profileId,
+  }),
+  handleComposerPlaceholderClick: () => ({
+    type: actionTypes.OPEN_STORIES_COMPOSER,
   }),
 };
