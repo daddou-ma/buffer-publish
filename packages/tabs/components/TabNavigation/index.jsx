@@ -56,6 +56,7 @@ class TabNavigation extends React.Component {
       isBusinessAccount,
       isManager,
       isInstagramProfile,
+      hasStoriesFlip,
     } = this.props;
 
     return tabId === getValidTab(
@@ -64,6 +65,7 @@ class TabNavigation extends React.Component {
       isInstagramProfile,
       isManager,
       features.isFreeUser(),
+      hasStoriesFlip,
     );
   }
 
@@ -185,6 +187,7 @@ TabNavigation.defaultProps = {
   isInstagramProfile: false,
   isBusinessAccount: false,
   isManager: false,
+  hasStoriesFlip: false,
 };
 
 TabNavigation.propTypes = {
@@ -202,6 +205,7 @@ TabNavigation.propTypes = {
   isLockedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
   shouldShowUpgradeButton: PropTypes.bool,
+  hasStoriesFlip: PropTypes.bool,
 };
 
 export default WithFeatureLoader(TabNavigation);

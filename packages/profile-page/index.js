@@ -34,6 +34,7 @@ export default hot(
           view: state[reducerName].byProfileId[profileId].tabId || null,
           isBusinessAccount: state.profileSidebar.selectedProfile.business,
           selectedProfile: state.profileSidebar.selectedProfile,
+          hasStoriesFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('stories_groups') : false,
         };
       }
       return {};

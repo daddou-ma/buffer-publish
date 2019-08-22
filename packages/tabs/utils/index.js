@@ -10,6 +10,7 @@ const openBillingWindow = () => {
   window.location.href = `${getBaseURL()}/app/account/receipts?content_only=true`;
 };
 
+// TODO: remove `hasStoriesFlip` paramenter once the Stories is launched
 /**
  * Checks if the user can go the selected tab and returns the proper one in case is invalid
  *
@@ -21,7 +22,7 @@ const openBillingWindow = () => {
  *
  * @returns string validTabId with the valid tab, default value is 'queue'
  */
-const getValidTab = (selectedTab, isBusinessAccount, isInstagramProfile, isManager, isFreeUser) => {
+const getValidTab = (selectedTab, isBusinessAccount, isInstagramProfile, isManager, isFreeUser, hasStoriesFlip) => {
   let validTabId = selectedTab;
 
   switch (selectedTab) {
@@ -52,7 +53,7 @@ const getValidTab = (selectedTab, isBusinessAccount, isInstagramProfile, isManag
       break;
     case 'stories':
       /* IG, Business users or Team Members */
-      validTabId = (isBusinessAccount && isInstagramProfile) ? 'stories' : 'queue';
+      validTabId = (isBusinessAccount && isInstagramProfile && hasStoriesFlip) ? 'stories' : 'queue';
       break;
     case 'settings':
       validTabId = 'settings';

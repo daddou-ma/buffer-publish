@@ -74,6 +74,7 @@ const verifyTab = (
   selectedProfile,
   isFreeUser,
   onChangeTab,
+  hasStoriesFlip,
 ) => {
   let isInstagramProfile = false;
   let isBusinessAccount = false;
@@ -85,7 +86,7 @@ const verifyTab = (
     isManager = selectedProfile.isManager;
 
     const validTabId =
-      getValidTab(tabId, isBusinessAccount, isInstagramProfile, isManager, isFreeUser);
+      getValidTab(tabId, isBusinessAccount, isInstagramProfile, isManager, isFreeUser, hasStoriesFlip);
 
     // if current tabId is not valid, redirect to the queue
     if (tabId !== validTabId) {
@@ -94,9 +95,9 @@ const verifyTab = (
   }
 };
 
-const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, features, onChangeTab }) => {
+const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, features, onChangeTab, hasStoriesFlip }) => {
   // if current tabId is not valid, redirect to the queue
-  verifyTab(tabId, profileId, selectedProfile, features.isFreeUser(), onChangeTab);
+  verifyTab(tabId, profileId, selectedProfile, features.isFreeUser(), onChangeTab, hasStoriesFlip);
 
   switch (tabId) {
     case 'queue':
@@ -169,6 +170,7 @@ function ProfilePage({
   selectedProfile,
   features,
   onChangeTab,
+  hasStoriesFlip,
 }) {
   const isQueueTab = tabId === 'queue';
   const isOtherPostsTab =
@@ -178,6 +180,7 @@ function ProfilePage({
       'pendingApproval',
       'pastReminders',
       'grid',
+      'stories',
     ].includes(tabId) ||
     // analytics/posts is a child tab, so check for that too (it's the default if not present)
     (tabId === 'analytics' && (!childTabId || childTabId === 'posts'));
@@ -220,6 +223,7 @@ function ProfilePage({
               selectedProfile={selectedProfile}
               features={features}
               onChangeTab={onChangeTab}
+              hasStoriesFlip={hasStoriesFlip}
             />
             {loadingMore && (
               <div style={loadingAnimationStyle}>
@@ -252,6 +256,7 @@ ProfilePage.propTypes = {
     isManager: PropTypes.bool,
   }),
   features: PropTypes.object.isRequired, // eslint-disable-line
+  hasStoriesFlip: PropTypes.bool,
 };
 
 ProfilePage.defaultProps = {
@@ -261,6 +266,7 @@ ProfilePage.defaultProps = {
   posts: [],
   onChangeTab: () => {},
   selectedProfile: null,
+  hasStoriesFlip: false,
 };
 
 export default WithFeatureLoader(ProfilePage);
