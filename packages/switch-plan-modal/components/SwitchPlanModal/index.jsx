@@ -30,6 +30,25 @@ const isPro = plan => plan === 'pro';
 const isPremium = plan => plan === 'premium_business';
 const isSmallBusiness = plan => plan === 'small';
 
+const getButtonText = ({ plan, translations }) => {
+  let buttonText = '';
+  switch (plan) {
+    case 'pro':
+      buttonText = translations.proDescriptors.buttonText;
+      break;
+    case 'premium_business':
+      buttonText = translations.premiumDescriptors.buttonText;
+      break;
+    case 'small':
+      buttonText = translations.businessDescriptors.buttonText;
+      break;
+    default:
+      buttonText = 'Subscribe';
+      break;
+  }
+  return buttonText;
+};
+
 const currentYear = new Date().getFullYear();
 const creditCardSvg = '<svg width="31" height="21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="%23fff" d="M0 0h31v21H0z"/><rect width="31" height="21" rx="3" fill="%232D98C8"/><path fill="%23343E47" d="M0 3h31v3H0z"/><path fill="%23fff" d="M6 9h20v4H6z"/><path fill="%23FD232B" d="M20 10h5v2h-5z"/></svg>';
 const creditCardBackground = `right 6px center no-repeat url('data:image/svg+xml;utf8,${creditCardSvg}')`;
@@ -143,7 +162,7 @@ class SwitchPlanModal extends React.Component {
       <Modal
         wide
         action={{
-          label: validating ? translations.validating : translations.switchCta,
+          label: validating ? translations.validating : getButtonText({ plan, translations }),
           disabled: validating,
           callback: () => this.submitForm({ card, upgradePlan }),
         }}

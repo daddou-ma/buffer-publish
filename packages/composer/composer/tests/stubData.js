@@ -121,5 +121,19 @@ export const rawProfilesData = [
     shouldBeAutoSelected: false,
     subprofiles: [],
     timezone: "America/Los_Angeles",
+  },
+  {
+    id: "59cd5270b7ca102c117a12b1",
+    imagesAvatar: "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+    instagramDirectEnabled: true,
+    isBusinessProfile: true,
+    isDisabled: false,
+    serviceFormattedUsername: "Test Facebook Page",
+    serviceName: "facebook",
+    serviceType: "page",
+    serviceUsername: "test_facebook_page",
+    shouldBeAutoSelected: false,
+    subprofiles: [],
+    timezone: "America/Los_Angeles",
   }
 ];

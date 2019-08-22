@@ -746,6 +746,10 @@ const getDraftCharacterCount = (id, text) => {
     return charCount;
   }
 
+  if (draft.service.name === 'facebook') {
+    return (text && text.length) || 0;
+  }
+
   throw new Error('No character counting rules implemented for this service');
 };
 

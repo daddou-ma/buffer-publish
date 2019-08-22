@@ -1,7 +1,6 @@
 import { ActionTypes } from '../AppConstants';
 import {
   fakeImageData,
-  fakeMetaData,
   fakeUserData,
   fakeVideoData,
   rawProfilesData,
@@ -21,6 +20,14 @@ describe('ComposerStore', () => {
     action: {
       actionType: ActionTypes.COMPOSER_ADD_DRAFT_IMAGE,
       id: 'instagram',
+      image: fakeImageData,
+    },
+  };
+
+  const actionAddImageFacebook = {
+    action: {
+      actionType: ActionTypes.COMPOSER_ADD_DRAFT_IMAGE,
+      id: 'facebook',
       image: fakeImageData,
     },
   };
@@ -46,6 +53,13 @@ describe('ComposerStore', () => {
     },
   };
 
+  const actionEnableFacebookDraft = {
+    action: {
+      actionType: ActionTypes.COMPOSER_ENABLE,
+      id: 'facebook',
+    },
+  };
+
   const actionAddProfiles = {
     action: {
       actionType: ActionTypes.COMPOSER_CREATE_PROFILES,
@@ -63,6 +77,13 @@ describe('ComposerStore', () => {
     action: {
       actionType: ActionTypes.COMPOSER_SELECT_PROFILE,
       id: '5a81d9ae63fbc389007b23c6',
+    },
+  };
+
+  const actionSelectProfileFacebook = {
+    action: {
+      actionType: ActionTypes.COMPOSER_SELECT_PROFILE,
+      id: '59cd5270b7ca102c117a12b1',
     },
   };
 
@@ -235,6 +256,19 @@ describe('ComposerStore', () => {
     expect(characterCommentCount).toEqual(7);
   });
 
+  it('returns total amount of characters for facebook draft', () => {
+    const id = 'facebook';
+
+    AppDispatcher.dispatch(actionAddProfiles);
+    AppDispatcher.dispatch(actionSelectProfileFacebook);
+    AppDispatcher.dispatch(actionEnableFacebookDraft);
+    AppDispatcher.dispatch(actionAddImageFacebook);
+
+    expect(ComposerStore.getDraftCharacterCount(id, 'Text with 23 characters')).toEqual(23);
+    expect(ComposerStore.getDraftCharacterCount(id, '')).toEqual(0);
+    expect(ComposerStore.getDraftCharacterCount(id, null)).toEqual(0);
+  });
+
   describe('soft reset state', () => {
     it('returns the drafts objects', () => {
       AppDispatcher.dispatch(actionAddProfiles);
@@ -248,4 +282,5 @@ describe('ComposerStore', () => {
       expect(draftsAfterReset[0].constructor.name).toEqual('Draft');
     });
   });
+
 });

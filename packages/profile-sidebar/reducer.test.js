@@ -20,6 +20,7 @@ describe('reducer', () => {
       hasTwitter: true,
       isSearchPopupVisible: false,
       searchText: null,
+      hasOnboardingFeatureFlip: false,
     };
     const action = {
       type: 'INIT',
