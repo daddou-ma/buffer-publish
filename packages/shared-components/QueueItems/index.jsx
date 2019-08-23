@@ -117,7 +117,7 @@ const renderPost = ({
 
   const defaultStyle = {
     default: {
-      marginBottom: !isStory ? '2rem' : '8px',
+      marginBottom: isStory ? '8px' : '2rem',
       maxHeight: '100vh',
       transition: `all ${transitionAnimationTime} ${transitionAnimationType}`,
     },
