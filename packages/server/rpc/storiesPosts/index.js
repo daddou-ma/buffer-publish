@@ -10,7 +10,7 @@ const { buildPostMap } = require('./../../formatters/src');
  */
 module.exports = method(
   'storiesPosts',
-  'fetch queued posts',
+  'fetch stories groups',
   ({ profileId, page, count = 20 }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/profiles/${profileId}/updates/pending.json`,

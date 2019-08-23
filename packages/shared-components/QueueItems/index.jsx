@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
   Text,
@@ -9,6 +9,7 @@ import {
   transitionAnimationType,
 } from '@bufferapp/components/style/animation';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import { PostEmptySlot } from '@bufferapp/publish-shared-components';
 
 import TextPost from '../TextPost';
 import ImagePost from '../ImagePost';
@@ -27,6 +28,31 @@ const listHeaderStyle = {
   marginBottom: '1rem',
   marginTop: '1rem',
   marginLeft: '0.5rem',
+};
+
+const headerTextStyle = {
+  display: 'flex',
+  alignItems: 'baseline',
+};
+
+const headerTextDayOfWeekStyle = {
+  fontFamily: 'Roboto',
+  fontStyle: 'normal',
+  fontWeight: 'bold',
+  lineHeight: 'normal',
+  fontSize: '18px',
+  color: '#3D3D3D',
+};
+
+const headerTextDateStyle = {
+  fontFamily: 'Roboto',
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+  lineHeight: 'normal',
+  fontSize: '14px',
+  textTransform: 'uppercase',
+  color: '#636363',
+  marginLeft: '8px',
 };
 
 const postTypeComponentMap = new Map([
@@ -50,6 +76,7 @@ const draftTypeComponentMap = new Map([
 const renderPost = ({
   post,
   index,
+  isStory,
   onCancelConfirmClick,
   onRequeueClick,
   onDeleteClick,
@@ -90,7 +117,7 @@ const renderPost = ({
 
   const defaultStyle = {
     default: {
-      marginBottom: '2rem',
+      marginBottom: !isStory ? '2rem' : '8px',
       maxHeight: '100vh',
       transition: `all ${transitionAnimationTime} ${transitionAnimationType}`,
     },
@@ -196,25 +223,61 @@ const renderDraft = ({
   );
 };
 
-const renderHeader = ({ text, id }) => (
+const renderHeader = ({
+  text,
+  id,
+  dayOfWeek,
+  date,
+}) => (
   <div style={listHeaderStyle} key={id}>
-    <Text color={'black'}>
-      {text}
-    </Text>
+    <div style={headerTextStyle}>
+      {(dayOfWeek && date)
+        ? (
+          <React.Fragment>
+            <span style={headerTextDayOfWeekStyle}>{dayOfWeek}</span>
+            <span style={headerTextDateStyle}>{date}</span>
+          </React.Fragment>
+        ) : <span style={headerTextDayOfWeekStyle}>{text}</span>
+      }
+    </div>
   </div>
+);
+
+const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
+  <PostEmptySlot
+    key={id}
+    time="Add to Story"
+    service="isStoryGroup"
+    onClick={() => onEmptySlotClick({
+      dueTime: slot.label,
+      profile_service: profileService,
+      scheduled_at: slot.timestamp,
+      due_at: slot.timestamp,
+    })}
+  />
 );
 
 /* eslint-enable react/prop-types */
 
 const QueueItems = (props) => {
-  const { items, type, ...propsForPosts } = props;
+  const { items, type, onEmptySlotClick, ...propsForPosts } = props;
   const itemList = items.map((item, index) => {
     const { queueItemType, ...rest } = item;
     if (queueItemType === 'post') {
-      return type === 'drafts' ? renderDraft({ draft: rest, ...propsForPosts }) : renderPost({ post: rest, index, ...propsForPosts });
+      switch (type) {
+        case 'drafts':
+          return renderDraft({ draft: rest, ...propsForPosts });
+        case 'stories':
+          return renderPost({ post: rest, index, isStory: true, ...propsForPosts });
+        default:
+          return renderPost({ post: rest, index, ...propsForPosts });
+      }
     }
     if (queueItemType === 'header') {
       return renderHeader(rest);
+    }
+    if (queueItemType === 'slot') {
+      return renderSlot(rest, onEmptySlotClick);
     }
     return null;
   });
@@ -245,12 +308,14 @@ QueueItems.propTypes = {
   onSwapPosts: PropTypes.func,
   draggable: PropTypes.bool,
   type: PropTypes.string,
+  onEmptySlotClick: PropTypes.func,
 };
 
 QueueItems.defaultProps = {
   items: [],
   draggable: false,
   type: 'post',
+  onEmptySlotClick: () => {},
 };
 
 export default QueueItems;

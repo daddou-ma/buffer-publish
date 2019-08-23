@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import {
-  PostEmptySlot,
+  QueueItems,
   BufferLoading,
   ComposerInput,
 } from '@bufferapp/publish-shared-components';
@@ -38,7 +38,15 @@ const StoriesPosts = ({
   isLockedProfile,
   showStoriesComposer,
   onEmptySlotClick,
+  onEditClick,
+  onDeleteClick,
+  onDeleteConfirmClick,
   onComposerPlaceholderClick,
+  hasFirstCommentFlip,
+  isBusinessAccount,
+  onShareNowClick,
+  onCalendarClick,
+  onCancelConfirmClick,
 }) => {
   if (loading) {
     return (
@@ -69,13 +77,19 @@ const StoriesPosts = ({
         {showStoriesComposer && editMode && (
           <div>New composer!</div>
         )}
-        {storiesPosts.length > 0 && (
-          <div>Story Groups listed here</div>
-        )}
-        <PostEmptySlot
-          time="Story"
-          service="noProfile"
-          onClick={() => {}}
+        <QueueItems
+          items={storiesPosts}
+          onCancelConfirmClick={onCancelConfirmClick}
+          onCalendarClick={onCalendarClick}
+          onDeleteClick={onDeleteClick}
+          onDeleteConfirmClick={onDeleteConfirmClick}
+          onEditClick={onEditClick}
+          onEmptySlotClick={onEmptySlotClick}
+          onShareNowClick={onShareNowClick}
+          draggable={false}
+          type="stories"
+          hasFirstCommentFlip={hasFirstCommentFlip}
+          isBusinessAccount={isBusinessAccount}
         />
       </div>
     </ErrorBoundary>
@@ -91,9 +105,17 @@ StoriesPosts.propTypes = {
     PropTypes.shape({
       type: PropTypes.string,
     }),
-  ).isRequired,
+  ),
   showStoriesComposer: PropTypes.bool,
+  hasFirstCommentFlip: PropTypes.bool,
+  isBusinessAccount: PropTypes.bool,
   onEmptySlotClick: PropTypes.func.isRequired,
+  onEditClick: PropTypes.func,
+  onDeleteClick: PropTypes.func,
+  onDeleteConfirmClick: PropTypes.func,
+  onShareNowClick: PropTypes.func,
+  onCalendarClick: PropTypes.func,
+  onCancelConfirmClick: PropTypes.func,
   onComposerPlaceholderClick: PropTypes.func,
 };
 
@@ -104,6 +126,15 @@ StoriesPosts.defaultProps = {
   moreToLoad: false,
   isLockedProfile: false,
   showStoriesComposer: false,
+  hasFirstCommentFlip: false,
+  isBusinessAccount: false,
+  storiesPosts: [],
+  onEditClick: () => {},
+  onDeleteClick: () => {},
+  onDeleteConfirmClick: () => {},
+  onShareNowClick: () => {},
+  onCalendarClick: () => {},
+  onCancelConfirmClick: () => {},
   onComposerPlaceholderClick: () => {},
 };
 

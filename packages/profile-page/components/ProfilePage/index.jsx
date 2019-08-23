@@ -172,7 +172,7 @@ function ProfilePage({
   onChangeTab,
   hasStoriesFlip,
 }) {
-  const isQueueTab = tabId === 'queue';
+  const isQueueTab = tabId === 'queue' || tabId === 'stories';
   const isOtherPostsTab =
     [
       'drafts',
@@ -180,7 +180,6 @@ function ProfilePage({
       'pendingApproval',
       'pastReminders',
       'grid',
-      'stories',
     ].includes(tabId) ||
     // analytics/posts is a child tab, so check for that too (it's the default if not present)
     (tabId === 'analytics' && (!childTabId || childTabId === 'posts'));
