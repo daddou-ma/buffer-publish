@@ -66,7 +66,9 @@ const StoriesPosts = ({
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
             {showStoriesComposer && !editMode && (
-              <div>New composer!</div>
+              <React.Fragment>
+                {/* TODO: add here <StoryGroupPopover /> */}
+              </React.Fragment>
             )}
             <ComposerInput
               placeholder="What would you like to add to your Story?"
@@ -75,7 +77,9 @@ const StoriesPosts = ({
           </div>
         </div>
         {showStoriesComposer && editMode && (
-          <div>New composer!</div>
+          <React.Fragment>
+            {/* TODO: add here <StoryGroupPopover /> */}
+          </React.Fragment>
         )}
         <QueueItems
           items={storiesPosts}
