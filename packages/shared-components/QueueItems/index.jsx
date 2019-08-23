@@ -276,7 +276,7 @@ const QueueItems = (props) => {
     if (queueItemType === 'header') {
       return renderHeader(rest);
     }
-    if (queueItemType === 'slot') {
+    if (type === 'stories' && queueItemType === 'slot') {
       return renderSlot(rest, onEmptySlotClick);
     }
     return null;
