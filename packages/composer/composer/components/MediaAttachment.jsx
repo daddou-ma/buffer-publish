@@ -4,8 +4,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { UploadTypes } from '@bufferapp/publish-constants';
-import { FileUploadFormatsConfigs, MediaTypes, NotificationScopes } from '../AppConstants';
+import { MediaTypes, UploadTypes } from '@bufferapp/publish-constants';
+import { FileUploadFormatsConfigs, NotificationScopes } from '../AppConstants';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import MediaAttachmentThumbnail from '../components/MediaAttachmentThumbnail';
 import MediaAttachmentEditor from '../components/MediaAttachmentEditor';

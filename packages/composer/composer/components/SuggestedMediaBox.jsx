@@ -6,9 +6,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import throttle from 'lodash.throttle';
+import { MediaTypes } from '@bufferapp/publish-constants';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import AppActionCreators from '../action-creators/AppActionCreators';
-import { MediaTypes } from '../AppConstants';
 import Button from '../components/Button';
 import SuggestedMediaThumbnailInfo from './SuggestedMediaThumbnailInfo';
 import styles from './css/SuggestedMediaBox.css';

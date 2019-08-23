@@ -2,16 +2,15 @@
  * Thin wrapper around @bufferapp/buffer-js-metrics that automatically provides the app environment
  */
 
-import AppStore from '../stores/AppStore';
-import { AppEnvironments } from '../AppConstants';
+import { AppEnvironments } from '@bufferapp/publish-constants';
 import BufferMetrics, { AppEnvironments as BufferMetricsAppEnvironments }
   from '@bufferapp/buffer-js-metrics';
 
 class Metrics extends BufferMetrics {
-  static trackAction(...args) {
-    const { appEnvironment, disableTelemetry } = AppStore.getMetaData();
-
+  static trackAction(scope, extraData, { appEnvironment, disableTelemetry }) {
     if (disableTelemetry) return undefined;
+
+    let args = [scope, extraData];
 
     // Map app env constants with BufferMetrics's internal app env constants
     const appEnvironmentsMap = new Map([

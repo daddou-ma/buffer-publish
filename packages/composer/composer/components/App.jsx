@@ -10,7 +10,7 @@ import { AppEnvironments, NotificationScopes, Services, ErrorTypes, SaveButtonTy
 import AppActionCreators from '../action-creators/AppActionCreators';
 import AppInitActionCreators from '../action-creators/AppInitActionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import WebSocket from '../utils/WebSocket';
+import WebSocket from '@bufferapp/publish-upload-zone/utils/WebSocket';
 import { observeStore } from '../utils/StoreUtils';
 import AppHooks from '../utils/LifecycleHooks';
 import AppStateless from './AppStateless';

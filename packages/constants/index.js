@@ -1,4 +1,4 @@
-import keyMirror from 'keymirror';
+const keyMirror = require('keymirror');
 
 const SERVICE_TWITTER = 'twitter';
 const SERVICE_FACEBOOK = 'facebook';
@@ -37,6 +37,18 @@ const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
 const UploadTypes = keyMirror({
   LINK_THUMBNAIL: null,
   MEDIA: null,
+});
+
+const MediaTypes = keyMirror({
+  IMAGE: null,
+  VIDEO: null,
+  GIF: null,
+});
+
+const AppEnvironments = keyMirror({
+  EXTENSION: null,
+  WEB_DASHBOARD: null,
+  ONBOARDING: null,
 });
 
 module.exports = {
@@ -81,5 +93,7 @@ module.exports = {
     PLANS_SMALL_UPGRADE,
     PLANS_SMALL_DOWNGRADE,
   },
+  MediaTypes,
   UploadTypes,
+  AppEnvironments,
 };

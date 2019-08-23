@@ -1,16 +1,17 @@
-import { UploadTypes } from '@bufferapp/publish-constants';
+import { UploadTypes, MediaTypes } from '@bufferapp/publish-constants';
 import AppDispatcher from '../dispatcher';
-import { ActionTypes, MediaTypes, NotificationScopes } from '../AppConstants';
+import { ActionTypes, NotificationScopes } from '../AppConstants';
 import AppStore from '../stores/AppStore';
 import ComposerStore from '../stores/ComposerStore';
 import Scraper from '../utils/Scraper';
 import Shortener from '../utils/Shortener';
-import Uploader from '../utils/Uploader';
+import Uploader from '@bufferapp/publish-upload-zone/utils/Uploader';
 import NotificationActionCreators from './NotificationActionCreators';
 import AppActionCreators from './AppActionCreators';
 import { getStillDataUriFromGif } from '../utils/DOMUtils';
 import { getFileTypeFromPath } from '../utils/StringUtils';
 import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
+import ServerActionCreators from '../action-creators/ServerActionCreators';
 
 const ComposerActionCreators = {
 
@@ -491,6 +492,7 @@ const ComposerActionCreators = {
         scope: NotificationScopes.FILE_UPLOAD,
         message,
       }),
+      notifiers: ServerActionCreators,
     });
     uploader.upload(imageFile)
       .then((uploadedFile) => {
@@ -624,6 +626,7 @@ const ComposerActionCreators = {
       userId,
       s3UploadSignature,
       errorNotifier: notifiers.queueError,
+      notifiers: ServerActionCreators,
     });
 
     notifiers.uploadStarted({ id, uploaderInstance: uploader });

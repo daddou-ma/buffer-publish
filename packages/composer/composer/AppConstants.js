@@ -4,6 +4,7 @@
  */
 
 import keyMirror from 'keymirror';
+import { MediaTypes } from '@bufferapp/publish-constants';
 
 const AppEnvironments = keyMirror({
   EXTENSION: null,
@@ -14,12 +15,6 @@ const AppEnvironments = keyMirror({
 const DataImportEnvironments = keyMirror({
   BOOKMARKLET_PHP: null, // The document at /add, served through bookmarklet.php
   WEB_DASHBOARD: null, // Anywhere in the web dashboard
-});
-
-const MediaTypes = keyMirror({
-  IMAGE: null,
-  VIDEO: null,
-  GIF: null,
 });
 
 const AttachmentTypes = keyMirror({
@@ -478,8 +473,7 @@ const InstagramThumbnailMaxSize = 500;
 
 export {
   Services, AttachmentTypes, QueueingTypes, ActionTypes, AsyncOperationStates,
-  NotificationTypes, NotificationScopes, FileUploadFormatsConfigs, MediaUploadConfig,
-  MediaTypes, AppEnvironments, ComposerInitiators, LinkAttachmentTextFieldTypes,
+  NotificationTypes, NotificationScopes, FileUploadFormatsConfigs, MediaUploadConfig, ComposerInitiators, LinkAttachmentTextFieldTypes,
   FloatingErrorCodes, UpgradeErrorCodes, ErrorTypes, SaveButtonTypes, InlineSaveButtonTypes, ButtonsQueuingTypesMap,
   DataImportEnvironments, bufferOrigins, bufferOriginRegex,
   InstagramAspectRatioLimits, InstagramThumbnailMaxSize,
