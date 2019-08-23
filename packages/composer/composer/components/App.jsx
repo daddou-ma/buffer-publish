@@ -2,11 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import DragMe from '@bufferapp/dragme';
+import { AppEnvironments } from '@bufferapp/publish-constants';
 import AppStore from '../stores/AppStore';
 import ComposerStore from '../stores/ComposerStore';
 import NotificationStore from '../stores/NotificationStore';
-import { AppEnvironments, NotificationScopes, Services, ErrorTypes, SaveButtonTypes, ActionTypes }
-  from '../AppConstants';
+import {
+  NotificationScopes,
+  Services,
+  ErrorTypes,
+  SaveButtonTypes,
+  ActionTypes,
+} from '../AppConstants';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import AppInitActionCreators from '../action-creators/AppInitActionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';

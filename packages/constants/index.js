@@ -51,6 +51,12 @@ const AppEnvironments = keyMirror({
   ONBOARDING: null,
 });
 
+const PUSHER = {
+  API_KEY: 'bd9ba9324ece3341976e',
+  CLUSTER: 'mt1',
+  AUTH_ENDPOINT: '/pusher_receiver/auth',
+};
+
 module.exports = {
   SERVICE_NAMES: [
     SERVICE_TWITTER,
@@ -96,4 +102,5 @@ module.exports = {
   MediaTypes,
   UploadTypes,
   AppEnvironments,
+  PUSHER,
 };
