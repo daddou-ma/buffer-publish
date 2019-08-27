@@ -6,7 +6,7 @@ import StoryGroupPopover from './components/StoryGroupPopover';
 export default connect(
   state => ({
     uses24hTime: state.appSidebar.user.uses_24h_time,
-    timezone: state.appSidebar.user.timezone,
+    timezone: state.profileSidebar.selectedProfile.timezone,
     weekStartsMonday: state.appSidebar.user.week_starts_monday,
   }),
   dispatch => ({

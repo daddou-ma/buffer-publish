@@ -6,6 +6,7 @@ import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
 const refreshStoryGroups = (dispatch) => {
+  // will need to pass correct arguments once api/rpc is done
   dispatch(dataFetchActions.fetch({
     name: 'getStoryGroups',
   }));
