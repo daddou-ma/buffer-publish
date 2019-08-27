@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Divider } from "@bufferapp/components";
+import {
+  Text,
+  Modal,
+} from '@bufferapp/ui';
 
 import StripeCreditCardForm from '../../../credit-card-form';
 
-import InputText from '../InputText';
 import PlanCycleSelect from '../PlanCycleSelect';
 import PlanDescriptors from '../PlanDescriptors';
-import Select from '../Select';
 
 const listItemStyle = {
   marginBottom: '0.75rem',
