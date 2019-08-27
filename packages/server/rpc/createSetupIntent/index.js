@@ -6,7 +6,7 @@ const strictSSL = !(process.env.NODE_ENV === 'development');
 module.exports = method(
   'createSetupIntent',
   'create a setup intent in Stripe',
-  ({ session }) => rp({
+  (args, { session }) => rp({
     uri: `${process.env.API_ADDR}/1/billing/create-setup-intent.json`,
     method: 'GET',
     strictSSL,
