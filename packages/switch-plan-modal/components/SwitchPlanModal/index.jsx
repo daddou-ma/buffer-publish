@@ -86,57 +86,8 @@ class SwitchPlanModal extends React.Component {
   }
 
   submitForm() {
-    const {
-      card,
-      upgradePlan,
-    } = this.props;
-
-    if (this.isCardValid(card)) {
-      upgradePlan();
-    }
-  }
-
-  isCardValid(card) {
-    const {
-      name,
-      number,
-      expMonth,
-      expYear,
-      cvc,
-    } = card;
-
-    let nameHasError = false;
-    let numberHasError = false;
-    let expMonthHasError = false;
-    let expYearHasError = false;
-    let cvcHasError = false;
-
-    if (isEmptyCard(card)) {
-      nameHasError = true;
-      numberHasError = true;
-      expMonthHasError = true;
-      expYearHasError = true;
-      cvcHasError = true;
-    }
-
-    if (!name || name === '') nameHasError = true;
-    if (!number || number === '') numberHasError = true;
-    if (!expMonth || expMonth === '') expMonthHasError = true;
-    if (!expYear || expYear === '') expYearHasError = true;
-    if (!cvc || cvc === '') cvcHasError = true;
-
-    this.setState({
-      errors: {
-        name: nameHasError,
-        number: numberHasError,
-        expMonth: expMonthHasError,
-        expYear: expYearHasError,
-        cvc: cvcHasError,
-      },
-    });
-
-    return !nameHasError && !numberHasError && !expMonthHasError
-           && !expYearHasError && !cvcHasError;
+    const { upgradePlan } = this.props;
+    // Set up card details
   }
 
   render() {
