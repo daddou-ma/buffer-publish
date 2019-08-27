@@ -16,7 +16,6 @@ export default connect(
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
     onDateTimeSlotPickerSubmit: (timestamp) => {
-      console.log('timestamp', timestamp);
       dispatch(actions.handleSaveStoryGroup(timestamp));
     },
   }),
