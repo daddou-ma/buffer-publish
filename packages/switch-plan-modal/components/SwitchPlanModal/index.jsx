@@ -2,13 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Divider } from "@bufferapp/components";
-import StripeCreditCardForm from "../../../credit-card-form/components/CreditCardForm";
 
-import {
-  Text,
-  Modal,
-} from '@bufferapp/ui';
-import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
+import StripeCreditCardForm from '../../../credit-card-form';
 
 import InputText from '../InputText';
 import PlanCycleSelect from '../PlanCycleSelect';
