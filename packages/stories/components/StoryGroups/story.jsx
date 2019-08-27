@@ -4,8 +4,8 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from 'storybook-addon-a11y';
 
-import StoriesPosts from './index';
-import storiesPosts from './storiesData';
+import StoryGroups from './index';
+import storyGroups from './storiesData';
 
 const storeFake = state => ({
   default: () => {},
@@ -45,16 +45,16 @@ const UpgradeModalDecorator = storyFn => (
   </Provider>
 );
 
-storiesOf('StoriesPosts', module)
+storiesOf('StoryGroups', module)
   .addDecorator(checkA11y)
   .addDecorator(UpgradeModalDecorator)
   .add('should show stories posts', () => (
-    <StoriesPosts
+    <StoryGroups
       total={2}
       loading={false}
       isManager
       isBusinessAccount
-      storiesPosts={storiesPosts}
+      storyGroups={storyGroups}
       isLockedProfile={false}
       showStoriesComposer={action('showStoriesComposer')}
       onEmptySlotClick={action('onEmptySlotClick')}

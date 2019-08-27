@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 
 import { actions } from './reducer';
-import StoriesPosts from './components/StoriesPosts';
+import StoryGroups from './components/StoryGroups';
 
 export default connect(
   (state, ownProps) => {
@@ -16,7 +16,7 @@ export default connect(
         loadingMore: currentProfile.loadingMore,
         moreToLoad: currentProfile.moreToLoad,
         page: currentProfile.page,
-        storiesPosts: formatPostLists({
+        storyGroups: formatPostLists({
           isManager: profileData.isManager,
           posts: currentProfile.posts,
           scheduleSlotsEnabled: true,
@@ -45,7 +45,7 @@ export default connect(
       dispatch(actions.handleComposerPlaceholderClick());
     },
   }),
-)(StoriesPosts);
+)(StoryGroups);
 
 export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';

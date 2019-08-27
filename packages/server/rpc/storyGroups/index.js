@@ -9,7 +9,7 @@ const { buildPostMap } = require('./../../formatters/src');
  * - Map result if necessary
  */
 module.exports = method(
-  'storiesPosts',
+  'storyGroups',
   'fetch stories groups',
   ({ profileId, page, count = 20 }, { session }) =>
     rp({

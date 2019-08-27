@@ -19,7 +19,7 @@ describe('middleware', () => {
       .toBeDefined();
   });
 
-  it('should fetch storiesPosts', () => {
+  it('should fetch storyGroups', () => {
     const action = {
       type: profileActionTypes.SELECT_PROFILE,
       profile: {
@@ -31,7 +31,7 @@ describe('middleware', () => {
       .toBeCalledWith(action);
     expect(dispatch)
       .toBeCalledWith(dataFetchActions.fetch({
-        name: 'storiesPosts',
+        name: 'storyGroups',
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,

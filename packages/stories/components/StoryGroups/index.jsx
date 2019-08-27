@@ -31,10 +31,10 @@ const containerStyle = {
   marginRight: '0.5rem',
 };
 
-const StoriesPosts = ({
+const StoryGroups = ({
   loading,
   editMode,
-  storiesPosts,
+  storyGroups,
   isLockedProfile,
   showStoriesComposer,
   onEmptySlotClick,
@@ -82,7 +82,7 @@ const StoriesPosts = ({
           </React.Fragment>
         )}
         <QueueItems
-          items={storiesPosts}
+          items={storyGroups}
           onCancelConfirmClick={onCancelConfirmClick}
           onCalendarClick={onCalendarClick}
           onDeleteClick={onDeleteClick}
@@ -99,13 +99,13 @@ const StoriesPosts = ({
     </ErrorBoundary>
   );
 };
-StoriesPosts.propTypes = {
+StoryGroups.propTypes = {
   loading: PropTypes.bool,
   editMode: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   isLockedProfile: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
-  storiesPosts: PropTypes.arrayOf(
+  storyGroups: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
     }),
@@ -123,7 +123,7 @@ StoriesPosts.propTypes = {
   onComposerPlaceholderClick: PropTypes.func,
 };
 
-StoriesPosts.defaultProps = {
+StoryGroups.defaultProps = {
   page: 1,
   loading: true,
   editMode: false,
@@ -132,7 +132,7 @@ StoriesPosts.defaultProps = {
   showStoriesComposer: false,
   hasFirstCommentFlip: false,
   isBusinessAccount: false,
-  storiesPosts: [],
+  storyGroups: [],
   onEditClick: () => {},
   onDeleteClick: () => {},
   onDeleteConfirmClick: () => {},
@@ -142,4 +142,4 @@ StoriesPosts.defaultProps = {
   onComposerPlaceholderClick: () => {},
 };
 
-export default WithFeatureLoader(StoriesPosts);
+export default WithFeatureLoader(StoryGroups);
