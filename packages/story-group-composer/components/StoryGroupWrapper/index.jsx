@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 
 const WrapperStyle = styled.div`
   width: 686px;
@@ -18,7 +19,12 @@ const ADD_NOTE = 'addNote';
  * Wrapper to make sure to display add story view or add note view
  */
 
-const StoryGroupWrapper = () => {
+const StoryGroupWrapper = ({
+  onDateTimeSlotPickerSubmit,
+  uses24hTime,
+  timezone,
+  weekStartsMonday,
+}) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
 
@@ -32,6 +38,10 @@ const StoryGroupWrapper = () => {
       }
     </WrapperStyle>
   );
+};
+
+StoryGroupWrapper.propTypes = {
+  ...DateTimeSlotPickerWrapper.propTypes,
 };
 
 export default StoryGroupWrapper;
