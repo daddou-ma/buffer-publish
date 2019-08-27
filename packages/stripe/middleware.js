@@ -35,15 +35,7 @@ export default ({ dispatch, getState }) => next => (action) => {
             message: errorMessage,
           }));
         } else {
-          dispatch(asyncDataFetchActions.fetch({
-            name: 'switchPlan',
-            args: {
-              plan: getState().switchPlanModal.plan,
-              cycle: getState().switchPlanModal.cycle,
-              source: getState().switchPlanModal.source,
-              token: response.id,
-            },
-          }));
+          //  Upgrade plan
         }
       });
       break;
