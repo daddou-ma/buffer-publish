@@ -8,7 +8,7 @@ module.exports = method(
   'create a setup intent in Stripe',
   (args, { session }) => rp({
     uri: `${process.env.API_ADDR}/1/billing/create-setup-intent.json`,
-    method: 'GET',
+    method: 'POST',
     strictSSL,
     qs: {
       access_token: session.publish.accessToken,
