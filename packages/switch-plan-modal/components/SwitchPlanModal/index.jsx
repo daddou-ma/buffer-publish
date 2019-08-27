@@ -7,6 +7,7 @@ import {
   Modal,
 } from '@bufferapp/ui';
 
+import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
 import StripeCreditCardForm from '../../../credit-card-form';
 
 import PlanCycleSelect from '../PlanCycleSelect';
