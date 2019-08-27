@@ -43,6 +43,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch(
         asyncDataFetchActions.fetch({
           name: 'createSetupIntent',
+          args: {},
         }),
       );
       break;
