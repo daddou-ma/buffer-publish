@@ -26,7 +26,7 @@ export default ({ dispatch, getState }) => next => (action) => {
   const errorMessages = getState().i18n.translations.stripe;
   switch (action.type) {
     case actionTypes.CREDIT_CARD_VALIDATING:
-      Stripe.createToken(action.card, (status, response) => {
+      Stripe.handleCardSetup(action.card, (status, response) => {
         const errorMessage = getErrorMessage(response, errorMessages);
         if (errorMessage) {
           dispatch(actions.throwValidationError(errorMessage));
