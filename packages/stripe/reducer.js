@@ -3,6 +3,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('STRIPE', {
   SETUP_INTENT_REQUEST: 0,
   SETUP_INTENT_SUCCESS: 0,
+  SETUP_INTENT_ERROR: 0,
   CREDIT_CARD_VALIDATING: 0,
   CREDIT_CARD_ERROR: 0,
   CREDIT_CARD_APPROVED: 0,
@@ -65,6 +66,10 @@ export default (state = initialState, action) => {
 export const actions = {
   createSetupIntentRequest: () => ({
     type: actionTypes.SETUP_INTENT_REQUEST,
+  }),
+  createSetupIntentSuccess: setupIntentClientSecret => ({
+    type: actionTypes.SETUP_INTENT_SUCCESS,
+    setupIntentClientSecret,
   }),
   validateCreditCard: card => ({
     type: actionTypes.CREDIT_CARD_VALIDATING,

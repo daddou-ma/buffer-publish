@@ -47,6 +47,11 @@ export default ({ dispatch, getState }) => next => (action) => {
         }),
       );
       break;
+    case `createSetupIntent_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(
+        actions.createSetupIntentSuccess(action.result.setup_intent.client_secret),
+      );
+      break;
     case `switchPlan_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
       window.location = getURL.getPublishUrl();
       break;
