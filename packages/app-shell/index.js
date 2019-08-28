@@ -16,6 +16,7 @@ export default connect(
     showSwitchPlan: state.appShell.showSwitchPlan,
     showManageTeam: state.appShell.showManageTeam,
     showStartProTrial: state.appShell.showStartProTrial,
+    hideAppShell: (!state.appShell.sawOnboardingPage && window.location.pathname === '/new-business-trialists'),
   }),
   dispatch => ({
     openPreferences() {
