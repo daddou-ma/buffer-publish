@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DateTimeSlotPicker from '../../../composer/composer/components/DateTimeSlotPicker';
+import DateTimeSlotPicker from '@bufferapp/publish-composer/composer/components/DateTimeSlotPicker';
 import styled from 'styled-components';
 
 const DateTimeSlotPickerWrapper = ({
