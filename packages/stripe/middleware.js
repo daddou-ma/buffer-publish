@@ -39,7 +39,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         }
       });
       break;
-    case actionTypes.SETUP_INTENT_REQUEST:
+    case actionTypes.CREATE_SETUP_INTENT_REQUEST:
       dispatch(
         asyncDataFetchActions.fetch({
           name: 'createSetupIntent',
