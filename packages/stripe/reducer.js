@@ -17,7 +17,7 @@ const initialState = {
   card: null,
   token: null,
   validating: false,
-  validatingSetupIntent: false,
+  creatingSetupIntent: false,
   setupIntentClientSecret: '',
 };
 
@@ -26,13 +26,13 @@ export default (state = initialState, action) => {
     case actionTypes.SETUP_INTENT_REQUEST:
       return {
         ...state,
-        validatingSetupIntent: true,
+        creatingSetupIntent: true,
       };
     case actionTypes.SETUP_INTENT_SUCCESS:
       return {
         ...state,
         setupIntentClientSecret: action.setupIntentClientSecret,
-        validatingSetupIntent: false,
+        creatingSetupIntent: false,
       };
     case actionTypes.CREDIT_CARD_VALIDATING:
       return {
@@ -63,7 +63,7 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  getSetupIntent: () => ({
+  createSetupIntentRequest: () => ({
     type: actionTypes.SETUP_INTENT_REQUEST,
   }),
   validateCreditCard: card => ({

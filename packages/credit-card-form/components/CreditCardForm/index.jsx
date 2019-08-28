@@ -6,12 +6,12 @@ import CreditCardForm from './form';
 
 class StripeWrapper extends Component {
   static propTypes = {
-    getSetupIntent: PropTypes.func.isRequired,
+    createSetupIntentRequest: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    const { getSetupIntent } = this.props;
-    getSetupIntent();
+    const { createSetupIntentRequest } = this.props;
+    createSetupIntentRequest();
   }
 
   render() {

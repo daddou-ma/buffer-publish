@@ -6,6 +6,6 @@ import StripeCreditCardForm from './components/CreditCardForm';
 export default connect(
   null,
   dispatch => ({
-    getSetupIntent: () => dispatch(stripeActions.getSetupIntent()),
+    createSetupIntentRequest: () => dispatch(stripeActions.createSetupIntentRequest()),
   }),
 )(StripeCreditCardForm);
