@@ -6,7 +6,7 @@ import { Redirect } from 'react-router';
 import QueuedPosts from '@bufferapp/publish-queue';
 import SentPosts from '@bufferapp/publish-sent';
 import GridPosts from '@bufferapp/publish-grid';
-import StoriesPosts from '@bufferapp/publish-stories';
+import StoryGroups from '@bufferapp/publish-stories';
 import PastReminders from '@bufferapp/publish-past-reminders';
 import DraftList from '@bufferapp/publish-drafts';
 import PostingSchedule from '@bufferapp/publish-posting-schedule';
@@ -107,7 +107,7 @@ const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, f
     case 'grid':
       return <GridPosts profileId={profileId} />;
     case 'stories':
-      return <StoriesPosts profileId={profileId} />;
+      return <StoryGroups profileId={profileId} />;
     case 'drafts':
     case 'awaitingApproval':
     case 'pendingApproval':
@@ -172,7 +172,7 @@ function ProfilePage({
   onChangeTab,
   hasStoriesFlip,
 }) {
-  const isQueueTab = tabId === 'queue';
+  const isQueueTab = tabId === 'queue' || tabId === 'stories';
   const isOtherPostsTab =
     [
       'drafts',
@@ -180,7 +180,6 @@ function ProfilePage({
       'pendingApproval',
       'pastReminders',
       'grid',
-      'stories',
     ].includes(tabId) ||
     // analytics/posts is a child tab, so check for that too (it's the default if not present)
     (tabId === 'analytics' && (!childTabId || childTabId === 'posts'));
