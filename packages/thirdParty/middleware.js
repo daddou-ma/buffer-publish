@@ -202,6 +202,7 @@ export default ({ dispatch, getState }) => next => (action) => {
           url: window.location.origin || null,
           referrer: document.referrer || null,
           search: action.payload.search || null,
+          // don't need channel if route isnt associated with profileId
           channel: getChannelIfNeeded({ path, getState }),
         };
         dispatch(analyticsActions.trackEvent('Page Viewed', metadata));
