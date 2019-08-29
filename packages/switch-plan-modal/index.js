@@ -14,6 +14,7 @@ export default connect(
     validating: state.stripe.validating,
     isNonprofit: state.appSidebar.user.isNonprofit,
     hasExpiredProTrial: state.appSidebar.user.shouldShowProTrialExpiredModal,
+    stripeClientSecret: state.stripe.setupIntentClientSecret,
   }),
   dispatch => ({
     storeValue: (id, value) => dispatch(actions.storeValue(id, value)),
