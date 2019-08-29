@@ -118,7 +118,7 @@ const draftsReducer = (state = {}, action) => {
   switch (action.type) {
     case `draftPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { drafts } = action.result;
-      if (action.args.isFetchingMore) {
+      if (action.args.isFetchingMore || Object.keys(state).length > Object.keys(drafts).length) {
         return { ...state, ...drafts };
       }
       return drafts;
@@ -156,6 +156,16 @@ const draftsReducer = (state = {}, action) => {
 const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
     case `draftPosts_${dataFetchActionTypes.FETCH_START}`:
+      if (action.args.clear) {
+        return {
+          loading: !action.args.isFetchingMore,
+          loadingMore: action.args.isFetchingMore,
+          moreToLoad: false,
+          page: 1,
+          drafts: {},
+          total: 0,
+        };
+      }
       return {
         ...state,
         loading: !action.args.isFetchingMore,

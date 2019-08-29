@@ -29,6 +29,7 @@ export default connect(
     isInstagramProfile: state.generalSettings.isInstagramProfile,
     selectedProfile: state.profileSidebar.selectedProfile,
     canStartProTrial: state.appSidebar.user.canStartProTrial,
+    hasStoriesFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('stories_groups') : false,
   }),
   (dispatch, ownProps) => ({
     onTabClick: (tabId) => {

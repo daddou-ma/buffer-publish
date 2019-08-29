@@ -4,6 +4,7 @@ import { reducer as tabsReducer } from '@bufferapp/publish-tabs';
 import { reducer as queueReducer } from '@bufferapp/publish-queue';
 import { reducer as sentReducer } from '@bufferapp/publish-sent';
 import { reducer as gridReducer } from '@bufferapp/publish-grid';
+import { reducer as storiesReducer } from '@bufferapp/publish-stories';
 import { reducer as pastRemindersReducer } from '@bufferapp/publish-past-reminders';
 import { reducer as draftsReducer } from '@bufferapp/publish-drafts';
 import { reducer as postingScheduleReducer } from '@bufferapp/publish-posting-schedule';
@@ -40,6 +41,7 @@ import { reducer as disabledQueueReducer } from '@bufferapp/publish-disabled-que
 import { reducer as onboardingReducer } from '@bufferapp/publish-onboarding';
 import { reducer as globalAccountReducer } from '@bufferapp/global-account';
 import { reducer as closeComposerModalReducer } from '@bufferapp/publish-close-composer-confirmation-modal';
+import { reducer as storyGroupComposerReducer } from '@bufferapp/publish-story-group-composer';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -59,6 +61,7 @@ export default {
   queue: queueReducer,
   sent: sentReducer,
   grid: gridReducer,
+  stories: storiesReducer,
   pastReminders: pastRemindersReducer,
   i18n: i18nReducer,
   tabs: tabsReducer,
@@ -96,6 +99,7 @@ export default {
   disabledQueue: disabledQueueReducer,
   globalAccount: globalAccountReducer,
   closeComposerModal: closeComposerModalReducer,
+  storyGroupComposer: storyGroupComposerReducer,
 
   // Analyze
   average: averageReducer,
