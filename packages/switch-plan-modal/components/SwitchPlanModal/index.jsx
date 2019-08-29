@@ -166,7 +166,10 @@ class SwitchPlanModal extends React.Component {
                 {translations.enterPaymentDetails} <LockedIcon />
               </Text>
             </div>
-            <StripeCreditCardForm />
+            <StripeCreditCardForm
+              stripeClientSecret={stripeClientSecret}
+              hideModal={hideModal}
+            />
           </div>
         </div>
       </Modal>
