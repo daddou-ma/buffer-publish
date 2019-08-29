@@ -49,38 +49,20 @@ const getButtonText = ({ plan, translations }) => {
   return buttonText;
 };
 
-const currentYear = new Date().getFullYear();
-const creditCardSvg = '<svg width="31" height="21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="%23fff" d="M0 0h31v21H0z"/><rect width="31" height="21" rx="3" fill="%232D98C8"/><path fill="%23343E47" d="M0 3h31v3H0z"/><path fill="%23fff" d="M6 9h20v4H6z"/><path fill="%23FD232B" d="M20 10h5v2h-5z"/></svg>';
-const creditCardBackground = `right 6px center no-repeat url('data:image/svg+xml;utf8,${creditCardSvg}')`;
-
-const isEmptyCard = card => Object.keys(card).length === 0 && card.constructor === Object;
-
 class SwitchPlanModal extends React.Component {
   constructor() {
     super();
-    this.state = {
-      errors: {
-        name: false,
-        number: false,
-        expMonth: false,
-        expYear: false,
-        cvc: false,
-      },
-    };
 
     this.onSecondaryAction = this.onSecondaryAction.bind(this);
-    this.submitForm = this.submitForm.bind(this);
   }
 
   onSecondaryAction() {
     const {
       hideModal,
       cancelTrial,
-      clearCardInfo,
       hasExpiredProTrial,
     } = this.props;
 
-    clearCardInfo();
     if (hasExpiredProTrial) {
       cancelTrial();
     } else {
@@ -88,13 +70,10 @@ class SwitchPlanModal extends React.Component {
     }
   }
 
-  submitForm() {
-    const { upgradePlan } = this.props;
-    // Set up card details
+  submitForm = () => {
   }
 
   render() {
-    const { errors } = this.state;
     const {
       plan,
       translations,
@@ -105,7 +84,6 @@ class SwitchPlanModal extends React.Component {
       selectCycle,
       isNonprofit,
       hasExpiredProTrial,
-      card,
       dismissible,
     } = this.props;
 
@@ -115,7 +93,7 @@ class SwitchPlanModal extends React.Component {
         action={{
           label: validating ? translations.validating : getButtonText({ plan, translations }),
           disabled: validating,
-          callback: () => this.submitForm({ card, upgradePlan }),
+          callback: () => this.submitForm(),
         }}
         secondaryAction={{
           label: translations.close,
@@ -179,14 +157,6 @@ class SwitchPlanModal extends React.Component {
 
 SwitchPlanModal.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
-  card: PropTypes.shape({
-    name: PropTypes.string,
-    number: PropTypes.string,
-    expMonth: PropTypes.string,
-    expYear: PropTypes.string,
-    cvc: PropTypes.string,
-    addressZip: PropTypes.string,
-  }),
   cycle: PropTypes.string.isRequired,
   plan: PropTypes.string,
   upgradePlan: PropTypes.func.isRequired,
@@ -204,7 +174,6 @@ SwitchPlanModal.propTypes = {
 SwitchPlanModal.defaultProps = {
   hasExpiredProTrial: false,
   dismissible: false,
-  card: {},
   plan: 'pro',
 };
 
