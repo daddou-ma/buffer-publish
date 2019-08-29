@@ -41,6 +41,7 @@ import { reducer as disabledQueueReducer } from '@bufferapp/publish-disabled-que
 import { reducer as onboardingReducer } from '@bufferapp/publish-onboarding';
 import { reducer as globalAccountReducer } from '@bufferapp/global-account';
 import { reducer as closeComposerModalReducer } from '@bufferapp/publish-close-composer-confirmation-modal';
+import { reducer as storyGroupComposerReducer } from '@bufferapp/publish-story-group-composer';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -98,6 +99,7 @@ export default {
   disabledQueue: disabledQueueReducer,
   globalAccount: globalAccountReducer,
   closeComposerModal: closeComposerModalReducer,
+  storyGroupComposer: storyGroupComposerReducer,
 
   // Analyze
   average: averageReducer,
