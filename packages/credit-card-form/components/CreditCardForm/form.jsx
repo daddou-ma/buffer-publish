@@ -7,9 +7,9 @@ class CreditCardForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
 
-    const { stripeClientSecret, hideModal, stripe } = this.props;
+    const { setupIntentClientSecret, hideModal, stripe } = this.props;
     stripe
-      .handleCardSetup(stripeClientSecret)
+      .handleCardSetup(setupIntentClientSecret)
       .then(res => {
         // handle upgrade
       })

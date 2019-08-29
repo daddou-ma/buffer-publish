@@ -86,7 +86,7 @@ class SwitchPlanModal extends React.Component {
       hasExpiredProTrial,
       dismissible,
       hideModal,
-      stripeClientSecret,
+      setupIntentClientSecret,
     } = this.props;
 
     return (
@@ -147,7 +147,7 @@ class SwitchPlanModal extends React.Component {
               </Text>
             </div>
             <StripeCreditCardForm
-              stripeClientSecret={stripeClientSecret}
+              setupIntentClientSecret={setupIntentClientSecret}
               hideModal={hideModal}
             />
           </div>
@@ -171,7 +171,7 @@ SwitchPlanModal.propTypes = {
   isNonprofit: PropTypes.bool.isRequired,
   hasExpiredProTrial: PropTypes.bool,
   dismissible: PropTypes.bool,
-  stripeClientSecret: PropTypes.string.isRequired,
+  setupIntentClientSecret: PropTypes.string.isRequired,
 };
 
 SwitchPlanModal.defaultProps = {
