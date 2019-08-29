@@ -3,7 +3,11 @@ import { push } from 'connected-react-router';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { PLANS_OPEN_MODAL } from '@bufferapp/publish-constants';
+import { getCtaProperties } from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import Plans from './components/Plans';
+import { getPlanId } from './utils/plans';
 
 export default connect(
   state => ({
@@ -15,6 +19,14 @@ export default connect(
   }),
   dispatch => ({
     onChoosePlanClick: ({ source, plan }) => {
+      const ctaProperties = getCtaProperties(PLANS_OPEN_MODAL);
+      const metadata = {
+        product: 'publish',
+        planName: plan,
+        planId: getPlanId(plan),
+        ...ctaProperties,
+      };
+      dispatch(analyticsActions.trackEvent('Opened Payment Modal', metadata));
       dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
     },
     onBackToDashboardClick: ({ selectedProfileId, profiles }) => {
