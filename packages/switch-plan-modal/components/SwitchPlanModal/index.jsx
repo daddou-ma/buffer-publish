@@ -85,6 +85,8 @@ class SwitchPlanModal extends React.Component {
       isNonprofit,
       hasExpiredProTrial,
       dismissible,
+      hideModal,
+      stripeClientSecret,
     } = this.props;
 
     return (
@@ -169,6 +171,7 @@ SwitchPlanModal.propTypes = {
   isNonprofit: PropTypes.bool.isRequired,
   hasExpiredProTrial: PropTypes.bool,
   dismissible: PropTypes.bool,
+  stripeClientSecret: PropTypes.string.isRequired,
 };
 
 SwitchPlanModal.defaultProps = {
