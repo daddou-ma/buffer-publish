@@ -62,6 +62,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         break;
       }
       const path = getState().router.location.pathname;
+      const isComingFromSignin = path === '/onboarding';
       const params = getProfilePageParams({
         path,
       });
@@ -72,7 +73,13 @@ export default ({ dispatch, getState }) => next => (action) => {
         path,
       });
       const { profiles, isOnBusinessTrial, hasOnboardingFeatureFlip } = getState().profileSidebar;
-      if (params && params.profileId) {
+
+      // With a feature flip, temporary
+      if (isComingFromSignin && profiles.length === 0
+        && isOnBusinessTrial && hasOnboardingFeatureFlip) {
+        dispatch(push('/new-business-trialists'));
+        break;
+      } else if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
 
         dispatch(actions.selectProfile({
@@ -111,9 +118,6 @@ export default ({ dispatch, getState }) => next => (action) => {
           profileId: selectedProfile.id,
           tabId: 'queue',
         })));
-      // With a feature flip, temporary
-      } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial && hasOnboardingFeatureFlip) {
-        dispatch(push('/new-business-trialists'));
       } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial) {
         dispatch(push('/new-connection-business-trialists'));
       } else if (!isPreferencePage && profiles.length === 0) {
