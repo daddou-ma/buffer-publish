@@ -16,7 +16,7 @@ class StripeWrapper extends Component {
 
   render() {
     return (
-      <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
+      <StripeProvider apiKey={window.STRIPE_PUBLISHABLE_KEY}>
         <Elements>
           <CreditCardForm {...this.props} />
         </Elements>
