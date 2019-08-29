@@ -19,13 +19,6 @@ export default ({ dispatch, getState }) => next => (action) => {
         name: state.appSidebar.user.name,
         email: state.globalAccount.email,
       }));
-      // Temp location for page tracking so we just know how many times someone is
-      // loading the dashboard.
-      setTimeout(() => {
-        dispatch(analyticsActions.pageChange('New Publish', {
-          app: 'new_publish',
-        }));
-      }, 500);
       break;
     default:
       break;
