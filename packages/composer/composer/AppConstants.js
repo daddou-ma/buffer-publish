@@ -4,6 +4,7 @@
  */
 
 import keyMirror from 'keymirror';
+import { MediaTypes } from '@bufferapp/publish-constants';
 
 const AppEnvironments = keyMirror({
   EXTENSION: null,
@@ -14,12 +15,6 @@ const AppEnvironments = keyMirror({
 const DataImportEnvironments = keyMirror({
   BOOKMARKLET_PHP: null, // The document at /add, served through bookmarklet.php
   WEB_DASHBOARD: null, // Anywhere in the web dashboard
-});
-
-const MediaTypes = keyMirror({
-  IMAGE: null,
-  VIDEO: null,
-  GIF: null,
 });
 
 const AttachmentTypes = keyMirror({
@@ -53,11 +48,6 @@ const ComposerInitiators = {
     'menu-image',
   ],
 };
-
-const UploadTypes = keyMirror({
-  LINK_THUMBNAIL: null,
-  MEDIA: null,
-});
 
 const Services = (() => {
   const Service = class {
@@ -463,17 +453,6 @@ const FileUploadFormatsConfigs = (() => {
   return FileUploadFormatsConfigsMap;
 })();
 
-const ContentTypeMediaTypeMap = new Map([
-  ['JPG', 'IMAGE'],
-  ['JPEG', 'IMAGE'],
-  ['PNG', 'IMAGE'],
-  ['GIF', 'GIF'],
-  ['MOV', 'VIDEO'],
-  ['MP4', 'VIDEO'],
-  ['M4V', 'VIDEO'],
-  ['AVI', 'VIDEO'],
-]);
-
 const MediaUploadConfig = {
   endpoint: '/upload/media',
 };
@@ -494,9 +473,8 @@ const InstagramThumbnailMaxSize = 500;
 
 export {
   Services, AttachmentTypes, QueueingTypes, ActionTypes, AsyncOperationStates,
-  NotificationTypes, NotificationScopes, FileUploadFormatsConfigs, MediaUploadConfig,
-  MediaTypes, AppEnvironments, UploadTypes, ComposerInitiators, LinkAttachmentTextFieldTypes,
+  NotificationTypes, NotificationScopes, FileUploadFormatsConfigs, MediaUploadConfig, ComposerInitiators, LinkAttachmentTextFieldTypes,
   FloatingErrorCodes, UpgradeErrorCodes, ErrorTypes, SaveButtonTypes, InlineSaveButtonTypes, ButtonsQueuingTypesMap,
-  DataImportEnvironments, ContentTypeMediaTypeMap, bufferOrigins, bufferOriginRegex,
+  DataImportEnvironments, bufferOrigins, bufferOriginRegex,
   InstagramAspectRatioLimits, InstagramThumbnailMaxSize,
 };

@@ -1,14 +1,14 @@
 {
-  "name": "@bufferapp/publish-constants",
+  "name": "@bufferapp/publish-upload-zone",
   "version": "2.0.0",
-  "description": "Buffer Publish Constants",
+  "description": "Upload zone component to allow files to be uploaded",
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ignore-pattern coverage node_modules"
   },
-  "author": "hharnisc@gmail.com",
+  "author": "karel@buffer.com",
   "dependencies": {
-    "keymirror": "0.1.1"
+    "@bufferapp/async-data-fetch": "1.9.4"
   },
   "devDependencies": {
     "eslint": "^5.3.0"

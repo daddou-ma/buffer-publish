@@ -8,7 +8,7 @@ import NotificationContainer from '../components/NotificationContainer';
 import ProfileSection from '../components/ProfileSection';
 import ComposerSection from '../components/ComposerSection';
 import UpdateSaver from '../components/UpdateSaver';
-import { AppEnvironments } from '../AppConstants';
+import { AppEnvironments } from '@bufferapp/publish-constants';
 import styles from './css/App.css';
 import ExtensionComponents from '../components/ExtensionComponents';
 import { isOnExtension } from '../utils/extension';
