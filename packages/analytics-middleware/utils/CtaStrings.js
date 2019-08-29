@@ -15,7 +15,7 @@ const getCtaProperties = (cta) => {
       };
     }
   }
-  return { cta };
+  return { cta: cta || null };
 };
 
 export default getCtaProperties;

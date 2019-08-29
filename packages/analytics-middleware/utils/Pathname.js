@@ -64,8 +64,9 @@ const getPageNameFromPath = (path) => {
   }
 
   const page = path.match(PAGE_PATH_REGEX);
-  if (page && page[1].length) {
-    return page[2].length ? `${page[1]} ${page[2]}` : page[1];
+  if (page && page[1] && page[1].length) {
+    // check for subnames if preferences
+    return page[2] && page[2].length ? `${page[1]} ${page[2]}` : page[1];
   }
 
   return null;

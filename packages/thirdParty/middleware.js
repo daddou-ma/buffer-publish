@@ -190,8 +190,8 @@ export default ({ dispatch, getState }) => next => (action) => {
     }
     case LOCATION_CHANGE: {
       const path = action.payload.location.pathname;
-      // when a user first hits publish.buffer.com, we select a profile for them and the routes changes
-      // we don't want to track the initial load before the profile is selected
+      /* when a user first hits publish.buffer.com, we select a profile for them and the routes changes
+       We don't want to track the initial load before the profile is selected */
       if (path !== '/') {
         const metadata = {
           platform: 'new_publish',
@@ -204,7 +204,6 @@ export default ({ dispatch, getState }) => next => (action) => {
           search: action.payload.search || null,
           channel: getChannelIfNeeded({ path, getState }),
         };
-        console.log('metadata', metadata);
         dispatch(analyticsActions.trackEvent('Page Viewed', metadata));
       }
       break;
