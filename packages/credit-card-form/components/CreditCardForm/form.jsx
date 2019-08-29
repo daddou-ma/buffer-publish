@@ -1,25 +1,30 @@
+/* eslint-disable arrow-parens */
 import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
+import { Button } from '@bufferapp/ui';
 
 class CreditCardForm extends Component {
-  constructor(props) {
-    super(props);
-  }
+  handleSubmit = ev => {
+    ev.preventDefault();
 
-  componentDidMount() {}
-
-  componentDidUpdate() {}
-
-  componentWillUnmount() {}
-
-  onChange = () => {};
-
-  onSubmit = e => {
-    e.preventDefault();
+    const { stripeClientSecret, hideModal, stripe } = this.props;
+    stripe
+      .handleCardSetup(stripeClientSecret)
+      .then(res => {
+        // handle upgrade
+      })
+      .catch(err => {
+        // handle error
+      });
   };
 
   render() {
-    return <CardElement />;
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <CardElement />
+        <Button type="primary" label="Select Plan" />
+      </form>
+    );
   }
 }
 
