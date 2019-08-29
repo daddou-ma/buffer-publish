@@ -2,7 +2,10 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes } from './reducer';
+import { getPageNameFromPath, getChannelIfNeeded } from './utils/TrackingUtils';
 
 import {
   HELPSCOUT_ID,
