@@ -4,10 +4,16 @@ import debounce from 'lodash.debounce';
 import findLastIndexOf from 'lodash.findlastindex';
 import cloneDeep from 'lodash.clonedeep';
 import twitterText from 'twitter-text';
+import { AppEnvironments, MediaTypes } from '@bufferapp/publish-constants';
 import AppDispatcher from '../dispatcher';
 import {
-  ActionTypes, Services, AttachmentTypes, MediaTypes, ComposerInitiators,
-  AppEnvironments, NotificationScopes, ErrorTypes, InstagramAspectRatioLimits,
+  ActionTypes,
+  Services,
+  AttachmentTypes,
+  ComposerInitiators,
+  NotificationScopes,
+  ErrorTypes,
+  InstagramAspectRatioLimits,
 } from '../AppConstants';
 import AppStore from './AppStore';
 import AppActionCreators from '../action-creators/AppActionCreators';

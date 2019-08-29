@@ -1,3 +1,5 @@
+const keyMirror = require('keymirror');
+
 const SERVICE_TWITTER = 'twitter';
 const SERVICE_FACEBOOK = 'facebook';
 const SERVICE_LINKEDIN = 'linkedin';
@@ -36,6 +38,29 @@ const PLANS_PREMIUM_DOWNGRADE = 'publish-plans-switchPlansModal-premiumDowngrade
 const PLANS_SMALL_UPGRADE = 'publish-plans-switchPlansModal-smallUpgrade-1';
 const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
 const PLANS_OPEN_MODAL = 'publish-plans-subscribeButton-openSwithPlansModal-1';
+
+const UploadTypes = keyMirror({
+  LINK_THUMBNAIL: null,
+  MEDIA: null,
+});
+
+const MediaTypes = keyMirror({
+  IMAGE: null,
+  VIDEO: null,
+  GIF: null,
+});
+
+const AppEnvironments = keyMirror({
+  EXTENSION: null,
+  WEB_DASHBOARD: null,
+  ONBOARDING: null,
+});
+
+const PUSHER = {
+  API_KEY: 'bd9ba9324ece3341976e',
+  CLUSTER: 'mt1',
+  AUTH_ENDPOINT: '/pusher_receiver/auth',
+};
 
 module.exports = {
   SERVICE_NAMES: [
@@ -85,4 +110,8 @@ module.exports = {
     PLANS_SMALL_DOWNGRADE,
     PLANS_OPEN_MODAL,
   },
+  MediaTypes,
+  UploadTypes,
+  AppEnvironments,
+  PUSHER,
 };
