@@ -10,6 +10,7 @@ const StoryGroupPopover = ({
   uses24hTime,
   timezone,
   weekStartsMonday,
+  selectedProfile,
 }) => (
   <Popover
     width="100%"
@@ -21,6 +22,7 @@ const StoryGroupPopover = ({
       uses24hTime={uses24hTime}
       timezone={timezone}
       weekStartsMonday={weekStartsMonday}
+      selectedProfile={selectedProfile}
     />
   </Popover>
 );
@@ -28,6 +30,18 @@ const StoryGroupPopover = ({
 StoryGroupPopover.propTypes = {
   onOverlayClick: PropTypes.func.isRequired,
   ...DateTimeSlotPickerWrapper.propTypes,
+  selectedProfile: PropTypes.shape({
+    id: PropTypes.string,
+    avatarUrl: PropTypes.string,
+    avatar_https: PropTypes.string,
+    serviceUsername: PropTypes.string,
+    serviceId: PropTypes.string,
+    organizationId: PropTypes.string,
+    username: PropTypes.string,
+    service: PropTypes.string,
+    handle: PropTypes.string,
+  }),
+
 };
 
 export default StoryGroupPopover;

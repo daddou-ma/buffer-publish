@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
 import {
   QueueItems,
   BufferLoading,
@@ -65,22 +66,14 @@ const StoryGroups = ({
       <div className={containerStyle}>
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
-            {showStoriesComposer && !editMode && (
-              <React.Fragment>
-                {/* TODO: add here <StoryGroupPopover /> */}
-              </React.Fragment>
-            )}
+            {showStoriesComposer && !editMode && <StoryGroupPopover />}
             <ComposerInput
               placeholder="What would you like to add to your Story?"
               onPlaceholderClick={onComposerPlaceholderClick}
             />
           </div>
         </div>
-        {showStoriesComposer && editMode && (
-          <React.Fragment>
-            {/* TODO: add here <StoryGroupPopover /> */}
-          </React.Fragment>
-        )}
+        {showStoriesComposer && editMode && <StoryGroupPopover />}
         <QueueItems
           items={storyGroups}
           onCancelConfirmClick={onCancelConfirmClick}
