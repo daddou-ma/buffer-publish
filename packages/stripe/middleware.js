@@ -25,19 +25,11 @@ const getErrorMessage = (response, errorMessages) => {
 export default ({ dispatch, getState }) => next => (action) => {
   const errorMessages = getState().i18n.translations.stripe;
   switch (action.type) {
-    case actionTypes.CREDIT_CARD_VALIDATING:
-      Stripe.handleCardSetup(action.card, (status, response) => {
-        const errorMessage = getErrorMessage(response, errorMessages);
-        if (errorMessage) {
-          dispatch(actions.throwValidationError(errorMessage));
-          dispatch(notification.createNotification({
-            notificationType: 'error',
-            message: errorMessage,
-          }));
-        } else {
-          //  Upgrade plan
-        }
-      });
+    case actionTypes.HANDLE_CARD_SETUP_REQUEST:
+      break;
+    case actionTypes.HANDLE_CARD_SETUP_SUCCESS:
+      break;
+    case actionTypes.HANDLE_CARD_SETUP_ERROR:
       break;
     case actionTypes.CREATE_SETUP_INTENT_REQUEST:
       dispatch(
