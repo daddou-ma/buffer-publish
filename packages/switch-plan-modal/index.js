@@ -25,8 +25,8 @@ export default connect(
     cancelTrial: () => dispatch(actions.cancelTrial()),
     clearCardInfo: () => dispatch(actions.clearCardInfo()),
     handleCardSetupRequest: () => dispatch(stripeActions.handleCardSetupRequest()),
-    handleCardSetupSuccess: () => dispatch(stripeActions.handleCardSetupSuccess()),
-    handleCardSetupError: () => dispatch(stripeActions.handleCardSetupError()),
+    handleCardSetupSuccess: options => dispatch(stripeActions.handleCardSetupSuccess(options)),
+    handleCardSetupError: error => dispatch(stripeActions.handleCardSetupError(error)),
   }),
 )(SwitchPlanModal);
 
