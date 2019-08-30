@@ -94,11 +94,21 @@ export const actions = {
   handleCardSetupRequest: () => ({
     type: actionTypes.HANDLE_CARD_SETUP_REQUEST,
   }),
-  handleCardSetupSuccess: () => ({
+  handleCardSetupSuccess: ({
+    cycle, 
+    source, 
+    plan, 
+    paymentMethodId,
+  }) => ({
     type: actionTypes.HANDLE_CARD_SETUP_SUCCESS,
+    paymentMethodId,
+    cycle,
+    source,
+    plan,
   }),
-  handleCardSetupError: () => ({
+  handleCardSetupError: err => ({
     type: actionTypes.HANDLE_CARD_SETUP_ERROR,
+    errorMessage: err,
   }),
   validateCreditCard: card => ({
     type: actionTypes.CREDIT_CARD_VALIDATING,
