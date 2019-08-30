@@ -7,6 +7,9 @@ export const actionTypes = keyWrapper('STRIPE', {
   CREDIT_CARD_ERROR: 0,
   CREDIT_CARD_APPROVED: 0,
   CHANGE_BILLING_CYCLE: 0,
+  HANDLE_CARD_SETUP_REQUEST: 0,
+  HANDLE_CARD_SETUP_SUCCESS: 0,
+  HANDLE_CARD_SETUP_ERROR: 0,
 });
 
 const MONTHLY_CYCLE = 'month';
@@ -19,6 +22,8 @@ const initialState = {
   validating: false,
   creatingSetupIntent: false,
   setupIntentClientSecret: '',
+  validatingCardSetup: false,
+  handleCardSetupError: '',
 };
 
 export default (state = initialState, action) => {
@@ -27,6 +32,22 @@ export default (state = initialState, action) => {
       return {
         ...state,
         creatingSetupIntent: true,
+      };
+    case actionTypes.HANDLE_SETUP_CARD_REQUEST:
+      return {
+        ...state,
+        validatingCardSetup: true,
+      };
+    case actionTypes.HANDLE_SETUP_CARD_SUCCESS:
+      return {
+        ...state,
+        validatingCardSetup: false,
+      };
+    case actionTypes.HANDLE_SETUP_CARD_ERROR:
+      return {
+        ...state,
+        validatingCardSetup: false,
+        handleCardSetupError: 'Add error here',
       };
     case actionTypes.CREATE_SETUP_INTENT_SUCCESS:
       return {
@@ -69,6 +90,15 @@ export const actions = {
   createSetupIntentSuccess: setupIntentClientSecret => ({
     type: actionTypes.CREATE_SETUP_INTENT_SUCCESS,
     setupIntentClientSecret,
+  }),
+  handleCardSetupRequest: () => ({
+    type: actionTypes.HANDLE_CARD_SETUP_REQUEST,
+  }),
+  handleCardSetupSuccess: () => ({
+    type: actionTypes.HANDLE_CARD_SETUP_SUCCESS,
+  }),
+  handleCardSetupError: () => ({
+    type: actionTypes.HANDLE_CARD_SETUP_ERROR,
   }),
   validateCreditCard: card => ({
     type: actionTypes.CREDIT_CARD_VALIDATING,
