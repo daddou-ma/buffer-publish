@@ -4,14 +4,14 @@ const PAGE_PATH_REGEX = /^\/(\w*)\/?(\w*)\/?$/;
 function getPageName({ tab, page, subPage }) {
   let pageName = null;
   if (tab === 'tab') {
+    let defaultSubPage = 'general-settings';
     switch (page) {
       case 'analytics':
-      case 'settings': {
+        defaultSubPage = 'posts';
+      case 'settings':
         // pages have default views even if sub-route name isnt present
-        const defaultSubPage = page === 'analytics' ? 'posts' : 'general-settings';
         pageName = subPage ? `${page} ${subPage}` : `${page} ${defaultSubPage}`;
         break;
-      }
       default: pageName = page;
         break;
     }
