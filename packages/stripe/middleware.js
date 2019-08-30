@@ -39,12 +39,6 @@ export default ({ dispatch }) => next => (action) => {
         }),
       );
       break;
-    case `switchPlan_${asyncDataFetchActionTypes.FETCH_ERROR}`:
-      dispatch(notification.createNotification({
-        notificationType: 'error',
-        message: 'RPC Error', // temp error message
-      }));
-      break;
     case `createSetupIntent_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(
         actions.createSetupIntentSuccess(action.result.setup_intent.client_secret),
