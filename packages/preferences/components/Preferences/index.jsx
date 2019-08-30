@@ -53,6 +53,7 @@ const Preferences = ({
   onUnknownTab,
   selectedProfileId,
   profiles,
+  isOnBusinessTrial,
 }) => (
   <div
     style={{
@@ -91,6 +92,7 @@ const Preferences = ({
               onBackToDashboardClick({
                 selectedProfileId,
                 profiles,
+                isOnBusinessTrial,
               })
             }
           />
@@ -111,6 +113,7 @@ Preferences.propTypes = {
   onUnknownTab: PropTypes.func.isRequired,
   selectedProfileId: ProfileSidebarComponent.propTypes.selectedProfileId,
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
+  isOnBusinessTrial: PropTypes.bool.isRequired,
 };
 
 Preferences.defaultProps = {

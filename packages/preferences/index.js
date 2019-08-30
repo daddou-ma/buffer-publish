@@ -4,6 +4,8 @@ import {
   getPreferencePageParams,
   generatePreferencePageRoute,
   generateProfilePageRoute,
+  newBusinessTrialistsRoute,
+  newConnectionRoute,
 } from '@bufferapp/publish-routes';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { trackAction } from '@bufferapp/publish-data-tracking';
@@ -18,6 +20,7 @@ export default connect(
       profiles: state.profileSidebar.profiles,
       selectedTabId: preferenceId,
       selectedProfileId: state.profileSidebar.selectedProfileId,
+      isOnBusinessTrial: state.profileSidebar.isOnBusinessTrial,
     };
   },
   dispatch => ({
@@ -32,7 +35,7 @@ export default connect(
       preferenceId: 'general',
     }))),
     // go back to the last selected profile
-    onBackToDashboardClick: ({ selectedProfileId, profiles }) => {
+    onBackToDashboardClick: ({ selectedProfileId, profiles, isOnBusinessTrial }) => {
       trackAction({ location: 'preferences', action: 'return_to_dashboard' });
       if (profiles.length > 0) {
         const profileId = selectedProfileId || profiles[0].id;
@@ -43,8 +46,10 @@ export default connect(
         dispatch(push(generateProfilePageRoute({
           profileId,
         })));
+      } else if (isOnBusinessTrial) {
+        dispatch(push(newBusinessTrialistsRoute));
       } else {
-        dispatch(push('/'));
+        dispatch(push(newConnectionRoute));
       }
     },
   }),
