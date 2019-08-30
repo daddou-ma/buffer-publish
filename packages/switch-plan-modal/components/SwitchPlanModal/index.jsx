@@ -95,10 +95,6 @@ class SwitchPlanModal extends React.Component {
           disabled: validating,
           callback: () => this.submitForm(),
         }}
-        secondaryAction={{
-          label: translations.close,
-          callback: this.onSecondaryAction,
-        }}
         dismissible={dismissible}
       >
         <div style={{ overflow: 'auto', height: 'auto' }}>
