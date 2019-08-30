@@ -12,10 +12,10 @@ export const getProfilePageParams = ({ path }) => {
 };
 
 export const generateChildTabRoute = ({ profileId, tabId = 'queue', childTabId = 'general-settings' }) =>
-    `/profile/${profileId}/tab/${tabId}/${childTabId}`;
+  `/profile/${profileId}/tab/${tabId}/${childTabId}`;
 
 export const generateProfilePageRoute = ({ profileId, tabId = 'queue' }) =>
-    `/profile/${profileId}/tab/${tabId}`;
+  `/profile/${profileId}/tab/${tabId}`;
 
 export const profilePageRoute = generateProfilePageRoute({
   profileId: ':profileId',
@@ -32,6 +32,10 @@ export const generatePreferencePageRoute = ({ preferenceId }) =>
   `/preferences/${preferenceId}`;
 
 export const plansPageRoute = '/plans';
+
+export const newBusinessTrialistsRoute = '/new-business-trialists';
+
+export const newConnectionRoute = '/new-connection';
 
 export const preferencePageRoute = generatePreferencePageRoute({
   preferenceId: ':preferenceId',
@@ -50,7 +54,7 @@ export const getPreferencePageParams = ({ path }) => {
 // TO-DO: Refactor with regex
 export const getPlansPageParams = ({ path }) => {
   if (path === plansPageRoute) {
-    return true
+    return true;
   }
   return false;
 };

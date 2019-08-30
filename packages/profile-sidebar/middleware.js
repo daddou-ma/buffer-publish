@@ -7,6 +7,8 @@ import {
   getProfilePageParams,
   getPreferencePageParams,
   getPlansPageParams,
+  newBusinessTrialistsRoute,
+  newConnectionRoute,
 } from '@bufferapp/publish-routes';
 import {
   actionTypes as dataFetchActionTypes,
@@ -113,11 +115,11 @@ export default ({ dispatch, getState }) => next => (action) => {
         })));
       // With a feature flip, temporary
       } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial && hasOnboardingFeatureFlip) {
-        dispatch(push('/new-business-trialists'));
+        dispatch(push(newBusinessTrialistsRoute));
       } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial) {
         dispatch(push('/new-connection-business-trialists'));
       } else if (!isPreferencePage && profiles.length === 0) {
-        dispatch(push('/new-connection'));
+        dispatch(push(newConnectionRoute));
       }
       break;
     }
