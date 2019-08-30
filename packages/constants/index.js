@@ -6,6 +6,10 @@ const SERVICE_LINKEDIN = 'linkedin';
 const SERVICE_GOOGLE = 'google';
 const SERVICE_PINTEREST = 'pinterest';
 const SERVICE_INSTAGRAM = 'instagram';
+
+const PRO_PLAN_ID = '5';
+const PREMIUM_BUSINESS_PLAN_ID = '9';
+const SMALL_PLAN_ID = '10';
 // segment naming convention: APP-VIEW-LOCATION-BUTTON-VERSION
 // https://www.notion.so/buffer/CTA-Parameter-Conventions-Call-to-Action-WIP-0ae87bdd99574e3888afb2fe6b75035a
 const ANALYTICS_OVERVIEW_SBP_TRIAL = 'publish-analyticsOverview-trialCard-sbpTrial-1';
@@ -33,6 +37,7 @@ const PLANS_PREMIUM_UPGRADE = 'publish-plans-switchPlansModal-premiumUpgrade-1';
 const PLANS_PREMIUM_DOWNGRADE = 'publish-plans-switchPlansModal-premiumDowngrade-1';
 const PLANS_SMALL_UPGRADE = 'publish-plans-switchPlansModal-smallUpgrade-1';
 const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
+const PLANS_OPEN_MODAL = 'publish-plans-subscribeButton-openSwithPlansModal-1';
 
 const UploadTypes = keyMirror({
   LINK_THUMBNAIL: null,
@@ -72,6 +77,11 @@ module.exports = {
   SERVICE_GOOGLE,
   SERVICE_PINTEREST,
   SERVICE_INSTAGRAM,
+  PLAN_IDS: {
+    PRO_PLAN_ID,
+    PREMIUM_BUSINESS_PLAN_ID,
+    SMALL_PLAN_ID,
+  },
   SEGMENT_NAMES: {
     ANALYTICS_OVERVIEW_SBP_TRIAL,
     ANALYTICS_OVERVIEW_BUSINESS_UPGRADE,
@@ -98,6 +108,7 @@ module.exports = {
     PLANS_PREMIUM_DOWNGRADE,
     PLANS_SMALL_UPGRADE,
     PLANS_SMALL_DOWNGRADE,
+    PLANS_OPEN_MODAL,
   },
   MediaTypes,
   UploadTypes,

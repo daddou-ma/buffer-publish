@@ -6,7 +6,7 @@ import { gray } from '@bufferapp/ui/style/colors';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import styled from 'styled-components';
 import PlanColumn from '../PlanColumn';
-import getSource from '../../utils/source';
+import { getSource } from '../../utils/plans';
 
 const ButtonStyle = styled.div`
   padding: 16px 16px 0px;
