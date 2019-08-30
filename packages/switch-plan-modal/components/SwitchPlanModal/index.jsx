@@ -144,7 +144,12 @@ class SwitchPlanModal extends React.Component {
                 {translations.enterPaymentDetails} <LockedIcon />
               </Text>
             </div>
-            <StripeCreditCardForm {...this.props} />
+            <StripeCreditCardForm
+              buttonLabel={buttonLabel}
+              closeButtonLabel={translations.close}
+              closeAction={this.onSecondaryAction}
+              {...this.props}
+            />
           </div>
         </div>
       </Modal>
