@@ -19,10 +19,12 @@ class CreditCardForm extends Component {
     stripe
       .handleCardSetup(setupIntentClientSecret)
       .then(res => {
-        // handle upgrade
+        handleCardSetupSuccess();
+        upgradePlan();
       })
       .catch(err => {
         // handle error
+        handleCardSetupError();
       });
   };
 
