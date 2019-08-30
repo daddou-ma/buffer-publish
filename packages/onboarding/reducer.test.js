@@ -60,25 +60,6 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('handles CONNECT_SOCIAL_ACCOUNT_ONBOARDING action type', () => {
-    const stateBefore = {
-      ...initialState,
-      canSeeOnboardingPage: true,
-    };
-    const stateAfter = {
-      ...initialState,
-      canSeeOnboardingPage: false,
-    };
-    const action = {
-      type: actionTypes.CONNECT_SOCIAL_ACCOUNT_ONBOARDING,
-    };
-    deepFreeze(stateBefore);
-    deepFreeze(action);
-
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
-  });
-
   it('handles SKIP_STEP action type', () => {
     const stateBefore = {
       ...initialState,
