@@ -88,7 +88,7 @@ class SwitchPlanModal extends React.Component {
       <Modal
         wide
         action={{
-          label: validating ? translations.validating : getButtonText({ plan, translations }),
+          label: '',
           disabled: validating,
           callback: () => this.submitForm(),
         }}
@@ -138,7 +138,9 @@ class SwitchPlanModal extends React.Component {
               </Text>
             </div>
             <StripeCreditCardForm
-              buttonLabel={buttonLabel}
+              buttonLabel={
+                validating ? translations.validating : getButtonText({ plan, translations })
+              }
               closeButtonLabel={translations.close}
               closeAction={this.onSecondaryAction}
               {...this.props}
