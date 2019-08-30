@@ -8,7 +8,14 @@ class CreditCardForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
 
-    const { setupIntentClientSecret, hideModal, stripe } = this.props;
+    const {
+      setupIntentClientSecret,
+      stripe,
+      upgradePlan,
+      handleCardSetupSuccess,
+      handleCardSetupError
+    } = this.props;
+
     stripe
       .handleCardSetup(setupIntentClientSecret)
       .then(res => {
@@ -20,11 +27,22 @@ class CreditCardForm extends Component {
   };
 
   render() {
+    const {
+      buttonLabel,
+      validating,
+      closeButtonLabel,
+      closeAction
+    } = this.props;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <CardElement />
         <ButtonWrapper>
-          <Button type="secondary" label={closeButtonLabel} onClick={closeAction} />
+          <Button
+            type="secondary"
+            label={closeButtonLabel}
+            onClick={closeAction}
+          />
           <Button type="primary" label={buttonLabel} disabled={validating} />
         </ButtonWrapper>
       </form>
