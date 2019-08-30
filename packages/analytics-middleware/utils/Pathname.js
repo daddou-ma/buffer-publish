@@ -67,7 +67,7 @@ const getPageNameFromPath = (path) => {
     return page[2] && page[2].length ? `${page[1]} ${page[2]}` : page[1];
   }
 
-  return null;
+  return path;
 };
 
 const getChannelIfNeeded = ({ path, getState }) => {
