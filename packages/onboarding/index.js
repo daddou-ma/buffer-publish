@@ -9,8 +9,8 @@ export default connect(
     canSeeOnboardingPage: state.onboarding.canSeeOnboardingPage,
   }),
   dispatch => ({
-    onConnectSocialAccountClick: () => {
-      dispatch(actions.handleConnectSocialAccountClick());
+    onConnectSocialAccountOnboardingClick: () => {
+      dispatch(actions.handleConnectSocialAccountOnboardingClick());
     },
     onSkipStep: () => {
       dispatch(actions.handleSkipStep());
@@ -18,8 +18,8 @@ export default connect(
     onManageSocialAccountClick: () => {
       dispatch(actions.handleManageSocialAccountClick());
     },
-    goToConnectSocialAccount: () => {
-      dispatch(actions.handleConnectSocialAccount());
+    onConnectSocialAccountSidebarClick: () => {
+      dispatch(actions.handleConnectSocialAccountSidebarClick());
     },
   }),
 )(OnboardingManager);

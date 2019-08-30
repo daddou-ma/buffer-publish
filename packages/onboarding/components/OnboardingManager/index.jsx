@@ -5,17 +5,17 @@ import OnboardingPage from '../OnboardingPage';
 
 const OnboardingManager = ({
   canSeeOnboardingPage,
-  onConnectSocialAccountClick,
+  onConnectSocialAccountOnboardingClick,
   onSkipStep,
   onManageSocialAccountClick,
-  goToConnectSocialAccount,
+  onConnectSocialAccountSidebarClick,
   translations,
 }) => (
   <React.Fragment>
     {canSeeOnboardingPage
       && (
         <OnboardingPage
-          onConnectSocialAccountClick={onConnectSocialAccountClick}
+          onConnectSocialAccountClick={onConnectSocialAccountOnboardingClick}
           onSkipStep={onSkipStep}
           translations={translations}
         />
@@ -26,7 +26,7 @@ const OnboardingManager = ({
         <DisabledQueue
           translations={translations}
           onManageSocialAccountClick={onManageSocialAccountClick}
-          goToConnectSocialAccount={goToConnectSocialAccount}
+          goToConnectSocialAccount={onConnectSocialAccountSidebarClick}
         />
       )
     }
@@ -34,10 +34,10 @@ const OnboardingManager = ({
 );
 
 OnboardingManager.propTypes = {
-  onConnectSocialAccountClick: PropTypes.func.isRequired,
+  onConnectSocialAccountOnboardingClick: PropTypes.func.isRequired,
   onSkipStep: PropTypes.func.isRequired,
   onManageSocialAccountClick: PropTypes.func.isRequired,
-  goToConnectSocialAccount: PropTypes.func.isRequired,
+  onConnectSocialAccountSidebarClick: PropTypes.func.isRequired,
   canSeeOnboardingPage: PropTypes.bool.isRequired,
   translations: PropTypes.shape({
     title: PropTypes.string,
