@@ -3,16 +3,19 @@ import partition from 'lodash.partition';
 import debounce from 'lodash.debounce';
 import escapeRegExp from 'lodash.escaperegexp';
 import moment from 'moment-timezone';
+import { AppEnvironments } from '@bufferapp/publish-constants';
 import AppDispatcher from '../dispatcher';
-import { ActionTypes, AppEnvironments, AsyncOperationStates, Services, QueueingTypes, NotificationScopes }
-  from '../AppConstants';
+import {
+  ActionTypes,
+  AsyncOperationStates,
+  Services,
+  QueueingTypes,
+  NotificationScopes,
+} from '../AppConstants';
 import ComposerStore from './ComposerStore';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
-import { getDomainFromUrl } from '../utils/StringUtils';
-import { observeStore } from '../utils/StoreUtils';
-// import { registerStore, sendToMonitor } from '../utils/devtools';
 
 const CHANGE_EVENT = 'change';
 

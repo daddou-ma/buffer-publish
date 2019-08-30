@@ -3,6 +3,14 @@
     "loggedIn": "Logged In...",
     "loggedOut": "Logged Out..."
   },
+  "upload-zone": {
+    "buttonTitle": "Upload media",
+    "invalidFormatCantUseAnyFiles": "We can't quite use any of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
+    "invalidFormatCantUseSomeFiles": "We can't quite use some of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
+    "invalidFormatCantOneOfFiles": "We can't quite use some of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
+    "invalidFormatCantSingleFile": "We can't quite use that type of file. Could you try one of the following instead: {acceptedFilesText}?",
+    "invalidFileSize": "We can't upload \"{fileName}\" because it's too large: we can only handle files of that type up to {formattedMaxSize}. Could you try a smaller file?"
+  },
   "app-switcher": {
     "headline1": "Switch Back to Classic Buffer",
     "tagline": "Thanks for trying out our refreshed experience",
@@ -90,7 +98,7 @@
     "freeSchedule": "Schedule up to 10 posts per account",
     "freePostHistory": "No post history",
     "proDescriptors": {
-      "plan": "Switch to the Pro plan!",
+      "plan": "Subscribe to the Pro plan!",
       "left": {
         "connect": "Connect 8 social accounts",
         "users": "1 user",
@@ -106,10 +114,11 @@
       "nonprofitMonthlyPrice": "$7.50 per month",
       "planMonthlyPrice": "$15 per month",
       "planMonthlyDescription": "Cancel and get a refund any time",
-      "planYearlyDescription": "Save 20% vs paying monthly"
+      "planYearlyDescription": "Save 20% vs paying monthly",
+      "buttonText": "Subscribe to Pro Plan"
     },
     "premiumDescriptors": {
-      "plan": "Switch to the Premium plan!",
+      "plan": "Subscribe to the Premium plan!",
       "left": {
         "connect": "Connect 8 social accounts",
         "users": "Collaborate with 2 users",
@@ -125,10 +134,11 @@
       "nonprofitMonthlyPrice": "$32.50 per month",
       "planMonthlyPrice": "$65 per month",
       "planMonthlyDescription": "Cancel and get a refund any time",
-      "planYearlyDescription": "Save 15% vs paying monthly"
+      "planYearlyDescription": "Save 15% vs paying monthly",
+      "buttonText": "Subscribe to Premium Plan"
     },
     "businessDescriptors": {
-      "plan": "Switch to the Small Business plan!",
+      "plan": "Subscribe to the Small Business plan!",
       "left": {
         "businessConnect": "Connect 25 social accounts",
         "businessUsers": "Collaborate with 6 users",
@@ -144,7 +154,8 @@
       "nonprofitMonthlyPrice": "$49.50 per month",
       "planMonthlyPrice": "$99 per month",
       "planMonthlyDescription": "Cancel and get a refund any time",
-      "planYearlyDescription": "Save 15% vs paying monthly"
+      "planYearlyDescription": "Save 15% vs paying monthly",
+      "buttonText": "Subscribe to Small Business Plan"
     },
     "proPlan": "Pro Plan",
     "proConnect": "Connect up to eight social accounts including Pinterest",

@@ -10,6 +10,7 @@ import { middleware as sentMiddleware } from '@bufferapp/publish-sent';
 import { middleware as gridMiddleware } from '@bufferapp/publish-grid';
 import { middleware as pastRemindersMiddleware } from '@bufferapp/publish-past-reminders';
 import { middleware as draftsMiddleware } from '@bufferapp/publish-drafts';
+import { middleware as storiesMiddleware } from '@bufferapp/publish-stories';
 import { middleware as postingScheduleSettingsMiddleware } from '@bufferapp/publish-posting-schedule';
 import { middleware as generalSettingsMiddleware } from '@bufferapp/publish-general-settings';
 import { middleware as profileSidebarMiddleware } from '@bufferapp/publish-profile-sidebar';
@@ -51,6 +52,7 @@ import { middleware as segmentTrackingMiddleware } from '@bufferapp/publish-anal
 import { middleware as onboardingMiddleware } from '@bufferapp/publish-onboarding';
 import { middleware as globalAccountMiddleware } from '@bufferapp/global-account';
 import { middleware as closeComposerModalMiddleware } from '@bufferapp/publish-close-composer-confirmation-modal';
+import { middleware as storyGroupComposerMiddleware } from '@bufferapp/publish-story-group-composer';
 
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
@@ -134,6 +136,8 @@ const configureStore = initialstate => {
         onboardingMiddleware,
         globalAccountMiddleware,
         closeComposerModalMiddleware,
+        storiesMiddleware,
+        storyGroupComposerMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,

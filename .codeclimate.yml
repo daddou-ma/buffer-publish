@@ -1,0 +1,6 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      javascript:
+        mass_threshold: 50

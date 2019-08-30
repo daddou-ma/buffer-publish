@@ -75,6 +75,10 @@ const getHoverMsg = (service) => {
     return (
       <span>Connect a social account to schedule posts to your queue</span>
     );
+  } else if (service === 'isStoryGroup') {
+    return (
+      <span>Schedule a Story</span>
+    );
   }
 };
 

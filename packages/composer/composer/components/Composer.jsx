@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import ReactDOMServer from 'react-dom/server';
 import uniqBy from 'lodash.uniqby';
+import { MediaTypes } from '@bufferapp/publish-constants';
 import { Toggle, Text } from '@bufferapp/components';
 import { ProTag } from '@bufferapp/publish-shared-components';
 import HashtagIcon from '@bufferapp/ui/Icon/Icons/Hashtag';
@@ -30,8 +31,12 @@ import LocationComposerBar from '../components/LocationComposerBar';
 import ShopgridComposerBar from '../components/ShopgridComposerBar';
 import TooltipList from '../components/TooltipList';
 import Button from '../components/Button';
-import { AttachmentTypes, MediaTypes, NotificationScopes, ErrorTypes, QueueingTypes }
-  from '../AppConstants';
+import {
+  AttachmentTypes,
+  NotificationScopes,
+  ErrorTypes,
+  QueueingTypes,
+} from '../AppConstants';
 import InstagramFeedback from '../components/InstagramFeedback';
 import InstagramThumbnailButton from '../components/InstagramThumbnailButton';
 import { isIE } from '../utils/DOMUtils';

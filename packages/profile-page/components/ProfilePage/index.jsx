@@ -6,6 +6,7 @@ import { Redirect } from 'react-router';
 import QueuedPosts from '@bufferapp/publish-queue';
 import SentPosts from '@bufferapp/publish-sent';
 import GridPosts from '@bufferapp/publish-grid';
+import StoryGroups from '@bufferapp/publish-stories';
 import PastReminders from '@bufferapp/publish-past-reminders';
 import DraftList from '@bufferapp/publish-drafts';
 import PostingSchedule from '@bufferapp/publish-posting-schedule';
@@ -73,6 +74,7 @@ const verifyTab = (
   selectedProfile,
   isFreeUser,
   onChangeTab,
+  hasStoriesFlip,
 ) => {
   let isInstagramProfile = false;
   let isBusinessAccount = false;
@@ -84,7 +86,7 @@ const verifyTab = (
     isManager = selectedProfile.isManager;
 
     const validTabId =
-      getValidTab(tabId, isBusinessAccount, isInstagramProfile, isManager, isFreeUser);
+      getValidTab(tabId, isBusinessAccount, isInstagramProfile, isManager, isFreeUser, hasStoriesFlip);
 
     // if current tabId is not valid, redirect to the queue
     if (tabId !== validTabId) {
@@ -93,9 +95,9 @@ const verifyTab = (
   }
 };
 
-const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, features, onChangeTab }) => {
+const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, features, onChangeTab, hasStoriesFlip }) => {
   // if current tabId is not valid, redirect to the queue
-  verifyTab(tabId, profileId, selectedProfile, features.isFreeUser(), onChangeTab);
+  verifyTab(tabId, profileId, selectedProfile, features.isFreeUser(), onChangeTab, hasStoriesFlip);
 
   switch (tabId) {
     case 'queue':
@@ -104,6 +106,8 @@ const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, f
       return <PastReminders profileId={profileId} />;
     case 'grid':
       return <GridPosts profileId={profileId} />;
+    case 'stories':
+      return <StoryGroups profileId={profileId} />;
     case 'drafts':
     case 'awaitingApproval':
     case 'pendingApproval':
@@ -166,8 +170,9 @@ function ProfilePage({
   selectedProfile,
   features,
   onChangeTab,
+  hasStoriesFlip,
 }) {
-  const isQueueTab = tabId === 'queue';
+  const isQueueTab = tabId === 'queue' || tabId === 'stories';
   const isOtherPostsTab =
     [
       'drafts',
@@ -217,6 +222,7 @@ function ProfilePage({
               selectedProfile={selectedProfile}
               features={features}
               onChangeTab={onChangeTab}
+              hasStoriesFlip={hasStoriesFlip}
             />
             {loadingMore && (
               <div style={loadingAnimationStyle}>
@@ -239,9 +245,9 @@ ProfilePage.propTypes = {
     }),
   }).isRequired,
   onLoadMore: PropTypes.func.isRequired,
-  loadingMore: PropTypes.bool.isRequired,
-  moreToLoad: PropTypes.bool.isRequired,
-  page: PropTypes.number.isRequired,
+  loadingMore: PropTypes.bool,
+  moreToLoad: PropTypes.bool,
+  page: PropTypes.number,
   onChangeTab: PropTypes.func,
   selectedProfile: PropTypes.shape({
     service: PropTypes.string,
@@ -249,6 +255,7 @@ ProfilePage.propTypes = {
     isManager: PropTypes.bool,
   }),
   features: PropTypes.object.isRequired, // eslint-disable-line
+  hasStoriesFlip: PropTypes.bool,
 };
 
 ProfilePage.defaultProps = {
@@ -256,9 +263,9 @@ ProfilePage.defaultProps = {
   moreToLoad: false,
   page: 1,
   posts: [],
-  total: 0,
   onChangeTab: () => {},
   selectedProfile: null,
+  hasStoriesFlip: false,
 };
 
 export default WithFeatureLoader(ProfilePage);
