@@ -24,16 +24,16 @@ function getElementFromPath(path, element) {
   if (match) {
     const [
       route, // eslint-disable-line no-unused-vars
-      profile,
-      profileId,
+      channel, // eslint-disable-line no-unused-vars
+      channelId,
       tab,
       page,
       subPage,
     ] = match;
 
     switch (element) {
-      case 'profileId':
-        return profileId;
+      case 'channelId':
+        return channelId;
       case 'pageName':
         return getPageName({ tab, page, subPage }) || null;
       default:
@@ -44,14 +44,14 @@ function getElementFromPath(path, element) {
   return null;
 }
 
-function getProfileById(profiles, profileId) {
-  return profiles.find(p => p.id === profileId) || null;
+function getChannelById(channel, channelId) {
+  return channel.find(p => p.id === channelId) || null;
 }
 
-function getProfileFromPath(path, profiles) {
-  const profileId = getElementFromPath(path, 'profileId');
-  if (profileId) {
-    return getProfileById(profiles, profileId);
+function getChannelFromPath(path, channels) {
+  const channelId = getElementFromPath(path, 'channelId');
+  if (channelId) {
+    return getChannelById(channels, channelId);
   }
 
   return null;
@@ -76,7 +76,7 @@ const getChannelIfNeeded = ({ path, getState }) => {
   const match = path.match(PROFILE_PAGES_PATH_REGEX);
   if (match) {
     const { profiles } = getState().profiles;
-    const channel = getProfileFromPath(path, profiles);
+    const channel = getChannelFromPath(path, profiles);
     return channel ? channel.service : null;
   }
   return null;

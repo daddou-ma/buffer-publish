@@ -7,9 +7,9 @@ const SERVICE_GOOGLE = 'google';
 const SERVICE_PINTEREST = 'pinterest';
 const SERVICE_INSTAGRAM = 'instagram';
 
-const PRO_PLAN_ID = 5;
-const PREMIUM_BUSINESS_PLAN_ID = 9;
-const SMALL_PLAN_ID = 10;
+const PRO_PLAN_ID = '5';
+const PREMIUM_BUSINESS_PLAN_ID = '9';
+const SMALL_PLAN_ID = '10';
 // segment naming convention: APP-VIEW-LOCATION-BUTTON-VERSION
 // https://www.notion.so/buffer/CTA-Parameter-Conventions-Call-to-Action-WIP-0ae87bdd99574e3888afb2fe6b75035a
 const ANALYTICS_OVERVIEW_SBP_TRIAL = 'publish-analyticsOverview-trialCard-sbpTrial-1';

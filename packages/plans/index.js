@@ -5,7 +5,7 @@ import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
-import { getCtaProperties } from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
+import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import Plans from './components/Plans';
 import { getPlanId } from './utils/plans';
 
@@ -26,7 +26,7 @@ export default connect(
         planId: getPlanId(plan),
         ...ctaProperties,
       };
-      dispatch(analyticsActions.trackEvent('Opened Payment Modal', metadata));
+      dispatch(analyticsActions.trackEvent('Modal Payment Opened', metadata));
       dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
     },
     onBackToDashboardClick: ({ selectedProfileId, profiles }) => {
