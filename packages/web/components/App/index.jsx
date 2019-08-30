@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { profilePageRoute, preferencePageRoute, childTabRoute, plansPageRoute } from '@bufferapp/publish-routes';
+import {
+  profilePageRoute,
+  preferencePageRoute,
+  childTabRoute,
+  plansPageRoute,
+  newBusinessTrialistsRoute,
+  newConnectionRoute,
+} from '@bufferapp/publish-routes';
 import { Route, Switch, withRouter } from 'react-router';
 
 import { DragDropContext } from 'react-dnd';
@@ -66,7 +73,7 @@ class App extends Component { // eslint-disable-line
                   component={ProfilePage}
                 />
                 <Route
-                  path="/new-connection"
+                  path={newConnectionRoute}
                   component={DefaultPage}
                 />
                 <Route
@@ -74,7 +81,7 @@ class App extends Component { // eslint-disable-line
                   component={DisabledQueue}
                 />
                 <Route
-                  path="/new-business-trialists"
+                  path={newBusinessTrialistsRoute}
                   component={OnboardingManager}
                 />
                 <Route

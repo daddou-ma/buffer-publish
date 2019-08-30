@@ -9,7 +9,7 @@ const OnboardingManager = ({
   onSkipStep,
   translations,
 }) => (
-  <div>
+  <React.Fragment>
     {canSeeOnboardingPage
       && (
         <OnboardingPage
@@ -24,7 +24,7 @@ const OnboardingManager = ({
         <DisabledQueue />
       )
     }
-  </div>
+  </React.Fragment>
 );
 
 OnboardingManager.propTypes = {
