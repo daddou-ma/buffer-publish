@@ -52,7 +52,7 @@ const getButtonText = ({ plan, translations }) => {
 class SwitchPlanModal extends React.Component {
   constructor() {
     super();
-
+    
     this.onSecondaryAction = this.onSecondaryAction.bind(this);
   }
 
@@ -85,8 +85,6 @@ class SwitchPlanModal extends React.Component {
       isNonprofit,
       hasExpiredProTrial,
       dismissible,
-      hideModal,
-      setupIntentClientSecret,
     } = this.props;
 
     return (
@@ -146,10 +144,7 @@ class SwitchPlanModal extends React.Component {
                 {translations.enterPaymentDetails} <LockedIcon />
               </Text>
             </div>
-            <StripeCreditCardForm
-              setupIntentClientSecret={setupIntentClientSecret}
-              hideModal={hideModal}
-            />
+            <StripeCreditCardForm {...this.props} />
           </div>
         </div>
       </Modal>
