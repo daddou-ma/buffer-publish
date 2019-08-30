@@ -5,25 +5,7 @@ import { actions as notification } from '@bufferapp/notifications';
 import { actions as asyncDataFetchActions, actionTypes as asyncDataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions, actionTypes } from './reducer';
 
-const getErrorMessage = (response, errorMessages) => {
-  let message = null;
-  if (response.error) {
-    message = response.error.message;
-  } else if (!response.card.name) {
-    message = errorMessages.noNameError;
-  } else if (response.card.country === 'US') {
-    if (!response.card.address_zip) {
-      message = errorMessages.noZipError;
-    } else if (response.card.address_zip_check === 'fail') {
-      message = errorMessages.invalidZipError;
-    }
-  }
-
-  return message;
-};
-
 export default ({ dispatch, getState }) => next => (action) => {
-  const errorMessages = getState().i18n.translations.stripe;
   switch (action.type) {
     case actionTypes.HANDLE_CARD_SETUP_REQUEST:
       break;
