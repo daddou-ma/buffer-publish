@@ -7,9 +7,19 @@ import { actions, actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => (action) => {
   switch (action.type) {
-    case actionTypes.HANDLE_CARD_SETUP_REQUEST:
-      break;
     case actionTypes.HANDLE_CARD_SETUP_SUCCESS:
+      const { cycle, source, plan, paymentMethodId } = action;
+      dispatch(
+        asyncDataFetchActions.fetch({
+          name: 'switchPlan',
+          args: {
+            cycle,
+            source,
+            plan,
+            paymentMethodId,
+          },
+        }),
+      );
       break;
     case actionTypes.HANDLE_CARD_SETUP_ERROR:
       break;
