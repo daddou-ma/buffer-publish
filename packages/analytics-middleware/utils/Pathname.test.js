@@ -30,7 +30,7 @@ describe('Pathname Utils', () => {
     it('returns null if pathname is not valid', () => {
       const pathname = '/test/test/test';
       const pageName = getPageNameFromPath(pathname);
-      expect(pageName).toEqual(null);
+      expect(pageName).toEqual(pathname);
     });
   });
 });
