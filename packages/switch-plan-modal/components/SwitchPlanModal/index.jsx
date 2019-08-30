@@ -79,11 +79,8 @@ class SwitchPlanModal extends React.Component {
       translations,
       cycle,
       validating,
-      upgradePlan,
-      storeValue,
       selectCycle,
       isNonprofit,
-      hasExpiredProTrial,
       dismissible,
     } = this.props;
 
