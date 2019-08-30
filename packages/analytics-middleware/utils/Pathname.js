@@ -1,20 +1,18 @@
 const PROFILE_PAGES_PATH_REGEX = /^\/(\w*)\/(\w*)\/(\w*)\/(\w*)\/?(.*)/;
 const PAGE_PATH_REGEX = /^\/(\w*)\/?(\w*)\/?$/;
 
-function getPageName({ tab, page, subPage }) {
+function getPageName({ page, subPage }) {
   let pageName = null;
-  if (tab === 'tab') {
-    let defaultSubPage = 'general-settings';
-    switch (page) {
-      case 'analytics':
-        defaultSubPage = 'posts';
-      case 'settings':
-        // pages have default views even if sub-route name isnt present
-        pageName = subPage ? `${page} ${subPage}` : `${page} ${defaultSubPage}`;
-        break;
-      default: pageName = page;
-        break;
-    }
+  let defaultSubPage = 'general-settings';
+  switch (page) {
+    case 'analytics':
+      defaultSubPage = 'posts';
+    case 'settings':
+      // pages have default views even if sub-route name isnt present
+      pageName = subPage ? `${page} ${subPage}` : `${page} ${defaultSubPage}`;
+      break;
+    default: pageName = page;
+      break;
   }
   return pageName;
 }
@@ -35,7 +33,7 @@ function getElementFromPath(path, element) {
       case 'channelId':
         return channelId;
       case 'pageName':
-        return getPageName({ tab, page, subPage }) || null;
+        return getPageName({ page, subPage }) || null;
       default:
         return null;
     }

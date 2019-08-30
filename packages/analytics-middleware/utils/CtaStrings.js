@@ -1,6 +1,6 @@
 const isValidCtaString = splitCta => splitCta.length === 5;
 
-const getCtaProperties = (cta) => {
+const getCtaProperties = (cta = null) => {
   if (cta) {
     const splitCta = cta.split('-');
     if (isValidCtaString(splitCta)) {
@@ -14,9 +14,8 @@ const getCtaProperties = (cta) => {
         ctaVersion,
       };
     }
-    return { cta };
   }
-  return { cta: null };
+  return { cta };
 };
 
 export default getCtaProperties;
