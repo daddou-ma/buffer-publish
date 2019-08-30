@@ -5,7 +5,7 @@ import { actions as notification } from '@bufferapp/notifications';
 import { actions as asyncDataFetchActions, actionTypes as asyncDataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions, actionTypes } from './reducer';
 
-export default ({ dispatch, getState }) => next => (action) => {
+export default ({ dispatch }) => next => (action) => {
   switch (action.type) {
     case actionTypes.HANDLE_CARD_SETUP_SUCCESS:
       const { cycle, source, plan, paymentMethodId } = action;
