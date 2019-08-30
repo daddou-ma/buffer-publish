@@ -8,6 +8,7 @@ import { Text } from '@bufferapp/components';
 import ArrowLeft from '@bufferapp/ui/Icon/Icons/ArrowLeft';
 import ArrowRight from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import clamp from 'lodash.clamp';
+import { Button } from '@bufferapp/ui';
 
 const cardWidth = 180;
 const cardMargin = 4;
@@ -25,6 +26,11 @@ const WrapperStyle = styled.div`
 `;
 
 const HeaderBar = styled.div`
+  padding: 13px 0;
+  display: flex;
+`;
+
+const FooterBar = styled.div`
   padding: 13px 0;
   display: flex;
 `;
@@ -49,18 +55,19 @@ const BodyContainer = styled.div`
   overflow: hidden;
 `;
 
-const StyledLeftArrow = styled.div`
+const StyledArrow = styled.button`
   top: 50%;
   transform: translateY(-50%);
   position: absolute;
-  left: 0;
-`;
-
-const StyledRightArrow = styled.div`
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  right: 0;
+  left: ${props => props.prev ? 0 : 'initial'}
+  right: ${props => props.prev ? 'initial' : 0}
+  background-color: #E0E0E0;
+  border: 1px solid #E0E0E0;
+  height: 32px;
+  width: 32px;
+  margin: 16px;
+  outline: none;
+  border-radius: 2px;
 `;
 
 const CarouselContainer = styled.div`
@@ -68,7 +75,7 @@ const CarouselContainer = styled.div`
   padding-left: 16px;
   width: calc(${cardWidth + (cardMargin * 2)}px * 15);
   transform: ${props => `translateX(calc(-${cardWidth + (cardMargin * 2)}px * ${props.selectedItem}`}));
-  transition: all 0.2s linear;
+  transition: all 0.3s ease-out;
 `;
 
 const CarouselCard = styled.div`
@@ -79,13 +86,6 @@ const CarouselCard = styled.div`
   width: ${cardWidth}px;
 `;
 
-const Button = styled.button`
-  background-color: #E0E0E0;
-  border: 1px solid #E0E0E0;
-  height: 32px;
-  width: 32px;
-`;
-
 const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
 
@@ -93,8 +93,26 @@ const ADD_NOTE = 'addNote';
  * Wrapper to make sure to display add story view or add note view
  */
 
-const LeftArrow = ({ onClick, hide = false }) => !hide && <StyledLeftArrow><Button onClick={onClick}><ArrowLeft /></Button></StyledLeftArrow>;
-const RightArrow = ({ onClick, hide = false, disable = false }) => !hide && <StyledRightArrow><Button onClick={onClick}><ArrowRight /></Button></StyledRightArrow>;
+const NavArrow = ({
+  prev = false,
+  hide = false,
+  incrementBy = 1,
+  selectedItem = 0,
+  setSelectedItem = null,
+}) => {
+  if (hide) return null;
+  return (
+    <StyledArrow
+      prev={prev}
+      onClick={() => {
+        setSelectedItem(clamp(selectedItem + incrementBy, lowerBounds, upperBounds));
+      }}
+    >
+      {prev ? <ArrowLeft /> : <ArrowRight />}
+    </StyledArrow>
+  );
+}
+
 const SliderCarousel = ({ initialSelectedItem = 0 }) => {
   const [selectedItem, setSelectedItem] = useState(initialSelectedItem);
 
@@ -117,13 +135,18 @@ const SliderCarousel = ({ initialSelectedItem = 0 }) => {
         <CarouselCard>14</CarouselCard>
         <CarouselCard>15</CarouselCard>
       </CarouselContainer>
-      <LeftArrow
+      <NavArrow
+        prev
         hide={selectedItem <= 0}
-        onClick={() => setSelectedItem(clamp(selectedItem - 1, lowerBounds, upperBounds))}
+        setSelectedItem={setSelectedItem}
+        selectedItem={selectedItem}
+        incrementBy={-1}
       />
-      <RightArrow
+      <NavArrow
         hide={selectedItem >= 14}
-        onClick={() => setSelectedItem(clamp(selectedItem + 1, lowerBounds, upperBounds))}
+        setSelectedItem={setSelectedItem}
+        selectedItem={selectedItem}
+        incrementBy={+1}
       />
     </React.Fragment>
   );
@@ -165,6 +188,10 @@ const StoryGroupWrapper = ({
         <BodyContainer>
           <SliderCarousel />
         </BodyContainer>
+        <FooterBar>
+          <Button label="Preview" />
+          <Button label="Schedule Story" />
+        </FooterBar>
       </React.Fragment>
       }
       {viewMode === ADD_NOTE &&
