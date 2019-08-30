@@ -1,30 +1,38 @@
 /* eslint-disable arrow-parens */
 import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
-import { Button } from '@bufferapp/ui';
-import { ButtonWrapper } from './styles';
+import { Button } from "@bufferapp/ui";
+import { ButtonWrapper } from "./styles";
 
 class CreditCardForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
 
     const {
+      cycle,
+      handleCardSetupError,
+      handleCardSetupSuccess,
+      plan,
       setupIntentClientSecret,
+      source,
       stripe,
       upgradePlan,
-      handleCardSetupSuccess,
-      handleCardSetupError
     } = this.props;
 
     stripe
       .handleCardSetup(setupIntentClientSecret)
       .then(res => {
-        handleCardSetupSuccess();
+        const options = {
+          paymentMethodId: res.setupIntent.payment_method,
+          source,
+          plan,
+          cycle,
+        }
+        handleCardSetupSuccess(options);
         upgradePlan();
       })
       .catch(err => {
-        // handle error
-        handleCardSetupError();
+        handleCardSetupError(err);
       });
   };
 
