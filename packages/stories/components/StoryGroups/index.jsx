@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
 import {
   QueueItems,
   BufferLoading,
   ComposerInput,
 } from '@bufferapp/publish-shared-components';
+import { CircleInstReminderIcon } from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 
 const ErrorBoundary = getErrorBoundary(true);
 
 const composerStyle = {
-  marginBottom: '1.5rem',
+  marginBottom: '0.1rem',
   flexGrow: '1',
 };
 
@@ -30,6 +34,16 @@ const loadingContainerStyle = {
 const containerStyle = {
   marginRight: '0.5rem',
 };
+
+const ReminderTextWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ReminderTextStyle = styled(Text)`
+  margin-left: 0.5rem;
+  font-size: 12px;
+`;
 
 const StoryGroups = ({
   loading,
@@ -67,7 +81,7 @@ const StoryGroups = ({
           <div style={composerStyle}>
             {showStoriesComposer && !editMode && (
               <React.Fragment>
-                {/* TODO: add here <StoryGroupPopover /> */}
+                <StoryGroupPopover />
               </React.Fragment>
             )}
             <ComposerInput
@@ -78,9 +92,15 @@ const StoryGroups = ({
         </div>
         {showStoriesComposer && editMode && (
           <React.Fragment>
-            {/* TODO: add here <StoryGroupPopover /> */}
+            <StoryGroupPopover />
           </React.Fragment>
         )}
+        <ReminderTextWrapper>
+          <CircleInstReminderIcon color="instagram" />
+          <ReminderTextStyle type="p">
+            When it’s time to post your Story, we’ll send a Reminder to your mobile device.
+          </ReminderTextStyle>
+        </ReminderTextWrapper>
         <QueueItems
           items={storyGroups}
           onCancelConfirmClick={onCancelConfirmClick}

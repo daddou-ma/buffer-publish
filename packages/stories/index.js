@@ -44,6 +44,9 @@ export default connect(
     onComposerPlaceholderClick: () => {
       dispatch(actions.handleComposerPlaceholderClick());
     },
+    handleCloseStoriesComposer: () => {
+      dispatch(actions.handleCloseStoriesComposer());
+    },
   }),
 )(StoryGroups);
 
