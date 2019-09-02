@@ -1,8 +1,26 @@
 import deepFreeze from 'deep-freeze';
 import reducer, { actions, initialState, actionTypes } from './reducer';
 
-describe('actions', () => {
-  test('should handle user_FETCH_SUCCESS action type, if user saw onboarding page', () => {
+describe('reducer', () => {
+  // Tests the default case in the reducer switch statement
+  it('initializes default state', () => {
+    const action = {
+      type: '',
+    };
+    // Protects state and actions from mutation
+    deepFreeze(initialState);
+    deepFreeze(action);
+
+    // When state is undefined, it's supposed to return initial state
+    expect(reducer(undefined, action))
+      .toEqual(initialState);
+  });
+
+  it('handles user_FETCH_SUCCESS action type, if user saw onboarding page', () => {
+    const stateBefore = {
+      ...initialState,
+      canSeeOnboardingPage: true,
+    };
     const stateAfter = {
       ...initialState,
       canSeeOnboardingPage: false,
@@ -13,12 +31,18 @@ describe('actions', () => {
         messages: ['user_saw_onboarding_page'],
       },
     };
+    deepFreeze(stateBefore);
     deepFreeze(action);
-    expect(reducer(undefined, action))
+
+    expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
   });
 
-  test('should handle user_FETCH_SUCCESS action type, if user did not see onboarding page', () => {
+  it('handles user_FETCH_SUCCESS action type, if user did not see onboarding page', () => {
+    const stateBefore = {
+      ...initialState,
+      canSeeOnboardingPage: null,
+    };
     const stateAfter = {
       ...initialState,
       canSeeOnboardingPage: true,
@@ -29,25 +53,18 @@ describe('actions', () => {
         messages: [],
       },
     };
+    deepFreeze(stateBefore);
     deepFreeze(action);
-    expect(reducer(undefined, action))
+
+    expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
   });
 
-  test('should handle CONNECT_SOCIAL_ACCOUNT action type', () => {
-    const stateAfter = {
+  it('handles SKIP_STEP action type', () => {
+    const stateBefore = {
       ...initialState,
-      canSeeOnboardingPage: false,
+      canSeeOnboardingPage: true,
     };
-    const action = {
-      type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
-    };
-    deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
-  });
-
-  test('should handle SKIP_STEP action type', () => {
     const stateAfter = {
       ...initialState,
       canSeeOnboardingPage: false,
@@ -55,20 +72,37 @@ describe('actions', () => {
     const action = {
       type: actionTypes.SKIP_STEP,
     };
+    deepFreeze(stateBefore);
     deepFreeze(action);
-    expect(reducer(undefined, action))
+
+    expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
   });
 
-  test('handleConnectSocialAccountClick triggers a CONNECT_SOCIAL_ACCOUNT action', () => {
-    expect(actions.handleConnectSocialAccountClick()).toEqual({
-      type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
+  // Test action creators:
+  describe('action creators', () => {
+    it('triggers a CONNECT_SOCIAL_ACCOUNT_ONBOARDING action', () => {
+      expect(actions.handleConnectSocialAccountOnboardingClick()).toEqual({
+        type: actionTypes.CONNECT_SOCIAL_ACCOUNT_ONBOARDING,
+      });
     });
-  });
 
-  test('handleSkipStep triggers a SKIP_STEP action', () => {
-    expect(actions.handleSkipStep()).toEqual({
-      type: actionTypes.SKIP_STEP,
+    it('triggers a SKIP_STEP action', () => {
+      expect(actions.handleSkipStep()).toEqual({
+        type: actionTypes.SKIP_STEP,
+      });
+    });
+
+    it('triggers a MANAGE_SOCIAL_ACCOUNT action', () => {
+      expect(actions.handleManageSocialAccountClick()).toEqual({
+        type: actionTypes.MANAGE_SOCIAL_ACCOUNT,
+      });
+    });
+
+    it('triggers a CONNECT_SOCIAL_ACCOUNT_SIDEBAR action', () => {
+      expect(actions.handleConnectSocialAccountSidebarClick()).toEqual({
+        type: actionTypes.CONNECT_SOCIAL_ACCOUNT_SIDEBAR,
+      });
     });
   });
 });

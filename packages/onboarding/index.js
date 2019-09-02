@@ -9,11 +9,17 @@ export default connect(
     canSeeOnboardingPage: state.onboarding.canSeeOnboardingPage,
   }),
   dispatch => ({
-    onConnectSocialAccountClick: () => {
-      dispatch(actions.handleConnectSocialAccountClick());
+    onConnectSocialAccountOnboardingClick: () => {
+      dispatch(actions.handleConnectSocialAccountOnboardingClick());
     },
     onSkipStep: () => {
       dispatch(actions.handleSkipStep());
+    },
+    onManageSocialAccountClick: () => {
+      dispatch(actions.handleManageSocialAccountClick());
+    },
+    onConnectSocialAccountSidebarClick: () => {
+      dispatch(actions.handleConnectSocialAccountSidebarClick());
     },
   }),
 )(OnboardingManager);

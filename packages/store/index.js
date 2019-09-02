@@ -34,7 +34,6 @@ import { middleware as dateTimePreferencesMiddleware } from '@bufferapp/date-tim
 import { middleware as closeAccountMiddleware } from '@bufferapp/close-account';
 import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintenance-redirect';
 import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
-import { middleware as disabledQueueMiddleware } from '@bufferapp/publish-disabled-queue';
 import { middleware as instagramDirectPostingModalMiddleware } from '@bufferapp/publish-ig-direct-posting-modal';
 import { middleware as notificationsProviderMiddleware } from '@bufferapp/publish-notifications-provider';
 import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/publish-profiles-disconnected-modal';
@@ -116,7 +115,6 @@ const configureStore = initialstate => {
         dateTimePreferencesMiddleware,
         closeAccountMiddleware,
         defaultPageMiddleware,
-        disabledQueueMiddleware,
         instagramDirectPostingModalMiddleware,
         maintenanceRedirectMiddleware,
         draftsMiddleware,
