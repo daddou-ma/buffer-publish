@@ -15,25 +15,25 @@ import { Text } from '@bufferapp/ui';
 
 const ErrorBoundary = getErrorBoundary(true);
 
-const composerStyle = {
-  marginBottom: '0.1rem',
-  flexGrow: '1',
-};
+const ContainerStyle = styled.div`
+  margin-right: 0.5rem;
+`;
 
-const topBarContainerStyle = {
-  display: 'flex',
-};
+const TopBarContainerStyle = styled.div`
+  display: flex;
+`;
 
-const loadingContainerStyle = {
-  width: '100%',
-  height: '100%',
-  textAlign: 'center',
-  paddingTop: '5rem',
-};
+const LoadingContainerStyle = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 5rem;
+`;
 
-const containerStyle = {
-  marginRight: '0.5rem',
-};
+const ComposerInputStyle = styled.div`
+  margin-bottom: 0.1rem;
+  flex-grow: 1;
+`;
 
 const ReminderTextWrapper = styled.div`
   display: flex;
@@ -64,9 +64,9 @@ const StoryGroups = ({
 }) => {
   if (loading) {
     return (
-      <div style={loadingContainerStyle}>
+      <LoadingContainerStyle>
         <BufferLoading size={64} />
-      </div>
+      </LoadingContainerStyle>
     );
   }
 
@@ -76,9 +76,9 @@ const StoryGroups = ({
 
   return (
     <ErrorBoundary>
-      <div className={containerStyle}>
-        <div style={topBarContainerStyle}>
-          <div style={composerStyle}>
+      <ContainerStyle>
+        <TopBarContainerStyle>
+          <ComposerInputStyle>
             {showStoriesComposer && !editMode && (
               <React.Fragment>
                 <StoryGroupPopover />
@@ -88,8 +88,8 @@ const StoryGroups = ({
               placeholder="What would you like to add to your Story?"
               onPlaceholderClick={onComposerPlaceholderClick}
             />
-          </div>
-        </div>
+          </ComposerInputStyle>
+        </TopBarContainerStyle>
         {showStoriesComposer && editMode && (
           <React.Fragment>
             <StoryGroupPopover />
@@ -115,16 +115,14 @@ const StoryGroups = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
           isBusinessAccount={isBusinessAccount}
         />
-      </div>
+      </ContainerStyle>
     </ErrorBoundary>
   );
 };
 StoryGroups.propTypes = {
   loading: PropTypes.bool,
   editMode: PropTypes.bool,
-  moreToLoad: PropTypes.bool, // eslint-disable-line
-  isLockedProfile: PropTypes.bool, // eslint-disable-line
-  page: PropTypes.number, // eslint-disable-line
+  isLockedProfile: PropTypes.bool,
   storyGroups: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
@@ -144,10 +142,8 @@ StoryGroups.propTypes = {
 };
 
 StoryGroups.defaultProps = {
-  page: 1,
   loading: true,
   editMode: false,
-  moreToLoad: false,
   isLockedProfile: false,
   showStoriesComposer: false,
   hasFirstCommentFlip: false,
