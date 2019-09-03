@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { borderWidth } from '@bufferapp/components/style/border';
 import { offWhite } from '@bufferapp/components/style/color';
 import { Link } from '@bufferapp/components';
 import MessageIcon from '@bufferapp/ui/Icon/Icons/Message';
@@ -36,9 +35,9 @@ const CardFooterWrapper = styled.div`
 `;
 
 const CardFooterWrapperWithBorder = styled(CardFooterWrapper)`
-  padding: 12px 16px;
+  padding: 0 16px;
   background-color: ${offWhite};
-  borderTop: ${borderWidth} solid ${grayLight};
+  border-top: 1px solid ${grayLight};
 `;
 
 const CardFooterContent = styled.div`
@@ -108,7 +107,9 @@ const CardFooter = ({
   return (
     <WrapperComponent isDragging={isDragging} disableBorder={disableBorder}>
       <CardFooterContent>
-        <IconWrapper>{icon}</IconWrapper>
+        {icon
+          && <IconWrapper>{icon}</IconWrapper>
+        }
         {messageLink
           ? (
             <Link href={messageLink} unstyled newTab>
@@ -117,10 +118,12 @@ const CardFooter = ({
           )
           : (
             <Fragment>
-              <PreMessage type="p">
-                { preMessage }
-                &nbsp;
-              </PreMessage>
+              {preMessage && (
+                <PreMessage type="p">
+                  { preMessage }
+                  &nbsp;
+                </PreMessage>
+              )}
               <Message type="p" textColor={textColor}>{ message }</Message>
             </Fragment>
           )
@@ -163,7 +166,7 @@ const CardFooter = ({
         )
       }
       {isPerformingAction
-        && actionMessage
+        && <Message type="p">{ actionMessage }</Message>
       }
     </WrapperComponent>
   );
@@ -198,7 +201,7 @@ CardFooter.defaultProps = {
   onEditClick: null,
   onSubmitClick: null,
   submitLabel: 'Share Now',
-  onRequeueClick: false,
+  onRequeueClick: null,
   hasFirstComment: false,
   isPerformingAction: false,
   actionMessage: 'Submitting...',
