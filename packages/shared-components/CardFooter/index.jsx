@@ -12,7 +12,7 @@ import { fontWeightBold } from '@bufferapp/ui/style/fonts';
 
 const ALLOWED_COLORS = [grayDark, red];
 
-const IgCommentIconWrapper = styled.span`
+const CommentIconWrapper = styled.span`
   display: flex;
   align-items: center;
   padding-left: 0.5rem;
@@ -20,12 +20,6 @@ const IgCommentIconWrapper = styled.span`
   border-left: 1px solid ${grayLight};
   color: ${grayDarker};
 `;
-
-const renderCommentIcon = () => (
-  <IgCommentIconWrapper title="Post includes a comment">
-    <MessageIcon />
-  </IgCommentIconWrapper>
-);
 
 const CardFooterWrapper = styled.div`
   display: flex;
@@ -101,7 +95,7 @@ const CardFooter = ({
   isDragging,
   disableBorder,
 }) => {
-  const hideAllButtons = (hideButtons || isPerformingAction) || messageLink;
+  const hideAllButtons = hideButtons || isPerformingAction || messageLink;
   const [isConfirmingDelete, setConfirmingDelete] = useState(false);
   const textColor = ALLOWED_COLORS.includes(messageColor) ? messageColor : grayDarker;
   const WrapperComponent = disableBorder ? CardFooterWrapper : CardFooterWrapperWithBorder;
@@ -132,7 +126,9 @@ const CardFooter = ({
         }
         {hasFirstComment
           && (
-            renderCommentIcon()
+            <CommentIconWrapper title="Post includes a comment">
+              <MessageIcon />
+            </CommentIconWrapper>
           )
         }
       </CardFooterContent>
