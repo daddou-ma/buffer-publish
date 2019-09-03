@@ -9,11 +9,18 @@ import ArrowLeft from '@bufferapp/ui/Icon/Icons/ArrowLeft';
 import ArrowRight from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import clamp from 'lodash.clamp';
 import { Button } from '@bufferapp/ui';
+import { grayLight, grayLighter } from '@bufferapp/ui/style/colors';
+import Attach from '@bufferapp/ui/Icon/Icons/Attach';
+import UploadZone from '@bufferapp/publish-upload-zone';
+import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
+import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
+import { UploadTypes } from '@bufferapp/publish-constants';
 
+const cardsToShow = 15;
 const cardWidth = 180;
 const cardMargin = 4;
 const lowerBounds = 0;
-const upperBounds = 14;
+const upperBounds = cardsToShow - 1;
 
 const WrapperStyle = styled.div`
   background-color: white;
@@ -56,13 +63,14 @@ const BodyContainer = styled.div`
 `;
 
 const StyledArrow = styled.button`
+  cursor: pointer;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(calc(-50% - 16px));
   position: absolute;
   left: ${props => props.prev ? 0 : 'initial'}
   right: ${props => props.prev ? 'initial' : 0}
-  background-color: #E0E0E0;
-  border: 1px solid #E0E0E0;
+  background-color: ${grayLight};
+  border: 1px solid ${grayLight};
   height: 32px;
   width: 32px;
   margin: 16px;
@@ -79,8 +87,11 @@ const CarouselContainer = styled.div`
 `;
 
 const CarouselCard = styled.div`
-  background-color: #F5F5F5;
-  display: block;
+  position: relative;
+  align-items: center;
+  background-color: ${grayLighter};
+  display: flex;
+  justify-content: center;
   height: 320px;
   margin: ${cardMargin}px;
   width: ${cardWidth}px;
@@ -111,29 +122,101 @@ const NavArrow = ({
       {prev ? <ArrowLeft /> : <ArrowRight />}
     </StyledArrow>
   );
-}
+};
 
-const SliderCarousel = ({ initialSelectedItem = 0 }) => {
+const getCardsToShow = ({ cards = [] }) => {
+  const cardList = [];
+  const sortedCards = cards.sort((a, b) => {
+    if (a.order > b.order) return 1;
+    return -1;
+  });
+  for (let i = 0; i < cardsToShow; i += 1) {
+    const card = sortedCards[i];
+    if (card) {
+      cardList.push(card);
+    } else {
+      cardList.push({ order: i });
+    }
+  }
+  return cardList;
+};
+
+const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
   const [selectedItem, setSelectedItem] = useState(initialSelectedItem);
+  const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
+
+  const uploadDraftFile = (id, file, uploadType, notifiers, createFileUploaderCallback) => {
+    const { id: userId, s3_upload_signature: s3Signature } = userData;
+    const s3UploadSignature = {
+      algorithm: s3Signature.algorithm,
+      base64Policy: s3Signature.base64policy,
+      bucket: s3Signature.bucket,
+      credentials: s3Signature.credentials,
+      date: s3Signature.date,
+      expires: s3Signature.expires,
+      signature: s3Signature.signature,
+      successActionStatus: s3Signature.success_action_status,
+    };
+    const uploadDraftFileCallback = createFileUploaderCallback({
+      s3UploadSignature,
+      userId,
+      csrfToken: null,
+      serverNotifiers: {
+        videoProcessed: (processedVideoData) => console.log('videoProcessed', { processedVideoData }),
+        profileGroupCreated: (groupData) => console.log('profileGroupCreated', { groupData }),
+        profileGroupUpdated: (groupData) => console.log('profileGroupUpdate', { groupData }),
+        profileGroupDeleted: (groupData) => console.log('profileGroupDeleted', { groupData }),
+      },
+    });
+
+    return uploadDraftFileCallback(id, file, uploadType, notifiers);
+  };
+
+  const thing = {
+    uploadStarted: (...props) => console.log('uploadStarted', { ...props }),
+    uploadedLinkThumbnail: (...props) => console.log('uploadedLinkThumbnail', { ...props }),
+    uploadedDraftImage: (...props) => console.log('uploadedDraftImage', { ...props }),
+    uploadedDraftVideo: (...props) => console.log('uploadedDraftVideo',  {...props }),
+    draftGifUploaded: (...props) => console.log('draftGifUploaded', { ...props }),
+    queueError: (...props) => console.log('queueError', { ...props }),
+    monitorFileUploadProgress: (...props) => console.log('monitorFileUploadProgress', { ...props }),
+  };
 
   return (
     <React.Fragment>
       <CarouselContainer selectedItem={selectedItem}>
-        <CarouselCard>1</CarouselCard>
-        <CarouselCard>2</CarouselCard>
-        <CarouselCard>3</CarouselCard>
-        <CarouselCard>4</CarouselCard>
-        <CarouselCard>5</CarouselCard>
-        <CarouselCard>6</CarouselCard>
-        <CarouselCard>7</CarouselCard>
-        <CarouselCard>8</CarouselCard>
-        <CarouselCard>9</CarouselCard>
-        <CarouselCard>10</CarouselCard>
-        <CarouselCard>11</CarouselCard>
-        <CarouselCard>12</CarouselCard>
-        <CarouselCard>13</CarouselCard>
-        <CarouselCard>14</CarouselCard>
-        <CarouselCard>15</CarouselCard>
+        {getCardsToShow({ cards: [] }).map(card => (
+          <CarouselCard
+            key={card.order}
+            card={card}
+          >
+            <div>
+              <UploadZone
+                mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+                uploadDraftFile={uploadDraftFile}
+                notifiers={thing}
+                removeAllNotifications={() => console.log('removeAllNotifications', true)}
+                queueError={({ message }) => console.log('queueError', { message })}
+                draftId="card"
+                uploadFormatsConfig={uploadFormatsConfig}
+                service={{
+                  maxAttachableImagesCount: 1,
+                  canHaveMediaAttachmentType: () => true,
+                }}
+                uploadType={UploadTypes.LINK_THUMBNAIL}
+                multiple={false}
+                disabled={false}
+              />
+
+              <Button
+                type="primary"
+                label="Add Media Files"
+                onClick={() => {}}
+                icon={<Attach />}
+              />
+            </div>
+          </CarouselCard>
+        ))}
       </CarouselContainer>
       <NavArrow
         prev
@@ -150,7 +233,7 @@ const SliderCarousel = ({ initialSelectedItem = 0 }) => {
       />
     </React.Fragment>
   );
-}
+};
 
 const StoryGroupWrapper = ({
   onDateTimeSlotPickerSubmit,
@@ -158,6 +241,7 @@ const StoryGroupWrapper = ({
   timezone,
   weekStartsMonday,
   selectedProfile,
+  userData,
   }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
@@ -186,11 +270,11 @@ const StoryGroupWrapper = ({
           </AvatarContainer>
         </HeaderBar>
         <BodyContainer>
-          <SliderCarousel />
+          <SliderCarousel userData={userData} />
         </BodyContainer>
         <FooterBar>
-          <Button label="Preview" />
-          <Button label="Schedule Story" />
+          <Button label="Preview" onClick={() => true} />
+          <Button label="Schedule Story" onClick={() => true} />
         </FooterBar>
       </React.Fragment>
       }
@@ -214,6 +298,7 @@ StoryGroupWrapper.propTypes = {
     service: PropTypes.string,
     handle: PropTypes.string,
   }).isRequired,
+  userData: PropTypes.shape({}).isRequired,
 };
 
 export default StoryGroupWrapper;

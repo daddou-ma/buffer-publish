@@ -17,6 +17,7 @@ import { stringTokenizer } from '@bufferapp/publish-i18n';
 
 import styles from './uploadZone.css';
 import { getHumanReadableSize, getFileTypeFromPath } from '@bufferapp/publish-composer/composer/utils/StringUtils';
+import createFileUploaderCallback from '../../utils/DraftUploader';
 
 const ContentTypeMediaTypeMap = new Map([
   ['JPG', 'IMAGE'],
@@ -130,7 +131,7 @@ class UploadZone extends React.Component {
 
     if (uploadableNewFiles.length > 0) {
       uploadableNewFiles.forEach((file) => {
-        uploadDraftFile(draftId, file, uploadType, notifiers);
+        uploadDraftFile(draftId, file, uploadType, notifiers, createFileUploaderCallback);
       });
     }
   };
@@ -141,9 +142,9 @@ class UploadZone extends React.Component {
   };
 
   render () {
-    const { translations } = this.props;
+    const { translations, classNames } = this.props;
     const transparentClickZoneClassName =
-      [styles.transparentClickZone, this.props.classNames.uploadZone].join(' ');
+      [styles.transparentClickZone, (classNames && classNames.uploadZone || '')].join(' ');
 
     const acceptedFileExtensions =
       Array.from(this.props.uploadFormatsConfig.keys())
@@ -154,8 +155,8 @@ class UploadZone extends React.Component {
       <div>
         <Dropzone
           onDrop={this.onDrop}
-          activeClassName={this.props.classNames.uploadZoneActive}
-          disabledClassName={this.props.classNames.uploadZoneDisabled}
+          activeClassName={classNames && classNames.uploadZoneActive}
+          disabledClassName={classNames && classNames.uploadZoneDisabled}
           className={transparentClickZoneClassName}
           ref={(node) => { this.dropzone = node; }}
           multiple={this.props.multiple}
@@ -179,11 +180,10 @@ UploadZone.propTypes = {
     uploadZone: PropTypes.string,
     uploadZoneActive: PropTypes.string,
     uploadZoneDisabled: PropTypes.string,
-  }),
+  }).isRequired,
   uploadFormatsConfig: PropTypes.object,
   disabled: PropTypes.bool,
   multiple: PropTypes.bool,
-  visibleNotifications: PropTypes.array.isRequired,
   uploadType: PropTypes.string.isRequired,
   service: PropTypes.shape({
     maxAttachableImagesCount: PropTypes.number,

@@ -11,6 +11,7 @@ const StoryGroupPopover = ({
   timezone,
   weekStartsMonday,
   selectedProfile,
+  userData,
 }) => (
   <Popover
     width="100%"
@@ -23,6 +24,7 @@ const StoryGroupPopover = ({
       timezone={timezone}
       weekStartsMonday={weekStartsMonday}
       selectedProfile={selectedProfile}
+      userData={userData}
     />
   </Popover>
 );
@@ -41,7 +43,7 @@ StoryGroupPopover.propTypes = {
     service: PropTypes.string,
     handle: PropTypes.string,
   }),
-
+  userData: PropTypes.shape({}).isRequired,
 };
 
 export default StoryGroupPopover;

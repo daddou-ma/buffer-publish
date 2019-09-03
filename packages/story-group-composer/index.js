@@ -9,6 +9,7 @@ export default connect(
     timezone: state.profileSidebar.selectedProfile.timezone,
     weekStartsMonday: state.appSidebar.user.week_starts_monday,
     selectedProfile: state.profileSidebar.selectedProfile,
+    userData: state.appSidebar.user,
   }),
   dispatch => ({
     onOverlayClick: () => {

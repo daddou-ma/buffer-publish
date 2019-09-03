@@ -1,0 +1,89 @@
+import Uploader from './Uploader';
+import ServerActionCreators from '@bufferapp/publish-composer/composer/action-creators/ServerActionCreators';
+import { MediaTypes, UploadTypes } from '@bufferapp/publish-constants';
+import { getStillDataUriFromGif } from '@bufferapp/publish-composer/composer/utils/DOMUtils';
+
+const createFileUploaderCallback = ({
+  s3UploadSignature,
+  userId,
+  csrfToken,
+  serverNotifiers,
+}) => (id, file, uploadType, notifiers) => {
+  const uploader = new Uploader({
+    csrf_token: csrfToken,
+    userId,
+    s3UploadSignature,
+    errorNotifier: notifiers.queueError,
+    notifiers: serverNotifiers,
+  });
+
+  notifiers.uploadStarted({ id, uploaderInstance: uploader });
+
+  uploader.upload(file)
+    .then((uploadedFile) => {
+      if (uploadedFile.success === false) {
+        notifiers.queueError('Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?');
+      }
+
+      if (uploadType === UploadTypes.LINK_THUMBNAIL) {
+        notifiers.uploadedLinkThumbnail({
+          id,
+          uploaderInstance: uploader,
+          url: uploadedFile.url,
+          width: uploadedFile.width,
+          height: uploadedFile.height,
+        });
+      } else {
+        switch (uploadedFile.type) {
+          case MediaTypes.IMAGE:
+            notifiers.uploadedDraftImage({
+              id,
+              uploaderInstance: uploader,
+              url: uploadedFile.url,
+              location: window.location, //eslint-disable-line
+              width: uploadedFile.width,
+              height: uploadedFile.height,
+            });
+            break;
+
+          case MediaTypes.VIDEO:
+            notifiers.uploadedDraftVideo({
+              id,
+              uploaderInstance: uploader,
+              uploadId: uploadedFile.uploadId,
+              fileExtension: uploadedFile.fileExtension
+            });
+            break;
+
+          case MediaTypes.GIF:
+            getStillDataUriFromGif(uploadedFile.url)
+              .then(dataUri => dataUri)
+              .catch(() => null)
+              .then((dataUriOrNull) => {
+                notifiers.draftGifUploaded({
+                  id,
+                  uploaderInstance: uploader,
+                  url: uploadedFile.url,
+                  stillGifUrl: dataUriOrNull,
+                  width: uploadedFile.width,
+                  height: uploadedFile.height,
+                });
+              });
+            break;
+
+          default:
+            break;
+        }
+      }
+    })
+    .catch(() => {
+      notifiers.queueError('Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?');
+    });
+
+  notifiers.monitorFileUploadProgress({
+    id,
+    uploaderInstance: uploader,
+  });
+};
+
+export default createFileUploaderCallback;
