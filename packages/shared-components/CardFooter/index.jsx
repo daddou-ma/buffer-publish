@@ -30,12 +30,12 @@ const renderCommentIcon = () => (
 const CardFooterWrapper = styled.div`
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 8px 1rem;
   opacity: ${({ isDragging }) => (isDragging ? 0 : 1)};
 `;
 
 const CardFooterWrapperWithBorder = styled(CardFooterWrapper)`
-  padding: 0 16px;
+  padding: 8px 16px;
   background-color: ${offWhite};
   border-top: 1px solid ${grayLight};
 `;
@@ -61,11 +61,13 @@ const IconWrapper = styled.span`
 
 const Message = styled(Text)`
   font-size: 12px;
+  margin: 0;
   color: ${({ textColor }) => (textColor)};
 `;
 
 const PreMessage = styled(Text)`
   font-size: 12px;
+  margin: 0;
   font-weight: ${fontWeightBold};
 `;
 
