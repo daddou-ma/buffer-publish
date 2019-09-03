@@ -99,7 +99,7 @@ const CardFooter = ({
   isDragging,
   disableBorder,
 }) => {
-  const showButtons = !(hideButtons || isPerformingAction) || !!messageLink;
+  const showButtons = !(hideButtons || isPerformingAction) || !messageLink;
   const [isConfirmingDelete, setConfirmingDelete] = useState(false);
   const textColor = ALLOWED_COLORS.includes(messageColor) ? messageColor : grayDarker;
   const WrapperComponent = disableBorder ? CardFooterWrapper : CardFooterWrapperWithBorder;

@@ -49,7 +49,7 @@ const PostFooter = ({
     <CardFooter
       hideButtons={hideButtons}
       icon={renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder, isPastReminder)}
-      preMessage={dueTime}
+      preMessage={isPastReminder ? dueTime : '' }
       message={isPastReminder ? day : (hasError ? '' : postDetails.postAction)}
       messageColor={isSent ? grayDark : ''}
       hasError={hasError}
@@ -58,7 +58,7 @@ const PostFooter = ({
       onEditClick={onEditClick}
       onSubmitClick={onShareNowClick}
       submitLabel={hasError ? 'Retry Now' : 'Share Now'}
-      onRequeueClick={onRequeueClick}
+      onRequeueClick={hasError ? onRequeueClick : null}
       hasFirstComment={hasCommentEnabled && comment.commentEnabled}
       isPerformingAction={!!actionMessage}
       actionMessage={actionMessage}
