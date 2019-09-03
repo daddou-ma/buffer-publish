@@ -8,7 +8,7 @@ export default ({ dispatch, getState }) => next => (action) => {
   switch (action.type) {
     case profileActionTypes.SELECT_PROFILE:
       dispatch(dataFetchActions.fetch({
-        name: 'storyGroups',
+        name: 'getStoryGroups',
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,

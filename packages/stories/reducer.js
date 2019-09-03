@@ -39,7 +39,7 @@ const determineIfMoreToLoad = (action, currentPosts) => {
 
 const postsReducer = (state = {}, action) => {
   switch (action.type) {
-    case `storyGroups_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { updates } = action.result;
       if (action.args.isFetchingMore) {
         return { ...state, ...updates };
@@ -53,13 +53,13 @@ const postsReducer = (state = {}, action) => {
 
 const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
-    case `storyGroups_${dataFetchActionTypes.FETCH_START}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
         loading: !action.args.isFetchingMore && !action.args.hideLoading,
         loadingMore: action.args.isFetchingMore,
       };
-    case `storyGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         loading: false,
@@ -69,7 +69,7 @@ const profileReducer = (state = profileInitialState, action) => {
         posts: postsReducer(state.posts, action),
         total: action.result.total,
       };
-    case `storyGroups_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         loading: false,
@@ -85,9 +85,9 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
-    case `storyGroups_${dataFetchActionTypes.FETCH_START}`:
-    case `storyGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `storyGroups_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
       profileId = getProfileId(action);
       if (profileId) {
         return {

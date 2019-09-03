@@ -10,6 +10,7 @@ const StoryGroupPopover = ({
   uses24hTime,
   timezone,
   weekStartsMonday,
+  onUpdateStoryGroup,
 }) => (
   <Popover
     width="100%"
@@ -21,6 +22,7 @@ const StoryGroupPopover = ({
       uses24hTime={uses24hTime}
       timezone={timezone}
       weekStartsMonday={weekStartsMonday}
+      onUpdateStoryGroup={onUpdateStoryGroup}
     />
   </Popover>
 );
