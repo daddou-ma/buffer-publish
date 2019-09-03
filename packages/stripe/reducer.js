@@ -27,6 +27,12 @@ export default (state = initialState, action) => {
         ...state,
         creatingSetupIntent: true,
       };
+    case actionTypes.CREATE_SETUP_INTENT_SUCCESS:
+      return {
+        ...state,
+        setupIntentClientSecret: action.setupIntentClientSecret,
+        creatingSetupIntent: false,
+      };
     case actionTypes.HANDLE_SETUP_CARD_REQUEST:
       return {
         ...state,
@@ -65,9 +71,9 @@ export const actions = {
     type: actionTypes.HANDLE_CARD_SETUP_REQUEST,
   }),
   handleCardSetupSuccess: ({
-    cycle, 
-    source, 
-    plan, 
+    cycle,
+    source,
+    plan,
     paymentMethodId,
   }) => ({
     type: actionTypes.HANDLE_CARD_SETUP_SUCCESS,
