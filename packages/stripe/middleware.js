@@ -7,6 +7,14 @@ import { actions, actionTypes } from './reducer';
 
 export default ({ dispatch }) => next => (action) => {
   switch (action.type) {
+    case actionTypes.CREATE_SETUP_INTENT_REQUEST:
+      dispatch(
+        asyncDataFetchActions.fetch({
+          name: 'createSetupIntent',
+          args: {},
+        }),
+      );
+      break;
     case actionTypes.HANDLE_CARD_SETUP_SUCCESS: {
       const {
         cycle,
@@ -28,17 +36,6 @@ export default ({ dispatch }) => next => (action) => {
       );
       break;
     }
-    case actionTypes.HANDLE_CARD_SETUP_ERROR:
-      // Add notification for error
-      break;
-    case actionTypes.CREATE_SETUP_INTENT_REQUEST:
-      dispatch(
-        asyncDataFetchActions.fetch({
-          name: 'createSetupIntent',
-          args: {},
-        }),
-      );
-      break;
     case `createSetupIntent_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(
         actions.createSetupIntentSuccess(action.result.setup_intent.client_secret),
