@@ -1,7 +1,5 @@
 import reducer, { actions } from './reducer';
 
-import { CREDIT_CARD, TOKEN } from './test/constants';
-
 describe('reducer', () => {
   let state = {};
   describe('initial state', () => {
@@ -12,38 +10,24 @@ describe('reducer', () => {
     });
 
     it('has no error', () => expect(state.error).toBeNull());
-    it('has no card information', () => expect(state.card).toBeNull());
-    it('has no token', () => expect(state.token).toBeNull());
-    it('is not validating', () => expect(state.validating).toBeFalsy());
+    it('is not creating a setup intent', () => expect(state.creatingSetupIntent).toBe(false));
+    it('has no setup intent client secret', () => expect(state.setupIntentClientSecret).toBe(''));
+    it('is not validating card setup', () => expect(state.validatingCardSetup).toBe(false));
+    it('has no card setup error', () => expect(state.handleCardSetupError).toBe(''));
   });
 
-  describe('validateCreditCard', () => {
-    beforeEach(() => {
-      state = reducer(undefined, actions.validateCreditCard(CREDIT_CARD));
+  describe('creating a setup intent', () => {
+    it('createSetupIntentRequest sets creatingSetupIntent to true', () => {
+      state = reducer(undefined, actions.createSetupIntentRequest());
+      expect(state.creatingSetupIntent).toBe(true);
     });
 
-    it('sets the state to validating', () => expect(state.validating).toBeTruthy());
-    it('stores the card', () => expect(state.card).toBe(CREDIT_CARD));
-  });
-
-  describe('throwValidationError', () => {
-    beforeEach(() => {
-      const validatingState = reducer(undefined, actions.validateCreditCard(CREDIT_CARD));
-      state = reducer(validatingState, actions.throwValidationError('credit card expired!'));
+    it('createSetupIntentSuccess sets a client secret to setupIntentClientSecret', () => {
+      state = reducer(undefined, actions.createSetupIntentSuccess());
+      expect(state.creatingSetupIntent).toBe(false);
+      // Mock request
+      // expect(state.setupIntentClientSecret).toNotBe('');
     });
-
-    it('sets validating back to false', () => expect(state.validating).toBeFalsy());
-    it('stores error message', () => expect(state.error).toBe('credit card expired!'));
-  });
-
-  describe('approveCreditCard', () => {
-    beforeEach(() => {
-      const validatingState = reducer(undefined, actions.validateCreditCard(CREDIT_CARD));
-      state = reducer(validatingState, actions.approveCreditCard(TOKEN));
-    });
-
-    it('sets validating back to false', () => expect(state.validating).toBeFalsy());
-    it('stores the token', () => expect(state.token).toBe(TOKEN));
   });
 
   describe('changing billing cyles', () => {

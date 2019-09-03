@@ -3,9 +3,6 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('STRIPE', {
   CREATE_SETUP_INTENT_REQUEST: 0,
   CREATE_SETUP_INTENT_SUCCESS: 0,
-  CREDIT_CARD_VALIDATING: 0,
-  CREDIT_CARD_ERROR: 0,
-  CREDIT_CARD_APPROVED: 0,
   CHANGE_BILLING_CYCLE: 0,
   HANDLE_CARD_SETUP_REQUEST: 0,
   HANDLE_CARD_SETUP_SUCCESS: 0,
@@ -17,9 +14,6 @@ const YEARLY_CYCLE = 'year';
 
 const initialState = {
   error: null,
-  card: null,
-  token: null,
-  validating: false,
   creatingSetupIntent: false,
   setupIntentClientSecret: '',
   validatingCardSetup: false,
@@ -48,30 +42,6 @@ export default (state = initialState, action) => {
         ...state,
         validatingCardSetup: false,
         handleCardSetupError: 'Add error here',
-      };
-    case actionTypes.CREATE_SETUP_INTENT_SUCCESS:
-      return {
-        ...state,
-        setupIntentClientSecret: action.setupIntentClientSecret,
-        creatingSetupIntent: false,
-      };
-    case actionTypes.CREDIT_CARD_VALIDATING:
-      return {
-        ...state,
-        validating: true,
-        card: action.card,
-      };
-    case actionTypes.CREDIT_CARD_ERROR:
-      return {
-        ...state,
-        validating: false,
-        error: action.error,
-      };
-    case actionTypes.CREDIT_CARD_APPROVED:
-      return {
-        ...state,
-        validating: false,
-        token: action.token,
       };
     case actionTypes.CHANGE_BILLING_CYCLE:
       return {
@@ -109,18 +79,6 @@ export const actions = {
   handleCardSetupError: err => ({
     type: actionTypes.HANDLE_CARD_SETUP_ERROR,
     errorMessage: err,
-  }),
-  validateCreditCard: card => ({
-    type: actionTypes.CREDIT_CARD_VALIDATING,
-    card,
-  }),
-  throwValidationError: error => ({
-    type: actionTypes.CREDIT_CARD_ERROR,
-    error,
-  }),
-  approveCreditCard: token => ({
-    type: actionTypes.CREDIT_CARD_APPROVED,
-    token,
   }),
   setMonthlyCycle: () => ({
     type: actionTypes.CHANGE_BILLING_CYCLE,
