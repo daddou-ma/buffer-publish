@@ -3,44 +3,34 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { offWhite } from '@bufferapp/components/style/color';
-import {
-  Link,
-} from '@bufferapp/components';
-
+import { Link } from '@bufferapp/components';
+import MessageIcon from '@bufferapp/ui/Icon/Icons/Message';
 import { Text, Button } from '@bufferapp/ui';
-import { grayLight, grayDarker, red } from '@bufferapp/ui/style/colors';
+import {
+  grayLight, grayDarker, red, grayDark,
+} from '@bufferapp/ui/style/colors';
 import { fontWeightBold } from '@bufferapp/ui/style/fonts';
 
-const ALLOWED_COLORS = ['shuttleGray', 'red'];
+const ALLOWED_COLORS = [grayDark, red];
 
-const igCommentIconWrapper = {
-  display: 'flex',
-  alignItems: 'center',
-  paddingLeft: '0.5rem',
-  marginLeft: '0.5rem',
-  borderLeft: '1px solid #cfd4d6',
-};
+const IgCommentIconWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+  border-left: 1px solid ${grayLight};
+  color: ${grayDarker};
+`;
+
 const renderCommentIcon = () => (
-  <span style={igCommentIconWrapper} title="Post includes a comment">
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        fill="#59626a"
-        d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H6c-.746 0-2.886 1.672-4.13 2.52-.457.31-.87.032-.87-.52V3z"
-      />
-    </svg>
-  </span>
+  <IgCommentIconWrapper title="Post includes a comment">
+    <MessageIcon />
+  </IgCommentIconWrapper>
 );
 
 const CardFooterWrapper = styled.div`
   display: flex;
+  align-items: center;
   padding: 0.5rem 1rem;
   opacity: ${({ isDragging }) => (isDragging ? 0 : 1)};
 `;
@@ -72,6 +62,7 @@ const IconWrapper = styled.span`
 
 const Message = styled(Text)`
   font-size: 12px;
+  color: ${({ textColor }) => (textColor)};
 `;
 
 const PreMessage = styled(Text)`
@@ -121,7 +112,7 @@ const CardFooter = ({
         {messageLink
           ? (
             <Link href={messageLink} unstyled newTab>
-              <Message type="p">{ message }</Message>
+              <Message type="p" textColor={textColor}>{ message }</Message>
             </Link>
           )
           : (
@@ -201,7 +192,7 @@ CardFooter.defaultProps = {
   hideButtons: false,
   icon: null,
   preMessage: null,
-  messageColor: 'black',
+  messageColor: grayDarker,
   messageLink: null,
   onDeleteClick: null,
   onEditClick: null,
