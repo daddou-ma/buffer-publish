@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
   ClockIcon,
@@ -11,10 +11,10 @@ const renderIcon = (hasError, isSent, isCustomScheduled, isInstagramReminder, is
   if ((!hasError && !isCustomScheduled && !isInstagramReminder) || isPastReminder) return;
 
   return (
-    <div>
+    <Fragment>
       {isInstagramReminder && !hasError ? <CircleInstReminderIcon color="instagram" /> : null}
       {isCustomScheduled && !hasError && !isInstagramReminder ? <ClockIcon color={isSent ? 'shuttleGray' : 'outerSpace'} /> : null}
-    </div>
+    </Fragment>
   );
 };
 
@@ -49,7 +49,7 @@ const PostFooter = ({
     <CardFooter
       hideButtons={hideButtons}
       icon={renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder, isPastReminder)}
-      preMessage={isPastReminder ? dueTime : '' }
+      preMessage={isPastReminder ? dueTime : ''}
       message={isPastReminder ? day : (hasError ? '' : postDetails.postAction)}
       messageColor={isSent ? grayDark : ''}
       hasError={hasError}
