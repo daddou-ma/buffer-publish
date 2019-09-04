@@ -5,18 +5,6 @@ import { Image } from '@bufferapp/components';
 import { grayLight, gray } from '@bufferapp/ui/style/colors';
 import { Text, Button } from '@bufferapp/ui';
 
-const AvatarWrapper = styled.span`
-  display: flex;
-  margin-right: 9px;
-`;
-
-const TextWithStyles = styled(Text)`
-  font-size: 12px;
-  line-height: 14px;
-  margin: 0;
-  color: ${gray};
-`;
-
 const CardHeaderWrapper = styled.div`
   display: flex;
   border-bottom: 1px solid ${grayLight};
@@ -31,6 +19,18 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-grow: 1;
   align-items: center;
+`;
+
+const AvatarWrapper = styled.span`
+  display: flex;
+  margin-right: 9px;
+`;
+
+const TextWithStyles = styled(Text)`
+  font-size: 12px;
+  line-height: 14px;
+  margin: 0;
+  color: ${gray};
 `;
 
 const CardHeader = ({

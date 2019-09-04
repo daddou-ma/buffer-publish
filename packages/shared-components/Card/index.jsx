@@ -6,6 +6,7 @@ import { borderRadius } from '@bufferapp/ui/style/borders';
 
 const CardWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   background: ${white};
   border: 1px solid ${gray};
   box-sizing: border-box;
@@ -20,7 +21,6 @@ const Card = ({
     {children}
   </CardWrapper>
 );
-
 
 Card.propTypes = {
   children: PropTypes.node,
