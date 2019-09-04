@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import HeaderBar from '../HeaderBar';
+import AddNote from '../AddNote';
 
 const WrapperStyle = styled.div`
   width: 686px;
@@ -10,6 +12,12 @@ const WrapperStyle = styled.div`
   top: 0;
   right: 0;
   border-radius: 3px;
+  padding: 16px;
+`;
+
+const HeaderBarStyle = styled.div`
+  padding: 13px 0;
+  display: flex;
 `;
 
 const ADD_STORY = 'addStory';
@@ -24,18 +32,27 @@ const StoryGroupWrapper = ({
   uses24hTime,
   timezone,
   weekStartsMonday,
+  selectedProfile,
+  saveNote,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
-  const [viewMode, setViewMode] = useState(ADD_STORY);
-
+  const [viewMode, setViewMode] = useState(ADD_NOTE);
   return (
     <WrapperStyle>
+      <HeaderBarStyle>
+        <HeaderBar
+          selectedProfile={selectedProfile}
+        />
+      </HeaderBarStyle>
       {viewMode === ADD_STORY &&
         <div>Add story view</div>
       }
-      {viewMode === ADD_NOTE &&
-        <div>Add note view</div>
-      }
+      {viewMode === ADD_NOTE && (
+        <AddNote
+          setViewMode={setViewMode}
+          saveNote={saveNote}
+        />
+      )}
     </WrapperStyle>
   );
 };
