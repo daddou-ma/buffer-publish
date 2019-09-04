@@ -19,10 +19,6 @@ const getPostActionString = ({ post }) => {
     twentyFourHourTime: post.twentyfour_hour_time,
   })
 
-  if (post.stories) {
-    return `You will receive a reminder on ${post.day} when it's time to post.`
-  }
-
   // to run in every situation except when can_send_direct is explicitly false.
   // if pinned is explicitly set to true, then post is not custom scheduled
   if (
@@ -228,6 +224,7 @@ module.exports = post => {
       status: post.status,
       stories: post.stories,
       twentyfourHourTime: post.twentyfour_hour_time,
+      storyAction: `You will receive a reminder on ${post.day} when it's time to post.`,
     }
   };
 };
