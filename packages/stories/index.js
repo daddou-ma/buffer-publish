@@ -50,6 +50,9 @@ export default connect(
     handleCloseStoriesComposer: () => {
       dispatch(actions.handleCloseStoriesComposer());
     },
+    onPreviewClick: () => {
+      dispatch(actions.handlePreviewClick());
+    },
   }),
 )(StoryGroups);
 

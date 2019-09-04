@@ -5,6 +5,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('STORIES', {
   OPEN_STORIES_COMPOSER: 0,
   HIDE_STORIES_COMPOSER: 0,
+  OPEN_PREVIEW: 0,
 });
 
 export const initialState = {
@@ -136,5 +137,8 @@ export const actions = {
   }),
   handleCloseStoriesComposer: () => ({
     type: actionTypes.HIDE_STORIES_COMPOSER,
+  }),
+  handlePreviewClick: () => ({
+    type: actionTypes.OPEN_PREVIEW,
   }),
 };

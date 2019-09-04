@@ -95,6 +95,7 @@ const renderPost = ({
   draggable,
   basic,
   hasFirstCommentFlip,
+  onPreviewClick,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -111,6 +112,7 @@ const renderPost = ({
     onImageClickPrev: () => onImageClickPrev({ post }),
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
+    onPreviewClick: () => onPreviewClick({ post }),
     onDropPost,
     onSwapPosts,
     hasFirstCommentFlip,
