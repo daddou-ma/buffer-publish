@@ -34,12 +34,7 @@ const StoryGroupWrapper = ({
   return (
     <WrapperStyle>
       {viewMode === ADD_STORY && (
-        <div>
-          Add story view
-          <div onClick={() => onUpdateStoryGroup('', '', '')}> Update</div>
-          <div onClick={() => onCreateStoryGroup('')}> Create</div>
-          <div onClick={() => onDeleteStoryGroup('')}> Delete</div>
-        </div>
+        <div>Add story view</div>
       )}
       {viewMode === ADD_NOTE &&
         <div>Add note view</div>
