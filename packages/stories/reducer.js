@@ -126,8 +126,13 @@ export const actions = {
     emptySlotData,
     profileId,
   }),
+  handleEditStoryGroupClick: () => ({
+    type: actionTypes.OPEN_STORIES_COMPOSER,
+    editMode: true,
+  }),
   handleComposerPlaceholderClick: () => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,
+    editMode: false,
   }),
   handleCloseStoriesComposer: () => ({
     type: actionTypes.HIDE_STORIES_COMPOSER,
