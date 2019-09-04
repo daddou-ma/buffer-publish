@@ -218,8 +218,8 @@ module.exports = post => {
     commentEnabled: post.comment_enabled,
     commentText: post.comment_text,
     storyDetails: {
-      creatorName: '', // TODO: include creator name
-      avatarUrl: '', // TODO: include avatarUrl
+      creatorName: 'Joel', // TODO: include creator name
+      avatarUrl: 'https://pbs.twimg.com/profile_images/988613046510628866/Io1ZQUpy_400x400.jpg', // TODO: include avatarUrl
       createdAt: getDateString(post.created_at, post.profile_timezone, {
         twentyFourHourTime: post.twentyfour_hour_time,
       }),
