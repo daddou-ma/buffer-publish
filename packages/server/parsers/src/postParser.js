@@ -220,7 +220,9 @@ module.exports = post => {
     storyDetails: {
       creatorName: '', // TODO: include creator name
       avatarUrl: '', // TODO: include avatarUrl
-      createdAt: post.created_at,
+      createdAt: getDateString(post.created_at, post.profile_timezone, {
+        twentyFourHourTime: post.twentyfour_hour_time,
+      }),
       status: post.status,
       stories: post.stories,
       twentyfourHourTime: post.twentyfour_hour_time,
