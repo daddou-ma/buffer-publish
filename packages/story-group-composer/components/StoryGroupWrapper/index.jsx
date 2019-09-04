@@ -39,11 +39,9 @@ const StoryGroupWrapper = ({
   const [viewMode, setViewMode] = useState(ADD_NOTE);
   return (
     <WrapperStyle>
-      <HeaderBarStyle>
-        <HeaderBar
-          selectedProfile={selectedProfile}
-        />
-      </HeaderBarStyle>
+      <HeaderBar
+        selectedProfile={selectedProfile}
+      />
       {viewMode === ADD_STORY &&
         <div>Add story view</div>
       }

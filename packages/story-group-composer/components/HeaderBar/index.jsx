@@ -7,6 +7,7 @@ import { Text } from '@bufferapp/ui';
 
 const AvatarContainer = styled.div`
   display: flex;
+  padding: 8px 0px 13px;
 `;
 
 const AvatarNameWrapper = styled.div`
