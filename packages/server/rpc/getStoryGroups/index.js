@@ -3,28 +3,24 @@ const rp = require('request-promise');
 const { postParser } = require('./../../parsers/src');
 const { buildPostMap } = require('./../../formatters/src');
 
-/**
- * TODO:
- * - Replace `uri` with endpoint to fetch stories groups
- * - Map result if necessary
- */
 module.exports = method(
   'getStoryGroups',
   'fetch stories groups',
-  ({ profileId, page, count = 20 }, { session }) =>
+  ({ profileId, since, before, utc = false }, { session }) =>
     rp({
-      uri: `${process.env.API_ADDR}/1/profiles/${profileId}/updates/pending.json`,
+      uri: `${process.env.API_ADDR}/1/profiles/${profileId}/story_groups/pending.json`,
       method: 'GET',
       strictSSL: !(process.env.NODE_ENV === 'development'),
       qs: {
         access_token: session.publish.accessToken,
-        page,
-        count,
+        since,
+        before,
+        utc,
       },
     })
       .then(result => JSON.parse(result))
       .then((parsedResult) => {
-        const updates = parsedResult.updates.map(postParser);
+        const updates = parsedResult.data.map(postParser);
         const mappedUpdates = buildPostMap(updates);
         return {
           total: parsedResult.total,

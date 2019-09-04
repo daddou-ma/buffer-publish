@@ -19,6 +19,10 @@ const getPostActionString = ({ post }) => {
     twentyFourHourTime: post.twentyfour_hour_time,
   })
 
+  if (post.stories) {
+    return `You will receive a reminder on ${post.day} when it's time to post.`
+  }
+
   // to run in every situation except when can_send_direct is explicitly false.
   // if pinned is explicitly set to true, then post is not custom scheduled
   if (
@@ -76,7 +80,9 @@ const getRetweetProfileInfo = post => {
 }
 
 const getPostType = ({ post }) => {
-  if (!post.media || post.retweet) {
+  if (post.stories) {
+    return 'storyGroup';
+  } else if (!post.media || post.retweet) {
     return 'text'
   } else if (post.media && post.media.picture && !post.extra_media) {
     return 'image'
@@ -215,5 +221,8 @@ module.exports = post => {
     sharedBy: post.shared_by,
     commentEnabled: post.comment_enabled,
     commentText: post.comment_text,
+    status: post.status,
+    stories: post.stories,
+    twentyfourHourTime: post.twentyfour_hour_time,
   };
 };

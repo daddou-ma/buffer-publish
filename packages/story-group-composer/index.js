@@ -16,8 +16,14 @@ export default connect(
     onDateTimeSlotPickerSubmit: (scheduledAt) => {
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
+    onCreateStoryGroup: (scheduledAt) => {
+      dispatch(actions.handleSaveStoryGroup(scheduledAt));
+    },
     onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
       dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
+    },
+    onDeleteStoryGroup: (storyGroupId) => {
+      dispatch(actions.handleDeleteStoryGroup(storyGroupId));
     },
   }),
 )(StoryGroupPopover);

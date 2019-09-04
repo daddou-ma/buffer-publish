@@ -24,16 +24,23 @@ const StoryGroupWrapper = ({
   uses24hTime,
   timezone,
   weekStartsMonday,
+  onCreateStoryGroup,
   onUpdateStoryGroup,
+  onDeleteStoryGroup,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
 
   return (
     <WrapperStyle>
-      {viewMode === ADD_STORY &&
-        <div>Add story view <div onClick={() => onUpdateStoryGroup('', '', '')}>Update</div></div>
-      }
+      {viewMode === ADD_STORY && (
+        <div>
+          Add story view
+          <div onClick={() => onUpdateStoryGroup('', '', '')}> Update</div>
+          <div onClick={() => onCreateStoryGroup('')}> Create</div>
+          <div onClick={() => onDeleteStoryGroup('')}> Delete</div>
+        </div>
+      )}
       {viewMode === ADD_NOTE &&
         <div>Add note view</div>
       }
