@@ -221,8 +221,13 @@ module.exports = post => {
     sharedBy: post.shared_by,
     commentEnabled: post.comment_enabled,
     commentText: post.comment_text,
-    status: post.status,
-    stories: post.stories,
-    twentyfourHourTime: post.twentyfour_hour_time,
+    storyDetails: {
+      creatorName: '', // TODO: include creator name
+      avatarUrl: '', // TODO: include avatarUrl
+      createdAt: post.created_at,
+      status: post.status,
+      stories: post.stories,
+      twentyfourHourTime: post.twentyfour_hour_time,
+    }
   };
 };

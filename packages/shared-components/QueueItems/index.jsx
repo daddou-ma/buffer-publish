@@ -14,7 +14,7 @@ import { PostEmptySlot } from '@bufferapp/publish-shared-components';
 import TextPost from '../TextPost';
 import ImagePost from '../ImagePost';
 import MultipleImagesPost from '../MultipleImagesPost';
-import StoryGroupCard from '../StoryGroupCard';
+import Story from '../Story';
 import LinkPost from '../LinkPost';
 import VideoPost from '../VideoPost';
 import PostDragWrapper from '../PostDragWrapper';
@@ -62,7 +62,7 @@ const postTypeComponentMap = new Map([
   ['multipleImage', MultipleImagesPost],
   ['link', LinkPost],
   ['video', VideoPost],
-  ['storyGroup', StoryGroupCard],
+  ['storyGroup', Story],
 ]);
 
 const draftTypeComponentMap = new Map([
@@ -71,7 +71,7 @@ const draftTypeComponentMap = new Map([
   ['multipleImage', MultipleImagesDraft],
   ['link', LinkDraft],
   ['video', VideoDraft],
-  ['storyGroup', StoryGroupCard],
+  ['storyGroup', Story],
 ]);
 
 /* eslint-disable react/prop-types */
