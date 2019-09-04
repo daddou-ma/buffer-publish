@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MediaTypes } from '@bufferapp/publish-constants';
 import Modal from '../__legacy-buffer-web-shared-components__/modal/modal';
 import styles from './css/MediaZoomBox.css';
 import ImageDescriptionInput from '../components/ImageDescriptionInput';
-import { MediaTypes } from '../AppConstants';
 import { getHumanReadableSize } from '../utils/StringUtils';
 
 class MediaZoomBox extends React.Component {

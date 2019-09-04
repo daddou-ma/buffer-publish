@@ -1,4 +1,5 @@
-import { ActionTypes, AppEnvironments } from '../AppConstants';
+import { AppEnvironments } from '@bufferapp/publish-constants';
+import { ActionTypes } from '../AppConstants';
 import { rawProfilesData, fakeMetaData } from './stubData';
 
 jest.dontMock('../stores/AppStore');

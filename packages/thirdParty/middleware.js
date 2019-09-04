@@ -2,6 +2,9 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { getPageNameFromPath, getChannelIfNeeded } from '@bufferapp/publish-analytics-middleware/utils/Pathname';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes } from './reducer';
 
 import {
@@ -183,6 +186,27 @@ export default ({ dispatch, getState }) => next => (action) => {
         }
       }
 
+      break;
+    }
+    case LOCATION_CHANGE: {
+      const path = action.payload.location.pathname;
+      /* when a user first hits publish.buffer.com, we select a profile for them and the routes changes
+       We don't want to track the initial load before the profile is selected */
+      if (path !== '/') {
+        const metadata = {
+          platform: 'new_publish',
+          product: 'publish',
+          name: getPageNameFromPath(path) || null,
+          path,
+          title: document.title || null,
+          url: window.location.origin || null,
+          referrer: document.referrer || null,
+          search: action.payload.search || null,
+          // don't need channel if route isnt associated with profileId
+          channel: getChannelIfNeeded({ path, getState }),
+        };
+        dispatch(analyticsActions.trackEvent('Page Viewed', metadata));
+      }
       break;
     }
     default:

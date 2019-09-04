@@ -11,8 +11,6 @@ export default connect(
   }),
   dispatch => ({
     onOverlayClick: () => {
-      // TO-DO: will need to add HIDE_COMPOSER logic in the stories queue once completed
-      // We'll need to add the stories tab case in the close-composer-confirmation-modal middleware
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
     onDateTimeSlotPickerSubmit: (timestamp) => {

@@ -7,15 +7,21 @@ import PropTypes from 'prop-types';
 import ReactDOMServer from 'react-dom/server';
 import moment from 'moment-timezone';
 import partition from 'lodash.partition';
+import { AppEnvironments } from '@bufferapp/publish-constants';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import { AppEnvironments, QueueingTypes, NotificationScopes, Services, SaveButtonTypes, InlineSaveButtonTypes }
-  from '../AppConstants';
-import Dropdown, { DropdownTrigger, DropdownContent } from '../components/Dropdown';
-import DateTimeSlotPicker from '../components/DateTimeSlotPicker';
-import UpdateSaverItem from '../components/UpdateSaverItem';
-import OmniboxButtons from '../components/OmniboxButtons';
-import NotificationContainer from '../components/NotificationContainer';
-import TooltipList from '../components/TooltipList';
+import {
+  QueueingTypes,
+  NotificationScopes,
+  Services,
+  SaveButtonTypes,
+  InlineSaveButtonTypes,
+} from '../AppConstants';
+import Dropdown, { DropdownTrigger, DropdownContent } from './Dropdown';
+import DateTimeSlotPicker from './DateTimeSlotPicker';
+import UpdateSaverItem from './UpdateSaverItem';
+import OmniboxButtons from './OmniboxButtons';
+import NotificationContainer from './NotificationContainer';
+import TooltipList from './TooltipList';
 import styles from './css/UpdateSaver.css';
 
 const getUpdateSaverState = () => ({

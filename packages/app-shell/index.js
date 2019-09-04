@@ -1,7 +1,7 @@
 import { actions as appSwitcherActions } from '@bufferapp/publish-app-switcher';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { generatePreferencePageRoute } from '@bufferapp/publish-routes';
+import { generatePreferencePageRoute, newBusinessTrialistsRoute } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
 
@@ -16,7 +16,10 @@ export default connect(
     showSwitchPlan: state.appShell.showSwitchPlan,
     showManageTeam: state.appShell.showManageTeam,
     showStartProTrial: state.appShell.showStartProTrial,
+    hideAppShell: (!state.appShell.sawOnboardingPage
+      && state.router.location.pathname === newBusinessTrialistsRoute),
   }),
+
   dispatch => ({
     openPreferences() {
       dispatch(

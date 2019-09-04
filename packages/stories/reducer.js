@@ -4,6 +4,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('STORIES', {
   OPEN_STORIES_COMPOSER: 0,
+  HIDE_STORIES_COMPOSER: 0,
 });
 
 export const initialState = {
@@ -106,6 +107,13 @@ export default (state = initialState, action) => {
         emptySlotMode: action.emptySlotMode,
         emptySlotData: action.emptySlotData,
       };
+    case actionTypes.HIDE_STORIES_COMPOSER:
+      return {
+        ...state,
+        showStoriesComposer: false,
+        editMode: false,
+        emptySlotMode: false,
+      };
     default:
       return state;
   }
@@ -120,5 +128,8 @@ export const actions = {
   }),
   handleComposerPlaceholderClick: () => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,
+  }),
+  handleCloseStoriesComposer: () => ({
+    type: actionTypes.HIDE_STORIES_COMPOSER,
   }),
 };

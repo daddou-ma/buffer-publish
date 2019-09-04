@@ -127,29 +127,36 @@ const AppShell = ({
   bannerOptions,
   onCloseBanner,
   bannerKey,
-}) => (
-  <BDSAppShell
-    content={children}
-    activeProduct="publish"
-    user={{
-      ...user,
-      menuItems: generateUserMenuItems({
-        showReturnToClassic,
-        showSwitchPlan,
-        showManageTeam,
-        showStartProTrial,
-        returnToClassic,
-        switchPlan,
-        openPreferences,
-      }),
-    }}
-    helpMenuItems={helpMenuItems}
-    bannerOptions={bannerOptions ? {
-      ...bannerOptions,
-      onCloseBanner: () => onCloseBanner({ key: bannerKey }),
-    } : null}
-  />
-);
+  hideAppShell,
+}) => {
+  if (hideAppShell) {
+    return children;
+  }
+
+  return (
+    <BDSAppShell
+      content={children}
+      activeProduct="publish"
+      user={{
+        ...user,
+        menuItems: generateUserMenuItems({
+          showReturnToClassic,
+          showSwitchPlan,
+          showManageTeam,
+          showStartProTrial,
+          returnToClassic,
+          switchPlan,
+          openPreferences,
+        }),
+      }}
+      helpMenuItems={helpMenuItems}
+      bannerOptions={bannerOptions ? {
+        ...bannerOptions,
+        onCloseBanner: () => onCloseBanner({ key: bannerKey }),
+      } : null}
+    />
+  );
+};
 
 AppShell.propTypes = {
   children: PropTypes.node.isRequired,
@@ -173,6 +180,7 @@ AppShell.propTypes = {
       __html: PropTypes.string,
     }),
   }),
+  hideAppShell: PropTypes.bool.isRequired,
 };
 
 AppShell.defaultProps = {
