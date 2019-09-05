@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Button } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
@@ -30,6 +31,9 @@ const StoryGroupWrapper = ({
   translations,
   selectedProfile,
   saveNote,
+  onCreateStoryGroup,
+  onUpdateStoryGroup,
+  onDeleteStoryGroup,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_NOTE);
@@ -40,7 +44,13 @@ const StoryGroupWrapper = ({
           selectedProfile={selectedProfile}
         />
         {viewMode === ADD_STORY &&
-          <div>Add story view</div>
+          /* TODO: delete this button once the create story group is in place */
+          (<Button
+            type="primary"
+            size="small"
+            label="Create"
+            onClick={() => onCreateStoryGroup()}
+          />)
         }
         {viewMode === ADD_NOTE && (
           <AddNote

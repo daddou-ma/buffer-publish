@@ -19,7 +19,6 @@ describe('middleware', () => {
         },
       ],
       isOnBusinessTrial: false,
-      hasOnboardingFeatureFlip: false,
       selectedProfileId: '1234',
     },
     tabs: {

@@ -14,6 +14,9 @@ const StoryGroupPopover = ({
   weekStartsMonday,
   selectedProfile,
   saveNote,
+  onCreateStoryGroup,
+  onUpdateStoryGroup,
+  onDeleteStoryGroup,
 }) => (
   <Popover
     width="100%"
@@ -28,6 +31,9 @@ const StoryGroupPopover = ({
       selectedProfile={selectedProfile}
       saveNote={saveNote}
       translations={translations}
+      onCreateStoryGroup={onCreateStoryGroup}
+      onUpdateStoryGroup={onUpdateStoryGroup}
+      onDeleteStoryGroup={onDeleteStoryGroup}
     />
   </Popover>
 );

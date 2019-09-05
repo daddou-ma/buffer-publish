@@ -5,15 +5,16 @@ import { actionTypes } from './reducer';
 describe('middleware', () => {
   const dispatch = jest.fn();
   const next = jest.fn();
+  window.location = jest.fn();
 
-  test('should export middleware', () => {
+  it('exports middleware', () => {
     expect(middleware)
       .toBeDefined();
   });
 
-  test('should fetch readMessage when CONNECT_SOCIAL_ACCOUNT', () => {
+  it('fetches readMessage when CONNECT_SOCIAL_ACCOUNT_ONBOARDING', () => {
     const action = {
-      type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
+      type: actionTypes.CONNECT_SOCIAL_ACCOUNT_ONBOARDING,
     };
     middleware({ dispatch })(next)(action);
     expect(next)
@@ -27,7 +28,7 @@ describe('middleware', () => {
       }));
   });
 
-  test('should fetch readMessage when SKIP_STEP', () => {
+  it('fetches readMessage when SKIP_STEP_ONBOARDING', () => {
     const action = {
       type: actionTypes.SKIP_STEP,
     };
