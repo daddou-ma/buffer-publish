@@ -11,9 +11,12 @@ module.exports = (storyGroup) => {
     scheduledAt: storyGroup.scheduled_at,
     isPastDue,
     type: 'storyGroup',
+    profileId: storyGroup.profile_id,
+    profileTimezone: storyGroup.profile_timezone,
     storyDetails: {
-      creatorName: 'Joel', // TODO: include creator name
-      avatarUrl: 'https://pbs.twimg.com/profile_images/988613046510628866/Io1ZQUpy_400x400.jpg', // TODO: include avatarUrl
+      creatorName: storyGroup.user_name,
+      avatarUrl: storyGroup.user_avatar,
+      dueTime: storyGroup.due_time,
       createdAt: getDateString(storyGroup.created_at, storyGroup.profile_timezone, {
         twentyFourHourTime: storyGroup.twentyfour_hour_time,
       }),
