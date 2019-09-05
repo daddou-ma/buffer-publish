@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import HeaderBar from '../HeaderBar';
+import AddNote from '../AddNote';
+
+const ADD_STORY = 'addStory';
+const ADD_NOTE = 'addNote';
 
 const WrapperStyle = styled.div`
   width: 686px;
@@ -11,10 +16,8 @@ const WrapperStyle = styled.div`
   top: 0;
   right: 0;
   border-radius: 3px;
+  padding: 16px;
 `;
-
-const ADD_STORY = 'addStory';
-const ADD_NOTE = 'addNote';
 
 /*
  * Wrapper to make sure to display add story view or add note view
@@ -25,35 +28,48 @@ const StoryGroupWrapper = ({
   uses24hTime,
   timezone,
   weekStartsMonday,
+  translations,
+  selectedProfile,
+  saveNote,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
-
   return (
-    <WrapperStyle>
-      {viewMode === ADD_STORY && (
-        <div>
-          Add story view
-          {/* TODO: delete this button once the create story group is in place */}
-          <Button
+    <Fragment>
+      <WrapperStyle>
+        <HeaderBar
+          selectedProfile={selectedProfile}
+        />
+        {viewMode === ADD_STORY &&
+          /* TODO: delete this button once the create story group is in place */
+          (<Button
             type="primary"
             size="small"
             label="Create"
             onClick={() => onCreateStoryGroup()}
+          />)
+        }
+        {viewMode === ADD_NOTE && (
+          <AddNote
+            translations={translations}
+            onCancelClick={() => setViewMode(ADD_STORY)}
+            onSaveNoteClick={({ storyId, note }) => {
+              saveNote({ storyId, note });
+              setViewMode(ADD_STORY);
+            }}
           />
-        </div>
-      )}
-      {viewMode === ADD_NOTE &&
-        <div>Add note view</div>
-      }
-    </WrapperStyle>
+        )}
+      </WrapperStyle>
+    </Fragment>
   );
 };
 
 StoryGroupWrapper.propTypes = {
+  saveNote: PropTypes.func.isRequired,
+  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   ...DateTimeSlotPickerWrapper.propTypes,
 };
 

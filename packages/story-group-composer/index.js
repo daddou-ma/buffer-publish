@@ -8,6 +8,8 @@ export default connect(
     uses24hTime: state.appSidebar.user.uses_24h_time,
     timezone: state.profileSidebar.selectedProfile.timezone,
     weekStartsMonday: state.appSidebar.user.week_starts_monday,
+    selectedProfile: state.profileSidebar.selectedProfile,
+    translations: state.i18n.translations['story-group-composer'],
   }),
   dispatch => ({
     onOverlayClick: () => {
@@ -21,6 +23,9 @@ export default connect(
     },
     onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
       dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
+    },
+    saveNote: ({ note, storyId }) => {
+      dispatch(actions.handleSaveStoryNote({ note, storyId }));
     },
   }),
 )(StoryGroupPopover);

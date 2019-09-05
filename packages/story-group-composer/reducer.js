@@ -3,12 +3,17 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 
 export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_GROUP: 0,
+  SAVE_STORY_NOTE: 0,
   UPDATE_STORY_GROUP: 0,
 });
 
 export const initialState = {
-  draft: null,
+  draft: {},
 };
+
+const updateStoryNote = ({ stories = [], storyId, note }) => (
+  stories.map(story => (story.id === storyId ? { ...story, note } : story))
+);
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -28,6 +33,14 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case actionTypes.SAVE_STORY_NOTE: {
+      const { storyId, note } = action;
+      const { stories } = state.draft;
+      return {
+        ...state,
+        draft: { ...state.draft, stories: updateStoryNote({ stories, storyId, note }) },
+      };
+    }
     default:
       return state;
   }
@@ -43,5 +56,10 @@ export const actions = {
     storyGroupId,
     scheduledAt,
     stories,
+  }),
+  handleSaveStoryNote: ({ storyId, note }) => ({
+    type: actionTypes.SAVE_STORY_NOTE,
+    storyId,
+    note,
   }),
 };
