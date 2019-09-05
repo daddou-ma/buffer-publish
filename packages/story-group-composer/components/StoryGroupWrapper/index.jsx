@@ -27,30 +27,39 @@ const StoryGroupWrapper = ({
   uses24hTime,
   timezone,
   weekStartsMonday,
+  translations,
   selectedProfile,
   saveNote,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
-  const [viewMode, setViewMode] = useState(ADD_STORY);
+  const [viewMode, setViewMode] = useState(ADD_NOTE);
   return (
-    <WrapperStyle>
-      <HeaderBar
-        selectedProfile={selectedProfile}
-      />
-      {viewMode === ADD_STORY &&
-        <div>Add story view</div>
-      }
-      {viewMode === ADD_NOTE && (
-        <AddNote
-          setViewMode={setViewMode}
-          saveNote={saveNote}
+    <Fragment>
+      <WrapperStyle>
+        <HeaderBar
+          selectedProfile={selectedProfile}
         />
-      )}
-    </WrapperStyle>
+        {viewMode === ADD_STORY &&
+          <div>Add story view</div>
+        }
+        {viewMode === ADD_NOTE && (
+          <AddNote
+            translations={translations}
+            onCancelClick={() => setViewMode(ADD_STORY)}
+            onSaveNoteClick={({ storyId, note }) => {
+              saveNote({ storyId, note });
+              setViewMode(ADD_STORY);
+            }}
+          />
+        )}
+      </WrapperStyle>
+    </Fragment>
   );
 };
 
 StoryGroupWrapper.propTypes = {
+  saveNote: PropTypes.func.isRequired,
+  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   ...DateTimeSlotPickerWrapper.propTypes,
 };
 

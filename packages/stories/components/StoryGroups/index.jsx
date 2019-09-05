@@ -66,22 +66,14 @@ const StoryGroups = ({
       <div className={containerStyle}>
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
-            {showStoriesComposer && !editMode && (
-              <React.Fragment>
-                <StoryGroupPopover />
-              </React.Fragment>
-            )}
+            {showStoriesComposer && !editMode && <StoryGroupPopover />}
             <ComposerInput
               placeholder="What would you like to add to your Story?"
               onPlaceholderClick={onComposerPlaceholderClick}
             />
           </div>
         </div>
-        {showStoriesComposer && editMode && (
-          <React.Fragment>
-            {/* TODO: add here <StoryGroupPopover /> */}
-          </React.Fragment>
-        )}
+        {showStoriesComposer && editMode && <StoryGroupPopover />}
         <QueueItems
           items={storyGroups}
           onCancelConfirmClick={onCancelConfirmClick}
