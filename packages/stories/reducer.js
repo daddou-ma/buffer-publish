@@ -5,6 +5,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('STORIES', {
   OPEN_STORIES_COMPOSER: 0,
   HIDE_STORIES_COMPOSER: 0,
+  DELETE_STORY_GROUP: 0,
   OPEN_PREVIEW: 0,
 });
 
@@ -140,5 +141,9 @@ export const actions = {
   }),
   handlePreviewClick: () => ({
     type: actionTypes.OPEN_PREVIEW,
+  }),
+  handleDeleteStoryGroup: ({ storyGroup }) => ({
+    type: actionTypes.DELETE_STORY_GROUP,
+    storyGroup: storyGroup.post,
   }),
 };

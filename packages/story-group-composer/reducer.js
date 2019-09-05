@@ -4,7 +4,6 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_GROUP: 0,
   UPDATE_STORY_GROUP: 0,
-  DELETE_STORY_GROUP: 0,
 });
 
 export const initialState = {
@@ -44,9 +43,5 @@ export const actions = {
     storyGroupId,
     scheduledAt,
     stories,
-  }),
-  handleDeleteStoryGroup: storyGroupId => ({
-    type: actionTypes.DELETE_STORY_GROUP,
-    storyGroupId,
   }),
 };

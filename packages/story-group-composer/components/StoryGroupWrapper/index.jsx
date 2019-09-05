@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Button } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 
 const WrapperStyle = styled.div`
@@ -34,7 +35,16 @@ const StoryGroupWrapper = ({
   return (
     <WrapperStyle>
       {viewMode === ADD_STORY && (
-        <div>Add story view</div>
+        <div>
+          Add story view
+          {/* TODO: delete this button once the create story group is in place */}
+          <Button
+            type="primary"
+            size="small"
+            label="Create"
+            onClick={() => onCreateStoryGroup()}
+          />
+        </div>
       )}
       {viewMode === ADD_NOTE &&
         <div>Add note view</div>

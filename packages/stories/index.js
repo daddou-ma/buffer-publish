@@ -53,6 +53,9 @@ export default connect(
     onPreviewClick: () => {
       dispatch(actions.handlePreviewClick());
     },
+    onDeleteConfirmClick: (storyGroup) => {
+      dispatch(actions.handleDeleteStoryGroup({ storyGroup }));
+    },
   }),
 )(StoryGroups);
 

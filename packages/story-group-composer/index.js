@@ -22,9 +22,6 @@ export default connect(
     onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
       dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
     },
-    onDeleteStoryGroup: (storyGroupId) => {
-      dispatch(actions.handleDeleteStoryGroup(storyGroupId));
-    },
   }),
 )(StoryGroupPopover);
 
