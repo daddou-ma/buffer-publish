@@ -36,7 +36,7 @@ const StoryGroupWrapper = ({
   onDeleteStoryGroup,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
-  const [viewMode, setViewMode] = useState(ADD_NOTE);
+  const [viewMode, setViewMode] = useState(ADD_STORY);
   return (
     <Fragment>
       <WrapperStyle>

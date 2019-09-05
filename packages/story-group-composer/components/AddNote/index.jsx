@@ -19,10 +19,14 @@ const ButtonStyle = styled.div`
 `;
 
 const imageStyle = {
-  width: '180px',
-  height: '320px',
-  objectFit: 'cover',
+
 };
+
+const StyledImage = styled.img`
+  width: 180px;
+  height: 320px;
+  object-fit: cover;
+`;
 
 const AddNote = ({
   onSaveNoteClick,
@@ -41,8 +45,7 @@ const AddNote = ({
     <Fragment>
       <BodyWrapperStyle>
         <div>
-          <img
-            style={imageStyle}
+          <StyledImage
             src={story.thumbnail}
             alt={translations.noteImageAlt}
           />
