@@ -44,8 +44,17 @@ export default connect(
     onComposerPlaceholderClick: () => {
       dispatch(actions.handleComposerPlaceholderClick());
     },
+    onEditClick: () => {
+      dispatch(actions.handleEditStoryGroupClick());
+    },
     handleCloseStoriesComposer: () => {
       dispatch(actions.handleCloseStoriesComposer());
+    },
+    onPreviewClick: () => {
+      dispatch(actions.handlePreviewClick());
+    },
+    onDeleteConfirmClick: (storyGroup) => {
+      dispatch(actions.handleDeleteStoryGroup({ storyGroup }));
     },
   }),
 )(StoryGroups);

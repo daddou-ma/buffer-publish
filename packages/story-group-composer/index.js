@@ -13,8 +13,14 @@ export default connect(
     onOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
-    onDateTimeSlotPickerSubmit: (timestamp) => {
-      dispatch(actions.handleSaveStoryGroup(timestamp));
+    onDateTimeSlotPickerSubmit: (scheduledAt) => {
+      dispatch(actions.handleSaveStoryGroup(scheduledAt));
+    },
+    onCreateStoryGroup: (scheduledAt) => {
+      dispatch(actions.handleSaveStoryGroup(scheduledAt));
+    },
+    onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
+      dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
     },
   }),
 )(StoryGroupPopover);

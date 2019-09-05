@@ -5,6 +5,8 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('STORIES', {
   OPEN_STORIES_COMPOSER: 0,
   HIDE_STORIES_COMPOSER: 0,
+  DELETE_STORY_GROUP: 0,
+  OPEN_PREVIEW: 0,
 });
 
 export const initialState = {
@@ -39,7 +41,7 @@ const determineIfMoreToLoad = (action, currentPosts) => {
 
 const postsReducer = (state = {}, action) => {
   switch (action.type) {
-    case `storyGroups_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { updates } = action.result;
       if (action.args.isFetchingMore) {
         return { ...state, ...updates };
@@ -53,13 +55,13 @@ const postsReducer = (state = {}, action) => {
 
 const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
-    case `storyGroups_${dataFetchActionTypes.FETCH_START}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
         loading: !action.args.isFetchingMore && !action.args.hideLoading,
         loadingMore: action.args.isFetchingMore,
       };
-    case `storyGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         loading: false,
@@ -69,7 +71,7 @@ const profileReducer = (state = profileInitialState, action) => {
         posts: postsReducer(state.posts, action),
         total: action.result.total,
       };
-    case `storyGroups_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         loading: false,
@@ -85,9 +87,9 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
-    case `storyGroups_${dataFetchActionTypes.FETCH_START}`:
-    case `storyGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `storyGroups_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -126,10 +128,22 @@ export const actions = {
     emptySlotData,
     profileId,
   }),
+  handleEditStoryGroupClick: () => ({
+    type: actionTypes.OPEN_STORIES_COMPOSER,
+    editMode: true,
+  }),
   handleComposerPlaceholderClick: () => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,
+    editMode: false,
   }),
   handleCloseStoriesComposer: () => ({
     type: actionTypes.HIDE_STORIES_COMPOSER,
+  }),
+  handlePreviewClick: () => ({
+    type: actionTypes.OPEN_PREVIEW,
+  }),
+  handleDeleteStoryGroup: ({ storyGroup }) => ({
+    type: actionTypes.DELETE_STORY_GROUP,
+    storyGroup: storyGroup.post,
   }),
 };

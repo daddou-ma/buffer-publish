@@ -14,6 +14,7 @@ import { PostEmptySlot } from '@bufferapp/publish-shared-components';
 import TextPost from '../TextPost';
 import ImagePost from '../ImagePost';
 import MultipleImagesPost from '../MultipleImagesPost';
+import Story from '../Story';
 import LinkPost from '../LinkPost';
 import VideoPost from '../VideoPost';
 import PostDragWrapper from '../PostDragWrapper';
@@ -61,6 +62,7 @@ const postTypeComponentMap = new Map([
   ['multipleImage', MultipleImagesPost],
   ['link', LinkPost],
   ['video', VideoPost],
+  ['storyGroup', Story],
 ]);
 
 const draftTypeComponentMap = new Map([
@@ -69,6 +71,7 @@ const draftTypeComponentMap = new Map([
   ['multipleImage', MultipleImagesDraft],
   ['link', LinkDraft],
   ['video', VideoDraft],
+  ['storyGroup', Story],
 ]);
 
 /* eslint-disable react/prop-types */
@@ -92,6 +95,7 @@ const renderPost = ({
   draggable,
   basic,
   hasFirstCommentFlip,
+  onPreviewClick,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -108,6 +112,7 @@ const renderPost = ({
     onImageClickPrev: () => onImageClickPrev({ post }),
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
+    onPreviewClick: () => onPreviewClick({ post }),
     onDropPost,
     onSwapPosts,
     hasFirstCommentFlip,

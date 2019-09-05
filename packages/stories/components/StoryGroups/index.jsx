@@ -61,6 +61,7 @@ const StoryGroups = ({
   onShareNowClick,
   onCalendarClick,
   onCancelConfirmClick,
+  onPreviewClick,
 }) => {
   if (loading) {
     return (
@@ -114,6 +115,7 @@ const StoryGroups = ({
           type="stories"
           hasFirstCommentFlip={hasFirstCommentFlip}
           isBusinessAccount={isBusinessAccount}
+          onPreviewClick={onPreviewClick}
         />
       </ContainerStyle>
     </ErrorBoundary>
@@ -139,6 +141,7 @@ StoryGroups.propTypes = {
   onCalendarClick: PropTypes.func,
   onCancelConfirmClick: PropTypes.func,
   onComposerPlaceholderClick: PropTypes.func,
+  onPreviewClick: PropTypes.func,
 };
 
 StoryGroups.defaultProps = {
@@ -156,6 +159,7 @@ StoryGroups.defaultProps = {
   onCalendarClick: () => {},
   onCancelConfirmClick: () => {},
   onComposerPlaceholderClick: () => {},
+  onPreviewClick: () => {},
 };
 
 export default WithFeatureLoader(StoryGroups);
