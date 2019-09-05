@@ -4,8 +4,8 @@ module.exports = (storyGroup) => {
   const isPastDue = isInThePast(storyGroup.scheduled_at)
 
   return {
-    day: storyGroup.day,
     id: storyGroup.id,
+    day: storyGroup.day,
     createdAt: storyGroup.created_at,
     scheduled_at: storyGroup.scheduled_at,
     scheduledAt: storyGroup.scheduled_at,
