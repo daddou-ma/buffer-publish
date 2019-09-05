@@ -7,7 +7,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
 });
 
 export const initialState = {
-  draft: null,
+  draft: {},
 };
 
 const updateStoryNote = ({ stories = [], storyId, note }) => (

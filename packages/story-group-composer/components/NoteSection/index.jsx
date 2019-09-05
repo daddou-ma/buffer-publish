@@ -49,7 +49,7 @@ const SubtextWrapper = styled.span`
   font-size: 14px;
 `;
 
-const NoteSection = ({ note, setNote }) => (
+const NoteSection = ({ note, setNote, translations }) => (
   <Fragment>
     <NoteWrapper>
       <NoteHeader>
@@ -64,12 +64,12 @@ const NoteSection = ({ note, setNote }) => (
           type="input"
           value={note}
           onChange={setNote}
-          placeholder="Add your caption or a note to self"
+          placeholder={translations.notePlaceholder}
         />
       </TextAreaWrapper>
       <SubtextWrapper>
         <Text>
-          When it comes time to post, you'll be able to copy and paste your note into Instagram.
+          {translations.noteSubText}
         </Text>
       </SubtextWrapper>
     </NoteWrapper>
@@ -79,6 +79,10 @@ const NoteSection = ({ note, setNote }) => (
 NoteSection.propTypes = {
   note: PropTypes.string,
   setNote: PropTypes.func.isRequired,
+  translations: PropTypes.shape({
+    notePlaceholder: PropTypes.string,
+    noteSubText: PropTypes.string,
+  }).isRequired,
 };
 
 NoteSection.defaultProps = {

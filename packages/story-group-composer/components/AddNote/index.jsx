@@ -25,14 +25,14 @@ const imageStyle = {
 };
 
 const AddNote = ({
-  saveNote,
-  setViewMode,
+  onSaveNoteClick,
+  onCancelClick,
+  translations,
   // dummy data until we get uploading/adding story done
   story = { note: null, id: 1, thumbnail: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80'},
 }) => {
-  // hooks: https://reactjs.org/docs/hooks-state.html
   const [note, setNote] = useState(story.note);
-  const setStoryNote = (event) => {
+  const setNoteValue = (event) => {
     const { value } = event.target;
     setNote(value);
   };
@@ -44,26 +44,27 @@ const AddNote = ({
           <img
             style={imageStyle}
             src={story.thumbnail}
-            alt="Instagram story media"
+            alt={translations.noteImageAlt}
           />
         </div>
-        <NoteSection note={story.note} setNote={setStoryNote} />
+        <NoteSection
+          note={story.note}
+          setNote={setNoteValue}
+          translations={translations}
+        />
       </BodyWrapperStyle>
       <FooterBar>
         <ButtonStyle>
           <Button
             type="text"
-            label="Cancel"
-            onClick={() => setViewMode('addStory')}
+            label={translations.cancelNoteButton}
+            onClick={onCancelClick}
           />
         </ButtonStyle>
         <Button
           type="primary"
-          label="Save Note"
-          onClick={() => {
-            saveNote({ storyId: story.id, note });
-            setViewMode('addStory');
-          }}
+          label={translations.saveNoteButton}
+          onClick={() => onSaveNoteClick({ storyId: story.id, note })}
         />
       </FooterBar>
     </Fragment>
@@ -71,13 +72,18 @@ const AddNote = ({
 };
 
 AddNote.propTypes = {
+  onSaveNoteClick: PropTypes.func.isRequired,
+  onCancelClick: PropTypes.func.isRequired,
   story: PropTypes.shape({
     thumbnail: PropTypes.string,
     note: PropTypes.string,
     id: PropTypes.number,
   }).isRequired,
-  saveNote: PropTypes.func.isRequired,
-  setViewMode: PropTypes.func.isRequired,
+  translations: PropTypes.shape({
+    saveNoteButton: PropTypes.string,
+    cancelNoteButton: PropTypes.string,
+    noteImageAlt: PropTypes.string,
+  }).isRequired,
 };
 
 export default AddNote;

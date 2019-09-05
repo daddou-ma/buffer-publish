@@ -9,6 +9,7 @@ export default connect(
     timezone: state.profileSidebar.selectedProfile.timezone,
     weekStartsMonday: state.appSidebar.user.week_starts_monday,
     selectedProfile: state.profileSidebar.selectedProfile,
+    translations: state.i18n.translations['story-group-composer'],
   }),
   dispatch => ({
     onOverlayClick: () => {
