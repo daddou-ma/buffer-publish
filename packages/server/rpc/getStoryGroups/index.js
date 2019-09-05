@@ -1,6 +1,6 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { postParser } = require('./../../parsers/src');
+const { storyGroupParser } = require('./../../parsers/src');
 const { buildPostMap } = require('./../../formatters/src');
 
 module.exports = method(
@@ -20,7 +20,7 @@ module.exports = method(
     })
       .then(result => JSON.parse(result))
       .then((parsedResult) => {
-        const updates = parsedResult.data.map(postParser);
+        const updates = parsedResult.data.map(storyGroupParser);
         const mappedUpdates = buildPostMap(updates);
         return {
           total: parsedResult.total,
