@@ -27,7 +27,10 @@ class Uploader {
   upload (file) {
     return this.uploadToS3(file)
       .then((uploadKey) => this.uploadToBuffer(uploadKey))
-      .then((response) => this.attachDimensions(response, { key: this.imageDimensionsKey, userId: this.userId }))
+      .then((response) => this.attachDimensions(response, {
+        key: this.imageDimensionsKey,
+        userId: this.userId,
+      }))
       .then((response) => this.listenToProcessingEventsForVideos(response))
       .then((response) => this.formatResponse(response));
   }

@@ -105,12 +105,12 @@ const ADD_NOTE = 'addNote';
  */
 
 const NavArrow = ({
-  prev = false,
-  hide = false,
-  incrementBy = 1,
-  selectedItem = 0,
-  setSelectedItem = null,
-}) => {
+                    prev = false,
+                    hide = false,
+                    incrementBy = 1,
+                    selectedItem = 0,
+                    setSelectedItem = null,
+                  }) => {
   if (hide) return null;
   return (
     <StyledArrow
@@ -119,12 +119,12 @@ const NavArrow = ({
         setSelectedItem(clamp(selectedItem + incrementBy, lowerBounds, upperBounds));
       }}
     >
-      {prev ? <ArrowLeft /> : <ArrowRight />}
+      {prev ? <ArrowLeft/> : <ArrowRight/>}
     </StyledArrow>
   );
 };
 
-const getCardsToShow = ({ cards = [] }) => {
+const getCardsToShow = ({cards = []}) => {
   const cardList = [];
   const sortedCards = cards.sort((a, b) => {
     if (a.order > b.order) return 1;
@@ -172,10 +172,42 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
       csrfToken: null,
       imageDimensionsKey,
       serverNotifiers: {
-        videoProcessed: (processedVideoData) => console.log('videoProcessed', { processedVideoData }),
-        profileGroupCreated: (groupData) => console.log('profileGroupCreated', { groupData }),
-        profileGroupUpdated: (groupData) => console.log('profileGroupUpdate', { groupData }),
-        profileGroupDeleted: (groupData) => console.log('profileGroupDeleted', { groupData }),
+        videoProcessed: (processedVideoData) => {
+
+          let {
+            uploadId,
+            name,
+            duration,
+            durationMs,
+            size,
+            width,
+            height,
+            url,
+            originalUrl,
+            thumbnail,
+            availableThumbnails,
+          } = processedVideoData;
+
+          // trigger this when a video has completed being processed on the server
+          console.log('videoProcessed', {
+            processedVideoData: {
+              uploadId,
+              name,
+              duration,
+              durationMs,
+              size,
+              width,
+              height,
+              url,
+              originalUrl,
+              thumbnail,
+              availableThumbnails,
+            }
+          });
+        },
+        profileGroupCreated: () => {},
+        profileGroupUpdated: () => {},
+        profileGroupDeleted: () => {},
       },
     });
 
@@ -183,7 +215,7 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
   };
 
   const notifiers = {
-    uploadStarted: ({ id, uploaderInstance }) => {
+    uploadStarted: ({ id, uploaderInstance, file }) => {
 // set upload progress to 0
 // const monitorComposerLastInteractedWith = (fn) => (draftId, ...restArgs) => {
 //   if (draftId === 'omni' || draftId === AppStore.getAppState().expandedComposerId) {
@@ -196,7 +228,7 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
 //   updateDraftFileUploadProgress(action.id, action.uploaderInstance, 0);
 // })();
 
-      //console.log('uploadStarted', { id, uploaderInstance });
+      console.log('uploadStarted', { id, uploaderInstance, file });
     },
     uploadedLinkThumbnail: ({
       id,
@@ -204,36 +236,37 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
       url,
       width,
       height,
+      file,
     }) => {
       // set upload progress to 0
-// const updateDraftFileUploadProgress = (id, uploaderInstance, progress) => {
-//   const { filesUploadProgress } = ComposerStore.getDraft(id);
-//
-//   if (progress !== null) filesUploadProgress.set(uploaderInstance, progress);
-//   else filesUploadProgress.delete(uploaderInstance);
-// };
-//
-// const addDraftUploadedLinkThumbnail = (id, url, width, height) => {
-//   const draftsSharedData = ComposerStore.getDraftsSharedData();
-//   const formattedImage = getNewImage({ url, width, height });
-//
-// /**
-//  * It's important for the three collections below to share the same formattedImage
-//  * reference, so that a change made in one location propagates to all other places
-//  * seamlessly.
-//  * TODO: Re-implement this logic in an immutable fashion: it'll be a bit more work
-//  * to manually search and update all places where an image can be stored, but it'll
-//  * be much more solid.
-//  * /
-//   updateDraftLinkThumbnail(id, formattedImage);
-//   addDraftLinkAvailableThumbnail(id, formattedImage);
-//   draftsSharedData.uploadedImages.push(formattedImage);
-// };
-//
-//  addDraftUploadedLinkThumbnail(action.id, action.url, action.width, action.height);
-//  updateDraftFileUploadProgress(action.id, action.uploaderInstance, null);
+      // const updateDraftFileUploadProgress = (id, uploaderInstance, progress) => {
+      //   const { filesUploadProgress } = ComposerStore.getDraft(id);
+      //
+      //   if (progress !== null) filesUploadProgress.set(uploaderInstance, progress);
+      //   else filesUploadProgress.delete(uploaderInstance);
+      // };
+      //
+      // const addDraftUploadedLinkThumbnail = (id, url, width, height) => {
+      //   const draftsSharedData = ComposerStore.getDraftsSharedData();
+      //   const formattedImage = getNewImage({ url, width, height });
+      //
+      // /**
+      //  * It's important for the three collections below to share the same formattedImage
+      //  * reference, so that a change made in one location propagates to all other places
+      //  * seamlessly.
+      //  * TODO: Re-implement this logic in an immutable fashion: it'll be a bit more work
+      //  * to manually search and update all places where an image can be stored, but it'll
+      //  * be much more solid.
+      //  * /
+      //   updateDraftLinkThumbnail(id, formattedImage);
+      //   addDraftLinkAvailableThumbnail(id, formattedImage);
+      //   draftsSharedData.uploadedImages.push(formattedImage);
+      // };
+      //
+      //  addDraftUploadedLinkThumbnail(action.id, action.url, action.width, action.height);
+      //  updateDraftFileUploadProgress(action.id, action.uploaderInstance, null);
 
-      //console.log('uploadedLinkThumbnail', { id, uploaderInstance, url, width, height });
+      console.log('uploadedLinkThumbnail', { id, uploaderInstance, url, width, height, file });
     },
     uploadedDraftImage: ({
       id,
@@ -242,22 +275,23 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
       location,
       width,
       height,
+      file,
     }) => {
-      //console.log('uploadedDraftImage', { id, uploaderInstance, url, location, width, height });
+      console.log('uploadedDraftImage', { id, uploaderInstance, url, location, width, height, file });
     },
     uploadedDraftVideo: ({
       id,
       uploaderInstance,
       uploadId,
       fileExtension,
+      file,
     }) => {
-// const addDraftProcessingVideo = (draftId, uploaderInstance, uploadId) => {
-//   state.draftsSharedData.processingVideos.set(uploadId, [draftId, uploaderInstance]);
-// };
-//
-// addDraftProcessingVideo(action.id, action.uploaderInstance, action.uploadId);
-
-      //console.log('uploadedDraftVideo',  { id, uploaderInstance, uploadId, fileExtension });
+      // const addDraftProcessingVideo = (draftId, uploaderInstance, uploadId) => {
+      //   state.draftsSharedData.processingVideos.set(uploadId, [draftId, uploaderInstance]);
+      // };
+      //
+      // addDraftProcessingVideo(action.id, action.uploaderInstance, action.uploadId);
+      console.log('uploadedDraftVideo',  { id, uploaderInstance, uploadId, fileExtension, file });
     },
     draftGifUploaded: ({
       id,
@@ -266,37 +300,38 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
       stillGifUrl,
       width,
       height,
+      file,
     }) => {
-// const addDraftUploadedGif = (draftId, url, stillGifUrl, width, height) => {
-//   const draftsSharedData = ComposerStore.getDraftsSharedData();
-//   const formattedGif = getNewGif(url, stillGifUrl, width, height);
-//
-// /**
-//  * It's important for the two collections below to share the same formattedGif
-//  * reference, so that a change made in one location propagates to all other places
-//  * seamlessly.
-//  * TODO: Re-implement this logic in an immutable fashion: it'll be a bit more work
-//  * to manually search and update all places where an image can be stored, but it'll
-//  * be much more solid.
-//  * /
-//
-//   draftsSharedData.uploadedGifs.push(formattedGif);
-//   addDraftGif(draftId, formattedGif);
-// };
-//
-// addDraftUploadedGif(action.id, action.url, action.stillGifUrl, action.width, action.height);
-// updateDraftFileUploadProgress(action.id, action.uploaderInstance, null);
+      // const addDraftUploadedGif = (draftId, url, stillGifUrl, width, height) => {
+      //   const draftsSharedData = ComposerStore.getDraftsSharedData();
+      //   const formattedGif = getNewGif(url, stillGifUrl, width, height);
+      //
+      // /**
+      //  * It's important for the two collections below to share the same formattedGif
+      //  * reference, so that a change made in one location propagates to all other places
+      //  * seamlessly.
+      //  * TODO: Re-implement this logic in an immutable fashion: it'll be a bit more work
+      //  * to manually search and update all places where an image can be stored, but it'll
+      //  * be much more solid.
+      //  * /
+      //
+      //   draftsSharedData.uploadedGifs.push(formattedGif);
+      //   addDraftGif(draftId, formattedGif);
+      // };
+      //
+      // addDraftUploadedGif(action.id, action.url, action.stillGifUrl, action.width, action.height);
+      // updateDraftFileUploadProgress(action.id, action.uploaderInstance, null);
 
-      //console.log('draftGifUploaded', { id, uploaderInstance, url, stillGifUrl, width, height });
+      console.log('draftGifUploaded', { id, uploaderInstance, url, stillGifUrl, width, height, file });
     },
-    queueError: ({message}) => {
-// NotificationActionCreators.queueError({
-//   scope: NotificationScopes.FILE_UPLOAD,
-//   message
-// });
-      //console.log('queueError', { message });
+    queueError: ({ message }) => {
+      // NotificationActionCreators.queueError({
+      //   scope: NotificationScopes.FILE_UPLOAD,
+      //   message
+      // });
+      console.log('queueError', { message });
     },
-    monitorFileUploadProgress: async ({ id, uploaderInstance}) => {
+    monitorFileUploadProgress: async ({ id, uploaderInstance, file }) => {
 
       const progressIterator = uploaderInstance.getProgressIterator();
       let item;
@@ -305,17 +340,17 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
         const promisedProgress = item.value;
 
         await promisedProgress.then(progress => { // eslint-disable-line no-await-in-loop
-          //console.log('monitorFileUploadProgress', { id, uploaderInstance, progress });
+          console.log('monitorFileUploadProgress', { id, uploaderInstance, progress, file });
         });
       }
-      //console.log('monitorFileUploadProgress', { id, uploaderInstance });
+      console.log('monitorFileUploadProgress', { id, uploaderInstance, file });
     },
   };
 
   return (
     <React.Fragment>
       <CarouselContainer selectedItem={selectedItem}>
-        {getCardsToShow({ cards: [] }).map(card => (
+        {getCardsToShow({cards: []}).map(card => (
           <CarouselCard
             key={card.order}
             card={card}
@@ -344,11 +379,11 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
                     canHaveMediaAttachmentType: () => true,
                   }}
                   uploadType={UploadTypes.LINK_THUMBNAIL}
-                  multiple={false}
+                  multiple
                   disabled={false}
                 />
               </div>
-              )
+            )
             }
           </CarouselCard>
         ))}
@@ -371,13 +406,13 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
 };
 
 const StoryGroupWrapper = ({
-  onDateTimeSlotPickerSubmit,
-  uses24hTime,
-  timezone,
-  weekStartsMonday,
-  selectedProfile,
-  userData,
-  }) => {
+                             onDateTimeSlotPickerSubmit,
+                             uses24hTime,
+                             timezone,
+                             weekStartsMonday,
+                             selectedProfile,
+                             userData,
+                           }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
 
@@ -405,11 +440,11 @@ const StoryGroupWrapper = ({
           </AvatarContainer>
         </HeaderBar>
         <BodyContainer>
-          <SliderCarousel userData={userData} />
+          <SliderCarousel userData={userData}/>
         </BodyContainer>
         <FooterBar>
-          <Button label="Preview" onClick={() => true} />
-          <Button label="Schedule Story" onClick={() => true} />
+          <Button label="Preview" onClick={() => true}/>
+          <Button label="Schedule Story" onClick={() => true}/>
         </FooterBar>
       </React.Fragment>
       }

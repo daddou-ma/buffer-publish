@@ -18,7 +18,7 @@ const createFileUploaderCallback = ({
     imageDimensionsKey,
   });
 
-  notifiers.uploadStarted({ id, uploaderInstance: uploader });
+  notifiers.uploadStarted({ id, uploaderInstance: uploader, file });
 
   uploader.upload(file)
     .then((uploadedFile) => {
@@ -33,6 +33,7 @@ const createFileUploaderCallback = ({
           url: uploadedFile.url,
           width: uploadedFile.width,
           height: uploadedFile.height,
+          file,
         });
       } else {
         switch (uploadedFile.type) {
@@ -44,6 +45,7 @@ const createFileUploaderCallback = ({
               location: window.location, //eslint-disable-line
               width: uploadedFile.width,
               height: uploadedFile.height,
+              file,
             });
             break;
 
@@ -53,6 +55,7 @@ const createFileUploaderCallback = ({
               uploaderInstance: uploader,
               uploadId: uploadedFile.uploadId,
               fileExtension: uploadedFile.fileExtension,
+              file,
             });
             break;
 
@@ -68,6 +71,7 @@ const createFileUploaderCallback = ({
                   stillGifUrl: dataUriOrNull,
                   width: uploadedFile.width,
                   height: uploadedFile.height,
+                  file,
                 });
               });
             break;
@@ -84,6 +88,7 @@ const createFileUploaderCallback = ({
   notifiers.monitorFileUploadProgress({
     id,
     uploaderInstance: uploader,
+    file,
   });
 };
 

@@ -71,7 +71,7 @@ class UploadZone extends React.Component {
   };
 
   getUploadableNewFiles = (files) => {
-    const {uploadFormatsConfig, queueError, translations} = this.props;
+    const { uploadFormatsConfig, queueError, translations } = this.props;
 
     let invalidFormatFilesCount = 0;
 
@@ -139,17 +139,19 @@ class UploadZone extends React.Component {
     const fileMediaTypes = files.map((file) => (
       ContentTypeMediaTypeMap.get(getFileTypeFromPath(file.name).toUpperCase())
     ));
-    const uniqueFileMediaTypes = [...new Set(fileMediaTypes)].filter(v => !!v);
-    const containsMixedMediaTypes = uniqueFileMediaTypes.length > 1;
+    if(!supportsMixedMediaTypes) {
+      const uniqueFileMediaTypes = [...new Set(fileMediaTypes)].filter(v => !!v);
+      const containsMixedMediaTypes = uniqueFileMediaTypes.length > 1;
 
-    if (containsMixedMediaTypes && !supportsMixedMediaTypes) {
-      mixedMediaUnsupportedCallback(service);
-      return;
+      if (containsMixedMediaTypes) {
+        mixedMediaUnsupportedCallback(service);
+        return;
+      }
     }
 
     // Truncate files to upload to the max attachable images count
-    if (files.length > service.maxAttachableImagesCount) {
-      files.splice(service.maxAttachableImagesCount);
+    if (files.length > maxAttachableImagesCount) {
+      files.splice(maxAttachableImagesCount);
     }
 
     const uploadableNewFiles = this.getUploadableNewFiles(files);
