@@ -11,12 +11,16 @@ import * as Styles from './style';
 const cardsToShow = 15;
 const lowerBounds = 0;
 
-const getCardsToShow = ({ cards = [] }) => {
-  const cardList = [];
-  const sortedCards = cards.sort((a, b) => {
+const sortCards = cards => (
+  cards.sort((a, b) => {
     if (a.order > b.order) return 1;
     return -1;
-  });
+  })
+);
+
+const getCardsToShow = ({ cards = [] }) => {
+  const cardList = [];
+  const sortedCards = sortCards(cards);
   for (let i = 0; i < cardsToShow; i += 1) {
     const card = sortedCards[i];
     if (card) {
@@ -85,12 +89,8 @@ const CarouselView = ({
   cards,
   cardWidth,
   cardHeight,
-}) => {
-  const sortedCards = cards.sort((a, b) => {
-    if (a.order > b.order) return 1;
-    return -1;
-  });
-  return sortedCards.map(card => (
+}) => (
+  sortCards(cards).map(card => (
     <Styles.CarouselCard
       key={card.order}
       card={card}
@@ -100,8 +100,8 @@ const CarouselView = ({
     >
       {card.type === 'video' && <PlayIcon />}
     </Styles.CarouselCard>
-  ));
-};
+  ))
+);
 
 /**
  * Carousel component adapts the size depending on the editMode
