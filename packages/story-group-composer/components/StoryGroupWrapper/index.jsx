@@ -1,9 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Avatar from '@bufferapp/ui/Avatar';
-import { SensitiveData } from '@bufferapp/publish-shared-components';
-import { Text } from '@bufferapp/components';
+
 import ArrowLeft from '@bufferapp/ui/Icon/Icons/ArrowLeft';
 import ArrowRight from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import clamp from 'lodash.clamp';
@@ -14,8 +12,8 @@ import UploadZone from '@bufferapp/publish-upload-zone';
 import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
 import { UploadTypes } from '@bufferapp/publish-constants';
-import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 
+import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
 
@@ -35,25 +33,9 @@ const WrapperStyle = styled.div`
   width: 686px;
 `;
 
-// const HeaderBar = styled.div`
-//   padding: 13px 0;
-//   display: flex;
-// `;
-
 const FooterBar = styled.div`
   padding: 13px 0;
   display: flex;
-`;
-
-const AvatarContainer = styled.div`
-  display: flex;
-`;
-
-const AvatarNameWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 16px;
 `;
 
 const BodyContainer = styled.div`
@@ -100,7 +82,6 @@ const CarouselCard = styled.div`
   width: ${cardWidth}px;
 `;
 
-
 const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
 
@@ -123,7 +104,7 @@ const NavArrow = ({
         setSelectedItem(clamp(selectedItem + incrementBy, lowerBounds, upperBounds));
       }}
     >
-      {prev ? <ArrowLeft/> : <ArrowRight/>}
+      {prev ? <ArrowLeft /> : <ArrowRight />}
     </StyledArrow>
   );
 };
@@ -410,18 +391,18 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
 };
 
 const StoryGroupWrapper = ({
-                             translations,
-                             saveNote,
-                             onCreateStoryGroup,
-                             onUpdateStoryGroup,
-                             onDeleteStoryGroup,
-                             onDateTimeSlotPickerSubmit,
-                             uses24hTime,
-                             timezone,
-                             weekStartsMonday,
-                             selectedProfile,
-                             userData,
-                           }) => {
+  translations,
+  saveNote,
+  onCreateStoryGroup,
+  onUpdateStoryGroup,
+  onDeleteStoryGroup,
+  onDateTimeSlotPickerSubmit,
+  uses24hTime,
+  timezone,
+  weekStartsMonday,
+  selectedProfile,
+  userData,
+}) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
 
@@ -461,56 +442,3 @@ StoryGroupWrapper.propTypes = {
 };
 
 export default StoryGroupWrapper;
-/*
-const StoryGroupWrapper = ({
-  onDateTimeSlotPickerSubmit,
-  uses24hTime,
-  timezone,
-  weekStartsMonday,
-  translations,
-  selectedProfile,
-  saveNote,
-  onCreateStoryGroup,
-  onUpdateStoryGroup,
-  onDeleteStoryGroup,
-}) => {
-  // hooks: https://reactjs.org/docs/hooks-state.html
-  const [viewMode, setViewMode] = useState(ADD_STORY);
-  return (
-    <Fragment>
-      <WrapperStyle>
-        <HeaderBar
-          selectedProfile={selectedProfile}
-        />
-        {viewMode === ADD_STORY &&
-          /* TODO: delete this button once the create story group is in place * /
-          (<Button
-            type="primary"
-            size="small"
-            label="Create"
-            onClick={() => onCreateStoryGroup()}
-          />)
-        }
-        {viewMode === ADD_NOTE && (
-          <AddNote
-            translations={translations}
-            onCancelClick={() => setViewMode(ADD_STORY)}
-            onSaveNoteClick={({ storyId, note }) => {
-              saveNote({ storyId, note });
-              setViewMode(ADD_STORY);
-            }}
-          />
-        )}
-      </WrapperStyle>
-    </Fragment>
-  );
-};
-
-StoryGroupWrapper.propTypes = {
-  saveNote: PropTypes.func.isRequired,
-  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
-  ...DateTimeSlotPickerWrapper.propTypes,
-};
-
-export default StoryGroupWrapper;
-*/
