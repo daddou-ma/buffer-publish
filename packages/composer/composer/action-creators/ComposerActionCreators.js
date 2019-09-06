@@ -608,7 +608,7 @@ const ComposerActionCreators = {
         isGif: true,
       });
     },
-    queueError: (message) => {
+    queueError: ({ message }) => {
       NotificationActionCreators.queueError({
         scope: NotificationScopes.FILE_UPLOAD,
         message
@@ -620,12 +620,15 @@ const ComposerActionCreators = {
   },
   uploadDraftFile: (id, file, uploadType, notifiers, createFileUploaderCallback) => {
     const { id: userId, s3UploadSignature } = AppStore.getUserData();
+    const imageDimensionsKey = AppStore.getImageDimensionsKey();
     const csrfToken = AppStore.getCsrfToken();
+
     const uploadDraftFile = createFileUploaderCallback({
       s3UploadSignature,
       userId,
       csrfToken,
       serverNotifiers: ServerActionCreators,
+      imageDimensionsKey,
     });
 
     return uploadDraftFile(id, file, uploadType, notifiers);

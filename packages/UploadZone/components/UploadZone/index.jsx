@@ -14,8 +14,8 @@ import Dropzone from 'react-dropzone';
 import preventXss from 'xss';
 import { Button } from '@bufferapp/ui';
 import { stringTokenizer } from '@bufferapp/publish-i18n';
+import styled from 'styled-components';
 
-import styles from './uploadZone.css';
 import { getHumanReadableSize, getFileTypeFromPath } from '@bufferapp/publish-composer/composer/utils/StringUtils';
 import createFileUploaderCallback from '../../utils/DraftUploader';
 
@@ -30,8 +30,31 @@ const ContentTypeMediaTypeMap = new Map([
   ['AVI', 'VIDEO'],
 ]);
 
+const ButtonWithStyles = styled(Button)`
+  color: transparent !important;
+  background: transparent !important;;
+  border: 0 !important;
+  position: absolute !important;
+  width: 0;
+  height: 0;
+`;
+
+const DropzoneWithStyles = styled(Dropzone)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: none;
+
+  :focus {
+    outline: none;
+  }
+`;
+
 class UploadZone extends React.Component {
-  onHiddenA11yButtonClick = () => {
+  onUploadButtonClick = () => {
     const {disabled} = this.props;
     if (disabled) return;
     this.dropzone.open();
@@ -109,7 +132,9 @@ class UploadZone extends React.Component {
       mixedMediaUnsupportedCallback,
       uploadType,
       notifiers,
+      supportsMixedMediaTypes,
     } = this.props;
+    const { maxAttachableImagesCount } = service;
 
     const fileMediaTypes = files.map((file) => (
       ContentTypeMediaTypeMap.get(getFileTypeFromPath(file.name).toUpperCase())
@@ -117,7 +142,7 @@ class UploadZone extends React.Component {
     const uniqueFileMediaTypes = [...new Set(fileMediaTypes)].filter(v => !!v);
     const containsMixedMediaTypes = uniqueFileMediaTypes.length > 1;
 
-    if (containsMixedMediaTypes) {
+    if (containsMixedMediaTypes && !supportsMixedMediaTypes) {
       mixedMediaUnsupportedCallback(service);
       return;
     }
@@ -142,30 +167,43 @@ class UploadZone extends React.Component {
   };
 
   render () {
-    const { translations, classNames } = this.props;
-    const transparentClickZoneClassName =
-      [styles.transparentClickZone, (classNames && classNames.uploadZone || '')].join(' ');
+    const {
+      translations,
+      classNames,
+      multiple,
+      disabled,
+      uploadFormatsConfig,
+      uploadButton,
+    } = this.props;
+
+    let UploadButton = ({onClick}) => <ButtonWithStyles
+        onClick={onClick}
+        title={translations.buttonTitle}
+      />;
+
+    if (uploadButton !== null) {
+      UploadButton = uploadButton;
+    }
 
     const acceptedFileExtensions =
-      Array.from(this.props.uploadFormatsConfig.keys())
+      Array.from(uploadFormatsConfig.keys())
         .map((format) => `.${format.toLowerCase()}`)
         .join();
 
     return (
       <div>
-        <Dropzone
+        <DropzoneWithStyles
           onDrop={this.onDrop}
           activeClassName={classNames && classNames.uploadZoneActive}
           disabledClassName={classNames && classNames.uploadZoneDisabled}
-          className={transparentClickZoneClassName}
+          className={classNames && classNames.uploadZone}
           ref={(node) => { this.dropzone = node; }}
-          multiple={this.props.multiple}
-          disabled={this.props.disabled}
+          multiple={multiple}
+          disabled={disabled}
         />
-        <Button
-          className={styles.hiddenA11yButton}
-          onClick={this.onHiddenA11yButtonClick}
+        <UploadButton
           title={translations.buttonTitle}
+          onClick={this.onUploadButtonClick}
         />
       </div>
 
@@ -174,6 +212,7 @@ class UploadZone extends React.Component {
 }
 
 UploadZone.propTypes = {
+  uploadButton: PropTypes.node,
   draftId: PropTypes.string.isRequired,
   className: PropTypes.string,
   classNames: PropTypes.shape({
@@ -191,6 +230,7 @@ UploadZone.propTypes = {
   }).isRequired,
   uploadDraftFile: PropTypes.func.isRequired,
   removeAllNotifications: PropTypes.func.isRequired,
+  supportsMixedMediaTypes: PropTypes.bool.isRequired,
   mixedMediaUnsupportedCallback: PropTypes.func.isRequired,
   queueError: PropTypes.func.isRequired,
   notifiers: PropTypes.shape({
@@ -213,6 +253,8 @@ UploadZone.propTypes = {
 };
 
 UploadZone.defaultProps = {
+  uploadButton: null,
+  supportsMixedMediaTypes: false,
   disabled: false,
   multiple: true,
 };

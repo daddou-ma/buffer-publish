@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import Avatar from '@bufferapp/ui/Avatar';
 import { SensitiveData } from '@bufferapp/publish-shared-components';
 import { Text } from '@bufferapp/components';
@@ -15,6 +14,7 @@ import UploadZone from '@bufferapp/publish-upload-zone';
 import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
 import { UploadTypes } from '@bufferapp/publish-constants';
+import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 
 const cardsToShow = 15;
 const cardWidth = 180;
@@ -130,12 +130,16 @@ const getCardsToShow = ({ cards = [] }) => {
     if (a.order > b.order) return 1;
     return -1;
   });
-  for (let i = 0; i < cardsToShow; i += 1) {
+  for (let i = 0, firstEmpty = true; i < cardsToShow; i += 1) {
     const card = sortedCards[i];
     if (card) {
       cardList.push(card);
     } else {
-      cardList.push({ order: i });
+      cardList.push({
+        order: i,
+        empty: firstEmpty,
+      });
+      firstEmpty = false;
     }
   }
   return cardList;
@@ -146,7 +150,12 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
   const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
 
   const uploadDraftFile = (id, file, uploadType, notifiers, createFileUploaderCallback) => {
-    const { id: userId, s3_upload_signature: s3Signature } = userData;
+    const {
+      id: userId,
+      s3_upload_signature: s3Signature,
+      imageDimensionsKey,
+    } = userData;
+
     const s3UploadSignature = {
       algorithm: s3Signature.algorithm,
       base64Policy: s3Signature.base64policy,
@@ -161,6 +170,7 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
       s3UploadSignature,
       userId,
       csrfToken: null,
+      imageDimensionsKey,
       serverNotifiers: {
         videoProcessed: (processedVideoData) => console.log('videoProcessed', { processedVideoData }),
         profileGroupCreated: (groupData) => console.log('profileGroupCreated', { groupData }),
@@ -172,14 +182,134 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
     return uploadDraftFileCallback(id, file, uploadType, notifiers);
   };
 
-  const thing = {
-    uploadStarted: (...props) => console.log('uploadStarted', { ...props }),
-    uploadedLinkThumbnail: (...props) => console.log('uploadedLinkThumbnail', { ...props }),
-    uploadedDraftImage: (...props) => console.log('uploadedDraftImage', { ...props }),
-    uploadedDraftVideo: (...props) => console.log('uploadedDraftVideo',  {...props }),
-    draftGifUploaded: (...props) => console.log('draftGifUploaded', { ...props }),
-    queueError: (...props) => console.log('queueError', { ...props }),
-    monitorFileUploadProgress: (...props) => console.log('monitorFileUploadProgress', { ...props }),
+  const notifiers = {
+    uploadStarted: ({ id, uploaderInstance }) => {
+// set upload progress to 0
+// const monitorComposerLastInteractedWith = (fn) => (draftId, ...restArgs) => {
+//   if (draftId === 'omni' || draftId === AppStore.getAppState().expandedComposerId) {
+//     state.meta.lastInteractedWithComposerId = draftId;
+//   }
+//
+//   return fn(draftId, ...restArgs);
+// };
+// monitorComposerLastInteractedWith(() => {
+//   updateDraftFileUploadProgress(action.id, action.uploaderInstance, 0);
+// })();
+
+      //console.log('uploadStarted', { id, uploaderInstance });
+    },
+    uploadedLinkThumbnail: ({
+      id,
+      uploaderInstance,
+      url,
+      width,
+      height,
+    }) => {
+      // set upload progress to 0
+// const updateDraftFileUploadProgress = (id, uploaderInstance, progress) => {
+//   const { filesUploadProgress } = ComposerStore.getDraft(id);
+//
+//   if (progress !== null) filesUploadProgress.set(uploaderInstance, progress);
+//   else filesUploadProgress.delete(uploaderInstance);
+// };
+//
+// const addDraftUploadedLinkThumbnail = (id, url, width, height) => {
+//   const draftsSharedData = ComposerStore.getDraftsSharedData();
+//   const formattedImage = getNewImage({ url, width, height });
+//
+// /**
+//  * It's important for the three collections below to share the same formattedImage
+//  * reference, so that a change made in one location propagates to all other places
+//  * seamlessly.
+//  * TODO: Re-implement this logic in an immutable fashion: it'll be a bit more work
+//  * to manually search and update all places where an image can be stored, but it'll
+//  * be much more solid.
+//  * /
+//   updateDraftLinkThumbnail(id, formattedImage);
+//   addDraftLinkAvailableThumbnail(id, formattedImage);
+//   draftsSharedData.uploadedImages.push(formattedImage);
+// };
+//
+//  addDraftUploadedLinkThumbnail(action.id, action.url, action.width, action.height);
+//  updateDraftFileUploadProgress(action.id, action.uploaderInstance, null);
+
+      //console.log('uploadedLinkThumbnail', { id, uploaderInstance, url, width, height });
+    },
+    uploadedDraftImage: ({
+      id,
+      uploaderInstance,
+      url,
+      location,
+      width,
+      height,
+    }) => {
+      //console.log('uploadedDraftImage', { id, uploaderInstance, url, location, width, height });
+    },
+    uploadedDraftVideo: ({
+      id,
+      uploaderInstance,
+      uploadId,
+      fileExtension,
+    }) => {
+// const addDraftProcessingVideo = (draftId, uploaderInstance, uploadId) => {
+//   state.draftsSharedData.processingVideos.set(uploadId, [draftId, uploaderInstance]);
+// };
+//
+// addDraftProcessingVideo(action.id, action.uploaderInstance, action.uploadId);
+
+      //console.log('uploadedDraftVideo',  { id, uploaderInstance, uploadId, fileExtension });
+    },
+    draftGifUploaded: ({
+      id,
+      uploaderInstance,
+      url,
+      stillGifUrl,
+      width,
+      height,
+    }) => {
+// const addDraftUploadedGif = (draftId, url, stillGifUrl, width, height) => {
+//   const draftsSharedData = ComposerStore.getDraftsSharedData();
+//   const formattedGif = getNewGif(url, stillGifUrl, width, height);
+//
+// /**
+//  * It's important for the two collections below to share the same formattedGif
+//  * reference, so that a change made in one location propagates to all other places
+//  * seamlessly.
+//  * TODO: Re-implement this logic in an immutable fashion: it'll be a bit more work
+//  * to manually search and update all places where an image can be stored, but it'll
+//  * be much more solid.
+//  * /
+//
+//   draftsSharedData.uploadedGifs.push(formattedGif);
+//   addDraftGif(draftId, formattedGif);
+// };
+//
+// addDraftUploadedGif(action.id, action.url, action.stillGifUrl, action.width, action.height);
+// updateDraftFileUploadProgress(action.id, action.uploaderInstance, null);
+
+      //console.log('draftGifUploaded', { id, uploaderInstance, url, stillGifUrl, width, height });
+    },
+    queueError: ({message}) => {
+// NotificationActionCreators.queueError({
+//   scope: NotificationScopes.FILE_UPLOAD,
+//   message
+// });
+      //console.log('queueError', { message });
+    },
+    monitorFileUploadProgress: async ({ id, uploaderInstance}) => {
+
+      const progressIterator = uploaderInstance.getProgressIterator();
+      let item;
+
+      while (!(item = progressIterator.next()).done) { // eslint-disable-line no-cond-assign
+        const promisedProgress = item.value;
+
+        await promisedProgress.then(progress => { // eslint-disable-line no-await-in-loop
+          //console.log('monitorFileUploadProgress', { id, uploaderInstance, progress });
+        });
+      }
+      //console.log('monitorFileUploadProgress', { id, uploaderInstance });
+    },
   };
 
   return (
@@ -190,31 +320,36 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
             key={card.order}
             card={card}
           >
-            <div>
-              <UploadZone
-                mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-                uploadDraftFile={uploadDraftFile}
-                notifiers={thing}
-                removeAllNotifications={() => console.log('removeAllNotifications', true)}
-                queueError={({ message }) => console.log('queueError', { message })}
-                draftId="card"
-                uploadFormatsConfig={uploadFormatsConfig}
-                service={{
-                  maxAttachableImagesCount: 1,
-                  canHaveMediaAttachmentType: () => true,
-                }}
-                uploadType={UploadTypes.LINK_THUMBNAIL}
-                multiple={false}
-                disabled={false}
-              />
-
-              <Button
-                type="primary"
-                label="Add Media Files"
-                onClick={() => {}}
-                icon={<Attach />}
-              />
-            </div>
+            {card.empty && (
+              <div>
+                <UploadZone
+                  uploadButton={({onClick}) => (
+                    <Button
+                      type="primary"
+                      label="Add Media Files"
+                      icon={<Attach/>}
+                      onClick={onClick}
+                    />
+                  )}
+                  supportsMixedMediaTypes
+                  mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+                  uploadDraftFile={uploadDraftFile}
+                  notifiers={notifiers}
+                  removeAllNotifications={() => console.log('removeAllNotifications', true)}
+                  queueError={({message}) => console.log('queueError', {message})}
+                  draftId={card.order}
+                  uploadFormatsConfig={uploadFormatsConfig}
+                  service={{
+                    maxAttachableImagesCount: cardsToShow,
+                    canHaveMediaAttachmentType: () => true,
+                  }}
+                  uploadType={UploadTypes.LINK_THUMBNAIL}
+                  multiple={false}
+                  disabled={false}
+                />
+              </div>
+              )
+            }
           </CarouselCard>
         ))}
       </CarouselContainer>

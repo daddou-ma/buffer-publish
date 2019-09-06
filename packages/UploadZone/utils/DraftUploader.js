@@ -1,12 +1,12 @@
-import Uploader from './Uploader';
-import ServerActionCreators from '@bufferapp/publish-composer/composer/action-creators/ServerActionCreators';
 import { MediaTypes, UploadTypes } from '@bufferapp/publish-constants';
 import { getStillDataUriFromGif } from '@bufferapp/publish-composer/composer/utils/DOMUtils';
+import Uploader from './Uploader';
 
 const createFileUploaderCallback = ({
   s3UploadSignature,
   userId,
   csrfToken,
+  imageDimensionsKey,
   serverNotifiers,
 }) => (id, file, uploadType, notifiers) => {
   const uploader = new Uploader({
@@ -15,6 +15,7 @@ const createFileUploaderCallback = ({
     s3UploadSignature,
     errorNotifier: notifiers.queueError,
     notifiers: serverNotifiers,
+    imageDimensionsKey,
   });
 
   notifiers.uploadStarted({ id, uploaderInstance: uploader });
@@ -22,7 +23,7 @@ const createFileUploaderCallback = ({
   uploader.upload(file)
     .then((uploadedFile) => {
       if (uploadedFile.success === false) {
-        notifiers.queueError('Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?');
+        notifiers.queueError({ message: 'Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?'});
       }
 
       if (uploadType === UploadTypes.LINK_THUMBNAIL) {
@@ -51,7 +52,7 @@ const createFileUploaderCallback = ({
               id,
               uploaderInstance: uploader,
               uploadId: uploadedFile.uploadId,
-              fileExtension: uploadedFile.fileExtension
+              fileExtension: uploadedFile.fileExtension,
             });
             break;
 
@@ -76,8 +77,8 @@ const createFileUploaderCallback = ({
         }
       }
     })
-    .catch(() => {
-      notifiers.queueError('Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?');
+    .catch((e) => {
+      notifiers.queueError({ message: 'Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?' });
     });
 
   notifiers.monitorFileUploadProgress({
