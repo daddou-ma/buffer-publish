@@ -14,7 +14,7 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle storyGroups_FETCH_START action type', () => {
+  it('should handle getStoryGroups_FETCH_START action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
@@ -29,7 +29,7 @@ describe('reducer', () => {
     };
     const action = {
       profileId,
-      type: 'storyGroups_FETCH_START',
+      type: 'getStoryGroups_FETCH_START',
       args: {
         isFetchingMore: false,
       },
@@ -39,7 +39,7 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle storyGroups_FETCH_SUCCESS action type', () => {
+  it('should handle getStoryGroups_FETCH_SUCCESS action type', () => {
     const post = { post: { id: 'foo', text: 'i love buffer' } };
     const stateAfter = {
       byProfileId: {
@@ -55,7 +55,7 @@ describe('reducer', () => {
     };
     const action = {
       profileId,
-      type: 'storyGroups_FETCH_SUCCESS',
+      type: 'getStoryGroups_FETCH_SUCCESS',
       result: {
         updates: [post],
         total: 1,
@@ -69,7 +69,7 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle storyGroups_FETCH_FAIL action type', () => {
+  it('should handle getStoryGroups_FETCH_FAIL action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
@@ -84,7 +84,7 @@ describe('reducer', () => {
     };
     const action = {
       profileId,
-      type: 'storyGroups_FETCH_FAIL',
+      type: 'getStoryGroups_FETCH_FAIL',
     };
     deepFreeze(action);
     expect(reducer(undefined, action))

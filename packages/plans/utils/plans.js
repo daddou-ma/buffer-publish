@@ -1,3 +1,5 @@
+import { PLAN_IDS } from '@bufferapp/publish-constants';
+
 const getSource = ({ newPlan, currentPlan }) => {
   let source = null;
   switch (newPlan) {
@@ -22,4 +24,22 @@ const getSource = ({ newPlan, currentPlan }) => {
   return source;
 };
 
-export default getSource;
+const getPlanId = (plan) => {
+  let planId = null;
+  switch (plan) {
+    case 'pro':
+      planId = PLAN_IDS.PRO_PLAN_ID;
+      break;
+    case 'premium_business':
+      planId = PLAN_IDS.PREMIUM_BUSINESS_PLAN_ID;
+      break;
+    case 'small':
+      planId = PLAN_IDS.SMALL_PLAN_ID;
+      break;
+    default:
+      break;
+  }
+  return planId;
+};
+
+export { getSource, getPlanId };

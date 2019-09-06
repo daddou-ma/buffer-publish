@@ -1,7 +1,13 @@
 import React from 'react';
 import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Text, Tooltip } from '@bufferapp/ui';
+import { white, grayDark } from '@bufferapp/ui/style/colors';
+import {
+  fontSize,
+  fontWeight,
+} from '@bufferapp/ui/style/fonts';
 import {
   Tabs,
   Tab,
@@ -17,78 +23,77 @@ import {
   accomodate this edge case.
 */
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 
-const composerStyle = {
-  marginBottom: '1.5rem',
-  flexGrow: '1',
-};
+const ProfilePage = styled.div`
+  display: flex;
+  flex-grow: 1;
+`;
 
-const topBarContainerStyle = {
-  display: 'flex',
-};
+const ProfileSidebarWrapper = styled.div`
+  flex-basis: 16rem;
+  width: 16rem;
+  min-width: 16rem;
+  position: sticky;
+  bottom: 0;
+  top: 0;
+  max-height: 100vh;
+`;
 
-const tabsStyle = {
-  paddingLeft: '0.5rem',
-  position: 'relative',
-  top: '0',
-  backgroundColor: 'white',
-  zIndex: 1,
-};
+const Content = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+  min-height: 100%;
+`;
 
-const profilePageStyle = {
-  display: 'flex',
-  flexGrow: 1,
-};
+const TabsWrapper = styled.div`
+  padding-left: 0.5rem;
+  position: relative;
+  top: 0;
+  background-color: ${white};
+  z-index: 1;
+`;
 
-const profileSideBarStyle = {
-  flexBasis: '16rem',
-  width: '16rem',
-  minWidth: '16rem',
-  position: 'sticky',
-  bottom: 0,
-  top: 0,
-  maxHeight: '100vh',
-};
+const TabWrapper = styled.div`
+  display: inline-block;
+`;
 
-const contentStyle = {
-  flexGrow: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  marginLeft: '0.5rem',
-  marginRight: '1rem',
-  minHeight: '100%',
-};
+const Queue = styled.div`
+  max-width: 864px;
+  height: 100%;
+  margin-top: 1rem;
+`;
 
-const tabContentStyle = {
-  maxWidth: '864px',
-  height: '100%',
-  marginTop: '1rem',
-};
+const TopBarContainer = styled.div`
+  display: flex;
+`;
 
-const listHeaderStyle = {
-  margin: '1rem 0 1rem 0.5rem',
-  display: 'flex',
-  alignItems: 'center',
-};
+const ComposerWrapper = styled.div`
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+`;
 
-const headerTextDateStyle = {
-  fontWeight: 'normal',
-  lineHeight: 'normal',
-  fontSize: '14px',
-  textTransform: 'uppercase',
-  color: '#636363',
-  marginLeft: '8px',
-};
+const ListHeader = styled.div`
+  margin: 1rem 0 1rem 0.5rem;
+  display: flex;
+  align-items: center;
+`;
 
-const headerTextStyle = {
-  display: 'flex',
-  alignItems: 'baseline',
-};
+const HeaderTextDate = styled.span`
+  font-weight: ${fontWeight};
+  line-height: normal;
+  font-size: ${fontSize};
+  text-transform: uppercase;
+  color: ${grayDark};
+  margin-left: 8px;
+`;
 
-const tabStyle = {
-  display: 'inline-block',
-};
+const HeaderText = styled.div`
+  display: flex;
+  align-items: baseline;
+`;
 
 const calendarBtns = ['Day', 'Week', 'Month'];
 
@@ -99,62 +104,62 @@ const DisabledQueue = ({
   onManageSocialAccountClick,
   goToConnectSocialAccount,
 }) => (
-  <div style={profilePageStyle}>
-    <div style={profileSideBarStyle}>
+  <ProfilePage>
+    <ProfileSidebarWrapper>
       <ProfileSidebar
         translations={translations}
         onManageSocialAccountClick={onManageSocialAccountClick}
         goToConnectSocialAccount={goToConnectSocialAccount}
         loading={false}
       />
-    </div>
-    <div style={contentStyle}>
-      <div id="tabs" style={tabsStyle}>
+    </ProfileSidebarWrapper>
+    <Content>
+      <TabsWrapper id="tabs">
         <Tabs
-          selectedTabId={'disabledTab'}
+          selectedTabId="disabledTab"
           onTabClick={() => {}}
         >
-          <Tab tabId={'disabledTab'}>{translations.queueTab}</Tab>
-          <div style={tabStyle}>
+          <Tab tabId="disabledTab">{translations.queueTab}</Tab>
+          <TabWrapper>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId={'disabledTab2'} disabled>{translations.analyticsTab}</Tab>
+              <Tab tabId="disabledTab2" disabled>{translations.analyticsTab}</Tab>
             </Tooltip>
-          </div>
-          <div style={tabStyle}>
+          </TabWrapper>
+          <TabWrapper>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId={'disabledTab3'} disabled>{translations.awaitingTab}</Tab>
+              <Tab tabId="disabledTab3" disabled>{translations.awaitingTab}</Tab>
             </Tooltip>
-          </div>
-          <div style={tabStyle}>
+          </TabWrapper>
+          <TabWrapper>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId={'disabledTab4'} disabled>{translations.draftsTab}</Tab>
+              <Tab tabId="disabledTab4" disabled>{translations.draftsTab}</Tab>
             </Tooltip>
-          </div>
-          <div style={tabStyle}>
+          </TabWrapper>
+          <TabWrapper>
             <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId={'disabledTab5'} disabled>{translations.settingsTab}</Tab>
+              <Tab tabId="disabledTab5" disabled>{translations.settingsTab}</Tab>
             </Tooltip>
-          </div>
+          </TabWrapper>
         </Tabs>
-      </div>
-      <div style={tabContentStyle}>
-        <div style={topBarContainerStyle}>
-          <div style={composerStyle}>
+      </TabsWrapper>
+      <Queue>
+        <TopBarContainer>
+          <ComposerWrapper>
             <Tooltip label="Connect a social account to start sharing content" position="bottom">
               <ComposerInput
                 isDisabled
                 placeholder={translations.composerInput}
               />
             </Tooltip>
-          </div>
-        </div>
-        <div style={listHeaderStyle}>
-          <div style={headerTextStyle}>
+          </ComposerWrapper>
+        </TopBarContainer>
+        <ListHeader>
+          <HeaderText>
             <Text type="h3">{translations.currentDay}</Text>
-            <span style={headerTextDateStyle}>
+            <HeaderTextDate>
               <Text>{getCurrentDay()}</Text>
-            </span>
-          </div>
+            </HeaderTextDate>
+          </HeaderText>
           <div style={{ marginLeft: 'auto' }}>
             <Tooltip label="Connect a social account to see calendar views of your posts" position="top">
               <QueueButtonGroup
@@ -164,7 +169,7 @@ const DisabledQueue = ({
               />
             </Tooltip>
           </div>
-        </div>
+        </ListHeader>
         <PostEmptySlot
           time="08:33 am"
           service="noProfile"
@@ -175,9 +180,9 @@ const DisabledQueue = ({
           service="noProfile"
           onClick={() => {}}
         />
-      </div>
-    </div>
-  </div>
+      </Queue>
+    </Content>
+  </ProfilePage>
 );
 
 DisabledQueue.propTypes = {

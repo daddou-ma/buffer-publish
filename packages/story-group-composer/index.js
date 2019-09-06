@@ -9,16 +9,24 @@ export default connect(
     timezone: state.profileSidebar.selectedProfile.timezone,
     weekStartsMonday: state.appSidebar.user.week_starts_monday,
     selectedProfile: state.profileSidebar.selectedProfile,
+    translations: state.i18n.translations['story-group-composer'],
     userData: state.appSidebar.user,
   }),
   dispatch => ({
     onOverlayClick: () => {
-      // TO-DO: will need to add HIDE_COMPOSER logic in the stories queue once completed
-      // We'll need to add the stories tab case in the close-composer-confirmation-modal middleware
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
-    onDateTimeSlotPickerSubmit: (timestamp) => {
-      dispatch(actions.handleSaveStoryGroup(timestamp));
+    onDateTimeSlotPickerSubmit: (scheduledAt) => {
+      dispatch(actions.handleSaveStoryGroup(scheduledAt));
+    },
+    onCreateStoryGroup: (scheduledAt) => {
+      dispatch(actions.handleSaveStoryGroup(scheduledAt));
+    },
+    onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
+      dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
+    },
+    saveNote: ({ note, storyId }) => {
+      dispatch(actions.handleSaveStoryNote({ note, storyId }));
     },
   }),
 )(StoryGroupPopover);

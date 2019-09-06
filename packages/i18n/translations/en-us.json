@@ -38,9 +38,7 @@
     "testemonial": "Publish helps us build a better model of content that generates more engagement.",
     "name": "Justin Ozanich",
     "role": "Marketing Manager",
-    "company": "Foster Coffee Company"
-  },
-  "disabled-queue": {
+    "company": "Foster Coffee Company",
     "connectButton": "Manage Social Accounts",
     "queueTab": "Queue",
     "analyticsTab": "Analytics",
@@ -303,5 +301,12 @@
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly"
     }
+  },
+  "story-group-composer": {
+    "noteSubText": "When it comes time to post, you'll be able to copy and paste your note into Instagram.",
+    "notePlaceholder": "Add your caption or a note to self",
+    "saveNoteButton": "Save Note",
+    "cancelNoteButton": "Cancel",
+    "noteImageAlt": "Instagram story media"
   }
 }

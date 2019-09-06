@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Avatar from '@bufferapp/ui/Avatar';
@@ -16,6 +16,9 @@ import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/A
 import { UploadTypes } from '@bufferapp/publish-constants';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 
+import HeaderBar from '../HeaderBar';
+import AddNote from '../AddNote';
+
 const cardsToShow = 15;
 const cardWidth = 180;
 const cardMargin = 4;
@@ -32,10 +35,10 @@ const WrapperStyle = styled.div`
   width: 686px;
 `;
 
-const HeaderBar = styled.div`
-  padding: 13px 0;
-  display: flex;
-`;
+// const HeaderBar = styled.div`
+//   padding: 13px 0;
+//   display: flex;
+// `;
 
 const FooterBar = styled.div`
   padding: 13px 0;
@@ -97,6 +100,7 @@ const CarouselCard = styled.div`
   width: ${cardWidth}px;
 `;
 
+
 const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
 
@@ -105,12 +109,12 @@ const ADD_NOTE = 'addNote';
  */
 
 const NavArrow = ({
-                    prev = false,
-                    hide = false,
-                    incrementBy = 1,
-                    selectedItem = 0,
-                    setSelectedItem = null,
-                  }) => {
+  prev = false,
+  hide = false,
+  incrementBy = 1,
+  selectedItem = 0,
+  setSelectedItem = null,
+}) => {
   if (hide) return null;
   return (
     <StyledArrow
@@ -231,13 +235,13 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
       console.log('uploadStarted', { id, uploaderInstance, file });
     },
     uploadedLinkThumbnail: ({
-      id,
-      uploaderInstance,
-      url,
-      width,
-      height,
-      file,
-    }) => {
+                              id,
+                              uploaderInstance,
+                              url,
+                              width,
+                              height,
+                              file,
+                            }) => {
       // set upload progress to 0
       // const updateDraftFileUploadProgress = (id, uploaderInstance, progress) => {
       //   const { filesUploadProgress } = ComposerStore.getDraft(id);
@@ -269,23 +273,23 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
       console.log('uploadedLinkThumbnail', { id, uploaderInstance, url, width, height, file });
     },
     uploadedDraftImage: ({
-      id,
-      uploaderInstance,
-      url,
-      location,
-      width,
-      height,
-      file,
-    }) => {
+                           id,
+                           uploaderInstance,
+                           url,
+                           location,
+                           width,
+                           height,
+                           file,
+                         }) => {
       console.log('uploadedDraftImage', { id, uploaderInstance, url, location, width, height, file });
     },
     uploadedDraftVideo: ({
-      id,
-      uploaderInstance,
-      uploadId,
-      fileExtension,
-      file,
-    }) => {
+                           id,
+                           uploaderInstance,
+                           uploadId,
+                           fileExtension,
+                           file,
+                         }) => {
       // const addDraftProcessingVideo = (draftId, uploaderInstance, uploadId) => {
       //   state.draftsSharedData.processingVideos.set(uploadId, [draftId, uploaderInstance]);
       // };
@@ -294,14 +298,14 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
       console.log('uploadedDraftVideo',  { id, uploaderInstance, uploadId, fileExtension, file });
     },
     draftGifUploaded: ({
-      id,
-      uploaderInstance,
-      url,
-      stillGifUrl,
-      width,
-      height,
-      file,
-    }) => {
+                         id,
+                         uploaderInstance,
+                         url,
+                         stillGifUrl,
+                         width,
+                         height,
+                         file,
+                       }) => {
       // const addDraftUploadedGif = (draftId, url, stillGifUrl, width, height) => {
       //   const draftsSharedData = ComposerStore.getDraftsSharedData();
       //   const formattedGif = getNewGif(url, stillGifUrl, width, height);
@@ -406,6 +410,11 @@ const SliderCarousel = ({ initialSelectedItem = 0, userData }) => {
 };
 
 const StoryGroupWrapper = ({
+                             translations,
+                             saveNote,
+                             onCreateStoryGroup,
+                             onUpdateStoryGroup,
+                             onDeleteStoryGroup,
                              onDateTimeSlotPickerSubmit,
                              uses24hTime,
                              timezone,
@@ -420,27 +429,9 @@ const StoryGroupWrapper = ({
     <WrapperStyle>
       {viewMode === ADD_STORY &&
       <React.Fragment>
-        <HeaderBar>
-          <AvatarContainer>
-            <Avatar
-              src={selectedProfile.avatar_https}
-              fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
-              alt={selectedProfile.handle}
-              size="medium"
-              type="social"
-              network={selectedProfile.service}
-            />
-            <AvatarNameWrapper>
-              <SensitiveData>
-                <Text size="mini" color="outerSpace">
-                  {selectedProfile.handle}
-                </Text>
-              </SensitiveData>
-            </AvatarNameWrapper>
-          </AvatarContainer>
-        </HeaderBar>
+        <HeaderBar selectedProfile={selectedProfile} />
         <BodyContainer>
-          <SliderCarousel userData={userData}/>
+          <SliderCarousel userData={userData} />
         </BodyContainer>
         <FooterBar>
           <Button label="Preview" onClick={() => true}/>
@@ -448,27 +439,78 @@ const StoryGroupWrapper = ({
         </FooterBar>
       </React.Fragment>
       }
-      {viewMode === ADD_NOTE &&
-      <div>Add note view</div>
-      }
+      {viewMode === ADD_NOTE && (
+        <AddNote
+          translations={translations}
+          onCancelClick={() => setViewMode(ADD_STORY)}
+          onSaveNoteClick={({ storyId, note }) => {
+            saveNote({ storyId, note });
+            setViewMode(ADD_STORY);
+          }}
+        />
+      )}
     </WrapperStyle>
   );
 };
 
 StoryGroupWrapper.propTypes = {
+  saveNote: PropTypes.func.isRequired,
+  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   ...DateTimeSlotPickerWrapper.propTypes,
-  selectedProfile: PropTypes.shape({
-    id: PropTypes.string,
-    avatarUrl: PropTypes.string,
-    avatar_https: PropTypes.string,
-    serviceUsername: PropTypes.string,
-    serviceId: PropTypes.string,
-    organizationId: PropTypes.string,
-    username: PropTypes.string,
-    service: PropTypes.string,
-    handle: PropTypes.string,
-  }).isRequired,
   userData: PropTypes.shape({}).isRequired,
 };
 
 export default StoryGroupWrapper;
+/*
+const StoryGroupWrapper = ({
+  onDateTimeSlotPickerSubmit,
+  uses24hTime,
+  timezone,
+  weekStartsMonday,
+  translations,
+  selectedProfile,
+  saveNote,
+  onCreateStoryGroup,
+  onUpdateStoryGroup,
+  onDeleteStoryGroup,
+}) => {
+  // hooks: https://reactjs.org/docs/hooks-state.html
+  const [viewMode, setViewMode] = useState(ADD_STORY);
+  return (
+    <Fragment>
+      <WrapperStyle>
+        <HeaderBar
+          selectedProfile={selectedProfile}
+        />
+        {viewMode === ADD_STORY &&
+          /* TODO: delete this button once the create story group is in place * /
+          (<Button
+            type="primary"
+            size="small"
+            label="Create"
+            onClick={() => onCreateStoryGroup()}
+          />)
+        }
+        {viewMode === ADD_NOTE && (
+          <AddNote
+            translations={translations}
+            onCancelClick={() => setViewMode(ADD_STORY)}
+            onSaveNoteClick={({ storyId, note }) => {
+              saveNote({ storyId, note });
+              setViewMode(ADD_STORY);
+            }}
+          />
+        )}
+      </WrapperStyle>
+    </Fragment>
+  );
+};
+
+StoryGroupWrapper.propTypes = {
+  saveNote: PropTypes.func.isRequired,
+  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
+  ...DateTimeSlotPickerWrapper.propTypes,
+};
+
+export default StoryGroupWrapper;
+*/

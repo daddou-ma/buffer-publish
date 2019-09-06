@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DisabledQueue from '@bufferapp/publish-disabled-queue';
+import DisabledQueue from '../DisabledQueue';
 import OnboardingPage from '../OnboardingPage';
 
 const OnboardingManager = ({
   canSeeOnboardingPage,
-  onConnectSocialAccountClick,
+  onConnectSocialAccountOnboardingClick,
   onSkipStep,
+  onManageSocialAccountClick,
+  onConnectSocialAccountSidebarClick,
   translations,
 }) => (
-  <div>
+  <React.Fragment>
     {canSeeOnboardingPage
       && (
         <OnboardingPage
-          onConnectSocialAccountClick={onConnectSocialAccountClick}
+          onConnectSocialAccountClick={onConnectSocialAccountOnboardingClick}
           onSkipStep={onSkipStep}
           translations={translations}
         />
@@ -21,15 +23,21 @@ const OnboardingManager = ({
     }
     {!canSeeOnboardingPage
       && (
-        <DisabledQueue />
+        <DisabledQueue
+          translations={translations}
+          onManageSocialAccountClick={onManageSocialAccountClick}
+          goToConnectSocialAccount={onConnectSocialAccountSidebarClick}
+        />
       )
     }
-  </div>
+  </React.Fragment>
 );
 
 OnboardingManager.propTypes = {
-  onConnectSocialAccountClick: PropTypes.func.isRequired,
+  onConnectSocialAccountOnboardingClick: PropTypes.func.isRequired,
   onSkipStep: PropTypes.func.isRequired,
+  onManageSocialAccountClick: PropTypes.func.isRequired,
+  onConnectSocialAccountSidebarClick: PropTypes.func.isRequired,
   canSeeOnboardingPage: PropTypes.bool.isRequired,
   translations: PropTypes.shape({
     title: PropTypes.string,

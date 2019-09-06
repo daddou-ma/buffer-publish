@@ -3,14 +3,20 @@ import PropTypes from 'prop-types';
 import { Popover } from '@bufferapp/components';
 import StoryGroupWrapper from '../StoryGroupWrapper';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import HeaderBar from '../HeaderBar';
 
 const StoryGroupPopover = ({
   onOverlayClick,
+  translations,
   onDateTimeSlotPickerSubmit,
   uses24hTime,
   timezone,
   weekStartsMonday,
   selectedProfile,
+  saveNote,
+  onCreateStoryGroup,
+  onUpdateStoryGroup,
+  onDeleteStoryGroup,
   userData,
 }) => (
   <Popover
@@ -24,6 +30,11 @@ const StoryGroupPopover = ({
       timezone={timezone}
       weekStartsMonday={weekStartsMonday}
       selectedProfile={selectedProfile}
+      saveNote={saveNote}
+      translations={translations}
+      onCreateStoryGroup={onCreateStoryGroup}
+      onUpdateStoryGroup={onUpdateStoryGroup}
+      onDeleteStoryGroup={onDeleteStoryGroup}
       userData={userData}
     />
   </Popover>
@@ -32,17 +43,8 @@ const StoryGroupPopover = ({
 StoryGroupPopover.propTypes = {
   onOverlayClick: PropTypes.func.isRequired,
   ...DateTimeSlotPickerWrapper.propTypes,
-  selectedProfile: PropTypes.shape({
-    id: PropTypes.string,
-    avatarUrl: PropTypes.string,
-    avatar_https: PropTypes.string,
-    serviceUsername: PropTypes.string,
-    serviceId: PropTypes.string,
-    organizationId: PropTypes.string,
-    username: PropTypes.string,
-    service: PropTypes.string,
-    handle: PropTypes.string,
-  }),
+  saveNote: PropTypes.func.isRequired,
+  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   userData: PropTypes.shape({}).isRequired,
 };
 
