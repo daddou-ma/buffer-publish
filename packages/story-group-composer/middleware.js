@@ -47,6 +47,17 @@ const createMockStoryGroup = (dispatch, profileSidebar) => {
           asset_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9c64869bb331a32f5552/7f6dd5f725507d760a782527adacb055.original.jpg',
           thumbnail_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9c64869bb331a32f5552/7f6dd5f725507d760a782527adacb055.original.jpg',
         },
+        {
+          order: '3',
+          type: 'video',
+          upload_id: '5cf0e6be40dd59017a161f75',
+          duration_ms: '60',
+          file_size: '60mb',
+          width: '640',
+          height: '640',
+          asset_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9c64869bb331a32f5552/7f6dd5f725507d760a782527adacb055.original.jpg',
+          thumbnail_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9c64869bb331a32f5552/7f6dd5f725507d760a782527adacb055.original.jpg',
+        },
       ],
     },
   }));

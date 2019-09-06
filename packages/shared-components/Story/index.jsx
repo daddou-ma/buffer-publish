@@ -5,6 +5,7 @@ import { CircleInstReminderIcon } from '@bufferapp/components';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import CardFooter from '../CardFooter';
+import Carousel from '../Carousel';
 
 const Story = ({
   storyDetails,
@@ -27,7 +28,7 @@ const Story = ({
         createdAt={storyDetails.createdAt}
         onPreviewClick={onPreviewClick}
       />
-      <p>INSERT CAROUSEL</p>
+      <Carousel cards={storyDetails.stories} editMode={false} />
       <CardFooter
         icon={<CircleInstReminderIcon color="instagram" />}
         message={storyDetails.storyAction}
@@ -48,6 +49,12 @@ Story.propTypes = {
     avatarUrl: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     storyAction: PropTypes.string.isRequired,
+    stories: PropTypes.arrayOf(PropTypes.shape({
+      order: PropTypes.string,
+      note: PropTypes.string,
+      asset_url: PropTypes.string,
+      thumbnail_url: PropTypes.string,
+    })),
   }),
   isDeleting: PropTypes.bool,
   isWorking: PropTypes.bool,
