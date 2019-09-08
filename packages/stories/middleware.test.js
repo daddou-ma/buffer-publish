@@ -19,7 +19,7 @@ describe('middleware', () => {
       .toBeDefined();
   });
 
-  it('should fetch storyGroups', () => {
+  it('should fetch getStoryGroups', () => {
     const action = {
       type: profileActionTypes.SELECT_PROFILE,
       profile: {
@@ -31,11 +31,9 @@ describe('middleware', () => {
       .toBeCalledWith(action);
     expect(dispatch)
       .toBeCalledWith(dataFetchActions.fetch({
-        name: 'storyGroups',
+        name: 'getStoryGroups',
         args: {
           profileId: action.profile.id,
-          isFetchingMore: false,
-          count: 300,
         },
       }));
   });

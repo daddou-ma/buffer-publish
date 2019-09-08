@@ -8,13 +8,24 @@ export default connect(
     uses24hTime: state.appSidebar.user.uses_24h_time,
     timezone: state.profileSidebar.selectedProfile.timezone,
     weekStartsMonday: state.appSidebar.user.week_starts_monday,
+    selectedProfile: state.profileSidebar.selectedProfile,
+    translations: state.i18n.translations['story-group-composer'],
   }),
   dispatch => ({
     onOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
-    onDateTimeSlotPickerSubmit: (timestamp) => {
-      dispatch(actions.handleSaveStoryGroup(timestamp));
+    onDateTimeSlotPickerSubmit: (scheduledAt) => {
+      dispatch(actions.handleSaveStoryGroup(scheduledAt));
+    },
+    onCreateStoryGroup: (scheduledAt) => {
+      dispatch(actions.handleSaveStoryGroup(scheduledAt));
+    },
+    onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
+      dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
+    },
+    saveNote: ({ note, storyId }) => {
+      dispatch(actions.handleSaveStoryNote({ note, storyId }));
     },
   }),
 )(StoryGroupPopover);

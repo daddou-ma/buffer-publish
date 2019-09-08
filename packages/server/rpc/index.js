@@ -61,7 +61,10 @@ const createHashtagGroup = require('./createHashtagGroup');
 const deleteHashtagGroup = require('./deleteHashtagGroup');
 const getHashtagGroups = require('./getHashtagGroups');
 const createSetupIntent = require('./createSetupIntent');
-const storyGroupsMethod = require('./storyGroups');
+const getStoryGroupsMethod = require('./getStoryGroups');
+const createStoryGroupMethod = require('./createStoryGroup');
+const updateStoryGroupMethod = require('./updateStoryGroup');
+const deleteStoryGroupMethod = require('./deleteStoryGroup');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -139,5 +142,8 @@ module.exports = rpc(
   deleteHashtagGroup,
   getHashtagGroups,
   createSetupIntent,
-  storyGroupsMethod,
+  getStoryGroupsMethod,
+  createStoryGroupMethod,
+  updateStoryGroupMethod,
+  deleteStoryGroupMethod,
 );
