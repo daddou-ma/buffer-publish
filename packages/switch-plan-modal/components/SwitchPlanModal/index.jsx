@@ -70,9 +70,6 @@ class SwitchPlanModal extends React.Component {
     }
   }
 
-  submitForm = () => {
-  }
-
   render() {
     const {
       plan,
