@@ -87,11 +87,6 @@ class SwitchPlanModal extends React.Component {
     return (
       <Modal
         wide
-        action={{
-          label: '',
-          disabled: validating,
-          callback: () => this.submitForm(),
-        }}
         dismissible={dismissible}
       >
         <div style={{ overflow: 'auto', height: 'auto' }}>
