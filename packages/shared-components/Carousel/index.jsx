@@ -11,6 +11,14 @@ import * as Styles from './style';
 const cardsToShow = 15;
 const lowerBounds = 0;
 
+const getCardSizes = (editMode) => {
+  if (editMode) {
+    return { cardWidth: 180, cardHeight: 320, maxPerPage: 4 };
+  }
+
+  return { cardWidth: 110, cardHeight: 198, maxPerPage: 7 };
+};
+
 const sortCards = cards => (
   cards.sort((a, b) => {
     if (a.order > b.order) return 1;
@@ -62,11 +70,10 @@ const PlayIcon = () => (
 /**
  * Carousel on edit mode, handling from the composer
  */
-const CarouselEdit = ({
-  cardWidth,
-  cardHeight,
-}) => (
-  getCardsToShow({ cards: [] }).map(card => (
+const CarouselEdit = () => {
+  const { cardWidth, cardHeight } = getCardSizes(true);
+
+  return getCardsToShow({ cards: [] }).map(card => (
     <Styles.CarouselCard
       key={card.order}
       card={card}
@@ -79,18 +86,18 @@ const CarouselEdit = ({
         {/* TODO: Add <UploadZone /> */}
       </div>
     </Styles.CarouselCard>
-  ))
-);
+  ));
+};
 
 /**
  * Carousel on view mode, to display images in the queue
  */
 const CarouselView = ({
   cards,
-  cardWidth,
-  cardHeight,
-}) => (
-  sortCards(cards).map(card => (
+}) => {
+  const { cardWidth, cardHeight } = getCardSizes(false);
+
+  return sortCards(cards).map(card => (
     <Styles.CarouselCard
       key={card.order}
       card={card}
@@ -100,8 +107,14 @@ const CarouselView = ({
     >
       {card.type === 'video' && <PlayIcon />}
     </Styles.CarouselCard>
-  ))
-);
+  ));
+};
+
+const shouldHideRightArrow = (
+  total,
+  selectedItem,
+  maxPerPage,
+) => total - selectedItem - maxPerPage < 0;
 
 /**
  * Carousel component adapts the size depending on the editMode
@@ -114,12 +127,8 @@ const Carousel = ({
   initialSelectedItem = 0,
 }) => {
   const [selectedItem, setSelectedItem] = useState(initialSelectedItem);
+  const { cardWidth, cardHeight, maxPerPage } = getCardSizes(editMode);
   const total = editMode ? cardsToShow : cards.length;
-  const upperBounds = editMode ? cardsToShow - 1 : total - 1;
-  const cardWidth = editMode ? 180 : 110;
-  const cardHeight = editMode ? 320 : 198;
-  const maxPerPage = editMode ? 4 : 7;
-  const hide = total - selectedItem - maxPerPage < 0;
 
   return (
     <React.Fragment>
@@ -134,8 +143,8 @@ const Carousel = ({
           editMode={editMode}
         >
           {editMode
-            ? <CarouselEdit cardWidth={cardWidth} cardHeight={cardHeight} />
-            : <CarouselView cards={cards} cardWidth={cardWidth} cardHeight={cardHeight} />
+            ? <CarouselEdit />
+            : <CarouselView cards={cards} />
           }
         </Styles.CarouselContainer>
         <NavArrow
@@ -144,14 +153,14 @@ const Carousel = ({
           setSelectedItem={setSelectedItem}
           selectedItem={selectedItem}
           incrementBy={-1}
-          upperBounds={upperBounds}
+          upperBounds={total - 1}
         />
         <NavArrow
-          hide={hide}
+          hide={shouldHideRightArrow(total, selectedItem, maxPerPage)}
           setSelectedItem={setSelectedItem}
           selectedItem={selectedItem}
           incrementBy={+1}
-          upperBounds={upperBounds}
+          upperBounds={total - 1}
         />
       </Styles.SliderCarousel>
     </React.Fragment>
