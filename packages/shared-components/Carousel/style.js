@@ -8,8 +8,8 @@ export const Arrow = styled.button`
   top: 50%;
   transform: translateY(calc(-50% - 16px));
   position: absolute;
-  left: ${props => props.prev ? 0 : 'initial'};
-  right: ${props => props.prev ? 'initial' : 0};
+  left: ${props => (props.prev ? 0 : 'initial')};
+  right: ${props => (props.prev ? 'initial' : 0)};
   background-color: ${grayLight};
   border: 1px solid ${grayLight};
   height: 32px;
@@ -21,7 +21,7 @@ export const Arrow = styled.button`
 
 export const CarouselContainer = styled.div`
   display: flex;
-  padding-left: ${props => props.editMode ? '16px' : 0};
+  padding-left: ${props => (props.editMode ? '16px' : 0)};
   width: calc(${props => props.cardWidth + (cardMargin * 2)}px *  ${$props => $props.totalCards});
   transform: ${props => `translateX(calc(-${props.cardWidth + (cardMargin * 2)}px * ${props.selectedItem}`}));
   transition: all 0.3s ease-out;
@@ -31,7 +31,7 @@ export const CarouselCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: ${props => props.editMode ? `${cardMargin}px` : `16px ${cardMargin}px`};
+  margin: ${props => (props.editMode ? `${cardMargin}px` : `16px ${cardMargin}px`)};
   height: ${$props => $props.cardHeight}px;
   width: ${$props => $props.cardWidth}px;
   background-color: ${grayLighter};
@@ -43,7 +43,7 @@ export const CarouselCard = styled.div`
 export const SliderCarousel = styled.div`
   position: relative;
   overflow: hidden;
-  margin: ${props => props.editMode ? '0 -16px 0 -16px' : '0 16px 0 12px'};
+  margin: ${props => (props.editMode ? '0 -16px 0 -16px' : '0 16px 0 12px')};
 `;
 
 export const IconWrapper = styled.div`
