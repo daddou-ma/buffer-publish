@@ -10,14 +10,17 @@ class CreditCardForm extends Component {
 
     const {
       cycle,
-      handleCardSetupError,
+      handleCardSetupRequest,
       handleCardSetupSuccess,
+      handleCardSetupError,
       plan,
       setupIntentClientSecret,
       source,
       stripe,
       upgradePlan,
     } = this.props;
+
+    handleCardSetupRequest();
 
     stripe
       .handleCardSetup(setupIntentClientSecret)
