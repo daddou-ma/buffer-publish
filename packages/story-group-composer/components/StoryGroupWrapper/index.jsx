@@ -5,6 +5,7 @@ import { Button } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
+import Carousel from '@bufferapp/publish-shared-components/Carousel';
 
 const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
@@ -31,12 +32,15 @@ const StoryGroupWrapper = ({
   translations,
   selectedProfile,
   saveNote,
+  editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
+  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
+
   return (
     <Fragment>
       <WrapperStyle>
@@ -45,13 +49,17 @@ const StoryGroupWrapper = ({
         />
         {viewMode === ADD_STORY &&
           /* TODO: delete this button once the create story group is in place */
-          (<Button
-            type="primary"
-            size="small"
-            label="Create"
-            onClick={() => onCreateStoryGroup()}
-          />)
-        }
+          (
+            <React.Fragment>
+              <Carousel editMode cards={cards} />
+              <Button
+                type="primary"
+                size="small"
+                label="Create"
+                onClick={() => onCreateStoryGroup()}
+              />
+            </React.Fragment>
+          )}
         {viewMode === ADD_NOTE && (
           <AddNote
             translations={translations}

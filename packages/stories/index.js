@@ -18,7 +18,7 @@ export default connect(
         page: currentProfile.page,
         storyGroups: formatPostLists({
           isManager: profileData.isManager,
-          posts: currentProfile.posts,
+          posts: currentProfile.storyPosts,
           scheduleSlotsEnabled: true,
           isSingleSlot: true,
           profileTimezone: profileData.timezone,
@@ -44,8 +44,11 @@ export default connect(
     onComposerPlaceholderClick: () => {
       dispatch(actions.handleComposerPlaceholderClick());
     },
-    onEditClick: () => {
-      dispatch(actions.handleEditStoryGroupClick());
+    onEditClick: (draft) => {
+      dispatch(actions.handleEditStoryGroupClick({
+        draft: draft.post,
+        profileId: ownProps.profileId,
+      }));
     },
     handleCloseStoriesComposer: () => {
       dispatch(actions.handleCloseStoriesComposer());

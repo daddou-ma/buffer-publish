@@ -23,7 +23,7 @@ export const profileInitialState = {
   loadingMore: false,
   moreToLoad: false,
   page: 1,
-  posts: {},
+  storyPosts: {},
   total: 0,
 };
 
@@ -39,7 +39,7 @@ const determineIfMoreToLoad = (action, currentPosts) => {
   return (action.result.total > (currentPostCount + resultUpdatesCount));
 };
 
-const postsReducer = (state = {}, action) => {
+const storyPostsReducer = (state = {}, action) => {
   switch (action.type) {
     case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { updates } = action.result;
@@ -66,9 +66,9 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         loading: false,
         loadingMore: false,
-        moreToLoad: determineIfMoreToLoad(action, state.posts),
+        moreToLoad: determineIfMoreToLoad(action, state.storyPosts),
         page: state.page + 1,
-        posts: postsReducer(state.posts, action),
+        storyPosts: storyPostsReducer(state.storyPosts, action),
         total: action.result.total,
       };
     case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
@@ -128,9 +128,12 @@ export const actions = {
     emptySlotData,
     profileId,
   }),
-  handleEditStoryGroupClick: () => ({
+  handleEditStoryGroupClick: ({ draft, profileId }) => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,
+    updateId: draft.id,
     editMode: true,
+    draft,
+    profileId,
   }),
   handleComposerPlaceholderClick: () => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,
