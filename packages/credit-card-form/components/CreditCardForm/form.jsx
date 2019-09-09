@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import { Button } from "@bufferapp/ui";
-import { ButtonWrapper } from "./styles";
+import { ButtonWrapper, InputWrapper } from "./styles";
 
 class CreditCardForm extends Component {
   handleSubmit = ev => {
@@ -46,7 +46,9 @@ class CreditCardForm extends Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <CardElement />
+        <InputWrapper>
+          <CardElement />
+        </InputWrapper>
         <ButtonWrapper>
           <Button
             type="secondary"
