@@ -1,31 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Card,
   LinkifiedText,
   Text,
 } from '@bufferapp/components';
 
-import {
-  transitionAnimationType,
-} from '@bufferapp/components/style/animation';
-
-import DraftHeader from '../DraftHeader';
+import Card from '../Card';
+import CardHeader from '../CardHeader';
 import DraftFooter from '../DraftFooter';
 import RetweetPanel from '../RetweetPanel';
 
 import RenderPostMetaBar from '../Post/RenderPostMetaBar';
-
-const postContainerStyle = {
-  display: 'flex',
-  width: '100%',
-  transition: `box-shadow 0.1s ${transitionAnimationType}`,
-};
-
-const postStyle = {
-  flexGrow: 1,
-  minWidth: 0,
-};
 
 const postContentStyle = {
   padding: '1rem',
@@ -46,22 +31,26 @@ const renderRetweetComment = ({
   basic,
 }) => (
   <div style={commentStyle}>
-    {basic ?
-      <Text
-        color="black"
-        size="mini"
-      >
-        {retweetComment}
-      </Text> :
-      <LinkifiedText
-        links={retweetCommentLinks}
-        newTab
-        size="mini"
-        unstyled
-        color="black"
-      >
-        {retweetComment}
-      </LinkifiedText>
+    {basic
+      ? (
+        <Text
+          color="black"
+          size="mini"
+        >
+          {retweetComment}
+        </Text>
+      )
+      : (
+        <LinkifiedText
+          links={retweetCommentLinks}
+          newTab
+          size="mini"
+          unstyled
+          color="black"
+        >
+          {retweetComment}
+        </LinkifiedText>
+      )
     }
   </div>
 );
@@ -77,10 +66,7 @@ const renderContent = ({
     return (
       <div style={postContentStyle}>
         { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic }) : '' }
-        <Card
-          color={'off-white'}
-          reducedPadding
-        >
+        <Card>
           <div style={retweetProfileWrapperStyle}>
             <RetweetPanel {...retweetProfile} />
           </div>
@@ -125,51 +111,47 @@ const Draft = ({
   hasFirstCommentFlip,
   profileService,
   geolocationName,
-}) =>
-  (<div style={postContainerStyle}>
-    <div style={postStyle}>
-      <Card
-        faded={isDeleting}
-        noPadding
-      >
-        <DraftHeader
-          draftDetails={draftDetails}
-        />
-        {renderContent({
-          children,
-          retweetProfile,
-          retweetComment,
-          retweetCommentLinks,
-          basic,
-        })}
-        <RenderPostMetaBar
-          profileService={profileService}
-          locationName={geolocationName}
-        />
-        <DraftFooter
-          hasPermission={hasPermission}
-          isDeleting={isDeleting}
-          isConfirmingDelete={isConfirmingDelete}
-          isMoving={isMoving}
-          isPastDue={isPastDue}
-          isWorking={isWorking}
-          manager={manager}
-          scheduledAt={scheduledAt}
-          onApproveClick={onApproveClick}
-          onCancelConfirmClick={onCancelConfirmClick}
-          onDeleteClick={onDeleteClick}
-          onDeleteConfirmClick={onDeleteConfirmClick}
-          onEditClick={onEditClick}
-          onMoveToDraftsClick={onMoveToDraftsClick}
-          onRequestApprovalClick={onRequestApprovalClick}
-          onRescheduleClick={onRescheduleClick}
-          draftDetails={draftDetails}
-          view={view}
-          hasFirstCommentFlip={hasFirstCommentFlip}
-        />
-      </Card>
-    </div>
-  </div>);
+}) => (
+  <Card>
+    <CardHeader
+      creatorName={draftDetails.creatorName}
+      avatarUrl={draftDetails.avatarUrl}
+      createdAt={draftDetails.createdAt}
+    />
+    {renderContent({
+      children,
+      retweetProfile,
+      retweetComment,
+      retweetCommentLinks,
+      basic,
+    })}
+    <RenderPostMetaBar
+      profileService={profileService}
+      locationName={geolocationName}
+    />
+    <DraftFooter
+      hasPermission={hasPermission}
+      isDeleting={isDeleting}
+      isConfirmingDelete={isConfirmingDelete}
+      isMoving={isMoving}
+      isPastDue={isPastDue}
+      isWorking={isWorking}
+      manager={manager}
+      scheduledAt={scheduledAt}
+      onApproveClick={onApproveClick}
+      onCancelConfirmClick={onCancelConfirmClick}
+      onDeleteClick={onDeleteClick}
+      onDeleteConfirmClick={onDeleteConfirmClick}
+      onEditClick={onEditClick}
+      onMoveToDraftsClick={onMoveToDraftsClick}
+      onRequestApprovalClick={onRequestApprovalClick}
+      onRescheduleClick={onRescheduleClick}
+      draftDetails={draftDetails}
+      view={view}
+      hasFirstCommentFlip={hasFirstCommentFlip}
+    />
+  </Card>
+);
 
 Draft.commonPropTypes = {
   hasPermission: PropTypes.bool.isRequired,
