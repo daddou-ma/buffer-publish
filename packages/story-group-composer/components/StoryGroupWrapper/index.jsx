@@ -20,6 +20,11 @@ const WrapperStyle = styled.div`
   padding: 16px;
 `;
 
+const FooterBar = styled.div`
+  padding: 13px 0;
+  display: flex;
+`;
+
 /*
  * Wrapper to make sure to display add story view or add note view
  */
@@ -36,6 +41,7 @@ const StoryGroupWrapper = ({
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
+  userData,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
@@ -48,24 +54,32 @@ const StoryGroupWrapper = ({
           selectedProfile={selectedProfile}
         />
         {viewMode === ADD_STORY &&
-          /* TODO: delete this button once the create story group is in place */
-          (
-            <React.Fragment>
-              <Carousel editMode cards={cards} />
-              <Button
-                type="primary"
-                size="small"
-                label="Create"
-                onClick={() => onCreateStoryGroup()}
-              />
-            </React.Fragment>
-          )}
+        /* TODO: delete this button once the create story group is in place */
+        (
+          <React.Fragment>
+            <Carousel
+              editMode
+              cards={cards}
+              userData={userData}
+            />
+            <Button
+              type="primary"
+              size="small"
+              label="Create"
+              onClick={() => onCreateStoryGroup()}
+            />
+            <FooterBar>
+              <Button label="Preview" onClick={() => true} />
+              <Button label="Schedule Story" onClick={() => true} />
+            </FooterBar>
+          </React.Fragment>
+        )}
         {viewMode === ADD_NOTE && (
           <AddNote
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
-            onSaveNoteClick={({ storyId, note }) => {
-              saveNote({ storyId, note });
+            onSaveNoteClick={({storyId, note}) => {
+              saveNote({storyId, note});
               setViewMode(ADD_STORY);
             }}
           />
@@ -79,6 +93,7 @@ StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   ...DateTimeSlotPickerWrapper.propTypes,
+  userData: PropTypes.shape({}).isRequired,
 };
 
 export default StoryGroupWrapper;
