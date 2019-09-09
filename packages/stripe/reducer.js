@@ -4,9 +4,9 @@ export const actionTypes = keyWrapper('STRIPE', {
   CREATE_SETUP_INTENT_REQUEST: 0,
   CREATE_SETUP_INTENT_SUCCESS: 0,
   CHANGE_BILLING_CYCLE: 0,
-  HANDLE_CARD_SETUP_REQUEST: 0,
-  HANDLE_CARD_SETUP_SUCCESS: 0,
-  HANDLE_CARD_SETUP_ERROR: 0,
+  HANDLE_SETUP_CARD_REQUEST: 0,
+  HANDLE_SETUP_CARD_SUCCESS: 0,
+  HANDLE_SETUP_CARD_ERROR: 0,
 });
 
 const MONTHLY_CYCLE = 'month';
@@ -68,7 +68,7 @@ export const actions = {
     setupIntentClientSecret,
   }),
   handleCardSetupRequest: () => ({
-    type: actionTypes.HANDLE_CARD_SETUP_REQUEST,
+    type: actionTypes.HANDLE_SETUP_CARD_REQUEST,
   }),
   handleCardSetupSuccess: ({
     cycle,
@@ -76,14 +76,14 @@ export const actions = {
     plan,
     paymentMethodId,
   }) => ({
-    type: actionTypes.HANDLE_CARD_SETUP_SUCCESS,
+    type: actionTypes.HANDLE_SETUP_CARD_SUCCESS,
     paymentMethodId,
     cycle,
     source,
     plan,
   }),
   handleCardSetupError: err => ({
-    type: actionTypes.HANDLE_CARD_SETUP_ERROR,
+    type: actionTypes.HANDLE_SETUP_CARD_ERROR,
     errorMessage: err,
   }),
   setMonthlyCycle: () => ({

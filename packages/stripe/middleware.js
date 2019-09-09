@@ -15,7 +15,7 @@ export default ({ dispatch }) => next => (action) => {
         }),
       );
       break;
-    case actionTypes.HANDLE_CARD_SETUP_SUCCESS: {
+    case actionTypes.HANDLE_SETUP_CARD_SUCCESS: {
       const {
         cycle,
         source,

@@ -26,7 +26,7 @@ describe('middleware', () => {
 
   it('should trigger a switchPlan on handleCardSetupSuccess', () => {
     const action = {
-      type: actionTypes.HANDLE_CARD_SETUP_SUCCESS,
+      type: actionTypes.HANDLE_SETUP_CARD_SUCCESS,
       cycle: 'year',
       plan: 'premium_business',
       source: 'publish',
