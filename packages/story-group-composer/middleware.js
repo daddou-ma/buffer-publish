@@ -58,16 +58,13 @@ export default ({ getState, dispatch }) => next => (action) => {
   switch (action.type) {
     case actionTypes.SAVE_STORY_GROUP: {
       const storyGroup = getState().storyGroupComposer.draft;
-
-      // TODO: delete this after the add Story group functionality is in place
-      // createMockStoryGroup(dispatch, getState().profileSidebar);
-
-      if (action.scheduledAt) {
+      const { scheduledAt } = action;
+      if (scheduledAt) {
         dispatch(dataFetchActions.fetch({
           name: 'createStoryGroup',
           args: {
             profileId: selectedProfileId,
-            scheduledAt: action.scheduledAt,
+            scheduledAt,
             stories: storyGroup.stories,
           },
         }));

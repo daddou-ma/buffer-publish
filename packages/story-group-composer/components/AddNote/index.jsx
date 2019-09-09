@@ -63,7 +63,7 @@ const AddNote = ({
         <Button
           type="primary"
           label={translations.saveNoteButton}
-          onClick={() => onSaveNoteClick({ storyId: story.id, note })}
+          onClick={() => onSaveNoteClick({ storyId: story.order, note })}
         />
       </FooterBar>
     </Fragment>
@@ -74,9 +74,9 @@ AddNote.propTypes = {
   onSaveNoteClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   story: PropTypes.shape({
-    thumbnail: PropTypes.string,
+    thumbnail_url: PropTypes.string,
     note: PropTypes.string,
-    id: PropTypes.number,
+    order: PropTypes.number,
   }).isRequired,
   translations: PropTypes.shape({
     saveNoteButton: PropTypes.string,

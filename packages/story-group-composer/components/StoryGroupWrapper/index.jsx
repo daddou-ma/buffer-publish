@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
@@ -46,14 +45,8 @@ const StoryGroupWrapper = ({
           selectedProfile={selectedProfile}
         />
         {viewMode === ADD_STORY && (
-          /* TODO: delete this button once the create story group is in place */
           <div>
-            <Button
-              type="primary"
-              size="small"
-              label="Create"
-              onClick={() => onCreateStoryGroup()}
-            />
+            {/* TODO: remove temporary default height once components are in place */}
             <div style={{ height: '350px' }} />
             <AddStoryFooter
               onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
@@ -61,6 +54,7 @@ const StoryGroupWrapper = ({
               weekStartsMonday={weekStartsMonday}
               uses24hTime={uses24hTime}
               isScheduleLoading={isScheduleLoading}
+              translations={translations}
             />
           </div>
         )}

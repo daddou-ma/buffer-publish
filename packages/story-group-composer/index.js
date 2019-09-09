@@ -26,8 +26,8 @@ export default connect(
     onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
       dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
     },
-    saveNote: ({ note, storyId }) => {
-      dispatch(actions.handleSaveStoryNote({ note, storyId }));
+    saveNote: ({ note, order }) => {
+      dispatch(actions.handleSaveStoryNote({ note, order }));
     },
   }),
 )(StoryGroupPopover);

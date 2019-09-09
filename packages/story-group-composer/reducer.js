@@ -11,6 +11,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
 export const initialState = {
   // temporarily adding as dummy data until create is working
   draft: {
+    scheduledAt: null,
     stories: [{
       note: null,
       order: 1,
@@ -18,13 +19,12 @@ export const initialState = {
       asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
       thumbnail_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
     }],
-    scheduledAt: null,
   },
   isScheduleLoading: false,
 };
 
-const updateStoryNote = ({ stories = [], storyId, note }) => (
-  stories.map(story => (story.id === storyId ? { ...story, note } : story))
+const updateStoryNote = ({ stories = [], order, note }) => (
+  stories.map(story => (story.order === order ? { ...story, note } : story))
 );
 
 export default (state = initialState, action) => {
@@ -46,11 +46,11 @@ export default (state = initialState, action) => {
       };
     }
     case actionTypes.SAVE_STORY_NOTE: {
-      const { storyId, note } = action;
+      const { order, note } = action;
       const { stories } = state.draft;
       return {
         ...state,
-        draft: { ...state.draft, stories: updateStoryNote({ stories, storyId, note }) },
+        draft: { ...state.draft, stories: updateStoryNote({ stories, order, note }) },
       };
     }
     case actionTypes.SET_SCHEDULE_LOADING: {
@@ -75,9 +75,9 @@ export const actions = {
     scheduledAt,
     stories,
   }),
-  handleSaveStoryNote: ({ storyId, note }) => ({
+  handleSaveStoryNote: ({ order, note }) => ({
     type: actionTypes.SAVE_STORY_NOTE,
-    storyId,
+    order,
     note,
   }),
   setScheduleLoading: isLoading => ({
