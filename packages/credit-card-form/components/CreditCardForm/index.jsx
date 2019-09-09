@@ -15,8 +15,10 @@ class StripeWrapper extends Component {
   }
 
   render() {
+    const { stripePublishableKey, stripe } = this.props;
+
     return (
-      <StripeProvider apiKey={window.STRIPE_PUBLISHABLE_KEY}>
+      <StripeProvider stripe={stripe}>
         <Elements>
           <CreditCardForm {...this.props} />
         </Elements>
@@ -24,5 +26,15 @@ class StripeWrapper extends Component {
     );
   }
 }
+
+StripeWrapper.propTypes = {
+  stripe: PropTypes.any, // eslint-disable-line
+  stripePublishableKey: PropTypes.string,
+  createSetupIntentRequest: PropTypes.func,
+  buttonLabel: PropTypes.string,
+  closeButtonLabel: PropTypes.string,
+  closeAction: PropTypes.func,
+  validating: PropTypes.bool,
+};
 
 export default StripeWrapper;

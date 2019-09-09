@@ -8,7 +8,7 @@ import {
 } from '@bufferapp/ui';
 
 import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
-import StripeCreditCardForm from '../../../credit-card-form';
+import StripeCreditCardForm from '@bufferapp/credit-card-form';
 
 import PlanCycleSelect from '../PlanCycleSelect';
 import PlanDescriptors from '../PlanDescriptors';
@@ -52,7 +52,7 @@ const getButtonText = ({ plan, translations }) => {
 class SwitchPlanModal extends React.Component {
   constructor() {
     super();
-    
+
     this.onSecondaryAction = this.onSecondaryAction.bind(this);
   }
 

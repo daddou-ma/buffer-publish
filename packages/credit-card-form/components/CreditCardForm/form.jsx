@@ -1,11 +1,10 @@
-/* eslint-disable arrow-parens */
 import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import { Button } from "@bufferapp/ui";
 import { ButtonWrapper, InputWrapper } from "./styles";
 
 class CreditCardForm extends Component {
-  handleSubmit = ev => {
+  handleSubmit = (ev) => {
     ev.preventDefault();
 
     const {
@@ -24,7 +23,7 @@ class CreditCardForm extends Component {
 
     stripe
       .handleCardSetup(setupIntentClientSecret)
-      .then(res => {
+      .then((res) => {
         const options = {
           paymentMethodId: res.setupIntent.payment_method,
           source,
@@ -34,7 +33,7 @@ class CreditCardForm extends Component {
         handleCardSetupSuccess(options);
         upgradePlan();
       })
-      .catch(err => {
+      .catch((err) => {
         handleCardSetupError(err);
       });
   };

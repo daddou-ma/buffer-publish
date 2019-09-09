@@ -4,8 +4,14 @@ import { actions as stripeActions } from '@bufferapp/stripe';
 import StripeCreditCardForm from './components/CreditCardForm';
 
 export default connect(
-  null,
+  state => ({
+    stripePublishableKey: state.creditCardForm.stripePublishableKey,
+    stripe: state.creditCardForm.stripe,
+  }),
   dispatch => ({
     createSetupIntentRequest: () => dispatch(stripeActions.createSetupIntentRequest()),
   }),
 )(StripeCreditCardForm);
+
+
+export reducer from './reducer';

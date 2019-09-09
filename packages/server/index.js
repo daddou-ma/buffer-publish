@@ -129,6 +129,7 @@ const stripeScript = `
   <script src="https://js.stripe.com/v3/"></script>
   <script type="text/javascript">
     const stripe = Stripe('${stripePublishableKey}');
+    window._stripe = stripe;
     window.STRIPE_PUBLISHABLE_KEY = '${stripePublishableKey}';
   </script>
 `;
