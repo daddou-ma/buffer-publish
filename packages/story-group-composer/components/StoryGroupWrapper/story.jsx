@@ -16,5 +16,6 @@ storiesOf('StoryGroup', module)
       uses24hTime
       timezone="Asia/Tehran"
       weekStartsMonday={false}
+      isScheduleLoading={false}
     />
   ));
