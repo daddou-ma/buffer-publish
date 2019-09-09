@@ -128,9 +128,12 @@ export const actions = {
     emptySlotData,
     profileId,
   }),
-  handleEditStoryGroupClick: () => ({
+  handleEditStoryGroupClick: ({ draft, profileId }) => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,
+    updateId: draft.id,
     editMode: true,
+    draft,
+    profileId,
   }),
   handleComposerPlaceholderClick: () => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,

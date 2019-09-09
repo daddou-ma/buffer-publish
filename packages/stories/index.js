@@ -44,8 +44,11 @@ export default connect(
     onComposerPlaceholderClick: () => {
       dispatch(actions.handleComposerPlaceholderClick());
     },
-    onEditClick: () => {
-      dispatch(actions.handleEditStoryGroupClick());
+    onEditClick: (draft) => {
+      dispatch(actions.handleEditStoryGroupClick({
+        draft: draft.post,
+        profileId: ownProps.profileId,
+      }));
     },
     handleCloseStoriesComposer: () => {
       dispatch(actions.handleCloseStoriesComposer());

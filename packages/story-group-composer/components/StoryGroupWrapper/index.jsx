@@ -32,12 +32,15 @@ const StoryGroupWrapper = ({
   translations,
   selectedProfile,
   saveNote,
+  editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
+  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
+
   return (
     <Fragment>
       <WrapperStyle>
@@ -48,7 +51,7 @@ const StoryGroupWrapper = ({
           /* TODO: delete this button once the create story group is in place */
           (
             <React.Fragment>
-              <Carousel editMode />
+              <Carousel editMode cards={cards} />
               <Button
                 type="primary"
                 size="small"

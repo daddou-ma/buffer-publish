@@ -68,44 +68,28 @@ const PlayIcon = () => (
 );
 
 /**
+ * Carousel on view mode, to display images in the queue
  * Carousel on edit mode, handling from the composer
  */
-const CarouselEdit = () => {
-  const { cardWidth, cardHeight } = getCardSizes(true);
-
-  return getCardsToShow({ cards: [] }).map(card => (
-    <Styles.CarouselCard
-      key={card.order}
-      card={card}
-      cardHeight={cardHeight}
-      cardWidth={cardWidth}
-      editMode
-    >
-      <div>
-        Edit Mode
-        {/* TODO: Add <UploadZone /> */}
-      </div>
-    </Styles.CarouselCard>
-  ));
-};
-
-/**
- * Carousel on view mode, to display images in the queue
- */
-const CarouselView = ({
+const CarouselBody = ({
   cards,
+  editMode,
 }) => {
-  const { cardWidth, cardHeight } = getCardSizes(false);
+  const { cardWidth, cardHeight } = getCardSizes(editMode);
+  const cardsToRender = editMode ? getCardsToShow({ cards }) : sortCards(cards);
 
-  return sortCards(cards).map(card => (
+  return cardsToRender.map(card => (
     <Styles.CarouselCard
       key={card.order}
       card={card}
       cardHeight={cardHeight}
       cardWidth={cardWidth}
-      editMode={false}
+      editMode={editMode}
     >
-      {card.type === 'video' && <PlayIcon />}
+      {editMode
+        ? <div>{/* TODO: Add <UploadZone /> */}</div>
+        : card.type === 'video' && <PlayIcon />
+      }
     </Styles.CarouselCard>
   ));
 };
@@ -142,10 +126,7 @@ const Carousel = ({
           cardHeight={cardHeight}
           editMode={editMode}
         >
-          {editMode
-            ? <CarouselEdit />
-            : <CarouselView cards={cards} />
-          }
+          <CarouselBody cards={cards} editMode={editMode} />
         </Styles.CarouselContainer>
         <NavArrow
           prev
