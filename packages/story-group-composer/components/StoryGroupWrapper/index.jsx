@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Carousel from '@bufferapp/publish-shared-components/Carousel';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
@@ -32,32 +33,36 @@ const StoryGroupWrapper = ({
   selectedProfile,
   isScheduleLoading,
   saveNote,
+  editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
+  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
+
   return (
     <Fragment>
       <WrapperStyle>
         <HeaderBar
           selectedProfile={selectedProfile}
         />
-        {viewMode === ADD_STORY && (
-          <div>
-            {/* TODO: remove temporary default height once components are in place */}
-            <div style={{ height: '350px' }} />
-            <AddStoryFooter
-              onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
-              timezone={timezone}
-              weekStartsMonday={weekStartsMonday}
-              uses24hTime={uses24hTime}
-              isScheduleLoading={isScheduleLoading}
-              translations={translations}
-            />
-          </div>
-        )}
+        {viewMode === ADD_STORY &&
+          /* TODO: delete this button once the create story group is in place */
+          (
+            <React.Fragment>
+              <Carousel editMode cards={cards} />
+              <AddStoryFooter
+                onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
+                timezone={timezone}
+                weekStartsMonday={weekStartsMonday}
+                uses24hTime={uses24hTime}
+                isScheduleLoading={isScheduleLoading}
+                translations={translations}
+              />
+            </React.Fragment>
+          )}
         {viewMode === ADD_NOTE && (
           <AddNote
             translations={translations}
