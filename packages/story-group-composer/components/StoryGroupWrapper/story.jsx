@@ -14,7 +14,7 @@ storiesOf('StoryGroup', module)
       saveNote={() => {}}
       onDateTimeSlotPickerSubmit={() => {}}
       uses24hTime
-      timezone="UTC"
+      timezone="Asia/Tehran"
       weekStartsMonday={false}
     />
   ));

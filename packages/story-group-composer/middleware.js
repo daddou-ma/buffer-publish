@@ -87,9 +87,17 @@ export default ({ getState, dispatch }) => next => (action) => {
       break;
     }
     case `createStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(actions.setScheduleLoading(false));
       dispatch(notificationActions.createNotification({
         notificationType: 'error',
         message: action.error,
+      }));
+      break;
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(storiesActions.handleCloseStoriesComposer());
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: 'Great! This story has been added to your queue.',
       }));
       break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:

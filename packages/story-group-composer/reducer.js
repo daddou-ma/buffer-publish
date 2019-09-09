@@ -41,6 +41,12 @@ export default (state = initialState, action) => {
         draft: { ...state.draft, stories: updateStoryNote({ stories, storyId, note }) },
       };
     }
+    case actionTypes.SET_SCHEDULE_LOADING: {
+      return {
+        ...state,
+        isScheduleLoading: action.isLoading,
+      };
+    }
     default:
       return state;
   }
@@ -61,5 +67,9 @@ export const actions = {
     type: actionTypes.SAVE_STORY_NOTE,
     storyId,
     note,
+  }),
+  setScheduleLoading: isLoading => ({
+    type: actionTypes.SET_SCHEDULE_LOADING,
+    isLoading,
   }),
 };

@@ -30,6 +30,7 @@ const StoryGroupWrapper = ({
   weekStartsMonday,
   translations,
   selectedProfile,
+  isScheduleLoading,
   saveNote,
   onCreateStoryGroup,
   onUpdateStoryGroup,
@@ -70,6 +71,7 @@ const StoryGroupWrapper = ({
 StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
+  isScheduleLoading: PropTypes.bool.isRequired,
   ...DateTimeSlotPickerWrapper.propTypes,
 };
 

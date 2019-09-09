@@ -13,6 +13,7 @@ const StoryGroupPopover = ({
   timezone,
   weekStartsMonday,
   selectedProfile,
+  isScheduleLoading,
   saveNote,
   onCreateStoryGroup,
   onUpdateStoryGroup,
@@ -31,6 +32,7 @@ const StoryGroupPopover = ({
       selectedProfile={selectedProfile}
       saveNote={saveNote}
       translations={translations}
+      isScheduleLoading={isScheduleLoading}
       onCreateStoryGroup={onCreateStoryGroup}
       onUpdateStoryGroup={onUpdateStoryGroup}
       onDeleteStoryGroup={onDeleteStoryGroup}
@@ -41,6 +43,7 @@ const StoryGroupPopover = ({
 StoryGroupPopover.propTypes = {
   onOverlayClick: PropTypes.func.isRequired,
   saveNote: PropTypes.func.isRequired,
+  isScheduleLoading: PropTypes.bool.isRequired,
   selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   ...DateTimeSlotPickerWrapper.propTypes,
 };

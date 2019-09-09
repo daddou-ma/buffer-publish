@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Button } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 
-
 const FooterBar = styled.div`
   padding: 13px;
   display: flex;
@@ -20,6 +19,7 @@ const AddStoryFooter = ({
   timezone,
   weekStartsMonday,
   uses24hTime,
+  isScheduleLoading,
 }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   return (
@@ -27,26 +27,26 @@ const AddStoryFooter = ({
       <FooterBar>
         <ButtonStyle>
           <Button
-            type="secodary"
+            type="secondary"
             label="Preview"
+            onClick={() => {}}
           />
         </ButtonStyle>
         <Button
-          onSelectClick={() => setShowDatePicker(true)}
           onClick={() => setShowDatePicker(true)}
           type="primary"
-          isSplit
-          items={[
-            { id: '1', title: 'Share Now' },
-          ]}
-          label="Schedule Story"
+          disabled={isScheduleLoading}
+          label={isScheduleLoading ? 'Scheduling Story...' : 'Schedule Story'}
         />
         {showDatePicker && (
           <DateTimeSlotPickerWrapper
             shouldUse24hTime={uses24hTime}
             timezone={timezone}
             weekStartsMonday={weekStartsMonday}
-            onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
+            onDateTimeSlotPickerSubmit={(scheduledAt) => {
+              setShowDatePicker(false);
+              onDateTimeSlotPickerSubmit(scheduledAt);
+            }}
           />
         )}
       </FooterBar>
@@ -60,6 +60,7 @@ AddStoryFooter.propTypes = {
   weekStartsMonday: PropTypes.bool.isRequired,
   uses24hTime: PropTypes.bool.isRequired,
   onDateTimeSlotPickerSubmit: PropTypes.func.isRequired,
+  isScheduleLoading: PropTypes.bool.isRequired,
 };
 
 export default AddStoryFooter;

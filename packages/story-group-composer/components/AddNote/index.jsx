@@ -18,10 +18,6 @@ const ButtonStyle = styled.div`
   margin-right: 5px;
 `;
 
-const imageStyle = {
-
-};
-
 const StyledImage = styled.img`
   width: 180px;
   height: 320px;
@@ -33,7 +29,7 @@ const AddNote = ({
   onCancelClick,
   translations,
   // dummy data until we get uploading/adding story done
-  story = { note: null, id: 1, thumbnail: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80'},
+  story,
 }) => {
   const [note, setNote] = useState(story.note);
   const setNoteValue = (event) => {
@@ -46,7 +42,7 @@ const AddNote = ({
       <BodyWrapperStyle>
         <div>
           <StyledImage
-            src={story.thumbnail}
+            src={story.thumbnail_url}
             alt={translations.noteImageAlt}
           />
         </div>

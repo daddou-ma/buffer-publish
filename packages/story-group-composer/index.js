@@ -10,12 +10,14 @@ export default connect(
     weekStartsMonday: state.appSidebar.user.week_starts_monday,
     selectedProfile: state.profileSidebar.selectedProfile,
     translations: state.i18n.translations['story-group-composer'],
+    isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
   }),
   dispatch => ({
     onOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
     onDateTimeSlotPickerSubmit: (scheduledAt) => {
+      dispatch(actions.setScheduleLoading(true));
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
     onCreateStoryGroup: (scheduledAt) => {
