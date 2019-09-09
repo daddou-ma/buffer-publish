@@ -3,12 +3,12 @@ import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
-import { actionTypes } from './reducer';
+import { actions as storiesActions } from '@bufferapp/publish-stories';
+import { actionTypes, actions } from './reducer';
 
 const moment = require('moment-timezone');
 
 const refreshStoryGroups = (dispatch, selectedProfileId) => {
-  // will need to pass correct arguments once api/rpc is done
   dispatch(dataFetchActions.fetch({
     name: 'getStoryGroups',
     profileId: selectedProfileId,
@@ -60,7 +60,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       const storyGroup = getState().storyGroupComposer.draft;
 
       // TODO: delete this after the add Story group functionality is in place
-      createMockStoryGroup(dispatch, getState().profileSidebar);
+      // createMockStoryGroup(dispatch, getState().profileSidebar);
 
       if (action.scheduledAt) {
         dispatch(dataFetchActions.fetch({
@@ -68,7 +68,7 @@ export default ({ getState, dispatch }) => next => (action) => {
           args: {
             profileId: selectedProfileId,
             scheduledAt: action.scheduledAt,
-            stories: storyGroup,
+            stories: storyGroup.stories,
           },
         }));
       }

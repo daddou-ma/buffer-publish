@@ -5,10 +5,22 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_GROUP: 0,
   SAVE_STORY_NOTE: 0,
   UPDATE_STORY_GROUP: 0,
+  SET_SCHEDULE_LOADING: 0,
 });
 
 export const initialState = {
-  draft: {},
+  // temporarily adding as dummy data until create is working
+  draft: {
+    stories: [{
+      note: null,
+      order: 1,
+      type: 'image',
+      asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+      thumbnail_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+    }],
+    scheduledAt: null,
+  },
+  isScheduleLoading: false,
 };
 
 const updateStoryNote = ({ stories = [], storyId, note }) => (

@@ -5,6 +5,7 @@ import { Button } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
+import AddStoryFooter from '../AddStoryFooter';
 
 const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
@@ -44,15 +45,25 @@ const StoryGroupWrapper = ({
         <HeaderBar
           selectedProfile={selectedProfile}
         />
-        {viewMode === ADD_STORY &&
+        {viewMode === ADD_STORY && (
           /* TODO: delete this button once the create story group is in place */
-          (<Button
-            type="primary"
-            size="small"
-            label="Create"
-            onClick={() => onCreateStoryGroup()}
-          />)
-        }
+          <div>
+            <Button
+              type="primary"
+              size="small"
+              label="Create"
+              onClick={() => onCreateStoryGroup()}
+            />
+            <div style={{ height: '350px' }} />
+            <AddStoryFooter
+              onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
+              timezone={timezone}
+              weekStartsMonday={weekStartsMonday}
+              uses24hTime={uses24hTime}
+              isScheduleLoading={isScheduleLoading}
+            />
+          </div>
+        )}
         {viewMode === ADD_NOTE && (
           <AddNote
             translations={translations}
