@@ -89,6 +89,7 @@ const CardFooter = ({
   onSubmitClick,
   submitLabel,
   onRequeueClick,
+  requeueLabel,
   hasFirstComment,
   isPerformingAction,
   actionMessage,
@@ -158,7 +159,7 @@ const CardFooter = ({
               && <Button type={onRequeueClick ? 'secondary' : 'primary'} label={submitLabel} size="small" onClick={onSubmitClick} />
             }
             {onRequeueClick
-              && <RequeueButton type="primary" label="Re-add to Queue" size="small" onClick={onRequeueClick} />
+              && <RequeueButton type="primary" label={requeueLabel} size="small" onClick={onRequeueClick} />
             }
           </ButtonWrapper>
         )
@@ -182,6 +183,7 @@ CardFooter.propTypes = {
   onSubmitClick: PropTypes.func,
   submitLabel: PropTypes.string,
   onRequeueClick: PropTypes.func,
+  requeueLabel: PropTypes.string,
   hasFirstComment: PropTypes.bool,
   isPerformingAction: PropTypes.bool,
   actionMessage: PropTypes.string,
@@ -200,6 +202,7 @@ CardFooter.defaultProps = {
   onSubmitClick: null,
   submitLabel: 'Share Now',
   onRequeueClick: null,
+  requeueLabel: 'Reschedule',
   hasFirstComment: false,
   isPerformingAction: false,
   actionMessage: 'Submitting...',
