@@ -57,7 +57,10 @@ export default connect(
       dispatch(actions.handlePreviewClick());
     },
     onDeleteConfirmClick: (storyGroup) => {
-      dispatch(actions.handleDeleteStoryGroup({ storyGroup }));
+      dispatch(actions.handleDeleteStoryGroup({
+        storyGroup,
+        profileId: ownProps.profileId,
+      }));
     },
     onShareNowClick: (storyGroup) => {
       dispatch(actions.handleShareNowClick({

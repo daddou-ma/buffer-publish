@@ -39,6 +39,7 @@ const getStoryGroupId = (action) => {
   if (action.args) { return action.args.updateId; }
   if (action.post) { return action.post.id; }
   if (action.draft) { return action.draft.id; }
+  if (action.storyGroup) { return action.storyGroup.id; }
 };
 
 const determineIfMoreToLoad = (action, currentPosts) => {
@@ -73,6 +74,10 @@ const storyPostsReducer = (state = {}, action) => {
       }
       return updates;
     }
+    case actionTypes.DELETE_STORY_GROUP: {
+      const { [getStoryGroupId(action)]: deleted, ...currentState } = state;
+      return currentState;
+    }
     case actionTypes.STORY_GROUP_SHARE_NOW:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
@@ -104,6 +109,11 @@ const profileReducer = (state = profileInitialState, action) => {
         storyPosts: storyPostsReducer(state.storyPosts, action),
         total: action.result.total,
       };
+    case actionTypes.DELETE_STORY_GROUP:
+      return {
+        ...state,
+        storyPosts: storyPostsReducer(state.storyPosts, action),
+      };
     case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
@@ -121,6 +131,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
     case actionTypes.STORY_GROUP_SHARE_NOW:
+    case actionTypes.DELETE_STORY_GROUP:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
@@ -180,9 +191,10 @@ export const actions = {
   handlePreviewClick: () => ({
     type: actionTypes.OPEN_PREVIEW,
   }),
-  handleDeleteStoryGroup: ({ storyGroup }) => ({
+  handleDeleteStoryGroup: ({ storyGroup, profileId }) => ({
     type: actionTypes.DELETE_STORY_GROUP,
     storyGroup: storyGroup.post,
+    profileId,
   }),
   handleShareNowClick: ({ draft }) => ({
     type: actionTypes.STORY_GROUP_SHARE_NOW,
