@@ -16,7 +16,7 @@ const initialState = {
   error: null,
   creatingSetupIntent: false,
   setupIntentClientSecret: '',
-  validatingCardSetup: false,
+  validating: false,
   handleCardSetupError: '',
 };
 
@@ -36,18 +36,17 @@ export default (state = initialState, action) => {
     case actionTypes.HANDLE_SETUP_CARD_REQUEST:
       return {
         ...state,
-        validatingCardSetup: true,
+        validating: true,
       };
     case actionTypes.HANDLE_SETUP_CARD_SUCCESS:
       return {
         ...state,
-        validatingCardSetup: false,
       };
     case actionTypes.HANDLE_SETUP_CARD_ERROR:
       return {
         ...state,
-        validatingCardSetup: false,
-        handleCardSetupError: 'Add error here',
+        validating: false,
+        handleCardSetupError: 'Sorry, but there was an error with your card. Please try again.',
       };
     case actionTypes.CHANGE_BILLING_CYCLE:
       return {
