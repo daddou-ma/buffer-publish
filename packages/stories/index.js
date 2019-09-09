@@ -18,7 +18,7 @@ export default connect(
         page: currentProfile.page,
         storyGroups: formatPostLists({
           isManager: profileData.isManager,
-          posts: currentProfile.posts,
+          posts: currentProfile.storyPosts,
           scheduleSlotsEnabled: true,
           isSingleSlot: true,
           profileTimezone: profileData.timezone,

@@ -22,7 +22,7 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          posts: {},
+          storyPosts: {},
           total: 0,
         },
       },
@@ -40,7 +40,7 @@ describe('reducer', () => {
   });
 
   it('should handle getStoryGroups_FETCH_SUCCESS action type', () => {
-    const post = { post: { id: 'foo', text: 'i love buffer' } };
+    const storyPost = { storyPost: { id: 'foo', text: 'i love buffer' } };
     const stateAfter = {
       byProfileId: {
         [profileId]: {
@@ -48,7 +48,7 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 2,
-          posts: [post],
+          storyPosts: [storyPost],
           total: 1,
         },
       },
@@ -57,7 +57,7 @@ describe('reducer', () => {
       profileId,
       type: 'getStoryGroups_FETCH_SUCCESS',
       result: {
-        updates: [post],
+        updates: [storyPost],
         total: 1,
       },
       args: {
@@ -77,7 +77,7 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          posts: {},
+          storyPosts: {},
           total: 0,
         },
       },
