@@ -1,6 +1,6 @@
 {
-  "name": "@bufferapp/credit-card-form",
-  "version": "1.0.0",
+  "name": "@bufferapp/publish-credit-card-form",
+  "version": "2.0.0",
   "description": "Stripe Elements based credit card form",
   "main": "index.js",
   "scripts": {

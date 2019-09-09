@@ -8,7 +8,7 @@ import {
 } from '@bufferapp/ui';
 
 import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
-import StripeCreditCardForm from '@bufferapp/credit-card-form';
+import StripeCreditCardForm from '@bufferapp/publish-credit-card-form';
 
 import PlanCycleSelect from '../PlanCycleSelect';
 import PlanDescriptors from '../PlanDescriptors';
