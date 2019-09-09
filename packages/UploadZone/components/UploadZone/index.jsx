@@ -71,7 +71,7 @@ class UploadZone extends React.Component {
   };
 
   getUploadableNewFiles = (files) => {
-    const { uploadFormatsConfig, queueError, translations } = this.props;
+    const {uploadFormatsConfig, queueError, translations} = this.props;
 
     let invalidFormatFilesCount = 0;
 
@@ -90,7 +90,7 @@ class UploadZone extends React.Component {
         message = stringTokenizer(message, '{fileName}', preventXss(file.name));
         message = stringTokenizer(message, '{formattedMaxSize}', formattedMaxSize);
 
-        queueError({ message });
+        queueError({message});
         return false;
       }
 
@@ -103,7 +103,7 @@ class UploadZone extends React.Component {
 
       if (invalidFormatFilesCount > 1) {
         if (invalidFormatFilesCount === files.length) {
-          message = translations.invalidFormatCantUseAnyFiles
+          message = translations.invalidFormatCantUseAnyFiles;
         } else {
           message = translations.invalidFormatCantUseSomeFiles;
         }
@@ -118,7 +118,7 @@ class UploadZone extends React.Component {
       //we want to insert our tokenized accepedFilesText string into our message where appropriate
       message = stringTokenizer(message, '{acceptedFilesText}', acceptedFilesText);
 
-      queueError({ message });
+      queueError({message});
     }
 
     return validFiles;
@@ -134,12 +134,12 @@ class UploadZone extends React.Component {
       notifiers,
       supportsMixedMediaTypes,
     } = this.props;
-    const { maxAttachableImagesCount } = service;
+    const {maxAttachableImagesCount} = service;
 
     const fileMediaTypes = files.map((file) => (
       ContentTypeMediaTypeMap.get(getFileTypeFromPath(file.name).toUpperCase())
     ));
-    if(!supportsMixedMediaTypes) {
+    if (!supportsMixedMediaTypes) {
       const uniqueFileMediaTypes = [...new Set(fileMediaTypes)].filter(v => !!v);
       const containsMixedMediaTypes = uniqueFileMediaTypes.length > 1;
 
@@ -179,9 +179,9 @@ class UploadZone extends React.Component {
     } = this.props;
 
     let UploadButton = ({onClick}) => <ButtonWithStyles
-        onClick={onClick}
-        title={translations.buttonTitle}
-      />;
+      onClick={onClick}
+      title={translations.buttonTitle}
+    />;
 
     if (uploadButton !== null) {
       UploadButton = uploadButton;
@@ -208,13 +208,12 @@ class UploadZone extends React.Component {
           onClick={this.onUploadButtonClick}
         />
       </div>
-
     );
   }
 }
 
 UploadZone.propTypes = {
-  uploadButton: PropTypes.node,
+  uploadButton: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
   draftId: PropTypes.string.isRequired,
   className: PropTypes.string,
   classNames: PropTypes.shape({
@@ -259,7 +258,11 @@ UploadZone.defaultProps = {
   supportsMixedMediaTypes: false,
   disabled: false,
   multiple: true,
+  classNames: {
+    uploadZone: '',
+    uploadZoneActive: '',
+    uploadZoneDisabled: '',
+  }
 };
-
 
 export default UploadZone;
