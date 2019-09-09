@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import { grayLight } from '@bufferapp/ui/style/colors';
+import { borderRadius } from '@bufferapp/ui/style/borders';
 
 export const InputWrapper = styled.div`
-  border: 1px solid #E0E0E0;
-  border-radius: 4px;
+  border: 1px solid ${grayLight};
+  border-radius: ${borderRadius};
   padding: 8px;
 `;
 
