@@ -20,6 +20,7 @@ const AddStoryFooter = ({
   weekStartsMonday,
   uses24hTime,
   isScheduleLoading,
+  translations,
 }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   return (
@@ -28,7 +29,7 @@ const AddStoryFooter = ({
         <ButtonStyle>
           <Button
             type="secondary"
-            label="Preview"
+            label={translations.previewButton}
             onClick={() => {}}
           />
         </ButtonStyle>
@@ -36,7 +37,7 @@ const AddStoryFooter = ({
           onClick={() => setShowDatePicker(true)}
           type="primary"
           disabled={isScheduleLoading}
-          label={isScheduleLoading ? 'Scheduling Story...' : 'Schedule Story'}
+          label={isScheduleLoading ? translations.scheduleLoadingButton : translations.scheduleButton}
         />
         {showDatePicker && (
           <DateTimeSlotPickerWrapper
@@ -61,6 +62,11 @@ AddStoryFooter.propTypes = {
   uses24hTime: PropTypes.bool.isRequired,
   onDateTimeSlotPickerSubmit: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
+  translations: PropTypes.shape({
+    scheduleLoadingButton: PropTypes.string,
+    scheduleButton: PropTypes.string,
+    previewButton: PropTypes.string,
+  }).isRequired,
 };
 
 export default AddStoryFooter;
