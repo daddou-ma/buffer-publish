@@ -377,8 +377,7 @@ class CardCarousel extends React.Component {
                     disabled={false}
                   />
                 </div>
-              )
-              }
+              )}
             </CarouselCard>
           ))}
         </CarouselContainer>
