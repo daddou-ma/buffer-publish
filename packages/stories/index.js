@@ -44,9 +44,9 @@ export default connect(
     onComposerPlaceholderClick: () => {
       dispatch(actions.handleComposerPlaceholderClick());
     },
-    onEditClick: (draft) => {
+    onEditClick: (storyGroup) => {
       dispatch(actions.handleEditStoryGroupClick({
-        draft: draft.post,
+        draft: storyGroup.post,
         profileId: ownProps.profileId,
       }));
     },
@@ -58,6 +58,11 @@ export default connect(
     },
     onDeleteConfirmClick: (storyGroup) => {
       dispatch(actions.handleDeleteStoryGroup({ storyGroup }));
+    },
+    onShareNowClick: (storyGroup) => {
+      dispatch(actions.handleShareNowClick({
+        draft: storyGroup.post,
+      }));
     },
   }),
 )(StoryGroups);

@@ -7,6 +7,7 @@ export const actionTypes = keyWrapper('STORIES', {
   HIDE_STORIES_COMPOSER: 0,
   DELETE_STORY_GROUP: 0,
   OPEN_PREVIEW: 0,
+  STORY_GROUP_SHARE_NOW: 0,
 });
 
 export const initialState = {
@@ -33,10 +34,34 @@ const getProfileId = (action) => {
   if (action.profile) { return action.profile.id; }
 };
 
+const getStoryGroupId = (action) => {
+  if (action.updateId) { return action.updateId; }
+  if (action.args) { return action.args.updateId; }
+  if (action.post) { return action.post.id; }
+  if (action.draft) { return action.draft.id; }
+};
+
 const determineIfMoreToLoad = (action, currentPosts) => {
   const currentPostCount = Object.keys(currentPosts).length;
   const resultUpdatesCount = Object.keys(action.result.updates).length;
   return (action.result.total > (currentPostCount + resultUpdatesCount));
+};
+
+const storyPostReducer = (state, action) => {
+  switch (action.type) {
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+      return {
+        ...state,
+        isWorking: true,
+      };
+    case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        isWorking: false,
+      };
+    default:
+      return state;
+  }
 };
 
 const storyPostsReducer = (state = {}, action) => {
@@ -48,6 +73,12 @@ const storyPostsReducer = (state = {}, action) => {
       }
       return updates;
     }
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        [getStoryGroupId(action)]: storyPostReducer(state[getStoryGroupId(action)], action),
+      };
     default:
       return state;
   }
@@ -61,6 +92,8 @@ const profileReducer = (state = profileInitialState, action) => {
         loading: !action.args.isFetchingMore && !action.args.hideLoading,
         loadingMore: action.args.isFetchingMore,
       };
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
@@ -87,6 +120,8 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
@@ -148,5 +183,10 @@ export const actions = {
   handleDeleteStoryGroup: ({ storyGroup }) => ({
     type: actionTypes.DELETE_STORY_GROUP,
     storyGroup: storyGroup.post,
+  }),
+  handleShareNowClick: ({ draft }) => ({
+    type: actionTypes.STORY_GROUP_SHARE_NOW,
+    updateId: draft.id,
+    draft,
   }),
 };

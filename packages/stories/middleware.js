@@ -37,6 +37,26 @@ export default ({ dispatch, getState }) => next => (action) => {
         message: action.error,
       }));
       break;
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+      dispatch(dataFetchActions.fetch({
+        name: 'shareStoryGroupNow',
+        args: {
+          updateId: action.draft.id,
+        },
+      }));
+      break;
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: 'Yay, your story has been shared! 🎉',
+      }));
+      break;
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      break;
     default:
       break;
   }

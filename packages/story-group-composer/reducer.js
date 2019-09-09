@@ -7,8 +7,22 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_GROUP: 0,
 });
 
+/*
+{
+  note: null,
+  order: 1,
+  type: 'image',
+  asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+  thumbnail_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+}
+*/
+
 export const initialState = {
-  draft: {},
+  draft: {
+    stories: [],
+    scheduledAt: null,
+  },
+  isScheduleLoading: false,
 };
 
 const updateStoryNote = ({ stories = [], storyId, note }) => (
@@ -20,7 +34,10 @@ export default (state = initialState, action) => {
     case actionTypes.SAVE_STORY_GROUP: {
       return {
         ...state,
-        draft: { ...state.draft, scheduledAt: action.scheduledAt },
+        draft: {
+          ...state.draft,
+          scheduledAt: action.scheduledAt,
+        },
       };
     }
     case actionTypes.UPDATE_STORY_GROUP: {
@@ -38,7 +55,10 @@ export default (state = initialState, action) => {
       const { stories } = state.draft;
       return {
         ...state,
-        draft: { ...state.draft, stories: updateStoryNote({ stories, storyId, note }) },
+        draft: {
+          ...state.draft,
+          stories: updateStoryNote({ stories, storyId, note }),
+        },
       };
     }
     default:
