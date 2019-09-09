@@ -1,23 +1,23 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import { Button } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
-import CardCarousel from '../CardCarousel';
+import Carousel from '@bufferapp/publish-shared-components/Carousel';
 
-const cardsToShow = 15;
+const ADD_STORY = 'addStory';
+const ADD_NOTE = 'addNote';
 
 const WrapperStyle = styled.div`
-  background-color: white;
-  border-radius: 3px;
-  height: 100%;
-  padding: 16px;
-  right: 0;
-  top: 0;
   width: 686px;
+  height: 100%;
+  background-color: white;
+  top: 0;
+  right: 0;
+  border-radius: 3px;
+  padding: 16px;
 `;
 
 const FooterBar = styled.div`
@@ -25,60 +25,67 @@ const FooterBar = styled.div`
   display: flex;
 `;
 
-const BodyContainer = styled.div`
-  display: flex;
-  position: relative;
-  margin-left: -16px;
-  margin-right: -16px;
-  max-width: 718px;
-  overflow: hidden;
-`;
-
-const ADD_STORY = 'addStory';
-const ADD_NOTE = 'addNote';
+/*
+ * Wrapper to make sure to display add story view or add note view
+ */
 
 const StoryGroupWrapper = ({
-  translations,
-  saveNote,
-  onCreateStoryGroup,
-  onUpdateStoryGroup,
-  onDeleteStoryGroup,
   onDateTimeSlotPickerSubmit,
   uses24hTime,
   timezone,
   weekStartsMonday,
+  translations,
   selectedProfile,
+  saveNote,
+  editingStoryGroup,
+  onCreateStoryGroup,
+  onUpdateStoryGroup,
+  onDeleteStoryGroup,
   userData,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
+  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
 
   return (
-    <WrapperStyle>
-      {viewMode === ADD_STORY
-      && (
-        <React.Fragment>
-          <HeaderBar selectedProfile={selectedProfile} />
-          <BodyContainer>
-            <CardCarousel userData={userData} cardsToShow={cardsToShow} />
-          </BodyContainer>
-          <FooterBar>
-            <Button label="Preview" onClick={() => true} />
-            <Button label="Schedule Story" onClick={() => true} />
-          </FooterBar>
-        </React.Fragment>
-      )}
-      {viewMode === ADD_NOTE && (
-        <AddNote
-          translations={translations}
-          onCancelClick={() => setViewMode(ADD_STORY)}
-          onSaveNoteClick={({ storyId, note }) => {
-            saveNote({ storyId, note });
-            setViewMode(ADD_STORY);
-          }}
+    <Fragment>
+      <WrapperStyle>
+        <HeaderBar
+          selectedProfile={selectedProfile}
         />
-      )}
-    </WrapperStyle>
+        {viewMode === ADD_STORY &&
+        /* TODO: delete this button once the create story group is in place */
+        (
+          <React.Fragment>
+            <Carousel
+              editMode
+              cards={cards}
+              userData={userData}
+            />
+            <Button
+              type="primary"
+              size="small"
+              label="Create"
+              onClick={() => onCreateStoryGroup()}
+            />
+            <FooterBar>
+              <Button label="Preview" onClick={() => true} />
+              <Button label="Schedule Story" onClick={() => true} />
+            </FooterBar>
+          </React.Fragment>
+        )}
+        {viewMode === ADD_NOTE && (
+          <AddNote
+            translations={translations}
+            onCancelClick={() => setViewMode(ADD_STORY)}
+            onSaveNoteClick={({storyId, note}) => {
+              saveNote({storyId, note});
+              setViewMode(ADD_STORY);
+            }}
+          />
+        )}
+      </WrapperStyle>
+    </Fragment>
   );
 };
 

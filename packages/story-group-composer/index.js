@@ -4,14 +4,23 @@ import { actions } from './reducer';
 import StoryGroupPopover from './components/StoryGroupPopover';
 
 export default connect(
-  state => ({
-    uses24hTime: state.appSidebar.user.uses_24h_time,
-    timezone: state.profileSidebar.selectedProfile.timezone,
-    weekStartsMonday: state.appSidebar.user.week_starts_monday,
-    selectedProfile: state.profileSidebar.selectedProfile,
-    translations: state.i18n.translations['story-group-composer'],
-    userData: state.appSidebar.user,
-  }),
+  (state) => {
+    const { selectedProfileId } = state.profileSidebar;
+    const currentProfile = state.stories.byProfileId[selectedProfileId];
+    const { editingPostId } = state.stories;
+    const editingStoryGroup = currentProfile.storyPosts[editingPostId];
+
+    return {
+      uses24hTime: state.appSidebar.user.uses_24h_time,
+      timezone: state.profileSidebar.selectedProfile.timezone,
+      weekStartsMonday: state.appSidebar.user.week_starts_monday,
+      selectedProfile: state.profileSidebar.selectedProfile,
+      translations: state.i18n.translations['story-group-composer'],
+      userData: state.appSidebar.user,
+      editingPostId,
+      editingStoryGroup,
+    };
+  },
   dispatch => ({
     onOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());

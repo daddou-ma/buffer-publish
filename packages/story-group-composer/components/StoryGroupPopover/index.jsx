@@ -14,6 +14,7 @@ const StoryGroupPopover = ({
   weekStartsMonday,
   selectedProfile,
   saveNote,
+  editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
@@ -31,6 +32,7 @@ const StoryGroupPopover = ({
       weekStartsMonday={weekStartsMonday}
       selectedProfile={selectedProfile}
       saveNote={saveNote}
+      editingStoryGroup={editingStoryGroup}
       translations={translations}
       onCreateStoryGroup={onCreateStoryGroup}
       onUpdateStoryGroup={onUpdateStoryGroup}
