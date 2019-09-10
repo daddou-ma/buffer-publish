@@ -32,6 +32,7 @@ const getProfileId = (action) => {
   if (action.profileId) { return action.profileId; }
   if (action.args) { return action.args.profileId; }
   if (action.profile) { return action.profile.id; }
+  if (action.draft) { return action.draft.profileId; }
 };
 
 const getStoryGroupId = (action) => {
@@ -74,7 +75,8 @@ const storyPostsReducer = (state = {}, action) => {
       }
       return updates;
     }
-    case actionTypes.DELETE_STORY_GROUP: {
+    case actionTypes.DELETE_STORY_GROUP:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { [getStoryGroupId(action)]: deleted, ...currentState } = state;
       return currentState;
     }
@@ -104,8 +106,6 @@ const profileReducer = (state = profileInitialState, action) => {
         loading: !action.args.isFetchingMore && !action.args.hideLoading,
         loadingMore: action.args.isFetchingMore,
       };
-    case actionTypes.STORY_GROUP_SHARE_NOW:
-    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
@@ -116,7 +116,10 @@ const profileReducer = (state = profileInitialState, action) => {
         storyPosts: storyPostsReducer(state.storyPosts, action),
         total: action.result.total,
       };
+    case actionTypes.STORY_GROUP_SHARE_NOW:
     case actionTypes.DELETE_STORY_GROUP:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
@@ -140,6 +143,7 @@ export default (state = initialState, action) => {
     case profileSidebarActionTypes.SELECT_PROFILE:
     case actionTypes.STORY_GROUP_SHARE_NOW:
     case actionTypes.DELETE_STORY_GROUP:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
@@ -205,9 +209,10 @@ export const actions = {
     storyGroup: storyGroup.post,
     profileId,
   }),
-  handleShareNowClick: ({ draft }) => ({
+  handleShareNowClick: ({ draft, profileId }) => ({
     type: actionTypes.STORY_GROUP_SHARE_NOW,
     updateId: draft.id,
     draft,
+    profileId,
   }),
 };

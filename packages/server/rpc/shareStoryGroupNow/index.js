@@ -9,7 +9,7 @@ const getMessage = (message) => {
 module.exports = method(
   'shareStoryGroupNow',
   'share story group now',
-  async ({ storyGroupId }, { session }) => {
+  async ({ storyGroupId, profileId }, { session }) => {
     let result;
     try {
       result = await rp({

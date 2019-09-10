@@ -42,6 +42,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         name: 'shareStoryGroupNow',
         args: {
           updateId: action.draft.id,
+          profileId: action.profileId,
         },
       }));
       break;

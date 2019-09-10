@@ -65,6 +65,7 @@ export default connect(
     onShareNowClick: (storyGroup) => {
       dispatch(actions.handleShareNowClick({
         draft: storyGroup.post,
+        profileId: ownProps.profileId,
       }));
     },
   }),
