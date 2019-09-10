@@ -10,21 +10,20 @@ describe('reducer', () => {
     });
 
     it('has no error', () => expect(state.error).toBeNull());
-    it('is not creating a setup intent', () => expect(state.creatingSetupIntent).toBe(false));
+    it('is not creating a setup intent', () => expect(state.validating).toBe(false));
     it('has no setup intent client secret', () => expect(state.setupIntentClientSecret).toBe(''));
     it('is not validating card setup', () => expect(state.validating).toBe(false));
-    it('has no card setup error', () => expect(state.handleCardSetupError).toBe(''));
   });
 
   describe('creating a setup intent', () => {
-    it('createSetupIntentRequest sets creatingSetupIntent to true', () => {
+    it('createSetupIntentRequest sets validating to true', () => {
       state = reducer(undefined, actions.createSetupIntentRequest());
-      expect(state.creatingSetupIntent).toBe(true);
+      expect(state.validating).toBe(true);
     });
 
     it('createSetupIntentSuccess sets a client secret to setupIntentClientSecret', () => {
       state = reducer(undefined, actions.createSetupIntentSuccess());
-      expect(state.creatingSetupIntent).toBe(false);
+      expect(state.validating).toBe(false);
       // Mock request
       // expect(state.setupIntentClientSecret).toNotBe('');
     });
