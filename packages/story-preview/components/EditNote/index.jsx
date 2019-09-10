@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Button } from '@bufferapp/ui';
 import { grayDarker, grayLight } from '@bufferapp/ui/style/colors';
-import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
+import { fontFamily, fontSize, fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
 const ContentWrapper = styled.div`
@@ -20,6 +20,7 @@ const NoteWrapper = styled.div`
 
 const Title = styled(Text)`
   margin: 0 0 8px;
+  font-weight: ${fontWeightMedium};
 `;
 
 // Temporary, textarea will be replaced by BDS Textarea component
@@ -54,8 +55,7 @@ const ButtonWrapper = styled.div`
 const EditNote = ({
   onSaveNoteClick,
   onCancelClick,
-  // dummy data until we get uploading/adding story done
-  story = { note: '', id: 1, thumbnail: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80' },
+  story,
 }) => {
   const [note, setNote] = useState(story.note);
   const setNoteValue = (event) => {
@@ -65,7 +65,7 @@ const EditNote = ({
 
   return (
     <ContentWrapper>
-      <Title type="h3">Note</Title>
+      <Title type="p">Note</Title>
       <NoteWrapper>
         <TextAreaWrapper>
           <textarea
@@ -97,9 +97,11 @@ EditNote.propTypes = {
   onSaveNoteClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   story: PropTypes.shape({
-    thumbnail: PropTypes.string,
     note: PropTypes.string,
-    id: PropTypes.number,
+    type: PropTypes.oneOf(['image', 'video', 'gif']),
+    order: PropTypes.number,
+    asset_url: PropTypes.string,
+    thumbnail_url: PropTypes.string,
   }).isRequired,
 };
 

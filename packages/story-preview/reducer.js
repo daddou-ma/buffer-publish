@@ -1,5 +1,5 @@
 import keyWrapper from '@bufferapp/keywrapper';
-import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 
 export const actionTypes = keyWrapper('STORY_PREVIEW', {
 });
@@ -10,10 +10,10 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+    case profileActionTypes.SELECT_PROFILE: {
       return {
         ...state,
-        user: { avatarUrl: action.avatarUrl, handle: action.handle },
+        user: { avatarUrl: action.profile.avatarUrl, handle: action.profile.handle },
       };
     }
     default:
