@@ -18,6 +18,7 @@ export default connect(
       translations: state.i18n.translations['story-group-composer'],
       isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
       showDatePicker: state.storyGroupComposer.showDatePicker,
+      draft: state.storyGroupComposer.draft,
       userData: state.appSidebar.user,
       editingPostId,
       editingStoryGroup,
@@ -27,11 +28,8 @@ export default connect(
     onOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
-    onDateTimeSlotPickerSubmit: (scheduledAt) => {
-      dispatch(actions.setScheduleLoading(true));
-      dispatch(actions.handleSaveStoryGroup(scheduledAt));
-    },
     onCreateStoryGroup: (scheduledAt) => {
+      dispatch(actions.setScheduleLoading(true));
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
     onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId }) => {
@@ -41,7 +39,7 @@ export default connect(
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
     },
-    setShowDatePicker: (showDatePicker) => {
+    onSetShowDatePicker: (showDatePicker) => {
       dispatch(actions.setShowDatePicker(showDatePicker));
     },
     onComposerClick: (showDatePicker) => {

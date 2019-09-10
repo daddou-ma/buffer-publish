@@ -18,7 +18,6 @@ const getReadableDateFormat = ({ uses24hTime, scheduledAt }) => {
 };
 
 const AddStoryFooter = ({
-  onDateTimeSlotPickerSubmit,
   timezone,
   weekStartsMonday,
   uses24hTime,
@@ -26,10 +25,32 @@ const AddStoryFooter = ({
   translations,
   editingStoryGroup,
   onUpdateStoryGroup,
-  setShowDatePicker,
+  onCreateStoryGroup,
+  onSetShowDatePicker,
   showDatePicker,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(editingStoryGroup ? editingStoryGroup.scheduledAt : null);
+
+  const onDateTimeSlotPickerSubmit = (timestamp) => {
+    onSetShowDatePicker(false);
+    if (editingStoryGroup) {
+      setScheduledAt(timestamp);
+    } else {
+      onCreateStoryGroup(timestamp);
+    }
+  };
+
+  const onScheduleClick = () => {
+    if (editingStoryGroup) {
+      onUpdateStoryGroup({
+        scheduledAt,
+        stories: editingStoryGroup.storyDetails.stories,
+        storyGroupId: editingStoryGroup.id,
+      });
+    } else {
+      onSetShowDatePicker(true);
+    }
+  };
 
   return (
     <Fragment>
@@ -48,7 +69,7 @@ const AddStoryFooter = ({
               label="Edit"
               type="secondary"
               size="small"
-              onClick={() => { setShowDatePicker(true); }}
+              onClick={() => { onSetShowDatePicker(true); }}
             />
           </EditStoryStyle>
         )}
@@ -60,14 +81,7 @@ const AddStoryFooter = ({
           />
         </ButtonStyle>
         <Button
-          onClick={() => (editingStoryGroup
-            ? onUpdateStoryGroup({
-              scheduledAt,
-              stories: editingStoryGroup.storyDetails.stories,
-              storyGroupId: editingStoryGroup.id,
-            })
-            : setShowDatePicker(true)
-          )}
+          onClick={onScheduleClick}
           type="primary"
           disabled={isScheduleLoading}
           label={isScheduleLoading
@@ -80,14 +94,7 @@ const AddStoryFooter = ({
             timezone={timezone}
             weekStartsMonday={weekStartsMonday}
             editMode={!!editingStoryGroup}
-            onDateTimeSlotPickerSubmit={(timestamp) => {
-              setShowDatePicker(false);
-              if (editingStoryGroup) {
-                setScheduledAt(timestamp);
-              } else {
-                onDateTimeSlotPickerSubmit(timestamp);
-              }
-            }}
+            onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
           />
         )}
       </FooterBar>
@@ -99,7 +106,7 @@ AddStoryFooter.propTypes = {
   ...DateTimeSlotPickerWrapper.propTypes,
   isScheduleLoading: PropTypes.bool.isRequired,
   onUpdateStoryGroup: PropTypes.func.isRequired,
-  setShowDatePicker: PropTypes.func.isRequired,
+  onSetShowDatePicker: PropTypes.func.isRequired,
   showDatePicker: PropTypes.bool.isRequired,
   translations: PropTypes.shape({
     scheduleLoadingButton: PropTypes.string,

@@ -8,7 +8,6 @@ import HeaderBar from '../HeaderBar';
 const StoryGroupPopover = ({
   onOverlayClick,
   translations,
-  onDateTimeSlotPickerSubmit,
   uses24hTime,
   timezone,
   weekStartsMonday,
@@ -20,9 +19,10 @@ const StoryGroupPopover = ({
   onUpdateStoryGroup,
   onDeleteStoryGroup,
   onComposerClick,
-  setShowDatePicker,
+  onSetShowDatePicker,
   showDatePicker,
   userData,
+  draft,
 }) => (
   <Popover
     width="100%"
@@ -30,7 +30,6 @@ const StoryGroupPopover = ({
     onOverlayClick={onOverlayClick}
   >
     <StoryGroupWrapper
-      onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
       uses24hTime={uses24hTime}
       timezone={timezone}
       weekStartsMonday={weekStartsMonday}
@@ -43,9 +42,10 @@ const StoryGroupPopover = ({
       onUpdateStoryGroup={onUpdateStoryGroup}
       onDeleteStoryGroup={onDeleteStoryGroup}
       onComposerClick={onComposerClick}
-      setShowDatePicker={setShowDatePicker}
+      onSetShowDatePicker={onSetShowDatePicker}
       showDatePicker={showDatePicker}
       userData={userData}
+      draft={draft}
     />
   </Popover>
 );

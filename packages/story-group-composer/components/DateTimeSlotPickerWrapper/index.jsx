@@ -35,13 +35,14 @@ DateTimeSlotPickerWrapper.propTypes = {
   timezone: PropTypes.string.isRequired,
   weekStartsMonday: PropTypes.bool.isRequired,
   uses24hTime: PropTypes.bool,
-  onDateTimeSlotPickerSubmit: PropTypes.func.isRequired,
+  onDateTimeSlotPickerSubmit: PropTypes.func,
   editMode: PropTypes.bool,
 };
 
 DateTimeSlotPickerWrapper.defaultProps = {
   editMode: false,
   uses24hTime: false,
+  onDateTimeSlotPickerSubmit: () => {},
 };
 
 export default DateTimeSlotPickerWrapper;

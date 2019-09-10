@@ -20,17 +20,11 @@ const WrapperStyle = styled.div`
   padding: 16px;
 `;
 
-const FooterBar = styled.div`
-  padding: 13px 0;
-  display: flex;
-`;
-
 /*
  * Wrapper to make sure to display add story view or add note view
  */
 
 const StoryGroupWrapper = ({
-  onDateTimeSlotPickerSubmit,
   uses24hTime,
   timezone,
   weekStartsMonday,
@@ -43,12 +37,13 @@ const StoryGroupWrapper = ({
   onUpdateStoryGroup,
   onDeleteStoryGroup,
   onComposerClick,
-  setShowDatePicker,
+  onSetShowDatePicker,
   showDatePicker,
   userData,
+  draft,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
-  const [viewMode, setViewMode] = useState(ADD_STORY);
+  const [viewMode, setViewMode] = useState(ADD_NOTE);
   const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
   return (
     <Fragment>
@@ -65,15 +60,15 @@ const StoryGroupWrapper = ({
             />
             <AddStoryFooter
               onClick={() => onComposerClick(showDatePicker)}
-              onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
               timezone={timezone}
               weekStartsMonday={weekStartsMonday}
               uses24hTime={uses24hTime}
               isScheduleLoading={isScheduleLoading}
               translations={translations}
               editingStoryGroup={editingStoryGroup}
+              onCreateStoryGroup={onCreateStoryGroup}
               onUpdateStoryGroup={onUpdateStoryGroup}
-              setShowDatePicker={setShowDatePicker}
+              onSetShowDatePicker={onSetShowDatePicker}
               showDatePicker={showDatePicker}
             />
           </React.Fragment>
@@ -82,6 +77,7 @@ const StoryGroupWrapper = ({
           <AddNote
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
+            story={draft.stories[0]}
             onSaveNoteClick={({ order, note }) => {
               saveNote({ order, note });
               setViewMode(ADD_STORY);

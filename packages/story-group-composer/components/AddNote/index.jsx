@@ -9,7 +9,7 @@ const FooterBar = styled.div`
   display: flex;
 `;
 
-const BodyWrapperStyle = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
 `;
 
@@ -31,7 +31,7 @@ const AddNote = ({
   // dummy data until we get uploading/adding story done
   story,
 }) => {
-  const [note, setNote] = useState(story.note);
+  const [note, setNote] = useState(story ? story.note : null);
   const setNoteValue = (event) => {
     const { value } = event.target;
     setNote(value);
@@ -39,7 +39,7 @@ const AddNote = ({
 
   return (
     <Fragment>
-      <BodyWrapperStyle>
+      <ContentWrapper>
         <div>
           <StyledImage
             src={story.thumbnail_url}
@@ -51,7 +51,7 @@ const AddNote = ({
           setNote={setNoteValue}
           translations={translations}
         />
-      </BodyWrapperStyle>
+      </ContentWrapper>
       <FooterBar>
         <ButtonStyle>
           <Button
@@ -77,6 +77,7 @@ AddNote.propTypes = {
     thumbnail_url: PropTypes.string,
     note: PropTypes.string,
     order: PropTypes.number,
+    type: PropTypes.oneOf(['image', 'video', 'gif']),
   }).isRequired,
   translations: PropTypes.shape({
     saveNoteButton: PropTypes.string,

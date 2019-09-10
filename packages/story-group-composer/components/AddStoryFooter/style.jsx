@@ -1,6 +1,6 @@
-import moment from 'moment-timezone';
 import styled from 'styled-components';
 import { Button } from '@bufferapp/ui';
+import { fontSize, fontWeightMedium } from '@bufferapp/ui/style/fonts';
 
 export const FooterBar = styled.div`
   padding: 16px 3px 3px;
@@ -22,8 +22,8 @@ export const EditTextStyle = styled.span`
 
 export const EditDateStyle = styled.span`
   margin: auto;
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: ${fontWeightMedium};
+  font-size: ${fontSize};
   margin-left: 5px;
 `;
 
