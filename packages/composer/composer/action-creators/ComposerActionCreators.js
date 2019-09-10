@@ -8,10 +8,9 @@ import Shortener from '../utils/Shortener';
 import Uploader from '@bufferapp/publish-upload-zone/utils/Uploader';
 import NotificationActionCreators from './NotificationActionCreators';
 import AppActionCreators from './AppActionCreators';
-import { getStillDataUriFromGif } from '../utils/DOMUtils';
 import { getFileTypeFromPath } from '../utils/StringUtils';
 import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
-import ServerActionCreators from '../action-creators/ServerActionCreators';
+import ServerActionCreators from './ServerActionCreators';
 
 const ComposerActionCreators = {
 
@@ -609,7 +608,7 @@ const ComposerActionCreators = {
         isGif: true,
       });
     },
-    queueError: (message) => {
+    queueError: ({ message }) => {
       NotificationActionCreators.queueError({
         scope: NotificationScopes.FILE_UPLOAD,
         message
@@ -619,83 +618,20 @@ const ComposerActionCreators = {
       ComposerActionCreators.monitorDraftFileUploadProgress(id, uploaderInstance);
     },
   },
-  uploadDraftFile: (id, file, uploadType, notifiers) => {
+  uploadDraftFile: (id, file, uploadType, notifiers, createFileUploaderCallback) => {
     const { id: userId, s3UploadSignature } = AppStore.getUserData();
-    const uploader = new Uploader({
-      csrf_token: AppStore.getCsrfToken(),
-      userId,
+    const imageDimensionsKey = AppStore.getImageDimensionsKey();
+    const csrfToken = AppStore.getCsrfToken();
+
+    const uploadDraftFile = createFileUploaderCallback({
       s3UploadSignature,
-      errorNotifier: notifiers.queueError,
-      notifiers: ServerActionCreators,
+      userId,
+      csrfToken,
+      serverNotifiers: ServerActionCreators,
+      imageDimensionsKey,
     });
 
-    notifiers.uploadStarted({ id, uploaderInstance: uploader });
-
-    uploader.upload(file)
-      .then((uploadedFile) => {
-        if (uploadedFile.success === false) {
-          notifiers.queueError('Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?');
-        }
-
-        if (uploadType === UploadTypes.LINK_THUMBNAIL) {
-          notifiers.uploadedLinkThumbnail({
-            id,
-            uploaderInstance: uploader,
-            url: uploadedFile.url,
-            width: uploadedFile.width,
-            height: uploadedFile.height,
-          });
-        } else {
-          switch (uploadedFile.type) {
-            case MediaTypes.IMAGE:
-              notifiers.uploadedDraftImage({
-                id,
-                uploaderInstance: uploader,
-                url: uploadedFile.url,
-                location: window.location, //eslint-disable-line
-                width: uploadedFile.width,
-                height: uploadedFile.height,
-              });
-              break;
-
-            case MediaTypes.VIDEO:
-              notifiers.uploadedDraftVideo({
-                id,
-                uploaderInstance: uploader,
-                uploadId: uploadedFile.uploadId,
-                fileExtension: uploadedFile.fileExtension
-              });
-              break;
-
-            case MediaTypes.GIF:
-              getStillDataUriFromGif(uploadedFile.url)
-                .then(dataUri => dataUri)
-                .catch(() => null)
-                .then((dataUriOrNull) => {
-                  notifiers.draftGifUploaded({
-                    id,
-                    uploaderInstance: uploader,
-                    url: uploadedFile.url,
-                    stillGifUrl: dataUriOrNull,
-                    width: uploadedFile.width,
-                    height: uploadedFile.height,
-                  });
-                });
-              break;
-
-            default:
-              break;
-          }
-        }
-      })
-      .catch(() => {
-        notifiers.queueError('Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?');
-      });
-
-    notifiers.monitorFileUploadProgress({
-      id,
-      uploaderInstance: uploader,
-    });
+    return uploadDraftFile(id, file, uploadType, notifiers);
   },
 
   updateImageAltText: (image, altText) => {
