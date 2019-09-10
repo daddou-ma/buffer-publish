@@ -2,10 +2,11 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '@bufferapp/ui';
-import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
-import HeaderBar from '../HeaderBar';
-import AddNote from '../AddNote';
 import Carousel from '@bufferapp/publish-shared-components/Carousel';
+import AddNote from '../AddNote';
+import HeaderBar from '../HeaderBar';
+import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import CarouselCards from '../CarouselCards';
 
 const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
@@ -53,15 +54,22 @@ const StoryGroupWrapper = ({
         <HeaderBar
           selectedProfile={selectedProfile}
         />
-        {viewMode === ADD_STORY &&
+        {viewMode === ADD_STORY
         /* TODO: delete this button once the create story group is in place */
-        (
+        && (
           <React.Fragment>
             <Carousel
-              editMode
-              cards={cards}
               userData={userData}
-            />
+              largeCards
+            >
+              <CarouselCards
+                cards={cards}
+                totalCardsToShow={15}
+                userData={userData}
+                largeCards
+                editMode
+              />
+            </Carousel>
             <Button
               type="primary"
               size="small"
@@ -78,8 +86,8 @@ const StoryGroupWrapper = ({
           <AddNote
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
-            onSaveNoteClick={({storyId, note}) => {
-              saveNote({storyId, note});
+            onSaveNoteClick={({ storyId, note }) => {
+              saveNote({ storyId, note });
               setViewMode(ADD_STORY);
             }}
           />

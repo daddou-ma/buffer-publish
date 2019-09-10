@@ -1,11 +1,10 @@
-/* Commenting out tests to pass build for now
 import React from 'react';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { checkA11y } from 'storybook-addon-a11y';
-import Carousel from './index';
-import carouselData from './carouselData';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
+import Carousel, { CarouselCard, getCardSizes } from './index';
+import carouselData from './carouselData';
 
 const storeFake = state => ({
   default: () => {},
@@ -48,15 +47,41 @@ const UpgradeModalDecorator = storyFn => (
 storiesOf('Carousel', module)
   .addDecorator(checkA11y)
   .addDecorator(UpgradeModalDecorator)
-  .add('should show carousel with stories', () => (
-    <Carousel
-      cards={carouselData}
-      editMode={false}
-    />
-  ))
-  .add('should carousel with slots', () => (
-    <Carousel
-      editMode
-    />
-  ));
-*/
+  .add('should show carousel with stories', () => {
+    const { cardWidth, cardHeight } = getCardSizes();
+
+    return (
+      <Carousel
+        totalCardsToShow={carouselData.length}
+      >
+        { carouselData.map(card => (
+          <CarouselCard
+            cardWidth={cardWidth}
+            cardHeight={cardHeight}
+            card={card}
+          />
+        ))
+        }
+      </Carousel>
+    );
+  })
+  .add('should carousel with slots', () => {
+    const { cardWidth, cardHeight } = getCardSizes(true);
+
+    return (
+      <Carousel
+        largeCards
+        totalCardsToShow={carouselData.length}
+      >
+        {carouselData.map(card => (
+          <CarouselCard
+            largeCards
+            cardWidth={cardWidth}
+            cardHeight={cardHeight}
+            card={card}
+          />
+        ))
+        }
+      </Carousel>
+    );
+  });
