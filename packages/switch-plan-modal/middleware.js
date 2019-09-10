@@ -9,12 +9,11 @@ import { actionTypes as modalsActionTypes, actions as modalActions } from '@buff
 import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line
-  const { card, source, plan } = getState().switchPlanModal;
+  const { source } = getState().switchPlanModal;
   next(action);
 
   switch (action.type) {
     case actionTypes.UPGRADE: {
-      dispatch(stripeActions.validateCreditCard(card));
       trackAction({
         location: 'MODALS',
         action: 'submit_upgrade_to_pro',

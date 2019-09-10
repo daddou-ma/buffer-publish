@@ -125,10 +125,13 @@ const showModalScript = (key, val) => {
   `;
 };
 
-const stripeScript = `<script src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-    Stripe.setPublishableKey('${stripePublishableKey}');
-</script>
+const stripeScript = `
+  <script src="https://js.stripe.com/v3/"></script>
+  <script type="text/javascript">
+    const stripe = Stripe('${stripePublishableKey}');
+    window._stripe = stripe;
+    window.STRIPE_PUBLISHABLE_KEY = '${stripePublishableKey}';
+  </script>
 `;
 
 const appcuesScript = '<script src="//fast.appcues.com/49463.js"></script>';
