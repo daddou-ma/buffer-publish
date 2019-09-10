@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Button } from '@bufferapp/ui';
+import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ const NoteWrapper = styled.div`
 
 const Title = styled(Text)`
   margin: 0;
+  font-weight: ${fontWeightMedium};
 `;
 
 const Note = styled(Text)`
@@ -25,13 +27,12 @@ const Note = styled(Text)`
 
 const ViewNote = ({
   onEditNoteClick,
-  // dummy data until we get uploading/adding story done
-  story = { note: '', id: 1, thumbnail: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80' },
+  story,
 }) => {
   const hasNoNote = !story.note || story.note.length < 0;
   return (
     <ContentWrapper>
-      <Title type="h3">Note</Title>
+      <Title type="p">Note</Title>
       <NoteWrapper>
         {hasNoNote
           && (
@@ -57,9 +58,11 @@ const ViewNote = ({
 ViewNote.propTypes = {
   onEditNoteClick: PropTypes.func.isRequired,
   story: PropTypes.shape({
-    thumbnail: PropTypes.string,
     note: PropTypes.string,
-    id: PropTypes.number,
+    type: PropTypes.oneOf(['image', 'video', 'gif']),
+    order: PropTypes.number,
+    asset_url: PropTypes.string,
+    thumbnail_url: PropTypes.string,
   }).isRequired,
 };
 
