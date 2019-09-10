@@ -43,7 +43,7 @@ const StoryGroupWrapper = ({
   draft,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
-  const [viewMode, setViewMode] = useState(ADD_NOTE);
+  const [viewMode, setViewMode] = useState(ADD_STORY);
   const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
   return (
     <Fragment>
