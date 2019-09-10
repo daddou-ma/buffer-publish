@@ -4,6 +4,12 @@ import { Button } from "@bufferapp/ui";
 import { ButtonWrapper, InputWrapper } from "./styles";
 
 class CreditCardForm extends Component {
+  constructor () {
+    super();
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit = (ev) => {
     ev.preventDefault();
 
@@ -47,7 +53,7 @@ class CreditCardForm extends Component {
             label={closeButtonLabel}
             onClick={closeAction}
           />
-          <Button type="primary" label={buttonLabel} disabled={validating} />
+          <Button type="primary" onClick={this.handleSubmit} label={buttonLabel} disabled={validating} />
         </ButtonWrapper>
       </form>
     );
