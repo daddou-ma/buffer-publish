@@ -52,12 +52,12 @@ const StoryGroupPopover = ({
 
 StoryGroupPopover.propTypes = {
   onOverlayClick: PropTypes.func.isRequired,
-  ...DateTimeSlotPickerWrapper.propTypes,
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
+  userData: PropTypes.shape({}).isRequired,
+  ...DateTimeSlotPickerWrapper.propTypes,
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
-  userData: PropTypes.shape({}).isRequired,
 };
 
 export default StoryGroupPopover;

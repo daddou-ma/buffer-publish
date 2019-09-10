@@ -96,10 +96,10 @@ const StoryGroupWrapper = ({
 StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
+  userData: PropTypes.shape({}).isRequired,
   ...HeaderBar.PropTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
-  userData: PropTypes.shape({}).isRequired,
 };
 
 export default StoryGroupWrapper;

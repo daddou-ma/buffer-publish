@@ -35,7 +35,6 @@ export default connect(
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
     onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId }) => {
-      console.log('update!');
       dispatch(actions.setScheduleLoading(true));
       dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId }));
     },
