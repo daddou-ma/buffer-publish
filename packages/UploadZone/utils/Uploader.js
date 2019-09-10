@@ -13,7 +13,7 @@ import WebAPIUtils from '@bufferapp/publish-composer/composer/utils/WebAPIUtils'
 import WebSocket from './WebSocket';
 
 class Uploader {
-  constructor ({errorNotifier, userId, s3UploadSignature, csrf_token, notifiers}) {
+  constructor ({errorNotifier, userId, s3UploadSignature, csrf_token, notifiers, imageDimensionsKey}) {
     this._xhr = null;
     this._uploadProgressSub = () => {};
     this.errorNotifier = errorNotifier;
@@ -21,12 +21,16 @@ class Uploader {
     this.s3UploadSignature = s3UploadSignature;
     this.csrf_token = csrf_token;
     this.notifiers = notifiers;
+    this.imageDimensionsKey = imageDimensionsKey
   }
 
   upload (file) {
     return this.uploadToS3(file)
       .then((uploadKey) => this.uploadToBuffer(uploadKey))
-      .then((response) => this.attachDimensions(response))
+      .then((response) => this.attachDimensions(response, {
+        key: this.imageDimensionsKey,
+        userId: this.userId,
+      }))
       .then((response) => this.listenToProcessingEventsForVideos(response))
       .then((response) => this.formatResponse(response));
   }
@@ -142,12 +146,12 @@ class Uploader {
       });
   }
 
-  attachDimensions (response) {
+  attachDimensions (response, { key, userId }) {
     if (response.type !== 'photo') {
       return response;
     }
 
-    return WebAPIUtils.getImageDimensions(response.fullsize)
+    return WebAPIUtils.getImageDimensions({ url: response.fullsize, key, user_id: userId })
       .then(({width, height}) => ({...response, width, height}))
       .catch(() => response);
   }

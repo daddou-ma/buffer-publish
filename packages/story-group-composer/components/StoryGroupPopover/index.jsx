@@ -22,6 +22,7 @@ const StoryGroupPopover = ({
   onComposerClick,
   setShowDatePicker,
   showDatePicker,
+  userData,
 }) => (
   <Popover
     width="100%"
@@ -44,16 +45,19 @@ const StoryGroupPopover = ({
       onComposerClick={onComposerClick}
       setShowDatePicker={setShowDatePicker}
       showDatePicker={showDatePicker}
+      userData={userData}
     />
   </Popover>
 );
 
 StoryGroupPopover.propTypes = {
   onOverlayClick: PropTypes.func.isRequired,
+  ...DateTimeSlotPickerWrapper.propTypes,
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
+  userData: PropTypes.shape({}).isRequired,
 };
 
 export default StoryGroupPopover;

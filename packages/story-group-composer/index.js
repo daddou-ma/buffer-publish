@@ -18,6 +18,7 @@ export default connect(
       translations: state.i18n.translations['story-group-composer'],
       isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
       showDatePicker: state.storyGroupComposer.showDatePicker,
+      userData: state.appSidebar.user,
       editingPostId,
       editingStoryGroup,
     };

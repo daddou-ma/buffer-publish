@@ -20,6 +20,11 @@ const WrapperStyle = styled.div`
   padding: 16px;
 `;
 
+const FooterBar = styled.div`
+  padding: 13px 0;
+  display: flex;
+`;
+
 /*
  * Wrapper to make sure to display add story view or add note view
  */
@@ -40,6 +45,7 @@ const StoryGroupWrapper = ({
   onComposerClick,
   setShowDatePicker,
   showDatePicker,
+  userData,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
@@ -52,7 +58,11 @@ const StoryGroupWrapper = ({
         />
         {viewMode === ADD_STORY && (
           <React.Fragment>
-            <Carousel editMode cards={cards} />
+            <Carousel
+              editMode
+              cards={cards}
+              userData={userData}
+            />
             <AddStoryFooter
               onClick={() => onComposerClick(showDatePicker)}
               onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
@@ -72,8 +82,8 @@ const StoryGroupWrapper = ({
           <AddNote
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
-            onSaveNoteClick={({ storyId, note }) => {
-              saveNote({ storyId, note });
+            onSaveNoteClick={({storyId, note}) => {
+              saveNote({storyId, note});
               setViewMode(ADD_STORY);
             }}
           />
@@ -89,6 +99,7 @@ StoryGroupWrapper.propTypes = {
   ...HeaderBar.PropTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
+  userData: PropTypes.shape({}).isRequired,
 };
 
 export default StoryGroupWrapper;
