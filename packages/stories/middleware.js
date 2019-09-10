@@ -49,7 +49,7 @@ export default ({ dispatch, getState }) => next => (action) => {
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
-        message: 'Yay, your story has been shared! 🎉',
+        message: 'Great! you will receive a reminder to post manually! 🎉',
       }));
       break;
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
