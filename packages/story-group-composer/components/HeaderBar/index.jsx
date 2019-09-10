@@ -43,13 +43,7 @@ const HeaderBar = ({
 
 HeaderBar.propTypes = {
   selectedProfile: PropTypes.shape({
-    id: PropTypes.string,
-    avatarUrl: PropTypes.string,
     avatar_https: PropTypes.string,
-    serviceUsername: PropTypes.string,
-    serviceId: PropTypes.string,
-    organizationId: PropTypes.string,
-    username: PropTypes.string,
     service: PropTypes.string,
     handle: PropTypes.string,
   }).isRequired,
