@@ -5,17 +5,8 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_GROUP: 0,
   SAVE_STORY_NOTE: 0,
   UPDATE_STORY_GROUP: 0,
+  FILE_UPLOAD_FINISHED: 0,
 });
-
-/*
-{
-  note: null,
-  order: 1,
-  type: 'image',
-  asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
-  thumbnail_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
-}
-*/
 
 export const initialState = {
   draft: {
@@ -40,6 +31,9 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      return initialState;
+    }
     case actionTypes.UPDATE_STORY_GROUP: {
       return {
         ...state,
@@ -58,6 +52,29 @@ export default (state = initialState, action) => {
         draft: {
           ...state.draft,
           stories: updateStoryNote({ stories, storyId, note }),
+        },
+      };
+    }
+    case actionTypes.FILE_UPLOAD_FINISHED: {
+      const { fileUploaded } = action;
+      const order = state.draft.stories.length + 1;
+      // TODO: check this bit of code for other media types
+      const story = {
+        order,
+        note: null,
+        type: fileUploaded.type,
+        asset_url: fileUploaded.url,
+        thumbnail_url: fileUploaded.url,
+        height: fileUploaded.height,
+        width: fileUploaded.width,
+        file_size: fileUploaded.file.size,
+      };
+
+      return {
+        ...state,
+        draft: {
+          ...state.draft,
+          stories: [...state.draft.stories, story],
         },
       };
     }
@@ -81,5 +98,9 @@ export const actions = {
     type: actionTypes.SAVE_STORY_NOTE,
     storyId,
     note,
+  }),
+  handleFileUploadFinished: fileUploaded => ({
+    type: actionTypes.FILE_UPLOAD_FINISHED,
+    fileUploaded,
   }),
 };

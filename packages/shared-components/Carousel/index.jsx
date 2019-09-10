@@ -96,9 +96,12 @@ class CarouselBody extends React.Component {
       height,
       file,
     }) => {
-      console.log('uploadedLinkThumbnail', {
-        id, uploaderInstance, url, width, height, file,
-      });
+      const type = 'image';
+      const uploadedFile = {
+        id, uploaderInstance, url, width, height, file, type,
+      };
+      console.log('uploadedLinkThumbnail', uploadedFile);
+      this.onUploadFinished(uploadedFile);
     },
     uploadedDraftImage: ({
       id,
@@ -120,8 +123,9 @@ class CarouselBody extends React.Component {
       fileExtension,
       file,
     }) => {
+      const type = 'video';
       console.log('uploadedDraftVideo', {
-        id, uploaderInstance, uploadId, fileExtension, file,
+        id, uploaderInstance, uploadId, fileExtension, file, type,
       });
     },
     draftGifUploaded: ({
@@ -133,8 +137,9 @@ class CarouselBody extends React.Component {
       height,
       file,
     }) => {
+      const type = 'gif';
       console.log('draftGifUploaded', {
-        id, uploaderInstance, url, stillGifUrl, width, height, file,
+        id, uploaderInstance, url, stillGifUrl, width, height, file, type,
       });
     },
     queueError: ({ message }) => {
@@ -155,6 +160,10 @@ class CarouselBody extends React.Component {
       }
       console.log('monitorFileUploadProgress', { id, uploaderInstance, file });
     },
+  };
+
+  onUploadFinished = (uploadedFile) => {
+    this.props.onUploadFinished(uploadedFile);
   };
 
   uploadDraftFile = (id, file, uploadType, notifiers, createFileUploaderCallback) => {
@@ -310,6 +319,7 @@ class Carousel extends React.Component {
       editMode,
       cardsToShow,
       userData,
+      onUploadFinished,
     } = this.props;
 
     const { selectedItem } = this.state;
@@ -333,6 +343,7 @@ class Carousel extends React.Component {
               editMode={editMode}
               cardsToShow={cardsToShow}
               userData={userData}
+              onUploadFinished={onUploadFinished}
             />
           </Styles.CarouselContainer>
           <NavArrow

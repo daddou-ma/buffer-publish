@@ -19,6 +19,7 @@ const StoryGroupPopover = ({
   onUpdateStoryGroup,
   onDeleteStoryGroup,
   userData,
+  onUploadFinished,
 }) => (
   <Popover
     width="100%"
@@ -37,6 +38,7 @@ const StoryGroupPopover = ({
       onCreateStoryGroup={onCreateStoryGroup}
       onUpdateStoryGroup={onUpdateStoryGroup}
       onDeleteStoryGroup={onDeleteStoryGroup}
+      onUploadFinished={onUploadFinished}
       userData={userData}
     />
   </Popover>
@@ -48,6 +50,11 @@ StoryGroupPopover.propTypes = {
   saveNote: PropTypes.func.isRequired,
   selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   userData: PropTypes.shape({}).isRequired,
+  onUploadFinished: PropTypes.func,
+};
+
+StoryGroupPopover.defaultProps = {
+  onUploadFinished: () => {},
 };
 
 export default StoryGroupPopover;

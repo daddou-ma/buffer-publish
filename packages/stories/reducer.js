@@ -84,6 +84,13 @@ const storyPostsReducer = (state = {}, action) => {
         ...state,
         [getStoryGroupId(action)]: storyPostReducer(state[getStoryGroupId(action)], action),
       };
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { storyGroup } = action.result;
+      return {
+        ...state,
+        [storyGroup.id]: storyGroup,
+      };
+    }
     default:
       return state;
   }
@@ -110,6 +117,7 @@ const profileReducer = (state = profileInitialState, action) => {
         total: action.result.total,
       };
     case actionTypes.DELETE_STORY_GROUP:
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         storyPosts: storyPostsReducer(state.storyPosts, action),
@@ -136,6 +144,7 @@ export default (state = initialState, action) => {
     case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       profileId = getProfileId(action);
       if (profileId) {
         return {

@@ -42,6 +42,7 @@ const StoryGroupWrapper = ({
   onUpdateStoryGroup,
   onDeleteStoryGroup,
   userData,
+  onUploadFinished,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
@@ -61,6 +62,7 @@ const StoryGroupWrapper = ({
               editMode
               cards={cards}
               userData={userData}
+              onUploadFinished={onUploadFinished}
             />
             <Button
               type="primary"
@@ -94,6 +96,11 @@ StoryGroupWrapper.propTypes = {
   selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   ...DateTimeSlotPickerWrapper.propTypes,
   userData: PropTypes.shape({}).isRequired,
+  onUploadFinished: PropTypes.func,
+};
+
+StoryGroupWrapper.defaultProps = {
+  onUploadFinished: () => {},
 };
 
 export default StoryGroupWrapper;

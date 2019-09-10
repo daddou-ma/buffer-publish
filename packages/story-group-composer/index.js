@@ -3,6 +3,8 @@ import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
 import StoryGroupPopover from './components/StoryGroupPopover';
 
+const moment = require('moment-timezone');
+
 export default connect(
   (state) => {
     const { selectedProfileId } = state.profileSidebar;
@@ -28,7 +30,11 @@ export default connect(
     onDateTimeSlotPickerSubmit: (scheduledAt) => {
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
-    onCreateStoryGroup: (scheduledAt) => {
+    onCreateStoryGroup: () => {
+      // TODO: remove this after, is for testing purposes
+      const todayDate = (new Date()).setSeconds(0);
+      const today = moment.tz(todayDate, 'Europe/Madrid');
+      const scheduledAt = today.clone().add(3, 'hours').unix();
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
     onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
@@ -36,6 +42,9 @@ export default connect(
     },
     saveNote: ({ note, storyId }) => {
       dispatch(actions.handleSaveStoryNote({ note, storyId }));
+    },
+    onUploadFinished: (fileUploaded) => {
+      dispatch(actions.handleFileUploadFinished(fileUploaded));
     },
   }),
 )(StoryGroupPopover);
