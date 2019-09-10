@@ -10,8 +10,6 @@ class CreditCardForm extends Component {
     const {
       cycle,
       handleCardSetupRequest,
-      handleCardSetupSuccess,
-      handleCardSetupError,
       plan,
       setupIntentClientSecret,
       source,
@@ -19,23 +17,15 @@ class CreditCardForm extends Component {
       upgradePlan,
     } = this.props;
 
-    handleCardSetupRequest();
-
-    stripe
-      .handleCardSetup(setupIntentClientSecret)
-      .then((res) => {
-        const options = {
-          paymentMethodId: res.setupIntent.payment_method,
-          source,
-          plan,
-          cycle,
-        }
-        handleCardSetupSuccess(options);
-        upgradePlan();
-      })
-      .catch((err) => {
-        handleCardSetupError(err);
-      });
+    // TODO - merge in one?
+    handleCardSetupRequest(
+      stripe,
+      setupIntentClientSecret,
+      source,
+      plan,
+      cycle,
+    );
+    upgradePlan();
   };
 
   render() {

@@ -24,9 +24,8 @@ export default connect(
     hideModal: () => dispatch(modalsActions.hideUpgradeModal()),
     cancelTrial: () => dispatch(actions.cancelTrial()),
     clearCardInfo: () => dispatch(actions.clearCardInfo()),
-    handleCardSetupRequest: () => dispatch(stripeActions.handleCardSetupRequest()),
-    handleCardSetupSuccess: options => dispatch(stripeActions.handleCardSetupSuccess(options)),
-    handleCardSetupError: error => dispatch(stripeActions.handleCardSetupError(error)),
+    handleCardSetupRequest: (stripe, setupIntentClientSecret, source, plan, cycle) =>
+      dispatch(stripeActions.handleCardSetupRequest(stripe, setupIntentClientSecret, source, plan, cycle)),
   }),
 )(SwitchPlanModal);
 

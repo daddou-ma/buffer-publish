@@ -1,5 +1,3 @@
-/* global Stripe */
-
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions as notification } from '@bufferapp/notifications';
 import { actions as asyncDataFetchActions, actionTypes as asyncDataFetchActionTypes } from '@bufferapp/async-data-fetch';
@@ -14,6 +12,34 @@ export default ({ dispatch }) => next => (action) => {
           args: {},
         }),
       );
+      break;
+    case actionTypes.HANDLE_SETUP_CARD_REQUEST:
+      const {
+        stripe,
+        setupIntentClientSecret,
+        source,
+        plan,
+        cycle,
+      } = action;
+
+      stripe
+        .handleCardSetup(setupIntentClientSecret)
+        .then((result) => {
+          if (result.error) {
+            dispatch(actions.handleCardSetupError(result.error.message));
+            dispatch(notification.createNotification({
+              notificationType: 'error',
+              message: result.error.message,
+            }));
+          } else {
+            dispatch(actions.handleCardSetupSuccess(
+              cycle,
+              source,
+              plan,
+              result.setupIntent.payment_method,
+            ));
+          }
+        });
       break;
     case actionTypes.HANDLE_SETUP_CARD_SUCCESS: {
       const {

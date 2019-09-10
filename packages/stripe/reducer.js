@@ -14,10 +14,8 @@ const YEARLY_CYCLE = 'year';
 
 const initialState = {
   error: null,
-  creatingSetupIntent: false,
   setupIntentClientSecret: '',
   validating: false,
-  handleCardSetupError: '',
 };
 
 export default (state = initialState, action) => {
@@ -25,13 +23,13 @@ export default (state = initialState, action) => {
     case actionTypes.CREATE_SETUP_INTENT_REQUEST:
       return {
         ...state,
-        creatingSetupIntent: true,
+        validating: true,
       };
     case actionTypes.CREATE_SETUP_INTENT_SUCCESS:
       return {
         ...state,
         setupIntentClientSecret: action.setupIntentClientSecret,
-        creatingSetupIntent: false,
+        validating: false,
       };
     case actionTypes.HANDLE_SETUP_CARD_REQUEST:
       return {
@@ -46,7 +44,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         validating: false,
-        handleCardSetupError: 'Sorry, but there was an error with your card. Please try again.',
+        error: action.error,
       };
     case actionTypes.CHANGE_BILLING_CYCLE:
       return {
@@ -66,15 +64,26 @@ export const actions = {
     type: actionTypes.CREATE_SETUP_INTENT_SUCCESS,
     setupIntentClientSecret,
   }),
-  handleCardSetupRequest: () => ({
+  handleCardSetupRequest: (
+    stripe,
+    setupIntentClientSecret,
+    source,
+    plan,
+    cycle,
+  ) => ({
     type: actionTypes.HANDLE_SETUP_CARD_REQUEST,
+    stripe,
+    setupIntentClientSecret,
+    source,
+    plan,
+    cycle,
   }),
-  handleCardSetupSuccess: ({
+  handleCardSetupSuccess: (
     cycle,
     source,
     plan,
     paymentMethodId,
-  }) => ({
+  ) => ({
     type: actionTypes.HANDLE_SETUP_CARD_SUCCESS,
     paymentMethodId,
     cycle,
@@ -83,7 +92,7 @@ export const actions = {
   }),
   handleCardSetupError: err => ({
     type: actionTypes.HANDLE_SETUP_CARD_ERROR,
-    errorMessage: err,
+    error: err,
   }),
   setMonthlyCycle: () => ({
     type: actionTypes.CHANGE_BILLING_CYCLE,
