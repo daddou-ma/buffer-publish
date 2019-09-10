@@ -82,8 +82,8 @@ const StoryGroupWrapper = ({
           <AddNote
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
-            onSaveNoteClick={({storyId, note}) => {
-              saveNote({storyId, note});
+            onSaveNoteClick={({ order, note }) => {
+              saveNote({ order, note });
               setViewMode(ADD_STORY);
             }}
           />

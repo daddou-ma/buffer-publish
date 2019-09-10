@@ -63,7 +63,7 @@ const AddNote = ({
         <Button
           type="primary"
           label={translations.saveNoteButton}
-          onClick={() => onSaveNoteClick({ storyId: story.order, note })}
+          onClick={() => onSaveNoteClick({ order: story.order, note })}
         />
       </FooterBar>
     </Fragment>
