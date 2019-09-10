@@ -31,7 +31,6 @@ export default ({ getState, dispatch }) => next => (action) => {
             stories: storyGroup.stories,
           },
         }));
-        dispatch(storiesActions.handleCloseStoriesComposer());
       }
       break;
     }
@@ -48,15 +47,24 @@ export default ({ getState, dispatch }) => next => (action) => {
       break;
     }
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
-        message: 'Yay! Your Story has been created!',
+        message: 'Great! This story has been added to your queue.',
       }));
       break;
     case `createStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
         notificationType: 'error',
         message: action.error,
+      }));
+      break;
+    case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(storiesActions.handleCloseStoriesComposer());
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: 'Great! This story has been updated.',
       }));
       break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
