@@ -60,6 +60,7 @@ const globalAccount = require('./globalAccount');
 const createHashtagGroup = require('./createHashtagGroup');
 const deleteHashtagGroup = require('./deleteHashtagGroup');
 const getHashtagGroups = require('./getHashtagGroups');
+const createSetupIntent = require('./createSetupIntent');
 const getStoryGroupsMethod = require('./getStoryGroups');
 const createStoryGroupMethod = require('./createStoryGroup');
 const updateStoryGroupMethod = require('./updateStoryGroup');
@@ -140,6 +141,7 @@ module.exports = rpc(
   createHashtagGroup,
   deleteHashtagGroup,
   getHashtagGroups,
+  createSetupIntent,
   getStoryGroupsMethod,
   createStoryGroupMethod,
   updateStoryGroupMethod,

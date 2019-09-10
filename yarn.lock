@@ -325,7 +325,7 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/async-data-fetch/-/async-data-fetch-1.9.3.tgz#ad0cddb56e609e2ae6b06ed5f7736af66e17d601"
   integrity sha512-dKbDSpi5paujKOwQdZ3T0lFPLMyv5V/wtRbPoRw0w+93D26QPSQ926He8SzUxLvi48mNx7Vufvzr9cDTDDbh9w==
 
-"@bufferapp/async-data-fetch@1.9.4":
+"@bufferapp/async-data-fetch@1.9.4", "@bufferapp/async-data-fetch@^1.9.4":
   version "1.9.4"
   resolved "https://registry.yarnpkg.com/@bufferapp/async-data-fetch/-/async-data-fetch-1.9.4.tgz#186a15efd7280d403065ae313aa3707ad9066bcc"
   integrity sha512-uSWWtngPYGP5MAE2rLtWhacOjqIs6VBWFHyR+XdTRxwLACH+BeNwGVoj+5QFJS8AQgE/a0/HD3Px7JGyrYCkrA==
@@ -641,10 +641,10 @@
     react-dom "16.8.6"
     styled-components "4.3.2"
 
-"@bufferapp/ui@5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.2.2.tgz#52761b14f9f939cfb899f1a6f66e023cfe6c04ce"
-  integrity sha512-TRnIXl3Oxt5OVrLno2ar9bH3l8gsT5hWycNgadlghTtGpRJNmROm+lAoWliD12FSHEOQYb2S3TiYxIiCnShrDA==
+"@bufferapp/ui@5.2.4":
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.2.4.tgz#2a32efa0b317aca6b09499c4f8d9832d2ca8c09b"
+  integrity sha512-67r5Xlr843K7MnK8tHX+p3xn7BUN/21VtbAGYMz5znxnGM/nOMXZJz6GowpHU3io2Z8v1hf1NmWfskU5bdclTg==
   dependencies:
     "@reach/tooltip" "0.2.2"
     immutability-helper "^2.9.0"
@@ -12930,14 +12930,6 @@ react-dom@16.8.6:
     prop-types "^15.6.2"
     scheduler "^0.13.6"
 
-react-dropzone@4.1.3:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-4.1.3.tgz#25a0292c994541158d38155d08bb96e0aa5b83b2"
-  integrity sha512-AmVy1hSZ/BELkr1Pta8n+zFBfR7nZugU/hlyjauooozcBdL+d6xUMV/5xSQE/qxkKjPC7wtE/XPJUv54gLsezA==
-  dependencies:
-    attr-accept "^1.0.3"
-    prop-types "^15.5.7"
-
 react-dropzone@4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-4.2.3.tgz#f7bc92aa5fe4253fdb1fd3792114d2d29b47119a"
@@ -13162,6 +13154,13 @@ react-split-pane@^0.1.77:
     prop-types "^15.5.10"
     react-lifecycles-compat "^3.0.4"
     react-style-proptype "^3.0.0"
+
+react-stripe-elements@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-stripe-elements/-/react-stripe-elements-4.0.1.tgz#89b52c909a80f17afc7907313c3b3c3f21fa125d"
+  integrity sha512-S+O2+hphs6ASz29l85nj6mpS7YWTa3NMwZTonIMt4+8xrfS/jET+0Xd3cNdJoGkHiCtLEId6UimqivONK+liOw==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-style-proptype@^3.0.0:
   version "3.2.2"

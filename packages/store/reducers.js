@@ -42,6 +42,7 @@ import { reducer as globalAccountReducer } from '@bufferapp/global-account';
 import { reducer as closeComposerModalReducer } from '@bufferapp/publish-close-composer-confirmation-modal';
 import { reducer as storyPreviewReducer } from '@bufferapp/publish-story-preview';
 import { reducer as storyGroupComposerReducer } from '@bufferapp/publish-story-group-composer';
+import { reducer as creditCardFormReducer } from '@bufferapp/publish-credit-card-form';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -100,6 +101,7 @@ export default {
   closeComposerModal: closeComposerModalReducer,
   storyPreview: storyPreviewReducer,
   storyGroupComposer: storyGroupComposerReducer,
+  creditCardForm: creditCardFormReducer,
 
   // Analyze
   average: averageReducer,

@@ -18,6 +18,7 @@ const StoryGroupPopover = ({
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
+  userData,
 }) => (
   <Popover
     width="100%"
@@ -36,15 +37,17 @@ const StoryGroupPopover = ({
       onCreateStoryGroup={onCreateStoryGroup}
       onUpdateStoryGroup={onUpdateStoryGroup}
       onDeleteStoryGroup={onDeleteStoryGroup}
+      userData={userData}
     />
   </Popover>
 );
 
 StoryGroupPopover.propTypes = {
   onOverlayClick: PropTypes.func.isRequired,
+  ...DateTimeSlotPickerWrapper.propTypes,
   saveNote: PropTypes.func.isRequired,
   selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
-  ...DateTimeSlotPickerWrapper.propTypes,
+  userData: PropTypes.shape({}).isRequired,
 };
 
 export default StoryGroupPopover;
