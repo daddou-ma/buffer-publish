@@ -6,6 +6,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_NOTE: 0,
   UPDATE_STORY_GROUP: 0,
   SET_SCHEDULE_LOADING: 0,
+  SET_SHOW_DATE_PICKER: 0,
 });
 
 export const initialState = {
@@ -21,6 +22,7 @@ export const initialState = {
     }],
   },
   isScheduleLoading: false,
+  showDatePicker: false,
 };
 
 const updateStoryNote = ({ stories = [], order, note }) => (
@@ -42,6 +44,7 @@ export default (state = initialState, action) => {
           ...state.draft,
           scheduledAt: action.scheduledAt,
           stories: action.stories,
+          storyGroupId: action.storyGroupId,
         },
       };
     }
@@ -59,6 +62,12 @@ export default (state = initialState, action) => {
         isScheduleLoading: action.isLoading,
       };
     }
+    case actionTypes.SET_SHOW_DATE_PICKER: {
+      return {
+        ...state,
+        showDatePicker: action.showDatePicker,
+      };
+    }
     default:
       return state;
   }
@@ -69,11 +78,11 @@ export const actions = {
     type: actionTypes.SAVE_STORY_GROUP,
     scheduledAt,
   }),
-  handleUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => ({
+  handleUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId }) => ({
     type: actionTypes.UPDATE_STORY_GROUP,
-    storyGroupId,
     scheduledAt,
     stories,
+    storyGroupId,
   }),
   handleSaveStoryNote: ({ order, note }) => ({
     type: actionTypes.SAVE_STORY_NOTE,
@@ -83,5 +92,9 @@ export const actions = {
   setScheduleLoading: isLoading => ({
     type: actionTypes.SET_SCHEDULE_LOADING,
     isLoading,
+  }),
+  setShowDatePicker: showDatePicker => ({
+    type: actionTypes.SET_SHOW_DATE_PICKER,
+    showDatePicker,
   }),
 };

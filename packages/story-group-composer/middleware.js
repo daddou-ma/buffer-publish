@@ -107,7 +107,7 @@ export default ({ getState, dispatch }) => next => (action) => {
   const { selectedProfileId } = getState().profileSidebar;
   switch (action.type) {
     case actionTypes.SAVE_STORY_GROUP: {
-      const storyGroup = getState().storyGroupComposer.draft;
+      const { stories } = getState().storyGroupComposer.draft;
       const { scheduledAt } = action;
       if (scheduledAt) {
         dispatch(dataFetchActions.fetch({
@@ -115,20 +115,21 @@ export default ({ getState, dispatch }) => next => (action) => {
           args: {
             profileId: selectedProfileId,
             scheduledAt,
-            stories: storyGroup.stories,
+            stories,
           },
         }));
       }
       break;
     }
     case actionTypes.UPDATE_STORY_GROUP: {
-      const storyGroup = getState().storyGroupComposer.draft;
+      const { stories, storyGroupId } = getState().storyGroupComposer.draft;
       dispatch(dataFetchActions.fetch({
         name: 'updateStoryGroup',
         args: {
           profileId: selectedProfileId,
           scheduledAt: action.scheduledAt,
-          stories: storyGroup,
+          stories,
+          storyGroupId,
         },
       }));
       break;
@@ -140,11 +141,25 @@ export default ({ getState, dispatch }) => next => (action) => {
         message: action.error,
       }));
       break;
+    case `updateStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(actions.setScheduleLoading(false));
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      break;
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
         message: 'Great! This story has been added to your queue.',
+      }));
+      break;
+    case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(storiesActions.handleCloseStoriesComposer());
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: 'Great! This story has been updated.',
       }));
       break;
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:

@@ -17,6 +17,7 @@ export default connect(
       selectedProfile: state.profileSidebar.selectedProfile,
       translations: state.i18n.translations['story-group-composer'],
       isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
+      showDatePicker: state.storyGroupComposer.showDatePicker,
       editingPostId,
       editingStoryGroup,
     };
@@ -32,11 +33,19 @@ export default connect(
     onCreateStoryGroup: (scheduledAt) => {
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
-    onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
-      dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
+    onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId }) => {
+      console.log('update!');
+      dispatch(actions.setScheduleLoading(true));
+      dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId }));
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
+    },
+    setShowDatePicker: (showDatePicker) => {
+      dispatch(actions.setShowDatePicker(showDatePicker));
+    },
+    onComposerClick: (showDatePicker) => {
+      if (showDatePicker) dispatch(actions.setShowDatePicker(false));
     },
   }),
 )(StoryGroupPopover);

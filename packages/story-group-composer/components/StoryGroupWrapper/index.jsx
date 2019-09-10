@@ -37,32 +37,37 @@ const StoryGroupWrapper = ({
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
+  onComposerClick,
+  setShowDatePicker,
+  showDatePicker,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
   const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
-
   return (
     <Fragment>
       <WrapperStyle>
         <HeaderBar
           selectedProfile={selectedProfile}
         />
-        {viewMode === ADD_STORY &&
-          /* TODO: delete this button once the create story group is in place */
-          (
-            <React.Fragment>
-              <Carousel editMode cards={cards} />
-              <AddStoryFooter
-                onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
-                timezone={timezone}
-                weekStartsMonday={weekStartsMonday}
-                uses24hTime={uses24hTime}
-                isScheduleLoading={isScheduleLoading}
-                translations={translations}
-              />
-            </React.Fragment>
-          )}
+        {viewMode === ADD_STORY && (
+          <React.Fragment>
+            <Carousel editMode cards={cards} />
+            <AddStoryFooter
+              onClick={() => onComposerClick(showDatePicker)}
+              onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
+              timezone={timezone}
+              weekStartsMonday={weekStartsMonday}
+              uses24hTime={uses24hTime}
+              isScheduleLoading={isScheduleLoading}
+              translations={translations}
+              editingStoryGroup={editingStoryGroup}
+              onUpdateStoryGroup={onUpdateStoryGroup}
+              setShowDatePicker={setShowDatePicker}
+              showDatePicker={showDatePicker}
+            />
+          </React.Fragment>
+        )}
         {viewMode === ADD_NOTE && (
           <AddNote
             translations={translations}
@@ -80,9 +85,10 @@ const StoryGroupWrapper = ({
 
 StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
-  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
+  ...HeaderBar.PropTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
+  ...AddStoryFooter.propTypes,
 };
 
 export default StoryGroupWrapper;
