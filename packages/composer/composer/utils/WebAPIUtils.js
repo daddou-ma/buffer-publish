@@ -353,11 +353,15 @@ const WebAPIUtils = {
         ), [])
       )),
 
-  getImageDimensions: (url) => (
+  getImageDimensions: ({
+    url,
+    key = AppStore.getImageDimensionsKey(),
+    user_id = AppStore.getUserData().id,
+  }) => (
     // https://image-dimensions.buffer.com/dimensions deprecated
     Request.get('https://fastimage.buffer.com/dimensions', {
-      user_id: AppStore.getUserData().id,
-      key: AppStore.getImageDimensionsKey(),
+      user_id,
+      key,
       url,
     }, { mode: 'cors' })
       .then((response) => response.json())
