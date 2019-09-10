@@ -50,6 +50,10 @@ const textareaStyle = {
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+
+  button:last-of-type {
+    margin-left: 10px;
+  }
 `;
 
 const EditNote = ({

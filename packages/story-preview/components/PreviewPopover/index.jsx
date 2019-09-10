@@ -21,13 +21,19 @@ const PreviewPopover = ({
     avatarUrl: 'https://pbs.twimg.com/profile_images/988613046510628866/Io1ZQUpy_400x400.jpg',
     handle: 'joelgascoigne',
   },
-  // dummy data until we get uploading/adding story done
   story = {
     note: '',
     type: 'image',
     order: 1,
-    asset_url: '',
-    thumbnail_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+    asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+    thumbnail_url: '',
+  },
+  story1 = {
+    note: '',
+    type: 'video',
+    order: 1,
+    asset_url: 'http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4',
+    thumbnail_url: 'http://assets-jpcust.jwpsrv.com/thumbnails/to6w2sch-320.jpg',
   },
 }) => (
   <Popover
@@ -37,7 +43,7 @@ const PreviewPopover = ({
   >
     <ContentWrapper>
       <PreviewMedia
-        story={story}
+        story={story1}
         user={user}
       />
       <NoteWrapper

@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
     case profileActionTypes.SELECT_PROFILE: {
       return {
         ...state,
-        user: { avatarUrl: action.profile.avatarUrl, handle: action.profile.handle },
+        user: { avatarUrl: action.profile.avatarUrl, handle: action.profile.username },
       };
     }
     default:
