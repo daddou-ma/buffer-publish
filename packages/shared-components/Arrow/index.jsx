@@ -20,6 +20,7 @@ const Arrow = ({
     type="secondary"
     icon={isLeft ? <ArrowLeft /> : <ArrowRight />}
     hasIconOnly
+    isLeft={isLeft}
     onClick={onClick}
   />
 );
