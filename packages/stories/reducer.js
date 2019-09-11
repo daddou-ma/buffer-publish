@@ -89,10 +89,7 @@ const storyPostsReducer = (state = {}, action) => {
     case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { storyGroup } = action.result;
-      return {
-        ...state,
-        [storyGroup.id]: storyGroup,
-      };
+      return { ...state, [storyGroup.id]: storyGroup };
     }
     default:
       return state;
