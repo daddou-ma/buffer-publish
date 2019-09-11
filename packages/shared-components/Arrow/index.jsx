@@ -10,6 +10,9 @@ const ArrowButton = styled(Button)`
   border-radius: 3px;
   justify-content: center;
   padding: 0;
+  :focus {
+    box-shadow: none;
+  }
 `;
 
 const Arrow = ({
