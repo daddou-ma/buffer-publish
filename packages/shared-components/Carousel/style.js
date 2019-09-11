@@ -3,6 +3,15 @@ import { grayLight, grayLighter } from '@bufferapp/ui/style/colors';
 
 const cardMargin = 4;
 
+export const ArrowWrapper = styled.div`
+  position: absolute;
+  left: ${props => (props.isLeft && props.largeCards ? '10px' : 'initial')};
+  right: ${props => (props.isLeft ? 'initial' : (props.largeCards ? '10px' : 0 ))};
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(calc(-50%));
+`;
+
 export const Arrow = styled.button`
   cursor: pointer;
   top: 50%;
@@ -44,5 +53,10 @@ export const CarouselCard = styled.div`
 export const SliderCarousel = styled.div`
   position: relative;
   overflow: hidden;
-  margin: ${props => (props.largeCards ? '0 -16px 0 -16px' : '0 16px 0 12px')};
+  margin: ${props => (props.largeCards ? '0 -16px 0 -16px' : '0 12px 0 12px')};
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  opacity: 0.8;
 `;

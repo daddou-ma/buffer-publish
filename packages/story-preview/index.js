@@ -3,7 +3,7 @@ import PreviewPopover from './components/PreviewPopover';
 
 export default connect(
   state => ({
-
+    user: state.storyPreview.user,
   }),
   dispatch => ({
     onOverlayClick: () => {
@@ -14,5 +14,5 @@ export default connect(
   }),
 )(PreviewPopover);
 
-// export reducer, { actions, actionTypes } from './reducer';
+export reducer, { actions, actionTypes } from './reducer';
 // export middleware from './middleware';

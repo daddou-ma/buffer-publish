@@ -8,9 +8,8 @@ const SEE_NOTE = 'seeNote';
 const EDIT_NOTE = 'editNote';
 
 const WrapperStyle = styled.div`
-  width: 275px;
-  height: 592px; 
-  border: 1px solid gray;
+  height: calc( 100% - 56px);
+  width: calc( 275px - 32px);
   padding: 32px 16px 24px;
 `;
 
@@ -20,6 +19,7 @@ const WrapperStyle = styled.div`
 
 const NoteWrapper = ({
   onSaveNoteClick,
+  story,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(SEE_NOTE);
@@ -30,6 +30,7 @@ const NoteWrapper = ({
           && (
             <ViewNote
               onEditNoteClick={() => setViewMode(EDIT_NOTE)}
+              story={story}
             />
           )
         }
@@ -38,6 +39,7 @@ const NoteWrapper = ({
             <EditNote
               onSaveNoteClick={onSaveNoteClick}
               onCancelClick={() => setViewMode(SEE_NOTE)}
+              story={story}
             />
           )
         }
@@ -48,6 +50,13 @@ const NoteWrapper = ({
 
 NoteWrapper.propTypes = {
   onSaveNoteClick: PropTypes.func.isRequired,
+  story: PropTypes.shape({
+    note: PropTypes.string,
+    type: PropTypes.oneOf(['image', 'video', 'gif']),
+    order: PropTypes.number,
+    asset_url: PropTypes.string,
+    thumbnail_url: PropTypes.string,
+  }).isRequired,
 };
 
 export default NoteWrapper;

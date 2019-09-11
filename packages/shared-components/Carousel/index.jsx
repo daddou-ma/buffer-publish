@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clamp from 'lodash.clamp';
-import ArrowLeft from '@bufferapp/ui/Icon/Icons/ArrowLeft';
-import ArrowRight from '@bufferapp/ui/Icon/Icons/ArrowRight';
+import Arrow from '@bufferapp/publish-shared-components/Arrow';
+
 import {
-  Arrow,
+  ArrowWrapper,
   CarouselContainer,
   SliderCarousel,
 } from './style';
@@ -21,20 +21,21 @@ const NavArrow = ({
   selectedItem = 0,
   setSelectedItem = null,
   totalCardsToShow,
+  largeCards,
 }) => {
   if (hide) return null;
   const lowerBounds = 0;
   const upperBounds = totalCardsToShow - 1;
 
   return (
-    <Arrow
-      prev={prev}
-      onClick={() => {
-        setSelectedItem(clamp(selectedItem + incrementBy, lowerBounds, upperBounds));
-      }}
-    >
-      {prev ? <ArrowLeft /> : <ArrowRight />}
-    </Arrow>
+    <ArrowWrapper isLeft={prev} largeCards={largeCards}>
+      <Arrow
+        isLeft={prev}
+        onClick={() => {
+          setSelectedItem(clamp(selectedItem + incrementBy, lowerBounds, upperBounds));
+        }}
+      />
+    </ArrowWrapper>
   );
 };
 
@@ -45,6 +46,7 @@ NavArrow.propTypes = {
   selectedItem: PropTypes.number,
   setSelectedItem: PropTypes.func,
   totalCardsToShow: PropTypes.number,
+  largeCards: PropTypes.bool,
 };
 
 const shouldHideRightArrow = (
@@ -100,6 +102,7 @@ class Carousel extends React.Component {
             selectedItem={selectedItem}
             incrementBy={-1}
             totalCardsToShow={totalCardsToShow}
+            largeCards={largeCards}
           />
           <NavArrow
             hide={shouldHideRightArrow(totalCardsToShow, selectedItem, maxPerPage)}
@@ -107,6 +110,7 @@ class Carousel extends React.Component {
             selectedItem={selectedItem}
             incrementBy={+1}
             totalCardsToShow={totalCardsToShow}
+            largeCards={largeCards}
           />
         </SliderCarousel>
       </React.Fragment>

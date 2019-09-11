@@ -16,6 +16,9 @@ export default connect(
       weekStartsMonday: state.appSidebar.user.week_starts_monday,
       selectedProfile: state.profileSidebar.selectedProfile,
       translations: state.i18n.translations['story-group-composer'],
+      isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
+      showDatePicker: state.storyGroupComposer.showDatePicker,
+      draft: state.storyGroupComposer.draft,
       userData: state.appSidebar.user,
       editingPostId,
       editingStoryGroup,
@@ -25,17 +28,22 @@ export default connect(
     onOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
-    onDateTimeSlotPickerSubmit: (scheduledAt) => {
-      dispatch(actions.handleSaveStoryGroup(scheduledAt));
-    },
     onCreateStoryGroup: (scheduledAt) => {
+      dispatch(actions.setScheduleLoading(true));
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
-    onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
-      dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
+    onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId }) => {
+      dispatch(actions.setScheduleLoading(true));
+      dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId }));
     },
-    saveNote: ({ note, storyId }) => {
-      dispatch(actions.handleSaveStoryNote({ note, storyId }));
+    saveNote: ({ note, order }) => {
+      dispatch(actions.handleSaveStoryNote({ note, order }));
+    },
+    onSetShowDatePicker: (showDatePicker) => {
+      dispatch(actions.setShowDatePicker(showDatePicker));
+    },
+    onComposerClick: (showDatePicker) => {
+      if (showDatePicker) dispatch(actions.setShowDatePicker(false));
     },
   }),
 )(StoryGroupPopover);

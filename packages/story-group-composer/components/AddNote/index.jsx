@@ -9,7 +9,7 @@ const FooterBar = styled.div`
   display: flex;
 `;
 
-const BodyWrapperStyle = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
 `;
 
@@ -17,10 +17,6 @@ const ButtonStyle = styled.div`
   margin-left: auto;
   margin-right: 5px;
 `;
-
-const imageStyle = {
-
-};
 
 const StyledImage = styled.img`
   width: 180px;
@@ -33,9 +29,9 @@ const AddNote = ({
   onCancelClick,
   translations,
   // dummy data until we get uploading/adding story done
-  story = { note: null, id: 1, thumbnail: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80'},
+  story,
 }) => {
-  const [note, setNote] = useState(story.note);
+  const [note, setNote] = useState(story ? story.note : null);
   const setNoteValue = (event) => {
     const { value } = event.target;
     setNote(value);
@@ -43,10 +39,10 @@ const AddNote = ({
 
   return (
     <Fragment>
-      <BodyWrapperStyle>
+      <ContentWrapper>
         <div>
           <StyledImage
-            src={story.thumbnail}
+            src={story.thumbnail_url}
             alt={translations.noteImageAlt}
           />
         </div>
@@ -55,7 +51,7 @@ const AddNote = ({
           setNote={setNoteValue}
           translations={translations}
         />
-      </BodyWrapperStyle>
+      </ContentWrapper>
       <FooterBar>
         <ButtonStyle>
           <Button
@@ -67,7 +63,7 @@ const AddNote = ({
         <Button
           type="primary"
           label={translations.saveNoteButton}
-          onClick={() => onSaveNoteClick({ storyId: story.id, note })}
+          onClick={() => onSaveNoteClick({ order: story.order, note })}
         />
       </FooterBar>
     </Fragment>
@@ -78,9 +74,10 @@ AddNote.propTypes = {
   onSaveNoteClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   story: PropTypes.shape({
-    thumbnail: PropTypes.string,
+    thumbnail_url: PropTypes.string,
     note: PropTypes.string,
-    id: PropTypes.number,
+    order: PropTypes.number,
+    type: PropTypes.oneOf(['image', 'video', 'gif']),
   }).isRequired,
   translations: PropTypes.shape({
     saveNoteButton: PropTypes.string,

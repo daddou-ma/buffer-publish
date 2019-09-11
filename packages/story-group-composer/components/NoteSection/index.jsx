@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text } from '@bufferapp/ui';
 import { grayDarker, grayLight, gray } from '@bufferapp/ui/style/colors';
-import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
+import { fontFamily, fontSize, fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
 const NoteHeader = styled.span`
   margin: 0px 0px 7px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: ${fontWeightMedium};
   color: ${grayDarker};
 `;
 
@@ -46,7 +46,7 @@ const NoteWrapper = styled.div`
 const SubtextWrapper = styled.span`
   color: ${gray};
   margin: 8px 0px;
-  font-size: 14px;
+  font-size: ${fontSize};
 `;
 
 const NoteSection = ({ note, setNote, translations }) => (
