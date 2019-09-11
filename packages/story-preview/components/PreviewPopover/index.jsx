@@ -33,17 +33,17 @@ const PreviewPopover = ({
   //stories,
   user,
 }) => {
-  const [currentStory, setCurrentStory] = useState(0);
-  const storyElement = stories[currentStory];
+  const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+  const storyToDisplay = stories[currentStoryIndex];
 
-  const showLeftArrow = currentStory > 0;
-  const showRightArrow = currentStory < (stories.length - 1);
+  const showLeftArrow = currentStoryIndex > 0;
+  const showRightArrow = currentStoryIndex < (stories.length - 1);
 
   const onArrowClick = (type) => {
     if (type === 'left' && showLeftArrow) {
-      setCurrentStory(currentStory - 1);
+      setCurrentStoryIndex(currentStoryIndex - 1);
     } else if (type === 'right' && showRightArrow) {
-      setCurrentStory(currentStory + 1);
+      setCurrentStoryIndex(currentStoryIndex + 1);
     }
   };
 
@@ -54,20 +54,18 @@ const PreviewPopover = ({
     >
       <SliderContainer>
         <Slider
-          height={592}
-          width={629}
           onCloseClick={onCloseClick}
           showLeftArrow={showLeftArrow}
           showRightArrow={showRightArrow}
           onArrowClick={onArrowClick}
         >
           <PreviewMedia
-            story={storyElement}
+            story={storyToDisplay}
             user={user}
           />
           <NoteWrapper
             onSaveNoteClick={onSaveNoteClick}
-            story={storyElement}
+            story={storyToDisplay}
           />
         </Slider>
       </SliderContainer>
