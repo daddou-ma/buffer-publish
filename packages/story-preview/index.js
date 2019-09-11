@@ -4,6 +4,7 @@ import PreviewPopover from './components/PreviewPopover';
 export default connect(
   state => ({
     user: state.storyPreview.user,
+    stories: state.storyPreview.stories,
   }),
   dispatch => ({
     onOverlayClick: () => {

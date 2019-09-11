@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import PreviewPopover from '@bufferapp/publish-story-preview';
 import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
 import {
   QueueItems,
@@ -62,6 +63,8 @@ const StoryGroups = ({
   onCalendarClick,
   onCancelConfirmClick,
   onPreviewClick,
+  onClosePreviewClick,
+  showStoryPreview,
 }) => {
   if (loading) {
     return (
@@ -77,6 +80,11 @@ const StoryGroups = ({
 
   return (
     <ErrorBoundary>
+      {showStoryPreview && (
+        <PreviewPopover
+          onCloseClick={onClosePreviewClick}
+        />
+      )}
       <ContainerStyle>
         <TopBarContainerStyle>
           <ComposerInputStyle>
@@ -142,6 +150,8 @@ StoryGroups.propTypes = {
   onCancelConfirmClick: PropTypes.func,
   onComposerPlaceholderClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
+  onClosePreviewClick: PropTypes.func,
+  showStoryPreview: PropTypes.bool,
 };
 
 StoryGroups.defaultProps = {
@@ -152,6 +162,7 @@ StoryGroups.defaultProps = {
   hasFirstCommentFlip: false,
   isBusinessAccount: false,
   storyGroups: [],
+  showStoryPreview: false,
   onEditClick: () => {},
   onDeleteClick: () => {},
   onDeleteConfirmClick: () => {},
@@ -160,6 +171,7 @@ StoryGroups.defaultProps = {
   onCancelConfirmClick: () => {},
   onComposerPlaceholderClick: () => {},
   onPreviewClick: () => {},
+  onClosePreviewClick: () => {},
 };
 
 export default WithFeatureLoader(StoryGroups);
