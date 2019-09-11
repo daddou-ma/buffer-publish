@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Popover } from '@bufferapp/components';
-import { Button } from '@bufferapp/ui';
-import { ArrowLeft, ArrowRight, Cross } from '@bufferapp/ui/Icon';
+import { Cross } from '@bufferapp/ui/Icon';
 import { white, transparent } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
+import Arrow from '../Arrow';
 
 const ContentWrapper = styled.div`
   background-color: ${white};
@@ -26,14 +26,6 @@ const ArrowColumn = styled.div`
   justify-content: center;
   background-color: ${transparent};
   width: 48px;
-`;
-
-const ArrowButton = styled(Button)`
-  width: 32px;
-  height: 32px;
-  border-radius: 3px;
-  justify-content: center;
-  padding: 0;
 `;
 
 const CloseButton = styled(Cross)`
@@ -63,10 +55,8 @@ const LightboxCarousel = ({
       <ArrowColumn>
         {showLeftArrow
           && (
-            <ArrowButton
-              type="secondary"
-              icon={<ArrowLeft />}
-              hasIconOnly
+            <Arrow
+              isLeft
               onClick={() => onArrowClick('left')}
             />
           )
@@ -79,10 +69,8 @@ const LightboxCarousel = ({
       <ArrowColumn>
         {showRightArrow
           && (
-            <ArrowButton
-              type="secondary"
-              icon={<ArrowRight />}
-              hasIconOnly
+            <Arrow
+              isLeft={false}
               onClick={() => onArrowClick('right')}
             />
           )
@@ -110,7 +98,7 @@ LightboxCarousel.defaultProps = {
   width: 629,
   showLeftArrow: true,
   showRightArrow: true,
-  onArrowClick: null,
+  onArrowClick: () => {},
 };
 
 export default LightboxCarousel;
