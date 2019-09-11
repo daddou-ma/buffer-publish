@@ -40,6 +40,7 @@ const ButtonWithStyles = styled(Button)`
 `;
 
 const DropzoneWithStyles = styled(Dropzone)`
+  cursor: pointer;
   position: absolute;
   top: 0;
   left: 0;

@@ -12,6 +12,8 @@ import { UploadTypes } from '@bufferapp/publish-constants';
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash.clonedeep';
 
+import styles from './styles.css';
+
 const IconWrapper = styled(CirclePlayIcon)`
       display: flex;
       opacity: 0.8;
@@ -181,6 +183,7 @@ class CarouselCards extends React.Component {
                         onClick={onClick}
                       />
                     )}
+                    classNames={styles}
                     supportsMixedMediaTypes
                     mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
                     uploadDraftFile={this.uploadDraftFile(userData)}

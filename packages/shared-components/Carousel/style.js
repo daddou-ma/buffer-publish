@@ -38,6 +38,7 @@ export const CarouselCard = styled.div`
   background-size: cover;
   background-position: center;
   background-image: url(${props => props.card.thumbnail_url});
+  position: relative;
 `;
 
 export const SliderCarousel = styled.div`
