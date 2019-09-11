@@ -23,6 +23,17 @@ const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
 
+const getStory = (fileUploaded, order) => ({
+  order,
+  note: null,
+  type: fileUploaded.type,
+  asset_url: fileUploaded.url,
+  thumbnail_url: fileUploaded.url,
+  height: fileUploaded.height,
+  width: fileUploaded.width,
+  file_size: fileUploaded.file.size,
+});
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_STORY_GROUP: {
@@ -58,37 +69,23 @@ export default (state = initialState, action) => {
     case actionTypes.FILE_UPLOAD_FINISHED: {
       const { fileUploaded, editingStoryGroup } = action;
       const order = (state.draft.stories.length + 1).toString();
+      let { draft } = state;
+      let { stories } = state.draft;
 
       // TODO: check this bit of code for other media types
-      const story = {
-        order,
-        note: null,
-        type: fileUploaded.type,
-        asset_url: fileUploaded.url,
-        thumbnail_url: fileUploaded.url,
-        height: fileUploaded.height,
-        width: fileUploaded.width,
-        file_size: fileUploaded.file.size,
-      };
+      const story = getStory(fileUploaded, order);
 
       if (editingStoryGroup) {
-        const { stories } = editingStoryGroup.storyDetails;
+        ({ stories } = editingStoryGroup.storyDetails);
         story.order = (stories.length + 1).toString();
-
-        return {
-          ...state,
-          draft: {
-            ...editingStoryGroup,
-            stories: [...stories, story],
-          },
-        };
+        draft = editingStoryGroup;
       }
 
       return {
         ...state,
         draft: {
-          ...state.draft,
-          stories: [...state.draft.stories, story],
+          ...draft,
+          stories: [...stories, story],
         },
       };
     }
