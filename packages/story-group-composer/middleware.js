@@ -4,10 +4,9 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as storiesActions } from '@bufferapp/publish-stories';
-import { actionTypes } from './reducer';
+import { actionTypes, actions } from './reducer';
 
 const refreshStoryGroups = (dispatch, selectedProfileId) => {
-  // will need to pass correct arguments once api/rpc is done
   dispatch(dataFetchActions.fetch({
     name: 'getStoryGroups',
     profileId: selectedProfileId,
@@ -36,34 +35,41 @@ export default ({ getState, dispatch }) => next => (action) => {
     }
     case actionTypes.UPDATE_STORY_GROUP: {
       const { stories, storyGroupId } = getState().storyGroupComposer.draft;
-      const { scheduledAt } = action;
-
       dispatch(dataFetchActions.fetch({
         name: 'updateStoryGroup',
         args: {
           profileId: selectedProfileId,
-          scheduledAt,
-          storyGroupId,
+          scheduledAt: action.scheduledAt,
           stories,
+          storyGroupId,
         },
       }));
       break;
     }
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(actions.setScheduleLoading(false));
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      break;
+    case `updateStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(actions.setScheduleLoading(false));
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      break;
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(actions.setScheduleLoading(false));
       dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
         message: 'Great! This story has been added to your queue.',
       }));
       break;
-    case `createStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(storiesActions.handleCloseStoriesComposer());
-      dispatch(notificationActions.createNotification({
-        notificationType: 'error',
-        message: action.error,
-      }));
-      break;
     case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(actions.setScheduleLoading(false));
       dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
         notificationType: 'success',

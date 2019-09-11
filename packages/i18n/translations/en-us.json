@@ -307,6 +307,9 @@
     "notePlaceholder": "Add your caption or a note to self",
     "saveNoteButton": "Save Note",
     "cancelNoteButton": "Cancel",
-    "noteImageAlt": "Instagram story media"
+    "noteImageAlt": "Instagram story media",
+    "scheduleLoadingButton": "Scheduling Story...",
+    "scheduleButton": "Schedule Story",
+    "previewButton": "Preview"
   }
 }

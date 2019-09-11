@@ -8,18 +8,22 @@ import HeaderBar from '../HeaderBar';
 const StoryGroupPopover = ({
   onOverlayClick,
   translations,
-  onDateTimeSlotPickerSubmit,
   uses24hTime,
   timezone,
   weekStartsMonday,
   selectedProfile,
+  isScheduleLoading,
   saveNote,
   editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
+  onComposerClick,
+  onSetShowDatePicker,
+  showDatePicker,
   userData,
   onUploadFinished,
+  draft,
 }) => (
   <Popover
     width="100%"
@@ -27,7 +31,6 @@ const StoryGroupPopover = ({
     onOverlayClick={onOverlayClick}
   >
     <StoryGroupWrapper
-      onDateTimeSlotPickerSubmit={onDateTimeSlotPickerSubmit}
       uses24hTime={uses24hTime}
       timezone={timezone}
       weekStartsMonday={weekStartsMonday}
@@ -35,25 +38,32 @@ const StoryGroupPopover = ({
       saveNote={saveNote}
       editingStoryGroup={editingStoryGroup}
       translations={translations}
+      isScheduleLoading={isScheduleLoading}
       onCreateStoryGroup={onCreateStoryGroup}
       onUpdateStoryGroup={onUpdateStoryGroup}
       onDeleteStoryGroup={onDeleteStoryGroup}
       onUploadFinished={onUploadFinished}
+      onComposerClick={onComposerClick}
+      onSetShowDatePicker={onSetShowDatePicker}
+      showDatePicker={showDatePicker}
       userData={userData}
+      draft={draft}
     />
   </Popover>
 );
 
 StoryGroupPopover.propTypes = {
   onOverlayClick: PropTypes.func.isRequired,
-  ...DateTimeSlotPickerWrapper.propTypes,
   saveNote: PropTypes.func.isRequired,
-  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
+  isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
   onUploadFinished: PropTypes.func,
 };
 
 StoryGroupPopover.defaultProps = {
+  ...DateTimeSlotPickerWrapper.propTypes,
+  ...HeaderBar.propTypes,
+  ...DateTimeSlotPickerWrapper.propTypes,
   onUploadFinished: () => {},
 };
 
