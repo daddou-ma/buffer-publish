@@ -112,7 +112,6 @@ const configureStore = initialstate => {
         modalsMiddleware,
         twoFactorAuthMiddleware,
         dateTimePreferencesMiddleware,
-        closeAccountMiddleware,
         defaultPageMiddleware,
         disabledQueueMiddleware,
         instagramDirectPostingModalMiddleware,

@@ -76,7 +76,6 @@ export default {
   modals: modalsReducer,
   manageAppsExtras: manageAppsReducer,
   twoFactorAuth: twoFactorAuthReducer,
-  closeAccount: closeAccountReducer,
   productFeatures: productFeaturesReducer,
   drafts: draftsReducer,
   generalSettings: generalSettingsReducer,
