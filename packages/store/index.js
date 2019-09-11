@@ -141,7 +141,8 @@ const configureStore = initialstate => {
         compareChartMiddleware,
         datePickerMiddleware,
         postsMiddleware,
-        profileLoaderMiddleware,
+        // Removing the Analyze profile loader middleware as it was causing a double load to occur
+        // profileLoaderMiddleware,
         profileSelectorMiddleware,
         summaryTableMiddleware,
         // These need to be the last middlewares in the chain
