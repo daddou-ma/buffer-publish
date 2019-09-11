@@ -343,8 +343,9 @@ export const formatPostLists = ({
   hasTwentyFourHourTimeFormat,
   profileService,
   isSingleSlot,
+  orderBy = 'due_at',
 }) => {
-  const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
+  const orderedPosts = Object.values(posts).sort((a, b) => a[orderBy] - b[orderBy]);
 
   /**
    * CASE 1: Schedule Slots Enabled

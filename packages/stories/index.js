@@ -26,6 +26,7 @@ export default connect(
           weeksToShow: currentProfile.page + 1,
           hasTwentyFourHourTimeFormat: state.appSidebar.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
+          orderBy: 'scheduledAt',
         }),
         showStoriesComposer: state.stories.showStoriesComposer,
         editMode: state.stories.editMode,
