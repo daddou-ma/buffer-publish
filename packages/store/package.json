@@ -17,7 +17,6 @@
     "@bufferapp/app-sidebar": "1.11.4",
     "@bufferapp/async-data-fetch": "1.9.4",
     "@bufferapp/average-table": "1.1.0",
-    "@bufferapp/close-account": "2.0.0",
     "@bufferapp/compare-chart": "1.1.0",
     "@bufferapp/environment": "1.9.4",
     "@bufferapp/maintenance-redirect": "2.0.0",

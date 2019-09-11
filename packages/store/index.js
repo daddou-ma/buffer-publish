@@ -31,7 +31,6 @@ import { middleware as modalsMiddleware } from '@bufferapp/publish-modals';
 import { middleware as manageAppsMiddleware } from '@bufferapp/manage-apps-extras';
 import { middleware as twoFactorAuthMiddleware } from '@bufferapp/publish-two-factor-auth';
 import { middleware as dateTimePreferencesMiddleware } from '@bufferapp/date-time-preferences';
-import { middleware as closeAccountMiddleware } from '@bufferapp/close-account';
 import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintenance-redirect';
 import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
 import { middleware as disabledQueueMiddleware } from '@bufferapp/publish-disabled-queue';
