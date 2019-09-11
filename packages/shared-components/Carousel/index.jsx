@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clamp from 'lodash.clamp';
 import { grayLighter } from '@bufferapp/ui/style/colors';
-import ArrowLeft from '@bufferapp/ui/Icon/Icons/ArrowLeft';
-import ArrowRight from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import { CirclePlayIcon } from '@bufferapp/components/Icon/Icons';
+import Arrow from '@bufferapp/publish-shared-components/Arrow';
 
 import UploadZone from '@bufferapp/publish-upload-zone';
 import { Button } from '@bufferapp/ui';
@@ -13,8 +12,6 @@ import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/File
 import { UploadTypes } from '@bufferapp/publish-constants';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
 import * as Styles from './style';
-
-const lowerBounds = 0;
 
 const getCardSizes = (editMode) => {
   if (editMode) {
@@ -56,20 +53,21 @@ const NavArrow = ({
   selectedItem = 0,
   setSelectedItem = null,
   cardsToShow,
+  editMode,
 }) => {
   if (hide) return null;
   const lowerBounds = 0;
   const upperBounds = cardsToShow - 1;
 
   return (
-    <Styles.Arrow
-      prev={prev}
-      onClick={() => {
-        setSelectedItem(clamp(selectedItem + incrementBy, lowerBounds, upperBounds));
-      }}
-    >
-      {prev ? <ArrowLeft /> : <ArrowRight />}
-    </Styles.Arrow>
+    <Styles.ArrowWrapper isLeft={prev} editMode={editMode}>
+      <Arrow
+        isLeft={prev}
+        onClick={() => {
+          setSelectedItem(clamp(selectedItem + incrementBy, lowerBounds, upperBounds));
+        }}
+      />
+    </Styles.ArrowWrapper>
   );
 };
 
@@ -353,6 +351,7 @@ class Carousel extends React.Component {
             selectedItem={selectedItem}
             incrementBy={-1}
             cardsToShow={total}
+            editMode={editMode}
           />
           <NavArrow
             hide={shouldHideRightArrow(total, selectedItem, maxPerPage)}
@@ -360,6 +359,7 @@ class Carousel extends React.Component {
             selectedItem={selectedItem}
             incrementBy={+1}
             cardsToShow={total}
+            editMode={editMode}
           />
         </Styles.SliderCarousel>
       </React.Fragment>
