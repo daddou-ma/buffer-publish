@@ -28,6 +28,7 @@ const AddStoryFooter = ({
   onCreateStoryGroup,
   onSetShowDatePicker,
   showDatePicker,
+  onComposerClick,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(editingStoryGroup ? editingStoryGroup.scheduledAt : null);
 
@@ -48,7 +49,11 @@ const AddStoryFooter = ({
         storyGroupId: editingStoryGroup.id,
       });
     } else {
-      onSetShowDatePicker(true);
+      if (showDatePicker) {
+        onSetShowDatePicker(false);
+      } else {
+        onSetShowDatePicker(true);
+      }
     }
   };
 
@@ -69,7 +74,13 @@ const AddStoryFooter = ({
               label="Edit"
               type="secondary"
               size="small"
-              onClick={() => { onSetShowDatePicker(true); }}
+              onClick={() => {
+                if (showDatePicker) {
+                  onSetShowDatePicker(false);
+                } else {
+                  onSetShowDatePicker(true);
+                } }
+              }
             />
           </EditStoryStyle>
         )}
@@ -88,16 +99,16 @@ const AddStoryFooter = ({
             ? translations.scheduleLoadingButton
             : translations.scheduleButton}
         />
-        {showDatePicker && (
-          <DateTimeSlotPickerWrapper
-            shouldUse24hTime={uses24hTime}
-            timezone={timezone}
-            weekStartsMonday={weekStartsMonday}
-            editMode={!!editingStoryGroup}
-            onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
-          />
-        )}
       </FooterBar>
+      {showDatePicker && (
+        <DateTimeSlotPickerWrapper
+          shouldUse24hTime={uses24hTime}
+          timezone={timezone}
+          weekStartsMonday={weekStartsMonday}
+          editMode={!!editingStoryGroup}
+          onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
+        />
+      )}
     </Fragment>
   );
 };
