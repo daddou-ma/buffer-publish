@@ -36,8 +36,6 @@ const getProfileId = (action) => {
 };
 
 const getStoryGroupId = (action) => {
-  if (action.updateId) { return action.updateId; }
-  if (action.args) { return action.args.updateId; }
   if (action.post) { return action.post.id; }
   if (action.draft) { return action.draft.id; }
   if (action.storyGroup) { return action.storyGroup.id; }
