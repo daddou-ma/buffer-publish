@@ -50,6 +50,9 @@ const LightboxCarousel = ({
   width,
   onOverlayClick,
   onCloseClick,
+  showLeftArrow,
+  showRightArrow,
+  onArrowClick,
 }) => (
   <Popover
     width="100%"
@@ -58,26 +61,32 @@ const LightboxCarousel = ({
   >
     <Modal height={height}>
       <ArrowColumn>
-        <ArrowButton
-          type="secondary"
-          icon={<ArrowLeft />}
-          hasIconOnly
-          onClick={() => {}}
-          label="Click Me"
-        />
+        {showLeftArrow
+          && (
+            <ArrowButton
+              type="secondary"
+              icon={<ArrowLeft />}
+              hasIconOnly
+              onClick={() => onArrowClick('left')}
+            />
+          )
+        }
       </ArrowColumn>
       <ContentWrapper height={height} width={width}>
         {children}
       </ContentWrapper>
       <CloseButton size="large" onClick={onCloseClick} />
       <ArrowColumn>
-        <ArrowButton
-          type="secondary"
-          icon={<ArrowRight />}
-          hasIconOnly
-          onClick={() => {}}
-          label="Click Me"
-        />
+        {showRightArrow
+          && (
+            <ArrowButton
+              type="secondary"
+              icon={<ArrowRight />}
+              hasIconOnly
+              onClick={() => onArrowClick('right')}
+            />
+          )
+        }
       </ArrowColumn>
     </Modal>
   </Popover>
@@ -89,7 +98,9 @@ LightboxCarousel.propTypes = {
   onCloseClick: PropTypes.func,
   height: PropTypes.number,
   width: PropTypes.number,
-
+  showLeftArrow: PropTypes.bool,
+  showRightArrow: PropTypes.bool,
+  onArrowClick: PropTypes.func,
 };
 
 LightboxCarousel.defaultProps = {
@@ -97,6 +108,9 @@ LightboxCarousel.defaultProps = {
   onCloseClick: null,
   height: 592,
   width: 629,
+  showLeftArrow: true,
+  showRightArrow: true,
+  onArrowClick: null,
 };
 
 export default LightboxCarousel;
