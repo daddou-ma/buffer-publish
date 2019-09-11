@@ -26,4 +26,6 @@ export GridList from './GridList';
 export ConfirmModal from './ConfirmModal';
 export ComposerInput from './ComposerInput';
 export ProTag from './ProTag';
+export LightboxCarousel from './LightboxCarousel';
+export Arrow from './Arrow';
 export ComposerSidepanel from './ComposerSidepanel';
