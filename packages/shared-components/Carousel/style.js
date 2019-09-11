@@ -1,22 +1,15 @@
 import styled from 'styled-components';
-import { grayLight, grayLighter } from '@bufferapp/ui/style/colors';
+import { grayLighter } from '@bufferapp/ui/style/colors';
 
 const cardMargin = 4;
 
-export const Arrow = styled.button`
+export const ArrowWrapper = styled.div`
+  position: absolute;
+  left: ${props => (props.isLeft && props.editMode ? '10px' : 'initial')};
+  right: ${props => (props.isLeft ? 'initial' : (props.editMode ? '10px' : 0 ))};
   cursor: pointer;
   top: 50%;
   transform: translateY(calc(-50% - 16px));
-  position: absolute;
-  left: ${props => (props.prev ? 0 : 'initial')};
-  right: ${props => (props.prev ? 'initial' : 0)};
-  background-color: ${grayLight};
-  border: 1px solid ${grayLight};
-  height: 32px;
-  width: 32px;
-  margin: 16px;
-  outline: none;
-  border-radius: 2px;
 `;
 
 export const CarouselContainer = styled.div`
@@ -43,7 +36,7 @@ export const CarouselCard = styled.div`
 export const SliderCarousel = styled.div`
   position: relative;
   overflow: hidden;
-  margin: ${props => (props.editMode ? '0 -16px 0 -16px' : '0 16px 0 12px')};
+  margin: ${props => (props.editMode ? '0 -16px 0 -16px' : '0 12px 0 12px')};
 `;
 
 export const IconWrapper = styled.div`
