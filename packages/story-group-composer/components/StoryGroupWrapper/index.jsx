@@ -36,6 +36,7 @@ const StoryGroupWrapper = ({
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
+  onDeleteStory,
   onComposerClick,
   onSetShowDatePicker,
   showDatePicker,
@@ -44,6 +45,7 @@ const StoryGroupWrapper = ({
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
+  const [story, setStory] = useState();
   const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
   return (
     <Fragment>
@@ -57,6 +59,8 @@ const StoryGroupWrapper = ({
               editMode
               cards={cards}
               userData={userData}
+              onAddNoteClick={(storyCard) => { setStory(storyCard); setViewMode(ADD_NOTE); }}
+              onDeleteStoryClick={storyCard => onDeleteStory({ storyCard })}
             />
             <AddStoryFooter
               onClick={() => onComposerClick(showDatePicker)}

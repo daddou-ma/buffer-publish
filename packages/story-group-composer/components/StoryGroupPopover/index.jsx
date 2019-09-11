@@ -18,6 +18,7 @@ const StoryGroupPopover = ({
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
+  onDeleteStory,
   onComposerClick,
   onSetShowDatePicker,
   showDatePicker,
@@ -41,6 +42,7 @@ const StoryGroupPopover = ({
       onCreateStoryGroup={onCreateStoryGroup}
       onUpdateStoryGroup={onUpdateStoryGroup}
       onDeleteStoryGroup={onDeleteStoryGroup}
+      onDeleteStory={onDeleteStory}
       onComposerClick={onComposerClick}
       onSetShowDatePicker={onSetShowDatePicker}
       showDatePicker={showDatePicker}

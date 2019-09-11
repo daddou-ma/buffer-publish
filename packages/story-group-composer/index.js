@@ -26,6 +26,7 @@ export default connect(
   },
   dispatch => ({
     onOverlayClick: () => {
+      dispatch(actions.setShowDatePicker(false));
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
     onCreateStoryGroup: (scheduledAt) => {
@@ -44,6 +45,10 @@ export default connect(
     },
     onComposerClick: (showDatePicker) => {
       if (showDatePicker) dispatch(actions.setShowDatePicker(false));
+    },
+    onDeleteStory: (story) => {
+      console.log('delete story', story);
+      // reorder stories
     },
   }),
 )(StoryGroupPopover);

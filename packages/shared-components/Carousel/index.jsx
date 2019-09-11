@@ -7,12 +7,12 @@ import ArrowRight from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import { CirclePlayIcon } from '@bufferapp/components/Icon/Icons';
 
 import UploadZone from '@bufferapp/publish-upload-zone';
-import { Button } from '@bufferapp/ui';
 import Attach from '@bufferapp/ui/Icon/Icons/Attach';
 import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
 import { UploadTypes } from '@bufferapp/publish-constants';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
 import * as Styles from './style';
+import CarouselCard from '../CarouselCard';
 
 const lowerBounds = 0;
 
@@ -79,11 +79,43 @@ const PlayIcon = () => (
   </Styles.IconWrapper>
 );
 
+// <UploadZone
+//   uploadButton={({ onClick }) => (
+//     <Button
+//       type="primary"
+//       label="Add Media Files"
+//       icon={<Attach />}
+//       onClick={onClick}
+//     />
+//   )}
+//   supportsMixedMediaTypes
+//   mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+//   uploadDraftFile={this.uploadDraftFile}
+//   notifiers={this.notifiers}
+//   removeAllNotifications={() => console.log('removeAllNotifications', true)}
+//   queueError={({ message }) => console.log('queueError', { message })}
+//   draftId={card.order}
+//   uploadFormatsConfig={uploadFormatsConfig}
+//   service={{
+//     maxAttachableImagesCount: cardsToShow,
+//     canHaveMediaAttachmentType: () => true,
+//   }}
+//   uploadType={UploadTypes.LINK_THUMBNAIL}
+//   multiple
+//   disabled={false}
+// />
+
 /**
  * Carousel on view mode, to display images in the queue
  * Carousel on edit mode, handling from the composer
  */
 class CarouselBody extends React.Component {
+  
+  setSelectedItem = (item) => {
+    this.setState({
+      selectedItem: item,
+    });
+  };
   notifiers = {
     uploadStarted: ({ id, uploaderInstance, file }) => {
       console.log('uploadStarted', { id, uploaderInstance, file });
@@ -228,57 +260,23 @@ class CarouselBody extends React.Component {
       cards,
       editMode,
       cardsToShow,
+      onAddNoteClick,
+      onDeleteStoryClick,
     } = this.props;
     const { cardWidth, cardHeight } = getCardSizes(editMode);
     const cardsToRender = editMode ? getCardsToShow({ cards, cardsToShow }) : sortCards(cards);
     const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
 
     return cardsToRender.map(card => (
-      <Styles.CarouselCard
+      <CarouselCard
         key={card.order}
         card={card}
         cardHeight={cardHeight}
         cardWidth={cardWidth}
         editMode={editMode}
-      >
-        {editMode
-          ? (
-            <React.Fragment>
-              {card.empty && (
-                <div>
-                  <UploadZone
-                    uploadButton={({ onClick }) => (
-                      <Button
-                        type="primary"
-                        label="Add Media Files"
-                        icon={<Attach />}
-                        onClick={onClick}
-                      />
-                    )}
-                    supportsMixedMediaTypes
-                    mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-                    uploadDraftFile={this.uploadDraftFile}
-                    notifiers={this.notifiers}
-                    removeAllNotifications={() => console.log('removeAllNotifications', true)}
-                    queueError={({ message }) => console.log('queueError', { message })}
-                    draftId={card.order}
-                    uploadFormatsConfig={uploadFormatsConfig}
-                    service={{
-                      maxAttachableImagesCount: cardsToShow,
-                      canHaveMediaAttachmentType: () => true,
-                    }}
-                    uploadType={UploadTypes.LINK_THUMBNAIL}
-                    multiple
-                    disabled={false}
-                  />
-                </div>
-              )}
-
-            </React.Fragment>
-          )
-          : card.type === 'video' && <PlayIcon />
-        }
-      </Styles.CarouselCard>
+        onAddNoteClick={onAddNoteClick}
+        onDeleteStoryClick={onDeleteStoryClick}
+      />
     ));
   }
 }
@@ -310,6 +308,8 @@ class Carousel extends React.Component {
       editMode,
       cardsToShow,
       userData,
+      onAddNoteClick,
+      onDeleteStoryClick,
     } = this.props;
 
     const { selectedItem } = this.state;
@@ -333,6 +333,8 @@ class Carousel extends React.Component {
               editMode={editMode}
               cardsToShow={cardsToShow}
               userData={userData}
+              onAddNoteClick={onAddNoteClick}
+              onDeleteStoryClick={onDeleteStoryClick}
             />
           </Styles.CarouselContainer>
           <NavArrow

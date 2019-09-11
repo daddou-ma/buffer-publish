@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { grayLight, grayLighter } from '@bufferapp/ui/style/colors';
+import { grayLight } from '@bufferapp/ui/style/colors';
 
 const cardMargin = 4;
 
@@ -25,19 +25,6 @@ export const CarouselContainer = styled.div`
   width: calc(${props => props.cardWidth + (cardMargin * 2)}px *  ${$props => $props.totalCards});
   transform: ${props => `translateX(calc(-${props.cardWidth + (cardMargin * 2)}px * ${props.selectedItem}`}));
   transition: all 0.3s ease-out;
-`;
-
-export const CarouselCard = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: ${props => (props.editMode ? `${cardMargin}px` : `16px ${cardMargin}px`)};
-  height: ${$props => $props.cardHeight}px;
-  width: ${$props => $props.cardWidth}px;
-  background-color: ${grayLighter};
-  background-size: cover;
-  background-position: center;
-  background-image: url(${props => props.card.thumbnail_url});
 `;
 
 export const SliderCarousel = styled.div`

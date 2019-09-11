@@ -47,7 +47,7 @@ const AddNote = ({
           />
         </div>
         <NoteSection
-          note={story.note}
+          note={note}
           setNote={setNoteValue}
           translations={translations}
         />
