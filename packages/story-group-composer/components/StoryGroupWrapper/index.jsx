@@ -62,7 +62,7 @@ const StoryGroupWrapper = ({
               editMode
               cards={cards}
               userData={userData}
-              onUploadFinished={onUploadFinished}
+              onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, editingStoryGroup)}
             />
             <Button
               type="primary"
@@ -70,6 +70,18 @@ const StoryGroupWrapper = ({
               label="Create"
               onClick={() => onCreateStoryGroup()}
             />
+            {editingStoryGroup && (
+              <Button
+                type="primary"
+                size="small"
+                label="Update"
+                onClick={() => onUpdateStoryGroup(
+                  editingStoryGroup.scheduledAt,
+                  cards,
+                  editingStoryGroup.id,
+                )}
+              />
+            )}
             <FooterBar>
               <Button label="Preview" onClick={() => true} />
               <Button label="Schedule Story" onClick={() => true} />

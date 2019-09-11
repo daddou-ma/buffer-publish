@@ -19,7 +19,7 @@ export default ({ getState, dispatch }) => next => (action) => {
   const { selectedProfileId } = getState().profileSidebar;
   switch (action.type) {
     case actionTypes.SAVE_STORY_GROUP: {
-      const storyGroup = getState().storyGroupComposer.draft;
+      const { stories } = getState().storyGroupComposer.draft;
       const { scheduledAt } = action;
 
       if (scheduledAt) {
@@ -28,20 +28,23 @@ export default ({ getState, dispatch }) => next => (action) => {
           args: {
             profileId: selectedProfileId,
             scheduledAt,
-            stories: storyGroup.stories,
+            stories,
           },
         }));
       }
       break;
     }
     case actionTypes.UPDATE_STORY_GROUP: {
-      const storyGroup = getState().storyGroupComposer.draft;
+      const { stories, storyGroupId } = getState().storyGroupComposer.draft;
+      const { scheduledAt } = action;
+
       dispatch(dataFetchActions.fetch({
         name: 'updateStoryGroup',
         args: {
           profileId: selectedProfileId,
-          scheduledAt: action.scheduledAt,
-          stories: storyGroup,
+          scheduledAt,
+          storyGroupId,
+          stories,
         },
       }));
       break;

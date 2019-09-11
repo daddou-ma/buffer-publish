@@ -1,5 +1,6 @@
-const { method } = require('@bufferapp/buffer-rpc');
+const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
+const { storyGroupParser } = require('./../../parsers/src');
 
 module.exports = method(
   'updateStoryGroup',
@@ -19,8 +20,15 @@ module.exports = method(
     })
       .then(result => JSON.parse(result))
       .then((parsedResult) => {
+        const storyGroup = storyGroupParser(parsedResult.data);
         return {
-          result: parsedResult,
+          storyGroup,
         };
+      })
+      .catch((err) => {
+        if (err.error) {
+          const error = JSON.parse(err.error);
+          throw createError({ message: error.message });
+        }
       }),
 );

@@ -37,14 +37,14 @@ export default connect(
       const scheduledAt = today.clone().add(3, 'hours').unix();
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
-    onUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => {
-      dispatch(actions.handleUpdateStoryGroup(storyGroupId, scheduledAt, stories));
+    onUpdateStoryGroup: (scheduledAt, stories, storyGroupId) => {
+      dispatch(actions.handleUpdateStoryGroup(scheduledAt, stories, storyGroupId));
     },
     saveNote: ({ note, storyId }) => {
       dispatch(actions.handleSaveStoryNote({ note, storyId }));
     },
-    onUploadFinished: (fileUploaded) => {
-      dispatch(actions.handleFileUploadFinished(fileUploaded));
+    onUploadFinished: (fileUploaded, editingStoryGroup) => {
+      dispatch(actions.handleFileUploadFinished(fileUploaded, editingStoryGroup));
     },
   }),
 )(StoryGroupPopover);

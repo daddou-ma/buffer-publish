@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
         draft: {
           ...state.draft,
           scheduledAt: action.scheduledAt,
-          stories: action.stories,
+          storyGroupId: action.storyGroupId,
         },
       };
     }
@@ -56,8 +56,9 @@ export default (state = initialState, action) => {
       };
     }
     case actionTypes.FILE_UPLOAD_FINISHED: {
-      const { fileUploaded } = action;
-      const order = state.draft.stories.length + 1;
+      const { fileUploaded, editingStoryGroup } = action;
+      const order = (state.draft.stories.length + 1).toString();
+
       // TODO: check this bit of code for other media types
       const story = {
         order,
@@ -69,6 +70,19 @@ export default (state = initialState, action) => {
         width: fileUploaded.width,
         file_size: fileUploaded.file.size,
       };
+
+      if (editingStoryGroup) {
+        const { stories } = editingStoryGroup.storyDetails;
+        story.order = (stories.length + 1).toString();
+
+        return {
+          ...state,
+          draft: {
+            ...editingStoryGroup,
+            stories: [...stories, story],
+          },
+        };
+      }
 
       return {
         ...state,
@@ -88,19 +102,20 @@ export const actions = {
     type: actionTypes.SAVE_STORY_GROUP,
     scheduledAt,
   }),
-  handleUpdateStoryGroup: (storyGroupId, scheduledAt, stories) => ({
+  handleUpdateStoryGroup: (scheduledAt, stories, storyGroupId) => ({
     type: actionTypes.UPDATE_STORY_GROUP,
-    storyGroupId,
     scheduledAt,
     stories,
+    storyGroupId,
   }),
   handleSaveStoryNote: ({ storyId, note }) => ({
     type: actionTypes.SAVE_STORY_NOTE,
     storyId,
     note,
   }),
-  handleFileUploadFinished: fileUploaded => ({
+  handleFileUploadFinished: (fileUploaded, editingStoryGroup) => ({
     type: actionTypes.FILE_UPLOAD_FINISHED,
     fileUploaded,
+    editingStoryGroup,
   }),
 };
