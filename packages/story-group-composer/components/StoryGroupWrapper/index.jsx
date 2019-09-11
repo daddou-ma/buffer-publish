@@ -2,9 +2,10 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Carousel from '@bufferapp/publish-shared-components/Carousel';
-import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
-import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
+import HeaderBar from '../HeaderBar';
+import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import CarouselCards from '../CarouselCards';
 import AddStoryFooter from '../AddStoryFooter';
 
 const ADD_STORY = 'addStory';
@@ -45,19 +46,29 @@ const StoryGroupWrapper = ({
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
   const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
+
   return (
     <Fragment>
       <WrapperStyle>
         <HeaderBar
           selectedProfile={selectedProfile}
         />
-        {viewMode === ADD_STORY && (
+        {viewMode === ADD_STORY
+        /* TODO: delete this button once the create story group is in place */
+        && (
           <React.Fragment>
             <Carousel
-              editMode
-              cards={cards}
               userData={userData}
-            />
+              largeCards
+            >
+              <CarouselCards
+                cards={cards}
+                totalCardsToShow={15}
+                userData={userData}
+                largeCards
+                editMode
+              />
+            </Carousel>
             <AddStoryFooter
               onClick={() => onComposerClick(showDatePicker)}
               timezone={timezone}
@@ -93,7 +104,8 @@ StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
-  ...HeaderBar.PropTypes,
+  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
+  ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
 };
