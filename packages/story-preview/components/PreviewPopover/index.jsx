@@ -2,19 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { white } from '@bufferapp/ui/style/colors';
-import { Popover } from '@bufferapp/components';
+import { LightboxCarousel } from '@bufferapp/publish-shared-components';
 import NoteWrapper from '../NoteWrapper';
 import PreviewMedia from '../PreviewMedia';
 
-const ContentWrapper = styled.div`
-  background-color: ${white};
-  display: flex;
-  height: 592px;
-  width: 629px;
-`;
-
 const PreviewPopover = ({
-  onOverlayClick,
+  onCloseClick,
   onSaveNoteClick,
   // dummy data
   user = {
@@ -36,26 +29,24 @@ const PreviewPopover = ({
     thumbnail_url: 'http://assets-jpcust.jwpsrv.com/thumbnails/to6w2sch-320.jpg',
   },
 }) => (
-  <Popover
-    width="100%"
-    top="5rem"
-    onOverlayClick={onOverlayClick}
+  <LightboxCarousel
+    height={592}
+    width={629}
+    onCloseClick={onCloseClick}
   >
-    <ContentWrapper>
-      <PreviewMedia
-        story={story1}
-        user={user}
-      />
-      <NoteWrapper
-        onSaveNoteClick={onSaveNoteClick}
-        story={story}
-      />
-    </ContentWrapper>
-  </Popover>
+    <PreviewMedia
+      story={story}
+      user={user}
+    />
+    <NoteWrapper
+      onSaveNoteClick={onSaveNoteClick}
+      story={story}
+    />
+  </LightboxCarousel>
 );
 
 PreviewPopover.propTypes = {
-  onOverlayClick: PropTypes.func.isRequired,
+  onCloseClick: PropTypes.func.isRequired,
   onSaveNoteClick: PropTypes.func.isRequired,
   user: PropTypes.shape({
     avatarUrl: PropTypes.string.isRequired,

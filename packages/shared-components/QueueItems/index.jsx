@@ -112,7 +112,7 @@ const renderPost = ({
     onImageClickPrev: () => onImageClickPrev({ post }),
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
-    onPreviewClick: () => onPreviewClick({ post }),
+    onPreviewClick,
     onDropPost,
     onSwapPosts,
     hasFirstCommentFlip,
