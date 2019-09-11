@@ -9,7 +9,7 @@ export const ArrowWrapper = styled.div`
   right: ${props => (props.isLeft ? 'initial' : (props.largeCards ? '10px' : 0 ))};
   cursor: pointer;
   top: 50%;
-  transform: translateY(calc(-50%));
+  transform: translateY(-50%);
 `;
 
 export const Arrow = styled.button`
