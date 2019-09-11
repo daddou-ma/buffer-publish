@@ -40,13 +40,33 @@ storiesOf('PostFooter', module)
   .addDecorator(checkA11y)
   .add('queued post', () => (
     <PostFooter
-      onCancelConfirmClick={linkTo('PostFooter', 'queued post')}
-      onDeleteClick={linkTo('PostFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('PostFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onShareNowClick={linkTo('PostFooter', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
+    />
+  ))
+  .add('dragging post', () => (
+    <PostFooter
+      onDeleteConfirmClick={linkTo('PostFooter', 'isDeleting')}
+      onEditClick={action('edit-click')}
+      onShareNowClick={linkTo('PostFooter', 'isWorking')}
+      postDetails={postDetails}
+      isSent={false}
+      dragging
+    />
+  ))
+  .add('has instagram comment', () => (
+    <PostFooter
+      onDeleteConfirmClick={linkTo('PostFooter', 'isDeleting')}
+      onEditClick={action('edit-click')}
+      onShareNowClick={linkTo('PostFooter', 'isWorking')}
+      postDetails={postDetails}
+      isSent={false}
+      hasCommentEnabled
+      commentEnabled
+      commentText="Cenas"
     />
   ))
   .add('post if contributor', () => (
@@ -60,6 +80,22 @@ storiesOf('PostFooter', module)
     <PostFooter
       postDetails={postDetailsSent}
       isSent
+    />
+  ))
+  .add('sent post if link', () => (
+    <PostFooter
+      postDetails={postDetailsSent}
+      isSent
+      isManager
+      serviceLink="www.buffer.com"
+    />
+  ))
+  .add('past reminder', () => (
+    <PostFooter
+      postDetails={postDetailsSent}
+      isPastReminder
+      day="Today"
+      dueTime="12:08pm"
     />
   ))
   .add('custom scheduled post', () => (
@@ -82,31 +118,17 @@ storiesOf('PostFooter', module)
   ))
   .add('post with error', () => (
     <PostFooter
-      onCancelConfirmClick={linkTo('PostFooter', 'queued post')}
-      onDeleteClick={linkTo('PostFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('PostFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onShareNowClick={linkTo('PostFooter', 'isWorking')}
       postDetails={postDetailsError}
       isSent={false}
-    />
-  ))
-  .add('isConfirmingDelete', () => (
-    <PostFooter
-      onDeleteClick={linkTo('PostFooter', 'isConfirmingDelete')}
-      onDeleteConfirmClick={linkTo('PostFooter', 'isDeleting')}
-      onCancelConfirmClick={linkTo('PostFooter', 'queued post')}
-      onEditClick={action('edit-click')}
-      postDetails={postDetails}
-      isConfirmingDelete
-      isSent={false}
+      onRequeueClick={action('requeue-click')}
     />
   ))
   .add('isDeleting', () => (
     <PostFooter
-      onDeleteClick={linkTo('PostFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('PostFooter', 'isDeleting')}
-      onCancelConfirmClick={linkTo('PostFooter', 'queued post')}
       onEditClick={action('edit-click')}
       postDetails={postDetails}
       isDeleting
@@ -115,9 +137,7 @@ storiesOf('PostFooter', module)
   ))
   .add('isWorking', () => (
     <PostFooter
-      onDeleteClick={linkTo('PostFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('PostFooter', 'isDeleting')}
-      onCancelConfirmClick={linkTo('PostFooter', 'queued post')}
       onEditClick={action('edit-click')}
       postDetails={postDetails}
       isWorking

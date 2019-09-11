@@ -40,3 +40,12 @@ const insertIntoTranslation = (insertInto, replacements) => {
 }
 
 export default insertIntoTranslation;
+export const stringTokenizer = (insertInto, replaceString, replaceWith) => {
+  const tokenizedString = insertReplacer(insertInto, replaceString, replaceWith);
+
+  if (typeof tokenizedString !== 'string') {
+    return tokenizedString.join('');
+  }
+
+  return tokenizedString;
+}

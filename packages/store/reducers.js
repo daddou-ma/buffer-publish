@@ -36,10 +36,12 @@ import { reducer as ctaBannerReducer } from '@bufferapp/publish-cta-banner';
 import { reducer as igFirstCommentProTrialModalReducer } from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 import { reducer as trialReducer } from '@bufferapp/publish-trial';
 import { reducer as hashtagGroupsReducer } from '@bufferapp/publish-hashtag-group-manager';
-import { reducer as disabledQueueReducer } from '@bufferapp/publish-disabled-queue';
 import { reducer as onboardingReducer } from '@bufferapp/publish-onboarding';
 import { reducer as globalAccountReducer } from '@bufferapp/global-account';
 import { reducer as closeComposerModalReducer } from '@bufferapp/publish-close-composer-confirmation-modal';
+import { reducer as storyPreviewReducer } from '@bufferapp/publish-story-preview';
+import { reducer as storyGroupComposerReducer } from '@bufferapp/publish-story-group-composer';
+import { reducer as creditCardFormReducer } from '@bufferapp/publish-credit-card-form';
 
 // Analyze
 import { reducer as averageReducer } from '@bufferapp/average-table';
@@ -93,9 +95,11 @@ export default {
   trial: trialReducer,
   onboarding: onboardingReducer,
   hashtagGroups: hashtagGroupsReducer,
-  disabledQueue: disabledQueueReducer,
   globalAccount: globalAccountReducer,
   closeComposerModal: closeComposerModalReducer,
+  storyPreview: storyPreviewReducer,
+  storyGroupComposer: storyGroupComposerReducer,
+  creditCardForm: creditCardFormReducer,
 
   // Analyze
   average: averageReducer,

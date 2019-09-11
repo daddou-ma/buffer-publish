@@ -33,7 +33,6 @@ import { middleware as twoFactorAuthMiddleware } from '@bufferapp/publish-two-fa
 import { middleware as dateTimePreferencesMiddleware } from '@bufferapp/date-time-preferences';
 import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintenance-redirect';
 import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
-import { middleware as disabledQueueMiddleware } from '@bufferapp/publish-disabled-queue';
 import { middleware as instagramDirectPostingModalMiddleware } from '@bufferapp/publish-ig-direct-posting-modal';
 import { middleware as notificationsProviderMiddleware } from '@bufferapp/publish-notifications-provider';
 import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/publish-profiles-disconnected-modal';
@@ -51,6 +50,7 @@ import { middleware as segmentTrackingMiddleware } from '@bufferapp/publish-anal
 import { middleware as onboardingMiddleware } from '@bufferapp/publish-onboarding';
 import { middleware as globalAccountMiddleware } from '@bufferapp/global-account';
 import { middleware as closeComposerModalMiddleware } from '@bufferapp/publish-close-composer-confirmation-modal';
+import { middleware as storyGroupComposerMiddleware } from '@bufferapp/publish-story-group-composer';
 
 // Remove analytics middleware when publish switches to analyze
 import { middleware as averageMiddleware } from '@bufferapp/average-table';
@@ -113,7 +113,6 @@ const configureStore = initialstate => {
         twoFactorAuthMiddleware,
         dateTimePreferencesMiddleware,
         defaultPageMiddleware,
-        disabledQueueMiddleware,
         instagramDirectPostingModalMiddleware,
         maintenanceRedirectMiddleware,
         draftsMiddleware,
@@ -134,12 +133,14 @@ const configureStore = initialstate => {
         globalAccountMiddleware,
         closeComposerModalMiddleware,
         storiesMiddleware,
+        storyGroupComposerMiddleware,
         // Analyze
         averageMiddleware,
         compareChartMiddleware,
         datePickerMiddleware,
         postsMiddleware,
-        profileLoaderMiddleware,
+        // Removing the Analyze profile loader middleware as it was causing a double load to occur
+        // profileLoaderMiddleware,
         profileSelectorMiddleware,
         summaryTableMiddleware,
         // These need to be the last middlewares in the chain

@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { profilePageRoute, preferencePageRoute, childTabRoute, plansPageRoute } from '@bufferapp/publish-routes';
+import {
+  profilePageRoute,
+  preferencePageRoute,
+  childTabRoute,
+  plansPageRoute,
+  newBusinessTrialistsRoute,
+  newConnectionRoute,
+} from '@bufferapp/publish-routes';
 import { Route, Switch, withRouter } from 'react-router';
 
 import { DragDropContext } from 'react-dnd';
@@ -15,7 +22,6 @@ import EnsurePublishBetaUser from '@bufferapp/publish-beta-redirect';
 import AppModals from '@bufferapp/publish-modals';
 import InitialLoading from '@bufferapp/publish-initial-loading';
 import DefaultPage from '@bufferapp/default-page';
-import DisabledQueue from '@bufferapp/publish-disabled-queue';
 import OnboardingManager from '@bufferapp/publish-onboarding';
 import CTABanner from '@bufferapp/publish-cta-banner';
 import TemporaryBanner from '@bufferapp/publish-temporary-banner';
@@ -66,15 +72,11 @@ class App extends Component { // eslint-disable-line
                   component={ProfilePage}
                 />
                 <Route
-                  path="/new-connection"
+                  path={newConnectionRoute}
                   component={DefaultPage}
                 />
                 <Route
-                  path="/new-connection-business-trialists"
-                  component={DisabledQueue}
-                />
-                <Route
-                  path="/new-business-trialists"
+                  path={newBusinessTrialistsRoute}
                   component={OnboardingManager}
                 />
                 <Route

@@ -8,6 +8,7 @@
   },
   "author": "amylee@buffer.com",
   "dependencies": {
+    "lodash.clamp": "^4.0.3"
   },
   "devDependencies": {
     "eslint": "^5.3.0"

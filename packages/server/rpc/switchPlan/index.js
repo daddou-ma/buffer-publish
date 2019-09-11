@@ -27,7 +27,7 @@ const getCtaFromSource = source =>
 module.exports = method(
   'switchPlan',
   'switch user plan',
-  async ({ cycle, token, source, plan }, { session }) => {
+  async ({ cycle, paymentMethodId, source, plan }, { session }) => {
     let result;
     try {
       result = await rp({
@@ -37,7 +37,7 @@ module.exports = method(
         json: true,
         form: {
           cycle,
-          stripeToken: token,
+          payment_method_id: paymentMethodId,
           cta: getCtaFromSource(source),
           access_token: session.publish.accessToken,
           product: 'publish',

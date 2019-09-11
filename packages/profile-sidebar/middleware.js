@@ -7,6 +7,8 @@ import {
   getProfilePageParams,
   getPreferencePageParams,
   getPlansPageParams,
+  newBusinessTrialistsRoute,
+  newConnectionRoute,
 } from '@bufferapp/publish-routes';
 import {
   actionTypes as dataFetchActionTypes,
@@ -37,6 +39,9 @@ export default ({ dispatch, getState }) => next => (action) => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(dataFetchActions.fetch({
         name: 'profiles',
+        args: {
+          id: action.result.id,
+        },
       }));
       break;
     }
@@ -71,7 +76,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       const isPlansPage = !!getPlansPageParams({
         path,
       });
-      const { profiles, isOnBusinessTrial, hasOnboardingFeatureFlip } = getState().profileSidebar;
+      const { profiles, isOnBusinessTrial } = getState().profileSidebar;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
 
@@ -111,13 +116,10 @@ export default ({ dispatch, getState }) => next => (action) => {
           profileId: selectedProfile.id,
           tabId: 'queue',
         })));
-      // With a feature flip, temporary
-      } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial && hasOnboardingFeatureFlip) {
-        dispatch(push('/new-business-trialists'));
       } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial) {
-        dispatch(push('/new-connection-business-trialists'));
+        dispatch(push(newBusinessTrialistsRoute));
       } else if (!isPreferencePage && profiles.length === 0) {
-        dispatch(push('/new-connection'));
+        dispatch(push(newConnectionRoute));
       }
       break;
     }

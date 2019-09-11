@@ -1,15 +1,16 @@
+import { UploadTypes, MediaTypes } from '@bufferapp/publish-constants';
 import AppDispatcher from '../dispatcher';
-import { ActionTypes, MediaTypes, NotificationScopes, UploadTypes } from '../AppConstants';
+import { ActionTypes, NotificationScopes } from '../AppConstants';
 import AppStore from '../stores/AppStore';
 import ComposerStore from '../stores/ComposerStore';
 import Scraper from '../utils/Scraper';
 import Shortener from '../utils/Shortener';
-import Uploader from '../utils/Uploader';
-import NotificationActionCreators from '../action-creators/NotificationActionCreators';
-import AppActionCreators from '../action-creators/AppActionCreators';
-import { getStillDataUriFromGif } from '../utils/DOMUtils';
+import Uploader from '@bufferapp/publish-upload-zone/utils/Uploader';
+import NotificationActionCreators from './NotificationActionCreators';
+import AppActionCreators from './AppActionCreators';
 import { getFileTypeFromPath } from '../utils/StringUtils';
 import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
+import ServerActionCreators from './ServerActionCreators';
 
 const ComposerActionCreators = {
 
@@ -481,7 +482,17 @@ const ComposerActionCreators = {
   },
 
   uploadInstagramDraftThumbnail: (id, imageFile, video) => {
-    const uploader = new Uploader();
+    const { id: userId, s3UploadSignature } = AppStore.getUserData();
+    const uploader = new Uploader({
+      csrf_token: AppStore.getCsrfToken(),
+      userId,
+      s3UploadSignature,
+      errorNotifier: ({ message }) => NotificationActionCreators.queueError({
+        scope: NotificationScopes.FILE_UPLOAD,
+        message,
+      }),
+      notifiers: ServerActionCreators,
+    });
     uploader.upload(imageFile)
       .then((uploadedFile) => {
         const thumbOffset = video.currentTime * 1000;
@@ -504,119 +515,123 @@ const ComposerActionCreators = {
         ModalActionCreators.closeModal('overlay');
       });
   },
-
-  uploadDraftFile: (id, file, uploadType) => {
-    const uploader = new Uploader();
-
-    AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_DRAFT_FILE_UPLOAD_STARTED,
+  notifiers: {
+    uploadStarted: ({ id, uploaderInstance }) => {
+      return AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_DRAFT_FILE_UPLOAD_STARTED,
+        id,
+        uploaderInstance,
+      });
+    },
+    uploadedLinkThumbnail: ({
       id,
-      uploaderInstance: uploader,
+      uploaderInstance,
+      url,
+      width,
+      height,
+    }) => {
+      AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_LINK_THUMBNAIL,
+        id,
+        uploaderInstance,
+        url,
+        width,
+        height,
+      });
+      AppActionCreators.trackUserAction(['composer', 'thumbnail', 'uploaded_file'], {
+        extension: getFileTypeFromPath(url),
+      });
+    },
+    uploadedDraftImage: ({
+      id,
+      uploaderInstance,
+      url,
+      location,
+      width,
+      height,
+    }) => {
+      AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_IMAGE,
+        id,
+        uploaderInstance,
+        url,
+        location,
+        width,
+        height,
+      });
+      AppActionCreators.trackUserAction(['composer', 'media', 'uploaded', 'photo'], {
+        extension: getFileTypeFromPath(url),
+      });
+      AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
+        addedFrom: 'upload',
+        isGif: false,
+      });
+    },
+    uploadedDraftVideo: ({
+      id,
+      uploaderInstance,
+      uploadId,
+      fileExtension,
+    }) => {
+      AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_VIDEO,
+        id,
+        uploaderInstance,
+        uploadId,
+      });
+      AppActionCreators.trackUserAction(['composer', 'media', 'uploaded', 'video'], {
+        extension: fileExtension,
+      });
+    },
+    draftGifUploaded: ({
+      id,
+      uploaderInstance,
+      url,
+      stillGifUrl,
+      width,
+      height,
+    }) => {
+      AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_GIF,
+        id,
+        uploaderInstance,
+        url,
+        stillGifUrl,
+        width,
+        height,
+      });
+      AppActionCreators.trackUserAction(['composer', 'media', 'uploaded', 'photo'], {
+        extension: getFileTypeFromPath(url),
+      });
+      AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
+        addedFrom: 'upload',
+        isGif: true,
+      });
+    },
+    queueError: ({ message }) => {
+      NotificationActionCreators.queueError({
+        scope: NotificationScopes.FILE_UPLOAD,
+        message
+      });
+    },
+    monitorFileUploadProgress: ({ id, uploaderInstance}) => {
+      ComposerActionCreators.monitorDraftFileUploadProgress(id, uploaderInstance);
+    },
+  },
+  uploadDraftFile: (id, file, uploadType, notifiers, createFileUploaderCallback) => {
+    const { id: userId, s3UploadSignature } = AppStore.getUserData();
+    const imageDimensionsKey = AppStore.getImageDimensionsKey();
+    const csrfToken = AppStore.getCsrfToken();
+
+    const uploadDraftFile = createFileUploaderCallback({
+      s3UploadSignature,
+      userId,
+      csrfToken,
+      serverNotifiers: ServerActionCreators,
+      imageDimensionsKey,
     });
 
-    uploader.upload(file)
-      .then((uploadedFile) => {
-        if (uploadedFile.success === false) {
-          NotificationActionCreators.queueError({
-            scope: NotificationScopes.FILE_UPLOAD,
-            message: 'Uh oh! It looks like we had an issue connecting to our' +
-                     ' servers. Up for trying again?',
-          });
-        }
-
-        if (uploadType === UploadTypes.LINK_THUMBNAIL) {
-          AppDispatcher.handleViewAction({
-            actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_LINK_THUMBNAIL,
-            id,
-            uploaderInstance: uploader,
-            url: uploadedFile.url,
-            width: uploadedFile.width,
-            height: uploadedFile.height,
-          });
-
-          AppActionCreators.trackUserAction(['composer', 'thumbnail', 'uploaded_file'], {
-            extension: getFileTypeFromPath(uploadedFile.url),
-          });
-        } else {
-          switch (uploadedFile.type) {
-            case MediaTypes.IMAGE:
-              AppDispatcher.handleViewAction({
-                actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_IMAGE,
-                id,
-                uploaderInstance: uploader,
-                url: uploadedFile.url,
-                location,
-                width: uploadedFile.width,
-                height: uploadedFile.height,
-              });
-              AppActionCreators.trackUserAction(['composer', 'media', 'uploaded', 'photo'], {
-                extension: getFileTypeFromPath(uploadedFile.url),
-              });
-              AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
-                addedFrom: 'upload',
-                isGif: false,
-              });
-              break;
-
-            case MediaTypes.VIDEO:
-              AppDispatcher.handleViewAction({
-                actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_VIDEO,
-                id,
-                uploaderInstance: uploader,
-                uploadId: uploadedFile.uploadId,
-              });
-              AppActionCreators.trackUserAction(['composer', 'media', 'uploaded', 'video'], {
-                extension: uploadedFile.fileExtension,
-              });
-              break;
-
-            case MediaTypes.GIF:
-              getStillDataUriFromGif(uploadedFile.url)
-                .then((dataUri) => {
-                  AppDispatcher.handleViewAction({
-                    actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_GIF,
-                    id,
-                    uploaderInstance: uploader,
-                    url: uploadedFile.url,
-                    stillGifUrl: dataUri,
-                    width: uploadedFile.width,
-                    height: uploadedFile.height,
-                  });
-                })
-                .catch(() => {
-                  AppDispatcher.handleViewAction({
-                    actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_GIF,
-                    id,
-                    uploaderInstance: uploader,
-                    url: uploadedFile.url,
-                    stillGifUrl: null,
-                    width: uploadedFile.width,
-                    height: uploadedFile.height,
-                  });
-                });
-              AppActionCreators.trackUserAction(['composer', 'media', 'uploaded', 'photo'], {
-                extension: getFileTypeFromPath(uploadedFile.url),
-              });
-              AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
-                addedFrom: 'upload',
-                isGif: true,
-              });
-              break;
-
-            default:
-              break;
-          }
-        }
-      })
-      .catch(() => {
-        NotificationActionCreators.queueError({
-          scope: NotificationScopes.FILE_UPLOAD,
-          message: 'Uh oh! It looks like we had an issue connecting to our ' +
-                   'servers. Up for trying again?',
-        });
-      });
-
-    ComposerActionCreators.monitorDraftFileUploadProgress(id, uploader);
+    return uploadDraftFile(id, file, uploadType, notifiers);
   },
 
   updateImageAltText: (image, altText) => {
