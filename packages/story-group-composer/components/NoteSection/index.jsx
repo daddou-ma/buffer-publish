@@ -6,11 +6,9 @@ import { grayDarker, grayLight, gray } from '@bufferapp/ui/style/colors';
 import { fontFamily, fontSize, fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
-const NoteHeader = styled.span`
-  margin: 0px 0px 7px;
-  font-size: 14px;
+const Title = styled(Text)`
+  margin: 0 0 8px;
   font-weight: ${fontWeightMedium};
-  color: ${grayDarker};
 `;
 
 // Change textarea with BDS textarea when complete
@@ -52,11 +50,7 @@ const SubtextWrapper = styled.span`
 const NoteSection = ({ note, setNote, translations }) => (
   <Fragment>
     <NoteWrapper>
-      <NoteHeader>
-        <Text>
-          Note
-        </Text>
-      </NoteHeader>
+      <Title type="p">Note</Title>
       <TextAreaWrapper>
         <textarea
           style={textareaStyle}
