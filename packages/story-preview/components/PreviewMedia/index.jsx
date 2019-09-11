@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Avatar, Text } from '@bufferapp/ui';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
+import { borderRadius } from '@bufferapp/ui/style/borders';
 
 const ContentWrapper = styled.div`
   background-color: #000;
   height: calc(100% - 48px);
   width: calc(354px - 48px);
   padding: 24px;
+  border-radius: ${borderRadius} 0 0 ${borderRadius};
 `;
 
 const Header = styled.div`
