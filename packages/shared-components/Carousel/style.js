@@ -9,7 +9,7 @@ export const ArrowWrapper = styled.div`
   right: ${props => (props.isLeft ? 'initial' : (props.editMode ? '10px' : 0 ))};
   cursor: pointer;
   top: 50%;
-  transform: translateY(calc(-50% - ${props => (props.editMode ? '16px' : '0px')}));
+  transform: translateY(calc(-50%));
 `;
 
 export const CarouselContainer = styled.div`

@@ -74,18 +74,6 @@ const StoryGroupWrapper = ({
               onSetShowDatePicker={onSetShowDatePicker}
               showDatePicker={showDatePicker}
             />
-            {editingStoryGroup && (
-              <Button
-                type="primary"
-                size="small"
-                label="Update"
-                onClick={() => onUpdateStoryGroup(
-                  editingStoryGroup.scheduledAt,
-                  cards,
-                  editingStoryGroup.id,
-                )}
-              />
-            )}
           </React.Fragment>
         )}
         {viewMode === ADD_NOTE && (
