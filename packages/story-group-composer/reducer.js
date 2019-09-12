@@ -10,6 +10,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SET_SHOW_DATE_PICKER: 0,
   RESET_DRAFT_STATE: 0,
   CREATE_NEW_STORY_CARD: 0,
+  UPDATE_STORY_UPLOAD_PROGRESS: 0,
 });
 
 const newStory = () => clonedeep({
@@ -25,6 +26,8 @@ const newStory = () => clonedeep({
   height: null,
   uploading: false,
   name: null,
+  progress: null,
+  originalName: null,
 });
 
 export const initialState = {
@@ -40,6 +43,30 @@ export const initialState = {
 const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
+
+const updateStoryProgress = ({
+  stories, progress, file, complete
+}) => stories.map((story) => {
+  if (story.uploading === true && story.name === file.name) {
+    let uploading = true;
+    let { name } = file;
+    let originalName = '';
+    console.log(complete);
+    if (complete) {
+      uploading = false;
+      name = '';
+      originalName = file.name;
+    }
+    return {
+      ...story,
+      progress,
+      uploading,
+      originalName,
+      name,
+    };
+  }
+  return story;
+});
 
 export default (state, action) => {
   if (!state) {
@@ -86,6 +113,21 @@ export default (state, action) => {
         showDatePicker: action.showDatePicker,
       };
     }
+    case actionTypes.UPDATE_STORY_UPLOAD_PROGRESS: {
+      const {
+        id, uploaderInstance, progress, file, complete,
+      } = action.args;
+      const { stories } = state.draft;
+      return {
+        ...state,
+        draft: {
+          ...state.draft,
+          stories: updateStoryProgress({
+            stories, id, uploaderInstance, progress, file, complete,
+          }),
+        },
+      };
+    }
     case actionTypes.CREATE_NEW_STORY_CARD: {
       const { stories } = state.draft;
       const { file } = action.args;
@@ -96,6 +138,7 @@ export default (state, action) => {
           stories: [...stories, {
             ...newStory(),
             uploading: true,
+            progress: 0,
             thumbnail_url: file && file.preview,
             name: file.name,
             order: stories.length,
@@ -122,6 +165,18 @@ export const actions = {
     type: actionTypes.SAVE_STORY_NOTE,
     order,
     note,
+  }),
+  updateStoryUploadProgress: ({
+    id, uploaderInstance, progress, file, complete,
+  }) => ({
+    type: actionTypes.UPDATE_STORY_UPLOAD_PROGRESS,
+    args: {
+      id,
+      uploaderInstance,
+      progress,
+      file,
+      complete,
+    },
   }),
   setScheduleLoading: isLoading => ({
     type: actionTypes.SET_SCHEDULE_LOADING,

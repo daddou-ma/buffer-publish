@@ -39,6 +39,7 @@ const StoryGroupWrapper = ({
   onDeleteStoryGroup,
   onComposerClick,
   onCreateNewStoryCard,
+  onUpdateStoryUploadProgress,
   onSetShowDatePicker,
   showDatePicker,
   userData,
@@ -63,6 +64,7 @@ const StoryGroupWrapper = ({
             >
               <CarouselCards
                 createNewFile={onCreateNewStoryCard}
+                updateUploadProgress={onUpdateStoryUploadProgress}
                 cards={cards}
                 totalCardsToShow={15}
                 userData={userData}
@@ -90,8 +92,8 @@ const StoryGroupWrapper = ({
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
             story={draft.stories[0]}
-            onSaveNoteClick={({order, note}) => {
-              saveNote({order, note});
+            onSaveNoteClick={({ order, note }) => {
+              saveNote({ order, note });
               setViewMode(ADD_STORY);
             }}
           />

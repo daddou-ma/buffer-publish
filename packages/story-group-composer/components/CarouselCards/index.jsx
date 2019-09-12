@@ -9,6 +9,7 @@ import { Button } from '@bufferapp/ui';
 import Attach from '@bufferapp/ui/Icon/Icons/Attach';
 import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
 import { UploadTypes } from '@bufferapp/publish-constants';
+import CircularUploadIndicator from '@bufferapp/publish-composer/composer/components/progress-indicators/CircularUploadIndicator';
 import PropTypes from 'prop-types';
 
 import styles from './styles.css';
@@ -42,6 +43,7 @@ const getCardsToShow = ({ cards = [], totalCardsToShow }) => {
       cardList.push({
         order: i,
         empty: firstEmpty,
+        progress: null,
       });
       firstEmpty = false;
     }
@@ -81,18 +83,19 @@ class CarouselCards extends React.Component {
     queueError: ({ message }) => this.props.notifyError({ message }),
     monitorFileUploadProgress: async ({ id, uploaderInstance, file }) => {
       const progressIterator = uploaderInstance.getProgressIterator();
+      const { updateUploadProgress } = this.props;
       let item;
 
       while (!(item = progressIterator.next()).done) { // eslint-disable-line no-cond-assign
         const promisedProgress = item.value;
 
         await promisedProgress.then(progress => // eslint-disable-line no-await-in-loop
-          this.props.updateUploadProgress({
+          updateUploadProgress({
             id, uploaderInstance, progress, file, complete: false,
           }));
       }
-      this.props.updateUploadProgress({
-        id, uploaderInstance, file, complete: true,
+      updateUploadProgress({
+        id, uploaderInstance, file, complete: true, progress: 100,
       });
     },
   };
@@ -197,6 +200,14 @@ class CarouselCards extends React.Component {
                     disabled={false}
                   />
                 </div>
+              )}
+              {!card.empty && card.progress !== null && card.uploading && (
+                <CircularUploadIndicator
+                  classNames={{ container: styles.container }}
+                  size={54}
+                  progress={card.progress}
+                  showText
+                />
               )}
 
             </React.Fragment>

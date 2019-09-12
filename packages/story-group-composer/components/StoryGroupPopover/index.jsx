@@ -21,6 +21,7 @@ const StoryGroupPopover = ({
   onComposerClick,
   onSetShowDatePicker,
   onCreateNewStoryCard,
+  onUpdateStoryUploadProgress,
   showDatePicker,
   userData,
   draft,
@@ -45,6 +46,7 @@ const StoryGroupPopover = ({
       onCreateNewStoryCard={onCreateNewStoryCard}
       onComposerClick={onComposerClick}
       onSetShowDatePicker={onSetShowDatePicker}
+      onUpdateStoryUploadProgress={onUpdateStoryUploadProgress}
       showDatePicker={showDatePicker}
       userData={userData}
       draft={draft}

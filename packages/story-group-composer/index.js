@@ -38,7 +38,6 @@ export default connect(
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
-      dispatch(actions.resetDraftState());
     },
     onSetShowDatePicker: (showDatePicker) => {
       dispatch(actions.setShowDatePicker(showDatePicker));
@@ -48,6 +47,21 @@ export default connect(
     },
     onCreateNewStoryCard: ({ id, uploaderInstance, file }) => {
       dispatch(actions.createNewStoryCard({ id, uploaderInstance, file }));
+    },
+    onUpdateStoryUploadProgress: ({
+      id, uploaderInstance, progress, file, complete,
+    }) => {
+      if (!complete) {
+        dispatch(actions.updateStoryUploadProgress({
+          id, uploaderInstance, progress, file,
+        }));
+      } else {
+        setTimeout(() => {
+          dispatch(actions.updateStoryUploadProgress({
+            id, uploaderInstance, progress, file, complete,
+          }));
+        }, 1000);
+      }
     },
   }),
 )(StoryGroupPopover);
