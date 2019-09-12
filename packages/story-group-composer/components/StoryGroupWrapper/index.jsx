@@ -61,7 +61,6 @@ const StoryGroupWrapper = ({
             <Carousel
               userData={userData}
               largeCards
-              onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, editingStoryGroup)}
             >
               <CarouselCards
                 cards={cards}
@@ -69,6 +68,7 @@ const StoryGroupWrapper = ({
                 userData={userData}
                 largeCards
                 editMode
+                onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, editingStoryGroup)}
               />
             </Carousel>
             <AddStoryFooter
@@ -106,7 +106,7 @@ StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
-  onUploadFinished: PropTypes.func,
+  createImageThumbnail: PropTypes.func,
 };
 
 StoryGroupWrapper.defaultProps = {
@@ -115,7 +115,7 @@ StoryGroupWrapper.defaultProps = {
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
-  onUploadFinished: () => {},
+  createImageThumbnail: () => {},
 };
 
 export default StoryGroupWrapper;

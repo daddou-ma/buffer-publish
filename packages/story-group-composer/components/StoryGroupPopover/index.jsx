@@ -57,14 +57,12 @@ StoryGroupPopover.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
-  onUploadFinished: PropTypes.func,
 };
 
 StoryGroupPopover.defaultProps = {
   ...DateTimeSlotPickerWrapper.propTypes,
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
-  onUploadFinished: () => {},
 };
 
 export default StoryGroupPopover;
