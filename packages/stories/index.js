@@ -39,9 +39,9 @@ export default connect(
     return {};
   },
   (dispatch, ownProps) => ({
-    onEmptySlotClick: (post) => {
+    onEmptySlotClick: (storyGroup) => {
       dispatch(actions.handleEmptySlotClick({
-        emptySlotData: post,
+        emptySlotData: storyGroup,
         profileId: ownProps.profileId,
       }));
     },
@@ -72,7 +72,7 @@ export default connect(
     },
     onShareNowClick: (storyGroup) => {
       dispatch(actions.handleShareNowClick({
-        draft: storyGroup.post,
+        storyGroup: storyGroup.post,
         profileId: ownProps.profileId,
       }));
     },

@@ -41,6 +41,7 @@ const getStoryGroupId = (action) => {
   if (action.post) { return action.post.id; }
   if (action.draft) { return action.draft.id; }
   if (action.storyGroup) { return action.storyGroup.id; }
+  if (action.args) { return action.args.updateId; }
 };
 
 const determineIfMoreToLoad = (action, currentPosts) => {
@@ -222,10 +223,10 @@ export const actions = {
     storyGroup: storyGroup.post,
     profileId,
   }),
-  handleShareNowClick: ({ draft, profileId }) => ({
+  handleShareNowClick: ({ storyGroup, profileId }) => ({
     type: actionTypes.STORY_GROUP_SHARE_NOW,
-    updateId: draft.id,
-    draft,
+    updateId: storyGroup.id,
+    storyGroup,
     profileId,
   }),
 };

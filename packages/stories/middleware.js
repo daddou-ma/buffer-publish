@@ -41,7 +41,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch(dataFetchActions.fetch({
         name: 'shareStoryGroupNow',
         args: {
-          updateId: action.draft.id,
+          updateId: action.storyGroup.id,
           profileId: action.profileId,
         },
       }));
@@ -49,7 +49,7 @@ export default ({ dispatch, getState }) => next => (action) => {
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
-        message: 'Great! you will receive a reminder to post manually! 🎉',
+        message: 'Great! You will receive a reminder to post manually! 🎉',
       }));
       break;
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
