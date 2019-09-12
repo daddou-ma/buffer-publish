@@ -8,8 +8,7 @@ const SEE_NOTE = 'seeNote';
 const EDIT_NOTE = 'editNote';
 
 const WrapperStyle = styled.div`
-  height: calc( 100% - 56px);
-  width: calc( 275px - 32px);
+  flex: 1;
   padding: 32px 16px 24px;
 `;
 

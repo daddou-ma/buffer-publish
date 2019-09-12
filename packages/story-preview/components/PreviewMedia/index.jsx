@@ -7,8 +7,6 @@ import { borderRadius } from '@bufferapp/ui/style/borders';
 
 const ContentWrapper = styled.div`
   background-color: #000;
-  height: calc(100% - 48px);
-  width: calc(354px - 48px);
   padding: 24px;
   border-radius: ${borderRadius} 0 0 ${borderRadius};
 `;

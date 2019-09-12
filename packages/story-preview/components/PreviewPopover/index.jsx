@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Slider } from '@bufferapp/publish-shared-components';
@@ -8,6 +8,7 @@ import PreviewMedia from '../PreviewMedia';
 
 const SliderContainer = styled.div`
   height: 592px;
+  width: 725px;
 `;
 
 const stories = [
@@ -26,6 +27,27 @@ const stories = [
     thumbnail_url: 'http://assets-jpcust.jwpsrv.com/thumbnails/to6w2sch-320.jpg',
   },
 ];
+
+/* eslint-disable react/prop-types */
+
+const SliderItem = ({
+  storyToDisplay,
+  onSaveNoteClick,
+  user,
+}) => (
+  <Fragment>
+    <PreviewMedia
+      story={storyToDisplay}
+      user={user}
+    />
+    <NoteWrapper
+      onSaveNoteClick={onSaveNoteClick}
+      story={storyToDisplay}
+    />
+  </Fragment>
+);
+
+/* eslint-enable react/prop-types */
 
 const PreviewPopover = ({
   onCloseClick,
@@ -59,13 +81,10 @@ const PreviewPopover = ({
           showRightArrow={showRightArrow}
           onArrowClick={onArrowClick}
         >
-          <PreviewMedia
-            story={storyToDisplay}
+          <SliderItem
             user={user}
-          />
-          <NoteWrapper
             onSaveNoteClick={onSaveNoteClick}
-            story={storyToDisplay}
+            storyToDisplay={storyToDisplay}
           />
         </Slider>
       </SliderContainer>

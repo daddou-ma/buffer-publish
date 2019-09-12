@@ -9,8 +9,7 @@ import Arrow from '../Arrow';
 const ContentWrapper = styled.div`
   background-color: ${white};
   display: flex;
-  height: 100%;
-  width: 100%;
+  flex: 1;
   border-radius: ${borderRadius};
 `;
 
