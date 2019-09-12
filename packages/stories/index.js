@@ -33,6 +33,7 @@ export default connect(
         showStoryPreview: state.stories.showStoryPreview,
         editMode: state.stories.editMode,
         isBusinessAccount: profileData.business,
+        userData: state.appSidebar.user,
       };
     }
     return {};
