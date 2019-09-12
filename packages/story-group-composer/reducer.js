@@ -1,3 +1,4 @@
+import clonedeep from 'lodash.clonedeep';
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
@@ -7,19 +8,30 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_GROUP: 0,
   SET_SCHEDULE_LOADING: 0,
   SET_SHOW_DATE_PICKER: 0,
+  RESET_DRAFT_STATE: 0,
+  CREATE_NEW_STORY_CARD: 0,
+});
+
+const newStory = () => clonedeep({
+  note: null,
+  order: 0,
+  type: null,
+  asset_url: null,
+  thumbnail_url: null,
+  upload_id: null,
+  duration_ms: null,
+  file_size: null,
+  width: null,
+  height: null,
+  uploading: false,
+  name: null,
 });
 
 export const initialState = {
   // temporarily adding as dummy data until create is working
   draft: {
     scheduledAt: null,
-    stories: [{
-      note: null,
-      order: 1,
-      type: 'image',
-      asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
-      thumbnail_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
-    }],
+    stories: [],
   },
   isScheduleLoading: false,
   showDatePicker: false,
@@ -29,13 +41,19 @@ const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
 
-export default (state = initialState, action) => {
+export default (state, action) => {
+  if (!state) {
+    state = clonedeep(initialState);
+  }
   switch (action.type) {
     case actionTypes.SAVE_STORY_GROUP: {
       return {
         ...state,
         draft: { ...state.draft, scheduledAt: action.scheduledAt },
       };
+    }
+    case actionTypes.RESET_DRAFT_STATE: {
+      return clonedeep(initialState);
     }
     case actionTypes.UPDATE_STORY_GROUP: {
       return {
@@ -68,11 +86,27 @@ export default (state = initialState, action) => {
         showDatePicker: action.showDatePicker,
       };
     }
+    case actionTypes.CREATE_NEW_STORY_CARD: {
+      const { stories } = state.draft;
+      const { file } = action.args;
+      return {
+        ...state,
+        draft: {
+          ...state.draft,
+          stories: [...stories, {
+            ...newStory(),
+            uploading: true,
+            thumbnail_url: file && file.preview,
+            name: file.name,
+            order: stories.length,
+          }],
+        },
+      };
+    }
     default:
       return state;
   }
 };
-
 export const actions = {
   handleSaveStoryGroup: scheduledAt => ({
     type: actionTypes.SAVE_STORY_GROUP,
@@ -96,5 +130,16 @@ export const actions = {
   setShowDatePicker: showDatePicker => ({
     type: actionTypes.SET_SHOW_DATE_PICKER,
     showDatePicker,
+  }),
+  resetDraftState: () => ({
+    type: actionTypes.RESET_DRAFT_STATE,
+  }),
+  createNewStoryCard: ({ file, uploaderInstance, id }) => ({
+    type: actionTypes.CREATE_NEW_STORY_CARD,
+    args: {
+      id,
+      uploaderInstance,
+      file,
+    },
   }),
 };

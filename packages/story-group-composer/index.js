@@ -38,12 +38,16 @@ export default connect(
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
+      dispatch(actions.resetDraftState());
     },
     onSetShowDatePicker: (showDatePicker) => {
       dispatch(actions.setShowDatePicker(showDatePicker));
     },
     onComposerClick: (showDatePicker) => {
       if (showDatePicker) dispatch(actions.setShowDatePicker(false));
+    },
+    onCreateNewStoryCard: ({ id, uploaderInstance, file }) => {
+      dispatch(actions.createNewStoryCard({ id, uploaderInstance, file }));
     },
   }),
 )(StoryGroupPopover);

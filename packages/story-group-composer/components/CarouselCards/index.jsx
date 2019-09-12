@@ -10,7 +10,6 @@ import Attach from '@bufferapp/ui/Icon/Icons/Attach';
 import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
 import { UploadTypes } from '@bufferapp/publish-constants';
 import PropTypes from 'prop-types';
-import cloneDeep from 'lodash.clonedeep';
 
 import styles from './styles.css';
 
@@ -41,7 +40,7 @@ const getCardsToShow = ({ cards = [], totalCardsToShow }) => {
       cardList.push(card);
     } else {
       cardList.push({
-        order: `${i}`,
+        order: i,
         empty: firstEmpty,
       });
       firstEmpty = false;
@@ -103,38 +102,36 @@ class CarouselCards extends React.Component {
 
     this.state = {
       draftCards: [],
-      currentCards: cloneDeep(props.cards),
+      currentCards: props.cards,
     };
   }
 
-  uploadDraftFile = userData => (id, file, uploadType, notifiers, createFileUploaderCallback) => {
+  uploadDraftFile = ({
+    userData,
+    videoProcessingComplete,
+  }) => (id, file, uploadType, notifiers, createFileUploaderCallback) => {
     const {
       id: userId,
       s3_upload_signature: s3Signature,
       imageDimensionsKey,
     } = userData;
 
-    const s3UploadSignature = {
-      algorithm: s3Signature.algorithm,
-      base64Policy: s3Signature.base64policy,
-      bucket: s3Signature.bucket,
-      credentials: s3Signature.credentials,
-      date: s3Signature.date,
-      expires: s3Signature.expires,
-      signature: s3Signature.signature,
-      successActionStatus: s3Signature.success_action_status,
-    };
     const uploadDraftFileCallback = createFileUploaderCallback({
-      s3UploadSignature,
+      s3UploadSignature: {
+        algorithm: s3Signature.algorithm,
+        base64Policy: s3Signature.base64policy,
+        bucket: s3Signature.bucket,
+        credentials: s3Signature.credentials,
+        date: s3Signature.date,
+        expires: s3Signature.expires,
+        signature: s3Signature.signature,
+        successActionStatus: s3Signature.success_action_status,
+      },
       userId,
       csrfToken: null,
       imageDimensionsKey,
       serverNotifiers: {
-        videoProcessed: ({
-          uploadId, name, duration, durationMs, size, width, height, url, originalUrl, thumbnail, availableThumbnails,
-        }) => this.props.videoProcessingComplete({
-          uploadId, name, duration, durationMs, size, width, height, url, originalUrl, thumbnail, availableThumbnails,
-        }),
+        videoProcessed: processedVideoMeta => videoProcessingComplete(processedVideoMeta),
         profileGroupCreated: () => {},
         profileGroupUpdated: () => {},
         profileGroupDeleted: () => {},
@@ -152,11 +149,10 @@ class CarouselCards extends React.Component {
       userData,
       removeNotifications,
       notifyError,
+      videoProcessingComplete,
+      cards,
     } = this.props;
 
-    const {
-      currentCards: cards,
-    } = this.state;
     const { cardWidth, cardHeight } = getCardSizes(largeCards);
     const cardsToRender = editMode ? getCardsToShow({ cards, totalCardsToShow }) : sortCards(cards);
     const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
@@ -186,17 +182,17 @@ class CarouselCards extends React.Component {
                     classNames={styles}
                     supportsMixedMediaTypes
                     mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-                    uploadDraftFile={this.uploadDraftFile(userData)}
+                    uploadDraftFile={this.uploadDraftFile({ userData, videoProcessingComplete })}
                     notifiers={this.notifiers}
                     removeAllNotifications={removeNotifications}
                     queueError={notifyError}
-                    draftId={card.order}
+                    draftId={`${card.order}`}
                     uploadFormatsConfig={uploadFormatsConfig}
                     service={{
                       maxAttachableImagesCount: totalCardsToShow,
                       canHaveMediaAttachmentType: () => true,
                     }}
-                    uploadType={UploadTypes.LINK_THUMBNAIL}
+                    uploadType={UploadTypes.MEDIA}
                     multiple
                     disabled={false}
                   />
@@ -215,7 +211,7 @@ class CarouselCards extends React.Component {
 CarouselCards.propTypes = {
   largeCards: PropTypes.bool,
   cards: PropTypes.arrayOf(PropTypes.shape({
-    order: PropTypes.string,
+    order: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     type: PropTypes.string,
     note: PropTypes.string,
     asset_url: PropTypes.string,
@@ -264,12 +260,12 @@ CarouselCards.defaultProps = {
   }),
   uploadImageComplete: ({
     id, uploaderInstance, url, location = null, width, height, file, stillGifUrl = null,
-  }) => console.log('uploadedDraftImage - Create Draft Image', {
+  }) => console.log('uploadedDraftImage - Image Upload Created', {
     id, uploaderInstance, url, location, width, height, file, stillGifUrl,
   }),
   videoProcessingStarted: ({
     id, uploaderInstance, uploadId, fileExtension, file,
-  }) => console.log('uploadedDraftVideo', {
+  }) => console.log('uploadedDraftVideo - Video Processing Started', {
     id, uploaderInstance, uploadId, fileExtension, file,
   }),
   videoProcessingComplete: ({

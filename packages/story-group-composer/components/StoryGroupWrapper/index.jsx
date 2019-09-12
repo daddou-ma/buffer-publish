@@ -38,14 +38,14 @@ const StoryGroupWrapper = ({
   onUpdateStoryGroup,
   onDeleteStoryGroup,
   onComposerClick,
+  onCreateNewStoryCard,
   onSetShowDatePicker,
   showDatePicker,
   userData,
   draft,
 }) => {
-  // hooks: https://reactjs.org/docs/hooks-state.html
+  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : draft.stories;
   const [viewMode, setViewMode] = useState(ADD_STORY);
-  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
 
   return (
     <Fragment>
@@ -62,6 +62,7 @@ const StoryGroupWrapper = ({
               largeCards
             >
               <CarouselCards
+                createNewFile={onCreateNewStoryCard}
                 cards={cards}
                 totalCardsToShow={15}
                 userData={userData}
@@ -89,8 +90,8 @@ const StoryGroupWrapper = ({
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
             story={draft.stories[0]}
-            onSaveNoteClick={({ order, note }) => {
-              saveNote({ order, note });
+            onSaveNoteClick={({order, note}) => {
+              saveNote({order, note});
               setViewMode(ADD_STORY);
             }}
           />
