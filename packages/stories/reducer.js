@@ -8,6 +8,7 @@ export const actionTypes = keyWrapper('STORIES', {
   DELETE_STORY_GROUP: 0,
   OPEN_PREVIEW: 0,
   STORY_GROUP_SHARE_NOW: 0,
+  CLOSE_PREVIEW: 0,
 });
 
 export const initialState = {
@@ -17,6 +18,7 @@ export const initialState = {
   editMode: false,
   emptySlotMode: false,
   editingPostId: '',
+  showStoryPreview: false,
 };
 
 export const profileInitialState = {
@@ -173,6 +175,16 @@ export default (state = initialState, action) => {
         editMode: false,
         emptySlotMode: false,
       };
+    case actionTypes.OPEN_PREVIEW:
+      return {
+        ...state,
+        showStoryPreview: true,
+      };
+    case actionTypes.CLOSE_PREVIEW:
+      return {
+        ...state,
+        showStoryPreview: false,
+      };
     default:
       return state;
   }
@@ -201,6 +213,9 @@ export const actions = {
   }),
   handlePreviewClick: () => ({
     type: actionTypes.OPEN_PREVIEW,
+  }),
+  handleClosePreviewClick: () => ({
+    type: actionTypes.CLOSE_PREVIEW,
   }),
   handleDeleteStoryGroup: ({ storyGroup, profileId }) => ({
     type: actionTypes.DELETE_STORY_GROUP,

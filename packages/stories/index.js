@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
+import { actions as previewActions } from '@bufferapp/publish-story-preview';
 
 import { actions } from './reducer';
 import StoryGroups from './components/StoryGroups';
@@ -29,6 +30,7 @@ export default connect(
           orderBy: 'scheduledAt',
         }),
         showStoriesComposer: state.stories.showStoriesComposer,
+        showStoryPreview: state.stories.showStoryPreview,
         editMode: state.stories.editMode,
         isBusinessAccount: profileData.business,
       };
@@ -54,8 +56,12 @@ export default connect(
     handleCloseStoriesComposer: () => {
       dispatch(actions.handleCloseStoriesComposer());
     },
-    onPreviewClick: () => {
+    onPreviewClick: (stories) => {
+      dispatch(previewActions.handlePreviewClick(stories));
       dispatch(actions.handlePreviewClick());
+    },
+    onClosePreviewClick: () => {
+      dispatch(actions.handleClosePreviewClick());
     },
     onDeleteConfirmClick: (storyGroup) => {
       dispatch(actions.handleDeleteStoryGroup({

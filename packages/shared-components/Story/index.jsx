@@ -26,7 +26,7 @@ const Story = ({
         creatorName={storyDetails.creatorName}
         avatarUrl={storyDetails.avatarUrl}
         createdAt={storyDetails.createdAt}
-        onPreviewClick={onPreviewClick}
+        onPreviewClick={() => onPreviewClick(storyDetails.stories)}
       />
       <Carousel cards={storyDetails.stories} editMode={false} />
       <CardFooter
