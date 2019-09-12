@@ -11,23 +11,6 @@ const SliderContainer = styled.div`
   width: 725px;
 `;
 
-const stories = [
-  {
-    note: 'Note 1',
-    type: 'image',
-    order: 0,
-    asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
-    thumbnail_url: '',
-  },
-  {
-    note: 'Note 2',
-    type: 'video',
-    order: 1,
-    asset_url: 'http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4',
-    thumbnail_url: 'http://assets-jpcust.jwpsrv.com/thumbnails/to6w2sch-320.jpg',
-  },
-];
-
 /* eslint-disable react/prop-types */
 
 const SliderItem = ({
@@ -52,7 +35,7 @@ const SliderItem = ({
 const PreviewPopover = ({
   onCloseClick,
   onSaveNoteClick,
-  //stories,
+  stories,
   user,
 }) => {
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
@@ -103,7 +86,7 @@ PreviewPopover.propTypes = {
     PropTypes.shape({
       note: PropTypes.string,
       type: PropTypes.oneOf(['image', 'video', 'gif']),
-      order: PropTypes.number,
+      order: PropTypes.string,
       asset_url: PropTypes.string,
       thumbnail_url: PropTypes.string,
     }),
