@@ -50,7 +50,7 @@ export default connect(
     },
     onEditClick: (storyGroup) => {
       dispatch(actions.handleEditStoryGroupClick({
-        draft: storyGroup.post,
+        storyGroup: storyGroup.post,
         profileId: ownProps.profileId,
       }));
     },
