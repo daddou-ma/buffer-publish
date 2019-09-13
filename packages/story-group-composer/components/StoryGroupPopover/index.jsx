@@ -22,6 +22,10 @@ const StoryGroupPopover = ({
   onSetShowDatePicker,
   onCreateNewStoryCard,
   onUpdateStoryUploadProgress,
+  onVideoUploadProcessingStarted,
+  onVideoUploadProcessingComplete,
+  onMonitorUpdateProgress,
+  onUploadDraftFile,
   showDatePicker,
   userData,
   draft,
@@ -47,6 +51,10 @@ const StoryGroupPopover = ({
       onComposerClick={onComposerClick}
       onSetShowDatePicker={onSetShowDatePicker}
       onUpdateStoryUploadProgress={onUpdateStoryUploadProgress}
+      onVideoUploadProcessingStarted={onVideoUploadProcessingStarted}
+      onVideoUploadProcessingComplete={onVideoUploadProcessingComplete}
+      onMonitorUpdateProgress={onMonitorUpdateProgress}
+      onUploadDraftFile={onUploadDraftFile}
       showDatePicker={showDatePicker}
       userData={userData}
       draft={draft}

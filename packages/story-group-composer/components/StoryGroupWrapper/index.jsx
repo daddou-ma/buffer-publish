@@ -40,6 +40,10 @@ const StoryGroupWrapper = ({
   onComposerClick,
   onCreateNewStoryCard,
   onUpdateStoryUploadProgress,
+  onVideoUploadProcessingStarted,
+  onVideoUploadProcessingComplete,
+  onMonitorUpdateProgress,
+  onUploadDraftFile,
   onSetShowDatePicker,
   showDatePicker,
   userData,
@@ -65,6 +69,10 @@ const StoryGroupWrapper = ({
               <CarouselCards
                 createNewFile={onCreateNewStoryCard}
                 updateUploadProgress={onUpdateStoryUploadProgress}
+                videoProcessingStarted={onVideoUploadProcessingStarted}
+                videoProcessingComplete={onVideoUploadProcessingComplete}
+                monitorUpdateProgress={onMonitorUpdateProgress}
+                uploadDraftFile={onUploadDraftFile}
                 cards={cards}
                 totalCardsToShow={15}
                 userData={userData}
