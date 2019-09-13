@@ -23,7 +23,7 @@ export const PencilIconWrapper = styled.div`
   margin-left: auto;
 `;
 
-export const NoteText = styled.div`
+export const TextWrapper = styled.div`
   color: white;
   margin: auto;
   font-size: 14px;

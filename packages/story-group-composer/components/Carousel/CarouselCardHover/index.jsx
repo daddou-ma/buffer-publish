@@ -9,7 +9,7 @@ import {
   DragDropWrapper,
   EditNoteWrapper,
   StyledPencilIcon,
-  NoteText,
+  TextWrapper,
   PencilIconWrapper,
 } from './style';
 
@@ -20,22 +20,36 @@ const CarouselCardHover = ({
 }) => (
   <Fragment>
     <TrashIconWrapper>
-      <StyledTrashIcon size="medium" onClick={() => { onDeleteStoryClick(card); }} />
+      <StyledTrashIcon
+        size="medium"
+        onClick={() => onDeleteStoryClick(card)}
+      />
     </TrashIconWrapper>
     <DragDropWrapper />
     {
       card.note
         ? (
           <EditNoteWrapper>
-            <NoteText><Text>{getShortString(card.note)}</Text></NoteText>
+            <TextWrapper>
+              <Text>
+                {getShortString(card.note)}
+              </Text>
+            </TextWrapper>
             <PencilIconWrapper>
-              <StyledPencilIcon size="medium" onClick={() => { onAddNoteClick(card); }} />
+              <StyledPencilIcon
+                size="medium"
+                onClick={() => onAddNoteClick(card)}
+              />
             </PencilIconWrapper>
           </EditNoteWrapper>
         )
         : (
           <ButtonWrapper>
-            <Button label="Add Note" onClick={() => { onAddNoteClick(card); }} fullWidth />
+            <Button
+              label="Add Note"
+              onClick={() => onAddNoteClick(card)}
+              fullWidth
+            />
           </ButtonWrapper>
         )
     }

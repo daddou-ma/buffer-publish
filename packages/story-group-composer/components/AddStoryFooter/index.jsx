@@ -28,7 +28,6 @@ const AddStoryFooter = ({
   onCreateStoryGroup,
   onSetShowDatePicker,
   showDatePicker,
-  onComposerClick,
   editMode,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
@@ -51,11 +50,7 @@ const AddStoryFooter = ({
         storyGroupId,
       });
     } else {
-      if (showDatePicker) {
-        onSetShowDatePicker(false);
-      } else {
-        onSetShowDatePicker(true);
-      }
+      onSetShowDatePicker(true);
     }
   };
 
@@ -76,13 +71,7 @@ const AddStoryFooter = ({
               label="Edit"
               type="secondary"
               size="small"
-              onClick={() => {
-                if (showDatePicker) {
-                  onSetShowDatePicker(false);
-                } else {
-                  onSetShowDatePicker(true);
-                } }
-              }
+              onClick={() => onSetShowDatePicker(true)}
             />
           </EditStoryStyle>
         )}

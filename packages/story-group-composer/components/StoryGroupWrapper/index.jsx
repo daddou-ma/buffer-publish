@@ -68,7 +68,10 @@ const StoryGroupWrapper = ({
                 userData={userData}
                 largeCards
                 editMode
-                onAddNoteClick={(storyCard) => { setStory(storyCard); setViewMode(ADD_NOTE); }}
+                onAddNoteClick={(storyCard) => {
+                  setStory(storyCard);
+                  setViewMode(ADD_NOTE);
+                }}
                 onDeleteStoryClick={storyCard => onDeleteStory(storyCard)}
               />
             </Carousel>

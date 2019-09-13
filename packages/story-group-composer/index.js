@@ -23,7 +23,6 @@ export default connect(
   },
   dispatch => ({
     onOverlayClick: () => {
-      dispatch(actions.setShowDatePicker(false));
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
     onCreateStoryGroup: (scheduledAt) => {
