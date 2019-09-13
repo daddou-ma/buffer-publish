@@ -6,7 +6,6 @@ import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
 import CarouselCards from '../Carousel/CarouselCards';
-import CarouselCardHover from '../Carousel/CarouselCardHover';
 import AddStoryFooter from '../AddStoryFooter';
 
 const ADD_STORY = 'addStory';
@@ -46,8 +45,6 @@ const StoryGroupWrapper = ({
   onMonitorUpdateProgress,
   onUploadImageComplete,
   onUploadDraftFile,
-  onSetShowDatePicker,
-  showDatePicker,
   userData,
   onUploadFinished,
   storyGroup,
@@ -92,7 +89,6 @@ const StoryGroupWrapper = ({
               />
             </Carousel>
             <AddStoryFooter
-              onClick={() => onComposerClick(showDatePicker)}
               timezone={timezone}
               weekStartsMonday={weekStartsMonday}
               uses24hTime={uses24hTime}
@@ -102,8 +98,6 @@ const StoryGroupWrapper = ({
               editMode={editMode}
               onCreateStoryGroup={onCreateStoryGroup}
               onUpdateStoryGroup={onUpdateStoryGroup}
-              onSetShowDatePicker={onSetShowDatePicker}
-              showDatePicker={showDatePicker}
             />
           </React.Fragment>
         )}

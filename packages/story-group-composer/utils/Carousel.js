@@ -28,7 +28,7 @@ export const getCardsToShow = ({ cards = [], totalCardsToShow }) => {
 
 export const getShortString = (string) => {
   if (string.length > 20) {
-    string = string.substring(0, 20);
+    string = `${string.substring(0, 20)}...`;
   }
-  return `${string}...`;
+  return string;
 };

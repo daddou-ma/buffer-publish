@@ -15,7 +15,6 @@ export default connect(
       selectedProfile: state.profileSidebar.selectedProfile,
       translations: state.i18n.translations['story-group-composer'],
       isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
-      showDatePicker: state.storyGroupComposer.showDatePicker,
       storyGroup: state.storyGroupComposer.storyGroup,
       editMode: !!editingPostId,
       userData: state.appSidebar.user,
@@ -36,12 +35,6 @@ export default connect(
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
-    },
-    onSetShowDatePicker: (showDatePicker) => {
-      dispatch(actions.setShowDatePicker(showDatePicker));
-    },
-    onComposerClick: (showDatePicker) => {
-      if (showDatePicker) dispatch(actions.setShowDatePicker(false));
     },
     onCreateNewStoryCard: ({ id, uploaderInstance, file }) => {
       dispatch(actions.createNewStoryCard({ id, uploaderInstance, file }));
