@@ -28,9 +28,6 @@ export const CarouselCard = styled.div`
   height: ${props => props.cardHeight ? props.cardHeight : 198}px;
   width: ${props => props.cardWidth ? props.cardWidth : 110}px;
   background-color: ${grayLighter};
-  background-size: cover;
-  background-position: center;
-  background-image: url(${props => props.card.thumbnail_url});
   position: relative;
 `;
 

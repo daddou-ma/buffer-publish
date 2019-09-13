@@ -1,8 +1,7 @@
 import React from 'react';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
 import styled from 'styled-components';
-import { CirclePlayIcon, Text } from '@bufferapp/components';
-import Loader from '@bufferapp/components/Loader';
+import { CirclePlayIcon, Text, LoadingAnimation } from '@bufferapp/components';
 import { grayLighter } from '@bufferapp/ui/style/colors';
 import { CarouselCard, getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
 import UploadZone from '@bufferapp/publish-upload-zone';
@@ -15,16 +14,7 @@ import CircularUploadIndicator
 import PropTypes from 'prop-types';
 import styles from './styles.css';
 
-const IconWrapper = styled(CirclePlayIcon)`
-      display: flex;
-      opacity: 0.8;
-    `;
-
-const PlayIcon = () => (
-  <IconWrapper>
-    <CirclePlayIcon color={grayLighter} size={{ width: '40px' }} />
-  </IconWrapper>
-);
+import { CoverImage, UploadingVideo } from './styles';
 
 const sortCards = cards => (
   cards.sort((a, b) => {
@@ -82,9 +72,9 @@ const CarouselCards = ({
   const notifiers = {
     uploadStarted: props => createNewFile(props),
     uploadedLinkThumbnail: props => createImageThumbnail(props),
-    uploadedDraftImage: props => uploadImageComplete(props),
-    uploadedDraftVideo: props => videoProcessingStarted(props),
-    draftGifUploaded: props => uploadImageComplete(props),
+    uploadedDraftImage: props => uploadImageComplete({ ...props, contentType: 'image' }),
+    uploadedDraftVideo: props => videoProcessingStarted({ ...props, contentType: 'video' }),
+    draftGifUploaded: props => uploadImageComplete({ ...props, contentType: 'gif' }),
     queueError: props => notifyError(props),
     monitorFileUploadProgress: monitorUpdateProgress(updateUploadProgress),
   };
@@ -97,59 +87,54 @@ const CarouselCards = ({
       cardWidth={cardWidth}
       largeCards={largeCards}
     >
-      {editMode
-        ? (
-          <React.Fragment>
-            {card.empty && (
-              <div>
-                <UploadZone
-                  uploadButton={({ onClick }) => (
-                    <Button
-                      type="primary"
-                      label="Add Media Files"
-                      icon={<Attach />}
-                      onClick={onClick}
-                    />
-                  )}
-                  classNames={styles}
-                  supportsMixedMediaTypes
-                  mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-                  uploadDraftFile={uploadDraftFile({ userData, videoProcessingComplete })}
-                  notifiers={notifiers}
-                  removeAllNotifications={removeNotifications}
-                  queueError={notifyError}
-                  draftId={`${card.order}`}
-                  uploadFormatsConfig={uploadFormatsConfig}
-                  service={{
-                    maxAttachableImagesCount: maxAttachableMediaCount,
-                    canHaveMediaAttachmentType: () => true,
-                  }}
-                  uploadType={UploadTypes.MEDIA}
-                  multiple
-                  disabled={false}
-                />
-              </div>
-            )}
-            {!card.empty && card.progress !== null && card.uploading && (
-              <CircularUploadIndicator
-                classNames={{ container: styles.container }}
-                size={54}
-                progress={card.progress}
-                showText
-                finishingUpText="Finishing Upload..."
-              />
-            )}
+      {card.empty && (
+      <div>
+        <UploadZone
+          uploadButton={({ onClick }) => (
+            <Button
+              type="primary"
+              label="Add Media Files"
+              icon={<Attach />}
+              onClick={onClick}
+            />
+          )}
+          classNames={styles}
+          supportsMixedMediaTypes
+          mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+          uploadDraftFile={uploadDraftFile({ userData, videoProcessingComplete })}
+          notifiers={notifiers}
+          removeAllNotifications={removeNotifications}
+          queueError={notifyError}
+          draftId={`${card.order}`}
+          uploadFormatsConfig={uploadFormatsConfig}
+          service={{
+            maxAttachableImagesCount: maxAttachableMediaCount,
+            canHaveMediaAttachmentType: () => true,
+          }}
+          uploadType={UploadTypes.MEDIA}
+          multiple
+          disabled={false}
+        />
+      </div>
+      )}
+      {!card.empty && card.progress !== null && card.uploading && (
+      <CircularUploadIndicator
+        classNames={{ container: styles.container }}
+        size={54}
+        progress={card.progress}
+        showText
+        finishingUpText="Finishing Upload..."
+      />
+      )}
 
-            {!card.empty && card.processing === true && (
-              <Loader>
-                <Text size="small">Processing video</Text>
-              </Loader>
-            )}
+      {card.thumbnail_url && <CoverImage src={card.thumbnail_url} />}
 
-          </React.Fragment>
-        )
-        : card.type === 'video' && <PlayIcon />
-      }
+      {!card.empty && card.processing === true && (
+      <UploadingVideo>
+        <Text size="small">Processing video</Text>
+        <LoadingAnimation marginTop="0" />
+      </UploadingVideo>
+      )}
     </CarouselCard>
   ));
 };

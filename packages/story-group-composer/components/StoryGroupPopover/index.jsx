@@ -25,6 +25,7 @@ const StoryGroupPopover = ({
   onVideoUploadProcessingStarted,
   onVideoUploadProcessingComplete,
   onMonitorUpdateProgress,
+  onUploadImageComplete,
   onUploadDraftFile,
   showDatePicker,
   userData,
@@ -56,6 +57,7 @@ const StoryGroupPopover = ({
       onVideoUploadProcessingStarted={onVideoUploadProcessingStarted}
       onVideoUploadProcessingComplete={onVideoUploadProcessingComplete}
       onMonitorUpdateProgress={onMonitorUpdateProgress}
+      onUploadImageComplete={onUploadImageComplete}
       onUploadDraftFile={onUploadDraftFile}
       showDatePicker={showDatePicker}
       userData={userData}
