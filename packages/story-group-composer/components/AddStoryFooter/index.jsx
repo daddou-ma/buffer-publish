@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import { getReadableDateFormat } from '../../utils/AddStory';
 import {
   FooterBar,
   ButtonStyle,
@@ -11,11 +11,6 @@ import {
   EditDateStyle,
   StyledEditButton,
 } from './style';
-
-const getReadableDateFormat = ({ uses24hTime, scheduledAt }) => {
-  const readableFormat = uses24hTime ? 'MMM D, H:mm' : 'MMM D, h:mm A';
-  return moment.unix(scheduledAt).format(readableFormat);
-};
 
 const AddStoryFooter = ({
   timezone,
