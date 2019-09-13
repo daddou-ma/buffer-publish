@@ -47,7 +47,8 @@ export const EditNoteWrapper = styled.div`
 
 export const ButtonWrapper = styled.div`
   width: 90%;
-  margin: 5px;
+  margin: auto;
+  margin-bottom: 5px;
 `;
 
 export const DragDropWrapper = styled.div`
