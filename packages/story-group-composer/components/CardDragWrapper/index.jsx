@@ -6,8 +6,9 @@ import CardItem from '../CardItem';
 
 const cardSource = {
   beginDrag(props) {
+    console.log('props', props);
     return {
-      id: props.id,
+      id: props.card.order,
       index: props.index,
     };
   },

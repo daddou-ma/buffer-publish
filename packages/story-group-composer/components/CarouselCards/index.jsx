@@ -58,7 +58,7 @@ const CarouselCards = ({
   const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
   const maxAttachableMediaCount = totalCardsToShow - cards.length;
 
-  return cardsToRender.map(card => (
+  return cardsToRender.map((card, index) => (
     <CardDragWrapper
       key={card.uploadTrackingId}
       card={card}
@@ -79,6 +79,7 @@ const CarouselCards = ({
       uploadImageComplete={uploadImageComplete}
       videoProcessingStarted={videoProcessingStarted}
       cardLimit={totalCardsToShow}
+      index={index}
       onDropCard={onDropCard}
     />
   ));

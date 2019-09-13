@@ -49,6 +49,7 @@ const updateStoryNote = ({ stories = [], order, note }) => (
 );
 
 const moveCardInArray = (arr, from, to) => {
+  console.log('arr, from, to', arr, from, to);
   const clone = [...arr];
 
   // Support passing `from` and `to` in non-sequential order (e.g., 4 and 1).
@@ -68,7 +69,7 @@ const handleCardDropped = (stories, action) => {
 
   // Final list of cards
   const sortedStories = reorderedCards;
-  console.log('sorted stories')
+  console.log('sorted stories');
 
   return sortedStories;
 };
@@ -260,7 +261,10 @@ export default (state, action) => {
       if (!action.commit) {
         return {
           ...state,
-          stories: handleCardDropped(state.stories, action),
+          draft: {
+            ...state.draft,
+            stories: handleCardDropped(state.draft.stories, action),
+          },
         };
       }
       return state;
