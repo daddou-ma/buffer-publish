@@ -1,20 +1,8 @@
 import React from 'react';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
-import styled from 'styled-components';
-import { CirclePlayIcon, Text, LoadingAnimation } from '@bufferapp/components';
-import { grayLighter } from '@bufferapp/ui/style/colors';
-import { CarouselCard, getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
-import UploadZone from '@bufferapp/publish-upload-zone';
-import { Button } from '@bufferapp/ui';
-import Attach from '@bufferapp/ui/Icon/Icons/Attach';
-import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
-import { UploadTypes } from '@bufferapp/publish-constants';
-import CircularUploadIndicator
-  from '@bufferapp/publish-composer/composer/components/progress-indicators/CircularUploadIndicator';
+import { getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
 import PropTypes from 'prop-types';
-import styles from './styles.css';
-
-import { CoverImage, UploadingVideo } from './styles';
+import CardDragWrapper from '../CardDragWrapper';
 
 const sortCards = cards => (
   cards.sort((a, b) => {
@@ -63,79 +51,36 @@ const CarouselCards = ({
   createImageThumbnail,
   uploadImageComplete,
   videoProcessingStarted,
+  onDropCard,
 }) => {
   const { cardWidth, cardHeight } = getCardSizes(largeCards);
   const cardsToRender = editMode ? getCardsToShow({ cards, totalCardsToShow }) : sortCards(cards);
   const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
   const maxAttachableMediaCount = totalCardsToShow - cards.length;
 
-  const notifiers = {
-    uploadStarted: props => createNewFile(props),
-    uploadedLinkThumbnail: props => createImageThumbnail(props),
-    uploadedDraftImage: props => uploadImageComplete({ ...props, contentType: 'image' }),
-    uploadedDraftVideo: props => videoProcessingStarted({ ...props, contentType: 'video' }),
-    draftGifUploaded: props => uploadImageComplete({ ...props, contentType: 'gif' }),
-    queueError: props => notifyError(props),
-    monitorFileUploadProgress: monitorUpdateProgress(updateUploadProgress),
-  };
-
   return cardsToRender.map(card => (
-    <CarouselCard
+    <CardDragWrapper
       key={card.uploadTrackingId}
       card={card}
       cardHeight={cardHeight}
       cardWidth={cardWidth}
       largeCards={largeCards}
-    >
-      {card.empty && (
-      <div>
-        <UploadZone
-          uploadButton={({ onClick }) => (
-            <Button
-              type="primary"
-              label="Add Media Files"
-              icon={<Attach />}
-              onClick={onClick}
-            />
-          )}
-          classNames={styles}
-          supportsMixedMediaTypes
-          mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-          uploadDraftFile={uploadDraftFile({ userData, videoProcessingComplete })}
-          notifiers={notifiers}
-          removeAllNotifications={removeNotifications}
-          queueError={notifyError}
-          draftId={`${card.order}`}
-          uploadFormatsConfig={uploadFormatsConfig}
-          service={{
-            maxAttachableImagesCount: maxAttachableMediaCount,
-            canHaveMediaAttachmentType: () => true,
-          }}
-          uploadType={UploadTypes.MEDIA}
-          multiple
-          disabled={false}
-        />
-      </div>
-      )}
-      {!card.empty && card.progress !== null && card.uploading && (
-      <CircularUploadIndicator
-        classNames={{ container: styles.container }}
-        size={54}
-        progress={card.progress}
-        showText
-        finishingUpText="Finishing Upload..."
-      />
-      )}
-
-      {card.thumbnail_url && <CoverImage src={card.thumbnail_url} />}
-
-      {!card.empty && card.processing === true && (
-      <UploadingVideo>
-        <Text size="small">Processing video</Text>
-        <LoadingAnimation marginTop="0" />
-      </UploadingVideo>
-      )}
-    </CarouselCard>
+      userData={userData}
+      uploadFormatsConfig={uploadFormatsConfig}
+      maxAttachableMediaCount={maxAttachableMediaCount}
+      removeNotifications={removeNotifications}
+      notifyError={notifyError}
+      videoProcessingComplete={videoProcessingComplete}
+      uploadDraftFile={uploadDraftFile}
+      updateUploadProgress={updateUploadProgress}
+      monitorUpdateProgress={monitorUpdateProgress}
+      createNewFile={createNewFile}
+      createImageThumbnail={createImageThumbnail}
+      uploadImageComplete={uploadImageComplete}
+      videoProcessingStarted={videoProcessingStarted}
+      cardLimit={totalCardsToShow}
+      onDropCard={onDropCard}
+    />
   ));
 };
 
@@ -175,6 +120,7 @@ CarouselCards.propTypes = {
   videoProcessingComplete: PropTypes.func,
   uploadDraftFile: PropTypes.func,
   monitorUpdateProgress: PropTypes.func,
+  onDropCard: PropTypes.func,
 };
 
 CarouselCards.defaultProps = {
@@ -241,7 +187,7 @@ CarouselCards.defaultProps = {
     videoProcessingComplete,
   }),
   monitorUpdateProgress: () => console.log('monitorUploadProgress'),
-
+  onDropCard: () => console.log('cardDropped'),
   largeCards: false,
   cards: [],
   editMode: false,

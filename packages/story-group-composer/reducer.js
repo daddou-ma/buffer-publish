@@ -14,6 +14,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_VIDEO_PROCESSING_STARTED: 0,
   UPDATE_STORY_VIDEO_PROCESSING_COMPLETE: 0,
   UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: 0,
+  CARD_DROPPED: 0,
 });
 
 const newStory = () => clonedeep({
@@ -46,6 +47,31 @@ export const initialState = {
 const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
+
+const moveCardInArray = (arr, from, to) => {
+  const clone = [...arr];
+
+  // Support passing `from` and `to` in non-sequential order (e.g., 4 and 1).
+  const fromIndex = from < to ? from : to;
+  const toIndex = to > from ? to : from;
+
+  // Generate the new array
+  Array.prototype.splice.call(clone, toIndex, 0,
+    Array.prototype.splice.call(clone, fromIndex, 1)[0],
+  );
+  return clone;
+};
+
+const handleCardDropped = (stories, action) => {
+  const { cardLimit, hoverIndex, dragIndex } = action;
+  const reorderedCards = moveCardInArray(stories, dragIndex, hoverIndex);
+
+  // Final list of cards
+  const sortedStories = reorderedCards;
+  console.log('sorted stories')
+
+  return sortedStories;
+};
 
 export default (state, action) => {
   if (!state) {
@@ -229,6 +255,16 @@ export default (state, action) => {
         },
       };
     }
+    case actionTypes.CARD_DROPPED: {
+      console.log('DROPPPEEEDD', action);
+      if (!action.commit) {
+        return {
+          ...state,
+          stories: handleCardDropped(state.stories, action),
+        };
+      }
+      return state;
+    }
     default:
       return state;
   }
@@ -345,5 +381,16 @@ export const actions = {
       uploadId,
     },
   }),
-
+  onDropCard: ({
+    commit,
+    dragIndex,
+    hoverIndex,
+    cardLimit,
+  }) => ({
+    type: actionTypes.CARD_DROPPED,
+    commit,
+    dragIndex,
+    hoverIndex,
+    cardLimit,
+  }),
 };

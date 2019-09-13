@@ -50,6 +50,7 @@ const StoryGroupWrapper = ({
   userData,
   onUploadFinished,
   draft,
+  onDropCard,
 }) => {
   const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : draft.stories;
   const [viewMode, setViewMode] = useState(ADD_STORY);
@@ -81,7 +82,7 @@ const StoryGroupWrapper = ({
                 userData={userData}
                 largeCards
                 editMode
-                onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, editingStoryGroup)}
+                onDropCard={onDropCard}
               />
             </Carousel>
             <AddStoryFooter

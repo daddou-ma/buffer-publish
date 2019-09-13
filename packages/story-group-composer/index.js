@@ -171,7 +171,20 @@ export default connect(
         stillGifUrl,
         contentType,
       }));
-    }
+    },
+    onDropCard: ({
+      commit,
+      cardLimit,
+      dragIndex,
+      hoverIndex,
+    }) => {
+      dispatch(actions.onDropCard({
+        commit,
+        cardLimit,
+        dragIndex,
+        hoverIndex,
+      }));
+    },
   }),
 )(StoryGroupPopover);
 

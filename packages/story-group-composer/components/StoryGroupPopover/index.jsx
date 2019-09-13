@@ -31,6 +31,7 @@ const StoryGroupPopover = ({
   userData,
   onUploadFinished,
   draft,
+  onDropCard,
 }) => (
   <Popover
     width="100%"
@@ -62,6 +63,7 @@ const StoryGroupPopover = ({
       showDatePicker={showDatePicker}
       userData={userData}
       draft={draft}
+      onDropCard={onDropCard}
     />
   </Popover>
 );
