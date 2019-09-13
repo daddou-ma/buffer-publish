@@ -9,10 +9,17 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SET_SHOW_DATE_PICKER: 0,
 });
 
+// TODO: set stories array to empty when uploading in ready
 export const initialState = {
   draft: {
     scheduledAt: null,
-    stories: [],
+    stories: [{
+      note: null,
+      order: 1,
+      type: 'image',
+      asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+      thumbnail_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+    }],
   },
   isScheduleLoading: false,
   showDatePicker: false,
