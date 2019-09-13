@@ -18,10 +18,10 @@ export default connect(
       translations: state.i18n.translations['story-group-composer'],
       isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
       showDatePicker: state.storyGroupComposer.showDatePicker,
-      draft: state.storyGroupComposer.draft,
+      storyGroup: state.storyGroupComposer.storyGroup,
+      editMode: !!editingPostId,
       userData: state.appSidebar.user,
       editingPostId,
-      editingStoryGroup,
     };
   },
   dispatch => ({

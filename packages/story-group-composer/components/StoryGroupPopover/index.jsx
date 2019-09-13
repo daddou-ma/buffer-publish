@@ -23,7 +23,8 @@ const StoryGroupPopover = ({
   onSetShowDatePicker,
   showDatePicker,
   userData,
-  draft,
+  storyGroup,
+  editMode,
 }) => (
   <Popover
     width="100%"
@@ -47,7 +48,8 @@ const StoryGroupPopover = ({
       onSetShowDatePicker={onSetShowDatePicker}
       showDatePicker={showDatePicker}
       userData={userData}
-      draft={draft}
+      storyGroup={storyGroup}
+      editMode={editMode}
     />
   </Popover>
 );

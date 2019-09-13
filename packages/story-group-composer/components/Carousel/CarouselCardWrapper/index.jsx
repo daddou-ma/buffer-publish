@@ -9,52 +9,28 @@ import { Button } from '@bufferapp/ui';
 import Attach from '@bufferapp/ui/Icon/Icons/Attach';
 import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
 import { UploadTypes } from '@bufferapp/publish-constants';
+import CircularUploadIndicator from '@bufferapp/publish-composer/composer/components/progress-indicators/CircularUploadIndicator';
 import PropTypes from 'prop-types';
-import cloneDeep from 'lodash.clonedeep';
+import CarouselCardHover from '../CarouselCardHover';
 
 import styles from './styles.css';
 
 const IconWrapper = styled(CirclePlayIcon)`
-      display: flex;
-      opacity: 0.8;
-    `;
+  display: flex;
+  opacity: 0.8;
+`;
 
-const PlayIcon = () => (
+const PlayIcon = (
   <IconWrapper>
     <CirclePlayIcon color={grayLighter} size={{ width: '40px' }} />
   </IconWrapper>
 );
 
-const sortCards = cards => (
-  cards.sort((a, b) => {
-    if (a.order > b.order) return 1;
-    return -1;
-  })
-);
-
-const getCardsToShow = ({ cards = [], totalCardsToShow }) => {
-  const cardList = [];
-  const sortedCards = sortCards(cards);
-  for (let i = 0, firstEmpty = true; i < totalCardsToShow; i += 1) {
-    const card = sortedCards[i];
-    if (card) {
-      cardList.push(card);
-    } else {
-      cardList.push({
-        order: `${i}`,
-        empty: firstEmpty,
-      });
-      firstEmpty = false;
-    }
-  }
-  return cardList;
-};
-
 /**
  * Carousel on view mode, to display images in the queue
  * Carousel on edit mode, handling from the composer
  */
-class CarouselCards extends React.Component {
+class CarouselCardWrapper extends React.Component {
   notifiers = {
     uploadStarted: ({
       id, uploaderInstance, file,
@@ -82,18 +58,19 @@ class CarouselCards extends React.Component {
     queueError: ({ message }) => this.props.notifyError({ message }),
     monitorFileUploadProgress: async ({ id, uploaderInstance, file }) => {
       const progressIterator = uploaderInstance.getProgressIterator();
+      const { updateUploadProgress } = this.props;
       let item;
 
       while (!(item = progressIterator.next()).done) { // eslint-disable-line no-cond-assign
         const promisedProgress = item.value;
 
         await promisedProgress.then(progress => // eslint-disable-line no-await-in-loop
-          this.props.updateUploadProgress({
+          updateUploadProgress({
             id, uploaderInstance, progress, file, complete: false,
           }));
       }
-      this.props.updateUploadProgress({
-        id, uploaderInstance, file, complete: true,
+      updateUploadProgress({
+        id, uploaderInstance, file, complete: true, progress: 100,
       });
     },
   };
@@ -102,39 +79,36 @@ class CarouselCards extends React.Component {
     super(props);
 
     this.state = {
-      draftCards: [],
-      currentCards: cloneDeep(props.cards),
+      hovered: false,
     };
   }
 
-  uploadDraftFile = userData => (id, file, uploadType, notifiers, createFileUploaderCallback) => {
+  uploadDraftFile = ({
+    userData,
+    videoProcessingComplete,
+  }) => (id, file, uploadType, notifiers, createFileUploaderCallback) => {
     const {
       id: userId,
       s3_upload_signature: s3Signature,
       imageDimensionsKey,
     } = userData;
 
-    const s3UploadSignature = {
-      algorithm: s3Signature.algorithm,
-      base64Policy: s3Signature.base64policy,
-      bucket: s3Signature.bucket,
-      credentials: s3Signature.credentials,
-      date: s3Signature.date,
-      expires: s3Signature.expires,
-      signature: s3Signature.signature,
-      successActionStatus: s3Signature.success_action_status,
-    };
     const uploadDraftFileCallback = createFileUploaderCallback({
-      s3UploadSignature,
+      s3UploadSignature: {
+        algorithm: s3Signature.algorithm,
+        base64Policy: s3Signature.base64policy,
+        bucket: s3Signature.bucket,
+        credentials: s3Signature.credentials,
+        date: s3Signature.date,
+        expires: s3Signature.expires,
+        signature: s3Signature.signature,
+        successActionStatus: s3Signature.success_action_status,
+      },
       userId,
       csrfToken: null,
       imageDimensionsKey,
       serverNotifiers: {
-        videoProcessed: ({
-          uploadId, name, duration, durationMs, size, width, height, url, originalUrl, thumbnail, availableThumbnails,
-        }) => this.props.videoProcessingComplete({
-          uploadId, name, duration, durationMs, size, width, height, url, originalUrl, thumbnail, availableThumbnails,
-        }),
+        videoProcessed: processedVideoMeta => videoProcessingComplete(processedVideoMeta),
         profileGroupCreated: () => {},
         profileGroupUpdated: () => {},
         profileGroupDeleted: () => {},
@@ -146,29 +120,40 @@ class CarouselCards extends React.Component {
 
   render () {
     const {
+      card,
       totalCardsToShow,
       largeCards,
       editMode,
       userData,
       removeNotifications,
       notifyError,
+      videoProcessingComplete,
+      onAddNoteClick,
+      onDeleteStoryClick,
     } = this.props;
 
-    const {
-      currentCards: cards,
-    } = this.state;
     const { cardWidth, cardHeight } = getCardSizes(largeCards);
-    const cardsToRender = editMode ? getCardsToShow({ cards, totalCardsToShow }) : sortCards(cards);
     const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
-
-    return cardsToRender.map(card => (
+    return (
       <CarouselCard
         key={card.order}
         card={card}
         cardHeight={cardHeight}
         cardWidth={cardWidth}
         largeCards={largeCards}
+        onMouseEnter={() => this.setState({ hovered: true })}
+        onMouseLeave={() => this.setState({ hovered: false })}
       >
+        {card.type
+          && this.state.hovered
+          && (
+            <CarouselCardHover
+              card={card}
+              onAddNoteClick={onAddNoteClick}
+              onDeleteStoryClick={onDeleteStoryClick}
+            />
+          )
+        }
         {editMode
           ? (
             <React.Fragment>
@@ -186,21 +171,29 @@ class CarouselCards extends React.Component {
                     classNames={styles}
                     supportsMixedMediaTypes
                     mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-                    uploadDraftFile={this.uploadDraftFile(userData)}
+                    uploadDraftFile={this.uploadDraftFile({ userData, videoProcessingComplete })}
                     notifiers={this.notifiers}
                     removeAllNotifications={removeNotifications}
                     queueError={notifyError}
-                    draftId={card.order}
+                    draftId={`${card.order}`}
                     uploadFormatsConfig={uploadFormatsConfig}
                     service={{
                       maxAttachableImagesCount: totalCardsToShow,
                       canHaveMediaAttachmentType: () => true,
                     }}
-                    uploadType={UploadTypes.LINK_THUMBNAIL}
+                    uploadType={UploadTypes.MEDIA}
                     multiple
                     disabled={false}
                   />
                 </div>
+              )}
+              {!card.empty && card.progress !== null && card.uploading && (
+                <CircularUploadIndicator
+                  classNames={{ container: styles.container }}
+                  size={54}
+                  progress={card.progress}
+                  showText
+                />
               )}
 
             </React.Fragment>
@@ -208,22 +201,14 @@ class CarouselCards extends React.Component {
           : card.type === 'video' && <PlayIcon />
         }
       </CarouselCard>
-    ));
+    );
   }
 }
 
-CarouselCards.propTypes = {
+CarouselCardWrapper.propTypes = {
   largeCards: PropTypes.bool,
-  cards: PropTypes.arrayOf(PropTypes.shape({
-    order: PropTypes.string,
-    type: PropTypes.string,
-    note: PropTypes.string,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-  })),
   editMode: PropTypes.bool,
   totalCardsToShow: PropTypes.number,
-  getCardSizes: PropTypes.func,
   userData: PropTypes.shape({
     id: PropTypes.string,
     s3_upload_signature: PropTypes.shape({
@@ -237,7 +222,7 @@ CarouselCards.propTypes = {
       success_action_status: PropTypes.string,
     }).isRequired,
     imageDimensionsKey: PropTypes.string,
-  }),
+  }).isRequired,
   notifyError: PropTypes.func,
   removeNotifications: PropTypes.func,
   createNewFile: PropTypes.func,
@@ -246,9 +231,12 @@ CarouselCards.propTypes = {
   uploadImageComplete: PropTypes.func,
   videoProcessingStarted: PropTypes.func,
   videoProcessingComplete: PropTypes.func,
+  onAddNoteClick: PropTypes.func.isRequired,
+  onDeleteStoryClick: PropTypes.func.isRequired,
+  ...CarouselCardHover.propTypes,
 };
 
-CarouselCards.defaultProps = {
+CarouselCardWrapper.defaultProps = {
   removeNotifications: () => console.log('removeAllNotifications', true),
   notifyError: ({ message }) => console.log('queueError', { message }),
   createNewFile: ({ id, uploaderInstance, file }) => console.log('uploadStarted - File Created', { id, uploaderInstance, file }),
@@ -264,12 +252,12 @@ CarouselCards.defaultProps = {
   }),
   uploadImageComplete: ({
     id, uploaderInstance, url, location = null, width, height, file, stillGifUrl = null,
-  }) => console.log('uploadedDraftImage - Create Draft Image', {
+  }) => console.log('uploadedDraftImage - Image Upload Created', {
     id, uploaderInstance, url, location, width, height, file, stillGifUrl,
   }),
   videoProcessingStarted: ({
     id, uploaderInstance, uploadId, fileExtension, file,
-  }) => console.log('uploadedDraftVideo', {
+  }) => console.log('uploadedDraftVideo - Video Processing Started', {
     id, uploaderInstance, uploadId, fileExtension, file,
   }),
   videoProcessingComplete: ({
@@ -279,10 +267,8 @@ CarouselCards.defaultProps = {
   }),
 
   largeCards: false,
-  cards: [],
   editMode: false,
   totalCardsToShow: 15,
-  getCardSizes: null,
 };
 
-export default CarouselCards;
+export default CarouselCardWrapper;

@@ -5,7 +5,7 @@ import Carousel from '@bufferapp/publish-shared-components/Carousel';
 import AddNote from '../AddNote';
 import HeaderBar from '../HeaderBar';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
-import CarouselCards from '../CarouselCards';
+import CarouselCards from '../Carousel/CarouselCards';
 import AddStoryFooter from '../AddStoryFooter';
 
 const ADD_STORY = 'addStory';
@@ -33,7 +33,6 @@ const StoryGroupWrapper = ({
   selectedProfile,
   isScheduleLoading,
   saveNote,
-  editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
@@ -42,12 +41,13 @@ const StoryGroupWrapper = ({
   onSetShowDatePicker,
   showDatePicker,
   userData,
-  draft,
+  storyGroup,
+  editMode,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(ADD_STORY);
   const [story, setStory] = useState();
-  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
+  const cards = storyGroup ? storyGroup.stories : [];
 
   return (
     <Fragment>
@@ -56,7 +56,6 @@ const StoryGroupWrapper = ({
           selectedProfile={selectedProfile}
         />
         {viewMode === ADD_STORY
-        /* TODO: delete this button once the create story group is in place */
         && (
           <React.Fragment>
             <Carousel
@@ -80,7 +79,8 @@ const StoryGroupWrapper = ({
               uses24hTime={uses24hTime}
               isScheduleLoading={isScheduleLoading}
               translations={translations}
-              editingStoryGroup={editingStoryGroup}
+              storyGroup={storyGroup}
+              editMode={editMode}
               onCreateStoryGroup={onCreateStoryGroup}
               onUpdateStoryGroup={onUpdateStoryGroup}
               onSetShowDatePicker={onSetShowDatePicker}
@@ -92,7 +92,7 @@ const StoryGroupWrapper = ({
           <AddNote
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
-            story={draft.stories[0]}
+            story={story}
             onSaveNoteClick={({ order, note }) => {
               saveNote({ order, note });
               setViewMode(ADD_STORY);

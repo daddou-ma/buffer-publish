@@ -7,20 +7,12 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_GROUP: 0,
   SET_SCHEDULE_LOADING: 0,
   SET_SHOW_DATE_PICKER: 0,
+  DELETE_STORY: 0,
+  SET_STORY_GROUP: 0,
 });
 
 export const initialState = {
-  // temporarily adding as dummy data until create is working
-  draft: {
-    scheduledAt: null,
-    stories: [{
-      note: null,
-      order: 1,
-      type: 'image',
-      asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
-      thumbnail_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
-    }],
-  },
+  storyGroup: { stories: [] },
   isScheduleLoading: false,
   showDatePicker: false,
 };
