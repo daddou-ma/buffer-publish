@@ -5,7 +5,8 @@ import { CircleInstReminderIcon } from '@bufferapp/components';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import CardFooter from '../CardFooter';
-import Carousel from '../Carousel';
+import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
+import { CoverImage, PlayIcon } from '@bufferapp/publish-story-group-composer/components/CarouselCards/styles';
 
 const Story = ({
   storyDetails,
@@ -19,6 +20,8 @@ const Story = ({
   const deletingMessage = isDeleting && 'Deleting...';
   const submittingMessage = isWorking && 'Sharing...';
   const actionMessage = deletingMessage || submittingMessage || '';
+  const largeCards = false;
+  const { cardWidth, cardHeight } = getCardSizes(largeCards);
 
   return (
     <Card>
@@ -28,7 +31,18 @@ const Story = ({
         createdAt={storyDetails.createdAt}
         onPreviewClick={() => onPreviewClick(storyDetails.stories)}
       />
-      <Carousel cards={storyDetails.stories} editMode={false} />
+      <Carousel editMode={false} totalCardsToShow={(storyDetails.stories && storyDetails.stories.length) || 0}>
+        {storyDetails.stories && storyDetails.stories.map((card) => (
+          <CarouselCard
+            cardHeight={cardHeight}
+            cardWidth={cardWidth}
+            largeCards={largeCards}
+          >
+            {card.thumbnail_url && <CoverImage src={card.thumbnail_url} />}
+            {card.type === 'video' && <PlayIcon />}
+          </CarouselCard>
+        ))}
+      </Carousel>
       <CardFooter
         icon={<CircleInstReminderIcon color="instagram" />}
         message={storyDetails.storyAction}

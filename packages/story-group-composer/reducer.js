@@ -142,7 +142,7 @@ export default (state, action) => {
                 uploading: false,
                 width,
                 height,
-                thumbnail_url: stillGifUrl || url,
+                thumbnail_url: url,
               };
             }
             return story;

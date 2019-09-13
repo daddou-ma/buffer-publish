@@ -50,10 +50,10 @@ export default connect(
       dispatch(actions.createNewStoryCard({ id, uploaderInstance, file }));
     },
     onVideoUploadProcessingStarted: ({
-      id, uploaderInstance, uploadId, fileExtension, file, progress,
+      id, uploaderInstance, uploadId, fileExtension, file, progress, contentType,
     }) => {
       dispatch(actions.videoUploadProcessingStarted({
-        id, uploaderInstance, uploadId, fileExtension, file, progress,
+        id, uploaderInstance, uploadId, fileExtension, file, progress, contentType,
       }));
     },
     onUploadDraftFile: ({
