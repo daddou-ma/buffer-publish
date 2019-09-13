@@ -82,9 +82,7 @@ export default connect(
         csrfToken: null,
         imageDimensionsKey,
         serverNotifiers: {
-          videoProcessed: processedVideoMeta => videoProcessingComplete({
-            ...processedVideoMeta,
-          }),
+          videoProcessed: processedVideoMeta => videoProcessingComplete(processedVideoMeta),
           profileGroupCreated: () => {},
           profileGroupUpdated: () => {},
           profileGroupDeleted: () => {},
@@ -93,8 +91,6 @@ export default connect(
 
       return uploadDraftFileCallback(uploadTrackingId, file, uploadType, notifiers);
     },
-
-
     onVideoUploadProcessingComplete: ({
       id,
       name,
@@ -136,7 +132,7 @@ export default connect(
           dispatch(actions.updateStoryUploadProgress({
             id, uploaderInstance, progress, file, complete,
           }));
-        }, 1000);
+        }, 500);
       }
     },
     onMonitorUpdateProgress: updateUploadProgress => async ({ id, uploaderInstance, file }) => {
@@ -155,6 +151,27 @@ export default connect(
         id, uploaderInstance, file, complete: true, progress: 100,
       });
     },
+    onUploadImageComplete: ({
+      id,
+      uploaderInstance,
+      url,
+      width,
+      height,
+      file,
+      stillGifUrl,
+      contentType,
+    }) => {
+      dispatch(actions.uploadImageComplete({
+        id,
+        uploaderInstance,
+        url,
+        width,
+        height,
+        file,
+        stillGifUrl,
+        contentType,
+      }));
+    }
   }),
 )(StoryGroupPopover);
 

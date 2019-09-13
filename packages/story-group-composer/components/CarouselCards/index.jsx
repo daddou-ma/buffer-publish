@@ -1,8 +1,7 @@
 import React from 'react';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
 import styled from 'styled-components';
-import { CirclePlayIcon, Text } from '@bufferapp/components';
-import Loader from '@bufferapp/components/Loader';
+import { CirclePlayIcon, Text, LoadingAnimation } from '@bufferapp/components';
 import { grayLighter } from '@bufferapp/ui/style/colors';
 import { CarouselCard, getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
 import UploadZone from '@bufferapp/publish-upload-zone';
@@ -25,6 +24,13 @@ const PlayIcon = () => (
     <CirclePlayIcon color={grayLighter} size={{ width: '40px' }} />
   </IconWrapper>
 );
+
+const UploadingVideo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 
 const sortCards = cards => (
   cards.sort((a, b) => {
@@ -52,6 +58,13 @@ const getCardsToShow = ({ cards = [], totalCardsToShow }) => {
   }
   return cardList;
 };
+
+const CoverImage = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 
 /**
  * Carousel on view mode, to display images in the queue
@@ -82,9 +95,9 @@ const CarouselCards = ({
   const notifiers = {
     uploadStarted: props => createNewFile(props),
     uploadedLinkThumbnail: props => createImageThumbnail(props),
-    uploadedDraftImage: props => uploadImageComplete(props),
-    uploadedDraftVideo: props => videoProcessingStarted(props),
-    draftGifUploaded: props => uploadImageComplete(props),
+    uploadedDraftImage: props => uploadImageComplete({ ...props, contentType: 'image' }),
+    uploadedDraftVideo: props => videoProcessingStarted({ ...props, contentType: 'video' }),
+    draftGifUploaded: props => uploadImageComplete({ ...props, contentType: 'gif' }),
     queueError: props => notifyError(props),
     monitorFileUploadProgress: monitorUpdateProgress(updateUploadProgress),
   };
@@ -101,55 +114,58 @@ const CarouselCards = ({
         ? (
           <React.Fragment>
             {card.empty && (
-              <div>
-                <UploadZone
-                  uploadButton={({ onClick }) => (
-                    <Button
-                      type="primary"
-                      label="Add Media Files"
-                      icon={<Attach />}
-                      onClick={onClick}
-                    />
-                  )}
-                  classNames={styles}
-                  supportsMixedMediaTypes
-                  mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-                  uploadDraftFile={uploadDraftFile({ userData, videoProcessingComplete })}
-                  notifiers={notifiers}
-                  removeAllNotifications={removeNotifications}
-                  queueError={notifyError}
-                  draftId={`${card.order}`}
-                  uploadFormatsConfig={uploadFormatsConfig}
-                  service={{
-                    maxAttachableImagesCount: maxAttachableMediaCount,
-                    canHaveMediaAttachmentType: () => true,
-                  }}
-                  uploadType={UploadTypes.MEDIA}
-                  multiple
-                  disabled={false}
-                />
-              </div>
+            <div>
+              <UploadZone
+                uploadButton={({ onClick }) => (
+                  <Button
+                        type="primary"
+                        label="Add Media Files"
+                        icon={<Attach />}
+                        onClick={onClick}
+                      />
+                )}
+                classNames={styles}
+                supportsMixedMediaTypes
+                mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+                uploadDraftFile={uploadDraftFile({ userData, videoProcessingComplete })}
+                notifiers={notifiers}
+                removeAllNotifications={removeNotifications}
+                queueError={notifyError}
+                draftId={`${card.order}`}
+                uploadFormatsConfig={uploadFormatsConfig}
+                service={{
+                  maxAttachableImagesCount: maxAttachableMediaCount,
+                  canHaveMediaAttachmentType: () => true,
+                }}
+                uploadType={UploadTypes.MEDIA}
+                multiple
+                disabled={false}
+              />
+            </div>
             )}
             {!card.empty && card.progress !== null && card.uploading && (
-              <CircularUploadIndicator
-                classNames={{ container: styles.container }}
-                size={54}
-                progress={card.progress}
-                showText
-                finishingUpText="Finishing Upload..."
-              />
+            <CircularUploadIndicator
+              classNames={{ container: styles.container }}
+              size={54}
+              progress={card.progress}
+              showText
+              finishingUpText="Finishing Upload..."
+            />
             )}
 
+            {card.thumbnail_url && <CoverImage src={card.thumbnail_url} />}
+
             {!card.empty && card.processing === true && (
-              <Loader>
-                <Text size="small">Processing video</Text>
-              </Loader>
+            <UploadingVideo>
+              <Text size="small">Processing video</Text>
+              <LoadingAnimation marginTop="0" />
+            </UploadingVideo>
             )}
 
           </React.Fragment>
         )
         : card.type === 'video' && <PlayIcon />
-      }
+        }
     </CarouselCard>
   ));
 };

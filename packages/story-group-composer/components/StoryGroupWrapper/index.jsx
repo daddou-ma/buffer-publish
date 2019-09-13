@@ -43,6 +43,7 @@ const StoryGroupWrapper = ({
   onVideoUploadProcessingStarted,
   onVideoUploadProcessingComplete,
   onMonitorUpdateProgress,
+  onUploadImageComplete,
   onUploadDraftFile,
   onSetShowDatePicker,
   showDatePicker,
@@ -73,6 +74,7 @@ const StoryGroupWrapper = ({
                 videoProcessingStarted={onVideoUploadProcessingStarted}
                 videoProcessingComplete={onVideoUploadProcessingComplete}
                 monitorUpdateProgress={onMonitorUpdateProgress}
+                uploadImageComplete={onUploadImageComplete}
                 uploadDraftFile={onUploadDraftFile}
                 cards={cards}
                 totalCardsToShow={15}

@@ -13,6 +13,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_UPLOAD_PROGRESS: 0,
   UPDATE_STORY_VIDEO_PROCESSING_STARTED: 0,
   UPDATE_STORY_VIDEO_PROCESSING_COMPLETE: 0,
+  UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: 0,
 });
 
 const newStory = () => clonedeep({
@@ -110,7 +111,38 @@ export default (state, action) => {
               return {
                 ...story,
                 progress,
-                uploading: !complete,
+              };
+            }
+            return story;
+          }),
+        },
+      };
+    }
+    case actionTypes.UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: {
+      const {
+        id,
+        url,
+        width,
+        height,
+        stillGifUrl,
+        contentType,
+      } = action.args;
+      const { stories } = state.draft;
+      return {
+        ...state,
+        draft: {
+          ...state.draft,
+          stories: stories.map((story) => {
+            if (story.uploadTrackingId === id) {
+              return {
+                ...story,
+                asset_url: url,
+                type: contentType,
+                progress: 100,
+                uploading: false,
+                width,
+                height,
+                thumbnail_url: stillGifUrl || url,
               };
             }
             return story;
@@ -120,17 +152,12 @@ export default (state, action) => {
     }
     case actionTypes.UPDATE_STORY_VIDEO_PROCESSING_COMPLETE: {
       const {
-        id,
-        name,
-        duration,
         durationMs,
         size,
         width,
         height,
         url,
-        originalUrl,
         thumbnail,
-        availableThumbnails,
         uploadId,
       } = action.args;
       const { stories } = state.draft;
@@ -143,7 +170,8 @@ export default (state, action) => {
               return {
                 ...story,
                 processing: false,
-                name,
+                progress: 100,
+                uploading: false,
                 duration_ms: durationMs,
                 file_size: size,
                 thumbnail_url: thumbnail,
@@ -160,10 +188,8 @@ export default (state, action) => {
     case actionTypes.UPDATE_STORY_VIDEO_PROCESSING_STARTED: {
       const {
         id,
-        uploaderInstance,
         uploadId,
-        fileExtension,
-        file,
+        contentType,
       } = action.args;
       const { stories } = state.draft;
       return {
@@ -175,7 +201,10 @@ export default (state, action) => {
               return {
                 ...story,
                 processing: true,
+                progress: 100,
+                uploading: false,
                 upload_id: uploadId,
+                type: contentType,
               };
             }
             return story;
@@ -185,7 +214,7 @@ export default (state, action) => {
     }
     case actionTypes.CREATE_NEW_STORY_CARD: {
       const { stories } = state.draft;
-      const { file, id } = action.args;
+      const { id } = action.args;
       return {
         ...state,
         draft: {
@@ -195,8 +224,6 @@ export default (state, action) => {
             uploadTrackingId: id,
             uploading: true,
             progress: 0,
-            thumbnail_url: file && file.preview,
-            name: file.name,
             order: stories.length,
           }],
         },
@@ -254,8 +281,30 @@ export const actions = {
       file,
     },
   }),
+  uploadImageComplete: ({
+    id,
+    uploaderInstance,
+    url,
+    width,
+    height,
+    file,
+    stillGifUrl = null,
+    contentType,
+  }) => ({
+    type: actionTypes.UPDATE_STORY_UPLOAD_IMAGE_COMPLETED,
+    args: {
+      id,
+      uploaderInstance,
+      url,
+      width,
+      height,
+      file,
+      stillGifUrl,
+      contentType,
+    },
+  }),
   videoUploadProcessingStarted: ({
-    id, uploaderInstance, uploadId, fileExtension, file, progress,
+    id, uploaderInstance, uploadId, fileExtension, file, progress, contentType,
   }) => ({
     type: actionTypes.UPDATE_STORY_VIDEO_PROCESSING_STARTED,
     args: {
@@ -265,11 +314,11 @@ export const actions = {
       fileExtension,
       file,
       progress,
+      contentType,
     },
   }),
   videoUploadProcessingComplete: ({
     id,
-    name,
     duration,
     durationMs,
     size,
@@ -284,7 +333,6 @@ export const actions = {
     type: actionTypes.UPDATE_STORY_VIDEO_PROCESSING_COMPLETE,
     args: {
       id,
-      name,
       duration,
       durationMs,
       size,
