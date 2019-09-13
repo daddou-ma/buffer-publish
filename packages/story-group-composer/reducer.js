@@ -8,7 +8,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_GROUP: 0,
   SET_SCHEDULE_LOADING: 0,
   SET_SHOW_DATE_PICKER: 0,
-  RESET_DRAFT_STATE: 0,
+  RESET_STORY_GROUP_STATE: 0,
   CREATE_NEW_STORY_CARD: 0,
   UPDATE_STORY_UPLOAD_PROGRESS: 0,
   UPDATE_STORY_VIDEO_PROCESSING_STARTED: 0,
@@ -72,7 +72,7 @@ export default (state, action) => {
       };
     }
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case actionTypes.RESET_DRAFT_STATE: {
+    case actionTypes.RESET_STORY_GROUP_STATE: {
       return clonedeep(initialState);
     }
     case actionTypes.UPDATE_STORY_GROUP: {
@@ -302,12 +302,8 @@ export const actions = {
     type: actionTypes.SET_SCHEDULE_LOADING,
     isLoading,
   }),
-  setShowDatePicker: showDatePicker => ({
-    type: actionTypes.SET_SHOW_DATE_PICKER,
-    showDatePicker,
-  }),
-  resetDraftState: () => ({
-    type: actionTypes.RESET_DRAFT_STATE,
+  resetStoryGroupState: () => ({
+    type: actionTypes.RESET_STORY_GROUP_STATE,
   }),
   createNewStoryCard: ({ file, uploaderInstance, id }) => ({
     type: actionTypes.CREATE_NEW_STORY_CARD,

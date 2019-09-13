@@ -63,7 +63,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       }));
       break;
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(actions.setScheduleLoading(false));
+      dispatch(actions.resetStoryGroupState());
       dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
@@ -71,7 +71,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       }));
       break;
     case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(actions.setScheduleLoading(false));
+      dispatch(actions.resetStoryGroupState());
       dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
         notificationType: 'success',

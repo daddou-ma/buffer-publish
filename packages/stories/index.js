@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
+import { actions as storyGroupComposerActions } from '@bufferapp/publish-story-group-composer';
 
 import { actions } from './reducer';
 import StoryGroups from './components/StoryGroups';
