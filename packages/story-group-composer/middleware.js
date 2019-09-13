@@ -2,8 +2,9 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
+import cloneDeep from 'lodash.clonedeep';
 import { actions as notificationActions } from '@bufferapp/notifications';
-import { actions as storiesActions } from '@bufferapp/publish-stories';
+import { actions as storiesActions, actionTypes as storiesActionTypes } from '@bufferapp/publish-stories';
 import { actionTypes, actions } from './reducer';
 
 const refreshStoryGroups = (dispatch, selectedProfileId) => {

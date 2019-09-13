@@ -5,10 +5,7 @@ import StoryGroupPopover from './components/StoryGroupPopover';
 
 export default connect(
   (state) => {
-    const { selectedProfileId } = state.profileSidebar;
-    const currentProfile = state.stories.byProfileId[selectedProfileId];
     const { editingPostId } = state.stories;
-    const editingStoryGroup = currentProfile.storyPosts[editingPostId];
 
     return {
       uses24hTime: state.appSidebar.user.uses_24h_time,
@@ -48,6 +45,7 @@ export default connect(
     },
     onDeleteStory: (story) => {
       console.log('delete story', story);
+      dispatch(actions.deleteStory(story));
       // reorder stories
     },
   }),

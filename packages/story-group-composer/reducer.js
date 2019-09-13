@@ -42,10 +42,18 @@ export default (state = initialState, action) => {
     }
     case actionTypes.SAVE_STORY_NOTE: {
       const { order, note } = action;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: { ...state.draft, stories: updateStoryNote({ stories, order, note }) },
+        storyGroup: { ...state.storyGroup, stories: updateStoryNote({ stories, order, note }) },
+      };
+    }
+    case actionTypes.DELETE_STORY: {
+      const { story } = action;
+      const { stories } = state.storyGroup;
+      return {
+        ...state,
+        storyGroup: { ...state.storyGroup, stories: deleteStory({ stories, story }) },
       };
     }
     case actionTypes.SET_SCHEDULE_LOADING: {
@@ -88,5 +96,9 @@ export const actions = {
   setShowDatePicker: showDatePicker => ({
     type: actionTypes.SET_SHOW_DATE_PICKER,
     showDatePicker,
+  }),
+  deleteStory: story => ({
+    type: actionTypes.DELETE_STORY,
+    story,
   }),
 };
