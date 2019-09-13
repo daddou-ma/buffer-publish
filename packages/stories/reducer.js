@@ -34,12 +34,10 @@ const getProfileId = (action) => {
   if (action.profileId) { return action.profileId; }
   if (action.args) { return action.args.profileId; }
   if (action.profile) { return action.profile.id; }
-  if (action.draft) { return action.draft.profileId; }
 };
 
 const getStoryGroupId = (action) => {
   if (action.post) { return action.post.id; }
-  if (action.draft) { return action.draft.id; }
   if (action.storyGroup) { return action.storyGroup.id; }
   if (action.args) { return action.args.updateId; }
 };
