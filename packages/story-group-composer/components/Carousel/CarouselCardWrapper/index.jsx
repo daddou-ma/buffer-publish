@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
-import styled from 'styled-components';
-import { CirclePlayIcon, Text, LoadingAnimation } from '@bufferapp/components';
-import { grayLighter } from '@bufferapp/ui/style/colors';
+import { Text, LoadingAnimation } from '@bufferapp/components';
 import { CarouselCard, getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
 import UploadZone from '@bufferapp/publish-upload-zone';
 import { Button } from '@bufferapp/ui';
@@ -126,7 +124,6 @@ const CarouselCardWrapper = ({
 
 CarouselCardWrapper.propTypes = {
   largeCards: PropTypes.bool,
-  editMode: PropTypes.bool,
   userData: PropTypes.shape({
     id: PropTypes.string,
     s3_upload_signature: PropTypes.shape({

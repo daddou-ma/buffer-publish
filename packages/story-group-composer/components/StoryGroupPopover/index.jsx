@@ -20,7 +20,6 @@ const StoryGroupPopover = ({
   onDeleteStoryGroup,
   onDeleteStory,
   onComposerClick,
-  onSetShowDatePicker,
   onCreateNewStoryCard,
   onUpdateStoryUploadProgress,
   onVideoUploadProcessingStarted,
@@ -28,7 +27,6 @@ const StoryGroupPopover = ({
   onMonitorUpdateProgress,
   onUploadImageComplete,
   onUploadDraftFile,
-  showDatePicker,
   userData,
   storyGroup,
   editMode,
@@ -54,14 +52,12 @@ const StoryGroupPopover = ({
       onCreateNewStoryCard={onCreateNewStoryCard}
       onUploadFinished={onUploadFinished}
       onComposerClick={onComposerClick}
-      onSetShowDatePicker={onSetShowDatePicker}
       onUpdateStoryUploadProgress={onUpdateStoryUploadProgress}
       onVideoUploadProcessingStarted={onVideoUploadProcessingStarted}
       onVideoUploadProcessingComplete={onVideoUploadProcessingComplete}
       onMonitorUpdateProgress={onMonitorUpdateProgress}
       onUploadImageComplete={onUploadImageComplete}
       onUploadDraftFile={onUploadDraftFile}
-      showDatePicker={showDatePicker}
       userData={userData}
       storyGroup={storyGroup}
       editMode={editMode}

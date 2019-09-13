@@ -36,13 +36,11 @@ const newStory = () => clonedeep({
 });
 
 export const initialState = {
-  // temporarily adding as dummy data until create is working
   storyGroup: {
     scheduledAt: null,
     stories: [],
   },
   isScheduleLoading: false,
-  showDatePicker: false,
 };
 
 const updateStoryNote = ({ stories = [], order, note }) => (
@@ -117,12 +115,6 @@ export default (state, action) => {
       return {
         ...state,
         isScheduleLoading: action.isLoading,
-      };
-    }
-    case actionTypes.SET_SHOW_DATE_PICKER: {
-      return {
-        ...state,
-        showDatePicker: action.showDatePicker,
       };
     }
     case actionTypes.UPDATE_STORY_UPLOAD_PROGRESS: {
