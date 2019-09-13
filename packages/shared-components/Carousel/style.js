@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { grayLight } from '@bufferapp/ui/style/colors';
+import { grayLight, grayLighter } from '@bufferapp/ui/style/colors';
 
 const cardMargin = 4;
 
@@ -38,6 +38,7 @@ export const CarouselContainer = styled.div`
 
 export const CarouselCard = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: ${props => (props.largeCards ? `${cardMargin}px` : `16px ${cardMargin}px`)};
