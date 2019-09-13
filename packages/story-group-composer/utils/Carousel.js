@@ -1,6 +1,6 @@
 
 // TO-DO: Add tests for methods
-const sortCards = cards => (
+export const sortCards = cards => (
   cards.sort((a, b) => {
     if (a.order > b.order) return 1;
     return -1;

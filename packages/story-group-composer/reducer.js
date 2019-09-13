@@ -29,12 +29,6 @@ const reorderStories = stories => (
   stories.forEach((item, index) => { item.order = index + 1; })
 );
 
-const updateStories = ({ stories, story }) => {
-  const newStories = deleteStory({ stories, story });
-  const reorder = reorderStories(newStories);
-  console.log('reorder', reorder);
-  return []; //reorderStories(newStories);
-};
 
 export default (state = initialState, action) => {
   switch (action.type) {

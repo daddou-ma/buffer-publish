@@ -43,9 +43,8 @@ export default connect(
     onComposerClick: (showDatePicker) => {
       if (showDatePicker) dispatch(actions.setShowDatePicker(false));
     },
-    onDeleteStory: (story) => {
-      console.log('delete story', story);
-      dispatch(actions.deleteStory(story));
+    onDeleteStory: (storyCard) => {
+      dispatch(actions.deleteStory(storyCard));
       // reorder stories
     },
   }),

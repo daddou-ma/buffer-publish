@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CarouselCardWrapper from '../CarouselCardWrapper';
-import { getCardsToShow } from '../../../utils/Carousel';
+import { getCardsToShow, sortCards } from '../../../utils/Carousel';
 
 const CarouselCards = ({
   totalCardsToShow,
