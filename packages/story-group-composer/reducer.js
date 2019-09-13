@@ -54,9 +54,13 @@ export default (state, action) => {
     case actionTypes.SAVE_STORY_GROUP: {
       return {
         ...state,
-        draft: { ...state.draft, scheduledAt: action.scheduledAt },
+        draft: {
+          ...state.draft,
+          scheduledAt: action.scheduledAt,
+        },
       };
     }
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case actionTypes.RESET_DRAFT_STATE: {
       return clonedeep(initialState);
     }
@@ -66,7 +70,6 @@ export default (state, action) => {
         draft: {
           ...state.draft,
           scheduledAt: action.scheduledAt,
-          stories: action.stories,
           storyGroupId: action.storyGroupId,
         },
       };
@@ -203,6 +206,7 @@ export default (state, action) => {
       return state;
   }
 };
+
 export const actions = {
   handleSaveStoryGroup: scheduledAt => ({
     type: actionTypes.SAVE_STORY_GROUP,

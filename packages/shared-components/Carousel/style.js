@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { grayLight, grayLighter } from '@bufferapp/ui/style/colors';
+import { grayLighter } from '@bufferapp/ui/style/colors';
 
 const cardMargin = 4;
 
@@ -10,22 +10,6 @@ export const ArrowWrapper = styled.div`
   cursor: pointer;
   top: 50%;
   transform: translateY(-50%);
-`;
-
-export const Arrow = styled.button`
-  cursor: pointer;
-  top: 50%;
-  transform: translateY(calc(-50% - 16px));
-  position: absolute;
-  left: ${props => (props.prev ? 0 : 'initial')};
-  right: ${props => (props.prev ? 'initial' : 0)};
-  background-color: ${grayLight};
-  border: 1px solid ${grayLight};
-  height: 32px;
-  width: 32px;
-  margin: 16px;
-  outline: none;
-  border-radius: 2px;
 `;
 
 export const CarouselContainer = styled.div`

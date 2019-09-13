@@ -9,7 +9,7 @@ export default connect(
     const { selectedProfileId } = state.profileSidebar;
     const currentProfile = state.stories.byProfileId[selectedProfileId];
     const { editingPostId } = state.stories;
-    const editingStoryGroup = currentProfile.storyPosts[editingPostId];
+    const editingStoryGroup = editingPostId ? currentProfile.storyPosts[editingPostId] : null;
 
     return {
       uses24hTime: state.appSidebar.user.uses_24h_time,

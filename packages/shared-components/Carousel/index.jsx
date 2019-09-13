@@ -83,7 +83,6 @@ class Carousel extends React.Component {
     return (
       <React.Fragment>
         <SliderCarousel
-
           largeCards={largeCards}
         >
           <CarouselContainer

@@ -28,6 +28,7 @@ const StoryGroupPopover = ({
   onUploadDraftFile,
   showDatePicker,
   userData,
+  onUploadFinished,
   draft,
 }) => (
   <Popover
@@ -48,6 +49,7 @@ const StoryGroupPopover = ({
       onUpdateStoryGroup={onUpdateStoryGroup}
       onDeleteStoryGroup={onDeleteStoryGroup}
       onCreateNewStoryCard={onCreateNewStoryCard}
+      onUploadFinished={onUploadFinished}
       onComposerClick={onComposerClick}
       onSetShowDatePicker={onSetShowDatePicker}
       onUpdateStoryUploadProgress={onUpdateStoryUploadProgress}
@@ -67,6 +69,9 @@ StoryGroupPopover.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
+};
+
+StoryGroupPopover.defaultProps = {
   ...DateTimeSlotPickerWrapper.propTypes,
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,

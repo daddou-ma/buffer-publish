@@ -2,9 +2,9 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Carousel from '@bufferapp/publish-shared-components/Carousel';
-import AddNote from '../AddNote';
-import HeaderBar from '../HeaderBar';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import HeaderBar from '../HeaderBar';
+import AddNote from '../AddNote';
 import CarouselCards from '../CarouselCards';
 import AddStoryFooter from '../AddStoryFooter';
 
@@ -47,6 +47,7 @@ const StoryGroupWrapper = ({
   onSetShowDatePicker,
   showDatePicker,
   userData,
+  onUploadFinished,
   draft,
 }) => {
   const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : draft.stories;
@@ -78,6 +79,7 @@ const StoryGroupWrapper = ({
                 userData={userData}
                 largeCards
                 editMode
+                onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, editingStoryGroup)}
               />
             </Carousel>
             <AddStoryFooter
@@ -115,10 +117,16 @@ StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
+  createImageThumbnail: PropTypes.func,
+};
+
+StoryGroupWrapper.defaultProps = {
+  ...HeaderBar.PropTypes,
   selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
+  createImageThumbnail: () => {},
 };
 
 export default StoryGroupWrapper;

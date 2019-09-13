@@ -65,6 +65,7 @@ const getStoryGroupsMethod = require('./getStoryGroups');
 const createStoryGroupMethod = require('./createStoryGroup');
 const updateStoryGroupMethod = require('./updateStoryGroup');
 const deleteStoryGroupMethod = require('./deleteStoryGroup');
+const shareStoryGroupNowMethod = require('./shareStoryGroupNow');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const analyticsStartDate = require('./analytics/analyticsStartDate');
@@ -146,4 +147,5 @@ module.exports = rpc(
   createStoryGroupMethod,
   updateStoryGroupMethod,
   deleteStoryGroupMethod,
+  shareStoryGroupNowMethod,
 );

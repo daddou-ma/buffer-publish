@@ -136,6 +136,7 @@ const CarouselCards = ({
                 size={54}
                 progress={card.progress}
                 showText
+                finishingUpText="Finishing Upload..."
               />
             )}
 
