@@ -22,6 +22,7 @@ export const CarouselContainer = styled.div`
 
 export const CarouselCard = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: ${props => (props.largeCards ? `${cardMargin}px` : `16px ${cardMargin}px`)};

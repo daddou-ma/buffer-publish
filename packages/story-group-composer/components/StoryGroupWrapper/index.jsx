@@ -5,7 +5,8 @@ import Carousel from '@bufferapp/publish-shared-components/Carousel';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
-import CarouselCards from '../CarouselCards';
+import CarouselCards from '../Carousel/CarouselCards';
+import CarouselCardHover from '../Carousel/CarouselCardHover';
 import AddStoryFooter from '../AddStoryFooter';
 
 const ADD_STORY = 'addStory';
@@ -33,10 +34,10 @@ const StoryGroupWrapper = ({
   selectedProfile,
   isScheduleLoading,
   saveNote,
-  editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
+  onDeleteStory,
   onComposerClick,
   onCreateNewStoryCard,
   onUpdateStoryUploadProgress,
@@ -49,10 +50,12 @@ const StoryGroupWrapper = ({
   showDatePicker,
   userData,
   onUploadFinished,
-  draft,
+  storyGroup,
+  editMode,
 }) => {
-  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : draft.stories;
+  const cards = storyGroup ? storyGroup.stories : [];
   const [viewMode, setViewMode] = useState(ADD_STORY);
+  const [story, setStory] = useState();
 
   return (
     <Fragment>
@@ -61,7 +64,6 @@ const StoryGroupWrapper = ({
           selectedProfile={selectedProfile}
         />
         {viewMode === ADD_STORY
-        /* TODO: delete this button once the create story group is in place */
         && (
           <React.Fragment>
             <Carousel
@@ -81,7 +83,12 @@ const StoryGroupWrapper = ({
                 userData={userData}
                 largeCards
                 editMode
-                onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, editingStoryGroup)}
+                onAddNoteClick={(storyCard) => {
+                  setStory(storyCard);
+                  setViewMode(ADD_NOTE);
+                }}
+                onDeleteStoryClick={storyCard => onDeleteStory(storyCard)}
+                onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, storyGroup)}
               />
             </Carousel>
             <AddStoryFooter
@@ -91,7 +98,8 @@ const StoryGroupWrapper = ({
               uses24hTime={uses24hTime}
               isScheduleLoading={isScheduleLoading}
               translations={translations}
-              editingStoryGroup={editingStoryGroup}
+              storyGroup={storyGroup}
+              editMode={editMode}
               onCreateStoryGroup={onCreateStoryGroup}
               onUpdateStoryGroup={onUpdateStoryGroup}
               onSetShowDatePicker={onSetShowDatePicker}
@@ -103,7 +111,7 @@ const StoryGroupWrapper = ({
           <AddNote
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
-            story={draft.stories[0]}
+            story={story}
             onSaveNoteClick={({ order, note }) => {
               saveNote({ order, note });
               setViewMode(ADD_STORY);
@@ -119,7 +127,6 @@ StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
-  createImageThumbnail: PropTypes.func,
 };
 
 StoryGroupWrapper.defaultProps = {
@@ -128,7 +135,6 @@ StoryGroupWrapper.defaultProps = {
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
-  createImageThumbnail: () => {},
 };
 
 export default StoryGroupWrapper;

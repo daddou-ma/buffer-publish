@@ -14,6 +14,8 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_VIDEO_PROCESSING_STARTED: 0,
   UPDATE_STORY_VIDEO_PROCESSING_COMPLETE: 0,
   UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: 0,
+  DELETE_STORY: 0,
+  SET_STORY_GROUP: 0,
 });
 
 const newStory = () => clonedeep({
@@ -35,7 +37,7 @@ const newStory = () => clonedeep({
 
 export const initialState = {
   // temporarily adding as dummy data until create is working
-  draft: {
+  storyGroup: {
     scheduledAt: null,
     stories: [],
   },
@@ -47,6 +49,14 @@ const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
 
+const deleteStory = ({ stories, story }) => (
+  stories.filter(item => item.order !== story.order)
+);
+
+const reorderStories = stories => (
+  stories.forEach((item, index) => { item.order = index + 1; })
+);
+
 export default (state, action) => {
   if (!state) {
     state = clonedeep(initialState);
@@ -55,9 +65,9 @@ export default (state, action) => {
     case actionTypes.SAVE_STORY_GROUP: {
       return {
         ...state,
-        draft: {
-          ...state.draft,
-          scheduledAt: action.scheduledAt,
+        storyGroup: {
+          ...state.storyGroup,
+          scheduledAt: action.scheduledAt
         },
       };
     }
@@ -68,8 +78,20 @@ export default (state, action) => {
     case actionTypes.UPDATE_STORY_GROUP: {
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
+          scheduledAt: action.scheduledAt,
+          stories: action.stories,
+          storyGroupId: action.storyGroupId,
+        },
+      };
+    }
+    case actionTypes.SET_STORY_GROUP: {
+      return {
+        ...state,
+        storyGroup: {
+          ...state.storyGroup,
+          stories: action.stories,
           scheduledAt: action.scheduledAt,
           storyGroupId: action.storyGroupId,
         },
@@ -77,10 +99,18 @@ export default (state, action) => {
     }
     case actionTypes.SAVE_STORY_NOTE: {
       const { order, note } = action;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: { ...state.draft, stories: updateStoryNote({ stories, order, note }) },
+        storyGroup: { ...state.storyGroup, stories: updateStoryNote({ stories, order, note }) },
+      };
+    }
+    case actionTypes.DELETE_STORY: {
+      const { story } = action;
+      const { stories } = state.storyGroup;
+      return {
+        ...state,
+        storyGroup: { ...state.storyGroup, stories: deleteStory({ stories, story }) },
       };
     }
     case actionTypes.SET_SCHEDULE_LOADING: {
@@ -101,11 +131,11 @@ export default (state, action) => {
         progress,
         complete,
       } = action.args;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: stories.map((story) => {
             if (story.uploadTrackingId === id) {
               return {
@@ -127,11 +157,11 @@ export default (state, action) => {
         stillGifUrl,
         contentType,
       } = action.args;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: stories.map((story) => {
             if (story.uploadTrackingId === id) {
               return {
@@ -160,11 +190,11 @@ export default (state, action) => {
         thumbnail,
         uploadId,
       } = action.args;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: stories.map((story) => {
             if (story.upload_id === uploadId) {
               return {
@@ -191,11 +221,11 @@ export default (state, action) => {
         uploadId,
         contentType,
       } = action.args;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: stories.map((story) => {
             if (story.uploadTrackingId === id) {
               return {
@@ -213,12 +243,12 @@ export default (state, action) => {
       };
     }
     case actionTypes.CREATE_NEW_STORY_CARD: {
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       const { id } = action.args;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: [...stories, {
             ...newStory(),
             uploadTrackingId: id,
@@ -249,6 +279,12 @@ export const actions = {
     type: actionTypes.SAVE_STORY_NOTE,
     order,
     note,
+  }),
+  setStoryGroup: ({ scheduledAt, stories, storyGroupId }) => ({
+    type: actionTypes.SET_STORY_GROUP,
+    scheduledAt,
+    stories,
+    storyGroupId,
   }),
   updateStoryUploadProgress: ({
     id, uploaderInstance, progress, file, complete,
@@ -344,6 +380,10 @@ export const actions = {
       availableThumbnails,
       uploadId,
     },
+  }),
+  deleteStory: story => ({
+    type: actionTypes.DELETE_STORY,
+    story,
   }),
 
 };

@@ -19,8 +19,6 @@ const ButtonStyle = styled.div`
 `;
 
 const StyledImage = styled.img`
-  width: 180px;
-  height: 320px;
   object-fit: cover;
 `;
 
@@ -44,10 +42,12 @@ const AddNote = ({
           <StyledImage
             src={story.thumbnail_url}
             alt={translations.noteImageAlt}
+            height="320px"
+            width="180px"
           />
         </div>
         <NoteSection
-          note={story.note}
+          note={note}
           setNote={setNoteValue}
           translations={translations}
         />
