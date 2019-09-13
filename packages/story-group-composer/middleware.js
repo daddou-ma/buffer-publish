@@ -19,7 +19,7 @@ export default ({ getState, dispatch }) => next => (action) => {
   const { selectedProfileId } = getState().profileSidebar;
   switch (action.type) {
     case actionTypes.SAVE_STORY_GROUP: {
-      const { stories } = getState().storyGroupComposer.draft;
+      const { stories } = getState().storyGroupComposer.storyGroup;
       const { scheduledAt } = action;
       if (scheduledAt) {
         dispatch(dataFetchActions.fetch({
@@ -34,7 +34,8 @@ export default ({ getState, dispatch }) => next => (action) => {
       break;
     }
     case actionTypes.UPDATE_STORY_GROUP: {
-      const { stories, storyGroupId } = getState().storyGroupComposer.draft;
+      const { stories } = getState().storyGroupComposer.storyGroup;
+      const { storyGroupId } = getState().storyGroupComposer.storyGroup;
       dispatch(dataFetchActions.fetch({
         name: 'updateStoryGroup',
         args: {
@@ -81,6 +82,19 @@ export default ({ getState, dispatch }) => next => (action) => {
         refreshStoryGroups(dispatch, selectedProfileId);
       }
       break;
+    case storiesActionTypes.OPEN_STORIES_COMPOSER: {
+      const currentProfile = getState().stories.byProfileId[selectedProfileId];
+      const { editingPostId } = getState().stories;
+      const editingStoryGroup = cloneDeep(currentProfile.storyPosts[editingPostId]);
+      if (editingStoryGroup) {
+        dispatch(actions.setStoryGroup({
+          stories: editingStoryGroup.storyDetails.stories,
+          storyGroupId: editingStoryGroup.id,
+          scheduledAt: editingStoryGroup.scheduledAt,
+        }));
+      }
+      break;
+    }
     default:
       break;
   }
