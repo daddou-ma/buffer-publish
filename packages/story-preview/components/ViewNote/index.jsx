@@ -60,7 +60,7 @@ ViewNote.propTypes = {
   story: PropTypes.shape({
     note: PropTypes.string,
     type: PropTypes.oneOf(['image', 'video', 'gif']),
-    order: PropTypes.number,
+    order: PropTypes.string,
     asset_url: PropTypes.string,
     thumbnail_url: PropTypes.string,
   }).isRequired,

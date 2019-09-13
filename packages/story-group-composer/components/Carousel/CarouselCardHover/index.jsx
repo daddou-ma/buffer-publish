@@ -11,6 +11,7 @@ import {
   StyledPencilIcon,
   TextWrapper,
   PencilIconWrapper,
+  HoverWrapper,
 } from './style';
 
 const CarouselCardHover = ({
@@ -19,40 +20,42 @@ const CarouselCardHover = ({
   onDeleteStoryClick,
 }) => (
   <Fragment>
-    <TrashIconWrapper>
-      <StyledTrashIcon
-        size="medium"
-        onClick={() => onDeleteStoryClick(card)}
-      />
-    </TrashIconWrapper>
-    <DragDropWrapper />
-    {
-      card.note
-        ? (
-          <EditNoteWrapper>
-            <TextWrapper>
-              <Text>
-                {getShortString(card.note)}
-              </Text>
-            </TextWrapper>
-            <PencilIconWrapper>
-              <StyledPencilIcon
-                size="medium"
+    <HoverWrapper>
+      <TrashIconWrapper>
+        <StyledTrashIcon
+          size="medium"
+          onClick={() => onDeleteStoryClick(card)}
+        />
+      </TrashIconWrapper>
+      <DragDropWrapper />
+      {
+        card.note
+          ? (
+            <EditNoteWrapper>
+              <TextWrapper>
+                <Text>
+                  {getShortString(card.note)}
+                </Text>
+              </TextWrapper>
+              <PencilIconWrapper>
+                <StyledPencilIcon
+                  size="medium"
+                  onClick={() => onAddNoteClick(card)}
+                />
+              </PencilIconWrapper>
+            </EditNoteWrapper>
+          )
+          : (
+            <ButtonWrapper>
+              <Button
+                label="Add Note"
                 onClick={() => onAddNoteClick(card)}
+                fullWidth
               />
-            </PencilIconWrapper>
-          </EditNoteWrapper>
-        )
-        : (
-          <ButtonWrapper>
-            <Button
-              label="Add Note"
-              onClick={() => onAddNoteClick(card)}
-              fullWidth
-            />
-          </ButtonWrapper>
-        )
-    }
+            </ButtonWrapper>
+          )
+      }
+    </HoverWrapper>
   </Fragment>
 );
 

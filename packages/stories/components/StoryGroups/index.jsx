@@ -65,6 +65,7 @@ const StoryGroups = ({
   onPreviewClick,
   onClosePreviewClick,
   showStoryPreview,
+  userData,
 }) => {
   if (loading) {
     return (
@@ -124,6 +125,7 @@ const StoryGroups = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
           isBusinessAccount={isBusinessAccount}
           onPreviewClick={onPreviewClick}
+          userData={userData}
         />
       </ContainerStyle>
     </ErrorBoundary>
@@ -152,6 +154,10 @@ StoryGroups.propTypes = {
   onPreviewClick: PropTypes.func,
   onClosePreviewClick: PropTypes.func,
   showStoryPreview: PropTypes.bool,
+  userData: PropTypes.shape({
+    id: PropTypes.string,
+    email: PropTypes.string,
+  }),
 };
 
 StoryGroups.defaultProps = {
@@ -172,6 +178,7 @@ StoryGroups.defaultProps = {
   onComposerPlaceholderClick: () => {},
   onPreviewClick: () => {},
   onClosePreviewClick: () => {},
+  userData: {},
 };
 
 export default WithFeatureLoader(StoryGroups);

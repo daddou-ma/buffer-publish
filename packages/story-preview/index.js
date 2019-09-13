@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { actions as storyGroupActions } from '@bufferapp/publish-story-group-composer';
 import PreviewPopover from './components/PreviewPopover';
 
 export default connect(
@@ -7,13 +8,10 @@ export default connect(
     stories: state.storyPreview.stories,
   }),
   dispatch => ({
-    onOverlayClick: () => {
-    },
-    onSaveNoteClick: ({ note, storyId }) => {
-      //dispatch(actions.handleSaveStoryNote({ note, storyId }));
+    onSaveNoteClick: ({ order, note }) => {
+      dispatch(storyGroupActions.handleSaveStoryNote({ order, note }));
     },
   }),
 )(PreviewPopover);
 
 export reducer, { actions, actionTypes } from './reducer';
-// export middleware from './middleware';

@@ -21,6 +21,7 @@ export default ({ getState, dispatch }) => next => (action) => {
     case actionTypes.SAVE_STORY_GROUP: {
       const { stories } = getState().storyGroupComposer.storyGroup;
       const { scheduledAt } = action;
+
       if (scheduledAt) {
         dispatch(dataFetchActions.fetch({
           name: 'createStoryGroup',
@@ -41,8 +42,8 @@ export default ({ getState, dispatch }) => next => (action) => {
         args: {
           profileId: selectedProfileId,
           scheduledAt: action.scheduledAt,
-          stories,
           storyGroupId,
+          stories,
         },
       }));
       break;

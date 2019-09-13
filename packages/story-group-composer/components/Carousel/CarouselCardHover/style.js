@@ -54,3 +54,11 @@ export const DragDropWrapper = styled.div`
   flex-grow: 1;
   cursor: pointer;
 `;
+
+export const HoverWrapper = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
