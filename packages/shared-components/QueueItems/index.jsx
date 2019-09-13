@@ -96,6 +96,7 @@ const renderPost = ({
   basic,
   hasFirstCommentFlip,
   onPreviewClick,
+  userData,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -116,6 +117,7 @@ const renderPost = ({
     onDropPost,
     onSwapPosts,
     hasFirstCommentFlip,
+    userData,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;

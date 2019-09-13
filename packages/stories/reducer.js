@@ -7,6 +7,7 @@ export const actionTypes = keyWrapper('STORIES', {
   HIDE_STORIES_COMPOSER: 0,
   DELETE_STORY_GROUP: 0,
   OPEN_PREVIEW: 0,
+  STORY_GROUP_SHARE_NOW: 0,
   CLOSE_PREVIEW: 0,
 });
 
@@ -35,10 +36,33 @@ const getProfileId = (action) => {
   if (action.profile) { return action.profile.id; }
 };
 
+const getStoryGroupId = (action) => {
+  if (action.post) { return action.post.id; }
+  if (action.storyGroup) { return action.storyGroup.id; }
+  if (action.args) { return action.args.updateId; }
+};
+
 const determineIfMoreToLoad = (action, currentPosts) => {
   const currentPostCount = Object.keys(currentPosts).length;
   const resultUpdatesCount = Object.keys(action.result.updates).length;
   return (action.result.total > (currentPostCount + resultUpdatesCount));
+};
+
+const storyPostReducer = (state, action) => {
+  switch (action.type) {
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+      return {
+        ...state,
+        isWorking: true,
+      };
+    case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        isWorking: false,
+      };
+    default:
+      return state;
+  }
 };
 
 const storyPostsReducer = (state = {}, action) => {
@@ -49,6 +73,22 @@ const storyPostsReducer = (state = {}, action) => {
         return { ...state, ...updates };
       }
       return updates;
+    }
+    case actionTypes.DELETE_STORY_GROUP:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { [getStoryGroupId(action)]: deleted, ...currentState } = state;
+      return currentState;
+    }
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        [getStoryGroupId(action)]: storyPostReducer(state[getStoryGroupId(action)], action),
+      };
+    case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { storyGroup } = action.result;
+      return { ...state, [storyGroup.id]: storyGroup };
     }
     default:
       return state;
@@ -73,6 +113,16 @@ const profileReducer = (state = profileInitialState, action) => {
         storyPosts: storyPostsReducer(state.storyPosts, action),
         total: action.result.total,
       };
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+    case actionTypes.DELETE_STORY_GROUP:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        storyPosts: storyPostsReducer(state.storyPosts, action),
+      };
     case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
@@ -89,9 +139,15 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+    case actionTypes.DELETE_STORY_GROUP:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -140,11 +196,11 @@ export const actions = {
     emptySlotData,
     profileId,
   }),
-  handleEditStoryGroupClick: ({ draft, profileId }) => ({
+  handleEditStoryGroupClick: ({ storyGroup, profileId }) => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,
-    updateId: draft.id,
+    updateId: storyGroup.id,
     editMode: true,
-    draft,
+    storyGroup,
     profileId,
   }),
   handleComposerPlaceholderClick: () => ({
@@ -160,8 +216,15 @@ export const actions = {
   handleClosePreviewClick: () => ({
     type: actionTypes.CLOSE_PREVIEW,
   }),
-  handleDeleteStoryGroup: ({ storyGroup }) => ({
+  handleDeleteStoryGroup: ({ storyGroup, profileId }) => ({
     type: actionTypes.DELETE_STORY_GROUP,
     storyGroup: storyGroup.post,
+    profileId,
+  }),
+  handleShareNowClick: ({ storyGroup, profileId }) => ({
+    type: actionTypes.STORY_GROUP_SHARE_NOW,
+    updateId: storyGroup.id,
+    storyGroup,
+    profileId,
   }),
 };

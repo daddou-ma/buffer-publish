@@ -37,6 +37,27 @@ export default ({ dispatch, getState }) => next => (action) => {
         message: action.error,
       }));
       break;
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+      dispatch(dataFetchActions.fetch({
+        name: 'shareStoryGroupNow',
+        args: {
+          updateId: action.storyGroup.id,
+          profileId: action.profileId,
+        },
+      }));
+      break;
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: 'Great! You will receive a reminder to post manually! 🎉',
+      }));
+      break;
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      break;
     default:
       break;
   }

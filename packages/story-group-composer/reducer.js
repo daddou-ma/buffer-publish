@@ -9,8 +9,8 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SET_SHOW_DATE_PICKER: 0,
 });
 
+// TODO: set stories array to empty when uploading in ready
 export const initialState = {
-  // temporarily adding as dummy data until create is working
   draft: {
     scheduledAt: null,
     stories: [{
@@ -34,8 +34,14 @@ export default (state = initialState, action) => {
     case actionTypes.SAVE_STORY_GROUP: {
       return {
         ...state,
-        draft: { ...state.draft, scheduledAt: action.scheduledAt },
+        draft: {
+          ...state.draft,
+          scheduledAt: action.scheduledAt,
+        },
       };
+    }
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      return initialState;
     }
     case actionTypes.UPDATE_STORY_GROUP: {
       return {
@@ -43,7 +49,6 @@ export default (state = initialState, action) => {
         draft: {
           ...state.draft,
           scheduledAt: action.scheduledAt,
-          stories: action.stories,
           storyGroupId: action.storyGroupId,
         },
       };
