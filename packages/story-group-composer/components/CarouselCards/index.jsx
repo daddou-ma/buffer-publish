@@ -61,7 +61,7 @@ class CarouselCards extends React.Component {
     }) => this.props.createNewFile({ id, uploaderInstance, file }),
     uploadedLinkThumbnail: ({
       id, uploaderInstance, url, width, height, file,
-    }) => this.createImageThumbnail({
+    }) => this.props.createImageThumbnail({
       id, uploaderInstance, url, width, height, file,
     }),
     uploadedDraftImage: ({
@@ -143,20 +143,6 @@ class CarouselCards extends React.Component {
 
     return uploadDraftFileCallback(id, file, uploadType, notifiers);
   };
-
-  createImageThumbnail = ({
-    id, uploaderInstance, url, width, height, file,
-  }) => {
-    const type = 'image';
-    this.props.createImageThumbnail({
-      id, uploaderInstance, url, width, height, file,
-    });
-    // TODO: remove this once the actual upload logic is done
-    // this is for testing purposes
-    this.props.onUploadFinished({
-      id, uploaderInstance, url, width, height, file, type,
-    });
-  }
 
   render () {
     const {

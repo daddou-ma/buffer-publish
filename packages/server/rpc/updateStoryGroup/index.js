@@ -26,8 +26,8 @@ module.exports = method(
         };
       })
       .catch((err) => {
-        if (err.error) {
-          const error = JSON.parse(err.error);
+        if (err) {
+          const error = JSON.parse(err);
           throw createError({ message: error.message });
         }
       }),

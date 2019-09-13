@@ -32,7 +32,6 @@ export default connect(
       dispatch(actions.setScheduleLoading(true));
       dispatch(actions.handleSaveStoryGroup(scheduledAt));
     },
-
     onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId }) => {
       dispatch(actions.setScheduleLoading(true));
       dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId }));
@@ -45,9 +44,6 @@ export default connect(
     },
     onComposerClick: (showDatePicker) => {
       if (showDatePicker) dispatch(actions.setShowDatePicker(false));
-    },
-    onUploadFinished: (fileUploaded, editingStoryGroup) => {
-      dispatch(actions.handleFileUploadFinished(fileUploaded, editingStoryGroup));
     },
   }),
 )(StoryGroupPopover);

@@ -40,8 +40,8 @@ export default ({ getState, dispatch }) => next => (action) => {
         args: {
           profileId: selectedProfileId,
           scheduledAt: action.scheduledAt,
-          stories,
           storyGroupId,
+          stories,
         },
       }));
       break;

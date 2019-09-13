@@ -7,7 +7,6 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_GROUP: 0,
   SET_SCHEDULE_LOADING: 0,
   SET_SHOW_DATE_PICKER: 0,
-  FILE_UPLOAD_FINISHED: 0,
 });
 
 export const initialState = {
@@ -22,17 +21,6 @@ export const initialState = {
 const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
-
-const getStory = (fileUploaded, order) => ({
-  order,
-  note: null,
-  type: fileUploaded.type,
-  asset_url: fileUploaded.url,
-  thumbnail_url: fileUploaded.url,
-  height: fileUploaded.height,
-  width: fileUploaded.width,
-  file_size: fileUploaded.file.size,
-});
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -64,29 +52,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         draft: { ...state.draft, stories: updateStoryNote({ stories, order, note }) },
-      };
-    }
-    case actionTypes.FILE_UPLOAD_FINISHED: {
-      const { fileUploaded, editingStoryGroup } = action;
-      const order = (state.draft.stories.length + 1).toString();
-      let { draft } = state;
-      let { stories } = state.draft;
-
-      // TODO: check this bit of code for other media types
-      const story = getStory(fileUploaded, order);
-
-      if (editingStoryGroup) {
-        ({ stories } = editingStoryGroup.storyDetails);
-        story.order = (stories.length + 1).toString();
-        draft = editingStoryGroup;
-      }
-
-      return {
-        ...state,
-        draft: {
-          ...draft,
-          stories: [...stories, story],
-        },
       };
     }
     case actionTypes.SET_SCHEDULE_LOADING: {
@@ -129,10 +94,5 @@ export const actions = {
   setShowDatePicker: showDatePicker => ({
     type: actionTypes.SET_SHOW_DATE_PICKER,
     showDatePicker,
-  }),
-  handleFileUploadFinished: (fileUploaded, editingStoryGroup) => ({
-    type: actionTypes.FILE_UPLOAD_FINISHED,
-    fileUploaded,
-    editingStoryGroup,
   }),
 };
