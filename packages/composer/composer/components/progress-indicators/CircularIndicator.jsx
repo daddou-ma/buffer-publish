@@ -6,12 +6,12 @@ import styles from '../css/progress-indicators/CircularIndicator.css';
 const CircularIndicator = (props) => {
   const {
     size, progress, initialProgress, showText, classNames, styles: stylesMap,
-    strokeWidth,
+    strokeWidth, finishingUpText,
   } = props;
 
   const displayedProgress = initialProgress + (progress * (100 - initialProgress) / 100);
   const progressText = (
-    progress === 100 ? 'Finishing up…' :
+    progress === 100 ? finishingUpText :
       progress === 0 ? `${progress}%` : `${progress.toFixed(1)}%`
   );
 
@@ -80,9 +80,11 @@ CircularIndicator.propTypes = {
   styles: PropTypes.shape({
     circle: PropTypes.object,
   }),
+  finishingUpText: PropTypes.string,
 };
 
 CircularIndicator.defaultProps = {
+  finishingUpText: 'Finishing up…',
   initialProgress: 0,
   showText: false,
   strokeWidth: 2,

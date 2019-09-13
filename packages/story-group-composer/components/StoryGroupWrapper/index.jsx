@@ -38,15 +38,20 @@ const StoryGroupWrapper = ({
   onUpdateStoryGroup,
   onDeleteStoryGroup,
   onComposerClick,
+  onCreateNewStoryCard,
+  onUpdateStoryUploadProgress,
+  onVideoUploadProcessingStarted,
+  onVideoUploadProcessingComplete,
+  onMonitorUpdateProgress,
+  onUploadDraftFile,
   onSetShowDatePicker,
   showDatePicker,
   userData,
   onUploadFinished,
   draft,
 }) => {
-  // hooks: https://reactjs.org/docs/hooks-state.html
+  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : draft.stories;
   const [viewMode, setViewMode] = useState(ADD_STORY);
-  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
 
   return (
     <Fragment>
@@ -63,6 +68,12 @@ const StoryGroupWrapper = ({
               largeCards
             >
               <CarouselCards
+                createNewFile={onCreateNewStoryCard}
+                updateUploadProgress={onUpdateStoryUploadProgress}
+                videoProcessingStarted={onVideoUploadProcessingStarted}
+                videoProcessingComplete={onVideoUploadProcessingComplete}
+                monitorUpdateProgress={onMonitorUpdateProgress}
+                uploadDraftFile={onUploadDraftFile}
                 cards={cards}
                 totalCardsToShow={15}
                 userData={userData}

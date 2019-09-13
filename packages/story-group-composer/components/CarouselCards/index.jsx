@@ -1,7 +1,8 @@
 import React from 'react';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
 import styled from 'styled-components';
-import { CirclePlayIcon } from '@bufferapp/components';
+import { CirclePlayIcon, Text } from '@bufferapp/components';
+import Loader from '@bufferapp/components/Loader';
 import { grayLighter } from '@bufferapp/ui/style/colors';
 import { CarouselCard, getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
 import UploadZone from '@bufferapp/publish-upload-zone';
@@ -9,9 +10,9 @@ import { Button } from '@bufferapp/ui';
 import Attach from '@bufferapp/ui/Icon/Icons/Attach';
 import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
 import { UploadTypes } from '@bufferapp/publish-constants';
+import CircularUploadIndicator
+  from '@bufferapp/publish-composer/composer/components/progress-indicators/CircularUploadIndicator';
 import PropTypes from 'prop-types';
-import cloneDeep from 'lodash.clonedeep';
-
 import styles from './styles.css';
 
 const IconWrapper = styled(CirclePlayIcon)`
@@ -41,8 +42,10 @@ const getCardsToShow = ({ cards = [], totalCardsToShow }) => {
       cardList.push(card);
     } else {
       cardList.push({
-        order: `${i}`,
+        order: i,
         empty: firstEmpty,
+        progress: null,
+        uploadTrackingId: i,
       });
       firstEmpty = false;
     }
@@ -54,168 +57,107 @@ const getCardsToShow = ({ cards = [], totalCardsToShow }) => {
  * Carousel on view mode, to display images in the queue
  * Carousel on edit mode, handling from the composer
  */
-class CarouselCards extends React.Component {
-  notifiers = {
-    uploadStarted: ({
-      id, uploaderInstance, file,
-    }) => this.props.createNewFile({ id, uploaderInstance, file }),
-    uploadedLinkThumbnail: ({
-      id, uploaderInstance, url, width, height, file,
-    }) => this.props.createImageThumbnail({
-      id, uploaderInstance, url, width, height, file,
-    }),
-    uploadedDraftImage: ({
-      id, uploaderInstance, url, location, width, height, file,
-    }) => this.props.uploadImageComplete({
-      id, uploaderInstance, url, location, width, height, file,
-    }),
-    uploadedDraftVideo: ({
-      id, uploaderInstance, uploadId, fileExtension, file,
-    }) => this.props.videoProcessingStarted({
-      id, uploaderInstance, uploadId, fileExtension, file,
-    }),
-    draftGifUploaded: ({
-      id, uploaderInstance, url, stillGifUrl, width, height, file,
-    }) => this.props.uploadImageComplete({
-      id, uploaderInstance, url, stillGifUrl, width, height, file,
-    }),
-    queueError: ({ message }) => this.props.notifyError({ message }),
-    monitorFileUploadProgress: async ({ id, uploaderInstance, file }) => {
-      const progressIterator = uploaderInstance.getProgressIterator();
-      let item;
+const CarouselCards = ({
+  totalCardsToShow,
+  largeCards,
+  editMode,
+  userData,
+  removeNotifications,
+  notifyError,
+  videoProcessingComplete,
+  cards,
+  uploadDraftFile,
+  updateUploadProgress,
+  monitorUpdateProgress,
+  createNewFile,
+  createImageThumbnail,
+  uploadImageComplete,
+  videoProcessingStarted,
+}) => {
+  const { cardWidth, cardHeight } = getCardSizes(largeCards);
+  const cardsToRender = editMode ? getCardsToShow({ cards, totalCardsToShow }) : sortCards(cards);
+  const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
+  const maxAttachableMediaCount = totalCardsToShow - cards.length;
 
-      while (!(item = progressIterator.next()).done) { // eslint-disable-line no-cond-assign
-        const promisedProgress = item.value;
+  const notifiers = {
+    uploadStarted: props => createNewFile(props),
+    uploadedLinkThumbnail: props => createImageThumbnail(props),
+    uploadedDraftImage: props => uploadImageComplete(props),
+    uploadedDraftVideo: props => videoProcessingStarted(props),
+    draftGifUploaded: props => uploadImageComplete(props),
+    queueError: props => notifyError(props),
+    monitorFileUploadProgress: monitorUpdateProgress(updateUploadProgress),
+  };
 
-        await promisedProgress.then(progress => // eslint-disable-line no-await-in-loop
-          this.props.updateUploadProgress({
-            id, uploaderInstance, progress, file, complete: false,
-          }));
+  return cardsToRender.map(card => (
+    <CarouselCard
+      key={card.uploadTrackingId}
+      card={card}
+      cardHeight={cardHeight}
+      cardWidth={cardWidth}
+      largeCards={largeCards}
+    >
+      {editMode
+        ? (
+          <React.Fragment>
+            {card.empty && (
+              <div>
+                <UploadZone
+                  uploadButton={({ onClick }) => (
+                    <Button
+                      type="primary"
+                      label="Add Media Files"
+                      icon={<Attach />}
+                      onClick={onClick}
+                    />
+                  )}
+                  classNames={styles}
+                  supportsMixedMediaTypes
+                  mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+                  uploadDraftFile={uploadDraftFile({ userData, videoProcessingComplete })}
+                  notifiers={notifiers}
+                  removeAllNotifications={removeNotifications}
+                  queueError={notifyError}
+                  draftId={`${card.order}`}
+                  uploadFormatsConfig={uploadFormatsConfig}
+                  service={{
+                    maxAttachableImagesCount: maxAttachableMediaCount,
+                    canHaveMediaAttachmentType: () => true,
+                  }}
+                  uploadType={UploadTypes.MEDIA}
+                  multiple
+                  disabled={false}
+                />
+              </div>
+            )}
+            {!card.empty && card.progress !== null && card.uploading && (
+              <CircularUploadIndicator
+                classNames={{ container: styles.container }}
+                size={54}
+                progress={card.progress}
+                showText
+                finishingUpText="Finishing Upload..."
+              />
+            )}
+
+            {!card.empty && card.processing === true && (
+              <Loader>
+                <Text size="small">Processing video</Text>
+              </Loader>
+            )}
+
+          </React.Fragment>
+        )
+        : card.type === 'video' && <PlayIcon />
       }
-      this.props.updateUploadProgress({
-        id, uploaderInstance, file, complete: true,
-      });
-    },
-  };
-
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      draftCards: [],
-      currentCards: cloneDeep(props.cards),
-    };
-  }
-
-  uploadDraftFile = userData => (id, file, uploadType, notifiers, createFileUploaderCallback) => {
-    const {
-      id: userId,
-      s3_upload_signature: s3Signature,
-      imageDimensionsKey,
-    } = userData;
-
-    const s3UploadSignature = {
-      algorithm: s3Signature.algorithm,
-      base64Policy: s3Signature.base64policy,
-      bucket: s3Signature.bucket,
-      credentials: s3Signature.credentials,
-      date: s3Signature.date,
-      expires: s3Signature.expires,
-      signature: s3Signature.signature,
-      successActionStatus: s3Signature.success_action_status,
-    };
-    const uploadDraftFileCallback = createFileUploaderCallback({
-      s3UploadSignature,
-      userId,
-      csrfToken: null,
-      imageDimensionsKey,
-      serverNotifiers: {
-        videoProcessed: ({
-          uploadId, name, duration, durationMs, size, width, height, url, originalUrl, thumbnail, availableThumbnails,
-        }) => this.props.videoProcessingComplete({
-          uploadId, name, duration, durationMs, size, width, height, url, originalUrl, thumbnail, availableThumbnails,
-        }),
-        profileGroupCreated: () => {},
-        profileGroupUpdated: () => {},
-        profileGroupDeleted: () => {},
-      },
-    });
-
-    return uploadDraftFileCallback(id, file, uploadType, notifiers);
-  };
-
-  render () {
-    const {
-      totalCardsToShow,
-      largeCards,
-      editMode,
-      userData,
-      removeNotifications,
-      notifyError,
-    } = this.props;
-
-    const {
-      currentCards: cards,
-    } = this.state;
-    const { cardWidth, cardHeight } = getCardSizes(largeCards);
-    const cardsToRender = editMode ? getCardsToShow({ cards, totalCardsToShow }) : sortCards(cards);
-    const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
-
-    return cardsToRender.map(card => (
-      <CarouselCard
-        key={card.order}
-        card={card}
-        cardHeight={cardHeight}
-        cardWidth={cardWidth}
-        largeCards={largeCards}
-      >
-        {editMode
-          ? (
-            <React.Fragment>
-              {card.empty && (
-                <div>
-                  <UploadZone
-                    uploadButton={({ onClick }) => (
-                      <Button
-                        type="primary"
-                        label="Add Media Files"
-                        icon={<Attach />}
-                        onClick={onClick}
-                      />
-                    )}
-                    classNames={styles}
-                    supportsMixedMediaTypes
-                    mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-                    uploadDraftFile={this.uploadDraftFile(userData)}
-                    notifiers={this.notifiers}
-                    removeAllNotifications={removeNotifications}
-                    queueError={notifyError}
-                    draftId={card.order}
-                    uploadFormatsConfig={uploadFormatsConfig}
-                    service={{
-                      maxAttachableImagesCount: totalCardsToShow,
-                      canHaveMediaAttachmentType: () => true,
-                    }}
-                    uploadType={UploadTypes.LINK_THUMBNAIL}
-                    multiple
-                    disabled={false}
-                  />
-                </div>
-              )}
-
-            </React.Fragment>
-          )
-          : card.type === 'video' && <PlayIcon />
-        }
-      </CarouselCard>
-    ));
-  }
-}
+    </CarouselCard>
+  ));
+};
 
 CarouselCards.propTypes = {
   largeCards: PropTypes.bool,
   cards: PropTypes.arrayOf(PropTypes.shape({
-    order: PropTypes.string,
+    order: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     type: PropTypes.string,
     note: PropTypes.string,
     asset_url: PropTypes.string,
@@ -246,12 +188,22 @@ CarouselCards.propTypes = {
   uploadImageComplete: PropTypes.func,
   videoProcessingStarted: PropTypes.func,
   videoProcessingComplete: PropTypes.func,
+  uploadDraftFile: PropTypes.func,
+  monitorUpdateProgress: PropTypes.func,
 };
 
 CarouselCards.defaultProps = {
   removeNotifications: () => console.log('removeAllNotifications', true),
   notifyError: ({ message }) => console.log('queueError', { message }),
-  createNewFile: ({ id, uploaderInstance, file }) => console.log('uploadStarted - File Created', { id, uploaderInstance, file }),
+  createNewFile: ({
+    id,
+    uploaderInstance,
+    file,
+  }) => console.log('uploadStarted - File Created', {
+    id,
+    uploaderInstance,
+    file,
+  }),
   createImageThumbnail: ({
     id, uploaderInstance, url, width, height, file,
   }) => console.log('uploadedLinkThumbnail - Create Image Thumbnail', {
@@ -264,19 +216,46 @@ CarouselCards.defaultProps = {
   }),
   uploadImageComplete: ({
     id, uploaderInstance, url, location = null, width, height, file, stillGifUrl = null,
-  }) => console.log('uploadedDraftImage - Create Draft Image', {
+  }) => console.log('uploadedDraftImage - Image Upload Created', {
     id, uploaderInstance, url, location, width, height, file, stillGifUrl,
   }),
   videoProcessingStarted: ({
     id, uploaderInstance, uploadId, fileExtension, file,
-  }) => console.log('uploadedDraftVideo', {
+  }) => console.log('uploadedDraftVideo - Video Processing Started', {
     id, uploaderInstance, uploadId, fileExtension, file,
   }),
   videoProcessingComplete: ({
-    uploadId, name, duration, durationMs, size, width, height, url, originalUrl, thumbnail, availableThumbnails,
+    id,
+    uploadId,
+    name,
+    duration,
+    durationMs,
+    size,
+    width,
+    height,
+    url,
+    originalUrl,
+    thumbnail,
+    availableThumbnails,
   }) => console.log('videoProcessed - Video Processing Complete', {
-    uploadId, name, duration, durationMs, size, width, height, url, originalUrl, thumbnail, availableThumbnails,
+    id,
+    uploadId,
+    name,
+    duration,
+    durationMs,
+    size,
+    width,
+    height,
+    url,
+    originalUrl,
+    thumbnail,
+    availableThumbnails,
   }),
+  uploadDraftFile: ({ userData, videoProcessingComplete }) => console.log('uploadDraftFile', {
+    userData,
+    videoProcessingComplete,
+  }),
+  monitorUpdateProgress: () => console.log('monitorUploadProgress'),
 
   largeCards: false,
   cards: [],

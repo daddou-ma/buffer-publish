@@ -5,3 +5,7 @@
     border: 1px solid #6B81FF !important; /* import { blueLighter } from '@bufferapp/ui/style/colors'; */
 }
 .uploadZoneDisabled {}
+
+.container {
+    background-image: radial-gradient(white 0%, white 70%, transparent 70%);
+}
