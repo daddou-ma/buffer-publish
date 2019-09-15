@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
 import { getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
 import { getCardsToShow, sortCards } from '../../../utils/Carousel';
-import CardDragWrapper from '../../CardDragWrapper';
+import CardDragWrapper from '../CardDragWrapper';
 
 const CarouselCards = ({
   totalCardsToShow,

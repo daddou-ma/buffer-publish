@@ -9,7 +9,7 @@ import { UploadTypes } from '@bufferapp/publish-constants';
 import CircularUploadIndicator
   from '@bufferapp/publish-composer/composer/components/progress-indicators/CircularUploadIndicator';
 import PropTypes from 'prop-types';
-import CarouselCardHover from '../Carousel/CarouselCardHover';
+import CarouselCardHover from '../CarouselCardHover';
 import styles from './styles.css';
 
 import { CoverImage, UploadingVideo, StoryWrapper } from './styles';
