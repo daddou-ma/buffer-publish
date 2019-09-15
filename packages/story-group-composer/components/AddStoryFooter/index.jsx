@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import { getReadableDateFormat } from '../../utils/AddStory';
 import {
   FooterBar,
   ButtonStyle,
@@ -12,28 +12,23 @@ import {
   StyledEditButton,
 } from './style';
 
-const getReadableDateFormat = ({ uses24hTime, scheduledAt }) => {
-  const readableFormat = uses24hTime ? 'MMM D, H:mm' : 'MMM D, h:mm A';
-  return moment.unix(scheduledAt).format(readableFormat);
-};
-
 const AddStoryFooter = ({
   timezone,
   weekStartsMonday,
   uses24hTime,
   isScheduleLoading,
   translations,
-  editingStoryGroup,
+  storyGroup,
   onUpdateStoryGroup,
   onCreateStoryGroup,
-  onSetShowDatePicker,
-  showDatePicker,
+  editMode,
 }) => {
-  const [scheduledAt, setScheduledAt] = useState(editingStoryGroup ? editingStoryGroup.scheduledAt : null);
+  const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const onDateTimeSlotPickerSubmit = (timestamp) => {
-    onSetShowDatePicker(false);
-    if (editingStoryGroup) {
+    setShowDatePicker(false);
+    if (editMode) {
       setScheduledAt(timestamp);
     } else {
       onCreateStoryGroup(timestamp);
@@ -41,21 +36,28 @@ const AddStoryFooter = ({
   };
 
   const onScheduleClick = () => {
-    if (editingStoryGroup) {
+    if (editMode) {
+      const { stories, storyGroupId } = storyGroup;
       onUpdateStoryGroup({
         scheduledAt,
-        stories: editingStoryGroup.storyDetails.stories,
-        storyGroupId: editingStoryGroup.id,
+        stories,
+        storyGroupId,
       });
     } else {
-      onSetShowDatePicker(true);
+      setShowDatePicker(true);
+    }
+  };
+
+  const onFooterClick = () => {
+    if (showDatePicker) {
+      setShowDatePicker(false);
     }
   };
 
   return (
     <Fragment>
-      <FooterBar>
-        {editingStoryGroup && (
+      <FooterBar onClick={onFooterClick}>
+        {editMode && (
           <EditStoryStyle>
             <EditTextStyle>
               <Text type="p">Story Schedule:</Text>
@@ -69,7 +71,7 @@ const AddStoryFooter = ({
               label="Edit"
               type="secondary"
               size="small"
-              onClick={() => { onSetShowDatePicker(true); }}
+              onClick={() => setShowDatePicker(true)}
             />
           </EditStoryStyle>
         )}
@@ -88,16 +90,16 @@ const AddStoryFooter = ({
             ? translations.scheduleLoadingButton
             : translations.scheduleButton}
         />
-        {showDatePicker && (
-          <DateTimeSlotPickerWrapper
-            shouldUse24hTime={uses24hTime}
-            timezone={timezone}
-            weekStartsMonday={weekStartsMonday}
-            editMode={!!editingStoryGroup}
-            onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
-          />
-        )}
       </FooterBar>
+      {showDatePicker && (
+        <DateTimeSlotPickerWrapper
+          shouldUse24hTime={uses24hTime}
+          timezone={timezone}
+          weekStartsMonday={weekStartsMonday}
+          editMode={editMode}
+          onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
+        />
+      )}
     </Fragment>
   );
 };
@@ -106,14 +108,12 @@ AddStoryFooter.propTypes = {
   ...DateTimeSlotPickerWrapper.propTypes,
   isScheduleLoading: PropTypes.bool.isRequired,
   onUpdateStoryGroup: PropTypes.func.isRequired,
-  onSetShowDatePicker: PropTypes.func.isRequired,
-  showDatePicker: PropTypes.bool.isRequired,
   translations: PropTypes.shape({
     scheduleLoadingButton: PropTypes.string,
     scheduleButton: PropTypes.string,
     previewButton: PropTypes.string,
   }).isRequired,
-  editingStoryGroup: PropTypes.shape({
+  storyGroup: PropTypes.shape({
     storyDetails: PropTypes.shape({
       stories: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string,
@@ -124,7 +124,7 @@ AddStoryFooter.propTypes = {
 };
 
 AddStoryFooter.defaultProps = {
-  editingStoryGroup: null,
+  storyGroup: {},
 };
 
 export default AddStoryFooter;

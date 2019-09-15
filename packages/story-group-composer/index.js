@@ -6,10 +6,7 @@ import StoryGroupPopover from './components/StoryGroupPopover';
 
 export default connect(
   (state) => {
-    const { selectedProfileId } = state.profileSidebar;
-    const currentProfile = state.stories.byProfileId[selectedProfileId];
     const { editingPostId } = state.stories;
-    const editingStoryGroup = editingPostId ? currentProfile.storyPosts[editingPostId] : null;
 
     return {
       uses24hTime: state.appSidebar.user.uses_24h_time,
@@ -18,11 +15,10 @@ export default connect(
       selectedProfile: state.profileSidebar.selectedProfile,
       translations: state.i18n.translations['story-group-composer'],
       isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
-      showDatePicker: state.storyGroupComposer.showDatePicker,
-      draft: state.storyGroupComposer.draft,
+      storyGroup: state.storyGroupComposer.storyGroup,
+      editMode: !!editingPostId,
       userData: state.appSidebar.user,
       editingPostId,
-      editingStoryGroup,
     };
   },
   dispatch => ({
@@ -39,12 +35,6 @@ export default connect(
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
-    },
-    onSetShowDatePicker: (showDatePicker) => {
-      dispatch(actions.setShowDatePicker(showDatePicker));
-    },
-    onComposerClick: (showDatePicker) => {
-      if (showDatePicker) dispatch(actions.setShowDatePicker(false));
     },
     onCreateNewStoryCard: ({ id, uploaderInstance, file }) => {
       dispatch(actions.createNewStoryCard({ id, uploaderInstance, file }));
@@ -184,6 +174,10 @@ export default connect(
         dragIndex,
         hoverIndex,
       }));
+    },
+    onDeleteStory: (storyCard) => {
+      dispatch(actions.deleteStory(storyCard));
+      // reorder stories
     },
   }),
 )(StoryGroupPopover);

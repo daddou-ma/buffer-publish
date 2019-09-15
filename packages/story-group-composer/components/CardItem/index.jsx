@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CarouselCard } from '@bufferapp/publish-shared-components/Carousel';
 import { Text, LoadingAnimation } from '@bufferapp/components';
 import UploadZone from '@bufferapp/publish-upload-zone';
@@ -9,9 +9,10 @@ import { UploadTypes } from '@bufferapp/publish-constants';
 import CircularUploadIndicator
   from '@bufferapp/publish-composer/composer/components/progress-indicators/CircularUploadIndicator';
 import PropTypes from 'prop-types';
+import CarouselCardHover from '../Carousel/CarouselCardHover';
 import styles from './styles.css';
 
-import { CoverImage, UploadingVideo } from './styles';
+import { CoverImage, UploadingVideo, StoryWrapper } from './styles';
 
 const CardItem = ({
   card,
@@ -31,6 +32,8 @@ const CardItem = ({
   createImageThumbnail,
   uploadImageComplete,
   videoProcessingStarted,
+  onAddNoteClick,
+  onDeleteStoryClick,
 }) => {
   const notifiers = {
     uploadStarted: props => createNewFile(props),
@@ -41,6 +44,7 @@ const CardItem = ({
     queueError: props => notifyError(props),
     monitorFileUploadProgress: monitorUpdateProgress(updateUploadProgress),
   };
+  const [isHovering, setIsHovering] = useState(false);
 
   return (
     <CarouselCard
@@ -49,6 +53,8 @@ const CardItem = ({
       cardHeight={cardHeight}
       cardWidth={cardWidth}
       largeCards={largeCards}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
       {card.empty && (
       <div>
@@ -90,7 +96,18 @@ const CardItem = ({
       />
       )}
 
-      {card.thumbnail_url && <CoverImage src={card.thumbnail_url} />}
+      {card.thumbnail_url && (
+        <StoryWrapper>
+          <CoverImage src={card.thumbnail_url} />
+          {isHovering && (
+            <CarouselCardHover
+              card={card}
+              onAddNoteClick={onAddNoteClick}
+              onDeleteStoryClick={onDeleteStoryClick}
+            />
+          )}
+        </StoryWrapper>
+      )}
 
       {!card.empty && card.processing === true && (
       <UploadingVideo>

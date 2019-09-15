@@ -8,13 +8,15 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_GROUP: 0,
   SET_SCHEDULE_LOADING: 0,
   SET_SHOW_DATE_PICKER: 0,
-  RESET_DRAFT_STATE: 0,
+  RESET_STORY_GROUP_STATE: 0,
   CREATE_NEW_STORY_CARD: 0,
   UPDATE_STORY_UPLOAD_PROGRESS: 0,
   UPDATE_STORY_VIDEO_PROCESSING_STARTED: 0,
   UPDATE_STORY_VIDEO_PROCESSING_COMPLETE: 0,
   UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: 0,
   CARD_DROPPED: 0,
+  DELETE_STORY: 0,
+  SET_STORY_GROUP: 0,
 });
 
 const newStory = () => clonedeep({
@@ -35,13 +37,11 @@ const newStory = () => clonedeep({
 });
 
 export const initialState = {
-  // temporarily adding as dummy data until create is working
-  draft: {
+  storyGroup: {
     scheduledAt: null,
     stories: [],
   },
   isScheduleLoading: false,
-  showDatePicker: false,
 };
 
 const updateStoryNote = ({ stories = [], order, note }) => (
@@ -73,6 +73,13 @@ const handleCardDropped = (stories, action) => {
 
   return sortedStories;
 };
+const deleteStory = ({ stories, story }) => (
+  stories.filter(item => item.order !== story.order)
+);
+
+const reorderStories = stories => (
+  stories.forEach((item, index) => { item.order = index + 1; })
+);
 
 export default (state, action) => {
   if (!state) {
@@ -82,21 +89,33 @@ export default (state, action) => {
     case actionTypes.SAVE_STORY_GROUP: {
       return {
         ...state,
-        draft: {
-          ...state.draft,
-          scheduledAt: action.scheduledAt,
+        storyGroup: {
+          ...state.storyGroup,
+          scheduledAt: action.scheduledAt
         },
       };
     }
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case actionTypes.RESET_DRAFT_STATE: {
+    case actionTypes.RESET_STORY_GROUP_STATE: {
       return clonedeep(initialState);
     }
     case actionTypes.UPDATE_STORY_GROUP: {
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
+          scheduledAt: action.scheduledAt,
+          stories: action.stories,
+          storyGroupId: action.storyGroupId,
+        },
+      };
+    }
+    case actionTypes.SET_STORY_GROUP: {
+      return {
+        ...state,
+        storyGroup: {
+          ...state.storyGroup,
+          stories: action.stories,
           scheduledAt: action.scheduledAt,
           storyGroupId: action.storyGroupId,
         },
@@ -104,10 +123,18 @@ export default (state, action) => {
     }
     case actionTypes.SAVE_STORY_NOTE: {
       const { order, note } = action;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: { ...state.draft, stories: updateStoryNote({ stories, order, note }) },
+        storyGroup: { ...state.storyGroup, stories: updateStoryNote({ stories, order, note }) },
+      };
+    }
+    case actionTypes.DELETE_STORY: {
+      const { story } = action;
+      const { stories } = state.storyGroup;
+      return {
+        ...state,
+        storyGroup: { ...state.storyGroup, stories: deleteStory({ stories, story }) },
       };
     }
     case actionTypes.SET_SCHEDULE_LOADING: {
@@ -116,23 +143,17 @@ export default (state, action) => {
         isScheduleLoading: action.isLoading,
       };
     }
-    case actionTypes.SET_SHOW_DATE_PICKER: {
-      return {
-        ...state,
-        showDatePicker: action.showDatePicker,
-      };
-    }
     case actionTypes.UPDATE_STORY_UPLOAD_PROGRESS: {
       const {
         id,
         progress,
         complete,
       } = action.args;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: stories.map((story) => {
             if (story.uploadTrackingId === id) {
               return {
@@ -154,11 +175,11 @@ export default (state, action) => {
         stillGifUrl,
         contentType,
       } = action.args;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: stories.map((story) => {
             if (story.uploadTrackingId === id) {
               return {
@@ -187,11 +208,11 @@ export default (state, action) => {
         thumbnail,
         uploadId,
       } = action.args;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: stories.map((story) => {
             if (story.upload_id === uploadId) {
               return {
@@ -218,11 +239,11 @@ export default (state, action) => {
         uploadId,
         contentType,
       } = action.args;
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: stories.map((story) => {
             if (story.uploadTrackingId === id) {
               return {
@@ -240,12 +261,12 @@ export default (state, action) => {
       };
     }
     case actionTypes.CREATE_NEW_STORY_CARD: {
-      const { stories } = state.draft;
+      const { stories } = state.storyGroup;
       const { id } = action.args;
       return {
         ...state,
-        draft: {
-          ...state.draft,
+        storyGroup: {
+          ...state.storyGroup,
           stories: [...stories, {
             ...newStory(),
             uploadTrackingId: id,
@@ -290,6 +311,12 @@ export const actions = {
     order,
     note,
   }),
+  setStoryGroup: ({ scheduledAt, stories, storyGroupId }) => ({
+    type: actionTypes.SET_STORY_GROUP,
+    scheduledAt,
+    stories,
+    storyGroupId,
+  }),
   updateStoryUploadProgress: ({
     id, uploaderInstance, progress, file, complete,
   }) => ({
@@ -306,12 +333,8 @@ export const actions = {
     type: actionTypes.SET_SCHEDULE_LOADING,
     isLoading,
   }),
-  setShowDatePicker: showDatePicker => ({
-    type: actionTypes.SET_SHOW_DATE_PICKER,
-    showDatePicker,
-  }),
-  resetDraftState: () => ({
-    type: actionTypes.RESET_DRAFT_STATE,
+  resetStoryGroupState: () => ({
+    type: actionTypes.RESET_STORY_GROUP_STATE,
   }),
   createNewStoryCard: ({ file, uploaderInstance, id }) => ({
     type: actionTypes.CREATE_NEW_STORY_CARD,
@@ -397,4 +420,9 @@ export const actions = {
     hoverIndex,
     cardLimit,
   }),
+  deleteStory: story => ({
+    type: actionTypes.DELETE_STORY,
+    story,
+  }),
+
 };
