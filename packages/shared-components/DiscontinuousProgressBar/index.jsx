@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { white } from '@bufferapp/ui/style/colors';
 
-const ProgressBarFilled = styled.div`
+export const ProgressBarFilled = styled.div`
   background: ${white};
   border-radius: 1px;
   width: 100%;
   height: 2px;
 `;
 
-const ProgressBar = styled(ProgressBarFilled)`
+export const ProgressBar = styled(ProgressBarFilled)`
   opacity: 0.4;
 `;
 
