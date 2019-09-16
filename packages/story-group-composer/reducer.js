@@ -55,7 +55,7 @@ const reorderStories = (stories, targetOrder, sourceOrder) => {
   if (sourceOrder < targetOrder) {
     remainingCards.forEach((story) => {
       if (story.order > sourceOrder && story.order <= targetOrder) {
-        const order = story.order - 1;
+        const order = parseInt(story.order, 10) - 1;
         story.order = order;
       }
       return story;
@@ -65,7 +65,7 @@ const reorderStories = (stories, targetOrder, sourceOrder) => {
   if (sourceOrder > targetOrder) {
     remainingCards.forEach((story) => {
       if (story.order < sourceOrder && story.order >= targetOrder) {
-        const order = story.order + 1;
+        const order = parseInt(story.order, 10) + 1;
         story.order = order;
       }
       return story;

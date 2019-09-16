@@ -1,6 +1,6 @@
 import React, { useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
-
+import styled from 'styled-components';
 import { DragSource, DropTarget } from 'react-dnd';
 import CardItem from '../CardItem';
 
@@ -23,6 +23,25 @@ const cardTarget = {
   },
 };
 
+const getStyle = (isDragging) => {
+  const transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+  const hideOutline = { outline: 'none' };
+
+  if (isDragging) {
+    return {
+      opacity: 0.5,
+      ...hideOutline,
+    };
+  }
+  return { transition, ...hideOutline };
+};
+
+const DragWrapper = styled.div`
+  :focus {
+    outline: none;
+  }
+`;
+
 const CardDragWrapper = React.forwardRef(
   ({
     connectDragSource,
@@ -30,20 +49,22 @@ const CardDragWrapper = React.forwardRef(
     ...cardProps
   }, ref) => {
     const elementRef = useRef(null);
+    const { isDragging } = cardProps;
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
     useImperativeHandle(ref, () => ({
       getNode: () => elementRef.current,
     }));
     return (
-      <div
+      <DragWrapper
         aria-dropeffect="move"
         ref={elementRef}
         draggable
         tabIndex={0}
+        style={getStyle(isDragging)}
       >
         <CardItem {...cardProps} />
-      </div>
+      </DragWrapper>
     );
   },
 );

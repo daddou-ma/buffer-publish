@@ -57,9 +57,8 @@ const CardItem = ({
       largeCards={largeCards}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      isTarget={isOver}
     >
-      {isOver && 'isOver'}
-      {isDragging && 'isDragging'}
       {card.empty && (
       <div>
         <UploadZone
