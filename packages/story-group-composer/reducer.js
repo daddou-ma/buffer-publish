@@ -48,37 +48,40 @@ const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
 
-const reorderStories = (stories, targetOrder, sourceOrder) => {
-  const movedCard = stories.find(item => item.order === sourceOrder);
+const isDraggingFromLeft = (remainingCards, sourceOrder, targetOrder) => {
+  remainingCards.forEach((story) => {
+    if (story.order > sourceOrder && story.order <= targetOrder) {
+      story.order = parseInt(story.order, 10) - 1;
+    }
+  });
+};
+
+const isDraggingFromRight = (remainingCards, sourceOrder, targetOrder) => {
+  remainingCards.forEach((story) => {
+    if (story.order < sourceOrder && story.order >= targetOrder) {
+      story.order = parseInt(story.order, 10) + 1;
+    }
+  });
+};
+
+const reorderStories = (stories, sourceOrder, targetOrder) => {
+  const draggedCard = stories.find(item => item.order === sourceOrder);
   const remainingCards = stories.filter(item => item.order !== sourceOrder);
 
   if (sourceOrder < targetOrder) {
-    remainingCards.forEach((story) => {
-      if (story.order > sourceOrder && story.order <= targetOrder) {
-        const order = parseInt(story.order, 10) - 1;
-        story.order = order;
-      }
-      return story;
-    });
+    isDraggingFromLeft(remainingCards, sourceOrder, targetOrder);
   }
-
   if (sourceOrder > targetOrder) {
-    remainingCards.forEach((story) => {
-      if (story.order < sourceOrder && story.order >= targetOrder) {
-        const order = parseInt(story.order, 10) + 1;
-        story.order = order;
-      }
-      return story;
-    });
+    isDraggingFromRight(remainingCards, sourceOrder, targetOrder);
   }
 
-  movedCard.order = targetOrder;
-  const reorderedCards = [
+  draggedCard.order = targetOrder;
+  const result = [
     ...remainingCards,
-    movedCard,
+    draggedCard,
   ];
 
-  return reorderedCards;
+  return result;
 };
 
 const deleteStory = ({ stories, story }) => (
@@ -296,7 +299,7 @@ export default (state, action) => {
           ...state,
           storyGroup: {
             ...state.storyGroup,
-            stories: reorderStories(state.storyGroup.stories, targetCard.order, sourceCard.order),
+            stories: reorderStories(state.storyGroup.stories, sourceCard.order, targetCard.order),
           },
         };
       }
