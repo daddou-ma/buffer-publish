@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { white } from '@bufferapp/ui/style/colors';
 
-const ProgressElements = styled.div`
+const ProgressBarFilled = styled.div`
   background: ${white};
   border-radius: 1px;
   width: 100%;
   height: 2px;
 `;
 
-const ProgressElementsLeft = styled(ProgressElements)`
+const ProgressBar = styled(ProgressBarFilled)`
   opacity: 0.4;
 `;
 
@@ -23,12 +23,14 @@ const ProgressContainer = styled.div`
   }
 `;
 
-const renderBars = (numberBars, type) => {
-  const ComponentToRender = type === 'left' ? (<ProgressElementsLeft />) : (<ProgressElements />);
-
+const renderBars = (numberOfBarsFilled, totalNumberOfBars) => {
   const bars = [];
-  for (let i = 0; i < numberBars; i += 1) {
-    bars.push(ComponentToRender);
+  for (let i = 0; i < totalNumberOfBars; i += 1) {
+    if (i < numberOfBarsFilled) {
+      bars.push(<ProgressBarFilled />);
+    } else {
+      bars.push(<ProgressBar />);
+    }
   }
 
   return (
@@ -39,22 +41,17 @@ const renderBars = (numberBars, type) => {
 };
 
 const DiscountinuousProgressBar = ({
-  totalElementsIndex,
-  currentElementIndex,
-}) => {
-  const ElementsLeftShow = totalElementsIndex - currentElementIndex;
-
-  return (
-    <ProgressContainer>
-      {renderBars(currentElementIndex)}
-      {renderBars(ElementsLeftShow, 'left')}
-    </ProgressContainer>
-  );
-};
+  numberOfBarsFilled,
+  totalNumberOfBars,
+}) => (
+  <ProgressContainer>
+    {renderBars(numberOfBarsFilled, totalNumberOfBars)}
+  </ProgressContainer>
+);
 
 DiscountinuousProgressBar.propTypes = {
-  totalElementsIndex: PropTypes.number.isRequired,
-  currentElementIndex: PropTypes.number.isRequired,
+  numberOfBarsFilled: PropTypes.number.isRequired,
+  totalNumberOfBars: PropTypes.number.isRequired,
 };
 
 export default DiscountinuousProgressBar;

@@ -56,8 +56,8 @@ const PreviewMedia = ({
     <ContentWrapper>
       <Header>
         <DiscontinuousProgressBar
-          totalElementsIndex={numberOfStories}
-          currentElementIndex={order}
+          totalNumberOfBars={numberOfStories}
+          numberOfBarsFilled={order}
         />
         <AvatarContainer>
           <Avatar
