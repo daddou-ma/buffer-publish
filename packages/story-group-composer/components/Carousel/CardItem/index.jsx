@@ -34,7 +34,6 @@ const CardItem = ({
   videoProcessingStarted,
   onAddNoteClick,
   onDeleteStoryClick,
-  isDragging,
   isOver,
 }) => {
   const notifiers = {
@@ -130,10 +129,84 @@ CardItem.propTypes = {
     asset_url: PropTypes.string,
     thumbnail_url: PropTypes.string,
   }),
+  notifyError: PropTypes.func,
+  removeNotifications: PropTypes.func,
+  createNewFile: PropTypes.func,
+  createImageThumbnail: PropTypes.func,
+  updateUploadProgress: PropTypes.func,
+  uploadImageComplete: PropTypes.func,
+  videoProcessingStarted: PropTypes.func,
+  videoProcessingComplete: PropTypes.func,
+  uploadDraftFile: PropTypes.func,
+  monitorUpdateProgress: PropTypes.func,
+  ...CarouselCardHover.propTypes,
 };
 
 CardItem.defaultProps = {
   card: {},
+  removeNotifications: () => console.log('removeAllNotifications', true),
+  notifyError: ({ message }) => console.log('queueError', { message }),
+  createNewFile: ({
+    id,
+    uploaderInstance,
+    file,
+  }) => console.log('uploadStarted - File Created', {
+    id,
+    uploaderInstance,
+    file,
+  }),
+  createImageThumbnail: ({
+    id, uploaderInstance, url, width, height, file,
+  }) => console.log('uploadedLinkThumbnail - Create Image Thumbnail', {
+    id, uploaderInstance, url, width, height, file,
+  }),
+  updateUploadProgress: ({
+    id, uploaderInstance, progress, file, complete,
+  }) => console.log('monitorFileUploadProgress - Update Upload Progress', {
+    id, uploaderInstance, progress, file, complete,
+  }),
+  uploadImageComplete: ({
+    id, uploaderInstance, url, location = null, width, height, file, stillGifUrl = null,
+  }) => console.log('uploadedDraftImage - Image Upload Created', {
+    id, uploaderInstance, url, location, width, height, file, stillGifUrl,
+  }),
+  videoProcessingStarted: ({
+    id, uploaderInstance, uploadId, fileExtension, file,
+  }) => console.log('uploadedDraftVideo - Video Processing Started', {
+    id, uploaderInstance, uploadId, fileExtension, file,
+  }),
+  videoProcessingComplete: ({
+    id,
+    uploadId,
+    name,
+    duration,
+    durationMs,
+    size,
+    width,
+    height,
+    url,
+    originalUrl,
+    thumbnail,
+    availableThumbnails,
+  }) => console.log('videoProcessed - Video Processing Complete', {
+    id,
+    uploadId,
+    name,
+    duration,
+    durationMs,
+    size,
+    width,
+    height,
+    url,
+    originalUrl,
+    thumbnail,
+    availableThumbnails,
+  }),
+  uploadDraftFile: ({ userData, videoProcessingComplete }) => console.log('uploadDraftFile', {
+    userData,
+    videoProcessingComplete,
+  }),
+  monitorUpdateProgress: () => console.log('monitorUploadProgress'),
 };
 
 export default CardItem;
