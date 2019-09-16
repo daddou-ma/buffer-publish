@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as previewActions } from '@bufferapp/publish-story-preview';
 import uuid from 'uuid/v4';
 import { actions } from './reducer';
 import StoryGroupPopover from './components/StoryGroupPopover';
@@ -16,6 +17,7 @@ export default connect(
       translations: state.i18n.translations['story-group-composer'],
       isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
       storyGroup: state.storyGroupComposer.storyGroup,
+      showStoryPreview: state.storyGroupComposer.showStoryPreview,
       editMode: !!editingPostId,
       userData: state.appSidebar.user,
       editingPostId,
@@ -35,6 +37,13 @@ export default connect(
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
+    },
+    onPreviewClick: (stories) => {
+      dispatch(previewActions.handlePreviewClick(stories));
+      dispatch(actions.handlePreviewClick());
+    },
+    onClosePreviewClick: () => {
+      dispatch(actions.handleClosePreviewClick());
     },
     onCreateNewStoryCard: ({ id, uploaderInstance, file }) => {
       dispatch(actions.createNewStoryCard({ id, uploaderInstance, file }));

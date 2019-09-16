@@ -45,6 +45,7 @@ const StoryGroupWrapper = ({
   onMonitorUpdateProgress,
   onUploadImageComplete,
   onUploadDraftFile,
+  onPreviewClick,
   userData,
   onUploadFinished,
   onDropCard,
@@ -100,6 +101,7 @@ const StoryGroupWrapper = ({
               editMode={editMode}
               onCreateStoryGroup={onCreateStoryGroup}
               onUpdateStoryGroup={onUpdateStoryGroup}
+              onPreviewClick={onPreviewClick}
             />
           </React.Fragment>
         )}
