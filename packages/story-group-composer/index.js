@@ -171,6 +171,9 @@ export default connect(
         contentType,
       }));
     },
+    onDropCard: (cardSource, cardTarget) => {
+      dispatch(actions.onDropCard(cardSource, cardTarget));
+    },
     onDeleteStory: (storyCard) => {
       dispatch(actions.deleteStory(storyCard));
       // reorder stories

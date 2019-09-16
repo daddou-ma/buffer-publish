@@ -35,6 +35,7 @@ const StoryGroupPopover = ({
   showStoryPreview,
   onClosePreviewClick,
   onPreviewClick,
+  onDropCard,
 }) => (
   <React.Fragment>
     {showStoryPreview && (
@@ -70,6 +71,7 @@ const StoryGroupPopover = ({
           onUploadImageComplete={onUploadImageComplete}
           onUploadDraftFile={onUploadDraftFile}
           onPreviewClick={onPreviewClick}
+          onDropCard={onDropCard}
           userData={userData}
           storyGroup={storyGroup}
           editMode={editMode}

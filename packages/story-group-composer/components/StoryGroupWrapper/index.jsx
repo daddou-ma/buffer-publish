@@ -48,6 +48,7 @@ const StoryGroupWrapper = ({
   onPreviewClick,
   userData,
   onUploadFinished,
+  onDropCard,
   storyGroup,
   editMode,
 }) => {
@@ -81,6 +82,7 @@ const StoryGroupWrapper = ({
                 userData={userData}
                 largeCards
                 editMode
+                onDropCard={onDropCard}
                 onAddNoteClick={(storyCard) => {
                   setStory(storyCard);
                   setViewMode(ADD_NOTE);

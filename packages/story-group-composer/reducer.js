@@ -14,6 +14,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_VIDEO_PROCESSING_STARTED: 0,
   UPDATE_STORY_VIDEO_PROCESSING_COMPLETE: 0,
   UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: 0,
+  CARD_DROPPED: 0,
   DELETE_STORY: 0,
   OPEN_PREVIEW: 0,
   CLOSE_PREVIEW: 0,
@@ -50,13 +51,43 @@ const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
 
+const reorderStories = (stories, sourceOrder, targetOrder) => {
+  const draggedCard = stories.find(item => item.order === sourceOrder);
+  const remainingCards = stories.filter(item => item.order !== sourceOrder);
+
+  if (sourceOrder < targetOrder) {
+    remainingCards.forEach((story) => {
+      if (story.order > sourceOrder && story.order <= targetOrder) {
+        story.order = parseInt(story.order, 10) - 1;
+      }
+    });
+  }
+  if (sourceOrder > targetOrder) {
+    remainingCards.forEach((story) => {
+      if (story.order < sourceOrder && story.order >= targetOrder) {
+        story.order = parseInt(story.order, 10) + 1;
+      }
+    });
+  }
+  draggedCard.order = targetOrder;
+
+  const result = [
+    ...remainingCards,
+    draggedCard,
+  ];
+
+  return result;
+};
+
 const deleteStory = ({ stories, story }) => (
   stories.filter(item => item.order !== story.order)
 );
 
+/*
 const reorderStories = stories => (
   stories.forEach((item, index) => { item.order = index + 1; })
 );
+*/
 
 export default (state, action) => {
   if (!state) {
@@ -68,7 +99,7 @@ export default (state, action) => {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          scheduledAt: action.scheduledAt
+          scheduledAt: action.scheduledAt,
         },
       };
     }
@@ -254,6 +285,21 @@ export default (state, action) => {
         },
       };
     }
+    case actionTypes.CARD_DROPPED: {
+      const { card: sourceCard } = action.cardSource;
+      const { card: targetCard } = action.cardTarget;
+
+      if (sourceCard.order !== targetCard.order) {
+        return {
+          ...state,
+          storyGroup: {
+            ...state.storyGroup,
+            stories: reorderStories(state.storyGroup.stories, sourceCard.order, targetCard.order),
+          },
+        };
+      }
+      return state;
+    }
     case actionTypes.OPEN_PREVIEW:
       return {
         ...state,
@@ -387,6 +433,11 @@ export const actions = {
       availableThumbnails,
       uploadId,
     },
+  }),
+  onDropCard: (cardSource, cardTarget) => ({
+    type: actionTypes.CARD_DROPPED,
+    cardSource,
+    cardTarget,
   }),
   deleteStory: story => ({
     type: actionTypes.DELETE_STORY,
