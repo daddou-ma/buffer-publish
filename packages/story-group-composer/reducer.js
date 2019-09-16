@@ -48,34 +48,30 @@ const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
 
-const isDraggingFromLeft = (remainingCards, sourceOrder, targetOrder) => {
-  remainingCards.forEach((story) => {
-    if (story.order > sourceOrder && story.order <= targetOrder) {
-      story.order = parseInt(story.order, 10) - 1;
-    }
-  });
-};
-
-const isDraggingFromRight = (remainingCards, sourceOrder, targetOrder) => {
-  remainingCards.forEach((story) => {
-    if (story.order < sourceOrder && story.order >= targetOrder) {
-      story.order = parseInt(story.order, 10) + 1;
-    }
-  });
+const setOrder = (draggedCard, remainingCards, sourceOrder, targetOrder) => {
+  if (sourceOrder < targetOrder) {
+    remainingCards.forEach((story) => {
+      if (story.order > sourceOrder && story.order <= targetOrder) {
+        story.order = parseInt(story.order, 10) - 1;
+      }
+    });
+  }
+  if (sourceOrder > targetOrder) {
+    remainingCards.forEach((story) => {
+      if (story.order < sourceOrder && story.order >= targetOrder) {
+        story.order = parseInt(story.order, 10) + 1;
+      }
+    });
+  }
+  draggedCard.order = targetOrder;
 };
 
 const reorderStories = (stories, sourceOrder, targetOrder) => {
   const draggedCard = stories.find(item => item.order === sourceOrder);
   const remainingCards = stories.filter(item => item.order !== sourceOrder);
 
-  if (sourceOrder < targetOrder) {
-    isDraggingFromLeft(remainingCards, sourceOrder, targetOrder);
-  }
-  if (sourceOrder > targetOrder) {
-    isDraggingFromRight(remainingCards, sourceOrder, targetOrder);
-  }
+  setOrder(draggedCard, remainingCards, sourceOrder, targetOrder);
 
-  draggedCard.order = targetOrder;
   const result = [
     ...remainingCards,
     draggedCard,
