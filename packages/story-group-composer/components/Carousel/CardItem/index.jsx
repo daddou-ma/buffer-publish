@@ -34,6 +34,8 @@ const CardItem = ({
   videoProcessingStarted,
   onAddNoteClick,
   onDeleteStoryClick,
+  isDragging,
+  isOver,
 }) => {
   const notifiers = {
     uploadStarted: props => createNewFile(props),
@@ -56,6 +58,8 @@ const CardItem = ({
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
+      {isOver && 'isOver'}
+      {isDragging && 'isDragging'}
       {card.empty && (
       <div>
         <UploadZone

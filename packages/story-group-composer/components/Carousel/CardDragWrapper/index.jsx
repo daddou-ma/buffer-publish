@@ -6,45 +6,20 @@ import CardItem from '../CardItem';
 
 const cardSource = {
   beginDrag(props) {
-    console.log('props', props);
     return {
-      id: props.card.order,
+      id: props.card.asset_url,
       index: props.index,
+      card: props.card,
+      onDropCard: props.onDropCard,
     };
   },
 };
 
 const cardTarget = {
-  drop(props) {
-    props.onDropCard({ commit: true });
-  },
-
-  hover(props, monitor, component) {
-    if (!component) {
-      return null;
-    }
-    // node = HTML Div element from imperative API
-    const node = component.getNode();
-    if (!node) {
-      return null;
-    }
-    const { index: dragIndex } = monitor.getItem();
-    const { index: hoverIndex, onDropCard, cardLimit } = props;
-    console.log('dragIndex', dragIndex, 'hoverIndex', hoverIndex);
-
-    // Don't replace profile with itself...
-    if (dragIndex === hoverIndex) {
-      return;
-    }
-
-    // other validations here...
-
-    // Drop!
-    onDropCard({ dragIndex, hoverIndex, cardLimit });
-
-    // We need to directly mutate the monitor state here
-    // to ensure the currently dragged item index is updated.
-    monitor.getItem().index = hoverIndex;
+  drop(props, monitor) {
+    const { onDropCard } = monitor.getItem();
+    /* cardSource, cardTarget */
+    onDropCard(monitor.getItem(), props);
   },
 };
 
@@ -79,18 +54,21 @@ CardDragWrapper.propTypes = {
   id: PropTypes.string.isRequired, // eslint-disable-line
 };
 
+// connectDragPreview: connect.dragPreview(),
 export default DropTarget(
   'card',
   cardTarget,
-  connect => ({
+  (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
   }),
 )(
   DragSource(
     'card',
     cardSource,
-    connect => ({
+    (connect, monitor) => ({
       connectDragSource: connect.dragSource(),
+      isDragging: monitor.isDragging(),
     }),
   )(CardDragWrapper),
 );

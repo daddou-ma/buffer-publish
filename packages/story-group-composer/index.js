@@ -162,18 +162,8 @@ export default connect(
         contentType,
       }));
     },
-    onDropCard: ({
-      commit,
-      cardLimit,
-      dragIndex,
-      hoverIndex,
-    }) => {
-      dispatch(actions.onDropCard({
-        commit,
-        cardLimit,
-        dragIndex,
-        hoverIndex,
-      }));
+    onDropCard: (cardSource, cardTarget) => {
+      dispatch(actions.onDropCard(cardSource, cardTarget));
     },
     onDeleteStory: (storyCard) => {
       dispatch(actions.deleteStory(storyCard));

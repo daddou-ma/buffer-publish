@@ -48,38 +48,48 @@ const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
 
-const moveCardInArray = (arr, from, to) => {
-  console.log('arr, from, to', arr, from, to);
-  const clone = [...arr];
+const reorderStories = (stories, targetOrder, sourceOrder) => {
+  const movedCard = stories.find(item => item.order === sourceOrder);
+  const remainingCards = stories.filter(item => item.order !== sourceOrder);
 
-  // Support passing `from` and `to` in non-sequential order (e.g., 4 and 1).
-  const fromIndex = from < to ? from : to;
-  const toIndex = to > from ? to : from;
+  if (sourceOrder < targetOrder) {
+    remainingCards.forEach((story) => {
+      if (story.order > sourceOrder && story.order <= targetOrder) {
+        const order = story.order - 1;
+        story.order = order;
+      }
+      return story;
+    });
+  }
 
-  // Generate the new array
-  Array.prototype.splice.call(clone, toIndex, 0,
-    Array.prototype.splice.call(clone, fromIndex, 1)[0],
-  );
-  return clone;
+  if (sourceOrder > targetOrder) {
+    remainingCards.forEach((story) => {
+      if (story.order < sourceOrder && story.order >= targetOrder) {
+        const order = story.order + 1;
+        story.order = order;
+      }
+      return story;
+    });
+  }
+
+  movedCard.order = targetOrder;
+  const reorderedCards = [
+    ...remainingCards,
+    movedCard,
+  ];
+
+  return reorderedCards;
 };
 
-const handleCardDropped = (stories, action) => {
-  const { cardLimit, hoverIndex, dragIndex } = action;
-  const reorderedCards = moveCardInArray(stories, dragIndex, hoverIndex);
-
-  // Final list of cards
-  const sortedStories = reorderedCards;
-  console.log('sorted stories');
-
-  return sortedStories;
-};
 const deleteStory = ({ stories, story }) => (
   stories.filter(item => item.order !== story.order)
 );
 
+/*
 const reorderStories = stories => (
   stories.forEach((item, index) => { item.order = index + 1; })
 );
+*/
 
 export default (state, action) => {
   if (!state) {
@@ -91,7 +101,7 @@ export default (state, action) => {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          scheduledAt: action.scheduledAt
+          scheduledAt: action.scheduledAt,
         },
       };
     }
@@ -278,13 +288,15 @@ export default (state, action) => {
       };
     }
     case actionTypes.CARD_DROPPED: {
-      console.log('DROPPPEEEDD', action);
-      if (!action.commit) {
+      const { card: sourceCard } = action.cardSource;
+      const { card: targetCard } = action.cardTarget;
+
+      if (sourceCard.order !== targetCard.order) {
         return {
           ...state,
-          draft: {
-            ...state.draft,
-            stories: handleCardDropped(state.draft.stories, action),
+          storyGroup: {
+            ...state.storyGroup,
+            stories: reorderStories(state.storyGroup.stories, targetCard.order, sourceCard.order),
           },
         };
       }
@@ -408,17 +420,10 @@ export const actions = {
       uploadId,
     },
   }),
-  onDropCard: ({
-    commit,
-    dragIndex,
-    hoverIndex,
-    cardLimit,
-  }) => ({
+  onDropCard: (cardSource, cardTarget) => ({
     type: actionTypes.CARD_DROPPED,
-    commit,
-    dragIndex,
-    hoverIndex,
-    cardLimit,
+    cardSource,
+    cardTarget,
   }),
   deleteStory: story => ({
     type: actionTypes.DELETE_STORY,
