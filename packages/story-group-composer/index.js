@@ -39,7 +39,6 @@ export default connect(
       dispatch(actions.handleSaveStoryNote({ note, order }));
     },
     onPreviewClick: (stories) => {
-      debugger;
       dispatch(previewActions.handlePreviewClick(stories));
       dispatch(actions.handlePreviewClick());
     },
