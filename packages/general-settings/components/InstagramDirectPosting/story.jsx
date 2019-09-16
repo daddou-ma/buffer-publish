@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import { action } from '@storybook/addon-actions';
 import InstagramDirectPosting from './index';
 

@@ -11,7 +11,7 @@
     "lodash.clamp": "^4.0.3"
   },
   "devDependencies": {
-    "eslint": "^5.3.0"
+    "eslint": "6.4.0"
   },
   "publishConfig": {
     "access": "public"

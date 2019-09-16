@@ -6,7 +6,7 @@ import {
 import createHistory from 'history/createHashHistory';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import { DragDropContext } from 'react-dnd';
 import TestBackend from 'react-dnd-test-backend';
 import ProfilePage from './index';

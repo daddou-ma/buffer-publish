@@ -3,7 +3,7 @@ import { action, storiesOf } from '@storybook/react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer as formReducer } from 'redux-form';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import DateTimePreferences from './index';
 
 const store = createStore(formReducer);

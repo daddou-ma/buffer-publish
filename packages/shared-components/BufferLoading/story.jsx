@@ -4,7 +4,7 @@ import {
   storiesOf,
 } from '@storybook/react';
 
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 
 import BufferLoading from './index';
 

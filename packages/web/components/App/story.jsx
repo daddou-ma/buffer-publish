@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import {
   ConnectedRouter as Router,
 } from 'connected-react-router';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import App from './index';
 
 storiesOf('App', module)

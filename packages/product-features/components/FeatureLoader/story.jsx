@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import { Text } from '@bufferapp/components';
 import PropTypes from 'prop-types';
 import FeatureLoader from './index';

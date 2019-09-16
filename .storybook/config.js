@@ -1,4 +1,6 @@
-import 'babel-polyfill';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import requireContext from 'require-context.macro';
 import { configure } from '@storybook/react';
 
 /**
@@ -12,7 +14,7 @@ import { configure } from '@storybook/react';
  *
  */
 function loadStories() {
-  const req = require.context(__PACKAGES__, true, /story\.jsx$/);
+  const req = requireContext(__PACKAGES__, true, /story\.jsx$/);
   req.keys().forEach(filename => req(filename));
 }
 configure(loadStories, module);

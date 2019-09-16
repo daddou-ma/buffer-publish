@@ -3,7 +3,7 @@ import {
   storiesOf,
   action,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import LinkPost from './index';
 import { Provider } from 'react-redux';
 

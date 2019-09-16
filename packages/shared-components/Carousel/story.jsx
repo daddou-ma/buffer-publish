@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import Carousel, { CarouselCard, getCardSizes } from './index';
 import carouselData from './carouselData';

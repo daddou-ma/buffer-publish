@@ -4,7 +4,7 @@ import {
   linkTo,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import { Text } from '@bufferapp/components';
 import Draft from './index';
 

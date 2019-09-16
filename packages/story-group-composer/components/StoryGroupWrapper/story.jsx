@@ -5,7 +5,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { selectedProfile } from '@bufferapp/publish-profile-sidebar/mockData/profiles';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import { Provider } from 'react-redux';
 import StoryGroupWrapper from './index';
 

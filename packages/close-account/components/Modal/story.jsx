@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { reducer as formReducer, SubmissionError } from 'redux-form';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from 'storybook-addon-a11y';
+import { checkA11y } from '@storybook/addon-a11y/register';
 import Modal from './index';
 
 const store = createStore(combineReducers({ form: formReducer }));

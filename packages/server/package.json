@@ -34,7 +34,7 @@
     "twitter-text": "3.0.0"
   },
   "devDependencies": {
-    "eslint": "^5.3.0"
+    "eslint": "6.4.0"
   },
   "publishConfig": {
     "access": "public"
