@@ -75,7 +75,6 @@ CardDragWrapper.propTypes = {
   id: PropTypes.string.isRequired, // eslint-disable-line
 };
 
-// connectDragPreview: connect.dragPreview(),
 export default DropTarget(
   'card',
   cardTarget,
