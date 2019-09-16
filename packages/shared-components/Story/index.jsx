@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CircleInstReminderIcon } from '@bufferapp/components';
-
-import { CoverImage, PlayIcon } from '@bufferapp/publish-story-group-composer/components/Carousel/CarouselCardWrapper/styles';
+import { CoverImage, PlayIcon } from '@bufferapp/publish-story-group-composer/components/Carousel/CardItem/styles';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import CardFooter from '../CardFooter';
