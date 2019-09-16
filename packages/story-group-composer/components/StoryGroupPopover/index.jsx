@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Popover } from '@bufferapp/components';
 import StoryGroupWrapper from '../StoryGroupWrapper';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import CarouselCardHover from '../Carousel/CarouselCardHover';
 import HeaderBar from '../HeaderBar';
 
 const StoryGroupPopover = ({
@@ -14,15 +15,22 @@ const StoryGroupPopover = ({
   selectedProfile,
   isScheduleLoading,
   saveNote,
-  editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
+  onDeleteStory,
   onComposerClick,
-  onSetShowDatePicker,
-  showDatePicker,
+  onCreateNewStoryCard,
+  onUpdateStoryUploadProgress,
+  onVideoUploadProcessingStarted,
+  onVideoUploadProcessingComplete,
+  onMonitorUpdateProgress,
+  onUploadImageComplete,
+  onUploadDraftFile,
   userData,
-  draft,
+  storyGroup,
+  editMode,
+  onUploadFinished,
 }) => (
   <Popover
     width="100%"
@@ -35,17 +43,24 @@ const StoryGroupPopover = ({
       weekStartsMonday={weekStartsMonday}
       selectedProfile={selectedProfile}
       saveNote={saveNote}
-      editingStoryGroup={editingStoryGroup}
       translations={translations}
       isScheduleLoading={isScheduleLoading}
       onCreateStoryGroup={onCreateStoryGroup}
       onUpdateStoryGroup={onUpdateStoryGroup}
       onDeleteStoryGroup={onDeleteStoryGroup}
+      onDeleteStory={onDeleteStory}
+      onCreateNewStoryCard={onCreateNewStoryCard}
+      onUploadFinished={onUploadFinished}
       onComposerClick={onComposerClick}
-      onSetShowDatePicker={onSetShowDatePicker}
-      showDatePicker={showDatePicker}
+      onUpdateStoryUploadProgress={onUpdateStoryUploadProgress}
+      onVideoUploadProcessingStarted={onVideoUploadProcessingStarted}
+      onVideoUploadProcessingComplete={onVideoUploadProcessingComplete}
+      onMonitorUpdateProgress={onMonitorUpdateProgress}
+      onUploadImageComplete={onUploadImageComplete}
+      onUploadDraftFile={onUploadDraftFile}
       userData={userData}
-      draft={draft}
+      storyGroup={storyGroup}
+      editMode={editMode}
     />
   </Popover>
 );
@@ -55,9 +70,13 @@ StoryGroupPopover.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
+};
+
+StoryGroupPopover.defaultProps = {
   ...DateTimeSlotPickerWrapper.propTypes,
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
+  ...CarouselCardHover.propTypes,
 };
 
 export default StoryGroupPopover;

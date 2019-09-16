@@ -1,7 +1,0 @@
-.uploadZone {}
-.uploadZoneActive {
-    box-sizing: border-box;
-    border-radius: 4px; /* import { borderRadius } from '@bufferapp/ui/style/borders'; */
-    border: 1px solid #6B81FF !important; /* import { blueLighter } from '@bufferapp/ui/style/colors'; */
-}
-.uploadZoneDisabled {}

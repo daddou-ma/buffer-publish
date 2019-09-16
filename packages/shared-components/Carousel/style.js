@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { grayLight, grayLighter } from '@bufferapp/ui/style/colors';
+import { grayLighter } from '@bufferapp/ui/style/colors';
 
 const cardMargin = 4;
 
@@ -12,22 +12,6 @@ export const ArrowWrapper = styled.div`
   transform: translateY(-50%);
 `;
 
-export const Arrow = styled.button`
-  cursor: pointer;
-  top: 50%;
-  transform: translateY(calc(-50% - 16px));
-  position: absolute;
-  left: ${props => (props.prev ? 0 : 'initial')};
-  right: ${props => (props.prev ? 'initial' : 0)};
-  background-color: ${grayLight};
-  border: 1px solid ${grayLight};
-  height: 32px;
-  width: 32px;
-  margin: 16px;
-  outline: none;
-  border-radius: 2px;
-`;
-
 export const CarouselContainer = styled.div`
   display: flex;
   padding-left: ${props => (props.largeCards ? '16px' : 0)};
@@ -38,15 +22,13 @@ export const CarouselContainer = styled.div`
 
 export const CarouselCard = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: ${props => (props.largeCards ? `${cardMargin}px` : `16px ${cardMargin}px`)};
   height: ${props => props.cardHeight ? props.cardHeight : 198}px;
   width: ${props => props.cardWidth ? props.cardWidth : 110}px;
   background-color: ${grayLighter};
-  background-size: cover;
-  background-position: center;
-  background-image: url(${props => props.card.thumbnail_url});
   position: relative;
 `;
 

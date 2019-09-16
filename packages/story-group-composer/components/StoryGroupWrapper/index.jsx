@@ -2,10 +2,10 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Carousel from '@bufferapp/publish-shared-components/Carousel';
-import AddNote from '../AddNote';
-import HeaderBar from '../HeaderBar';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
-import CarouselCards from '../CarouselCards';
+import HeaderBar from '../HeaderBar';
+import AddNote from '../AddNote';
+import CarouselCards from '../Carousel/CarouselCards';
 import AddStoryFooter from '../AddStoryFooter';
 
 const ADD_STORY = 'addStory';
@@ -33,19 +33,26 @@ const StoryGroupWrapper = ({
   selectedProfile,
   isScheduleLoading,
   saveNote,
-  editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
+  onDeleteStory,
   onComposerClick,
-  onSetShowDatePicker,
-  showDatePicker,
+  onCreateNewStoryCard,
+  onUpdateStoryUploadProgress,
+  onVideoUploadProcessingStarted,
+  onVideoUploadProcessingComplete,
+  onMonitorUpdateProgress,
+  onUploadImageComplete,
+  onUploadDraftFile,
   userData,
-  draft,
+  onUploadFinished,
+  storyGroup,
+  editMode,
 }) => {
-  // hooks: https://reactjs.org/docs/hooks-state.html
+  const cards = storyGroup ? storyGroup.stories : [];
   const [viewMode, setViewMode] = useState(ADD_STORY);
-  const cards = editingStoryGroup ? editingStoryGroup.storyDetails.stories : [];
+  const [story, setStory] = useState();
 
   return (
     <Fragment>
@@ -54,7 +61,6 @@ const StoryGroupWrapper = ({
           selectedProfile={selectedProfile}
         />
         {viewMode === ADD_STORY
-        /* TODO: delete this button once the create story group is in place */
         && (
           <React.Fragment>
             <Carousel
@@ -62,25 +68,36 @@ const StoryGroupWrapper = ({
               largeCards
             >
               <CarouselCards
+                createNewFile={onCreateNewStoryCard}
+                updateUploadProgress={onUpdateStoryUploadProgress}
+                videoProcessingStarted={onVideoUploadProcessingStarted}
+                videoProcessingComplete={onVideoUploadProcessingComplete}
+                monitorUpdateProgress={onMonitorUpdateProgress}
+                uploadImageComplete={onUploadImageComplete}
+                uploadDraftFile={onUploadDraftFile}
                 cards={cards}
                 totalCardsToShow={15}
                 userData={userData}
                 largeCards
                 editMode
+                onAddNoteClick={(storyCard) => {
+                  setStory(storyCard);
+                  setViewMode(ADD_NOTE);
+                }}
+                onDeleteStoryClick={storyCard => onDeleteStory(storyCard)}
+                onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, storyGroup)}
               />
             </Carousel>
             <AddStoryFooter
-              onClick={() => onComposerClick(showDatePicker)}
               timezone={timezone}
               weekStartsMonday={weekStartsMonday}
               uses24hTime={uses24hTime}
               isScheduleLoading={isScheduleLoading}
               translations={translations}
-              editingStoryGroup={editingStoryGroup}
+              storyGroup={storyGroup}
+              editMode={editMode}
               onCreateStoryGroup={onCreateStoryGroup}
               onUpdateStoryGroup={onUpdateStoryGroup}
-              onSetShowDatePicker={onSetShowDatePicker}
-              showDatePicker={showDatePicker}
             />
           </React.Fragment>
         )}
@@ -88,7 +105,7 @@ const StoryGroupWrapper = ({
           <AddNote
             translations={translations}
             onCancelClick={() => setViewMode(ADD_STORY)}
-            story={draft.stories[0]}
+            story={story}
             onSaveNoteClick={({ order, note }) => {
               saveNote({ order, note });
               setViewMode(ADD_STORY);
@@ -104,6 +121,10 @@ StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
+};
+
+StoryGroupWrapper.defaultProps = {
+  ...HeaderBar.PropTypes,
   selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
