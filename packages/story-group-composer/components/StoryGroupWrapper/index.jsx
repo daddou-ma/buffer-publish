@@ -6,6 +6,7 @@ import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
 import CarouselCards from '../Carousel/CarouselCards';
+import CardItem from '../Carousel/CardItem';
 import AddStoryFooter from '../AddStoryFooter';
 
 const ADD_STORY = 'addStory';
@@ -125,6 +126,7 @@ StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
+  ...CardItem.propTypes,
 };
 
 StoryGroupWrapper.defaultProps = {
@@ -133,6 +135,7 @@ StoryGroupWrapper.defaultProps = {
   ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
+  ...CardItem.defaultProps,
 };
 
 export default StoryGroupWrapper;
