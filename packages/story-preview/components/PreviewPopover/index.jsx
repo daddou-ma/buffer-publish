@@ -90,7 +90,7 @@ PreviewPopover.propTypes = {
     PropTypes.shape({
       note: PropTypes.string,
       type: PropTypes.oneOf(['image', 'video', 'gif']),
-      order: PropTypes.string,
+      order: PropTypes.number,
       asset_url: PropTypes.string,
       thumbnail_url: PropTypes.string,
     }),

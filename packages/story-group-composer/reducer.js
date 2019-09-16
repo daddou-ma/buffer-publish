@@ -15,6 +15,8 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   UPDATE_STORY_VIDEO_PROCESSING_COMPLETE: 0,
   UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: 0,
   DELETE_STORY: 0,
+  OPEN_PREVIEW: 0,
+  CLOSE_PREVIEW: 0,
   SET_STORY_GROUP: 0,
 });
 
@@ -41,6 +43,7 @@ export const initialState = {
     stories: [],
   },
   isScheduleLoading: false,
+  showStoryPreview: false,
 };
 
 const updateStoryNote = ({ stories = [], order, note }) => (
@@ -251,6 +254,16 @@ export default (state, action) => {
         },
       };
     }
+    case actionTypes.OPEN_PREVIEW:
+      return {
+        ...state,
+        showStoryPreview: true,
+      };
+    case actionTypes.CLOSE_PREVIEW:
+      return {
+        ...state,
+        showStoryPreview: false,
+      };
     default:
       return state;
   }
@@ -271,6 +284,12 @@ export const actions = {
     type: actionTypes.SAVE_STORY_NOTE,
     order,
     note,
+  }),
+  handlePreviewClick: () => ({
+    type: actionTypes.OPEN_PREVIEW,
+  }),
+  handleClosePreviewClick: () => ({
+    type: actionTypes.CLOSE_PREVIEW,
   }),
   setStoryGroup: ({ scheduledAt, stories, storyGroupId }) => ({
     type: actionTypes.SET_STORY_GROUP,
