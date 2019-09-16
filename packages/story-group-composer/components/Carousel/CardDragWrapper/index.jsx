@@ -61,6 +61,7 @@ const CardDragWrapper = React.forwardRef(
     useImperativeHandle(ref, () => ({
       getNode: () => elementRef.current,
     }));
+
     return (
       <DragWrapper
         aria-dropeffect="move"
