@@ -17,11 +17,13 @@ const SliderItem = ({
   storyToDisplay,
   onSaveNoteClick,
   user,
+  numberOfStories,
 }) => (
   <Fragment>
     <PreviewMedia
       story={storyToDisplay}
       user={user}
+      numberOfStories={numberOfStories}
     />
     <NoteWrapper
       onSaveNoteClick={onSaveNoteClick}
@@ -38,6 +40,7 @@ const PreviewPopover = ({
   stories,
   user,
 }) => {
+  const numberOfStories = stories.length;
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
   const storyToDisplay = stories[currentStoryIndex];
 
@@ -68,6 +71,7 @@ const PreviewPopover = ({
             user={user}
             onSaveNoteClick={onSaveNoteClick}
             storyToDisplay={storyToDisplay}
+            numberOfStories={numberOfStories}
           />
         </Slider>
       </SliderContainer>
