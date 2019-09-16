@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import uuid from 'uuid/v4';
 import styled from 'styled-components';
 import { white } from '@bufferapp/ui/style/colors';
 
@@ -27,9 +28,9 @@ const renderBars = (numberOfBarsFilled, totalNumberOfBars) => {
   const bars = [];
   for (let i = 0; i < totalNumberOfBars; i += 1) {
     if (i < numberOfBarsFilled) {
-      bars.push(<ProgressBarFilled />);
+      bars.push(<ProgressBarFilled key={uuid()} />);
     } else {
-      bars.push(<ProgressBar />);
+      bars.push(<ProgressBar key={uuid()} />);
     }
   }
 
