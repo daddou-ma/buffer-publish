@@ -48,7 +48,7 @@ const updateStoryNote = ({ stories = [], order, note }) => (
   stories.map(story => (story.order === order ? { ...story, note } : story))
 );
 
-const setOrder = (draggedCard, remainingCards, sourceOrder, targetOrder) => {
+const setOrder = (remainingCards, sourceOrder, targetOrder) => {
   if (sourceOrder < targetOrder) {
     remainingCards.forEach((story) => {
       if (story.order > sourceOrder && story.order <= targetOrder) {
@@ -63,14 +63,13 @@ const setOrder = (draggedCard, remainingCards, sourceOrder, targetOrder) => {
       }
     });
   }
-  draggedCard.order = targetOrder;
 };
 
 const reorderStories = (stories, sourceOrder, targetOrder) => {
   const draggedCard = stories.find(item => item.order === sourceOrder);
   const remainingCards = stories.filter(item => item.order !== sourceOrder);
 
-  setOrder(draggedCard, remainingCards, sourceOrder, targetOrder);
+  setOrder(remainingCards, sourceOrder, targetOrder);
 
   const result = [
     ...remainingCards,
