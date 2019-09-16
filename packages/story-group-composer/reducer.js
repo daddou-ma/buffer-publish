@@ -241,13 +241,13 @@ export default (state, action) => {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: [...stories, {
+          stories: stories.push({
             ...newStory(),
             uploadTrackingId: id,
             uploading: true,
             progress: 0,
             order: stories.length,
-          }],
+          }),
         },
       };
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import AppsManager from './index';
 
@@ -16,7 +16,7 @@ const connectedApps = [
 ];
 
 storiesOf('AppsManager', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('without connected apps', () => (
     <AppsManager
       onRequestCloseModal={action('onRequestCloseModal')}

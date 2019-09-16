@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import CloseComposerConfirmationModal from './index';
 
 const translations = {
@@ -10,7 +10,7 @@ const translations = {
 };
 
 storiesOf('CloseComposerConfirmationModal', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('should show modal', () => (
     <CloseComposerConfirmationModal
       translations={translations}

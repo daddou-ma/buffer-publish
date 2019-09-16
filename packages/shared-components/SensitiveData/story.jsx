@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import SensitiveData from './index';
 
 
 storiesOf('SensitiveData', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <SensitiveData>
       <span>Some Text</span>

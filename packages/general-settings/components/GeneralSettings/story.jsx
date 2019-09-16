@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import GeneralSettings from './index';
@@ -38,7 +38,7 @@ const UpgradeModalDecorator = storyFn => (
 );
 
 storiesOf('GeneralSettings', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
   .add('default', () => (
     <GeneralSettings

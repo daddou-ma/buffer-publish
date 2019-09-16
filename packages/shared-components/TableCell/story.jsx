@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import TableCell from './index';
 
 /* eslint-disable react/prop-types */
@@ -8,7 +8,7 @@ const HoverableFocusableThing = ({ hovered, focused }) => <div>{hovered} - {focu
 /* eslint-enable react/prop-types */
 
 storiesOf('TableCell', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <TableCell>
       <HoverableFocusableThing />

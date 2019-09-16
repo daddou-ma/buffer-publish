@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import HashtagGroupWrapper from './index';
 
 const hashtagGroups = [
@@ -17,7 +17,7 @@ const hashtagGroups = [
 ];
 
 storiesOf('HashtagGroup', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('create hashtag group', () => (
     <HashtagGroupWrapper
       viewMode={'createHashtag'}

@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { reducer as formReducer } from 'redux-form';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import CloseAccount from './index';
 
 const store = createStore(combineReducers({ form: formReducer }));
 
 storiesOf('CloseAccount', module)
-  .addDecorator(checkA11y)
-  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
+  .addDecorator(withA11y)
+  .addDecorator(getStory => `<Provider store={store}>${getStory()}</Provider>`)
   .add('default', () => (
     <CloseAccount
       onRequestCloseModal={action('onRequestCloseModal')}

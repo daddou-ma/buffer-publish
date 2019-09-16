@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import { Text } from '@bufferapp/components';
 import PropTypes from 'prop-types';
 import FeatureLoader from './index';
@@ -19,7 +19,7 @@ const defaultStyles = {
 const Fallback = <Text size={'large'} >Fallback</Text>;
 
 storiesOf('FeatureLoader', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('should show child on free plan', () => (
     <div style={defaultStyles}>
       <FeatureLoader

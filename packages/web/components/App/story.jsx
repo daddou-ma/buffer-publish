@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 import {
   ConnectedRouter as Router,
 } from 'connected-react-router';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import App from './index';
 
 storiesOf('App', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={createStore()}>
       <Router history={history}>

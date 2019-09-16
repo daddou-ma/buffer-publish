@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
@@ -61,7 +61,7 @@ class _TestContextContainer extends Component { // eslint-disable-line
 const TestContextContainer = DragDropContext(TestBackend)(_TestContextContainer);
 
 storiesOf('QueuedPosts', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
   .addDecorator(getStory => <TestContextContainer>{getStory()}</TestContextContainer>)
   .add('default', () => (

@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
-import ImagePost from './index';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import { Provider } from 'react-redux';
+import ImagePost from './index';
 
 const storeFake = state => ({
   default: () => {},
@@ -68,7 +68,7 @@ const tallImage = 'http://via.placeholder.com/400x900';
 const wideImage = 'http://via.placeholder.com/900x400';
 
 storiesOf('ImagePost', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
       {getStory()}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 
 import StoryGroups from './index';
 import storyGroups from './storiesData';
@@ -46,7 +46,7 @@ const UpgradeModalDecorator = storyFn => (
 );
 
 storiesOf('StoryGroups', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
   .add('should show stories storyPosts', () => (
     <StoryGroups

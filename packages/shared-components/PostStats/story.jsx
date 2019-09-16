@@ -2,7 +2,7 @@ import React from 'react';
 import {
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import PostStats from './index';
 
 const stats = {
@@ -28,7 +28,7 @@ const twitterStats = {
 };
 
 storiesOf('PostStats', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <PostStats
       statistics={stats}

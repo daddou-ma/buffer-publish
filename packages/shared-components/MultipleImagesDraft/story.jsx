@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import MultipleImagesDraft from './index';
 
 const links = [{
@@ -33,7 +33,7 @@ const imageUrls = [
 ];
 
 storiesOf('MultipleImagesDraft', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('queued multiple image post', () => (
     <MultipleImagesDraft
       hasPermission

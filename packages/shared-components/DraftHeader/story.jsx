@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-  action,
-  linkTo,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import DraftHeader from './index';
 
 const draftDetails = {
@@ -14,7 +12,7 @@ const draftDetails = {
 };
 
 storiesOf('DraftHeader', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <DraftHeader
       draftDetails={draftDetails}

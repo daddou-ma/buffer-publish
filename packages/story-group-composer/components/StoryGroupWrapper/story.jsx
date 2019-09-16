@@ -5,7 +5,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { selectedProfile } from '@bufferapp/publish-profile-sidebar/mockData/profiles';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import { Provider } from 'react-redux';
 import StoryGroupWrapper from './index';
 
@@ -23,7 +23,7 @@ function createMockStore () {
 }
 
 storiesOf('StoryGroup', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(getStory => (
     <Provider store={createMockStore()}>
       {getStory()}

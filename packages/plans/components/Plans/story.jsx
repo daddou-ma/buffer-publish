@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import Plans from './index';
 import translations from '../../../i18n/translations/en-us.json';
 
 storiesOf('Plans', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('should display plans page', () => (
     <Plans
       onChoosePlanClick={() => {}}

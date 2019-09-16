@@ -2,7 +2,7 @@ import React from 'react';
 import {
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import RenderPostMetaBar from './index';
 
 const subprofiles = [
@@ -19,7 +19,7 @@ const subprofiles = [
 ];
 
 storiesOf('RenderPostMetaBar', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('Post with Instagram', () => (
     <RenderPostMetaBar
       profileService={'instagram'}

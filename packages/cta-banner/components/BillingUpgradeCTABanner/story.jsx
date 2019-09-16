@@ -2,7 +2,7 @@ import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { withA11y } from '@storybook/addon-a11y';
 import { Provider } from 'react-redux';
 
 
@@ -80,7 +80,7 @@ const storeBusiness = createMockStore(true, false);
 const storePro = createMockStore(false, true);
 
 storiesOf('BillingUpgradeCTABanner', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner

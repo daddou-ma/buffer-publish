@@ -1,13 +1,14 @@
 import React from 'react';
 import {
-  action,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { action } from '@storybook/addon-actions';
+import { linkTo } from '@storybook/addon-links';
+import { withA11y } from '@storybook/addon-a11y';
 import PostFooterButtons from './index';
 
 storiesOf('PostFooterButtons', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <PostFooterButtons
       onCancelConfirmClick={action('cancel-confirm-click')}

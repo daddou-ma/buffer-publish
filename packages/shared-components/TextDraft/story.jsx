@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import TextDraft from './index';
 
 const links = [{
@@ -60,7 +60,7 @@ const scheduledAt = 123456789;
 
 
 storiesOf('TextDraft', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default. All approval view.', () => (
     <TextDraft
       hasPermission

@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  action,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y/register';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import ScheduleTableColumn from './index';
 
 const dayName = 'Monday';
@@ -33,7 +33,7 @@ const timesSingle = [
 const timesEmpty = [];
 
 storiesOf('ScheduleTableColumn', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <ScheduleTableColumn
       dayName={dayName}
