@@ -4,6 +4,7 @@ import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/A
 import { getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
 import { getCardsToShow, sortCards } from '../../../utils/Carousel';
 import CardDragWrapper from '../CardDragWrapper';
+import CardItem from '../CardItem';
 
 const CarouselCards = ({
   totalCardsToShow,
@@ -61,13 +62,7 @@ const CarouselCards = ({
 };
 
 CarouselCards.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.shape({
-    order: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    type: PropTypes.string,
-    note: PropTypes.string,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-  })),
+  cards: PropTypes.arrayOf(CardItem.propTypes.card),
   largeCards: PropTypes.bool.isRequired,
   onAddNoteClick: PropTypes.func.isRequired,
   onDeleteStoryClick: PropTypes.func.isRequired,
