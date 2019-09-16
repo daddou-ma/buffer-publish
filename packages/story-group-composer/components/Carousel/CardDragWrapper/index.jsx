@@ -5,6 +5,9 @@ import { DragSource, DropTarget } from 'react-dnd';
 import CardItem from '../CardItem';
 
 const cardSource = {
+  canDrag(props) {
+    return props.index < props.totalCards;
+  },
   beginDrag(props) {
     return {
       id: props.card.asset_url,
@@ -16,6 +19,9 @@ const cardSource = {
 };
 
 const cardTarget = {
+  canDrop(props) {
+    return props.index < props.totalCards;
+  },
   drop(props, monitor) {
     const { onDropCard } = monitor.getItem();
     /* cardSource, cardTarget */

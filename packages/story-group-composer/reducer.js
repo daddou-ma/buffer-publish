@@ -270,7 +270,9 @@ export default (state, action) => {
     }
     case actionTypes.CREATE_NEW_STORY_CARD: {
       const { stories } = state.storyGroup;
-      const { id } = action.args;
+      const { id, file } = action.args;
+      const isImage = file.type !== 'image/gif' && !file.type.includes('video');
+
       return {
         ...state,
         storyGroup: {
@@ -280,7 +282,7 @@ export default (state, action) => {
             uploadTrackingId: id,
             uploading: true,
             progress: 0,
-            order: stories.length,
+            order: isImage ? stories.length : stories.length + 1,
           }],
         },
       };
