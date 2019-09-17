@@ -85,7 +85,11 @@ const CardDragWrapper = React.forwardRef(
 CardDragWrapper.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired, // eslint-disable-line
+  id: PropTypes.string,
+};
+
+CardDragWrapper.defaultProps = {
+  id: null,
 };
 
 export default DropTarget(
