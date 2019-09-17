@@ -19,8 +19,8 @@ const cardSource = {
 };
 
 const cardTarget = {
-  canDrop(props) {
-    return props.index < props.totalCards;
+  canDrop(props, monitor) {
+    return props.index !== monitor.getItem().index;
   },
   drop(props, monitor) {
     const { onDropCard } = monitor.getItem();
