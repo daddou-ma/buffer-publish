@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {
   LinkifiedText,
   Text,
@@ -11,6 +12,15 @@ import DraftFooter from '../DraftFooter';
 import RetweetPanel from '../RetweetPanel';
 
 import RenderPostMetaBar from '../Post/RenderPostMetaBar';
+
+const RetweetCard = styled(Card)`
+  padding: 1rem;
+`;
+
+const RetweetCardContent = styled.span`
+  padding: 1rem;
+`;
+
 
 const postContentStyle = {
   padding: '1rem',
@@ -66,12 +76,14 @@ const renderContent = ({
     return (
       <div style={postContentStyle}>
         { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic }) : '' }
-        <Card>
-          <div style={retweetProfileWrapperStyle}>
-            <RetweetPanel {...retweetProfile} />
-          </div>
-          { children }
-        </Card>
+        <RetweetCard>
+          <RetweetCardContent>
+            <div style={retweetProfileWrapperStyle}>
+              <RetweetPanel {...retweetProfile} />
+            </div>
+            { children }
+          </RetweetCardContent>
+        </RetweetCard>
       </div>
     );
   }
