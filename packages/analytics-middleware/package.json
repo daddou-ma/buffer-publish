@@ -19,7 +19,6 @@
   },
   "author": "federicoweber@gmail.com",
   "devDependencies": {
-    "eslint": "6.4.0",
     "jest": "24.9.0"
   },
   "publishConfig": {

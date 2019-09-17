@@ -52,7 +52,6 @@
     "moment": "^2.22.2"
   },
   "devDependencies": {
-    "eslint": "6.4.0"
   },
   "publishConfig": {
     "access": "public"
