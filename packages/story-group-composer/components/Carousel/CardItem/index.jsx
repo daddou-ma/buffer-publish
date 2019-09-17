@@ -84,7 +84,7 @@ const CardItem = ({
           }}
           uploadType={UploadTypes.MEDIA}
           multiple
-          disabled={false}
+          disabled={isOver}
         />
       </div>
       )}

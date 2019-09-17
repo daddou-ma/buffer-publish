@@ -54,22 +54,24 @@ const updateStoryNote = ({ stories = [], order, note }) => (
 const reorderStories = (stories, sourceOrder, targetOrder) => {
   const draggedCard = stories.find(item => item.order === sourceOrder);
   const remainingCards = stories.filter(item => item.order !== sourceOrder);
+  const source = parseInt(sourceOrder, 10);
+  const target = parseInt(targetOrder, 10);
 
-  if (sourceOrder < targetOrder) {
+  if (source < target) {
     remainingCards.forEach((story) => {
-      if (story.order > sourceOrder && story.order <= targetOrder) {
+      if (story.order > source && story.order <= target) {
         story.order = parseInt(story.order, 10) - 1;
       }
     });
   }
-  if (sourceOrder > targetOrder) {
+  if (source > target) {
     remainingCards.forEach((story) => {
-      if (story.order < sourceOrder && story.order >= targetOrder) {
+      if (story.order < source && story.order >= target) {
         story.order = parseInt(story.order, 10) + 1;
       }
     });
   }
-  draggedCard.order = targetOrder;
+  draggedCard.order = target;
 
   const result = [
     ...remainingCards,
@@ -271,6 +273,7 @@ export default (state, action) => {
     case actionTypes.CREATE_NEW_STORY_CARD: {
       const { stories } = state.storyGroup;
       const { id } = action.args;
+
       return {
         ...state,
         storyGroup: {
@@ -280,7 +283,7 @@ export default (state, action) => {
             uploadTrackingId: id,
             uploading: true,
             progress: 0,
-            order: stories.length,
+            order: stories.length + 1,
           }],
         },
       };

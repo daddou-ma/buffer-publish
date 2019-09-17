@@ -56,6 +56,7 @@ const CarouselCards = ({
       editMode
       uploadFormatsConfig={uploadFormatsConfig}
       cardLimit={totalCardsToShow}
+      totalCards={cards.length}
       onDropCard={onDropCard}
     />
   ));

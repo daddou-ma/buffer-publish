@@ -5,6 +5,9 @@ import { DragSource, DropTarget } from 'react-dnd';
 import CardItem from '../CardItem';
 
 const cardSource = {
+  canDrag(props) {
+    return props.index < props.totalCards;
+  },
   beginDrag(props) {
     return {
       id: props.card.asset_url,
@@ -16,23 +19,33 @@ const cardSource = {
 };
 
 const cardTarget = {
+  canDrop(props, monitor) {
+    return props.index !== monitor.getItem().index;
+  },
   drop(props, monitor) {
     const { onDropCard } = monitor.getItem();
     /* cardSource, cardTarget */
     onDropCard(monitor.getItem(), props);
   },
+  hover(props, monitor, component) {
+    if (!component) {
+      return null;
+    }
+    // node = HTML Div element from imperative API
+    const node = component.getNode();
+    if (!node) {
+      return null;
+    }
+    const { onDropCard } = props;
+    /* cardSource, cardTarget */
+    onDropCard(monitor.getItem(), props);
+  },
 };
 
-const getStyle = (isDragging) => {
+const wrapperStyle = () => {
   const transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
   const hideOutline = { outline: 'none' };
 
-  if (isDragging) {
-    return {
-      opacity: 0.5,
-      ...hideOutline,
-    };
-  }
   return { transition, ...hideOutline };
 };
 
@@ -49,19 +62,19 @@ const CardDragWrapper = React.forwardRef(
     ...cardProps
   }, ref) => {
     const elementRef = useRef(null);
-    const { isDragging } = cardProps;
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
     useImperativeHandle(ref, () => ({
       getNode: () => elementRef.current,
     }));
+
     return (
       <DragWrapper
         aria-dropeffect="move"
         ref={elementRef}
         draggable
         tabIndex={0}
-        style={getStyle(isDragging)}
+        style={wrapperStyle()}
       >
         <CardItem {...cardProps} />
       </DragWrapper>
