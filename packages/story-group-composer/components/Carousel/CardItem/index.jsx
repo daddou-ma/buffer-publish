@@ -12,7 +12,12 @@ import PropTypes from 'prop-types';
 import CarouselCardHover from '../CarouselCardHover';
 import styles from './styles.css';
 
-import { CoverImage, UploadingVideo, StoryWrapper } from './styles';
+import {
+  CoverImage,
+  UploadingVideo,
+  StoryWrapper,
+  PlayIcon,
+} from './styles';
 
 const CardItem = ({
   card,
@@ -101,6 +106,7 @@ const CardItem = ({
       {card.thumbnail_url && (
         <StoryWrapper>
           <CoverImage src={card.thumbnail_url} />
+          {card.type === 'video' && <PlayIcon large={largeCards} />}
           {isHovering && (
             <CarouselCardHover
               card={card}
