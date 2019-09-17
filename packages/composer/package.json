@@ -87,7 +87,6 @@
     "event-pubsub": "4.3.0",
     "events": "1.1.1",
     "fetch-jsonp": "1.0.3",
-    "find-with-regex": "^1.0.2",
     "flux": "2.1.1",
     "hashtag-regex": "^2.0.0",
     "immutable": "3.7.6",
