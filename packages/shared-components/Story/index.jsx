@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CircleInstReminderIcon } from '@bufferapp/components';
-
+import { CoverImage, PlayIcon } from '@bufferapp/publish-story-group-composer/components/Carousel/CardItem/styles';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import CardFooter from '../CardFooter';
+import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
 
 const Story = ({
   storyDetails,
@@ -18,6 +19,8 @@ const Story = ({
   const deletingMessage = isDeleting && 'Deleting...';
   const submittingMessage = isWorking && 'Sharing...';
   const actionMessage = deletingMessage || submittingMessage || '';
+  const largeCards = false;
+  const { cardWidth, cardHeight } = getCardSizes(largeCards);
 
   return (
     <Card>
@@ -25,9 +28,20 @@ const Story = ({
         creatorName={storyDetails.creatorName}
         avatarUrl={storyDetails.avatarUrl}
         createdAt={storyDetails.createdAt}
-        onPreviewClick={onPreviewClick}
+        onPreviewClick={() => onPreviewClick(storyDetails.stories)}
       />
-      <p>INSERT CAROUSEL</p>
+      <Carousel editMode={false} totalCardsToShow={(storyDetails.stories && storyDetails.stories.length) || 0}>
+        {storyDetails.stories && storyDetails.stories.map((card) => (
+          <CarouselCard
+            cardHeight={cardHeight}
+            cardWidth={cardWidth}
+            largeCards={largeCards}
+          >
+            {card.thumbnail_url && <CoverImage src={card.thumbnail_url} />}
+            {card.type === 'video' && <PlayIcon />}
+          </CarouselCard>
+        ))}
+      </Carousel>
       <CardFooter
         icon={<CircleInstReminderIcon color="instagram" />}
         message={storyDetails.storyAction}
@@ -48,6 +62,12 @@ Story.propTypes = {
     avatarUrl: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     storyAction: PropTypes.string.isRequired,
+    stories: PropTypes.arrayOf(PropTypes.shape({
+      order: PropTypes.string,
+      note: PropTypes.string,
+      asset_url: PropTypes.string,
+      thumbnail_url: PropTypes.string,
+    })),
   }),
   isDeleting: PropTypes.bool,
   isWorking: PropTypes.bool,

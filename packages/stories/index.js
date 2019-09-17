@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
+import { actions as previewActions } from '@bufferapp/publish-story-preview';
+import { actions as storyGroupComposerActions } from '@bufferapp/publish-story-group-composer';
 
 import { actions } from './reducer';
 import StoryGroups from './components/StoryGroups';
@@ -18,7 +20,7 @@ export default connect(
         page: currentProfile.page,
         storyGroups: formatPostLists({
           isManager: profileData.isManager,
-          posts: currentProfile.posts,
+          posts: currentProfile.storyPosts,
           scheduleSlotsEnabled: true,
           isSingleSlot: true,
           profileTimezone: profileData.timezone,
@@ -26,26 +28,54 @@ export default connect(
           weeksToShow: currentProfile.page + 1,
           hasTwentyFourHourTimeFormat: state.appSidebar.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
+          orderBy: 'scheduledAt',
         }),
         showStoriesComposer: state.stories.showStoriesComposer,
+        showStoryPreview: state.stories.showStoryPreview,
         editMode: state.stories.editMode,
         isBusinessAccount: profileData.business,
+        userData: state.appSidebar.user,
       };
     }
     return {};
   },
   (dispatch, ownProps) => ({
-    onEmptySlotClick: (post) => {
+    onEmptySlotClick: (storyGroup) => {
       dispatch(actions.handleEmptySlotClick({
-        emptySlotData: post,
+        emptySlotData: storyGroup,
         profileId: ownProps.profileId,
       }));
     },
     onComposerPlaceholderClick: () => {
       dispatch(actions.handleComposerPlaceholderClick());
     },
+    onEditClick: (storyGroup) => {
+      dispatch(actions.handleEditStoryGroupClick({
+        storyGroup: storyGroup.post,
+        profileId: ownProps.profileId,
+      }));
+    },
     handleCloseStoriesComposer: () => {
       dispatch(actions.handleCloseStoriesComposer());
+    },
+    onPreviewClick: (stories) => {
+      dispatch(previewActions.handlePreviewClick(stories));
+      dispatch(actions.handlePreviewClick());
+    },
+    onClosePreviewClick: () => {
+      dispatch(actions.handleClosePreviewClick());
+    },
+    onDeleteConfirmClick: (storyGroup) => {
+      dispatch(actions.handleDeleteStoryGroup({
+        storyGroup,
+        profileId: ownProps.profileId,
+      }));
+    },
+    onShareNowClick: (storyGroup) => {
+      dispatch(actions.handleShareNowClick({
+        storyGroup: storyGroup.post,
+        profileId: ownProps.profileId,
+      }));
     },
   }),
 )(StoryGroups);

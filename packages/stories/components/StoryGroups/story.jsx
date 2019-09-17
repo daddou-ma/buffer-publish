@@ -48,7 +48,7 @@ const UpgradeModalDecorator = storyFn => (
 storiesOf('StoryGroups', module)
   .addDecorator(checkA11y)
   .addDecorator(UpgradeModalDecorator)
-  .add('should show stories posts', () => (
+  .add('should show stories storyPosts', () => (
     <StoryGroups
       total={2}
       loading={false}

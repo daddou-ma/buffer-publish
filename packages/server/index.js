@@ -125,10 +125,13 @@ const showModalScript = (key, val) => {
   `;
 };
 
-const stripeScript = `<script src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-    Stripe.setPublishableKey('${stripePublishableKey}');
-</script>
+const stripeScript = `
+  <script src="https://js.stripe.com/v3/"></script>
+  <script type="text/javascript">
+    const stripe = Stripe('${stripePublishableKey}');
+    window._stripe = stripe;
+    window.STRIPE_PUBLISHABLE_KEY = '${stripePublishableKey}';
+  </script>
 `;
 
 const appcuesScript = '<script src="//fast.appcues.com/49463.js"></script>';
@@ -215,16 +218,7 @@ app.use('*', (req, res, next) => {
   next();
 });
 
-app.use(
-  setRequestSessionMiddleware({
-    production: isProduction,
-    sessionKeys: ['publish', 'global'],
-  }),
-);
-
 app.use(bodyParser.json());
-
-app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
 
 app.use(
   bufferMetricsMiddleware({
@@ -233,6 +227,17 @@ app.use(
     trackVisits: true,
   }),
 );
+
+app.use(
+  setRequestSessionMiddleware({
+    production: isProduction,
+    sessionKeys: ['publish', 'global'],
+  }),
+);
+
+
+app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
+
 
 /**
  * The composer expects this URL to exist and accept

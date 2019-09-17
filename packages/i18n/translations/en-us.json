@@ -301,5 +301,15 @@
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly"
     }
+  },
+  "story-group-composer": {
+    "noteSubText": "When it comes time to post, you'll be able to copy and paste your note into Instagram.",
+    "notePlaceholder": "Add your caption or a note to self",
+    "saveNoteButton": "Save Note",
+    "cancelNoteButton": "Cancel",
+    "noteImageAlt": "Instagram story media",
+    "scheduleLoadingButton": "Scheduling Story...",
+    "scheduleButton": "Schedule Story",
+    "previewButton": "Preview"
   }
 }

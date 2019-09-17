@@ -14,7 +14,7 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle storyGroups_FETCH_START action type', () => {
+  it('should handle getStoryGroups_FETCH_START action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
@@ -22,14 +22,14 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          posts: {},
+          storyPosts: {},
           total: 0,
         },
       },
     };
     const action = {
       profileId,
-      type: 'storyGroups_FETCH_START',
+      type: 'getStoryGroups_FETCH_START',
       args: {
         isFetchingMore: false,
       },
@@ -39,8 +39,8 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle storyGroups_FETCH_SUCCESS action type', () => {
-    const post = { post: { id: 'foo', text: 'i love buffer' } };
+  it('should handle getStoryGroups_FETCH_SUCCESS action type', () => {
+    const storyPost = { storyPost: { id: 'foo', text: 'i love buffer' } };
     const stateAfter = {
       byProfileId: {
         [profileId]: {
@@ -48,16 +48,16 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 2,
-          posts: [post],
+          storyPosts: [storyPost],
           total: 1,
         },
       },
     };
     const action = {
       profileId,
-      type: 'storyGroups_FETCH_SUCCESS',
+      type: 'getStoryGroups_FETCH_SUCCESS',
       result: {
-        updates: [post],
+        updates: [storyPost],
         total: 1,
       },
       args: {
@@ -69,7 +69,7 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle storyGroups_FETCH_FAIL action type', () => {
+  it('should handle getStoryGroups_FETCH_FAIL action type', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
@@ -77,14 +77,14 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          posts: {},
+          storyPosts: {},
           total: 0,
         },
       },
     };
     const action = {
       profileId,
-      type: 'storyGroups_FETCH_FAIL',
+      type: 'getStoryGroups_FETCH_FAIL',
     };
     deepFreeze(action);
     expect(reducer(undefined, action))

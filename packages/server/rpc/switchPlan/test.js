@@ -16,7 +16,7 @@ const session = {
 const switchPlan = source =>
   RPCEndpoint.fn({
     cycle: 'year',
-    token: 'stripe token',
+    paymentMethodId: 'mock payment method id',
     source,
   }, { session });
 
@@ -27,11 +27,11 @@ describe('rpc/switchPlan', () => {
     expect(rp.mock.calls[0][0].form.access_token).toBe(accessToken);
   });
 
-  it('sends over the selected cycle and current stripe token', () => {
+  it('sends over the selected cycle and current payment method id', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
     switchPlan();
     expect(rp.mock.calls[0][0].form.cycle).toBe('year');
-    expect(rp.mock.calls[0][0].form.stripeToken).toBe('stripe token');
+    expect(rp.mock.calls[0][0].form.payment_method_id).toBe('mock payment method id');
   });
 
   it('it sends the correct cta for specific upgrade paths', () => {
