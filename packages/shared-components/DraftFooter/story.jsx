@@ -96,6 +96,7 @@ storiesOf('DraftFooter', module)
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRequestApprovalClick={linkTo('DraftFooter', 'drafts view: isWorking')}
+      onRescheduleClick={action('reschedule-click')}
       draftDetails={draftDetailsPastDue}
       scheduledAt={scheduledAt}
       view={draftsView}
@@ -109,6 +110,7 @@ storiesOf('DraftFooter', module)
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRequestApprovalClick={linkTo('DraftFooter', 'drafts view: isWorking')}
+      onRescheduleClick={action('reschedule-click')}
       draftDetails={draftDetails}
       view={draftsView}
     />
@@ -122,6 +124,7 @@ storiesOf('DraftFooter', module)
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRequestApprovalClick={linkTo('DraftFooter', 'drafts view: isWorking')}
+      onRescheduleClick={action('reschedule-click')}
       draftDetails={draftDetails}
       view={draftsView}
     />
@@ -223,32 +226,6 @@ storiesOf('DraftFooter', module)
       onRequestApprovalClick={linkTo('DraftFooter', 'drafts view: isWorking')}
       draftDetails={draftDetails}
       view={approvalView}
-    />
-  ))
-  .add('isConfirmingDelete', () => (
-    <DraftFooter
-      hasPermission
-      onDeleteClick={linkTo('DraftFooter', 'isConfirmingDelete')}
-      onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'default')}
-      onEditClick={action('edit-click')}
-      draftDetails={draftDetails}
-      isConfirmingDelete
-      view={draftsView}
-    />
-  ))
-  .add('managerIsConfirmingDelete', () => (
-    <DraftFooter
-      hasPermission
-      manager
-      onApproveClick={action('approve-click')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
-      onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
-      onEditClick={action('edit-click')}
-      draftDetails={draftDetails}
-      isConfirmingDelete
-      view={draftsView}
     />
   ))
   .add('isDeleting', () => (
