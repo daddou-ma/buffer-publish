@@ -235,6 +235,7 @@ storiesOf('Draft', module)
   .add('past due no permission', () => (
     <Draft
       hasPermission={false}
+      manager={false}
       draftDetails={pastDueDraftDetails}
       isPastDue
       onApproveClick={linkTo('Draft', 'isWorking')}
@@ -250,6 +251,7 @@ storiesOf('Draft', module)
   .add('no permission', () => (
     <Draft
       hasPermission={false}
+      manager={false}
       draftDetails={draftDetails}
       onApproveClick={linkTo('Draft', 'isWorking')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}

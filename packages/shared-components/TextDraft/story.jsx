@@ -145,6 +145,7 @@ storiesOf('TextDraft', module)
   .add('past due no permission', () => (
     <TextDraft
       hasPermission={false}
+      manager={false}
       links={links}
       draftDetails={draftDetailsPastDue}
       isPastDue
@@ -160,6 +161,7 @@ storiesOf('TextDraft', module)
   .add('no permission', () => (
     <TextDraft
       hasPermission={false}
+      manager={false}
       links={links}
       draftDetails={draftDetails}
       text={text}
