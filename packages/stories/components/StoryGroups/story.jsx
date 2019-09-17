@@ -59,11 +59,9 @@ storiesOf('StoryGroups', module)
       showStoriesComposer={action('showStoriesComposer')}
       onEmptySlotClick={action('onEmptySlotClick')}
       onEditClick={action('onEditClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onShareNowClick={action('onShareNowClick')}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
       onCalendarClick={action('onCalendarClick')}
     />
   ));

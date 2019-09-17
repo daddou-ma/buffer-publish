@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import {
   action,
   linkTo,
@@ -7,7 +8,6 @@ import {
 import { checkA11y } from 'storybook-addon-a11y';
 import { Text } from '@bufferapp/components';
 import Post from './index';
-import { Provider } from 'react-redux';
 
 const storeFake = state => ({
   default: () => {},
@@ -20,7 +20,7 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
 const postDetails = {
@@ -80,7 +80,7 @@ const subprofiles = [
 ];
 
 const children = (
-  <Text size={'mini'} color={'black'}>
+  <Text size="mini" color="black">
     {'Rubber baby buggy bumpers.'}
   </Text>
 );
@@ -95,8 +95,6 @@ storiesOf('Post', module)
   .add('queued post', () => (
     <Post
       postDetails={postDetails}
-      onCancelConfirmClick={linkTo('Post', 'hovered')}
-      onDeleteClick={linkTo('Post', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Post', 'isDeleting')}
       onShareNowClick={linkTo('Post', 'isWorking')}
       onEditClick={action('edit-click')}
@@ -108,8 +106,6 @@ storiesOf('Post', module)
   .add('sent', () => (
     <Post
       postDetails={sentPostDetails}
-      onCancelConfirmClick={linkTo('Post', 'hovered')}
-      onDeleteClick={linkTo('Post', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Post', 'isDeleting')}
       onEditClick={action('edit-click')}
       onShareNowClick={linkTo('Post', 'isWorking')}
@@ -123,8 +119,6 @@ storiesOf('Post', module)
     <Post
       onMouseEnter={action('on-mouse-enter')}
       onMouseLeave={action('on-mouse-leave')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={linkTo('Post', 'isWorking')}
@@ -137,8 +131,6 @@ storiesOf('Post', module)
   .add('isConfirmingDelete', () => (
     <Post
       isConfirmingDelete
-      onCancelConfirmClick={linkTo('Post', 'hovered')}
-      onDeleteClick={linkTo('Post', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Post', 'isDeleting')}
       onEditClick={action('edit-click')}
       onShareNowClick={linkTo('Post', 'isWorking')}
@@ -151,8 +143,6 @@ storiesOf('Post', module)
   .add('isDeleting', () => (
     <Post
       isDeleting
-      onCancelConfirmClick={linkTo('Post', 'hovered')}
-      onDeleteClick={linkTo('Post', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Post', 'isDeleting')}
       onEditClick={action('edit-click')}
       onShareNowClick={linkTo('Post', 'isWorking')}
@@ -165,8 +155,6 @@ storiesOf('Post', module)
   .add('isWorking', () => (
     <Post
       isWorking
-      onCancelConfirmClick={linkTo('Post', 'hovered')}
-      onDeleteClick={linkTo('Post', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Post', 'isDeleting')}
       onEditClick={action('edit-click')}
       onShareNowClick={linkTo('Post', 'isWorking')}
@@ -181,8 +169,6 @@ storiesOf('Post', module)
       postDetails={isARetweetPostDetails}
       onMouseEnter={action('mouse-enter')}
       onMouseLeave={action('mous-leave')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={linkTo('Post', 'isWorking')}
@@ -198,8 +184,6 @@ storiesOf('Post', module)
       retweetCommentLinks={links}
       onMouseEnter={action('mouse-enter')}
       onMouseLeave={action('mous-leave')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={linkTo('Post', 'isWorking')}
@@ -213,8 +197,6 @@ storiesOf('Post', module)
   .add('Instragram post with Location', () => (
     <Post
       postDetails={postDetails}
-      onCancelConfirmClick={linkTo('Post', 'hovered')}
-      onDeleteClick={linkTo('Post', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Post', 'isDeleting')}
       onShareNowClick={linkTo('Post', 'isWorking')}
       onEditClick={action('edit-click')}
@@ -228,8 +210,6 @@ storiesOf('Post', module)
   .add('Instragram post without Location', () => (
     <Post
       postDetails={postDetails}
-      onCancelConfirmClick={linkTo('Post', 'hovered')}
-      onDeleteClick={linkTo('Post', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Post', 'isDeleting')}
       onShareNowClick={linkTo('Post', 'isWorking')}
       onEditClick={action('edit-click')}
@@ -242,15 +222,13 @@ storiesOf('Post', module)
   .add('Pinterest post with board and source URL', () => (
     <Post
       postDetails={postDetails}
-      onCancelConfirmClick={linkTo('Post', 'hovered')}
-      onDeleteClick={linkTo('Post', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Post', 'isDeleting')}
       onShareNowClick={linkTo('Post', 'isWorking')}
       onEditClick={action('edit-click')}
       profileService="pinterest"
       subprofiles={subprofiles}
-      subprofileID={'5bbca83e94803d000e7dca35'}
-      sourceUrl={'http://google.com'}
+      subprofileID="5bbca83e94803d000e7dca35"
+      sourceUrl="http://google.com"
       isSent={false}
     >
       {children}
@@ -259,14 +237,12 @@ storiesOf('Post', module)
   .add('Pinterest post with board only', () => (
     <Post
       postDetails={postDetails}
-      onCancelConfirmClick={linkTo('Post', 'hovered')}
-      onDeleteClick={linkTo('Post', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Post', 'isDeleting')}
       onShareNowClick={linkTo('Post', 'isWorking')}
       onEditClick={action('edit-click')}
       profileService="pinterest"
       subprofiles={subprofiles}
-      subprofileID={'5bbca83e94803d000e7dca34'}
+      subprofileID="5bbca83e94803d000e7dca34"
       isSent={false}
     >
       {children}

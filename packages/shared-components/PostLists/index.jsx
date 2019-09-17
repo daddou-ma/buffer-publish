@@ -16,8 +16,6 @@ const postListStyle = {
 const renderPostList = ({
   index,
   postList,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -35,14 +33,12 @@ const renderPostList = ({
   isPastReminder,
   isBusinessAccount,
   hasFirstCommentFlip,
-}) =>
+}) => (
   <div style={postListStyle}>
     <PostList
       key={`postList-${index}`}
       listHeader={postList.listHeader}
       posts={postList.posts}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
       onDeleteConfirmClick={onDeleteConfirmClick}
       onEditClick={onEditClick}
       onShareNowClick={onShareNowClick}
@@ -61,14 +57,13 @@ const renderPostList = ({
       isBusinessAccount={isBusinessAccount}
       hasFirstCommentFlip={hasFirstCommentFlip}
     />
-  </div>;
+  </div>
+);
 
 /* eslint-enable react/prop-types */
 
 const PostLists = ({
   postLists,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -86,14 +81,12 @@ const PostLists = ({
   isPastReminder,
   isBusinessAccount,
   hasFirstCommentFlip,
-}) =>
+}) => (
   <List
     items={postLists.map((postList, index) =>
       renderPostList({
         index,
         postList,
-        onCancelConfirmClick,
-        onDeleteClick,
         onDeleteConfirmClick,
         onEditClick,
         onShareNowClick,
@@ -114,7 +107,8 @@ const PostLists = ({
       }),
     )}
     fillContainer
-  />;
+  />
+);
 
 PostLists.propTypes = {
   postLists: PropTypes.arrayOf(
@@ -127,8 +121,6 @@ PostLists.propTypes = {
       ),
     }),
   ).isRequired,
-  onCancelConfirmClick: PropTypes.func,
-  onDeleteClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
@@ -149,7 +141,6 @@ PostLists.propTypes = {
 };
 
 PostLists.defaultProps = {
-  postLists: [],
 };
 
 export default PostLists;

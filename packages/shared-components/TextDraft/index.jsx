@@ -26,8 +26,6 @@ const TextDraft = ({
   links,
   manager,
   onApproveClick,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onMoveToDraftsClick,
@@ -46,20 +44,22 @@ const TextDraft = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic ?
-          <Text
-            size="mini"
-          >
-            {text}
-          </Text> :
-          <LinkifiedText
-            links={links}
-            size="mini"
-            newTab
-            unstyled
-          >
-            {text}
-          </LinkifiedText>
+        {basic
+          ? (
+            <Text size="mini">
+              {text}
+            </Text>
+          )
+          : (
+            <LinkifiedText
+              links={links}
+              size="mini"
+              newTab
+              unstyled
+            >
+              {text}
+            </LinkifiedText>
+          )
         }
       </span>
     </div>
@@ -77,8 +77,6 @@ const TextDraft = ({
       links={links}
       manager={manager}
       onApproveClick={onApproveClick}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
       onDeleteConfirmClick={onDeleteConfirmClick}
       onEditClick={onEditClick}
       onMoveToDraftsClick={onMoveToDraftsClick}

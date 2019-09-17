@@ -56,8 +56,6 @@ describe('Queue', () => {
         <Queue
           profileId="abc"
           postLists={[]}
-          onCancelConfirmClick={jest.fn()}
-          onDeleteClick={jest.fn()}
           onDeleteConfirmClick={jest.fn()}
           onEditClick={jest.fn()}
           onRequeueClick={jest.fn()}
