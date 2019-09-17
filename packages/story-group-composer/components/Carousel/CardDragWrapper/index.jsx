@@ -27,18 +27,25 @@ const cardTarget = {
     /* cardSource, cardTarget */
     onDropCard(monitor.getItem(), props);
   },
+  hover(props, monitor, component) {
+    if (!component) {
+      return null;
+    }
+    // node = HTML Div element from imperative API
+    const node = component.getNode();
+    if (!node) {
+      return null;
+    }
+    const { onDropCard } = props;
+    /* cardSource, cardTarget */
+    onDropCard(monitor.getItem(), props);
+  },
 };
 
-const wrapperStyle = (isDragging) => {
+const wrapperStyle = () => {
   const transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
   const hideOutline = { outline: 'none' };
 
-  if (isDragging) {
-    return {
-      opacity: 0.5,
-      ...hideOutline,
-    };
-  }
   return { transition, ...hideOutline };
 };
 
@@ -55,7 +62,6 @@ const CardDragWrapper = React.forwardRef(
     ...cardProps
   }, ref) => {
     const elementRef = useRef(null);
-    const { isDragging } = cardProps;
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
     useImperativeHandle(ref, () => ({
@@ -68,7 +74,7 @@ const CardDragWrapper = React.forwardRef(
         ref={elementRef}
         draggable
         tabIndex={0}
-        style={wrapperStyle(isDragging)}
+        style={wrapperStyle()}
       >
         <CardItem {...cardProps} />
       </DragWrapper>
