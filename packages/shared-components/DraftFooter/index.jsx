@@ -24,7 +24,7 @@ const renderIcon = ({ isPastDue, scheduledAt }) => {
 };
 /* eslint-enable react/prop-types */
 
-const renderRequeueAction = ({
+const renderDraftsAction = ({
   hasRescheduleAction,
   hasRequestApprovalAction,
   manager,
@@ -44,7 +44,7 @@ const renderRequeueAction = ({
   return null;
 };
 
-const renderRequeueLabel = ({
+const renderDraftsActionLabel = ({
   hasRescheduleAction,
   hasRequestApprovalAction,
   manager,
@@ -102,9 +102,8 @@ const DraftFooter = ({
       messageColor={isPastDue ? red : ''}
       onDeleteClick={hasPermission ? onDeleteConfirmClick : null}
       onEditClick={!hasPermission || (!manager && approvalView) ? null : onEditClick}
-      onSubmitClick={(approvalView && hasPermission) ? onMoveToDraftsClick : null}
-      submitLabel="Move to Drafts"
-      onRequeueClick={renderRequeueAction({
+      onMoveToDraftsClick={(approvalView && hasPermission) ? onMoveToDraftsClick : null}
+      onSubmitDraftsClick={renderDraftsAction({
         hasRescheduleAction,
         hasRequestApprovalAction,
         manager,
@@ -112,7 +111,7 @@ const DraftFooter = ({
         onRequestApprovalClick,
         onRescheduleClick,
       })}
-      requeueLabel={renderRequeueLabel({
+      submitDraftsLabel={renderDraftsActionLabel({
         hasRescheduleAction,
         hasRequestApprovalAction,
         manager,
