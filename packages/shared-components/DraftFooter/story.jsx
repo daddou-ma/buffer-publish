@@ -37,8 +37,6 @@ storiesOf('DraftFooter', module)
       hasPermission
       manager
       onApproveClick={linkTo('DraftFooter', 'drafts view: managerIsApproving')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetailsScheduled}
@@ -51,8 +49,6 @@ storiesOf('DraftFooter', module)
       hasPermission
       manager
       onApproveClick={linkTo('DraftFooter', 'drafts view: managerIsApproving')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
@@ -65,8 +61,6 @@ storiesOf('DraftFooter', module)
       isPastDue
       manager
       onApproveClick={linkTo('DraftFooter', 'managerIsApproving')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
       onRescheduleClick={action('reschedule-click')}
@@ -78,8 +72,6 @@ storiesOf('DraftFooter', module)
   .add('drafts view: not manager', () => (
     <DraftFooter
       hasPermission
-      onCancelConfirmClick={linkTo('DraftFooter', 'default')}
-      onDeleteClick={linkTo('DraftFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRequestApprovalClick={linkTo('DraftFooter', 'drafts view: isWorking')}
@@ -91,8 +83,6 @@ storiesOf('DraftFooter', module)
     <DraftFooter
       hasPermission
       isPastDue
-      onCancelConfirmClick={linkTo('DraftFooter', 'default')}
-      onDeleteClick={linkTo('DraftFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRequestApprovalClick={linkTo('DraftFooter', 'drafts view: isWorking')}
@@ -105,8 +95,6 @@ storiesOf('DraftFooter', module)
   .add('drafts view: not manager, no permission', () => (
     <DraftFooter
       hasPermission={false}
-      onCancelConfirmClick={linkTo('DraftFooter', 'default')}
-      onDeleteClick={linkTo('DraftFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRequestApprovalClick={linkTo('DraftFooter', 'drafts view: isWorking')}
@@ -119,8 +107,6 @@ storiesOf('DraftFooter', module)
     <DraftFooter
       hasPermission={false}
       isPastDue
-      onCancelConfirmClick={linkTo('DraftFooter', 'default')}
-      onDeleteClick={linkTo('DraftFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRequestApprovalClick={linkTo('DraftFooter', 'drafts view: isWorking')}
@@ -134,8 +120,6 @@ storiesOf('DraftFooter', module)
       hasPermission
       manager
       onApproveClick={linkTo('DraftFooter', 'approval view: managerIsApproving')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
       onMoveToDraftsClick={linkTo('DraftFooter', 'approval view: manager moving to drafts')}
@@ -149,8 +133,6 @@ storiesOf('DraftFooter', module)
       isPastDue
       manager
       onApproveClick={linkTo('DraftFooter', 'managerIsApproving')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
       onRescheduleClick={action('reschedule-click')}
@@ -162,8 +144,6 @@ storiesOf('DraftFooter', module)
   .add('approval view: not a manager', () => (
     <DraftFooter
       hasPermission
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
       onMoveToDraftsClick={linkTo('DraftFooter', 'approval view: not manager moving to drafts')}
@@ -175,8 +155,6 @@ storiesOf('DraftFooter', module)
     <DraftFooter
       hasPermission
       isPastDue
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
       onRescheduleClick={action('reschedule-click')}
@@ -188,8 +166,6 @@ storiesOf('DraftFooter', module)
   .add('approval view: not manager, no permission', () => (
     <DraftFooter
       hasPermission={false}
-      onCancelConfirmClick={linkTo('DraftFooter', 'default')}
-      onDeleteClick={linkTo('DraftFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRequestApprovalClick={linkTo('DraftFooter', 'drafts view: isWorking')}
@@ -204,8 +180,6 @@ storiesOf('DraftFooter', module)
       isWorking
       manager
       onApproveClick={linkTo('DraftFooter', 'approval view: managerIsApproving')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
       onMoveToDraftsClick={action('move-to-drafts-click')}
@@ -218,8 +192,6 @@ storiesOf('DraftFooter', module)
       hasPermission
       isMoving
       isWorking
-      onCancelConfirmClick={linkTo('DraftFooter', 'default')}
-      onDeleteClick={linkTo('DraftFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       onMoveToDraftsClick={action('move-to-drafts-click')}
@@ -231,9 +203,7 @@ storiesOf('DraftFooter', module)
   .add('isDeleting', () => (
     <DraftFooter
       hasPermission
-      onDeleteClick={linkTo('DraftFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'default')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       isDeleting
@@ -245,9 +215,7 @@ storiesOf('DraftFooter', module)
       hasPermission
       manager
       onApproveClick={action('approve-click')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       isWorking
@@ -259,9 +227,7 @@ storiesOf('DraftFooter', module)
       hasPermission
       manager
       onApproveClick={action('approve-click')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       isWorking
@@ -272,9 +238,7 @@ storiesOf('DraftFooter', module)
     <DraftFooter
       hasPermission
       onApproveClick={action('approve-click')}
-      onDeleteClick={linkTo('DraftFooter', 'managerIsConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
-      onCancelConfirmClick={linkTo('DraftFooter', 'manager')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       isMoving
@@ -284,8 +248,6 @@ storiesOf('DraftFooter', module)
   .add('no permission', () => (
     <DraftFooter
       hasPermission={false}
-      onCancelConfirmClick={linkTo('DraftFooter', 'default')}
-      onDeleteClick={linkTo('DraftFooter', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('DraftFooter', 'isDeleting')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}

@@ -20,6 +20,7 @@ const renderIcon = (hasError, isSent, isCustomScheduled, isInstagramReminder, is
 
 const PostFooter = ({
   isDeleting,
+  isConfirmingDelete,
   isWorking,
   onDeleteConfirmClick,
   onRequeueClick,
@@ -41,7 +42,7 @@ const PostFooter = ({
   const { isCustomScheduled, isInstagramReminder } = postDetails;
   const comment = { commentEnabled, commentText };
   const hideButtons = !isManager || isSent || isPastReminder;
-  const deletingMessage = isDeleting && 'Deleting...';
+  const deletingMessage = (isDeleting || isConfirmingDelete) && 'Deleting...';
   const submittingMessage = isWorking && 'Sharing...';
   const actionMessage = deletingMessage || submittingMessage || '';
 
@@ -70,6 +71,7 @@ const PostFooter = ({
 
 PostFooter.propTypes = {
   isDeleting: PropTypes.bool,
+  isConfirmingDelete: PropTypes.bool,
   isWorking: PropTypes.bool,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,

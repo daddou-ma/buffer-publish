@@ -63,6 +63,7 @@ const renderDraftsActionLabel = ({
 const DraftFooter = ({
   hasPermission,
   isDeleting,
+  isConfirmingDelete,
   isMoving,
   isWorking,
   isPastDue,
@@ -87,7 +88,7 @@ const DraftFooter = ({
   const hasRequestApprovalAction = draftsView && hasPermission;
 
   // Performing Actions
-  const deletingMessage = isDeleting && 'Deleting...';
+  const deletingMessage = (isDeleting || isConfirmingDelete) && 'Deleting...';
   const movingMessage = isMoving && approvalView && 'Moving...';
   const requestingMessage = isMoving && !approvalView && 'Requesting...';
   const approvingMessage = isWorking && manager && approvalView && 'Approving...';
@@ -127,6 +128,7 @@ const DraftFooter = ({
 DraftFooter.propTypes = {
   hasPermission: PropTypes.bool.isRequired,
   isDeleting: PropTypes.bool,
+  isConfirmingDelete: PropTypes.bool,
   isMoving: PropTypes.bool,
   isWorking: PropTypes.bool,
   isPastDue: PropTypes.bool,

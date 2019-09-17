@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import {
   storiesOf,
   action,
@@ -9,7 +10,6 @@ import {
   postLists,
   postListsNoHeaders,
 } from './postData';
-import { Provider } from 'react-redux';
 
 const storeFake = state => ({
   default: () => {},
@@ -22,7 +22,7 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
 storiesOf('QueueItems', module)
@@ -35,9 +35,7 @@ storiesOf('QueueItems', module)
   .add('default queue', () => (
     <QueueItems
       items={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
       onRequeueClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -53,9 +51,7 @@ storiesOf('QueueItems', module)
   .add('no headers type drafts', () => (
     <QueueItems
       items={postListsNoHeaders}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
       onRequeueClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -66,6 +62,6 @@ storiesOf('QueueItems', module)
       onDropPost={action('onDropPost')}
       onSwapPosts={action('onSwapPosts')}
       draggable={false}
-      type={'drafts'}
+      type="drafts"
     />
   ));

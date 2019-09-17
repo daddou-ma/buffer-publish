@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {
   LinkifiedText,
   Text,
@@ -11,6 +12,15 @@ import DraftFooter from '../DraftFooter';
 import RetweetPanel from '../RetweetPanel';
 
 import RenderPostMetaBar from '../Post/RenderPostMetaBar';
+
+const RetweetCard = styled(Card)`
+  padding: 1rem;
+`;
+
+const RetweetCardContent = styled.span`
+  padding: 1rem;
+`;
+
 
 const postContentStyle = {
   padding: '1rem',
@@ -66,12 +76,14 @@ const renderContent = ({
     return (
       <div style={postContentStyle}>
         { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic }) : '' }
-        <Card>
-          <div style={retweetProfileWrapperStyle}>
-            <RetweetPanel {...retweetProfile} />
-          </div>
-          { children }
-        </Card>
+        <RetweetCard>
+          <RetweetCardContent>
+            <div style={retweetProfileWrapperStyle}>
+              <RetweetPanel {...retweetProfile} />
+            </div>
+            { children }
+          </RetweetCardContent>
+        </RetweetCard>
       </div>
     );
   }
@@ -94,8 +106,6 @@ const Draft = ({
   isPastDue,
   manager,
   onApproveClick,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onMoveToDraftsClick,
@@ -139,8 +149,6 @@ const Draft = ({
       manager={manager}
       scheduledAt={scheduledAt}
       onApproveClick={onApproveClick}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
       onDeleteConfirmClick={onDeleteConfirmClick}
       onEditClick={onEditClick}
       onMoveToDraftsClick={onMoveToDraftsClick}
@@ -153,21 +161,27 @@ const Draft = ({
   </Card>
 );
 
-Draft.commonPropTypes = {
+Draft.propTypes = {
   hasPermission: PropTypes.bool.isRequired,
   isConfirmingDelete: PropTypes.bool,
   isDeleting: PropTypes.bool,
   isWorking: PropTypes.bool,
-  onCancelConfirmClick: PropTypes.func,
-  onRequeueClick: PropTypes.func,
-  onDeleteClick: PropTypes.func,
+  isMoving: PropTypes.bool,
+  isPastDue: PropTypes.bool,
+  manager: PropTypes.bool,
   onDeleteConfirmClick: PropTypes.func,
+  onApproveClick: PropTypes.func,
+  onMoveToDraftsClick: PropTypes.func,
+  onRequestApprovalClick: PropTypes.func,
+  onRescheduleClick: PropTypes.func,
   onEditClick: PropTypes.func,
-  onShareNowClick: PropTypes.func,
   draftDetails: PropTypes.shape({
     isRetweet: PropTypes.bool,
     postAction: PropTypes.string,
     error: PropTypes.string,
+    creatorName: PropTypes.string,
+    avatarUrl: PropTypes.string,
+    createdAt: PropTypes.string,
   }).isRequired,
   retweetProfile: PropTypes.shape({
     avatarUrl: PropTypes.string,
@@ -184,10 +198,6 @@ Draft.commonPropTypes = {
     }),
   ),
   hasFirstCommentFlip: PropTypes.bool,
-};
-
-Draft.propTypes = {
-  ...Draft.commonPropTypes,
   view: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
@@ -196,6 +206,9 @@ Draft.defaultProps = {
   isConfirmingDelete: false,
   isDeleting: false,
   isWorking: false,
+  isMoving: false,
+  isPastDue: false,
+  manager: true,
   hasFirstCommentFlip: false,
 };
 

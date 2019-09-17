@@ -74,20 +74,8 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
-    onDeleteClick: (post) => {
-      dispatch(actions.handleDeleteClick({
-        post: post.post,
-        profileId: ownProps.profileId,
-      }));
-    },
     onDeleteConfirmClick: (post) => {
       dispatch(actions.handleDeleteConfirmClick({
-        post: post.post,
-        profileId: ownProps.profileId,
-      }));
-    },
-    onCancelConfirmClick: (post) => {
-      dispatch(actions.handleCancelConfirmClick({
         post: post.post,
         profileId: ownProps.profileId,
       }));

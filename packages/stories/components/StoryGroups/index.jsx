@@ -54,14 +54,12 @@ const StoryGroups = ({
   showStoriesComposer,
   onEmptySlotClick,
   onEditClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onComposerPlaceholderClick,
   hasFirstCommentFlip,
   isBusinessAccount,
   onShareNowClick,
   onCalendarClick,
-  onCancelConfirmClick,
   onPreviewClick,
   onClosePreviewClick,
   showStoryPreview,
@@ -113,9 +111,7 @@ const StoryGroups = ({
         </ReminderTextWrapper>
         <QueueItems
           items={storyGroups}
-          onCancelConfirmClick={onCancelConfirmClick}
           onCalendarClick={onCalendarClick}
-          onDeleteClick={onDeleteClick}
           onDeleteConfirmClick={onDeleteConfirmClick}
           onEditClick={onEditClick}
           onEmptySlotClick={onEmptySlotClick}
@@ -145,11 +141,9 @@ StoryGroups.propTypes = {
   isBusinessAccount: PropTypes.bool,
   onEmptySlotClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
-  onDeleteClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onCalendarClick: PropTypes.func,
-  onCancelConfirmClick: PropTypes.func,
   onComposerPlaceholderClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
   onClosePreviewClick: PropTypes.func,
@@ -170,11 +164,9 @@ StoryGroups.defaultProps = {
   storyGroups: [],
   showStoryPreview: false,
   onEditClick: () => {},
-  onDeleteClick: () => {},
   onDeleteConfirmClick: () => {},
   onShareNowClick: () => {},
   onCalendarClick: () => {},
-  onCancelConfirmClick: () => {},
   onComposerPlaceholderClick: () => {},
   onPreviewClick: () => {},
   onClosePreviewClick: () => {},
