@@ -28,8 +28,12 @@ export const CarouselCard = styled.div`
   margin: ${props => (props.largeCards ? `${cardMargin}px` : `16px ${cardMargin}px`)};
   height: ${props => props.cardHeight ? props.cardHeight : 198}px;
   width: ${props => props.cardWidth ? props.cardWidth : 110}px;
+  box-shadow: ${props => props.isTarget ? '0px 0px 4px 4px #2c4bff' : 'none'};
   background-color: ${grayLighter};
   position: relative;
+  :focus {
+    outline: none;
+  }
 `;
 
 export const SliderCarousel = styled.div`

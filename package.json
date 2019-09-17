@@ -42,10 +42,10 @@
     "@bufferapp/components": "3.2.1",
     "@bufferapp/ui": "5.2.4",
     "@storybook/addon-a11y": "5.1.11",
-    "@storybook/addon-storyshots": "5.1.11",
-    "@storybook/react": "5.1.11",
     "@storybook/addon-actions": "5.1.11",
     "@storybook/addon-links": "5.1.11",
+    "@storybook/addon-storyshots": "5.1.11",
+    "@storybook/react": "5.1.11",
     "axe-core": "2.2.0",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
@@ -135,7 +135,8 @@
   "dependencies": {
     "@bufferapp/react-images-loaded": "^1.1.0-fork.0",
     "@hot-loader/react-dom": "^16.8.6",
-    "hashtag-regex": "^2.0.0"
+    "hashtag-regex": "^2.0.0",
+    "pusher-js-mock": "^0.2.0"
   },
   "workspaces": [
     "packages/*"

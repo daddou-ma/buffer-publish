@@ -13,7 +13,7 @@ module.exports = {
   setupFiles: [
     '<rootDir>/jest-raf-shim.js',
   ],
-  setupFilesAfterEnv: ['./setupEnzyme.js'],
+  setupFilesAfterEnv: ['<rootDir>/setupEnzyme.js'],
   globals: {
     __PACKAGES__: '../packages',
   },

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CarouselCardWrapper from '../CarouselCardWrapper';
+import { FileUploadFormatsConfigs } from '@bufferapp/publish-composer/composer/AppConstants';
+import { getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
 import { getCardsToShow, sortCards } from '../../../utils/Carousel';
+import CardDragWrapper from '../CardDragWrapper';
+import CardItem from '../CardItem';
 
 const CarouselCards = ({
   totalCardsToShow,
@@ -21,15 +24,21 @@ const CarouselCards = ({
   videoProcessingStarted,
   onAddNoteClick,
   onDeleteStoryClick,
+  onDropCard,
 }) => {
   const cardsToRender = editMode ? getCardsToShow({ cards, totalCardsToShow }) : sortCards(cards);
+  const { cardWidth, cardHeight } = getCardSizes(largeCards);
   const maxAttachableMediaCount = totalCardsToShow - cards.length;
+  const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
 
-  return cardsToRender.map(card => (
-    <CarouselCardWrapper
+  return cardsToRender.map((card, index) => (
+    <CardDragWrapper
+      index={index}
       key={card.uploadTrackingId}
       card={card}
       largeCards={largeCards}
+      cardHeight={cardHeight}
+      cardWidth={cardWidth}
       onAddNoteClick={onAddNoteClick}
       onDeleteStoryClick={onDeleteStoryClick}
       maxAttachableMediaCount={maxAttachableMediaCount}
@@ -45,18 +54,15 @@ const CarouselCards = ({
       uploadImageComplete={uploadImageComplete}
       videoProcessingStarted={videoProcessingStarted}
       editMode
+      uploadFormatsConfig={uploadFormatsConfig}
+      cardLimit={totalCardsToShow}
+      onDropCard={onDropCard}
     />
   ));
 };
 
 CarouselCards.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.shape({
-    order: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    type: PropTypes.string,
-    note: PropTypes.string,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-  })),
+  cards: PropTypes.arrayOf(CardItem.propTypes.card),
   largeCards: PropTypes.bool.isRequired,
   onAddNoteClick: PropTypes.func.isRequired,
   onDeleteStoryClick: PropTypes.func.isRequired,

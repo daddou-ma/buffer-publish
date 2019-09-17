@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { DiscontinuousProgressBar } from '@bufferapp/publish-shared-components';
 import { Avatar, Text } from '@bufferapp/ui';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
+
+const IMAGE_WIDTH = 306;
+const IMAGE_HEIGHT = 544;
 
 const ContentWrapper = styled.div`
   background-color: #000;
@@ -15,8 +19,14 @@ const Header = styled.div`
   position: absolute;
   top: 24px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  width: calc(${IMAGE_WIDTH}px - 16px);
   margin: 8px;
+`;
+
+const AvatarContainer = styled.span`
+  display: flex;
+  align-items: center;
 
   p:first-of-type {
     margin-left: 7px;
@@ -35,28 +45,37 @@ const Video = styled.video`
 const PreviewMedia = ({
   story,
   user,
+  numberOfStories,
 }) => {
   const { avatarUrl, handle } = user;
-  const { type, asset_url, thumbnail_url } = story;
+  const {
+    type, asset_url, thumbnail_url, order,
+  } = story;
 
   return (
     <ContentWrapper>
       <Header>
-        <Avatar
-          src={avatarUrl}
-          alt={handle}
-          size="small"
+        <DiscontinuousProgressBar
+          totalNumberOfBars={numberOfStories}
+          numberOfBarsFilled={order + 1}
         />
-        <Text type="p" color="white">{handle}</Text>
+        <AvatarContainer>
+          <Avatar
+            src={avatarUrl}
+            alt={handle}
+            size="small"
+          />
+          <Text type="p" color="white">{handle}</Text>
+        </AvatarContainer>
       </Header>
       {(type === 'image' || type === 'gif')
         && (
-          <Image height="544" width="306" src={asset_url} />
+          <Image height={IMAGE_HEIGHT} width={IMAGE_WIDTH} src={asset_url} />
         )
       }
       {type === 'video'
         && (
-          <Video height="544" width="306" poster={thumbnail_url} autoPlay loop muted>
+          <Video height={IMAGE_HEIGHT} width={IMAGE_WIDTH} poster={thumbnail_url} autoPlay loop muted>
             <source src={asset_url} type="video/mp4" />
             <source src={asset_url} type="video/webm" />
           </Video>
@@ -71,10 +90,11 @@ PreviewMedia.propTypes = {
     avatarUrl: PropTypes.string.isRequired,
     handle: PropTypes.string,
   }).isRequired,
+  numberOfStories: PropTypes.number.isRequired,
   story: PropTypes.shape({
     note: PropTypes.string,
     type: PropTypes.oneOf(['image', 'video', 'gif']),
-    order: PropTypes.string,
+    order: PropTypes.number,
     asset_url: PropTypes.string,
     thumbnail_url: PropTypes.string,
   }).isRequired,

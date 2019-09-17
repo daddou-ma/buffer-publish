@@ -21,6 +21,7 @@ const AddStoryFooter = ({
   storyGroup,
   onUpdateStoryGroup,
   onCreateStoryGroup,
+  onPreviewClick,
   editMode,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
@@ -79,7 +80,7 @@ const AddStoryFooter = ({
           <Button
             type="secondary"
             label={translations.previewButton}
-            onClick={() => {}}
+            onClick={() => onPreviewClick(storyGroup.stories)}
           />
         </ButtonStyle>
         <Button
