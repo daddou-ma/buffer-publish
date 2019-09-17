@@ -54,22 +54,24 @@ const updateStoryNote = ({ stories = [], order, note }) => (
 const reorderStories = (stories, sourceOrder, targetOrder) => {
   const draggedCard = stories.find(item => item.order === sourceOrder);
   const remainingCards = stories.filter(item => item.order !== sourceOrder);
+  const source = parseInt(sourceOrder, 10);
+  const target = parseInt(targetOrder, 10);
 
-  if (sourceOrder < targetOrder) {
+  if (source < target) {
     remainingCards.forEach((story) => {
-      if (story.order > sourceOrder && story.order <= targetOrder) {
+      if (story.order > source && story.order <= target) {
         story.order = parseInt(story.order, 10) - 1;
       }
     });
   }
-  if (sourceOrder > targetOrder) {
+  if (source > target) {
     remainingCards.forEach((story) => {
-      if (story.order < sourceOrder && story.order >= targetOrder) {
+      if (story.order < source && story.order >= target) {
         story.order = parseInt(story.order, 10) + 1;
       }
     });
   }
-  draggedCard.order = targetOrder;
+  draggedCard.order = target;
 
   const result = [
     ...remainingCards,
@@ -79,15 +81,19 @@ const reorderStories = (stories, sourceOrder, targetOrder) => {
   return result;
 };
 
-const deleteStory = ({ stories, story }) => (
-  stories.filter(item => item.order !== story.order)
-);
+const deleteStory = ({ stories, story }) => {
+  const result = stories.filter(item => item.order !== story.order);
 
-/*
-const reorderStories = stories => (
-  stories.forEach((item, index) => { item.order = index + 1; })
-);
-*/
+  result.forEach((item) => {
+    // If card is on the right of the deleted card,
+    // change order one space to the left
+    if (item.order > story.order) {
+      item.order = parseInt(item.order, 10) - 1;
+    }
+  });
+
+  return result;
+};
 
 export default (state, action) => {
   if (!state) {
@@ -271,17 +277,18 @@ export default (state, action) => {
     case actionTypes.CREATE_NEW_STORY_CARD: {
       const { stories } = state.storyGroup;
       const { id } = action.args;
+
       return {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: stories.push({
+          stories: [...stories, {
             ...newStory(),
             uploadTrackingId: id,
             uploading: true,
             progress: 0,
-            order: stories.length,
-          }),
+            order: stories.length + 1,
+          }],
         },
       };
     }

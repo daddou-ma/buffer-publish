@@ -43,8 +43,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={posts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -58,8 +56,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={sentPosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -74,8 +70,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={sentPosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -92,8 +86,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={pastRemindersPosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -111,8 +103,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={pastRemindersPosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -131,8 +121,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={pastRemindersPosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -151,8 +139,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={missingTypePosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -166,8 +152,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={linkPosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -181,8 +165,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={imagePosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -196,8 +178,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={multipleImagePosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -211,8 +191,6 @@ storiesOf('PostList', module)
     <PostList
       listHeader={listHeader}
       posts={videoPosts}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}

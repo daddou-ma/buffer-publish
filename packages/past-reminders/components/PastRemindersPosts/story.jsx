@@ -47,8 +47,6 @@ storiesOf('PastRemindersPosts', module)
       header={header}
       subHeader={subHeader}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -64,8 +62,6 @@ storiesOf('PastRemindersPosts', module)
       header={header}
       subHeader={subHeader}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -81,8 +77,6 @@ storiesOf('PastRemindersPosts', module)
       header={header}
       subHeader={subHeader}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -101,8 +95,6 @@ storiesOf('PastRemindersPosts', module)
       header={header}
       subHeader={subHeader}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}

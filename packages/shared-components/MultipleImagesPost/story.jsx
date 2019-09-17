@@ -67,8 +67,6 @@ storiesOf('MultipleImagesPost', module)
       postDetails={postDetails}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -86,8 +84,6 @@ storiesOf('MultipleImagesPost', module)
       postDetails={postDetails}
       links={multilineLinks}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -105,8 +101,6 @@ storiesOf('MultipleImagesPost', module)
       postDetails={postDetailsSent}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -124,8 +118,6 @@ storiesOf('MultipleImagesPost', module)
       postDetails={postDetailsError}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}

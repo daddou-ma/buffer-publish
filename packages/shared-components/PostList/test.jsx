@@ -28,8 +28,6 @@ describe('PostList', () => {
       <Provider store={store}>
         <PostList
           posts={posts}
-          onDeleteCancel={() => {}}
-          onDeleteClick={() => {}}
           onDeleteConfirmClick={() => {}}
           onEditClick={handleEditClick}
           onShareNowClick={() => {}}
@@ -53,8 +51,6 @@ describe('PostList', () => {
       <Provider store={store}>
         <PostList
           posts={posts}
-          onDeleteCancel={() => {}}
-          onDeleteClick={() => {}}
           onDeleteConfirmClick={() => {}}
           onEditClick={() => {}}
           onShareNowClick={handleShareNowClick}

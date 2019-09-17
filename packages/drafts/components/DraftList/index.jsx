@@ -44,8 +44,6 @@ const DraftList = ({
   postLists,
   manager,
   onApproveClick,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onMoveToDraftsClick,
@@ -66,17 +64,18 @@ const DraftList = ({
   onComposerOverlayClick,
 }) => {
   if (features.isProUser()) {
-    const startTrial = () =>
-      window.location.assign(`${getURL.getStartTrialURL({
+    const startTrial = () => window.location.assign(
+      `${getURL.getStartTrialURL({
         trialType: 'small',
         cta: SEGMENT_NAMES.DRAFTS_SBP_TRIAL,
         nextUrl: 'https://publish.buffer.com',
-      })}`);
-    const goToBilling = () =>
-      window.location.assign(`${getURL.getBillingURL({
+      })}`,
+    );
+    const goToBilling = () => window.location.assign(
+      `${getURL.getBillingURL({
         cta: SEGMENT_NAMES.DRAFTS_BUSINESS_UPGRADE,
-      })
-    }`);
+      })}`,
+    );
     const trackAndGo = ({ location, action, afterTracked }) => {
       trackAction({
         location,
@@ -87,21 +86,25 @@ const DraftList = ({
       });
     };
     if (canStartBusinessTrial) {
-      return (<BusinessTrialOrUpgradeCard
+      return (
+        <BusinessTrialOrUpgradeCard
+          heading="Collaborate With Your Team"
+          body="Add your team to your Buffer account so you can collaborate and save even more time."
+          cta="Start a Free 14-Day Trial of the Business Plan"
+          onCtaClick={() => { trackAndGo({ location: 'drafts', action: 'collaborate_with_team_b4b_trial_start_click', afterTracked: startTrial }); }}
+          backgroundImage="squares"
+        />
+      );
+    }
+    return (
+      <BusinessTrialOrUpgradeCard
         heading="Collaborate With Your Team"
         body="Add your team to your Buffer account so you can collaborate and save even more time."
-        cta="Start a Free 14-Day Trial of the Business Plan"
-        onCtaClick={() => { trackAndGo({ location: 'drafts', action: 'collaborate_with_team_b4b_trial_start_click', afterTracked: startTrial }); }}
+        cta="Upgrade to Buffer for Business"
+        onCtaClick={() => { trackAndGo({ location: 'analytics', action: 'collaborate_with_team_b4b_upgrade_click', afterTracked: goToBilling }); }}
         backgroundImage="squares"
-      />);
-    }
-    return (<BusinessTrialOrUpgradeCard
-      heading="Collaborate With Your Team"
-      body="Add your team to your Buffer account so you can collaborate and save even more time."
-      cta="Upgrade to Buffer for Business"
-      onCtaClick={() => { trackAndGo({ location: 'analytics', action: 'collaborate_with_team_b4b_upgrade_click', afterTracked: goToBilling }); }}
-      backgroundImage="squares"
-    />);
+      />
+    );
   }
 
   if (loading) {
@@ -120,39 +123,43 @@ const DraftList = ({
     <ErrorBoundary>
       <div className={containerStyle}>
         <div style={topBarContainerStyle}>
-          {tabId === 'drafts' &&
-            <div style={composerStyle}>
-              {showComposer && !editMode &&
-                <ComposerPopover
-                  type={'drafts'}
-                  onSave={onComposerCreateSuccess}
-                  preserveComposerStateOnClose
-                  onComposerOverlayClick={onComposerOverlayClick}
-                  editMode={editMode}
+          {tabId === 'drafts'
+            && (
+              <div style={composerStyle}>
+                {showComposer && !editMode
+                  && (
+                    <ComposerPopover
+                      type="drafts"
+                      onSave={onComposerCreateSuccess}
+                      preserveComposerStateOnClose
+                      onComposerOverlayClick={onComposerOverlayClick}
+                      editMode={editMode}
+                    />
+                  )
+                }
+                <ComposerInput
+                  placeholder="Create a new draft..."
+                  onPlaceholderClick={onComposerPlaceholderClick}
                 />
-              }
-              <ComposerInput
-                placeholder={'Create a new draft...'}
-                onPlaceholderClick={onComposerPlaceholderClick}
-              />
-            </div>
+              </div>
+            )
           }
         </div>
-        {showComposer && editMode &&
-          <ComposerPopover
-            type={'drafts'}
-            onSave={onComposerCreateSuccess}
-            onComposerOverlayClick={onComposerOverlayClick}
-            editMode={editMode}
-          />
+        {showComposer && editMode
+          && (
+            <ComposerPopover
+              type="drafts"
+              onSave={onComposerCreateSuccess}
+              onComposerOverlayClick={onComposerOverlayClick}
+              editMode={editMode}
+            />
+          )
         }
-        {
-          postLists.length > 0 ?
+        {postLists.length > 0
+          ? (
             <QueueItems
               items={postLists}
               onApproveClick={onApproveClick}
-              onCancelConfirmClick={onCancelConfirmClick}
-              onDeleteClick={onDeleteClick}
               onDeleteConfirmClick={onDeleteConfirmClick}
               onEditClick={onEditClick}
               onMoveToDraftsClick={onMoveToDraftsClick}
@@ -163,13 +170,16 @@ const DraftList = ({
               onImageClickPrev={onImageClickPrev}
               onImageClose={onImageClose}
               draggable={false}
-              type={'drafts'}
+              type="drafts"
               hasFirstCommentFlip={hasFirstCommentFlip}
-            /> :
+            />
+          )
+          : (
             <Empty
               isManager={manager}
               view={tabId}
             />
+          )
         }
       </div>
     </ErrorBoundary>
@@ -187,8 +197,6 @@ DraftList.propTypes = {
   ),
   manager: PropTypes.bool.isRequired,
   onApproveClick: PropTypes.func.isRequired,
-  onCancelConfirmClick: PropTypes.func.isRequired,
-  onDeleteClick: PropTypes.func.isRequired,
   onDeleteConfirmClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
   onMoveToDraftsClick: PropTypes.func.isRequired,

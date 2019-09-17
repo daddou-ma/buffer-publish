@@ -32,8 +32,6 @@ storiesOf('PostLists', module)
   .add('default', () => (
     <PostLists
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}

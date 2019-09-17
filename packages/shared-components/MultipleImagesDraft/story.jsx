@@ -40,8 +40,6 @@ storiesOf('MultipleImagesDraft', module)
       draftDetails={draftDetails}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -52,7 +50,7 @@ storiesOf('MultipleImagesDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       currentImage={0}
-      view={'drafts'}
+      view="drafts"
     />
   ))
   .add('sent multiple image post', () => (
@@ -62,8 +60,6 @@ storiesOf('MultipleImagesDraft', module)
       draftDetails={draftDetails}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -74,6 +70,6 @@ storiesOf('MultipleImagesDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       currentImage={0}
-      view={'approval'}
+      view="approval"
     />
   ));

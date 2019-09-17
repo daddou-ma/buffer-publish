@@ -38,7 +38,7 @@ const Story = ({
             largeCards={largeCards}
           >
             {card.thumbnail_url && <CoverImage src={card.thumbnail_url} />}
-            {card.type === 'video' && <PlayIcon />}
+            {card.type === 'video' && <PlayIcon large={false} />}
           </CarouselCard>
         ))}
       </Carousel>

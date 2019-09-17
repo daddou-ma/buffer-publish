@@ -67,7 +67,7 @@ CarouselCardHover.propTypes = {
     asset_url: PropTypes.string,
     thumbnail_url: PropTypes.string,
     empty: PropTypes.bool,
-    progress: PropTypes.string,
+    progress: PropTypes.number,
   }).isRequired,
   onAddNoteClick: PropTypes.func.isRequired,
   onDeleteStoryClick: PropTypes.func.isRequired,

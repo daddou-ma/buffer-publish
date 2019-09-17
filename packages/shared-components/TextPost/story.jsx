@@ -1,11 +1,11 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import {
   storiesOf,
 } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import TextPost from './index';
-import { Provider } from 'react-redux';
 
 const storeFake = state => ({
   default: () => {},
@@ -18,7 +18,7 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
 const links = [{
@@ -82,8 +82,6 @@ storiesOf('TextPost', module)
       links={links}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -95,8 +93,6 @@ storiesOf('TextPost', module)
       links={multilineLinks}
       postDetails={postDetails}
       text={multilineText}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -108,8 +104,6 @@ storiesOf('TextPost', module)
       links={links}
       postDetails={postDetailsSent}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -121,8 +115,6 @@ storiesOf('TextPost', module)
       links={links}
       postDetails={isARetweetPostDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -135,8 +127,6 @@ storiesOf('TextPost', module)
       links={links}
       postDetails={isARetweetPostDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -151,8 +141,6 @@ storiesOf('TextPost', module)
       links={links}
       postDetails={postDetailsError}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}

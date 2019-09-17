@@ -68,8 +68,6 @@ storiesOf('TextDraft', module)
       draftDetails={draftDetails}
       text={text}
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       view={approvalView}
@@ -82,8 +80,6 @@ storiesOf('TextDraft', module)
       draftDetails={draftDetailsScheduled}
       text={text}
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       scheduledAt={scheduledAt}
@@ -98,8 +94,6 @@ storiesOf('TextDraft', module)
       text={text}
       manager
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       view={approvalView}
@@ -112,8 +106,6 @@ storiesOf('TextDraft', module)
       draftDetails={isARetweetDraftDetails}
       text={text}
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       retweetProfile={retweetProfile}
@@ -127,8 +119,6 @@ storiesOf('TextDraft', module)
       draftDetails={isARetweetDraftDetails}
       text={text}
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       retweetProfile={retweetProfile}
@@ -145,8 +135,6 @@ storiesOf('TextDraft', module)
       isPastDue
       text={text}
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onRescheduleClick={action('reschedule-click')}
@@ -157,13 +145,12 @@ storiesOf('TextDraft', module)
   .add('past due no permission', () => (
     <TextDraft
       hasPermission={false}
+      manager={false}
       links={links}
       draftDetails={draftDetailsPastDue}
       isPastDue
       text={text}
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onRescheduleClick={action('reschedule-click')}
@@ -174,12 +161,11 @@ storiesOf('TextDraft', module)
   .add('no permission', () => (
     <TextDraft
       hasPermission={false}
+      manager={false}
       links={links}
       draftDetails={draftDetails}
       text={text}
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       view={approvalView}

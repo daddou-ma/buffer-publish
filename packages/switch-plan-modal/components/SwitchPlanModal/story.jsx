@@ -21,6 +21,7 @@ const storeFake = state => ({
 function createMockStore () {
   return storeFake({
     creditCardForm: { stripePublishableKey: 'TEST', stripe: null },
+    setupIntentClientSecret: '',
   });
 }
 

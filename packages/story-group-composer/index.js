@@ -176,7 +176,6 @@ export default connect(
     },
     onDeleteStory: (storyCard) => {
       dispatch(actions.deleteStory(storyCard));
-      // reorder stories
     },
   }),
 )(StoryGroupPopover);

@@ -42,8 +42,6 @@ const postTypeComponentMap = new Map([
 
 const renderPost = ({
   post,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -61,8 +59,6 @@ const renderPost = ({
   const postWithEventHandlers = {
     ...post,
     key: post.id,
-    onCancelConfirmClick: () => onCancelConfirmClick({ post }),
-    onDeleteClick: () => onDeleteClick({ post }),
     onDeleteConfirmClick: () => onDeleteConfirmClick({ post }),
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
@@ -88,8 +84,6 @@ const renderPost = ({
 const PostList = ({
   listHeader,
   posts,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -107,33 +101,31 @@ const PostList = ({
   isBusinessAccount,
   features,
   hasFirstCommentFlip,
-}) =>
+}) => (
   <div>
     <div style={listHeaderStyle}>
       <Text
-        color={'black'}
+        color="black"
       >
         {listHeader}
       </Text>
     </div>
     <List
-      items={posts.map(post =>
+      items={posts.map(post => (
         <div
           id={`update-${post.id}`}
           className={[
             'update',
             `post_${post.profile_service}`,
-            post.postDetails && post.postDetails.isRetweet ?
-              'is_retweet' :
-              'not_retweet',
+            post.postDetails && post.postDetails.isRetweet
+              ? 'is_retweet'
+              : 'not_retweet',
           ].join(' ')}
           style={postStyle}
         >
           {
             renderPost({
               post,
-              onCancelConfirmClick,
-              onDeleteClick,
               onDeleteConfirmClick,
               onEditClick,
               onShareNowClick,
@@ -150,43 +142,52 @@ const PostList = ({
               hasFirstCommentFlip,
             })
           }
-          {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder &&
-            <div style={reBufferWrapperStyle}>
-              <Button
-                type="secondary"
-                label="Share Again"
-                onClick={() => { onShareAgainClick({ post }); }}
-              />
-            </div>
+          {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder
+            && (
+              <div style={reBufferWrapperStyle}>
+                <Button
+                  type="secondary"
+                  label="Share Again"
+                  onClick={() => { onShareAgainClick({ post }); }}
+                />
+              </div>
+            )
           }
-          {isPastReminder &&
-            <div>
-              {(!features.isFreeUser() || isBusinessAccount) &&
-                <div style={reBufferWrapperStyle}>
-                  <Button
-                    fullWidth
-                    type="secondary"
-                    label="Share Again"
-                    onClick={() => { onShareAgainClick({ post }); }}
-                  />
-                </div>
+          {isPastReminder
+            && (
+              <div>
+                {(!features.isFreeUser() || isBusinessAccount)
+                  && (
+                    <div style={reBufferWrapperStyle}>
+                      <Button
+                        fullWidth
+                        type="secondary"
+                        label="Share Again"
+                        onClick={() => { onShareAgainClick({ post }); }}
+                      />
+                    </div>
+                  )
+                }
+                {isManager
+                && (
+                  <div style={reBufferWrapperStyle}>
+                    <Button
+                      fullWidth
+                      type="secondary"
+                      label="Send to Mobile"
+                      onClick={() => { onMobileClick({ post }); }}
+                    />
+                  </div>
+                )
               }
-              {isManager &&
-                <div style={reBufferWrapperStyle}>
-                  <Button
-                    fullWidth
-                    type="secondary"
-                    label="Send to Mobile"
-                    onClick={() => { onMobileClick({ post }); }}
-                  />
-                </div>
-              }
-            </div>
+              </div>
+            )
           }
-        </div>,
-      )}
+        </div>
+      ))}
     />
-  </div>;
+  </div>
+);
 
 PostList.propTypes = {
   listHeader: PropTypes.string,
@@ -195,8 +196,6 @@ PostList.propTypes = {
       text: PropTypes.string,
     }),
   ),
-  onCancelConfirmClick: PropTypes.func,
-  onDeleteClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,

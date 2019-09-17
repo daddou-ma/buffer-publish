@@ -46,8 +46,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={linkAttachment}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -62,8 +60,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={linkAttachment}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -78,8 +74,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: squareImage }}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -94,8 +88,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: tallImage }}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -110,8 +102,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: wideImage }}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}

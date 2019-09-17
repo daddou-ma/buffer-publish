@@ -72,8 +72,6 @@ storiesOf('LinkPost', module)
       linkAttachment={linkAttachment}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -86,8 +84,6 @@ storiesOf('LinkPost', module)
       linkAttachment={linkAttachment}
       postDetails={postDetails}
       text={multilineText}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -100,8 +96,6 @@ storiesOf('LinkPost', module)
       linkAttachment={linkAttachment}
       postDetails={postDetailsSent}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -114,8 +108,6 @@ storiesOf('LinkPost', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: squareImage }}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -128,8 +120,6 @@ storiesOf('LinkPost', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: tallImage }}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -142,8 +132,6 @@ storiesOf('LinkPost', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: wideImage }}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -156,8 +144,6 @@ storiesOf('LinkPost', module)
       linkAttachment={linkAttachment}
       postDetails={postDetailsError}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}

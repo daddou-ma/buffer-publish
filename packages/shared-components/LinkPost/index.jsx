@@ -46,8 +46,6 @@ const LinkPost = ({
   isWorking,
   links,
   linkAttachment,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -82,24 +80,28 @@ const LinkPost = ({
   const children = (
     <div style={postContentStyle}>
       <div style={postContentTextStyle}>
-        {basic ?
-          <Text
-            color="black"
-            size="mini"
-            whitespace="pre-wrap"
-          >
-            {text}
-          </Text> :
-          <LinkifiedText
-            color="black"
-            links={links}
-            size="mini"
-            whitespace="pre-wrap"
-            newTab
-            unstyled
-          >
-            {text}
-          </LinkifiedText>
+        {basic
+          ? (
+            <Text
+              color="black"
+              size="mini"
+              whitespace="pre-wrap"
+            >
+              {text}
+            </Text>
+          )
+          : (
+            <LinkifiedText
+              color="black"
+              links={links}
+              size="mini"
+              whitespace="pre-wrap"
+              newTab
+              unstyled
+            >
+              {text}
+            </LinkifiedText>
+          )
         }
       </div>
       <div>
@@ -110,12 +112,12 @@ const LinkPost = ({
             <div style={linkAttachmentContentStyle}>
               <Image
                 src={linkAttachment.thumbnailUrl}
-                width={'15rem'}
-                minWidth={'15rem'}
-                maxWidth={'15rem'}
-                height={'10rem'}
-                border={'rounded'}
-                objectFit={'cover'}
+                width="15rem"
+                minWidth="15rem"
+                maxWidth="15rem"
+                height="10rem"
+                border="rounded"
+                objectFit="cover"
               />
               <div style={linkAttachmentTextStyle}>
                 <div>
@@ -124,12 +126,12 @@ const LinkPost = ({
                   </Text>
                 </div>
                 <div style={linkUrlStyle}>
-                  <Text size={'small'} color={'outerSpaceLight'}>
+                  <Text size="small" color="outerSpaceLight">
                     {linkAttachment.url}
                   </Text>
                 </div>
                 <div>
-                  <Text size={'small'}>
+                  <Text size="small">
                     {linkAttachment.description}
                   </Text>
                 </div>
@@ -148,8 +150,6 @@ const LinkPost = ({
       isWorking={isWorking}
       links={links}
       linkAttachment={linkAttachment}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
       onDeleteConfirmClick={onDeleteConfirmClick}
       onEditClick={onEditClick}
       onShareNowClick={onShareNowClick}
