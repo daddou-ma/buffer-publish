@@ -12,6 +12,12 @@ import {
   StyledEditButton,
 } from './style';
 
+const isScheduleDisabled = ({ storiesLength, uploadsCompleted, isScheduleLoading }) =>
+  storiesLength < 1 || !uploadsCompleted || isScheduleLoading;
+
+const isPreviewDisabled = ({ storiesLength, uploadsCompleted }) =>
+  storiesLength < 1 || !uploadsCompleted;
+
 const AddStoryFooter = ({
   timezone,
   weekStartsMonday,
@@ -23,6 +29,8 @@ const AddStoryFooter = ({
   onCreateStoryGroup,
   onPreviewClick,
   editMode,
+  uploadsCompleted,
+  storiesLength,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -80,13 +88,14 @@ const AddStoryFooter = ({
           <Button
             type="secondary"
             label={translations.previewButton}
+            disabled={isPreviewDisabled({ storiesLength, uploadsCompleted })}
             onClick={() => onPreviewClick(storyGroup.stories)}
           />
         </ButtonStyle>
         <Button
           onClick={onScheduleClick}
           type="primary"
-          disabled={isScheduleLoading}
+          disabled={isScheduleDisabled({ storiesLength, uploadsCompleted, isScheduleLoading })}
           label={isScheduleLoading
             ? translations.scheduleLoadingButton
             : translations.scheduleButton}

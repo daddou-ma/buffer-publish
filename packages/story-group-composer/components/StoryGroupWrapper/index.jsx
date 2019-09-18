@@ -36,9 +36,7 @@ const StoryGroupWrapper = ({
   saveNote,
   onCreateStoryGroup,
   onUpdateStoryGroup,
-  onDeleteStoryGroup,
   onDeleteStory,
-  onComposerClick,
   onCreateNewStoryCard,
   onUpdateStoryUploadProgress,
   onVideoUploadProcessingStarted,
@@ -56,6 +54,7 @@ const StoryGroupWrapper = ({
   const cards = storyGroup ? storyGroup.stories : [];
   const [viewMode, setViewMode] = useState(ADD_STORY);
   const [story, setStory] = useState();
+  const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0
 
   return (
     <Fragment>
@@ -103,6 +102,8 @@ const StoryGroupWrapper = ({
               onCreateStoryGroup={onCreateStoryGroup}
               onUpdateStoryGroup={onUpdateStoryGroup}
               onPreviewClick={onPreviewClick}
+              uploadsCompleted={uploadsCompleted}
+              storiesLength={storyGroup.stories.length}
             />
           </React.Fragment>
         )}
