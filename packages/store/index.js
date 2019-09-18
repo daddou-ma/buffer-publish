@@ -51,6 +51,7 @@ import { middleware as segmentTrackingMiddleware } from '@bufferapp/publish-anal
 import { middleware as onboardingMiddleware } from '@bufferapp/publish-onboarding';
 import { middleware as globalAccountMiddleware } from '@bufferapp/global-account';
 import { middleware as closeComposerModalMiddleware } from '@bufferapp/publish-close-composer-confirmation-modal';
+import { middleware as storyPreviewMiddleware } from '@bufferapp/publish-story-preview';
 import { middleware as storyGroupComposerMiddleware } from '@bufferapp/publish-story-group-composer';
 
 // Remove analytics middleware when publish switches to analyze
@@ -135,6 +136,7 @@ const configureStore = initialstate => {
         globalAccountMiddleware,
         closeComposerModalMiddleware,
         storiesMiddleware,
+        storyPreviewMiddleware,
         storyGroupComposerMiddleware,
         // Analyze
         averageMiddleware,

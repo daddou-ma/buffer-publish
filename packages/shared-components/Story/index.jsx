@@ -8,6 +8,9 @@ import CardFooter from '../CardFooter';
 import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
 
 const Story = ({
+  id,
+  profileId,
+  scheduledAt,
   storyDetails,
   isDeleting,
   isWorking,
@@ -28,7 +31,7 @@ const Story = ({
         creatorName={storyDetails.creatorName}
         avatarUrl={storyDetails.avatarUrl}
         createdAt={storyDetails.createdAt}
-        onPreviewClick={() => onPreviewClick(storyDetails.stories)}
+        onPreviewClick={() => onPreviewClick(storyDetails.stories, profileId, id, scheduledAt)}
       />
       <Carousel editMode={false} totalCardsToShow={(storyDetails.stories && storyDetails.stories.length) || 0}>
         {storyDetails.stories && storyDetails.stories.map((card) => (
@@ -57,6 +60,9 @@ const Story = ({
 };
 
 Story.propTypes = {
+  id: PropTypes.string.isRequired,
+  profileId: PropTypes.string.isRequired,
+  scheduledAt: PropTypes.number.isRequired,
   storyDetails: PropTypes.shape({
     creatorName: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
