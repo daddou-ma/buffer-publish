@@ -3,7 +3,7 @@ import chinaChineseTranslations from './translations/zh-cn.json';
 import {
   actions,
   actionTypes,
-} from './';
+} from './reducer';
 
 export default store => next => (action) => {
   switch (action.type) {

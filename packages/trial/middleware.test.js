@@ -1,6 +1,6 @@
 import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals/reducer';
 import { trackAction } from '@bufferapp/publish-data-tracking';
-import { actionTypes as notificationActionTypes } from '@bufferapp/notifications/lib/reducer';
+import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,

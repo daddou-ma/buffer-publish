@@ -4,7 +4,7 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings';
+import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes, actions } from './reducer';
 

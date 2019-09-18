@@ -1,4 +1,4 @@
-import { constants as tabsNames } from '@bufferapp/publish-preferences';
+import tabsNames from '@bufferapp/publish-preferences/constants';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as dataFetchActions, actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';

@@ -1,12 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import Drafts, {
-  reducer,
+import middleware from './middleware';
+import reducer, {
   actions,
   actionTypes,
-  middleware,
-} from './index';
+} from './reducer';
 import DraftList from './components/DraftList';
 
 const storeFake = state => ({
@@ -16,8 +15,8 @@ const storeFake = state => ({
   getState: () => ({ ...state }),
 });
 
-describe.skip('Drafts', () => {
-  describe('Component', () => {
+describe('Drafts', () => {
+  describe.skip('Component', () => {
     const draft = {
       id1: {
         id: 'id1',
