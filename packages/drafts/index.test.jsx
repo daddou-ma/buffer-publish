@@ -1,12 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import Drafts, {
-  reducer,
+import Drafts from './index';
+import reducer, {
   actions,
   actionTypes,
-  middleware,
-} from './index';
+} from './reducer';
+import middleware from './middleware';
 import DraftList from './components/DraftList';
 
 const storeFake = state => ({
