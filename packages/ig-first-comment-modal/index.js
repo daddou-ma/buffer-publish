@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 
-import { actionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import InstagramFirstCommentModal from './components/InstagramFirstCommentModal';

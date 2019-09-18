@@ -13,7 +13,7 @@ import { middleware as draftsMiddleware } from '@bufferapp/publish-drafts';
 import { middleware as storiesMiddleware } from '@bufferapp/publish-stories';
 import { middleware as postingScheduleSettingsMiddleware } from '@bufferapp/publish-posting-schedule';
 import { middleware as generalSettingsMiddleware } from '@bufferapp/publish-general-settings';
-import { middleware as profileSidebarMiddleware } from '@bufferapp/publish-profile-sidebar';
+import profileSidebarMiddleware from '@bufferapp/publish-profile-sidebar/middleware';
 import { middleware as clientAccessMiddleware } from '@bufferapp/client-access';
 import { middleware as appSidebarMiddleware } from '@bufferapp/app-sidebar';
 import { middleware as productFeatureMiddleware } from '@bufferapp/product-features';

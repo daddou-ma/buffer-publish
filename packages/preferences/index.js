@@ -7,7 +7,7 @@ import {
   newBusinessTrialistsRoute,
   newConnectionRoute,
 } from '@bufferapp/publish-routes';
-import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
+import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import Preferences from './components/Preferences';

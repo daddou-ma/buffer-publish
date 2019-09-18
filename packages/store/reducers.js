@@ -10,7 +10,7 @@ import { reducer as draftsReducer } from '@bufferapp/publish-drafts';
 import { reducer as postingScheduleReducer } from '@bufferapp/publish-posting-schedule';
 import { reducer as generalSettingsReducer } from '@bufferapp/publish-general-settings';
 import { reducer as i18nReducer } from '@bufferapp/publish-i18n';
-import { reducer as profileSidebarReducer } from '@bufferapp/publish-profile-sidebar';
+import profileSidebarReducer from '@bufferapp/publish-profile-sidebar/reducer';
 import { reducer as clientAccessReducer } from '@bufferapp/client-access';
 import { reducer as appSidebarReducer } from '@bufferapp/app-sidebar';
 import { reducer as productFeaturesReducer } from '@bufferapp/product-features';
