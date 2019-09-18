@@ -1,8 +1,8 @@
-import queueActions from '@bufferapp/publish-queue/reducer';
+import { actions as queueActions } from '@bufferapp/publish-queue/reducer';
 import { actions as draftsActions } from '@bufferapp/publish-drafts';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions as storiesActions } from '@bufferapp/publish-stories';
-import { actions as storyGroupComposerActions } from '@bufferapp/publish-story-group-composer';
+import { actions as storyGroupComposerActions } from '@bufferapp/publish-story-group-composer/reducer';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => (action) => {
