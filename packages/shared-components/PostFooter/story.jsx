@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  action,
-  linkTo,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { linkTo } from '@storybook/addon-links';
+import { withA11y } from '@storybook/addon-a11y';
 import PostFooter from './index';
 
 const postDetails = {
@@ -37,7 +37,7 @@ const postDetailsError = {
 };
 
 storiesOf('PostFooter', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('queued post', () => (
     <PostFooter
       onDeleteConfirmClick={linkTo('PostFooter', 'isDeleting')}

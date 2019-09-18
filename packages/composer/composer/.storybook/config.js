@@ -1,4 +1,5 @@
-import 'babel-polyfill';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import { configure } from '@storybook/react';
 
 const req = require.context('../components', true, /story\.jsx$/);

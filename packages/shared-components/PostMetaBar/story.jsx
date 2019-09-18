@@ -2,11 +2,11 @@ import React from 'react';
 import {
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import PostMetaBar from './index';
 
 storiesOf('PostMetaBar', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('Pinterest bar with boards and sourceUrl', () => (
     <PostMetaBar
       leftContent={{

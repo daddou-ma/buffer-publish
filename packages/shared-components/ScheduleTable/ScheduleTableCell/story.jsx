@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  action,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import ScheduleTableCell from './index';
 
 const dayName = 'Monday';
@@ -17,7 +17,7 @@ const time = {
 };
 
 storiesOf('ScheduleTableCell', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <ScheduleTableCell
       time={time}
