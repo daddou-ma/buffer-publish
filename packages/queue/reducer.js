@@ -1,6 +1,6 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
-import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
+import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
+import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import { postParser } from '@bufferapp/publish-server/parsers/src';
 import keyWrapper from '@bufferapp/keywrapper';
 
