@@ -3,8 +3,8 @@ import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
-import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification';
-import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty';
+import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification/reducer';
+import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty/reducer';
 import { actions, actionTypes } from './reducer';
 import {
   shouldShowSwitchPlanModal,
