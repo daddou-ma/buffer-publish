@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { reducer as tabsReducer } from '@bufferapp/publish-tabs';
-import { reducer as queueReducer } from '@bufferapp/publish-queue';
+import queueReducer from '@bufferapp/publish-queue/reducer';
 import { reducer as sentReducer } from '@bufferapp/publish-sent';
 import { reducer as gridReducer } from '@bufferapp/publish-grid';
 import { reducer as storiesReducer } from '@bufferapp/publish-stories';

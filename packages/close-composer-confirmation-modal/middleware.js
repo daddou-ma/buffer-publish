@@ -1,4 +1,4 @@
-import { actions as queueActions } from '@bufferapp/publish-queue';
+import queueActions from '@bufferapp/publish-queue/reducer';
 import { actions as draftsActions } from '@bufferapp/publish-drafts';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions as storiesActions } from '@bufferapp/publish-stories';
