@@ -6,7 +6,7 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { actions as notificationActions } from '@bufferapp/notifications';
+import { actions as notificationActions } from '@bufferapp/notifications/lib/reducer';
 import { actionTypes } from './reducer';
 
 const getTrackingData = ({ post = {}, channel = {} }) => ({
