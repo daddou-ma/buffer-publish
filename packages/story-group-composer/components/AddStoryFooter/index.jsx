@@ -12,12 +12,6 @@ import {
   StyledEditButton,
 } from './style';
 
-const isScheduleDisabled = ({ storiesLength, uploadsCompleted, isScheduleLoading }) =>
-  storiesLength < 1 || !uploadsCompleted || isScheduleLoading;
-
-const isPreviewDisabled = ({ storiesLength, uploadsCompleted }) =>
-  storiesLength < 1 || !uploadsCompleted;
-
 const AddStoryFooter = ({
   timezone,
   weekStartsMonday,
@@ -29,11 +23,14 @@ const AddStoryFooter = ({
   onCreateStoryGroup,
   onPreviewClick,
   editMode,
-  uploadsCompleted,
-  storiesLength,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const storiesLength = storyGroup.stories.length;
+  const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0
+
+  const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading;
+  const isPreviewDisabled = storiesLength < 1 || !uploadsCompleted;
 
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
@@ -88,14 +85,14 @@ const AddStoryFooter = ({
           <Button
             type="secondary"
             label={translations.previewButton}
-            disabled={isPreviewDisabled({ storiesLength, uploadsCompleted })}
+            disabled={isPreviewDisabled}
             onClick={() => onPreviewClick(storyGroup.stories)}
           />
         </ButtonStyle>
         <Button
           onClick={onScheduleClick}
           type="primary"
-          disabled={isScheduleDisabled({ storiesLength, uploadsCompleted, isScheduleLoading })}
+          disabled={isScheduleDisabled}
           label={isScheduleLoading
             ? translations.scheduleLoadingButton
             : translations.scheduleButton}
@@ -131,8 +128,6 @@ AddStoryFooter.propTypes = {
     }),
     scheduledAt: PropTypes.number,
   }),
-  uploadsCompleted: PropTypes.bool.isRequired,
-  storiesLength: PropTypes.number.isRequired,
 };
 
 AddStoryFooter.defaultProps = {
