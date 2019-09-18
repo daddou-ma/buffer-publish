@@ -1,6 +1,6 @@
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as dataFetchActions, actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actions as notificationActions } from '@bufferapp/notifications';
+import { actions as notificationActions } from '@bufferapp/notifications/lib/reducer';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
