@@ -19,6 +19,7 @@ const WrapperStyle = styled.div`
 const NoteWrapper = ({
   onSaveNoteClick,
   story,
+  view,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(SEE_NOTE);
@@ -37,7 +38,7 @@ const NoteWrapper = ({
           && (
             <EditNote
               onSaveNoteClick={({ order, note }) => {
-                onSaveNoteClick({ order, note });
+                onSaveNoteClick({ order, note, view });
                 setViewMode(SEE_NOTE);
               }}
               onCancelClick={() => setViewMode(SEE_NOTE)}
@@ -59,6 +60,7 @@ NoteWrapper.propTypes = {
     asset_url: PropTypes.string,
     thumbnail_url: PropTypes.string,
   }).isRequired,
+  view: PropTypes.oneOf(['composer', 'queue']).isRequired,
 };
 
 export default NoteWrapper;

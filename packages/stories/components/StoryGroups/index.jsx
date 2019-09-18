@@ -82,6 +82,7 @@ const StoryGroups = ({
       {showStoryPreview && (
         <PreviewPopover
           onCloseClick={onClosePreviewClick}
+          view="queue"
         />
       )}
       <ContainerStyle>

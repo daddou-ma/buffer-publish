@@ -61,7 +61,7 @@ const EditNote = ({
   onCancelClick,
   story,
 }) => {
-  const [note, setNote] = useState(story.note);
+  const [note, setNote] = useState(story.note || '');
   const setNoteValue = (event) => {
     const { value } = event.target;
     setNote(value);

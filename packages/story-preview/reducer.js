@@ -4,6 +4,7 @@ import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-si
 export const actionTypes = keyWrapper('STORY_PREVIEW', {
   OPEN_PREVIEW: 0,
   SAVE_NOTE: 0,
+  SAVE_NOTE_COMPOSER: 0,
 });
 
 export const initialState = {
@@ -12,6 +13,16 @@ export const initialState = {
   profileId: null,
   storyGroupId: null,
   scheduledAt: null,
+};
+
+const updateStoryNote = ({ stories = [], order, note }) => {
+  const updatedStories = stories.map((story) => {
+    if (story.order === order) {
+      story.note = note;
+    }
+    return story;
+  });
+  return updatedStories;
 };
 
 export default (state = initialState, action) => {
@@ -31,6 +42,14 @@ export default (state = initialState, action) => {
         storyGroupId: action.id,
       };
     }
+    case actionTypes.SAVE_NOTE_COMPOSER: {
+      const { stories } = state;
+      const { order, note } = action;
+      return {
+        ...state,
+        stories: updateStoryNote({ stories, order, note }),
+      };
+    }
     default:
       return state;
   }
@@ -46,6 +65,11 @@ export const actions = {
   }),
   handleSaveNoteClick: ({ order, note }) => ({
     type: actionTypes.SAVE_NOTE,
+    order,
+    note,
+  }),
+  handleSaveNoteComposer: ({ order, note }) => ({
+    type: actionTypes.SAVE_NOTE_COMPOSER,
     order,
     note,
   }),
