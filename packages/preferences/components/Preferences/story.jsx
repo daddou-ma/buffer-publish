@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import { Provider } from 'react-redux';
 import {
   ConnectedRouter as Router,
@@ -14,7 +14,7 @@ const history = createHistory();
 const store = createStore();
 
 storiesOf('Preferences', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
       <Router history={history}>

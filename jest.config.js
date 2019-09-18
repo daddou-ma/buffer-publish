@@ -9,10 +9,11 @@ module.exports = {
   moduleNameMapper: {
     '\\.(css|less)$': 'identity-obj-proxy',
   },
+  moduleFileExtensions: ['js', 'json', 'jsx'],
   setupFiles: [
     '<rootDir>/jest-raf-shim.js',
   ],
-  setupTestFrameworkScriptFile: '<rootDir>/setupEnzyme.js',
+  setupFilesAfterEnv: ['<rootDir>/setupEnzyme.js'],
   globals: {
     __PACKAGES__: '../packages',
   },

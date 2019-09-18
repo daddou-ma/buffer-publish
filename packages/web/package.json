@@ -23,7 +23,6 @@
   },
   "author": "Harrison Harnisch <hharnisc@gmail.com> (http://hharnisc.github.io)",
   "devDependencies": {
-    "eslint": "^5.3.0"
   },
   "publishConfig": {
     "access": "public"

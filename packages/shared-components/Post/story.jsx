@@ -1,11 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
-  action,
-  linkTo,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { linkTo } from '@storybook/addon-links';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import { Text } from '@bufferapp/components';
 import Post from './index';
 
@@ -86,7 +86,7 @@ const children = (
 );
 
 storiesOf('Post', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
       {getStory()}

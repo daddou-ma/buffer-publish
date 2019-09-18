@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import VideoDraft from './index';
 
 const links = [{
@@ -43,7 +43,7 @@ const wideImage = 'http://lorempixel.com/900/400/cats/';
 const view = 'approval';
 
 storiesOf('VideoDraft', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('queued video post', () => (
     <VideoDraft
       imageSrc={imageSrc}

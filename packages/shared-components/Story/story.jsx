@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  action,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import Story from './index';
 
 const storyDetails = {
@@ -14,7 +14,7 @@ const storyDetails = {
 };
 
 storiesOf('Story', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <Story
       storyDetails={storyDetails}
