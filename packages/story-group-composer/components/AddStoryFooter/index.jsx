@@ -23,9 +23,12 @@ const AddStoryFooter = ({
   onCreateStoryGroup,
   onPreviewClick,
   editMode,
+  emptySlotData,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const initialDateTime = emptySlotData && emptySlotData.slotMoment
+    ? emptySlotData.slotMoment : null;
 
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
@@ -99,6 +102,7 @@ const AddStoryFooter = ({
           weekStartsMonday={weekStartsMonday}
           editMode={editMode}
           onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
+          initialDateTime={initialDateTime}
         />
       )}
     </Fragment>

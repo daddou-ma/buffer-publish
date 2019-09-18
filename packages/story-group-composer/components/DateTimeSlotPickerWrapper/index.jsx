@@ -20,6 +20,7 @@ const DateTimeSlotPickerWrapper = ({
   weekStartsMonday,
   uses24hTime,
   editMode,
+  initialDateTime,
 }) => (
   <DateTimePickerStyle style={getDateTimePickerPosition(editMode)}>
     <DateTimeSlotPicker
@@ -27,6 +28,7 @@ const DateTimeSlotPickerWrapper = ({
       shouldUse24hTime={uses24hTime}
       timezone={timezone}
       weekStartsMonday={weekStartsMonday}
+      initialDateTime={initialDateTime}
     />
   </DateTimePickerStyle>
 );

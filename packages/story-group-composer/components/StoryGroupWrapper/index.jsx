@@ -52,6 +52,7 @@ const StoryGroupWrapper = ({
   onDropCard,
   storyGroup,
   editMode,
+  emptySlotData,
 }) => {
   const cards = storyGroup ? storyGroup.stories : [];
   const [viewMode, setViewMode] = useState(ADD_STORY);
@@ -103,6 +104,7 @@ const StoryGroupWrapper = ({
               onCreateStoryGroup={onCreateStoryGroup}
               onUpdateStoryGroup={onUpdateStoryGroup}
               onPreviewClick={onPreviewClick}
+              emptySlotData={emptySlotData}
             />
           </React.Fragment>
         )}

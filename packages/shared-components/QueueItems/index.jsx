@@ -249,6 +249,7 @@ const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
       profile_service: profileService,
       scheduled_at: slot.timestamp,
       due_at: slot.timestamp,
+      slotMoment: slot.slotMoment,
     })}
   />
 );
