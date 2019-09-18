@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { RichUtils, Modifier, EditorState } from '@bufferapp/draft-js';
 import DraftjsEditor from '@bufferapp/draft-js-plugins-editor';
-import createMentionPlugin from '@bufferapp/draft-js-mention-plugin';
+import createMentionPlugin from '@bufferapp/draft-js-mention-plugin/lib/index';
 import createEmojiPlugin from '@bufferapp/draft-js-emoji-plugin';
 import '@bufferapp/draft-js-emoji-plugin/lib/plugin.css';
 import twitterText from 'twitter-text';
