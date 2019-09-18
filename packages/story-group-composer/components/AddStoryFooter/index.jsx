@@ -131,6 +131,8 @@ AddStoryFooter.propTypes = {
     }),
     scheduledAt: PropTypes.number,
   }),
+  uploadsCompleted: PropTypes.bool.isRequired,
+  storiesLength: PropTypes.number.isRequired,
 };
 
 AddStoryFooter.defaultProps = {
