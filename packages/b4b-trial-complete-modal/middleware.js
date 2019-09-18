@@ -1,6 +1,6 @@
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { actions as modalActions } from '@bufferapp/publish-modals';
+import { actions as modalActions } from '@bufferapp/publish-modals/reducer';
 import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line

@@ -1,7 +1,7 @@
 import { actions as queueActions } from '@bufferapp/publish-queue/reducer';
-import { actions as draftsActions } from '@bufferapp/publish-drafts';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { actions as storiesActions } from '@bufferapp/publish-stories';
+import { actions as draftsActions } from '@bufferapp/publish-drafts/reducer';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
+import { actions as storiesActions } from '@bufferapp/publish-stories/reducer';
 import { actions as storyGroupComposerActions } from '@bufferapp/publish-story-group-composer/reducer';
 import { actionTypes } from './reducer';
 

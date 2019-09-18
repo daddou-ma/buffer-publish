@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
 import { actionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
