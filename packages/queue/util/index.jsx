@@ -187,7 +187,6 @@ export const getSlotsWithTimestampsAndNoTimeForDay = ({
     label: slotMoment.format(hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'),
     timestamp: slotMoment.unix(),
     dayText,
-    slotMoment,
   }];
 };
 
