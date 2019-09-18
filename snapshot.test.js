@@ -1,6 +1,5 @@
 // use story.js files as snapshots
 import initStoryshots, { snapshotWithOptions } from '@storybook/addon-storyshots';
-import { Elements, StripeProvider } from 'react-stripe-elements';
 
 const skipSupplyingRefs = [
   'CloseComposerConfirmationModal',
@@ -20,6 +19,8 @@ initStoryshots({
   configPath: '.storybookStoryshot/',
   test: snapshotWithOptions(story => (skipSupplyingRefs.includes(story.kind) ? {} : ({
     createNodeMock: (element) => {
+      const { Elements, StripeProvider } = require('react-stripe-elements');
+
       if (element.type === Elements) {
         return null;
       }
