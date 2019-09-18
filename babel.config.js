@@ -24,7 +24,11 @@ module.exports = function (api) {
           useESModules: false,
         },
       ],
-      'babel-plugin-macros',
     ],
+    env: {
+      test: {
+        plugins: ['require-context-hook'],
+      },
+    },
   };
 };
