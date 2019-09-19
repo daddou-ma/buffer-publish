@@ -29,7 +29,7 @@ const CarouselCards = ({
   const cardsToRender = editMode ? getCardsToShow({ cards, totalCardsToShow }) : sortCards(cards);
   const { cardWidth, cardHeight } = getCardSizes(largeCards);
   const maxAttachableMediaCount = totalCardsToShow - cards.length;
-  const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
+  const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.STORIES); // Clone config
 
   return cardsToRender.map((card, index) => (
     <CardDragWrapper
