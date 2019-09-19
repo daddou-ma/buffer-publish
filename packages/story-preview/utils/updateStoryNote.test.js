@@ -1,6 +1,6 @@
-import updateNote from './updateNote';
+import updateStoryNote from './updateStoryNote';
 
-describe('updateNote', () => {
+describe('updateStoryNote', () => {
   it('returns stories with updated note', () => {
     const stories = [{
       order: 1,
@@ -24,7 +24,7 @@ describe('updateNote', () => {
       note: 'Amazing Note',
     }];
 
-    expect(updateNote(updatedNoteData)).toEqual(updatedStories);
+    expect(updateStoryNote(updatedNoteData)).toEqual(updatedStories);
   });
 
   it('returns empty array if stories are undefined', () => {
@@ -38,6 +38,6 @@ describe('updateNote', () => {
 
     const updatedStories = [];
 
-    expect(updateNote(updatedNoteData)).toEqual(updatedStories);
+    expect(updateStoryNote(updatedNoteData)).toEqual(updatedStories);
   });
 });
