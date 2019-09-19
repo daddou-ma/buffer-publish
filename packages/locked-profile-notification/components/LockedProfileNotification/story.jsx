@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import LockedProfileNotification from './index';
 
 const storeFake = state => ({
@@ -27,7 +27,7 @@ const storePro = createMockStore('pro');
 const storeBusiness = createMockStore('business');
 
 storiesOf('Locked Profile Notification', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('free user', () => (
     <Provider store={storeFree}>
       <LockedProfileNotification

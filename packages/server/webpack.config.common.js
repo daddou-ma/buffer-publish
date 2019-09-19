@@ -8,11 +8,10 @@ const PostCSSColorFunction = require('postcss-color-function');
 const vendor = ['react', 'react-dom', '@bufferapp/components'];
 const { analyzePackagesWhitelist, analyzeLessLoader } = require('../../analyze.config.js');
 
-
 module.exports = {
   context: __dirname,
   entry: {
-    bundle: ['babel-polyfill', '../web/index.jsx'],
+    bundle: ['core-js/stable','regenerator-runtime/runtime', '../web/index.jsx'],
     vendor,
   },
   resolve: {

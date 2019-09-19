@@ -2,9 +2,10 @@ import {
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import {
-  actionTypes as modalsActionTypes, actions as modalActions,
-} from '@bufferapp/publish-modals';
-import { actions as trialActions } from '@bufferapp/publish-trial';
+  actionTypes as modalsActionTypes,
+  actions as modalActions,
+} from '@bufferapp/publish-modals/reducer';
+import { actions as trialActions } from '@bufferapp/publish-trial/reducer';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actionTypes } from './reducer';
 

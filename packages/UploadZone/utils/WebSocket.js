@@ -83,7 +83,9 @@ class WebSocket {
     let pusherInstance;
 
     if (isDashboardEnv) {
-      [pusherInstance] = InternalPusher.instances;
+      if (InternalPusher && InternalPusher.instances) {
+        [pusherInstance] = InternalPusher.instances;
+      }
     } else {
       pusherInstance = window.__pusher;
     }

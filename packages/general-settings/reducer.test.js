@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import reducer, { actionTypes } from './reducer';
 

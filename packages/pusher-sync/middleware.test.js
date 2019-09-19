@@ -1,6 +1,6 @@
 import Pusher from 'pusher-js';
-import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
-import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
+import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
+import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { postParser } from '@bufferapp/publish-server/parsers/src';
 
 import middleware from './middleware';

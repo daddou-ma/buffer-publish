@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { actions as stripeActions } from '@bufferapp/stripe';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
+import { actions as stripeActions } from '@bufferapp/stripe/reducer';
 
 import SwitchPlanModal from './components/SwitchPlanModal';
 import { actions } from './reducer';
