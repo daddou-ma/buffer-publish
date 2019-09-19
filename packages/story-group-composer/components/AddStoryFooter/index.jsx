@@ -27,7 +27,7 @@ const AddStoryFooter = ({
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const storiesLength = storyGroup.stories.length;
-  const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0
+  const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0;
 
   const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading;
   const isPreviewDisabled = storiesLength < 1 || !uploadsCompleted;
