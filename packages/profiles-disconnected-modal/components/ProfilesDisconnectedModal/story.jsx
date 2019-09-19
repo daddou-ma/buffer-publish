@@ -1,13 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import ProfilesDisconnectedModal from './index';
 
 storiesOf('ProfilesDisconnectedModal', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('should show welcome modal', () => (
     <ProfilesDisconnectedModal
       translations={translations['profiles-disconnected-modal']}

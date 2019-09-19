@@ -1,7 +1,7 @@
 import deepFreeze from 'deep-freeze';
 
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actions as queueActions } from '@bufferapp/publish-queue';
+import { actions as queueActions } from '@bufferapp/publish-queue/reducer';
 import reducer, { actions, actionTypes, initialState as profileInitialState } from './reducer';
 import { profiles } from './mockData/profiles';
 

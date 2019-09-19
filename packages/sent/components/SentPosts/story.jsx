@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Provider } from 'react-redux';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import SentPosts from './index';
 import {
   header,
@@ -37,7 +37,7 @@ const UpgradeModalDecorator = storyFn => (
 );
 
 storiesOf('SentPosts', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
   .add('default', () => (
     <SentPosts

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import ScheduleSettingHeader from './index';
 
 const profileName = 'Buffer Admin';
@@ -14,7 +14,7 @@ const timezoneOptions = [
 ];
 
 storiesOf('ScheduleSettingHeader', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <ScheduleSettingHeader
       profileName={profileName}

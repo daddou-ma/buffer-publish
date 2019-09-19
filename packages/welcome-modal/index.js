@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
 import WelcomeModal from './components/WelcomeModal';
 

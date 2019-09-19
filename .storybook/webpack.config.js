@@ -1,4 +1,4 @@
-const webpack = require('../node_modules/@storybook/core/node_modules/webpack');
+const webpack = require('webpack');
 
 module.exports = {
   plugins: [new webpack.DefinePlugin({

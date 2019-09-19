@@ -1,7 +1,13 @@
-const { getDateString, isInThePast } = require('../../formatters/src')
+const { getDateString, isInThePast } = require('../../formatters/src');
+
+
+const getStoryAction = ({ scheduledAt, timezone, options }) => {
+  const dateString = getDateString(scheduledAt, timezone, options);
+  return `You will receive a reminder ${dateString} when it's time to post.`;
+};
 
 module.exports = (storyGroup) => {
-  const isPastDue = isInThePast(storyGroup.scheduled_at)
+  const isPastDue = isInThePast(storyGroup.scheduled_at);
 
   return {
     id: storyGroup.id,
@@ -23,7 +29,14 @@ module.exports = (storyGroup) => {
       status: storyGroup.status,
       stories: storyGroup.stories,
       twentyfourHourTime: storyGroup.twentyfour_hour_time,
-      storyAction: `You will receive a reminder on ${storyGroup.day} when it's time to post.`,
-    }
+      storyAction: getStoryAction({
+        scheduledAt: storyGroup.scheduled_at,
+        timezone: storyGroup.profile_timezone,
+        options: {
+          twentyFourHourTime: storyGroup.twentyfour_hour_time,
+          createdAt: storyGroup.created_at,
+        },
+      }),
+    },
   };
 };
