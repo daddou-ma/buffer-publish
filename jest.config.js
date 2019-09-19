@@ -11,7 +11,8 @@ module.exports = {
   },
   moduleFileExtensions: ['js', 'json', 'jsx'],
   setupFiles: [
-    '<rootDir>/jest-raf-shim.js',
+    '<rootDir>/.jest/jest-raf-shim.js',
+    '<rootDir>/.jest/require-context.js',
   ],
   setupFilesAfterEnv: ['<rootDir>/setupEnzyme.js'],
   globals: {
