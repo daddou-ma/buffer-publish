@@ -14,6 +14,13 @@ const refreshStoryGroups = (dispatch, selectedProfileId) => {
   }));
 };
 
+const getTrackingDataForOpenComposer = ({ channel = {} }) => ({
+  channel: channel.service || null,
+  channelId: channel.id || null,
+  channelServiceId: channel.serviceId || null,
+  clientId: channel.clientId || null,
+});
+
 export default ({ getState, dispatch }) => next => (action) => {
   next(action);
   const { selectedProfileId } = getState().profileSidebar;
@@ -93,6 +100,10 @@ export default ({ getState, dispatch }) => next => (action) => {
           storyGroupId: editingStoryGroup.id,
           scheduledAt: editingStoryGroup.scheduledAt,
         }));
+
+        const channel = getState().profileSidebar.selectedProfile;
+        const metadata = getTrackingDataForOpenComposer({ channel });
+        dispatch(analyticsActions.trackEvent('Story Composer Opened', metadata));
       }
       break;
     }
