@@ -224,7 +224,7 @@ export const actions = {
   }),
   handleShareNowClick: ({ storyGroup, profileId }) => ({
     type: actionTypes.STORY_GROUP_SHARE_NOW,
-    updateId: storyGroup.id,
+    storyGroupId: storyGroup.id,
     storyGroup,
     profileId,
   }),
