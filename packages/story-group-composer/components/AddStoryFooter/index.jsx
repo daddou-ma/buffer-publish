@@ -36,7 +36,6 @@ const AddStoryFooter = ({
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const initialDateTime = getInitialDateTime(editMode, scheduledAt, emptySlotData);
 
   const storiesLength = storyGroup.stories.length;
   const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0;
@@ -116,7 +115,7 @@ const AddStoryFooter = ({
           weekStartsMonday={weekStartsMonday}
           editMode={editMode}
           onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
-          initialDateTime={initialDateTime}
+          initialDateTime={getInitialDateTime(editMode, scheduledAt, emptySlotData)}
         />
       )}
     </Fragment>
