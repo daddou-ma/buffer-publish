@@ -1,5 +1,5 @@
 import keyWrapper from '@bufferapp/keywrapper';
-import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals';
+import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals/reducer';
 
 export const actionTypes = keyWrapper('STEAL_PROFILE_MODAL', {
 });

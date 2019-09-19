@@ -1,5 +1,5 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actionTypes as initialLoadingActionTypes } from '@bufferapp/publish-initial-loading';
+import { actionTypes as initialLoadingActionTypes } from '@bufferapp/publish-initial-loading/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 
 import getNotificationMessage from './utils/getNotificationMessage';
