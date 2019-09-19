@@ -10,4 +10,4 @@ module.exports = {
   buildPostMap,
   getURL,
   abbreviateNumber,
-}
+};

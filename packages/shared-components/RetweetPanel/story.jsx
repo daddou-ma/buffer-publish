@@ -2,11 +2,11 @@ import React from 'react';
 import {
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import RetweetPanel from './index';
 
 storiesOf('RetweetPanel', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <RetweetPanel
       name={'Joel Gascoigne'}

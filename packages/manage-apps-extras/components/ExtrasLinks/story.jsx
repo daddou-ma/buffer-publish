@@ -1,10 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import ExtrasLinks from './index';
 
 storiesOf('ExtrasLinks', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('should show text and links', () => (
     <ExtrasLinks />
   ));
