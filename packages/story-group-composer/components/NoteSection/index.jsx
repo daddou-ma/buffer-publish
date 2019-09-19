@@ -59,6 +59,7 @@ const NoteSection = ({ note, setNote, translations }) => (
           value={note}
           onChange={setNote}
           placeholder={translations.notePlaceholder}
+          autoFocus
         />
       </TextAreaWrapper>
       <SubtextWrapper>
