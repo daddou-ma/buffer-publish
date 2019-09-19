@@ -26,6 +26,11 @@ const AddStoryFooter = ({
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const storiesLength = storyGroup.stories.length;
+  const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0;
+
+  const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading;
+  const isPreviewDisabled = storiesLength < 1 || !uploadsCompleted;
 
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
@@ -80,13 +85,14 @@ const AddStoryFooter = ({
           <Button
             type="secondary"
             label={translations.previewButton}
+            disabled={isPreviewDisabled}
             onClick={() => onPreviewClick(storyGroup.stories)}
           />
         </ButtonStyle>
         <Button
           onClick={onScheduleClick}
           type="primary"
-          disabled={isScheduleLoading}
+          disabled={isScheduleDisabled}
           label={isScheduleLoading
             ? translations.scheduleLoadingButton
             : translations.scheduleButton}

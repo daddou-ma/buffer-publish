@@ -2,8 +2,8 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { actions as notificationActions } from '@bufferapp/notifications';
-import { AppHooks } from '@bufferapp/publish-composer';
+import { actions as notificationActions } from '@bufferapp/notifications/lib/';
+import { AppHooks } from '@bufferapp/publish-composer/composer/utils/LifecycleHooks';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => (action) => {

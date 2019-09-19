@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import Carousel, { CarouselCard, getCardSizes } from './index';
 import carouselData from './carouselData';
@@ -45,7 +45,7 @@ const UpgradeModalDecorator = storyFn => (
 );
 
 storiesOf('Carousel', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
   .add('should show carousel with stories', () => {
     const { cardWidth, cardHeight } = getCardSizes();

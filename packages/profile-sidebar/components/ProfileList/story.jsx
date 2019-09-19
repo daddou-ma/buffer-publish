@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
 import ProfileList from './index';
@@ -19,7 +19,7 @@ class _TestContextContainer extends Component { // eslint-disable-line
 const TestContextContainer = DragDropContext(TestBackend)(_TestContextContainer);
 
 storiesOf('ProfileList', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(getStory => <TestContextContainer>{getStory()}</TestContextContainer>)
   .add('should display a list of profiles', () => (
     <ProfileList

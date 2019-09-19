@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
 import createStore from '@bufferapp/publish-store';
@@ -30,7 +30,7 @@ class _TestContextContainer extends Component { // eslint-disable-line
 const TestContextContainer = DragDropContext(TestBackend)(_TestContextContainer);
 
 storiesOf('ProfileSidebar', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
       {getStory()}

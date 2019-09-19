@@ -69,4 +69,4 @@ module.exports = {
     date.setDate(date.getDate() - days)
     return Math.ceil(date.getTime() / 1000)
   },
-}
+};
