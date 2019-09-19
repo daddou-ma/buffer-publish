@@ -60,6 +60,7 @@ describe('middleware', () => {
       type: profileActionTypes.SELECT_PROFILE,
       profile: {
         id: 'id1',
+        type: 'instagram',
       },
     };
     middleware({ dispatch })(next)(action);
