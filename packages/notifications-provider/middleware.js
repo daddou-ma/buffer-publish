@@ -7,8 +7,7 @@ import getNotificationMessage from './utils/getNotificationMessage';
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
   switch (action.type) {
-    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case initialLoadingActionTypes.PROFILE_LOADING_REDIRECT: {
+    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const profilesLoaded = getState().profileSidebar.loading === false;
       if (!profilesLoaded) {
         break;
