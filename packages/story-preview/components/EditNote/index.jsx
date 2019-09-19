@@ -5,6 +5,7 @@ import { Text, Button } from '@bufferapp/ui';
 import { grayDarker, grayLight } from '@bufferapp/ui/style/colors';
 import { fontFamily, fontSize, fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
+import { storyPropTypes } from '../../utils/commonPropTypes';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -100,13 +101,7 @@ const EditNote = ({
 EditNote.propTypes = {
   onSaveNoteClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
-  story: PropTypes.shape({
-    note: PropTypes.string,
-    type: PropTypes.oneOf(['image', 'video', 'gif']),
-    order: PropTypes.number,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-  }).isRequired,
+  story: storyPropTypes, // eslint-disable-line react/require-default-props
 };
 
 export default EditNote;

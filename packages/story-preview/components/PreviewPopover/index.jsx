@@ -5,6 +5,7 @@ import { Slider } from '@bufferapp/publish-shared-components';
 import { Popover } from '@bufferapp/components';
 import NoteWrapper from '../NoteWrapper';
 import PreviewMedia from '../PreviewMedia';
+import { storyPropTypes, userPropTypes } from '../../utils/commonPropTypes';
 
 const SliderContainer = styled.div`
   height: 592px;
@@ -86,19 +87,8 @@ const PreviewPopover = ({
 PreviewPopover.propTypes = {
   onCloseClick: PropTypes.func.isRequired,
   onSaveNoteClick: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string.isRequired,
-    handle: PropTypes.string,
-  }).isRequired,
-  stories: PropTypes.arrayOf(
-    PropTypes.shape({
-      note: PropTypes.string,
-      type: PropTypes.oneOf(['image', 'video', 'gif']),
-      order: PropTypes.number,
-      asset_url: PropTypes.string,
-      thumbnail_url: PropTypes.string,
-    }),
-  ).isRequired,
+  user: userPropTypes, // eslint-disable-line react/require-default-props
+  stories: PropTypes.arrayOf(storyPropTypes).isRequired,
   view: PropTypes.oneOf(['composer', 'queue']).isRequired,
 };
 

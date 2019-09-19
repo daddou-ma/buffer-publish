@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ViewNote from '../ViewNote';
 import EditNote from '../EditNote';
+import { storyPropTypes } from '../../utils/commonPropTypes';
 
 const SEE_NOTE = 'seeNote';
 const EDIT_NOTE = 'editNote';
@@ -53,13 +54,7 @@ const NoteWrapper = ({
 
 NoteWrapper.propTypes = {
   onSaveNoteClick: PropTypes.func.isRequired,
-  story: PropTypes.shape({
-    note: PropTypes.string,
-    type: PropTypes.oneOf(['image', 'video', 'gif']),
-    order: PropTypes.number,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-  }).isRequired,
+  story: storyPropTypes, // eslint-disable-line react/require-default-props
   view: PropTypes.oneOf(['composer', 'queue']).isRequired,
 };
 
