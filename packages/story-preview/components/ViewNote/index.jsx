@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Button } from '@bufferapp/ui';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
+import { storyPropTypes } from '../../utils/commonPropTypes';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -57,13 +58,7 @@ const ViewNote = ({
 
 ViewNote.propTypes = {
   onEditNoteClick: PropTypes.func.isRequired,
-  story: PropTypes.shape({
-    note: PropTypes.string,
-    type: PropTypes.oneOf(['image', 'video', 'gif']),
-    order: PropTypes.number,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-  }).isRequired,
+  story: storyPropTypes, // eslint-disable-line react/require-default-props
 };
 
 export default ViewNote;

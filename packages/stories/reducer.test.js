@@ -26,6 +26,7 @@ describe('reducer', () => {
           total: 0,
         },
       },
+      showStoryPreview: false,
     };
     const action = {
       profileId,
@@ -52,6 +53,7 @@ describe('reducer', () => {
           total: 1,
         },
       },
+      showStoryPreview: false,
     };
     const action = {
       profileId,
@@ -81,6 +83,7 @@ describe('reducer', () => {
           total: 0,
         },
       },
+      showStoryPreview: false,
     };
     const action = {
       profileId,

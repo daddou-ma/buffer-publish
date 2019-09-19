@@ -8,6 +8,9 @@ import CardFooter from '../CardFooter';
 import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
 
 const Story = ({
+  id,
+  profileId,
+  scheduledAt,
   storyDetails,
   isDeleting,
   isWorking,
@@ -21,17 +24,22 @@ const Story = ({
   const actionMessage = deletingMessage || submittingMessage || '';
   const largeCards = false;
   const { cardWidth, cardHeight } = getCardSizes(largeCards);
+  const {
+    stories, creatorName, avatarUrl, createdAt, storyAction,
+  } = storyDetails;
 
   return (
     <Card>
       <CardHeader
-        creatorName={storyDetails.creatorName}
-        avatarUrl={storyDetails.avatarUrl}
-        createdAt={storyDetails.createdAt}
-        onPreviewClick={() => onPreviewClick(storyDetails.stories)}
+        creatorName={creatorName}
+        avatarUrl={avatarUrl}
+        createdAt={createdAt}
+        onPreviewClick={() => onPreviewClick({
+          stories, profileId, id, scheduledAt,
+        })}
       />
-      <Carousel editMode={false} totalCardsToShow={(storyDetails.stories && storyDetails.stories.length) || 0}>
-        {storyDetails.stories && storyDetails.stories.map((card) => (
+      <Carousel editMode={false} totalCardsToShow={(stories && stories.length) || 0}>
+        {stories && stories.map(card => (
           <CarouselCard
             cardHeight={cardHeight}
             cardWidth={cardWidth}
@@ -44,7 +52,7 @@ const Story = ({
       </Carousel>
       <CardFooter
         icon={<CircleInstReminderIcon color="instagram" />}
-        message={storyDetails.storyAction}
+        message={storyAction}
         onDeleteClick={onDeleteConfirmClick}
         onEditClick={onEditClick}
         onSubmitClick={onShareNowClick}
@@ -57,6 +65,9 @@ const Story = ({
 };
 
 Story.propTypes = {
+  id: PropTypes.string.isRequired,
+  profileId: PropTypes.string.isRequired,
+  scheduledAt: PropTypes.number.isRequired,
   storyDetails: PropTypes.shape({
     creatorName: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,

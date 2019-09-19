@@ -156,6 +156,7 @@ export default (state = initialState, action) => {
             ...state.byProfileId,
             [profileId]: profileReducer(state.byProfileId[profileId], action),
           },
+          showStoryPreview: state.showStoryPreview,
         };
       }
       return state;

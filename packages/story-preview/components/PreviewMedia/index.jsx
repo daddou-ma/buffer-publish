@@ -5,6 +5,7 @@ import { DiscontinuousProgressBar } from '@bufferapp/publish-shared-components';
 import { Avatar, Text } from '@bufferapp/ui';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
+import { storyPropTypes, userPropTypes } from '../../utils/commonPropTypes';
 
 const IMAGE_WIDTH = 306;
 const IMAGE_HEIGHT = 544;
@@ -57,7 +58,7 @@ const PreviewMedia = ({
       <Header>
         <DiscontinuousProgressBar
           totalNumberOfBars={numberOfStories}
-          numberOfBarsFilled={order + 1}
+          numberOfBarsFilled={parseInt(order, 10)}
         />
         <AvatarContainer>
           <Avatar
@@ -86,18 +87,9 @@ const PreviewMedia = ({
 };
 
 PreviewMedia.propTypes = {
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string.isRequired,
-    handle: PropTypes.string,
-  }).isRequired,
+  user: userPropTypes, // eslint-disable-line react/require-default-props
   numberOfStories: PropTypes.number.isRequired,
-  story: PropTypes.shape({
-    note: PropTypes.string,
-    type: PropTypes.oneOf(['image', 'video', 'gif']),
-    order: PropTypes.number,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-  }).isRequired,
+  story: storyPropTypes, // eslint-disable-line react/require-default-props
 };
 
 export default PreviewMedia;

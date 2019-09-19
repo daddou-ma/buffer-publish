@@ -39,8 +39,12 @@ export default connect(
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
     },
-    onPreviewClick: (stories) => {
-      dispatch(previewActions.handlePreviewClick(stories));
+    onPreviewClick: ({
+      stories, profileId, id, scheduledAt,
+    }) => {
+      dispatch(previewActions.handlePreviewClick({
+        stories, profileId, id, scheduledAt,
+      }));
       dispatch(actions.handlePreviewClick());
     },
     onClosePreviewClick: () => {

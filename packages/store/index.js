@@ -5,6 +5,7 @@ import {
   logTrackingMiddleware,
   bufferMetricsMiddleware,
 } from '@bufferapp/publish-data-tracking';
+
 import queueMiddleware from '@bufferapp/publish-queue/middleware';
 import sentMiddleware from '@bufferapp/publish-sent/middleware';
 import gridMiddleware from '@bufferapp/publish-grid/middleware';
@@ -51,6 +52,7 @@ import segmentTrackingMiddleware from '@bufferapp/publish-analytics-middleware/m
 import onboardingMiddleware from '@bufferapp/publish-onboarding/middleware';
 import globalAccountMiddleware from '@bufferapp/global-account/middleware';
 import closeComposerModalMiddleware from '@bufferapp/publish-close-composer-confirmation-modal/middleware';
+import storyPreviewMiddleware from '@bufferapp/publish-story-preview/middleware';
 import storyGroupComposerMiddleware from '@bufferapp/publish-story-group-composer/middleware';
 
 // Remove analytics middleware when publish switches to analyze
@@ -135,6 +137,7 @@ const configureStore = initialstate => {
         globalAccountMiddleware,
         closeComposerModalMiddleware,
         storiesMiddleware,
+        storyPreviewMiddleware,
         storyGroupComposerMiddleware,
         // Analyze
         averageMiddleware,
