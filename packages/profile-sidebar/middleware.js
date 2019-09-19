@@ -1,6 +1,6 @@
 import { push } from 'connected-react-router';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { actions as tabsActions } from '@bufferapp/publish-tabs';
+import { actions as tabsActions } from '@bufferapp/publish-tabs/reducer';
 
 import {
   generateProfilePageRoute,

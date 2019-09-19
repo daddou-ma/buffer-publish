@@ -68,12 +68,11 @@ class Editor extends React.Component {
     placeholder: 'What would you like to share?',
   };
 
-  constructor(props) {
+  constructor (props) {
     super(props);
-
-    const { editorPlugins, editorPluginsComponents, editorPluginsUtils } =
-      this.createEditorPlugins();
-    Object.assign(this, { editorPlugins, editorPluginsComponents, editorPluginsUtils });
+    this.editorPlugins = null;
+    this.editorPluginsComponents = null;
+    this.editorPluginsUtils = null;
   }
 
   state = {
@@ -82,6 +81,13 @@ class Editor extends React.Component {
     hashtagAutocompleteSearchQuery: '',
     hashtagAutocompleteSuggestions: [],
   };
+
+  componentWillMount() {
+    const { editorPlugins, editorPluginsComponents, editorPluginsUtils } = this.createEditorPlugins();
+    this.editorPlugins = editorPlugins;
+    this.editorPluginsComponents = editorPluginsComponents;
+    this.editorPluginsUtils = editorPluginsUtils;
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.forceDecoratorsRerender) {

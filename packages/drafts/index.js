@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getDateString, isInThePast } from '@bufferapp/publish-server/formatters/src';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
 import { actions } from './reducer';
 import DraftList from './components/DraftList';

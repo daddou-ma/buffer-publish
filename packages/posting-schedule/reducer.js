@@ -1,4 +1,4 @@
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import cloneDeep from 'lodash.clonedeep';
 import keyWrapper from '@bufferapp/keywrapper';

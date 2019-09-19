@@ -1,5 +1,5 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
+import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 
 import keyWrapper from '@bufferapp/keywrapper';
 

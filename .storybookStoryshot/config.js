@@ -1,8 +1,6 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import "@babel/register";
-import registerRequireContextHook from 'babel-plugin-require-context-hook/register';
-registerRequireContextHook();
 import { configure, storiesOf } from '@storybook/react';
 
 // Add all story.jsx files inside components directories except for the ones in node_modules

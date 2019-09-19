@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 // load the presentational component
 import InstagramDirectPostingModal from './components/InstagramDirectPostingModal';

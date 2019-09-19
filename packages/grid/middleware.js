@@ -1,4 +1,4 @@
-import { actionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,

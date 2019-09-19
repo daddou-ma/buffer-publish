@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 // load the presentational component
 import StealProfileModal from './components/StealProfileModal';
 
