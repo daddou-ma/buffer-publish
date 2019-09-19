@@ -40,6 +40,7 @@ const StoryGroupPopover = ({
     {showStoryPreview && (
       <PreviewPopover
         onCloseClick={onClosePreviewClick}
+        view="composer"
       />
     )}
     {!showStoryPreview && (
