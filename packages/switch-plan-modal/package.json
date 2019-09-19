@@ -17,7 +17,6 @@
     "@bufferapp/publish-data-tracking": "2.0.0"
   },
   "devDependencies": {
-    "eslint": "^5.3.0"
   },
   "publishConfig": {
     "access": "public"

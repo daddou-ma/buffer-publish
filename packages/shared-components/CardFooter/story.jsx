@@ -2,7 +2,7 @@ import React from 'react';
 import {
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import { CircleInstReminderIcon } from '@bufferapp/components';
 import CardFooter from './index';
@@ -13,7 +13,7 @@ const postDetailsInstagramReminder = {
 };
 
 storiesOf('CardFooter', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('instagram reminder story', () => (
     <CardFooter
       postDetails={postDetailsInstagramReminder}

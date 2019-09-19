@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import ComposerSidepanel from './index';
 
@@ -18,7 +18,7 @@ const composerStyle = {
 };
 
 storiesOf('ComposerSidepanel', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('should show composer sidepanel', () => (
     <div style={wrapperStyle}>
       <div style={composerStyle}>
@@ -31,7 +31,7 @@ storiesOf('ComposerSidepanel', module)
       </div>
     </div>
   ))
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('should not show composer sidepanel', () => (
     <div style={wrapperStyle}>
       <div style={composerStyle}>

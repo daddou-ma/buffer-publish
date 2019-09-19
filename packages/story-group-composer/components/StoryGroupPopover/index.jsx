@@ -20,7 +20,6 @@ const StoryGroupPopover = ({
   onUpdateStoryGroup,
   onDeleteStoryGroup,
   onDeleteStory,
-  onComposerClick,
   onCreateNewStoryCard,
   onUpdateStoryUploadProgress,
   onVideoUploadProcessingStarted,
@@ -64,7 +63,6 @@ const StoryGroupPopover = ({
           onDeleteStory={onDeleteStory}
           onCreateNewStoryCard={onCreateNewStoryCard}
           onUploadFinished={onUploadFinished}
-          onComposerClick={onComposerClick}
           onUpdateStoryUploadProgress={onUpdateStoryUploadProgress}
           onVideoUploadProcessingStarted={onVideoUploadProcessingStarted}
           onVideoUploadProcessingComplete={onVideoUploadProcessingComplete}

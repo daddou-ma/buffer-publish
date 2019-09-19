@@ -1,12 +1,13 @@
 import React from 'react';
-import { action, storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import ScheduleTableHeader from './index';
 
 const dayName = 'Monday';
 
 storiesOf('ScheduleTableHeader', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <ScheduleTableHeader
       dayName={dayName}

@@ -43,7 +43,7 @@ class UnshortenedLinkTooltip extends React.Component {
     this.isClickOnTooltipInProgress = false;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.callbacks.onUnshortenedLinkMouseOver = this.onUnshortenedLinkMouseOver;
     this.props.callbacks.onUnshortenedLinkMouseOut = this.onUnshortenedLinkMouseOut;
     this.props.callbacks.onEditorStateChange = this.onEditorStateChange;

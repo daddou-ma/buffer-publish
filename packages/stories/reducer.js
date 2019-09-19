@@ -1,5 +1,5 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('STORIES', {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 
 import ConfirmModal from './index';
 
 storiesOf('ConfirmModal', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('Modal for posting schedule', () => (
     <div>
       <ConfirmModal

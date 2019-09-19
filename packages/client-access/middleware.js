@@ -1,6 +1,3 @@
-import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
-
 import {
   actions as asyncDataFetch,
 } from '@bufferapp/async-data-fetch';

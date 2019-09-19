@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import styled from 'styled-components';
 import Arrow from './index';
 
@@ -17,7 +17,7 @@ const Content = styled.div`
 `;
 
 storiesOf('Arrow', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('should show left arrow', () => (
     <Arrow
       isLeft

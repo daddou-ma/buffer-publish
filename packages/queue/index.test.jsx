@@ -1,73 +1,10 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import { Provider } from 'react-redux';
-import Queue, {
-  reducer,
+import middleware from './middleware';
+import reducer, {
   actions,
   actionTypes,
-  middleware,
-} from './index';
-import QueuedPosts from './components/QueuedPosts';
-
-const storeFake = state => ({
-  default: () => {},
-  subscribe: () => {},
-  dispatch: () => {},
-  getState: () => ({ ...state }),
-});
+} from './reducer';
 
 describe('Queue', () => {
-  it('should render', () => {
-    const store = storeFake({
-      profileSidebar: {
-        profiles: [
-          { id: 'abc', paused: false, schedules: [] },
-        ],
-        selectedProfile: {
-          isManager: true,
-        },
-      },
-      appSidebar: {
-        user: {
-          features: [],
-        },
-      },
-      queue: {
-        byProfileId: {
-          abc: {
-            loading: true,
-            loadingMore: false,
-            moreToLoad: false,
-            page: 1,
-            posts: [],
-            total: 0,
-          },
-        },
-      },
-      modals: {
-        showInstagramDirectPostingModal: false,
-      },
-      environment: {
-        environment: 'production',
-      },
-    });
-    const wrapper = mount(
-      <Provider store={store}>
-        <Queue
-          profileId="abc"
-          postLists={[]}
-          onDeleteConfirmClick={jest.fn()}
-          onEditClick={jest.fn()}
-          onRequeueClick={jest.fn()}
-          onShareNowClick={jest.fn()}
-          onSwapPosts={jest.fn()}
-        />
-      </Provider>,
-    );
-    expect(wrapper.find(QueuedPosts).length)
-      .toBe(1);
-  });
-
   it('should export reducer', () => {
     expect(reducer)
       .toBeDefined();
