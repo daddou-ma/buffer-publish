@@ -6,6 +6,7 @@ import cloneDeep from 'lodash.clonedeep';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as storiesActions, actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
 import { actionTypes, actions } from './reducer';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
 
 const refreshStoryGroups = (dispatch, selectedProfileId) => {
   dispatch(dataFetchActions.fetch({
