@@ -32,6 +32,8 @@ const AddStoryFooter = ({
   const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading;
   const isPreviewDisabled = storiesLength < 1 || !uploadsCompleted;
 
+  const { stories } = storyGroup;
+
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
     if (editMode) {
@@ -86,7 +88,7 @@ const AddStoryFooter = ({
             type="secondary"
             label={translations.previewButton}
             disabled={isPreviewDisabled}
-            onClick={() => onPreviewClick(storyGroup.stories)}
+            onClick={() => onPreviewClick({ stories })}
           />
         </ButtonStyle>
         <Button

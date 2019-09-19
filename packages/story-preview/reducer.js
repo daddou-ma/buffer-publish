@@ -48,7 +48,9 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  handlePreviewClick: (stories, profileId, id, scheduledAt) => ({
+  handlePreviewClick: ({
+    stories, profileId, id, scheduledAt,
+  }) => ({
     type: actionTypes.OPEN_PREVIEW,
     stories,
     profileId,

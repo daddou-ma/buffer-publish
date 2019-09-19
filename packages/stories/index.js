@@ -58,8 +58,12 @@ export default connect(
     handleCloseStoriesComposer: () => {
       dispatch(actions.handleCloseStoriesComposer());
     },
-    onPreviewClick: (stories, profileId, id, scheduledAt) => {
-      dispatch(previewActions.handlePreviewClick(stories, profileId, id, scheduledAt));
+    onPreviewClick: ({
+      stories, profileId, id, scheduledAt,
+    }) => {
+      dispatch(previewActions.handlePreviewClick({
+        stories, profileId, id, scheduledAt,
+      }));
       dispatch(actions.handlePreviewClick());
     },
     onClosePreviewClick: () => {
