@@ -27,6 +27,8 @@ const StoryGroupPopover = ({
   onMonitorUpdateProgress,
   onUploadImageComplete,
   onUploadDraftFile,
+  onRemoveNotifications,
+  onShowErrorNotification,
   userData,
   storyGroup,
   editMode,
@@ -35,6 +37,7 @@ const StoryGroupPopover = ({
   onClosePreviewClick,
   onPreviewClick,
   onDropCard,
+  errorMessages,
 }) => (
   <React.Fragment>
     {showStoryPreview && (
@@ -69,11 +72,14 @@ const StoryGroupPopover = ({
           onMonitorUpdateProgress={onMonitorUpdateProgress}
           onUploadImageComplete={onUploadImageComplete}
           onUploadDraftFile={onUploadDraftFile}
+          onRemoveNotifications={onRemoveNotifications}
+          onShowErrorNotification={onShowErrorNotification}
           onPreviewClick={onPreviewClick}
           onDropCard={onDropCard}
           userData={userData}
           storyGroup={storyGroup}
           editMode={editMode}
+          errorMessages={errorMessages}
         />
       </Popover>
     )}
