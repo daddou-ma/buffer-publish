@@ -1,31 +1,57 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import CloseAccount, { reducer } from './index';
-import Modal from './components/Modal';
 import { Button } from '@bufferapp/ui';
-import { createStore } from 'redux';
+import CloseAccountHOC, {
+  actions,
+} from './index';
+import CloseAccount from './components/CloseAccount';
 
-describe('close-account-component', () => {
-  it('opens modal', () => {
-
-    const store = createStore(reducer, {
-      closeAccount: {
-        showModal: false,
-      },
-    });
-    const onRequestOpenModal = jest.fn();
-
-    const wrapper = mount(
-      <Provider store={store}>
-        <CloseAccount onRequestOpenModal={onRequestOpenModal} />
-      </Provider>,
-    );
-
-    expect(wrapper.find(CloseAccount).find(Modal).length).toBe(0);
-
-    wrapper.find(CloseAccount).find(Button).at(1).simulate('click');
-
-    expect(onRequestOpenModal).toBeCalled();
+function createProviderWithStore(initialState, fakeDispatch, Component) {
+  const storeFake = state => ({
+    default: () => {},
+    subscribe: () => {},
+    dispatch: fakeDispatch,
+    getState: () => ({ ...state }),
   });
-})
+
+  const store = storeFake(initialState);
+
+  return mount(
+    <Provider store={store}>
+      <Component />
+    </Provider>,
+  );
+}
+
+describe('close-account', () => {
+  const state = {
+    closeAccount: {
+      showModal: false,
+    },
+  };
+  it('renders close-account component', () => {
+    const fakeDispatch = jest.fn();
+
+    const wrapper = createProviderWithStore(state, fakeDispatch, CloseAccountHOC);
+
+    expect(wrapper.find(CloseAccount).length).toBe(1);
+
+    wrapper.unmount();
+  });
+  it('opens modal when button clicked', () => {
+    const fakeDispatch = jest.fn();
+
+    const wrapper = createProviderWithStore(state, fakeDispatch, CloseAccountHOC);
+
+    expect(wrapper.find(CloseAccount).prop('showModal')).toBe(false);
+
+    expect(wrapper.find(CloseAccount).at(0).find(Button).length).toBe(1);
+
+    wrapper.find(CloseAccount).at(0).find(Button).at(0).simulate('click');
+
+    expect(fakeDispatch).toBeCalledWith(actions.requestOpenModal());
+
+    wrapper.unmount();
+  });
+});
