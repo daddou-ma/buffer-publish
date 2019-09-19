@@ -1,6 +1,6 @@
 import keyWrapper from '@bufferapp/keywrapper';
-import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals';
-import { actionTypes as stripeActionTypes } from '@bufferapp/stripe';
+import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals/reducer';
+import { actionTypes as stripeActionTypes } from '@bufferapp/stripe/reducer';
 
 export const actionTypes = keyWrapper('UPGRADE_MODAL', {
   STORE_VALUE: 0,

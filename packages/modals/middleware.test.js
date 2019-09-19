@@ -6,7 +6,7 @@ import {
 import {
   actionTypes as thirdPartyActionTypes,
 } from '@bufferapp/publish-thirdparty';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 
 import middleware from './middleware';
 import {

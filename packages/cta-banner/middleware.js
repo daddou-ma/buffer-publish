@@ -1,6 +1,6 @@
-import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
-import { actionTypes } from '.';
+import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line
   const { user } = getState().appSidebar;

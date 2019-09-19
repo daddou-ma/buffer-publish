@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
 import WelcomeB4BTrialModal from './components/WelcomeB4BTrialModal';
 

@@ -3,7 +3,7 @@ const { analyzePackagesWhitelist } = require('./analyze.config.js');
 module.exports = {
   verbose: true,
   transformIgnorePatterns: [
-    `/node_modules(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/components)(?!/@bufferapp/notifications)(?!/@bufferapp/web-components)(?!/@bufferapp/publish-composer)(?!/@bufferapp/unauthorized-redirect)(?!/@bufferapp/app-sidebar)${analyzePackagesWhitelist}/`,
+    `/node_modules(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/draft-js-mention-plugin)(?!/@bufferapp/components)(?!/@bufferapp/notifications)(?!/@bufferapp/web-components)(?!/@bufferapp/publish-composer)(?!/@bufferapp/unauthorized-redirect)(?!/@bufferapp/app-sidebar)${analyzePackagesWhitelist}/`,
   ],
   collectCoverage: true,
   moduleNameMapper: {
@@ -11,7 +11,8 @@ module.exports = {
   },
   moduleFileExtensions: ['js', 'json', 'jsx'],
   setupFiles: [
-    '<rootDir>/jest-raf-shim.js',
+    '<rootDir>/.jest/jest-raf-shim.js',
+    '<rootDir>/.jest/require-context.js',
   ],
   setupFilesAfterEnv: ['<rootDir>/setupEnzyme.js'],
   globals: {

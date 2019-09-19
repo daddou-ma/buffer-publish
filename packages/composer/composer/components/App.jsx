@@ -222,7 +222,8 @@ class App extends React.Component {
     }
   }
 
-  componentWillMount() {
+
+  componentDidMount() {
     AppStore.addChangeListener(this.onStoreChange);
     NotificationStore.addChangeListener(this.onStoreChange);
     // prevent drop/dragover behavior when dropping a file not in the dropzone
@@ -237,9 +238,6 @@ class App extends React.Component {
     AppActionCreators.trackUserAction(['viewed'], {
       timeToRender: (new Date() - window.pageStartTime),
     });
-  }
-
-  componentDidMount() {
     observeStore(AppStore, store => store.getAppState().isLoaded)
       .then(() => {
         if (this.state.metaData.appEnvironment === AppEnvironments.EXTENSION) {
