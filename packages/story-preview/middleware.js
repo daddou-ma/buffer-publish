@@ -1,15 +1,6 @@
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
-
-const updateStoryNote = ({ stories = [], order, note }) => {
-  const updatedStories = stories.map((story) => {
-    if (story.order === order) {
-      story.note = note;
-    }
-    return story;
-  });
-  return updatedStories;
-};
+import updateStoryNote from './utils/updateStoryNote';
 
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);

@@ -1,6 +1,7 @@
 import keyWrapper from '@bufferapp/keywrapper';
 
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
+import updateStoryNote from './utils/updateStoryNote';
 
 export const actionTypes = keyWrapper('STORY_PREVIEW', {
   OPEN_PREVIEW: 0,
@@ -14,16 +15,6 @@ export const initialState = {
   profileId: null,
   storyGroupId: null,
   scheduledAt: null,
-};
-
-const updateStoryNote = ({ stories = [], order, note }) => {
-  const updatedStories = stories.map((story) => {
-    if (story.order === order) {
-      story.note = note;
-    }
-    return story;
-  });
-  return updatedStories;
 };
 
 export default (state = initialState, action) => {
