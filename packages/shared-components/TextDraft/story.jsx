@@ -59,7 +59,7 @@ const approvalView = 'approval';
 const scheduledAt = 123456789;
 
 
-storiesOf('TextDraft', module)
+storiesOf('Cards|Drafts/TextDraft', module)
   .addDecorator(withA11y)
   .add('default. All approval view.', () => (
     <TextDraft

@@ -55,7 +55,7 @@ const imageUrls = [
   'http://via.placeholder.com/400x400',
 ];
 
-storiesOf('MultipleImagesPost', module)
+storiesOf('Cards|Posts/MultipleImagesPost', module)
   .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
