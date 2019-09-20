@@ -39,6 +39,7 @@ const StoryGroupPopover = ({
   onDropCard,
   errorMessages,
   emptySlotData,
+  maxStories,
 }) => (
   <React.Fragment>
     {showStoryPreview && (
@@ -54,6 +55,7 @@ const StoryGroupPopover = ({
         onOverlayClick={onOverlayClick}
       >
         <StoryGroupWrapper
+          maxStories={maxStories}
           uses24hTime={uses24hTime}
           timezone={timezone}
           weekStartsMonday={weekStartsMonday}

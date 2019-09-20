@@ -48,6 +48,7 @@ export const initialState = {
   isScheduleLoading: false,
   showStoryPreview: false,
   errors: [],
+  maxStories: 10,
 };
 
 const updateStoryNote = ({ stories = [], order, note }) => (

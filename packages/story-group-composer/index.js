@@ -23,6 +23,7 @@ export default connect(
       editingPostId,
       errorMessages: state.storyGroupComposer.errors,
       emptySlotData,
+      maxStories: state.storyGroupComposer.maxStories,
     };
   },
   dispatch => ({
