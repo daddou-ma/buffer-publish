@@ -93,6 +93,14 @@ class TabNavigation extends React.Component {
           onTabClick={onTabClick}
         >
           <Tab tabId="queue">Queue</Tab>
+          {/* IG, Business users or Team Members */}
+          {this.isValidTab('stories')
+            && (
+              <Tab tabId="stories">
+                Stories
+                <Tag>New</Tag>
+              </Tab>
+            )}
           {this.isValidTab('pastReminders')
             && <Tab tabId="pastReminders">Past Reminders</Tab>
           }
@@ -113,14 +121,6 @@ class TabNavigation extends React.Component {
           {this.isValidTab('grid')
             && <Tab tabId="grid">Shop Grid</Tab>
           }
-          {/* IG, Business users or Team Members */}
-          {this.isValidTab('stories')
-            && (
-              <Tab tabId="stories">
-                Stories
-                <Tag>New</Tag>
-              </Tab>
-            )}
           <Tab tabId="settings">Settings</Tab>
         </Tabs>
         { shouldShowUpgradeButton && (
