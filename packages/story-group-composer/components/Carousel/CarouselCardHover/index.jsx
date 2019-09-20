@@ -51,6 +51,7 @@ const CarouselCardHover = ({
                 label="Add Note"
                 onClick={() => onAddNoteClick(card)}
                 fullWidth
+                size="small"
               />
             </ButtonWrapper>
           )
