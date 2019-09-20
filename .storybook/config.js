@@ -13,7 +13,8 @@ import { configure } from '@storybook/react';
  */
 
 function loadStories() {
-  const req = require.context(__PACKAGES__, true, /story\.jsx$/);
-  req.keys().forEach(filename => req(filename));
+	// Add all story.jsx files inside components directories except for the ones in node_modules
+	const req = require.context(__PACKAGES__, true, /^((?![\\/]node_modules[\\/]).)*components\/.*\/*story\.jsx$/);
+	req.keys().forEach(filename => req(filename));
 }
 configure(loadStories, module);
