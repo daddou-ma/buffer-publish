@@ -12,6 +12,8 @@ module.exports = method(
       strictSSL: !(process.env.NODE_ENV === 'development'),
       qs: {
         access_token: session.publish.accessToken,
+      },
+      form: {
         profile_id: profileId,
         scheduled_at: scheduledAt,
         stories,
