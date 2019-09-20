@@ -19,6 +19,8 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   OPEN_PREVIEW: 0,
   CLOSE_PREVIEW: 0,
   SET_STORY_GROUP: 0,
+  SHOW_ERRORS: 0,
+  HIDE_ERRORS: 0,
 });
 
 const newStory = () => clonedeep({
@@ -45,6 +47,7 @@ export const initialState = {
   },
   isScheduleLoading: false,
   showStoryPreview: false,
+  errors: [],
 };
 
 const updateStoryNote = ({ stories = [], order, note }) => (
@@ -317,6 +320,16 @@ export default (state, action) => {
         ...state,
         showStoryPreview: false,
       };
+    case actionTypes.HIDE_ERRORS:
+      return {
+        ...state,
+        errors: [],
+      };
+    case actionTypes.SHOW_ERRORS:
+      return {
+        ...state,
+        errors: [...state.errors, action.message],
+      };
     default:
       return state;
   }
@@ -450,5 +463,11 @@ export const actions = {
     type: actionTypes.DELETE_STORY,
     story,
   }),
-
+  showError: ({ message }) => ({
+    type: actionTypes.SHOW_ERRORS,
+    message,
+  }),
+  hideError: () => ({
+    type: actionTypes.HIDE_ERRORS,
+  }),
 };
