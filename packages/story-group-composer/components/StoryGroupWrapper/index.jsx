@@ -69,6 +69,7 @@ const StoryGroupWrapper = ({
   editMode,
   errorMessages,
   emptySlotData,
+  maxStories,
 }) => {
   const cards = storyGroup ? storyGroup.stories : [];
   const [viewMode, setViewMode] = useState(ADD_STORY);
@@ -85,6 +86,7 @@ const StoryGroupWrapper = ({
           <React.Fragment>
             <Carousel
               userData={userData}
+              totalCardsToShow={maxStories}
               largeCards
             >
               <CarouselCards
@@ -96,7 +98,7 @@ const StoryGroupWrapper = ({
                 uploadImageComplete={onUploadImageComplete}
                 uploadDraftFile={onUploadDraftFile}
                 cards={cards}
-                totalCardsToShow={15}
+                totalCardsToShow={maxStories}
                 userData={userData}
                 largeCards
                 editMode
