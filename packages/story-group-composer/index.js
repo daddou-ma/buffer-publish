@@ -7,7 +7,7 @@ import StoryGroupPopover from './components/StoryGroupPopover';
 
 export default connect(
   (state) => {
-    const { editingPostId } = state.stories;
+    const { editingPostId, emptySlotData } = state.stories;
 
     return {
       uses24hTime: state.appSidebar.user.uses_24h_time,
@@ -21,6 +21,7 @@ export default connect(
       editMode: !!editingPostId,
       userData: state.appSidebar.user,
       editingPostId,
+      emptySlotData,
     };
   },
   dispatch => ({

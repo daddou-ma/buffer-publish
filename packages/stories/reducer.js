@@ -17,6 +17,7 @@ export const initialState = {
   showStoriesComposer: false,
   editMode: false,
   emptySlotMode: false,
+  emptySlotData: null,
   editingPostId: '',
   showStoryPreview: false,
 };
@@ -174,6 +175,7 @@ export default (state = initialState, action) => {
         showStoriesComposer: false,
         editMode: false,
         emptySlotMode: false,
+        emptySlotData: null,
       };
     case actionTypes.OPEN_PREVIEW:
       return {
@@ -194,6 +196,7 @@ export const actions = {
   handleEmptySlotClick: ({ profileId, emptySlotData }) => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,
     emptySlotMode: true,
+    editMode: false,
     emptySlotData,
     profileId,
   }),

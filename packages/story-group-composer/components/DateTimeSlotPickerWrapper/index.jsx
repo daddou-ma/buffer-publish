@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DateTimeSlotPicker from '@bufferapp/publish-composer/composer/components/DateTimeSlotPicker';
 import styled from 'styled-components';
+import moment from 'moment-timezone';
 
 const DateTimePickerStyle = styled.div`
   background: white;
@@ -20,6 +21,7 @@ const DateTimeSlotPickerWrapper = ({
   weekStartsMonday,
   uses24hTime,
   editMode,
+  initialDateTime,
 }) => (
   <DateTimePickerStyle style={getDateTimePickerPosition(editMode)}>
     <DateTimeSlotPicker
@@ -27,6 +29,7 @@ const DateTimeSlotPickerWrapper = ({
       shouldUse24hTime={uses24hTime}
       timezone={timezone}
       weekStartsMonday={weekStartsMonday}
+      initialDateTime={initialDateTime}
     />
   </DateTimePickerStyle>
 );
@@ -37,12 +40,14 @@ DateTimeSlotPickerWrapper.propTypes = {
   uses24hTime: PropTypes.bool,
   onDateTimeSlotPickerSubmit: PropTypes.func,
   editMode: PropTypes.bool,
+  initialDateTime: PropTypes.instanceOf(moment),
 };
 
 DateTimeSlotPickerWrapper.defaultProps = {
   editMode: false,
   uses24hTime: false,
   onDateTimeSlotPickerSubmit: () => {},
+  initialDateTime: null,
 };
 
 export default DateTimeSlotPickerWrapper;
