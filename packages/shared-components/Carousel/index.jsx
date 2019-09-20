@@ -53,7 +53,7 @@ const shouldHideRightArrow = (
   total,
   selectedItem,
   maxPerPage,
-) => total - selectedItem - maxPerPage < 0;
+) => total + 1 - selectedItem - maxPerPage < 0;
 
 class Carousel extends React.Component {
   constructor (props) {
@@ -73,12 +73,15 @@ class Carousel extends React.Component {
   render () {
     const {
       totalCardsToShow,
+      totalStories,
       children,
       largeCards,
     } = this.props;
 
     const { selectedItem } = this.state;
     const { cardWidth, cardHeight, maxPerPage } = getCardSizes(largeCards);
+    const incrementBy = totalStories - selectedItem === maxPerPage ? 2 : 1;
+    const decrementBy = totalStories - selectedItem < maxPerPage ? -2 : -1;
 
     return (
       <React.Fragment>
@@ -99,15 +102,15 @@ class Carousel extends React.Component {
             hide={selectedItem <= 0}
             setSelectedItem={this.setSelectedItem}
             selectedItem={selectedItem}
-            incrementBy={-1}
+            incrementBy={decrementBy}
             totalCardsToShow={totalCardsToShow}
             largeCards={largeCards}
           />
           <NavArrow
-            hide={shouldHideRightArrow(totalCardsToShow, selectedItem, maxPerPage)}
+            hide={shouldHideRightArrow(totalStories, selectedItem, maxPerPage)}
             setSelectedItem={this.setSelectedItem}
             selectedItem={selectedItem}
-            incrementBy={+1}
+            incrementBy={incrementBy}
             totalCardsToShow={totalCardsToShow}
             largeCards={largeCards}
           />
@@ -122,12 +125,14 @@ Carousel.propTypes = {
   children: PropTypes.element,
   initialSelectedItem: PropTypes.number,
   totalCardsToShow: PropTypes.number,
+  totalStories: PropTypes.number,
 };
 
 Carousel.defaultProps = {
   largeCards: false,
   initialSelectedItem: 0,
   totalCardsToShow: 15,
+  totalStories: 0,
 };
 
 export default Carousel;

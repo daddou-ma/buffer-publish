@@ -14,7 +14,7 @@ export const ArrowWrapper = styled.div`
 
 export const CarouselContainer = styled.div`
   display: flex;
-  padding-left: ${props => (props.largeCards ? '16px' : 0)};
+  padding-left: ${props => (props.largeCards ? '8px' : 0)};
   width: calc(${props => props.cardWidth + cardMargin}px *  ${$props => $props.totalCardsToShow});
   transform: ${props => `translateX(calc(-${props.cardWidth + cardMargin}px * ${props.selectedItem}`}));
   transition: all 0.3s ease-out;
@@ -39,7 +39,7 @@ export const CarouselCard = styled.div`
 export const SliderCarousel = styled.div`
   position: relative;
   overflow: hidden;
-  margin: ${props => (props.largeCards ? '0 -16px 0 -16px' : '0 12px 0 12px')};
+  margin: ${props => (props.largeCards ? '0 -16px 0 -16px' : '0 8px 0 8px')};
 `;
 
 export const IconWrapper = styled.div`
