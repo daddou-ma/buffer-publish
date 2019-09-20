@@ -1,7 +1,8 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Carousel from '@bufferapp/publish-shared-components/Carousel';
+import Carousel, { CarouselCard, getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
+import { Text } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
@@ -30,6 +31,16 @@ const ErrorMessage = styled.div`
   padding: 8px;
   font-size: 0.875rem;
   font-weight: 400;
+`;
+
+const CarouselCardCongrats = styled.span`
+  color: inherit;
+  font-family: 'Roboto';
+  font-size: 0.875rem;
+  font-weight: ${props => props.weight};
+  line-height: inherit;
+  margin: 8px;
+  text-align: center;
 `;
 
 const ErrorHandler = ({ errorMessages }) => {
@@ -75,6 +86,10 @@ const StoryGroupWrapper = ({
   const [viewMode, setViewMode] = useState(ADD_STORY);
   const [story, setStory] = useState();
 
+  const hasReachedMaxStories = (maxStories - cards.length) <= 0;
+  const totalStoriesInCarousel = hasReachedMaxStories ? maxStories + 1 : maxStories;
+  const { cardWidth, cardHeight } = getCardSizes(true);
+
   return (
     <Fragment>
       <WrapperStyle>
@@ -86,7 +101,7 @@ const StoryGroupWrapper = ({
           <React.Fragment>
             <Carousel
               userData={userData}
-              totalCardsToShow={maxStories}
+              totalCardsToShow={totalStoriesInCarousel}
               largeCards
             >
               <CarouselCards
@@ -112,6 +127,26 @@ const StoryGroupWrapper = ({
                 removeNotifications={onRemoveNotifications}
                 notifyError={onShowErrorNotification}
               />
+              {hasReachedMaxStories
+              && (
+                <CarouselCard
+                  key="congrats"
+                  cardHeight={cardHeight}
+                  cardWidth={cardWidth}
+                  largeCards
+                  onMouseEnter={() => false}
+                  onMouseLeave={() => false}
+                  isTarget={false}
+                >
+                  <CarouselCardCongrats weight="500">
+                    You’re a Stories superstar!
+                  </CarouselCardCongrats>
+                  <CarouselCardCongrats weight="normal">
+                    {`You’ve hit the ${maxStories} media limit per scheduled Story.`}
+                  </CarouselCardCongrats>
+                </CarouselCard>
+              )
+              }
             </Carousel>
             <ErrorHandler errorMessages={errorMessages} />
             <AddStoryFooter
