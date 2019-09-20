@@ -38,6 +38,7 @@ const StoryGroupPopover = ({
   onPreviewClick,
   onDropCard,
   errorMessages,
+  emptySlotData,
 }) => (
   <React.Fragment>
     {showStoryPreview && (
@@ -80,6 +81,7 @@ const StoryGroupPopover = ({
           storyGroup={storyGroup}
           editMode={editMode}
           errorMessages={errorMessages}
+          emptySlotData={emptySlotData}
         />
       </Popover>
     )}
