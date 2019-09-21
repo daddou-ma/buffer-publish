@@ -80,8 +80,8 @@ class Carousel extends React.Component {
 
     const { selectedItem } = this.state;
     const { cardWidth, cardHeight, maxPerPage } = getCardSizes(largeCards);
-    const incrementBy = totalStories - selectedItem === maxPerPage ? 2 : 1;
-    const decrementBy = totalStories - selectedItem < maxPerPage ? -2 : -1;
+    const incrementBy = largeCards && (totalStories - selectedItem === maxPerPage) ? 2 : 1;
+    const decrementBy = largeCards && (totalStories - selectedItem < maxPerPage) ? -2 : -1;
 
     return (
       <React.Fragment>
