@@ -22,6 +22,21 @@ const WrapperStyle = styled.div`
   padding: 16px;
 `;
 
+const ErrorMessage = styled.div`
+  display: block;
+  background-color: rgba(243, 175, 185, 0.25);
+  color: #9D2637;
+  margin: 8px 0;
+  padding: 8px;
+  font-size: 0.875rem;
+  font-weight: 400;
+`;
+
+const ErrorHandler = ({ errorMessages }) => {
+  if (!errorMessages) return null;
+  return errorMessages && errorMessages.map(err => <ErrorMessage key={`${err}`}>{err}</ErrorMessage>);
+};
+
 /*
  * Wrapper to make sure to display add story view or add note view
  */
@@ -45,12 +60,16 @@ const StoryGroupWrapper = ({
   onUploadImageComplete,
   onUploadDraftFile,
   onPreviewClick,
+  onRemoveNotifications,
+  onShowErrorNotification,
   userData,
   onUploadFinished,
   onDropCard,
   storyGroup,
   editMode,
+  errorMessages,
   emptySlotData,
+  maxStories,
 }) => {
   const cards = storyGroup ? storyGroup.stories : [];
   const [viewMode, setViewMode] = useState(ADD_STORY);
@@ -67,6 +86,7 @@ const StoryGroupWrapper = ({
           <React.Fragment>
             <Carousel
               userData={userData}
+              totalCardsToShow={maxStories}
               largeCards
               totalStories={(storyGroup.stories && storyGroup.stories.length) || 0}
             >
@@ -79,7 +99,7 @@ const StoryGroupWrapper = ({
                 uploadImageComplete={onUploadImageComplete}
                 uploadDraftFile={onUploadDraftFile}
                 cards={cards}
-                totalCardsToShow={15}
+                totalCardsToShow={maxStories}
                 userData={userData}
                 largeCards
                 editMode
@@ -90,8 +110,11 @@ const StoryGroupWrapper = ({
                 }}
                 onDeleteStoryClick={storyCard => onDeleteStory(storyCard)}
                 onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, storyGroup)}
+                removeNotifications={onRemoveNotifications}
+                notifyError={onShowErrorNotification}
               />
             </Carousel>
+            <ErrorHandler errorMessages={errorMessages} />
             <AddStoryFooter
               timezone={timezone}
               weekStartsMonday={weekStartsMonday}

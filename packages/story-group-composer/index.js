@@ -21,7 +21,9 @@ export default connect(
       editMode: !!editingPostId,
       userData: state.appSidebar.user,
       editingPostId,
+      errorMessages: state.storyGroupComposer.errors,
       emptySlotData,
+      maxStories: state.storyGroupComposer.maxStories,
     };
   },
   dispatch => ({
@@ -181,6 +183,12 @@ export default connect(
     },
     onDeleteStory: (storyCard) => {
       dispatch(actions.deleteStory(storyCard));
+    },
+    onRemoveNotifications: () => {
+      dispatch(actions.hideError());
+    },
+    onShowErrorNotification: ({ message }) => {
+      dispatch(actions.showError({ message }));
     },
   }),
 )(StoryGroupPopover);

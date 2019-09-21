@@ -14,12 +14,66 @@ const refreshStoryGroups = (dispatch, selectedProfileId) => {
   }));
 };
 
+const createImageStory = (story) => {
+  const {
+    _id,
+    note,
+    order,
+    type,
+    asset_url,
+    thumbnail_url,
+  } = story;
+  return {
+    _id,
+    note,
+    order,
+    type,
+    asset_url,
+    thumbnail_url,
+  };
+};
+
+const createVideoStory = (story) => {
+  const {
+    _id,
+    note,
+    order,
+    type,
+    asset_url,
+    thumbnail_url,
+    upload_id,
+    duration_ms,
+    file_size,
+    width,
+    height,
+  } = story;
+  return {
+    _id,
+    note,
+    order,
+    type,
+    asset_url,
+    thumbnail_url,
+    upload_id,
+    duration_ms,
+    file_size,
+    width,
+    height,
+  };
+};
+
+const getMappedStories = (story) => {
+  if (story.type === 'video') return createVideoStory(story);
+  return createImageStory(story);
+};
+
 export default ({ getState, dispatch }) => next => (action) => {
   next(action);
   const { selectedProfileId } = getState().profileSidebar;
   switch (action.type) {
     case actionTypes.SAVE_STORY_GROUP: {
       const { stories } = getState().storyGroupComposer.storyGroup;
+      const sendStories = stories.map(getMappedStories);
       const { scheduledAt } = action;
 
       if (scheduledAt) {
@@ -28,7 +82,7 @@ export default ({ getState, dispatch }) => next => (action) => {
           args: {
             profileId: selectedProfileId,
             scheduledAt,
-            stories,
+            stories: sendStories,
           },
         }));
       }

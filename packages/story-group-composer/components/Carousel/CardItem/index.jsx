@@ -3,7 +3,7 @@ import { CarouselCard } from '@bufferapp/publish-shared-components/Carousel';
 import { Text, LoadingAnimation } from '@bufferapp/components';
 import UploadZone from '@bufferapp/publish-upload-zone';
 import { Button } from '@bufferapp/ui';
-import Attach from '@bufferapp/ui/Icon/Icons/Attach';
+import PlusIcon from '@bufferapp/ui/Icon/Icons/Plus';
 import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
 import { UploadTypes } from '@bufferapp/publish-constants';
 import CircularUploadIndicator
@@ -69,8 +69,8 @@ const CardItem = ({
           uploadButton={({ onClick }) => (
             <Button
               type="primary"
-              label="Add Media Files"
-              icon={<Attach />}
+              label="Add Media"
+              icon={<PlusIcon />}
               onClick={onClick}
             />
           )}
