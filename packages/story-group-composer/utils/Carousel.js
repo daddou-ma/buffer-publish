@@ -2,7 +2,7 @@
 // TO-DO: Add tests for methods
 export const sortCards = cards => (
   cards.sort((a, b) => {
-    if (a.order > b.order) return 1;
+    if (parseInt(a.order, 10) > parseInt(b.order, 10)) return 1;
     return -1;
   })
 );
