@@ -64,7 +64,7 @@ const childrenLineBreaks = (
   </Text>
 );
 
-storiesOf('Draft', module)
+storiesOf('Cards|Drafts/Draft', module)
   .addDecorator(withA11y)
   .add('default', () => (
     <Draft
