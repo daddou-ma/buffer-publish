@@ -13,7 +13,7 @@ const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
 
 const WrapperStyle = styled.div`
-  width: 686px;
+  width: 728px;
   height: 100%;
   background-color: white;
   top: 0;
