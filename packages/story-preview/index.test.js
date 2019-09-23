@@ -81,7 +81,7 @@ describe('StoryPreview', () => {
       wrapper.unmount();
     });
 
-    it('dispatches a handleSaveNoteComposer action when click on Save Note in the Preview opened through the component', () => {
+    it('dispatches a handleSaveNoteComposer action when click on Save Note in the Preview opened through the composer', () => {
       const wrapper = mount(
         <Provider store={store}>
           <StoryPreview
