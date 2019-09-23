@@ -88,6 +88,7 @@ const StoryGroupWrapper = ({
               userData={userData}
               totalCardsToShow={maxStories}
               largeCards
+              totalStories={(storyGroup.stories && storyGroup.stories.length) || 0}
             >
               <CarouselCards
                 createNewFile={onCreateNewStoryCard}
