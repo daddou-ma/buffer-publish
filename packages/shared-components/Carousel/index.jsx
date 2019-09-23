@@ -10,8 +10,8 @@ import {
 } from './style';
 
 export const getCardSizes = (largeCards) => {
-  if (largeCards) return { cardWidth: 180, cardHeight: 320, maxPerPage: 4 };
-  return { cardWidth: 110, cardHeight: 198, maxPerPage: 7 };
+  if (largeCards) return { cardWidth: 180, cardHeight: 320, maxPerPage: 5 };
+  return { cardWidth: 110, cardHeight: 198, maxPerPage: 8 };
 };
 
 const NavArrow = ({
@@ -49,11 +49,15 @@ NavArrow.propTypes = {
   largeCards: PropTypes.bool,
 };
 
-const shouldHideRightArrow = (
-  total,
+const shouldHideRightArrow = ({
+  totalStories,
   selectedItem,
   maxPerPage,
-) => total + 1 - selectedItem - maxPerPage < 0;
+  canUploadMore,
+}) => {
+  const total = canUploadMore ? totalStories + 1 : totalStories;
+  return total - selectedItem < maxPerPage;
+};
 
 class Carousel extends React.Component {
   constructor (props) {
@@ -80,8 +84,9 @@ class Carousel extends React.Component {
 
     const { selectedItem } = this.state;
     const { cardWidth, cardHeight, maxPerPage } = getCardSizes(largeCards);
-    const incrementBy = largeCards && (totalStories - selectedItem === maxPerPage) ? 2 : 1;
-    const decrementBy = largeCards && (totalStories - selectedItem < maxPerPage) ? -2 : -1;
+    const canUploadMore = largeCards && totalStories < totalCardsToShow;
+    const incrementBy = canUploadMore && (totalStories - selectedItem === maxPerPage) ? 2 : 1;
+    const decrementBy = canUploadMore && (totalStories - selectedItem < maxPerPage) ? -2 : -1;
 
     return (
       <React.Fragment>
@@ -107,7 +112,12 @@ class Carousel extends React.Component {
             largeCards={largeCards}
           />
           <NavArrow
-            hide={shouldHideRightArrow(totalStories, selectedItem, maxPerPage)}
+            hide={shouldHideRightArrow({
+              totalStories,
+              selectedItem,
+              maxPerPage,
+              canUploadMore,
+            })}
             setSelectedItem={this.setSelectedItem}
             selectedItem={selectedItem}
             incrementBy={incrementBy}
@@ -131,7 +141,7 @@ Carousel.propTypes = {
 Carousel.defaultProps = {
   largeCards: false,
   initialSelectedItem: 0,
-  totalCardsToShow: 15,
+  totalCardsToShow: 10,
   totalStories: 0,
 };
 
