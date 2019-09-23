@@ -85,7 +85,7 @@ const children = (
   </Text>
 );
 
-storiesOf('Post', module)
+storiesOf('Cards|Posts/Post', module)
   .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>

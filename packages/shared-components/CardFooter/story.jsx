@@ -12,7 +12,7 @@ const postDetailsInstagramReminder = {
   isInstagramReminder: true,
 };
 
-storiesOf('CardFooter', module)
+storiesOf('Cards|Basic Elements/CardFooter', module)
   .addDecorator(withA11y)
   .add('instagram reminder story', () => (
     <CardFooter
