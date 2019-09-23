@@ -58,24 +58,22 @@ const updateStoryNote = ({ stories = [], order, note }) => (
 const reorderStories = (stories, sourceOrder, targetOrder) => {
   const draggedCard = stories.find(item => item.order === sourceOrder);
   const remainingCards = stories.filter(item => item.order !== sourceOrder);
-  const source = parseInt(sourceOrder, 10);
-  const target = parseInt(targetOrder, 10);
 
-  if (source < target) {
+  if (sourceOrder < targetOrder) {
     remainingCards.forEach((story) => {
-      if (story.order > source && story.order <= target) {
-        story.order = parseInt(story.order, 10) - 1;
+      if (story.order > sourceOrder && story.order <= targetOrder) {
+        story.order -= 1;
       }
     });
   }
-  if (source > target) {
+  if (sourceOrder > targetOrder) {
     remainingCards.forEach((story) => {
-      if (story.order < source && story.order >= target) {
-        story.order = parseInt(story.order, 10) + 1;
+      if (story.order < sourceOrder && story.order >= targetOrder) {
+        story.order += 1;
       }
     });
   }
-  draggedCard.order = target;
+  draggedCard.order = targetOrder;
 
   const result = [
     ...remainingCards,
@@ -88,15 +86,14 @@ const reorderStories = (stories, sourceOrder, targetOrder) => {
 const deleteStory = ({ stories, story }) => {
   const result = stories.filter(item => item.order !== story.order);
 
-  result.forEach((item) => {
+  return result.map((item) => {
     // If card is on the right of the deleted card,
     // change order one space to the left
     if (item.order > story.order) {
-      item.order = parseInt(item.order, 10) - 1;
+      item.order -= 1;
     }
+    return item;
   });
-
-  return result;
 };
 
 export default (state, action) => {
