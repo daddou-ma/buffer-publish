@@ -162,7 +162,6 @@ export default (state, action) => {
       const {
         id,
         progress,
-        complete,
       } = action.args;
       const { stories } = state.storyGroup;
       return {
@@ -187,7 +186,6 @@ export default (state, action) => {
         url,
         width,
         height,
-        stillGifUrl,
         contentType,
       } = action.args;
       const { stories } = state.storyGroup;
