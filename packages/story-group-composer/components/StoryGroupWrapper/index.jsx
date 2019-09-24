@@ -2,7 +2,8 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Carousel, { CarouselCard, getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
-import { Text } from '@bufferapp/ui';
+import { fontSizeMini, fontWeight, fontWeightMedium, fontFamily } from '@bufferapp/components/style/font';
+import { red } from '@bufferapp/components/style/color';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
@@ -26,17 +27,17 @@ const WrapperStyle = styled.div`
 const ErrorMessage = styled.div`
   display: block;
   background-color: rgba(243, 175, 185, 0.25);
-  color: #9D2637;
+  color: ${red};
   margin: 8px 0;
   padding: 8px;
-  font-size: 0.875rem;
-  font-weight: 400;
+  font-size: ${fontSizeMini};
+  font-weight: ${fontWeight};
 `;
 
 const CarouselCardCongrats = styled.span`
   color: inherit;
-  font-family: 'Roboto';
-  font-size: 0.875rem;
+  font-family: ${fontFamily};
+  font-size: ${fontSizeMini};
   font-weight: ${props => props.weight};
   line-height: inherit;
   margin: 8px;
@@ -138,10 +139,10 @@ const StoryGroupWrapper = ({
                   onMouseLeave={() => false}
                   isTarget={false}
                 >
-                  <CarouselCardCongrats weight="500">
+                  <CarouselCardCongrats weight={fontWeightMedium}>
                     You’re a Stories superstar!
                   </CarouselCardCongrats>
-                  <CarouselCardCongrats weight="normal">
+                  <CarouselCardCongrats weight={fontWeight}>
                     {`You’ve hit the ${maxStories} media limit per scheduled Story.`}
                   </CarouselCardCongrats>
                 </CarouselCard>
