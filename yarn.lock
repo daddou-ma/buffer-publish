@@ -954,7 +954,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.9"
 
-"@babel/runtime-corejs3@^7.6.2":
+"@babel/runtime-corejs3@7.6.2":
   version "7.6.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.6.2.tgz#032d0ca5107747751bb31cbce2302f9a73bd824c"
   integrity sha512-FX1ddj2gf7psgslvkkKeyxftnslUFDY9OHGnp+wJ+4JIKSEABB1fKVZiE7/2n+C9RVTPfPwpOqGmFf5TGvg0Bw==
@@ -1226,17 +1226,6 @@
     "@bufferapp/react-simple-dropdown" "3.2.5"
     react-highcharts "^16.0.2"
 
-"@bufferapp/components@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-3.0.2.tgz#a12503ce4b347fcd375034a1558795ffe791d6e1"
-  integrity sha512-uER+3TGkJe7em2FZftrHDlbGVBV2lurjLGczs/J8Y7IbDeYZz1adT9pdvJm+Wz1y5zKZO/l/1tWiWCwS0I38fQ==
-  dependencies:
-    "@bufferapp/react-keyframes" "0.2.5"
-    moment "^2.22.2"
-    raf "3.4.0"
-    react-autocomplete "1.7.2"
-    react-day-picker "7.2.3"
-
 "@bufferapp/components@3.2.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-3.2.1.tgz#a9654ed3e265323d9678cd9aadf55de98ac068db"
@@ -1248,7 +1237,7 @@
     react-autocomplete "1.7.2"
     react-day-picker "7.2.3"
 
-"@bufferapp/draft-js-emoji-plugin@^2.0.2":
+"@bufferapp/draft-js-emoji-plugin@2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@bufferapp/draft-js-emoji-plugin/-/draft-js-emoji-plugin-2.0.2.tgz#a9dcf735ebff6c2e5d63a07032c01291377111d2"
   integrity sha512-KDja7MCnGRqK7omusd/A/IHlrCSe/yj0zBlKdwSB3bmcEchHUTWm64tC4WUlI84YVtrzvsHW9rT0h+wnnAZmrw==
@@ -1386,7 +1375,7 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/profile-loader/-/profile-loader-1.1.0.tgz#fb53134872e800e23ec2a24d24a14044f472e5c9"
   integrity sha512-3mA6is0KoV2+etOzrjbJXXoysu8yJwEzVSt4zaSQSZMzwFwa9j+qxtTq9ktHohot6wamobVIIU4hE/8X6TmEjA==
 
-"@bufferapp/react-images-loaded@^1.1.0-fork.0":
+"@bufferapp/react-images-loaded@1.1.0-fork.0":
   version "1.1.0-fork.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/react-images-loaded/-/react-images-loaded-1.1.0-fork.0.tgz#fb3e2e13df30c806cf17ebf11b19a20d32c02e46"
   integrity sha512-GCkIOvktQSP4Y5p5Zdx3FMtlV7np2IdmDwq9ckPCuQ9jFWsub6KXR39vF7BbV/GiLJh5KvXbI2lgzk2qtxiaEA==
@@ -1667,7 +1656,7 @@
     lodash.camelcase "^4.3.0"
     protobufjs "^6.8.6"
 
-"@hot-loader/react-dom@^16.8.6":
+"@hot-loader/react-dom@16.9.0":
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/@hot-loader/react-dom/-/react-dom-16.9.0.tgz#7782cec9d78172f3e4c86a317ba7a73bd0271acd"
   integrity sha512-MsOdCBB7c5YNyB4iDDct+tS7AihvYyfwZVV+z/QnbTjPgxH98kqIDXO92nU7tLXp0OtYFErHZfcWjtszP/572w==
@@ -3887,7 +3876,7 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-babel-jest@^24.9.0:
+babel-jest@24.9.0, babel-jest@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-24.9.0.tgz#3fc327cb8467b89d14d7bc70e315104a783ccd54"
   integrity sha512-ntuddfyiN+EhMw58PTNL1ph4C9rECiQXjI4nMMBKBaNjXvqLdkXpPRcMSr4iyBrJg/+wz9brFUD6RhOAT6r4Iw==
@@ -4511,7 +4500,7 @@ babel-plugin-transform-exponentiation-operator@^6.22.0, babel-plugin-transform-e
     babel-plugin-syntax-exponentiation-operator "^6.8.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-export-extensions@^6.22.0:
+babel-plugin-transform-export-extensions@6.22.0, babel-plugin-transform-export-extensions@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-export-extensions/-/babel-plugin-transform-export-extensions-6.22.0.tgz#53738b47e75e8218589eea946cbbd39109bbe653"
   integrity sha1-U3OLR+deghhYnuqUbLvTkQm75lM=
@@ -9119,7 +9108,7 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-hashtag-regex@^2.0.0:
+hashtag-regex@2.1.0, hashtag-regex@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/hashtag-regex/-/hashtag-regex-2.1.0.tgz#9c82142e96a9ffa8421151763cb9fef30c75ba8b"
   integrity sha512-D89pGyCZOMtaXdEJ1he9/GmhZAUXlHPn+oN2oFmrNZFX9MlblUdqw7DmJ2IlWc1My+GP0BeCDlMwWW2zSVLVoA==
@@ -11267,11 +11256,6 @@ lodash-es@^4.17.11, lodash-es@^4.17.3, lodash-es@^4.2.0, lodash-es@^4.2.1:
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
   integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
 
-lodash._baseclone@~4.5.0:
-  version "4.5.7"
-  resolved "https://registry.yarnpkg.com/lodash._baseclone/-/lodash._baseclone-4.5.7.tgz#ce42ade08384ef5d62fa77c30f61a46e686f8434"
-  integrity sha1-zkKt4IOE711i+nfDD2GkbmhvhDQ=
-
 lodash._getnative@^3.0.0:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
@@ -11296,13 +11280,6 @@ lodash.clone@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clone/-/lodash.clone-4.5.0.tgz#195870450f5a13192478df4bc3d23d2dea1907b6"
   integrity sha1-GVhwRQ9aExkkeN9Lw9I9LeoZB7Y=
-
-lodash.clonedeep@4.3.2:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.3.2.tgz#d0112c02c76b5223833aebc6a4b6e334f0d057de"
-  integrity sha1-0BEsAsdrUiODOuvGpLbjNPDQV94=
-  dependencies:
-    lodash._baseclone "~4.5.0"
 
 lodash.clonedeep@4.5.0:
   version "4.5.0"
@@ -14091,7 +14068,7 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-pusher-js-mock@^0.2.0:
+pusher-js-mock@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/pusher-js-mock/-/pusher-js-mock-0.2.0.tgz#2598961c11472798e48c12e2e8bc3d6bc712a868"
   integrity sha512-mB8k+6PIdXjD5u2Gd61al/DegCIKLwCtiJOn7DIxbsibLjkm2mdMO4r22puWBZKlBdrIG5S2pvbK1CnTXLdmMw==

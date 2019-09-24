@@ -45,23 +45,7 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "0.8.2",
     "pusher-js": "^4.2.1",
-    "style-loader": "^0.19.1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {
-    "@bufferapp/buffer-js-api": "0.3.0",
-    "@bufferapp/buffer-js-metrics": "0.2.0",
-    "@bufferapp/buffer-js-request": "0.2.0",
-    "@bufferapp/components": "3.0.2",
-    "@bufferapp/draft-js": "0.10.1-fork.5",
-    "@bufferapp/draft-js-emoji-plugin": "^2.0.2",
-    "@bufferapp/draft-js-mention-plugin": "2.0.0-rc8.3",
-    "@bufferapp/draft-js-plugins-editor": "2.0.0-rc8.3",
-    "@bufferapp/dragme": "0.2.2",
-    "@bufferapp/react-images-loaded": "^1.1.0-fork.0",
-    "@bufferapp/react-simple-dropdown": "3.3.0",
+    "style-loader": "^0.19.1",
     "decorate-component-with-props": "1.0.2",
     "event-pubsub": "4.3.0",
     "events": "1.1.1",
@@ -69,9 +53,6 @@
     "flux": "2.1.1",
     "hashtag-regex": "^2.0.0",
     "immutable": "3.7.6",
-    "keymirror": "0.1.1",
-    "lodash.clonedeep": "4.3.2",
-    "lodash.debounce": "4.0.8",
     "lodash.escaperegexp": "4.1.2",
     "lodash.findlastindex": "4.6.0",
     "lodash.partition": "4.6.0",
@@ -85,5 +66,8 @@
     "rimraf": "^2.6.2",
     "setimmediate": "^1.0.5",
     "twitter-text": "2.0.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
