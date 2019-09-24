@@ -66,7 +66,7 @@ export default connect(
       const ctaProperties = getCtaProperties(SEGMENT_NAMES.STORIES_PREVIEW_QUEUE);
       const imageCount = stories.filter(story => story.type === 'image').length;
       const videoCount = stories.filter(story => story.type === 'video').length;
-      const noteCount = stories.filter(story => story.note.length > 0).length;
+      const noteCount = stories.filter(story => story.note && story.note.length > 0).length;
       const metadata = {
         product: 'publish',
         storyGroupId: id,
