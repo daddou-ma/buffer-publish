@@ -64,7 +64,12 @@ const StoryGroups = ({
   onClosePreviewClick,
   showStoryPreview,
   userData,
+  translations,
 }) => {
+  const hasStoriesMobileVersion = (
+    userData.tags ? userData.tags.includes('has_instagram_stories_mobile') : false
+  );
+
   if (loading) {
     return (
       <LoadingContainerStyle>
@@ -94,7 +99,7 @@ const StoryGroups = ({
               </React.Fragment>
             )}
             <ComposerInput
-              placeholder="What would you like to add to your Story?"
+              placeholder={translations.composerInputText}
               onPlaceholderClick={onComposerPlaceholderClick}
             />
           </ComposerInputStyle>
@@ -152,6 +157,12 @@ StoryGroups.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.string,
     email: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.strings),
+  }),
+  translations: PropTypes.shape({
+    mobileTagText: PropTypes.string,
+    reminderText: PropTypes.string,
+    composerInputText: PropTypes.string,
   }),
 };
 
@@ -172,6 +183,7 @@ StoryGroups.defaultProps = {
   onPreviewClick: () => {},
   onClosePreviewClick: () => {},
   userData: {},
+  translations: {},
 };
 
 export default WithFeatureLoader(StoryGroups);

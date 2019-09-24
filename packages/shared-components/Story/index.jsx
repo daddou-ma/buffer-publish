@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CircleInstReminderIcon } from '@bufferapp/components';
 import { CoverImage, PlayIcon } from '@bufferapp/publish-story-group-composer/components/Carousel/CardItem/styles';
+import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import CardFooter from '../CardFooter';
 import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
+import PostErrorBanner from '../PostErrorBanner';
+
+const storiesQueueTranslations = translations['stories-queue'];
 
 const Story = ({
   id,

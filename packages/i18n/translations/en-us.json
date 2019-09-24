@@ -311,5 +311,11 @@
     "scheduleLoadingButton": "Scheduling Story...",
     "scheduleButton": "Schedule Story",
     "previewButton": "Preview"
+  },
+  "stories-queue": {
+    "reminderText": "When it’s time to post your Story, we’ll send a Reminder to your mobile device.",
+    "mobileTagText": "Uh-oh! Looks like you might not have the latest version of the Buffer mobile app. Download it now to start using Stories!",
+    "bannerMobileTagText": "Hmm...looks like you might not have the latest version of the Buffer mobile app. Download it now so that you can share this Story!",
+    "composerInputText": "What would you like to add to your Story?"
   }
 }
