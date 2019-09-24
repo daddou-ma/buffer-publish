@@ -127,6 +127,7 @@ const StoryGroupWrapper = ({
               onUpdateStoryGroup={onUpdateStoryGroup}
               onPreviewClick={onPreviewClick}
               emptySlotData={emptySlotData}
+              selectedProfile={selectedProfile}
             />
           </React.Fragment>
         )}
