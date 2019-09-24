@@ -45,6 +45,7 @@ const EditNote = ({
           onChange={setNoteValue}
           id="noteTextArea"
           fullHeight
+          autoFocus
         />
       </NoteWrapper>
       <ButtonWrapper>
