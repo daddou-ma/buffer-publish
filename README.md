@@ -59,7 +59,7 @@ To get started on local development and testing:
 5. **Start up the publish docker containers**
     ```bash
     $ cd ../buffer-dev
-    $ ./dev up session-service core-authentication-service login publish
+    $ ./dev up session-service authentication-service login publish
    ```
 
    Publish relies on both the **session** and **account** services, so it's important to include them in our _up_ command. The order is important, since this relates to the way docker-compose starts up containers.
