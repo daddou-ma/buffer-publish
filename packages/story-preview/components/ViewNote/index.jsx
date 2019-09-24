@@ -18,6 +18,7 @@ const NoteWrapper = styled.div`
 `;
 
 const Title = styled(Text)`
+  line-height: 16px;
   margin: 0;
   font-weight: ${fontWeightMedium};
 `;
