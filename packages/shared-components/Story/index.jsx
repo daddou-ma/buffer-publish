@@ -22,6 +22,7 @@ const Story = ({
   onEditClick,
   onShareNowClick,
   onPreviewClick,
+  userData,
 }) => {
   const deletingMessage = isDeleting && 'Deleting...';
   const submittingMessage = isWorking && 'Sharing...';
@@ -31,9 +32,20 @@ const Story = ({
   const {
     stories, creatorName, avatarUrl, createdAt, storyAction,
   } = storyDetails;
+  const { tags } = userData;
+  const hasStoriesMobileVersion = (
+    tags ? tags.includes('has_instagram_stories_mobile') : false
+  );
 
   return (
     <Card>
+      {!hasStoriesMobileVersion
+        && (
+          <PostErrorBanner
+            error={storiesQueueTranslations.bannerMobileTagText}
+          />
+        )
+      }
       <CardHeader
         creatorName={creatorName}
         avatarUrl={avatarUrl}
@@ -94,6 +106,9 @@ Story.propTypes = {
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
+  userData: PropTypes.shape({
+    tags: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 Story.defaultProps = {
@@ -103,6 +118,7 @@ Story.defaultProps = {
   onEditClick: null,
   onShareNowClick: null,
   onPreviewClick: null,
+  userData: {},
 };
 
 export default Story;
