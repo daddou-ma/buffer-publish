@@ -155,8 +155,6 @@ StoryGroupWrapper.propTypes = {
 
 StoryGroupWrapper.defaultProps = {
   ...HeaderBar.PropTypes,
-  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
-  ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
   ...CardItem.defaultProps,
