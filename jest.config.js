@@ -1,6 +1,7 @@
+const babelConfig = require('./babel.config.js');
+require('@babel/register')(babelConfig);
 require('core-js/stable');
 require('regenerator-runtime/runtime');
-require('@babel/register');
 
 const { analyzePackagesWhitelist } = require('./analyze.config.js');
 
