@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
-import { actions as storyGroupComposerActions } from '@bufferapp/publish-story-group-composer';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 
 import { actions } from './reducer';
 import StoryGroups from './components/StoryGroups';
@@ -61,6 +63,24 @@ export default connect(
     onPreviewClick: ({
       stories, profileId, id, scheduledAt,
     }) => {
+      const ctaProperties = getCtaProperties(SEGMENT_NAMES.STORIES_PREVIEW_QUEUE);
+      const imageCount = stories.filter(story => story.type === 'image').length;
+      const videoCount = stories.filter(story => story.type === 'video').length;
+      const noteCount = stories.filter(story => story.note.length > 0).length;
+      const metadata = {
+        product: 'publish',
+        storyGroupId: id,
+        channel: 'instagram',
+        channelId: profileId,
+        channelServiceId: '',
+        mediaCount: imageCount + videoCount,
+        imageCount,
+        videoCount,
+        noteCount,
+        scheduledAt,
+        ...ctaProperties,
+      };
+      dispatch(analyticsActions.trackEvent('Story Preview Opened Queue', metadata));
       dispatch(previewActions.handlePreviewClick({
         stories, profileId, id, scheduledAt,
       }));
