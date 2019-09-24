@@ -104,6 +104,7 @@ const StoryGroupWrapper = ({
               userData={userData}
               totalCardsToShow={totalStoriesInCarousel}
               largeCards
+              totalStories={(storyGroup.stories && storyGroup.stories.length) || 0}
             >
               <CarouselCards
                 createNewFile={onCreateNewStoryCard}
@@ -190,8 +191,6 @@ StoryGroupWrapper.propTypes = {
 
 StoryGroupWrapper.defaultProps = {
   ...HeaderBar.PropTypes,
-  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
-  ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
   ...CardItem.defaultProps,

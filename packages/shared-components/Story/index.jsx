@@ -38,7 +38,11 @@ const Story = ({
           stories, profileId, id, scheduledAt,
         })}
       />
-      <Carousel editMode={false} totalCardsToShow={(stories && stories.length) || 0}>
+      <Carousel
+        editMode={false}
+        totalCardsToShow={(stories && stories.length) || 0}
+        totalStories={(stories && stories.length) || 0}
+      >
         {stories && stories.map(card => (
           <CarouselCard
             cardHeight={cardHeight}

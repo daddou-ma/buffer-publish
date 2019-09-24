@@ -12,7 +12,7 @@ const details = {
   createdAt: 'March 2nd at 12:45pm (GMT)',
 };
 
-storiesOf('CardHeader', module)
+storiesOf('Cards|Basic Elements/CardHeader', module)
   .addDecorator(withA11y)
   .add('default', () => (
     <CardHeader

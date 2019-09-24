@@ -5,7 +5,7 @@ import {
 import { withA11y } from '@storybook/addon-a11y';
 import RetweetPanel from './index';
 
-storiesOf('RetweetPanel', module)
+storiesOf('Cards|Shared Elements/RetweetPanel', module)
   .addDecorator(withA11y)
   .add('default', () => (
     <RetweetPanel

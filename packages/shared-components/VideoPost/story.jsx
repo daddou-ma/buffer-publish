@@ -60,7 +60,7 @@ const squareImage = 'http://lorempixel.com/400/400/cats/';
 const tallImage = 'http://lorempixel.com/400/900/cats/';
 const wideImage = 'http://lorempixel.com/900/400/cats/';
 
-storiesOf('VideoPost', module)
+storiesOf('Cards|Posts/VideoPost', module)
   .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>

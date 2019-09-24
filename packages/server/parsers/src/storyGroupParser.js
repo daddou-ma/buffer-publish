@@ -6,6 +6,11 @@ const getStoryAction = ({ scheduledAt, timezone, options }) => {
   return `You will receive a reminder ${dateString} when it's time to post.`;
 };
 
+const parseStories = stories => stories.map((story) => {
+  story.order = parseInt(story.order, 10);
+  return story;
+});
+
 module.exports = (storyGroup) => {
   const isPastDue = isInThePast(storyGroup.scheduled_at);
 
@@ -27,7 +32,7 @@ module.exports = (storyGroup) => {
         twentyFourHourTime: storyGroup.twentyfour_hour_time,
       }),
       status: storyGroup.status,
-      stories: storyGroup.stories,
+      stories: parseStories(storyGroup.stories),
       twentyfourHourTime: storyGroup.twentyfour_hour_time,
       storyAction: getStoryAction({
         scheduledAt: storyGroup.scheduled_at,

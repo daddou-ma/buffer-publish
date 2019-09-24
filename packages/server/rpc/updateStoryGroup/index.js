@@ -12,9 +12,11 @@ module.exports = method(
       strictSSL: !(process.env.NODE_ENV === 'development'),
       qs: {
         access_token: session.publish.accessToken,
+      },
+      form: {
         profile_id: profileId,
-        story_group_id: storyGroupId,
         scheduled_at: scheduledAt,
+        story_group_id: storyGroupId,
         stories,
       },
     })
