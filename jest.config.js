@@ -1,9 +1,26 @@
+require('core-js/stable');
+require('regenerator-runtime/runtime');
+require('@babel/register');
+
 const { analyzePackagesWhitelist } = require('./analyze.config.js');
+
+const publishPackages = [
+  'async-data-fetch',
+  'draft-js-mention-plugin',
+  'publish-composer',
+  'components',
+  'notifications',
+  'web-components',
+  'unauthorized-redirect',
+  'app-sidebar',
+];
+
+const publishPackagesWhitelist = publishPackages.map(imp => `(?!/@bufferapp/${imp})`).join('');
 
 module.exports = {
   verbose: true,
   transformIgnorePatterns: [
-    `/node_modules(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/draft-js-mention-plugin)(?!/@bufferapp/components)(?!/@bufferapp/notifications)(?!/@bufferapp/web-components)(?!/@bufferapp/unauthorized-redirect)(?!/@bufferapp/app-sidebar)${analyzePackagesWhitelist}/`,
+    `/node_modules${publishPackagesWhitelist}${analyzePackagesWhitelist}`,
   ],
   collectCoverage: true,
   moduleNameMapper: {
