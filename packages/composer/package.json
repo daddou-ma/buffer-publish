@@ -3,25 +3,6 @@
   "version": "2.0.0",
   "description": "The publish web composer and its interfaces",
   "main": "index.js",
-  "scripts": {
-    "start": "start-storybook -p 9001 -c ./composer/.storybook",
-    "lint": "echo \"disabled command: eslint . --ignore-pattern coverage node_modules\"",
-    "test": "yarn run lint && jest",
-    "test-watch": "jest --watch",
-    "test-update": "jest -u",
-    "test-without-coverage": "yarn run lint && jest --coverage=false --collectCoverage=false",
-    "compile": "rimraf dist/* && webpack --output-path=dist --config webpack.prod.config.js",
-    "compile-dev": "rimraf dist/* && webpack --output-path=dist"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "verbose": true,
-    "testURL": "https://local.buffer.com",
-    "moduleNameMapper": {
-      "\\.(css|less)$": "identity-obj-proxy"
-    },
-    "setupFilesAfterEnv": ["./composer/tests/setupTests.js"]
-  },
   "author": "pioul06+github@gmail.com",
   "devDependencies": {
     "autoprefixer": "7.1.2",

@@ -7,7 +7,6 @@ const { analyzePackagesWhitelist } = require('./analyze.config.js');
 
 const publishPackages = [
   'async-data-fetch',
-  'draft-js-mention-plugin',
   'publish-composer',
   'components',
   'notifications',
