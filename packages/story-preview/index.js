@@ -10,6 +10,7 @@ export default connect(
     storyGroupId: state.storyPreview.storyGroupId,
     profileId: state.storyPreview.profileId,
     scheduledAt: state.storyPreview.scheduledAt,
+    translations: state.i18n.translations['story-preview'],
   }),
   dispatch => ({
     onSaveNoteClick: ({ order, note, view }) => {

@@ -5,7 +5,7 @@ import { Slider } from '@bufferapp/publish-shared-components';
 import { Popover } from '@bufferapp/components';
 import NoteWrapper from '../NoteWrapper';
 import PreviewMedia from '../PreviewMedia';
-import { storyPropTypes, userPropTypes } from '../../utils/commonPropTypes';
+import { storyPropTypes, userPropTypes, translationsPropTypes } from '../../utils/commonPropTypes';
 
 const SliderContainer = styled.div`
   height: 592px;
@@ -20,6 +20,7 @@ const SliderItem = ({
   user,
   numberOfStories,
   view,
+  translations,
 }) => (
   <Fragment>
     <PreviewMedia
@@ -31,6 +32,7 @@ const SliderItem = ({
       onSaveNoteClick={onSaveNoteClick}
       story={storyToDisplay}
       view={view}
+      translations={translations}
     />
   </Fragment>
 );
@@ -43,6 +45,7 @@ const PreviewPopover = ({
   stories,
   user,
   view,
+  translations,
 }) => {
   const numberOfStories = stories.length;
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
@@ -77,6 +80,7 @@ const PreviewPopover = ({
             storyToDisplay={storyToDisplay}
             numberOfStories={numberOfStories}
             view={view}
+            translations={translations}
           />
         </Slider>
       </SliderContainer>
@@ -90,6 +94,7 @@ PreviewPopover.propTypes = {
   user: userPropTypes, // eslint-disable-line react/require-default-props
   stories: PropTypes.arrayOf(storyPropTypes).isRequired,
   view: PropTypes.oneOf(['composer', 'queue']).isRequired,
+  translations: translationsPropTypes, // eslint-disable-line react/require-default-props
 };
 
 export default PreviewPopover;
