@@ -98,7 +98,7 @@
     "prop-types": "15.5.10",
     "react": "16.8.6",
     "react-addons-test-utils": "15.6.2",
-    "react-day-picker": "6.1.0",
+    "react-day-picker": "6.1.1",
     "react-dnd": "7.4.5",
     "react-dnd-html5-backend": "7.4.4",
     "react-dnd-test-backend": "7.4.4",
@@ -112,7 +112,7 @@
     "react-simple-dropdown": "3.2.0",
     "react-syntax-highlighter": "11.0.2",
     "react-test-renderer": "16.8.6",
-    "react-textarea-autosize": "5.1.0",
+    "react-textarea-autosize": "7.1.0",
     "react-tooltip": "3.3.0",
     "redux": "3.6.0",
     "redux-form": "6.6.3",
@@ -131,7 +131,8 @@
     "webpack-cli": "3.3.8",
     "webpack-dev-middleware": "3.7.1",
     "webpack-dev-server": "3.8.0",
-    "webpack-merge": "4.2.2"
+    "webpack-merge": "4.2.2",
+    "xss": "1.0.6"
   },
   "dependencies": {
     "@bufferapp/react-images-loaded": "^1.1.0-fork.0",
