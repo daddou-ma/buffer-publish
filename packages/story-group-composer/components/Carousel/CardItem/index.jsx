@@ -40,6 +40,7 @@ const CardItem = ({
   onAddNoteClick,
   onDeleteStoryClick,
   isOver,
+  isDragging,
 }) => {
   const notifiers = {
     uploadStarted: props => createNewFile(props),
@@ -105,9 +106,9 @@ const CardItem = ({
 
       {card.thumbnail_url && (
         <StoryWrapper>
-          <CoverImage src={card.thumbnail_url} />
+          <CoverImage src={card.thumbnail_url} isTarget={isOver} />
           {card.type === 'video' && <PlayIcon large={largeCards} />}
-          {isHovering && (
+          {isHovering && !isDragging && (
             <CarouselCardHover
               card={card}
               onAddNoteClick={onAddNoteClick}
