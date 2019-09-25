@@ -46,6 +46,7 @@ const UpgradeModalDecorator = storyFn => (
   </Provider>
 );
 
+
 storiesOf('StoryGroups', module)
   .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
@@ -66,24 +67,5 @@ storiesOf('StoryGroups', module)
       onCalendarClick={action('onCalendarClick')}
       translations={translations['stories-queue']}
       userData={{ tags: ['has_instagram_stories_mobile'] }}
-    />
-  ))
-  .add('should show stories with card banner message to download mobile app', () => (
-    <StoryGroups
-      total={2}
-      loading={false}
-      isManager
-      isBusinessAccount
-      storyGroups={storyGroups}
-      isLockedProfile={false}
-      showStoriesComposer={action('showStoriesComposer')}
-      onEmptySlotClick={action('onEmptySlotClick')}
-      onEditClick={action('onEditClick')}
-      onDeleteConfirmClick={action('onDeleteConfirmClick')}
-      onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
-      onShareNowClick={action('onShareNowClick')}
-      onCalendarClick={action('onCalendarClick')}
-      translations={translations['stories-queue']}
-      userData={{ tags: [''] }}
     />
   ));
