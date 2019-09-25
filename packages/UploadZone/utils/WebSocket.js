@@ -77,11 +77,17 @@ class WebSocket {
 
   bind = ({ userId, notifiers }) => {
     this.eventHandlers = this.configureEventHandlers(notifiers);
+    let { pusher } = this;
 
-    Pusher.channel_auth_endpoint = PUSHER.AUTH_ENDPOINT;
-    const pusher = new Pusher(PUSHER.API_KEY, {
-      cluster: PUSHER.CLUSTER,
-    });
+    if (!pusher) {
+      Pusher.channel_auth_endpoint = PUSHER.AUTH_ENDPOINT;
+      pusher = new Pusher(PUSHER.API_KEY, {
+        cluster: PUSHER.CLUSTER,
+      });
+
+      this.pusher = pusher;
+    }
+
     const pusherInstance = pusher.subscribe(`private-updates-${userId}`);
     this.eventHandlers.forEach((handler, event) => pusherInstance.bind(event, handler));
     this.hasWebSocketConnectionOpen = true;
