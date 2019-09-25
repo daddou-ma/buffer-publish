@@ -563,23 +563,21 @@ class Composer extends React.Component {
 
     return (
       <div className={characterCountClassName}>
-        {shouldShowCharacterCount
-          && (
+        {shouldShowCharacterCount && (
           <CharacterCount
             count={draft.characterCount}
             maxCount={draft.service.charLimit}
             className={styles.characterCountBox}
           />
-          )}
-        {shouldShowHashtagCount
-          && (
+        )}
+        {shouldShowHashtagCount && (
           <CharacterCount
             count={draft.getNumberOfHashtags()}
             maxCount={draft.service.maxHashtags}
             className={styles.characterCountBox}
             type="hashtag"
           />
-          )}
+        )}
       </div>
     );
   }
