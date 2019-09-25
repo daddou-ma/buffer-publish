@@ -48,6 +48,15 @@
     "composerInput": "What would you like to share?",
     "currentDay": "Today"
   },
+  "story-preview": {
+    "noteTitle": "Note",
+    "notePlaceholder": "Add your caption or a note-to-self",
+    "cancel": "Cancel",
+    "saveNote": "Save Note",
+    "addNote": "Add Note",
+    "editNote": "Edit Note",
+    "noteExplanation": "When it comes time to post, you'll be able to copy and past your note into Instagram."
+  },
   "stripe": {
     "noNameError": "Uh oh, please fill out the cardholder name :)",
     "noZipError": "For extra security, please add the zip code associated with this card",

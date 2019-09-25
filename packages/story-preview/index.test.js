@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Button } from '@bufferapp/ui';
 import { actions as storyGroupActions } from '@bufferapp/publish-story-group-composer';
+import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import StoryPreview, {
   reducer,
   actions,
@@ -41,6 +42,11 @@ describe('StoryPreview', () => {
           profileId: 'id2',
           scheduledAt: null,
           user: {},
+        },
+        i18n: {
+          translations: {
+            'story-preview': translations['story-preview'],
+          },
         },
       });
     });

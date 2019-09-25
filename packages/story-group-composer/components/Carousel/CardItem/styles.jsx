@@ -40,6 +40,7 @@ export const CoverImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: ${props => (props.isTarget ? '0.6' : '1')};
 `;
 
 export const StoryWrapper = styled.div`

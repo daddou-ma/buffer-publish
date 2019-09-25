@@ -5,9 +5,9 @@ import AppStore from '../stores/AppStore';
 import ComposerStore from '../stores/ComposerStore';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import { NotificationScopes } from '../AppConstants';
-import Composer from '../components/Composer';
-import ProductRolloutTooltip from '../components/ProductRolloutTooltip';
-import NotificationContainer from '../components/NotificationContainer';
+import Composer from './Composer';
+import ProductRolloutTooltip from './ProductRolloutTooltip';
+import NotificationContainer from './NotificationContainer';
 import styles from './css/ComposerSection.css';
 
 const getComposerState = () => ({
@@ -47,23 +47,24 @@ const ComposerComponent = ({
 }) => {
   const canUserPostToMultipleNetworks = uniqBy(profiles, p => p.service.name).length > 1;
   const showRolloutTooltip = (
-    AppStore.getOptions().canSelectProfiles &&
-    canUserPostToMultipleNetworks &&
-    (isOmniboxEnabled || index === enabledDrafts.length - 1)
+    AppStore.getOptions().canSelectProfiles
+    && canUserPostToMultipleNetworks
+    && (isOmniboxEnabled || index === enabledDrafts.length - 1)
   );
 
-  const children =
-    showRolloutTooltip ?
-      (<ProductRolloutTooltip
+  const children = showRolloutTooltip
+    ? (
+      <ProductRolloutTooltip
         visibleNotifications={visibleNotifications}
         isOmniboxEnabled={isOmniboxEnabled}
-      />) :
-      null;
+      />
+    )
+    : null;
 
   // When focus should be forced, figure out *which* editor instance to force-focus
   const forceEditorInstanceFocus = (
-    state.forceEditorFocus &&
-    (isOmniboxEnabled || appState.expandedComposerId === draft.id)
+    state.forceEditorFocus
+    && (isOmniboxEnabled || appState.expandedComposerId === draft.id)
   );
 
   return (
@@ -97,20 +98,23 @@ const ComposerComponent = ({
     </Composer>
   );
 };
+
 /* eslint-enable react/prop-types */
 
 class ComposerSection extends React.Component {
   state = getComposerState();
 
   componentDidMount = () => ComposerStore.addChangeListener(this.onStoreChange);
+
   componentWillUnmount = () => ComposerStore.removeChangeListener(this.onStoreChange);
+
   onStoreChange = () => this.setState(getComposerState());
 
   onTwitterMaxProfileNotificationClose = () => {
     AppActionCreators.rememberTwitterMaxProfileNotificationClosedOnce();
   };
 
-  render() {
+  render () {
     const { enabledDrafts, draftsSharedData, omniDraft } = this.state;
 
     const {
@@ -122,7 +126,7 @@ class ComposerSection extends React.Component {
     } = this.props;
 
     const hasEnabledDrafts = enabledDrafts.length > 0 || isOmniboxEnabled;
-    const composersHaveBeenExpanded = appState.composersHaveBeenExpanded;
+    const { composersHaveBeenExpanded } = appState;
 
     const twitterMaxProfileNotificationClassNames = {
       container: styles.twitterMaxProfileNotificationContainer,
@@ -134,9 +138,9 @@ class ComposerSection extends React.Component {
       <div className={styles.composerSection}>
         {!hasEnabledDrafts && (
           <div className={styles.emptyState}>
-            {composersHaveBeenExpanded ?
-              'Your work has been saved. Please select a social account above to continue.' :
-              'Please select a social account above to continue.'}
+            {composersHaveBeenExpanded
+              ? 'Your work has been saved. Please select a social account above to continue.'
+              : 'Please select a social account above to continue.'}
           </div>
         )}
 
@@ -148,9 +152,10 @@ class ComposerSection extends React.Component {
           showCloseIcon
         />
 
-        {isOmniboxEnabled &&
-          <ComposerComponent
-            {
+        {isOmniboxEnabled
+        && (
+        <ComposerComponent
+          {
             ...{
               state: this.state,
               draft: omniDraft,
@@ -177,14 +182,15 @@ class ComposerSection extends React.Component {
               isBusinessUser,
               draftMode,
             }
-            }
-          />
+          }
+        />
+        )
         }
 
-        {!isOmniboxEnabled &&
-          enabledDrafts.map((draft, index) => (
-            <ComposerComponent
-              {
+        {!isOmniboxEnabled
+        && enabledDrafts.map((draft, index) => (
+          <ComposerComponent
+            {
               ...{
                 state: this.state,
                 draft,
@@ -212,9 +218,9 @@ class ComposerSection extends React.Component {
                 isBusinessUser,
                 draftMode,
               }
-              }
-            />),
-          )}
+            }
+          />
+        ))}
       </div>
     );
   }
@@ -250,6 +256,5 @@ ComposerSection.defaultProps = {
   isBusinessUser: false,
   draftMode: false,
 };
-
 
 export default ComposerSection;

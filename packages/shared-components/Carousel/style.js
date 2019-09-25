@@ -29,7 +29,7 @@ const getLeftScroll = ({ cardWidth, selectedItem }) => {
 
 export const CarouselContainer = styled.div`
   display: flex;
-  padding-left: ${props => (props.largeCards ? '8px' : 0)};
+  padding: ${props => (props.largeCards ? '8px 0px 8px 8px' : 0)};
   width: calc(${props => props.cardWidth + cardMargin}px *  ${$props => $props.totalCardsToShow});
   transform: ${props => `translateX(calc(-${getLeftScroll(props)}px`}));
   transition: all 0.3s ease-out;
