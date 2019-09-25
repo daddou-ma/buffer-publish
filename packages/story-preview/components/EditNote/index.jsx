@@ -28,6 +28,7 @@ const EditNote = ({
   onSaveNoteClick,
   onCancelClick,
   story,
+  translations,
 }) => {
   const [note, setNote] = useState(story.note || '');
   const setNoteValue = (event) => {
@@ -39,9 +40,9 @@ const EditNote = ({
     <ContentWrapper>
       <NoteWrapper>
         <TextArea
-          label="Note"
+          label={translations.noteTitle}
           value={note}
-          placeholder="Add your caption or a note-to-self"
+          placeholder={translations.notePlaceholder}
           onChange={setNoteValue}
           id="noteTextArea"
           fullHeight
@@ -51,12 +52,12 @@ const EditNote = ({
       <ButtonWrapper>
         <Button
           type="text"
-          label="Cancel"
+          label={translations.cancel}
           onClick={onCancelClick}
         />
         <Button
           type="primary"
-          label="Save Note"
+          label={translations.saveNote}
           onClick={() => onSaveNoteClick({ order: story.order, note })}
         />
       </ButtonWrapper>
@@ -68,6 +69,12 @@ EditNote.propTypes = {
   onSaveNoteClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   story: storyPropTypes, // eslint-disable-line react/require-default-props
+  translations: PropTypes.shape({
+    noteTitle: PropTypes.string.isRequired,
+    notePlaceholder: PropTypes.string.isRequired,
+    cancel: PropTypes.string.isRequired,
+    saveNote: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default EditNote;
