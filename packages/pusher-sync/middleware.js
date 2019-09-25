@@ -106,6 +106,7 @@ export default ({ dispatch }) => {
       const { profileId } = action;
       if (profileId) {
         if (!channelsByProfileId[profileId]) {
+          console.log(action);
           const channelName = `private-updates-${profileId}`;
           channelsByProfileId[profileId] = pusher.subscribe(channelName);
           bindProfileEvents(channelsByProfileId[profileId], profileId, dispatch);
