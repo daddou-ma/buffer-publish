@@ -2,7 +2,8 @@ import Pusher from 'pusher-js';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
-import { postParser } from '@bufferapp/publish-server/parsers/src';
+import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
+import { postParser, storyGroupParser } from '@bufferapp/publish-server/parsers/src';
 
 const PUSHER_APP_KEY = 'bd9ba9324ece3341976e';
 
@@ -83,6 +84,13 @@ const bindProfileEvents = (channel, profileId, dispatch) => {
       type: profileSidebarActionTypes.PUSHER_PROFILE_PAUSED_STATE,
       paused,
       profileId,
+    });
+  });
+  channel.bind('sent_story_group', (data) => {
+    dispatch({
+      type: storiesActionTypes.STORY_SENT,
+      profileId,
+      storyGroup: storyGroupParser(data.story_group),
     });
   });
 };

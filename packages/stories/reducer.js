@@ -9,6 +9,7 @@ export const actionTypes = keyWrapper('STORIES', {
   OPEN_PREVIEW: 0,
   STORY_GROUP_SHARE_NOW: 0,
   CLOSE_PREVIEW: 0,
+  STORY_SENT: 0,
 });
 
 export const initialState = {
@@ -76,6 +77,7 @@ const storyPostsReducer = (state = {}, action) => {
       return updates;
     }
     case actionTypes.DELETE_STORY_GROUP:
+    case actionTypes.STORY_SENT:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { [getStoryGroupId(action)]: deleted, ...currentState } = state;
       return currentState;
@@ -116,6 +118,7 @@ const profileReducer = (state = profileInitialState, action) => {
       };
     case actionTypes.STORY_GROUP_SHARE_NOW:
     case actionTypes.DELETE_STORY_GROUP:
+    case actionTypes.STORY_SENT:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
@@ -142,6 +145,7 @@ export default (state = initialState, action) => {
     case profileSidebarActionTypes.SELECT_PROFILE:
     case actionTypes.STORY_GROUP_SHARE_NOW:
     case actionTypes.DELETE_STORY_GROUP:
+    case actionTypes.STORY_SENT:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
