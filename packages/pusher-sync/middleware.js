@@ -112,10 +112,10 @@ export default ({ dispatch }) => {
         if (!channelsByProfileId[profileId]) {
           channelsByProfileId[profileId] = {
             updates: pusher.subscribe(`private-updates-${profileId}`),
-            storyGroups: pusher.subscribe(`private-story-groups-${profileId}`),
+            storyGroups: tabId === 'stories' ? pusher.subscribe(`private-story-groups-${profileId}`) : null,
           };
           bindProfileUpdateEvents(channelsByProfileId[profileId].updates, profileId, dispatch);
-          if (tabId === 'stories') {
+          if (channelsByProfileId[profileId].storyGroups) {
             bindProfileStoryGroupEvents(channelsByProfileId[profileId].storyGroups, profileId, dispatch);
           }
         }
