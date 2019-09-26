@@ -1,5 +1,6 @@
 import Pusher from 'pusher-js';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
+import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs/reducer';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
@@ -12,7 +13,7 @@ const profileEventActionMap = {
   updated_update: queueActionTypes.POST_UPDATED,
 };
 
-const bindProfileEvents = (channel, profileId, dispatch) => {
+const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
   // Bind post related events
   Object.entries(profileEventActionMap).forEach(([pusherEvent, actionType]) => {
     channel.bind(pusherEvent, (data) => {
@@ -86,6 +87,9 @@ const bindProfileEvents = (channel, profileId, dispatch) => {
       profileId,
     });
   });
+};
+
+const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
   channel.bind('sent_story_group', (data) => {
     dispatch({
       type: storiesActionTypes.STORY_SENT,
@@ -102,14 +106,18 @@ export default ({ dispatch }) => {
 
   return next => (action) => {
     next(action);
-    if (action.type === profileSidebarActionTypes.SELECT_PROFILE) {
-      const { profileId } = action;
+    if (action.type === tabsActionTypes.SELECT_TAB) {
+      const { profileId, tabId } = action;
       if (profileId) {
         if (!channelsByProfileId[profileId]) {
-          console.log(action);
-          const channelName = `private-updates-${profileId}`;
-          channelsByProfileId[profileId] = pusher.subscribe(channelName);
-          bindProfileEvents(channelsByProfileId[profileId], profileId, dispatch);
+          channelsByProfileId[profileId] = {
+            updates: pusher.subscribe(`private-updates-${profileId}`),
+            storyGroups: pusher.subscribe(`private-story-groups-${profileId}`),
+          };
+          bindProfileUpdateEvents(channelsByProfileId[profileId].updates, profileId, dispatch);
+          if (tabId === 'stories') {
+            bindProfileStoryGroupEvents(channelsByProfileId[profileId].storyGroups, profileId, dispatch);
+          }
         }
       }
     }
