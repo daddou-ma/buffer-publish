@@ -34,7 +34,7 @@ export default connect(
         editMode: state.stories.editMode,
         isBusinessAccount: profileData.business,
         userData: state.appSidebar.user,
-        translations: state.i18n.translations['stories-queue'],
+        translations: state.i18n.translations['story-group-queue'],
       };
     }
     return {};

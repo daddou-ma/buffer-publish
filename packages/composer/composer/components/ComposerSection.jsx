@@ -190,6 +190,7 @@ class ComposerSection extends React.Component {
         {!isOmniboxEnabled
         && enabledDrafts.map((draft, index) => (
           <ComposerComponent
+            key={draft.id}
             {
               ...{
                 state: this.state,

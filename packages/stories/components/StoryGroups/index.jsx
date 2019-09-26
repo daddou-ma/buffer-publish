@@ -115,7 +115,7 @@ const StoryGroups = ({
               </React.Fragment>
             )}
             <ComposerInput
-              placeholder={translations.composerInputText}
+              placeholder={translations.inputPlaceholder}
               onPlaceholderClick={onComposerPlaceholderClick}
             />
           </ComposerInputStyle>
@@ -184,6 +184,10 @@ StoryGroups.propTypes = {
     reminderText: PropTypes.string,
     composerInputText: PropTypes.string,
   }),
+  translations: PropTypes.shape({
+    inputPlaceholder: PropTypes.string.isRequired,
+    reminderText: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 StoryGroups.defaultProps = {
