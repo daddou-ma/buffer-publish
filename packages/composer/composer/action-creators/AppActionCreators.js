@@ -496,7 +496,12 @@ const AppActionCreators = {
   },
 
   listenToChangeEventsForGroups: () => {
-    WebSocket.init({userId: AppStore.getUserData().id, notifiers: ServerActionCreators});
+    const { appEnvironment } = AppStore.getMetaData();
+    WebSocket.init({
+      userId: AppStore.getUserData().id,
+      notifiers: ServerActionCreators,
+      appEnvironment,
+    });
   },
 
   resetSelectedProfiles: (profilesData) => {

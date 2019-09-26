@@ -17,18 +17,8 @@ class WebSocket {
 
   hasWebSocketConnectionOpen = false;
 
-  init = ({ userId, notifiers }) => {
-    if (this.hasWebSocketConnectionOpen) return;
-
-    this.eventHandlers = this.configureEventHandlers(notifiers);
-
-    Pusher.channel_auth_endpoint = PUSHER.AUTH_ENDPOINT;
-    const pusher = new Pusher(PUSHER.API_KEY, {
-      cluster: PUSHER.CLUSTER,
-    });
-    const pusherInstance = pusher.subscribe(`private-updates-${userId}`);
-    this.eventHandlers.forEach((handler, event) => pusherInstance.bind(event, handler));
-    this.hasWebSocketConnectionOpen = true;
+  init = ({ userId, notifiers, appEnvironment }) => {
+    this.rebind({ userId, notifiers, appEnvironment: false, });
   };
 
   configureEventHandlers = (notifiers) => {
@@ -76,6 +66,31 @@ class WebSocket {
       ['edited_profile_group', handleEditedProfileGroup],
       ['deleted_profile_group', handleDeletedProfileGroup],
     ]);
+  };
+
+  rebind = ({ userId, notifiers, appEnvironment }) => {
+    if (this.hasWebSocketConnectionOpen) {
+      this.cleanUp(appEnvironment);
+    }
+    this.bind({ userId, notifiers });
+  };
+
+  bind = ({ userId, notifiers }) => {
+    this.eventHandlers = this.configureEventHandlers(notifiers);
+    let { pusher } = this;
+
+    if (!pusher) {
+      Pusher.channel_auth_endpoint = PUSHER.AUTH_ENDPOINT;
+      pusher = new Pusher(PUSHER.API_KEY, {
+        cluster: PUSHER.CLUSTER,
+      });
+
+      this.pusher = pusher;
+    }
+
+    const pusherInstance = pusher.subscribe(`private-updates-${userId}`);
+    this.eventHandlers.forEach((handler, event) => pusherInstance.bind(event, handler));
+    this.hasWebSocketConnectionOpen = true;
   };
 
   cleanUp = (appEnvironment) => {

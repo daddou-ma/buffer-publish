@@ -158,7 +158,11 @@ class Uploader {
 
   listenToProcessingEventsForVideos (response) {
     if (response.type === 'video') {
-      WebSocket.init({ userId: this.userId, notifiers: this.notifiers });
+      WebSocket.init({
+        userId: this.userId,
+        notifiers: this.notifiers,
+        appEnvironment: null,
+      });
     }
     return response;
   }

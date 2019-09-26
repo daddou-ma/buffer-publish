@@ -208,6 +208,7 @@ QueuedPosts.propTypes = {
 };
 
 QueuedPosts.defaultProps = {
+  postLists: [],
   loading: true,
   moreToLoad: false,
   page: 1,
