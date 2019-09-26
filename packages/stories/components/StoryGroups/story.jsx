@@ -40,11 +40,6 @@ const store = storeFake({
   },
 });
 
-const translations = {
-  inputPlaceholder: 'What would you like to add to your Story?',
-  reminderText: 'When it’s time to post your Story, we’ll send a Reminder to your mobile device.',
-};
-
 const UpgradeModalDecorator = storyFn => (
   <Provider store={store}>
     {storyFn()}
@@ -70,7 +65,7 @@ storiesOf('StoryGroups', module)
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onShareNowClick={action('onShareNowClick')}
       onCalendarClick={action('onCalendarClick')}
-      translations={translations}
+      translations={translations['story-group-queue']}
       userData={{ tags: ['has_instagram_stories_mobile'] }}
     />
   ));
