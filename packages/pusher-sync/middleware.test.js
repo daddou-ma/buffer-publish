@@ -1,5 +1,5 @@
 import Pusher from 'pusher-js';
-import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs/reducer';
+import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { postParser } from '@bufferapp/publish-server/parsers/src';
 
@@ -11,16 +11,20 @@ describe('middleware', () => {
     getState: () => ({ }),
   };
   const next = jest.fn();
-  const selectTabAction = {
-    type: tabsActionTypes.SELECT_TAB,
+  const selectProfileAction = {
+    type: profileSidebarActionTypes.SELECT_PROFILE,
     profileId: '12345',
-    tabId: 'stories',
+    profile: {
+      service: 'instagram',
+    },
   };
 
-  const selectQueueTabAction = {
-    type: tabsActionTypes.SELECT_TAB,
+  const selectIGProfileAction = {
+    type: profileSidebarActionTypes.SELECT_PROFILE,
     profileId: '123456',
-    tabId: 'queue',
+    profile: {
+      service: 'twitter',
+    },
   };
 
   beforeEach(() => {
@@ -28,13 +32,13 @@ describe('middleware', () => {
   });
 
   it('should call next when running middleware', () => {
-    middleware(store)(next)(selectTabAction);
+    middleware(store)(next)(selectProfileAction);
     expect(next)
       .toBeCalled();
   });
 
   it('should create a new pusher instance', () => {
-    middleware(store)(next)(selectTabAction);
+    middleware(store)(next)(selectProfileAction);
     expect(Pusher)
       .toHaveBeenCalledWith(
         'bd9ba9324ece3341976e',
@@ -43,7 +47,7 @@ describe('middleware', () => {
   });
 
   it('should subscribe to both private updates and private story groups channel', () => {
-    middleware(store)(next)(selectTabAction);
+    middleware(store)(next)(selectProfileAction);
     expect(Pusher.subscribe)
       .toHaveBeenCalledWith('private-updates-12345');
     expect(Pusher.subscribe)
@@ -51,7 +55,7 @@ describe('middleware', () => {
   });
 
   it('should subscribe to private updates but not private story groups channel', () => {
-    middleware(store)(next)(selectQueueTabAction);
+    middleware(store)(next)(selectIGProfileAction);
     expect(Pusher.subscribe)
       .not.toHaveBeenCalledWith('private-story-groups-123456');
     expect(Pusher.subscribe)
@@ -59,7 +63,7 @@ describe('middleware', () => {
   });
 
   it('should subscribe to update events', () => {
-    middleware(store)(next)(selectTabAction);
+    middleware(store)(next)(selectProfileAction);
     expect(Pusher.bind.mock.calls[0][0]).toEqual('private-updates-12345');
     expect(Pusher.bind.mock.calls[0][1]).toEqual('sent_update');
     expect(Pusher.bind.mock.calls[1][0]).toEqual('private-updates-12345');
@@ -82,7 +86,7 @@ describe('middleware', () => {
   });
 
   it('should dispatch when a subscribed pusher event happens', () => {
-    middleware(store)(next)(selectTabAction);
+    middleware(store)(next)(selectProfileAction);
     const update = { id: '00012345', text: 'Hello, world.' };
     Pusher.simulate('private-updates-12345', 'added_update', { update });
     expect(store.dispatch).toHaveBeenCalledWith({

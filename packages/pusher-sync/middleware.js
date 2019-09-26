@@ -1,6 +1,5 @@
 import Pusher from 'pusher-js';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
-import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs/reducer';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
@@ -106,13 +105,14 @@ export default ({ dispatch }) => {
 
   return next => (action) => {
     next(action);
-    if (action.type === tabsActionTypes.SELECT_TAB) {
-      const { profileId, tabId } = action;
+    if (action.type === profileSidebarActionTypes.SELECT_PROFILE) {
+      const { profileId } = action;
+      const { service } = action.profile;
       if (profileId) {
         // If the profile is not subscribed to any channels, subscribes to private-updates channel:
         const newProfileChannels = channelsByProfileId[profileId] || { updates: pusher.subscribe(`private-updates-${profileId}`) };
-        // If on stories tab and profile is not subscribed to story-groups channel, subscribes to private-story-groups channel:
-        if (tabId === 'stories' && newProfileChannels.storyGroups === undefined) {
+        // If instagram profile and profile is not subscribed to story-groups channel, subscribes to private-story-groups channel:
+        if (service === 'instagram' && newProfileChannels.storyGroups === undefined) {
           newProfileChannels.storyGroups = pusher.subscribe(`private-story-groups-${profileId}`);
         }
         channelsByProfileId[profileId] = newProfileChannels;
