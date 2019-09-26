@@ -165,7 +165,7 @@ export default (state = initialState, action) => {
         ...state,
         showStoriesComposer: true,
         editMode: action.editMode,
-        editingPostId: action.updateId,
+        editingPostId: action.updateId || '',
         emptySlotMode: action.emptySlotMode,
         emptySlotData: action.emptySlotData,
       };
