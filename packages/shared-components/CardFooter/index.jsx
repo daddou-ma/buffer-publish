@@ -26,6 +26,7 @@ const CardFooterWrapper = styled.div`
   align-items: center;
   padding: 8px 1rem;
   opacity: ${({ isDragging }) => (isDragging ? 0 : 1)};
+  border-radius: 0 0 4px 4px;
 `;
 
 const CardFooterWrapperWithBorder = styled(CardFooterWrapper)`
