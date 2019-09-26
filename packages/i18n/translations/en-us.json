@@ -116,6 +116,26 @@
       "planYearlyDescription": "Save 20% vs paying monthly",
       "buttonText": "Subscribe to Pro Plan"
     },
+    "soloPremiumDescriptors": {
+      "plan": "Subscribe to the Premium plan!",
+      "left": {
+        "connect": "Connect 8 social accounts",
+        "users": "1 user",
+        "posts": "Schedule 2,000 posts"
+      },
+      "right": {
+        "insta": "Schedule a first comment on Instagram",
+        "hashtags": "Use Hashtag Manager to optimize reach",
+        "shopgrid": "Drive sales through Shop Grid"
+      },
+      "nonprofitYearlyPrice": "$168 per year",
+      "planYearlyPrice": "$336 per year",
+      "nonprofitMonthlyPrice": "$17.50 per month",
+      "planMonthlyPrice": "$35 per month",
+      "planMonthlyDescription": "Cancel and get a refund any time",
+      "planYearlyDescription": "Save 20% vs paying monthly",
+      "buttonText": "Subscribe to Premium Plan"
+    },
     "premiumDescriptors": {
       "plan": "Subscribe to the Premium plan!",
       "left": {
@@ -297,7 +317,9 @@
       "features": ["8 social accounts", "2 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
       "buttonText": "Choose Plan",
       "buttonCurrentPlanText": "Current Plan",
-      "billingText": "Billed Monthly"
+      "billingText": "Billed Monthly",
+      "soloCost": "$35",
+      "soloNonProfitCost": "$17.50"
     },
     "small": {
       "title": "Business",
