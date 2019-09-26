@@ -23,7 +23,7 @@ export const getCreateSGTrackingData = ({ storyGroup, channel = {} }) => {
     channel: channel.type,
     channelServiceId: channel.serviceId,
     channelId: storyGroup.profileId,
-    scheduledAt: storyGroup.scheduledAt,
+    scheduledAt: JSON.stringify(storyGroup.scheduledAt),
     clientId: null,
     clientName: CLIENT_NAME,
     ...counts,
