@@ -9,7 +9,7 @@ import CardFooter from '../CardFooter';
 import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
 import PostErrorBanner from '../PostErrorBanner';
 
-const storiesQueueTranslations = translations['stories-queue'];
+const sgQueueTranslations = translations['story-group-queue'];
 
 const Story = ({
   id,
@@ -42,7 +42,7 @@ const Story = ({
       {!hasStoriesMobileVersion
         && (
           <PostErrorBanner
-            error={storiesQueueTranslations.bannerMobileTagText}
+            error={sgQueueTranslations.bannerMobileTagText}
           />
         )
       }
