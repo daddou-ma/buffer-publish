@@ -64,6 +64,7 @@ const StoryGroups = ({
   onClosePreviewClick,
   showStoryPreview,
   userData,
+  translations,
 }) => {
   if (loading) {
     return (
@@ -94,7 +95,7 @@ const StoryGroups = ({
               </React.Fragment>
             )}
             <ComposerInput
-              placeholder="What would you like to add to your Story?"
+              placeholder={translations.inputPlaceholder}
               onPlaceholderClick={onComposerPlaceholderClick}
             />
           </ComposerInputStyle>
@@ -107,7 +108,7 @@ const StoryGroups = ({
         <ReminderTextWrapper>
           <CircleInstReminderIcon color="instagram" />
           <ReminderTextStyle type="p">
-            When it’s time to post your Story, we’ll send a Reminder to your mobile device.
+            {translations.reminderText}
           </ReminderTextStyle>
         </ReminderTextWrapper>
         <QueueItems
@@ -153,6 +154,10 @@ StoryGroups.propTypes = {
     id: PropTypes.string,
     email: PropTypes.string,
   }),
+  translations: PropTypes.shape({
+    inputPlaceholder: PropTypes.string.isRequired,
+    reminderText: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 StoryGroups.defaultProps = {

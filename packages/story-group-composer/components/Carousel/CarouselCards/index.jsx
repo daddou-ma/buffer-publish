@@ -25,6 +25,7 @@ const CarouselCards = ({
   onAddNoteClick,
   onDeleteStoryClick,
   onDropCard,
+  translations,
 }) => {
   const cardsToRender = editMode ? getCardsToShow({ cards, totalCardsToShow }) : sortCards(cards);
   const { cardWidth, cardHeight } = getCardSizes(largeCards);
@@ -58,6 +59,7 @@ const CarouselCards = ({
       cardLimit={totalCardsToShow}
       totalCards={cards.length}
       onDropCard={onDropCard}
+      translations={translations}
     />
   ));
 };
