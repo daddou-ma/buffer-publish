@@ -319,6 +319,13 @@
     "noteImageAlt": "Instagram story media",
     "scheduleLoadingButton": "Scheduling Story...",
     "scheduleButton": "Schedule Story",
-    "previewButton": "Preview"
+    "previewButton": "Preview",
+    "addNote": "Add Note",
+    "processingVideo": "Processing video",
+    "addMedia": "Add Media"
+  },
+  "story-group-queue": {
+    "inputPlaceholder": "What would you like to add to your Story?",
+    "reminderText": "When it’s time to post your Story, we’ll send a Reminder to your mobile device."
   }
 }
