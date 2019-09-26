@@ -109,15 +109,17 @@ export default ({ dispatch }) => {
     if (action.type === tabsActionTypes.SELECT_TAB) {
       const { profileId, tabId } = action;
       if (profileId) {
-        if (!channelsByProfileId[profileId]) {
-          channelsByProfileId[profileId] = {
-            updates: pusher.subscribe(`private-updates-${profileId}`),
-            storyGroups: tabId === 'stories' ? pusher.subscribe(`private-story-groups-${profileId}`) : null,
-          };
-          bindProfileUpdateEvents(channelsByProfileId[profileId].updates, profileId, dispatch);
-          if (channelsByProfileId[profileId].storyGroups) {
-            bindProfileStoryGroupEvents(channelsByProfileId[profileId].storyGroups, profileId, dispatch);
-          }
+        // If the profile is not subscribed to any channels, subscribes to private-updates channel:
+        const newProfileChannels = channelsByProfileId[profileId] || { updates: pusher.subscribe(`private-updates-${profileId}`) };
+        // If on stories tab and profile is not subscribed to story-groups channel, subscribes to private-story-groups channel:
+        if (tabId === 'stories' && newProfileChannels.storyGroups === undefined) {
+          newProfileChannels.storyGroups = pusher.subscribe(`private-story-groups-${profileId}`);
+        }
+        channelsByProfileId[profileId] = newProfileChannels;
+
+        bindProfileUpdateEvents(channelsByProfileId[profileId].updates, profileId, dispatch);
+        if (channelsByProfileId[profileId].storyGroups) {
+          bindProfileStoryGroupEvents(channelsByProfileId[profileId].storyGroups, profileId, dispatch);
         }
       }
     }
