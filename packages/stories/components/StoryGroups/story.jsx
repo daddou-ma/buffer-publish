@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
+import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import StoryGroups from './index';
 import storyGroups from './storiesData';
@@ -39,16 +40,12 @@ const store = storeFake({
   },
 });
 
-const translations = {
-  inputPlaceholder: 'What would you like to add to your Story?',
-  reminderText: 'When it’s time to post your Story, we’ll send a Reminder to your mobile device.',
-};
-
 const UpgradeModalDecorator = storyFn => (
   <Provider store={store}>
     {storyFn()}
   </Provider>
 );
+
 
 storiesOf('StoryGroups', module)
   .addDecorator(withA11y)
@@ -68,6 +65,7 @@ storiesOf('StoryGroups', module)
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onShareNowClick={action('onShareNowClick')}
       onCalendarClick={action('onCalendarClick')}
-      translations={translations}
+      translations={translations['story-group-queue']}
+      userData={{ tags: ['has_instagram_stories_mobile'] }}
     />
   ));

@@ -22,5 +22,16 @@ storiesOf('Cards|Stories/Story', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-click')}
       onPreviewClick={action('preview-click')}
+      userData={{ tags: ['has_instagram_stories_mobile'] }}
+    />
+  ))
+  .add('story with banner message to download mobile app', () => (
+    <Story
+      storyDetails={storyDetails}
+      onDeleteConfirmClick={action('delete-click')}
+      onEditClick={action('edit-click')}
+      onShareNowClick={action('share-click')}
+      onPreviewClick={action('preview-click')}
+      userData={{ tags: [] }}
     />
   ));
