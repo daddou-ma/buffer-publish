@@ -19,7 +19,7 @@ const getTrackingDataForOpenComposer = ({ channel = {} }) => ({
   channel: channel.service,
   channelId: channel.id,
   channelServiceId: channel.serviceId,
-  //clientId: channel.clientId,
+  clientName: 'publishWeb',
 });
 
 export default ({ getState, dispatch }) => next => (action) => {
