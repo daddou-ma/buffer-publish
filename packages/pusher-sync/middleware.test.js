@@ -14,6 +14,17 @@ describe('middleware', () => {
   const selectProfileAction = {
     type: profileSidebarActionTypes.SELECT_PROFILE,
     profileId: '12345',
+    profile: {
+      service: 'instagram',
+    },
+  };
+
+  const selectIGProfileAction = {
+    type: profileSidebarActionTypes.SELECT_PROFILE,
+    profileId: '123456',
+    profile: {
+      service: 'twitter',
+    },
   };
 
   beforeEach(() => {
@@ -35,10 +46,20 @@ describe('middleware', () => {
       );
   });
 
-  it('should subscribe to private updates channel', () => {
+  it('should subscribe to both private updates and private story groups channel', () => {
     middleware(store)(next)(selectProfileAction);
     expect(Pusher.subscribe)
       .toHaveBeenCalledWith('private-updates-12345');
+    expect(Pusher.subscribe)
+      .toHaveBeenCalledWith('private-story-groups-12345');
+  });
+
+  it('should subscribe to private updates but not private story groups channel', () => {
+    middleware(store)(next)(selectIGProfileAction);
+    expect(Pusher.subscribe)
+      .not.toHaveBeenCalledWith('private-story-groups-123456');
+    expect(Pusher.subscribe)
+      .toHaveBeenCalledWith('private-updates-123456');
   });
 
   it('should subscribe to update events', () => {
@@ -59,7 +80,9 @@ describe('middleware', () => {
     expect(Pusher.bind.mock.calls[6][1]).toEqual('reordered_updates');
     expect(Pusher.bind.mock.calls[7][0]).toEqual('private-updates-12345');
     expect(Pusher.bind.mock.calls[7][1]).toEqual('queue_paused');
-    expect(Pusher.bind).toHaveBeenCalledTimes(8);
+    expect(Pusher.bind.mock.calls[8][0]).toEqual('private-story-groups-12345');
+    expect(Pusher.bind.mock.calls[8][1]).toEqual('sent_story_group');
+    expect(Pusher.bind).toHaveBeenCalledTimes(9);
   });
 
   it('should dispatch when a subscribed pusher event happens', () => {
