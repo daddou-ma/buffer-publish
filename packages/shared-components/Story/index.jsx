@@ -23,6 +23,7 @@ const Story = ({
   onShareNowClick,
   onPreviewClick,
   userData,
+  onRequeueClick,
 }) => {
   const deletingMessage = isDeleting && 'Deleting...';
   const submittingMessage = isWorking && 'Sharing...';
@@ -30,19 +31,24 @@ const Story = ({
   const largeCards = false;
   const { cardWidth, cardHeight } = getCardSizes(largeCards);
   const {
-    stories, creatorName, avatarUrl, createdAt, storyAction,
+    stories, creatorName, avatarUrl, createdAt, storyAction, error, errorLink,
   } = storyDetails;
   const { tags } = userData;
   const hasStoriesMobileVersion = (
     tags ? tags.includes('has_instagram_stories_mobile') : false
   );
 
+  const hasError = error && error.length > 0;
+  const shouldDisplayErrorBanner = hasError || !hasStoriesMobileVersion;
+  const errorMessage = hasError ? error : sgQueueTranslations.bannerMobileTagText;
+
   return (
     <Card>
-      {!hasStoriesMobileVersion
+      {shouldDisplayErrorBanner
         && (
           <PostErrorBanner
-            error={sgQueueTranslations.bannerMobileTagText}
+            error={errorMessage}
+            errorLink={errorLink}
           />
         )
       }
@@ -71,14 +77,17 @@ const Story = ({
         ))}
       </Carousel>
       <CardFooter
-        icon={<CircleInstReminderIcon color="instagram" />}
-        message={storyAction}
+        icon={hasError ? '' : <CircleInstReminderIcon color="instagram" />}
         onDeleteClick={onDeleteConfirmClick}
         onEditClick={onEditClick}
         onSubmitClick={onShareNowClick}
-        submitLabel="Share Now"
         isPerformingAction={!!actionMessage}
         actionMessage={actionMessage}
+
+        message={hasError ? '' : storyAction}
+        submitLabel={hasError ? 'Retry Now' : 'Share Now'}
+        requeueLabel={hasError ? 'Re-add to Queue' : null}
+        onRequeueClick={hasError ? onRequeueClick : null}
       />
     </Card>
   );
@@ -93,6 +102,8 @@ Story.propTypes = {
     avatarUrl: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     storyAction: PropTypes.string.isRequired,
+    error: PropTypes.string,
+    errorLink: PropTypes.string,
     stories: PropTypes.arrayOf(PropTypes.shape({
       order: PropTypes.string,
       note: PropTypes.string,
@@ -105,6 +116,7 @@ Story.propTypes = {
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
+  onRequeueClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
   userData: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string),
@@ -119,6 +131,7 @@ Story.defaultProps = {
   onShareNowClick: null,
   onPreviewClick: null,
   userData: {},
+  onRequeueClick: null,
 };
 
 export default Story;

@@ -79,6 +79,7 @@ const StoryGroups = ({
   onPreviewClick,
   onClosePreviewClick,
   showStoryPreview,
+  onRequeueClick,
   userData,
   translations,
 }) => {
@@ -148,6 +149,7 @@ const StoryGroups = ({
           isBusinessAccount={isBusinessAccount}
           onPreviewClick={onPreviewClick}
           userData={userData}
+          onRequeueClick={onRequeueClick}
         />
       </ContainerStyle>
     </ErrorBoundary>
@@ -173,6 +175,7 @@ StoryGroups.propTypes = {
   onComposerPlaceholderClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
   onClosePreviewClick: PropTypes.func,
+  onRequeueClick: PropTypes.func,
   showStoryPreview: PropTypes.bool,
   userData: PropTypes.shape({
     id: PropTypes.string,
@@ -206,6 +209,7 @@ StoryGroups.defaultProps = {
   onComposerPlaceholderClick: () => {},
   onPreviewClick: () => {},
   onClosePreviewClick: () => {},
+  onRequeueClick: () => {},
   userData: {},
   translations: {},
 };
