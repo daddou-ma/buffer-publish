@@ -1,6 +1,7 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { getCreateSGTrackingData } from './utils/Tracking';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import getSGTrackingData from './utils/Tracking';
 import middleware from './middleware';
 
 jest.mock('@bufferapp/publish-analytics-middleware');

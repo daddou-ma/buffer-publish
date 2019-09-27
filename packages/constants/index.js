@@ -41,6 +41,7 @@ const PLANS_SMALL_UPGRADE = 'publish-plans-switchPlansModal-smallUpgrade-1';
 const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
 const PLANS_OPEN_MODAL = 'publish-plans-subscribeButton-openSwithPlansModal-1';
 const STORIES_CREATE_STORY_GROUP = 'publish-stories-composer-createStoryGroup-1';
+const STORIES_UPDATE_STORY_GROUP = 'publish-stories-composer-updateStoryGroup-1';
 
 const UploadTypes = keyMirror({
   LINK_THUMBNAIL: null,
@@ -113,6 +114,7 @@ module.exports = {
     QUEUE_LIMIT_PRO_TRIAL,
     QUEUE_LIMIT_PRO_UPGRADE,
     STORIES_CREATE_STORY_GROUP,
+    STORIES_UPDATE_STORY_GROUP,
   },
   MediaTypes,
   UploadTypes,

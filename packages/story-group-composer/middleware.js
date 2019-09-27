@@ -6,7 +6,8 @@ import cloneDeep from 'lodash.clonedeep';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as storiesActions, actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { getCreateSGTrackingData } from './utils/Tracking';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import getSGTrackingData from './utils/Tracking';
 import { actionTypes, actions } from './reducer';
 
 const refreshStoryGroups = (dispatch, selectedProfileId) => {
@@ -121,7 +122,11 @@ export default ({ getState, dispatch }) => next => (action) => {
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { storyGroup } = action.result;
       const channel = state.profileSidebar.selectedProfile;
-      const metadata = getCreateSGTrackingData({ storyGroup, channel });
+      const metadata = getSGTrackingData({
+        storyGroup,
+        channel,
+        cta: SEGMENT_NAMES.STORIES_CREATE_STORY_GROUP,
+      });
       /* Future TO-DO: look into refactoring this tracking to the back-end */
       dispatch(analyticsActions.trackEvent('Story Created', metadata));
       dispatch(actions.resetStoryGroupState());
@@ -132,7 +137,16 @@ export default ({ getState, dispatch }) => next => (action) => {
       }));
       break;
     }
-    case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { storyGroup } = action.result;
+      const channel = state.profileSidebar.selectedProfile;
+      const metadata = getSGTrackingData({
+        storyGroup,
+        channel,
+        cta: SEGMENT_NAMES.STORIES_UPDATE_STORY_GROUP,
+      });
+      /* Future TO-DO: look into refactoring this tracking to the back-end */
+      dispatch(analyticsActions.trackEvent('Story Updated', metadata));
       dispatch(actions.resetStoryGroupState());
       dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
@@ -140,6 +154,7 @@ export default ({ getState, dispatch }) => next => (action) => {
         message: 'Great! This story has been updated.',
       }));
       break;
+    }
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (selectedProfileId) {
         refreshStoryGroups(dispatch, selectedProfileId);
