@@ -18,6 +18,7 @@ const CarouselCardHover = ({
   card,
   onAddNoteClick,
   onDeleteStoryClick,
+  translations,
 }) => (
   <Fragment>
     <HoverWrapper>
@@ -48,9 +49,10 @@ const CarouselCardHover = ({
           : (
             <ButtonWrapper>
               <Button
-                label="Add Note"
+                label={translations.addNote}
                 onClick={() => onAddNoteClick(card)}
                 fullWidth
+                size="small"
               />
             </ButtonWrapper>
           )
@@ -68,6 +70,9 @@ CarouselCardHover.propTypes = {
     thumbnail_url: PropTypes.string,
     empty: PropTypes.bool,
     progress: PropTypes.number,
+  }).isRequired,
+  translations: PropTypes.shape({
+    addNote: PropTypes.string.isRequired,
   }).isRequired,
   onAddNoteClick: PropTypes.func.isRequired,
   onDeleteStoryClick: PropTypes.func.isRequired,

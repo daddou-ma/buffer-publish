@@ -41,7 +41,7 @@ const squareImage = 'http://via.placeholder.com/400x400';
 const tallImage = 'http://via.placeholder.com/400x900';
 const wideImage = 'http://via.placeholder.com/900x400';
 
-storiesOf('ImageDraft', module)
+storiesOf('Cards|Drafts/ImageDraft', module)
   .addDecorator(withA11y)
   .add('drafts image draft', () => (
     <ImageDraft

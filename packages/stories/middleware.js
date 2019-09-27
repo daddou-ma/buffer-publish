@@ -13,7 +13,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch(dataFetchActions.fetch({
         name: 'getStoryGroups',
         args: {
-          profileId: action.profile.id,
+          profileId: action.profileId || action.profile.id,
         },
       }));
       break;
@@ -41,8 +41,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch(dataFetchActions.fetch({
         name: 'shareStoryGroupNow',
         args: {
-          updateId: action.storyGroup.id,
-          profileId: action.profileId,
+          storyGroupId: action.storyGroup.id,
         },
       }));
       break;

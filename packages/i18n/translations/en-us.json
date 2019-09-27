@@ -48,6 +48,15 @@
     "composerInput": "What would you like to share?",
     "currentDay": "Today"
   },
+  "story-preview": {
+    "noteTitle": "Note",
+    "notePlaceholder": "Add your caption or a note-to-self",
+    "cancel": "Cancel",
+    "saveNote": "Save Note",
+    "addNote": "Add Note",
+    "editNote": "Edit Note",
+    "noteExplanation": "When it comes time to post, you'll be able to copy and past your note into Instagram."
+  },
   "stripe": {
     "noNameError": "Uh oh, please fill out the cardholder name :)",
     "noZipError": "For extra security, please add the zip code associated with this card",
@@ -306,10 +315,19 @@
     "noteSubText": "When it comes time to post, you'll be able to copy and paste your note into Instagram.",
     "notePlaceholder": "Add your caption or a note to self",
     "saveNoteButton": "Save Note",
-    "cancelNoteButton": "Cancel",
+    "cancelNoteButton": "Back",
     "noteImageAlt": "Instagram story media",
     "scheduleLoadingButton": "Scheduling Story...",
     "scheduleButton": "Schedule Story",
-    "previewButton": "Preview"
+    "previewButton": "Preview",
+    "addNote": "Add Note",
+    "processingVideo": "Processing video",
+    "addMedia": "Add Media"
+  },
+  "story-group-queue": {
+    "inputPlaceholder": "What would you like to add to your Story?",
+    "reminderText": "When it’s time to post your Story, we’ll send a Reminder to your mobile device.",
+     "mobileTagText": "Uh-oh! Looks like you might not have the latest version of the Buffer mobile app. Download it now to start using Stories!",
+    "bannerMobileTagText": "Hmm...looks like you might not have the latest version of the Buffer mobile app. Download it now so that you can share this Story!"
   }
 }

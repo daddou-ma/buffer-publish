@@ -12,3 +12,12 @@ export const userPropTypes = PropTypes.shape({
   avatarUrl: PropTypes.string.isRequired,
   handle: PropTypes.string,
 }).isRequired;
+
+export const translationsPropTypes = PropTypes.shape({
+  notePlaceholder: PropTypes.string.isRequired,
+  cancel: PropTypes.string.isRequired,
+  saveNote: PropTypes.string.isRequired,
+  addNote: PropTypes.string.isRequired,
+  editNote: PropTypes.string.isRequired,
+  noteExplanation: PropTypes.string.isRequired,
+}).isRequired;

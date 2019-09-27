@@ -19,6 +19,8 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   OPEN_PREVIEW: 0,
   CLOSE_PREVIEW: 0,
   SET_STORY_GROUP: 0,
+  SHOW_ERRORS: 0,
+  HIDE_ERRORS: 0,
 });
 
 const newStory = () => clonedeep({
@@ -45,6 +47,8 @@ export const initialState = {
   },
   isScheduleLoading: false,
   showStoryPreview: false,
+  errors: [],
+  maxStories: 10,
 };
 
 const updateStoryNote = ({ stories = [], order, note }) => (
@@ -54,24 +58,22 @@ const updateStoryNote = ({ stories = [], order, note }) => (
 const reorderStories = (stories, sourceOrder, targetOrder) => {
   const draggedCard = stories.find(item => item.order === sourceOrder);
   const remainingCards = stories.filter(item => item.order !== sourceOrder);
-  const source = parseInt(sourceOrder, 10);
-  const target = parseInt(targetOrder, 10);
 
-  if (source < target) {
+  if (sourceOrder < targetOrder) {
     remainingCards.forEach((story) => {
-      if (story.order > source && story.order <= target) {
-        story.order = parseInt(story.order, 10) - 1;
+      if (story.order > sourceOrder && story.order <= targetOrder) {
+        story.order -= 1;
       }
     });
   }
-  if (source > target) {
+  if (sourceOrder > targetOrder) {
     remainingCards.forEach((story) => {
-      if (story.order < source && story.order >= target) {
-        story.order = parseInt(story.order, 10) + 1;
+      if (story.order < sourceOrder && story.order >= targetOrder) {
+        story.order += 1;
       }
     });
   }
-  draggedCard.order = target;
+  draggedCard.order = targetOrder;
 
   const result = [
     ...remainingCards,
@@ -84,15 +86,14 @@ const reorderStories = (stories, sourceOrder, targetOrder) => {
 const deleteStory = ({ stories, story }) => {
   const result = stories.filter(item => item.order !== story.order);
 
-  result.forEach((item) => {
+  return result.map((item) => {
     // If card is on the right of the deleted card,
     // change order one space to the left
     if (item.order > story.order) {
-      item.order = parseInt(item.order, 10) - 1;
+      item.order -= 1;
     }
+    return item;
   });
-
-  return result;
 };
 
 export default (state, action) => {
@@ -161,7 +162,6 @@ export default (state, action) => {
       const {
         id,
         progress,
-        complete,
       } = action.args;
       const { stories } = state.storyGroup;
       return {
@@ -186,7 +186,6 @@ export default (state, action) => {
         url,
         width,
         height,
-        stillGifUrl,
         contentType,
       } = action.args;
       const { stories } = state.storyGroup;
@@ -316,6 +315,16 @@ export default (state, action) => {
       return {
         ...state,
         showStoryPreview: false,
+      };
+    case actionTypes.HIDE_ERRORS:
+      return {
+        ...state,
+        errors: [],
+      };
+    case actionTypes.SHOW_ERRORS:
+      return {
+        ...state,
+        errors: [...state.errors, action.message],
       };
     default:
       return state;
@@ -450,5 +459,11 @@ export const actions = {
     type: actionTypes.DELETE_STORY,
     story,
   }),
-
+  showError: ({ message }) => ({
+    type: actionTypes.SHOW_ERRORS,
+    message,
+  }),
+  hideError: () => ({
+    type: actionTypes.HIDE_ERRORS,
+  }),
 };

@@ -30,7 +30,7 @@ const draftsView = 'drafts';
 const approvalView = 'approval';
 const scheduledAt = 1495553578;
 
-storiesOf('DraftFooter', module)
+storiesOf('Cards|Drafts/DraftFooter', module)
   .addDecorator(withA11y)
   .add('drafts view: manager - scheduled post', () => (
     <DraftFooter

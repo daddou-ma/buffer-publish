@@ -42,7 +42,7 @@ const tallImage = 'http://lorempixel.com/400/900/cats/';
 const wideImage = 'http://lorempixel.com/900/400/cats/';
 const view = 'approval';
 
-storiesOf('VideoDraft', module)
+storiesOf('Cards|Drafts/VideoDraft', module)
   .addDecorator(withA11y)
   .add('queued video post', () => (
     <VideoDraft

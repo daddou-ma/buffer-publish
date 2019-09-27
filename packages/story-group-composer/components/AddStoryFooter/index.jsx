@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
-import { getReadableDateFormat } from '../../utils/AddStory';
+import { getReadableDateFormat, getMomentTime } from '../../utils/AddStory';
 import {
   FooterBar,
   ButtonStyle,
@@ -11,6 +11,20 @@ import {
   EditDateStyle,
   StyledEditButton,
 } from './style';
+
+const getInitialDateTime = ({
+  editMode,
+  scheduledAt,
+  emptySlotData,
+  timezone,
+}) => {
+  if (editMode || emptySlotData) {
+    const timestamp = editMode ? scheduledAt : emptySlotData.scheduledAt;
+    return getMomentTime({ scheduledAt: timestamp, timezone });
+  }
+
+  return null;
+};
 
 const AddStoryFooter = ({
   timezone,
@@ -23,12 +37,13 @@ const AddStoryFooter = ({
   onCreateStoryGroup,
   onPreviewClick,
   editMode,
+  emptySlotData,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+
   const storiesLength = storyGroup.stories.length;
   const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0;
-
   const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading;
   const isPreviewDisabled = storiesLength < 1 || !uploadsCompleted;
 
@@ -45,7 +60,7 @@ const AddStoryFooter = ({
 
   const onScheduleClick = () => {
     if (editMode) {
-      const { stories, storyGroupId } = storyGroup;
+      const { storyGroupId } = storyGroup;
       onUpdateStoryGroup({
         scheduledAt,
         stories,
@@ -72,7 +87,7 @@ const AddStoryFooter = ({
             </EditTextStyle>
             <EditDateStyle>
               <Text>
-                {getReadableDateFormat({ scheduledAt, uses24hTime })}
+                {getReadableDateFormat({ uses24hTime, scheduledAt, timezone })}
               </Text>
             </EditDateStyle>
             <StyledEditButton
@@ -107,6 +122,12 @@ const AddStoryFooter = ({
           weekStartsMonday={weekStartsMonday}
           editMode={editMode}
           onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
+          initialDateTime={getInitialDateTime({
+            editMode,
+            scheduledAt,
+            emptySlotData,
+            timezone,
+          })}
         />
       )}
     </Fragment>

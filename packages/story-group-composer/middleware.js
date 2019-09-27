@@ -5,8 +5,8 @@ import {
 import cloneDeep from 'lodash.clonedeep';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as storiesActions, actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
-import { actionTypes, actions } from './reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
+import { actionTypes, actions } from './reducer';
 
 const refreshStoryGroups = (dispatch, selectedProfileId) => {
   dispatch(dataFetchActions.fetch({
@@ -22,12 +22,66 @@ const getTrackingDataForOpenComposer = ({ channel = {} }) => ({
   clientName: 'publishWeb',
 });
 
+const createImageStory = (story) => {
+  const {
+    _id,
+    note,
+    order,
+    type,
+    asset_url,
+    thumbnail_url,
+  } = story;
+  return {
+    _id,
+    note,
+    order,
+    type,
+    asset_url,
+    thumbnail_url,
+  };
+};
+
+const createVideoStory = (story) => {
+  const {
+    _id,
+    note,
+    order,
+    type,
+    asset_url,
+    thumbnail_url,
+    upload_id,
+    duration_ms,
+    file_size,
+    width,
+    height,
+  } = story;
+  return {
+    _id,
+    note,
+    order,
+    type,
+    asset_url,
+    thumbnail_url,
+    upload_id,
+    duration_ms,
+    file_size,
+    width,
+    height,
+  };
+};
+
+const getMappedStories = (story) => {
+  if (story.type === 'video') return createVideoStory(story);
+  return createImageStory(story);
+};
+
 export default ({ getState, dispatch }) => next => (action) => {
   next(action);
   const { selectedProfileId } = getState().profileSidebar;
   switch (action.type) {
     case actionTypes.SAVE_STORY_GROUP: {
       const { stories } = getState().storyGroupComposer.storyGroup;
+      const sendStories = stories.map(getMappedStories);
       const { scheduledAt } = action;
 
       if (scheduledAt) {
@@ -36,7 +90,7 @@ export default ({ getState, dispatch }) => next => (action) => {
           args: {
             profileId: selectedProfileId,
             scheduledAt,
-            stories,
+            stories: sendStories,
           },
         }));
       }

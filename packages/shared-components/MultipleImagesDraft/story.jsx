@@ -32,7 +32,7 @@ const imageUrls = [
   'http://via.placeholder.com/400x400',
 ];
 
-storiesOf('MultipleImagesDraft', module)
+storiesOf('Cards|Drafts/MultipleImagesDraft', module)
   .addDecorator(withA11y)
   .add('queued multiple image post', () => (
     <MultipleImagesDraft

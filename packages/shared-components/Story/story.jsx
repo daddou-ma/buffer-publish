@@ -13,7 +13,7 @@ const storyDetails = {
   storyAction: 'You will receive a reminder today at 2:55 PM (BST) when it is time to post',
 };
 
-storiesOf('Story', module)
+storiesOf('Cards|Stories/Story', module)
   .addDecorator(withA11y)
   .add('default', () => (
     <Story
@@ -22,5 +22,16 @@ storiesOf('Story', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-click')}
       onPreviewClick={action('preview-click')}
+      userData={{ tags: ['has_instagram_stories_mobile'] }}
+    />
+  ))
+  .add('story with banner message to download mobile app', () => (
+    <Story
+      storyDetails={storyDetails}
+      onDeleteConfirmClick={action('delete-click')}
+      onEditClick={action('edit-click')}
+      onShareNowClick={action('share-click')}
+      onPreviewClick={action('preview-click')}
+      userData={{ tags: [] }}
     />
   ));

@@ -12,12 +12,28 @@ export const ArrowWrapper = styled.div`
   transform: translateY(-50%);
 `;
 
+const getLeftScroll = ({ cardWidth, selectedItem }) => {
+  let result = 0;
+  if (selectedItem === 0) { return 0; }
+
+  for (let i = 1; i <= selectedItem; i += 1) {
+    if (i === 1) {
+      result += cardWidth + 3 * (cardWidth / 5) + cardMargin * 2;
+    } else {
+      result += cardWidth + cardMargin;
+    }
+  }
+
+  return result;
+};
+
 export const CarouselContainer = styled.div`
   display: flex;
-  padding-left: ${props => (props.largeCards ? '16px' : 0)};
+  padding: ${props => (props.largeCards ? '8px 0px 8px 8px' : 0)};
   width: calc(${props => props.cardWidth + cardMargin}px *  ${$props => $props.totalCardsToShow});
-  transform: ${props => `translateX(calc(-${props.cardWidth + cardMargin}px * ${props.selectedItem}`}));
+  transform: ${props => `translateX(calc(-${getLeftScroll(props)}px`}));
   transition: all 0.3s ease-out;
+  left: ${props => (props.selectedItem % 2 === 0 ? 1 : 0)}px;
 `;
 
 export const CarouselCard = styled.div`
@@ -39,7 +55,7 @@ export const CarouselCard = styled.div`
 export const SliderCarousel = styled.div`
   position: relative;
   overflow: hidden;
-  margin: ${props => (props.largeCards ? '0 -16px 0 -16px' : '0 12px 0 12px')};
+  margin: ${props => (props.largeCards ? '0 -16px 0 -16px' : '0 8px 0 8px')};
 `;
 
 export const IconWrapper = styled.div`

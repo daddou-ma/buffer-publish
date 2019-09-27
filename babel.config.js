@@ -17,8 +17,8 @@ module.exports = function (api) {
       '@babel/plugin-proposal-export-default-from',
       ['@babel/plugin-transform-runtime',
         {
+          corejs: 3,
           absoluteRuntime: false,
-          corejs: false,
           helpers: true,
           regenerator: true,
           useESModules: false,

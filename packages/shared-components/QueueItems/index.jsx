@@ -247,7 +247,7 @@ const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
     onClick={() => onEmptySlotClick({
       dueTime: slot.label,
       profile_service: profileService,
-      scheduled_at: slot.timestamp,
+      scheduledAt: slot.timestamp,
       due_at: slot.timestamp,
     })}
   />

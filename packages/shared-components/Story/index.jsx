@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CircleInstReminderIcon } from '@bufferapp/components';
 import { CoverImage, PlayIcon } from '@bufferapp/publish-story-group-composer/components/Carousel/CardItem/styles';
+import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import CardFooter from '../CardFooter';
 import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
+import PostErrorBanner from '../PostErrorBanner';
+
+const sgQueueTranslations = translations['story-group-queue'];
 
 const Story = ({
   id,
@@ -18,6 +22,7 @@ const Story = ({
   onEditClick,
   onShareNowClick,
   onPreviewClick,
+  userData,
 }) => {
   const deletingMessage = isDeleting && 'Deleting...';
   const submittingMessage = isWorking && 'Sharing...';
@@ -27,9 +32,20 @@ const Story = ({
   const {
     stories, creatorName, avatarUrl, createdAt, storyAction,
   } = storyDetails;
+  const { tags } = userData;
+  const hasStoriesMobileVersion = (
+    tags ? tags.includes('has_instagram_stories_mobile') : false
+  );
 
   return (
     <Card>
+      {!hasStoriesMobileVersion
+        && (
+          <PostErrorBanner
+            error={sgQueueTranslations.bannerMobileTagText}
+          />
+        )
+      }
       <CardHeader
         creatorName={creatorName}
         avatarUrl={avatarUrl}
@@ -38,7 +54,11 @@ const Story = ({
           stories, profileId, id, scheduledAt,
         })}
       />
-      <Carousel editMode={false} totalCardsToShow={(stories && stories.length) || 0}>
+      <Carousel
+        editMode={false}
+        totalCardsToShow={(stories && stories.length) || 0}
+        totalStories={(stories && stories.length) || 0}
+      >
         {stories && stories.map(card => (
           <CarouselCard
             cardHeight={cardHeight}
@@ -86,6 +106,9 @@ Story.propTypes = {
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
+  userData: PropTypes.shape({
+    tags: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 Story.defaultProps = {
@@ -95,6 +118,7 @@ Story.defaultProps = {
   onEditClick: null,
   onShareNowClick: null,
   onPreviewClick: null,
+  userData: {},
 };
 
 export default Story;

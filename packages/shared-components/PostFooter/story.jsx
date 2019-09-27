@@ -36,7 +36,7 @@ const postDetailsError = {
   error: 'Woops! Something went wrong. Try again?',
 };
 
-storiesOf('PostFooter', module)
+storiesOf('Cards|Posts/PostFooter', module)
   .addDecorator(withA11y)
   .add('queued post', () => (
     <PostFooter

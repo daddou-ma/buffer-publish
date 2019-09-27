@@ -9,16 +9,15 @@ const getMessage = (message) => {
 module.exports = method(
   'shareStoryGroupNow',
   'share story group now',
-  async ({ storyGroupId, profileId }, { session }) => {
+  async ({ storyGroupId }, { session }) => {
     let result;
     try {
       result = await rp({
         uri: `${process.env.API_ADDR}/1/story_groups/${storyGroupId}/share.json`,
-        method: 'POST',
+        method: 'GET',
         strictSSL: !(process.env.NODE_ENV === 'development'),
         qs: {
           access_token: session.publish.accessToken,
-          story_group_id: storyGroupId,
         },
       });
     } catch (err) {

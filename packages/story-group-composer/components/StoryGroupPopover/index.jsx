@@ -27,6 +27,8 @@ const StoryGroupPopover = ({
   onMonitorUpdateProgress,
   onUploadImageComplete,
   onUploadDraftFile,
+  onRemoveNotifications,
+  onShowErrorNotification,
   userData,
   storyGroup,
   editMode,
@@ -35,6 +37,9 @@ const StoryGroupPopover = ({
   onClosePreviewClick,
   onPreviewClick,
   onDropCard,
+  errorMessages,
+  emptySlotData,
+  maxStories,
 }) => (
   <React.Fragment>
     {showStoryPreview && (
@@ -50,6 +55,7 @@ const StoryGroupPopover = ({
         onOverlayClick={onOverlayClick}
       >
         <StoryGroupWrapper
+          maxStories={maxStories}
           uses24hTime={uses24hTime}
           timezone={timezone}
           weekStartsMonday={weekStartsMonday}
@@ -69,11 +75,15 @@ const StoryGroupPopover = ({
           onMonitorUpdateProgress={onMonitorUpdateProgress}
           onUploadImageComplete={onUploadImageComplete}
           onUploadDraftFile={onUploadDraftFile}
+          onRemoveNotifications={onRemoveNotifications}
+          onShowErrorNotification={onShowErrorNotification}
           onPreviewClick={onPreviewClick}
           onDropCard={onDropCard}
           userData={userData}
           storyGroup={storyGroup}
           editMode={editMode}
+          errorMessages={errorMessages}
+          emptySlotData={emptySlotData}
         />
       </Popover>
     )}

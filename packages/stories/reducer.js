@@ -9,6 +9,7 @@ export const actionTypes = keyWrapper('STORIES', {
   OPEN_PREVIEW: 0,
   STORY_GROUP_SHARE_NOW: 0,
   CLOSE_PREVIEW: 0,
+  STORY_SENT: 0,
 });
 
 export const initialState = {
@@ -17,6 +18,7 @@ export const initialState = {
   showStoriesComposer: false,
   editMode: false,
   emptySlotMode: false,
+  emptySlotData: null,
   editingPostId: '',
   showStoryPreview: false,
 };
@@ -75,6 +77,7 @@ const storyPostsReducer = (state = {}, action) => {
       return updates;
     }
     case actionTypes.DELETE_STORY_GROUP:
+    case actionTypes.STORY_SENT:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { [getStoryGroupId(action)]: deleted, ...currentState } = state;
       return currentState;
@@ -115,6 +118,7 @@ const profileReducer = (state = profileInitialState, action) => {
       };
     case actionTypes.STORY_GROUP_SHARE_NOW:
     case actionTypes.DELETE_STORY_GROUP:
+    case actionTypes.STORY_SENT:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
@@ -141,6 +145,7 @@ export default (state = initialState, action) => {
     case profileSidebarActionTypes.SELECT_PROFILE:
     case actionTypes.STORY_GROUP_SHARE_NOW:
     case actionTypes.DELETE_STORY_GROUP:
+    case actionTypes.STORY_SENT:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
@@ -174,6 +179,7 @@ export default (state = initialState, action) => {
         showStoriesComposer: false,
         editMode: false,
         emptySlotMode: false,
+        emptySlotData: null,
       };
     case actionTypes.OPEN_PREVIEW:
       return {
@@ -194,6 +200,7 @@ export const actions = {
   handleEmptySlotClick: ({ profileId, emptySlotData }) => ({
     type: actionTypes.OPEN_STORIES_COMPOSER,
     emptySlotMode: true,
+    editMode: false,
     emptySlotData,
     profileId,
   }),
@@ -224,7 +231,7 @@ export const actions = {
   }),
   handleShareNowClick: ({ storyGroup, profileId }) => ({
     type: actionTypes.STORY_GROUP_SHARE_NOW,
-    updateId: storyGroup.id,
+    storyGroupId: storyGroup.id,
     storyGroup,
     profileId,
   }),

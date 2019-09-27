@@ -1,7 +1,9 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Carousel from '@bufferapp/publish-shared-components/Carousel';
+import Carousel, { CarouselCard, getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
+import { fontSizeMini, fontWeight, fontWeightMedium, fontFamily } from '@bufferapp/components/style/font';
+import { red } from '@bufferapp/components/style/color';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
@@ -13,7 +15,7 @@ const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
 
 const WrapperStyle = styled.div`
-  width: 686px;
+  width: 728px;
   height: 100%;
   background-color: white;
   top: 0;
@@ -21,6 +23,31 @@ const WrapperStyle = styled.div`
   border-radius: 3px;
   padding: 16px;
 `;
+
+const ErrorMessage = styled.div`
+  display: block;
+  background-color: rgba(243, 175, 185, 0.25);
+  color: ${red};
+  margin: 8px 0;
+  padding: 8px;
+  font-size: ${fontSizeMini};
+  font-weight: ${fontWeight};
+`;
+
+const CarouselCardCongrats = styled.span`
+  color: inherit;
+  font-family: ${fontFamily};
+  font-size: ${fontSizeMini};
+  font-weight: ${props => props.weight};
+  line-height: inherit;
+  margin: 8px;
+  text-align: center;
+`;
+
+const ErrorHandler = ({ errorMessages }) => {
+  if (!errorMessages) return null;
+  return errorMessages && errorMessages.map(err => <ErrorMessage key={`${err}`}>{err}</ErrorMessage>);
+};
 
 /*
  * Wrapper to make sure to display add story view or add note view
@@ -45,15 +72,24 @@ const StoryGroupWrapper = ({
   onUploadImageComplete,
   onUploadDraftFile,
   onPreviewClick,
+  onRemoveNotifications,
+  onShowErrorNotification,
   userData,
   onUploadFinished,
   onDropCard,
   storyGroup,
   editMode,
+  errorMessages,
+  emptySlotData,
+  maxStories,
 }) => {
   const cards = storyGroup ? storyGroup.stories : [];
   const [viewMode, setViewMode] = useState(ADD_STORY);
   const [story, setStory] = useState();
+
+  const hasReachedMaxStories = (maxStories - cards.length) <= 0;
+  const totalStoriesInCarousel = hasReachedMaxStories ? maxStories + 1 : maxStories;
+  const { cardWidth, cardHeight } = getCardSizes(true);
 
   return (
     <Fragment>
@@ -66,7 +102,9 @@ const StoryGroupWrapper = ({
           <React.Fragment>
             <Carousel
               userData={userData}
+              totalCardsToShow={totalStoriesInCarousel}
               largeCards
+              totalStories={(storyGroup.stories && storyGroup.stories.length) || 0}
             >
               <CarouselCards
                 createNewFile={onCreateNewStoryCard}
@@ -77,7 +115,7 @@ const StoryGroupWrapper = ({
                 uploadImageComplete={onUploadImageComplete}
                 uploadDraftFile={onUploadDraftFile}
                 cards={cards}
-                totalCardsToShow={15}
+                totalCardsToShow={maxStories}
                 userData={userData}
                 largeCards
                 editMode
@@ -88,8 +126,32 @@ const StoryGroupWrapper = ({
                 }}
                 onDeleteStoryClick={storyCard => onDeleteStory(storyCard)}
                 onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, storyGroup)}
+                removeNotifications={onRemoveNotifications}
+                notifyError={onShowErrorNotification}
+                translations={translations}
               />
+              {hasReachedMaxStories
+              && (
+                <CarouselCard
+                  key="congrats"
+                  cardHeight={cardHeight}
+                  cardWidth={cardWidth}
+                  largeCards
+                  onMouseEnter={() => false}
+                  onMouseLeave={() => false}
+                  isTarget={false}
+                >
+                  <CarouselCardCongrats weight={fontWeightMedium}>
+                    You’re a Stories superstar!
+                  </CarouselCardCongrats>
+                  <CarouselCardCongrats weight={fontWeight}>
+                    {`You’ve hit the ${maxStories} media limit per scheduled Story.`}
+                  </CarouselCardCongrats>
+                </CarouselCard>
+              )
+              }
             </Carousel>
+            <ErrorHandler errorMessages={errorMessages} />
             <AddStoryFooter
               timezone={timezone}
               weekStartsMonday={weekStartsMonday}
@@ -101,6 +163,7 @@ const StoryGroupWrapper = ({
               onCreateStoryGroup={onCreateStoryGroup}
               onUpdateStoryGroup={onUpdateStoryGroup}
               onPreviewClick={onPreviewClick}
+              emptySlotData={emptySlotData}
             />
           </React.Fragment>
         )}
@@ -129,8 +192,6 @@ StoryGroupWrapper.propTypes = {
 
 StoryGroupWrapper.defaultProps = {
   ...HeaderBar.PropTypes,
-  selectedProfile: HeaderBar.propTypes.selectedProfile.isRequired,
-  ...HeaderBar.propTypes,
   ...DateTimeSlotPickerWrapper.propTypes,
   ...AddStoryFooter.propTypes,
   ...CardItem.defaultProps,
