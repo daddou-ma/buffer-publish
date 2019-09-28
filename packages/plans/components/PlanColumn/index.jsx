@@ -7,7 +7,6 @@ import {
   ColumnStyle,
   TopContentStyle,
   ImageWrapperStyle,
-  SubtitleStyle,
   FooterStyle,
   ButtonWrapperStyle,
   LinkStyle,
@@ -19,13 +18,13 @@ const PlanColumn = ({
   cost,
   nonProfitCost,
   isNonprofit,
-  subtitle,
   imageSrc,
   plan,
   currentPlan,
   source,
   onChoosePlanClick,
   features,
+  featureTooltips,
   buttonText,
   buttonCurrentPlanText,
   billingText,
@@ -44,12 +43,9 @@ const PlanColumn = ({
         { isNonprofit ? nonProfitCost : cost }/mo
       </Text>
       <Text>{ billingText }</Text>
-      <SubtitleStyle>
-        <Text>{ subtitle }</Text>
-      </SubtitleStyle>
     </TopContentStyle>
-    {features.map(feature => (
-      <PlanFeatureList feature={feature} key={feature} />
+    {features.map((feature, index) => (
+      <PlanFeatureList feature={feature} key={feature} tooltip={featureTooltips[index]} />
     ))}
     <FooterStyle>
       <ButtonWrapperStyle>
@@ -83,6 +79,7 @@ PlanColumn.propTypes = {
   buttonCurrentPlanText: PropTypes.string.isRequired,
   billingText: PropTypes.string.isRequired,
   features: PropTypes.array.isRequired,
+  featureTooltips: PropTypes.array.isRequired,
   isNonprofit: PropTypes.bool.isRequired,
 };
 

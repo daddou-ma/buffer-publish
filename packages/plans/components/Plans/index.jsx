@@ -68,14 +68,6 @@ const Plans = ({
           source={getSource({ newPlan: 'premium_business', currentPlan })}
           isNonprofit={isNonprofit}
         />
-        <PlanColumn
-          {...translations.small}
-          imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-business@2x.jpeg"
-          currentPlan={currentPlan}
-          onChoosePlanClick={onChoosePlanClick}
-          source={getSource({ newPlan: 'small', currentPlan })}
-          isNonprofit={isNonprofit}
-        />
       </ColumnContainerStyle>
     </div>
   </ContainerStyle>

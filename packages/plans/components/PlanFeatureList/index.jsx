@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { blue } from '@bufferapp/ui/style/colors';
 import CheckmarkIcon from '@bufferapp/ui/Icon/Icons/Checkmark';
-import { Text } from '@bufferapp/ui';
+import { Text, Tooltip } from '@bufferapp/ui';
+import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 
 const IconStyle = styled.span`
   background: ${blue};
@@ -24,17 +25,28 @@ const FeatureWrapperStyle = styled.div`
 
 const PlanFeatureList = ({
   feature,
+  tooltip,
 }) => (
   <FeatureWrapperStyle key={feature}>
     <IconStyle>
       <CheckmarkIcon />
     </IconStyle>
     <Text>{feature}</Text>
+
+    {tooltip !== '' && (
+    <Tooltip
+      label={tooltip}
+      position="right"
+    >
+      <InfoIcon size="medium" />
+    </Tooltip>
+    )}
   </FeatureWrapperStyle>
 );
 
 PlanFeatureList.propTypes = {
   feature: PropTypes.string.isRequired,
+  tooltip: PropTypes.string.isRequired,
 };
 
 export default PlanFeatureList;
