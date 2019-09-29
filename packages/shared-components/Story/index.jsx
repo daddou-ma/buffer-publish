@@ -85,7 +85,6 @@ const Story = ({
 
         message={hasError ? '' : storyAction}
         submitLabel={hasError ? 'Retry Now' : 'Share Now'}
-        requeueLabel={hasError ? 'Re-add to Queue' : null}
       />
     </Card>
   );

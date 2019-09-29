@@ -79,7 +79,6 @@ const StoryGroups = ({
   onPreviewClick,
   onClosePreviewClick,
   showStoryPreview,
-  onRequeueClick,
   userData,
   translations,
 }) => {
