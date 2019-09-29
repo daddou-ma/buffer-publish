@@ -20,6 +20,7 @@ module.exports = (storyGroup) => {
     createdAt: storyGroup.created_at,
     scheduled_at: storyGroup.scheduled_at,
     scheduledAt: storyGroup.scheduled_at,
+    due_at: storyGroup.scheduled_at,
     isPastDue,
     type: 'storyGroup',
     profileId: storyGroup.profile_id,
