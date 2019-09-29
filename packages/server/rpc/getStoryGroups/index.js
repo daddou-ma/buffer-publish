@@ -6,13 +6,14 @@ const { buildPostMap } = require('./../../formatters/src');
 module.exports = method(
   'getStoryGroups',
   'fetch stories groups',
-  ({ profileId, since, before, utc = false }, { session }) =>
+  ({ profileId, since, before, utc = false, count = 20 }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/profiles/${profileId}/story_groups/pending.json`,
       method: 'GET',
       strictSSL: !(process.env.NODE_ENV === 'development'),
       qs: {
         access_token: session.publish.accessToken,
+        count,
         since,
         before,
         utc,
