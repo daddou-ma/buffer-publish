@@ -81,9 +81,6 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
-    onRequeueClick: () => {
-      console.log('check with design to see if we should implement this');
-    },
   }),
 )(StoryGroups);
 

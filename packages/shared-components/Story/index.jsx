@@ -23,7 +23,6 @@ const Story = ({
   onShareNowClick,
   onPreviewClick,
   userData,
-  onRequeueClick,
 }) => {
   const deletingMessage = isDeleting && 'Deleting...';
   const submittingMessage = isWorking && 'Sharing...';
@@ -87,7 +86,6 @@ const Story = ({
         message={hasError ? '' : storyAction}
         submitLabel={hasError ? 'Retry Now' : 'Share Now'}
         requeueLabel={hasError ? 'Re-add to Queue' : null}
-        onRequeueClick={hasError ? onRequeueClick : null}
       />
     </Card>
   );
@@ -116,7 +114,6 @@ Story.propTypes = {
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
-  onRequeueClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
   userData: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string),
@@ -131,7 +128,6 @@ Story.defaultProps = {
   onShareNowClick: null,
   onPreviewClick: null,
   userData: {},
-  onRequeueClick: null,
 };
 
 export default Story;
