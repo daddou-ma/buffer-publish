@@ -128,7 +128,7 @@ export default ({ getState, dispatch }) => next => (action) => {
         cta: SEGMENT_NAMES.STORIES_CREATE_STORY_GROUP,
       });
       /* Future TO-DO: look into refactoring this tracking to the back-end */
-      dispatch(analyticsActions.trackEvent('Story Created', metadata));
+      dispatch(analyticsActions.trackEvent('Story Group Created', metadata));
       dispatch(actions.resetStoryGroupState());
       dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
@@ -146,7 +146,7 @@ export default ({ getState, dispatch }) => next => (action) => {
         cta: SEGMENT_NAMES.STORIES_UPDATE_STORY_GROUP,
       });
       /* Future TO-DO: look into refactoring this tracking to the back-end */
-      dispatch(analyticsActions.trackEvent('Story Updated', metadata));
+      dispatch(analyticsActions.trackEvent('Story Group Updated', metadata));
       dispatch(actions.resetStoryGroupState());
       dispatch(storiesActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
