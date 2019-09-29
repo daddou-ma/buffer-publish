@@ -42,7 +42,7 @@ describe('middleware', () => {
         .toBeCalledWith(action);
 
       expect(analyticsActions.trackEvent)
-        .toBeCalledWith('Story Created', expectedObj);
+        .toBeCalledWith('Story Group Created', expectedObj);
     });
     it('should send tracking data when story group is updated', () => {
       const action = {
@@ -61,7 +61,7 @@ describe('middleware', () => {
         .toBeCalledWith(action);
 
       expect(analyticsActions.trackEvent)
-        .toBeCalledWith('Story Updated', expectedObj);
+        .toBeCalledWith('Story Group Updated', expectedObj);
     });
   });
 });
