@@ -17,7 +17,7 @@ env:
       fieldRef:
         fieldPath: status.hostIP
   - name: ANALYZE_API_ADDR
-    value: https://analyze-api.buffer.com
+    value: http://analytics-analyze-api.analyze:443
   - name: BUGSNAG_KEY
     valueFrom:
       secretKeyRef:
