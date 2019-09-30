@@ -94,13 +94,13 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  it('should handle DELETE_STORY_GROUP action type', () => {
+  it('should handle STORY_DELETED action type', () => {
     const stateBefore = {
       byProfileId: {
         [profileId]: {
           storyPosts: {
-            '1sg': { _id: '1sg', stories: [] },
-            '2sg': { _id: '2sg', stories: [] },
+            '1sg': { id: '1sg', stories: [] },
+            '2sg': { id: '2sg', stories: [] },
           },
         },
       },
@@ -110,7 +110,7 @@ describe('reducer', () => {
       byProfileId: {
         [profileId]: {
           storyPosts: {
-            '1sg': { _id: '1sg', stories: [] },
+            '1sg': { id: '1sg', stories: [] },
           },
         },
       },
@@ -118,9 +118,88 @@ describe('reducer', () => {
     };
 
     const action = {
-      type: actionTypes.DELETE_STORY_GROUP,
+      type: actionTypes.STORY_DELETED,
       storyGroup: {
         id: '2sg',
+      },
+      profileId,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('should handle STORY_CREATED action type', () => {
+    const stateBefore = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { id: '1sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+    const stateAfter = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { id: '1sg', stories: [] },
+            '2sg': { id: '2sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+
+    const action = {
+      type: actionTypes.STORY_CREATED,
+      storyGroup: {
+        id: '2sg',
+        stories: [],
+      },
+      profileId,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('should handle STORY_UPDATED action type', () => {
+    const stateBefore = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { id: '1sg', stories: [] },
+            '2sg': { id: '2sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+    const stateAfter = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { id: '1sg', stories: [] },
+            '2sg': { id: '2sg', stories: [{ id: 'story' }] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+
+    const action = {
+      type: actionTypes.STORY_UPDATED,
+      storyGroup: {
+        id: '2sg',
+        stories: [{ id: 'story' }],
       },
       profileId,
     };
