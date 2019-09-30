@@ -14,6 +14,7 @@ const refreshStoryGroups = (dispatch, selectedProfileId) => {
   dispatch(dataFetchActions.fetch({
     name: 'getStoryGroups',
     profileId: selectedProfileId,
+    isFetchingMore: false,
   }));
 };
 
