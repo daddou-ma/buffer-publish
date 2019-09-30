@@ -33,7 +33,7 @@ module.exports = (storyGroup) => {
       createdAt: getDateString(storyGroup.created_at, storyGroup.profile_timezone, {
         twentyFourHourTime: storyGroup.twentyfour_hour_time,
       }),
-      error: storyGroup.error,
+      error: storyGroup.error_message,
       errorLink: storyGroup.errorLink,
       status: storyGroup.status,
       stories: parseStories(storyGroup.stories),
