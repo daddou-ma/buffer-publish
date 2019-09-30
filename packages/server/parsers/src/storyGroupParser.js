@@ -20,6 +20,7 @@ module.exports = (storyGroup) => {
     createdAt: storyGroup.created_at,
     scheduled_at: storyGroup.scheduled_at,
     scheduledAt: storyGroup.scheduled_at,
+    // Add to fix issue with missing due_at in queue utils in formatPostLists
     due_at: storyGroup.scheduled_at,
     isPastDue,
     type: 'storyGroup',
