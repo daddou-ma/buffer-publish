@@ -11,7 +11,7 @@ env:
   - name: AUTH_SVC_ADDR
     value: http://authentication-service.core
   - name: API_ADDR
-    value: https://k8s-api-php71-dev.buffer.com
+    value: http://publish-api-dev.dev:443
   - name: DD_AGENT_HOST
     valueFrom:
       fieldRef:
