@@ -34,7 +34,7 @@ module.exports = (storyGroup) => {
         twentyFourHourTime: storyGroup.twentyfour_hour_time,
       }),
       error: storyGroup.error_message,
-      errorLink: storyGroup.errorLink,
+      errorLink: storyGroup.error_link,
       status: storyGroup.status,
       stories: parseStories(storyGroup.stories),
       twentyfourHourTime: storyGroup.twentyfour_hour_time,
