@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import reducer, { initialState, profileInitialState, actionTypes } from './reducer';
+import reducer, { initialState, actionTypes } from './reducer';
 
 const profileId = '123456';
 
