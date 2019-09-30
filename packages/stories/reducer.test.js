@@ -132,6 +132,85 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
+  it('should handle updateStoryGroup_FETCH_SUCCESS action type', () => {
+    const stateBefore = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { id: '1sg', stories: [{ id: '1', note: 'test' }] },
+            '2sg': { id: '2sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+    const stateAfter = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { id: '1sg', stories: [{ id: '1', note: 'test updated' }] },
+            '2sg': { id: '2sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+
+    const action = {
+      type: 'updateStoryGroup_FETCH_SUCCESS',
+      result: {
+        storyGroup: { id: '1sg', stories: [{ id: '1', note: 'test updated' }] },
+      },
+      profileId,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('should handle createStoryGroup_FETCH_SUCCESS action type', () => {
+    const stateBefore = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { id: '1sg', stories: [{ id: '1', note: 'test' }] },
+            '2sg': { id: '2sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+    const stateAfter = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { id: '1sg', stories: [{ id: '1', note: 'test' }] },
+            '2sg': { id: '2sg', stories: [] },
+            '3sg': { id: '3sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+
+    const action = {
+      type: 'createStoryGroup_FETCH_SUCCESS',
+      result: {
+        storyGroup: { id: '3sg', stories: [] },
+      },
+      profileId,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
   it('should handle STORY_GROUP_SHARE_NOW action type', () => {
     const stateBefore = {
       byProfileId: {
@@ -156,6 +235,82 @@ describe('reducer', () => {
 
     const action = {
       type: actionTypes.STORY_GROUP_SHARE_NOW,
+      storyGroupId: '1sg',
+      storyGroup: {
+        id: '1sg',
+      },
+      profileId,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('should handle shareStoryGroupNow_FETCH_SUCCESS action type', () => {
+    const stateBefore = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { _id: '1sg', stories: [] },
+            '2sg': { _id: '2sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+    const stateAfter = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { _id: '1sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+
+    const action = {
+      type: 'shareStoryGroupNow_FETCH_SUCCESS',
+      storyGroup: {
+        id: '2sg',
+      },
+      profileId,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('should handle shareStoryGroupNow_FETCH_FAIL action type', () => {
+    const stateBefore = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { _id: '1sg', stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+    const stateAfter = {
+      byProfileId: {
+        [profileId]: {
+          storyPosts: {
+            '1sg': { _id: '1sg', isWorking: false, stories: [] },
+          },
+        },
+      },
+      showStoryPreview: false,
+    };
+
+    const action = {
+      type: 'shareStoryGroupNow_FETCH_FAIL',
       storyGroupId: '1sg',
       storyGroup: {
         id: '1sg',

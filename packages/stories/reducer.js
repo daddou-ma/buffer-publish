@@ -56,7 +56,7 @@ const storyPostReducer = (state, action) => {
         ...state,
         isWorking: true,
       };
-    case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         isWorking: false,
