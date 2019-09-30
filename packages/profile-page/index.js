@@ -68,7 +68,7 @@ export default hot(
               profileId,
               page,
               isFetchingMore: true,
-              needsApproval: tabId === 'awaitingApproval' || tabId === 'pendingApproval',
+              needsApproval: ['awaitingApproval', 'pendingApproval'].includes(tabId),
             },
           }),
         );
