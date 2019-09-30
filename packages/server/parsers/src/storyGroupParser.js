@@ -20,6 +20,8 @@ module.exports = (storyGroup) => {
     createdAt: storyGroup.created_at,
     scheduled_at: storyGroup.scheduled_at,
     scheduledAt: storyGroup.scheduled_at,
+    // Add to fix issue with missing due_at in queue utils in formatPostLists
+    due_at: storyGroup.scheduled_at,
     isPastDue,
     type: 'storyGroup',
     profileId: storyGroup.profile_id,
@@ -31,6 +33,8 @@ module.exports = (storyGroup) => {
       createdAt: getDateString(storyGroup.created_at, storyGroup.profile_timezone, {
         twentyFourHourTime: storyGroup.twentyfour_hour_time,
       }),
+      error: storyGroup.error_message,
+      errorLink: storyGroup.error_link,
       status: storyGroup.status,
       stories: parseStories(storyGroup.stories),
       twentyfourHourTime: storyGroup.twentyfour_hour_time,
