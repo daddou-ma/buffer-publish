@@ -105,6 +105,7 @@ const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
     });
   });
   channel.bind('story_group_updated', (data) => {
+    console.log(data);
     dispatch({
       type: storiesActionTypes.STORY_UPDATED,
       profileId,
