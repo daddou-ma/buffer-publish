@@ -178,8 +178,11 @@ export default connect(
         contentType,
       }));
     },
-    onDropCard: (cardSource, cardTarget) => {
+    onDropCard: (cardSource, cardTarget, end = false) => {
       dispatch(actions.onDropCard(cardSource, cardTarget));
+      if (end) {
+        dispatch(actions.trackDroppedCard(cardSource, cardTarget));
+      }
     },
     onDeleteStory: (storyCard) => {
       dispatch(actions.deleteStory(storyCard));

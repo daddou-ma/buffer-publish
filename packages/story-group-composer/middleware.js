@@ -5,6 +5,9 @@ import {
 import cloneDeep from 'lodash.clonedeep';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as storiesActions, actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
+import { dragged } from '@bufferapp/publish-analytics-middleware/transformers/publish/story';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_TRACKING } from '@bufferapp/publish-constants';
 import { actionTypes, actions } from './reducer';
 
 const refreshStoryGroups = (dispatch, selectedProfileId) => {
@@ -150,6 +153,21 @@ export default ({ getState, dispatch }) => next => (action) => {
       }
       break;
     }
+    case actionTypes.TRACK_DRAG_AND_DROP_STORY:
+      if (selectedProfileId) {
+        const state = getState();
+        const currentProfile = state.profileSidebar && state.profileSidebar.selectedProfile;
+        if (currentProfile) {
+          const metadata = dragged({
+            product: SEGMENT_TRACKING.TRACKING_PRODUCT,
+            channel: currentProfile.service,
+            channelId: currentProfile.id,
+            channelServiceId: currentProfile.serviceId,
+            clientName: SEGMENT_TRACKING.TRACKING_CLIENT_NAME,
+          });
+          dispatch(analyticsActions.trackEvent('Story Dragged', metadata));
+        }
+      }
     default:
       break;
   }
