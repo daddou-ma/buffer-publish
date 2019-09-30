@@ -97,6 +97,7 @@ const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
     });
   });
   channel.bind('story_group_created', (data) => {
+    console.log(data);
     dispatch({
       type: storiesActionTypes.STORY_CREATED,
       profileId,

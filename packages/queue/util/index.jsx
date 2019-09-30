@@ -319,6 +319,7 @@ export const getItemsForDay = ({
 
 export const groupPostsByDay = posts =>
   posts.reduce((finalPosts, post) => {
+    debugger;
     finalPosts[post.day] = finalPosts[post.day] || [];
     finalPosts[post.day].push(post);
     return finalPosts;
@@ -366,6 +367,7 @@ export const formatPostLists = ({
   orderBy = 'due_at',
 }) => {
   const orderedPosts = Object.values(posts).sort((a, b) => a[orderBy] - b[orderBy]);
+  debugger;
 
   /**
    * CASE 1: Schedule Slots Enabled
