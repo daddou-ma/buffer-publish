@@ -57,7 +57,7 @@ const storyPostReducer = (state, action) => {
         ...state,
         isWorking: true,
       };
-    case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         isWorking: false,
@@ -169,7 +169,7 @@ export default (state = initialState, action) => {
         ...state,
         showStoriesComposer: true,
         editMode: action.editMode,
-        editingPostId: action.updateId,
+        editingPostId: action.updateId || '',
         emptySlotMode: action.emptySlotMode,
         emptySlotData: action.emptySlotData,
       };
