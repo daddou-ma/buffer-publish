@@ -319,7 +319,6 @@ export const getItemsForDay = ({
 
 export const groupPostsByDay = posts =>
   posts.reduce((finalPosts, post) => {
-    console.log(finalPosts, posts, post);
     finalPosts[post.day] = finalPosts[post.day] || [];
     finalPosts[post.day].push(post);
     return finalPosts;
@@ -366,7 +365,6 @@ export const formatPostLists = ({
   isSingleSlot,
   orderBy = 'due_at',
 }) => {
-  console.log(posts);
   const orderedPosts = Object.values(posts).sort((a, b) => a[orderBy] - b[orderBy]);
 
   /**

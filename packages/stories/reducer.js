@@ -57,7 +57,6 @@ const determineIfMoreToLoad = (action, currentPosts) => {
 const storyPostReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.POST_CREATED:
-    case actionTypes.POST_UPDATED:
       return action.storyGroup;
     case actionTypes.DELETE_STORY_GROUP:
       return {
@@ -99,8 +98,6 @@ const storyPostsReducer = (state = {}, action) => {
       const { [getStoryGroupId(action)]: deleted, ...currentState } = state;
       return currentState;
     }
-    case actionTypes.STORY_CREATED:
-    case actionTypes.STORY_UPDATED:
     case actionTypes.STORY_GROUP_SHARE_NOW:
     case actionTypes.DELETE_STORY_GROUP:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
@@ -108,6 +105,11 @@ const storyPostsReducer = (state = {}, action) => {
         ...state,
         [getStoryGroupId(action)]: storyPostReducer(state[getStoryGroupId(action)], action),
       };
+    case actionTypes.STORY_CREATED:
+    case actionTypes.STORY_UPDATED: {
+      const { storyGroup } = action;
+      return { ...state, [storyGroup.id]: storyGroup };
+    }
     case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { storyGroup } = action.result;
