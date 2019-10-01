@@ -5,6 +5,7 @@ import { actions as analyticsActions } from '@bufferapp/publish-analytics-middle
 import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import uuid from 'uuid/v4';
+import { getCounts } from './utils/Tracking';
 import { actions } from './reducer';
 import StoryGroupPopover from './components/StoryGroupPopover';
 
@@ -53,9 +54,7 @@ export default connect(
       stories, profileId, id, scheduledAt, serviceId,
     }) => {
       const ctaProperties = getCtaProperties(SEGMENT_NAMES.STORIES_PREVIEW_COMPOSER);
-      const imageCount = stories.filter(story => story.type === 'image').length;
-      const videoCount = stories.filter(story => story.type === 'video').length;
-      const noteCount = stories.filter(story => story.note && story.note.length > 0).length;
+      const counts = getCounts(stories);
 
       const metadata = {
         clientName: CLIENT_NAME,
@@ -63,11 +62,8 @@ export default connect(
         channel: 'instagram',
         channelId: profileId,
         channelServiceId: serviceId,
-        mediaCount: imageCount + videoCount,
-        imageCount,
-        videoCount,
-        noteCount,
         scheduledAt: scheduledAt ? JSON.stringify(scheduledAt) : undefined,
+        ...counts,
         ...ctaProperties,
       };
       dispatch(analyticsActions.trackEvent('Story Group Previewed', metadata));
