@@ -121,7 +121,7 @@ const AddStoryFooter = ({
       </FooterBar>
       {showDatePicker && (
         <DateTimeSlotPickerWrapper
-          shouldUse24hTime={uses24hTime}
+          uses24hTime={uses24hTime}
           timezone={timezone}
           weekStartsMonday={weekStartsMonday}
           editMode={editMode}
