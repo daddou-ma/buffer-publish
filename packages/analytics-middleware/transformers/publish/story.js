@@ -7,13 +7,13 @@ const notify = (...params) => {
 };
 
 /**
- * processedSegmentData
+ * removeNullObjectKeys
  * Function to remove null props from segment data object
  *
  * @param props {Object} Data you want to filter down to not null properties
  * @returns {Object} mapped object with null props filtered out
  */
-const processedSegmentData = (data) => {
+const removeNullObjectKeys = (data) => {
   const segmentData = {};
 
   if (data) {
@@ -62,7 +62,7 @@ export const dragged = ({
     clientName,
   };
 
-  return processedSegmentData(draggedSegment);
+  return removeNullObjectKeys(draggedSegment);
 };
 
 dragged.propTypes = {
