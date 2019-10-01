@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CircleInstReminderIcon } from '@bufferapp/components';
 import { CoverImage, PlayIcon } from '@bufferapp/publish-story-group-composer/components/Carousel/CardItem/styles';
+import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import CardFooter from '../CardFooter';
 import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
+import PostErrorBanner from '../PostErrorBanner';
+
+const sgQueueTranslations = translations['story-group-queue'];
 
 const Story = ({
   id,
@@ -18,6 +22,7 @@ const Story = ({
   onEditClick,
   onShareNowClick,
   onPreviewClick,
+  userData,
 }) => {
   const deletingMessage = isDeleting && 'Deleting...';
   const submittingMessage = isWorking && 'Sharing...';
@@ -25,11 +30,27 @@ const Story = ({
   const largeCards = false;
   const { cardWidth, cardHeight } = getCardSizes(largeCards);
   const {
-    stories, creatorName, avatarUrl, createdAt, storyAction,
+    stories, creatorName, avatarUrl, createdAt, storyAction, error, errorLink,
   } = storyDetails;
+  const { tags } = userData;
+  const hasStoriesMobileVersion = (
+    tags ? tags.includes('has_instagram_stories_mobile') : false
+  );
+
+  const hasError = error && error.length > 0;
+  const shouldDisplayErrorBanner = hasError || !hasStoriesMobileVersion;
+  const errorMessage = hasError ? error : sgQueueTranslations.bannerMobileTagText;
 
   return (
     <Card>
+      {shouldDisplayErrorBanner
+        && (
+          <PostErrorBanner
+            error={errorMessage}
+            errorLink={errorLink}
+          />
+        )
+      }
       <CardHeader
         creatorName={creatorName}
         avatarUrl={avatarUrl}
@@ -55,14 +76,15 @@ const Story = ({
         ))}
       </Carousel>
       <CardFooter
-        icon={<CircleInstReminderIcon color="instagram" />}
-        message={storyAction}
+        icon={hasError ? '' : <CircleInstReminderIcon color="instagram" />}
         onDeleteClick={onDeleteConfirmClick}
         onEditClick={onEditClick}
         onSubmitClick={onShareNowClick}
-        submitLabel="Share Now"
         isPerformingAction={!!actionMessage}
         actionMessage={actionMessage}
+
+        message={hasError ? '' : storyAction}
+        submitLabel={hasError ? 'Retry Now' : 'Share Now'}
       />
     </Card>
   );
@@ -77,6 +99,8 @@ Story.propTypes = {
     avatarUrl: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     storyAction: PropTypes.string.isRequired,
+    error: PropTypes.string,
+    errorLink: PropTypes.string,
     stories: PropTypes.arrayOf(PropTypes.shape({
       order: PropTypes.string,
       note: PropTypes.string,
@@ -90,6 +114,9 @@ Story.propTypes = {
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
+  userData: PropTypes.shape({
+    tags: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 Story.defaultProps = {
@@ -99,6 +126,7 @@ Story.defaultProps = {
   onEditClick: null,
   onShareNowClick: null,
   onPreviewClick: null,
+  userData: {},
 };
 
 export default Story;

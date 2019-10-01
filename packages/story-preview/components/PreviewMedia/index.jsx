@@ -71,15 +71,24 @@ const PreviewMedia = ({
       </Header>
       {(type === 'image' || type === 'gif')
         && (
-          <Image height={IMAGE_HEIGHT} width={IMAGE_WIDTH} src={asset_url} />
+          <Image
+            height={IMAGE_HEIGHT}
+            width={IMAGE_WIDTH}
+            src={asset_url}
+          />
         )
       }
       {type === 'video'
         && (
-          <Video height={IMAGE_HEIGHT} width={IMAGE_WIDTH} poster={thumbnail_url} autoPlay loop muted>
-            <source src={asset_url} type="video/mp4" />
-            <source src={asset_url} type="video/webm" />
-          </Video>
+          <Video
+            src={asset_url}
+            height={IMAGE_HEIGHT}
+            width={IMAGE_WIDTH}
+            poster={thumbnail_url}
+            autoPlay
+            loop
+            muted
+          />
         )
       }
     </ContentWrapper>

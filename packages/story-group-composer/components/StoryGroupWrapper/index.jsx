@@ -128,6 +128,7 @@ const StoryGroupWrapper = ({
                 onUploadFinished={fileUploaded => onUploadFinished(fileUploaded, storyGroup)}
                 removeNotifications={onRemoveNotifications}
                 notifyError={onShowErrorNotification}
+                translations={translations}
               />
               {hasReachedMaxStories
               && (

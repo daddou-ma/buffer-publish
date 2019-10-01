@@ -2,7 +2,8 @@ import Pusher from 'pusher-js';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
-import { postParser } from '@bufferapp/publish-server/parsers/src';
+import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
+import { postParser, storyGroupParser } from '@bufferapp/publish-server/parsers/src';
 
 const PUSHER_APP_KEY = 'bd9ba9324ece3341976e';
 
@@ -11,7 +12,7 @@ const profileEventActionMap = {
   updated_update: queueActionTypes.POST_UPDATED,
 };
 
-const bindProfileEvents = (channel, profileId, dispatch) => {
+const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
   // Bind post related events
   Object.entries(profileEventActionMap).forEach(([pusherEvent, actionType]) => {
     channel.bind(pusherEvent, (data) => {
@@ -87,6 +88,37 @@ const bindProfileEvents = (channel, profileId, dispatch) => {
   });
 };
 
+const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
+  channel.bind('sent_story_group', (data) => {
+    dispatch({
+      type: storiesActionTypes.STORY_SENT,
+      profileId,
+      storyGroup: storyGroupParser(data.story_group),
+    });
+  });
+  channel.bind('story_group_created', (data) => {
+    dispatch({
+      type: storiesActionTypes.STORY_CREATED,
+      profileId,
+      storyGroup: storyGroupParser(data.story_group),
+    });
+  });
+  channel.bind('story_group_updated', (data) => {
+    dispatch({
+      type: storiesActionTypes.STORY_UPDATED,
+      profileId,
+      storyGroup: storyGroupParser(data.story_group),
+    });
+  });
+  channel.bind('story_group_deleted', (data) => {
+    dispatch({
+      type: storiesActionTypes.STORY_DELETED,
+      profileId,
+      storyGroupId: data.story_group_id,
+    });
+  });
+};
+
 export default ({ dispatch }) => {
   const pusher = new Pusher(PUSHER_APP_KEY, { authEndpoint: '/pusher/auth' });
   window.__pusher = pusher;
@@ -96,11 +128,19 @@ export default ({ dispatch }) => {
     next(action);
     if (action.type === profileSidebarActionTypes.SELECT_PROFILE) {
       const { profileId } = action;
+      const { service } = action.profile;
       if (profileId) {
-        if (!channelsByProfileId[profileId]) {
-          const channelName = `private-updates-${profileId}`;
-          channelsByProfileId[profileId] = pusher.subscribe(channelName);
-          bindProfileEvents(channelsByProfileId[profileId], profileId, dispatch);
+        // If the profile is not subscribed to any channels, subscribes to private-updates channel:
+        const newProfileChannels = channelsByProfileId[profileId] || { updates: pusher.subscribe(`private-updates-${profileId}`) };
+        // If instagram profile and profile is not subscribed to story-groups channel, subscribes to private-story-groups channel:
+        if (service === 'instagram' && newProfileChannels.storyGroups === undefined) {
+          newProfileChannels.storyGroups = pusher.subscribe(`private-story-groups-${profileId}`);
+        }
+        channelsByProfileId[profileId] = newProfileChannels;
+
+        bindProfileUpdateEvents(channelsByProfileId[profileId].updates, profileId, dispatch);
+        if (channelsByProfileId[profileId].storyGroups) {
+          bindProfileStoryGroupEvents(channelsByProfileId[profileId].storyGroups, profileId, dispatch);
         }
       }
     }

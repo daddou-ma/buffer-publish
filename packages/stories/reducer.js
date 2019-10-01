@@ -9,6 +9,10 @@ export const actionTypes = keyWrapper('STORIES', {
   OPEN_PREVIEW: 0,
   STORY_GROUP_SHARE_NOW: 0,
   CLOSE_PREVIEW: 0,
+  STORY_SENT: 0,
+  STORY_CREATED: 0,
+  STORY_DELETED: 0,
+  STORY_UPDATED: 0,
 });
 
 export const initialState = {
@@ -39,6 +43,7 @@ const getProfileId = (action) => {
 
 const getStoryGroupId = (action) => {
   if (action.post) { return action.post.id; }
+  if (action.storyGroupId) { return action.storyGroupId; }
   if (action.storyGroup) { return action.storyGroup.id; }
   if (action.args) { return action.args.updateId; }
 };
@@ -51,12 +56,24 @@ const determineIfMoreToLoad = (action, currentPosts) => {
 
 const storyPostReducer = (state, action) => {
   switch (action.type) {
+    case actionTypes.POST_CREATED:
+      return action.storyGroup;
+    case actionTypes.DELETE_STORY_GROUP:
+      return {
+        ...state,
+        isDeleting: true,
+      };
+    case `deleteStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        isDeleting: false,
+      };
     case actionTypes.STORY_GROUP_SHARE_NOW:
       return {
         ...state,
         isWorking: true,
       };
-    case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         isWorking: false,
@@ -75,17 +92,24 @@ const storyPostsReducer = (state = {}, action) => {
       }
       return updates;
     }
-    case actionTypes.DELETE_STORY_GROUP:
+    case actionTypes.STORY_DELETED:
+    case actionTypes.STORY_SENT:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { [getStoryGroupId(action)]: deleted, ...currentState } = state;
       return currentState;
     }
     case actionTypes.STORY_GROUP_SHARE_NOW:
+    case actionTypes.DELETE_STORY_GROUP:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
         [getStoryGroupId(action)]: storyPostReducer(state[getStoryGroupId(action)], action),
       };
+    case actionTypes.STORY_CREATED:
+    case actionTypes.STORY_UPDATED: {
+      const { storyGroup } = action;
+      return { ...state, [storyGroup.id]: storyGroup };
+    }
     case `updateStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { storyGroup } = action.result;
@@ -116,6 +140,10 @@ const profileReducer = (state = profileInitialState, action) => {
       };
     case actionTypes.STORY_GROUP_SHARE_NOW:
     case actionTypes.DELETE_STORY_GROUP:
+    case actionTypes.STORY_SENT:
+    case actionTypes.STORY_CREATED:
+    case actionTypes.STORY_DELETED:
+    case actionTypes.STORY_UPDATED:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `createStoryGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
@@ -142,6 +170,10 @@ export default (state = initialState, action) => {
     case profileSidebarActionTypes.SELECT_PROFILE:
     case actionTypes.STORY_GROUP_SHARE_NOW:
     case actionTypes.DELETE_STORY_GROUP:
+    case actionTypes.STORY_SENT:
+    case actionTypes.STORY_CREATED:
+    case actionTypes.STORY_DELETED:
+    case actionTypes.STORY_UPDATED:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `getStoryGroups_${dataFetchActionTypes.FETCH_START}`:
@@ -165,7 +197,7 @@ export default (state = initialState, action) => {
         ...state,
         showStoriesComposer: true,
         editMode: action.editMode,
-        editingPostId: action.updateId,
+        editingPostId: action.updateId || '',
         emptySlotMode: action.emptySlotMode,
         emptySlotData: action.emptySlotData,
       };

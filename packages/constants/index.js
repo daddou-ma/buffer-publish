@@ -10,6 +10,8 @@ const SERVICE_INSTAGRAM = 'instagram';
 const PRO_PLAN_ID = '5';
 const PREMIUM_BUSINESS_PLAN_ID = '9';
 const SMALL_PLAN_ID = '10';
+
+const CLIENT_NAME = 'publishWeb';
 // segment naming convention: APP-VIEW-LOCATION-BUTTON-VERSION
 // https://www.notion.so/buffer/CTA-Parameter-Conventions-Call-to-Action-WIP-0ae87bdd99574e3888afb2fe6b75035a
 const ANALYTICS_OVERVIEW_SBP_TRIAL = 'publish-analyticsOverview-trialCard-sbpTrial-1';
@@ -38,6 +40,8 @@ const PLANS_PREMIUM_DOWNGRADE = 'publish-plans-switchPlansModal-premiumDowngrade
 const PLANS_SMALL_UPGRADE = 'publish-plans-switchPlansModal-smallUpgrade-1';
 const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
 const PLANS_OPEN_MODAL = 'publish-plans-subscribeButton-openSwithPlansModal-1';
+const STORIES_CREATE_STORY_GROUP = 'publish-stories-composer-createStoryGroup-1';
+const STORIES_UPDATE_STORY_GROUP = 'publish-stories-composer-updateStoryGroup-1';
 
 const TRACKING_CLIENT_NAME = 'publishWeb';
 
@@ -100,17 +104,19 @@ module.exports = {
     LOCKED_PROFILE_PRO_UPGRADE,
     LOCKED_PROFILE_BUSINESS_UPGRADE,
     PINTEREST_PRO_UPGRADE,
+    PLANS_OPEN_MODAL,
     PLAN_OVERVIEW_PRO_UPGRADE,
-    PROFILE_LIMIT_PRO_UPGRADE,
-    QUEUE_LIMIT_PRO_TRIAL,
-    QUEUE_LIMIT_PRO_UPGRADE,
     PLANS_PRO_UPGRADE,
     PLANS_PRO_DOWNGRADE,
     PLANS_PREMIUM_UPGRADE,
     PLANS_PREMIUM_DOWNGRADE,
     PLANS_SMALL_UPGRADE,
     PLANS_SMALL_DOWNGRADE,
-    PLANS_OPEN_MODAL,
+    PROFILE_LIMIT_PRO_UPGRADE,
+    QUEUE_LIMIT_PRO_TRIAL,
+    QUEUE_LIMIT_PRO_UPGRADE,
+    STORIES_CREATE_STORY_GROUP,
+    STORIES_UPDATE_STORY_GROUP,
   },
   SEGMENT_TRACKING: {
     TRACKING_CLIENT_NAME,
@@ -119,4 +125,5 @@ module.exports = {
   UploadTypes,
   AppEnvironments,
   PUSHER,
+  CLIENT_NAME,
 };
