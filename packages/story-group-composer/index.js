@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import uuid from 'uuid/v4';
 import { actions } from './reducer';
@@ -51,8 +51,9 @@ export default connect(
       const imageCount = stories.filter(story => story.type === 'image').length;
       const videoCount = stories.filter(story => story.type === 'video').length;
       const noteCount = stories.filter(story => story.note && story.note.length > 0).length;
+
       const metadata = {
-        product: 'publish',
+        clientName: CLIENT_NAME,
         storyGroupId: id,
         channel: 'instagram',
         channelId: profileId,
@@ -61,10 +62,10 @@ export default connect(
         imageCount,
         videoCount,
         noteCount,
-        scheduledAt,
+        scheduledAt: scheduledAt ? JSON.stringify(scheduledAt) : undefined,
         ...ctaProperties,
       };
-      dispatch(analyticsActions.trackEvent('Story Preview Opened Composer', metadata));
+      dispatch(analyticsActions.trackEvent('Story Group Previewed', metadata));
       dispatch(previewActions.handlePreviewClick({
         stories, profileId, id, scheduledAt,
       }));
