@@ -204,7 +204,7 @@ export default ({ getState, dispatch }) => next => (action) => {
     case actionTypes.TRACK_NOTE: {
       const { storyGroup } = state.storyGroupComposer;
       const { cta, note, order } = action;
-      const story = getStory({ stories: storyGroup.stories, order });
+      const story = getStory({ stories: storyGroup.stories, order }) || {};
       if (!story.note || story.note.length === 0) {
         const channel = state.profileSidebar.selectedProfile;
         const metadata = getNoteTrackingData({

@@ -26,9 +26,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     case actionTypes.TRACK_NOTE: {
-      console.log('stories', stories, order);
-      const story = getStory({ stories, order });
-      console.log('story', story);
+      const story = getStory({ stories, order }) || {};
       if (!story.note || story.note.length === 0) {
         const channel = getState().profileSidebar.selectedProfile;
         const metadata = getNoteTrackingData({
