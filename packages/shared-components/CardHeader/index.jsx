@@ -33,6 +33,10 @@ const TextWithStyles = styled(Text)`
   color: ${gray};
 `;
 
+const getCreatedText = creatorName => (
+  creatorName ? `${creatorName} created this ` : 'Created '
+);
+
 const CardHeader = ({
   creatorName,
   avatarUrl,
@@ -44,17 +48,18 @@ const CardHeader = ({
   return (
     <WrapperComponent>
       <ContentWrapper>
-        <AvatarWrapper>
-          <Image
-            src={avatarUrl}
-            border="circle"
-            height="1.25rem"
-            width="1.25rem"
-          />
-        </AvatarWrapper>
+        {creatorName && (
+          <AvatarWrapper>
+            <Image
+              src={avatarUrl}
+              border="circle"
+              height="1.25rem"
+              width="1.25rem"
+            />
+          </AvatarWrapper>
+        )}
         <TextWithStyles type="p">
-          {creatorName}
-          &nbsp;created this&nbsp;
+          {getCreatedText(creatorName)}
           {createdAt}
         </TextWithStyles>
       </ContentWrapper>
