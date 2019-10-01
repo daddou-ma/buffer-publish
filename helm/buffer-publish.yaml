@@ -56,9 +56,9 @@ env:
       fieldRef:
         fieldPath: status.hostIP
   - name: API_ADDR
-    value: https://k8s-api-php71.buffer.com
+    value: http://publish-api.buffer:443
   - name: ANALYZE_API_ADDR
-    value: https://analyze-api.buffer.com
+    value: http://analytics-analyze-api.analyze:443
   - name: CLIENT_ID
     valueFrom:
       secretKeyRef:

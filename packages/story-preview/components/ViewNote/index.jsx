@@ -18,6 +18,7 @@ const NoteWrapper = styled.div`
 `;
 
 const Title = styled(Text)`
+  line-height: 16px;
   margin: 0;
   font-weight: ${fontWeightMedium};
 `;
@@ -29,15 +30,16 @@ const Note = styled(Text)`
 const ViewNote = ({
   onEditNoteClick,
   story,
+  translations,
 }) => {
   const hasNoNote = !story.note || story.note.length < 0;
   return (
     <ContentWrapper>
-      <Title type="p">Note</Title>
+      <Title type="p">{translations.noteTitle}</Title>
       <NoteWrapper>
         {hasNoNote
           && (
-            <Note type="p" color="gray">When it comes time to post, you'll be able to copy and past your note into instagram.</Note>
+            <Note type="p" color="gray">{translations.noteExplanation}</Note>
           )
         }
         {!hasNoNote
@@ -48,7 +50,7 @@ const ViewNote = ({
       </NoteWrapper>
       <Button
         type="secondary"
-        label={hasNoNote ? 'Add Note' : 'Edit Note'}
+        label={hasNoNote ? translations.addNote : translations.editNote}
         onClick={onEditNoteClick}
         fullWidth
       />
@@ -59,6 +61,12 @@ const ViewNote = ({
 ViewNote.propTypes = {
   onEditNoteClick: PropTypes.func.isRequired,
   story: storyPropTypes, // eslint-disable-line react/require-default-props
+  translations: PropTypes.shape({
+    noteTitle: PropTypes.string.isRequired,
+    noteExplanation: PropTypes.string.isRequired,
+    addNote: PropTypes.string.isRequired,
+    editNote: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ViewNote;

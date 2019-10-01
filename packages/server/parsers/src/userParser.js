@@ -12,6 +12,7 @@ module.exports = userData => ({
   name: userData.name,
   createdAt: userData.created_at,
   features: userData.features,
+  tags: userData.tags,
   hasTwentyFourHourTimeFormat: userData.twentyfour_hour_time,
   imageDimensionsKey: userData.imagedimensions_key,
   plan: userData.plan,

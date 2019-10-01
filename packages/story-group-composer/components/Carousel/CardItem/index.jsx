@@ -40,6 +40,8 @@ const CardItem = ({
   onAddNoteClick,
   onDeleteStoryClick,
   isOver,
+  isDragging,
+  translations,
 }) => {
   const notifiers = {
     uploadStarted: props => createNewFile(props),
@@ -69,7 +71,7 @@ const CardItem = ({
           uploadButton={({ onClick }) => (
             <Button
               type="primary"
-              label="Add Media"
+              label={translations.addMedia}
               icon={<PlusIcon />}
               onClick={onClick}
             />
@@ -105,11 +107,12 @@ const CardItem = ({
 
       {card.thumbnail_url && (
         <StoryWrapper>
-          <CoverImage src={card.thumbnail_url} />
+          <CoverImage src={card.thumbnail_url} isTarget={isOver} />
           {card.type === 'video' && <PlayIcon large={largeCards} />}
-          {isHovering && (
+          {isHovering && !isDragging && (
             <CarouselCardHover
               card={card}
+              translations={translations}
               onAddNoteClick={onAddNoteClick}
               onDeleteStoryClick={onDeleteStoryClick}
             />
@@ -119,7 +122,7 @@ const CardItem = ({
 
       {!card.empty && card.processing === true && (
       <UploadingVideo>
-        <Text size="small">Processing video</Text>
+        <Text size="small">{translations.processingVideo}</Text>
         <LoadingAnimation marginTop="0" />
       </UploadingVideo>
       )}

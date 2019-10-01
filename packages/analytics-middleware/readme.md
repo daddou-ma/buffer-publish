@@ -53,6 +53,8 @@ onInteraction: ({ message }) => {
 },
 ```
 
+Tip: We don't need to pass in the `product` property when calling `trackEvent`. The product name is set as a window var and we're setting it in the [middleware](https://github.com/bufferapp/buffer-publish/blob/master/packages/analytics-middleware/middleware.js#L17)
+
 ## Test your changes
 
 [Follow step 4 in this notion guide](https://www.notion.so/buffer/How-to-implement-tracking-with-Segment-An-Engineering-guide-da75fcd8a464456dba1cf80a529f9121) to test your local & production changes. It's important to check that there are no violations in the violation tab.

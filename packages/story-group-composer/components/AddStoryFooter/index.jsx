@@ -12,10 +12,15 @@ import {
   StyledEditButton,
 } from './style';
 
-const getInitialDateTime = (editMode, scheduledAt, emptySlotData) => {
+const getInitialDateTime = ({
+  editMode,
+  scheduledAt,
+  emptySlotData,
+  timezone,
+}) => {
   if (editMode || emptySlotData) {
     const timestamp = editMode ? scheduledAt : emptySlotData.scheduledAt;
-    return getMomentTime(timestamp);
+    return getMomentTime({ scheduledAt: timestamp, timezone });
   }
 
   return null;
@@ -57,6 +62,7 @@ const AddStoryFooter = ({
 
   const onScheduleClick = () => {
     if (editMode) {
+      const { storyGroupId } = storyGroup;
       onUpdateStoryGroup({
         scheduledAt,
         stories,
@@ -83,7 +89,7 @@ const AddStoryFooter = ({
             </EditTextStyle>
             <EditDateStyle>
               <Text>
-                {getReadableDateFormat({ scheduledAt, uses24hTime })}
+                {getReadableDateFormat({ uses24hTime, scheduledAt, timezone })}
               </Text>
             </EditDateStyle>
             <StyledEditButton
@@ -120,7 +126,12 @@ const AddStoryFooter = ({
           weekStartsMonday={weekStartsMonday}
           editMode={editMode}
           onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
-          initialDateTime={getInitialDateTime(editMode, scheduledAt, emptySlotData)}
+          initialDateTime={getInitialDateTime({
+            editMode,
+            scheduledAt,
+            emptySlotData,
+            timezone,
+          })}
         />
       )}
     </Fragment>

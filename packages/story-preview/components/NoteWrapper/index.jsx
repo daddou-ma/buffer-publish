@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ViewNote from '../ViewNote';
 import EditNote from '../EditNote';
-import { storyPropTypes } from '../../utils/commonPropTypes';
+import { storyPropTypes, translationsPropTypes } from '../../utils/commonPropTypes';
 
 const SEE_NOTE = 'seeNote';
 const EDIT_NOTE = 'editNote';
@@ -21,6 +21,7 @@ const NoteWrapper = ({
   onSaveNoteClick,
   story,
   view,
+  translations,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(SEE_NOTE);
@@ -32,6 +33,7 @@ const NoteWrapper = ({
             <ViewNote
               onEditNoteClick={() => setViewMode(EDIT_NOTE)}
               story={story}
+              translations={translations}
             />
           )
         }
@@ -44,6 +46,7 @@ const NoteWrapper = ({
               }}
               onCancelClick={() => setViewMode(SEE_NOTE)}
               story={story}
+              translations={translations}
             />
           )
         }
@@ -56,6 +59,7 @@ NoteWrapper.propTypes = {
   onSaveNoteClick: PropTypes.func.isRequired,
   story: storyPropTypes, // eslint-disable-line react/require-default-props
   view: PropTypes.oneOf(['composer', 'queue']).isRequired,
+  translations: translationsPropTypes, // eslint-disable-line react/require-default-props
 };
 
 export default NoteWrapper;

@@ -54,6 +54,9 @@ export const ButtonWrapper = styled.div`
 export const DragDropWrapper = styled.div`
   flex-grow: 1;
   cursor: pointer;
+  :hover {
+    cursor: move;
+  }
 `;
 
 export const HoverWrapper = styled.div`
