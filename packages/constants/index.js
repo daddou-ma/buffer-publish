@@ -44,6 +44,9 @@ const STORIES_PREVIEW_COMPOSER = 'publish-stories-composer-preview-1';
 const STORIES_PREVIEW_QUEUE = 'publish-stories-queue-preview-1';
 const STORIES_CREATE_STORY_GROUP = 'publish-stories-composer-createStoryGroup-1';
 const STORIES_UPDATE_STORY_GROUP = 'publish-stories-composer-updateStoryGroup-1';
+const STORIES_COMPOSER_ADD_NOTE = 'publish-stories-composer-addNote-1';
+const STORIES_PREVIEW_QUEUE_ADD_NOTE = 'publish-stories-queuePreview-addNote-1';
+const STORIES_PREVIEW_COMPOSER_ADD_NOTE = 'publish-stories-composerPreview-addNote-1';
 
 const TRACKING_CLIENT_NAME = 'publishWeb';
 
@@ -122,6 +125,9 @@ module.exports = {
     QUEUE_LIMIT_PRO_UPGRADE,
     STORIES_CREATE_STORY_GROUP,
     STORIES_UPDATE_STORY_GROUP,
+    STORIES_COMPOSER_ADD_NOTE,
+    STORIES_PREVIEW_COMPOSER_ADD_NOTE,
+    STORIES_PREVIEW_QUEUE_ADD_NOTE,
   },
   SEGMENT_TRACKING: {
     TRACKING_CLIENT_NAME,

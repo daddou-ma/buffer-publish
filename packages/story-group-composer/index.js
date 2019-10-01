@@ -42,6 +42,11 @@ export default connect(
       dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId }));
     },
     saveNote: ({ note, order }) => {
+      dispatch(actions.trackNote({
+        cta: SEGMENT_NAMES.STORIES_COMPOSER_ADD_NOTE,
+        note,
+        order,
+      }));
       dispatch(actions.handleSaveStoryNote({ note, order }));
     },
     onPreviewClick: ({

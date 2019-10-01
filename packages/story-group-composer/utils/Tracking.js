@@ -14,7 +14,7 @@ const getSGCounts = (stories = []) => {
   };
 };
 
-const getSGTrackingData = ({ storyGroup, channel = {}, cta }) => {
+export const getSGTrackingData = ({ storyGroup, channel = {}, cta }) => {
   const { stories } = storyGroup.storyDetails;
   const counts = getSGCounts(stories);
   const ctaProperties = getCtaProperties(cta);
@@ -31,4 +31,26 @@ const getSGTrackingData = ({ storyGroup, channel = {}, cta }) => {
   };
 };
 
-export default getSGTrackingData;
+export const getNoteTrackingData = ({
+  storyGroupId,
+  channel = {},
+  note = '',
+  cta,
+}) => {
+  const ctaProperties = getCtaProperties(cta);
+  return {
+    storyGroupId,
+    channel: channel.type,
+    channelServiceId: channel.serviceId,
+    channelId: channel.id,
+    noteText: note,
+    characterCount: note.length,
+    clientId: null,
+    clientName: CLIENT_NAME,
+    ...ctaProperties,
+  };
+};
+
+export const getStory = ({ stories = [], order }) => (
+  stories.find(story => story.order === order)
+);

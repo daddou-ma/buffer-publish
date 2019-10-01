@@ -22,6 +22,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SHOW_ERRORS: 0,
   HIDE_ERRORS: 0,
   TRACK_DRAG_AND_DROP_STORY: 0,
+  TRACK_NOTE: 0,
 });
 
 const newStory = () => clonedeep({

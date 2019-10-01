@@ -1,4 +1,8 @@
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+// TO-DO: create general stories utils to add cross-tracking logic
+import { getStory, getNoteTrackingData } from '@bufferapp/publish-story-group-composer/utils/Tracking';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { actionTypes } from './reducer';
 import updateStoryNote from './utils/updateStoryNote';
 
@@ -21,6 +25,22 @@ export default ({ dispatch, getState }) => next => (action) => {
         },
       }));
       break;
+    case actionTypes.TRACK_NOTE: {
+      console.log('stories', stories, order);
+      const story = getStory({ stories, order });
+      console.log('story', story);
+      if (!story.note || story.note.length === 0) {
+        const channel = getState().profileSidebar.selectedProfile;
+        const metadata = getNoteTrackingData({
+          channel,
+          cta: SEGMENT_NAMES.STORIES_PREVIEW_QUEUE_ADD_NOTE,
+          note,
+          storyGroupId,
+        });
+        dispatch(analyticsActions.trackEvent('Story Note Added', metadata));
+      }
+      break;
+    }
     default:
       break;
   }
