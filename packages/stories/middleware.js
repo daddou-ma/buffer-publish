@@ -14,6 +14,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         name: 'getStoryGroups',
         args: {
           profileId: action.profileId || action.profile.id,
+          isFetchingMore: false,
         },
       }));
       break;

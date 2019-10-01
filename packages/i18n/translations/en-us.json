@@ -55,7 +55,7 @@
     "saveNote": "Save Note",
     "addNote": "Add Note",
     "editNote": "Edit Note",
-    "noteExplanation": "When it comes time to post, you'll be able to copy and past your note into Instagram."
+    "noteExplanation": "When it comes time to post, you'll be able to copy and paste your note into Instagram."
   },
   "stripe": {
     "noNameError": "Uh oh, please fill out the cardholder name :)",

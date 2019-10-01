@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
+import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import uuid from 'uuid/v4';
 import { actions } from './reducer';
 import StoryGroupPopover from './components/StoryGroupPopover';
@@ -42,8 +45,27 @@ export default connect(
       dispatch(actions.handleSaveStoryNote({ note, order }));
     },
     onPreviewClick: ({
-      stories, profileId, id, scheduledAt,
+      stories, profileId, id, scheduledAt, serviceId,
     }) => {
+      const ctaProperties = getCtaProperties(SEGMENT_NAMES.STORIES_PREVIEW_COMPOSER);
+      const imageCount = stories.filter(story => story.type === 'image').length;
+      const videoCount = stories.filter(story => story.type === 'video').length;
+      const noteCount = stories.filter(story => story.note && story.note.length > 0).length;
+
+      const metadata = {
+        clientName: CLIENT_NAME,
+        storyGroupId: id,
+        channel: 'instagram',
+        channelId: profileId,
+        channelServiceId: serviceId,
+        mediaCount: imageCount + videoCount,
+        imageCount,
+        videoCount,
+        noteCount,
+        scheduledAt: scheduledAt ? JSON.stringify(scheduledAt) : undefined,
+        ...ctaProperties,
+      };
+      dispatch(analyticsActions.trackEvent('Story Group Previewed', metadata));
       dispatch(previewActions.handlePreviewClick({
         stories, profileId, id, scheduledAt,
       }));
@@ -178,8 +200,11 @@ export default connect(
         contentType,
       }));
     },
-    onDropCard: (cardSource, cardTarget) => {
+    onDropCard: (cardSource, cardTarget, end = false) => {
       dispatch(actions.onDropCard(cardSource, cardTarget));
+      if (end) {
+        dispatch(actions.trackDroppedCard(cardSource, cardTarget));
+      }
     },
     onDeleteStory: (storyCard) => {
       dispatch(actions.deleteStory(storyCard));

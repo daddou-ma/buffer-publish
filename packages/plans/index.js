@@ -21,7 +21,6 @@ export default connect(
     onChoosePlanClick: ({ source, plan }) => {
       const ctaProperties = getCtaProperties(SEGMENT_NAMES.PLANS_OPEN_MODAL);
       const metadata = {
-        product: 'publish',
         planName: plan,
         planId: getPlanId(plan),
         ...ctaProperties,
