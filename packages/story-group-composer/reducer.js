@@ -468,10 +468,14 @@ export const actions = {
   hideError: () => ({
     type: actionTypes.HIDE_ERRORS,
   }),
-  trackDroppedCard: (cardSource, cardTarget) => {
-    return ({
-      type: actionTypes.TRACK_DRAG_AND_DROP_STORY,
-      isDragging: cardSource.isDragging
-    });
-  },
+  trackDroppedCard: cardSource => ({
+    type: actionTypes.TRACK_DRAG_AND_DROP_STORY,
+    isDragging: cardSource.isDragging,
+  }),
+  trackNote: ({ cta, note, order }) => ({
+    type: actionTypes.TRACK_NOTE,
+    cta,
+    note,
+    order,
+  }),
 };

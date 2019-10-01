@@ -186,9 +186,8 @@ export default ({ getState, dispatch }) => next => (action) => {
       dispatch(analyticsActions.trackEvent('Story Group Composer Opened', metadata));
       break;
     }
-    case actionTypes.TRACK_DRAG_AND_DROP_STORY:
+    case actionTypes.TRACK_DRAG_AND_DROP_STORY: {
       if (selectedProfileId) {
-        const state = getState();
         const currentProfile = state.profileSidebar && state.profileSidebar.selectedProfile;
         if (currentProfile) {
           const metadata = dragged({
