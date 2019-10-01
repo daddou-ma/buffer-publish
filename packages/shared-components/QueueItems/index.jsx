@@ -91,6 +91,7 @@ const renderPost = ({
   basic,
   hasFirstCommentFlip,
   onPreviewClick,
+  serviceId,
   userData,
 }) => {
   const postWithEventHandlers = {
@@ -110,6 +111,7 @@ const renderPost = ({
     onDropPost,
     onSwapPosts,
     hasFirstCommentFlip,
+    serviceId,
     userData,
   };
   let PostComponent = postTypeComponentMap.get(post.type);

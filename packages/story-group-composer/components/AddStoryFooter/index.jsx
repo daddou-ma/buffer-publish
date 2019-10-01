@@ -38,6 +38,7 @@ const AddStoryFooter = ({
   onPreviewClick,
   editMode,
   emptySlotData,
+  selectedProfile,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -47,7 +48,8 @@ const AddStoryFooter = ({
   const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading;
   const isPreviewDisabled = storiesLength < 1 || !uploadsCompleted;
 
-  const { stories } = storyGroup;
+  const { stories, storyGroupId } = storyGroup;
+  const { id, serviceId } = selectedProfile;
 
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
@@ -103,7 +105,9 @@ const AddStoryFooter = ({
             type="secondary"
             label={translations.previewButton}
             disabled={isPreviewDisabled}
-            onClick={() => onPreviewClick({ stories })}
+            onClick={() => onPreviewClick({
+              stories, scheduledAt, id: storyGroupId, profileId: id, serviceId,
+            })}
           />
         </ButtonStyle>
         <Button
