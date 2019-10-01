@@ -31,7 +31,7 @@ const Story = ({
   const largeCards = false;
   const { cardWidth, cardHeight } = getCardSizes(largeCards);
   const {
-    stories, creatorName, avatarUrl, createdAt, storyAction, error, errorLink,
+    stories, avatarUrl, createdAt, storyAction, error, errorLink,
   } = storyDetails;
   const { tags } = userData;
   const hasStoriesMobileVersion = (
@@ -53,7 +53,6 @@ const Story = ({
         )
       }
       <CardHeader
-        creatorName={creatorName}
         avatarUrl={avatarUrl}
         createdAt={createdAt}
         onPreviewClick={() => onPreviewClick({
@@ -96,7 +95,6 @@ Story.propTypes = {
   profileId: PropTypes.string.isRequired,
   scheduledAt: PropTypes.number.isRequired,
   storyDetails: PropTypes.shape({
-    creatorName: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     storyAction: PropTypes.string.isRequired,
