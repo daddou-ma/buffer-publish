@@ -23,6 +23,7 @@ const textStyle = {
 const BillingUpgradeCTABanner = ({
   translations,
   trial,
+  isPremiumBusinessPlan,
   onClickStartSubscription,
   profileCount,
 }) => {
@@ -34,7 +35,7 @@ const BillingUpgradeCTABanner = ({
     <Text {...styles}>
       <FeatureLoader supportedPlans="free">Free</FeatureLoader>
       <FeatureLoader supportedPlans="pro">Pro</FeatureLoader>
-      <FeatureLoader supportedPlans="business">Business</FeatureLoader>
+      <FeatureLoader supportedPlans="business">{isPremiumBusinessPlan ? 'Premium' : 'Business'}</FeatureLoader>
     </Text>
   );
 
@@ -117,11 +118,13 @@ BillingUpgradeCTABanner.propTypes = {
     trialTimeRemaining: PropTypes.string,
   }),
   onClickStartSubscription: PropTypes.func.isRequired,
+  isPremiumBusinessPlan: PropTypes.bool,
   profileCount: PropTypes.number,
 };
 
 BillingUpgradeCTABanner.defaultProps = {
   profileCount: 0,
+  isPremiumBusinessPlan: false,
   trial: {
     hasCardDetails: false,
     hasTrialExtended: false,
