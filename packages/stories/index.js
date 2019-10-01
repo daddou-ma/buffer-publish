@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 
 import { actions } from './reducer';
@@ -36,6 +36,7 @@ export default connect(
         showStoryPreview: state.stories.showStoryPreview,
         editMode: state.stories.editMode,
         isBusinessAccount: profileData.business,
+        serviceId: profileData.serviceId,
         userData: state.appSidebar.user,
         translations: state.i18n.translations['story-group-queue'],
       };
@@ -62,26 +63,26 @@ export default connect(
       dispatch(actions.handleCloseStoriesComposer());
     },
     onPreviewClick: ({
-      stories, profileId, id, scheduledAt,
+      stories, profileId, id, scheduledAt, serviceId,
     }) => {
       const ctaProperties = getCtaProperties(SEGMENT_NAMES.STORIES_PREVIEW_QUEUE);
       const imageCount = stories.filter(story => story.type === 'image').length;
       const videoCount = stories.filter(story => story.type === 'video').length;
       const noteCount = stories.filter(story => story.note && story.note.length > 0).length;
       const metadata = {
-        product: 'publish',
+        clientName: CLIENT_NAME,
         storyGroupId: id,
         channel: 'instagram',
         channelId: profileId,
-        channelServiceId: '',
+        channelServiceId: serviceId,
         mediaCount: imageCount + videoCount,
         imageCount,
         videoCount,
         noteCount,
-        scheduledAt,
+        scheduledAt: JSON.stringify(scheduledAt),
         ...ctaProperties,
       };
-      dispatch(analyticsActions.trackEvent('Story Preview Opened Queue', metadata));
+      dispatch(analyticsActions.trackEvent('Story Group Previewed', metadata));
       dispatch(previewActions.handlePreviewClick({
         stories, profileId, id, scheduledAt,
       }));

@@ -22,6 +22,7 @@ const Story = ({
   onEditClick,
   onShareNowClick,
   onPreviewClick,
+  serviceId,
   userData,
 }) => {
   const deletingMessage = isDeleting && 'Deleting...';
@@ -56,7 +57,7 @@ const Story = ({
         avatarUrl={avatarUrl}
         createdAt={createdAt}
         onPreviewClick={() => onPreviewClick({
-          stories, profileId, id, scheduledAt,
+          stories, profileId, id, scheduledAt, serviceId,
         })}
       />
       <Carousel
@@ -114,6 +115,7 @@ Story.propTypes = {
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
+  serviceId: PropTypes.string.isRequired,
   userData: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string),
   }),
