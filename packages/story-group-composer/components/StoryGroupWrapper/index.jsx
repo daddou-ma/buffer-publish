@@ -10,6 +10,7 @@ import AddNote from '../AddNote';
 import CarouselCards from '../Carousel/CarouselCards';
 import CardItem from '../Carousel/CardItem';
 import AddStoryFooter from '../AddStoryFooter';
+import CustomDragLayer from '../Carousel/CustomDragLayer';
 
 const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
@@ -106,6 +107,7 @@ const StoryGroupWrapper = ({
               largeCards
               totalStories={(storyGroup.stories && storyGroup.stories.length) || 0}
             >
+              <CustomDragLayer sourceImage={'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d84c090869bb3019c0c1f6d/84d535eda53587623027568303456056.original.jpg'} />
               <CarouselCards
                 createNewFile={onCreateNewStoryCard}
                 updateUploadProgress={onUpdateStoryUploadProgress}
