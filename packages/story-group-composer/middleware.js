@@ -19,6 +19,14 @@ const refreshStoryGroups = (dispatch, selectedProfileId) => {
   }));
 };
 
+const getTrackingDataForOpenComposer = ({ channel = {} }) => ({
+  channel: channel.service,
+  channelId: channel.id,
+  channelServiceId: channel.serviceId,
+  clientName: 'publishWeb',
+  clientId: null,
+});
+
 const createImageStory = (story) => {
   const {
     _id,
@@ -173,6 +181,9 @@ export default ({ getState, dispatch }) => next => (action) => {
           scheduledAt: editingStoryGroup.scheduledAt,
         }));
       }
+      const channel = getState().profileSidebar.selectedProfile;
+      const metadata = getTrackingDataForOpenComposer({ channel });
+      dispatch(analyticsActions.trackEvent('Story Group Composer Opened', metadata));
       break;
     }
     case actionTypes.TRACK_DRAG_AND_DROP_STORY:
