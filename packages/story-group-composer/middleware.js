@@ -159,7 +159,6 @@ export default ({ getState, dispatch }) => next => (action) => {
         const currentProfile = state.profileSidebar && state.profileSidebar.selectedProfile;
         if (currentProfile) {
           const metadata = dragged({
-            product: SEGMENT_TRACKING.TRACKING_PRODUCT,
             channel: currentProfile.service,
             channelId: currentProfile.id,
             channelServiceId: currentProfile.serviceId,

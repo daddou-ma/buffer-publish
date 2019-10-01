@@ -40,7 +40,6 @@ const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
 const PLANS_OPEN_MODAL = 'publish-plans-subscribeButton-openSwithPlansModal-1';
 
 const TRACKING_CLIENT_NAME = 'publishWeb';
-const TRACKING_PRODUCT = 'publish';
 
 const UploadTypes = keyMirror({
   LINK_THUMBNAIL: null,
@@ -115,7 +114,6 @@ module.exports = {
   },
   SEGMENT_TRACKING: {
     TRACKING_CLIENT_NAME,
-    TRACKING_PRODUCT,
   },
   MediaTypes,
   UploadTypes,
