@@ -20,6 +20,7 @@ const getTrackingDataForOpenComposer = ({ channel = {} }) => ({
   channelId: channel.id,
   channelServiceId: channel.serviceId,
   clientName: 'publishWeb',
+  clientId: null,
 });
 
 const createImageStory = (story) => {
@@ -158,7 +159,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       }
       const channel = getState().profileSidebar.selectedProfile;
       const metadata = getTrackingDataForOpenComposer({ channel });
-      dispatch(analyticsActions.trackEvent('Story Composer Opened', metadata));
+      dispatch(analyticsActions.trackEvent('Story Group Composer Opened', metadata));
       break;
     }
     default:
