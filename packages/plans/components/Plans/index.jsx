@@ -7,6 +7,7 @@ import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/componen
 import styled from 'styled-components';
 import PlanColumn from '../PlanColumn';
 import PlanColumnExperimentControl from '../PlanColumnExperimentControl';
+import PlanColumnExperimentEnabled from '../PlanColumnExperimentEnabled';
 import { getSource } from '../../utils/plans';
 
 const ButtonStyle = styled.div`
@@ -74,7 +75,7 @@ const Plans = ({
       )}
       {isExperimentControl && (
         <ColumnContainerStyle>
-          <PlanColumnExperimentControl
+          <PlanColumnExperimentEnabled
             {...translations.pro}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
             currentPlan={currentPlan}
@@ -82,7 +83,7 @@ const Plans = ({
             source={getSource({ newPlan: 'pro', currentPlan })}
             isNonprofit={isNonprofit}
           />
-          <PlanColumnExperimentControl
+          <PlanColumnExperimentEnabled
             {...translations.premium}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
             currentPlan={currentPlan}
