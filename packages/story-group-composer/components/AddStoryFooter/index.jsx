@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
+import { isInThePast } from '@bufferapp/publish-server/formatters/src';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import { getReadableDateFormat, getMomentTime } from '../../utils/AddStory';
+import { storyGroupPropTypes, translationsPropTypes, selectedProfilePropTypes } from '../../utils/commonPropTypes';
 import {
   FooterBar,
   ButtonStyle,
@@ -39,13 +41,19 @@ const AddStoryFooter = ({
   editMode,
   emptySlotData,
   selectedProfile,
+  isPastDue,
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
 
+  /* this covers the case if a story group has a share failure and a user edits it
+   without updating the scheduled_at. Now the schedule button will be disabled until
+   date is updated. */
+  const isScheduledAtPastDue = isPastDue && isInThePast(scheduledAt);
+
   const storiesLength = storyGroup.stories.length;
   const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0;
-  const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading;
+  const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading || isScheduledAtPastDue;
   const isPreviewDisabled = storiesLength < 1 || !uploadsCompleted;
 
   const { stories, storyGroupId } = storyGroup;
@@ -62,7 +70,6 @@ const AddStoryFooter = ({
 
   const onScheduleClick = () => {
     if (editMode) {
-      const { storyGroupId } = storyGroup;
       onUpdateStoryGroup({
         scheduledAt,
         stories,
@@ -142,23 +149,17 @@ AddStoryFooter.propTypes = {
   ...DateTimeSlotPickerWrapper.propTypes,
   isScheduleLoading: PropTypes.bool.isRequired,
   onUpdateStoryGroup: PropTypes.func.isRequired,
-  translations: PropTypes.shape({
-    scheduleLoadingButton: PropTypes.string,
-    scheduleButton: PropTypes.string,
-    previewButton: PropTypes.string,
-  }).isRequired,
-  storyGroup: PropTypes.shape({
-    storyDetails: PropTypes.shape({
-      stories: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string,
-      })),
-    }),
-    scheduledAt: PropTypes.number,
-  }),
+  onCreateStoryGroup: PropTypes.func.isRequired,
+  onPreviewClick: PropTypes.func.isRequired,
+  translations: translationsPropTypes, // eslint-disable-line react/require-default-props,
+  storyGroup: storyGroupPropTypes, // eslint-disable-line react/require-default-props,
+  selectedProfile: selectedProfilePropTypes, // eslint-disable-line react/require-default-props,
+  isPastDue: PropTypes.bool,
 };
 
 AddStoryFooter.defaultProps = {
   storyGroup: {},
+  isPastDue: false,
 };
 
 export default AddStoryFooter;

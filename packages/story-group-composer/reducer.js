@@ -135,6 +135,7 @@ export default (state, action) => {
           stories: action.stories,
           scheduledAt: action.scheduledAt,
           storyGroupId: action.storyGroupId,
+          isPastDue: action.isPastDue,
         },
       };
     }
@@ -355,11 +356,12 @@ export const actions = {
   handleClosePreviewClick: () => ({
     type: actionTypes.CLOSE_PREVIEW,
   }),
-  setStoryGroup: ({ scheduledAt, stories, storyGroupId }) => ({
+  setStoryGroup: ({ scheduledAt, stories, storyGroupId, isPastDue }) => ({
     type: actionTypes.SET_STORY_GROUP,
     scheduledAt,
     stories,
     storyGroupId,
+    isPastDue,
   }),
   updateStoryUploadProgress: ({
     id, uploaderInstance, progress, file, complete,
