@@ -43,19 +43,17 @@ const Plans = ({
         size="small"
         icon={<ArrowLeft color={gray} />}
         label={translations.buttonDashboardText}
-        onClick={() =>
-          onBackToDashboardClick({
-            selectedProfileId,
-            profiles,
-          })
+        onClick={() => onBackToDashboardClick({
+          selectedProfileId,
+          profiles,
+        })
         }
       />
     </ButtonStyle>
     <div style={{ textAlign: 'center' }}>
       <HeaderStyle type="h1">{ translations.headerText }</HeaderStyle>
-      <ColumnContainerStyle>
-        {!isExperimentControl && (
-        <div>
+      {!isExperimentControl && (
+        <ColumnContainerStyle>
           <PlanColumn
             {...translations.pro}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
@@ -72,11 +70,11 @@ const Plans = ({
             source={getSource({ newPlan: 'premium_business', currentPlan })}
             isNonprofit={isNonprofit}
           />
-        </div>
-        )}
-        {isExperimentControl && (
-        <div>
-          <PlanColumn
+        </ColumnContainerStyle>
+      )}
+      {isExperimentControl && (
+        <ColumnContainerStyle>
+          <PlanColumnExperimentControl
             {...translations.pro}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
             currentPlan={currentPlan}
@@ -84,7 +82,7 @@ const Plans = ({
             source={getSource({ newPlan: 'pro', currentPlan })}
             isNonprofit={isNonprofit}
           />
-          <PlanColumn
+          <PlanColumnExperimentControl
             {...translations.premium}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
             currentPlan={currentPlan}
@@ -92,9 +90,8 @@ const Plans = ({
             source={getSource({ newPlan: 'premium_business', currentPlan })}
             isNonprofit={isNonprofit}
           />
-        </div>
-        )}
-      </ColumnContainerStyle>
+        </ColumnContainerStyle>
+      )}
     </div>
   </ContainerStyle>
 );

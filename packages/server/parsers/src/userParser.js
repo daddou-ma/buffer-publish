@@ -38,6 +38,7 @@ module.exports = userData => ({
     'instagram-location-tagging',
   ),
   hasIGDirectVideoFlip: userData.features.includes('ig_direct_video_posting'),
+  hasPaydayExperimentControlFlip: userData.features.includes('payday_experiment_control'),
   profile_limit: userData.profile_limit,
   profiles_schedules_slots: userData.profiles_schedules_slots,
   hasNewPublish: userData.in_new_publish_rollout,
