@@ -22,6 +22,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SHOW_ERRORS: 0,
   HIDE_ERRORS: 0,
   TRACK_DRAG_AND_DROP_STORY: 0,
+  TRACK_NOTE: 0,
 });
 
 const newStory = () => clonedeep({
@@ -467,10 +468,14 @@ export const actions = {
   hideError: () => ({
     type: actionTypes.HIDE_ERRORS,
   }),
-  trackDroppedCard: (cardSource, cardTarget) => {
-    return ({
-      type: actionTypes.TRACK_DRAG_AND_DROP_STORY,
-      isDragging: cardSource.isDragging
-    });
-  },
+  trackDroppedCard: cardSource => ({
+    type: actionTypes.TRACK_DRAG_AND_DROP_STORY,
+    isDragging: cardSource.isDragging,
+  }),
+  trackNote: ({ cta, note, order }) => ({
+    type: actionTypes.TRACK_NOTE,
+    cta,
+    note,
+    order,
+  }),
 };

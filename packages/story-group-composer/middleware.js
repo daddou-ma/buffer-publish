@@ -8,7 +8,7 @@ import { actions as storiesActions, actionTypes as storiesActionTypes } from '@b
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { SEGMENT_NAMES, SEGMENT_TRACKING } from '@bufferapp/publish-constants';
 import { dragged } from '@bufferapp/publish-analytics-middleware/transformers/publish/story';
-import getSGTrackingData from './utils/Tracking';
+import { getSGTrackingData, getStory, getNoteTrackingData } from './utils/Tracking';
 import { actionTypes, actions } from './reducer';
 
 const refreshStoryGroups = (dispatch, selectedProfileId) => {
@@ -186,9 +186,8 @@ export default ({ getState, dispatch }) => next => (action) => {
       dispatch(analyticsActions.trackEvent('Story Group Composer Opened', metadata));
       break;
     }
-    case actionTypes.TRACK_DRAG_AND_DROP_STORY:
+    case actionTypes.TRACK_DRAG_AND_DROP_STORY: {
       if (selectedProfileId) {
-        const state = getState();
         const currentProfile = state.profileSidebar && state.profileSidebar.selectedProfile;
         if (currentProfile) {
           const metadata = dragged({
@@ -200,6 +199,24 @@ export default ({ getState, dispatch }) => next => (action) => {
           dispatch(analyticsActions.trackEvent('Story Dragged', metadata));
         }
       }
+      break;
+    }
+    case actionTypes.TRACK_NOTE: {
+      const { storyGroup } = state.storyGroupComposer;
+      const { cta, note, order } = action;
+      const story = getStory({ stories: storyGroup.stories, order }) || {};
+      if (!story.note || story.note.length === 0) {
+        const channel = state.profileSidebar.selectedProfile;
+        const metadata = getNoteTrackingData({
+          storyGroupId: storyGroup.id,
+          channel,
+          note,
+          cta,
+        });
+        dispatch(analyticsActions.trackEvent('Story Note Added', metadata));
+      }
+      break;
+    }
     default:
       break;
   }

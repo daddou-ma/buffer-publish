@@ -7,6 +7,7 @@ export const actionTypes = keyWrapper('STORY_PREVIEW', {
   OPEN_PREVIEW: 0,
   SAVE_NOTE: 0,
   SAVE_NOTE_COMPOSER: 0,
+  TRACK_NOTE: 0,
 });
 
 export const initialState = {
@@ -64,6 +65,11 @@ export const actions = {
   }),
   handleSaveNoteComposer: ({ order, note }) => ({
     type: actionTypes.SAVE_NOTE_COMPOSER,
+    order,
+    note,
+  }),
+  trackNote: ({ order, note }) => ({
+    type: actionTypes.TRACK_NOTE,
     order,
     note,
   }),
