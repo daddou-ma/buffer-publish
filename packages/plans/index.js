@@ -16,6 +16,7 @@ export default connect(
     selectedProfileId: state.profileSidebar.selectedProfileId,
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
+    isExperimentControl: true,
   }),
   dispatch => ({
     onChoosePlanClick: ({ source, plan }) => {

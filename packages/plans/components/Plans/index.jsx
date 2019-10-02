@@ -6,6 +6,7 @@ import { gray } from '@bufferapp/ui/style/colors';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import styled from 'styled-components';
 import PlanColumn from '../PlanColumn';
+import PlanColumnExperimentControl from '../PlanColumnExperimentControl';
 import { getSource } from '../../utils/plans';
 
 const ButtonStyle = styled.div`
@@ -33,6 +34,7 @@ const Plans = ({
   profiles,
   translations,
   isNonprofit,
+  isExperimentControl,
 }) => (
   <ContainerStyle>
     <ButtonStyle>
@@ -52,22 +54,46 @@ const Plans = ({
     <div style={{ textAlign: 'center' }}>
       <HeaderStyle type="h1">{ translations.headerText }</HeaderStyle>
       <ColumnContainerStyle>
-        <PlanColumn
-          {...translations.pro}
-          imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
-          currentPlan={currentPlan}
-          onChoosePlanClick={onChoosePlanClick}
-          source={getSource({ newPlan: 'pro', currentPlan })}
-          isNonprofit={isNonprofit}
-        />
-        <PlanColumn
-          {...translations.premium}
-          imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
-          currentPlan={currentPlan}
-          onChoosePlanClick={onChoosePlanClick}
-          source={getSource({ newPlan: 'premium_business', currentPlan })}
-          isNonprofit={isNonprofit}
-        />
+        {!isExperimentControl && (
+        <div>
+          <PlanColumn
+            {...translations.pro}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'pro', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+          <PlanColumn
+            {...translations.premium}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'premium_business', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+        </div>
+        )}
+        {isExperimentControl && (
+        <div>
+          <PlanColumn
+            {...translations.pro}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'pro', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+          <PlanColumn
+            {...translations.premium}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'premium_business', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+        </div>
+        )}
       </ColumnContainerStyle>
     </div>
   </ContainerStyle>
@@ -81,6 +107,7 @@ Plans.propTypes = {
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
   translations: PropTypes.object.isRequired,  // eslint-disable-line
   isNonprofit: PropTypes.bool.isRequired,
+  isExperimentControl: PropTypes.bool.isRequired,
 };
 
 export default Plans;
