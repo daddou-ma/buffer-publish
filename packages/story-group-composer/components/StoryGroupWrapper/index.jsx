@@ -164,6 +164,7 @@ const StoryGroupWrapper = ({
               onPreviewClick={onPreviewClick}
               emptySlotData={emptySlotData}
               selectedProfile={selectedProfile}
+              isPastDue={storyGroup.isPastDue}
             />
           </React.Fragment>
         )}
