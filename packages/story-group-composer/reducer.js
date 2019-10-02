@@ -1,6 +1,7 @@
 import clonedeep from 'lodash.clonedeep';
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import debounce from 'lodash.debounce';
 
 export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_GROUP: 0,
@@ -11,6 +12,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   RESET_STORY_GROUP_STATE: 0,
   CREATE_NEW_STORY_CARD: 0,
   UPDATE_STORY_UPLOAD_PROGRESS: 0,
+  UPDATE_STORY_PROGRESS: 0,
   UPDATE_STORY_VIDEO_PROCESSING_STARTED: 0,
   UPDATE_STORY_VIDEO_PROCESSING_COMPLETE: 0,
   UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: 0,
@@ -47,6 +49,7 @@ export const initialState = {
     scheduledAt: null,
     stories: [],
   },
+  inProgress: [],
   isScheduleLoading: false,
   showStoryPreview: false,
   errors: [],
@@ -160,26 +163,43 @@ export default (state, action) => {
         isScheduleLoading: action.isLoading,
       };
     }
-    case actionTypes.UPDATE_STORY_UPLOAD_PROGRESS: {
-      const {
-        id,
-        progress,
-      } = action.args;
+    case actionTypes.UPDATE_STORY_PROGRESS: {
+      const { inProgress } = state;
       const { stories } = state.storyGroup;
       return {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: stories.map((story) => {
-            if (story.uploadTrackingId === id) {
-              return {
-                ...story,
-                progress,
-              };
-            }
+          stories: stories.map((filteredStory) => {
+            const story = clonedeep(filteredStory);
+
+            inProgress
+              .filter(currentStory => story.uploadTrackingId === currentStory.id)
+              .forEach(({ progress }) => {
+                if (progress > story.progress) {
+                  story.progress = progress;
+                }
+              });
             return story;
           }),
         },
+        progress: [],
+      };
+    }
+    case actionTypes.UPDATE_STORY_UPLOAD_PROGRESS: {
+      const {
+        id,
+        progress,
+      } = action.args;
+      return {
+        ...state,
+        inProgress: [
+          ...state.inProgress,
+          {
+            id,
+            progress,
+          }
+        ],
       };
     }
     case actionTypes.UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: {
@@ -361,6 +381,9 @@ export const actions = {
     stories,
     storyGroupId,
   }),
+  updateStoryPogress: debounce(dispatch => dispatch({
+    type: actionTypes.UPDATE_STORY_PROGRESS,
+  }), 200, { leading: false, trailing: true }),
   updateStoryUploadProgress: ({
     id, uploaderInstance, progress, file, complete,
   }) => ({

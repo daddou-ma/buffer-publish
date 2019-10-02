@@ -152,6 +152,7 @@ export default connect(
     onUpdateStoryUploadProgress: ({
       id, uploaderInstance, progress, file, complete,
     }) => {
+      actions.updateStoryPogress(dispatch);
       if (!complete) {
         dispatch(actions.updateStoryUploadProgress({
           id, uploaderInstance, progress, file, complete,
