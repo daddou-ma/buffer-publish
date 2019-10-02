@@ -48,8 +48,6 @@ const STORIES_COMPOSER_ADD_NOTE = 'publish-stories-composer-addNote-1';
 const STORIES_PREVIEW_QUEUE_ADD_NOTE = 'publish-stories-queuePreview-addNote-1';
 const STORIES_PREVIEW_COMPOSER_ADD_NOTE = 'publish-stories-composerPreview-addNote-1';
 
-const TRACKING_CLIENT_NAME = 'publishWeb';
-
 const UploadTypes = keyMirror({
   LINK_THUMBNAIL: null,
   MEDIA: null,
@@ -128,9 +126,6 @@ module.exports = {
     STORIES_COMPOSER_ADD_NOTE,
     STORIES_PREVIEW_COMPOSER_ADD_NOTE,
     STORIES_PREVIEW_QUEUE_ADD_NOTE,
-  },
-  SEGMENT_TRACKING: {
-    TRACKING_CLIENT_NAME,
   },
   MediaTypes,
   UploadTypes,
