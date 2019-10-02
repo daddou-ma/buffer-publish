@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Image } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
+import { People, Person } from '@bufferapp/ui/Icon';
 import PlanFeatureList from '../PlanFeatureList';
 import {
   ColumnStyle,
@@ -9,9 +11,44 @@ import {
   ImageWrapperStyle,
   FooterStyle,
   ButtonWrapperStyle,
-  LinkStyle,
-  TextStyle,
 } from './style';
+
+const UsersStyle = styled.span`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: blue;
+`;
+
+const IconStyle = styled.span`
+  display: flex;
+  padding-right: 4px;
+`;
+
+const PriceStyle = styled.span`
+  h1 {
+    margin-bottom: 5px;
+  }
+`;
+
+const BillingTextStyle = styled.span`
+  font-size: 14px;
+  color: gray;
+`;
+
+const FeatureListStyle = styled.span`
+  margin-top: 35px;
+`;
+const UserIcon = ({ Icon, text }) => (
+  <UsersStyle>
+    <IconStyle>
+      {Icon}
+    </IconStyle>
+    <Text>
+      {text}
+    </Text>
+  </UsersStyle>
+);
 
 const PlanColumn = ({
   title,
@@ -39,14 +76,22 @@ const PlanColumn = ({
           height="130px"
         />
       </ImageWrapperStyle>
-      <Text type="h1">
-        { isNonprofit ? nonProfitCost : cost }/mo
-      </Text>
-      <Text>{ billingText }</Text>
+      <UserIcon Icon={plan === 'premium_business' ? <People /> : <Person />} text={plan === 'premium_business' ? '2 users' : '1 user'} />
+      <PriceStyle>
+        <Text type="h1">
+          { isNonprofit ? nonProfitCost : cost }
+          /mo
+        </Text>
+      </PriceStyle>
+      <BillingTextStyle>
+        <Text>{ billingText }</Text>
+      </BillingTextStyle>
     </TopContentStyle>
-    {features.map((feature, index) => (
-      <PlanFeatureList feature={feature} key={feature} tooltip={featureTooltips[index]} />
-    ))}
+    <FeatureListStyle>
+      {features.map((feature, index) => (
+        <PlanFeatureList feature={feature} key={feature} tooltip={featureTooltips[index]} />
+      ))}
+    </FeatureListStyle>
     <FooterStyle>
       <ButtonWrapperStyle>
         <Button
@@ -57,10 +102,6 @@ const PlanColumn = ({
           onClick={() => onChoosePlanClick({ source, plan })}
         />
       </ButtonWrapperStyle>
-      <TextStyle>or </TextStyle>
-      <LinkStyle href="https://buffer.com/pricing/publish#compare-features">
-        <Text>see more features</Text>
-      </LinkStyle>
     </FooterStyle>
   </ColumnStyle>
 );

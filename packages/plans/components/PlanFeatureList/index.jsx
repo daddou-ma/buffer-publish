@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { blue } from '@bufferapp/ui/style/colors';
-import CheckmarkIcon from '@bufferapp/ui/Icon/Icons/Checkmark';
 import { Text, Tooltip } from '@bufferapp/ui';
-import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
+import { Checkmark, Info } from '@bufferapp/ui/Icon';
 
 const IconStyle = styled.span`
   background: ${blue};
@@ -23,24 +22,34 @@ const FeatureWrapperStyle = styled.div`
   text-align: left;
 `;
 
+const TooltipStyle = styled.span`
+  text-align: unset;
+  vertical-align: middle;
+  display: inline-flex;
+  margin-left: 8px;
+  padding: 2px;
+  color: gray;
+`;
+
 const PlanFeatureList = ({
   feature,
   tooltip,
 }) => (
   <FeatureWrapperStyle key={feature}>
     <IconStyle>
-      <CheckmarkIcon />
+      <Checkmark />
     </IconStyle>
     <Text>{feature}</Text>
-
-    {tooltip !== '' && (
-    <Tooltip
-      label={tooltip}
-      position="right"
-    >
-      <InfoIcon size="medium" />
-    </Tooltip>
-    )}
+    <TooltipStyle>
+      {tooltip !== '' && (
+        <Tooltip
+          label={tooltip}
+          position="right"
+        >
+          <Info size="medium" />
+        </Tooltip>
+      )}
+    </TooltipStyle>
   </FeatureWrapperStyle>
 );
 
