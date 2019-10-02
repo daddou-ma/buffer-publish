@@ -10,8 +10,8 @@ const getSource = ({ newPlan, currentPlan }) => {
       break;
     case 'solo_premium_business':
       source = currentPlan === 'free' || currentPlan === 'pro'
-        ? 'plans_premium_upgrade'
-        : 'plans_premium_downgrade';
+        ? 'plans_solo_premium_upgrade'
+        : 'plans_solo_premium_downgrade';
       break;
     case 'premium_business':
       source = currentPlan === 'free'
@@ -39,6 +39,9 @@ const getPlanId = (plan) => {
   switch (plan) {
     case 'pro':
       planId = PLAN_IDS.PRO_PLAN_ID;
+      break;
+    case 'solo_premium_business':
+      planId = PLAN_IDS.SOLO_PREMIUM_BUSINESS_PLAN_ID;
       break;
     case 'premium_business':
       planId = PLAN_IDS.PREMIUM_BUSINESS_PLAN_ID;
