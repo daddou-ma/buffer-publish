@@ -62,7 +62,6 @@ const AddStoryFooter = ({
 
   const onScheduleClick = () => {
     if (editMode) {
-      const { storyGroupId } = storyGroup;
       onUpdateStoryGroup({
         scheduledAt,
         stories,
@@ -142,23 +141,17 @@ AddStoryFooter.propTypes = {
   ...DateTimeSlotPickerWrapper.propTypes,
   isScheduleLoading: PropTypes.bool.isRequired,
   onUpdateStoryGroup: PropTypes.func.isRequired,
-  translations: PropTypes.shape({
-    scheduleLoadingButton: PropTypes.string,
-    scheduleButton: PropTypes.string,
-    previewButton: PropTypes.string,
-  }).isRequired,
-  storyGroup: PropTypes.shape({
-    storyDetails: PropTypes.shape({
-      stories: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string,
-      })),
-    }),
-    scheduledAt: PropTypes.number,
-  }),
+  onCreateStoryGroup: PropTypes.func.isRequired,
+  onPreviewClick: PropTypes.func.isRequired,
+  translations: translationsPropTypes, // eslint-disable-line react/require-default-props,
+  storyGroup: storyGroupPropTypes, // eslint-disable-line react/require-default-props,
+  selectedProfile: selectedProfilePropTypes, // eslint-disable-line react/require-default-props,
+  isPastDue: PropTypes.bool,
 };
 
 AddStoryFooter.defaultProps = {
   storyGroup: {},
+  isPastDue: false,
 };
 
 export default AddStoryFooter;

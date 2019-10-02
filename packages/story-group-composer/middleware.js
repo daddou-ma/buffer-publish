@@ -179,6 +179,7 @@ export default ({ getState, dispatch }) => next => (action) => {
           stories: editingStoryGroup.storyDetails.stories,
           storyGroupId: editingStoryGroup.id,
           scheduledAt: editingStoryGroup.scheduledAt,
+          isPastDue: editingStoryGroup.isPastDue,
         }));
       }
       const channel = getState().profileSidebar.selectedProfile;

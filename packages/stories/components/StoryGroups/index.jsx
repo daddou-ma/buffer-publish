@@ -180,7 +180,7 @@ StoryGroups.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.string,
     email: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.strings),
+    tags: PropTypes.arrayOf(PropTypes.string),
   }),
   translations: PropTypes.shape({
     inputPlaceholder: PropTypes.string.isRequired,

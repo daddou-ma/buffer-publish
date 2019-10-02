@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import { Popover } from '@bufferapp/components';
 import PreviewPopover from '@bufferapp/publish-story-preview';
 import StoryGroupWrapper from '../StoryGroupWrapper';
-import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
-import CarouselCardHover from '../Carousel/CarouselCardHover';
-import HeaderBar from '../HeaderBar';
 
 const StoryGroupPopover = ({
   onOverlayClick,
@@ -92,16 +89,12 @@ const StoryGroupPopover = ({
 
 StoryGroupPopover.propTypes = {
   onOverlayClick: PropTypes.func.isRequired,
-  saveNote: PropTypes.func.isRequired,
-  isScheduleLoading: PropTypes.bool.isRequired,
-  userData: PropTypes.shape({}).isRequired,
+  showStoryPreview: PropTypes.bool,
+  ...StoryGroupWrapper.propTypes,
 };
 
 StoryGroupPopover.defaultProps = {
-  ...DateTimeSlotPickerWrapper.propTypes,
-  ...HeaderBar.propTypes,
-  ...DateTimeSlotPickerWrapper.propTypes,
-  ...CarouselCardHover.propTypes,
+  showStoryPreview: false,
 };
 
 export default StoryGroupPopover;
