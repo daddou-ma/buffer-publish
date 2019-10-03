@@ -143,7 +143,10 @@ class CardItem extends React.Component {
 
         {card.thumbnail_url && (
           <StoryWrapper>
-            <CoverImage src={getSafeimageUrl(card.thumbnail_url, 180, 320)} isTarget={isOver} />
+            <CoverImage
+              src={getSafeimageUrl(card.thumbnail_url, cardWidth, cardHeight)}
+              isTarget={isOver}
+            />
             {card.type === 'video' && <PlayIcon large={largeCards} />}
             {isHovering && !isDragging && (
               <CarouselCardHover

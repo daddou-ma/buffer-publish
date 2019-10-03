@@ -71,7 +71,7 @@ const Story = ({
             cardWidth={cardWidth}
             largeCards={largeCards}
           >
-            {card.thumbnail_url && <CoverImage src={getSafeimageUrl(card.thumbnail_url, 110, 198)} />}
+            {card.thumbnail_url && <CoverImage src={getSafeimageUrl(card.thumbnail_url, cardWidth, cardHeight)} />}
             {card.type === 'video' && <PlayIcon large={false} />}
           </CarouselCard>
         ))}
