@@ -170,9 +170,7 @@ export default (state, action) => {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: stories.map((filteredStory) => {
-            const story = clonedeep(filteredStory);
-
+          stories: clonedeep(stories).map((story) => {
             inProgress
               .filter(currentStory => story.uploadTrackingId === currentStory.id)
               .forEach(({ progress }) => {
@@ -383,7 +381,7 @@ export const actions = {
   }),
   updateStoryPogress: debounce(dispatch => dispatch({
     type: actionTypes.UPDATE_STORY_PROGRESS,
-  }), 200, { leading: false, trailing: true }),
+  }), 270, { leading: false, trailing: true }),
   updateStoryUploadProgress: ({
     id, uploaderInstance, progress, file, complete,
   }) => ({
@@ -431,6 +429,7 @@ export const actions = {
       file,
       stillGifUrl,
       contentType,
+
     },
   }),
   videoUploadProcessingStarted: ({
