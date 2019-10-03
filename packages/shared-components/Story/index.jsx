@@ -8,6 +8,7 @@ import CardHeader from '../CardHeader';
 import CardFooter from '../CardFooter';
 import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
 import PostErrorBanner from '../PostErrorBanner';
+import { getSafeimageUrl } from '@bufferapp/publish-story-group-composer/utils/SafeImage';
 
 const sgQueueTranslations = translations['story-group-queue'];
 
@@ -70,7 +71,7 @@ const Story = ({
             cardWidth={cardWidth}
             largeCards={largeCards}
           >
-            {card.thumbnail_url && <CoverImage src={card.thumbnail_url} />}
+            {card.thumbnail_url && <CoverImage src={getSafeimageUrl(card.thumbnail_url, 110, 198)} />}
             {card.type === 'video' && <PlayIcon large={false} />}
           </CarouselCard>
         ))}

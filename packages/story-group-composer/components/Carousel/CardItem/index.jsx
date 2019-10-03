@@ -18,6 +18,7 @@ import {
   StoryWrapper,
   PlayIcon,
 } from './styles';
+import { getSafeimageUrl } from '../../../utils/SafeImage';
 
 class CardItem extends React.Component {
   constructor (props) {
@@ -142,7 +143,7 @@ class CardItem extends React.Component {
 
         {card.thumbnail_url && (
           <StoryWrapper>
-            <CoverImage src={card.thumbnail_url} isTarget={isOver} />
+            <CoverImage src={getSafeimageUrl(card.thumbnail_url, 180, 320)} isTarget={isOver} />
             {card.type === 'video' && <PlayIcon large={largeCards} />}
             {isHovering && !isDragging && (
               <CarouselCardHover
