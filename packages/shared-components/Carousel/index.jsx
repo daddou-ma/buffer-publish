@@ -74,6 +74,22 @@ class Carousel extends React.Component {
     });
   };
 
+  shouldComponentUpdate (nextProps, nextState) {
+    const { totalStories, children } = this.props;
+    const { totalStories: nextTotalStories, children: nextChildren } = nextProps;
+    const { selectedItem } = this.state;
+    const { selectedItem: nextSelectedItem } = nextState;
+
+    if (
+      totalStories !== nextTotalStories
+      || selectedItem !== nextSelectedItem
+      || children !== nextChildren
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   render () {
     const {
       totalCardsToShow,
