@@ -20,116 +20,152 @@ import {
   PlayIcon,
 } from './styles';
 
-const CardItem = ({
-  card,
-  cardHeight,
-  cardWidth,
-  userData,
-  largeCards,
-  uploadFormatsConfig,
-  maxAttachableMediaCount,
-  removeNotifications,
-  notifyError,
-  videoProcessingComplete,
-  uploadDraftFile,
-  updateUploadProgress,
-  monitorUpdateProgress,
-  createNewFile,
-  createImageThumbnail,
-  uploadImageComplete,
-  videoProcessingStarted,
-  onAddNoteClick,
-  onDeleteStoryClick,
-  isOver,
-  isDragging,
-  translations,
-}) => {
-  const notifiers = {
-    uploadStarted: props => createNewFile(props),
-    uploadedLinkThumbnail: props => createImageThumbnail(props),
-    uploadedDraftImage: props => uploadImageComplete({ ...props, contentType: 'image' }),
-    uploadedDraftVideo: props => videoProcessingStarted({ ...props, contentType: 'video' }),
-    draftGifUploaded: props => uploadImageComplete({ ...props, contentType: 'gif' }),
-    queueError: props => notifyError(props),
-    monitorFileUploadProgress: monitorUpdateProgress(updateUploadProgress),
+class CardItem extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      isHovering: false,
+    };
+  }
+
+  setIsHovering = (isHovering) => {
+    this.setState({ isHovering });
   };
-  const [isHovering, setIsHovering] = useState(false);
 
-  return (
-    <CarouselCard
-      key={card.uploadTrackingId}
-      card={card}
-      cardHeight={cardHeight}
-      cardWidth={cardWidth}
-      largeCards={largeCards}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-      isTarget={isOver}
-    >
-      {card.empty && (
-      <div>
-        <UploadZone
-          uploadButton={({ onClick }) => (
-            <Button
-              type="primary"
-              label={translations.addMedia}
-              icon={<PlusIcon />}
-              onClick={onClick}
+  shouldComponentUpdate (nextProps, nextState, nextContext) {
+    const { card, isOver, isDragging } = this.props;
+    const { card: cardNext, isOver: isOverNext, isDragging: isDraggingNext } = nextProps;
+
+    const { isHovering } = this.state;
+    const { isHovering: isHoveringNext } = nextState;
+
+    if (
+      card.empty !== cardNext.empty
+      || card.thumbnail_url !== cardNext.thumbnail_url
+      || card.progress !== cardNext.progress
+      || card.uploading !== cardNext.uploading
+      || isHovering !== isHoveringNext
+      || isOver !== isOverNext
+      || isDragging !== isDraggingNext
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  render() {
+    const {
+      card,
+      cardHeight,
+      cardWidth,
+      userData,
+      largeCards,
+      uploadFormatsConfig,
+      maxAttachableMediaCount,
+      removeNotifications,
+      notifyError,
+      videoProcessingComplete,
+      uploadDraftFile,
+      updateUploadProgress,
+      monitorUpdateProgress,
+      createNewFile,
+      createImageThumbnail,
+      uploadImageComplete,
+      videoProcessingStarted,
+      onAddNoteClick,
+      onDeleteStoryClick,
+      isOver,
+      isDragging,
+      translations,
+    } = this.props;
+    const notifiers = {
+      uploadStarted: props => createNewFile(props),
+      uploadedLinkThumbnail: props => createImageThumbnail(props),
+      uploadedDraftImage: props => uploadImageComplete({ ...props, contentType: 'image' }),
+      uploadedDraftVideo: props => videoProcessingStarted({ ...props, contentType: 'video' }),
+      draftGifUploaded: props => uploadImageComplete({ ...props, contentType: 'gif' }),
+      queueError: props => notifyError(props),
+      monitorFileUploadProgress: monitorUpdateProgress(updateUploadProgress),
+    };
+    const { isHovering } = this.state;
+
+    return (
+      <CarouselCard
+        key={card.uploadTrackingId}
+        card={card}
+        cardHeight={cardHeight}
+        cardWidth={cardWidth}
+        largeCards={largeCards}
+        onMouseEnter={() => this.setIsHovering(true)}
+        onMouseLeave={() => this.setIsHovering(false)}
+        isTarget={isOver}
+      >
+        {card.empty && (
+          <div>
+            <UploadZone
+              uploadButton={({ onClick }) => (
+                <Button
+                  type="primary"
+                  label={translations.addMedia}
+                  icon={<PlusIcon />}
+                  onClick={onClick}
+                />
+              )}
+              classNames={styles}
+              supportsMixedMediaTypes
+              mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+              uploadDraftFile={uploadDraftFile({ userData, videoProcessingComplete })}
+              notifiers={notifiers}
+              removeAllNotifications={removeNotifications}
+              queueError={notifyError}
+              draftId={`${card.order}`}
+              uploadFormatsConfig={uploadFormatsConfig}
+              service={{
+                maxAttachableImagesCount: maxAttachableMediaCount,
+                canHaveMediaAttachmentType: () => true,
+              }}
+              uploadType={UploadTypes.MEDIA}
+              multiple
+              disabled={isOver}
             />
-          )}
-          classNames={styles}
-          supportsMixedMediaTypes
-          mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-          uploadDraftFile={uploadDraftFile({ userData, videoProcessingComplete })}
-          notifiers={notifiers}
-          removeAllNotifications={removeNotifications}
-          queueError={notifyError}
-          draftId={`${card.order}`}
-          uploadFormatsConfig={uploadFormatsConfig}
-          service={{
-            maxAttachableImagesCount: maxAttachableMediaCount,
-            canHaveMediaAttachmentType: () => true,
-          }}
-          uploadType={UploadTypes.MEDIA}
-          multiple
-          disabled={isOver}
-        />
-      </div>
-      )}
-      {!card.empty && card.progress !== null && card.uploading && (
-      <CircularUploadIndicator
-        classNames={{ container: styles.container }}
-        size={54}
-        progress={card.progress}
-        showText
-        finishingUpText="Finishing Upload..."
-      />
-      )}
+          </div>
+        )}
+        {!card.empty && card.progress !== null && card.uploading && (
+          <CircularUploadIndicator
+            classNames={{ container: styles.container }}
+            size={54}
+            progress={card.progress}
+            showText
+            finishingUpText="Finishing Upload..."
+          />
+        )}
 
-      {card.thumbnail_url && (
-        <StoryWrapper>
-          <CoverImage src={card.thumbnail_url} isTarget={isOver} />
-          {card.type === 'video' && <PlayIcon large={largeCards} />}
-          {isHovering && !isDragging && (
-            <CarouselCardHover
-              card={card}
-              translations={translations}
-              onAddNoteClick={onAddNoteClick}
-              onDeleteStoryClick={onDeleteStoryClick}
-            />
-          )}
-        </StoryWrapper>
-      )}
+        {card.thumbnail_url && (
+          <StoryWrapper>
+            <CoverImage src={card.thumbnail_url} isTarget={isOver} />
+            {card.type === 'video' && <PlayIcon large={largeCards} />}
+            {isHovering && !isDragging && (
+              <CarouselCardHover
+                card={card}
+                translations={translations}
+                onAddNoteClick={onAddNoteClick}
+                onDeleteStoryClick={onDeleteStoryClick}
+              />
+            )}
+          </StoryWrapper>
+        )}
 
-      {!card.empty && card.processing === true && (
-      <UploadingVideo>
-        <Text size="small">{translations.processingVideo}</Text>
-        <LoadingAnimation marginTop="0" />
-      </UploadingVideo>
-      )}
-    </CarouselCard>
-  );
-};
+        {!card.empty && card.processing === true && (
+          <UploadingVideo>
+            <Text size="small">{translations.processingVideo}</Text>
+            <LoadingAnimation marginTop="0" />
+          </UploadingVideo>
+        )}
+      </CarouselCard>
+    );
+  }
+}
 
 CardItem.propTypes = {
   card: carouselCardPropTypes, // eslint-disable-line react/require-default-props,

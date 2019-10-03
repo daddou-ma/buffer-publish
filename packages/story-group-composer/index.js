@@ -152,17 +152,10 @@ export default connect(
     onUpdateStoryUploadProgress: ({
       id, uploaderInstance, progress, file, complete,
     }) => {
-      if (!complete) {
-        dispatch(actions.updateStoryUploadProgress({
-          id, uploaderInstance, progress, file, complete,
-        }));
-      } else {
-        setTimeout(() => {
-          dispatch(actions.updateStoryUploadProgress({
-            id, uploaderInstance, progress, file, complete,
-          }));
-        }, 500);
-      }
+      dispatch(actions.updateStoryUploadProgress({
+        id, uploaderInstance, progress, file, complete,
+      }));
+      actions.updateStoryPogress(dispatch);
     },
     onMonitorUpdateProgress: updateUploadProgress => async ({ id, uploaderInstance, file }) => {
       const progressIterator = uploaderInstance.getProgressIterator();
