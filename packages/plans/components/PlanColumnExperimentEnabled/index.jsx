@@ -109,10 +109,10 @@ const PlanColumnExperimentEnabled = ({
       {plan === 'premium_business' && (
       <PlanStyle>
         <LeftPlanItem>
-          <UserIcon Icon={<People />} text="2 users" />
+          <UserIcon Icon={<Person />} text="1 user" />
           <PriceStyle>
             <Text type="h1">
-              { isNonprofit ? nonProfitCost : cost }
+              { isNonprofit ? soloNonProfitCost : soloCost }
               /mo
             </Text>
           </PriceStyle>
@@ -121,10 +121,10 @@ const PlanColumnExperimentEnabled = ({
           </BillingTextStyle>
         </LeftPlanItem>
         <RightPlanItem>
-          <UserIcon Icon={<Person />} text="1 user" />
+          <UserIcon Icon={<People />} text="2 users" />
           <PriceStyle>
             <Text type="h1">
-              { isNonprofit ? soloNonProfitCost : soloCost }
+              { isNonprofit ? nonProfitCost : cost }
               /mo
             </Text>
           </PriceStyle>

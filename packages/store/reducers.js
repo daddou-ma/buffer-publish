@@ -42,6 +42,7 @@ import globalAccountReducer from '@bufferapp/global-account/reducer';
 import closeComposerModalReducer from '@bufferapp/publish-close-composer-confirmation-modal/reducer';
 import storyPreviewReducer from '@bufferapp/publish-story-preview/reducer';
 import storyGroupComposerReducer from '@bufferapp/publish-story-group-composer/reducer';
+import plansReducer from '@bufferapp/publish-plans/reducer';
 import creditCardFormReducer from '@bufferapp/publish-credit-card-form/reducer';
 
 // Analyze
@@ -101,6 +102,7 @@ export default {
   closeComposerModal: closeComposerModalReducer,
   storyPreview: storyPreviewReducer,
   storyGroupComposer: storyGroupComposerReducer,
+  plans: plansReducer,
   creditCardForm: creditCardFormReducer,
 
   // Analyze

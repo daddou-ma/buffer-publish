@@ -9,6 +9,8 @@ import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaS
 import Plans from './components/Plans';
 import { getPlanId } from './utils/plans';
 
+import { actions } from './reducer';
+
 export default connect(
   state => ({
     currentPlan: state.appSidebar.user.plan,
@@ -17,8 +19,12 @@ export default connect(
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
     isExperimentControl: state.appSidebar.user.hasPaydayExperimentControlFlip,
+    selectedPremiumPlan: state.plans.selectedPremiumPlan,
   }),
   dispatch => ({
+    onPremiumPlanClick: ({ selectedPlan }) => {
+      dispatch(actions.setSelectedPlan({ selectedPlan }));
+    },
     onChoosePlanClick: ({ source, plan }) => {
       const ctaProperties = getCtaProperties(SEGMENT_NAMES.PLANS_OPEN_MODAL);
       const metadata = {

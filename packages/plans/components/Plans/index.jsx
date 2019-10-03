@@ -36,6 +36,8 @@ const Plans = ({
   translations,
   isNonprofit,
   isExperimentControl,
+  onPremiumPlanClick,
+  selectedPremiumPlan,
 }) => (
   <ContainerStyle>
     <ButtonStyle>
