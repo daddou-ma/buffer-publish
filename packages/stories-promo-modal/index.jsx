@@ -5,8 +5,9 @@ import { getURL } from '@bufferapp/publish-server/formatters/src';
 import StoriesPromoModal from './components/StoriesPromoModal';
 
 export default connect(
+  null,
   dispatch => ({
-    onCloseModalClick: () => dispatch(modalsActions.hideStoriesPromoFreeModal()),
+    onCloseModalClick: () => dispatch(modalsActions.hideStoriesPromoModal()),
     onStartTrialClick: () => window.location.assign(`${getURL.getStartTrialURL({
       plan: 'premium_business',
       cycle: 'month',

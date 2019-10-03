@@ -46,7 +46,7 @@ const StoriesPromoModal = ({
       <img
         width="100%"
         alt="instagram_stories_snippet"
-        src="https://s3-alpha-sig.figma.com/img/c200/7c21/b7ebc50159e1334b0a8284e99a0bef62?Expires=1571011200&Signature=MEHN~bBfhlEThgk7qAt3qN0QTQrd4NOKwC7flCSPYlsucfeLmNmta888eISBboj2uSwXkMkjjOjk8Y-e3f6PYTjnNjW04wo8qBidWvewbGn1ZXw-EEXNMRDfJsK~KwC6mmnjumrzBKdKZYaiUsnOAyb3nscHIjSKwSfc7mXdSD2-wBXmbcKn6WzR5bxi3-P4Ot9aQYXxXJGY3QXv443t3By3b2BeetTMYjAc5-edbGgpMOi6f2wAXwonetNLyymmXMXmNLq6Rhwb7eLoeOsPS4OruR2RKae0MH3h2Q-C8y7G3aybwc1zn0bW-lE5CnnF2ojM0d~2snzJtCpWD-ceSQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+        src="https://buffer-publish.s3.amazonaws.com/images/stories-promo-modal.png"
       />
       <ModalContent>
         <Title type="h2">New! Plan, preview and schedule Instagram Stories</Title>
