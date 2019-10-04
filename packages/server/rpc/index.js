@@ -29,7 +29,6 @@ const changeDateTimePreferences = require('./changeDateTimePreferences');
 const twoFactorUpdate = require('./twoFactorUpdate');
 const twoFactorConfirm = require('./twoFactorConfirm');
 const twoFactorRecovery = require('./twoFactorRecovery');
-const closeAccount = require('./closeAccount');
 const connectedApps = require('./connectedApps');
 const revokeConnectedApp = require('./revokeConnectedApp');
 const featureMethod = require('./features');
@@ -105,7 +104,6 @@ module.exports = rpc(
   twoFactorUpdate,
   twoFactorConfirm,
   twoFactorRecovery,
-  closeAccount,
   connectedApps,
   revokeConnectedApp,
   featureMethod,

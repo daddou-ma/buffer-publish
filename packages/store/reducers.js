@@ -25,7 +25,6 @@ import modalsReducer from '@bufferapp/publish-modals/reducer';
 import instagramDirectPostingModalReducer from '@bufferapp/publish-ig-direct-posting-modal/reducer';
 import manageAppsReducer from '@bufferapp/manage-apps-extras/reducer';
 import twoFactorAuthReducer from '@bufferapp/publish-two-factor-auth/reducer';
-import closeAccountReducer from '@bufferapp/close-account/reducer';
 import profilesDisconnectedModalReducer from '@bufferapp/publish-profiles-disconnected-modal/reducer';
 import accountNotificationsReducer from '@bufferapp/publish-account-notifications/reducer';
 import stealProfileModalReducer from '@bufferapp/publish-steal-profile-modal/reducer';
@@ -79,7 +78,6 @@ export default {
   modals: modalsReducer,
   manageAppsExtras: manageAppsReducer,
   twoFactorAuth: twoFactorAuthReducer,
-  closeAccount: closeAccountReducer,
   productFeatures: productFeaturesReducer,
   drafts: draftsReducer,
   generalSettings: generalSettingsReducer,
