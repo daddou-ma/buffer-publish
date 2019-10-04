@@ -36,6 +36,7 @@ const renderPostList = ({
 }) => (
   <div style={postListStyle}>
     <PostList
+      index={index}
       key={`postList-${index}`}
       listHeader={postList.listHeader}
       posts={postList.posts}

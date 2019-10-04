@@ -8,6 +8,7 @@ const QueueButtonGroup = ({ onClick, buttons, disabled }) => (
       <QueueButton
         key={text}
         text={text}
+        total={buttons.length}
         index={index}
         onClick={onClick}
         disabled={disabled}

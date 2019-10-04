@@ -6,6 +6,7 @@ import {
 } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
 import { WithFeatureLoader } from '@bufferapp/product-features';
+import { QueueButtonGroup } from '@bufferapp/publish-shared-components';
 import TextPost from '../TextPost';
 import ImagePost from '../ImagePost';
 import MultipleImagesPost from '../MultipleImagesPost';
@@ -25,6 +26,8 @@ const postStyle = {
 };
 
 const listHeaderStyle = {
+  display: 'flex',
+  alignItems: 'center',
   marginBottom: '1rem',
   marginTop: '1rem',
   marginLeft: '0.5rem',
@@ -79,6 +82,22 @@ const renderPost = ({
   return <PostComponent {...postWithEventHandlers} />;
 };
 
+const renderHeader = ({ listHeader, isPastReminder, isFirstItem }) => (
+  <div style={listHeaderStyle}>
+    <Text color="black">
+      {listHeader}
+    </Text>
+    {isPastReminder && isFirstItem && (
+      <div style={{ marginLeft: 'auto' }}>
+        <QueueButtonGroup
+          buttons={['Posts', 'Stories']}
+          onClick={() => {}}
+        />
+      </div>
+    )}
+  </div>
+);
+
 /* eslint-enable react/prop-types */
 
 const PostList = ({
@@ -101,15 +120,10 @@ const PostList = ({
   isBusinessAccount,
   features,
   hasFirstCommentFlip,
+  index,
 }) => (
   <div>
-    <div style={listHeaderStyle}>
-      <Text
-        color="black"
-      >
-        {listHeader}
-      </Text>
-    </div>
+    {renderHeader({ listHeader, isPastReminder, isFirstItem: index === 0 })}
     <List
       items={posts.map(post => (
         <div
@@ -213,10 +227,12 @@ PostList.propTypes = {
   isBusinessAccount: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   features: PropTypes.object.isRequired, // eslint-disable-line
+  index: PropTypes.number,
 };
 
 PostList.defaultProps = {
   posts: [],
+  index: 0,
 };
 
 export default WithFeatureLoader(PostList);

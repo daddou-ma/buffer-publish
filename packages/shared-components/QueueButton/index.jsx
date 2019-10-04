@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const getBorderRadius = (index) => {
+const getBorderRadius = (index, total) => {
   if (index === 0) return '4px 0px 0px 4px';
-  else if (index === 2) return '0px 4px 4px 0px';
+  if (index === total - 1) return '0px 4px 4px 0px';
   return '0px';
 };
 
 // refactor when new design system is used
-const btnStyle = (index, isHovering, isSelected, disabled) => ({
+const btnStyle = (index, isHovering, isSelected, disabled, total) => ({
   fontFamily: 'Roboto',
   fontWeight: 500,
   color: isSelected || isHovering ? '#3D3D3D' : '#636363',
-  borderRadius: getBorderRadius(index, length),
+  borderRadius: getBorderRadius(index, total),
   fontSize: '14px',
   border: isSelected ? '1px solid #636363' : '1px solid #C4C4C4',
   boxSizing: 'border-box',
@@ -28,7 +28,7 @@ const btnStyle = (index, isHovering, isSelected, disabled) => ({
 
 const getWeekOrMonth = (index) => {
   if (index === 1) return 'week';
-  else if (index === 2) return 'month';
+  if (index === 2) return 'month';
   return null;
 };
 
@@ -55,10 +55,19 @@ class QueueButton extends Component {
   }
 
   render() {
-    const { onClick, index, text, disabled } = this.props;
+    const {
+      onClick,
+      total,
+      index,
+      text,
+      disabled,
+    } = this.props;
+    const { isHovering, selectedIndex } = this.state;
+
     return (
       <button
-        style={btnStyle(index, this.state.isHovering, this.state.selectedIndex === index, disabled)}
+        type="button"
+        style={btnStyle(index, isHovering, selectedIndex === index, disabled, total)}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={(e) => {
@@ -78,10 +87,12 @@ QueueButton.propTypes = {
   index: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  total: PropTypes.number,
 };
 
 QueueButton.defaultProps = {
   disabled: false,
+  total: 0,
 };
 
 export default QueueButton;
