@@ -27,7 +27,7 @@ export default hot(connect(
   }),
   (dispatch, ownProps) => ({
     onProfileClick: (profile) => {
-      if (profile.id !== ownProps.profileId) {
+      if (profile && (profile.id !== ownProps.profileId)) {
         dispatch(tabsActions.selectTab({
           tabId: ownProps.tabId,
           profileId: profile.id,

@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  action,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import CardHeader from './index';
 
 const details = {
@@ -12,8 +12,8 @@ const details = {
   createdAt: 'March 2nd at 12:45pm (GMT)',
 };
 
-storiesOf('CardHeader', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Basic Elements/CardHeader', module)
+  .addDecorator(withA11y)
   .add('default', () => (
     <CardHeader
       creatorName={details.creatorName}

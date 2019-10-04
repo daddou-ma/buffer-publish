@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import { SensitiveData } from '@bufferapp/publish-shared-components';
 import Avatar from '@bufferapp/ui/Avatar';
 import { Text } from '@bufferapp/ui';
+import { selectedProfilePropTypes } from '../../utils/commonPropTypes';
 
 const AvatarContainer = styled.div`
   display: flex;
-  padding: 8px 0px 13px;
+  padding: 8px 0px 5px;
 `;
 
 const AvatarNameWrapper = styled.div`
@@ -42,11 +43,7 @@ const HeaderBar = ({
 );
 
 HeaderBar.propTypes = {
-  selectedProfile: PropTypes.shape({
-    avatar_https: PropTypes.string,
-    service: PropTypes.string,
-    handle: PropTypes.string,
-  }).isRequired,
+  selectedProfile: selectedProfilePropTypes, // eslint-disable-line react/require-default-props,,
 };
 
 export default HeaderBar;

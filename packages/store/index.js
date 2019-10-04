@@ -5,64 +5,66 @@ import {
   logTrackingMiddleware,
   bufferMetricsMiddleware,
 } from '@bufferapp/publish-data-tracking';
-import { middleware as queueMiddleware } from '@bufferapp/publish-queue';
-import { middleware as sentMiddleware } from '@bufferapp/publish-sent';
-import { middleware as gridMiddleware } from '@bufferapp/publish-grid';
-import { middleware as pastRemindersMiddleware } from '@bufferapp/publish-past-reminders';
-import { middleware as draftsMiddleware } from '@bufferapp/publish-drafts';
-import { middleware as storiesMiddleware } from '@bufferapp/publish-stories';
-import { middleware as postingScheduleSettingsMiddleware } from '@bufferapp/publish-posting-schedule';
-import { middleware as generalSettingsMiddleware } from '@bufferapp/publish-general-settings';
-import { middleware as profileSidebarMiddleware } from '@bufferapp/publish-profile-sidebar';
-import { middleware as clientAccessMiddleware } from '@bufferapp/client-access';
-import { middleware as appSidebarMiddleware } from '@bufferapp/app-sidebar';
-import { middleware as productFeatureMiddleware } from '@bufferapp/product-features';
-import { middleware as i18nMiddleware } from '@bufferapp/publish-i18n';
-import { middleware as asyncDataFetchMiddleware } from '@bufferapp/async-data-fetch';
-import { middleware as pusherSyncMiddleware } from '@bufferapp/publish-pusher-sync';
-import { middleware as notificationsMiddleware } from '@bufferapp/notifications';
-import { middleware as environmentMiddleware } from '@bufferapp/environment';
-import { middleware as unauthorizedRedirectMiddleware } from '@bufferapp/unauthorized-redirect';
-import { middleware as appSwitcherMiddleware } from '@bufferapp/publish-app-switcher';
-import { middleware as betaRedirectMiddleware } from '@bufferapp/publish-beta-redirect';
-import { middleware as switchPlanModalMiddleware } from '@bufferapp/publish-switch-plan-modal';
-import { middleware as stripeMiddleware } from '@bufferapp/stripe';
-import { middleware as modalsMiddleware } from '@bufferapp/publish-modals';
-import { middleware as manageAppsMiddleware } from '@bufferapp/manage-apps-extras';
-import { middleware as twoFactorAuthMiddleware } from '@bufferapp/publish-two-factor-auth';
-import { middleware as dateTimePreferencesMiddleware } from '@bufferapp/date-time-preferences';
-import { middleware as maintenanceRedirectMiddleware } from '@bufferapp/maintenance-redirect';
-import { middleware as defaultPageMiddleware } from '@bufferapp/default-page';
-import { middleware as instagramDirectPostingModalMiddleware } from '@bufferapp/publish-ig-direct-posting-modal';
-import { middleware as notificationsProviderMiddleware } from '@bufferapp/publish-notifications-provider';
-import { middleware as profilesDisconnectedModalMiddleware } from '@bufferapp/publish-profiles-disconnected-modal';
-import { middleware as accountNotificationsMiddleware } from '@bufferapp/publish-account-notifications';
-import { middleware as publishCTABannerMiddleware } from '@bufferapp/publish-cta-banner';
-import { middleware as thirdpartyMiddleware } from '@bufferapp/publish-thirdparty';
-import { middleware as bookmarkletsMiddleware } from '@bufferapp/publish-bookmarklets';
-import { middleware as b4bTrialCompleteModalMiddleware } from '@bufferapp/publish-b4b-trial-complete-modal';
-import { middleware as tabsMiddleware } from '@bufferapp/publish-tabs';
-import { middleware as appShellMiddleware } from '@bufferapp/publish-app-shell';
-import { middleware as igFirstCommentProTrialModalMiddleware } from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
-import { middleware as hashtagGroupsMiddleware } from '@bufferapp/publish-hashtag-group-manager';
-import { middleware as trialMiddleware } from '@bufferapp/publish-trial';
-import { middleware as segmentTrackingMiddleware } from '@bufferapp/publish-analytics-middleware';
-import { middleware as onboardingMiddleware } from '@bufferapp/publish-onboarding';
-import { middleware as globalAccountMiddleware } from '@bufferapp/global-account';
-import { middleware as closeComposerModalMiddleware } from '@bufferapp/publish-close-composer-confirmation-modal';
-import { middleware as storyGroupComposerMiddleware } from '@bufferapp/publish-story-group-composer';
+
+import queueMiddleware from '@bufferapp/publish-queue/middleware';
+import sentMiddleware from '@bufferapp/publish-sent/middleware';
+import gridMiddleware from '@bufferapp/publish-grid/middleware';
+import pastRemindersMiddleware from '@bufferapp/publish-past-reminders/middleware';
+import draftsMiddleware from '@bufferapp/publish-drafts/middleware';
+import storiesMiddleware from '@bufferapp/publish-stories/middleware';
+import postingScheduleSettingsMiddleware from '@bufferapp/publish-posting-schedule/middleware';
+import generalSettingsMiddleware from '@bufferapp/publish-general-settings/middleware';
+import profileSidebarMiddleware from '@bufferapp/publish-profile-sidebar/middleware';
+import clientAccessMiddleware from '@bufferapp/client-access/middleware';
+import appSidebarMiddleware from '@bufferapp/app-sidebar/lib/middleware';
+import productFeatureMiddleware from '@bufferapp/product-features/middleware';
+import i18nMiddleware from '@bufferapp/publish-i18n/middleware';
+import asyncDataFetchMiddleware from '@bufferapp/async-data-fetch/lib/middleware';
+import pusherSyncMiddleware from '@bufferapp/publish-pusher-sync/middleware';
+import notificationsMiddleware from '@bufferapp/notifications/lib/middleware';
+import environmentMiddleware from '@bufferapp/environment/lib/middleware';
+import unauthorizedRedirectMiddleware from '@bufferapp/unauthorized-redirect/middleware';
+import appSwitcherMiddleware from '@bufferapp/publish-app-switcher/middleware';
+import betaRedirectMiddleware from '@bufferapp/publish-beta-redirect/middleware';
+import switchPlanModalMiddleware from '@bufferapp/publish-switch-plan-modal/middleware';
+import stripeMiddleware from '@bufferapp/stripe/middleware';
+import modalsMiddleware from '@bufferapp/publish-modals/middleware';
+import manageAppsMiddleware from '@bufferapp/manage-apps-extras/middleware';
+import twoFactorAuthMiddleware from '@bufferapp/publish-two-factor-auth/middleware';
+import dateTimePreferencesMiddleware from '@bufferapp/date-time-preferences/middleware';
+import maintenanceRedirectMiddleware from '@bufferapp/maintenance-redirect/middleware';
+import defaultPageMiddleware from '@bufferapp/default-page/middleware';
+import instagramDirectPostingModalMiddleware from '@bufferapp/publish-ig-direct-posting-modal/middleware';
+import notificationsProviderMiddleware from '@bufferapp/publish-notifications-provider/middleware';
+import profilesDisconnectedModalMiddleware from '@bufferapp/publish-profiles-disconnected-modal/middleware';
+import accountNotificationsMiddleware from '@bufferapp/publish-account-notifications/middleware';
+import publishCTABannerMiddleware from '@bufferapp/publish-cta-banner/middleware';
+import thirdpartyMiddleware from '@bufferapp/publish-thirdparty/middleware';
+import bookmarkletsMiddleware from '@bufferapp/publish-bookmarklets/middleware';
+import b4bTrialCompleteModalMiddleware from '@bufferapp/publish-b4b-trial-complete-modal/middleware';
+import tabsMiddleware from '@bufferapp/publish-tabs/middleware';
+import appShellMiddleware from '@bufferapp/publish-app-shell/middleware';
+import igFirstCommentProTrialModalMiddleware from '@bufferapp/publish-ig-first-comment-pro-trial-modal/middleware';
+import hashtagGroupsMiddleware from '@bufferapp/publish-hashtag-group-manager/middleware';
+import trialMiddleware from '@bufferapp/publish-trial/middleware';
+import segmentTrackingMiddleware from '@bufferapp/publish-analytics-middleware/middleware';
+import onboardingMiddleware from '@bufferapp/publish-onboarding/middleware';
+import globalAccountMiddleware from '@bufferapp/global-account/middleware';
+import closeComposerModalMiddleware from '@bufferapp/publish-close-composer-confirmation-modal/middleware';
+import storyPreviewMiddleware from '@bufferapp/publish-story-preview/middleware';
+import storyGroupComposerMiddleware from '@bufferapp/publish-story-group-composer/middleware';
 
 // Remove analytics middleware when publish switches to analyze
-import { middleware as averageMiddleware } from '@bufferapp/average-table';
-import { middleware as compareChartMiddleware } from '@bufferapp/compare-chart';
-import { middleware as datePickerMiddleware } from '@bufferapp/analyze-date-picker';
-import { middleware as exportPickerMiddleware } from '@bufferapp/analyze-export-picker';
-import { middleware as exportToCSVMiddleware } from '@bufferapp/analyze-csv-export';
-import { middleware as exportToPNGMiddleware } from '@bufferapp/analyze-png-export';
-import { middleware as postsMiddleware } from '@bufferapp/posts-table';
-import { middleware as profileLoaderMiddleware } from '@bufferapp/profile-loader';
-import { middleware as profileSelectorMiddleware } from '@bufferapp/analyze-profile-selector';
-import { middleware as summaryTableMiddleware } from '@bufferapp/summary-table';
+import averageMiddleware from '@bufferapp/average-table/middleware';
+import compareChartMiddleware from '@bufferapp/compare-chart/middleware';
+import datePickerMiddleware from '@bufferapp/analyze-date-picker/middleware';
+import exportPickerMiddleware from '@bufferapp/analyze-export-picker/middleware';
+import exportToCSVMiddleware from '@bufferapp/analyze-csv-export/middleware';
+import exportToPNGMiddleware from '@bufferapp/analyze-png-export/middleware';
+import postsMiddleware from '@bufferapp/posts-table/middleware';
+// import profileLoaderMiddleware from '@bufferapp/profile-loader/middleware';
+import profileSelectorMiddleware from '@bufferapp/analyze-profile-selector/middleware';
+import summaryTableMiddleware from '@bufferapp/summary-table/middleware';
 
 import reducers from './reducers';
 
@@ -133,6 +135,7 @@ const configureStore = initialstate => {
         globalAccountMiddleware,
         closeComposerModalMiddleware,
         storiesMiddleware,
+        storyPreviewMiddleware,
         storyGroupComposerMiddleware,
         // Analyze
         averageMiddleware,

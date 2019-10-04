@@ -172,7 +172,9 @@ describe('reducer', () => {
 
   // DRAFT_DELETED
   it('should handle DRAFT_DELETED action type', () => {
-    const draft = { id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: true };
+    const draft = {
+      id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: true,
+    };
     const stateBefore = {
       byProfileId: {
         [profileId]: {
@@ -233,9 +235,11 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-    // DRAFT_CONFIRMED_DELETE
+  // DRAFT_CONFIRMED_DELETE
   it('should handle DRAFT_CONFIRMED_DELETE action type', () => {
-    const draft = { id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: false };
+    const draft = {
+      id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: false,
+    };
     const draftAfter = { ...draft, isConfirmingDelete: false, isDeleting: true };
     const stateBefore = {
       byProfileId: {
@@ -263,82 +267,6 @@ describe('reducer', () => {
     };
     const action = {
       type: actionTypes.DRAFT_CONFIRMED_DELETE,
-      profileId,
-      draft: draftAfter,
-    };
-    deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
-  });
-
-    // DRAFT_CANCELED_DELETE
-  it('should handle DRAFT_CANCELED_DELETE action type', () => {
-    const draft = { id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: false };
-    const draftAfter = { ...draft, isConfirmingDelete: false, isDeleting: false };
-    const stateBefore = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          drafts: { 12345: draft },
-          total: 1,
-        },
-      },
-    };
-    const stateAfter = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          drafts: { 12345: draftAfter },
-          total: 1,
-        },
-      },
-    };
-    const action = {
-      type: actionTypes.DRAFT_CANCELED_DELETE,
-      profileId,
-      draft: draftAfter,
-    };
-    deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
-  });
-
-  // DRAFT_CLICKED_DELETE
-  it('should handle DRAFT_CLICKED_DELETE action type', () => {
-    const draft = { id: '12345', text: 'i heart buffer', isConfirmingDelete: false };
-    const draftAfter = { ...draft, isConfirmingDelete: true };
-    const stateBefore = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          drafts: { 12345: draft },
-          total: 1,
-        },
-      },
-    };
-    const stateAfter = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          drafts: { 12345: draftAfter },
-          total: 1,
-        },
-      },
-    };
-    const action = {
-      type: actionTypes.DRAFT_CLICKED_DELETE,
       profileId,
       draft: draftAfter,
     };
@@ -549,24 +477,6 @@ describe('reducer', () => {
       });
     });
 
-    it('handleDeleteClick triggers a DRAFT_CLICKED_DELETE action', () => {
-      expect(actions.handleDeleteClick({ draft, profileId })).toEqual({
-        type: actionTypes.DRAFT_CLICKED_DELETE,
-        updateId: draft.id,
-        draft,
-        profileId,
-      });
-    });
-
-    it('handleCancelConfirmClick triggers a DRAFT_CANCELED_DELETE action', () => {
-      expect(actions.handleCancelConfirmClick({ draft, profileId })).toEqual({
-        type: actionTypes.DRAFT_CANCELED_DELETE,
-        updateId: draft.id,
-        draft,
-        profileId,
-      });
-    });
-
     it('handleDeleteConfirmClick triggers a DRAFT_CONFIRMED_DELETE action', () => {
       expect(actions.handleDeleteConfirmClick({ draft, profileId })).toEqual({
         type: actionTypes.DRAFT_CONFIRMED_DELETE,
@@ -581,7 +491,7 @@ describe('reducer', () => {
         type: actionTypes.OPEN_COMPOSER,
       });
     });
-    
+
     it('handleComposerCreateSuccess triggers a HIDE_COMPOSER action', () => {
       expect(actions.handleComposerCreateSuccess()).toEqual({
         type: actionTypes.HIDE_COMPOSER,

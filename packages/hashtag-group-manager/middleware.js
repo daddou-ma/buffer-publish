@@ -3,6 +3,7 @@ import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
 import { trackAction } from '@bufferapp/publish-data-tracking';
+import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
@@ -54,7 +55,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       }));
       refreshHashtagGroups(dispatch, organizationId);
       break;
-    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case profileSidebarActionTypes.SELECT_PROFILE:
       refreshHashtagGroups(dispatch, organizationId);
       break;
     case actionTypes.INSERT_HASHTAG_GROUP:

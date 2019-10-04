@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
-import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
+import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
@@ -21,7 +21,6 @@ export default connect(
     onChoosePlanClick: ({ source, plan }) => {
       const ctaProperties = getCtaProperties(SEGMENT_NAMES.PLANS_OPEN_MODAL);
       const metadata = {
-        product: 'publish',
         planName: plan,
         planId: getPlanId(plan),
         ...ctaProperties,

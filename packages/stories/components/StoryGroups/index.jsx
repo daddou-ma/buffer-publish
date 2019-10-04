@@ -12,6 +12,7 @@ import {
   ComposerInput,
 } from '@bufferapp/publish-shared-components';
 import { CircleInstReminderIcon } from '@bufferapp/components';
+import WarningIcon from '@bufferapp/ui/Icon/Icons/Warning';
 import { Text } from '@bufferapp/ui';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -46,6 +47,21 @@ const ReminderTextStyle = styled(Text)`
   font-size: 12px;
 `;
 
+/* this color red https://bufferapp.github.io/ui/#/ui/Guides/colors isn't the same
+red as the @bufferapp/ui/style/colors */
+const StyledWarningIcon = styled(WarningIcon)`
+  fill: #e0364f;
+`;
+
+const renderNotification = ({ IconComponent, message }) => (
+  <ReminderTextWrapper>
+    { IconComponent }
+    <ReminderTextStyle type="p">
+      { message }
+    </ReminderTextStyle>
+  </ReminderTextWrapper>
+);
+
 const StoryGroups = ({
   loading,
   editMode,
@@ -54,18 +70,23 @@ const StoryGroups = ({
   showStoriesComposer,
   onEmptySlotClick,
   onEditClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onComposerPlaceholderClick,
   hasFirstCommentFlip,
   isBusinessAccount,
   onShareNowClick,
   onCalendarClick,
-  onCancelConfirmClick,
   onPreviewClick,
   onClosePreviewClick,
   showStoryPreview,
+  userData,
+  serviceId,
+  translations,
 }) => {
+  const hasStoriesMobileVersion = (
+    userData.tags ? userData.tags.includes('has_instagram_stories_mobile') : false
+  );
+
   if (loading) {
     return (
       <LoadingContainerStyle>
@@ -83,6 +104,7 @@ const StoryGroups = ({
       {showStoryPreview && (
         <PreviewPopover
           onCloseClick={onClosePreviewClick}
+          view="queue"
         />
       )}
       <ContainerStyle>
@@ -94,7 +116,7 @@ const StoryGroups = ({
               </React.Fragment>
             )}
             <ComposerInput
-              placeholder="What would you like to add to your Story?"
+              placeholder={translations.inputPlaceholder}
               onPlaceholderClick={onComposerPlaceholderClick}
             />
           </ComposerInputStyle>
@@ -104,17 +126,19 @@ const StoryGroups = ({
             <StoryGroupPopover />
           </React.Fragment>
         )}
-        <ReminderTextWrapper>
-          <CircleInstReminderIcon color="instagram" />
-          <ReminderTextStyle type="p">
-            When it’s time to post your Story, we’ll send a Reminder to your mobile device.
-          </ReminderTextStyle>
-        </ReminderTextWrapper>
+        {hasStoriesMobileVersion
+          ? renderNotification({
+            IconComponent: <CircleInstReminderIcon color="instagram" />,
+            message: translations.reminderText,
+          })
+          : renderNotification({
+            IconComponent: <StyledWarningIcon />,
+            message: translations.mobileTagText,
+          })
+        }
         <QueueItems
           items={storyGroups}
-          onCancelConfirmClick={onCancelConfirmClick}
           onCalendarClick={onCalendarClick}
-          onDeleteClick={onDeleteClick}
           onDeleteConfirmClick={onDeleteConfirmClick}
           onEditClick={onEditClick}
           onEmptySlotClick={onEmptySlotClick}
@@ -124,6 +148,8 @@ const StoryGroups = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
           isBusinessAccount={isBusinessAccount}
           onPreviewClick={onPreviewClick}
+          serviceId={serviceId}
+          userData={userData}
         />
       </ContainerStyle>
     </ErrorBoundary>
@@ -143,15 +169,25 @@ StoryGroups.propTypes = {
   isBusinessAccount: PropTypes.bool,
   onEmptySlotClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
-  onDeleteClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onCalendarClick: PropTypes.func,
-  onCancelConfirmClick: PropTypes.func,
   onComposerPlaceholderClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
   onClosePreviewClick: PropTypes.func,
   showStoryPreview: PropTypes.bool,
+  serviceId: PropTypes.string.isRequired,
+  userData: PropTypes.shape({
+    id: PropTypes.string,
+    email: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+  }),
+  translations: PropTypes.shape({
+    inputPlaceholder: PropTypes.string.isRequired,
+    mobileTagText: PropTypes.string,
+    reminderText: PropTypes.string,
+    composerInputText: PropTypes.string,
+  }).isRequired,
 };
 
 StoryGroups.defaultProps = {
@@ -164,14 +200,13 @@ StoryGroups.defaultProps = {
   storyGroups: [],
   showStoryPreview: false,
   onEditClick: () => {},
-  onDeleteClick: () => {},
   onDeleteConfirmClick: () => {},
   onShareNowClick: () => {},
   onCalendarClick: () => {},
-  onCancelConfirmClick: () => {},
   onComposerPlaceholderClick: () => {},
   onPreviewClick: () => {},
   onClosePreviewClick: () => {},
+  userData: {},
 };
 
 export default WithFeatureLoader(StoryGroups);

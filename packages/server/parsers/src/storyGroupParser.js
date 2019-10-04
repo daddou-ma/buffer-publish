@@ -1,7 +1,18 @@
-const { getDateString, isInThePast } = require('../../formatters/src')
+const { getDateString, isInThePast } = require('../../formatters/src');
+
+
+const getStoryAction = ({ scheduledAt, timezone, options }) => {
+  const dateString = getDateString(scheduledAt, timezone, options);
+  return `You will receive a reminder ${dateString} when it's time to post.`;
+};
+
+const parseStories = stories => stories.map((story) => {
+  story.order = parseInt(story.order, 10);
+  return story;
+});
 
 module.exports = (storyGroup) => {
-  const isPastDue = isInThePast(storyGroup.scheduled_at)
+  const isPastDue = isInThePast(storyGroup.scheduled_at);
 
   return {
     id: storyGroup.id,
@@ -9,6 +20,8 @@ module.exports = (storyGroup) => {
     createdAt: storyGroup.created_at,
     scheduled_at: storyGroup.scheduled_at,
     scheduledAt: storyGroup.scheduled_at,
+    // Add to fix issue with missing due_at in queue utils in formatPostLists
+    due_at: storyGroup.scheduled_at,
     isPastDue,
     type: 'storyGroup',
     profileId: storyGroup.profile_id,
@@ -20,10 +33,19 @@ module.exports = (storyGroup) => {
       createdAt: getDateString(storyGroup.created_at, storyGroup.profile_timezone, {
         twentyFourHourTime: storyGroup.twentyfour_hour_time,
       }),
+      error: storyGroup.error_message,
+      errorLink: storyGroup.error_link,
       status: storyGroup.status,
-      stories: storyGroup.stories,
+      stories: parseStories(storyGroup.stories),
       twentyfourHourTime: storyGroup.twentyfour_hour_time,
-      storyAction: `You will receive a reminder on ${storyGroup.day} when it's time to post.`,
-    }
+      storyAction: getStoryAction({
+        scheduledAt: storyGroup.scheduled_at,
+        timezone: storyGroup.profile_timezone,
+        options: {
+          twentyFourHourTime: storyGroup.twentyfour_hour_time,
+          createdAt: storyGroup.created_at,
+        },
+      }),
+    },
   };
 };

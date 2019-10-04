@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
@@ -61,7 +61,7 @@ class _TestContextContainer extends Component { // eslint-disable-line
 const TestContextContainer = DragDropContext(TestBackend)(_TestContextContainer);
 
 storiesOf('QueuedPosts', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
   .addDecorator(getStory => <TestContextContainer>{getStory()}</TestContextContainer>)
   .add('default', () => (
@@ -69,8 +69,6 @@ storiesOf('QueuedPosts', module)
       total={10}
       loading={false}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -97,8 +95,6 @@ storiesOf('QueuedPosts', module)
       total={0}
       loading
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -125,8 +121,6 @@ storiesOf('QueuedPosts', module)
       total={10}
       loading={false}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -153,8 +147,6 @@ storiesOf('QueuedPosts', module)
     <QueuedPosts
       total={10}
       loading={false}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -182,8 +174,6 @@ storiesOf('QueuedPosts', module)
       total={10}
       loading={false}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}

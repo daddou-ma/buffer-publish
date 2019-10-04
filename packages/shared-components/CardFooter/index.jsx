@@ -26,6 +26,7 @@ const CardFooterWrapper = styled.div`
   align-items: center;
   padding: 8px 1rem;
   opacity: ${({ isDragging }) => (isDragging ? 0 : 1)};
+  border-radius: 0 0 4px 4px;
 `;
 
 const CardFooterWrapperWithBorder = styled(CardFooterWrapper)`
@@ -89,6 +90,10 @@ const CardFooter = ({
   onSubmitClick,
   submitLabel,
   onRequeueClick,
+  requeueLabel,
+  onMoveToDraftsClick,
+  onSubmitDraftsClick,
+  submitDraftsLabel,
   hasFirstComment,
   isPerformingAction,
   actionMessage,
@@ -102,6 +107,8 @@ const CardFooter = ({
 
   return (
     <WrapperComponent isDragging={isDragging} disableBorder={disableBorder}>
+
+      { /* FOOTER MESSAGE */ }
       <CardFooterContent>
         {icon
           && <IconWrapper>{icon}</IconWrapper>
@@ -132,6 +139,8 @@ const CardFooter = ({
           )
         }
       </CardFooterContent>
+
+      { /* FOOTER BUTTONS */ }
       {!hideAllButtons
         && (
           <ButtonWrapper>
@@ -154,15 +163,27 @@ const CardFooter = ({
             {onEditClick
               && <EditButton type="secondary" label="Edit" size="small" onClick={onEditClick} />
             }
+
+            { /* POSTS AND STORIES ACTIONS ONLY */ }
             {onSubmitClick
               && <Button type={onRequeueClick ? 'secondary' : 'primary'} label={submitLabel} size="small" onClick={onSubmitClick} />
             }
             {onRequeueClick
-              && <RequeueButton type="primary" label="Re-add to Queue" size="small" onClick={onRequeueClick} />
+              && <RequeueButton type="primary" label={requeueLabel} size="small" onClick={onRequeueClick} />
+            }
+
+            { /* DRAFTS ACTIONS ONLY */ }
+            {onMoveToDraftsClick
+              && <Button type={onSubmitDraftsClick ? 'secondary' : 'primary'} label="Move to Drafts" size="small" onClick={onMoveToDraftsClick} />
+            }
+            {onSubmitDraftsClick
+              && <RequeueButton type="primary" label={submitDraftsLabel} size="small" onClick={onSubmitDraftsClick} />
             }
           </ButtonWrapper>
         )
       }
+
+      { /* FOOTER ACTONS */ }
       {isPerformingAction
         && <Message type="p">{ actionMessage }</Message>
       }
@@ -182,6 +203,10 @@ CardFooter.propTypes = {
   onSubmitClick: PropTypes.func,
   submitLabel: PropTypes.string,
   onRequeueClick: PropTypes.func,
+  requeueLabel: PropTypes.string,
+  onMoveToDraftsClick: PropTypes.func,
+  onSubmitDraftsClick: PropTypes.func,
+  submitDraftsLabel: PropTypes.string,
   hasFirstComment: PropTypes.bool,
   isPerformingAction: PropTypes.bool,
   actionMessage: PropTypes.string,
@@ -200,6 +225,10 @@ CardFooter.defaultProps = {
   onSubmitClick: null,
   submitLabel: 'Share Now',
   onRequeueClick: null,
+  requeueLabel: 'Reschedule',
+  onMoveToDraftsClick: null,
+  onSubmitDraftsClick: null,
+  submitDraftsLabel: 'Approve',
   hasFirstComment: false,
   isPerformingAction: false,
   actionMessage: 'Submitting...',

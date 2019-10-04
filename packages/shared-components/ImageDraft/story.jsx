@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import ImageDraft from './index';
 
 const links = [{
@@ -41,8 +41,8 @@ const squareImage = 'http://via.placeholder.com/400x400';
 const tallImage = 'http://via.placeholder.com/400x900';
 const wideImage = 'http://via.placeholder.com/900x400';
 
-storiesOf('ImageDraft', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Drafts/ImageDraft', module)
+  .addDecorator(withA11y)
   .add('drafts image draft', () => (
     <ImageDraft
       hasPermission
@@ -52,8 +52,6 @@ storiesOf('ImageDraft', module)
       links={links}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -63,7 +61,7 @@ storiesOf('ImageDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
-      view={'drafts'}
+      view="drafts"
     />
   ))
   .add('approval image draft', () => (
@@ -74,8 +72,6 @@ storiesOf('ImageDraft', module)
       links={links}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -84,7 +80,7 @@ storiesOf('ImageDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
-      view={'approval'}
+      view="approval"
     />
   ))
   .add('square image', () => (
@@ -94,8 +90,6 @@ storiesOf('ImageDraft', module)
       links={links}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -105,7 +99,7 @@ storiesOf('ImageDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
-      view={'drafts'}
+      view="drafts"
     />
   ))
   .add('tall image', () => (
@@ -115,8 +109,6 @@ storiesOf('ImageDraft', module)
       links={links}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -126,7 +118,7 @@ storiesOf('ImageDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
-      view={'drafts'}
+      view="drafts"
     />
   ))
   .add('wide image', () => (
@@ -136,8 +128,6 @@ storiesOf('ImageDraft', module)
       links={links}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -147,7 +137,7 @@ storiesOf('ImageDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
-      view={'drafts'}
+      view="drafts"
     />
   ))
   .add('retweet', () => (
@@ -157,8 +147,6 @@ storiesOf('ImageDraft', module)
       links={links}
       draftDetails={isARetweetDraftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -169,7 +157,7 @@ storiesOf('ImageDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
-      view={'drafts'}
+      view="drafts"
     />
   ))
   .add('tag', () => (
@@ -179,9 +167,7 @@ storiesOf('ImageDraft', module)
       links={links}
       draftDetails={draftDetails}
       text={text}
-      tag={'GIF'}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
+      tag="GIF"
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -191,6 +177,6 @@ storiesOf('ImageDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
-      view={'drafts'}
+      view="drafts"
     />
   ));

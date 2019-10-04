@@ -43,7 +43,7 @@ class ShortLinkTooltip extends React.Component {
     this.isClickOnTooltipInProgress = false;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.callbacks.onShortLinkMouseOver = this.onShortLinkMouseOver;
     this.props.callbacks.onShortLinkMouseOut = this.onShortLinkMouseOut;
     this.props.callbacks.onEditorStateChange = this.onEditorStateChange;

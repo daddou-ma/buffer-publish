@@ -39,9 +39,7 @@ const QueuedPosts = ({
   postLists,
   onComposerPlaceholderClick,
   onComposerCreateSuccess,
-  onCancelConfirmClick,
   onRequeueClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onEmptySlotClick,
@@ -95,51 +93,55 @@ const QueuedPosts = ({
       <div>
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
-            {showComposer && !editMode &&
-              <ComposerPopover
-                onSave={onComposerCreateSuccess}
-                preserveComposerStateOnClose
-                type={'queue'}
-                onComposerOverlayClick={onComposerOverlayClick}
-                editMode={editMode}
-              />
+            {showComposer && !editMode
+              && (
+                <ComposerPopover
+                  onSave={onComposerCreateSuccess}
+                  preserveComposerStateOnClose
+                  type="queue"
+                  onComposerOverlayClick={onComposerOverlayClick}
+                  editMode={editMode}
+                />
+              )
             }
             <ComposerInput
               onPlaceholderClick={onComposerPlaceholderClick}
-              placeholder={'What would you like to share?'}
+              placeholder="What would you like to share?"
             />
           </div>
         </div>
-        {isInstagramProfile && !isInstagramBusiness &&
-          <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
+        {isInstagramProfile && !isInstagramBusiness
+          && <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
         }
-        {showInstagramDirectPostingModal &&
-          <InstagramDirectPostingModal />
+        {showInstagramDirectPostingModal
+          && <InstagramDirectPostingModal />
         }
         {!!paused && <QueuePausedBar isManager={isManager} handleClickUnpause={onUnpauseClick} />}
-        {showEmptyQueueMessage &&
-          <EmptyState
-            title="It looks like you haven't got any posts in your queue!"
-            subtitle="Click the box above to add a post to your queue :)"
-            heroImg="https://s3.amazonaws.com/buffer-publish/images/fresh-queue%402x.png"
-            heroImgSize={{ width: '229px', height: '196px' }}
-          />
+        {showEmptyQueueMessage
+          && (
+            <EmptyState
+              title="It looks like you haven't got any posts in your queue!"
+              subtitle="Click the box above to add a post to your queue :)"
+              heroImg="https://s3.amazonaws.com/buffer-publish/images/fresh-queue%402x.png"
+              heroImgSize={{ width: '229px', height: '196px' }}
+            />
+          )
         }
-        {showComposer && editMode &&
-          <ComposerPopover
-            onSave={onComposerCreateSuccess}
-            type={'queue'}
-            onComposerOverlayClick={onComposerOverlayClick}
-            editMode={editMode}
-          />
+        {showComposer && editMode
+          && (
+            <ComposerPopover
+              onSave={onComposerCreateSuccess}
+              type="queue"
+              onComposerOverlayClick={onComposerOverlayClick}
+              editMode={editMode}
+            />
+          )
         }
         <QueueItems
           items={postLists}
           subprofiles={subprofiles}
-          onCancelConfirmClick={onCancelConfirmClick}
           onCalendarClick={onCalendarClick}
           onRequeueClick={onRequeueClick}
-          onDeleteClick={onDeleteClick}
           onDeleteConfirmClick={onDeleteConfirmClick}
           onEditClick={onEditClick}
           onEmptySlotClick={onEmptySlotClick}
@@ -177,9 +179,7 @@ QueuedPosts.propTypes = {
   onComposerPlaceholderClick: PropTypes.func.isRequired,
   onComposerCreateSuccess: PropTypes.func.isRequired,
   onComposerOverlayClick: PropTypes.func.isRequired,
-  onCancelConfirmClick: PropTypes.func.isRequired,
   onRequeueClick: PropTypes.func.isRequired,
-  onDeleteClick: PropTypes.func.isRequired,
   onDeleteConfirmClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
   onEmptySlotClick: PropTypes.func.isRequired,
@@ -208,13 +208,12 @@ QueuedPosts.propTypes = {
 };
 
 QueuedPosts.defaultProps = {
+  postLists: [],
   loading: true,
   moreToLoad: false,
   page: 1,
-  postLists: [],
   showComposer: false,
   showEmptyQueueMessage: false,
-  enabledApplicationModes: [],
   editMode: false,
   paused: false,
   subprofiles: [],

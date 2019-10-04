@@ -55,8 +55,6 @@ const ImagePost = ({
   isWorking,
   imageSrc,
   links,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -97,38 +95,41 @@ const ImagePost = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic ?
-          <Text
-            color="black"
-            size="mini"
-            whitespace="pre-wrap"
-          >
-            {text}
-          </Text>
-          :
-          <LinkifiedText
-            color="black"
-            links={links}
-            size="mini"
-            whitespace="pre-wrap"
-            newTab
-            unstyled
-          >
-            {text}
-          </LinkifiedText>
+        {basic
+          ? (
+            <Text
+              color="black"
+              size="mini"
+              whitespace="pre-wrap"
+            >
+              {text}
+            </Text>
+          )
+          : (
+            <LinkifiedText
+              color="black"
+              links={links}
+              size="mini"
+              whitespace="pre-wrap"
+              newTab
+              unstyled
+            >
+              {text}
+            </LinkifiedText>
+          )
         }
       </span>
       <div style={imageWrapperStyle} onClick={onImageClick}>
         <div style={thumbnailWrapperStyle}>
           <Image
             src={imageSrc}
-            width={'auto'}
-            height={'auto'}
-            maxWidth={'9rem'}
-            maxHeight={'9rem'}
-            minHeight={'7rem'}
-            minWidth={'7rem'}
-            objectFit={'cover'}
+            width="auto"
+            height="auto"
+            maxWidth="9rem"
+            maxHeight="9rem"
+            minHeight="7rem"
+            minWidth="7rem"
+            objectFit="cover"
           />
         </div>
         <Lightbox
@@ -153,8 +154,6 @@ const ImagePost = ({
       isWorking={isWorking}
       imageSrc={imageSrc}
       links={links}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
       onDeleteConfirmClick={onDeleteConfirmClick}
       onEditClick={onEditClick}
       onShareNowClick={onShareNowClick}

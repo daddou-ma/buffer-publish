@@ -1,4 +1,4 @@
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import middleware from './middleware';
 
@@ -34,6 +34,7 @@ describe('middleware', () => {
         name: 'getStoryGroups',
         args: {
           profileId: action.profile.id,
+          isFetchingMore: false,
         },
       }));
   });

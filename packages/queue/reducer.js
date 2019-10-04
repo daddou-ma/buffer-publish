@@ -1,6 +1,6 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
-import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
+import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
+import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import { postParser } from '@bufferapp/publish-server/parsers/src';
 import keyWrapper from '@bufferapp/keywrapper';
 
@@ -9,9 +9,7 @@ export const actionTypes = keyWrapper('QUEUE', {
   POST_UPDATED: 0,
   POST_DELETED: 0,
   POST_SENT: 0,
-  POST_CLICKED_DELETE: 0,
   POST_CONFIRMED_DELETE: 0,
-  POST_CANCELED_DELETE: 0,
   POST_ERROR: 0,
   POST_SHARE_NOW: 0,
   POST_IMAGE_CLICKED: 0,
@@ -130,8 +128,6 @@ const postReducer = (state, action) => {
       return action.post;
     case actionTypes.POST_ERROR:
       return state;
-    case actionTypes.POST_CLICKED_DELETE:
-      return { ...state, isConfirmingDelete: true };
     case actionTypes.POST_CONFIRMED_DELETE:
       return {
         ...state,
@@ -142,11 +138,6 @@ const postReducer = (state, action) => {
       return {
         ...state,
         isWorking: true,
-      };
-    case actionTypes.POST_CANCELED_DELETE:
-      return {
-        ...state,
-        isConfirmingDelete: false,
       };
     case actionTypes.POST_IMAGE_CLICKED:
       return {
@@ -252,9 +243,7 @@ const postsReducer = (state = {}, action) => {
     case draftActionTypes.DRAFT_APPROVED:
     case actionTypes.POST_CREATED:
     case actionTypes.POST_UPDATED:
-    case actionTypes.POST_CLICKED_DELETE:
     case actionTypes.POST_CONFIRMED_DELETE:
-    case actionTypes.POST_CANCELED_DELETE:
     case actionTypes.POST_SHARE_NOW:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
@@ -321,10 +310,8 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.POST_ERROR:
     case actionTypes.POST_CREATED:
     case actionTypes.POST_UPDATED:
-    case actionTypes.POST_CLICKED_DELETE:
     case actionTypes.POST_CONFIRMED_DELETE:
     case actionTypes.POST_DELETED:
-    case actionTypes.POST_CANCELED_DELETE:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
@@ -357,10 +344,8 @@ export default (state = initialState, action) => {
     case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case actionTypes.POST_CREATED:
     case actionTypes.POST_UPDATED:
-    case actionTypes.POST_CLICKED_DELETE:
     case actionTypes.POST_CONFIRMED_DELETE:
     case actionTypes.POST_DELETED:
-    case actionTypes.POST_CANCELED_DELETE:
     case actionTypes.POST_ERROR:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
@@ -440,20 +425,8 @@ export const actions = {
     emptySlotData,
     profileId,
   }),
-  handleDeleteClick: ({ post, profileId }) => ({
-    type: actionTypes.POST_CLICKED_DELETE,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
   handleDeleteConfirmClick: ({ post, profileId }) => ({
     type: actionTypes.POST_CONFIRMED_DELETE,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleCancelConfirmClick: ({ post, profileId }) => ({
-    type: actionTypes.POST_CANCELED_DELETE,
     updateId: post.id,
     post,
     profileId,

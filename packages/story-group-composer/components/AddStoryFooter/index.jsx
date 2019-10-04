@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react';
-import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
+import { isInThePast } from '@bufferapp/publish-server/formatters/src';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
+import { getReadableDateFormat, getMomentTime } from '../../utils/AddStory';
+import { storyGroupPropTypes, translationsPropTypes, selectedProfilePropTypes } from '../../utils/commonPropTypes';
 import {
   FooterBar,
   ButtonStyle,
@@ -12,9 +14,18 @@ import {
   StyledEditButton,
 } from './style';
 
-const getReadableDateFormat = ({ uses24hTime, scheduledAt }) => {
-  const readableFormat = uses24hTime ? 'MMM D, H:mm' : 'MMM D, h:mm A';
-  return moment.unix(scheduledAt).format(readableFormat);
+const getInitialDateTime = ({
+  editMode,
+  scheduledAt,
+  emptySlotData,
+  timezone,
+}) => {
+  if (editMode || emptySlotData) {
+    const timestamp = editMode ? scheduledAt : emptySlotData.scheduledAt;
+    return getMomentTime({ scheduledAt: timestamp, timezone });
+  }
+
+  return null;
 };
 
 const AddStoryFooter = ({
@@ -23,17 +34,34 @@ const AddStoryFooter = ({
   uses24hTime,
   isScheduleLoading,
   translations,
-  editingStoryGroup,
+  storyGroup,
   onUpdateStoryGroup,
   onCreateStoryGroup,
-  onSetShowDatePicker,
-  showDatePicker,
+  onPreviewClick,
+  editMode,
+  emptySlotData,
+  selectedProfile,
+  isPastDue,
 }) => {
-  const [scheduledAt, setScheduledAt] = useState(editingStoryGroup ? editingStoryGroup.scheduledAt : null);
+  const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  /* this covers the case if a story group has a share failure and a user edits it
+   without updating the scheduled_at. Now the schedule button will be disabled until
+   date is updated. */
+  const isScheduledAtPastDue = isPastDue && isInThePast(scheduledAt);
+
+  const storiesLength = storyGroup.stories.length;
+  const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0;
+  const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading || isScheduledAtPastDue;
+  const isPreviewDisabled = storiesLength < 1 || !uploadsCompleted;
+
+  const { stories, storyGroupId } = storyGroup;
+  const { id, serviceId } = selectedProfile;
 
   const onDateTimeSlotPickerSubmit = (timestamp) => {
-    onSetShowDatePicker(false);
-    if (editingStoryGroup) {
+    setShowDatePicker(false);
+    if (editMode) {
       setScheduledAt(timestamp);
     } else {
       onCreateStoryGroup(timestamp);
@@ -41,35 +69,41 @@ const AddStoryFooter = ({
   };
 
   const onScheduleClick = () => {
-    if (editingStoryGroup) {
+    if (editMode) {
       onUpdateStoryGroup({
         scheduledAt,
-        stories: editingStoryGroup.storyDetails.stories,
-        storyGroupId: editingStoryGroup.id,
+        stories,
+        storyGroupId,
       });
     } else {
-      onSetShowDatePicker(true);
+      setShowDatePicker(true);
+    }
+  };
+
+  const onFooterClick = () => {
+    if (showDatePicker) {
+      setShowDatePicker(false);
     }
   };
 
   return (
     <Fragment>
-      <FooterBar>
-        {editingStoryGroup && (
+      <FooterBar onClick={onFooterClick}>
+        {editMode && (
           <EditStoryStyle>
             <EditTextStyle>
               <Text type="p">Story Schedule:</Text>
             </EditTextStyle>
             <EditDateStyle>
               <Text>
-                {getReadableDateFormat({ scheduledAt, uses24hTime })}
+                {getReadableDateFormat({ uses24hTime, scheduledAt, timezone })}
               </Text>
             </EditDateStyle>
             <StyledEditButton
               label="Edit"
               type="secondary"
               size="small"
-              onClick={() => { onSetShowDatePicker(true); }}
+              onClick={() => setShowDatePicker(true)}
             />
           </EditStoryStyle>
         )}
@@ -77,27 +111,36 @@ const AddStoryFooter = ({
           <Button
             type="secondary"
             label={translations.previewButton}
-            onClick={() => {}}
+            disabled={isPreviewDisabled}
+            onClick={() => onPreviewClick({
+              stories, scheduledAt, id: storyGroupId, profileId: id, serviceId,
+            })}
           />
         </ButtonStyle>
         <Button
           onClick={onScheduleClick}
           type="primary"
-          disabled={isScheduleLoading}
+          disabled={isScheduleDisabled}
           label={isScheduleLoading
             ? translations.scheduleLoadingButton
             : translations.scheduleButton}
         />
-        {showDatePicker && (
-          <DateTimeSlotPickerWrapper
-            shouldUse24hTime={uses24hTime}
-            timezone={timezone}
-            weekStartsMonday={weekStartsMonday}
-            editMode={!!editingStoryGroup}
-            onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
-          />
-        )}
       </FooterBar>
+      {showDatePicker && (
+        <DateTimeSlotPickerWrapper
+          uses24hTime={uses24hTime}
+          timezone={timezone}
+          weekStartsMonday={weekStartsMonday}
+          editMode={editMode}
+          onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
+          initialDateTime={getInitialDateTime({
+            editMode,
+            scheduledAt,
+            emptySlotData,
+            timezone,
+          })}
+        />
+      )}
     </Fragment>
   );
 };
@@ -106,25 +149,17 @@ AddStoryFooter.propTypes = {
   ...DateTimeSlotPickerWrapper.propTypes,
   isScheduleLoading: PropTypes.bool.isRequired,
   onUpdateStoryGroup: PropTypes.func.isRequired,
-  onSetShowDatePicker: PropTypes.func.isRequired,
-  showDatePicker: PropTypes.bool.isRequired,
-  translations: PropTypes.shape({
-    scheduleLoadingButton: PropTypes.string,
-    scheduleButton: PropTypes.string,
-    previewButton: PropTypes.string,
-  }).isRequired,
-  editingStoryGroup: PropTypes.shape({
-    storyDetails: PropTypes.shape({
-      stories: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string,
-      })),
-    }),
-    scheduledAt: PropTypes.number,
-  }),
+  onCreateStoryGroup: PropTypes.func.isRequired,
+  onPreviewClick: PropTypes.func.isRequired,
+  translations: translationsPropTypes, // eslint-disable-line react/require-default-props,
+  storyGroup: storyGroupPropTypes, // eslint-disable-line react/require-default-props,
+  selectedProfile: selectedProfilePropTypes, // eslint-disable-line react/require-default-props,
+  isPastDue: PropTypes.bool,
 };
 
 AddStoryFooter.defaultProps = {
-  editingStoryGroup: null,
+  storyGroup: {},
+  isPastDue: false,
 };
 
 export default AddStoryFooter;

@@ -165,7 +165,7 @@ class UploadZone extends React.Component {
   };
 
   cleanUpNotifications = () => {
-    const {removeAllNotifications} = this.props;
+    const { removeAllNotifications } = this.props;
     removeAllNotifications();
   };
 

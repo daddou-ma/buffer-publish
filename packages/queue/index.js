@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
+import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import { actions } from './reducer';
-import { formatPostLists, openCalendarWindow, isScheduleSlotsAvailable } from './util/';
+import { formatPostLists, openCalendarWindow, isScheduleSlotsAvailable } from './util';
 import QueuedPosts from './components/QueuedPosts';
 
 export default connect(
@@ -74,20 +74,8 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
-    onDeleteClick: (post) => {
-      dispatch(actions.handleDeleteClick({
-        post: post.post,
-        profileId: ownProps.profileId,
-      }));
-    },
     onDeleteConfirmClick: (post) => {
       dispatch(actions.handleDeleteConfirmClick({
-        post: post.post,
-        profileId: ownProps.profileId,
-      }));
-    },
-    onCancelConfirmClick: (post) => {
-      dispatch(actions.handleCancelConfirmClick({
         post: post.post,
         profileId: ownProps.profileId,
       }));

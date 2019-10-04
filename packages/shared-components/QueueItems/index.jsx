@@ -1,8 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-} from '@bufferapp/components';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
 import {
   transitionAnimationTime,
@@ -80,9 +77,7 @@ const renderPost = ({
   post,
   index,
   isStory,
-  onCancelConfirmClick,
   onRequeueClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -96,14 +91,14 @@ const renderPost = ({
   basic,
   hasFirstCommentFlip,
   onPreviewClick,
+  serviceId,
+  userData,
 }) => {
   const postWithEventHandlers = {
     ...post,
     key: post.id,
     index,
     postDetails: post.postDetails,
-    onCancelConfirmClick: () => onCancelConfirmClick({ post }),
-    onDeleteClick: () => onDeleteClick({ post }),
     onDeleteConfirmClick: () => onDeleteConfirmClick({ post }),
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
@@ -116,6 +111,8 @@ const renderPost = ({
     onDropPost,
     onSwapPosts,
     hasFirstCommentFlip,
+    serviceId,
+    userData,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -166,8 +163,6 @@ const renderPost = ({
 const renderDraft = ({
   draft,
   onApproveClick,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onMoveToDraftsClick,
@@ -183,8 +178,6 @@ const renderDraft = ({
     ...draft,
     key: draft.id,
     draftDetails: draft.draftDetails,
-    onCancelConfirmClick: () => onCancelConfirmClick({ draft }),
-    onDeleteClick: () => onDeleteClick({ draft }),
     onDeleteConfirmClick: () => onDeleteConfirmClick({ draft }),
     onEditClick: () => onEditClick({ draft }),
     onApproveClick: () => onApproveClick({ draft }),
@@ -256,7 +249,7 @@ const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
     onClick={() => onEmptySlotClick({
       dueTime: slot.label,
       profile_service: profileService,
-      scheduled_at: slot.timestamp,
+      scheduledAt: slot.timestamp,
       due_at: slot.timestamp,
     })}
   />
@@ -299,8 +292,6 @@ QueueItems.propTypes = {
       type: PropTypes.string,
     }),
   ),
-  onCancelConfirmClick: PropTypes.func,
-  onDeleteClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,

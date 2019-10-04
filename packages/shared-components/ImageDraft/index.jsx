@@ -60,8 +60,6 @@ const ImageDraft = ({
   links,
   manager,
   onApproveClick,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onMoveToDraftsClick,
@@ -88,35 +86,36 @@ const ImageDraft = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic ?
-          <Text
-            color="black"
-            size="mini"
-          >
-            {text}
-          </Text> :
-          <LinkifiedText
-            color="black"
-            links={links}
-            size="mini"
-            newTab
-            unstyled
-          >
-            {text}
-          </LinkifiedText>
+        {basic
+          ? (
+            <Text color="black" size="mini">
+              {text}
+            </Text>
+          )
+          : (
+            <LinkifiedText
+              color="black"
+              links={links}
+              size="mini"
+              newTab
+              unstyled
+            >
+              {text}
+            </LinkifiedText>
+          )
         }
       </span>
       <div style={imageWrapperStyle} onClick={onImageClick}>
         <div style={thumbnailWrapperStyle}>
           <Image
             src={imageSrc}
-            width={'auto'}
-            height={'auto'}
-            maxWidth={'9rem'}
-            maxHeight={'9rem'}
-            minHeight={'7rem'}
-            minWidth={'7rem'}
-            objectFit={'cover'}
+            width="auto"
+            height="auto"
+            maxWidth="9rem"
+            maxHeight="9rem"
+            minHeight="7rem"
+            minWidth="7rem"
+            objectFit="cover"
           />
         </div>
         <Lightbox
@@ -145,8 +144,6 @@ const ImageDraft = ({
       links={links}
       manager={manager}
       onApproveClick={onApproveClick}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
       onDeleteConfirmClick={onDeleteConfirmClick}
       onEditClick={onEditClick}
       onMoveToDraftsClick={onMoveToDraftsClick}

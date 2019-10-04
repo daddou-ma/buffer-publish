@@ -1,4 +1,4 @@
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
@@ -13,7 +13,8 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch(dataFetchActions.fetch({
         name: 'getStoryGroups',
         args: {
-          profileId: action.profile.id,
+          profileId: action.profileId || action.profile.id,
+          isFetchingMore: false,
         },
       }));
       break;
@@ -32,6 +33,26 @@ export default ({ dispatch, getState }) => next => (action) => {
       }));
       break;
     case `deleteStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      break;
+    case actionTypes.STORY_GROUP_SHARE_NOW:
+      dispatch(dataFetchActions.fetch({
+        name: 'shareStoryGroupNow',
+        args: {
+          storyGroupId: action.storyGroup.id,
+        },
+      }));
+      break;
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'success',
+        message: 'Great! You will receive a reminder to post manually! 🎉',
+      }));
+      break;
+    case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'error',
         message: action.error,

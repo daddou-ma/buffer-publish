@@ -61,25 +61,29 @@ const commentStyle = {
 const renderRetweetComment = ({
   retweetComment,
   retweetCommentLinks,
-  basic
+  basic,
 }) => (
   <div style={commentStyle}>
-    {basic ?
-      <Text
-        color="black"
-        size="mini"
-      >
-        {retweetComment}
-      </Text> :
-      <LinkifiedText
-        color="black"
-        links={retweetCommentLinks}
-        newTab
-        size="mini"
-        unstyled
-      >
-        {retweetComment}
-      </LinkifiedText>
+    {basic
+      ? (
+        <Text
+          color="black"
+          size="mini"
+        >
+          {retweetComment}
+        </Text>
+      )
+      : (
+        <LinkifiedText
+          color="black"
+          links={retweetCommentLinks}
+          newTab
+          size="mini"
+          unstyled
+        >
+          {retweetComment}
+        </LinkifiedText>
+      )
     }
   </div>
 );
@@ -98,7 +102,7 @@ const renderContent = ({
       <div style={getPostContentStyle({ draggable, dragging })}>
         { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic }) : '' }
         <Card
-          color={'off-white'}
+          color="off-white"
           reducedPadding
         >
           <div style={retweetProfileWrapperStyle}>
@@ -154,8 +158,6 @@ const Post = ({
   isConfirmingDelete,
   isDeleting,
   isWorking,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -189,8 +191,8 @@ const Post = ({
   hasFirstCommentFlip,
   features,
   basic,
-}) =>
-  (<div style={getPostContainerStyle({ dragging, hovering, isOver })}>
+}) => (
+  <div style={getPostContainerStyle({ dragging, hovering, isOver })}>
     <div style={postStyle}>
       <BDSCard
         faded={isDeleting}
@@ -199,12 +201,14 @@ const Post = ({
         dragging={dragging}
         isOver={isOver}
       >
-        {postDetails && postDetails.error && postDetails.error.length > 0 &&
-          <PostErrorBanner
-            dragging={dragging}
-            error={postDetails.error}
-            errorLink={postDetails.errorLink}
-          />
+        {postDetails && postDetails.error && postDetails.error.length > 0
+          && (
+            <PostErrorBanner
+              dragging={dragging}
+              error={postDetails.error}
+              errorLink={postDetails.errorLink}
+            />
+          )
         }
         {renderContent({
           children,
@@ -230,8 +234,6 @@ const Post = ({
           isDeleting={isDeleting}
           isConfirmingDelete={isConfirmingDelete}
           isWorking={isWorking}
-          onCancelConfirmClick={onCancelConfirmClick}
-          onDeleteClick={onDeleteClick}
           onDeleteConfirmClick={onDeleteConfirmClick}
           onEditClick={onEditClick}
           onShareNowClick={onShareNowClick}
@@ -249,27 +251,27 @@ const Post = ({
           hasCommentEnabled={hasCommentEnabled}
           hasFirstCommentFlip={hasFirstCommentFlip}
         />
-        { (isBusinessAccount || !features.isFreeUser()) &&
-          isSent &&
-          !postDetails.isRetweet &&
-          <PostStats
-            showTwitterMentions={!features.isFreeUser() && !features.isProUser()}
-            statistics={statistics}
-            profileService={profileService}
-          />
+        { (isBusinessAccount || !features.isFreeUser())
+          && isSent && !postDetails.isRetweet
+          && (
+            <PostStats
+              showTwitterMentions={!features.isFreeUser() && !features.isProUser()}
+              statistics={statistics}
+              profileService={profileService}
+            />
+          )
         }
       </BDSCard>
     </div>
-  </div>);
+  </div>
+);
 
 Post.commonPropTypes = {
   isConfirmingDelete: PropTypes.bool,
   isDeleting: PropTypes.bool,
   isWorking: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
-  onCancelConfirmClick: PropTypes.func,
   onRequeueClick: PropTypes.func,
-  onDeleteClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,

@@ -6,7 +6,7 @@ import {
 import createHistory from 'history/createHashHistory';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import { DragDropContext } from 'react-dnd';
 import TestBackend from 'react-dnd-test-backend';
 import ProfilePage from './index';
@@ -95,7 +95,7 @@ function createMockStore (profileList) {
 const storeProfiles = createMockStore(profiles);
 
 storiesOf('ProfilePage', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
       <Router history={history}>

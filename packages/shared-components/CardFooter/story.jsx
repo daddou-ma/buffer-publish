@@ -2,7 +2,8 @@ import React from 'react';
 import {
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
+import { action } from '@storybook/addon-actions';
 import { CircleInstReminderIcon } from '@bufferapp/components';
 import CardFooter from './index';
 
@@ -11,15 +12,15 @@ const postDetailsInstagramReminder = {
   isInstagramReminder: true,
 };
 
-storiesOf('CardFooter', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Basic Elements/CardFooter', module)
+  .addDecorator(withA11y)
   .add('instagram reminder story', () => (
     <CardFooter
       postDetails={postDetailsInstagramReminder}
       icon={<CircleInstReminderIcon color="instagram" />}
       message="You will receive a reminder at 9:21 (GMT) when it is time to post"
-      onDeleteClick
-      onSubmitClick
-      onEditClick
+      onDeleteClick={action('delete-click')}
+      onSubmitClick={action('submit-click')}
+      onEditClick={action('edit-click')}
     />
   ));

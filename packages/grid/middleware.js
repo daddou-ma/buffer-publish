@@ -1,4 +1,4 @@
-import { actionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
@@ -12,12 +12,14 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
   next(action);
   switch (action.type) {
     case actionTypes.SELECT_PROFILE:
-      dispatch(dataFetchActions.fetch({
-        name: 'gridPosts',
-        args: {
-          profileId: action.profile.id,
-        },
-      }));
+      if (action.profile.type && action.profile.type === 'instagram') {
+        dispatch(dataFetchActions.fetch({
+          name: 'gridPosts',
+          args: {
+            profileId: action.profile.id,
+          },
+        }));
+      }
       break;
 
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:

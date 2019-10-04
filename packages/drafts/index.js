@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getDateString, isInThePast } from '@bufferapp/publish-server/formatters/src';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
@@ -20,7 +20,7 @@ const getPostActionString = ({
     });
     return `This ${isDraftsView ? 'draft' : 'post'} ${isPastDue ? 'was' : 'will be'}
       scheduled for ${dateString}${isPastDue ? '' : ' on approval'
-    }.`;
+}.`;
   } else if (draft.sharedNext) {
     return `This ${isDraftsView ? 'draft' : 'post'} will be added to the top of the queue on approval.`;
   }
@@ -35,7 +35,7 @@ const getDraftDetails = ({
   twentyFourHourTime,
   isDraftsView,
 }) => {
-  const createdAt = draft.createdAt;
+  const { createdAt } = draft;
   const servicesWithCommentFeature = ['instagram'];
   const createdAtString = getDateString(createdAt, profileTimezone, {
     createdAt,
@@ -70,7 +70,7 @@ const getDraftDetails = ({
 // Could export this to utils and then pull it in and pass tab depending on which package uses it
 const formatPostLists = (profile, drafts, user, tabId) => {
   const profileTimezone = profile.timezone;
-  const isManager = profile.isManager;
+  const { isManager } = profile;
   const twentyFourHourTime = user.twentyfour_hour_time;
   const orderedDrafts = Object.values(drafts).sort((a, b) => a.createdAt - b.createdAt);
 
@@ -104,8 +104,7 @@ const formatPostLists = (profile, drafts, user, tabId) => {
 
 export default connect(
   (state, ownProps) => {
-    const profileId = ownProps.profileId;
-    const tabId = ownProps.tabId;
+    const { profileId, tabId } = ownProps;
     const currentProfile = state.drafts.byProfileId[profileId];
     if (currentProfile) {
       return {
@@ -171,22 +170,6 @@ export default connect(
     onEditClick: (draft) => {
       dispatch(
         actions.handleEditClick({
-          draft: draft.draft,
-          profileId: ownProps.profileId,
-        }),
-      );
-    },
-    onDeleteClick: (draft) => {
-      dispatch(
-        actions.handleDeleteClick({
-          draft: draft.draft,
-          profileId: ownProps.profileId,
-        }),
-      );
-    },
-    onCancelConfirmClick: (draft) => {
-      dispatch(
-        actions.handleCancelConfirmClick({
           draft: draft.draft,
           profileId: ownProps.profileId,
         }),

@@ -218,16 +218,7 @@ app.use('*', (req, res, next) => {
   next();
 });
 
-app.use(
-  setRequestSessionMiddleware({
-    production: isProduction,
-    sessionKeys: ['publish', 'global'],
-  }),
-);
-
 app.use(bodyParser.json());
-
-app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
 
 app.use(
   bufferMetricsMiddleware({
@@ -236,6 +227,17 @@ app.use(
     trackVisits: true,
   }),
 );
+
+app.use(
+  setRequestSessionMiddleware({
+    production: isProduction,
+    sessionKeys: ['publish', 'global'],
+  }),
+);
+
+
+app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
+
 
 /**
  * The composer expects this URL to exist and accept

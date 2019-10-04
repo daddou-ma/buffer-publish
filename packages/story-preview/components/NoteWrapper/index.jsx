@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ViewNote from '../ViewNote';
 import EditNote from '../EditNote';
+import { storyPropTypes, translationsPropTypes } from '../../utils/commonPropTypes';
 
 const SEE_NOTE = 'seeNote';
 const EDIT_NOTE = 'editNote';
 
 const WrapperStyle = styled.div`
-  height: calc( 100% - 56px);
-  width: calc( 275px - 32px);
+  flex: 1;
   padding: 32px 16px 24px;
 `;
 
@@ -20,6 +20,8 @@ const WrapperStyle = styled.div`
 const NoteWrapper = ({
   onSaveNoteClick,
   story,
+  view,
+  translations,
 }) => {
   // hooks: https://reactjs.org/docs/hooks-state.html
   const [viewMode, setViewMode] = useState(SEE_NOTE);
@@ -31,15 +33,20 @@ const NoteWrapper = ({
             <ViewNote
               onEditNoteClick={() => setViewMode(EDIT_NOTE)}
               story={story}
+              translations={translations}
             />
           )
         }
         {viewMode === EDIT_NOTE
           && (
             <EditNote
-              onSaveNoteClick={onSaveNoteClick}
+              onSaveNoteClick={({ order, note }) => {
+                onSaveNoteClick({ order, note, view });
+                setViewMode(SEE_NOTE);
+              }}
               onCancelClick={() => setViewMode(SEE_NOTE)}
               story={story}
+              translations={translations}
             />
           )
         }
@@ -50,13 +57,9 @@ const NoteWrapper = ({
 
 NoteWrapper.propTypes = {
   onSaveNoteClick: PropTypes.func.isRequired,
-  story: PropTypes.shape({
-    note: PropTypes.string,
-    type: PropTypes.oneOf(['image', 'video', 'gif']),
-    order: PropTypes.number,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-  }).isRequired,
+  story: storyPropTypes, // eslint-disable-line react/require-default-props
+  view: PropTypes.oneOf(['composer', 'queue']).isRequired,
+  translations: translationsPropTypes, // eslint-disable-line react/require-default-props
 };
 
 export default NoteWrapper;

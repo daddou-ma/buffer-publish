@@ -1,6 +1,6 @@
-import 'babel-polyfill';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import { configure } from '@storybook/react';
-
 /**
  * `__PACKAGES__` below is dynamically pulled from the environment
  * via the custom webpack config, allowing us to run storybook on
@@ -11,8 +11,10 @@ import { configure } from '@storybook/react';
  *   $ PACKAGE=shared-components yarn run storybook
  *
  */
+
 function loadStories() {
-  const req = require.context(__PACKAGES__, true, /story\.jsx$/);
-  req.keys().forEach(filename => req(filename));
+	// Add all story.jsx files inside components directories except for the ones in node_modules
+	const req = require.context(__PACKAGES__, true, /^((?![\\/]node_modules[\\/]).)*components\/.*\/*story\.jsx$/);
+	req.keys().forEach(filename => req(filename));
 }
 configure(loadStories, module);

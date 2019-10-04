@@ -143,6 +143,15 @@ export const getSlotsWithTimestampsForDay = ({
   }).filter(slot => slot); // gets rid of `null` slots (i.e., in the past)
 };
 
+const getFutureTime = (timezone) => {
+  const todayDate = (new Date()).setSeconds(0); // Seconds must be 0 for precise scheduling
+  const isTimezoneSet = !!timezone;
+  const today = isTimezoneSet ? moment.tz(todayDate, timezone) : moment(todayDate);
+  today.add(1, 'hours');
+
+  return today.format('HH:mm');
+};
+
 /**
  * Returns slots with timestamps and labels for the given day
  * This method doesn't take into account times, only days of the week
@@ -161,12 +170,22 @@ export const getSlotsWithTimestampsAndNoTimeForDay = ({
   }
 
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+  const slot = '10:00';
   const dayMoment = moment.tz(new Date(dayUnixTime * 1000), profileTimezone);
+  const slotMoment = dayMoment.clone();
+  const [hour, minute] = slot.split(':');
+  slotMoment.set({ hour: parseInt(hour, 10), minute: parseInt(minute, 10) });
+
+  if (slotMoment.isBefore(now)) {
+    const anHourFromNow = getFutureTime(profileTimezone);
+    const [hourNow, minuteNow] = anHourFromNow.split(':');
+    slotMoment.set({ hour: parseInt(hourNow, 10), minute: parseInt(minuteNow, 10) });
+  }
 
   return [{
     name: days[dayIndex],
-    label: dayMoment.format(hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'),
-    timestamp: dayMoment.unix(),
+    label: slotMoment.format(hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'),
+    timestamp: slotMoment.unix(),
     dayText,
   }];
 };
@@ -273,6 +292,7 @@ export const getItemsForDay = ({
   posts,
   isManager,
   profileService,
+  orderBy,
 }) => {
   const slotsItems = daySlots.map((daySlot) => {
     const item = getSlotItem({ slot: daySlot, profileService });
@@ -288,8 +308,8 @@ export const getItemsForDay = ({
    */
   const items = postsItems
     .sort((a, b) => {
-      const aField = a.slot ? a.slot.timestamp : a.due_at;
-      const bField = b.slot ? b.slot.timestamp : b.due_at;
+      const aField = a.slot ? a.slot.timestamp : a[orderBy];
+      const bField = b.slot ? b.slot.timestamp : b[orderBy];
       return aField - bField;
     })
     .concat(slotsItems);
@@ -343,8 +363,9 @@ export const formatPostLists = ({
   hasTwentyFourHourTimeFormat,
   profileService,
   isSingleSlot,
+  orderBy = 'due_at',
 }) => {
-  const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
+  const orderedPosts = Object.values(posts).sort((a, b) => a[orderBy] - b[orderBy]);
 
   /**
    * CASE 1: Schedule Slots Enabled
@@ -399,6 +420,7 @@ export const formatPostLists = ({
             posts: postsForDay,
             isManager,
             profileService,
+            orderBy,
           });
         } else {
           daySlots = getSlotsWithTimestampsForDay({

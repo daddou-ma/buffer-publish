@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '@bufferapp/ui';
 import NoteSection from '../NoteSection';
+import { translationsPropTypes } from '../../utils/commonPropTypes';
 
 const FooterBar = styled.div`
   padding: 13px 0px 0px;
@@ -19,8 +20,6 @@ const ButtonStyle = styled.div`
 `;
 
 const StyledImage = styled.img`
-  width: 180px;
-  height: 320px;
   object-fit: cover;
 `;
 
@@ -28,7 +27,6 @@ const AddNote = ({
   onSaveNoteClick,
   onCancelClick,
   translations,
-  // dummy data until we get uploading/adding story done
   story,
 }) => {
   const [note, setNote] = useState(story ? story.note : null);
@@ -44,10 +42,12 @@ const AddNote = ({
           <StyledImage
             src={story.thumbnail_url}
             alt={translations.noteImageAlt}
+            height="320px"
+            width="180px"
           />
         </div>
         <NoteSection
-          note={story.note}
+          note={note}
           setNote={setNoteValue}
           translations={translations}
         />
@@ -79,11 +79,7 @@ AddNote.propTypes = {
     order: PropTypes.number,
     type: PropTypes.oneOf(['image', 'video', 'gif']),
   }).isRequired,
-  translations: PropTypes.shape({
-    saveNoteButton: PropTypes.string,
-    cancelNoteButton: PropTypes.string,
-    noteImageAlt: PropTypes.string,
-  }).isRequired,
+  translations: translationsPropTypes, // eslint-disable-line react/require-default-props,,
 };
 
 export default AddNote;

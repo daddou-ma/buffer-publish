@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Popover } from '@bufferapp/components';
+import PreviewPopover from '@bufferapp/publish-story-preview';
 import StoryGroupWrapper from '../StoryGroupWrapper';
-import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
-import HeaderBar from '../HeaderBar';
 
 const StoryGroupPopover = ({
   onOverlayClick,
@@ -14,50 +13,88 @@ const StoryGroupPopover = ({
   selectedProfile,
   isScheduleLoading,
   saveNote,
-  editingStoryGroup,
   onCreateStoryGroup,
   onUpdateStoryGroup,
   onDeleteStoryGroup,
-  onComposerClick,
-  onSetShowDatePicker,
-  showDatePicker,
+  onDeleteStory,
+  onCreateNewStoryCard,
+  onUpdateStoryUploadProgress,
+  onVideoUploadProcessingStarted,
+  onVideoUploadProcessingComplete,
+  onMonitorUpdateProgress,
+  onUploadImageComplete,
+  onUploadDraftFile,
+  onRemoveNotifications,
+  onShowErrorNotification,
   userData,
-  draft,
+  storyGroup,
+  editMode,
+  onUploadFinished,
+  showStoryPreview,
+  onClosePreviewClick,
+  onPreviewClick,
+  onDropCard,
+  errorMessages,
+  emptySlotData,
+  maxStories,
 }) => (
-  <Popover
-    width="100%"
-    top="5rem"
-    onOverlayClick={onOverlayClick}
-  >
-    <StoryGroupWrapper
-      uses24hTime={uses24hTime}
-      timezone={timezone}
-      weekStartsMonday={weekStartsMonday}
-      selectedProfile={selectedProfile}
-      saveNote={saveNote}
-      editingStoryGroup={editingStoryGroup}
-      translations={translations}
-      isScheduleLoading={isScheduleLoading}
-      onCreateStoryGroup={onCreateStoryGroup}
-      onUpdateStoryGroup={onUpdateStoryGroup}
-      onDeleteStoryGroup={onDeleteStoryGroup}
-      onComposerClick={onComposerClick}
-      onSetShowDatePicker={onSetShowDatePicker}
-      showDatePicker={showDatePicker}
-      userData={userData}
-      draft={draft}
-    />
-  </Popover>
+  <React.Fragment>
+    {showStoryPreview && (
+      <PreviewPopover
+        onCloseClick={onClosePreviewClick}
+        view="composer"
+      />
+    )}
+    {!showStoryPreview && (
+      <Popover
+        width="100%"
+        top="5rem"
+        onOverlayClick={onOverlayClick}
+      >
+        <StoryGroupWrapper
+          maxStories={maxStories}
+          uses24hTime={uses24hTime}
+          timezone={timezone}
+          weekStartsMonday={weekStartsMonday}
+          selectedProfile={selectedProfile}
+          saveNote={saveNote}
+          translations={translations}
+          isScheduleLoading={isScheduleLoading}
+          onCreateStoryGroup={onCreateStoryGroup}
+          onUpdateStoryGroup={onUpdateStoryGroup}
+          onDeleteStoryGroup={onDeleteStoryGroup}
+          onDeleteStory={onDeleteStory}
+          onCreateNewStoryCard={onCreateNewStoryCard}
+          onUploadFinished={onUploadFinished}
+          onUpdateStoryUploadProgress={onUpdateStoryUploadProgress}
+          onVideoUploadProcessingStarted={onVideoUploadProcessingStarted}
+          onVideoUploadProcessingComplete={onVideoUploadProcessingComplete}
+          onMonitorUpdateProgress={onMonitorUpdateProgress}
+          onUploadImageComplete={onUploadImageComplete}
+          onUploadDraftFile={onUploadDraftFile}
+          onRemoveNotifications={onRemoveNotifications}
+          onShowErrorNotification={onShowErrorNotification}
+          onPreviewClick={onPreviewClick}
+          onDropCard={onDropCard}
+          userData={userData}
+          storyGroup={storyGroup}
+          editMode={editMode}
+          errorMessages={errorMessages}
+          emptySlotData={emptySlotData}
+        />
+      </Popover>
+    )}
+  </React.Fragment>
 );
 
 StoryGroupPopover.propTypes = {
   onOverlayClick: PropTypes.func.isRequired,
-  saveNote: PropTypes.func.isRequired,
-  isScheduleLoading: PropTypes.bool.isRequired,
-  userData: PropTypes.shape({}).isRequired,
-  ...DateTimeSlotPickerWrapper.propTypes,
-  ...HeaderBar.propTypes,
-  ...DateTimeSlotPickerWrapper.propTypes,
+  showStoryPreview: PropTypes.bool,
+  ...StoryGroupWrapper.propTypes,
+};
+
+StoryGroupPopover.defaultProps = {
+  showStoryPreview: false,
 };
 
 export default StoryGroupPopover;

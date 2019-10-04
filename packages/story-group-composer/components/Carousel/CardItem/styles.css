@@ -1,0 +1,17 @@
+:root {
+    --blueLighter: #6B81FF;
+    --borderRadius: 4px;
+}
+
+.uploadZone {}
+.uploadZoneActive {
+    box-sizing: border-box;
+    border-radius: var(--borderRadius);
+    border: 1px solid var(--blueLighter) !important;
+}
+.uploadZoneDisabled {
+    border: none !important;
+}
+.container {
+    background-image: radial-gradient(white 0%, white 70%, transparent 70%);
+}

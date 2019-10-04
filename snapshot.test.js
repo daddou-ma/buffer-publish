@@ -1,19 +1,10 @@
-// use story.js files as snapshots
-import initStoryshots, { snapshotWithOptions } from '@storybook/addon-storyshots';
-import { Elements, StripeProvider } from 'react-stripe-elements';
+const babelConfig = require('./babel.config.js');
+require('@babel/register')(babelConfig);
+require('core-js/stable');
+require('regenerator-runtime/runtime');
+const initStoryshots = require('@storybook/addon-storyshots').default;
 
 initStoryshots({
   suit: 'Snapshots',
   configPath: '.storybookStoryshot/',
-  test: snapshotWithOptions(story => ({
-    createNodeMock: (element) => {
-      if (element.type === Elements) {
-        return null;
-      }
-      if (element.type === StripeProvider) {
-        return null;
-      }
-      return element;
-    },
-  })),
 });

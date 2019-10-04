@@ -2,7 +2,7 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
-import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
 import { getPageNameFromPath, getChannelIfNeeded } from '@bufferapp/publish-analytics-middleware/utils/Pathname';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes } from './reducer';
@@ -65,9 +65,11 @@ export default ({ dispatch, getState }) => next => (action) => {
             const {
               productFeatures: { planName },
             } = getState();
-            window.FS.identify(id, {
-              pricingPlan_str: planName,
-            });
+            if (planName !== 'free') {
+              window.FS.identify(id, {
+                pricingPlan_str: planName,
+              });
+            }
           }
         }
       }

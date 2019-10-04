@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import MultipleImagesPost from './index';
 import { Provider } from 'react-redux';
 
@@ -55,8 +55,8 @@ const imageUrls = [
   'http://via.placeholder.com/400x400',
 ];
 
-storiesOf('MultipleImagesPost', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Posts/MultipleImagesPost', module)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
       {getStory()}
@@ -67,8 +67,6 @@ storiesOf('MultipleImagesPost', module)
       postDetails={postDetails}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -86,8 +84,6 @@ storiesOf('MultipleImagesPost', module)
       postDetails={postDetails}
       links={multilineLinks}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -105,8 +101,6 @@ storiesOf('MultipleImagesPost', module)
       postDetails={postDetailsSent}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -124,8 +118,6 @@ storiesOf('MultipleImagesPost', module)
       postDetails={postDetailsError}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}

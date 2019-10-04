@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Composer from './App';
-import useCases from '../.storybook/mock-initial-props';
+import useCases from '../mockData/mock-initial-props';
 
 const stories = {
   create: 'Dashboard (create new)',

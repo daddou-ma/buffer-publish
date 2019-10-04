@@ -1,12 +1,12 @@
 import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
-import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
 import { getProfilePageParams } from '@bufferapp/publish-routes';
 
 import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { actions as notificationActions } from '@bufferapp/notifications';
+import { actions as notificationActions } from '@bufferapp/notifications/lib/reducer';
 import { actionTypes } from './reducer';
 
 const getTrackingData = ({ post = {}, channel = {} }) => ({

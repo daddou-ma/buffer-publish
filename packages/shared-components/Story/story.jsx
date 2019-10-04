@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  action,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import Story from './index';
 
 const storyDetails = {
@@ -13,8 +13,13 @@ const storyDetails = {
   storyAction: 'You will receive a reminder today at 2:55 PM (BST) when it is time to post',
 };
 
-storiesOf('Story', module)
-  .addDecorator(checkA11y)
+const storyDetailsWithError = {
+  ...storyDetails,
+  error: 'There was an error sharing this story. Please try again!',
+};
+
+storiesOf('Cards|Stories/Story', module)
+  .addDecorator(withA11y)
   .add('default', () => (
     <Story
       storyDetails={storyDetails}
@@ -22,5 +27,26 @@ storiesOf('Story', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-click')}
       onPreviewClick={action('preview-click')}
+      userData={{ tags: ['has_instagram_stories_mobile'] }}
+    />
+  ))
+  .add('story with banner message to download mobile app', () => (
+    <Story
+      storyDetails={storyDetails}
+      onDeleteConfirmClick={action('delete-click')}
+      onEditClick={action('edit-click')}
+      onShareNowClick={action('share-click')}
+      onPreviewClick={action('preview-click')}
+      userData={{ tags: [] }}
+    />
+  ))
+  .add('story with banner error message', () => (
+    <Story
+      storyDetails={storyDetailsWithError}
+      onDeleteConfirmClick={action('delete-click')}
+      onEditClick={action('edit-click')}
+      onShareNowClick={action('share-click')}
+      onPreviewClick={action('preview-click')}
+      userData={{ tags: [] }}
     />
   ));

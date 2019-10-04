@@ -6,7 +6,7 @@ import {
 import {
   actionTypes as thirdPartyActionTypes,
 } from '@bufferapp/publish-thirdparty';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 
 import middleware from './middleware';
 import {
@@ -108,11 +108,20 @@ describe('middleware', () => {
   it('should show profiles disconnected modal when one or more is disconnected', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
+    const getState = () => ({
+      appSidebar: {
+        user: {
+          isBusinessTeamMember: 'id1',
+          plan: 'free',
+          messages: [],
+        },
+      },
+    });
     const action = {
       type: `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`,
       result: [{ isDisconnected: false }, { isDisconnected: false }, { isDisconnected: true }],
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)

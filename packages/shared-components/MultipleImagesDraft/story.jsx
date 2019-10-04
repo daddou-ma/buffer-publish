@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import MultipleImagesDraft from './index';
 
 const links = [{
@@ -32,16 +32,14 @@ const imageUrls = [
   'http://via.placeholder.com/400x400',
 ];
 
-storiesOf('MultipleImagesDraft', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Drafts/MultipleImagesDraft', module)
+  .addDecorator(withA11y)
   .add('queued multiple image post', () => (
     <MultipleImagesDraft
       hasPermission
       draftDetails={draftDetails}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -52,7 +50,7 @@ storiesOf('MultipleImagesDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       currentImage={0}
-      view={'drafts'}
+      view="drafts"
     />
   ))
   .add('sent multiple image post', () => (
@@ -62,8 +60,6 @@ storiesOf('MultipleImagesDraft', module)
       draftDetails={draftDetails}
       links={links}
       imageUrls={imageUrls}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -74,6 +70,6 @@ storiesOf('MultipleImagesDraft', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       currentImage={0}
-      view={'approval'}
+      view="approval"
     />
   ));

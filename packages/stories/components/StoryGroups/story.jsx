@@ -2,7 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
+import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import StoryGroups from './index';
 import storyGroups from './storiesData';
@@ -45,8 +46,9 @@ const UpgradeModalDecorator = storyFn => (
   </Provider>
 );
 
+
 storiesOf('StoryGroups', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
   .add('should show stories storyPosts', () => (
     <StoryGroups
@@ -59,11 +61,11 @@ storiesOf('StoryGroups', module)
       showStoriesComposer={action('showStoriesComposer')}
       onEmptySlotClick={action('onEmptySlotClick')}
       onEditClick={action('onEditClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onComposerPlaceholderClick={action('onComposerPlaceholderClick')}
       onShareNowClick={action('onShareNowClick')}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
       onCalendarClick={action('onCalendarClick')}
+      translations={translations['story-group-queue']}
+      userData={{ tags: ['has_instagram_stories_mobile'] }}
     />
   ));

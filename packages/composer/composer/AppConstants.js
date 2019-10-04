@@ -439,6 +439,7 @@ const FileUploadFormatsConfigs = (() => {
     ['VIDEO', ['MOV', 'MP4', 'M4V', 'AVI']],
     ['GIF', ['GIF']],
     ['MEDIA', ['JPG', 'JPEG', 'GIF', 'PNG', 'MOV', 'MP4', 'M4V', 'AVI']],
+    ['STORIES', ['JPG', 'JPEG', 'PNG', 'MOV', 'MP4', 'M4V', 'AVI']],
   ]);
 
   const FileUploadFormatsConfigsMap = {};
