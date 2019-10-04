@@ -25,7 +25,7 @@ export default connect(
         },
       }));
       window.location.assign(`${getURL.getStartTrialURL({
-        plan: 'premium_business_',
+        plan: 'premium_business',
         cycle: 'month',
         cta: SEGMENT_NAMES.STORIES_PROMO_MODAL,
         nextUrl: 'https://publish.buffer.com',
