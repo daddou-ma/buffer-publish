@@ -25,8 +25,11 @@ export default connect(
     onPremiumPlanClick: ({ selectedPlan }) => {
       dispatch(actions.setSelectedPlan({ selectedPlan }));
     },
-    onChoosePlanClick: ({ source, plan }) => {
+    onChoosePlanClick: ({ source, plan, soloPlanSelected }) => {
       const ctaProperties = getCtaProperties(SEGMENT_NAMES.PLANS_OPEN_MODAL);
+      if (plan === 'premium_business' && soloPlanSelected) {
+        plan = 'solo_premium_business';
+      }
       const metadata = {
         product: 'publish',
         planName: plan,

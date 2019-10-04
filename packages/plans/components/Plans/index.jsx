@@ -90,8 +90,11 @@ const Plans = ({
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
             currentPlan={currentPlan}
             onChoosePlanClick={onChoosePlanClick}
-            source={getSource({ newPlan: 'premium_business', currentPlan })}
+            source={getSource({ newPlan: selectedPremiumPlan === 1 ? 'solo_premium_business' : 'premium_business', currentPlan })}
             isNonprofit={isNonprofit}
+            onPremiumPlanClick={onPremiumPlanClick}
+            selectedPremiumPlan={selectedPremiumPlan}
+
           />
         </ColumnContainerStyle>
       )}

@@ -64,6 +64,48 @@ const UserIcon = ({ Icon, text }) => (
   </UsersStyle>
 );
 
+const RightPlanButton = ({
+  isNonprofit, nonProfitCost, cost, billingText}) => (
+    <RightPlanItem>
+      <UserIcon Icon={<People />} text="2 users" />
+      <PriceStyle>
+        <Text type="h1">
+          { isNonprofit ? nonProfitCost : cost }
+              /mo
+        </Text>
+      </PriceStyle>
+      <BillingTextStyle>
+        <Text>{ billingText }</Text>
+      </BillingTextStyle>
+    </RightPlanItem>
+);
+
+const RightButton = styled(Button)`
+  height: unset;
+  background-color: #2c4bff24
+`;
+
+const LeftPlanButton = ({
+  isNonprofit, nonProfitCost, cost, billingText}) => (
+    <LeftPlanItem>
+      <UserIcon Icon={<People />} text="1 user" />
+      <PriceStyle>
+        <Text type="h1">
+          { isNonprofit ? nonProfitCost : cost }
+              /mo
+        </Text>
+      </PriceStyle>
+      <BillingTextStyle>
+        <Text>{ billingText }</Text>
+      </BillingTextStyle>
+    </LeftPlanItem>
+);
+
+const LeftButton = styled(Button)`
+  height: unset;
+  background-color: #2c4bff24
+`;
+
 const PlanColumnExperimentEnabled = ({
   title,
   cost,
@@ -81,6 +123,8 @@ const PlanColumnExperimentEnabled = ({
   buttonText,
   buttonCurrentPlanText,
   billingText,
+  onPremiumPlanClick,
+  selectedPremiumPlan,
 }) => (
   <ColumnStyle>
     <TopContentStyle>
@@ -94,7 +138,7 @@ const PlanColumnExperimentEnabled = ({
       </ImageWrapperStyle>
       {plan !== 'premium_business' && (
         <div>
-          <UserIcon Icon={plan === 'premium_business' ? <People /> : <Person />} text={plan === 'premium_business' ? '2 users' : '1 user'} />
+          <UserIcon Icon={<Person />} text="1 user" />
           <PriceStyle>
             <Text type="h1">
               { isNonprofit ? nonProfitCost : cost }
@@ -108,30 +152,20 @@ const PlanColumnExperimentEnabled = ({
       )}
       {plan === 'premium_business' && (
       <PlanStyle>
-        <LeftPlanItem>
-          <UserIcon Icon={<Person />} text="1 user" />
-          <PriceStyle>
-            <Text type="h1">
-              { isNonprofit ? soloNonProfitCost : soloCost }
-              /mo
-            </Text>
-          </PriceStyle>
-          <BillingTextStyle>
-            <Text>{ billingText }</Text>
-          </BillingTextStyle>
-        </LeftPlanItem>
-        <RightPlanItem>
-          <UserIcon Icon={<People />} text="2 users" />
-          <PriceStyle>
-            <Text type="h1">
-              { isNonprofit ? nonProfitCost : cost }
-              /mo
-            </Text>
-          </PriceStyle>
-          <BillingTextStyle>
-            <Text>{ billingText }</Text>
-          </BillingTextStyle>
-        </RightPlanItem>
+        <LeftButton
+          type={selectedPremiumPlan === 1 ? 'primary' : 'secondary'}
+          onClick={() => onPremiumPlanClick({ selectedPlan: 1 })}
+          hasIconOnly
+          size="large"
+          icon={<LeftPlanButton isNonprofit={isNonprofit} nonProfitCost={soloNonProfitCost} cost={soloCost} billingText={billingText} />}
+        />
+        <RightButton
+          type={selectedPremiumPlan === 1 ? 'secondary' : 'primary'}
+          onClick={() => onPremiumPlanClick({ selectedPlan: 2 })}
+          hasIconOnly
+          size="large"
+          icon={<RightPlanButton isNonprofit={isNonprofit} nonProfitCost={nonProfitCost} cost={cost} billingText={billingText} />}
+        />
       </PlanStyle>
       )}
     </TopContentStyle>
@@ -147,7 +181,7 @@ const PlanColumnExperimentEnabled = ({
           label={currentPlan === plan ? buttonCurrentPlanText : buttonText}
           fullWidth
           disabled={currentPlan === plan}
-          onClick={() => onChoosePlanClick({ source, plan })}
+          onClick={() => onChoosePlanClick({ source, plan, soloPlanSelected: selectedPremiumPlan === 1 })}
         />
       </ButtonWrapperStyle>
     </FooterStyle>
