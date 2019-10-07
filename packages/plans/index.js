@@ -19,6 +19,7 @@ export default connect(
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
     isExperimentControl: state.appSidebar.user.hasPaydayExperimentControlFlip,
+    isExperimentEnabled: state.appSidebar.user.hasPaydayExperimentEnabledFlip,
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
   }),
   dispatch => ({

@@ -11,47 +11,15 @@ import {
   ImageWrapperStyle,
   FooterStyle,
   ButtonWrapperStyle,
+  UsersStyle,
+  IconStyle,
+  PriceStyle,
+  BillingTextStyle,
+  FeatureListStyle,
+  PlanStyle,
+  RightPlanItem,
+  LeftPlanItem,
 } from './style';
-
-const UsersStyle = styled.span`
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  color: blue;
-`;
-
-const IconStyle = styled.span`
-  display: flex;
-  padding-right: 4px;
-`;
-
-const PriceStyle = styled.span`
-  h1 {
-    margin-bottom: 5px;
-  }
-`;
-
-const BillingTextStyle = styled.span`
-  font-size: 14px;
-  color: gray;
-`;
-
-const FeatureListStyle = styled.span`
-  margin-top: 35px;
-`;
-
-const PlanStyle = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const RightPlanItem = styled.div`
-  margin-left: 5px;
-`;
-
-const LeftPlanItem = styled.div`
-  margin-right: 5px;
-`;
 
 const UserIcon = ({ Icon, text }) => (
   <UsersStyle>

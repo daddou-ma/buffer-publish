@@ -11,34 +11,13 @@ import {
   ImageWrapperStyle,
   FooterStyle,
   ButtonWrapperStyle,
+  UsersStyle,
+  IconStyle,
+  PriceStyle,
+  BillingTextStyle,
+  FeatureListStyle,
 } from './style';
 
-const UsersStyle = styled.span`
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  color: blue;
-`;
-
-const IconStyle = styled.span`
-  display: flex;
-  padding-right: 4px;
-`;
-
-const PriceStyle = styled.span`
-  h1 {
-    margin-bottom: 5px;
-  }
-`;
-
-const BillingTextStyle = styled.span`
-  font-size: 14px;
-  color: gray;
-`;
-
-const FeatureListStyle = styled.span`
-  margin-top: 35px;
-`;
 const UserIcon = ({ Icon, text }) => (
   <UsersStyle>
     <IconStyle>

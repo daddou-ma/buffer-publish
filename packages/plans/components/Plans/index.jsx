@@ -36,6 +36,7 @@ const Plans = ({
   translations,
   isNonprofit,
   isExperimentControl,
+  isExperimentEnabled,
   onPremiumPlanClick,
   selectedPremiumPlan,
 }) => (
@@ -55,7 +56,7 @@ const Plans = ({
     </ButtonStyle>
     <div style={{ textAlign: 'center' }}>
       <HeaderStyle type="h1">{ translations.headerText }</HeaderStyle>
-      {!isExperimentControl && (
+      {!isExperimentControl && !isExperimentEnabled && (
         <ColumnContainerStyle>
           <PlanColumn
             {...translations.pro}
@@ -73,9 +74,17 @@ const Plans = ({
             source={getSource({ newPlan: 'premium_business', currentPlan })}
             isNonprofit={isNonprofit}
           />
+          <PlanColumn
+            {...translations.small}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-business@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'small', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
         </ColumnContainerStyle>
       )}
-      {isExperimentControl && (
+      {isExperimentEnabled && (
         <ColumnContainerStyle>
           <PlanColumnExperimentEnabled
             {...translations.pro}
@@ -98,6 +107,26 @@ const Plans = ({
           />
         </ColumnContainerStyle>
       )}
+      {isExperimentControl && (
+        <ColumnContainerStyle>
+          <PlanColumnExperimentControl
+            {...translations.pro}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'pro', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+          <PlanColumnExperimentControl
+            {...translations.premium}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'premium_business', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+        </ColumnContainerStyle>
+      )}
     </div>
   </ContainerStyle>
 );
@@ -110,7 +139,6 @@ Plans.propTypes = {
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
   translations: PropTypes.object.isRequired,  // eslint-disable-line
   isNonprofit: PropTypes.bool.isRequired,
-  isExperimentControl: PropTypes.bool.isRequired,
 };
 
 export default Plans;

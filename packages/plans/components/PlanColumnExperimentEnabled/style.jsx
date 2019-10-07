@@ -42,3 +42,43 @@ export const ImageWrapperStyle = styled.div`
 export const TopContentStyle = styled.div`
   text-align: center;
 `;
+
+export const UsersStyle = styled.span`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: blue;
+`;
+
+export const IconStyle = styled.span`
+  display: flex;
+  padding-right: 4px;
+`;
+
+export const PriceStyle = styled.span`
+  h1 {
+    margin-bottom: 5px;
+  }
+`;
+
+export const BillingTextStyle = styled.span`
+  font-size: 14px;
+  color: gray;
+`;
+
+export const FeatureListStyle = styled.span`
+  margin-top: 35px;
+`;
+
+export const PlanStyle = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const RightPlanItem = styled.div`
+  margin-left: 5px;
+`;
+
+export const LeftPlanItem = styled.div`
+  margin-right: 5px;
+`;
