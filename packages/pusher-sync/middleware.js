@@ -96,6 +96,27 @@ const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
       storyGroup: storyGroupParser(data.story_group),
     });
   });
+  channel.bind('story_group_created', (data) => {
+    dispatch({
+      type: storiesActionTypes.STORY_CREATED,
+      profileId,
+      storyGroup: storyGroupParser(data.story_group),
+    });
+  });
+  channel.bind('story_group_updated', (data) => {
+    dispatch({
+      type: storiesActionTypes.STORY_UPDATED,
+      profileId,
+      storyGroup: storyGroupParser(data.story_group),
+    });
+  });
+  channel.bind('story_group_deleted', (data) => {
+    dispatch({
+      type: storiesActionTypes.STORY_DELETED,
+      profileId,
+      storyGroupId: data.story_group_id,
+    });
+  });
 };
 
 export default ({ dispatch }) => {

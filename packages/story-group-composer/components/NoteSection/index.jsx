@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Text, TextArea } from '@bufferapp/ui';
 import { gray } from '@bufferapp/ui/style/colors';
 import { fontSize } from '@bufferapp/ui/style/fonts';
+import { translationsPropTypes } from '../../utils/commonPropTypes';
 
 const NoteWrapper = styled.div`
   display: flex;
@@ -43,10 +44,7 @@ const NoteSection = ({ note, setNote, translations }) => (
 NoteSection.propTypes = {
   note: PropTypes.string,
   setNote: PropTypes.func.isRequired,
-  translations: PropTypes.shape({
-    notePlaceholder: PropTypes.string,
-    noteSubText: PropTypes.string,
-  }).isRequired,
+  translations: translationsPropTypes, // eslint-disable-line react/require-default-props,,
 };
 
 NoteSection.defaultProps = {

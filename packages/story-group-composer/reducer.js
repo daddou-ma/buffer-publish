@@ -1,6 +1,7 @@
 import clonedeep from 'lodash.clonedeep';
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import debounce from 'lodash.debounce';
 
 export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_GROUP: 0,
@@ -11,6 +12,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   RESET_STORY_GROUP_STATE: 0,
   CREATE_NEW_STORY_CARD: 0,
   UPDATE_STORY_UPLOAD_PROGRESS: 0,
+  UPDATE_STORY_PROGRESS: 0,
   UPDATE_STORY_VIDEO_PROCESSING_STARTED: 0,
   UPDATE_STORY_VIDEO_PROCESSING_COMPLETE: 0,
   UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: 0,
@@ -21,6 +23,8 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SET_STORY_GROUP: 0,
   SHOW_ERRORS: 0,
   HIDE_ERRORS: 0,
+  TRACK_DRAG_AND_DROP_STORY: 0,
+  TRACK_NOTE: 0,
 });
 
 const newStory = () => clonedeep({
@@ -45,6 +49,7 @@ export const initialState = {
     scheduledAt: null,
     stories: [],
   },
+  inProgress: [],
   isScheduleLoading: false,
   showStoryPreview: false,
   errors: [],
@@ -133,6 +138,7 @@ export default (state, action) => {
           stories: action.stories,
           scheduledAt: action.scheduledAt,
           storyGroupId: action.storyGroupId,
+          isPastDue: action.isPastDue,
         },
       };
     }
@@ -158,26 +164,41 @@ export default (state, action) => {
         isScheduleLoading: action.isLoading,
       };
     }
-    case actionTypes.UPDATE_STORY_UPLOAD_PROGRESS: {
-      const {
-        id,
-        progress,
-      } = action.args;
+    case actionTypes.UPDATE_STORY_PROGRESS: {
+      const { inProgress } = state;
       const { stories } = state.storyGroup;
       return {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: stories.map((story) => {
-            if (story.uploadTrackingId === id) {
-              return {
-                ...story,
-                progress,
-              };
-            }
+          stories: clonedeep(stories).map((story) => {
+            inProgress
+              .filter(currentStory => story.uploadTrackingId === currentStory.id)
+              .forEach(({ progress }) => {
+                if (progress > story.progress) {
+                  story.progress = progress;
+                }
+              });
             return story;
           }),
         },
+        progress: [],
+      };
+    }
+    case actionTypes.UPDATE_STORY_UPLOAD_PROGRESS: {
+      const {
+        id,
+        progress,
+      } = action.args;
+      return {
+        ...state,
+        inProgress: [
+          ...state.inProgress,
+          {
+            id,
+            progress,
+          }
+        ],
       };
     }
     case actionTypes.UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: {
@@ -353,12 +374,16 @@ export const actions = {
   handleClosePreviewClick: () => ({
     type: actionTypes.CLOSE_PREVIEW,
   }),
-  setStoryGroup: ({ scheduledAt, stories, storyGroupId }) => ({
+  setStoryGroup: ({ scheduledAt, stories, storyGroupId, isPastDue }) => ({
     type: actionTypes.SET_STORY_GROUP,
     scheduledAt,
     stories,
     storyGroupId,
+    isPastDue,
   }),
+  updateStoryPogress: debounce(dispatch => dispatch({
+    type: actionTypes.UPDATE_STORY_PROGRESS,
+  }), 270, { leading: false, trailing: true }),
   updateStoryUploadProgress: ({
     id, uploaderInstance, progress, file, complete,
   }) => ({
@@ -406,6 +431,7 @@ export const actions = {
       file,
       stillGifUrl,
       contentType,
+
     },
   }),
   videoUploadProcessingStarted: ({
@@ -465,5 +491,15 @@ export const actions = {
   }),
   hideError: () => ({
     type: actionTypes.HIDE_ERRORS,
+  }),
+  trackDroppedCard: cardSource => ({
+    type: actionTypes.TRACK_DRAG_AND_DROP_STORY,
+    isDragging: cardSource.isDragging,
+  }),
+  trackNote: ({ cta, note, order }) => ({
+    type: actionTypes.TRACK_NOTE,
+    cta,
+    note,
+    order,
   }),
 };

@@ -80,6 +80,7 @@ const StoryGroups = ({
   onClosePreviewClick,
   showStoryPreview,
   userData,
+  serviceId,
   translations,
 }) => {
   const hasStoriesMobileVersion = (
@@ -147,6 +148,7 @@ const StoryGroups = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
           isBusinessAccount={isBusinessAccount}
           onPreviewClick={onPreviewClick}
+          serviceId={serviceId}
           userData={userData}
         />
       </ContainerStyle>
@@ -174,19 +176,17 @@ StoryGroups.propTypes = {
   onPreviewClick: PropTypes.func,
   onClosePreviewClick: PropTypes.func,
   showStoryPreview: PropTypes.bool,
+  serviceId: PropTypes.string.isRequired,
   userData: PropTypes.shape({
     id: PropTypes.string,
     email: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.strings),
-  }),
-  translations: PropTypes.shape({
-    mobileTagText: PropTypes.string,
-    reminderText: PropTypes.string,
-    composerInputText: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
   }),
   translations: PropTypes.shape({
     inputPlaceholder: PropTypes.string.isRequired,
-    reminderText: PropTypes.string.isRequired,
+    mobileTagText: PropTypes.string,
+    reminderText: PropTypes.string,
+    composerInputText: PropTypes.string,
   }).isRequired,
 };
 
@@ -207,7 +207,6 @@ StoryGroups.defaultProps = {
   onPreviewClick: () => {},
   onClosePreviewClick: () => {},
   userData: {},
-  translations: {},
 };
 
 export default WithFeatureLoader(StoryGroups);

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { actions as storyGroupActions } from '@bufferapp/publish-story-group-composer';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { actions } from './reducer';
 import PreviewPopover from './components/PreviewPopover';
 
@@ -15,9 +16,12 @@ export default connect(
   dispatch => ({
     onSaveNoteClick: ({ order, note, view }) => {
       if (view === 'queue') {
+        dispatch(actions.trackNote({ order, note }));
         dispatch(actions.handleSaveNoteClick({ order, note }));
       }
       if (view === 'composer') {
+        const cta = SEGMENT_NAMES.STORIES_PREVIEW_COMPOSER_ADD_NOTE;
+        dispatch(storyGroupActions.trackNote({ cta, order, note }));
         dispatch(storyGroupActions.handleSaveStoryNote({ order, note }));
         dispatch(actions.handleSaveNoteComposer({ order, note }));
       }

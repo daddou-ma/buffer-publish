@@ -8,6 +8,10 @@ const cardSource = {
   canDrag(props) {
     return props.index < props.totalCards;
   },
+  endDrag(props, monitor) {
+    const { onDropCard } = props;
+    onDropCard(monitor.getItem(), props, true);
+  },
   beginDrag(props) {
     return {
       id: props.card.asset_url,

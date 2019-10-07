@@ -15,6 +15,7 @@ export const initialState = {
   upgradeModalB4BSource: null,
   showInstagramFirstCommentProTrialModal: false,
   showCloseComposerConfirmationModal: false,
+  showStoriesPromoModal: false,
   modalToShowLater: null,
 };
 
@@ -40,6 +41,8 @@ export const actionTypes = keyWrapper('MODALS', {
   SHOW_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
   HIDE_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
   SAVE_MODAL_TO_SHOW_LATER: 0,
+  SHOW_STORIES_PROMO_MODAL: 0,
+  HIDE_STORIES_PROMO_MODAL: 0,
   HIDE_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
   SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
 });
@@ -160,6 +163,16 @@ export default (state = initialState, action) => {
         ...state,
         showInstagramFirstCommentProTrialModal: true,
       };
+    case actionTypes.SHOW_STORIES_PROMO_MODAL:
+      return {
+        ...state,
+        showStoriesPromoModal: true,
+      };
+    case actionTypes.HIDE_STORIES_PROMO_MODAL:
+      return {
+        ...state,
+        showStoriesPromoModal: false,
+      };
     case actionTypes.HIDE_CLOSE_COMPOSER_CONFIRMATION_MODAL:
       return {
         ...state,
@@ -235,6 +248,12 @@ export const actions = {
   }),
   hideInstagramDirectPostingModal: () => ({
     type: actionTypes.HIDE_IG_DIRECT_POSTING_MODAL,
+  }),
+  showStoriesPromoModal: () => ({
+    type: actionTypes.SHOW_STORIES_PROMO_MODAL,
+  }),
+  hideStoriesPromoModal: () => ({
+    type: actionTypes.HIDE_STORIES_PROMO_MODAL,
   }),
   saveModalToShowLater: ({ modalId, profileId }) => ({
     type: actionTypes.SAVE_MODAL_TO_SHOW_LATER,

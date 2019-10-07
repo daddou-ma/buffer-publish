@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
 import { getShortString } from '../../../utils/Carousel';
+import { carouselCardPropTypes } from '../../../utils/commonPropTypes';
 import {
   StyledTrashIcon,
   TrashIconWrapper,
@@ -62,20 +63,17 @@ const CarouselCardHover = ({
 );
 
 CarouselCardHover.propTypes = {
-  card: PropTypes.shape({
-    order: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    type: PropTypes.string,
-    note: PropTypes.string,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-    empty: PropTypes.bool,
-    progress: PropTypes.number,
-  }).isRequired,
+  card: carouselCardPropTypes, // eslint-disable-line react/require-default-props,
   translations: PropTypes.shape({
     addNote: PropTypes.string.isRequired,
   }).isRequired,
-  onAddNoteClick: PropTypes.func.isRequired,
-  onDeleteStoryClick: PropTypes.func.isRequired,
+  onAddNoteClick: PropTypes.func,
+  onDeleteStoryClick: PropTypes.func,
+};
+
+CarouselCardHover.defaultProps = {
+  onAddNoteClick: () => {},
+  onDeleteStoryClick: () => {},
 };
 
 export default CarouselCardHover;

@@ -31,7 +31,6 @@ export default connect(
         plan = 'solo_premium_business';
       }
       const metadata = {
-        product: 'publish',
         planName: plan,
         planId: getPlanId(plan),
         ...ctaProperties,

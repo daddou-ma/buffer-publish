@@ -59,14 +59,16 @@ module.exports = {
     }
     return `https://buffer.com/profile/disconnect_bitly_auth/${profileId}`;
   },
-  getStartTrialURL: ({ trialType, cta, nextUrl }) => {
+  getStartTrialURL: ({ plan, cycle, trialType, cta, nextUrl }) => {
     const nextParam = nextUrl ? `&next=${nextUrl}` : '';
     // temporarily adding to rule out that unknown ctas are not coming from publish
     const ctaParam = cta ? `&cta=${cta}` : `&cta=publish-test-getStartTrialUrl-start${trialType}Trial-1`;
+    // we are slowly deprecating trialType in favor of plan
+    const planParam = trialType ? `trialType=${trialType}` : `plan=${plan}&cycle=${cycle}`;
     if (window.location.hostname === 'publish.local.buffer.com') {
-      return `https://local.buffer.com/billing/start-trial?trialType=${trialType}${ctaParam}${nextParam}`;
+      return `https://local.buffer.com/billing/start-trial?${planParam}${ctaParam}${nextParam}`;
     }
-    return `https://buffer.com/billing/start-trial?trialType=${trialType}${ctaParam}${nextParam}`;
+    return `https://buffer.com/billing/start-trial?${planParam}${ctaParam}${nextParam}`;
   },
   getBillingURL: ({ cta }) => {
     const ctaParam = cta ? `&cta=${cta}` : '';

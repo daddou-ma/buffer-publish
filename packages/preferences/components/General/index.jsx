@@ -1,12 +1,7 @@
 import React, { Fragment } from 'react';
 import { Divider } from '@bufferapp/components';
-import CloseAccount from '@bufferapp/close-account';
 import DateTimePreferences from '@bufferapp/date-time-preferences';
 import { Text } from '@bufferapp/ui';
-
-const closeStyle = {
-  paddingBottom: '1rem',
-};
 
 const General = () => (
   <Fragment>
@@ -14,10 +9,6 @@ const General = () => (
     <Text type="p">Change your general preferences.</Text>
     <Divider />
     <DateTimePreferences />
-    <div style={closeStyle}>
-      <Divider />
-      <CloseAccount />
-    </div>
   </Fragment>
 );
 

@@ -6,6 +6,20 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions } from '@bufferapp/publish-tabs';
 import ProfilePage from './components/ProfilePage';
 
+const requestName = tabId => ({
+  queue: 'queuedPosts',
+  drafts: 'draftPosts',
+  awaitingApproval: 'draftPosts',
+  pendingApproval: 'draftPosts',
+  grid: 'gridPosts',
+  analytics: 'sentPosts',
+  pastReminders: 'pastRemindersPosts',
+  stories: 'getStoryGroups',
+  default: 'queuedPosts',
+})[tabId];
+
+export const getRequestName = tabId => requestName(tabId) || requestName('default');
+
 // default export = container
 export default hot(
   connect(
@@ -47,43 +61,14 @@ export default hot(
         }));
       },
       onLoadMore: ({ profileId, page, tabId }) => {
-        let requestName;
-        let needsApproval = false;
-        switch (tabId) {
-          case 'queue':
-            requestName = 'queued';
-            break;
-          case 'drafts':
-            requestName = 'draft';
-            break;
-          case 'awaitingApproval':
-          case 'pendingApproval':
-            requestName = 'draft';
-            needsApproval = true;
-            break;
-          case 'grid':
-            requestName = 'grid';
-            break;
-          case 'analytics':
-            requestName = 'sent';
-            break;
-          case 'pastReminders':
-            requestName = 'pastReminders';
-            break;
-          case 'stories':
-            requestName = 'stories';
-            break;
-          default:
-            requestName = 'queued';
-        }
         dispatch(
           dataFetchActions.fetch({
-            name: `${requestName}Posts`,
+            name: getRequestName(tabId),
             args: {
               profileId,
               page,
               isFetchingMore: true,
-              needsApproval,
+              needsApproval: ['awaitingApproval', 'pendingApproval'].includes(tabId),
             },
           }),
         );

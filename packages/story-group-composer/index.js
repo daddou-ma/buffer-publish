@@ -1,7 +1,11 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
+import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import uuid from 'uuid/v4';
+import { getCounts } from './utils/Tracking';
 import { actions } from './reducer';
 import StoryGroupPopover from './components/StoryGroupPopover';
 
@@ -39,11 +43,30 @@ export default connect(
       dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId }));
     },
     saveNote: ({ note, order }) => {
+      dispatch(actions.trackNote({
+        cta: SEGMENT_NAMES.STORIES_COMPOSER_ADD_NOTE,
+        note,
+        order,
+      }));
       dispatch(actions.handleSaveStoryNote({ note, order }));
     },
     onPreviewClick: ({
-      stories, profileId, id, scheduledAt,
+      stories, profileId, id, scheduledAt, serviceId,
     }) => {
+      const ctaProperties = getCtaProperties(SEGMENT_NAMES.STORIES_PREVIEW_COMPOSER);
+      const counts = getCounts(stories);
+
+      const metadata = {
+        clientName: CLIENT_NAME,
+        storyGroupId: id,
+        channel: 'instagram',
+        channelId: profileId,
+        channelServiceId: serviceId,
+        scheduledAt: scheduledAt ? JSON.stringify(scheduledAt) : undefined,
+        ...counts,
+        ...ctaProperties,
+      };
+      dispatch(analyticsActions.trackEvent('Story Group Previewed', metadata));
       dispatch(previewActions.handlePreviewClick({
         stories, profileId, id, scheduledAt,
       }));
@@ -129,17 +152,10 @@ export default connect(
     onUpdateStoryUploadProgress: ({
       id, uploaderInstance, progress, file, complete,
     }) => {
-      if (!complete) {
-        dispatch(actions.updateStoryUploadProgress({
-          id, uploaderInstance, progress, file, complete,
-        }));
-      } else {
-        setTimeout(() => {
-          dispatch(actions.updateStoryUploadProgress({
-            id, uploaderInstance, progress, file, complete,
-          }));
-        }, 500);
-      }
+      dispatch(actions.updateStoryUploadProgress({
+        id, uploaderInstance, progress, file, complete,
+      }));
+      actions.updateStoryPogress(dispatch);
     },
     onMonitorUpdateProgress: updateUploadProgress => async ({ id, uploaderInstance, file }) => {
       const progressIterator = uploaderInstance.getProgressIterator();
@@ -178,8 +194,12 @@ export default connect(
         contentType,
       }));
     },
-    onDropCard: (cardSource, cardTarget) => {
-      dispatch(actions.onDropCard(cardSource, cardTarget));
+    onDropCard: (cardSource, cardTarget, end = false) => {
+      if (end) {
+        dispatch(actions.trackDroppedCard(cardSource, cardTarget));
+      } else {
+        dispatch(actions.onDropCard(cardSource, cardTarget));
+      }
     },
     onDeleteStory: (storyCard) => {
       dispatch(actions.deleteStory(storyCard));

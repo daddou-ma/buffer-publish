@@ -22,6 +22,7 @@ const Story = ({
   onEditClick,
   onShareNowClick,
   onPreviewClick,
+  serviceId,
   userData,
 }) => {
   const deletingMessage = isDeleting && 'Deleting...';
@@ -30,28 +31,32 @@ const Story = ({
   const largeCards = false;
   const { cardWidth, cardHeight } = getCardSizes(largeCards);
   const {
-    stories, creatorName, avatarUrl, createdAt, storyAction,
+    stories, avatarUrl, createdAt, storyAction, error, errorLink,
   } = storyDetails;
   const { tags } = userData;
   const hasStoriesMobileVersion = (
     tags ? tags.includes('has_instagram_stories_mobile') : false
   );
 
+  const hasError = error && error.length > 0;
+  const shouldDisplayErrorBanner = hasError || !hasStoriesMobileVersion;
+  const errorMessage = hasError ? error : sgQueueTranslations.bannerMobileTagText;
+
   return (
     <Card>
-      {!hasStoriesMobileVersion
+      {shouldDisplayErrorBanner
         && (
           <PostErrorBanner
-            error={sgQueueTranslations.bannerMobileTagText}
+            error={errorMessage}
+            errorLink={errorLink}
           />
         )
       }
       <CardHeader
-        creatorName={creatorName}
         avatarUrl={avatarUrl}
         createdAt={createdAt}
         onPreviewClick={() => onPreviewClick({
-          stories, profileId, id, scheduledAt,
+          stories, profileId, id, scheduledAt, serviceId,
         })}
       />
       <Carousel
@@ -71,14 +76,15 @@ const Story = ({
         ))}
       </Carousel>
       <CardFooter
-        icon={<CircleInstReminderIcon color="instagram" />}
-        message={storyAction}
+        icon={hasError ? '' : <CircleInstReminderIcon color="instagram" />}
         onDeleteClick={onDeleteConfirmClick}
         onEditClick={onEditClick}
         onSubmitClick={onShareNowClick}
-        submitLabel="Share Now"
         isPerformingAction={!!actionMessage}
         actionMessage={actionMessage}
+
+        message={hasError ? '' : storyAction}
+        submitLabel={hasError ? 'Retry Now' : 'Share Now'}
       />
     </Card>
   );
@@ -89,10 +95,11 @@ Story.propTypes = {
   profileId: PropTypes.string.isRequired,
   scheduledAt: PropTypes.number.isRequired,
   storyDetails: PropTypes.shape({
-    creatorName: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     storyAction: PropTypes.string.isRequired,
+    error: PropTypes.string,
+    errorLink: PropTypes.string,
     stories: PropTypes.arrayOf(PropTypes.shape({
       order: PropTypes.string,
       note: PropTypes.string,
@@ -106,6 +113,7 @@ Story.propTypes = {
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onPreviewClick: PropTypes.func,
+  serviceId: PropTypes.string.isRequired,
   userData: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string),
   }),
