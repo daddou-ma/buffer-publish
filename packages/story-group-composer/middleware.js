@@ -7,7 +7,9 @@ import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as storiesActions, actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
-import { dragged } from '@bufferapp/publish-analytics-middleware/transformers/publish/story';
+import { dragged, nonConfirmingImageUploaded } from '@bufferapp/publish-analytics-middleware/transformers/publish/story';
+import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
+import getAspectRatio, { InstagramStoriesAspectRatios } from './utils/aspectRatioFinder';
 import { getSGTrackingData, getStory, getNoteTrackingData } from './utils/Tracking';
 import { actionTypes, actions } from './reducer';
 
@@ -26,6 +28,12 @@ const getTrackingDataForOpenComposer = ({ channel = {} }) => ({
   clientName: 'publishWeb',
   clientId: null,
 });
+
+const shouldTrackAspectRatio = ({ width, height }) => {
+  const aspectRatio = getAspectRatio(width, height);
+  return InstagramStoriesAspectRatios.indexOf(aspectRatio) <= 0;
+};
+
 
 const createImageStory = (story) => {
   const {
@@ -198,6 +206,32 @@ export default ({ getState, dispatch }) => next => (action) => {
             clientName: CLIENT_NAME,
           });
           dispatch(analyticsActions.trackEvent('Story Dragged', metadata));
+        }
+      }
+      break;
+    }
+    case actionTypes.TRACK_NON_CONFORMING_IMAGE_UPLOADED_STORY: {
+      if (selectedProfileId) {
+        const currentProfile = state.profileSidebar && state.profileSidebar.selectedProfile;
+        if (currentProfile && shouldTrackAspectRatio(action.args)) {
+          const ctaProperties = getCtaProperties(action.args.cta);
+          const currentStoriesProfile = state.stories.byProfileId[selectedProfileId];
+          const { editingPostId } = state.stories;
+          const editingStoryGroup = currentStoriesProfile.storyPosts[editingPostId];
+
+          const { scheduledAt } = editingStoryGroup || {};
+
+          const metadata = nonConfirmingImageUploaded({
+            storyGroupId: editingPostId,
+            channel: currentProfile.service,
+            channelId: currentProfile.id,
+            channelServiceId: currentProfile.serviceId,
+            clientName: CLIENT_NAME,
+            scheduledAt,
+            ...ctaProperties,
+          });
+
+          dispatch(analyticsActions.trackEvent('Story Nonconforming Image Uploaded', metadata));
         }
       }
       break;
