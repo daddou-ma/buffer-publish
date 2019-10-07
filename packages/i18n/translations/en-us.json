@@ -294,7 +294,7 @@
       "nonProfitCost": "$32.50",
       "subtitle": "Unlock advanced IG features",
       "plan": "premium_business",
-      "features": ["8 social accounts", "2 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "features": ["8 social accounts", "2 users", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
       "buttonText": "Choose Plan",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly"
@@ -305,7 +305,7 @@
       "nonProfitCost": "$49.50",
       "subtitle": "Built for teams building brands",
       "plan": "small",
-      "features": ["25 social accounts", "6 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "features": ["25 social accounts", "6 users", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
       "buttonText": "Choose Plan",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly"
