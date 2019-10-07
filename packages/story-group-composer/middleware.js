@@ -222,7 +222,7 @@ export default ({ getState, dispatch }) => next => (action) => {
           const { scheduledAt } = editingStoryGroup || {};
 
           const metadata = nonConfirmingImageUploaded({
-            storyGroupId: editingPostId,
+            storyGroupId: editingStoryGroup ? editingPostId : null,
             channel: currentProfile.service,
             channelId: currentProfile.id,
             channelServiceId: currentProfile.serviceId,
