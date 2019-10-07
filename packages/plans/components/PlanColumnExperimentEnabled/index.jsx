@@ -50,6 +50,11 @@ const RightPlanButton = ({
 
 const RightButton = styled(Button)`
   height: unset;
+  padding: 20px 30px 30px 30px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
   background-color: #2c4bff24
 `;
 
@@ -71,6 +76,11 @@ const LeftPlanButton = ({
 
 const LeftButton = styled(Button)`
   height: unset;
+  padding: 20px 30px 30px 30px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
   background-color: #2c4bff24
 `;
 
