@@ -3,6 +3,19 @@ import { actions as dataFetchActions, actionTypes as dataFetchActionTypes } from
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
+const fetchPastReminders = (dispatch, action) => {
+  const { viewType } = action;
+  const pastRemindersRPC = viewType === 'stories' ? 'getPastRemindersStories' : 'pastRemindersPosts';
+
+  dispatch(dataFetchActions.fetch({
+    name: pastRemindersRPC,
+    args: {
+      profileId: action.profileId || action.profile.id,
+      isFetchingMore: false,
+    },
+  }));
+};
+
 export default ({ dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
   switch (action.type) {
@@ -14,6 +27,9 @@ export default ({ dispatch }) => next => (action) => { // eslint-disable-line no
           isFetchingMore: false,
         },
       }));
+      break;
+    case actionTypes.TOGGLE_VIEW_TYPE:
+      fetchPastReminders(dispatch, action);
       break;
     case actionTypes.POST_MOBILE_REMINDER:
       dispatch(dataFetchActions.fetch({

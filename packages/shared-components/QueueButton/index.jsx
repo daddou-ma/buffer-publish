@@ -32,13 +32,40 @@ const getWeekOrMonth = (index) => {
   return null;
 };
 
+const getRemindersType = (index) => {
+  if (index === 0) return 'posts';
+  if (index === 1) return 'stories';
+  return null;
+};
+
+const getDefaultIndexButton = (props) => {
+  const {
+    index,
+    viewType,
+    text,
+    tab,
+  } = props;
+
+  if (tab === 'reminders' && viewType === text.toLowerCase()) {
+    return index;
+  }
+  if (tab === 'queue') {
+    return 0;
+  }
+};
+
 class QueueButton extends Component {
-  constructor() {
-    super();
-    this.state = { isHovering: false, selectedIndex: 0 };
+  constructor(props) {
+    super(props);
+    const selectedIndex = getDefaultIndexButton(props);
+    this.state = {
+      isHovering: false,
+      selectedIndex,
+    };
 
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.onClickQueueButton = this.onClickQueueButton.bind(this);
   }
 
   onMouseEnter() {
@@ -49,14 +76,29 @@ class QueueButton extends Component {
     this.setState({ isHovering: false });
   }
 
-  updateIndex (selectedIndex) {
+  onClickQueueButton(e) {
+    e.preventDefault();
+    const { onClick, index, tab } = this.props;
+    // console.log('onClickQueueButton', this.props);
+
+    if (tab === 'reminders') {
+      const reminderType = getRemindersType(index);
+      onClick(reminderType);
+    }
+
+    if (tab === 'queue') {
+      const weekOrMonth = getWeekOrMonth(index);
+      onClick(weekOrMonth);
+    }
+  }
+
+  updateIndex(selectedIndex) {
     // Currently not using logic because Week & Month btns open up in new window
     this.setState({ selectedIndex });
   }
 
   render() {
     const {
-      onClick,
       total,
       index,
       text,
@@ -70,11 +112,7 @@ class QueueButton extends Component {
         style={btnStyle(index, isHovering, selectedIndex === index, disabled, total)}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
-        onClick={(e) => {
-          e.preventDefault();
-          const weekOrMonth = getWeekOrMonth(index);
-          onClick(weekOrMonth);
-        }}
+        onClick={(e) => { this.onClickQueueButton(e); }}
       >
         {text}
       </button>
@@ -88,11 +126,13 @@ QueueButton.propTypes = {
   text: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   total: PropTypes.number,
+  tab: PropTypes.string,
 };
 
 QueueButton.defaultProps = {
   disabled: false,
   total: 0,
+  tab: 'queue',
 };
 
 export default QueueButton;

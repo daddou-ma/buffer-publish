@@ -58,6 +58,8 @@ const PastRemindersPosts = ({
   isManager,
   isBusinessAccount,
   isLockedProfile,
+  viewType,
+  onToggleViewType,
 }) => {
   if (loading) {
     return (
@@ -86,27 +88,29 @@ const PastRemindersPosts = ({
       <div>
         <div style={headerStyle}>
           <div style={titleStyle}>
-            <Text color={'black'}>{header}</Text>
+            <Text color="black">{header}</Text>
           </div>
-          <Text color={'shuttleGray'} size={'mini'}>{subHeader}</Text>
+          <Text color="shuttleGray" size="mini">{subHeader}</Text>
           <Divider />
         </div>
         <div style={topBarContainerStyle}>
-          {showComposer && !editMode &&
-            <div style={composerStyle}>
-              <ComposerPopover
-                onSave={onComposerCreateSuccess}
-                type={'pastReminders'}
-              />
-            </div>
-          }
+          {showComposer && !editMode
+            && (
+              <div style={composerStyle}>
+                <ComposerPopover
+                  onSave={onComposerCreateSuccess}
+                  type="pastReminders"
+                />
+              </div>
+            )}
         </div>
-        {showComposer && editMode &&
-          <ComposerPopover
-            onSave={onComposerCreateSuccess}
-            type={'pastReminders'}
-          />
-        }
+        {showComposer && editMode
+          && (
+            <ComposerPopover
+              onSave={onComposerCreateSuccess}
+              type="pastReminders"
+            />
+          )}
         <PostLists
           postLists={postLists}
           onEditClick={onEditClick}
@@ -118,6 +122,8 @@ const PastRemindersPosts = ({
           onImageClose={onImageClose}
           isManager={isManager}
           isBusinessAccount={isBusinessAccount}
+          onToggleViewType={onToggleViewType}
+          viewType={viewType}
           isSent={false}
           isPastReminder
         />

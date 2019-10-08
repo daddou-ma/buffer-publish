@@ -62,6 +62,7 @@ const deleteHashtagGroup = require('./deleteHashtagGroup');
 const getHashtagGroups = require('./getHashtagGroups');
 const createSetupIntent = require('./createSetupIntent');
 const getStoryGroupsMethod = require('./getStoryGroups');
+const getPastRemindersStoriesMethod = require('./getPastRemindersStories');
 const createStoryGroupMethod = require('./createStoryGroup');
 const updateStoryGroupMethod = require('./updateStoryGroup');
 const deleteStoryGroupMethod = require('./deleteStoryGroup');
@@ -144,6 +145,7 @@ module.exports = rpc(
   getHashtagGroups,
   createSetupIntent,
   getStoryGroupsMethod,
+  getPastRemindersStoriesMethod,
   createStoryGroupMethod,
   updateStoryGroupMethod,
   deleteStoryGroupMethod,

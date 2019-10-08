@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // load the presentational component
 import { actions } from './reducer';
 import PastRemindersPosts from './components/PastRemindersPosts';
+import { header, subHeader } from './components/PastRemindersPosts/postData';
 
 const formatPostLists = (posts) => {
   const postLists = [];
@@ -12,6 +13,10 @@ const formatPostLists = (posts) => {
     Object.values(posts).sort((a, b) => b.due_at - a.due_at) : [];
 
   orderedPosts.forEach((post) => {
+    if (post.storyDetails) {
+      post.postDetails = post.storyDetails;
+    }
+
     if (post.day !== day) {
       day = post.day;
       newList = { listHeader: day, posts: [post] };
@@ -26,12 +31,14 @@ const formatPostLists = (posts) => {
 // default export = container
 export default connect(
   (state, ownProps) => {
-    const profileId = ownProps.profileId;
+    const { profileId } = ownProps;
     const currentProfile = state.pastReminders.byProfileId[profileId];
+
     if (currentProfile) {
       return {
-        header: currentProfile.header,
-        subHeader: currentProfile.subHeader,
+        header,
+        subHeader,
+        viewType: state.pastReminders.viewType,
         loading: currentProfile.loading,
         loadingMore: currentProfile.loadingMore,
         moreToLoad: currentProfile.moreToLoad,
@@ -84,6 +91,12 @@ export default connect(
       dispatch(actions.handleImageClickPrev({
         post: post.post,
         profileId: ownProps.profileId,
+      }));
+    },
+    onToggleViewType: (viewType) => {
+      dispatch(actions.handleToggleViewType({
+        profileId: ownProps.profileId,
+        viewType,
       }));
     },
   }),

@@ -12,6 +12,7 @@ import ImagePost from '../ImagePost';
 import MultipleImagesPost from '../MultipleImagesPost';
 import LinkPost from '../LinkPost';
 import VideoPost from '../VideoPost';
+import Story from '../Story';
 
 const reBufferWrapperStyle = {
   paddingLeft: '1rem',
@@ -39,6 +40,7 @@ const postTypeComponentMap = new Map([
   ['multipleImage', MultipleImagesPost],
   ['link', LinkPost],
   ['video', VideoPost],
+  ['storyGroup', Story],
 ]);
 
 /* eslint-disable react/prop-types */
@@ -82,7 +84,7 @@ const renderPost = ({
   return <PostComponent {...postWithEventHandlers} />;
 };
 
-const renderHeader = ({ listHeader, isPastReminder, isFirstItem }) => (
+const renderHeader = ({ listHeader, isPastReminder, isFirstItem, viewType, onToggleViewType }) => (
   <div style={listHeaderStyle}>
     <Text color="black">
       {listHeader}
@@ -90,8 +92,10 @@ const renderHeader = ({ listHeader, isPastReminder, isFirstItem }) => (
     {isPastReminder && isFirstItem && (
       <div style={{ marginLeft: 'auto' }}>
         <QueueButtonGroup
+          tab="reminders"
+          viewType={viewType}
           buttons={['Posts', 'Stories']}
-          onClick={() => {}}
+          onClick={type => onToggleViewType(type)}
         />
       </div>
     )}
@@ -121,9 +125,17 @@ const PostList = ({
   features,
   hasFirstCommentFlip,
   index,
+  viewType,
+  onToggleViewType,
 }) => (
   <div>
-    {renderHeader({ listHeader, isPastReminder, isFirstItem: index === 0 })}
+    {renderHeader({
+      listHeader,
+      isPastReminder,
+      isFirstItem: index === 0,
+      viewType,
+      onToggleViewType,
+    })}
     <List
       items={posts.map(post => (
         <div

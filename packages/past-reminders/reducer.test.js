@@ -20,6 +20,7 @@ describe('reducer', () => {
 
   it('should handle pastRemindersPosts_FETCH_START action type', () => {
     const stateAfter = {
+      ...initialState,
       byProfileId: {
         [profileId]: {
           header,
@@ -48,6 +49,7 @@ describe('reducer', () => {
   it('should handle pastRemindersPosts_FETCH_SUCCESS action type', () => {
     const post = { id: 'foo', text: 'i love buffer' };
     const stateAfter = {
+      ...initialState,
       byProfileId: {
         [profileId]: {
           header,
@@ -79,6 +81,7 @@ describe('reducer', () => {
 
   it('should handle pastRemindersPosts_FETCH_FAIL action type', () => {
     const stateAfter = {
+      ...initialState,
       byProfileId: {
         [profileId]: {
           header,

@@ -15,6 +15,7 @@ export const actionTypes = keyWrapper('PAST_REMINDERS', {
   POST_IMAGE_CLICKED_NEXT: 0,
   POST_IMAGE_CLICKED_PREV: 0,
   POST_IMAGE_CLOSED: 0,
+  TOGGLE_VIEW_TYPE: 0,
 });
 
 export const initialState = {
@@ -23,6 +24,7 @@ export const initialState = {
   editMode: false,
   editingPostId: '',
   environment: 'production',
+  viewType: 'posts',
 };
 
 export const profileInitialState = {
@@ -37,6 +39,14 @@ export const profileInitialState = {
 };
 
 const handlePosts = (action, currentPosts) => {
+  let posts = action.result.updates;
+  if (action.args.isFetchingMore) {
+    posts = { ...currentPosts, ...posts };
+  }
+  return posts;
+};
+
+const handleStoryGroups = (action, currentPosts) => {
   let posts = action.result.updates;
   if (action.args.isFetchingMore) {
     posts = { ...currentPosts, ...posts };
@@ -120,12 +130,14 @@ const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
       return profileInitialState;
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_START}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
         loading: !action.args.isFetchingMore,
         loadingMore: action.args.isFetchingMore,
       };
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
@@ -136,6 +148,7 @@ const profileReducer = (state = profileInitialState, action) => {
         posts: handlePosts(action, state.posts),
         total: action.result.total,
       };
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_FAIL}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
@@ -164,6 +177,9 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_START}`:
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_FAIL}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_START}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_FAIL}`:
@@ -176,6 +192,7 @@ export default (state = initialState, action) => {
       profileId = getProfileId(action);
       if (profileId) {
         return {
+          ...state,
           byProfileId: {
             ...state.byProfileId,
             [profileId]: profileReducer(state.byProfileId[profileId], action),
@@ -195,6 +212,12 @@ export default (state = initialState, action) => {
         ...state,
         showComposer: false,
         editMode: false,
+      };
+    case actionTypes.TOGGLE_VIEW_TYPE:
+      return {
+        ...state,
+        profileId: action.profileId,
+        viewType: action.viewType,
       };
     default:
       return state;
@@ -240,5 +263,10 @@ export const actions = {
     updateId: post.id,
     post,
     profileId,
+  }),
+  handleToggleViewType: ({ profileId, viewType }) => ({
+    type: actionTypes.TOGGLE_VIEW_TYPE,
+    profileId,
+    viewType,
   }),
 };
