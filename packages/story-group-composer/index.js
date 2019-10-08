@@ -43,12 +43,12 @@ export default connect(
       dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId }));
     },
     saveNote: ({ note, order }) => {
+      dispatch(actions.handleSaveStoryNote({ note, order }));
       dispatch(actions.trackNote({
         cta: SEGMENT_NAMES.STORIES_COMPOSER_ADD_NOTE,
         note,
         order,
       }));
-      dispatch(actions.handleSaveStoryNote({ note, order }));
     },
     onPreviewClick: ({
       stories, profileId, id, scheduledAt, serviceId,
@@ -66,11 +66,11 @@ export default connect(
         ...counts,
         ...ctaProperties,
       };
-      dispatch(analyticsActions.trackEvent('Story Group Previewed', metadata));
       dispatch(previewActions.handlePreviewClick({
         stories, profileId, id, scheduledAt,
       }));
       dispatch(actions.handlePreviewClick());
+      dispatch(analyticsActions.trackEvent('Story Group Previewed', metadata));
     },
     onClosePreviewClick: () => {
       dispatch(actions.handleClosePreviewClick());
@@ -192,6 +192,12 @@ export default connect(
         file,
         stillGifUrl,
         contentType,
+      }));
+      dispatch(actions.trackAspectRatio({
+        width,
+        height,
+        cta: SEGMENT_NAMES.STORIES_IMAGE_ASPECT_RATIO_UPLOADED,
+        id,
       }));
     },
     onDropCard: (cardSource, cardTarget, end = false) => {

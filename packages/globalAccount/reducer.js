@@ -7,6 +7,7 @@ export default (state = {}, action) => {
         ...state,
         email: action.result.email,
         _id: action.result._id,
+        isAnalyzePublishBundle: action.result.isAnalyzePublishBundle,
       };
     default:
       return state;

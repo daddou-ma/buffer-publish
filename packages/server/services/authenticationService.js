@@ -5,4 +5,5 @@ const client = process.env.AUTH_SVC_ADDR ? new RPCClient({ url: `${process.env.A
 
 module.exports = {
   getAccount: ({ accountId }) => client.call('getAccount', { _id: accountId }),
+  getOrganization: ({ adminAccountId }) => client.call('getOrganization', { adminAccountId }),
 };
