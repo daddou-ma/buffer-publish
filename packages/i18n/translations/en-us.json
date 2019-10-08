@@ -294,7 +294,7 @@
       "nonProfitCost": "$32.50",
       "subtitle": "Unlock advanced IG features",
       "plan": "premium_business",
-      "features": ["8 social accounts", "2 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "features": ["8 social accounts", "2 users", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
       "buttonText": "Choose Plan",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly"
@@ -305,7 +305,7 @@
       "nonProfitCost": "$49.50",
       "subtitle": "Built for teams building brands",
       "plan": "small",
-      "features": ["25 social accounts", "6 users", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "features": ["25 social accounts", "6 users", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
       "buttonText": "Choose Plan",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly"
@@ -326,8 +326,10 @@
   },
   "story-group-queue": {
     "inputPlaceholder": "What would you like to add to your Story?",
-    "reminderText": "When it’s time to post your Story, we’ll send a Reminder to your mobile device.",
-     "mobileTagText": "Uh-oh! Looks like you might not have the latest version of the Buffer mobile app. Download it now to start using Stories!",
+    "reminderText1": "When it’s time to post your Story, we’ll send a ",
+    "reminderLinkText2": "Reminder ",
+    "reminderText3": "to your mobile device.",
+    "mobileTagText": "Uh-oh! Looks like you might not have the latest version of the Buffer mobile app. Download it now to start using Stories!",
     "bannerMobileTagText": "Hmm...looks like you might not have the latest version of the Buffer mobile app. Download it now so that you can share this Story!"
   }
 }

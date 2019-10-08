@@ -49,6 +49,21 @@ const STORIES_COMPOSER_ADD_NOTE = 'publish-stories-composer-addNote-1';
 const STORIES_PREVIEW_QUEUE_ADD_NOTE = 'publish-stories-queuePreview-addNote-1';
 const STORIES_PREVIEW_COMPOSER_ADD_NOTE = 'publish-stories-composerPreview-addNote-1';
 
+const ImageDimensions = {
+  large: {
+    width: 306,
+    height: 544,
+  },
+  regular: {
+    width: 180,
+    height: 320,
+  },
+  thumbnail: {
+    width: 110,
+    height: 198,
+  },
+};
+
 const UploadTypes = keyMirror({
   LINK_THUMBNAIL: null,
   MEDIA: null,
@@ -133,4 +148,5 @@ module.exports = {
   AppEnvironments,
   PUSHER,
   CLIENT_NAME,
+  ImageDimensions,
 };

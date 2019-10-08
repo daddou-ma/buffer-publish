@@ -6,6 +6,7 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import PreviewPopover from '@bufferapp/publish-story-preview';
 import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
+import { blue } from '@bufferapp/ui/style/colors';
 import {
   QueueItems,
   BufferLoading,
@@ -47,11 +48,29 @@ const ReminderTextStyle = styled(Text)`
   font-size: 12px;
 `;
 
+const StyledLink = styled.a`
+  color: ${blue};
+  text-decoration: none;
+`;
+
 /* this color red https://bufferapp.github.io/ui/#/ui/Guides/colors isn't the same
 red as the @bufferapp/ui/style/colors */
 const StyledWarningIcon = styled(WarningIcon)`
   fill: #e0364f;
 `;
+
+const getReminderMessage = ({ reminderText1, reminderLinkText2, reminderText3 }) => (
+  <span>
+    {reminderText1}
+    <StyledLink
+      href="https://faq.buffer.com/article/1106-publish-instagram-stories-scheduling"
+      target="_blank"
+    >
+      {reminderLinkText2}
+    </StyledLink>
+    {reminderText3}
+  </span>
+);
 
 const renderNotification = ({ IconComponent, message }) => (
   <ReminderTextWrapper>
@@ -129,7 +148,7 @@ const StoryGroups = ({
         {hasStoriesMobileVersion
           ? renderNotification({
             IconComponent: <CircleInstReminderIcon color="instagram" />,
-            message: translations.reminderText,
+            message: getReminderMessage(translations),
           })
           : renderNotification({
             IconComponent: <StyledWarningIcon />,
