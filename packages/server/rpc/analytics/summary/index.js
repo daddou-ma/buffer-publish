@@ -34,10 +34,6 @@ const LABELS = {
   },
 };
 
-function shouldUseAnalyzeApi (profileService) {
-  return profileService === 'instagram';
-}
-
 const requestTotals = (profileId, profileService, dateRange, accessToken, analyzeApiAddr) =>
   rp({
     uri: `${analyzeApiAddr}/metrics/totals`,
@@ -47,10 +43,7 @@ const requestTotals = (profileId, profileService, dateRange, accessToken, analyz
       access_token: accessToken,
       start_date: dateRange.start,
       end_date: dateRange.end,
-      profile_id: (shouldUseAnalyzeApi(profileService) ?
-        profileId :
-        null
-      ),
+      profile_id: profileId,
     },
     json: true,
   });
