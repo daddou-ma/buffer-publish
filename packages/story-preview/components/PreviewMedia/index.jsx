@@ -5,6 +5,7 @@ import { DiscontinuousProgressBar } from '@bufferapp/publish-shared-components';
 import { Avatar, Text } from '@bufferapp/ui';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
+import { getLargeSafeImageUrl } from '@bufferapp/publish-story-group-composer/utils/SafeImage';
 import { storyPropTypes, userPropTypes } from '../../utils/commonPropTypes';
 
 const IMAGE_WIDTH = 306;
@@ -74,7 +75,7 @@ const PreviewMedia = ({
           <Image
             height={IMAGE_HEIGHT}
             width={IMAGE_WIDTH}
-            src={asset_url}
+            src={getLargeSafeImageUrl(asset_url)}
           />
         )
       }

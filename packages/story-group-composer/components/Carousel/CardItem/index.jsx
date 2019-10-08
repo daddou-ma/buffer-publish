@@ -8,6 +8,7 @@ import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/File
 import { UploadTypes } from '@bufferapp/publish-constants';
 import CircularUploadIndicator
   from '@bufferapp/publish-composer/composer/components/progress-indicators/CircularUploadIndicator';
+import { getLargeSafeImageUrl } from '@bufferapp/publish-story-group-composer/utils/SafeImage';
 import PropTypes from 'prop-types';
 import CarouselCardHover from '../CarouselCardHover';
 import { carouselCardPropTypes } from '../../../utils/commonPropTypes';
@@ -143,7 +144,10 @@ class CardItem extends React.Component {
 
         {card.thumbnail_url && (
           <StoryWrapper>
-            <CoverImage src={card.thumbnail_url} isTarget={isOver} />
+            <CoverImage
+              src={getLargeSafeImageUrl(card.thumbnail_url)}
+              isTarget={isOver}
+            />
             {card.type === 'video' && <PlayIcon large={largeCards} />}
             {isHovering && !isDragging && (
               <CarouselCardHover

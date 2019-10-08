@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { CircleInstReminderIcon } from '@bufferapp/components';
 import { CoverImage, PlayIcon } from '@bufferapp/publish-story-group-composer/components/Carousel/CardItem/styles';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
+import { getLargeSafeImageUrl } from '@bufferapp/publish-story-group-composer/utils/SafeImage';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import CardFooter from '../CardFooter';
@@ -70,7 +71,7 @@ const Story = ({
             cardWidth={cardWidth}
             largeCards={largeCards}
           >
-            {card.thumbnail_url && <CoverImage src={card.thumbnail_url} />}
+            {card.thumbnail_url && <CoverImage src={getLargeSafeImageUrl(card.thumbnail_url)} />}
             {card.type === 'video' && <PlayIcon large={false} />}
           </CarouselCard>
         ))}
