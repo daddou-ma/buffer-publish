@@ -34,6 +34,25 @@ describe('middleware', () => {
       .toHaveBeenCalledWith('foo1', {
         name: 'The Great Foo',
         email: 'foo@buffer.com',
+        multiProductBundleName: null,
       });
   });
+
+  it('it should send the bundle name information if the user is on an Analyze + Publish bundle', () => {
+    analyticsActions.init = jest.fn();
+    state.globalAccount.isAnalyzePublishBundle = true;
+
+    const action = {
+      type: `globalAccount_${fetchActions.FETCH_SUCCESS}`,
+    };
+
+    middleware(store)(next)(action);
+    expect(analyticsActions.init)
+      .toHaveBeenCalledWith('foo1', {
+        name: 'The Great Foo',
+        email: 'foo@buffer.com',
+        multiProductBundleName: 'analyze_publish_eid_19',
+      });
+  });
+
 });
