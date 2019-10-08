@@ -93,6 +93,7 @@ dragged.propTypes = {
  * @param ctaVersion {string|null} What is the version number of the CTA? If setting the value for the first time, set to "1".
  * @param clientId {string|null} What was the unique identifier of the client the user was in when they uploaded a nonconforming image?
  * @param clientName {string|null} Which client was the user in when they uploaded a nonconforming image? IE, `publishIos`, `publishWeb`, `publishAndroid`.
+ * @param imageAspectRatio {string|null} The actual aspect ratio of the uploaded image.
  */
 export const nonConfirmingImageUploaded = ({
   storyGroupId = null,
@@ -109,6 +110,7 @@ export const nonConfirmingImageUploaded = ({
   ctaVersion = null,
   clientId = null,
   clientName = null,
+  imageAspectRatio = null,
 }) => {
   if (clientId === null && clientName === null) {
     notify('StoryNonConfirmingImageUploaded - clientName or clientId must be supplied');
@@ -128,6 +130,7 @@ export const nonConfirmingImageUploaded = ({
     ctaVersion,
     clientId,
     clientName,
+    imageAspectRatio,
   };
   return removeNullObjectKeys(nonConformingImageSegment);
 };
@@ -147,4 +150,5 @@ nonConfirmingImageUploaded.propTypes = {
   ctaVersion: PropTypes.string,
   clientId: PropTypes.string,
   clientName: PropTypes.string,
+  imageAspectRatio: PropTypes.string,
 };

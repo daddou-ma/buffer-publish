@@ -9,6 +9,7 @@ import { actions as analyticsActions } from '@bufferapp/publish-analytics-middle
 import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
 import { dragged, nonConfirmingImageUploaded } from '@bufferapp/publish-analytics-middleware/transformers/publish/story';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
+import { formatShareDate } from '@bufferapp/publish-composer/composer/utils/TrackingUtils';
 import getAspectRatio, { InstagramStoriesAspectRatios } from './utils/aspectRatioFinder';
 import { getSGTrackingData, getStory, getNoteTrackingData } from './utils/Tracking';
 import { actionTypes, actions } from './reducer';
@@ -29,8 +30,7 @@ const getTrackingDataForOpenComposer = ({ channel = {} }) => ({
   clientId: null,
 });
 
-const shouldTrackAspectRatio = ({ width, height }) => {
-  const aspectRatio = getAspectRatio(width, height);
+const shouldTrackAspectRatio = (aspectRatio) => {
   return InstagramStoriesAspectRatios.indexOf(aspectRatio) <= 0;
 };
 
@@ -213,7 +213,8 @@ export default ({ getState, dispatch }) => next => (action) => {
     case actionTypes.TRACK_NON_CONFORMING_IMAGE_UPLOADED_STORY: {
       if (selectedProfileId) {
         const currentProfile = state.profileSidebar && state.profileSidebar.selectedProfile;
-        if (currentProfile && shouldTrackAspectRatio(action.args)) {
+        const imageAspectRatio = getAspectRatio(action.args);
+        if (currentProfile && shouldTrackAspectRatio(imageAspectRatio)) {
           const ctaProperties = getCtaProperties(action.args.cta);
           const currentStoriesProfile = state.stories.byProfileId[selectedProfileId];
           const { editingPostId } = state.stories;
@@ -227,7 +228,8 @@ export default ({ getState, dispatch }) => next => (action) => {
             channelId: currentProfile.id,
             channelServiceId: currentProfile.serviceId,
             clientName: CLIENT_NAME,
-            scheduledAt,
+            scheduledAt: formatShareDate(scheduledAt),
+            imageAspectRatio,
             ...ctaProperties,
           });
 

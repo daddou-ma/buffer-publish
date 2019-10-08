@@ -1,6 +1,6 @@
-const getDivisor = (width, height) => (height ? getDivisor(height, width % height) : width);
+const getDivisor = ({ width, height }) => (height ? getDivisor({ width: height, height: width % height }) : width);
 
-const getAspectRatio = (width, height) => {
+const getAspectRatio = ({ width, height }) => {
   if (
     Number.isNaN(width)
     || Number.isNaN(height)
@@ -11,7 +11,7 @@ const getAspectRatio = (width, height) => {
     return '1:1';
   }
 
-  const divisor = getDivisor(width, height);
+  const divisor = getDivisor({ width, height });
 
   return `${width / divisor}:${height / divisor}`;
 };
