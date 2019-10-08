@@ -80,14 +80,14 @@ describe('rpc/compare', () => {
 
     expect(rp.mock.calls[0])
       .toEqual([{
-        uri: `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/daily_totals.json`,
-        method: 'GET',
+        uri: 'analyze-api/metrics/daily_totals',
+        method: 'POST',
         strictSSL: false,
         qs: {
           access_token: token,
           start_date: start,
           end_date: end,
-          profile_id: null,
+          profile_id: profileId,
         },
         json: true,
       }]);
@@ -109,14 +109,14 @@ describe('rpc/compare', () => {
 
     expect(rp.mock.calls[1])
       .toEqual([{
-        uri: `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/daily_totals.json`,
-        method: 'GET',
+        uri: 'analyze-api/metrics/daily_totals',
+        method: 'POST',
         strictSSL: false,
         qs: {
           access_token: token,
           start_date: start,
           end_date: end,
-          profile_id: null,
+          profile_id: profileId,
         },
         json: true,
       }]);
