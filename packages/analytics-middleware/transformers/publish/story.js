@@ -18,7 +18,7 @@ const removeNullObjectKeys = (data) => {
 
   if (data) {
     Object.keys(data)
-      .filter(key => data[key] !== null && typeof data[key] !== 'undefined')
+      .filter(key => data[key] != null)
       .forEach((key) => {
         segmentData[key] = data[key];
       });
