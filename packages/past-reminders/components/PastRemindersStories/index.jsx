@@ -71,13 +71,17 @@ const PastRemindersStories = ({
           {showStoriesComposer && !editMode
             && (
               <div style={composerStyle}>
-                <StoryGroupPopover />
+                <StoryGroupPopover
+                  type="pastReminders"
+                />
               </div>
             )}
         </div>
         {showStoriesComposer && editMode
           && (
-            <StoryGroupPopover />
+            <StoryGroupPopover
+              type="pastReminders"
+            />
           )}
         <PostLists
           postLists={postLists}

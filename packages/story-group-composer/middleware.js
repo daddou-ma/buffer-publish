@@ -5,6 +5,7 @@ import {
 import cloneDeep from 'lodash.clonedeep';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as storiesActions, actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
+import { actions as remindersActions, actionTypes as remindersActionTypes } from '@bufferapp/publish-past-reminders/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
 import { dragged } from '@bufferapp/publish-analytics-middleware/transformers/publish/story';
@@ -185,6 +186,20 @@ export default ({ getState, dispatch }) => next => (action) => {
       const channel = getState().profileSidebar.selectedProfile;
       const metadata = getTrackingDataForOpenComposer({ channel });
       dispatch(analyticsActions.trackEvent('Story Group Composer Opened', metadata));
+      break;
+    }
+    case remindersActionTypes.OPEN_STORIES_COMPOSER: {
+      const currentProfile = state.pastReminders.byProfileId[selectedProfileId];
+      const { editingPostId } = state.pastReminders;
+      const editingStoryGroup = cloneDeep(currentProfile.posts[editingPostId]);
+      if (editingStoryGroup) {
+        dispatch(actions.setStoryGroup({
+          stories: editingStoryGroup.storyDetails.stories,
+          storyGroupId: editingStoryGroup.id,
+          scheduledAt: editingStoryGroup.scheduledAt,
+          isPastDue: editingStoryGroup.isPastDue,
+        }));
+      }
       break;
     }
     case actionTypes.TRACK_DRAG_AND_DROP_STORY: {
