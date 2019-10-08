@@ -195,9 +195,10 @@ export default connect(
       }));
     },
     onDropCard: (cardSource, cardTarget, end = false) => {
-      dispatch(actions.onDropCard(cardSource, cardTarget));
       if (end) {
         dispatch(actions.trackDroppedCard(cardSource, cardTarget));
+      } else {
+        dispatch(actions.onDropCard(cardSource, cardTarget));
       }
     },
     onDeleteStory: (storyCard) => {

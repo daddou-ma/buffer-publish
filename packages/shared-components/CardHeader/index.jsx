@@ -71,7 +71,7 @@ const CardHeader = ({
 };
 
 CardHeader.propTypes = {
-  creatorName: PropTypes.string.isRequired,
+  creatorName: PropTypes.string,
   avatarUrl: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   onPreviewClick: PropTypes.func,
@@ -79,6 +79,7 @@ CardHeader.propTypes = {
 
 CardHeader.defaultProps = {
   onPreviewClick: null,
+  creatorName: null,
 };
 
 export default CardHeader;

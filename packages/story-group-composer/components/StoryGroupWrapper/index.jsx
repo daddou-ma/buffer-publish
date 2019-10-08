@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import Carousel, { CarouselCard, getCardSizes } from '@bufferapp/publish-shared-components/Carousel';
 import { fontSizeMini, fontWeight, fontWeightMedium, fontFamily } from '@bufferapp/components/style/font';
 import { red } from '@bufferapp/components/style/color';
-import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import HeaderBar from '../HeaderBar';
 import AddNote from '../AddNote';
 import CarouselCards from '../Carousel/CarouselCards';
 import CardItem from '../Carousel/CardItem';
 import AddStoryFooter from '../AddStoryFooter';
+import { selectedProfilePropTypes } from '../../utils/commonPropTypes';
 
 const ADD_STORY = 'addStory';
 const ADD_NOTE = 'addNote';
@@ -90,7 +90,6 @@ const StoryGroupWrapper = ({
   const hasReachedMaxStories = (maxStories - cards.length) <= 0;
   const totalStoriesInCarousel = hasReachedMaxStories ? maxStories + 1 : maxStories;
   const { cardWidth, cardHeight } = getCardSizes(true);
-
   return (
     <Fragment>
       <WrapperStyle>
@@ -165,6 +164,7 @@ const StoryGroupWrapper = ({
               onPreviewClick={onPreviewClick}
               emptySlotData={emptySlotData}
               selectedProfile={selectedProfile}
+              isPastDue={storyGroup.isPastDue}
             />
           </React.Fragment>
         )}
@@ -184,18 +184,22 @@ const StoryGroupWrapper = ({
   );
 };
 
+
 StoryGroupWrapper.propTypes = {
   saveNote: PropTypes.func.isRequired,
   isScheduleLoading: PropTypes.bool.isRequired,
   userData: PropTypes.shape({}).isRequired,
+  uses24hTime: PropTypes.bool.isRequired,
+  weekStartsMonday: PropTypes.bool.isRequired,
+  selectedProfile: selectedProfilePropTypes, // eslint-disable-line react/require-default-props
+  timezone: PropTypes.string.isRequired,
+  editMode: PropTypes.bool,
+  maxStories: PropTypes.number.isRequired,
   ...CardItem.propTypes,
 };
 
 StoryGroupWrapper.defaultProps = {
-  ...HeaderBar.PropTypes,
-  ...DateTimeSlotPickerWrapper.propTypes,
-  ...AddStoryFooter.propTypes,
-  ...CardItem.defaultProps,
+  editMode: false,
 };
 
 export default StoryGroupWrapper;

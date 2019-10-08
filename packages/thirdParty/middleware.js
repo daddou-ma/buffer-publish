@@ -65,9 +65,11 @@ export default ({ dispatch, getState }) => next => (action) => {
             const {
               productFeatures: { planName },
             } = getState();
-            window.FS.identify(id, {
-              pricingPlan_str: planName,
-            });
+            if (planName !== 'free') {
+              window.FS.identify(id, {
+                pricingPlan_str: planName,
+              });
+            }
           }
         }
       }

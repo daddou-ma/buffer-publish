@@ -11,6 +11,7 @@ import CircularUploadIndicator
 import { getLargeSafeImageUrl } from '@bufferapp/publish-story-group-composer/utils/SafeImage';
 import PropTypes from 'prop-types';
 import CarouselCardHover from '../CarouselCardHover';
+import { carouselCardPropTypes } from '../../../utils/commonPropTypes';
 import styles from './styles.css';
 
 import {
@@ -171,13 +172,7 @@ class CardItem extends React.Component {
 }
 
 CardItem.propTypes = {
-  card: PropTypes.shape({
-    order: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    type: PropTypes.string,
-    note: PropTypes.string,
-    asset_url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
-  }),
+  card: carouselCardPropTypes, // eslint-disable-line react/require-default-props,
   notifyError: PropTypes.func,
   removeNotifications: PropTypes.func,
   createNewFile: PropTypes.func,
