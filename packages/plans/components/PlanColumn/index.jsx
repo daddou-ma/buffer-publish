@@ -11,7 +11,6 @@ import {
   FooterStyle,
   ButtonWrapperStyle,
   LinkStyle,
-  TextStyle,
 } from './style';
 
 const PlanColumn = ({
@@ -25,6 +24,7 @@ const PlanColumn = ({
   currentPlan,
   source,
   onChoosePlanClick,
+  monthly,
   features,
   buttonText,
   buttonCurrentPlanText,
@@ -41,7 +41,8 @@ const PlanColumn = ({
         />
       </ImageWrapperStyle>
       <Text type="h1">
-        { isNonprofit ? nonProfitCost : cost }/mo
+        { isNonprofit ? nonProfitCost : cost }
+        { monthly }
       </Text>
       <Text>{ billingText }</Text>
       <SubtitleStyle>
@@ -61,7 +62,7 @@ const PlanColumn = ({
           onClick={() => onChoosePlanClick({ source, plan })}
         />
       </ButtonWrapperStyle>
-      <TextStyle>or </TextStyle>
+      <Text>or </Text>
       <LinkStyle href="https://buffer.com/pricing/publish#compare-features">
         <Text>see more features</Text>
       </LinkStyle>
