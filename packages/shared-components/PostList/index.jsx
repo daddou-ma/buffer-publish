@@ -240,11 +240,15 @@ PostList.propTypes = {
   hasFirstCommentFlip: PropTypes.bool,
   features: PropTypes.object.isRequired, // eslint-disable-line
   index: PropTypes.number,
+  viewType: PropTypes.string,
+  onToggleViewType: PropTypes.func,
 };
 
 PostList.defaultProps = {
   posts: [],
   index: 0,
+  viewType: 'posts',
+  onToggleViewType: () => {},
 };
 
 export default WithFeatureLoader(PostList);

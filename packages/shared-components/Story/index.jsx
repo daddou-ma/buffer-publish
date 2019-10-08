@@ -24,6 +24,9 @@ const Story = ({
   onPreviewClick,
   serviceId,
   userData,
+  isManager,
+  isSent,
+  isPastReminder,
 }) => {
   const deletingMessage = isDeleting && 'Deleting...';
   const submittingMessage = isWorking && 'Sharing...';
@@ -38,6 +41,7 @@ const Story = ({
     tags ? tags.includes('has_instagram_stories_mobile') : false
   );
 
+  const hideButtons = !isManager || isSent || isPastReminder;
   const hasError = error && error.length > 0;
   const shouldDisplayErrorBanner = hasError || !hasStoriesMobileVersion;
   const errorMessage = hasError ? error : sgQueueTranslations.bannerMobileTagText;
@@ -76,6 +80,7 @@ const Story = ({
         ))}
       </Carousel>
       <CardFooter
+        hideButtons={hideButtons}
         icon={hasError ? '' : <CircleInstReminderIcon color="instagram" />}
         onDeleteClick={onDeleteConfirmClick}
         onEditClick={onEditClick}
@@ -117,6 +122,9 @@ Story.propTypes = {
   userData: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string),
   }),
+  isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
+  isPastReminder: PropTypes.bool,
 };
 
 Story.defaultProps = {
@@ -127,6 +135,9 @@ Story.defaultProps = {
   onShareNowClick: null,
   onPreviewClick: null,
   userData: {},
+  isManager: true,
+  isSent: false,
+  isPastReminder: false,
 };
 
 export default Story;

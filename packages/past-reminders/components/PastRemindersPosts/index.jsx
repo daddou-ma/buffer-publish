@@ -4,25 +4,11 @@ import {
   PostLists,
   EmptyState,
 } from '@bufferapp/publish-shared-components';
-import {
-  Divider,
-  Text,
-  LoadingAnimation,
-} from '@bufferapp/components';
+import { LoadingAnimation } from '@bufferapp/components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 const ErrorBoundary = getErrorBoundary(true);
-
-const headerStyle = {
-  marginBottom: '1.5rem',
-  width: '100%',
-};
-
-const titleStyle = {
-  marginBottom: '8px',
-};
 
 const loadingContainerStyle = {
   width: '100%',
@@ -40,8 +26,6 @@ const composerStyle = {
 };
 
 const PastRemindersPosts = ({
-  header,
-  subHeader,
   total,
   loading,
   postLists,
@@ -57,7 +41,6 @@ const PastRemindersPosts = ({
   editMode,
   isManager,
   isBusinessAccount,
-  isLockedProfile,
   viewType,
   onToggleViewType,
 }) => {
@@ -67,10 +50,6 @@ const PastRemindersPosts = ({
         <LoadingAnimation />
       </div>
     );
-  }
-
-  if (isLockedProfile) {
-    return <LockedProfileNotification />;
   }
 
   if (total < 1) {
@@ -83,16 +62,10 @@ const PastRemindersPosts = ({
       />
     );
   }
+
   return (
     <ErrorBoundary>
       <div>
-        <div style={headerStyle}>
-          <div style={titleStyle}>
-            <Text color="black">{header}</Text>
-          </div>
-          <Text color="shuttleGray" size="mini">{subHeader}</Text>
-          <Divider />
-        </div>
         <div style={topBarContainerStyle}>
           {showComposer && !editMode
             && (
@@ -133,8 +106,6 @@ const PastRemindersPosts = ({
 };
 
 PastRemindersPosts.propTypes = {
-  header: PropTypes.string,
-  subHeader: PropTypes.string,
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
@@ -152,7 +123,7 @@ PastRemindersPosts.propTypes = {
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
   onComposerCreateSuccess: PropTypes.func.isRequired,
-  onEditClick: PropTypes.func.isRequired,
+  onEditClick: PropTypes.func,
   onShareAgainClick: PropTypes.func,
   onMobileClick: PropTypes.func,
   onImageClick: PropTypes.func,
@@ -161,12 +132,11 @@ PastRemindersPosts.propTypes = {
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
-  isLockedProfile: PropTypes.bool,
+  viewType: PropTypes.string,
+  onToggleViewType: PropTypes.func,
 };
 
 PastRemindersPosts.defaultProps = {
-  header: null,
-  subHeader: null,
   loading: true,
   moreToLoad: false,
   page: 1,
@@ -176,7 +146,7 @@ PastRemindersPosts.defaultProps = {
   editMode: false,
   isManager: true,
   isBusinessAccount: false,
-  isLockedProfile: false,
+  viewType: 'posts',
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onMobileClick: () => {},
@@ -184,6 +154,7 @@ PastRemindersPosts.defaultProps = {
   onImageClickNext: () => {},
   onImageClickPrev: () => {},
   onImageClose: () => {},
+  onToggleViewType: () => {},
 };
 
 export default PastRemindersPosts;

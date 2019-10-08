@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 // load the presentational component
 import { actions } from './reducer';
-import PastRemindersPosts from './components/PastRemindersPosts';
+import PastRemindersWrapper from './components/PastRemindersWrapper';
 import { header, subHeader } from './components/PastRemindersPosts/postData';
 
 const formatPostLists = (posts) => {
@@ -46,6 +46,7 @@ export default connect(
         postLists: formatPostLists(currentProfile.posts),
         total: currentProfile.total,
         showComposer: state.pastReminders.showComposer,
+        showStoriesComposer: state.pastReminders.showStoriesComposer,
         editMode: state.pastReminders.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
@@ -61,13 +62,22 @@ export default connect(
         profileId: ownProps.profileId,
       }));
     },
+    onComposerCreateSuccess: () => {
+      dispatch(actions.handleComposerCreateSuccess());
+    },
+    onShareStoryGroupAgain: ({ post }) => {
+      dispatch(actions.handleShareStoryGroupAgain({
+        post,
+        profileId: ownProps.profileId,
+      }));
+    },
+    handleCloseStoriesComposer: () => {
+      dispatch(actions.handleCloseStoriesComposer());
+    },
     onMobileClick: ({ post }) => {
       dispatch(actions.handleMobileClick({
         post,
       }));
-    },
-    onComposerCreateSuccess: () => {
-      dispatch(actions.handleComposerCreateSuccess());
     },
     onImageClick: (post) => {
       dispatch(actions.handleImageClick({
@@ -100,7 +110,7 @@ export default connect(
       }));
     },
   }),
-)(PastRemindersPosts);
+)(PastRemindersWrapper);
 
 // export reducer, actions and action types
 export reducer, { actions, actionTypes } from './reducer';

@@ -16,11 +16,14 @@ export const actionTypes = keyWrapper('PAST_REMINDERS', {
   POST_IMAGE_CLICKED_PREV: 0,
   POST_IMAGE_CLOSED: 0,
   TOGGLE_VIEW_TYPE: 0,
+  OPEN_STORIES_COMPOSER: 0,
+  HIDE_STORIES_COMPOSER: 0,
 });
 
 export const initialState = {
   byProfileId: {},
   showComposer: false,
+  showStoriesComposer: false,
   editMode: false,
   editingPostId: '',
   environment: 'production',
@@ -39,14 +42,6 @@ export const profileInitialState = {
 };
 
 const handlePosts = (action, currentPosts) => {
-  let posts = action.result.updates;
-  if (action.args.isFetchingMore) {
-    posts = { ...currentPosts, ...posts };
-  }
-  return posts;
-};
-
-const handleStoryGroups = (action, currentPosts) => {
   let posts = action.result.updates;
   if (action.args.isFetchingMore) {
     posts = { ...currentPosts, ...posts };
@@ -213,6 +208,21 @@ export default (state = initialState, action) => {
         showComposer: false,
         editMode: false,
       };
+    case actionTypes.OPEN_STORIES_COMPOSER:
+      return {
+        ...state,
+        showStoriesComposer: true,
+        editMode: action.editMode,
+        editingPostId: action.updateId || '',
+      };
+    case actionTypes.HIDE_STORIES_COMPOSER:
+      return {
+        ...state,
+        showStoriesComposer: false,
+        editMode: false,
+        emptySlotMode: false,
+        emptySlotData: null,
+      };
     case actionTypes.TOGGLE_VIEW_TYPE:
       return {
         ...state,
@@ -233,12 +243,21 @@ export const actions = {
       profileId,
     };
   },
+  handleComposerCreateSuccess: () => ({
+    type: actionTypes.HIDE_COMPOSER,
+  }),
+  handleShareStoryGroupAgain: ({ post, profileId }) => ({
+    type: actionTypes.OPEN_STORIES_COMPOSER,
+    updateId: post.id,
+    editMode: false,
+    profileId,
+  }),
+  handleCloseStoriesComposer: () => ({
+    type: actionTypes.HIDE_STORIES_COMPOSER,
+  }),
   handleMobileClick: ({ post }) => ({
     type: actionTypes.POST_MOBILE_REMINDER,
     updateId: post.id,
-  }),
-  handleComposerCreateSuccess: () => ({
-    type: actionTypes.HIDE_COMPOSER,
   }),
   handleImageClick: ({ post, profileId }) => ({
     type: actionTypes.POST_IMAGE_CLICKED,
