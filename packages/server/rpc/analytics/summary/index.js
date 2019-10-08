@@ -40,14 +40,8 @@ function shouldUseAnalyzeApi (profileService) {
 
 const requestTotals = (profileId, profileService, dateRange, accessToken, analyzeApiAddr) =>
   rp({
-    uri: (shouldUseAnalyzeApi(profileService) ?
-      `${analyzeApiAddr}/metrics/totals` :
-      `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/totals.json`
-    ),
-    method: (shouldUseAnalyzeApi(profileService) ?
-      'POST' :
-      'GET'
-    ),
+    uri: `${analyzeApiAddr}/metrics/totals`,
+    method: 'POST',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
       access_token: accessToken,
