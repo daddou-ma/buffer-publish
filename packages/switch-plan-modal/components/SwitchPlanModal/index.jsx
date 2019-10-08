@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Divider } from "@bufferapp/components";
+import { Divider } from '@bufferapp/components';
 import {
   Text,
   Modal,
@@ -86,7 +86,7 @@ class SwitchPlanModal extends React.Component {
         wide
         dismissible={dismissible}
       >
-        <div style={{ overflow: 'auto', height: 'auto' }}>
+        <div style={{ height: 'auto' }}>
           <div style={{ width: '600px', padding: '0px 20px 25px' }}>
             {isPro(plan) && <PlanDescriptors {...translations.proDescriptors} />}
             {isPremium(plan) && <PlanDescriptors {...translations.premiumDescriptors} />}
