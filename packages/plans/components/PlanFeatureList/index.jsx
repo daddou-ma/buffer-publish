@@ -41,7 +41,7 @@ const PlanFeatureList = ({
     </IconStyle>
     <Text>{feature}</Text>
     <TooltipStyle>
-      {tooltip !== '' && (
+      {tooltip && tooltip !== '' && (
         <Tooltip
           label={tooltip}
           position="right"

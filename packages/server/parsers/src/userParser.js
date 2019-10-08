@@ -17,7 +17,7 @@ module.exports = userData => ({
   imageDimensionsKey: userData.imagedimensions_key,
   plan: userData.plan,
   planCode: userData.plan_code,
-  is_business_user: userData.plan_code >= 9 && userData.plan_code <= 19,
+  is_business_user: userData.plan_code >= 8 && userData.plan_code <= 19,
   is_free_user: userData.plan === 'free',
   messages: userData.messages || [],
   new_contributions_emails_subscribe_link:

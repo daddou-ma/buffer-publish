@@ -1,29 +1,14 @@
-import { grayDarker, blue } from '@bufferapp/ui/style/colors';
-import { Text } from '@bufferapp/ui';
 import styled from 'styled-components';
+import { borderRadius } from '@bufferapp/ui/style/borders';
 
 export const ColumnStyle = styled.div`
   box-shadow: 0px 0px 16px #00000014;
-  border-radius: 4px;
+  border-radius: ${borderRadius};
   margin-right: 24px;
   padding: 45px;
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;
-`;
-
-export const SubtitleStyle = styled.div`
-  color: ${blue};
-  font-weight: 700;
-  margin: 22px 0px;
-`;
-
-export const LinkStyle = styled.a`
-  color: ${grayDarker};
-`;
-
-export const TextStyle = styled(Text)`
-  color: ${grayDarker};
 `;
 
 export const ButtonWrapperStyle = styled.div`
@@ -59,11 +44,6 @@ export const PriceStyle = styled.span`
   h1 {
     margin-bottom: 5px;
   }
-`;
-
-export const BillingTextStyle = styled.span`
-  font-size: 14px;
-  color: gray;
 `;
 
 export const FeatureListStyle = styled.span`

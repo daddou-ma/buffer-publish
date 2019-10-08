@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Image } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
 import { People, Person } from '@bufferapp/ui/Icon';
@@ -14,7 +13,6 @@ import {
   UsersStyle,
   IconStyle,
   PriceStyle,
-  BillingTextStyle,
   FeatureListStyle,
 } from './style';
 
@@ -39,6 +37,7 @@ const PlanColumnExperimentControl = ({
   currentPlan,
   source,
   onChoosePlanClick,
+  monthly,
   features,
   featureTooltips,
   buttonText,
@@ -59,12 +58,10 @@ const PlanColumnExperimentControl = ({
       <PriceStyle>
         <Text type="h1">
           { isNonprofit ? nonProfitCost : cost }
-          /mo
+          { monthly }
         </Text>
       </PriceStyle>
-      <BillingTextStyle>
-        <Text>{ billingText }</Text>
-      </BillingTextStyle>
+      <Text type="p">{ billingText }</Text>
     </TopContentStyle>
     <FeatureListStyle>
       {features.map((feature, index) => (

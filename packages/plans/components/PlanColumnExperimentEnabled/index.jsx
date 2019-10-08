@@ -14,7 +14,6 @@ import {
   UsersStyle,
   IconStyle,
   PriceStyle,
-  BillingTextStyle,
   FeatureListStyle,
   PlanStyle,
   RightPlanItem,
@@ -33,24 +32,22 @@ const UserIcon = ({ Icon, text }) => (
 );
 
 const RightPlanButton = ({
-  isNonprofit, nonProfitCost, cost, billingText}) => (
+  isNonprofit, nonProfitCost, cost, billingText, monthly}) => (
     <RightPlanItem>
       <UserIcon Icon={<People />} text="2 users" />
       <PriceStyle>
         <Text type="h1">
           { isNonprofit ? nonProfitCost : cost }
-              /mo
+          { monthly }
         </Text>
       </PriceStyle>
-      <BillingTextStyle>
-        <Text>{ billingText }</Text>
-      </BillingTextStyle>
+      <Text type="p">{ billingText }</Text>
     </RightPlanItem>
 );
 
 const RightButton = styled(Button)`
   height: unset;
-  padding: 20px 30px 30px 30px;
+  padding: 20px 30px 15px 30px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   border-top-left-radius: 0px;
@@ -59,24 +56,22 @@ const RightButton = styled(Button)`
 `;
 
 const LeftPlanButton = ({
-  isNonprofit, nonProfitCost, cost, billingText}) => (
+  isNonprofit, nonProfitCost, cost, billingText, monthly}) => (
     <LeftPlanItem>
       <UserIcon Icon={<People />} text="1 user" />
       <PriceStyle>
         <Text type="h1">
           { isNonprofit ? nonProfitCost : cost }
-              /mo
+          { monthly }
         </Text>
       </PriceStyle>
-      <BillingTextStyle>
-        <Text>{ billingText }</Text>
-      </BillingTextStyle>
+      <Text type="p">{ billingText }</Text>
     </LeftPlanItem>
 );
 
 const LeftButton = styled(Button)`
   height: unset;
-  padding: 20px 30px 30px 30px;
+  padding: 20px 30px 15px 30px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   border-top-left-radius: 25px;
@@ -98,6 +93,7 @@ const PlanColumnExperimentEnabled = ({
   onChoosePlanClick,
   features,
   featureTooltips,
+  monthly,
   buttonText,
   buttonCurrentPlanText,
   billingText,
@@ -120,12 +116,10 @@ const PlanColumnExperimentEnabled = ({
           <PriceStyle>
             <Text type="h1">
               { isNonprofit ? nonProfitCost : cost }
-              /mo
+              { monthly }
             </Text>
           </PriceStyle>
-          <BillingTextStyle>
-            <Text>{ billingText }</Text>
-          </BillingTextStyle>
+          <Text type="p">{ billingText }</Text>
         </div>
       )}
       {plan === 'premium_business' && (
@@ -135,14 +129,14 @@ const PlanColumnExperimentEnabled = ({
           onClick={() => onPremiumPlanClick({ selectedPlan: 1 })}
           hasIconOnly
           size="large"
-          icon={<LeftPlanButton isNonprofit={isNonprofit} nonProfitCost={soloNonProfitCost} cost={soloCost} billingText={billingText} />}
+          icon={<LeftPlanButton isNonprofit={isNonprofit} nonProfitCost={soloNonProfitCost} cost={soloCost} billingText={billingText} monthly={monthly} />}
         />
         <RightButton
           type={selectedPremiumPlan === 1 ? 'secondary' : 'primary'}
           onClick={() => onPremiumPlanClick({ selectedPlan: 2 })}
           hasIconOnly
           size="large"
-          icon={<RightPlanButton isNonprofit={isNonprofit} nonProfitCost={nonProfitCost} cost={cost} billingText={billingText} />}
+          icon={<RightPlanButton isNonprofit={isNonprofit} nonProfitCost={nonProfitCost} cost={cost} billingText={billingText} monthly={monthly} />}
         />
       </PlanStyle>
       )}

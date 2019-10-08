@@ -1,5 +1,3 @@
-import { grayDarker, blue } from '@bufferapp/ui/style/colors';
-import { Text } from '@bufferapp/ui';
 import styled from 'styled-components';
 
 export const ColumnStyle = styled.div`
@@ -10,20 +8,6 @@ export const ColumnStyle = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;
-`;
-
-export const SubtitleStyle = styled.div`
-  color: ${blue};
-  font-weight: 700;
-  margin: 22px 0px;
-`;
-
-export const LinkStyle = styled.a`
-  color: ${grayDarker};
-`;
-
-export const TextStyle = styled(Text)`
-  color: ${grayDarker};
 `;
 
 export const ButtonWrapperStyle = styled.div`
@@ -59,11 +43,6 @@ export const PriceStyle = styled.span`
   h1 {
     margin-bottom: 5px;
   }
-`;
-
-export const BillingTextStyle = styled.span`
-  font-size: 14px;
-  color: gray;
 `;
 
 export const FeatureListStyle = styled.span`
