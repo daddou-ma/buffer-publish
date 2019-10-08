@@ -25,7 +25,7 @@ class TemporaryDashboardBanner extends React.Component {
 
   render () {
     const { hidden } = this.state;
-    const { enabledApplicationModes, hasLinkedinProfiles } = this.props;
+    const { enabledApplicationModes } = this.props;
 
     if (!enabledApplicationModes) {
       return null;
@@ -34,30 +34,17 @@ class TemporaryDashboardBanner extends React.Component {
     const temporaryDashboard =
       this.getEnabledApplicationMode(dashboardBanner, enabledApplicationModes);
 
-    const shouldShowBanner = temporaryDashboard || hasLinkedinProfiles;
-
-    if (!shouldShowBanner) {
+    if (!temporaryDashboard) {
       return null;
     }
 
     return (
       <div style={getContainerStyle(hidden)}>
-        {temporaryDashboard
-        && (
-          <Banner
-            themeColor="orange"
-            customHTML={{ __html: temporaryDashboard.content }}
-            onCloseBanner={() => this.setState({ hidden: true })}
-          />
-        )}
-        {hasLinkedinProfiles
-        && (
-          <Banner
-            themeColor="orange"
-            customHTML={{ __html: 'Due to a permissions update from LinkedIn, we’ll need to reconnect your account. Please take a moment to <a href="https://buffer.com/manage">reconnect</a> now.' }}
-            onCloseBanner={() => this.setState({ hidden: true })}
-          />
-        )}
+        <Banner
+          themeColor="orange"
+          customHTML={{ __html: temporaryDashboard.content }}
+          onCloseBanner={() => this.setState({ hidden: true })}
+        />
       </div>
     );
   }
@@ -69,12 +56,10 @@ TemporaryDashboardBanner.propTypes = {
       PropTypes.string,
     ),
   ),
-  hasLinkedinProfiles: PropTypes.bool,
 };
 
 TemporaryDashboardBanner.defaultProps = {
   enabledApplicationModes: [],
-  hasLinkedinProfiles: false,
 };
 
 export default TemporaryDashboardBanner;
