@@ -2,6 +2,49 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import QueueButton from '../QueueButton';
 
+const getRemindersType = (index) => {
+  if (index === 0) return 'posts';
+  if (index === 1) return 'stories';
+  return null;
+};
+
+const getWeekOrMonth = (index) => {
+  if (index === 1) return 'week';
+  if (index === 2) return 'month';
+  return null;
+};
+
+const onClickQueueButton = ({
+  onClick,
+  index,
+  tab,
+}) => {
+  // console.log('onClickQueueButton', this.props);
+  if (tab === 'reminders') {
+    const reminderType = getRemindersType(index);
+    onClick(reminderType);
+  }
+
+  if (tab === 'queue') {
+    const weekOrMonth = getWeekOrMonth(index);
+    onClick(weekOrMonth);
+  }
+};
+
+const getSelectedIndex = ({
+  index,
+  viewType,
+  text,
+  tab,
+}) => {
+  if (tab === 'reminders' && viewType === text.toLowerCase()) {
+    return index;
+  }
+  if (tab === 'queue') {
+    return 0;
+  }
+};
+
 const QueueButtonGroup = ({
   onClick,
   buttons,
@@ -16,10 +59,18 @@ const QueueButtonGroup = ({
         text={text}
         total={buttons.length}
         index={index}
-        onClick={onClick}
+        onClick={() => onClickQueueButton({
+          onClick,
+          index,
+          tab,
+        })}
         disabled={disabled}
-        tab={tab}
-        viewType={viewType}
+        selectedIndex={getSelectedIndex({
+          index,
+          viewType,
+          text,
+          tab,
+        })}
       />
     ))}
   </div>

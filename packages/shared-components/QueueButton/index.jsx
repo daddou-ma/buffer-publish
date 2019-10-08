@@ -26,46 +26,16 @@ const btnStyle = (index, isHovering, isSelected, disabled, total) => ({
   pointerEvents: disabled ? 'none' : 'auto',
 });
 
-const getWeekOrMonth = (index) => {
-  if (index === 1) return 'week';
-  if (index === 2) return 'month';
-  return null;
-};
-
-const getRemindersType = (index) => {
-  if (index === 0) return 'posts';
-  if (index === 1) return 'stories';
-  return null;
-};
-
-const getDefaultIndexButton = (props) => {
-  const {
-    index,
-    viewType,
-    text,
-    tab,
-  } = props;
-
-  if (tab === 'reminders' && viewType === text.toLowerCase()) {
-    return index;
-  }
-  if (tab === 'queue') {
-    return 0;
-  }
-};
-
 class QueueButton extends Component {
   constructor(props) {
     super(props);
-    const selectedIndex = getDefaultIndexButton(props);
     this.state = {
       isHovering: false,
-      selectedIndex,
+      selectedIndex: props.selectedIndex,
     };
 
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
-    this.onClickQueueButton = this.onClickQueueButton.bind(this);
   }
 
   onMouseEnter() {
@@ -76,22 +46,6 @@ class QueueButton extends Component {
     this.setState({ isHovering: false });
   }
 
-  onClickQueueButton(e) {
-    e.preventDefault();
-    const { onClick, index, tab } = this.props;
-    // console.log('onClickQueueButton', this.props);
-
-    if (tab === 'reminders') {
-      const reminderType = getRemindersType(index);
-      onClick(reminderType);
-    }
-
-    if (tab === 'queue') {
-      const weekOrMonth = getWeekOrMonth(index);
-      onClick(weekOrMonth);
-    }
-  }
-
   updateIndex(selectedIndex) {
     // Currently not using logic because Week & Month btns open up in new window
     this.setState({ selectedIndex });
@@ -99,6 +53,7 @@ class QueueButton extends Component {
 
   render() {
     const {
+      onClick,
       total,
       index,
       text,
@@ -112,7 +67,10 @@ class QueueButton extends Component {
         style={btnStyle(index, isHovering, selectedIndex === index, disabled, total)}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
-        onClick={(e) => { this.onClickQueueButton(e); }}
+        onClick={(e) => {
+          e.preventDefault();
+          onClick();
+        }}
       >
         {text}
       </button>
@@ -126,13 +84,12 @@ QueueButton.propTypes = {
   text: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   total: PropTypes.number,
-  tab: PropTypes.string,
+  selectedIndex: PropTypes.number,
 };
 
 QueueButton.defaultProps = {
   disabled: false,
   total: 0,
-  tab: 'queue',
 };
 
 export default QueueButton;
