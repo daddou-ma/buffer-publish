@@ -31,7 +31,7 @@ class QueueButton extends Component {
     super(props);
     this.state = {
       isHovering: false,
-      selectedIndex: props.selectedIndex,
+      selectedIndex: 0,
     };
 
     this.onMouseEnter = this.onMouseEnter.bind(this);
@@ -58,8 +58,9 @@ class QueueButton extends Component {
       index,
       text,
       disabled,
+      selectedIndex,
     } = this.props;
-    const { isHovering, selectedIndex } = this.state;
+    const { isHovering } = this.state;
 
     return (
       <button

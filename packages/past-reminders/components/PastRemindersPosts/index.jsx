@@ -41,8 +41,6 @@ const PastRemindersPosts = ({
   editMode,
   isManager,
   isBusinessAccount,
-  viewType,
-  onToggleViewType,
 }) => {
   if (loading) {
     return (
@@ -66,17 +64,17 @@ const PastRemindersPosts = ({
   return (
     <ErrorBoundary>
       <div>
-        <div style={topBarContainerStyle}>
-          {showComposer && !editMode
-            && (
+        {showComposer && !editMode
+          && (
+            <div style={topBarContainerStyle}>
               <div style={composerStyle}>
                 <ComposerPopover
                   onSave={onComposerCreateSuccess}
                   type="pastReminders"
                 />
               </div>
-            )}
-        </div>
+            </div>
+          )}
         {showComposer && editMode
           && (
             <ComposerPopover
@@ -95,8 +93,6 @@ const PastRemindersPosts = ({
           onImageClose={onImageClose}
           isManager={isManager}
           isBusinessAccount={isBusinessAccount}
-          onToggleViewType={onToggleViewType}
-          viewType={viewType}
           isSent={false}
           isPastReminder
         />
@@ -132,8 +128,6 @@ PastRemindersPosts.propTypes = {
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
-  viewType: PropTypes.string,
-  onToggleViewType: PropTypes.func,
 };
 
 PastRemindersPosts.defaultProps = {
@@ -146,7 +140,6 @@ PastRemindersPosts.defaultProps = {
   editMode: false,
   isManager: true,
   isBusinessAccount: false,
-  viewType: 'posts',
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onMobileClick: () => {},
@@ -154,7 +147,6 @@ PastRemindersPosts.defaultProps = {
   onImageClickNext: () => {},
   onImageClickPrev: () => {},
   onImageClose: () => {},
-  onToggleViewType: () => {},
 };
 
 export default PastRemindersPosts;

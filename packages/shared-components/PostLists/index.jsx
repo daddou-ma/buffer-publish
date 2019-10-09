@@ -33,8 +33,6 @@ const renderPostList = ({
   isPastReminder,
   isBusinessAccount,
   hasFirstCommentFlip,
-  viewType,
-  onToggleViewType,
 }) => (
   <div style={postListStyle}>
     <PostList
@@ -59,8 +57,6 @@ const renderPostList = ({
       isPastReminder={isPastReminder}
       isBusinessAccount={isBusinessAccount}
       hasFirstCommentFlip={hasFirstCommentFlip}
-      viewType={viewType}
-      onToggleViewType={onToggleViewType}
     />
   </div>
 );
@@ -86,8 +82,6 @@ const PostLists = ({
   isPastReminder,
   isBusinessAccount,
   hasFirstCommentFlip,
-  viewType,
-  onToggleViewType,
 }) => (
   <List
     items={postLists.map((postList, index) =>
@@ -111,8 +105,6 @@ const PostLists = ({
         isPastReminder,
         isBusinessAccount,
         hasFirstCommentFlip,
-        viewType,
-        onToggleViewType,
       }),
     )}
     fillContainer

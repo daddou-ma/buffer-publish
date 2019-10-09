@@ -42,8 +42,6 @@ const PastRemindersStories = ({
   editMode,
   isManager,
   isBusinessAccount,
-  viewType,
-  onToggleViewType,
 }) => {
   if (loading) {
     return (
@@ -94,8 +92,6 @@ const PastRemindersStories = ({
           onImageClose={onImageClose}
           isManager={isManager}
           isBusinessAccount={isBusinessAccount}
-          onToggleViewType={onToggleViewType}
-          viewType={viewType}
           isSent={false}
           isPastReminder
         />
@@ -130,8 +126,6 @@ PastRemindersStories.propTypes = {
   onImageClose: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
-  viewType: PropTypes.string,
-  onToggleViewType: PropTypes.func,
 };
 
 PastRemindersStories.defaultProps = {
@@ -144,7 +138,6 @@ PastRemindersStories.defaultProps = {
   editMode: false,
   isManager: true,
   isBusinessAccount: false,
-  viewType: 'posts',
   onEditClick: () => {},
   onShareStoryGroupAgain: () => {},
   onMobileClick: () => {},
@@ -152,7 +145,6 @@ PastRemindersStories.defaultProps = {
   onImageClickNext: () => {},
   onImageClickPrev: () => {},
   onImageClose: () => {},
-  onToggleViewType: () => {},
 };
 
 export default PastRemindersStories;

@@ -6,7 +6,6 @@ import {
 } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { QueueButtonGroup } from '@bufferapp/publish-shared-components';
 import TextPost from '../TextPost';
 import ImagePost from '../ImagePost';
 import MultipleImagesPost from '../MultipleImagesPost';
@@ -26,13 +25,13 @@ const postStyle = {
   marginBottom: '2rem',
 };
 
-const listHeaderStyle = {
+const listHeaderStyle = isFirstItem => ({
   display: 'flex',
   alignItems: 'center',
   marginBottom: '1rem',
-  marginTop: '1rem',
+  marginTop: isFirstItem ? '2rem' : '1rem',
   marginLeft: '0.5rem',
-};
+});
 
 const postTypeComponentMap = new Map([
   ['text', TextPost],
@@ -84,21 +83,11 @@ const renderPost = ({
   return <PostComponent {...postWithEventHandlers} />;
 };
 
-const renderHeader = ({ listHeader, isPastReminder, isFirstItem, viewType, onToggleViewType }) => (
-  <div style={listHeaderStyle}>
+const renderHeader = ({ listHeader, isFirstItem }) => (
+  <div style={listHeaderStyle(isFirstItem)}>
     <Text color="black">
       {listHeader}
     </Text>
-    {isPastReminder && isFirstItem && (
-      <div style={{ marginLeft: 'auto' }}>
-        <QueueButtonGroup
-          tab="reminders"
-          viewType={viewType}
-          buttons={['Posts', 'Stories']}
-          onClick={type => onToggleViewType(type)}
-        />
-      </div>
-    )}
   </div>
 );
 
@@ -125,17 +114,9 @@ const PostList = ({
   features,
   hasFirstCommentFlip,
   index,
-  viewType,
-  onToggleViewType,
 }) => (
   <div>
-    {renderHeader({
-      listHeader,
-      isPastReminder,
-      isFirstItem: index === 0,
-      viewType,
-      onToggleViewType,
-    })}
+    {renderHeader({ listHeader, isFirstItem: index === 0 })}
     <List
       items={posts.map(post => (
         <div
@@ -239,16 +220,10 @@ PostList.propTypes = {
   isBusinessAccount: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   features: PropTypes.object.isRequired, // eslint-disable-line
-  index: PropTypes.number,
-  viewType: PropTypes.string,
-  onToggleViewType: PropTypes.func,
 };
 
 PostList.defaultProps = {
   posts: [],
-  index: 0,
-  viewType: 'posts',
-  onToggleViewType: () => {},
 };
 
 export default WithFeatureLoader(PostList);

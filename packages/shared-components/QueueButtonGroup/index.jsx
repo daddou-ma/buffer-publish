@@ -19,7 +19,6 @@ const onClickQueueButton = ({
   index,
   tab,
 }) => {
-  // console.log('onClickQueueButton', this.props);
   if (tab === 'reminders') {
     const reminderType = getRemindersType(index);
     onClick(reminderType);

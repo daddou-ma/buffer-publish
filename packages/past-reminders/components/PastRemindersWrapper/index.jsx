@@ -4,6 +4,8 @@ import {
   Divider,
   Text,
 } from '@bufferapp/components';
+import styled from 'styled-components';
+import { QueueButtonGroup } from '@bufferapp/publish-shared-components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import PastRemindersPosts from '../PastRemindersPosts';
@@ -11,14 +13,24 @@ import PastRemindersStories from '../PastRemindersStories';
 
 const ErrorBoundary = getErrorBoundary(true);
 
-const headerStyle = {
-  marginBottom: '1.5rem',
-  width: '100%',
-};
+const Header = styled.div`
+  margin-bottom: 1.5rem,
+  width: 100%,
+`;
 
-const titleStyle = {
-  marginBottom: '8px',
-};
+const TitleWrapper = styled.div`
+  margin-bottom: 8px,
+`;
+
+const ButtonRelativeContainer = styled.div`
+  position: relative;
+`;
+
+const ButtonWrapper = styled.div`
+  position: absolute
+  right: 0;
+  top: 15px;
+`;
 
 const PastRemindersWrapper = (props) => {
   const {
@@ -26,6 +38,7 @@ const PastRemindersWrapper = (props) => {
     subHeader,
     isLockedProfile,
     viewType,
+    onToggleViewType,
   } = props;
 
   if (isLockedProfile) {
@@ -34,13 +47,23 @@ const PastRemindersWrapper = (props) => {
 
   return (
     <ErrorBoundary>
-      <div style={headerStyle}>
-        <div style={titleStyle}>
+      <Header>
+        <TitleWrapper>
           <Text color="black">{header}</Text>
-        </div>
+        </TitleWrapper>
         <Text color="shuttleGray" size="mini">{subHeader}</Text>
         <Divider />
-      </div>
+      </Header>
+      <ButtonRelativeContainer>
+        <ButtonWrapper>
+          <QueueButtonGroup
+            tab="reminders"
+            viewType={viewType}
+            buttons={['Posts', 'Stories']}
+            onClick={type => onToggleViewType(type)}
+          />
+        </ButtonWrapper>
+      </ButtonRelativeContainer>
       {viewType === 'posts' && <PastRemindersPosts {...props} />}
       {viewType === 'stories' && <PastRemindersStories {...props} />}
     </ErrorBoundary>
@@ -53,6 +76,7 @@ PastRemindersWrapper.propTypes = {
   viewType: PropTypes.string,
   total: PropTypes.number,
   isLockedProfile: PropTypes.bool,
+  onToggleViewType: PropTypes.func,
 };
 
 PastRemindersWrapper.defaultProps = {
@@ -61,6 +85,7 @@ PastRemindersWrapper.defaultProps = {
   viewType: 'posts',
   total: 0,
   isLockedProfile: false,
+  onToggleViewType: () => {},
 };
 
 export default PastRemindersWrapper;
