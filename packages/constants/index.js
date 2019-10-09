@@ -18,6 +18,9 @@ const ANALYTICS_OVERVIEW_SBP_TRIAL = 'publish-analyticsOverview-trialCard-sbpTri
 const ANALYTICS_OVERVIEW_BUSINESS_UPGRADE = 'publish-analyticsOverview-upgradeCard-businessUpgrade-1';
 const APP_SHELL_PRO_TRIAL = 'publish-appShell-menu-proTrial-1';
 const APP_SHELL_PRO_UPGRADE = 'publish-appShell-menu-proUpgrade-1';
+const CTA_BANNER_PREMIUM_UPGRADE = 'publish-app-ctaBanner-premiumUpgrade-1';
+const CTA_BANNER_SMALL_UPGRADE = 'publish-app-ctaBanner-smallUpgrade-1';
+const CTA_BANNER_PRO_UPGRADE = 'publish-app-ctaBanner-proUpgrade-1';
 const DRAFTS_SBP_TRIAL = 'publish-drafts-trialCard-sbpTrial-1';
 const DRAFTS_BUSINESS_UPGRADE = 'publish-drafts-upgradeCard-businessUpgrade-1';
 const EXPIRED_TRIAL_PRO_UPGRADE = 'publish-app-expiredTrialModal-proUpgrade-1';
@@ -113,6 +116,9 @@ module.exports = {
     ANALYTICS_OVERVIEW_BUSINESS_UPGRADE,
     APP_SHELL_PRO_TRIAL,
     APP_SHELL_PRO_UPGRADE,
+    CTA_BANNER_PREMIUM_UPGRADE,
+    CTA_BANNER_SMALL_UPGRADE,
+    CTA_BANNER_PRO_UPGRADE,
     DRAFTS_SBP_TRIAL,
     DRAFTS_BUSINESS_UPGRADE,
     EXPIRED_TRIAL_PRO_UPGRADE,
