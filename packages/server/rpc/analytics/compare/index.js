@@ -5,29 +5,16 @@ const METRICS_CONFIG = require('./metricsConfig');
 const NON_SUMMABLE_METRICS = ['followers'];
 const METRICS_TO_AVERAGE = ['engagement_rate'];
 
-function shouldUseAnalyzeApi (profileService) {
-  return profileService === 'instagram';
-}
-
 const requestDailyTotals = (profileId, profileService, dateRange, accessToken, analyzeApiAddr) =>
   rp({
-    uri: (shouldUseAnalyzeApi(profileService) ?
-      `${analyzeApiAddr}/metrics/daily_totals` :
-      `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/daily_totals.json`
-    ),
-    method: (shouldUseAnalyzeApi(profileService) ?
-      'POST' :
-      'GET'
-    ),
+    uri: `${analyzeApiAddr}/metrics/daily_totals`,
+    method: 'POST',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
       access_token: accessToken,
       start_date: dateRange.start,
       end_date: dateRange.end,
-      profile_id: (shouldUseAnalyzeApi(profileService) ?
-        profileId :
-        null
-      ),
+      profile_id: profileId,
     },
     json: true,
   });

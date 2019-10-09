@@ -34,29 +34,16 @@ const LABELS = {
   },
 };
 
-function shouldUseAnalyzeApi (profileService) {
-  return profileService === 'instagram';
-}
-
 const requestTotals = (profileId, profileService, dateRange, accessToken, analyzeApiAddr) =>
   rp({
-    uri: (shouldUseAnalyzeApi(profileService) ?
-      `${analyzeApiAddr}/metrics/totals` :
-      `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/totals.json`
-    ),
-    method: (shouldUseAnalyzeApi(profileService) ?
-      'POST' :
-      'GET'
-    ),
+    uri: `${analyzeApiAddr}/metrics/totals`,
+    method: 'POST',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
       access_token: accessToken,
       start_date: dateRange.start,
       end_date: dateRange.end,
-      profile_id: (shouldUseAnalyzeApi(profileService) ?
-        profileId :
-        null
-      ),
+      profile_id: profileId,
     },
     json: true,
   });

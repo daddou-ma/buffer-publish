@@ -1,11 +1,13 @@
-const { method } = require('@bufferapp/micro-rpc');
+const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 const DateRange = require('../utils/DateRange');
+
+const RPC_NAME = 'posts_summary';
 
 const LABELS = {
   facebook: {
     posts_count: 'Posts',
-    post_reach: 'Post Reach',
+    post_reach: 'Reach',
     reactions: 'Reactions',
     comments: 'Comments',
     shares: 'Shares',
@@ -21,28 +23,24 @@ const LABELS = {
   },
   instagram: {
     posts_count: 'Posts',
-    impressions: 'Post Impressions',
-    reach: 'Post Reach',
-    likes: 'Post Likes',
-    comments: 'Post Comments',
+    impressions: 'Impressions',
+    reach: 'Reach',
+    likes: 'Likes',
+    comments: 'Comments',
     engagement_rate: 'Engagement Rate',
   },
 };
 
-function shouldUseAnalyzeApi (profileService) {
-  return profileService === 'instagram';
-}
-
-const requestPostsSummary = (profileId, profileService, dateRange, accessToken) =>
+const requestPostsSummary = (
+  profileId,
+  profileService,
+  dateRange,
+  accessToken,
+  analyzeApiAddr
+) =>
   rp({
-    uri: (shouldUseAnalyzeApi(profileService) ?
-      `${process.env.ANALYZE_API_ADDR}/metrics/post_totals` :
-      `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/posts_summary.json`
-    ),
-    method: (shouldUseAnalyzeApi(profileService) ?
-      'POST' :
-      'GET'
-    ),
+    uri: `${analyzeApiAddr}/metrics/post_totals`,
+    method: 'POST',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
       access_token: accessToken,
@@ -76,9 +74,9 @@ const summarize = (metric, currentPeriod, pastPeriod, profileService) => {
 };
 
 module.exports = method(
-  'posts_summary',
+  RPC_NAME,
   'fetch analytics posts summary for profiles and pages',
-  ({ profileId, profileService, startDate, endDate }, { session }) => {
+  ({ profileId, profileService, startDate, endDate }, req) => {
     const dateRange = new DateRange(startDate, endDate);
     const previousDateRange = dateRange.getPreviousDateRange();
 
@@ -86,13 +84,15 @@ module.exports = method(
       profileId,
       profileService,
       dateRange,
-      session.publish.accessToken,
+      req.session.publish.accessToken,
+      req.app.get('analyzeApiAddr')
     );
     const previousPeriod = requestPostsSummary(
       profileId,
       profileService,
       previousDateRange,
-      session.publish.accessToken,
+      req.session.publish.accessToken,
+      req.app.get('analyzeApiAddr')
     );
 
     return Promise
@@ -105,6 +105,5 @@ module.exports = method(
           summarize(metric, currentPeriodResult, pastPeriodResult, profileService),
         )), profileService);
       })
-      .catch(() => []);
   },
 );
