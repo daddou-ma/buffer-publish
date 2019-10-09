@@ -8,6 +8,7 @@ const SERVICE_PINTEREST = 'pinterest';
 const SERVICE_INSTAGRAM = 'instagram';
 
 const PRO_PLAN_ID = '5';
+const SOLO_PREMIUM_BUSINESS_PLAN_ID = '8';
 const PREMIUM_BUSINESS_PLAN_ID = '9';
 const SMALL_PLAN_ID = '10';
 
@@ -108,6 +109,7 @@ module.exports = {
   SERVICE_INSTAGRAM,
   PLAN_IDS: {
     PRO_PLAN_ID,
+    SOLO_PREMIUM_BUSINESS_PLAN_ID,
     PREMIUM_BUSINESS_PLAN_ID,
     SMALL_PLAN_ID,
   },

@@ -1,10 +1,11 @@
 import { grayDarker, blue } from '@bufferapp/ui/style/colors';
-import { Text } from '@bufferapp/ui';
 import styled from 'styled-components';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import { fontWeightBold } from '@bufferapp/ui/style/fonts';
 
 export const ColumnStyle = styled.div`
   box-shadow: 0px 0px 16px #00000014;
-  border-radius: 4px;
+  border-radius: ${borderRadius};
   margin-right: 24px;
   padding: 45px;
   display: flex;
@@ -14,15 +15,11 @@ export const ColumnStyle = styled.div`
 
 export const SubtitleStyle = styled.div`
   color: ${blue};
-  font-weight: 700;
+  font-weight: ${fontWeightBold};
   margin: 22px 0px;
 `;
 
 export const LinkStyle = styled.a`
-  color: ${grayDarker};
-`;
-
-export const TextStyle = styled(Text)`
   color: ${grayDarker};
 `;
 

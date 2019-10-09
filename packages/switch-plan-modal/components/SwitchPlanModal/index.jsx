@@ -27,6 +27,7 @@ const ListItem = ({ text }) => (
 ListItem.propTypes = { text: PropTypes.string.isRequired };
 
 const isPro = plan => plan === 'pro';
+const isSoloPremium = plan => plan === 'solo_premium_business';
 const isPremium = plan => plan === 'premium_business';
 const isSmallBusiness = plan => plan === 'small';
 
@@ -35,6 +36,9 @@ const getButtonText = ({ plan, translations }) => {
   switch (plan) {
     case 'pro':
       buttonText = translations.proDescriptors.buttonText;
+      break;
+    case 'solo_premium_business':
+      buttonText = translations.soloPremiumDescriptors.buttonText;
       break;
     case 'premium_business':
       buttonText = translations.premiumDescriptors.buttonText;
@@ -90,6 +94,7 @@ class SwitchPlanModal extends React.Component {
           <div style={{ width: '600px', padding: '0px 20px 25px' }}>
             {isPro(plan) && <PlanDescriptors {...translations.proDescriptors} />}
             {isPremium(plan) && <PlanDescriptors {...translations.premiumDescriptors} />}
+            {isSoloPremium(plan) && <PlanDescriptors {...translations.soloPremiumDescriptors} />}
             {isSmallBusiness(plan) && <PlanDescriptors {...translations.businessDescriptors} />}
 
             <Divider marginTop="" marginBottom="1.5rem" />
@@ -98,6 +103,16 @@ class SwitchPlanModal extends React.Component {
               <PlanCycleSelect
                 translations={translations.proDescriptors}
                 plan={plan}
+                cycle={cycle}
+                selectCycle={selectCycle}
+                isNonprofit={isNonprofit}
+              />
+            )}
+
+            {isSoloPremium(plan) && (
+              <PlanCycleSelect
+                plan={plan}
+                translations={translations.soloPremiumDescriptors}
                 cycle={cycle}
                 selectCycle={selectCycle}
                 isNonprofit={isNonprofit}

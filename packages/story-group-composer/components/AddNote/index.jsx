@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '@bufferapp/ui';
+import { getLargeSafeImageUrl } from '@bufferapp/publish-story-group-composer/utils/SafeImage';
 import NoteSection from '../NoteSection';
 import { translationsPropTypes } from '../../utils/commonPropTypes';
 
@@ -40,7 +41,7 @@ const AddNote = ({
       <ContentWrapper>
         <div>
           <StyledImage
-            src={story.thumbnail_url}
+            src={getLargeSafeImageUrl(story.thumbnail_url)}
             alt={translations.noteImageAlt}
             height="320px"
             width="180px"
