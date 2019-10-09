@@ -1,4 +1,4 @@
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+const { SEGMENT_NAMES } = require('@bufferapp/publish-constants');
 
 const sourceCtaMap = new Map([
   ['app_shell', SEGMENT_NAMES.APP_SHELL_PRO_UPGRADE],
@@ -23,4 +23,4 @@ const sourceCtaMap = new Map([
 
 const getCtaFromSource = source => sourceCtaMap.get(source) || null;
 
-export default getCtaFromSource;
+module.exports = getCtaFromSource;
