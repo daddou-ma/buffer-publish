@@ -39,6 +39,14 @@ export default ({ dispatch }) => next => (action) => { // eslint-disable-line no
         },
       }));
       break;
+    case actionTypes.STORY_GROUP_MOBILE_REMINDER:
+      dispatch(dataFetchActions.fetch({
+        name: 'shareStoryGroupNow',
+        args: {
+          storyGroupId: action.updateId,
+        },
+      }));
+      break;
     case `mobileReminder_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'success',

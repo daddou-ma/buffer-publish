@@ -33,7 +33,7 @@ const PastRemindersStories = ({
   postLists,
   onEditClick,
   onShareStoryGroupAgain,
-  onMobileClick,
+  onStoryGroupMobileClick,
   onImageClick,
   onImageClickNext,
   onImageClickPrev,
@@ -85,7 +85,7 @@ const PastRemindersStories = ({
           postLists={postLists}
           onEditClick={onEditClick}
           onShareAgainClick={onShareStoryGroupAgain}
-          onMobileClick={onMobileClick}
+          onMobileClick={onStoryGroupMobileClick}
           onImageClick={onImageClick}
           onImageClickNext={onImageClickNext}
           onImageClickPrev={onImageClickPrev}

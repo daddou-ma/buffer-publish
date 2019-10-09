@@ -79,6 +79,11 @@ export default connect(
         post,
       }));
     },
+    onStoryGroupMobileClick: ({ post }) => {
+      dispatch(actions.handleStoryGroupMobileClick({
+        post,
+      }));
+    },
     onImageClick: (post) => {
       dispatch(actions.handleImageClick({
         post: post.post,
