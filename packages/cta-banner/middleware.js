@@ -10,6 +10,8 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
     case actionTypes.START_SUBSCRIPTION:
       if (user && user.plan === 'premium_business') {
         dispatch(modalsActions.showSwitchPlanModal({ source: 'cta_banner_upgrade', plan: 'premium_business' }));
+      } else if (user && user.plan === 'small') {
+        dispatch(modalsActions.showSwitchPlanModal({ source: 'cta_banner_upgrade', plan: 'small' }));
       } else if (user && user.is_business_user) {
         openBillingWindow();
       } else {
