@@ -20,6 +20,7 @@ export default connect(
   }),
   dispatch => ({
     storeValue: (id, value) => dispatch(actions.storeValue(id, value)),
+    upgradePlan: () => dispatch(actions.upgrade()),
     selectCycle: cycle => dispatch(actions.selectCycle(cycle)),
     hideModal: () => dispatch(modalsActions.hideUpgradeModal()),
     cancelTrial: () => dispatch(actions.cancelTrial()),

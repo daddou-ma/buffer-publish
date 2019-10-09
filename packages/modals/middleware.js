@@ -5,10 +5,6 @@ import {
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification/reducer';
 import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty/reducer';
-import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
-import getCtaFromSource from '@bufferapp/publish-switch-plan-modal/utils/tracking';
-import { getPlanId } from '@bufferapp/publish-plans/utils/plans';
 import { actions, actionTypes } from './reducer';
 import {
   shouldShowSwitchPlanModal,
@@ -168,21 +164,6 @@ export default ({ dispatch, getState }) => next => (action) => {
         dispatch(actions.showSwitchPlanModal({ source: 'queue_limit', plan: 'pro' }));
       }
       break;
-
-    case actionTypes.SHOW_SWITCH_PLAN_MODAL: {
-      const { source, plan } = action;
-      const ctaName = getCtaFromSource(source);
-      const ctaProperties = getCtaProperties(ctaName);
-
-      const metadata = {
-        planName: plan,
-        planId: getPlanId(plan),
-        ...ctaProperties,
-      };
-
-      dispatch(analyticsActions.trackEvent('Modal Payment Opened', metadata));
-      break;
-    }
     default:
       break;
   }
