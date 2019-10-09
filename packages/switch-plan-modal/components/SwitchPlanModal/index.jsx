@@ -148,7 +148,6 @@ SwitchPlanModal.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   cycle: PropTypes.string.isRequired,
   plan: PropTypes.string,
-  upgradePlan: PropTypes.func.isRequired,
   storeValue: PropTypes.func.isRequired,
   validating: PropTypes.bool.isRequired,
   selectCycle: PropTypes.func.isRequired,

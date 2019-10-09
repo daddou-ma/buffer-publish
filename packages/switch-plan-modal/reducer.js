@@ -4,7 +4,6 @@ import { actionTypes as stripeActionTypes } from '@bufferapp/stripe/reducer';
 
 export const actionTypes = keyWrapper('UPGRADE_MODAL', {
   STORE_VALUE: 0,
-  UPGRADE: 0,
   SELECT_CYCLE: 0,
   CANCEL_TRIAL: 0,
   CLEAR_CARD_INFO: 0,
@@ -76,9 +75,6 @@ export const actions = {
     type: actionTypes.STORE_VALUE,
     id,
     value,
-  }),
-  upgrade: () => ({
-    type: actionTypes.UPGRADE,
   }),
   selectCycle: cycle => ({
     type: actionTypes.SELECT_CYCLE,
