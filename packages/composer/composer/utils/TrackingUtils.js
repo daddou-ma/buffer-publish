@@ -65,4 +65,4 @@ const getSegmentMetadata = ({
   shareType: trackingShareTypeMap.get(queueingType) || null,
 });
 
-export { getComposerSource, getSegmentMetadata };
+export { getComposerSource, getSegmentMetadata, formatShareDate };

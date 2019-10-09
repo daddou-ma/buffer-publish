@@ -10,6 +10,7 @@ export default connect(
     plan: state.switchPlanModal.plan,
     cycle: state.switchPlanModal.cycle,
     card: state.switchPlanModal.card,
+    source: state.switchPlanModal.source,
     dismissible: state.switchPlanModal.dismissible,
     translations: state.i18n.translations['switch-plan-modal'],
     validating: state.stripe.validating,

@@ -2,6 +2,7 @@ import clonedeep from 'lodash.clonedeep';
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import debounce from 'lodash.debounce';
+import getAspectRatio, { InstagramStoriesAspectRatios }  from './utils/aspectRatioFinder';
 
 export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_GROUP: 0,
@@ -25,6 +26,7 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   HIDE_ERRORS: 0,
   TRACK_DRAG_AND_DROP_STORY: 0,
   TRACK_NOTE: 0,
+  TRACK_NON_CONFORMING_IMAGE_UPLOADED_STORY: 0,
 });
 
 const newStory = () => clonedeep({
@@ -197,7 +199,7 @@ export default (state, action) => {
           {
             id,
             progress,
-          }
+          },
         ],
       };
     }
@@ -374,7 +376,9 @@ export const actions = {
   handleClosePreviewClick: () => ({
     type: actionTypes.CLOSE_PREVIEW,
   }),
-  setStoryGroup: ({ scheduledAt, stories, storyGroupId, isPastDue }) => ({
+  setStoryGroup: ({
+    scheduledAt, stories, storyGroupId, isPastDue,
+  }) => ({
     type: actionTypes.SET_STORY_GROUP,
     scheduledAt,
     stories,
@@ -501,5 +505,14 @@ export const actions = {
     cta,
     note,
     order,
+  }),
+  trackAspectRatio: ({ cta, width, height, id }) => ({
+    type: actionTypes.TRACK_NON_CONFORMING_IMAGE_UPLOADED_STORY,
+    args: {
+      width,
+      height,
+      cta,
+      id,
+    },
   }),
 };

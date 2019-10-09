@@ -2,16 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clamp from 'lodash.clamp';
 import Arrow from '@bufferapp/publish-shared-components/Arrow';
-
+import { ImageDimensions } from '@bufferapp/publish-constants';
 import {
   ArrowWrapper,
   CarouselContainer,
   SliderCarousel,
 } from './style';
 
-export const getCardSizes = (largeCards) => {
-  if (largeCards) return { cardWidth: 180, cardHeight: 320, maxPerPage: 5 };
-  return { cardWidth: 110, cardHeight: 198, maxPerPage: 8 };
+export const getCardSizes = (
+  largeCards,
+  large = ImageDimensions.regular,
+  thumbnail = ImageDimensions.thumbnail
+) => {
+  if (largeCards) {
+    return {
+      cardWidth: large.width,
+      cardHeight: large.height,
+      maxPerPage: 5,
+    };
+  }
+  return {
+    cardWidth: thumbnail.width,
+    cardHeight: thumbnail.height,
+    maxPerPage: 8,
+  };
 };
 
 const NavArrow = ({

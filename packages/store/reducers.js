@@ -25,7 +25,6 @@ import modalsReducer from '@bufferapp/publish-modals/reducer';
 import instagramDirectPostingModalReducer from '@bufferapp/publish-ig-direct-posting-modal/reducer';
 import manageAppsReducer from '@bufferapp/manage-apps-extras/reducer';
 import twoFactorAuthReducer from '@bufferapp/publish-two-factor-auth/reducer';
-import closeAccountReducer from '@bufferapp/close-account/reducer';
 import profilesDisconnectedModalReducer from '@bufferapp/publish-profiles-disconnected-modal/reducer';
 import accountNotificationsReducer from '@bufferapp/publish-account-notifications/reducer';
 import stealProfileModalReducer from '@bufferapp/publish-steal-profile-modal/reducer';
@@ -42,6 +41,7 @@ import globalAccountReducer from '@bufferapp/global-account/reducer';
 import closeComposerModalReducer from '@bufferapp/publish-close-composer-confirmation-modal/reducer';
 import storyPreviewReducer from '@bufferapp/publish-story-preview/reducer';
 import storyGroupComposerReducer from '@bufferapp/publish-story-group-composer/reducer';
+import plansReducer from '@bufferapp/publish-plans/reducer';
 import creditCardFormReducer from '@bufferapp/publish-credit-card-form/reducer';
 
 // Analyze
@@ -79,7 +79,6 @@ export default {
   modals: modalsReducer,
   manageAppsExtras: manageAppsReducer,
   twoFactorAuth: twoFactorAuthReducer,
-  closeAccount: closeAccountReducer,
   productFeatures: productFeaturesReducer,
   drafts: draftsReducer,
   generalSettings: generalSettingsReducer,
@@ -101,6 +100,7 @@ export default {
   closeComposerModal: closeComposerModalReducer,
   storyPreview: storyPreviewReducer,
   storyGroupComposer: storyGroupComposerReducer,
+  plans: plansReducer,
   creditCardForm: creditCardFormReducer,
 
   // Analyze

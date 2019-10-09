@@ -8,6 +8,7 @@ const SERVICE_PINTEREST = 'pinterest';
 const SERVICE_INSTAGRAM = 'instagram';
 
 const PRO_PLAN_ID = '5';
+const SOLO_PREMIUM_BUSINESS_PLAN_ID = '8';
 const PREMIUM_BUSINESS_PLAN_ID = '9';
 const SMALL_PLAN_ID = '10';
 
@@ -48,6 +49,22 @@ const STORIES_UPDATE_STORY_GROUP = 'publish-stories-composer-updateStoryGroup-1'
 const STORIES_COMPOSER_ADD_NOTE = 'publish-stories-composer-addNote-1';
 const STORIES_PREVIEW_QUEUE_ADD_NOTE = 'publish-stories-queuePreview-addNote-1';
 const STORIES_PREVIEW_COMPOSER_ADD_NOTE = 'publish-stories-composerPreview-addNote-1';
+const STORIES_IMAGE_ASPECT_RATIO_UPLOADED = 'publish-stories-composer-imageAspectRatioUploaded-1';
+
+const ImageDimensions = {
+  large: {
+    width: 306,
+    height: 544,
+  },
+  regular: {
+    width: 180,
+    height: 320,
+  },
+  thumbnail: {
+    width: 110,
+    height: 198,
+  },
+};
 
 const UploadTypes = keyMirror({
   LINK_THUMBNAIL: null,
@@ -89,6 +106,7 @@ module.exports = {
   SERVICE_INSTAGRAM,
   PLAN_IDS: {
     PRO_PLAN_ID,
+    SOLO_PREMIUM_BUSINESS_PLAN_ID,
     PREMIUM_BUSINESS_PLAN_ID,
     SMALL_PLAN_ID,
   },
@@ -127,10 +145,12 @@ module.exports = {
     STORIES_COMPOSER_ADD_NOTE,
     STORIES_PREVIEW_COMPOSER_ADD_NOTE,
     STORIES_PREVIEW_QUEUE_ADD_NOTE,
+    STORIES_IMAGE_ASPECT_RATIO_UPLOADED,
   },
   MediaTypes,
   UploadTypes,
   AppEnvironments,
   PUSHER,
   CLIENT_NAME,
+  ImageDimensions,
 };
