@@ -2,7 +2,7 @@ import clonedeep from 'lodash.clonedeep';
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import debounce from 'lodash.debounce';
-import getAspectRatio, { InstagramStoriesAspectRatios }  from './utils/aspectRatioFinder';
+import getAspectRatio, { InstagramStoriesAspectRatios } from './utils/aspectRatioFinder';
 
 export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_GROUP: 0,
@@ -113,6 +113,7 @@ export default (state, action) => {
         ...state,
         storyGroup: {
           ...state.storyGroup,
+          shareNow: action.shareNow,
           scheduledAt: action.scheduledAt,
         },
       };
@@ -355,15 +356,19 @@ export default (state, action) => {
 };
 
 export const actions = {
-  handleSaveStoryGroup: scheduledAt => ({
+  handleSaveStoryGroup: (scheduledAt, shareNow) => ({
     type: actionTypes.SAVE_STORY_GROUP,
     scheduledAt,
+    shareNow,
   }),
-  handleUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId }) => ({
+  handleUpdateStoryGroup: ({
+    scheduledAt, stories, storyGroupId, shareNow,
+  }) => ({
     type: actionTypes.UPDATE_STORY_GROUP,
     scheduledAt,
     stories,
     storyGroupId,
+    shareNow,
   }),
   handleSaveStoryNote: ({ order, note }) => ({
     type: actionTypes.SAVE_STORY_NOTE,
@@ -506,7 +511,12 @@ export const actions = {
     note,
     order,
   }),
-  trackAspectRatio: ({ cta, width, height, id }) => ({
+  trackAspectRatio: ({
+    cta,
+    width,
+    height,
+    id,
+  }) => ({
     type: actionTypes.TRACK_NON_CONFORMING_IMAGE_UPLOADED_STORY,
     args: {
       width,

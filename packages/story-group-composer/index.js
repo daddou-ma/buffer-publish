@@ -34,13 +34,13 @@ export default connect(
     onOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
-    onCreateStoryGroup: (scheduledAt) => {
+    onCreateStoryGroup: (scheduledAt, shareNow = false) => {
       dispatch(actions.setScheduleLoading(true));
-      dispatch(actions.handleSaveStoryGroup(scheduledAt));
+      dispatch(actions.handleSaveStoryGroup(scheduledAt, shareNow));
     },
-    onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId }) => {
+    onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId, shareNow = false }) => {
       dispatch(actions.setScheduleLoading(true));
-      dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId }));
+      dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId, shareNow }));
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));

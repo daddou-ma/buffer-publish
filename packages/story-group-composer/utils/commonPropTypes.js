@@ -10,6 +10,7 @@ export const selectedProfilePropTypes = PropTypes.shape({
 export const translationsPropTypes = PropTypes.shape({
   scheduleLoadingButton: PropTypes.string,
   scheduleButton: PropTypes.string,
+  shareNowButton: PropTypes.string,
   previewButton: PropTypes.string,
   addNote: PropTypes.string.isRequired,
   notePlaceholder: PropTypes.string,

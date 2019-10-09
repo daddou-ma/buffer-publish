@@ -28,6 +28,40 @@ const getInitialDateTime = ({
   return null;
 };
 
+const getIsScheduleDisabled = ({
+  editMode,
+  storiesLength,
+  uploadsCompleted,
+  isScheduleLoading,
+  isScheduledAtPastDue,
+}) => {
+  if (!editMode) {
+    if (storiesLength < 1) {
+      return true;
+    }
+    if (!uploadsCompleted) {
+      return true;
+    }
+    if (isScheduleLoading) {
+      return true;
+    }
+    if (isScheduledAtPastDue) {
+      return true;
+    }
+  } else {
+    if (storiesLength < 1) {
+      return true;
+    }
+    if (!uploadsCompleted) {
+      return true;
+    }
+    if (isScheduleLoading) {
+      return true;
+    }
+  }
+  return false;
+};
+
 const AddStoryFooter = ({
   timezone,
   weekStartsMonday,
@@ -45,6 +79,7 @@ const AddStoryFooter = ({
 }) => {
   const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [forceDatePickerSubmit, setForceDatePickerSubmit] = useState(false);
 
   /* this covers the case if a story group has a share failure and a user edits it
    without updating the scheduled_at. Now the schedule button will be disabled until
@@ -53,7 +88,13 @@ const AddStoryFooter = ({
 
   const storiesLength = storyGroup.stories.length;
   const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0;
-  const isScheduleDisabled = storiesLength < 1 || !uploadsCompleted || isScheduleLoading || isScheduledAtPastDue;
+  const isScheduleDisabled = getIsScheduleDisabled({
+    storiesLength,
+    uploadsCompleted,
+    isScheduleLoading,
+    isScheduledAtPastDue,
+    editMode,
+  });
   const isPreviewDisabled = storiesLength < 1 || !uploadsCompleted;
 
   const { stories, storyGroupId } = storyGroup;
@@ -62,21 +103,44 @@ const AddStoryFooter = ({
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
     if (editMode) {
-      setScheduledAt(timestamp);
+      if (forceDatePickerSubmit) {
+        setForceDatePickerSubmit(false);
+        onUpdateStoryGroup({
+          scheduledAt: timestamp,
+          stories,
+          storyGroupId,
+        });
+      } else {
+        setScheduledAt(timestamp);
+      }
     } else {
       onCreateStoryGroup(timestamp);
     }
   };
 
   const onScheduleClick = () => {
-    if (editMode) {
+    if (!editMode || (editMode && isScheduledAtPastDue)) {
+      setForceDatePickerSubmit(true);
+      setShowDatePicker(true);
+    } else {
       onUpdateStoryGroup({
         scheduledAt,
         stories,
         storyGroupId,
       });
+    }
+  };
+
+  const onShareNowClick = () => {
+    if (editMode) {
+      onUpdateStoryGroup({
+        scheduledAt,
+        stories,
+        storyGroupId,
+        shareNow: true,
+      });
     } else {
-      setShowDatePicker(true);
+      onCreateStoryGroup(null, true);
     }
   };
 
@@ -118,8 +182,19 @@ const AddStoryFooter = ({
           />
         </ButtonStyle>
         <Button
+          onSelectClick={(selectedItem) => {
+            if (typeof selectedItem.selectedItemClick !== 'undefined') {
+              selectedItem.selectedItemClick();
+            }
+            return false;
+          }}
           onClick={onScheduleClick}
+          isSplit
           type="primary"
+          items={[
+            { title: translations.scheduleButton, selectedItemClick: onScheduleClick },
+            { title: translations.shareNowButton, selectedItemClick: onShareNowClick },
+          ]}
           disabled={isScheduleDisabled}
           label={isScheduleLoading
             ? translations.scheduleLoadingButton

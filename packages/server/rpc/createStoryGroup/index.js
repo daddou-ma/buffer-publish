@@ -5,7 +5,7 @@ const { storyGroupParser } = require('./../../parsers/src');
 module.exports = method(
   'createStoryGroup',
   'fetch stories groups',
-  ({ profileId, scheduledAt, stories }, { session }) =>
+  ({ profileId, scheduledAt, shareNow, stories }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/story_groups/create.json`,
       method: 'POST',
@@ -16,6 +16,7 @@ module.exports = method(
       form: {
         profile_id: profileId,
         scheduled_at: scheduledAt,
+        share_now: shareNow,
         stories,
       },
     })
