@@ -3,16 +3,16 @@ import getCtaProperties from './CtaStrings';
 
 describe('CtaStrings Utils', () => {
   describe('returns correct cta properties', () => {
-    it('returns plans open modal cta properties', () => {
+    it('returns app shell pro trial cta properties', () => {
       const expectedProperties = {
-        cta: SEGMENT_NAMES.PLANS_OPEN_MODAL,
+        cta: SEGMENT_NAMES.APP_SHELL_PRO_TRIAL,
         ctaApp: 'publish',
-        ctaView: 'plans',
-        ctaLocation: 'subscribeButton',
-        ctaButton: 'openSwithPlansModal',
+        ctaView: 'appShell',
+        ctaLocation: 'menu',
+        ctaButton: 'proTrial',
         ctaVersion: '1',
       };
-      const properties = getCtaProperties(SEGMENT_NAMES.PLANS_OPEN_MODAL);
+      const properties = getCtaProperties(SEGMENT_NAMES.APP_SHELL_PRO_TRIAL);
       expect(properties).toEqual(expectedProperties);
     });
     it('returns only cta if cta string doesnt meet validation', () => {
