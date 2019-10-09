@@ -150,6 +150,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       dispatch(analyticsActions.trackEvent('Story Group Created', metadata));
       dispatch(actions.resetStoryGroupState());
       dispatch(storiesActions.handleCloseStoriesComposer());
+      dispatch(remindersActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
         message: 'Great! This story has been added to your queue.',

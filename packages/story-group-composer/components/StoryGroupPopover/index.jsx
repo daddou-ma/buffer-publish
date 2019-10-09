@@ -37,6 +37,7 @@ const StoryGroupPopover = ({
   errorMessages,
   emptySlotData,
   maxStories,
+  sentPost,
 }) => (
   <React.Fragment>
     {showStoryPreview && (
@@ -81,6 +82,7 @@ const StoryGroupPopover = ({
           editMode={editMode}
           errorMessages={errorMessages}
           emptySlotData={emptySlotData}
+          sentPost={sentPost}
         />
       </Popover>
     )}

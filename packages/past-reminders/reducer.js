@@ -213,7 +213,7 @@ export default (state = initialState, action) => {
         ...state,
         showStoriesComposer: true,
         editMode: action.editMode,
-        editingPostId: action.updateId || '',
+        editingPostId: action.updateId,
       };
     case actionTypes.HIDE_STORIES_COMPOSER:
       return {
