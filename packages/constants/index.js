@@ -43,7 +43,6 @@ const PLANS_PREMIUM_UPGRADE = 'publish-plans-switchPlansModal-premiumUpgrade-1';
 const PLANS_PREMIUM_DOWNGRADE = 'publish-plans-switchPlansModal-premiumDowngrade-1';
 const PLANS_SMALL_UPGRADE = 'publish-plans-switchPlansModal-smallUpgrade-1';
 const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
-const PLANS_OPEN_MODAL = 'publish-plans-subscribeButton-openSwithPlansModal-1';
 const STORIES_PROMO_MODAL = 'publish-storiesPromoModal-buttonBottom-Premium-1';
 const STORIES_PREVIEW_COMPOSER = 'publish-stories-composer-preview-1';
 const STORIES_PREVIEW_QUEUE = 'publish-stories-queue-preview-1';
@@ -139,7 +138,6 @@ module.exports = {
     PLANS_PREMIUM_DOWNGRADE,
     PLANS_SMALL_UPGRADE,
     PLANS_SMALL_DOWNGRADE,
-    PLANS_OPEN_MODAL,
     STORIES_PROMO_MODAL,
     STORIES_PREVIEW_COMPOSER,
     STORIES_PREVIEW_QUEUE,
