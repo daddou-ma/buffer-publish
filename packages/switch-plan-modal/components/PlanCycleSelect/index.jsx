@@ -21,7 +21,6 @@ const getPlanCycleStyle = (selected, first) => ({
   background: selected ? '#2C4BFF' : 'white',
   border: selected ? '1px solid transparent' : '1px solid #ABB7FF',
   marginRight: first ? '25px' : 0,
-  transition: 'all 0.5s',
 });
 
 const checkmarkContainerStyle = {
