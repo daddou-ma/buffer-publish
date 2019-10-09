@@ -57,7 +57,7 @@ const PastRemindersWrapper = (props) => {
       <ButtonRelativeContainer>
         <ButtonWrapper>
           <QueueButtonGroup
-            tab="reminders"
+            tab="pastReminders"
             viewType={viewType}
             buttons={['Posts', 'Stories']}
             onClick={type => onToggleViewType(type)}
