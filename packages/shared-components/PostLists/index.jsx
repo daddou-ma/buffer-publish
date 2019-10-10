@@ -34,6 +34,7 @@ const renderPostList = ({
   isBusinessAccount,
   hasFirstCommentFlip,
   userData,
+  onPreviewClick,
 }) => (
   <div style={postListStyle}>
     <PostList
@@ -59,6 +60,7 @@ const renderPostList = ({
       isBusinessAccount={isBusinessAccount}
       hasFirstCommentFlip={hasFirstCommentFlip}
       userData={userData}
+      onPreviewClick={onPreviewClick}
     />
   </div>
 );
@@ -85,6 +87,7 @@ const PostLists = ({
   isBusinessAccount,
   hasFirstCommentFlip,
   userData,
+  onPreviewClick,
 }) => (
   <List
     items={postLists.map((postList, index) =>
@@ -109,6 +112,7 @@ const PostLists = ({
         isBusinessAccount,
         hasFirstCommentFlip,
         userData,
+        onPreviewClick,
       }),
     )}
     fillContainer

@@ -1,5 +1,6 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
+import { actions as previewActions } from '@bufferapp/publish-story-preview';
 // load the presentational component
 import { actions } from './reducer';
 import PastRemindersWrapper from './components/PastRemindersWrapper';
@@ -52,6 +53,7 @@ export default connect(
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         userData: state.appSidebar.user,
+        showStoryPreview: state.pastReminders.showStoryPreview,
       };
     }
     return {};
@@ -114,6 +116,17 @@ export default connect(
         profileId: ownProps.profileId,
         viewType,
       }));
+    },
+    onPreviewClick: ({
+      stories, profileId, id, scheduledAt, serviceId,
+    }) => {
+      dispatch(previewActions.handlePreviewClick({
+        stories, profileId, id, scheduledAt,
+      }));
+      dispatch(actions.handlePreviewClick());
+    },
+    onClosePreviewClick: () => {
+      dispatch(actions.handleClosePreviewClick());
     },
   }),
 )(PastRemindersWrapper);

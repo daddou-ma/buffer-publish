@@ -19,6 +19,8 @@ export const actionTypes = keyWrapper('PAST_REMINDERS', {
   TOGGLE_VIEW_TYPE: 0,
   OPEN_STORIES_COMPOSER: 0,
   HIDE_STORIES_COMPOSER: 0,
+  OPEN_PREVIEW: 0,
+  CLOSE_PREVIEW: 0,
 });
 
 export const initialState = {
@@ -29,6 +31,7 @@ export const initialState = {
   editingPostId: '',
   environment: 'production',
   viewType: 'posts',
+  showStoryPreview: false,
 };
 
 export const profileInitialState = {
@@ -230,6 +233,16 @@ export default (state = initialState, action) => {
         profileId: action.profileId,
         viewType: action.viewType,
       };
+    case actionTypes.OPEN_PREVIEW:
+      return {
+        ...state,
+        showStoryPreview: true,
+      };
+    case actionTypes.CLOSE_PREVIEW:
+      return {
+        ...state,
+        showStoryPreview: false,
+      };
     default:
       return state;
   }
@@ -292,5 +305,11 @@ export const actions = {
     type: actionTypes.TOGGLE_VIEW_TYPE,
     profileId,
     viewType,
+  }),
+  handlePreviewClick: () => ({
+    type: actionTypes.OPEN_PREVIEW,
+  }),
+  handleClosePreviewClick: () => ({
+    type: actionTypes.CLOSE_PREVIEW,
   }),
 };

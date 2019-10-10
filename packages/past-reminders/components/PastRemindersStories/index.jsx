@@ -9,6 +9,7 @@ import {
 } from '@bufferapp/components';
 import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import PreviewPopover from '@bufferapp/publish-story-preview';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -43,6 +44,9 @@ const PastRemindersStories = ({
   isManager,
   isBusinessAccount,
   userData,
+  onPreviewClick,
+  showStoryPreview,
+  onClosePreviewClick,
 }) => {
   if (loading) {
     return (
@@ -65,6 +69,12 @@ const PastRemindersStories = ({
 
   return (
     <ErrorBoundary>
+      {showStoryPreview && (
+        <PreviewPopover
+          onCloseClick={onClosePreviewClick}
+          view="queue"
+        />
+      )}
       <div>
         <div style={topBarContainerStyle}>
           {showStoriesComposer && !editMode
@@ -96,6 +106,7 @@ const PastRemindersStories = ({
           isSent={false}
           isPastReminder
           userData={userData}
+          onPreviewClick={onPreviewClick}
         />
       </div>
     </ErrorBoundary>
@@ -121,13 +132,16 @@ PastRemindersStories.propTypes = {
   editMode: PropTypes.bool,
   onEditClick: PropTypes.func,
   onShareStoryGroupAgain: PropTypes.func,
-  onMobileClick: PropTypes.func,
   onImageClick: PropTypes.func,
   onImageClickNext: PropTypes.func,
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
+  onStoryGroupMobileClick: PropTypes.func,
+  onPreviewClick: PropTypes.func,
+  onClosePreviewClick: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
+  showStoryPreview: PropTypes.bool,
 };
 
 PastRemindersStories.defaultProps = {
@@ -140,13 +154,16 @@ PastRemindersStories.defaultProps = {
   editMode: false,
   isManager: true,
   isBusinessAccount: false,
+  showStoryPreview: false,
   onEditClick: () => {},
   onShareStoryGroupAgain: () => {},
-  onMobileClick: () => {},
   onImageClick: () => {},
   onImageClickNext: () => {},
   onImageClickPrev: () => {},
   onImageClose: () => {},
+  onStoryGroupMobileClick: () => {},
+  onPreviewClick: () => {},
+  onClosePreviewClick: () => {},
 };
 
 export default PastRemindersStories;

@@ -60,6 +60,7 @@ const renderPost = ({
   isPastReminder,
   hasFirstCommentFlip,
   userData,
+  onPreviewClick,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -78,6 +79,7 @@ const renderPost = ({
     isPastReminder,
     hasFirstCommentFlip,
     userData,
+    onPreviewClick,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -117,6 +119,7 @@ const PostList = ({
   hasFirstCommentFlip,
   index,
   userData,
+  onPreviewClick,
 }) => (
   <div>
     {renderHeader({ listHeader, isFirstItem: index === 0 })}
@@ -151,6 +154,7 @@ const PostList = ({
               isPastReminder,
               hasFirstCommentFlip,
               userData,
+              onPreviewClick,
             })
           }
           {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder
