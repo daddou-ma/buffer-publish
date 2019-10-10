@@ -87,7 +87,7 @@ const Plans = ({
       {isExperimentEnabled && (
         <ColumnContainerStyle>
           <PlanColumnExperimentEnabled
-            {...translations.pro}
+            {...translations.proExperiment}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
             currentPlan={currentPlan}
             onChoosePlanClick={onChoosePlanClick}
@@ -95,7 +95,7 @@ const Plans = ({
             isNonprofit={isNonprofit}
           />
           <PlanColumnExperimentEnabled
-            {...translations.premium}
+            {...translations.premiumExperiment}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
             currentPlan={currentPlan}
             onChoosePlanClick={onChoosePlanClick}
@@ -110,7 +110,7 @@ const Plans = ({
       {isExperimentControl && (
         <ColumnContainerStyle>
           <PlanColumnExperimentControl
-            {...translations.pro}
+            {...translations.proExperiment}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
             currentPlan={currentPlan}
             onChoosePlanClick={onChoosePlanClick}
@@ -118,7 +118,7 @@ const Plans = ({
             isNonprofit={isNonprofit}
           />
           <PlanColumnExperimentControl
-            {...translations.premium}
+            {...translations.premiumExperiment}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
             currentPlan={currentPlan}
             onChoosePlanClick={onChoosePlanClick}

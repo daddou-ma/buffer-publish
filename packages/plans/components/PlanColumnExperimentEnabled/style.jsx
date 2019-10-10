@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import { blue, grayDark } from '@bufferapp/ui/style/colors';
+import { Text } from '@bufferapp/ui';
+
 
 export const ColumnStyle = styled.div`
   box-shadow: 0px 0px 16px #00000014;
   border-radius: 4px;
-  margin-right: 24px;
+  margin-right: 40px;
   padding: 45px;
   display: flex;
   flex-direction: column;
@@ -24,6 +27,7 @@ export const ImageWrapperStyle = styled.div`
 `;
 
 export const TopContentStyle = styled.div`
+  position: relative;
   text-align: center;
 `;
 
@@ -31,7 +35,7 @@ export const UsersStyle = styled.span`
   align-items: center;
   justify-content: center;
   display: flex;
-  color: blue;
+  color: ${props => (props.isSelected ? blue : grayDark)};
 `;
 
 export const IconStyle = styled.span`
@@ -41,23 +45,46 @@ export const IconStyle = styled.span`
 
 export const PriceStyle = styled.span`
   h1 {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
+    margin-top: 6px;
   }
 `;
 
 export const FeatureListStyle = styled.span`
-  margin-top: 35px;
+  margin-top: 5px;
+`;
+
+export const EmptySpan = styled.span`
+  height: 130px;
+  display: inline-block;
+`;
+
+export const TextStyle = styled(Text)`
+  font-family: Poppins;
+`;
+
+export const BillingTextStyle = styled(Text)`
+  margin: 0;
+`;
+
+export const MonthlyText = styled.span`
+  font-family: Poppins;
+  font-size: 13px;
 `;
 
 export const PlanStyle = styled.div`
+  position: absolute;
+  right: -65px;
   display: flex;
   align-items: center;
 `;
 
 export const RightPlanItem = styled.div`
-  margin-left: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
 `;
 
 export const LeftPlanItem = styled.div`
-  margin-right: 5px;
+  margin-right: 15px;
+  margin-left: 15px;
 `;

@@ -331,6 +331,39 @@
       "soloNonProfitCost": "$17.50",
       "monthly": "/mo"
     },
+    "proExperiment": {
+      "title": "Pro",
+      "cost": "$15",
+      "nonProfitCost": "$7.50",
+      "subtitle": "Commit to a social strategy",
+      "plan": "pro",
+      "features": ["8 social accounts", "Instagram first comment"],
+      "featureTooltips": ["", "Include first comment when you schedule Instagram posts"],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly",
+      "monthly": "/mo"
+    },
+    "premiumExperiment": {
+      "title": "Premium",
+      "cost": "$65",
+      "nonProfitCost": "$32.50",
+      "subtitle": "Unlock advanced IG features",
+      "plan": "premium_business",
+      "features": ["8 social accounts", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "featureTooltips": ["",
+                          "Plan, preview, and schedule Instagram Stories on web and mobile.",
+                          "Include the first comment when you schedule Instagram posts",
+                          "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
+                          "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+                          ],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly",
+      "soloCost": "$35",
+      "soloNonProfitCost": "$17.50",
+      "monthly": "/mo"
+    },
     "small": {
       "title": "Business",
       "cost": "$99",
