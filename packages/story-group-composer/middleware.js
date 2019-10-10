@@ -36,7 +36,7 @@ const shouldTrackAspectRatio = (aspectRatio) => {
 };
 
 
-const createImageStory = (story) => {
+export const createImageStory = (story) => {
   const {
     _id,
     note,
@@ -55,7 +55,7 @@ const createImageStory = (story) => {
   };
 };
 
-const createVideoStory = (story) => {
+export const createVideoStory = (story) => {
   const {
     _id,
     note,
@@ -84,7 +84,7 @@ const createVideoStory = (story) => {
   };
 };
 
-const getMappedStories = (story) => {
+export const getMappedStories = (story) => {
   if (story.type === 'video') return createVideoStory(story);
   return createImageStory(story);
 };

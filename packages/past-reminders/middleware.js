@@ -1,6 +1,8 @@
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as dataFetchActions, actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { getMappedStories } from '@bufferapp/publish-story-group-composer/middleware';
+import { getTodayTimestamp } from '@bufferapp/publish-story-group-composer/utils/AddStory';
 import { actionTypes } from './reducer';
 
 const fetchPastReminders = (dispatch, action) => {
@@ -16,8 +18,10 @@ const fetchPastReminders = (dispatch, action) => {
   }));
 };
 
-export default ({ dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
+export default ({ getState, dispatch }) => next => (action) => {
   next(action);
+  const state = getState();
+  const { selectedProfileId } = state.profileSidebar;
   switch (action.type) {
     case profileActionTypes.SELECT_PROFILE:
       dispatch(dataFetchActions.fetch({
@@ -39,12 +43,29 @@ export default ({ dispatch }) => next => (action) => { // eslint-disable-line no
         },
       }));
       break;
-    case actionTypes.STORY_GROUP_MOBILE_REMINDER:
-      dispatch(dataFetchActions.fetch({
-        name: 'shareStoryGroupNow',
-        args: {
-          storyGroupId: action.updateId,
-        },
+    case actionTypes.STORY_GROUP_MOBILE_REMINDER: {
+      if (action.storyGroup && action.storyGroup.storyDetails) {
+        const { storyGroup } = action;
+        const { stories } = storyGroup.storyDetails;
+        const sendStories = stories.map(getMappedStories);
+        const scheduledAt = getTodayTimestamp({ timezone: storyGroup.profileTimezone });
+
+        dispatch(dataFetchActions.fetch({
+          name: 'createStoryGroup',
+          args: {
+            profileId: selectedProfileId,
+            scheduledAt,
+            stories: sendStories,
+            shareNow: true,
+          },
+        }));
+      }
+      break;
+    }
+    case `createStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
       }));
       break;
     case `mobileReminder_${dataFetchActionTypes.FETCH_SUCCESS}`:

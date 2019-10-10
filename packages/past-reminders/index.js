@@ -85,6 +85,7 @@ export default connect(
     onStoryGroupMobileClick: ({ post }) => {
       dispatch(actions.handleStoryGroupMobileClick({
         post,
+        profileId: ownProps.profileId,
       }));
     },
     onImageClick: (post) => {

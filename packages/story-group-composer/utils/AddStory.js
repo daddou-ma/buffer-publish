@@ -14,3 +14,10 @@ export const getMomentTime = ({ scheduledAt, timezone }) => {
   }
   return scheduledAtMoment;
 };
+
+export const getTodayTimestamp = ({ timezone }) => {
+  const todayDate = (new Date()).setSeconds(0);
+  const isTimezoneSet = !!timezone;
+  const today = isTimezoneSet ? moment.tz(todayDate, timezone) : moment(todayDate);
+  return today.clone().add(1, 'hours').unix();
+};

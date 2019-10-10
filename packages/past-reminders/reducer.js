@@ -273,9 +273,11 @@ export const actions = {
     type: actionTypes.POST_MOBILE_REMINDER,
     updateId: post.id,
   }),
-  handleStoryGroupMobileClick: ({ post }) => ({
+  handleStoryGroupMobileClick: ({ post, profileId }) => ({
     type: actionTypes.STORY_GROUP_MOBILE_REMINDER,
     updateId: post.id,
+    storyGroup: post,
+    profileId,
   }),
   handleImageClick: ({ post, profileId }) => ({
     type: actionTypes.POST_IMAGE_CLICKED,
