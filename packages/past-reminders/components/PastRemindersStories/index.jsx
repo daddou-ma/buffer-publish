@@ -2,31 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   PostLists,
-  EmptyState,
 } from '@bufferapp/publish-shared-components';
-import {
-  LoadingAnimation,
-} from '@bufferapp/components';
 import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import PreviewPopover from '@bufferapp/publish-story-preview';
+import {
+  Loading,
+  ComposerStyle,
+  EmptyStateStyled,
+  TopBarContainerStyle,
+} from '../PastRemindersWrapper/style';
 
 const ErrorBoundary = getErrorBoundary(true);
-
-const loadingContainerStyle = {
-  width: '100%',
-  height: '100%',
-  textAlign: 'center',
-  paddingTop: '5rem',
-};
-
-const topBarContainerStyle = {
-  display: 'flex',
-};
-
-const composerStyle = {
-  flexGrow: '1',
-};
 
 const PastRemindersStories = ({
   total,
@@ -50,20 +37,13 @@ const PastRemindersStories = ({
 }) => {
   if (loading) {
     return (
-      <div style={loadingContainerStyle}>
-        <LoadingAnimation />
-      </div>
+      <Loading />
     );
   }
 
   if (total < 1) {
     return (
-      <EmptyState
-        title="You haven’t published any posts with this account in the past 30 days!"
-        subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
-        heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
-        heroImgSize={{ width: '270px', height: '150px' }}
-      />
+      <EmptyStateStyled />
     );
   }
 
@@ -75,17 +55,17 @@ const PastRemindersStories = ({
           view="queue"
         />
       )}
-      <div>
-        <div style={topBarContainerStyle}>
+      <React.Fragment>
+        <TopBarContainerStyle>
           {showStoriesComposer && !editMode
             && (
-              <div style={composerStyle}>
+              <ComposerStyle>
                 <StoryGroupPopover
                   type="pastReminders"
                 />
-              </div>
+              </ComposerStyle>
             )}
-        </div>
+        </TopBarContainerStyle>
         {showStoriesComposer && editMode
           && (
             <StoryGroupPopover
@@ -108,7 +88,7 @@ const PastRemindersStories = ({
           userData={userData}
           onPreviewClick={onPreviewClick}
         />
-      </div>
+      </React.Fragment>
     </ErrorBoundary>
   );
 };
@@ -142,6 +122,9 @@ PastRemindersStories.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   showStoryPreview: PropTypes.bool,
+  userData: PropTypes.shape({
+    tags: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 PastRemindersStories.defaultProps = {
@@ -155,6 +138,7 @@ PastRemindersStories.defaultProps = {
   isManager: true,
   isBusinessAccount: false,
   showStoryPreview: false,
+  userData: {},
   onEditClick: () => {},
   onShareStoryGroupAgain: () => {},
   onImageClick: () => {},
