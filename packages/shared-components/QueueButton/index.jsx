@@ -7,23 +7,41 @@ const getBorderRadius = (index, total) => {
   return '0px';
 };
 
+const getBorderRight = (index, selectedIndex) => (
+  index === selectedIndex - 1 ? { borderRight: 'none' } : ''
+);
+
+const getBorderLeft = (isSelected, index) => (
+  !isSelected && index !== 0 ? { borderLeft: 'none' } : ''
+);
+
+const lightBorder = '1px solid #C4C4C4';
+const darkBorder = '1px solid #636363';
+
 // refactor when new design system is used
-const btnStyle = (index, isHovering, isSelected, disabled, total) => ({
+const btnStyle = ({
+  index,
+  isHovering,
+  isSelected,
+  disabled,
+  total,
+  selectedIndex,
+}) => ({
   fontFamily: 'Roboto',
   fontWeight: 500,
   color: isSelected || isHovering ? '#3D3D3D' : '#636363',
   borderRadius: getBorderRadius(index, total),
   fontSize: '14px',
-  border: isSelected ? '1px solid #636363' : '1px solid #C4C4C4',
+  border: isSelected ? darkBorder : lightBorder,
   boxSizing: 'border-box',
   backgroundColor: isSelected || isHovering ? '#F5F5F5' : 'initial',
   height: '36px',
   padding: '8px 16px',
   cursor: 'pointer',
   outline: 'none',
-  position: (index !== 1) ? 'relative' : 'initial',
-  margin: (index !== 1) ? 'auto -1px' : 'initial',
   pointerEvents: disabled ? 'none' : 'auto',
+  ...getBorderLeft(isSelected, index),
+  ...getBorderRight(index, selectedIndex),
 });
 
 class QueueButton extends Component {
@@ -31,7 +49,6 @@ class QueueButton extends Component {
     super(props);
     this.state = {
       isHovering: false,
-      selectedIndex: 0,
     };
 
     this.onMouseEnter = this.onMouseEnter.bind(this);
@@ -44,11 +61,6 @@ class QueueButton extends Component {
 
   onMouseLeave() {
     this.setState({ isHovering: false });
-  }
-
-  updateIndex(selectedIndex) {
-    // Currently not using logic because Week & Month btns open up in new window
-    this.setState({ selectedIndex });
   }
 
   render() {
@@ -65,7 +77,14 @@ class QueueButton extends Component {
     return (
       <button
         type="button"
-        style={btnStyle(index, isHovering, selectedIndex === index, disabled, total)}
+        style={btnStyle({
+          index,
+          isHovering,
+          isSelected: selectedIndex === index,
+          disabled,
+          total,
+          selectedIndex,
+        })}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={(e) => {

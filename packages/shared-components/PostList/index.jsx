@@ -59,6 +59,7 @@ const renderPost = ({
   isBusinessAccount,
   isPastReminder,
   hasFirstCommentFlip,
+  userData,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -76,6 +77,7 @@ const renderPost = ({
     isBusinessAccount,
     isPastReminder,
     hasFirstCommentFlip,
+    userData,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -114,6 +116,7 @@ const PostList = ({
   features,
   hasFirstCommentFlip,
   index,
+  userData,
 }) => (
   <div>
     {renderHeader({ listHeader, isFirstItem: index === 0 })}
@@ -147,6 +150,7 @@ const PostList = ({
               isBusinessAccount,
               isPastReminder,
               hasFirstCommentFlip,
+              userData,
             })
           }
           {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder

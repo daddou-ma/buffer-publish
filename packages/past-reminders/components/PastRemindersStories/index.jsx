@@ -42,6 +42,7 @@ const PastRemindersStories = ({
   editMode,
   isManager,
   isBusinessAccount,
+  userData,
 }) => {
   if (loading) {
     return (
@@ -94,6 +95,7 @@ const PastRemindersStories = ({
           isBusinessAccount={isBusinessAccount}
           isSent={false}
           isPastReminder
+          userData={userData}
         />
       </div>
     </ErrorBoundary>

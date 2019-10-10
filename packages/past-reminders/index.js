@@ -51,6 +51,7 @@ export default connect(
         isManager: state.profileSidebar.selectedProfile.isManager,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        userData: state.appSidebar.user,
       };
     }
     return {};

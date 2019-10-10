@@ -5,19 +5,19 @@ import QueueButton from '../QueueButton';
 const REMINDERS = 'pastReminders';
 
 const onClickButton = (tab, index, onClick) => {
-  let viewType = {
+  let toggleOption = {
     1: 'week',
     2: 'month',
   };
 
   if (tab === REMINDERS) {
-    viewType = {
+    toggleOption = {
       0: 'posts',
       1: 'stories',
     };
   }
 
-  return onClick(viewType[index] || viewType['0']);
+  return onClick(toggleOption[index] || toggleOption['0']);
 };
 
 const QueueButtonGroup = ({
@@ -25,8 +25,9 @@ const QueueButtonGroup = ({
   buttons,
   disabled,
   tab,
+  viewType,
 }) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(viewType === 'stories' ? 1 : 0);
 
   return (
     <div>
@@ -55,11 +56,13 @@ QueueButtonGroup.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.string).isRequired,
   disabled: PropTypes.bool,
   tab: PropTypes.string,
+  viewType: PropTypes.string,
 };
 
 QueueButtonGroup.defaultProps = {
   disabled: false,
   tab: 'queue',
+  viewType: 'day',
 };
 
 export default QueueButtonGroup;
