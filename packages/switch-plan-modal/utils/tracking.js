@@ -23,4 +23,4 @@ const sourceCtaMap = new Map([
 
 const getCtaFromSource = source => sourceCtaMap.get(source) || null;
 
-module.exports = getCtaFromSource;
+export default getCtaFromSource;
