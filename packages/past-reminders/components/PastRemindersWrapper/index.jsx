@@ -13,7 +13,7 @@ import PastRemindersStories from '../PastRemindersStories';
 
 const ErrorBoundary = getErrorBoundary(true);
 
-const Header = styled.div`
+const HeaderWrapper = styled.div`
   margin-bottom: 1.5rem,
   width: 100%,
 `;
@@ -32,10 +32,31 @@ const ButtonWrapper = styled.div`
   top: 15px;
 `;
 
+const Header = ({
+  header,
+  subHeader,
+}) => (
+  <HeaderWrapper>
+    <TitleWrapper>
+      <Text color="black">{header}</Text>
+    </TitleWrapper>
+    <Text color="shuttleGray" size="mini">{subHeader}</Text>
+    <Divider />
+  </HeaderWrapper>
+);
+
+Header.propTypes = {
+  header: PropTypes.string,
+  subHeader: PropTypes.string,
+};
+
+Header.defaultProps = {
+  header: null,
+  subHeader: null,
+};
+
 const PastRemindersWrapper = (props) => {
   const {
-    header,
-    subHeader,
     isLockedProfile,
     viewType,
     onToggleViewType,
@@ -47,13 +68,7 @@ const PastRemindersWrapper = (props) => {
 
   return (
     <ErrorBoundary>
-      <Header>
-        <TitleWrapper>
-          <Text color="black">{header}</Text>
-        </TitleWrapper>
-        <Text color="shuttleGray" size="mini">{subHeader}</Text>
-        <Divider />
-      </Header>
+      <Header {...props} />
       <ButtonRelativeContainer>
         <ButtonWrapper>
           <QueueButtonGroup
@@ -71,8 +86,6 @@ const PastRemindersWrapper = (props) => {
 };
 
 PastRemindersWrapper.propTypes = {
-  header: PropTypes.string,
-  subHeader: PropTypes.string,
   viewType: PropTypes.string,
   total: PropTypes.number,
   isLockedProfile: PropTypes.bool,
@@ -80,8 +93,6 @@ PastRemindersWrapper.propTypes = {
 };
 
 PastRemindersWrapper.defaultProps = {
-  header: null,
-  subHeader: null,
   viewType: 'posts',
   total: 0,
   isLockedProfile: false,
