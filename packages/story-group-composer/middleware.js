@@ -84,6 +84,17 @@ export const createVideoStory = (story) => {
   };
 };
 
+const setStoryGroup = ({ editingStoryGroup, dispatch }) => {
+  if (editingStoryGroup) {
+    dispatch(actions.setStoryGroup({
+      stories: editingStoryGroup.storyDetails.stories,
+      storyGroupId: editingStoryGroup.id,
+      scheduledAt: editingStoryGroup.scheduledAt,
+      isPastDue: editingStoryGroup.isPastDue,
+    }));
+  }
+};
+
 export const getMappedStories = (story) => {
   if (story.type === 'video') return createVideoStory(story);
   return createImageStory(story);
@@ -184,14 +195,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       const currentProfile = state.stories.byProfileId[selectedProfileId];
       const { editingPostId } = state.stories;
       const editingStoryGroup = cloneDeep(currentProfile.storyPosts[editingPostId]);
-      if (editingStoryGroup) {
-        dispatch(actions.setStoryGroup({
-          stories: editingStoryGroup.storyDetails.stories,
-          storyGroupId: editingStoryGroup.id,
-          scheduledAt: editingStoryGroup.scheduledAt,
-          isPastDue: editingStoryGroup.isPastDue,
-        }));
-      }
+      setStoryGroup({ editingStoryGroup, dispatch });
       const channel = getState().profileSidebar.selectedProfile;
       const metadata = getTrackingDataForOpenComposer({ channel });
       dispatch(analyticsActions.trackEvent('Story Group Composer Opened', metadata));
@@ -201,14 +205,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       const currentProfile = state.pastReminders.byProfileId[selectedProfileId];
       const { editingPostId } = state.pastReminders;
       const editingStoryGroup = cloneDeep(currentProfile.posts[editingPostId]);
-      if (editingStoryGroup) {
-        dispatch(actions.setStoryGroup({
-          stories: editingStoryGroup.storyDetails.stories,
-          storyGroupId: editingStoryGroup.id,
-          scheduledAt: editingStoryGroup.scheduledAt,
-          isPastDue: editingStoryGroup.isPastDue,
-        }));
-      }
+      setStoryGroup({ editingStoryGroup, dispatch });
       break;
     }
     case actionTypes.TRACK_DRAG_AND_DROP_STORY: {
