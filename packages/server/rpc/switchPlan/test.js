@@ -11,11 +11,11 @@ const session = {
   },
 };
 
-const switchPlan = source =>
+const switchPlan = cta =>
   RPCEndpoint.fn({
     cycle: 'year',
     paymentMethodId: 'mock payment method id',
-    source,
+    cta,
   }, { session });
 
 describe('rpc/switchPlan', () => {

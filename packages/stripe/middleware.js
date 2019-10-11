@@ -56,7 +56,7 @@ export default ({ dispatch }) => next => (action) => {
           name: 'switchPlan',
           args: {
             cycle,
-            source: getCtaFromSource(source),
+            cta: getCtaFromSource(source),
             plan,
             paymentMethodId,
           },

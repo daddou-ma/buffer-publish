@@ -5,7 +5,7 @@ module.exports = method(
   'switchPlan',
   'switch user plan',
   async ({
-    cycle, paymentMethodId, source, plan,
+    cycle, paymentMethodId, cta, plan,
   }, { session }) => {
     let result;
     try {
@@ -17,7 +17,7 @@ module.exports = method(
         form: {
           cycle,
           payment_method_id: paymentMethodId,
-          cta: source,
+          cta,
           access_token: session.publish.accessToken,
           product: 'publish',
           plan,

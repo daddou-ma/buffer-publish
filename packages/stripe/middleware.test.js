@@ -42,7 +42,7 @@ describe('middleware', () => {
         args: {
           cycle: action.cycle,
           plan: action.plan,
-          source: SEGMENT_NAMES.QUEUE_LIMIT_PRO_UPGRADE,
+          cta: SEGMENT_NAMES.QUEUE_LIMIT_PRO_UPGRADE,
           paymentMethodId: action.paymentMethodId,
         },
       }));
