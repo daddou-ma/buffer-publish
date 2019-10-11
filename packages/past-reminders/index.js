@@ -59,34 +59,36 @@ export default connect(
     return {};
   },
   (dispatch, ownProps) => ({
-    onShareAgainClick: ({ post }) => {
-      dispatch(actions.handleShareAgainClick({
-        post,
-        profileId: ownProps.profileId,
-      }));
+    onShareAgainClick: ({ post }, viewType) => {
+      if (viewType && viewType === 'stories') {
+        dispatch(actions.handleShareStoryGroupAgain({
+          post,
+          profileId: ownProps.profileId,
+        }));
+      } else {
+        dispatch(actions.handleShareAgainClick({
+          post,
+          profileId: ownProps.profileId,
+        }));
+      }
     },
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
     },
-    onShareStoryGroupAgain: ({ post }) => {
-      dispatch(actions.handleShareStoryGroupAgain({
-        post,
-        profileId: ownProps.profileId,
-      }));
-    },
     handleCloseStoriesComposer: () => {
       dispatch(actions.handleCloseStoriesComposer());
     },
-    onMobileClick: ({ post }) => {
-      dispatch(actions.handleMobileClick({
-        post,
-      }));
-    },
-    onStoryGroupMobileClick: ({ post }) => {
-      dispatch(actions.handleStoryGroupMobileClick({
-        post,
-        profileId: ownProps.profileId,
-      }));
+    onMobileClick: ({ post }, viewType) => {
+      if (viewType && viewType === 'stories') {
+        dispatch(actions.handleStoryGroupMobileClick({
+          post,
+          profileId: ownProps.profileId,
+        }));
+      } else {
+        dispatch(actions.handleMobileClick({
+          post,
+        }));
+      }
     },
     onImageClick: (post) => {
       dispatch(actions.handleImageClick({

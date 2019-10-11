@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {
   PostLists,
 } from '@bufferapp/publish-shared-components';
+import PreviewPopover from '@bufferapp/publish-story-preview';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
+import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import {
   Loading,
@@ -14,9 +16,30 @@ import {
 
 const ErrorBoundary = getErrorBoundary(true);
 
+const Composer = ({ showComposer, showStoriesComposer, onSave }) => {
+  if (showComposer) {
+    return (
+      <ComposerPopover
+        onSave={onSave}
+        type="pastReminders"
+      />
+    );
+  }
+
+  if (showStoriesComposer) {
+    return (
+      <StoryGroupPopover
+        type="pastReminders"
+      />
+    );
+  }
+};
+
 const PastRemindersPosts = ({
   total,
   loading,
+  userData,
+  viewType,
   postLists,
   onEditClick,
   onShareAgainClick,
@@ -30,6 +53,10 @@ const PastRemindersPosts = ({
   editMode,
   isManager,
   isBusinessAccount,
+  onPreviewClick,
+  showStoryPreview,
+  showStoriesComposer,
+  onClosePreviewClick,
 }) => {
   if (loading) {
     return (
@@ -45,30 +72,39 @@ const PastRemindersPosts = ({
 
   return (
     <ErrorBoundary>
+      {showStoryPreview && (
+        <PreviewPopover
+          onCloseClick={onClosePreviewClick}
+          view="queue"
+        />
+      )}
       <React.Fragment>
-        {showComposer && !editMode
+        {(showComposer || showStoriesComposer) && !editMode
           && (
             <TopBarContainerStyle>
               <ComposerStyle>
-                <ComposerPopover
+                <Composer
+                  showComposer={showComposer}
+                  showStoriesComposer={showStoriesComposer}
                   onSave={onComposerCreateSuccess}
-                  type="pastReminders"
                 />
               </ComposerStyle>
             </TopBarContainerStyle>
           )}
-        {showComposer && editMode
+        {(showComposer || showStoriesComposer) && editMode
           && (
-            <ComposerPopover
+            <Composer
+              showComposer={showComposer}
+              showStoriesComposer={showStoriesComposer}
               onSave={onComposerCreateSuccess}
-              type="pastReminders"
             />
           )}
+
         <PostLists
           postLists={postLists}
           onEditClick={onEditClick}
-          onShareAgainClick={onShareAgainClick}
-          onMobileClick={onMobileClick}
+          onShareAgainClick={post => onShareAgainClick(post, viewType)}
+          onMobileClick={post => onMobileClick(post, viewType)}
           onImageClick={onImageClick}
           onImageClickNext={onImageClickNext}
           onImageClickPrev={onImageClickPrev}
@@ -77,6 +113,8 @@ const PastRemindersPosts = ({
           isBusinessAccount={isBusinessAccount}
           isSent={false}
           isPastReminder
+          userData={userData}
+          onPreviewClick={onPreviewClick}
         />
       </React.Fragment>
     </ErrorBoundary>
@@ -100,6 +138,7 @@ PastRemindersPosts.propTypes = {
   total: PropTypes.number,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
+  showStoriesComposer: PropTypes.bool,
   onComposerCreateSuccess: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
   onShareAgainClick: PropTypes.func,
@@ -108,8 +147,15 @@ PastRemindersPosts.propTypes = {
   onImageClickNext: PropTypes.func,
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
+  onPreviewClick: PropTypes.func,
+  onClosePreviewClick: PropTypes.func,
+  viewType: PropTypes.string,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
+  showStoryPreview: PropTypes.bool,
+  userData: PropTypes.shape({
+    tags: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 PastRemindersPosts.defaultProps = {
@@ -119,9 +165,13 @@ PastRemindersPosts.defaultProps = {
   postLists: [],
   total: 0,
   showComposer: false,
+  showStoriesComposer: false,
   editMode: false,
   isManager: true,
   isBusinessAccount: false,
+  showStoryPreview: false,
+  viewType: 'posts',
+  userData: {},
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onMobileClick: () => {},
@@ -129,6 +179,8 @@ PastRemindersPosts.defaultProps = {
   onImageClickNext: () => {},
   onImageClickPrev: () => {},
   onImageClose: () => {},
+  onPreviewClick: () => {},
+  onClosePreviewClick: () => {},
 };
 
 export default PastRemindersPosts;

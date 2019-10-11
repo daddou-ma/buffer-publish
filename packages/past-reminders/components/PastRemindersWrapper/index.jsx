@@ -9,7 +9,6 @@ import { QueueButtonGroup } from '@bufferapp/publish-shared-components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import PastRemindersPosts from '../PastRemindersPosts';
-import PastRemindersStories from '../PastRemindersStories';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -79,8 +78,7 @@ const PastRemindersWrapper = (props) => {
           />
         </ButtonWrapper>
       </ButtonRelativeContainer>
-      {viewType === 'posts' && <PastRemindersPosts {...props} />}
-      {viewType === 'stories' && <PastRemindersStories {...props} />}
+      <PastRemindersPosts viewType={viewType} {...props} />
     </ErrorBoundary>
   );
 };

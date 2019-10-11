@@ -68,6 +68,12 @@ export default ({ getState, dispatch }) => next => (action) => {
         message: 'A push notification to your connected mobile devices has been sent so you can post to Instagram!',
       }));
       break;
+    case `mobileReminder_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(notificationActions.createNotification({
+        notificationType: 'error',
+        message: action.error,
+      }));
+      break;
     default:
       break;
   }
