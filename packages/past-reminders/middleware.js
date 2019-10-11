@@ -62,12 +62,6 @@ export default ({ getState, dispatch }) => next => (action) => {
       }
       break;
     }
-    case `createStoryGroup_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(notificationActions.createNotification({
-        notificationType: 'error',
-        message: action.error,
-      }));
-      break;
     case `mobileReminder_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
