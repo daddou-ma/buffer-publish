@@ -4,15 +4,15 @@ import {
   actions as asyncDataFetchActions,
   actionTypes as asyncDataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import middleware from './middleware';
 import { actions, actionTypes } from './reducer';
 
 describe('middleware', () => {
-  const dispatch = jest.fn();
-  const next = jest.fn();
-
   it('should trigger a createSetupIntent request', () => {
+    const dispatch = jest.fn();
+    const next = jest.fn();
     const action = {
       type: actionTypes.CREATE_SETUP_INTENT_REQUEST,
     };
@@ -25,11 +25,13 @@ describe('middleware', () => {
   });
 
   it('should trigger a switchPlan on handleCardSetupSuccess', () => {
+    const dispatch = jest.fn();
+    const next = jest.fn();
     const action = {
       type: actionTypes.HANDLE_SETUP_CARD_SUCCESS,
       cycle: 'year',
       plan: 'premium_business',
-      source: 'publish',
+      source: 'queue_limit',
       paymentMethodId: 'pm_0FEigk47hwqlaZWUt3rg5WTQ',
     };
 
@@ -40,13 +42,15 @@ describe('middleware', () => {
         args: {
           cycle: action.cycle,
           plan: action.plan,
-          source: action.source,
+          cta: SEGMENT_NAMES.QUEUE_LIMIT_PRO_UPGRADE,
           paymentMethodId: action.paymentMethodId,
         },
       }));
   });
 
   it('should trigger a createSetupIntent success', () => {
+    const dispatch = jest.fn();
+    const next = jest.fn();
     const action = {
       type: `createSetupIntent_${asyncDataFetchActionTypes.FETCH_SUCCESS}`,
       result: {

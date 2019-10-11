@@ -7,6 +7,7 @@ import {
   actionTypes as thirdPartyActionTypes,
 } from '@bufferapp/publish-thirdparty';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 import middleware from './middleware';
 import {
@@ -202,6 +203,36 @@ describe('middleware', () => {
       .toBeCalledWith(action);
     expect(dispatch)
       .toBeCalledWith(nextAction);
+  });
+
+  it('tracks a Modal Payment Opened event when the payment modal opens', () => {
+    const next = jest.fn();
+    const dispatch = jest.fn();
+    analyticsActions.trackEvent = jest.fn();
+
+    const action = {
+      type: modalsActionTypes.SHOW_SWITCH_PLAN_MODAL,
+      plan: 'premium_business',
+      source: 'cta_banner_upgrade_premium',
+    };
+
+    const expectedMetadata = {
+      cta: 'publish-app-ctaBanner-premiumUpgrade-1',
+      ctaApp: 'publish',
+      ctaButton: 'premiumUpgrade',
+      ctaLocation: 'ctaBanner',
+      ctaVersion: '1',
+      ctaView: 'app',
+      planId: '9',
+      planName: 'premium_business',
+    };
+    middleware({ dispatch })(next)(action);
+
+    expect(next)
+      .toBeCalledWith(action);
+
+    expect(analyticsActions.trackEvent)
+      .toBeCalledWith('Modal Payment Opened', expectedMetadata);
   });
 
   it('should ignore other actions', () => {

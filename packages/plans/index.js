@@ -3,11 +3,7 @@ import { push } from 'connected-react-router';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
-import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
-import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import Plans from './components/Plans';
-import { getPlanId } from './utils/plans';
 
 import { actions } from './reducer';
 
@@ -27,16 +23,9 @@ export default connect(
       dispatch(actions.setSelectedPlan({ selectedPlan }));
     },
     onChoosePlanClick: ({ source, plan, soloPlanSelected }) => {
-      const ctaProperties = getCtaProperties(SEGMENT_NAMES.PLANS_OPEN_MODAL);
       if (plan === 'premium_business' && soloPlanSelected) {
         plan = 'solo_premium_business';
       }
-      const metadata = {
-        planName: plan,
-        planId: getPlanId(plan),
-        ...ctaProperties,
-      };
-      dispatch(analyticsActions.trackEvent('Modal Payment Opened', metadata));
       dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
     },
     onBackToDashboardClick: ({ selectedProfileId, profiles }) => {

@@ -1,69 +1,46 @@
-import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals';
-import { trackAction } from '@bufferapp/publish-data-tracking';
-
-import middleware from './middleware';
+import { actions as modalActions } from '@bufferapp/publish-modals';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
-jest.mock('@bufferapp/publish-data-tracking');
+import middleware from './middleware';
 
 describe('middleware', () => {
-  describe('should send tracking data', () => {
-    const next = jest.fn();
-    const dispatch = jest.fn();
-    const getState = jest.fn(() => ({
-      switchPlanModal: { source: 'source' },
-    }));
+  const next = jest.fn();
+  const dispatch = jest.fn();
+  const getState = jest.fn(() => ({
+    switchPlanModal: { source: 'source' },
+  }));
 
-    test('when the modal opens', () => {
-      const action = {
-        type: modalsActionTypes.SHOW_SWITCH_PLAN_MODAL,
-        source: 'source',
-      };
-      middleware({ dispatch, getState })(next)(action);
+  it('fetches cancelTrial and hides upgrade modal', () => {
+    const action = {
+      type: actionTypes.CANCEL_TRIAL,
+    };
+    middleware({ dispatch, getState })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(dataFetchActions.fetch({
+        name: 'cancelTrial',
+      }));
+    expect(dispatch)
+      .toBeCalledWith(modalActions.hideUpgradeModal());
+  });
 
-      expect(next)
-        .toBeCalledWith(action);
-
-      expect(trackAction)
-        .toBeCalledWith({
-          location: 'MODALS',
-          action: 'show_upgrade_to_pro',
-          metadata: { source: 'source' },
-        });
+  it('triggers a notification if there is an error canceling the trial', () => {
+    const RPC_NAME = 'cancelTrial';
+    const action = dataFetchActions.fetchFail({
+      name: RPC_NAME,
+      error: 'Ups',
     });
-
-    test('when the modal closes', () => {
-      const action = {
-        type: modalsActionTypes.HIDE_SWITCH_PLAN_MODAL,
-      };
-      middleware({ dispatch, getState })(next)(action);
-
-      expect(next)
-        .toBeCalledWith(action);
-
-      expect(trackAction)
-        .toBeCalledWith({
-          location: 'MODALS',
-          action: 'hide_upgrade_to_pro',
-          metadata: { source: 'source' },
-        });
-    });
-
-    test('when the modal form is submitted', () => {
-      const action = {
-        type: actionTypes.UPGRADE,
-      };
-      middleware({ dispatch, getState })(next)(action);
-
-      expect(next)
-        .toBeCalledWith(action);
-
-      expect(trackAction)
-        .toBeCalledWith({
-          location: 'MODALS',
-          action: 'submit_upgrade_to_pro',
-          metadata: { source: 'source' },
-        });
-    });
+    middleware({ dispatch, getState })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(expect.objectContaining({
+        type: notificationActionTypes.CREATE_NOTIFICATION,
+        notificationType: 'error',
+        message: 'Ups',
+      }));
   });
 });

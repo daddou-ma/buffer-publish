@@ -1,6 +1,7 @@
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions as notification } from '@bufferapp/notifications';
 import { actions as asyncDataFetchActions, actionTypes as asyncDataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import getCtaFromSource from '@bufferapp/publish-switch-plan-modal/utils/tracking';
 import { actions, actionTypes } from './reducer';
 
 export default ({ dispatch }) => next => (action) => {
@@ -13,7 +14,7 @@ export default ({ dispatch }) => next => (action) => {
         }),
       );
       break;
-    case actionTypes.HANDLE_SETUP_CARD_REQUEST:
+    case actionTypes.HANDLE_SETUP_CARD_REQUEST: {
       const {
         stripe,
         setupIntentClientSecret,
@@ -41,6 +42,7 @@ export default ({ dispatch }) => next => (action) => {
           }
         });
       break;
+    }
     case actionTypes.HANDLE_SETUP_CARD_SUCCESS: {
       const {
         cycle,
@@ -54,7 +56,7 @@ export default ({ dispatch }) => next => (action) => {
           name: 'switchPlan',
           args: {
             cycle,
-            source,
+            cta: getCtaFromSource(source),
             plan,
             paymentMethodId,
           },
