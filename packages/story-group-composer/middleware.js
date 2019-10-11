@@ -88,11 +88,6 @@ const getMappedStories = (story) => {
   return createImageStory(story);
 };
 
-const getScheduledAtTime = ({scheduledAt, shareNow}) => {
-  const fiveMinutesInSeconds = 60 * 5;
-  return shareNow ? (Math.ceil(+new Date() / 1000) + fiveMinutesInSeconds) : scheduledAt;
-};
-
 export default ({ getState, dispatch }) => next => (action) => {
   next(action);
   const state = getState();
@@ -107,7 +102,7 @@ export default ({ getState, dispatch }) => next => (action) => {
           name: 'createStoryGroup',
           args: {
             profileId: selectedProfileId,
-            scheduledAt: getScheduledAtTime(action),
+            scheduledAt,
             shareNow,
             stories: sendStories,
           },
@@ -118,12 +113,12 @@ export default ({ getState, dispatch }) => next => (action) => {
     case actionTypes.UPDATE_STORY_GROUP: {
       const { stories } = state.storyGroupComposer.storyGroup;
       const { storyGroupId } = state.storyGroupComposer.storyGroup;
-      const { shareNow } = action;
+      const { scheduledAt, shareNow } = action;
       dispatch(dataFetchActions.fetch({
         name: 'updateStoryGroup',
         args: {
           profileId: selectedProfileId,
-          scheduledAt: getScheduledAtTime(action),
+          scheduledAt,
           storyGroupId,
           shareNow,
           stories,

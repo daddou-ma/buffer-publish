@@ -34,33 +34,12 @@ const getIsScheduleDisabled = ({
   uploadsCompleted,
   isScheduleLoading,
   isScheduledAtPastDue,
-}) => {
-  if (!editMode) {
-    if (storiesLength < 1) {
-      return true;
-    }
-    if (!uploadsCompleted) {
-      return true;
-    }
-    if (isScheduleLoading) {
-      return true;
-    }
-    if (isScheduledAtPastDue) {
-      return true;
-    }
-  } else {
-    if (storiesLength < 1) {
-      return true;
-    }
-    if (!uploadsCompleted) {
-      return true;
-    }
-    if (isScheduleLoading) {
-      return true;
-    }
-  }
-  return false;
-};
+}) => (
+  storiesLength < 1
+  || !uploadsCompleted
+  || isScheduleLoading
+  || (!editMode && isScheduledAtPastDue)
+);
 
 const AddStoryFooter = ({
   timezone,
@@ -192,8 +171,8 @@ const AddStoryFooter = ({
           isSplit
           type="primary"
           items={[
-            { title: translations.scheduleButton, selectedItemClick: onScheduleClick },
             { title: translations.shareNowButton, selectedItemClick: onShareNowClick },
+            { title: translations.scheduleButton, selectedItemClick: onScheduleClick },
           ]}
           disabled={isScheduleDisabled}
           label={isScheduleLoading
