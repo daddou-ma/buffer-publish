@@ -1,12 +1,12 @@
 const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
-const getCtaFromSource = require('@bufferapp/publish-switch-plan-modal/utils/tracking');
-
 module.exports = method(
   'switchPlan',
   'switch user plan',
-  async ({ cycle, paymentMethodId, source, plan }, { session }) => {
+  async ({
+    cycle, paymentMethodId, source, plan,
+  }, { session }) => {
     let result;
     try {
       result = await rp({
@@ -17,7 +17,7 @@ module.exports = method(
         form: {
           cycle,
           payment_method_id: paymentMethodId,
-          cta: getCtaFromSource(source),
+          cta: source,
           access_token: session.publish.accessToken,
           product: 'publish',
           plan,
