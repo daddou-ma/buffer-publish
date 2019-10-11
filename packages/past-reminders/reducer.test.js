@@ -1,5 +1,10 @@
 import deepFreeze from 'deep-freeze';
-import reducer, { actions, initialState, profileInitialState, actionTypes } from './reducer';
+import reducer, {
+  actions,
+  initialState,
+  profileInitialState,
+  actionTypes,
+} from './reducer';
 import {
   header,
   subHeader,
@@ -395,6 +400,77 @@ describe('reducer', () => {
       expect(actions.handleMobileClick({ post })).toEqual({
         type: actionTypes.POST_MOBILE_REMINDER,
         updateId: post.id,
+      });
+    });
+
+    it('handleStoryGroupMobileClick triggers a STORY_GROUP_MOBILE_REMINDER action', () => {
+      const post = { id: 'id1' };
+      expect(actions.handleStoryGroupMobileClick({ post, profileId })).toEqual({
+        type: actionTypes.STORY_GROUP_MOBILE_REMINDER,
+        updateId: post.id,
+        storyGroup: post,
+        profileId,
+      });
+    });
+
+    it('handleImageClick triggers a POST_IMAGE_CLICKED action', () => {
+      const post = { id: 'id1' };
+      expect(actions.handleImageClick({ post, profileId })).toEqual({
+        type: actionTypes.POST_IMAGE_CLICKED,
+        updateId: post.id,
+        post,
+        profileId,
+      });
+    });
+
+    it('handleImageClickNext triggers a POST_IMAGE_CLICKED_NEXT action', () => {
+      const post = { id: 'id1' };
+      expect(actions.handleImageClickNext({ post, profileId })).toEqual({
+        type: actionTypes.POST_IMAGE_CLICKED_NEXT,
+        updateId: post.id,
+        post,
+        profileId,
+      });
+    });
+
+    it('handleImageClickPrev triggers a POST_IMAGE_CLICKED_PREV action', () => {
+      const post = { id: 'id1' };
+      expect(actions.handleImageClickPrev({ post, profileId })).toEqual({
+        type: actionTypes.POST_IMAGE_CLICKED_PREV,
+        updateId: post.id,
+        post,
+        profileId,
+      });
+    });
+
+    it('handleImageClose triggers a POST_IMAGE_CLOSED action', () => {
+      const post = { id: 'id1' };
+      expect(actions.handleImageClose({ post, profileId })).toEqual({
+        type: actionTypes.POST_IMAGE_CLOSED,
+        updateId: post.id,
+        post,
+        profileId,
+      });
+    });
+
+    it('handleToggleViewType triggers a TOGGLE_VIEW_TYPE action', () => {
+      const viewType = 'stories';
+      expect(actions.handleToggleViewType({ profileId, viewType })).toEqual({
+        type: actionTypes.TOGGLE_VIEW_TYPE,
+        profileId,
+        viewType,
+      });
+    });
+
+    it('handlePreviewClick triggers a OPEN_PREVIEW action', () => {
+      expect(actions.handlePreviewClick()).toEqual({
+        type: actionTypes.OPEN_PREVIEW,
+      });
+    });
+
+    it('handleClosePreviewClick triggers a CLOSE_PREVIEW action', () => {
+      expect(actions.handleClosePreviewClick()).toEqual({
+        type: actionTypes.CLOSE_PREVIEW,
       });
     });
   });
