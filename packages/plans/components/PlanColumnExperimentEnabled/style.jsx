@@ -24,6 +24,7 @@ export const FooterStyle = styled.div`
 
 export const ImageWrapperStyle = styled.div`
   margin: 0px auto 30px;
+  margin-bottom: ${props => (props.isPremium ? '30px' : '48px')}
 `;
 
 export const TopContentStyle = styled.div`

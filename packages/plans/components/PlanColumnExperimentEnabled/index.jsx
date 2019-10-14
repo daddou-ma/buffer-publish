@@ -66,7 +66,7 @@ const RightButton = styled(Button)`
 const LeftPlanButton = ({
   isNonprofit, nonProfitCost, cost, billingText, monthly, isSelected}) => (
     <LeftPlanItem>
-      <UserIcon Icon={<People />} text="1 user" isSelected={isSelected} />
+      <UserIcon Icon={<Person />} text="1 user" isSelected={isSelected} />
       <PriceStyle>
         <TextStyle type="h1">
           { isNonprofit ? nonProfitCost : cost }
@@ -106,18 +106,19 @@ const PlanColumnExperimentEnabled = ({
   selectedPremiumPlan,
 }) => {
   const isSelected = () => selectedPremiumPlan === 1;
+  const isPremium = plan === 'premium_business';
   return (
     <ColumnStyle>
       <TopContentStyle>
         <Text type="h3">{ title }</Text>
-        <ImageWrapperStyle>
+        <ImageWrapperStyle isPremium={isPremium}>
           <Image
             src={imageSrc}
             width="auto"
             height="130px"
           />
         </ImageWrapperStyle>
-        {plan !== 'premium_business' && (
+        {!isPremium && (
           <div>
             <UserIcon Icon={<Person />} text="1 user" isSelected />
             <PriceStyle>
@@ -129,7 +130,7 @@ const PlanColumnExperimentEnabled = ({
             <Text type="p">{ billingText }</Text>
           </div>
         )}
-        {plan === 'premium_business' && (
+        {isPremium && (
         <div>
           <PlanStyle>
             <LeftButton
