@@ -45,10 +45,6 @@ const METRIC_KEY_LABELS = {
   },
 };
 
-function shouldUseAnalyzeApi (profileService) {
-  return profileService === 'instagram';
-}
-
 function shouldUseDaysAsAverageQuantity(profileService, metric) {
   return profileService === 'facebook'
     || (profileService === 'instagram' && metric === 'impressions');
@@ -56,46 +52,34 @@ function shouldUseDaysAsAverageQuantity(profileService, metric) {
 
 const requestTotals = (profileId, profileService, dateRange, accessToken, analyzeApiAddr) =>
   rp({
-    uri: (shouldUseAnalyzeApi(profileService) ?
-      `${analyzeApiAddr}/metrics/totals` :
-      `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/totals.json`
-    ),
-    method: (shouldUseAnalyzeApi(profileService) ?
-      'POST' :
-      'GET'
-    ),
+    uri: `${analyzeApiAddr}/metrics/totals`,
+    method: 'POST',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
       access_token: accessToken,
       start_date: dateRange.start,
       end_date: dateRange.end,
-      profile_id: (shouldUseAnalyzeApi(profileService) ?
-        profileId :
-        null
-      ),
+      profile_id: profileId,
     },
     json: true,
   });
 
-const requestDailyTotals = (profileId, profileService, dateRange, accessToken, analyzeApiAddr) =>
+const requestDailyTotals = (
+  profileId,
+  profileService,
+  dateRange,
+  accessToken,
+  analyzeApiAddr,
+) =>
   rp({
-    uri: (shouldUseAnalyzeApi(profileService) ?
-      `${analyzeApiAddr}/metrics/daily_totals` :
-      `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/daily_totals.json`
-    ),
-    method: (shouldUseAnalyzeApi(profileService) ?
-      'POST' :
-      'GET'
-    ),
+    uri: `${analyzeApiAddr}/metrics/daily_totals`,
+    method: 'POST',
     strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
     qs: {
       access_token: accessToken,
       start_date: dateRange.start,
       end_date: dateRange.end,
-      profile_id: (shouldUseAnalyzeApi(profileService) ?
-        profileId :
-        null
-      ),
+      profile_id: profileId,
     },
     json: true,
   });

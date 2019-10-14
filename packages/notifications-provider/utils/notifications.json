@@ -4,7 +4,8 @@
     "bitly-connect": "Great, your bitly account has been linked with the profile {{__variable__}}",
     "bitly-disconnect": "Okay, your bitly account has been disconnected.",
     "trial-extended": "Great! We’ve extended your free trial.",
-    "trial-pro-started": "Nice! The trial started successfully!"
+    "trial-pro-started": "Nice! The trial started successfully!",
+    "connection": "{{__variable__}}"
   },
   "error": {
     "connection": "{{__variable__}}",
