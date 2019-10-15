@@ -168,7 +168,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       // the composer closes after pusher sent event, so close the confirmation modal too
       const { showCloseComposerConfirmationModal } = getState().modals;
       if (showCloseComposerConfirmationModal) {
-        dispatch(actions.hideConfirmationModal());
+        dispatch(actions.hideCloseComposerConfirmationModal());
       }
       break;
     }
