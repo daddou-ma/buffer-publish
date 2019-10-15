@@ -35,6 +35,50 @@ const Composer = ({ showComposer, showStoriesComposer, onSave }) => {
   }
 };
 
+const ComposerWrapper = ({
+  editMode,
+  showComposer,
+  showStoriesComposer,
+  onComposerCreateSuccess,
+}) => (
+  <React.Fragment>
+    {(showComposer || showStoriesComposer) && !editMode
+      && (
+        <TopBarContainerStyle>
+          <ComposerStyle>
+            <Composer
+              showComposer={showComposer}
+              showStoriesComposer={showStoriesComposer}
+              onSave={onComposerCreateSuccess}
+            />
+          </ComposerStyle>
+        </TopBarContainerStyle>
+      )}
+    {(showComposer || showStoriesComposer) && editMode
+      && (
+        <Composer
+          showComposer={showComposer}
+          showStoriesComposer={showStoriesComposer}
+          onSave={onComposerCreateSuccess}
+        />
+      )}
+  </React.Fragment>
+);
+
+ComposerWrapper.propTypes = {
+  editMode: PropTypes.bool,
+  showComposer: PropTypes.bool,
+  showStoriesComposer: PropTypes.bool,
+  onComposerCreateSuccess: PropTypes.func,
+};
+
+ComposerWrapper.defaultProps = {
+  editMode: false,
+  showComposer: false,
+  showStoriesComposer: false,
+  onComposerCreateSuccess: () => {},
+};
+
 const PastRemindersPosts = ({
   total,
   loading,
@@ -79,26 +123,12 @@ const PastRemindersPosts = ({
         />
       )}
       <React.Fragment>
-        {(showComposer || showStoriesComposer) && !editMode
-          && (
-            <TopBarContainerStyle>
-              <ComposerStyle>
-                <Composer
-                  showComposer={showComposer}
-                  showStoriesComposer={showStoriesComposer}
-                  onSave={onComposerCreateSuccess}
-                />
-              </ComposerStyle>
-            </TopBarContainerStyle>
-          )}
-        {(showComposer || showStoriesComposer) && editMode
-          && (
-            <Composer
-              showComposer={showComposer}
-              showStoriesComposer={showStoriesComposer}
-              onSave={onComposerCreateSuccess}
-            />
-          )}
+        <ComposerWrapper
+          editMode={editMode}
+          showComposer={showComposer}
+          showStoriesComposer={showStoriesComposer}
+          onComposerCreateSuccess={onComposerCreateSuccess}
+        />
 
         <PostLists
           postLists={postLists}

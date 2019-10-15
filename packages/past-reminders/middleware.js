@@ -2,7 +2,6 @@ import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-si
 import { actions as dataFetchActions, actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { getMappedStories } from '@bufferapp/publish-story-group-composer/middleware';
-import { getTodayTimestamp } from '@bufferapp/publish-story-group-composer/utils/AddStory';
 import { actionTypes } from './reducer';
 
 const fetchPastReminders = (dispatch, action) => {
@@ -48,14 +47,12 @@ export default ({ getState, dispatch }) => next => (action) => {
         const { storyGroup } = action;
         const { stories } = storyGroup.storyDetails;
         const sendStories = stories.map(getMappedStories);
-        // @todo: remove scheduledAt
-        const scheduledAt = getTodayTimestamp({ timezone: storyGroup.profileTimezone });
 
         dispatch(dataFetchActions.fetch({
           name: 'createStoryGroup',
           args: {
             profileId: selectedProfileId,
-            scheduledAt,
+            scheduledAt: null,
             stories: sendStories,
             shareNow: true,
           },
