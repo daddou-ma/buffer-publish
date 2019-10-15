@@ -48,6 +48,7 @@ export default ({ getState, dispatch }) => next => (action) => {
         const { storyGroup } = action;
         const { stories } = storyGroup.storyDetails;
         const sendStories = stories.map(getMappedStories);
+        // @todo: remove scheduledAt
         const scheduledAt = getTodayTimestamp({ timezone: storyGroup.profileTimezone });
 
         dispatch(dataFetchActions.fetch({

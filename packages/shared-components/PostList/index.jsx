@@ -5,6 +5,7 @@ import {
   Text,
 } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
+import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import TextPost from '../TextPost';
 import ImagePost from '../ImagePost';
@@ -13,25 +14,28 @@ import LinkPost from '../LinkPost';
 import VideoPost from '../VideoPost';
 import Story from '../Story';
 
-const reBufferWrapperStyle = {
-  paddingLeft: '1rem',
-  paddingBottom: '0.5rem',
-  minWidth: '146px',
-};
+const RemindersButtons = styled.div`
+`;
 
-const postStyle = {
-  display: 'flex',
-  alignItems: 'flex-start',
-  marginBottom: '2rem',
-};
+const ShareAgainWrapper = styled.div`
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
+  min-width: 146px;
+`;
 
-const listHeaderStyle = isFirstItem => ({
-  display: 'flex',
-  alignItems: 'center',
-  marginBottom: '1rem',
-  marginTop: isFirstItem ? '2rem' : '1rem',
-  marginLeft: '0.5rem',
-});
+const PostStyle = styled.div`
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+`;
+
+const HeaderStyle = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: ${props => (props.isFirstItem ? '2rem' : '1rem')};
+  margin-left: 0.5rem;
+`;
 
 const postTypeComponentMap = new Map([
   ['text', TextPost],
@@ -87,12 +91,12 @@ const renderPost = ({
   return <PostComponent {...postWithEventHandlers} />;
 };
 
-const renderHeader = ({ listHeader, isFirstItem }) => (
-  <div style={listHeaderStyle(isFirstItem)}>
+const Header = ({ listHeader, isFirstItem }) => (
+  <HeaderStyle isFirstItem={isFirstItem}>
     <Text color="black">
       {listHeader}
     </Text>
-  </div>
+  </HeaderStyle>
 );
 
 /* eslint-enable react/prop-types */
@@ -121,11 +125,11 @@ const PostList = ({
   userData,
   onPreviewClick,
 }) => (
-  <div>
-    {renderHeader({ listHeader, isFirstItem: index === 0 })}
+  <React.Fragment>
+    <Header listHeader={listHeader} isFirstItem={index === 0} />
     <List
       items={posts.map(post => (
-        <div
+        <PostStyle
           id={`update-${post.id}`}
           className={[
             'update',
@@ -134,7 +138,6 @@ const PostList = ({
               ? 'is_retweet'
               : 'not_retweet',
           ].join(' ')}
-          style={postStyle}
         >
           {
             renderPost({
@@ -159,52 +162,49 @@ const PostList = ({
           }
           {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder
             && (
-              <div style={reBufferWrapperStyle}>
+              <ShareAgainWrapper>
                 <Button
                   type="secondary"
                   label="Share Again"
                   onClick={() => { onShareAgainClick({ post }); }}
                 />
-              </div>
-            )
-          }
+              </ShareAgainWrapper>
+            )}
           {isPastReminder
             && (
-              <div>
+              <RemindersButtons>
                 {(!features.isFreeUser() || isBusinessAccount)
                   && (
-                    <div style={reBufferWrapperStyle}>
+                    <ShareAgainWrapper>
                       <Button
                         fullWidth
                         type="secondary"
                         label="Share Again"
                         onClick={() => { onShareAgainClick({ post }); }}
                       />
-                    </div>
-                  )
-                }
+                    </ShareAgainWrapper>
+                  )}
                 {isManager
                 && (
-                  <div style={reBufferWrapperStyle}>
+                  <ShareAgainWrapper>
                     <Button
                       fullWidth
                       type="secondary"
                       label="Send to Mobile"
                       onClick={() => { onMobileClick({ post }); }}
                     />
-                  </div>
-                )
-              }
-              </div>
-            )
-          }
-        </div>
+                  </ShareAgainWrapper>
+                )}
+              </RemindersButtons>
+            )}
+        </PostStyle>
       ))}
     />
-  </div>
+  </React.Fragment>
 );
 
 PostList.propTypes = {
+  index: PropTypes.number,
   listHeader: PropTypes.string,
   posts: PropTypes.arrayOf(
     PropTypes.shape({
@@ -222,6 +222,7 @@ PostList.propTypes = {
   onSwapPosts: PropTypes.func,
   onShareAgainClick: PropTypes.func,
   onMobileClick: PropTypes.func,
+  onPreviewClick: PropTypes.func,
   isSent: PropTypes.bool,
   isManager: PropTypes.bool,
   isPastReminder: PropTypes.bool,
@@ -231,7 +232,9 @@ PostList.propTypes = {
 };
 
 PostList.defaultProps = {
+  index: 0,
   posts: [],
+  onPreviewClick: () => {},
 };
 
 export default WithFeatureLoader(PostList);
