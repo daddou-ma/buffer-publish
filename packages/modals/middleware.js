@@ -6,6 +6,7 @@ import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-si
 import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification/reducer';
 import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import getCtaFromSource from '@bufferapp/publish-switch-plan-modal/utils/tracking';
 import { getPlanId } from '@bufferapp/publish-plans/utils/plans';
@@ -160,6 +161,14 @@ export default ({ dispatch, getState }) => next => (action) => {
         }
 
         resetShowModalKey();
+      }
+      break;
+    }
+    case storiesActionTypes.STORIES_SENT: {
+      // the composer closes after pusher stories event, so close the confirmation modal too
+      const { showCloseComposerConfirmationModal } = getState().modals;
+      if (showCloseComposerConfirmationModal) {
+        dispatch(actions.hideConfirmationModal());
       }
       break;
     }
