@@ -16,11 +16,12 @@ import {
 
 const getInitialDateTime = ({
   editMode,
+  sentPost,
   scheduledAt,
   emptySlotData,
   timezone,
 }) => {
-  if (editMode || emptySlotData) {
+  if ((editMode && !sentPost) || emptySlotData) {
     const timestamp = editMode ? scheduledAt : emptySlotData.scheduledAt;
     return getMomentTime({ scheduledAt: timestamp, timezone });
   }
@@ -42,8 +43,9 @@ const AddStoryFooter = ({
   emptySlotData,
   selectedProfile,
   isPastDue,
+  sentPost,
 }) => {
-  const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
+  const [scheduledAt, setScheduledAt] = useState(storyGroup && !sentPost ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   /* this covers the case if a story group has a share failure and a user edits it
@@ -61,7 +63,7 @@ const AddStoryFooter = ({
 
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
-    if (editMode) {
+    if (editMode && !sentPost) {
       setScheduledAt(timestamp);
     } else {
       onCreateStoryGroup(timestamp);
@@ -69,7 +71,7 @@ const AddStoryFooter = ({
   };
 
   const onScheduleClick = () => {
-    if (editMode) {
+    if (editMode && !sentPost) {
       onUpdateStoryGroup({
         scheduledAt,
         stories,
@@ -89,7 +91,7 @@ const AddStoryFooter = ({
   return (
     <Fragment>
       <FooterBar onClick={onFooterClick}>
-        {editMode && (
+        {editMode && !sentPost && (
           <EditStoryStyle>
             <EditTextStyle>
               <Text type="p">Story Schedule:</Text>
@@ -135,6 +137,7 @@ const AddStoryFooter = ({
           onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
           initialDateTime={getInitialDateTime({
             editMode,
+            sentPost,
             scheduledAt,
             emptySlotData,
             timezone,
