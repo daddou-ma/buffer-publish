@@ -6,12 +6,13 @@ import { actions } from './reducer';
 import PastRemindersWrapper from './components/PastRemindersWrapper';
 import { header, subHeader } from './components/PastRemindersPosts/postData';
 
-const formatPostLists = (posts) => {
-  const postLists = [];
+const orderPosts = posts => ((posts && typeof posts === 'object')
+  ? Object.values(posts).sort((a, b) => b.due_at - a.due_at) : []);
+
+const preparePosts = (orderedPosts) => {
   let day;
   let newList;
-  const orderedPosts = (posts && typeof posts === 'object') ?
-    Object.values(posts).sort((a, b) => b.due_at - a.due_at) : [];
+  const result = [];
 
   orderedPosts.forEach((post) => {
     if (post.storyDetails) {
@@ -21,11 +22,18 @@ const formatPostLists = (posts) => {
     if (post.day !== day) {
       day = post.day;
       newList = { listHeader: day, posts: [post] };
-      postLists.push(newList);
+      result.push(newList);
     } else { // if same day add to posts array of current list
       newList.posts.push(post);
     }
   });
+
+  return result;
+};
+
+const formatPostLists = (posts) => {
+  const orderedPosts = orderPosts(posts);
+  const postLists = preparePosts(orderedPosts);
   return postLists;
 };
 
