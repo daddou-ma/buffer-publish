@@ -83,12 +83,6 @@ const AddStoryFooter = ({
 
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
-    setShowDatePicker(false);
-    if (editMode && !sentPost) {
-      setScheduledAt(timestamp);
-    } else {
-      onCreateStoryGroup(timestamp);
-    }
     if (editMode) {
       if (forceDatePickerSubmit || sentPost) {
         setForceDatePickerSubmit(false);
