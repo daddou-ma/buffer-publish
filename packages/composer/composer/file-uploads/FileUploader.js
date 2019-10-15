@@ -1,5 +1,6 @@
+import { MediaTypes } from '@bufferapp/publish-constants';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
-import { NotificationScopes, MediaTypes } from '../AppConstants';
+import { NotificationScopes } from '../AppConstants';
 
 export default class FileUploader {
   static throwMixedMediaTypesError(service) {

@@ -4,10 +4,16 @@ import debounce from 'lodash.debounce';
 import findLastIndexOf from 'lodash.findlastindex';
 import cloneDeep from 'lodash.clonedeep';
 import twitterText from 'twitter-text';
+import { AppEnvironments, MediaTypes } from '@bufferapp/publish-constants';
 import AppDispatcher from '../dispatcher';
 import {
-  ActionTypes, Services, AttachmentTypes, MediaTypes, ComposerInitiators,
-  AppEnvironments, NotificationScopes, ErrorTypes, InstagramAspectRatioLimits,
+  ActionTypes,
+  Services,
+  AttachmentTypes,
+  ComposerInitiators,
+  NotificationScopes,
+  ErrorTypes,
+  InstagramAspectRatioLimits,
 } from '../AppConstants';
 import AppStore from './AppStore';
 import AppActionCreators from '../action-creators/AppActionCreators';
@@ -129,8 +135,8 @@ const softResetState = () => {
   state = newState;
 };
 
-const eventShowUpgradeModal = () => {
-  events.trigger('show-upgrade-modal');
+const eventShowSwitchPlanModal = () => {
+  events.trigger('show-switch-plan-modal');
 }
 
 const ComposerStore = Object.assign({}, EventEmitter.prototype, {
@@ -919,6 +925,10 @@ const getDraftCharacterCount = (id, text) => {
     }
 
     return charCount;
+  }
+
+  if (draft.service.name === 'facebook') {
+    return (text && text.length) || 0;
   }
 
   throw new Error('No character counting rules implemented for this service');
@@ -2411,8 +2421,8 @@ const onDispatchedPayload = (payload) => {
       softResetState();
       break;
 
-    case ActionTypes.EVENT_SHOW_UPGRADE_MODAL:
-      eventShowUpgradeModal();
+    case ActionTypes.EVENT_SHOW_SWITCH_PLAN_MODAL:
+      eventShowSwitchPlanModal();
       break;
 
     default:

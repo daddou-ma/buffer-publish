@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { profilePageRoute, preferencePageRoute, childTabRoute } from '@bufferapp/publish-routes';
+import {
+  profilePageRoute,
+  preferencePageRoute,
+  childTabRoute,
+  plansPageRoute,
+  newBusinessTrialistsRoute,
+  newConnectionRoute,
+} from '@bufferapp/publish-routes';
 import { Route, Switch, withRouter } from 'react-router';
 
 import { DragDropContext } from 'react-dnd';
@@ -9,12 +16,13 @@ import AppShell from '@bufferapp/publish-app-shell';
 import Notifications from '@bufferapp/notifications';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
+import Plans from '@bufferapp/publish-plans';
 import AppSwitcher from '@bufferapp/publish-app-switcher';
 import EnsurePublishBetaUser from '@bufferapp/publish-beta-redirect';
 import AppModals from '@bufferapp/publish-modals';
 import InitialLoading from '@bufferapp/publish-initial-loading';
 import DefaultPage from '@bufferapp/default-page';
-import DisabledQueue from '@bufferapp/publish-disabled-queue';
+import OnboardingManager from '@bufferapp/publish-onboarding';
 import CTABanner from '@bufferapp/publish-cta-banner';
 import TemporaryBanner from '@bufferapp/publish-temporary-banner';
 import ThirdParty from '@bufferapp/publish-thirdparty';
@@ -52,6 +60,10 @@ class App extends Component { // eslint-disable-line
                   component={Preferences}
                 />
                 <Route
+                  path={plansPageRoute}
+                  component={Plans}
+                />
+                <Route
                   path={childTabRoute}
                   component={ProfilePage}
                 />
@@ -60,12 +72,12 @@ class App extends Component { // eslint-disable-line
                   component={ProfilePage}
                 />
                 <Route
-                  path="/new-connection"
+                  path={newConnectionRoute}
                   component={DefaultPage}
                 />
                 <Route
-                  path="/new-connection-business-trialists"
-                  component={DisabledQueue}
+                  path={newBusinessTrialistsRoute}
+                  component={OnboardingManager}
                 />
                 <Route
                   component={InitialLoading}

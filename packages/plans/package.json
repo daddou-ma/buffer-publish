@@ -1,0 +1,18 @@
+{
+  "name": "@bufferapp/publish-plans",
+  "version": "2.0.0",
+  "description": "A package for displaying and switching pricing plans",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "amylee@bufferapp.com",
+  "dependencies": {
+    "@bufferapp/async-data-fetch": "1.9.4"
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

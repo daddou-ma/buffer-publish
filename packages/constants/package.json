@@ -7,8 +7,10 @@
     "lint": "eslint . --ignore-pattern coverage node_modules"
   },
   "author": "hharnisc@gmail.com",
+  "dependencies": {
+    "keymirror": "0.1.1"
+  },
   "devDependencies": {
-    "eslint": "^5.3.0"
   },
   "publishConfig": {
     "access": "public"

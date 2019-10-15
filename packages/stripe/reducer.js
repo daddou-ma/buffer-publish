@@ -1,10 +1,12 @@
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('STRIPE', {
-  CREDIT_CARD_VALIDATING: 0,
-  CREDIT_CARD_ERROR: 0,
-  CREDIT_CARD_APPROVED: 0,
+  CREATE_SETUP_INTENT_REQUEST: 0,
+  CREATE_SETUP_INTENT_SUCCESS: 0,
   CHANGE_BILLING_CYCLE: 0,
+  HANDLE_SETUP_CARD_REQUEST: 0,
+  HANDLE_SETUP_CARD_SUCCESS: 0,
+  HANDLE_SETUP_CARD_ERROR: 0,
 });
 
 const MONTHLY_CYCLE = 'month';
@@ -12,30 +14,37 @@ const YEARLY_CYCLE = 'year';
 
 const initialState = {
   error: null,
-  card: null,
-  token: null,
+  setupIntentClientSecret: '',
   validating: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.CREDIT_CARD_VALIDATING:
+    case actionTypes.CREATE_SETUP_INTENT_REQUEST:
       return {
         ...state,
         validating: true,
-        card: action.card,
       };
-    case actionTypes.CREDIT_CARD_ERROR:
+    case actionTypes.CREATE_SETUP_INTENT_SUCCESS:
+      return {
+        ...state,
+        setupIntentClientSecret: action.setupIntentClientSecret,
+        validating: false,
+      };
+    case actionTypes.HANDLE_SETUP_CARD_REQUEST:
+      return {
+        ...state,
+        validating: true,
+      };
+    case actionTypes.HANDLE_SETUP_CARD_SUCCESS:
+      return {
+        ...state,
+      };
+    case actionTypes.HANDLE_SETUP_CARD_ERROR:
       return {
         ...state,
         validating: false,
         error: action.error,
-      };
-    case actionTypes.CREDIT_CARD_APPROVED:
-      return {
-        ...state,
-        validating: false,
-        token: action.token,
       };
     case actionTypes.CHANGE_BILLING_CYCLE:
       return {
@@ -48,17 +57,42 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  validateCreditCard: card => ({
-    type: actionTypes.CREDIT_CARD_VALIDATING,
-    card,
+  createSetupIntentRequest: () => ({
+    type: actionTypes.CREATE_SETUP_INTENT_REQUEST,
   }),
-  throwValidationError: error => ({
-    type: actionTypes.CREDIT_CARD_ERROR,
-    error,
+  createSetupIntentSuccess: setupIntentClientSecret => ({
+    type: actionTypes.CREATE_SETUP_INTENT_SUCCESS,
+    setupIntentClientSecret,
   }),
-  approveCreditCard: token => ({
-    type: actionTypes.CREDIT_CARD_APPROVED,
-    token,
+  handleCardSetupRequest: (
+    stripe,
+    setupIntentClientSecret,
+    source,
+    plan,
+    cycle,
+  ) => ({
+    type: actionTypes.HANDLE_SETUP_CARD_REQUEST,
+    stripe,
+    setupIntentClientSecret,
+    source,
+    plan,
+    cycle,
+  }),
+  handleCardSetupSuccess: (
+    cycle,
+    source,
+    plan,
+    paymentMethodId,
+  ) => ({
+    type: actionTypes.HANDLE_SETUP_CARD_SUCCESS,
+    paymentMethodId,
+    cycle,
+    source,
+    plan,
+  }),
+  handleCardSetupError: err => ({
+    type: actionTypes.HANDLE_SETUP_CARD_ERROR,
+    error: err,
   }),
   setMonthlyCycle: () => ({
     type: actionTypes.CHANGE_BILLING_CYCLE,

@@ -8,11 +8,11 @@
   },
   "author": "mike@msanroman.io",
   "dependencies": {
+    "@bufferapp/async-data-fetch": "^1.9.4",
     "@bufferapp/keywrapper": "0.2.0",
     "@bufferapp/publish-server": "2.0.0"
   },
   "devDependencies": {
-    "eslint": "^5.3.0"
   },
   "publishConfig": {
     "access": "public"

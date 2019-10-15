@@ -38,7 +38,7 @@ export const shouldShowWelcomeModalPaidUsers = () =>
 export const shouldShowInstagramDirectPostingModal = () =>
   getShowModalKey() === 'ig-direct-post-modal';
 
-export const shouldShowUpgradeModal = () =>
+export const shouldShowSwitchPlanModal = () =>
   getShowModalKey().indexOf('upgrade-to-pro') === 0;
 
 /**

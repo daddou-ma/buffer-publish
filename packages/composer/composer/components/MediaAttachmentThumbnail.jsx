@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MediaTypes } from '@bufferapp/publish-constants';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import CloseButton from '../components/CloseButton';
 import Button from '../components/Button';
 import { escapeParens } from '../utils/StringUtils';
-import { MediaTypes } from '../AppConstants';
 import styles from './css/MediaAttachmentThumbnail.css';
 import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
 

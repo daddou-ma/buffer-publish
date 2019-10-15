@@ -1,5 +1,5 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('DRAFTS', {
@@ -9,8 +9,6 @@ export const actionTypes = keyWrapper('DRAFTS', {
   DRAFT_APPROVED: 0,
   DRAFT_APPROVE: 0,
   DRAFT_NEEDS_APPROVAL: 0,
-  DRAFT_CLICKED_DELETE: 0,
-  DRAFT_CANCELED_DELETE: 0,
   DRAFT_CONFIRMED_DELETE: 0,
   OPEN_COMPOSER: 0,
   HIDE_COMPOSER: 0,
@@ -68,16 +66,6 @@ const draftReducer = (state, action) => {
         isConfirmingDelete: false,
         isDeleting: true,
       };
-    case actionTypes.DRAFT_CLICKED_DELETE:
-      return {
-        ...state,
-        isConfirmingDelete: true,
-      };
-    case actionTypes.DRAFT_CANCELED_DELETE:
-      return {
-        ...state,
-        isConfirmingDelete: false,
-      };
     case actionTypes.DRAFT_APPROVE:
       return {
         ...state,
@@ -118,7 +106,7 @@ const draftsReducer = (state = {}, action) => {
   switch (action.type) {
     case `draftPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { drafts } = action.result;
-      if (action.args.isFetchingMore) {
+      if (action.args.isFetchingMore || Object.keys(state).length > Object.keys(drafts).length) {
         return { ...state, ...drafts };
       }
       return drafts;
@@ -140,8 +128,6 @@ const draftsReducer = (state = {}, action) => {
     case actionTypes.DRAFT_IMAGE_CLICKED_NEXT:
     case actionTypes.DRAFT_IMAGE_CLICKED_PREV:
     case actionTypes.DRAFT_CONFIRMED_DELETE:
-    case actionTypes.DRAFT_CANCELED_DELETE:
-    case actionTypes.DRAFT_CLICKED_DELETE:
     case actionTypes.DRAFT_APPROVE:
     case actionTypes.DRAFT_NEEDS_APPROVAL:
       return {
@@ -156,6 +142,16 @@ const draftsReducer = (state = {}, action) => {
 const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
     case `draftPosts_${dataFetchActionTypes.FETCH_START}`:
+      if (action.args.clear) {
+        return {
+          loading: !action.args.isFetchingMore,
+          loadingMore: action.args.isFetchingMore,
+          moreToLoad: false,
+          page: 1,
+          drafts: {},
+          total: 0,
+        };
+      }
       return {
         ...state,
         loading: !action.args.isFetchingMore,
@@ -185,8 +181,6 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.DRAFT_DELETED:
     case actionTypes.DRAFT_APPROVED:
     case actionTypes.DRAFT_CONFIRMED_DELETE:
-    case actionTypes.DRAFT_CANCELED_DELETE:
-    case actionTypes.DRAFT_CLICKED_DELETE:
     case actionTypes.DRAFT_APPROVE:
     case actionTypes.DRAFT_NEEDS_APPROVAL:
       return {
@@ -220,8 +214,6 @@ export default (state = initialState, action) => {
     case actionTypes.DRAFT_DELETED:
     case actionTypes.DRAFT_APPROVED:
     case actionTypes.DRAFT_CONFIRMED_DELETE:
-    case actionTypes.DRAFT_CANCELED_DELETE:
-    case actionTypes.DRAFT_CLICKED_DELETE:
     case actionTypes.DRAFT_APPROVE:
     case actionTypes.DRAFT_NEEDS_APPROVAL:
       profileId = getProfileId(action);
@@ -277,18 +269,6 @@ export const actions = {
     type: actionTypes.OPEN_COMPOSER,
     updateId: draft.id,
     editMode: true,
-    draft,
-    profileId,
-  }),
-  handleDeleteClick: ({ draft, profileId }) => ({
-    type: actionTypes.DRAFT_CLICKED_DELETE,
-    updateId: draft.id,
-    draft,
-    profileId,
-  }),
-  handleCancelConfirmClick: ({ draft, profileId }) => ({
-    type: actionTypes.DRAFT_CANCELED_DELETE,
-    updateId: draft.id,
     draft,
     profileId,
   }),

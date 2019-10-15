@@ -5,13 +5,16 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { UploadTypes } from '@bufferapp/publish-constants';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import styles from './css/LinkAttachmentThumbnailEditor.css';
-import { FileUploadFormatsConfigs, UploadTypes } from '../AppConstants';
+import { FileUploadFormatsConfigs, NotificationScopes } from '../AppConstants';
 import { escapeParens } from '../utils/StringUtils';
-import UploadZone from '../components/UploadZone';
+import UploadZone from '@bufferapp/publish-upload-zone';
 import Button from '../components/Button';
 import CircularUploadIndicator from '../components/progress-indicators/CircularUploadIndicator';
+import NotificationActionCreators from '../action-creators/NotificationActionCreators';
+import FileUploader from '../file-uploads/FileUploader';
 
 class LinkAttachmentThumbnailEditor extends React.Component {
   static propTypes = {
@@ -81,6 +84,14 @@ class LinkAttachmentThumbnailEditor extends React.Component {
           />}
 
         <UploadZone
+          mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+          uploadDraftFile={ComposerActionCreators.uploadDraftFile}
+          notifiers={ComposerActionCreators.notifiers}
+          removeAllNotifications={() => NotificationActionCreators.removeAllNotificationsByScope(NotificationScopes.FILE_UPLOAD)}
+          queueError={({message}) => NotificationActionCreators.queueError({
+            scope: NotificationScopes.FILE_UPLOAD,
+            message
+          })}
           classNames={uploadZoneClassNames}
           draftId={this.props.draftId}
           uploadFormatsConfig={uploadFormatsConfig}

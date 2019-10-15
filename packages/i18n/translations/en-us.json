@@ -3,6 +3,14 @@
     "loggedIn": "Logged In...",
     "loggedOut": "Logged Out..."
   },
+  "upload-zone": {
+    "buttonTitle": "Upload media",
+    "invalidFormatCantUseAnyFiles": "We can't quite use any of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
+    "invalidFormatCantUseSomeFiles": "We can't quite use some of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
+    "invalidFormatCantOneOfFiles": "We can't quite use some of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
+    "invalidFormatCantSingleFile": "We can't quite use that type of file. Could you try one of the following instead: {acceptedFilesText}?",
+    "invalidFileSize": "We can't upload \"{fileName}\" because it's too large: we can only handle files of that type up to {formattedMaxSize}. Could you try a smaller file?"
+  },
   "app-switcher": {
     "headline1": "Switch Back to Classic Buffer",
     "tagline": "Thanks for trying out our refreshed experience",
@@ -18,7 +26,19 @@
     "connectButton": "Connect Your Social Accounts",
     "defaultTitle": "Let's get your account set up!"
   },
-  "disabled-queue": {
+  "onboarding-page": {
+    "title": "Your account has been setup!",
+    "description": "Now let's connect a social account so you can begin publishing content.",
+    "cta1": "You can also connect your",
+    "ctaChannel1": "Linkedin",
+    "cta2": "and",
+    "ctaChannel2": "Pinterest",
+    "cta3": "accounts.",
+    "skipStep": "Or skip this step",
+    "testemonial": "Publish helps us build a better model of content that generates more engagement.",
+    "name": "Justin Ozanich",
+    "role": "Marketing Manager",
+    "company": "Foster Coffee Company",
     "connectButton": "Manage Social Accounts",
     "queueTab": "Queue",
     "analyticsTab": "Analytics",
@@ -28,6 +48,15 @@
     "composerInput": "What would you like to share?",
     "currentDay": "Today"
   },
+  "story-preview": {
+    "noteTitle": "Note",
+    "notePlaceholder": "Add your caption or a note-to-self",
+    "cancel": "Cancel",
+    "saveNote": "Save Note",
+    "addNote": "Add Note",
+    "editNote": "Edit Note",
+    "noteExplanation": "When it comes time to post, you'll be able to copy and paste your note into Instagram."
+  },
   "stripe": {
     "noNameError": "Uh oh, please fill out the cardholder name :)",
     "noZipError": "For extra security, please add the zip code associated with this card",
@@ -36,22 +65,16 @@
   "billing-upgrade-cta-banner": {
     "remainingTrial": "You have {remaining} on your {plan} plan trial. ",
     "billedTrialEnd": "You'll be billed {billedAmount} at the end of your trial. ",
-    "completeBilling": "Complete your billing details to make the transition smooth. ",
+    "completeBilling": "Add your billing details now to start your subscription. ",
     "planTrial": "You're on the {plan} trial. ",
-    "addBilling": "Add Billing Details",
-    "manageBilling": "Manage Billing"
+    "startSubscription": "Start Subscription"
   },
-  "upgrade-modal": {
+  "switch-plan-modal": {
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
     "proTrialistUpgradeHeader": "Complete your trial and upgrade to the Pro Plan!",
     "proTrialistSubCopy": "The Pro plan includes up to 8 social accounts, custom thumbnails for Instagram videos, Instagram first comment and more.",
-    "proPlanSocialAccounts": "Connect up to 8 social accounts (vs. 3 on Free)",
-    "proPlanIGVideoCover": "Choose a custom video thumbnail for Instagram videos",
-    "proPlanIGFirstComment": "Add a first comment for your Instagram Direct posts",
+    "proIGFirstComment": "Schedule first comment to Instagram",
     "proPlanScheduling": "Schedule 100 posts per social account",
-    "proPlanCalendar": "Manage everything at a glance with the Social Media Calendar",
-    "proPlanBitly": "Shorten your links with Bit.ly",
-    "proPlanAnalytics": "View post-level analytics for your sent posts",
     "proPlanMonthlyPrice": "$15 per month",
     "proPlanNonprofitMonthlyPrice": "$7.50 per month",
     "proPlanMonthlyDescription": "Cancel and get a refund any time",
@@ -66,10 +89,99 @@
     "securityCode": "Security code",
     "zipCode": "Zip code",
     "zipLeaveBlank": "Leave blank for non-US cards",
-    "upgradeCta": "Upgrade to the Pro Plan",
+    "switchCta": "Switch your plan",
     "validating": "One moment...",
-    "stayOnFreeCta": "Stay on the Free Plan for now",
-    "proTrialistStayOnFreeCta": "Downgrade to the Free Plan"
+    "close": "Close",
+    "freePlan": "Free Plan",
+    "freeConnect": "Connect up to three social accounts",
+    "freeSchedule": "Schedule up to 10 posts per account",
+    "freePostHistory": "No post history",
+    "proDescriptors": {
+      "plan": "Subscribe to the Pro plan!",
+      "left": {
+        "connect": "Connect 8 social accounts",
+        "users": "1 user",
+        "calendar": "Get a calendar view of your publishing schedule"
+      },
+      "right": {
+        "posts": "Schedule 100 posts",
+        "insta": "Schedule a first comment on Instagram",
+        "history": "Review a 30-day history of your posts"
+      },
+      "nonprofitYearlyPrice": "$72 per year",
+      "planYearlyPrice": "$144 per year",
+      "nonprofitMonthlyPrice": "$7.50 per month",
+      "planMonthlyPrice": "$15 per month",
+      "planMonthlyDescription": "Cancel and get a refund any time",
+      "planYearlyDescription": "Save 20% vs paying monthly",
+      "buttonText": "Subscribe to Pro Plan"
+    },
+    "soloPremiumDescriptors": {
+      "plan": "Subscribe to the Premium plan!",
+      "left": {
+        "connect": "Connect 8 social accounts",
+        "users": "1 user",
+        "posts": "Schedule 2,000 posts"
+      },
+      "right": {
+        "insta": "Schedule a first comment on Instagram",
+        "hashtags": "Use Hashtag Manager to optimize reach",
+        "shopgrid": "Drive sales through Shop Grid"
+      },
+      "nonprofitYearlyPrice": "$168 per year",
+      "planYearlyPrice": "$336 per year",
+      "nonprofitMonthlyPrice": "$17.50 per month",
+      "planMonthlyPrice": "$35 per month",
+      "planMonthlyDescription": "Cancel and get a refund any time",
+      "planYearlyDescription": "Save 20% vs paying monthly",
+      "buttonText": "Subscribe to Premium Plan"
+    },
+    "premiumDescriptors": {
+      "plan": "Subscribe to the Premium plan!",
+      "left": {
+        "connect": "Connect 8 social accounts",
+        "users": "Collaborate with 2 users",
+        "posts": "Schedule 2,000 posts"
+      },
+      "right": {
+        "insta": "Schedule a first comment on Instagram",
+        "hashtags": "Use Hashtag Manager to optimize reach",
+        "shopgrid": "Drive sales through Shop Grid"
+      },
+      "nonprofitYearlyPrice": "$330 per year",
+      "planYearlyPrice": "$660 per year",
+      "nonprofitMonthlyPrice": "$32.50 per month",
+      "planMonthlyPrice": "$65 per month",
+      "planMonthlyDescription": "Cancel and get a refund any time",
+      "planYearlyDescription": "Save 15% vs paying monthly",
+      "buttonText": "Subscribe to Premium Plan"
+    },
+    "businessDescriptors": {
+      "plan": "Subscribe to the Small Business plan!",
+      "left": {
+        "businessConnect": "Connect 25 social accounts",
+        "businessUsers": "Collaborate with 6 users",
+        "businessPosts": "Schedule 2,000 posts"
+      },
+      "right": {
+        "insta": "Schedule a first comment on Instagram",
+        "hashtags": "Use Hashtag Manager to optimize reach",
+        "shopgrid": "Drive sales through Shop Grid"
+      },
+      "nonprofitYearlyPrice": "$594 per year",
+      "planYearlyPrice": "$1,188 per year",
+      "nonprofitMonthlyPrice": "$49.50 per month",
+      "planMonthlyPrice": "$99 per month",
+      "planMonthlyDescription": "Cancel and get a refund any time",
+      "planYearlyDescription": "Save 15% vs paying monthly",
+      "buttonText": "Subscribe to Small Business Plan"
+    },
+    "proPlan": "Pro Plan",
+    "proConnect": "Connect up to eight social accounts including Pinterest",
+    "proSchedule": "Schedule up to 100 posts per account",
+    "proCalendarView": "Get a calendar view of your publishing schedule",
+    "proReviewHistory": "Review a 30-day history of your posts",
+    "premiumSwitchHeader": "Switch to the Premium Plan!"
   },
   "welcome-modal": {
     "headline": "We've refreshed the look of Buffer",
@@ -85,14 +197,30 @@
     "cancelCta": "Maybe Later"
   },
   "welcome-paid-modal": {
-    "headline1": "A Refreshed Experience",
-    "body1": "We're working on a refreshed experience for you. The same Buffer you’ve come to love – ",
-    "body2": "now simpler, smoother, and faster.",
-    "cta1": "Continue",
-    "headline2": "Switch Back at Any Time",
-    "body3": "Feeling nostalgic? Switch back to classic Buffer at any time.",
-    "cta2": "Sounds Good",
-    "altText": "You can go back to classic Buffer from the top menu"
+    "step1": {
+      "headline": "A Better Buffer Experience",
+      "body1": "It's the same Buffer you’ve come to love – now simpler and faster, with ",
+      "body2": "advanced Instagram features to help you grow your reach.",
+      "cta": "Learn More"
+    },
+    "step2": {
+      "headline": "Turn Instagram Posts Into Sales",
+      "body": "Seamlessly transition your Instagram audience to your online store by linking your profile to a shoppable page, powered by your Instagram grid.",
+      "altText": "Instagram Grid Shop with custom URLs",
+      "cta": "Continue"
+    },
+    "step3": {
+      "headline": "Include a First Comment with Saved Hashtags",
+      "body": "Optimize your reach by including a first comment on Instagram posts. Insert custom saved hashtag groups with Hashtag Manager.",
+      "altText": "Hashtag Manager for Instagram",
+      "cta": "Continue"
+    },
+    "step4": {
+      "headline": "Switch Back at Any Time",
+      "body": "Feeling nostalgic? Switch back to classic Buffer at any time.",
+      "cta": "Sounds Good",
+      "altText": "You can go back to classic Buffer from the top menu"
+    }
   },
   "instagram-first-comment-modal": {
     "headline": "It looks like we’ll need permission to post an Instagram comment on your behalf. ",
@@ -165,5 +293,76 @@
     "text": "Are you sure you want to close the composer? You will lose any unsaved changes.",
     "sure": "Yes, Close Composer",
     "cancel": "Cancel"
+  },
+  "plans-page": {
+    "buttonDashboardText": "Back to Dashboard",
+    "headerText": "Choose your Buffer Publish plan",
+    "pro": {
+      "title": "Pro",
+      "cost": "$15",
+      "nonProfitCost": "$7.50",
+      "subtitle": "Commit to a social strategy",
+      "plan": "pro",
+      "features": ["8 social accounts", "1 user", "Instagram first comment"],
+      "featureTooltips": ["", "", "Include first comment when you schedule Instagram posts"],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly",
+      "monthly": "/mo"
+    },
+    "premium": {
+      "title": "Premium",
+      "cost": "$65",
+      "nonProfitCost": "$32.50",
+      "subtitle": "Unlock advanced IG features",
+      "plan": "premium_business",
+      "features": ["8 social accounts", "2 users", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "featureTooltips": ["",
+                          "",
+                          "Plan, preview, and schedule Instagram Stories on web and mobile.",
+                          "Include the first comment when you schedule Instagram posts",
+                          "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
+                          "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+                          ],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly",
+      "soloCost": "$35",
+      "soloNonProfitCost": "$17.50",
+      "monthly": "/mo"
+    },
+    "small": {
+      "title": "Business",
+      "cost": "$99",
+      "nonProfitCost": "$49.50",
+      "subtitle": "Built for teams building brands",
+      "plan": "small",
+      "features": ["25 social accounts", "6 users", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "buttonText": "Choose Plan",
+      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Billed Monthly",
+      "monthly": "/mo"
+    }
+  },
+  "story-group-composer": {
+    "noteSubText": "When it comes time to post, you'll be able to copy and paste your note into Instagram.",
+    "notePlaceholder": "Add your caption or a note to self",
+    "saveNoteButton": "Save Note",
+    "cancelNoteButton": "Back",
+    "noteImageAlt": "Instagram story media",
+    "scheduleLoadingButton": "Scheduling Story...",
+    "scheduleButton": "Schedule Story",
+    "previewButton": "Preview",
+    "addNote": "Add Note",
+    "processingVideo": "Processing video",
+    "addMedia": "Add Media"
+  },
+  "story-group-queue": {
+    "inputPlaceholder": "What would you like to add to your Story?",
+    "reminderText1": "When it’s time to post your Story, we’ll send a ",
+    "reminderLinkText2": "Reminder ",
+    "reminderText3": "to your mobile device.",
+    "mobileTagText": "Uh-oh! Looks like you might not have the latest version of the Buffer mobile app. Download it now to start using Stories!",
+    "bannerMobileTagText": "Hmm...looks like you might not have the latest version of the Buffer mobile app. Download it now so that you can share this Story!"
   }
 }

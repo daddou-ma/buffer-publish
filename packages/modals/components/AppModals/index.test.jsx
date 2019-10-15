@@ -15,7 +15,7 @@ const fakeStore = state => ({
 
 describe('Modals', () => {
   it('renders nothing when no modals are visible', () => {
-    const visibleModals = { ...initialState, showUpgradeModal: false };
+    const visibleModals = { ...initialState, showSwitchPlanModal: false };
     const renderer = new ShallowRenderer();
     const rendered = renderer.render(
       <AppModals {...visibleModals} />,
@@ -23,7 +23,7 @@ describe('Modals', () => {
     expect(rendered).toMatchSnapshot();
   });
   it('renders upgrade modal', () => {
-    const visibleModals = { ...initialState, showUpgradeModal: true };
+    const visibleModals = { ...initialState, showSwitchPlanModal: true };
     const renderer = new ShallowRenderer();
     const rendered = renderer.render(
       <AppModals {...visibleModals} />,
@@ -31,7 +31,7 @@ describe('Modals', () => {
     expect(rendered).toMatchSnapshot();
   });
   it('renders a connected upgrade modal', () => {
-    const visibleModals = { ...initialState, showUpgradeModal: true };
+    const visibleModals = { ...initialState, showSwitchPlanModal: true };
     const renderer = new ShallowRenderer();
     const rendered = renderer.render(
       <Provider store={fakeStore({ modals: visibleModals })}>

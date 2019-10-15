@@ -32,20 +32,20 @@ describe('reducer', () => {
     expect(reducer(undefined, action).showStartProTrial).toBe(false);
   });
 
-  it('should set showUpgradeToPro to true for free users', () => {
+  it('should set showSwitchPlanModal to true for free users', () => {
     const action = {
       type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
       result: { is_free_user: true, isBusinessTeamMember: false },
     };
-    expect(reducer(undefined, action).showUpgradeToPro).toBe(true);
+    expect(reducer(undefined, action).showSwitchPlanModal).toBe(true);
   });
 
-  it('should set showUpgradeToPro to false for free users that are business team members', () => {
+  it('should set showSwitchPlanModal to false for free users that are business team members', () => {
     const action = {
       type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
       result: { is_free_user: true, isBusinessTeamMember: true },
     };
-    expect(reducer(undefined, action).showUpgradeToPro).toBe(false);
+    expect(reducer(undefined, action).showSwitchPlanModal).toBe(false);
   });
 
   it('should collect the user data when the user is loaded', () => {

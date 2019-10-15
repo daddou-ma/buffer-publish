@@ -143,6 +143,53 @@ export const getSlotsWithTimestampsForDay = ({
   }).filter(slot => slot); // gets rid of `null` slots (i.e., in the past)
 };
 
+const getFutureTime = (timezone) => {
+  const todayDate = (new Date()).setSeconds(0); // Seconds must be 0 for precise scheduling
+  const isTimezoneSet = !!timezone;
+  const today = isTimezoneSet ? moment.tz(todayDate, timezone) : moment(todayDate);
+  today.add(1, 'hours');
+
+  return today.format('HH:mm');
+};
+
+/**
+ * Returns slots with timestamps and labels for the given day
+ * This method doesn't take into account times, only days of the week
+ */
+export const getSlotsWithTimestampsAndNoTimeForDay = ({
+  profileTimezone,
+  hasTwentyFourHourTimeFormat,
+  now,
+  day: { text: dayText, dayIndex, dayUnixTime },
+}) => {
+  if (now === null) {
+    now = moment.tz(profileTimezone);
+  }
+  if (dayIndex === -1) {
+    return [];
+  }
+
+  const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+  const slot = '10:00';
+  const dayMoment = moment.tz(new Date(dayUnixTime * 1000), profileTimezone);
+  const slotMoment = dayMoment.clone();
+  const [hour, minute] = slot.split(':');
+  slotMoment.set({ hour: parseInt(hour, 10), minute: parseInt(minute, 10) });
+
+  if (slotMoment.isBefore(now)) {
+    const anHourFromNow = getFutureTime(profileTimezone);
+    const [hourNow, minuteNow] = anHourFromNow.split(':');
+    slotMoment.set({ hour: parseInt(hourNow, 10), minute: parseInt(minuteNow, 10) });
+  }
+
+  return [{
+    name: days[dayIndex],
+    label: slotMoment.format(hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'),
+    timestamp: slotMoment.unix(),
+    dayText,
+  }];
+};
+
 /**
  * Convenience method for generating a header item for the `QueueItems` component
  */
@@ -236,6 +283,40 @@ export const getQueueItemsForDay = ({
   return items;
 };
 
+/**
+ * Returns a list of posts by day and a single slot for a given set of `daySlots` that were
+ * obtained from `getSlotsWithTimestampsAndNoTimeForDay`.
+ */
+export const getItemsForDay = ({
+  daySlots,
+  posts,
+  isManager,
+  profileService,
+  orderBy,
+}) => {
+  const slotsItems = daySlots.map((daySlot) => {
+    const item = getSlotItem({ slot: daySlot, profileService });
+    return item;
+  });
+
+  const postsItems = posts
+    .map(post => getPostItem({ isManager, post }));
+
+  /**
+   * Sort posts first and then concant the slots items
+   * to view at the end
+   */
+  const items = postsItems
+    .sort((a, b) => {
+      const aField = a.slot ? a.slot.timestamp : a[orderBy];
+      const bField = b.slot ? b.slot.timestamp : b[orderBy];
+      return aField - bField;
+    })
+    .concat(slotsItems);
+
+  return items;
+};
+
 export const groupPostsByDay = posts =>
   posts.reduce((finalPosts, post) => {
     finalPosts[post.day] = finalPosts[post.day] || [];
@@ -281,15 +362,20 @@ export const formatPostLists = ({
   weeksToShow,
   hasTwentyFourHourTimeFormat,
   profileService,
+  isSingleSlot,
+  orderBy = 'due_at',
 }) => {
-  const orderedPosts = Object.values(posts).sort((a, b) => a.due_at - b.due_at);
+  const orderedPosts = Object.values(posts).sort((a, b) => a[orderBy] - b[orderBy]);
 
   /**
    * CASE 1: Schedule Slots Enabled
    */
   if (scheduleSlotsEnabled) {
     // Get the schedule slots for each day
-    const dailySlots = getDailySlotsFromProfileSchedules(schedules);
+    let dailySlots = [];
+    if (schedules) {
+      dailySlots = getDailySlotsFromProfileSchedules(schedules);
+    }
 
     // Now get the weeks/days we'll show in the queue
     let days = getDaysForUpcomingWeeks({
@@ -317,19 +403,39 @@ export const formatPostLists = ({
     days.forEach((day) => {
       const dayHeader = getDayHeaderItem(day);
       if (dayHeader.id !== noScheduledDate) {
-        const daySlots = getSlotsWithTimestampsForDay({
-          profileTimezone,
-          hasTwentyFourHourTimeFormat,
-          dailySlots,
-          day,
-        });
+        let daySlots;
+        let queueItemsForDay;
         const postsForDay = postsByDay[day.text] || [];
-        const queueItemsForDay = getQueueItemsForDay({
-          daySlots,
-          posts: postsForDay,
-          isManager,
-          profileService,
-        });
+
+        // For Stories tabs, we only need to load one slot per day
+        // which should be visible at all times
+        if (isSingleSlot) {
+          daySlots = getSlotsWithTimestampsAndNoTimeForDay({
+            profileTimezone,
+            hasTwentyFourHourTimeFormat,
+            day,
+          });
+          queueItemsForDay = getItemsForDay({
+            daySlots,
+            posts: postsForDay,
+            isManager,
+            profileService,
+            orderBy,
+          });
+        } else {
+          daySlots = getSlotsWithTimestampsForDay({
+            profileTimezone,
+            hasTwentyFourHourTimeFormat,
+            dailySlots,
+            day,
+          });
+          queueItemsForDay = getQueueItemsForDay({
+            daySlots,
+            posts: postsForDay,
+            isManager,
+            profileService,
+          });
+        }
 
         // Check for length here so we don't add a dayHeader when there are no slots or posts
         if (queueItemsForDay.length) {

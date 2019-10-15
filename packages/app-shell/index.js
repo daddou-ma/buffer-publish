@@ -1,7 +1,7 @@
 import { actions as appSwitcherActions } from '@bufferapp/publish-app-switcher';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { generatePreferencePageRoute } from '@bufferapp/publish-routes';
+import { generatePreferencePageRoute, newBusinessTrialistsRoute } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
 
@@ -13,10 +13,13 @@ export default connect(
     bannerOptions: state.appShell.bannerOptions,
     bannerKey: state.appShell.bannerKey,
     showReturnToClassic: state.appShell.showReturnToClassic,
-    showUpgradeToPro: state.appShell.showUpgradeToPro,
+    showSwitchPlan: state.appShell.showSwitchPlan,
     showManageTeam: state.appShell.showManageTeam,
     showStartProTrial: state.appShell.showStartProTrial,
+    hideAppShell: (!state.appShell.sawOnboardingPage
+      && state.router.location.pathname === newBusinessTrialistsRoute),
   }),
+
   dispatch => ({
     openPreferences() {
       dispatch(
@@ -34,8 +37,8 @@ export default connect(
         }),
       );
     },
-    upgradeToPro() {
-      dispatch(modalActions.showUpgradeModal({ source: 'app_shell' }));
+    switchPlan() {
+      dispatch(modalActions.showSwitchPlanModal({ source: 'app_shell', plan: 'pro' }));
     },
     onCloseBanner({ key }) {
       dispatch(actions.onCloseBanner({ key }));

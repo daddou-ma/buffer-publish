@@ -8,7 +8,7 @@ export const actionTypes = keyWrapper('APP_SHELL', {
 
 export const initialState = {
   showReturnToClassic: false,
-  showUpgradeToPro: false,
+  showSwitchPlanModal: false,
   user: {
     name: '...',
     email: '',
@@ -16,6 +16,7 @@ export const initialState = {
   },
   bannerKey: null,
   bannerOptions: undefined,
+  sawOnboardingPage: true,
 };
 
 export default (state = initialState, action) => {
@@ -28,9 +29,10 @@ export default (state = initialState, action) => {
           name: action.result.name,
         },
         showReturnToClassic: action.result.showReturnToClassic,
-        showUpgradeToPro: action.result.is_free_user && !action.result.isBusinessTeamMember,
+        showSwitchPlanModal: action.result.is_free_user && !action.result.isBusinessTeamMember,
         showManageTeam: !action.result.is_free_user,
         showStartProTrial: action.result.canStartProTrial && !action.result.isBusinessTeamMember,
+        sawOnboardingPage: action.result.messages && action.result.messages.includes('user_saw_onboarding_page'),
       };
     case actionTypes.SET_BANNER_OPTIONS:
       return {

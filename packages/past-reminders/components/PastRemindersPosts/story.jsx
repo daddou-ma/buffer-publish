@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import PastRemindersPosts from './index';
@@ -20,10 +20,10 @@ const storeFake = state => ({
 const store = storeFake({
   i18n: {
     translations: {
-      'upgrade-modal': {},
+      'switch-plan-modal': {},
     },
   },
-  upgradeModal: {},
+  switchPlanModal: {},
   stripe: {},
   productFeatures: {
     planName: 'free',
@@ -38,7 +38,7 @@ const StoreDecorator = storyFn => (
 );
 
 storiesOf('PastRemindersPosts', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(StoreDecorator)
   .add('default', () => (
     <PastRemindersPosts
@@ -47,8 +47,6 @@ storiesOf('PastRemindersPosts', module)
       header={header}
       subHeader={subHeader}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -64,8 +62,6 @@ storiesOf('PastRemindersPosts', module)
       header={header}
       subHeader={subHeader}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -81,13 +77,11 @@ storiesOf('PastRemindersPosts', module)
       header={header}
       subHeader={subHeader}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
-      onClickUpgradeToPro={action('onClickUpgradeToPro')}
+      onClickSwitchPlan={action('onClickSwitchPlan')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       isBusinessAccount
@@ -101,13 +95,11 @@ storiesOf('PastRemindersPosts', module)
       header={header}
       subHeader={subHeader}
       postLists={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
       onRequeueClick={action('onRequeueClick')}
-      onClickUpgradeToPro={action('onClickUpgradeToPro')}
+      onClickSwitchPlan={action('onClickSwitchPlan')}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       isBusinessAccount

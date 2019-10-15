@@ -9,9 +9,9 @@ describe("AppDispatcher", () => {
   it("sends a pubsub event when the upgrade modal is supposed to show", () => {
     const eventTrigger = jest.spyOn(events, "trigger");
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.EVENT_SHOW_UPGRADE_MODAL
+      actionType: ActionTypes.EVENT_SHOW_SWITCH_PLAN_MODAL
     });
-    expect(eventTrigger).toHaveBeenCalledWith('show-upgrade-modal');
+    expect(eventTrigger).toHaveBeenCalledWith('show-switch-plan-modal');
   });
 
 });

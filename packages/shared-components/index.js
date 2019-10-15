@@ -26,4 +26,7 @@ export GridList from './GridList';
 export ConfirmModal from './ConfirmModal';
 export ComposerInput from './ComposerInput';
 export ProTag from './ProTag';
+export Slider from './Slider';
+export DiscontinuousProgressBar from './DiscontinuousProgressBar';
+export Arrow from './Arrow';
 export ComposerSidepanel from './ComposerSidepanel';

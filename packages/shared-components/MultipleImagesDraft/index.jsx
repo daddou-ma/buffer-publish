@@ -32,8 +32,6 @@ const MultipleImagesDraft = ({
   links,
   manager,
   onApproveClick,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onMoveToDraftsClick,
@@ -59,31 +57,35 @@ const MultipleImagesDraft = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic ?
-          <Text
-            color="black"
-            size="mini"
-            whitespace="pre-wrap"
-          >
-            {text}
-          </Text> :
-          <LinkifiedText
-            color="black"
-            links={links}
-            size="mini"
-            newTab
-            unstyled
-          >
-            {text}
-          </LinkifiedText>
+        {basic
+          ? (
+            <Text
+              color="black"
+              size="mini"
+              whitespace="pre-wrap"
+            >
+              {text}
+            </Text>
+          )
+          : (
+            <LinkifiedText
+              color="black"
+              links={links}
+              size="mini"
+              newTab
+              unstyled
+            >
+              {text}
+            </LinkifiedText>
+          )
         }
       </span>
       <div style={imagesWrapperStyle} onClick={onImageClick}>
         <MultipleImages
-          border={'rounded'}
-          height={'9rem'}
+          border="rounded"
+          height="9rem"
           urls={imageUrls}
-          width={'9rem'}
+          width="9rem"
         />
         <Lightbox
           images={images}
@@ -110,8 +112,6 @@ const MultipleImagesDraft = ({
       links={links}
       manager={manager}
       onApproveClick={onApproveClick}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
       onDeleteConfirmClick={onDeleteConfirmClick}
       onEditClick={onEditClick}
       onMoveToDraftsClick={onMoveToDraftsClick}

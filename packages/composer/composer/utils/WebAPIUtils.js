@@ -2,8 +2,9 @@ import fetchJsonp from 'fetch-jsonp';
 import partition from 'lodash.partition';
 import lruCache from 'lru-cache';
 import Request from '@bufferapp/buffer-js-request';
+import { AppEnvironments } from '@bufferapp/publish-constants';
 import AppActionCreators from '../action-creators/AppActionCreators';
-import { QueueingTypes, AttachmentTypes, AppEnvironments } from '../AppConstants';
+import { QueueingTypes, AttachmentTypes } from '../AppConstants';
 import AppStore from '../stores/AppStore';
 import API from './API';
 import { observeStore } from '../utils/StoreUtils';
@@ -352,11 +353,15 @@ const WebAPIUtils = {
         ), [])
       )),
 
-  getImageDimensions: (url) => (
+  getImageDimensions: ({
+    url,
+    key = AppStore.getImageDimensionsKey(),
+    user_id = AppStore.getUserData().id,
+  }) => (
     // https://image-dimensions.buffer.com/dimensions deprecated
     Request.get('https://fastimage.buffer.com/dimensions', {
-      user_id: AppStore.getUserData().id,
-      key: AppStore.getImageDimensionsKey(),
+      user_id,
+      key,
       url,
     }, { mode: 'cors' })
       .then((response) => response.json())

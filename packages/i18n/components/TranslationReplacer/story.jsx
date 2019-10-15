@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 
 import TranslationReplacer from './index';
 
@@ -11,7 +11,7 @@ const translations = {
 };
 
 storiesOf('Translation Replacer', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('default', () => (
     <TranslationReplacer
       translation={translations.default}

@@ -3,7 +3,9 @@
     "example-with-variable": "This is an example with this {{__variable__}} value",
     "bitly-connect": "Great, your bitly account has been linked with the profile {{__variable__}}",
     "bitly-disconnect": "Okay, your bitly account has been disconnected.",
-    "trial-extended": "Great! We’ve extended your free trial."
+    "trial-extended": "Great! We’ve extended your free trial.",
+    "trial-pro-started": "Nice! The trial started successfully!",
+    "connection": "{{__variable__}}"
   },
   "error": {
     "connection": "{{__variable__}}",
@@ -13,6 +15,7 @@
     "trial-extended": "{{__variable__}}",
     "trial-already-extended": "Oops, it seems you already extended your trial once.",
     "trial-extension-not-available": "Oops, it seems you might not be eligible for a trial extension.",
-    "trial-pro-fail-started": "Oops, it seems there was an error starting a Pro Trial"
+    "trial-pro-fail-started": "Oops, it seems there was an error starting a Pro Trial",
+    "trial-fail-started": "Oops, it seems there was an error starting the trial: {{__variable__}}"
   }
 }

@@ -1,11 +1,14 @@
 import { push } from 'connected-react-router';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { actions as tabsActions } from '@bufferapp/publish-tabs';
+import { actions as tabsActions } from '@bufferapp/publish-tabs/reducer';
 
 import {
   generateProfilePageRoute,
   getProfilePageParams,
   getPreferencePageParams,
+  getPlansPageParams,
+  newBusinessTrialistsRoute,
+  newConnectionRoute,
 } from '@bufferapp/publish-routes';
 import {
   actionTypes as dataFetchActionTypes,
@@ -36,6 +39,9 @@ export default ({ dispatch, getState }) => next => (action) => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(dataFetchActions.fetch({
         name: 'profiles',
+        args: {
+          id: action.result.id,
+        },
       }));
       break;
     }
@@ -67,6 +73,9 @@ export default ({ dispatch, getState }) => next => (action) => {
       const isPreferencePage = !!getPreferencePageParams({
         path,
       });
+      const isPlansPage = !!getPlansPageParams({
+        path,
+      });
       const { profiles, isOnBusinessTrial } = getState().profileSidebar;
       if (params && params.profileId) {
         const profile = [...profiles].find(p => p.id === params.profileId);
@@ -91,7 +100,7 @@ export default ({ dispatch, getState }) => next => (action) => {
             profile: formatAnalyticsProfileObj(profile),
           });
         }
-      } else if (!isPreferencePage && profiles.length > 0) {
+      } else if (!isPreferencePage && !isPlansPage && profiles.length > 0) {
         const selectedProfile = profiles[0];
         dispatch(actions.selectProfile({
           profile: selectedProfile,
@@ -108,9 +117,9 @@ export default ({ dispatch, getState }) => next => (action) => {
           tabId: 'queue',
         })));
       } else if (!isPreferencePage && profiles.length === 0 && isOnBusinessTrial) {
-        dispatch(push('/new-connection-business-trialists'));
+        dispatch(push(newBusinessTrialistsRoute));
       } else if (!isPreferencePage && profiles.length === 0) {
-        dispatch(push('/new-connection'));
+        dispatch(push(newConnectionRoute));
       }
       break;
     }

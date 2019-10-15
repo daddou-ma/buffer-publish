@@ -19,6 +19,7 @@ export default store => next => (action) => {
       }
       break;
     case actionTypes.PAGE_CHANGE:
+    // currently using track event for page change logic, leaving here for now
       if (window.analytics) {
         window.analytics.page(
           action.pageName,

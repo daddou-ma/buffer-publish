@@ -1,6 +1,6 @@
 import middleware from './middleware';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as generalSettingsActionTypes } from './reducer';
 
 describe('middleware', () => {

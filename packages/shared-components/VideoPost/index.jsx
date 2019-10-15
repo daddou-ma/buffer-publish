@@ -7,8 +7,6 @@ const VideoPost = ({
   isWorking,
   imageSrc,
   links,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -45,7 +43,7 @@ const VideoPost = ({
   commentText,
   hasCommentEnabled,
   hasFirstCommentFlip,
-}) =>
+}) => (
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
     isDeleting={isDeleting}
@@ -55,8 +53,6 @@ const VideoPost = ({
     postDetails={postDetails}
     tag={tag}
     text={text}
-    onCancelConfirmClick={onCancelConfirmClick}
-    onDeleteClick={onDeleteClick}
     onDeleteConfirmClick={onDeleteConfirmClick}
     onEditClick={onEditClick}
     onShareNowClick={onShareNowClick}
@@ -90,7 +86,8 @@ const VideoPost = ({
     commentText={commentText}
     hasCommentEnabled={hasCommentEnabled}
     hasFirstCommentFlip={hasFirstCommentFlip}
-  />;
+  />
+);
 
 VideoPost.propTypes = ImagePost.propTypes;
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 
 import AppShell from './index';
 
 storiesOf('AppShell', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('normal', () => (
     <AppShell
       user={{
@@ -43,7 +43,7 @@ storiesOf('AppShell', module)
   .add('with start a pro trial link', () => (
     <AppShell
       showStartProTrial
-      showUpgradeToPro
+      showSwitchPlan
       user={{
         name: 'Tom Redman',
         email: 'tom.redman@buffer.com',

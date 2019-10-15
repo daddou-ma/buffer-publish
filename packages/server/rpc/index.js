@@ -24,12 +24,11 @@ const requeuePost = require('./requeuePost');
 const updatePausedSchedules = require('./updatePausedSchedules');
 const sendFeedback = require('./sendFeedback');
 const savePublishBetaRedirect = require('./savePublishBetaRedirect');
-const upgradeToPro = require('./upgradeToPro');
+const switchPlan = require('./switchPlan');
 const changeDateTimePreferences = require('./changeDateTimePreferences');
 const twoFactorUpdate = require('./twoFactorUpdate');
 const twoFactorConfirm = require('./twoFactorConfirm');
 const twoFactorRecovery = require('./twoFactorRecovery');
-const closeAccount = require('./closeAccount');
 const connectedApps = require('./connectedApps');
 const revokeConnectedApp = require('./revokeConnectedApp');
 const featureMethod = require('./features');
@@ -60,9 +59,14 @@ const globalAccount = require('./globalAccount');
 const createHashtagGroup = require('./createHashtagGroup');
 const deleteHashtagGroup = require('./deleteHashtagGroup');
 const getHashtagGroups = require('./getHashtagGroups');
+const createSetupIntent = require('./createSetupIntent');
+const getStoryGroupsMethod = require('./getStoryGroups');
+const createStoryGroupMethod = require('./createStoryGroup');
+const updateStoryGroupMethod = require('./updateStoryGroup');
+const deleteStoryGroupMethod = require('./deleteStoryGroup');
+const shareStoryGroupNowMethod = require('./shareStoryGroupNow');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
-const analyticsStartDate = require('./analytics/analyticsStartDate');
 const average = require('./analytics/average');
 const compare = require('./analytics/compare');
 const getReport = require('./analytics/getReport');
@@ -94,12 +98,11 @@ module.exports = rpc(
   updatePausedSchedules,
   sendFeedback,
   savePublishBetaRedirect,
-  upgradeToPro,
+  switchPlan,
   changeDateTimePreferences,
   twoFactorUpdate,
   twoFactorConfirm,
   twoFactorRecovery,
-  closeAccount,
   connectedApps,
   revokeConnectedApp,
   featureMethod,
@@ -110,7 +113,6 @@ module.exports = rpc(
   toggleGoogleAnalytics,
   saveGATrackingSettings,
   getGATrackingSettings,
-  analyticsStartDate,
   average,
   compare,
   getReport,
@@ -136,4 +138,10 @@ module.exports = rpc(
   createHashtagGroup,
   deleteHashtagGroup,
   getHashtagGroups,
+  createSetupIntent,
+  getStoryGroupsMethod,
+  createStoryGroupMethod,
+  updateStoryGroupMethod,
+  deleteStoryGroupMethod,
+  shareStoryGroupNowMethod,
 );

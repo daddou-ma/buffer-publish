@@ -7,7 +7,8 @@
  * of these larger objects, depending on the environment they're in.
  */
 
-import { DataImportEnvironments, AppEnvironments } from '../AppConstants';
+import { AppEnvironments } from '@bufferapp/publish-constants';
+import { DataImportEnvironments } from '../AppConstants';
 
 const DataImportUtils = {
   extractPropsFromBufferGlobal: (bufferGlobal) => ({

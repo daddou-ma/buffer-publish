@@ -10,7 +10,7 @@
   "author": "hamish@buffer.com",
   "dependencies": {
     "@bufferapp/keywrapper": "0.2.0",
-    "@bufferapp/publish-upgrade-modal": "2.0.0",
+    "@bufferapp/publish-switch-plan-modal": "2.0.0",
     "@bufferapp/publish-welcome-modal": "2.0.0",
     "@bufferapp/publish-ig-direct-posting-modal": "2.0.0",
     "@bufferapp/publish-welcome-paid-modal": "2.0.0",
@@ -20,7 +20,6 @@
     "@bufferapp/buffermetrics": "0.9.0"
   },
   "devDependencies": {
-    "eslint": "^5.3.0"
   },
   "publishConfig": {
     "access": "public"

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import PostStats from './index';
 
 const stats = {
@@ -27,23 +27,23 @@ const twitterStats = {
   reach: 3,
 };
 
-storiesOf('PostStats', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Posts/PostStats', module)
+  .addDecorator(withA11y)
   .add('default', () => (
     <PostStats
       statistics={stats}
-      profileService={'facebook'}
+      profileService="facebook"
     />
   ))
   .add('linkedin stats', () => (
     <PostStats
       statistics={linkedinStats}
-      profileService={'linkedin'}
+      profileService="linkedin"
     />
   ))
   .add('twitter stats', () => (
     <PostStats
       statistics={twitterStats}
-      profileService={'twitter'}
+      profileService="twitter"
     />
   ));

@@ -28,8 +28,6 @@ const MultipleImagesPost = ({
   isDeleting,
   isWorking,
   links,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -70,32 +68,36 @@ const MultipleImagesPost = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic ?
-          <Text
-            color="black"
-            size="mini"
-            whitespace="pre-wrap"
-          >
-            {text}
-          </Text> :
-          <LinkifiedText
-            color="black"
-            links={links}
-            size="mini"
-            whitespace="pre-wrap"
-            newTab
-            unstyled
-          >
-            {text}
-          </LinkifiedText>
+        {basic
+          ? (
+            <Text
+              color="black"
+              size="mini"
+              whitespace="pre-wrap"
+            >
+              {text}
+            </Text>
+          )
+          : (
+            <LinkifiedText
+              color="black"
+              links={links}
+              size="mini"
+              whitespace="pre-wrap"
+              newTab
+              unstyled
+            >
+              {text}
+            </LinkifiedText>
+          )
         }
       </span>
       <div style={imagesWrapperStyle} onClick={onImageClick}>
         <MultipleImages
-          border={'rounded'}
-          height={'9rem'}
+          border="rounded"
+          height="9rem"
           urls={imageUrls}
-          width={'9rem'}
+          width="9rem"
         />
         <Lightbox
           images={images}
@@ -118,8 +120,6 @@ const MultipleImagesPost = ({
       isDeleting={isDeleting}
       isWorking={isWorking}
       links={links}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
       onDeleteConfirmClick={onDeleteConfirmClick}
       onEditClick={onEditClick}
       onShareNowClick={onShareNowClick}

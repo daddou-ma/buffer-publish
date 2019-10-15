@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { ComposerSidepanel } from '@bufferapp/publish-shared-components';
 import HashtagGroupWrapper from '@bufferapp/publish-hashtag-group-manager';
-import Modals from '../components/Modals';
-import NotificationContainer from '../components/NotificationContainer';
-import ProfileSection from '../components/ProfileSection';
-import ComposerSection from '../components/ComposerSection';
-import UpdateSaver from '../components/UpdateSaver';
-import { AppEnvironments } from '../AppConstants';
+import { AppEnvironments } from '@bufferapp/publish-constants';
+import Modals from './Modals';
+import NotificationContainer from './NotificationContainer';
+import ProfileSection from './ProfileSection';
+import ComposerSection from './ComposerSection';
+import UpdateSaver from './UpdateSaver';
 import styles from './css/App.css';
-import ExtensionComponents from '../components/ExtensionComponents';
+import ExtensionComponents from './ExtensionComponents';
 import { isOnExtension } from '../utils/extension';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 
@@ -56,8 +56,7 @@ class AppStateless extends React.Component {
   appDynamicStyles(position) {
     const dynamicStyles = {};
     if (position !== null) {
-      const shouldOverrideVerticalPositioningOnly =
-        typeof position.left === 'undefined';
+      const shouldOverrideVerticalPositioningOnly = typeof position.left === 'undefined';
 
       if (shouldOverrideVerticalPositioningOnly) {
         dynamicStyles.margin = '0 auto';
@@ -82,11 +81,11 @@ class AppStateless extends React.Component {
    * @param {array} allSelectedProfiles
    */
   shouldShowSidepanel({
-                        omniboxEnabled,
-                        expandedComposerId,
-                        isComposerSidebarVisible,
-                        allSelectedProfiles,
-                      }) {
+    omniboxEnabled,
+    expandedComposerId,
+    isComposerSidebarVisible,
+    allSelectedProfiles,
+  }) {
     const otherNetworkSelected = omniboxEnabled && allSelectedProfiles.some(profile => profile.service.name !== 'instagram');
     const shouldShowSidebar = !(otherNetworkSelected || expandedComposerId !== 'instagram');
 
@@ -212,13 +211,15 @@ class AppStateless extends React.Component {
             metadata={metaData}
           />
 
-          {canSelectProfiles ?
-            <ProfileSection
-              appState={appState}
-              profiles={profiles}
-              userData={userData}
-              visibleNotifications={visibleNotifications}
-            /> : null}
+          {canSelectProfiles
+            ? (
+              <ProfileSection
+                appState={appState}
+                profiles={profiles}
+                userData={userData}
+                visibleNotifications={visibleNotifications}
+              />
+            ) : null}
 
           <ComposerSection
             isOmniboxEnabled={omniboxEnabled}
@@ -266,11 +267,13 @@ class AppStateless extends React.Component {
           <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
         </div>
         <ComposerSidepanel isVisible={isSidepanelVisible} onClose={this.onCloseSidepanel}>
-          {isSidepanelVisible &&
+          {isSidepanelVisible
+          && (
           <HashtagGroupWrapper
-            viewMode={'manageHashtag'}
+            viewMode="manageHashtag"
             onInsertHashtagGroupClick={this.onInsertHashtagGroupClick}
-          />}
+          />
+          )}
         </ComposerSidepanel>
       </div>
     );

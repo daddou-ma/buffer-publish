@@ -1,11 +1,11 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import VideoPost from './index';
-import { Provider } from 'react-redux';
 
 const storeFake = state => ({
   default: () => {},
@@ -18,7 +18,7 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
 const links = [{
@@ -37,11 +37,6 @@ const multilineText = 'What is a Product Designer? \n\nAn awesome story by @jgad
 const postDetails = {
   isRetweet: false,
   postAction: 'This post will be sent at 9:21 (GMT)',
-};
-
-const postDetailsSent = {
-  isRetweet: false,
-  postAction: 'This post was sent at 9:21 (GMT)',
 };
 
 const isARetweetPostDetails = {
@@ -65,8 +60,8 @@ const squareImage = 'http://lorempixel.com/400/400/cats/';
 const tallImage = 'http://lorempixel.com/400/900/cats/';
 const wideImage = 'http://lorempixel.com/900/400/cats/';
 
-storiesOf('VideoPost', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Posts/VideoPost', module)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
       {getStory()}
@@ -78,8 +73,6 @@ storiesOf('VideoPost', module)
       links={links}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -97,8 +90,6 @@ storiesOf('VideoPost', module)
       links={multilineLinks}
       postDetails={postDetails}
       text={multilineText}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -116,8 +107,6 @@ storiesOf('VideoPost', module)
       links={links}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -135,8 +124,6 @@ storiesOf('VideoPost', module)
       links={links}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -154,8 +141,6 @@ storiesOf('VideoPost', module)
       links={links}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -173,8 +158,6 @@ storiesOf('VideoPost', module)
       links={links}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -192,8 +175,6 @@ storiesOf('VideoPost', module)
       links={links}
       postDetails={isARetweetPostDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -212,8 +193,6 @@ storiesOf('VideoPost', module)
       links={links}
       postDetails={postDetailsError}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}

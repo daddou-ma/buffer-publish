@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import LinkDraft from './index';
 
 const links = [{
@@ -37,8 +37,8 @@ const squareImage = 'http://lorempixel.com/400/400/cats/';
 const tallImage = 'http://lorempixel.com/400/900/cats/';
 const wideImage = 'http://lorempixel.com/900/400/cats/';
 
-storiesOf('LinkDraft', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Drafts/LinkDraft', module)
+  .addDecorator(withA11y)
   .add('queued link post', () => (
     <LinkDraft
       hasPermission
@@ -46,8 +46,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={linkAttachment}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -62,8 +60,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={linkAttachment}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -78,8 +74,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: squareImage }}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -94,8 +88,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: tallImage }}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -110,8 +102,6 @@ storiesOf('LinkDraft', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: wideImage }}
       draftDetails={draftDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}

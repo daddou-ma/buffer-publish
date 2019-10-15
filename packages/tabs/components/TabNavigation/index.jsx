@@ -5,21 +5,34 @@ import {
   Tab,
 } from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
-import { Text } from '@bufferapp/components';
-import FeatureLoader, { WithFeatureLoader } from '@bufferapp/product-features';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import styled from 'styled-components';
 import { getValidTab } from '../../utils';
 
-const upgradeCtaStyle = {
-  transform: 'translate(0, 1px)',
-  margin: '12px 0',
-  display: 'inline-block',
-  textAlign: 'center',
-  position: 'absolute',
-  top: 0,
-  right: 0,
-};
+const UpgradeCtaStyle = styled.div`
+  transform: translate(0, 1px);
+  margin: 12px 0;
+  display: inline-block;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-left: 8px;
+  display: inline-block;
+`;
+
+const Tag = styled.span`
+  padding: 2px 8px;
+  font-size: 12px;
+  margin-left: 8px;
+  border-radius: 100px;
+  color: #FFFFFF;
+  background-color: #87C221;
+`;
 
 const tabsStyle = {
   paddingLeft: '0.5rem',
@@ -43,6 +56,7 @@ class TabNavigation extends React.Component {
       isBusinessAccount,
       isManager,
       isInstagramProfile,
+      hasStoriesFlip,
     } = this.props;
 
     return tabId === getValidTab(
@@ -50,23 +64,24 @@ class TabNavigation extends React.Component {
       isBusinessAccount,
       isInstagramProfile,
       isManager,
-      features.isFreeUser());
+      features.isFreeUser(),
+      hasStoriesFlip,
+    );
   }
 
   render () {
+    const { loading } = this.state;
     const {
       selectedTabId,
       selectedChildTabId,
       onTabClick,
       onChildTabClick,
-      onProTrial,
-      shouldShowUpgradeCta,
+      shouldShowUpgradeButton,
       shouldShowNestedSettingsTab,
       shouldShowNestedAnalyticsTab,
       shouldHideAnalyticsOverviewTab,
       onUpgradeButtonClick,
       isLockedProfile,
-      canStartProTrial,
     } = this.props;
 
     return (
@@ -77,87 +92,77 @@ class TabNavigation extends React.Component {
           selectedTabId={selectedTabId}
           onTabClick={onTabClick}
         >
-          <Tab tabId={'queue'}>Queue</Tab>
-          {this.isValidTab('pastReminders') &&
-            <Tab tabId={'pastReminders'}>Past Reminders</Tab>
+          <Tab tabId="queue">Queue</Tab>
+          {/* IG, Business users or Team Members */}
+          {this.isValidTab('stories')
+            && (
+              <Tab tabId="stories">
+                Stories
+                <Tag>New</Tag>
+              </Tab>
+            )}
+          {this.isValidTab('pastReminders')
+            && <Tab tabId="pastReminders">Past Reminders</Tab>
           }
-          <Tab tabId={'analytics'}>Analytics</Tab>
+          <Tab tabId="analytics">Analytics</Tab>
           {/* Team Members who are Managers */}
-          {this.isValidTab('awaitingApproval') &&
-            <Tab tabId={'awaitingApproval'}>Awaiting Approval</Tab>
+          {this.isValidTab('awaitingApproval')
+            && <Tab tabId="awaitingApproval">Awaiting Approval</Tab>
           }
           {/* Team Members who are Contributors */}
-          {this.isValidTab('pendingApproval') &&
-            <Tab tabId={'pendingApproval'}>Pending Approval</Tab>
+          {this.isValidTab('pendingApproval')
+            && <Tab tabId="pendingApproval">Pending Approval</Tab>
           }
           {/* Pro and up users or Team Members */}
-          {this.isValidTab('drafts') &&
-            <Tab tabId={'drafts'}>Drafts</Tab>
+          {this.isValidTab('drafts')
+            && <Tab tabId="drafts">Drafts</Tab>
           }
-          {/* Business users or Team Members */}
-          {this.isValidTab('grid') &&
-            <Tab tabId={'grid'}>Shop Grid</Tab>
+          {/* IG, Business users or Team Members */}
+          {this.isValidTab('grid')
+            && <Tab tabId="grid">Shop Grid</Tab>
           }
-          <Tab tabId={'settings'}>Settings</Tab>
+          <Tab tabId="settings">Settings</Tab>
         </Tabs>
-        {shouldShowUpgradeCta &&
-          <div style={upgradeCtaStyle}>
-            <Text size="mini">
-              Want to see more from Buffer?
-            </Text>
-            <div style={{ marginLeft: '8px', display: 'inline-block' }}>
+        { shouldShowUpgradeButton && (
+          <UpgradeCtaStyle>
+            <ButtonWrapper>
               <Button
-                label={'Upgrade for more'}
+                label="Upgrade"
                 type="secondary"
                 size="small"
                 onClick={(e) => {
                   e.preventDefault();
-                  onUpgradeButtonClick('pro');
+                  onUpgradeButtonClick();
                 }}
               />
-            </div>
-          </div>
-        }
-        {!onProTrial &&
-          <FeatureLoader supportedPlans={'pro'}>
-            <div style={upgradeCtaStyle}>
-              <Button
-                label="Learn about Buffer for Business"
-                size="small"
-                type="secondary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onUpgradeButtonClick('b4b');
-                }}
-              />
-            </div>
-          </FeatureLoader>
-        }
-        {shouldShowNestedAnalyticsTab && !isLockedProfile &&
+            </ButtonWrapper>
+          </UpgradeCtaStyle>
+        )}
+        {shouldShowNestedAnalyticsTab && !isLockedProfile && (
           <Tabs
             selectedTabId={selectedChildTabId || 'posts'}
             onTabClick={onChildTabClick}
             secondary
           >
-            <Tab tabId={'posts'}>Posts</Tab>
-            {!shouldHideAnalyticsOverviewTab &&
-              <Tab tabId={'overview'}>Overview</Tab>
+            <Tab tabId="posts">Posts</Tab>
+            {!shouldHideAnalyticsOverviewTab
+              && <Tab tabId="overview">Overview</Tab>
             }
           </Tabs>
-        }
-        {shouldShowNestedSettingsTab && !isLockedProfile &&
+        )}
+        {shouldShowNestedSettingsTab && !isLockedProfile && (
           <Tabs
             selectedTabId={selectedChildTabId || 'general-settings'}
             onTabClick={onChildTabClick}
             secondary
           >
-            <Tab tabId={'general-settings'}>General</Tab>
-            <Tab tabId={'posting-schedule'}>Posting Schedule</Tab>
+            <Tab tabId="general-settings">General</Tab>
+            <Tab tabId="posting-schedule">Posting Schedule</Tab>
             <div style={{ display: 'inline-block' }}>
               <Button
                 type="secondary"
                 size="small"
-                label={this.state.loading ? 'Reconnecting…' : 'Reconnect'}
+                label={loading ? 'Reconnecting…' : 'Reconnect'}
                 onClick={(e) => {
                   e.preventDefault();
                   this.setState({ loading: true });
@@ -166,45 +171,41 @@ class TabNavigation extends React.Component {
               />
             </div>
           </Tabs>
-        }
+        )}
       </div>
     );
   }
 }
 
 TabNavigation.defaultProps = {
-  shouldShowUpgradeCta: false,
   shouldShowNestedSettingsTab: false,
   shouldShowNestedAnalyticsTab: false,
   shouldHideAnalyticsOverviewTab: false,
+  shouldShowUpgradeButton: false,
   selectedChildTabId: null,
-  profileId: null,
   isLockedProfile: false,
   isInstagramProfile: false,
   isBusinessAccount: false,
   isManager: false,
-  onProTrial: true,
-  canStartProTrial: false,
+  hasStoriesFlip: false,
 };
 
 TabNavigation.propTypes = {
   features: PropTypes.any.isRequired, // eslint-disable-line
   isBusinessAccount: PropTypes.bool,
-  isManager: PropTypes.bool.isRequired,
+  isManager: PropTypes.bool,
   selectedTabId: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
-  shouldShowUpgradeCta: PropTypes.bool.isRequired,
   onUpgradeButtonClick: PropTypes.func.isRequired,
-  canStartProTrial: PropTypes.bool,
   onChildTabClick: PropTypes.func.isRequired,
-  onProTrial: PropTypes.bool,
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,
   shouldShowNestedAnalyticsTab: PropTypes.bool,
   shouldHideAnalyticsOverviewTab: PropTypes.bool,
-  profileId: PropTypes.string,
   isLockedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
+  shouldShowUpgradeButton: PropTypes.bool,
+  hasStoriesFlip: PropTypes.bool,
 };
 
 export default WithFeatureLoader(TabNavigation);

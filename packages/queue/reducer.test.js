@@ -1,6 +1,5 @@
 import deepFreeze from 'deep-freeze';
 import reducer, { initialState, actionTypes } from './reducer';
-import { postParser } from '@bufferapp/publish-server/parsers/src';
 
 const profileId = '123456';
 
@@ -291,44 +290,6 @@ describe('reducer', () => {
       .toEqual(stateAfter);
   });
 
-  // POST_CLICKED_DELETE
-  it('should handle POST_CLICKED_DELETE action type', () => {
-    const post = { id: '12345', text: 'i heart buffer', isConfirmingDelete: false };
-    const postAfter = { ...post, isConfirmingDelete: true };
-    const stateBefore = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: { 12345: post },
-          total: 1,
-        },
-      },
-    };
-    const stateAfter = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: { 12345: postAfter },
-          total: 1,
-        },
-      },
-    };
-    const action = {
-      type: actionTypes.POST_CLICKED_DELETE,
-      profileId,
-      post: postAfter,
-    };
-    deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
-  });
-
   // POST_CONFIRMED_DELETE
   it('should handle POST_CONFIRMED_DELETE action type', () => {
     const post = { id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: false };
@@ -369,7 +330,9 @@ describe('reducer', () => {
 
   // POST_DELETED
   it('should handle POST_DELETED action type', () => {
-    const post = { id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: true };
+    const post = {
+      id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: true,
+    };
     const stateBefore = {
       byProfileId: {
         [profileId]: {
@@ -398,44 +361,6 @@ describe('reducer', () => {
       type: actionTypes.POST_DELETED,
       profileId,
       post,
-    };
-    deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
-  });
-
-  // POST_CANCELED_DELETE
-  it('should handle POST_CANCELED_DELETE action type', () => {
-    const post = { id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: false };
-    const postAfter = { ...post, isConfirmingDelete: false, isDeleting: false };
-    const stateBefore = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: { 12345: post },
-          total: 1,
-        },
-      },
-    };
-    const stateAfter = {
-      byProfileId: {
-        [profileId]: {
-          loading: true,
-          loadingMore: false,
-          moreToLoad: false,
-          page: 1,
-          posts: { 12345: postAfter },
-          total: 1,
-        },
-      },
-    };
-    const action = {
-      type: actionTypes.POST_CANCELED_DELETE,
-      profileId,
-      post: postAfter,
     };
     deepFreeze(action);
     expect(reducer(stateBefore, action))

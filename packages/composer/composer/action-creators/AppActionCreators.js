@@ -1,17 +1,25 @@
 import partition from 'lodash.partition';
 import AppDispatcher from '../dispatcher';
 import {
-  ActionTypes, AppEnvironments, QueueingTypes, NotificationScopes, ErrorTypes, FloatingErrorCodes,
-  InlineSaveButtonTypes, ButtonsQueuingTypesMap, UpgradeErrorCodes, bufferOrigins,
+  ActionTypes,
+  QueueingTypes,
+  NotificationScopes,
+  ErrorTypes,
+  FloatingErrorCodes,
+  InlineSaveButtonTypes,
+  ButtonsQueuingTypesMap,
+  UpgradeErrorCodes,
+  bufferOrigins,
 } from '../AppConstants';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
+import ServerActionCreators from '../action-creators/ServerActionCreators';
 import WebAPIUtils from '../utils/WebAPIUtils';
 import ComposerStore from '../stores/ComposerStore';
 import ComposerActionCreators from './ComposerActionCreators';
 import AppStore from '../stores/AppStore';
 import AppHooks from '../utils/LifecycleHooks';
 import Metrics from '../utils/Metrics';
-import WebSocket from '../utils/WebSocket';
+import WebSocket from '@bufferapp/publish-upload-zone/utils/WebSocket';
 import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
 import { removeLinkFromErrorMessageText } from '../utils/StringUtils';
@@ -215,7 +223,7 @@ const AppActionCreators = {
                       window.open(`${bufferOrigins.get(environment)}/pricing`);
                     } else {
                       AppDispatcher.handleViewAction({
-                        actionType: ActionTypes.EVENT_SHOW_UPGRADE_MODAL,
+                        actionType: ActionTypes.EVENT_SHOW_SWITCH_PLAN_MODAL,
                       });
                     }
                   } else if (!isBusinessUser) {
@@ -437,7 +445,8 @@ const AppActionCreators = {
     // Auto-insert 'multiple-composers' as second scope for all tracking
     scope.splice(1, 0, 'multiple-composers');
 
-    Metrics.trackAction(scope, extraData);
+    const { appEnvironment, disableTelemetry } = AppStore.getMetaData();
+    Metrics.trackAction(scope, extraData, {appEnvironment, disableTelemetry});
   },
 
   toggleAllProfiles: () => {
@@ -487,7 +496,12 @@ const AppActionCreators = {
   },
 
   listenToChangeEventsForGroups: () => {
-    WebSocket.init();
+    const { appEnvironment } = AppStore.getMetaData();
+    WebSocket.init({
+      userId: AppStore.getUserData().id,
+      notifiers: ServerActionCreators,
+      appEnvironment,
+    });
   },
 
   resetSelectedProfiles: (profilesData) => {

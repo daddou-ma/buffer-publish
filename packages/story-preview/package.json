@@ -1,0 +1,17 @@
+{
+  "name": "@bufferapp/publish-story-preview",
+  "version": "2.0.0",
+  "description": "Story preview popover",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "ana@buffer.com",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

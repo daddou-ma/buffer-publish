@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import LinkPost from './index';
 import { Provider } from 'react-redux';
 
@@ -59,8 +59,8 @@ const squareImage = 'http://lorempixel.com/400/400/cats/';
 const tallImage = 'http://lorempixel.com/400/900/cats/';
 const wideImage = 'http://lorempixel.com/900/400/cats/';
 
-storiesOf('LinkPost', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Posts/LinkPost', module)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
       {getStory()}
@@ -72,8 +72,6 @@ storiesOf('LinkPost', module)
       linkAttachment={linkAttachment}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -86,8 +84,6 @@ storiesOf('LinkPost', module)
       linkAttachment={linkAttachment}
       postDetails={postDetails}
       text={multilineText}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -100,8 +96,6 @@ storiesOf('LinkPost', module)
       linkAttachment={linkAttachment}
       postDetails={postDetailsSent}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -114,8 +108,6 @@ storiesOf('LinkPost', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: squareImage }}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -128,8 +120,6 @@ storiesOf('LinkPost', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: tallImage }}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -142,8 +132,6 @@ storiesOf('LinkPost', module)
       linkAttachment={{ ...linkAttachment, thumbnailUrl: wideImage }}
       postDetails={postDetails}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
@@ -156,8 +144,6 @@ storiesOf('LinkPost', module)
       linkAttachment={linkAttachment}
       postDetails={postDetailsError}
       text={text}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}

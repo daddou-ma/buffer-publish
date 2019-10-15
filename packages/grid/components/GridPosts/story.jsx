@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import GridPosts from './index';
 import {
@@ -27,10 +27,10 @@ const profile = {
 const store = storeFake({
   i18n: {
     translations: {
-      'upgrade-modal': {},
+      'switch-plan-modal': {},
     },
   },
-  upgradeModal: {},
+  switchPlanModal: {},
   stripe: {},
   publicGridUrl: 'https://shopgr.id/my-brand',
   profile,
@@ -49,7 +49,7 @@ const UpgradeModalDecorator = storyFn => (
 );
 
 storiesOf('GridPosts', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
   .add('should show grid posts', () => (
     <GridPosts

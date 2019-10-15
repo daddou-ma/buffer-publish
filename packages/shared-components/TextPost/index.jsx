@@ -21,8 +21,6 @@ const TextPost = ({
   isWorking,
   imageSrc,
   links,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -60,25 +58,29 @@ const TextPost = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic ?
-          <Text
-            size="mini"
-            whitespace="pre-wrap"
-            color="black"
-          >
-            {text}
-          </Text> :
-          <LinkifiedText
-            color="black"
-            links={links}
-            size="mini"
-            whitespace="pre-wrap"
-            newTab
-            unstyled
-            basic={basic}
-          >
-            {text}
-          </LinkifiedText>
+        {basic
+          ? (
+            <Text
+              size="mini"
+              whitespace="pre-wrap"
+              color="black"
+            >
+              {text}
+            </Text>
+          )
+          : (
+            <LinkifiedText
+              color="black"
+              links={links}
+              size="mini"
+              whitespace="pre-wrap"
+              newTab
+              unstyled
+              basic={basic}
+            >
+              {text}
+            </LinkifiedText>
+          )
         }
       </span>
     </div>
@@ -91,8 +93,6 @@ const TextPost = ({
       isWorking={isWorking}
       imageSrc={imageSrc}
       links={links}
-      onCancelConfirmClick={onCancelConfirmClick}
-      onDeleteClick={onDeleteClick}
       onDeleteConfirmClick={onDeleteConfirmClick}
       onEditClick={onEditClick}
       onShareNowClick={onShareNowClick}

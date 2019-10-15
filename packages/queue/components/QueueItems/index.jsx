@@ -8,8 +8,6 @@ import {
   transitionAnimationTime,
   transitionAnimationType,
 } from '@bufferapp/components/style/animation';
-import { noScheduledDate } from '../../util';
-
 import {
   TextPost,
   ImagePost,
@@ -23,13 +21,13 @@ import {
 import PostEmptySlot from '@bufferapp/publish-shared-components/PostEmptySlot/dropTarget';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import FailedPostComponent from '@bufferapp/publish-web/components/ErrorBoundary/failedPostComponent';
+import { noScheduledDate } from '../../util';
 
 const ErrorBoundary = getErrorBoundary(true);
 
 const listHeaderStyle = {
   marginBottom: '1rem',
   marginTop: '1rem',
-  // marginLeft: '0.5rem',
   display: 'flex',
   alignItems: 'center',
 };
@@ -78,9 +76,7 @@ const renderPost = ({
   post,
   index,
   subprofiles,
-  onCancelConfirmClick,
   onRequeueClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -99,8 +95,6 @@ const renderPost = ({
     index,
     postDetails: post.postDetails,
     subprofiles,
-    onCancelConfirmClick: () => onCancelConfirmClick({ post }),
-    onDeleteClick: () => onDeleteClick({ post }),
     onDeleteConfirmClick: () => onDeleteConfirmClick({ post }),
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
@@ -169,7 +163,7 @@ const renderPost = ({
   return (
     <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
       <ErrorBoundary
-        fallbackComponent={() =>
+        fallbackComponent={() => (
           <ErrorBoundary
             fallbackComponent={() => (
               <FailedPostComponent
@@ -181,7 +175,7 @@ const renderPost = ({
           >
             <PostComponent {...postWithEventHandlers} basic />
           </ErrorBoundary>
-        }
+        )}
       >
         <PostComponent {...postWithEventHandlers} />
       </ErrorBoundary>
@@ -219,20 +213,24 @@ const renderHeader = (
   <div style={listHeaderStyle} key={id}>
     <div style={headerTextStyle}>
       {(dayOfWeek && date)
-        ? (<React.Fragment>
-          <span style={headerTextDayOfWeekStyle}>{dayOfWeek}</span>
-          <span style={headerTextDateStyle}>{date}</span>
-        </React.Fragment>)
+        ? (
+          <React.Fragment>
+            <span style={headerTextDayOfWeekStyle}>{dayOfWeek}</span>
+            <span style={headerTextDateStyle}>{date}</span>
+          </React.Fragment>
+        )
         : <span style={headerTextDayOfWeekStyle}>{getText(text)}</span>
       }
     </div>
-    {showCalendarBtnGroup && (!features.isFreeUser() || isBusinessAccount) &&
-      <div style={{ marginLeft: 'auto' }}>
-        <QueueButtonGroup
-          buttons={calendarBtns}
-          onClick={type => onCalendarClick(type, `daily_view_type_buttons_click_${type}`)}
-        />
-      </div>
+    {showCalendarBtnGroup && (!features.isFreeUser() || isBusinessAccount)
+      && (
+        <div style={{ marginLeft: 'auto' }}>
+          <QueueButtonGroup
+            buttons={calendarBtns}
+            onClick={type => onCalendarClick(type, `daily_view_type_buttons_click_${type}`)}
+          />
+        </div>
+      )
     }
   </div>
 );
@@ -244,15 +242,13 @@ const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
     timestamp={slot.timestamp}
     day={slot.dayText}
     service={profileService}
-    onClick={() =>
-      onEmptySlotClick({
-        dueTime: slot.label,
-        profile_service: profileService,
-        scheduled_at: slot.timestamp,
-        due_at: slot.timestamp,
-        pinned: true,
-      })
-    }
+    onClick={() => onEmptySlotClick({
+      dueTime: slot.label,
+      profile_service: profileService,
+      scheduled_at: slot.timestamp,
+      due_at: slot.timestamp,
+      pinned: true,
+    })}
   />
 );
 
@@ -313,8 +309,6 @@ QueueItems.propTypes = {
     }),
   ),
   onCalendarClick: PropTypes.func,
-  onCancelConfirmClick: PropTypes.func,
-  onDeleteClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onEmptySlotClick: PropTypes.func,

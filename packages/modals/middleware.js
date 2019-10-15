@@ -2,12 +2,16 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
-import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification';
-import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
+import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification/reducer';
+import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty/reducer';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
+import getCtaFromSource from '@bufferapp/publish-switch-plan-modal/utils/tracking';
+import { getPlanId } from '@bufferapp/publish-plans/utils/plans';
 import { actions, actionTypes } from './reducer';
 import {
-  shouldShowUpgradeModal,
+  shouldShowSwitchPlanModal,
   shouldShowWelcomeModal,
   getSourceFromKey,
   shouldShowStealProfileModal,
@@ -23,12 +27,12 @@ export default ({ dispatch, getState }) => next => (action) => {
   switch (action.type) {
     case lockedProfileActionTypes.UPGRADE:
       if (action.plan === 'free') {
-        dispatch(actions.showUpgradeModal({ source: 'locked_profile' }));
+        dispatch(actions.showSwitchPlanModal({ source: 'locked_profile', plan: 'pro' }));
       }
       break;
     case 'APP_INIT': {
-      if (shouldShowUpgradeModal()) {
-        dispatch(actions.showUpgradeModal({ source: getSourceFromKey() }));
+      if (shouldShowSwitchPlanModal()) {
+        dispatch(actions.showSwitchPlanModal({ source: getSourceFromKey(), plan: 'pro' }));
       }
       if (shouldShowStealProfileModal()) {
         dispatch(actions.showStealProfileModal({ stealProfileUsername: getShowModalValue() }));
@@ -46,31 +50,51 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       break;
     }
-    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`:
+
+    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const {
+        isBusinessTeamMember,
+        plan,
+        messages,
+      } = getState().appSidebar.user;
+
       if (action.result && action.result.some(profile => profile.isDisconnected)) {
         dispatch(actions.showProfilesDisconnectedModal());
       }
+
+      // Make sure the Stories Promo Modal doesn't open on top of the disconnect modal
+      if (plan === 'free' && !isBusinessTeamMember && !messages.includes('user_saw_stories_promo')) {
+        if (action.result && action.result.some(profile => profile.isDisconnected)) {
+          dispatch(actions.saveModalToShowLater({
+            modalId: actionTypes.SHOW_STORIES_PROMO_MODAL,
+          }));
+        } else {
+          dispatch(actions.showStoriesPromoModal());
+        }
+      }
       break;
+    }
+
+    case actionTypes.HIDE_PROFILES_DISCONNECTED_MODAL: {
+      const modalToShow = getState().modals.modalToShowLater;
+      if (!modalToShow) {
+        return;
+      }
+
+      if (modalToShow.id === actionTypes.SHOW_STORIES_PROMO_MODAL) {
+        dispatch(actions.showStoriesPromoModal());
+      }
+
+      break;
+    }
+
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const message = 'welcome_to_business_modal';
       const {
-        messages: readMessages,
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
-        profileCount,
-        isOnBusinessTrial
-      } = action.result; // user
-      const hasNotReadWelcomeMessage = readMessages && !readMessages.includes(message);
-      if (isOnBusinessTrial && hasNotReadWelcomeMessage && profileCount > 0) {
-        /**
-         * TEMP - Hiding B4B Trial Modal from showing to clean up trial start experience
-         */
-        // dispatch(actions.showWelcomeB4BTrialModal());
-        // // Mark modal as seen
-        // dispatch(dataFetchActions.fetch({ name: 'readMessage', args: { message } }));
-        // if user is free, subscription hasn't been cancelled, hasExpiredProTrial
-      } else if (shouldShowProTrialExpiredModal) {
-        dispatch(actions.showUpgradeModal({ source: 'pro_trial_expired' }));
+      } = action.result; // userData
+      if (shouldShowProTrialExpiredModal) {
+        dispatch(actions.showSwitchPlanModal({ source: 'pro_trial_expired', plan: 'pro' }));
       } else if (shouldShowBusinessTrialExpiredModal) {
         dispatch(actions.showB4BTrialExpiredModal({ source: 'b4b_trial_expired' }));
       }
@@ -140,10 +164,25 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     }
     case 'COMPOSER_EVENT':
-      if (action.eventType === 'show-upgrade-modal') {
-        dispatch(actions.showUpgradeModal({ source: 'queue_limit' }));
+      if (action.eventType === 'show-switch-plan-modal') {
+        dispatch(actions.showSwitchPlanModal({ source: 'queue_limit', plan: 'pro' }));
       }
       break;
+
+    case actionTypes.SHOW_SWITCH_PLAN_MODAL: {
+      const { source, plan } = action;
+      const ctaName = getCtaFromSource(source);
+      const ctaProperties = getCtaProperties(ctaName);
+
+      const metadata = {
+        planName: plan,
+        planId: getPlanId(plan),
+        ...ctaProperties,
+      };
+
+      dispatch(analyticsActions.trackEvent('Modal Payment Opened', metadata));
+      break;
+    }
     default:
       break;
   }

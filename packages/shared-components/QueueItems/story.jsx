@@ -1,15 +1,15 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import {
   storiesOf,
-  action,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import QueueItems from './index';
 import {
   postLists,
   postListsNoHeaders,
 } from './postData';
-import { Provider } from 'react-redux';
 
 const storeFake = state => ({
   default: () => {},
@@ -22,11 +22,11 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
 storiesOf('QueueItems', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(getStory =>
     <Provider store={store}>
       {getStory()}
@@ -35,9 +35,7 @@ storiesOf('QueueItems', module)
   .add('default queue', () => (
     <QueueItems
       items={postLists}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
       onRequeueClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -53,9 +51,7 @@ storiesOf('QueueItems', module)
   .add('no headers type drafts', () => (
     <QueueItems
       items={postListsNoHeaders}
-      onCancelConfirmClick={action('onCancelConfirmClick')}
       onRequeueClick={action('onCancelConfirmClick')}
-      onDeleteClick={action('onDeleteClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -66,6 +62,6 @@ storiesOf('QueueItems', module)
       onDropPost={action('onDropPost')}
       onSwapPosts={action('onSwapPosts')}
       draggable={false}
-      type={'drafts'}
+      type="drafts"
     />
   ));

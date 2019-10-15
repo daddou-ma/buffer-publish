@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import Sidebar from './index';
 
@@ -45,7 +45,7 @@ const storeFree = createMockStore(true);
 const storePro = createMockStore(false);
 
 storiesOf('Sidebar', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('should show app sidebar', () => (
     <Provider store={storePro}>
       <div style={{ width: '65px', height: '100%', display: 'flex' }}>

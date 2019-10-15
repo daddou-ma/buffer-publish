@@ -297,7 +297,11 @@ const loadInitialMetaData = (metaData) => {
         observeStore(AppStore, (store) => store.getAppState().isLoaded)
           .then(() => {
             metaData.images.forEach((image) => {
-              WebAPIUtils.getImageDimensions(image.picture)
+              WebAPIUtils.getImageDimensions({
+                url: image.picture,
+                key: AppStore.getImageDimensionsKey(),
+                user_id: AppStore.getUserData().id,
+              })
                 .then(({ width, height }) => {
                   AppDispatcher.handleViewAction({
                     actionType: ActionTypes.COMPOSER_UPDATE_UPLOADED_IMAGE_DIMENSIONS,

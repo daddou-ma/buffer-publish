@@ -6,6 +6,20 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions } from '@bufferapp/publish-tabs';
 import ProfilePage from './components/ProfilePage';
 
+const requestName = tabId => ({
+  queue: 'queuedPosts',
+  drafts: 'draftPosts',
+  awaitingApproval: 'draftPosts',
+  pendingApproval: 'draftPosts',
+  grid: 'gridPosts',
+  analytics: 'sentPosts',
+  pastReminders: 'pastRemindersPosts',
+  stories: 'getStoryGroups',
+  default: 'queuedPosts',
+})[tabId];
+
+export const getRequestName = tabId => requestName(tabId) || requestName('default');
+
 // default export = container
 export default hot(
   connect(
@@ -14,10 +28,10 @@ export default hot(
         getProfilePageParams({ path: ownProps.history.location.pathname }) ||
         {};
       // With analytics, the reducer state name doesnt match the tabId
-      const reducerName =
-        tabId === 'analytics' && (!childTabId || childTabId === 'posts')
-          ? 'sent'
-          : tabId;
+      let reducerName = tabId === 'analytics' && (!childTabId || childTabId === 'posts')
+        ? 'sent'
+        : tabId;
+      if (tabId === 'awaitingApproval' || tabId === 'pendingApproval') reducerName = 'drafts';
       if (
         state[reducerName] &&
         state[reducerName].byProfileId &&
@@ -34,6 +48,7 @@ export default hot(
           view: state[reducerName].byProfileId[profileId].tabId || null,
           isBusinessAccount: state.profileSidebar.selectedProfile.business,
           selectedProfile: state.profileSidebar.selectedProfile,
+          hasStoriesFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('stories_groups') : false,
         };
       }
       return {};
@@ -46,35 +61,14 @@ export default hot(
         }));
       },
       onLoadMore: ({ profileId, page, tabId }) => {
-        let requestName;
-        switch (tabId) {
-          case 'queue':
-            requestName = 'queued';
-            break;
-          case 'drafts':
-          case 'awaitingApproval':
-          case 'pendingApproval':
-            requestName = 'draft';
-            break;
-          case 'grid':
-            requestName = 'grid';
-            break;
-          case 'analytics':
-            requestName = 'sent';
-            break;
-          case 'pastReminders':
-            requestName = 'pastReminders';
-            break;
-          default:
-            requestName = 'queued';
-        }
         dispatch(
           dataFetchActions.fetch({
-            name: `${requestName}Posts`,
+            name: getRequestName(tabId),
             args: {
               profileId,
               page,
               isFetchingMore: true,
+              needsApproval: ['awaitingApproval', 'pendingApproval'].includes(tabId),
             },
           }),
         );

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import UpgradeModal from '@bufferapp/publish-upgrade-modal';
+import SwitchPlanModal from '@bufferapp/publish-switch-plan-modal';
 import WelcomeModal from '@bufferapp/publish-welcome-modal';
 import StealProfileModal from '@bufferapp/publish-steal-profile-modal';
 import ProfilesDisconnectedModal from '@bufferapp/publish-profiles-disconnected-modal';
@@ -11,10 +11,11 @@ import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-mo
 import WelcomeB4BTrialModal from '@bufferapp/publish-welcome-b4b-trial-modal';
 import B4bTrialCompleteModal from '@bufferapp/publish-b4b-trial-complete-modal';
 import InstagramFirstCommentProTrialModal from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
+import StoriesPromoModal from '@bufferapp/publish-stories-promo-modal';
 import CloseComposerConfirmationModal from '@bufferapp/publish-close-composer-confirmation-modal';
 
 const AppModals = ({
-  showUpgradeModal,
+  showSwitchPlanModal,
   showWelcomeModal,
   showWelcomePaidModal,
   showProfilesDisconnectedModal,
@@ -24,11 +25,12 @@ const AppModals = ({
   showInstagramFirstCommentModal,
   showB4BTrialExpiredModal,
   showInstagramFirstCommentProTrialModal,
+  showStoriesPromoModal,
   showCloseComposerConfirmationModal,
 }) => (
   <React.Fragment>
     {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
-    {showUpgradeModal && <UpgradeModal />}
+    {showSwitchPlanModal && <SwitchPlanModal />}
     {showWelcomeModal && <WelcomeModal />}
     {showInstagramFirstCommentModal && <InstagramFirstCommentModal />}
     {showWelcomePaidModal && <WelcomePaidModal />}
@@ -37,12 +39,13 @@ const AppModals = ({
     {showStealProfileModal && <StealProfileModal />}
     {showB4BTrialExpiredModal && <B4bTrialCompleteModal />}
     {showInstagramFirstCommentProTrialModal && <InstagramFirstCommentProTrialModal />}
+    {showStoriesPromoModal && <StoriesPromoModal />}
     {showCloseComposerConfirmationModal && <CloseComposerConfirmationModal />}
   </React.Fragment>
 );
 
 AppModals.propTypes = {
-  showUpgradeModal: PropTypes.bool.isRequired,
+  showSwitchPlanModal: PropTypes.bool.isRequired,
   showWelcomeModal: PropTypes.bool.isRequired,
   showWelcomePaidModal: PropTypes.bool.isRequired,
   showProfilesDisconnectedModal: PropTypes.bool.isRequired,
@@ -52,6 +55,7 @@ AppModals.propTypes = {
   showInstagramFirstCommentModal: PropTypes.bool.isRequired,
   showB4BTrialExpiredModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentProTrialModal: PropTypes.bool.isRequired,
+  showStoriesPromoModal: PropTypes.bool.isRequired,
   showCloseComposerConfirmationModal: PropTypes.bool.isRequired,
 };
 

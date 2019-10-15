@@ -1,53 +1,76 @@
-/* global Stripe */
-
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions as notification } from '@bufferapp/notifications';
 import { actions as asyncDataFetchActions, actionTypes as asyncDataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import getCtaFromSource from '@bufferapp/publish-switch-plan-modal/utils/tracking';
 import { actions, actionTypes } from './reducer';
 
-const getErrorMessage = (response, errorMessages) => {
-  let message = null;
-  if (response.error) {
-    message = response.error.message;
-  } else if (!response.card.name) {
-    message = errorMessages.noNameError;
-  } else if (response.card.country === 'US') {
-    if (!response.card.address_zip) {
-      message = errorMessages.noZipError;
-    } else if (response.card.address_zip_check === 'fail') {
-      message = errorMessages.invalidZipError;
-    }
-  }
-
-  return message;
-};
-
-export default ({ dispatch, getState }) => next => (action) => {
-  const errorMessages = getState().i18n.translations.stripe;
+export default ({ dispatch }) => next => (action) => {
   switch (action.type) {
-    case actionTypes.CREDIT_CARD_VALIDATING:
-      Stripe.createToken(action.card, (status, response) => {
-        const errorMessage = getErrorMessage(response, errorMessages);
-        if (errorMessage) {
-          dispatch(actions.throwValidationError(errorMessage));
-          dispatch(notification.createNotification({
-            notificationType: 'error',
-            message: errorMessage,
-          }));
-        } else {
-          dispatch(asyncDataFetchActions.fetch({
-            name: 'upgradeToPro',
-            args: {
-              cycle: getState().upgradeModal.cycle,
-              source: getState().upgradeModal.source,
-              token: response.id,
-            },
-          }));
-        }
-      });
+    case actionTypes.CREATE_SETUP_INTENT_REQUEST:
+      dispatch(
+        asyncDataFetchActions.fetch({
+          name: 'createSetupIntent',
+          args: {},
+        }),
+      );
       break;
-    case `upgradeToPro_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
-      window.location.reload();
+    case actionTypes.HANDLE_SETUP_CARD_REQUEST: {
+      const {
+        stripe,
+        setupIntentClientSecret,
+        source,
+        plan,
+        cycle,
+      } = action;
+
+      stripe
+        .handleCardSetup(setupIntentClientSecret)
+        .then((result) => {
+          if (result.error) {
+            dispatch(actions.handleCardSetupError(result.error.message));
+            dispatch(notification.createNotification({
+              notificationType: 'error',
+              message: result.error.message,
+            }));
+          } else {
+            dispatch(actions.handleCardSetupSuccess(
+              cycle,
+              source,
+              plan,
+              result.setupIntent.payment_method,
+            ));
+          }
+        });
+      break;
+    }
+    case actionTypes.HANDLE_SETUP_CARD_SUCCESS: {
+      const {
+        cycle,
+        source,
+        plan,
+        paymentMethodId,
+      } = action;
+
+      dispatch(
+        asyncDataFetchActions.fetch({
+          name: 'switchPlan',
+          args: {
+            cycle,
+            cta: getCtaFromSource(source),
+            plan,
+            paymentMethodId,
+          },
+        }),
+      );
+      break;
+    }
+    case `createSetupIntent_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch(
+        actions.createSetupIntentSuccess(action.result.setup_intent.client_secret),
+      );
+      break;
+    case `switchPlan_${asyncDataFetchActionTypes.FETCH_SUCCESS}`:
+      window.location = getURL.getPublishUrl();
       break;
     default:
       break;

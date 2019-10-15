@@ -10,7 +10,6 @@ const RPC_ENDPOINTS = {
   posts: require('../posts'), // eslint-disable-line global-require
   'contextual-compare': require('../contextual'), // eslint-disable-line global-require
   compare: require('../compare'), // eslint-disable-line global-require
-  audience: require('../audience'), // eslint-disable-line global-require
   comparison: require('../comparison'), // eslint-disable-line global-require
 };
 

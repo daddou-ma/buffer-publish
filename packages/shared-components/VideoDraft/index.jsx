@@ -12,8 +12,6 @@ const VideoDraft = ({
   links,
   manager,
   onApproveClick,
-  onCancelConfirmClick,
-  onDeleteClick,
   onDeleteConfirmClick,
   onEditClick,
   onMoveToDraftsClick,
@@ -34,7 +32,7 @@ const VideoDraft = ({
   view,
   basic,
   hasFirstCommentFlip,
-}) =>
+}) => (
   <ImageDraft
     hasPermission={hasPermission}
     isConfirmingDelete={isConfirmingDelete}
@@ -46,8 +44,6 @@ const VideoDraft = ({
     links={links}
     manager={manager}
     onApproveClick={onApproveClick}
-    onCancelConfirmClick={onCancelConfirmClick}
-    onDeleteClick={onDeleteClick}
     onDeleteConfirmClick={onDeleteConfirmClick}
     onEditClick={onEditClick}
     onMoveToDraftsClick={onMoveToDraftsClick}
@@ -68,7 +64,8 @@ const VideoDraft = ({
     view={view}
     basic={basic}
     hasFirstCommentFlip={hasFirstCommentFlip}
-  />;
+  />
+);
 
 VideoDraft.propTypes = ImageDraft.propTypes;
 

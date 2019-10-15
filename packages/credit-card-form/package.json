@@ -1,0 +1,18 @@
+{
+  "name": "@bufferapp/publish-credit-card-form",
+  "version": "2.0.0",
+  "description": "Stripe Elements based credit card form",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "dace@buffer.com",
+  "dependencies": {
+    "react-stripe-elements": "^4.0.1"
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

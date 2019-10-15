@@ -1,5 +1,3 @@
-import { push } from 'connected-react-router';
-import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
@@ -29,7 +27,7 @@ export default hot(connect(
   }),
   (dispatch, ownProps) => ({
     onProfileClick: (profile) => {
-      if (profile.id !== ownProps.profileId) {
+      if (profile && (profile.id !== ownProps.profileId)) {
         dispatch(tabsActions.selectTab({
           tabId: ownProps.tabId,
           profileId: profile.id,
@@ -46,7 +44,12 @@ export default hot(connect(
         }
       }
     },
-    onDropProfile: ({ commit, profileLimit, dragIndex, hoverIndex }) => {
+    onDropProfile: ({
+      commit,
+      profileLimit,
+      dragIndex,
+      hoverIndex,
+    }) => {
       dispatch(actions.onDropProfile({
         commit,
         profileLimit,
@@ -60,8 +63,8 @@ export default hot(connect(
     showProfilesDisconnectedModal: () => {
       dispatch(modalActions.showProfilesDisconnectedModal());
     },
-    showUpgradeModal: () => {
-      dispatch(modalActions.showUpgradeModal({ source: 'app_header' }));
+    showSwitchPlanModal: () => {
+      dispatch(modalActions.showSwitchPlanModal({ source: 'app_header', plan: 'pro' }));
     },
     goToConnectSocialAccount: () => {
       dispatch(actions.handleConnectSocialAccount());

@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  action,
-  linkTo,
   storiesOf,
 } from '@storybook/react';
-import { checkA11y } from 'storybook-addon-a11y';
+import { linkTo } from '@storybook/addon-links';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
 import { Text } from '@bufferapp/components';
 import Draft from './index';
 
@@ -59,20 +59,18 @@ const children = (
 );
 
 const childrenLineBreaks = (
-  <Text size={'mini'}>
+  <Text size="mini">
     {'I am a text-only \n test post \n with line breaks.'}
   </Text>
 );
 
-storiesOf('Draft', module)
-  .addDecorator(checkA11y)
+storiesOf('Cards|Drafts/Draft', module)
+  .addDecorator(withA11y)
   .add('default', () => (
     <Draft
       hasPermission
       draftDetails={draftDetails}
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       view={draftsView}
@@ -85,8 +83,6 @@ storiesOf('Draft', module)
       hasPermission
       draftDetails={draftDetails}
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       view={draftsView}
@@ -99,8 +95,6 @@ storiesOf('Draft', module)
       hasPermission
       draftDetails={scheduledDraftDetails}
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       scheduledAt={scheduledAt}
@@ -115,8 +109,6 @@ storiesOf('Draft', module)
       onMouseEnter={action('on-mouse-enter')}
       onMouseLeave={action('on-mouse-leave')}
       onApproveClick={linkTo('Draft', 'isWorkingManager')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       manager
@@ -131,8 +123,6 @@ storiesOf('Draft', module)
       hasPermission
       isConfirmingDelete
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
@@ -146,8 +136,6 @@ storiesOf('Draft', module)
       hasPermission
       isDeleting
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
@@ -161,8 +149,6 @@ storiesOf('Draft', module)
       hasPermission
       isWorking
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
@@ -176,8 +162,6 @@ storiesOf('Draft', module)
       hasPermission
       manager
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       isWorking
@@ -193,8 +177,6 @@ storiesOf('Draft', module)
       isMoving
       isWorking
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
@@ -210,8 +192,6 @@ storiesOf('Draft', module)
       onMouseEnter={action('mouse-enter')}
       onMouseLeave={action('mous-leave')}
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       retweetProfile={retweetProfile}
@@ -228,8 +208,6 @@ storiesOf('Draft', module)
       onMouseEnter={action('mouse-enter')}
       onMouseLeave={action('mous-leave')}
       onApproveClick={action('approve-click')}
-      onCancelConfirmClick={action('cancel-confirm-click')}
-      onDeleteClick={action('delete-click')}
       onDeleteConfirmClick={action('delete-confirm-click')}
       onEditClick={action('edit-click')}
       retweetProfile={retweetProfile}
@@ -245,8 +223,6 @@ storiesOf('Draft', module)
       draftDetails={pastDueDraftDetails}
       isPastDue
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRescheduleClick={action('reschedule-click')}
@@ -259,11 +235,10 @@ storiesOf('Draft', module)
   .add('past due no permission', () => (
     <Draft
       hasPermission={false}
+      manager={false}
       draftDetails={pastDueDraftDetails}
       isPastDue
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       onRescheduleClick={action('reschedule-click')}
@@ -276,10 +251,9 @@ storiesOf('Draft', module)
   .add('no permission', () => (
     <Draft
       hasPermission={false}
+      manager={false}
       draftDetails={draftDetails}
       onApproveClick={linkTo('Draft', 'isWorking')}
-      onCancelConfirmClick={linkTo('Draft', 'hovered')}
-      onDeleteClick={linkTo('Draft', 'isConfirmingDelete')}
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       view={draftsView}
