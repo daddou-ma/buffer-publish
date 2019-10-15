@@ -164,8 +164,8 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       break;
     }
-    case storiesActionTypes.STORIES_SENT: {
-      // the composer closes after pusher stories event, so close the confirmation modal too
+    case storiesActionTypes.STORY_SENT: {
+      // the composer closes after pusher sent event, so close the confirmation modal too
       const { showCloseComposerConfirmationModal } = getState().modals;
       if (showCloseComposerConfirmationModal) {
         dispatch(actions.hideConfirmationModal());
