@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Divider } from "@bufferapp/components";
+import { Divider } from '@bufferapp/components';
 import {
   Text,
   Modal,
@@ -27,6 +27,7 @@ const ListItem = ({ text }) => (
 ListItem.propTypes = { text: PropTypes.string.isRequired };
 
 const isPro = plan => plan === 'pro';
+const isSoloPremium = plan => plan === 'solo_premium_business';
 const isPremium = plan => plan === 'premium_business';
 const isSmallBusiness = plan => plan === 'small';
 
@@ -35,6 +36,9 @@ const getButtonText = ({ plan, translations }) => {
   switch (plan) {
     case 'pro':
       buttonText = translations.proDescriptors.buttonText;
+      break;
+    case 'solo_premium_business':
+      buttonText = translations.soloPremiumDescriptors.buttonText;
       break;
     case 'premium_business':
       buttonText = translations.premiumDescriptors.buttonText;
@@ -86,10 +90,11 @@ class SwitchPlanModal extends React.Component {
         wide
         dismissible={dismissible}
       >
-        <div style={{ overflow: 'auto', height: 'auto' }}>
+        <div style={{ height: 'auto' }}>
           <div style={{ width: '600px', padding: '0px 20px 25px' }}>
             {isPro(plan) && <PlanDescriptors {...translations.proDescriptors} />}
             {isPremium(plan) && <PlanDescriptors {...translations.premiumDescriptors} />}
+            {isSoloPremium(plan) && <PlanDescriptors {...translations.soloPremiumDescriptors} />}
             {isSmallBusiness(plan) && <PlanDescriptors {...translations.businessDescriptors} />}
 
             <Divider marginTop="" marginBottom="1.5rem" />
@@ -98,6 +103,16 @@ class SwitchPlanModal extends React.Component {
               <PlanCycleSelect
                 translations={translations.proDescriptors}
                 plan={plan}
+                cycle={cycle}
+                selectCycle={selectCycle}
+                isNonprofit={isNonprofit}
+              />
+            )}
+
+            {isSoloPremium(plan) && (
+              <PlanCycleSelect
+                plan={plan}
+                translations={translations.soloPremiumDescriptors}
                 cycle={cycle}
                 selectCycle={selectCycle}
                 isNonprofit={isNonprofit}
@@ -148,7 +163,6 @@ SwitchPlanModal.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   cycle: PropTypes.string.isRequired,
   plan: PropTypes.string,
-  upgradePlan: PropTypes.func.isRequired,
   storeValue: PropTypes.func.isRequired,
   validating: PropTypes.bool.isRequired,
   selectCycle: PropTypes.func.isRequired,

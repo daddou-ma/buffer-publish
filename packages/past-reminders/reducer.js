@@ -11,18 +11,27 @@ export const actionTypes = keyWrapper('PAST_REMINDERS', {
   OPEN_COMPOSER: 0,
   HIDE_COMPOSER: 0,
   POST_MOBILE_REMINDER: 0,
+  STORY_GROUP_MOBILE_REMINDER: 0,
   POST_IMAGE_CLICKED: 0,
   POST_IMAGE_CLICKED_NEXT: 0,
   POST_IMAGE_CLICKED_PREV: 0,
   POST_IMAGE_CLOSED: 0,
+  TOGGLE_VIEW_TYPE: 0,
+  OPEN_STORIES_COMPOSER: 0,
+  HIDE_STORIES_COMPOSER: 0,
+  OPEN_PREVIEW: 0,
+  CLOSE_PREVIEW: 0,
 });
 
 export const initialState = {
   byProfileId: {},
   showComposer: false,
+  showStoriesComposer: false,
   editMode: false,
   editingPostId: '',
   environment: 'production',
+  viewType: 'posts',
+  showStoryPreview: false,
 };
 
 export const profileInitialState = {
@@ -120,12 +129,14 @@ const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
       return profileInitialState;
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_START}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
         loading: !action.args.isFetchingMore,
         loadingMore: action.args.isFetchingMore,
       };
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
@@ -136,6 +147,7 @@ const profileReducer = (state = profileInitialState, action) => {
         posts: handlePosts(action, state.posts),
         total: action.result.total,
       };
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_FAIL}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
@@ -164,6 +176,9 @@ export default (state = initialState, action) => {
   let profileId;
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_START}`:
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getPastRemindersStories_${dataFetchActionTypes.FETCH_FAIL}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_START}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_FAIL}`:
@@ -176,6 +191,7 @@ export default (state = initialState, action) => {
       profileId = getProfileId(action);
       if (profileId) {
         return {
+          ...state,
           byProfileId: {
             ...state.byProfileId,
             [profileId]: profileReducer(state.byProfileId[profileId], action),
@@ -196,6 +212,37 @@ export default (state = initialState, action) => {
         showComposer: false,
         editMode: false,
       };
+    case actionTypes.OPEN_STORIES_COMPOSER:
+      return {
+        ...state,
+        showStoriesComposer: true,
+        editMode: action.editMode,
+        editingPostId: action.updateId,
+      };
+    case actionTypes.HIDE_STORIES_COMPOSER:
+      return {
+        ...state,
+        showStoriesComposer: false,
+        editMode: false,
+        emptySlotMode: false,
+        emptySlotData: null,
+      };
+    case actionTypes.TOGGLE_VIEW_TYPE:
+      return {
+        ...state,
+        profileId: action.profileId,
+        viewType: action.viewType,
+      };
+    case actionTypes.OPEN_PREVIEW:
+      return {
+        ...state,
+        showStoryPreview: true,
+      };
+    case actionTypes.CLOSE_PREVIEW:
+      return {
+        ...state,
+        showStoryPreview: false,
+      };
     default:
       return state;
   }
@@ -210,12 +257,27 @@ export const actions = {
       profileId,
     };
   },
+  handleComposerCreateSuccess: () => ({
+    type: actionTypes.HIDE_COMPOSER,
+  }),
+  handleShareStoryGroupAgain: ({ post, profileId }) => ({
+    type: actionTypes.OPEN_STORIES_COMPOSER,
+    updateId: post.id,
+    editMode: false,
+    profileId,
+  }),
+  handleCloseStoriesComposer: () => ({
+    type: actionTypes.HIDE_STORIES_COMPOSER,
+  }),
   handleMobileClick: ({ post }) => ({
     type: actionTypes.POST_MOBILE_REMINDER,
     updateId: post.id,
   }),
-  handleComposerCreateSuccess: () => ({
-    type: actionTypes.HIDE_COMPOSER,
+  handleStoryGroupMobileClick: ({ post, profileId }) => ({
+    type: actionTypes.STORY_GROUP_MOBILE_REMINDER,
+    updateId: post.id,
+    storyGroup: post,
+    profileId,
   }),
   handleImageClick: ({ post, profileId }) => ({
     type: actionTypes.POST_IMAGE_CLICKED,
@@ -240,5 +302,16 @@ export const actions = {
     updateId: post.id,
     post,
     profileId,
+  }),
+  handleToggleViewType: ({ profileId, viewType }) => ({
+    type: actionTypes.TOGGLE_VIEW_TYPE,
+    profileId,
+    viewType,
+  }),
+  handlePreviewClick: () => ({
+    type: actionTypes.OPEN_PREVIEW,
+  }),
+  handleClosePreviewClick: () => ({
+    type: actionTypes.CLOSE_PREVIEW,
   }),
 };

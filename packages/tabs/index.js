@@ -19,6 +19,7 @@ export default connect(
     shouldShowUpgradeCta: state.appSidebar.user.is_free_user && !state.appSidebar.user.isBusinessTeamMember,
     shouldShowUpgradeButton: state.appSidebar.user.plan === 'free'
                              || state.appSidebar.user.plan === 'pro'
+                             || state.appSidebar.user.plan === 'solo_premium_business'
                              || state.appSidebar.user.plan === 'premium_business',
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',

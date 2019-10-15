@@ -33,9 +33,12 @@ const renderPostList = ({
   isPastReminder,
   isBusinessAccount,
   hasFirstCommentFlip,
+  userData,
+  onPreviewClick,
 }) => (
   <div style={postListStyle}>
     <PostList
+      index={index}
       key={`postList-${index}`}
       listHeader={postList.listHeader}
       posts={postList.posts}
@@ -56,6 +59,8 @@ const renderPostList = ({
       isPastReminder={isPastReminder}
       isBusinessAccount={isBusinessAccount}
       hasFirstCommentFlip={hasFirstCommentFlip}
+      userData={userData}
+      onPreviewClick={onPreviewClick}
     />
   </div>
 );
@@ -81,6 +86,8 @@ const PostLists = ({
   isPastReminder,
   isBusinessAccount,
   hasFirstCommentFlip,
+  userData,
+  onPreviewClick,
 }) => (
   <List
     items={postLists.map((postList, index) =>
@@ -104,6 +111,8 @@ const PostLists = ({
         isPastReminder,
         isBusinessAccount,
         hasFirstCommentFlip,
+        userData,
+        onPreviewClick,
       }),
     )}
     fillContainer

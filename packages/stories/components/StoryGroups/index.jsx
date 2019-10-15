@@ -131,7 +131,7 @@ const StoryGroups = ({
           <ComposerInputStyle>
             {showStoriesComposer && !editMode && (
               <React.Fragment>
-                <StoryGroupPopover />
+                <StoryGroupPopover type="stories" />
               </React.Fragment>
             )}
             <ComposerInput
@@ -142,7 +142,7 @@ const StoryGroups = ({
         </TopBarContainerStyle>
         {showStoriesComposer && editMode && (
           <React.Fragment>
-            <StoryGroupPopover />
+            <StoryGroupPopover type="stories" />
           </React.Fragment>
         )}
         {hasStoriesMobileVersion

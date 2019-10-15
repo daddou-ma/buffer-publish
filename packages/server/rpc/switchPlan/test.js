@@ -2,9 +2,7 @@
 jest.mock('micro-rpc-client');
 jest.mock('request-promise');
 import rp from 'request-promise';
-import RPCEndpoint from './';
-
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import RPCEndpoint from '.';
 
 const accessToken = 'AN ACCESS TOKEN';
 const session = {
@@ -13,11 +11,11 @@ const session = {
   },
 };
 
-const switchPlan = source =>
+const switchPlan = cta =>
   RPCEndpoint.fn({
     cycle: 'year',
     paymentMethodId: 'mock payment method id',
-    source,
+    cta,
   }, { session });
 
 describe('rpc/switchPlan', () => {
@@ -37,13 +35,7 @@ describe('rpc/switchPlan', () => {
   it('it sends the correct cta for specific upgrade paths', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
     switchPlan('queue_limit');
-    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe(SEGMENT_NAMES.QUEUE_LIMIT_PRO_UPGRADE);
-  });
-
-  it('it sends null for empty sources', () => {
-    rp.mockReturnValueOnce(Promise.resolve({}));
-    switchPlan();
-    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe(null);
+    expect(rp.mock.calls[rp.mock.calls.length - 1][0].form.cta).toBe('queue_limit');
   });
 
   it('an error response gets returned too', () => {

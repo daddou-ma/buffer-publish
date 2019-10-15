@@ -12,6 +12,7 @@ const CardWrapper = styled.div`
   box-sizing: border-box;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.16);
   border-radius: ${borderRadius};
+  width: 100%;
 `;
 
 const Card = ({

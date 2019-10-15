@@ -1,5 +1,5 @@
 /* eslint-disable import/first */
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 jest.mock('micro-rpc-client');
 jest.mock('request-promise');
@@ -31,6 +31,7 @@ describe('rpc/posts_summary', () => {
       profileId,
       profileService: 'instagram',
     }, {
+      app: { get() { return process.env.API_ADDR; } },
       session: {
         publish: {
           accessToken: token,
@@ -64,6 +65,7 @@ describe('rpc/posts_summary', () => {
       profileId,
       profileService: 'twitter',
     }, {
+      app: { get() { return 'analyze-api'; } },
       session: {
         publish: {
           accessToken: token,
@@ -73,8 +75,8 @@ describe('rpc/posts_summary', () => {
 
     expect(rp.mock.calls[0])
       .toEqual([{
-        uri: `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/posts_summary.json`,
-        method: 'GET',
+        uri: 'analyze-api/metrics/post_totals',
+        method: 'POST',
         strictSSL: false,
         qs: {
           access_token: token,
@@ -96,6 +98,7 @@ describe('rpc/posts_summary', () => {
       profileId,
       profileService: 'twitter',
     }, {
+      app: { get() { return 'analyze-api'; } },
       session: {
         publish: {
           accessToken: token,
@@ -108,8 +111,8 @@ describe('rpc/posts_summary', () => {
 
     expect(rp.mock.calls[1])
       .toEqual([{
-        uri: `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/posts_summary.json`,
-        method: 'GET',
+        uri: 'analyze-api/metrics/post_totals',
+        method: 'POST',
         strictSSL: false,
         qs: {
           access_token: token,
@@ -125,10 +128,16 @@ describe('rpc/posts_summary', () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_RESPONSE));
 
+    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
+    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+
     const postsSummaryData = await postsSummary.fn({
+      startDate: start,
+      endDate: end,
       profileId,
       profileService: 'facebook',
     }, {
+      app: { get() { return process.env.API_ADDR; } },
       session: {
         publish: {
           accessToken: token,
@@ -143,7 +152,7 @@ describe('rpc/posts_summary', () => {
         diff: -40,
       },
       {
-        label: 'Post Reach',
+        label: 'Reach',
         value: 1181030,
         diff: -0,
       },

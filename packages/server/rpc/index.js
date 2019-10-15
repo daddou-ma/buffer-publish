@@ -61,13 +61,13 @@ const deleteHashtagGroup = require('./deleteHashtagGroup');
 const getHashtagGroups = require('./getHashtagGroups');
 const createSetupIntent = require('./createSetupIntent');
 const getStoryGroupsMethod = require('./getStoryGroups');
+const getPastRemindersStoriesMethod = require('./getPastRemindersStories');
 const createStoryGroupMethod = require('./createStoryGroup');
 const updateStoryGroupMethod = require('./updateStoryGroup');
 const deleteStoryGroupMethod = require('./deleteStoryGroup');
 const shareStoryGroupNowMethod = require('./shareStoryGroupNow');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
-const analyticsStartDate = require('./analytics/analyticsStartDate');
 const average = require('./analytics/average');
 const compare = require('./analytics/compare');
 const getReport = require('./analytics/getReport');
@@ -114,7 +114,6 @@ module.exports = rpc(
   toggleGoogleAnalytics,
   saveGATrackingSettings,
   getGATrackingSettings,
-  analyticsStartDate,
   average,
   compare,
   getReport,
@@ -142,6 +141,7 @@ module.exports = rpc(
   getHashtagGroups,
   createSetupIntent,
   getStoryGroupsMethod,
+  getPastRemindersStoriesMethod,
   createStoryGroupMethod,
   updateStoryGroupMethod,
   deleteStoryGroupMethod,

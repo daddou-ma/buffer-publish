@@ -16,11 +16,12 @@ import {
 
 const getInitialDateTime = ({
   editMode,
+  sentPost,
   scheduledAt,
   emptySlotData,
   timezone,
 }) => {
-  if (editMode || emptySlotData) {
+  if ((editMode && !sentPost) || emptySlotData) {
     const timestamp = editMode ? scheduledAt : emptySlotData.scheduledAt;
     return getMomentTime({ scheduledAt: timestamp, timezone });
   }
@@ -55,8 +56,9 @@ const AddStoryFooter = ({
   emptySlotData,
   selectedProfile,
   isPastDue,
+  sentPost,
 }) => {
-  const [scheduledAt, setScheduledAt] = useState(storyGroup ? storyGroup.scheduledAt : null);
+  const [scheduledAt, setScheduledAt] = useState(storyGroup && !sentPost ? storyGroup.scheduledAt : null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [forceDatePickerSubmit, setForceDatePickerSubmit] = useState(false);
 
@@ -81,8 +83,14 @@ const AddStoryFooter = ({
 
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
+    setShowDatePicker(false);
+    if (editMode && !sentPost) {
+      setScheduledAt(timestamp);
+    } else {
+      onCreateStoryGroup(timestamp);
+    }
     if (editMode) {
-      if (forceDatePickerSubmit) {
+      if (forceDatePickerSubmit || sentPost) {
         setForceDatePickerSubmit(false);
         onUpdateStoryGroup({
           scheduledAt: timestamp,
@@ -98,7 +106,7 @@ const AddStoryFooter = ({
   };
 
   const onScheduleClick = () => {
-    if (!editMode || (editMode && isScheduledAtPastDue)) {
+    if (!editMode || (editMode && isScheduledAtPastDue) || (editMode && sentPost)) {
       setForceDatePickerSubmit(true);
       setShowDatePicker(true);
     } else {
@@ -132,7 +140,7 @@ const AddStoryFooter = ({
   return (
     <Fragment>
       <FooterBar onClick={onFooterClick}>
-        {editMode && (
+        {editMode && !sentPost && (
           <EditStoryStyle>
             <EditTextStyle>
               <Text type="p">Story Schedule:</Text>
@@ -189,6 +197,7 @@ const AddStoryFooter = ({
           onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
           initialDateTime={getInitialDateTime({
             editMode,
+            sentPost,
             scheduledAt,
             emptySlotData,
             timezone,

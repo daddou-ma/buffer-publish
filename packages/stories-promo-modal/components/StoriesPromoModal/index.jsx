@@ -52,6 +52,7 @@ const StoriesPromoModal = ({
         <Title type="h2">New! Plan, preview and schedule Instagram Stories</Title>
         <Description type="p">Try it free for 14 days on the Premium plan.</Description>
         <Button type="primary" label="Start Free 14-Day Trial" onClick={onStartTrialClick} />
+        <Button type="text" label="Dismiss" onClick={onCloseModalClick} />
       </ModalContent>
     </Modal>
   </Popover>

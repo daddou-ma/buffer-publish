@@ -6,6 +6,8 @@ import { gray } from '@bufferapp/ui/style/colors';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import styled from 'styled-components';
 import PlanColumn from '../PlanColumn';
+import PlanColumnExperimentControl from '../PlanColumnExperimentControl';
+import PlanColumnExperimentEnabled from '../PlanColumnExperimentEnabled';
 import { getSource } from '../../utils/plans';
 
 const ButtonStyle = styled.div`
@@ -33,6 +35,10 @@ const Plans = ({
   profiles,
   translations,
   isNonprofit,
+  isExperimentControl,
+  isExperimentEnabled,
+  onPremiumPlanClick,
+  selectedPremiumPlan,
 }) => (
   <ContainerStyle>
     <ButtonStyle>
@@ -41,42 +47,86 @@ const Plans = ({
         size="small"
         icon={<ArrowLeft color={gray} />}
         label={translations.buttonDashboardText}
-        onClick={() =>
-          onBackToDashboardClick({
-            selectedProfileId,
-            profiles,
-          })
+        onClick={() => onBackToDashboardClick({
+          selectedProfileId,
+          profiles,
+        })
         }
       />
     </ButtonStyle>
     <div style={{ textAlign: 'center' }}>
       <HeaderStyle type="h1">{ translations.headerText }</HeaderStyle>
-      <ColumnContainerStyle>
-        <PlanColumn
-          {...translations.pro}
-          imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
-          currentPlan={currentPlan}
-          onChoosePlanClick={onChoosePlanClick}
-          source={getSource({ newPlan: 'pro', currentPlan })}
-          isNonprofit={isNonprofit}
-        />
-        <PlanColumn
-          {...translations.premium}
-          imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
-          currentPlan={currentPlan}
-          onChoosePlanClick={onChoosePlanClick}
-          source={getSource({ newPlan: 'premium_business', currentPlan })}
-          isNonprofit={isNonprofit}
-        />
-        <PlanColumn
-          {...translations.small}
-          imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-business@2x.jpeg"
-          currentPlan={currentPlan}
-          onChoosePlanClick={onChoosePlanClick}
-          source={getSource({ newPlan: 'small', currentPlan })}
-          isNonprofit={isNonprofit}
-        />
-      </ColumnContainerStyle>
+      {!isExperimentControl && !isExperimentEnabled && (
+        <ColumnContainerStyle>
+          <PlanColumn
+            {...translations.pro}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'pro', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+          <PlanColumn
+            {...translations.premium}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'premium_business', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+          <PlanColumn
+            {...translations.small}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-business@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'small', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+        </ColumnContainerStyle>
+      )}
+      {isExperimentEnabled && (
+        <ColumnContainerStyle>
+          <PlanColumnExperimentEnabled
+            {...translations.pro}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'pro', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+          <PlanColumnExperimentEnabled
+            {...translations.premium}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: selectedPremiumPlan === 1 ? 'solo_premium_business' : 'premium_business', currentPlan })}
+            isNonprofit={isNonprofit}
+            onPremiumPlanClick={onPremiumPlanClick}
+            selectedPremiumPlan={selectedPremiumPlan}
+
+          />
+        </ColumnContainerStyle>
+      )}
+      {isExperimentControl && (
+        <ColumnContainerStyle>
+          <PlanColumnExperimentControl
+            {...translations.pro}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'pro', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+          <PlanColumnExperimentControl
+            {...translations.premium}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'premium_business', currentPlan })}
+            isNonprofit={isNonprofit}
+          />
+        </ColumnContainerStyle>
+      )}
     </div>
   </ContainerStyle>
 );

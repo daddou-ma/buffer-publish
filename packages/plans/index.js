@@ -3,11 +3,9 @@ import { push } from 'connected-react-router';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
-import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
-import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import Plans from './components/Plans';
-import { getPlanId } from './utils/plans';
+
+import { actions } from './reducer';
 
 export default connect(
   state => ({
@@ -16,16 +14,18 @@ export default connect(
     selectedProfileId: state.profileSidebar.selectedProfileId,
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
+    isExperimentControl: state.appSidebar.user.hasPaydayExperimentControlFlip,
+    isExperimentEnabled: state.appSidebar.user.hasPaydayExperimentEnabledFlip,
+    selectedPremiumPlan: state.plans.selectedPremiumPlan,
   }),
   dispatch => ({
-    onChoosePlanClick: ({ source, plan }) => {
-      const ctaProperties = getCtaProperties(SEGMENT_NAMES.PLANS_OPEN_MODAL);
-      const metadata = {
-        planName: plan,
-        planId: getPlanId(plan),
-        ...ctaProperties,
-      };
-      dispatch(analyticsActions.trackEvent('Modal Payment Opened', metadata));
+    onPremiumPlanClick: ({ selectedPlan }) => {
+      dispatch(actions.setSelectedPlan({ selectedPlan }));
+    },
+    onChoosePlanClick: ({ source, plan, soloPlanSelected }) => {
+      if (plan === 'premium_business' && soloPlanSelected) {
+        plan = 'solo_premium_business';
+      }
       dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
     },
     onBackToDashboardClick: ({ selectedProfileId, profiles }) => {

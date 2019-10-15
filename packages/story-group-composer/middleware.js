@@ -5,6 +5,7 @@ import {
 import cloneDeep from 'lodash.clonedeep';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as storiesActions, actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
+import { actions as remindersActions, actionTypes as remindersActionTypes } from '@bufferapp/publish-past-reminders/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
 import { dragged, nonConfirmingImageUploaded } from '@bufferapp/publish-analytics-middleware/transformers/publish/story';
@@ -35,7 +36,7 @@ const shouldTrackAspectRatio = (aspectRatio) => {
 };
 
 
-const createImageStory = (story) => {
+export const createImageStory = (story) => {
   const {
     _id,
     note,
@@ -54,7 +55,7 @@ const createImageStory = (story) => {
   };
 };
 
-const createVideoStory = (story) => {
+export const createVideoStory = (story) => {
   const {
     _id,
     note,
@@ -83,7 +84,18 @@ const createVideoStory = (story) => {
   };
 };
 
-const getMappedStories = (story) => {
+const setStoryGroup = ({ editingStoryGroup, dispatch }) => {
+  if (editingStoryGroup) {
+    dispatch(actions.setStoryGroup({
+      stories: editingStoryGroup.storyDetails.stories,
+      storyGroupId: editingStoryGroup.id,
+      scheduledAt: editingStoryGroup.scheduledAt,
+      isPastDue: editingStoryGroup.isPastDue,
+    }));
+  }
+};
+
+export const getMappedStories = (story) => {
   if (story.type === 'video') return createVideoStory(story);
   return createImageStory(story);
 };
@@ -152,6 +164,7 @@ export default ({ getState, dispatch }) => next => (action) => {
       dispatch(analyticsActions.trackEvent('Story Group Created', metadata));
       dispatch(actions.resetStoryGroupState());
       dispatch(storiesActions.handleCloseStoriesComposer());
+      dispatch(remindersActions.handleCloseStoriesComposer());
       dispatch(notificationActions.createNotification({
         notificationType: 'success',
         message: 'Great! This story has been added to your queue.',
@@ -185,17 +198,17 @@ export default ({ getState, dispatch }) => next => (action) => {
       const currentProfile = state.stories.byProfileId[selectedProfileId];
       const { editingPostId } = state.stories;
       const editingStoryGroup = cloneDeep(currentProfile.storyPosts[editingPostId]);
-      if (editingStoryGroup) {
-        dispatch(actions.setStoryGroup({
-          stories: editingStoryGroup.storyDetails.stories,
-          storyGroupId: editingStoryGroup.id,
-          scheduledAt: editingStoryGroup.scheduledAt,
-          isPastDue: editingStoryGroup.isPastDue,
-        }));
-      }
+      setStoryGroup({ editingStoryGroup, dispatch });
       const channel = getState().profileSidebar.selectedProfile;
       const metadata = getTrackingDataForOpenComposer({ channel });
       dispatch(analyticsActions.trackEvent('Story Group Composer Opened', metadata));
+      break;
+    }
+    case remindersActionTypes.OPEN_STORIES_COMPOSER: {
+      const currentProfile = state.pastReminders.byProfileId[selectedProfileId];
+      const { editingPostId } = state.pastReminders;
+      const editingStoryGroup = cloneDeep(currentProfile.posts[editingPostId]);
+      setStoryGroup({ editingStoryGroup, dispatch });
       break;
     }
     case actionTypes.TRACK_DRAG_AND_DROP_STORY: {

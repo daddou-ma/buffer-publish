@@ -8,13 +8,23 @@ const getSource = ({ newPlan, currentPlan }) => {
         ? 'plans_pro_upgrade'
         : 'plans_pro_downgrade';
       break;
-    case 'premium_business':
+    case 'solo_premium_business':
       source = currentPlan === 'free' || currentPlan === 'pro'
+        ? 'plans_solo_premium_upgrade'
+        : 'plans_solo_premium_downgrade';
+      break;
+    case 'premium_business':
+      source = currentPlan === 'free'
+      || currentPlan === 'pro'
+      || currentPlan === 'solo_premium_business'
         ? 'plans_premium_upgrade'
         : 'plans_premium_downgrade';
       break;
     case 'small':
-      source = currentPlan === 'free' || currentPlan === 'pro' || currentPlan === 'premium_business'
+      source = currentPlan === 'free'
+      || currentPlan === 'pro'
+      || currentPlan === 'solo_premium_business'
+      || currentPlan === 'premium_business'
         ? 'plans_small_upgrade'
         : 'plans_small_downgrade';
       break;
@@ -29,6 +39,9 @@ const getPlanId = (plan) => {
   switch (plan) {
     case 'pro':
       planId = PLAN_IDS.PRO_PLAN_ID;
+      break;
+    case 'solo_premium_business':
+      planId = PLAN_IDS.SOLO_PREMIUM_BUSINESS_PLAN_ID;
       break;
     case 'premium_business':
       planId = PLAN_IDS.PREMIUM_BUSINESS_PLAN_ID;
