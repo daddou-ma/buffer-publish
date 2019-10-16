@@ -82,6 +82,7 @@ const StoryGroupWrapper = ({
   errorMessages,
   emptySlotData,
   maxStories,
+  sentPost,
 }) => {
   const cards = storyGroup ? storyGroup.stories : [];
   const [viewMode, setViewMode] = useState(ADD_STORY);
@@ -165,6 +166,7 @@ const StoryGroupWrapper = ({
               emptySlotData={emptySlotData}
               selectedProfile={selectedProfile}
               isPastDue={storyGroup.isPastDue}
+              sentPost={sentPost}
             />
           </React.Fragment>
         )}

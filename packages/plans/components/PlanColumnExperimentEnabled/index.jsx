@@ -23,6 +23,7 @@ import {
   MonthlyText,
   BillingTextStyle,
   EmptySpan,
+  LeftBillingText,
 } from './style';
 
 const UserIcon = ({ Icon, text, isSelected }) => (
@@ -53,10 +54,7 @@ const RightPlanButton = ({
 const RightButton = styled(Button)`
   height: unset;
   padding: 20px 30px 15px 30px;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-radius: 0 25px 25px 0;
   background-color: ${props => (props.type === 'primary' ? '#EEF1FF' : 'white')};
   :hover {
     background-color: ${props => (props.type === 'primary' ? '#EEF1FF' : grayLighter)};
@@ -78,10 +76,7 @@ const LeftPlanButton = ({
 );
 
 const LeftButton = styled(RightButton)`
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-radius: 25px 0 0 25px;
 `;
 
 const PlanColumnExperimentEnabled = ({
@@ -119,7 +114,7 @@ const PlanColumnExperimentEnabled = ({
           />
         </ImageWrapperStyle>
         {!isPremium && (
-          <div>
+          <React.Fragment>
             <UserIcon Icon={<Person />} text="1 user" isSelected />
             <PriceStyle>
               <TextStyle type="h1">
@@ -127,11 +122,11 @@ const PlanColumnExperimentEnabled = ({
                 <MonthlyText>{ monthly }</MonthlyText>
               </TextStyle>
             </PriceStyle>
-            <Text type="p">{ billingText }</Text>
-          </div>
+            <LeftBillingText type="p">{ billingText }</LeftBillingText>
+          </React.Fragment>
         )}
         {isPremium && (
-        <div>
+        <React.Fragment>
           <PlanStyle>
             <LeftButton
               type={isSelected() ? 'primary' : 'secondary'}
@@ -149,7 +144,7 @@ const PlanColumnExperimentEnabled = ({
             />
           </PlanStyle>
           <EmptySpan />
-        </div>
+        </React.Fragment>
         )}
       </TopContentStyle>
       <FeatureListStyle>
@@ -169,7 +164,7 @@ const PlanColumnExperimentEnabled = ({
         </ButtonWrapperStyle>
       </FooterStyle>
     </ColumnStyle>
-  )
+  );
 };
 
 PlanColumnExperimentEnabled.propTypes = {

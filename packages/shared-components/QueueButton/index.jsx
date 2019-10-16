@@ -1,41 +1,55 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const getBorderRadius = (index) => {
+const getBorderRadius = (index, total) => {
   if (index === 0) return '4px 0px 0px 4px';
-  else if (index === 2) return '0px 4px 4px 0px';
+  if (index === total - 1) return '0px 4px 4px 0px';
   return '0px';
 };
 
+const getBorderRight = (index, selectedIndex) => (
+  index === selectedIndex - 1 ? { borderRight: 'none' } : ''
+);
+
+const getBorderLeft = (isSelected, index) => (
+  !isSelected && index !== 0 ? { borderLeft: 'none' } : ''
+);
+
+const lightBorder = '1px solid #C4C4C4';
+const darkBorder = '1px solid #636363';
+
 // refactor when new design system is used
-const btnStyle = (index, isHovering, isSelected, disabled) => ({
+const btnStyle = ({
+  index,
+  isHovering,
+  isSelected,
+  disabled,
+  total,
+  selectedIndex,
+}) => ({
   fontFamily: 'Roboto',
   fontWeight: 500,
   color: isSelected || isHovering ? '#3D3D3D' : '#636363',
-  borderRadius: getBorderRadius(index, length),
+  borderRadius: getBorderRadius(index, total),
   fontSize: '14px',
-  border: isSelected ? '1px solid #636363' : '1px solid #C4C4C4',
+  border: isSelected ? darkBorder : lightBorder,
   boxSizing: 'border-box',
   backgroundColor: isSelected || isHovering ? '#F5F5F5' : 'initial',
   height: '36px',
   padding: '8px 16px',
   cursor: 'pointer',
   outline: 'none',
-  position: (index !== 1) ? 'relative' : 'initial',
-  margin: (index !== 1) ? 'auto -1px' : 'initial',
   pointerEvents: disabled ? 'none' : 'auto',
+  ...getBorderLeft(isSelected, index),
+  ...getBorderRight(index, selectedIndex),
 });
 
-const getWeekOrMonth = (index) => {
-  if (index === 1) return 'week';
-  else if (index === 2) return 'month';
-  return null;
-};
-
 class QueueButton extends Component {
-  constructor() {
-    super();
-    this.state = { isHovering: false, selectedIndex: 0 };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isHovering: false,
+    };
 
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
@@ -49,22 +63,33 @@ class QueueButton extends Component {
     this.setState({ isHovering: false });
   }
 
-  updateIndex (selectedIndex) {
-    // Currently not using logic because Week & Month btns open up in new window
-    this.setState({ selectedIndex });
-  }
-
   render() {
-    const { onClick, index, text, disabled } = this.props;
+    const {
+      onClick,
+      total,
+      index,
+      text,
+      disabled,
+      selectedIndex,
+    } = this.props;
+    const { isHovering } = this.state;
+
     return (
       <button
-        style={btnStyle(index, this.state.isHovering, this.state.selectedIndex === index, disabled)}
+        type="button"
+        style={btnStyle({
+          index,
+          isHovering,
+          isSelected: selectedIndex === index,
+          disabled,
+          total,
+          selectedIndex,
+        })}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={(e) => {
           e.preventDefault();
-          const weekOrMonth = getWeekOrMonth(index);
-          onClick(weekOrMonth);
+          onClick();
         }}
       >
         {text}
@@ -78,10 +103,13 @@ QueueButton.propTypes = {
   index: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  total: PropTypes.number,
+  selectedIndex: PropTypes.number,
 };
 
 QueueButton.defaultProps = {
   disabled: false,
+  total: 0,
 };
 
 export default QueueButton;

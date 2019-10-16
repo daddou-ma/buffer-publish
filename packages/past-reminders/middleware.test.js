@@ -5,6 +5,12 @@ import {
 import { actionTypes } from './reducer';
 import middleware from './middleware';
 
+const getStateWithSelectedUser = () => ({
+  profileSidebar: {
+    selectedProfileId: 1234,
+  },
+});
+
 describe('middleware', () => {
   const next = jest.fn();
   const dispatch = jest.fn();
@@ -19,7 +25,7 @@ describe('middleware', () => {
       type: actionTypes.POST_MOBILE_REMINDER,
       updateId: 1234,
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState: getStateWithSelectedUser })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -34,7 +40,7 @@ describe('middleware', () => {
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
     });
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState: getStateWithSelectedUser })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)

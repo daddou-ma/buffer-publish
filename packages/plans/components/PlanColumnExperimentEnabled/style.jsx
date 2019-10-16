@@ -52,7 +52,7 @@ export const PriceStyle = styled.span`
 `;
 
 export const FeatureListStyle = styled.span`
-  margin-top: 5px;
+  margin-top: 13px;
 `;
 
 export const EmptySpan = styled.span`
@@ -66,6 +66,10 @@ export const TextStyle = styled(Text)`
 
 export const BillingTextStyle = styled(Text)`
   margin: 0;
+`;
+
+export const LeftBillingText = styled(Text)`
+  margin-top: 0;
 `;
 
 export const MonthlyText = styled.span`

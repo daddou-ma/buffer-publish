@@ -5,7 +5,7 @@ const { storyGroupParser } = require('./../../parsers/src');
 module.exports = method(
   'updateStoryGroup',
   'fetch stories groups',
-  ({ profileId, scheduledAt, storyGroupId, stories }, { session }) =>
+  ({ profileId, scheduledAt, storyGroupId, shareNow, stories }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/story_groups/update.json`,
       method: 'POST',
@@ -17,6 +17,7 @@ module.exports = method(
         profile_id: profileId,
         scheduled_at: scheduledAt,
         story_group_id: storyGroupId,
+        share_now: shareNow,
         stories,
       },
     })

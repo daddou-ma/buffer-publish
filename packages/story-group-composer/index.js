@@ -10,8 +10,17 @@ import { actions } from './reducer';
 import StoryGroupPopover from './components/StoryGroupPopover';
 
 export default connect(
-  (state) => {
-    const { editingPostId, emptySlotData } = state.stories;
+  (state, ownProps) => {
+    const { emptySlotData } = state.stories;
+    const { type } = ownProps;
+    const { editingPostId } = state[type];
+    let options = {};
+
+    if (type === 'pastReminders') {
+      options = {
+        sentPost: true,
+      };
+    }
 
     return {
       uses24hTime: state.appSidebar.user.uses_24h_time,
@@ -28,19 +37,20 @@ export default connect(
       errorMessages: state.storyGroupComposer.errors,
       emptySlotData,
       maxStories: state.storyGroupComposer.maxStories,
+      ...options,
     };
   },
   dispatch => ({
     onOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
-    onCreateStoryGroup: (scheduledAt) => {
+    onCreateStoryGroup: (scheduledAt, shareNow = false) => {
       dispatch(actions.setScheduleLoading(true));
-      dispatch(actions.handleSaveStoryGroup(scheduledAt));
+      dispatch(actions.handleSaveStoryGroup(scheduledAt, shareNow));
     },
-    onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId }) => {
+    onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId, shareNow = false }) => {
       dispatch(actions.setScheduleLoading(true));
-      dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId }));
+      dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId, shareNow }));
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
