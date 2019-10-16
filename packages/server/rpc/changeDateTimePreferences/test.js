@@ -12,6 +12,7 @@ const session = {
 };
 const mockUser = {
   features: [],
+  experiments: [],
   messages: [],
   plan: 'free',
   email_notifications: [],
