@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Text } from '@bufferapp/ui';
+import { Button, Text, Select as UISelect } from '@bufferapp/ui';
 import { isInThePast } from '@bufferapp/publish-server/formatters/src';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import { getReadableDateFormat, getMomentTime } from '../../utils/AddStory';
@@ -13,6 +13,15 @@ import {
   EditDateStyle,
   StyledEditButton,
 } from './style';
+
+class Select extends UISelect {
+  handleSelectOption = (option, event) => {
+    this.props.onSelectClick(option, event);
+    this.setState({
+      isOpen: false,
+    });
+  };
+}
 
 const getInitialDateTime = ({
   editMode,
@@ -163,24 +172,31 @@ const AddStoryFooter = ({
           />
         </ButtonStyle>
         <Button
-          onSelectClick={(selectedItem) => {
-            if (typeof selectedItem.selectedItemClick !== 'undefined') {
-              selectedItem.selectedItemClick();
-            }
-            return false;
-          }}
           onClick={onScheduleClick}
           isSplit
           type="primary"
-          items={[
-            { title: translations.shareNowButton, selectedItemClick: onShareNowClick },
-            { title: translations.scheduleButton, selectedItemClick: onScheduleClick },
-          ]}
           disabled={isScheduleDisabled}
           label={isScheduleLoading
             ? translations.scheduleLoadingButton
             : translations.scheduleButton}
-        />
+        >
+          <Select
+            onSelectClick={(selectedItem) => {
+              if (typeof selectedItem.selectedItemClick !== 'undefined') {
+                selectedItem.selectedItemClick();
+              }
+              return false;
+            }}
+            items={[
+              { title: translations.shareNowButton, selectedItemClick: onShareNowClick },
+              { title: translations.scheduleButton, selectedItemClick: onScheduleClick },
+            ]}
+            type="primary"
+            isSplit
+            xPosition="right"
+            hideSearch
+          />
+        </Button>
       </FooterBar>
       {showDatePicker && (
         <DateTimeSlotPickerWrapper
