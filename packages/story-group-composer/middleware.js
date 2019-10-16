@@ -108,13 +108,14 @@ export default ({ getState, dispatch }) => next => (action) => {
     case actionTypes.SAVE_STORY_GROUP: {
       const { stories } = state.storyGroupComposer.storyGroup;
       const sendStories = stories.map(getMappedStories);
-      const { scheduledAt } = action;
-      if (scheduledAt) {
+      const { scheduledAt, shareNow } = action;
+      if (scheduledAt || shareNow) {
         dispatch(dataFetchActions.fetch({
           name: 'createStoryGroup',
           args: {
             profileId: selectedProfileId,
             scheduledAt,
+            shareNow,
             stories: sendStories,
           },
         }));
@@ -124,12 +125,14 @@ export default ({ getState, dispatch }) => next => (action) => {
     case actionTypes.UPDATE_STORY_GROUP: {
       const { stories } = state.storyGroupComposer.storyGroup;
       const { storyGroupId } = state.storyGroupComposer.storyGroup;
+      const { scheduledAt, shareNow } = action;
       dispatch(dataFetchActions.fetch({
         name: 'updateStoryGroup',
         args: {
           profileId: selectedProfileId,
-          scheduledAt: action.scheduledAt,
+          scheduledAt,
           storyGroupId,
+          shareNow,
           stories,
         },
       }));
