@@ -93,13 +93,17 @@ const AddStoryFooter = ({
   const onDateTimeSlotPickerSubmit = (timestamp) => {
     setShowDatePicker(false);
     if (editMode) {
-      if (forceDatePickerSubmit || sentPost) {
+      if (forceDatePickerSubmit) {
         setForceDatePickerSubmit(false);
-        onUpdateStoryGroup({
-          scheduledAt: timestamp,
-          stories,
-          storyGroupId,
-        });
+        if (sentPost) {
+          onCreateStoryGroup(timestamp);
+        } else {
+          onUpdateStoryGroup({
+            scheduledAt: timestamp,
+            stories,
+            storyGroupId,
+          });
+        }
       } else {
         setScheduledAt(timestamp);
       }
@@ -123,12 +127,16 @@ const AddStoryFooter = ({
 
   const onShareNowClick = () => {
     if (editMode) {
-      onUpdateStoryGroup({
-        scheduledAt,
-        stories,
-        storyGroupId,
-        shareNow: true,
-      });
+      if (sentPost) {
+        onCreateStoryGroup(null, true);
+      } else {
+        onUpdateStoryGroup({
+          scheduledAt,
+          stories,
+          storyGroupId,
+          shareNow: true,
+        });
+      }
     } else {
       onCreateStoryGroup(null, true);
     }
