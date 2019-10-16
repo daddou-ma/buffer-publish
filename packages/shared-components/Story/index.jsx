@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { CircleInstReminderIcon } from '@bufferapp/components';
 import { CoverImage, PlayIcon } from '@bufferapp/publish-story-group-composer/components/Carousel/CardItem/styles';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
@@ -11,6 +12,10 @@ import Carousel, { CarouselCard, getCardSizes } from '../Carousel';
 import PostErrorBanner from '../PostErrorBanner';
 
 const sgQueueTranslations = translations['story-group-queue'];
+
+const CardWrapper = styled.div`
+  width: ${props => (props.isPastReminder ? '703px' : '100%')};
+`;
 
 const Story = ({
   id,
@@ -48,51 +53,54 @@ const Story = ({
   const errorMessage = hasError ? error : sgQueueTranslations.bannerMobileTagText;
 
   return (
-    <Card>
-      {shouldDisplayErrorBanner
-        && (
-          <PostErrorBanner
-            error={errorMessage}
-            errorLink={errorLink}
-          />
-        )
-      }
-      <CardHeader
-        avatarUrl={avatarUrl}
-        createdAt={createdAt}
-        onPreviewClick={() => onPreviewClick({
-          stories, profileId, id, scheduledAt, serviceId,
-        })}
-      />
-      <Carousel
-        editMode={false}
-        totalCardsToShow={(stories && stories.length) || 0}
-        totalStories={(stories && stories.length) || 0}
-      >
-        {stories && stories.map(card => (
-          <CarouselCard
-            cardHeight={cardHeight}
-            cardWidth={cardWidth}
-            largeCards={largeCards}
-          >
-            {card.thumbnail_url && <CoverImage src={getLargeSafeImageUrl(card.thumbnail_url)} />}
-            {card.type === 'video' && <PlayIcon large={false} />}
-          </CarouselCard>
-        ))}
-      </Carousel>
-      <CardFooter
-        hideButtons={hideButtons}
-        icon={hasError ? '' : <CircleInstReminderIcon color="instagram" />}
-        onDeleteClick={onDeleteConfirmClick}
-        onEditClick={onEditClick}
-        onSubmitClick={onShareNowClick}
-        isPerformingAction={!!actionMessage}
-        actionMessage={actionMessage}
+    <CardWrapper isPastReminder={isPastReminder}>
+      <Card>
+        {shouldDisplayErrorBanner
+          && (
+            <PostErrorBanner
+              error={errorMessage}
+              errorLink={errorLink}
+            />
+          )
+        }
+        <CardHeader
+          avatarUrl={avatarUrl}
+          createdAt={createdAt}
+          onPreviewClick={() => onPreviewClick({
+            stories, profileId, id, scheduledAt, serviceId,
+          })}
+        />
+        <Carousel
+          editMode={false}
+          maxItemsPerPage={isPastReminder ? 6 : null}
+          totalCardsToShow={(stories && stories.length) || 0}
+          totalStories={(stories && stories.length) || 0}
+        >
+          {stories && stories.map(card => (
+            <CarouselCard
+              cardHeight={cardHeight}
+              cardWidth={cardWidth}
+              largeCards={largeCards}
+            >
+              {card.thumbnail_url && <CoverImage src={getLargeSafeImageUrl(card.thumbnail_url)} />}
+              {card.type === 'video' && <PlayIcon large={false} />}
+            </CarouselCard>
+          ))}
+        </Carousel>
+        <CardFooter
+          hideButtons={hideButtons}
+          icon={hasError ? '' : <CircleInstReminderIcon color="instagram" />}
+          onDeleteClick={onDeleteConfirmClick}
+          onEditClick={onEditClick}
+          onSubmitClick={onShareNowClick}
+          isPerformingAction={!!actionMessage}
+          actionMessage={actionMessage}
 
-        message={hasError ? '' : storyAction}
-        submitLabel={hasError ? 'Retry Now' : 'Share Now'}
-      />
-    </Card>
+          message={hasError ? '' : storyAction}
+          submitLabel={hasError ? 'Retry Now' : 'Share Now'}
+        />
+      </Card>
+    </CardWrapper>
   );
 };
 
