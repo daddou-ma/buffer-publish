@@ -72,7 +72,7 @@ const Story = ({
         />
         <Carousel
           editMode={false}
-          maxItemsPerPage={isPastReminder ? 6 : null}
+          maxItemsPerPage={isPastReminder ? 7 : null}
           totalCardsToShow={(stories && stories.length) || 0}
           totalStories={(stories && stories.length) || 0}
         >

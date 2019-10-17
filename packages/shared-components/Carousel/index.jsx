@@ -178,7 +178,7 @@ Carousel.defaultProps = {
   initialSelectedItem: 0,
   totalCardsToShow: 10,
   totalStories: 0,
-  maxItemsPerPage: 8,
+  maxItemsPerPage: null,
 };
 
 export default Carousel;
