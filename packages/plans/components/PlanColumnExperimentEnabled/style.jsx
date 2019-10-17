@@ -37,6 +37,9 @@ export const UsersStyle = styled.span`
   justify-content: center;
   display: flex;
   color: ${props => (props.isSelected ? blue : grayDark)};
+  span {
+    font-size: 14px;
+  }
 `;
 
 export const IconStyle = styled.span`
