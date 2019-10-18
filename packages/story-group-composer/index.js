@@ -144,6 +144,10 @@ export default connect(
       availableThumbnails,
       uploadId,
     }) => {
+      const videoMaxLength = 15 * 1000; // 15s
+      if (durationMs > videoMaxLength) {
+        dispatch(actions.showError({ message: "Heads up! Your video is over the 15 second max limit for an Instagram Story. Instagram will clip the end of your video down to the first 15 seconds."}));
+      }
       dispatch(actions.videoUploadProcessingComplete({
         id,
         name,
