@@ -23,7 +23,7 @@ const AppModals = ({
   showInstagramDirectPostingModal,
   showWelcomeB4BTrialModal,
   showInstagramFirstCommentModal,
-  showTrialExpiredModal,
+  showTrialCompleteModal,
   showInstagramFirstCommentProTrialModal,
   showStoriesPromoModal,
   showCloseComposerConfirmationModal,
@@ -37,7 +37,7 @@ const AppModals = ({
     {showWelcomeB4BTrialModal && <WelcomeB4BTrialModal />}
     {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
     {showStealProfileModal && <StealProfileModal />}
-    {showTrialExpiredModal && <TrialCompleteModal />}
+    {showTrialCompleteModal && <TrialCompleteModal />}
     {showInstagramFirstCommentProTrialModal && <InstagramFirstCommentProTrialModal />}
     {showStoriesPromoModal && <StoriesPromoModal />}
     {showCloseComposerConfirmationModal && <CloseComposerConfirmationModal />}
@@ -53,7 +53,7 @@ AppModals.propTypes = {
   showInstagramDirectPostingModal: PropTypes.bool.isRequired,
   showWelcomeB4BTrialModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentModal: PropTypes.bool.isRequired,
-  showTrialExpiredModal: PropTypes.bool.isRequired,
+  showTrialCompleteModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentProTrialModal: PropTypes.bool.isRequired,
   showStoriesPromoModal: PropTypes.bool.isRequired,
   showCloseComposerConfirmationModal: PropTypes.bool.isRequired,
