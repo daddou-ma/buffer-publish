@@ -9,7 +9,7 @@ import WelcomePaidModal from '@bufferapp/publish-welcome-paid-modal';
 import InstagramFirstCommentModal from '@bufferapp/publish-ig-first-comment-modal';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import WelcomeB4BTrialModal from '@bufferapp/publish-welcome-b4b-trial-modal';
-import B4bTrialCompleteModal from '@bufferapp/publish-b4b-trial-complete-modal';
+import TrialCompleteModal from '@bufferapp/publish-trial-complete-modal';
 import InstagramFirstCommentProTrialModal from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 import StoriesPromoModal from '@bufferapp/publish-stories-promo-modal';
 import CloseComposerConfirmationModal from '@bufferapp/publish-close-composer-confirmation-modal';
@@ -23,7 +23,7 @@ const AppModals = ({
   showInstagramDirectPostingModal,
   showWelcomeB4BTrialModal,
   showInstagramFirstCommentModal,
-  showB4BTrialExpiredModal,
+  showTrialExpiredModal,
   showInstagramFirstCommentProTrialModal,
   showStoriesPromoModal,
   showCloseComposerConfirmationModal,
@@ -37,7 +37,7 @@ const AppModals = ({
     {showWelcomeB4BTrialModal && <WelcomeB4BTrialModal />}
     {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
     {showStealProfileModal && <StealProfileModal />}
-    {showB4BTrialExpiredModal && <B4bTrialCompleteModal />}
+    {showTrialExpiredModal && <TrialCompleteModal />}
     {showInstagramFirstCommentProTrialModal && <InstagramFirstCommentProTrialModal />}
     {showStoriesPromoModal && <StoriesPromoModal />}
     {showCloseComposerConfirmationModal && <CloseComposerConfirmationModal />}
@@ -53,7 +53,7 @@ AppModals.propTypes = {
   showInstagramDirectPostingModal: PropTypes.bool.isRequired,
   showWelcomeB4BTrialModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentModal: PropTypes.bool.isRequired,
-  showB4BTrialExpiredModal: PropTypes.bool.isRequired,
+  showTrialExpiredModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentProTrialModal: PropTypes.bool.isRequired,
   showStoriesPromoModal: PropTypes.bool.isRequired,
   showCloseComposerConfirmationModal: PropTypes.bool.isRequired,

@@ -30,7 +30,7 @@ import accountNotificationsReducer from '@bufferapp/publish-account-notification
 import stealProfileModalReducer from '@bufferapp/publish-steal-profile-modal/reducer';
 import lockedProfileNotificationReducer from '@bufferapp/publish-locked-profile-notification/reducer';
 import thirdpartyReducer from '@bufferapp/publish-thirdparty/reducer';
-import b4bTrialCompleteReducer from '@bufferapp/publish-b4b-trial-complete-modal/reducer';
+import trialCompleteModalReducer from '@bufferapp/publish-trial-complete-modal/reducer';
 import appShellReducer from '@bufferapp/publish-app-shell/reducer';
 import ctaBannerReducer from '@bufferapp/publish-cta-banner/reducer';
 import igFirstCommentProTrialModalReducer from '@bufferapp/publish-ig-first-comment-pro-trial-modal/reducer';
@@ -89,7 +89,7 @@ export default {
   stealProfileModal: stealProfileModalReducer,
   lockedProfileNotification: lockedProfileNotificationReducer,
   thirdparty: thirdpartyReducer,
-  b4bTrialComplete: b4bTrialCompleteReducer,
+  trialCompleteModal: trialCompleteModalReducer,
   appShell: appShellReducer,
   ctaBanner: ctaBannerReducer,
   igFirstCommentProTrialModal: igFirstCommentProTrialModalReducer,

@@ -11,8 +11,7 @@ export const initialState = {
   showInstagramDirectPostingModal: false,
   showWelcomeB4BTrialModal: false,
   showInstagramFirstCommentModal: false,
-  showB4BTrialExpiredModal: false,
-  upgradeModalB4BSource: null,
+  showTrialCompleteModal: false,
   showInstagramFirstCommentProTrialModal: false,
   showCloseComposerConfirmationModal: false,
   showStoriesPromoModal: false,
@@ -34,8 +33,8 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_IG_DIRECT_POSTING_MODAL: 0,
   SHOW_WELCOME_B4B_TRIAL_MODAL: 0,
   HIDE_WELCOME_B4B_TRIAL_MODAL: 0,
-  SHOW_UPGRADE_B4B_MODAL: 0,
-  HIDE_UPGRADE_B4B_MODAL: 0,
+  SHOW_TRIAL_COMPLETE_MODAL: 0,
+  HIDE_TRIAL_COMPLETE_MODAL: 0,
   SHOW_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
   HIDE_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
   SHOW_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
@@ -60,16 +59,15 @@ export default (state = initialState, action) => {
         ...state,
         showSwitchPlanModal: false,
       };
-    case actionTypes.SHOW_UPGRADE_B4B_MODAL:
+    case actionTypes.SHOW_TRIAL_COMPLETE_MODAL:
       return {
         ...state,
-        showB4BTrialExpiredModal: true,
-        upgradeModalB4BSource: action.source,
+        showTrialCompleteModal: true,
       };
-    case actionTypes.HIDE_UPGRADE_B4B_MODAL:
+    case actionTypes.HIDE_TRIAL_COMPLETE_MODAL:
       return {
         ...state,
-        showB4BTrialExpiredModal: false,
+        showTrialCompleteModal: false,
       };
     case actionTypes.SHOW_WELCOME_MODAL:
       return {
@@ -197,12 +195,11 @@ export const actions = {
   hideUpgradeModal: () => ({
     type: actionTypes.HIDE_SWITCH_PLAN_MODAL,
   }),
-  showB4BTrialExpiredModal: ({ source }) => ({
-    type: actionTypes.SHOW_UPGRADE_B4B_MODAL,
-    source,
+  showTrialCompleteModal: () => ({
+    type: actionTypes.SHOW_TRIAL_COMPLETE_MODAL,
   }),
-  hideUpgradeB4BModal: () => ({
-    type: actionTypes.HIDE_UPGRADE_B4B_MODAL,
+  hideTrialCompleteModal: () => ({
+    type: actionTypes.HIDE_TRIAL_COMPLETE_MODAL,
   }),
   showInstagramFirstCommentModal: ({ ids }) => ({
     type: actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_MODAL,

@@ -41,7 +41,7 @@ import accountNotificationsMiddleware from '@bufferapp/publish-account-notificat
 import publishCTABannerMiddleware from '@bufferapp/publish-cta-banner/middleware';
 import thirdpartyMiddleware from '@bufferapp/publish-thirdparty/middleware';
 import bookmarkletsMiddleware from '@bufferapp/publish-bookmarklets/middleware';
-import b4bTrialCompleteModalMiddleware from '@bufferapp/publish-b4b-trial-complete-modal/middleware';
+import trialCompleteModalMiddleware from '@bufferapp/publish-trial-complete-modal/middleware';
 import tabsMiddleware from '@bufferapp/publish-tabs/middleware';
 import appShellMiddleware from '@bufferapp/publish-app-shell/middleware';
 import igFirstCommentProTrialModalMiddleware from '@bufferapp/publish-ig-first-comment-pro-trial-modal/middleware';
@@ -124,7 +124,7 @@ const configureStore = initialstate => {
         publishCTABannerMiddleware,
         bookmarkletsMiddleware,
         thirdpartyMiddleware,
-        b4bTrialCompleteModalMiddleware,
+        trialCompleteModalMiddleware,
         tabsMiddleware,
         appShellMiddleware,
         igFirstCommentProTrialModalMiddleware,
