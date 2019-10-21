@@ -221,4 +221,22 @@ const InstagramUserTags = ({
   );
 };
 
+InstagramUserTags.propTypes = {
+  media: PropTypes.shape({
+    url: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }).isRequired,
+  draftId: PropTypes.string.isRequired,
+  userTags: PropTypes.arrayOf({
+    userName: PropTypes.string,
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }),
+};
+
+InstagramUserTags.defaultProps = {
+  userTags: [],
+};
+
 export default InstagramUserTags;
