@@ -34,7 +34,9 @@ describe('reducer', () => {
       result: {
         shouldShowProTrialExpiredModal: false,
         shouldShowBusinessTrialExpiredModal: true,
-        plan: 'premium_business',
+        trial: {
+          trialPlan: 'premium_business',
+        },
       },
     };
     deepFreeze(stateBefore);

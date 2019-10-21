@@ -35,13 +35,13 @@ const TrialCompleteModal = ({
       background="url('https://s3.amazonaws.com/buffer-publish/images/b4b-welcome-modal-background.svg') no-repeat"
       action={{
         label: translations.completeAndUpgrade,
-        action: () => {
+        callback: () => {
           completeAndUpgrade();
         },
       }}
       secondaryAction={{
         label: translations.cancelTrial,
-        action: () => {
+        callback: () => {
           cancelTrial();
         },
       }}
