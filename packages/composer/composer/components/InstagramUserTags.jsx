@@ -168,7 +168,7 @@ const InstagramUserTags = ({
         </StyledPersonIcon>
         { tags && (
           <div>
-            {tags.map(({ tag, index }) => (
+            {tags.map((tag, index) => (
               displayUserTags({ tag, index })
             ))}
           </div>
