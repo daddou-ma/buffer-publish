@@ -79,6 +79,7 @@ const Services = (() => {
         canEditLinkAttachment: false,
         canEditVideoAttachment: false,
         canHaveLocation: false,
+        canHaveUserTags: false,
         usesImageFirstLayout: false,
         isOmni: false,
       };
@@ -162,6 +163,7 @@ const Services = (() => {
       maxHashtags: 30,
       maxMentions: 5,
       canHaveLocation: true,
+      canHaveUserTags: true,
       canEditVideoAttachment: false,
     }),
     new Service({
