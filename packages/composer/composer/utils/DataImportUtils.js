@@ -168,6 +168,7 @@ const DataImportUtils = {
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
           hasHashtagGroupsFlip: hasFeature(userData.features, 'hashtag_groups'),
+          hasIGUserTagFlip: hasFeature(userData.features, 'instagram_user_tags'),
           profileGroups: userData.profile_groups ?
             userData.profile_groups.map((group) => ({
               name: group.name,

@@ -31,6 +31,7 @@ class MediaAttachment extends React.Component {
     className: PropTypes.string,
     usesImageFirstLayout: PropTypes.bool,
     composerPosition: PropTypes.object,
+    hasIGUserTagFlip: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -58,7 +59,7 @@ class MediaAttachment extends React.Component {
   render() {
     const {
       images, video, gif, tempImage, draftId, maxAttachableImagesCount, filesUploadProgress,
-      service, className, usesImageFirstLayout, composerPosition, draft,
+      service, className, usesImageFirstLayout, composerPosition, draft, hasIGUserTagFlip,
     } = this.props;
 
     const shouldDisplayUploadNewButton = (
@@ -114,6 +115,7 @@ class MediaAttachment extends React.Component {
               draft={draft}
               showTwitterImageDescription={showTwitterImageDescription}
               composerPosition={composerPosition}
+              hasIGUserTagFlip={hasIGUserTagFlip}
             />
           ))}
 

@@ -41,6 +41,7 @@ const ComposerComponent = ({
   hasIGDirectVideoFlip,
   hasShopgridFlip,
   hasHashtagGroupsFlip,
+  hasIGUserTagFlip,
   isFreeUser,
   isBusinessUser,
   draftMode,
@@ -90,6 +91,7 @@ const ComposerComponent = ({
       hasIGDirectVideoFlip={hasIGDirectVideoFlip}
       hasShopgridFlip={hasShopgridFlip}
       hasHashtagGroupsFlip={hasHashtagGroupsFlip}
+      hasIGUserTagFlip={hasIGUserTagFlip}
       isFreeUser={isFreeUser}
       isBusinessUser={isBusinessUser}
       draftMode={draftMode}
@@ -122,7 +124,7 @@ class ComposerSection extends React.Component {
       shouldEnableFacebookAutocomplete, shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled, composerPosition, hasIGDirectFlip, hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip, isFreeUser, isBusinessUser, canStartProTrial,
-      isOnProTrial, hasShopgridFlip, hasHashtagGroupsFlip, draftMode,
+      isOnProTrial, hasShopgridFlip, hasHashtagGroupsFlip, hasIGUserTagFlip, draftMode,
     } = this.props;
 
     const hasEnabledDrafts = enabledDrafts.length > 0 || isOmniboxEnabled;
@@ -178,6 +180,7 @@ class ComposerSection extends React.Component {
               hasIGDirectVideoFlip,
               hasShopgridFlip,
               hasHashtagGroupsFlip,
+              hasIGUserTagFlip,
               isFreeUser,
               isBusinessUser,
               draftMode,
@@ -215,6 +218,7 @@ class ComposerSection extends React.Component {
                 hasIGDirectVideoFlip,
                 hasShopgridFlip,
                 hasHashtagGroupsFlip,
+                hasIGUserTagFlip,
                 isFreeUser,
                 isBusinessUser,
                 draftMode,
@@ -245,6 +249,7 @@ ComposerSection.propTypes = {
   isFreeUser: PropTypes.bool.isRequired,
   hasShopgridFlip: PropTypes.bool,
   hasHashtagGroupsFlip: PropTypes.bool,
+  hasIGUserTagFlip: PropTypes.bool,
   isBusinessUser: PropTypes.bool,
   draftMode: PropTypes.bool,
 };
@@ -254,6 +259,7 @@ ComposerSection.defaultProps = {
   composerPosition: null,
   hasShopgridFlip: false,
   hasHashtagGroupsFlip: false,
+  hasIGUserTagFlip: false,
   isBusinessUser: false,
   draftMode: false,
 };

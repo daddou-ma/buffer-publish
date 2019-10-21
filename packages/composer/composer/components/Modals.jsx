@@ -11,6 +11,7 @@ const ModalComponents = {
   EmptyTextAlert,
   MediaZoomBox,
   InstagramThumbnailEditor,
+  InstagramUserTags,
 };
 
 class Modals extends React.Component {

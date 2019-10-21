@@ -168,6 +168,7 @@ class Composer extends React.Component {
     isOnProTrial: PropTypes.bool,
     hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
+    hasIGUserTagFlip: PropTypes.bool,
     hasHashtagGroupsFlip: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
@@ -181,6 +182,7 @@ class Composer extends React.Component {
     canStartProTrial: false,
     isOnProTrial: false,
     hasIGDirectVideoFlip: false,
+    hasIGUserTagFlip: false,
     hasShopgridFlip: false,
     hasHashtagGroupsFlip: false,
     profiles: [],
@@ -597,6 +599,7 @@ class Composer extends React.Component {
       composerPosition,
       hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip,
+      hasIGUserTagFlip,
       hasShopgridFlip,
       hasHashtagGroupsFlip,
       draftMode,
@@ -824,6 +827,7 @@ class Composer extends React.Component {
         className={mediaAttachmentClassName}
         usesImageFirstLayout={usesImageFirstLayout}
         composerPosition={composerPosition}
+        hasIGUserTagFlip={hasIGUserTagFlip}
       />
     );
 
