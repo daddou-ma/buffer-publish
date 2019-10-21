@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
         ...state,
         hasExpiredProTrial: action.result.shouldShowProTrialExpiredModal,
         hasExpiredBusinessTrial: action.result.shouldShowBusinessTrialExpiredModal,
-        isPremiumBusiness: action.result.plan === 'premium_business',
+        isPremiumBusiness: action.result.trial && action.result.trial.trialPlan === 'premium_business',
       };
     default:
       return state;
