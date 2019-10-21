@@ -65,10 +65,8 @@ export default ({ dispatch, getState }) => next => (action) => {
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
       } = action.result; // userData
-      if (shouldShowProTrialExpiredModal) {
-        dispatch(actions.showSwitchPlanModal({ source: 'pro_trial_expired', plan: 'pro' }));
-      } else if (shouldShowBusinessTrialExpiredModal) {
-        dispatch(actions.showB4BTrialExpiredModal({ source: 'b4b_trial_expired' }));
+      if (shouldShowProTrialExpiredModal || shouldShowBusinessTrialExpiredModal) {
+        dispatch(actions.showTrialCompleteModal());
       }
       break;
     }

@@ -120,6 +120,20 @@ describe('middleware', () => {
       .toBeCalledWith(actions.showProfilesDisconnectedModal());
   });
 
+  it('should show trial upgrade modal', () => {
+    const next = jest.fn();
+    const dispatch = jest.fn();
+    const action = {
+      type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
+      result: { shouldShowProTrialExpiredModal: true },
+    };
+    middleware({ dispatch })(next)(action);
+    expect(next)
+      .toBeCalledWith(action);
+    expect(dispatch)
+      .toBeCalledWith(actions.showTrialCompleteModal());
+  });
+
   it('should show instagram direct posting modal when key is present', () => {
     window._showModal = {
       key: 'ig-direct-post-modal',

@@ -1,10 +1,8 @@
-const hasProTrialExpired = trials =>
-  trials.some(trial => trial.is_awesome && trial.status === 'expired');
+const hasProTrialExpired = trials => trials.some(trial => trial.is_awesome && trial.status === 'expired');
 
-const isOnBusinessPlan = trialPlan =>
-  ['business', 'agency', 'small', 'premium_business'].some(
-    plan => plan === trialPlan,
-  );
+const isOnBusinessPlan = trialPlan => ['business', 'agency', 'small', 'premium_business'].some(
+  plan => plan === trialPlan,
+);
 
 module.exports = userData => ({
   id: userData.id,
@@ -69,22 +67,22 @@ module.exports = userData => ({
     && !userData.trial_done,
   trial: userData.on_awesome_trial
     ? {
-        hasCardDetails: userData.has_card_details,
-        hasTrialExtended: userData.has_trial_extended,
-        onTrial: userData.on_awesome_trial,
-        postTrialCost: '',
-        trialLength: userData.awesome_trial_length,
-        trialTimeRemaining: userData.awesome_trial_time_remaining,
-      }
+      hasCardDetails: userData.has_card_details,
+      hasTrialExtended: userData.has_trial_extended,
+      onTrial: userData.on_awesome_trial,
+      postTrialCost: '',
+      trialLength: userData.awesome_trial_length,
+      trialTimeRemaining: userData.awesome_trial_time_remaining,
+    }
     : {
-        hasCardDetails: userData.has_card_details,
-        hasTrialExtended: userData.has_trial_extended,
-        onTrial: userData.on_trial,
-        postTrialCost: userData.post_trial_cost,
-        trialLength: userData.trial_length,
-        trialTimeRemaining: userData.trial_time_remaining,
-      },
-  messages: userData.messages,
+      hasCardDetails: userData.has_card_details,
+      hasTrialExtended: userData.has_trial_extended,
+      onTrial: userData.on_trial,
+      postTrialCost: userData.post_trial_cost,
+      trialLength: userData.trial_length,
+      trialTimeRemaining: userData.trial_time_remaining,
+      trialPlan: userData.trial_plan,
+    },
   isNonprofit: userData.billing_status_nonprofit,
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,

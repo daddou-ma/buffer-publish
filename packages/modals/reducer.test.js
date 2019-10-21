@@ -122,15 +122,15 @@ describe('reducer', () => {
         .toEqual(Object.assign(initialState,
           { showInstagramFirstCommentModal: false, firstCommentIds: null }));
     });
-    it('should show upgrade b4b modal', () => {
-      expect(reducer(initialState, actions.showB4BTrialExpiredModal({ source: 'source' })))
+    it('should show trial complete modal', () => {
+      expect(reducer(initialState, actions.showTrialCompleteModal()))
         .toEqual(Object.assign(initialState,
-          { showB4BTrialExpiredModal: true, upgradeModalB4BSource: 'source' }));
+          { showTrialCompleteModal: true }));
     });
-    it('should hide upgrade b4b modal', () => {
-      expect(reducer(initialState, actions.hideUpgradeB4BModal()))
+    it('should hide trial complete modal', () => {
+      expect(reducer(initialState, actions.hideTrialCompleteModal()))
         .toEqual(Object.assign(initialState,
-          { showB4BTrialExpiredModal: false }));
+          { showTrialCompleteModal: false }));
     });
     it('should save modal to show later', () => {
       expect(reducer(initialState, actions.saveModalToShowLater({ modalId: 'modalId', profileId: 'profileId' })))

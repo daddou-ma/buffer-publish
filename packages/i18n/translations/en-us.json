@@ -283,11 +283,10 @@
     "getInTouch": "Get in touch",
     "takeMeBack": "Take Me Back to Buffer"
   },
-  "b4b-trial-complete-modal": {
-    "header": "Your Buffer for Business trial is complete!",
+  "trial-complete-modal": {
+    "header": "Your Buffer {plan} trial is complete!",
     "completeAndUpgrade": "Complete and Upgrade",
-    "cancelTrial": "Cancel Trial",
-    "cancelTrialAndLock": "Cancel Trial and Lock Extra Profiles"
+    "cancelTrial": "Cancel Trial"
   },
   "close-composer-confirmation-modal": {
     "text": "Are you sure you want to close the composer? You will lose any unsaved changes.",
