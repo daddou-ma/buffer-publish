@@ -168,6 +168,7 @@ const DataImportUtils = {
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
           hasHashtagGroupsFlip: hasFeature(userData.features, 'hashtag_groups'),
+          hasIGUserTagFlip: hasFeature(userData.features, 'instagram_user_tags'),
           profileGroups: userData.profile_groups ?
             userData.profile_groups.map((group) => ({
               name: group.name,
@@ -204,6 +205,7 @@ const DataImportUtils = {
           sourceUrl: null,
           locationId: null,
           locationName: null,
+          userTags: null,
           facebookMentionEntities: null,
           should_show_rollout_tooltip: false,
           isPrefillingExistingUpdate: false,
@@ -274,6 +276,7 @@ const DataImportUtils = {
           sourceUrl: update.source_url || null,
           locationId: update.service_geolocation_id || null,
           locationName: update.service_geolocation_name || null,
+          userTags: update.service_user_tags || null,
           facebookMentionEntities: update.entities || null,
           commentEnabled: update.commentEnabled,
           commentText: update.commentText || null,
@@ -340,6 +343,7 @@ const DataImportUtils = {
         sourceUrl: meta.sourceUrl || null,
         locationId: meta.locationId || null,
         locationName: meta.locationName || null,
+        userTags: meta.userTags || null,
         linkData: meta.linkData !== null ?
           getFormattedLinkData(meta.linkData) : null,
         via: meta.via || null,

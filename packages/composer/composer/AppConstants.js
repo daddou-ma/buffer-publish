@@ -79,6 +79,7 @@ const Services = (() => {
         canEditLinkAttachment: false,
         canEditVideoAttachment: false,
         canHaveLocation: false,
+        canHaveUserTags: false,
         usesImageFirstLayout: false,
         isOmni: false,
       };
@@ -162,6 +163,7 @@ const Services = (() => {
       maxHashtags: 30,
       maxMentions: 5,
       canHaveLocation: true,
+      canHaveUserTags: true,
       canEditVideoAttachment: false,
     }),
     new Service({
@@ -302,6 +304,7 @@ const ActionTypes = keyMirror({
   COMPOSER_SELECT_PROFILE: null,
   COMPOSER_SELECT_PROFILES: null,
   COMPOSER_QUEUE_PROFILES_SUBPROFILES_DROPDOWNS_TO_EXPAND: null,
+  COMPOSER_UPDATE_DRAFT_USER_TAGS: null,
   COMPOSER_EMPTY_PROFILES_SUBPROFILES_DROPDOWNS_TO_EXPAND: null,
   COMPOSER_UNSELECT_PROFILE: null,
   COMPOSER_UNSELECT_PROFILES: null,

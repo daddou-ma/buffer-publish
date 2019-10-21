@@ -17,18 +17,34 @@ class MediaAttachmentThumbnail extends React.Component {
     showTwitterImageDescription: PropTypes.bool.isRequired,
     composerPosition: PropTypes.object,
     canEditVideoAttachment: PropTypes.bool,
+    hasIGUserTagFlip: PropTypes.bool,
   };
 
   static defaultProps = {
     composerPosition: null,
     canEditVideoAttachment: null,
+    hasIGUserTagFlip: false,
   };
 
   onClick = () => {
-    const { media, draftId, showTwitterImageDescription, composerPosition } = this.props;
-    ModalActionCreators.openModal('MediaZoomBox', {
-      media, draftId, showTwitterImageDescription, composerPosition,
-    });
+    const {
+      media,
+      draftId,
+      showTwitterImageDescription,
+      composerPosition,
+      draft,
+      hasIGUserTagFlip
+    } = this.props;
+
+    if (hasIGUserTagFlip) {
+      ModalActionCreators.openModal('InstagramUserTags', {
+        media, draftId, composerPosition, userTags: draft.userTags,
+      });
+    } else {
+      ModalActionCreators.openModal('MediaZoomBox', {
+        media, draftId, showTwitterImageDescription, composerPosition,
+      });
+    }
   }
 
   onCloseButtonClick = () => {
@@ -60,7 +76,13 @@ class MediaAttachmentThumbnail extends React.Component {
   };
 
   render() {
-    const { media, className, showTwitterImageDescription, canEditVideoAttachment } = this.props;
+    const {
+      media,
+      className,
+      showTwitterImageDescription,
+      canEditVideoAttachment,
+      hasIGUserTagFlip,
+    } = this.props;
     const thumbnailClassName = [styles.thumbnail, className].join(' ');
     const isVideo = media.mediaType === MediaTypes.VIDEO;
     const isRegularImage = media.mediaType === MediaTypes.IMAGE;
@@ -89,6 +111,9 @@ class MediaAttachmentThumbnail extends React.Component {
               src={escapeParens(thumbnail)}
               className={styles.thumbnailImage}
             />
+            {hasIGUserTagFlip &&
+              <div className={styles.userTagOverlay}>Tag Users</div>
+            }
             {isVideo &&
               <span className={videoThumbnailClass} aria-label="video attachment" />}
           </Button>
