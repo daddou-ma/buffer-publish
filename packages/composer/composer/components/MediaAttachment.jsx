@@ -111,6 +111,7 @@ class MediaAttachment extends React.Component {
               className={thumbnailClassName}
               key={image.url}
               media={image}
+              draft={draft}
               showTwitterImageDescription={showTwitterImageDescription}
               composerPosition={composerPosition}
             />

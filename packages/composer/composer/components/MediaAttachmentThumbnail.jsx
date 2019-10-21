@@ -111,6 +111,9 @@ class MediaAttachmentThumbnail extends React.Component {
               src={escapeParens(thumbnail)}
               className={styles.thumbnailImage}
             />
+            {hasIGUserTagFlip &&
+              <div className={styles.userTagOverlay}>Tag Users</div>
+            }
             {isVideo &&
               <span className={videoThumbnailClass} aria-label="video attachment" />}
           </Button>

@@ -1,8 +1,9 @@
 import React from 'react';
-import EmptyTextAlert from '../components/EmptyTextAlert';
-import MediaZoomBox from '../components/MediaZoomBox';
-import InstagramThumbnailEditor from '../components/InstagramThumbnailEditor';
-import Store from '../__legacy-buffer-web-shared-components__/modal/store.js';
+import EmptyTextAlert from './EmptyTextAlert';
+import MediaZoomBox from './MediaZoomBox';
+import InstagramThumbnailEditor from './InstagramThumbnailEditor';
+import Store from '../__legacy-buffer-web-shared-components__/modal/store';
+import InstagramUserTags from './InstagramUserTags';
 
 const getState = () => Store.getCurrentState();
 
