@@ -14,7 +14,9 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
       break;
     }
     case actionTypes.COMPLETE_UPGRADE_TRIAL: {
-      const { hasExpiredProTrial, hasExpiredBusinessTrial, isPremiumBusiness } = getState().trialCompleteModal;
+      const {
+        hasExpiredProTrial, hasExpiredBusinessTrial, isPremiumBusiness,
+      } = getState().trialCompleteModal;
       const ctaName = () => {
         if (hasExpiredProTrial) return SEGMENT_NAMES.EXPIRED_TRIAL_PRO_UPGRADE;
         if (hasExpiredBusinessTrial) {
@@ -26,7 +28,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
       };
 
       window.location.assign(`${getURL.getBillingURL({
-        cta: ctaName,
+        cta: ctaName(),
       })}`);
       break;
     }
