@@ -396,6 +396,14 @@ const ComposerActionCreators = {
     });
   },
 
+  updateDraftUserTags: (id, userTags) => {
+    AppDispatcher.handleViewAction({
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAG,
+      id,
+      userTags,
+    });
+  },
+
   updateDraftLinkThumbnail: (id, thumbnail) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_LINK_THUMBNAIL,

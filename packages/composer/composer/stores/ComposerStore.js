@@ -655,6 +655,13 @@ const updateDraftLocation = monitorComposerLastInteractedWith(
   }
 );
 
+const updateDraftUserTags = monitorComposerLastInteractedWith(
+  (id, userTags) => {
+    const draft = ComposerStore.getDraft(id);
+    draft.userTags = userTags;
+  },
+);
+
 const updateDraftScheduledAt = monitorComposerLastInteractedWith(
   (id, timestamp, isPinnedToSlot = false) => {
     const draft = ComposerStore.getDraft(id);
@@ -1991,6 +1998,10 @@ const onDispatchedPayload = (payload) => {
 
     case ActionTypes.COMPOSER_REMOVE_DRAFT_GIF:
       removeDraftGif(action.id, action.gifUrl);
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAG:
+      updateDraftUserTags(action.id, action.userTags);
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_TEMP_IMAGE:

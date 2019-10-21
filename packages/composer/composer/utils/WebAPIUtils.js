@@ -709,6 +709,16 @@ function getFormattedAPIData(serviceName, unformattedData) {
       conditionalFields.service_geolocation_name = locationName;
     }
 
+    // if (serviceDraft.service.canHaveUserTags) {
+      const { userTags } = serviceDraft;
+      const newUserTags = userTags.map((tag) => {
+        delete tag.xPosition;
+        delete tag.yPosition;
+        return tag;
+      });
+      conditionalFields.service_user_tags = newUserTags;
+    // }
+
     if (hasEnabledRetweetAttachment) {
       const retweet = serviceDraft.retweet;
 

@@ -158,6 +158,11 @@ class App extends React.Component {
         name: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
       })),
+      userTags: PropTypes.arrayOf(PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
+      })),
       locationId: PropTypes.string,
       locationName: PropTypes.string,
       commentEnabled: PropTypes.bool,
