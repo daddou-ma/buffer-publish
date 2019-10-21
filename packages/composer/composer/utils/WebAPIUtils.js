@@ -712,8 +712,8 @@ function getFormattedAPIData(serviceName, unformattedData) {
     // if (serviceDraft.service.canHaveUserTags) {
       const { userTags } = serviceDraft;
       const newUserTags = userTags.map((tag) => {
-        delete tag.xPosition;
-        delete tag.yPosition;
+        delete tag.clientX;
+        delete tag.clientY;
         return tag;
       });
       conditionalFields.service_user_tags = newUserTags;

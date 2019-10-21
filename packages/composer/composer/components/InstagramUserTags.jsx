@@ -9,6 +9,7 @@ import ModalActionCreators from '../__legacy-buffer-web-shared-components__/moda
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import styles from './css/InstagramUserTags.css';
 
+// TO-DO: Move styled components into their own css file
 const StyledUserName = styled.div`
   display: flex;
   marginTop: 5px;
@@ -31,25 +32,66 @@ const StyledText = styled(Text)`
    marginTop: 12px;
 `;
 
+const StyledModalWrapper = styled.div`
+  background-color: white;
+  padding: 0px 15px 0px 0px;
+  display: flex;
+`;
+
+const StyledRightHeader = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledImage = styled.img`
+  max-height: 500px;
+  width: auto;
+  margin: 0 auto;
+  cursor: crosshair;
+  display: block;
+`;
+
+const StyledRightContent = styled.div`
+  margin-left: 15px;
+  width: 275px;
+`;
+
+const calculateTagStyles = ({ tag, showTags }) => ({
+  position: 'absolute',
+  left: `${tag.clientX}px`,
+  top: `${tag.clientY}px`,
+  color: 'white',
+  backgroundColor: 'black',
+  borderRadius: '7%',
+  padding: '2px 5px',
+  opacity: '0.7',
+  display: showTags ? 'block' : 'none',
+});
+
+const modalClassNames = {
+  modal: styles.modalStyles,
+  closeButton: styles.closeButton,
+};
+
 const InstagramUserTags = ({
   media,
   draftId,
   userTags = [],
 }) => {
-  const initialCoordinateState = { x: null, y: null, xPosition: null, yPosition: null };
+  const initialCoordinateState = { x: null, y: null, clientX: null, clientY: null };
   const [coordinates, setCoordinates] = useState(initialCoordinateState);
   const [tags, setTags] = useState(userTags);
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
 
   const saveTag = () => {
-    const { x, y, xPosition, yPosition } = coordinates;
+    const { x, y, clientX, clientY } = coordinates;
     const userTag = {
       username: inputValue,
       x,
       y,
-      xPosition,
-      yPosition,
+      clientX,
+      clientY,
     };
     setTags([...tags, userTag]);
     setInputValue('');
@@ -61,58 +103,44 @@ const InstagramUserTags = ({
     ModalActionCreators.closeModal();
   };
 
-  const setInput = (e) => {
-    setInputValue(e.target.value);
-  };
-
   const removeTag = (removedUserTag) => {
-    const newArray = tags.filter(tag => tag !== removedUserTag);
-    setTags(newArray);
+    const newTagArray = tags.filter(tag => tag !== removedUserTag);
+    setTags(newTagArray);
   };
 
   const onImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
-    const xPosition = e.clientX - rect.left; // x position within the element.
-    const yPosition = e.clientY - rect.top; // y position within the element.
+    const clientX = e.clientX - rect.left; // x position within the element.
+    const clientY = e.clientY - rect.top; // y position within the element.
     // final_width = max_height * start_width / start_height
     let { width, height } = media;
     if (height > 500) {
       width = (500 * width) / height;
       height = 500;
     }
-    const x = (xPosition / width);
-    const y = (yPosition / height);
-    setCoordinates({ x: x.toFixed(2), y: y.toFixed(2), xPosition, yPosition });
+    const x = (clientX / width);
+    const y = (clientY / height);
+    setCoordinates({
+      x: x.toFixed(2),
+      y: y.toFixed(2),
+      clientX,
+      clientY,
+    });
+
     e.preventDefault();
-  }
+  };
 
   const onTogglePersonIcon = () => (
     showTags ? setShowTags(false) : setShowTags(true)
   );
 
-  const modalClassNames = {
-    modal: styles.modalStyles,
-    closeButton: styles.closeButton,
-  };
-
-  const calculateTagStyles = tag => ({
-    position: 'absolute',
-    left: `${tag.xPosition}px`,
-    top: `${tag.yPosition}px`,
-    color: 'white',
-    backgroundColor: 'black',
-    borderRadius: '7%',
-    padding: '2px 5px',
-    opacity: '0.7',
-    display: showTags ? 'block' : 'none',
-  });
-
-  const displayUserTags = (tag, index) => (
-    <div key={index} style={calculateTagStyles(tag)}>
+  const displayUserTags = ({ tag, index }) => (
+    <div key={index} style={calculateTagStyles({ tag, showTags })}>
       {tag.username}
     </div>
   );
 
+  // TO-DO: refactor to be more a11y friendly
   const renderUsername = (tag, index) => (
     <StyledUserName key={index}>
       <a
@@ -129,38 +157,35 @@ const InstagramUserTags = ({
 
   return (
     <Modal classNames={modalClassNames} hideCloseButton>
-      <div className={styles.wrapper}>
-        <div>
-          <img
-            alt=""
-            className={styles.media}
-            src={media.url}
-            onClick={onImageClick}
-          />
-          <StyledPersonIcon onClick={onTogglePersonIcon}>
-            <Person size="large" />
-          </StyledPersonIcon>
-          { tags && (
-            <div>
-              {tags.map((tag, index) => (
-                displayUserTags(tag, index)
-              ))}
-            </div>
-          )}
-        </div>
-        <div className={styles.rightContentWrapper}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+      <StyledModalWrapper>
+        <StyledImage
+          alt=""
+          src={media.url}
+          onClick={onImageClick}
+        />
+        <StyledPersonIcon onClick={onTogglePersonIcon}>
+          <Person size="large" />
+        </StyledPersonIcon>
+        { tags && (
+          <div>
+            {tags.map(({ tag, index }) => (
+              displayUserTags({ tag, index })
+            ))}
+          </div>
+        )}
+        <StyledRightContent>
+          <StyledRightHeader>
             <span className={styles.arrowLeftIcon}>
               <ArrowLeft size="large" />
             </span>
             <Text type="h3">Tag a user</Text>
-          </div>
+          </StyledRightHeader>
           <Text>Click on a spot in the photo to tag</Text>
           <div style={{ display: 'flex' }}>
             <div className={styles.atSign}>@</div>
             <Input
               type="input"
-              onChange={setInput}
+              onChange={(e) => { setInputValue(e.target.value); }}
               placeholder="username"
               value={inputValue}
               name="tagInput"
@@ -184,14 +209,14 @@ const InstagramUserTags = ({
           )}
           <StyledText>
             Note: The Instagram API only allows public users to be
-            tagged and prevents autocomplete in usernames.
+            tagged and prevents autocomplete in usernames. // Move to translations
           </StyledText>
           <Button
             onClick={saveGlobalTags}
             label="Save and Close"
           />
-        </div>
-      </div>
+        </StyledRightContent>
+      </StyledModalWrapper>
     </Modal>
   );
 };

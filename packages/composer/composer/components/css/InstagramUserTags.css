@@ -20,13 +20,6 @@
   box-shadow: none;
 }
 
-.modalStyles .closeIcon {
-  z-index: 1;
-  order: 2;
-  position: relative!important;
-  right: 12px;
-}
-
 .modalStyles .mediaContainer {
   order: 1;
   position: relative;
@@ -48,12 +41,6 @@
   z-index: -1;
 }
 
-.modalStyles .wrapper {
-  background-color: white;
-  padding: 0px 15px 0px 0px;
-  display: flex;
-}
-
 .modalStyles .crossIcon {
   display: inline-flex;
   align-items: center;
@@ -72,17 +59,4 @@
   align-items: center;
   display: inline-flex;
   margin-right: 6px;
-}
-
-.modalStyles .rightContentWrapper {
-  margin-left: 15px;
-  width: 275px;
-}
-
-.modalStyles .media {
-  max-height: 500px;
-  width: auto;
-  margin: 0 auto;
-  cursor: crosshair;
-  display: block;
 }
