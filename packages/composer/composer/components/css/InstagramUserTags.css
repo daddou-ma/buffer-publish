@@ -1,0 +1,88 @@
+:import('./constants.css') {
+  outerspace: outerspace;
+  primary-font-color: primary-font-color;
+}
+
+:root {
+  --outerspace: outerspace;
+  --primary-font-color: primary-font-color;
+}
+
+.modalStyles.modalStyles {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: initial;
+  justify-content: center;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.modalStyles .closeIcon {
+  z-index: 1;
+  order: 2;
+  position: relative!important;
+  right: 12px;
+}
+
+.modalStyles .mediaContainer {
+  order: 1;
+  position: relative;
+  text-align: center;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.modalStyles .mediaContainer::after {
+  background: black;
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.5;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.modalStyles .wrapper {
+  background-color: white;
+  padding: 0px 15px 0px 0px;
+  display: flex;
+}
+
+.modalStyles .crossIcon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+.modalStyles .arrowLeftIcon {
+  margin-right: 7px;
+  display: flex;
+  color: #2c4bff;
+}
+
+.modalStyles .atSign {
+  font-size: 20px;
+  align-items: center;
+  display: inline-flex;
+  margin-right: 6px;
+}
+
+.modalStyles .rightContentWrapper {
+  margin-left: 15px;
+  width: 275px;
+}
+
+.modalStyles .media {
+  max-height: 500px;
+  width: auto;
+  margin: 0 auto;
+  cursor: crosshair;
+  display: block;
+}
