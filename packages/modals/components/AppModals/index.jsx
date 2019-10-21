@@ -11,7 +11,6 @@ import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-mo
 import WelcomeB4BTrialModal from '@bufferapp/publish-welcome-b4b-trial-modal';
 import TrialCompleteModal from '@bufferapp/publish-trial-complete-modal';
 import InstagramFirstCommentProTrialModal from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
-import StoriesPromoModal from '@bufferapp/publish-stories-promo-modal';
 import CloseComposerConfirmationModal from '@bufferapp/publish-close-composer-confirmation-modal';
 
 const AppModals = ({
@@ -25,7 +24,6 @@ const AppModals = ({
   showInstagramFirstCommentModal,
   showTrialCompleteModal,
   showInstagramFirstCommentProTrialModal,
-  showStoriesPromoModal,
   showCloseComposerConfirmationModal,
 }) => (
   <React.Fragment>
@@ -39,7 +37,6 @@ const AppModals = ({
     {showStealProfileModal && <StealProfileModal />}
     {showTrialCompleteModal && <TrialCompleteModal />}
     {showInstagramFirstCommentProTrialModal && <InstagramFirstCommentProTrialModal />}
-    {showStoriesPromoModal && <StoriesPromoModal />}
     {showCloseComposerConfirmationModal && <CloseComposerConfirmationModal />}
   </React.Fragment>
 );
@@ -55,7 +52,6 @@ AppModals.propTypes = {
   showInstagramFirstCommentModal: PropTypes.bool.isRequired,
   showTrialCompleteModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentProTrialModal: PropTypes.bool.isRequired,
-  showStoriesPromoModal: PropTypes.bool.isRequired,
   showCloseComposerConfirmationModal: PropTypes.bool.isRequired,
 };
 

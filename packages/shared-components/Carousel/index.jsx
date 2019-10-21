@@ -110,13 +110,17 @@ class Carousel extends React.Component {
       totalStories,
       children,
       largeCards,
+      maxItemsPerPage,
     } = this.props;
 
     const { selectedItem } = this.state;
     const { cardWidth, cardHeight, maxPerPage } = getCardSizes(largeCards);
+
+    const maxCardsToDisplay = maxItemsPerPage || maxPerPage;
+
     const canUploadMore = largeCards && totalStories < totalCardsToShow;
-    const incrementBy = canUploadMore && (totalStories - selectedItem === maxPerPage) ? 2 : 1;
-    const decrementBy = canUploadMore && (totalStories - selectedItem < maxPerPage) ? -2 : -1;
+    const incrementBy = canUploadMore && (totalStories - selectedItem === maxCardsToDisplay) ? 2 : 1;
+    const decrementBy = canUploadMore && (totalStories - selectedItem < maxCardsToDisplay) ? -2 : -1;
 
     return (
       <React.Fragment>
@@ -145,7 +149,7 @@ class Carousel extends React.Component {
             hide={shouldHideRightArrow({
               totalStories,
               selectedItem,
-              maxPerPage,
+              maxPerPage: maxCardsToDisplay,
               canUploadMore,
             })}
             setSelectedItem={this.setSelectedItem}
@@ -166,6 +170,7 @@ Carousel.propTypes = {
   initialSelectedItem: PropTypes.number,
   totalCardsToShow: PropTypes.number,
   totalStories: PropTypes.number,
+  maxItemsPerPage: PropTypes.number,
 };
 
 Carousel.defaultProps = {
@@ -173,6 +178,7 @@ Carousel.defaultProps = {
   initialSelectedItem: 0,
   totalCardsToShow: 10,
   totalStories: 0,
+  maxItemsPerPage: null,
 };
 
 export default Carousel;
