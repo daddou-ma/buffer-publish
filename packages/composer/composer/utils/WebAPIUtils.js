@@ -459,7 +459,7 @@ function getTwitterACPublicSearchHashtagSuggestions(search) {
 
 function getFacebookACPrivateSearchSuggestions(search) {
   const selectedFbAccounts = AppStore.getSelectedProfilesForService('facebook');
-  const selectedFbPages = selectedFbAccounts.filter((p) => p.serviceType === 'page');
+  const selectedFbPages = selectedFbAccounts.filter(p => p.serviceType === 'page');
 
   return API.get('search/facebook_pages.json', { q: search, profile_id: selectedFbPages[0].id })
     .then((results) => {
