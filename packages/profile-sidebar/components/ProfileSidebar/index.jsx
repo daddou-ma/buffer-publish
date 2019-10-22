@@ -111,7 +111,7 @@ const ProfileSidebar = ({
         {!hasInstagram && <ProfileConnectShortcut
           label="Connect Instagram"
           network="instagram"
-          url="https://buffer.com/oauth/instagram?cta=sidebar"
+          url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
           profileLimit={profileLimit}
           profiles={profiles}
           showSwitchPlanModal={showSwitchPlanModal}
@@ -120,7 +120,7 @@ const ProfileSidebar = ({
         {!hasFacebook && <ProfileConnectShortcut
           label="Connect Facebook"
           network="facebook"
-          url="https://buffer.com/oauth/facebook/choose?cta=sidebar"
+          url="https://buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1"
           profileLimit={profileLimit}
           profiles={profiles}
           showSwitchPlanModal={showSwitchPlanModal}
@@ -129,7 +129,7 @@ const ProfileSidebar = ({
         {!hasTwitter && <ProfileConnectShortcut
           label="Connect Twitter"
           network="twitter"
-          url="https://buffer.com/oauth/twitter?cta=sidebar"
+          url="https://buffer.com/oauth/twitter?cta=publish-app-sidebar-addProfile-1"
           profileLimit={profileLimit}
           profiles={profiles}
           showSwitchPlanModal={showSwitchPlanModal}
