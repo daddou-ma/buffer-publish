@@ -13,6 +13,8 @@ const sourceCtaMap = new Map([
   ['locked_profile', SEGMENT_NAMES.LOCKED_PROFILE_PRO_UPGRADE],
   ['pro_trial_expired', SEGMENT_NAMES.EXPIRED_TRIAL_PRO_UPGRADE],
   ['b4b_trial_expired', SEGMENT_NAMES.EXPIRED_TRIAL_BUSINESS_UPGRADE],
+  ['plans_solo_premium_upgrade', SEGMENT_NAMES.PLANS_SOLO_PREMIUM_UPGRADE],
+  ['plans_solo_premium_downgrade', SEGMENT_NAMES.PLANS_SOLO_PREMIUM_DOWNGRADE],
   ['plans_pro_upgrade', SEGMENT_NAMES.PLANS_PRO_UPGRADE],
   ['plans_pro_downgrade', SEGMENT_NAMES.PLANS_PRO_DOWNGRADE],
   ['plans_premium_upgrade', SEGMENT_NAMES.PLANS_PREMIUM_UPGRADE],
