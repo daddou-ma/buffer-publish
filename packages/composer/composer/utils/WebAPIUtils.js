@@ -467,8 +467,10 @@ function getFacebookACPrivateSearchSuggestions(search) {
         const csrfToken = AppStore.getCsrfToken();
         const oauthLink = `/oauth/reconnect/${selectedFbPages[0].id}?csrf_token=${csrfToken}`;
 
-        throw new Error(`Oops! We currently can't provide Facebook page tagging.
-        We're working to <a href="https://status.buffer.com/" target="_blank">get this fixed!</a>`);
+        throw new Error(`Oops! We lost access to your Facebook account, and can't provide
+                         Facebook page tag suggestions as a result. Would you be up for
+                         <a href="${oauthLink}" target="_blank">reconnecting that account</a>
+                         and trying again?`);
       }
       return results;
     })
