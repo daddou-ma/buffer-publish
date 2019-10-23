@@ -33,7 +33,10 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     case 'APP_INIT': {
       if (shouldShowSwitchPlanModal()) {
-        dispatch(actions.showSwitchPlanModal({ source: getSourceFromKey(), plan: 'pro' }));
+        dispatch(actions.showSwitchPlanModal({
+          source: getSourceFromKey(),
+          plan: shouldShowSwitchPlanModal(),
+        }));
       }
       if (shouldShowStealProfileModal()) {
         dispatch(actions.showStealProfileModal({ stealProfileUsername: getShowModalValue() }));
