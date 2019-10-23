@@ -168,7 +168,7 @@ class Composer extends React.Component {
     isOnProTrial: PropTypes.bool,
     hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
-    hasIGUserTagFlip: PropTypes.bool,
+    hasAccessToUserTag: PropTypes.bool,
     hasHashtagGroupsFlip: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
@@ -182,7 +182,7 @@ class Composer extends React.Component {
     canStartProTrial: false,
     isOnProTrial: false,
     hasIGDirectVideoFlip: false,
-    hasIGUserTagFlip: false,
+    hasAccessToUserTag: false,
     hasShopgridFlip: false,
     hasHashtagGroupsFlip: false,
     profiles: [],
@@ -599,7 +599,7 @@ class Composer extends React.Component {
       composerPosition,
       hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip,
-      hasIGUserTagFlip,
+      hasAccessToUserTag,
       hasShopgridFlip,
       hasHashtagGroupsFlip,
       draftMode,
@@ -812,6 +812,11 @@ class Composer extends React.Component {
 
     const composerFooterClassName = usesImageFirstLayout ? styles.imageFirstFooter : styles.composerFooter;
 
+    const canAddUserTag = hasAccessToUserTag // on the user level
+      && this.isInstagram()
+      && draft.instagramFeedback.length < 1 // don't allow user to add tag if post is reminder
+      && !appState.isOmniboxEnabled;
+
     const composerMediaAttachment = (
       <MediaAttachment
         draft={draft}
@@ -827,7 +832,7 @@ class Composer extends React.Component {
         className={mediaAttachmentClassName}
         usesImageFirstLayout={usesImageFirstLayout}
         composerPosition={composerPosition}
-        hasIGUserTagFlip={hasIGUserTagFlip}
+        canAddUserTag={canAddUserTag}
       />
     );
 

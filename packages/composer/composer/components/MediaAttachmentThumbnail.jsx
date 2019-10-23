@@ -17,13 +17,13 @@ class MediaAttachmentThumbnail extends React.Component {
     showTwitterImageDescription: PropTypes.bool.isRequired,
     composerPosition: PropTypes.object,
     canEditVideoAttachment: PropTypes.bool,
-    hasIGUserTagFlip: PropTypes.bool,
+    canAddUserTag: PropTypes.bool,
   };
 
   static defaultProps = {
     composerPosition: null,
     canEditVideoAttachment: null,
-    hasIGUserTagFlip: false,
+    canAddUserTag: false,
   };
 
   onClick = () => {
@@ -33,10 +33,10 @@ class MediaAttachmentThumbnail extends React.Component {
       showTwitterImageDescription,
       composerPosition,
       draft,
-      hasIGUserTagFlip
+      canAddUserTag
     } = this.props;
 
-    if (hasIGUserTagFlip) {
+    if (canAddUserTag) {
       ModalActionCreators.openModal('InstagramUserTags', {
         media, draftId, composerPosition, userTags: draft.userTags,
       });
@@ -111,8 +111,8 @@ class MediaAttachmentThumbnail extends React.Component {
               src={escapeParens(thumbnail)}
               className={styles.thumbnailImage}
             />
-            {hasIGUserTagFlip &&
-              <div className={styles.userTagOverlay}>Tag Users</div>
+            {canAddUserTag &&
+              renderTagOption(userTagCount)
             }
             {isVideo &&
               <span className={videoThumbnailClass} aria-label="video attachment" />}
