@@ -1,13 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MediaTypes } from '@bufferapp/publish-constants';
+import PersonIcon from '@bufferapp/ui/Icon/Icons/Person';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import { Text } from '@bufferapp/ui';
+import styled from 'styled-components';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import AppActionCreators from '../action-creators/AppActionCreators';
-import CloseButton from '../components/CloseButton';
-import Button from '../components/Button';
+import CloseButton from './CloseButton';
+import Button from './Button';
 import { escapeParens } from '../utils/StringUtils';
 import styles from './css/MediaAttachmentThumbnail.css';
 import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
+
+const StyledIconWrapper = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledTagWrapper = styled.div`
+  position: absolute;
+  top: 63%;
+  left: 5%;
+  color: white;
+  display: flex;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: ${borderRadius};
+`;
+
+const renderTagOption = tagCount => (
+  <StyledTagWrapper>
+    <StyledIconWrapper>
+      <PersonIcon size="medium" />
+    </StyledIconWrapper>
+    <Text>
+      {tagCount || 'Tag'}
+    </Text>
+  </StyledTagWrapper>
+);
 
 class MediaAttachmentThumbnail extends React.Component {
   static propTypes = {
@@ -81,12 +113,15 @@ class MediaAttachmentThumbnail extends React.Component {
       className,
       showTwitterImageDescription,
       canEditVideoAttachment,
-      hasIGUserTagFlip,
+      canAddUserTag,
+      draft,
     } = this.props;
+
     const thumbnailClassName = [styles.thumbnail, className].join(' ');
     const isVideo = media.mediaType === MediaTypes.VIDEO;
     const isRegularImage = media.mediaType === MediaTypes.IMAGE;
     const thumbnail = isVideo ? media.thumbnail : media.url;
+    const userTagCount = draft.userTags ? draft.userTags.length : null;
 
     const videoThumbnailClass = canEditVideoAttachment ?
       `${styles.editableVideoThumbnail} bi bi-video` :
