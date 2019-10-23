@@ -4,6 +4,9 @@
   "description": "The publish web composer and its interfaces",
   "main": "index.js",
   "author": "pioul06+github@gmail.com",
+  "dependencies": {
+    "@bufferapp/publish-composer-user-tags": "2.0.0"
+  },
   "devDependencies": {
     "autoprefixer": "7.1.2",
     "autoprefixer-loader": "^3.2.0",
