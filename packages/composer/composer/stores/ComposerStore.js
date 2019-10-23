@@ -1820,7 +1820,8 @@ const updateInstagramDraftsFeedback = () => {
   if (hasSomeEnabledProfiles && hasSomeDisabledProfiles) {
     instagramDraft.instagramFeedback.push(getNewInstagramFeedbackObj({
       message: `Some of your accounts aren't enabled for Direct Scheduling,
-                we'll send out Reminders for those accounts.`,
+                we'll send out Reminders for those accounts. Not all features
+                are supported for reminders.`,
       composerId: 'instagram',
       code: 'NOT_ENABLED',
     }));
