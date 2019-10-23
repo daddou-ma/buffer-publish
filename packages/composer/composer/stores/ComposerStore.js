@@ -1820,7 +1820,8 @@ const updateInstagramDraftsFeedback = () => {
   if (hasSomeEnabledProfiles && hasSomeDisabledProfiles) {
     instagramDraft.instagramFeedback.push(getNewInstagramFeedbackObj({
       message: `Some of your accounts aren't enabled for Direct Scheduling,
-                we'll send out Reminders for those accounts.`,
+                we'll send out Reminders for those accounts. Not all features
+                are supported for reminders.`,
       composerId: 'instagram',
       code: 'NOT_ENABLED',
     }));
@@ -1871,6 +1872,10 @@ const onDispatchedPayload = (payload) => {
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT:
       state.drafts.forEach(draft => updateToggleComment(draft.id, action.commentEnabled));
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_USER_TAGS:
+      state.drafts.forEach(draft => updateDraftUserTags(draft.id, action.userTags));
       break;
 
     case ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR:
@@ -2000,7 +2005,7 @@ const onDispatchedPayload = (payload) => {
       removeDraftGif(action.id, action.gifUrl);
       break;
 
-    case ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAG:
+    case ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAGS:
       updateDraftUserTags(action.id, action.userTags);
       break;
 

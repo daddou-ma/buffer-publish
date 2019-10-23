@@ -236,7 +236,7 @@ class AppStateless extends React.Component {
             hasIGDirectFlip={userData.hasIGDirectFlip || false}
             hasIGLocationTaggingFeature={userData.hasIGLocationTaggingFeature || false}
             hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
-            hasIGUserTagFlip={userData.hasIGUserTagFlip || false}
+            hasAccessToUserTag={userData.hasAccessToUserTag || false}
             hasShopgridFlip={userData.hasShopgridFlip || false}
             hasHashtagGroupsFlip={userData.hasHashtagGroupsFlip || false}
             isFreeUser={userData.isFreeUser || false}

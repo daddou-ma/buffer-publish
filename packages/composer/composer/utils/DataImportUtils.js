@@ -163,12 +163,11 @@ const DataImportUtils = {
           shouldAlwaysSkipEmptyTextAlert: userData.skip_empty_text_alert,
           hasSimplifiedFreePlanUX: userData.has_simplified_free_plan_ux,
           hasIGLocationTaggingFeature: userData.hasIGLocationTaggingFeature,
-          canStartProTrial: userData.canStartProTrial,
           isOnProTrial: userData.isOnProTrial,
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
           hasHashtagGroupsFlip: hasFeature(userData.features, 'hashtag_groups'),
-          hasIGUserTagFlip: hasFeature(userData.features, 'instagram_user_tags'),
+          hasAccessToUserTag: userData.hasAccessToUserTag,
           profileGroups: userData.profile_groups ?
             userData.profile_groups.map((group) => ({
               name: group.name,

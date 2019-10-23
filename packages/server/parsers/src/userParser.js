@@ -4,6 +4,8 @@ const isOnBusinessPlan = trialPlan => ['business', 'agency', 'small', 'premium_b
   plan => plan === trialPlan,
 );
 
+const isOnEnterprisePlan = plan => ['enterprise'].some(enterprisePlan => plan === enterprisePlan);
+
 module.exports = userData => ({
   id: userData.id,
   email: userData.email,
@@ -89,4 +91,7 @@ module.exports = userData => ({
   showReturnToClassic: userData.has_np_app_switcher,
   helpScoutConfig: userData.helpscout_beacon_params,
   isBusinessTeamMember: userData.is_business_team_member,
+  hasAccessToUserTag: userData.features.includes('instagram_user_tags')
+    && (userData.is_pro_premium_or_business_org_user // this includes team members
+    || isOnEnterprisePlan(userData.plan)), // TO-DO: Add to api
 });

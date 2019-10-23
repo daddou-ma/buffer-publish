@@ -46,18 +46,6 @@
   width: auto;
 }
 
-.userTagOverlay {
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  color: white;
-  padding: 5px 0px;
-  background-color: black;
-  opacity: 0.7;
-}
-
 .imageContainer::after {
   content: "";
   position: absolute;

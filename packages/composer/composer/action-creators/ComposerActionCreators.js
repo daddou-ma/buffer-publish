@@ -398,7 +398,7 @@ const ComposerActionCreators = {
 
   updateDraftUserTags: (id, userTags) => {
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAG,
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAGS,
       id,
       userTags,
     });
