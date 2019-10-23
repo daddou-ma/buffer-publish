@@ -38,8 +38,13 @@ export const shouldShowWelcomeModalPaidUsers = () =>
 export const shouldShowInstagramDirectPostingModal = () =>
   getShowModalKey() === 'ig-direct-post-modal';
 
-export const shouldShowSwitchPlanModal = () =>
-  getShowModalKey().indexOf('upgrade-to-pro') === 0;
+export const shouldShowSwitchPlanModal = () => {
+  if (getShowModalKey().indexOf('upgrade-to-pro') === 0) return 'pro';
+  if (getShowModalKey().indexOf('upgrade-to-premium') === 0) return 'premium_business';
+  if (getShowModalKey().indexOf('upgrade-to-small') === 0) return 'small';
+
+  return null;
+};
 
 /**
  * Extracts a source from the modal key in the URL
