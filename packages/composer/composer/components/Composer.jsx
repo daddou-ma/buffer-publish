@@ -812,7 +812,7 @@ class Composer extends React.Component {
 
     const composerFooterClassName = usesImageFirstLayout ? styles.imageFirstFooter : styles.composerFooter;
 
-    const canAddUserTag = hasAccessToUserTag // on the user level
+    const canAddUserTag = hasAccessToUserTag // on the user level including feature flip
       && this.isInstagram()
       && draft.instagramFeedback.length < 1 // don't allow user to add tag if post is reminder
       && !appState.isOmniboxEnabled;

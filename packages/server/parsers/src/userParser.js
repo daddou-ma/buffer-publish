@@ -93,5 +93,5 @@ module.exports = userData => ({
   isBusinessTeamMember: userData.is_business_team_member,
   hasAccessToUserTag: userData.features.includes('instagram_user_tags')
     && (userData.is_pro_premium_or_business_org_user // this includes team members
-    || isOnEnterprisePlan(userData.plan)), // Add to api response
+    || isOnEnterprisePlan(userData.plan)), // TO-DO: Add to api
 });
