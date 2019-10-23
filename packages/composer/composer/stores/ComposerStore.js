@@ -1873,6 +1873,10 @@ const onDispatchedPayload = (payload) => {
       state.drafts.forEach(draft => updateToggleComment(draft.id, action.commentEnabled));
       break;
 
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_USER_TAGS:
+      state.drafts.forEach(draft => updateDraftUserTags(draft.id, action.userTags));
+      break;
+
     case ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR:
       updateToggleSidebarVisibility(action.id, action.composerSidebarVisible);
       break;
@@ -2000,7 +2004,7 @@ const onDispatchedPayload = (payload) => {
       removeDraftGif(action.id, action.gifUrl);
       break;
 
-    case ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAG:
+    case ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAGS:
       updateDraftUserTags(action.id, action.userTags);
       break;
 
