@@ -4,9 +4,6 @@ import { Text, Button } from '@bufferapp/ui';
 import { ArrowLeft, Cross, Person } from '@bufferapp/ui/Icon';
 import Input from '@bufferapp/ui/Input';
 
-// import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
-// import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-
 import {
   UserName,
   ButtonWrapper,
@@ -31,7 +28,7 @@ const calculateTagStyles = ({ tag, showTags }) => ({
   display: showTags ? 'block' : 'none',
 });
 
-const UserTags = ({ media, userTags = [] }) => {
+const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
   const initialCoordinateState = {
     x: null,
     y: null,
@@ -55,13 +52,6 @@ const UserTags = ({ media, userTags = [] }) => {
     setTags([...tags, userTag]);
     setInputValue('');
     setCoordinates(initialCoordinateState);
-  };
-
-  const saveGlobalTags = () => {
-    // ComposerActionCreators.updateDraftUserTags(draftId, tags);
-    // ModalActionCreators.closeModal();
-    // console.log('save tags');
-    // TODO: use passed in prop to send up
   };
 
   const removeTag = removedUserTag => {
@@ -101,8 +91,8 @@ const UserTags = ({ media, userTags = [] }) => {
   TagImageLabel.propTypes = {
     tag: PropTypes.shape({
       username: PropTypes.string,
-      x: PropTypes.number,
-      y: PropTypes.number,
+      x: PropTypes.string,
+      y: PropTypes.string,
     }).isRequired,
     index: PropTypes.number.isRequired,
   };
@@ -125,8 +115,8 @@ const UserTags = ({ media, userTags = [] }) => {
   TagListItem.propTypes = {
     tag: PropTypes.shape({
       username: PropTypes.string,
-      x: PropTypes.number,
-      y: PropTypes.number,
+      x: PropTypes.string,
+      y: PropTypes.string,
     }).isRequired,
     index: PropTypes.number.isRequired,
   };
@@ -141,7 +131,7 @@ const UserTags = ({ media, userTags = [] }) => {
         {tags && (
           <div>
             {tags.map((tag, index) => (
-              <TagImageLabel tag={tag} index={index} />
+              <TagImageLabel tag={tag} index={index} key={tag} />
             ))}
           </div>
         )}
@@ -177,7 +167,7 @@ const UserTags = ({ media, userTags = [] }) => {
           {tags && (
             <div>
               {tags.map((tag, index) => (
-                <TagListItem tag={tag} index={index} />
+                <TagListItem tag={tag} index={index} key={tag} />
               ))}
             </div>
           )}
@@ -185,7 +175,7 @@ const UserTags = ({ media, userTags = [] }) => {
             Note: The API only allows public users to be tagged and prevents
             autocomplete in usernames. // Move to translations
           </PlainText>
-          <Button onClick={saveGlobalTags} label="Save and Close" />
+          <Button onClick={() => saveGlobalTags(tags)} label="Save and Close" />
         </RightContent>
       </ModalInner>
     </Modal>
@@ -198,11 +188,14 @@ UserTags.propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
   }).isRequired,
-  userTags: PropTypes.arrayOf({
-    userName: PropTypes.string,
-    x: PropTypes.number,
-    y: PropTypes.number,
-  }),
+  userTags: PropTypes.arrayOf(
+    PropTypes.shape({
+      userName: PropTypes.string,
+      x: PropTypes.number,
+      y: PropTypes.number,
+    })
+  ),
+  saveGlobalTags: PropTypes.func.isRequired,
 };
 
 UserTags.defaultProps = {
