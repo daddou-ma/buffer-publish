@@ -5,65 +5,116 @@ import {
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actionTypes } from './reducer';
+import countHashtagsInText from './utils/HashtagCounter';
 
 const refreshHashtagGroups = (dispatch, organizationId) => {
   if (organizationId) {
-    dispatch(dataFetchActions.fetch({
-      name: 'getHashtagGroups',
-      args: {
-        organizationId,
-      },
-    }));
+    dispatch(
+      dataFetchActions.fetch({
+        name: 'getHashtagGroups',
+        args: {
+          organizationId,
+        },
+      })
+    );
   }
 };
 
-export default ({ getState, dispatch }) => next => (action) => {
+const getTrackingMetadataFromStoryGroup = (name, text) => {
+  return {
+    hashtagGroupName: name,
+    hashtagCount: countHashtagsInText(text),
+    product: 'publish',
+  };
+};
+
+export default ({ getState, dispatch }) => next => action => {
   next(action);
   const { organizationId } = getState().profileSidebar.selectedProfile;
   switch (action.type) {
-    case actionTypes.SAVE_HASHTAG_GROUP:
+    case actionTypes.SAVE_HASHTAG_GROUP: {
       const { name, text } = getState().hashtagGroups;
-      dispatch(dataFetchActions.fetch({
-        name: 'createHashtagGroup',
-        args: {
-          organizationId,
-          name,
-          text,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'createHashtagGroup',
+          args: {
+            organizationId,
+            name,
+            text,
+          },
+        })
+      );
       break;
+    }
     case actionTypes.DELETE_HASHTAG_GROUP:
-      dispatch(dataFetchActions.fetch({
-        name: 'deleteHashtagGroup',
-        args: {
-          organizationId,
-          snippetId: action.groupId,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'deleteHashtagGroup',
+          args: {
+            organizationId,
+            snippetId: action.groupId,
+          },
+        })
+      );
+
+      dispatch(
+        analyticsActions.trackEvent(
+          'Hashtag Group Deleted',
+          getTrackingMetadataFromStoryGroup(action.name, action.text)
+        )
+      );
       break;
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(notificationActions.createNotification({
-        notificationType: 'error',
-        message: action.error,
-      }));
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'error',
+          message: action.error,
+        })
+      );
       break;
     case `deleteHashtagGroup_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(notificationActions.createNotification({
-        notificationType: 'error',
-        message: action.error,
-      }));
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'error',
+          message: action.error,
+        })
+      );
       refreshHashtagGroups(dispatch, organizationId);
       break;
     case profileSidebarActionTypes.SELECT_PROFILE:
       refreshHashtagGroups(dispatch, organizationId);
       break;
     case actionTypes.INSERT_HASHTAG_GROUP:
-      trackAction({ location: 'hashtagManager', action: 'hashtag_inserted', metadata: { organizationId } });
+      trackAction({
+        location: 'hashtagManager',
+        action: 'hashtag_inserted',
+        metadata: { organizationId },
+      });
+
+      dispatch(
+        analyticsActions.trackEvent(
+          'Hashtag Group Inserted',
+          getTrackingMetadataFromStoryGroup(action.name, action.text)
+        )
+      );
       break;
-    case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      trackAction({ location: 'hashtagManager', action: 'hashtag_created', metadata: { organizationId } });
+    case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      trackAction({
+        location: 'hashtagManager',
+        action: 'hashtag_created',
+        metadata: { organizationId },
+      });
+
+      dispatch(
+        analyticsActions.trackEvent(
+          'Hashtag Group Created',
+          getTrackingMetadataFromStoryGroup(action.args.name, action.args.text)
+        )
+      );
       break;
+    }
     default:
       break;
   }

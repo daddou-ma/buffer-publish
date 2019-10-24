@@ -17,7 +17,7 @@ const MANAGE_MODE = 'manageHashtag';
  * Wrapper to make sure to display group creator or manager
  */
 class HashtagGroupWrapper extends React.Component {
-  constructor () {
+  constructor() {
     super();
 
     this.state = {
@@ -37,8 +37,8 @@ class HashtagGroupWrapper extends React.Component {
     this.props.onCancelHashtagGroup();
   }
 
-  onDeleteHashtagGroupClick(groupId) {
-    this.props.onDeleteHashtagGroup(groupId);
+  onDeleteHashtagGroupClick(name, text, groupId) {
+    this.props.onDeleteHashtagGroup(name, text, groupId);
   }
 
   render() {
@@ -55,24 +55,24 @@ class HashtagGroupWrapper extends React.Component {
 
     return (
       <div style={boxStyle}>
-        {viewMode === CREATE_MODE &&
-        <HashtagGroupCreator
-          name={name}
-          text={text}
-          onChangeGroupName={onChangeGroupName}
-          onChangeGroupText={onChangeGroupText}
-          onSaveHashtagGroup={onSaveHashtagGroup}
-          onCancelHashtagGroup={() => this.onSwitchMode(MANAGE_MODE)}
-        />
-        }
-        {viewMode === MANAGE_MODE &&
-        <HashtagGroupManager
-          hashtagGroups={hashtagGroups}
-          onCreateHashtagGroup={() => this.onSwitchMode(CREATE_MODE)}
-          onInsertHashtagGroupClick={onHandleInsertHashtagGroupClick}
-          onDeleteHashtagGroupClick={groupId => this.onDeleteHashtagGroupClick(groupId)}
-        />
-        }
+        {viewMode === CREATE_MODE && (
+          <HashtagGroupCreator
+            name={name}
+            text={text}
+            onChangeGroupName={onChangeGroupName}
+            onChangeGroupText={onChangeGroupText}
+            onSaveHashtagGroup={onSaveHashtagGroup}
+            onCancelHashtagGroup={() => this.onSwitchMode(MANAGE_MODE)}
+          />
+        )}
+        {viewMode === MANAGE_MODE && (
+          <HashtagGroupManager
+            hashtagGroups={hashtagGroups}
+            onCreateHashtagGroup={() => this.onSwitchMode(CREATE_MODE)}
+            onInsertHashtagGroupClick={onHandleInsertHashtagGroupClick}
+            onDeleteHashtagGroupClick={this.onDeleteHashtagGroupClick}
+          />
+        )}
       </div>
     );
   }
@@ -94,13 +94,15 @@ HashtagGroupWrapper.propTypes = {
       name: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       id: PropTypes.string,
-    }),
+    })
   ).isRequired,
-  profiles: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    canPostComment: PropTypes.bool,
-    isSelected: PropTypes.bool,
-  })),
+  profiles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      canPostComment: PropTypes.bool,
+      isSelected: PropTypes.bool,
+    })
+  ),
 };
 
 HashtagGroupWrapper.defaultProps = {

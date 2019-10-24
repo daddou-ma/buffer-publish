@@ -11,5 +11,4 @@ const countHashtagsInText = (text) => {
   return counter;
 };
 
-
 export default countHashtagsInText;
