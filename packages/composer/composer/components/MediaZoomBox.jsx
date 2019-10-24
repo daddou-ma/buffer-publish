@@ -19,7 +19,12 @@ class MediaZoomBox extends React.Component {
   };
 
   render() {
-    const { media, draftId, showTwitterImageDescription, composerPosition } = this.props;
+    const {
+      media,
+      draftId,
+      showTwitterImageDescription,
+      composerPosition,
+    } = this.props;
 
     const modalClassNames = {
       modal: styles.modalStyles,
@@ -31,23 +36,36 @@ class MediaZoomBox extends React.Component {
     };
 
     return (
-      <Modal classNames={modalClassNames} modalCustumStyle={modalDynamicStyles}>
-        {media.mediaType === MediaTypes.GIF &&
+      <Modal classNames={modalClassNames} modalCustomStyle={modalDynamicStyles}>
+        {media.mediaType === MediaTypes.GIF && (
           <div className={styles.mediaContainer}>
             <img className={styles.media} alt="" src={media.url} />
-          </div>}
-        {media.mediaType === MediaTypes.IMAGE &&
-          <div className={styles.mediaContainer}>
-            <img className={styles.media} alt="" src={media.url} />
-            {showTwitterImageDescription &&
-              <ImageDescriptionInput draftId={draftId} mediaAttachment={media} />}
-          </div>}
-        {media.mediaType === MediaTypes.VIDEO &&
-          <div className={styles.mediaContainer}>
-            <video className={styles.media} poster={media.thumbnail} controls src={media.url} />
-            <div className={styles.fileSize}>{getHumanReadableSize(media.size)}</div>
           </div>
-        }
+        )}
+        {media.mediaType === MediaTypes.IMAGE && (
+          <div className={styles.mediaContainer}>
+            <img className={styles.media} alt="" src={media.url} />
+            {showTwitterImageDescription && (
+              <ImageDescriptionInput
+                draftId={draftId}
+                mediaAttachment={media}
+              />
+            )}
+          </div>
+        )}
+        {media.mediaType === MediaTypes.VIDEO && (
+          <div className={styles.mediaContainer}>
+            <video
+              className={styles.media}
+              poster={media.thumbnail}
+              controls
+              src={media.url}
+            />
+            <div className={styles.fileSize}>
+              {getHumanReadableSize(media.size)}
+            </div>
+          </div>
+        )}
       </Modal>
     );
   }
