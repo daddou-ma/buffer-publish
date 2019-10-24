@@ -1,7 +1,5 @@
 import keyWrapper from '@bufferapp/keywrapper';
-import {
-  actionTypes as dataFetchActionTypes,
-} from '@bufferapp/async-data-fetch';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('HASHTAG_GROUP_MANAGER', {
   CANCEL_HASHTAG_GROUP: 0,
@@ -67,7 +65,6 @@ export default (state = initialState, action) => {
   }
 };
 
-
 export const actions = {
   handleCancelHashtagGroupClick: () => ({
     type: actionTypes.CANCEL_HASHTAG_GROUP,
@@ -75,11 +72,15 @@ export const actions = {
   handleSaveHashtagGroupClick: () => ({
     type: actionTypes.SAVE_HASHTAG_GROUP,
   }),
-  handleInsertHashtagGroupClick: () => ({
+  handleInsertHashtagGroupClick: ({ name, text }) => ({
     type: actionTypes.INSERT_HASHTAG_GROUP,
+    name,
+    text,
   }),
-  handleDeleteHashtagGroup: ({ groupId }) => ({
+  handleDeleteHashtagGroup: ({ name, text, groupId }) => ({
     type: actionTypes.DELETE_HASHTAG_GROUP,
+    name,
+    text,
     groupId,
   }),
   handleChangeGroupName: ({ name }) => ({

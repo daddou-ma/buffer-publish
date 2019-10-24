@@ -57,7 +57,7 @@ const getItemWrapperStyle = ({ state }) => {
 class HashtagGroupItem extends Component {
   state = {
     hover: false,
-  }
+  };
 
   render() {
     const {
@@ -77,16 +77,15 @@ class HashtagGroupItem extends Component {
           style={getItemWrapperStyle({ state: this.state })}
         >
           <div style={{ flex: '1', overflow: 'hidden' }}>
-            <Tooltip
-              label={hashtags}
-              position="top"
-            >
+            <Tooltip label={hashtags} position="top">
               <div style={{ display: 'flex' }}>
                 <span style={nameWrapperStyles}>
                   <Text type="label">{name}</Text>
                 </span>
                 <span style={counterWrapperStyles}>
-                  <Text type="label" color="gray">{numberOfHashtags}</Text>
+                  <Text type="label" color="gray">
+                    {numberOfHashtags}
+                  </Text>
                 </span>
               </div>
               <div style={getHashtagsStyles(this.state.hover)}>
@@ -94,7 +93,7 @@ class HashtagGroupItem extends Component {
               </div>
             </Tooltip>
           </div>
-          {this.state.hover &&
+          {this.state.hover && (
             <div style={buttonWrapperStyle}>
               <Button
                 type="primary"
@@ -112,7 +111,8 @@ class HashtagGroupItem extends Component {
                     id: 'deleteHashtagGroup',
                     title: 'Delete Group',
                     icon: <TrashIcon color="gray" />,
-                    onItemClick: () => onDeleteHashtagGroupClick(snippetId),
+                    onItemClick: () =>
+                      onDeleteHashtagGroupClick(name, hashtags, snippetId),
                   },
                 ]}
                 hasIconOnly
@@ -121,16 +121,12 @@ class HashtagGroupItem extends Component {
                 hideSearch
               />
             </div>
-          }
+          )}
         </div>
-        <Divider
-          marginTop={'0'}
-          marginBottom={'0'}
-        />
+        <Divider marginTop={'0'} marginBottom={'0'} />
       </Fragment>
     );
   }
-
 }
 
 HashtagGroupItem.propTypes = {
@@ -141,9 +137,6 @@ HashtagGroupItem.propTypes = {
   hashtags: PropTypes.string.isRequired,
 };
 
-HashtagGroupItem.defaultProps = {
-
-};
-
+HashtagGroupItem.defaultProps = {};
 
 export default HashtagGroupItem;

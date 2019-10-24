@@ -14,28 +14,18 @@ const HashtagGroupList = ({
   onInsertHashtagGroupClick,
   onDeleteHashtagGroupClick,
 }) => {
-  const children = hashtagGroups.map(
-    ({
-      name,
-      text,
-      _id,
-    }) => (
-      <HashtagGroupItem
-        key={_id}
-        snippetId={_id}
-        name={name}
-        numberOfHashtags={countHashtagsInText(text).toString()}
-        hashtags={text}
-        onInsertHashtagGroupClick={() => onInsertHashtagGroupClick(text)}
-        onDeleteHashtagGroupClick={onDeleteHashtagGroupClick}
-      />
-    ),
-  );
-  return (
-    <div style={contentStyle}>
-      {children}
-    </div>
-  );
+  const children = hashtagGroups.map(({ name, text, _id }) => (
+    <HashtagGroupItem
+      key={_id}
+      snippetId={_id}
+      name={name}
+      numberOfHashtags={countHashtagsInText(text).toString()}
+      hashtags={text}
+      onInsertHashtagGroupClick={() => onInsertHashtagGroupClick(name, text)}
+      onDeleteHashtagGroupClick={onDeleteHashtagGroupClick}
+    />
+  ));
+  return <div style={contentStyle}>{children}</div>;
 };
 
 HashtagGroupList.propTypes = {
@@ -44,7 +34,7 @@ HashtagGroupList.propTypes = {
       name: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       _id: PropTypes.string,
-    }),
+    })
   ).isRequired,
   onDeleteHashtagGroupClick: PropTypes.func.isRequired,
   onInsertHashtagGroupClick: PropTypes.func.isRequired,

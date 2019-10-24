@@ -16,28 +16,36 @@ export default connect(
     onSaveHashtagGroup: () => {
       dispatch(actions.handleSaveHashtagGroupClick());
     },
-    onDeleteHashtagGroup: (groupId) => {
-      dispatch(actions.handleDeleteHashtagGroup({
-        groupId,
-      }));
+    onDeleteHashtagGroup: (name, text, groupId) => {
+      dispatch(
+        actions.handleDeleteHashtagGroup({
+          name,
+          text,
+          groupId,
+        })
+      );
     },
-    onChangeGroupName: (name) => {
-      dispatch(actions.handleChangeGroupName({
-        name,
-      }));
+    onChangeGroupName: name => {
+      dispatch(
+        actions.handleChangeGroupName({
+          name,
+        })
+      );
     },
-    onChangeGroupText: (text) => {
-      dispatch(actions.handleChangeGroupText({
-        text,
-      }));
+    onChangeGroupText: text => {
+      dispatch(
+        actions.handleChangeGroupText({
+          text,
+        })
+      );
     },
-    onHandleInsertHashtagGroupClick: (text) => {
+    onHandleInsertHashtagGroupClick: (name, text) => {
       if (ownProps.onInsertHashtagGroupClick) {
         ownProps.onInsertHashtagGroupClick(text);
       }
-      dispatch(actions.handleInsertHashtagGroupClick());
+      dispatch(actions.handleInsertHashtagGroupClick({ name, text }));
     },
-  }),
+  })
 )(HashtagGroupWrapper);
 
 export reducer, { actions, actionTypes } from './reducer';
