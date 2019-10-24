@@ -70,7 +70,7 @@ class MediaAttachmentThumbnail extends React.Component {
 
     if (canAddUserTag) {
       ModalActionCreators.openModal('InstagramUserTags', {
-        media, draftId, composerPosition, userTags: draft.userTags,
+        media, draftId, composerPosition, userTags: draft && draft.userTags,
       });
     } else {
       ModalActionCreators.openModal('MediaZoomBox', {
