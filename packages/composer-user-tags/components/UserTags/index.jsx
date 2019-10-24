@@ -87,7 +87,10 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
   const onTogglePersonIcon = () => setShowTags(!showTags);
 
   const TagImageLabel = ({ tag }) => (
-    <div key={uniqKey(tag)} style={calculateTagStyles({ tag, showTags })}>
+    <div
+      key={uniqKey(tag.username)}
+      style={calculateTagStyles({ tag, showTags })}
+    >
       {tag.username}
     </div>
   );
@@ -100,7 +103,7 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
   };
 
   const TagListItem = ({ tag }) => (
-    <UserName key={uniqKey(tag)}>
+    <UserName key={uniqKey(tag.username)}>
       <button
         type="button"
         onClick={() => {
@@ -131,7 +134,11 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
         {tags && (
           <div>
             {tags.map((tag, index) => (
-              <TagImageLabel tag={tag} index={index} key={uniqKey(tag)} />
+              <TagImageLabel
+                tag={tag}
+                index={index}
+                key={uniqKey(tag.username)}
+              />
             ))}
           </div>
         )}
@@ -167,7 +174,11 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
           {tags && (
             <div>
               {tags.map((tag, index) => (
-                <TagListItem tag={tag} index={index} key={uniqKey(tag)} />
+                <TagListItem
+                  tag={tag}
+                  index={index}
+                  key={uniqKey(tag.username)}
+                />
               ))}
             </div>
           )}
@@ -190,7 +201,7 @@ UserTags.propTypes = {
   }).isRequired,
   userTags: PropTypes.arrayOf(
     PropTypes.shape({
-      userName: PropTypes.string,
+      username: PropTypes.string,
       x: PropTypes.number,
       y: PropTypes.number,
     })
