@@ -1875,7 +1875,7 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_USER_TAGS:
-      state.drafts.forEach(draft => updateDraftUserTags(draft.id, action.userTags));
+      state.drafts.forEach(draft => updateDraftUserTags(draft.id, action && action.userTags));
       break;
 
     case ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR:
@@ -2006,7 +2006,7 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAGS:
-      updateDraftUserTags(action.id, action.userTags);
+      updateDraftUserTags(action.id, action && action.userTags);
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_TEMP_IMAGE:

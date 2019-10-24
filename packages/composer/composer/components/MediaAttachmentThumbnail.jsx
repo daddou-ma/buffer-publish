@@ -121,7 +121,7 @@ class MediaAttachmentThumbnail extends React.Component {
     const isVideo = media.mediaType === MediaTypes.VIDEO;
     const isRegularImage = media.mediaType === MediaTypes.IMAGE;
     const thumbnail = isVideo ? media.thumbnail : media.url;
-    const userTagCount = draft.userTags ? draft.userTags.length : null;
+    const userTagCount = draft && draft.userTags ? draft.userTags.length : null;
 
     const videoThumbnailClass = canEditVideoAttachment ?
       `${styles.editableVideoThumbnail} bi bi-video` :
