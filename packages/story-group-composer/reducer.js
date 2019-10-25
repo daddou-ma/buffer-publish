@@ -344,11 +344,19 @@ export default (state, action) => {
       return {
         ...state,
         errors: [],
+        processedErrors: [],
       };
     case actionTypes.SHOW_ERRORS:
+      if (action.uploadId !== null && state.processedErrors.includes(action.uploadId)) {
+        return state;
+      }
       return {
         ...state,
-        errors: [...state.errors, action.message],
+        errors: [
+          ...state.errors,
+          action.message,
+        ].filter((value, index, self) => self.indexOf(value) === index),
+        processedErrors: [...state.processedErrors, action.uploadId],
       };
     default:
       return state;
@@ -494,9 +502,10 @@ export const actions = {
     type: actionTypes.DELETE_STORY,
     story,
   }),
-  showError: ({ message }) => ({
+  showError: ({ message, uploadId = null }) => ({
     type: actionTypes.SHOW_ERRORS,
     message,
+    uploadId,
   }),
   hideError: () => ({
     type: actionTypes.HIDE_ERRORS,

@@ -46,7 +46,7 @@ const CarouselCardCongrats = styled.span`
 
 const ErrorHandler = ({ errorMessages }) => {
   if (!errorMessages) return null;
-  return errorMessages && errorMessages.map(err => <ErrorMessage key={`${err}`}>{err}</ErrorMessage>);
+  return errorMessages && errorMessages.map(({ message: err }) => <ErrorMessage key={`${err}`}>{err}</ErrorMessage>);
 };
 
 /*
