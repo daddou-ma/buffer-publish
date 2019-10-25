@@ -78,8 +78,8 @@ class Modal extends React.Component {
     const node = ev.target;
 
     if (node.id === 'overlay') {
-      const { hideCloseButton } = this.props;
-      if (hideCloseButton) {
+      const { preventCloseOnOverlayClick } = this.props;
+      if (preventCloseOnOverlayClick) {
         return;
       }
       ActionCreators.closeModal(OVERLAY);
@@ -160,6 +160,7 @@ class Modal extends React.Component {
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
   hideCloseButton: PropTypes.bool,
+  preventCloseOnOverlayClick: PropTypes.bool,
   classNames: PropTypes.shape({
     modal: PropTypes.string,
     closeButton: PropTypes.string,
@@ -169,6 +170,7 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   hideCloseButton: false,
+  preventCloseOnOverlayClick: false,
 };
 
 module.exports = Modal;

@@ -16,7 +16,11 @@ const InstagramUserTags = ({ media, draftId, userTags = [] }) => {
     ModalActionCreators.closeModal();
   };
   return (
-    <Modal classNames={modalClassNames} hideCloseButton>
+    <Modal
+      classNames={modalClassNames}
+      hideCloseButton
+      preventCloseOnOverlayClick
+    >
       <UserTags
         media={media}
         userTags={userTags}
