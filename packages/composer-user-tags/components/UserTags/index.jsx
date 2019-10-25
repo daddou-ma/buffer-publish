@@ -157,6 +157,17 @@ UserTags.propTypes = {
     })
   ),
   saveGlobalTags: PropTypes.func.isRequired,
+  translations: PropTypes.shape({
+    rightHeader: PropTypes.string,
+    rightHeaderSubtext: PropTypes.string,
+    placeholder: PropTypes.string,
+    inputLabel: PropTypes.string,
+    inputBtnLabel: PropTypes.string,
+    footerText: PropTypes.string,
+    maxLimitText: PropTypes.string,
+    btnSave: PropTypes.string,
+    btnClose: PropTypes.string,
+  }).isRequired,
 };
 
 UserTags.defaultProps = {

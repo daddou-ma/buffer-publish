@@ -397,5 +397,16 @@
     "reminderText3": "to your mobile device.",
     "mobileTagText": "Uh-oh! Looks like you might not have the latest version of the Buffer mobile app. Download it now to start using Stories!",
     "bannerMobileTagText": "Hmm...looks like you might not have the latest version of the Buffer mobile app. Download it now so that you can share this Story!"
+  },
+  "user-tags": {
+    "rightHeader": "Tag Users",
+    "rightHeaderSubtext": "Click anywhere on the photo to tag a public user.",
+    "placeholder": "username",
+    "inputLabel": "Instagram User",
+    "inputBtnLabel": "Add Tag",
+    "footerText": "Instagram API limitations prevent searching for usernames and tagging private users.",
+    "maxLimitText": "You've reached the 20 tag limit.",
+    "btnSave": "Save and Close",
+    "btnClose": "Close"
   }
 }
