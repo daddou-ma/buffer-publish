@@ -4,13 +4,11 @@ export const ButtonWrapper = styled.div`
   margin: auto 0px 10px 5px;
 `;
 
-export const StyledLabel = styled.label`
+export const StyledLabel = styled.span`
   position: absolute;
-  left: 10px;
-  font-weight: bold;
-  font-size: 0.8em;
-  color: #444;
-  top: 9px;
+  display: block;
+  top: 167px;
+  margin-left: 5px;
 `;
 
 export const MaxCount = styled.span`

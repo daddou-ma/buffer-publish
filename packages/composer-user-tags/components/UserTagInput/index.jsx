@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
 import Input from '@bufferapp/ui/Input';
 
-import { ButtonWrapper, StyledLabel, MaxCount } from './style';
+import { ButtonWrapper, MaxCount } from './style';
 
 const UserTagInput = ({
   translations,
@@ -32,7 +32,6 @@ const UserTagInput = ({
         name="tagInput"
         label={translations.inputLabel}
       />
-      <StyledLabel>@</StyledLabel>
       <ButtonWrapper>
         <Button
           type="primary"
