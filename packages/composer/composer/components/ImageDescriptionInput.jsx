@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@bufferapp/ui';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
+import ModalActionCreators from '../shared-components/modal/actionCreators';
 import Input from '../components/Input';
 import CharacterCount from './CharacterCount';
 import styles from './css/ImageDescriptionInput.css';
@@ -22,16 +22,19 @@ class ImageDescriptionInput extends React.Component {
     };
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       altText: e.target.value,
       saveButtonText: 'Save',
       count: e.target.value.length,
     });
-  }
+  };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.saveButtonText === 'Save' && this.state.saveButtonText === 'Saved!') {
+    if (
+      prevState.saveButtonText === 'Save' &&
+      this.state.saveButtonText === 'Saved!'
+    ) {
       setTimeout(() => {
         ModalActionCreators.closeModal();
       }, 800);
@@ -39,9 +42,12 @@ class ImageDescriptionInput extends React.Component {
   };
 
   onClick = () => {
-    ComposerActionCreators.updateImageAltText(this.props.mediaAttachment, this.state.altText);
+    ComposerActionCreators.updateImageAltText(
+      this.props.mediaAttachment,
+      this.state.altText
+    );
     this.setState({ saveButtonText: 'Saved!' });
-  }
+  };
 
   render() {
     return (
@@ -53,7 +59,11 @@ class ImageDescriptionInput extends React.Component {
           value={this.state.altText}
           onChange={this.handleChange}
         />
-        <CharacterCount count={this.state.count} maxCount={420} className={styles.charCount} />
+        <CharacterCount
+          count={this.state.count}
+          maxCount={420}
+          className={styles.charCount}
+        />
         <div className={styles.button}>
           <Button
             type="primary"

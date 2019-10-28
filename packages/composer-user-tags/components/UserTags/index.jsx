@@ -28,6 +28,9 @@ const calculateTagStyles = ({ tag, showTags }) => ({
   display: showTags ? 'block' : 'none',
 });
 
+/** React is most efficient with unique keys for items. Quick method to create them based on a given string. */
+const uniqKey = identifier => `${identifier}-${new Date().getTime()}`;
+
 const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
   const initialCoordinateState = {
     x: null,
@@ -83,8 +86,11 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
 
   const onTogglePersonIcon = () => setShowTags(!showTags);
 
-  const TagImageLabel = ({ tag, index }) => (
-    <div key={index} style={calculateTagStyles({ tag, showTags })}>
+  const TagImageLabel = ({ tag }) => (
+    <div
+      key={uniqKey(tag.username)}
+      style={calculateTagStyles({ tag, showTags })}
+    >
       {tag.username}
     </div>
   );
@@ -94,12 +100,10 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
       x: PropTypes.string,
       y: PropTypes.string,
     }).isRequired,
-    index: PropTypes.number.isRequired,
   };
 
-  // TO-DO: refactor to be more a11y friendly
-  const TagListItem = ({ tag, index }) => (
-    <UserName key={index}>
+  const TagListItem = ({ tag }) => (
+    <UserName key={uniqKey(tag.username)}>
       <button
         type="button"
         onClick={() => {
@@ -118,7 +122,6 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
       x: PropTypes.string,
       y: PropTypes.string,
     }).isRequired,
-    index: PropTypes.number.isRequired,
   };
 
   return (
@@ -131,7 +134,11 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
         {tags && (
           <div>
             {tags.map((tag, index) => (
-              <TagImageLabel tag={tag} index={index} key={tag} />
+              <TagImageLabel
+                tag={tag}
+                index={index}
+                key={uniqKey(tag.username)}
+              />
             ))}
           </div>
         )}
@@ -167,7 +174,11 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
           {tags && (
             <div>
               {tags.map((tag, index) => (
-                <TagListItem tag={tag} index={index} key={tag} />
+                <TagListItem
+                  tag={tag}
+                  index={index}
+                  key={uniqKey(tag.username)}
+                />
               ))}
             </div>
           )}
@@ -190,7 +201,7 @@ UserTags.propTypes = {
   }).isRequired,
   userTags: PropTypes.arrayOf(
     PropTypes.shape({
-      userName: PropTypes.string,
+      username: PropTypes.string,
       x: PropTypes.number,
       y: PropTypes.number,
     })

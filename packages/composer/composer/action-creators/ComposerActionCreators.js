@@ -9,11 +9,10 @@ import Uploader from '@bufferapp/publish-upload-zone/utils/Uploader';
 import NotificationActionCreators from './NotificationActionCreators';
 import AppActionCreators from './AppActionCreators';
 import { getFileTypeFromPath } from '../utils/StringUtils';
-import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
+import ModalActionCreators from '../shared-components/modal/actionCreators';
 import ServerActionCreators from './ServerActionCreators';
 
 const ComposerActionCreators = {
-
   enable: (id, markAppAsLoadedWhenDone = false) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_ENABLE,
@@ -22,21 +21,21 @@ const ComposerActionCreators = {
     });
   },
 
-  disable: (id) => {
+  disable: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_DISABLE,
       id,
     });
   },
 
-  expand: (id) => {
+  expand: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_EXPAND,
       id,
     });
   },
 
-  collapse: (id) => {
+  collapse: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_COLLAPSE,
       id,
@@ -51,7 +50,7 @@ const ComposerActionCreators = {
     });
   },
 
-  updateDraftIsSaved: (id) => {
+  updateDraftIsSaved: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.UPDATE_DRAFT_IS_SAVED,
       id,
@@ -93,18 +92,18 @@ const ComposerActionCreators = {
 
       currentCanonicalUrl = canonicalUrl;
 
-      Scraper.scrape(canonicalUrl, environment)
-        .then((scrapedData) => {
-          const doesScrapedDataStillMatchSourceUrl = currentCanonicalUrl === canonicalUrl;
-          if (!doesScrapedDataStillMatchSourceUrl) return;
+      Scraper.scrape(canonicalUrl, environment).then(scrapedData => {
+        const doesScrapedDataStillMatchSourceUrl =
+          currentCanonicalUrl === canonicalUrl;
+        if (!doesScrapedDataStillMatchSourceUrl) return;
 
-          const linkData = Object.assign({}, scrapedData, { url });
-          AppDispatcher.handleViewAction({
-            actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK_DATA,
-            id,
-            linkData,
-          });
+        const linkData = Object.assign({}, scrapedData, { url });
+        AppDispatcher.handleViewAction({
+          actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK_DATA,
+          id,
+          linkData,
         });
+      });
     };
   })(),
 
@@ -116,7 +115,10 @@ const ComposerActionCreators = {
     });
   },
 
-  updateDraftCommentCharacterCount: (id, { didEditorStateChange = true } = {}) => {
+  updateDraftCommentCharacterCount: (
+    id,
+    { didEditorStateChange = true } = {}
+  ) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_COMMENT_CHARACTER_COUNT,
       id,
@@ -160,10 +162,14 @@ const ComposerActionCreators = {
     });
 
     const toggleAction = commentEnabled ? 'enabled' : 'disabled';
-    AppActionCreators.trackUserAction(['composer', 'toggle_comment', toggleAction]);
+    AppActionCreators.trackUserAction([
+      'composer',
+      'toggle_comment',
+      toggleAction,
+    ]);
   },
 
-  parseDraftTextLinks: (id) => {
+  parseDraftTextLinks: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_PARSE_DRAFT_TEXT_LINKS,
       id,
@@ -229,13 +235,13 @@ const ComposerActionCreators = {
     const canonicalUrl = ComposerStore.getCanonicalUrl(url);
 
     Scraper.scrape(canonicalUrl, environment)
-      .then((scrapedData) => ({
+      .then(scrapedData => ({
         url,
         title: scrapedData.title || '',
         description: scrapedData.description || '',
         availableThumbnails: scrapedData.images || [],
       }))
-      .then((linkData) => {
+      .then(linkData => {
         AppDispatcher.handleViewAction({
           actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_LINK_DATA,
           id,
@@ -248,14 +254,14 @@ const ComposerActionCreators = {
       });
   },
 
-  selectNextLinkThumbnail: (draftId) => {
+  selectNextLinkThumbnail: draftId => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_NEXT_LINK_THUMBNAIL,
       draftId,
     });
   },
 
-  selectPreviousLinkThumbnail: (draftId) => {
+  selectPreviousLinkThumbnail: draftId => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_PREVIOUS_LINK_THUMBNAIL,
       draftId,
@@ -271,31 +277,33 @@ const ComposerActionCreators = {
     let profiles = [];
     if (draft.service.isOmni) {
       const enabledDrafts = ComposerStore.getEnabledDrafts();
-      profiles = enabledDrafts.length > 0 ?
-      AppStore.getSelectedProfilesForService(enabledDrafts[0].service.name) :
-      AppStore.getProfiles();
+      profiles =
+        enabledDrafts.length > 0
+          ? AppStore.getSelectedProfilesForService(
+              enabledDrafts[0].service.name
+            )
+          : AppStore.getProfiles();
     } else {
-      profiles = draft.isEnabled ?
-      AppStore.getSelectedProfilesForService(draft.service.name) :
-      [];
+      profiles = draft.isEnabled
+        ? AppStore.getSelectedProfilesForService(draft.service.name)
+        : [];
     }
 
     if (profiles.length <= 0) return;
     const profileId = profiles[0].id;
 
-    Shortener.shorten(profileId, url)
-      .then((shortLink) => {
-        // Don't create action when no new shortlink generated (can happen when url is already
-        // a short link, or when link shortening is disabled for that profile)
-        if (url === shortLink) return;
+    Shortener.shorten(profileId, url).then(shortLink => {
+      // Don't create action when no new shortlink generated (can happen when url is already
+      // a short link, or when link shortening is disabled for that profile)
+      if (url === shortLink) return;
 
-        AppDispatcher.handleViewAction({
-          actionType: ActionTypes.COMPOSER_DRAFT_LINK_SHORTENED,
-          id,
-          link: url,
-          shortLink,
-        });
+      AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_DRAFT_LINK_SHORTENED,
+        id,
+        link: url,
+        shortLink,
       });
+    });
   },
 
   draftTextLinkUnshortened: (id, unshortenedLink) => {
@@ -328,17 +336,16 @@ const ComposerActionCreators = {
     const { environment } = AppStore.getMetaData();
     const canonicalUrl = ComposerStore.getCanonicalUrl(url);
 
-    Scraper.scrape(canonicalUrl, environment)
-      .then(({ images = [] }) => {
-        if (images.length === 0) return;
+    Scraper.scrape(canonicalUrl, environment).then(({ images = [] }) => {
+      if (images.length === 0) return;
 
-        AppDispatcher.handleViewAction({
-          actionType: ActionTypes.COMPOSER_ADD_DRAFT_AVAILABLE_IMAGES,
-          id,
-          images,
-          sourceLink: url,
-        });
+      AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_ADD_DRAFT_AVAILABLE_IMAGES,
+        id,
+        images,
+        sourceLink: url,
       });
+    });
   },
 
   removeDraftLinkAvailableImages: (id, sourceLink) => {
@@ -357,7 +364,7 @@ const ComposerActionCreators = {
     });
   },
 
-  attachmentToggled: (id) => {
+  attachmentToggled: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_DRAFT_ATTACHMENT_TOGGLED,
       id,
@@ -452,14 +459,14 @@ const ComposerActionCreators = {
     });
   },
 
-  removeDraftVideo: (id) => {
+  removeDraftVideo: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_REMOVE_DRAFT_VIDEO,
       id,
     });
   },
 
-  removeDraftGif: (id) => {
+  removeDraftGif: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_REMOVE_DRAFT_GIF,
       id,
@@ -474,7 +481,7 @@ const ComposerActionCreators = {
     });
   },
 
-  removeDraftTempImage: (id) => {
+  removeDraftTempImage: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_REMOVE_DRAFT_TEMP_IMAGE,
       id,
@@ -483,7 +490,8 @@ const ComposerActionCreators = {
 
   updateDraftAttachedMediaEditingPayload: (id, media) => {
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_ATTACHED_MEDIA_EDITING_PAYLOAD,
+      actionType:
+        ActionTypes.COMPOSER_UPDATE_DRAFT_ATTACHED_MEDIA_EDITING_PAYLOAD,
       id,
       media,
     });
@@ -495,14 +503,16 @@ const ComposerActionCreators = {
       csrf_token: AppStore.getCsrfToken(),
       userId,
       s3UploadSignature,
-      errorNotifier: ({ message }) => NotificationActionCreators.queueError({
-        scope: NotificationScopes.FILE_UPLOAD,
-        message,
-      }),
+      errorNotifier: ({ message }) =>
+        NotificationActionCreators.queueError({
+          scope: NotificationScopes.FILE_UPLOAD,
+          message,
+        }),
       notifiers: ServerActionCreators,
     });
-    uploader.upload(imageFile)
-      .then((uploadedFile) => {
+    uploader
+      .upload(imageFile)
+      .then(uploadedFile => {
         const thumbOffset = video.currentTime * 1000;
         AppDispatcher.handleViewAction({
           actionType: ActionTypes.COMPOSER_UPDATE_INSTAGRAM_DRAFT_THUMBNAIL,
@@ -517,7 +527,8 @@ const ComposerActionCreators = {
       .catch(() => {
         NotificationActionCreators.queueError({
           scope: NotificationScopes.FILE_UPLOAD,
-          message: 'Uh oh! It looks like we had an issue saving the thumbnail. Up for trying again?',
+          message:
+            'Uh oh! It looks like we had an issue saving the thumbnail. Up for trying again?',
         });
         AppActionCreators.setThumbnailLoading(false);
         ModalActionCreators.closeModal('overlay');
@@ -531,13 +542,7 @@ const ComposerActionCreators = {
         uploaderInstance,
       });
     },
-    uploadedLinkThumbnail: ({
-      id,
-      uploaderInstance,
-      url,
-      width,
-      height,
-    }) => {
+    uploadedLinkThumbnail: ({ id, uploaderInstance, url, width, height }) => {
       AppDispatcher.handleViewAction({
         actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_LINK_THUMBNAIL,
         id,
@@ -546,9 +551,12 @@ const ComposerActionCreators = {
         width,
         height,
       });
-      AppActionCreators.trackUserAction(['composer', 'thumbnail', 'uploaded_file'], {
-        extension: getFileTypeFromPath(url),
-      });
+      AppActionCreators.trackUserAction(
+        ['composer', 'thumbnail', 'uploaded_file'],
+        {
+          extension: getFileTypeFromPath(url),
+        }
+      );
     },
     uploadedDraftImage: ({
       id,
@@ -567,29 +575,30 @@ const ComposerActionCreators = {
         width,
         height,
       });
-      AppActionCreators.trackUserAction(['composer', 'media', 'uploaded', 'photo'], {
-        extension: getFileTypeFromPath(url),
-      });
+      AppActionCreators.trackUserAction(
+        ['composer', 'media', 'uploaded', 'photo'],
+        {
+          extension: getFileTypeFromPath(url),
+        }
+      );
       AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
         addedFrom: 'upload',
         isGif: false,
       });
     },
-    uploadedDraftVideo: ({
-      id,
-      uploaderInstance,
-      uploadId,
-      fileExtension,
-    }) => {
+    uploadedDraftVideo: ({ id, uploaderInstance, uploadId, fileExtension }) => {
       AppDispatcher.handleViewAction({
         actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_VIDEO,
         id,
         uploaderInstance,
         uploadId,
       });
-      AppActionCreators.trackUserAction(['composer', 'media', 'uploaded', 'video'], {
-        extension: fileExtension,
-      });
+      AppActionCreators.trackUserAction(
+        ['composer', 'media', 'uploaded', 'video'],
+        {
+          extension: fileExtension,
+        }
+      );
     },
     draftGifUploaded: ({
       id,
@@ -608,9 +617,12 @@ const ComposerActionCreators = {
         width,
         height,
       });
-      AppActionCreators.trackUserAction(['composer', 'media', 'uploaded', 'photo'], {
-        extension: getFileTypeFromPath(url),
-      });
+      AppActionCreators.trackUserAction(
+        ['composer', 'media', 'uploaded', 'photo'],
+        {
+          extension: getFileTypeFromPath(url),
+        }
+      );
       AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
         addedFrom: 'upload',
         isGif: true,
@@ -619,14 +631,23 @@ const ComposerActionCreators = {
     queueError: ({ message }) => {
       NotificationActionCreators.queueError({
         scope: NotificationScopes.FILE_UPLOAD,
-        message
+        message,
       });
     },
-    monitorFileUploadProgress: ({ id, uploaderInstance}) => {
-      ComposerActionCreators.monitorDraftFileUploadProgress(id, uploaderInstance);
+    monitorFileUploadProgress: ({ id, uploaderInstance }) => {
+      ComposerActionCreators.monitorDraftFileUploadProgress(
+        id,
+        uploaderInstance
+      );
     },
   },
-  uploadDraftFile: (id, file, uploadType, notifiers, createFileUploaderCallback) => {
+  uploadDraftFile: (
+    id,
+    file,
+    uploadType,
+    notifiers,
+    createFileUploaderCallback
+  ) => {
     const { id: userId, s3UploadSignature } = AppStore.getUserData();
     const imageDimensionsKey = AppStore.getImageDimensionsKey();
     const csrfToken = AppStore.getCsrfToken();
@@ -654,10 +675,12 @@ const ComposerActionCreators = {
     const progressIterator = uploaderInstance.getProgressIterator();
     let item;
 
-    while (!(item = progressIterator.next()).done) { // eslint-disable-line no-cond-assign
+    while (!(item = progressIterator.next()).done) {
+      // eslint-disable-line no-cond-assign
       const promisedProgress = item.value;
 
-      await promisedProgress.then((progress) => { // eslint-disable-line no-await-in-loop
+      await promisedProgress.then(progress => {
+        // eslint-disable-line no-await-in-loop
         AppDispatcher.handleViewAction({
           actionType: ActionTypes.COMPOSER_DRAFT_FILE_UPLOAD_PROGRESS,
           id,

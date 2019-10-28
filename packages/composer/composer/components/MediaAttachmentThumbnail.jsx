@@ -11,7 +11,7 @@ import CloseButton from './CloseButton';
 import Button from './Button';
 import { escapeParens } from '../utils/StringUtils';
 import styles from './css/MediaAttachmentThumbnail.css';
-import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
+import ModalActionCreators from '../shared-components/modal/actionCreators';
 
 const StyledIconWrapper = styled.span`
   display: flex;
@@ -35,9 +35,7 @@ const renderTagOption = tagCount => (
     <StyledIconWrapper>
       <PersonIcon size="medium" />
     </StyledIconWrapper>
-    <Text>
-      {tagCount || 'Tag'}
-    </Text>
+    <Text>{tagCount || 'Tag'}</Text>
   </StyledTagWrapper>
 );
 
@@ -65,19 +63,25 @@ class MediaAttachmentThumbnail extends React.Component {
       showTwitterImageDescription,
       composerPosition,
       draft,
-      canAddUserTag
+      canAddUserTag,
     } = this.props;
 
     if (canAddUserTag) {
       ModalActionCreators.openModal('InstagramUserTags', {
-        media, draftId, composerPosition, userTags: draft && draft.userTags,
+        media,
+        draftId,
+        composerPosition,
+        userTags: draft && draft.userTags,
       });
     } else {
       ModalActionCreators.openModal('MediaZoomBox', {
-        media, draftId, showTwitterImageDescription, composerPosition,
+        media,
+        draftId,
+        showTwitterImageDescription,
+        composerPosition,
       });
     }
-  }
+  };
 
   onCloseButtonClick = () => {
     const { draftId, media } = this.props;
@@ -85,21 +89,32 @@ class MediaAttachmentThumbnail extends React.Component {
     switch (media.mediaType) {
       case MediaTypes.IMAGE:
         ComposerActionCreators.removeDraftImage(draftId, media);
-        AppActionCreators.trackUserAction(['composer', 'media', 'removed', 'photo'], {
-          isGif: false,
-        });
+        AppActionCreators.trackUserAction(
+          ['composer', 'media', 'removed', 'photo'],
+          {
+            isGif: false,
+          }
+        );
         break;
 
       case MediaTypes.VIDEO:
         ComposerActionCreators.removeDraftVideo(draftId);
-        AppActionCreators.trackUserAction(['composer', 'media', 'removed', 'video']);
+        AppActionCreators.trackUserAction([
+          'composer',
+          'media',
+          'removed',
+          'video',
+        ]);
         break;
 
       case MediaTypes.GIF:
         ComposerActionCreators.removeDraftGif(draftId);
-        AppActionCreators.trackUserAction(['composer', 'media', 'removed', 'photo'], {
-          isGif: true,
-        });
+        AppActionCreators.trackUserAction(
+          ['composer', 'media', 'removed', 'photo'],
+          {
+            isGif: true,
+          }
+        );
         break;
 
       default:
@@ -123,14 +138,17 @@ class MediaAttachmentThumbnail extends React.Component {
     const thumbnail = isVideo ? media.thumbnail : media.url;
     const userTagCount = draft && draft.userTags ? draft.userTags.length : null;
 
-    const videoThumbnailClass = canEditVideoAttachment ?
-      `${styles.editableVideoThumbnail} bi bi-video` :
-      `${styles.videoThumbnail} bi bi-video`;
-    const tooltipCopy = (isRegularImage && showTwitterImageDescription) ?
-      'Click to expand & add description' : 'Click to expand';
-    const ariaLabel = (isRegularImage && showTwitterImageDescription) ?
-      'Select to expand image and add image description' :
-      `Select to expand ${isVideo ? 'video' : 'image'}`;
+    const videoThumbnailClass = canEditVideoAttachment
+      ? `${styles.editableVideoThumbnail} bi bi-video`
+      : `${styles.videoThumbnail} bi bi-video`;
+    const tooltipCopy =
+      isRegularImage && showTwitterImageDescription
+        ? 'Click to expand & add description'
+        : 'Click to expand';
+    const ariaLabel =
+      isRegularImage && showTwitterImageDescription
+        ? 'Select to expand image and add image description'
+        : `Select to expand ${isVideo ? 'video' : 'image'}`;
 
     return (
       <div className={thumbnailClassName}>
@@ -146,11 +164,13 @@ class MediaAttachmentThumbnail extends React.Component {
               src={escapeParens(thumbnail)}
               className={styles.thumbnailImage}
             />
-            {canAddUserTag &&
-              renderTagOption(userTagCount)
-            }
-            {isVideo &&
-              <span className={videoThumbnailClass} aria-label="video attachment" />}
+            {canAddUserTag && renderTagOption(userTagCount)}
+            {isVideo && (
+              <span
+                className={videoThumbnailClass}
+                aria-label="video attachment"
+              />
+            )}
           </Button>
         </div>
 
