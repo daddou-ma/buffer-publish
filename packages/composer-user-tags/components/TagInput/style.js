@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ButtonWrapper = styled.div`
-  margin: auto 0px 10px 5px;
+  margin: auto 0px 10px 8px;
 `;
 
 export const StyledLabel = styled.span`

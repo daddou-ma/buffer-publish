@@ -2,9 +2,9 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { Person } from '@bufferapp/ui/Icon';
-import UserTagInput from '../UserTagInput';
-import UserTagListItem from '../UserTagListItem';
-import UserTagImageLabel from '../UserTagImageLabel';
+import TagInput from '../TagInput';
+import TagListItem from '../TagListItem';
+import ImageLabel from '../ImageLabel';
 
 import {
   PersonIcon,
@@ -18,7 +18,7 @@ import {
   TopContent,
   BottomContent,
   TagList,
-  ListWrapper,
+  InputWrapper,
   Title,
   FooterButtons,
   SaveButton,
@@ -98,7 +98,7 @@ const UserTags = ({
         {tags && (
           <Fragment>
             {tags.map(tag => (
-              <UserTagImageLabel tag={tag} showTags={showTags} key={tag} />
+              <ImageLabel tag={tag} showTags={showTags} key={tag} />
             ))}
           </Fragment>
         )}
@@ -109,8 +109,8 @@ const UserTags = ({
               <Text>{translations.rightHeaderSubtext}</Text>
             </RightHeader>
             {showInput && (
-              <ListWrapper>
-                <UserTagInput
+              <InputWrapper>
+                <TagInput
                   translations={translations}
                   inputValue={inputValue}
                   setInputValue={setInputValue}
@@ -118,12 +118,12 @@ const UserTags = ({
                   addTag={addTag}
                   reachedMaxLimit={reachedMaxLimit}
                 />
-              </ListWrapper>
+              </InputWrapper>
             )}
             {tags && (
               <TagList>
                 {tags.map((tag, index) => (
-                  <UserTagListItem
+                  <TagListItem
                     tag={tag}
                     index={index}
                     lastItem={tags.length === index + 1}

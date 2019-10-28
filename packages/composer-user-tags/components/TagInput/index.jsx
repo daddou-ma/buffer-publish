@@ -5,7 +5,7 @@ import Input from '@bufferapp/ui/Input';
 
 import { ButtonWrapper, MaxCount } from './style';
 
-const UserTagInput = ({
+const TagInput = ({
   translations,
   inputValue,
   setInputValue,
@@ -48,7 +48,7 @@ const UserTagInput = ({
   );
 };
 
-UserTagInput.propTypes = {
+TagInput.propTypes = {
   translations: PropTypes.shape({
     placeholder: PropTypes.string,
     inputLabel: PropTypes.string,
@@ -62,4 +62,4 @@ UserTagInput.propTypes = {
   coordinates: PropTypes.shape({ y: PropTypes.string }).isRequired,
 };
 
-export default UserTagInput;
+export default TagInput;

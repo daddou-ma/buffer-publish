@@ -13,11 +13,11 @@ const calculateTagStyles = ({ tag, showTags }) => ({
   display: showTags ? 'block' : 'none',
 });
 
-const UserTagImageLabel = ({ tag, showTags }) => (
+const ImageLabel = ({ tag, showTags }) => (
   <div style={calculateTagStyles({ tag, showTags })}>{tag.username}</div>
 );
 
-UserTagImageLabel.propTypes = {
+ImageLabel.propTypes = {
   tag: PropTypes.shape({
     username: PropTypes.string,
     x: PropTypes.string,
@@ -26,4 +26,4 @@ UserTagImageLabel.propTypes = {
   showTags: PropTypes.bool.isRequired,
 };
 
-export default UserTagImageLabel;
+export default ImageLabel;

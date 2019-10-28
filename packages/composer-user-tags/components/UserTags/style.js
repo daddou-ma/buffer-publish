@@ -61,7 +61,7 @@ export const RightHeader = styled.div`
   padding: 6px 24px 24px;
 `;
 
-export const ListWrapper = styled.div`
+export const InputWrapper = styled.div`
   display: flex;
   background-color: ${grayLighter};
   padding: 16px 24px;
