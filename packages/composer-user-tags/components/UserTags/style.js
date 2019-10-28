@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { grayLight, grayLighter, gray } from '@bufferapp/ui/style/colors';
+import { Text } from '@bufferapp/ui';
 
 export const PersonIcon = styled.div`
   position: absolute;
@@ -22,7 +23,6 @@ export const Modal = styled.div`
 
 export const ModalInner = styled.div`
   background-color: white;
-  padding: 0px 15px 0px 0px;
   display: flex;
 `;
 
@@ -41,8 +41,10 @@ export const RightContent = styled.div`
 `;
 
 export const TagList = styled.div`
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
   padding: 0 24px;
+  overflow: scroll;
+  height: 95px;
 `;
 
 export const TopContent = styled.div`

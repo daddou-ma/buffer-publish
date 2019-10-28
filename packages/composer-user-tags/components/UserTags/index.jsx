@@ -19,9 +19,18 @@ import {
   BottomContent,
   TagList,
   ListWrapper,
+  Title,
+  FooterButtons,
+  SaveButton,
 } from './style';
 
-const UserTags = ({ media, userTags = [], saveGlobalTags, translations }) => {
+const UserTags = ({
+  media,
+  userTags = [],
+  saveGlobalTags,
+  onCancel,
+  translations,
+}) => {
   const initialCoordinateState = {
     x: null,
     y: null,
@@ -97,7 +106,7 @@ const UserTags = ({ media, userTags = [], saveGlobalTags, translations }) => {
         <RightContent>
           <TopContent>
             <RightHeader>
-              <Text type="h3">{translations.rightHeader}</Text>
+              <Title type="h3">{translations.rightHeader}</Title>
               <Text>{translations.rightHeaderSubtext}</Text>
             </RightHeader>
             {showInput && (

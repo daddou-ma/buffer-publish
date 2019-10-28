@@ -23,4 +23,6 @@ export const Link = styled.a`
   margin-left: auto;
   cursor: pointer;
   color: inherit;
+  align-self: flex-end;
+  display: flex;
 `;
