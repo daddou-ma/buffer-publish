@@ -39,6 +39,7 @@ export const RightContent = styled.div`
   flex-direction: column;
 `;
 
+// TO-DO: Refactor height to be responsive
 export const TagList = styled.div`
   overflow: scroll;
   height: 148px;
