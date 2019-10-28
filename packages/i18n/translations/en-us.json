@@ -406,7 +406,7 @@
     "inputBtnLabel": "Add Tag",
     "footerText": "Instagram API limitations prevent searching for usernames and tagging private users.",
     "maxLimitText": "You've reached the 20 tag limit.",
-    "btnSave": "Save and Close",
-    "btnClose": "Close"
+    "btnSave": "Save",
+    "btnCancel": "Cancel"
   }
 }

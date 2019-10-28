@@ -60,3 +60,7 @@
   display: inline-flex;
   margin-right: 6px;
 }
+
+.modal {
+  width: auto;
+}

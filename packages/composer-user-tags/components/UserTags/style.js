@@ -17,7 +17,6 @@ export const TextWrapper = styled.span`
 `;
 
 export const Modal = styled.div`
-  width: 864px;
   display: flex;
 `;
 
@@ -35,16 +34,14 @@ export const Image = styled.img`
 `;
 
 export const RightContent = styled.div`
-  width: 305px;
+  width: 350px;
   display: flex;
   flex-direction: column;
 `;
 
 export const TagList = styled.div`
-  /* margin-bottom: 12px; */
-  padding: 0 24px;
   overflow: scroll;
-  height: 95px;
+  height: 150px;
 `;
 
 export const TopContent = styled.div`
@@ -61,7 +58,7 @@ export const Line = styled.hr`
 `;
 
 export const RightHeader = styled.div`
-  padding: 0 24px 24px;
+  padding: 6px 24px 24px;
 `;
 
 export const ListWrapper = styled.div`
