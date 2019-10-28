@@ -10,7 +10,7 @@ import {
   isEdge,
 } from '../utils/DOMUtils';
 import { InstagramThumbnailMaxSize } from '../AppConstants';
-import Modal from '../__legacy-buffer-web-shared-components__/modal/modal';
+import Modal from '../shared-components/modal/modal';
 import InstagramThumbnailSlider from './InstagramThumbnailSlider';
 import ComposerStore from '../stores/ComposerStore';
 import styles from './css/InstagramThumbnailEditor.css';
