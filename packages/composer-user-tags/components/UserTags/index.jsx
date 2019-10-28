@@ -82,7 +82,9 @@ const UserTags = ({
       clientX,
       clientY,
     });
-    setShowInput(true);
+
+    // show input once a tag has been added
+    if (!showInput) setShowInput(true);
     e.preventDefault();
   };
 
@@ -91,7 +93,11 @@ const UserTags = ({
   return (
     <Modal>
       <ModalInner>
-        <Image alt="" src={media.url} onClick={onImageClick} />
+        <Image
+          alt="Image to tag users"
+          src={media.url}
+          onClick={onImageClick}
+        />
         <PersonIcon onClick={onTogglePersonIcon}>
           <Person size="large" />
         </PersonIcon>
