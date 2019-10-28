@@ -41,7 +41,7 @@ export const RightContent = styled.div`
 
 export const TagList = styled.div`
   overflow: scroll;
-  height: 150px;
+  height: 148px;
 `;
 
 export const TopContent = styled.div`
@@ -62,6 +62,7 @@ export const RightHeader = styled.div`
 `;
 
 export const InputWrapper = styled.div`
+  border-bottom: 2px solid white;
   display: flex;
   background-color: ${grayLighter};
   padding: 16px 24px;
