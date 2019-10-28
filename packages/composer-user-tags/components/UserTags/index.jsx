@@ -41,8 +41,7 @@ const UserTags = ({
   const [tags, setTags] = useState(userTags);
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  const [showInput, setShowInput] = useState(!!userTags);
-
+  const [showInput, setShowInput] = useState(userTags && userTags.length > 0);
   const MAX_TAG_LIMIT = 20;
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
 
@@ -127,6 +126,7 @@ const UserTags = ({
                   <UserTagListItem
                     tag={tag}
                     index={index}
+                    lastItem={tags.length === index + 1}
                     key={tag}
                     removeTag={tagItem => removeTag(tagItem)}
                   />
@@ -140,12 +140,16 @@ const UserTags = ({
               <Text>{translations.footerText}</Text>
             </TextWrapper>
             <FooterButtons>
-              <Button onClick={onCancel} label="Cancel" type="text" />
+              <Button
+                onClick={onCancel}
+                label={translations.btnCancel}
+                type="text"
+              />
               <SaveButton>
                 <Button
                   onClick={() => saveGlobalTags(tags)}
                   type="secondary"
-                  label="Save"
+                  label={translations.btnSave}
                   fullWidth
                 />
               </SaveButton>
@@ -181,7 +185,7 @@ UserTags.propTypes = {
     footerText: PropTypes.string,
     maxLimitText: PropTypes.string,
     btnSave: PropTypes.string,
-    btnClose: PropTypes.string,
+    btnCancel: PropTypes.string,
   }).isRequired,
 };
 

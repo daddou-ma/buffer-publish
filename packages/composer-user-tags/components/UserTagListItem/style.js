@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { grayLight, grayDarker } from '@bufferapp/ui/style/colors';
+import { grayLight, grayLighter, grayDarker } from '@bufferapp/ui/style/colors';
 
 export const CloseButton = styled.button`
   background: ${grayLight};
@@ -16,7 +16,9 @@ export const CloseButton = styled.button`
 
 export const UserName = styled.div`
   display: flex;
-  margin-top: 12px;
+  border-bottom: ${props =>
+    props.lastItem ? 'none' : `1px solid ${grayLighter}`};
+  padding: 12px 24px;
 `;
 
 export const Link = styled.a`

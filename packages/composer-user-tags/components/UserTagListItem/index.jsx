@@ -6,8 +6,8 @@ import { UserName, CloseButton, Link } from './style';
 
 const getUrl = username => `https://www.instagram.com/${username}`;
 
-const TagListItem = ({ tag, index, removeTag }) => (
-  <UserName key={index}>
+const TagListItem = ({ tag, index, removeTag, lastItem }) => (
+  <UserName key={index} lastItem={lastItem}>
     <CloseButton
       type="button"
       onClick={() => {
@@ -33,6 +33,7 @@ TagListItem.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
   removeTag: PropTypes.func.isRequired,
+  lastItem: PropTypes.bool.isRequired,
 };
 
 export default TagListItem;
