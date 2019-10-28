@@ -67,6 +67,18 @@ export const RightHeader = styled.div`
 export const ListWrapper = styled.div`
   display: flex;
   background-color: ${grayLighter};
-  padding: 0px 24px;
-  min-height: 112px;
+  padding: 16px 24px;
+  min-height: 72px;
+`;
+
+export const Title = styled(Text)`
+  margin-bottom: 10px;
+`;
+
+export const FooterButtons = styled.div`
+  display: flex;
+`;
+
+export const SaveButton = styled.div`
+  width: 100%;
 `;

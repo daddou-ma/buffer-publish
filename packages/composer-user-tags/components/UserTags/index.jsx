@@ -139,12 +139,17 @@ const UserTags = ({
             <TextWrapper>
               <Text>{translations.footerText}</Text>
             </TextWrapper>
-            <Button
-              onClick={() => saveGlobalTags(tags)}
-              type="secondary"
-              fullWidth
-              label="Save and Close"
-            />
+            <FooterButtons>
+              <Button onClick={onCancel} label="Cancel" type="text" />
+              <SaveButton>
+                <Button
+                  onClick={() => saveGlobalTags(tags)}
+                  type="secondary"
+                  label="Save"
+                  fullWidth
+                />
+              </SaveButton>
+            </FooterButtons>
           </BottomContent>
         </RightContent>
       </ModalInner>
