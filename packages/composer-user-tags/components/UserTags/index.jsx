@@ -171,6 +171,7 @@ UserTags.propTypes = {
     })
   ),
   saveGlobalTags: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   translations: PropTypes.shape({
     rightHeader: PropTypes.string,
     rightHeaderSubtext: PropTypes.string,
