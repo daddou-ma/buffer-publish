@@ -17,6 +17,7 @@ storiesOf('Composer User Tags', module)
           'https://buffer-media-uploads-dev.s3.amazonaws.com/5daa35aaaa731800067cfef3/5db0753942c3f7009b653c74/9ba15726fe45ed4f58d326bf2fb73a3c.original.jpeg',
       }}
       saveGlobalTags={action('saving tags!')}
+      onCancel={action('cancel!')}
       translations={translations['user-tags']}
     />
   ));
