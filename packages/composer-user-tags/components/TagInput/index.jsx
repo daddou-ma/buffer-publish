@@ -9,13 +9,10 @@ const TagInput = ({
   translations,
   inputValue,
   setInputValue,
-  coordinates,
+  disabled,
   addTag,
   reachedMaxLimit,
 }) => {
-  const inputValueLength = inputValue.replace(/ /g, '').length;
-  const disabled = !coordinates.y || inputValueLength < 1;
-
   if (reachedMaxLimit) {
     return (
       <MaxCount>
@@ -59,7 +56,7 @@ TagInput.propTypes = {
   inputValue: PropTypes.string.isRequired,
   setInputValue: PropTypes.func.isRequired,
   addTag: PropTypes.func.isRequired,
-  coordinates: PropTypes.shape({ y: PropTypes.string }).isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default TagInput;

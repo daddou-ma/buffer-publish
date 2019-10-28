@@ -45,6 +45,8 @@ const UserTags = ({
   const [showInput, setShowInput] = useState(userTags && userTags.length > 0);
   const MAX_TAG_LIMIT = 20;
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
+  const inputValueLength = inputValue.replace(/ /g, '').length;
+  const isAddTagDisabled = !coordinates.y || inputValueLength < 1;
 
   const addTag = () => {
     const { x, y, clientX, clientY } = coordinates;
@@ -125,7 +127,7 @@ const UserTags = ({
                   translations={translations}
                   inputValue={inputValue}
                   setInputValue={setInputValue}
-                  coordinates={coordinates}
+                  disabled={isAddTagDisabled}
                   addTag={addTag}
                   reachedMaxLimit={reachedMaxLimit}
                 />
