@@ -1413,10 +1413,10 @@
     "@bufferapp/nav-sidebar" "^1.11.0"
     numeral "2.0.6"
 
-"@bufferapp/ui@5.6.0":
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.6.0.tgz#ad515b2b3067aaf9131b099a173fdc87d2d59215"
-  integrity sha512-6RXYiH0+84DDOt8iRswRNe7c8r9om0Foz+IYxKJ6lrUEd2n1sf0ITymn9IZAZ/LT85StvKGlH82sDuAN+8JRbQ==
+"@bufferapp/ui@5.10.0":
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.10.0.tgz#22c4a7c8c01f07ae702571f245b0211e6e1ba5fa"
+  integrity sha512-x3P6qyxZ8EeiqD6gIfRqucXiPXMq9uBvuhUConsHtIHvvqdnsGFKrycnSahR8W/wXFhba0xjoYMthgGKfu0ElQ==
   dependencies:
     "@reach/tooltip" "0.2.2"
     immutability-helper "^2.9.0"
@@ -1424,10 +1424,10 @@
     react-dom "16.8.6"
     styled-components "4.3.2"
 
-"@bufferapp/ui@5.7.0":
-  version "5.7.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.7.0.tgz#a37520be483796110375e77243251a3c5552afe9"
-  integrity sha512-QR1x2i7Y/J3NsgzT6xoZ3P+ydzKui8Q+kouXjGjfFE6rCiw7kBQE+r6mS5luNW6C/0CrxRTlfj2vHBMg7RYi0g==
+"@bufferapp/ui@5.6.0":
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.6.0.tgz#ad515b2b3067aaf9131b099a173fdc87d2d59215"
+  integrity sha512-6RXYiH0+84DDOt8iRswRNe7c8r9om0Foz+IYxKJ6lrUEd2n1sf0ITymn9IZAZ/LT85StvKGlH82sDuAN+8JRbQ==
   dependencies:
     "@reach/tooltip" "0.2.2"
     immutability-helper "^2.9.0"

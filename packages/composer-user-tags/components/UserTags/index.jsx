@@ -1,37 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
-import { ArrowLeft, Cross, Person } from '@bufferapp/ui/Icon';
-import Input from '@bufferapp/ui/Input';
+import { Person } from '@bufferapp/ui/Icon';
+import TagInput from '../TagInput';
+import TagListItem from '../TagListItem';
+import ImageLabel from '../ImageLabel';
 
 import {
-  UserName,
-  ButtonWrapper,
   PersonIcon,
-  PlainText,
+  TextWrapper,
   Modal,
   ModalInner,
   RightHeader,
   Image,
   RightContent,
+  Line,
+  TopContent,
+  BottomContent,
+  TagList,
+  InputWrapper,
+  Title,
+  FooterButtons,
+  SaveButton,
 } from './style';
 
-const calculateTagStyles = ({ tag, showTags }) => ({
-  position: 'absolute',
-  left: `${tag.clientX}px`,
-  top: `${tag.clientY}px`,
-  color: 'white',
-  backgroundColor: 'black',
-  borderRadius: '7%',
-  padding: '2px 5px',
-  opacity: '0.7',
-  display: showTags ? 'block' : 'none',
-});
-
-/** React is most efficient with unique keys for items. Quick method to create them based on a given string. */
-const uniqKey = identifier => `${identifier}-${new Date().getTime()}`;
-
-const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
+const UserTags = ({
+  media,
+  userTags = [],
+  saveGlobalTags,
+  onCancel,
+  translations,
+}) => {
+  const uniqKey = identifier => `${identifier}-${new Date().getTime()}`;
   const initialCoordinateState = {
     x: null,
     y: null,
@@ -42,8 +42,13 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
   const [tags, setTags] = useState(userTags);
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
+  const [showInput, setShowInput] = useState(userTags && userTags.length > 0);
+  const MAX_TAG_LIMIT = 20;
+  const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
+  const inputValueLength = inputValue.replace(/ /g, '').length;
+  const isAddTagDisabled = !coordinates.y || inputValueLength < 1;
 
-  const saveTag = () => {
+  const addTag = () => {
     const { x, y, clientX, clientY } = coordinates;
     const userTag = {
       username: inputValue,
@@ -81,112 +86,89 @@ const UserTags = ({ media, userTags = [], saveGlobalTags }) => {
       clientY,
     });
 
+    // show input once a tag has been added
+    if (!showInput) setShowInput(true);
     e.preventDefault();
   };
 
   const onTogglePersonIcon = () => setShowTags(!showTags);
 
-  const TagImageLabel = ({ tag }) => (
-    <div
-      key={uniqKey(tag.username)}
-      style={calculateTagStyles({ tag, showTags })}
-    >
-      {tag.username}
-    </div>
-  );
-  TagImageLabel.propTypes = {
-    tag: PropTypes.shape({
-      username: PropTypes.string,
-      x: PropTypes.string,
-      y: PropTypes.string,
-    }).isRequired,
-  };
-
-  const TagListItem = ({ tag }) => (
-    <UserName key={uniqKey(tag.username)}>
-      <button
-        type="button"
-        onClick={() => {
-          removeTag(tag);
-        }}
-        tabIndex={0}
-      >
-        <Cross size="medium" />
-      </button>
-      {tag.username}
-    </UserName>
-  );
-  TagListItem.propTypes = {
-    tag: PropTypes.shape({
-      username: PropTypes.string,
-      x: PropTypes.string,
-      y: PropTypes.string,
-    }).isRequired,
-  };
-
   return (
     <Modal>
       <ModalInner>
-        <Image alt="" src={media.url} onClick={onImageClick} />
+        <Image
+          alt="Image to tag users"
+          src={media.url}
+          onClick={onImageClick}
+        />
         <PersonIcon onClick={onTogglePersonIcon}>
           <Person size="large" />
         </PersonIcon>
         {tags && (
-          <div>
-            {tags.map((tag, index) => (
-              <TagImageLabel
+          <Fragment>
+            {tags.map(tag => (
+              <ImageLabel
                 tag={tag}
-                index={index}
+                showTags={showTags}
                 key={uniqKey(tag.username)}
               />
             ))}
-          </div>
+          </Fragment>
         )}
         <RightContent>
-          <RightHeader>
-            <span>
-              <ArrowLeft size="large" />
-            </span>
-            <Text type="h3">Tag a user</Text>
-          </RightHeader>
-          <Text>Click on a spot in the photo to tag</Text>
-          <div style={{ display: 'flex' }}>
-            <div>@</div>
-            <Input
-              type="input"
-              onChange={e => {
-                setInputValue(e.target.value);
-              }}
-              placeholder="username"
-              value={inputValue}
-              name="tagInput"
-            />
-            <ButtonWrapper>
-              <Button
-                type="primary"
-                size="small"
-                onClick={saveTag}
-                label="Save tag"
-                disabled={!coordinates.y}
-              />
-            </ButtonWrapper>
-          </div>
-          {tags && (
-            <div>
-              {tags.map((tag, index) => (
-                <TagListItem
-                  tag={tag}
-                  index={index}
-                  key={uniqKey(tag.username)}
+          <TopContent>
+            <RightHeader>
+              <Title type="h3">{translations.rightHeader}</Title>
+              <Text>{translations.rightHeaderSubtext}</Text>
+            </RightHeader>
+            {showInput && (
+              <InputWrapper>
+                <TagInput
+                  translations={translations}
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                  disabled={isAddTagDisabled}
+                  addTag={addTag}
+                  reachedMaxLimit={reachedMaxLimit}
                 />
-              ))}
-            </div>
-          )}
-          <PlainText>
-            Note: The API only allows public users to be tagged and prevents
-            autocomplete in usernames. // Move to translations
-          </PlainText>
-          <Button onClick={() => saveGlobalTags(tags)} label="Save and Close" />
+              </InputWrapper>
+            )}
+            {tags && (
+              <TagList>
+                {tags.map((tag, index) => (
+                  <TagListItem
+                    tag={tag}
+                    index={index}
+                    lastItem={tags.length === index + 1}
+                    key={uniqKey(tag.username)}
+                    removeTag={tagItem => removeTag(tagItem)}
+                    translations={translations}
+                  />
+                ))}
+              </TagList>
+            )}
+          </TopContent>
+          <BottomContent>
+            <Line />
+            <TextWrapper>
+              <Text>{translations.footerText}</Text>
+            </TextWrapper>
+            <FooterButtons>
+              <Button
+                onClick={onCancel}
+                label={translations.btnCancel}
+                type="text"
+              />
+              <SaveButton>
+                <Button
+                  onClick={() => saveGlobalTags(tags)}
+                  type="secondary"
+                  label={translations.btnSave}
+                  fullWidth
+                />
+              </SaveButton>
+            </FooterButtons>
+          </BottomContent>
         </RightContent>
       </ModalInner>
     </Modal>
@@ -207,6 +189,18 @@ UserTags.propTypes = {
     })
   ),
   saveGlobalTags: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  translations: PropTypes.shape({
+    rightHeader: PropTypes.string,
+    rightHeaderSubtext: PropTypes.string,
+    placeholder: PropTypes.string,
+    inputLabel: PropTypes.string,
+    inputBtnLabel: PropTypes.string,
+    footerText: PropTypes.string,
+    maxLimitText: PropTypes.string,
+    btnSave: PropTypes.string,
+    btnCancel: PropTypes.string,
+  }).isRequired,
 };
 
 UserTags.defaultProps = {

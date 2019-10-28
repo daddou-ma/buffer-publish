@@ -15,6 +15,9 @@ const InstagramUserTags = ({ media, draftId, userTags = [] }) => {
     ComposerActionCreators.updateDraftUserTags(draftId, tags);
     ModalActionCreators.closeModal();
   };
+
+  const onCancel = () => ModalActionCreators.closeModal();
+
   return (
     <Modal
       classNames={modalClassNames}
@@ -25,6 +28,7 @@ const InstagramUserTags = ({ media, draftId, userTags = [] }) => {
         media={media}
         userTags={userTags}
         saveGlobalTags={saveGlobalTags}
+        onCancel={onCancel}
       />
     </Modal>
   );
