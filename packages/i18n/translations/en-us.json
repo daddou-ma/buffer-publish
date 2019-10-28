@@ -407,6 +407,7 @@
     "footerText": "Instagram API limitations prevent searching for usernames and tagging private users.",
     "maxLimitText": "You've reached the 20 tag limit.",
     "btnSave": "Save",
-    "btnCancel": "Cancel"
+    "btnCancel": "Cancel",
+    "tooltip": "View profile"
   }
 }

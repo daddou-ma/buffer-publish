@@ -129,6 +129,7 @@ const UserTags = ({
                     lastItem={tags.length === index + 1}
                     key={tag}
                     removeTag={tagItem => removeTag(tagItem)}
+                    translations={translations}
                   />
                 ))}
               </TagList>
