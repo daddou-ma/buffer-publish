@@ -13,6 +13,9 @@ const UserTagInput = ({
   addTag,
   reachedMaxLimit,
 }) => {
+  const inputValueLength = inputValue.replace(/ /g, '').length;
+  const disabled = !coordinates.y || inputValueLength < 1;
+
   if (reachedMaxLimit) {
     return (
       <MaxCount>
@@ -38,7 +41,7 @@ const UserTagInput = ({
           size="small"
           onClick={addTag}
           label={translations.inputBtnLabel}
-          disabled={!coordinates.y}
+          disabled={disabled}
         />
       </ButtonWrapper>
     </Fragment>
