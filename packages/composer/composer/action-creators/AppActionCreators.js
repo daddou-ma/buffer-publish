@@ -20,15 +20,17 @@ import AppStore from '../stores/AppStore';
 import AppHooks from '../utils/LifecycleHooks';
 import Metrics from '../utils/Metrics';
 import WebSocket from '@bufferapp/publish-upload-zone/utils/WebSocket';
-import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
+import ModalActionCreators from '../shared-components/modal/actionCreators';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
 import { removeLinkFromErrorMessageText } from '../utils/StringUtils';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 const getDefaultQueueingType = () => {
   const { saveButtons } = AppStore.getOptions();
-  const [inlineSaveButtonTypes, stackedSaveButtonTypes] =
-    partition(saveButtons, (button) => InlineSaveButtonTypes.includes(button));
+  const [inlineSaveButtonTypes, stackedSaveButtonTypes] = partition(
+    saveButtons,
+    button => InlineSaveButtonTypes.includes(button)
+  );
 
   let saveButtonType;
 
@@ -42,20 +44,21 @@ const getDefaultQueueingType = () => {
 };
 
 const AppActionCreators = {
-
   // Preload a subset of relevant autocomplete data for Twitter
-  refreshTwitterAutocompleteBootstrapData: (profilesIds) => {
-    WebAPIUtils.getTwitterAutocompleteBootstrapData(profilesIds)
-      .then((friends) => {
+  refreshTwitterAutocompleteBootstrapData: profilesIds => {
+    WebAPIUtils.getTwitterAutocompleteBootstrapData(profilesIds).then(
+      friends => {
         AppDispatcher.handleApiAction({
-          actionType: ActionTypes.APP_RECEIVE_TWITTER_AUTOCOMPLETE_BOOTSTRAP_DATA,
+          actionType:
+            ActionTypes.APP_RECEIVE_TWITTER_AUTOCOMPLETE_BOOTSTRAP_DATA,
           friends,
           profilesIds,
         });
-      });
+      }
+    );
   },
 
-  triggerInteraction: (message) => {
+  triggerInteraction: message => {
     AppHooks.handleActionTaken(message);
   },
 
@@ -66,27 +69,26 @@ const AppActionCreators = {
     const { isSavingPossible } = AppStore.getAppState();
     const { shouldAlwaysSkipEmptyTextAlert } = AppStore.getUserData();
     const metaData = AppStore.getMetaData();
-    const hadTextToPrefill = (
+    const hadTextToPrefill =
       metaData.text ||
       metaData.url ||
       metaData.via ||
-      (metaData.retweetData && metaData.retweetData.comment)
-    );
+      (metaData.retweetData && metaData.retweetData.comment);
 
     if (!isSavingPossible) return Promise.reject();
 
     const { saveButtons } = AppStore.getOptions();
-    const allowedQueuingTypes =
-      saveButtons.map((saveButtonType) => ButtonsQueuingTypesMap.get(saveButtonType));
+    const allowedQueuingTypes = saveButtons.map(saveButtonType =>
+      ButtonsQueuingTypesMap.get(saveButtonType)
+    );
     if (!allowedQueuingTypes.includes(queueingType)) return Promise.reject();
 
-    const shouldShowEmptyTextAlert = (
+    const shouldShowEmptyTextAlert =
       !metaData.isPrefillingExistingUpdate &&
       hadTextToPrefill &&
       !shouldAlwaysSkipEmptyTextAlert &&
       !shouldSkipEmptyTextAlert &&
-      AppStore.hasFBDraftWithNoText()
-    );
+      AppStore.hasFBDraftWithNoText();
 
     if (shouldShowEmptyTextAlert) {
       ModalActionCreators.openModal('EmptyTextAlert', { queueingType });
@@ -97,8 +99,9 @@ const AppActionCreators = {
       queueingType,
       customScheduleTime,
       profiles: AppStore.getSelectedProfiles(),
-      drafts:
-        ComposerStore.getEnabledDrafts().filter((draft) => !ComposerStore.isDraftLocked(draft.id)),
+      drafts: ComposerStore.getEnabledDrafts().filter(
+        draft => !ComposerStore.isDraftLocked(draft.id)
+      ),
     };
 
     AppDispatcher.handleViewAction({
@@ -109,7 +112,10 @@ const AppActionCreators = {
     return WebAPIUtils.saveDrafts(data)
       .then(async ({ successfulResponses, unsuccessfulResponses }) => {
         // If we're "saving and approving", approve successfully saved updates
-        if (queueingType === QueueingTypes.SAVE_AND_APPROVE && successfulResponses.length > 0) {
+        if (
+          queueingType === QueueingTypes.SAVE_AND_APPROVE &&
+          successfulResponses.length > 0
+        ) {
           const ids = extractSavedUpdatesIdsFromResponses(successfulResponses);
           await WebAPIUtils.approveDrafts(ids);
         }
@@ -126,47 +132,75 @@ const AppActionCreators = {
 
         if (areAllResponsesSuccessful) {
           const successfulResponseMessageMap = new Map([
-            [QueueingTypes.QUEUE, {
-              singular: 'Great! The post has been added to your queue.',
-              plural: 'Great! All posts have been added to your queue.',
-            }],
-            [QueueingTypes.NEXT, {
-              singular: 'Great! The post has been added to your queue.',
-              plural: 'Great! All posts have been added to your queue.',
-            }],
-            [QueueingTypes.NOW, {
-              singular: 'Great! The post has been shared.',
-              plural: 'Great! All posts have been shared.',
-            }],
-            [QueueingTypes.CUSTOM, {
-              singular: 'Great! The post has been scheduled.',
-              plural: 'Great! All posts have been scheduled.',
-            }],
-            [QueueingTypes.SAVE, {
-              singular: 'Great! The post has been saved.',
-              plural: 'Great! All posts have been saved.',
-            }],
-            [QueueingTypes.SAVE_AND_APPROVE, {
-              singular: 'Great! The post has been saved.',
-              plural: 'Great! All posts have been saved.',
-            }],
-            [QueueingTypes.ADD_DRAFT, {
-              singular: 'Great! The post has been added to your drafts.',
-              plural: 'Great! All posts have been added to your drafts.',
-            }],
-            [QueueingTypes.NEXT_DRAFT, {
-              singular: 'Great! The post has been added to your drafts.',
-              plural: 'Great! All posts have been added to your drafts.',
-            }],
-            [QueueingTypes.CUSTOM_DRAFT, {
-              singular: 'Great! The post has been added to your drafts.',
-              plural: 'Great! All posts have been added to your drafts.',
-            }],
+            [
+              QueueingTypes.QUEUE,
+              {
+                singular: 'Great! The post has been added to your queue.',
+                plural: 'Great! All posts have been added to your queue.',
+              },
+            ],
+            [
+              QueueingTypes.NEXT,
+              {
+                singular: 'Great! The post has been added to your queue.',
+                plural: 'Great! All posts have been added to your queue.',
+              },
+            ],
+            [
+              QueueingTypes.NOW,
+              {
+                singular: 'Great! The post has been shared.',
+                plural: 'Great! All posts have been shared.',
+              },
+            ],
+            [
+              QueueingTypes.CUSTOM,
+              {
+                singular: 'Great! The post has been scheduled.',
+                plural: 'Great! All posts have been scheduled.',
+              },
+            ],
+            [
+              QueueingTypes.SAVE,
+              {
+                singular: 'Great! The post has been saved.',
+                plural: 'Great! All posts have been saved.',
+              },
+            ],
+            [
+              QueueingTypes.SAVE_AND_APPROVE,
+              {
+                singular: 'Great! The post has been saved.',
+                plural: 'Great! All posts have been saved.',
+              },
+            ],
+            [
+              QueueingTypes.ADD_DRAFT,
+              {
+                singular: 'Great! The post has been added to your drafts.',
+                plural: 'Great! All posts have been added to your drafts.',
+              },
+            ],
+            [
+              QueueingTypes.NEXT_DRAFT,
+              {
+                singular: 'Great! The post has been added to your drafts.',
+                plural: 'Great! All posts have been added to your drafts.',
+              },
+            ],
+            [
+              QueueingTypes.CUSTOM_DRAFT,
+              {
+                singular: 'Great! The post has been added to your drafts.',
+                plural: 'Great! All posts have been added to your drafts.',
+              },
+            ],
           ]);
 
-          const successMessage = (successfulResponses.length > 1) ?
-            successfulResponseMessageMap.get(queueingType).plural :
-            successfulResponseMessageMap.get(queueingType).singular;
+          const successMessage =
+            successfulResponses.length > 1
+              ? successfulResponseMessageMap.get(queueingType).plural
+              : successfulResponseMessageMap.get(queueingType).singular;
 
           AppHooks.handleSavedDrafts({
             message: successMessage,
@@ -184,17 +218,26 @@ const AppActionCreators = {
         // error/success states for each composer (we could be even more granular
         // here by, for each composer, singling out profile ids that either succeeded
         // or failed, and offering custom messages accordingly)
-        successfulResponses.forEach((successfulResponse) => {
-          AppActionCreators.clearComposerInlineErrors(successfulResponse.serviceName);
-          ComposerActionCreators.updateDraftHasSavingError(successfulResponse.serviceName, false);
-          ComposerActionCreators.updateDraftIsSaved(successfulResponse.serviceName);
+        successfulResponses.forEach(successfulResponse => {
+          AppActionCreators.clearComposerInlineErrors(
+            successfulResponse.serviceName
+          );
+          ComposerActionCreators.updateDraftHasSavingError(
+            successfulResponse.serviceName,
+            false
+          );
+          ComposerActionCreators.updateDraftIsSaved(
+            successfulResponse.serviceName
+          );
           NotificationActionCreators.queueSuccess({
             scope: `${NotificationScopes.UPDATE_SAVING}-${successfulResponse.serviceName}`,
           });
         });
 
-        unsuccessfulResponses.forEach((unsuccessfulResponse) => {
-          AppActionCreators.clearComposerInlineErrors(unsuccessfulResponse.serviceName);
+        unsuccessfulResponses.forEach(unsuccessfulResponse => {
+          AppActionCreators.clearComposerInlineErrors(
+            unsuccessfulResponse.serviceName
+          );
 
           // Did we get an error because the user reached a limit and could upgrade?
           // Don't show it as an 'error' in that case
@@ -211,7 +254,7 @@ const AppActionCreators = {
               // the link.
               message: removeLinkFromErrorMessageText(
                 unsuccessfulResponse.message,
-                'embedded-cta-link',
+                'embedded-cta-link'
               ),
               isUnique: true,
               cta: {
@@ -229,17 +272,24 @@ const AppActionCreators = {
                   } else if (!isBusinessUser) {
                     window.open(`${bufferOrigins.get(environment)}/pricing`);
                   } else {
-                    window.open(`${bufferOrigins.get(environment)}/app/account/receipts?content_only=true`);
+                    window.open(
+                      `${bufferOrigins.get(
+                        environment
+                      )}/app/account/receipts?content_only=true`
+                    );
                   }
                 },
               },
             });
           } else {
-            ComposerActionCreators.updateDraftHasSavingError(unsuccessfulResponse.serviceName, true);
+            ComposerActionCreators.updateDraftHasSavingError(
+              unsuccessfulResponse.serviceName,
+              true
+            );
 
-            const scope = FloatingErrorCodes.includes(unsuccessfulResponse.code) ?
-              `${NotificationScopes.UPDATE_SAVING}-${ErrorTypes.FLOATING}` :
-              `${NotificationScopes.UPDATE_SAVING}-${ErrorTypes.INLINE}-${unsuccessfulResponse.serviceName}`;
+            const scope = FloatingErrorCodes.includes(unsuccessfulResponse.code)
+              ? `${NotificationScopes.UPDATE_SAVING}-${ErrorTypes.FLOATING}`
+              : `${NotificationScopes.UPDATE_SAVING}-${ErrorTypes.INLINE}-${unsuccessfulResponse.serviceName}`;
 
             NotificationActionCreators.queueError({
               scope,
@@ -250,7 +300,7 @@ const AppActionCreators = {
       });
   },
 
-  clearComposerInlineErrors: (id) => {
+  clearComposerInlineErrors: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_CLEAR_INLINE_ERRORS,
       id,
@@ -261,7 +311,7 @@ const AppActionCreators = {
     const data = { name };
 
     WebAPIUtils.createNewSubprofile(profileId, data)
-      .then((newSubprofile) => {
+      .then(newSubprofile => {
         AppDispatcher.handleViewAction({
           actionType: ActionTypes.COMPOSER_CREATE_NEW_SUBPROFILE,
           profileId: newSubprofile.profileId,
@@ -285,9 +335,8 @@ const AppActionCreators = {
       });
   },
 
-  refreshSubprofileData: (profileId) => {
-    WebAPIUtils.fetchProfileSubprofiles(profileId)
-    .then((response) => {
+  refreshSubprofileData: profileId => {
+    WebAPIUtils.fetchProfileSubprofiles(profileId).then(response => {
       AppDispatcher.handleViewAction({
         actionType: ActionTypes.APP_REFRESH_SUBPROFILE_DATA,
         profileId,
@@ -296,14 +345,14 @@ const AppActionCreators = {
     });
   },
 
-  createSubprofilePending: (profileId) => {
+  createSubprofilePending: profileId => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_CREATE_NEW_SUBPROFILE_PENDING,
       profileId,
     });
   },
 
-  setThumbnailLoading: (isLoading) => {
+  setThumbnailLoading: isLoading => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.APP_SET_THUMBNAIL_LOADING,
       isLoading,
@@ -326,21 +375,25 @@ const AppActionCreators = {
     });
   },
 
-  selectProfile: (id) => {
+  selectProfile: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_SELECT_PROFILE,
       id,
     });
   },
 
-  unselectProfile: (id) => {
+  unselectProfile: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UNSELECT_PROFILE,
       id,
     });
   },
 
-  selectProfiles: (ids, markAppAsLoadedWhenDone = false, originatedFromGroupSelection = false) => {
+  selectProfiles: (
+    ids,
+    markAppAsLoadedWhenDone = false,
+    originatedFromGroupSelection = false
+  ) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_SELECT_PROFILES,
       ids,
@@ -349,27 +402,33 @@ const AppActionCreators = {
     });
   },
 
-  unselectProfiles: (ids) => {
+  unselectProfiles: ids => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UNSELECT_PROFILES,
       ids,
     });
   },
 
-  queueProfileSubprofilesDropdownsIdsToExpand: (ids) => {
+  queueProfileSubprofilesDropdownsIdsToExpand: ids => {
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_QUEUE_PROFILES_SUBPROFILES_DROPDOWNS_TO_EXPAND,
+      actionType:
+        ActionTypes.COMPOSER_QUEUE_PROFILES_SUBPROFILES_DROPDOWNS_TO_EXPAND,
       ids,
     });
   },
 
   emptyProfileSubprofilesDropdownsIdsToExpand: () => {
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_EMPTY_PROFILES_SUBPROFILES_DROPDOWNS_TO_EXPAND,
+      actionType:
+        ActionTypes.COMPOSER_EMPTY_PROFILES_SUBPROFILES_DROPDOWNS_TO_EXPAND,
     });
   },
 
-  selectProfilesOnBehalfOfUser: (ids, markAppAsLoadedWhenDone, originatedFromGroupSelection) => {
+  selectProfilesOnBehalfOfUser: (
+    ids,
+    markAppAsLoadedWhenDone,
+    originatedFromGroupSelection
+  ) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_SELECT_PROFILES_ON_BEHALF_OF_USER,
       ids,
@@ -378,14 +437,14 @@ const AppActionCreators = {
     });
   },
 
-  collapseProfileSubprofileDropdown: (id) => {
+  collapseProfileSubprofileDropdown: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_COLLAPSE_PROFILE_SUBPROFILE_DROPDOWN,
       id,
     });
   },
 
-  expandProfileSubprofileDropdown: (id) => {
+  expandProfileSubprofileDropdown: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_EXPAND_PROFILE_SUBPROFILE_DROPDOWN,
       id,
@@ -398,7 +457,7 @@ const AppActionCreators = {
     });
   },
 
-  selectGroupProfiles: (id) => {
+  selectGroupProfiles: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.APP_SELECT_GROUP_PROFILES,
       id,
@@ -417,23 +476,28 @@ const AppActionCreators = {
     const pendingAPICalls = new Set();
 
     return (profileId, momentInMonth) => {
-      const startDateString = momentInMonth.startOf('month').format('YYYY-MM-DD');
+      const startDateString = momentInMonth
+        .startOf('month')
+        .format('YYYY-MM-DD');
       const endDateString = momentInMonth.endOf('month').format('YYYY-MM-DD');
       const requestIdentifier = `${profileId}-${startDateString}-${endDateString}`;
 
       // If a request for the same profile and month is already running, don't make another one
       if (pendingAPICalls.has(requestIdentifier)) return;
 
-      WebAPIUtils.getProfileSlotDataForDateRange(profileId, startDateString, endDateString)
-        .then((slots) => {
-          pendingAPICalls.delete(requestIdentifier);
+      WebAPIUtils.getProfileSlotDataForDateRange(
+        profileId,
+        startDateString,
+        endDateString
+      ).then(slots => {
+        pendingAPICalls.delete(requestIdentifier);
 
-          AppDispatcher.handleViewAction({
-            actionType: ActionTypes.APP_RECEIVE_PROFILE_SLOT_DATA,
-            id: profileId,
-            slots,
-          });
+        AppDispatcher.handleViewAction({
+          actionType: ActionTypes.APP_RECEIVE_PROFILE_SLOT_DATA,
+          id: profileId,
+          slots,
         });
+      });
 
       pendingAPICalls.add(requestIdentifier);
     };
@@ -446,7 +510,7 @@ const AppActionCreators = {
     scope.splice(1, 0, 'multiple-composers');
 
     const { appEnvironment, disableTelemetry } = AppStore.getMetaData();
-    Metrics.trackAction(scope, extraData, {appEnvironment, disableTelemetry});
+    Metrics.trackAction(scope, extraData, { appEnvironment, disableTelemetry });
   },
 
   toggleAllProfiles: () => {
@@ -455,21 +519,21 @@ const AppActionCreators = {
     });
   },
 
-  updateOmniboxState: (isEnabled) => {
+  updateOmniboxState: isEnabled => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.APP_UPDATE_OMNIBOX_STATE,
       isEnabled,
     });
   },
 
-  updatePartiallySavedDraftsProfilesIds: (partiallySavedDrafts) => {
+  updatePartiallySavedDraftsProfilesIds: partiallySavedDrafts => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.APP_UPDATE_PARTIALLY_SAVED_DRAFTS_PROFILES_IDS,
       partiallySavedDrafts,
     });
   },
 
-  rememberModalView: (modalKey) => WebAPIUtils.rememberModalView(modalKey),
+  rememberModalView: modalKey => WebAPIUtils.rememberModalView(modalKey),
 
   forceEditorFocus: () => {
     AppDispatcher.handleViewAction({
@@ -504,7 +568,7 @@ const AppActionCreators = {
     });
   },
 
-  resetSelectedProfiles: (profilesData) => {
+  resetSelectedProfiles: profilesData => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.RESET_PROFILES_DATA,
       profilesData,
@@ -512,15 +576,16 @@ const AppActionCreators = {
   },
 
   getFacebookDomainOwnershipForProfile: (profileId, url) => {
-    WebAPIUtils.getFacebookDomainOwnershipForProfile(profileId, url)
-      .then((isOwner) => {
+    WebAPIUtils.getFacebookDomainOwnershipForProfile(profileId, url).then(
+      isOwner => {
         AppDispatcher.handleApiAction({
           actionType: ActionTypes.APP_RECEIVE_FACEBOOK_DOMAIN_OWNERSHIP_DATA,
           profileId,
           url,
           isOwner,
         });
-      });
+      }
+    );
   },
 
   refreshFacebookDomainOwnershipData: () => {
@@ -531,7 +596,8 @@ const AppActionCreators = {
 
   rememberTwitterMaxProfileNotificationClosedOnce: () => {
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.APP_REMEMBER_TWITTER_MAX_PROFILE_NOTIF_CLOSED_ONCE,
+      actionType:
+        ActionTypes.APP_REMEMBER_TWITTER_MAX_PROFILE_NOTIF_CLOSED_ONCE,
     });
   },
 };

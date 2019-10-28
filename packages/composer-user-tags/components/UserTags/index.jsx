@@ -31,6 +31,7 @@ const UserTags = ({
   onCancel,
   translations,
 }) => {
+  const uniqKey = identifier => `${identifier}-${new Date().getTime()}`;
   const initialCoordinateState = {
     x: null,
     y: null,
@@ -104,7 +105,11 @@ const UserTags = ({
         {tags && (
           <Fragment>
             {tags.map(tag => (
-              <ImageLabel tag={tag} showTags={showTags} key={tag} />
+              <ImageLabel
+                tag={tag}
+                showTags={showTags}
+                key={uniqKey(tag.username)}
+              />
             ))}
           </Fragment>
         )}
@@ -133,7 +138,7 @@ const UserTags = ({
                     tag={tag}
                     index={index}
                     lastItem={tags.length === index + 1}
-                    key={tag}
+                    key={uniqKey(tag.username)}
                     removeTag={tagItem => removeTag(tagItem)}
                     translations={translations}
                   />
@@ -176,7 +181,7 @@ UserTags.propTypes = {
   }).isRequired,
   userTags: PropTypes.arrayOf(
     PropTypes.shape({
-      userName: PropTypes.string,
+      username: PropTypes.string,
       x: PropTypes.number,
       y: PropTypes.number,
     })

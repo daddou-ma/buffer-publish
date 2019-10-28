@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-} from '@bufferapp/components';
-import ModalActionCreators from '../__legacy-buffer-web-shared-components__/modal/actionCreators';
+import { Button } from '@bufferapp/components';
+import ModalActionCreators from '../shared-components/modal/actionCreators';
 
 const openModal = (video, draftId, composerPosition) => {
   ModalActionCreators.openModal('InstagramThumbnailEditor', {
-    video, draftId, composerPosition,
+    video,
+    draftId,
+    composerPosition,
   });
 };
 
@@ -20,11 +20,13 @@ const wrapperStyle = {
 const InstagramThumbnailButton = ({ video, draftId, composerPosition }) => (
   <div style={wrapperStyle}>
     <Button
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault();
         openModal(video, draftId, composerPosition);
       }}
-    > Edit Cover
+    >
+      {' '}
+      Edit Cover
     </Button>
   </div>
 );

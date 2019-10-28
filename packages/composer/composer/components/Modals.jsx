@@ -2,7 +2,7 @@ import React from 'react';
 import EmptyTextAlert from './EmptyTextAlert';
 import MediaZoomBox from './MediaZoomBox';
 import InstagramThumbnailEditor from './InstagramThumbnailEditor';
-import Store from '../__legacy-buffer-web-shared-components__/modal/store';
+import Store from '../shared-components/modal/store';
 import InstagramUserTags from './InstagramUserTags';
 
 const getState = () => Store.getCurrentState();
@@ -30,9 +30,7 @@ class Modals extends React.Component {
     const ModalToShow = ModalComponents[this.state.modalName] || 'span';
 
     return (
-      <div>
-        {this.state.open && <ModalToShow {...this.state.modalProps} />}
-      </div>
+      <div>{this.state.open && <ModalToShow {...this.state.modalProps} />}</div>
     );
   }
 }
