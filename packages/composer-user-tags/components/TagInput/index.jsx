@@ -1,18 +1,38 @@
-import React, { Fragment } from 'react';
+import React, {
+  Fragment,
+  useLayoutEffect,
+  useRef,
+  useImperativeHandle,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
 import Input from '@bufferapp/ui/Input';
 
 import { ButtonWrapper, MaxCount } from './style';
 
-const TagInput = ({
-  translations,
-  inputValue,
-  setInputValue,
-  disabled,
-  addTag,
-  reachedMaxLimit,
-}) => {
+const TagInput = (
+  {
+    translations,
+    inputValue,
+    setInputValue,
+    disabled,
+    addTag,
+    reachedMaxLimit,
+  },
+  ref
+) => {
+  /**
+   * This strange looking `ref / useImperativeHandle` stuff just makes it so that the
+   * parent component can get a ref on this TagInput component and call `ref.current.focus()` on it.
+   * https://reactjs.org/docs/hooks-reference.html#useimperativehandle
+   */
+  const inputEl = useRef(null);
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputEl.current.focus();
+    },
+  }));
+
   if (reachedMaxLimit) {
     return (
       <MaxCount>
@@ -31,6 +51,8 @@ const TagInput = ({
         value={inputValue}
         name="tagInput"
         label={translations.inputLabel}
+        prefix={{ text: '@', paddingLeft: '25px' }}
+        ref={inputEl}
       />
       <ButtonWrapper>
         <Button
@@ -46,6 +68,7 @@ const TagInput = ({
 };
 
 TagInput.propTypes = {
+  inputRef: PropTypes.shape({ current: PropTypes.any }).isRequired,
   translations: PropTypes.shape({
     placeholder: PropTypes.string,
     inputLabel: PropTypes.string,
@@ -59,4 +82,4 @@ TagInput.propTypes = {
   disabled: PropTypes.bool.isRequired,
 };
 
-export default TagInput;
+export default React.forwardRef(TagInput);

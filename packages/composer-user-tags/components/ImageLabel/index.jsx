@@ -7,10 +7,9 @@ const StyledImageLabel = styled.div`
   left: ${({ tag }) => tag.clientX}px;
   top: ${({ tag }) => tag.clientY}px;
   color: white;
-  background-color: black;
-  border-radius: 7%;
-  padding: 2px 5px;
-  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 2px;
+  padding: 2px 8px;
   display: ${({ showTags }) => (showTags ? 'block' : 'none')};
 `;
 

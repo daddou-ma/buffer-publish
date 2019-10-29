@@ -4,18 +4,22 @@ import { grayLight, grayLighter, grayDarker } from '@bufferapp/ui/style/colors';
 export const CloseButton = styled.button`
   background: ${grayLight};
   border: 2px solid ${grayLight};
-  box-sizing: borderBox;
-  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
   color: ${grayDarker};
-  vertical-align: middle;
-  display: inline-flex;
   margin-right: 8px;
   padding: 0px;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const UserName = styled.div`
   display: flex;
+  align-items: center;
   border-bottom: ${props =>
     props.lastItem ? 'none' : `1px solid ${grayLighter}`};
   padding: 12px 24px;

@@ -4,10 +4,13 @@ import { Text } from '@bufferapp/ui';
 
 export const PersonIcon = styled.div`
   position: absolute;
-  bottom: 7px;
-  left: 7px;
-  color: black;
+  bottom: 16px;
+  left: 16px;
   cursor: pointer;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.8);
 `;
 
 export const TextWrapper = styled.span`

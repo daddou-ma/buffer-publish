@@ -1,10 +1,11 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useRef, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { Person } from '@bufferapp/ui/Icon';
 import TagInput from '../TagInput';
 import TagListItem from '../TagListItem';
 import ImageLabel from '../ImageLabel';
+import uuid from 'uuid/v4';
 
 import {
   PersonIcon,
@@ -34,7 +35,6 @@ const UserTags = ({
   trackTag,
   trackAllTags,
 }) => {
-  const uniqKey = identifier => `${identifier}-${new Date().getTime()}`;
   const initialCoordinateState = {
     x: null,
     y: null,
@@ -45,8 +45,21 @@ const UserTags = ({
   const [tags, setTags] = useState(userTags);
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  const [showInput, setShowInput] = useState(userTags && userTags.length > 0);
+  const [showInput, setShowInput] = useState(false);
+
+  /*
+   * Anytime the input is shown and/or coordinates change
+   * we focus the tag input
+   */
+  const tagInputRef = useRef(null);
+  useEffect(() => {
+    if (tagInputRef.current) {
+      tagInputRef.current.focus();
+    }
+  }, [showInput, coordinates]);
+
   const MAX_TAG_LIMIT = 20;
+
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
   const inputValueLength = inputValue.replace(/ /g, '').length;
   const isAddTagDisabled = !coordinates.y || inputValueLength < 1;
@@ -63,6 +76,8 @@ const UserTags = ({
     setTags([...tags, userTag]);
     setInputValue('');
     setCoordinates(initialCoordinateState);
+    setShowInput(false);
+    setShowTags(true);
     selectedChannels.forEach(channel => {
       if (channel.isBusinessProfile) {
         trackTag({ channel, username: inputValue });
@@ -103,8 +118,8 @@ const UserTags = ({
       clientY,
     });
 
-    // show input once a tag has been added
-    if (!showInput) setShowInput(true);
+    // show input once a spot has been clicked
+    setShowInput(true);
     e.preventDefault();
   };
 
@@ -124,11 +139,7 @@ const UserTags = ({
         {tags && (
           <Fragment>
             {tags.map(tag => (
-              <ImageLabel
-                tag={tag}
-                showTags={showTags}
-                key={uniqKey(tag.username)}
-              />
+              <ImageLabel tag={tag} showTags={showTags} key={uuid()} />
             ))}
           </Fragment>
         )}
@@ -138,18 +149,21 @@ const UserTags = ({
               <Title type="h3">{translations.rightHeader}</Title>
               <Text>{translations.rightHeaderSubtext}</Text>
             </RightHeader>
-            {showInput && (
-              <InputWrapper>
-                <TagInput
-                  translations={translations}
-                  inputValue={inputValue}
-                  setInputValue={setInputValue}
-                  disabled={isAddTagDisabled}
-                  addTag={addTag}
-                  reachedMaxLimit={reachedMaxLimit}
-                />
-              </InputWrapper>
-            )}
+            <form onSubmit={addTag}>
+              {showInput && (
+                <InputWrapper>
+                  <TagInput
+                    translations={translations}
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
+                    disabled={isAddTagDisabled}
+                    addTag={addTag}
+                    reachedMaxLimit={reachedMaxLimit}
+                    ref={tagInputRef}
+                  />
+                </InputWrapper>
+              )}
+            </form>
             {tags && (
               <TagList>
                 {tags.map((tag, index) => (
@@ -157,7 +171,7 @@ const UserTags = ({
                     tag={tag}
                     index={index}
                     lastItem={tags.length === index + 1}
-                    key={uniqKey(tag.username)}
+                    key={uuid()}
                     removeTag={tagItem => removeTag(tagItem)}
                     translations={translations}
                   />
