@@ -39,6 +39,7 @@ const Plans = ({
   isExperimentEnabled,
   onPremiumPlanClick,
   selectedPremiumPlan,
+  isAwesomeUser,
 }) => (
   <ContainerStyle>
     <ButtonStyle>
@@ -50,13 +51,14 @@ const Plans = ({
         onClick={() => onBackToDashboardClick({
           selectedProfileId,
           profiles,
+          isAwesomeUser,
         })
         }
       />
     </ButtonStyle>
     <div style={{ textAlign: 'center' }}>
       <HeaderStyle type="h1">{ translations.headerText }</HeaderStyle>
-      {!isExperimentControl && !isExperimentEnabled && (
+      {!isExperimentControl && !isExperimentEnabled && !isAwesomeUser && (
         <ColumnContainerStyle>
           <PlanColumn
             {...translations.pro}
@@ -84,7 +86,7 @@ const Plans = ({
           />
         </ColumnContainerStyle>
       )}
-      {isExperimentEnabled && (
+      {isExperimentEnabled || isAwesomeUser && (
         <ColumnContainerStyle>
           <PlanColumnExperimentEnabled
             {...translations.proExperiment}
@@ -107,7 +109,7 @@ const Plans = ({
           />
         </ColumnContainerStyle>
       )}
-      {isExperimentControl && (
+      {isExperimentControl && !isAwesomeUser && (
         <ColumnContainerStyle>
           <PlanColumnExperimentControl
             {...translations.proExperiment}

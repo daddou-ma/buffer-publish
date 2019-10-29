@@ -10,6 +10,8 @@ const getClassicBufferURL = () => {
   return 'https://buffer.com/app';
 };
 
+const onPaydayPage = window.location.pathname.endsWith('plans');
+
 export default ({ getState, dispatch }) => next => (action) => {
   next(action);
   switch (action.type) {
@@ -20,7 +22,7 @@ export default ({ getState, dispatch }) => next => (action) => {
         hasNewPublish,
       } = getState().betaRedirect;
       if (!hasPublishBeta) {
-        if (!hasNewPublish) {
+        if (!hasNewPublish && !onPaydayPage) {
           window.location.replace(getClassicBufferURL());
         }
       } else if (!hasPublishBetaRedirect) {

@@ -7,6 +7,7 @@ export default connect(
     hasPublishBeta: state.betaRedirect.hasPublishBeta,
     hasNewPublish: state.betaRedirect.hasNewPublish,
     loading: state.betaRedirect.loading,
+    onPaydayPage: state.betaRedirect.onPaydayPage,
   }),
 )(EnsurePublishBetaUser);
 

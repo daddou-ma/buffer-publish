@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 
+const onPaydayPage = window.location.pathname.endsWith('plans');
+
 const EnsurePublishBetaUser = ({ children, loading, hasPublishBeta, hasNewPublish }) => {
-  if (loading || (!hasPublishBeta && !hasNewPublish)) {
+  if (loading || (!hasPublishBeta && !hasNewPublish && !onPaydayPage)) {
     return (
       <BufferLoading fullscreen />
     );
   }
-  if (hasPublishBeta || hasNewPublish) {
+  if (hasPublishBeta || hasNewPublish || onPaydayPage) {
     return children;
   }
 };
