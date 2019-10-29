@@ -6,11 +6,15 @@ import Modal from '../shared-components/modal/modal';
 import ModalActionCreators from '../shared-components/modal/actionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import style from './css/InstagramUserTags.css';
+import AppStore from '../stores/AppStore';
 
 const InstagramUserTags = ({ media, draftId, userTags = [] }) => {
   const modalClassNames = {
     modal: style.modal,
   };
+  const selectedIgProfiles = AppStore.getSelectedProfilesForService(
+    'instagram'
+  );
   const saveGlobalTags = tags => {
     ComposerActionCreators.updateDraftUserTags(draftId, tags);
     ModalActionCreators.closeModal();
@@ -29,6 +33,7 @@ const InstagramUserTags = ({ media, draftId, userTags = [] }) => {
         userTags={userTags}
         saveGlobalTags={saveGlobalTags}
         onCancel={onCancel}
+        selectedChannels={selectedIgProfiles}
       />
     </Modal>
   );
