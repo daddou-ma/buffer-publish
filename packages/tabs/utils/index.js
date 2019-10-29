@@ -1,8 +1,10 @@
 const getBaseURL = () => {
-  return window.location.hostname === 'publish.local.buffer.com' ? 'https://local.buffer.com' : 'https://buffer.com';
+  return window.location.hostname === 'publish.local.buffer.com'
+    ? 'https://local.buffer.com'
+    : 'https://buffer.com';
 };
 
-const openCalendarWindow = (profileId) => {
+const openCalendarWindow = profileId => {
   window.location.href = `${getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/week/?content_only=true`;
 };
 
@@ -22,7 +24,16 @@ const openBillingWindow = () => {
  *
  * @returns string validTabId with the valid tab, default value is 'queue'
  */
-const getValidTab = (selectedTab, isBusinessAccount, isInstagramProfile, isManager, isFreeUser, hasStoriesFlip) => {
+const getValidTab = (
+  selectedTab,
+  isBusinessAccount,
+  isInstagramProfile,
+  isManager,
+  isFreeUser,
+  hasStoriesFlip,
+  childTabId,
+  shouldHideAdvancedAnalytics
+) => {
   let validTabId = selectedTab;
 
   switch (selectedTab) {
@@ -33,27 +44,36 @@ const getValidTab = (selectedTab, isBusinessAccount, isInstagramProfile, isManag
       validTabId = isInstagramProfile ? 'pastReminders' : 'queue';
       break;
     case 'analytics':
-      validTabId = 'analytics';
+      if (childTabId === 'overview') {
+        validTabId = shouldHideAdvancedAnalytics ? 'queue' : 'analytics';
+      } else {
+        validTabId = 'analytics';
+      }
       break;
     case 'awaitingApproval':
       /* Team Members who are Managers */
-      validTabId = (isBusinessAccount && isManager) ? 'awaitingApproval' : 'queue';
+      validTabId =
+        isBusinessAccount && isManager ? 'awaitingApproval' : 'queue';
       break;
     case 'pendingApproval':
       /* Team Members who are Contributors */
-      validTabId = (isBusinessAccount && !isManager) ? 'pendingApproval' : 'queue';
+      validTabId =
+        isBusinessAccount && !isManager ? 'pendingApproval' : 'queue';
       break;
     case 'drafts':
       /* Pro and up users or Team Members */
-      validTabId = (!isFreeUser || isBusinessAccount) ? 'drafts' : 'queue';
+      validTabId = !isFreeUser || isBusinessAccount ? 'drafts' : 'queue';
       break;
     case 'grid':
       /* IG, Business users or Team Members */
-      validTabId = (isBusinessAccount && isInstagramProfile) ? 'grid' : 'queue';
+      validTabId = isBusinessAccount && isInstagramProfile ? 'grid' : 'queue';
       break;
     case 'stories':
       /* IG, Business users or Team Members */
-      validTabId = (isBusinessAccount && isInstagramProfile && hasStoriesFlip) ? 'stories' : 'queue';
+      validTabId =
+        isBusinessAccount && isInstagramProfile && hasStoriesFlip
+          ? 'stories'
+          : 'queue';
       break;
     case 'settings':
       validTabId = 'settings';
