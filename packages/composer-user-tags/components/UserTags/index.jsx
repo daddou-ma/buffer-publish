@@ -5,6 +5,7 @@ import { Person } from '@bufferapp/ui/Icon';
 import TagInput from '../TagInput';
 import TagListItem from '../TagListItem';
 import ImageLabel from '../ImageLabel';
+import { getClientXY, removeClientXY } from '../../utils/Tags';
 
 import {
   PersonIcon,
@@ -38,11 +39,13 @@ const UserTags = ({
     clientX: null,
     clientY: null,
   };
+  const hasUserTags = userTags && userTags.length > 0;
+
   const [coordinates, setCoordinates] = useState(initialCoordinateState);
-  const [tags, setTags] = useState(userTags);
+  const [tags, setTags] = useState(getClientXY({ userTags, media }));
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  const [showInput, setShowInput] = useState(userTags && userTags.length > 0);
+  const [showInput, setShowInput] = useState(hasUserTags);
   const MAX_TAG_LIMIT = 20;
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
   const inputValueLength = inputValue.replace(/ /g, '').length;
@@ -161,7 +164,7 @@ const UserTags = ({
               />
               <SaveButton>
                 <Button
-                  onClick={() => saveGlobalTags(tags)}
+                  onClick={() => saveGlobalTags(removeClientXY(tags))}
                   type="secondary"
                   label={translations.btnSave}
                   fullWidth
