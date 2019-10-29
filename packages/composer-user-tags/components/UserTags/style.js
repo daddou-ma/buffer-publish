@@ -45,7 +45,7 @@ export const RightContent = styled.div`
 // TO-DO: Refactor height to be responsive
 export const TagList = styled.div`
   overflow: scroll;
-  height: 148px;
+  height: ${({ showingInput }) => (showingInput ? '148px' : '248px')};
 `;
 
 export const TopContent = styled.div`

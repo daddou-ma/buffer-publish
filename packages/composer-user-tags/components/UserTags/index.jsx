@@ -58,7 +58,7 @@ const UserTags = ({
     }
   }, [showInput, coordinates]);
 
-  const MAX_TAG_LIMIT = 20;
+  const MAX_TAG_LIMIT = 2;
 
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
   const inputValueLength = inputValue.replace(/ /g, '').length;
@@ -134,7 +134,7 @@ const UserTags = ({
           onClick={onImageClick}
         />
         <PersonIcon onClick={onTogglePersonIcon}>
-          <Person size="large" />
+          <Person size="medium" />
         </PersonIcon>
         {tags && (
           <Fragment>
@@ -165,7 +165,7 @@ const UserTags = ({
               )}
             </form>
             {tags && (
-              <TagList>
+              <TagList showingInput={showInput}>
                 {tags.map((tag, index) => (
                   <TagListItem
                     tag={tag}

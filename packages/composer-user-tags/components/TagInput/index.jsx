@@ -29,7 +29,9 @@ const TagInput = (
   const inputEl = useRef(null);
   useImperativeHandle(ref, () => ({
     focus: () => {
-      inputEl.current.focus();
+      if (inputEl.current) {
+        inputEl.current.focus();
+      }
     },
   }));
 
