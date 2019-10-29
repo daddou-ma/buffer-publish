@@ -4,10 +4,15 @@ import { Text } from '@bufferapp/ui';
 
 export const PersonIcon = styled.div`
   position: absolute;
-  bottom: 7px;
-  left: 7px;
-  color: black;
+  bottom: 22px;
+  left: 22px;
+  padding: 6px;
   cursor: pointer;
+  border-radius: 50%;
+  color: white;
+  background: rgba(0, 0, 0, 0.8);
+  vertical-align: middle;
+  display: inline-flex;
 `;
 
 export const TextWrapper = styled.span`
@@ -26,11 +31,19 @@ export const ModalInner = styled.div`
 `;
 
 export const Image = styled.img`
-  max-height: 500px;
-  width: auto;
+  max-height: 100%;
+  max-width: 100%;
+  /* width: auto; */
   margin: 0;
   cursor: crosshair;
   display: block;
+`;
+
+export const ImageWrapper = styled.div`
+  max-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const RightContent = styled.div`

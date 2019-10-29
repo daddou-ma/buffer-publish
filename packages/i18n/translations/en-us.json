@@ -408,6 +408,7 @@
     "maxLimitText": "You've reached the 20 tag limit.",
     "btnSave": "Save",
     "btnCancel": "Cancel",
-    "tooltip": "View profile"
+    "tooltip": "View profile",
+    "imgAltText": "Image to tag users",
   }
 }

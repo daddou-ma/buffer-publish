@@ -23,6 +23,7 @@ import {
   Title,
   FooterButtons,
   SaveButton,
+  ImageWrapper,
 } from './style';
 
 const UserTags = ({
@@ -99,14 +100,18 @@ const UserTags = ({
   return (
     <Modal>
       <ModalInner>
-        <Image
-          alt="Image to tag users"
-          src={media.url}
-          onClick={onImageClick}
-        />
-        <PersonIcon onClick={onTogglePersonIcon}>
-          <Person size="large" />
-        </PersonIcon>
+        <ImageWrapper>
+          <Image
+            alt={translations.imgAltText}
+            src={media.url}
+            onClick={onImageClick}
+          />
+        </ImageWrapper>
+        {hasUserTags && (
+          <PersonIcon onClick={onTogglePersonIcon}>
+            <Person size="medium" />
+          </PersonIcon>
+        )}
         {tags && (
           <Fragment>
             {tags.map(tag => (
@@ -203,6 +208,7 @@ UserTags.propTypes = {
     maxLimitText: PropTypes.string,
     btnSave: PropTypes.string,
     btnCancel: PropTypes.string,
+    imgAltText: PropTypes.string,
   }).isRequired,
 };
 
