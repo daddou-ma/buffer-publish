@@ -25,8 +25,8 @@ export const getCoordinates = ({ e, media }) => {
   // final_width = max_height * start_width / start_height
   const x = (e.clientX - rect.left) / width;
   const y = (e.clientY - rect.top) / height;
-  // get percentage to display correctly with responsive image
   return {
+    // get percentage to display correctly with responsive image
     clientX: x * 100,
     clientY: y * 100,
     x: x.toFixed(2),
