@@ -230,7 +230,7 @@ PostList.propTypes = {
   isPastReminder: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
-  showAnalyzeBannerAfterFirstPost: PropTypes.bool.isRequired,
+  showAnalyzeBannerAfterFirstPost: PropTypes.bool,
   isAnalyzeCustomer: PropTypes.bool,
   features: PropTypes.object.isRequired, // eslint-disable-line
 };
@@ -239,6 +239,7 @@ PostList.defaultProps = {
   index: 0,
   posts: [],
   isAnalyzeCustomer: false,
+  showAnalyzeBannerAfterFirstPost: false,
   onPreviewClick: () => {},
 };
 
