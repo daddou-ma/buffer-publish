@@ -1,10 +1,13 @@
-const hasProTrialExpired = trials => trials.some(trial => trial.is_awesome && trial.status === 'expired');
+const hasProTrialExpired = trials =>
+  trials.some(trial => trial.is_awesome && trial.status === 'expired');
 
-const isOnBusinessPlan = trialPlan => ['business', 'agency', 'small', 'premium_business'].some(
-  plan => plan === trialPlan,
-);
+const isOnBusinessPlan = trialPlan =>
+  ['business', 'agency', 'small', 'premium_business'].some(
+    plan => plan === trialPlan
+  );
 
-const isOnEnterprisePlan = plan => ['enterprise'].some(enterprisePlan => plan === enterprisePlan);
+const isOnEnterprisePlan = plan =>
+  ['enterprise'].some(enterprisePlan => plan === enterprisePlan);
 
 module.exports = userData => ({
   id: userData.id,
@@ -23,7 +26,7 @@ module.exports = userData => ({
   new_contributions_emails_subscribe_link:
     userData.new_contributions_emails_subscribe_link,
   skip_empty_text_alert: userData.messages.includes(
-    'remember_confirm_saving_modal',
+    'remember_confirm_saving_modal'
   ),
   profile_groups: userData.profile_groups || [],
   s3_upload_signature: userData.s3_upload_signature,
@@ -32,14 +35,16 @@ module.exports = userData => ({
   has_ig_direct_flip: userData.features.includes('instagram_direct_posting'),
   twofactor: userData.twofactor,
   has_simplified_free_plan_ux: userData.features.includes(
-    'has_simplified_free_plan_ux',
+    'has_simplified_free_plan_ux'
   ),
   hasIGLocationTaggingFeature: userData.features.includes(
-    'instagram-location-tagging',
+    'instagram-location-tagging'
   ),
   hasIGDirectVideoFlip: userData.features.includes('ig_direct_video_posting'),
-  hasPaydayExperimentControlFlip: userData.experiments['payday_page_experiment'] === 'control',
-  hasPaydayExperimentEnabledFlip: userData.experiments['payday_page_experiment'] === 'enabled',
+  hasPaydayExperimentControlFlip:
+    userData.experiments['payday_page_experiment'] === 'control',
+  hasPaydayExperimentEnabledFlip:
+    userData.experiments['payday_page_experiment'] === 'enabled',
   profile_limit: userData.profile_limit,
   profiles_schedules_slots: userData.profiles_schedules_slots,
   hasNewPublish: userData.in_new_publish_rollout,
@@ -50,48 +55,52 @@ module.exports = userData => ({
     updateSuccesses: userData.email_notifications.includes('update_successes'),
     weeklyDigests: userData.email_notifications.includes('weekly_digests'),
     newContributions: userData.email_notifications.includes(
-      'new_contributions',
+      'new_contributions'
     ),
     postMovedBackToDrafts: userData.email_notifications.includes(
-      'post_moved_back_to_drafts',
+      'post_moved_back_to_drafts'
     ),
     celebrations: userData.email_notifications.includes('celebrations'),
   },
   canStartBusinessTrial: userData.can_start_business_trial,
   canStartProTrial: userData.can_start_pro_trial,
   isOnProTrial: userData.on_awesome_trial,
-  shouldShowProTrialExpiredModal: hasProTrialExpired(userData.feature_trials)
-    && userData.plan === 'free'
-    && !userData.has_cancelled,
+  shouldShowProTrialExpiredModal:
+    hasProTrialExpired(userData.feature_trials) &&
+    userData.plan === 'free' &&
+    !userData.has_cancelled,
   isOnBusinessTrial: isOnBusinessPlan(userData.trial_plan),
-  shouldShowBusinessTrialExpiredModal: isOnBusinessPlan(userData.trial_plan)
-    && userData.trial_expired
-    && !userData.trial_done,
+  shouldShowBusinessTrialExpiredModal:
+    isOnBusinessPlan(userData.trial_plan) &&
+    userData.trial_expired &&
+    !userData.trial_done,
   trial: userData.on_awesome_trial
     ? {
-      hasCardDetails: userData.has_card_details,
-      hasTrialExtended: userData.has_trial_extended,
-      onTrial: userData.on_awesome_trial,
-      postTrialCost: '',
-      trialLength: userData.awesome_trial_length,
-      trialTimeRemaining: userData.awesome_trial_time_remaining,
-    }
+        hasCardDetails: userData.has_card_details,
+        hasTrialExtended: userData.has_trial_extended,
+        onTrial: userData.on_awesome_trial,
+        postTrialCost: '',
+        trialLength: userData.awesome_trial_length,
+        trialTimeRemaining: userData.awesome_trial_time_remaining,
+      }
     : {
-      hasCardDetails: userData.has_card_details,
-      hasTrialExtended: userData.has_trial_extended,
-      onTrial: userData.on_trial,
-      postTrialCost: userData.post_trial_cost,
-      trialLength: userData.trial_length,
-      trialTimeRemaining: userData.trial_time_remaining,
-      trialPlan: userData.trial_plan,
-    },
+        hasCardDetails: userData.has_card_details,
+        hasTrialExtended: userData.has_trial_extended,
+        onTrial: userData.on_trial,
+        postTrialCost: userData.post_trial_cost,
+        trialLength: userData.trial_length,
+        trialTimeRemaining: userData.trial_time_remaining,
+        trialPlan: userData.trial_plan,
+      },
   isNonprofit: userData.billing_status_nonprofit,
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,
   showReturnToClassic: userData.has_np_app_switcher,
   helpScoutConfig: userData.helpscout_beacon_params,
   isBusinessTeamMember: userData.is_business_team_member,
-  hasAccessToUserTag: userData.features.includes('instagram_user_tags')
-    && (userData.is_pro_premium_or_business_org_user // this includes team members
-    || isOnEnterprisePlan(userData.plan)), // TO-DO: Add to api
+  hasAccessToUserTag:
+    userData.features.includes('instagram_user_tags') &&
+    (userData.is_pro_premium_or_business_org_user || // this includes team members
+      isOnEnterprisePlan(userData.plan)), // TO-DO: Add to api
+  isAnalyzeCustomer: userData.is_analyze_customer,
 });

@@ -1,6 +1,4 @@
-import {
-  List,
-} from '@bufferapp/components';
+import { List } from '@bufferapp/components';
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -35,6 +33,8 @@ const renderPostList = ({
   hasFirstCommentFlip,
   userData,
   onPreviewClick,
+  showAnalyzeBannerAfterFirstPost,
+  isAnalyzeCustomer,
 }) => (
   <div style={postListStyle}>
     <PostList
@@ -61,6 +61,8 @@ const renderPostList = ({
       hasFirstCommentFlip={hasFirstCommentFlip}
       userData={userData}
       onPreviewClick={onPreviewClick}
+      showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
+      isAnalyzeCustomer={isAnalyzeCustomer}
     />
   </div>
 );
@@ -88,6 +90,8 @@ const PostLists = ({
   hasFirstCommentFlip,
   userData,
   onPreviewClick,
+  showAnalyzeBannerAfterFirstPost,
+  isAnalyzeCustomer,
 }) => (
   <List
     items={postLists.map((postList, index) =>
@@ -113,7 +117,9 @@ const PostLists = ({
         hasFirstCommentFlip,
         userData,
         onPreviewClick,
-      }),
+        showAnalyzeBannerAfterFirstPost,
+        isAnalyzeCustomer,
+      })
     )}
     fillContainer
   />
@@ -126,9 +132,9 @@ PostLists.propTypes = {
       posts: PropTypes.arrayOf(
         PropTypes.shape({
           text: PropTypes.string,
-        }),
+        })
       ),
-    }),
+    })
   ).isRequired,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
@@ -147,9 +153,13 @@ PostLists.propTypes = {
   isPastReminder: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
+  showAnalyzeBannerAfterFirstPost: PropTypes.bool,
+  isAnalyzeCustomer: PropTypes.bool,
 };
 
 PostLists.defaultProps = {
+  showAnalyzeBannerAfterFirstPost: false,
+  isAnalyzeCustomer: false,
 };
 
 export default PostLists;
