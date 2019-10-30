@@ -17,6 +17,7 @@ const StyledIconWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 4px;
 `;
 
 const StyledTagWrapper = styled.div`
