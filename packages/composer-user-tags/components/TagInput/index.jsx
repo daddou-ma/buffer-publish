@@ -16,6 +16,7 @@ const TagInput = (
     inputValue,
     setInputValue,
     disabled,
+    inputDisabled,
     addTag,
     reachedMaxLimit,
   },
@@ -31,6 +32,11 @@ const TagInput = (
     focus: () => {
       if (inputEl.current) {
         inputEl.current.focus();
+      }
+    },
+    blur: () => {
+      if (inputEl.current) {
+        inputEl.current.blur();
       }
     },
   }));
@@ -49,12 +55,12 @@ const TagInput = (
         onChange={e => {
           setInputValue(e.target.value);
         }}
-        placeholder={translations.placeholder}
         value={inputValue}
         name="tagInput"
         label={translations.inputLabel}
         prefix={{ text: '@', paddingLeft: '25px' }}
         ref={inputEl}
+        disabled={inputDisabled}
       />
       <ButtonWrapper>
         <Button
@@ -82,6 +88,7 @@ TagInput.propTypes = {
   setInputValue: PropTypes.func.isRequired,
   addTag: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
+  inputDisabled: PropTypes.bool.isRequired,
 };
 
 export default React.forwardRef(TagInput);

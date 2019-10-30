@@ -26,6 +26,7 @@ import {
   TextWrapper,
   Title,
   TopContent,
+  CoordinateMarker,
 } from './style';
 
 const UserTags = ({
@@ -51,23 +52,14 @@ const UserTags = ({
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
   const [showInput, setShowInput] = useState(hasUserTags);
-
-  /*
-   * Anytime the input is shown and/or coordinates change
-   * we focus the tag input
-   */
   const tagInputRef = useRef(null);
-  useEffect(() => {
-    if (tagInputRef.current) {
-      tagInputRef.current.focus();
-    }
-  }, [showInput, coordinates]);
 
   const MAX_TAG_LIMIT = 20;
 
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
   const inputValueLength = inputValue.replace(/ /g, '').length;
   const isAddTagDisabled = !coordinates.y || inputValueLength < 1;
+  const isTagInputDisabled = !coordinates.y;
 
   const addTag = () => {
     const { x, y, clientX, clientY } = coordinates;
@@ -81,8 +73,10 @@ const UserTags = ({
     setTags([...tags, userTag]);
     setInputValue('');
     setCoordinates(initialCoordinateState);
-    setShowInput(false);
     setShowTags(true);
+    if (tagInputRef.current) {
+      tagInputRef.current.blur();
+    }
     selectedChannels.forEach(channel => {
       if (channel.isBusinessProfile) {
         trackTag({ channel, username: inputValue });
@@ -110,6 +104,11 @@ const UserTags = ({
     setCoordinates(coords);
     // show input once a tag has been added
     setShowInput(true);
+    setTimeout(() => {
+      if (tagInputRef.current) {
+        tagInputRef.current.focus();
+      }
+    }, 0);
     e.preventDefault();
   };
 
@@ -132,6 +131,7 @@ const UserTags = ({
                 ))}
               </Fragment>
             )}
+            <CoordinateMarker coordinates={coordinates} />
           </ImageWrapper>
         </ResponsiveContainer>
         {hasUserTags && (
@@ -153,6 +153,7 @@ const UserTags = ({
                     inputValue={inputValue}
                     setInputValue={setInputValue}
                     disabled={isAddTagDisabled}
+                    inputDisabled={isTagInputDisabled}
                     addTag={addTag}
                     reachedMaxLimit={reachedMaxLimit}
                     ref={tagInputRef}

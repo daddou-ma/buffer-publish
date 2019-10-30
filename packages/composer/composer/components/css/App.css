@@ -68,8 +68,7 @@
 }
 
 .appWrapper {
-	height: 100%;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  height: 100%;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5em;
@@ -115,7 +114,8 @@
   vertical-align: baseline;
 }
 
-.closeButton.closeButton { /* Specificity hack */
+.closeButton.closeButton {
+  /* Specificity hack */
   position: absolute;
   top: -11px;
   right: -15px;

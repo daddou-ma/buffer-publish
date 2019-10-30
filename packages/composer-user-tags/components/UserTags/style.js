@@ -12,6 +12,10 @@ export const PersonIcon = styled.div`
   width: 28px;
   height: 28px;
   background: rgba(0, 0, 0, 0.8);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const TextWrapper = styled.span`
@@ -97,4 +101,19 @@ export const SaveButton = styled.div`
 
 export const ImageWrapper = styled.div`
   position: relative;
+`;
+
+export const CoordinateMarker = styled.div`
+  display: ${({ coordinates }) => (coordinates.y ? 'block' : 'none')};
+  position: absolute;
+  left: ${({ coordinates }) => `${coordinates.clientX}%`};
+  top: ${({ coordinates }) => `${coordinates.clientY}%`};
+  width: 32px;
+  height: 32px;
+  background: rgba(44, 75, 255, 0.8);
+  border: 2px solid #fff;
+  box-sizing: border-box;
+  border-radius: 100%;
+  transform: translate(-16px, -16px);
+  pointer-events: none;
 `;
