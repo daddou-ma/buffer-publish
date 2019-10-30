@@ -60,6 +60,7 @@ export const RightContent = styled.div`
 export const TagList = styled.div`
   overflow: scroll;
   height: ${({ showingInput }) => (showingInput ? '148px' : '248px')};
+  overflow-x: hidden;
 `;
 
 export const TopContent = styled.div`

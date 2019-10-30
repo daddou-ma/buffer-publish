@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Fragment } from 'react';
+import React, { useState, useRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { Person } from '@bufferapp/ui/Icon';
@@ -61,7 +61,7 @@ const UserTags = ({
   const isAddTagDisabled = !coordinates.y || inputValueLength < 1;
   const isTagInputDisabled = !coordinates.y;
 
-  const addTag = () => {
+  const addTag = e => {
     const { x, y, clientX, clientY } = coordinates;
     const userTag = {
       username: inputValue,
@@ -82,6 +82,7 @@ const UserTags = ({
         trackTag({ channel, username: inputValue });
       }
     });
+    if (e) e.preventDefault();
   };
 
   const saveTags = () => {

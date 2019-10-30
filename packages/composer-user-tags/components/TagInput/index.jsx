@@ -1,9 +1,4 @@
-import React, {
-  Fragment,
-  useLayoutEffect,
-  useRef,
-  useImperativeHandle,
-} from 'react';
+import React, { Fragment, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
 import Input from '@bufferapp/ui/Input';
