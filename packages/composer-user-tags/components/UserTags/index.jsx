@@ -2,27 +2,30 @@ import React, { useState, useRef, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { Person } from '@bufferapp/ui/Icon';
+import uuid from 'uuid/v4';
 import TagInput from '../TagInput';
 import TagListItem from '../TagListItem';
 import ImageLabel from '../ImageLabel';
-import uuid from 'uuid/v4';
+import { getClientXY, removeClientXY, getCoordinates } from '../../utils/Tags';
 
 import {
-  PersonIcon,
-  TextWrapper,
+  BottomContent,
+  FooterButtons,
+  Image,
+  ImageWrapper,
+  InputWrapper,
+  Line,
   Modal,
   ModalInner,
-  RightHeader,
-  Image,
+  PersonIcon,
+  ResponsiveContainer,
   RightContent,
-  Line,
-  TopContent,
-  BottomContent,
-  TagList,
-  InputWrapper,
-  Title,
-  FooterButtons,
+  RightHeader,
   SaveButton,
+  TagList,
+  TextWrapper,
+  Title,
+  TopContent,
 } from './style';
 
 const UserTags = ({
@@ -41,11 +44,13 @@ const UserTags = ({
     clientX: null,
     clientY: null,
   };
+
   const [coordinates, setCoordinates] = useState(initialCoordinateState);
-  const [tags, setTags] = useState(userTags);
+  const [tags, setTags] = useState(getClientXY(userTags));
+  const hasUserTags = tags && tags.length > 0;
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  const [showInput, setShowInput] = useState(false);
+  const [showInput, setShowInput] = useState(hasUserTags);
 
   /*
    * Anytime the input is shown and/or coordinates change
@@ -86,7 +91,8 @@ const UserTags = ({
   };
 
   const saveTags = () => {
-    saveGlobalTags(tags);
+    const globalTags = removeClientXY(tags);
+    saveGlobalTags(globalTags);
     selectedChannels.forEach(channel => {
       if (channel.isBusinessProfile) {
         trackAllTags({ channel, tags });
@@ -100,25 +106,9 @@ const UserTags = ({
   };
 
   const onImageClick = e => {
-    const rect = e.target.getBoundingClientRect();
-    const clientX = e.clientX - rect.left; // x position within the element.
-    const clientY = e.clientY - rect.top; // y position within the element.
-    // final_width = max_height * start_width / start_height
-    let { width, height } = media;
-    if (height > 500) {
-      width = (500 * width) / height;
-      height = 500;
-    }
-    const x = clientX / width;
-    const y = clientY / height;
-    setCoordinates({
-      x: x.toFixed(2),
-      y: y.toFixed(2),
-      clientX,
-      clientY,
-    });
-
-    // show input once a spot has been clicked
+    const coords = getCoordinates({ e, media });
+    setCoordinates(coords);
+    // show input once a tag has been added
     setShowInput(true);
     e.preventDefault();
   };
@@ -128,20 +118,26 @@ const UserTags = ({
   return (
     <Modal>
       <ModalInner>
-        <Image
-          alt="Image to tag users"
-          src={media.url}
-          onClick={onImageClick}
-        />
-        <PersonIcon onClick={onTogglePersonIcon}>
-          <Person size="medium" />
-        </PersonIcon>
-        {tags && (
-          <Fragment>
-            {tags.map(tag => (
-              <ImageLabel tag={tag} showTags={showTags} key={uuid()} />
-            ))}
-          </Fragment>
+        <ResponsiveContainer>
+          <ImageWrapper>
+            <Image
+              alt={translations.imgAltText}
+              src={media.url}
+              onClick={onImageClick}
+            />
+            {tags && (
+              <Fragment>
+                {tags.map(tag => (
+                  <ImageLabel tag={tag} showTags={showTags} key={uuid()} />
+                ))}
+              </Fragment>
+            )}
+          </ImageWrapper>
+        </ResponsiveContainer>
+        {hasUserTags && (
+          <PersonIcon onClick={onTogglePersonIcon}>
+            <Person size="medium" />
+          </PersonIcon>
         )}
         <RightContent>
           <TopContent>
@@ -240,6 +236,7 @@ UserTags.propTypes = {
     maxLimitText: PropTypes.string,
     btnSave: PropTypes.string,
     btnCancel: PropTypes.string,
+    imgAltText: PropTypes.string,
   }).isRequired,
 };
 

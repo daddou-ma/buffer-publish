@@ -75,6 +75,8 @@ const verifyTab = (
   isFreeUser,
   onChangeTab,
   hasStoriesFlip,
+  childTabId,
+  shouldHideAdvancedAnalytics
 ) => {
   let isInstagramProfile = false;
   let isBusinessAccount = false;
@@ -85,8 +87,16 @@ const verifyTab = (
     isBusinessAccount = selectedProfile.business;
     isManager = selectedProfile.isManager;
 
-    const validTabId =
-      getValidTab(tabId, isBusinessAccount, isInstagramProfile, isManager, isFreeUser, hasStoriesFlip);
+    const validTabId = getValidTab(
+      tabId,
+      isBusinessAccount,
+      isInstagramProfile,
+      isManager,
+      isFreeUser,
+      hasStoriesFlip,
+      childTabId,
+      shouldHideAdvancedAnalytics
+    );
 
     // if current tabId is not valid, redirect to the queue
     if (tabId !== validTabId) {
@@ -95,9 +105,28 @@ const verifyTab = (
   }
 };
 
-const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, features, onChangeTab, hasStoriesFlip }) => {
+const TabContent = ({
+  tabId,
+  profileId,
+  childTabId,
+  loadMore,
+  selectedProfile,
+  features,
+  onChangeTab,
+  hasStoriesFlip,
+  shouldHideAdvancedAnalytics,
+}) => {
   // if current tabId is not valid, redirect to the queue
-  verifyTab(tabId, profileId, selectedProfile, features.isFreeUser(), onChangeTab, hasStoriesFlip);
+  verifyTab(
+    tabId,
+    profileId,
+    selectedProfile,
+    features.isFreeUser(),
+    onChangeTab,
+    hasStoriesFlip,
+    childTabId,
+    shouldHideAdvancedAnalytics
+  );
 
   switch (tabId) {
     case 'queue':
@@ -118,7 +147,13 @@ const TabContent = ({ tabId, profileId, childTabId, loadMore, selectedProfile, f
           return <Analytics />;
         case 'posts':
         default:
-          return <SentPosts profileId={profileId} tabId={tabId} loadMore={loadMore} />;
+          return (
+            <SentPosts
+              profileId={profileId}
+              tabId={tabId}
+              loadMore={loadMore}
+            />
+          );
       }
     case 'settings':
       switch (childTabId) {
@@ -150,6 +185,8 @@ TabContent.propTypes = {
     isManager: PropTypes.bool,
   }),
   features: PropTypes.object.isRequired, // eslint-disable-line
+  hasStoriesFlip: PropTypes.bool,
+  shouldHideAdvancedAnalytics: PropTypes.bool,
 };
 
 TabContent.defaultProps = {
@@ -157,6 +194,8 @@ TabContent.defaultProps = {
   childTabId: '',
   onChangeTab: () => {},
   selectedProfile: {},
+  hasStoriesFlip: false,
+  shouldHideAdvancedAnalytics: false,
 };
 
 function ProfilePage({
@@ -171,6 +210,7 @@ function ProfilePage({
   features,
   onChangeTab,
   hasStoriesFlip,
+  shouldHideAdvancedAnalytics,
 }) {
   const isQueueTab = tabId === 'queue' || tabId === 'stories';
   const isOtherPostsTab =
@@ -223,6 +263,7 @@ function ProfilePage({
               features={features}
               onChangeTab={onChangeTab}
               hasStoriesFlip={hasStoriesFlip}
+              shouldHideAdvancedAnalytics={shouldHideAdvancedAnalytics}
             />
             {loadingMore && (
               <div style={loadingAnimationStyle}>
@@ -256,6 +297,7 @@ ProfilePage.propTypes = {
   }),
   features: PropTypes.object.isRequired, // eslint-disable-line
   hasStoriesFlip: PropTypes.bool,
+  shouldHideAdvancedAnalytics: PropTypes.bool,
 };
 
 ProfilePage.defaultProps = {
@@ -266,6 +308,7 @@ ProfilePage.defaultProps = {
   onChangeTab: () => {},
   selectedProfile: null,
   hasStoriesFlip: false,
+  shouldHideAdvancedAnalytics: false,
 };
 
 export default WithFeatureLoader(ProfilePage);

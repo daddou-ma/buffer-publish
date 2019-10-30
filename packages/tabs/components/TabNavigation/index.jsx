@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Tabs,
-  Tab,
-} from '@bufferapp/publish-shared-components';
+import { Tabs, Tab } from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -30,8 +27,8 @@ const Tag = styled.span`
   font-size: 12px;
   margin-left: 8px;
   border-radius: 100px;
-  color: #FFFFFF;
-  background-color: #87C221;
+  color: #ffffff;
+  background-color: #87c221;
 `;
 
 const tabsStyle = {
@@ -50,7 +47,7 @@ class TabNavigation extends React.Component {
     this.isValidTab = this.isValidTab.bind(this);
   }
 
-  isValidTab (tabId) {
+  isValidTab(tabId) {
     const {
       features,
       isBusinessAccount,
@@ -59,17 +56,20 @@ class TabNavigation extends React.Component {
       hasStoriesFlip,
     } = this.props;
 
-    return tabId === getValidTab(
-      tabId,
-      isBusinessAccount,
-      isInstagramProfile,
-      isManager,
-      features.isFreeUser(),
-      hasStoriesFlip,
+    return (
+      tabId ===
+      getValidTab(
+        tabId,
+        isBusinessAccount,
+        isInstagramProfile,
+        isManager,
+        features.isFreeUser(),
+        hasStoriesFlip
+      )
     );
   }
 
-  render () {
+  render() {
     const { loading } = this.state;
     const {
       selectedTabId,
@@ -79,7 +79,7 @@ class TabNavigation extends React.Component {
       shouldShowUpgradeButton,
       shouldShowNestedSettingsTab,
       shouldShowNestedAnalyticsTab,
-      shouldHideAnalyticsOverviewTab,
+      shouldHideAdvancedAnalytics,
       onUpgradeButtonClick,
       isLockedProfile,
     } = this.props;
@@ -88,49 +88,41 @@ class TabNavigation extends React.Component {
       /* wrapper div with "tabs" id necessary as a selector
       for a11y focus after selecting profile in sidebar */
       <div id="tabs" style={tabsStyle}>
-        <Tabs
-          selectedTabId={selectedTabId}
-          onTabClick={onTabClick}
-        >
+        <Tabs selectedTabId={selectedTabId} onTabClick={onTabClick}>
           <Tab tabId="queue">Queue</Tab>
           {/* IG, Business users or Team Members */}
-          {this.isValidTab('stories')
-            && (
-              <Tab tabId="stories">
-                Stories
-                <Tag>New</Tag>
-              </Tab>
-            )}
-          {this.isValidTab('pastReminders')
-            && <Tab tabId="pastReminders">Past Reminders</Tab>
-          }
+          {this.isValidTab('stories') && (
+            <Tab tabId="stories">
+              Stories
+              <Tag>New</Tag>
+            </Tab>
+          )}
+          {this.isValidTab('pastReminders') && (
+            <Tab tabId="pastReminders">Past Reminders</Tab>
+          )}
           <Tab tabId="analytics">Analytics</Tab>
           {/* Team Members who are Managers */}
-          {this.isValidTab('awaitingApproval')
-            && <Tab tabId="awaitingApproval">Awaiting Approval</Tab>
-          }
+          {this.isValidTab('awaitingApproval') && (
+            <Tab tabId="awaitingApproval">Awaiting Approval</Tab>
+          )}
           {/* Team Members who are Contributors */}
-          {this.isValidTab('pendingApproval')
-            && <Tab tabId="pendingApproval">Pending Approval</Tab>
-          }
+          {this.isValidTab('pendingApproval') && (
+            <Tab tabId="pendingApproval">Pending Approval</Tab>
+          )}
           {/* Pro and up users or Team Members */}
-          {this.isValidTab('drafts')
-            && <Tab tabId="drafts">Drafts</Tab>
-          }
+          {this.isValidTab('drafts') && <Tab tabId="drafts">Drafts</Tab>}
           {/* IG, Business users or Team Members */}
-          {this.isValidTab('grid')
-            && <Tab tabId="grid">Shop Grid</Tab>
-          }
+          {this.isValidTab('grid') && <Tab tabId="grid">Shop Grid</Tab>}
           <Tab tabId="settings">Settings</Tab>
         </Tabs>
-        { shouldShowUpgradeButton && (
+        {shouldShowUpgradeButton && (
           <UpgradeCtaStyle>
             <ButtonWrapper>
               <Button
                 label="Upgrade"
                 type="secondary"
                 size="small"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   onUpgradeButtonClick();
                 }}
@@ -145,9 +137,9 @@ class TabNavigation extends React.Component {
             secondary
           >
             <Tab tabId="posts">Posts</Tab>
-            {!shouldHideAnalyticsOverviewTab
-              && <Tab tabId="overview">Overview</Tab>
-            }
+            {!shouldHideAdvancedAnalytics && (
+              <Tab tabId="overview">Overview</Tab>
+            )}
           </Tabs>
         )}
         {shouldShowNestedSettingsTab && !isLockedProfile && (
@@ -163,7 +155,7 @@ class TabNavigation extends React.Component {
                 type="secondary"
                 size="small"
                 label={loading ? 'Reconnecting…' : 'Reconnect'}
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   this.setState({ loading: true });
                   window.location.assign(`${getURL.getManageURL()}`);
@@ -180,7 +172,7 @@ class TabNavigation extends React.Component {
 TabNavigation.defaultProps = {
   shouldShowNestedSettingsTab: false,
   shouldShowNestedAnalyticsTab: false,
-  shouldHideAnalyticsOverviewTab: false,
+  shouldHideAdvancedAnalytics: true,
   shouldShowUpgradeButton: false,
   selectedChildTabId: null,
   isLockedProfile: false,
@@ -201,7 +193,7 @@ TabNavigation.propTypes = {
   selectedChildTabId: PropTypes.string,
   shouldShowNestedSettingsTab: PropTypes.bool,
   shouldShowNestedAnalyticsTab: PropTypes.bool,
-  shouldHideAnalyticsOverviewTab: PropTypes.bool,
+  shouldHideAdvancedAnalytics: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
   shouldShowUpgradeButton: PropTypes.bool,
