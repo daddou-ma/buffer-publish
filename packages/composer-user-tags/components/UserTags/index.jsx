@@ -41,10 +41,10 @@ const UserTags = ({
     clientX: null,
     clientY: null,
   };
-  const hasUserTags = userTags && userTags.length > 0;
 
   const [coordinates, setCoordinates] = useState(initialCoordinateState);
-  const [tags, setTags] = useState(getClientXY({ userTags, media }));
+  const [tags, setTags] = useState(getClientXY(userTags));
+  const hasUserTags = tags && tags.length > 0;
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
   const [showInput, setShowInput] = useState(hasUserTags);
@@ -85,28 +85,30 @@ const UserTags = ({
   return (
     <Modal>
       <ModalInner>
-        <ImageWrapper>
-          <Image
-            alt={translations.imgAltText}
-            src={media.url}
-            onClick={onImageClick}
-          />
-        </ImageWrapper>
+        <ResponsiveContainer>
+          <ImageWrapper>
+            <Image
+              alt={translations.imgAltText}
+              src={media.url}
+              onClick={onImageClick}
+            />
+            {tags && (
+              <Fragment>
+                {tags.map(tag => (
+                  <ImageLabel
+                    tag={tag}
+                    showTags={showTags}
+                    key={uniqKey(tag.username)}
+                  />
+                ))}
+              </Fragment>
+            )}
+          </ImageWrapper>
+        </ResponsiveContainer>
         {hasUserTags && (
           <PersonIcon onClick={onTogglePersonIcon}>
             <Person size="medium" />
           </PersonIcon>
-        )}
-        {tags && (
-          <Fragment>
-            {tags.map(tag => (
-              <ImageLabel
-                tag={tag}
-                showTags={showTags}
-                key={uniqKey(tag.username)}
-              />
-            ))}
-          </Fragment>
         )}
         <RightContent>
           <TopContent>

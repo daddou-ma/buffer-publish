@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { grayLight, grayLighter, gray } from '@bufferapp/ui/style/colors';
 import { Text } from '@bufferapp/ui';
+import { MAX_HEIGHT } from '../../utils/Tags';
 
 export const PersonIcon = styled.div`
   position: absolute;
@@ -31,28 +32,29 @@ export const ModalInner = styled.div`
 `;
 
 export const Image = styled.img`
-  max-height: 100%;
+  max-height: ${MAX_HEIGHT}px;
   max-width: 100%;
-  /* width: auto; */
+  width: auto;
   margin: 0;
   cursor: crosshair;
   display: block;
 `;
 
-export const ImageWrapper = styled.div`
-  max-height: 500px;
+export const ResponsiveContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  background-color: black;
 `;
 
 export const RightContent = styled.div`
   width: 350px;
+  min-height: 499px; /* Set min height so modal will stay same size on input display */
   display: flex;
   flex-direction: column;
 `;
 
-// TO-DO: Refactor height to be responsive
 export const TagList = styled.div`
   overflow: scroll;
   height: 148px;
@@ -93,4 +95,8 @@ export const FooterButtons = styled.div`
 
 export const SaveButton = styled.div`
   width: 100%;
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
 `;
