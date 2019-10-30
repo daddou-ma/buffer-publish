@@ -5,23 +5,26 @@ import { Person } from '@bufferapp/ui/Icon';
 import TagInput from '../TagInput';
 import TagListItem from '../TagListItem';
 import ImageLabel from '../ImageLabel';
+import { getClientXY, removeClientXY, getCoordinates } from '../../utils/Tags';
 
 import {
-  PersonIcon,
-  TextWrapper,
+  BottomContent,
+  FooterButtons,
+  Image,
+  ImageWrapper,
+  InputWrapper,
+  Line,
   Modal,
   ModalInner,
-  RightHeader,
-  Image,
+  PersonIcon,
+  ResponsiveContainer,
   RightContent,
-  Line,
-  TopContent,
-  BottomContent,
-  TagList,
-  InputWrapper,
-  Title,
-  FooterButtons,
+  RightHeader,
   SaveButton,
+  TagList,
+  TextWrapper,
+  Title,
+  TopContent,
 } from './style';
 
 const UserTags = ({
@@ -41,11 +44,13 @@ const UserTags = ({
     clientX: null,
     clientY: null,
   };
+
   const [coordinates, setCoordinates] = useState(initialCoordinateState);
-  const [tags, setTags] = useState(userTags);
+  const [tags, setTags] = useState(getClientXY(userTags));
+  const hasUserTags = tags && tags.length > 0;
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  const [showInput, setShowInput] = useState(userTags && userTags.length > 0);
+  const [showInput, setShowInput] = useState(hasUserTags);
   const MAX_TAG_LIMIT = 20;
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
   const inputValueLength = inputValue.replace(/ /g, '').length;
@@ -71,7 +76,8 @@ const UserTags = ({
   };
 
   const saveTags = () => {
-    saveGlobalTags(tags);
+    const globalTags = removeClientXY(tags);
+    saveGlobalTags(globalTags);
     selectedChannels.forEach(channel => {
       if (channel.isBusinessProfile) {
         trackAllTags({ channel, tags });
@@ -85,24 +91,8 @@ const UserTags = ({
   };
 
   const onImageClick = e => {
-    const rect = e.target.getBoundingClientRect();
-    const clientX = e.clientX - rect.left; // x position within the element.
-    const clientY = e.clientY - rect.top; // y position within the element.
-    // final_width = max_height * start_width / start_height
-    let { width, height } = media;
-    if (height > 500) {
-      width = (500 * width) / height;
-      height = 500;
-    }
-    const x = clientX / width;
-    const y = clientY / height;
-    setCoordinates({
-      x: x.toFixed(2),
-      y: y.toFixed(2),
-      clientX,
-      clientY,
-    });
-
+    const coords = getCoordinates({ e, media });
+    setCoordinates(coords);
     // show input once a tag has been added
     if (!showInput) setShowInput(true);
     e.preventDefault();
@@ -113,24 +103,30 @@ const UserTags = ({
   return (
     <Modal>
       <ModalInner>
-        <Image
-          alt="Image to tag users"
-          src={media.url}
-          onClick={onImageClick}
-        />
-        <PersonIcon onClick={onTogglePersonIcon}>
-          <Person size="large" />
-        </PersonIcon>
-        {tags && (
-          <Fragment>
-            {tags.map(tag => (
-              <ImageLabel
-                tag={tag}
-                showTags={showTags}
-                key={uniqKey(tag.username)}
-              />
-            ))}
-          </Fragment>
+        <ResponsiveContainer>
+          <ImageWrapper>
+            <Image
+              alt={translations.imgAltText}
+              src={media.url}
+              onClick={onImageClick}
+            />
+            {tags && (
+              <Fragment>
+                {tags.map(tag => (
+                  <ImageLabel
+                    tag={tag}
+                    showTags={showTags}
+                    key={uniqKey(tag.username)}
+                  />
+                ))}
+              </Fragment>
+            )}
+          </ImageWrapper>
+        </ResponsiveContainer>
+        {hasUserTags && (
+          <PersonIcon onClick={onTogglePersonIcon}>
+            <Person size="medium" />
+          </PersonIcon>
         )}
         <RightContent>
           <TopContent>
@@ -226,6 +222,7 @@ UserTags.propTypes = {
     maxLimitText: PropTypes.string,
     btnSave: PropTypes.string,
     btnCancel: PropTypes.string,
+    imgAltText: PropTypes.string,
   }).isRequired,
 };
 

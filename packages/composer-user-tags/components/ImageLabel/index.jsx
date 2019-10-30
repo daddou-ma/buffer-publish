@@ -4,13 +4,12 @@ import styled from 'styled-components';
 
 const StyledImageLabel = styled.div`
   position: absolute;
-  left: ${({ tag }) => tag.clientX}px;
-  top: ${({ tag }) => tag.clientY}px;
+  left: ${({ tag }) => `${tag.clientX}%`};
+  top: ${({ tag }) => `${tag.clientY}%`};
   color: white;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 7%;
   padding: 2px 5px;
-  opacity: 0.7;
   display: ${({ showTags }) => (showTags ? 'block' : 'none')};
 `;
 
