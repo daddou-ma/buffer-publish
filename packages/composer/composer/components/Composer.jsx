@@ -818,12 +818,12 @@ class Composer extends React.Component {
     // allow if draft feedback states that an account is set up for reminders
     const feedbackNotEnabled =
       draft.instagramFeedback.length === 1 &&
-      draft.instagramFeedback.map(feedback => feedback.code === 'NOT_ENABLED');
+      draft.instagramFeedback.some(feedback => feedback.code === 'NOT_ENABLED');
 
     const canAddUserTag = hasAccessToUserTag // on the user level including feature flip
       && this.isInstagram()
-      && selectedProfiles.some((profile) => profile.instagramDirectEnabled)
-      /* don't allow user to add tag if post is a reminder though its ok if more than one 
+      && selectedProfiles.some(profile => profile.instagramDirectEnabled)
+      /* don't allow user to add tag if post is a reminder though its ok if more than one
       ig profile is selected and one doesnt have direct scheduling enabled */
       && (draft.instagramFeedback.length < 1 || feedbackNotEnabled);
 
