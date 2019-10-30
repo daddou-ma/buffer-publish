@@ -815,11 +815,15 @@ class Composer extends React.Component {
     const selectedProfiles = this.getSelectedProfilesForService();
     const numSelectedProfiles = selectedProfiles.length;
 
+    // allow if draft feedback states that an account is set up for reminders
+    const feedbackNotEnabled =
+      draft.instagramFeedback.length === 1 &&
+      draft.instagramFeedback.map(feedback => feedback.code === 'NOT_ENABLED');
+
     const canAddUserTag = hasAccessToUserTag // on the user level including feature flip
       && this.isInstagram()
       && selectedProfiles.some((profile) => profile.instagramDirectEnabled)
-      && draft.instagramFeedback.length < 1 // don't allow user to add tag if post is reminder
-      // && !appState.isOmniboxEnabled;
+      && (draft.instagramFeedback.length < 1 || feedbackNotEnabled); // don't allow user to add tag if post is reminder
 
     const composerMediaAttachment = (
       <MediaAttachment
