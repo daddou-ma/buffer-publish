@@ -58,7 +58,7 @@ const UserTags = ({
     }
   }, [showInput, coordinates]);
 
-  const MAX_TAG_LIMIT = 2;
+  const MAX_TAG_LIMIT = 20;
 
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
   const inputValueLength = inputValue.replace(/ /g, '').length;
