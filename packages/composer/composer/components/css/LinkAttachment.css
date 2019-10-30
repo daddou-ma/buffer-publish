@@ -24,7 +24,9 @@
 
 .linkAttachment {
   position: relative;
-  min-height: calc(var(--link-attachment-thumbnail-height) + 2 * (var(--padding) + 1));
+  min-height: calc(
+    var(--link-attachment-thumbnail-height) + 2 * (var(--padding) + 1)
+  );
   margin: 0 var(--margin-x);
   padding: 10px 10px 0 10px;
   border: var(--border-size) solid var(--composer-inner-border-color);
@@ -37,7 +39,7 @@
 }
 
 .linkAttachment::before {
-  content: "";
+  content: '';
   position: absolute;
   top: calc(-var(--border-size) - 1);
   left: calc(-var(--margin-x) - 1);
@@ -142,9 +144,8 @@
   width: calc(100% - var(--close-button-size) - 6px);
   margin: -6px -4px -2px -4px;
   padding: 2px 4px;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 18px;
-  color: #323B43;
+  color: #323b43;
   cursor: default;
 }

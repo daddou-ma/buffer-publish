@@ -1,7 +1,8 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useRef, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { Person } from '@bufferapp/ui/Icon';
+import uuid from 'uuid/v4';
 import TagInput from '../TagInput';
 import TagListItem from '../TagListItem';
 import ImageLabel from '../ImageLabel';
@@ -25,6 +26,7 @@ import {
   TextWrapper,
   Title,
   TopContent,
+  CoordinateMarker,
 } from './style';
 
 const UserTags = ({
@@ -37,7 +39,6 @@ const UserTags = ({
   trackTag,
   trackAllTags,
 }) => {
-  const uniqKey = identifier => `${identifier}-${new Date().getTime()}`;
   const initialCoordinateState = {
     x: null,
     y: null,
@@ -51,10 +52,14 @@ const UserTags = ({
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
   const [showInput, setShowInput] = useState(hasUserTags);
+  const tagInputRef = useRef(null);
+
   const MAX_TAG_LIMIT = 20;
+
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
   const inputValueLength = inputValue.replace(/ /g, '').length;
   const isAddTagDisabled = !coordinates.y || inputValueLength < 1;
+  const isTagInputDisabled = !coordinates.y;
 
   const addTag = () => {
     const { x, y, clientX, clientY } = coordinates;
@@ -68,6 +73,10 @@ const UserTags = ({
     setTags([...tags, userTag]);
     setInputValue('');
     setCoordinates(initialCoordinateState);
+    setShowTags(true);
+    if (tagInputRef.current) {
+      tagInputRef.current.blur();
+    }
     selectedChannels.forEach(channel => {
       if (channel.isBusinessProfile) {
         trackTag({ channel, username: inputValue });
@@ -94,7 +103,12 @@ const UserTags = ({
     const coords = getCoordinates({ e, media });
     setCoordinates(coords);
     // show input once a tag has been added
-    if (!showInput) setShowInput(true);
+    setShowInput(true);
+    setTimeout(() => {
+      if (tagInputRef.current) {
+        tagInputRef.current.focus();
+      }
+    }, 0);
     e.preventDefault();
   };
 
@@ -113,14 +127,11 @@ const UserTags = ({
             {tags && (
               <Fragment>
                 {tags.map(tag => (
-                  <ImageLabel
-                    tag={tag}
-                    showTags={showTags}
-                    key={uniqKey(tag.username)}
-                  />
+                  <ImageLabel tag={tag} showTags={showTags} key={uuid()} />
                 ))}
               </Fragment>
             )}
+            <CoordinateMarker coordinates={coordinates} />
           </ImageWrapper>
         </ResponsiveContainer>
         {hasUserTags && (
@@ -134,26 +145,30 @@ const UserTags = ({
               <Title type="h3">{translations.rightHeader}</Title>
               <Text>{translations.rightHeaderSubtext}</Text>
             </RightHeader>
-            {showInput && (
-              <InputWrapper>
-                <TagInput
-                  translations={translations}
-                  inputValue={inputValue}
-                  setInputValue={setInputValue}
-                  disabled={isAddTagDisabled}
-                  addTag={addTag}
-                  reachedMaxLimit={reachedMaxLimit}
-                />
-              </InputWrapper>
-            )}
+            <form onSubmit={addTag}>
+              {showInput && (
+                <InputWrapper>
+                  <TagInput
+                    translations={translations}
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
+                    disabled={isAddTagDisabled}
+                    inputDisabled={isTagInputDisabled}
+                    addTag={addTag}
+                    reachedMaxLimit={reachedMaxLimit}
+                    ref={tagInputRef}
+                  />
+                </InputWrapper>
+              )}
+            </form>
             {tags && (
-              <TagList>
+              <TagList showingInput={showInput}>
                 {tags.map((tag, index) => (
                   <TagListItem
                     tag={tag}
                     index={index}
                     lastItem={tags.length === index + 1}
-                    key={uniqKey(tag.username)}
+                    key={uuid()}
                     removeTag={tagItem => removeTag(tagItem)}
                     translations={translations}
                   />

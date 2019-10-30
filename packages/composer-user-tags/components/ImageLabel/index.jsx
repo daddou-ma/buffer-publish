@@ -8,8 +8,8 @@ const StyledImageLabel = styled.div`
   top: ${({ tag }) => `${tag.clientY}%`};
   color: white;
   background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 7%;
-  padding: 2px 5px;
+  border-radius: 2px;
+  padding: 2px 8px;
   display: ${({ showTags }) => (showTags ? 'block' : 'none')};
 `;
 

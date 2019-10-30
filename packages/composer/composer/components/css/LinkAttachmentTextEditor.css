@@ -13,7 +13,7 @@
 }
 
 .editableField:hover,
-.editableField:focus{
+.editableField:focus {
   background-color: #f8f8f8;
   outline: none;
 }
@@ -23,10 +23,9 @@
   width: calc(100% - var(--close-button-size) - 28px);
   margin: -6px -4px -2px -4px;
   padding: 2px 4px;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 18px;
-  color: #323B43;
+  color: #323b43;
 }
 
 .title::placeholder {

@@ -155,7 +155,6 @@
   position: relative;
 }
 
-
 .composer:last-child {
   margin-bottom: 0;
 }
@@ -164,7 +163,7 @@
   width: 100%;
   background: white;
   opacity: 0.3;
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   top: 0;
@@ -197,7 +196,7 @@
 .iconWithProfileCount::after {
   content: attr(data-profile-count);
   display: inline-block;
-  position: absolute;;
+  position: absolute;
   bottom: -4px;
   right: -2px;
   background: white;
@@ -297,7 +296,7 @@
 }
 
 .updateZone::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   right: 0;
@@ -306,7 +305,8 @@
   width: 0;
   height: 38px;
   background: var(--primary-bg-color);
-  border-radius: 0 var(--composer-update-zone-border-radius) var(--composer-update-zone-border-radius) 0;
+  border-radius: 0 var(--composer-update-zone-border-radius)
+    var(--composer-update-zone-border-radius) 0;
 }
 
 .expandedUpdateZone {
@@ -333,14 +333,14 @@
 }
 
 .displayedBehindAnotherUpdateZone::after {
-  content: "";
+  content: '';
   position: absolute;
   top: -1px;
   right: -1px;
   bottom: -1px;
   left: -1px;
   display: block;
-  background: hsla(0, 0%, 100%, .5);
+  background: hsla(0, 0%, 100%, 0.5);
   z-index: var(--composer-text-editor-overlay-zindex);
 }
 
@@ -353,7 +353,7 @@
 }
 
 .displayedBehindAnotherUpdateZone:hover::after {
-  background: hsla(0, 0%, 100%, .5);
+  background: hsla(0, 0%, 100%, 0.5);
 }
 .errorUpdateZone {
   border-radius: var(--composer-update-zone-border-radius);
@@ -634,7 +634,6 @@
   border-radius: 3px;
   padding: 5px 10px;
   width: calc(100% - 22px);
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
 
@@ -670,9 +669,9 @@
 }
 
 .toggleTextWrapper {
-   display: flex;
-   align-items: center;
-   margin-left: 8px;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
 }
 
 .proTagWrapper {
