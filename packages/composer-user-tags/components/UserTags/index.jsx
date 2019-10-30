@@ -91,7 +91,22 @@ const UserTags = ({
   };
 
   const onImageClick = e => {
-    const coords = getCoordinates({ e, media });
+    const rect = e.target.getBoundingClientRect();
+    let { width, height } = media;
+    if (height > 500) {
+      width = (500 * width) / height;
+      height = 500;
+    }
+    // final_width = max_height * start_width / start_height
+    const x = (e.clientX - rect.left) / width;
+    const y = (e.clientY - rect.top) / height;
+    const coords = {
+      // get percentage to display correctly with responsive image
+      clientX: x * 100,
+      clientY: y * 100,
+      x: x.toFixed(2),
+      y: y.toFixed(2),
+    };
     setCoordinates(coords);
     // show input once a tag has been added
     if (!showInput) setShowInput(true);
