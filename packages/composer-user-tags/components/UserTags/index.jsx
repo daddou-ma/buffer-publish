@@ -5,25 +5,26 @@ import { Person } from '@bufferapp/ui/Icon';
 import TagInput from '../TagInput';
 import TagListItem from '../TagListItem';
 import ImageLabel from '../ImageLabel';
-import { getClientXY, removeClientXY } from '../../utils/Tags';
+import { getClientXY, removeClientXY, getCoordinates } from '../../utils/Tags';
 
 import {
-  PersonIcon,
-  TextWrapper,
+  BottomContent,
+  FooterButtons,
+  Image,
+  ImageWrapper,
+  InputWrapper,
+  Line,
   Modal,
   ModalInner,
-  RightHeader,
-  Image,
+  PersonIcon,
+  ResponsiveContainer,
   RightContent,
-  Line,
-  TopContent,
-  BottomContent,
-  TagList,
-  InputWrapper,
-  Title,
-  FooterButtons,
+  RightHeader,
   SaveButton,
-  ImageWrapper,
+  TagList,
+  TextWrapper,
+  Title,
+  TopContent,
 } from './style';
 
 const UserTags = ({
@@ -72,24 +73,8 @@ const UserTags = ({
   };
 
   const onImageClick = e => {
-    const rect = e.target.getBoundingClientRect();
-    const clientX = e.clientX - rect.left; // x position within the element.
-    const clientY = e.clientY - rect.top; // y position within the element.
-    // final_width = max_height * start_width / start_height
-    let { width, height } = media;
-    if (height > 500) {
-      width = (500 * width) / height;
-      height = 500;
-    }
-    const x = clientX / width;
-    const y = clientY / height;
-    setCoordinates({
-      x: x.toFixed(2),
-      y: y.toFixed(2),
-      clientX,
-      clientY,
-    });
-
+    const coords = getCoordinates({ e, media });
+    setCoordinates(coords);
     // show input once a tag has been added
     if (!showInput) setShowInput(true);
     e.preventDefault();
