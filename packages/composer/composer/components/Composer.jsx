@@ -812,10 +812,14 @@ class Composer extends React.Component {
 
     const composerFooterClassName = usesImageFirstLayout ? styles.imageFirstFooter : styles.composerFooter;
 
+    const selectedProfiles = this.getSelectedProfilesForService();
+    const numSelectedProfiles = selectedProfiles.length;
+
     const canAddUserTag = hasAccessToUserTag // on the user level including feature flip
       && this.isInstagram()
+      && selectedProfiles.some((profile) => profile.instagramDirectEnabled)
       && draft.instagramFeedback.length < 1 // don't allow user to add tag if post is reminder
-      && !appState.isOmniboxEnabled;
+      // && !appState.isOmniboxEnabled;
 
     const composerMediaAttachment = (
       <MediaAttachment
@@ -877,8 +881,6 @@ class Composer extends React.Component {
       && hasSuggestedMedia
     );
 
-    const selectedProfiles = this.getSelectedProfilesForService();
-    const numSelectedProfiles = selectedProfiles.length;
     const networkIconTooltipContent = this.getSelectedProfilesTooltipMarkup();
 
     const sourceUrl = draft.sourceLink !== null ? draft.sourceLink.url : null;
