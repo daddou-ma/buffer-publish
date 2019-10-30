@@ -33,6 +33,9 @@ const UserTags = ({
   saveGlobalTags,
   onCancel,
   translations,
+  selectedChannels,
+  trackTag,
+  trackAllTags,
 }) => {
   const uniqKey = identifier => `${identifier}-${new Date().getTime()}`;
   const initialCoordinateState = {
@@ -65,6 +68,21 @@ const UserTags = ({
     setTags([...tags, userTag]);
     setInputValue('');
     setCoordinates(initialCoordinateState);
+    selectedChannels.forEach(channel => {
+      if (channel.isBusinessProfile) {
+        trackTag({ channel, username: inputValue });
+      }
+    });
+  };
+
+  const saveTags = () => {
+    const globalTags = removeClientXY(tags);
+    saveGlobalTags(globalTags);
+    selectedChannels.forEach(channel => {
+      if (channel.isBusinessProfile) {
+        trackAllTags({ channel, tags });
+      }
+    });
   };
 
   const removeTag = removedUserTag => {
@@ -156,7 +174,7 @@ const UserTags = ({
               />
               <SaveButton>
                 <Button
-                  onClick={() => saveGlobalTags(removeClientXY(tags))}
+                  onClick={saveTags}
                   type="secondary"
                   label={translations.btnSave}
                   fullWidth
@@ -183,8 +201,17 @@ UserTags.propTypes = {
       y: PropTypes.number,
     })
   ),
+  selectedChannels: PropTypes.arrayOf(
+    PropTypes.shape({
+      serviceId: PropTypes.string,
+      id: PropTypes.number,
+      service: PropTypes.shape({ username: PropTypes.string }),
+    })
+  ).isRequired,
   saveGlobalTags: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  trackTag: PropTypes.func.isRequired,
+  trackAllTags: PropTypes.func.isRequired,
   translations: PropTypes.shape({
     rightHeader: PropTypes.string,
     rightHeaderSubtext: PropTypes.string,
