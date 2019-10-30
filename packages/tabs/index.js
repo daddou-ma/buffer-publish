@@ -30,10 +30,10 @@ export default connect(
       state.appSidebar.user.plan === 'premium_business',
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
-    shouldHideAnalyticsOverviewTab:
+    shouldHideAdvancedAnalytics:
       state.profileSidebar.selectedProfile.type === 'linkedin' ||
       state.profileSidebar.selectedProfile.type === 'pinterest' ||
-      state.appSidebar.user.shouldHideAnalyticsOverviewTab,
+      state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
     isInstagramProfile: state.generalSettings.isInstagramProfile,

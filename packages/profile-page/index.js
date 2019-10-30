@@ -55,8 +55,9 @@ export default hot(
           hasStoriesFlip: state.appSidebar.user.features
             ? state.appSidebar.user.features.includes('stories_groups')
             : false,
-          shouldHideAdvancedAnalytics:
-            state.appSidebar.user.shouldHideAdvancedAnalytics,
+          shouldHideAdvancedAnalytics: state.profileSidebar.selectedProfile
+            ? state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics
+            : false,
         };
       }
       return {};

@@ -102,5 +102,5 @@ module.exports = userData => ({
     userData.features.includes('instagram_user_tags') &&
     (userData.is_pro_premium_or_business_org_user || // this includes team members
       isOnEnterprisePlan(userData.plan)), // TO-DO: Add to api
-  shouldHideAdvancedAnalytics: userData.should_hide_advanced_analytics,
+  isAnalyzeCustomer: userData.is_analyze_customer,
 });
