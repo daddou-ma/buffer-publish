@@ -172,7 +172,7 @@ class TabNavigation extends React.Component {
 TabNavigation.defaultProps = {
   shouldShowNestedSettingsTab: false,
   shouldShowNestedAnalyticsTab: false,
-  shouldHideAdvancedAnalytics: false,
+  shouldHideAdvancedAnalytics: true,
   shouldShowUpgradeButton: false,
   selectedChildTabId: null,
   isLockedProfile: false,
