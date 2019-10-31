@@ -404,6 +404,8 @@
     "placeholder": "username",
     "inputLabel": "Instagram User",
     "inputBtnLabel": "Add Tag",
+    "inputBtnAddTag": "Add Tag",
+    "inputBtnCancel": "Cancel",
     "footerText": "Instagram API limitations prevent searching for usernames and tagging private users.",
     "maxLimitText": "You've reached the 20 tag limit.",
     "btnSave": "Save",
