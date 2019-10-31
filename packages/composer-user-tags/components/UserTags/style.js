@@ -120,6 +120,7 @@ export const InputWrapper = styled.form`
     translateY(
       ${({ coordinates }) => (Number(coordinates.y) > 0.5 ? '-156' : '16')}px
     );
+  z-index: 10;
 `;
 
 export const CoordinateMarker = styled.div`
@@ -127,12 +128,12 @@ export const CoordinateMarker = styled.div`
   position: absolute;
   left: ${({ coordinates }) => `${coordinates.clientX}%`};
   top: ${({ coordinates }) => `${coordinates.clientY}%`};
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   background: rgba(44, 75, 255, 0.8);
   border: 2px solid #fff;
   box-sizing: border-box;
   border-radius: 100%;
-  transform: translate(-6px, -6px);
+  transform: translate(-8px, -8px);
   pointer-events: none;
 `;
