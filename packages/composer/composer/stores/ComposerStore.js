@@ -655,11 +655,14 @@ const updateDraftLocation = monitorComposerLastInteractedWith(
   }
 );
 
-const updateDraftUserTags = monitorComposerLastInteractedWith(
+const updateDraftImageUserTags = monitorComposerLastInteractedWith(
   (id, userTags) => {
     const draft = ComposerStore.getDraft(id);
-    draft.userTags = userTags;
-  },
+    // for tag case, there should only be one image
+    if (draft.images && draft.images[0]) {
+      draft.images[0].userTags = userTags;
+    }
+  }
 );
 
 const updateDraftScheduledAt = monitorComposerLastInteractedWith(
@@ -1874,8 +1877,13 @@ const onDispatchedPayload = (payload) => {
       state.drafts.forEach(draft => updateToggleComment(draft.id, action.commentEnabled));
       break;
 
-    case ActionTypes.COMPOSER_UPDATE_DRAFTS_USER_TAGS:
-      state.drafts.forEach(draft => updateDraftUserTags(draft.id, action && action.userTags));
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_IMAGE_USER_TAGS:
+      // need to add timeout because draft images doesn't load right away in edit mode
+      setTimeout(() => {
+        state.drafts.forEach(draft =>
+          updateDraftImageUserTags(draft.id, action && action.userTags)
+        );
+      });
       break;
 
     case ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR:
@@ -2005,8 +2013,8 @@ const onDispatchedPayload = (payload) => {
       removeDraftGif(action.id, action.gifUrl);
       break;
 
-    case ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAGS:
-      updateDraftUserTags(action.id, action && action.userTags);
+    case ActionTypes.COMPOSER_UPDATE_DRAFT_IMAGE_USER_TAGS:
+      updateDraftImageUserTags(action.id, action && action.userTags);
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_TEMP_IMAGE:

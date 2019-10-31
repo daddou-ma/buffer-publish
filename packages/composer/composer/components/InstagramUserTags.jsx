@@ -16,7 +16,7 @@ const InstagramUserTags = ({ media, draftId, userTags = [] }) => {
     'instagram'
   );
   const saveGlobalTags = tags => {
-    ComposerActionCreators.updateDraftUserTags(draftId, tags);
+    ComposerActionCreators.updateDraftImageUserTags(draftId, tags);
     ModalActionCreators.closeModal();
   };
 
