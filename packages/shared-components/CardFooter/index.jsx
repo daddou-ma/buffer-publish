@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { offWhite } from '@bufferapp/components/style/color';
 import { Link } from '@bufferapp/components';
 import MessageIcon from '@bufferapp/ui/Icon/Icons/Message';
+import PersonIcon from '@bufferapp/ui/Icon/Icons/Person';
 import { Text, Button } from '@bufferapp/ui';
 import {
   grayLight, grayDarker, red, grayDark,
@@ -19,6 +20,15 @@ const CommentIconWrapper = styled.span`
   margin-left: 0.5rem;
   border-left: 1px solid ${grayLight};
   color: ${grayDarker};
+`;
+
+const UserTagsIconWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  color: ${grayDarker};
+  ${({ hasFirstComment }) =>
+    !hasFirstComment ? `margin-left: 0.5rem; border-left: 1px solid ${grayLight};` : ''}
 `;
 
 const CardFooterWrapper = styled.div`
@@ -99,6 +109,7 @@ const CardFooter = ({
   actionMessage,
   isDragging,
   disableBorder,
+  hasUserTags,
 }) => {
   const hideAllButtons = hideButtons || isPerformingAction || messageLink;
   const [isConfirmingDelete, setConfirmingDelete] = useState(false);
@@ -136,6 +147,13 @@ const CardFooter = ({
             <CommentIconWrapper title="Post includes a comment">
               <MessageIcon />
             </CommentIconWrapper>
+          )
+        }
+        {hasUserTags
+          && (
+            <UserTagsIconWrapper title="Post includes tagged users" hasFirstComment={hasFirstComment}>
+              <PersonIcon />
+            </UserTagsIconWrapper>
           )
         }
       </CardFooterContent>
@@ -212,6 +230,7 @@ CardFooter.propTypes = {
   actionMessage: PropTypes.string,
   isDragging: PropTypes.bool,
   disableBorder: PropTypes.bool,
+  hasUserTags: PropTypes.bool,
 };
 
 CardFooter.defaultProps = {
@@ -234,6 +253,7 @@ CardFooter.defaultProps = {
   actionMessage: 'Submitting...',
   isDragging: false,
   disableBorder: false,
+  hasUserTags: false,
 };
 
 export default CardFooter;

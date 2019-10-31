@@ -91,6 +91,7 @@ const ImagePost = ({
   commentText,
   hasCommentEnabled,
   hasFirstCommentFlip,
+  service_user_tags: userTags,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -184,6 +185,7 @@ const ImagePost = ({
       commentText={commentText}
       hasCommentEnabled={hasCommentEnabled}
       hasFirstCommentFlip={hasFirstCommentFlip}
+      hasUserTags={userTags}
     >
       {children}
     </Post>

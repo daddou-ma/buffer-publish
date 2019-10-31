@@ -191,6 +191,7 @@ const Post = ({
   hasFirstCommentFlip,
   features,
   basic,
+  hasUserTags,
 }) => (
   <div style={getPostContainerStyle({ dragging, hovering, isOver })}>
     <div style={postStyle}>
@@ -250,6 +251,7 @@ const Post = ({
           commentText={commentText}
           hasCommentEnabled={hasCommentEnabled}
           hasFirstCommentFlip={hasFirstCommentFlip}
+          hasUserTags={hasUserTags}
         />
         { (isBusinessAccount || !features.isFreeUser())
           && isSent && !postDetails.isRetweet
