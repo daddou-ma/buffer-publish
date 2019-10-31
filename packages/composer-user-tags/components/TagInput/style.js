@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 export const ButtonWrapper = styled.div`
-  margin: auto 0px 10px 8px;
+  margin-top: 6px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
 `;
 
 export const StyledLabel = styled.span`

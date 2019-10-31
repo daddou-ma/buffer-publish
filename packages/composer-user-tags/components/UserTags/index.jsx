@@ -51,7 +51,7 @@ const UserTags = ({
   const hasUserTags = tags && tags.length > 0;
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  const [showInput, setShowInput] = useState(hasUserTags);
+  const [showInput, setShowInput] = useState(false);
   const tagInputRef = useRef(null);
 
   const MAX_TAG_LIMIT = 20;
@@ -77,11 +77,22 @@ const UserTags = ({
     if (tagInputRef.current) {
       tagInputRef.current.blur();
     }
+    setShowInput(false);
     selectedChannels.forEach(channel => {
       if (channel.isBusinessProfile) {
         trackTag({ channel, username: inputValue });
       }
     });
+    if (e) e.preventDefault();
+  };
+
+  const cancelAddTag = e => {
+    setInputValue('');
+    setCoordinates(initialCoordinateState);
+    if (tagInputRef.current) {
+      tagInputRef.current.blur();
+    }
+    setShowInput(false);
     if (e) e.preventDefault();
   };
 
@@ -133,6 +144,21 @@ const UserTags = ({
               </Fragment>
             )}
             <CoordinateMarker coordinates={coordinates} />
+            {showInput && (
+              <InputWrapper coordinates={coordinates} onSubmit={addTag}>
+                <TagInput
+                  translations={translations}
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                  disabled={isAddTagDisabled}
+                  inputDisabled={isTagInputDisabled}
+                  addTag={addTag}
+                  cancel={cancelAddTag}
+                  reachedMaxLimit={reachedMaxLimit}
+                  ref={tagInputRef}
+                />
+              </InputWrapper>
+            )}
           </ImageWrapper>
         </ResponsiveContainer>
         {hasUserTags && (
@@ -146,22 +172,6 @@ const UserTags = ({
               <Title type="h3">{translations.rightHeader}</Title>
               <Text>{translations.rightHeaderSubtext}</Text>
             </RightHeader>
-            <form onSubmit={addTag}>
-              {showInput && (
-                <InputWrapper>
-                  <TagInput
-                    translations={translations}
-                    inputValue={inputValue}
-                    setInputValue={setInputValue}
-                    disabled={isAddTagDisabled}
-                    inputDisabled={isTagInputDisabled}
-                    addTag={addTag}
-                    reachedMaxLimit={reachedMaxLimit}
-                    ref={tagInputRef}
-                  />
-                </InputWrapper>
-              )}
-            </form>
             {tags && (
               <TagList showingInput={showInput}>
                 {tags.map((tag, index) => (
@@ -182,7 +192,7 @@ const UserTags = ({
             <TextWrapper>
               <Text>{translations.footerText}</Text>
             </TextWrapper>
-            <FooterButtons>
+            <FooterButtons disabled={showInput}>
               <Button
                 onClick={onCancel}
                 label={translations.btnCancel}

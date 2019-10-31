@@ -12,6 +12,7 @@ const TagInput = (
     setInputValue,
     disabled,
     inputDisabled,
+    cancel,
     addTag,
     reachedMaxLimit,
   },
@@ -62,8 +63,14 @@ const TagInput = (
           type="primary"
           size="small"
           onClick={addTag}
-          label={translations.inputBtnLabel}
+          label={translations.inputBtnAddTag}
           disabled={disabled}
+        />
+        <Button
+          type="text"
+          size="small"
+          onClick={cancel}
+          label={translations.inputBtnCancel}
         />
       </ButtonWrapper>
     </Fragment>
@@ -75,12 +82,14 @@ TagInput.propTypes = {
   translations: PropTypes.shape({
     placeholder: PropTypes.string,
     inputLabel: PropTypes.string,
-    inputBtnLabel: PropTypes.string,
+    inputBtnAddTag: PropTypes.string,
+    inputBtnCancel: PropTypes.string,
     maxLimitText: PropTypes.string,
   }).isRequired,
   reachedMaxLimit: PropTypes.bool.isRequired,
   inputValue: PropTypes.string.isRequired,
   setInputValue: PropTypes.func.isRequired,
+  cancel: PropTypes.func.isRequired,
   addTag: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
   inputDisabled: PropTypes.bool.isRequired,

@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { grayLight, grayLighter, gray } from '@bufferapp/ui/style/colors';
+import { borderRadius } from '@bufferapp/ui/style/borders';
 import { Text } from '@bufferapp/ui';
 import { MAX_HEIGHT } from '../../utils/Tags';
 
@@ -59,7 +60,7 @@ export const RightContent = styled.div`
 
 export const TagList = styled.div`
   overflow: scroll;
-  height: ${({ showingInput }) => (showingInput ? '148px' : '248px')};
+  height: 248px;
   overflow-x: hidden;
 `;
 
@@ -80,20 +81,19 @@ export const RightHeader = styled.div`
   padding: 6px 24px 24px;
 `;
 
-export const InputWrapper = styled.div`
-  border-bottom: 2px solid white;
-  display: flex;
-  background-color: ${grayLighter};
-  padding: 16px 24px;
-  min-height: 72px;
-`;
-
 export const Title = styled(Text)`
   margin-bottom: 10px;
 `;
 
 export const FooterButtons = styled.div`
   display: flex;
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          pointer-events: none;
+          opacity: .5;
+        `
+      : ''}
 `;
 
 export const SaveButton = styled.div`
@@ -104,17 +104,35 @@ export const ImageWrapper = styled.div`
   position: relative;
 `;
 
+export const InputWrapper = styled.form`
+  display: ${({ coordinates }) => (coordinates.y ? 'block' : 'none')};
+  position: absolute;
+  left: ${({ coordinates }) => `${coordinates.clientX}%`};
+  top: ${({ coordinates }) => `${coordinates.clientY}%`};
+  background-color: ${grayLighter};
+  height: 140px;
+  width: 258px;
+  border-radius: ${borderRadius};
+  padding: 16px;
+  box-sizing: border-box;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.16);
+  transform: translateX(-50%)
+    translateY(
+      ${({ coordinates }) => (Number(coordinates.y) > 0.5 ? '-156' : '16')}px
+    );
+`;
+
 export const CoordinateMarker = styled.div`
   display: ${({ coordinates }) => (coordinates.y ? 'block' : 'none')};
   position: absolute;
   left: ${({ coordinates }) => `${coordinates.clientX}%`};
   top: ${({ coordinates }) => `${coordinates.clientY}%`};
-  width: 32px;
-  height: 32px;
+  width: 12px;
+  height: 12px;
   background: rgba(44, 75, 255, 0.8);
   border: 2px solid #fff;
   box-sizing: border-box;
   border-radius: 100%;
-  transform: translate(-16px, -16px);
+  transform: translate(-6px, -6px);
   pointer-events: none;
 `;
