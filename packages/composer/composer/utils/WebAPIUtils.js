@@ -750,7 +750,6 @@ function getFormattedAPIData(serviceName, unformattedData) {
         link: serviceDraft.shopgridLink,
       });
     }
-    console.log('conditionalFields', conditionalFields);
     return conditionalFields;
   };
 
