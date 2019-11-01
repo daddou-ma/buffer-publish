@@ -5,6 +5,14 @@ import Input from '@bufferapp/ui/Input';
 
 import { ButtonWrapper, MaxCount, MaxCountText } from './style';
 
+/**
+ * Remove unnecessary characters from the input.
+ * - @ sign
+ * - all whitespace
+ * @param {String} value
+ */
+const filterInput = value => value.replace(/@/g, '').replace(/\s/g, '');
+
 const TagInput = (
   {
     translations,
@@ -58,7 +66,7 @@ const TagInput = (
       <Input
         type="input"
         onChange={e => {
-          setInputValue(e.target.value);
+          setInputValue(filterInput(e.target.value));
         }}
         value={inputValue}
         name="tagInput"
