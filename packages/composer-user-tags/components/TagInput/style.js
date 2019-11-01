@@ -16,8 +16,13 @@ export const StyledLabel = styled.span`
 
 export const MaxCount = styled.span`
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   display: flex;
   width: 100%;
-  text-align: center;
+  height: 100%;
+`;
+
+export const MaxCountText = styled.span`
+  margin-right: 10px;
 `;

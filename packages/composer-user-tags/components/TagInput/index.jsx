@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
 import Input from '@bufferapp/ui/Input';
 
-import { ButtonWrapper, MaxCount } from './style';
+import { ButtonWrapper, MaxCount, MaxCountText } from './style';
 
 const TagInput = (
   {
@@ -40,7 +40,15 @@ const TagInput = (
   if (reachedMaxLimit) {
     return (
       <MaxCount>
-        <Text>{translations.maxLimitText}</Text>
+        <MaxCountText>
+          <Text>{translations.maxLimitText}</Text>
+        </MaxCountText>
+        <Button
+          type="secondary"
+          size="small"
+          onClick={cancel}
+          label={translations.inputBtnCancel}
+        />
       </MaxCount>
     );
   }
