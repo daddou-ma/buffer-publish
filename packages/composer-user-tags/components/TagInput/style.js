@@ -7,13 +7,6 @@ export const ButtonWrapper = styled.div`
   flex-direction: row-reverse;
 `;
 
-export const StyledLabel = styled.span`
-  position: absolute;
-  display: block;
-  top: 167px;
-  margin-left: 5px;
-`;
-
 export const MaxCount = styled.span`
   justify-content: center;
   flex-direction: row;
@@ -25,4 +18,11 @@ export const MaxCount = styled.span`
 
 export const MaxCountText = styled.span`
   margin-right: 10px;
+`;
+
+export const StyledLabel = styled.span`
+  position: absolute;
+  display: block;
+  top: 167px;
+  margin-left: 5px;
 `;
