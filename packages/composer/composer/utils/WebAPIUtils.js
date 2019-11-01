@@ -713,8 +713,10 @@ function getFormattedAPIData(serviceName, unformattedData) {
 
     const { images } = serviceDraft;
     const userTags = images && images[0] && images[0].userTags;
-    if (serviceDraft.service.canHaveUserTags && userTags) {
-      conditionalFields.service_user_tags = userTags;
+    if (serviceDraft.service.canHaveUserTags) {
+      conditionalFields.service_user_tags =
+        // Ensuring we send `null` here so it removes the tags when all are removed
+        userTags && userTags.length ? userTags : null;
     }
 
     if (hasEnabledRetweetAttachment) {
@@ -748,7 +750,6 @@ function getFormattedAPIData(serviceName, unformattedData) {
         link: serviceDraft.shopgridLink,
       });
     }
-
     return conditionalFields;
   };
 
