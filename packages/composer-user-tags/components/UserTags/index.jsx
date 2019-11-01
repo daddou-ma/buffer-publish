@@ -70,7 +70,7 @@ const UserTags = ({
       return;
     }
 
-    if (inputError) setInputError(false);
+    setInputError(false);
 
     const { x, y, clientX, clientY } = coordinates;
     const userTag = {
