@@ -406,7 +406,7 @@
     "inputBtnLabel": "Add Tag",
     "inputBtnAddTag": "Add Tag",
     "inputBtnCancel": "Cancel",
-    "usernameError": "Oops! You can only tag the same username once.",
+    "usernameError": "Oops! User already tagged",
     "footerText": "Instagram API limitations prevent searching for usernames and tagging private users.",
     "maxLimitText": "You've reached the 20 tag limit.",
     "btnSave": "Save",
