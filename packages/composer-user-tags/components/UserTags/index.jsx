@@ -52,6 +52,7 @@ const UserTags = ({
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
   const [showInput, setShowInput] = useState(false);
+  const [inputError, setInputError] = useState(false);
   const tagInputRef = useRef(null);
 
   const MAX_TAG_LIMIT = 20;
@@ -62,6 +63,15 @@ const UserTags = ({
   const isTagInputDisabled = !coordinates.y;
 
   const addTag = e => {
+    const usernameAlreadyAdded = tags.some(tag => tag.username === inputValue);
+    if (usernameAlreadyAdded) {
+      setInputError(true);
+      if (e) e.preventDefault();
+      return;
+    }
+
+    setInputError(false);
+
     const { x, y, clientX, clientY } = coordinates;
     const userTag = {
       username: inputValue,
@@ -145,7 +155,11 @@ const UserTags = ({
             )}
             <CoordinateMarker coordinates={coordinates} />
             {showInput && (
-              <InputWrapper coordinates={coordinates} onSubmit={addTag}>
+              <InputWrapper
+                coordinates={coordinates}
+                onSubmit={addTag}
+                error={inputError}
+              >
                 <TagInput
                   translations={translations}
                   inputValue={inputValue}
@@ -156,6 +170,7 @@ const UserTags = ({
                   cancel={cancelAddTag}
                   reachedMaxLimit={reachedMaxLimit}
                   ref={tagInputRef}
+                  error={inputError}
                 />
               </InputWrapper>
             )}

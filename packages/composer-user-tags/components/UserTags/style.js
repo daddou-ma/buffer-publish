@@ -110,7 +110,7 @@ export const InputWrapper = styled.form`
   left: ${({ coordinates }) => `${coordinates.clientX}%`};
   top: ${({ coordinates }) => `${coordinates.clientY}%`};
   background-color: ${grayLighter};
-  height: 140px;
+  height: ${({ error }) => (error ? '160px' : '140px')};
   width: 258px;
   border-radius: ${borderRadius};
   padding: 16px;

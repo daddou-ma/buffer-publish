@@ -15,6 +15,7 @@ const TagInput = (
     cancel,
     addTag,
     reachedMaxLimit,
+    error,
   },
   ref
 ) => {
@@ -65,6 +66,8 @@ const TagInput = (
         prefix={{ text: '@', paddingLeft: '25px' }}
         ref={inputEl}
         disabled={inputDisabled}
+        help={error && translations.usernameError}
+        hasError={error}
       />
       <ButtonWrapper>
         <Button
@@ -93,6 +96,7 @@ TagInput.propTypes = {
     inputBtnAddTag: PropTypes.string,
     inputBtnCancel: PropTypes.string,
     maxLimitText: PropTypes.string,
+    usernameError: PropTypes.string,
   }).isRequired,
   reachedMaxLimit: PropTypes.bool.isRequired,
   inputValue: PropTypes.string.isRequired,
@@ -101,6 +105,7 @@ TagInput.propTypes = {
   addTag: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
   inputDisabled: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
 export default React.forwardRef(TagInput);
