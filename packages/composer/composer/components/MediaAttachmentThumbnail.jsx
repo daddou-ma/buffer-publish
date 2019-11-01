@@ -40,6 +40,9 @@ const renderTagOption = tagCount => (
   </StyledTagWrapper>
 );
 
+const getTags = draft =>
+  draft && draft.images && draft.images[0] && draft.images[0].userTags;
+
 class MediaAttachmentThumbnail extends React.Component {
   static propTypes = {
     draftId: PropTypes.string.isRequired,
@@ -68,11 +71,12 @@ class MediaAttachmentThumbnail extends React.Component {
     } = this.props;
 
     if (canAddUserTag) {
+      const userTags = getTags(draft);
       ModalActionCreators.openModal('InstagramUserTags', {
         media,
         draftId,
         composerPosition,
-        userTags: draft && draft.userTags,
+        userTags,
       });
     } else {
       ModalActionCreators.openModal('MediaZoomBox', {
@@ -137,7 +141,8 @@ class MediaAttachmentThumbnail extends React.Component {
     const isVideo = media.mediaType === MediaTypes.VIDEO;
     const isRegularImage = media.mediaType === MediaTypes.IMAGE;
     const thumbnail = isVideo ? media.thumbnail : media.url;
-    const userTagCount = draft && draft.userTags ? draft.userTags.length : null;
+    const tags = getTags(draft);
+    const userTagCount = tags ? tags.length : null;
 
     const videoThumbnailClass = canEditVideoAttachment
       ? `${styles.editableVideoThumbnail} bi bi-video`

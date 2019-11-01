@@ -245,7 +245,7 @@ const loadInitialMetaData = (metaData) => {
 
   if (metaData.userTags) {
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_USER_TAGS,
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_IMAGE_USER_TAGS,
       userTags: metaData.userTags,
     });
   }

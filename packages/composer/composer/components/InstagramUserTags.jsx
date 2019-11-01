@@ -16,7 +16,7 @@ const InstagramUserTags = ({ media, draftId, userTags = [] }) => {
     'instagram'
   );
   const saveGlobalTags = tags => {
-    ComposerActionCreators.updateDraftUserTags(draftId, tags);
+    ComposerActionCreators.updateDraftImageUserTags(draftId, tags);
     ModalActionCreators.closeModal();
   };
 
@@ -46,11 +46,13 @@ InstagramUserTags.propTypes = {
     height: PropTypes.number,
   }).isRequired,
   draftId: PropTypes.string.isRequired,
-  userTags: PropTypes.arrayOf({
-    userName: PropTypes.string,
-    x: PropTypes.number,
-    y: PropTypes.number,
-  }),
+  userTags: PropTypes.arrayOf(
+    PropTypes.shape({
+      username: PropTypes.string,
+      x: PropTypes.string,
+      y: PropTypes.string,
+    })
+  ),
 };
 
 InstagramUserTags.defaultProps = {

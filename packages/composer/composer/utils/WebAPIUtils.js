@@ -711,7 +711,8 @@ function getFormattedAPIData(serviceName, unformattedData) {
       conditionalFields.service_geolocation_name = locationName;
     }
 
-    const { userTags } = serviceDraft;
+    const { images } = serviceDraft;
+    const userTags = images && images[0] && images[0].userTags;
     if (serviceDraft.service.canHaveUserTags && userTags) {
       conditionalFields.service_user_tags = userTags;
     }

@@ -223,14 +223,14 @@ UserTags.propTypes = {
   userTags: PropTypes.arrayOf(
     PropTypes.shape({
       username: PropTypes.string,
-      x: PropTypes.number,
-      y: PropTypes.number,
+      x: PropTypes.string,
+      y: PropTypes.string,
     })
   ),
   selectedChannels: PropTypes.arrayOf(
     PropTypes.shape({
       serviceId: PropTypes.string,
-      id: PropTypes.number,
+      id: PropTypes.string,
       service: PropTypes.shape({ username: PropTypes.string }),
     })
   ).isRequired,
