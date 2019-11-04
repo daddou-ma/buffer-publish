@@ -347,7 +347,11 @@ export default (state, action) => {
         processedErrors: [],
       };
     case actionTypes.SHOW_ERRORS:
-      if (action.uploadId !== null && state.processedErrors.includes(action.uploadId)) {
+      if (
+        action.uploadId !== null &&
+        state.processedErrors &&
+        state.processedErrors.includes(action.uploadId)
+      ) {
         return state;
       }
       return {
