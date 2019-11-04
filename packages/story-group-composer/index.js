@@ -48,9 +48,13 @@ export default connect(
       dispatch(actions.setScheduleLoading(true));
       dispatch(actions.handleSaveStoryGroup(scheduledAt, shareNow));
     },
-    onUpdateStoryGroup: ({ scheduledAt, stories, storyGroupId, shareNow = false }) => {
+    onUpdateStoryGroup: ({
+      scheduledAt, stories, storyGroupId, shareNow = false,
+    }) => {
       dispatch(actions.setScheduleLoading(true));
-      dispatch(actions.handleUpdateStoryGroup({ scheduledAt, stories, storyGroupId, shareNow }));
+      dispatch(actions.handleUpdateStoryGroup({
+        scheduledAt, stories, storyGroupId, shareNow,
+      }));
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
@@ -144,6 +148,13 @@ export default connect(
       availableThumbnails,
       uploadId,
     }) => {
+      const videoMaxLength = 15 * 1000; // 15s
+      if (durationMs > videoMaxLength) {
+        dispatch(actions.showError({
+          message: 'Heads up! Your video is over the 15 second max limit for an Instagram Story. Instagram will clip the end of your video down to the first 15 seconds.',
+          uploadId,
+        }));
+      }
       dispatch(actions.videoUploadProcessingComplete({
         id,
         name,
