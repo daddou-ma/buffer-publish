@@ -6,7 +6,6 @@ import { gray } from '@bufferapp/ui/style/colors';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import styled from 'styled-components';
 import PlanColumn from '../PlanColumn';
-import PlanColumnExperimentControl from '../PlanColumnExperimentControl';
 import PlanColumnExperimentEnabled from '../PlanColumnExperimentEnabled';
 import { getSource } from '../../utils/plans';
 
