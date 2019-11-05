@@ -28,51 +28,61 @@ import {
 
 const UserIcon = ({ Icon, text, isSelected }) => (
   <UsersStyle isSelected={isSelected}>
-    <IconStyle>
-      {Icon}
-    </IconStyle>
-    <Text>
-      {text}
-    </Text>
+    <IconStyle>{Icon}</IconStyle>
+    <Text>{text}</Text>
   </UsersStyle>
 );
 
 const RightPlanButton = ({
-  isNonprofit, nonProfitCost, cost, billingText, monthly, isSelected}) => (
-    <RightPlanItem>
-      <UserIcon Icon={<People />} text="2 users" isSelected={isSelected} />
-      <PriceStyle>
-        <TextStyle type="h1">
-          { isNonprofit ? nonProfitCost : cost }
-          <MonthlyText>{ monthly }</MonthlyText>
-        </TextStyle>
-      </PriceStyle>
-      <BillingTextStyle type="p">{ billingText }</BillingTextStyle>
-    </RightPlanItem>
+  isNonprofit,
+  nonProfitCost,
+  cost,
+  billingText,
+  monthly,
+  isSelected,
+}) => (
+  <RightPlanItem>
+    <UserIcon Icon={<People />} text="2 users" isSelected={isSelected} />
+    <PriceStyle>
+      <TextStyle type="h1">
+        {isNonprofit ? nonProfitCost : cost}
+        <MonthlyText>{monthly}</MonthlyText>
+      </TextStyle>
+    </PriceStyle>
+    <BillingTextStyle type="p">{billingText}</BillingTextStyle>
+  </RightPlanItem>
 );
 
 const RightButton = styled(Button)`
   height: unset;
   padding: 20px 30px 15px 30px;
   border-radius: 0 25px 25px 0;
-  background-color: ${props => (props.type === 'primary' ? '#EEF1FF' : 'white')};
+  background-color: ${props =>
+    props.type === 'primary' ? '#EEF1FF' : 'white'};
   :hover {
-    background-color: ${props => (props.type === 'primary' ? '#EEF1FF' : grayLighter)};
+    background-color: ${props =>
+      props.type === 'primary' ? '#EEF1FF' : grayLighter};
   }
 `;
 
 const LeftPlanButton = ({
-  isNonprofit, nonProfitCost, cost, billingText, monthly, isSelected}) => (
-    <LeftPlanItem>
-      <UserIcon Icon={<Person />} text="1 user" isSelected={isSelected} />
-      <PriceStyle>
-        <TextStyle type="h1">
-          { isNonprofit ? nonProfitCost : cost }
-          <MonthlyText>{ monthly }</MonthlyText>
-        </TextStyle>
-      </PriceStyle>
-      <BillingTextStyle type="p">{ billingText }</BillingTextStyle>
-    </LeftPlanItem>
+  isNonprofit,
+  nonProfitCost,
+  cost,
+  billingText,
+  monthly,
+  isSelected,
+}) => (
+  <LeftPlanItem>
+    <UserIcon Icon={<Person />} text="1 user" isSelected={isSelected} />
+    <PriceStyle>
+      <TextStyle type="h1">
+        {isNonprofit ? nonProfitCost : cost}
+        <MonthlyText>{monthly}</MonthlyText>
+      </TextStyle>
+    </PriceStyle>
+    <BillingTextStyle type="p">{billingText}</BillingTextStyle>
+  </LeftPlanItem>
 );
 
 const LeftButton = styled(RightButton)`
@@ -105,51 +115,69 @@ const PlanColumnExperimentEnabled = ({
   return (
     <ColumnStyle>
       <TopContentStyle>
-        <Text type="h3">{ title }</Text>
+        <Text type="h3">{title}</Text>
         <ImageWrapperStyle isPremium={isPremium}>
-          <Image
-            src={imageSrc}
-            width="auto"
-            height="130px"
-          />
+          <Image src={imageSrc} width="auto" height="130px" />
         </ImageWrapperStyle>
         {!isPremium && (
           <React.Fragment>
             <UserIcon Icon={<Person />} text="1 user" isSelected />
             <PriceStyle>
               <TextStyle type="h1">
-                { isNonprofit ? nonProfitCost : cost }
-                <MonthlyText>{ monthly }</MonthlyText>
+                {isNonprofit ? nonProfitCost : cost}
+                <MonthlyText>{monthly}</MonthlyText>
               </TextStyle>
             </PriceStyle>
-            <LeftBillingText type="p">{ billingText }</LeftBillingText>
+            <LeftBillingText type="p">{billingText}</LeftBillingText>
           </React.Fragment>
         )}
         {isPremium && (
-        <React.Fragment>
-          <PlanStyle>
-            <LeftButton
-              type={isSelected() ? 'primary' : 'secondary'}
-              onClick={() => onPremiumPlanClick({ selectedPlan: 1 })}
-              hasIconOnly
-              size="large"
-              icon={<LeftPlanButton isNonprofit={isNonprofit} nonProfitCost={soloNonProfitCost} cost={soloCost} billingText={billingText} monthly={monthly} isSelected={isSelected()} />}
-            />
-            <RightButton
-              type={isSelected() ? 'secondary' : 'primary'}
-              onClick={() => onPremiumPlanClick({ selectedPlan: 2 })}
-              hasIconOnly
-              size="large"
-              icon={<RightPlanButton isNonprofit={isNonprofit} nonProfitCost={nonProfitCost} cost={cost} billingText={billingText} monthly={monthly} isSelected={!isSelected()} />}
-            />
-          </PlanStyle>
-          <EmptySpan />
-        </React.Fragment>
+          <React.Fragment>
+            <PlanStyle>
+              <LeftButton
+                type={isSelected() ? 'primary' : 'secondary'}
+                onClick={() => onPremiumPlanClick({ selectedPlan: 1 })}
+                hasIconOnly
+                size="large"
+                icon={
+                  <LeftPlanButton
+                    isNonprofit={isNonprofit}
+                    nonProfitCost={soloNonProfitCost}
+                    cost={soloCost}
+                    billingText={billingText}
+                    monthly={monthly}
+                    isSelected={isSelected()}
+                  />
+                }
+              />
+              <RightButton
+                type={isSelected() ? 'secondary' : 'primary'}
+                onClick={() => onPremiumPlanClick({ selectedPlan: 2 })}
+                hasIconOnly
+                size="large"
+                icon={
+                  <RightPlanButton
+                    isNonprofit={isNonprofit}
+                    nonProfitCost={nonProfitCost}
+                    cost={cost}
+                    billingText={billingText}
+                    monthly={monthly}
+                    isSelected={!isSelected()}
+                  />
+                }
+              />
+            </PlanStyle>
+            <EmptySpan />
+          </React.Fragment>
         )}
       </TopContentStyle>
       <FeatureListStyle>
         {features.map((feature, index) => (
-          <PlanFeatureList feature={feature} key={feature} tooltip={featureTooltips[index]} />
+          <PlanFeatureList
+            feature={feature}
+            key={feature}
+            tooltip={featureTooltips[index]}
+          />
         ))}
       </FeatureListStyle>
       <FooterStyle>
@@ -159,7 +187,13 @@ const PlanColumnExperimentEnabled = ({
             label={currentPlan === plan ? buttonCurrentPlanText : buttonText}
             fullWidth
             disabled={currentPlan === plan}
-            onClick={() => onChoosePlanClick({ source, plan, soloPlanSelected: selectedPremiumPlan === 1 })}
+            onClick={() =>
+              onChoosePlanClick({
+                source,
+                plan,
+                soloPlanSelected: selectedPremiumPlan === 1,
+              })
+            }
           />
         </ButtonWrapperStyle>
       </FooterStyle>
