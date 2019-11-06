@@ -89,7 +89,7 @@ const LeftButton = styled(RightButton)`
   border-radius: 25px 0 0 25px;
 `;
 
-const PlanColumnExperimentEnabled = ({
+const PlanColumnWithPremiumSolo = ({
   title,
   cost,
   nonProfitCost,
@@ -221,4 +221,4 @@ PlanColumnExperimentEnabled.propTypes = {
   isNonprofit: PropTypes.bool.isRequired,
 };
 
-export default PlanColumnExperimentEnabled;
+export default PlanColumnWithPremiumSolo;
