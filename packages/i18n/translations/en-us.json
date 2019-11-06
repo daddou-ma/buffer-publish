@@ -27,8 +27,8 @@
     "defaultTitle": "Let's get your account set up!"
   },
   "onboarding-page": {
-    "title": "Your account has been setup!",
-    "description": "Now let's connect a social account so you can begin publishing content.",
+    "title": "Your account has been set up!",
+    "description": "Connect a social account, so you can schedule your first post",
     "cta1": "You can also connect your",
     "ctaChannel1": "Linkedin",
     "cta2": "and",

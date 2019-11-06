@@ -91,8 +91,6 @@ module.exports = userData => ({
   showReturnToClassic: userData.has_np_app_switcher,
   helpScoutConfig: userData.helpscout_beacon_params,
   isBusinessTeamMember: userData.is_business_team_member,
-  hasAccessToUserTag:
-    userData.features.includes('instagram_user_tags') &&
-    userData.is_pro_and_up_org_user, // this includes team members
+  hasAccessToUserTag: userData.is_pro_and_up_org_user, // this includes team members
   isAnalyzeCustomer: userData.is_analyze_customer,
 });
