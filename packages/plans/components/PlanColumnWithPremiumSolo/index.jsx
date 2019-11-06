@@ -201,7 +201,7 @@ const PlanColumnWithPremiumSolo = ({
   );
 };
 
-PlanColumnExperimentEnabled.propTypes = {
+PlanColumnWithPremiumSolo.propTypes = {
   title: PropTypes.string.isRequired,
   cost: PropTypes.string.isRequired,
   nonProfitCost: PropTypes.string.isRequired,
