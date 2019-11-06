@@ -1,4 +1,5 @@
 import keyWrapper from '@bufferapp/keywrapper';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 
 export const actionTypes = keyWrapper('TABS', {
   SELECT_TAB: 0,
@@ -10,6 +11,8 @@ const initialState = {
   selectedProfileId: '',
   selectedProfile: {},
   isBusinessAccount: false,
+  draftsNeedApprovalCount: '',
+  draftsCount: '',
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +21,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         tabId: action.tabId,
+      };
+    }
+    case profileActionTypes.SELECT_PROFILE: {
+      return {
+        ...state,
+        draftsNeedApprovalCount: action.profile.draftsNeedApprovalCount,
+        draftsCount: action.profile.draftsCount,
       };
     }
     default:

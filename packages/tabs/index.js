@@ -42,6 +42,8 @@ export default connect(
     hasStoriesFlip: state.appSidebar.user.features
       ? state.appSidebar.user.features.includes('stories_groups')
       : false,
+    draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
+    draftsCount: state.tabs.draftsCount,
   }),
   (dispatch, ownProps) => ({
     onTabClick: tabId => {
