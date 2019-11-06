@@ -5,7 +5,7 @@ export const actionTypes = keyWrapper('TABS', {
   SELECT_TAB: 0,
 });
 
-const initialState = {
+export const initialState = {
   profiles: [],
   tabId: 'queue',
   selectedProfileId: '',
