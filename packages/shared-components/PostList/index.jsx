@@ -125,7 +125,7 @@ const PostList = ({
   <React.Fragment>
     <Header listHeader={listHeader} isFirstItem={index === 0} />
     <List
-      items={posts.map((post, position) => (
+      items={posts.map((post) => (
         <React.Fragment>
           <PostStyle
             id={`update-${post.id}`}
@@ -196,7 +196,7 @@ const PostList = ({
               </RemindersButtons>
             )}
           </PostStyle>
-          {showAnalyzeBannerAfterFirstPost && position === 0 ? (
+          {showAnalyzeBannerAfterFirstPost && index === 0 ? (
             <BannerAdvancedAnalytics isAnalyzeCustomer={isAnalyzeCustomer} />
           ) : null}
         </React.Fragment>
