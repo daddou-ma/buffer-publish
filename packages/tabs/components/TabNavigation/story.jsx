@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import TabNavigation from './index';
@@ -35,21 +33,19 @@ const store = storeFake({
 });
 
 const UpgradeModalDecorator = storyFn => (
-  <Provider store={store}>
-    {storyFn()}
-  </Provider>
+  <Provider store={store}>{storyFn()}</Provider>
 );
 
-storiesOf('TabNavigation', module)
+storiesOf('Tabs|TabNavigation', module)
   .addDecorator(UpgradeModalDecorator)
   .add('default', () => (
     <TabNavigation
-      selectedTabId={'queue'}
+      selectedTabId="queue"
       onTabClick={action('tab-click')}
       isBusinessAccount={false}
       isManager={false}
       shouldShowNestedSettingsTab
-      selectedChildTabId={'general-settings'}
+      selectedChildTabId="general-settings"
       onChildTabClick={action('child-tab-click')}
       showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta
@@ -59,13 +55,13 @@ storiesOf('TabNavigation', module)
   ))
   .add('isInstagramProfile', () => (
     <TabNavigation
-      selectedTabId={'queue'}
+      selectedTabId="queue"
       onTabClick={action('tab-click')}
       isBusinessAccount={false}
       isManager={false}
       isInstagramProfile
       shouldShowNestedSettingsTab
-      selectedChildTabId={'general-settings'}
+      selectedChildTabId="general-settings"
       onChildTabClick={action('child-tab-click')}
       showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta
@@ -75,12 +71,12 @@ storiesOf('TabNavigation', module)
   ))
   .add('should show start pro trial', () => (
     <TabNavigation
-      selectedTabId={'queue'}
+      selectedTabId="queue"
       onTabClick={action('tab-click')}
       isBusinessAccount={false}
       isManager={false}
       shouldShowNestedSettingsTab
-      selectedChildTabId={'general-settings'}
+      selectedChildTabId="general-settings"
       onChildTabClick={action('child-tab-click')}
       showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta
@@ -90,7 +86,7 @@ storiesOf('TabNavigation', module)
   ))
   .add('should show grid tab', () => (
     <TabNavigation
-      selectedTabId={'grid'}
+      selectedTabId="grid"
       onTabClick={action('tab-click')}
       isBusinessAccount
       isManager={false}
@@ -104,12 +100,12 @@ storiesOf('TabNavigation', module)
   ))
   .add('isContributor', () => (
     <TabNavigation
-      selectedTabId={'queue'}
+      selectedTabId="queue"
       onTabClick={action('tab-click')}
       isBusinessAccount
       isManager={false}
       shouldShowNestedSettingsTab
-      selectedChildTabId={'general-settings'}
+      selectedChildTabId="general-settings"
       onChildTabClick={action('child-tab-click')}
       showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta={false}
@@ -119,12 +115,12 @@ storiesOf('TabNavigation', module)
   ))
   .add('isManager, isBusinessAccount', () => (
     <TabNavigation
-      selectedTabId={'queue'}
+      selectedTabId="queue"
       onTabClick={action('tab-click')}
       isBusinessAccount
       isManager
       shouldShowNestedSettingsTab
-      selectedChildTabId={'general-settings'}
+      selectedChildTabId="general-settings"
       onChildTabClick={action('child-tab-click')}
       showSwitchPlanModal={action('show-switch-plan-modal')}
       shouldShowUpgradeCta={false}
