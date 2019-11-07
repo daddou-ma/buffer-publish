@@ -403,9 +403,9 @@ const ComposerActionCreators = {
     });
   },
 
-  updateDraftUserTags: (id, userTags) => {
+  updateDraftImageUserTags: (id, userTags) => {
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_USER_TAGS,
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_IMAGE_USER_TAGS,
       id,
       userTags,
     });

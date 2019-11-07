@@ -1,11 +1,8 @@
-module.exports = function (api) {
+module.exports = function(api) {
   api.cache(true);
 
   return {
-    presets: [
-      '@babel/preset-env',
-      '@babel/preset-react',
-    ],
+    presets: ['@babel/preset-env', '@babel/preset-react'],
     plugins: [
       'react-hot-loader/babel',
       '@babel/plugin-proposal-object-rest-spread',
@@ -15,7 +12,8 @@ module.exports = function (api) {
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-transform-modules-commonjs',
       '@babel/plugin-proposal-export-default-from',
-      ['@babel/plugin-transform-runtime',
+      [
+        '@babel/plugin-transform-runtime',
         {
           corejs: 3,
           absoluteRuntime: false,
@@ -24,6 +22,7 @@ module.exports = function (api) {
           useESModules: false,
         },
       ],
+      'babel-plugin-styled-components',
     ],
     env: {
       test: {

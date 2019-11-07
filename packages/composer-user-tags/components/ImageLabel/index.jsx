@@ -4,14 +4,14 @@ import styled from 'styled-components';
 
 const StyledImageLabel = styled.div`
   position: absolute;
-  left: ${({ tag }) => tag.clientX}px;
-  top: ${({ tag }) => tag.clientY}px;
+  left: ${({ tag }) => `${tag.clientX}%`};
+  top: ${({ tag }) => `${tag.clientY}%`};
   color: white;
-  background-color: black;
-  border-radius: 7%;
-  padding: 2px 5px;
-  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  padding: 2px 8px;
   display: ${({ showTags }) => (showTags ? 'block' : 'none')};
+  transform: translateX(-50%);
 `;
 
 const ImageLabel = ({ tag, showTags }) => (

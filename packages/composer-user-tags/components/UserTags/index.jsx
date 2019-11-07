@@ -1,27 +1,32 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { Person } from '@bufferapp/ui/Icon';
+import uuid from 'uuid/v4';
 import TagInput from '../TagInput';
 import TagListItem from '../TagListItem';
 import ImageLabel from '../ImageLabel';
+import { getClientXY, removeClientXY, getCoordinates } from '../../utils/Tags';
 
 import {
-  PersonIcon,
-  TextWrapper,
+  BottomContent,
+  FooterButtons,
+  Image,
+  ImageWrapper,
+  InputWrapper,
+  Line,
   Modal,
   ModalInner,
-  RightHeader,
-  Image,
+  PersonIcon,
+  ResponsiveContainer,
   RightContent,
-  Line,
-  TopContent,
-  BottomContent,
-  TagList,
-  InputWrapper,
-  Title,
-  FooterButtons,
+  RightHeader,
   SaveButton,
+  TagList,
+  TextWrapper,
+  Title,
+  TopContent,
+  CoordinateMarker,
 } from './style';
 
 const UserTags = ({
@@ -34,24 +39,39 @@ const UserTags = ({
   trackTag,
   trackAllTags,
 }) => {
-  const uniqKey = identifier => `${identifier}-${new Date().getTime()}`;
   const initialCoordinateState = {
     x: null,
     y: null,
     clientX: null,
     clientY: null,
   };
+
   const [coordinates, setCoordinates] = useState(initialCoordinateState);
-  const [tags, setTags] = useState(userTags);
+  const [tags, setTags] = useState(getClientXY(userTags));
+  const hasUserTags = tags && tags.length > 0;
   const [showTags, setShowTags] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  const [showInput, setShowInput] = useState(userTags && userTags.length > 0);
+  const [showInput, setShowInput] = useState(false);
+  const [inputError, setInputError] = useState(false);
+  const tagInputRef = useRef(null);
+
   const MAX_TAG_LIMIT = 20;
+
   const reachedMaxLimit = tags && tags.length >= MAX_TAG_LIMIT;
   const inputValueLength = inputValue.replace(/ /g, '').length;
   const isAddTagDisabled = !coordinates.y || inputValueLength < 1;
+  const isTagInputDisabled = !coordinates.y;
 
-  const addTag = () => {
+  const addTag = e => {
+    const usernameAlreadyAdded = tags.some(tag => tag.username === inputValue);
+    if (usernameAlreadyAdded) {
+      setInputError(true);
+      if (e) e.preventDefault();
+      return;
+    }
+
+    setInputError(false);
+
     const { x, y, clientX, clientY } = coordinates;
     const userTag = {
       username: inputValue,
@@ -63,15 +83,32 @@ const UserTags = ({
     setTags([...tags, userTag]);
     setInputValue('');
     setCoordinates(initialCoordinateState);
+    setShowTags(true);
+    if (tagInputRef.current) {
+      tagInputRef.current.blur();
+    }
+    setShowInput(false);
     selectedChannels.forEach(channel => {
       if (channel.isBusinessProfile) {
         trackTag({ channel, username: inputValue });
       }
     });
+    if (e) e.preventDefault();
+  };
+
+  const cancelAddTag = e => {
+    setInputValue('');
+    setCoordinates(initialCoordinateState);
+    if (tagInputRef.current) {
+      tagInputRef.current.blur();
+    }
+    setShowInput(false);
+    if (e) e.preventDefault();
   };
 
   const saveTags = () => {
-    saveGlobalTags(tags);
+    const globalTags = removeClientXY(tags);
+    saveGlobalTags(globalTags);
     selectedChannels.forEach(channel => {
       if (channel.isBusinessProfile) {
         trackAllTags({ channel, tags });
@@ -85,26 +122,15 @@ const UserTags = ({
   };
 
   const onImageClick = e => {
-    const rect = e.target.getBoundingClientRect();
-    const clientX = e.clientX - rect.left; // x position within the element.
-    const clientY = e.clientY - rect.top; // y position within the element.
-    // final_width = max_height * start_width / start_height
-    let { width, height } = media;
-    if (height > 500) {
-      width = (500 * width) / height;
-      height = 500;
-    }
-    const x = clientX / width;
-    const y = clientY / height;
-    setCoordinates({
-      x: x.toFixed(2),
-      y: y.toFixed(2),
-      clientX,
-      clientY,
-    });
-
+    const coords = getCoordinates({ e, media });
+    setCoordinates(coords);
     // show input once a tag has been added
-    if (!showInput) setShowInput(true);
+    setShowInput(true);
+    setTimeout(() => {
+      if (tagInputRef.current) {
+        tagInputRef.current.focus();
+      }
+    }, 0);
     e.preventDefault();
   };
 
@@ -113,24 +139,47 @@ const UserTags = ({
   return (
     <Modal>
       <ModalInner>
-        <Image
-          alt="Image to tag users"
-          src={media.url}
-          onClick={onImageClick}
-        />
-        <PersonIcon onClick={onTogglePersonIcon}>
-          <Person size="large" />
-        </PersonIcon>
-        {tags && (
-          <Fragment>
-            {tags.map(tag => (
-              <ImageLabel
-                tag={tag}
-                showTags={showTags}
-                key={uniqKey(tag.username)}
-              />
-            ))}
-          </Fragment>
+        <ResponsiveContainer>
+          <ImageWrapper>
+            <Image
+              alt={translations.imgAltText}
+              src={media.url}
+              onClick={onImageClick}
+            />
+            {tags && (
+              <Fragment>
+                {tags.map(tag => (
+                  <ImageLabel tag={tag} showTags={showTags} key={uuid()} />
+                ))}
+              </Fragment>
+            )}
+            <CoordinateMarker coordinates={coordinates} />
+            {showInput && (
+              <InputWrapper
+                coordinates={coordinates}
+                onSubmit={addTag}
+                error={inputError}
+              >
+                <TagInput
+                  translations={translations}
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                  disabled={isAddTagDisabled}
+                  inputDisabled={isTagInputDisabled}
+                  addTag={addTag}
+                  cancel={cancelAddTag}
+                  reachedMaxLimit={reachedMaxLimit}
+                  ref={tagInputRef}
+                  error={inputError}
+                />
+              </InputWrapper>
+            )}
+          </ImageWrapper>
+        </ResponsiveContainer>
+        {hasUserTags && (
+          <PersonIcon onClick={onTogglePersonIcon}>
+            <Person size="medium" />
+          </PersonIcon>
         )}
         <RightContent>
           <TopContent>
@@ -138,26 +187,14 @@ const UserTags = ({
               <Title type="h3">{translations.rightHeader}</Title>
               <Text>{translations.rightHeaderSubtext}</Text>
             </RightHeader>
-            {showInput && (
-              <InputWrapper>
-                <TagInput
-                  translations={translations}
-                  inputValue={inputValue}
-                  setInputValue={setInputValue}
-                  disabled={isAddTagDisabled}
-                  addTag={addTag}
-                  reachedMaxLimit={reachedMaxLimit}
-                />
-              </InputWrapper>
-            )}
             {tags && (
-              <TagList>
+              <TagList showingInput={showInput}>
                 {tags.map((tag, index) => (
                   <TagListItem
                     tag={tag}
                     index={index}
                     lastItem={tags.length === index + 1}
-                    key={uniqKey(tag.username)}
+                    key={uuid()}
                     removeTag={tagItem => removeTag(tagItem)}
                     translations={translations}
                   />
@@ -170,7 +207,7 @@ const UserTags = ({
             <TextWrapper>
               <Text>{translations.footerText}</Text>
             </TextWrapper>
-            <FooterButtons>
+            <FooterButtons disabled={showInput}>
               <Button
                 onClick={onCancel}
                 label={translations.btnCancel}
@@ -201,14 +238,14 @@ UserTags.propTypes = {
   userTags: PropTypes.arrayOf(
     PropTypes.shape({
       username: PropTypes.string,
-      x: PropTypes.number,
-      y: PropTypes.number,
+      x: PropTypes.string,
+      y: PropTypes.string,
     })
   ),
   selectedChannels: PropTypes.arrayOf(
     PropTypes.shape({
       serviceId: PropTypes.string,
-      id: PropTypes.number,
+      id: PropTypes.string,
       service: PropTypes.shape({ username: PropTypes.string }),
     })
   ).isRequired,
@@ -226,6 +263,7 @@ UserTags.propTypes = {
     maxLimitText: PropTypes.string,
     btnSave: PropTypes.string,
     btnCancel: PropTypes.string,
+    imgAltText: PropTypes.string,
   }).isRequired,
 };
 

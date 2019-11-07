@@ -812,10 +812,20 @@ class Composer extends React.Component {
 
     const composerFooterClassName = usesImageFirstLayout ? styles.imageFirstFooter : styles.composerFooter;
 
+    const selectedProfiles = this.getSelectedProfilesForService();
+    const numSelectedProfiles = selectedProfiles.length;
+
+    // allow if draft feedback states that an account is set up for reminders
+    const feedbackNotEnabled =
+      draft.instagramFeedback.length === 1 &&
+      draft.instagramFeedback.some(feedback => feedback.code === 'NOT_ENABLED');
+
     const canAddUserTag = hasAccessToUserTag // on the user level including feature flip
       && this.isInstagram()
-      && draft.instagramFeedback.length < 1 // don't allow user to add tag if post is reminder
-      && !appState.isOmniboxEnabled;
+      && selectedProfiles.some(profile => profile.instagramDirectEnabled)
+      /* don't allow user to add tag if post is a reminder though its ok if more than one
+      ig profile is selected and one doesnt have direct scheduling enabled */
+      && (draft.instagramFeedback.length < 1 || feedbackNotEnabled);
 
     const composerMediaAttachment = (
       <MediaAttachment
@@ -877,8 +887,6 @@ class Composer extends React.Component {
       && hasSuggestedMedia
     );
 
-    const selectedProfiles = this.getSelectedProfilesForService();
-    const numSelectedProfiles = selectedProfiles.length;
     const networkIconTooltipContent = this.getSelectedProfilesTooltipMarkup();
 
     const sourceUrl = draft.sourceLink !== null ? draft.sourceLink.url : null;
