@@ -6,8 +6,7 @@ import { gray } from '@bufferapp/ui/style/colors';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import styled from 'styled-components';
 import PlanColumn from '../PlanColumn';
-import PlanColumnExperimentControl from '../PlanColumnExperimentControl';
-import PlanColumnExperimentEnabled from '../PlanColumnExperimentEnabled';
+import PlanColumnWithPremiumSolo from '../PlanColumnWithPremiumSolo';
 import { getSource } from '../../utils/plans';
 
 const ButtonStyle = styled.div`
@@ -35,8 +34,7 @@ const Plans = ({
   profiles,
   translations,
   isNonprofit,
-  isExperimentControl,
-  isExperimentEnabled,
+  isOnProPlan,
   onPremiumPlanClick,
   selectedPremiumPlan,
 }) => (
@@ -56,7 +54,7 @@ const Plans = ({
     </ButtonStyle>
     <div style={{ textAlign: 'center' }}>
       <HeaderStyle type="h1">{ translations.headerText }</HeaderStyle>
-      {!isExperimentControl && !isExperimentEnabled && (
+      {!isOnProPlan && (
         <ColumnContainerStyle>
           <PlanColumn
             {...translations.pro}
@@ -84,9 +82,9 @@ const Plans = ({
           />
         </ColumnContainerStyle>
       )}
-      {isExperimentEnabled && (
+      {isOnProPlan && (
         <ColumnContainerStyle>
-          <PlanColumnExperimentEnabled
+          <PlanColumnWithPremiumSolo
             {...translations.proExperiment}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
             currentPlan={currentPlan}
@@ -94,36 +92,22 @@ const Plans = ({
             source={getSource({ newPlan: 'pro', currentPlan })}
             isNonprofit={isNonprofit}
           />
-          <PlanColumnExperimentEnabled
+          <PlanColumnWithPremiumSolo
             {...translations.premiumExperiment}
             imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
             currentPlan={currentPlan}
             onChoosePlanClick={onChoosePlanClick}
-            source={getSource({ newPlan: selectedPremiumPlan === 1 ? 'solo_premium_business' : 'premium_business', currentPlan })}
+            source={getSource({
+              newPlan:
+                selectedPremiumPlan === 1
+                  ? 'solo_premium_business'
+                  : 'premium_business',
+              currentPlan,
+            })}
             isNonprofit={isNonprofit}
             onPremiumPlanClick={onPremiumPlanClick}
             selectedPremiumPlan={selectedPremiumPlan}
 
-          />
-        </ColumnContainerStyle>
-      )}
-      {isExperimentControl && (
-        <ColumnContainerStyle>
-          <PlanColumnExperimentControl
-            {...translations.proExperiment}
-            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
-            currentPlan={currentPlan}
-            onChoosePlanClick={onChoosePlanClick}
-            source={getSource({ newPlan: 'pro', currentPlan })}
-            isNonprofit={isNonprofit}
-          />
-          <PlanColumnExperimentControl
-            {...translations.premiumExperiment}
-            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
-            currentPlan={currentPlan}
-            onChoosePlanClick={onChoosePlanClick}
-            source={getSource({ newPlan: 'premium_business', currentPlan })}
-            isNonprofit={isNonprofit}
           />
         </ColumnContainerStyle>
       )}
