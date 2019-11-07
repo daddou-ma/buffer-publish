@@ -35,7 +35,18 @@ export default ({ getState, dispatch }) => next => action => {
       break;
     }
 
-    case draftActionTypes.DRAFT_DELETED:
+    case draftActionTypes.DRAFT_DELETED: {
+      if (selectedProfileId === action.profileId) {
+        dispatch(
+          actions.updateCounter({
+            needsApproval: action.draft.needsApproval,
+            draftAction: 'draftDeleted',
+          })
+        );
+      }
+      break;
+    }
+
     case draftActionTypes.DRAFT_UPDATED:
     case draftActionTypes.DRAFT_APPROVED: {
       console.log('tabMiddleware', selectedProfileId, action);

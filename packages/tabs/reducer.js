@@ -44,6 +44,18 @@ export default (state = initialState, action) => {
           draftsCount: state.draftsCount + 1,
         };
       }
+      if (action.needsApproval && action.draftAction === 'draftDeleted') {
+        return {
+          ...state,
+          draftsNeedApprovalCount: state.draftsNeedApprovalCount - 1,
+        };
+      }
+      if (!action.needsApproval && action.draftAction === 'draftDeleted') {
+        return {
+          ...state,
+          draftsCount: state.draftsCount - 1,
+        };
+      }
       return {
         ...state,
       };

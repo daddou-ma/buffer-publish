@@ -42,7 +42,6 @@ const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
   // Bind deleted update events, both for posts and drafts
   channel.bind('deleted_update', (data) => {
     if (data.update.draft) {
-      console.log(data);
       dispatch({
         type: draftActionTypes.DRAFT_DELETED,
         profileId,
