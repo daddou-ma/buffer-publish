@@ -57,7 +57,6 @@ const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
   });
   // Bind approved drafts event
   channel.bind('collaboration_draft_approved', (data) => {
-    console.log(data);
     dispatch({
       type: draftActionTypes.DRAFT_APPROVED,
       profileId,

@@ -34,7 +34,6 @@ export default ({ getState, dispatch }) => next => action => {
       }
       break;
     }
-
     case draftActionTypes.DRAFT_DELETED: {
       if (selectedProfileId === action.profileId) {
         dispatch(
@@ -46,9 +45,18 @@ export default ({ getState, dispatch }) => next => action => {
       }
       break;
     }
-
-    case draftActionTypes.DRAFT_UPDATED:
     case draftActionTypes.DRAFT_APPROVED: {
+      if (selectedProfileId === action.profileId) {
+        dispatch(
+          actions.updateCounter({
+            needsApproval: action.draft.needsApproval,
+            draftAction: 'draftApproved',
+          })
+        );
+      }
+      break;
+    }
+    case draftActionTypes.DRAFT_UPDATED: {
       console.log('tabMiddleware', selectedProfileId, action);
       break;
     }
