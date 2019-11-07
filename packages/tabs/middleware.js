@@ -2,10 +2,11 @@ import { push } from 'connected-react-router';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
 
-import { actionTypes } from './reducer';
+import { actionTypes, actions } from './reducer';
 
 export default ({ getState, dispatch }) => next => action => {
   next(action);
+  const { selectedProfileId } = getState().profileSidebar;
   switch (action.type) {
     case actionTypes.SELECT_TAB:
       if (
@@ -22,12 +23,22 @@ export default ({ getState, dispatch }) => next => action => {
         );
       }
       break;
-    case draftActionTypes.DRAFT_CREATED:
+    case draftActionTypes.DRAFT_CREATED: {
+      if (selectedProfileId === action.profileId) {
+        dispatch(
+          actions.updateCounter({
+            needsApproval: action.draft.needsApproval,
+            draftAction: 'draftCreated',
+          })
+        );
+      }
+      break;
+    }
+
     case draftActionTypes.DRAFT_DELETED:
     case draftActionTypes.DRAFT_UPDATED:
     case draftActionTypes.DRAFT_APPROVED: {
-      const { profileId } = getState();
-      console.log('tabMiddleware', profileId, action);
+      console.log('tabMiddleware', selectedProfileId, action);
       break;
     }
 

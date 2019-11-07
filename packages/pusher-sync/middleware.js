@@ -26,7 +26,6 @@ const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
   // Bind added update events, both for posts and drafts
   channel.bind('added_update', (data) => {
     if (data.update.draft) {
-      console.log(data);
       dispatch({
         type: draftActionTypes.DRAFT_CREATED,
         profileId,
