@@ -32,13 +32,25 @@ export default ({ dispatch, getState }) => next => (action) => {
       dispatch({ type: actionTypes.FULLSTORY, result: action.result });
       dispatch({ type: actionTypes.APPCUES, result: action.result });
       dispatch({ type: actionTypes.HELPSCOUT_BEACON, result: action.result });
-      dispatch({ type: actionTypes.QUALAROO, result: action.result });
+      dispatch({ type: actionTypes.ITERATE, result: action.result });
       break;
 
-    case actionTypes.QUALAROO:
-      if (window && window._kiq) {
-        const { id } = action.result;
-        window._kiq.push(['identify', id]);
+    case actionTypes.ITERATE:
+      if (window && window.Iterate) {
+        const { result } = action;
+        window.Iterate('identify', {
+          first_name: result.name,
+          last_name: ' ',
+          email: result.email,
+          createdAt: result.createdAt,
+          plan: result.plan,
+          planCode: result.planCode,
+          onTrial: result.trial.onTrial,
+          trialLength: result.trial.trialLength,
+          trialTimeRemaining: result.trial.trialTimeRemaining,
+          orgUserCount: result.orgUserCount,
+          profileCount: result.profileCount,
+        });
       }
       break;
 
