@@ -45,7 +45,7 @@
     "@bufferapp/buffer-js-metrics": "0.2.0",
     "@bufferapp/buffer-js-request": "0.2.0",
     "@bufferapp/components": "3.2.1",
-    "@bufferapp/draft-js": "0.10.1-fork.5",
+    "draft-js": "0.11.2",
     "@bufferapp/draft-js-emoji-plugin": "2.0.2",
     "@bufferapp/draft-js-mention-plugin": "2.0.0-rc8.3",
     "@bufferapp/draft-js-plugins-editor": "2.0.0-rc8.3",

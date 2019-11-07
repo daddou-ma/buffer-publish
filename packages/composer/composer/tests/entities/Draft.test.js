@@ -1,4 +1,4 @@
-import { EditorState, ContentState } from '@bufferapp/draft-js';
+import { EditorState, ContentState } from 'draft-js';
 
 import Draft from '../../entities/Draft';
 

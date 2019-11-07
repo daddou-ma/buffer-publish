@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { EditorState, ContentState } from '@bufferapp/draft-js';
+import { EditorState, ContentState } from 'draft-js';
 import debounce from 'lodash.debounce';
 import findLastIndexOf from 'lodash.findlastindex';
 import cloneDeep from 'lodash.clonedeep';

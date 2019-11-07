@@ -1,4 +1,4 @@
-import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
+import { EditorState, Modifier, SelectionState } from 'draft-js';
 
 /**
  * Remove all Facebook Autocomplete entities from the editorState.

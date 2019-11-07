@@ -2,7 +2,7 @@
  * Replace a range of text with a new link.
  */
 
-import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
+import { EditorState, Modifier, SelectionState } from 'draft-js';
 
 const replaceLink = (editorState, contentBlock, { indices, oldLink, newLink }) => {
   const blockKey = contentBlock.getKey();

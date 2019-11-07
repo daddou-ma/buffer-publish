@@ -7,7 +7,7 @@
  * This process is completely seamless for users: it doesn't impact the undo
  * stack, nor does it change the editor's SelectionState.
  */
-import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
+import { EditorState, Modifier, SelectionState } from 'draft-js';
 
 const addPrepopulatedHashtag = (editorState, contentBlock, indices) => {
   const blockKey = contentBlock.getKey();

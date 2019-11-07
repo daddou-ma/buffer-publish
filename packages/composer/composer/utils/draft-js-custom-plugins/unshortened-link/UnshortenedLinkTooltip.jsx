@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EditorState } from '@bufferapp/draft-js';
+import { EditorState } from 'draft-js';
 import addShortLink from '../short-link/modifiers/addShortLink';
 import Button from '../../../components/Button';
 

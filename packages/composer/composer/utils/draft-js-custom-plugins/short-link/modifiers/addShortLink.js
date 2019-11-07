@@ -9,7 +9,7 @@
  *   to create a new undo stack boundary
  */
 
-import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
+import { EditorState, Modifier, SelectionState } from 'draft-js';
 
 const addShortLink = (editorState, contentBlock, linkData, { isUserAction = false } = {}) => {
   const blockKey = contentBlock.getKey();

@@ -1,4 +1,4 @@
-import { EditorState, ContentState } from '@bufferapp/draft-js';
+import { EditorState, ContentState } from 'draft-js';
 
 import { validateDraft, validateVideoForInstagram } from '../../../lib/validation/ValidateDraft';
 import ValidationSuccess from '../../../lib/validation/ValidationSuccess';

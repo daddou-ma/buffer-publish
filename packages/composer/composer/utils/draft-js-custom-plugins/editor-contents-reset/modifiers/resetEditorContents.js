@@ -1,7 +1,7 @@
 /**
  * Reset an editor's contents
  */
-import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
+import { EditorState, Modifier, SelectionState } from 'draft-js';
 
 const resetEditorContents = (editorState) => {
   let contentState = editorState.getCurrentContent();
