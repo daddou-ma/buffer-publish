@@ -26,6 +26,7 @@ const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
   // Bind added update events, both for posts and drafts
   channel.bind('added_update', (data) => {
     if (data.update.draft) {
+      console.log(data);
       dispatch({
         type: draftActionTypes.DRAFT_CREATED,
         profileId,
@@ -42,6 +43,7 @@ const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
   // Bind deleted update events, both for posts and drafts
   channel.bind('deleted_update', (data) => {
     if (data.update.draft) {
+      console.log(data);
       dispatch({
         type: draftActionTypes.DRAFT_DELETED,
         profileId,
@@ -57,6 +59,7 @@ const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
   });
   // Bind approved drafts event
   channel.bind('collaboration_draft_approved', (data) => {
+    console.log(data);
     dispatch({
       type: draftActionTypes.DRAFT_APPROVED,
       profileId,
@@ -65,6 +68,7 @@ const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
   });
   // Bind updated/ moved drafts event
   channel.bind('collaboration_draft_updated', (data) => {
+    console.log(data);
     dispatch({
       type: draftActionTypes.DRAFT_UPDATED,
       profileId,
