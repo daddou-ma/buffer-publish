@@ -21,9 +21,11 @@ export default connect(
     selectedProfileId: state.profileSidebar.selectedProfileId,
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
-    isOnProPlan: state.appSidebar.user.plan === 'pro',
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
     isAwesomeUser: state.appSidebar.user.isOnAwesomePlan,
+    shouldSeeSoloPlanOption:
+      state.appSidebar.user.plan === 'pro' ||
+      state.appSidebar.user.isOnAwesomePlan,
   }),
   dispatch => ({
     onPremiumPlanClick: ({ selectedPlan }) => {
