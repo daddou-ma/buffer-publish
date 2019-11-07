@@ -77,18 +77,20 @@ describe('middleware', () => {
     expect(Pusher.bind.mock.calls[5][0]).toEqual('private-updates-12345');
     expect(Pusher.bind.mock.calls[5][1]).toEqual('collaboration_draft_updated');
     expect(Pusher.bind.mock.calls[6][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[6][1]).toEqual('reordered_updates');
+    expect(Pusher.bind.mock.calls[6][1]).toEqual('collaboration_draft_moved');
     expect(Pusher.bind.mock.calls[7][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[7][1]).toEqual('queue_paused');
-    expect(Pusher.bind.mock.calls[8][0]).toEqual('private-story-groups-12345');
-    expect(Pusher.bind.mock.calls[8][1]).toEqual('sent_story_group');
+    expect(Pusher.bind.mock.calls[7][1]).toEqual('reordered_updates');
+    expect(Pusher.bind.mock.calls[8][0]).toEqual('private-updates-12345');
+    expect(Pusher.bind.mock.calls[8][1]).toEqual('queue_paused');
     expect(Pusher.bind.mock.calls[9][0]).toEqual('private-story-groups-12345');
-    expect(Pusher.bind.mock.calls[9][1]).toEqual('story_group_created');
+    expect(Pusher.bind.mock.calls[9][1]).toEqual('sent_story_group');
     expect(Pusher.bind.mock.calls[10][0]).toEqual('private-story-groups-12345');
-    expect(Pusher.bind.mock.calls[10][1]).toEqual('story_group_updated');
+    expect(Pusher.bind.mock.calls[10][1]).toEqual('story_group_created');
     expect(Pusher.bind.mock.calls[11][0]).toEqual('private-story-groups-12345');
-    expect(Pusher.bind.mock.calls[11][1]).toEqual('story_group_deleted');
-    expect(Pusher.bind).toHaveBeenCalledTimes(12);
+    expect(Pusher.bind.mock.calls[11][1]).toEqual('story_group_updated');
+    expect(Pusher.bind.mock.calls[12][0]).toEqual('private-story-groups-12345');
+    expect(Pusher.bind.mock.calls[12][1]).toEqual('story_group_deleted');
+    expect(Pusher.bind).toHaveBeenCalledTimes(13);
   });
 
   it('should dispatch when a subscribed pusher event happens', () => {
