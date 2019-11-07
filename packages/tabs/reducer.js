@@ -3,7 +3,7 @@ import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-si
 
 export const actionTypes = keyWrapper('TABS', {
   SELECT_TAB: 0,
-  UPDATE_COUNTER: 0,
+  UPDATE_DRAFT_COUNTER: 0,
 });
 
 export const initialState = {
@@ -24,6 +24,7 @@ export default (state = initialState, action) => {
         tabId: action.tabId,
       };
     }
+
     case profileActionTypes.SELECT_PROFILE: {
       return {
         ...state,
@@ -31,51 +32,46 @@ export default (state = initialState, action) => {
         draftsCount: action.profile.draftsCount,
       };
     }
-    case actionTypes.UPDATE_COUNTER: {
-      if (action.needsApproval && action.draftAction === 'draftCreated') {
-        return {
-          ...state,
-          draftsNeedApprovalCount: state.draftsNeedApprovalCount + 1,
-        };
-      }
-      if (!action.needsApproval && action.draftAction === 'draftCreated') {
+
+    case actionTypes.UPDATE_DRAFT_COUNTER: {
+      // Updates counter when draft is created
+      if (action.draftAction === 'DRAFTS__DRAFT_CREATED') {
+        if (action.needsApproval) {
+          return {
+            ...state,
+            draftsNeedApprovalCount: state.draftsNeedApprovalCount + 1,
+          };
+        }
         return {
           ...state,
           draftsCount: state.draftsCount + 1,
         };
       }
-      if (action.needsApproval && action.draftAction === 'draftDeleted') {
-        return {
-          ...state,
-          draftsNeedApprovalCount: state.draftsNeedApprovalCount - 1,
-        };
-      }
-      if (!action.needsApproval && action.draftAction === 'draftDeleted') {
-        return {
-          ...state,
-          draftsCount: state.draftsCount - 1,
-        };
-      }
-      if (action.needsApproval && action.draftAction === 'draftApproved') {
-        return {
-          ...state,
-          draftsNeedApprovalCount: state.draftsNeedApprovalCount - 1,
-        };
-      }
-      if (!action.needsApproval && action.draftAction === 'draftApproved') {
+      // Updates counter when draft is deleted or approved
+      if (
+        action.draftAction === 'DRAFTS__DRAFT_DELETED' ||
+        action.draftAction === 'DRAFTS__DRAFT_APPROVED'
+      ) {
+        if (action.needsApproval) {
+          return {
+            ...state,
+            draftsNeedApprovalCount: state.draftsNeedApprovalCount - 1,
+          };
+        }
         return {
           ...state,
           draftsCount: state.draftsCount - 1,
         };
       }
-      if (action.needsApproval && action.draftAction === 'draftMoved') {
-        return {
-          ...state,
-          draftsNeedApprovalCount: state.draftsNeedApprovalCount + 1,
-          draftsCount: state.draftsCount - 1,
-        };
-      }
-      if (!action.needsApproval && action.draftAction === 'draftMoved') {
+      // Updates counter when draft is moved
+      if (action.draftAction === 'DRAFTS__DRAFT_MOVED') {
+        if (action.needsApproval) {
+          return {
+            ...state,
+            draftsNeedApprovalCount: state.draftsNeedApprovalCount + 1,
+            draftsCount: state.draftsCount - 1,
+          };
+        }
         return {
           ...state,
           draftsNeedApprovalCount: state.draftsNeedApprovalCount - 1,
@@ -97,8 +93,8 @@ export const actions = {
     tabId,
     profileId,
   }),
-  updateCounter: ({ needsApproval, draftAction }) => ({
-    type: actionTypes.UPDATE_COUNTER,
+  updateDraftCounter: ({ needsApproval, draftAction }) => ({
+    type: actionTypes.UPDATE_DRAFT_COUNTER,
     needsApproval,
     draftAction,
   }),

@@ -6,7 +6,6 @@ import { actionTypes, actions } from './reducer';
 
 export default ({ getState, dispatch }) => next => action => {
   next(action);
-  const { selectedProfileId } = getState().profileSidebar;
   switch (action.type) {
     case actionTypes.SELECT_TAB:
       if (
@@ -23,45 +22,17 @@ export default ({ getState, dispatch }) => next => action => {
         );
       }
       break;
-    case draftActionTypes.DRAFT_CREATED: {
-      if (selectedProfileId === action.profileId) {
-        dispatch(
-          actions.updateCounter({
-            needsApproval: action.draft.needsApproval,
-            draftAction: 'draftCreated',
-          })
-        );
-      }
-      break;
-    }
-    case draftActionTypes.DRAFT_DELETED: {
-      if (selectedProfileId === action.profileId) {
-        dispatch(
-          actions.updateCounter({
-            needsApproval: action.draft.needsApproval,
-            draftAction: 'draftDeleted',
-          })
-        );
-      }
-      break;
-    }
-    case draftActionTypes.DRAFT_APPROVED: {
-      if (selectedProfileId === action.profileId) {
-        dispatch(
-          actions.updateCounter({
-            needsApproval: action.draft.needsApproval,
-            draftAction: 'draftApproved',
-          })
-        );
-      }
-      break;
-    }
+
+    // Drafts pusher events trigger a draft counter update action
+    case draftActionTypes.DRAFT_CREATED:
+    case draftActionTypes.DRAFT_DELETED:
+    case draftActionTypes.DRAFT_APPROVED:
     case draftActionTypes.DRAFT_MOVED: {
-      if (selectedProfileId === action.profileId) {
+      if (getState().profileSidebar.selectedProfileId === action.profileId) {
         dispatch(
-          actions.updateCounter({
+          actions.updateDraftCounter({
             needsApproval: action.draft.needsApproval,
-            draftAction: 'draftMoved',
+            draftAction: action.type,
           })
         );
       }
