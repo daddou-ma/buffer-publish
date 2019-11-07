@@ -21,32 +21,26 @@ const PlanColumn = ({
   subtitle,
   imageSrc,
   plan,
-  currentPlan,
   source,
   onChoosePlanClick,
   monthly,
   features,
   buttonText,
-  buttonCurrentPlanText,
   billingText,
 }) => (
   <ColumnStyle>
     <TopContentStyle>
-      <Text type="h3">{ title }</Text>
+      <Text type="h3">{title}</Text>
       <ImageWrapperStyle>
-        <Image
-          src={imageSrc}
-          width="auto"
-          height="130px"
-        />
+        <Image src={imageSrc} width="auto" height="130px" />
       </ImageWrapperStyle>
       <Text type="h1">
         { isNonprofit ? nonProfitCost : cost }
-        { monthly }
+        {monthly}
       </Text>
-      <Text>{ billingText }</Text>
+      <Text>{billingText}</Text>
       <SubtitleStyle>
-        <Text>{ subtitle }</Text>
+        <Text>{subtitle}</Text>
       </SubtitleStyle>
     </TopContentStyle>
     {features.map(feature => (
@@ -56,9 +50,9 @@ const PlanColumn = ({
       <ButtonWrapperStyle>
         <Button
           type="primary"
-          label={currentPlan === plan ? buttonCurrentPlanText : buttonText}
+          label={buttonText}
           fullWidth
-          disabled={currentPlan === plan}
+          disabled={false}
           onClick={() => onChoosePlanClick({ source, plan })}
         />
       </ButtonWrapperStyle>
@@ -77,11 +71,9 @@ PlanColumn.propTypes = {
   subtitle: PropTypes.string.isRequired,
   imageSrc: PropTypes.string.isRequired,
   plan: PropTypes.string.isRequired,
-  currentPlan: PropTypes.string.isRequired,
   source: PropTypes.string.isRequired,
   onChoosePlanClick: PropTypes.func.isRequired,
   buttonText: PropTypes.string.isRequired,
-  buttonCurrentPlanText: PropTypes.string.isRequired,
   billingText: PropTypes.string.isRequired,
   features: PropTypes.array.isRequired,
   isNonprofit: PropTypes.bool.isRequired,
