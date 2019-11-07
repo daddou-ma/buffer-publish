@@ -16,7 +16,7 @@ export default connect(
     showSwitchPlan: state.appShell.showSwitchPlan,
     showManageTeam: state.appShell.showManageTeam,
     showStartProTrial: state.appShell.showStartProTrial,
-    isAwesomeUser: state.appSidebar.user.isOnAwesomePlan,
+    hideMenuItems: state.appShell.hideMenuItems,
     hideAppShell: (!state.appShell.sawOnboardingPage
       && state.router.location.pathname === newBusinessTrialistsRoute),
   }),

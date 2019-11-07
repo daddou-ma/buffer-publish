@@ -33,6 +33,7 @@ export default (state = initialState, action) => {
         showManageTeam: !action.result.is_free_user,
         showStartProTrial: action.result.canStartProTrial && !action.result.isBusinessTeamMember,
         sawOnboardingPage: action.result.messages && action.result.messages.includes('user_saw_onboarding_page'),
+        hideMenuItems: action.result.isOnAwesomePlan,
       };
     case actionTypes.SET_BANNER_OPTIONS:
       return {

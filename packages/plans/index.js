@@ -40,6 +40,7 @@ export default connect(
     onBackToDashboardClick: ({ selectedProfileId, profiles, isAwesomeUser }) => {
       if (isAwesomeUser) {
         window.location.replace(getClassicBufferURL());
+        return;
       }
       if (profiles.length > 0) {
         const profileId = selectedProfileId || profiles[0].id;
