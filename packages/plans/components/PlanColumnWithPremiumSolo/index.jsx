@@ -98,14 +98,12 @@ const PlanColumnWithPremiumSolo = ({
   isNonprofit,
   imageSrc,
   plan,
-  currentPlan,
   source,
   onChoosePlanClick,
   features,
   featureTooltips,
   monthly,
   buttonText,
-  buttonCurrentPlanText,
   billingText,
   onPremiumPlanClick,
   selectedPremiumPlan,
@@ -184,9 +182,9 @@ const PlanColumnWithPremiumSolo = ({
         <ButtonWrapperStyle>
           <Button
             type="primary"
-            label={currentPlan === plan ? buttonCurrentPlanText : buttonText}
+            label={buttonText}
             fullWidth
-            disabled={currentPlan === plan}
+            disabled={false}
             onClick={() =>
               onChoosePlanClick({
                 source,
@@ -207,14 +205,11 @@ PlanColumnWithPremiumSolo.propTypes = {
   nonProfitCost: PropTypes.string.isRequired,
   soloCost: PropTypes.string.isRequired,
   soloNonProfitCost: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
   imageSrc: PropTypes.string.isRequired,
   plan: PropTypes.string.isRequired,
-  currentPlan: PropTypes.string.isRequired,
   source: PropTypes.string.isRequired,
   onChoosePlanClick: PropTypes.func.isRequired,
   buttonText: PropTypes.string.isRequired,
-  buttonCurrentPlanText: PropTypes.string.isRequired,
   billingText: PropTypes.string.isRequired,
   features: PropTypes.array.isRequired,
   featureTooltips: PropTypes.array.isRequired,
