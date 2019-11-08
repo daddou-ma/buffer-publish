@@ -18,9 +18,10 @@ export default ({ getState, dispatch }) => next => (action) => {
         hasPublishBeta,
         hasPublishBetaRedirect,
         hasNewPublish,
+        onPaydayPage,
       } = getState().betaRedirect;
       if (!hasPublishBeta) {
-        if (!hasNewPublish) {
+        if (!hasNewPublish && !onPaydayPage) {
           window.location.replace(getClassicBufferURL());
         }
       } else if (!hasPublishBetaRedirect) {

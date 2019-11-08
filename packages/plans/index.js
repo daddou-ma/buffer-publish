@@ -7,6 +7,13 @@ import Plans from './components/Plans';
 
 import { actions } from './reducer';
 
+const getClassicBufferURL = () => {
+  if (window.location.hostname === 'publish.local.buffer.com') {
+    return 'https://local.buffer.com/app';
+  }
+  return 'https://buffer.com/app';
+};
+
 export default connect(
   state => ({
     currentPlan: state.appSidebar.user.plan,
@@ -14,8 +21,11 @@ export default connect(
     selectedProfileId: state.profileSidebar.selectedProfileId,
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
-    isOnProPlan: state.appSidebar.user.plan === 'pro',
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
+    isAwesomeUser: state.appSidebar.user.isOnAwesomePlan,
+    shouldSeeSoloPlanOption:
+      state.appSidebar.user.plan === 'pro' ||
+      state.appSidebar.user.isOnAwesomePlan,
   }),
   dispatch => ({
     onPremiumPlanClick: ({ selectedPlan }) => {
@@ -27,7 +37,11 @@ export default connect(
       }
       dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
     },
-    onBackToDashboardClick: ({ selectedProfileId, profiles }) => {
+    onBackToDashboardClick: ({ selectedProfileId, profiles, isAwesomeUser }) => {
+      if (isAwesomeUser) {
+        window.location.replace(getClassicBufferURL());
+        return;
+      }
       if (profiles.length > 0) {
         const profileId = selectedProfileId || profiles[0].id;
         const profile = profiles.find(p => p.id === profileId);

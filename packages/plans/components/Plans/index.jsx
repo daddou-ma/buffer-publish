@@ -34,9 +34,10 @@ const Plans = ({
   profiles,
   translations,
   isNonprofit,
-  isOnProPlan,
   onPremiumPlanClick,
   selectedPremiumPlan,
+  isAwesomeUser,
+  shouldSeeSoloPlanOption,
 }) => (
   <ContainerStyle>
     <ButtonStyle>
@@ -48,13 +49,14 @@ const Plans = ({
         onClick={() => onBackToDashboardClick({
           selectedProfileId,
           profiles,
+          isAwesomeUser,
         })
         }
       />
     </ButtonStyle>
     <div style={{ textAlign: 'center' }}>
       <HeaderStyle type="h1">{ translations.headerText }</HeaderStyle>
-      {!isOnProPlan && (
+      {!shouldSeeSoloPlanOption && (
         <ColumnContainerStyle>
           <PlanColumn
             {...translations.pro}
@@ -82,7 +84,7 @@ const Plans = ({
           />
         </ColumnContainerStyle>
       )}
-      {isOnProPlan && (
+      {shouldSeeSoloPlanOption && (
         <ColumnContainerStyle>
           <PlanColumnWithPremiumSolo
             {...translations.proExperiment}

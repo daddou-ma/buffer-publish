@@ -4,13 +4,17 @@ import PropTypes from 'prop-types';
 
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 
-const EnsurePublishBetaUser = ({ children, loading, hasPublishBeta, hasNewPublish }) => {
-  if (loading || (!hasPublishBeta && !hasNewPublish)) {
-    return (
-      <BufferLoading fullscreen />
-    );
+const EnsurePublishBetaUser = ({
+  children,
+  loading,
+  hasPublishBeta,
+  hasNewPublish,
+  onPaydayPage,
+}) => {
+  if (loading || (!hasPublishBeta && !hasNewPublish && !onPaydayPage)) {
+    return <BufferLoading fullscreen />;
   }
-  if (hasPublishBeta || hasNewPublish) {
+  if (hasPublishBeta || hasNewPublish || onPaydayPage) {
     return children;
   }
 };

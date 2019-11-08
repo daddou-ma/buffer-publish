@@ -9,6 +9,7 @@ const initialState = {
   hasPublishBetaRedirect: false,
   hasNewPublish: false,
   loading: true,
+  onPaydayPage: false,
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +21,7 @@ export default (state = initialState, action) => {
         hasPublishBeta: features.includes('new_publish_beta'),
         hasPublishBetaRedirect: features.includes('new_publish_beta_redirect'),
         hasNewPublish,
+        onPaydayPage: window.location.pathname.endsWith('plans'),
       };
     }
     default:
