@@ -32,6 +32,10 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       break;
     case 'APP_INIT': {
+      if (getState().appSidebar.user.plan === 'awesome') {
+        // Context: https://buffer.atlassian.net/browse/PUB-2004
+        return;
+      }
       if (shouldShowSwitchPlanModal()) {
         dispatch(actions.showSwitchPlanModal({
           source: getSourceFromKey(),
@@ -56,6 +60,10 @@ export default ({ dispatch, getState }) => next => (action) => {
     }
 
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      if (getState().appSidebar.user.plan === 'awesome') {
+        // Context: https://buffer.atlassian.net/browse/PUB-2004
+        return;
+      }
       if (action.result && action.result.some(profile => profile.isDisconnected)) {
         dispatch(actions.showProfilesDisconnectedModal());
       }
@@ -67,7 +75,12 @@ export default ({ dispatch, getState }) => next => (action) => {
       const {
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
+        isOnAwesomePlan,
       } = action.result; // userData
+      if (isOnAwesomePlan) {
+        // Context: https://buffer.atlassian.net/browse/PUB-2004
+        return;
+      }
       if (shouldShowProTrialExpiredModal || shouldShowBusinessTrialExpiredModal) {
         dispatch(actions.showTrialCompleteModal());
       }
@@ -107,6 +120,11 @@ export default ({ dispatch, getState }) => next => (action) => {
       const profileId = getState().profileSidebar.selectedProfileId;
       const isIGBusiness = getState().profileSidebar.selectedProfile.service_type === 'business';
       const tourInProgress = getState().thirdparty.appCues.inProgress;
+
+      if (getState().appSidebar.user.plan === 'awesome') {
+        // Context: https://buffer.atlassian.net/browse/PUB-2004
+        return;
+      }
 
       if (shouldShowInstagramDirectPostingModal() && !isIGBusiness) {
         if (tourInProgress) {

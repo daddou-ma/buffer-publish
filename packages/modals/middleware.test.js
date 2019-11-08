@@ -22,10 +22,17 @@ describe('middleware', () => {
     };
     const next = jest.fn();
     const dispatch = jest.fn();
+    const getState = () => ({
+      appSidebar: {
+        user: {
+          plan: 'pro',
+        },
+      },
+    });
     const action = {
       type: 'APP_INIT',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -37,10 +44,17 @@ describe('middleware', () => {
     };
     const next = jest.fn();
     const dispatch = jest.fn();
+    const getState = () => ({
+      appSidebar: {
+        user: {
+          plan: 'pro',
+        },
+      },
+    });
     const action = {
       type: 'APP_INIT',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -52,10 +66,17 @@ describe('middleware', () => {
     };
     const next = jest.fn();
     const dispatch = jest.fn();
+    const getState = () => ({
+      appSidebar: {
+        user: {
+          plan: 'pro',
+        },
+      },
+    });
     const action = {
       type: 'APP_INIT',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -81,10 +102,17 @@ describe('middleware', () => {
     };
     const next = jest.fn();
     const dispatch = jest.fn();
+    const getState = () => ({
+      appSidebar: {
+        user: {
+          plan: 'pro',
+        },
+      },
+    });
     const action = {
       type: 'APP_INIT',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -96,10 +124,17 @@ describe('middleware', () => {
     };
     const next = jest.fn();
     const dispatch = jest.fn();
+    const getState = () => ({
+      appSidebar: {
+        user: {
+          plan: 'pro',
+        },
+      },
+    });
     const action = {
       type: 'APP_INIT',
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -109,11 +144,18 @@ describe('middleware', () => {
   it('should show profiles disconnected modal when one or more is disconnected', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
+    const getState = () => ({
+      appSidebar: {
+        user: {
+          plan: 'pro',
+        },
+      },
+    });
     const action = {
       type: `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`,
       result: [{ isDisconnected: false }, { isDisconnected: false }, { isDisconnected: true }],
     };
-    middleware({ dispatch })(next)(action);
+    middleware({ dispatch, getState })(next)(action);
     expect(next)
       .toBeCalledWith(action);
     expect(dispatch)
@@ -150,6 +192,11 @@ describe('middleware', () => {
       thirdparty: {
         appCues: {
           inProgress: false,
+        },
+      },
+      appSidebar: {
+        user: {
+          plan: 'pro',
         },
       },
     });

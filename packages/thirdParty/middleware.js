@@ -31,7 +31,10 @@ export default ({ dispatch, getState }) => next => (action) => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({ type: actionTypes.FULLSTORY, result: action.result });
       dispatch({ type: actionTypes.APPCUES, result: action.result });
-      dispatch({ type: actionTypes.HELPSCOUT_BEACON, result: action.result });
+      if (!action.result.isOnAwesomePlan) {
+        // Context: https://buffer.atlassian.net/browse/PUB-2004
+        dispatch({ type: actionTypes.HELPSCOUT_BEACON, result: action.result });
+      }
       dispatch({ type: actionTypes.ITERATE, result: action.result });
       break;
 
