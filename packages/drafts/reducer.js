@@ -5,6 +5,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('DRAFTS', {
   DRAFT_CREATED: 0,
   DRAFT_UPDATED: 0,
+  DRAFT_MOVED: 0,
   DRAFT_DELETED: 0,
   DRAFT_APPROVED: 0,
   DRAFT_APPROVE: 0,
@@ -120,6 +121,7 @@ const draftsReducer = (state = {}, action) => {
       return newState;
     }
     case actionTypes.DRAFT_UPDATED:
+    case actionTypes.DRAFT_MOVED:
     case actionTypes.DRAFT_CREATED: {
       return { ...state, [getDraftUpdateId(action)]: action.draft };
     }
@@ -178,6 +180,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.DRAFT_IMAGE_CLICKED_PREV:
     case actionTypes.DRAFT_CREATED:
     case actionTypes.DRAFT_UPDATED:
+    case actionTypes.DRAFT_MOVED:
     case actionTypes.DRAFT_DELETED:
     case actionTypes.DRAFT_APPROVED:
     case actionTypes.DRAFT_CONFIRMED_DELETE:
@@ -211,6 +214,7 @@ export default (state = initialState, action) => {
     case `draftPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case actionTypes.DRAFT_CREATED:
     case actionTypes.DRAFT_UPDATED:
+    case actionTypes.DRAFT_MOVED:
     case actionTypes.DRAFT_DELETED:
     case actionTypes.DRAFT_APPROVED:
     case actionTypes.DRAFT_CONFIRMED_DELETE:

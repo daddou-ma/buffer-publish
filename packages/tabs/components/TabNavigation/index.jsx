@@ -6,6 +6,7 @@ import { WithFeatureLoader } from '@bufferapp/product-features';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import styled from 'styled-components';
 import { getValidTab } from '../../utils';
+import TabTag from '../TabTag';
 
 const UpgradeCtaStyle = styled.div`
   transform: translate(0, 1px);
@@ -20,15 +21,6 @@ const UpgradeCtaStyle = styled.div`
 const ButtonWrapper = styled.div`
   margin-left: 8px;
   display: inline-block;
-`;
-
-const Tag = styled.span`
-  padding: 2px 8px;
-  font-size: 12px;
-  margin-left: 8px;
-  border-radius: 100px;
-  color: #ffffff;
-  background-color: #87c221;
 `;
 
 const tabsStyle = {
@@ -82,6 +74,8 @@ class TabNavigation extends React.Component {
       shouldHideAdvancedAnalytics,
       onUpgradeButtonClick,
       isLockedProfile,
+      draftsNeedApprovalCount,
+      draftsCount,
     } = this.props;
 
     return (
@@ -94,7 +88,7 @@ class TabNavigation extends React.Component {
           {this.isValidTab('stories') && (
             <Tab tabId="stories">
               Stories
-              <Tag>New</Tag>
+              <TabTag type="new" labelName="New" />
             </Tab>
           )}
           {this.isValidTab('pastReminders') && (
@@ -103,14 +97,25 @@ class TabNavigation extends React.Component {
           <Tab tabId="analytics">Analytics</Tab>
           {/* Team Members who are Managers */}
           {this.isValidTab('awaitingApproval') && (
-            <Tab tabId="awaitingApproval">Awaiting Approval</Tab>
+            <Tab tabId="awaitingApproval">
+              Awaiting Approval
+              <TabTag type="counter" labelName={draftsNeedApprovalCount} />
+            </Tab>
           )}
           {/* Team Members who are Contributors */}
           {this.isValidTab('pendingApproval') && (
-            <Tab tabId="pendingApproval">Pending Approval</Tab>
+            <Tab tabId="pendingApproval">
+              Pending Approval
+              <TabTag type="counter" labelName={draftsNeedApprovalCount} />
+            </Tab>
           )}
           {/* Pro and up users or Team Members */}
-          {this.isValidTab('drafts') && <Tab tabId="drafts">Drafts</Tab>}
+          {this.isValidTab('drafts') && (
+            <Tab tabId="drafts">
+              Drafts
+              <TabTag type="counter" labelName={draftsCount} />
+            </Tab>
+          )}
           {/* IG, Business users or Team Members */}
           {this.isValidTab('grid') && <Tab tabId="grid">Shop Grid</Tab>}
           <Tab tabId="settings">Settings</Tab>
@@ -180,6 +185,8 @@ TabNavigation.defaultProps = {
   isBusinessAccount: false,
   isManager: false,
   hasStoriesFlip: false,
+  draftsNeedApprovalCount: null,
+  draftsCount: null,
 };
 
 TabNavigation.propTypes = {
@@ -198,6 +205,8 @@ TabNavigation.propTypes = {
   isInstagramProfile: PropTypes.bool,
   shouldShowUpgradeButton: PropTypes.bool,
   hasStoriesFlip: PropTypes.bool,
+  draftsNeedApprovalCount: PropTypes.number,
+  draftsCount: PropTypes.number,
 };
 
 export default WithFeatureLoader(TabNavigation);

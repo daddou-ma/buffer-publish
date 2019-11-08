@@ -89,6 +89,10 @@ function createMockStore (profileList) {
     environment: {
       environment: 'dev',
     },
+    tabs: {
+      draftsNeedApprovalCount: 1,
+      draftsCount: 0,
+    },
   });
 }
 

@@ -42,10 +42,12 @@ export default connect(
     hasStoriesFlip: state.appSidebar.user.features
       ? state.appSidebar.user.features.includes('stories_groups')
       : false,
+    draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
+    draftsCount: state.tabs.draftsCount,
   }),
   (dispatch, ownProps) => ({
     onTabClick: tabId => {
-      const profileId = ownProps.profileId;
+      const { profileId } = ownProps;
       trackAction({
         location: 'tabs',
         action: `click_tab_${tabId}`,
@@ -62,8 +64,7 @@ export default connect(
       dispatch(push(plansPageRoute));
     },
     onChildTabClick: childTabId => {
-      const tabId = ownProps.tabId;
-      const profileId = ownProps.profileId;
+      const { tabId, profileId } = ownProps;
       trackAction({
         location: 'tabs',
         action: `click_tab_${tabId}_${childTabId}`,
