@@ -6,19 +6,21 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions } from '@bufferapp/publish-tabs';
 import ProfilePage from './components/ProfilePage';
 
-const requestName = tabId => ({
-  queue: 'queuedPosts',
-  drafts: 'draftPosts',
-  awaitingApproval: 'draftPosts',
-  pendingApproval: 'draftPosts',
-  grid: 'gridPosts',
-  analytics: 'sentPosts',
-  pastReminders: 'pastRemindersPosts',
-  stories: 'getStoryGroups',
-  default: 'queuedPosts',
-})[tabId];
+const requestName = tabId =>
+  ({
+    queue: 'queuedPosts',
+    drafts: 'draftPosts',
+    awaitingApproval: 'draftPosts',
+    pendingApproval: 'draftPosts',
+    grid: 'gridPosts',
+    analytics: 'sentPosts',
+    pastReminders: 'pastRemindersPosts',
+    stories: 'getStoryGroups',
+    default: 'queuedPosts',
+  }[tabId]);
 
-export const getRequestName = tabId => requestName(tabId) || requestName('default');
+export const getRequestName = tabId =>
+  requestName(tabId) || requestName('default');
 
 // default export = container
 export default hot(
@@ -28,10 +30,12 @@ export default hot(
         getProfilePageParams({ path: ownProps.history.location.pathname }) ||
         {};
       // With analytics, the reducer state name doesnt match the tabId
-      let reducerName = tabId === 'analytics' && (!childTabId || childTabId === 'posts')
-        ? 'sent'
-        : tabId;
-      if (tabId === 'awaitingApproval' || tabId === 'pendingApproval') reducerName = 'drafts';
+      let reducerName =
+        tabId === 'analytics' && (!childTabId || childTabId === 'posts')
+          ? 'sent'
+          : tabId;
+      if (tabId === 'awaitingApproval' || tabId === 'pendingApproval')
+        reducerName = 'drafts';
       if (
         state[reducerName] &&
         state[reducerName].byProfileId &&
@@ -48,17 +52,24 @@ export default hot(
           view: state[reducerName].byProfileId[profileId].tabId || null,
           isBusinessAccount: state.profileSidebar.selectedProfile.business,
           selectedProfile: state.profileSidebar.selectedProfile,
-          hasStoriesFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('stories_groups') : false,
+          hasStoriesFlip: state.appSidebar.user.features
+            ? state.appSidebar.user.features.includes('stories_groups')
+            : false,
+          shouldHideAdvancedAnalytics: state.profileSidebar.selectedProfile
+            ? state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics
+            : false,
         };
       }
       return {};
     },
     dispatch => ({
       onChangeTab: (tabId, profileId) => {
-        dispatch(actions.selectTab({
-          tabId,
-          profileId,
-        }));
+        dispatch(
+          actions.selectTab({
+            tabId,
+            profileId,
+          })
+        );
       },
       onLoadMore: ({ profileId, page, tabId }) => {
         dispatch(
@@ -68,11 +79,13 @@ export default hot(
               profileId,
               page,
               isFetchingMore: true,
-              needsApproval: ['awaitingApproval', 'pendingApproval'].includes(tabId),
+              needsApproval: ['awaitingApproval', 'pendingApproval'].includes(
+                tabId
+              ),
             },
-          }),
+          })
         );
       },
-    }),
-  )(ProfilePage),
+    })
+  )(ProfilePage)
 );

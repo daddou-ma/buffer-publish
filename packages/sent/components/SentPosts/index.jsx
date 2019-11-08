@@ -62,6 +62,8 @@ const SentPosts = ({
   profileId,
   page,
   loadMore,
+  showAnalyzeBannerAfterFirstPost,
+  isAnalyzeCustomer,
 }) => {
   if (loading) {
     return (
@@ -76,9 +78,10 @@ const SentPosts = ({
   }
 
   if (total < 1) {
-    const title = isBusinessAccount || !features.isFreeUser() ?
-      'You haven’t published any posts with this account!' :
-      'You haven’t published any posts with this account in the past 30 days!';
+    const title =
+      isBusinessAccount || !features.isFreeUser()
+        ? 'You haven’t published any posts with this account!'
+        : 'You haven’t published any posts with this account in the past 30 days!';
     return (
       <Fragment>
         <EmptyState
@@ -95,9 +98,10 @@ const SentPosts = ({
     loadMore({ profileId, page, tabId });
   };
 
-  const header = isBusinessAccount || !features.isFreeUser() ?
-    'Your sent posts' :
-    'Your sent posts for the last 30 days';
+  const header =
+    isBusinessAccount || !features.isFreeUser()
+      ? 'Your sent posts'
+      : 'Your sent posts for the last 30 days';
   return (
     <ErrorBoundary>
       <div>
@@ -129,15 +133,13 @@ const SentPosts = ({
           isBusinessAccount={isBusinessAccount}
           isSent
           hasFirstCommentFlip={hasFirstCommentFlip}
+          showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
+          isAnalyzeCustomer={isAnalyzeCustomer}
         />
       </div>
       {moreToLoad && (
         <div style={loadMoreButtonStyle}>
-          <Button
-            type="primary"
-            label="Load More"
-            onClick={loadMorePosts}
-          />
+          <Button type="primary" label="Load More" onClick={loadMorePosts} />
         </div>
       )}
     </ErrorBoundary>
@@ -155,12 +157,14 @@ SentPosts.propTypes = {
       posts: PropTypes.arrayOf(
         PropTypes.shape({
           text: PropTypes.string,
-        }),
+        })
       ),
-    }),
+    })
   ),
   total: PropTypes.number,
   showComposer: PropTypes.bool,
+  showAnalyzeBannerAfterFirstPost: PropTypes.bool,
+  isAnalyzeCustomer: PropTypes.bool,
   editMode: PropTypes.bool,
   onComposerCreateSuccess: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
@@ -182,6 +186,8 @@ SentPosts.defaultProps = {
   postLists: [],
   total: 0,
   showComposer: false,
+  showAnalyzeBannerAfterFirstPost: false,
+  isAnalyzeCustomer: false,
   editMode: false,
   isManager: true,
   isBusinessAccount: false,

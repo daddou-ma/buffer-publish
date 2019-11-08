@@ -16,7 +16,7 @@ const TagListItem = ({ tag, index, lastItem, removeTag, translations }) => (
       }}
       tabIndex={0}
     >
-      <Cross size="medium" />
+      <Cross size="small" />
     </CloseButton>
     {`@${tag.username}`}
     <Link target="_blank" href={getUrl(tag.username)}>

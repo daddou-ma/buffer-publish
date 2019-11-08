@@ -1,6 +1,9 @@
-engines:
-  duplication:
+checks:
+  identical-code:
     enabled: true
     config:
-      javascript:
-        mass_threshold: 50
+      threshold: 50
+  similar-code:
+    enabled: true
+    config:
+      threshold: 80

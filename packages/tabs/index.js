@@ -1,5 +1,8 @@
 import { push } from 'connected-react-router';
-import { generateChildTabRoute, plansPageRoute } from '@bufferapp/publish-routes';
+import {
+  generateChildTabRoute,
+  plansPageRoute,
+} from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
@@ -13,52 +16,71 @@ export default connect(
     isManager: state.profileSidebar.selectedProfile.isManager,
     selectedTabId: ownProps.tabId,
     selectedChildTabId: ownProps.childTabId,
-    onProTrial: state.appSidebar.user.trial &&
-                state.appSidebar.user.trial.onTrial &&
-                !state.profileSidebar.selectedProfile.business,
-    shouldShowUpgradeCta: state.appSidebar.user.is_free_user && !state.appSidebar.user.isBusinessTeamMember,
-    shouldShowUpgradeButton: state.appSidebar.user.plan === 'free'
-                             || state.appSidebar.user.plan === 'pro'
-                             || state.appSidebar.user.plan === 'solo_premium_business'
-                             || state.appSidebar.user.plan === 'premium_business',
+    onProTrial:
+      state.appSidebar.user.trial &&
+      state.appSidebar.user.trial.onTrial &&
+      !state.profileSidebar.selectedProfile.business,
+    shouldShowUpgradeCta:
+      state.appSidebar.user.is_free_user &&
+      !state.appSidebar.user.isBusinessTeamMember,
+    shouldShowUpgradeButton:
+      state.appSidebar.user.plan === 'free' ||
+      state.appSidebar.user.plan === 'pro' ||
+      state.appSidebar.user.plan === 'solo_premium_business' ||
+      state.appSidebar.user.plan === 'premium_business',
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
-    shouldHideAnalyticsOverviewTab: state.profileSidebar.selectedProfile.type === 'linkedin'
-                                    || state.profileSidebar.selectedProfile.type === 'pinterest',
+    shouldHideAdvancedAnalytics:
+      state.profileSidebar.selectedProfile.type === 'linkedin' ||
+      state.profileSidebar.selectedProfile.type === 'pinterest' ||
+      state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
     isInstagramProfile: state.generalSettings.isInstagramProfile,
     selectedProfile: state.profileSidebar.selectedProfile,
     canStartProTrial: state.appSidebar.user.canStartProTrial,
-    hasStoriesFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('stories_groups') : false,
+    hasStoriesFlip: state.appSidebar.user.features
+      ? state.appSidebar.user.features.includes('stories_groups')
+      : false,
+    draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
+    draftsCount: state.tabs.draftsCount,
   }),
   (dispatch, ownProps) => ({
-    onTabClick: (tabId) => {
-      const profileId = ownProps.profileId;
-      trackAction({ location: 'tabs', action: `click_tab_${tabId}`, metadata: { profileId } });
-      dispatch(actions.selectTab({
-        tabId,
-        profileId,
-      }));
-    },
-    onUpgradeButtonClick: () => {
+    onTabClick: tabId => {
+      const { profileId } = ownProps;
+      trackAction({
+        location: 'tabs',
+        action: `click_tab_${tabId}`,
+        metadata: { profileId },
+      });
       dispatch(
-        push(
-          plansPageRoute,
-        ),
+        actions.selectTab({
+          tabId,
+          profileId,
+        })
       );
     },
-    onChildTabClick: (childTabId) => {
-      const tabId = ownProps.tabId;
-      const profileId = ownProps.profileId;
-      trackAction({ location: 'tabs', action: `click_tab_${tabId}_${childTabId}`, metadata: { profileId } });
-      dispatch(push(generateChildTabRoute({
-        tabId,
-        childTabId,
-        profileId,
-      })));
+    onUpgradeButtonClick: () => {
+      dispatch(push(plansPageRoute));
     },
-  }),
+    onChildTabClick: childTabId => {
+      const { tabId, profileId } = ownProps;
+      trackAction({
+        location: 'tabs',
+        action: `click_tab_${tabId}_${childTabId}`,
+        metadata: { profileId },
+      });
+      dispatch(
+        push(
+          generateChildTabRoute({
+            tabId,
+            childTabId,
+            profileId,
+          })
+        )
+      );
+    },
+  })
 )(TabNavigation);
 
 // export reducer, actions and action types

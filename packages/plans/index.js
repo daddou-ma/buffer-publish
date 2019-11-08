@@ -21,10 +21,11 @@ export default connect(
     selectedProfileId: state.profileSidebar.selectedProfileId,
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
-    isExperimentControl: state.appSidebar.user.hasPaydayExperimentControlFlip,
-    isExperimentEnabled: state.appSidebar.user.hasPaydayExperimentEnabledFlip,
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
     isAwesomeUser: state.appSidebar.user.isOnAwesomePlan,
+    shouldSeeSoloPlanOption:
+      state.appSidebar.user.plan === 'pro' ||
+      state.appSidebar.user.isOnAwesomePlan,
   }),
   dispatch => ({
     onPremiumPlanClick: ({ selectedPlan }) => {
@@ -39,6 +40,7 @@ export default connect(
     onBackToDashboardClick: ({ selectedProfileId, profiles, isAwesomeUser }) => {
       if (isAwesomeUser) {
         window.location.replace(getClassicBufferURL());
+        return;
       }
       if (profiles.length > 0) {
         const profileId = selectedProfileId || profiles[0].id;

@@ -174,17 +174,18 @@ const segmentScript = `<script>
       }}();
     </script>`;
 
-const qualarooScript =
-  `<!-- Qualaroo for buffer.com -->
-    <script type="text/javascript">
-      var _kiq = _kiq || [];
-      (function(){
-        setTimeout(function(){
-        var d = document, f = d.getElementsByTagName('script')[0], s = d.createElement('script'); s.type = 'text/javascript';
-        s.async = true; s.src = '//s3.amazonaws.com/ki.js/50685/d9G.js'; f.parentNode.insertBefore(s, f);
-        }, 1);
-      })();
-    </script>`;
+const iterateScript = `<script>
+    window.iterateSettings = {
+        apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55X2lkIjoiNWQ1ZjIxMzUxMzU5ZDMwMDAxMDE3N2IxIiwiaWF0IjoxNTY2NTE1NTA5fQ.UPeBAlcqV4aZQ_rJxRIkYWpNC1nDS24O1MG4WIEuuUg'
+    };
+    (function(i,t,e,r,a){if(t.getElementById(r))
+    {return}
+    i.IterateObjectName=a;var z=function()
+    {z.c(arguments)};
+    z.q=[];z.c=function(args){z.q.push(args)};i[a]=z;var js,fjs=t.getElementsByTagName(e)[0];
+    function l() {js=t.createElement(e);js.id=r;js.async=1;js.src="https://platform.iteratehq.com/loader.js";fjs.parentNode.insertBefore(js,fjs)}; if(t.readyState==="complete") {l();} else 
+    if(i.attachEvent) {i.attachEvent('onload', l);} else{i.addEventListener('load', l, false);}}(window, document,'script','iterate-js','Iterate'));
+  </script>`;
 
 const getHtml = ({ notification, userId, modalKey, modalValue }) =>
   fs
@@ -199,7 +200,7 @@ const getHtml = ({ notification, userId, modalKey, modalValue }) =>
     .replace('{{{showModalScript}}}', showModalScript(modalKey, modalValue))
     .replace('{{{appcues}}}', isProduction ? appcuesScript : '')
     .replace('{{{intercomScript}}}', intercomScript)
-    .replace('{{{qualarooScript}}}', isProduction ? qualarooScript : '')
+    .replace('{{{iterateScript}}}', isProduction ? iterateScript : '')
     .replace('{{{helpScoutScript}}}', helpScoutScript)
     .replace('{{{userScript}}}', getUserScript({ id: userId }))
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))

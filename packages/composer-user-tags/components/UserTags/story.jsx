@@ -19,5 +19,8 @@ storiesOf('Composer User Tags', module)
       saveGlobalTags={action('saving tags!')}
       onCancel={action('cancel!')}
       translations={translations['user-tags']}
+      selectedChannels={[]}
+      trackTag={action('track tag')}
+      trackAllTags={action('track all tags')}
     />
   ));

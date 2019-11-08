@@ -27,8 +27,8 @@
     "defaultTitle": "Let's get your account set up!"
   },
   "onboarding-page": {
-    "title": "Your account has been setup!",
-    "description": "Now let's connect a social account so you can begin publishing content.",
+    "title": "Your account has been set up!",
+    "description": "Connect a social account, so you can schedule your first post",
     "cta1": "You can also connect your",
     "ctaChannel1": "Linkedin",
     "cta2": "and",
@@ -404,10 +404,14 @@
     "placeholder": "username",
     "inputLabel": "Instagram User",
     "inputBtnLabel": "Add Tag",
+    "inputBtnAddTag": "Add Tag",
+    "inputBtnCancel": "Cancel",
+    "usernameError": "Oops! User already tagged",
     "footerText": "Instagram API limitations prevent searching for usernames and tagging private users.",
-    "maxLimitText": "You've reached the 20 tag limit.",
+    "maxLimitText": "Reached the 20 tag limit.",
     "btnSave": "Save",
     "btnCancel": "Cancel",
-    "tooltip": "View profile"
+    "tooltip": "View profile",
+    "imgAltText": "Image to tag users"
   }
 }

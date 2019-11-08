@@ -10,7 +10,7 @@ export const actionTypes = keyWrapper('thirdparty', {
   INTERCOM_LOADED: 0,
   HELPSCOUT_BEACON: 0,
   HELPSCOUT_BEACON_LOADED: 0,
-  QUALAROO: 0,
+  ITERATE: 0,
 });
 
 const initialState = {

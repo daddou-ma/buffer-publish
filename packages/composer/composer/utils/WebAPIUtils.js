@@ -711,17 +711,12 @@ function getFormattedAPIData(serviceName, unformattedData) {
       conditionalFields.service_geolocation_name = locationName;
     }
 
-    // TO-DO: Refactor, though prob fine for now as a user will only have userTags if they have feature flip
-    const { userTags } = serviceDraft;
-    if (serviceDraft.service.canHaveUserTags && userTags) {
-      // Post fails if you try to send clientX & clientY.
-      // We may want to calculate this on component load instead of saving to store
-      const newUserTags = userTags.map((tag) => {
-        delete tag.clientX;
-        delete tag.clientY;
-        return tag;
-      });
-      conditionalFields.service_user_tags = newUserTags;
+    const { images } = serviceDraft;
+    const userTags = images && images[0] && images[0].userTags;
+    if (serviceDraft.service.canHaveUserTags) {
+      conditionalFields.service_user_tags =
+        // Ensuring we send `null` here so it removes the tags when all are removed
+        userTags && userTags.length ? userTags : null;
     }
 
     if (hasEnabledRetweetAttachment) {
@@ -755,7 +750,6 @@ function getFormattedAPIData(serviceName, unformattedData) {
         link: serviceDraft.shopgridLink,
       });
     }
-
     return conditionalFields;
   };
 

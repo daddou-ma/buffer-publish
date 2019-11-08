@@ -33,6 +33,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     case 'APP_INIT': {
       if (getState().appSidebar.user.plan === 'awesome') {
+        // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;
       }
       if (shouldShowSwitchPlanModal()) {
@@ -60,6 +61,7 @@ export default ({ dispatch, getState }) => next => (action) => {
 
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       if (getState().appSidebar.user.plan === 'awesome') {
+        // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;
       }
       if (action.result && action.result.some(profile => profile.isDisconnected)) {
@@ -76,6 +78,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         isOnAwesomePlan,
       } = action.result; // userData
       if (isOnAwesomePlan) {
+        // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;
       }
       if (shouldShowProTrialExpiredModal || shouldShowBusinessTrialExpiredModal) {
@@ -119,6 +122,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       const tourInProgress = getState().thirdparty.appCues.inProgress;
 
       if (getState().appSidebar.user.plan === 'awesome') {
+        // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;
       }
 

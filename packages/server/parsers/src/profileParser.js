@@ -13,6 +13,8 @@ module.exports = profile => ({
   hasOrganizationMembers: profile.has_organization_members,
   pendingCount: profile.counts.pending,
   sentCount: profile.counts.sent,
+  draftsNeedApprovalCount: profile.counts.drafts_needs_approval_true,
+  draftsCount: profile.counts.drafts_needs_approval_false,
   timezone: profile.timezone,
   timezone_city: profile.timezone_city,
   schedules: profile.schedules,
@@ -37,6 +39,7 @@ module.exports = profile => ({
   isContributor: profile.is_contributor,
   isDisconnected: profile.oauth_broken,
   location: profile.location,
+  shouldHideAdvancedAnalytics: profile.should_hide_advanced_analytics,
   // Remove when publish stops importing Analyze components
   organizationId: profile.organization_id,
   username: profile.service_username,
