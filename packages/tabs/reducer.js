@@ -1,5 +1,5 @@
 import keyWrapper from '@bufferapp/keywrapper';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('TABS', {
   SELECT_TAB: 0,
@@ -12,8 +12,8 @@ export const initialState = {
   selectedProfileId: '',
   selectedProfile: {},
   isBusinessAccount: false,
-  draftsNeedApprovalCount: '',
-  draftsCount: '',
+  draftsNeedApprovalCount: null,
+  draftsCount: null,
 };
 
 export default (state = initialState, action) => {
@@ -25,63 +25,17 @@ export default (state = initialState, action) => {
       };
     }
 
-    case profileActionTypes.SELECT_PROFILE: {
+    case `getCounts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       return {
         ...state,
-        draftsNeedApprovalCount: action.profile.draftsNeedApprovalCount,
-        draftsCount: action.profile.draftsCount,
+        draftsNeedApprovalCount:
+          action.result.counts.drafts_needs_approval_true,
+        draftsCount:
+          action.result.counts.drafts_needs_approval_false ||
+          action.result.counts.drafts,
       };
     }
 
-    case actionTypes.UPDATE_DRAFT_COUNTER: {
-      // Updates counter when draft is created
-      if (action.draftAction === 'DRAFTS__DRAFT_CREATED') {
-        if (action.needsApproval) {
-          return {
-            ...state,
-            draftsNeedApprovalCount: state.draftsNeedApprovalCount + 1,
-          };
-        }
-        return {
-          ...state,
-          draftsCount: state.draftsCount + 1,
-        };
-      }
-      // Updates counter when draft is deleted or approved
-      if (
-        action.draftAction === 'DRAFTS__DRAFT_DELETED' ||
-        action.draftAction === 'DRAFTS__DRAFT_APPROVED'
-      ) {
-        if (action.needsApproval) {
-          return {
-            ...state,
-            draftsNeedApprovalCount: state.draftsNeedApprovalCount - 1,
-          };
-        }
-        return {
-          ...state,
-          draftsCount: state.draftsCount - 1,
-        };
-      }
-      // Updates counter when draft is moved
-      if (action.draftAction === 'DRAFTS__DRAFT_MOVED') {
-        if (action.needsApproval) {
-          return {
-            ...state,
-            draftsNeedApprovalCount: state.draftsNeedApprovalCount + 1,
-            draftsCount: state.draftsCount - 1,
-          };
-        }
-        return {
-          ...state,
-          draftsNeedApprovalCount: state.draftsNeedApprovalCount - 1,
-          draftsCount: state.draftsCount + 1,
-        };
-      }
-      return {
-        ...state,
-      };
-    }
     default:
       return state;
   }
@@ -92,10 +46,5 @@ export const actions = {
     type: actionTypes.SELECT_TAB,
     tabId,
     profileId,
-  }),
-  updateDraftCounter: ({ needsApproval, draftAction }) => ({
-    type: actionTypes.UPDATE_DRAFT_COUNTER,
-    needsApproval,
-    draftAction,
   }),
 };

@@ -1,8 +1,10 @@
 import { push } from 'connected-react-router';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import middleware from './middleware';
-import { actionTypes, actions } from './reducer';
+import { actionTypes } from './reducer';
 
 describe('middleware', () => {
   it('exports middleware', () => {
@@ -35,6 +37,29 @@ describe('middleware', () => {
     );
   });
 
+  it('updates drafts counter when SELECT_PROFILE', () => {
+    const dispatch = jest.fn();
+    const next = jest.fn();
+
+    const action = {
+      type: profileActionTypes.SELECT_PROFILE,
+      profile: {
+        id: 'id',
+      },
+    };
+
+    middleware({ dispatch })(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'getCounts',
+        args: {
+          profileId: 'id',
+        },
+      })
+    );
+  });
+
   it('updates drafts counter when DRAFT_CREATED', () => {
     const fakeState = () => ({
       profileSidebar: {
@@ -55,9 +80,11 @@ describe('middleware', () => {
     middleware({ dispatch, getState: fakeState })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
-      actions.updateDraftCounter({
-        needsApproval: false,
-        draftAction: 'DRAFTS__DRAFT_CREATED',
+      dataFetchActions.fetch({
+        name: 'getCounts',
+        args: {
+          profileId: 'id',
+        },
       })
     );
   });
@@ -82,9 +109,11 @@ describe('middleware', () => {
     middleware({ dispatch, getState: fakeState })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
-      actions.updateDraftCounter({
-        needsApproval: false,
-        draftAction: 'DRAFTS__DRAFT_DELETED',
+      dataFetchActions.fetch({
+        name: 'getCounts',
+        args: {
+          profileId: 'id',
+        },
       })
     );
   });
@@ -109,9 +138,11 @@ describe('middleware', () => {
     middleware({ dispatch, getState: fakeState })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
-      actions.updateDraftCounter({
-        needsApproval: true,
-        draftAction: 'DRAFTS__DRAFT_APPROVED',
+      dataFetchActions.fetch({
+        name: 'getCounts',
+        args: {
+          profileId: 'id',
+        },
       })
     );
   });
@@ -136,9 +167,11 @@ describe('middleware', () => {
     middleware({ dispatch, getState: fakeState })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
-      actions.updateDraftCounter({
-        needsApproval: false,
-        draftAction: 'DRAFTS__DRAFT_MOVED',
+      dataFetchActions.fetch({
+        name: 'getCounts',
+        args: {
+          profileId: 'id',
+        },
       })
     );
   });
@@ -163,9 +196,11 @@ describe('middleware', () => {
     middleware({ dispatch, getState: fakeState })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).not.toBeCalledWith(
-      actions.updateDraftCounter({
-        needsApproval: false,
-        draftAction: 'DRAFTS__DRAFT_CREATED',
+      dataFetchActions.fetch({
+        name: 'getCounts',
+        args: {
+          profileId: 'id',
+        },
       })
     );
   });
