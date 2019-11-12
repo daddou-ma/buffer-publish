@@ -35,6 +35,33 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
+  it('handles getCounts_FETCH_START action type', () => {
+    const stateBefore = {
+      ...initialState,
+      draftsNeedApprovalCount: 0,
+      draftsCount: 1,
+    };
+    const stateAfter = {
+      ...initialState,
+      draftsNeedApprovalCount: null,
+      draftsCount: null,
+    };
+    const action = {
+      type: 'getCounts_FETCH_START',
+      result: {
+        counts: {
+          drafts_needs_approval_true: 1,
+          drafts_needs_approval_false: 2,
+        },
+      },
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
   it('handles getCounts_FETCH_SUCCESS action type', () => {
     const stateBefore = {
       ...initialState,

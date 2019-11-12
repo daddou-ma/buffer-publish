@@ -25,6 +25,14 @@ export default (state = initialState, action) => {
       };
     }
 
+    case `getCounts_${dataFetchActionTypes.FETCH_START}`: {
+      return {
+        ...state,
+        draftsNeedApprovalCount: null,
+        draftsCount: null,
+      };
+    }
+
     case `getCounts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       return {
         ...state,

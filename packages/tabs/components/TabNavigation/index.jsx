@@ -99,21 +99,27 @@ class TabNavigation extends React.Component {
           {this.isValidTab('awaitingApproval') && (
             <Tab tabId="awaitingApproval">
               Awaiting Approval
-              <TabTag type="counter" labelName={draftsNeedApprovalCount} />
+              {draftsNeedApprovalCount != null && (
+                <TabTag type="counter" labelName={draftsNeedApprovalCount} />
+              )}
             </Tab>
           )}
           {/* Team Members who are Contributors */}
           {this.isValidTab('pendingApproval') && (
             <Tab tabId="pendingApproval">
               Pending Approval
-              <TabTag type="counter" labelName={draftsNeedApprovalCount} />
+              {draftsNeedApprovalCount != null && (
+                <TabTag type="counter" labelName={draftsNeedApprovalCount} />
+              )}
             </Tab>
           )}
           {/* Pro and up users or Team Members */}
           {this.isValidTab('drafts') && (
             <Tab tabId="drafts">
               Drafts
-              <TabTag type="counter" labelName={draftsCount} />
+              {draftsCount != null && (
+                <TabTag type="counter" labelName={draftsCount} />
+              )}
             </Tab>
           )}
           {/* IG, Business users or Team Members */}
