@@ -4,7 +4,7 @@ const rp = require('request-promise');
 module.exports = method(
   'addUserTag',
   'add tag to user',
-  ({ tag }, { session }) =>
+  ({ tag, name }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/user/add_tag.json`,
       method: 'POST',
@@ -12,6 +12,7 @@ module.exports = method(
       qs: {
         access_token: session.publish.accessToken,
         tag,
+        name,
       },
     })
     .then(result => JSON.parse(result))
