@@ -38,186 +38,6 @@ function getState() {
 }
 
 class App extends React.Component {
-  static propTypes = {
-    profilesData: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      canPostComment: PropTypes.bool,
-      serviceName: PropTypes.string.isRequired,
-      serviceUsername: PropTypes.string.isRequired,
-      serviceFormattedUsername: PropTypes.string.isRequired,
-      imagesAvatar: PropTypes.string.isRequired,
-      timezone: PropTypes.string.isRequired,
-      shouldBeAutoSelected: PropTypes.bool.isRequired,
-      isDisabled: PropTypes.bool.isRequired,
-      disabledMessage: PropTypes.string,
-      serviceType: PropTypes.string.isRequired,
-      serviceId: PropTypes.string.isRequired,
-      isBusinessProfile: PropTypes.bool.isRequired,
-      isContributor: PropTypes.bool,
-      isManager: PropTypes.bool.isRequired,
-      profileHasPostingSchedule: PropTypes.bool,
-      subprofiles: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        profileId: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-        isShared: PropTypes.bool.isRequired,
-        shouldBeAutoSelected: PropTypes.bool.isRequired,
-      })).isRequired,
-    })).isRequired,
-
-    userData: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      s3UploadSignature: PropTypes.shape({
-        algorithm: PropTypes.string.isRequired,
-        base64Policy: PropTypes.string.isRequired,
-        bucket: PropTypes.string.isRequired,
-        credentials: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-        expires: PropTypes.string.isRequired,
-        signature: PropTypes.string.isRequired,
-        successActionStatus: PropTypes.string.isRequired,
-      }).isRequired,
-      canStartProTrial: PropTypes.bool.isRequired,
-      isOnProTrial: PropTypes.bool.isRequired,
-      uses24hTime: PropTypes.bool.isRequired,
-      weekStartsMonday: PropTypes.bool.isRequired,
-      isFreeUser: PropTypes.bool.isRequired,
-      hasIGDirectFlip: PropTypes.bool.isRequired,
-      hasAccessToUserTag: PropTypes.bool.isRequired,
-      hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
-      hasIGDirectVideoFlip: PropTypes.bool.isRequired,
-      isBusinessUser: PropTypes.bool.isRequired,
-      shouldAlwaysSkipEmptyTextAlert: PropTypes.bool.isRequired,
-      profileGroups: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        profileIds: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-      })).isRequired,
-      profilesSchedulesSlots: PropTypes.objectOf(
-        PropTypes.objectOf(
-          PropTypes.arrayOf(PropTypes.shape({
-            isSlotFree: PropTypes.bool.isRequired,
-            timestamp: PropTypes.number.isRequired,
-          })),
-        ),
-      ),
-    }).isRequired,
-
-    metaData: PropTypes.shape({
-      environment: PropTypes.string.isRequired,
-      appEnvironment: PropTypes.string.isRequired,
-      shouldDisplayHelpButton: PropTypes.bool.isRequired,
-      shouldEnableFacebookAutocomplete: PropTypes.bool.isRequired,
-      shouldUseNewTwitterAutocomplete: PropTypes.bool.isRequired,
-      enableTwitterChanges: PropTypes.bool.isRequired,
-      disableTelemetry: PropTypes.bool.isRequired,
-      shouldShowRolloutTooltip: PropTypes.bool.isRequired,
-      updateId: PropTypes.string,
-      scheduledAt: PropTypes.number,
-      isPinnedToSlot: PropTypes.bool,
-      isPrefillingExistingUpdate: PropTypes.bool,
-      existingUpdateProfileService: PropTypes.string,
-      didUserSetScheduledAt: PropTypes.bool,
-      text: PropTypes.string,
-      url: PropTypes.string,
-      sourceUrl: PropTypes.string,
-      via: PropTypes.string,
-      images: PropTypes.arrayOf(PropTypes.object),
-      video: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        duration: PropTypes.number.isRequired,
-        durationMs: PropTypes.number.isRequired,
-        size: PropTypes.number.isRequired,
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
-        url: PropTypes.string.isRequired,
-        originalUrl: PropTypes.string.isRequired,
-        thumbnail: PropTypes.string.isRequired,
-        thumbOffset: PropTypes.string.isRequired,
-        availableThumbnails: PropTypes.arrayOf(PropTypes.string).isRequired,
-      }),
-      browser: PropTypes.string,
-      extensionVersion: PropTypes.string,
-      retweetData: PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        tweetId: PropTypes.string.isRequired,
-        userId: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number,
-        ]).isRequired,
-        userName: PropTypes.string.isRequired,
-        userDisplayName: PropTypes.string.isRequired,
-        tweetUrl: PropTypes.string.isRequired,
-        avatarUrl: PropTypes.string.isRequired,
-        comment: PropTypes.string.isRequired,
-      }),
-      facebookMentionEntities: PropTypes.arrayOf(PropTypes.shape({
-        indices: PropTypes.arrayOf(PropTypes.number).isRequired,
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
-      })),
-      userTags: PropTypes.arrayOf(PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired,
-      })),
-      locationId: PropTypes.string,
-      locationName: PropTypes.string,
-      commentEnabled: PropTypes.bool,
-      commentText: PropTypes.string,
-      shopgridLink: PropTypes.string,
-      composerSidebarVisible: PropTypes.bool,
-      tabId: PropTypes.string,
-      emptySlotMode: PropTypes.bool,
-    }).isRequired,
-
-    csrfToken: PropTypes.string.isRequired,
-    draftMode: PropTypes.bool.isRequired,
-    imageDimensionsKey: PropTypes.string.isRequired,
-    onNewPublish: PropTypes.bool,
-    options: PropTypes.shape({
-      canSelectProfiles: PropTypes.bool.isRequired,
-      preserveStateOnClose: PropTypes.bool.isRequired,
-      saveButtons: PropTypes.arrayOf(
-        PropTypes.oneOf(Object.keys(SaveButtonTypes)),
-      ).isRequired,
-      updateId: PropTypes.string,
-      position: PropTypes.shape({
-        top: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        left: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        margin: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        marginLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        transition: PropTypes.string,
-      }),
-      onSave: PropTypes.func,
-      sentPost: PropTypes.bool,
-    }).isRequired,
-  };
-
-  static defaultProps = {
-    userData: {
-      profileSchedulesSlots: undefined,
-      onNewPublish: false,
-      hasIGLocationTaggingFeature: false,
-      canStartProTrial: false,
-      isOnProTrial: false,
-      hasIGDirectVideoFlip: false,
-      hasAccessToUserTag: false,
-    },
-    options: {
-      onSave: () => {},
-      sentPost: false,
-    },
-    profilesData: {
-      isContributor: false,
-      canPostComment: false,
-      profileHasPostingSchedule: false,
-    },
-  };
-
   constructor(props) {
     super(props);
 
@@ -233,6 +53,7 @@ class App extends React.Component {
   componentDidMount() {
     AppStore.addChangeListener(this.onStoreChange);
     NotificationStore.addChangeListener(this.onStoreChange);
+
     // prevent drop/dragover behavior when dropping a file not in the dropzone
     window.addEventListener('drop', e => e.preventDefault());
     window.addEventListener('dragover', e => e.preventDefault());
@@ -411,5 +232,186 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  profilesData: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    canPostComment: PropTypes.bool,
+    serviceName: PropTypes.string.isRequired,
+    serviceUsername: PropTypes.string.isRequired,
+    serviceFormattedUsername: PropTypes.string.isRequired,
+    imagesAvatar: PropTypes.string.isRequired,
+    timezone: PropTypes.string.isRequired,
+    shouldBeAutoSelected: PropTypes.bool.isRequired,
+    isDisabled: PropTypes.bool.isRequired,
+    disabledMessage: PropTypes.string,
+    serviceType: PropTypes.string.isRequired,
+    serviceId: PropTypes.string.isRequired,
+    isBusinessProfile: PropTypes.bool.isRequired,
+    isContributor: PropTypes.bool,
+    isManager: PropTypes.bool.isRequired,
+    profileHasPostingSchedule: PropTypes.bool,
+    subprofiles: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      profileId: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+      isShared: PropTypes.bool.isRequired,
+      shouldBeAutoSelected: PropTypes.bool.isRequired,
+    })).isRequired,
+  })).isRequired,
+
+  userData: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    s3UploadSignature: PropTypes.shape({
+      algorithm: PropTypes.string.isRequired,
+      base64Policy: PropTypes.string.isRequired,
+      bucket: PropTypes.string.isRequired,
+      credentials: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      expires: PropTypes.string.isRequired,
+      signature: PropTypes.string.isRequired,
+      successActionStatus: PropTypes.string.isRequired,
+    }).isRequired,
+    canStartProTrial: PropTypes.bool.isRequired,
+    isOnProTrial: PropTypes.bool.isRequired,
+    uses24hTime: PropTypes.bool.isRequired,
+    weekStartsMonday: PropTypes.bool.isRequired,
+    isFreeUser: PropTypes.bool.isRequired,
+    hasIGDirectFlip: PropTypes.bool.isRequired,
+    hasAccessToUserTag: PropTypes.bool.isRequired,
+    hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
+    hasIGDirectVideoFlip: PropTypes.bool.isRequired,
+    isBusinessUser: PropTypes.bool.isRequired,
+    shouldAlwaysSkipEmptyTextAlert: PropTypes.bool.isRequired,
+    profileGroups: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      profileIds: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    })).isRequired,
+    profilesSchedulesSlots: PropTypes.objectOf(
+      PropTypes.objectOf(
+        PropTypes.arrayOf(PropTypes.shape({
+          isSlotFree: PropTypes.bool.isRequired,
+          timestamp: PropTypes.number.isRequired,
+        })),
+      ),
+    ),
+  }).isRequired,
+
+  metaData: PropTypes.shape({
+    environment: PropTypes.string.isRequired,
+    appEnvironment: PropTypes.string.isRequired,
+    shouldDisplayHelpButton: PropTypes.bool.isRequired,
+    shouldEnableFacebookAutocomplete: PropTypes.bool.isRequired,
+    shouldUseNewTwitterAutocomplete: PropTypes.bool.isRequired,
+    enableTwitterChanges: PropTypes.bool.isRequired,
+    disableTelemetry: PropTypes.bool.isRequired,
+    shouldShowRolloutTooltip: PropTypes.bool.isRequired,
+    updateId: PropTypes.string,
+    scheduledAt: PropTypes.number,
+    isPinnedToSlot: PropTypes.bool,
+    isPrefillingExistingUpdate: PropTypes.bool,
+    existingUpdateProfileService: PropTypes.string,
+    didUserSetScheduledAt: PropTypes.bool,
+    text: PropTypes.string,
+    url: PropTypes.string,
+    sourceUrl: PropTypes.string,
+    via: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.object),
+    video: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      duration: PropTypes.number.isRequired,
+      durationMs: PropTypes.number.isRequired,
+      size: PropTypes.number.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+      url: PropTypes.string.isRequired,
+      originalUrl: PropTypes.string.isRequired,
+      thumbnail: PropTypes.string.isRequired,
+      thumbOffset: PropTypes.string.isRequired,
+      availableThumbnails: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }),
+    browser: PropTypes.string,
+    extensionVersion: PropTypes.string,
+    retweetData: PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      tweetId: PropTypes.string.isRequired,
+      userId: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]).isRequired,
+      userName: PropTypes.string.isRequired,
+      userDisplayName: PropTypes.string.isRequired,
+      tweetUrl: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+      comment: PropTypes.string.isRequired,
+    }),
+    facebookMentionEntities: PropTypes.arrayOf(PropTypes.shape({
+      indices: PropTypes.arrayOf(PropTypes.number).isRequired,
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+    })),
+    userTags: PropTypes.arrayOf(PropTypes.shape({
+      username: PropTypes.string.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+    })),
+    locationId: PropTypes.string,
+    locationName: PropTypes.string,
+    commentEnabled: PropTypes.bool,
+    commentText: PropTypes.string,
+    shopgridLink: PropTypes.string,
+    composerSidebarVisible: PropTypes.bool,
+    tabId: PropTypes.string,
+    emptySlotMode: PropTypes.bool,
+  }).isRequired,
+
+  csrfToken: PropTypes.string.isRequired,
+  draftMode: PropTypes.bool.isRequired,
+  imageDimensionsKey: PropTypes.string.isRequired,
+  onNewPublish: PropTypes.bool,
+  options: PropTypes.shape({
+    canSelectProfiles: PropTypes.bool.isRequired,
+    preserveStateOnClose: PropTypes.bool.isRequired,
+    saveButtons: PropTypes.arrayOf(
+      PropTypes.oneOf(Object.keys(SaveButtonTypes)),
+    ).isRequired,
+    updateId: PropTypes.string,
+    position: PropTypes.shape({
+      top: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      left: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      margin: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      marginLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      transition: PropTypes.string,
+    }),
+    onSave: PropTypes.func,
+    sentPost: PropTypes.bool,
+  }).isRequired,
+};
+
+App.defaultProps = {
+  userData: {
+    profileSchedulesSlots: undefined,
+    onNewPublish: false,
+    hasIGLocationTaggingFeature: false,
+    canStartProTrial: false,
+    isOnProTrial: false,
+    hasIGDirectVideoFlip: false,
+    hasAccessToUserTag: false,
+  },
+  options: {
+    onSave: () => {},
+    sentPost: false,
+  },
+  profilesData: {
+    isContributor: false,
+    canPostComment: false,
+    profileHasPostingSchedule: false,
+  },
+};
+
 
 export default App;

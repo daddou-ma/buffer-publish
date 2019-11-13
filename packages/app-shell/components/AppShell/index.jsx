@@ -14,7 +14,7 @@ const InvertedReturnIcon = () => (
 
 const helpMenuItems = [
   {
-    id: '1',
+    id: '0',
     title: 'Support',
     onItemClick: () => {
       window.location.assign(`https://${getURL.getBaseURL()}/support`);
