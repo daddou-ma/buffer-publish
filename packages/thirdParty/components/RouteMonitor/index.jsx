@@ -58,7 +58,6 @@ RouteMonitor.propTypes = {
   helpScoutBeacon: PropTypes.shape({
     loaded: PropTypes.bool,
   }),
-  showingModals: PropTypes.bool,
   modalsShowing: PropTypes.bool,
   userId: PropTypes.string,
 };
