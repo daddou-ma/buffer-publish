@@ -31,6 +31,9 @@ const tabsStyle = {
   zIndex: 1,
 };
 
+const TabCounterTag = ({ labelName }) =>
+  labelName != null && <TabTag type="counter" labelName={labelName} />;
+
 class TabNavigation extends React.Component {
   constructor(props) {
     super(props);
@@ -99,27 +102,21 @@ class TabNavigation extends React.Component {
           {this.isValidTab('awaitingApproval') && (
             <Tab tabId="awaitingApproval">
               Awaiting Approval
-              {draftsNeedApprovalCount != null && (
-                <TabTag type="counter" labelName={draftsNeedApprovalCount} />
-              )}
+              <TabCounterTag labelName={draftsNeedApprovalCount} />
             </Tab>
           )}
           {/* Team Members who are Contributors */}
           {this.isValidTab('pendingApproval') && (
             <Tab tabId="pendingApproval">
               Pending Approval
-              {draftsNeedApprovalCount != null && (
-                <TabTag type="counter" labelName={draftsNeedApprovalCount} />
-              )}
+              <TabCounterTag labelName={draftsNeedApprovalCount} />
             </Tab>
           )}
           {/* Pro and up users or Team Members */}
           {this.isValidTab('drafts') && (
             <Tab tabId="drafts">
               Drafts
-              {draftsCount != null && (
-                <TabTag type="counter" labelName={draftsCount} />
-              )}
+              <TabCounterTag labelName={draftsCount} />
             </Tab>
           )}
           {/* IG, Business users or Team Members */}
