@@ -75,9 +75,14 @@ const copyLinkStyle = {
   marginLeft: 'auto',
 };
 
-const onCopyToClipboard = (text, handleCopyToClipboard) => {
+const onCopyToClipboard = ({
+  publicGridUrl,
+  profile,
+  handleCopyToClipboard,
+  trackLinkCopied,
+}) => {
   const el = document.createElement('textarea');
-  el.value = text;
+  el.value = publicGridUrl;
   el.setAttribute('readonly', '');
   el.style.position = 'absolute';
   el.style.left = '-9999px';
@@ -87,6 +92,7 @@ const onCopyToClipboard = (text, handleCopyToClipboard) => {
   document.body.removeChild(el);
   if (copied) {
     handleCopyToClipboard(true);
+    trackLinkCopied({ channel: profile, publicGridUrl });
   } else {
     handleCopyToClipboard(false);
   }
@@ -105,6 +111,8 @@ const GridPosts = ({
   onImageClose,
   onChangePostUrl,
   onSavePostUrl,
+  trackLinkCopied,
+  trackPagePreviewed,
   isManager,
   isLockedProfile,
   isBusinessAccount,
@@ -163,11 +171,14 @@ const GridPosts = ({
             <div style={linkFieldStyle}>
               <button
                 style={copyLinkButtonStyle}
+                type="button"
                 onClick={() => {
-                  onCopyToClipboard(
+                  onCopyToClipboard({
                     publicGridUrl,
+                    profile,
                     handleCopyToClipboard,
-                  );
+                    trackLinkCopied,
+                  });
                 }}
               >
                 {publicGridUrl}
@@ -188,10 +199,11 @@ const GridPosts = ({
               </button>
             </div>
             <Button
-              label={'Preview Page'}
+              label="Preview Page"
               type="secondary"
               onClick={() => {
                 onPreviewClick(publicGridUrl);
+                trackPagePreviewed(profile);
               }}
             />
           </div>
@@ -227,6 +239,8 @@ GridPosts.propTypes = {
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   handleCopyToClipboard: PropTypes.func,
+  trackLinkCopied: PropTypes.func.isRequired,
+  trackPagePreviewed: PropTypes.func.isRequired,
   features: PropTypes.object.isRequired, // eslint-disable-line
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,

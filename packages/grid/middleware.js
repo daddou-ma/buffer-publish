@@ -4,7 +4,7 @@ import {
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
-import { trackAction } from '@bufferapp/publish-data-tracking';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actionTypes as gridActionTypes } from './reducer';
 import { isValidURL, urlHasProtocol, getBaseURL } from './util';
 
@@ -80,7 +80,18 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
 
     case `updatePostLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.result && action.result.success) {
-        trackAction({ location: 'grid', action: 'updated_grid_post_url' });
+        const { updateId, link } = action.args;
+        const channel = getState().profileSidebar.selectedProfile;
+        const metadata = {
+          channelId: channel.id,
+          channelServiceId: channel.serviceId,
+          channelUsername: channel.serviceUsername,
+          postId: updateId,
+          url: link,
+        };
+        dispatch(
+          analyticsActions.trackEvent('Shop Grid Post URL Updated', metadata)
+        );
         dispatch(notificationActions.createNotification({
           notificationType: 'success',
           message: 'Nice! Your changes have been saved.',

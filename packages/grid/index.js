@@ -1,5 +1,7 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
+import { CLIENT_NAME } from '@bufferapp/publish-constants';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 // load the presentational component
 import { actions } from './reducer';
 import GridPosts from './components/GridPosts';
@@ -70,7 +72,30 @@ export default connect(
         copySuccess,
       }));
     },
-  }),
+    trackLinkCopied: ({ channel, publicGridUrl }) => {
+      const metadata = {
+        channelId: channel.id,
+        channelServiceId: channel.serviceId,
+        channelUsername: channel.serviceUsername,
+        shopGridUrl: publicGridUrl || '',
+        clientName: CLIENT_NAME,
+      };
+      dispatch(
+        analyticsActions.trackEvent('Shop Grid Page Link Copied', metadata)
+      );
+    },
+    trackPagePreviewed: channel => {
+      const metadata = {
+        channelId: channel.id,
+        channelServiceId: channel.serviceId,
+        channelUsername: channel.serviceUsername,
+        clientName: CLIENT_NAME,
+      };
+      dispatch(
+        analyticsActions.trackEvent('Shop Grid Page Previewed', metadata)
+      );
+    },
+  })
 )(GridPosts);
 
 // export reducer, actions and action types
