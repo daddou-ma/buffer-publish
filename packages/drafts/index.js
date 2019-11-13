@@ -61,7 +61,6 @@ const getDraftDetails = ({
     }),
     isRetweet: draft.retweet !== undefined,
     commentText: draft.commentText,
-    commentEnabled: draft.commentEnabled,
     hasCommentEnabled: servicesWithCommentFeature.indexOf(draft.profile_service) !== -1,
     shopgridLink: draft.shopgridLink,
   };

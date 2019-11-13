@@ -124,7 +124,7 @@
     "react-dnd-test-backend": "7.4.4",
     "react-dom": "16.8.6",
     "react-dropzone": "4.2.3",
-    "react-hot-loader": "4.8.4",
+    "react-hot-loader": "4.12.17",
     "react-redux": "5.0.4",
     "react-router": "4.2.0",
     "react-router-dom": "4.1.2",

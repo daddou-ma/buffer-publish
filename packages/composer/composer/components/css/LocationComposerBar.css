@@ -1,16 +1,14 @@
 .locationComposerBar {
-    padding: 10px;
+    padding: 3px 10px 11px;
     width: 100%;
     box-sizing: border-box;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     float: left;
-    border-top: 1px solid #E6EBEF;
-    margin-top: -1px;
 }
 
 .locationComposerBarWithMedia {
-    padding: 10px;
+    padding: 3px 10px 11px;
     width: 100%;
     box-sizing: border-box;
     border-bottom-left-radius: 3px;
@@ -30,7 +28,7 @@
     font-weight: 600;
     font-size: 12px;
     color: #343e47;
-    width: 110px;
+    width: 120px;
     padding-top: 6px;
 }
 
@@ -50,6 +48,10 @@
     font-weight: 500;
     font-size: 12px;
     width: 100%;
+    outline: none;
+}
+.locationFieldInput:focus {
+    border: 1px solid #2d99ec;
 }
 
 .locationMenu {

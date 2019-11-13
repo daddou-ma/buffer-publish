@@ -191,15 +191,12 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
       const validationResults = validateDraft(draft);
 
       const isIGDraft = draft.service.name === 'instagram';
-      const hasRequiredComment =
-          !isIGDraft || (!draft.commentEnabled || (draft.commentEnabled && draft.commentText));
 
       const isInvalid =
         (!hasText && !hasAnyAttachment) ||
         !hasRequiredAttachmentAttached ||
         !hasRequiredText ||
         !isSourceUrlUnrequiredOrValid ||
-        !hasRequiredComment ||
         validationResultVideo.isInvalid() ||
         validationResults.isInvalid();
 
@@ -254,10 +251,6 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
 
         if (validationResults.isInvalid()) {
           messages = messages.concat(validationResults.getErrorMessages());
-        }
-
-        if (!hasRequiredComment) {
-          messages.push('Please include a valid comment');
         }
 
         invalidDraftsFeedback.push({ draft, messages });
@@ -776,22 +769,6 @@ const updateDraftCharacterCount = monitorComposerLastInteractedWith(
 
     const draftText = ComposerStore.getDraftText(id);
     draft.characterCount = getDraftCharacterCount(id, draftText);
-
-    // If the character count was updated as a result of a change that didn't
-    // originate from the editor itself, we need to give the editor an opportunity
-    // to re-render the highlighter's decorator ourselves. A prop is used to tell
-    // the editor to re-render decorators. The editor itself sets that prop back
-    // to false using the draft reference.
-    if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
-  }
-);
-
-const updateToggleComment = monitorComposerLastInteractedWith(
-  (id, commentEnabled, didEditorStateChange) => {
-    const draft = ComposerStore.getDraft(id);
-    if (draft.service.name === 'instagram') {
-      draft.commentEnabled = commentEnabled;
-    }
 
     // If the character count was updated as a result of a change that didn't
     // originate from the editor itself, we need to give the editor an opportunity
@@ -1867,14 +1844,6 @@ const onDispatchedPayload = (payload) => {
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_COMMENT:
       state.drafts.forEach(draft => updateDraftComment(draft.id, action.commentText));
-      break;
-
-    case ActionTypes.COMPOSER_UPDATE_TOGGLE_COMMENT:
-      updateToggleComment(action.id, action.commentEnabled);
-      break;
-
-    case ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_COMMENT:
-      state.drafts.forEach(draft => updateToggleComment(draft.id, action.commentEnabled));
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_IMAGE_USER_TAGS:
