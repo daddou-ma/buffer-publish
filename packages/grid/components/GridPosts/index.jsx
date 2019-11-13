@@ -14,6 +14,7 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
 import { openPreviewPage } from '../../util';
+import ColorPicker from '../ColorPicker';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -196,6 +197,7 @@ const GridPosts = ({
             />
           </div>
         </div>
+        <ColorPicker />
         <GridList
           gridPosts={gridPosts}
           onChangePostUrl={onChangePostUrl}
