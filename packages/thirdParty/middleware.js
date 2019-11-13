@@ -100,6 +100,7 @@ export default ({ dispatch, getState }) => next => (action) => {
             trial,
             orgUserCount,
             profileCount,
+            awesomeUserVisitedPayday,
             is_business_user: isBusinessUser,
           } = action.result;
           if (isBusinessUser || plan === 'pro') {
@@ -118,7 +119,19 @@ export default ({ dispatch, getState }) => next => (action) => {
               trialTimeRemaining: trial.trialTimeRemaining,
               orgUserCount, // Number of users (including the account owner)
               profileCount, // Number of profiles _owned_ by the user
+              previousPlanId: awesomeUserVisitedPayday ? 'awesome' : '',
             });
+
+            if (awesomeUserVisitedPayday) {
+              dispatch(
+                dataFetchActions.fetch({
+                  name: 'deleteUserTag',
+                  args: {
+                    tag: 'awesome_user_visited_payday',
+                  },
+                })
+              );
+            }
 
             const dispatchAppcuesStarted = () => {
               dispatch({
