@@ -168,7 +168,7 @@ class Composer extends React.Component {
     hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
     hasAccessToUserTag: PropTypes.bool,
-    isBusinessTeamMember: PropTypes.bool,
+    hasAccessToHashtagManager: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
     draftMode: PropTypes.bool,
@@ -183,7 +183,7 @@ class Composer extends React.Component {
     hasIGDirectVideoFlip: false,
     hasAccessToUserTag: false,
     hasShopgridFlip: false,
-    isBusinessTeamMember: false,
+    hasAccessToHashtagManager: false,
     profiles: [],
     expandedComposerId: null,
     selectedProfiles: [],
@@ -640,7 +640,6 @@ class Composer extends React.Component {
   ) {
     const shouldShowHashtagCount =
       this.isExpanded() &&
-      this.props.isBusinessTeamMember && // @todo: remove this validation
       draft.service.name === 'instagram' &&
       draft.service.maxHashtags !== null &&
       draft.service.maxHashtags - draft.getNumberOfHashtags() <= 10;
@@ -683,7 +682,7 @@ class Composer extends React.Component {
       hasIGDirectVideoFlip,
       hasAccessToUserTag,
       hasShopgridFlip,
-      isBusinessTeamMember,
+      hasAccessToHashtagManager,
       draftMode,
     } = this.props;
 
@@ -1217,7 +1216,7 @@ class Composer extends React.Component {
                     this.onCommentClick(e, userHasBusinessOrProPlan)
                   }
                   shouldDisplayProTag={!userHasBusinessOrProPlan}
-                  shouldDisplayHashtagManager={isBusinessTeamMember}
+                  shouldDisplayHashtagManager={hasAccessToHashtagManager}
                 />
               )}
 

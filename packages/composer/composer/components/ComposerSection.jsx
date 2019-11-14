@@ -41,7 +41,7 @@ const ComposerComponent = ({
   hasIGDirectVideoFlip,
   hasShopgridFlip,
   hasAccessToUserTag,
-  isBusinessTeamMember,
+  hasAccessToHashtagManager,
   isFreeUser,
   isBusinessUser,
   draftMode,
@@ -91,7 +91,7 @@ const ComposerComponent = ({
       hasIGDirectVideoFlip={hasIGDirectVideoFlip}
       hasShopgridFlip={hasShopgridFlip}
       hasAccessToUserTag={hasAccessToUserTag}
-      isBusinessTeamMember={isBusinessTeamMember}
+      hasAccessToHashtagManager={hasAccessToHashtagManager}
       isFreeUser={isFreeUser}
       isBusinessUser={isBusinessUser}
       draftMode={draftMode}
@@ -120,11 +120,26 @@ class ComposerSection extends React.Component {
     const { enabledDrafts, draftsSharedData, omniDraft } = this.state;
 
     const {
-      appState, profiles, visibleNotifications, areAllDraftsSaved, selectedProfiles,
-      shouldEnableFacebookAutocomplete, shouldShowInlineSubprofileDropdown,
-      isOmniboxEnabled, composerPosition, hasIGDirectFlip, hasIGLocationTaggingFeature,
-      hasIGDirectVideoFlip, isFreeUser, isBusinessUser, canStartProTrial,
-      isOnProTrial, hasShopgridFlip, hasAccessToUserTag, isBusinessTeamMember, draftMode,
+      appState,
+      profiles,
+      visibleNotifications,
+      areAllDraftsSaved,
+      selectedProfiles,
+      shouldEnableFacebookAutocomplete,
+      shouldShowInlineSubprofileDropdown,
+      isOmniboxEnabled,
+      composerPosition,
+      hasIGDirectFlip,
+      hasIGLocationTaggingFeature,
+      hasIGDirectVideoFlip,
+      isFreeUser,
+      isBusinessUser,
+      canStartProTrial,
+      isOnProTrial,
+      hasShopgridFlip,
+      hasAccessToUserTag,
+      hasAccessToHashtagManager,
+      draftMode,
     } = this.props;
 
     const hasEnabledDrafts = enabledDrafts.length > 0 || isOmniboxEnabled;
@@ -180,7 +195,7 @@ class ComposerSection extends React.Component {
               hasIGDirectVideoFlip,
               hasShopgridFlip,
               hasAccessToUserTag,
-              isBusinessTeamMember,
+              hasAccessToHashtagManager,
               isFreeUser,
               isBusinessUser,
               draftMode,
@@ -218,7 +233,7 @@ class ComposerSection extends React.Component {
                 hasIGDirectVideoFlip,
                 hasShopgridFlip,
                 hasAccessToUserTag,
-                isBusinessTeamMember,
+                hasAccessToHashtagManager,
                 isFreeUser,
                 isBusinessUser,
                 draftMode,
@@ -249,7 +264,7 @@ ComposerSection.propTypes = {
   isFreeUser: PropTypes.bool.isRequired,
   hasShopgridFlip: PropTypes.bool,
   hasAccessToUserTag: PropTypes.bool,
-  isBusinessTeamMember: PropTypes.bool,
+  hasAccessToHashtagManager: PropTypes.bool,
   isBusinessUser: PropTypes.bool,
   draftMode: PropTypes.bool,
 };
@@ -259,7 +274,7 @@ ComposerSection.defaultProps = {
   composerPosition: null,
   hasShopgridFlip: false,
   hasAccessToUserTag: false,
-  isBusinessTeamMember: false,
+  hasAccessToHashtagManager: false,
   isBusinessUser: false,
   draftMode: false,
 };
