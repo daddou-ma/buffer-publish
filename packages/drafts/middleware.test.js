@@ -1,6 +1,7 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { CLIENT_NAME } from '@bufferapp/publish-constants';
 import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
@@ -182,6 +183,7 @@ describe('middleware', () => {
       channelType: 'personal_profile',
       channel: 'twitter',
       channelServiceId: 'foo123',
+      clientName: CLIENT_NAME,
     };
     it('it should track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to approval', () => {
       analyticsActions.trackEvent = jest.fn();
@@ -197,18 +199,21 @@ describe('middleware', () => {
       expect(analyticsActions.trackEvent)
       .toHaveBeenCalledWith('Draft Submitted', expectedTrackingObj);
     });
-    it('it should not track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to drafts', () => {
+    it('it should track analytics-middleware on draft rejected', () => {
       analyticsActions.trackEvent = jest.fn();
       const RPC_NAME = 'changeDraftStatus';
       const action = dataFetchActions.fetchSuccess({
         name: RPC_NAME,
         result: {
-          update: {}, draft: { needs_approval: false },
+          update: {}, draft: { needs_approval: false, id: 'foo', type: 'text' },
         },
       });
 
       middleware({ dispatch, getState })(next)(action);
-      expect(analyticsActions.trackEvent).not.toHaveBeenCalled();
+      expect(analyticsActions.trackEvent).toHaveBeenCalledWith(
+        'Draft Rejected',
+        expectedTrackingObj
+      );
     });
 
     it('it should track analytics-middleware on deletePost', () => {
