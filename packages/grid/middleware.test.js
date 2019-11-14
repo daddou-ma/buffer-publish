@@ -78,4 +78,74 @@ describe('middleware', () => {
         },
       }));
   });
+  describe('segment tracking', () => {
+    const getStateWithChannel = () => ({
+      profileSidebar: {
+        selectedProfile: {
+          id: 'bar',
+          serviceId: 'foo123',
+          serviceUsername: 'am.ylee',
+        },
+      },
+    });
+    const channel = getStateWithChannel().profileSidebar.selectedProfile;
+    it('it should track on copy to clipboard success', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const action = {
+        type: gridActionTypes.COPY_TO_CLIPBOARD_RESULT,
+        copySuccess: true,
+        publicGridUrl: 'https://google.com',
+      };
+
+      const expectedTrackingObj = {
+        shopGridUrl: action.publicGridUrl,
+        clientName: CLIENT_NAME,
+        ...getChannelProperties(channel),
+      };
+
+      middleware({ dispatch, getState: getStateWithChannel })(next)(action);
+      expect(analyticsActions.trackEvent).toHaveBeenCalledWith(
+        'Shop Grid Page Link Copied',
+        expectedTrackingObj
+      );
+    });
+
+    it('it should not track on copy to clipboard failure', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const action = {
+        type: gridActionTypes.COPY_TO_CLIPBOARD_RESULT,
+        copySuccess: false,
+      };
+
+      middleware({ dispatch })(next)(action);
+      expect(analyticsActions.trackEvent).not.toHaveBeenCalledWith(
+        'Shop Grid Page Link Copied',
+        {}
+      );
+    });
+
+    it('it should track on post link updated', () => {
+      analyticsActions.trackEvent = jest.fn();
+      const RPC_NAME = 'updatePostLink';
+      const action = dataFetchActions.fetchSuccess({
+        name: RPC_NAME,
+        args: {
+          updateId: '123',
+          link: 'https://google.com',
+        },
+        result: { success: true },
+      });
+      const expectedTrackingObj = {
+        postId: '123',
+        url: 'https://google.com',
+        ...getChannelProperties(channel),
+      };
+
+      middleware({ dispatch, getState: getStateWithChannel })(next)(action);
+      expect(analyticsActions.trackEvent).toHaveBeenCalledWith(
+        'Shop Grid Post URL Updated',
+        expectedTrackingObj
+      );
+    });
+  });
 });
