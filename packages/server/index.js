@@ -19,23 +19,25 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const { join } = require('path');
 const shutdownHelper = require('@bufferapp/shutdown-helper');
-const { apiError } = require('./middleware');
 const {
   setRequestSessionMiddleware,
   validateSessionMiddleware,
 } = require('@bufferapp/session-manager');
 const bufferMetricsMiddleware = require('@bufferapp/buffermetrics/middleware');
 const { errorMiddleware } = require('@bufferapp/buffer-rpc');
+const serialize = require('serialize-javascript');
+const multer = require('multer');
+const helmet = require('helmet');
+
+const { apiError } = require('./middleware');
 const controller = require('./lib/controller');
 const rpcHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
+const userMethod = require('./rpc/user/index');
 const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
 const { getFaviconCode, setupFaviconRoutes } = require('./lib/favicon');
 const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
-const serialize = require('serialize-javascript');
-const multer = require('multer');
-const helmet = require('helmet');
 
 const app = express();
 const server = http.createServer(app);
@@ -56,7 +58,9 @@ let staticAssets = {
 app.set('isProduction', isProduction);
 
 if (isProduction) {
-  staticAssets = JSON.parse(fs.readFileSync(join(__dirname, 'staticAssets.json'), 'utf8'));
+  staticAssets = JSON.parse(
+    fs.readFileSync(join(__dirname, 'staticAssets.json'), 'utf8')
+  );
   segmentKey = '9Plsiyvw9NEgXEN7eSBwiAGlHD3DHp0A';
   // Ensure that static assets is not empty
   if (Object.keys(staticAssets).length === 0) {
@@ -82,7 +86,7 @@ const getUserScript = user => `
 </script>
 `;
 
-const notificationScript = (notification) => {
+const notificationScript = notification => {
   if (!notification) {
     return '';
   }
@@ -90,7 +94,9 @@ const notificationScript = (notification) => {
   let variable = '';
 
   if (notification.variable) {
-    variable = `variable: ${serialize(notification.variable, { isJSON: true })}`;
+    variable = `variable: ${serialize(notification.variable, {
+      isJSON: true,
+    })}`;
   }
 
   return `
@@ -156,10 +162,11 @@ window['_fs_namespace'] = 'FS';
 
 const intercomScript = `
 <script>
-(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/${isProduction ? 'jv1br1uf' : 'yfr605bq'}';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/${
+  isProduction ? 'jv1br1uf' : 'yfr605bq'
+}';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
 </script>
 `;
-
 
 const helpScoutScript = `
 <script>
@@ -187,15 +194,33 @@ const iterateScript = `<script>
     if(i.attachEvent) {i.attachEvent('onload', l);} else{i.addEventListener('load', l, false);}}(window, document,'script','iterate-js','Iterate'));
   </script>`;
 
-const getHtml = ({ notification, userId, modalKey, modalValue }) =>
-  fs
+const getHtml = ({
+  notification,
+  userId,
+  modalKey,
+  modalValue,
+  userData,
+  includeFullstory = true,
+}) => {
+  const includedFullstoryScript = includeFullstory ? fullStoryScript : '';
+  const bufferUser =
+    typeof userData === 'undefined'
+      ? ''
+      : `<script>window.bufferUser = ${JSON.stringify(userData)}</script>`;
+  return fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
     .replace('{{{bundle}}}', staticAssets['bundle.js'])
     .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
     .replace('{{{stripeScript}}}', stripeScript)
-    .replace('{{{fullStoryScript}}}', isProduction ? fullStoryScript : '')
-    .replace('{{{bugsnagScript}}}', isProduction ? getBugsnagScript(userId) : '')
+    .replace(
+      '{{{fullStoryScript}}}',
+      !isProduction ? includedFullstoryScript : ''
+    )
+    .replace(
+      '{{{bugsnagScript}}}',
+      isProduction ? getBugsnagScript(userId) : ''
+    )
     .replace('{{{notificationScript}}}', notificationScript(notification))
     .replace('{{{showModalScript}}}', showModalScript(modalKey, modalValue))
     .replace('{{{appcues}}}', isProduction ? appcuesScript : '')
@@ -204,7 +229,9 @@ const getHtml = ({ notification, userId, modalKey, modalValue }) =>
     .replace('{{{helpScoutScript}}}', helpScoutScript)
     .replace('{{{userScript}}}', getUserScript({ id: userId }))
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
-    .replace('{{{segmentScript}}}', segmentScript);
+    .replace('{{{segmentScript}}}', segmentScript)
+    .replace('{{{bufferUser}}}', bufferUser);
+};
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());
@@ -214,7 +241,8 @@ app.all('/maintenance', maintenanceHandler);
 
 // All routes after this have access to the user session
 app.use('*', (req, res, next) => {
-  const analyzeApiAddr = req.get('ANALYZE-API-ADDR') || process.env.ANALYZE_API_ADDR;
+  const analyzeApiAddr =
+    req.get('ANALYZE-API-ADDR') || process.env.ANALYZE_API_ADDR;
   app.set('analyzeApiAddr', analyzeApiAddr);
   next();
 });
@@ -226,29 +254,28 @@ app.use(
     name: 'Buffer-Publish',
     debug: !isProduction,
     trackVisits: true,
-  }),
+  })
 );
 
 app.use(
   setRequestSessionMiddleware({
     production: isProduction,
     sessionKeys: ['publish', 'global'],
-  }),
+  })
 );
 
-
 app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
-
 
 /**
  * The composer expects this URL to exist and accept
  * metrics data. It does on buffer-web, but not here
  * in publish, so we create it here.
  */
-app.post('/ajax/buffermetrics',
+app.post(
+  '/ajax/buffermetrics',
   // needed to parse the multipart FormData
   multiBodyParser.fields([]),
-  composerAjaxBuffemetrics,
+  composerAjaxBuffemetrics
 );
 
 app.get('/health-check', controller.healthCheck);
@@ -258,7 +285,7 @@ app.use(
   validateSessionMiddleware({
     production: isProduction,
     requiredSessionKeys: ['publish.accessToken', 'publish.foreignKey'],
-  }),
+  })
 );
 
 app.use(verifyAccessToken);
@@ -273,10 +300,10 @@ app.post(
     const channel = req.body.channel_name;
     const auth = pusher.authenticate(socketId, channel);
     res.send(auth);
-  },
+  }
 );
 
-const getNotificationFromQuery = (query) => {
+const getNotificationFromQuery = query => {
   let notification = null;
   if (query.nt && query.nk) {
     notification = {
@@ -295,12 +322,24 @@ app.get('*', (req, res) => {
   const userId = req.session.publish.foreignKey;
   const modalKey = req.query.mk ? req.query.mk : null;
   const modalValue = req.query.mv ? req.query.mv : null;
-  res.send(getHtml({
-    notification,
-    userId,
-    modalKey,
-    modalValue,
-  }));
+
+  userMethod
+    .fn(null, req, res)
+    .catch(() => {
+      return undefined;
+    })
+    .then(user => {
+      res.send(
+        getHtml({
+          notification,
+          userId,
+          modalKey,
+          modalValue,
+          userData: user,
+          includeFullstory: user ? user.planCode !== 1 : true,
+        })
+      );
+    });
 });
 
 app.use(apiError);
