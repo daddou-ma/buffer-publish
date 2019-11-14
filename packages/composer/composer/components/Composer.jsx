@@ -168,7 +168,7 @@ class Composer extends React.Component {
     hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
     hasAccessToUserTag: PropTypes.bool,
-    hasHashtagGroupsFlip: PropTypes.bool,
+    isBusinessTeamMember: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
     draftMode: PropTypes.bool,
@@ -183,7 +183,7 @@ class Composer extends React.Component {
     hasIGDirectVideoFlip: false,
     hasAccessToUserTag: false,
     hasShopgridFlip: false,
-    hasHashtagGroupsFlip: false,
+    isBusinessTeamMember: false,
     profiles: [],
     expandedComposerId: null,
     selectedProfiles: [],
@@ -640,7 +640,7 @@ class Composer extends React.Component {
   ) {
     const shouldShowHashtagCount =
       this.isExpanded() &&
-      this.props.hasHashtagGroupsFlip && // @todo: remove this validation
+      this.props.isBusinessTeamMember && // @todo: remove this validation
       draft.service.name === 'instagram' &&
       draft.service.maxHashtags !== null &&
       draft.service.maxHashtags - draft.getNumberOfHashtags() <= 10;
@@ -683,7 +683,7 @@ class Composer extends React.Component {
       hasIGDirectVideoFlip,
       hasAccessToUserTag,
       hasShopgridFlip,
-      hasHashtagGroupsFlip,
+      isBusinessTeamMember,
       draftMode,
     } = this.props;
 
@@ -1211,13 +1211,13 @@ class Composer extends React.Component {
               {shouldDisplayFirstCommentSection() && (
                 <FirstCommentComposerBar
                   draft={draft}
-                  hasHashtagGroupsFlip={hasHashtagGroupsFlip}
                   onToggleSidebarVisibility={this.onToggleSidebarVisibility}
                   onCommentChange={this.onCommentChange}
                   onCommentClick={e =>
                     this.onCommentClick(e, userHasBusinessOrProPlan)
                   }
                   shouldDisplayProTag={!userHasBusinessOrProPlan}
+                  shouldDisplayHashtagManager={isBusinessTeamMember}
                 />
               )}
 

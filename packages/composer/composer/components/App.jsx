@@ -85,6 +85,7 @@ class App extends React.Component {
       isFreeUser: PropTypes.bool.isRequired,
       hasIGDirectFlip: PropTypes.bool.isRequired,
       hasAccessToUserTag: PropTypes.bool.isRequired,
+      isBusinessTeamMember: PropTypes.bool.isRequired,
       hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
       hasIGDirectVideoFlip: PropTypes.bool.isRequired,
       isBusinessUser: PropTypes.bool.isRequired,
@@ -206,6 +207,7 @@ class App extends React.Component {
       isOnProTrial: false,
       hasIGDirectVideoFlip: false,
       hasAccessToUserTag: false,
+      isBusinessTeamMember: false,
     },
     options: {
       onSave: () => {},

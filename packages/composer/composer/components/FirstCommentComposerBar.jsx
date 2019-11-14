@@ -46,7 +46,8 @@ const Textarea = styled(TextareaAutosize)`
   border: 1px solid #e6ebef;
   border-radius: 3px;
   padding: 8px
-    ${({ hasHashtagGroupsFlip }) => (hasHashtagGroupsFlip ? '30px' : '10px')}
+    ${({ shouldDisplayHashtagManager }) =>
+      shouldDisplayHashtagManager ? '30px' : '10px'}
     8px ${({ shouldDisplayProTag }) => (shouldDisplayProTag ? '54px' : '8px')};
   width: 100%;
   font-size: 12px;
@@ -74,14 +75,14 @@ const ProTagWrapper = styled.div`
 
 const FirstCommentComposerBar = ({
   draft,
-  hasHashtagGroupsFlip,
   onToggleSidebarVisibility,
   onCommentChange,
   onCommentClick,
   shouldDisplayProTag,
+  shouldDisplayHashtagManager,
 }) => (
   <Wrapper>
-    {hasHashtagGroupsFlip && (
+    {shouldDisplayHashtagManager && (
       <HashTagIconButton
         type="button"
         onClick={e =>
@@ -107,7 +108,7 @@ const FirstCommentComposerBar = ({
         if (!shouldDisplayProTag) onCommentChange(e);
       }}
       onClick={onCommentClick}
-      hasHashtagGroupsFlip={hasHashtagGroupsFlip}
+      shouldDisplayHashtagManager={shouldDisplayHashtagManager}
       shouldDisplayProTag={shouldDisplayProTag}
     />
   </Wrapper>
@@ -119,11 +120,11 @@ FirstCommentComposerBar.propTypes = {
     composerSidebarVisible: PropTypes.bool,
     commentText: PropTypes.string,
   }).isRequired,
-  hasHashtagGroupsFlip: PropTypes.bool.isRequired,
   onToggleSidebarVisibility: PropTypes.func.isRequired,
   onCommentChange: PropTypes.func.isRequired,
   onCommentClick: PropTypes.func.isRequired,
   shouldDisplayProTag: PropTypes.bool.isRequired,
+  shouldDisplayHashtagManager: PropTypes.bool.isRequired,
 };
 
 export default FirstCommentComposerBar;
