@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
 import Input from '@bufferapp/ui/Input';
+import { Checkmark } from '@bufferapp/ui/Icon';
 import {
   ColorWrapper,
   ColorSelectorWrapper,
@@ -12,6 +13,7 @@ import {
   ColorInput,
   InputWrapper,
   ColorSwatchesContainer,
+  CheckmarkWrapper,
   colorSwatches,
   DEFAULT_COLOR,
 } from './styles';
@@ -20,22 +22,30 @@ const isHexValid = hex => {
   return /^#([0-9A-F]{3}){1,2}$/i.test(hex);
 };
 
-const AllColorsSwatches = ({ setColor }) => {
+const CheckIcon = () => (
+  <CheckmarkWrapper>
+    <Checkmark />
+  </CheckmarkWrapper>
+);
+
+const AllColorsSwatches = ({ colorSelected, setColor }) => {
   const colors = Object.keys(colorSwatches).map(key => (
     <CircleColor
       color={colorSwatches[key]}
       onClick={() => setColor(colorSwatches[key])}
       selectable
-    />
+    >
+      {colorSelected === colorSwatches[key] && <CheckIcon />}
+    </CircleColor>
   ));
 
   return colors;
 };
 
-const ColorSwatches = ({ setColor }) => {
+const ColorSwatches = ({ colorSelected, setColor }) => {
   return (
     <ColorSwatchesContainer>
-      <AllColorsSwatches setColor={setColor} />
+      <AllColorsSwatches setColor={setColor} colorSelected={colorSelected} />
     </ColorSwatchesContainer>
   );
 };
@@ -45,7 +55,7 @@ const LinkSelector = ({ color, setColor, isValidHex, setIsValidHex }) => {
 
   return (
     <ColorSelector>
-      <ColorSwatches setColor={setColor} />
+      <ColorSwatches setColor={setColor} colorSelected={color} />
       <ColorContainer>
         <ColorInputWrapper color={color}>
           <ColorInput

@@ -31,11 +31,21 @@ export const ColorSelectorWrapper = styled.div`
   position: relative;
 `;
 
+export const CheckmarkWrapper = styled.div`
+  position: absolute;
+  display: flex;
+`;
+
 export const CircleColor = styled.div`
-  width: 24px;
-  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 23px;
+  height: 23px;
   border-radius: 50%;
   background-color: ${props => (props.color ? props.color : DEFAULT_COLOR)};
+  color: ${props => (props.color === colorSwatches.white ? colorSwatches.black : colorSwatches.white)};
   border: ${props =>
     props.color === colorSwatches.white
       ? '1px solid #000000'
@@ -44,21 +54,32 @@ export const CircleColor = styled.div`
   margin-bottom: ${props => (props.selectable ? '10px' : '0px')};
   cursor: ${props => (props.selectable ? 'pointer' : 'auto')};
   :hover {
-    box-shadow: ${props => (props.selectable ? '0 0 0 1px #2c4bff' : 'none')};
+    :after {
+      content: '';
+      width: 31px;
+      height: 31px;
+      border: 1px solid #4307ff;
+      border-radius: 50%;
+      display: block;
+      margin: -5px -5px;
+    }
   }
 `;
 
 export const ColorSelector = styled.div`
   position: absolute;
   z-index: 1000;
-  width: 170px;
+  width: 155px;
   height: 121px;
   background-color: white;
   border-radius: 5px;
-  padding: 15px 10px 10px 10px;
+  padding: 15px 16px 10px 16px;
   border: 1px solid lightgrey;
   left: 0;
   top: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const ColorContainer = styled.div`
@@ -95,4 +116,5 @@ export const ColorSwatchesContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
+  margin-right: -6px;
 `;
