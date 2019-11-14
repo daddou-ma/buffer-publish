@@ -5,8 +5,14 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { CLIENT_NAME } from '@bufferapp/publish-constants';
 import { actionTypes as gridActionTypes } from './reducer';
-import { isValidURL, urlHasProtocol, getBaseURL } from './util';
+import {
+  isValidURL,
+  urlHasProtocol,
+  getBaseURL,
+  getChannelProperties,
+} from './util';
 
 export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
   next(action);
@@ -34,6 +40,15 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
 
     case gridActionTypes.COPY_TO_CLIPBOARD_RESULT:
       if (action.copySuccess) {
+        const channel = getState().profileSidebar.selectedProfile;
+        const metadata = {
+          ...getChannelProperties(channel),
+          shopGridUrl: action.publicGridUrl || '',
+          clientName: CLIENT_NAME,
+        };
+        dispatch(
+          analyticsActions.trackEvent('Shop Grid Page Link Copied', metadata)
+        );
         dispatch(notificationActions.createNotification({
           notificationType: 'success',
           message: 'Copied!',
@@ -83,9 +98,7 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         const { updateId, link } = action.args;
         const channel = getState().profileSidebar.selectedProfile;
         const metadata = {
-          channelId: channel.id,
-          channelServiceId: channel.serviceId,
-          channelUsername: channel.serviceUsername,
+          ...getChannelProperties(channel),
           postId: updateId,
           url: link,
         };

@@ -5,6 +5,7 @@ import { actions as analyticsActions } from '@bufferapp/publish-analytics-middle
 // load the presentational component
 import { actions } from './reducer';
 import GridPosts from './components/GridPosts';
+import { getChannelProperties } from './util';
 
 const orderPostLists = (posts) => {
   const postLists = [];
@@ -67,28 +68,15 @@ export default connect(
         link,
       }));
     },
-    handleCopyToClipboard: (copySuccess) => {
+    handleCopyToClipboard: ({ copySuccess, publicGridUrl }) => {
       dispatch(actions.handleCopyToClipboardResult({
         copySuccess,
+        publicGridUrl,
       }));
-    },
-    trackLinkCopied: ({ channel, publicGridUrl }) => {
-      const metadata = {
-        channelId: channel.id,
-        channelServiceId: channel.serviceId,
-        channelUsername: channel.serviceUsername,
-        shopGridUrl: publicGridUrl || '',
-        clientName: CLIENT_NAME,
-      };
-      dispatch(
-        analyticsActions.trackEvent('Shop Grid Page Link Copied', metadata)
-      );
     },
     trackPagePreviewed: channel => {
       const metadata = {
-        channelId: channel.id,
-        channelServiceId: channel.serviceId,
-        channelUsername: channel.serviceUsername,
+        ...getChannelProperties(channel),
         clientName: CLIENT_NAME,
       };
       dispatch(

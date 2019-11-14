@@ -3,6 +3,10 @@ import {
   actions as dataFetchActions, actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { CLIENT_NAME } from '@bufferapp/publish-constants';
+import { getChannelProperties } from './util';
+import { actionTypes as gridActionTypes } from './reducer';
 import middleware from './middleware';
 
 describe('middleware', () => {

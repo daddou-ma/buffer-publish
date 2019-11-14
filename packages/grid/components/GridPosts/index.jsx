@@ -75,12 +75,7 @@ const copyLinkStyle = {
   marginLeft: 'auto',
 };
 
-const onCopyToClipboard = ({
-  publicGridUrl,
-  profile,
-  handleCopyToClipboard,
-  trackLinkCopied,
-}) => {
+const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
   const el = document.createElement('textarea');
   el.value = publicGridUrl;
   el.setAttribute('readonly', '');
@@ -91,10 +86,9 @@ const onCopyToClipboard = ({
   const copied = document.execCommand('copy');
   document.body.removeChild(el);
   if (copied) {
-    handleCopyToClipboard(true);
-    trackLinkCopied({ channel: profile, publicGridUrl });
+    handleCopyToClipboard({ copySuccess: true, publicGridUrl });
   } else {
-    handleCopyToClipboard(false);
+    handleCopyToClipboard({ copySuccess: false });
   }
 };
 
@@ -111,7 +105,6 @@ const GridPosts = ({
   onImageClose,
   onChangePostUrl,
   onSavePostUrl,
-  trackLinkCopied,
   trackPagePreviewed,
   isManager,
   isLockedProfile,
@@ -175,9 +168,7 @@ const GridPosts = ({
                 onClick={() => {
                   onCopyToClipboard({
                     publicGridUrl,
-                    profile,
                     handleCopyToClipboard,
-                    trackLinkCopied,
                   });
                 }}
               >
@@ -239,7 +230,6 @@ GridPosts.propTypes = {
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   handleCopyToClipboard: PropTypes.func,
-  trackLinkCopied: PropTypes.func.isRequired,
   trackPagePreviewed: PropTypes.func.isRequired,
   features: PropTypes.object.isRequired, // eslint-disable-line
   isManager: PropTypes.bool,
