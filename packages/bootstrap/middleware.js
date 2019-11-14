@@ -12,9 +12,11 @@ export default ({ dispatch }) => next => action => {
         dispatch(
           dataFetchActions.fetchSuccess({
             name: 'user',
-            result: window.bufferUser,
+            result: { ...window.bufferUser },
           })
         );
+        // make sure we only bootstrap this data once
+        window.bufferUser = undefined;
       } else {
         dispatch(
           dataFetchActions.fetch({

@@ -206,7 +206,7 @@ const getHtml = ({
   const bufferUser =
     typeof userData === 'undefined'
       ? ''
-      : `<script>window.bufferUser = ${JSON.stringify(userData)}</script>`;
+      : `<script>try { window.bufferUser = ${JSON.stringify(userData)}; } catch(e) {}</script>`;
   return fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
