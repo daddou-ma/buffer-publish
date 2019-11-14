@@ -199,6 +199,7 @@ class Composer extends React.Component {
   state = {
     didRenderOnce: false,
     shouldAutoFocusEditor: false,
+    hasCheckedForFacebookPermission: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -593,11 +594,28 @@ class Composer extends React.Component {
     );
   };
 
+  /**
+   * @todo: It might make more sense to refactor this method into the
+   * `FirstCommentComposerSection` component.
+   */
   onCommentClick = (e, userHasBusinessOrProPlan) => {
     e.preventDefault();
-
+    const { hasCheckedForFacebookPermission } = this.state;
+    if (userHasBusinessOrProPlan) {
+      /** This will trigger, if necessary, a modal to re-auth facebook for the commenting permission */
+      if (!hasCheckedForFacebookPermission) {
+        AppActionCreators.triggerInteraction({
+          message: {
+            id: this.props.draft.id,
+            ids: this.props.selectedProfiles.map(profile => profile.id),
+            action: 'COMMENT_ENABLED',
+          },
+        });
+        this.setState({ hasCheckedForFacebookPermission: true });
+      }
+    }
     // Show upgrade modal if they are on the Free plan
-    if (!userHasBusinessOrProPlan) {
+    else {
       const { canStartProTrial } = this.props;
       if (canStartProTrial) {
         AppActionCreators.triggerInteraction({
