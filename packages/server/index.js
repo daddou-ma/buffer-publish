@@ -215,7 +215,7 @@ const getHtml = ({
     .replace('{{{stripeScript}}}', stripeScript)
     .replace(
       '{{{fullStoryScript}}}',
-      !isProduction ? includedFullstoryScript : ''
+      isProduction ? includedFullstoryScript : ''
     )
     .replace(
       '{{{bugsnagScript}}}',
