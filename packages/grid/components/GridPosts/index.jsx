@@ -112,14 +112,6 @@ const onPreviewClick = (publicGridUrl) => {
   openPreviewPage(publicGridUrl);
 };
 
-const onChangeColor = (color, contrastColor) => {
-  console.log('Color changed to -->', color, contrastColor);
-};
-
-const onBlurColorPicker = (color, contrastColor) => {
-  console.log('On blur color picker -->', color, contrastColor);
-};
-
 const ColorPickerSection = () => {
   const [colorButtons, setColorButton] = useState(DEFAULT_COLOR);
   const [textColor, setTextColor] = useState('#FFFFFF');
@@ -130,12 +122,10 @@ const ColorPickerSection = () => {
         label="Link Color"
         defaultColor="#2C4BFF"
         onChange={(color, contrastColor) => {
-          onChangeColor(color, contrastColor);
           setColorButton(color);
           setTextColor(contrastColor);
         }}
         onBlur={(color, contrastColor) => {
-          onBlurColorPicker(color, contrastColor);
           setColorButton(color);
           setTextColor(contrastColor);
         }}
