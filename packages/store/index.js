@@ -16,7 +16,7 @@ import postingScheduleSettingsMiddleware from '@bufferapp/publish-posting-schedu
 import generalSettingsMiddleware from '@bufferapp/publish-general-settings/middleware';
 import profileSidebarMiddleware from '@bufferapp/publish-profile-sidebar/middleware';
 import clientAccessMiddleware from '@bufferapp/client-access/middleware';
-import appSidebarMiddleware from '@bufferapp/app-sidebar/lib/middleware';
+import bootstrapMiddleware from '@bufferapp/publish-bootstrap/middleware';
 import productFeatureMiddleware from '@bufferapp/product-features/middleware';
 import i18nMiddleware from '@bufferapp/publish-i18n/middleware';
 import asyncDataFetchMiddleware from '@bufferapp/async-data-fetch/lib/middleware';
@@ -94,7 +94,7 @@ const configureStore = initialstate => {
         i18nMiddleware,
         profileSidebarMiddleware,
         clientAccessMiddleware,
-        appSidebarMiddleware,
+        bootstrapMiddleware,
         productFeatureMiddleware,
         queueMiddleware,
         sentMiddleware,

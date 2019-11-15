@@ -1,8 +1,11 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
+import { CLIENT_NAME } from '@bufferapp/publish-constants';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 // load the presentational component
 import { actions } from './reducer';
 import GridPosts from './components/GridPosts';
+import { getChannelProperties } from './util';
 
 const orderPostLists = (posts) => {
   const postLists = [];
@@ -65,12 +68,22 @@ export default connect(
         link,
       }));
     },
-    handleCopyToClipboard: (copySuccess) => {
+    handleCopyToClipboard: ({ copySuccess, publicGridUrl }) => {
       dispatch(actions.handleCopyToClipboardResult({
         copySuccess,
+        publicGridUrl,
       }));
     },
-  }),
+    trackPagePreviewed: channel => {
+      const metadata = {
+        ...getChannelProperties(channel),
+        clientName: CLIENT_NAME,
+      };
+      dispatch(
+        analyticsActions.trackEvent('Shop Grid Page Previewed', metadata)
+      );
+    },
+  })
 )(GridPosts);
 
 // export reducer, actions and action types

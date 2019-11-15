@@ -1,6 +1,7 @@
 import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
 import { getProfilePageParams } from '@bufferapp/publish-routes';
+import { CLIENT_NAME } from '@bufferapp/publish-constants';
 
 import {
   actions as dataFetchActions,
@@ -16,6 +17,7 @@ const getTrackingData = ({ post = {}, channel = {} }) => ({
   channelServiceId: channel.serviceId || null,
   postId: post.id || null,
   mediaType: post.type || null,
+  clientName: CLIENT_NAME,
 });
 
 export default ({ dispatch, getState }) => next => (action) => {
@@ -97,11 +99,12 @@ export default ({ dispatch, getState }) => next => (action) => {
       const draft = action.result ? action.result.draft : {};
       /* this is also called when a draft in approval is moved back into drafts, which
        is why we need to check the needs_approval bool */
-      if (draft.needs_approval) {
-        const channel = state.profileSidebar.selectedProfile;
-        const metadata = getTrackingData({ post: draft, channel });
-        dispatch(analyticsActions.trackEvent('Draft Submitted', metadata));
-      }
+      const channel = state.profileSidebar.selectedProfile;
+      const metadata = getTrackingData({ post: draft, channel });
+      const eventName = draft.needs_approval
+        ? 'Draft Submitted'
+        : 'Draft Rejected';
+      dispatch(analyticsActions.trackEvent(eventName, metadata));
       break;
     }
     case `approveDraft_${dataFetchActionTypes.FETCH_FAIL}`:
