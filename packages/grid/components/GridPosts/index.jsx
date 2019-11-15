@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   GridList,
@@ -14,6 +14,7 @@ import LockedProfileNotification from '@bufferapp/publish-locked-profile-notific
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
+import styled from 'styled-components';
 import { openPreviewPage } from '../../util';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -76,6 +77,19 @@ const copyLinkStyle = {
   marginLeft: 'auto',
 };
 
+const DEFAULT_COLOR = '#2C4BFF';
+const ButtonTest = styled.div`
+  color: ${props => (props.textColor ? props.textColor : '#FFFFFF')};
+  background-color: ${props => (props.bgColor ? props.bgColor : DEFAULT_COLOR)};
+  width: 130px;
+  height: 35px;
+  border-radius: 4px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+`;
+
 const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
   const el = document.createElement('textarea');
   el.value = publicGridUrl;
@@ -104,6 +118,34 @@ const onChangeColor = (color, contrastColor) => {
 
 const onBlurColorPicker = (color, contrastColor) => {
   console.log('On blur color picker -->', color, contrastColor);
+};
+
+const ColorPickerSection = () => {
+  const [colorButtons, setColorButton] = useState(DEFAULT_COLOR);
+  const [textColor, setTextColor] = useState('#FFFFFF');
+
+  return (
+    <>
+      <ColorPicker
+        label="Link Color"
+        defaultColor="#2C4BFF"
+        onChange={(color, contrastColor) => {
+          onChangeColor(color, contrastColor);
+          setColorButton(color);
+          setTextColor(contrastColor);
+        }}
+        onBlur={(color, contrastColor) => {
+          onBlurColorPicker(color, contrastColor);
+          setColorButton(color);
+          setTextColor(contrastColor);
+        }}
+      />
+
+      <ButtonTest bgColor={colorButtons} textColor={textColor}>
+        Background test
+      </ButtonTest>
+    </>
+  );
 };
 
 const GridPosts = ({
@@ -208,16 +250,7 @@ const GridPosts = ({
             />
           </div>
         </div>
-        <ColorPicker
-          label="Link Color"
-          defaultColor="#2C4BFF"
-          onChange={(color, contrastColor) =>
-            onChangeColor(color, contrastColor)
-          }
-          onBlur={(color, contrastColor) =>
-            onBlurColorPicker(color, contrastColor)
-          }
-        />
+        <ColorPickerSection />
         <GridList
           gridPosts={gridPosts}
           onChangePostUrl={onChangePostUrl}
