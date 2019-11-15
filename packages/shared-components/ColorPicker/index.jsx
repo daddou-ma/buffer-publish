@@ -20,8 +20,21 @@ import {
   DEFAULT_COLOR,
 } from './styles';
 
-const isHexValid = hex => {
-  return /^#([0-9A-F]{3}){1,2}$/i.test(hex);
+const isHexValid = hex => /^#[0-9A-F]{6}$/i.test(hex);
+
+const getColorContrast = hex => {
+  const hexColor = hex.replace('#', '');
+  const r = parseInt(hexColor.substr(0, 2), 16);
+  const g = parseInt(hexColor.substr(2, 2), 16);
+  const b = parseInt(hexColor.substr(4, 2), 16);
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+
+  return yiq >= 160 ? '#000000' : '#ffffff';
+};
+
+const onColorChange = (selectedColor, onChange) => {
+  const textColor = getColorContrast(selectedColor);
+  onChange(selectedColor, textColor);
 };
 
 const ColorSwatches = ({ colorSelected, onChange }) => (
@@ -30,7 +43,7 @@ const ColorSwatches = ({ colorSelected, onChange }) => (
       <CircleColorWrapper>
         <CircleColor
           color={colorSwatches[key]}
-          onClick={() => onChange(colorSwatches[key])}
+          onClick={() => onColorChange(colorSwatches[key], onChange)}
           selectable
         >
           {colorSelected === colorSwatches[key] && (
@@ -94,14 +107,14 @@ const ColorSelectorPopup = ({
             type="color"
             value={colorSelected}
             id="colorWheel"
-            onChange={event => onChange(event.target.value)}
+            onChange={e => onColorChange(e.target.value, onChange)}
           />
         </ColorInputWrapper>
         <InputWrapper>
           <Input
             type="input"
             onChange={e => {
-              onChange(e.target.value);
+              onColorChange(e.target.value, onChange);
               setIsValidHex(isHexValid(e.target.value));
             }}
             value={colorSelected}
@@ -110,7 +123,7 @@ const ColorSelectorPopup = ({
             hasError={!isValidHex}
             onBlur={() => {
               if (!isValidHex) {
-                onChange(DEFAULT_COLOR);
+                onColorChange(DEFAULT_COLOR, onChange);
                 setIsValidHex(true);
               }
             }}
@@ -151,21 +164,30 @@ const ColorPicker = ({ onChange, label, defaultColor, onBlur }) => {
           label={color}
           type="secondary"
           icon={<CircleColor color={color} selectable={false} />}
-          onClick={() => setVisible(!visible)}
-          onBlur={() => setVisible(false)}
+          onClick={() => {
+            const newVisible = !visible;
+            setVisible(!visible);
+            if (newVisible === false && onBlur) {
+              onBlur(color, getColorContrast(color));
+            }
+          }}
+          onBlur={() => {
+            setVisible(false);
+            if (onBlur) onBlur(color, getColorContrast(color));
+          }}
         />
         {visible && (
           <ColorSelectorPopup
             colorSelected={color}
             onChange={newColor => {
               setColor(newColor);
-              onChange(newColor);
+              onColorChange(newColor, onChange);
             }}
             isValidHex={isValidHex}
             setIsValidHex={setIsValidHex}
             onBlur={() => {
               setVisible(false);
-              if (onBlur) onBlur();
+              if (onBlur) onBlur(color, getColorContrast(color));
             }}
           />
         )}

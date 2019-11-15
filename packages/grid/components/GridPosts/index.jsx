@@ -4,6 +4,7 @@ import {
   GridList,
   EmptyState,
   BufferLoading,
+  ColorPicker,
 } from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button } from '@bufferapp/ui';
@@ -14,7 +15,6 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
 import { openPreviewPage } from '../../util';
-import ColorPicker from '../ColorPicker';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -98,8 +98,12 @@ const onPreviewClick = (publicGridUrl) => {
   openPreviewPage(publicGridUrl);
 };
 
-const onChangeColor = color => {
-  console.log('Color changed to -->', color);
+const onChangeColor = (color, contrastColor) => {
+  console.log('Color changed to -->', color, contrastColor);
+};
+
+const onBlurColorPicker = (color, contrastColor) => {
+  console.log('On blur color picker -->', color, contrastColor);
 };
 
 const GridPosts = ({
@@ -204,7 +208,12 @@ const GridPosts = ({
         <ColorPicker
           label="Link Color"
           defaultColor="#2C4BFF"
-          onChange={color => onChangeColor(color)}
+          onChange={(color, contrastColor) =>
+            onChangeColor(color, contrastColor)
+          }
+          onBlur={(color, contrastColor) =>
+            onBlurColorPicker(color, contrastColor)
+          }
         />
         <GridList
           gridPosts={gridPosts}
