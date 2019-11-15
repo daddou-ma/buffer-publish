@@ -98,6 +98,10 @@ const onPreviewClick = (publicGridUrl) => {
   openPreviewPage(publicGridUrl);
 };
 
+const onChangeColor = (color) => {
+  console.log('Color changed to -->', color);
+};
+
 const GridPosts = ({
   total,
   loading,
@@ -197,7 +201,11 @@ const GridPosts = ({
             />
           </div>
         </div>
-        <ColorPicker />
+        <ColorPicker
+          label="Link Color"
+          defaultColor="#2C4BFF"
+          onChange={color => onChangeColor(color)}
+        />
         <GridList
           gridPosts={gridPosts}
           onChangePostUrl={onChangePostUrl}

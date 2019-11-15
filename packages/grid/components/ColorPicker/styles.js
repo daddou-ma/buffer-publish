@@ -14,21 +14,15 @@ export const colorSwatches = {
   aqua: '#2AB4B4',
 };
 
-export const ColorWrapper = styled.div`
+export const ColorPickerWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 15px;
 `;
 
 export const ColorSelectorWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  border: 1px solid grey;
-  border-radius: 4px;
-  margin-left: 8px;
-  padding: 0px 8px;
-  height: 36px;
   position: relative;
+  margin-left: 10px;
 `;
 
 export const CheckmarkWrapper = styled.div`
@@ -36,37 +30,45 @@ export const CheckmarkWrapper = styled.div`
   display: flex;
 `;
 
+export const CircleColorWrapper = styled.div`
+  display: flex;
+  flex: 20%;
+  justify-content: center;
+`;
+
 export const CircleColor = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 23px;
-  height: 23px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background-color: ${props => (props.color ? props.color : DEFAULT_COLOR)};
-  color: ${props => (props.color === colorSwatches.white ? colorSwatches.black : colorSwatches.white)};
+  color: ${props =>
+    props.color === colorSwatches.white
+      ? colorSwatches.black
+      : colorSwatches.white};
   border: ${props =>
     props.color === colorSwatches.white
       ? '1px solid #000000'
       : `1px solid ${props.color}`};
-  margin-right: 6px;
   margin-bottom: ${props => (props.selectable ? '10px' : '0px')};
   cursor: ${props => (props.selectable ? 'pointer' : 'auto')};
   :hover {
     :after {
+      display: ${props => (props.selectable ? 'block' : 'none')};
       content: '';
-      width: 31px;
-      height: 31px;
+      width: 30px;
+      height: 30px;
       border: 1px solid #4307ff;
       border-radius: 50%;
-      display: block;
       margin: -5px -5px;
     }
   }
 `;
 
-export const ColorSelector = styled.div`
+export const ColorPopup = styled.div`
   position: absolute;
   z-index: 1000;
   width: 155px;
@@ -113,8 +115,5 @@ export const InputWrapper = styled.div`
 
 export const ColorSwatchesContainer = styled.div`
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-right: -6px;
 `;

@@ -1,19 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
 import Input from '@bufferapp/ui/Input';
 import { Checkmark } from '@bufferapp/ui/Icon';
+import Button from '@bufferapp/ui/Button';
 import {
-  ColorWrapper,
-  ColorSelectorWrapper,
+  ColorPickerWrapper,
   CircleColor,
-  ColorSelector,
+  ColorSelectorWrapper,
+  ColorPopup,
   ColorContainer,
   ColorInputWrapper,
   ColorInput,
   InputWrapper,
   ColorSwatchesContainer,
   CheckmarkWrapper,
+  CircleColorWrapper,
   colorSwatches,
   DEFAULT_COLOR,
 } from './styles';
@@ -30,13 +32,15 @@ const CheckIcon = () => (
 
 const AllColorsSwatches = ({ colorSelected, setColor }) => {
   const colors = Object.keys(colorSwatches).map(key => (
-    <CircleColor
-      color={colorSwatches[key]}
-      onClick={() => setColor(colorSwatches[key])}
-      selectable
-    >
-      {colorSelected === colorSwatches[key] && <CheckIcon />}
-    </CircleColor>
+    <CircleColorWrapper>
+      <CircleColor
+        color={colorSwatches[key]}
+        onClick={() => setColor(colorSwatches[key])}
+        selectable
+      >
+        {colorSelected === colorSwatches[key] && <CheckIcon />}
+      </CircleColor>
+    </CircleColorWrapper>
   ));
 
   return colors;
@@ -50,11 +54,38 @@ const ColorSwatches = ({ colorSelected, setColor }) => {
   );
 };
 
-const LinkSelector = ({ color, setColor, isValidHex, setIsValidHex }) => {
+const useOutsideClick = (ref, callback) => {
+  const handleClick = e => {
+    if (ref.current && !ref.current.contains(e.target)) {
+      callback();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  });
+};
+
+const ColorSelectorPopup = ({
+  color,
+  setColor,
+  isValidHex,
+  setIsValidHex,
+  onBlur,
+}) => {
   const containerEl = useRef(null);
+  const ref = useRef();
+
+  useOutsideClick(ref, () => {
+    onBlur();
+  });
 
   return (
-    <ColorSelector>
+    <ColorPopup ref={ref}>
       <ColorSwatches setColor={setColor} colorSelected={color} />
       <ColorContainer>
         <ColorInputWrapper color={color}>
@@ -87,30 +118,40 @@ const LinkSelector = ({ color, setColor, isValidHex, setIsValidHex }) => {
           />
         </InputWrapper>
       </ColorContainer>
-    </ColorSelector>
+    </ColorPopup>
   );
 };
 
-const ColorPicker = () => {
-  const [color, setColor] = useState(DEFAULT_COLOR);
+const ColorPicker = ({ onChange, label, defaultColor, onBlur }) => {
+  const [color, setColor] = useState(defaultColor || DEFAULT_COLOR);
+  const [visible, setVisible] = useState(false);
   const [isValidHex, setIsValidHex] = useState(true);
 
   return (
-    <ColorWrapper>
-      <Text type="label">Link Color</Text>
+    <ColorPickerWrapper>
+      <Text type="label">{label}</Text>
       <ColorSelectorWrapper>
-        <CircleColor color={color} selectable={false} />
-        <Text color="grayDark" type="p">
-          {color}
-        </Text>
-        <LinkSelector
-          color={color}
-          setColor={setColor}
-          isValidHex={isValidHex}
-          setIsValidHex={setIsValidHex}
+        <Button
+          type="secondary"
+          icon={<CircleColor color={color} selectable={false} />}
+          onClick={() => setVisible(!visible)}
+          label={color}
+          onBlur={() => setVisible(false)}
         />
+        {visible && (
+          <ColorSelectorPopup
+            color={color}
+            setColor={setColor}
+            isValidHex={isValidHex}
+            setIsValidHex={setIsValidHex}
+            onBlur={() => {
+              setVisible(false);
+              if (onBlur) onBlur();
+            }}
+          />
+        )}
       </ColorSelectorWrapper>
-    </ColorWrapper>
+    </ColorPickerWrapper>
   );
 };
 
