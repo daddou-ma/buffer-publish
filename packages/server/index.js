@@ -194,6 +194,26 @@ const iterateScript = `<script>
     if(i.attachEvent) {i.attachEvent('onload', l);} else{i.addEventListener('load', l, false);}}(window, document,'script','iterate-js','Iterate'));
   </script>`;
 
+const getUserData = ({ userData }) => {
+  const bufferUser =
+    typeof userData === 'undefined'
+      ? ''
+      : `<script>try { window.bufferUser = ${JSON.stringify(
+          userData
+        )}; } catch(e) {}</script>`;
+
+  return bufferUser;
+};
+
+const getFullstory = ({ includeFullstory }) => {
+  const includedFullstoryScript = includeFullstory ? fullStoryScript : '';
+  return isProduction ? includedFullstoryScript : '';
+};
+
+const getBugsnag = ({ userId }) => {
+  return isProduction ? getBugsnagScript(userId) : '';
+};
+
 const getHtml = ({
   notification,
   userId,
@@ -202,25 +222,14 @@ const getHtml = ({
   userData,
   includeFullstory = true,
 }) => {
-  const includedFullstoryScript = includeFullstory ? fullStoryScript : '';
-  const bufferUser =
-    typeof userData === 'undefined'
-      ? ''
-      : `<script>try { window.bufferUser = ${JSON.stringify(userData)}; } catch(e) {}</script>`;
   return fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
     .replace('{{{bundle}}}', staticAssets['bundle.js'])
     .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
     .replace('{{{stripeScript}}}', stripeScript)
-    .replace(
-      '{{{fullStoryScript}}}',
-      isProduction ? includedFullstoryScript : ''
-    )
-    .replace(
-      '{{{bugsnagScript}}}',
-      isProduction ? getBugsnagScript(userId) : ''
-    )
+    .replace('{{{fullStoryScript}}}', getFullstory({ includeFullstory }))
+    .replace('{{{bugsnagScript}}}', getBugsnag({ userId }))
     .replace('{{{notificationScript}}}', notificationScript(notification))
     .replace('{{{showModalScript}}}', showModalScript(modalKey, modalValue))
     .replace('{{{appcues}}}', isProduction ? appcuesScript : '')
@@ -230,7 +239,7 @@ const getHtml = ({
     .replace('{{{userScript}}}', getUserScript({ id: userId }))
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
     .replace('{{{segmentScript}}}', segmentScript)
-    .replace('{{{bufferUser}}}', bufferUser);
+    .replace('{{{bufferUser}}}', getUserData({ userData }));
 };
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
