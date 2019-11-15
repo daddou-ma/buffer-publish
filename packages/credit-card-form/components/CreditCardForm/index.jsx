@@ -9,13 +9,28 @@ class StripeWrapper extends Component {
     createSetupIntentRequest: PropTypes.func.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { stripe: null };
+  }
+
   componentDidMount() {
+    const { stripePublishableKey } = this.props;
+
+    if (window.Stripe) {
+      this.setState({ stripe: window.Stripe(stripePublishableKey) });
+    } else {
+      document.querySelector('#stripe-js').addEventListener('load', () => {
+        // Create Stripe instance once Stripe.js loads
+        this.setState({ stripe: window.Stripe(stripePublishableKey) });
+      });
+    }
     const { createSetupIntentRequest } = this.props;
     createSetupIntentRequest();
   }
 
   render() {
-    const { stripePublishableKey, stripe } = this.props;
+    const { stripe } = this.state;
 
     return (
       <StripeProvider stripe={stripe}>
