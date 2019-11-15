@@ -98,7 +98,7 @@ const onPreviewClick = (publicGridUrl) => {
   openPreviewPage(publicGridUrl);
 };
 
-const onChangeColor = (color) => {
+const onChangeColor = color => {
   console.log('Color changed to -->', color);
 };
 

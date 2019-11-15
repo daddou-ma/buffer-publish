@@ -24,34 +24,34 @@ const isHexValid = hex => {
   return /^#([0-9A-F]{3}){1,2}$/i.test(hex);
 };
 
-const CheckIcon = () => (
-  <CheckmarkWrapper>
-    <Checkmark />
-  </CheckmarkWrapper>
+const ColorSwatches = ({ colorSelected, onChange }) => (
+  <ColorSwatchesContainer>
+    {Object.keys(colorSwatches).map(key => (
+      <CircleColorWrapper>
+        <CircleColor
+          color={colorSwatches[key]}
+          onClick={() => onChange(colorSwatches[key])}
+          selectable
+        >
+          {colorSelected === colorSwatches[key] && (
+            <CheckmarkWrapper>
+              <Checkmark />
+            </CheckmarkWrapper>
+          )}
+        </CircleColor>
+      </CircleColorWrapper>
+    ))}
+  </ColorSwatchesContainer>
 );
 
-const AllColorsSwatches = ({ colorSelected, setColor }) => {
-  const colors = Object.keys(colorSwatches).map(key => (
-    <CircleColorWrapper>
-      <CircleColor
-        color={colorSwatches[key]}
-        onClick={() => setColor(colorSwatches[key])}
-        selectable
-      >
-        {colorSelected === colorSwatches[key] && <CheckIcon />}
-      </CircleColor>
-    </CircleColorWrapper>
-  ));
-
-  return colors;
+ColorSwatches.propTypes = {
+  onChange: PropTypes.func,
+  colorSelected: PropTypes.string,
 };
 
-const ColorSwatches = ({ colorSelected, setColor }) => {
-  return (
-    <ColorSwatchesContainer>
-      <AllColorsSwatches setColor={setColor} colorSelected={colorSelected} />
-    </ColorSwatchesContainer>
-  );
+ColorSwatches.defaultProps = {
+  onChange: () => {},
+  colorSelected: '',
 };
 
 const useOutsideClick = (ref, callback) => {
@@ -71,11 +71,11 @@ const useOutsideClick = (ref, callback) => {
 };
 
 const ColorSelectorPopup = ({
-  color,
-  setColor,
+  colorSelected,
   isValidHex,
   setIsValidHex,
   onBlur,
+  onChange,
 }) => {
   const containerEl = useRef(null);
   const ref = useRef();
@@ -86,31 +86,31 @@ const ColorSelectorPopup = ({
 
   return (
     <ColorPopup ref={ref}>
-      <ColorSwatches setColor={setColor} colorSelected={color} />
+      <ColorSwatches onChange={onChange} colorSelected={colorSelected} />
       <ColorContainer>
-        <ColorInputWrapper color={color}>
+        <ColorInputWrapper color={colorSelected}>
           <ColorInput
             ref={containerEl}
             type="color"
-            value={color}
+            value={colorSelected}
             id="colorWheel"
-            onChange={event => setColor(event.target.value)}
+            onChange={event => onChange(event.target.value)}
           />
         </ColorInputWrapper>
         <InputWrapper>
           <Input
             type="input"
             onChange={e => {
-              setColor(e.target.value);
+              onChange(e.target.value);
               setIsValidHex(isHexValid(e.target.value));
             }}
-            value={color}
+            value={colorSelected}
             name="colorInput"
             disabled={false}
             hasError={!isValidHex}
             onBlur={() => {
               if (!isValidHex) {
-                setColor(DEFAULT_COLOR);
+                onChange(DEFAULT_COLOR);
                 setIsValidHex(true);
               }
             }}
@@ -120,6 +120,22 @@ const ColorSelectorPopup = ({
       </ColorContainer>
     </ColorPopup>
   );
+};
+
+ColorSelectorPopup.propTypes = {
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  setIsValidHex: PropTypes.func,
+  colorSelected: PropTypes.string,
+  isValidHex: PropTypes.bool,
+};
+
+ColorSelectorPopup.defaultProps = {
+  onBlur: () => {},
+  onChange: () => {},
+  setIsValidHex: () => {},
+  colorSelected: '',
+  isValidHex: true,
 };
 
 const ColorPicker = ({ onChange, label, defaultColor, onBlur }) => {
@@ -132,16 +148,19 @@ const ColorPicker = ({ onChange, label, defaultColor, onBlur }) => {
       <Text type="label">{label}</Text>
       <ColorSelectorWrapper>
         <Button
+          label={color}
           type="secondary"
           icon={<CircleColor color={color} selectable={false} />}
           onClick={() => setVisible(!visible)}
-          label={color}
           onBlur={() => setVisible(false)}
         />
         {visible && (
           <ColorSelectorPopup
-            color={color}
-            setColor={setColor}
+            colorSelected={color}
+            onChange={newColor => {
+              setColor(newColor);
+              onChange(newColor);
+            }}
             isValidHex={isValidHex}
             setIsValidHex={setIsValidHex}
             onBlur={() => {
@@ -153,6 +172,20 @@ const ColorPicker = ({ onChange, label, defaultColor, onBlur }) => {
       </ColorSelectorWrapper>
     </ColorPickerWrapper>
   );
+};
+
+ColorPicker.propTypes = {
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  label: PropTypes.string,
+  defaultColor: PropTypes.string,
+};
+
+ColorPicker.defaultProps = {
+  onBlur: () => {},
+  onChange: () => {},
+  label: '',
+  defaultColor: '',
 };
 
 export default ColorPicker;
