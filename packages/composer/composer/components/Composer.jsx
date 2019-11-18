@@ -35,6 +35,7 @@ import {
 import InstagramFeedback from './InstagramFeedback';
 import InstagramThumbnailButton from './InstagramThumbnailButton';
 import { isIE } from '../utils/DOMUtils';
+import { isManagerOrContributorForAnyProfile } from '../utils/profile-filtering';
 
 import styles from './css/Composer.css';
 
@@ -167,7 +168,6 @@ class Composer extends React.Component {
     hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
     hasAccessToUserTag: PropTypes.bool,
-    hasAccessToHashtagManager: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
     draftMode: PropTypes.bool,
@@ -182,7 +182,6 @@ class Composer extends React.Component {
     hasIGDirectVideoFlip: false,
     hasAccessToUserTag: false,
     hasShopgridFlip: false,
-    hasAccessToHashtagManager: false,
     profiles: [],
     expandedComposerId: null,
     selectedProfiles: [],
@@ -597,10 +596,10 @@ class Composer extends React.Component {
    * @todo: It might make more sense to refactor this method into the
    * `FirstCommentComposerSection` component.
    */
-  onCommentClick = (e, userHasBusinessOrProPlan) => {
+  onCommentClick = (e, profileIsProOrBusiness) => {
     e.preventDefault();
     const { hasCheckedForFacebookPermission } = this.state;
-    if (userHasBusinessOrProPlan) {
+    if (profileIsProOrBusiness) {
       /** This will trigger, if necessary, a modal to re-auth facebook for the commenting permission */
       if (!hasCheckedForFacebookPermission) {
         AppActionCreators.triggerInteraction({
@@ -681,7 +680,6 @@ class Composer extends React.Component {
       hasIGDirectVideoFlip,
       hasAccessToUserTag,
       hasShopgridFlip,
-      hasAccessToHashtagManager,
       draftMode,
     } = this.props;
 
@@ -842,10 +840,15 @@ class Composer extends React.Component {
     const showComposerFbAutocompleteDisabledNotice =
       this.isExpanded() && hasComposerFbAutocompleteDisabledNotice;
 
-    const userHasBusinessOrProPlan =
-      !this.props.isFreeUser ||
-      this.isInstagramManager() ||
-      this.isInstagramContributor();
+    const { isFreeUser } = this.props;
+    const profileIsBusiness = isManagerOrContributorForAnyProfile(
+      {
+        profiles: this.props.selectedProfiles,
+        service: 'instagram',
+      }
+    );
+    const profileIsProOrBusiness =
+      !isFreeUser || profileIsBusiness;
 
     const shouldDisplayEditThumbnailBtn =
       this.isInstagram() &&
@@ -853,7 +856,7 @@ class Composer extends React.Component {
       this.isExpanded() &&
       this.hasIGDirectPostingEnabled() &&
       hasIGDirectVideoFlip &&
-      userHasBusinessOrProPlan &&
+      profileIsProOrBusiness &&
       composerFeedbackMessages.length < 1 && // don't allow user to edit thumbnail if can't add to queue
       draft.instagramFeedback.length < 1 && // don't allow user to edit thumbnail if post is reminder
       !appState.isOmniboxEnabled &&
@@ -868,14 +871,15 @@ class Composer extends React.Component {
     };
 
     const shouldDisplayFirstCommentSection = () => {
-      const hasSelectedSomeInstagramDirectProfiles = this.props.selectedProfiles.some(
+      const { selectedProfiles: allSelectedProfiles, canStartProTrial } = this.props;
+      const hasSelectedSomeInstagramDirectProfiles = allSelectedProfiles.some(
         profile => profile.instagramDirectEnabled
       );
       return (
         areAllSelectedProfilesIG() &&
         (hasSelectedSomeInstagramDirectProfiles &&
           this.isInstagram() &&
-          (userHasBusinessOrProPlan || this.props.canStartProTrial) &&
+          (profileIsProOrBusiness || canStartProTrial) &&
           this.isExpanded() &&
           !appState.isOmniboxEnabled)
       );
@@ -1212,11 +1216,13 @@ class Composer extends React.Component {
                   onToggleSidebarVisibility={this.onToggleSidebarVisibility}
                   onCommentChange={this.onCommentChange}
                   onCommentClick={e =>
-                    this.onCommentClick(e, userHasBusinessOrProPlan)
+                    this.onCommentClick(e, profileIsProOrBusiness)
                   }
-                  shouldDisplayProTag={!userHasBusinessOrProPlan}
-                  shouldDisplayHashtagManager={hasAccessToHashtagManager}
-                  shouldShowCommentCharacterCount={shouldShowCommentCharacterCount}
+                  shouldDisplayProTag={!profileIsProOrBusiness}
+                  shouldDisplayHashtagManager={profileIsBusiness}
+                  shouldShowCommentCharacterCount={
+                    shouldShowCommentCharacterCount
+                  }
                 />
               )}
 

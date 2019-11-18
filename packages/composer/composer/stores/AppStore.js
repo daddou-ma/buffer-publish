@@ -161,7 +161,6 @@ const getNewUserData = (data) => ({
   isOnProTrial: data.isOnProTrial,
   hasShopgridFlip: data.hasShopgridFlip,
   hasAccessToUserTag: data.hasAccessToUserTag,
-  hasAccessToHashtagManager: data.hasAccessToHashtagManager,
 });
 
 const getNewSubprofile = ({ avatar, id, name, isShared }) =>

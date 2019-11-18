@@ -41,7 +41,6 @@ const ComposerComponent = ({
   hasIGDirectVideoFlip,
   hasShopgridFlip,
   hasAccessToUserTag,
-  hasAccessToHashtagManager,
   isFreeUser,
   isBusinessUser,
   draftMode,
@@ -91,7 +90,6 @@ const ComposerComponent = ({
       hasIGDirectVideoFlip={hasIGDirectVideoFlip}
       hasShopgridFlip={hasShopgridFlip}
       hasAccessToUserTag={hasAccessToUserTag}
-      hasAccessToHashtagManager={hasAccessToHashtagManager}
       isFreeUser={isFreeUser}
       isBusinessUser={isBusinessUser}
       draftMode={draftMode}
@@ -138,7 +136,6 @@ class ComposerSection extends React.Component {
       isOnProTrial,
       hasShopgridFlip,
       hasAccessToUserTag,
-      hasAccessToHashtagManager,
       draftMode,
     } = this.props;
 
@@ -195,7 +192,6 @@ class ComposerSection extends React.Component {
               hasIGDirectVideoFlip,
               hasShopgridFlip,
               hasAccessToUserTag,
-              hasAccessToHashtagManager,
               isFreeUser,
               isBusinessUser,
               draftMode,
@@ -233,7 +229,6 @@ class ComposerSection extends React.Component {
                 hasIGDirectVideoFlip,
                 hasShopgridFlip,
                 hasAccessToUserTag,
-                hasAccessToHashtagManager,
                 isFreeUser,
                 isBusinessUser,
                 draftMode,
@@ -264,7 +259,6 @@ ComposerSection.propTypes = {
   isFreeUser: PropTypes.bool.isRequired,
   hasShopgridFlip: PropTypes.bool,
   hasAccessToUserTag: PropTypes.bool,
-  hasAccessToHashtagManager: PropTypes.bool,
   isBusinessUser: PropTypes.bool,
   draftMode: PropTypes.bool,
 };
@@ -274,7 +268,6 @@ ComposerSection.defaultProps = {
   composerPosition: null,
   hasShopgridFlip: false,
   hasAccessToUserTag: false,
-  hasAccessToHashtagManager: false,
   isBusinessUser: false,
   draftMode: false,
 };
