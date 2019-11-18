@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * Component that displays a composer
  */
