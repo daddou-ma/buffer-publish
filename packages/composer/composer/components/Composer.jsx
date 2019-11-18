@@ -1217,6 +1217,7 @@ class Composer extends React.Component {
                   }
                   shouldDisplayProTag={!userHasBusinessOrProPlan}
                   shouldDisplayHashtagManager={hasAccessToHashtagManager}
+                  shouldShowCommentCharacterCount={shouldShowCommentCharacterCount}
                 />
               )}
 
@@ -1272,13 +1273,6 @@ class Composer extends React.Component {
 
           {children}
         </div>
-        {shouldShowCommentCharacterCount && (
-          <CharacterCount
-            count={draft.characterCommentCount}
-            maxCount={draft.service.commentCharLimit}
-            className={styles.characterCountComment}
-          />
-        )}
       </div>
     );
   }

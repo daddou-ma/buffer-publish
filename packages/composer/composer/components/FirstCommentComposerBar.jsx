@@ -7,6 +7,16 @@ import HashtagIcon from '@bufferapp/ui/Icon/Icons/Hashtag';
 import { Tooltip } from '@bufferapp/ui';
 import TextareaAutosize from 'react-textarea-autosize';
 
+import CharacterCount from './CharacterCount';
+
+const CommentCharacterCount = styled(CharacterCount)`
+  display: inline-block;
+  background-color: #E6EBEF;
+  border-radius: 3px;
+  padding: 3px 3px;
+  line-height: 12px;
+`;
+
 const Wrapper = styled.div`
   position: relative;
   clear: left;
@@ -37,7 +47,7 @@ const Label = styled.label`
   font-weight: 600;
   font-size: 12px;
   color: #343e47;
-  width: 130px;
+  width: 125px;
   padding: 6px 28px 0 10px;
 `;
 
@@ -53,6 +63,7 @@ const Textarea = styled(TextareaAutosize)`
   font-size: 12px;
   font-weight: 500;
   box-sizing: border-box;
+  font-family: inherit;
   &:focus {
     border: 1px solid #2d99ec;
     outline: none;
@@ -80,6 +91,7 @@ const FirstCommentComposerBar = ({
   onCommentClick,
   shouldDisplayProTag,
   shouldDisplayHashtagManager,
+  shouldShowCommentCharacterCount,
 }) => (
   <Wrapper>
     {shouldDisplayHashtagManager && (
@@ -95,7 +107,15 @@ const FirstCommentComposerBar = ({
         </Tooltip>
       </HashTagIconButton>
     )}
-    <Label>First Comment</Label>
+    <Label>
+      First Comment{' '}
+      {shouldShowCommentCharacterCount && (
+        <CommentCharacterCount
+          count={draft.characterCommentCount}
+          maxCount={draft.service.commentCharLimit}
+        />
+      )}
+    </Label>
     {shouldDisplayProTag && (
       <ProTagWrapper>
         <ProTag />
@@ -119,72 +139,17 @@ FirstCommentComposerBar.propTypes = {
     commentEnabled: PropTypes.bool,
     composerSidebarVisible: PropTypes.bool,
     commentText: PropTypes.string,
+    characterCommentCount: PropTypes.number,
+    service: PropTypes.shape({
+      commentCharLimit: PropTypes.number,
+    }),
   }).isRequired,
   onToggleSidebarVisibility: PropTypes.func.isRequired,
   onCommentChange: PropTypes.func.isRequired,
   onCommentClick: PropTypes.func.isRequired,
   shouldDisplayProTag: PropTypes.bool.isRequired,
   shouldDisplayHashtagManager: PropTypes.bool.isRequired,
+  shouldShowCommentCharacterCount: PropTypes.bool.isRequired,
 };
 
 export default FirstCommentComposerBar;
-
-/**
-
-    <div className={styles.toggleCommentContainer}>
-      {shouldDisplayProTag && (
-        <div className={styles.proTagWrapper}>
-          <ProTag />
-        </div>
-      )}
-      <div className={styles.toggleWrapper}>
-        <div className={styles.togglePosition}>
-          <Toggle
-            disabled={false}
-            onText=""
-            offText=""
-            on={draft.commentEnabled}
-            size="small"
-            onClick={e =>
-              this.onToggleComment(
-                e,
-                !draft.commentEnabled,
-                userHasBusinessOrProPlan
-              )
-            }
-          />
-        </div>
-        <div
-          className={styles.toggleTextWrapper}
-          onClick={this.onCommentClick}
-          role="button"
-          tabIndex={0}
-        >
-          <Text weight="medium" color="black" size="small">
-            Include a comment with this post
-          </Text>
-        </div>
-        <div
-          className={styles.questionIcon}
-          onClick={this.onCommentClick}
-          role="button"
-          tabIndex={0}
-        >
-          <Tooltip
-            label="Enabling this option will allow you to include a comment for your post!"
-            position="right"
-          >
-            <InfoIcon size="medium" />
-          </Tooltip>
-        </div>
-      </div>
-      {shouldShowCommentCharacterCount && (
-        <CharacterCount
-          count={draft.characterCommentCount}
-          maxCount={draft.service.commentCharLimit}
-          className={styles.characterCountComment}
-        />
-      )}
-    </div>
-
- */
