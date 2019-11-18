@@ -12,7 +12,6 @@ const SOLO_PREMIUM_BUSINESS_PLAN_ID = '8';
 const PREMIUM_BUSINESS_PLAN_ID = '9';
 const SMALL_PLAN_ID = '10';
 
-const CLIENT_NAME = 'publishWeb';
 // segment naming convention: APP-VIEW-LOCATION-BUTTON-VERSION
 // https://www.notion.so/buffer/CTA-Parameter-Conventions-Call-to-Action-WIP-0ae87bdd99574e3888afb2fe6b75035a
 const ANALYTICS_OVERVIEW_SBP_TRIAL = 'publish-analyticsOverview-trialCard-sbpTrial-1';
@@ -159,6 +158,5 @@ module.exports = {
   UploadTypes,
   AppEnvironments,
   PUSHER,
-  CLIENT_NAME,
   ImageDimensions,
 };

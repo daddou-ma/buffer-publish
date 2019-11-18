@@ -5,7 +5,6 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { CLIENT_NAME } from '@bufferapp/publish-constants';
 import { actionTypes as gridActionTypes } from './reducer';
 import {
   isValidURL,
@@ -44,7 +43,6 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         const metadata = {
           ...getChannelProperties(channel),
           shopGridUrl: action.publicGridUrl || '',
-          clientName: CLIENT_NAME,
         };
         dispatch(
           analyticsActions.trackEvent('Shop Grid Page Link Copied', metadata)
