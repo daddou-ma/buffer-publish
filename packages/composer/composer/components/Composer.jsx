@@ -8,12 +8,6 @@ import ReactTooltip from 'react-tooltip';
 import ReactDOMServer from 'react-dom/server';
 import uniqBy from 'lodash.uniqby';
 import { MediaTypes } from '@bufferapp/publish-constants';
-import { Toggle, Text } from '@bufferapp/components';
-import { ProTag } from '@bufferapp/publish-shared-components';
-import HashtagIcon from '@bufferapp/ui/Icon/Icons/Hashtag';
-import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
-import { Tooltip } from '@bufferapp/ui';
-import Textarea from 'react-textarea-autosize';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
@@ -29,6 +23,7 @@ import ComposerProfileTooltip from './ComposerProfileTooltip';
 import PinterestComposerBar from './PinterestComposerBar';
 import LocationComposerBar from './LocationComposerBar';
 import ShopgridComposerBar from './ShopgridComposerBar';
+import FirstCommentComposerBar from './FirstCommentComposerBar';
 import TooltipList from './TooltipList';
 import Button from './Button';
 import {
@@ -54,7 +49,7 @@ class Composer extends React.Component {
           composerId: PropTypes.string,
           code: PropTypes.string,
           message: PropTypes.string,
-        }),
+        })
       ),
     }).isRequired,
     draft: PropTypes.shape({
@@ -77,7 +72,7 @@ class Composer extends React.Component {
       images: PropTypes.arrayOf(
         PropTypes.shape({
           url: PropTypes.string,
-        }),
+        })
       ),
       video: PropTypes.shape({
         url: PropTypes.string,
@@ -105,34 +100,37 @@ class Composer extends React.Component {
       tempImage: PropTypes.string,
       filesUploadProgress: PropTypes.instanceOf(Map),
     }).isRequired,
-    enabledDrafts: PropTypes.arrayOf(PropTypes.shape({
-      images: PropTypes.arrayOf(
-        PropTypes.shape({
+    enabledDrafts: PropTypes.arrayOf(
+      PropTypes.shape({
+        images: PropTypes.arrayOf(
+          PropTypes.shape({
+            url: PropTypes.string,
+          })
+        ),
+        video: PropTypes.shape({
           url: PropTypes.string,
+          thumbnail: PropTypes.string,
         }),
-      ),
-      video: PropTypes.shape({
-        url: PropTypes.string,
-        thumbnail: PropTypes.string,
-      }),
-      gif: PropTypes.shape({
-        url: PropTypes.string,
-        stillGifUrl: PropTypes.string,
-      }),
-    })).isRequired,
+        gif: PropTypes.shape({
+          url: PropTypes.string,
+          stillGifUrl: PropTypes.string,
+        }),
+      })
+    ).isRequired,
     draftsSharedData: PropTypes.shape({
       uploadedVideos: PropTypes.array,
       uploadedImages: PropTypes.array,
       uploadedGifs: PropTypes.array,
-
     }).isRequired,
-    visibleNotifications: PropTypes.arrayOf(PropTypes.shape({
-      message: PropTypes.string,
-      scope: PropTypes.string,
-      data: PropTypes.shape({
-        id: PropTypes.string,
-      }),
-    })).isRequired,
+    visibleNotifications: PropTypes.arrayOf(
+      PropTypes.shape({
+        message: PropTypes.string,
+        scope: PropTypes.string,
+        data: PropTypes.shape({
+          id: PropTypes.string,
+        }),
+      })
+    ).isRequired,
     areAllDraftsSaved: PropTypes.bool.isRequired,
     shouldEnableFacebookAutocomplete: PropTypes.bool.isRequired,
     shouldShowInlineSubprofileDropdown: PropTypes.bool.isRequired,
@@ -154,7 +152,7 @@ class Composer extends React.Component {
           commentCharLimit: PropTypes.number,
           maxAttachableImagesCount: PropTypes.number,
         }),
-      }),
+      })
     ),
     children: PropTypes.node,
     composerPosition: PropTypes.shape({
@@ -169,7 +167,7 @@ class Composer extends React.Component {
     hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
     hasAccessToUserTag: PropTypes.bool,
-    hasHashtagGroupsFlip: PropTypes.bool,
+    hasAccessToHashtagManager: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
     draftMode: PropTypes.bool,
@@ -184,7 +182,7 @@ class Composer extends React.Component {
     hasIGDirectVideoFlip: false,
     hasAccessToUserTag: false,
     hasShopgridFlip: false,
-    hasHashtagGroupsFlip: false,
+    hasAccessToHashtagManager: false,
     profiles: [],
     expandedComposerId: null,
     selectedProfiles: [],
@@ -193,13 +191,14 @@ class Composer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onToggleComment = this.onToggleComment.bind(this);
+    this.onCommentClick = this.onCommentClick.bind(this);
     this.onToggleSidebarVisibility = this.onToggleSidebarVisibility.bind(this);
   }
 
   state = {
     didRenderOnce: false,
     shouldAutoFocusEditor: false,
+    hasCheckedForFacebookPermission: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -211,20 +210,21 @@ class Composer extends React.Component {
      */
     const willBeExpanded = nextProps.expandedComposerId === this.props.draft.id;
     const isExpanded = this.isExpanded() && this.state.didRenderOnce;
-    const shouldAutoFocusEditor = (!isExpanded && willBeExpanded) || nextProps.forceEditorFocus;
+    const shouldAutoFocusEditor =
+      (!isExpanded && willBeExpanded) || nextProps.forceEditorFocus;
     this.setState({ didRenderOnce: true, shouldAutoFocusEditor });
 
     if (nextProps.forceEditorFocus) AppActionCreators.stopForcingEditorFocus();
   }
 
-  onComposerClick = (e) => {
+  onComposerClick = e => {
     if (this.isDisplayedBehind()) {
       e.preventDefault();
       this.expand();
     }
   };
 
-  onNetworkIconClick = (e) => {
+  onNetworkIconClick = e => {
     e.preventDefault();
     this.toggleExpandedState();
   };
@@ -233,10 +233,11 @@ class Composer extends React.Component {
   // (e.g. when collapsing an expanded composer when a click is registered outside).
   // Don't prevent default for file input clicks or links, but prevent them from bubbling up,
   // so that the default browser action (file selection) still happens.
-  onUpdateZoneClick = (e) => {
+  onUpdateZoneClick = e => {
     if (!this.isExpanded()) return;
 
-    const isFileInputTargeted = e.target.tagName === 'INPUT' && e.target.getAttribute('type') === 'file';
+    const isFileInputTargeted =
+      e.target.tagName === 'INPUT' && e.target.getAttribute('type') === 'file';
     const isLinkTargeted = e.target.tagName === 'A';
 
     if (isFileInputTargeted || isLinkTargeted) e.stopPropagation();
@@ -250,8 +251,11 @@ class Composer extends React.Component {
       attachment_replaced: AttachmentTypes.Media,
     });
 
-    ComposerActionCreators.toggleAttachment(this.props.draft.id, AttachmentTypes.LINK);
-  }
+    ComposerActionCreators.toggleAttachment(
+      this.props.draft.id,
+      AttachmentTypes.LINK
+    );
+  };
 
   onRetweetAttachmentSwitchClick = () => {
     AppActionCreators.trackUserAction(['composer', 'attachment', 'enabled'], {
@@ -260,48 +264,26 @@ class Composer extends React.Component {
       attachment_replaced: AttachmentTypes.Media,
     });
 
-    ComposerActionCreators.toggleAttachment(this.props.draft.id, AttachmentTypes.RETWEET);
-  }
-
-  onToggleComment = (e, commentEnabled, userHasBusinessOrProPlan) => {
-    e.preventDefault();
-    const { canStartProTrial } = this.props;
-    if (userHasBusinessOrProPlan) {
-      // show input if user already has access to first comment
-      AppActionCreators.triggerInteraction({
-        message: {
-          id: this.props.draft.id,
-          ids: this.props.selectedProfiles.map(profile => profile.id),
-          action: commentEnabled ? 'COMMENT_ENABLED' : null,
-        },
-      });
-      ComposerActionCreators.updateToggleComment(this.props.draft.id, commentEnabled);
-    } else if (canStartProTrial) {
-      AppActionCreators.triggerInteraction({
-        message: {
-          action: 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL',
-        },
-      });
-    } else {
-      AppActionCreators.triggerInteraction({
-        message: {
-          action: 'SHOW_PRO_UPGRADE_MODAL',
-        },
-      });
-    }
+    ComposerActionCreators.toggleAttachment(
+      this.props.draft.id,
+      AttachmentTypes.RETWEET
+    );
   };
 
   onToggleSidebarVisibility = (e, composerSidebarVisible) => {
     e.preventDefault();
     ComposerActionCreators.updateToggleSidebarVisibility(
       this.props.draft.id,
-      composerSidebarVisible,
+      composerSidebarVisible
     );
   };
 
   onMediaAttachmentSwitchClick = () => {
-    const replacedAttachment = this.isLinkAttachmentEnabled() && this.hasLinkAttachment() ? AttachmentTypes.LINK
-      : this.isRetweetAttachmentEnabled() && this.hasRetweetAttachment() ? AttachmentTypes.RETWEET
+    const replacedAttachment =
+      this.isLinkAttachmentEnabled() && this.hasLinkAttachment()
+        ? AttachmentTypes.LINK
+        : this.isRetweetAttachmentEnabled() && this.hasRetweetAttachment()
+        ? AttachmentTypes.RETWEET
         : 'no_previous_attachment';
 
     AppActionCreators.trackUserAction(['composer', 'attachment', 'enabled'], {
@@ -310,47 +292,66 @@ class Composer extends React.Component {
       attachment_replaced: replacedAttachment,
     });
 
-    ComposerActionCreators.toggleAttachment(this.props.draft.id, AttachmentTypes.MEDIA);
+    ComposerActionCreators.toggleAttachment(
+      this.props.draft.id,
+      AttachmentTypes.MEDIA
+    );
   };
 
   onEditorFocus = () => this.expand();
 
-  getSuggestedMedia = (shouldFilterOutAttachedMedia) => {
+  getSuggestedMedia = shouldFilterOutAttachedMedia => {
     const { draft, enabledDrafts, draftsSharedData } = this.props;
-    const otherEnabledDrafts = enabledDrafts.filter(enabledDraft => enabledDraft.id !== draft.id);
+    const otherEnabledDrafts = enabledDrafts.filter(
+      enabledDraft => enabledDraft.id !== draft.id
+    );
     const { availableImages } = draft;
-    const availableLinkThumbnails = draft.link !== null && draft.link.availableThumbnails !== null
-      ? draft.link.availableThumbnails : [];
-    const availableSourceLinkImages = draft.sourceLink !== null
-      ? draft.sourceLink.availableImages : [];
+    const availableLinkThumbnails =
+      draft.link !== null && draft.link.availableThumbnails !== null
+        ? draft.link.availableThumbnails
+        : [];
+    const availableSourceLinkImages =
+      draft.sourceLink !== null ? draft.sourceLink.availableImages : [];
 
     let suggestedMedia = Array.prototype.concat.call(
       // Other enabled drafts' attached videos
-      otherEnabledDrafts.reduce((attachedVideos, otherDraft) => (otherDraft.video !== null ? attachedVideos.concat(otherDraft.video) : attachedVideos),
-        []),
+      otherEnabledDrafts.reduce(
+        (attachedVideos, otherDraft) =>
+          otherDraft.video !== null
+            ? attachedVideos.concat(otherDraft.video)
+            : attachedVideos,
+        []
+      ),
       // Other enabled drafts' attached images
       ...otherEnabledDrafts.map(otherDraft => otherDraft.images),
       // Other enabled drafts' attached gifs (if service supports gifs)
       draft.service.canHaveMediaAttachmentType(MediaTypes.GIF)
-        ? otherEnabledDrafts.reduce((attachedGifs, otherDraft) => (otherDraft.gif !== null ? attachedGifs.concat(otherDraft.gif) : attachedGifs),
-          [])
+        ? otherEnabledDrafts.reduce(
+            (attachedGifs, otherDraft) =>
+              otherDraft.gif !== null
+                ? attachedGifs.concat(otherDraft.gif)
+                : attachedGifs,
+            []
+          )
         : [],
       draftsSharedData.uploadedVideos, // All uploaded videos
       draftsSharedData.uploadedImages, // All uploaded images
       // All uploaded gifs (if service supports gifs)
       draft.service.canHaveMediaAttachmentType(MediaTypes.GIF)
-        ? draftsSharedData.uploadedGifs : [],
+        ? draftsSharedData.uploadedGifs
+        : [],
       availableImages, // This draft's available images
       availableLinkThumbnails, // This draft's link attachment's available thumbnails
-      availableSourceLinkImages, // Images found on this draft's source url page
+      availableSourceLinkImages // Images found on this draft's source url page
     );
 
     if (shouldFilterOutAttachedMedia) {
-      suggestedMedia = suggestedMedia.filter(suggestedItem => (
-        !draft.images.find(image => suggestedItem.url === image.url)
-        && !(draft.video && draft.video.url === suggestedItem.url)
-        && !(draft.gif && draft.gif.url === suggestedItem.url)
-      ));
+      suggestedMedia = suggestedMedia.filter(
+        suggestedItem =>
+          !draft.images.find(image => suggestedItem.url === image.url) &&
+          !(draft.video && draft.video.url === suggestedItem.url) &&
+          !(draft.gif && draft.gif.url === suggestedItem.url)
+      );
     }
 
     // Deduplicate suggested media
@@ -365,11 +366,20 @@ class Composer extends React.Component {
       thumbnails = [draft.video.thumbnail];
     } else if (attachmentType === AttachmentTypes.MEDIA && draft.gif !== null) {
       if (draft.gif.stillGifUrl !== null) thumbnails = [draft.gif.stillGifUrl];
-    } else if (attachmentType === AttachmentTypes.MEDIA && draft.images.length > 0) {
+    } else if (
+      attachmentType === AttachmentTypes.MEDIA &&
+      draft.images.length > 0
+    ) {
       thumbnails = draft.images.map(image => image.url);
-    } else if (attachmentType === AttachmentTypes.LINK && draft.link.thumbnail !== null) {
+    } else if (
+      attachmentType === AttachmentTypes.LINK &&
+      draft.link.thumbnail !== null
+    ) {
       thumbnails = [draft.link.thumbnail.url];
-    } else if (attachmentType === AttachmentTypes.RETWEET && draft.retweet !== null) {
+    } else if (
+      attachmentType === AttachmentTypes.RETWEET &&
+      draft.retweet !== null
+    ) {
       thumbnails = [draft.retweet.avatarUrl];
     }
     return thumbnails;
@@ -379,154 +389,177 @@ class Composer extends React.Component {
     // Message codes for which feedback shouldn't be displayed inside the composer
     const whatPreventsSavingIgnoredCodes = [1];
 
-    return this.props.appState.whatPreventsSaving.filter(what => (
-      what.composerId === this.props.draft.id
-      && !whatPreventsSavingIgnoredCodes.includes(what.code)
-    ));
+    return this.props.appState.whatPreventsSaving.filter(
+      what =>
+        what.composerId === this.props.draft.id &&
+        !whatPreventsSavingIgnoredCodes.includes(what.code)
+    );
   };
 
   getOmniboxNoticeTooltipMarkup = () => {
-    const messages = this.props.visibleNotifications.reduce((notifMessages, notif) => (notif.scope === NotificationScopes.MC_OMNIBOX_EDIT_NOTICE
-      && notif.data.id === this.props.draft.id ? notifMessages.concat(notif.message)
-      : notifMessages), []);
+    const messages = this.props.visibleNotifications.reduce(
+      (notifMessages, notif) =>
+        notif.scope === NotificationScopes.MC_OMNIBOX_EDIT_NOTICE &&
+        notif.data.id === this.props.draft.id
+          ? notifMessages.concat(notif.message)
+          : notifMessages,
+      []
+    );
 
     if (messages.length < 1) {
       return null;
     }
 
-    return (
-      ReactDOMServer.renderToStaticMarkup(
-        <TooltipList messages={messages} />,
-      )
+    return ReactDOMServer.renderToStaticMarkup(
+      <TooltipList messages={messages} />
     );
   };
 
   getAlertIconTooltipMarkup = () => {
-    const messages = this.props.appState.whatPreventsSaving.reduce((alertMessages, what) => (what.composerId === this.props.draft.id ? alertMessages.concat(what.message)
-      : alertMessages), []);
+    const messages = this.props.appState.whatPreventsSaving.reduce(
+      (alertMessages, what) =>
+        what.composerId === this.props.draft.id
+          ? alertMessages.concat(what.message)
+          : alertMessages,
+      []
+    );
 
     if (messages.length < 1) {
       return null;
     }
 
-    return (
-      ReactDOMServer.renderToStaticMarkup(
-        <TooltipList messages={messages} />,
-      )
+    return ReactDOMServer.renderToStaticMarkup(
+      <TooltipList messages={messages} />
     );
   };
 
-  getSelectedProfilesForService = () => this.props.selectedProfiles.filter(profile => profile.service.name === this.props.draft.id);
+  getSelectedProfilesForService = () =>
+    this.props.selectedProfiles.filter(
+      profile => profile.service.name === this.props.draft.id
+    );
 
   getSelectedProfilesTooltipMarkup = () => {
     const selectedProfilesForService = this.getSelectedProfilesForService();
-    return (
-      ReactDOMServer.renderToStaticMarkup(
-        <ComposerProfileTooltip
-          selectedProfilesForService={selectedProfilesForService}
-          key={this.props.draft.id}
-        />,
-      )
+    return ReactDOMServer.renderToStaticMarkup(
+      <ComposerProfileTooltip
+        selectedProfilesForService={selectedProfilesForService}
+        key={this.props.draft.id}
+      />
     );
   };
 
-  hasComposerAlerts = () => this.props.appState.whatPreventsSaving.filter(what => what.composerId === this.props.draft.id).length > 0;
+  hasComposerAlerts = () =>
+    this.props.appState.whatPreventsSaving.filter(
+      what => what.composerId === this.props.draft.id
+    ).length > 0;
 
-  hasOmniboxNotices = () => this.props.visibleNotifications.some(notif => notif.scope === NotificationScopes.MC_OMNIBOX_EDIT_NOTICE
-      && notif.data.id === this.props.draft.id);
+  hasOmniboxNotices = () =>
+    this.props.visibleNotifications.some(
+      notif =>
+        notif.scope === NotificationScopes.MC_OMNIBOX_EDIT_NOTICE &&
+        notif.data.id === this.props.draft.id
+    );
 
-  isEnabled = () => this.props.draft.isEnabled || this.props.draft.service.isOmni;
+  isEnabled = () =>
+    this.props.draft.isEnabled || this.props.draft.service.isOmni;
 
   isExpanded = () => this.props.expandedComposerId === this.props.draft.id;
 
-  isLinkAttachmentEnabled = () => this.props.draft.enabledAttachmentType === AttachmentTypes.LINK;
+  isLinkAttachmentEnabled = () =>
+    this.props.draft.enabledAttachmentType === AttachmentTypes.LINK;
 
-  isMediaAttachmentEnabled = () => this.props.draft.enabledAttachmentType === AttachmentTypes.MEDIA;
+  isMediaAttachmentEnabled = () =>
+    this.props.draft.enabledAttachmentType === AttachmentTypes.MEDIA;
 
-  isRetweetAttachmentEnabled = () => this.props.draft.enabledAttachmentType === AttachmentTypes.RETWEET;
+  isRetweetAttachmentEnabled = () =>
+    this.props.draft.enabledAttachmentType === AttachmentTypes.RETWEET;
 
   hasLinkAttachment = () => this.props.draft.link !== null;
 
-  hasMediaAttachment = () => (
-    this.props.draft.images.length > 0
-    || this.props.draft.video !== null
-    || this.props.draft.gif !== null
-  );
+  hasMediaAttachment = () =>
+    this.props.draft.images.length > 0 ||
+    this.props.draft.video !== null ||
+    this.props.draft.gif !== null;
 
   hasRetweetAttachment = () => this.props.draft.retweet !== null;
 
-  hasAttachment = () => (
-    (this.isLinkAttachmentEnabled() && this.hasLinkAttachment())
-    || (this.isMediaAttachmentEnabled() && this.hasMediaAttachment())
-    || (this.isRetweetAttachmentEnabled() && this.hasRetweetAttachment())
-  );
+  hasAttachment = () =>
+    (this.isLinkAttachmentEnabled() && this.hasLinkAttachment()) ||
+    (this.isMediaAttachmentEnabled() && this.hasMediaAttachment()) ||
+    (this.isRetweetAttachmentEnabled() && this.hasRetweetAttachment());
 
-  shouldShowMediaAttachmentSwitch = () => (
-    !this.isMediaAttachmentEnabled()
-    && !this.isRetweetAttachmentEnabled()
-    && this.props.draft.service.canHaveSomeAttachmentType([
+  shouldShowMediaAttachmentSwitch = () =>
+    !this.isMediaAttachmentEnabled() &&
+    !this.isRetweetAttachmentEnabled() &&
+    this.props.draft.service.canHaveSomeAttachmentType([
       AttachmentTypes.LINK,
       AttachmentTypes.RETWEET,
-    ])
-  );
+    ]);
 
-  shouldShowLinkAttachmentSwitch = () => this.isMediaAttachmentEnabled() && this.hasLinkAttachment();
+  shouldShowLinkAttachmentSwitch = () =>
+    this.isMediaAttachmentEnabled() && this.hasLinkAttachment();
 
-
-  shouldShowRetweetAttachmentSwitch = () => this.isMediaAttachmentEnabled() && this.hasRetweetAttachment();
+  shouldShowRetweetAttachmentSwitch = () =>
+    this.isMediaAttachmentEnabled() && this.hasRetweetAttachment();
 
   // Determine if that composer is displayed as "behind" another active composer
-  isDisplayedBehind = () => this.props.expandedComposerId !== null && !this.isExpanded();
+  isDisplayedBehind = () =>
+    this.props.expandedComposerId !== null && !this.isExpanded();
 
   isInstagram = () => this.props.draft.service.name === 'instagram';
 
   hasVideo = () => this.props.draft.video !== null;
 
-  getSelectedInstagramProfiles = () => (
-    this.props.selectedProfiles.filter(profile => profile.service.name === 'instagram')
-  );
+  getSelectedInstagramProfiles = () =>
+    this.props.selectedProfiles.filter(
+      profile => profile.service.name === 'instagram'
+    );
 
   getSelectedInstagramProfileId = () => {
     const selectedInstagramDirectProfiles = this.getSelectedInstagramProfiles();
     const hasInstagramSelected = selectedInstagramDirectProfiles.length > 0;
     return hasInstagramSelected ? selectedInstagramDirectProfiles[0].id : null;
-  }
+  };
 
   isInstagramContributor = () => {
     const selectedInstagramProfile = this.getSelectedInstagramProfiles();
-    const hasInstagramSelected = selectedInstagramProfile && selectedInstagramProfile.length === 1;
+    const hasInstagramSelected =
+      selectedInstagramProfile && selectedInstagramProfile.length === 1;
     return (
-      hasInstagramSelected
-      && selectedInstagramProfile[0]
-      && selectedInstagramProfile[0].isContributor
-    );
-  }
-
-  isInstagramManager = () => {
-    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
-    const hasInstagramSelected = selectedInstagramProfile && selectedInstagramProfile.length === 1;
-
-    return (
-      hasInstagramSelected
-      && selectedInstagramProfile[0]
-      && selectedInstagramProfile[0].isManager
-      && selectedInstagramProfile[0].isBusinessProfile
-    );
-  }
-
-  hasIGDirectPostingEnabled = () => {
-    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
-    const hasInstagramSelected = selectedInstagramProfile && selectedInstagramProfile.length === 1;
-    return (
-      hasInstagramSelected
-      && selectedInstagramProfile[0]
-      && selectedInstagramProfile[0].instagramDirectEnabled
+      hasInstagramSelected &&
+      selectedInstagramProfile[0] &&
+      selectedInstagramProfile[0].isContributor
     );
   };
 
-  hasAttachmentSwitch = () => this.shouldShowRetweetAttachmentSwitch()
-    || this.shouldShowLinkAttachmentSwitch()
-    || this.shouldShowMediaAttachmentSwitch();
+  isInstagramManager = () => {
+    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
+    const hasInstagramSelected =
+      selectedInstagramProfile && selectedInstagramProfile.length === 1;
+
+    return (
+      hasInstagramSelected &&
+      selectedInstagramProfile[0] &&
+      selectedInstagramProfile[0].isManager &&
+      selectedInstagramProfile[0].isBusinessProfile
+    );
+  };
+
+  hasIGDirectPostingEnabled = () => {
+    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
+    const hasInstagramSelected =
+      selectedInstagramProfile && selectedInstagramProfile.length === 1;
+    return (
+      hasInstagramSelected &&
+      selectedInstagramProfile[0] &&
+      selectedInstagramProfile[0].instagramDirectEnabled
+    );
+  };
+
+  hasAttachmentSwitch = () =>
+    this.shouldShowRetweetAttachmentSwitch() ||
+    this.shouldShowLinkAttachmentSwitch() ||
+    this.shouldShowMediaAttachmentSwitch();
 
   expand = () => {
     if (this.isExpanded()) return;
@@ -539,29 +572,76 @@ class Composer extends React.Component {
     ComposerActionCreators.collapse(this.props.draft.id);
   };
 
-  toggleExpandedState = () => (this.isExpanded() ? this.collapse() : this.expand());
+  toggleExpandedState = () =>
+    this.isExpanded() ? this.collapse() : this.expand();
 
-  removeNotice = (ev) => {
+  removeNotice = ev => {
     ev.stopPropagation();
-    NotificationActionCreators.removeComposerOmniboxNotices(this.props.draft.id);
+    NotificationActionCreators.removeComposerOmniboxNotices(
+      this.props.draft.id
+    );
     ReactTooltip.hide(this.noticeTooltip);
   };
 
-  onCommentChange = (e) => {
-    ComposerActionCreators.updateDraftComment(this.props.draft.id, e.target.value);
-    ComposerActionCreators.updateDraftCommentCharacterCount(this.props.draft.id);
+  onCommentChange = e => {
+    ComposerActionCreators.updateDraftComment(
+      this.props.draft.id,
+      e.target.value
+    );
+    ComposerActionCreators.updateDraftCommentCharacterCount(
+      this.props.draft.id
+    );
   };
 
-  onCommentClick = (e) => {
+  /**
+   * @todo: It might make more sense to refactor this method into the
+   * `FirstCommentComposerSection` component.
+   */
+  onCommentClick = (e, userHasBusinessOrProPlan) => {
     e.preventDefault();
+    const { hasCheckedForFacebookPermission } = this.state;
+    if (userHasBusinessOrProPlan) {
+      /** This will trigger, if necessary, a modal to re-auth facebook for the commenting permission */
+      if (!hasCheckedForFacebookPermission) {
+        AppActionCreators.triggerInteraction({
+          message: {
+            id: this.props.draft.id,
+            ids: this.props.selectedProfiles.map(profile => profile.id),
+            action: 'COMMENT_ENABLED',
+          },
+        });
+        this.setState({ hasCheckedForFacebookPermission: true });
+      }
+    }
+    // Show upgrade modal if they are on the Free plan
+    else {
+      const { canStartProTrial } = this.props;
+      if (canStartProTrial) {
+        AppActionCreators.triggerInteraction({
+          message: {
+            action: 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL',
+          },
+        });
+      } else {
+        AppActionCreators.triggerInteraction({
+          message: {
+            action: 'SHOW_PRO_UPGRADE_MODAL',
+          },
+        });
+      }
+    }
   };
 
-  renderCharacterCount(draft, characterCountClassName, shouldShowCharacterCount) {
-    const shouldShowHashtagCount = this.isExpanded()
-      && this.props.hasHashtagGroupsFlip // @todo: remove this validation
-      && draft.service.name === 'instagram'
-      && draft.service.maxHashtags !== null
-      && draft.service.maxHashtags - draft.getNumberOfHashtags() <= 10;
+  renderCharacterCount(
+    draft,
+    characterCountClassName,
+    shouldShowCharacterCount
+  ) {
+    const shouldShowHashtagCount =
+      this.isExpanded() &&
+      draft.service.name === 'instagram' &&
+      draft.service.maxHashtags !== null &&
+      draft.service.maxHashtags - draft.getNumberOfHashtags() <= 10;
 
     return (
       <div className={characterCountClassName}>
@@ -601,14 +681,17 @@ class Composer extends React.Component {
       hasIGDirectVideoFlip,
       hasAccessToUserTag,
       hasShopgridFlip,
-      hasHashtagGroupsFlip,
+      hasAccessToHashtagManager,
       draftMode,
     } = this.props;
 
     const composerFeedbackMessages = this.getComposerFeedbackMessages();
-    const shouldShowRetweetAttachment = this.isRetweetAttachmentEnabled() && this.hasRetweetAttachment();
+    const shouldShowRetweetAttachment =
+      this.isRetweetAttachmentEnabled() && this.hasRetweetAttachment();
 
-    const hasComposerBeenCollapsed = appState.composersWhichHaveBeenCollapsed.has(draft.id);
+    const hasComposerBeenCollapsed = appState.composersWhichHaveBeenCollapsed.has(
+      draft.id
+    );
     const isLocked = draft.isSaved;
 
     const editorPlaceholder = () => {
@@ -617,31 +700,48 @@ class Composer extends React.Component {
     };
 
     const savedComposer = draft.isSaved;
-    const attachmentGlanceHasNoThumbnail = this.getAttachmentThumbnails() === null;
+    const attachmentGlanceHasNoThumbnail =
+      this.getAttachmentThumbnails() === null;
     const hasOmniboxNotices = this.hasOmniboxNotices();
     const hasComposerAlerts = this.hasComposerAlerts();
 
-    const shouldShowAlertIcons = hasComposerAlerts && appState.isOmniboxEnabled === false && hasComposerBeenCollapsed;
+    const shouldShowAlertIcons =
+      hasComposerAlerts &&
+      appState.isOmniboxEnabled === false &&
+      hasComposerBeenCollapsed;
 
-    const shouldShowOmniboxNotices = hasOmniboxNotices && !shouldShowAlertIcons && !this.isExpanded();
+    const shouldShowOmniboxNotices =
+      hasOmniboxNotices && !shouldShowAlertIcons && !this.isExpanded();
 
     const updateZoneClassName = [
-      savedComposer ? styles.savedUpdateZone
-        : this.isExpanded() ? styles.expandedUpdateZone : styles.updateZone,
-      this.hasAttachment() && !this.isExpanded() ? styles.updateZoneWithAttachmentGlance : '',
-      this.hasAttachment() && !this.isExpanded() && attachmentGlanceHasNoThumbnail
-        ? styles.updateZoneAttachmentGlanceNoThumbnail : '',
-      !this.isExpanded()
-      && (shouldShowOmniboxNotices || shouldShowAlertIcons)
-        ? styles.updateZoneWithNotice : null,
+      savedComposer
+        ? styles.savedUpdateZone
+        : this.isExpanded()
+        ? styles.expandedUpdateZone
+        : styles.updateZone,
+      this.hasAttachment() && !this.isExpanded()
+        ? styles.updateZoneWithAttachmentGlance
+        : '',
+      this.hasAttachment() &&
+      !this.isExpanded() &&
+      attachmentGlanceHasNoThumbnail
+        ? styles.updateZoneAttachmentGlanceNoThumbnail
+        : '',
+      !this.isExpanded() && (shouldShowOmniboxNotices || shouldShowAlertIcons)
+        ? styles.updateZoneWithNotice
+        : null,
       draft.hasSavingError ? styles.editableErrorUpdateZone : '',
-      this.isDisplayedBehind() && isLocked ? styles.lockedDisplayedBehindAnotherZone
-        : this.isDisplayedBehind() ? styles.displayedBehindAnotherUpdateZone : '',
+      this.isDisplayedBehind() && isLocked
+        ? styles.lockedDisplayedBehindAnotherZone
+        : this.isDisplayedBehind()
+        ? styles.displayedBehindAnotherUpdateZone
+        : '',
     ].join(' ');
 
     const composerClassName = [
       this.isDisplayedBehind()
-        ? styles.composerDisplayedBehindAnother : styles.composer,
+        ? styles.composerDisplayedBehindAnother
+        : styles.composer,
       isLocked ? styles.lockedComposer : '',
       draft.service.isOmni ? styles.omnibox : '',
       'js-disable-dragging',
@@ -657,10 +757,12 @@ class Composer extends React.Component {
       'bi  bi-link',
     ].join(' ');
 
-    const mediaAttachmentSwitchCopy = this.isLinkAttachmentEnabled() && this.hasLinkAttachment()
-      ? 'Replace link attachment with image or video'
-      : !this.isMediaAttachmentEnabled()
-        ? 'Add image or video' : '';
+    const mediaAttachmentSwitchCopy =
+      this.isLinkAttachmentEnabled() && this.hasLinkAttachment()
+        ? 'Replace link attachment with image or video'
+        : !this.isMediaAttachmentEnabled()
+        ? 'Add image or video'
+        : '';
 
     const composerHiddenTitle = `${draft.service.name} composer`;
 
@@ -680,20 +782,24 @@ class Composer extends React.Component {
     ].join(' ');
 
     const composerNotPrefilledNoticeScope = `${NotificationScopes.COMPOSER_NOTICE_NOT_PREFILLED}-${draft.service.name}`;
-    const hasComposerNotPrefilledNotice = visibleNotifications.some(n => n.scope === composerNotPrefilledNoticeScope);
-    const hasComposerFbAutocompleteDisabledNotice = visibleNotifications.some(n => (
-      n.scope === NotificationScopes.COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED
-    ));
-
-    const hasTwitterDuplicateWarningNotice = visibleNotifications.some(n => n.scope === NotificationScopes.TWITTER_DUPLICATE_CONTENT_WARNING);
-
-    let shouldShowComposerFeedbackMessages = (
-      this.isExpanded()
-      && composerFeedbackMessages.length > 0
-      && hasComposerBeenCollapsed
-      && !appState.isOmniboxEnabled
-      && !hasComposerNotPrefilledNotice
+    const hasComposerNotPrefilledNotice = visibleNotifications.some(
+      n => n.scope === composerNotPrefilledNoticeScope
     );
+    const hasComposerFbAutocompleteDisabledNotice = visibleNotifications.some(
+      n =>
+        n.scope === NotificationScopes.COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED
+    );
+
+    const hasTwitterDuplicateWarningNotice = visibleNotifications.some(
+      n => n.scope === NotificationScopes.TWITTER_DUPLICATE_CONTENT_WARNING
+    );
+
+    let shouldShowComposerFeedbackMessages =
+      this.isExpanded() &&
+      composerFeedbackMessages.length > 0 &&
+      hasComposerBeenCollapsed &&
+      !appState.isOmniboxEnabled &&
+      !hasComposerNotPrefilledNotice;
 
     /**
      * HACK: Remove this when we no longer need to prevent videos
@@ -708,10 +814,12 @@ class Composer extends React.Component {
      * This will all be removed shortly once we start allowing these
      * videos and send them as reminders instead.
      */
-    if (composerFeedbackMessages.length > 0
-      && this.isExpanded()
-      && this.isInstagram()
-      && this.hasVideo()) {
+    if (
+      composerFeedbackMessages.length > 0 &&
+      this.isExpanded() &&
+      this.isInstagram() &&
+      this.hasVideo()
+    ) {
       shouldShowComposerFeedbackMessages = true;
       // Uncomment below to add FAQ link after the 'aspect ratio' notice text inline
       // (still needs styling)
@@ -726,63 +834,57 @@ class Composer extends React.Component {
       // });
     }
 
-    const shouldShowInstagramFeedback = this.isInstagram() && draft.instagramFeedback.length > 0;
+    const shouldShowInstagramFeedback =
+      this.isInstagram() && draft.instagramFeedback.length > 0;
 
-    const shouldShowComposerNotPrefilledNotice = this.isExpanded() && hasComposerNotPrefilledNotice;
-    const showComposerFbAutocompleteDisabledNotice = (
-      this.isExpanded()
-      && hasComposerFbAutocompleteDisabledNotice
-    );
+    const shouldShowComposerNotPrefilledNotice =
+      this.isExpanded() && hasComposerNotPrefilledNotice;
+    const showComposerFbAutocompleteDisabledNotice =
+      this.isExpanded() && hasComposerFbAutocompleteDisabledNotice;
 
-    const userHasBusinessOrProPlan = (
-      !this.props.isFreeUser
-      || this.isInstagramManager()
-      || this.isInstagramContributor()
-    );
+    const userHasBusinessOrProPlan =
+      !this.props.isFreeUser ||
+      this.isInstagramManager() ||
+      this.isInstagramContributor();
 
-    const shouldDisplayEditThumbnailBtn = (
-      this.isInstagram()
-      && this.hasVideo()
-      && this.isExpanded()
-      && this.hasIGDirectPostingEnabled()
-      && hasIGDirectVideoFlip
-      && userHasBusinessOrProPlan
-      && composerFeedbackMessages.length < 1 // don't allow user to edit thumbnail if can't add to queue
-      && draft.instagramFeedback.length < 1 // don't allow user to edit thumbnail if post is reminder
-      && !appState.isOmniboxEnabled
-      && !isIE() // not compatible with IE for first version
-    );
-
-    const shouldDisplayProTag = (
-      !userHasBusinessOrProPlan
-      || this.props.isOnProTrial
-    );
+    const shouldDisplayEditThumbnailBtn =
+      this.isInstagram() &&
+      this.hasVideo() &&
+      this.isExpanded() &&
+      this.hasIGDirectPostingEnabled() &&
+      hasIGDirectVideoFlip &&
+      userHasBusinessOrProPlan &&
+      composerFeedbackMessages.length < 1 && // don't allow user to edit thumbnail if can't add to queue
+      draft.instagramFeedback.length < 1 && // don't allow user to edit thumbnail if post is reminder
+      !appState.isOmniboxEnabled &&
+      !isIE(); // not compatible with IE for first version
 
     const areAllSelectedProfilesIG = () => {
-      const notInstagram = this.props.selectedProfiles.some(profile => profile.service.name !== 'instagram');
+      const notInstagram = this.props.selectedProfiles.some(
+        profile => profile.service.name !== 'instagram'
+      );
 
       return !notInstagram || appState.expandedComposerId === 'instagram';
     };
 
-    const shouldDisplayFirstCommentSection = (commentEnabled) => {
-      const hasSelectedSomeInstagramDirectProfiles = this.props.selectedProfiles.some(profile => profile.instagramDirectEnabled);
+    const shouldDisplayFirstCommentSection = () => {
+      const hasSelectedSomeInstagramDirectProfiles = this.props.selectedProfiles.some(
+        profile => profile.instagramDirectEnabled
+      );
       return (
-        areAllSelectedProfilesIG() && (
-          commentEnabled || (
-            hasSelectedSomeInstagramDirectProfiles
-            && this.isInstagram()
-            && (userHasBusinessOrProPlan
-              || this.props.canStartProTrial)
-            && this.isExpanded()
-            && !appState.isOmniboxEnabled
-          )
-        )
+        areAllSelectedProfilesIG() &&
+        (hasSelectedSomeInstagramDirectProfiles &&
+          this.isInstagram() &&
+          (userHasBusinessOrProPlan || this.props.canStartProTrial) &&
+          this.isExpanded() &&
+          !appState.isOmniboxEnabled)
       );
     };
 
-    const shouldShowTwitterDuplicateContentWarningNotice = this.isExpanded()
-      && hasTwitterDuplicateWarningNotice
-      && draft.service.shouldShowDuplicateContentWarning;
+    const shouldShowTwitterDuplicateContentWarningNotice =
+      this.isExpanded() &&
+      hasTwitterDuplicateWarningNotice &&
+      draft.service.shouldShowDuplicateContentWarning;
 
     const addedToQueueCopyMap = new Map([
       [QueueingTypes.QUEUE, 'Added to queue!'],
@@ -793,24 +895,36 @@ class Composer extends React.Component {
       [QueueingTypes.SAVE_AND_APPROVE, 'Saved!'],
     ]);
 
-    const shouldShowCharacterCount = this.isExpanded() && draft.service.charLimit !== null
-      && draft.service.charLimit - draft.characterCount <= 280;
+    const shouldShowCharacterCount =
+      this.isExpanded() &&
+      draft.service.charLimit !== null &&
+      draft.service.charLimit - draft.characterCount <= 280;
 
-    const shouldShowCommentCharacterCount = this.isExpanded() && draft.service.commentCharLimit !== null
-      && draft.service.commentCharLimit - draft.characterCommentCount <= 280;
+    const shouldShowCommentCharacterCount =
+      this.isExpanded() &&
+      draft.service.commentCharLimit !== null &&
+      draft.service.commentCharLimit - draft.characterCommentCount <= 280;
 
-    const usesImageFirstLayout = draft.service.usesImageFirstLayout && draft.images.length === 0;
+    const usesImageFirstLayout =
+      draft.service.usesImageFirstLayout && draft.images.length === 0;
     const hasSuggestedMedia = this.getSuggestedMedia(true).length > 0;
     const suggestedMediaBoxClassName = [
-      usesImageFirstLayout ? styles.imageFirstSuggestedMediaBox
+      usesImageFirstLayout
+        ? styles.imageFirstSuggestedMediaBox
         : !this.hasAttachmentSwitch()
-          ? styles.suggestedMediaBoxAlignedBottom : '',
+        ? styles.suggestedMediaBoxAlignedBottom
+        : '',
     ].join(' ');
 
-    const mediaAttachmentClassName = usesImageFirstLayout ? styles.imageFirstMediaAttachment
-      : hasSuggestedMedia ? styles.mediaAttachmentWithSuggestedMedia : '';
+    const mediaAttachmentClassName = usesImageFirstLayout
+      ? styles.imageFirstMediaAttachment
+      : hasSuggestedMedia
+      ? styles.mediaAttachmentWithSuggestedMedia
+      : '';
 
-    const composerFooterClassName = usesImageFirstLayout ? styles.imageFirstFooter : styles.composerFooter;
+    const composerFooterClassName = usesImageFirstLayout
+      ? styles.imageFirstFooter
+      : styles.composerFooter;
 
     const selectedProfiles = this.getSelectedProfilesForService();
     const numSelectedProfiles = selectedProfiles.length;
@@ -820,12 +934,13 @@ class Composer extends React.Component {
       draft.instagramFeedback.length === 1 &&
       draft.instagramFeedback.some(feedback => feedback.code === 'NOT_ENABLED');
 
-    const canAddUserTag = hasAccessToUserTag // on the user level including feature flip
-      && this.isInstagram()
-      && selectedProfiles.some(profile => profile.instagramDirectEnabled)
+    const canAddUserTag =
+      hasAccessToUserTag && // on the user level including feature flip
+      this.isInstagram() &&
+      selectedProfiles.some(profile => profile.instagramDirectEnabled) &&
       /* don't allow user to add tag if post is a reminder though its ok if more than one
       ig profile is selected and one doesnt have direct scheduling enabled */
-      && (draft.instagramFeedback.length < 1 || feedbackNotEnabled);
+      (draft.instagramFeedback.length < 1 || feedbackNotEnabled);
 
     const composerMediaAttachment = (
       <MediaAttachment
@@ -880,12 +995,10 @@ class Composer extends React.Component {
       />
     );
 
-    const shouldShowMediaAttachment = this.isExpanded() && this.isMediaAttachmentEnabled();
-    const shouldShowSuggestedMediaBox = (
-      this.isExpanded()
-      && this.isMediaAttachmentEnabled()
-      && hasSuggestedMedia
-    );
+    const shouldShowMediaAttachment =
+      this.isExpanded() && this.isMediaAttachmentEnabled();
+    const shouldShowSuggestedMediaBox =
+      this.isExpanded() && this.isMediaAttachmentEnabled() && hasSuggestedMedia;
 
     const networkIconTooltipContent = this.getSelectedProfilesTooltipMarkup();
 
@@ -893,20 +1006,21 @@ class Composer extends React.Component {
     const locationName = draft.locationName !== null ? draft.locationName : '';
 
     const socialNetworkIconClassName = [
-      isLocked ? styles.lockedNetworkIcon
-        : styles[`${draft.service.name}Icon`],
+      isLocked ? styles.lockedNetworkIcon : styles[`${draft.service.name}Icon`],
       numSelectedProfiles > 1 ? styles.iconWithProfileCount : '',
       `bi bi-circle-${draft.service.name}`,
     ].join(' ');
 
+    const shouldDisplayCharCountAboveAttachment =
+      shouldShowSuggestedMediaBox ||
+      (this.isLinkAttachmentEnabled() && this.hasLinkAttachment()) ||
+      (this.isRetweetAttachmentEnabled() && this.hasRetweetAttachment());
 
-    const shouldDisplayCharCountAboveAttachment = shouldShowSuggestedMediaBox
-      || (this.isLinkAttachmentEnabled() && this.hasLinkAttachment())
-      || (this.isRetweetAttachmentEnabled() && this.hasRetweetAttachment());
-
-    const characterCountClassName = shouldDisplayCharCountAboveAttachment ? styles.aboveAttachmentCharCount
-      : !shouldShowMediaAttachment ? styles.charCountNoMediaAttachment
-        : styles.characterCountWrapper;
+    const characterCountClassName = shouldDisplayCharCountAboveAttachment
+      ? styles.aboveAttachmentCharCount
+      : !shouldShowMediaAttachment
+      ? styles.charCountNoMediaAttachment
+      : styles.characterCountWrapper;
 
     return (
       <div className={composerClassName} onClick={this.onComposerClick}>
@@ -917,102 +1031,98 @@ class Composer extends React.Component {
           data-tip={networkIconTooltipContent}
           data-html
         />
-        <div tabIndex="0" className={styles.hiddenA11yText} aria-label={composerHiddenTitle} />
+        <div
+          tabIndex="0"
+          className={styles.hiddenA11yText}
+          aria-label={composerHiddenTitle}
+        />
 
         <div onClick={this.onUpdateZoneClick} className={updateZoneClassName}>
-          {savedComposer && !areAllDraftsSaved
-          && (
-          <div className={savedComposerFeedbackClassNames}>
-            {addedToQueueCopyMap.get(appState.draftSaveQueueingType)}
-          </div>
-          )}
-          {shouldShowOmniboxNotices
-          && (
-          <div
-            data-tip={this.getOmniboxNoticeTooltipMarkup()}
-            data-html
-            className={[
-              'bi bi-notification',
-              styles.noticeIcon,
-            ].join(' ')}
-            ref={(node) => { this.noticeTooltip = node; }}
-          >
-            <Button
-              onClick={this.removeNotice}
-              className={[
-                'bi bi-notification-close',
-                styles.removeNoticeIcon,
-              ].join(' ')}
-            />
-          </div>
-          )
-          }
-          {shouldShowAlertIcons && !this.isExpanded()
-          && (
-          <div
-            data-tip={this.getAlertIconTooltipMarkup()}
-            data-html
-            className={[
-              'bi bi-warning',
-              styles.alertIcon,
-            ].join(' ')}
-          />
-          )
-          }
-
-          {shouldShowComposerFeedbackMessages
-          && composerFeedbackMessages.map(what => (
-            <div className={styles.composerFeedbackMessage} key={`${draft.id}-${what.message}`}>
-              {what.message}
-              {what.extra && what.extra}
+          {savedComposer && !areAllDraftsSaved && (
+            <div className={savedComposerFeedbackClassNames}>
+              {addedToQueueCopyMap.get(appState.draftSaveQueueingType)}
             </div>
-          ))}
-
-          {shouldShowComposerNotPrefilledNotice
-          && (
-          <NotificationContainer
-            visibleNotifications={visibleNotifications}
-            scope={composerNotPrefilledNoticeScope}
-            classNames={noticeClassNames}
-            showCloseIcon
-          />
+          )}
+          {shouldShowOmniboxNotices && (
+            <div
+              data-tip={this.getOmniboxNoticeTooltipMarkup()}
+              data-html
+              className={['bi bi-notification', styles.noticeIcon].join(' ')}
+              ref={node => {
+                this.noticeTooltip = node;
+              }}
+            >
+              <Button
+                onClick={this.removeNotice}
+                className={[
+                  'bi bi-notification-close',
+                  styles.removeNoticeIcon,
+                ].join(' ')}
+              />
+            </div>
+          )}
+          {shouldShowAlertIcons && !this.isExpanded() && (
+            <div
+              data-tip={this.getAlertIconTooltipMarkup()}
+              data-html
+              className={['bi bi-warning', styles.alertIcon].join(' ')}
+            />
           )}
 
-          {shouldShowTwitterDuplicateContentWarningNotice
-          && (
-          <NotificationContainer
-            visibleNotifications={visibleNotifications}
-            scope={NotificationScopes.TWITTER_DUPLICATE_CONTENT_WARNING}
-            classNames={noticeClassNames}
-            showCloseIcon
-          />
+          {shouldShowComposerFeedbackMessages &&
+            composerFeedbackMessages.map(what => (
+              <div
+                className={styles.composerFeedbackMessage}
+                key={`${draft.id}-${what.message}`}
+              >
+                {what.message}
+                {what.extra && what.extra}
+              </div>
+            ))}
+
+          {shouldShowComposerNotPrefilledNotice && (
+            <NotificationContainer
+              visibleNotifications={visibleNotifications}
+              scope={composerNotPrefilledNoticeScope}
+              classNames={noticeClassNames}
+              showCloseIcon
+            />
           )}
 
-          {showComposerFbAutocompleteDisabledNotice
-          && (
-          <NotificationContainer
-            visibleNotifications={visibleNotifications}
-            scope={NotificationScopes.COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED}
-            classNames={noticeClassNames}
-            showCloseIcon
-          />
+          {shouldShowTwitterDuplicateContentWarningNotice && (
+            <NotificationContainer
+              visibleNotifications={visibleNotifications}
+              scope={NotificationScopes.TWITTER_DUPLICATE_CONTENT_WARNING}
+              classNames={noticeClassNames}
+              showCloseIcon
+            />
+          )}
+
+          {showComposerFbAutocompleteDisabledNotice && (
+            <NotificationContainer
+              visibleNotifications={visibleNotifications}
+              scope={NotificationScopes.COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED}
+              classNames={noticeClassNames}
+              showCloseIcon
+            />
           )}
 
           {!usesImageFirstLayout && (
             <div className={styles.editorMediaContainer}>
               {composerEditor}
 
-              {this.renderCharacterCount(draft, characterCountClassName, shouldShowCharacterCount)}
+              {this.renderCharacterCount(
+                draft,
+                characterCountClassName,
+                shouldShowCharacterCount
+              )}
 
-              {shouldShowMediaAttachment
-              && (
-              <div className={styles.mediaWrapper}>
-                {composerMediaAttachment}
-                {shouldDisplayEditThumbnailBtn
-                && instagramThumbnailButton
-                }
-                {shouldShowSuggestedMediaBox && composerSuggestedMediaBox}
-              </div>
+              {shouldShowMediaAttachment && (
+                <div className={styles.mediaWrapper}>
+                  {composerMediaAttachment}
+                  {shouldDisplayEditThumbnailBtn && instagramThumbnailButton}
+                  {shouldShowSuggestedMediaBox && composerSuggestedMediaBox}
+                </div>
               )}
             </div>
           )}
@@ -1024,30 +1134,34 @@ class Composer extends React.Component {
                 {composerEditor}
               </div>
 
-              {this.renderCharacterCount(draft, styles.imageFirstCharacterCount, shouldShowCharacterCount)}
+              {this.renderCharacterCount(
+                draft,
+                styles.imageFirstCharacterCount,
+                shouldShowCharacterCount
+              )}
 
-              {shouldDisplayEditThumbnailBtn
-              && instagramThumbnailButton
-              }
+              {shouldDisplayEditThumbnailBtn && instagramThumbnailButton}
               {shouldShowSuggestedMediaBox && composerSuggestedMediaBox}
             </div>
           )}
 
-          {this.isExpanded() && this.isLinkAttachmentEnabled() && this.hasLinkAttachment()
-          && (
-          <LinkAttachment
-            link={draft.link}
-            draftId={draft.id}
-            service={draft.service}
-            visibleNotifications={this.props.visibleNotifications}
-            filesUploadProgress={draft.filesUploadProgress}
-            appState={appState}
-            selectedProfiles={selectedProfiles}
-          />
-          )}
+          {this.isExpanded() &&
+            this.isLinkAttachmentEnabled() &&
+            this.hasLinkAttachment() && (
+              <LinkAttachment
+                link={draft.link}
+                draftId={draft.id}
+                service={draft.service}
+                visibleNotifications={this.props.visibleNotifications}
+                filesUploadProgress={draft.filesUploadProgress}
+                appState={appState}
+                selectedProfiles={selectedProfiles}
+              />
+            )}
 
-          {this.isExpanded() && shouldShowRetweetAttachment
-          && <RetweetAttachment retweet={draft.retweet} draftId={draft.id} />}
+          {this.isExpanded() && shouldShowRetweetAttachment && (
+            <RetweetAttachment retweet={draft.retweet} draftId={draft.id} />
+          )}
 
           {this.isExpanded() && (
             <div className={composerFooterClassName}>
@@ -1086,16 +1200,31 @@ class Composer extends React.Component {
                 profiles={profiles}
                 draftId={draft.id}
                 sourceUrl={sourceUrl}
-                shouldShowInlineSubprofileDropdown={shouldShowInlineSubprofileDropdown}
+                shouldShowInlineSubprofileDropdown={
+                  shouldShowInlineSubprofileDropdown
+                }
                 visibleNotifications={visibleNotifications}
               />
+
+              {shouldDisplayFirstCommentSection() && (
+                <FirstCommentComposerBar
+                  draft={draft}
+                  onToggleSidebarVisibility={this.onToggleSidebarVisibility}
+                  onCommentChange={this.onCommentChange}
+                  onCommentClick={e =>
+                    this.onCommentClick(e, userHasBusinessOrProPlan)
+                  }
+                  shouldDisplayProTag={!userHasBusinessOrProPlan}
+                  shouldDisplayHashtagManager={hasAccessToHashtagManager}
+                  shouldShowCommentCharacterCount={shouldShowCommentCharacterCount}
+                />
+              )}
 
               <ShopgridComposerBar
                 isInstagram={this.isInstagram()}
                 selectedInstagramProfiles={this.getSelectedInstagramProfiles()}
                 hasShopgridFlip={hasShopgridFlip}
                 isBusinessUser={this.props.isBusinessUser}
-
                 draft={draft}
                 draftId={draft.id}
                 shopgridLink={draft.shopgridLink}
@@ -1103,13 +1232,11 @@ class Composer extends React.Component {
 
               <LocationComposerBar
                 withMediaAttachment={!usesImageFirstLayout}
-
                 selectedProfiles={selectedProfiles}
                 isInstagram={this.isInstagram()}
                 hasIGLocationTaggingFeature={hasIGLocationTaggingFeature}
                 hasIGDirectVideoFlip={hasIGDirectVideoFlip}
                 hasVideo={this.hasVideo()}
-
                 draftId={draft.id}
                 locationName={locationName}
                 instagramProfileId={this.getSelectedInstagramProfileId()}
@@ -1119,16 +1246,16 @@ class Composer extends React.Component {
             </div>
           )}
 
-          {shouldShowInstagramFeedback && this.isExpanded()
-          && <InstagramFeedback feedback={draft.instagramFeedback} />}
+          {shouldShowInstagramFeedback && this.isExpanded() && (
+            <InstagramFeedback feedback={draft.instagramFeedback} />
+          )}
 
-          {this.hasAttachment() && !this.isExpanded()
-          && (
-          <AttachmentGlance
-            draft={draft}
-            attachmentType={this.props.draft.enabledAttachmentType}
-            attachmentThumbnails={this.getAttachmentThumbnails()}
-          />
+          {this.hasAttachment() && !this.isExpanded() && (
+            <AttachmentGlance
+              draft={draft}
+              attachmentType={this.props.draft.enabledAttachmentType}
+              attachmentThumbnails={this.getAttachmentThumbnails()}
+            />
           )}
 
           <NotificationContainer
@@ -1145,100 +1272,6 @@ class Composer extends React.Component {
 
           {children}
         </div>
-
-        {shouldDisplayFirstCommentSection(draft.commentEnabled)
-        && (
-        <div>
-          <div className={styles.toggleCommentContainer}>
-            {shouldDisplayProTag
-              && (
-              <div className={styles.proTagWrapper}>
-                <ProTag />
-              </div>
-              )
-            }
-            <div className={styles.toggleWrapper}>
-              <div className={styles.togglePosition}>
-                <Toggle
-                  disabled={false}
-                  onText=""
-                  offText=""
-                  on={draft.commentEnabled}
-                  size="small"
-                  onClick={e => this.onToggleComment(
-                    e, !draft.commentEnabled, userHasBusinessOrProPlan,
-                  )}
-                />
-              </div>
-              <div
-                className={styles.toggleTextWrapper}
-                onClick={this.onCommentClick}
-                role="button"
-                tabIndex={0}
-              >
-                <Text weight="medium" color="black" size="small">
-                  Include a comment with this post
-                </Text>
-              </div>
-              <div
-                className={styles.questionIcon}
-                onClick={this.onCommentClick}
-                role="button"
-                tabIndex={0}
-              >
-                <Tooltip
-                  label="Enabling this option will allow you to include a comment for your post!"
-                  position="right"
-                >
-                  <InfoIcon size="medium" />
-                </Tooltip>
-              </div>
-            </div>
-            {shouldShowCommentCharacterCount
-            && (
-            <CharacterCount
-              count={draft.characterCommentCount}
-              maxCount={draft.service.commentCharLimit}
-              className={styles.characterCountComment}
-            />
-            )
-            }
-          </div>
-          {
-            draft.commentEnabled
-            && (
-            <div className={styles.firstCommentWrapper}>
-              {hasHashtagGroupsFlip
-                && (
-                <div
-                  className={styles.hashtagIcon}
-                  onClick={e => this.onToggleSidebarVisibility(e, !draft.composerSidebarVisible)}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <Tooltip label="Hashtag Manager" position="top">
-                    <HashtagIcon size="medium" color="#B8B8B8" />
-                  </Tooltip>
-                </div>
-                )
-              }
-              <Textarea
-                minRows={4}
-                className={[
-                  styles.expandedFirstComment,
-                  hasHashtagGroupsFlip ? styles.firstCommentWithIcon : '',
-                ].join(' ')}
-                placeholder="Your comment"
-                value={draft.commentText}
-                onChange={this.onCommentChange}
-                onClick={this.onCommentClick}
-              />
-            </div>
-            )
-          }
-        </div>
-        )
-        }
       </div>
     );
   }

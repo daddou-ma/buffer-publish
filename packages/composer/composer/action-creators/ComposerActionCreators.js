@@ -154,21 +154,6 @@ const ComposerActionCreators = {
     // AppActionCreators.trackUserAction(['composer', 'toggle_hashtag_group', toggleAction]);
   },
 
-  updateToggleComment: (id, commentEnabled) => {
-    AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_UPDATE_TOGGLE_COMMENT,
-      id,
-      commentEnabled,
-    });
-
-    const toggleAction = commentEnabled ? 'enabled' : 'disabled';
-    AppActionCreators.trackUserAction([
-      'composer',
-      'toggle_comment',
-      toggleAction,
-    ]);
-  },
-
   parseDraftTextLinks: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_PARSE_DRAFT_TEXT_LINKS,
