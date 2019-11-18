@@ -93,6 +93,5 @@ module.exports = userData => ({
   isBusinessTeamMember: userData.is_business_team_member,
   isOnAwesomePlan: userData.plan === 'awesome',
   hasAccessToUserTag: userData.is_pro_and_up_org_user, // this includes team members
-  hasAccessToHashtagManager: userData.is_premium_or_business_org_user,
   isAnalyzeCustomer: userData.is_analyze_customer,
 });
