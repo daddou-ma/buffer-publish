@@ -5,10 +5,10 @@ import {
 } from '../../utils/profile-filtering';
 
 const mockProfiles = [
-  { service: { name: 'instagram' }, isManager: true },
+  { service: { name: 'instagram' }, isManager: true, isBusinessProfile: true },
   { service: { name: 'instagram' } },
   { service: { name: 'twitter' } },
-  { service: { name: 'facebook' }, isManager: true },
+  { service: { name: 'facebook' }, isManager: true, isBusinessProfile: true },
 ];
 
 describe('Profile Filtering', () => {

@@ -35,6 +35,7 @@ import {
 import InstagramFeedback from './InstagramFeedback';
 import InstagramThumbnailButton from './InstagramThumbnailButton';
 import { isIE } from '../utils/DOMUtils';
+import { isManagerOrContributorForAnyProfile } from '../utils/profile-filtering';
 
 import styles from './css/Composer.css';
 
@@ -839,10 +840,10 @@ class Composer extends React.Component {
     const showComposerFbAutocompleteDisabledNotice =
       this.isExpanded() && hasComposerFbAutocompleteDisabledNotice;
 
-    const { isFreeUser, selectedProfiles } = this.props;
+    const { isFreeUser } = this.props;
     const profileIsBusiness = isManagerOrContributorForAnyProfile(
       {
-        profiles: selectedProfiles,
+        profiles: this.props.selectedProfiles,
         service: 'instagram',
       }
     );
@@ -870,8 +871,8 @@ class Composer extends React.Component {
     };
 
     const shouldDisplayFirstCommentSection = () => {
-      const { selectedProfiles, canStartProTrial } = this.props;
-      const hasSelectedSomeInstagramDirectProfiles = selectedProfiles.some(
+      const { selectedProfiles: allSelectedProfiles, canStartProTrial } = this.props;
+      const hasSelectedSomeInstagramDirectProfiles = allSelectedProfiles.some(
         profile => profile.instagramDirectEnabled
       );
       return (

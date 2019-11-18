@@ -20,13 +20,18 @@ export const getProfilesByService = ({ profiles, service }) =>
 export const getProfilesWhereUserHasRole = ({ profiles, role, service }) => {
   const filteredProfiles = getProfilesByService({ profiles, service });
   if (role === 'contributor') {
-    return filteredProfiles.filter(profile => profile.isContributor);
+    return filteredProfiles.filter(
+      profile => profile.isContributor && profile.isBusinessProfile
+    );
   }
   if (role === 'manager') {
-    return filteredProfiles.filter(profile => profile.isManager);
+    return filteredProfiles.filter(
+      profile => profile.isManager && profile.isBusinessProfile
+    );
   }
   return filteredProfiles.filter(
-    profile => profile.isContributor || profile.isManager
+    profile =>
+      profile.isBusinessProfile && (profile.isContributor || profile.isManager)
   );
 };
 
