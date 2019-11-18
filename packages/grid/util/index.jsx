@@ -12,3 +12,9 @@ export const isValidURL = (str) => {
 };
 
 export const urlHasProtocol = url => ((url.indexOf('https://') !== -1) || (url.indexOf('http://') !== -1));
+
+export const getChannelProperties = channel => ({
+  channelId: channel.id,
+  channelServiceId: channel.serviceId,
+  channelUsername: channel.serviceUsername,
+});

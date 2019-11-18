@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 
 import { actions } from './reducer';
@@ -70,7 +70,6 @@ export default connect(
       const videoCount = stories.filter(story => story.type === 'video').length;
       const noteCount = stories.filter(story => story.note && story.note.length > 0).length;
       const metadata = {
-        clientName: CLIENT_NAME,
         storyGroupId: id,
         channel: 'instagram',
         channelId: profileId,

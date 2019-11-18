@@ -15,6 +15,7 @@ export default store => next => (action) => {
           action.eventName,
           Object.assign({
             product: window.PRODUCT_TRACKING_KEY,
+            clientName: window.CLIENT_NAME,
           }, action.payload));
       }
       break;

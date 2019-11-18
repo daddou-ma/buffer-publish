@@ -75,9 +75,9 @@ const copyLinkStyle = {
   marginLeft: 'auto',
 };
 
-const onCopyToClipboard = (text, handleCopyToClipboard) => {
+const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
   const el = document.createElement('textarea');
-  el.value = text;
+  el.value = publicGridUrl;
   el.setAttribute('readonly', '');
   el.style.position = 'absolute';
   el.style.left = '-9999px';
@@ -86,9 +86,9 @@ const onCopyToClipboard = (text, handleCopyToClipboard) => {
   const copied = document.execCommand('copy');
   document.body.removeChild(el);
   if (copied) {
-    handleCopyToClipboard(true);
+    handleCopyToClipboard({ copySuccess: true, publicGridUrl });
   } else {
-    handleCopyToClipboard(false);
+    handleCopyToClipboard({ copySuccess: false });
   }
 };
 
@@ -105,6 +105,7 @@ const GridPosts = ({
   onImageClose,
   onChangePostUrl,
   onSavePostUrl,
+  trackPagePreviewed,
   isManager,
   isLockedProfile,
   isBusinessAccount,
@@ -163,11 +164,12 @@ const GridPosts = ({
             <div style={linkFieldStyle}>
               <button
                 style={copyLinkButtonStyle}
+                type="button"
                 onClick={() => {
-                  onCopyToClipboard(
+                  onCopyToClipboard({
                     publicGridUrl,
                     handleCopyToClipboard,
-                  );
+                  });
                 }}
               >
                 {publicGridUrl}
@@ -188,10 +190,11 @@ const GridPosts = ({
               </button>
             </div>
             <Button
-              label={'Preview Page'}
+              label="Preview Page"
               type="secondary"
               onClick={() => {
                 onPreviewClick(publicGridUrl);
+                trackPagePreviewed(profile);
               }}
             />
           </div>
@@ -227,6 +230,7 @@ GridPosts.propTypes = {
   onImageClick: PropTypes.func,
   onImageClose: PropTypes.func,
   handleCopyToClipboard: PropTypes.func,
+  trackPagePreviewed: PropTypes.func.isRequired,
   features: PropTypes.object.isRequired, // eslint-disable-line
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
