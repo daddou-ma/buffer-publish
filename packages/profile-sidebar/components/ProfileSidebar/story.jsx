@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
-import createStore from '@bufferapp/publish-store';
+import store from '@bufferapp/publish-store';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import ProfileSidebar from './index';
@@ -12,7 +12,6 @@ import { profiles } from '../../mockData/profiles';
 const lotsOfProfiles = () =>
   [...Array(10)].reduce(p => [...p, ...profiles], []);
 
-const store = createStore();
 const translations = {
   connectButton: 'Manage Social Accounts',
 };
