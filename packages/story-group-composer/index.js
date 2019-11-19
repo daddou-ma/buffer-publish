@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import uuid from 'uuid/v4';
 import { getCounts } from './utils/Tracking';
@@ -71,7 +71,6 @@ export default connect(
       const counts = getCounts(stories);
 
       const metadata = {
-        clientName: CLIENT_NAME,
         storyGroupId: id,
         channel: 'instagram',
         channelId: profileId,

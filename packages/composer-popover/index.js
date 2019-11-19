@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Popover } from '@bufferapp/components';
+import { hot } from 'react-hot-loader/root';
 import ComposerWrapper from './components/ComposerWrapper';
 
 const onOverlayClick = (onSave, onComposerOverlayClick, editMode) => {
@@ -48,4 +49,4 @@ ComposerPopover.defaultProps = {
   type: 'queue',
 };
 
-export default ComposerPopover;
+export default hot(ComposerPopover);

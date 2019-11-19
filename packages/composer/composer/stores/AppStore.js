@@ -160,7 +160,6 @@ const getNewUserData = (data) => ({
   canStartProTrial: data.canStartProTrial,
   isOnProTrial: data.isOnProTrial,
   hasShopgridFlip: data.hasShopgridFlip,
-  hasHashtagGroupsFlip: data.hasHashtagGroupsFlip,
   hasAccessToUserTag: data.hasAccessToUserTag,
 });
 
@@ -1171,7 +1170,6 @@ const onDispatchedPayload = (payload) => {
     case ActionTypes.COMPOSER_DRAFT_ATTACHMENT_TOGGLED:
     case ActionTypes.COMPOSER_UPDATE_DRAFT_CHARACTER_COUNT:
     case ActionTypes.COMPOSER_UPDATE_DRAFT_COMMENT_CHARACTER_COUNT:
-    case ActionTypes.COMPOSER_UPDATE_TOGGLE_COMMENT:
     case ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK:
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_SOURCE_LINK:
     case ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK_DATA:

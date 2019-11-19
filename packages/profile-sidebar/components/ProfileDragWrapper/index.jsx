@@ -88,6 +88,7 @@ const ProfileDragWrapper = React.forwardRef(
         ref={elementRef}
         draggable
         tabIndex={0}
+        style={{ outline: 'none' }}
       >
         <ProfileListItem {...profileProps} />
       </div>

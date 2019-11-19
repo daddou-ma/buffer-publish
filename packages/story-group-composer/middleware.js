@@ -7,7 +7,7 @@ import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as storiesActions, actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
 import { actions as remindersActions, actionTypes as remindersActionTypes } from '@bufferapp/publish-past-reminders/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { SEGMENT_NAMES, CLIENT_NAME } from '@bufferapp/publish-constants';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { dragged, nonConfirmingImageUploaded } from '@bufferapp/publish-analytics-middleware/transformers/publish/story';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import { formatShareDate } from '@bufferapp/publish-composer/composer/utils/TrackingUtils';
@@ -219,7 +219,6 @@ export default ({ getState, dispatch }) => next => (action) => {
             channel: currentProfile.service,
             channelId: currentProfile.id,
             channelServiceId: currentProfile.serviceId,
-            clientName: CLIENT_NAME,
           });
           dispatch(analyticsActions.trackEvent('Story Dragged', metadata));
         }
@@ -243,7 +242,6 @@ export default ({ getState, dispatch }) => next => (action) => {
             channel: currentProfile.service,
             channelId: currentProfile.id,
             channelServiceId: currentProfile.serviceId,
-            clientName: CLIENT_NAME,
             scheduledAt: formatShareDate(scheduledAt),
             imageAspectRatio,
             ...ctaProperties,

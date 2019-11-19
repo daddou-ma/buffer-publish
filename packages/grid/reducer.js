@@ -195,8 +195,9 @@ export const actions = {
     profileId,
     link,
   }),
-  handleCopyToClipboardResult: ({ copySuccess }) => ({
+  handleCopyToClipboardResult: ({ copySuccess, publicGridUrl }) => ({
     type: actionTypes.COPY_TO_CLIPBOARD_RESULT,
     copySuccess,
+    publicGridUrl,
   }),
 };

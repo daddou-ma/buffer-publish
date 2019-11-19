@@ -2,12 +2,24 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getProfilePageParams } from '@bufferapp/publish-routes';
 
-function RouteMonitor({ pathname, appCues, intercom, helpScoutBeacon }) {
+function RouteMonitor({
+  pathname,
+  appCues,
+  intercom,
+  helpScoutBeacon,
+  modalsShowing,
+  userId,
+}) {
+  if (appCues && appCues.loaded && window && window.Appcues && userId) {
+    window.Appcues.identify(userId, {
+      modalsShowing,
+    });
+  }
   useEffect(() => {
     // Appcues triggers the display of content on page load.
     // Calling the Appcues.page() method will notify Appcues that
     // the page has changed and it should check again for content.
-    if (appCues && appCues.loaded && window.Appcues) {
+    if (appCues && appCues.loaded && window && window.Appcues) {
       window.Appcues.page();
 
       const profilePageParams = getProfilePageParams({ path: pathname });
@@ -21,12 +33,12 @@ function RouteMonitor({ pathname, appCues, intercom, helpScoutBeacon }) {
     }
 
     // Let Intercom know when we've changed pages
-    if (intercom && intercom.loaded && window.Intercom) {
+    if (intercom && intercom.loaded && window && window.Intercom) {
       window.Intercom('update');
     }
 
     // Let HelpScout Beacon know when we've changed pages
-    if (helpScoutBeacon && helpScoutBeacon.loaded && window.Beacon) {
+    if (helpScoutBeacon && helpScoutBeacon.loaded && window && window.Beacon) {
       window.Beacon('suggest');
     }
 
@@ -46,6 +58,8 @@ RouteMonitor.propTypes = {
   helpScoutBeacon: PropTypes.shape({
     loaded: PropTypes.bool,
   }),
+  modalsShowing: PropTypes.bool,
+  userId: PropTypes.string,
 };
 
 RouteMonitor.defaultProps = {
@@ -60,6 +74,8 @@ RouteMonitor.defaultProps = {
   helpScoutBeacon: {
     loaded: false,
   },
+  modalsShowing: false,
+  userId: '',
 };
 
 export default RouteMonitor;

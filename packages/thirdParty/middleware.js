@@ -91,7 +91,15 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     case actionTypes.APPCUES:
       if (window) {
-        if (window.Appcues) {
+        if (!window.Appcues) {
+          const appcuesJS = document.querySelector('#appcues-js');
+          if (appcuesJS !== null) {
+            appcuesJS.addEventListener('load', () => {
+              // re-dispatch this event if appcues isn't yet loaded
+              dispatch(action);
+            });
+          }
+        } else if (window.Appcues) {
           const {
             id,
             createdAt,

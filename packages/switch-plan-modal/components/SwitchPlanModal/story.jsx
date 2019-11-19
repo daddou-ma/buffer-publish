@@ -2,14 +2,12 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
-import { createHashHistory as createHistory } from 'history';
 
 import { Provider } from 'react-redux';
-import { ConnectedRouter as Router } from 'connected-react-router';
-
 import SwitchPlanModal from './index';
 
-const history = createHistory();
+const getFakeEventListener = () => ({ addEventListener: () => true });
+Object.defineProperty(global.document, 'querySelector', { value: getFakeEventListener });
 
 const storeFake = state => ({
   default: () => {},

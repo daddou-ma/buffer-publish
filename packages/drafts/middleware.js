@@ -97,11 +97,12 @@ export default ({ dispatch, getState }) => next => (action) => {
       const draft = action.result ? action.result.draft : {};
       /* this is also called when a draft in approval is moved back into drafts, which
        is why we need to check the needs_approval bool */
-      if (draft.needs_approval) {
-        const channel = state.profileSidebar.selectedProfile;
-        const metadata = getTrackingData({ post: draft, channel });
-        dispatch(analyticsActions.trackEvent('Draft Submitted', metadata));
-      }
+      const channel = state.profileSidebar.selectedProfile;
+      const metadata = getTrackingData({ post: draft, channel });
+      const eventName = draft.needs_approval
+        ? 'Draft Submitted'
+        : 'Draft Rejected';
+      dispatch(analyticsActions.trackEvent(eventName, metadata));
       break;
     }
     case `approveDraft_${dataFetchActionTypes.FETCH_FAIL}`:
