@@ -5,14 +5,20 @@ const PostCSSCustomProperties = require('postcss-custom-properties');
 const PostCSSCalc = require('postcss-calc');
 const PostCSSColorFunction = require('postcss-color-function');
 
-const vendor = ['react', 'react-dom', '@bufferapp/components'];
-const { analyzePackagesWhitelist, analyzeLessLoader } = require('../../analyze.config.js');
+const {
+  // analyzePackagesWhitelist,
+  analyzeLessLoader,
+} = require('../../analyze.config.js');
 
 module.exports = {
   context: __dirname,
   entry: {
-    bundle: ['core-js/stable','regenerator-runtime/runtime', '../web/index.jsx'],
-    vendor,
+    bundle: [
+      'core-js/stable',
+      'regenerator-runtime/runtime',
+      '../web/index.jsx',
+    ],
+    // vendor,
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
@@ -21,7 +27,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: new RegExp(`/node_modules(?!/@bufferapp/performance-tracking)(?!/@bufferapp/async-data-fetch)(?!/@bufferapp/components)(?!/@bufferapp/web-components)(?!/@bufferapp/publish-composer)(?!/@bufferapp/unauthorized-redirect)${analyzePackagesWhitelist}/`),
+        exclude: /node_modules(?!\/@bufferapp\/*)/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -48,10 +54,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[name].css',
-    }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.LoaderOptionsPlugin({
       options: {
@@ -75,7 +77,7 @@ module.exports = {
         vendor: {
           chunks: 'all',
           name: 'vendor',
-          test: 'vendor',
+          test: /[\\/]node_modules[\\/]/,
         },
       },
     },
@@ -83,7 +85,7 @@ module.exports = {
   output: {
     path: __dirname,
     filename: '[name].js',
-    chunkFilename: '[name].js',
+    sourceMapFilename: '[file].map',
   },
   stats: {
     children: false, // Disable logging from child plugins
