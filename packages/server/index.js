@@ -138,7 +138,7 @@ const stripeScript = `
   </script>
 `;
 
-const appcuesScript = '<script src="//fast.appcues.com/49463.js"></script>';
+const appcuesScript = '<script id="appcues-js" src="//fast.appcues.com/49463.js" async></script>';
 
 const fullStoryScript = `<script>
 window['_fs_debug'] = false;
