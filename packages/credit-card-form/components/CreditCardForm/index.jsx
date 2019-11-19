@@ -9,7 +9,6 @@ import CreditCardForm from './form';
 const LoaderWrapper = styled.div`
   display: flex;
   justify-content: center;
-  vertical-align: center;
 `;
 
 class StripeWrapper extends Component {
