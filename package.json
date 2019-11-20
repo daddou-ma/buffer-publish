@@ -15,7 +15,7 @@
     "storybook": "start-storybook -p 9001",
     "watch": "webpack-dev-server --config ./packages/server/webpack.config.dev.js --colors --display-error-details --progress",
     "build": "webpack --config ./packages/server/webpack.config.prod.js --output-path=`pwd`",
-    "build:analyze": "ANALYZE_BUNDLE=true webpack --config ./packages/server/webpack.config.prod.js --output-path=dist",
+    "build:analyze": "ANALYZE_BUNDLE=true webpack --config ./packages/server/webpack.config.prod.js --output-path=dist --progress",
     "bugsnag:release": "node ./packages/server/scripts/bugsnag-release.js",
     "rebuild-grpc": "docker exec -it bufferdev_publish_1 sh -c 'cd /usr/src/app && npm rebuild grpc --target_arch=x64 --target_platform=linux --target_libc=musl --update-binary --verbose'"
   },
