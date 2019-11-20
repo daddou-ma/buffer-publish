@@ -74,7 +74,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: false,
+        vendors: false, // Disable the default vendors cache group for finer control
         vendor: {
           chunks: 'initial',
           name: 'vendor',

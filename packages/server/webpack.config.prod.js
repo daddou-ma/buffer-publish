@@ -11,15 +11,18 @@ const plugins = [
   }),
 ];
 
+let devtool = 'source-map';
+
 // `yarn run build:analyze` to visually inspect the bundle
 // when building locally
 if (process.env.ANALYZE_BUNDLE) {
   plugins.push(new BundleAnalyzerPlugin());
+  devtool = false;
 }
 
 const merged = merge(common, {
   mode: 'production',
-  devtool: 'source-map',
+  devtool,
   optimization: {
     nodeEnv: 'production',
   },
