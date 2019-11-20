@@ -18,7 +18,7 @@ import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import AppSwitcher from '@bufferapp/publish-app-switcher';
-import EnsurePublishBetaUser from '@bufferapp/publish-beta-redirect';
+import InitialLoading from '@bufferapp/publish-initial-loading';
 import AppModals from '@bufferapp/publish-modals';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
@@ -52,7 +52,7 @@ class App extends Component { // eslint-disable-line
           <div style={contentStyle}>
             <CTABanner />
             <TemporaryBanner />
-            <EnsurePublishBetaUser>
+            <InitialLoading>
               <Switch>
                 <Route
                   path={preferencePageRoute}
@@ -79,7 +79,7 @@ class App extends Component { // eslint-disable-line
                   component={OnboardingManager}
                 />
               </Switch>
-            </EnsurePublishBetaUser>
+            </InitialLoading>
           </div>
         </AppShell>
 
