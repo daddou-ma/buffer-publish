@@ -22,10 +22,12 @@ const ComposerPopover = ({
   editMode,
 }) => (
   <Popover
-    width={'100%'}
-    top={'5rem'}
+    width="100%"
+    top="5rem"
     transparentOverlay={transparentOverlay}
-    onOverlayClick={() => onOverlayClick(onSave, onComposerOverlayClick, editMode)}
+    onOverlayClick={() =>
+      onOverlayClick(onSave, onComposerOverlayClick, editMode)
+    }
   >
     <ComposerWrapper
       type={type}
@@ -41,12 +43,14 @@ ComposerPopover.propTypes = {
   transparentOverlay: PropTypes.bool,
   preserveComposerStateOnClose: PropTypes.bool,
   type: PropTypes.oneOf(['queue', 'drafts', 'sent', 'pastReminders']),
+  editMode: PropTypes.bool,
 };
 
 ComposerPopover.defaultProps = {
   transparentOverlay: false,
   preserveComposerStateOnClose: false,
   type: 'queue',
+  editMode: false,
 };
 
 export default hot(ComposerPopover);
