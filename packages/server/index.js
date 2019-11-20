@@ -194,14 +194,11 @@ const iterateScript = `<script>
   </script>`;
 
 const getUserData = ({ userData }) => {
-  const bufferUser =
-    typeof userData === 'undefined'
-      ? ''
-      : `<script>try { window.bufferUser = ${JSON.stringify(
-          userData
-        )}; } catch(e) {}</script>`;
+  if (typeof userData === 'undefined') {
+    return '';
+  }
 
-  return bufferUser;
+  return `<script>try { window.bufferUser = ${JSON.stringify(userData)}; } catch(e) {}</script>`;
 };
 
 const getFullstory = ({ includeFullstory }) => {
@@ -212,6 +209,9 @@ const getFullstory = ({ includeFullstory }) => {
 const getBugsnag = ({ userId }) => {
   return isProduction ? getBugsnagScript(userId) : '';
 };
+
+// We are hard coding the planCode check to 1 for free users, but if we need more we should import constants instead
+const canIncludeFullstory = user => (user ? user.planCode !== 1 : true);
 
 const getHtml = ({
   notification,
@@ -344,7 +344,7 @@ app.get('*', (req, res) => {
           modalKey,
           modalValue,
           userData: user,
-          includeFullstory: user ? user.planCode !== 1 : true,
+          includeFullstory: canIncludeFullstory(user),
         })
       );
     });
