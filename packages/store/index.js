@@ -26,8 +26,11 @@ const store = createStore(
 store.asyncReducers = {};
 
 // This is how lazy-loaded packages can add their stores once loaded
-store.injectReducer = function(key, reducer) {
-  store.asyncReducers[key] = reducer;
+store.injectReducers = function(reducerMap) {
+  store.asyncReducers = {
+    ...store.asyncReducers,
+    ...reducerMap,
+  };
   store.replaceReducer(createReducer(store.asyncReducers));
 };
 

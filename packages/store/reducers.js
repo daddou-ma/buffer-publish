@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+
 import tabsReducer from '@bufferapp/publish-tabs/reducer';
 import queueReducer from '@bufferapp/publish-queue/reducer';
 import sentReducer from '@bufferapp/publish-sent/reducer';
@@ -43,19 +43,6 @@ import storyPreviewReducer from '@bufferapp/publish-story-preview/reducer';
 import storyGroupComposerReducer from '@bufferapp/publish-story-group-composer/reducer';
 import plansReducer from '@bufferapp/publish-plans/reducer';
 import creditCardFormReducer from '@bufferapp/publish-credit-card-form/reducer';
-
-// Analyze
-import averageReducer from '@bufferapp/average-table/reducer';
-import compareChartReducer from '@bufferapp/compare-chart/reducer';
-import datePickerReducer from '@bufferapp/analyze-date-picker/reducer';
-import exportPickerReducer from '@bufferapp/analyze-export-picker/reducer';
-import exportToCSVReducer from '@bufferapp/analyze-csv-export/reducer';
-import exportToPNGReducer from '@bufferapp/analyze-png-export/reducer';
-import postsReducer from '@bufferapp/posts-table/reducer';
-import profileReducer from '@bufferapp/analyze-profile-selector/reducer';
-import reportListReducer from '@bufferapp/report-list/reducer';
-import summaryTableReducer from '@bufferapp/summary-table/reducer';
-import profileLoaderReducer from '@bufferapp/profile-loader/reducer';
 
 export default {
   form: formReducer,
@@ -102,17 +89,4 @@ export default {
   storyGroupComposer: storyGroupComposerReducer,
   plans: plansReducer,
   creditCardForm: creditCardFormReducer,
-
-  // Analyze
-  average: averageReducer,
-  compare: compareChartReducer,
-  date: datePickerReducer,
-  exportPicker: exportPickerReducer,
-  exportToPNG: exportToPNGReducer,
-  exportToCSV: exportToCSVReducer,
-  posts: postsReducer,
-  profileLoader: profileLoaderReducer,
-  profiles: profileReducer,
-  reportList: reportListReducer,
-  summary: summaryTableReducer,
 };

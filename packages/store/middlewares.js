@@ -55,18 +55,6 @@ import closeComposerModalMiddleware from '@bufferapp/publish-close-composer-conf
 import storyPreviewMiddleware from '@bufferapp/publish-story-preview/middleware';
 import storyGroupComposerMiddleware from '@bufferapp/publish-story-group-composer/middleware';
 
-// Remove analytics middleware when publish switches to analyze
-import averageMiddleware from '@bufferapp/average-table/middleware';
-import compareChartMiddleware from '@bufferapp/compare-chart/middleware';
-import datePickerMiddleware from '@bufferapp/analyze-date-picker/middleware';
-import exportPickerMiddleware from '@bufferapp/analyze-export-picker/middleware';
-import exportToCSVMiddleware from '@bufferapp/analyze-csv-export/middleware';
-import exportToPNGMiddleware from '@bufferapp/analyze-png-export/middleware';
-import postsMiddleware from '@bufferapp/posts-table/middleware';
-// import profileLoaderMiddleware from '@bufferapp/profile-loader/middleware';
-import profileSelectorMiddleware from '@bufferapp/analyze-profile-selector/middleware';
-import summaryTableMiddleware from '@bufferapp/summary-table/middleware';
-
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
@@ -127,21 +115,7 @@ const composedMiddlewares = history =>
       storyGroupComposerMiddleware,
 
       // Dynamic middlware insertion point (for lazy-loaded components)
-      reduxDynamicMiddlewares,
-
-      // Analyze
-      averageMiddleware,
-      compareChartMiddleware,
-      datePickerMiddleware,
-      postsMiddleware,
-      // Removing the Analyze profile loader middleware as it was causing a double load to occur
-      // profileLoaderMiddleware,
-      profileSelectorMiddleware,
-      summaryTableMiddleware,
-      // These need to be the last middlewares in the chain
-      exportToPNGMiddleware,
-      exportToCSVMiddleware,
-      exportPickerMiddleware
+      reduxDynamicMiddlewares
     )
   );
 
