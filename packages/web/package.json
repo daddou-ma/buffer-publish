@@ -12,7 +12,6 @@
     "@bufferapp/publish-app-switcher": "2.0.0",
     "@bufferapp/publish-beta-redirect": "2.0.0",
     "@bufferapp/publish-example": "2.0.0",
-    "@bufferapp/publish-initial-loading": "2.0.0",
     "@bufferapp/publish-modals": "2.0.0",
     "@bufferapp/publish-preferences": "2.0.0",
     "@bufferapp/publish-profile-sidebar": "2.0.0",

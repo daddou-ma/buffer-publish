@@ -20,7 +20,6 @@ import Plans from '@bufferapp/publish-plans';
 import AppSwitcher from '@bufferapp/publish-app-switcher';
 import EnsurePublishBetaUser from '@bufferapp/publish-beta-redirect';
 import AppModals from '@bufferapp/publish-modals';
-import InitialLoading from '@bufferapp/publish-initial-loading';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
 import CTABanner from '@bufferapp/publish-cta-banner';
@@ -78,9 +77,6 @@ class App extends Component { // eslint-disable-line
                 <Route
                   path={newBusinessTrialistsRoute}
                   component={OnboardingManager}
-                />
-                <Route
-                  component={InitialLoading}
                 />
               </Switch>
             </EnsurePublishBetaUser>
