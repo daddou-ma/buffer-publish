@@ -1,6 +1,4 @@
-import {
-  actionTypes as dataFetchActionTypes,
-} from '@bufferapp/async-data-fetch';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = {};
 
@@ -15,7 +13,9 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { result: { hasNewPublish, features = [] } } = action;
+      const {
+        result: { hasNewPublish, features = [] },
+      } = action;
       return {
         loading: false,
         hasPublishBeta: features.includes('new_publish_beta'),

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 
-const EnsurePublishBetaUser = ({
+const InitialLoading = ({
   children,
   loading,
   hasPublishBeta,
@@ -19,11 +19,11 @@ const EnsurePublishBetaUser = ({
   }
 };
 
-EnsurePublishBetaUser.propTypes = {
+InitialLoading.propTypes = {
   children: PropTypes.node.isRequired,
   loading: PropTypes.bool.isRequired,
   hasPublishBeta: PropTypes.bool.isRequired,
   hasNewPublish: PropTypes.bool.isRequired,
 };
 
-export default EnsurePublishBetaUser;
+export default InitialLoading;
