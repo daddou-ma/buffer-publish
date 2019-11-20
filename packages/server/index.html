@@ -4,7 +4,6 @@
 <head>
   <title>Buffer Publish</title>
   {{{favicon}}}
-
   <link href="https://fonts.googleapis.com/css?family=Poppins:800|Roboto:300,400,500,700&display=swap" rel="stylesheet">
   <link href="//icons.buffer.com/0.16.4/buffer-icons.css" rel="stylesheet" type="text/css" />
   <link href="{{{bundle-css}}}" rel="stylesheet" type="text/css" />
@@ -144,17 +143,6 @@
       color: #168eea;
     }
   </style>
-  {{{appcues}}}
-  {{{bugsnagScript}}}
-  {{{stripeScript}}}
-  {{{fullStoryScript}}}
-  {{{notificationScript}}}
-  {{{showModalScript}}}
-  {{{intercomScript}}}
-  {{{segmentScript}}}
-  {{{helpScoutScript}}}
-  {{{iterateScript}}}
-  {{{userScript}}}
 </head>
 
 <body>
@@ -202,7 +190,19 @@
       message.style.display = 'block';
     }
   </script>
-  {{{bufferUser}}}
+  <!-- user + third party scripts -->
+  {{{appcues}}}
+  {{{bugsnagScript}}}
+  {{{stripeScript}}}
+  {{{fullStoryScript}}}
+  {{{notificationScript}}}
+  {{{showModalScript}}}
+  {{{intercomScript}}}
+  {{{segmentScript}}}
+  {{{helpScoutScript}}}
+  {{{iterateScript}}}
+  {{{userScript}}}
+  <!-- app scripts -->
   <script crossorigin src="{{{vendor}}}"></script>
   <script crossorigin src="{{{bundle}}}"></script>
 </body>
