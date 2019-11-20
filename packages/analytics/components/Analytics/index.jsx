@@ -30,6 +30,8 @@ const AnalyticsList = ({
   canStartBusinessTrial,
   isBusinessAccount,
   isInstagramBusiness,
+  fetchProfiles,
+  selectProfile,
 }) => {
   // user is either a free or pro and is not a team member
   if (!isBusinessAccount && (features.isProUser() || features.isFreeUser())) {
@@ -101,7 +103,12 @@ const AnalyticsList = ({
     return (
       <ErrorBoundary>
         <Suspense fallback={<div>Loading...</div>}>
-          <LazyAnalyticsList />
+          <LazyAnalyticsList
+            profile={profile}
+            isInstagramBusiness={isInstagramBusiness}
+            fetchProfiles={fetchProfiles}
+            selectProfile={selectProfile}
+          />
         </Suspense>
       </ErrorBoundary>
     );
@@ -123,6 +130,8 @@ AnalyticsList.propTypes = {
   isLockedProfile: PropTypes.bool,
   isBusinessAccount: PropTypes.bool.isRequired,
   isInstagramBusiness: PropTypes.bool.isRequired,
+  fetchProfiles: PropTypes.func.isRequired,
+  selectProfile: PropTypes.func.isRequired,
 };
 
 AnalyticsList.defaultProps = {

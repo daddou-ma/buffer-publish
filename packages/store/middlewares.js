@@ -55,6 +55,8 @@ import closeComposerModalMiddleware from '@bufferapp/publish-close-composer-conf
 import storyPreviewMiddleware from '@bufferapp/publish-story-preview/middleware';
 import storyGroupComposerMiddleware from '@bufferapp/publish-story-group-composer/middleware';
 
+import actionsOnlyForAnalyzeMiddleware from '@bufferapp/publish-analytics/middleware';
+
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
@@ -64,6 +66,7 @@ const composedMiddlewares = history =>
   composeEnhancers(
     applyMiddleware(
       routerMiddleware(history),
+      actionsOnlyForAnalyzeMiddleware('hide'),
       asyncDataFetchMiddleware,
       logTrackingMiddleware,
       bufferMetricsMiddleware,
@@ -114,6 +117,7 @@ const composedMiddlewares = history =>
       storyPreviewMiddleware,
       storyGroupComposerMiddleware,
 
+      actionsOnlyForAnalyzeMiddleware('reveal'),
       // Dynamic middlware insertion point (for lazy-loaded components)
       reduxDynamicMiddlewares
     )
