@@ -75,7 +75,6 @@ export default ({ getState, dispatch }) => next => action => {
         // publish.buffer.com/profile/{profileId}/tab/{tabId}
         case 'navigateToDedicatedProfileRoute': {
           const profile = [...profiles].find(p => p.id === params.profileId);
-
           dispatch(
             profileActions.handleProfileRouteLoaded({
               selectedProfile: profile,
