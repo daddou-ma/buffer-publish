@@ -18,7 +18,7 @@ import asyncDataFetchReducer from '@bufferapp/async-data-fetch/lib/reducer';
 import notificationsReducer from '@bufferapp/notifications/lib/reducer';
 import environmentReducer from '@bufferapp/environment/lib/reducer';
 import appSwitcherReducer from '@bufferapp/publish-app-switcher/reducer';
-import betaRedirectReducer from '@bufferapp/publish-beta-redirect/reducer';
+import initialLoadingReducer from '@bufferapp/publish-initial-loading/reducer';
 import switchPlanModalReducer from '@bufferapp/publish-switch-plan-modal/reducer';
 import stripeReducer from '@bufferapp/stripe/reducer';
 import modalsReducer from '@bufferapp/publish-modals/reducer';
@@ -60,7 +60,7 @@ export default {
   notifications: notificationsReducer,
   environment: environmentReducer,
   appSwitcher: appSwitcherReducer,
-  betaRedirect: betaRedirectReducer,
+  initialLoading: initialLoadingReducer,
   switchPlanModal: switchPlanModalReducer,
   stripe: stripeReducer,
   modals: modalsReducer,

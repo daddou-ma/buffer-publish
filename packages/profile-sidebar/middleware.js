@@ -1,15 +1,6 @@
-import { push } from 'connected-react-router';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions as tabsActions } from '@bufferapp/publish-tabs/reducer';
 
-import {
-  generateProfilePageRoute,
-  getProfilePageParams,
-  getPreferencePageParams,
-  getPlansPageParams,
-  newBusinessTrialistsRoute,
-  newConnectionRoute,
-} from '@bufferapp/publish-routes';
 import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
@@ -64,64 +55,23 @@ export default ({ dispatch, getState }) => next => action => {
         );
       }
       break;
-    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const profilesLoaded = getState().profileSidebar.loading === false;
-      if (!profilesLoaded) {
-        break;
-      }
-      const path = getState().router.location.pathname;
-      const params = getProfilePageParams({
-        path,
-      });
-      const isPreferencePage = !!getPreferencePageParams({
-        path,
-      });
-      const isPlansPage = !!getPlansPageParams({
-        path,
-      });
-      const { profiles, isOnBusinessTrial } = getState().profileSidebar;
-      if (params && params.profileId) {
-        const profile = [...profiles].find(p => p.id === params.profileId);
 
+    case actionTypes.PROFILE_ROUTE_LOADED: {
+      const profile = action.selectedProfile;
+      dispatch(
+        actions.selectProfile({
+          profile,
+        })
+      );
+      // When the page has just loaded or is refreshed,
+      // we want to be able to update the actual selected tab
+      if (action.tabId && getState().tabs.tabId !== action.tabId) {
         dispatch(
-          actions.selectProfile({
-            profile,
+          tabsActions.selectTab({
+            tabId: action.tabId,
+            profileId: profile.id,
           })
         );
-
-        // When the page has just loaded or is refreshed,
-        // we want to be able to update the actual selected tab
-        if (getState().tabs.tabId !== params.tabId) {
-          dispatch(
-            tabsActions.selectTab({
-              tabId: params.tabId,
-              profileId: profile.id,
-            })
-          );
-        }
-      } else if (!isPreferencePage && !isPlansPage && profiles.length > 0) {
-        const selectedProfile = profiles[0];
-        dispatch(
-          actions.selectProfile({
-            profile: selectedProfile,
-          })
-        );
-        dispatch(
-          push(
-            generateProfilePageRoute({
-              profileId: selectedProfile.id,
-              tabId: 'queue',
-            })
-          )
-        );
-      } else if (
-        !isPreferencePage &&
-        profiles.length === 0 &&
-        isOnBusinessTrial
-      ) {
-        dispatch(push(newBusinessTrialistsRoute));
-      } else if (!isPreferencePage && profiles.length === 0) {
-        dispatch(push(newConnectionRoute));
       }
       break;
     }

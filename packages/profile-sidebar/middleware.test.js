@@ -1,5 +1,5 @@
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
-import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
+import { actionTypes } from './reducer';
 import middleware from './middleware';
 
 describe('middleware', () => {
@@ -31,27 +31,35 @@ describe('middleware', () => {
   const getState = jest.fn(() => state);
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
-  it('should select a profile on fetch profiles success', () => {
-    const RPC_NAME = 'profiles';
-    const action = dataFetchActions.fetchSuccess({
-      name: RPC_NAME,
-    });
-    const selectProfileAction = {
-      type: profileActionTypes.SELECT_PROFILE,
-      profileId: '1234',
-      profile: {
-        id: '1234',
-        username: 'profile1',
+  it('should select a profile and a tab when PROFILE_ROUTE_LOADED', () => {
+    const action = {
+      type: actionTypes.PROFILE_ROUTE_LOADED,
+      selectedProfile: {
+        id: 'id1',
       },
+      tabId: 'queue',
     };
+
+    const selectProfileAction = {
+      type: actionTypes.SELECT_PROFILE,
+      profile: {
+        id: 'id1',
+      },
+      profileId: 'id1',
+    };
+
+    const selectTabAction = {
+      type: tabsActionTypes.SELECT_TAB,
+      tabId: 'queue',
+      profileId: 'id1',
+    };
+
     middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(selectProfileAction);
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(selectProfileAction);
+    expect(dispatch).toBeCalledWith(selectTabAction);
   });
 });
