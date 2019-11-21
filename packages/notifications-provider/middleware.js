@@ -1,10 +1,9 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actionTypes as initialLoadingActionTypes } from '@bufferapp/publish-initial-loading/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 
 import getNotificationMessage from './utils/getNotificationMessage';
 
-export default ({ dispatch, getState }) => next => (action) => {
+export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
@@ -19,14 +18,16 @@ export default ({ dispatch, getState }) => next => (action) => {
         const message = getNotificationMessage(
           notificationType,
           window._notification.key,
-          window._notification.variable,
+          window._notification.variable
         );
 
         if (message) {
-          dispatch(notificationActions.createNotification({
-            notificationType,
-            message,
-          }));
+          dispatch(
+            notificationActions.createNotification({
+              notificationType,
+              message,
+            })
+          );
         }
       }
       break;
