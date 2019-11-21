@@ -138,6 +138,7 @@
     "react-tooltip": "3.3.0",
     "redux": "3.6.0",
     "redux-form": "6.6.3",
+    "redux-dynamic-middlewares": "^1.0.0",
     "regenerator-runtime": "0.13.3",
     "request": "2.81.0",
     "request-promise": "4.2.1",
@@ -158,8 +159,5 @@
   },
   "workspaces": [
     "packages/*"
-  ],
-  "dependencies": {
-    "redux-dynamic-middlewares": "^1.0.0"
-  }
+  ]
 }
