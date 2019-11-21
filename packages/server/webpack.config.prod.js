@@ -10,6 +10,9 @@ const merged = merge(common, {
     nodeEnv: 'production',
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
     // Create source maps that have the [hash] in them.
     // Since there's no replacement string for the extension
     // (e.g., '[ext]') we have to have one for JS and another
