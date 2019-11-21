@@ -24,7 +24,11 @@ class StripeWrapper extends Component {
   componentDidMount() {
     const { stripePublishableKey } = this.props;
 
-    if (window.Stripe) {
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.Stripe !== 'undefined' &&
+      window.Stripe
+    ) {
       this.setState({ stripe: window.Stripe(stripePublishableKey) });
     } else {
       const stripeJS = document.querySelector('#stripe-js');
