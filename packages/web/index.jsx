@@ -1,14 +1,11 @@
-import 'react-hot-loader/patch';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter as Router } from 'connected-react-router';
 
-import createStore, { history } from '@bufferapp/publish-store';
+import store, { history } from '@bufferapp/publish-store';
 import App from './components/App';
 import getErrorBoundary from './components/ErrorBoundary';
-
-const store = createStore();
 
 store.dispatch({
   type: 'APP_INIT',
@@ -24,5 +21,5 @@ render(
       </Router>
     </Provider>
   </ErrorBoundary>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

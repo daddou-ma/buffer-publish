@@ -144,6 +144,10 @@ export default (state = initialState, action) => {
   let searchText = null;
   switch (action.type) {
     case `profiles_${dataFetchActionTypes.FETCH_START}`:
+      // Ignore analyze specific actions so as not to flash loading state
+      if (action.args && action.args.forAnalyze) {
+        return state;
+      }
       return {
         ...state,
         loading: true,

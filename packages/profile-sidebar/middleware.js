@@ -9,8 +9,6 @@ import {
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions, actionTypes } from './reducer';
 
-const { formatAnalyticsProfileObj } = require('./analytics');
-
 export const refreshProfile = (dispatch, profileId, message) => {
   dispatch(
     dataFetchActions.fetch({
@@ -75,13 +73,6 @@ export default ({ dispatch, getState }) => next => action => {
           })
         );
       }
-      // Dispatch different select profile for components in analyze
-      if (profile.isAnalyticsSupported) {
-        dispatch({
-          type: 'PROFILE_SELECTOR__SELECT_PROFILE',
-          profile: formatAnalyticsProfileObj(profile),
-        });
-      }
       break;
     }
 
@@ -131,8 +122,7 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     case actionTypes.PROFILE_DROPPED: {
       if (action.commit) {
-        const state = getState();
-        const profiles = state.profileSidebar.profiles;
+        const { profileSidebar: profiles } = getState();
         const orderedIds = profiles.map(profile => profile.id);
         dispatch(
           dataFetchActions.fetch({

@@ -4,7 +4,8 @@
 const isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
   // This line must come before importing any instrumented module.
-  require('dd-trace').init({ // eslint-disable-line
+  require('dd-trace').init({
+    // eslint-disable-line
     env: 'production',
     hostname: process.env.DD_AGENT_HOST,
     port: 8126,
@@ -138,7 +139,8 @@ const stripeScript = `
   </script>
 `;
 
-const appcuesScript = '<script id="appcues-js" src="//fast.appcues.com/49463.js" async></script>';
+const appcuesScript =
+  '<script id="appcues-js" src="//fast.appcues.com/49463.js" async></script>';
 
 const fullStoryScript = `<script>
 window['_fs_debug'] = false;
@@ -221,11 +223,27 @@ const getHtml = ({
   userData,
   includeFullstory = true,
 }) => {
+  /**
+   * Because our static assets have hashes in their names in production
+   * they will also be keyed that way in the staticAssets file. So we
+   * need to do a bit of magic here to extract the correct key for the
+   * bundles full path.
+   */
+  const filenames = Object.keys(staticAssets);
+  const bundleKey = isProduction
+    ? filenames.find(file => file.match(/bundle\.(.*)\.js$/))
+    : 'bundle.js';
+  const vendorKey = isProduction
+    ? filenames.find(file => file.match(/vendor\.(.*)\.js$/))
+    : 'vendor.js';
+  const bundleCssKey = isProduction
+    ? filenames.find(file => file.match(/bundle\.(.*)\.css$/))
+    : 'bundle.css';
   return fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
-    .replace('{{{vendor}}}', staticAssets['vendor.js'])
-    .replace('{{{bundle}}}', staticAssets['bundle.js'])
-    .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
+    .replace('{{{vendor}}}', staticAssets[vendorKey])
+    .replace('{{{bundle}}}', staticAssets[bundleKey])
+    .replace('{{{bundle-css}}}', staticAssets[bundleCssKey])
     .replace('{{{stripeScript}}}', stripeScript)
     .replace('{{{fullStoryScript}}}', getFullstory({ includeFullstory }))
     .replace('{{{bugsnagScript}}}', getBugsnag({ userId }))
