@@ -10,8 +10,3 @@ module.exports = (state = profilesData || {}, action) => {
       return state;
   }
 }
-
-state.profiles
-state.user
-
-state.sidebar.
