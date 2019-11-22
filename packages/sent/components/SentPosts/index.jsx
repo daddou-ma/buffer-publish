@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   PostLists,
@@ -64,7 +64,12 @@ const SentPosts = ({
   loadMore,
   showAnalyzeBannerAfterFirstPost,
   isAnalyzeCustomer,
+  fetchSentPosts,
 }) => {
+  useEffect(() => {
+    fetchSentPosts();
+  }, [profileId]);
+
   if (loading) {
     return (
       <div style={loadingContainerStyle}>
@@ -147,6 +152,7 @@ const SentPosts = ({
 };
 
 SentPosts.propTypes = {
+  fetchSentPosts: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line

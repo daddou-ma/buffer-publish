@@ -10,6 +10,7 @@ export const actionTypes = keyWrapper('SENT', {
   POST_IMAGE_CLICKED_NEXT: 0,
   POST_IMAGE_CLICKED_PREV: 0,
   POST_IMAGE_CLOSED: 0,
+  FETCH_SENT_POSTS: 0,
 });
 
 export const initialState = {
@@ -228,6 +229,10 @@ export const actions = {
     type: actionTypes.POST_IMAGE_CLOSED,
     updateId: post.id,
     post,
+    profileId,
+  }),
+  fetchSentPosts: ({ profileId }) => ({
+    type: actionTypes.FETCH_SENT_POSTS,
     profileId,
   }),
 };
