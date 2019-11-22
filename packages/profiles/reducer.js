@@ -4,7 +4,7 @@ let profilesData =
   typeof window.bufferData.profiles !== 'undefined' &&
   window.bufferData.profiles;
 
-module.exports = (state = profilesData || {}, action) => {
+module.exports = (state = profilesData || [], action) => {
   switch(action.type) {
     default:
       return state;
