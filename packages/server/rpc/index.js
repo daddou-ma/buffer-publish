@@ -46,9 +46,7 @@ const setNotifications = require('./setNotifications');
 const readMessage = require('./readMessage');
 const updateRecheck = require('./bookmarklets/updateRecheck');
 const profileQuickAnalytics = require('./bookmarklets/profileQuickAnalytics');
-const gridPosts = require('./grid');
 const shortenUrl = require('./shortenUrl');
-const updatePostLink = require('./updatePostLink');
 const dropPost = require('./dropPost');
 const swapPosts = require('./swapPosts');
 const cancelTrial = require('./cancelTrial');
@@ -67,6 +65,10 @@ const createStoryGroupMethod = require('./createStoryGroup');
 const updateStoryGroupMethod = require('./updateStoryGroup');
 const deleteStoryGroupMethod = require('./deleteStoryGroup');
 const shareStoryGroupNowMethod = require('./shareStoryGroupNow');
+const getShopGridPostsMethod = require('./shopGrid/getPosts');
+const updateShopGridPostLink = require('./shopGrid/updatePostLink');
+const updateCustomLinksMethod = require('./shopGrid/customLinks/update');
+const deleteCustomLinkMethod = require('./shopGrid/customLinks/delete');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const average = require('./analytics/average');
@@ -127,9 +129,7 @@ module.exports = rpc(
   readMessage,
   updateRecheck,
   profileQuickAnalytics,
-  gridPosts,
   shortenUrl,
-  updatePostLink,
   dropPost,
   swapPosts,
   cancelTrial,
@@ -148,4 +148,8 @@ module.exports = rpc(
   updateStoryGroupMethod,
   deleteStoryGroupMethod,
   shareStoryGroupNowMethod,
+  getShopGridPostsMethod,
+  updateShopGridPostLink,
+  updateCustomLinksMethod,
+  deleteCustomLinkMethod
 );

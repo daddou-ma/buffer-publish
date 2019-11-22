@@ -34,6 +34,7 @@ export default connect(
         profile,
         isBusinessAccount: profile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        customLinksDetails: profile.customLinksDetails,
         publicGridUrl: `https://shopgr.id/${profile.serviceUsername}`,
       };
     }
@@ -77,6 +78,44 @@ export default connect(
       const metadata = getChannelProperties(channel);
       dispatch(
         analyticsActions.trackEvent('Shop Grid Page Previewed', metadata)
+      );
+    },
+    onUpdateCustomLinks: ({ customLinks }) => {
+      dispatch(
+        actions.handleUpdateCustomLinks({
+          profileId: ownProps.profileId,
+          customLinks,
+          customLinkColor: null,
+          customLinkButtonType: null,
+        })
+      );
+    },
+    onUpdateCustomLinksColor: ({ customLinkColor }) => {
+      dispatch(
+        actions.handleUpdateCustomLinks({
+          profileId: ownProps.profileId,
+          customLinks: false,
+          customLinkColor,
+          customLinkButtonType: null,
+        })
+      );
+    },
+    onUpdateCustomLinksButtonType: ({ customLinkButtonType }) => {
+      dispatch(
+        actions.handleUpdateCustomLinks({
+          profileId: ownProps.profileId,
+          customLinks: false,
+          customLinkColor: null,
+          customLinkButtonType,
+        })
+      );
+    },
+    onDeleteCustomLink: ({ customLinkId }) => {
+      dispatch(
+        actions.handleDeleteCustomLink({
+          profileId: ownProps.profileId,
+          customLinkId,
+        })
       );
     },
   })
