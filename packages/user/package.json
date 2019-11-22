@@ -1,7 +1,7 @@
 {
-  "name": "@bufferapp/publish-user",
+  "name": "@bufferapp/publish-data-user",
   "version": "2.0.0",
-  "description": "Bootstrap Package",
+  "description": "User Data Package",
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ignore-pattern coverage node_modules"
