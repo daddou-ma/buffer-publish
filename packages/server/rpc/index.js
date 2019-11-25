@@ -67,6 +67,8 @@ const createStoryGroupMethod = require('./createStoryGroup');
 const updateStoryGroupMethod = require('./updateStoryGroup');
 const deleteStoryGroupMethod = require('./deleteStoryGroup');
 const shareStoryGroupNowMethod = require('./shareStoryGroupNow');
+const addUserTag = require('./addUserTag');
+const removeUserTag = require('./removeUserTag');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const average = require('./analytics/average');
@@ -148,4 +150,6 @@ module.exports = rpc(
   updateStoryGroupMethod,
   deleteStoryGroupMethod,
   shareStoryGroupNowMethod,
+  addUserTag,
+  removeUserTag
 );
