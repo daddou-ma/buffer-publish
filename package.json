@@ -15,6 +15,7 @@
     "storybook": "start-storybook -p 9001",
     "watch": "webpack-dev-server --config ./packages/server/webpack.config.dev.js --colors --display-error-details --progress",
     "build": "webpack --config ./packages/server/webpack.config.prod.js --output-path=`pwd`",
+    "build:analyze": "ANALYZE_BUNDLE=true webpack --config ./packages/server/webpack.config.prod.js --output-path=dist --progress",
     "bugsnag:release": "node ./packages/server/scripts/bugsnag-release.js",
     "rebuild-grpc": "docker exec -it bufferdev_publish_1 sh -c 'cd /usr/src/app && npm rebuild grpc --target_arch=x64 --target_platform=linux --target_libc=musl --update-binary --verbose'"
   },
@@ -66,6 +67,7 @@
     "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
     "babel-plugin-require-context-hook": "1.0.0",
+    "babel-plugin-styled-components": "^1.10.6",
     "babel-plugin-transform-export-extensions": "6.22.0",
     "bugsnag": "1.11.0",
     "bugsnag-build-reporter": "^1.0.0",
@@ -124,7 +126,7 @@
     "react-dnd-test-backend": "7.4.4",
     "react-dom": "16.8.6",
     "react-dropzone": "4.2.3",
-    "react-hot-loader": "4.8.4",
+    "react-hot-loader": "4.12.17",
     "react-redux": "5.0.4",
     "react-router": "4.2.0",
     "react-router-dom": "4.1.2",
@@ -136,6 +138,7 @@
     "react-tooltip": "3.3.0",
     "redux": "3.6.0",
     "redux-form": "6.6.3",
+    "redux-dynamic-middlewares": "^1.0.0",
     "regenerator-runtime": "0.13.3",
     "request": "2.81.0",
     "request-promise": "4.2.1",
@@ -147,13 +150,12 @@
     "twitter-text": "1.14.7",
     "uuid": "3.0.1",
     "webpack": "4.40.2",
-    "webpack-bundle-analyzer": ">=3.3.2",
+    "webpack-bundle-analyzer": "3.6.0",
     "webpack-cli": "3.3.8",
     "webpack-dev-middleware": "3.7.1",
     "webpack-dev-server": "3.8.0",
     "webpack-merge": "4.2.2",
-    "xss": "1.0.6",
-    "babel-plugin-styled-components": "^1.10.6"
+    "xss": "1.0.6"
   },
   "workspaces": [
     "packages/*"

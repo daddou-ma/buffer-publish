@@ -197,18 +197,21 @@ describe('middleware', () => {
       expect(analyticsActions.trackEvent)
       .toHaveBeenCalledWith('Draft Submitted', expectedTrackingObj);
     });
-    it('it should not track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to drafts', () => {
+    it('it should track analytics-middleware on draft rejected', () => {
       analyticsActions.trackEvent = jest.fn();
       const RPC_NAME = 'changeDraftStatus';
       const action = dataFetchActions.fetchSuccess({
         name: RPC_NAME,
         result: {
-          update: {}, draft: { needs_approval: false },
+          update: {}, draft: { needs_approval: false, id: 'foo', type: 'text' },
         },
       });
 
       middleware({ dispatch, getState })(next)(action);
-      expect(analyticsActions.trackEvent).not.toHaveBeenCalled();
+      expect(analyticsActions.trackEvent).toHaveBeenCalledWith(
+        'Draft Rejected',
+        expectedTrackingObj
+      );
     });
 
     it('it should track analytics-middleware on deletePost', () => {

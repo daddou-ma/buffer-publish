@@ -1,5 +1,4 @@
 import deepFreeze from 'deep-freeze';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import reducer, { initialState, actionTypes, actions } from './reducer';
 
 describe('reducer', () => {
@@ -36,7 +35,34 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('handles SELECT_PROFILE action type', () => {
+  it('handles getCounts_FETCH_START action type', () => {
+    const stateBefore = {
+      ...initialState,
+      draftsNeedApprovalCount: 0,
+      draftsCount: 1,
+    };
+    const stateAfter = {
+      ...initialState,
+      draftsNeedApprovalCount: null,
+      draftsCount: null,
+    };
+    const action = {
+      type: 'getCounts_FETCH_START',
+      result: {
+        counts: {
+          drafts_needs_approval_true: 1,
+          drafts_needs_approval_false: 2,
+        },
+      },
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles getCounts_FETCH_SUCCESS action type', () => {
     const stateBefore = {
       ...initialState,
       draftsNeedApprovalCount: null,
@@ -48,10 +74,12 @@ describe('reducer', () => {
       draftsCount: 2,
     };
     const action = {
-      type: profileActionTypes.SELECT_PROFILE,
-      profile: {
-        draftsNeedApprovalCount: 1,
-        draftsCount: 2,
+      type: 'getCounts_FETCH_SUCCESS',
+      result: {
+        counts: {
+          drafts_needs_approval_true: 1,
+          drafts_needs_approval_false: 2,
+        },
       },
     };
 
@@ -59,200 +87,6 @@ describe('reducer', () => {
     deepFreeze(action);
 
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
-  describe('UPDATE_DRAFT_COUNTER action type', () => {
-    describe('When DRAFT_CREATED', () => {
-      it('updates counter if draft needs approval', () => {
-        const stateBefore = {
-          ...initialState,
-          draftsNeedApprovalCount: 0,
-          draftsCount: 0,
-        };
-        const stateAfter = {
-          ...initialState,
-          draftsNeedApprovalCount: 1,
-          draftsCount: 0,
-        };
-        const action = {
-          type: actionTypes.UPDATE_DRAFT_COUNTER,
-          needsApproval: true,
-          draftAction: 'DRAFTS__DRAFT_CREATED',
-        };
-
-        deepFreeze(stateBefore);
-        deepFreeze(action);
-
-        expect(reducer(stateBefore, action)).toEqual(stateAfter);
-      });
-
-      it('updates counter if draft does not need approval', () => {
-        const stateBefore = {
-          ...initialState,
-          draftsNeedApprovalCount: 0,
-          draftsCount: 0,
-        };
-        const stateAfter = {
-          ...initialState,
-          draftsNeedApprovalCount: 0,
-          draftsCount: 1,
-        };
-        const action = {
-          type: actionTypes.UPDATE_DRAFT_COUNTER,
-          needsApproval: false,
-          draftAction: 'DRAFTS__DRAFT_CREATED',
-        };
-
-        deepFreeze(stateBefore);
-        deepFreeze(action);
-
-        expect(reducer(stateBefore, action)).toEqual(stateAfter);
-      });
-    });
-
-    describe('When DRAFT_DELETED', () => {
-      it('updates counter if draft needs approval', () => {
-        const stateBefore = {
-          ...initialState,
-          draftsNeedApprovalCount: 2,
-          draftsCount: 0,
-        };
-        const stateAfter = {
-          ...initialState,
-          draftsNeedApprovalCount: 1,
-          draftsCount: 0,
-        };
-        const action = {
-          type: actionTypes.UPDATE_DRAFT_COUNTER,
-          needsApproval: true,
-          draftAction: 'DRAFTS__DRAFT_DELETED',
-        };
-
-        deepFreeze(stateBefore);
-        deepFreeze(action);
-
-        expect(reducer(stateBefore, action)).toEqual(stateAfter);
-      });
-
-      it('updates counter if draft does not need approval', () => {
-        const stateBefore = {
-          ...initialState,
-          draftsNeedApprovalCount: 0,
-          draftsCount: 2,
-        };
-        const stateAfter = {
-          ...initialState,
-          draftsNeedApprovalCount: 0,
-          draftsCount: 1,
-        };
-        const action = {
-          type: actionTypes.UPDATE_DRAFT_COUNTER,
-          needsApproval: false,
-          draftAction: 'DRAFTS__DRAFT_DELETED',
-        };
-
-        deepFreeze(stateBefore);
-        deepFreeze(action);
-
-        expect(reducer(stateBefore, action)).toEqual(stateAfter);
-      });
-    });
-
-    describe('When DRAFT_APPROVED', () => {
-      it('updates counter if draft needs approval', () => {
-        const stateBefore = {
-          ...initialState,
-          draftsNeedApprovalCount: 2,
-          draftsCount: 0,
-        };
-        const stateAfter = {
-          ...initialState,
-          draftsNeedApprovalCount: 1,
-          draftsCount: 0,
-        };
-        const action = {
-          type: actionTypes.UPDATE_DRAFT_COUNTER,
-          needsApproval: true,
-          draftAction: 'DRAFTS__DRAFT_APPROVED',
-        };
-
-        deepFreeze(stateBefore);
-        deepFreeze(action);
-
-        expect(reducer(stateBefore, action)).toEqual(stateAfter);
-      });
-
-      it('updates counter if draft does not need approval', () => {
-        const stateBefore = {
-          ...initialState,
-          draftsNeedApprovalCount: 0,
-          draftsCount: 2,
-        };
-        const stateAfter = {
-          ...initialState,
-          draftsNeedApprovalCount: 0,
-          draftsCount: 1,
-        };
-        const action = {
-          type: actionTypes.UPDATE_DRAFT_COUNTER,
-          needsApproval: false,
-          draftAction: 'DRAFTS__DRAFT_APPROVED',
-        };
-
-        deepFreeze(stateBefore);
-        deepFreeze(action);
-
-        expect(reducer(stateBefore, action)).toEqual(stateAfter);
-      });
-    });
-
-    describe('When DRAFT_MOVED', () => {
-      it('updates counter if draft needs approval', () => {
-        const stateBefore = {
-          ...initialState,
-          draftsNeedApprovalCount: 0,
-          draftsCount: 1,
-        };
-        const stateAfter = {
-          ...initialState,
-          draftsNeedApprovalCount: 1,
-          draftsCount: 0,
-        };
-        const action = {
-          type: actionTypes.UPDATE_DRAFT_COUNTER,
-          needsApproval: true,
-          draftAction: 'DRAFTS__DRAFT_MOVED',
-        };
-
-        deepFreeze(stateBefore);
-        deepFreeze(action);
-
-        expect(reducer(stateBefore, action)).toEqual(stateAfter);
-      });
-
-      it('updates counter if draft does not need approval', () => {
-        const stateBefore = {
-          ...initialState,
-          draftsNeedApprovalCount: 1,
-          draftsCount: 0,
-        };
-        const stateAfter = {
-          ...initialState,
-          draftsNeedApprovalCount: 0,
-          draftsCount: 1,
-        };
-        const action = {
-          type: actionTypes.UPDATE_DRAFT_COUNTER,
-          needsApproval: false,
-          draftAction: 'DRAFTS__DRAFT_MOVED',
-        };
-
-        deepFreeze(stateBefore);
-        deepFreeze(action);
-
-        expect(reducer(stateBefore, action)).toEqual(stateAfter);
-      });
-    });
   });
 
   // Test action creators:
@@ -266,20 +100,6 @@ describe('reducer', () => {
       expect(actions.selectTab({ tabId: 'tab', profileId: 'id' })).toEqual(
         expectedAction
       );
-    });
-
-    it('creates a UPDATE_DRAFT_COUNTER action', () => {
-      const expectedAction = {
-        type: actionTypes.UPDATE_DRAFT_COUNTER,
-        needsApproval: true,
-        draftAction: 'action',
-      };
-      expect(
-        actions.updateDraftCounter({
-          needsApproval: true,
-          draftAction: 'action',
-        })
-      ).toEqual(expectedAction);
     });
   });
 });

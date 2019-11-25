@@ -745,7 +745,8 @@ function getFormattedAPIData(serviceName, unformattedData) {
 
     if (serviceDraft.service.name === 'instagram') {
       conditionalFields = Object.assign(conditionalFields, {
-        comment_enabled: serviceDraft.commentEnabled,
+        comment_enabled:
+          serviceDraft.commentText && serviceDraft.commentText.trim() !== '',
         comment_text: serviceDraft.commentText,
         link: serviceDraft.shopgridLink,
       });

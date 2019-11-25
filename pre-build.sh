@@ -17,14 +17,16 @@ yarn install --non-interactive
 # Notify Bugsnag of new release
 yarn run bugsnag:release
 
+# Build the bundle and it's assets (CSS, chunks, source maps)
 yarn run build
 
-UPLOADER="https://github.com/bufferapp/buffer-static-upload/releases/download/0.2.1/buffer-static-upload-`uname -s`"
+# Upload the static assets to S3
+UPLOADER="https://github.com/bufferapp/buffer-static-upload/releases/download/0.3.0/buffer-static-upload-`uname -s`"
 curl -L $UPLOADER > ./buffer-static-upload
 chmod +x ./buffer-static-upload
 
-FILES="vendor.js,bundle.js,bundle.css,*.map"
-./buffer-static-upload -files "$FILES" -dir publish
+FILES="*.css,*.js,*.map"
+./buffer-static-upload -files "$FILES" -dir publish -skip-versioning
 
 echo "STATIC ASSETS:"
 cat ./staticAssets.json

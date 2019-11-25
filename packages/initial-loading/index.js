@@ -1,17 +1,13 @@
-// component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
-import { actions } from './reducer';
 
-// load the presentational component
 import InitialLoading from './components/InitialLoading';
 
-export default connect(
-    null,
-    dispatch => ({
-      onCompomentMount: () => {
-        dispatch(actions.profileLoadingRedirect());
-      },
-    }),
-)(InitialLoading);
+export default connect(state => ({
+  hasPublishBeta: state.initialLoading.hasPublishBeta,
+  hasNewPublish: state.initialLoading.hasNewPublish,
+  loading: state.initialLoading.loading,
+  onPaydayPage: state.initialLoading.onPaydayPage,
+}))(InitialLoading);
 
-export { actionTypes } from './reducer';
+export reducer, { actions, actionTypes } from './reducer';
+export middleware from './middleware';

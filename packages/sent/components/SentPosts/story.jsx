@@ -48,6 +48,7 @@ storiesOf('SentPosts', module)
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       onShareAgainClick={action('onShareAgainClick')}
+      fetchSentPosts={action('fetchSentPosts')}
     />
   ))
   .add('if in Business Account', () => (
@@ -60,5 +61,6 @@ storiesOf('SentPosts', module)
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       onShareAgainClick={action('onShareAgainClick')}
+      fetchSentPosts={action('fetchSentPosts')}
     />
   ));

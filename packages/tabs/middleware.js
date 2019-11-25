@@ -1,8 +1,10 @@
 import { push } from 'connected-react-router';
 import { generateProfilePageRoute } from '@bufferapp/publish-routes';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
+import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 
-import { actionTypes, actions } from './reducer';
+import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => action => {
   next(action);
@@ -23,6 +25,18 @@ export default ({ getState, dispatch }) => next => action => {
       }
       break;
 
+    case profileActionTypes.SELECT_PROFILE: {
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getCounts',
+          args: {
+            profileId: action.profile.id,
+          },
+        })
+      );
+      break;
+    }
+
     // Drafts pusher events trigger a draft counter update action
     case draftActionTypes.DRAFT_CREATED:
     case draftActionTypes.DRAFT_DELETED:
@@ -30,9 +44,11 @@ export default ({ getState, dispatch }) => next => action => {
     case draftActionTypes.DRAFT_MOVED: {
       if (getState().profileSidebar.selectedProfileId === action.profileId) {
         dispatch(
-          actions.updateDraftCounter({
-            needsApproval: action.draft.needsApproval,
-            draftAction: action.type,
+          dataFetchActions.fetch({
+            name: 'getCounts',
+            args: {
+              profileId: action.profileId,
+            },
           })
         );
       }

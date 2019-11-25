@@ -56,6 +56,7 @@ const startTrial = require('./startTrial');
 const intercom = require('./intercom');
 const v1ToV2UpgradeDetails = require('./v1ToV2UpgradeDetails');
 const globalAccount = require('./globalAccount');
+const getCounts = require('./getCounts');
 const createHashtagGroup = require('./createHashtagGroup');
 const deleteHashtagGroup = require('./deleteHashtagGroup');
 const getHashtagGroups = require('./getHashtagGroups');
@@ -138,6 +139,7 @@ module.exports = rpc(
   intercom,
   v1ToV2UpgradeDetails,
   globalAccount,
+  getCounts,
   createHashtagGroup,
   deleteHashtagGroup,
   getHashtagGroups,

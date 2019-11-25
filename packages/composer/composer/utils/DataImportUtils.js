@@ -166,7 +166,6 @@ const DataImportUtils = {
           isOnProTrial: userData.isOnProTrial,
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
-          hasHashtagGroupsFlip: hasFeature(userData.features, 'hashtag_groups'),
           hasAccessToUserTag: userData.hasAccessToUserTag,
           profileGroups: userData.profile_groups ?
             userData.profile_groups.map((group) => ({

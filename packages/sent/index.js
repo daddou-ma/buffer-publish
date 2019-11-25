@@ -103,6 +103,13 @@ export default connect(
         })
       );
     },
+    fetchSentPosts: () => {
+      dispatch(
+        actions.fetchSentPosts({
+          profileId: ownProps.profileId,
+        })
+      );
+    },
   })
 )(SentPosts);
 

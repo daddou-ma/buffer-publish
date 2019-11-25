@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Divider,
-  Text,
-} from '@bufferapp/components';
+import { Divider, Text } from '@bufferapp/components';
 import styled from 'styled-components';
 import { QueueButtonGroup } from '@bufferapp/publish-shared-components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
@@ -18,7 +15,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  margin-bottom: 8px,
+  margin-bottom: 8px;
 `;
 
 const ButtonRelativeContainer = styled.div`
@@ -31,15 +28,14 @@ const ButtonWrapper = styled.div`
   top: 15px;
 `;
 
-const Header = ({
-  header,
-  subHeader,
-}) => (
+const Header = ({ header, subHeader }) => (
   <HeaderWrapper>
     <TitleWrapper>
       <Text color="black">{header}</Text>
     </TitleWrapper>
-    <Text color="shuttleGray" size="mini">{subHeader}</Text>
+    <Text color="shuttleGray" size="mini">
+      {subHeader}
+    </Text>
     <Divider />
   </HeaderWrapper>
 );
@@ -54,12 +50,12 @@ Header.defaultProps = {
   subHeader: null,
 };
 
-const PastRemindersWrapper = (props) => {
-  const {
-    isLockedProfile,
-    viewType,
-    onToggleViewType,
-  } = props;
+const PastRemindersWrapper = props => {
+  const { isLockedProfile, viewType, onToggleViewType, profileId } = props;
+
+  useEffect(() => {
+    onToggleViewType('posts');
+  }, [profileId]);
 
   if (isLockedProfile) {
     return <LockedProfileNotification />;
@@ -88,6 +84,7 @@ PastRemindersWrapper.propTypes = {
   total: PropTypes.number,
   isLockedProfile: PropTypes.bool,
   onToggleViewType: PropTypes.func,
+  profileId: PropTypes.string.isRequired,
 };
 
 PastRemindersWrapper.defaultProps = {

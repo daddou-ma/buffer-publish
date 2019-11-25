@@ -13,6 +13,7 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   PROFILE_DROPPED: 0,
   SINGLE_PROFILE: 0,
   HANDLE_SEARCH_PROFILE_CHANGE: 0,
+  PROFILE_ROUTE_LOADED: 0,
 });
 
 export const initialState = {
@@ -143,6 +144,10 @@ export default (state = initialState, action) => {
   let searchText = null;
   switch (action.type) {
     case `profiles_${dataFetchActionTypes.FETCH_START}`:
+      // Ignore analyze specific actions so as not to flash loading state
+      if (action.args && action.args.forAnalyze) {
+        return state;
+      }
       return {
         ...state,
         loading: true,
@@ -269,5 +274,10 @@ export const actions = {
   handleSearchProfileChange: ({ value }) => ({
     type: actionTypes.HANDLE_SEARCH_PROFILE_CHANGE,
     value,
+  }),
+  handleProfileRouteLoaded : ({ selectedProfile, tabId }) => ({ 
+    type: actionTypes.PROFILE_ROUTE_LOADED,
+    selectedProfile,
+    tabId,
   }),
 };

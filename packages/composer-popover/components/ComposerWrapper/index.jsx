@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
-import { bufferPublishComposer as Composer } from '@bufferapp/publish-composer';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions as trialActions } from '@bufferapp/publish-trial';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+// import { bufferPublishComposer as Composer } from '@bufferapp/publish-composer';
 
-const ComposerWrapper = props => <Composer {...props} />;
+const Composer = lazy(() =>
+  import(
+    /* webpackChunkName: "composer" */ '@bufferapp/publish-composer/interfaces/buffer-publish'
+  )
+);
 
-ComposerWrapper.propTypes = Composer.propTypes;
-ComposerWrapper.defaultProps = Composer.defaultProps;
+const ConnectedComposer = props => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Composer {...props} />
+  </Suspense>
+);
 
 export default connect(
   (state, ownProps) => {
     if (state.appSidebar && state.profileSidebar) {
-      const type = ownProps.type;
-      const selectedProfileId = state.profileSidebar.selectedProfileId;
+      const { type } = ownProps;
+      const {
+        profileSidebar: { selectedProfileId },
+      } = state;
       const postId = state[type].editingPostId;
 
       let options = {};
@@ -31,8 +40,9 @@ export default connect(
           options = {
             editMode: state.queue.editMode,
             emptySlotMode: state.queue.emptySlotMode,
-            post: state.queue.emptySlotMode ? state.queue.emptySlotData :
-              state.queue.byProfileId[selectedProfileId].posts[postId],
+            post: state.queue.emptySlotMode
+              ? state.queue.emptySlotData
+              : state.queue.byProfileId[selectedProfileId].posts[postId],
           };
           break;
         case 'sent':
@@ -49,13 +59,14 @@ export default connect(
           options = {
             editMode: state.pastReminders.editMode,
             sentPost: true,
-            post: state.pastReminders.byProfileId[selectedProfileId].posts[postId],
+            post:
+              state.pastReminders.byProfileId[selectedProfileId].posts[postId],
           };
           break;
         default:
           return;
       }
-      return ({
+      return {
         userData: state.appSidebar.user,
         profiles: state.profileSidebar.profiles,
         enabledApplicationModes: state.enabledApplicationModes,
@@ -65,7 +76,7 @@ export default connect(
         selectedProfileId,
         tabId: state.tabs.tabId,
         ...options,
-      });
+      };
     }
     return {};
   },
@@ -79,22 +90,36 @@ export default connect(
           dispatch(modalsActions.showInstagramFirstCommentModal(message));
           break;
         case 'SHOW_IG_FIRST_COMMENT_PRO_TRIAL_MODAL':
-          dispatch(modalsActions.showInstagramFirstCommentProTrialModal({ source: 'ig_first_comment_toggle' }));
+          dispatch(
+            modalsActions.showInstagramFirstCommentProTrialModal({
+              source: 'ig_first_comment_toggle',
+            })
+          );
           break;
         case 'SHOW_PRO_UPGRADE_MODAL':
-          dispatch(modalsActions.showSwitchPlanModal({ source: 'ig_first_comment_toggle', plan: 'pro' }));
+          dispatch(
+            modalsActions.showSwitchPlanModal({
+              source: 'ig_first_comment_toggle',
+              plan: 'pro',
+            })
+          );
           break;
         case 'START_PRO_TRIAL':
-          dispatch(trialActions.handleStartProTrial({
-            scope: message.scope,
-            source: message.source,
-          }));
+          dispatch(
+            trialActions.handleStartProTrial({
+              scope: message.scope,
+              source: message.source,
+            })
+          );
           break;
         case 'SEGMENT_TRACKING':
-          dispatch(analyticsActions.trackEvent(message.eventName, message.metadata));
+          dispatch(
+            analyticsActions.trackEvent(message.eventName, message.metadata)
+          );
           break;
-        default: break;
+        default:
+          break;
       }
     },
-  }),
-)(ComposerWrapper);
+  })
+)(ConnectedComposer);

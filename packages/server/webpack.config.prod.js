@@ -1,29 +1,36 @@
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const merge = require('webpack-merge');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.config.common.js');
+
+const plugins = [
+  new MiniCssExtractPlugin({
+    filename: '[name].[chunkhash:8].css',
+    chunkFilename: '[name].[chunkhash:8].css',
+  }),
+];
+
+let devtool = 'source-map';
+
+// `yarn run build:analyze` to visually inspect the bundle
+// when building locally
+if (process.env.ANALYZE_BUNDLE) {
+  plugins.push(new BundleAnalyzerPlugin());
+  devtool = false;
+}
 
 const merged = merge(common, {
   mode: 'production',
-  devtool: undefined,
+  devtool,
   optimization: {
     nodeEnv: 'production',
   },
-  plugins: [
-    // Create source maps that have the [hash] in them.
-    // Since there's no replacement string for the extension
-    // (e.g., '[ext]') we have to have one for JS and another
-    // for CSS.
-    new webpack.SourceMapDevToolPlugin({
-      filename: '[name].[hash].js.map',
-      exclude: ['bundle.css'],
-    }),
-    // Create source maps for the CSS
-    new webpack.SourceMapDevToolPlugin({
-      filename: '[name].[hash].css.map',
-      test: ['bundle.css'],
-    }),
-  ],
+  plugins,
+  output: {
+    publicPath: 'https://static.buffer.com/publish/',
+    filename: '[name].[chunkhash:8].js',
+  },
 });
 
 module.exports = merged;
