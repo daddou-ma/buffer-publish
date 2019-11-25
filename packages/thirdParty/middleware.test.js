@@ -159,6 +159,7 @@ describe('middleware', () => {
       trialTimeRemaining: mockUser.trial.trialTimeRemaining,
       orgUserCount: mockUser.orgUserCount,
       profileCount: mockUser.profileCount,
+      previousPlanId: '',
     });
 
     expect(global.Appcues.on.mock.calls).toEqual([

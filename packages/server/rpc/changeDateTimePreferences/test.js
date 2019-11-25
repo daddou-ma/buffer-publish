@@ -17,6 +17,7 @@ const mockUser = {
   plan: 'free',
   email_notifications: [],
   feature_trials: [],
+  tags: [],
 };
 describe('rpc/changeDateTimePreferences', () => {
   beforeEach(() => {
