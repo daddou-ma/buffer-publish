@@ -73,7 +73,13 @@ const getPageNameFromPath = (path) => {
 const getChannelIfNeeded = ({ path, getState }) => {
   const match = path.match(PROFILE_PAGES_PATH_REGEX);
   if (match) {
-    const { profiles } = getState().profiles;
+    // Previously this code depended on the `profiles` reducer but
+    // this was from the shared analyze code which is now lazy-loaded,
+    // so we use the profileSidebar instead.
+    const { profiles } = getState().profileSidebar;
+    if (!profiles || profiles.length === 0) {
+      return null;
+    }
     const channel = getChannelFromPath(path, profiles);
     return channel ? channel.service : null;
   }

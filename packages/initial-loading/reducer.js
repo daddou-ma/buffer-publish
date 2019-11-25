@@ -1,11 +1,32 @@
-import keyWrapper from '@bufferapp/keywrapper';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
-export const actionTypes = keyWrapper('INITIAL_LOADING', [
-  'PROFILE_LOADING_REDIRECT',
-]);
+export const actionTypes = {};
 
-export const actions = {
-  profileLoadingRedirect: () => ({
-    type: actionTypes.PROFILE_LOADING_REDIRECT,
-  }),
+const initialState = {
+  hasPublishBeta: false,
+  hasPublishBetaRedirect: false,
+  hasNewPublish: false,
+  loading: true,
+  onPaydayPage: false,
 };
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const {
+        result: { hasNewPublish, features = [] },
+      } = action;
+      return {
+        loading: false,
+        hasPublishBeta: features.includes('new_publish_beta'),
+        hasPublishBetaRedirect: features.includes('new_publish_beta_redirect'),
+        hasNewPublish,
+        onPaydayPage: window.location.pathname.endsWith('plans'),
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+export const actions = {};

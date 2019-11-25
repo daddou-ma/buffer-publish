@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+
 import tabsReducer from '@bufferapp/publish-tabs/reducer';
 import queueReducer from '@bufferapp/publish-queue/reducer';
 import sentReducer from '@bufferapp/publish-sent/reducer';
@@ -18,7 +18,7 @@ import asyncDataFetchReducer from '@bufferapp/async-data-fetch/lib/reducer';
 import notificationsReducer from '@bufferapp/notifications/lib/reducer';
 import environmentReducer from '@bufferapp/environment/lib/reducer';
 import appSwitcherReducer from '@bufferapp/publish-app-switcher/reducer';
-import betaRedirectReducer from '@bufferapp/publish-beta-redirect/reducer';
+import initialLoadingReducer from '@bufferapp/publish-initial-loading/reducer';
 import switchPlanModalReducer from '@bufferapp/publish-switch-plan-modal/reducer';
 import stripeReducer from '@bufferapp/stripe/reducer';
 import modalsReducer from '@bufferapp/publish-modals/reducer';
@@ -44,19 +44,6 @@ import storyGroupComposerReducer from '@bufferapp/publish-story-group-composer/r
 import plansReducer from '@bufferapp/publish-plans/reducer';
 import creditCardFormReducer from '@bufferapp/publish-credit-card-form/reducer';
 
-// Analyze
-import averageReducer from '@bufferapp/average-table/reducer';
-import compareChartReducer from '@bufferapp/compare-chart/reducer';
-import datePickerReducer from '@bufferapp/analyze-date-picker/reducer';
-import exportPickerReducer from '@bufferapp/analyze-export-picker/reducer';
-import exportToCSVReducer from '@bufferapp/analyze-csv-export/reducer';
-import exportToPNGReducer from '@bufferapp/analyze-png-export/reducer';
-import postsReducer from '@bufferapp/posts-table/reducer';
-import profileReducer from '@bufferapp/analyze-profile-selector/reducer';
-import reportListReducer from '@bufferapp/report-list/reducer';
-import summaryTableReducer from '@bufferapp/summary-table/reducer';
-import profileLoaderReducer from '@bufferapp/profile-loader/reducer';
-
 export default {
   form: formReducer,
   queue: queueReducer,
@@ -73,7 +60,7 @@ export default {
   notifications: notificationsReducer,
   environment: environmentReducer,
   appSwitcher: appSwitcherReducer,
-  betaRedirect: betaRedirectReducer,
+  initialLoading: initialLoadingReducer,
   switchPlanModal: switchPlanModalReducer,
   stripe: stripeReducer,
   modals: modalsReducer,
@@ -102,17 +89,4 @@ export default {
   storyGroupComposer: storyGroupComposerReducer,
   plans: plansReducer,
   creditCardForm: creditCardFormReducer,
-
-  // Analyze
-  average: averageReducer,
-  compare: compareChartReducer,
-  date: datePickerReducer,
-  exportPicker: exportPickerReducer,
-  exportToPNG: exportToPNGReducer,
-  exportToCSV: exportToCSVReducer,
-  posts: postsReducer,
-  profileLoader: profileLoaderReducer,
-  profiles: profileReducer,
-  reportList: reportListReducer,
-  summary: summaryTableReducer,
 };

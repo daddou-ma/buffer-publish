@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import createStore, { history } from '@bufferapp/publish-store';
+import store, { history } from '@bufferapp/publish-store';
 import { Provider } from 'react-redux';
 import {
   ConnectedRouter as Router,
@@ -11,7 +11,7 @@ import App from './index';
 storiesOf('App', module)
   .addDecorator(withA11y)
   .addDecorator(getStory =>
-    <Provider store={createStore()}>
+    <Provider store={store}>
       <Router history={history}>
         {getStory()}
       </Router>
