@@ -25,5 +25,5 @@ module.exports = method(
     }
     result = JSON.parse(result);
     return Promise.resolve(result);
-  },
+  }
 );

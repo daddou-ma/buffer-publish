@@ -13,7 +13,7 @@ import {
   getChannelProperties,
 } from './util';
 
-export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line no-unused-vars
+export default ({ getState, dispatch }) => next => action => { // eslint-disable-line no-unused-vars
   next(action);
   switch (action.type) {
     case actionTypes.SELECT_PROFILE:
@@ -121,6 +121,55 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         message: 'There was an error saving your changes!',
       }));
       break;
+
+    case gridActionTypes.UPDATE_CUSTOM_LINKS:
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'updateCustomLinks',
+          args: {
+            profileId: action.profileId,
+            customLinks: action.customLinks,
+            customLinkColor: action.customLinkColor,
+            customLinkButtonType: action.customLinkButtonType,
+          },
+        })
+      );
+      break;
+
+    case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      // TODO: add implementation
+      console.log('Success!', action);
+      break;
+
+    case `updateCustomLinks_${dataFetchActionTypes.FETCH_FAIL}`:
+      // TODO: add implementation
+      console.log('Error!', action);
+      break;
+
+    case gridActionTypes.DELETE_CUSTOM_LINK:
+      if (action.customLinkId) {
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'deleteCustomLink',
+            args: {
+              profileId: action.profileId,
+              customLinkId: action.customLinkId,
+            },
+          })
+        );
+      }
+      break;
+
+    case `deleteCustomLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      // TODO: add implementation
+      console.log('Success!', action);
+      break;
+
+    case `deleteCustomLink_${dataFetchActionTypes.FETCH_FAIL}`:
+      // TODO: add implementation
+      console.log('Error!', action);
+      break;
+
     default:
       break;
   }

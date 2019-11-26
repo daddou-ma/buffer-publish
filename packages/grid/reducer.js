@@ -9,6 +9,9 @@ export const actionTypes = keyWrapper('GRID', {
   UPDATE_POST_URL: 0,
   SAVE_POST_URL: 0,
   COPY_TO_CLIPBOARD_RESULT: 0,
+  GET_CUSTOM_LINKS: 0,
+  UPDATE_CUSTOM_LINKS: 0,
+  DELETE_CUSTOM_LINK: 0,
 });
 
 export const initialState = {
@@ -199,5 +202,22 @@ export const actions = {
     type: actionTypes.COPY_TO_CLIPBOARD_RESULT,
     copySuccess,
     publicGridUrl,
+  }),
+  handleUpdateCustomLinks: ({
+    profileId,
+    customLinks,
+    customLinkColor,
+    customLinkButtonType,
+  }) => ({
+    type: actionTypes.UPDATE_CUSTOM_LINKS,
+    profileId,
+    customLinks,
+    customLinkColor,
+    customLinkButtonType,
+  }),
+  handleDeleteCustomLink: ({ profileId, customLinkId }) => ({
+    type: actionTypes.DELETE_CUSTOM_LINK,
+    profileId,
+    customLinkId,
   }),
 };

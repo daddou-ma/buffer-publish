@@ -47,4 +47,9 @@ module.exports = profile => ({
     (profile.service === 'twitter' ||
       profile.service === 'facebook' ||
       isInstagramAnalyticsSupported(profile)),
+  customLinksDetails: {
+    buttonColor: profile.custom_links_color,
+    buttonType: profile.custom_links_button_type,
+    customLinks: profile.custom_links,
+  },
 });
