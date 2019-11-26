@@ -12,6 +12,7 @@ module.exports = function(api) {
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-transform-modules-commonjs',
       '@babel/plugin-proposal-export-default-from',
+      'babel-plugin-dynamic-import-node',
       [
         '@babel/plugin-transform-runtime',
         {
