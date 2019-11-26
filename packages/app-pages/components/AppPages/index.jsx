@@ -16,7 +16,8 @@ import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
 
-const AppPages = ({ profiles, hasProfiles, isOnBusinessTrial }) => {
+const AppPages = ({ profiles, isOnBusinessTrial }) => {
+  const hasProfiles = profiles && profiles.length > 0;
   const redirectToQueue = () => {
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
@@ -49,15 +50,13 @@ const AppPages = ({ profiles, hasProfiles, isOnBusinessTrial }) => {
 };
 
 AppPages.propTypes = {
-  profiles: PropTypes.shape,
-  hasProfiles: PropTypes.bool,
+  profiles: PropTypes.arrayOf(PropTypes.object),
   isOnBusinessTrial: PropTypes.bool,
 };
 
 AppPages.defaultProps = {
-  hasProfiles: false,
   isOnBusinessTrial: false,
-  profiles: {},
+  profiles: [],
 };
 
 export default AppPages;
