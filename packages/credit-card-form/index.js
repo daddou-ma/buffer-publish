@@ -6,7 +6,6 @@ import StripeCreditCardForm from './components/CreditCardForm';
 export default connect(
   state => ({
     stripePublishableKey: state.creditCardForm.stripePublishableKey,
-    stripe: state.creditCardForm.stripe,
   }),
   dispatch => ({
     createSetupIntentRequest: () => dispatch(stripeActions.createSetupIntentRequest()),

@@ -1,7 +1,6 @@
 import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
 import { getProfilePageParams } from '@bufferapp/publish-routes';
-import { CLIENT_NAME } from '@bufferapp/publish-constants';
 
 import {
   actions as dataFetchActions,
@@ -17,7 +16,6 @@ const getTrackingData = ({ post = {}, channel = {} }) => ({
   channelServiceId: channel.serviceId || null,
   postId: post.id || null,
   mediaType: post.type || null,
-  clientName: CLIENT_NAME,
 });
 
 export default ({ dispatch, getState }) => next => (action) => {

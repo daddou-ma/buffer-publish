@@ -87,14 +87,6 @@ describe('ComposerStore', () => {
     },
   };
 
-  const actionUpdateToggleComment = (id, commentEnabled) => ({
-    action: {
-      actionType: ActionTypes.COMPOSER_UPDATE_TOGGLE_COMMENT,
-      id,
-      commentEnabled,
-    },
-  });
-
   const actionUpdateDraftShopgridLink = (id, shopgridLink) => ({
     action: {
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_SHOPGRID_LINK,
@@ -200,41 +192,13 @@ describe('ComposerStore', () => {
     expect(characterCount).toEqual(7);
   });
 
-  it('enables comment area', () => {
-    const id = 'instagram';
-    const commentEnabled = true;
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddImage);
-    AppDispatcher.dispatch(actionUpdateToggleComment(id, commentEnabled));
-    AppDispatcher.dispatch(actionUpdateInstaState);
-    const draft = ComposerStore.default.getDraft('instagram');
-    expect(draft.commentEnabled).toBeTruthy();
-  });
-
-  it('disables comment area', () => {
-    const id = 'instagram';
-    const commentEnabled = false;
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddImage);
-    AppDispatcher.dispatch(actionUpdateToggleComment(id, commentEnabled));
-    AppDispatcher.dispatch(actionUpdateInstaState);
-    const draft = ComposerStore.default.getDraft('instagram');
-    expect(draft.commentEnabled).toBeFalsy();
-  });
-
   it('sets the comment text in the draft', () => {
     const id = 'instagram';
-    const commentEnabled = true;
     const commentText = 'Comment';
     AppDispatcher.dispatch(actionAddProfiles);
     AppDispatcher.dispatch(actionSelectProfile);
     AppDispatcher.dispatch(actionEnableInstagramDraft);
     AppDispatcher.dispatch(actionAddImage);
-    AppDispatcher.dispatch(actionUpdateToggleComment(id, commentEnabled));
     AppDispatcher.dispatch(actionUpdateDraftComment(id, commentText));
     AppDispatcher.dispatch(actionUpdateInstaState);
     const draft = ComposerStore.default.getDraft('instagram');
@@ -243,13 +207,11 @@ describe('ComposerStore', () => {
 
   it('returns total amount of characters for comment', () => {
     const id = 'instagram';
-    const commentEnabled = true;
     const commentText = 'Comment';
     AppDispatcher.dispatch(actionAddProfiles);
     AppDispatcher.dispatch(actionSelectProfile);
     AppDispatcher.dispatch(actionEnableInstagramDraft);
     AppDispatcher.dispatch(actionAddImage);
-    AppDispatcher.dispatch(actionUpdateToggleComment(id, commentEnabled));
     AppDispatcher.dispatch(actionUpdateDraftComment(id, commentText));
     AppDispatcher.dispatch(actionUpdateInstaState);
     const characterCommentCount = ComposerStore.getDraftCharacterCount(id, commentText);

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Popover } from '@bufferapp/components';
+import { hot } from 'react-hot-loader/root';
 import ComposerWrapper from './components/ComposerWrapper';
 
 const onOverlayClick = (onSave, onComposerOverlayClick, editMode) => {
@@ -21,10 +22,12 @@ const ComposerPopover = ({
   editMode,
 }) => (
   <Popover
-    width={'100%'}
-    top={'5rem'}
+    width="100%"
+    top="5rem"
     transparentOverlay={transparentOverlay}
-    onOverlayClick={() => onOverlayClick(onSave, onComposerOverlayClick, editMode)}
+    onOverlayClick={() =>
+      onOverlayClick(onSave, onComposerOverlayClick, editMode)
+    }
   >
     <ComposerWrapper
       type={type}
@@ -40,12 +43,14 @@ ComposerPopover.propTypes = {
   transparentOverlay: PropTypes.bool,
   preserveComposerStateOnClose: PropTypes.bool,
   type: PropTypes.oneOf(['queue', 'drafts', 'sent', 'pastReminders']),
+  editMode: PropTypes.bool,
 };
 
 ComposerPopover.defaultProps = {
   transparentOverlay: false,
   preserveComposerStateOnClose: false,
   type: 'queue',
+  editMode: false,
 };
 
-export default ComposerPopover;
+export default hot(ComposerPopover);

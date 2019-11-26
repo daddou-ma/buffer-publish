@@ -1,4 +1,3 @@
-import { CLIENT_NAME } from '@bufferapp/publish-constants';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 
 export const getCounts = (stories = []) => {
@@ -25,7 +24,6 @@ export const getSGTrackingData = ({ storyGroup, channel = {}, cta }) => {
     channelId: storyGroup.profileId,
     scheduledAt: JSON.stringify(storyGroup.scheduledAt),
     clientId: null,
-    clientName: CLIENT_NAME,
     ...counts,
     ...ctaProperties,
   };
@@ -46,7 +44,6 @@ export const getNoteTrackingData = ({
     noteText: note,
     characterCount: note.length,
     clientId: null,
-    clientName: CLIENT_NAME,
     ...ctaProperties,
   };
 };

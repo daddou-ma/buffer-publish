@@ -40,6 +40,11 @@ const profileBadgeWrapperStyle = {
   alignItems: 'center',
 };
 
+const containerUnstyled = {
+  textDecoration: 'none',
+  outline: 'none',
+};
+
 const PendingCountNotification = ({ pendingCount, selected }) => (
   <Text size="mini" color={selected ? 'white' : 'shuttleGray'}>
     {pendingCount < 0 ? 0 : pendingCount}
@@ -80,13 +85,12 @@ const ProfileListItem = ({
   };
 
   return (
-    <Link
-      href={'#'}
+    <div
       onClick={e => {
         e.preventDefault();
         handleClick();
       }}
-      unstyled
+      style={containerUnstyled}
     >
       <div
         style={calculateStyles(
@@ -139,7 +143,7 @@ const ProfileListItem = ({
           <PendingCountNotification pendingCount={pendingCount} selected={selected} />
         )}
       </div>
-    </Link>
+    </div>
   );
 };
 

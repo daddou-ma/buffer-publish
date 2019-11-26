@@ -7,11 +7,10 @@ import {
   ConnectedRouter as Router,
 } from 'connected-react-router';
 import createHistory from 'history/createHashHistory';
-import createStore from '@bufferapp/publish-store';
+import store from '@bufferapp/publish-store';
 import Preferences from './index';
 
 const history = createHistory();
-const store = createStore();
 
 storiesOf('Preferences', module)
   .addDecorator(withA11y)

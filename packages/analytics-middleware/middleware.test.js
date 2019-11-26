@@ -13,6 +13,7 @@ describe('middleware', () => {
   };
 
   global.PRODUCT_TRACKING_KEY = 'publish';
+  global.CLIENT_NAME = 'publishWeb';
 
   afterEach(() => jest.clearAllMocks());
 
@@ -54,6 +55,7 @@ describe('middleware', () => {
       .toHaveBeenCalledWith(action.eventName, {
         bar: 'bar',
         product: 'publish',
+        clientName: 'publishWeb',
       });
   });
 

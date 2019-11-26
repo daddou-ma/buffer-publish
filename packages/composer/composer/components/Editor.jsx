@@ -352,15 +352,31 @@ class Editor extends React.Component {
     return 'handled';
   };
 
-  handlePastedText = (text) => {
-    const { editorState } = this.props.draft;
-    const contentState = Modifier.replaceText(
-      editorState.getCurrentContent(),
-      editorState.getSelection(),
-      text,
-    );
+  replacePastedText = (text, editorState) => {
+    if (text) {
+      return Modifier.replaceText(
+        editorState.getCurrentContent(),
+        editorState.getSelection(),
+        text
+      );
+    }
 
-    this.onEditorStateChange(EditorState.push(editorState, contentState, 'insert-fragment'));
+    return null;
+  };
+
+  updateEditorStateAfterPaste = (editorState, contentState) => {
+    this.onEditorStateChange(
+      EditorState.push(editorState, contentState, 'insert-fragment')
+    );
+  };
+
+  handlePastedText = text => {
+    const { editorState } = this.props.draft;
+    const contentState = this.replacePastedText(text, editorState);
+
+    if (contentState) {
+      this.updateEditorStateAfterPaste(editorState, contentState);
+    }
 
     return 'handled';
   };

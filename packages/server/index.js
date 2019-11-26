@@ -4,7 +4,8 @@
 const isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
   // This line must come before importing any instrumented module.
-  require('dd-trace').init({ // eslint-disable-line
+  require('dd-trace').init({
+    // eslint-disable-line
     env: 'production',
     hostname: process.env.DD_AGENT_HOST,
     port: 8126,
@@ -132,15 +133,14 @@ const showModalScript = (key, val) => {
 };
 
 const stripeScript = `
-  <script src="https://js.stripe.com/v3/"></script>
+  <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
   <script type="text/javascript">
-    const stripe = Stripe('${stripePublishableKey}');
-    window._stripe = stripe;
     window.STRIPE_PUBLISHABLE_KEY = '${stripePublishableKey}';
   </script>
 `;
 
-const appcuesScript = '<script src="//fast.appcues.com/49463.js"></script>';
+const appcuesScript =
+  '<script id="appcues-js" src="//fast.appcues.com/49463.js" async></script>';
 
 const fullStoryScript = `<script>
 window['_fs_debug'] = false;
@@ -176,6 +176,7 @@ const helpScoutScript = `
 
 const segmentScript = `<script>
       window.PRODUCT_TRACKING_KEY = 'publish';
+      window.CLIENT_NAME = 'publishWeb';
       !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
         analytics.load("${segmentKey}");
       }}();
@@ -195,14 +196,11 @@ const iterateScript = `<script>
   </script>`;
 
 const getUserData = ({ userData }) => {
-  const bufferUser =
-    typeof userData === 'undefined'
-      ? ''
-      : `<script>try { window.bufferUser = ${JSON.stringify(
-          userData
-        )}; } catch(e) {}</script>`;
+  if (typeof userData === 'undefined') {
+    return '';
+  }
 
-  return bufferUser;
+  return `<script>try { window.bufferUser = ${JSON.stringify(userData)}; } catch(e) {}</script>`;
 };
 
 const getFullstory = ({ includeFullstory }) => {
@@ -214,6 +212,9 @@ const getBugsnag = ({ userId }) => {
   return isProduction ? getBugsnagScript(userId) : '';
 };
 
+// We are hard coding the planCode check to 1 for free users, but if we need more we should import constants instead
+const canIncludeFullstory = user => (user ? user.planCode !== 1 : true);
+
 const getHtml = ({
   notification,
   userId,
@@ -222,11 +223,27 @@ const getHtml = ({
   userData,
   includeFullstory = true,
 }) => {
+  /**
+   * Because our static assets have hashes in their names in production
+   * they will also be keyed that way in the staticAssets file. So we
+   * need to do a bit of magic here to extract the correct key for the
+   * bundles full path.
+   */
+  const filenames = Object.keys(staticAssets);
+  const bundleKey = isProduction
+    ? filenames.find(file => file.match(/bundle\.(.*)\.js$/))
+    : 'bundle.js';
+  const vendorKey = isProduction
+    ? filenames.find(file => file.match(/vendor\.(.*)\.js$/))
+    : 'vendor.js';
+  const bundleCssKey = isProduction
+    ? filenames.find(file => file.match(/bundle\.(.*)\.css$/))
+    : 'bundle.css';
   return fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
-    .replace('{{{vendor}}}', staticAssets['vendor.js'])
-    .replace('{{{bundle}}}', staticAssets['bundle.js'])
-    .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
+    .replace('{{{vendor}}}', staticAssets[vendorKey])
+    .replace('{{{bundle}}}', staticAssets[bundleKey])
+    .replace('{{{bundle-css}}}', staticAssets[bundleCssKey])
     .replace('{{{stripeScript}}}', stripeScript)
     .replace('{{{fullStoryScript}}}', getFullstory({ includeFullstory }))
     .replace('{{{bugsnagScript}}}', getBugsnag({ userId }))
@@ -345,7 +362,7 @@ app.get('*', (req, res) => {
           modalKey,
           modalValue,
           userData: user,
-          includeFullstory: user ? user.planCode !== 1 : true,
+          includeFullstory: canIncludeFullstory(user),
         })
       );
     });

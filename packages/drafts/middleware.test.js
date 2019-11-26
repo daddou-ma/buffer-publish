@@ -1,7 +1,6 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { CLIENT_NAME } from '@bufferapp/publish-constants';
 import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
@@ -183,7 +182,6 @@ describe('middleware', () => {
       channelType: 'personal_profile',
       channel: 'twitter',
       channelServiceId: 'foo123',
-      clientName: CLIENT_NAME,
     };
     it('it should track analytics-middleware on changeDraftStatus_FETCH_SUCCESS move to approval', () => {
       analyticsActions.trackEvent = jest.fn();

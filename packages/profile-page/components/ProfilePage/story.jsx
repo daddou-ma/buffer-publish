@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import createStore from '@bufferapp/publish-store';
+import store from '@bufferapp/publish-store';
 import {
   ConnectedRouter as Router,
 } from 'connected-react-router';
@@ -13,7 +13,6 @@ import ProfilePage from './index';
 import { selectedProfile, profiles } from '../../../profile-sidebar/mockData/profiles';
 
 const history = createHistory();
-const store = createStore();
 const stubbedHistory = {
   location: {
     pathname: '/profile/1234/tab/queue',

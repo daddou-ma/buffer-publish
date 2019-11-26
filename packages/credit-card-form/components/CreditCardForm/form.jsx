@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { CardElement, injectStripe } from "react-stripe-elements";
-import { Button } from "@bufferapp/ui";
-import { ButtonWrapper, InputWrapper } from "./styles";
+import React, { Component } from 'react';
+import { CardElement, injectStripe } from 'react-stripe-elements';
+import { Button } from '@bufferapp/ui';
+import { ButtonWrapper, InputWrapper } from './styles';
 
 class CreditCardForm extends Component {
-  constructor () {
+  constructor() {
     super();
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit = (ev) => {
+  handleSubmit = ev => {
     ev.preventDefault();
 
     const {
@@ -29,9 +29,11 @@ class CreditCardForm extends Component {
       setupIntentClientSecret,
       source,
       plan,
-      cycle,
+      cycle
     );
-    upgradePlan();
+    if (typeof upgradePlan === 'function') {
+      upgradePlan();
+    }
   };
 
   render() {
@@ -39,7 +41,7 @@ class CreditCardForm extends Component {
       buttonLabel,
       validating,
       closeButtonLabel,
-      closeAction
+      closeAction,
     } = this.props;
 
     return (
@@ -53,7 +55,12 @@ class CreditCardForm extends Component {
             label={closeButtonLabel}
             onClick={closeAction}
           />
-          <Button type="primary" onClick={this.handleSubmit} label={buttonLabel} disabled={validating} />
+          <Button
+            type="primary"
+            onClick={this.handleSubmit}
+            label={buttonLabel}
+            disabled={validating}
+          />
         </ButtonWrapper>
       </form>
     );
