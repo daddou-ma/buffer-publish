@@ -137,10 +137,12 @@ export default ({ getState, dispatch }) => next => action => { // eslint-disable
       break;
 
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      // TODO: add implementation
       console.log('Success!', action);
       break;
 
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_FAIL}`:
+      // TODO: add implementation
       console.log('Error!', action);
       break;
 
@@ -159,10 +161,12 @@ export default ({ getState, dispatch }) => next => action => { // eslint-disable
       break;
 
     case `deleteCustomLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      // TODO: add implementation
       console.log('Success!', action);
       break;
 
     case `deleteCustomLink_${dataFetchActionTypes.FETCH_FAIL}`:
+      // TODO: add implementation
       console.log('Error!', action);
       break;
 

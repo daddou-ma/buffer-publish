@@ -149,51 +149,6 @@ const GridPosts = ({
     );
   }
 
-  const CustomLinksActions = () => {
-    const customLinks = [
-      { text: 'texty text!!!', order: 2, url: 'url3' },
-      { text: 'huhuhu!!!', order: 1, url: 'url4' },
-    ];
-    const customLinkColor = '#AFAFAF';
-    const customLinkButtonType = 'rounded';
-    console.log('Custom Links Details --->', customLinksDetails);
-
-    return (
-      <>
-        <Button
-          label="Update Custom Links"
-          type="secondary"
-          onClick={() => {
-            onUpdateCustomLinks({ customLinks });
-          }}
-        />
-        <Button
-          label="Update Custom Links - Color"
-          type="secondary"
-          onClick={() => {
-            onUpdateCustomLinksColor({ customLinkColor });
-          }}
-        />
-        <Button
-          label="Update Custom Links - Type"
-          type="secondary"
-          onClick={() => {
-            onUpdateCustomLinksButtonType({ customLinkButtonType });
-          }}
-        />
-        <Button
-          label="Delete Custom Link"
-          type="secondary"
-          onClick={() => {
-            onDeleteCustomLink({
-              customLinkId: 'id',
-            });
-          }}
-        />
-      </>
-    );
-  };
-
   return (
     <ErrorBoundary>
       <div>
@@ -208,7 +163,6 @@ const GridPosts = ({
                 type="social"
                 network={profile.service}
               />
-              <CustomLinksActions />
             </div>
           </div>
           <div style={buttonsWrapperStyles}>
