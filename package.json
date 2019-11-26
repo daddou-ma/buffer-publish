@@ -130,6 +130,7 @@
     "react-hot-loader": "4.12.17",
     "react-redux": "5.0.4",
     "react-router": "5.1.2",
+    "react-router-redux": "5.0.0-alpha.6",
     "react-simple-dropdown": "3.2.0",
     "react-syntax-highlighter": "11.0.2",
     "react-test-renderer": "16.8.6",
