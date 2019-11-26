@@ -113,6 +113,11 @@ const GridPosts = ({
   handleCopyToClipboard,
   publicGridUrl,
   features,
+  customLinksDetails,
+  onUpdateCustomLinks,
+  onUpdateCustomLinksColor,
+  onUpdateCustomLinksButtonType,
+  onDeleteCustomLink,
 }) => {
   if (loading) {
     return (
