@@ -48,7 +48,7 @@ import profilesReducer from '@bufferapp/publish-data-profiles/reducer';
 
 export default {
   user: userReducer,
-  profiles: profilesReducer,
+  publishProfiles: profilesReducer,
   form: formReducer,
   queue: queueReducer,
   sent: sentReducer,

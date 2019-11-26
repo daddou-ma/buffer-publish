@@ -22,6 +22,11 @@ export default ({ dispatch }) => next => action => {
         dispatch(
           dataFetchActions.fetch({
             name: 'profiles',
+            args: {
+              // Passing this prevents the profiles FETCH_SUCCESS from affecting the
+              // rest of the publish app.
+              forAnalyze: action.forAnalyze || false,
+            },
           })
         );
       }

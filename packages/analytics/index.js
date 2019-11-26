@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 
 import Analytics from './components/Analytics';
 
@@ -20,16 +19,7 @@ const mapDispatchToProps = dispatch => ({
    * is mounted it can setup its stores / trigger fetches / etc.
    */
   fetchProfiles() {
-    dispatch(
-      dataFetchActions.fetch({
-        name: 'profiles',
-        args: {
-          // Passing this prevents the profiles FETCH_SUCCESS from affecting the
-          // rest of the publish app.
-          forAnalyze: true,
-        },
-      })
-    );
+    dispatch({ type: 'PROFILES_INIT', forAnalyze: true });
   },
   selectProfile(profile) {
     const {
