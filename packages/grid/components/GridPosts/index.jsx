@@ -8,6 +8,7 @@ import {
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
+import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import Avatar from '@bufferapp/ui/Avatar';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
@@ -201,6 +202,8 @@ const GridPosts = ({
                 onPreviewClick(publicGridUrl);
                 trackPagePreviewed(profile);
               }}
+              icon={<ArrowRightIcon />}
+              iconEnd
             />
           </div>
         </div>
