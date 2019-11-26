@@ -18,7 +18,8 @@ import OnboardingManager from '@bufferapp/publish-onboarding';
 
 const AppPages = ({ profiles, hasProfiles, isOnBusinessTrial }) => {
   const redirectToQueue = () => {
-    const selectedProfileId = profiles[0].id;
+    const selectedProfileId =
+      Array.isArray(profiles) && !!profiles.length && profiles[0].id;
     const newPath = generateProfilePageRoute({ profileId: selectedProfileId });
     return <Redirect to={newPath} />;
   };
@@ -27,17 +28,21 @@ const AppPages = ({ profiles, hasProfiles, isOnBusinessTrial }) => {
       <Route path={preferencePageRoute} component={Preferences} />
       <Route path={plansPageRoute} component={Plans} />
 
+      {!hasProfiles && (
+        <Route path={newBusinessTrialistsRoute} component={OnboardingManager} />
+      )}
       {!hasProfiles && isOnBusinessTrial && (
         <Redirect to={newBusinessTrialistsRoute} />
       )}
 
+      {!hasProfiles && (
+        <Route path={newConnectionRoute} component={DefaultPage} />
+      )}
       {!hasProfiles && <Redirect to={newConnectionRoute} />}
 
       <Route path={childTabRoute} component={ProfilePage} />
       <Route path={profilePageRoute} component={ProfilePage} />
 
-      <Route path={newConnectionRoute} component={DefaultPage} />
-      <Route path={newBusinessTrialistsRoute} component={OnboardingManager} />
       <Route>{redirectToQueue()}</Route>
     </Switch>
   );
