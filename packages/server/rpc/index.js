@@ -69,6 +69,8 @@ const getShopGridPostsMethod = require('./shopGrid/getPosts');
 const updateShopGridPostLink = require('./shopGrid/updatePostLink');
 const updateCustomLinksMethod = require('./shopGrid/customLinks/update');
 const deleteCustomLinkMethod = require('./shopGrid/customLinks/delete');
+const addUserTag = require('./addUserTag');
+const removeUserTag = require('./removeUserTag');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const average = require('./analytics/average');
@@ -148,6 +150,8 @@ module.exports = rpc(
   updateStoryGroupMethod,
   deleteStoryGroupMethod,
   shareStoryGroupNowMethod,
+  addUserTag,
+  removeUserTag,
   getShopGridPostsMethod,
   updateShopGridPostLink,
   updateCustomLinksMethod,
