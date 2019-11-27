@@ -35,6 +35,7 @@ const controller = require('./lib/controller');
 const rpcHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
 const userMethod = require('./rpc/user/index');
+const profilesMethod = require('./rpc/profiles/index');
 const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
 const { getFaviconCode, setupFaviconRoutes } = require('./lib/favicon');
@@ -195,12 +196,26 @@ const iterateScript = `<script>
     if(i.attachEvent) {i.attachEvent('onload', l);} else{i.addEventListener('load', l, false);}}(window, document,'script','iterate-js','Iterate'));
   </script>`;
 
-const getUserData = ({ userData }) => {
-  if (typeof userData === 'undefined') {
+const getBufferData = ({ user, profiles }) => {
+  if (typeof user === 'undefined' && typeof profiles === 'undefined') {
     return '';
   }
 
-  return `<script>try { window.bufferUser = ${JSON.stringify(userData)}; } catch(e) {}</script>`;
+  const bufferData = {};
+
+  if (typeof user !== 'undefined') {
+    bufferData.user = user;
+  }
+  if (typeof profiles !== 'undefined') {
+    bufferData.profiles = profiles;
+  }
+
+  return `
+<script>
+  try {
+    window.bufferData = ${JSON.stringify(bufferData)};
+  } catch(e) {}
+</script>`;
 };
 
 const getFullstory = ({ includeFullstory }) => {
@@ -220,7 +235,8 @@ const getHtml = ({
   userId,
   modalKey,
   modalValue,
-  userData,
+  user,
+  profiles,
   includeFullstory = true,
 }) => {
   /**
@@ -256,7 +272,7 @@ const getHtml = ({
     .replace('{{{userScript}}}', getUserScript({ id: userId }))
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
     .replace('{{{segmentScript}}}', segmentScript)
-    .replace('{{{bufferUser}}}', getUserData({ userData }));
+    .replace('{{{bufferData}}}', getBufferData({ user, profiles }));
 };
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
@@ -349,23 +365,28 @@ app.get('*', (req, res) => {
   const modalKey = req.query.mk ? req.query.mk : null;
   const modalValue = req.query.mv ? req.query.mv : null;
 
-  userMethod
-    .fn(null, req, res)
-    .catch(() => {
+  Promise.all([
+    userMethod.fn(null, req, res).catch(() => {
+      // added catch incase we don't have any data in the object
       return undefined;
-    })
-    .then(user => {
-      res.send(
-        getHtml({
-          notification,
-          userId,
-          modalKey,
-          modalValue,
-          userData: user,
-          includeFullstory: canIncludeFullstory(user),
-        })
-      );
-    });
+    }),
+    profilesMethod.fn(null, req, res).catch(() => {
+      // added catch incase we don't have any data in the object
+      return undefined;
+    }),
+  ]).then(([user, profiles]) => {
+    res.send(
+      getHtml({
+        notification,
+        userId,
+        modalKey,
+        modalValue,
+        user,
+        profiles,
+        includeFullstory: canIncludeFullstory(user),
+      })
+    );
+  });
 });
 
 app.use(apiError);

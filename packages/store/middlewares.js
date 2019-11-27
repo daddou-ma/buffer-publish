@@ -18,6 +18,8 @@ import generalSettingsMiddleware from '@bufferapp/publish-general-settings/middl
 import profileSidebarMiddleware from '@bufferapp/publish-profile-sidebar/middleware';
 import clientAccessMiddleware from '@bufferapp/client-access/middleware';
 import bootstrapMiddleware from '@bufferapp/publish-bootstrap/middleware';
+import userMiddleware from '@bufferapp/publish-data-user/middleware';
+import profilesMiddleware from '@bufferapp/publish-data-profiles/middleware';
 import productFeatureMiddleware from '@bufferapp/product-features/middleware';
 import i18nMiddleware from '@bufferapp/publish-i18n/middleware';
 import asyncDataFetchMiddleware from '@bufferapp/async-data-fetch/lib/middleware';
@@ -74,6 +76,8 @@ const composedMiddlewares = history =>
       profileSidebarMiddleware,
       clientAccessMiddleware,
       bootstrapMiddleware,
+      userMiddleware,
+      profilesMiddleware,
       productFeatureMiddleware,
       queueMiddleware,
       sentMiddleware,
