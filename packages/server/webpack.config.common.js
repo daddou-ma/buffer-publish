@@ -72,6 +72,9 @@ module.exports = {
     }),
   ],
   optimization: {
+    runtimeChunk: {
+      name: 'manifest',
+    },
     splitChunks: {
       cacheGroups: {
         vendors: false, // Disable the default vendors cache group for finer control
