@@ -130,6 +130,7 @@ export default ({ getState, dispatch }) => next => action => { // eslint-disable
             profileId: action.profileId,
             customLinks: action.customLinks,
             customLinkColor: action.customLinkColor,
+            customLinkContrastColor: action.customLinkContrastColor,
             customLinkButtonType: action.customLinkButtonType,
           },
         })
