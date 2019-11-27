@@ -6,8 +6,12 @@ const common = require('./webpack.config.common.js');
 
 const plugins = [
   new MiniCssExtractPlugin({
-    filename: '[name].[chunkhash:8].css',
-    chunkFilename: '[name].[chunkhash:8].css',
+    /**
+     * Using `contenthash` here instead of `chunkhash` to ensure the CSS hash doesn't change unnecessarily
+     * See: https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/#setting-up-hashing
+     */
+    filename: '[name].[contenthash:8].css',
+    chunkFilename: '[name].[contenthash:8].css',
   }),
 ];
 
