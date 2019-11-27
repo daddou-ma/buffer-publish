@@ -143,9 +143,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         message: `Oh no, we had trouble updating your paused days!
         Please contact support if this persists.`,
       }));
-      dispatch(dataFetchActions.fetch({
-        name: 'profiles',
-      }));
+      dispatch({ type: 'PROFILES_INIT' });
       break;
     default:
       break;
