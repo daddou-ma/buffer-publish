@@ -98,16 +98,21 @@ export default connect(
           profileId: ownProps.profileId,
           customLinks,
           customLinkColor: null,
+          customLinkContrastColor: null,
           customLinkButtonType: null,
         })
       );
     },
-    onUpdateCustomLinksColor: ({ customLinkColor }) => {
+    onUpdateCustomLinksColor: ({
+      customLinkColor,
+      customLinkContrastColor,
+    }) => {
       dispatch(
         actions.handleUpdateCustomLinks({
           profileId: ownProps.profileId,
           customLinks: false,
           customLinkColor,
+          customLinkContrastColor,
           customLinkButtonType: null,
         })
       );
@@ -118,6 +123,7 @@ export default connect(
           profileId: ownProps.profileId,
           customLinks: false,
           customLinkColor: null,
+          customLinkContrastColor: null,
           customLinkButtonType,
         })
       );

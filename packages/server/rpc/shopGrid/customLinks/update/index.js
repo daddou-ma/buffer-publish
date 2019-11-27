@@ -5,7 +5,13 @@ module.exports = method(
   'updateCustomLinks',
   'update custom links for a profile',
   async (
-    { profileId, customLinks, customLinkColor, customLinkButtonType },
+    {
+      profileId,
+      customLinks,
+      customLinkColor,
+      customLinkContrastColor,
+      customLinkButtonType,
+    },
     { session }
   ) => {
     let result;
@@ -18,6 +24,7 @@ module.exports = method(
           access_token: session.publish.accessToken,
           custom_links: customLinks,
           custom_links_color: customLinkColor,
+          custom_links_contrast_color: customLinkContrastColor,
           custom_links_button_type: customLinkButtonType,
         },
       });
