@@ -77,7 +77,7 @@ const ColorSelectorPopup = ({
             hasError={!isValidHex}
             onBlur={() => {
               if (!isValidHex) {
-                onColorChange(DEFAULT_COLOR, onChange);
+                onColorChange(colorSelected, onChange, isValidHex);
                 setIsValidHex(true);
               }
             }}
