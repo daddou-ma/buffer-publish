@@ -77,7 +77,7 @@ const copyLinkStyle = {
   marginLeft: 'auto',
 };
 
-const DEFAULT_COLOR = '#2C4BFF';
+const DEFAULT_COLOR = '#000000';
 const ButtonTest = styled.div`
   color: ${props => (props.textColor ? props.textColor : '#FFFFFF')};
   background-color: ${props => (props.bgColor ? props.bgColor : DEFAULT_COLOR)};
@@ -107,7 +107,7 @@ const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
   }
 };
 
-const onPreviewClick = (publicGridUrl) => {
+const onPreviewClick = publicGridUrl => {
   trackAction({ location: 'grid', action: 'click_preview_url' });
   openPreviewPage(publicGridUrl);
 };
@@ -120,7 +120,7 @@ const ColorPickerSection = () => {
     <>
       <ColorPicker
         label="Link Color"
-        defaultColor="#2C4BFF"
+        defaultColor={DEFAULT_COLOR}
         onChange={(color, contrastColor) => {
           setColorButton(color);
           setTextColor(contrastColor);
@@ -134,6 +134,61 @@ const ColorPickerSection = () => {
       <ButtonTest bgColor={colorButtons} textColor={textColor}>
         Background test
       </ButtonTest>
+    </>
+  );
+};
+
+const CustomLinksActions = ({
+  customLinksDetails,
+  onUpdateCustomLinks,
+  onUpdateCustomLinksColor,
+  onUpdateCustomLinksButtonType,
+  onDeleteCustomLink,
+}) => {
+  const customLinks = [
+    { text: 'First custom link', order: 2, url: 'my.url.1' },
+    { text: 'Second custom link', order: 1, url: 'my.url.2' },
+    { text: 'Third custom link', order: 3, url: 'my.url.3' },
+  ];
+  const customLinkColor = '#AFAFAF';
+  const customLinkContrastColor = '#AFAFAF';
+  const customLinkButtonType = 'rounded';
+
+  return (
+    <>
+      <Button
+        label="Update Custom Links"
+        type="secondary"
+        onClick={() => {
+          onUpdateCustomLinks({ customLinks });
+        }}
+      />
+      <Button
+        label="Update Custom Links - Color"
+        type="secondary"
+        onClick={() => {
+          onUpdateCustomLinksColor({
+            customLinkColor,
+            customLinkContrastColor,
+          });
+        }}
+      />
+      <Button
+        label="Update Custom Links - Type"
+        type="secondary"
+        onClick={() => {
+          onUpdateCustomLinksButtonType({ customLinkButtonType });
+        }}
+      />
+      <Button
+        label="Delete Custom Link"
+        type="secondary"
+        onClick={() => {
+          onDeleteCustomLink({
+            customLinkId: 'id',
+          });
+        }}
+      />
     </>
   );
 };
@@ -246,6 +301,13 @@ const GridPosts = ({
           </div>
         </div>
         <ColorPickerSection />
+        <CustomLinksActions
+          customLinksDetails={customLinksDetails}
+          onUpdateCustomLinks={onUpdateCustomLinks}
+          onUpdateCustomLinksColor={onUpdateCustomLinksColor}
+          onUpdateCustomLinksButtonType={onUpdateCustomLinksButtonType}
+          onDeleteCustomLink={onDeleteCustomLink}
+        />
         <GridList
           gridPosts={gridPosts}
           onChangePostUrl={onChangePostUrl}

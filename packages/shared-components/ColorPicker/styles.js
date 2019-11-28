@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 
-export const DEFAULT_COLOR = '#2C4BFF';
 export const colorSwatches = {
-  white: '#FFFFFF',
   black: '#000000',
-  green: '#87C221',
-  blue: '#2C4BFF',
-  lightBlue: '#1DA1F2',
-  orange: '#FF702C',
-  pink: '#E466C5',
-  purple: '#6D1EB3',
-  red: '#F73F16',
+  white: '#FFFFFF',
+  darkPurple: '#3A619C',
+  purple: '#979BC8',
+  lightBlue: '#0098DB',
   aqua: '#2AB4B4',
+  yellow: '#FCE86A',
+  brown: '#AF847A',
+  orange: '#E7764C',
+  red: '#E94D41',
 };
+
+export const DEFAULT_COLOR = colorSwatches.black;
 
 export const ColorPickerWrapper = styled.div`
   display: flex;

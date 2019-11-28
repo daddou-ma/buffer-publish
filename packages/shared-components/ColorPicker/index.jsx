@@ -1,155 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
-import Input from '@bufferapp/ui/Input';
-import { Checkmark } from '@bufferapp/ui/Icon';
 import Button from '@bufferapp/ui/Button';
 import {
   ColorPickerWrapper,
   CircleColor,
   ColorSelectorWrapper,
-  ColorPopup,
-  ColorContainer,
-  ColorInputWrapper,
-  ColorInput,
-  InputWrapper,
-  ColorSwatchesContainer,
-  CheckmarkWrapper,
-  CircleColorWrapper,
-  colorSwatches,
   DEFAULT_COLOR,
 } from './styles';
 
-const isHexValid = hex => /^#[0-9A-F]{6}$/i.test(hex);
-
-const getColorContrast = hex => {
-  const hexColor = hex.replace('#', '');
-  const r = parseInt(hexColor.substr(0, 2), 16);
-  const g = parseInt(hexColor.substr(2, 2), 16);
-  const b = parseInt(hexColor.substr(4, 2), 16);
-  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
-
-  return yiq >= 160 ? '#000000' : '#ffffff';
-};
-
-const onColorChange = (selectedColor, onChange) => {
-  const textColor = getColorContrast(selectedColor);
-  onChange(selectedColor, textColor);
-};
-
-const ColorSwatches = ({ colorSelected, onChange }) => (
-  <ColorSwatchesContainer>
-    {Object.keys(colorSwatches).map(key => (
-      <CircleColorWrapper>
-        <CircleColor
-          color={colorSwatches[key]}
-          onClick={() => onColorChange(colorSwatches[key], onChange)}
-          selectable
-        >
-          {colorSelected === colorSwatches[key] && (
-            <CheckmarkWrapper>
-              <Checkmark />
-            </CheckmarkWrapper>
-          )}
-        </CircleColor>
-      </CircleColorWrapper>
-    ))}
-  </ColorSwatchesContainer>
-);
-
-ColorSwatches.propTypes = {
-  onChange: PropTypes.func,
-  colorSelected: PropTypes.string,
-};
-
-ColorSwatches.defaultProps = {
-  onChange: () => {},
-  colorSelected: '',
-};
-
-const useOutsideClick = (ref, callback) => {
-  const handleClick = e => {
-    if (ref.current && !ref.current.contains(e.target)) {
-      callback();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClick);
-
-    return () => {
-      document.removeEventListener('click', handleClick);
-    };
-  });
-};
-
-const ColorSelectorPopup = ({
-  colorSelected,
-  isValidHex,
-  setIsValidHex,
-  onBlur,
-  onChange,
-}) => {
-  const containerEl = useRef(null);
-  const ref = useRef();
-
-  useOutsideClick(ref, () => {
-    onBlur();
-  });
-
-  return (
-    <ColorPopup ref={ref}>
-      <ColorSwatches onChange={onChange} colorSelected={colorSelected} />
-      <ColorContainer>
-        <ColorInputWrapper color={colorSelected}>
-          <ColorInput
-            ref={containerEl}
-            type="color"
-            value={colorSelected}
-            id="colorWheel"
-            onChange={e => onColorChange(e.target.value, onChange)}
-          />
-        </ColorInputWrapper>
-        <InputWrapper>
-          <Input
-            type="input"
-            onChange={e => {
-              onColorChange(e.target.value, onChange);
-              setIsValidHex(isHexValid(e.target.value));
-            }}
-            value={colorSelected}
-            name="colorInput"
-            disabled={false}
-            hasError={!isValidHex}
-            onBlur={() => {
-              if (!isValidHex) {
-                onColorChange(DEFAULT_COLOR, onChange);
-                setIsValidHex(true);
-              }
-            }}
-            maxLength="7"
-          />
-        </InputWrapper>
-      </ColorContainer>
-    </ColorPopup>
-  );
-};
-
-ColorSelectorPopup.propTypes = {
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  setIsValidHex: PropTypes.func,
-  colorSelected: PropTypes.string,
-  isValidHex: PropTypes.bool,
-};
-
-ColorSelectorPopup.defaultProps = {
-  onBlur: () => {},
-  onChange: () => {},
-  setIsValidHex: () => {},
-  colorSelected: '',
-  isValidHex: true,
-};
+import ColorSelectorPopup from './components/ColorSelectorPopup';
+import { getColorContrast, onColorChange } from './utils/HexValidations';
 
 const ColorPicker = ({ onChange, label, defaultColor, onBlur }) => {
   const [color, setColor] = useState(defaultColor || DEFAULT_COLOR);
@@ -178,6 +39,7 @@ const ColorPicker = ({ onChange, label, defaultColor, onBlur }) => {
         />
         {visible && (
           <ColorSelectorPopup
+            onColorChange={onColorChange}
             colorSelected={color}
             onChange={newColor => {
               setColor(newColor);
