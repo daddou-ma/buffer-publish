@@ -78,7 +78,7 @@ const copyLinkStyle = {
 };
 
 const DEFAULT_COLOR = '#000000';
-const ButtonTest = styled.div`
+const PreviewButton = styled.div`
   color: ${props => (props.textColor ? props.textColor : '#FFFFFF')};
   background-color: ${props => (props.bgColor ? props.bgColor : DEFAULT_COLOR)};
   width: 130px;
@@ -131,9 +131,9 @@ const ColorPickerSection = () => {
         }}
       />
 
-      <ButtonTest bgColor={colorButtons} textColor={textColor}>
+      <PreviewButton bgColor={colorButtons} textColor={textColor}>
         Background test
-      </ButtonTest>
+      </PreviewButton>
     </>
   );
 };
