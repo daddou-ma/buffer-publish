@@ -233,18 +233,6 @@ const getBugsnag = ({ userId }) => {
 // We are hard coding the planCode check to 1 for free users, but if we need more we should import constants instead
 const canIncludeFullstory = user => (user ? user.planCode !== 1 : true);
 
-/**
- * Webpack runtime script, inline into the HTML in prod, locally just include the script:
- * https://survivejs.com/webpack/optimizing/separating-manifest/
- */
-const getRuntimeScript = () => {
-  if (isProduction) {
-    const runtimeFilename = staticAssets['runtime.js'].split('/').pop();
-    return fs.readFileSync(join(__dirname, runtimeFilename), 'utf8');
-  }
-  return `<script crossorigin src="${staticAssets['runtime.js']}"></script>`;
-};
-
 const getHtml = ({
   notification,
   userId,
@@ -256,7 +244,7 @@ const getHtml = ({
 }) => {
   return fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
-    .replace('{{{runtime}}}', getRuntimeScript())
+    .replace('{{{runtime}}}', staticAssets['runtime.js'])
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
     .replace('{{{bundle}}}', staticAssets['bundle.js'])
     .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
