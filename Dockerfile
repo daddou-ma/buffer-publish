@@ -12,6 +12,7 @@ RUN yarn install --non-interactive
 COPY packages/server /usr/src/app
 COPY staticAssets.json /usr/src/app
 COPY webpackAssets.json /usr/src/app
+COPY runtime.*.json /usr/src/app
 COPY version.json /usr/src/app
 
 EXPOSE 80
