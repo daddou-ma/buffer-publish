@@ -15,9 +15,10 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
 import styled from 'styled-components';
-import { grayLight, grayDark } from '@bufferapp/ui/style/colors';
+import { gray, grayLight, grayDark } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
+import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 import { openPreviewPage } from '../../util';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -118,6 +119,16 @@ const MyLinksSection = styled.div`
   border-radius: ${borderRadius};
   padding: 16px;
   margin-bottom: 22px;
+`;
+
+const MyLinksTitle = styled.div``;
+
+const PopoverTextContainer = styled.div`
+  padding: 0.5rem 0.25rem;
+`;
+
+const MyLinksIcon = styled.span`
+  padding: 8px;
 `;
 
 const GridPosts = ({
@@ -226,7 +237,26 @@ const GridPosts = ({
             />
           </StyledButtonWrapper>
         </StyledHeader>
-        <MyLinksSection>My Links go here</MyLinksSection>
+        <MyLinksSection>
+          <MyLinksTitle>
+            My Links go here
+            <MyLinksIcon>
+              <IconArrowPopover
+                icon={<InfoIcon color={gray} />}
+                position="below"
+                shadow
+                oneLine={false}
+                width="320px"
+                label="Posting Times"
+              >
+                <PopoverTextContainer>
+                  {/* eslint-disable max-len */}
+                  Add upto 3 custom links to the top of your Shop grid page.
+                </PopoverTextContainer>
+              </IconArrowPopover>
+            </MyLinksIcon>
+          </MyLinksTitle>
+        </MyLinksSection>
         <GridList
           gridPosts={gridPosts}
           onChangePostUrl={onChangePostUrl}
