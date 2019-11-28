@@ -240,7 +240,10 @@ const canIncludeFullstory = user => (user ? user.planCode !== 1 : true);
 const getRuntimeScript = () => {
   if (isProduction) {
     const runtimeFilename = staticAssets['runtime.js'].split('/').pop();
-    return fs.readFileSync(join(__dirname, runtimeFilename), 'utf8');
+    return `<script>${fs.readFileSync(
+      join(__dirname, runtimeFilename),
+      'utf8'
+    )}</script>`;
   }
   return `<script crossorigin src="${staticAssets['runtime.js']}"></script>`;
 };
