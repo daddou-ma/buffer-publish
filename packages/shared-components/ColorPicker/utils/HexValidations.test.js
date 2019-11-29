@@ -50,4 +50,10 @@ describe('HexValidations Utils', () => {
     const repeatValue = getValidHex('ABC');
     expect(repeatValue).toEqual('#ABCABC');
   });
+
+  it('returns last valid hex when invalid input found', () => {
+    const lastValidColor = '#EB002E';
+    const validHex = getValidHex('!!', lastValidColor);
+    expect(validHex).toEqual(lastValidColor);
+  });
 });

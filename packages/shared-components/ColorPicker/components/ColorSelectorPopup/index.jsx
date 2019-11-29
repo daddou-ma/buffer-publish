@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Input from '@bufferapp/ui/Input';
@@ -10,6 +10,7 @@ import {
   ColorInputWrapper,
   ColorInput,
   InputWrapper,
+  DEFAULT_COLOR,
 } from '../../styles';
 
 import { isHexValid, getValidHex } from '../../utils/HexValidations';
@@ -40,16 +41,24 @@ const ColorSelectorPopup = ({
 }) => {
   const containerEl = useRef(null);
   const ref = useRef();
+  const [lastValidColor, setLastValidColor] = useState(colorSelected || DEFAULT_COLOR);
 
   useOutsideClick(ref, () => {
     onBlur();
   });
 
+  const onColorSelectionChange = colorSelected => {
+    onColorChange(colorSelected, onChange);
+    setLastValidColor(colorSelected);
+  };
+
   return (
     <ColorPopup ref={ref}>
       <ColorSwatches
         onChange={onChange}
-        onColorChange={onColorChange}
+        onColorChange={color => {
+          onColorSelectionChange(color);
+        }}
         colorSelected={colorSelected}
       />
       <ColorContainer>
@@ -59,7 +68,9 @@ const ColorSelectorPopup = ({
             type="color"
             value={colorSelected}
             id="colorWheel"
-            onChange={e => onColorChange(e.target.value, onChange)}
+            onChange={e => {
+              onColorSelectionChange(e.target.value);
+            }}
           />
         </ColorInputWrapper>
         <InputWrapper>
@@ -67,8 +78,9 @@ const ColorSelectorPopup = ({
             type="input"
             prefix={{ text: '#', paddingLeft: '18px' }}
             onChange={e => {
+              const isValidColor = isHexValid(e.target.value);
+              setIsValidHex(isValidColor);
               onColorChange(e.target.value, onChange);
-              setIsValidHex(isHexValid(e.target.value));
             }}
             value={colorSelected.replace('#', '')}
             name="colorInput"
@@ -76,8 +88,8 @@ const ColorSelectorPopup = ({
             hasError={!isValidHex}
             onBlur={() => {
               if (!isValidHex) {
-                const selectedHex = getValidHex(colorSelected);
-                onColorChange(selectedHex, onChange);
+                const selectedHex = getValidHex(colorSelected, lastValidColor);
+                onColorSelectionChange(selectedHex);
                 setIsValidHex(true);
               }
             }}
