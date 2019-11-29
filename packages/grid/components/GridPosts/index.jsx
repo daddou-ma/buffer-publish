@@ -77,19 +77,6 @@ const copyLinkStyle = {
   marginLeft: 'auto',
 };
 
-const DEFAULT_COLOR = '#000000';
-const PreviewButton = styled.div`
-  color: ${props => (props.textColor ? props.textColor : '#FFFFFF')};
-  background-color: ${props => (props.bgColor ? props.bgColor : DEFAULT_COLOR)};
-  width: 130px;
-  height: 35px;
-  border-radius: 4px;
-  padding: 5px 10px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-`;
-
 const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
   const el = document.createElement('textarea');
   el.value = publicGridUrl;
@@ -110,87 +97,6 @@ const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
 const onPreviewClick = publicGridUrl => {
   trackAction({ location: 'grid', action: 'click_preview_url' });
   openPreviewPage(publicGridUrl);
-};
-
-const ColorPickerSection = () => {
-  const [colorButtons, setColorButton] = useState(DEFAULT_COLOR);
-  const [textColor, setTextColor] = useState('#FFFFFF');
-
-  return (
-    <>
-      <ColorPicker
-        label="Link Color"
-        defaultColor={DEFAULT_COLOR}
-        onChange={(color, contrastColor) => {
-          setColorButton(color);
-          setTextColor(contrastColor);
-        }}
-        onBlur={(color, contrastColor) => {
-          setColorButton(color);
-          setTextColor(contrastColor);
-        }}
-      />
-
-      <PreviewButton bgColor={colorButtons} textColor={textColor}>
-        Background test
-      </PreviewButton>
-    </>
-  );
-};
-
-const CustomLinksActions = ({
-  customLinksDetails,
-  onUpdateCustomLinks,
-  onUpdateCustomLinksColor,
-  onUpdateCustomLinksButtonType,
-  onDeleteCustomLink,
-}) => {
-  const customLinks = [
-    { text: 'First custom link', order: 2, url: 'my.url.1' },
-    { text: 'Second custom link', order: 1, url: 'my.url.2' },
-    { text: 'Third custom link', order: 3, url: 'my.url.3' },
-  ];
-  const customLinkColor = '#AFAFAF';
-  const customLinkContrastColor = '#AFAFAF';
-  const customLinkButtonType = 'rounded';
-
-  return (
-    <>
-      <Button
-        label="Update Custom Links"
-        type="secondary"
-        onClick={() => {
-          onUpdateCustomLinks({ customLinks });
-        }}
-      />
-      <Button
-        label="Update Custom Links - Color"
-        type="secondary"
-        onClick={() => {
-          onUpdateCustomLinksColor({
-            customLinkColor,
-            customLinkContrastColor,
-          });
-        }}
-      />
-      <Button
-        label="Update Custom Links - Type"
-        type="secondary"
-        onClick={() => {
-          onUpdateCustomLinksButtonType({ customLinkButtonType });
-        }}
-      />
-      <Button
-        label="Delete Custom Link"
-        type="secondary"
-        onClick={() => {
-          onDeleteCustomLink({
-            customLinkId: 'id',
-          });
-        }}
-      />
-    </>
-  );
 };
 
 const GridPosts = ({
@@ -300,14 +206,6 @@ const GridPosts = ({
             />
           </div>
         </div>
-        <ColorPickerSection />
-        <CustomLinksActions
-          customLinksDetails={customLinksDetails}
-          onUpdateCustomLinks={onUpdateCustomLinks}
-          onUpdateCustomLinksColor={onUpdateCustomLinksColor}
-          onUpdateCustomLinksButtonType={onUpdateCustomLinksButtonType}
-          onDeleteCustomLink={onDeleteCustomLink}
-        />
         <GridList
           gridPosts={gridPosts}
           onChangePostUrl={onChangePostUrl}
