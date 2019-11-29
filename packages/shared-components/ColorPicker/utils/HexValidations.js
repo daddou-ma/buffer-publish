@@ -21,17 +21,15 @@ export const repeatInputHex = (selectedHex, lastValidColor) => {
 };
 
 export const getValidHex = (hexColor, lastValidColor) => {
-  let result = hexColor.replace('#', '');
+  const color = hexColor.replace('#', '');
   const validColor = lastValidColor || DEFAULT_COLOR;
 
   if (!isHexValid(hexColor)) {
-    const shouldRepeat = result.length > 0 && result.length <= 3;
-    result = shouldRepeat ? repeatInputHex(result, validColor) : validColor;
-  } else {
-    result = hexColor;
+    const shouldRepeat = color.length > 0 && color.length <= 3;
+    return shouldRepeat ? repeatInputHex(color, validColor) : validColor;
   }
 
-  return result;
+  return hexColor;
 };
 
 export const onColorChange = (selectedHex, onChange) => {
