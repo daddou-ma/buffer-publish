@@ -12,12 +12,13 @@ export const getColorContrast = hex => {
 
 export const isHexValid = hex => /^#[0-9A-F]{6}$/i.test(hex);
 
-export const repeatInputHex = (selectedHex, repeatBy, lastValidColor) => {
+const MAX_HEX_LENGTH = 6;
+export const repeatInputHex = (selectedHex, lastValidColor) => {
+  const repeatBy = MAX_HEX_LENGTH / selectedHex.length;
   const repeatedHex = `#${selectedHex.repeat(repeatBy)}`;
+
   return isHexValid(repeatedHex) ? repeatedHex : lastValidColor;
 };
-
-const MAX_HEX_LENGTH = 6;
 
 export const getValidHex = (hexColor, lastValidColor) => {
   let result = hexColor.replace('#', '');
@@ -25,10 +26,7 @@ export const getValidHex = (hexColor, lastValidColor) => {
 
   if (!isHexValid(hexColor)) {
     const shouldRepeat = result.length > 0 && result.length <= 3;
-    const repeatBy = MAX_HEX_LENGTH / result.length;
-    result = shouldRepeat
-      ? repeatInputHex(result, repeatBy, validColor)
-      : validColor;
+    result = shouldRepeat ? repeatInputHex(result, validColor) : validColor;
   } else {
     result = hexColor;
   }
