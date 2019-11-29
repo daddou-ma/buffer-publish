@@ -10,18 +10,19 @@ export const getColorContrast = hex => {
   return yiq >= 160 ? '#000000' : '#ffffff';
 };
 
-export const isHexValid = hex => /^#[0-9A-F]{6}$/i.test(`#${hex}`);
+export const isHexValid = hex => /^#[0-9A-F]{6}$/i.test(hex);
 
-const repeatInputHex = (selectedHex, repeatBy) => {
-  const repeatedHex = selectedHex.repeat(repeatBy);
+export const repeatInputHex = (selectedHex, repeatBy) => {
+  const repeatedHex = `#${selectedHex.repeat(repeatBy)}`;
   return isHexValid(repeatedHex) ? repeatedHex : DEFAULT_COLOR;
 };
 
 const MAX_HEX_LENGTH = 6;
 
-const getValidHex = (hexColor, isValidHex = true) => {
+export const getValidHex = hexColor => {
   let result = hexColor.replace('#', '');
-  if (!isValidHex) {
+
+  if (!isHexValid(hexColor)) {
     const shouldRepeat = result.length > 0 && result.length <= 3;
     const repeatBy = MAX_HEX_LENGTH / result.length;
     result = shouldRepeat ? repeatInputHex(result, repeatBy) : DEFAULT_COLOR;
@@ -32,9 +33,7 @@ const getValidHex = (hexColor, isValidHex = true) => {
   return result;
 };
 
-export const onColorChange = (hexColor, onChange, isValidHex = true) => {
-  const selectedHex = getValidHex(hexColor, isValidHex);
-
+export const onColorChange = (selectedHex, onChange) => {
   const selectedColor = (selectedHex.charAt(0) !== '#'
     ? `#${selectedHex}`
     : selectedHex

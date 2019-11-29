@@ -10,10 +10,9 @@ import {
   ColorInputWrapper,
   ColorInput,
   InputWrapper,
-  DEFAULT_COLOR,
 } from '../../styles';
 
-import { isHexValid } from '../../utils/HexValidations';
+import { isHexValid, getValidHex } from '../../utils/HexValidations';
 
 const useOutsideClick = (ref, callback) => {
   const handleClick = e => {
@@ -77,7 +76,8 @@ const ColorSelectorPopup = ({
             hasError={!isValidHex}
             onBlur={() => {
               if (!isValidHex) {
-                onColorChange(colorSelected, onChange, isValidHex);
+                const selectedHex = getValidHex(colorSelected);
+                onColorChange(selectedHex, onChange);
                 setIsValidHex(true);
               }
             }}
