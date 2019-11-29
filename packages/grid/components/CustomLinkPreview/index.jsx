@@ -4,12 +4,12 @@ import styled from 'styled-components';
 
 const DEFAULT_COLOR = '#000000';
 
-const LinkPreview = styled.div.attrs({
-  style: ({ bgColor, textColor }) => ({
-    backgroundColor: bgColor || DEFAULT_COLOR,
-    color: textColor || '#FFFFFF',
-  }),
-})`
+export const LinkPreview = styled.div.attrs(props => ({
+  style: {
+    backgroundColor: `${props.bgColor || DEFAULT_COLOR}`,
+    color: `${props.textColor || '#FFFFFF'}`,
+  },
+}))`
   width: 130px;
   height: 35px;
   border-radius: 4px;
