@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   GridList,
   EmptyState,
   BufferLoading,
+  ColorPicker,
 } from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button } from '@bufferapp/ui';
@@ -20,6 +21,7 @@ import { borderRadius } from '@bufferapp/ui/style/borders';
 import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
 import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 import { openPreviewPage } from '../../util';
+import CustomLinkPreview from '../CustomLinkPreview';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -114,6 +116,25 @@ const onPreviewClick = publicGridUrl => {
   openPreviewPage(publicGridUrl);
 };
 
+const DEFAULT_COLOR = '#000000';
+
+const ColorPickerSection = ({ setColorButton, setTextColor }) => {
+  return (
+    <ColorPicker
+      label="Link Color"
+      defaultColor={DEFAULT_COLOR}
+      onChange={(color, contrastColor) => {
+        setColorButton(color);
+        setTextColor(contrastColor);
+      }}
+      onBlur={(color, contrastColor) => {
+        setColorButton(color);
+        setTextColor(contrastColor);
+      }}
+    />
+  );
+};
+
 const MyLinksSection = styled.div`
   border: 1px solid ${grayLight};
   border-radius: ${borderRadius};
@@ -122,6 +143,12 @@ const MyLinksSection = styled.div`
 `;
 
 const MyLinksTitle = styled.div``;
+
+const MyLinksHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 const PopoverTextContainer = styled.div`
   padding: 0.5rem 0.25rem;
@@ -183,6 +210,9 @@ const GridPosts = ({
     );
   }
 
+  const [colorButton, setColorButton] = useState(DEFAULT_COLOR);
+  const [textColor, setTextColor] = useState('#FFFFFF');
+
   return (
     <ErrorBoundary>
       <div>
@@ -238,24 +268,35 @@ const GridPosts = ({
           </StyledButtonWrapper>
         </StyledHeader>
         <MyLinksSection>
-          <MyLinksTitle>
-            My Links go here
-            <MyLinksIcon>
-              <IconArrowPopover
-                icon={<InfoIcon color={gray} />}
-                position="below"
-                shadow
-                oneLine={false}
-                width="320px"
-                label="Posting Times"
-              >
-                <PopoverTextContainer>
-                  {/* eslint-disable max-len */}
-                  Add upto 3 custom links to the top of your Shop grid page.
-                </PopoverTextContainer>
-              </IconArrowPopover>
-            </MyLinksIcon>
-          </MyLinksTitle>
+          <MyLinksHeader>
+            <MyLinksTitle>
+              My Links go here
+              <MyLinksIcon>
+                <IconArrowPopover
+                  icon={<InfoIcon color={gray} />}
+                  position="below"
+                  shadow
+                  oneLine={false}
+                  width="320px"
+                  label="Posting Times"
+                >
+                  <PopoverTextContainer>
+                    {/* eslint-disable max-len */}
+                    Add upto 3 custom links to the top of your Shop grid page.
+                  </PopoverTextContainer>
+                </IconArrowPopover>
+              </MyLinksIcon>
+            </MyLinksTitle>
+            <ColorPickerSection
+              setColorButton={setColorButton}
+              setTextColor={setTextColor}
+            />
+          </MyLinksHeader>
+          <CustomLinkPreview
+            bgColor={colorButton}
+            textColor={textColor}
+            text="Background test"
+          />
         </MyLinksSection>
         <GridList
           gridPosts={gridPosts}
