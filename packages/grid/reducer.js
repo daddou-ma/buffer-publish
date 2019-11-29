@@ -207,12 +207,14 @@ export const actions = {
     profileId,
     customLinks,
     customLinkColor,
+    customLinkContrastColor,
     customLinkButtonType,
   }) => ({
     type: actionTypes.UPDATE_CUSTOM_LINKS,
     profileId,
     customLinks,
     customLinkColor,
+    customLinkContrastColor,
     customLinkButtonType,
   }),
   handleDeleteCustomLink: ({ profileId, customLinkId }) => ({

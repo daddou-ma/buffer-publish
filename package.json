@@ -129,8 +129,7 @@
     "react-dropzone": "4.2.3",
     "react-hot-loader": "4.12.17",
     "react-redux": "5.0.4",
-    "react-router": "4.2.0",
-    "react-router-dom": "4.1.2",
+    "react-router": "5.1.2",
     "react-router-redux": "5.0.0-alpha.6",
     "react-simple-dropdown": "3.2.0",
     "react-syntax-highlighter": "11.0.2",
@@ -155,10 +154,12 @@
     "webpack-cli": "3.3.8",
     "webpack-dev-middleware": "3.7.1",
     "webpack-dev-server": "3.8.0",
+    "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "4.2.2",
     "xss": "1.0.6"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {}
 }

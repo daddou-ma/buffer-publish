@@ -35,6 +35,7 @@ const controller = require('./lib/controller');
 const rpcHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
 const userMethod = require('./rpc/user/index');
+const profilesMethod = require('./rpc/profiles/index');
 const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
 const { getFaviconCode, setupFaviconRoutes } = require('./lib/favicon');
@@ -51,6 +52,7 @@ let segmentKey = 'qsP2UfgODyoJB3px9SDkGX5I6wDtdQ6a';
 setupFaviconRoutes(app, isProduction);
 
 let staticAssets = {
+  'runtime.js': 'https://local.buffer.com:8080/static/runtime.js', // webpack runtime
   'bundle.js': 'https://local.buffer.com:8080/static/bundle.js',
   'bundle.css': 'https://local.buffer.com:8080/static/bundle.css',
   'vendor.js': 'https://local.buffer.com:8080/static/vendor.js',
@@ -60,7 +62,9 @@ app.set('isProduction', isProduction);
 
 if (isProduction) {
   staticAssets = JSON.parse(
-    fs.readFileSync(join(__dirname, 'staticAssets.json'), 'utf8')
+    // Load the `webpackAssets.json` file instead of `staticAssets.json` that the buffer-static-uploader
+    // generates because the former keeps simple key names like 'bundle.js' that don't include the hash.
+    fs.readFileSync(join(__dirname, 'webpackAssets.json'), 'utf8')
   );
   segmentKey = '9Plsiyvw9NEgXEN7eSBwiAGlHD3DHp0A';
   // Ensure that static assets is not empty
@@ -195,12 +199,26 @@ const iterateScript = `<script>
     if(i.attachEvent) {i.attachEvent('onload', l);} else{i.addEventListener('load', l, false);}}(window, document,'script','iterate-js','Iterate'));
   </script>`;
 
-const getUserData = ({ userData }) => {
-  if (typeof userData === 'undefined') {
+const getBufferData = ({ user, profiles }) => {
+  if (typeof user === 'undefined' && typeof profiles === 'undefined') {
     return '';
   }
 
-  return `<script>try { window.bufferUser = ${JSON.stringify(userData)}; } catch(e) {}</script>`;
+  const bufferData = {};
+
+  if (typeof user !== 'undefined') {
+    bufferData.user = user;
+  }
+  if (typeof profiles !== 'undefined') {
+    bufferData.profiles = profiles;
+  }
+
+  return `
+<script>
+  try {
+    window.bufferData = ${JSON.stringify(bufferData)};
+  } catch(e) {}
+</script>`;
 };
 
 const getFullstory = ({ includeFullstory }) => {
@@ -215,35 +233,36 @@ const getBugsnag = ({ userId }) => {
 // We are hard coding the planCode check to 1 for free users, but if we need more we should import constants instead
 const canIncludeFullstory = user => (user ? user.planCode !== 1 : true);
 
+/**
+ * Webpack runtime script, inline into the HTML in prod, locally just include the script:
+ * https://survivejs.com/webpack/optimizing/separating-manifest/
+ */
+const getRuntimeScript = () => {
+  if (isProduction) {
+    const runtimeFilename = staticAssets['runtime.js'].split('/').pop();
+    return `<script>${fs.readFileSync(
+      join(__dirname, runtimeFilename),
+      'utf8'
+    )}</script>`;
+  }
+  return `<script crossorigin src="${staticAssets['runtime.js']}"></script>`;
+};
+
 const getHtml = ({
   notification,
   userId,
   modalKey,
   modalValue,
-  userData,
+  user,
+  profiles,
   includeFullstory = true,
 }) => {
-  /**
-   * Because our static assets have hashes in their names in production
-   * they will also be keyed that way in the staticAssets file. So we
-   * need to do a bit of magic here to extract the correct key for the
-   * bundles full path.
-   */
-  const filenames = Object.keys(staticAssets);
-  const bundleKey = isProduction
-    ? filenames.find(file => file.match(/bundle\.(.*)\.js$/))
-    : 'bundle.js';
-  const vendorKey = isProduction
-    ? filenames.find(file => file.match(/vendor\.(.*)\.js$/))
-    : 'vendor.js';
-  const bundleCssKey = isProduction
-    ? filenames.find(file => file.match(/bundle\.(.*)\.css$/))
-    : 'bundle.css';
   return fs
     .readFileSync(join(__dirname, 'index.html'), 'utf8')
-    .replace('{{{vendor}}}', staticAssets[vendorKey])
-    .replace('{{{bundle}}}', staticAssets[bundleKey])
-    .replace('{{{bundle-css}}}', staticAssets[bundleCssKey])
+    .replace('{{{runtime}}}', getRuntimeScript())
+    .replace('{{{vendor}}}', staticAssets['vendor.js'])
+    .replace('{{{bundle}}}', staticAssets['bundle.js'])
+    .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
     .replace('{{{stripeScript}}}', stripeScript)
     .replace('{{{fullStoryScript}}}', getFullstory({ includeFullstory }))
     .replace('{{{bugsnagScript}}}', getBugsnag({ userId }))
@@ -256,7 +275,7 @@ const getHtml = ({
     .replace('{{{userScript}}}', getUserScript({ id: userId }))
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
     .replace('{{{segmentScript}}}', segmentScript)
-    .replace('{{{bufferUser}}}', getUserData({ userData }));
+    .replace('{{{bufferData}}}', getBufferData({ user, profiles }));
 };
 
 app.use(logMiddleware({ name: 'BufferPublish' }));
@@ -349,23 +368,28 @@ app.get('*', (req, res) => {
   const modalKey = req.query.mk ? req.query.mk : null;
   const modalValue = req.query.mv ? req.query.mv : null;
 
-  userMethod
-    .fn(null, req, res)
-    .catch(() => {
+  Promise.all([
+    userMethod.fn(null, req, res).catch(() => {
+      // added catch incase we don't have any data in the object
       return undefined;
-    })
-    .then(user => {
-      res.send(
-        getHtml({
-          notification,
-          userId,
-          modalKey,
-          modalValue,
-          userData: user,
-          includeFullstory: canIncludeFullstory(user),
-        })
-      );
-    });
+    }),
+    profilesMethod.fn(null, req, res).catch(() => {
+      // added catch incase we don't have any data in the object
+      return undefined;
+    }),
+  ]).then(([user, profiles]) => {
+    res.send(
+      getHtml({
+        notification,
+        userId,
+        modalKey,
+        modalValue,
+        user,
+        profiles,
+        includeFullstory: canIncludeFullstory(user),
+      })
+    );
+  });
 });
 
 app.use(apiError);

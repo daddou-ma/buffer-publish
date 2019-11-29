@@ -49,6 +49,7 @@ module.exports = profile => ({
       isInstagramAnalyticsSupported(profile)),
   customLinksDetails: {
     buttonColor: profile.custom_links_color,
+    buttonContrastColor: profile.custom_links_contrast_color,
     buttonType: profile.custom_links_button_type,
     customLinks: profile.custom_links,
   },
