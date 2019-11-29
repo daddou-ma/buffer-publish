@@ -1,10 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
   GridList,
   EmptyState,
   BufferLoading,
-  ColorPicker,
 } from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button } from '@bufferapp/ui';
@@ -14,7 +13,6 @@ import LockedProfileNotification from '@bufferapp/publish-locked-profile-notific
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
-import styled from 'styled-components';
 import { openPreviewPage } from '../../util';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -94,7 +92,7 @@ const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
   }
 };
 
-const onPreviewClick = publicGridUrl => {
+const onPreviewClick = (publicGridUrl) => {
   trackAction({ location: 'grid', action: 'click_preview_url' });
   openPreviewPage(publicGridUrl);
 };
