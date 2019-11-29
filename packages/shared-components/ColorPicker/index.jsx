@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
+import styled from 'styled-components';
 import Button from '@bufferapp/ui/Button';
 import {
   ColorPickerWrapper,
@@ -8,6 +9,10 @@ import {
   ColorSelectorWrapper,
   DEFAULT_COLOR,
 } from './styles';
+
+const ButtonSelector = styled(Button)`
+  width: 124px;
+`;
 
 import ColorSelectorPopup from './components/ColorSelectorPopup';
 import { getColorContrast, onColorChange } from './utils/HexValidations';
@@ -21,7 +26,7 @@ const ColorPicker = ({ onChange, label, defaultColor, onBlur }) => {
     <ColorPickerWrapper>
       <Text type="label">{label}</Text>
       <ColorSelectorWrapper>
-        <Button
+        <ButtonSelector
           label={color}
           type="secondary"
           icon={<CircleColor color={color} selectable={false} />}

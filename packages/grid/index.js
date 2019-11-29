@@ -36,13 +36,20 @@ export default connect(
         profile,
         isBusinessAccount: profile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        customLinksDetails: profile.customLinksDetails,
+        customLinksDetails: currentProfile.customLinksDetails,
         publicGridUrl: `https://shopgr.id/${profile.serviceUsername}`,
       };
     }
     return {};
   },
   (dispatch, ownProps) => ({
+    onAddLinkClick: () => {
+      dispatch(
+        actions.handleAddGridLink({
+          profileId: ownProps.profileId,
+        })
+      );
+    },
     onImageClick: post => {
       dispatch(
         actions.handleImageClick({
@@ -133,6 +140,34 @@ export default connect(
         actions.handleDeleteCustomLink({
           profileId: ownProps.profileId,
           customLinkId,
+        })
+      );
+    },
+    onUpdateLinkText: ({ item, value }) => {
+      dispatch(
+        actions.handleEditCustomLinkText({
+          profileId: ownProps.profileId,
+          item,
+          value,
+          prop: 'text',
+        })
+      );
+    },
+    onSaveCustomLinkText: ({ item, value }) => {
+      dispatch(
+        actions.handleSaveCustomLink({
+          profileId: ownProps.profileId,
+          item,
+        })
+      );
+    },
+    onUpdateLinkUrl: ({ item, value }) => {
+      dispatch(
+        actions.handleEditCustomLinkUrl({
+          profileId: ownProps.profileId,
+          item,
+          value,
+          prop: 'url',
         })
       );
     },

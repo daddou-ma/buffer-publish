@@ -1,6 +1,7 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import keyWrapper from '@bufferapp/keywrapper';
+import cloneDeep from 'lodash.clonedeep';
 import { isValidURL, urlHasProtocol } from './util';
 
 export const actionTypes = keyWrapper('GRID', {
@@ -12,6 +13,11 @@ export const actionTypes = keyWrapper('GRID', {
   GET_CUSTOM_LINKS: 0,
   UPDATE_CUSTOM_LINKS: 0,
   DELETE_CUSTOM_LINK: 0,
+  ADD_CUSTOM_LINK: 0,
+  EDIT_CUSTOM_LINK_TEXT: 0,
+  CANCEL_EDIT_CUSTOM_LINK_TEXT: 0,
+  EDIT_CUSTOM_LINK_URL: 0,
+  SAVE_CUSTOM_LINK: 0,
 });
 
 export const initialState = {
@@ -23,23 +29,41 @@ export const profileInitialState = {
   loading: true,
   copySuccess: false,
   gridPosts: [],
+  customLinksDetails: {
+    buttonColor: null,
+    buttonType: null,
+    customLinks: [],
+    maxCustomLinks: 3,
+  },
   total: 0,
 };
 
-const getProfileId = (action) => {
-  if (action.profileId) { return action.profileId; }
-  if (action.args) { return action.args.profileId; }
-  if (action.profile) { return action.profile.id; }
+const getProfileId = action => {
+  if (action.profileId) {
+    return action.profileId;
+  }
+  if (action.args) {
+    return action.args.profileId;
+  }
+  if (action.profile) {
+    return action.profile.id;
+  }
 };
 
-const getPostUpdateId = (action) => {
-  if (action.updateId) { return action.updateId; }
-  if (action.args) { return action.args.updateId; }
-  if (action.post) { return action.post.id; }
+const getPostUpdateId = action => {
+  if (action.updateId) {
+    return action.updateId;
+  }
+  if (action.args) {
+    return action.args.updateId;
+  }
+  if (action.post) {
+    return action.post.id;
+  }
 };
 
 const postReducer = (state, action) => {
-  let link = action.link;
+  let { link } = action;
   switch (action.type) {
     case actionTypes.POST_IMAGE_CLICKED:
       return {
@@ -81,7 +105,10 @@ const postsReducer = (state, action) => {
     case actionTypes.POST_IMAGE_CLOSED: {
       return {
         ...state,
-        [getPostUpdateId(action)]: postReducer(state[getPostUpdateId(action)], action),
+        [getPostUpdateId(action)]: postReducer(
+          state[getPostUpdateId(action)],
+          action
+        ),
       };
     }
     default:
@@ -128,6 +155,52 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         gridPosts: postsReducer(state.gridPosts, action),
       };
+    case actionTypes.ADD_CUSTOM_LINK: {
+      const { customLinksDetails } = state;
+      const { customLinks } = customLinksDetails;
+      return {
+        ...state,
+        customLinksDetails: {
+          ...customLinksDetails,
+          customLinks: [
+            ...customLinks,
+            {
+              editing: true,
+              text: '',
+              url: '',
+              order: customLinks.length,
+            },
+          ],
+        },
+      };
+    }
+    case actionTypes.EDIT_CUSTOM_LINK_TEXT:
+    case actionTypes.EDIT_CUSTOM_LINK_URL: {
+      const { customLinksDetails } = state;
+      const { customLinks } = customLinksDetails;
+
+      const editedCustomLinks = cloneDeep(customLinks);
+
+      editedCustomLinks.map(item => {
+        if (item.order === action.item.order) {
+          if (typeof item[`old_${action.prop}`] === 'undefined') {
+            item[`old_${action.prop}`] = item[action.prop];
+          }
+          item[action.prop] = action.value;
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        customLinksDetails: {
+          ...customLinksDetails,
+          customLinks: editedCustomLinks,
+        },
+      };
+    }
+    case actionTypes.SAVE_CUSTOM_LINK:
+      return state;
     default:
       return state;
   }
@@ -150,6 +223,9 @@ export default (state = initialState, action) => {
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
+    case actionTypes.ADD_CUSTOM_LINK:
+    case actionTypes.EDIT_CUSTOM_LINK_TEXT:
+    case actionTypes.EDIT_CUSTOM_LINK_URL:
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -221,5 +297,33 @@ export const actions = {
     type: actionTypes.DELETE_CUSTOM_LINK,
     profileId,
     customLinkId,
+  }),
+  handleAddGridLink: ({ profileId }) => ({
+    type: actionTypes.ADD_CUSTOM_LINK,
+    profileId,
+  }),
+  handleCancelEditCustomLinkText: ({ profileId, item }) => ({
+    type: actionTypes.CANCEL_EDIT_CUSTOM_LINK_TEXT,
+    profileId,
+    item,
+  }),
+  handleSaveCustomLink: ({ profileId, item }) => ({
+    type: actionTypes.SAVE_CUSTOM_LINK,
+    profileId,
+    item,
+  }),
+  handleEditCustomLinkText: ({ profileId, item, value, prop }) => ({
+    type: actionTypes.EDIT_CUSTOM_LINK_TEXT,
+    profileId,
+    item,
+    value,
+    prop,
+  }),
+  handleEditCustomLinkUrl: ({ profileId, item, value, prop }) => ({
+    type: actionTypes.EDIT_CUSTOM_LINK_URL,
+    profileId,
+    item,
+    value,
+    prop,
   }),
 };

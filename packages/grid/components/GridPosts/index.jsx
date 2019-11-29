@@ -7,7 +7,7 @@ import {
   ColorPicker,
 } from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { Button } from '@bufferapp/ui';
+import { Button, Input } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
 import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import Avatar from '@bufferapp/ui/Avatar';
@@ -16,9 +16,18 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
 import styled from 'styled-components';
-import { gray, grayLight, grayDark } from '@bufferapp/ui/style/colors';
+import {
+  gray,
+  grayLight,
+  grayDark,
+  grayDarker,
+} from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
-import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
+import {
+  fontFamily,
+  fontSize,
+  fontWeightBold,
+} from '@bufferapp/ui/style/fonts';
 import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 import { openPreviewPage } from '../../util';
 import CustomLinkPreview from '../CustomLinkPreview';
@@ -118,10 +127,10 @@ const onPreviewClick = publicGridUrl => {
 
 const DEFAULT_COLOR = '#000000';
 
-const ColorPickerSection = ({ setColorButton, setTextColor }) => {
+const ColorPickerSection = ({ setColorButton, setTextColor, label }) => {
   return (
     <ColorPicker
-      label="Link Color"
+      label={label}
       defaultColor={DEFAULT_COLOR}
       onChange={(color, contrastColor) => {
         setColorButton(color);
@@ -138,16 +147,29 @@ const ColorPickerSection = ({ setColorButton, setTextColor }) => {
 const MyLinksSection = styled.div`
   border: 1px solid ${grayLight};
   border-radius: ${borderRadius};
-  padding: 16px;
   margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 `;
-
-const MyLinksTitle = styled.div``;
 
 const MyLinksHeader = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  padding: 16px;
+`;
+
+const MyLinksTitle = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const MyLinksBody = styled.div``;
+
+const EditingMyLinksItem = styled.div`
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid ${grayLight};
 `;
 
 const PopoverTextContainer = styled.div`
@@ -155,8 +177,100 @@ const PopoverTextContainer = styled.div`
 `;
 
 const MyLinksIcon = styled.span`
-  padding: 8px;
+  padding: 6px 0 0 6px;
 `;
+
+const MyLinksTitleText = styled.span`
+  color: ${grayDarker};
+  font-family: ${fontFamily};
+  font-size: 18px;
+  font-weight: ${fontWeightBold};
+`;
+
+const LinkColorSection = styled.div`
+  display: flex;
+  padding: 0 8px;
+`;
+
+const AddLinkSection = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 8px;
+`;
+
+const LinkInput = styled.div`
+  margin: 8px;
+  width: 50%;
+`;
+
+const LinksHeader = ({
+  customLinksDetails,
+  title = 'My Links',
+  label = 'My Links',
+  popupText = 'Add upto 3 custom links to the top of your Shop grid page.',
+  onAddLinkClick = () => {},
+  buttonText = 'Add Link',
+  pickerText = 'Link Color',
+}) => {
+  const [colorButton, setColorButton] = useState(DEFAULT_COLOR);
+  const [textColor, setTextColor] = useState('#FFFFFF');
+  return [
+    <MyLinksHeader>
+      <MyLinksTitle>
+        <MyLinksTitleText>{title}</MyLinksTitleText>
+        <MyLinksIcon>
+          <IconArrowPopover
+            icon={<InfoIcon color={gray} />}
+            position="below"
+            shadow
+            oneLine={false}
+            width="320px"
+            label={label}
+          >
+            <PopoverTextContainer>
+              {/* eslint-disable max-len */}
+              {popupText}
+            </PopoverTextContainer>
+          </IconArrowPopover>
+        </MyLinksIcon>
+      </MyLinksTitle>
+      <AddLinkSection>
+        <LinkColorSection>
+          <ColorPickerSection
+            label={pickerText}
+            setColorButton={setColorButton}
+            setTextColor={setTextColor}
+          />
+        </LinkColorSection>
+        <Button
+          label={buttonText}
+          type="primary"
+          onClick={onAddLinkClick}
+          disabled={
+            customLinksDetails.customLinks &&
+            customLinksDetails.customLinks.length >=
+              customLinksDetails.maxCustomLinks
+          }
+        />
+      </AddLinkSection>
+    </MyLinksHeader>,
+    <CustomLinkPreview
+      bgColor={colorButton}
+      textColor={textColor}
+      text="Background test"
+    />,
+  ];
+};
+
+LinksHeader.proptypes = {
+  customLinksDetails: PropTypes.object,
+  title: PropTypes.string,
+  label: PropTypes.string,
+  popupText: PropTypes.string,
+  onAddLinkClick: PropTypes.func,
+  buttonText: PropTypes.string,
+  pickerText: PropTypes.string,
+};
 
 const GridPosts = ({
   total,
@@ -179,6 +293,9 @@ const GridPosts = ({
   onUpdateCustomLinksColor,
   onUpdateCustomLinksButtonType,
   onDeleteCustomLink,
+  onAddLinkClick,
+  onUpdateLinkText,
+  onUpdateLinkUrl,
 }) => {
   if (loading) {
     return (
@@ -209,9 +326,6 @@ const GridPosts = ({
       </Fragment>
     );
   }
-
-  const [colorButton, setColorButton] = useState(DEFAULT_COLOR);
-  const [textColor, setTextColor] = useState('#FFFFFF');
 
   return (
     <ErrorBoundary>
@@ -268,35 +382,40 @@ const GridPosts = ({
           </StyledButtonWrapper>
         </StyledHeader>
         <MyLinksSection>
-          <MyLinksHeader>
-            <MyLinksTitle>
-              My Links go here
-              <MyLinksIcon>
-                <IconArrowPopover
-                  icon={<InfoIcon color={gray} />}
-                  position="below"
-                  shadow
-                  oneLine={false}
-                  width="320px"
-                  label="Posting Times"
-                >
-                  <PopoverTextContainer>
-                    {/* eslint-disable max-len */}
-                    Add upto 3 custom links to the top of your Shop grid page.
-                  </PopoverTextContainer>
-                </IconArrowPopover>
-              </MyLinksIcon>
-            </MyLinksTitle>
-            <ColorPickerSection
-              setColorButton={setColorButton}
-              setTextColor={setTextColor}
-            />
-          </MyLinksHeader>
-          <CustomLinkPreview
-            bgColor={colorButton}
-            textColor={textColor}
-            text="Background test"
+          <LinksHeader
+            customLinksDetails={customLinksDetails}
+            onAddLinkClick={onAddLinkClick}
           />
+          <MyLinksBody>
+            {customLinksDetails.customLinks.map(item => {
+              return (
+                <EditingMyLinksItem key={item.order}>
+                  <LinkInput>
+                    <Input
+                      label="Link Text"
+                      type="text"
+                      onChange={e =>
+                        onUpdateLinkText({ item, value: e.target.value })
+                      }
+                      name="text"
+                      value={item.text}
+                    />
+                  </LinkInput>
+                  <LinkInput>
+                    <Input
+                      label="Link URL"
+                      type="text"
+                      onChange={e =>
+                        onUpdateLinkUrl({ item, value: e.target.value })
+                      }
+                      name="url"
+                      value={item.url}
+                    />
+                  </LinkInput>
+                </EditingMyLinksItem>
+              );
+            })}
+          </MyLinksBody>
         </MyLinksSection>
         <GridList
           gridPosts={gridPosts}
@@ -340,6 +459,12 @@ GridPosts.propTypes = {
     avatar_https: PropTypes.string,
     timezone: PropTypes.string,
   }),
+  onAddLinkClick: PropTypes.func,
+  customLinksDetails: PropTypes.shape({
+    customLinks: PropTypes.array,
+    maxCustomLinks: PropTypes.number,
+    buttonColor: PropTypes.string,
+  }),
 };
 
 GridPosts.defaultProps = {
@@ -356,6 +481,12 @@ GridPosts.defaultProps = {
   onImageClose: () => {},
   handleCopyToClipboard: () => {},
   profile: {},
+  onAddLinkClick: () => {},
+  customLinksDetails: {
+    customLinks: [],
+    maxCustomLinks: 0,
+    buttonColor: null,
+  },
 };
 
 export default WithFeatureLoader(GridPosts);
