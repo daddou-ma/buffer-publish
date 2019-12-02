@@ -24,14 +24,12 @@ const useOutsideClick = (ref, callback) => {
 
   useEffect(() => {
     document.addEventListener('click', handleClick);
-
-    return () => {
-      document.removeEventListener('click', handleClick);
-    };
+    return () => document.removeEventListener('click', handleClick);
   });
 };
 
 const ColorSelectorPopup = ({
+  left,
   colorSelected,
   isValidHex,
   setIsValidHex,
@@ -53,7 +51,7 @@ const ColorSelectorPopup = ({
   };
 
   return (
-    <ColorPopup ref={ref}>
+    <ColorPopup ref={ref} left={left}>
       <ColorSwatches
         onChange={onChange}
         onColorChange={color => {
@@ -108,6 +106,7 @@ ColorSelectorPopup.propTypes = {
   setIsValidHex: PropTypes.func,
   colorSelected: PropTypes.string,
   isValidHex: PropTypes.bool,
+  left: PropTypes.number,
 };
 
 ColorSelectorPopup.defaultProps = {
@@ -117,6 +116,7 @@ ColorSelectorPopup.defaultProps = {
   onColorChange: () => {},
   colorSelected: '',
   isValidHex: true,
+  left: 0,
 };
 
 export default ColorSelectorPopup;
