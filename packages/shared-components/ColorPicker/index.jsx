@@ -1,49 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
-import styled from 'styled-components';
-import Button from '@bufferapp/ui/Button';
 import {
   ColorPickerWrapper,
-  CircleColor,
+  ColorPreview,
+  StyledButton,
   ColorSelectorWrapper,
+  ButtonWrapper,
   DEFAULT_COLOR,
 } from './styles';
 
-const ButtonSelector = styled(Button)`
-  width: 124px;
-`;
-
 import ColorSelectorPopup from './components/ColorSelectorPopup';
 import { getColorContrast, onColorChange } from './utils/HexValidations';
+
+const useLayoutSize = callback => {
+  const handleResize = () => {
+    const newLeft = window.innerWidth <= 1221 ? -67 : 0;
+    callback(newLeft);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  });
+};
 
 const ColorPicker = ({ onChange, label, defaultColor, onBlur }) => {
   const [color, setColor] = useState(defaultColor || DEFAULT_COLOR);
   const [visible, setVisible] = useState(false);
   const [isValidHex, setIsValidHex] = useState(true);
 
+  const [left, setLeft] = useState(0);
+  const targetRef = useRef();
+  useLayoutSize(setLeft);
+
   return (
     <ColorPickerWrapper>
       <Text type="label">{label}</Text>
-      <ColorSelectorWrapper>
-        <ButtonSelector
-          label={color}
-          type="secondary"
-          icon={<CircleColor color={color} selectable={false} />}
-          onClick={() => {
-            const newVisible = !visible;
-            setVisible(!visible);
-            if (newVisible === false && onBlur) {
-              onBlur(color, getColorContrast(color));
-            }
-          }}
-          onBlur={() => {
-            setVisible(false);
-            if (onBlur) onBlur(color, getColorContrast(color));
-          }}
-        />
+      <ColorSelectorWrapper ref={targetRef}>
+        <ButtonWrapper>
+          <StyledButton
+            label={color}
+            type="secondary"
+            fullWidth
+            icon={<ColorPreview color={color} />}
+            onClick={() => {
+              const newVisible = !visible;
+              setVisible(!visible);
+              if (newVisible === false && onBlur) {
+                onBlur(color, getColorContrast(color));
+              }
+            }}
+            onBlur={() => {
+              setVisible(false);
+              if (onBlur) onBlur(color, getColorContrast(color));
+            }}
+          />
+        </ButtonWrapper>
         {visible && (
           <ColorSelectorPopup
+            left={left}
             onColorChange={onColorChange}
             colorSelected={color}
             onChange={newColor => {
