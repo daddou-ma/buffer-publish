@@ -3,20 +3,32 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const DEFAULT_COLOR = '#000000';
+const WHITE = '#FFFFFF';
 
 export const LinkPreview = styled.div.attrs(props => ({
   style: {
     backgroundColor: `${props.bgColor || DEFAULT_COLOR}`,
-    color: `${props.textColor || '#FFFFFF'}`,
+    color: `${props.textColor || WHITE}`,
+    border: `${
+      props.bgColor === WHITE
+        ? `1px solid ${DEFAULT_COLOR}`
+        : `1px solid ${props.color}`
+    }`,
   },
 }))`
-  width: 130px;
-  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 285px;
+  height: 40px;
   border-radius: 4px;
   padding: 5px 10px;
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  cursor: default;
+  font-size: 14px;
+  line-height: 16px;
 `;
 
 const CustomLinkPreview = ({ bgColor, textColor, text }) => {
