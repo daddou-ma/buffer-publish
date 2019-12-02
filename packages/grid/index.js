@@ -175,6 +175,15 @@ export default connect(
         })
       );
     },
+    onToggleEditMode: ({ item, editing }) => {
+      dispatch(
+        actions.handleToggleEditMode({
+          profileId: ownProps.profileId,
+          item,
+          editing,
+        })
+      );
+    },
   })
 )(GridPosts);
 

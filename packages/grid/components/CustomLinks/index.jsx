@@ -51,7 +51,7 @@ const ActionsWrapper = styled.div`
   padding: 0 15px 15px;
 `;
 
-const MyLinksPreview = ({ item, bgColor, textColor }) => {
+const MyLinksPreview = ({ item, bgColor, textColor, onToggleEditMode }) => {
   return (
     <PreviewWrapper>
       <CustomLinkPreview
@@ -61,17 +61,22 @@ const MyLinksPreview = ({ item, bgColor, textColor }) => {
       />
       <UrlPreview>{item.url}</UrlPreview>
       <Button label="Delete" type="gray" />
-      <Button label="Edit" type="secondary" />
+      <Button
+        label="Edit"
+        type="secondary"
+        onClick={() => onToggleEditMode({ item, editing: true })}
+      />
     </PreviewWrapper>
   );
 };
 
-const EditingSection = ({
+const EditingLink = ({
   item,
   customLinksDetails,
   onUpdateCustomLinks,
   onUpdateLinkText,
   onUpdateLinkUrl,
+  onToggleEditMode,
 }) => {
   return (
     <>
@@ -96,7 +101,11 @@ const EditingSection = ({
         </LinkInput>
       </EditingMyLinksItem>
       <ActionsWrapper>
-        <Button label="Cancel" type="gray" />
+        <Button
+          label="Cancel"
+          type="gray"
+          onClick={() => onToggleEditMode({ item, editing: false })}
+        />
         <Button
           label="Save Link"
           type="primary"
@@ -121,6 +130,7 @@ const CustomLinks = ({
   onUpdateLinkText,
   onUpdateLinkUrl,
   maxCustomLinks,
+  onToggleEditMode,
 }) => {
   const [colorButtons, setColorButton] = useState(
     customLinksDetails.buttonColor || DEFAULT_COLOR
@@ -147,13 +157,14 @@ const CustomLinks = ({
             <>
               {!item.editing && (
                 <MyLinksPreview
+                  onToggleEditMode={onToggleEditMode}
                   bgColor={colorButtons}
                   textColor={textColor}
                   item={item}
                 />
               )}
               {item.editing && (
-                <EditingSection
+                <EditingLink
                   key={item.order}
                   item={item}
                   customLinksDetails={customLinksDetails}
@@ -161,6 +172,7 @@ const CustomLinks = ({
                   onUpdateLinkText={onUpdateLinkText}
                   onUpdateLinkUrl={onUpdateLinkUrl}
                   onDeleteCustomLink={onDeleteCustomLink}
+                  onToggleEditMode={onToggleEditMode}
                 />
               )}
             </>

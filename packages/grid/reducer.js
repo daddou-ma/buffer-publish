@@ -18,6 +18,7 @@ export const actionTypes = keyWrapper('GRID', {
   CANCEL_EDIT_CUSTOM_LINK_TEXT: 0,
   EDIT_CUSTOM_LINK_URL: 0,
   SAVE_CUSTOM_LINK: 0,
+  TOGGLE_CUSTOM_LINK_EDIT_MODE: 0,
 });
 
 export const initialState = {
@@ -180,6 +181,27 @@ const profileReducer = (state = profileInitialState, action) => {
         },
       };
     }
+    case actionTypes.TOGGLE_CUSTOM_LINK_EDIT_MODE: {
+      const { customLinksDetails } = state;
+      const { customLinks } = customLinksDetails;
+
+      const editedCustomLinks = cloneDeep(customLinks);
+
+      editedCustomLinks.map(item => {
+        if (item._id === action.item._id) {
+          item.editing = action.editing;
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        customLinksDetails: {
+          ...customLinksDetails,
+          customLinks: editedCustomLinks,
+        },
+      };
+    }
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:
     case actionTypes.EDIT_CUSTOM_LINK_URL: {
       const { customLinksDetails } = state;
@@ -232,6 +254,7 @@ export default (state = initialState, action) => {
     case actionTypes.ADD_CUSTOM_LINK:
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:
     case actionTypes.EDIT_CUSTOM_LINK_URL:
+    case actionTypes.TOGGLE_CUSTOM_LINK_EDIT_MODE:
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -331,5 +354,11 @@ export const actions = {
     item,
     value,
     prop,
+  }),
+  handleToggleEditMode: ({ profileId, item, editing }) => ({
+    type: actionTypes.TOGGLE_CUSTOM_LINK_EDIT_MODE,
+    profileId,
+    item,
+    editing,
   }),
 };
