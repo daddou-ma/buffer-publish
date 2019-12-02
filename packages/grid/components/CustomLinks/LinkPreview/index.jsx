@@ -12,7 +12,7 @@ export const LinkPreview = styled.div.attrs(props => ({
     border: `${
       props.bgColor === WHITE
         ? `1px solid ${DEFAULT_COLOR}`
-        : `1px solid ${props.color}`
+        : `1px solid ${props.bgColor}`
     }`,
   },
 }))`
