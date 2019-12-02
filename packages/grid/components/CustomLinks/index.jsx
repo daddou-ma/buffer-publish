@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Input, Button } from '@bufferapp/ui';
 import styled from 'styled-components';
 import { grayLight } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import LinksHeader from './LinksHeader';
+import CustomLinkPreview from './LinkPreview';
+
+const DEFAULT_COLOR = '#000000';
 
 const MyLinksSection = styled.div`
   border: 1px solid ${grayLight};
@@ -13,6 +16,14 @@ const MyLinksSection = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+`;
+
+const PreviewWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #636363;
+  margin: 15px;
 `;
 
 const MyLinksBody = styled.div``;
@@ -28,12 +39,77 @@ const LinkInput = styled.div`
   width: 50%;
 `;
 
+const UrlPreview = styled.div`
+  margin-left: 14px;
+  flex-basis: 402px;
+`;
+
 const ActionsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 0 15px 15px;
 `;
+
+const MyLinksPreview = ({ item, bgColor, textColor }) => {
+  return (
+    <PreviewWrapper>
+      <CustomLinkPreview
+        bgColor={bgColor}
+        textColor={textColor}
+        text={item.text}
+      />
+      <UrlPreview>{item.url}</UrlPreview>
+      <Button label="Delete" type="gray" />
+      <Button label="Edit" type="secondary" />
+    </PreviewWrapper>
+  );
+};
+
+const EditingSection = ({
+  item,
+  customLinksDetails,
+  onUpdateCustomLinks,
+  onUpdateLinkText,
+  onUpdateLinkUrl,
+}) => {
+  return (
+    <>
+      <EditingMyLinksItem>
+        <LinkInput>
+          <Input
+            label="Link Text"
+            type="text"
+            onChange={e => onUpdateLinkText({ item, value: e.target.value })}
+            name="text"
+            value={item.text}
+          />
+        </LinkInput>
+        <LinkInput>
+          <Input
+            label="Link URL"
+            type="text"
+            onChange={e => onUpdateLinkUrl({ item, value: e.target.value })}
+            name="url"
+            value={item.url}
+          />
+        </LinkInput>
+      </EditingMyLinksItem>
+      <ActionsWrapper>
+        <Button label="Cancel" type="gray" />
+        <Button
+          label="Save Link"
+          type="primary"
+          onClick={e =>
+            onUpdateCustomLinks({
+              customLinks: customLinksDetails.customLinks,
+            })
+          }
+        />
+      </ActionsWrapper>
+    </>
+  );
+};
 
 const CustomLinks = ({
   customLinksDetails,
@@ -46,53 +122,47 @@ const CustomLinks = ({
   onUpdateLinkUrl,
   maxCustomLinks,
 }) => {
+  const [colorButtons, setColorButton] = useState(
+    customLinksDetails.buttonColor || DEFAULT_COLOR
+  );
+  const [textColor, setTextColor] = useState(
+    customLinksDetails.buttonContrastColor || '#FFFFFF'
+  );
+
   return (
     <MyLinksSection>
       <LinksHeader
         customLinksDetails={customLinksDetails}
         maxCustomLinks={maxCustomLinks}
         onAddLinkClick={onAddLinkClick}
+        setColorButton={setColorButton}
+        setTextColor={setTextColor}
+        colorButtons={colorButtons}
+        textColor={textColor}
+        onUpdateCustomLinksColor={onUpdateCustomLinksColor}
       />
       <MyLinksBody>
         {customLinksDetails.customLinks.map(item => {
           return (
             <>
-              <EditingMyLinksItem key={item.order}>
-                <LinkInput>
-                  <Input
-                    label="Link Text?"
-                    type="text"
-                    onChange={e =>
-                      onUpdateLinkText({ item, value: e.target.value })
-                    }
-                    name="text"
-                    value={item.text}
-                  />
-                </LinkInput>
-                <LinkInput>
-                  <Input
-                    label="Link URL"
-                    type="text"
-                    onChange={e =>
-                      onUpdateLinkUrl({ item, value: e.target.value })
-                    }
-                    name="url"
-                    value={item.url}
-                  />
-                </LinkInput>
-              </EditingMyLinksItem>
-              <ActionsWrapper>
-                <Button label="Cancel" type="gray" />
-                <Button
-                  label="Save Link"
-                  type="primary"
-                  onClick={e =>
-                    onUpdateCustomLinks({
-                      customLinks: customLinksDetails.customLinks,
-                    })
-                  }
+              {!item.editing && (
+                <MyLinksPreview
+                  bgColor={colorButtons}
+                  textColor={textColor}
+                  item={item}
                 />
-              </ActionsWrapper>
+              )}
+              {item.editing && (
+                <EditingSection
+                  key={item.order}
+                  item={item}
+                  customLinksDetails={customLinksDetails}
+                  onUpdateCustomLinks={onUpdateCustomLinks}
+                  onUpdateLinkText={onUpdateLinkText}
+                  onUpdateLinkUrl={onUpdateLinkUrl}
+                  onDeleteCustomLink={onDeleteCustomLink}
+                />
+              )}
             </>
           );
         })}
@@ -107,6 +177,7 @@ CustomLinks.propTypes = {
     customLinks: PropTypes.array,
     maxCustomLinks: PropTypes.number,
     buttonColor: PropTypes.string,
+    buttonContrastColor: PropTypes.string,
   }),
 };
 
@@ -116,6 +187,7 @@ CustomLinks.defaultProps = {
     customLinks: [],
     maxCustomLinks: 0,
     buttonColor: null,
+    buttonContrastColor: null,
   },
 };
 

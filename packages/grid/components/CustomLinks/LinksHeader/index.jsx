@@ -7,7 +7,6 @@ import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 import { IconArrowPopover } from '@bufferapp/components';
 import { gray, grayDarker } from '@bufferapp/ui/style/colors';
 import { fontFamily, fontWeightBold } from '@bufferapp/ui/style/fonts';
-import CustomLinkPreview from '../LinkPreview';
 
 const DEFAULT_COLOR = '#000000';
 
@@ -48,11 +47,17 @@ const AddLinkSection = styled.div`
   margin: 0 0 0 8px;
 `;
 
-const ColorPickerSection = ({ setColorButton, setTextColor, label }) => {
+const ColorPickerSection = ({
+  label,
+  defaultColor,
+  setColorButton,
+  setTextColor,
+  onBlur,
+}) => {
   return (
     <ColorPicker
       label={label}
-      defaultColor={DEFAULT_COLOR}
+      defaultColor={defaultColor || DEFAULT_COLOR}
       onChange={(color, contrastColor) => {
         setColorButton(color);
         setTextColor(contrastColor);
@@ -60,6 +65,7 @@ const ColorPickerSection = ({ setColorButton, setTextColor, label }) => {
       onBlur={(color, contrastColor) => {
         setColorButton(color);
         setTextColor(contrastColor);
+        onBlur();
       }}
     />
   );
@@ -74,9 +80,12 @@ const LinksHeader = ({
   onAddLinkClick = () => {},
   buttonText = 'Add Link',
   pickerText = 'Link Color',
+  setColorButton,
+  setTextColor,
+  colorButtons,
+  textColor,
+  onUpdateCustomLinksColor,
 }) => {
-  const [colorButton, setColorButton] = useState(DEFAULT_COLOR);
-  const [textColor, setTextColor] = useState('#FFFFFF');
   return [
     <MyLinksHeader>
       <MyLinksTitle>
@@ -101,8 +110,15 @@ const LinksHeader = ({
         <LinkColorSection>
           <ColorPickerSection
             label={pickerText}
+            defaultColor={colorButtons}
             setColorButton={setColorButton}
             setTextColor={setTextColor}
+            onBlur={e =>
+              onUpdateCustomLinksColor({
+                customLinkColor: colorButtons,
+                customLinkContrastColor: textColor,
+              })
+            }
           />
         </LinkColorSection>
         <Button
@@ -116,11 +132,6 @@ const LinksHeader = ({
         />
       </AddLinkSection>
     </MyLinksHeader>,
-    <CustomLinkPreview
-      bgColor={colorButton}
-      textColor={textColor}
-      text="Background test"
-    />,
   ];
 };
 

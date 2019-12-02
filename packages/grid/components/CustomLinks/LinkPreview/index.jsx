@@ -19,13 +19,13 @@ export const LinkPreview = styled.div.attrs(props => ({
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 500;
   width: 285px;
+  min-width: 285px;
   height: 40px;
   border-radius: 4px;
-  padding: 5px 10px;
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
   cursor: default;
   font-size: 14px;
   line-height: 16px;
