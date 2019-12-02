@@ -33,9 +33,9 @@ export const profileInitialState = {
     buttonColor: null,
     buttonType: null,
     customLinks: [],
-    maxCustomLinks: 3,
   },
   total: 0,
+  maxCustomLinks: 3,
 };
 
 const getProfileId = action => {
@@ -119,6 +119,12 @@ const postsReducer = (state, action) => {
 const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
+      if (action.profile && action.profile.customLinksDetails) {
+        return {
+          ...profileInitialState,
+          customLinksDetails: action.profile.customLinksDetails,
+        };
+      }
       return profileInitialState;
     case `shortenUrl_${dataFetchActionTypes.FETCH_START}`:
       return {
