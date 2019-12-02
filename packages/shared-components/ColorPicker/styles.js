@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Button from '@bufferapp/ui/Button';
 
 export const colorSwatches = {
   black: '#000000',
@@ -37,6 +38,29 @@ export const CircleColorWrapper = styled.div`
   justify-content: center;
 `;
 
+export const ColorPreview = styled.div`
+  width: 37px;
+  height: 38px;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  background-color: ${props => (props.color ? props.color : DEFAULT_COLOR)};
+  border-right: ${props =>
+    props.color === colorSwatches.white
+      ? '1px solid lightgrey'
+      : `1px solid ${props.color}`};
+`;
+
+export const ButtonWrapper = styled.div`
+  width: 130px;
+`;
+
+export const StyledButton = styled(Button)`
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const CircleColor = styled.div`
   position: relative;
   display: flex;
@@ -69,7 +93,11 @@ export const CircleColor = styled.div`
   }
 `;
 
-export const ColorPopup = styled.div`
+export const ColorPopup = styled.div.attrs(props => ({
+  style: {
+    left: `${props.left}px` || 0,
+  },
+}))`
   position: absolute;
   z-index: 1000;
   width: 155px;
@@ -78,7 +106,6 @@ export const ColorPopup = styled.div`
   border-radius: 5px;
   padding: 15px 16px 10px 16px;
   border: 1px solid lightgrey;
-  left: 0;
   top: 45px;
   display: flex;
   flex-direction: column;
