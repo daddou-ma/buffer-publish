@@ -103,7 +103,7 @@ export default connect(
         analyticsActions.trackEvent('Shop Grid Page Previewed', metadata)
       );
     },
-    onUpdateCustomLinks: ({ customLinks }) => {
+    onUpdateCustomLinks: ({ customLinks, linkText, linkUrl, item }) => {
       dispatch(
         actions.handleUpdateCustomLinks({
           profileId: ownProps.profileId,
@@ -111,6 +111,9 @@ export default connect(
           customLinkColor: null,
           customLinkContrastColor: null,
           customLinkButtonType: null,
+          linkText,
+          linkUrl,
+          item,
         })
       );
     },

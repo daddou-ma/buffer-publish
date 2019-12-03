@@ -211,10 +211,21 @@ const profileReducer = (state = profileInitialState, action) => {
       const { customLinksDetails } = state;
       const { customLinks } = customLinksDetails;
 
-      const editedCustomLinks = cloneDeep(customLinks);
-
-      editedCustomLinks.map(item => {
-        item.editing = false;
+      const editedCustomLinks = cloneDeep(customLinks).map(item => {
+        if (
+          action.item !== null &&
+          action.linkText !== null &&
+          action.linkUrl !== null
+        ) {
+          if (item.order === action.item.order) {
+            item.editing = false;
+            item.text = action.linkText;
+            item.url = action.linkUrl;
+          }
+        }
+        if (!action.item) {
+          item.editing = false;
+        }
         return item;
       });
 
@@ -356,6 +367,9 @@ export const actions = {
     customLinkColor,
     customLinkContrastColor,
     customLinkButtonType,
+    linkText = null,
+    linkUrl = null,
+    item = null,
   }) => ({
     type: actionTypes.UPDATE_CUSTOM_LINKS,
     profileId,
@@ -363,6 +377,9 @@ export const actions = {
     customLinkColor,
     customLinkContrastColor,
     customLinkButtonType,
+    linkText,
+    linkUrl,
+    item,
   }),
   handleDeleteCustomLink: ({ profileId, customLinkId }) => ({
     type: actionTypes.DELETE_CUSTOM_LINK,

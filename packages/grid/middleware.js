@@ -122,13 +122,16 @@ export default ({ getState, dispatch }) => next => action => { // eslint-disable
       }));
       break;
 
-    case gridActionTypes.UPDATE_CUSTOM_LINKS:
+    case gridActionTypes.UPDATE_CUSTOM_LINKS: {
+      const profile = getState().grid.byProfileId[action.profileId];
+      const linkDetails = profile.customLinksDetails;
+
       dispatch(
         dataFetchActions.fetch({
           name: 'updateCustomLinks',
           args: {
             profileId: action.profileId,
-            customLinks: action.customLinks,
+            customLinks: linkDetails.customLinks || [],
             customLinkColor: action.customLinkColor,
             customLinkContrastColor: action.customLinkContrastColor,
             customLinkButtonType: action.customLinkButtonType,
@@ -136,7 +139,7 @@ export default ({ getState, dispatch }) => next => action => { // eslint-disable
         })
       );
       break;
-
+    }
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(
         notificationActions.createNotification({
