@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 
 import QueuedPosts from '@bufferapp/publish-queue';
 import SentPosts from '@bufferapp/publish-sent';
