@@ -186,19 +186,24 @@ const profileReducer = (state = profileInitialState, action) => {
       const { customLinks } = customLinksDetails;
 
       const editedCustomLinks = cloneDeep(customLinks);
+      let customLinksResult = editedCustomLinks.filter(link => link._id);
 
-      editedCustomLinks.map(item => {
-        if (item._id === action.item._id) {
-          item.editing = action.editing;
-        }
-        return item;
-      });
+      if (action.item._id) {
+        editedCustomLinks.map(item => {
+          if (item._id === action.item._id) {
+            item.editing = action.editing;
+          }
+          return item;
+        });
+
+        customLinksResult = editedCustomLinks;
+      }
 
       return {
         ...state,
         customLinksDetails: {
           ...customLinksDetails,
-          customLinks: editedCustomLinks,
+          customLinks: customLinksResult,
         },
       };
     }

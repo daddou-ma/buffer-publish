@@ -162,32 +162,33 @@ const CustomLinks = ({
         onUpdateCustomLinksColor={onUpdateCustomLinksColor}
       />
       <MyLinksBody>
-        {customLinksDetails.customLinks && customLinksDetails.customLinks.map(item => {
-          return (
-            <>
-              {!item.editing && (
-                <MyLinksPreview
-                  onDeleteCustomLink={onDeleteCustomLink}
-                  onToggleEditMode={onToggleEditMode}
-                  bgColor={colorButtons}
-                  textColor={textColor}
-                  item={item}
-                />
-              )}
-              {item.editing && (
-                <EditingLink
-                  key={item.order}
-                  item={item}
-                  customLinksDetails={customLinksDetails}
-                  onUpdateCustomLinks={onUpdateCustomLinks}
-                  onUpdateLinkText={onUpdateLinkText}
-                  onUpdateLinkUrl={onUpdateLinkUrl}
-                  onToggleEditMode={onToggleEditMode}
-                />
-              )}
-            </>
-          );
-        })}
+        {customLinksDetails.customLinks &&
+          customLinksDetails.customLinks.map(item => {
+            return (
+              <>
+                {item._id && !item.editing && (
+                  <MyLinksPreview
+                    onDeleteCustomLink={onDeleteCustomLink}
+                    onToggleEditMode={onToggleEditMode}
+                    bgColor={colorButtons}
+                    textColor={textColor}
+                    item={item}
+                  />
+                )}
+                {item.editing && (
+                  <EditingLink
+                    key={item.order}
+                    item={item}
+                    customLinksDetails={customLinksDetails}
+                    onUpdateCustomLinks={onUpdateCustomLinks}
+                    onUpdateLinkText={onUpdateLinkText}
+                    onUpdateLinkUrl={onUpdateLinkUrl}
+                    onToggleEditMode={onToggleEditMode}
+                  />
+                )}
+              </>
+            );
+          })}
       </MyLinksBody>
     </MyLinksSection>
   );
