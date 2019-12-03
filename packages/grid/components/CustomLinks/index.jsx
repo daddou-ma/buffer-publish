@@ -152,7 +152,7 @@ const CustomLinks = ({
         onUpdateCustomLinksColor={onUpdateCustomLinksColor}
       />
       <MyLinksBody>
-        {customLinksDetails.customLinks.map(item => {
+        {customLinksDetails.customLinks && customLinksDetails.customLinks.map(item => {
           return (
             <>
               {!item.editing && (

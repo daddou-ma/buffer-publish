@@ -164,7 +164,7 @@ const profileReducer = (state = profileInitialState, action) => {
       };
     case actionTypes.ADD_CUSTOM_LINK: {
       const { customLinksDetails } = state;
-      const { customLinks } = customLinksDetails;
+      const { customLinks = [] } = customLinksDetails;
       return {
         ...state,
         customLinksDetails: {
