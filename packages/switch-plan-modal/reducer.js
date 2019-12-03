@@ -15,6 +15,7 @@ export const initialState = {
   card: {},
   source: 'unknown',
   dismissible: false,
+  isPromo: false,
 };
 
 export default (state = initialState, action) => {
@@ -44,6 +45,7 @@ export default (state = initialState, action) => {
         ...state,
         source: action.source || 'unknown',
         plan: action.plan || 'pro',
+        isPromo: action.isPromo || false,
       };
     case modalsActionTypes.HIDE_SWITCH_PLAN_MODAL:
       return {

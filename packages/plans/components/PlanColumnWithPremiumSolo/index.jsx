@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { grayLighter } from '@bufferapp/ui/style/colors';
+import { grayLighter, orange } from '@bufferapp/ui/style/colors';
 import { Image } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
 import { People, Person } from '@bufferapp/ui/Icon';
@@ -24,6 +24,8 @@ import {
   BillingTextStyle,
   EmptySpan,
   LeftBillingText,
+  PromoTextStyle,
+  DiscountTextStyle,
 } from './style';
 
 const UserIcon = ({ Icon, text, isSelected }) => (
@@ -55,7 +57,7 @@ const RightPlanButton = ({
 
 const RightButton = styled(Button)`
   height: unset;
-  padding: 20px 30px 15px 30px;
+  padding: ${props => (props.isNonprofit ? '4% 3%' : '20px 30px 15px 30px')};
   border-radius: 0 25px 25px 0;
   background-color: ${props =>
     props.type === 'primary' ? '#EEF1FF' : 'white'};
@@ -87,6 +89,15 @@ const LeftPlanButton = ({
 
 const LeftButton = styled(RightButton)`
   border-radius: 25px 0 0 25px;
+  padding: ${props => (props.isNonprofit ? '4% 2%' : '')};
+`;
+
+const PromoCostLine = styled.div`
+  position: relative;
+  border: 1px solid ${orange};
+  width: ${props => (props.isNonprofit ? '90px' : '67px')};
+  top: 30px;
+  left: ${props => (props.isNonprofit ? '30px' : '35px')};
 `;
 
 const PlanColumnWithPremiumSolo = ({
@@ -95,6 +106,9 @@ const PlanColumnWithPremiumSolo = ({
   nonProfitCost,
   soloCost,
   soloNonProfitCost,
+  promoCost,
+  promoNonProfitCost,
+  promoDiscount,
   isNonprofit,
   imageSrc,
   plan,
@@ -107,11 +121,12 @@ const PlanColumnWithPremiumSolo = ({
   billingText,
   onPremiumPlanClick,
   selectedPremiumPlan,
+  isAwesomeUser,
 }) => {
   const isSelected = () => selectedPremiumPlan === 1;
   const isPremium = plan === 'premium_business';
   return (
-    <ColumnStyle>
+    <ColumnStyle isAwesomeUser={isAwesomeUser}>
       <TopContentStyle>
         <Text type="h3">{title}</Text>
         <ImageWrapperStyle isPremium={isPremium}>
@@ -120,13 +135,28 @@ const PlanColumnWithPremiumSolo = ({
         {!isPremium && (
           <React.Fragment>
             <UserIcon Icon={<Person />} text="1 user" isSelected />
+            <PromoCostLine isNonprofit={isNonprofit} />
             <PriceStyle>
-              <TextStyle type="h1">
-                {isNonprofit ? nonProfitCost : cost}
-                <MonthlyText>{monthly}</MonthlyText>
-              </TextStyle>
+              {!isAwesomeUser && (
+                <TextStyle type="h1">
+                  {isNonprofit ? nonProfitCost : cost}
+                  <MonthlyText>{monthly}</MonthlyText>
+                </TextStyle>
+              )}
+              {isAwesomeUser && (
+                <TextStyle type="h1">
+                  <PromoTextStyle>
+                    {isNonprofit ? nonProfitCost : cost}
+                  </PromoTextStyle>
+                  {isNonprofit ? promoNonProfitCost : promoCost}
+                  <MonthlyText>{monthly}</MonthlyText>
+                </TextStyle>
+              )}
             </PriceStyle>
             <LeftBillingText type="p">{billingText}</LeftBillingText>
+            {isAwesomeUser && (
+              <DiscountTextStyle type="p">{promoDiscount}</DiscountTextStyle>
+            )}
           </React.Fragment>
         )}
         {isPremium && (
@@ -137,6 +167,7 @@ const PlanColumnWithPremiumSolo = ({
                 onClick={() => onPremiumPlanClick({ selectedPlan: 1 })}
                 hasIconOnly
                 size="large"
+                isNonprofit={isNonprofit}
                 icon={
                   <LeftPlanButton
                     isNonprofit={isNonprofit}
@@ -153,6 +184,7 @@ const PlanColumnWithPremiumSolo = ({
                 onClick={() => onPremiumPlanClick({ selectedPlan: 2 })}
                 hasIconOnly
                 size="large"
+                isNonprofit={isNonprofit}
                 icon={
                   <RightPlanButton
                     isNonprofit={isNonprofit}
@@ -190,6 +222,7 @@ const PlanColumnWithPremiumSolo = ({
                 source,
                 plan,
                 soloPlanSelected: selectedPremiumPlan === 1,
+                isPromo: isAwesomeUser,
               })
             }
           />

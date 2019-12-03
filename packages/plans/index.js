@@ -23,19 +23,17 @@ export default connect(
     isNonprofit: state.appSidebar.user.isNonprofit,
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
     isAwesomeUser: state.appSidebar.user.isOnAwesomePlan,
-    shouldSeeSoloPlanOption:
-      state.appSidebar.user.plan === 'pro' ||
-      state.appSidebar.user.isOnAwesomePlan,
+    shouldSeeSoloPlanOption: state.appSidebar.user.plan === 'pro',
   }),
   dispatch => ({
     onPremiumPlanClick: ({ selectedPlan }) => {
       dispatch(actions.setSelectedPlan({ selectedPlan }));
     },
-    onChoosePlanClick: ({ source, plan, soloPlanSelected }) => {
+    onChoosePlanClick: ({ source, plan, soloPlanSelected, isPromo }) => {
       if (plan === 'premium_business' && soloPlanSelected) {
         plan = 'solo_premium_business';
       }
-      dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
+      dispatch(modalsActions.showSwitchPlanModal({ source, plan, isPromo }));
     },
     onBackToDashboardClick: ({ selectedProfileId, profiles, isAwesomeUser }) => {
       if (isAwesomeUser) {

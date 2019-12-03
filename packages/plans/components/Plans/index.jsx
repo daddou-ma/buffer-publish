@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { ArrowLeft } from '@bufferapp/ui/Icon';
-import { gray } from '@bufferapp/ui/style/colors';
+import { gray, orange } from '@bufferapp/ui/style/colors';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import styled from 'styled-components';
 import PlanColumn from '../PlanColumn';
@@ -22,8 +22,46 @@ const HeaderStyle = styled(Text)`
   margin-top: 0px;
 `;
 
+const PromoHeaderStyle = styled(Text)`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 42px;
+  line-height: 52px;
+  text-align: left;
+  width: 417px;
+  color: #ffffff;
+`;
+
+const PromoTextStyle = styled(Text)`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  text-align: left;
+  width: 380px;
+  color: #ffffff;
+  margin-top: 0px;
+  margin-bottom: 5px;
+`;
+
+const PromoContainerStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 200px;
+  margin-right: 40px;
+`;
+
+const PromoHeaderLine = styled.div`
+  border: 1px solid ${orange};
+  width: 200px;
+`;
+
 const ContainerStyle = styled.div`
   overflow-y: auto;
+  background: ${props => (props.isAwesomeUser ? '#121e66' : 'white')};
+  display: flex;
 `;
 
 const Plans = ({
@@ -39,7 +77,7 @@ const Plans = ({
   isAwesomeUser,
   shouldSeeSoloPlanOption,
 }) => (
-  <ContainerStyle>
+  <ContainerStyle isAwesomeUser={isAwesomeUser}>
     <ButtonStyle>
       <Button
         type="secondary"
@@ -55,8 +93,10 @@ const Plans = ({
       />
     </ButtonStyle>
     <div style={{ textAlign: 'center' }}>
-      <HeaderStyle type="h1">{ translations.headerText }</HeaderStyle>
-      {!shouldSeeSoloPlanOption && (
+      {!isAwesomeUser && (
+        <HeaderStyle type="h1">{translations.headerText}</HeaderStyle>
+      )}
+      {!shouldSeeSoloPlanOption && !isAwesomeUser && (
         <ColumnContainerStyle>
           <PlanColumn
             {...translations.pro}
@@ -84,7 +124,7 @@ const Plans = ({
           />
         </ColumnContainerStyle>
       )}
-      {shouldSeeSoloPlanOption && (
+      {shouldSeeSoloPlanOption && !isAwesomeUser && (
         <ColumnContainerStyle>
           <PlanColumnWithPremiumSolo
             {...translations.proExperiment}
@@ -109,7 +149,43 @@ const Plans = ({
             isNonprofit={isNonprofit}
             onPremiumPlanClick={onPremiumPlanClick}
             selectedPremiumPlan={selectedPremiumPlan}
-
+          />
+        </ColumnContainerStyle>
+      )}
+      {!shouldSeeSoloPlanOption && isAwesomeUser && (
+        <ColumnContainerStyle>
+          <PromoContainerStyle>
+            <PromoHeaderStyle type="h1">
+              {translations.promoHeader}
+            </PromoHeaderStyle>
+            <PromoTextStyle type="h3">{translations.promoDescription}</PromoTextStyle>
+            <PromoHeaderLine />
+          </PromoContainerStyle>
+          <PlanColumnWithPremiumSolo
+            {...translations.proExperiment}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({ newPlan: 'pro', currentPlan })}
+            isNonprofit={isNonprofit}
+            isAwesomeUser={isAwesomeUser}
+          />
+          <PlanColumnWithPremiumSolo
+            {...translations.premiumExperiment}
+            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
+            currentPlan={currentPlan}
+            onChoosePlanClick={onChoosePlanClick}
+            source={getSource({
+              newPlan:
+                selectedPremiumPlan === 1
+                  ? 'solo_premium_business'
+                  : 'premium_business',
+              currentPlan,
+            })}
+            isNonprofit={isNonprofit}
+            onPremiumPlanClick={onPremiumPlanClick}
+            selectedPremiumPlan={selectedPremiumPlan}
+            isAwesomeUser={isAwesomeUser}
           />
         </ColumnContainerStyle>
       )}
