@@ -1,170 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Input, Button } from '@bufferapp/ui';
-import styled from 'styled-components';
-import { grayLight } from '@bufferapp/ui/style/colors';
-import { borderRadius } from '@bufferapp/ui/style/borders';
 import LinksHeader from './LinksHeader';
-import CustomLinkPreview from './LinkPreview';
+import EditingLinkForm from './EditingLinkForm';
+import LinksPreview from './LinksPreview';
 
-const DEFAULT_COLOR = '#000000';
-
-const MyLinksSection = styled.div`
-  border: 1px solid ${grayLight};
-  border-radius: ${borderRadius};
-  margin-bottom: 22px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-`;
-
-const PreviewWrapper = styled.div`
-  display: flex;
-  position: relative;
-  border-bottom: 1px solid #f5f5f5;
-  transition: all 0.3s ease-in-out;
-
-  ::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    border-radius: 3px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  :hover {
-    cursor: move;
-    transform: scale(1, 1);
-    ::after {
-      opacity: 1;
-    }
-  }
-`;
-
-const LinkPreviewRow = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  font-size: 14px;
-  color: #636363;
-`;
-
-const MyLinksBody = styled.div``;
-
-const EditingMyLinksItem = styled.div`
-  display: flex;
-  padding: 8px;
-  border-top: 1px solid ${grayLight};
-`;
-
-const LinkInput = styled.div`
-  margin: 8px;
-  width: 50%;
-`;
-
-const UrlPreview = styled.div`
-  margin-left: 14px;
-  flex-basis: 402px;
-`;
-
-const ActionsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 15px 15px;
-`;
-
-const MyLinksPreview = ({
-  item,
-  bgColor,
-  textColor,
-  onDeleteCustomLink,
-  onToggleEditMode,
-}) => {
-  return (
-    <PreviewWrapper>
-      <LinkPreviewRow>
-        <CustomLinkPreview
-          bgColor={bgColor}
-          textColor={textColor}
-          text={item.text}
-        />
-        <UrlPreview>{item.url}</UrlPreview>
-        <Button
-          label="Delete"
-          type="gray"
-          onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
-        />
-        <Button
-          label="Edit"
-          type="secondary"
-          onClick={() => onToggleEditMode({ item, editing: true })}
-        />
-      </LinkPreviewRow>
-    </PreviewWrapper>
-  );
-};
-
-const EditingLink = ({
-  item,
-  customLinksDetails,
-  onUpdateCustomLinks,
-  onUpdateLinkText,
-  onUpdateLinkUrl,
-  onToggleEditMode,
-}) => {
-  return (
-    <>
-      <EditingMyLinksItem>
-        <LinkInput>
-          <Input
-            label="Link Text"
-            type="text"
-            onChange={e => onUpdateLinkText({ item, value: e.target.value })}
-            name="text"
-            value={item.text}
-          />
-        </LinkInput>
-        <LinkInput>
-          <Input
-            label="Link URL"
-            type="text"
-            onChange={e => onUpdateLinkUrl({ item, value: e.target.value })}
-            name="url"
-            value={item.url}
-          />
-        </LinkInput>
-      </EditingMyLinksItem>
-      <ActionsWrapper>
-        <Button
-          label="Cancel"
-          type="gray"
-          onClick={() => onToggleEditMode({ item, editing: false })}
-        />
-        <Button
-          label="Save Link"
-          type="primary"
-          onClick={e =>
-            onUpdateCustomLinks({
-              customLinks: customLinksDetails.customLinks,
-            })
-          }
-        />
-      </ActionsWrapper>
-    </>
-  );
-};
+import { DEFAULT_COLOR, MyLinksSection, MyLinksBody } from './styles';
 
 const CustomLinks = ({
   customLinksDetails,
   onUpdateCustomLinks,
   onUpdateCustomLinksColor,
-  onUpdateCustomLinksButtonType,
   onDeleteCustomLink,
   onAddLinkClick,
   onUpdateLinkText,
@@ -197,7 +42,7 @@ const CustomLinks = ({
             return (
               <>
                 {!item.editing && (
-                  <MyLinksPreview
+                  <LinksPreview
                     onDeleteCustomLink={onDeleteCustomLink}
                     onToggleEditMode={onToggleEditMode}
                     bgColor={colorButtons}
@@ -206,7 +51,7 @@ const CustomLinks = ({
                   />
                 )}
                 {item.editing && (
-                  <EditingLink
+                  <EditingLinkForm
                     key={item.order}
                     item={item}
                     customLinksDetails={customLinksDetails}
@@ -225,7 +70,14 @@ const CustomLinks = ({
 };
 
 CustomLinks.propTypes = {
+  maxCustomLinks: PropTypes.number,
   onAddLinkClick: PropTypes.func,
+  onUpdateLinkUrl: PropTypes.func,
+  onUpdateLinkText: PropTypes.func,
+  onToggleEditMode: PropTypes.func,
+  onDeleteCustomLink: PropTypes.func,
+  onUpdateCustomLinks: PropTypes.func,
+  onUpdateCustomLinksColor: PropTypes.func,
   customLinksDetails: PropTypes.shape({
     customLinks: PropTypes.array,
     maxCustomLinks: PropTypes.number,
@@ -235,7 +87,14 @@ CustomLinks.propTypes = {
 };
 
 CustomLinks.defaultProps = {
+  maxCustomLinks: 3,
   onAddLinkClick: () => {},
+  onUpdateLinkUrl: () => {},
+  onUpdateLinkText: () => {},
+  onToggleEditMode: () => {},
+  onDeleteCustomLink: () => {},
+  onUpdateCustomLinks: () => {},
+  onUpdateCustomLinksColor: () => {},
   customLinksDetails: {
     customLinks: [],
     maxCustomLinks: 0,
