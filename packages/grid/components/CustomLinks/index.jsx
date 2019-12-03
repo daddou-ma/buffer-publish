@@ -166,7 +166,7 @@ const CustomLinks = ({
           customLinksDetails.customLinks.map(item => {
             return (
               <>
-                {item._id && !item.editing && (
+                {!item.editing && (
                   <MyLinksPreview
                     onDeleteCustomLink={onDeleteCustomLink}
                     onToggleEditMode={onToggleEditMode}
