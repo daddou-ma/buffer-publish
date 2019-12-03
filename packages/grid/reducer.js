@@ -202,6 +202,41 @@ const profileReducer = (state = profileInitialState, action) => {
         },
       };
     }
+    case actionTypes.UPDATE_CUSTOM_LINKS: {
+      const { customLinksDetails } = state;
+      const { customLinks } = customLinksDetails;
+
+      const editedCustomLinks = cloneDeep(customLinks);
+
+      editedCustomLinks.map(item => {
+        item.editing = false;
+        return item;
+      });
+
+      return {
+        ...state,
+        customLinksDetails: {
+          ...customLinksDetails,
+          customLinks: editedCustomLinks,
+        },
+      };
+    }
+    case actionTypes.DELETE_CUSTOM_LINK: {
+      const { customLinksDetails } = state;
+      const { customLinks } = customLinksDetails;
+
+      const editedCustomLinks = cloneDeep(customLinks);
+
+      return {
+        ...state,
+        customLinksDetails: {
+          ...customLinksDetails,
+          customLinks: editedCustomLinks.filter(
+            link => link._id !== action.customLinkId
+          ),
+        },
+      };
+    }
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:
     case actionTypes.EDIT_CUSTOM_LINK_URL: {
       const { customLinksDetails } = state;
@@ -255,6 +290,8 @@ export default (state = initialState, action) => {
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:
     case actionTypes.EDIT_CUSTOM_LINK_URL:
     case actionTypes.TOGGLE_CUSTOM_LINK_EDIT_MODE:
+    case actionTypes.UPDATE_CUSTOM_LINKS:
+    case actionTypes.DELETE_CUSTOM_LINK:
       profileId = getProfileId(action);
       if (profileId) {
         return {

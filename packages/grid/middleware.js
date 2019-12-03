@@ -138,13 +138,21 @@ export default ({ getState, dispatch }) => next => action => { // eslint-disable
       break;
 
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      // TODO: add implementation
-      console.log('Success!', action);
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'success',
+          message: 'Nice! Your changes have been saved.',
+        })
+      );
       break;
 
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_FAIL}`:
-      // TODO: add implementation
-      console.log('Error!', action);
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'error',
+          message: 'There was an error saving your changes!',
+        })
+      );
       break;
 
     case gridActionTypes.DELETE_CUSTOM_LINK:
@@ -162,13 +170,21 @@ export default ({ getState, dispatch }) => next => action => { // eslint-disable
       break;
 
     case `deleteCustomLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      // TODO: add implementation
-      console.log('Success!', action);
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'success',
+          message: 'Nice! Your changes have been saved.',
+        })
+      );
       break;
 
     case `deleteCustomLink_${dataFetchActionTypes.FETCH_FAIL}`:
-      // TODO: add implementation
-      console.log('Error!', action);
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'error',
+          message: 'There was an error saving your changes!',
+        })
+      );
       break;
 
     default:

@@ -51,7 +51,13 @@ const ActionsWrapper = styled.div`
   padding: 0 15px 15px;
 `;
 
-const MyLinksPreview = ({ item, bgColor, textColor, onToggleEditMode }) => {
+const MyLinksPreview = ({
+  item,
+  bgColor,
+  textColor,
+  onDeleteCustomLink,
+  onToggleEditMode,
+}) => {
   return (
     <PreviewWrapper>
       <CustomLinkPreview
@@ -60,7 +66,11 @@ const MyLinksPreview = ({ item, bgColor, textColor, onToggleEditMode }) => {
         text={item.text}
       />
       <UrlPreview>{item.url}</UrlPreview>
-      <Button label="Delete" type="gray" />
+      <Button
+        label="Delete"
+        type="gray"
+        onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
+      />
       <Button
         label="Edit"
         type="secondary"
@@ -157,6 +167,7 @@ const CustomLinks = ({
             <>
               {!item.editing && (
                 <MyLinksPreview
+                  onDeleteCustomLink={onDeleteCustomLink}
                   onToggleEditMode={onToggleEditMode}
                   bgColor={colorButtons}
                   textColor={textColor}
@@ -171,7 +182,6 @@ const CustomLinks = ({
                   onUpdateCustomLinks={onUpdateCustomLinks}
                   onUpdateLinkText={onUpdateLinkText}
                   onUpdateLinkUrl={onUpdateLinkUrl}
-                  onDeleteCustomLink={onDeleteCustomLink}
                   onToggleEditMode={onToggleEditMode}
                 />
               )}
