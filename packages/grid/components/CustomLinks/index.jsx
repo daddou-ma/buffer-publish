@@ -20,10 +20,38 @@ const MyLinksSection = styled.div`
 
 const PreviewWrapper = styled.div`
   display: flex;
+  position: relative;
+  border-bottom: 1px solid #f5f5f5;
+  transition: all 0.3s ease-in-out;
+
+  ::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: 3px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  :hover {
+    cursor: move;
+    transform: scale(1, 1);
+    ::after {
+      opacity: 1;
+    }
+  }
+`;
+
+const LinkPreviewRow = styled.div`
+  width: 100%;
+  display: flex;
   align-items: center;
+  padding: 15px;
   font-size: 14px;
   color: #636363;
-  margin: 15px;
 `;
 
 const MyLinksBody = styled.div``;
@@ -60,22 +88,24 @@ const MyLinksPreview = ({
 }) => {
   return (
     <PreviewWrapper>
-      <CustomLinkPreview
-        bgColor={bgColor}
-        textColor={textColor}
-        text={item.text}
-      />
-      <UrlPreview>{item.url}</UrlPreview>
-      <Button
-        label="Delete"
-        type="gray"
-        onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
-      />
-      <Button
-        label="Edit"
-        type="secondary"
-        onClick={() => onToggleEditMode({ item, editing: true })}
-      />
+      <LinkPreviewRow>
+        <CustomLinkPreview
+          bgColor={bgColor}
+          textColor={textColor}
+          text={item.text}
+        />
+        <UrlPreview>{item.url}</UrlPreview>
+        <Button
+          label="Delete"
+          type="gray"
+          onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
+        />
+        <Button
+          label="Edit"
+          type="secondary"
+          onClick={() => onToggleEditMode({ item, editing: true })}
+        />
+      </LinkPreviewRow>
     </PreviewWrapper>
   );
 };
