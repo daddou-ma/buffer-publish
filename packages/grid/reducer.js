@@ -19,6 +19,7 @@ export const actionTypes = keyWrapper('GRID', {
   EDIT_CUSTOM_LINK_URL: 0,
   SAVE_CUSTOM_LINK: 0,
   TOGGLE_CUSTOM_LINK_EDIT_MODE: 0,
+  SWAP_CUSTOM_LINKS: 0,
 });
 
 export const initialState = {
@@ -253,6 +254,14 @@ const profileReducer = (state = profileInitialState, action) => {
         },
       };
     }
+    case actionTypes.SWAP_CUSTOM_LINKS: {
+      const { customLinkSource, customLinkTarget } = action;
+      // TODO: swap custom links
+
+      return {
+        ...state,
+      };
+    }
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:
     case actionTypes.EDIT_CUSTOM_LINK_URL: {
       const { customLinksDetails } = state;
@@ -308,6 +317,7 @@ export default (state = initialState, action) => {
     case actionTypes.TOGGLE_CUSTOM_LINK_EDIT_MODE:
     case actionTypes.UPDATE_CUSTOM_LINKS:
     case actionTypes.DELETE_CUSTOM_LINK:
+    case actionTypes.SWAP_CUSTOM_LINKS:
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -419,5 +429,15 @@ export const actions = {
     profileId,
     item,
     editing,
+  }),
+  handleSwapCustomLinks: ({
+    profileId,
+    customLinkSource,
+    customLinkTarget,
+  }) => ({
+    type: actionTypes.SWAP_CUSTOM_LINKS,
+    profileId,
+    customLinkSource,
+    customLinkTarget,
   }),
 };

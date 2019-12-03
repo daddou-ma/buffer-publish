@@ -3,7 +3,7 @@ import { grayLight } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
 export const DEFAULT_COLOR = '#000000';
-export const DEFAULT_CONTRAST_COLOR = '#000000';
+export const DEFAULT_CONTRAST_COLOR = '#FFFFFF';
 
 export const MyLinksSection = styled.div`
   border: 1px solid ${grayLight};

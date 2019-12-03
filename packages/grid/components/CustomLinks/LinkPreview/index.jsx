@@ -11,7 +11,7 @@ import {
   LinkPreviewRow,
 } from '../styles';
 
-export const LinkPreview = styled.div.attrs(props => ({
+export const LinkPreviewButton = styled.div.attrs(props => ({
   style: {
     backgroundColor: `${props.bgColor || DEFAULT_COLOR}`,
     color: `${props.textColor || DEFAULT_CONTRAST_COLOR}`,
@@ -37,7 +37,7 @@ export const LinkPreview = styled.div.attrs(props => ({
   line-height: 16px;
 `;
 
-const LinksPreview = ({
+const LinkPreview = ({
   item,
   bgColor,
   textColor,
@@ -47,9 +47,9 @@ const LinksPreview = ({
   return (
     <PreviewWrapper>
       <LinkPreviewRow>
-        <LinkPreview bgColor={bgColor} textColor={textColor}>
+        <LinkPreviewButton bgColor={bgColor} textColor={textColor}>
           {item.text}
-        </LinkPreview>
+        </LinkPreviewButton>
         <UrlPreview>{item.url}</UrlPreview>
         <Button
           label="Delete"
@@ -66,7 +66,7 @@ const LinksPreview = ({
   );
 };
 
-LinksPreview.propTypes = {
+LinkPreview.propTypes = {
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
   text: PropTypes.string,
@@ -79,7 +79,7 @@ LinksPreview.propTypes = {
   onDeleteCustomLink: PropTypes.func,
 };
 
-LinksPreview.defaultProps = {
+LinkPreview.defaultProps = {
   bgColor: DEFAULT_COLOR,
   textColor: '#FFFFFF',
   text: null,
@@ -91,4 +91,4 @@ LinksPreview.defaultProps = {
   onDeleteCustomLink: () => {},
 };
 
-export default LinksPreview;
+export default LinkPreview;

@@ -141,6 +141,7 @@ const GridPosts = ({
   hasCustomLinksFlip,
   maxCustomLinks,
   onToggleEditMode,
+  onSwapCustomLinks,
 }) => {
   if (loading) {
     return (
@@ -238,6 +239,7 @@ const GridPosts = ({
             onUpdateLinkUrl={onUpdateLinkUrl}
             maxCustomLinks={maxCustomLinks}
             onToggleEditMode={onToggleEditMode}
+            onSwapCustomLinks={onSwapCustomLinks}
           />
         )}
         <GridList

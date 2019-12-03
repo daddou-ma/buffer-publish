@@ -187,6 +187,15 @@ export default connect(
         })
       );
     },
+    onSwapCustomLinks: ({ customLinkSource, customLinkTarget }) => {
+      dispatch(
+        actions.handleSwapCustomLinks({
+          profileId: ownProps.profileId,
+          customLinkSource,
+          customLinkTarget,
+        })
+      );
+    },
   })
 )(GridPosts);
 

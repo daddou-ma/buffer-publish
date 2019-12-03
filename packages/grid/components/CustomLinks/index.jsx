@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import LinksHeader from './LinksHeader';
 import EditingLinkForm from './EditingLinkForm';
-import LinksPreview from './LinksPreview';
+import LinkDragWrapper from './LinkDragWrapper';
 
-import { DEFAULT_COLOR, MyLinksSection, MyLinksBody } from './styles';
+import {
+  DEFAULT_COLOR,
+  DEFAULT_CONTRAST_COLOR,
+  MyLinksSection,
+  MyLinksBody,
+} from './styles';
 
 const CustomLinks = ({
   customLinksDetails,
@@ -16,12 +21,13 @@ const CustomLinks = ({
   onUpdateLinkUrl,
   maxCustomLinks,
   onToggleEditMode,
+  onSwapCustomLinks,
 }) => {
   const [colorButtons, setColorButton] = useState(
     customLinksDetails.buttonColor || DEFAULT_COLOR
   );
   const [textColor, setTextColor] = useState(
-    customLinksDetails.buttonContrastColor || '#FFFFFF'
+    customLinksDetails.buttonContrastColor || DEFAULT_CONTRAST_COLOR
   );
 
   return (
@@ -42,12 +48,13 @@ const CustomLinks = ({
             return (
               <>
                 {!item.editing && (
-                  <LinksPreview
-                    onDeleteCustomLink={onDeleteCustomLink}
-                    onToggleEditMode={onToggleEditMode}
-                    bgColor={colorButtons}
-                    textColor={textColor}
+                  <LinkDragWrapper
                     item={item}
+                    textColor={textColor}
+                    bgColor={colorButtons}
+                    onSwapCustomLinks={onSwapCustomLinks}
+                    onToggleEditMode={onToggleEditMode}
+                    onDeleteCustomLink={onDeleteCustomLink}
                   />
                 )}
                 {item.editing && (
@@ -77,6 +84,7 @@ CustomLinks.propTypes = {
   onToggleEditMode: PropTypes.func,
   onDeleteCustomLink: PropTypes.func,
   onUpdateCustomLinks: PropTypes.func,
+  onSwapCustomLinks: PropTypes.func,
   onUpdateCustomLinksColor: PropTypes.func,
   customLinksDetails: PropTypes.shape({
     customLinks: PropTypes.array,
@@ -94,6 +102,7 @@ CustomLinks.defaultProps = {
   onToggleEditMode: () => {},
   onDeleteCustomLink: () => {},
   onUpdateCustomLinks: () => {},
+  onSwapCustomLinks: () => {},
   onUpdateCustomLinksColor: () => {},
   customLinksDetails: {
     customLinks: [],
