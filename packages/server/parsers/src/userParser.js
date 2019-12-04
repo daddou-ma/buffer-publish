@@ -92,9 +92,9 @@ module.exports = userData => ({
   helpScoutConfig: userData.helpscout_beacon_params,
   isBusinessTeamMember: userData.is_business_team_member,
   isOnAwesomePlan: userData.plan === 'awesome',
-  isAwesomePromoUser: userData.features.includes(
-    'legacy_awesome_monthly_promotion'
-  ),
+  isAwesomePromoUser:
+    userData.features.includes('legacy_awesome_monthly_promotion') &&
+    userData.plan === 'awesome',
   hasAccessToUserTag: userData.is_pro_and_up_org_user, // this includes team members
   isAnalyzeCustomer: userData.is_analyze_customer,
 });
