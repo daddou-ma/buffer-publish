@@ -142,6 +142,9 @@ const profileReducer = (state = profileInitialState, action) => {
         customLinksDetails: {
           ...state.customLinksDetails,
           buttonColor: action.result.profile.custom_links_color,
+          buttonContrastColor:
+            action.result.profile.custom_links_contrast_color,
+          customLinks: action.result.profile.custom_links,
         },
       };
     case `shortenUrl_${dataFetchActionTypes.FETCH_START}`:

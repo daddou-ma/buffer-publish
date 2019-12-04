@@ -22,6 +22,7 @@ const EditingLinkForm = ({
             onChange={e => onUpdateLinkText({ item, value: e.target.value })}
             name="text"
             value={item.text}
+            placeholder="Describe link (e.g. “Shop Sale”)"
           />
         </LinkInput>
         <LinkInput>
@@ -31,6 +32,7 @@ const EditingLinkForm = ({
             onChange={e => onUpdateLinkUrl({ item, value: e.target.value })}
             name="url"
             value={item.url}
+            placeholder="Your website or URL"
           />
         </LinkInput>
       </EditingMyLinksItem>
