@@ -32,9 +32,11 @@ export const carouselCardPropTypes = PropTypes.shape({
 
 export const storyGroupPropTypes = PropTypes.shape({
   storyDetails: PropTypes.shape({
-    stories: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-    })),
+    stories: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+      })
+    ),
   }),
   scheduledAt: PropTypes.number,
 }).isRequired;

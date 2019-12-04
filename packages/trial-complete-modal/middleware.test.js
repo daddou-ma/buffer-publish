@@ -13,13 +13,12 @@ describe('middleware', () => {
       type: actionTypes.CANCEL_TRIAL,
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'cancelTrial',
-      }));
-    expect(dispatch)
-      .toBeCalledWith(modalsActions.hideTrialCompleteModal());
+      })
+    );
+    expect(dispatch).toBeCalledWith(modalsActions.hideTrialCompleteModal());
   });
 });

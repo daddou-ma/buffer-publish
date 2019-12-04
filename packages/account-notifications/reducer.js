@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
       };
     case `setNotifications_${dataFetchActionTypes.FETCH_FAIL}`: {
       const rollbackState = {};
-      Object.keys(action.args.notifications).map((type) => {
+      Object.keys(action.args.notifications).map(type => {
         rollbackState[type] = !action.args.notifications[type];
         return null;
       });

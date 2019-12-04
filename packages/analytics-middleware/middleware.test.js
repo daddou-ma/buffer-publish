@@ -2,8 +2,7 @@ import './analytics.mock';
 import { actionTypes } from './actions';
 import middleware from './middleware';
 
-const state = {
-};
+const state = {};
 
 describe('middleware', () => {
   const next = jest.fn();
@@ -38,8 +37,10 @@ describe('middleware', () => {
       },
     };
     middleware(store)(next)(action);
-    expect(window.analytics.identify)
-      .toHaveBeenCalledWith(action.userId, action.payload);
+    expect(window.analytics.identify).toHaveBeenCalledWith(
+      action.userId,
+      action.payload
+    );
   });
 
   it(`On ${actionTypes.TRACK_EVENT} should push an event to segment`, () => {
@@ -51,12 +52,11 @@ describe('middleware', () => {
       },
     };
     middleware(store)(next)(action);
-    expect(window.analytics.track)
-      .toHaveBeenCalledWith(action.eventName, {
-        bar: 'bar',
-        product: 'publish',
-        clientName: 'publishWeb',
-      });
+    expect(window.analytics.track).toHaveBeenCalledWith(action.eventName, {
+      bar: 'bar',
+      product: 'publish',
+      clientName: 'publishWeb',
+    });
   });
 
   it(`On ${actionTypes.PAGE_CHANGE} should push a page change to segment`, () => {
@@ -68,10 +68,9 @@ describe('middleware', () => {
       },
     };
     middleware(store)(next)(action);
-    expect(window.analytics.page)
-      .toHaveBeenCalledWith(action.pageName, {
-        bar: 'bar',
-        product: 'publish',
-      });
+    expect(window.analytics.page).toHaveBeenCalledWith(action.pageName, {
+      bar: 'bar',
+      product: 'publish',
+    });
   });
 });

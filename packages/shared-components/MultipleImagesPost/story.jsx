@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import MultipleImagesPost from './index';
@@ -18,22 +16,29 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
-const links = [{
-  displayString: 'http://buff.ly/1LTbUqv',
-  indices: [74, 96],
-  rawString: 'http://buff.ly/1LTbUqv',
-  url: 'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
-}];
-const multilineLinks = [{
-  ...links[0],
-  indices: [78, 100],
-}];
+const links = [
+  {
+    displayString: 'http://buff.ly/1LTbUqv',
+    indices: [74, 96],
+    rawString: 'http://buff.ly/1LTbUqv',
+    url:
+      'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
+  },
+];
+const multilineLinks = [
+  {
+    ...links[0],
+    indices: [78, 100],
+  },
+];
 
-const text = 'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
-const multilineText = 'What is a Product Designer? \n\nAn awesome story by @jgadapee over on Medium! \n\nhttp://buff.ly/1LTbUqv';
+const text =
+  'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
+const multilineText =
+  'What is a Product Designer? \n\nAn awesome story by @jgadapee over on Medium! \n\nhttp://buff.ly/1LTbUqv';
 
 const postDetails = {
   postAction: 'This post will be sent at 9:21 (GMT)',
@@ -57,11 +62,7 @@ const imageUrls = [
 
 storiesOf('Cards|Posts/MultipleImagesPost', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
-    <Provider store={store}>
-      {getStory()}
-    </Provider>,
-  )
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('queued multiple image post', () => (
     <MultipleImagesPost
       postDetails={postDetails}

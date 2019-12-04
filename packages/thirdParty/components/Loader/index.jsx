@@ -42,7 +42,6 @@ Loader.defaultProps = {
   location: {},
   modalsShowing: false,
   userId: '',
-
 };
 
 export default Loader;

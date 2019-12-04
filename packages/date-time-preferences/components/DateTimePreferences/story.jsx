@@ -12,12 +12,18 @@ const store = createStore(formReducer);
 storiesOf('DateTimePreferences', module)
   .addDecorator(withA11y)
   .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
-  .add('a story', () => (
-    <DateTimePreferences />
-  ))
+  .add('a story', () => <DateTimePreferences />)
   .add('time format can be 24 hour', () => (
-    <DateTimePreferences twentyFourHourTime changeTwentyFourHourFormat={action('change twenty four hour format')} changeStartOfWeek={action('change day to start the week')} />
+    <DateTimePreferences
+      twentyFourHourTime
+      changeTwentyFourHourFormat={action('change twenty four hour format')}
+      changeStartOfWeek={action('change day to start the week')}
+    />
   ))
   .add('week can start on Monday', () => (
-    <DateTimePreferences weekStartsMonday changeTwentyFourHourFormat={action('change twenty four hour format')} changeStartOfWeek={action('change day to start the week')} />
+    <DateTimePreferences
+      weekStartsMonday
+      changeTwentyFourHourFormat={action('change twenty four hour format')}
+      changeStartOfWeek={action('change day to start the week')}
+    />
   ));

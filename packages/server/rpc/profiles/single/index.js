@@ -17,5 +17,5 @@ module.exports = method(
       },
     })
       .then(result => JSON.parse(result))
-      .then(profile => profileParser(profile)),
+      .then(profile => profileParser(profile))
 );

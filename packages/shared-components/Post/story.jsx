@@ -1,8 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
@@ -44,17 +42,21 @@ const sentPostDetails = {
 };
 
 const retweetProfile = {
-  avatarUrl: 'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f00002e/f49c2ff693f1c307af5e1b3d84e581ca.png',
+  avatarUrl:
+    'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f00002e/f49c2ff693f1c307af5e1b3d84e581ca.png',
   handle: '@joelgascoigne',
   name: 'Joel Gascoigne',
 };
 
-const links = [{
-  rawString: 'http://buff.ly/1LTbUqv',
-  displayString: 'http://buff.ly/1LTbUqv',
-  url: 'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
-  indices: [74, 96],
-}];
+const links = [
+  {
+    rawString: 'http://buff.ly/1LTbUqv',
+    displayString: 'http://buff.ly/1LTbUqv',
+    url:
+      'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
+    indices: [74, 96],
+  },
+];
 
 const statistics = {
   clicks: 12,
@@ -64,16 +66,19 @@ const statistics = {
   retweets: 2,
 };
 
-const retweetComment = 'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
+const retweetComment =
+  'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
 
 const subprofiles = [
   {
-    avatar: 'http://i.pinimg.com/200x150/76/4a/36/764a36f92e012937b13d150690747365.jpg',
+    avatar:
+      'http://i.pinimg.com/200x150/76/4a/36/764a36f92e012937b13d150690747365.jpg',
     id: '5bbca83e94803d000e7dca34',
     name: 'Books',
   },
   {
-    avatar: 'http://i.pinimg.com/200x150/ac/c7/15/acc7159eb4a3fd01963087465305b967.jpg',
+    avatar:
+      'http://i.pinimg.com/200x150/ac/c7/15/acc7159eb4a3fd01963087465305b967.jpg',
     id: '5bbca83e94803d000e7dca35',
     name: 'Travel',
   },
@@ -87,11 +92,7 @@ const children = (
 
 storiesOf('Cards|Posts/Post', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
-    <Provider store={store}>
-      {getStory()}
-    </Provider>,
-  )
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('queued post', () => (
     <Post
       postDetails={postDetails}

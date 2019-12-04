@@ -1,11 +1,8 @@
-import {
-  getRequestName,
-} from './index';
+import { getRequestName } from './index';
 
 describe('ProfilePage', () => {
   it('should export getRequestName', () => {
-    expect(getRequestName)
-      .toBeDefined();
+    expect(getRequestName).toBeDefined();
   });
 
   it('should return queue request name', () => {

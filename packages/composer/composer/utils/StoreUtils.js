@@ -3,7 +3,7 @@
 const observeStore = (store, predicate) => {
   let performCheck;
 
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     performCheck = () => {
       if (predicate.call(null, store)) {
         resolve();

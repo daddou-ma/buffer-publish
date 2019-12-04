@@ -8,8 +8,7 @@ describe('reducer', () => {
       type: 'INIT',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle user_FETCH_SUCCESS action type', () => {
@@ -22,12 +21,10 @@ describe('reducer', () => {
       result: {
         hasEmailNotifications: { bufferTips: true },
       },
-      args: {
-      },
+      args: {},
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   describe('actions', () => {

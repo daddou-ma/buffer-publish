@@ -1,7 +1,11 @@
 import { EventEmitter } from 'events';
 import cookies from 'js-cookie';
 import AppDispatcher from '../dispatcher';
-import { ActionTypes, NotificationTypes, NotificationScopes } from '../AppConstants';
+import {
+  ActionTypes,
+  NotificationTypes,
+  NotificationScopes,
+} from '../AppConstants';
 import { generateUniqueId } from '../utils/StringUtils';
 
 const CHANGE_EVENT = 'change';
@@ -17,14 +21,17 @@ const getInitialState = () => ({
 
 let state = getInitialState();
 
-const getNewErrorNotification = (id, {
-  scope,
-  errorCode,
-  message = '',
-  onlyCloseOnce = false,
-  showSoftAndHardCloseOptions = false,
-  data = {},
-}) => ({
+const getNewErrorNotification = (
+  id,
+  {
+    scope,
+    errorCode,
+    message = '',
+    onlyCloseOnce = false,
+    showSoftAndHardCloseOptions = false,
+    data = {},
+  }
+) => ({
   type: NotificationTypes.ERROR,
   id,
   scope,
@@ -35,13 +42,16 @@ const getNewErrorNotification = (id, {
   data,
 });
 
-const getNewSuccessNotification = (id, {
-  scope,
-  message = '',
-  onlyCloseOnce = false,
-  showSoftAndHardCloseOptions = false,
-  data = {},
-}) => ({
+const getNewSuccessNotification = (
+  id,
+  {
+    scope,
+    message = '',
+    onlyCloseOnce = false,
+    showSoftAndHardCloseOptions = false,
+    data = {},
+  }
+) => ({
   type: NotificationTypes.SUCCESS,
   id,
   scope,
@@ -51,14 +61,17 @@ const getNewSuccessNotification = (id, {
   data,
 });
 
-const getNewInfoNotification = (id, {
-  scope,
-  message = '',
-  onlyCloseOnce = false,
-  showSoftAndHardCloseOptions = false,
-  data = {},
-  cta,
-}) => ({
+const getNewInfoNotification = (
+  id,
+  {
+    scope,
+    message = '',
+    onlyCloseOnce = false,
+    showSoftAndHardCloseOptions = false,
+    data = {},
+    cta,
+  }
+) => ({
   type: NotificationTypes.INFO,
   id,
   scope,
@@ -71,17 +84,19 @@ const getNewInfoNotification = (id, {
 
 const NotificationStore = Object.assign({}, EventEmitter.prototype, {
   emitChange: () => NotificationStore.emit(CHANGE_EVENT),
-  addChangeListener: (callback) => NotificationStore.on(CHANGE_EVENT, callback),
-  removeChangeListener: (callback) => NotificationStore.removeListener(CHANGE_EVENT, callback),
+  addChangeListener: callback => NotificationStore.on(CHANGE_EVENT, callback),
+  removeChangeListener: callback =>
+    NotificationStore.removeListener(CHANGE_EVENT, callback),
 
   getVisibleNotifications: () => state.visibleNotifications,
 });
 
-const getClosedNotifications = () => cookies.getJSON(CLOSED_NOTIFICATIONS_COOKIE_KEY) || [];
-const setClosedNotifications =
-  (notifs) => cookies.set(CLOSED_NOTIFICATIONS_COOKIE_KEY, notifs, { expires: 365 * 4 });
+const getClosedNotifications = () =>
+  cookies.getJSON(CLOSED_NOTIFICATIONS_COOKIE_KEY) || [];
+const setClosedNotifications = notifs =>
+  cookies.set(CLOSED_NOTIFICATIONS_COOKIE_KEY, notifs, { expires: 365 * 4 });
 
-const shouldShowNotification = (notification) => {
+const shouldShowNotification = notification => {
   if (!notification.onlyCloseOnce) return true;
 
   const closedNotifications = getClosedNotifications();
@@ -94,7 +109,9 @@ const queueNotification = ({ isUnique, ...actionData }) => {
   // Remove prev notifications that share the same scope when a scope is identified as unique
   if (isUnique) removeAllNotificationsByScope(actionData.scope, false);
 
-  const existingNotificationIds = state.visibleNotifications.map((notif) => notif.id);
+  const existingNotificationIds = state.visibleNotifications.map(
+    notif => notif.id
+  );
   const id = generateUniqueId(existingNotificationIds);
   let notification;
 
@@ -115,23 +132,27 @@ const queueNotification = ({ isUnique, ...actionData }) => {
       return;
   }
 
-  if (shouldShowNotification(notification)) state.visibleNotifications.push(notification);
+  if (shouldShowNotification(notification))
+    state.visibleNotifications.push(notification);
 };
 
-const getRemovedNotificationAndIndex = (id) => {
-  const removedNotificationIndex = state.visibleNotifications.findIndex((notif) => notif.id === id);
-  const removedNotification = state.visibleNotifications[removedNotificationIndex];
+const getRemovedNotificationAndIndex = id => {
+  const removedNotificationIndex = state.visibleNotifications.findIndex(
+    notif => notif.id === id
+  );
+  const removedNotification =
+    state.visibleNotifications[removedNotificationIndex];
   return { removedNotificationIndex, removedNotification };
 };
 
-const isNotificationAlreadyInCookie = (removedNotification) => {
+const isNotificationAlreadyInCookie = removedNotification => {
   const closedNotifications = getClosedNotifications();
   const index = closedNotifications.indexOf(removedNotification.scope);
   // check if notification is already added to cookies
-  return (index !== -1);
+  return index !== -1;
 };
 
-const removeNotificationCookie = (id) => {
+const removeNotificationCookie = id => {
   const { removedNotification } = getRemovedNotificationAndIndex(id);
   if (!removedNotification) {
     return;
@@ -144,12 +165,18 @@ const removeNotificationCookie = (id) => {
   }
 };
 
-const removeNotification = (id, {
-  comesFromDirectUserAction = true,
-  isHardCloseCheckboxChecked,
-  shouldCloseVisibleNotification = true,
-} = {}) => {
-  const { removedNotification, removedNotificationIndex } = getRemovedNotificationAndIndex(id);
+const removeNotification = (
+  id,
+  {
+    comesFromDirectUserAction = true,
+    isHardCloseCheckboxChecked,
+    shouldCloseVisibleNotification = true,
+  } = {}
+) => {
+  const {
+    removedNotification,
+    removedNotificationIndex,
+  } = getRemovedNotificationAndIndex(id);
   /**
    * Sometimes `removeNotification()` called right after we've reset the app state
    * (this happens in `AppActionCreators.saveDrafts`) and so `state.visibleNotifications`
@@ -163,12 +190,13 @@ const removeNotification = (id, {
     state.visibleNotifications.splice(removedNotificationIndex, 1);
   }
 
-  const rememberClosedNotification = (
+  const rememberClosedNotification =
     removedNotification.onlyCloseOnce &&
     (!removedNotification.showSoftAndHardCloseOptions ||
-      (removedNotification.showSoftAndHardCloseOptions && isHardCloseCheckboxChecked)) &&
-    comesFromDirectUserAction && !isNotificationAlreadyInCookie(removedNotification)
-  );
+      (removedNotification.showSoftAndHardCloseOptions &&
+        isHardCloseCheckboxChecked)) &&
+    comesFromDirectUserAction &&
+    !isNotificationAlreadyInCookie(removedNotification);
 
   if (rememberClosedNotification) {
     const closedNotifications = getClosedNotifications();
@@ -177,21 +205,24 @@ const removeNotification = (id, {
 };
 
 const removeAllNotificationsByScope = (scope, comesFromDirectUserAction) => {
-  const notifications = state.visibleNotifications.filter((notif) =>
-    notif.scope === scope
+  const notifications = state.visibleNotifications.filter(
+    notif => notif.scope === scope
   );
-  notifications.forEach((notif) => removeNotification(notif.id, { comesFromDirectUserAction }));
+  notifications.forEach(notif =>
+    removeNotification(notif.id, { comesFromDirectUserAction })
+  );
 };
 
-const removeComposerOmniboxNotices = (draftId) => {
-  const notifications = state.visibleNotifications.filter((notif) =>
-    notif.data.id === draftId &&
-    notif.scope === NotificationScopes.MC_OMNIBOX_EDIT_NOTICE
+const removeComposerOmniboxNotices = draftId => {
+  const notifications = state.visibleNotifications.filter(
+    notif =>
+      notif.data.id === draftId &&
+      notif.scope === NotificationScopes.MC_OMNIBOX_EDIT_NOTICE
   );
-  notifications.forEach((notif) => removeNotification(notif.id));
+  notifications.forEach(notif => removeNotification(notif.id));
 };
 
-const onDispatchedPayload = (payload) => {
+const onDispatchedPayload = payload => {
   const action = payload.action;
   let isPayloadInteresting = true;
 
@@ -209,7 +240,10 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.REMOVE_ALL_NOTIFICATIONS_BY_SCOPE:
-      removeAllNotificationsByScope(action.scope, action.comesFromDirectUserAction);
+      removeAllNotificationsByScope(
+        action.scope,
+        action.comesFromDirectUserAction
+      );
       break;
 
     case ActionTypes.REMOVE_COMPOSER_NOTICES:

@@ -13,24 +13,28 @@ describe('middleware', () => {
     const useTwentyFourHourFormat = false;
     const action = actions.changeTwentyFourHourFormat(useTwentyFourHourFormat);
     middleware(store)(next)(action);
-    expect(dispatch).toHaveBeenCalledWith(fetchActions.fetch({
-      name: 'changeDateTimePreferences',
-      args: {
-        twentyfour_hour_time: useTwentyFourHourFormat,
-      },
-    }));
+    expect(dispatch).toHaveBeenCalledWith(
+      fetchActions.fetch({
+        name: 'changeDateTimePreferences',
+        args: {
+          twentyfour_hour_time: useTwentyFourHourFormat,
+        },
+      })
+    );
   });
 
   it('should call changeDateTimePreferences when changing the start of week from Sunday to Monday', () => {
     const startOnMonday = true;
     const action = actions.changeStartOfWeek(startOnMonday);
     middleware(store)(next)(action);
-    expect(dispatch).toHaveBeenCalledWith(fetchActions.fetch({
-      name: 'changeDateTimePreferences',
-      args: {
-        week_starts_monday: startOnMonday,
-      },
-    }));
+    expect(dispatch).toHaveBeenCalledWith(
+      fetchActions.fetch({
+        name: 'changeDateTimePreferences',
+        args: {
+          week_starts_monday: startOnMonday,
+        },
+      })
+    );
   });
 
   it('should send a success notifications when preferences are saved', () => {
@@ -38,9 +42,11 @@ describe('middleware', () => {
       name: RPC_NAME,
     });
     middleware(store)(next)(action);
-    expect(dispatch).toHaveBeenCalledWith(expect.objectContaining({
-      message: 'Great! Your preferences have been saved',
-    }));
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message: 'Great! Your preferences have been saved',
+      })
+    );
   });
 
   it('always propagates the action', () => {

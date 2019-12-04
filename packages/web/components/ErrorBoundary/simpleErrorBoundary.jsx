@@ -30,7 +30,11 @@ class ErrorBoundary extends React.Component {
         const FallbackComponent = this.props.defaultFallbackComponent;
         return <FallbackComponent {...this.state} />;
       }
-      return <h1>Something has gone wrong. Our team has been informed of the error.</h1>;
+      return (
+        <h1>
+          Something has gone wrong. Our team has been informed of the error.
+        </h1>
+      );
     }
 
     return this.props.children ? this.props.children : null;
@@ -40,7 +44,10 @@ class ErrorBoundary extends React.Component {
 ErrorBoundary.propTypes = {
   children: PropTypes.node,
   fallbackComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  defaultFallbackComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  defaultFallbackComponent: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.func,
+  ]),
 };
 
 ErrorBoundary.defaultProps = {

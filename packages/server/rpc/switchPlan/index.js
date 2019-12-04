@@ -4,9 +4,7 @@ const rp = require('request-promise');
 module.exports = method(
   'switchPlan',
   'switch user plan',
-  async ({
-    cycle, paymentMethodId, cta, plan,
-  }, { session }) => {
+  async ({ cycle, paymentMethodId, cta, plan }, { session }) => {
     let result;
     try {
       result = await rp({
@@ -29,5 +27,5 @@ module.exports = method(
       });
     }
     return result;
-  },
+  }
 );

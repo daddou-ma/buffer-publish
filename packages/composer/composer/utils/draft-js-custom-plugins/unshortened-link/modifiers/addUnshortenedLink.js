@@ -11,17 +11,21 @@
 
 import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
 
-const addUnshortenedLink = (editorState, contentBlock, linkData, { isUserAction = false } = {}) => {
+const addUnshortenedLink = (
+  editorState,
+  contentBlock,
+  linkData,
+  { isUserAction = false } = {}
+) => {
   const blockKey = contentBlock.getKey();
   let contentState = editorState.getCurrentContent();
   const originalSelectionBefore = contentState.getSelectionBefore();
   const originalSelection = editorState.getSelection();
   const currentEntityKey = contentBlock.getEntityAt(linkData.indices[0]);
 
-  const isAlreadyUnshortenedEntity = (
+  const isAlreadyUnshortenedEntity =
     currentEntityKey !== null &&
-    contentState.getEntity(currentEntityKey).getType() === 'UNSHORTENED_LINK'
-  );
+    contentState.getEntity(currentEntityKey).getType() === 'UNSHORTENED_LINK';
 
   if (isAlreadyUnshortenedEntity) return editorState;
 
@@ -41,8 +45,13 @@ const addUnshortenedLink = (editorState, contentBlock, linkData, { isUserAction 
     focusOffset: linkData.indices[1],
   });
 
-  contentState =
-    Modifier.replaceText(contentState, targetRange, linkData.unshortenedLink, null, entityKey);
+  contentState = Modifier.replaceText(
+    contentState,
+    targetRange,
+    linkData.unshortenedLink,
+    null,
+    entityKey
+  );
 
   /**
    * If current selection is after the replaced range of text, offset it
@@ -77,7 +86,11 @@ const addUnshortenedLink = (editorState, contentBlock, linkData, { isUserAction 
   let newEditorState;
 
   if (isUserAction) {
-    newEditorState = EditorState.push(editorState, contentState, 'apply-entity');
+    newEditorState = EditorState.push(
+      editorState,
+      contentState,
+      'apply-entity'
+    );
 
     newEditorState = EditorState.set(newEditorState, {
       selection: newSelection,

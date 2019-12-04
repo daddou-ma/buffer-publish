@@ -13,8 +13,8 @@ module.exports = method(
         access_token: session.publish.accessToken,
       },
     })
-    .then(data => JSON.parse(data))
-    .catch((err) => {
-      throw createError({ message: err.message });
-    }),
+      .then(data => JSON.parse(data))
+      .catch(err => {
+        throw createError({ message: err.message });
+      })
 );

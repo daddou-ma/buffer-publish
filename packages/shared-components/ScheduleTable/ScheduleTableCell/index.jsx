@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  InputTime,
-} from '@bufferapp/components';
+import { InputTime } from '@bufferapp/components';
 import CrossIcon from '@bufferapp/ui/Icon/Icons/Cross';
 import { Button } from '@bufferapp/ui';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
@@ -36,23 +34,26 @@ const TableCellContents = ({
   time,
   onRemoveTimeClick,
 }) => {
-  const buttonStyle = calculateStyles({
-    default: {
-      opacity: 0,
-      position: 'absolute',
-      right: '-4px',
-      top: '-2px',
+  const buttonStyle = calculateStyles(
+    {
+      default: {
+        opacity: 0,
+        position: 'absolute',
+        right: '-4px',
+        top: '-2px',
+      },
+      hovered: {
+        opacity: '1',
+      },
+      disabled: {
+        opacity: '0',
+      },
     },
-    hovered: {
-      opacity: '1',
-    },
-    disabled: {
-      opacity: '0',
-    },
-  }, {
-    hovered,
-    disabled,
-  });
+    {
+      hovered,
+      disabled,
+    }
+  );
   return (
     <div style={style}>
       <div
@@ -73,14 +74,14 @@ const TableCellContents = ({
           fontSize={'small'}
         />
       </div>
-      {!disabled &&
+      {!disabled && (
         <RemoveButton
           time={time}
           onRemoveTimeClick={onRemoveTimeClick}
           buttonStyle={buttonStyle}
           disabled={disabled}
         />
-      }
+      )}
     </div>
   );
 };
@@ -109,7 +110,15 @@ const ScheduleTableCell = ({
     <TableCellContents
       disabled={disabled}
       select24Hours={select24Hours}
-      onRemoveTimeClick={() => onRemoveTimeClick(time.hours, time.minutes, dayMap[dayName], timeIndex, paused)} //eslint-disable-line
+      onRemoveTimeClick={() =>
+        onRemoveTimeClick(
+          time.hours,
+          time.minutes,
+          dayMap[dayName],
+          timeIndex,
+          paused
+        )
+      } //eslint-disable-line
       time={{
         ...time,
         onChange: ({ hours, minutes }) => {

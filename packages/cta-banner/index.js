@@ -14,7 +14,7 @@ export default connect(
     onClickStartSubscription: () => {
       dispatch(actions.handleStartSubscription());
     },
-  }),
+  })
 )(BillingUpdateCTABanner);
 
 export reducer, { actions, actionTypes } from './reducer';

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import styles from './Hashtag.css';
 
-const Hashtag = (props) => (
-  <span className={styles.hashtag} spellCheck={false}>{props.children}</span>
+const Hashtag = props => (
+  <span className={styles.hashtag} spellCheck={false}>
+    {props.children}
+  </span>
 );
 
 Hashtag.propTypes = {

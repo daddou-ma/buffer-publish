@@ -41,17 +41,10 @@ const StoryGroupPopover = ({
 }) => (
   <React.Fragment>
     {showStoryPreview && (
-      <PreviewPopover
-        onCloseClick={onClosePreviewClick}
-        view="composer"
-      />
+      <PreviewPopover onCloseClick={onClosePreviewClick} view="composer" />
     )}
     {!showStoryPreview && (
-      <Popover
-        width="100%"
-        top="5rem"
-        onOverlayClick={onOverlayClick}
-      >
+      <Popover width="100%" top="5rem" onOverlayClick={onOverlayClick}>
         <StoryGroupWrapper
           maxStories={maxStories}
           uses24hTime={uses24hTime}

@@ -39,8 +39,9 @@ const PostStats = ({ statistics, profileService, showTwitterMentions }) => {
     plusOne: '+1',
   };
 
-  const createElement = (typeStats) => {
-    const isLinkedinClicks = typeStats === 'clicks' && profileService === 'linkedin';
+  const createElement = typeStats => {
+    const isLinkedinClicks =
+      typeStats === 'clicks' && profileService === 'linkedin';
     let value = statistics[typeStats];
     let title = titles[typeStats];
     if (typeStats === 'reach_twitter' && profileService === 'twitter') {
@@ -49,7 +50,11 @@ const PostStats = ({ statistics, profileService, showTwitterMentions }) => {
     if (typeStats === 'reach' && profileService === 'twitter') {
       return;
     }
-    if (!showTwitterMentions && typeStats === 'mentions' && profileService === 'twitter') {
+    if (
+      !showTwitterMentions &&
+      typeStats === 'mentions' &&
+      profileService === 'twitter'
+    ) {
       return;
     }
     if (

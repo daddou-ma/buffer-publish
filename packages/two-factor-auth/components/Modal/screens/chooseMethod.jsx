@@ -12,7 +12,9 @@ const ChooseMethod = ({ transition, setupApp, loading, editMode }) => (
           {editMode && 'Change Two Factor Authentication'}
         </Text>
         <div style={{ margin: '12px 0' }}>
-          <Text type="p">How would you like us to send your security codes?</Text>
+          <Text type="p">
+            How would you like us to send your security codes?
+          </Text>
         </div>
       </div>
       <div style={{ display: 'flex' }}>

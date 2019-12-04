@@ -4,7 +4,11 @@ import { Button, Text, Select as UISelect } from '@bufferapp/ui';
 import { isInThePast } from '@bufferapp/publish-server/formatters/src';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import { getReadableDateFormat, getMomentTime } from '../../utils/AddStory';
-import { storyGroupPropTypes, translationsPropTypes, selectedProfilePropTypes } from '../../utils/commonPropTypes';
+import {
+  storyGroupPropTypes,
+  translationsPropTypes,
+  selectedProfilePropTypes,
+} from '../../utils/commonPropTypes';
 import {
   FooterBar,
   ButtonStyle,
@@ -44,12 +48,11 @@ const getIsScheduleDisabled = ({
   uploadsCompleted,
   isScheduleLoading,
   isScheduledAtPastDue,
-}) => (
-  storiesLength < 1
-  || !uploadsCompleted
-  || isScheduleLoading
-  || (!editMode && isScheduledAtPastDue)
-);
+}) =>
+  storiesLength < 1 ||
+  !uploadsCompleted ||
+  isScheduleLoading ||
+  (!editMode && isScheduledAtPastDue);
 
 const AddStoryFooter = ({
   timezone,
@@ -67,7 +70,9 @@ const AddStoryFooter = ({
   isPastDue,
   sentPost,
 }) => {
-  const [scheduledAt, setScheduledAt] = useState(storyGroup && !sentPost ? storyGroup.scheduledAt : null);
+  const [scheduledAt, setScheduledAt] = useState(
+    storyGroup && !sentPost ? storyGroup.scheduledAt : null
+  );
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [forceDatePickerSubmit, setForceDatePickerSubmit] = useState(false);
 
@@ -77,7 +82,9 @@ const AddStoryFooter = ({
   const isScheduledAtPastDue = isPastDue && isInThePast(scheduledAt);
 
   const storiesLength = storyGroup.stories.length;
-  const uploadsCompleted = storyGroup.stories.filter(card => card.processing || card.uploading).length === 0;
+  const uploadsCompleted =
+    storyGroup.stories.filter(card => card.processing || card.uploading)
+      .length === 0;
   const isScheduleDisabled = getIsScheduleDisabled({
     storiesLength,
     uploadsCompleted,
@@ -90,7 +97,7 @@ const AddStoryFooter = ({
   const { stories, storyGroupId } = storyGroup;
   const { id, serviceId } = selectedProfile;
 
-  const onDateTimeSlotPickerSubmit = (timestamp) => {
+  const onDateTimeSlotPickerSubmit = timestamp => {
     setShowDatePicker(false);
     if (editMode) {
       if (forceDatePickerSubmit) {
@@ -113,7 +120,11 @@ const AddStoryFooter = ({
   };
 
   const onScheduleClick = () => {
-    if (!editMode || (editMode && isScheduledAtPastDue) || (editMode && sentPost)) {
+    if (
+      !editMode ||
+      (editMode && isScheduledAtPastDue) ||
+      (editMode && sentPost)
+    ) {
       setForceDatePickerSubmit(true);
       setShowDatePicker(true);
     } else {
@@ -174,9 +185,15 @@ const AddStoryFooter = ({
             type="secondary"
             label={translations.previewButton}
             disabled={isPreviewDisabled}
-            onClick={() => onPreviewClick({
-              stories, scheduledAt, id: storyGroupId, profileId: id, serviceId,
-            })}
+            onClick={() =>
+              onPreviewClick({
+                stories,
+                scheduledAt,
+                id: storyGroupId,
+                profileId: id,
+                serviceId,
+              })
+            }
           />
         </ButtonStyle>
         <Button
@@ -184,20 +201,28 @@ const AddStoryFooter = ({
           isSplit
           type="primary"
           disabled={isScheduleDisabled}
-          label={isScheduleLoading
-            ? translations.scheduleLoadingButton
-            : translations.scheduleButton}
+          label={
+            isScheduleLoading
+              ? translations.scheduleLoadingButton
+              : translations.scheduleButton
+          }
         >
           <Select
-            onSelectClick={(selectedItem) => {
+            onSelectClick={selectedItem => {
               if (typeof selectedItem.selectedItemClick !== 'undefined') {
                 selectedItem.selectedItemClick();
               }
               return false;
             }}
             items={[
-              { title: translations.shareNowButton, selectedItemClick: onShareNowClick },
-              { title: translations.scheduleButton, selectedItemClick: onScheduleClick },
+              {
+                title: translations.shareNowButton,
+                selectedItemClick: onShareNowClick,
+              },
+              {
+                title: translations.scheduleButton,
+                selectedItemClick: onScheduleClick,
+              },
             ]}
             type="primary"
             isSplit
@@ -212,7 +237,9 @@ const AddStoryFooter = ({
           timezone={timezone}
           weekStartsMonday={weekStartsMonday}
           editMode={editMode}
-          onDateTimeSlotPickerSubmit={timestamp => onDateTimeSlotPickerSubmit(timestamp)}
+          onDateTimeSlotPickerSubmit={timestamp =>
+            onDateTimeSlotPickerSubmit(timestamp)
+          }
           initialDateTime={getInitialDateTime({
             editMode,
             sentPost,

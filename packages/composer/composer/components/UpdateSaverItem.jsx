@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import { SaveButtonTypes, ButtonsQueuingTypesMap } from '../AppConstants';
-import Dropdown, { DropdownTrigger, DropdownContent } from '../components/Dropdown';
+import Dropdown, {
+  DropdownTrigger,
+  DropdownContent,
+} from '../components/Dropdown';
 import DateTimeSlotPicker from '../components/DateTimeSlotPicker';
 import Button from '../components/Button';
 
@@ -28,11 +31,13 @@ class UpdateSaverItem extends React.Component {
     isSecondaryItem: false,
   };
 
-  onButtonClick = (e) => {
+  onButtonClick = e => {
     const { type } = this.props;
     const queuingType = ButtonsQueuingTypesMap.get(type);
 
-    AppActionCreators.saveDrafts(queuingType, { shouldSkipEmptyTextAlert: false });
+    AppActionCreators.saveDrafts(queuingType, {
+      shouldSkipEmptyTextAlert: false,
+    });
 
     e.stopPropagation();
   };
@@ -49,9 +54,9 @@ class UpdateSaverItem extends React.Component {
    * the DateTimeSlotPicker. E.g. http://cl.ly/1R071e0i191e
    * To prevent this, we stop click event bubbling at the DateTimeSlotPicker level :)
    */
-  onDateTimeSlotPickerClick = (e) => e.stopPropagation();
+  onDateTimeSlotPickerClick = e => e.stopPropagation();
 
-  onDateTimeSlotPickerSubmit = (timestamp) => {
+  onDateTimeSlotPickerSubmit = timestamp => {
     const { type } = this.props;
     const queuingType = ButtonsQueuingTypesMap.get(type);
 
@@ -63,26 +68,41 @@ class UpdateSaverItem extends React.Component {
 
   onMouseEnter = () => {
     if (!this.props.appState.isSavingPossible) {
-      AppActionCreators.trackUserAction(['composer', 'hovered_over_disabled_add_to_queue']);
+      AppActionCreators.trackUserAction([
+        'composer',
+        'hovered_over_disabled_add_to_queue',
+      ]);
     }
   };
 
   onMouseDown = () => {
     if (!this.props.appState.isSavingPossible) {
-      AppActionCreators.trackUserAction(['composer', 'clicked_on_disabled_add_to_queue']);
+      AppActionCreators.trackUserAction([
+        'composer',
+        'clicked_on_disabled_add_to_queue',
+      ]);
     }
   };
 
   render() {
     const {
-      type, children, userData, disabled, timezone, isMenuItem,
-      isSecondaryItem, weekStartsMonday, isInlineSchedulerDisplayed, selectedProfiles,
+      type,
+      children,
+      userData,
+      disabled,
+      timezone,
+      isMenuItem,
+      isSecondaryItem,
+      weekStartsMonday,
+      isInlineSchedulerDisplayed,
+      selectedProfiles,
     } = this.props;
 
-    const buttonClassName =
-      isMenuItem ? styles.dropdownMenuItem :
-      isSecondaryItem ? styles.secondaryButton :
-      styles.button;
+    const buttonClassName = isMenuItem
+      ? styles.dropdownMenuItem
+      : isSecondaryItem
+      ? styles.secondaryButton
+      : styles.button;
 
     const schedulishSaveButtonTypes = [
       SaveButtonTypes.SCHEDULE_POST,
@@ -90,8 +110,9 @@ class UpdateSaverItem extends React.Component {
     ];
 
     const internalButtonType =
-      (schedulishSaveButtonTypes.includes(type) && !isInlineSchedulerDisplayed) ?
-      'SCHEDULE_POST_DROPDOWN' : 'BUTTON';
+      schedulishSaveButtonTypes.includes(type) && !isInlineSchedulerDisplayed
+        ? 'SCHEDULE_POST_DROPDOWN'
+        : 'BUTTON';
 
     switch (internalButtonType) {
       case 'SCHEDULE_POST_DROPDOWN':

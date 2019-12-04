@@ -1,7 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button, Tooltip } from '@bufferapp/ui';
-import { grayLight, redLight, red, grayDark, boxShadow, blue, grayDarker } from '@bufferapp/ui/style/colors';
+import {
+  grayLight,
+  redLight,
+  red,
+  grayDark,
+  boxShadow,
+  blue,
+  grayDarker,
+} from '@bufferapp/ui/style/colors';
 import { fontFamily, fontSize, lineHeight } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import countHashtagsInText from '../../utils/HashtagCounter';
@@ -81,7 +89,6 @@ const inputFocusedStyle = {
   border: `1px solid ${blue}`,
 };
 
-
 const getElementStyle = ({ state }, type) => {
   let style;
   let focusedStyle;
@@ -128,9 +135,9 @@ class HashtagGroupCreator extends Component {
     inputFocused: false,
     numberHashtagsLeft: HASHTAG_LIMIT,
     isSaveButtonDisabled: true,
-  }
+  };
 
-  constructor () {
+  constructor() {
     super();
 
     this.handleTextareaChange = this.handleTextareaChange.bind(this);
@@ -140,7 +147,10 @@ class HashtagGroupCreator extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.name !== this.props.name || prevProps.text !== this.props.text) {
+    if (
+      prevProps.name !== this.props.name ||
+      prevProps.text !== this.props.text
+    ) {
       this.disableSaveButton();
     }
   }
@@ -161,9 +171,8 @@ class HashtagGroupCreator extends Component {
   disableSaveButton() {
     const { numberHashtagsLeft } = this.state;
     const { name, text } = this.props;
-    const isSaveButtonDisabled = numberHashtagsLeft < 0 ||
-      !text.trim() ||
-      !name.trim();
+    const isSaveButtonDisabled =
+      numberHashtagsLeft < 0 || !text.trim() || !name.trim();
     this.setState({ isSaveButtonDisabled });
   }
 
@@ -176,11 +185,7 @@ class HashtagGroupCreator extends Component {
   }
 
   render() {
-    const {
-      name,
-      text,
-      onCancelHashtagGroup,
-    } = this.props;
+    const { name, text, onCancelHashtagGroup } = this.props;
 
     return (
       <Fragment>
@@ -190,10 +195,7 @@ class HashtagGroupCreator extends Component {
         <form style={contentStyle} autoComplete="off">
           <div>
             <div style={inputLabelStyle}>
-              <Text
-                htmlFor="hashtagGroupName"
-                type="label"
-              >
+              <Text htmlFor="hashtagGroupName" type="label">
                 Hashtag Group Name
               </Text>
             </div>
@@ -209,15 +211,14 @@ class HashtagGroupCreator extends Component {
               onBlur={() => this.setState({ inputFocused: false })}
             />
             <div style={labelStyle}>
-              <Text
-                htmlFor="hashtagGroupContent"
-                type="label"
-              >
+              <Text htmlFor="hashtagGroupContent" type="label">
                 Hashtag Group Content
               </Text>
             </div>
           </div>
-          <div style={getElementStyle({ state: this.state }, 'textareaWrapper')}>
+          <div
+            style={getElementStyle({ state: this.state }, 'textareaWrapper')}
+          >
             <textarea
               style={textareaStyle}
               placeholder="Your hashtags"
@@ -240,11 +241,7 @@ class HashtagGroupCreator extends Component {
         </form>
         <div style={buttonStyle}>
           <span style={cancelButtonStyle}>
-            <Button
-              type="text"
-              label="Cancel"
-              onClick={onCancelHashtagGroup}
-            />
+            <Button type="text" label="Cancel" onClick={onCancelHashtagGroup} />
           </span>
           <Button
             type="secondary"

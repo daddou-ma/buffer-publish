@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './Highlighter.css';
 
-const Highlighter = (props) => (
+const Highlighter = props => (
   <span className={styles.highlighted}>{props.children}</span>
 );
 

@@ -26,13 +26,15 @@ describe('When LocationFinder requests locations and response is ok', () => {
 
       return Promise.resolve({
         locations: {
-          data: [{
-            id,
-            name,
-            picture: pictureUrl,
-            checkins,
-            single_line_address: address,
-          }],
+          data: [
+            {
+              id,
+              name,
+              picture: pictureUrl,
+              checkins,
+              single_line_address: address,
+            },
+          ],
         },
       });
     });
@@ -43,14 +45,19 @@ describe('When LocationFinder requests locations and response is ok', () => {
   afterEach(() => jest.resetAllMocks());
 
   it('creates service location objects ', () => {
-    const serviceLocation = new ServiceLocation(id, name, pictureUrl, checkins, address);
+    const serviceLocation = new ServiceLocation(
+      id,
+      name,
+      pictureUrl,
+      checkins,
+      address
+    );
 
-    LocationFinder.findLocations('3123', 'New York').then((locations) => {
+    LocationFinder.findLocations('3123', 'New York').then(locations => {
       expect(locations).toEqual([serviceLocation]);
     });
   });
 });
-
 
 describe('When LocationFinder requests locations and response has an error', () => {
   beforeEach(() => {
@@ -62,7 +69,7 @@ describe('When LocationFinder requests locations and response has an error', () 
   afterEach(() => jest.resetAllMocks());
 
   it('should reject if no startdate is given', async () => {
-    LocationFinder.findLocations('3123', 'New York').catch((e) => {
+    LocationFinder.findLocations('3123', 'New York').catch(e => {
       expect(e).toBeTruthy();
     });
   });

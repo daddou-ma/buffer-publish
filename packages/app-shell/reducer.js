@@ -29,10 +29,14 @@ export default (state = initialState, action) => {
           name: action.result.name,
         },
         showReturnToClassic: action.result.showReturnToClassic,
-        showSwitchPlanModal: action.result.is_free_user && !action.result.isBusinessTeamMember,
+        showSwitchPlanModal:
+          action.result.is_free_user && !action.result.isBusinessTeamMember,
         showManageTeam: !action.result.is_free_user,
-        showStartProTrial: action.result.canStartProTrial && !action.result.isBusinessTeamMember,
-        sawOnboardingPage: action.result.messages && action.result.messages.includes('user_saw_onboarding_page'),
+        showStartProTrial:
+          action.result.canStartProTrial && !action.result.isBusinessTeamMember,
+        sawOnboardingPage:
+          action.result.messages &&
+          action.result.messages.includes('user_saw_onboarding_page'),
         hideMenuItems: action.result.isOnAwesomePlan,
       };
     case actionTypes.SET_BANNER_OPTIONS:

@@ -12,14 +12,10 @@ describe('middleware', () => {
       type: 'type',
     };
     middleware(undefined)(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(global.console.group)
-      .toHaveBeenCalled();
-    expect(global.console.log)
-      .toHaveBeenCalledWith('action', action);
-    expect(global.console.groupEnd)
-      .toHaveBeenCalled();
+    expect(next).toBeCalledWith(action);
+    expect(global.console.group).toHaveBeenCalled();
+    expect(global.console.log).toHaveBeenCalledWith('action', action);
+    expect(global.console.groupEnd).toHaveBeenCalled();
   });
   afterEach(() => {
     global.console.group.mockRestore();

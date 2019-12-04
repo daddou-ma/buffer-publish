@@ -17,25 +17,22 @@ const translations = {
 };
 
 /* eslint-disable react/prop-types */
-class _TestContextContainer extends Component { // eslint-disable-line
+class _TestContextContainer extends Component {
+  // eslint-disable-line
   render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
+    return <div>{this.props.children}</div>;
   }
 }
-const TestContextContainer = DragDropContext(TestBackend)(_TestContextContainer);
+const TestContextContainer = DragDropContext(TestBackend)(
+  _TestContextContainer
+);
 
 storiesOf('ProfileSidebar', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
-    <Provider store={store}>
-      {getStory()}
-    </Provider>,
-  )
-  .addDecorator(getStory => <TestContextContainer>{getStory()}</TestContextContainer>)
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
+  .addDecorator(getStory => (
+    <TestContextContainer>{getStory()}</TestContextContainer>
+  ))
   .add('should display a list of profiles', () => (
     <ProfileSidebar
       selectedProfileId={'1234'}

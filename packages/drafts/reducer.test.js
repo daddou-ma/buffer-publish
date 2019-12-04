@@ -10,8 +10,7 @@ describe('reducer', () => {
       type: 'INIT',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle draftPosts_FETCH_START action type', () => {
@@ -36,8 +35,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle draftPosts_FETCH_SUCCESS action type', () => {
@@ -67,8 +65,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle draftPosts_FETCH_FAIL action type', () => {
@@ -90,8 +87,7 @@ describe('reducer', () => {
       type: 'draftPosts_FETCH_FAIL',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   // DRAFT_CREATED
@@ -116,8 +112,7 @@ describe('reducer', () => {
       draft: draftCreated,
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   // DRAFT_UPDATED
@@ -166,14 +161,16 @@ describe('reducer', () => {
       draft: draftEdited,
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // DRAFT_DELETED
   it('should handle DRAFT_DELETED action type', () => {
     const draft = {
-      id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: true,
+      id: '12345',
+      text: 'i heart buffer',
+      isConfirmingDelete: true,
+      isDeleting: true,
     };
     const stateBefore = {
       byProfileId: {
@@ -194,7 +191,7 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          drafts: { },
+          drafts: {},
           total: 1, // still 1 because counts are updated separately
         },
       },
@@ -205,8 +202,7 @@ describe('reducer', () => {
       draft,
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // DRAFT_APPROVED.
@@ -231,16 +227,22 @@ describe('reducer', () => {
       draft,
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   // DRAFT_CONFIRMED_DELETE
   it('should handle DRAFT_CONFIRMED_DELETE action type', () => {
     const draft = {
-      id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: false,
+      id: '12345',
+      text: 'i heart buffer',
+      isConfirmingDelete: true,
+      isDeleting: false,
     };
-    const draftAfter = { ...draft, isConfirmingDelete: false, isDeleting: true };
+    const draftAfter = {
+      ...draft,
+      isConfirmingDelete: false,
+      isDeleting: true,
+    };
     const stateBefore = {
       byProfileId: {
         [profileId]: {
@@ -271,13 +273,16 @@ describe('reducer', () => {
       draft: draftAfter,
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // DRAFT_APPROVE
   it('should handle DRAFT_APPROVE action type', () => {
-    const draft = { id: '12345', text: 'i heart buffer', isConfirmingDelete: false };
+    const draft = {
+      id: '12345',
+      text: 'i heart buffer',
+      isConfirmingDelete: false,
+    };
     const draftAfter = { ...draft, isWorking: true };
     const stateBefore = {
       byProfileId: {
@@ -309,13 +314,16 @@ describe('reducer', () => {
       draft: draftAfter,
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // DRAFT_NEEDS_APPROVAL
   it('should handle DRAFT_NEEDS_APPROVAL action type', () => {
-    const draft = { id: '12345', text: 'i heart buffer', isConfirmingDelete: false };
+    const draft = {
+      id: '12345',
+      text: 'i heart buffer',
+      isConfirmingDelete: false,
+    };
     const draftAfter = { ...draft, isMoving: true };
     const stateBefore = {
       byProfileId: {
@@ -348,8 +356,7 @@ describe('reducer', () => {
       draft: draftAfter,
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // OPEN_COMPOSER
@@ -392,8 +399,7 @@ describe('reducer', () => {
       updateId: 'abc',
     };
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // HIDE_COMPOSER
@@ -432,8 +438,7 @@ describe('reducer', () => {
       profileId,
     };
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   describe('actions', () => {
@@ -449,7 +454,9 @@ describe('reducer', () => {
 
     it('handleRequestApprovalClick triggers a DRAFT_NEEDS_APPROVAL action', () => {
       const needsApproval = true;
-      expect(actions.handleRequestApprovalClick({ draft, needsApproval })).toEqual({
+      expect(
+        actions.handleRequestApprovalClick({ draft, needsApproval })
+      ).toEqual({
         type: actionTypes.DRAFT_NEEDS_APPROVAL,
         updateId: draft.id,
         needsApproval,

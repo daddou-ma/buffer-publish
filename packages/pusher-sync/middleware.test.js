@@ -8,7 +8,7 @@ import middleware from './middleware';
 describe('middleware', () => {
   const store = {
     dispatch: jest.fn(),
-    getState: () => ({ }),
+    getState: () => ({}),
   };
   const next = jest.fn();
   const selectProfileAction = {
@@ -33,33 +33,28 @@ describe('middleware', () => {
 
   it('should call next when running middleware', () => {
     middleware(store)(next)(selectProfileAction);
-    expect(next)
-      .toBeCalled();
+    expect(next).toBeCalled();
   });
 
   it('should create a new pusher instance', () => {
     middleware(store)(next)(selectProfileAction);
-    expect(Pusher)
-      .toHaveBeenCalledWith(
-        'bd9ba9324ece3341976e',
-        { authEndpoint: '/pusher/auth' },
-      );
+    expect(Pusher).toHaveBeenCalledWith('bd9ba9324ece3341976e', {
+      authEndpoint: '/pusher/auth',
+    });
   });
 
   it('should subscribe to both private updates and private story groups channel', () => {
     middleware(store)(next)(selectProfileAction);
-    expect(Pusher.subscribe)
-      .toHaveBeenCalledWith('private-updates-12345');
-    expect(Pusher.subscribe)
-      .toHaveBeenCalledWith('private-story-groups-12345');
+    expect(Pusher.subscribe).toHaveBeenCalledWith('private-updates-12345');
+    expect(Pusher.subscribe).toHaveBeenCalledWith('private-story-groups-12345');
   });
 
   it('should subscribe to private updates but not private story groups channel', () => {
     middleware(store)(next)(selectIGProfileAction);
-    expect(Pusher.subscribe)
-      .not.toHaveBeenCalledWith('private-story-groups-123456');
-    expect(Pusher.subscribe)
-      .toHaveBeenCalledWith('private-updates-123456');
+    expect(Pusher.subscribe).not.toHaveBeenCalledWith(
+      'private-story-groups-123456'
+    );
+    expect(Pusher.subscribe).toHaveBeenCalledWith('private-updates-123456');
   });
 
   it('should subscribe to update events', () => {
@@ -73,7 +68,9 @@ describe('middleware', () => {
     expect(Pusher.bind.mock.calls[3][0]).toEqual('private-updates-12345');
     expect(Pusher.bind.mock.calls[3][1]).toEqual('deleted_update');
     expect(Pusher.bind.mock.calls[4][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[4][1]).toEqual('collaboration_draft_approved');
+    expect(Pusher.bind.mock.calls[4][1]).toEqual(
+      'collaboration_draft_approved'
+    );
     expect(Pusher.bind.mock.calls[5][0]).toEqual('private-updates-12345');
     expect(Pusher.bind.mock.calls[5][1]).toEqual('collaboration_draft_updated');
     expect(Pusher.bind.mock.calls[6][0]).toEqual('private-updates-12345');

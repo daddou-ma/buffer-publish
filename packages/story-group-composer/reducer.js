@@ -2,7 +2,9 @@ import clonedeep from 'lodash.clonedeep';
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import debounce from 'lodash.debounce';
-import getAspectRatio, { InstagramStoriesAspectRatios } from './utils/aspectRatioFinder';
+import getAspectRatio, {
+  InstagramStoriesAspectRatios,
+} from './utils/aspectRatioFinder';
 
 export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   SAVE_STORY_GROUP: 0,
@@ -29,22 +31,23 @@ export const actionTypes = keyWrapper('STORY_GROUP_COMPOSER', {
   TRACK_NON_CONFORMING_IMAGE_UPLOADED_STORY: 0,
 });
 
-const newStory = () => clonedeep({
-  note: null,
-  order: 0,
-  type: null,
-  asset_url: null,
-  thumbnail_url: null,
-  upload_id: null,
-  duration_ms: null,
-  file_size: null,
-  width: null,
-  height: null,
-  uploading: false,
-  progress: null,
-  uploadTrackingId: null,
-  processing: null,
-});
+const newStory = () =>
+  clonedeep({
+    note: null,
+    order: 0,
+    type: null,
+    asset_url: null,
+    thumbnail_url: null,
+    upload_id: null,
+    duration_ms: null,
+    file_size: null,
+    width: null,
+    height: null,
+    uploading: false,
+    progress: null,
+    uploadTrackingId: null,
+    processing: null,
+  });
 
 export const initialState = {
   storyGroup: {
@@ -58,23 +61,22 @@ export const initialState = {
   maxStories: 10,
 };
 
-const updateStoryNote = ({ stories = [], order, note }) => (
-  stories.map(story => (story.order === order ? { ...story, note } : story))
-);
+const updateStoryNote = ({ stories = [], order, note }) =>
+  stories.map(story => (story.order === order ? { ...story, note } : story));
 
 const reorderStories = (stories, sourceOrder, targetOrder) => {
   const draggedCard = stories.find(item => item.order === sourceOrder);
   const remainingCards = stories.filter(item => item.order !== sourceOrder);
 
   if (sourceOrder < targetOrder) {
-    remainingCards.forEach((story) => {
+    remainingCards.forEach(story => {
       if (story.order > sourceOrder && story.order <= targetOrder) {
         story.order -= 1;
       }
     });
   }
   if (sourceOrder > targetOrder) {
-    remainingCards.forEach((story) => {
+    remainingCards.forEach(story => {
       if (story.order < sourceOrder && story.order >= targetOrder) {
         story.order += 1;
       }
@@ -82,10 +84,7 @@ const reorderStories = (stories, sourceOrder, targetOrder) => {
   }
   draggedCard.order = targetOrder;
 
-  const result = [
-    ...remainingCards,
-    draggedCard,
-  ];
+  const result = [...remainingCards, draggedCard];
 
   return result;
 };
@@ -93,7 +92,7 @@ const reorderStories = (stories, sourceOrder, targetOrder) => {
 const deleteStory = ({ stories, story }) => {
   const result = stories.filter(item => item.order !== story.order);
 
-  return result.map((item) => {
+  return result.map(item => {
     // If card is on the right of the deleted card,
     // change order one space to the left
     if (item.order > story.order) {
@@ -150,7 +149,10 @@ export default (state, action) => {
       const { stories } = state.storyGroup;
       return {
         ...state,
-        storyGroup: { ...state.storyGroup, stories: updateStoryNote({ stories, order, note }) },
+        storyGroup: {
+          ...state.storyGroup,
+          stories: updateStoryNote({ stories, order, note }),
+        },
       };
     }
     case actionTypes.DELETE_STORY: {
@@ -158,7 +160,10 @@ export default (state, action) => {
       const { stories } = state.storyGroup;
       return {
         ...state,
-        storyGroup: { ...state.storyGroup, stories: deleteStory({ stories, story }) },
+        storyGroup: {
+          ...state.storyGroup,
+          stories: deleteStory({ stories, story }),
+        },
       };
     }
     case actionTypes.SET_SCHEDULE_LOADING: {
@@ -174,9 +179,11 @@ export default (state, action) => {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: clonedeep(stories).map((story) => {
+          stories: clonedeep(stories).map(story => {
             inProgress
-              .filter(currentStory => story.uploadTrackingId === currentStory.id)
+              .filter(
+                currentStory => story.uploadTrackingId === currentStory.id
+              )
               .forEach(({ progress }) => {
                 if (progress > story.progress) {
                   story.progress = progress;
@@ -189,10 +196,7 @@ export default (state, action) => {
       };
     }
     case actionTypes.UPDATE_STORY_UPLOAD_PROGRESS: {
-      const {
-        id,
-        progress,
-      } = action.args;
+      const { id, progress } = action.args;
       return {
         ...state,
         inProgress: [
@@ -205,19 +209,13 @@ export default (state, action) => {
       };
     }
     case actionTypes.UPDATE_STORY_UPLOAD_IMAGE_COMPLETED: {
-      const {
-        id,
-        url,
-        width,
-        height,
-        contentType,
-      } = action.args;
+      const { id, url, width, height, contentType } = action.args;
       const { stories } = state.storyGroup;
       return {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: stories.map((story) => {
+          stories: stories.map(story => {
             if (story.uploadTrackingId === id) {
               return {
                 ...story,
@@ -250,7 +248,7 @@ export default (state, action) => {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: stories.map((story) => {
+          stories: stories.map(story => {
             if (story.upload_id === uploadId) {
               return {
                 ...story,
@@ -271,17 +269,13 @@ export default (state, action) => {
       };
     }
     case actionTypes.UPDATE_STORY_VIDEO_PROCESSING_STARTED: {
-      const {
-        id,
-        uploadId,
-        contentType,
-      } = action.args;
+      const { id, uploadId, contentType } = action.args;
       const { stories } = state.storyGroup;
       return {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: stories.map((story) => {
+          stories: stories.map(story => {
             if (story.uploadTrackingId === id) {
               return {
                 ...story,
@@ -305,13 +299,16 @@ export default (state, action) => {
         ...state,
         storyGroup: {
           ...state.storyGroup,
-          stories: [...stories, {
-            ...newStory(),
-            uploadTrackingId: id,
-            uploading: true,
-            progress: 0,
-            order: stories.length + 1,
-          }],
+          stories: [
+            ...stories,
+            {
+              ...newStory(),
+              uploadTrackingId: id,
+              uploading: true,
+              progress: 0,
+              order: stories.length + 1,
+            },
+          ],
         },
       };
     }
@@ -324,7 +321,11 @@ export default (state, action) => {
           ...state,
           storyGroup: {
             ...state.storyGroup,
-            stories: reorderStories(state.storyGroup.stories, sourceCard.order, targetCard.order),
+            stories: reorderStories(
+              state.storyGroup.stories,
+              sourceCard.order,
+              targetCard.order
+            ),
           },
         };
       }
@@ -356,10 +357,9 @@ export default (state, action) => {
       }
       return {
         ...state,
-        errors: [
-          ...state.errors,
-          action.message,
-        ].filter((value, index, self) => self.indexOf(value) === index),
+        errors: [...state.errors, action.message].filter(
+          (value, index, self) => self.indexOf(value) === index
+        ),
         processedErrors: [...state.processedErrors, action.uploadId],
       };
     default:
@@ -374,7 +374,10 @@ export const actions = {
     shareNow,
   }),
   handleUpdateStoryGroup: ({
-    scheduledAt, stories, storyGroupId, shareNow,
+    scheduledAt,
+    stories,
+    storyGroupId,
+    shareNow,
   }) => ({
     type: actionTypes.UPDATE_STORY_GROUP,
     scheduledAt,
@@ -393,20 +396,27 @@ export const actions = {
   handleClosePreviewClick: () => ({
     type: actionTypes.CLOSE_PREVIEW,
   }),
-  setStoryGroup: ({
-    scheduledAt, stories, storyGroupId, isPastDue,
-  }) => ({
+  setStoryGroup: ({ scheduledAt, stories, storyGroupId, isPastDue }) => ({
     type: actionTypes.SET_STORY_GROUP,
     scheduledAt,
     stories,
     storyGroupId,
     isPastDue,
   }),
-  updateStoryPogress: debounce(dispatch => dispatch({
-    type: actionTypes.UPDATE_STORY_PROGRESS,
-  }), 270, { leading: false, trailing: true }),
+  updateStoryPogress: debounce(
+    dispatch =>
+      dispatch({
+        type: actionTypes.UPDATE_STORY_PROGRESS,
+      }),
+    270,
+    { leading: false, trailing: true }
+  ),
   updateStoryUploadProgress: ({
-    id, uploaderInstance, progress, file, complete,
+    id,
+    uploaderInstance,
+    progress,
+    file,
+    complete,
   }) => ({
     type: actionTypes.UPDATE_STORY_UPLOAD_PROGRESS,
     args: {
@@ -452,11 +462,16 @@ export const actions = {
       file,
       stillGifUrl,
       contentType,
-
     },
   }),
   videoUploadProcessingStarted: ({
-    id, uploaderInstance, uploadId, fileExtension, file, progress, contentType,
+    id,
+    uploaderInstance,
+    uploadId,
+    fileExtension,
+    file,
+    progress,
+    contentType,
   }) => ({
     type: actionTypes.UPDATE_STORY_VIDEO_PROCESSING_STARTED,
     args: {
@@ -524,12 +539,7 @@ export const actions = {
     note,
     order,
   }),
-  trackAspectRatio: ({
-    cta,
-    width,
-    height,
-    id,
-  }) => ({
+  trackAspectRatio: ({ cta, width, height, id }) => ({
     type: actionTypes.TRACK_NON_CONFORMING_IMAGE_UPLOADED_STORY,
     args: {
       width,

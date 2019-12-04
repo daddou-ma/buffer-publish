@@ -14,7 +14,7 @@ module.exports = method(
       },
     })
       .then(data => JSON.parse(data))
-      .catch((err) => {
+      .catch(err => {
         throw createError({ message: err.message });
-      }),
+      })
 );

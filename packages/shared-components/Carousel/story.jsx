@@ -19,7 +19,8 @@ const profile = {
   business: true,
   service: 'instagram',
   timezone: 'Europe/London',
-  avatar_https: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5c829d3838da0900d16ee5e4/3a9dd6c260165524ba20b2fd174a0873.original.jpg',
+  avatar_https:
+    'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5c829d3838da0900d16ee5e4/3a9dd6c260165524ba20b2fd174a0873.original.jpg',
 };
 
 const store = storeFake({
@@ -39,9 +40,7 @@ const store = storeFake({
 });
 
 const UpgradeModalDecorator = storyFn => (
-  <Provider store={store}>
-    {storyFn()}
-  </Provider>
+  <Provider store={store}>{storyFn()}</Provider>
 );
 
 storiesOf('Carousel', module)
@@ -51,17 +50,14 @@ storiesOf('Carousel', module)
     const { cardWidth, cardHeight } = getCardSizes();
 
     return (
-      <Carousel
-        totalCardsToShow={carouselData.length}
-      >
-        { carouselData.map(card => (
+      <Carousel totalCardsToShow={carouselData.length}>
+        {carouselData.map(card => (
           <CarouselCard
             cardWidth={cardWidth}
             cardHeight={cardHeight}
             card={card}
           />
-        ))
-        }
+        ))}
       </Carousel>
     );
   })
@@ -69,10 +65,7 @@ storiesOf('Carousel', module)
     const { cardWidth, cardHeight } = getCardSizes(true);
 
     return (
-      <Carousel
-        largeCards
-        totalCardsToShow={carouselData.length}
-      >
+      <Carousel largeCards totalCardsToShow={carouselData.length}>
         {carouselData.map(card => (
           <CarouselCard
             largeCards
@@ -80,8 +73,7 @@ storiesOf('Carousel', module)
             cardHeight={cardHeight}
             card={card}
           />
-        ))
-        }
+        ))}
       </Carousel>
     );
   });

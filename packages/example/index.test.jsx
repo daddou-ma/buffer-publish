@@ -2,12 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 
-import Example, {
-  reducer,
-  actions,
-  actionTypes,
-  middleware,
-} from './index';
+import Example, { reducer, actions, actionTypes, middleware } from './index';
 import LoggedIn from './components/LoggedIn';
 
 const storeFake = state => ({
@@ -35,29 +30,24 @@ describe('Example', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Example />
-      </Provider>,
+      </Provider>
     );
-    expect(wrapper.find(LoggedIn).length)
-      .toBe(1);
+    expect(wrapper.find(LoggedIn).length).toBe(1);
   });
 
   it('should export reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('should export actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('should export actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

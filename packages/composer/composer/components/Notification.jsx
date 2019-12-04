@@ -40,20 +40,24 @@ class Notification extends React.Component {
 
   onCloseButtonClick = () => {
     const { id, showSoftAndHardCloseOptions, onClose } = this.props;
-    const data = showSoftAndHardCloseOptions ? {
-      isHardCloseCheckboxChecked: this.hardCloseCheckbox.checked,
-      shouldCloseVisibleNotification: true,
-    } : {};
+    const data = showSoftAndHardCloseOptions
+      ? {
+          isHardCloseCheckboxChecked: this.hardCloseCheckbox.checked,
+          shouldCloseVisibleNotification: true,
+        }
+      : {};
     NotificationActionCreators.removeNotification(id, data);
     onClose();
   };
 
   onCheckboxChange = () => {
     const { id, showSoftAndHardCloseOptions, onClose } = this.props;
-    const data = showSoftAndHardCloseOptions ? {
-      isHardCloseCheckboxChecked: this.hardCloseCheckbox.checked,
-      shouldCloseVisibleNotification: false,
-    } : {};
+    const data = showSoftAndHardCloseOptions
+      ? {
+          isHardCloseCheckboxChecked: this.hardCloseCheckbox.checked,
+          shouldCloseVisibleNotification: false,
+        }
+      : {};
     if (this.hardCloseCheckbox.checked) {
       NotificationActionCreators.removeNotification(id, data);
       onClose();
@@ -61,7 +65,7 @@ class Notification extends React.Component {
       // if a user unchecks the notification, remove the cookie that was added
       NotificationActionCreators.removeNotificationCookie(id);
     }
-  }
+  };
 
   render() {
     const {
@@ -84,9 +88,11 @@ class Notification extends React.Component {
     };
 
     const notificationClassName = [
-      (showCloseIcon && showSoftAndHardCloseOptions ? styles.notificationWithCloseButtonAndCheckbox :
-        showCloseIcon && !showSoftAndHardCloseOptions ? styles.notificationWithCloseButton :
-          styles.notification),
+      showCloseIcon && showSoftAndHardCloseOptions
+        ? styles.notificationWithCloseButtonAndCheckbox
+        : showCloseIcon && !showSoftAndHardCloseOptions
+        ? styles.notificationWithCloseButton
+        : styles.notification,
       notificationClassNamesMap[type],
       classNames.notification || className,
     ].join(' ');
@@ -99,33 +105,42 @@ class Notification extends React.Component {
 
     return (
       <div className={notificationClassName}>
-        {cta &&
+        {cta && (
           <div className={styles.ctaContainer}>
-            <Button type="primary" size="small" label={cta.label} onClick={cta.action} />
+            <Button
+              type="primary"
+              size="small"
+              label={cta.label}
+              onClick={cta.action}
+            />
           </div>
-        }
+        )}
         <div dangerouslySetInnerHTML={htmlMessage} />
 
-        {showCloseIcon &&
+        {showCloseIcon && (
           <CloseButton
             onClick={this.onCloseButtonClick}
             className={closeButtonClassName}
-          />}
+          />
+        )}
 
         {children}
 
-        {showSoftAndHardCloseOptions &&
+        {showSoftAndHardCloseOptions && (
           <div className={styles.hardCloseCheckboxContainer}>
             <label>
               <input
                 type="checkbox"
                 className={styles.hardCloseCheckbox}
                 onChange={this.onCheckboxChange}
-                ref={(el) => { this.hardCloseCheckbox = el; }}
+                ref={el => {
+                  this.hardCloseCheckbox = el;
+                }}
               />
               Don't show this message again
             </label>
-          </div>}
+          </div>
+        )}
       </div>
     );
   }

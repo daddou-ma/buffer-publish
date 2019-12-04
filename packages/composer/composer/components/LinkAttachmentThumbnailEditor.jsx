@@ -34,7 +34,11 @@ class LinkAttachmentThumbnailEditor extends React.Component {
     ComposerActionCreators.selectNextLinkThumbnail(this.props.draftId);
 
   render() {
-    const { selectedThumbnail, filesUploadProgress, availableThumbnails } = this.props;
+    const {
+      selectedThumbnail,
+      filesUploadProgress,
+      availableThumbnails,
+    } = this.props;
 
     const scrollLeftButtonClassName = [
       styles.scrollLeftButton,
@@ -50,11 +54,14 @@ class LinkAttachmentThumbnailEditor extends React.Component {
 
     const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.IMAGE);
     const hasThumbnail = selectedThumbnail !== null;
-    const hasMoreThanOneThumbnail = availableThumbnails !== null && availableThumbnails.length > 1;
+    const hasMoreThanOneThumbnail =
+      availableThumbnails !== null && availableThumbnails.length > 1;
 
     const areUploadsInProgress = filesUploadProgress.size > 0;
-    const totalUploadsProgress = areUploadsInProgress &&
-      Array.from(filesUploadProgress.values()).reduce((a, b) => a + b) / filesUploadProgress.size;
+    const totalUploadsProgress =
+      areUploadsInProgress &&
+      Array.from(filesUploadProgress.values()).reduce((a, b) => a + b) /
+        filesUploadProgress.size;
 
     const uploadZoneClassName = [
       'bi bi-add-media',
@@ -69,29 +76,38 @@ class LinkAttachmentThumbnailEditor extends React.Component {
       uploadZoneDisabled: styles.uploadZoneDisabled,
     };
 
-    const thumbnailStyles =
-      areUploadsInProgress ? styles.uploadingThumbnail : styles.thumbnail;
-
+    const thumbnailStyles = areUploadsInProgress
+      ? styles.uploadingThumbnail
+      : styles.thumbnail;
 
     return (
       <div className={styles.thumbnailEditorContainer}>
-        {hasThumbnail &&
+        {hasThumbnail && (
           <div
             className={thumbnailStyles}
-            style={{ backgroundImage: `url(${escapeParens(selectedThumbnail.url)})` }}
+            style={{
+              backgroundImage: `url(${escapeParens(selectedThumbnail.url)})`,
+            }}
             role="img"
             aria-label="Link Thumbnail"
-          />}
+          />
+        )}
 
         <UploadZone
           mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
           uploadDraftFile={ComposerActionCreators.uploadDraftFile}
           notifiers={ComposerActionCreators.notifiers}
-          removeAllNotifications={() => NotificationActionCreators.removeAllNotificationsByScope(NotificationScopes.FILE_UPLOAD)}
-          queueError={({message}) => NotificationActionCreators.queueError({
-            scope: NotificationScopes.FILE_UPLOAD,
-            message
-          })}
+          removeAllNotifications={() =>
+            NotificationActionCreators.removeAllNotificationsByScope(
+              NotificationScopes.FILE_UPLOAD
+            )
+          }
+          queueError={({ message }) =>
+            NotificationActionCreators.queueError({
+              scope: NotificationScopes.FILE_UPLOAD,
+              message,
+            })
+          }
           classNames={uploadZoneClassNames}
           draftId={this.props.draftId}
           uploadFormatsConfig={uploadFormatsConfig}
@@ -102,25 +118,30 @@ class LinkAttachmentThumbnailEditor extends React.Component {
           disabled={areUploadsInProgress}
         />
 
-        {areUploadsInProgress &&
+        {areUploadsInProgress && (
           <CircularUploadIndicator
             size={54}
             progress={totalUploadsProgress}
             classNames={progressIndicatorClassName}
             showText
-          />}
+          />
+        )}
 
-        {hasMoreThanOneThumbnail &&
+        {hasMoreThanOneThumbnail && (
           <Button
-            className={scrollLeftButtonClassName} onClick={this.selectPreviousThumbnail}
+            className={scrollLeftButtonClassName}
+            onClick={this.selectPreviousThumbnail}
             aria-label="Scroll suggested media left"
-          />}
+          />
+        )}
 
-        {hasMoreThanOneThumbnail &&
+        {hasMoreThanOneThumbnail && (
           <Button
-            className={scrollRightButtonClassName} onClick={this.selectNextThumbnail}
+            className={scrollRightButtonClassName}
+            onClick={this.selectNextThumbnail}
             aria-label="Scroll suggested media right"
-          />}
+          />
+        )}
       </div>
     );
   }

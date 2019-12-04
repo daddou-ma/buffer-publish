@@ -1,22 +1,25 @@
 import React from 'react';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import MultipleImagesDraft from './index';
 
-const links = [{
-  displayString: 'http://buff.ly/1LTbUqv',
-  indices: [74, 96],
-  rawString: 'http://buff.ly/1LTbUqv',
-  url: 'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
-}];
+const links = [
+  {
+    displayString: 'http://buff.ly/1LTbUqv',
+    indices: [74, 96],
+    rawString: 'http://buff.ly/1LTbUqv',
+    url:
+      'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
+  },
+];
 
-const text = 'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
+const text =
+  'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
 
 const draftDetails = {
-  avatarUrl: 'https://buffer-uploads.s3.amazonaws.com/510521020a19000b6a00001e/a476fed03b1de4e06563d6063d7d3ee0.jpg',
+  avatarUrl:
+    'https://buffer-uploads.s3.amazonaws.com/510521020a19000b6a00001e/a476fed03b1de4e06563d6063d7d3ee0.jpg',
   createdAt: 'on March 2nd at 12:45pm (GMT)',
   email: 'ash@buffer.com',
   isRetweet: false,

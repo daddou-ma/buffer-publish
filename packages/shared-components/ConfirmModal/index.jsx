@@ -43,7 +43,10 @@ const ConfirmModal = ({
     <Text type="h3">{heading}</Text>
     <div style={middleContainerStyle}>
       <Text type="p">
-        <div style={textContainerStyle} dangerouslySetInnerHTML={{ __html: body }} />
+        <div
+          style={textContainerStyle}
+          dangerouslySetInnerHTML={{ __html: body }}
+        />
       </Text>
       <div style={profileBadgeStyle}>
         <Avatar
@@ -60,7 +63,8 @@ const ConfirmModal = ({
       <Button type="Text" onClick={onCloseModal} label="Cancel" />
       <Button type="primary" onClick={onConfirmClick} label={btnText} />
     </div>
-  </div>);
+  </div>
+);
 
 ConfirmModal.propTypes = {
   profileService: PropTypes.string.isRequired,

@@ -1,14 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  LinkifiedText,
-  Text,
-} from '@bufferapp/components';
+import { Card, LinkifiedText, Text } from '@bufferapp/components';
 
-import {
-  transitionAnimationType,
-} from '@bufferapp/components/style/animation';
+import { transitionAnimationType } from '@bufferapp/components/style/animation';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 
 import PostFooter from '../PostFooter';
@@ -30,7 +24,7 @@ const postStyle = {
   minWidth: 0,
 };
 
-const prefixCSSForBrowser = (css) => {
+const prefixCSSForBrowser = css => {
   const chrome = navigator.userAgent.indexOf('Chrome') > -1;
   if (chrome) {
     return `-webkit-${css}`;
@@ -64,27 +58,21 @@ const renderRetweetComment = ({
   basic,
 }) => (
   <div style={commentStyle}>
-    {basic
-      ? (
-        <Text
-          color="black"
-          size="mini"
-        >
-          {retweetComment}
-        </Text>
-      )
-      : (
-        <LinkifiedText
-          color="black"
-          links={retweetCommentLinks}
-          newTab
-          size="mini"
-          unstyled
-        >
-          {retweetComment}
-        </LinkifiedText>
-      )
-    }
+    {basic ? (
+      <Text color="black" size="mini">
+        {retweetComment}
+      </Text>
+    ) : (
+      <LinkifiedText
+        color="black"
+        links={retweetCommentLinks}
+        newTab
+        size="mini"
+        unstyled
+      >
+        {retweetComment}
+      </LinkifiedText>
+    )}
   </div>
 );
 
@@ -100,28 +88,30 @@ const renderContent = ({
   if (retweetProfile) {
     return (
       <div style={getPostContentStyle({ draggable, dragging })}>
-        { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic }) : '' }
-        <Card
-          color="off-white"
-          reducedPadding
-        >
+        {retweetComment
+          ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic })
+          : ''}
+        <Card color="off-white" reducedPadding>
           <div style={retweetProfileWrapperStyle}>
             <RetweetPanel {...retweetProfile} />
           </div>
-          { children }
+          {children}
         </Card>
       </div>
     );
   }
 
   return (
-    <div style={getPostContentStyle({ draggable, dragging })}>
-      { children }
-    </div>
+    <div style={getPostContentStyle({ draggable, dragging })}>{children}</div>
   );
 };
 
-const getBorderStyle = ({ draggingPlaceholder, noBorder, dragging, isOver }) => {
+const getBorderStyle = ({
+  draggingPlaceholder,
+  noBorder,
+  dragging,
+  isOver,
+}) => {
   const lineType = draggingPlaceholder ? 'dashed' : 'solid';
   let color = '#b8b8b8';
 
@@ -136,17 +126,39 @@ const getBorderStyle = ({ draggingPlaceholder, noBorder, dragging, isOver }) => 
   return `1px ${lineType} ${color}`;
 };
 
-const getBDSCardStyle = ({ faded, draggingPlaceholder, noBorder, dragging, isOver }) => ({
+const getBDSCardStyle = ({
+  faded,
+  draggingPlaceholder,
+  noBorder,
+  dragging,
+  isOver,
+}) => ({
   background: '#fff',
   border: getBorderStyle({ draggingPlaceholder, noBorder, dragging, isOver }),
   borderRadius: '4px',
   opacity: faded ? '0.5' : '1',
   overflow: 'hidden',
-  boxShadow: (!draggingPlaceholder && !noBorder) && '0px 1px 4px rgba(0, 0, 0, 0.16)',
+  boxShadow:
+    !draggingPlaceholder && !noBorder && '0px 1px 4px rgba(0, 0, 0, 0.16)',
 });
 
-const BDSCard = ({ faded, draggingPlaceholder, noBorder, dragging, isOver, children }) => (
-  <div style={getBDSCardStyle({ faded, draggingPlaceholder, noBorder, dragging, isOver })}>
+const BDSCard = ({
+  faded,
+  draggingPlaceholder,
+  noBorder,
+  dragging,
+  isOver,
+  children,
+}) => (
+  <div
+    style={getBDSCardStyle({
+      faded,
+      draggingPlaceholder,
+      noBorder,
+      dragging,
+      isOver,
+    })}
+  >
     {children}
   </div>
 );
@@ -202,15 +214,13 @@ const Post = ({
         dragging={dragging}
         isOver={isOver}
       >
-        {postDetails && postDetails.error && postDetails.error.length > 0
-          && (
-            <PostErrorBanner
-              dragging={dragging}
-              error={postDetails.error}
-              errorLink={postDetails.errorLink}
-            />
-          )
-        }
+        {postDetails && postDetails.error && postDetails.error.length > 0 && (
+          <PostErrorBanner
+            dragging={dragging}
+            error={postDetails.error}
+            errorLink={postDetails.errorLink}
+          />
+        )}
         {renderContent({
           children,
           retweetProfile,
@@ -253,16 +263,17 @@ const Post = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
           hasUserTags={hasUserTags}
         />
-        { (isBusinessAccount || !features.isFreeUser())
-          && isSent && !postDetails.isRetweet
-          && (
+        {(isBusinessAccount || !features.isFreeUser()) &&
+          isSent &&
+          !postDetails.isRetweet && (
             <PostStats
-              showTwitterMentions={!features.isFreeUser() && !features.isProUser()}
+              showTwitterMentions={
+                !features.isFreeUser() && !features.isProUser()
+              }
               statistics={statistics}
               profileService={profileService}
             />
-          )
-        }
+          )}
       </BDSCard>
     </div>
   </div>
@@ -294,7 +305,7 @@ Post.commonPropTypes = {
       displayString: PropTypes.string,
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
-    }),
+    })
   ),
   draggable: PropTypes.bool,
   dragging: PropTypes.bool,

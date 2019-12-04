@@ -72,5 +72,8 @@ export const actions = {
     source,
   }),
   sendFeedback: ({ feedback, source }) =>
-    dataFetchActions.fetch({ name: 'sendFeedback', args: { body: feedback, source } }),
+    dataFetchActions.fetch({
+      name: 'sendFeedback',
+      args: { body: feedback, source },
+    }),
 };

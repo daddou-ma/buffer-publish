@@ -19,7 +19,7 @@ export default connect(
     onConfirmRevokeApp: ({ appId }) => {
       dispatch(actions.requestRevokeApp({ appId }));
     },
-  }),
+  })
 )(AppsAndExtras);
 
 export reducer, { actions, actionTypes } from './reducer';

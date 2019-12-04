@@ -1,4 +1,3 @@
-
 export const OVERLAY = 'overlay';
 export const BUTTON = 'button';
 export const ESCAPE = 'escape';

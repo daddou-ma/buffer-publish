@@ -20,10 +20,14 @@ const createFileUploaderCallback = ({
 
   notifiers.uploadStarted({ id, uploaderInstance: uploader, file });
 
-  uploader.upload(file)
-    .then((uploadedFile) => {
+  uploader
+    .upload(file)
+    .then(uploadedFile => {
       if (uploadedFile.success === false) {
-        notifiers.queueError({ message: 'Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?'});
+        notifiers.queueError({
+          message:
+            'Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?',
+        });
       }
 
       if (uploadType === UploadTypes.LINK_THUMBNAIL) {
@@ -63,7 +67,7 @@ const createFileUploaderCallback = ({
             getStillDataUriFromGif(uploadedFile.url)
               .then(dataUri => dataUri)
               .catch(() => null)
-              .then((dataUriOrNull) => {
+              .then(dataUriOrNull => {
                 notifiers.draftGifUploaded({
                   id,
                   uploaderInstance: uploader,
@@ -81,8 +85,11 @@ const createFileUploaderCallback = ({
         }
       }
     })
-    .catch((e) => {
-      notifiers.queueError({ message: 'Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?' });
+    .catch(e => {
+      notifiers.queueError({
+        message:
+          'Uh oh! It looks like we had an issue connecting to our servers. Up for trying again?',
+      });
     });
 
   notifiers.monitorFileUploadProgress({

@@ -19,9 +19,9 @@ function BannerAdvancedAnalytics({ isAnalyzeCustomer }) {
         size="small"
         onClick={() => {
           window.location.assign(
-            isAnalyzeCustomer ?
-            'https://analyze.buffer.com' :
-            'https://account.buffer.com/analyze?cta=publish-analytics-posts-analyzeTrial-1'
+            isAnalyzeCustomer
+              ? 'https://analyze.buffer.com'
+              : 'https://account.buffer.com/analyze?cta=publish-analytics-posts-analyzeTrial-1'
           );
         }}
         label={isAnalyzeCustomer ? 'Visit Analyze' : 'Start Free Analyze Trial'}

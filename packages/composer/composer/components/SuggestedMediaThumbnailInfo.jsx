@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './css/SuggestedMediaBox.css';
 
-const SuggestedMediaThumbnailInfo = (props) => {
-  const iconClassName = [
-    styles.imgIcon,
-    'bi bi-image',
-  ].join(' ');
+const SuggestedMediaThumbnailInfo = props => {
+  const iconClassName = [styles.imgIcon, 'bi bi-image'].join(' ');
 
   return (
     <span className={styles.imgDataContainer}>

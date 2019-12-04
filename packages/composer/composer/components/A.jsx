@@ -5,10 +5,7 @@ import PropTypes from 'prop-types';
 import styles from './css/A.css';
 
 const A = ({ className, ...restProps }) => (
-  <a
-    className={`${styles.a} ${className}`}
-    {...restProps}
-  />
+  <a className={`${styles.a} ${className}`} {...restProps} />
 );
 
 A.propTypes = {

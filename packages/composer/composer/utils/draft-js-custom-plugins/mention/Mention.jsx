@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './Mention.css';
 
-const Mention = (props) => (
+const Mention = props => (
   <span className={styles.mention}>{props.children}</span>
 );
 

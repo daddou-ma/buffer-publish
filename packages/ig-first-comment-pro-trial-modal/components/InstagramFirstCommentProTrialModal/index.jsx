@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Popover,
-} from '@bufferapp/components';
+import { Popover } from '@bufferapp/components';
 
 import { Button, Text } from '@bufferapp/ui';
 import { Cross, Checkmark } from '@bufferapp/ui/Icon';
@@ -94,9 +92,7 @@ const proTrialFeatureItem = text => (
     <span style={checkmarkWrapperStyle}>
       <Checkmark />
     </span>
-    <span style={proFeaturesStyle}>
-      {text}
-    </span>
+    <span style={proFeaturesStyle}>{text}</span>
   </div>
 );
 
@@ -128,46 +124,46 @@ const InstagramFirstCommentProTrialModal = ({
           <div style={lineStyle} />
           <div style={buttonStyle}>
             <Button
-              label={loading ? translations.buttonLoadingCopy : translations.buttonCopy}
+              label={
+                loading
+                  ? translations.buttonLoadingCopy
+                  : translations.buttonCopy
+              }
               type="primary"
               fullWidth
               onClick={startTrial}
               disabled={loading}
             />
           </div>
-          <div style={buttonSubCopyStyle}>
-            {translations.buttonSubCopy}
-          </div>
+          <div style={buttonSubCopyStyle}>{translations.buttonSubCopy}</div>
         </div>
         <div style={rightContentStyle}>
           <div style={{ display: 'flex' }}>
-            <div
-              onClick={hideModal}
-              role="button"
-              style={crossBtnStyle}
-            >
+            <div onClick={hideModal} role="button" style={crossBtnStyle}>
               <Cross size="medium" />
             </div>
           </div>
-          <div style={rightContentTitleStyle}>
-            {translations.heading2}
-          </div>
+          <div style={rightContentTitleStyle}>{translations.heading2}</div>
           {proTrialFeatureItem(
             <div>
               <Text>{translations.proTrialFeatures.connectAccounts}</Text>
               <Text>
-                <strong>{translations.proTrialFeatures.connectAccountsBold}</strong>
+                <strong>
+                  {translations.proTrialFeatures.connectAccountsBold}
+                </strong>
               </Text>
-            </div>,
+            </div>
           )}
           {proTrialFeatureItem(
             <div>
               <Text>{translations.proTrialFeatures.schedulePosts}</Text>
               <Text>
-                <strong>{translations.proTrialFeatures.schedulePostsBold}</strong>
+                <strong>
+                  {translations.proTrialFeatures.schedulePostsBold}
+                </strong>
               </Text>
               <Text>{translations.proTrialFeatures.schedulePosts2}</Text>
-            </div>,
+            </div>
           )}
           {proTrialFeatureItem(
             <div>
@@ -175,12 +171,12 @@ const InstagramFirstCommentProTrialModal = ({
               <Text>
                 <strong>{translations.proTrialFeatures.supportBold}</strong>
               </Text>
-            </div>,
+            </div>
           )}
           {proTrialFeatureItem(
             <div>
               <Text>{translations.proTrialFeatures.firstComment}</Text>
-            </div>,
+            </div>
           )}
           {proTrialFeatureItem(
             <div>
@@ -188,16 +184,18 @@ const InstagramFirstCommentProTrialModal = ({
               <Text>
                 <strong>{translations.proTrialFeatures.reportBold}</strong>
               </Text>
-            </div>,
+            </div>
           )}
           {proTrialFeatureItem(
             <div>
               <Text>{translations.proTrialFeatures.integrations}</Text>
               <Text>
-                <strong>{translations.proTrialFeatures.integrationsBold}</strong>
+                <strong>
+                  {translations.proTrialFeatures.integrationsBold}
+                </strong>
               </Text>
               <Text>{translations.proTrialFeatures.integrations2}</Text>
-            </div>,
+            </div>
           )}
         </div>
       </div>

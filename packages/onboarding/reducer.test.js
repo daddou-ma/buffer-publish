@@ -12,8 +12,7 @@ describe('reducer', () => {
     deepFreeze(action);
 
     // When state is undefined, it's supposed to return initial state
-    expect(reducer(undefined, action))
-      .toEqual(initialState);
+    expect(reducer(undefined, action)).toEqual(initialState);
   });
 
   it('handles user_FETCH_SUCCESS action type, if user saw onboarding page', () => {
@@ -34,8 +33,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('handles user_FETCH_SUCCESS action type, if user did not see onboarding page', () => {
@@ -56,8 +54,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('handles SKIP_STEP action type', () => {
@@ -75,8 +72,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // Test action creators:

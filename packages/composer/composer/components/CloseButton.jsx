@@ -15,7 +15,7 @@ class closeButton extends React.Component {
     label: 'Click to close',
   };
 
-  onClick = (e) => {
+  onClick = e => {
     e.preventDefault();
     this.props.onClick(e);
   };

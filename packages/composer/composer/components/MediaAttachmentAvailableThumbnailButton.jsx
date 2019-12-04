@@ -13,15 +13,19 @@ class MediaAttachmentAvailableThumbnailButton extends React.Component {
   };
 
   onSuggestedThumbnailClick = () => {
-    ComposerActionCreators.updateDraftVideoThumbnail(this.props.draftId, this.props.thumbnail);
+    ComposerActionCreators.updateDraftVideoThumbnail(
+      this.props.draftId,
+      this.props.thumbnail
+    );
   };
 
   render() {
     const { video, thumbnail, setSelectedThumbnailEl } = this.props;
 
-    const className = thumbnail === video.thumbnail ?
-      `${styles.selectedThumbnailContainer} bi bi-checkmark` :
-      styles.thumbnailContainer;
+    const className =
+      thumbnail === video.thumbnail
+        ? `${styles.selectedThumbnailContainer} bi bi-checkmark`
+        : styles.thumbnailContainer;
 
     return (
       <Button
@@ -33,7 +37,9 @@ class MediaAttachmentAvailableThumbnailButton extends React.Component {
           src={thumbnail}
           className={styles.thumbnail}
           alt="Suggested thumbnail for video"
-          ref={(ref) => { if (thumbnail === video.thumbnail) setSelectedThumbnailEl(ref); }}
+          ref={ref => {
+            if (thumbnail === video.thumbnail) setSelectedThumbnailEl(ref);
+          }}
         />
       </Button>
     );

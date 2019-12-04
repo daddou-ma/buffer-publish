@@ -10,7 +10,12 @@ const createHighlighterPlugin = (draft, getDraftCharacterCount) => {
   return {
     decorators: [
       {
-        strategy: highlighterStrategy.bind(null, draft, getDraftCharacterCount, store),
+        strategy: highlighterStrategy.bind(
+          null,
+          draft,
+          getDraftCharacterCount,
+          store
+        ),
         component: Highlighter,
       },
     ],

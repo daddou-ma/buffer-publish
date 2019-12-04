@@ -1,4 +1,5 @@
-module.exports.apiError = (err, req, res, next) => { // eslint-disable-line no-unused-vars
+module.exports.apiError = (err, req, res, next) => {
+  // eslint-disable-line no-unused-vars
   console.log('-----');
   console.error(err);
   console.log('-----');
@@ -13,7 +14,8 @@ module.exports.apiError = (err, req, res, next) => { // eslint-disable-line no-u
       user: { id: req.session.publish.foreignKey },
     });
     res.status(500).send({
-      error: 'Whoops something went wrong! We\'ve been alerted and will be sure to take a look',
+      error:
+        "Whoops something went wrong! We've been alerted and will be sure to take a look",
     });
   } else {
     res.status(500).send({

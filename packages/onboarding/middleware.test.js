@@ -8,8 +8,7 @@ describe('middleware', () => {
   window.location = jest.fn();
 
   it('exports middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('fetches readMessage when CONNECT_SOCIAL_ACCOUNT_ONBOARDING', () => {
@@ -17,15 +16,15 @@ describe('middleware', () => {
       type: actionTypes.CONNECT_SOCIAL_ACCOUNT_ONBOARDING,
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'readMessage',
         args: {
           message: 'user_saw_onboarding_page',
         },
-      }));
+      })
+    );
   });
 
   it('fetches readMessage when SKIP_STEP_ONBOARDING', () => {
@@ -33,14 +32,14 @@ describe('middleware', () => {
       type: actionTypes.SKIP_STEP,
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'readMessage',
         args: {
           message: 'user_saw_onboarding_page',
         },
-      }));
+      })
+    );
   });
 });

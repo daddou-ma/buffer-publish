@@ -29,7 +29,7 @@ const ChangePassword = () => (
       type="secondary"
       onClick={() =>
         window.location.assign(
-          'https://account.buffer.com?redirect=https%3A%2F%2Fpublish.buffer.com',
+          'https://account.buffer.com?redirect=https%3A%2F%2Fpublish.buffer.com'
         )
       }
     />

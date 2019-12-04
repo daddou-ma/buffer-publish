@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Image,
-  Text,
-} from '@bufferapp/components';
+import { Image, Text } from '@bufferapp/components';
 
 const retweetPanelContainerStyle = {
   display: 'flex',
@@ -16,11 +13,7 @@ const retweetHandleContainer = {
   marginLeft: '1rem',
 };
 
-const RetweetPanel = ({
-  name,
-  handle,
-  avatarUrl,
-}) =>
+const RetweetPanel = ({ name, handle, avatarUrl }) => (
   <div style={retweetPanelContainerStyle}>
     <Image
       src={avatarUrl}
@@ -32,7 +25,8 @@ const RetweetPanel = ({
       <Text size={'mini'}>{name}</Text>
       <Text size={'small'}>{handle}</Text>
     </div>
-  </div>;
+  </div>
+);
 
 RetweetPanel.propTypes = {
   name: PropTypes.string.isRequired,

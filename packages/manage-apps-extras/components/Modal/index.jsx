@@ -16,11 +16,17 @@ const Modal = ({
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <Text type="h3">Are you sure?</Text>
           <Text type="p">
-            You are about to revoke access to <b>{appName}</b>.
-            This will prevent the app from working with your Buffer account.
-            Are you sure you want to continue?
+            You are about to revoke access to <b>{appName}</b>. This will
+            prevent the app from working with your Buffer account. Are you sure
+            you want to continue?
           </Text>
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '1rem',
+            }}
+          >
             <Button
               type="text"
               disabled={submitting}

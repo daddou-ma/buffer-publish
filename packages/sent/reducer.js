@@ -38,7 +38,7 @@ const handlePosts = (action, currentPosts) => {
   return posts;
 };
 
-const increasePageCount = (page) => {
+const increasePageCount = page => {
   page += 1;
   return page;
 };
@@ -46,19 +46,31 @@ const increasePageCount = (page) => {
 const determineIfMoreToLoad = (action, currentPosts) => {
   const currentPostCount = Object.keys(currentPosts).length;
   const resultUpdatesCount = Object.keys(action.result.updates).length;
-  return (action.result.total > (currentPostCount + resultUpdatesCount));
+  return action.result.total > currentPostCount + resultUpdatesCount;
 };
 
-const getProfileId = (action) => {
-  if (action.profileId) { return action.profileId; }
-  if (action.args) { return action.args.profileId; }
-  if (action.profile) { return action.profile.id; }
+const getProfileId = action => {
+  if (action.profileId) {
+    return action.profileId;
+  }
+  if (action.args) {
+    return action.args.profileId;
+  }
+  if (action.profile) {
+    return action.profile.id;
+  }
 };
 
-const getPostUpdateId = (action) => {
-  if (action.updateId) { return action.updateId; }
-  if (action.args) { return action.args.updateId; }
-  if (action.post) { return action.post.id; }
+const getPostUpdateId = action => {
+  if (action.updateId) {
+    return action.updateId;
+  }
+  if (action.args) {
+    return action.args.updateId;
+  }
+  if (action.post) {
+    return action.post.id;
+  }
 };
 
 const postReducer = (state, action) => {
@@ -102,7 +114,10 @@ const postsReducer = (state, action) => {
     case actionTypes.POST_IMAGE_CLICKED_PREV: {
       return {
         ...state,
-        [getPostUpdateId(action)]: postReducer(state[getPostUpdateId(action)], action),
+        [getPostUpdateId(action)]: postReducer(
+          state[getPostUpdateId(action)],
+          action
+        ),
       };
     }
     default:

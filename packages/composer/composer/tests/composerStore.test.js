@@ -143,7 +143,9 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionAddImage);
     AppDispatcher.dispatch(actionUpdateInstaState);
     const draft = ComposerStore.default.getDraft('instagram');
-    expect(draft.instagramFeedback[0].message).toEqual('Due to Instagram limitations, we can\'t post galleries on your behalf. You will receive a Reminder to post manually when the time comes!');
+    expect(draft.instagramFeedback[0].message).toEqual(
+      "Due to Instagram limitations, we can't post galleries on your behalf. You will receive a Reminder to post manually when the time comes!"
+    );
   });
 
   it('sets draft postDirectToInstagram to false when video is added', () => {
@@ -214,7 +216,10 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionAddImage);
     AppDispatcher.dispatch(actionUpdateDraftComment(id, commentText));
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const characterCommentCount = ComposerStore.getDraftCharacterCount(id, commentText);
+    const characterCommentCount = ComposerStore.getDraftCharacterCount(
+      id,
+      commentText
+    );
     expect(characterCommentCount).toEqual(7);
   });
 
@@ -226,7 +231,9 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionEnableFacebookDraft);
     AppDispatcher.dispatch(actionAddImageFacebook);
 
-    expect(ComposerStore.getDraftCharacterCount(id, 'Text with 23 characters')).toEqual(23);
+    expect(
+      ComposerStore.getDraftCharacterCount(id, 'Text with 23 characters')
+    ).toEqual(23);
     expect(ComposerStore.getDraftCharacterCount(id, '')).toEqual(0);
     expect(ComposerStore.getDraftCharacterCount(id, null)).toEqual(0);
   });
@@ -244,5 +251,4 @@ describe('ComposerStore', () => {
       expect(draftsAfterReset[0].constructor.name).toEqual('Draft');
     });
   });
-
 });

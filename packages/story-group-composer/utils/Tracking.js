@@ -3,7 +3,8 @@ import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaS
 export const getCounts = (stories = []) => {
   const imageCount = stories.filter(story => story.type === 'image').length;
   const videoCount = stories.filter(story => story.type === 'video').length;
-  const noteCount = stories.filter(story => story.note && story.note.length > 0).length;
+  const noteCount = stories.filter(story => story.note && story.note.length > 0)
+    .length;
 
   return {
     imageCount,
@@ -48,6 +49,5 @@ export const getNoteTrackingData = ({
   };
 };
 
-export const getStory = ({ stories = [], order }) => (
-  stories.find(story => story.order === order)
-);
+export const getStory = ({ stories = [], order }) =>
+  stories.find(story => story.order === order);

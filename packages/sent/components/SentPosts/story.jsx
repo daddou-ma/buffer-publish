@@ -4,10 +4,7 @@ import { Provider } from 'react-redux';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import SentPosts from './index';
-import {
-  header,
-  postLists,
-} from './postData';
+import { header, postLists } from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -31,9 +28,7 @@ const store = storeFake({
 });
 
 const UpgradeModalDecorator = storyFn => (
-  <Provider store={store}>
-    {storyFn()}
-  </Provider>
+  <Provider store={store}>{storyFn()}</Provider>
 );
 
 storiesOf('SentPosts', module)

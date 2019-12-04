@@ -15,13 +15,7 @@ const CardWrapper = styled.div`
   width: 100%;
 `;
 
-const Card = ({
-  children,
-}) => (
-  <CardWrapper>
-    {children}
-  </CardWrapper>
-);
+const Card = ({ children }) => <CardWrapper>{children}</CardWrapper>;
 
 Card.propTypes = {
   children: PropTypes.node,

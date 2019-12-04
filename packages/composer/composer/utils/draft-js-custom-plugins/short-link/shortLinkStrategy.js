@@ -1,7 +1,7 @@
 /* Shortlinks are annotated with SHORT_LINK entities */
 
 const shortLinkStrategy = (contentBlock, callback, contentState) => {
-  contentBlock.findEntityRanges((character) => {
+  contentBlock.findEntityRanges(character => {
     const entityKey = character.getEntity();
     return (
       entityKey !== null &&

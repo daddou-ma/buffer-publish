@@ -1,6 +1,4 @@
-import {
-  actions as dataFetchActions,
-} from '@bufferapp/async-data-fetch';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import middleware from './middleware';
 
 describe('middleware', () => {
@@ -11,10 +9,9 @@ describe('middleware', () => {
       type: 'APP_INIT',
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({ name: 'features' }));
-
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({ name: 'features' })
+    );
   });
 });

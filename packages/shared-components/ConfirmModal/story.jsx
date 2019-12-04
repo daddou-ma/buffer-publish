@@ -15,8 +15,10 @@ storiesOf('ConfirmModal', module)
         profileService="twitter"
         avatar="https://pbs.twimg.com/profile_images/901516345476603904/e2F5vE32_normal.jpg"
         heading={'Are you sure?'}
-        body={'Would you like us to remove all your posting times for <span style="font-weight: bold">hello_world</span>?'}
-        btnText={'I\'m sure, empty it'}
+        body={
+          'Would you like us to remove all your posting times for <span style="font-weight: bold">hello_world</span>?'
+        }
+        btnText={"I'm sure, empty it"}
       />
     </div>
   ))

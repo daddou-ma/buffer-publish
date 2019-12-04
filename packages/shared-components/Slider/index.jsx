@@ -44,30 +44,14 @@ const Slider = ({
 }) => (
   <SliderContainer>
     <ArrowColumn>
-      {showLeftArrow
-        && (
-          <Arrow
-            isLeft
-            onClick={() => onArrowClick('left')}
-          />
-        )
-      }
+      {showLeftArrow && <Arrow isLeft onClick={() => onArrowClick('left')} />}
     </ArrowColumn>
-    <ContentWrapper>
-      {children}
-    </ContentWrapper>
-    {onCloseClick
-      && <CloseButton size="large" onClick={onCloseClick} />
-    }
+    <ContentWrapper>{children}</ContentWrapper>
+    {onCloseClick && <CloseButton size="large" onClick={onCloseClick} />}
     <ArrowColumn>
-      {showRightArrow
-        && (
-          <Arrow
-            isLeft={false}
-            onClick={() => onArrowClick('right')}
-          />
-        )
-      }
+      {showRightArrow && (
+        <Arrow isLeft={false} onClick={() => onArrowClick('right')} />
+      )}
     </ArrowColumn>
   </SliderContainer>
 );

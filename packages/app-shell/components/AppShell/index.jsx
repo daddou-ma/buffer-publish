@@ -92,10 +92,12 @@ function generateUserMenuItems({
       title: 'Start Pro Trial',
       icon: <Plus color={gray} />,
       onItemClick: () => {
-        window.location.assign(`${getURL.getStartTrialURL({
-          trialType: 'pro',
-          cta: SEGMENT_NAMES.APP_SHELL_PRO_TRIAL,
-        })}`);
+        window.location.assign(
+          `${getURL.getStartTrialURL({
+            trialType: 'pro',
+            cta: SEGMENT_NAMES.APP_SHELL_PRO_TRIAL,
+          })}`
+        );
       },
     },
     switchPlan: {
@@ -156,10 +158,14 @@ const AppShell = ({
         }),
       }}
       helpMenuItems={helpMenuItems}
-      bannerOptions={bannerOptions ? {
-        ...bannerOptions,
-        onCloseBanner: () => onCloseBanner({ key: bannerKey }),
-      } : null}
+      bannerOptions={
+        bannerOptions
+          ? {
+              ...bannerOptions,
+              onCloseBanner: () => onCloseBanner({ key: bannerKey }),
+            }
+          : null
+      }
     />
   );
 };

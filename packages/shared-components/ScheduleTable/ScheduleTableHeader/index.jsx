@@ -35,19 +35,17 @@ const ScheduleTableHeader = ({
   disabled,
 }) => (
   <div style={headerStyle} tabIndex="0">
-    <Text type="label">
-      {dayName}
-    </Text>
-    {!disabled &&
-    <div style={buttonStyle}>
-      <Button
-        type="link"
-        size="small"
-        label={`Turn ${paused ? 'on' : 'off'}`}
-        onClick={() => onPauseToggleClick(dayMap[dayName], paused)}
-      />
-    </div>
-    }
+    <Text type="label">{dayName}</Text>
+    {!disabled && (
+      <div style={buttonStyle}>
+        <Button
+          type="link"
+          size="small"
+          label={`Turn ${paused ? 'on' : 'off'}`}
+          onClick={() => onPauseToggleClick(dayMap[dayName], paused)}
+        />
+      </div>
+    )}
   </div>
 );
 

@@ -49,7 +49,9 @@ export default (state = initialState, action) => {
     case actionTypes.REQUEST_REVOKE_APP:
       return {
         ...initialState,
-        connectedApps: state.connectedApps.filter(app => app.id !== action.appId),
+        connectedApps: state.connectedApps.filter(
+          app => app.id !== action.appId
+        ),
       };
     default:
       return state;

@@ -33,17 +33,13 @@ const TextWithStyles = styled(Text)`
   color: ${gray};
 `;
 
-const getCreatedText = creatorName => (
-  creatorName ? `${creatorName} created this ` : 'Created '
-);
+const getCreatedText = creatorName =>
+  creatorName ? `${creatorName} created this ` : 'Created ';
 
-const CardHeader = ({
-  creatorName,
-  avatarUrl,
-  createdAt,
-  onPreviewClick,
-}) => {
-  const WrapperComponent = onPreviewClick ? CardHeaderWrapperWithButton : CardHeaderWrapper;
+const CardHeader = ({ creatorName, avatarUrl, createdAt, onPreviewClick }) => {
+  const WrapperComponent = onPreviewClick
+    ? CardHeaderWrapperWithButton
+    : CardHeaderWrapper;
 
   return (
     <WrapperComponent>
@@ -63,9 +59,14 @@ const CardHeader = ({
           {createdAt}
         </TextWithStyles>
       </ContentWrapper>
-      {onPreviewClick
-        && <Button type="secondary" label="Preview" size="small" onClick={onPreviewClick} />
-      }
+      {onPreviewClick && (
+        <Button
+          type="secondary"
+          label="Preview"
+          size="small"
+          onClick={onPreviewClick}
+        />
+      )}
     </WrapperComponent>
   );
 };

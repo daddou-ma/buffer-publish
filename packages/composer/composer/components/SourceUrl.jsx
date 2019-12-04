@@ -14,9 +14,12 @@ class SourceUrl extends React.Component {
     sourceUrl: null,
   };
 
-  saveSourceUrl = (e) => {
+  saveSourceUrl = e => {
     const newSourceUrl = e.target.value;
-    ComposerActionCreators.updateDraftSourceLink(this.props.draftId, newSourceUrl);
+    ComposerActionCreators.updateDraftSourceLink(
+      this.props.draftId,
+      newSourceUrl
+    );
   };
 
   render() {

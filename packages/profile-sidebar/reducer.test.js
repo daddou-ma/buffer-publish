@@ -2,7 +2,11 @@ import deepFreeze from 'deep-freeze';
 
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as queueActions } from '@bufferapp/publish-queue/reducer';
-import reducer, { actions, actionTypes, initialState as profileInitialState } from './reducer';
+import reducer, {
+  actions,
+  actionTypes,
+  initialState as profileInitialState,
+} from './reducer';
 import { profiles } from './mockData/profiles';
 
 describe('reducer', () => {
@@ -25,28 +29,25 @@ describe('reducer', () => {
       type: 'INIT',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should generate a selectProfile action', () => {
     const profile = profiles[0];
-    expect(actions.selectProfile({ profile }))
-      .toEqual({
-        type: actionTypes.SELECT_PROFILE,
-        profileId: profile.id,
-        profile,
-      });
+    expect(actions.selectProfile({ profile })).toEqual({
+      type: actionTypes.SELECT_PROFILE,
+      profileId: profile.id,
+      profile,
+    });
   });
 
   it('should generate a profile dropped action', () => {
     const props = { dragIndex: 1, hoverIndex: 0 };
-    expect(actions.onDropProfile(props))
-      .toEqual({
-        type: actionTypes.PROFILE_DROPPED,
-        dragIndex: props.dragIndex,
-        hoverIndex: props.hoverIndex,
-      });
+    expect(actions.onDropProfile(props)).toEqual({
+      type: actionTypes.PROFILE_DROPPED,
+      dragIndex: props.dragIndex,
+      hoverIndex: props.hoverIndex,
+    });
   });
 
   it('should reorder profiles with PROFILE_DROPPED', () => {
@@ -58,7 +59,10 @@ describe('reducer', () => {
     };
 
     const profilesAfter = profiles.slice();
-    [profilesAfter[dragIndex], profilesAfter[hoverIndex]] = [profilesAfter[hoverIndex], profilesAfter[dragIndex]];
+    [profilesAfter[dragIndex], profilesAfter[hoverIndex]] = [
+      profilesAfter[hoverIndex],
+      profilesAfter[dragIndex],
+    ];
 
     const stateAfter = {
       ...profileInitialState,
@@ -72,8 +76,7 @@ describe('reducer', () => {
     };
 
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should set loading to true when it begins the fetch', () => {
@@ -98,7 +101,10 @@ describe('reducer', () => {
       type: `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`,
       result: profiles,
     };
-    const { hasInstagram, hasFacebook, hasTwitter } = reducer(undefined, action);
+    const { hasInstagram, hasFacebook, hasTwitter } = reducer(
+      undefined,
+      action
+    );
     expect(hasInstagram).toBe(false);
     expect(hasFacebook).toBe(true);
     expect(hasTwitter).toBe(true);
@@ -136,17 +142,28 @@ describe('reducer', () => {
     });
     it('should update the profile paused state', () => {
       const pauseAction = actions.onPauseClick({ profileId: profiles[0].id });
-      const unpauseAction = actions.onUnpauseClick({ profileId: profiles[0].id });
+      const unpauseAction = actions.onUnpauseClick({
+        profileId: profiles[0].id,
+      });
 
       const stateWithPausedProfile = reducer(initialState, pauseAction);
       expect(stateWithPausedProfile.profiles[0].paused).toBe(true);
 
-      const stateWithUnpausedProfile = reducer(stateWithPausedProfile, unpauseAction);
+      const stateWithUnpausedProfile = reducer(
+        stateWithPausedProfile,
+        unpauseAction
+      );
       expect(stateWithUnpausedProfile.profiles[0].paused).toBe(false);
     });
     it('should update the profile post count', () => {
-      const action = queueActions.postCountUpdated(profiles[0].id, { pending: 5, sent: 2 });
-      const { profiles: profilesWithUpdatedPostCounts } = reducer(initialState, action);
+      const action = queueActions.postCountUpdated(profiles[0].id, {
+        pending: 5,
+        sent: 2,
+      });
+      const { profiles: profilesWithUpdatedPostCounts } = reducer(
+        initialState,
+        action
+      );
       expect(profilesWithUpdatedPostCounts[0].pendingCount).toBe(5);
       expect(profilesWithUpdatedPostCounts[0].sentCount).toBe(2);
     });

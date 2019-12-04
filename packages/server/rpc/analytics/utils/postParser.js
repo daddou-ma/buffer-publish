@@ -1,11 +1,9 @@
 const { getDateString } = require('../utils/date');
 const { parseTwitterLinks } = require('./linkParsing');
 
-const getImageUrls = (post) => {
+const getImageUrls = post => {
   if (!(post.media && post.media.picture && post.extra_media)) return [];
-  const imageUrls = post.extra_media.map(media =>
-    media.photo,
-  );
+  const imageUrls = post.extra_media.map(media => media.photo);
 
   imageUrls.unshift(post.media.picture);
   return imageUrls;
@@ -17,13 +15,9 @@ const getPostActionString = ({ post }) => {
   if (timestampToConvert === 0) {
     return 'NO TIME SET';
   }
-  const dateString = getDateString(
-    timestampToConvert,
-    post.profile_timezone,
-    {
-      twentyFourHourTime: post.twentyfour_hour_time,
-    },
-  );
+  const dateString = getDateString(timestampToConvert, post.profile_timezone, {
+    twentyFourHourTime: post.twentyfour_hour_time,
+  });
   return `This post ${post.sent_at ? 'was' : 'will be'} sent ${dateString}.`;
 };
 
@@ -32,7 +26,7 @@ const getPostDetails = ({ post }) => ({
   isRetweet: post.retweet !== undefined,
 });
 
-const getRetweetProfileInfo = (post) => {
+const getRetweetProfileInfo = post => {
   const retweet = post.retweet;
   if (!retweet) {
     return undefined;
@@ -61,7 +55,7 @@ const getPostType = ({ post }) => {
 };
 
 module.exports = {
-  postsMapper: (post) => {
+  postsMapper: post => {
     const media = post.media || {};
     const isVideo = media.video;
     let retweetComment;

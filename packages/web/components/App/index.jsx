@@ -32,7 +32,8 @@ const contentStyle = {
 
 // Can't use stateless function for App since then
 // the `DragDropContext` doesn't work.
-class App extends Component { // eslint-disable-line
+class App extends Component {
+  // eslint-disable-line
   render() {
     return (
       <div style={appStyle}>

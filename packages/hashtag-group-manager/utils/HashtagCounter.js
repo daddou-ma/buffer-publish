@@ -1,6 +1,6 @@
 const hashtagRegex = require('hashtag-regex');
 
-const countHashtagsInText = (text) => {
+const countHashtagsInText = text => {
   let counter = 0;
 
   const regex = hashtagRegex();

@@ -1,1 +1,3 @@
-export { default as resetEditorContents } from './modifiers/resetEditorContents';
+export {
+  default as resetEditorContents,
+} from './modifiers/resetEditorContents';

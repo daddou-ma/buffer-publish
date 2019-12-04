@@ -14,7 +14,8 @@ module.exports = method(
         adminAccountId: req.session.global.accountId,
       });
       if (organization) {
-        user.isAnalyzePublishBundle = organization.metadata.account.isAnalyzePublishBundle;
+        user.isAnalyzePublishBundle =
+          organization.metadata.account.isAnalyzePublishBundle;
       }
     } catch (e) {
       console.log(e); // eslint-disable-line no-console

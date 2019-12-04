@@ -1,8 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import TextPost from './index';
@@ -21,28 +19,37 @@ const store = storeFake({
   },
 });
 
-const links = [{
-  rawString: 'http://buff.ly/1LTbUqv',
-  displayString: 'http://buff.ly/1LTbUqv',
-  url: 'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
-  indices: [74, 96],
-}];
-const multilineLinks = [{
-  ...links[0],
-  indices: [78, 100],
-}];
+const links = [
+  {
+    rawString: 'http://buff.ly/1LTbUqv',
+    displayString: 'http://buff.ly/1LTbUqv',
+    url:
+      'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
+    indices: [74, 96],
+  },
+];
+const multilineLinks = [
+  {
+    ...links[0],
+    indices: [78, 100],
+  },
+];
 
-const text = 'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
-const multilineText = 'What is a Product Designer? \n\nAn awesome story by @jgadapee over on Medium! \n\nhttp://buff.ly/1LTbUqv';
+const text =
+  'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
+const multilineText =
+  'What is a Product Designer? \n\nAn awesome story by @jgadapee over on Medium! \n\nhttp://buff.ly/1LTbUqv';
 
 const retweetComment = 'Awesome book news here: http://buff.ly/2oZYTnY';
 
-const retweetCommentLinks = [{
-  rawString: 'http://buff.ly/2oZYTnY',
-  displayString: 'http://buff.ly/2oZYTnY',
-  url: 'https://www.theguardian.com/books',
-  indices: [24, 46],
-}];
+const retweetCommentLinks = [
+  {
+    rawString: 'http://buff.ly/2oZYTnY',
+    displayString: 'http://buff.ly/2oZYTnY',
+    url: 'https://www.theguardian.com/books',
+    indices: [24, 46],
+  },
+];
 
 const postDetails = {
   isRetweet: false,
@@ -67,16 +74,13 @@ const postDetailsError = {
 const retweetProfile = {
   name: 'Joel Gascoigne',
   handle: '@joelgascoigne',
-  avatarUrl: 'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f00002e/f49c2ff693f1c307af5e1b3d84e581ca.png',
+  avatarUrl:
+    'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f00002e/f49c2ff693f1c307af5e1b3d84e581ca.png',
 };
 
 storiesOf('Cards|Posts/TextPost', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
-    <Provider store={store}>
-      {getStory()}
-    </Provider>,
-  )
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('queued text post', () => (
     <TextPost
       links={links}

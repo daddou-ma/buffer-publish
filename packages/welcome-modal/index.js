@@ -9,5 +9,5 @@ export default connect(
   }),
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideWelcomeModal()),
-  }),
+  })
 )(WelcomeModal);

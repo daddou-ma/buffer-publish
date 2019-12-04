@@ -36,7 +36,8 @@ const ComposerWrapper = ({
   const getSaveButtons = () => {
     if (editMode) return ['SAVE'];
     else if (emptySlotMode) return ['SCHEDULE_POST'];
-    else if (draftMode) return ['ADD_TO_DRAFTS', 'SHARE_NEXT_DRAFT', 'SCHEDULE_DRAFT'];
+    else if (draftMode)
+      return ['ADD_TO_DRAFTS', 'SHARE_NEXT_DRAFT', 'SCHEDULE_DRAFT'];
     return ['ADD_TO_QUEUE', 'SHARE_NOW', 'SCHEDULE_POST'];
   };
 
@@ -75,11 +76,14 @@ const ComposerWrapper = ({
     application: 'WEB_DASHBOARD',
     environment: `${environment === 'development' ? 'local' : 'production'}`,
     should_enable_fb_autocomplete:
-      userData.features && userData.features.includes('mc_facebook_autocomplete'),
+      userData.features &&
+      userData.features.includes('mc_facebook_autocomplete'),
     enable_twitter_march_18_changes:
-      userData.features && userData.features.includes('twitter-march-18-changes'),
+      userData.features &&
+      userData.features.includes('twitter-march-18-changes'),
     hasIGLocationTaggingFeature:
-      userData.features && userData.features.includes('instagram-location-tagging'),
+      userData.features &&
+      userData.features.includes('instagram-location-tagging'),
     // TODO: make should_use_new_twitter_autocomplete dynamic based on the
     // value of enabledApplicationModes.includes('web-twitter-typeahead-autocomplete')
     isOnProTrial: userData.isOnProTrial,
@@ -205,7 +209,7 @@ events.on('start-trial', ({ message, removeScope }) => {
   });
 });
 
-events.on('action-taken', (message) => {
+events.on('action-taken', message => {
   publishComposerOnInteractionCallback(message);
 });
 

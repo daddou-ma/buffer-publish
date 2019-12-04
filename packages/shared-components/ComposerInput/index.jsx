@@ -32,11 +32,7 @@ const composerInputIcoCameraStyle = {
   marginLeft: 'auto',
 };
 
-const ComposerInput = ({
-  onPlaceholderClick,
-  placeholder,
-  isDisabled,
-}) =>
+const ComposerInput = ({ onPlaceholderClick, placeholder, isDisabled }) => (
   <button
     style={calculateStyles(composerInputStyle, { isDisabled })}
     onClick={onPlaceholderClick}
@@ -46,8 +42,8 @@ const ComposerInput = ({
     <div style={composerInputIcoCameraStyle}>
       <CameraIcon />
     </div>
-  </button>;
-
+  </button>
+);
 
 ComposerInput.propTypes = {
   onPlaceholderClick: PropTypes.func,

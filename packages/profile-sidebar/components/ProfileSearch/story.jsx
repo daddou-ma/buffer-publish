@@ -23,4 +23,4 @@ storiesOf('ProfileSearch', module)
       isSearchPopupVisible={false}
       handleSubmit={action('handleSubmit')}
     />
-));
+  ));

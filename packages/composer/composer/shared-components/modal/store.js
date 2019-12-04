@@ -7,17 +7,18 @@ const CHANGE_EVENT = 'change';
 const getInitialState = () => ({
   open: true,
   modalName: '',
-  modalProps: {}
+  modalProps: {},
 });
 
 const state = getInitialState();
 
 const Store = Object.assign({}, EventEmitter.prototype, {
   emitChange: () => Store.emit(CHANGE_EVENT),
-  addChangeListener: (callback) => Store.on(CHANGE_EVENT, callback),
-  removeChangeListener: (callback) => Store.removeListener(CHANGE_EVENT, callback),
+  addChangeListener: callback => Store.on(CHANGE_EVENT, callback),
+  removeChangeListener: callback =>
+    Store.removeListener(CHANGE_EVENT, callback),
   getCurrentState: () => state,
-  getInitialState
+  getInitialState,
 });
 
 const closeModal = () => {
@@ -28,15 +29,15 @@ const openModal = () => {
   state.open = true;
 };
 
-const setModal = (modalName) => {
+const setModal = modalName => {
   state.modalName = modalName;
 };
 
-const setModalProps = (modalProps) => {
+const setModalProps = modalProps => {
   state.modalProps = modalProps;
 };
 
-AppDispatcher.register((payload) => {
+AppDispatcher.register(payload => {
   switch (payload.action.actionType) {
     case ActionTypes.CLOSE_MODAL:
       closeModal();

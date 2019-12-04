@@ -1,6 +1,4 @@
-import {
-  actionTypes as dataFetchActionTypes,
-} from '@bufferapp/async-data-fetch';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import deepFreeze from 'deep-freeze';
 import reducer, { initialState } from './reducer';
 
@@ -11,8 +9,7 @@ describe('reducer', () => {
         type: 'INIT',
       };
       deepFreeze(action);
-      expect(reducer(undefined, action))
-        .toEqual(initialState);
+      expect(reducer(undefined, action)).toEqual(initialState);
     });
 
     it('sets showGoBackToClassic to true when the user is on new publish beta', () => {
@@ -34,8 +31,7 @@ describe('reducer', () => {
       };
 
       deepFreeze(action);
-      expect(reducer(undefined, action))
-        .toEqual(stateAfter);
+      expect(reducer(undefined, action)).toEqual(stateAfter);
     });
 
     it('sets submittingFeedback to true on FETCH_START', () => {
@@ -49,8 +45,7 @@ describe('reducer', () => {
       };
 
       deepFreeze(action);
-      expect(reducer(undefined, action))
-        .toEqual(stateAfter);
+      expect(reducer(undefined, action)).toEqual(stateAfter);
     });
 
     it('sets submittingFeedback to false and redirecting to true on FETCH_SUCCESS', () => {
@@ -65,8 +60,7 @@ describe('reducer', () => {
       };
 
       deepFreeze(action);
-      expect(reducer(undefined, action))
-        .toEqual(stateAfter);
+      expect(reducer(undefined, action)).toEqual(stateAfter);
     });
 
     it('sets submittingFeedback to false on FETCH_FAIL', () => {
@@ -80,8 +74,7 @@ describe('reducer', () => {
       };
 
       deepFreeze(action);
-      expect(reducer(undefined, action))
-        .toEqual(stateAfter);
+      expect(reducer(undefined, action)).toEqual(stateAfter);
     });
   });
 });

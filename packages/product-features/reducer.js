@@ -1,6 +1,4 @@
-import {
-  actionTypes as dataFetchActionTypes,
-} from '@bufferapp/async-data-fetch';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = {};
 

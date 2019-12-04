@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
@@ -9,7 +7,8 @@ import DraftFooter from './index';
 
 const draftDetails = {
   creatorName: 'Ash',
-  avatarUrl: 'https://buffer-uploads.s3.amazonaws.com/510521020a19000b6a00001e/a476fed03b1de4e06563d6063d7d3ee0.jpg',
+  avatarUrl:
+    'https://buffer-uploads.s3.amazonaws.com/510521020a19000b6a00001e/a476fed03b1de4e06563d6063d7d3ee0.jpg',
   email: 'ash@buffer.com',
   via: 'web',
   createdAt: 'March 2nd at 12:45pm (GMT)',
@@ -119,10 +118,16 @@ storiesOf('Cards|Drafts/DraftFooter', module)
     <DraftFooter
       hasPermission
       manager
-      onApproveClick={linkTo('DraftFooter', 'approval view: managerIsApproving')}
+      onApproveClick={linkTo(
+        'DraftFooter',
+        'approval view: managerIsApproving'
+      )}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
-      onMoveToDraftsClick={linkTo('DraftFooter', 'approval view: manager moving to drafts')}
+      onMoveToDraftsClick={linkTo(
+        'DraftFooter',
+        'approval view: manager moving to drafts'
+      )}
       draftDetails={draftDetails}
       view={approvalView}
     />
@@ -146,7 +151,10 @@ storiesOf('Cards|Drafts/DraftFooter', module)
       hasPermission
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
-      onMoveToDraftsClick={linkTo('DraftFooter', 'approval view: not manager moving to drafts')}
+      onMoveToDraftsClick={linkTo(
+        'DraftFooter',
+        'approval view: not manager moving to drafts'
+      )}
       draftDetails={draftDetails}
       view={approvalView}
     />
@@ -179,7 +187,10 @@ storiesOf('Cards|Drafts/DraftFooter', module)
       isMoving
       isWorking
       manager
-      onApproveClick={linkTo('DraftFooter', 'approval view: managerIsApproving')}
+      onApproveClick={linkTo(
+        'DraftFooter',
+        'approval view: managerIsApproving'
+      )}
       onDeleteConfirmClick={linkTo('DraftFooter', 'managerIsDeleting')}
       onEditClick={action('edit-click')}
       onMoveToDraftsClick={action('move-to-drafts-click')}

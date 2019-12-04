@@ -1,8 +1,5 @@
 import middleware from './middleware';
-import reducer, {
-  actions,
-  actionTypes,
-} from './reducer';
+import reducer, { actions, actionTypes } from './reducer';
 
 const storeFake = state => ({
   default: () => {},
@@ -13,22 +10,18 @@ const storeFake = state => ({
 
 describe('Drafts', () => {
   it('should export reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('should export actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('should export actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

@@ -12,35 +12,46 @@ describe('rpc/posts_summary', () => {
   const token = 'some token';
 
   it('should have the expected name', () => {
-    expect(postsSummary.name)
-      .toBe('posts_summary');
+    expect(postsSummary.name).toBe('posts_summary');
   });
 
   it('should have the expected docs', () => {
-    expect(postsSummary.docs)
-      .toBe('fetch analytics posts summary for profiles and pages');
+    expect(postsSummary.docs).toBe(
+      'fetch analytics posts summary for profiles and pages'
+    );
   });
 
   it('should request metrics to Analyze Api for Instagram', () => {
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    postsSummary.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService: 'instagram',
-    }, {
-      app: { get() { return process.env.API_ADDR; } },
-      session: {
-        publish: {
-          accessToken: token,
-        },
+    postsSummary.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService: 'instagram',
       },
-    });
+      {
+        app: {
+          get() {
+            return process.env.API_ADDR;
+          },
+        },
+        session: {
+          publish: {
+            accessToken: token,
+          },
+        },
+      }
+    );
 
-    expect(rp.mock.calls[0])
-      .toEqual([{
+    expect(rp.mock.calls[0]).toEqual([
+      {
         uri: `${process.env.ANALYZE_API_ADDR}/metrics/post_totals`,
         method: 'POST',
         strictSSL: false,
@@ -51,30 +62,42 @@ describe('rpc/posts_summary', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
   it('should request for the past week', () => {
     rp.mockClear();
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    postsSummary.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService: 'twitter',
-    }, {
-      app: { get() { return 'analyze-api'; } },
-      session: {
-        publish: {
-          accessToken: token,
-        },
+    postsSummary.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService: 'twitter',
       },
-    });
+      {
+        app: {
+          get() {
+            return 'analyze-api';
+          },
+        },
+        session: {
+          publish: {
+            accessToken: token,
+          },
+        },
+      }
+    );
 
-    expect(rp.mock.calls[0])
-      .toEqual([{
+    expect(rp.mock.calls[0]).toEqual([
+      {
         uri: 'analyze-api/metrics/post_totals',
         method: 'POST',
         strictSSL: false,
@@ -85,32 +108,48 @@ describe('rpc/posts_summary', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
   it('should request for the week before that', () => {
-    const endDate = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const startDate = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const endDate = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const startDate = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    postsSummary.fn({
-      startDate,
-      endDate,
-      profileId,
-      profileService: 'twitter',
-    }, {
-      app: { get() { return 'analyze-api'; } },
-      session: {
-        publish: {
-          accessToken: token,
-        },
+    postsSummary.fn(
+      {
+        startDate,
+        endDate,
+        profileId,
+        profileService: 'twitter',
       },
-    });
+      {
+        app: {
+          get() {
+            return 'analyze-api';
+          },
+        },
+        session: {
+          publish: {
+            accessToken: token,
+          },
+        },
+      }
+    );
 
-    const end = moment().subtract(8, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(14, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(8, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(14, 'days')
+      .format('MM/DD/YYYY');
 
-    expect(rp.mock.calls[1])
-      .toEqual([{
+    expect(rp.mock.calls[1]).toEqual([
+      {
         uri: 'analyze-api/metrics/post_totals',
         method: 'POST',
         strictSSL: false,
@@ -121,29 +160,41 @@ describe('rpc/posts_summary', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
   it('should combine the data for the two periods and show the current period value and the % difference', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_RESPONSE));
 
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    const postsSummaryData = await postsSummary.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService: 'facebook',
-    }, {
-      app: { get() { return process.env.API_ADDR; } },
-      session: {
-        publish: {
-          accessToken: token,
-        },
+    const postsSummaryData = await postsSummary.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService: 'facebook',
       },
-    });
+      {
+        app: {
+          get() {
+            return process.env.API_ADDR;
+          },
+        },
+        session: {
+          publish: {
+            accessToken: token,
+          },
+        },
+      }
+    );
 
     expect(postsSummaryData).toEqual([
       {

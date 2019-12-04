@@ -41,7 +41,6 @@ function RouteMonitor({
     if (helpScoutBeacon && helpScoutBeacon.loaded && window && window.Beacon) {
       window.Beacon('suggest');
     }
-
   }, [pathname]);
   return null;
 }

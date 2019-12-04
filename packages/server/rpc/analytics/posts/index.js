@@ -17,19 +17,23 @@ function mapSortBy(sortBy) {
 }
 
 function normalizeDate(posts) {
-  return posts.map(post => ({ ...post,
-    date: post.date * 1000
-  }));
+  return posts.map(post => ({ ...post, date: post.date * 1000 }));
 }
 
 module.exports = method(
   RPC_NAME,
   'fetch analytics posts for profiles and pages',
-  async ({ profileId, startDate, endDate, sortBy, descending, limit, searchTerms }, req) =>
+  async (
+    { profileId, startDate, endDate, sortBy, descending, limit, searchTerms },
+    req
+  ) =>
     rp({
       uri: `${req.app.get('analyzeApiAddr')}/posts`,
       method: 'POST',
-      strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
+      strictSSL: !(
+        process.env.NODE_ENV === 'development' ||
+        process.env.NODE_ENV === 'test'
+      ),
       body: {
         profile_id: profileId,
         start_date: startDate,
@@ -40,5 +44,5 @@ module.exports = method(
         search_terms: searchTerms,
       },
       json: true,
-    }).then(({ response }) => normalizeDate(response)),
+    }).then(({ response }) => normalizeDate(response))
 );

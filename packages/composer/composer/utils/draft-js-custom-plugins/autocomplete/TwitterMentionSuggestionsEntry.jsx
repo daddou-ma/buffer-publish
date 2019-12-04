@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TwitterMentionSuggestionsEntry = (props) => {
+const TwitterMentionSuggestionsEntry = props => {
   const {
     mention,
     theme: styles,
@@ -11,11 +11,18 @@ const TwitterMentionSuggestionsEntry = (props) => {
 
   return (
     <div {...parentProps}>
-      {mention.has('avatar') &&
-        <img src={mention.get('avatar')} className={styles.mentionSuggestionsEntryAvatar} alt="" />}
+      {mention.has('avatar') && (
+        <img
+          src={mention.get('avatar')}
+          className={styles.mentionSuggestionsEntryAvatar}
+          alt=""
+        />
+      )}
 
       <span className={styles.mentionSuggestionsEntryText}>
-        <span className={styles.mentionSuggestionsEntryName}>{mention.get('fullName')} </span>
+        <span className={styles.mentionSuggestionsEntryName}>
+          {mention.get('fullName')}{' '}
+        </span>
         {mention.get('name')}
       </span>
     </div>

@@ -4,11 +4,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import PastRemindersPosts from './index';
-import {
-  header,
-  subHeader,
-  postLists,
-} from './postData';
+import { header, subHeader, postLists } from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -32,9 +28,7 @@ const store = storeFake({
 });
 
 const StoreDecorator = storyFn => (
-  <Provider store={store}>
-    {storyFn()}
-  </Provider>
+  <Provider store={store}>{storyFn()}</Provider>
 );
 
 storiesOf('PastRemindersPosts', module)

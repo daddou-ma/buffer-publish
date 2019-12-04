@@ -1,7 +1,11 @@
-const positionSuggestions = function(getDecoratorParentRect, { decoratorRect, state, props }) {
+const positionSuggestions = function(
+  getDecoratorParentRect,
+  { decoratorRect, state, props }
+) {
   const decoratorParentRect = getDecoratorParentRect();
   const left = decoratorRect.left - decoratorParentRect.left;
-  const top = decoratorRect.top - decoratorParentRect.top + decoratorRect.height;
+  const top =
+    decoratorRect.top - decoratorParentRect.top + decoratorRect.height;
 
   return {
     left: `${left}px`,

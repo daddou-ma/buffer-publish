@@ -13,23 +13,29 @@ const isValidRelease = (rData = {}) => {
 
 if (releaseData) {
   if (isValidRelease(releaseData)) {
-    reportBuild({
-      apiKey: bugsnagApiKey,
-      appVersion: releaseData.version,
-      sourceControl: {
-        provider: 'github',
-        repository: 'bufferapp/buffer-publish',
-        revision: releaseData.version,
+    reportBuild(
+      {
+        apiKey: bugsnagApiKey,
+        appVersion: releaseData.version,
+        sourceControl: {
+          provider: 'github',
+          repository: 'bufferapp/buffer-publish',
+          revision: releaseData.version,
+        },
+        builderName: releaseData.author,
       },
-      builderName: releaseData.author,
-    }, {})
+      {}
+    )
       .then(() => console.log('[bugsnag:release] SUCCESS'))
-      .catch((err) => {
+      .catch(err => {
         console.log('[bugsnag:release] FAIL', err.messsage);
         process.exit(1);
       });
   } else {
-    console.log('[bugsnag:release] FAIL', 'Invalid or empty release data in `version.json`');
+    console.log(
+      '[bugsnag:release] FAIL',
+      'Invalid or empty release data in `version.json`'
+    );
     process.exit(1);
   }
 }

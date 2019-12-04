@@ -36,20 +36,30 @@ const getIconPartStyle = delay => ({
   animation: `2s ${delay} fade infinite`,
 });
 
-const BufferLoading = ({ fullscreen, size, dark }) =>
+const BufferLoading = ({ fullscreen, size, dark }) => (
   <div style={fullscreen ? loadingStyle({ dark }) : null}>
     <div style={getIconContainerStyle({ size, fullscreen })}>
       <div style={getIconPartStyle('0ms')}>
-        <BufferTopIcon color={dark ? 'white' : 'shuttleGray'} size={{ width: `${size}`, height: `${size}` }} />
+        <BufferTopIcon
+          color={dark ? 'white' : 'shuttleGray'}
+          size={{ width: `${size}`, height: `${size}` }}
+        />
       </div>
       <div style={getIconPartStyle('150ms')}>
-        <BufferMiddleIcon color={dark ? 'white' : 'shuttleGray'} size={{ width: `${size}`, height: `${size}` }} />
+        <BufferMiddleIcon
+          color={dark ? 'white' : 'shuttleGray'}
+          size={{ width: `${size}`, height: `${size}` }}
+        />
       </div>
       <div style={getIconPartStyle('300ms')}>
-        <BufferBottomIcon color={dark ? 'white' : 'shuttleGray'} size={{ width: `${size}`, height: `${size}` }} />
+        <BufferBottomIcon
+          color={dark ? 'white' : 'shuttleGray'}
+          size={{ width: `${size}`, height: `${size}` }}
+        />
       </div>
     </div>
-  </div>;
+  </div>
+);
 
 BufferLoading.propTypes = {
   fullscreen: PropTypes.bool,

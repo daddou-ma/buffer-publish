@@ -22,5 +22,5 @@ module.exports = method(
       throw err;
     }
     return 'OK';
-  },
+  }
 );

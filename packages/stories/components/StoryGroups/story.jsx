@@ -41,11 +41,8 @@ const store = storeFake({
 });
 
 const UpgradeModalDecorator = storyFn => (
-  <Provider store={store}>
-    {storyFn()}
-  </Provider>
+  <Provider store={store}>{storyFn()}</Provider>
 );
-
 
 storiesOf('StoryGroups', module)
   .addDecorator(withA11y)

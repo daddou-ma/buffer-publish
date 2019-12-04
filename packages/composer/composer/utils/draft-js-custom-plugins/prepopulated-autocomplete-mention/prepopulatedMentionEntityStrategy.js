@@ -1,5 +1,9 @@
-const prepopulatedMentionEntityStrategy = (contentBlock, callback, contentState) => {
-  contentBlock.findEntityRanges((character) => {
+const prepopulatedMentionEntityStrategy = (
+  contentBlock,
+  callback,
+  contentState
+) => {
+  contentBlock.findEntityRanges(character => {
     const entityKey = character.getEntity();
     return (
       entityKey !== null &&

@@ -60,11 +60,7 @@ const DragWrapper = styled.div`
 `;
 
 const CardDragWrapper = React.forwardRef(
-  ({
-    connectDragSource,
-    connectDropTarget,
-    ...cardProps
-  }, ref) => {
+  ({ connectDragSource, connectDropTarget, ...cardProps }, ref) => {
     const elementRef = useRef(null);
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
@@ -83,7 +79,7 @@ const CardDragWrapper = React.forwardRef(
         <CardItem {...cardProps} />
       </DragWrapper>
     );
-  },
+  }
 );
 
 CardDragWrapper.propTypes = {
@@ -96,20 +92,12 @@ CardDragWrapper.defaultProps = {
   id: null,
 };
 
-export default DropTarget(
-  'card',
-  cardTarget,
-  (connect, monitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-  }),
-)(
-  DragSource(
-    'card',
-    cardSource,
-    (connect, monitor) => ({
-      connectDragSource: connect.dragSource(),
-      isDragging: monitor.isDragging(),
-    }),
-  )(CardDragWrapper),
+export default DropTarget('card', cardTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+}))(
+  DragSource('card', cardSource, (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }))(CardDragWrapper)
 );

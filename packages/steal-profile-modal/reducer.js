@@ -1,8 +1,7 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals/reducer';
 
-export const actionTypes = keyWrapper('STEAL_PROFILE_MODAL', {
-});
+export const actionTypes = keyWrapper('STEAL_PROFILE_MODAL', {});
 
 export const initialState = {
   showStealProfileModal: false,
@@ -26,5 +25,4 @@ export default (state = initialState, action) => {
   }
 };
 
-export const actions = {
-};
+export const actions = {};

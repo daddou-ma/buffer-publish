@@ -19,9 +19,7 @@ const hashtagGroups = [
 storiesOf('HashtagGroup', module)
   .addDecorator(withA11y)
   .add('create hashtag group', () => (
-    <HashtagGroupWrapper
-      viewMode={'createHashtag'}
-    />
+    <HashtagGroupWrapper viewMode={'createHashtag'} />
   ))
   .add('manage hashtags, groups', () => (
     <HashtagGroupWrapper
@@ -30,8 +28,5 @@ storiesOf('HashtagGroup', module)
     />
   ))
   .add('manage hashtags, no groups', () => (
-    <HashtagGroupWrapper
-      viewMode={'manageHashtag'}
-      hashtagGroups={[]}
-    />
+    <HashtagGroupWrapper viewMode={'manageHashtag'} hashtagGroups={[]} />
   ));

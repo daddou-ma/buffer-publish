@@ -12,10 +12,17 @@ class LocationFinder {
 
     return API.post(LocationFinder.url, params)
       .catch(() => [])
-      .then((response) => {
+      .then(response => {
         const locations = response.locations.data;
-        return locations.map((l) =>
-          new ServiceLocation(l.id, l.name, l.picture, l.checkins, l.single_line_address)
+        return locations.map(
+          l =>
+            new ServiceLocation(
+              l.id,
+              l.name,
+              l.picture,
+              l.checkins,
+              l.single_line_address
+            )
         );
       });
   }

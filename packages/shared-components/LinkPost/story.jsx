@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import LinkPost from './index';
@@ -18,28 +16,38 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
-const links = [{
-  rawString: 'http://buff.ly/1LTbUqv',
-  displayString: 'http://buff.ly/1LTbUqv',
-  url: 'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
-  indices: [74, 96],
-}];
-const multilineLinks = [{
-  ...links[0],
-  indices: [78, 100],
-}];
+const links = [
+  {
+    rawString: 'http://buff.ly/1LTbUqv',
+    displayString: 'http://buff.ly/1LTbUqv',
+    url:
+      'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
+    indices: [74, 96],
+  },
+];
+const multilineLinks = [
+  {
+    ...links[0],
+    indices: [78, 100],
+  },
+];
 
-const text = 'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
-const multilineText = 'What is a Product Designer? \n\nAn awesome story by @jgadapee over on Medium! \n\nhttp://buff.ly/1LTbUqv';
+const text =
+  'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
+const multilineText =
+  'What is a Product Designer? \n\nAn awesome story by @jgadapee over on Medium! \n\nhttp://buff.ly/1LTbUqv';
 
 const linkAttachment = {
   title: 'What is a Product Designer?',
-  description: 'A brief history at how history and markets influence design titles',
-  url: 'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
-  thumbnailUrl: 'https://cdn-images-1.medium.com/max/2000/1*1Kua7bNJfvLlTxWqgxVKfw.jpeg',
+  description:
+    'A brief history at how history and markets influence design titles',
+  url:
+    'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
+  thumbnailUrl:
+    'https://cdn-images-1.medium.com/max/2000/1*1Kua7bNJfvLlTxWqgxVKfw.jpeg',
 };
 
 const postDetails = {
@@ -61,11 +69,7 @@ const wideImage = 'http://lorempixel.com/900/400/cats/';
 
 storiesOf('Cards|Posts/LinkPost', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
-    <Provider store={store}>
-      {getStory()}
-    </Provider>,
-  )
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('queued link post', () => (
     <LinkPost
       links={links}

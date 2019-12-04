@@ -15,10 +15,12 @@ class SlotPicker extends React.Component {
     metaData: PropTypes.object,
     shouldUse24hTime: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
-    slots: PropTypes.arrayOf(PropTypes.shape({
-      isSlotFree: PropTypes.bool.isRequired,
-      timestamp: PropTypes.number.isRequired,
-    })).isRequired,
+    slots: PropTypes.arrayOf(
+      PropTypes.shape({
+        isSlotFree: PropTypes.bool.isRequired,
+        timestamp: PropTypes.number.isRequired,
+      })
+    ).isRequired,
     metaData: PropTypes.object,
     slot: PropTypes.instanceOf(moment),
     timezone: PropTypes.string,
@@ -31,7 +33,7 @@ class SlotPicker extends React.Component {
     emptyByDefault: false,
   };
 
-  onSlotChange = (e) => {
+  onSlotChange = e => {
     const { timezone } = this.props;
 
     const slotTimestamp = e.target.value;
@@ -52,10 +54,11 @@ class SlotPicker extends React.Component {
 
     const isTimeInFuture = slotMoment.isAfter();
     const slotPastLabel = isTimeInFuture ? '' : ' (past)';
-    const slotOccupancyLabel =
-      isSlotFree ? '' :
-      this.isOriginalTimeOfEditedUpdate(timestamp) ? ' (occupied by this post)' :
-      ' (occupied)';
+    const slotOccupancyLabel = isSlotFree
+      ? ''
+      : this.isOriginalTimeOfEditedUpdate(timestamp)
+      ? ' (occupied by this post)'
+      : ' (occupied)';
 
     return `${humanReadableTime}${slotOccupancyLabel || slotPastLabel}`;
   };
@@ -63,7 +66,7 @@ class SlotPicker extends React.Component {
   // Returns true if we're editing an existing update and the timestamp passed
   // matches the original scheduled time of that update (i.e. the scheduled time
   // before any changes were made to it during this MC session)
-  isOriginalTimeOfEditedUpdate = (timestamp) => {
+  isOriginalTimeOfEditedUpdate = timestamp => {
     const { metaData } = this.props;
     const isEditingUpdate = metaData && metaData.updateId !== null;
     return isEditingUpdate && timestamp === metaData.scheduledAt;
@@ -77,44 +80,57 @@ class SlotPicker extends React.Component {
     const currentTimestampSeconds = Math.floor(Date.now() / 1000);
     const isSlotTimeInFuture = slotTimestamp > currentTimestampSeconds;
 
-    const isSlotTimestampAvailable = (
+    const isSlotTimestampAvailable =
       this.isOriginalTimeOfEditedUpdate(slotTimestamp) ||
       (isSlotTimeInFuture &&
-        slots.some(({ timestamp, isSlotFree }) => timestamp === slotTimestamp && isSlotFree))
-    );
-    const selectedSlot = isSlotTimestampAvailable && !emptyByDefault ?
-      slotTimestamp : EMPTY_OPTION_VALUE;
+        slots.some(
+          ({ timestamp, isSlotFree }) =>
+            timestamp === slotTimestamp && isSlotFree
+        ));
+    const selectedSlot =
+      isSlotTimestampAvailable && !emptyByDefault
+        ? slotTimestamp
+        : EMPTY_OPTION_VALUE;
 
     const hasSlots = slots.length > 0;
 
     const slotsWithDisabledInfo = slots.map(({ timestamp, isSlotFree }) => {
       const isTimeInFuture = timestamp > currentTimestampSeconds;
       const isDisabled =
-        (!isSlotFree || !isTimeInFuture) && !this.isOriginalTimeOfEditedUpdate(timestamp);
+        (!isSlotFree || !isTimeInFuture) &&
+        !this.isOriginalTimeOfEditedUpdate(timestamp);
 
       return { timestamp, isSlotFree, isDisabled };
     });
 
-    const areAllOptionsDisabled = slotsWithDisabledInfo.every(({ isDisabled }) => isDisabled);
+    const areAllOptionsDisabled = slotsWithDisabledInfo.every(
+      ({ isDisabled }) => isDisabled
+    );
 
     return (
       <div className={className}>
-        {hasSlots &&
+        {hasSlots && (
           <Select value={selectedSlot} onChange={this.onSlotChange}>
             <option disabled value={EMPTY_OPTION_VALUE}>
-              {areAllOptionsDisabled ? 'Select a slot (all occupied)' : 'Select a slot' }
+              {areAllOptionsDisabled
+                ? 'Select a slot (all occupied)'
+                : 'Select a slot'}
             </option>
-            {slotsWithDisabledInfo.map(({ timestamp, isSlotFree, isDisabled }) => (
-              <option value={timestamp} disabled={isDisabled} key={timestamp}>
-                {this.getHumanReadableTimeSlotLabel(timestamp, isSlotFree)}
-              </option>
-            ))}
-          </Select>}
+            {slotsWithDisabledInfo.map(
+              ({ timestamp, isSlotFree, isDisabled }) => (
+                <option value={timestamp} disabled={isDisabled} key={timestamp}>
+                  {this.getHumanReadableTimeSlotLabel(timestamp, isSlotFree)}
+                </option>
+              )
+            )}
+          </Select>
+        )}
 
-        {!hasSlots &&
+        {!hasSlots && (
           <Select disabled value="">
             <option value="">No slots this day</option>
-          </Select>}
+          </Select>
+        )}
       </div>
     );
   }

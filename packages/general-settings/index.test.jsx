@@ -16,15 +16,12 @@ const storeFake = state => ({
 });
 
 const store = storeFake({
-  generalSettings: {
-  },
+  generalSettings: {},
   appSidebar: {
-    user: {
-    },
+    user: {},
   },
   profileSidebar: {
-    selectedProfile: {
-    },
+    selectedProfile: {},
   },
 });
 
@@ -33,29 +30,24 @@ describe('GeneralSettings', () => {
     const wrapper = mount(
       <Provider store={store}>
         <GeneralSettings />
-      </Provider>,
+      </Provider>
     );
-    expect(wrapper.find(GeneralSettings).length)
-      .toBe(1);
+    expect(wrapper.find(GeneralSettings).length).toBe(1);
   });
 
   it('should export reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('should export actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('should export actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

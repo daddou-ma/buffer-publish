@@ -13,22 +13,26 @@ class ProductRolloutTooltip extends React.Component {
   };
 
   // Prevent side-effects on composers' expanded state when clicking in the tooltip
-  onTooltipClick = (e) => e.stopPropagation();
+  onTooltipClick = e => e.stopPropagation();
 
-  onButtonClick = (e) => {
+  onButtonClick = e => {
     e.stopPropagation();
 
     // There's only supposed to be one such notification at all times
-    const productRolloutNotification = this.props.visibleNotifications.find((notif) => (
-      notif.scope === NotificationScopes.MC_ROLLOUT_INFO
-    ));
+    const productRolloutNotification = this.props.visibleNotifications.find(
+      notif => notif.scope === NotificationScopes.MC_ROLLOUT_INFO
+    );
 
-    NotificationActionCreators.removeNotification(productRolloutNotification.id);
+    NotificationActionCreators.removeNotification(
+      productRolloutNotification.id
+    );
   };
 
   render() {
     const notificationContainerClassNames = {
-      container: this.props.isOmniboxEnabled ? styles.bottomPositionedContained : styles.container,
+      container: this.props.isOmniboxEnabled
+        ? styles.bottomPositionedContained
+        : styles.container,
       notification: styles.tooltip,
     };
 
@@ -39,8 +43,16 @@ class ProductRolloutTooltip extends React.Component {
         scope={NotificationScopes.MC_ROLLOUT_INFO}
         onClick={this.onTooltipClick}
       >
-        <Button className={styles.button} onClick={this.onButtonClick}>Awesome, got it!</Button>
-        <A href="/new-buffer-composer" target="_blank" rel="noopener noreferrer">Learn More</A>
+        <Button className={styles.button} onClick={this.onButtonClick}>
+          Awesome, got it!
+        </Button>
+        <A
+          href="/new-buffer-composer"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn More
+        </A>
       </NotificationContainer>
     );
   }

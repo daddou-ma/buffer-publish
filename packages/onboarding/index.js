@@ -21,7 +21,7 @@ export default connect(
     onConnectSocialAccountSidebarClick: () => {
       dispatch(actions.handleConnectSocialAccountSidebarClick());
     },
-  }),
+  })
 )(OnboardingManager);
 
 export reducer, { actions, actionTypes } from './reducer';

@@ -16,7 +16,10 @@ import { Button } from '@bufferapp/ui';
 import { stringTokenizer } from '@bufferapp/publish-i18n';
 import styled from 'styled-components';
 
-import { getHumanReadableSize, getFileTypeFromPath } from '@bufferapp/publish-composer/composer/utils/StringUtils';
+import {
+  getHumanReadableSize,
+  getFileTypeFromPath,
+} from '@bufferapp/publish-composer/composer/utils/StringUtils';
 import createFileUploaderCallback from '../../utils/DraftUploader';
 
 const ContentTypeMediaTypeMap = new Map([
@@ -32,7 +35,7 @@ const ContentTypeMediaTypeMap = new Map([
 
 const ButtonWithStyles = styled(Button)`
   color: transparent !important;
-  background: transparent !important;;
+  background: transparent !important;
   border: 0 !important;
   position: absolute !important;
   width: 0;
@@ -56,13 +59,13 @@ const DropzoneWithStyles = styled(Dropzone)`
 
 class UploadZone extends React.Component {
   onUploadButtonClick = () => {
-    const {disabled} = this.props;
+    const { disabled } = this.props;
     if (disabled) return;
     this.dropzone.open();
   };
 
-  onDrop = (files) => {
-    const {disabled} = this.props;
+  onDrop = files => {
+    const { disabled } = this.props;
     if (disabled) return;
 
     this.cleanUpNotifications();
@@ -71,12 +74,12 @@ class UploadZone extends React.Component {
     this.uploadFiles(files);
   };
 
-  getUploadableNewFiles = (files) => {
-    const {uploadFormatsConfig, queueError, translations} = this.props;
+  getUploadableNewFiles = files => {
+    const { uploadFormatsConfig, queueError, translations } = this.props;
 
     let invalidFormatFilesCount = 0;
 
-    const validFiles = files.filter((file) => {
+    const validFiles = files.filter(file => {
       const fileFormat = getFileTypeFromPath(file.name).toUpperCase();
 
       if (!uploadFormatsConfig.has(fileFormat)) {
@@ -86,12 +89,18 @@ class UploadZone extends React.Component {
 
       const uploadFormatConfig = uploadFormatsConfig.get(fileFormat);
       if (file.size > uploadFormatConfig.maxSize) {
-        const formattedMaxSize = getHumanReadableSize(uploadFormatConfig.maxSize);
+        const formattedMaxSize = getHumanReadableSize(
+          uploadFormatConfig.maxSize
+        );
         let message = translations.invalidFileSize;
         message = stringTokenizer(message, '{fileName}', preventXss(file.name));
-        message = stringTokenizer(message, '{formattedMaxSize}', formattedMaxSize);
+        message = stringTokenizer(
+          message,
+          '{formattedMaxSize}',
+          formattedMaxSize
+        );
 
-        queueError({message});
+        queueError({ message });
         return false;
       }
 
@@ -117,15 +126,19 @@ class UploadZone extends React.Component {
       }
 
       //we want to insert our tokenized accepedFilesText string into our message where appropriate
-      message = stringTokenizer(message, '{acceptedFilesText}', acceptedFilesText);
+      message = stringTokenizer(
+        message,
+        '{acceptedFilesText}',
+        acceptedFilesText
+      );
 
-      queueError({message});
+      queueError({ message });
     }
 
     return validFiles;
   };
 
-  uploadFiles = (files) => {
+  uploadFiles = files => {
     const {
       draftId,
       service,
@@ -135,13 +148,15 @@ class UploadZone extends React.Component {
       notifiers,
       supportsMixedMediaTypes,
     } = this.props;
-    const {maxAttachableImagesCount} = service;
+    const { maxAttachableImagesCount } = service;
 
-    const fileMediaTypes = files.map((file) => (
+    const fileMediaTypes = files.map(file =>
       ContentTypeMediaTypeMap.get(getFileTypeFromPath(file.name).toUpperCase())
-    ));
+    );
     if (!supportsMixedMediaTypes) {
-      const uniqueFileMediaTypes = [...new Set(fileMediaTypes)].filter(v => !!v);
+      const uniqueFileMediaTypes = [...new Set(fileMediaTypes)].filter(
+        v => !!v
+      );
       const containsMixedMediaTypes = uniqueFileMediaTypes.length > 1;
 
       if (containsMixedMediaTypes) {
@@ -158,8 +173,14 @@ class UploadZone extends React.Component {
     const uploadableNewFiles = this.getUploadableNewFiles(files);
 
     if (uploadableNewFiles.length > 0) {
-      uploadableNewFiles.forEach((file) => {
-        uploadDraftFile(draftId, file, uploadType, notifiers, createFileUploaderCallback);
+      uploadableNewFiles.forEach(file => {
+        uploadDraftFile(
+          draftId,
+          file,
+          uploadType,
+          notifiers,
+          createFileUploaderCallback
+        );
       });
     }
   };
@@ -169,7 +190,7 @@ class UploadZone extends React.Component {
     removeAllNotifications();
   };
 
-  render () {
+  render() {
     const {
       translations,
       classNames,
@@ -179,19 +200,17 @@ class UploadZone extends React.Component {
       uploadButton,
     } = this.props;
 
-    let UploadButton = ({onClick}) => <ButtonWithStyles
-      onClick={onClick}
-      title={translations.buttonTitle}
-    />;
+    let UploadButton = ({ onClick }) => (
+      <ButtonWithStyles onClick={onClick} title={translations.buttonTitle} />
+    );
 
     if (uploadButton !== null) {
       UploadButton = uploadButton;
     }
 
-    const acceptedFileExtensions =
-      Array.from(uploadFormatsConfig.keys())
-        .map((format) => `.${format.toLowerCase()}`)
-        .join();
+    const acceptedFileExtensions = Array.from(uploadFormatsConfig.keys())
+      .map(format => `.${format.toLowerCase()}`)
+      .join();
 
     return (
       <div>
@@ -200,7 +219,9 @@ class UploadZone extends React.Component {
           activeClassName={classNames && classNames.uploadZoneActive}
           disabledClassName={classNames && classNames.uploadZoneDisabled}
           className={classNames && classNames.uploadZone}
-          ref={(node) => { this.dropzone = node; }}
+          ref={node => {
+            this.dropzone = node;
+          }}
           multiple={multiple}
           disabled={disabled}
         />
@@ -214,7 +235,11 @@ class UploadZone extends React.Component {
 }
 
 UploadZone.propTypes = {
-  uploadButton: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
+  uploadButton: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
   draftId: PropTypes.string.isRequired,
   className: PropTypes.string,
   classNames: PropTypes.shape({
@@ -251,7 +276,7 @@ UploadZone.propTypes = {
     invalidFormatCantSingleFile: PropTypes.string,
     invalidFileSize: PropTypes.string,
     buttonTitle: PropTypes.string,
-  }).isRequired
+  }).isRequired,
 };
 
 UploadZone.defaultProps = {
@@ -263,7 +288,7 @@ UploadZone.defaultProps = {
     uploadZone: '',
     uploadZoneActive: '',
     uploadZoneDisabled: '',
-  }
+  },
 };
 
 export default UploadZone;

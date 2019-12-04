@@ -1,6 +1,4 @@
-import {
-  actionTypes as dataFetchActionTypes,
-} from '@bufferapp/async-data-fetch';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import {
   actionTypes as modalsActionTypes,
   actions as modalActions,
@@ -9,13 +7,16 @@ import { actions as trialActions } from '@bufferapp/publish-trial/reducer';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch, getState }) => next => (action) => { // eslint-disable-line
+export default ({ dispatch, getState }) => next => action => {
+  // eslint-disable-line
   next(action);
   switch (action.type) {
     case actionTypes.IG_FIRST_COMMENT_PRO_TRIAL:
-      dispatch(trialActions.handleStartProTrial({
-        source: 'ig_first_comment',
-      }));
+      dispatch(
+        trialActions.handleStartProTrial({
+          source: 'ig_first_comment',
+        })
+      );
       trackAction({
         location: 'MODALS',
         action: 'start_pro_trial',
@@ -29,7 +30,9 @@ export default ({ dispatch, getState }) => next => (action) => { // eslint-disab
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       if (getState().trial.startedTrial) {
         // focus instagram first comment text area after starting trial
-        const textareaElement = document.querySelector("[class^='Composer__expandedFirstComment']");
+        const textareaElement = document.querySelector(
+          "[class^='Composer__expandedFirstComment']"
+        );
         if (textareaElement) textareaElement.focus();
       }
       break;

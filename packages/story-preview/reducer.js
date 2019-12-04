@@ -23,7 +23,10 @@ export default (state = initialState, action) => {
     case profileActionTypes.SELECT_PROFILE: {
       return {
         ...state,
-        user: { avatarUrl: action.profile.avatarUrl, handle: action.profile.username },
+        user: {
+          avatarUrl: action.profile.avatarUrl,
+          handle: action.profile.username,
+        },
       };
     }
     case actionTypes.OPEN_PREVIEW: {
@@ -49,9 +52,7 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  handlePreviewClick: ({
-    stories, profileId, id, scheduledAt,
-  }) => ({
+  handlePreviewClick: ({ stories, profileId, id, scheduledAt }) => ({
     type: actionTypes.OPEN_PREVIEW,
     stories,
     profileId,

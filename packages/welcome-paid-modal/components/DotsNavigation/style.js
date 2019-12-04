@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const DotstyleUl = styled.ul`
   position: relative;
   display: inline-block;
@@ -47,7 +46,7 @@ export const DotstyleA = styled.a`
 
   &:hover,
   &:focus {
-  background-color: black;
+    background-color: black;
   }
 `;
 
@@ -62,7 +61,7 @@ export const DotstyleLiCurrentA = styled.a`
   cursor: pointer;
   position: absolute;
   -webkit-transition: background-color 0.3s ease;
-  transition:background-color 0.3s ease;
+  transition: background-color 0.3s ease;
   background-color: black;
 `;
 

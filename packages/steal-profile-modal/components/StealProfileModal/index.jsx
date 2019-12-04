@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Popover,
-  Card,
-  Link,
-} from '@bufferapp/components';
+import { Popover, Card, Link } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
 import WarningIcon from '@bufferapp/ui/Icon/Icons/Warning';
 
@@ -33,30 +29,31 @@ const StealProfileModal = ({
               <WarningIcon />
             </span>
             <Text type="h3">
-              {translations.headline1} {stealProfileUsername} {translations.headline2}
+              {translations.headline1} {stealProfileUsername}{' '}
+              {translations.headline2}
             </Text>
           </div>
-          <Text type="p">
-            {translations.body1}
-          </Text>
+          <Text type="p">{translations.body1}</Text>
           <Text type="p">
             <strong>
-              {
-              `${translations.body2} ${stealProfileUsername} ${translations.body3}
+              {`${translations.body2} ${stealProfileUsername} ${translations.body3}
                ${email} ${translations.body4}
-              `
-              }
+              `}
             </strong>
           </Text>
           <Text type="p">
-            <strong>
-              {translations.notSureWhere}&nbsp;
-            </strong>
+            <strong>{translations.notSureWhere}&nbsp;</strong>
             <Link newTab href="https://buffer.com/support">
               {translations.getInTouch}
             </Link>
           </Text>
-          <form style={{ paddingTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
+          <form
+            style={{
+              paddingTop: '1.5rem',
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          >
             <Button
               type="primary"
               onClick={hideModal}

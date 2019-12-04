@@ -34,26 +34,25 @@ const ShuffleQueue = ({
   <div>
     <Divider />
     <div style={shuffleQueueWrapperStyle}>
-      {showModal && <Popover
-        onOverlayClick={onCloseModal}
-      >
-        <ConfirmModal
-          onConfirmClick={onConfirmShuffleQueueClick}
-          onCloseModal={onCloseModal}
-          profileService={profileService}
-          avatar={avatarUrl}
-          heading={'Are you sure?'}
-          body={`Your first 200 queued updates for <span style="font-weight:bold">${profileName}</span> will be shuffled
+      {showModal && (
+        <Popover onOverlayClick={onCloseModal}>
+          <ConfirmModal
+            onConfirmClick={onConfirmShuffleQueueClick}
+            onCloseModal={onCloseModal}
+            profileService={profileService}
+            avatar={avatarUrl}
+            heading={'Are you sure?'}
+            body={`Your first 200 queued updates for <span style="font-weight:bold">${profileName}</span> will be shuffled
           into a completely random order.`}
-          btnText={loading ? 'Shuffling Queue..' : 'Shuffle Queue'}
-        />
-      </Popover>}
+            btnText={loading ? 'Shuffling Queue..' : 'Shuffle Queue'}
+          />
+        </Popover>
+      )}
       <div style={leftContentStyle}>
-        <Text type="h3">
-          Shuffle Queue
-        </Text>
+        <Text type="h3">Shuffle Queue</Text>
         <Text type="p">
-          Your first 200 queued updates will be shuffled into a completely random order.
+          Your first 200 queued updates will be shuffled into a completely
+          random order.
         </Text>
       </div>
       <div style={buttonWrapperStyle}>

@@ -20,18 +20,14 @@ const onClickButton = (tab, index, onClick) => {
   return onClick(toggleOption[index] || toggleOption['0']);
 };
 
-const QueueButtonGroup = ({
-  onClick,
-  buttons,
-  disabled,
-  tab,
-  viewType,
-}) => {
-  const [selectedIndex, setSelectedIndex] = useState(viewType === 'stories' ? 1 : 0);
+const QueueButtonGroup = ({ onClick, buttons, disabled, tab, viewType }) => {
+  const [selectedIndex, setSelectedIndex] = useState(
+    viewType === 'stories' ? 1 : 0
+  );
 
   return (
     <div>
-      { buttons.map((text, index) => (
+      {buttons.map((text, index) => (
         <QueueButton
           key={text}
           text={text}

@@ -1,5 +1,5 @@
 module.exports = featureData => {
-  const { features } = featureData
+  const { features } = featureData;
 
   return {
     features: features || {},
@@ -7,7 +7,7 @@ module.exports = featureData => {
       features.business === true
         ? 'business'
         : features.pro === true
-          ? 'pro'
-          : 'free',
-  }
-}
+        ? 'pro'
+        : 'free',
+  };
+};

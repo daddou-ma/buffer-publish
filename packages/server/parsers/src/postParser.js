@@ -1,23 +1,23 @@
-const { getDateString, isInThePast } = require('../../formatters/src')
-const { parseTwitterLinks, parseFacebookEntities } = require('./linkParsing')
+const { getDateString, isInThePast } = require('../../formatters/src');
+const { parseTwitterLinks, parseFacebookEntities } = require('./linkParsing');
 
 const getImageUrls = post => {
-  if (!(post.media && post.media.picture && post.extra_media)) return []
-  const imageUrls = post.extra_media.map(media => media.photo)
+  if (!(post.media && post.media.picture && post.extra_media)) return [];
+  const imageUrls = post.extra_media.map(media => media.photo);
 
-  imageUrls.unshift(post.media.picture)
-  return imageUrls
-}
+  imageUrls.unshift(post.media.picture);
+  return imageUrls;
+};
 
 const getPostActionString = ({ post }) => {
-  const timestampToConvert = post.sent_at || post.due_at
+  const timestampToConvert = post.sent_at || post.due_at;
   // due_at set to 0 when user has no scheduled posting times
   if (timestampToConvert === 0) {
-    return 'No Time Set'
+    return 'No Time Set';
   }
   const dateString = getDateString(timestampToConvert, post.profile_timezone, {
     twentyFourHourTime: post.twentyfour_hour_time,
-  })
+  });
 
   // to run in every situation except when can_send_direct is explicitly false.
   // if pinned is explicitly set to true, then post is not custom scheduled
@@ -28,7 +28,7 @@ const getPostActionString = ({ post }) => {
   ) {
     return `This post ${
       post.sent_at ? 'was' : 'is'
-    } custom scheduled for ${dateString}.`
+    } custom scheduled for ${dateString}.`;
   }
 
   if (
@@ -36,16 +36,16 @@ const getPostActionString = ({ post }) => {
     !post.can_send_direct &&
     !post.sent_at
   ) {
-    return `You will receive a reminder on ${dateString} when it's time to post.`
+    return `You will receive a reminder on ${dateString} when it's time to post.`;
   }
 
-  return `This post ${post.sent_at ? 'was' : 'will be'} sent ${dateString}.`
-}
+  return `This post ${post.sent_at ? 'was' : 'will be'} sent ${dateString}.`;
+};
 
 const getPostError = error => {
-  const isObject = typeof error === 'object' && error !== null
-  return isObject ? error.text || '' : error || ''
-}
+  const isObject = typeof error === 'object' && error !== null;
+  return isObject ? error.text || '' : error || '';
+};
 
 const getPostDetails = ({ post }) => ({
   postAction: getPostActionString({ post }),
@@ -57,12 +57,12 @@ const getPostDetails = ({ post }) => ({
     post.profile_service === 'instagram' && !post.can_send_direct
       ? true
       : false,
-})
+});
 
 const getRetweetProfileInfo = post => {
-  const retweet = post.retweet
+  const retweet = post.retweet;
   if (!retweet) {
-    return undefined
+    return undefined;
   }
 
   return {
@@ -72,26 +72,26 @@ const getRetweetProfileInfo = post => {
       (retweet.avatars && retweet.avatars.https) ||
       retweet.avatar_https ||
       'https://static.buffer.com/images/app/placeholder-twitter.png',
-  }
-}
+  };
+};
 
 const getPostType = ({ post }) => {
   if (!post.media || post.retweet) {
-    return 'text'
+    return 'text';
   } else if (post.media && post.media.picture && !post.extra_media) {
-    return 'image'
+    return 'image';
   } else if (post.media && post.media.picture && post.extra_media) {
-    return 'multipleImage'
+    return 'multipleImage';
   } else if (post.media && post.media.video) {
-    return 'video'
+    return 'video';
   } else if (post.media && post.media.link) {
-    return 'link'
+    return 'link';
   }
-  return 'text'
-}
+  return 'text';
+};
 
 const getUser = post => {
-  if (!post.user) return
+  if (!post.user) return;
 
   return {
     email: post.user.email,
@@ -99,70 +99,70 @@ const getUser = post => {
     gravatar: post.user.gravatar,
     avatar: post.user.avatar,
     id: post.user_id,
-  }
-}
+  };
+};
 
 const removeDuplicates = (arr, prop) => {
-  let obj = {}
+  let obj = {};
   return Object.keys(
     arr.reduce((prev, next) => {
-      if (!obj[next[prop]]) obj[next[prop]] = next
-      return obj
-    }, obj),
-  ).map(i => obj[i])
-}
+      if (!obj[next[prop]]) obj[next[prop]] = next;
+      return obj;
+    }, obj)
+  ).map(i => obj[i]);
+};
 
 module.exports = post => {
-  const media = post.media || {}
-  const isVideo = media.video
-  let retweetComment
-  let text
+  const media = post.media || {};
+  const isVideo = media.video;
+  let retweetComment;
+  let text;
 
   if (post.retweet) {
-    text = post.retweet.text
-    retweetComment = post.retweet.comment
+    text = post.retweet.text;
+    retweetComment = post.retweet.comment;
   } else {
-    text = post.text
+    text = post.text;
   }
 
   const canHaveLinks =
-    post.profile_service === 'twitter' || post.profile_service === 'facebook'
+    post.profile_service === 'twitter' || post.profile_service === 'facebook';
 
   const facebookLinks =
     post.profile_service === 'facebook'
       ? parseFacebookEntities(text, post.entities)
-      : []
+      : [];
 
-  const otherLinks = parseTwitterLinks(text)
+  const otherLinks = parseTwitterLinks(text);
 
   const safeOtherLinks = otherLinks.filter(link => {
-    const startIdx = link.indices[0]
-    const endIdx = link.indices[1]
+    const startIdx = link.indices[0];
+    const endIdx = link.indices[1];
     const hasClash = facebookLinks.some(facebookLink => {
-      const facebookStartIdx = facebookLink.indices[0]
-      const facebookEndIdx = facebookLink.indices[1]
-      const safe = endIdx < facebookStartIdx || startIdx > facebookEndIdx
-      return !safe
-    })
-    return !hasClash
-  })
+      const facebookStartIdx = facebookLink.indices[0];
+      const facebookEndIdx = facebookLink.indices[1];
+      const safe = endIdx < facebookStartIdx || startIdx > facebookEndIdx;
+      return !safe;
+    });
+    return !hasClash;
+  });
 
   const linksCreator = facebookLinks
     .concat(safeOtherLinks)
     .sort(
       ({ indices: [startIdxA] }, { indices: [startIdxB] }) =>
-        startIdxA - startIdxB,
-    )
+        startIdxA - startIdxB
+    );
 
-  const links = removeDuplicates(linksCreator, 'indices')
+  const links = removeDuplicates(linksCreator, 'indices');
 
   const retweetCommentLinks = canHaveLinks
     ? parseTwitterLinks(retweetComment)
-    : []
+    : [];
 
-  const isFixed = Boolean(post.error)
+  const isFixed = Boolean(post.error);
 
-  const isPastDue = isInThePast(post.scheduled_at)
+  const isPastDue = isInThePast(post.scheduled_at);
 
   return {
     day: post.day,

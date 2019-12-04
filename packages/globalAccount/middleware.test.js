@@ -30,12 +30,11 @@ describe('middleware', () => {
     };
 
     middleware(store)(next)(action);
-    expect(analyticsActions.init)
-      .toHaveBeenCalledWith('foo1', {
-        name: 'The Great Foo',
-        email: 'foo@buffer.com',
-        multiProductBundleName: null,
-      });
+    expect(analyticsActions.init).toHaveBeenCalledWith('foo1', {
+      name: 'The Great Foo',
+      email: 'foo@buffer.com',
+      multiProductBundleName: null,
+    });
   });
 
   it('it should send the bundle name information if the user is on an Analyze + Publish bundle', () => {
@@ -47,12 +46,10 @@ describe('middleware', () => {
     };
 
     middleware(store)(next)(action);
-    expect(analyticsActions.init)
-      .toHaveBeenCalledWith('foo1', {
-        name: 'The Great Foo',
-        email: 'foo@buffer.com',
-        multiProductBundleName: 'analyze_publish_eid_19',
-      });
+    expect(analyticsActions.init).toHaveBeenCalledWith('foo1', {
+      name: 'The Great Foo',
+      email: 'foo@buffer.com',
+      multiProductBundleName: 'analyze_publish_eid_19',
+    });
   });
-
 });

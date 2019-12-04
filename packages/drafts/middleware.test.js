@@ -1,9 +1,7 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import {
-  actions as dataFetchActions,
-} from '@bufferapp/async-data-fetch';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 import middleware from './middleware';
 
@@ -30,8 +28,7 @@ describe('middleware', () => {
   const getState = jest.fn(() => state);
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('should fetch draftPosts', () => {
@@ -42,10 +39,9 @@ describe('middleware', () => {
       location: { pathname: '/preferences/test' },
     };
     middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'draftPosts',
         args: {
           profileId: action.profileId,
@@ -53,7 +49,8 @@ describe('middleware', () => {
           needsApproval: false,
           clear: true,
         },
-      }));
+      })
+    );
   });
 
   it('should fetch deletePost', () => {
@@ -62,15 +59,15 @@ describe('middleware', () => {
       updateId: 'updateId1',
     };
     middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'deletePost',
         args: {
           updateId: action.updateId,
         },
-      }));
+      })
+    );
   });
 
   it('should fetch approveDraft', () => {
@@ -79,15 +76,15 @@ describe('middleware', () => {
       updateId: 'updateId1',
     };
     middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'approveDraft',
         args: {
           updateId: action.updateId,
         },
-      }));
+      })
+    );
   });
 
   it('should fetch changeDraftStatus', () => {
@@ -97,16 +94,16 @@ describe('middleware', () => {
       updateId: 'updateId1',
     };
     middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'changeDraftStatus',
         args: {
           updateId: action.updateId,
           needsApproval: action.needsApproval,
         },
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if draft is successfully approved', () => {
@@ -116,14 +113,14 @@ describe('middleware', () => {
       result: { update: {}, draft: {} },
     });
     middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
-        message: 'We\'ve added this draft to your queue!',
-      }));
+        message: "We've added this draft to your queue!",
+      })
+    );
   });
 
   it('should trigger a notification if draft is successfully moved', () => {
@@ -133,14 +130,14 @@ describe('middleware', () => {
       result: { update: {}, draft: {} },
     });
     middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
-        message: 'We\'ve successfully moved this draft!',
-      }));
+        message: "We've successfully moved this draft!",
+      })
+    );
   });
 
   it('should trigger a notification if there is an error approving the draft', () => {
@@ -149,14 +146,14 @@ describe('middleware', () => {
       name: RPC_NAME,
     });
     middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'error',
         message: 'There was an error adding this draft to your queue!',
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if there is an error moving the draft', () => {
@@ -165,14 +162,14 @@ describe('middleware', () => {
       name: RPC_NAME,
     });
     middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'error',
         message: 'There was an error moving this draft!',
-      }));
+      })
+    );
   });
   describe('segment tracking', () => {
     const expectedTrackingObj = {
@@ -189,13 +186,16 @@ describe('middleware', () => {
       const action = dataFetchActions.fetchSuccess({
         name: RPC_NAME,
         result: {
-          update: {}, draft: { needs_approval: true, id: 'foo', type: 'text' },
+          update: {},
+          draft: { needs_approval: true, id: 'foo', type: 'text' },
         },
       });
 
       middleware({ dispatch, getState })(next)(action);
-      expect(analyticsActions.trackEvent)
-      .toHaveBeenCalledWith('Draft Submitted', expectedTrackingObj);
+      expect(analyticsActions.trackEvent).toHaveBeenCalledWith(
+        'Draft Submitted',
+        expectedTrackingObj
+      );
     });
     it('it should track analytics-middleware on draft rejected', () => {
       analyticsActions.trackEvent = jest.fn();
@@ -203,7 +203,8 @@ describe('middleware', () => {
       const action = dataFetchActions.fetchSuccess({
         name: RPC_NAME,
         result: {
-          update: {}, draft: { needs_approval: false, id: 'foo', type: 'text' },
+          update: {},
+          draft: { needs_approval: false, id: 'foo', type: 'text' },
         },
       });
 
@@ -222,8 +223,10 @@ describe('middleware', () => {
         draft: { id: 'foo', type: 'text' },
       };
       middleware({ dispatch, getState })(next)(action);
-      expect(analyticsActions.trackEvent)
-      .toHaveBeenCalledWith('Draft Deleted', expectedTrackingObj);
+      expect(analyticsActions.trackEvent).toHaveBeenCalledWith(
+        'Draft Deleted',
+        expectedTrackingObj
+      );
     });
 
     it('it should track analytics-middleware on approveDraft', () => {
@@ -237,9 +240,10 @@ describe('middleware', () => {
       });
 
       middleware({ dispatch, getState })(next)(action);
-      expect(analyticsActions.trackEvent)
-      .toHaveBeenCalledWith('Draft Approved', expectedTrackingObj);
+      expect(analyticsActions.trackEvent).toHaveBeenCalledWith(
+        'Draft Approved',
+        expectedTrackingObj
+      );
     });
   });
-
 });

@@ -4,13 +4,16 @@ const rp = require('request-promise');
 module.exports = method(
   'updatePausedSchedules',
   'update paused schedules for profile',
-  async ({
-    profileId,
-    pausedSchedules,
-    schedules,
-    emptyPausedSchedules,
-    showNotification,
-  }, { session }) => {
+  async (
+    {
+      profileId,
+      pausedSchedules,
+      schedules,
+      emptyPausedSchedules,
+      showNotification,
+    },
+    { session }
+  ) => {
     let result;
     try {
       result = await rp({
@@ -36,5 +39,5 @@ module.exports = method(
     result.pausedSchedules = pausedSchedules;
     result.showNotification = showNotification;
     return Promise.resolve(result);
-  },
+  }
 );

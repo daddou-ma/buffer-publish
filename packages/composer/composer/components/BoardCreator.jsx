@@ -7,7 +7,6 @@ import NotificationContainer from '../components/NotificationContainer';
 import Input from '../components/Input';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
 
-
 class BoardCreator extends React.Component {
   static propTypes = {
     subprofiles: PropTypes.array,
@@ -20,15 +19,14 @@ class BoardCreator extends React.Component {
     this.state = this.getInitialBoardCreatorState();
   }
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
-    const notifications = this.props.visibleNotifications.filter((notif) =>
-      notif.scope === NotificationScopes.BOARD_CREATION
+    const notifications = this.props.visibleNotifications.filter(
+      notif => notif.scope === NotificationScopes.BOARD_CREATION
     );
     for (const notification of notifications) {
       NotificationActionCreators.removeNotification(notification.id);
     }
-
 
     const boardName = this.state.boardName;
     const profileId = this.props.profile.id;
@@ -38,7 +36,7 @@ class BoardCreator extends React.Component {
     this.setState(this.getInitialBoardCreatorState());
   };
 
-  onChange = (e) => {
+  onChange = e => {
     this.setState({
       boardName: e.target.value,
     });
@@ -49,18 +47,22 @@ class BoardCreator extends React.Component {
   });
 
   render() {
-    const isSubprofileCreationPending = this.props.profile.appState.isSubprofileCreationPending;
+    const isSubprofileCreationPending = this.props.profile.appState
+      .isSubprofileCreationPending;
     const isBoardNameEmpty = this.state.boardName.length === 0;
 
     const isDisabled = isBoardNameEmpty || isSubprofileCreationPending;
-    const submitButtonLabel = isSubprofileCreationPending ? 'Creating…' : 'Create';
+    const submitButtonLabel = isSubprofileCreationPending
+      ? 'Creating…'
+      : 'Create';
 
-    const submitButtonClassName = isDisabled ?
-      styles.disabledCreateButton : styles.createBoardButton;
+    const submitButtonClassName = isDisabled
+      ? styles.disabledCreateButton
+      : styles.createBoardButton;
 
-    const visibileNotificationsForProfile =
-      this.props.visibleNotifications.filter((notif) =>
-      notif.data.profileId === this.props.profile.id);
+    const visibileNotificationsForProfile = this.props.visibleNotifications.filter(
+      notif => notif.data.profileId === this.props.profile.id
+    );
 
     return (
       <div className={styles.createNewBoard}>
@@ -83,7 +85,6 @@ class BoardCreator extends React.Component {
           scope={NotificationScopes.BOARD_CREATION}
         />
       </div>
-
     );
   }
 }

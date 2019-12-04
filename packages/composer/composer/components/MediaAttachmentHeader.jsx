@@ -6,7 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './css/MediaAttachmentHeader.css';
 
-const MediaAttachmentHeader = (props) => {
+const MediaAttachmentHeader = props => {
   const maxAttachableImagesCount = props.maxAttachableImagesCount;
 
   const mediaAttachmentHeaderClassName = [
@@ -16,7 +16,8 @@ const MediaAttachmentHeader = (props) => {
 
   return (
     <div className={mediaAttachmentHeaderClassName}>
-      Add up to {maxAttachableImagesCount} image{(maxAttachableImagesCount > 1 ? 's ' : ' ')}
+      Add up to {maxAttachableImagesCount} image
+      {maxAttachableImagesCount > 1 ? 's ' : ' '}
       or 1 video
     </div>
   );

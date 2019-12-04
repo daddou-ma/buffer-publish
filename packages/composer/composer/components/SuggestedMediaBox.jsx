@@ -13,7 +13,10 @@ import Button from '../components/Button';
 import SuggestedMediaThumbnailInfo from './SuggestedMediaThumbnailInfo';
 import styles from './css/SuggestedMediaBox.css';
 import videoAttachmentThumbnailStyles from './css/VideoAttachmentThumbnail.css';
-import { getHumanReadableSize, getHumanReadableTime } from '../utils/StringUtils';
+import {
+  getHumanReadableSize,
+  getHumanReadableTime,
+} from '../utils/StringUtils';
 
 class SuggestedMediaBox extends React.Component {
   static propTypes = {
@@ -41,14 +44,17 @@ class SuggestedMediaBox extends React.Component {
 
   componentWillUnmount = () => this.updateScrollButtonsDisplay.cancel();
 
-  onThumbnailClick = (media) => {
+  onThumbnailClick = media => {
     switch (media.mediaType) {
       case MediaTypes.IMAGE:
         ComposerActionCreators.addDraftImage(this.props.draftId, media);
-        AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
-          addedFrom: 'suggested_media',
-          isGif: false,
-        });
+        AppActionCreators.trackUserAction(
+          ['composer', 'media', 'added_photo'],
+          {
+            addedFrom: 'suggested_media',
+            isGif: false,
+          }
+        );
         break;
 
       case MediaTypes.VIDEO:
@@ -57,10 +63,13 @@ class SuggestedMediaBox extends React.Component {
 
       case MediaTypes.GIF:
         ComposerActionCreators.addDraftGif(this.props.draftId, media);
-        AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
-          addedFrom: 'suggested_media',
-          isGif: true,
-        });
+        AppActionCreators.trackUserAction(
+          ['composer', 'media', 'added_photo'],
+          {
+            addedFrom: 'suggested_media',
+            isGif: true,
+          }
+        );
         break;
 
       default:
@@ -68,16 +77,17 @@ class SuggestedMediaBox extends React.Component {
     }
   };
 
-  onThumbnailMouseOver = (media) => {
-    const tempImage = media.mediaType === MediaTypes.VIDEO ? media.thumbnail : media.url;
+  onThumbnailMouseOver = media => {
+    const tempImage =
+      media.mediaType === MediaTypes.VIDEO ? media.thumbnail : media.url;
     ComposerActionCreators.updateDraftTempImage(this.props.draftId, tempImage);
   };
 
-  onThumbnailMouseOut = (e) => {
+  onThumbnailMouseOut = e => {
     ComposerActionCreators.removeDraftTempImage(this.props.draftId);
   };
 
-  getSuggestedMediaItem = (suggestedItem) => {
+  getSuggestedMediaItem = suggestedItem => {
     const mediaType = suggestedItem.mediaType;
     let suggestedMediaItem;
     const hasDimensionsData = suggestedItem.width && suggestedItem.height;
@@ -98,11 +108,12 @@ class SuggestedMediaBox extends React.Component {
             alt="Thumbnail of Suggested Media"
           />
 
-          {hasDimensionsData &&
+          {hasDimensionsData && (
             <SuggestedMediaThumbnailInfo
               width={suggestedItem.width}
               height={suggestedItem.height}
-            />}
+            />
+          )}
         </Button>
       );
     } else if (mediaType === MediaTypes.GIF) {
@@ -116,19 +127,24 @@ class SuggestedMediaBox extends React.Component {
           key={`${suggestedItem.url}-${this.props.draftId}`}
         >
           <img
-            src={suggestedItem.url} className={styles.thumbnail}
+            src={suggestedItem.url}
+            className={styles.thumbnail}
             alt="Thumbnail of Suggested GIF"
           />
 
-          {hasDimensionsData &&
+          {hasDimensionsData && (
             <SuggestedMediaThumbnailInfo
               width={suggestedItem.width}
               height={suggestedItem.height}
-            />}
+            />
+          )}
         </Button>
       );
     } else if (mediaType === MediaTypes.VIDEO) {
-      const iconClassName = ['bi bi-video', videoAttachmentThumbnailStyles.videoIcon].join(' ');
+      const iconClassName = [
+        'bi bi-video',
+        videoAttachmentThumbnailStyles.videoIcon,
+      ].join(' ');
 
       suggestedMediaItem = (
         <div
@@ -151,7 +167,9 @@ class SuggestedMediaBox extends React.Component {
             <span className={videoAttachmentThumbnailStyles.videoDataContainer}>
               <div className={iconClassName} />
               <div className={videoAttachmentThumbnailStyles.thumbnailInfo}>
-                <div className={videoAttachmentThumbnailStyles.thumbnailInfoText}>
+                <div
+                  className={videoAttachmentThumbnailStyles.thumbnailInfoText}
+                >
                   <div className={videoAttachmentThumbnailStyles.videoSize}>
                     {getHumanReadableSize(suggestedItem.size)}
                   </div>
@@ -169,17 +187,17 @@ class SuggestedMediaBox extends React.Component {
     return suggestedMediaItem;
   };
 
-  scrollXBy = (delta) => {
+  scrollXBy = delta => {
     this.suggestionsScrollContainer.scrollLeft += delta;
   };
 
-  scrollLeft = (e) => {
+  scrollLeft = e => {
     e.preventDefault();
     this.scrollXBy(-120);
     this.updateScrollButtonsDisplay();
   };
 
-  scrollRight = (e) => {
+  scrollRight = e => {
     e.preventDefault();
     this.scrollXBy(120);
     this.updateScrollButtonsDisplay();
@@ -189,10 +207,12 @@ class SuggestedMediaBox extends React.Component {
     const container = this.suggestionsScrollContainer;
     const canScrollLeft = container.scrollLeft > 0;
     const canScrollRight =
-      container.scrollLeft < (container.scrollWidth - container.offsetWidth - 1);
+      container.scrollLeft < container.scrollWidth - container.offsetWidth - 1;
 
-    if (canScrollLeft !== this.state.canScrollLeft ||
-        canScrollRight !== this.state.canScrollRight) {
+    if (
+      canScrollLeft !== this.state.canScrollLeft ||
+      canScrollRight !== this.state.canScrollRight
+    ) {
       this.setState({ canScrollLeft, canScrollRight });
     }
   }, 100);
@@ -225,24 +245,28 @@ class SuggestedMediaBox extends React.Component {
 
           <div className={styles.scrollControlsContainer}>
             <Button
-              className={scrollLeftButtonClassName} onClick={this.scrollLeft}
-              aria-label="Scroll suggested media left" disabled={!canScrollLeft}
+              className={scrollLeftButtonClassName}
+              onClick={this.scrollLeft}
+              aria-label="Scroll suggested media left"
+              disabled={!canScrollLeft}
             />
             <Button
-              className={scrollRightButtonClassName} onClick={this.scrollRight}
-              aria-label="Scroll suggested media right" disabled={!canScrollRight}
+              className={scrollRightButtonClassName}
+              onClick={this.scrollRight}
+              aria-label="Scroll suggested media right"
+              disabled={!canScrollRight}
             />
           </div>
 
           <div className={styles.suggestionsContainer}>
             <div
               className={styles.suggestionsScrollContainer}
-              ref={(ref) => (this.suggestionsScrollContainer = ref)}
+              ref={ref => (this.suggestionsScrollContainer = ref)}
               onScroll={this.updateScrollButtonsDisplay}
             >
-              {[...suggestedMedia].map((suggestedItem) => (
+              {[...suggestedMedia].map(suggestedItem =>
                 this.getSuggestedMediaItem(suggestedItem)
-              ))}
+              )}
             </div>
           </div>
         </div>

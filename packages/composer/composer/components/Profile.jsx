@@ -10,7 +10,10 @@ import { escapeParens } from '../utils/StringUtils';
 import styles from './css/Profile.css';
 import BoardSelector from '../components/BoardSelector';
 import Button from '../components/Button';
-import Dropdown, { DropdownTrigger, DropdownContent } from '../components/Dropdown';
+import Dropdown, {
+  DropdownTrigger,
+  DropdownContent,
+} from '../components/Dropdown';
 import { scrollIntoView } from '../utils/DOMUtils';
 
 class Profile extends React.Component {
@@ -28,7 +31,8 @@ class Profile extends React.Component {
       this.props.addContainerScrollHandler(this.onContainerScroll);
 
       const wasSubprofileDropdownJustExpanded =
-        this.props.profile.id === this.props.expandedProfileSubprofileDropdownId;
+        this.props.profile.id ===
+        this.props.expandedProfileSubprofileDropdownId;
 
       if (wasSubprofileDropdownJustExpanded) this.scrollProfileIntoView();
     }
@@ -47,26 +51,26 @@ class Profile extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.hasSubprofiles()) this.props.removeContainerScrollHandler(this.onContainerScroll);
+    if (this.hasSubprofiles())
+      this.props.removeContainerScrollHandler(this.onContainerScroll);
   }
 
   onContainerScroll = (e, scrollTop) => {
     const dropdownContent = ReactDOM.findDOMNode(this.refs.dropdownContent);
     const spacingFromProfileContainer = 5;
 
-    const yTranslation = (
-      this.profileContainerTopOffset
-      + this.profileContainerHeight
-      + spacingFromProfileContainer
-      - scrollTop
-    );
+    const yTranslation =
+      this.profileContainerTopOffset +
+      this.profileContainerHeight +
+      spacingFromProfileContainer -
+      scrollTop;
 
     dropdownContent.style.top = 0; // Anchor to top of parent on scroll, until then keep natural pos
     dropdownContent.style.transform = `translateY(${yTranslation}px)`; // And translate accordingly
     dropdownContent.style.webkitTransform = `translateY(${yTranslation}px)`; // Manual prefixing
   };
 
-  onClick = (e) => {
+  onClick = e => {
     const profile = this.props.profile;
 
     if (profile.isSelected) {
@@ -85,27 +89,30 @@ class Profile extends React.Component {
 
   // Give DOM events that could possibly be causing this method to run an
   // opportunity to propagate to all handlers before collapsing the dropdown
-  onSubprofileDropdownCollapsed = () => setImmediate(() => {
-    AppActionCreators.collapseProfileSubprofileDropdown(this.props.profile.id);
-  });
+  onSubprofileDropdownCollapsed = () =>
+    setImmediate(() => {
+      AppActionCreators.collapseProfileSubprofileDropdown(
+        this.props.profile.id
+      );
+    });
 
   // Give DOM events that could possibly be causing this method to run an
   // opportunity to propagate to all handlers before expanding the dropdown
-  onSubprofileDropdownExpanded = () => setImmediate(() => {
-    const { profile } = this.props;
+  onSubprofileDropdownExpanded = () =>
+    setImmediate(() => {
+      const { profile } = this.props;
 
-    AppActionCreators.expandProfileSubprofileDropdown(profile.id);
-    AppActionCreators.refreshSubprofileData(profile.id);
-  });
+      AppActionCreators.expandProfileSubprofileDropdown(profile.id);
+      AppActionCreators.refreshSubprofileData(profile.id);
+    });
 
   hasSubprofiles = () => {
     const service = Services.get(this.props.profile.service.name);
     return service.hasSubprofiles;
   };
 
-  isSubprofileDropdownExpanded = () => (
-    this.props.expandedProfileSubprofileDropdownId === this.props.profile.id
-  );
+  isSubprofileDropdownExpanded = () =>
+    this.props.expandedProfileSubprofileDropdownId === this.props.profile.id;
 
   get profileContainerTopOffset() {
     if (!this._profileContainerTopOffset) {
@@ -138,33 +145,40 @@ class Profile extends React.Component {
     const { profile, visibleNotifications } = this.props;
     const hasSubprofiles = this.hasSubprofiles();
     const formattedServiceType =
-      profile.serviceType.charAt(0).toUpperCase() + profile.serviceType.slice(1);
+      profile.serviceType.charAt(0).toUpperCase() +
+      profile.serviceType.slice(1);
 
     const profileContainerClassName = [
-      profile.isDisabled ? styles.lockedProfileContainer : styles.profileContainer,
+      profile.isDisabled
+        ? styles.lockedProfileContainer
+        : styles.profileContainer,
       profile.isDisabled ? 'bi bi-lock' : null,
       this.props.className,
       'js-disable-dragging',
     ].join(' ');
 
-    const profileClassName =
-      profile.isSelected ? styles.selectedProfile : styles.unselectedProfile;
+    const profileClassName = profile.isSelected
+      ? styles.selectedProfile
+      : styles.unselectedProfile;
 
-    const profilePictureClassName = profile.isSelected ?
-      styles.selectedProfilePicture : styles.unselectedProfilePicture;
+    const profilePictureClassName = profile.isSelected
+      ? styles.selectedProfilePicture
+      : styles.unselectedProfilePicture;
 
-    const profilePictureContainerClassName =
-      profile.isSelected ? null : styles.unselectedProfilePictureContainer;
+    const profilePictureContainerClassName = profile.isSelected
+      ? null
+      : styles.unselectedProfilePictureContainer;
 
     const socialNetworkIconClassName = [
       styles[`${profile.service.name}Icon`],
       `bi bi-circle-${profile.service.name}`,
     ].join(' ');
 
-    const profileDropdownTriggerClassName =
-      this.isSubprofileDropdownExpanded() ? styles.expandedProfileDropdownTrigger :
-      profile.isDisabled ? styles.lockedProfileDropdownTrigger :
-      styles.profileDropdownTrigger;
+    const profileDropdownTriggerClassName = this.isSubprofileDropdownExpanded()
+      ? styles.expandedProfileDropdownTrigger
+      : profile.isDisabled
+      ? styles.lockedProfileDropdownTrigger
+      : styles.profileDropdownTrigger;
 
     const profilePictureStyle = {
       backgroundImage: `url(${escapeParens(profile.images.avatar)})`,
@@ -173,13 +187,13 @@ class Profile extends React.Component {
     const selectedText = profile.isSelected ? 'Selected profile' : '';
 
     const profileTooltipBaseContents = `${profile.service.username} - ${formattedServiceType}`;
-    const profileTooltipContents = profile.isDisabled ?
-      `${profileTooltipBaseContents} (${profile.disabledMessage || 'locked'})` :
-      profileTooltipBaseContents;
+    const profileTooltipContents = profile.isDisabled
+      ? `${profileTooltipBaseContents} (${profile.disabledMessage || 'locked'})`
+      : profileTooltipBaseContents;
 
     return (
       <div className={profileContainerClassName} ref="profileContainer">
-        {hasSubprofiles &&
+        {hasSubprofiles && (
           <Dropdown
             isDropdownExpanded={this.isSubprofileDropdownExpanded()}
             onHide={this.onSubprofileDropdownCollapsed}
@@ -198,7 +212,10 @@ class Profile extends React.Component {
                         ${profile.service.name} ${formattedServiceType}`}
               >
                 <span className={profilePictureContainerClassName}>
-                  <span className={profilePictureClassName} style={profilePictureStyle} />
+                  <span
+                    className={profilePictureClassName}
+                    style={profilePictureStyle}
+                  />
                 </span>
                 <span className={socialNetworkIconClassName} />
               </div>
@@ -208,14 +225,16 @@ class Profile extends React.Component {
               ref="dropdownContent"
             >
               <BoardSelector
-                subprofiles={profile.subprofiles} profile={profile}
+                subprofiles={profile.subprofiles}
+                profile={profile}
                 subprofilesCount={profile.subprofiles.length}
                 visibleNotifications={visibleNotifications}
               />
             </DropdownContent>
-          </Dropdown>}
+          </Dropdown>
+        )}
 
-        {!hasSubprofiles &&
+        {!hasSubprofiles && (
           <div data-tip={profileTooltipContents}>
             <Button
               onClick={this.onClick}
@@ -226,11 +245,15 @@ class Profile extends React.Component {
                       ${profile.service.name} ${formattedServiceType}`}
             >
               <span className={profilePictureContainerClassName}>
-                <span className={profilePictureClassName} style={profilePictureStyle} />
+                <span
+                  className={profilePictureClassName}
+                  style={profilePictureStyle}
+                />
               </span>
               <span className={socialNetworkIconClassName} />
             </Button>
-          </div>}
+          </div>
+        )}
       </div>
     );
   }

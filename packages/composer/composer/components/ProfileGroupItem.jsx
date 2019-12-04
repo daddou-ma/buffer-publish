@@ -11,24 +11,27 @@ class ProfileGroupItem extends React.Component {
     selectedProfileGroupsIds: PropTypes.array.isRequired,
   };
 
-  onClick = (e) => {
+  onClick = e => {
     const { group, selectedProfileGroupsIds } = this.props;
     const { id } = group;
 
-    if (this.isSelected(id)) AppActionCreators.unselectGroupProfiles(id, selectedProfileGroupsIds);
+    if (this.isSelected(id))
+      AppActionCreators.unselectGroupProfiles(id, selectedProfileGroupsIds);
     else AppActionCreators.selectGroupProfiles(id);
 
     e.preventDefault();
   };
 
-  isSelected = (id) => this.props.selectedProfileGroupsIds.includes(id);
+  isSelected = id => this.props.selectedProfileGroupsIds.includes(id);
 
   render() {
     const { group } = this.props;
     const profilesCount = group.profileIds.length;
 
     const groupItemClassName = [
-      this.isSelected(group.id) ? styles.selectedGroupBtn : styles.unselectedGroupBtn,
+      this.isSelected(group.id)
+        ? styles.selectedGroupBtn
+        : styles.unselectedGroupBtn,
       'js-disable-dragging',
     ].join(' ');
 

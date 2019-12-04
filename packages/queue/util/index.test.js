@@ -588,7 +588,7 @@ describe('queue utils', () => {
       const hasSlotSchedules = isScheduleSlotsAvailable(schedules);
       expect(hasSlotSchedules).toBeTruthy();
     });
-    it('should return false if current profile doesn\'t have schedules', () => {
+    it("should return false if current profile doesn't have schedules", () => {
       const hasSlotSchedules = isScheduleSlotsAvailable(schedulesNotSet);
       expect(hasSlotSchedules).toBeFalsy();
     });

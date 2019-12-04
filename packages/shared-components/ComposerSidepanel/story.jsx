@@ -22,10 +22,7 @@ storiesOf('ComposerSidepanel', module)
   .add('should show composer sidepanel', () => (
     <div style={wrapperStyle}>
       <div style={composerStyle}>
-        <ComposerSidepanel
-          isVisible
-          onClose={action('onClose')}
-        >
+        <ComposerSidepanel isVisible onClose={action('onClose')}>
           Sidepanel content
         </ComposerSidepanel>
       </div>
@@ -35,12 +32,9 @@ storiesOf('ComposerSidepanel', module)
   .add('should not show composer sidepanel', () => (
     <div style={wrapperStyle}>
       <div style={composerStyle}>
-        <ComposerSidepanel
-          isVisible={false}
-          onClose={action('onClose')}
-        >
+        <ComposerSidepanel isVisible={false} onClose={action('onClose')}>
           Sidepanel content
         </ComposerSidepanel>
       </div>
     </div>
-));
+  ));

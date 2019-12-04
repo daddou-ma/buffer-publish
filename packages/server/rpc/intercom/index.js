@@ -12,5 +12,5 @@ module.exports = method(
       qs: {
         access_token: session.publish.accessToken,
       },
-    }).then(result => JSON.parse(result)),
+    }).then(result => JSON.parse(result))
 );

@@ -1,7 +1,11 @@
 import cloneDeep from 'lodash.clonedeep';
 import twitterText from 'twitter-text';
 import AppDispatcher from '../dispatcher';
-import { ActionTypes, AttachmentTypes, NotificationScopes } from '../AppConstants';
+import {
+  ActionTypes,
+  AttachmentTypes,
+  NotificationScopes,
+} from '../AppConstants';
 import AppHooks from '../utils/LifecycleHooks';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
@@ -12,9 +16,12 @@ import { observeStore } from '../utils/StoreUtils';
 import WebAPIUtils from '../utils/WebAPIUtils';
 
 const loadInitialProfilesData = (profilesData, options) => {
-  const autoSelectedProfiles =
-    profilesData.filter((profile) => profile.shouldBeAutoSelected && !profile.isDisabled);
-  const autoSelectedProfilesIds = autoSelectedProfiles.map((profile) => profile.id);
+  const autoSelectedProfiles = profilesData.filter(
+    profile => profile.shouldBeAutoSelected && !profile.isDisabled
+  );
+  const autoSelectedProfilesIds = autoSelectedProfiles.map(
+    profile => profile.id
+  );
   const autoSelectedProfilesSubprofilesIds = new Map();
   const hasAutoSelectedProfilesIds = autoSelectedProfilesIds.length > 0;
   const hasOnlyOneProfileConnected = profilesData.length === 1;
@@ -26,34 +33,42 @@ const loadInitialProfilesData = (profilesData, options) => {
    */
   const shouldEnsureAllSelectedProfilesHaveSubprofileSelected = !options.canSelectProfiles;
   if (shouldEnsureAllSelectedProfilesHaveSubprofileSelected) {
-    profilesData.forEach((profile) => {
+    profilesData.forEach(profile => {
       const hasSubprofiles = profile.subprofiles.length > 0;
       if (!profile.shouldBeAutoSelected || !hasSubprofiles) return;
 
-      const doesProfileHaveSelectedSubprofile =
-        profile.subprofiles.some((subprofile) => subprofile.shouldBeAutoSelected);
+      const doesProfileHaveSelectedSubprofile = profile.subprofiles.some(
+        subprofile => subprofile.shouldBeAutoSelected
+      );
       const shouldAutoSelectFirstSubprofile = !doesProfileHaveSelectedSubprofile;
 
-      if (shouldAutoSelectFirstSubprofile) profile.subprofiles[0].shouldBeAutoSelected = true;
+      if (shouldAutoSelectFirstSubprofile)
+        profile.subprofiles[0].shouldBeAutoSelected = true;
     });
   }
 
-  autoSelectedProfiles.forEach((profile) => {
+  autoSelectedProfiles.forEach(profile => {
     const hasSubprofiles = profile.subprofiles.length > 0;
     const profileId = profile.id;
 
     if (hasSubprofiles) {
-      const autoSelectedSubprofile =
-        profile.subprofiles.find((subprofile) => subprofile.shouldBeAutoSelected);
-      const hasAutoSelectedSubprofile = typeof autoSelectedSubprofile !== 'undefined';
+      const autoSelectedSubprofile = profile.subprofiles.find(
+        subprofile => subprofile.shouldBeAutoSelected
+      );
+      const hasAutoSelectedSubprofile =
+        typeof autoSelectedSubprofile !== 'undefined';
 
       if (hasAutoSelectedSubprofile) {
-        autoSelectedProfilesSubprofilesIds.set(profileId, autoSelectedSubprofile.id);
+        autoSelectedProfilesSubprofilesIds.set(
+          profileId,
+          autoSelectedSubprofile.id
+        );
       }
     }
   });
 
-  const hasAutoSelectedSubprofiles = autoSelectedProfilesSubprofilesIds.size > 0;
+  const hasAutoSelectedSubprofiles =
+    autoSelectedProfilesSubprofilesIds.size > 0;
 
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.COMPOSER_CREATE_PROFILES,
@@ -85,59 +100,60 @@ const loadInitialProfilesData = (profilesData, options) => {
   }
 };
 
-const loadInitialUserData = (userData) => {
+const loadInitialUserData = userData => {
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.APP_RECEIVE_USER_DATA,
     userData,
   });
 };
 
-const loadInitialImageDimensionsKey = (imageDimensionsKey) => {
+const loadInitialImageDimensionsKey = imageDimensionsKey => {
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.APP_RECEIVE_IMAGE_DIMENSIONS_KEY,
     imageDimensionsKey,
   });
 };
 
-const dispatchAutoUploadedImage = (image) => new Promise((resolve) => {
-  const isGif = getFileTypeFromPath(image.picture) === 'gif';
+const dispatchAutoUploadedImage = image =>
+  new Promise(resolve => {
+    const isGif = getFileTypeFromPath(image.picture) === 'gif';
 
-  if (isGif) {
-    getStillDataUriFromGif(image.picture)
-      .then((dataUri) => {
-        AppDispatcher.handleViewAction({
-          actionType: ActionTypes.COMPOSER_ADD_DRAFTS_AUTO_UPLOADED_GIF,
-          url: image.picture,
-          stillGifUrl: dataUri,
+    if (isGif) {
+      getStillDataUriFromGif(image.picture)
+        .then(dataUri => {
+          AppDispatcher.handleViewAction({
+            actionType: ActionTypes.COMPOSER_ADD_DRAFTS_AUTO_UPLOADED_GIF,
+            url: image.picture,
+            stillGifUrl: dataUri,
+          });
+          resolve();
+        })
+        .catch(() => {
+          AppDispatcher.handleViewAction({
+            actionType: ActionTypes.COMPOSER_ADD_DRAFTS_AUTO_UPLOADED_GIF,
+            url: image.picture,
+            stillGifUrl: null,
+          });
+          resolve();
         });
-        resolve();
-      })
-      .catch(() => {
-        AppDispatcher.handleViewAction({
-          actionType: ActionTypes.COMPOSER_ADD_DRAFTS_AUTO_UPLOADED_GIF,
-          url: image.picture,
-          stillGifUrl: null,
-        });
-        resolve();
+    } else {
+      AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_ADD_DRAFTS_AUTO_UPLOADED_IMAGE,
+        url: image.picture,
+        altText: image.alt_text,
       });
-  } else {
-    AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_ADD_DRAFTS_AUTO_UPLOADED_IMAGE,
-      url: image.picture,
-      altText: image.alt_text,
-    });
-    resolve();
-  }
-});
+      resolve();
+    }
+  });
 
-const loadInitialOptions = (options) => {
+const loadInitialOptions = options => {
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.APP_RECEIVE_OPTIONS,
     options,
   });
 };
 
-const loadInitialMetaData = (metaData) => {
+const loadInitialMetaData = metaData => {
   // Dispatch all metadata
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.APP_RECEIVE_METADATA,
@@ -157,10 +173,12 @@ const loadInitialMetaData = (metaData) => {
     });
   }
 
-  const hasRetweetComment = metaData.retweetData && metaData.retweetData.comment;
+  const hasRetweetComment =
+    metaData.retweetData && metaData.retweetData.comment;
   if (metaData.text || metaData.url || metaData.via || hasRetweetComment) {
     let text = metaData.text || '';
-    if (hasRetweetComment) text = `${metaData.retweetData.comment} ${text}`.trim();
+    if (hasRetweetComment)
+      text = `${metaData.retweetData.comment} ${text}`.trim();
 
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_SET_DRAFTS_INITIAL_TEXT,
@@ -173,27 +191,26 @@ const loadInitialMetaData = (metaData) => {
       isEditing: metaData.updateId !== null,
     });
 
-    observeStore(AppStore, (store) => store.getAppState().isLoaded)
-      .then(() => {
-        AppDispatcher.handleViewAction({
-          actionType: ActionTypes.COMPOSER_PARSE_DRAFTS_TEXT_LINKS,
-        });
+    observeStore(AppStore, store => store.getAppState().isLoaded).then(() => {
+      AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_PARSE_DRAFTS_TEXT_LINKS,
       });
+    });
   }
 
-  const initialUrlsInText = metaData.text ?
-    twitterText.extractUrlsWithIndices(metaData.text)
-      .map((urlWithIndices) => urlWithIndices.url) :
-    null;
-  const initialUrl = metaData.url || (initialUrlsInText && initialUrlsInText[0]);
+  const initialUrlsInText = metaData.text
+    ? twitterText
+        .extractUrlsWithIndices(metaData.text)
+        .map(urlWithIndices => urlWithIndices.url)
+    : null;
+  const initialUrl =
+    metaData.url || (initialUrlsInText && initialUrlsInText[0]);
 
   // Don't auto-attach link when importing an update to edit that didn't
   // have a link attached in the first place
   const isEditingUpdate = metaData.updateId !== null;
-  const preventAutoAttachingLink = (
-    isEditingUpdate &&
-    metaData.linkData === null
-  );
+  const preventAutoAttachingLink =
+    isEditingUpdate && metaData.linkData === null;
 
   if (initialUrl) {
     // If we haven't auto-attached a link on init, also prevent that same link
@@ -280,38 +297,37 @@ const loadInitialMetaData = (metaData) => {
   }
 
   if (metaData.images) {
-    const dispatches = metaData.images.map((image) => dispatchAutoUploadedImage(image));
+    const dispatches = metaData.images.map(image =>
+      dispatchAutoUploadedImage(image)
+    );
 
     // TODO: Instead of blocking on dispatchAutoUploadedImage(), we could dispatch instantly,
     // and dispatch one more time once stillGifUrl has been generated, like dimensions below
-    Promise.all(dispatches)
-      .then(() => {
-        AppDispatcher.handleViewAction({
-          actionType: ActionTypes.COMPOSER_ENABLE_DRAFTS_ATTACHMENT,
-          type: AttachmentTypes.MEDIA,
-        });
+    Promise.all(dispatches).then(() => {
+      AppDispatcher.handleViewAction({
+        actionType: ActionTypes.COMPOSER_ENABLE_DRAFTS_ATTACHMENT,
+        type: AttachmentTypes.MEDIA,
+      });
 
-        // TODO: this call to observeStore() could probably be moved to WebAPIUtils
-        // where there are store queries that actually depend on it
-        observeStore(AppStore, (store) => store.getAppState().isLoaded)
-          .then(() => {
-            metaData.images.forEach((image) => {
-              WebAPIUtils.getImageDimensions({
-                url: image.picture,
-                key: AppStore.getImageDimensionsKey(),
-                user_id: AppStore.getUserData().id,
-              })
-                .then(({ width, height }) => {
-                  AppDispatcher.handleViewAction({
-                    actionType: ActionTypes.COMPOSER_UPDATE_UPLOADED_IMAGE_DIMENSIONS,
-                    url: image.picture,
-                    width,
-                    height,
-                  });
-                });
+      // TODO: this call to observeStore() could probably be moved to WebAPIUtils
+      // where there are store queries that actually depend on it
+      observeStore(AppStore, store => store.getAppState().isLoaded).then(() => {
+        metaData.images.forEach(image => {
+          WebAPIUtils.getImageDimensions({
+            url: image.picture,
+            key: AppStore.getImageDimensionsKey(),
+            user_id: AppStore.getUserData().id,
+          }).then(({ width, height }) => {
+            AppDispatcher.handleViewAction({
+              actionType: ActionTypes.COMPOSER_UPDATE_UPLOADED_IMAGE_DIMENSIONS,
+              url: image.picture,
+              width,
+              height,
             });
           });
+        });
       });
+    });
   }
 
   if (metaData.shouldShowRolloutTooltip) {
@@ -345,7 +361,7 @@ const loadInitialMetaData = (metaData) => {
   }
 };
 
-const loadInitialCsrfToken = (csrfToken) => {
+const loadInitialCsrfToken = csrfToken => {
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.APP_RECEIVE_CSRF_TOKEN,
     csrfToken,
@@ -359,7 +375,7 @@ const AppInitActionCreators = {
     });
   },
 
-  resetUserData: (userData) => {
+  resetUserData: userData => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.RESET_USER_DATA,
       userData,
@@ -371,11 +387,14 @@ const AppInitActionCreators = {
    * AppActionCreators.js#saveDrafts, so we need to delay the resetting by two
    * cycles too so that it's dispatched after new notifications are dispatched.
    */
-  softResetData: () => setImmediate(() => setImmediate(() => {
-    AppDispatcher.handleViewAction({
-      actionType: ActionTypes.APP_SOFT_RESET,
-    });
-  })),
+  softResetData: () =>
+    setImmediate(() =>
+      setImmediate(() => {
+        AppDispatcher.handleViewAction({
+          actionType: ActionTypes.APP_SOFT_RESET,
+        });
+      })
+    ),
 
   /**
    * This is the only data entry point in the app: deep clone all objects to

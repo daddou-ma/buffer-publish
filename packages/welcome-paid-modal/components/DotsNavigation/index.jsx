@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DotstyleUl,
+import {
+  DotstyleUl,
   DotstyleA,
   DotstyleLi,
   DotstyleLiCurrentA,
@@ -25,27 +26,19 @@ const createSteps = (currentStep, nSteps, onClickCallback) => {
         )}
 
         {currentStep !== i && (
-          <DotstyleA
-            key={i}
-            href="#"
-            onClick={() => onClickCallback(i)}
-          >
+          <DotstyleA key={i} href="#" onClick={() => onClickCallback(i)}>
             Step {i}
           </DotstyleA>
         )}
-
-      </DotstyleLi>,
+      </DotstyleLi>
     );
   }
   return ul;
 };
 
-
 const DotsNavigation = ({ currentStep, onClickCallback, nSteps }) => (
   <DivDotStyle>
-    <DotstyleUl>
-      {createSteps(currentStep, nSteps, onClickCallback) }
-    </DotstyleUl>
+    <DotstyleUl>{createSteps(currentStep, nSteps, onClickCallback)}</DotstyleUl>
   </DivDotStyle>
 );
 
@@ -54,6 +47,5 @@ DotsNavigation.propTypes = {
   onClickCallback: PropTypes.func.isRequired,
   nSteps: PropTypes.number.isRequired,
 };
-
 
 export default DotsNavigation;

@@ -59,7 +59,7 @@ const iconMap = new Map([
   [SERVICE_INSTAGRAM, { component: InstagramIcon }],
 ]);
 
-const getHoverMsg = (service) => {
+const getHoverMsg = service => {
   const icon = iconMap.get(service);
   if (icon) {
     const { component: IconComponent } = icon;
@@ -68,7 +68,10 @@ const getHoverMsg = (service) => {
         <span style={iconStyle}>
           <IconComponent />
         </span>
-        <span> {service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post'} </span>
+        <span>
+          {' '}
+          {service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post'}{' '}
+        </span>
       </div>
     );
   } else if (service === 'noProfile') {
@@ -76,9 +79,7 @@ const getHoverMsg = (service) => {
       <span>Connect a social account to schedule posts to your queue</span>
     );
   } else if (service === 'isStoryGroup') {
-    return (
-      <span>Schedule a Story</span>
-    );
+    return <span>Schedule a Story</span>;
   }
 };
 
@@ -101,7 +102,8 @@ class PostEmptySlot extends Component {
 
   render() {
     const { service, time, onClick, focus } = this.props;
-    return ( // eslint-disable-next-line
+    return (
+      // eslint-disable-next-line
       <div
         style={emptySlotStyle(this.state.isHovering, focus, service)}
         onMouseEnter={this.onMouseEnter}

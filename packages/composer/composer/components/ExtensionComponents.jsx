@@ -4,31 +4,23 @@ import CloseButton from './CloseButton';
 import styles from './css/App.css';
 import { isOnExtension } from '../utils/extension';
 
-
 const ExtensionComponents = ({
-    draggingAnchorRef,
-    onCloseButtonClick,
-    metadata,
-  }) => (
-  isOnExtension(metadata) ?
+  draggingAnchorRef,
+  onCloseButtonClick,
+  metadata,
+}) =>
+  isOnExtension(metadata) ? (
     <Fragment>
       <span
-        className={[
-          'bi bi-drag',
-          styles.draggingAnchor,
-        ].join(' ')}
+        className={['bi bi-drag', styles.draggingAnchor].join(' ')}
         ref={draggingAnchorRef}
       />
       <CloseButton
-        className={[
-          'bi bi-x',
-          styles.closeButton,
-        ].join(' ')}
+        className={['bi bi-x', styles.closeButton].join(' ')}
         onClick={onCloseButtonClick}
       />
     </Fragment>
-    : null
-);
+  ) : null;
 
 ExtensionComponents.propTypes = {
   draggingAnchorRef: PropTypes.func.isRequired,

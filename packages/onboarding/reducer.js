@@ -17,7 +17,9 @@ export default (state = initialState, action) => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        canSeeOnboardingPage: !action.result.messages.includes('user_saw_onboarding_page'),
+        canSeeOnboardingPage: !action.result.messages.includes(
+          'user_saw_onboarding_page'
+        ),
       };
     case actionTypes.SKIP_STEP:
       return {

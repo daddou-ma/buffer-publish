@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Popover,
-  Card,
-  Link,
-} from '@bufferapp/components';
+import { Popover, Card, Link } from '@bufferapp/components';
 
 import { Text, Button } from '@bufferapp/ui';
 
@@ -14,8 +10,7 @@ const cardContentStyle = {
   margin: '28px',
 };
 
-const textWrapperStyle = {
-};
+const textWrapperStyle = {};
 
 const buttonWrapperStyle = {
   display: 'flex',
@@ -33,41 +28,54 @@ const InstagramDirectPostingModal = ({
   onCheckInstagramBusinessClick,
   onHideInstagramModal,
   profileId,
-}) => (<div>
-  <Popover>
-    <Card noPadding noBorder>
-      <div style={cardContentStyle}>
-        <Text type="h3">
-          {translations.headline}
-        </Text>
-        <div style={textWrapperStyle}>
-          <Text type="p">
-            {translations.description}
-          </Text>
-        </div>
-        {!isBusinessOnInstagram &&
+}) => (
+  <div>
+    <Popover>
+      <Card noPadding noBorder>
+        <div style={cardContentStyle}>
+          <Text type="h3">{translations.headline}</Text>
           <div style={textWrapperStyle}>
-            <Text type="p">
-              {translations.instructions}
-              <Link newTab href="https://faq.buffer.com/article/959-publish-instagram-set-up">
-                {translations.learnMore}
-              </Link>
-            </Text>
+            <Text type="p">{translations.description}</Text>
           </div>
-        }
-        <div style={buttonWrapperStyle}>
-          <Button onClick={onHideInstagramModal} type="text" label={translations.dismiss} />
-          {isBusinessOnInstagram &&
-            <Button type="primary" onClick={() => onSetUpDirectPostingClick(profileId)} label={translations.cta1} />
-          }
-          {!isBusinessOnInstagram &&
-            <Button type="primary" onClick={() => onCheckInstagramBusinessClick(profileId)} label={translations.cta2} />
-          }
+          {!isBusinessOnInstagram && (
+            <div style={textWrapperStyle}>
+              <Text type="p">
+                {translations.instructions}
+                <Link
+                  newTab
+                  href="https://faq.buffer.com/article/959-publish-instagram-set-up"
+                >
+                  {translations.learnMore}
+                </Link>
+              </Text>
+            </div>
+          )}
+          <div style={buttonWrapperStyle}>
+            <Button
+              onClick={onHideInstagramModal}
+              type="text"
+              label={translations.dismiss}
+            />
+            {isBusinessOnInstagram && (
+              <Button
+                type="primary"
+                onClick={() => onSetUpDirectPostingClick(profileId)}
+                label={translations.cta1}
+              />
+            )}
+            {!isBusinessOnInstagram && (
+              <Button
+                type="primary"
+                onClick={() => onCheckInstagramBusinessClick(profileId)}
+                label={translations.cta2}
+              />
+            )}
+          </div>
         </div>
-      </div>
-    </Card>
-  </Popover>
-</div>);
+      </Card>
+    </Popover>
+  </div>
+);
 
 InstagramDirectPostingModal.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line

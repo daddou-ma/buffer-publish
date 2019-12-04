@@ -7,12 +7,14 @@ import { getURL } from '@bufferapp/publish-server/formatters/src';
 import InstagramFirstCommentModal from './components/InstagramFirstCommentModal';
 
 export default connect(
-  (state) => {
+  state => {
     const profile = state.profileSidebar.selectedProfile;
     const firstCommentIds = state.modals && state.modals.firstCommentIds;
     let selectedProfiles = [profile];
     if (firstCommentIds) {
-      selectedProfiles = state.profileSidebar.profiles.filter(p => firstCommentIds.includes(p.id));
+      selectedProfiles = state.profileSidebar.profiles.filter(p =>
+        firstCommentIds.includes(p.id)
+      );
     }
 
     return {
@@ -26,17 +28,19 @@ export default connect(
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideInstagramFirstCommentModal()),
     loadFacebook: () => {
-      (function (d, s, id) {
+      (function(d, s, id) {
         if (d.getElementById(id)) return;
         const fjs = d.getElementsByTagName(s)[0];
         const js = d.createElement(s);
         js.id = id;
         js.src = '//connect.facebook.net/en_US/sdk.js';
         fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+      })(document, 'script', 'facebook-jssdk');
     },
-    launchRequestMorePermission: (profileId) => {
-      const popup = window.open(`https://${getURL.getBaseURL()}/oauth/instagram/${profileId}/reconnect/auth`);
+    launchRequestMorePermission: profileId => {
+      const popup = window.open(
+        `https://${getURL.getBaseURL()}/oauth/instagram/${profileId}/reconnect/auth`
+      );
 
       const interval = setInterval(() => {
         if (popup.closed) {
@@ -49,5 +53,5 @@ export default connect(
         }
       }, 150);
     },
-  }),
+  })
 )(InstagramFirstCommentModal);

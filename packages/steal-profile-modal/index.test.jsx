@@ -2,11 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 
-import Example, {
-  reducer,
-  actions,
-  actionTypes,
-} from './index';
+import Example, { reducer, actions, actionTypes } from './index';
 import StealProfileModal from './components/StealProfileModal';
 
 const storeFake = state => ({
@@ -42,24 +38,20 @@ describe('StealProfileModal', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Example />
-      </Provider>,
+      </Provider>
     );
-    expect(wrapper.find(StealProfileModal).length)
-      .toBe(1);
+    expect(wrapper.find(StealProfileModal).length).toBe(1);
   });
 
   it('should export reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('should export actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('should export actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 });

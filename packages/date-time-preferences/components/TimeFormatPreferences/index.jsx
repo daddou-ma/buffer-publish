@@ -8,11 +8,23 @@ const TimeFormatPreferences = () => (
   <Row>
     <Text type="h3">Time format</Text>
     <form>
-      <Field component="input" type="radio" id="twelveHourFormat" name="format" value="12" />
+      <Field
+        component="input"
+        type="radio"
+        id="twelveHourFormat"
+        name="format"
+        value="12"
+      />
       <label htmlFor="twelveHourFormat" style={{ marginRight: '.5rem' }}>
         <Text type="label">12 hour</Text>
       </label>
-      <Field component="input" type="radio" id="twentyFourHourFormat" name="format" value="24" />
+      <Field
+        component="input"
+        type="radio"
+        id="twentyFourHourFormat"
+        name="format"
+        value="24"
+      />
       <label htmlFor="twentyFourHourFormat">
         <Text type="label">24 hour</Text>
       </label>

@@ -88,7 +88,8 @@ export const postLists = [
 ];
 
 const draftDetails = {
-  avatarUrl: 'https://buffer-uploads.s3.amazonaws.com/510521020a19000b6a00001e/a476fed03b1de4e06563d6063d7d3ee0.jpg',
+  avatarUrl:
+    'https://buffer-uploads.s3.amazonaws.com/510521020a19000b6a00001e/a476fed03b1de4e06563d6063d7d3ee0.jpg',
   createdAt: 'on March 2nd at 12:45pm (GMT)',
   email: 'ash@buffer.com',
   isRetweet: false,

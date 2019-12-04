@@ -3,15 +3,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import {
-  InputTime,
-  InputWeekday,
-} from '@bufferapp/components';
+import { InputTime, InputWeekday } from '@bufferapp/components';
 
-import {
-  Button,
-  Text,
-} from '@bufferapp/ui';
+import { Button, Text } from '@bufferapp/ui';
 
 const editScheduleStyle = {
   display: 'flex',
@@ -53,30 +47,18 @@ const dayContainerStyle = {
   marginRight: '1rem',
 };
 
-const PostingTimeForm = ({
-  handleSubmit,
-  submitting,
-  twentyfourHourTime,
-}) => (
+const PostingTimeForm = ({ handleSubmit, submitting, twentyfourHourTime }) => (
   <form>
     <div style={editScheduleStyle}>
       <div style={textWrapperStyle}>
-        <Text type="label">
-          Add a new posting time
-        </Text>
+        <Text type="label">Add a new posting time</Text>
       </div>
       <div style={formStyle}>
         <div style={chooseDaysAndTimeStyle}>
           <div style={dayContainerStyle}>
-            <Field
-              name={'day'}
-              component={InputWeekday}
-              fontSize={'small'}
-            />
+            <Field name={'day'} component={InputWeekday} fontSize={'small'} />
           </div>
-          <Text type="label">
-            Choose times
-          </Text>
+          <Text type="label">Choose times</Text>
           <div style={inputTimeWrapper}>
             <Field
               name={'time'}
@@ -97,7 +79,7 @@ const PostingTimeForm = ({
       </div>
     </div>
   </form>
-  );
+);
 
 PostingTimeForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -110,17 +92,19 @@ PostingTimeForm.defaultProps = {
   twentyfourHourTime: false,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const timezone = state.settings ? state.settings.profileTimezone : null;
   const now = moment().tz(timezone);
   const day = { day: 'everyday' };
-  const time = now ? {
-    hours: now.hour(),
-    minutes: now.minute(),
-  } : {
-    hours: 12,
-    minutes: 0,
-  };
+  const time = now
+    ? {
+        hours: now.hour(),
+        minutes: now.minute(),
+      }
+    : {
+        hours: 12,
+        minutes: 0,
+      };
   return {
     initialValues: {
       time,

@@ -1,6 +1,4 @@
-import {
-  fontFamily,
-} from '@bufferapp/components/style/font';
+import { fontFamily } from '@bufferapp/components/style/font';
 
 const errorBoundary = {
   fontFamily,
@@ -79,5 +77,5 @@ export default {
   pre: {
     textAlign: 'left',
     width: '100%',
-  }
+  },
 };

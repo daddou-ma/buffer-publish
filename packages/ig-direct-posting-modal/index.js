@@ -12,22 +12,27 @@ export default connect(
     isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
   }),
   dispatch => ({
-    onHideInstagramModal: () => dispatch(modalsActions.hideInstagramDirectPostingModal()),
-    onSetUpDirectPostingClick: (profileId) => {
-      dispatch(actions.handleSetUpDirectPostingClick({
-        profileId,
-      }));
-    },
-    onCheckInstagramBusinessClick: (profileId) => {
-      dispatch(dataFetchActions.fetch({
-        name: 'checkInstagramBusiness',
-        args: {
+    onHideInstagramModal: () =>
+      dispatch(modalsActions.hideInstagramDirectPostingModal()),
+    onSetUpDirectPostingClick: profileId => {
+      dispatch(
+        actions.handleSetUpDirectPostingClick({
           profileId,
-          recheck: true,
-        },
-      }));
+        })
+      );
     },
-  }),
+    onCheckInstagramBusinessClick: profileId => {
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'checkInstagramBusiness',
+          args: {
+            profileId,
+            recheck: true,
+          },
+        })
+      );
+    },
+  })
 )(InstagramDirectPostingModal);
 
 export reducer, { actions, actionTypes } from './reducer';

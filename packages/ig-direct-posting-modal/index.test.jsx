@@ -35,24 +35,20 @@ describe('InstagramDirectPostingModal', () => {
     const wrapper = mount(
       <Provider store={store}>
         <InstagramDirectPostingModal />
-      </Provider>,
+      </Provider>
     );
-    expect(wrapper.find(InstagramDirectPostingModal).length)
-      .toBe(1);
+    expect(wrapper.find(InstagramDirectPostingModal).length).toBe(1);
   });
 
   it('should export reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('should export actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('should export actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 });
