@@ -123,7 +123,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case profileSidebarActionTypes.SELECT_PROFILE:
       if (action.profile && action.profile.customLinksDetails) {
         const { customLinksDetails } = action.profile;
-        const { customLinks } = customLinksDetails;
+        const { customLinks = [] } = customLinksDetails;
         customLinks
           .map(item => {
             item.order = parseInt(item.order, 10);
@@ -200,7 +200,7 @@ const profileReducer = (state = profileInitialState, action) => {
     }
     case actionTypes.TOGGLE_CUSTOM_LINK_EDIT_MODE: {
       const { customLinksDetails } = state;
-      const { customLinks } = customLinksDetails;
+      const { customLinks = [] } = customLinksDetails;
 
       const editedCustomLinks = cloneDeep(customLinks);
       let customLinksResult = editedCustomLinks.filter(link => link._id);
