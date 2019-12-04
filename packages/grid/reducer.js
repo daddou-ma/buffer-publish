@@ -128,6 +128,14 @@ const profileReducer = (state = profileInitialState, action) => {
         };
       }
       return profileInitialState;
+    case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        customLinksDetails: {
+          ...state.customLinksDetails,
+          buttonColor: action.result.profile.custom_links_color,
+        },
+      };
     case `shortenUrl_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
@@ -307,6 +315,7 @@ export default (state = initialState, action) => {
     case `gridPosts_${dataFetchActionTypes.FETCH_START}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case actionTypes.SAVE_POST_URL:
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:

@@ -74,8 +74,8 @@ const ColorPickerSection = ({
 const LinksHeader = ({
   customLinksDetails,
   maxCustomLinks,
-  title = 'My Links',
-  label = 'My Links',
+  title = 'Top Links',
+  label = 'Top Links',
   popupText = 'Add upto 3 custom links to the top of your Shop grid page.',
   onAddLinkClick = () => {},
   buttonText = 'Add Link',
