@@ -1,5 +1,4 @@
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { actionTypes } from '@bufferapp/publish-profile-sidebar';
 
 export default ({ dispatch }) => next => action => {
   next(action);
