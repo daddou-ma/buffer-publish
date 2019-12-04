@@ -106,12 +106,6 @@ export default ({ getState, dispatch }) => next => action => {
       }
       break;
 
-    case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch({
-        type: 'SINGLE_PROFILE_INIT',
-        profileId: action.args.profileId,
-      });
-      break;
     case `updatePostLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.result && action.result.success) {
         const { updateId, link } = action.args;
@@ -168,6 +162,10 @@ export default ({ getState, dispatch }) => next => action => {
       break;
     }
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch({
+        type: 'SINGLE_PROFILE_INIT',
+        profileId: action.args.profileId,
+      });
       dispatch(
         notificationActions.createNotification({
           notificationType: 'success',
