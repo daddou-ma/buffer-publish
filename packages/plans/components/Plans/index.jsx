@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { ArrowLeft } from '@bufferapp/ui/Icon';
-import { gray, orange } from '@bufferapp/ui/style/colors';
+import { blueDarker, gray, orange } from '@bufferapp/ui/style/colors';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import styled from 'styled-components';
 import PlanColumn from '../PlanColumn';
@@ -23,8 +23,6 @@ const HeaderStyle = styled(Text)`
 `;
 
 const PromoHeaderStyle = styled(Text)`
-  font-family: Roboto;
-  font-style: normal;
   font-weight: bold;
   font-size: 42px;
   line-height: 52px;
@@ -34,8 +32,6 @@ const PromoHeaderStyle = styled(Text)`
 `;
 
 const PromoTextStyle = styled(Text)`
-  font-family: Roboto;
-  font-style: normal;
   font-weight: bold;
   font-size: 18px;
   line-height: 28px;
@@ -60,7 +56,7 @@ const PromoHeaderLine = styled.div`
 
 const ContainerStyle = styled.div`
   overflow-y: auto;
-  background: ${props => (props.isAwesomePromoUser ? '#121e66' : 'white')};
+  background: ${props => (props.isAwesomePromoUser ? blueDarker : 'white')};
   display: ${props => (props.isAwesomePromoUser ? 'flex' : '')};
 `;
 
