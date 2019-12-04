@@ -8,72 +8,89 @@ import {
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
+import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import Avatar from '@bufferapp/ui/Avatar';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
+import styled from 'styled-components';
+import { grayLight, grayDark } from '@bufferapp/ui/style/colors';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
 import { openPreviewPage } from '../../util';
+import CustomLinks from '../CustomLinks';
 
 const ErrorBoundary = getErrorBoundary(true);
 
-const headerStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  marginBottom: '1.8rem',
-  width: '100%',
-};
+const StyledHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
+  width: 100%;
+`;
 
-const loadingContainerStyle = {
-  width: '100%',
-  height: '100%',
-  textAlign: 'center',
-  paddingTop: '5rem',
-};
+const StlyedLoadingGridContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 5rem;
+`;
 
-const profileBadgeStyle = {
-  padding: '0.05rem 0.25rem',
-};
+const StyledProfileBadge = styled.div`
+  padding: 0.05rem 0.25rem;
+`;
 
-const profileHeaderStyle = {
-  display: 'flex',
-  alignItems: 'center',
-};
+const StyledProfileHeader = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-const buttonsWrapperStyles = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  minWidth: '340px',
-};
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 340px;
+`;
 
-const linkFieldStyle = {
-  marginRight: '12px',
-  width: '100%',
-};
+const StyledLinkField = styled.div`
+  margin-right: 12px;
+  width: 100%;
+`;
 
-const copyLinkButtonStyle = {
-  alignItems: 'center',
-  backgroundColor: '#E0E0E0',
-  border: '1px solid #E0E0E0',
-  borderRadius: '4px',
-  color: '#636363',
-  cursor: 'pointer',
-  display: 'flex',
-  fontFamily: 'Roboto',
-  fontSize: '14px',
-  height: '40px',
-  outline: 'none',
-  paddingLeft: '16px',
-  paddingRight: '16px',
-  width: '100%',
-};
+const StlyedCopyLinkButton = styled.button`
+  align-items: center;
+  background-color: ${grayLight};
+  border: 1px solid ${grayLight};
+  border-radius: ${borderRadius};
+  color: ${grayDark};
+  cursor: pointer;
+  display: flex;
+  font-family: ${fontFamily};
+  font-size: ${fontSize};
+  height: 40px;
+  outline: none;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+`;
 
-const copyLinkStyle = {
-  width: '16px',
-  height: '16px',
-  marginLeft: 'auto',
-};
+const StyledCopyLink = styled.div`
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+`;
+
+const StyledCopyLinkIcon = styled.div`
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 5px;
+`;
+
+const StyledCopyLinkText = styled.div`
+  padding: 0.25rem 0.1rem;
+`;
 
 const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
   const el = document.createElement('textarea');
@@ -92,7 +109,7 @@ const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
   }
 };
 
-const onPreviewClick = (publicGridUrl) => {
+const onPreviewClick = publicGridUrl => {
   trackAction({ location: 'grid', action: 'click_preview_url' });
   openPreviewPage(publicGridUrl);
 };
@@ -118,12 +135,19 @@ const GridPosts = ({
   onUpdateCustomLinksColor,
   onUpdateCustomLinksButtonType,
   onDeleteCustomLink,
+  onAddLinkClick,
+  onUpdateLinkText,
+  onUpdateLinkUrl,
+  hasCustomLinksFlip,
+  maxCustomLinks,
+  onToggleEditMode,
+  onSwapCustomLinks,
 }) => {
   if (loading) {
     return (
-      <div style={loadingContainerStyle}>
+      <StlyedLoadingGridContainer>
         <BufferLoading size={64} />
-      </div>
+      </StlyedLoadingGridContainer>
     );
   }
 
@@ -152,9 +176,9 @@ const GridPosts = ({
   return (
     <ErrorBoundary>
       <div>
-        <div style={headerStyle}>
-          <div style={profileHeaderStyle}>
-            <div style={profileBadgeStyle}>
+        <StyledHeader>
+          <StyledProfileHeader>
+            <StyledProfileBadge>
               <Avatar
                 src={profile.avatar_https}
                 fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
@@ -163,12 +187,11 @@ const GridPosts = ({
                 type="social"
                 network={profile.service}
               />
-            </div>
-          </div>
-          <div style={buttonsWrapperStyles}>
-            <div style={linkFieldStyle}>
-              <button
-                style={copyLinkButtonStyle}
+            </StyledProfileBadge>
+          </StyledProfileHeader>
+          <StyledButtonWrapper>
+            <StyledLinkField>
+              <StlyedCopyLinkButton
                 type="button"
                 onClick={() => {
                   onCopyToClipboard({
@@ -178,22 +201,20 @@ const GridPosts = ({
                 }}
               >
                 {publicGridUrl}
-                <div style={copyLinkStyle}>
-                  <div style={{ display: 'inline-block', position: 'relative', top: '0px', left: '5px' }}>
+                <StyledCopyLink>
+                  <StyledCopyLinkIcon>
                     <IconArrowPopover
                       icon={<CopyIcon size="medium" />}
                       shadow
                       oneLine
                       label="Copy Page Link"
                     >
-                      <div style={{ padding: '.25rem .10rem' }}>
-                        Copy Page Link
-                      </div>
+                      <StyledCopyLinkText>Copy Page Link</StyledCopyLinkText>
                     </IconArrowPopover>
-                  </div>
-                </div>
-              </button>
-            </div>
+                  </StyledCopyLinkIcon>
+                </StyledCopyLink>
+              </StlyedCopyLinkButton>
+            </StyledLinkField>
             <Button
               label="Preview Page"
               type="secondary"
@@ -201,9 +222,26 @@ const GridPosts = ({
                 onPreviewClick(publicGridUrl);
                 trackPagePreviewed(profile);
               }}
+              icon={<ArrowRightIcon />}
+              iconEnd
             />
-          </div>
-        </div>
+          </StyledButtonWrapper>
+        </StyledHeader>
+        {hasCustomLinksFlip && (
+          <CustomLinks
+            customLinksDetails={customLinksDetails}
+            onUpdateCustomLinks={onUpdateCustomLinks}
+            onUpdateCustomLinksColor={onUpdateCustomLinksColor}
+            onUpdateCustomLinksButtonType={onUpdateCustomLinksButtonType}
+            onDeleteCustomLink={onDeleteCustomLink}
+            onAddLinkClick={onAddLinkClick}
+            onUpdateLinkText={onUpdateLinkText}
+            onUpdateLinkUrl={onUpdateLinkUrl}
+            maxCustomLinks={maxCustomLinks}
+            onToggleEditMode={onToggleEditMode}
+            onSwapCustomLinks={onSwapCustomLinks}
+          />
+        )}
         <GridList
           gridPosts={gridPosts}
           onChangePostUrl={onChangePostUrl}
@@ -225,9 +263,9 @@ GridPosts.propTypes = {
       posts: PropTypes.arrayOf(
         PropTypes.shape({
           text: PropTypes.string,
-        }),
+        })
       ),
-    }),
+    })
   ),
   total: PropTypes.number,
   onChangePostUrl: PropTypes.func,
@@ -246,6 +284,12 @@ GridPosts.propTypes = {
     avatar_https: PropTypes.string,
     timezone: PropTypes.string,
   }),
+  onAddLinkClick: PropTypes.func,
+  customLinksDetails: PropTypes.shape({
+    customLinks: PropTypes.array,
+    maxCustomLinks: PropTypes.number,
+    buttonColor: PropTypes.string,
+  }),
 };
 
 GridPosts.defaultProps = {
@@ -262,6 +306,12 @@ GridPosts.defaultProps = {
   onImageClose: () => {},
   handleCopyToClipboard: () => {},
   profile: {},
+  onAddLinkClick: () => {},
+  customLinksDetails: {
+    customLinks: [],
+    maxCustomLinks: 0,
+    buttonColor: null,
+  },
 };
 
 export default WithFeatureLoader(GridPosts);

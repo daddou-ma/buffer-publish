@@ -13,7 +13,7 @@ import {
 const ColorSwatches = ({ colorSelected, onColorChange, onChange }) => (
   <ColorSwatchesContainer>
     {Object.keys(colorSwatches).map(key => (
-      <CircleColorWrapper>
+      <CircleColorWrapper key={key.toString()}>
         <CircleColor
           color={colorSwatches[key]}
           onClick={() => onColorChange(colorSwatches[key], onChange)}

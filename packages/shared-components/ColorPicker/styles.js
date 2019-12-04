@@ -19,7 +19,6 @@ export const DEFAULT_COLOR = colorSwatches.black;
 export const ColorPickerWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
 `;
 
 export const ColorSelectorWrapper = styled.div`

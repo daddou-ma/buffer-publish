@@ -36,13 +36,24 @@ export default connect(
         profile,
         isBusinessAccount: profile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        customLinksDetails: profile.customLinksDetails,
+        customLinksDetails: currentProfile.customLinksDetails,
+        maxCustomLinks: currentProfile.maxCustomLinks,
         publicGridUrl: `https://shopgr.id/${profile.serviceUsername}`,
+        hasCustomLinksFlip: state.appSidebar.user.features
+          ? state.appSidebar.user.features.includes('shopgrid_links')
+          : false,
       };
     }
     return {};
   },
   (dispatch, ownProps) => ({
+    onAddLinkClick: () => {
+      dispatch(
+        actions.handleAddGridLink({
+          profileId: ownProps.profileId,
+        })
+      );
+    },
     onImageClick: post => {
       dispatch(
         actions.handleImageClick({
@@ -92,7 +103,7 @@ export default connect(
         analyticsActions.trackEvent('Shop Grid Page Previewed', metadata)
       );
     },
-    onUpdateCustomLinks: ({ customLinks }) => {
+    onUpdateCustomLinks: ({ customLinks, linkText, linkUrl, item }) => {
       dispatch(
         actions.handleUpdateCustomLinks({
           profileId: ownProps.profileId,
@@ -100,6 +111,9 @@ export default connect(
           customLinkColor: null,
           customLinkContrastColor: null,
           customLinkButtonType: null,
+          linkText,
+          linkUrl,
+          item,
         })
       );
     },
@@ -133,6 +147,52 @@ export default connect(
         actions.handleDeleteCustomLink({
           profileId: ownProps.profileId,
           customLinkId,
+        })
+      );
+    },
+    onUpdateLinkText: ({ item, value }) => {
+      dispatch(
+        actions.handleEditCustomLinkText({
+          profileId: ownProps.profileId,
+          item,
+          value,
+          prop: 'text',
+        })
+      );
+    },
+    onSaveCustomLinkText: ({ item, value }) => {
+      dispatch(
+        actions.handleSaveCustomLink({
+          profileId: ownProps.profileId,
+          item,
+        })
+      );
+    },
+    onUpdateLinkUrl: ({ item, value }) => {
+      dispatch(
+        actions.handleEditCustomLinkUrl({
+          profileId: ownProps.profileId,
+          item,
+          value,
+          prop: 'url',
+        })
+      );
+    },
+    onToggleEditMode: ({ item, editing }) => {
+      dispatch(
+        actions.handleToggleEditMode({
+          profileId: ownProps.profileId,
+          item,
+          editing,
+        })
+      );
+    },
+    onSwapCustomLinks: ({ customLinkSource, customLinkTarget }) => {
+      dispatch(
+        actions.handleSwapCustomLinks({
+          profileId: ownProps.profileId,
+          customLinkSource,
+          customLinkTarget,
         })
       );
     },

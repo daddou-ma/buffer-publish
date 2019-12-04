@@ -31,6 +31,16 @@ export default ({ dispatch }) => next => action => {
         );
       }
       break;
+    case 'SINGLE_PROFILE_INIT':
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'singleProfile',
+          args: {
+            profileId: action.profileId,
+          },
+        })
+      );
+      break;
     default:
       break;
   }
