@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { grayLight } from '@bufferapp/ui/style/colors';
+import { grayLight, blue } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
 export const DEFAULT_COLOR = '#000000';
@@ -19,6 +19,7 @@ export const PreviewWrapper = styled.div`
   position: relative;
   border-bottom: 1px solid #f5f5f5;
   transition: all 0.3s ease-in-out;
+  box-shadow: ${props => (props.isTarget ? `0px 0px 4px 4px ${blue}` : 'none')};
 
   ::after {
     content: '';

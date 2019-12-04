@@ -122,6 +122,14 @@ const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
       if (action.profile && action.profile.customLinksDetails) {
+        const { customLinksDetails } = action.profile;
+        const { customLinks } = customLinksDetails;
+        customLinks
+          .map(item => {
+            item.order = parseInt(item.order, 10);
+            return item;
+          })
+          .sort((a, b) => Number(a.order) - Number(b.order));
         return {
           ...profileInitialState,
           customLinksDetails: action.profile.customLinksDetails,
@@ -263,11 +271,28 @@ const profileReducer = (state = profileInitialState, action) => {
       };
     }
     case actionTypes.SWAP_CUSTOM_LINKS: {
+      const { customLinksDetails } = state;
+      const { customLinks } = customLinksDetails;
+
+      const editedCustomLinks = cloneDeep(customLinks);
       const { customLinkSource, customLinkTarget } = action;
-      // TODO: swap custom links
+
+      editedCustomLinks.map(item => {
+        if (item._id === customLinkSource._id) {
+          item.order = customLinkTarget.order;
+        }
+        if (item._id === customLinkTarget._id) {
+          item.order = customLinkSource.order;
+        }
+        return item;
+      });
 
       return {
         ...state,
+        customLinksDetails: {
+          ...customLinksDetails,
+          customLinks: editedCustomLinks.sort((a, b) => a.order - b.order),
+        },
       };
     }
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:

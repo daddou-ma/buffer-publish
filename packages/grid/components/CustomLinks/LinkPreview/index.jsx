@@ -43,9 +43,10 @@ const LinkPreview = ({
   textColor,
   onDeleteCustomLink,
   onToggleEditMode,
+  isTarget,
 }) => {
   return (
-    <PreviewWrapper>
+    <PreviewWrapper isTarget={isTarget}>
       <LinkPreviewRow>
         <LinkPreviewButton bgColor={bgColor} textColor={textColor}>
           {item.text}
@@ -67,6 +68,7 @@ const LinkPreview = ({
 };
 
 LinkPreview.propTypes = {
+  isTarget: PropTypes.bool,
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
   text: PropTypes.string,
@@ -80,6 +82,7 @@ LinkPreview.propTypes = {
 };
 
 LinkPreview.defaultProps = {
+  isTarget: false,
   bgColor: DEFAULT_COLOR,
   textColor: '#FFFFFF',
   text: null,

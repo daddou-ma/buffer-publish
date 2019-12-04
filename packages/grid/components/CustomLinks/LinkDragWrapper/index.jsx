@@ -1,6 +1,8 @@
 import React, { useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { DragSource, DropTarget } from 'react-dnd';
+import { DragSource, DropTarget, DragPreviewImage } from 'react-dnd';
+import SwapIcon from '@bufferapp/ui/Icon/Icons/Swap';
+import styled from 'styled-components';
 
 import LinkPreview from '../LinkPreview';
 
@@ -27,24 +29,91 @@ const customLinkTarget = {
   },
 };
 
+const SwapWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const SwapIconStyle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 19px;
+  background: #2c4bff;
+  border-radius: 24px;
+  color: #ffffff;
+`;
+
+const SwapText = styled.span`
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: bold;
+`;
+
+const SwapIconStyled = () => (
+  <SwapWrapper>
+    <SwapIconStyle>
+      <SwapIcon size="medium" color="#FFFFFF" />
+      <SwapText>Swap Links</SwapText>
+    </SwapIconStyle>
+  </SwapWrapper>
+);
+
+const wrapperStyle = ({ isOver, isDragging }) => {
+  const transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+  const hideOutline = { outline: 'none' };
+  console.log('isOver', isOver, 'isDragging', isDragging);
+
+  return { transition, ...hideOutline };
+};
+
+const DragWrapper = styled.div`
+  position: relative;
+  :focus {
+    outline: none;
+  }
+`;
+
 const LinkDragWrapper = React.forwardRef(
-  ({ connectDragSource, connectDropTarget, ...customLinkProps }, ref) => {
+  (
+    {
+      connectDragSource,
+      connectDropTarget,
+      connectDragPreview,
+      ...customLinkProps
+    },
+    ref
+  ) => {
     const elementRef = useRef(null);
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
     useImperativeHandle(ref, () => ({
       getNode: () => elementRef.current,
     }));
+    const { isOver, isDragging } = customLinkProps;
+
     return (
-      <div
-        aria-dropeffect="move"
-        ref={elementRef}
-        draggable
-        tabIndex={0}
-        style={{ outline: 'none' }}
-      >
-        <LinkPreview {...customLinkProps} />
-      </div>
+      <>
+        <DragPreviewImage
+          src="https://buffer-publish.s3.amazonaws.com/images/drag-link-placeholder.png"
+          connect={connectDragPreview}
+        />
+        <DragWrapper
+          aria-dropeffect="move"
+          ref={elementRef}
+          draggable
+          tabIndex={0}
+          style={wrapperStyle({ isOver, isDragging })}
+        >
+          {!isDragging && isOver && <SwapIconStyled />}
+          <LinkPreview isTarget={isOver} {...customLinkProps} />
+        </DragWrapper>
+      </>
     );
   }
 );
@@ -52,6 +121,7 @@ const LinkDragWrapper = React.forwardRef(
 LinkDragWrapper.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
+  connectDragPreview: PropTypes.func.isRequired,
 };
 
 export default DropTarget(
@@ -68,13 +138,3 @@ export default DropTarget(
     isDragging: monitor.isDragging(),
   }))(LinkDragWrapper)
 );
-
-/*
-export default DropTarget('customLink', customLinkTarget, connect => ({
-  connectDropTarget: connect.dropTarget(),
-}))(
-  DragSource('customLink', customLinkSource, connect => ({
-    connectDragSource: connect.dragSource(),
-  }))(LinkDragWrapper)
-);
-*/
