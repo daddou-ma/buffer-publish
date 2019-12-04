@@ -61,7 +61,7 @@ const PromoHeaderLine = styled.div`
 const ContainerStyle = styled.div`
   overflow-y: auto;
   background: ${props => (props.isAwesomeUser ? '#121e66' : 'white')};
-  display: flex;
+  display: ${props => (props.isAwesomeUser ? 'flex' : '')};
 `;
 
 const Plans = ({
@@ -74,10 +74,10 @@ const Plans = ({
   isNonprofit,
   onPremiumPlanClick,
   selectedPremiumPlan,
-  isAwesomeUser,
+  isAwesomePromoUser,
   shouldSeeSoloPlanOption,
 }) => (
-  <ContainerStyle isAwesomeUser={isAwesomeUser}>
+  <ContainerStyle isAwesomeUser={isAwesomePromoUser}>
     <ButtonStyle>
       <Button
         type="secondary"
@@ -93,10 +93,10 @@ const Plans = ({
       />
     </ButtonStyle>
     <div style={{ textAlign: 'center' }}>
-      {!isAwesomeUser && (
+      {!isAwesomePromoUser && (
         <HeaderStyle type="h1">{translations.headerText}</HeaderStyle>
       )}
-      {!shouldSeeSoloPlanOption && !isAwesomeUser && (
+      {!shouldSeeSoloPlanOption && !isAwesomePromoUser && (
         <ColumnContainerStyle>
           <PlanColumn
             {...translations.pro}
@@ -124,7 +124,7 @@ const Plans = ({
           />
         </ColumnContainerStyle>
       )}
-      {shouldSeeSoloPlanOption && !isAwesomeUser && (
+      {shouldSeeSoloPlanOption && !isAwesomePromoUser && (
         <ColumnContainerStyle>
           <PlanColumnWithPremiumSolo
             {...translations.proExperiment}
@@ -152,7 +152,7 @@ const Plans = ({
           />
         </ColumnContainerStyle>
       )}
-      {!shouldSeeSoloPlanOption && isAwesomeUser && (
+      {!shouldSeeSoloPlanOption && isAwesomePromoUser && (
         <ColumnContainerStyle>
           <PromoContainerStyle>
             <PromoHeaderStyle type="h1">
@@ -168,7 +168,7 @@ const Plans = ({
             onChoosePlanClick={onChoosePlanClick}
             source={getSource({ newPlan: 'pro', currentPlan })}
             isNonprofit={isNonprofit}
-            isAwesomeUser={isAwesomeUser}
+            isAwesomePromoUser={isAwesomePromoUser}
           />
           <PlanColumnWithPremiumSolo
             {...translations.premiumExperiment}
@@ -185,7 +185,7 @@ const Plans = ({
             isNonprofit={isNonprofit}
             onPremiumPlanClick={onPremiumPlanClick}
             selectedPremiumPlan={selectedPremiumPlan}
-            isAwesomeUser={isAwesomeUser}
+            isAwesomePromoUser={isAwesomePromoUser}
           />
         </ColumnContainerStyle>
       )}
