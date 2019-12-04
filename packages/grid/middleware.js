@@ -143,6 +143,25 @@ export default ({ getState, dispatch }) => next => action => {
       );
       break;
 
+    case gridActionTypes.SWAP_CUSTOM_LINKS: {
+      const profile = getState().grid.byProfileId[action.profileId];
+      const linkDetails = profile.customLinksDetails;
+
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'updateCustomLinks',
+          args: {
+            profileId: action.profileId,
+            customLinks: linkDetails.customLinks || [],
+            customLinkColor: null,
+            customLinkContrastColor: null,
+            customLinkButtonType: null,
+          },
+        })
+      );
+      break;
+    }
+
     case gridActionTypes.UPDATE_CUSTOM_LINKS: {
       const profile = getState().grid.byProfileId[action.profileId];
       const linkDetails = profile.customLinksDetails;
@@ -161,6 +180,7 @@ export default ({ getState, dispatch }) => next => action => {
       );
       break;
     }
+
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({
         type: 'SINGLE_PROFILE_INIT',
