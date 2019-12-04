@@ -226,7 +226,7 @@ const profileReducer = (state = profileInitialState, action) => {
     }
     case actionTypes.UPDATE_CUSTOM_LINKS: {
       const { customLinksDetails } = state;
-      const { customLinks } = customLinksDetails;
+      const { customLinks = [] } = customLinksDetails;
 
       const editedCustomLinks = cloneDeep(customLinks).map(item => {
         if (
@@ -256,7 +256,7 @@ const profileReducer = (state = profileInitialState, action) => {
     }
     case actionTypes.DELETE_CUSTOM_LINK: {
       const { customLinksDetails } = state;
-      const { customLinks } = customLinksDetails;
+      const { customLinks = [] } = customLinksDetails;
 
       const editedCustomLinks = cloneDeep(customLinks);
 
@@ -272,7 +272,7 @@ const profileReducer = (state = profileInitialState, action) => {
     }
     case actionTypes.SWAP_CUSTOM_LINKS: {
       const { customLinksDetails } = state;
-      const { customLinks } = customLinksDetails;
+      const { customLinks = [] } = customLinksDetails;
 
       const editedCustomLinks = cloneDeep(customLinks);
       const { customLinkSource, customLinkTarget } = action;
@@ -298,7 +298,7 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:
     case actionTypes.EDIT_CUSTOM_LINK_URL: {
       const { customLinksDetails } = state;
-      const { customLinks } = customLinksDetails;
+      const { customLinks = [] } = customLinksDetails;
 
       const editedCustomLinks = cloneDeep(customLinks);
 
