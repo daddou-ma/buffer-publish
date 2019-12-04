@@ -5,8 +5,8 @@ let userData =
   window.bufferData.user;
 
 module.exports = (state = userData || {}, action) => {
-  switch(action.type) {
+  switch (action.type) {
     default:
       return state;
   }
-}
+};

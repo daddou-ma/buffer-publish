@@ -35,16 +35,29 @@ const BillingUpgradeCTABanner = ({
     <Text {...styles}>
       <FeatureLoader supportedPlans="free">Free</FeatureLoader>
       <FeatureLoader supportedPlans="pro">Pro</FeatureLoader>
-      <FeatureLoader supportedPlans="business">{isPremiumBusinessPlan ? 'Premium' : 'Business'}</FeatureLoader>
+      <FeatureLoader supportedPlans="business">
+        {isPremiumBusinessPlan ? 'Premium' : 'Business'}
+      </FeatureLoader>
     </Text>
   );
 
-  const timeRemaining = <Text weight="bold" color={textColor} size="mini">{trial.trialTimeRemaining} remaining</Text>;
-  const postTrialCost = <Text weight="bold" color={textColor} size="mini">{trial.postTrialCost}</Text>;
+  const timeRemaining = (
+    <Text weight="bold" color={textColor} size="mini">
+      {trial.trialTimeRemaining} remaining
+    </Text>
+  );
+  const postTrialCost = (
+    <Text weight="bold" color={textColor} size="mini">
+      {trial.postTrialCost}
+    </Text>
+  );
 
   const trialRemaining = [
     { replaceString: '{remaining}', replaceWith: timeRemaining },
-    { replaceString: '{plan}', replaceWith: currentPlan({ color: textColor, size: 'mini' }) },
+    {
+      replaceString: '{plan}',
+      replaceWith: currentPlan({ color: textColor, size: 'mini' }),
+    },
   ];
 
   const billedAmountEnd = [
@@ -54,7 +67,14 @@ const BillingUpgradeCTABanner = ({
   let BannerText;
   if (!trial.hasCardDetails) {
     const planTrial = [
-      { replaceString: '{plan}', replaceWith: currentPlan({ color: textColor, weight: 'bold', size: 'mini' }) },
+      {
+        replaceString: '{plan}',
+        replaceWith: currentPlan({
+          color: textColor,
+          weight: 'bold',
+          size: 'mini',
+        }),
+      },
     ];
     BannerText = (
       <Fragment>
@@ -64,7 +84,9 @@ const BillingUpgradeCTABanner = ({
             replacementStrings={planTrial}
           />
         </Text>
-        <Text color={textColor} size="mini">{translations.completeBilling}</Text>
+        <Text color={textColor} size="mini">
+          {translations.completeBilling}
+        </Text>
       </Fragment>
     );
   } else {
@@ -88,9 +110,7 @@ const BillingUpgradeCTABanner = ({
 
   return (
     <div style={styling}>
-      <div style={textStyle}>
-        {BannerText}
-      </div>
+      <div style={textStyle}>{BannerText}</div>
       <Button
         type="primary"
         size="small"

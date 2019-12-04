@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  ClockIcon,
-  WarningIcon,
-} from '@bufferapp/components';
+import { ClockIcon, WarningIcon } from '@bufferapp/components';
 import { red } from '@bufferapp/ui/style/colors';
 
 import CardFooter from '../CardFooter';
@@ -11,14 +8,10 @@ import CardFooter from '../CardFooter';
 /* eslint-disable react/prop-types */
 const renderIcon = ({ isPastDue, scheduledAt }) => {
   if (isPastDue) {
-    return (
-      <WarningIcon color={red} />
-    );
+    return <WarningIcon color={red} />;
   }
   if (scheduledAt) {
-    return (
-      <ClockIcon />
-    );
+    return <ClockIcon />;
   }
   return null;
 };
@@ -91,9 +84,16 @@ const DraftFooter = ({
   const deletingMessage = (isDeleting || isConfirmingDelete) && 'Deleting...';
   const movingMessage = isMoving && approvalView && 'Moving...';
   const requestingMessage = isMoving && !approvalView && 'Requesting...';
-  const approvingMessage = isWorking && manager && approvalView && 'Approving...';
+  const approvingMessage =
+    isWorking && manager && approvalView && 'Approving...';
   const addingMessage = isWorking && manager && !approvalView && 'Adding...';
-  const actionMessage = deletingMessage || movingMessage || requestingMessage || approvingMessage || addingMessage || '';
+  const actionMessage =
+    deletingMessage ||
+    movingMessage ||
+    requestingMessage ||
+    approvingMessage ||
+    addingMessage ||
+    '';
 
   return (
     <CardFooter
@@ -102,8 +102,12 @@ const DraftFooter = ({
       message={postAction}
       messageColor={isPastDue ? red : ''}
       onDeleteClick={hasPermission ? onDeleteConfirmClick : null}
-      onEditClick={!hasPermission || (!manager && approvalView) ? null : onEditClick}
-      onMoveToDraftsClick={(approvalView && hasPermission) ? onMoveToDraftsClick : null}
+      onEditClick={
+        !hasPermission || (!manager && approvalView) ? null : onEditClick
+      }
+      onMoveToDraftsClick={
+        approvalView && hasPermission ? onMoveToDraftsClick : null
+      }
       onSubmitDraftsClick={renderDraftsAction({
         hasRescheduleAction,
         hasRequestApprovalAction,
@@ -118,7 +122,9 @@ const DraftFooter = ({
         manager,
         draftsView,
       })}
-      hasFirstComment={hasFirstCommentFlip && hasCommentEnabled && commentEnabled}
+      hasFirstComment={
+        hasFirstCommentFlip && hasCommentEnabled && commentEnabled
+      }
       isPerformingAction={!!actionMessage}
       actionMessage={actionMessage}
     />

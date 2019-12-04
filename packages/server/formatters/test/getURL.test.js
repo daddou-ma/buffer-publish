@@ -7,11 +7,15 @@ describe('getURL', () => {
   describe('getBillingURL', () => {
     it('should include cta param', () => {
       const result = getURL.getBillingURL({ cta: IG_FIRST_COMMENT_PRO_TRIAL });
-      expect(result).toEqual(`https://${getURL.getBaseURL()}/app/account/receipts?content_only=true&cta=${IG_FIRST_COMMENT_PRO_TRIAL}`);
+      expect(result).toEqual(
+        `https://${getURL.getBaseURL()}/app/account/receipts?content_only=true&cta=${IG_FIRST_COMMENT_PRO_TRIAL}`
+      );
     });
     it('should not include cta param', () => {
       const result = getURL.getBillingURL({});
-      expect(result).toEqual(`https://${getURL.getBaseURL()}/app/account/receipts?content_only=true`);
+      expect(result).toEqual(
+        `https://${getURL.getBaseURL()}/app/account/receipts?content_only=true`
+      );
     });
   });
 
@@ -21,7 +25,9 @@ describe('getURL', () => {
         cta: IG_FIRST_COMMENT_PRO_TRIAL,
         trialType: 'pro',
       });
-      expect(result).toEqual(`https://${getURL.getBaseURL()}/billing/start-trial?trialType=pro&cta=${IG_FIRST_COMMENT_PRO_TRIAL}`);
+      expect(result).toEqual(
+        `https://${getURL.getBaseURL()}/billing/start-trial?trialType=pro&cta=${IG_FIRST_COMMENT_PRO_TRIAL}`
+      );
     });
     // it('should not include cta', () => {
     //   const result = getURL.getStartTrialURL({

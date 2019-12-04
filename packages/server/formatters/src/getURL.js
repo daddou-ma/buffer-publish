@@ -41,19 +41,19 @@ module.exports = {
     }
     return 'https://buffer.com/manage/team-members';
   },
-  getInstagramDirectPostingURL: (profileId) => {
+  getInstagramDirectPostingURL: profileId => {
     if (window.location.hostname === 'publish.local.buffer.com') {
       return `https://local.buffer.com/instagram/setup?profile_id=${profileId}`;
     }
     return `https://buffer.com/instagram/setup?profile_id=${profileId}`;
   },
-  getConnectBitlyURL: (profileId) => {
+  getConnectBitlyURL: profileId => {
     if (window.location.hostname === 'publish.local.buffer.com') {
       return `https://local.buffer.com/oauth/bitly/${profileId}/auth`;
     }
     return `https://buffer.com/oauth/bitly/${profileId}/auth`;
   },
-  getDisconnectBitlyURL: (profileId) => {
+  getDisconnectBitlyURL: profileId => {
     if (window.location.hostname === 'publish.local.buffer.com') {
       return `https://local.buffer.com/profile/disconnect_bitly_auth/${profileId}`;
     }
@@ -62,9 +62,13 @@ module.exports = {
   getStartTrialURL: ({ plan, cycle, trialType, cta, nextUrl }) => {
     const nextParam = nextUrl ? `&next=${nextUrl}` : '';
     // temporarily adding to rule out that unknown ctas are not coming from publish
-    const ctaParam = cta ? `&cta=${cta}` : `&cta=publish-test-getStartTrialUrl-start${trialType}Trial-1`;
+    const ctaParam = cta
+      ? `&cta=${cta}`
+      : `&cta=publish-test-getStartTrialUrl-start${trialType}Trial-1`;
     // we are slowly deprecating trialType in favor of plan
-    const planParam = trialType ? `trialType=${trialType}` : `plan=${plan}&cycle=${cycle}`;
+    const planParam = trialType
+      ? `trialType=${trialType}`
+      : `plan=${plan}&cycle=${cycle}`;
     if (window.location.hostname === 'publish.local.buffer.com') {
       return `https://local.buffer.com/billing/start-trial?${planParam}${ctaParam}${nextParam}`;
     }

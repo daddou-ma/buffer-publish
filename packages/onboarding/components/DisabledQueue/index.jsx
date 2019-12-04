@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Tooltip } from '@bufferapp/ui';
 import { white, grayDark } from '@bufferapp/ui/style/colors';
-import {
-  fontSize,
-  fontWeight,
-} from '@bufferapp/ui/style/fonts';
+import { fontSize, fontWeight } from '@bufferapp/ui/style/fonts';
 import {
   Tabs,
   Tab,
@@ -115,29 +112,46 @@ const DisabledQueue = ({
     </ProfileSidebarWrapper>
     <Content>
       <TabsWrapper id="tabs">
-        <Tabs
-          selectedTabId="disabledTab"
-          onTabClick={() => {}}
-        >
+        <Tabs selectedTabId="disabledTab" onTabClick={() => {}}>
           <Tab tabId="disabledTab">{translations.queueTab}</Tab>
           <TabWrapper>
-            <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId="disabledTab2" disabled>{translations.analyticsTab}</Tab>
+            <Tooltip
+              label="Connect a social account to explore this tab"
+              position="bottom"
+            >
+              <Tab tabId="disabledTab2" disabled>
+                {translations.analyticsTab}
+              </Tab>
             </Tooltip>
           </TabWrapper>
           <TabWrapper>
-            <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId="disabledTab3" disabled>{translations.awaitingTab}</Tab>
+            <Tooltip
+              label="Connect a social account to explore this tab"
+              position="bottom"
+            >
+              <Tab tabId="disabledTab3" disabled>
+                {translations.awaitingTab}
+              </Tab>
             </Tooltip>
           </TabWrapper>
           <TabWrapper>
-            <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId="disabledTab4" disabled>{translations.draftsTab}</Tab>
+            <Tooltip
+              label="Connect a social account to explore this tab"
+              position="bottom"
+            >
+              <Tab tabId="disabledTab4" disabled>
+                {translations.draftsTab}
+              </Tab>
             </Tooltip>
           </TabWrapper>
           <TabWrapper>
-            <Tooltip label="Connect a social account to explore this tab" position="bottom">
-              <Tab tabId="disabledTab5" disabled>{translations.settingsTab}</Tab>
+            <Tooltip
+              label="Connect a social account to explore this tab"
+              position="bottom"
+            >
+              <Tab tabId="disabledTab5" disabled>
+                {translations.settingsTab}
+              </Tab>
             </Tooltip>
           </TabWrapper>
         </Tabs>
@@ -145,7 +159,10 @@ const DisabledQueue = ({
       <Queue>
         <TopBarContainer>
           <ComposerWrapper>
-            <Tooltip label="Connect a social account to start sharing content" position="bottom">
+            <Tooltip
+              label="Connect a social account to start sharing content"
+              position="bottom"
+            >
               <ComposerInput
                 isDisabled
                 placeholder={translations.composerInput}
@@ -161,7 +178,10 @@ const DisabledQueue = ({
             </HeaderTextDate>
           </HeaderText>
           <div style={{ marginLeft: 'auto' }}>
-            <Tooltip label="Connect a social account to see calendar views of your posts" position="top">
+            <Tooltip
+              label="Connect a social account to see calendar views of your posts"
+              position="top"
+            >
               <QueueButtonGroup
                 buttons={calendarBtns}
                 onClick={() => {}}
@@ -170,16 +190,8 @@ const DisabledQueue = ({
             </Tooltip>
           </div>
         </ListHeader>
-        <PostEmptySlot
-          time="08:33 am"
-          service="noProfile"
-          onClick={() => {}}
-        />
-        <PostEmptySlot
-          time="5:33 pm"
-          service="noProfile"
-          onClick={() => {}}
-        />
+        <PostEmptySlot time="08:33 am" service="noProfile" onClick={() => {}} />
+        <PostEmptySlot time="5:33 pm" service="noProfile" onClick={() => {}} />
       </Queue>
     </Content>
   </ProfilePage>

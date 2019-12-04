@@ -7,18 +7,20 @@ import PropTypes from 'prop-types';
 import { escapeParens } from '../utils/StringUtils';
 import styles from './css/LinkAttachmentThumbnail.css';
 
-const LinkAttachmentThumbnail = (props) => {
+const LinkAttachmentThumbnail = props => {
   const thumbnail = props.thumbnail;
   const hasThumbnail = thumbnail !== null;
 
   return (
     <div>
-      {hasThumbnail ?
+      {hasThumbnail ? (
         <div
           className={styles.thumbnail}
           style={{ backgroundImage: `url(${escapeParens(thumbnail.url)})` }}
-        /> :
-        <div className={styles.thumbnailPlaceholder} />}
+        />
+      ) : (
+        <div className={styles.thumbnailPlaceholder} />
+      )}
     </div>
   );
 };

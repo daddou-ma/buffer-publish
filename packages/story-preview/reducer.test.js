@@ -13,8 +13,7 @@ describe('reducer', () => {
     deepFreeze(action);
 
     // When state is undefined, it's supposed to return initial state
-    expect(reducer(undefined, action))
-      .toEqual(initialState);
+    expect(reducer(undefined, action)).toEqual(initialState);
   });
 
   it('should handle SELECT_PROFILE action type', () => {
@@ -40,8 +39,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle OPEN_PREVIEW action type', () => {
@@ -67,8 +65,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // Test action creators:

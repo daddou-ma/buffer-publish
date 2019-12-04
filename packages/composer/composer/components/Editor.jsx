@@ -11,38 +11,27 @@ import AppActionCreators from '../action-creators/AppActionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
 import WebAPIUtils from '../utils/WebAPIUtils';
-import CompositeNestableDecorator
-  from '../utils/draft-js-custom-plugins/draft-decorator/CompositeNestableDecorator';
+import CompositeNestableDecorator from '../utils/draft-js-custom-plugins/draft-decorator/CompositeNestableDecorator';
 import createShortLinkPlugin from '../utils/draft-js-custom-plugins/short-link';
 import createUnshortenedLinkPlugin from '../utils/draft-js-custom-plugins/unshortened-link';
 import createLinkDecoratorPlugin from '../utils/draft-js-custom-plugins/link';
 import createMentionDecoratorPlugin from '../utils/draft-js-custom-plugins/mention';
 import createHashtagDecoratorPlugin from '../utils/draft-js-custom-plugins/hashtag';
 import createHighlighterPlugin from '../utils/draft-js-custom-plugins/highlighter';
-import getAutocompleteSuggestionsPosition
-  from '../utils/draft-js-custom-plugins/autocomplete/utils/positionSuggestions';
-import TwitterAutocompleteSuggestionsEntry
-  from '../utils/draft-js-custom-plugins/autocomplete/TwitterMentionSuggestionsEntry';
-import TwitterHashtagAutocompleteSuggestionsEntry
-  from '../utils/draft-js-custom-plugins/autocomplete/TwitterHashtagSuggestionsEntry';
-import FacebookAutocompleteSuggestionsEntry
-  from '../utils/draft-js-custom-plugins/autocomplete/FacebookMentionSuggestionsEntry';
-import createPrepopulatedMentionPlugin
-  from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-mention';
-import createPrepopulatedHashtagPlugin
-  from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-hashtag';
-import createImportedFacebookMentionPlugin
-  from '../utils/draft-js-custom-plugins/imported-facebook-mention-entities';
+import getAutocompleteSuggestionsPosition from '../utils/draft-js-custom-plugins/autocomplete/utils/positionSuggestions';
+import TwitterAutocompleteSuggestionsEntry from '../utils/draft-js-custom-plugins/autocomplete/TwitterMentionSuggestionsEntry';
+import TwitterHashtagAutocompleteSuggestionsEntry from '../utils/draft-js-custom-plugins/autocomplete/TwitterHashtagSuggestionsEntry';
+import FacebookAutocompleteSuggestionsEntry from '../utils/draft-js-custom-plugins/autocomplete/FacebookMentionSuggestionsEntry';
+import createPrepopulatedMentionPlugin from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-mention';
+import createPrepopulatedHashtagPlugin from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-hashtag';
+import createImportedFacebookMentionPlugin from '../utils/draft-js-custom-plugins/imported-facebook-mention-entities';
 import createInspectSelectionPlugin from '../utils/draft-js-custom-plugins/inspect-selection';
 import { NotificationScopes, QueueingTypes } from '../AppConstants';
 
 import styles from './css/Editor.css';
-import twitterAutocompleteStyles
-  from '../utils/draft-js-custom-plugins/autocomplete/TwitterAutocomplete.css';
-import twitterHashtagAutocompleteStyles
-  from '../utils/draft-js-custom-plugins/autocomplete/TwitterHashtagAutocomplete.css';
-import facebookAutocompleteStyles
-  from '../utils/draft-js-custom-plugins/autocomplete/FacebookAutocomplete.css';
+import twitterAutocompleteStyles from '../utils/draft-js-custom-plugins/autocomplete/TwitterAutocomplete.css';
+import twitterHashtagAutocompleteStyles from '../utils/draft-js-custom-plugins/autocomplete/TwitterHashtagAutocomplete.css';
+import facebookAutocompleteStyles from '../utils/draft-js-custom-plugins/autocomplete/FacebookAutocomplete.css';
 import { getDraftCharacterCount } from '../stores/ComposerStore';
 
 class Editor extends React.Component {
@@ -68,7 +57,7 @@ class Editor extends React.Component {
     placeholder: 'What would you like to share?',
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.editorPlugins = null;
     this.editorPluginsComponents = null;
@@ -82,21 +71,25 @@ class Editor extends React.Component {
     hashtagAutocompleteSuggestions: [],
   };
 
-  componentWillMount () {
-    const { editorPlugins, editorPluginsComponents, editorPluginsUtils } = this.createEditorPlugins();
+  componentWillMount() {
+    const {
+      editorPlugins,
+      editorPluginsComponents,
+      editorPluginsUtils,
+    } = this.createEditorPlugins();
     this.editorPlugins = editorPlugins;
     this.editorPluginsComponents = editorPluginsComponents;
     this.editorPluginsUtils = editorPluginsUtils;
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.forceDecoratorsRerender) {
       nextProps.draft.forceDecoratorsRerender = false; // Mutating through shared reference
       this.refs.textZone.rerenderDecorators();
     }
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     /**
      * Autofocusing is slightly delayed so that the underlying DraftjsEditor
      * component has the time to initialize entirely before the focus event
@@ -107,7 +100,7 @@ class Editor extends React.Component {
     }
   }
 
-  onKeyDown = (e) => {
+  onKeyDown = e => {
     // Space/Enter: parse links
     if (e.key === ' ' || e.key === 'Enter') {
       this.parseDraftTextLinks();
@@ -116,9 +109,12 @@ class Editor extends React.Component {
       setImmediate(() => {
         const characterBefore = this.editorPluginsUtils.getCharacterBeforeSelectionStart();
         const hasCharacterBefore = characterBefore !== null;
-        const isCharacterBeforeWhitespace = twitterText.regexen.spaces.test(characterBefore);
+        const isCharacterBeforeWhitespace = twitterText.regexen.spaces.test(
+          characterBefore
+        );
 
-        if (!hasCharacterBefore || isCharacterBeforeWhitespace) this.parseDraftTextLinks();
+        if (!hasCharacterBefore || isCharacterBeforeWhitespace)
+          this.parseDraftTextLinks();
       });
     }
   };
@@ -129,12 +125,12 @@ class Editor extends React.Component {
 
   onCut = () => this.parseDraftTextLinks();
 
-  onClick = (e) => {
+  onClick = e => {
     e.preventDefault();
     this.props.onFocus(e);
   };
 
-  onEditorStateChange = (editorState) => {
+  onEditorStateChange = editorState => {
     // Only update editorState when necessary to prevent a rare race condition with
     // draft-js-mention-plugin, but still re-render whenever onEditorStateChange is
     // called because the nested AutocompleteSuggestions components need to in order
@@ -145,7 +141,10 @@ class Editor extends React.Component {
       return;
     }
 
-    ComposerActionCreators.updateDraftEditorState(this.props.draft.id, editorState);
+    ComposerActionCreators.updateDraftEditorState(
+      this.props.draft.id,
+      editorState
+    );
   };
 
   onFocus = e => this.props.onFocus(e);
@@ -154,11 +153,15 @@ class Editor extends React.Component {
     let currentValue;
 
     return ({ value }, searchType = 'mentions') => {
-      const searchQueryKey = searchType === 'mentions'
-        ? 'autocompleteSearchQuery' : 'hashtagAutocompleteSearchQuery';
+      const searchQueryKey =
+        searchType === 'mentions'
+          ? 'autocompleteSearchQuery'
+          : 'hashtagAutocompleteSearchQuery';
 
-      const suggestionsKey = searchType === 'mentions'
-        ? 'autocompleteSuggestions' : 'hashtagAutocompleteSuggestions';
+      const suggestionsKey =
+        searchType === 'mentions'
+          ? 'autocompleteSuggestions'
+          : 'hashtagAutocompleteSuggestions';
 
       // Only query for suggestions after users enter 2 or more characters
       if (!value || value.length < 2) {
@@ -170,12 +173,16 @@ class Editor extends React.Component {
       }
 
       // Don't run the Facebook Autocomplete if there isn't at least one Facebook page selected
-      if (this.props.draft.service.name === 'facebook' && searchType === 'mentions') {
-        const hasSelectedFbPages = this.props.profiles.some(p => (
-          p.isSelected
-            && p.service.name === 'facebook'
-            && p.serviceType === 'page'
-        ));
+      if (
+        this.props.draft.service.name === 'facebook' &&
+        searchType === 'mentions'
+      ) {
+        const hasSelectedFbPages = this.props.profiles.some(
+          p =>
+            p.isSelected &&
+            p.service.name === 'facebook' &&
+            p.serviceType === 'page'
+        );
 
         if (!hasSelectedFbPages) {
           this.setState({
@@ -190,7 +197,11 @@ class Editor extends React.Component {
 
       currentValue = value;
 
-      const suggestionsStream = WebAPIUtils.getAutocompleteSuggestions(this.props.draft.service.name, value, searchType);
+      const suggestionsStream = WebAPIUtils.getAutocompleteSuggestions(
+        this.props.draft.service.name,
+        value,
+        searchType
+      );
 
       (async () => {
         for await (const suggestions of suggestionsStream) {
@@ -202,11 +213,12 @@ class Editor extends React.Component {
             });
           }
         }
-      })().catch((error) => {
-        const alreadyHasSameAutocompleteNotif = this.props.visibleNotifications.some(notif => (
-          notif.scope === NotificationScopes.AUTOCOMPLETE
-          && notif.message === error.message
-        ));
+      })().catch(error => {
+        const alreadyHasSameAutocompleteNotif = this.props.visibleNotifications.some(
+          notif =>
+            notif.scope === NotificationScopes.AUTOCOMPLETE &&
+            notif.message === error.message
+        );
 
         if (!alreadyHasSameAutocompleteNotif) {
           NotificationActionCreators.queueError({
@@ -218,9 +230,8 @@ class Editor extends React.Component {
     };
   })();
 
-  onHashtagAutocompleteSearchChange = (...args) => (
-    this.onAutocompleteSearchChange(...args, 'hashtags')
-  );
+  onHashtagAutocompleteSearchChange = (...args) =>
+    this.onAutocompleteSearchChange(...args, 'hashtags');
 
   onAutocompleteOpen = () => {
     this.isAutocompleteOpen = true;
@@ -260,21 +271,26 @@ class Editor extends React.Component {
     });
   };
 
-  onLinkUnshortened = (unshortenedLink) => {
+  onLinkUnshortened = unshortenedLink => {
     ComposerActionCreators.draftTextLinkUnshortened(
-      this.props.draft.id, unshortenedLink,
+      this.props.draft.id,
+      unshortenedLink
     );
   };
 
   onLinkShortened = (unshortenedLink, shortLink) => {
     ComposerActionCreators.draftTextLinkShortened(
-      this.props.draft.id, unshortenedLink, shortLink,
+      this.props.draft.id,
+      unshortenedLink,
+      shortLink
     );
   };
 
   onLinkReshortened = (unshortenedLink, shortLink) => {
     ComposerActionCreators.draftTextLinkReshortened(
-      this.props.draft.id, unshortenedLink, shortLink,
+      this.props.draft.id,
+      unshortenedLink,
+      shortLink
     );
   };
 
@@ -284,22 +300,25 @@ class Editor extends React.Component {
 
     // Display notices for Facebook Autocomplete's special cases
     if (this.props.draft.service.name === 'facebook') {
-      const selectedFbAccounts = this.props.profiles.filter(p => (
-        p.isSelected
-          && p.service.name === 'facebook'
-      ));
+      const selectedFbAccounts = this.props.profiles.filter(
+        p => p.isSelected && p.service.name === 'facebook'
+      );
 
-      const hasSelectedFbProfiles = selectedFbAccounts.some(p => p.serviceType === 'profile');
-      const hasSelectedFbPages = selectedFbAccounts.some(p => p.serviceType === 'page');
+      const hasSelectedFbProfiles = selectedFbAccounts.some(
+        p => p.serviceType === 'profile'
+      );
+      const hasSelectedFbPages = selectedFbAccounts.some(
+        p => p.serviceType === 'page'
+      );
 
       if (hasSelectedFbProfiles && hasSelectedFbPages) {
         return `Only Facebook pages can add tags:
                 Facebook profiles will see regular text instead.`;
-      } if (hasSelectedFbProfiles && !hasSelectedFbPages) {
+      }
+      if (hasSelectedFbProfiles && !hasSelectedFbPages) {
         // This was broken after updating draft-js-mention-plugin to latest: disabled
         // in the meantime to prevent uwnanted visual artifacts
         // TODO: rebuild that functionality another way now that the plugin behaves differently
-
         /* return `Sorry, we can’t add tags on posts from Facebook profiles (just pages).
                 Your tag will show up as regular text.`; */
       }
@@ -308,7 +327,7 @@ class Editor extends React.Component {
     return '';
   };
 
-  handleReturn = (e) => {
+  handleReturn = e => {
     // Give control to mention plugin if it's active (to select the suggestion)
     if (this.isAutocompleteOpen || this.isHashtagAutocompleteOpen) {
       return 'not-handled';
@@ -321,14 +340,18 @@ class Editor extends React.Component {
 
     // Save drafts ("Share Now") on Ctrl/Cmd + Shift + Enter
     if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
-      AppActionCreators.saveDrafts(QueueingTypes.NOW, { shouldSkipEmptyTextAlert: false });
+      AppActionCreators.saveDrafts(QueueingTypes.NOW, {
+        shouldSkipEmptyTextAlert: false,
+      });
       this.refs.textZone.blur();
       return 'handled';
     }
 
     // Save drafts ("Add to Queue") on Ctrl/Cmd + Enter
     if (e.ctrlKey || e.metaKey) {
-      AppActionCreators.saveDrafts(undefined, { shouldSkipEmptyTextAlert: false });
+      AppActionCreators.saveDrafts(undefined, {
+        shouldSkipEmptyTextAlert: false,
+      });
       this.refs.textZone.blur();
       return 'handled';
     }
@@ -348,7 +371,9 @@ class Editor extends React.Component {
     // we'd need to force full re-renders on each key stroke for the two reasons
     // mentioned above, which leads to all sorts of side-effects with EditorState.
     // tl;dr: soft new lines ftw!
-    this.onEditorStateChange(RichUtils.insertSoftNewline(this.props.draft.editorState));
+    this.onEditorStateChange(
+      RichUtils.insertSoftNewline(this.props.draft.editorState)
+    );
     return 'handled';
   };
 
@@ -381,9 +406,10 @@ class Editor extends React.Component {
     return 'handled';
   };
 
-  parseDraftTextLinks = () => setImmediate(() => {
-    ComposerActionCreators.parseDraftTextLinks(this.props.draft.id);
-  });
+  parseDraftTextLinks = () =>
+    setImmediate(() => {
+      ComposerActionCreators.parseDraftTextLinks(this.props.draft.id);
+    });
 
   createEditorPlugins = () => {
     const editorPlugins = [];
@@ -398,7 +424,8 @@ class Editor extends React.Component {
     // Create unshortened link plugin
     const unshortenedLinkPlugin = createUnshortenedLinkPlugin();
     editorPlugins.push(unshortenedLinkPlugin);
-    editorPluginsComponents.UnshortenedLinkTooltip = unshortenedLinkPlugin.UnshortenedLinkTooltip;
+    editorPluginsComponents.UnshortenedLinkTooltip =
+      unshortenedLinkPlugin.UnshortenedLinkTooltip;
 
     // Create link plugin to decorate non-entity links
     const linkPlugin = createLinkDecoratorPlugin();
@@ -407,11 +434,15 @@ class Editor extends React.Component {
     // Create inspect-selection plugin to hook a util function into the editor
     const inspectSelectionPlugin = createInspectSelectionPlugin();
     editorPlugins.push(inspectSelectionPlugin);
-    editorPluginsUtils.getCharacterBeforeSelectionStart = inspectSelectionPlugin.getCharacterBeforeSelectionStart;
+    editorPluginsUtils.getCharacterBeforeSelectionStart =
+      inspectSelectionPlugin.getCharacterBeforeSelectionStart;
 
     // Create highlighter plugin
     if (this.props.draft.service.charLimit !== null) {
-      const highlighterPlugin = createHighlighterPlugin(this.props.draft, getDraftCharacterCount);
+      const highlighterPlugin = createHighlighterPlugin(
+        this.props.draft,
+        getDraftCharacterCount
+      );
       editorPlugins.push(highlighterPlugin);
     }
 
@@ -435,38 +466,52 @@ class Editor extends React.Component {
 
     // Create autocomplete plugin that handles mentions typed by users
     if (this.shouldEnableAutocomplete()) {
-      const getDecoratorParentRect = () => this.refs.editorWrapper.getBoundingClientRect();
+      const getDecoratorParentRect = () =>
+        this.refs.editorWrapper.getBoundingClientRect();
       const autocompletePlugin = createMentionPlugin({
-        theme: (
-          this.props.draft.service.name === 'twitter' ? twitterAutocompleteStyles
-            : this.props.draft.service.name === 'facebook' ? facebookAutocompleteStyles : null
+        theme:
+          this.props.draft.service.name === 'twitter'
+            ? twitterAutocompleteStyles
+            : this.props.draft.service.name === 'facebook'
+            ? facebookAutocompleteStyles
+            : null,
+        positionSuggestions: getAutocompleteSuggestionsPosition.bind(
+          null,
+          getDecoratorParentRect
         ),
-        positionSuggestions: getAutocompleteSuggestionsPosition.bind(null, getDecoratorParentRect),
         entityMutability: 'IMMUTABLE',
       });
 
       editorPlugins.push(autocompletePlugin);
-      editorPluginsComponents.AutocompleteSuggestions = autocompletePlugin.MentionSuggestions;
-      editorPluginsComponents.AutocompleteSuggestionsEntry = (
-        this.props.draft.service.name === 'twitter' ? TwitterAutocompleteSuggestionsEntry
-          : this.props.draft.service.name === 'facebook' ? FacebookAutocompleteSuggestionsEntry : null
-      );
+      editorPluginsComponents.AutocompleteSuggestions =
+        autocompletePlugin.MentionSuggestions;
+      editorPluginsComponents.AutocompleteSuggestionsEntry =
+        this.props.draft.service.name === 'twitter'
+          ? TwitterAutocompleteSuggestionsEntry
+          : this.props.draft.service.name === 'facebook'
+          ? FacebookAutocompleteSuggestionsEntry
+          : null;
 
       this.isAutocompleteOpen = false;
     }
 
     // Create autocomplete plugin that handles hashtags typed by users
     if (this.shouldEnableHashtagAutocomplete()) {
-      const getDecoratorParentRect = () => this.refs.editorWrapper.getBoundingClientRect();
+      const getDecoratorParentRect = () =>
+        this.refs.editorWrapper.getBoundingClientRect();
       const hashtagAutocompletePlugin = createMentionPlugin({
         theme: twitterHashtagAutocompleteStyles,
-        positionSuggestions: getAutocompleteSuggestionsPosition.bind(null, getDecoratorParentRect),
+        positionSuggestions: getAutocompleteSuggestionsPosition.bind(
+          null,
+          getDecoratorParentRect
+        ),
         entityMutability: 'IMMUTABLE',
         mentionTrigger: '#',
       });
 
       editorPlugins.push(hashtagAutocompletePlugin);
-      editorPluginsComponents.HashtagAutocompleteSuggestions = hashtagAutocompletePlugin.MentionSuggestions;
+      editorPluginsComponents.HashtagAutocompleteSuggestions =
+        hashtagAutocompletePlugin.MentionSuggestions;
       editorPluginsComponents.HashtagAutocompleteSuggestionsEntry = TwitterHashtagAutocompleteSuggestionsEntry;
 
       this.isHashtagAutocompleteOpen = false;
@@ -492,18 +537,17 @@ class Editor extends React.Component {
 
     const emojiPlugin = createEmojiPlugin({
       useNativeArt: true,
-      selectButtonContent:
-  <svg
-    aria-label="click to add emoji"
-    fill="currentColor"
-    style={emojiImageStyle}
-    preserveAspectRatio="xMidYMid meet"
-    viewBox="0 0 40 40"
-  >
-    <path
-      d="m28.3 24q-0.8 2.7-3.1 4.3t-5.1 1.7-5-1.6-3.1-4.4q-0.2-0.6 0.1-1.1t0.8-0.7q0.6-0.2 1.1 0.1t0.7 0.8q0.6 1.8 2.1 2.9t3.3 1.1 3.4-1.1 2.1-2.9q0.2-0.5 0.7-0.8t1.1-0.1 0.8 0.7 0.1 1.1z m-11-9.7q0 1.2-0.9 2t-2 0.8-2-0.8-0.8-2 0.8-2 2-0.9 2 0.9 0.9 2z m11.4 0q0 1.2-0.8 2t-2 0.8-2.1-0.8-0.8-2 0.8-2 2.1-0.9 2 0.9 0.8 2z m5.7 5.7q0-2.9-1.1-5.5t-3.1-4.6-4.5-3.1-5.6-1.1-5.5 1.1-4.6 3.1-3 4.6-1.1 5.5 1.1 5.5 3 4.6 4.6 3 5.5 1.2 5.6-1.2 4.5-3 3.1-4.6 1.1-5.5z m2.9 0q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z"
-    />
-  </svg>,
+      selectButtonContent: (
+        <svg
+          aria-label="click to add emoji"
+          fill="currentColor"
+          style={emojiImageStyle}
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 40 40"
+        >
+          <path d="m28.3 24q-0.8 2.7-3.1 4.3t-5.1 1.7-5-1.6-3.1-4.4q-0.2-0.6 0.1-1.1t0.8-0.7q0.6-0.2 1.1 0.1t0.7 0.8q0.6 1.8 2.1 2.9t3.3 1.1 3.4-1.1 2.1-2.9q0.2-0.5 0.7-0.8t1.1-0.1 0.8 0.7 0.1 1.1z m-11-9.7q0 1.2-0.9 2t-2 0.8-2-0.8-0.8-2 0.8-2 2-0.9 2 0.9 0.9 2z m11.4 0q0 1.2-0.8 2t-2 0.8-2.1-0.8-0.8-2 0.8-2 2.1-0.9 2 0.9 0.8 2z m5.7 5.7q0-2.9-1.1-5.5t-3.1-4.6-4.5-3.1-5.6-1.1-5.5 1.1-4.6 3.1-3 4.6-1.1 5.5 1.1 5.5 3 4.6 4.6 3 5.5 1.2 5.6-1.2 4.5-3 3.1-4.6 1.1-5.5z m2.9 0q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />
+        </svg>
+      ),
     });
     editorPlugins.push(emojiPlugin);
     editorPluginsComponents.EmojiSuggestions = emojiPlugin.EmojiSuggestions;
@@ -512,34 +556,48 @@ class Editor extends React.Component {
     return { editorPlugins, editorPluginsComponents, editorPluginsUtils };
   };
 
-  shouldEnableAutocomplete = () => (
-    this.props.draft.service.name === 'twitter'
-    || (this.props.draft.service.name === 'facebook' && this.props.shouldEnableFacebookAutocomplete)
-  );
+  shouldEnableAutocomplete = () =>
+    this.props.draft.service.name === 'twitter' ||
+    (this.props.draft.service.name === 'facebook' &&
+      this.props.shouldEnableFacebookAutocomplete);
 
-  shouldEnableHashtagAutocomplete = () => this.props.draft.service.name === 'twitter';
+  shouldEnableHashtagAutocomplete = () =>
+    this.props.draft.service.name === 'twitter';
 
-  render () {
+  render() {
     const {
-      draft, isComposerExpanded, placeholder, usesImageFirstLayout,
-      attachmentGlanceHasNoThumbnail, readOnly,
+      draft,
+      isComposerExpanded,
+      placeholder,
+      usesImageFirstLayout,
+      attachmentGlanceHasNoThumbnail,
+      readOnly,
     } = this.props;
 
     const {
-      ShortLinkTooltip, UnshortenedLinkTooltip, AutocompleteSuggestions,
-      AutocompleteSuggestionsEntry, HashtagAutocompleteSuggestions,
-      HashtagAutocompleteSuggestionsEntry, EmojiSuggestions, EmojiSelect,
+      ShortLinkTooltip,
+      UnshortenedLinkTooltip,
+      AutocompleteSuggestions,
+      AutocompleteSuggestionsEntry,
+      HashtagAutocompleteSuggestions,
+      HashtagAutocompleteSuggestionsEntry,
+      EmojiSuggestions,
+      EmojiSelect,
     } = this.editorPluginsComponents;
 
     const textZoneClassName = [
       this.props.hasLinkAttachment && isComposerExpanded
         ? [styles.expandedTextZone, styles.hasLinkAttachment].join(' ')
-        : isComposerExpanded ? styles.expandedTextZone
-          : attachmentGlanceHasNoThumbnail
-            ? [styles.hasAttachmentGlanceNoThumbnail, styles.collapsedTextZone].join(' ')
-            : this.props.hasAttachmentGlance
-              ? [styles.hasAttachmentGlance, styles.collapsedTextZone].join(' ')
-              : styles.collapsedTextZone,
+        : isComposerExpanded
+        ? styles.expandedTextZone
+        : attachmentGlanceHasNoThumbnail
+        ? [
+            styles.hasAttachmentGlanceNoThumbnail,
+            styles.collapsedTextZone,
+          ].join(' ')
+        : this.props.hasAttachmentGlance
+        ? [styles.hasAttachmentGlance, styles.collapsedTextZone].join(' ')
+        : styles.collapsedTextZone,
     ].join(' ');
 
     const textZoneTooltipClassNames = {
@@ -547,7 +605,9 @@ class Editor extends React.Component {
       hidden: styles.hiddenTextZoneTooltip,
     };
 
-    const editorWrapperClassName = usesImageFirstLayout ? styles.imageFirstEditorWrapper : styles.editorWrapper;
+    const editorWrapperClassName = usesImageFirstLayout
+      ? styles.imageFirstEditorWrapper
+      : styles.editorWrapper;
 
     const emojiButtonStyle = {
       position: 'absolute',
@@ -583,48 +643,43 @@ class Editor extends React.Component {
             onClose={this.onEmojiSuggestionsClose}
           />
           <div style={emojiButtonStyle}>
-            {isComposerExpanded
-            && <EmojiSelect />}
+            {isComposerExpanded && <EmojiSelect />}
           </div>
         </div>
 
-        {isComposerExpanded && this.shouldEnableAutocomplete()
-        && (
-        <AutocompleteSuggestions
-          onSearchChange={this.onAutocompleteSearchChange}
-          onOpen={this.onAutocompleteOpen}
-          onClose={this.onAutocompleteClose}
-          suggestions={this.state.autocompleteSuggestions}
-          entryComponent={AutocompleteSuggestionsEntry}
-          data-notice={this.getAutocompleteSuggestionsNotice()}
-          data-suggestions-count={this.state.autocompleteSuggestions.size}
-        />
+        {isComposerExpanded && this.shouldEnableAutocomplete() && (
+          <AutocompleteSuggestions
+            onSearchChange={this.onAutocompleteSearchChange}
+            onOpen={this.onAutocompleteOpen}
+            onClose={this.onAutocompleteClose}
+            suggestions={this.state.autocompleteSuggestions}
+            entryComponent={AutocompleteSuggestionsEntry}
+            data-notice={this.getAutocompleteSuggestionsNotice()}
+            data-suggestions-count={this.state.autocompleteSuggestions.size}
+          />
         )}
 
-        {isComposerExpanded && this.shouldEnableHashtagAutocomplete()
-        && (
-        <HashtagAutocompleteSuggestions
-          onSearchChange={this.onHashtagAutocompleteSearchChange}
-          onOpen={this.onHashtagAutocompleteOpen}
-          onClose={this.onHashtagAutocompleteClose}
-          suggestions={this.state.hashtagAutocompleteSuggestions}
-          entryComponent={HashtagAutocompleteSuggestionsEntry}
-        />
+        {isComposerExpanded && this.shouldEnableHashtagAutocomplete() && (
+          <HashtagAutocompleteSuggestions
+            onSearchChange={this.onHashtagAutocompleteSearchChange}
+            onOpen={this.onHashtagAutocompleteOpen}
+            onClose={this.onHashtagAutocompleteClose}
+            suggestions={this.state.hashtagAutocompleteSuggestions}
+            entryComponent={HashtagAutocompleteSuggestionsEntry}
+          />
         )}
 
-        {isComposerExpanded
-        && (
-        <ShortLinkTooltip
-          classNames={textZoneTooltipClassNames}
-          onLinkUnshortened={this.onLinkUnshortened}
-        />
+        {isComposerExpanded && (
+          <ShortLinkTooltip
+            classNames={textZoneTooltipClassNames}
+            onLinkUnshortened={this.onLinkUnshortened}
+          />
         )}
-        {isComposerExpanded
-        && (
-        <UnshortenedLinkTooltip
-          classNames={textZoneTooltipClassNames}
-          onLinkReshortened={this.onLinkReshortened}
-        />
+        {isComposerExpanded && (
+          <UnshortenedLinkTooltip
+            classNames={textZoneTooltipClassNames}
+            onLinkReshortened={this.onLinkReshortened}
+          />
         )}
       </div>
     );

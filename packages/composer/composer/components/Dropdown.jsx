@@ -7,7 +7,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import SimpleDropdown, { DropdownTrigger, DropdownContent } from '@bufferapp/react-simple-dropdown';
+import SimpleDropdown, {
+  DropdownTrigger,
+  DropdownContent,
+} from '@bufferapp/react-simple-dropdown';
 import styles from './css/Dropdown.css';
 
 const getDropdownState = ({ isDropdownExpanded }) => ({
@@ -33,7 +36,7 @@ class Dropdown extends React.Component {
 
   state = getDropdownState(this.props);
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps = nextProps => {
     if (this.props.isDropdownExpanded !== nextProps.isDropdownExpanded) {
       this.setState({
         isDropdownExpanded: nextProps.isDropdownExpanded,
@@ -59,31 +62,32 @@ class Dropdown extends React.Component {
   collapseDropdown = () => this.setState({ isDropdownExpanded: false });
 
   render() {
-    const isDropdownContentVisible = this.state.isDropdownExpanded && !this.props.disabled;
+    const isDropdownContentVisible =
+      this.state.isDropdownExpanded && !this.props.disabled;
 
-    const dropdownClassName = [
-      styles.dropdown,
-      this.props.className,
-    ].join(' ');
+    const dropdownClassName = [styles.dropdown, this.props.className].join(' ');
 
     // Attach some default styles to DropdownTrigger and DropdownContent
-    const children = React.Children.map(this.props.children, (child) => {
-      if (child.type.displayName !== 'DropdownTrigger' &&
-        child.type.displayName !== 'DropdownContent') return child;
+    const children = React.Children.map(this.props.children, child => {
+      if (
+        child.type.displayName !== 'DropdownTrigger' &&
+        child.type.displayName !== 'DropdownContent'
+      )
+        return child;
 
       let defaultClassName;
 
       if (child.type.displayName === 'DropdownTrigger') {
         defaultClassName = styles.dropdownTrigger;
       } else {
-        defaultClassName = isDropdownContentVisible ?
-          styles.visibleDropdownContent : styles.dropdownContent;
+        defaultClassName = isDropdownContentVisible
+          ? styles.visibleDropdownContent
+          : styles.dropdownContent;
       }
 
-      const childClassName = [
-        defaultClassName,
-        child.props.className,
-      ].join(' ');
+      const childClassName = [defaultClassName, child.props.className].join(
+        ' '
+      );
 
       return React.cloneElement(child, {
         className: childClassName,

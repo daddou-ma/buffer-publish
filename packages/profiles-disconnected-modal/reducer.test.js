@@ -63,14 +63,14 @@ describe('reducer', () => {
           type: actionTypes.RECONNECT_PROFILE,
           id: '1',
           service: 'twitter',
-        },
+        }
       );
       const someDisconnectedProfilesReconnecting = [
         { id: '1', isDisconnected: true, reconnecting: true },
         { id: '2', isDisconnected: true, reconnecting: false },
       ];
       expect(state.disconnectedProfiles).toEqual(
-        someDisconnectedProfilesReconnecting,
+        someDisconnectedProfilesReconnecting
       );
     });
   });

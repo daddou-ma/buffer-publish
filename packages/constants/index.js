@@ -14,8 +14,10 @@ const SMALL_PLAN_ID = '10';
 
 // segment naming convention: APP-VIEW-LOCATION-BUTTON-VERSION
 // https://www.notion.so/buffer/CTA-Parameter-Conventions-Call-to-Action-WIP-0ae87bdd99574e3888afb2fe6b75035a
-const ANALYTICS_OVERVIEW_SBP_TRIAL = 'publish-analyticsOverview-trialCard-sbpTrial-1';
-const ANALYTICS_OVERVIEW_BUSINESS_UPGRADE = 'publish-analyticsOverview-upgradeCard-businessUpgrade-1';
+const ANALYTICS_OVERVIEW_SBP_TRIAL =
+  'publish-analyticsOverview-trialCard-sbpTrial-1';
+const ANALYTICS_OVERVIEW_BUSINESS_UPGRADE =
+  'publish-analyticsOverview-upgradeCard-businessUpgrade-1';
 const APP_SHELL_PRO_TRIAL = 'publish-appShell-menu-proTrial-1';
 const APP_SHELL_PRO_UPGRADE = 'publish-appShell-menu-proUpgrade-1';
 const CTA_BANNER_PREMIUM_UPGRADE = 'publish-app-ctaBanner-premiumUpgrade-1';
@@ -24,35 +26,53 @@ const CTA_BANNER_PRO_UPGRADE = 'publish-app-ctaBanner-proUpgrade-1';
 const DRAFTS_SBP_TRIAL = 'publish-drafts-trialCard-sbpTrial-1';
 const DRAFTS_BUSINESS_UPGRADE = 'publish-drafts-upgradeCard-businessUpgrade-1';
 const EXPIRED_TRIAL_PRO_UPGRADE = 'publish-app-expiredTrialModal-proUpgrade-1';
-const EXPIRED_TRIAL_PREMIUM_UPGRADE = 'publish-app-expiredTrialModal-premiumUpgrade-1';
-const EXPIRED_TRIAL_BUSINESS_UPGRADE = 'publish-app-expiredTrialModal-businessUpgrade-1';
+const EXPIRED_TRIAL_PREMIUM_UPGRADE =
+  'publish-app-expiredTrialModal-premiumUpgrade-1';
+const EXPIRED_TRIAL_BUSINESS_UPGRADE =
+  'publish-app-expiredTrialModal-businessUpgrade-1';
 const HEADER_PRO_TRIAL = 'publish-app-header-proTrial-1';
 const HEADER_PRO_UPGRADE = 'publish-app-header-proUpgrade-1';
-const IG_FIRST_COMMENT_PRO_TRIAL = 'publish-composer-instagramFirstCommentTrialModal-proTrial-1';
-const IG_FIRST_COMMENT_PRO_UPGRADE = 'publish-composer-instagramFirstCommentUpgradeModal-proUpgrade-1';
-const LOCKED_PROFILE_PRO_UPGRADE = 'publish-profiles-lockedProfileUpgradeCard-proUpgrade-1';
-const LOCKED_PROFILE_BUSINESS_UPGRADE = 'publish-profiles-lockedProfileUpgradeCard-businessUpgrade-1';
-const PROFILE_LIMIT_PRO_UPGRADE = 'publish-orgAdminConnect-profileLimitUpgrade-proUpgrade-1';
-const QUEUE_LIMIT_PRO_TRIAL = 'publish-composer-queueLimitNotification-proTrial-1';
-const QUEUE_LIMIT_PRO_UPGRADE = 'publish-composer-queueLimitNotification-proUpgrade-1';
-const PINTEREST_PRO_UPGRADE = 'publish-orgAdminConnect-upgradeToConnectPinterest-proUpgrade-1';
-const PLAN_OVERVIEW_PRO_UPGRADE = 'publish-orgAdminConnect-planOverview-proUpgrade-1';
-const PLANS_SOLO_PREMIUM_UPGRADE = 'publish-plans-switchPlansModal-premium35Upgrade-1';
-const PLANS_SOLO_PREMIUM_DOWNGRADE = 'publish-plans-switchPlansModal-premium35Downgrade-1';
+const IG_FIRST_COMMENT_PRO_TRIAL =
+  'publish-composer-instagramFirstCommentTrialModal-proTrial-1';
+const IG_FIRST_COMMENT_PRO_UPGRADE =
+  'publish-composer-instagramFirstCommentUpgradeModal-proUpgrade-1';
+const LOCKED_PROFILE_PRO_UPGRADE =
+  'publish-profiles-lockedProfileUpgradeCard-proUpgrade-1';
+const LOCKED_PROFILE_BUSINESS_UPGRADE =
+  'publish-profiles-lockedProfileUpgradeCard-businessUpgrade-1';
+const PROFILE_LIMIT_PRO_UPGRADE =
+  'publish-orgAdminConnect-profileLimitUpgrade-proUpgrade-1';
+const QUEUE_LIMIT_PRO_TRIAL =
+  'publish-composer-queueLimitNotification-proTrial-1';
+const QUEUE_LIMIT_PRO_UPGRADE =
+  'publish-composer-queueLimitNotification-proUpgrade-1';
+const PINTEREST_PRO_UPGRADE =
+  'publish-orgAdminConnect-upgradeToConnectPinterest-proUpgrade-1';
+const PLAN_OVERVIEW_PRO_UPGRADE =
+  'publish-orgAdminConnect-planOverview-proUpgrade-1';
+const PLANS_SOLO_PREMIUM_UPGRADE =
+  'publish-plans-switchPlansModal-premium35Upgrade-1';
+const PLANS_SOLO_PREMIUM_DOWNGRADE =
+  'publish-plans-switchPlansModal-premium35Downgrade-1';
 const PLANS_PRO_UPGRADE = 'publish-plansPage-switchPlansModal-proUpgrade-1';
 const PLANS_PRO_DOWNGRADE = 'publish-plans-switchPlansModal-proDowngrade-1';
 const PLANS_PREMIUM_UPGRADE = 'publish-plans-switchPlansModal-premiumUpgrade-1';
-const PLANS_PREMIUM_DOWNGRADE = 'publish-plans-switchPlansModal-premiumDowngrade-1';
+const PLANS_PREMIUM_DOWNGRADE =
+  'publish-plans-switchPlansModal-premiumDowngrade-1';
 const PLANS_SMALL_UPGRADE = 'publish-plans-switchPlansModal-smallUpgrade-1';
 const PLANS_SMALL_DOWNGRADE = 'publish-plans-switchPlansModal-smallDowngrade-1';
 const STORIES_PREVIEW_COMPOSER = 'publish-stories-composer-preview-1';
 const STORIES_PREVIEW_QUEUE = 'publish-stories-queue-preview-1';
-const STORIES_CREATE_STORY_GROUP = 'publish-stories-composer-createStoryGroup-1';
-const STORIES_UPDATE_STORY_GROUP = 'publish-stories-composer-updateStoryGroup-1';
+const STORIES_CREATE_STORY_GROUP =
+  'publish-stories-composer-createStoryGroup-1';
+const STORIES_UPDATE_STORY_GROUP =
+  'publish-stories-composer-updateStoryGroup-1';
 const STORIES_COMPOSER_ADD_NOTE = 'publish-stories-composer-addNote-1';
 const STORIES_PREVIEW_QUEUE_ADD_NOTE = 'publish-stories-queuePreview-addNote-1';
-const STORIES_PREVIEW_COMPOSER_ADD_NOTE = 'publish-stories-composerPreview-addNote-1';
-const STORIES_IMAGE_ASPECT_RATIO_UPLOADED = 'publish-stories-composer-imageAspectRatioUploaded-1';
+const STORIES_PREVIEW_COMPOSER_ADD_NOTE =
+  'publish-stories-composerPreview-addNote-1';
+const STORIES_IMAGE_ASPECT_RATIO_UPLOADED =
+  'publish-stories-composer-imageAspectRatioUploaded-1';
 
 const ImageDimensions = {
   large: {

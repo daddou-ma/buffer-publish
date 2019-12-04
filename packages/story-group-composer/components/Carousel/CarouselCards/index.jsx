@@ -27,7 +27,9 @@ const CarouselCards = ({
   onDropCard,
   translations,
 }) => {
-  const cardsToRender = editMode ? getCardsToShow({ cards, totalCardsToShow }) : sortCards(cards);
+  const cardsToRender = editMode
+    ? getCardsToShow({ cards, totalCardsToShow })
+    : sortCards(cards);
   const { cardWidth, cardHeight } = getCardSizes(largeCards);
   const maxAttachableMediaCount = totalCardsToShow - cards.length;
   const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.STORIES); // Clone config

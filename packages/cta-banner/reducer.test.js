@@ -12,8 +12,7 @@ describe('reducer', () => {
     deepFreeze(action);
 
     // When state is undefined, it's supposed to return initial state
-    expect(reducer(undefined, action))
-      .toEqual(initialState);
+    expect(reducer(undefined, action)).toEqual(initialState);
   });
 
   it('handles user_FETCH_SUCCESS action type and updates profileCount', () => {
@@ -35,8 +34,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // Test action creators:

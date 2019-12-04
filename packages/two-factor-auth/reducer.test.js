@@ -101,16 +101,19 @@ describe('reducer', () => {
     });
   });
   it('sets the tfa data after the code is confirmed', () => {
-    const actual = reducer({
-      ...initialState,
-      updateMethod: 'sms',
-      updatePhoneNumber: 'phone',
-    }, {
-      type: 'twoFactorConfirm_FETCH_SUCCESS',
-      result: {
-        recovery: 'recovery',
+    const actual = reducer(
+      {
+        ...initialState,
+        updateMethod: 'sms',
+        updatePhoneNumber: 'phone',
       },
-    });
+      {
+        type: 'twoFactorConfirm_FETCH_SUCCESS',
+        result: {
+          recovery: 'recovery',
+        },
+      }
+    );
     expect(actual).toEqual({
       ...initialState,
       updateMethod: 'sms',

@@ -16,4 +16,4 @@ storiesOf('DefaultPage', module)
       translations={translations}
       onConnectSocialAccountClick={action('connect social account click')}
     />
-));
+  ));

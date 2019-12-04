@@ -6,7 +6,10 @@ const createInspectSelectionPlugin = () => {
   };
 
   return {
-    getCharacterBeforeSelectionStart: getCharacterBeforeSelectionStart.bind(null, store),
+    getCharacterBeforeSelectionStart: getCharacterBeforeSelectionStart.bind(
+      null,
+      store
+    ),
 
     initialize: ({ getEditorState }) => {
       store.getEditorState = getEditorState;

@@ -49,25 +49,35 @@ export default connect(
       dispatch(actions.handleSaveStoryGroup(scheduledAt, shareNow));
     },
     onUpdateStoryGroup: ({
-      scheduledAt, stories, storyGroupId, shareNow = false,
+      scheduledAt,
+      stories,
+      storyGroupId,
+      shareNow = false,
     }) => {
       dispatch(actions.setScheduleLoading(true));
-      dispatch(actions.handleUpdateStoryGroup({
-        scheduledAt, stories, storyGroupId, shareNow,
-      }));
+      dispatch(
+        actions.handleUpdateStoryGroup({
+          scheduledAt,
+          stories,
+          storyGroupId,
+          shareNow,
+        })
+      );
     },
     saveNote: ({ note, order }) => {
       dispatch(actions.handleSaveStoryNote({ note, order }));
-      dispatch(actions.trackNote({
-        cta: SEGMENT_NAMES.STORIES_COMPOSER_ADD_NOTE,
-        note,
-        order,
-      }));
+      dispatch(
+        actions.trackNote({
+          cta: SEGMENT_NAMES.STORIES_COMPOSER_ADD_NOTE,
+          note,
+          order,
+        })
+      );
     },
-    onPreviewClick: ({
-      stories, profileId, id, scheduledAt, serviceId,
-    }) => {
-      const ctaProperties = getCtaProperties(SEGMENT_NAMES.STORIES_PREVIEW_COMPOSER);
+    onPreviewClick: ({ stories, profileId, id, scheduledAt, serviceId }) => {
+      const ctaProperties = getCtaProperties(
+        SEGMENT_NAMES.STORIES_PREVIEW_COMPOSER
+      );
       const counts = getCounts(stories);
 
       const metadata = {
@@ -79,9 +89,14 @@ export default connect(
         ...counts,
         ...ctaProperties,
       };
-      dispatch(previewActions.handlePreviewClick({
-        stories, profileId, id, scheduledAt,
-      }));
+      dispatch(
+        previewActions.handlePreviewClick({
+          stories,
+          profileId,
+          id,
+          scheduledAt,
+        })
+      );
       dispatch(actions.handlePreviewClick());
       dispatch(analyticsActions.trackEvent('Story Group Previewed', metadata));
     },
@@ -92,16 +107,33 @@ export default connect(
       dispatch(actions.createNewStoryCard({ id, uploaderInstance, file }));
     },
     onVideoUploadProcessingStarted: ({
-      id, uploaderInstance, uploadId, fileExtension, file, progress, contentType,
+      id,
+      uploaderInstance,
+      uploadId,
+      fileExtension,
+      file,
+      progress,
+      contentType,
     }) => {
-      dispatch(actions.videoUploadProcessingStarted({
-        id, uploaderInstance, uploadId, fileExtension, file, progress, contentType,
-      }));
+      dispatch(
+        actions.videoUploadProcessingStarted({
+          id,
+          uploaderInstance,
+          uploadId,
+          fileExtension,
+          file,
+          progress,
+          contentType,
+        })
+      );
     },
-    onUploadDraftFile: ({
-      userData,
-      videoProcessingComplete,
-    }) => (id, file, uploadType, notifiers, createFileUploaderCallback) => {
+    onUploadDraftFile: ({ userData, videoProcessingComplete }) => (
+      id,
+      file,
+      uploadType,
+      notifiers,
+      createFileUploaderCallback
+    ) => {
       const uploadTrackingId = uuid();
       const {
         id: userId,
@@ -124,14 +156,20 @@ export default connect(
         csrfToken: null,
         imageDimensionsKey,
         serverNotifiers: {
-          videoProcessed: processedVideoMeta => videoProcessingComplete(processedVideoMeta),
+          videoProcessed: processedVideoMeta =>
+            videoProcessingComplete(processedVideoMeta),
           profileGroupCreated: () => {},
           profileGroupUpdated: () => {},
           profileGroupDeleted: () => {},
         },
       });
 
-      return uploadDraftFileCallback(uploadTrackingId, file, uploadType, notifiers);
+      return uploadDraftFileCallback(
+        uploadTrackingId,
+        file,
+        uploadType,
+        notifiers
+      );
     },
     onVideoUploadProcessingComplete: ({
       id,
@@ -149,48 +187,79 @@ export default connect(
     }) => {
       const videoMaxLength = 15 * 1000; // 15s
       if (durationMs > videoMaxLength) {
-        dispatch(actions.showError({
-          message: 'Heads up! Your video is over the 15 second max limit for an Instagram Story. Instagram will clip the end of your video down to the first 15 seconds.',
-          uploadId,
-        }));
+        dispatch(
+          actions.showError({
+            message:
+              'Heads up! Your video is over the 15 second max limit for an Instagram Story. Instagram will clip the end of your video down to the first 15 seconds.',
+            uploadId,
+          })
+        );
       }
-      dispatch(actions.videoUploadProcessingComplete({
-        id,
-        name,
-        duration,
-        durationMs,
-        size,
-        width,
-        height,
-        url,
-        originalUrl,
-        thumbnail,
-        availableThumbnails,
-        uploadId,
-      }));
+      dispatch(
+        actions.videoUploadProcessingComplete({
+          id,
+          name,
+          duration,
+          durationMs,
+          size,
+          width,
+          height,
+          url,
+          originalUrl,
+          thumbnail,
+          availableThumbnails,
+          uploadId,
+        })
+      );
     },
     onUpdateStoryUploadProgress: ({
-      id, uploaderInstance, progress, file, complete,
+      id,
+      uploaderInstance,
+      progress,
+      file,
+      complete,
     }) => {
-      dispatch(actions.updateStoryUploadProgress({
-        id, uploaderInstance, progress, file, complete,
-      }));
+      dispatch(
+        actions.updateStoryUploadProgress({
+          id,
+          uploaderInstance,
+          progress,
+          file,
+          complete,
+        })
+      );
       actions.updateStoryPogress(dispatch);
     },
-    onMonitorUpdateProgress: updateUploadProgress => async ({ id, uploaderInstance, file }) => {
+    onMonitorUpdateProgress: updateUploadProgress => async ({
+      id,
+      uploaderInstance,
+      file,
+    }) => {
       const progressIterator = uploaderInstance.getProgressIterator();
       let item;
 
-      while (!(item = progressIterator.next()).done) { // eslint-disable-line no-cond-assign
+      while (!(item = progressIterator.next()).done) {
+        // eslint-disable-line no-cond-assign
         const promisedProgress = item.value;
 
-        await promisedProgress.then(progress => // eslint-disable-line no-await-in-loop
+        await promisedProgress.then((
+          progress // eslint-disable-line no-await-in-loop
+        ) =>
           updateUploadProgress({
-            id, uploaderInstance, progress, file, complete: false,
-          }));
+            id,
+            uploaderInstance,
+            progress,
+            file,
+            complete: false,
+          })
+        );
       }
       updateUploadProgress({
-        id, uploaderInstance, file, complete: true, progress: 100,
+        id,
+        uploaderInstance,
+        file,
+        complete: true,
+        progress: 100,
       });
     },
     onUploadImageComplete: ({
@@ -203,22 +272,26 @@ export default connect(
       stillGifUrl,
       contentType,
     }) => {
-      dispatch(actions.uploadImageComplete({
-        id,
-        uploaderInstance,
-        url,
-        width,
-        height,
-        file,
-        stillGifUrl,
-        contentType,
-      }));
-      dispatch(actions.trackAspectRatio({
-        width,
-        height,
-        cta: SEGMENT_NAMES.STORIES_IMAGE_ASPECT_RATIO_UPLOADED,
-        id,
-      }));
+      dispatch(
+        actions.uploadImageComplete({
+          id,
+          uploaderInstance,
+          url,
+          width,
+          height,
+          file,
+          stillGifUrl,
+          contentType,
+        })
+      );
+      dispatch(
+        actions.trackAspectRatio({
+          width,
+          height,
+          cta: SEGMENT_NAMES.STORIES_IMAGE_ASPECT_RATIO_UPLOADED,
+          id,
+        })
+      );
     },
     onDropCard: (cardSource, cardTarget, end = false) => {
       if (end) {
@@ -227,7 +300,7 @@ export default connect(
         dispatch(actions.onDropCard(cardSource, cardTarget));
       }
     },
-    onDeleteStory: (storyCard) => {
+    onDeleteStory: storyCard => {
       dispatch(actions.deleteStory(storyCard));
     },
     onRemoveNotifications: () => {
@@ -236,7 +309,7 @@ export default connect(
     onShowErrorNotification: ({ message }) => {
       dispatch(actions.showError({ message }));
     },
-  }),
+  })
 )(StoryGroupPopover);
 
 export reducer, { actions, actionTypes } from './reducer';

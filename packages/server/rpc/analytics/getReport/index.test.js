@@ -17,13 +17,21 @@ describe('rpc/get_report', () => {
       accessToken: token,
     },
     app: {
-      get() { return 'analyze-api'; },
+      get() {
+        return 'analyze-api';
+      },
     },
   };
   const id = 'report-1235asd';
   moment.tz.setDefault(timezone);
-  const endDate = moment().startOf('day').subtract(1, 'days').format('MM/DD/YYYY');
-  const startDate = moment().startOf('day').subtract(30, 'days').format('MM/DD/YYYY');
+  const endDate = moment()
+    .startOf('day')
+    .subtract(1, 'days')
+    .format('MM/DD/YYYY');
+  const startDate = moment()
+    .startOf('day')
+    .subtract(30, 'days')
+    .format('MM/DD/YYYY');
   moment.tz.setDefault();
 
   const report = {
@@ -73,13 +81,11 @@ describe('rpc/get_report', () => {
   });
 
   it('should have the expected name', () => {
-    expect(getReport.name)
-      .toBe('get_report');
+    expect(getReport.name).toBe('get_report');
   });
 
   it('should have the expected docs', () => {
-    expect(getReport.docs)
-      .toBe('get report details');
+    expect(getReport.docs).toBe('get report details');
   });
 
   it('should request chart data for every chart on the argument list', async () => {
@@ -88,13 +94,15 @@ describe('rpc/get_report', () => {
 
     await getReport.fn({ _id: id, timezone }, session);
 
-    expect(summary.fn.mock.calls[0])
-      .toEqual([{
+    expect(summary.fn.mock.calls[0]).toEqual([
+      {
         profileId: '12351wa',
         profileService: 'facebook',
         startDate,
         endDate,
-      }, session]);
+      },
+      session,
+    ]);
   });
 
   it('returns chart data for each chart as a "metrics" key', async () => {
@@ -142,8 +150,12 @@ describe('rpc/get_report', () => {
   it('uses a custom date if the date range provided in the report is custom', async () => {
     report.date_range = {
       range: null,
-      startDate: moment().subtract(20, 'days').format('MM/DD/YYYY'),
-      endDate: moment().subtract(15, 'days').format('MM/DD/YYYY'),
+      startDate: moment()
+        .subtract(20, 'days')
+        .format('MM/DD/YYYY'),
+      endDate: moment()
+        .subtract(15, 'days')
+        .format('MM/DD/YYYY'),
     };
     summary.fn = jest.fn();
     summary.fn.mockReturnValueOnce(Promise.resolve([]));
@@ -181,7 +193,6 @@ describe('rpc/get_report', () => {
       endDate: end.format('MM/DD/YYYY'),
     });
   });
-
 
   it('assigns chart state to the chart response', async () => {
     const metricsEmbeddedInObject = {

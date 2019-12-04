@@ -183,7 +183,12 @@ export const actions = {
     profileId,
     utmTrackingChoice,
   }),
-  handleSaveGATrackingSettings: ({ profileId, utmCampaign, utmSource, utmMedium }) => ({
+  handleSaveGATrackingSettings: ({
+    profileId,
+    utmCampaign,
+    utmSource,
+    utmMedium,
+  }) => ({
     type: actionTypes.SAVE_GA_CUSTOM_FORM,
     profileId,
     utmCampaign,

@@ -31,7 +31,9 @@ function getState() {
     metaData: AppStore.getMetaData(),
     userData: AppStore.getUserData(),
     scheduledAt,
-    availableSchedulesSlotsForDay: AppStore.getAvailableSchedulesSlotsForDay(scheduledAt),
+    availableSchedulesSlotsForDay: AppStore.getAvailableSchedulesSlotsForDay(
+      scheduledAt
+    ),
     isPinnedToSlot: ComposerStore.isPinnedToSlot(),
     visibleNotifications: NotificationStore.getVisibleNotifications(),
   };
@@ -39,32 +41,36 @@ function getState() {
 
 class App extends React.Component {
   static propTypes = {
-    profilesData: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      canPostComment: PropTypes.bool,
-      serviceName: PropTypes.string.isRequired,
-      serviceUsername: PropTypes.string.isRequired,
-      serviceFormattedUsername: PropTypes.string.isRequired,
-      imagesAvatar: PropTypes.string.isRequired,
-      timezone: PropTypes.string.isRequired,
-      shouldBeAutoSelected: PropTypes.bool.isRequired,
-      isDisabled: PropTypes.bool.isRequired,
-      disabledMessage: PropTypes.string,
-      serviceType: PropTypes.string.isRequired,
-      serviceId: PropTypes.string.isRequired,
-      isBusinessProfile: PropTypes.bool.isRequired,
-      isContributor: PropTypes.bool,
-      isManager: PropTypes.bool.isRequired,
-      profileHasPostingSchedule: PropTypes.bool,
-      subprofiles: PropTypes.arrayOf(PropTypes.shape({
+    profilesData: PropTypes.arrayOf(
+      PropTypes.shape({
         id: PropTypes.string.isRequired,
-        profileId: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-        isShared: PropTypes.bool.isRequired,
+        canPostComment: PropTypes.bool,
+        serviceName: PropTypes.string.isRequired,
+        serviceUsername: PropTypes.string.isRequired,
+        serviceFormattedUsername: PropTypes.string.isRequired,
+        imagesAvatar: PropTypes.string.isRequired,
+        timezone: PropTypes.string.isRequired,
         shouldBeAutoSelected: PropTypes.bool.isRequired,
-      })).isRequired,
-    })).isRequired,
+        isDisabled: PropTypes.bool.isRequired,
+        disabledMessage: PropTypes.string,
+        serviceType: PropTypes.string.isRequired,
+        serviceId: PropTypes.string.isRequired,
+        isBusinessProfile: PropTypes.bool.isRequired,
+        isContributor: PropTypes.bool,
+        isManager: PropTypes.bool.isRequired,
+        profileHasPostingSchedule: PropTypes.bool,
+        subprofiles: PropTypes.arrayOf(
+          PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            profileId: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            avatar: PropTypes.string.isRequired,
+            isShared: PropTypes.bool.isRequired,
+            shouldBeAutoSelected: PropTypes.bool.isRequired,
+          })
+        ).isRequired,
+      })
+    ).isRequired,
 
     userData: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -89,18 +95,22 @@ class App extends React.Component {
       hasIGDirectVideoFlip: PropTypes.bool.isRequired,
       isBusinessUser: PropTypes.bool.isRequired,
       shouldAlwaysSkipEmptyTextAlert: PropTypes.bool.isRequired,
-      profileGroups: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        profileIds: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-      })).isRequired,
+      profileGroups: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          profileIds: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        })
+      ).isRequired,
       profilesSchedulesSlots: PropTypes.objectOf(
         PropTypes.objectOf(
-          PropTypes.arrayOf(PropTypes.shape({
-            isSlotFree: PropTypes.bool.isRequired,
-            timestamp: PropTypes.number.isRequired,
-          })),
-        ),
+          PropTypes.arrayOf(
+            PropTypes.shape({
+              isSlotFree: PropTypes.bool.isRequired,
+              timestamp: PropTypes.number.isRequired,
+            })
+          )
+        )
       ),
     }).isRequired,
 
@@ -143,27 +153,29 @@ class App extends React.Component {
       retweetData: PropTypes.shape({
         text: PropTypes.string.isRequired,
         tweetId: PropTypes.string.isRequired,
-        userId: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number,
-        ]).isRequired,
+        userId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+          .isRequired,
         userName: PropTypes.string.isRequired,
         userDisplayName: PropTypes.string.isRequired,
         tweetUrl: PropTypes.string.isRequired,
         avatarUrl: PropTypes.string.isRequired,
         comment: PropTypes.string.isRequired,
       }),
-      facebookMentionEntities: PropTypes.arrayOf(PropTypes.shape({
-        indices: PropTypes.arrayOf(PropTypes.number).isRequired,
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
-      })),
-      userTags: PropTypes.arrayOf(PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired,
-      })),
+      facebookMentionEntities: PropTypes.arrayOf(
+        PropTypes.shape({
+          indices: PropTypes.arrayOf(PropTypes.number).isRequired,
+          id: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired,
+          url: PropTypes.string.isRequired,
+        })
+      ),
+      userTags: PropTypes.arrayOf(
+        PropTypes.shape({
+          username: PropTypes.string.isRequired,
+          x: PropTypes.number.isRequired,
+          y: PropTypes.number.isRequired,
+        })
+      ),
       locationId: PropTypes.string,
       locationName: PropTypes.string,
       commentEnabled: PropTypes.bool,
@@ -182,7 +194,7 @@ class App extends React.Component {
       canSelectProfiles: PropTypes.bool.isRequired,
       preserveStateOnClose: PropTypes.bool.isRequired,
       saveButtons: PropTypes.arrayOf(
-        PropTypes.oneOf(Object.keys(SaveButtonTypes)),
+        PropTypes.oneOf(Object.keys(SaveButtonTypes))
       ).isRequired,
       updateId: PropTypes.string,
       position: PropTypes.shape({
@@ -229,7 +241,6 @@ class App extends React.Component {
     }
   }
 
-
   componentDidMount() {
     AppStore.addChangeListener(this.onStoreChange);
     NotificationStore.addChangeListener(this.onStoreChange);
@@ -243,21 +254,26 @@ class App extends React.Component {
     else AppInitActionCreators.loadInitialMetaData(this.props.metaData);
 
     AppActionCreators.trackUserAction(['viewed'], {
-      timeToRender: (new Date() - window.pageStartTime),
+      timeToRender: new Date() - window.pageStartTime,
     });
-    observeStore(AppStore, store => store.getAppState().isLoaded)
-      .then(() => {
-        if (this.state.metaData.appEnvironment === AppEnvironments.EXTENSION) {
-          this.dragMe = new DragMe(document.querySelector('.js-enable-dragging'), {
+    observeStore(AppStore, store => store.getAppState().isLoaded).then(() => {
+      if (this.state.metaData.appEnvironment === AppEnvironments.EXTENSION) {
+        this.dragMe = new DragMe(
+          document.querySelector('.js-enable-dragging'),
+          {
             cancel: '.js-disable-dragging',
-            onDragStart: (target) => {
+            onDragStart: target => {
               AppActionCreators.trackUserAction(['composer', 'dragged'], {
-                draggingTarget: (target === this.draggingAnchor) ? 'dragging-anchor' : 'app-window',
+                draggingTarget:
+                  target === this.draggingAnchor
+                    ? 'dragging-anchor'
+                    : 'app-window',
               });
             },
-          });
-        }
-      });
+          }
+        );
+      }
+    });
   }
 
   componentDidUpdate() {
@@ -279,12 +295,12 @@ class App extends React.Component {
 
   onStoreChange = () => this.setState(getState());
 
-  onAppWrapperClick = (e) => {
+  onAppWrapperClick = e => {
     const isBackdropClicked = e.target === e.currentTarget;
     if (isBackdropClicked) AppHooks.handleBackdropClicked();
   };
 
-  onAppClick = (e) => {
+  onAppClick = e => {
     const { expandedComposerId } = this.state.appState;
     const isComposerExpanded = expandedComposerId !== null;
 
@@ -315,7 +331,9 @@ class App extends React.Component {
     } = this.props;
 
     const { preserveStateOnClose } = options;
-    const { preserveStateOnClose: prevPreserveStateOnClose = false } = AppStore.getOptions();
+    const {
+      preserveStateOnClose: prevPreserveStateOnClose = false,
+    } = AppStore.getOptions();
 
     /**
      * options.preserveStateOnClose is used to reset the composers' state on close.
@@ -323,7 +341,10 @@ class App extends React.Component {
      * since stores are singletons, we'll need to reset the composers' state on load
      * if the new instance has `options.preserveStateOnClose === false`
      */
-    if (preserveStateOnClose === false && preserveStateOnClose !== prevPreserveStateOnClose) {
+    if (
+      preserveStateOnClose === false &&
+      preserveStateOnClose !== prevPreserveStateOnClose
+    ) {
       AppInitActionCreators.resetData();
     }
 
@@ -333,10 +354,8 @@ class App extends React.Component {
      * initial data again if the previous instance had its stores reset on close, or if
      * this new instance had its stores reset on init.
      */
-    const shouldLoadInitialData = (
-      prevPreserveStateOnClose !== true ||
-      preserveStateOnClose === false
-    );
+    const shouldLoadInitialData =
+      prevPreserveStateOnClose !== true || preserveStateOnClose === false;
 
     if (shouldLoadInitialData) {
       AppInitActionCreators.loadInitialData({
@@ -362,7 +381,11 @@ class App extends React.Component {
   render() {
     if (!this.state.appState.isLoaded) return null;
 
-    const { canSelectProfiles, saveButtons, position = null } = this.props.options;
+    const {
+      canSelectProfiles,
+      saveButtons,
+      position = null,
+    } = this.props.options;
 
     const topLevelNotificationContainerExcludedScopes = [
       NotificationScopes.BOARD_CREATION,
@@ -371,14 +394,20 @@ class App extends React.Component {
       NotificationScopes.MC_ROLLOUT_INFO,
       NotificationScopes.TWITTER_MAX_ONE_PROFILE_SELECTED,
       NotificationScopes.TWITTER_DUPLICATE_CONTENT_WARNING,
-      ...Services.map(service => `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${service.name}`),
-      ...Services.map(service => `${NotificationScopes.UPDATE_SAVING}-${service.name}`),
-      ...Services.map(service => (
-        `${NotificationScopes.UPDATE_SAVING}-${ErrorTypes.INLINE}-${service.name}`
-      )),
-      ...Services.map(service => (
-        `${NotificationScopes.COMPOSER_NOTICE_NOT_PREFILLED}-${service.name}`
-      )),
+      ...Services.map(
+        service => `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${service.name}`
+      ),
+      ...Services.map(
+        service => `${NotificationScopes.UPDATE_SAVING}-${service.name}`
+      ),
+      ...Services.map(
+        service =>
+          `${NotificationScopes.UPDATE_SAVING}-${ErrorTypes.INLINE}-${service.name}`
+      ),
+      ...Services.map(
+        service =>
+          `${NotificationScopes.COMPOSER_NOTICE_NOT_PREFILLED}-${service.name}`
+      ),
       NotificationScopes.COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED,
     ];
 
@@ -389,8 +418,12 @@ class App extends React.Component {
         onAppWrapperClick={this.onAppWrapperClick}
         onAppClick={this.onAppClick}
         onCloseButtonClick={this.onCloseButtonClick}
-        draggingAnchorRef={(ref) => { this.draggingAnchor = ref; }}
-        appElementRef={(ref) => { this.appElement = ref; }}
+        draggingAnchorRef={ref => {
+          this.draggingAnchor = ref;
+        }}
+        appElementRef={ref => {
+          this.appElement = ref;
+        }}
         metaData={this.state.metaData}
         onNewPublish={this.props.onNewPublish}
         position={position}
@@ -400,7 +433,9 @@ class App extends React.Component {
         userData={this.state.userData}
         scheduledAt={this.state.scheduledAt}
         visibleNotifications={this.state.visibleNotifications}
-        topLevelNotificationContainerExcludedScopes={topLevelNotificationContainerExcludedScopes}
+        topLevelNotificationContainerExcludedScopes={
+          topLevelNotificationContainerExcludedScopes
+        }
         areAllDraftsSaved={areAllDraftsSaved}
         saveButtons={saveButtons}
         isPinnedToSlot={this.state.isPinnedToSlot}

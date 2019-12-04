@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Toggle,
-} from '@bufferapp/components';
+import { Toggle } from '@bufferapp/components';
 import { Row } from '@bufferapp/publish-shared-components';
 import { Text } from '@bufferapp/ui';
 
@@ -13,13 +11,17 @@ const switchStyle = {
   textAlign: 'right',
 };
 
-const Notification = ({ title, description, onToggleClick, toggleisEnabled, type }) => (
+const Notification = ({
+  title,
+  description,
+  onToggleClick,
+  toggleisEnabled,
+  type,
+}) => (
   <Row>
     <div>
       <Text type="h3">{title}</Text>
-      {description &&
-        <Text type="p">{description}</Text>
-      }
+      {description && <Text type="p">{description}</Text>}
     </div>
     <div style={switchStyle}>
       <Toggle

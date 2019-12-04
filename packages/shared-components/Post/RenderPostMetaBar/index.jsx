@@ -24,8 +24,9 @@ const RenderPostMetaBar = ({
     );
   } else if (profileService === 'pinterest' && subprofileID) {
     /*  having a subprofileID is required, sourceUrl is not */
-    const subprofile = subprofiles ?
-      subprofiles.find((profile => profile.id === subprofileID)) : null;
+    const subprofile = subprofiles
+      ? subprofiles.find(profile => profile.id === subprofileID)
+      : null;
     return (
       <PinterestPostMetaBar
         dragging={dragging}
@@ -47,7 +48,7 @@ RenderPostMetaBar.propTypes = {
   subprofiles: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
-    }),
+    })
   ),
   dragging: PropTypes.bool,
   isSent: PropTypes.bool,

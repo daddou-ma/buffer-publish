@@ -30,34 +30,28 @@ const CarouselCardHover = ({
         />
       </TrashIconWrapper>
       <DragDropWrapper />
-      {
-        card.note
-          ? (
-            <EditNoteWrapper>
-              <TextWrapper>
-                <Text>
-                  {getShortString(card.note)}
-                </Text>
-              </TextWrapper>
-              <PencilIconWrapper>
-                <StyledPencilIcon
-                  size="medium"
-                  onClick={() => onAddNoteClick(card)}
-                />
-              </PencilIconWrapper>
-            </EditNoteWrapper>
-          )
-          : (
-            <ButtonWrapper>
-              <Button
-                label={translations.addNote}
-                onClick={() => onAddNoteClick(card)}
-                fullWidth
-                size="small"
-              />
-            </ButtonWrapper>
-          )
-      }
+      {card.note ? (
+        <EditNoteWrapper>
+          <TextWrapper>
+            <Text>{getShortString(card.note)}</Text>
+          </TextWrapper>
+          <PencilIconWrapper>
+            <StyledPencilIcon
+              size="medium"
+              onClick={() => onAddNoteClick(card)}
+            />
+          </PencilIconWrapper>
+        </EditNoteWrapper>
+      ) : (
+        <ButtonWrapper>
+          <Button
+            label={translations.addNote}
+            onClick={() => onAddNoteClick(card)}
+            fullWidth
+            size="small"
+          />
+        </ButtonWrapper>
+      )}
     </HoverWrapper>
   </Fragment>
 );

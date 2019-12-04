@@ -65,7 +65,6 @@ describe('constructor', () => {
     expect(draftWithMedia.characterCommentCount).toBeNull();
   });
 
-
   it('sets enabledAttachmentType to MEDIA when service can have it but cannot have link', () => {
     const exampleService = Services.get('instagram');
     exampleService.unavailableAttachmentTypes = [AttachmentTypes.LINK];
@@ -91,10 +90,11 @@ describe('constructor', () => {
   });
 });
 
-
 describe('isEmpty', () => {
   it('is false if plain text is present', () => {
-    const editorState = EditorState.createWithContent(ContentState.createFromText('Text'));
+    const editorState = EditorState.createWithContent(
+      ContentState.createFromText('Text')
+    );
     const exampleService = Services.get('instagram');
     const draft = new Draft(exampleService, editorState);
     expect(draft.isEmpty()).toBeFalsy();
@@ -180,11 +180,12 @@ describe('hasVideoAttached', () => {
   });
 });
 
-
 describe('getNumberOfMentions', () => {
   it('returns 0 if there are none', () => {
     const exampleService = Services.get('twitter');
-    const editorState = EditorState.createWithContent(ContentState.createFromText('Test example'));
+    const editorState = EditorState.createWithContent(
+      ContentState.createFromText('Test example')
+    );
 
     const draft = new Draft(exampleService, editorState);
     draft.commentText = 'text example';
@@ -193,7 +194,9 @@ describe('getNumberOfMentions', () => {
 
   it('returns the number of mentions in the text and comment', () => {
     const exampleService = Services.get('twitter');
-    const editorState = EditorState.createWithContent(ContentState.createFromText('Test example @one @two @three'));
+    const editorState = EditorState.createWithContent(
+      ContentState.createFromText('Test example @one @two @three')
+    );
     const draft = new Draft(exampleService, editorState);
     draft.commentText = 'text example @four @five text';
 
@@ -201,11 +204,12 @@ describe('getNumberOfMentions', () => {
   });
 });
 
-
 describe('getNumberOfHashtags', () => {
   it('returns 0 if there are none', () => {
     const exampleService = Services.get('twitter');
-    const editorState = EditorState.createWithContent(ContentState.createFromText('Test example'));
+    const editorState = EditorState.createWithContent(
+      ContentState.createFromText('Test example')
+    );
 
     const draft = new Draft(exampleService, editorState);
     draft.commentText = 'text example';
@@ -214,7 +218,9 @@ describe('getNumberOfHashtags', () => {
 
   it('returns the number of hashtags in the text and comment', () => {
     const exampleService = Services.get('twitter');
-    const editorState = EditorState.createWithContent(ContentState.createFromText('Test example #one #two #three'));
+    const editorState = EditorState.createWithContent(
+      ContentState.createFromText('Test example #one #two #three')
+    );
     const draft = new Draft(exampleService, editorState);
     draft.commentText = 'text example #four #five text';
 

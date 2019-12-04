@@ -8,7 +8,7 @@ import machine from '../../machine';
 const transitionAction = action('transition');
 const stories = storiesOf('TwoFactorAuth', module).addDecorator(withA11y);
 
-Object.keys(machine).forEach((machineState) => {
+Object.keys(machine).forEach(machineState => {
   stories.add(machineState, () => (
     <TwoFactorAuth
       machineState={machineState}

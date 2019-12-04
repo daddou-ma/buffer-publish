@@ -21,7 +21,7 @@ const closeIconStyle = {
   right: '10px',
 };
 
-const ComposerSidepanel = ({ isVisible, onClose, children }) =>
+const ComposerSidepanel = ({ isVisible, onClose, children }) => (
   <div
     id="composer-sidepanel"
     style={calculateStyles(
@@ -33,14 +33,15 @@ const ComposerSidepanel = ({ isVisible, onClose, children }) =>
       },
       {
         isVisible,
-      },
+      }
     )}
   >
     <div style={closeIconStyle}>
       <Cross size="medium" onClick={onClose} />
     </div>
     {children}
-  </div>;
+  </div>
+);
 
 ComposerSidepanel.propTypes = {
   isVisible: PropTypes.bool,

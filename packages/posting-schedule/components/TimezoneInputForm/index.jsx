@@ -54,9 +54,7 @@ let TimezoneInputForm = ({
   <form>
     <div style={editTimezoneStyle}>
       <div style={textWrapperStyle}>
-        <Text type="label">
-          Timezone
-        </Text>
+        <Text type="label">Timezone</Text>
       </div>
       <div style={formStyle}>
         <div style={chooseTimezoneStyle}>
@@ -70,7 +68,9 @@ let TimezoneInputForm = ({
               onChange={onTimezoneChange}
               onFocusHandler={onTimezoneInputFocus}
               onBlurHandler={onTimezoneInputBlur}
-              onSelect={({ timezone, city }) => { handleSubmit({ timezone, city }); }}
+              onSelect={({ timezone, city }) => {
+                handleSubmit({ timezone, city });
+              }}
               sortItems={sortItems}
             />
           </div>
@@ -78,12 +78,14 @@ let TimezoneInputForm = ({
       </div>
     </div>
   </form>
-  );
+);
 
 TimezoneInputForm.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-  })).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onTimezoneInputFocus: PropTypes.func.isRequired,
   onTimezoneInputBlur: PropTypes.func.isRequired,
@@ -91,21 +93,20 @@ TimezoneInputForm.propTypes = {
   disabled: PropTypes.bool.isRequired,
 };
 
-TimezoneInputForm.defaultProps = {
-};
-
+TimezoneInputForm.defaultProps = {};
 
 TimezoneInputForm = reduxForm({
   form: 'timezone-input',
   enableReinitialize: true,
 })(TimezoneInputForm);
 
-TimezoneInputForm = connect(
-  ({ postingSchedule }) => ({
-    initialValues: {
-      timezone: postingSchedule && !postingSchedule.clearTimezoneInput ? postingSchedule.profileTimezoneCity : '',
-    },
-  }),
-)(TimezoneInputForm);
+TimezoneInputForm = connect(({ postingSchedule }) => ({
+  initialValues: {
+    timezone:
+      postingSchedule && !postingSchedule.clearTimezoneInput
+        ? postingSchedule.profileTimezoneCity
+        : '',
+  },
+}))(TimezoneInputForm);
 
 export default TimezoneInputForm;

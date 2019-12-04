@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  borderWidth,
-  borderRadius,
-} from '@bufferapp/components/style/border';
+import { borderWidth, borderRadius } from '@bufferapp/components/style/border';
 import { mystic } from '@bufferapp/components/style/color';
 import ScheduleTableColumn from './ScheduleTableColumn';
 
@@ -37,31 +34,24 @@ const ScheduleTable = ({
   onPauseToggleClick,
 }) => (
   <div style={tableStyle}>
-    {
-      days.map(({
-        dayName,
-        postingTimesTotal,
-        times,
-        paused,
-      }) =>
-        <div
-          key={dayName}
-          style={paused ? pausedColumnStyle : tableColumnWrapperStyle}
-        >
-          <ScheduleTableColumn
-            dayName={dayName}
-            paused={paused}
-            disabled={disabled}
-            postingTimesTotal={postingTimesTotal}
-            select24Hours={select24Hours}
-            times={times}
-            onRemoveTimeClick={onRemoveTimeClick}
-            onUpdateTime={onUpdateTime}
-            onPauseToggleClick={onPauseToggleClick}
-          />
-        </div>,
-      )
-    }
+    {days.map(({ dayName, postingTimesTotal, times, paused }) => (
+      <div
+        key={dayName}
+        style={paused ? pausedColumnStyle : tableColumnWrapperStyle}
+      >
+        <ScheduleTableColumn
+          dayName={dayName}
+          paused={paused}
+          disabled={disabled}
+          postingTimesTotal={postingTimesTotal}
+          select24Hours={select24Hours}
+          times={times}
+          onRemoveTimeClick={onRemoveTimeClick}
+          onUpdateTime={onUpdateTime}
+          onPauseToggleClick={onPauseToggleClick}
+        />
+      </div>
+    ))}
   </div>
 );
 
@@ -80,9 +70,9 @@ ScheduleTable.propTypes = {
             }),
             PropTypes.string,
           ]),
-        }).isRequired,
+        }).isRequired
       ).isRequired,
-    }),
+    })
   ).isRequired,
   disabled: PropTypes.bool.isRequired,
   select24Hours: PropTypes.bool.isRequired,

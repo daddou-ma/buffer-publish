@@ -13,7 +13,7 @@ const ProfileList = ({
   profileLimit,
 }) => (
   <List
-    items={profiles.map((profile, index) =>
+    items={profiles.map((profile, index) => (
       <ProfileDragWrapper
         avatarUrl={profile.avatarUrl}
         type={profile.type}
@@ -29,17 +29,15 @@ const ProfileList = ({
         id={profile.id}
         index={index}
         location={profile.location}
-      />,
-    )}
+      />
+    ))}
   />
 );
 
 ProfileList.propTypes = {
   onProfileClick: PropTypes.func.isRequired,
   onDropProfile: PropTypes.func.isRequired,
-  profiles: PropTypes.arrayOf(
-    PropTypes.shape(ProfileListItem.propTypes),
-  ),
+  profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
   selectedProfileId: PropTypes.string,
   showProfilesDisconnectedModal: PropTypes.func.isRequired,
   profileLimit: PropTypes.number.isRequired,

@@ -8,20 +8,27 @@ class PinterestSelectedBoards extends React.Component {
   };
 
   getSelectedBoard = () => {
-    const selectedPinterestProfiles = this.props.profiles.filter((profile) => (
-      profile.isSelected &&
-      profile.service.name === 'pinterest'
-    ));
+    const selectedPinterestProfiles = this.props.profiles.filter(
+      profile => profile.isSelected && profile.service.name === 'pinterest'
+    );
 
-    return selectedPinterestProfiles.reduce((reducedSelectedSubprofiles, profile) => {
-      const doesProfileHaveSelectedSubprofile = profile.selectedSubprofileId !== null;
-      if (!doesProfileHaveSelectedSubprofile) return reducedSelectedSubprofiles;
+    return selectedPinterestProfiles.reduce(
+      (reducedSelectedSubprofiles, profile) => {
+        const doesProfileHaveSelectedSubprofile =
+          profile.selectedSubprofileId !== null;
+        if (!doesProfileHaveSelectedSubprofile)
+          return reducedSelectedSubprofiles;
 
-      const getSubProfile = (subprofile) => subprofile.id === profile.selectedSubprofileId;
-      const selectedSubprofileForProfile = profile.subprofiles.find(getSubProfile);
+        const getSubProfile = subprofile =>
+          subprofile.id === profile.selectedSubprofileId;
+        const selectedSubprofileForProfile = profile.subprofiles.find(
+          getSubProfile
+        );
 
-      return reducedSelectedSubprofiles.concat(selectedSubprofileForProfile);
-    }, []);
+        return reducedSelectedSubprofiles.concat(selectedSubprofileForProfile);
+      },
+      []
+    );
   };
 
   render() {
@@ -30,9 +37,11 @@ class PinterestSelectedBoards extends React.Component {
 
     const hasMultipleBoardsSelected = selectedBoards.length > 1;
 
-    const getAvatar = (avatar) => {
-      const defaultAvatarToOverride = 'https://static.bufferapp.com/images/app/pin_2x.png';
-      const defaultAvatar = 'https://static.bufferapp.com/images/app/img_pin@2x.png';
+    const getAvatar = avatar => {
+      const defaultAvatarToOverride =
+        'https://static.bufferapp.com/images/app/pin_2x.png';
+      const defaultAvatar =
+        'https://static.bufferapp.com/images/app/img_pin@2x.png';
       if (avatar === defaultAvatarToOverride) {
         return defaultAvatar;
       }
@@ -48,10 +57,15 @@ class PinterestSelectedBoards extends React.Component {
           src={firstBoardAvatar}
           role="presentation"
         />
-        {firstBoard && <div className={styles.selectedBoardName}>{firstBoard.name}</div>}
+        {firstBoard && (
+          <div className={styles.selectedBoardName}>{firstBoard.name}</div>
+        )}
 
-        {hasMultipleBoardsSelected &&
-        <div className={styles.additionalBoard}>+ {selectedBoards.length - 1} more</div>}
+        {hasMultipleBoardsSelected && (
+          <div className={styles.additionalBoard}>
+            + {selectedBoards.length - 1} more
+          </div>
+        )}
       </div>
     );
   }

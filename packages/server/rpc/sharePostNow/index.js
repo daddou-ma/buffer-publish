@@ -1,7 +1,7 @@
 const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
 
-const getMessage = (message) => {
+const getMessage = message => {
   const isObject = typeof message === 'object' && message !== null;
   return isObject ? message.text : message;
 };
@@ -31,5 +31,5 @@ module.exports = method(
     }
     result = JSON.parse(result);
     return Promise.resolve(result);
-  },
+  }
 );

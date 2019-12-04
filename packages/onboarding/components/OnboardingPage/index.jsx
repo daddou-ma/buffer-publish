@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { trackAction } from '@bufferapp/publish-data-tracking';
-import {
-  Text,
-  ProgressBar,
-  SocialButton,
-} from '@bufferapp/ui';
+import { Text, ProgressBar, SocialButton } from '@bufferapp/ui';
 
 import {
   Wrapper,
@@ -28,20 +24,19 @@ import {
   Footer,
 } from './style';
 
-
 const handleConnectSocialAccountClick = (
   channel,
   url,
-  onConnectSocialAccountClick,
+  onConnectSocialAccountClick
 ) => {
   const goConnectProfile = () => {
     if (channel === 'instagram') {
       /**
-      * This silly looking code loads an 'img' with the
-      * Instagram logout URL, which ensures the user is
-      * logged out of Instagram before we send them to
-      * reconnect.
-      */
+       * This silly looking code loads an 'img' with the
+       * Instagram logout URL, which ensures the user is
+       * logged out of Instagram before we send them to
+       * reconnect.
+       */
       const img = new Image();
       img.onerror = () => {
         window.location.assign(url);
@@ -53,20 +48,32 @@ const handleConnectSocialAccountClick = (
     }
     onConnectSocialAccountClick();
   };
-  trackAction({
-    location: 'onboarding_page',
-    action: `connect_${channel}`,
-  }, {
-    success: goConnectProfile(),
-    error: goConnectProfile(),
-  });
+  trackAction(
+    {
+      location: 'onboarding_page',
+      action: `connect_${channel}`,
+    },
+    {
+      success: goConnectProfile(),
+      error: goConnectProfile(),
+    }
+  );
 };
 
-const OnboardingPage = ({ onConnectSocialAccountClick, translations, onSkipStep }) => (
+const OnboardingPage = ({
+  onConnectSocialAccountClick,
+  translations,
+  onSkipStep,
+}) => (
   <Wrapper>
     <LeftColumn>
       <LogoWrapper>
-        <Logo src="https://s3.amazonaws.com/static.buffer.com/login/public/img/buffer-logo.svg" width="112" height="28" alt="Buffer Logo" />
+        <Logo
+          src="https://s3.amazonaws.com/static.buffer.com/login/public/img/buffer-logo.svg"
+          width="112"
+          height="28"
+          alt="Buffer Logo"
+        />
       </LogoWrapper>
       <LeftContentWrapper>
         <LeftContentContainer>
@@ -75,48 +82,58 @@ const OnboardingPage = ({ onConnectSocialAccountClick, translations, onSkipStep 
           <SocialButtonWrapper>
             <SocialButton
               channel="instagram"
-              onClick={() => handleConnectSocialAccountClick(
-                'instagram',
-                'https://buffer.com/oauth/instagram',
-                onConnectSocialAccountClick,
-              )}
+              onClick={() =>
+                handleConnectSocialAccountClick(
+                  'instagram',
+                  'https://buffer.com/oauth/instagram',
+                  onConnectSocialAccountClick
+                )
+              }
             />
             <SocialButton
               channel="facebook"
-              onClick={() => handleConnectSocialAccountClick(
-                'facebook',
-                'https://buffer.com/oauth/facebook/choose',
-                onConnectSocialAccountClick,
-              )}
+              onClick={() =>
+                handleConnectSocialAccountClick(
+                  'facebook',
+                  'https://buffer.com/oauth/facebook/choose',
+                  onConnectSocialAccountClick
+                )
+              }
             />
             <SocialButton
               channel="twitter"
-              onClick={() => handleConnectSocialAccountClick(
-                'twitter',
-                'https://buffer.com/oauth/twitter',
-                onConnectSocialAccountClick,
-              )}
+              onClick={() =>
+                handleConnectSocialAccountClick(
+                  'twitter',
+                  'https://buffer.com/oauth/twitter',
+                  onConnectSocialAccountClick
+                )
+              }
             />
           </SocialButtonWrapper>
           <TextWithStyles type="p">
             {translations.cta1}
             <LinkWithStyles
               type="link"
-              onClick={() => handleConnectSocialAccountClick(
-                'linkedin',
-                'https://buffer.com/oauth/linkedin',
-                onConnectSocialAccountClick,
-              )}
+              onClick={() =>
+                handleConnectSocialAccountClick(
+                  'linkedin',
+                  'https://buffer.com/oauth/linkedin',
+                  onConnectSocialAccountClick
+                )
+              }
               label={translations.ctaChannel1}
             />
             {translations.cta2}
             <LinkWithStyles
               type="link"
-              onClick={() => handleConnectSocialAccountClick(
-                'pinterest',
-                'https://buffer.com/oauth/pinterest',
-                onConnectSocialAccountClick,
-              )}
+              onClick={() =>
+                handleConnectSocialAccountClick(
+                  'pinterest',
+                  'https://buffer.com/oauth/pinterest',
+                  onConnectSocialAccountClick
+                )
+              }
               label={translations.ctaChannel2}
             />
             {translations.cta3}

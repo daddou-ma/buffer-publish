@@ -9,18 +9,17 @@ const TableCellStateless = ({
   onMouseEnter,
   onMouseLeave,
 }) => {
-  const style = calculateStyles({
-    default: {},
-    hovered: {},
-  }, {
-    hovered,
-  });
+  const style = calculateStyles(
+    {
+      default: {},
+      hovered: {},
+    },
+    {
+      hovered,
+    }
+  );
   return (
-    <div
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      style={style}
-    >
+    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={style}>
       {children}
     </div>
   );
@@ -47,10 +46,9 @@ class TableCell extends PseudoClassComponent {
 
     // string as children isn't clonable
     if (React.isValidElement(children)) {
-      hoveredChildren = React.cloneElement(
-        children,
-        { hovered: this.state.hovered },
-      );
+      hoveredChildren = React.cloneElement(children, {
+        hovered: this.state.hovered,
+      });
     }
 
     return (

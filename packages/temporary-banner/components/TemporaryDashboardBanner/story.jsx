@@ -31,13 +31,11 @@ storiesOf('TemporaryDashboardBanner', module)
       enabledApplicationModes={enabledApplicationNoTemp}
     />
   ))
-  .add('should not show TemporaryDashboardBanner if enabledApplication is empty', () => (
-    <TemporaryDashboardBanner
-      enabledApplicationModes={[]}
-    />
-  ))
-  .add('should not show TemporaryDashboardBanner if enabledApplication is null', () => (
-    <TemporaryDashboardBanner
-      enabledApplicationModes={null}
-    />
-  ));
+  .add(
+    'should not show TemporaryDashboardBanner if enabledApplication is empty',
+    () => <TemporaryDashboardBanner enabledApplicationModes={[]} />
+  )
+  .add(
+    'should not show TemporaryDashboardBanner if enabledApplication is null',
+    () => <TemporaryDashboardBanner enabledApplicationModes={null} />
+  );

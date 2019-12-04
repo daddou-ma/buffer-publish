@@ -1,6 +1,9 @@
 import { EditorState, ContentState } from '@bufferapp/draft-js';
 
-import { validateDraft, validateVideoForInstagram } from '../../../lib/validation/ValidateDraft';
+import {
+  validateDraft,
+  validateVideoForInstagram,
+} from '../../../lib/validation/ValidateDraft';
 import ValidationSuccess from '../../../lib/validation/ValidationSuccess';
 import ValidationFail from '../../../lib/validation/ValidationFail';
 
@@ -21,7 +24,9 @@ describe('validateVideoForInstagram', () => {
 
     const maxFileSizeInMb = instagramService.videoMaxSize / 1024 / 1024;
     const expectedMessage = `Please try again with a smaller file. Videos need to be smaller than ${maxFileSizeInMb}MB`;
-    expect(validateVideoForInstagram(draft.video)).toEqual(new ValidationFail(expectedMessage));
+    expect(validateVideoForInstagram(draft.video)).toEqual(
+      new ValidationFail(expectedMessage)
+    );
   });
 
   it('returns ValidationFail if video is too short', () => {
@@ -36,8 +41,11 @@ describe('validateVideoForInstagram', () => {
       service: instagramService,
     };
 
-    const expectedMessage = 'Please lengthen your video and try again. Videos need to be longer than 3 seconds';
-    expect(validateVideoForInstagram(draft.video)).toEqual(new ValidationFail(expectedMessage));
+    const expectedMessage =
+      'Please lengthen your video and try again. Videos need to be longer than 3 seconds';
+    expect(validateVideoForInstagram(draft.video)).toEqual(
+      new ValidationFail(expectedMessage)
+    );
   });
 
   it('returns ValidationFail if video is too long', () => {
@@ -52,8 +60,11 @@ describe('validateVideoForInstagram', () => {
       service: instagramService,
     };
 
-    const expectedMessage = 'Please shorten your video and try again. Videos need to be under 60 seconds long';
-    expect(validateVideoForInstagram(draft.video)).toEqual(new ValidationFail(expectedMessage));
+    const expectedMessage =
+      'Please shorten your video and try again. Videos need to be under 60 seconds long';
+    expect(validateVideoForInstagram(draft.video)).toEqual(
+      new ValidationFail(expectedMessage)
+    );
   });
 
   it('returns ValidationSuccess if video is within limits', () => {
@@ -68,7 +79,9 @@ describe('validateVideoForInstagram', () => {
       service: instagramService,
     };
 
-    expect(validateVideoForInstagram(draft.video)).toEqual(new ValidationSuccess());
+    expect(validateVideoForInstagram(draft.video)).toEqual(
+      new ValidationSuccess()
+    );
   });
   // TODO: Add this back after we add all IG validation failures as reminders, not errors
   // it('returns ValidationSuccess if video meets the required aspect ratio', () => {
@@ -103,27 +116,30 @@ describe('validateVideoForInstagram', () => {
   //
   //   expect(validateVideoForInstagram(draft.video)).toBeInstanceOf(ValidationFail);
   // });
-//   it('returns ValidationFail if video is larger than the req. aspect ratio', () => {
-//     const instagramService = Services.get('instagram');
-//
-//     const draft = {
-//       enabledAttachmentType: AttachmentTypes.MEDIA,
-//       video: {
-//         size: 1000,
-//         durationMs: 5000,
-//         width: 1600,
-//         height: 440,
-//       },
-//       service: instagramService,
-//     };
-//
-//     expect(validateVideoForInstagram(draft.video)).toBeInstanceOf(ValidationFail);
-//   });
+  //   it('returns ValidationFail if video is larger than the req. aspect ratio', () => {
+  //     const instagramService = Services.get('instagram');
+  //
+  //     const draft = {
+  //       enabledAttachmentType: AttachmentTypes.MEDIA,
+  //       video: {
+  //         size: 1000,
+  //         durationMs: 5000,
+  //         width: 1600,
+  //         height: 440,
+  //       },
+  //       service: instagramService,
+  //     };
+  //
+  //     expect(validateVideoForInstagram(draft.video)).toBeInstanceOf(ValidationFail);
+  //   });
 });
 
 describe('validateDraft', () => {
   it('returns success if state is empty', () => {
-    const draft = new Draft(Services.get('instagram'), EditorState.createEmpty());
+    const draft = new Draft(
+      Services.get('instagram'),
+      EditorState.createEmpty()
+    );
     const results = validateDraft(draft);
     expect(results.isValid()).toBeTruthy();
   });
@@ -139,7 +155,9 @@ describe('validateDraft', () => {
       const results = validateDraft(draft);
 
       expect(results.isInvalid()).toBeTruthy();
-      expect(results.getErrorMessages()).toContain('The link URL format is invalid');
+      expect(results.getErrorMessages()).toContain(
+        'The link URL format is invalid'
+      );
     });
 
     it('return success for valid url in shopgrid link', () => {
@@ -184,21 +202,27 @@ describe('validateDraft', () => {
       const service = Services.get('instagram');
       service.maxHashtags = 4;
 
-      const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four #five'));
+      const editorState = EditorState.createWithContent(
+        ContentState.createFromText('#one #two #three #four #five')
+      );
 
       const draft = new Draft(service, editorState);
 
       const results = validateDraft(draft);
 
       expect(results.isInvalid()).toBeTruthy();
-      expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used for caption and comment');
+      expect(results.getErrorMessages()).toContain(
+        'At most 4 hashtags can be used for caption and comment'
+      );
     });
 
     it('does not return max hashtags error in text if they do not exceed the amount allowed', () => {
       const service = Services.get('instagram');
       service.maxHashtags = 4;
 
-      const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three #four'));
+      const editorState = EditorState.createWithContent(
+        ContentState.createFromText('#one #two #three #four')
+      );
 
       const draft = new Draft(service, editorState);
       const results = validateDraft(draft);
@@ -216,7 +240,9 @@ describe('validateDraft', () => {
       const results = validateDraft(draft);
 
       expect(results.isInvalid()).toBeTruthy();
-      expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used for caption and comment');
+      expect(results.getErrorMessages()).toContain(
+        'At most 4 hashtags can be used for caption and comment'
+      );
     });
 
     it('does not return max hashtags error in comment if they do not exceed the amount allowed', () => {
@@ -234,14 +260,18 @@ describe('validateDraft', () => {
       const service = Services.get('instagram');
       service.maxHashtags = 4;
 
-      const editorState = EditorState.createWithContent(ContentState.createFromText('#one #two #three'));
+      const editorState = EditorState.createWithContent(
+        ContentState.createFromText('#one #two #three')
+      );
       const draft = new Draft(service, editorState);
       draft.commentText = '#four #five';
 
       const results = validateDraft(draft);
 
       expect(results.isInvalid()).toBeTruthy();
-      expect(results.getErrorMessages()).toContain('At most 4 hashtags can be used for caption and comment');
+      expect(results.getErrorMessages()).toContain(
+        'At most 4 hashtags can be used for caption and comment'
+      );
     });
   });
 
@@ -257,19 +287,25 @@ describe('validateDraft', () => {
       const results = validateDraft(draft);
 
       expect(results.isInvalid()).toBeTruthy();
-      expect(results.getErrorMessages()).toContain('At most 4 mentions can be used for caption and comment');
+      expect(results.getErrorMessages()).toContain(
+        'At most 4 mentions can be used for caption and comment'
+      );
     });
 
     it('returns max mentions error if they exceed the amount allowed in text', () => {
       const service = Services.get('instagram');
       service.maxMentions = 4;
-      const editorState = EditorState.createWithContent(ContentState.createFromText('@one @two @three @four @five'));
+      const editorState = EditorState.createWithContent(
+        ContentState.createFromText('@one @two @three @four @five')
+      );
       const draft = new Draft(service, editorState);
 
       const results = validateDraft(draft);
 
       expect(results.isInvalid()).toBeTruthy();
-      expect(results.getErrorMessages()).toContain('At most 4 mentions can be used for caption and comment');
+      expect(results.getErrorMessages()).toContain(
+        'At most 4 mentions can be used for caption and comment'
+      );
     });
 
     it('does not return max mentions error if they do not exceed the amount allowed', () => {
@@ -284,7 +320,6 @@ describe('validateDraft', () => {
     });
   });
 
-
   describe('characters validation', () => {
     // draft.characterCommentCount is updated in the ComposerStore when the text changes
     // in updateDraftCommentCharacterCount but we can force the value
@@ -298,7 +333,9 @@ describe('validateDraft', () => {
       const results = validateDraft(draft);
 
       expect(results.isInvalid()).toBeTruthy();
-      expect(results.getErrorMessages()).toContain('We can only fit 10 characters for comments');
+      expect(results.getErrorMessages()).toContain(
+        'We can only fit 10 characters for comments'
+      );
     });
 
     it('does not return max characters error in comment if they do not exceed the amount allowed', () => {

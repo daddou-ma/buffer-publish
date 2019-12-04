@@ -7,7 +7,10 @@ describe('Tracking Utils', () => {
       expect(source).toEqual('queue_list');
     });
     it('returns queue', () => {
-      const source = getComposerSource({ tabId: 'queue', emptySlotMode: false });
+      const source = getComposerSource({
+        tabId: 'queue',
+        emptySlotMode: false,
+      });
       expect(source).toEqual('queue');
     });
     it('returns share_again', () => {

@@ -10,7 +10,7 @@ const getFacebookAutocompleteEntities = function(editorState) {
 
   const contentState = editorState.getCurrentContent();
 
-  const filterFacebookAutocompleteEntities = (characterMetadata) => {
+  const filterFacebookAutocompleteEntities = characterMetadata => {
     const entityKey = characterMetadata.getEntity();
     if (entityKey === null) return false;
 
@@ -18,26 +18,30 @@ const getFacebookAutocompleteEntities = function(editorState) {
     return entityType === 'mention' || entityType === 'IMPORTED_MENTION';
   };
 
-  contentState.getBlockMap().forEach((contentBlock) => {
-    contentBlock.findEntityRanges(filterFacebookAutocompleteEntities, (start, end) => {
-      const entityKey = contentBlock.getEntityAt(start);
-      const mention = contentState.getEntity(entityKey).getData().mention;
+  contentState.getBlockMap().forEach(contentBlock => {
+    contentBlock.findEntityRanges(
+      filterFacebookAutocompleteEntities,
+      (start, end) => {
+        const entityKey = contentBlock.getEntityAt(start);
+        const mention = contentState.getEntity(entityKey).getData().mention;
 
-      const leftHandText = contentBlock.getText().slice(0, start);
-      const entitiesInlineOffset = getUnicodeAwareLength(leftHandText) - leftHandText.length;
+        const leftHandText = contentBlock.getText().slice(0, start);
+        const entitiesInlineOffset =
+          getUnicodeAwareLength(leftHandText) - leftHandText.length;
 
-      entities.push({
-        indices: [
-          entitiesBlockOffset + entitiesInlineOffset + start,
-          entitiesBlockOffset + entitiesInlineOffset + end,
-        ],
-        content: mention.get('id'),
-        text: mention.get('name'),
-        url: mention.get('url'),
-      });
-    });
+        entities.push({
+          indices: [
+            entitiesBlockOffset + entitiesInlineOffset + start,
+            entitiesBlockOffset + entitiesInlineOffset + end,
+          ],
+          content: mention.get('id'),
+          text: mention.get('name'),
+          url: mention.get('url'),
+        });
+      }
+    );
 
-    entitiesBlockOffset += (getUnicodeAwareLength(contentBlock.getText()) + 1);
+    entitiesBlockOffset += getUnicodeAwareLength(contentBlock.getText()) + 1;
   });
 
   return entities;

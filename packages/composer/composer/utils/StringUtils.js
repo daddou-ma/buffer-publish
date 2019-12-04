@@ -1,4 +1,4 @@
-const getHumanReadableSize = (bytes) => {
+const getHumanReadableSize = bytes => {
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
   if (bytes === 0) return 'n/a';
 
@@ -8,9 +8,9 @@ const getHumanReadableSize = (bytes) => {
   return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
 };
 
-const getHumanReadableTime = (unformattedSeconds) => {
+const getHumanReadableTime = unformattedSeconds => {
   let minutes = Math.floor(unformattedSeconds / 60);
-  let seconds = unformattedSeconds - (minutes * 60);
+  let seconds = unformattedSeconds - minutes * 60;
 
   if (seconds < 10) seconds = `0${seconds}`;
   if (minutes < 10) minutes = `0${minutes}`;
@@ -18,7 +18,7 @@ const getHumanReadableTime = (unformattedSeconds) => {
   return `${minutes}:${seconds}`;
 };
 
-const getFileTypeFromPath = (path) => {
+const getFileTypeFromPath = path => {
   const fileNameParts = path.split('.');
   return fileNameParts[fileNameParts.length - 1];
 };
@@ -37,7 +37,7 @@ const generateUniqueId = (existingIds = []) => {
   return id;
 };
 
-const getAbsoluteUrl = (link) => {
+const getAbsoluteUrl = link => {
   if (!link.includes('http://') && !link.includes('https://')) {
     link = `http://${link}`;
   }
@@ -52,31 +52,42 @@ const getAbsoluteUrl = (link) => {
  * makeUnicodeAwareIndexUnaware(str, i) when given a unicode-aware index in a string,
  * returns its unicode-unaware counterpart.
  */
-const getUnicodeAwareLength = (str) => [...str].length;
-const makeUnicodeAwareIndexUnaware = (str, i) => Array.from(str).slice(0, i).join('').length;
+const getUnicodeAwareLength = str => [...str].length;
+const makeUnicodeAwareIndexUnaware = (str, i) =>
+  Array.from(str)
+    .slice(0, i)
+    .join('').length;
 
 /**
  * Escape parens in a string. Useful for CSS style tags, where external resources
  * linked using `url()` have parens acting as special characters.
  */
 const cachedParensRegex = /(\(|\))/g;
-const escapeParens = (str) => str.replace(cachedParensRegex, '\\$1');
+const escapeParens = str => str.replace(cachedParensRegex, '\\$1');
 
-const getDomainFromUrl = (url) => (
-  url.replace(/(?:(?:https?|ftp):\/\/)?(?:www\.)?/, '').split(/[/?#]/)[0]
-);
+const getDomainFromUrl = url =>
+  url.replace(/(?:(?:https?|ftp):\/\/)?(?:www\.)?/, '').split(/[/?#]/)[0];
 
-const getBaseUrl = () => (
-  (window.location.hostname === 'publish.local.buffer.com') ? 'https://local.buffer.com' : 'https://buffer.com'
-);
+const getBaseUrl = () =>
+  window.location.hostname === 'publish.local.buffer.com'
+    ? 'https://local.buffer.com'
+    : 'https://buffer.com';
 
 const removeLinkFromErrorMessageText = (text, linkClass) => {
-  const rx = new RegExp(`<a class="${linkClass}".*?<\/a>`)
+  const rx = new RegExp(`<a class="${linkClass}".*?<\/a>`);
   return text.replace(rx, '');
 };
 
 export {
-  getHumanReadableSize, getHumanReadableTime, getFileTypeFromPath, escapeParens,
-  getAbsoluteUrl, generateUniqueId, getUnicodeAwareLength, makeUnicodeAwareIndexUnaware,
-  getDomainFromUrl, removeLinkFromErrorMessageText, getBaseUrl,
+  getHumanReadableSize,
+  getHumanReadableTime,
+  getFileTypeFromPath,
+  escapeParens,
+  getAbsoluteUrl,
+  generateUniqueId,
+  getUnicodeAwareLength,
+  makeUnicodeAwareIndexUnaware,
+  getDomainFromUrl,
+  removeLinkFromErrorMessageText,
+  getBaseUrl,
 };

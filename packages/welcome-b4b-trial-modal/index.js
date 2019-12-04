@@ -9,5 +9,5 @@ export default connect(
   }),
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideWelcomeB4BTrialModal()),
-  }),
+  })
 )(WelcomeB4BTrialModal);

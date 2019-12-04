@@ -11,14 +11,13 @@ import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import AppActionCreators from '../action-creators/AppActionCreators';
 
 class AttachmentGlance extends React.Component {
-
   static propTypes = {
     draft: PropTypes.object.isRequired,
     attachmentType: PropTypes.string.isRequired,
     attachmentThumbnails: PropTypes.array,
   };
 
-  onClick = (e) => {
+  onClick = e => {
     e.preventDefault();
     ComposerActionCreators.expand(this.props.draft.id);
     AppActionCreators.trackUserAction(['composer', 'expand']);
@@ -32,11 +31,17 @@ class AttachmentGlance extends React.Component {
       iconClassName = ['bi bi-video', styles.attachmentIcon].join(' ');
     } else if (attachmentType === AttachmentTypes.MEDIA && draft.gif !== null) {
       iconClassName = ['bi bi-gif', styles.attachmentIcon].join(' ');
-    } else if (attachmentType === AttachmentTypes.MEDIA && draft.images.length > 0) {
+    } else if (
+      attachmentType === AttachmentTypes.MEDIA &&
+      draft.images.length > 0
+    ) {
       iconClassName = ['bi bi-image', styles.attachmentIcon].join(' ');
     } else if (attachmentType === AttachmentTypes.LINK && draft.link !== null) {
       iconClassName = ['bi bi-link', styles.attachmentIcon].join(' ');
-    } else if (attachmentType === AttachmentTypes.RETWEET && draft.retweet !== null) {
+    } else if (
+      attachmentType === AttachmentTypes.RETWEET &&
+      draft.retweet !== null
+    ) {
       iconClassName = ['bi bi-retweet', styles.attachmentIcon].join(' ');
     }
     const hasThumbnail = attachmentThumbnails !== null;
@@ -45,40 +50,50 @@ class AttachmentGlance extends React.Component {
     if (attachmentThumbnails === null) {
       thumbnailContainerClassName = '';
     } else if (attachmentThumbnails.length === 1) {
-      thumbnailContainerClassName =
-        [styles.singleThumbnailContainer, styles.thumbnailContainer].join(' ');
+      thumbnailContainerClassName = [
+        styles.singleThumbnailContainer,
+        styles.thumbnailContainer,
+      ].join(' ');
     } else if (attachmentThumbnails.length === 2) {
-      thumbnailContainerClassName =
-        [styles.twoThumbnailContainer, styles.thumbnailContainer].join(' ');
+      thumbnailContainerClassName = [
+        styles.twoThumbnailContainer,
+        styles.thumbnailContainer,
+      ].join(' ');
     } else if (attachmentThumbnails.length === 3) {
-      thumbnailContainerClassName =
-        [styles.threeThumbnailContainer, styles.thumbnailContainer].join(' ');
+      thumbnailContainerClassName = [
+        styles.threeThumbnailContainer,
+        styles.thumbnailContainer,
+      ].join(' ');
     } else if (attachmentThumbnails.length === 4) {
-      thumbnailContainerClassName =
-        [styles.fourThumbnailContainer, styles.thumbnailContainer].join(' ');
+      thumbnailContainerClassName = [
+        styles.fourThumbnailContainer,
+        styles.thumbnailContainer,
+      ].join(' ');
     }
 
     const containerClass = [
-      hasThumbnail ? styles.containerWithThumbnail : styles.containerNoThumbnail,
+      hasThumbnail
+        ? styles.containerWithThumbnail
+        : styles.containerNoThumbnail,
       styles.container,
     ].join(' ');
 
     return (
       <div className={containerClass} onClick={this.onClick}>
-        <div
-          className={iconClassName}
-        />
-        {hasThumbnail &&
+        <div className={iconClassName} />
+        {hasThumbnail && (
           <div className={thumbnailContainerClassName}>
-            {attachmentThumbnails.map((thumbnail) =>
+            {attachmentThumbnails.map(thumbnail => (
               <div
                 src={thumbnail}
                 key={thumbnail}
                 className={styles.thumbnail}
                 role="presentation"
                 style={{ backgroundImage: `url(${escapeParens(thumbnail)})` }}
-              />)}
-          </div>}
+              />
+            ))}
+          </div>
+        )}
       </div>
     );
   }

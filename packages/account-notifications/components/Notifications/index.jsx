@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Divider,
-} from '@bufferapp/components';
+import { Divider } from '@bufferapp/components';
 import { Text } from '@bufferapp/ui';
 import Notification from '../Notification';
 
@@ -19,7 +17,9 @@ const Notifications = ({
 }) => (
   <div>
     <Text type="h2">Email Notifications</Text>
-    <Text type="p">We can remind you when one of your Buffer is looking a little empty.</Text>
+    <Text type="p">
+      We can remind you when one of your Buffer is looking a little empty.
+    </Text>
     <Divider />
     <Notification
       title={'Empty Buffer'}
@@ -31,7 +31,9 @@ const Notifications = ({
     <Divider />
     <Notification
       title={'Newsletter'}
-      description={'Send me occasional emails with new Buffer features and tips.'}
+      description={
+        'Send me occasional emails with new Buffer features and tips.'
+      }
       onToggleClick={onToggleClick}
       toggleisEnabled={bufferTips}
       type={'bufferTips'}
@@ -63,7 +65,9 @@ const Notifications = ({
     <Divider />
     <Notification
       title={'Awaiting Approval'}
-      description={'Send me emails when there is a new draft awaiting approval.'}
+      description={
+        'Send me emails when there is a new draft awaiting approval.'
+      }
       onToggleClick={onToggleClick}
       toggleisEnabled={newContributions}
       type={'newContributions'}
@@ -71,7 +75,9 @@ const Notifications = ({
     <Divider />
     <Notification
       title={'Post moved back to drafts'}
-      description={'Send me emails when my draft is moved from Pending Approval back to Drafts.'}
+      description={
+        'Send me emails when my draft is moved from Pending Approval back to Drafts.'
+      }
       onToggleClick={onToggleClick}
       toggleisEnabled={postMovedBackToDrafts}
       type={'postMovedBackToDrafts'}

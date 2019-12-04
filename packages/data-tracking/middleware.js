@@ -14,15 +14,24 @@ const getMetricsMetadata = (state, action) => {
     profileId: state.profileSidebar.selectedProfileId,
   };
   // Add Instagram Tracking Data
-  const isInstagramAction = (action === 'OPEN_IG_MODAL' || action === 'HIDE_IG_MODAL' || action === 'SET_DIRECT_POSTING');
+  const isInstagramAction =
+    action === 'OPEN_IG_MODAL' ||
+    action === 'HIDE_IG_MODAL' ||
+    action === 'SET_DIRECT_POSTING';
   if (isInstagramAction && state.queue.isBusinessOnInstagram) {
     metadata.isBusinessOnInstagram = state.queue.isBusinessOnInstagram
-      ? 'true' : 'false';
+      ? 'true'
+      : 'false';
   }
   return metadata;
 };
 
-export const logActionToConsole = (fromAutoTracking, location, action, metadata) => {
+export const logActionToConsole = (
+  fromAutoTracking,
+  location,
+  action,
+  metadata
+) => {
   // User has to type `showTracking()` in the console to enable
   if (!window._showTracking) {
     return;
@@ -37,7 +46,7 @@ export const logActionToConsole = (fromAutoTracking, location, action, metadata)
  * Redux middleware for logging tracked actions to the browse console, when enabled.
  * (See attach-to-console.js)
  */
-export const logTrackingMiddleware = ({ getState }) => next => (action) => {
+export const logTrackingMiddleware = ({ getState }) => next => action => {
   next(action);
 
   const segments = action.type.split('__');

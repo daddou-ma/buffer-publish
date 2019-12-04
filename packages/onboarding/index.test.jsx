@@ -1,12 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import Onboarding, {
-  reducer,
-  actions,
-  actionTypes,
-  middleware,
-} from './index';
+import Onboarding, { reducer, actions, actionTypes, middleware } from './index';
 import OnboardingManager from './components/OnboardingManager';
 
 const storeFake = state => ({
@@ -31,38 +26,31 @@ describe('Component', () => {
     const store = storeFake(state);
     const wrapper = mount(
       <Provider store={store}>
-        <Onboarding
-          canSeeOnboardingPage
-          translations=""
-        />
-      </Provider>,
+        <Onboarding canSeeOnboardingPage translations="" />
+      </Provider>
     );
-    expect(wrapper.find(OnboardingManager).length)
-      .toBe(1);
-    expect(wrapper.find(OnboardingManager).prop('canSeeOnboardingPage'))
-      .toBe(true);
+    expect(wrapper.find(OnboardingManager).length).toBe(1);
+    expect(wrapper.find(OnboardingManager).prop('canSeeOnboardingPage')).toBe(
+      true
+    );
     wrapper.unmount();
   });
 });
 
 describe('Onboarding', () => {
   test('should export reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   test('should export actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   test('should export actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 
   test('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

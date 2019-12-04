@@ -16,39 +16,43 @@ if (window._bugsnagConfig) {
   window.bugsnagClient = bugsnag({
     // Grab the config dropped in by the express server
     ...window._bugsnagConfig,
-// Remove FullStory integration for now (request from Super, Feb 6 2019)
-//     beforeSend: (report) => {
-//       // Make sure FullStory object exists
-//       if (window.FS && window.FS.getCurrentSessionURL) {
-//         report.updateMetaData(
-//           'fullstory', { urlAtTime: window.FS.getCurrentSessionURL(true) }
-//         );
-//       }
-//     },
+    // Remove FullStory integration for now (request from Super, Feb 6 2019)
+    //     beforeSend: (report) => {
+    //       // Make sure FullStory object exists
+    //       if (window.FS && window.FS.getCurrentSessionURL) {
+    //         report.updateMetaData(
+    //           'fullstory', { urlAtTime: window.FS.getCurrentSessionURL(true) }
+    //         );
+    //       }
+    //     },
   });
   window.bugsnagClient.use(bugsnagReact, React);
 
   BugsnagErrorBoundary = window.bugsnagClient.getPlugin('react');
 }
 
-
 const getErrorBoundary = (fit = false) => {
   if (BugsnagErrorBoundary) {
-    return ({ children, fallbackComponent }) => ( // eslint-disable-line
+    return (
+      { children, fallbackComponent } // eslint-disable-line
+    ) => (
       <BugsnagErrorBoundary
         FallbackComponent={
-          fallbackComponent ||
-          fit ? FittedFallbackComponent : BoundaryFallback
+          fallbackComponent || fit ? FittedFallbackComponent : BoundaryFallback
         }
       >
         {children}
       </BugsnagErrorBoundary>
     );
   }
-  return ({ children, fallbackComponent }) => ( // eslint-disable-line
+  return (
+    { children, fallbackComponent } // eslint-disable-line
+  ) => (
     <SimpleErrorBoundary
       fallbackComponent={fallbackComponent}
-      defaultFallbackComponent={fit ? FittedFallbackComponent : BoundaryFallback}
+      defaultFallbackComponent={
+        fit ? FittedFallbackComponent : BoundaryFallback
+      }
     >
       {children}
     </SimpleErrorBoundary>

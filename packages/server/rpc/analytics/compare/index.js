@@ -5,11 +5,19 @@ const METRICS_CONFIG = require('./metricsConfig');
 const NON_SUMMABLE_METRICS = ['followers'];
 const METRICS_TO_AVERAGE = ['engagement_rate'];
 
-const requestDailyTotals = (profileId, profileService, dateRange, accessToken, analyzeApiAddr) =>
+const requestDailyTotals = (
+  profileId,
+  profileService,
+  dateRange,
+  accessToken,
+  analyzeApiAddr
+) =>
   rp({
     uri: `${analyzeApiAddr}/metrics/daily_totals`,
     method: 'POST',
-    strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
+    strictSSL: !(
+      process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+    ),
     qs: {
       access_token: accessToken,
       start_date: dateRange.start,
@@ -19,7 +27,7 @@ const requestDailyTotals = (profileId, profileService, dateRange, accessToken, a
     json: true,
   });
 
-function percentageDifference (value, previousValue) {
+function percentageDifference(value, previousValue) {
   if (previousValue === 0 && value === 0) return 0;
   const difference = value - previousValue;
   if (previousValue === 0) previousValue = 1; // can't divide by 0
@@ -32,7 +40,7 @@ const summarize = (
   currentPeriodPostCount,
   previousPeriod,
   previousPeriodPostCount,
-  profileService,
+  profileService
 ) => {
   const previousValue = previousPeriod[metricKey] || 0;
   const value = currentPeriod[metricKey] || 0;
@@ -55,7 +63,7 @@ const summarize = (
 function formatTotals(
   currentPeriodResult,
   previousPeriodResult,
-  profileService,
+  profileService
 ) {
   const currentPeriodTotalPostCount = currentPeriodResult.posts_count;
   const previousPeriodTotalPostCount = previousPeriodResult.posts_count;
@@ -67,59 +75,59 @@ function formatTotals(
         currentPeriodTotalPostCount,
         previousPeriodResult,
         previousPeriodTotalPostCount,
-        profileService,
-      ),
+        profileService
+      )
     )
     .filter(metric => metric !== null);
 }
 
-function formatDaily(
-  currentPeriodDaily,
-  previousPeriodDaily,
-  profileService,
-) {
+function formatDaily(currentPeriodDaily, previousPeriodDaily, profileService) {
   const currentPeriodDays = Object.keys(currentPeriodDaily);
   const previousPeriodDays = Object.keys(previousPeriodDaily);
   const daily = Array.from(currentPeriodDays, (day, index) => ({
     day,
-    previousPeriodDay: previousPeriodDays[index] ?
-      previousPeriodDays[index] :
-      null,
+    previousPeriodDay: previousPeriodDays[index]
+      ? previousPeriodDays[index]
+      : null,
     currentPeriodMetrics: currentPeriodDaily[day],
-    previousPeriodMetrics: previousPeriodDays[index] ?
-      previousPeriodDaily[previousPeriodDays[index]] :
-      null,
+    previousPeriodMetrics: previousPeriodDays[index]
+      ? previousPeriodDaily[previousPeriodDays[index]]
+      : null,
     currentPeriodPostCount: currentPeriodDaily[day].posts_count,
-    previousPeriodPostCount: previousPeriodDays[index] ?
-      previousPeriodDaily[previousPeriodDays[index]].posts_count :
-      null,
-  })).filter(data => data.previousPeriodDay !== null).map((data) => {
-    const metricKeys = METRICS_CONFIG[profileService].orderedKeys;
-    return {
-      day: data.day,
-      previousPeriodDay: data.previousPeriodDay,
-      metrics: metricKeys.map(metricKey =>
-        summarize(
-          metricKey,
-          data.currentPeriodMetrics,
-          data.currentPeriodPostCount,
-          data.previousPeriodMetrics,
-          data.previousPeriodPostCount,
-          profileService,
-        ),
-      ).filter(metric => metric !== null),
-    };
-  });
+    previousPeriodPostCount: previousPeriodDays[index]
+      ? previousPeriodDaily[previousPeriodDays[index]].posts_count
+      : null,
+  }))
+    .filter(data => data.previousPeriodDay !== null)
+    .map(data => {
+      const metricKeys = METRICS_CONFIG[profileService].orderedKeys;
+      return {
+        day: data.day,
+        previousPeriodDay: data.previousPeriodDay,
+        metrics: metricKeys
+          .map(metricKey =>
+            summarize(
+              metricKey,
+              data.currentPeriodMetrics,
+              data.currentPeriodPostCount,
+              data.previousPeriodMetrics,
+              data.previousPeriodPostCount,
+              profileService
+            )
+          )
+          .filter(metric => metric !== null),
+      };
+    });
   return daily;
 }
 
-function getTotalsFromDaily (dailyData) {
+function getTotalsFromDaily(dailyData) {
   const currentPeriodTotals = {};
   const previousPeriodTotals = {};
   const currentMetricsToAveragEntriesCount = {};
   const previousMetricsToAveragEntriesCount = {};
-  dailyData.forEach((day) => {
-    day.metrics.forEach((metric) => {
+  dailyData.forEach(day => {
+    day.metrics.forEach(metric => {
       if (!currentPeriodTotals[metric.key]) {
         currentPeriodTotals[metric.key] = 0;
         previousPeriodTotals[metric.key] = 0;
@@ -146,30 +154,29 @@ function getTotalsFromDaily (dailyData) {
     });
   });
 
-  METRICS_TO_AVERAGE.forEach((metricKey) => {
-    currentPeriodTotals[metricKey] /= currentMetricsToAveragEntriesCount[metricKey];
-    previousPeriodTotals[metricKey] /= previousMetricsToAveragEntriesCount[metricKey];
+  METRICS_TO_AVERAGE.forEach(metricKey => {
+    currentPeriodTotals[metricKey] /=
+      currentMetricsToAveragEntriesCount[metricKey];
+    previousPeriodTotals[metricKey] /=
+      previousMetricsToAveragEntriesCount[metricKey];
   });
   return { currentPeriodTotals, previousPeriodTotals };
 }
 
-
-function formatData(
-  currentPeriodDaily,
-  previousPeriodDaily,
-  profileService,
-) {
+function formatData(currentPeriodDaily, previousPeriodDaily, profileService) {
   const daily = formatDaily(
     currentPeriodDaily,
     previousPeriodDaily,
-    profileService,
+    profileService
   );
 
-  const { currentPeriodTotals, previousPeriodTotals } = getTotalsFromDaily(daily);
+  const { currentPeriodTotals, previousPeriodTotals } = getTotalsFromDaily(
+    daily
+  );
   const totals = formatTotals(
     currentPeriodTotals,
     previousPeriodTotals,
-    profileService,
+    profileService
   );
 
   return {
@@ -192,34 +199,30 @@ module.exports = method(
       profileService,
       dateRange,
       accessToken,
-      analyzeApiAddr,
+      analyzeApiAddr
     );
     const previousPeriodDailyTotals = requestDailyTotals(
       profileId,
       profileService,
       previousDateRange,
       accessToken,
-      analyzeApiAddr,
+      analyzeApiAddr
     );
 
-    return Promise
-      .all([
-        currentPeriodDailyTotals,
-        previousPeriodDailyTotals,
-      ])
-      .then((response) => {
+    return Promise.all([currentPeriodDailyTotals, previousPeriodDailyTotals])
+      .then(response => {
         const currentPeriodDaily = response[0].response;
         const previousPeriodDaily = response[1].response;
 
         return formatData(
           currentPeriodDaily,
           previousPeriodDaily,
-          profileService,
+          profileService
         );
       })
       .catch(() => ({
         totals: [],
         daily: [],
       }));
-  },
+  }
 );

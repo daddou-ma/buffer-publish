@@ -20,33 +20,42 @@ describe('rpc/contextual', () => {
       },
     },
     app: {
-      get() { return 'analyze-api'; },
+      get() {
+        return 'analyze-api';
+      },
     },
   };
 
   it('should have the expected name', () => {
-    expect(contextual.name)
-      .toBe('contextual');
+    expect(contextual.name).toBe('contextual');
   });
 
   it('should have the expected docs', () => {
-    expect(contextual.docs)
-      .toBe('fetch analytics contextual for profiles and pages');
+    expect(contextual.docs).toBe(
+      'fetch analytics contextual for profiles and pages'
+    );
   });
 
   it('should request Questions Data to Analyze Api for Instagram', () => {
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    contextual.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService: 'instagram',
-    }, mockedRequest);
+    contextual.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService: 'instagram',
+      },
+      mockedRequest
+    );
 
-    expect(rp.mock.calls[0])
-      .toEqual([{
+    expect(rp.mock.calls[0]).toEqual([
+      {
         uri: 'analyze-api/metrics/questions',
         method: 'POST',
         strictSSL: false,
@@ -57,23 +66,31 @@ describe('rpc/contextual', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
   it('should request Questions Data to Analyze Api for Twitter', () => {
     rp.mockClear();
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    contextual.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService: 'twitter',
-    }, mockedRequest);
+    contextual.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService: 'twitter',
+      },
+      mockedRequest
+    );
 
-    expect(rp.mock.calls[0])
-      .toEqual([{
+    expect(rp.mock.calls[0]).toEqual([
+      {
         uri: 'analyze-api/metrics/questions',
         method: 'POST',
         strictSSL: false,
@@ -84,24 +101,31 @@ describe('rpc/contextual', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
-
 
   it('should request contextual data for the previous week', () => {
     rp.mockClear();
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    contextual.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService,
-    }, mockedRequest);
+    contextual.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService,
+      },
+      mockedRequest
+    );
 
-    expect(rp.mock.calls[0])
-      .toEqual([{
+    expect(rp.mock.calls[0]).toEqual([
+      {
         uri: `${process.env.API_ADDR}/1/profiles/${profileId}/analytics/contextual.json`,
         method: 'GET',
         strictSSL: false,
@@ -112,23 +136,30 @@ describe('rpc/contextual', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
-  it('it should return: data, metrics, and presets', async() => {
+  it('it should return: data, metrics, and presets', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
 
-    const data = await contextual.fn({ profileId, profileService }, mockedRequest);
+    const data = await contextual.fn(
+      { profileId, profileService },
+      mockedRequest
+    );
 
     expect(data.data).toBeDefined();
     expect(data.metrics).toBeDefined();
     expect(data.presets).toBeDefined();
   });
 
-  it('should return a valid response if all data is 0', async() => {
+  it('should return a valid response if all data is 0', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
 
-    const data = await contextual.fn({ profileId, profileService }, mockedRequest);
+    const data = await contextual.fn(
+      { profileId, profileService },
+      mockedRequest
+    );
 
     expect(data.metrics.length).toBe(10);
     expect(data.metrics[0]).toEqual({
@@ -137,10 +168,13 @@ describe('rpc/contextual', () => {
     });
   });
 
-  it('should return the daily data', async() => {
+  it('should return the daily data', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
 
-    const data = await contextual.fn({ profileId, profileService }, mockedRequest);
+    const data = await contextual.fn(
+      { profileId, profileService },
+      mockedRequest
+    );
     expect(data.data.length).toBe(7);
     expect(data.data[0].day).toBe('1508371200000');
     expect(data.data[0].metrics.length).toBe(10);
@@ -152,25 +186,30 @@ describe('rpc/contextual', () => {
     });
   });
 
-  it('should set postsCount to 0 if it is missing', async() => {
+  it('should set postsCount to 0 if it is missing', async () => {
     const response = {
       response: {
-        daily: [{
-          day: 1508371200000,
-          metrics: [
-            {
-              key: 'shares',
-              value: 29,
-            },
-          ],
-        }],
+        daily: [
+          {
+            day: 1508371200000,
+            metrics: [
+              {
+                key: 'shares',
+                value: 29,
+              },
+            ],
+          },
+        ],
         presets: [],
       },
     };
 
     rp.mockReturnValueOnce(Promise.resolve(response));
 
-    const data = await contextual.fn({ profileId, profileService }, mockedRequest);
+    const data = await contextual.fn(
+      { profileId, profileService },
+      mockedRequest
+    );
     expect(data.data.length).toBe(1);
     expect(data.data[0].metrics.length).toBe(1);
     expect(data.data[0].metrics[0]).toMatchObject({
@@ -180,63 +219,82 @@ describe('rpc/contextual', () => {
     });
   });
 
-  it('should return presets with empty data', async() => {
-    const mockedResponse = { response: {
-      daily: CURRENT_PERIOD_DAILY_RESPONSE.response.daily,
-      presets: [{
-        presetKey: 'content_type',
-        xAxis: 'date',
-        yAxis: {
-          metrics: [
-            {
-              key: 'new_followers',
+  it('should return presets with empty data', async () => {
+    const mockedResponse = {
+      response: {
+        daily: CURRENT_PERIOD_DAILY_RESPONSE.response.daily,
+        presets: [
+          {
+            presetKey: 'content_type',
+            xAxis: 'date',
+            yAxis: {
+              metrics: [
+                {
+                  key: 'new_followers',
+                },
+                {
+                  key: 'posts_count',
+                },
+              ],
             },
-            {
-              key: 'posts_count',
-            },
-          ],
-        },
-        data: [],
-      }],
-    } };
+            data: [],
+          },
+        ],
+      },
+    };
     rp.mockReturnValueOnce(Promise.resolve(mockedResponse));
 
-    const data = await contextual.fn({ profileId, profileService }, mockedRequest);
+    const data = await contextual.fn(
+      { profileId, profileService },
+      mockedRequest
+    );
     expect(data.presets.length).toBe(1);
   });
 
-  it('should filter out unsuded presets', async() => {
-    const mockedResponse = { response: {
-      daily: CURRENT_PERIOD_DAILY_RESPONSE.response.daily,
-      presets: [{
-        presetKey: 'foo_bar',
-        xAxis: 'date',
-        yAxis: {
-          metrics: [
-            {
-              key: 'new_followers',
+  it('should filter out unsuded presets', async () => {
+    const mockedResponse = {
+      response: {
+        daily: CURRENT_PERIOD_DAILY_RESPONSE.response.daily,
+        presets: [
+          {
+            presetKey: 'foo_bar',
+            xAxis: 'date',
+            yAxis: {
+              metrics: [
+                {
+                  key: 'new_followers',
+                },
+                {
+                  key: 'posts_count',
+                },
+              ],
             },
-            {
-              key: 'posts_count',
-            },
-          ],
-        },
-        data: [{}, {}],
-      }],
-    } };
+            data: [{}, {}],
+          },
+        ],
+      },
+    };
     rp.mockReturnValueOnce(Promise.resolve(mockedResponse));
 
-    const data = await contextual.fn({ profileId, profileService }, mockedRequest);
+    const data = await contextual.fn(
+      { profileId, profileService },
+      mockedRequest
+    );
     expect(data.presets.length).toBe(0);
   });
 
-  it('should return the presets data', async() => {
+  it('should return the presets data', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
 
-    const data = await contextual.fn({ profileId, profileService }, mockedRequest);
+    const data = await contextual.fn(
+      { profileId, profileService },
+      mockedRequest
+    );
     expect(data.presets.length).toBe(2);
 
-    expect(data.presets[0].label).toBe('How does post frequency affect my fan count?');
+    expect(data.presets[0].label).toBe(
+      'How does post frequency affect my fan count?'
+    );
     expect(data.presets[0].data.length).toBe(7);
     expect(data.presets[0].data[0]).toMatchObject({
       day: '1508371200000',
@@ -254,10 +312,13 @@ describe('rpc/contextual', () => {
     });
   });
 
-  it('should return empty data if fetch failed', async() => {
+  it('should return empty data if fetch failed', async () => {
     rp.mockReturnValueOnce(Promise.reject(CURRENT_PERIOD_DAILY_RESPONSE));
 
-    const data = await contextual.fn({ profileId, profileService }, mockedRequest);
+    const data = await contextual.fn(
+      { profileId, profileService },
+      mockedRequest
+    );
     expect(data.presets.length).toBe(0);
     expect(data.data.length).toBe(0);
     expect(data.metrics.length).toBe(0);

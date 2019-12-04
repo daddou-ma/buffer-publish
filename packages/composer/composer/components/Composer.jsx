@@ -841,14 +841,11 @@ class Composer extends React.Component {
       this.isExpanded() && hasComposerFbAutocompleteDisabledNotice;
 
     const { isFreeUser } = this.props;
-    const profileIsBusiness = isManagerOrContributorForAnyProfile(
-      {
-        profiles: this.props.selectedProfiles,
-        service: 'instagram',
-      }
-    );
-    const profileIsProOrBusiness =
-      !isFreeUser || profileIsBusiness;
+    const profileIsBusiness = isManagerOrContributorForAnyProfile({
+      profiles: this.props.selectedProfiles,
+      service: 'instagram',
+    });
+    const profileIsProOrBusiness = !isFreeUser || profileIsBusiness;
 
     const shouldDisplayEditThumbnailBtn =
       this.isInstagram() &&
@@ -871,7 +868,10 @@ class Composer extends React.Component {
     };
 
     const shouldDisplayFirstCommentSection = () => {
-      const { selectedProfiles: allSelectedProfiles, canStartProTrial } = this.props;
+      const {
+        selectedProfiles: allSelectedProfiles,
+        canStartProTrial,
+      } = this.props;
       const hasSelectedSomeInstagramDirectProfiles = allSelectedProfiles.some(
         profile => profile.instagramDirectEnabled
       );

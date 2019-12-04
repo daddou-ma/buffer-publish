@@ -36,46 +36,39 @@ const containerStyling = {
 };
 
 const LinkShorteningWrapper = ({
-    isFreeUser,
-    onOptionSelect,
-    children,
-    linkList,
-    startSectionStyles,
-    loading,
-    selectedShortener,
-    showConnectBitly,
-    onConnectBitlyURLClick,
-    onDisconnectBitlyURLClick,
-    isBitlyConnected,
-    isManager,
-  }) => {
-  const selectedValue = selectedShortener || (linkList && linkList.filter(ll => ll.selected));
+  isFreeUser,
+  onOptionSelect,
+  children,
+  linkList,
+  startSectionStyles,
+  loading,
+  selectedShortener,
+  showConnectBitly,
+  onConnectBitlyURLClick,
+  onDisconnectBitlyURLClick,
+  isBitlyConnected,
+  isManager,
+}) => {
+  const selectedValue =
+    selectedShortener || (linkList && linkList.filter(ll => ll.selected));
 
   return (
-    <div
-      style={containerStyling}
-    >
-      <div
-        style={startSectionStyles}
-      >
-        <Text type="h3">
-          Link Shortening
-        </Text>
+    <div style={containerStyling}>
+      <div style={startSectionStyles}>
+        <Text type="h3">Link Shortening</Text>
         {children}
       </div>
-      {loading &&
-        <div
-          style={loadingContainerStyle}
-        >
+      {loading && (
+        <div style={loadingContainerStyle}>
           <BufferLoading size={32} />
         </div>
-      }
-      {linkList && !loading &&
+      )}
+      {linkList && !loading && (
         <div
           style={{
             ...wrapperSidebarStyle,
             ...bitlyWrapperSidebarStyle,
-            ...((!showConnectBitly || isFreeUser) ? optionOnlyStyle : ''),
+            ...(!showConnectBitly || isFreeUser ? optionOnlyStyle : ''),
           }}
         >
           <div>
@@ -95,7 +88,7 @@ const LinkShorteningWrapper = ({
             onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
           />
         </div>
-      }
+      )}
     </div>
   );
 };
@@ -118,17 +111,13 @@ LinkShorteningWrapper.propTypes = {
   onOptionSelect: PropTypes.func,
   children: PropTypes.element.isRequired,
   loading: PropTypes.bool,
-  linkList: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    name: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    selected: PropTypes.bool,
-  })),
+  linkList: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      selected: PropTypes.bool,
+    })
+  ),
   startSectionStyles: PropTypes.shape({
     width: PropTypes.string,
     maxWidth: PropTypes.string,

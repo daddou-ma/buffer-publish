@@ -6,13 +6,12 @@ import styles from './css/OmniboxButtons.css';
 class OmniboxButtons extends React.Component {
   onCustomizeButtonClick = () => {
     ComposerActionCreators.applyOmniUpdate();
-  }
+  };
 
   render() {
-    const rightArrowClass = [
-      'bi bi-arrow-long-right',
-      styles.rightArrow,
-    ].join(' ');
+    const rightArrowClass = ['bi bi-arrow-long-right', styles.rightArrow].join(
+      ' '
+    );
 
     return (
       <Button

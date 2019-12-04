@@ -16,7 +16,8 @@ export default connect(
     mergedSchedules: state.postingSchedule.mergedSchedules,
     items: state.postingSchedule.items,
     profileTimezoneCity: state.postingSchedule.profileTimezoneCity,
-    hasTwentyFourHourTimeFormat: state.postingSchedule.hasTwentyFourHourTimeFormat,
+    hasTwentyFourHourTimeFormat:
+      state.postingSchedule.hasTwentyFourHourTimeFormat,
     clearTimezoneInput: state.postingSchedule.clearTimezoneInput,
     paused: state.postingSchedule.paused,
     showClearAllModal: state.postingSchedule.showClearAllModal,
@@ -28,46 +29,56 @@ export default connect(
   }),
   (dispatch, ownProps) => ({
     onRemoveTimeClick: (hours, minutes, dayName, timeIndex, paused) => {
-      dispatch(actions.handleRemoveTimeClick({
-        hours,
-        minutes,
-        dayName,
-        timeIndex,
-        profileId: ownProps.profileId,
-        paused,
-      }));
+      dispatch(
+        actions.handleRemoveTimeClick({
+          hours,
+          minutes,
+          dayName,
+          timeIndex,
+          profileId: ownProps.profileId,
+          paused,
+        })
+      );
     },
     onUpdateTime: (hours, minutes, dayName, timeIndex, paused) => {
-      dispatch(actions.handleUpdateTime({
-        hours,
-        minutes,
-        dayName,
-        timeIndex,
-        profileId: ownProps.profileId,
-        paused,
-      }));
+      dispatch(
+        actions.handleUpdateTime({
+          hours,
+          minutes,
+          dayName,
+          timeIndex,
+          profileId: ownProps.profileId,
+          paused,
+        })
+      );
     },
     onAddPostingTime: ({ day, time }) => {
-      dispatch(actions.handleAddPostingTime({
-        hours: time.hours,
-        minutes: time.minutes,
-        dayName: day.day || day,
-        profileId: ownProps.profileId,
-      }));
+      dispatch(
+        actions.handleAddPostingTime({
+          hours: time.hours,
+          minutes: time.minutes,
+          dayName: day.day || day,
+          profileId: ownProps.profileId,
+        })
+      );
     },
     onUpdateTimezone: ({ timezone, city }) => {
-      dispatch(actions.handleUpdateTimezone({
-        timezone,
-        city,
-        profileId: ownProps.profileId,
-      }));
+      dispatch(
+        actions.handleUpdateTimezone({
+          timezone,
+          city,
+          profileId: ownProps.profileId,
+        })
+      );
     },
     // send both args to allow debounce to work correctly
     onGetTimezones: (ev, timezone) => {
       if (timezone.length > 1) {
-        dispatch(actions.handleGetTimezones({
-          query: timezone,
-        }));
+        dispatch(
+          actions.handleGetTimezones({
+            query: timezone,
+          })
+        );
       }
     },
     onTimezoneInputFocus: () => {
@@ -79,28 +90,36 @@ export default connect(
     // maybe we can pass a `pausing` flag here that we can
     // check in the handler to see how to update the schedules?
     onPauseToggleClick: (dayName, paused) => {
-      dispatch(actions.handlePauseToggleClick({
-        profileId: ownProps.profileId,
-        dayName,
-        paused,
-      }));
+      dispatch(
+        actions.handlePauseToggleClick({
+          profileId: ownProps.profileId,
+          dayName,
+          paused,
+        })
+      );
     },
     onUnpauseClick: () => {
-      dispatch(profileSidebarActions.onUnpauseClick({ profileId: ownProps.profileId }));
+      dispatch(
+        profileSidebarActions.onUnpauseClick({ profileId: ownProps.profileId })
+      );
     },
     onPauseClick: () => {
-      dispatch(profileSidebarActions.onPauseClick({ profileId: ownProps.profileId }));
+      dispatch(
+        profileSidebarActions.onPauseClick({ profileId: ownProps.profileId })
+      );
     },
     onClearAllClick: () => {
       dispatch(actions.handleClearAllClick());
     },
     onConfirmClearClick: () => {
-      dispatch(actions.handleConfirmClearClick({ profileId: ownProps.profileId }));
+      dispatch(
+        actions.handleConfirmClearClick({ profileId: ownProps.profileId })
+      );
     },
     closePopover: () => {
       dispatch(actions.handleClosePopover());
     },
-  }),
+  })
 )(PostingSchedule);
 
 // export reducer, actions and action types

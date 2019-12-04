@@ -12,19 +12,34 @@ function validateVideoForInstagram(video) {
   }
 
   // TODO: Refactor this method to be used only for reminders once back end is updated
-  if (instagramService.videoMaxSize && video.size > instagramService.videoMaxSize) {
+  if (
+    instagramService.videoMaxSize &&
+    video.size > instagramService.videoMaxSize
+  ) {
     const maxFileSizeInMb = instagramService.videoMaxSize / 1024 / 1024;
-    return new ValidationFail(`Please try again with a smaller file. Videos need to be smaller than ${maxFileSizeInMb}MB`);
+    return new ValidationFail(
+      `Please try again with a smaller file. Videos need to be smaller than ${maxFileSizeInMb}MB`
+    );
   }
 
-  if (instagramService.videoMinDurationMs &&
-    (video.durationMs < instagramService.videoMinDurationMs)) {
-    return new ValidationFail(`Please lengthen your video and try again. Videos need to be longer than ${instagramService.videoMinDurationMs / 1000} seconds`);
+  if (
+    instagramService.videoMinDurationMs &&
+    video.durationMs < instagramService.videoMinDurationMs
+  ) {
+    return new ValidationFail(
+      `Please lengthen your video and try again. Videos need to be longer than ${instagramService.videoMinDurationMs /
+        1000} seconds`
+    );
   }
 
-  if (instagramService.videoMaxDurationMs
-    && video.durationMs > instagramService.videoMaxDurationMs) {
-    return new ValidationFail(`Please shorten your video and try again. Videos need to be under ${instagramService.videoMaxDurationMs / 1000} seconds long`);
+  if (
+    instagramService.videoMaxDurationMs &&
+    video.durationMs > instagramService.videoMaxDurationMs
+  ) {
+    return new ValidationFail(
+      `Please shorten your video and try again. Videos need to be under ${instagramService.videoMaxDurationMs /
+        1000} seconds long`
+    );
   }
 
   // Context: https://github.com/bufferapp/buffer-composer/pull/134
@@ -41,25 +56,37 @@ function validateVideoForInstagram(video) {
 
 const validateDraftFunctions = [
   function maxHashtags(draft) {
-    if (draft.service.maxHashtags !== null &&
-        draft.getNumberOfHashtags() > draft.service.maxHashtags) {
-      return new ValidationFail(`At most ${draft.service.maxHashtags} hashtags can be used for caption and comment`);
+    if (
+      draft.service.maxHashtags !== null &&
+      draft.getNumberOfHashtags() > draft.service.maxHashtags
+    ) {
+      return new ValidationFail(
+        `At most ${draft.service.maxHashtags} hashtags can be used for caption and comment`
+      );
     }
     return new ValidationSuccess();
   },
 
   function maxMentions(draft) {
-    if (draft.service.maxMentions !== null &&
-        draft.getNumberOfMentions() > draft.service.maxMentions) {
-      return new ValidationFail(`At most ${draft.service.maxMentions} mentions can be used for caption and comment`);
+    if (
+      draft.service.maxMentions !== null &&
+      draft.getNumberOfMentions() > draft.service.maxMentions
+    ) {
+      return new ValidationFail(
+        `At most ${draft.service.maxMentions} mentions can be used for caption and comment`
+      );
     }
     return new ValidationSuccess();
   },
 
   function maxCharactersInComment(draft) {
-    if (draft.service.commentCharLimit !== null &&
-        draft.characterCommentCount > draft.service.commentCharLimit) {
-      return new ValidationFail(`We can only fit ${draft.service.commentCharLimit} characters for comments`);
+    if (
+      draft.service.commentCharLimit !== null &&
+      draft.characterCommentCount > draft.service.commentCharLimit
+    ) {
+      return new ValidationFail(
+        `We can only fit ${draft.service.commentCharLimit} characters for comments`
+      );
     }
     return new ValidationSuccess();
   },
@@ -69,14 +96,16 @@ const validateDraftFunctions = [
       const shopgridLink = draft.shopgridLink;
 
       if (typeof shopgridLink !== 'undefined' && shopgridLink !== null) {
-        if (shopgridLink.replace(/\s+/g, '') !== '' && !isValidURL(shopgridLink)) {
+        if (
+          shopgridLink.replace(/\s+/g, '') !== '' &&
+          !isValidURL(shopgridLink)
+        ) {
           return new ValidationFail('The link URL format is invalid');
         }
       }
     }
     return new ValidationSuccess();
   },
-
 ];
 
 function validateDraft(draft) {

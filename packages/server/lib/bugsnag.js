@@ -13,9 +13,7 @@ const APP_TYPE_FRONTEND = 'frontend';
  * Get the current `releaseStage` for Bugsnag
  * https://docs.bugsnag.com/platforms/javascript/configuration-options/#releasestage
  */
-const getReleaseStage = () => (
-  RELEASE_STAGE || 'development'
-);
+const getReleaseStage = () => RELEASE_STAGE || 'development';
 
 /**
  * Get the `appVersion` for Bugsnag.
@@ -24,7 +22,9 @@ const getReleaseStage = () => (
  */
 const getAppVersion = () => {
   try {
-    const versionJson = JSON.parse(fs.readFileSync(join(__dirname, '..', 'version.json'), 'utf8'));
+    const versionJson = JSON.parse(
+      fs.readFileSync(join(__dirname, '..', 'version.json'), 'utf8')
+    );
     return versionJson.version;
   } catch (e) {
     return HOSTNAME;
@@ -42,10 +42,12 @@ const getBugsnagConfig = (appType, userId) => ({
   releaseStage: getReleaseStage(),
   appVersion: getAppVersion(),
   appType,
-  user: userId ? {
-    id: userId,
-    adminLink: `https://buffer.com/admin/user/${userId}`,
-  } : null,
+  user: userId
+    ? {
+        id: userId,
+        adminLink: `https://buffer.com/admin/user/${userId}`,
+      }
+    : null,
 });
 
 /**
@@ -56,7 +58,9 @@ const getBugsnagConfig = (appType, userId) => ({
  */
 const getBugsnagScript = userId => `
 <script type="text/javascript">
-  window._bugsnagConfig = ${JSON.stringify(getBugsnagConfig(APP_TYPE_FRONTEND, userId))};
+  window._bugsnagConfig = ${JSON.stringify(
+    getBugsnagConfig(APP_TYPE_FRONTEND, userId)
+  )};
 </script>
 `;
 

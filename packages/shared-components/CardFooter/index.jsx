@@ -7,7 +7,10 @@ import MessageIcon from '@bufferapp/ui/Icon/Icons/Message';
 import PersonIcon from '@bufferapp/ui/Icon/Icons/Person';
 import { Text, Button } from '@bufferapp/ui';
 import {
-  grayLight, grayDarker, red, grayDark,
+  grayLight,
+  grayDarker,
+  red,
+  grayDark,
 } from '@bufferapp/ui/style/colors';
 import { fontWeightBold } from '@bufferapp/ui/style/fonts';
 
@@ -28,7 +31,9 @@ const UserTagsIconWrapper = styled.span`
   padding-left: 0.5rem;
   color: ${grayDarker};
   ${({ hasFirstComment }) =>
-    !hasFirstComment ? `margin-left: 0.5rem; border-left: 1px solid ${grayLight};` : ''}
+    !hasFirstComment
+      ? `margin-left: 0.5rem; border-left: 1px solid ${grayLight};`
+      : ''}
 `;
 
 const CardFooterWrapper = styled.div`
@@ -67,7 +72,7 @@ const IconWrapper = styled.span`
 const Message = styled(Text)`
   font-size: 12px;
   margin: 0;
-  color: ${({ textColor }) => (textColor)};
+  color: ${({ textColor }) => textColor};
 `;
 
 const PreMessage = styled(Text)`
@@ -113,98 +118,132 @@ const CardFooter = ({
 }) => {
   const hideAllButtons = hideButtons || isPerformingAction || messageLink;
   const [isConfirmingDelete, setConfirmingDelete] = useState(false);
-  const textColor = ALLOWED_COLORS.includes(messageColor) ? messageColor : grayDarker;
-  const WrapperComponent = disableBorder ? CardFooterWrapper : CardFooterWrapperWithBorder;
+  const textColor = ALLOWED_COLORS.includes(messageColor)
+    ? messageColor
+    : grayDarker;
+  const WrapperComponent = disableBorder
+    ? CardFooterWrapper
+    : CardFooterWrapperWithBorder;
 
   return (
     <WrapperComponent isDragging={isDragging} disableBorder={disableBorder}>
-
-      { /* FOOTER MESSAGE */ }
+      {/* FOOTER MESSAGE */}
       <CardFooterContent>
-        {icon
-          && <IconWrapper>{icon}</IconWrapper>
-        }
-        {messageLink
-          ? (
-            <Link href={messageLink} unstyled newTab>
-              <Message type="p" textColor={textColor}>{ message }</Message>
-            </Link>
-          )
-          : (
-            <Fragment>
-              {preMessage && (
-                <PreMessage type="p">
-                  { preMessage }
-                  &nbsp;
-                </PreMessage>
-              )}
-              <Message type="p" textColor={textColor}>{ message }</Message>
-            </Fragment>
-          )
-        }
-        {hasFirstComment
-          && (
-            <CommentIconWrapper title="Post includes a comment">
-              <MessageIcon />
-            </CommentIconWrapper>
-          )
-        }
-        {hasUserTags
-          && (
-            <UserTagsIconWrapper title="Post includes tagged users" hasFirstComment={hasFirstComment}>
-              <PersonIcon />
-            </UserTagsIconWrapper>
-          )
-        }
+        {icon && <IconWrapper>{icon}</IconWrapper>}
+        {messageLink ? (
+          <Link href={messageLink} unstyled newTab>
+            <Message type="p" textColor={textColor}>
+              {message}
+            </Message>
+          </Link>
+        ) : (
+          <Fragment>
+            {preMessage && (
+              <PreMessage type="p">
+                {preMessage}
+                &nbsp;
+              </PreMessage>
+            )}
+            <Message type="p" textColor={textColor}>
+              {message}
+            </Message>
+          </Fragment>
+        )}
+        {hasFirstComment && (
+          <CommentIconWrapper title="Post includes a comment">
+            <MessageIcon />
+          </CommentIconWrapper>
+        )}
+        {hasUserTags && (
+          <UserTagsIconWrapper
+            title="Post includes tagged users"
+            hasFirstComment={hasFirstComment}
+          >
+            <PersonIcon />
+          </UserTagsIconWrapper>
+        )}
       </CardFooterContent>
 
-      { /* FOOTER BUTTONS */ }
-      {!hideAllButtons
-        && (
-          <ButtonWrapper>
-            {onDeleteClick
-              && (
+      {/* FOOTER BUTTONS */}
+      {!hideAllButtons && (
+        <ButtonWrapper>
+          {onDeleteClick && (
+            <Fragment>
+              {!isConfirmingDelete ? (
+                <Button
+                  type="text"
+                  label="Delete"
+                  size="small"
+                  onClick={() => setConfirmingDelete(true)}
+                />
+              ) : (
                 <Fragment>
-                  {!isConfirmingDelete
-                    ? <Button type="text" label="Delete" size="small" onClick={() => setConfirmingDelete(true)} />
-                    : (
-                      <Fragment>
-                        <Button type="text" label="Cancel" size="small" onClick={() => setConfirmingDelete(false)} />
-                        <Button type="text" label="Confirm" size="small" onClick={onDeleteClick} />
-                      </Fragment>
-                    )
-                  }
-                  <VerticalDivider />
+                  <Button
+                    type="text"
+                    label="Cancel"
+                    size="small"
+                    onClick={() => setConfirmingDelete(false)}
+                  />
+                  <Button
+                    type="text"
+                    label="Confirm"
+                    size="small"
+                    onClick={onDeleteClick}
+                  />
                 </Fragment>
-              )
-            }
-            {onEditClick
-              && <EditButton type="secondary" label="Edit" size="small" onClick={onEditClick} />
-            }
+              )}
+              <VerticalDivider />
+            </Fragment>
+          )}
+          {onEditClick && (
+            <EditButton
+              type="secondary"
+              label="Edit"
+              size="small"
+              onClick={onEditClick}
+            />
+          )}
 
-            { /* POSTS AND STORIES ACTIONS ONLY */ }
-            {onSubmitClick
-              && <Button type={onRequeueClick ? 'secondary' : 'primary'} label={submitLabel} size="small" onClick={onSubmitClick} />
-            }
-            {onRequeueClick
-              && <RequeueButton type="primary" label={requeueLabel} size="small" onClick={onRequeueClick} />
-            }
+          {/* POSTS AND STORIES ACTIONS ONLY */}
+          {onSubmitClick && (
+            <Button
+              type={onRequeueClick ? 'secondary' : 'primary'}
+              label={submitLabel}
+              size="small"
+              onClick={onSubmitClick}
+            />
+          )}
+          {onRequeueClick && (
+            <RequeueButton
+              type="primary"
+              label={requeueLabel}
+              size="small"
+              onClick={onRequeueClick}
+            />
+          )}
 
-            { /* DRAFTS ACTIONS ONLY */ }
-            {onMoveToDraftsClick
-              && <Button type={onSubmitDraftsClick ? 'secondary' : 'primary'} label="Move to Drafts" size="small" onClick={onMoveToDraftsClick} />
-            }
-            {onSubmitDraftsClick
-              && <RequeueButton type="primary" label={submitDraftsLabel} size="small" onClick={onSubmitDraftsClick} />
-            }
-          </ButtonWrapper>
-        )
-      }
+          {/* DRAFTS ACTIONS ONLY */}
+          {onMoveToDraftsClick && (
+            <Button
+              type={onSubmitDraftsClick ? 'secondary' : 'primary'}
+              label="Move to Drafts"
+              size="small"
+              onClick={onMoveToDraftsClick}
+            />
+          )}
+          {onSubmitDraftsClick && (
+            <RequeueButton
+              type="primary"
+              label={submitDraftsLabel}
+              size="small"
+              onClick={onSubmitDraftsClick}
+            />
+          )}
+        </ButtonWrapper>
+      )}
 
-      { /* FOOTER ACTONS */ }
-      {isPerformingAction
-        && <Message type="p">{ actionMessage }</Message>
-      }
+      {/* FOOTER ACTONS */}
+      {isPerformingAction && <Message type="p">{actionMessage}</Message>}
     </WrapperComponent>
   );
 };

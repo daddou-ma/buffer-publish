@@ -91,7 +91,7 @@ export const FooterButtons = styled.div`
     disabled
       ? css`
           pointer-events: none;
-          opacity: .5;
+          opacity: 0.5;
         `
       : ''}
 `;

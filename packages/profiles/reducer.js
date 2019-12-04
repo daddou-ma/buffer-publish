@@ -5,8 +5,8 @@ let profilesData =
   window.bufferData.profiles;
 
 module.exports = (state = profilesData || [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     default:
       return state;
   }
-}
+};

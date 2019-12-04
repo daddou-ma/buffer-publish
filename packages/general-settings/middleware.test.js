@@ -8,8 +8,7 @@ describe('middleware', () => {
   const next = jest.fn();
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('should run getLinkShortener when profile selected', () => {
@@ -26,10 +25,8 @@ describe('middleware', () => {
       },
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch(postAction));
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(dataFetchActions.fetch(postAction));
   });
 
   it('should run toggleGoogleAnalytics when toggled', () => {

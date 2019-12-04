@@ -28,15 +28,18 @@ class FixedDurationCircularIndicator extends React.Component {
     this.step();
   }
 
-  getInterval = () => this.props.duration / this.props.steps * 1000;
+  getInterval = () => (this.props.duration / this.props.steps) * 1000;
 
   step = () => {
     const progressStep = 100 / this.props.steps;
-    const progress = Math.min(Math.round(this.state.progress + progressStep), 100);
+    const progress = Math.min(
+      Math.round(this.state.progress + progressStep),
+      100
+    );
 
     this.setState({ progress });
     if (progress === 100) clearInterval(this._intervalId);
-  }
+  };
 
   render = () => {
     const transitionDuration = Math.round(this.getInterval() / 1000);

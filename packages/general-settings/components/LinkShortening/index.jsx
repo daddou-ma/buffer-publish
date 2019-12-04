@@ -13,22 +13,26 @@ const pinterestSectionStyling = {
 };
 
 const LinkShortening = ({
-    features,
-    onOptionSelect,
-    profileService,
-    linkShorteners,
-    loading,
-    selectedShortener,
-    onDisconnectBitlyURLClick,
-    onConnectBitlyURLClick,
-    isManager,
-  }) => {
-  const linkList = linkShorteners && linkShorteners.map(ls => ({
-    value: ls.domain,
-    name: `${ls.domain} ${ls.login ? `- ${ls.login}` : ''}`,
-    selected: ls.selected,
-  }));
-  const hasShortenersWithLogins = (linkShorteners && linkShorteners.filter(shortener => shortener.login)) || [];
+  features,
+  onOptionSelect,
+  profileService,
+  linkShorteners,
+  loading,
+  selectedShortener,
+  onDisconnectBitlyURLClick,
+  onConnectBitlyURLClick,
+  isManager,
+}) => {
+  const linkList =
+    linkShorteners &&
+    linkShorteners.map(ls => ({
+      value: ls.domain,
+      name: `${ls.domain} ${ls.login ? `- ${ls.login}` : ''}`,
+      selected: ls.selected,
+    }));
+  const hasShortenersWithLogins =
+    (linkShorteners && linkShorteners.filter(shortener => shortener.login)) ||
+    [];
   const isBitlyConnected = hasShortenersWithLogins.length > 0;
 
   if (profileService === 'pinterest') {
@@ -42,17 +46,22 @@ const LinkShortening = ({
         <div>
           <div style={pinterestSectionStyling}>
             <Text type="p">
-              Sadly, at the moment Pinterest does not allow posting of shortened links. <br />
-              For more,
-              read all about it <a
+              Sadly, at the moment Pinterest does not allow posting of shortened
+              links. <br />
+              For more, read all about it{' '}
+              <a
                 href="https://help.pinterest.com/en/articles/blocked-links-and-websites"
                 rel="noopener noreferrer"
                 target="_blank"
-              >here</a>.
+              >
+                here
+              </a>
+              .
             </Text>
           </div>
         </div>
-      </LinkShorteningWrapper>);
+      </LinkShorteningWrapper>
+    );
   }
   return (
     <LinkShorteningWrapper
@@ -72,13 +81,13 @@ const LinkShortening = ({
     >
       <div>
         <Text type="p">
-          Are your links feeling a little long? Well worry no longer, choose one of our link
-          shorteners or connect your own bit.ly account and Buffer will make sure that your
-          links are shortened whenever you post.
+          Are your links feeling a little long? Well worry no longer, choose one
+          of our link shorteners or connect your own bit.ly account and Buffer
+          will make sure that your links are shortened whenever you post.
         </Text>
         <Text type="p">
-          Please note that due to the specific spam filter LinkedIn uses, we do not support buff.ly for
-          LinkedIn and will default to bit.ly.
+          Please note that due to the specific spam filter LinkedIn uses, we do
+          not support buff.ly for LinkedIn and will default to bit.ly.
         </Text>
       </div>
     </LinkShorteningWrapper>
@@ -106,7 +115,7 @@ LinkShortening.propTypes = {
       selected: PropTypes.bool,
       tracking: PropTypes.bool,
       login: PropTypes.string,
-    }),
+    })
   ),
   loading: PropTypes.bool,
   selectedShortener: PropTypes.string,

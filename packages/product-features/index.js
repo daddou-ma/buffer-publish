@@ -13,7 +13,7 @@ export default connect(productFeatures)(FeatureLoader);
 
 export const WithFeatureLoader = compose(
   connect(productFeatures),
-  withFeatureLoader,
+  withFeatureLoader
 );
 
 // export reducer, actions and action types

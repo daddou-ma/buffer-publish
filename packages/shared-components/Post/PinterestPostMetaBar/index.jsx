@@ -10,8 +10,14 @@ const PinterestPostMetaBar = ({
   boardAvatarUrl,
   isSent,
 }) => {
-  const leftContent = { title: 'Pinned to:', text: boardName, avatarUrl: boardAvatarUrl };
-  const rightContent = sourceUrl ? { title: 'Source:', text: getFormattedSourceUrl(sourceUrl) } : null;
+  const leftContent = {
+    title: 'Pinned to:',
+    text: boardName,
+    avatarUrl: boardAvatarUrl,
+  };
+  const rightContent = sourceUrl
+    ? { title: 'Source:', text: getFormattedSourceUrl(sourceUrl) }
+    : null;
 
   return (
     <PostMetaBar

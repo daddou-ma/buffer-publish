@@ -15,10 +15,10 @@ module.exports = method(
       },
     })
       .then(result => JSON.parse(result))
-      .catch((err) => {
+      .catch(err => {
         if (err.error) {
           const error = JSON.parse(err.error);
           throw createError({ message: error.message });
         }
-      }),
+      })
 );

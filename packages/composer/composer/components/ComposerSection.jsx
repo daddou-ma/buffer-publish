@@ -45,27 +45,24 @@ const ComposerComponent = ({
   isBusinessUser,
   draftMode,
 }) => {
-  const canUserPostToMultipleNetworks = uniqBy(profiles, p => p.service.name).length > 1;
-  const showRolloutTooltip = (
-    AppStore.getOptions().canSelectProfiles
-    && canUserPostToMultipleNetworks
-    && (isOmniboxEnabled || index === enabledDrafts.length - 1)
-  );
+  const canUserPostToMultipleNetworks =
+    uniqBy(profiles, p => p.service.name).length > 1;
+  const showRolloutTooltip =
+    AppStore.getOptions().canSelectProfiles &&
+    canUserPostToMultipleNetworks &&
+    (isOmniboxEnabled || index === enabledDrafts.length - 1);
 
-  const children = showRolloutTooltip
-    ? (
-      <ProductRolloutTooltip
-        visibleNotifications={visibleNotifications}
-        isOmniboxEnabled={isOmniboxEnabled}
-      />
-    )
-    : null;
+  const children = showRolloutTooltip ? (
+    <ProductRolloutTooltip
+      visibleNotifications={visibleNotifications}
+      isOmniboxEnabled={isOmniboxEnabled}
+    />
+  ) : null;
 
   // When focus should be forced, figure out *which* editor instance to force-focus
-  const forceEditorInstanceFocus = (
-    state.forceEditorFocus
-    && (isOmniboxEnabled || appState.expandedComposerId === draft.id)
-  );
+  const forceEditorInstanceFocus =
+    state.forceEditorFocus &&
+    (isOmniboxEnabled || appState.expandedComposerId === draft.id);
 
   return (
     <Composer
@@ -75,7 +72,9 @@ const ComposerComponent = ({
       enabledDrafts={enabledDrafts}
       draftsSharedData={draftsSharedData}
       profiles={profiles}
-      expandedComposerId={isOmniboxEnabled ? draft.id : appState.expandedComposerId}
+      expandedComposerId={
+        isOmniboxEnabled ? draft.id : appState.expandedComposerId
+      }
       visibleNotifications={visibleNotifications}
       areAllDraftsSaved={areAllDraftsSaved}
       selectedProfiles={selectedProfiles}
@@ -106,7 +105,8 @@ class ComposerSection extends React.Component {
 
   componentDidMount = () => ComposerStore.addChangeListener(this.onStoreChange);
 
-  componentWillUnmount = () => ComposerStore.removeChangeListener(this.onStoreChange);
+  componentWillUnmount = () =>
+    ComposerStore.removeChangeListener(this.onStoreChange);
 
   onStoreChange = () => this.setState(getComposerState());
 
@@ -114,7 +114,7 @@ class ComposerSection extends React.Component {
     AppActionCreators.rememberTwitterMaxProfileNotificationClosedOnce();
   };
 
-  render () {
+  render() {
     const { enabledDrafts, draftsSharedData, omniDraft } = this.state;
 
     const {
@@ -166,11 +166,9 @@ class ComposerSection extends React.Component {
           showCloseIcon
         />
 
-        {isOmniboxEnabled
-        && (
-        <ComposerComponent
-          {
-            ...{
+        {isOmniboxEnabled && (
+          <ComposerComponent
+            {...{
               state: this.state,
               draft: omniDraft,
               profiles,
@@ -195,18 +193,15 @@ class ComposerSection extends React.Component {
               isFreeUser,
               isBusinessUser,
               draftMode,
-            }
-          }
-        />
-        )
-        }
+            }}
+          />
+        )}
 
-        {!isOmniboxEnabled
-        && enabledDrafts.map((draft, index) => (
-          <ComposerComponent
-            key={draft.id}
-            {
-              ...{
+        {!isOmniboxEnabled &&
+          enabledDrafts.map((draft, index) => (
+            <ComposerComponent
+              key={draft.id}
+              {...{
                 state: this.state,
                 draft,
                 index,
@@ -232,10 +227,9 @@ class ComposerSection extends React.Component {
                 isFreeUser,
                 isBusinessUser,
                 draftMode,
-              }
-            }
-          />
-        ))}
+              }}
+            />
+          ))}
       </div>
     );
   }

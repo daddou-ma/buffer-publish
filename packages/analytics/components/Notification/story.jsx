@@ -5,6 +5,4 @@ import Notification from './index';
 
 storiesOf('Unsupported Notification', module)
   .addDecorator(withA11y)
-  .add('default', () => (
-    <Notification />
-));
+  .add('default', () => <Notification />);

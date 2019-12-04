@@ -6,8 +6,7 @@ describe('middleware', () => {
   const next = jest.fn();
 
   it('exports middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('opens Premium Switch Plan Modal when Premium Trialist START_SUBSCRIPTION', () => {
@@ -25,14 +24,12 @@ describe('middleware', () => {
       type: actionTypes.START_SUBSCRIPTION,
     };
     middleware(store)(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(store.dispatch)
-      .toBeCalledWith({
-        type: modalActionTypes.SHOW_SWITCH_PLAN_MODAL,
-        source: 'cta_banner_upgrade_premium',
-        plan: 'premium_business',
-      });
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).toBeCalledWith({
+      type: modalActionTypes.SHOW_SWITCH_PLAN_MODAL,
+      source: 'cta_banner_upgrade_premium',
+      plan: 'premium_business',
+    });
   });
 
   it('opens small Switch Plan Modal when Small Business Trialist START_SUBSCRIPTION', () => {
@@ -50,14 +47,12 @@ describe('middleware', () => {
       type: actionTypes.START_SUBSCRIPTION,
     };
     middleware(store)(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(store.dispatch)
-      .toBeCalledWith({
-        type: modalActionTypes.SHOW_SWITCH_PLAN_MODAL,
-        source: 'cta_banner_upgrade_small',
-        plan: 'small',
-      });
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).toBeCalledWith({
+      type: modalActionTypes.SHOW_SWITCH_PLAN_MODAL,
+      source: 'cta_banner_upgrade_small',
+      plan: 'small',
+    });
   });
 
   it('opens pro Switch Plan Modal when Pro Trialist START_SUBSCRIPTION', () => {
@@ -75,13 +70,11 @@ describe('middleware', () => {
       type: actionTypes.START_SUBSCRIPTION,
     };
     middleware(store)(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(store.dispatch)
-      .toBeCalledWith({
-        type: modalActionTypes.SHOW_SWITCH_PLAN_MODAL,
-        source: 'cta_banner_upgrade_pro',
-        plan: 'pro',
-      });
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).toBeCalledWith({
+      type: modalActionTypes.SHOW_SWITCH_PLAN_MODAL,
+      source: 'cta_banner_upgrade_pro',
+      plan: 'pro',
+    });
   });
 });

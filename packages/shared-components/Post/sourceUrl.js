@@ -1,4 +1,4 @@
-const getFormattedSourceUrl = (preformattedUrl) => {
+const getFormattedSourceUrl = preformattedUrl => {
   /* create href a tag to easily grab hostname */
   const el = document.createElement('a');
   if (!preformattedUrl.includes('http')) {

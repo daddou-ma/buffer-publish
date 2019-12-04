@@ -1,6 +1,7 @@
 const handleEnabled = state => (state.isEnabled ? 'enabled' : 'disabled');
 const handleEditMode = state => (state.editMode ? 'enabled' : 'recovery');
-const handleConfirmBack = state => (state.updateMethod === 'app' ? 'setupApp' : 'setupSMS');
+const handleConfirmBack = state =>
+  state.updateMethod === 'app' ? 'setupApp' : 'setupSMS';
 
 const machine = {
   disabled: {

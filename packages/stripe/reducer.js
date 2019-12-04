@@ -69,7 +69,7 @@ export const actions = {
     setupIntentClientSecret,
     source,
     plan,
-    cycle,
+    cycle
   ) => ({
     type: actionTypes.HANDLE_SETUP_CARD_REQUEST,
     stripe,
@@ -78,12 +78,7 @@ export const actions = {
     plan,
     cycle,
   }),
-  handleCardSetupSuccess: (
-    cycle,
-    source,
-    plan,
-    paymentMethodId,
-  ) => ({
+  handleCardSetupSuccess: (cycle, source, plan, paymentMethodId) => ({
     type: actionTypes.HANDLE_SETUP_CARD_SUCCESS,
     paymentMethodId,
     cycle,

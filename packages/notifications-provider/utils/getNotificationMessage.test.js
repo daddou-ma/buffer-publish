@@ -11,15 +11,13 @@ describe('getNotificationMessage', () => {
 
   it('it should return the string if present', () => {
     expect(getNotificationMessage('success', 'bitly-disconnect')).toBe(
-      "Okay, your bitly account has been disconnected.",
+      'Okay, your bitly account has been disconnected.'
     );
   });
 
   it('it should return the string with the value replaced if present', () => {
-    expect(getNotificationMessage(
-      'success',
-      'example-with-variable',
-      'example',
-    )).toBe('This is an example with this example value');
+    expect(
+      getNotificationMessage('success', 'example-with-variable', 'example')
+    ).toBe('This is an example with this example value');
   });
 });

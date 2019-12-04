@@ -25,12 +25,17 @@ describe('constructor', () => {
       },
     };
 
-    const sl = new ServiceLocation(id, name, pictureUrlWithData, checkins, address);
+    const sl = new ServiceLocation(
+      id,
+      name,
+      pictureUrlWithData,
+      checkins,
+      address
+    );
 
     expect(sl.pictureUrl).toBe('https://example.com/image2.jpeg');
   });
 });
-
 
 describe('formattedAddressWithCheckins', () => {
   it('returns address and formatted checkins if both are present', () => {
@@ -44,9 +49,10 @@ describe('formattedAddressWithCheckins', () => {
   it('returns only formatted checkins if address not present', () => {
     const sl = new ServiceLocation(id, name, pictureUrl, checkins);
 
-    expect(sl.formattedAddressWithCheckins).toBe('1,312,322,333 people checked in here');
+    expect(sl.formattedAddressWithCheckins).toBe(
+      '1,312,322,333 people checked in here'
+    );
   });
-
 
   it('returns empty string if checkins not present', () => {
     const sl = new ServiceLocation(id, name, pictureUrl);

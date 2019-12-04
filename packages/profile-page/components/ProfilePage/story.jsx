@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import store from '@bufferapp/publish-store';
-import {
-  ConnectedRouter as Router,
-} from 'connected-react-router';
+import { ConnectedRouter as Router } from 'connected-react-router';
 import createHistory from 'history/createHashHistory';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
@@ -10,7 +8,10 @@ import { withA11y } from '@storybook/addon-a11y';
 import { DragDropContext } from 'react-dnd';
 import TestBackend from 'react-dnd-test-backend';
 import ProfilePage from './index';
-import { selectedProfile, profiles } from '../../../profile-sidebar/mockData/profiles';
+import {
+  selectedProfile,
+  profiles,
+} from '../../../profile-sidebar/mockData/profiles';
 
 const history = createHistory();
 const stubbedHistory = {
@@ -18,21 +19,21 @@ const stubbedHistory = {
     pathname: '/profile/1234/tab/queue',
     search: '',
     hash: '',
-    state: {} },
+    state: {},
+  },
 };
 
 /* eslint-disable react/prop-types */
-class _TestContextContainer extends Component { // eslint-disable-line
+class _TestContextContainer extends Component {
+  // eslint-disable-line
   render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
+    return <div>{this.props.children}</div>;
   }
 }
 
-const TestContextContainer = DragDropContext(TestBackend)(_TestContextContainer);
+const TestContextContainer = DragDropContext(TestBackend)(
+  _TestContextContainer
+);
 
 const storeFake = state => ({
   default: () => {},
@@ -41,7 +42,7 @@ const storeFake = state => ({
   getState: () => ({ ...state }),
 });
 
-function createMockStore (profileList) {
+function createMockStore(profileList) {
   return storeFake({
     productFeatures: {
       planName: 'business',
@@ -99,14 +100,14 @@ const storeProfiles = createMockStore(profiles);
 
 storiesOf('ProfilePage', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
+  .addDecorator(getStory => (
     <Provider store={store}>
-      <Router history={history}>
-        {getStory()}
-      </Router>
-    </Provider>,
-  )
-  .addDecorator(getStory => <TestContextContainer>{getStory()}</TestContextContainer>)
+      <Router history={history}>{getStory()}</Router>
+    </Provider>
+  ))
+  .addDecorator(getStory => (
+    <TestContextContainer>{getStory()}</TestContextContainer>
+  ))
   .add('should render', () => (
     <ProfilePage
       match={{

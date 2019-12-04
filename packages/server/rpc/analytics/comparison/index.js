@@ -1,23 +1,10 @@
-
 const { method } = require('@bufferapp/micro-rpc');
 const rp = require('request-promise');
 const DateRange = require('../utils/DateRange');
 
-const METRIC_KEYS = [
-  'audience',
-  'reach',
-  'likes',
-  'engagement',
-  'comments',
-];
+const METRIC_KEYS = ['audience', 'reach', 'likes', 'engagement', 'comments'];
 
-const PROFILE_COLORS = [
-  '#53CBB0',
-  '#168EEA',
-  '#C53DD2',
-  '#E53C5F',
-  '#F2994A',
-];
+const PROFILE_COLORS = ['#53CBB0', '#168EEA', '#C53DD2', '#E53C5F', '#F2994A'];
 
 const METRIC_CONFIGS_BY_KEY = {
   audience: {
@@ -77,7 +64,13 @@ const METRIC_CONFIGS_BY_KEY = {
   },
 };
 
-const formatDailyData = (day, value, profileService, metricKey, profileIndex) => {
+const formatDailyData = (
+  day,
+  value,
+  profileService,
+  metricKey,
+  profileIndex
+) => {
   const label = METRIC_CONFIGS_BY_KEY[metricKey][profileService].label;
   const color = PROFILE_COLORS[profileIndex];
   return {
@@ -91,14 +84,14 @@ const formatDailyData = (day, value, profileService, metricKey, profileIndex) =>
 };
 
 function getDailyData(days, data, metricKey, profileIndex) {
-  return days.map((day) => {
+  return days.map(day => {
     const dailyData = data.dailyData.find(d => d.day === day);
     return formatDailyData(
       day,
       dailyData ? dailyData.value : null,
       data.service,
       metricKey,
-      profileIndex,
+      profileIndex
     );
   });
 }
@@ -106,13 +99,13 @@ function getDailyData(days, data, metricKey, profileIndex) {
 function formatData(rawData, metricKey, dateRange) {
   const profileIds = Object.keys(rawData);
 
-  const profilesMetricData = Array.from(profileIds, (id) => {
+  const profilesMetricData = Array.from(profileIds, id => {
     const data = rawData[id];
     if (data[metricKey] === undefined) return null;
     return Object.assign({ profileId: id }, data[metricKey].profilesMetricData);
   }).filter(e => e !== null);
 
-  const profileTotals = Array.from(profileIds, (id) => {
+  const profileTotals = Array.from(profileIds, id => {
     const data = rawData[id];
     if (data[metricKey] === undefined) return null;
     return data[metricKey].profileTotals;
@@ -122,26 +115,32 @@ function formatData(rawData, metricKey, dateRange) {
 
   const days = dateRange.getDaysInRange();
 
-  const formattedProfilesMetricData = Array.from(profilesMetricData, (data, profileIndex) => ({
-    profileId: data.profileId,
-    dailyData: getDailyData(days, data, metricKey, profileIndex),
-  }));
-
-  const formattedProfileTotals = Array.from(profileTotals, (data, profileIndex) => {
-    const label = METRIC_CONFIGS_BY_KEY[metricKey][data.service].label;
-    const color = PROFILE_COLORS[profileIndex];
-    return {
-      metric: {
-        label,
-        color,
-      },
-      currentPeriodTotal: data.currentPeriodTotal,
-      currentPeriodDiff: data.currentPeriodDiff,
+  const formattedProfilesMetricData = Array.from(
+    profilesMetricData,
+    (data, profileIndex) => ({
       profileId: data.profileId,
-      username: data.username,
-      service: data.service,
-    };
-  });
+      dailyData: getDailyData(days, data, metricKey, profileIndex),
+    })
+  );
+
+  const formattedProfileTotals = Array.from(
+    profileTotals,
+    (data, profileIndex) => {
+      const label = METRIC_CONFIGS_BY_KEY[metricKey][data.service].label;
+      const color = PROFILE_COLORS[profileIndex];
+      return {
+        metric: {
+          label,
+          color,
+        },
+        currentPeriodTotal: data.currentPeriodTotal,
+        currentPeriodDiff: data.currentPeriodDiff,
+        profileId: data.profileId,
+        username: data.username,
+        service: data.service,
+      };
+    }
+  );
 
   return {
     profilesMetricData: formattedProfilesMetricData,
@@ -150,7 +149,9 @@ function formatData(rawData, metricKey, dateRange) {
 }
 
 function parseResponse(response, dateRange) {
-  const metricsData = METRIC_KEYS.map(metric => formatData(response, metric, dateRange));
+  const metricsData = METRIC_KEYS.map(metric =>
+    formatData(response, metric, dateRange)
+  );
   const metrics = {};
   METRIC_KEYS.forEach((metricKey, index) => {
     const data = metricsData[index];
@@ -169,7 +170,10 @@ module.exports = method(
     return rp({
       uri: `${req.app.get('analyzeApiAddr')}/comparison`,
       method: 'POST',
-      strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
+      strictSSL: !(
+        process.env.NODE_ENV === 'development' ||
+        process.env.NODE_ENV === 'test'
+      ),
       body: {
         profiles: profileIds,
         start_date: dateRange.start,
@@ -180,4 +184,5 @@ module.exports = method(
     })
       .then(({ response }) => parseResponse(response, dateRange))
       .catch(() => {});
-  });
+  }
+);

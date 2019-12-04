@@ -21,7 +21,7 @@ const urlWrapperStyle = {
 const itemStyle = index => ({
   display: 'flex',
   flexDirection: 'column',
-  margin: ((index + 1) % 3 === 0) ? '0 0 4% 0' : '0px 1.41% 4% 0px',
+  margin: (index + 1) % 3 === 0 ? '0 0 4% 0' : '0px 1.41% 4% 0px',
   flex: '0 1 32.35%',
   border: '1px solid #B8B8B8',
   boxSizing: 'border-box',
@@ -53,8 +53,8 @@ const scheduledIconStyle = {
 };
 
 /*
-* Getting tooltip text
-* */
+ * Getting tooltip text
+ * */
 const getTooltipText = (post, timezone) => {
   const timestamp = post.scheduled ? post.due_at : post.sent_at;
   let slotMoment = moment.unix(timestamp);
@@ -77,12 +77,15 @@ const GridListPost = ({
   return (
     <div style={itemStyle(index)}>
       <Link onClick={() => onImageClick({ post })}>
-        <div style={imgWrapperStyle(post.thumbnail)} title={getTooltipText(post, timezone)}>
-          {post.scheduled &&
+        <div
+          style={imgWrapperStyle(post.thumbnail)}
+          title={getTooltipText(post, timezone)}
+        >
+          {post.scheduled && (
             <div style={scheduledIconStyle}>
               <ClockIcon size="medium" />
             </div>
-          }
+          )}
         </div>
       </Link>
       <Lightbox
@@ -94,11 +97,14 @@ const GridListPost = ({
       />
       <div style={urlWrapperStyle}>
         <Input
-          onChange={(e) => {
+          onChange={e => {
             onChangePostUrl(post, e.target.value);
           }}
-          onBlur={(e) => {
-            if (typeof post.oldLink !== 'undefined' && (post.oldLink !== post.link)) {
+          onBlur={e => {
+            if (
+              typeof post.oldLink !== 'undefined' &&
+              post.oldLink !== post.link
+            ) {
               onSavePostUrl(post, e.target.value);
             }
           }}
@@ -122,22 +128,20 @@ const GridList = ({
 }) => {
   return (
     <div style={gridContainer}>
-      {
-        gridPosts.map((post, index) => {
-          return (
-            <GridListPost
-              key={`gridListPost-${post.id}`}
-              index={index}
-              post={post}
-              timezone={timezone}
-              onChangePostUrl={onChangePostUrl}
-              onSavePostUrl={onSavePostUrl}
-              onImageClick={onImageClick}
-              onImageClose={onImageClose}
-            />
-          );
-        })
-      }
+      {gridPosts.map((post, index) => {
+        return (
+          <GridListPost
+            key={`gridListPost-${post.id}`}
+            index={index}
+            post={post}
+            timezone={timezone}
+            onChangePostUrl={onChangePostUrl}
+            onSavePostUrl={onSavePostUrl}
+            onImageClick={onImageClick}
+            onImageClose={onImageClose}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -153,9 +157,9 @@ GridList.propTypes = {
       posts: PropTypes.arrayOf(
         PropTypes.shape({
           text: PropTypes.string,
-        }),
+        })
       ),
-    }),
+    })
   ).isRequired,
 };
 

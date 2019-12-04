@@ -49,23 +49,37 @@ const profileInitialState = {
 const determineIfMoreToLoad = (action, currentPosts) => {
   const currentPostCount = Object.keys(currentPosts).length;
   const resultUpdatesCount = Object.keys(action.result.updates).length;
-  return (action.result.total > (currentPostCount + resultUpdatesCount));
+  return action.result.total > currentPostCount + resultUpdatesCount;
 };
 
-const getProfileId = (action) => {
-  if (action.profileId) { return action.profileId; }
-  if (action.args) { return action.args.profileId; }
-  if (action.profile) { return action.profile.id; }
+const getProfileId = action => {
+  if (action.profileId) {
+    return action.profileId;
+  }
+  if (action.args) {
+    return action.args.profileId;
+  }
+  if (action.profile) {
+    return action.profile.id;
+  }
 };
 
-const getPostUpdateId = (action) => {
-  if (action.updateId) { return action.updateId; }
-  if (action.args) { return action.args.updateId; }
-  if (action.post) { return action.post.id; }
-  if (action.draft) { return action.draft.id; }
+const getPostUpdateId = action => {
+  if (action.updateId) {
+    return action.updateId;
+  }
+  if (action.args) {
+    return action.args.updateId;
+  }
+  if (action.post) {
+    return action.post.id;
+  }
+  if (action.draft) {
+    return action.draft.id;
+  }
 };
 
-const handleInstagramLoading = (action) => {
+const handleInstagramLoading = action => {
   if (action.args.recheck && action.result.is_business) {
     return true;
   }
@@ -109,7 +123,8 @@ const handlePostsReordered = (posts, { order: newOrder }) => {
 
   // Return a new post map
   const newPostsMap = finalPosts.reduce((map, post) => {
-    map[post.id] = post; return map;
+    map[post.id] = post;
+    return map;
   }, {});
 
   return newPostsMap;
@@ -176,11 +191,17 @@ const postReducer = (state, action) => {
         day: action.day,
       };
       // Generate new `postAction` text...
-      const { postDetails: { postAction } } = postParser(newPost);
+      const {
+        postDetails: { postAction },
+      } = postParser(newPost);
       return {
         ...state,
         ...newPost,
-        postDetails: { ...state.postDetails, isCustomScheduled: true, postAction },
+        postDetails: {
+          ...state.postDetails,
+          isCustomScheduled: true,
+          postAction,
+        },
       };
     }
     case actionTypes.POSTS_SWAPPED: {
@@ -212,7 +233,9 @@ const postReducer = (state, action) => {
         };
       }
       // Generate new `postAction` text...
-      const { postDetails: { postAction } } = postParser(newPost);
+      const {
+        postDetails: { postAction },
+      } = postParser(newPost);
 
       return {
         ...state,
@@ -254,13 +277,22 @@ const postsReducer = (state = {}, action) => {
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
-        [getPostUpdateId(action)]: postReducer(state[getPostUpdateId(action)], action),
+        [getPostUpdateId(action)]: postReducer(
+          state[getPostUpdateId(action)],
+          action
+        ),
       };
     case actionTypes.POSTS_SWAPPED:
       return {
         ...state,
-        [action.postSource.id]: postReducer(state[action.postSource.id], action),
-        [action.postTarget.id]: postReducer(state[action.postTarget.id], action),
+        [action.postSource.id]: postReducer(
+          state[action.postSource.id],
+          action
+        ),
+        [action.postTarget.id]: postReducer(
+          state[action.postTarget.id],
+          action
+        ),
       };
     default:
       return state;
@@ -272,7 +304,10 @@ const profileReducer = (state = profileInitialState, action) => {
     case `queuedPosts_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
-        loading: !action.args.isFetchingMore && !action.args.isReordering && !action.args.hideLoading,
+        loading:
+          !action.args.isFetchingMore &&
+          !action.args.isReordering &&
+          !action.args.hideLoading,
         loadingMore: action.args.isFetchingMore,
       };
     case `queuedPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:

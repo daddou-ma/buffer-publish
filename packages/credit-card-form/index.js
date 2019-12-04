@@ -8,9 +8,9 @@ export default connect(
     stripePublishableKey: state.creditCardForm.stripePublishableKey,
   }),
   dispatch => ({
-    createSetupIntentRequest: () => dispatch(stripeActions.createSetupIntentRequest()),
-  }),
+    createSetupIntentRequest: () =>
+      dispatch(stripeActions.createSetupIntentRequest()),
+  })
 )(StripeCreditCardForm);
-
 
 export reducer from './reducer';

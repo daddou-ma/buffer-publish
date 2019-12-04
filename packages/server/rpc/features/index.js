@@ -14,9 +14,8 @@ module.exports = method(
         access_token: session.publish.accessToken,
         includes: 'avatar',
       },
+    }).then(result => {
+      const featureData = JSON.parse(result);
+      return featureParser(featureData);
     })
-      .then((result) => {
-        const featureData = JSON.parse(result);
-        return featureParser(featureData);
-      }),
 );

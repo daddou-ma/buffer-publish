@@ -27,7 +27,10 @@ class LinkAttachment extends React.Component {
   };
 
   onCloseButtonClick = () => {
-    ComposerActionCreators.toggleAttachment(this.props.draftId, AttachmentTypes.LINK);
+    ComposerActionCreators.toggleAttachment(
+      this.props.draftId,
+      AttachmentTypes.LINK
+    );
 
     AppActionCreators.trackUserAction(['composer', 'attachment', 'disabled'], {
       attachment_type: AttachmentTypes.LINK,
@@ -49,7 +52,9 @@ class LinkAttachment extends React.Component {
     }
 
     // If only Facebook Profiles/Groups are selected (not Pages), prevent editing
-    const hasOnlyNonPagesSelected = selectedProfiles.every((profile) => profile.serviceType !== 'page');
+    const hasOnlyNonPagesSelected = selectedProfiles.every(
+      profile => profile.serviceType !== 'page'
+    );
     if (hasOnlyNonPagesSelected && !link.wasEdited) {
       return {
         canEdit: false,
@@ -59,7 +64,9 @@ class LinkAttachment extends React.Component {
 
     // If Facebook Profiles or Groups are selected, default to the generic info message
     // that mentions their unability to edit link previews
-    const hasNonPagesSelected = selectedProfiles.some((profile) => profile.serviceType !== 'page');
+    const hasNonPagesSelected = selectedProfiles.some(
+      profile => profile.serviceType !== 'page'
+    );
     if (hasNonPagesSelected) {
       return {
         canEdit: true,
@@ -80,7 +87,9 @@ class LinkAttachment extends React.Component {
     }
 
     const selectedProfilesIds = selectedProfiles.map(({ id }) => id);
-    const linkDomainOwnershipData = appState.domainsOwnedByFacebookPages.get(link.url);
+    const linkDomainOwnershipData = appState.domainsOwnedByFacebookPages.get(
+      link.url
+    );
 
     // Default to true while we retrieve more data
     if (linkDomainOwnershipData === undefined) {
@@ -90,8 +99,9 @@ class LinkAttachment extends React.Component {
       };
     }
 
-    const doAllSelectedProfilesOwnDomain =
-      selectedProfilesIds.every((id) => linkDomainOwnershipData.get(id) === true);
+    const doAllSelectedProfilesOwnDomain = selectedProfilesIds.every(
+      id => linkDomainOwnershipData.get(id) === true
+    );
 
     if (doAllSelectedProfilesOwnDomain) {
       return {
@@ -100,12 +110,18 @@ class LinkAttachment extends React.Component {
       };
     }
 
-    const doSomeSelectedProfilesOwnDomain =
-      selectedProfilesIds.some((id) => linkDomainOwnershipData.get(id) === true);
-    const isSomeOwnershipDataBeingLoaded =
-      selectedProfilesIds.some((id) => linkDomainOwnershipData.get(id) === null);
+    const doSomeSelectedProfilesOwnDomain = selectedProfilesIds.some(
+      id => linkDomainOwnershipData.get(id) === true
+    );
+    const isSomeOwnershipDataBeingLoaded = selectedProfilesIds.some(
+      id => linkDomainOwnershipData.get(id) === null
+    );
 
-    if (doSomeSelectedProfilesOwnDomain || isSomeOwnershipDataBeingLoaded || link.wasEdited) {
+    if (
+      doSomeSelectedProfilesOwnDomain ||
+      isSomeOwnershipDataBeingLoaded ||
+      link.wasEdited
+    ) {
       return {
         canEdit: true,
         isResultCertain: false,
@@ -119,35 +135,52 @@ class LinkAttachment extends React.Component {
   };
 
   render() {
-    const { link, draftId, service, visibleNotifications, filesUploadProgress } = this.props;
+    const {
+      link,
+      draftId,
+      service,
+      visibleNotifications,
+      filesUploadProgress,
+    } = this.props;
     const hasTitle = link.title !== null;
     const hasDescription = link.description !== null;
     const areUploadsInProgress = filesUploadProgress.size > 0;
     const absoluteUrl = getAbsoluteUrl(link.url);
-    const domainOnlyUrl =
-      link.url.replace('http://', '')
+    const domainOnlyUrl = link.url
+      .replace('http://', '')
       .replace('www.', '')
       .replace('https://', '')
       .split(/[/?#]/)[0];
 
-    const { canEdit: canEditLinkAttachment, isResultCertain, hasNonPages = false } = this.canEditLinkAttachment();
+    const {
+      canEdit: canEditLinkAttachment,
+      isResultCertain,
+      hasNonPages = false,
+    } = this.canEditLinkAttachment();
     const showFacebookLinkEditingMessage = !isResultCertain;
 
     return (
       <div>
-        {showFacebookLinkEditingMessage &&
+        {showFacebookLinkEditingMessage && (
           <p className={styles.facebookLinkEditingMessage}>
-            {hasNonPages ?
-              `It looks like you've got a few Facebook accounts selected. Please note that Profiles
+            {hasNonPages
+              ? `It looks like you've got a few Facebook accounts selected. Please note that Profiles
               and Groups are not allowed to make changes to link previews, and some Pages may not
-              either.` :
-              `Heads up! We're unsure if all the Facebook Pages you've selected are allowed to make
+              either.`
+              : `Heads up! We're unsure if all the Facebook Pages you've selected are allowed to make
               changes to link previews.`}{' '}
-            Please bear in mind that if you do make changes, the link attachment may look different once
-            published on Facebook. You can read more about{' '}
-            <A href="https://faq.buffer.com/article/255-can-i-customize-images-for-my-link-attachments" target="_blank">
-            Facebook's current link editing policies here</A>.
-          </p>}
+            Please bear in mind that if you do make changes, the link attachment
+            may look different once published on Facebook. You can read more
+            about{' '}
+            <A
+              href="https://faq.buffer.com/article/255-can-i-customize-images-for-my-link-attachments"
+              target="_blank"
+            >
+              Facebook's current link editing policies here
+            </A>
+            .
+          </p>
+        )}
 
         <div className={styles.linkAttachment}>
           <LinkAttachmentThumbnail
@@ -155,7 +188,7 @@ class LinkAttachment extends React.Component {
             isUploadInProgress={areUploadsInProgress}
           />
 
-          {canEditLinkAttachment &&
+          {canEditLinkAttachment && (
             <LinkAttachmentThumbnailEditor
               draftId={draftId}
               selectedThumbnail={link.thumbnail}
@@ -163,23 +196,33 @@ class LinkAttachment extends React.Component {
               visibleNotifications={visibleNotifications}
               service={service}
               filesUploadProgress={filesUploadProgress}
-            />}
+            />
+          )}
 
           <span className={styles.linkDetailsContainer}>
-            {hasTitle ?
+            {hasTitle ? (
               <LinkAttachmentTextEditor
                 type={LinkAttachmentTextFieldTypes.TITLE}
-                value={link.title} draftId={draftId} canBeEdited={canEditLinkAttachment}
-              /> :
-              <p className={styles.loadingMessage} />}
+                value={link.title}
+                draftId={draftId}
+                canBeEdited={canEditLinkAttachment}
+              />
+            ) : (
+              <p className={styles.loadingMessage} />
+            )}
 
-            <A className={styles.url} href={absoluteUrl} target="_blank">{domainOnlyUrl}</A>
+            <A className={styles.url} href={absoluteUrl} target="_blank">
+              {domainOnlyUrl}
+            </A>
 
-            {hasDescription &&
+            {hasDescription && (
               <LinkAttachmentTextEditor
                 type={LinkAttachmentTextFieldTypes.DESCRIPTION}
-                value={link.description} draftId={draftId} canBeEdited={canEditLinkAttachment}
-              />}
+                value={link.description}
+                draftId={draftId}
+                canBeEdited={canEditLinkAttachment}
+              />
+            )}
           </span>
 
           <CloseButton

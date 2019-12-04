@@ -9,7 +9,7 @@ export const noScheduledDate = 'No scheduled days or times';
  *
  * @param {array} schedules
  */
-export const getDailySlotsFromProfileSchedules = (schedules) => {
+export const getDailySlotsFromProfileSchedules = schedules => {
   // todo: consider pausedSchedules
 
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -29,7 +29,7 @@ export const getDailySlotsFromProfileSchedules = (schedules) => {
 
   // Simplify the schedule structure, filling in our `empty` array
   const combinedSchedules = schedules.reduce((combined, schedule) => {
-    schedule.days.forEach((day) => {
+    schedule.days.forEach(day => {
       const dayIndex = dayMap[day];
       const combinedTimes = combined[dayIndex].concat(schedule.times);
       const uniqueTimes = [...new Set(combinedTimes)]; // removes duplicates
@@ -48,13 +48,16 @@ export const getDayString = (profileTimezone, dateMoment, now = null) => {
   if (now === null) {
     now = moment.tz(profileTimezone);
   }
-  const todayRange = [
-    moment(now).startOf('day'),
-    moment(now).endOf('day'),
-  ];
+  const todayRange = [moment(now).startOf('day'), moment(now).endOf('day')];
   const tomorrowRange = [
-    moment(now).clone().add(1, 'day').startOf('day'),
-    moment(now).clone().add(1, 'day').endOf('day'),
+    moment(now)
+      .clone()
+      .add(1, 'day')
+      .startOf('day'),
+    moment(now)
+      .clone()
+      .add(1, 'day')
+      .endOf('day'),
   ];
   const isSameYear = dateMoment.format('YYYY') === now.format('YYYY');
 
@@ -90,18 +93,23 @@ export const getDaysForUpcomingWeeks = ({
     now = moment.tz(profileTimezone);
   }
   const currentDay = now.day();
-  let daysUntilEndOfWeek = (7 - currentDay);
+  let daysUntilEndOfWeek = 7 - currentDay;
   if (weekStartsOnMonday) {
     daysUntilEndOfWeek += 1;
   }
-  const daysToShow = daysUntilEndOfWeek + (numWeeks * 7);
+  const daysToShow = daysUntilEndOfWeek + numWeeks * 7;
   const rangeOfDays = [...Array(daysToShow).keys()];
 
-  const days = rangeOfDays.map((increment) => {
-    const dateMoment = now.clone()
+  const days = rangeOfDays.map(increment => {
+    const dateMoment = now
+      .clone()
       .add(increment, 'days')
       .set({ hour: 0, minute: 0, second: 0 });
-    const { text, date, dayOfWeek } = getDayString(profileTimezone, dateMoment, now);
+    const { text, date, dayOfWeek } = getDayString(
+      profileTimezone,
+      dateMoment,
+      now
+    );
     const dayIndex = dateMoment.day();
     return { text, date, dayOfWeek, dayIndex, dayUnixTime: dateMoment.unix() };
   });
@@ -127,26 +135,35 @@ export const getSlotsWithTimestampsForDay = ({
   }
   const slotsForTheDay = dailySlots[dayIndex];
   const dayMoment = moment.tz(new Date(dayUnixTime * 1000), profileTimezone);
-  return slotsForTheDay.map((slot) => {
-    const slotMoment = dayMoment.clone();
-    const [hour, minute] = slot.split(':');
-    slotMoment.set({ hour: parseInt(hour, 10), minute: parseInt(minute, 10) });
-    if (slotMoment.isBefore(now)) {
-      return null;
-    }
-    return {
-      name: slot,
-      label: slotMoment.format(hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'),
-      timestamp: slotMoment.unix(),
-      dayText,
-    };
-  }).filter(slot => slot); // gets rid of `null` slots (i.e., in the past)
+  return slotsForTheDay
+    .map(slot => {
+      const slotMoment = dayMoment.clone();
+      const [hour, minute] = slot.split(':');
+      slotMoment.set({
+        hour: parseInt(hour, 10),
+        minute: parseInt(minute, 10),
+      });
+      if (slotMoment.isBefore(now)) {
+        return null;
+      }
+      return {
+        name: slot,
+        label: slotMoment.format(
+          hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'
+        ),
+        timestamp: slotMoment.unix(),
+        dayText,
+      };
+    })
+    .filter(slot => slot); // gets rid of `null` slots (i.e., in the past)
 };
 
-const getFutureTime = (timezone) => {
-  const todayDate = (new Date()).setSeconds(0); // Seconds must be 0 for precise scheduling
+const getFutureTime = timezone => {
+  const todayDate = new Date().setSeconds(0); // Seconds must be 0 for precise scheduling
   const isTimezoneSet = !!timezone;
-  const today = isTimezoneSet ? moment.tz(todayDate, timezone) : moment(todayDate);
+  const today = isTimezoneSet
+    ? moment.tz(todayDate, timezone)
+    : moment(todayDate);
   today.add(1, 'hours');
 
   return today.format('HH:mm');
@@ -179,15 +196,22 @@ export const getSlotsWithTimestampsAndNoTimeForDay = ({
   if (slotMoment.isBefore(now)) {
     const anHourFromNow = getFutureTime(profileTimezone);
     const [hourNow, minuteNow] = anHourFromNow.split(':');
-    slotMoment.set({ hour: parseInt(hourNow, 10), minute: parseInt(minuteNow, 10) });
+    slotMoment.set({
+      hour: parseInt(hourNow, 10),
+      minute: parseInt(minuteNow, 10),
+    });
   }
 
-  return [{
-    name: days[dayIndex],
-    label: slotMoment.format(hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'),
-    timestamp: slotMoment.unix(),
-    dayText,
-  }];
+  return [
+    {
+      name: days[dayIndex],
+      label: slotMoment.format(
+        hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'
+      ),
+      timestamp: slotMoment.unix(),
+      dayText,
+    },
+  ];
 };
 
 /**
@@ -205,24 +229,19 @@ const servicesWithCommentFeature = ['instagram'];
 /**
  * Convenience method for generating a post item for the `QueueItems` component
  */
-export const getPostItem = ({
-  isManager,
-  post,
-}) => ({
+export const getPostItem = ({ isManager, post }) => ({
   queueItemType: 'post',
   ...post,
   isManager,
   draggable: false,
-  hasCommentEnabled: servicesWithCommentFeature.indexOf(post.profile_service) !== -1,
+  hasCommentEnabled:
+    servicesWithCommentFeature.indexOf(post.profile_service) !== -1,
 });
 
 /**
  * Convenience method for generating a slot item for the `QueueItems` component
  */
-export const getSlotItem = ({
-  slot,
-  profileService,
-}) => ({
+export const getSlotItem = ({ slot, profileService }) => ({
   queueItemType: 'slot',
   id: `${slot.timestamp}-${slot.name}`,
   slot,
@@ -233,11 +252,16 @@ export const getSlotItem = ({
  * Given a `daySlot` and array of `posts` this method will return either a post item or
  * and empty slot item if no post is currently occupying that slot.
  */
-export const getSlotOrPostItem = ({ daySlot, posts, isManager, profileService }) => {
-  const postInSlot = posts.find((post) => {
+export const getSlotOrPostItem = ({
+  daySlot,
+  posts,
+  isManager,
+  profileService,
+}) => {
+  const postInSlot = posts.find(post => {
     const isAtSlotTime = post.due_at === daySlot.timestamp;
     const isCustomScheduled = post.scheduled_at && !post.pinned;
-    return (isAtSlotTime && !isCustomScheduled);
+    return isAtSlotTime && !isCustomScheduled;
   });
   if (postInSlot) {
     return getPostItem({ isManager, post: postInSlot });
@@ -260,8 +284,13 @@ export const getQueueItemsForDay = ({
 }) => {
   const postsCollected = [];
 
-  const pinnedAndQueuedPosts = daySlots.map((daySlot) => {
-    const item = getSlotOrPostItem({ daySlot, posts, isManager, profileService });
+  const pinnedAndQueuedPosts = daySlots.map(daySlot => {
+    const item = getSlotOrPostItem({
+      daySlot,
+      posts,
+      isManager,
+      profileService,
+    });
     if (item.queueItemType === 'post') {
       postsCollected.push(item.id);
     }
@@ -272,13 +301,11 @@ export const getQueueItemsForDay = ({
     .filter(post => !postsCollected.includes(post.id))
     .map(post => getPostItem({ isManager, post }));
 
-  const items = pinnedAndQueuedPosts
-    .concat(remainingPosts)
-    .sort((a, b) => {
-      const aField = a.slot ? a.slot.timestamp : a.due_at;
-      const bField = b.slot ? b.slot.timestamp : b.due_at;
-      return aField - bField;
-    });
+  const items = pinnedAndQueuedPosts.concat(remainingPosts).sort((a, b) => {
+    const aField = a.slot ? a.slot.timestamp : a.due_at;
+    const bField = b.slot ? b.slot.timestamp : b.due_at;
+    return aField - bField;
+  });
 
   return items;
 };
@@ -294,13 +321,12 @@ export const getItemsForDay = ({
   profileService,
   orderBy,
 }) => {
-  const slotsItems = daySlots.map((daySlot) => {
+  const slotsItems = daySlots.map(daySlot => {
     const item = getSlotItem({ slot: daySlot, profileService });
     return item;
   });
 
-  const postsItems = posts
-    .map(post => getPostItem({ isManager, post }));
+  const postsItems = posts.map(post => getPostItem({ isManager, post }));
 
   /**
    * Sort posts first and then concant the slots items
@@ -332,7 +358,7 @@ export const getDaysToAddForPastPosts = ({ posts, profileTimezone, now }) => {
   const pastPosts = posts.filter(post => post.due_at < startOfToday.unix());
   const pastPostsDays = pastPosts.map(post => post.day);
   const uniqueDays = [...new Set(pastPostsDays)]; // removes duplicates
-  return uniqueDays.map((day) => {
+  return uniqueDays.map(day => {
     const [dayOfWeek, ...rest] = day.split(' ');
     const date = rest.join(' ');
     return {
@@ -365,7 +391,9 @@ export const formatPostLists = ({
   isSingleSlot,
   orderBy = 'due_at',
 }) => {
-  const orderedPosts = Object.values(posts).sort((a, b) => a[orderBy] - b[orderBy]);
+  const orderedPosts = Object.values(posts).sort(
+    (a, b) => a[orderBy] - b[orderBy]
+  );
 
   /**
    * CASE 1: Schedule Slots Enabled
@@ -396,11 +424,14 @@ export const formatPostLists = ({
      * These must be posts that failed to send for some reason or another, since otherwise
      * they'd be in the Sent Posts tab.
      */
-    const pastPostDays = getDaysToAddForPastPosts({ posts: orderedPosts, profileTimezone });
+    const pastPostDays = getDaysToAddForPastPosts({
+      posts: orderedPosts,
+      profileTimezone,
+    });
     days = [...pastPostDays, ...days];
 
     // Now let's add the posts for the Daily View weeks
-    days.forEach((day) => {
+    days.forEach(day => {
       const dayHeader = getDayHeaderItem(day);
       if (dayHeader.id !== noScheduledDate) {
         let daySlots;
@@ -439,11 +470,7 @@ export const formatPostLists = ({
 
         // Check for length here so we don't add a dayHeader when there are no slots or posts
         if (queueItemsForDay.length) {
-          finalList = [
-            ...finalList,
-            dayHeader,
-            ...queueItemsForDay,
-          ];
+          finalList = [...finalList, dayHeader, ...queueItemsForDay];
         }
       }
     });
@@ -453,14 +480,15 @@ export const formatPostLists = ({
      * This will happen when either
      *   a) The post was going to be sent, but the profile was paused (so we set the time to `0`) OR
      *   b) The user has no times set in their posting schedule.
-    */
+     */
     if (postsByDay[noScheduledDate]) {
       const isPaused = schedules.some(item => item.times.length > 0);
       const headerText = isPaused ? 'Paused posts' : noScheduledDate;
 
       finalList = [
-        ...postsByDay[noScheduledDate]
-          .map(post => getPostItem({ isManager, post })),
+        ...postsByDay[noScheduledDate].map(post =>
+          getPostItem({ isManager, post })
+        ),
         ...finalList,
       ];
 
@@ -502,13 +530,16 @@ export const formatPostLists = ({
 };
 
 const getBaseURL = () =>
-  (window.location.hostname === 'publish.local.buffer.com' ? 'https://local.buffer.com' : 'https://buffer.com');
+  window.location.hostname === 'publish.local.buffer.com'
+    ? 'https://local.buffer.com'
+    : 'https://buffer.com';
 
 export const openCalendarWindow = (profileId, weekOrMonth) => {
   window.open(
     `${getBaseURL()}/app/profile/${profileId}/buffer/queue/calendar/${weekOrMonth}/?content_only=true`,
-    '_blank',
+    '_blank'
   );
 };
 
-export const isScheduleSlotsAvailable = schedules => schedules.some(item => item.times.length > 0);
+export const isScheduleSlotsAvailable = schedules =>
+  schedules.some(item => item.times.length > 0);

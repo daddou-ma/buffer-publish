@@ -9,15 +9,20 @@
 const bufferOriginRegex = /https?:\/\/(?:[^.]+\.)?buffer(?:app)?\.com/;
 const bufferOrigins = new Map([
   ['local', 'https://local.buffer.com'],
-  ['production',
-    bufferOriginRegex.test(window.location.origin) ? window.location.origin : 'https://buffer.com'],
+  [
+    'production',
+    bufferOriginRegex.test(window.location.origin)
+      ? window.location.origin
+      : 'https://buffer.com',
+  ],
 ]);
 
 const getElRefOffset = (el, dir = 'top', ref = document.body) => {
-  const offsetPosMethodName = (dir !== 'left') ? 'offsetTop' : 'offsetLeft';
+  const offsetPosMethodName = dir !== 'left' ? 'offsetTop' : 'offsetLeft';
   let offset = el[offsetPosMethodName];
 
-  while ((el = el.offsetParent) !== ref) { // eslint-disable-line
+  while ((el = el.offsetParent) !== ref) {
+    // eslint-disable-line
     offset += el[offsetPosMethodName];
   }
 
@@ -36,8 +41,14 @@ const mcIframe = new Promise((resolve, reject) => {
   resolveIframePromise = resolve;
   rejectIframePromise = reject;
 })
-  .then((v) => { mcIframe.resolved = true; return v; })
-  .catch((r) => { mcIframe.resolved = true; throw r; });
+  .then(v => {
+    mcIframe.resolved = true;
+    return v;
+  })
+  .catch(r => {
+    mcIframe.resolved = true;
+    throw r;
+  });
 
 /**
  * Initialize MC from outside its iframe.
@@ -86,26 +97,31 @@ const init = ({
 
   const shouldAttachToDomNode = domNode !== null;
 
-  const windowPosition = shouldAttachToDomNode ? {
-    top: getElRefOffset(domNode, 'top'),
-    left: getElRefOffset(domNode, 'left'),
-  } : {
-    top: (
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop
-    ) + 50,
-  };
+  const windowPosition = shouldAttachToDomNode
+    ? {
+        top: getElRefOffset(domNode, 'top'),
+        left: getElRefOffset(domNode, 'left'),
+      }
+    : {
+        top:
+          (window.pageYOffset ||
+            document.documentElement.scrollTop ||
+            document.body.scrollTop) + 50,
+      };
 
   const openProfilesIds = getOpenProfilesIdsFromBufferGlobal(bufferGlobal);
-  const resetSelectedProfiles = prevOpenProfilesIds !== undefined && (
-    openProfilesIds.length !== prevOpenProfilesIds.length ||
-    prevOpenProfilesIds.some((id) => !openProfilesIds.includes(id))
-  );
+  const resetSelectedProfiles =
+    prevOpenProfilesIds !== undefined &&
+    (openProfilesIds.length !== prevOpenProfilesIds.length ||
+      prevOpenProfilesIds.some(id => !openProfilesIds.includes(id)));
   prevOpenProfilesIds = openProfilesIds;
 
-  const { userData, metaData, csrfToken, imageDimensionsKey } =
-    extractSerializablePropsFromBufferGlobal(env, bufferGlobal);
+  const {
+    userData,
+    metaData,
+    csrfToken,
+    imageDimensionsKey,
+  } = extractSerializablePropsFromBufferGlobal(env, bufferGlobal);
 
   environment = metaData.environment;
 
@@ -188,7 +204,7 @@ const init = ({
     `;
   }
 
-  mcIframe.then((iframe) => {
+  mcIframe.then(iframe => {
     // When composer is loaded, remove placeholder slightly after composer
     // becomes visible to make sure there's a smooth visual transition
     // between the two states
@@ -199,48 +215,57 @@ const init = ({
       }, 500);
     }
 
-    iframe.contentWindow.postMessage({
-      type: 'init',
-      env,
-      data: {
-        profiles,
-        userData,
-        metaData,
-        csrfToken,
-        imageDimensionsKey,
-        update,
-        subprofileId,
-        scheduledAt,
-        isPinnedToSlot,
+    iframe.contentWindow.postMessage(
+      {
+        type: 'init',
+        env,
+        data: {
+          profiles,
+          userData,
+          metaData,
+          csrfToken,
+          imageDimensionsKey,
+          update,
+          subprofileId,
+          scheduledAt,
+          isPinnedToSlot,
+        },
+        options: {
+          canSelectProfiles,
+          preserveStateOnClose,
+          resetSelectedProfiles,
+          saveButtons,
+          position: windowPosition,
+        },
       },
-      options: {
-        canSelectProfiles,
-        preserveStateOnClose,
-        resetSelectedProfiles,
-        saveButtons,
-        position: windowPosition,
-      },
-    }, bufferOrigins.get(environment));
+      bufferOrigins.get(environment)
+    );
 
     iframe.style.display = 'block';
     isIframeVisible = true;
   });
 };
 
-const hide = ({ preserveStateOnClose = false, stopPropagation = false } = {}) => {
+const hide = ({
+  preserveStateOnClose = false,
+  stopPropagation = false,
+} = {}) => {
   // If the loading placeholder is visible, close it
   if (placeholder !== undefined) {
     document.body.removeChild(placeholder);
     placeholder = undefined;
   }
 
-  mcIframe.then((iframe) => {
+  mcIframe.then(iframe => {
     if (!isIframeVisible) return;
 
     if (!preserveStateOnClose && !stopPropagation) {
-      iframe.contentWindow.postMessage({
-        type: 'reset-and-hide',
-      }, bufferOrigins.get(environment));
+      iframe.contentWindow.postMessage(
+        {
+          type: 'reset-and-hide',
+        },
+        bufferOrigins.get(environment)
+      );
     }
 
     iframe.style.display = 'none';
@@ -248,7 +273,7 @@ const hide = ({ preserveStateOnClose = false, stopPropagation = false } = {}) =>
   });
 };
 
-const onIframeMessage = (e) => {
+const onIframeMessage = e => {
   const isBufferOrigin = bufferOriginRegex.test(e.origin);
   if (!isBufferOrigin) return;
 
@@ -258,8 +283,9 @@ const onIframeMessage = (e) => {
     // hide the composer. We double-check a click doesn't follow the action
     // of selecting text before hiding the composer.
     case 'backdrop-click': {
-      mcIframe.then((iframe) => {
-        const isClickFollowingSelection = iframe.contentWindow.getSelection().toString().length > 0;
+      mcIframe.then(iframe => {
+        const isClickFollowingSelection =
+          iframe.contentWindow.getSelection().toString().length > 0;
         if (!isClickFollowingSelection) {
           const { preserveStateOnClose } = e.data;
           hide({ preserveStateOnClose });
@@ -274,7 +300,9 @@ const onIframeMessage = (e) => {
 
       onDraftsSaved();
       // eslint-disable-next-line no-new
-      new buffer.View.Notice({ model: new Backbone.Model({ message: e.data.message }) });
+      new buffer.View.Notice({
+        model: new Backbone.Model({ message: e.data.message }),
+      });
       break;
     }
 
@@ -305,7 +333,9 @@ const setup = () => {
   const frameId = 'multiple-composers-iframe';
 
   if (document.getElementById(frameId) !== null) {
-    rejectIframePromise('Can\'t setup Multiple Composers iframe: frame already setup');
+    rejectIframePromise(
+      "Can't setup Multiple Composers iframe: frame already setup"
+    );
   }
 
   const iframe = document.createElement('iframe');
@@ -344,33 +374,43 @@ function extractSerializablePropsFromBufferGlobal(env, bufferGlobal) {
       s3_upload_signature: unfilteredUserData.s3_upload_signature,
       uses_24h_time: unfilteredUserData.twentyfour_hour_time,
       week_starts_monday: unfilteredUserData.week_starts_monday,
-      has_ig_direct_flip: unfilteredUserData.features.includes('instagram_direct_posting'),
+      has_ig_direct_flip: unfilteredUserData.features.includes(
+        'instagram_direct_posting'
+      ),
       profile_groups: unfilteredUserData.profile_groups,
       is_free_user: bufferGlobal.data.user.isFree(),
       has_simplified_free_plan_ux: bufferGlobal.data.user.hasSimplifiedFreePlanUX(),
-      skip_empty_text_alert:
-        bufferGlobal.data.user.hasReadMessage('remember_confirm_saving_modal'),
-      is_business_user: ( // Same logic as user_model.php#onBusinessPlan()
-        unfilteredUserData.features.includes('improved_analytics') ||
-        (unfilteredUserData.plan_code >= 10 && unfilteredUserData.plan_code <= 19)
+      skip_empty_text_alert: bufferGlobal.data.user.hasReadMessage(
+        'remember_confirm_saving_modal'
       ),
-      hasIGLocationTaggingFeature:
-        unfilteredUserData.features.includes('instagram-location-tagging'),
-      hasIGDirectVideoFlip:
-        bufferGlobal.data.user.hasFeature('ig_direct_video_posting'),
+      // Same logic as user_model.php#onBusinessPlan()
+      is_business_user:
+        unfilteredUserData.features.includes('improved_analytics') ||
+        (unfilteredUserData.plan_code >= 10 &&
+          unfilteredUserData.plan_code <= 19),
+      hasIGLocationTaggingFeature: unfilteredUserData.features.includes(
+        'instagram-location-tagging'
+      ),
+      hasIGDirectVideoFlip: bufferGlobal.data.user.hasFeature(
+        'ig_direct_video_posting'
+      ),
     },
     metaData: {
       application: bufferGlobal.application,
       environment: bufferGlobal.environment,
-      should_enable_fb_autocomplete:
-        bufferGlobal.data.user.hasFeature('mc_facebook_autocomplete'),
-      enable_twitter_march_18_changes:
-        bufferGlobal.data.user.hasFeature('twitter-march-18-changes'),
-      should_use_new_twitter_autocomplete:
-        bufferGlobal.data.enabled_application_modes
-          .includes('web-twitter-typeahead-autocomplete'),
-      should_show_rollout_tooltip:
-        bufferGlobal.data.user.hasExperiment('mc-dashboard_phase_5', 'enabled'),
+      should_enable_fb_autocomplete: bufferGlobal.data.user.hasFeature(
+        'mc_facebook_autocomplete'
+      ),
+      enable_twitter_march_18_changes: bufferGlobal.data.user.hasFeature(
+        'twitter-march-18-changes'
+      ),
+      should_use_new_twitter_autocomplete: bufferGlobal.data.enabled_application_modes.includes(
+        'web-twitter-typeahead-autocomplete'
+      ),
+      should_show_rollout_tooltip: bufferGlobal.data.user.hasExperiment(
+        'mc-dashboard_phase_5',
+        'enabled'
+      ),
       disable_telemetry: false, // Only used in Firefox extension for now
     },
     csrfToken: bufferGlobal.csrf,
@@ -380,9 +420,9 @@ function extractSerializablePropsFromBufferGlobal(env, bufferGlobal) {
 
 function getOpenProfilesIdsFromBufferGlobal(bufferGlobal) {
   const profiles = bufferGlobal.data.profiles.toJSON();
-  const openProfiles = profiles.filter((profile) => profile.open === true);
+  const openProfiles = profiles.filter(profile => profile.open === true);
 
-  return openProfiles.map((profile) => profile.id);
+  return openProfiles.map(profile => profile.id);
 }
 
 export { setup, init, hide };

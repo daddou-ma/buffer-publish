@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-} from '@bufferapp/components';
+import { Text } from '@bufferapp/components';
 
-const LoggedIn = ({
-  loggedIn,
-  translations,
-}) =>
-  <Text>{ loggedIn ? translations.loggedIn : translations.loggedOut }</Text>;
+const LoggedIn = ({ loggedIn, translations }) => (
+  <Text>{loggedIn ? translations.loggedIn : translations.loggedOut}</Text>
+);
 
 LoggedIn.propTypes = {
   loggedIn: PropTypes.bool,

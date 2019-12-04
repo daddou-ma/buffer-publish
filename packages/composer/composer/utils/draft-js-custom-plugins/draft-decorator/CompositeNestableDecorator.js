@@ -42,10 +42,14 @@ class NestableDecorator {
       let counter = 0;
       const strategy = decorator.strategy;
 
-      strategy(block, (start, end) => {
-        occupySlice(decorations, start, end, ii + DELIMITER + counter);
-        counter++;
-      }, contentState);
+      strategy(
+        block,
+        (start, end) => {
+          occupySlice(decorations, start, end, ii + DELIMITER + counter);
+          counter++;
+        },
+        contentState
+      );
     });
 
     return List(decorations);
@@ -54,21 +58,25 @@ class NestableDecorator {
   getComponentForKey(key) {
     if (this.componentCache[key]) return this.componentCache[key];
 
-    const components = key.split(DECORATOR_DELIMITER)
-      .map((k) => parseInt(k.split(DELIMITER)[0], 10))
-      .map((k) => this.decorators[k].component);
+    const components = key
+      .split(DECORATOR_DELIMITER)
+      .map(k => parseInt(k.split(DELIMITER)[0], 10))
+      .map(k => this.decorators[k].component);
 
-    this.componentCache[key] = (props) => (
-      components.reduce((children, Outer) => <Outer {...props}>{children}</Outer>, props.children)
-    );
+    this.componentCache[key] = props =>
+      components.reduce(
+        (children, Outer) => <Outer {...props}>{children}</Outer>,
+        props.children
+      );
 
     return this.componentCache[key];
   }
 
   getPropsForKey(key) {
-    const pps = key.split(DECORATOR_DELIMITER)
-      .map((k) => parseInt(k.split(DELIMITER)[0], 10))
-      .map((k) => this.decorators[k].props);
+    const pps = key
+      .split(DECORATOR_DELIMITER)
+      .map(k => parseInt(k.split(DELIMITER)[0], 10))
+      .map(k => this.decorators[k].props);
 
     return Object.assign({}, ...pps);
   }

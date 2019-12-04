@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImagesLoadEvents from '@bufferapp/react-images-loaded';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import MediaAttachmentAvailableThumbnailButton
-  from '../components/MediaAttachmentAvailableThumbnailButton';
+import MediaAttachmentAvailableThumbnailButton from '../components/MediaAttachmentAvailableThumbnailButton';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { scrollIntoView } from '../utils/DOMUtils';
@@ -32,15 +31,15 @@ class MediaAttachmentEditor extends React.Component {
         padding: 25,
       });
     }
-  }
+  };
 
   onTitleChange = (draft, e) => {
     ComposerActionCreators.updateDraftVideoTitle(draft.id, e.target.value);
   };
 
-  setSelectedThumbnailEl = (el) => {
+  setSelectedThumbnailEl = el => {
     this.selectedThumbnailEl = el;
-  }
+  };
 
   render() {
     const { draft, onMouseOut, onSubmit, className } = this.props;
@@ -49,8 +48,13 @@ class MediaAttachmentEditor extends React.Component {
     const availableThumbnails = video.availableThumbnails || [video.thumbnail];
 
     return (
-      <div className={`${styles.container} ${className}`} onMouseOut={onMouseOut}>
-        <label className={styles.header} htmlFor="video-title-input">Title:</label>
+      <div
+        className={`${styles.container} ${className}`}
+        onMouseOut={onMouseOut}
+      >
+        <label className={styles.header} htmlFor="video-title-input">
+          Title:
+        </label>
         <Input
           type="text"
           value={video.name}
@@ -61,20 +65,25 @@ class MediaAttachmentEditor extends React.Component {
         <p className={styles.header}>Thumbnail:</p>
         <div
           className={styles.scrollContainer}
-          ref={(ref) => { this.scrollContainerEl = ref; }}
+          ref={ref => {
+            this.scrollContainerEl = ref;
+          }}
         >
           <ImagesLoadEvents onAlways={this.onAllThumbnailImagesLoadEvents}>
-            {availableThumbnails.map((thumbnail) => (
+            {availableThumbnails.map(thumbnail => (
               <MediaAttachmentAvailableThumbnailButton
                 video={video}
                 thumbnail={thumbnail}
                 setSelectedThumbnailEl={this.setSelectedThumbnailEl}
                 draftId={draft.id}
                 key={thumbnail}
-              />))}
+              />
+            ))}
           </ImagesLoadEvents>
         </div>
-        <Button onClick={onSubmit} className={styles.submitButton}>Done</Button>
+        <Button onClick={onSubmit} className={styles.submitButton}>
+          Done
+        </Button>
       </div>
     );
   }

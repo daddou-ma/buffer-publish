@@ -28,7 +28,11 @@ const TrialCompleteModal = ({
     }
   };
 
-  const titleMessage = stringTokenizer(translations.header, '{plan}', currentTrial());
+  const titleMessage = stringTokenizer(
+    translations.header,
+    '{plan}',
+    currentTrial()
+  );
 
   return (
     <Modal

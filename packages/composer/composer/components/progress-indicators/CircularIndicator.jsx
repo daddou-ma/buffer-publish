@@ -3,25 +3,31 @@ import PropTypes from 'prop-types';
 import Svg from '../../components/Svg';
 import styles from '../css/progress-indicators/CircularIndicator.css';
 
-const CircularIndicator = (props) => {
+const CircularIndicator = props => {
   const {
-    size, progress, initialProgress, showText, classNames, styles: stylesMap,
-    strokeWidth, finishingUpText,
+    size,
+    progress,
+    initialProgress,
+    showText,
+    classNames,
+    styles: stylesMap,
+    strokeWidth,
+    finishingUpText,
   } = props;
 
-  const displayedProgress = initialProgress + (progress * (100 - initialProgress) / 100);
-  const progressText = (
-    progress === 100 ? finishingUpText :
-      progress === 0 ? `${progress}%` : `${progress.toFixed(1)}%`
-  );
+  const displayedProgress =
+    initialProgress + (progress * (100 - initialProgress)) / 100;
+  const progressText =
+    progress === 100
+      ? finishingUpText
+      : progress === 0
+      ? `${progress}%`
+      : `${progress.toFixed(1)}%`;
 
   const circleRadius = size / 2 - strokeWidth / 2;
   const circleCircumference = 2 * Math.PI * circleRadius;
 
-  const containerClassName = [
-    styles.container,
-    classNames.container,
-  ].join(' ');
+  const containerClassName = [styles.container, classNames.container].join(' ');
 
   const containerDynamicStyle = {
     width: size,
@@ -33,13 +39,10 @@ const CircularIndicator = (props) => {
     height: size,
   };
 
-  const circleClassName = [
-    styles.circle,
-    classNames.circle,
-  ].join(' ');
+  const circleClassName = [styles.circle, classNames.circle].join(' ');
 
   const circleDynamicStyle = {
-    strokeDashoffset: (100 - displayedProgress) * circleCircumference / 100,
+    strokeDashoffset: ((100 - displayedProgress) * circleCircumference) / 100,
     strokeDasharray: circleCircumference,
     strokeWidth,
     ...stylesMap.circle,
@@ -61,8 +64,7 @@ const CircularIndicator = (props) => {
         />
       </Svg>
 
-      {showText &&
-        <span className={styles.progressText}>{progressText}</span>}
+      {showText && <span className={styles.progressText}>{progressText}</span>}
     </div>
   );
 };

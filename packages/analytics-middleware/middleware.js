@@ -1,6 +1,6 @@
 import { actionTypes } from './actions';
 
-export default store => next => (action) => {
+export default store => next => action => {
   // eslint-disable-line no-unused-vars
   next(action);
   switch (action.type) {
@@ -13,20 +13,28 @@ export default store => next => (action) => {
       if (window.analytics) {
         window.analytics.track(
           action.eventName,
-          Object.assign({
-            product: window.PRODUCT_TRACKING_KEY,
-            clientName: window.CLIENT_NAME,
-          }, action.payload));
+          Object.assign(
+            {
+              product: window.PRODUCT_TRACKING_KEY,
+              clientName: window.CLIENT_NAME,
+            },
+            action.payload
+          )
+        );
       }
       break;
     case actionTypes.PAGE_CHANGE:
-    // currently using track event for page change logic, leaving here for now
+      // currently using track event for page change logic, leaving here for now
       if (window.analytics) {
         window.analytics.page(
           action.pageName,
-          Object.assign({
-            product: window.PRODUCT_TRACKING_KEY,
-          }, action.payload));
+          Object.assign(
+            {
+              product: window.PRODUCT_TRACKING_KEY,
+            },
+            action.payload
+          )
+        );
       }
       break;
     default:

@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 import { isSupportedPlan, isSupportedFeature } from '../../utils';
 
 const FeatureLoader = ({
-                         productFeatures,
-                         supportedFeatures,
-                         children,
-                         fallback,
-                         supportedPlans,
-                       }) => {
-  const {
-    planName,
-    features,
-  } = productFeatures;
+  productFeatures,
+  supportedFeatures,
+  children,
+  fallback,
+  supportedPlans,
+}) => {
+  const { planName, features } = productFeatures;
 
   if (!isSupportedPlan(supportedPlans, planName)) {
     return fallback || null;

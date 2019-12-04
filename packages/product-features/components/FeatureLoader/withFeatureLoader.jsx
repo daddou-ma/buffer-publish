@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { isSupportedFeature, isSupportedPlan } from '../../utils';
 
-const WithFeatureLoader = (WrappedComponent) => {
+const WithFeatureLoader = WrappedComponent => {
   const FeatureLoader = ({ productFeatures, ...other }) => {
     const { planName, features } = productFeatures;
 

@@ -11,7 +11,7 @@ export default connect(
     onConnectSocialAccountClick: () => {
       dispatch(actions.handleConnectSocialAccountClick());
     },
-  }),
+  })
 )(DefaultPage);
 
 export { actions, actionTypes } from './reducer';

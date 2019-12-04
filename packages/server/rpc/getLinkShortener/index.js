@@ -17,5 +17,5 @@ module.exports = method(
       .then(result => ({
         linkShorteners: result,
       }));
-  },
+  }
 );

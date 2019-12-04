@@ -10,7 +10,7 @@ const removeFacebookAutocompleteEntities = function(editorState) {
   const originalSelectionBefore = contentState.getSelectionBefore();
   const originalSelection = editorState.getSelection();
 
-  const filterFacebookAutocompleteEntities = (characterMetadata) => {
+  const filterFacebookAutocompleteEntities = characterMetadata => {
     const entityKey = characterMetadata.getEntity();
     if (entityKey === null) return false;
 
@@ -18,21 +18,24 @@ const removeFacebookAutocompleteEntities = function(editorState) {
     return entityType === 'mention' || entityType === 'IMPORTED_MENTION';
   };
 
-  contentState.getBlockMap().forEach((contentBlock) => {
+  contentState.getBlockMap().forEach(contentBlock => {
     const blockKey = contentBlock.getKey();
 
-    contentBlock.findEntityRanges(filterFacebookAutocompleteEntities, (start, end) => {
-      contentState = Modifier.applyEntity(
-        contentState,
-        new SelectionState({
-          anchorKey: blockKey,
-          anchorOffset: start,
-          focusKey: blockKey,
-          focusOffset: end,
-        }),
-        null
-      );
-    });
+    contentBlock.findEntityRanges(
+      filterFacebookAutocompleteEntities,
+      (start, end) => {
+        contentState = Modifier.applyEntity(
+          contentState,
+          new SelectionState({
+            anchorKey: blockKey,
+            anchorOffset: start,
+            focusKey: blockKey,
+            focusOffset: end,
+          }),
+          null
+        );
+      }
+    );
   });
 
   /**

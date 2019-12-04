@@ -13,14 +13,12 @@ const storeFake = state => ({
 
 describe('DateTimePreferencesContainer', () => {
   it('should render', () => {
-    const store = storeFake({
-    });
+    const store = storeFake({});
     const wrapper = mount(
       <Provider store={store}>
         <DateTimePreferences />
-      </Provider>,
+      </Provider>
     );
-    expect(wrapper.find(DateTimePreferences).length)
-      .toBe(1);
+    expect(wrapper.find(DateTimePreferences).length).toBe(1);
   });
 });

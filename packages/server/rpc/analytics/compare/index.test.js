@@ -25,33 +25,40 @@ describe('rpc/compare', () => {
       },
     },
     app: {
-      get() { return 'analyze-api'; },
+      get() {
+        return 'analyze-api';
+      },
     },
   };
 
   it('should have the expected name', () => {
-    expect(compare.name)
-      .toBe('compare');
+    expect(compare.name).toBe('compare');
   });
 
   it('should have the expected docs', () => {
-    expect(compare.docs)
-      .toBe('fetch analytics compare for profiles and pages');
+    expect(compare.docs).toBe('fetch analytics compare for profiles and pages');
   });
 
   it('should request metrics to Analyze Api for Instagram', () => {
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    compare.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService: 'instagram',
-    }, mockedRequest);
+    compare.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService: 'instagram',
+      },
+      mockedRequest
+    );
 
-    expect(rp.mock.calls[0])
-      .toEqual([{
+    expect(rp.mock.calls[0]).toEqual([
+      {
         uri: 'analyze-api/metrics/daily_totals',
         method: 'POST',
         strictSSL: false,
@@ -62,24 +69,31 @@ describe('rpc/compare', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
-
 
   it('should request for the previous week', () => {
     rp.mockClear();
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    compare.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService,
-    }, mockedRequest);
+    compare.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService,
+      },
+      mockedRequest
+    );
 
-    expect(rp.mock.calls[0])
-      .toEqual([{
+    expect(rp.mock.calls[0]).toEqual([
+      {
         uri: 'analyze-api/metrics/daily_totals',
         method: 'POST',
         strictSSL: false,
@@ -90,25 +104,37 @@ describe('rpc/compare', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
   it('should request for the week before that', () => {
-    const endDate = moment().subtract(1, 'days').unix();
-    const startDate = moment().subtract(7, 'days').unix();
+    const endDate = moment()
+      .subtract(1, 'days')
+      .unix();
+    const startDate = moment()
+      .subtract(7, 'days')
+      .unix();
 
-    compare.fn({
-      startDate,
-      endDate,
-      profileId,
-      profileService,
-    }, mockedRequest);
+    compare.fn(
+      {
+        startDate,
+        endDate,
+        profileId,
+        profileService,
+      },
+      mockedRequest
+    );
 
-    const end = moment().subtract(8, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(14, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(8, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(14, 'days')
+      .format('MM/DD/YYYY');
 
-    expect(rp.mock.calls[1])
-      .toEqual([{
+    expect(rp.mock.calls[1]).toEqual([
+      {
         uri: 'analyze-api/metrics/daily_totals',
         method: 'POST',
         strictSSL: false,
@@ -119,10 +145,11 @@ describe('rpc/compare', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
-  it('it should return both total and daily compares', async() => {
+  it('it should return both total and daily compares', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_DAILY_RESPONSE));
 
@@ -132,7 +159,7 @@ describe('rpc/compare', () => {
     expect(data.totals).toBeDefined();
   });
 
-  it('should return the metrics value and diff, compared by total updates sent in the period', async() => {
+  it('should return the metrics value and diff, compared by total updates sent in the period', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_DAILY_RESPONSE));
 
@@ -150,7 +177,7 @@ describe('rpc/compare', () => {
     });
   });
 
-  it('should return a valid response if all data is 0', async() => {
+  it('should return a valid response if all data is 0', async () => {
     rp.mockReturnValueOnce(Promise.resolve(DAILY_RESPONSE_EMPTY));
     rp.mockReturnValueOnce(Promise.resolve(DAILY_RESPONSE_EMPTY));
 
@@ -169,7 +196,7 @@ describe('rpc/compare', () => {
     });
   });
 
-  it('should return a valid response if previous data is 0', async() => {
+  it('should return a valid response if previous data is 0', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(DAILY_RESPONSE_EMPTY));
 
@@ -188,9 +215,11 @@ describe('rpc/compare', () => {
     });
   });
 
-  it('should average metrics for days where the value to average is > 0', async() => {
+  it('should average metrics for days where the value to average is > 0', async () => {
     rp.mockReturnValueOnce(Promise.resolve(DAILY_RESPONSE_AVERAGE_METRICS));
-    rp.mockReturnValueOnce(Promise.resolve(PAST_DAILY_RESPONSE_AVERAGE_METRICS));
+    rp.mockReturnValueOnce(
+      Promise.resolve(PAST_DAILY_RESPONSE_AVERAGE_METRICS)
+    );
 
     const data = await compare.fn({ profileId, profileService }, mockedRequest);
 
@@ -206,7 +235,7 @@ describe('rpc/compare', () => {
     });
   });
 
-  it('should return the daily compares', async() => {
+  it('should return the daily compares', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_DAILY_RESPONSE));
 

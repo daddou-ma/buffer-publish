@@ -50,8 +50,8 @@ class Scraper {
         }
         return response;
       })
-      .then((response) => response.json())
-      .then((urlData) => {
+      .then(response => response.json())
+      .then(urlData => {
         this.cache.set(url, urlData);
         this.pendingRequests.delete(url);
 

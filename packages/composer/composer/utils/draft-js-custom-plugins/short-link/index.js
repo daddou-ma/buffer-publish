@@ -27,11 +27,13 @@ const createShortLinkPlugin = () => {
       {
         strategy: shortLinkStrategy,
         component: decorateComponentWithProps(ShortLink, {
-          onMouseOver: (shortLinkData) => {
-            if (callbacks.onShortLinkMouseOver) callbacks.onShortLinkMouseOver(shortLinkData);
+          onMouseOver: shortLinkData => {
+            if (callbacks.onShortLinkMouseOver)
+              callbacks.onShortLinkMouseOver(shortLinkData);
           },
-          onMouseOut: (shortLinkData) => {
-            if (callbacks.onShortLinkMouseOut) callbacks.onShortLinkMouseOut(shortLinkData);
+          onMouseOut: shortLinkData => {
+            if (callbacks.onShortLinkMouseOut)
+              callbacks.onShortLinkMouseOut(shortLinkData);
           },
         }),
       },
@@ -42,7 +44,7 @@ const createShortLinkPlugin = () => {
       store.setEditorState = setEditorState;
     },
 
-    onChange: (editorState) => {
+    onChange: editorState => {
       if (callbacks.onEditorStateChange) callbacks.onEditorStateChange();
       return editorState;
     },

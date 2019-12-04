@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Lightbox from 'react-images';
-import {
-  LinkifiedText,
-  MultipleImages,
-  Text,
-} from '@bufferapp/components';
+import { LinkifiedText, MultipleImages, Text } from '@bufferapp/components';
 import Post from '../Post';
 
 const postContentStyle = {
@@ -68,29 +64,22 @@ const MultipleImagesPost = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic
-          ? (
-            <Text
-              color="black"
-              size="mini"
-              whitespace="pre-wrap"
-            >
-              {text}
-            </Text>
-          )
-          : (
-            <LinkifiedText
-              color="black"
-              links={links}
-              size="mini"
-              whitespace="pre-wrap"
-              newTab
-              unstyled
-            >
-              {text}
-            </LinkifiedText>
-          )
-        }
+        {basic ? (
+          <Text color="black" size="mini" whitespace="pre-wrap">
+            {text}
+          </Text>
+        ) : (
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            whitespace="pre-wrap"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        )}
       </span>
       <div style={imagesWrapperStyle} onClick={onImageClick}>
         <MultipleImages
@@ -164,7 +153,7 @@ MultipleImagesPost.propTypes = {
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
       rawString: PropTypes.string,
-    }),
+    })
   ).isRequired,
   text: PropTypes.string.isRequired,
   isLightboxOpen: PropTypes.bool,

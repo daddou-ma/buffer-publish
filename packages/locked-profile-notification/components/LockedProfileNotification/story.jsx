@@ -12,7 +12,7 @@ const storeFake = state => ({
   getState: () => ({ ...state }),
 });
 
-function createMockStore (type) {
+function createMockStore(type) {
   return storeFake({
     productFeatures: {
       planName: type,
@@ -57,8 +57,6 @@ storiesOf('Locked Profile Notification', module)
   ))
   .add('teamMember', () => (
     <Provider store={storeTeamMember}>
-      <LockedProfileNotification
-        isOwner={false}
-      />
+      <LockedProfileNotification isOwner={false} />
     </Provider>
   ));

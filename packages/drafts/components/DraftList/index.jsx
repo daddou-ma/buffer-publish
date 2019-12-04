@@ -64,26 +64,31 @@ const DraftList = ({
   onComposerOverlayClick,
 }) => {
   if (features.isProUser()) {
-    const startTrial = () => window.location.assign(
-      `${getURL.getStartTrialURL({
-        trialType: 'small',
-        cta: SEGMENT_NAMES.DRAFTS_SBP_TRIAL,
-        nextUrl: 'https://publish.buffer.com',
-      })}`,
-    );
-    const goToBilling = () => window.location.assign(
-      `${getURL.getBillingURL({
-        cta: SEGMENT_NAMES.DRAFTS_BUSINESS_UPGRADE,
-      })}`,
-    );
+    const startTrial = () =>
+      window.location.assign(
+        `${getURL.getStartTrialURL({
+          trialType: 'small',
+          cta: SEGMENT_NAMES.DRAFTS_SBP_TRIAL,
+          nextUrl: 'https://publish.buffer.com',
+        })}`
+      );
+    const goToBilling = () =>
+      window.location.assign(
+        `${getURL.getBillingURL({
+          cta: SEGMENT_NAMES.DRAFTS_BUSINESS_UPGRADE,
+        })}`
+      );
     const trackAndGo = ({ location, action, afterTracked }) => {
-      trackAction({
-        location,
-        action,
-      }, {
-        success: afterTracked,
-        error: afterTracked,
-      });
+      trackAction(
+        {
+          location,
+          action,
+        },
+        {
+          success: afterTracked,
+          error: afterTracked,
+        }
+      );
     };
     if (canStartBusinessTrial) {
       return (
@@ -91,7 +96,13 @@ const DraftList = ({
           heading="Collaborate With Your Team"
           body="Add your team to your Buffer account so you can collaborate and save even more time."
           cta="Start a Free 14-Day Trial of the Business Plan"
-          onCtaClick={() => { trackAndGo({ location: 'drafts', action: 'collaborate_with_team_b4b_trial_start_click', afterTracked: startTrial }); }}
+          onCtaClick={() => {
+            trackAndGo({
+              location: 'drafts',
+              action: 'collaborate_with_team_b4b_trial_start_click',
+              afterTracked: startTrial,
+            });
+          }}
           backgroundImage="squares"
         />
       );
@@ -101,7 +112,13 @@ const DraftList = ({
         heading="Collaborate With Your Team"
         body="Add your team to your Buffer account so you can collaborate and save even more time."
         cta="Upgrade to Buffer for Business"
-        onCtaClick={() => { trackAndGo({ location: 'analytics', action: 'collaborate_with_team_b4b_upgrade_click', afterTracked: goToBilling }); }}
+        onCtaClick={() => {
+          trackAndGo({
+            location: 'analytics',
+            action: 'collaborate_with_team_b4b_upgrade_click',
+            afterTracked: goToBilling,
+          });
+        }}
         backgroundImage="squares"
       />
     );
@@ -123,64 +140,52 @@ const DraftList = ({
     <ErrorBoundary>
       <div className={containerStyle}>
         <div style={topBarContainerStyle}>
-          {tabId === 'drafts'
-            && (
-              <div style={composerStyle}>
-                {showComposer && !editMode
-                  && (
-                    <ComposerPopover
-                      type="drafts"
-                      onSave={onComposerCreateSuccess}
-                      preserveComposerStateOnClose
-                      onComposerOverlayClick={onComposerOverlayClick}
-                      editMode={editMode}
-                    />
-                  )
-                }
-                <ComposerInput
-                  placeholder="Create a new draft..."
-                  onPlaceholderClick={onComposerPlaceholderClick}
+          {tabId === 'drafts' && (
+            <div style={composerStyle}>
+              {showComposer && !editMode && (
+                <ComposerPopover
+                  type="drafts"
+                  onSave={onComposerCreateSuccess}
+                  preserveComposerStateOnClose
+                  onComposerOverlayClick={onComposerOverlayClick}
+                  editMode={editMode}
                 />
-              </div>
-            )
-          }
+              )}
+              <ComposerInput
+                placeholder="Create a new draft..."
+                onPlaceholderClick={onComposerPlaceholderClick}
+              />
+            </div>
+          )}
         </div>
-        {showComposer && editMode
-          && (
-            <ComposerPopover
-              type="drafts"
-              onSave={onComposerCreateSuccess}
-              onComposerOverlayClick={onComposerOverlayClick}
-              editMode={editMode}
-            />
-          )
-        }
-        {postLists.length > 0
-          ? (
-            <QueueItems
-              items={postLists}
-              onApproveClick={onApproveClick}
-              onDeleteConfirmClick={onDeleteConfirmClick}
-              onEditClick={onEditClick}
-              onMoveToDraftsClick={onMoveToDraftsClick}
-              onRequestApprovalClick={onRequestApprovalClick}
-              onRescheduleClick={onRescheduleClick}
-              onImageClick={onImageClick}
-              onImageClickNext={onImageClickNext}
-              onImageClickPrev={onImageClickPrev}
-              onImageClose={onImageClose}
-              draggable={false}
-              type="drafts"
-              hasFirstCommentFlip={hasFirstCommentFlip}
-            />
-          )
-          : (
-            <Empty
-              isManager={manager}
-              view={tabId}
-            />
-          )
-        }
+        {showComposer && editMode && (
+          <ComposerPopover
+            type="drafts"
+            onSave={onComposerCreateSuccess}
+            onComposerOverlayClick={onComposerOverlayClick}
+            editMode={editMode}
+          />
+        )}
+        {postLists.length > 0 ? (
+          <QueueItems
+            items={postLists}
+            onApproveClick={onApproveClick}
+            onDeleteConfirmClick={onDeleteConfirmClick}
+            onEditClick={onEditClick}
+            onMoveToDraftsClick={onMoveToDraftsClick}
+            onRequestApprovalClick={onRequestApprovalClick}
+            onRescheduleClick={onRescheduleClick}
+            onImageClick={onImageClick}
+            onImageClickNext={onImageClickNext}
+            onImageClickPrev={onImageClickPrev}
+            onImageClose={onImageClose}
+            draggable={false}
+            type="drafts"
+            hasFirstCommentFlip={hasFirstCommentFlip}
+          />
+        ) : (
+          <Empty isManager={manager} view={tabId} />
+        )}
       </div>
     </ErrorBoundary>
   );
@@ -193,7 +198,7 @@ DraftList.propTypes = {
   postLists: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string,
-    }),
+    })
   ),
   manager: PropTypes.bool.isRequired,
   onApproveClick: PropTypes.func.isRequired,

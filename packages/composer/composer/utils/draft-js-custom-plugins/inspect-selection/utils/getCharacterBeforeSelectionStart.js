@@ -15,8 +15,12 @@ const getCharacterBeforeSelectionStart = function(store) {
   if (startOffset === 0) return null;
 
   const startKey = selectionState.getStartKey();
-  const selectedBlock = editorState.getCurrentContent().getBlockForKey(startKey);
-  const characterBeforeSelectionStart = selectedBlock.getText().charAt(startOffset - 1);
+  const selectedBlock = editorState
+    .getCurrentContent()
+    .getBlockForKey(startKey);
+  const characterBeforeSelectionStart = selectedBlock
+    .getText()
+    .charAt(startOffset - 1);
 
   return characterBeforeSelectionStart;
 };

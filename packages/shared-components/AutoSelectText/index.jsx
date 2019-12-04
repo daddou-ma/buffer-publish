@@ -30,7 +30,14 @@ class AutoSelectText extends Component {
               padding: '1rem',
             }}
           >
-            <code style={{ fontSize: '16px', userSelect: 'all', fontWeight: 'bold' }} ref={this.textRef}>
+            <code
+              style={{
+                fontSize: '16px',
+                userSelect: 'all',
+                fontWeight: 'bold',
+              }}
+              ref={this.textRef}
+            >
               {this.props.children}
             </code>
           </div>

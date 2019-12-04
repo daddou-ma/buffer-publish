@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TwitterHashtagAutocompleteSuggestionsEntry = (props) => {
+const TwitterHashtagAutocompleteSuggestionsEntry = props => {
   const {
     mention,
     theme: styles,
@@ -12,7 +12,9 @@ const TwitterHashtagAutocompleteSuggestionsEntry = (props) => {
   return (
     <div {...parentProps}>
       <span className={styles.mentionSuggestionsEntryText}>
-        <span className={styles.mentionSuggestionsEntryName}>{mention.get('name')}</span>
+        <span className={styles.mentionSuggestionsEntryName}>
+          {mention.get('name')}
+        </span>
       </span>
     </div>
   );

@@ -35,16 +35,8 @@ const errorButtonStyle = {
 // using new design system styles, replace btn when system gets rolled out
 const renderButton = link => (
   <div style={errorButtonStyle}>
-    <Link
-      newTab
-      unstyled
-      href={link}
-    >
-      <Text
-        size={'mini'}
-        weight={'medium'}
-        color={'white'}
-      >
+    <Link newTab unstyled href={link}>
+      <Text size={'mini'} weight={'medium'} color={'white'}>
         Learn More
       </Text>
     </Link>
@@ -54,17 +46,11 @@ const renderButton = link => (
 const PostErrorBanner = ({ dragging, error, errorLink }) => (
   <div style={errorWrapperStyle(dragging)}>
     <div style={errorMessageStyle(errorLink)}>
-      <Text
-        size={'mini'}
-        weight={'medium'}
-        color={'white'}
-      >
-        { error }
+      <Text size={'mini'} weight={'medium'} color={'white'}>
+        {error}
       </Text>
     </div>
-    {errorLink &&
-      renderButton(errorLink)
-    }
+    {errorLink && renderButton(errorLink)}
   </div>
 );
 

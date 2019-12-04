@@ -11,7 +11,10 @@ module.exports = method(
         uri: `${process.env.API_ADDR}/1/user/twofactor/recovery.json`,
         method: 'POST',
         json: true,
-        strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
+        strictSSL: !(
+          process.env.NODE_ENV === 'development' ||
+          process.env.NODE_ENV === 'test'
+        ),
         form: {
           access_token: session.publish.accessToken,
         },
@@ -26,5 +29,5 @@ module.exports = method(
       throw err;
     }
     return Promise.resolve(result);
-  },
+  }
 );

@@ -16,7 +16,9 @@ class ServiceLocation {
   get formattedAddressWithCheckins() {
     if (this.checkins) {
       const numbersInGroupsOf3 = /\B(?=(\d{3})+(?!\d))/g;
-      const formattedNumber = this.checkins.toString().replace(numbersInGroupsOf3, ',');
+      const formattedNumber = this.checkins
+        .toString()
+        .replace(numbersInGroupsOf3, ',');
       const formattedCheckins = `${formattedNumber} people checked in here`;
 
       if (this.address) {

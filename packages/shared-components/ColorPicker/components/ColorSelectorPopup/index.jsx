@@ -39,7 +39,9 @@ const ColorSelectorPopup = ({
 }) => {
   const containerEl = useRef(null);
   const ref = useRef();
-  const [lastValidColor, setLastValidColor] = useState(colorSelected || DEFAULT_COLOR);
+  const [lastValidColor, setLastValidColor] = useState(
+    colorSelected || DEFAULT_COLOR
+  );
 
   useOutsideClick(ref, () => {
     onBlur();

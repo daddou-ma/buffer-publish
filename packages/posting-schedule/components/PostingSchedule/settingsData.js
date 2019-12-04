@@ -1,7 +1,10 @@
-
 export const settingsHeader = 'Your posting schedule for @joelgascoigne';
-const onChange = () => { console.log('on-change'); }; // eslint-disable-line
-const onRemoveTimeClick = () => { console.log('on-remove-time-click'); }; // eslint-disable-line
+const onChange = () => {
+  console.log('on-change');
+}; // eslint-disable-line
+const onRemoveTimeClick = () => {
+  console.log('on-remove-time-click');
+}; // eslint-disable-line
 
 const times = [
   {

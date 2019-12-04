@@ -22,16 +22,16 @@ module.exports = method(
       },
     })
       .then(result => JSON.parse(result))
-      .then((parsedResult) => {
+      .then(parsedResult => {
         const storyGroup = storyGroupParser(parsedResult.data);
         return {
           storyGroup,
         };
       })
-      .catch((err) => {
+      .catch(err => {
         if (err) {
           const error = JSON.parse(err);
           throw createError({ message: error.message });
         }
-      }),
+      })
 );

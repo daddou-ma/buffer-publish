@@ -3,9 +3,7 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import PostList from './index';
 
-import {
-  posts,
-} from './postData';
+import { posts } from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -32,17 +30,16 @@ describe('PostList', () => {
           onEditClick={handleEditClick}
           onShareNowClick={() => {}}
         />
-      </Provider>,
+      </Provider>
     );
     // click on the edit button
     wrapper
       .find('button')
       .at(1)
       .simulate('click');
-    expect(handleEditClick)
-      .toBeCalledWith({
-        post: posts[0],
-      });
+    expect(handleEditClick).toBeCalledWith({
+      post: posts[0],
+    });
   });
 
   it('should trigger onShareNowClick', () => {
@@ -55,16 +52,15 @@ describe('PostList', () => {
           onEditClick={() => {}}
           onShareNowClick={handleShareNowClick}
         />
-      </Provider>,
+      </Provider>
     );
     // click on the edit button
     wrapper
       .find('button')
       .at(2)
       .simulate('click');
-    expect(handleShareNowClick)
-      .toBeCalledWith({
-        post: posts[0],
-      });
+    expect(handleShareNowClick).toBeCalledWith({
+      post: posts[0],
+    });
   });
 });

@@ -11,7 +11,7 @@ import LocationComposerBar from '../components/LocationComposerBar';
 
 jest.mock('../action-creators/ComposerActionCreators');
 jest.mock('../utils/LocationFinder');
-jest.mock('lodash.debounce', () => jest.fn((fn) => fn));
+jest.mock('lodash.debounce', () => jest.fn(fn => fn));
 
 import debounce from 'lodash.debounce';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
@@ -36,56 +36,66 @@ describe('Whole component', () => {
       'LA, USA'
     );
 
-    const tree = renderer.create(
-      <LocationComposerBar
-        {...showLocationBar}
-
-        draftId={'123'}
-        locationName={'New York'}
-        locationId={'123123'}
-        instagramProfileId={'333'}
-        places={[sl]}
-      />
-    ).toJSON();
+    const tree = renderer
+      .create(
+        <LocationComposerBar
+          {...showLocationBar}
+          draftId={'123'}
+          locationName={'New York'}
+          locationId={'123123'}
+          instagramProfileId={'333'}
+          places={[sl]}
+        />
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('renders with location name when set', () => {
-    const tree = renderer.create(
-      <LocationComposerBar
-        {...showLocationBar}
-        draftId={'123'}
-        locationName={'New York'}
-        instagramProfileId={'333'}
-      />
-    ).toJSON();
+    const tree = renderer
+      .create(
+        <LocationComposerBar
+          {...showLocationBar}
+          draftId={'123'}
+          locationName={'New York'}
+          instagramProfileId={'333'}
+        />
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('renders with cross to remove location when set', () => {
-    const tree = renderer.create(
-      <LocationComposerBar
-        {...showLocationBar}
-        draftId={'123'}
-        locationName={'New York'}
-        locationId={'123123'}
-        instagramProfileId={'333'}
-      />
-    ).toJSON();
+    const tree = renderer
+      .create(
+        <LocationComposerBar
+          {...showLocationBar}
+          draftId={'123'}
+          locationName={'New York'}
+          locationId={'123123'}
+          instagramProfileId={'333'}
+        />
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
 
-const setup = (propOverrides) => {
-  const props = Object.assign({
-    draftId: '1231',
-    locationName: '',
-    locationId: null,
-    instagramProfileId: null,
-    places: [],
-  }, propOverrides);
+const setup = propOverrides => {
+  const props = Object.assign(
+    {
+      draftId: '1231',
+      locationName: '',
+      locationId: null,
+      instagramProfileId: null,
+      places: [],
+    },
+    propOverrides
+  );
 
-  const wrapper = shallow(<LocationComposerBar {...props} {...showLocationBar} />);
+  const wrapper = shallow(
+    <LocationComposerBar {...props} {...showLocationBar} />
+  );
 
   return {
     props,
@@ -108,9 +118,15 @@ describe('Cross remove button', () => {
     ComposerActionCreators.updateDraftLocation.mockReturnValue(true);
     const { wrapper } = setup({ locationId: '123', draftId: '1234' });
 
-    wrapper.find('span.locationFieldRemoveInput').simulate('click', { preventDefault() {} });
+    wrapper
+      .find('span.locationFieldRemoveInput')
+      .simulate('click', { preventDefault() {} });
 
-    expect(ComposerActionCreators.updateDraftLocation).toHaveBeenCalledWith('1234', null, '');
+    expect(ComposerActionCreators.updateDraftLocation).toHaveBeenCalledWith(
+      '1234',
+      null,
+      ''
+    );
   });
 });
 
@@ -128,7 +144,10 @@ describe('Autocomplete element', () => {
       123,
       'LA, USA'
     );
-    const { wrapper } = setup({ locationName: 'Los Angeles Test', places: [sl] });
+    const { wrapper } = setup({
+      locationName: 'Los Angeles Test',
+      places: [sl],
+    });
     const autocompleteProps = wrapper.find(Autocomplete).props();
 
     expect(autocompleteProps.items).toEqual([sl]);
@@ -157,7 +176,10 @@ describe('Autocomplete actions', () => {
 
     expect(debounce).toHaveBeenCalled();
     expect(LocationFinder.findLocations).toHaveBeenCalledWith('676', 'LA Test');
-    expect(ComposerActionCreators.updateDraftListPlaces).toHaveBeenCalledWith('1234', ['t']);
+    expect(ComposerActionCreators.updateDraftListPlaces).toHaveBeenCalledWith(
+      '1234',
+      ['t']
+    );
   });
 
   it('updates draft location when changed', () => {
@@ -181,11 +203,19 @@ describe('Autocomplete actions', () => {
   });
 
   it('resets input content when no location is selected', () => {
-    const { wrapper } = setup({ locationId: null, locationName: 'NYC', draftId: '1234' });
+    const { wrapper } = setup({
+      locationId: null,
+      locationName: 'NYC',
+      draftId: '1234',
+    });
     const autocompleteProps = wrapper.find(Autocomplete).props();
 
     autocompleteProps.onMenuVisibilityChange(false);
 
-    expect(ComposerActionCreators.updateDraftLocation).toHaveBeenCalledWith('1234', null, '');
+    expect(ComposerActionCreators.updateDraftLocation).toHaveBeenCalledWith(
+      '1234',
+      null,
+      ''
+    );
   });
 });

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { Provider } from 'react-redux';
@@ -34,11 +32,7 @@ const store = storeFake({
 
 storiesOf('PostList', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory => (
-    <Provider store={store}>
-      {getStory()}
-    </Provider>
-  ))
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('default', () => (
     <PostList
       listHeader={listHeader}

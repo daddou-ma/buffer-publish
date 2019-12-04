@@ -93,50 +93,49 @@ const QueuedPosts = ({
       <div>
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
-            {showComposer && !editMode
-              && (
-                <ComposerPopover
-                  onSave={onComposerCreateSuccess}
-                  preserveComposerStateOnClose
-                  type="queue"
-                  onComposerOverlayClick={onComposerOverlayClick}
-                  editMode={editMode}
-                />
-              )
-            }
+            {showComposer && !editMode && (
+              <ComposerPopover
+                onSave={onComposerCreateSuccess}
+                preserveComposerStateOnClose
+                type="queue"
+                onComposerOverlayClick={onComposerOverlayClick}
+                editMode={editMode}
+              />
+            )}
             <ComposerInput
               onPlaceholderClick={onComposerPlaceholderClick}
               placeholder="What would you like to share?"
             />
           </div>
         </div>
-        {isInstagramProfile && !isInstagramBusiness
-          && <InstagramDirectPostingBanner onDirectPostingClick={onDirectPostingClick} />
-        }
-        {showInstagramDirectPostingModal
-          && <InstagramDirectPostingModal />
-        }
-        {!!paused && <QueuePausedBar isManager={isManager} handleClickUnpause={onUnpauseClick} />}
-        {showEmptyQueueMessage
-          && (
-            <EmptyState
-              title="It looks like you haven't got any posts in your queue!"
-              subtitle="Click the box above to add a post to your queue :)"
-              heroImg="https://s3.amazonaws.com/buffer-publish/images/fresh-queue%402x.png"
-              heroImgSize={{ width: '229px', height: '196px' }}
-            />
-          )
-        }
-        {showComposer && editMode
-          && (
-            <ComposerPopover
-              onSave={onComposerCreateSuccess}
-              type="queue"
-              onComposerOverlayClick={onComposerOverlayClick}
-              editMode={editMode}
-            />
-          )
-        }
+        {isInstagramProfile && !isInstagramBusiness && (
+          <InstagramDirectPostingBanner
+            onDirectPostingClick={onDirectPostingClick}
+          />
+        )}
+        {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
+        {!!paused && (
+          <QueuePausedBar
+            isManager={isManager}
+            handleClickUnpause={onUnpauseClick}
+          />
+        )}
+        {showEmptyQueueMessage && (
+          <EmptyState
+            title="It looks like you haven't got any posts in your queue!"
+            subtitle="Click the box above to add a post to your queue :)"
+            heroImg="https://s3.amazonaws.com/buffer-publish/images/fresh-queue%402x.png"
+            heroImgSize={{ width: '229px', height: '196px' }}
+          />
+        )}
+        {showComposer && editMode && (
+          <ComposerPopover
+            onSave={onComposerCreateSuccess}
+            type="queue"
+            onComposerOverlayClick={onComposerOverlayClick}
+            editMode={editMode}
+          />
+        )}
         <QueueItems
           items={postLists}
           subprofiles={subprofiles}
@@ -168,12 +167,12 @@ QueuedPosts.propTypes = {
   postLists: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
-    }),
+    })
   ).isRequired,
   subprofiles: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
-    }),
+    })
   ),
   showEmptyQueueMessage: PropTypes.bool,
   onComposerPlaceholderClick: PropTypes.func.isRequired,

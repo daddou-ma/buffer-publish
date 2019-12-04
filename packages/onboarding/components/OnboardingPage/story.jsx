@@ -7,7 +7,5 @@ import OnboardingPage from './index';
 storiesOf('OnboardingPage', module)
   .addDecorator(withA11y)
   .add('should show image, title and button', () => (
-    <OnboardingPage
-      translations={translations['onboarding-page']}
-    />
+    <OnboardingPage translations={translations['onboarding-page']} />
   ));

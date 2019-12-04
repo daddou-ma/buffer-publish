@@ -24,14 +24,9 @@ const StyledImage = styled.img`
   object-fit: cover;
 `;
 
-const AddNote = ({
-  onSaveNoteClick,
-  onCancelClick,
-  translations,
-  story,
-}) => {
+const AddNote = ({ onSaveNoteClick, onCancelClick, translations, story }) => {
   const [note, setNote] = useState(story ? story.note : null);
-  const setNoteValue = (event) => {
+  const setNoteValue = event => {
     const { value } = event.target;
     setNote(value);
   };

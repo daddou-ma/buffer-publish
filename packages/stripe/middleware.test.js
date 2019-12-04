@@ -17,11 +17,12 @@ describe('middleware', () => {
       type: actionTypes.CREATE_SETUP_INTENT_REQUEST,
     };
     middleware({ dispatch })(next)(action);
-    expect(dispatch)
-      .toBeCalledWith(asyncDataFetchActions.fetch({
+    expect(dispatch).toBeCalledWith(
+      asyncDataFetchActions.fetch({
         name: 'createSetupIntent',
         args: {},
-      }));
+      })
+    );
   });
 
   it('should trigger a switchPlan on handleCardSetupSuccess', () => {
@@ -36,8 +37,8 @@ describe('middleware', () => {
     };
 
     middleware({ dispatch })(next)(action);
-    expect(dispatch)
-      .toBeCalledWith(asyncDataFetchActions.fetch({
+    expect(dispatch).toBeCalledWith(
+      asyncDataFetchActions.fetch({
         name: 'switchPlan',
         args: {
           cycle: action.cycle,
@@ -45,7 +46,8 @@ describe('middleware', () => {
           cta: SEGMENT_NAMES.QUEUE_LIMIT_PRO_UPGRADE,
           paymentMethodId: action.paymentMethodId,
         },
-      }));
+      })
+    );
   });
 
   it('should trigger a createSetupIntent success', () => {
@@ -55,14 +57,14 @@ describe('middleware', () => {
       type: `createSetupIntent_${asyncDataFetchActionTypes.FETCH_SUCCESS}`,
       result: {
         setup_intent: {
-          client_secret: 'seti_0FEiYc47iwqlrZWUfKe1S08B_secret_FkCyRQxVyO2DP5PewgO9lkRjLutaRtP',
+          client_secret:
+            'seti_0FEiYc47iwqlrZWUfKe1S08B_secret_FkCyRQxVyO2DP5PewgO9lkRjLutaRtP',
         },
       },
     };
     middleware({ dispatch })(next)(action);
-    expect(dispatch)
-      .toBeCalledWith(actions.createSetupIntentSuccess(
-        action.result.setup_intent.client_secret,
-      ));
+    expect(dispatch).toBeCalledWith(
+      actions.createSetupIntentSuccess(action.result.setup_intent.client_secret)
+    );
   });
 });

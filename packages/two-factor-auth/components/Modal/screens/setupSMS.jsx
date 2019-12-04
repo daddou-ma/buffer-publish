@@ -37,13 +37,21 @@ class SetupSMS extends React.Component {
             {!editMode && 'Set up your phone number'}
             {editMode && 'Change your phone number'}
           </Text>
-          {!editMode && <div style={{ margin: '12px 0' }}>
-            <Text type="p">
-              This will be the device we send verification codes each time you log into Buffer.
-            </Text>
-          </div>}
+          {!editMode && (
+            <div style={{ margin: '12px 0' }}>
+              <Text type="p">
+                This will be the device we send verification codes each time you
+                log into Buffer.
+              </Text>
+            </div>
+          )}
         </div>
-        <div style={{ padding: '16px 0 20px' }} ref={(el) => { this.inputContainer = el; }}>
+        <div
+          style={{ padding: '16px 0 20px' }}
+          ref={el => {
+            this.inputContainer = el;
+          }}
+        >
           <div style={{ paddingBottom: '4px' }}>
             <Text type="label">Phone number (incl. country code)</Text>
           </div>
@@ -62,24 +70,25 @@ class SetupSMS extends React.Component {
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          {!editMode &&
+          {!editMode && (
             <Button
               type="text"
               label="Back"
               onClick={() => transition('BACK')}
             />
-          }
-          {editMode &&
+          )}
+          {editMode && (
             <Button
               type="text"
               label="Cancel"
               onClick={() => transition('CLOSE')}
             />
-          }
+          )}
           <Button
             type="primary"
             label={loading ? 'Please wait…' : 'Next'}
-            onClick={this.handleSubmit} disabled={loading}
+            onClick={this.handleSubmit}
+            disabled={loading}
           />
         </div>
       </Fragment>

@@ -20,8 +20,7 @@ describe('middleware', () => {
   const dispatch = jest.fn();
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('should fetch enabledApplicationModes ', () => {
@@ -30,15 +29,15 @@ describe('middleware', () => {
       name: RPC_NAME,
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'enabledApplicationModes',
         args: {
           comprehensive: true,
         },
-      }));
+      })
+    );
   });
 
   it('should fetch queuedPosts', () => {
@@ -49,17 +48,17 @@ describe('middleware', () => {
       },
     };
     middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'queuedPosts',
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,
           count: 300,
         },
-      }));
+      })
+    );
   });
 
   it('should fetch queuedPosts if updatePausedSchedules is successful', () => {
@@ -70,17 +69,17 @@ describe('middleware', () => {
       },
     };
     middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'queuedPosts',
         args: {
           profileId: action.args.profileId,
           isFetchingMore: false,
           count: 300,
         },
-      }));
+      })
+    );
   });
 
   it('should fetch queuedPosts if updateSchedule is successful', () => {
@@ -91,17 +90,17 @@ describe('middleware', () => {
       },
     };
     middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'queuedPosts',
         args: {
           profileId: action.args.profileId,
           isFetchingMore: false,
           count: 300,
         },
-      }));
+      })
+    );
   });
 
   it('should trigger a notification for COMPOSER_EVENT in case of success', () => {
@@ -113,14 +112,14 @@ describe('middleware', () => {
       },
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
         message: action.data.message,
-      }));
+      })
+    );
   });
 
   it('should fetch posts again after a post is requeued', () => {
@@ -132,10 +131,9 @@ describe('middleware', () => {
       },
     });
     middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'queuedPosts',
         args: {
           profileId: action.args.profileId,
@@ -143,7 +141,8 @@ describe('middleware', () => {
           isReordering: true,
           count: 300,
         },
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if post is successfully re-added to the queue', () => {
@@ -155,14 +154,14 @@ describe('middleware', () => {
       },
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
-        message: 'We\'ve re-added this post to your queue!',
-      }));
+        message: "We've re-added this post to your queue!",
+      })
+    );
   });
 
   it('should trigger a notification if post is successfully deleted', () => {
@@ -174,14 +173,14 @@ describe('middleware', () => {
       },
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
-        message: 'Okay, we\'ve deleted that post!',
-      }));
+        message: "Okay, we've deleted that post!",
+      })
+    );
   });
 
   it('should refetch posts when a post is successfully deleted', () => {
@@ -193,8 +192,7 @@ describe('middleware', () => {
       },
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
+    expect(next).toBeCalledWith(action);
   });
 
   it('should fetch deletePost', () => {
@@ -203,15 +201,15 @@ describe('middleware', () => {
       updateId: 'id1',
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'deletePost',
         args: {
           updateId: action.updateId,
         },
-      }));
+      })
+    );
   });
 
   it('should fetch sharePostNow', () => {
@@ -223,16 +221,16 @@ describe('middleware', () => {
       profileId: 'profileId1',
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'sharePostNow',
         args: {
           updateId: action.post.id,
           profileId: action.profileId,
         },
-      }));
+      })
+    );
   });
 
   it('should fetch requeuePost', () => {
@@ -244,16 +242,16 @@ describe('middleware', () => {
       profileId: 'profileId1',
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'requeuePost',
         args: {
           updateId: action.post.id,
           profileId: action.profileId,
         },
-      }));
+      })
+    );
   });
 
   it('should swap posts', () => {
@@ -276,10 +274,9 @@ describe('middleware', () => {
       profileId: 'profileId1',
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'swapPosts',
         args: {
           updateSourceId: action.postSource.id,
@@ -290,7 +287,8 @@ describe('middleware', () => {
           targetPinned: action.postSource.postProps.pinned,
           targetDueAt: action.postSource.postProps.due_at,
         },
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if post is successfully shared', () => {
@@ -299,14 +297,14 @@ describe('middleware', () => {
       name: RPC_NAME,
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
         message: 'Yay, your post has been shared! 🎉',
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if it fails to share a post', () => {
@@ -316,14 +314,14 @@ describe('middleware', () => {
       error: 'Failed to share',
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'error',
         message: action.error,
-      }));
+      })
+    );
   });
 
   describe('Update Post Counts', () => {
@@ -359,10 +357,9 @@ describe('middleware', () => {
         profileId: 'profileId1',
       };
       middleware(store)(next)(action);
-      expect(next)
-        .toBeCalledWith(action);
-      expect(store.dispatch)
-        .toBeCalledWith(actions.postCountUpdated(action.profileId, newCounts),
+      expect(next).toBeCalledWith(action);
+      expect(store.dispatch).toBeCalledWith(
+        actions.postCountUpdated(action.profileId, newCounts)
       );
     });
 
@@ -376,10 +373,9 @@ describe('middleware', () => {
         profileId: 'profileId1',
       };
       middleware(store)(next)(action);
-      expect(next)
-        .toBeCalledWith(action);
-      expect(store.dispatch)
-        .toBeCalledWith(actions.postCountUpdated(action.profileId, newCounts),
+      expect(next).toBeCalledWith(action);
+      expect(store.dispatch).toBeCalledWith(
+        actions.postCountUpdated(action.profileId, newCounts)
       );
     });
 
@@ -393,10 +389,9 @@ describe('middleware', () => {
         profileId: 'profileId1',
       };
       middleware(store)(next)(action);
-      expect(next)
-        .toBeCalledWith(action);
-      expect(store.dispatch)
-        .toBeCalledWith(actions.postCountUpdated(action.profileId, newCounts),
+      expect(next).toBeCalledWith(action);
+      expect(store.dispatch).toBeCalledWith(
+        actions.postCountUpdated(action.profileId, newCounts)
       );
     });
   });

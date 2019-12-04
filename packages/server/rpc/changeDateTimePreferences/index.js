@@ -14,7 +14,5 @@ module.exports = method(
       form: Object.assign(preferences, {
         access_token: session.publish.accessToken,
       }),
-    })
-      .then(result => userParser(result.user)),
+    }).then(result => userParser(result.user))
 );
-

@@ -85,16 +85,18 @@ const ProfileSidebar = ({
 }) => (
   <div style={profileSidebarStyle}>
     {loading && renderLoadingProfiles()}
-    {profiles.length > 0 &&
+    {profiles.length > 0 && (
       <div style={profileListStyle} data-hide-scrollbar>
-        {profiles.length > 9 &&
+        {profiles.length > 9 && (
           <ProfileSearch
             profiles={profiles}
             onSearchProfileChange={onSearchProfileChange}
             isSearchPopupVisible={isSearchPopupVisible}
-            handleSubmit={({ selectedProfile }) => onProfileClick(selectedProfile)}
+            handleSubmit={({ selectedProfile }) =>
+              onProfileClick(selectedProfile)
+            }
           />
-        }
+        )}
         <ProfileList
           selectedProfileId={selectedProfileId}
           profiles={profiles}
@@ -105,36 +107,42 @@ const ProfileSidebar = ({
           translations={translations}
         />
       </div>
-    }
+    )}
     <div style={manageSocialAccountsStyle}>
       <div style={socialButtonsWrapperStyle}>
-        {!hasInstagram && <ProfileConnectShortcut
-          label="Connect Instagram"
-          network="instagram"
-          url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
-          profileLimit={profileLimit}
-          profiles={profiles}
-          showSwitchPlanModal={showSwitchPlanModal}
-          goToConnectSocialAccount={goToConnectSocialAccount}
-        />}
-        {!hasFacebook && <ProfileConnectShortcut
-          label="Connect Facebook"
-          network="facebook"
-          url="https://buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1"
-          profileLimit={profileLimit}
-          profiles={profiles}
-          showSwitchPlanModal={showSwitchPlanModal}
-          goToConnectSocialAccount={goToConnectSocialAccount}
-        />}
-        {!hasTwitter && <ProfileConnectShortcut
-          label="Connect Twitter"
-          network="twitter"
-          url="https://buffer.com/oauth/twitter?cta=publish-app-sidebar-addProfile-1"
-          profileLimit={profileLimit}
-          profiles={profiles}
-          showSwitchPlanModal={showSwitchPlanModal}
-          goToConnectSocialAccount={goToConnectSocialAccount}
-        />}
+        {!hasInstagram && (
+          <ProfileConnectShortcut
+            label="Connect Instagram"
+            network="instagram"
+            url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
+            profileLimit={profileLimit}
+            profiles={profiles}
+            showSwitchPlanModal={showSwitchPlanModal}
+            goToConnectSocialAccount={goToConnectSocialAccount}
+          />
+        )}
+        {!hasFacebook && (
+          <ProfileConnectShortcut
+            label="Connect Facebook"
+            network="facebook"
+            url="https://buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1"
+            profileLimit={profileLimit}
+            profiles={profiles}
+            showSwitchPlanModal={showSwitchPlanModal}
+            goToConnectSocialAccount={goToConnectSocialAccount}
+          />
+        )}
+        {!hasTwitter && (
+          <ProfileConnectShortcut
+            label="Connect Twitter"
+            network="twitter"
+            url="https://buffer.com/oauth/twitter?cta=publish-app-sidebar-addProfile-1"
+            profileLimit={profileLimit}
+            profiles={profiles}
+            showSwitchPlanModal={showSwitchPlanModal}
+            goToConnectSocialAccount={goToConnectSocialAccount}
+          />
+        )}
         <div style={bottomSectionStyle}>
           <div style={buttonDividerStyle}>
             <Divider marginTop="1rem" />

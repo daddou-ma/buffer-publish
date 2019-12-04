@@ -18,28 +18,29 @@ describe('machine', () => {
   });
 
   Object.entries(machine).forEach(([machineState, stateTransitions]) => {
-    Object.entries(stateTransitions).forEach(([transitionName, nextMachineStateName]) => {
-      const state = { machineState };
-      if (typeof nextMachineStateName === 'function') {
-        nextMachineStateName = nextMachineStateName(state);
-      }
-      it(`transitions from ${machineState} with ${transitionName} to ${nextMachineStateName}`, () => {
-        const nextState = handleTransition({
-          state,
-          name: transitionName,
+    Object.entries(stateTransitions).forEach(
+      ([transitionName, nextMachineStateName]) => {
+        const state = { machineState };
+        if (typeof nextMachineStateName === 'function') {
+          nextMachineStateName = nextMachineStateName(state);
+        }
+        it(`transitions from ${machineState} with ${transitionName} to ${nextMachineStateName}`, () => {
+          const nextState = handleTransition({
+            state,
+            name: transitionName,
+          });
+          expect(nextState.machineState).toBe(nextMachineStateName);
         });
-        expect(nextState.machineState).toBe(nextMachineStateName);
-      });
-    });
+      }
+    );
   });
 
   describe('transitions conditionally with CLOSE', () => {
-    const closeableMachineStates = Object
-      .keys(machine)
-      .filter(
-        machineState => !['enabled', 'disabled', 'recovery'].includes(machineState),
-      );
-    closeableMachineStates.forEach((machineState) => {
+    const closeableMachineStates = Object.keys(machine).filter(
+      machineState =>
+        !['enabled', 'disabled', 'recovery'].includes(machineState)
+    );
+    closeableMachineStates.forEach(machineState => {
       it(`from ${machineState} to enabled`, () => {
         const nextState = handleTransition({
           state: { machineState, isEnabled: true },
@@ -48,7 +49,7 @@ describe('machine', () => {
         expect(nextState.machineState).toBe('enabled');
       });
     });
-    closeableMachineStates.forEach((machineState) => {
+    closeableMachineStates.forEach(machineState => {
       it(`from ${machineState} to disabled`, () => {
         const nextState = handleTransition({
           state: { machineState, isEnabled: false },
@@ -61,7 +62,7 @@ describe('machine', () => {
 
   describe('transitions with CODE_ACCEPTED to enabled when in editMode', () => {
     const editModeMachineStates = ['confirm'];
-    editModeMachineStates.forEach((machineState) => {
+    editModeMachineStates.forEach(machineState => {
       it(`for ${machineState}`, () => {
         const nextState = handleTransition({
           state: { machineState, editMode: true },

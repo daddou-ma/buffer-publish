@@ -10,10 +10,11 @@ export default connect(
     translations: state.i18n.translations['close-composer-confirmation-modal'],
   }),
   dispatch => ({
-    onCloseComposerModal: () => dispatch(modalsActions.hideCloseComposerConfirmationModal()),
-    onCloseComposerAndConfirmationModal:
-      () => dispatch(actions.closeComposerAndConfirmationModal()),
-  }),
+    onCloseComposerModal: () =>
+      dispatch(modalsActions.hideCloseComposerConfirmationModal()),
+    onCloseComposerAndConfirmationModal: () =>
+      dispatch(actions.closeComposerAndConfirmationModal()),
+  })
 )(CloseComposerConfirmationModal);
 
 export reducer, { actions, actionTypes } from './reducer';

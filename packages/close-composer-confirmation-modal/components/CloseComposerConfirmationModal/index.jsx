@@ -10,17 +10,21 @@ const CloseComposerConfirmationModal = ({
   onCloseComposerModal,
 }) => (
   <Modal
-    action={{ label: translations.sure, callback: onCloseComposerAndConfirmationModal }}
-    secondaryAction={{ label: translations.cancel, callback: onCloseComposerModal }}
+    action={{
+      label: translations.sure,
+      callback: onCloseComposerAndConfirmationModal,
+    }}
+    secondaryAction={{
+      label: translations.cancel,
+      callback: onCloseComposerModal,
+    }}
   >
-    <Styles.ModalBody type="p">
-      {translations.text}
-    </Styles.ModalBody>
+    <Styles.ModalBody type="p">{translations.text}</Styles.ModalBody>
   </Modal>
 );
 
 CloseComposerConfirmationModal.propTypes = {
-  translations: PropTypes.object.isRequired,  // eslint-disable-line
+  translations: PropTypes.object.isRequired, // eslint-disable-line
   onCloseComposerAndConfirmationModal: PropTypes.func.isRequired,
   onCloseComposerModal: PropTypes.func.isRequired,
 };

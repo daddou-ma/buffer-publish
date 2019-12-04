@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
-import { getDateString, isInThePast } from '@bufferapp/publish-server/formatters/src';
+import {
+  getDateString,
+  isInThePast,
+} from '@bufferapp/publish-server/formatters/src';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
 import { actions } from './reducer';
@@ -18,14 +21,19 @@ const getPostActionString = ({
       isPastDue,
       twentyFourHourTime,
     });
-    return `This ${isDraftsView ? 'draft' : 'post'} ${isPastDue ? 'was' : 'will be'}
-      scheduled for ${dateString}${isPastDue ? '' : ' on approval'
-}.`;
+    return `This ${isDraftsView ? 'draft' : 'post'} ${
+      isPastDue ? 'was' : 'will be'
+    }
+      scheduled for ${dateString}${isPastDue ? '' : ' on approval'}.`;
   } else if (draft.sharedNext) {
-    return `This ${isDraftsView ? 'draft' : 'post'} will be added to the top of the queue on approval.`;
+    return `This ${
+      isDraftsView ? 'draft' : 'post'
+    } will be added to the top of the queue on approval.`;
   }
 
-  return `This ${isDraftsView ? 'draft' : 'post'} will be added to the queue on approval.`;
+  return `This ${
+    isDraftsView ? 'draft' : 'post'
+  } will be added to the queue on approval.`;
 };
 
 const getDraftDetails = ({
@@ -61,7 +69,8 @@ const getDraftDetails = ({
     }),
     isRetweet: draft.retweet !== undefined,
     commentText: draft.commentText,
-    hasCommentEnabled: servicesWithCommentFeature.indexOf(draft.profile_service) !== -1,
+    hasCommentEnabled:
+      servicesWithCommentFeature.indexOf(draft.profile_service) !== -1,
     shopgridLink: draft.shopgridLink,
   };
 };
@@ -71,19 +80,24 @@ const formatPostLists = (profile, drafts, user, tabId) => {
   const profileTimezone = profile.timezone;
   const { isManager } = profile;
   const twentyFourHourTime = user.twentyfour_hour_time;
-  const orderedDrafts = Object.values(drafts).sort((a, b) => a.createdAt - b.createdAt);
+  const orderedDrafts = Object.values(drafts).sort(
+    (a, b) => a.createdAt - b.createdAt
+  );
 
   // Drafts tab only displays drafts that don't need approval.
   // Approval tabs only display drafts that need approval.
   const isDraftsView = tabId === 'drafts';
-  const draftsList = orderedDrafts.filter(draft => draft.needsApproval !== isDraftsView);
+  const draftsList = orderedDrafts.filter(
+    draft => draft.needsApproval !== isDraftsView
+  );
   const typeOfTab = isDraftsView ? 'drafts' : 'approval';
 
   return draftsList.reduce((acc, draft, index) => {
     const isPastDue = isInThePast(draft.scheduled_at);
     acc.push({
       queueItemType: 'post',
-      hasPermission: isManager || (user.id === (draft.user? draft.user.id : draft.id)),
+      hasPermission:
+        isManager || user.id === (draft.user ? draft.user.id : draft.id),
       role: profile.organizationRole,
       manager: isManager,
       draftDetails: getDraftDetails({
@@ -113,7 +127,7 @@ export default connect(
           state.profileSidebar.selectedProfile,
           currentProfile.drafts,
           state.appSidebar.user,
-          tabId,
+          tabId
         ),
         loading: currentProfile.loading,
         loadingMore: currentProfile.loadingMore,
@@ -126,60 +140,62 @@ export default connect(
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         canStartBusinessTrial: state.drafts.canStartBusinessTrial,
-        hasFirstCommentFlip: state.appSidebar.user.features ? state.appSidebar.user.features.includes('first_comment') : false,
+        hasFirstCommentFlip: state.appSidebar.user.features
+          ? state.appSidebar.user.features.includes('first_comment')
+          : false,
       };
     }
     return {};
   },
   (dispatch, ownProps) => ({
-    onApproveClick: (draft) => {
+    onApproveClick: draft => {
       dispatch(
         actions.handleApproveClick({
           draft: draft.draft,
           profileId: ownProps.profileId,
-        }),
+        })
       );
     },
-    onRequestApprovalClick: (draft) => {
+    onRequestApprovalClick: draft => {
       dispatch(
         actions.handleRequestApprovalClick({
           draft: draft.draft,
           profileId: ownProps.profileId,
           needsApproval: true,
-        }),
+        })
       );
     },
-    onMoveToDraftsClick: (draft) => {
+    onMoveToDraftsClick: draft => {
       dispatch(
         actions.handleRequestApprovalClick({
           draft: draft.draft,
           profileId: ownProps.profileId,
           needsApproval: false,
-        }),
+        })
       );
     },
-    onRescheduleClick: (draft) => {
+    onRescheduleClick: draft => {
       dispatch(
         actions.handleRescheduleClick({
           draft: draft.draft,
           profileId: ownProps.profileId,
-        }),
+        })
       );
     },
-    onEditClick: (draft) => {
+    onEditClick: draft => {
       dispatch(
         actions.handleEditClick({
           draft: draft.draft,
           profileId: ownProps.profileId,
-        }),
+        })
       );
     },
-    onDeleteConfirmClick: (draft) => {
+    onDeleteConfirmClick: draft => {
       dispatch(
         actions.handleDeleteConfirmClick({
           draft: draft.draft,
           profileId: ownProps.profileId,
-        }),
+        })
       );
     },
     onComposerPlaceholderClick: () => {
@@ -188,34 +204,42 @@ export default connect(
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
     },
-    onImageClick: (draft) => {
-      dispatch(actions.handleImageClick({
-        draft: draft.draft,
-        profileId: ownProps.profileId,
-      }));
+    onImageClick: draft => {
+      dispatch(
+        actions.handleImageClick({
+          draft: draft.draft,
+          profileId: ownProps.profileId,
+        })
+      );
     },
-    onImageClose: (draft) => {
-      dispatch(actions.handleImageClose({
-        draft: draft.draft,
-        profileId: ownProps.profileId,
-      }));
+    onImageClose: draft => {
+      dispatch(
+        actions.handleImageClose({
+          draft: draft.draft,
+          profileId: ownProps.profileId,
+        })
+      );
     },
-    onImageClickNext: (draft) => {
-      dispatch(actions.handleImageClickNext({
-        draft: draft.draft,
-        profileId: ownProps.profileId,
-      }));
+    onImageClickNext: draft => {
+      dispatch(
+        actions.handleImageClickNext({
+          draft: draft.draft,
+          profileId: ownProps.profileId,
+        })
+      );
     },
-    onImageClickPrev: (draft) => {
-      dispatch(actions.handleImageClickPrev({
-        draft: draft.draft,
-        profileId: ownProps.profileId,
-      }));
+    onImageClickPrev: draft => {
+      dispatch(
+        actions.handleImageClickPrev({
+          draft: draft.draft,
+          profileId: ownProps.profileId,
+        })
+      );
     },
     onComposerOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
-  }),
+  })
 )(DraftList);
 
 // export reducer, actions and action types

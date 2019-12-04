@@ -1,7 +1,7 @@
 /* Unshortenedlinks are annotated with UNSHORTENED_LINK entities */
 
 const unshortenedLinkStrategy = (contentBlock, callback, contentState) => {
-  contentBlock.findEntityRanges((character) => {
+  contentBlock.findEntityRanges(character => {
     const entityKey = character.getEntity();
     return (
       entityKey !== null &&

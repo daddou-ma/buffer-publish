@@ -23,7 +23,7 @@ const sendFavicon = (req, res, contentType, isProduction) => {
       res.setHeader('Cache-Control', 'public, max-age=31536000');
       res.setHeader(
         'Expires',
-        new Date(Date.now() + 31536000000).toUTCString(),
+        new Date(Date.now() + 31536000000).toUTCString()
       );
     }
     res.set('Content-Type', contentType);
@@ -35,9 +35,9 @@ const sendFavicon = (req, res, contentType, isProduction) => {
 };
 
 const setupFaviconRoutes = (app, isProduction) => {
-  resources.forEach((resource) => {
+  resources.forEach(resource => {
     app.get(resource.path, (req, res) =>
-      sendFavicon(req, res, resource.contentType, isProduction),
+      sendFavicon(req, res, resource.contentType, isProduction)
     );
   });
 };

@@ -15,19 +15,23 @@ export default connect(
   }),
   dispatch => ({
     closeFeedbackModal() {
-      dispatch(actions.closeFeedbackModal({
-        source: 'app-switcher',
-      }));
+      dispatch(
+        actions.closeFeedbackModal({
+          source: 'app-switcher',
+        })
+      );
     },
     displayFeedbackModal() {
-      dispatch(actions.displayFeedbackModal({
-        source: 'app-switcher',
-      }));
+      dispatch(
+        actions.displayFeedbackModal({
+          source: 'app-switcher',
+        })
+      );
     },
-    sendFeedback({feedback, source}) {
+    sendFeedback({ feedback, source }) {
       dispatch(actions.sendFeedback({ feedback, source }));
     },
-  }),
+  })
 )(AppSwitcher);
 
 export reducer, { actions, actionTypes } from './reducer';

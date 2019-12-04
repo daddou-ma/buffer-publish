@@ -13,16 +13,21 @@ const session = {
 };
 
 const startProTrial = source =>
-  RPCEndpoint.fn({
-    source,
-    plan: 'pro',
-  }, { session });
+  RPCEndpoint.fn(
+    {
+      source,
+      plan: 'pro',
+    },
+    { session }
+  );
 
 describe('rpc/startTrial', () => {
   it('it sends the correct cta for specific trial paths', () => {
     rp.mockReturnValueOnce(Promise.resolve({}));
     startProTrial('queue_limit');
-    expect(rp.mock.calls[rp.mock.calls.length - 1][0].qs.cta).toBe(SEGMENT_NAMES.QUEUE_LIMIT_PRO_TRIAL);
+    expect(rp.mock.calls[rp.mock.calls.length - 1][0].qs.cta).toBe(
+      SEGMENT_NAMES.QUEUE_LIMIT_PRO_TRIAL
+    );
   });
 
   // it('it sends null for empty sources', () => {

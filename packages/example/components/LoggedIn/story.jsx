@@ -11,13 +11,8 @@ const translations = {
 storiesOf('LoggedIn', module)
   .addDecorator(withA11y)
   .add('should show user is logged in', () => (
-    <LoggedIn
-      translations={translations}
-      loggedIn
-    />
+    <LoggedIn translations={translations} loggedIn />
   ))
   .add('should show user is not logged in', () => (
-    <LoggedIn
-      translations={translations}
-    />
+    <LoggedIn translations={translations} />
   ));

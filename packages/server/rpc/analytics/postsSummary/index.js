@@ -41,7 +41,9 @@ const requestPostsSummary = (
   rp({
     uri: `${analyzeApiAddr}/metrics/post_totals`,
     method: 'POST',
-    strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
+    strictSSL: !(
+      process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+    ),
     qs: {
       access_token: accessToken,
       start_date: dateRange.start,
@@ -51,12 +53,13 @@ const requestPostsSummary = (
     json: true,
   });
 
-const filterMetrics = metrics => metrics.filter(metric => metric.label !== undefined);
+const filterMetrics = metrics =>
+  metrics.filter(metric => metric.label !== undefined);
 
-const sortMetrics = (metrics, profileService) => Object.values(LABELS[profileService]).map(
-  label => metrics.find(metric => metric.label === label),
-);
-
+const sortMetrics = (metrics, profileService) =>
+  Object.values(LABELS[profileService]).map(label =>
+    metrics.find(metric => metric.label === label)
+  );
 
 const percentageDifference = (value, pastValue) => {
   const difference = value - pastValue;
@@ -95,15 +98,23 @@ module.exports = method(
       req.app.get('analyzeApiAddr')
     );
 
-    return Promise
-      .all([currentPeriod, previousPeriod])
-      .then((response) => {
-        const currentPeriodResult = response[0].response;
-        const pastPeriodResult = response[1].response;
-        const metrics = Object.keys(currentPeriodResult);
-        return sortMetrics(filterMetrics(metrics.map(metric =>
-          summarize(metric, currentPeriodResult, pastPeriodResult, profileService),
-        )), profileService);
-      })
-  },
+    return Promise.all([currentPeriod, previousPeriod]).then(response => {
+      const currentPeriodResult = response[0].response;
+      const pastPeriodResult = response[1].response;
+      const metrics = Object.keys(currentPeriodResult);
+      return sortMetrics(
+        filterMetrics(
+          metrics.map(metric =>
+            summarize(
+              metric,
+              currentPeriodResult,
+              pastPeriodResult,
+              profileService
+            )
+          )
+        ),
+        profileService
+      );
+    });
+  }
 );

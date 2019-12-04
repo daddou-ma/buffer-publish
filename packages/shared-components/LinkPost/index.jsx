@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  Image,
-  Link,
-  LinkifiedText,
-  Text,
-} from '@bufferapp/components';
+import { Card, Image, Link, LinkifiedText, Text } from '@bufferapp/components';
 import Post from '../Post';
 
 const postContentStyle = {
@@ -38,7 +32,6 @@ const linkUrlStyle = {
   color: 'rgba(50, 59, 67, 0.3)',
   margin: '0.25rem 1rem 1rem 0',
 };
-
 
 const LinkPost = ({
   isConfirmingDelete,
@@ -80,35 +73,26 @@ const LinkPost = ({
   const children = (
     <div style={postContentStyle}>
       <div style={postContentTextStyle}>
-        {basic
-          ? (
-            <Text
-              color="black"
-              size="mini"
-              whitespace="pre-wrap"
-            >
-              {text}
-            </Text>
-          )
-          : (
-            <LinkifiedText
-              color="black"
-              links={links}
-              size="mini"
-              whitespace="pre-wrap"
-              newTab
-              unstyled
-            >
-              {text}
-            </LinkifiedText>
-          )
-        }
+        {basic ? (
+          <Text color="black" size="mini" whitespace="pre-wrap">
+            {text}
+          </Text>
+        ) : (
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            whitespace="pre-wrap"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        )}
       </div>
       <div>
         <Link href={linkAttachment.url} unstyled newTab>
-          <Card
-            noPadding
-          >
+          <Card noPadding>
             <div style={linkAttachmentContentStyle}>
               <Image
                 src={linkAttachment.thumbnailUrl}
@@ -121,9 +105,7 @@ const LinkPost = ({
               />
               <div style={linkAttachmentTextStyle}>
                 <div>
-                  <Text>
-                    {linkAttachment.title}
-                  </Text>
+                  <Text>{linkAttachment.title}</Text>
                 </div>
                 <div style={linkUrlStyle}>
                   <Text size="small" color="outerSpaceLight">
@@ -131,9 +113,7 @@ const LinkPost = ({
                   </Text>
                 </div>
                 <div>
-                  <Text size="small">
-                    {linkAttachment.description}
-                  </Text>
+                  <Text size="small">{linkAttachment.description}</Text>
                 </div>
               </div>
             </div>
@@ -194,7 +174,7 @@ LinkPost.propTypes = {
       displayString: PropTypes.string,
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
-    }),
+    })
   ).isRequired,
   linkAttachment: PropTypes.shape({
     title: PropTypes.string,

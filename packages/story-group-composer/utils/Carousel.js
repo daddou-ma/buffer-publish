@@ -1,11 +1,9 @@
-
 // TO-DO: Add tests for methods
-export const sortCards = cards => (
+export const sortCards = cards =>
   cards.sort((a, b) => {
     if (a.order > b.order) return 1;
     return -1;
-  })
-);
+  });
 
 export const getCardsToShow = ({ cards = [], totalCardsToShow }) => {
   const cardList = [];
@@ -26,7 +24,7 @@ export const getCardsToShow = ({ cards = [], totalCardsToShow }) => {
   return cardList;
 };
 
-export const getShortString = (string) => {
+export const getShortString = string => {
   if (string.length > 20) {
     string = `${string.substring(0, 20)}...`;
   }

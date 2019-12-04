@@ -2,9 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import {
-  reducer as formReducer,
-} from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 import {
   ConnectedRouter as Router,
   connectRouter,
@@ -21,21 +19,21 @@ import {
   timezones,
 } from './settingsData';
 
-
 const history = createHistory();
-const store = createStore(combineReducers({ form: formReducer, router: connectRouter(history) }));
+const store = createStore(
+  combineReducers({ form: formReducer, router: connectRouter(history) })
+);
 
-const avatarUrl = 'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f00002e/f49c2ff693f1c307af5e1b3d84e581ca.png';
+const avatarUrl =
+  'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f00002e/f49c2ff693f1c307af5e1b3d84e581ca.png';
 
 storiesOf('PostingSchedule', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
+  .addDecorator(getStory => (
     <Provider store={store}>
-      <Router history={history}>
-        {getStory()}
-      </Router>
-    </Provider>,
-  )
+      <Router history={history}>{getStory()}</Router>
+    </Provider>
+  ))
   .add('default', () => (
     <PostingSchedule
       isManager

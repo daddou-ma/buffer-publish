@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  Image,
-  Link,
-  LinkifiedText,
-  Text,
-} from '@bufferapp/components';
+import { Card, Image, Link, LinkifiedText, Text } from '@bufferapp/components';
 import Draft from '../Draft';
 
 const postContentStyle = {
@@ -39,7 +33,6 @@ const linkUrlStyle = {
   margin: '0.25rem 1rem 1rem 0',
 };
 
-
 const LinkDraft = ({
   hasPermission,
   isConfirmingDelete,
@@ -69,30 +62,25 @@ const LinkDraft = ({
   const children = (
     <div style={postContentStyle}>
       <div style={postContentTextStyle}>
-        {basic
-          ? (
-            <Text color="black" size="mini">
-              {text}
-            </Text>
-          )
-          : (
-            <LinkifiedText
-              color="black"
-              links={links}
-              size="mini"
-              newTab
-              unstyled
-            >
-              {text}
-            </LinkifiedText>
-          )
-        }
+        {basic ? (
+          <Text color="black" size="mini">
+            {text}
+          </Text>
+        ) : (
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        )}
       </div>
       <div>
         <Link href={linkAttachment.url} unstyled newTab>
-          <Card
-            noPadding
-          >
+          <Card noPadding>
             <div style={linkAttachmentContentStyle}>
               <Image
                 src={linkAttachment.thumbnailUrl}
@@ -105,9 +93,7 @@ const LinkDraft = ({
               />
               <div style={linkAttachmentTextStyle}>
                 <div>
-                  <Text>
-                    {linkAttachment.title}
-                  </Text>
+                  <Text>{linkAttachment.title}</Text>
                 </div>
                 <div style={linkUrlStyle}>
                   <Text size="small" color="outerSpaceLight">
@@ -115,9 +101,7 @@ const LinkDraft = ({
                   </Text>
                 </div>
                 <div>
-                  <Text size="small">
-                    {linkAttachment.description}
-                  </Text>
+                  <Text size="small">{linkAttachment.description}</Text>
                 </div>
               </div>
             </div>
@@ -166,7 +150,7 @@ LinkDraft.propTypes = {
       displayString: PropTypes.string,
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
-    }),
+    })
   ).isRequired,
   linkAttachment: PropTypes.shape({
     title: PropTypes.string,

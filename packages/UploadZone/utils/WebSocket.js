@@ -18,11 +18,11 @@ class WebSocket {
   hasWebSocketConnectionOpen = false;
 
   init = ({ userId, notifiers, appEnvironment }) => {
-    this.rebind({ userId, notifiers, appEnvironment: false, });
+    this.rebind({ userId, notifiers, appEnvironment: false });
   };
 
-  configureEventHandlers = (notifiers) => {
-    const handleTranscodedVideo = (data) => {
+  configureEventHandlers = notifiers => {
+    const handleTranscodedVideo = data => {
       notifiers.videoProcessed({
         uploadId: data.upload_id,
         name: data.media.video.title,
@@ -38,7 +38,11 @@ class WebSocket {
       });
     };
 
-    const handleCreatedProfileGroup = ({id, name, profile_ids: profileIds}) => {
+    const handleCreatedProfileGroup = ({
+      id,
+      name,
+      profile_ids: profileIds,
+    }) => {
       notifiers.profileGroupCreated({
         id,
         name,
@@ -46,7 +50,11 @@ class WebSocket {
       });
     };
 
-    const handleEditedProfileGroup = ({id, name, profile_ids: profileIds}) => {
+    const handleEditedProfileGroup = ({
+      id,
+      name,
+      profile_ids: profileIds,
+    }) => {
       notifiers.profileGroupUpdated({
         id,
         name,
@@ -54,7 +62,7 @@ class WebSocket {
       });
     };
 
-    const handleDeletedProfileGroup = ({id}) => {
+    const handleDeletedProfileGroup = ({ id }) => {
       notifiers.profileGroupDeleted({
         id,
       });
@@ -89,11 +97,13 @@ class WebSocket {
     }
 
     const pusherInstance = pusher.subscribe(`private-updates-${userId}`);
-    this.eventHandlers.forEach((handler, event) => pusherInstance.bind(event, handler));
+    this.eventHandlers.forEach((handler, event) =>
+      pusherInstance.bind(event, handler)
+    );
     this.hasWebSocketConnectionOpen = true;
   };
 
-  cleanUp = (appEnvironment) => {
+  cleanUp = appEnvironment => {
     const isDashboardEnv = appEnvironment === AppEnvironments.WEB_DASHBOARD;
     let pusherInstance;
 
@@ -106,7 +116,9 @@ class WebSocket {
     }
 
     if (pusherInstance && this.eventHandlers) {
-      this.eventHandlers.forEach((handler, event) => pusherInstance.unbind(event, handler));
+      this.eventHandlers.forEach((handler, event) =>
+        pusherInstance.unbind(event, handler)
+      );
     }
   };
 }

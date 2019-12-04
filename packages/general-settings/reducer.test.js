@@ -18,8 +18,7 @@ describe('reducer', () => {
       type: 'INIT',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle SELECT_PROFILE action type', () => {
@@ -35,7 +34,8 @@ describe('reducer', () => {
       remindersAreEnabled: false,
       showModal: false,
       profileName: 'buffer123',
-      avatarUrl: 'https://pbs.twimg.com/profile_images/901516345476603904/e2F5vE32_normal.jpg',
+      avatarUrl:
+        'https://pbs.twimg.com/profile_images/901516345476603904/e2F5vE32_normal.jpg',
       loadingShuffle: false,
     };
     const action = {
@@ -46,13 +46,13 @@ describe('reducer', () => {
         service: 'twitter',
         directPostingEnabled: true,
         serviceUsername: 'buffer123',
-        avatarUrl: 'https://pbs.twimg.com/profile_images/901516345476603904/e2F5vE32_normal.jpg',
+        avatarUrl:
+          'https://pbs.twimg.com/profile_images/901516345476603904/e2F5vE32_normal.jpg',
         loadingShuffle: false,
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should SHOW_GA_CUSTOMIZATION_FORM', () => {
@@ -72,8 +72,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should toggle GA FETCH_SUCCESS action type', () => {
@@ -93,8 +92,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should save GA Tracking settings', () => {
@@ -115,8 +113,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should get GA Tracking settings', () => {
@@ -146,8 +143,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should set utm campaign value', () => {
@@ -168,8 +164,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should set utm source value', () => {
@@ -190,8 +185,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should set utm medium value', () => {
@@ -212,8 +206,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
   it('should set loading to false when fetch is success', () => {
     const action = {

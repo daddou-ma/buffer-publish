@@ -34,7 +34,7 @@ describe('middleware', () => {
     middleware(store)(next)(reconnectTwitterAction);
     expect(next).toBeCalled();
     expect(window.location.assign).toHaveBeenCalledWith(
-      'https://local.buffer.com/oauth/reconnect/twitter-id',
+      'https://local.buffer.com/oauth/reconnect/twitter-id'
     );
   });
 
@@ -42,13 +42,17 @@ describe('middleware', () => {
     // This code ensures that we call the img.onerror right away for the sake of testing
     // (see the code in profiles-disconnected-modal/middleware.js)
     Object.defineProperty(global.Image.prototype, 'src', {
-      set() { if (this.onerror) { this.onerror(); } },
+      set() {
+        if (this.onerror) {
+          this.onerror();
+        }
+      },
     });
 
     middleware(store)(next)(reconnectInstagramAction);
     expect(next).toBeCalled();
     expect(window.location.assign).toHaveBeenCalledWith(
-      'https://local.buffer.com/oauth/reconnect/instagram-id',
+      'https://local.buffer.com/oauth/reconnect/instagram-id'
     );
   });
 });

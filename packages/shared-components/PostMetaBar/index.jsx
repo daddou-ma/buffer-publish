@@ -18,7 +18,7 @@ const getPostMetaBarStyle = (dragging, isSent) => ({
 const getImageWrapperStyle = avatarUrl => ({
   padding: avatarUrl ? '0 0.5rem' : '0 0.1rem',
   display: 'flex',
-  justifyContent: 'center', /* align horizontal */
+  justifyContent: 'center' /* align horizontal */,
 });
 
 const leftContentStyle = {
@@ -27,27 +27,17 @@ const leftContentStyle = {
   alignItems: 'center',
 };
 
-
 const renderLeftContent = leftContent => (
   <span style={leftContentStyle}>
-    <Text
-      size={'small'}
-      color={'black'}
-    >
+    <Text size={'small'} color={'black'}>
       {leftContent.title}
     </Text>
     <div style={getImageWrapperStyle(leftContent.avatarUrl)}>
-      { leftContent.avatarUrl &&
-        <Image
-          height="1.3rem"
-          src={leftContent.avatarUrl}
-        />
-      }
+      {leftContent.avatarUrl && (
+        <Image height="1.3rem" src={leftContent.avatarUrl} />
+      )}
     </div>
-    <Text
-      size={'small'}
-      color={'black'}
-    >
+    <Text size={'small'} color={'black'}>
       {leftContent.text}
     </Text>
   </span>
@@ -56,16 +46,13 @@ const renderLeftContent = leftContent => (
 const PostMetaBar = ({ leftContent, rightContent, dragging, isSent }) => (
   <div style={getPostMetaBarStyle(dragging, isSent)}>
     {renderLeftContent(leftContent)}
-    {rightContent &&
+    {rightContent && (
       <span>
-        <Text
-          size={'small'}
-          color={'black'}
-        >
+        <Text size={'small'} color={'black'}>
           {rightContent.title} {rightContent.text}
         </Text>
       </span>
-    }
+    )}
   </div>
 );
 

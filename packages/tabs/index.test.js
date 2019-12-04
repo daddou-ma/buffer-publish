@@ -52,10 +52,7 @@ describe('TabNavigation', () => {
   it('should render', () => {
     const wrapper = mount(
       <Provider store={store}>
-        <TabNavigation
-          profileId="id"
-          tabId="drafts"
-        />
+        <TabNavigation profileId="id" tabId="drafts" />
       </Provider>
     );
     expect(wrapper.find(TabNavigation).length).toBe(1);

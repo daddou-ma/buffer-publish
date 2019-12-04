@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-  Image,
-} from '@bufferapp/components';
+import { Text, Image } from '@bufferapp/components';
 
-const EmptyState = ({ title, subtitle, emoji, heroImg, heroImgSize, height }) => {
+const EmptyState = ({
+  title,
+  subtitle,
+  emoji,
+  heroImg,
+  heroImgSize,
+  height,
+}) => {
   const containerStyle = {
     textAlign: 'center',
     width: '700px',
@@ -23,7 +27,6 @@ const EmptyState = ({ title, subtitle, emoji, heroImg, heroImgSize, height }) =>
     width: '100%',
   };
 
-
   const subtitleStyle = {
     display: 'inline-block',
     width: '500px',
@@ -32,24 +35,28 @@ const EmptyState = ({ title, subtitle, emoji, heroImg, heroImgSize, height }) =>
   return (
     <div style={wrapperStyle}>
       <div style={containerStyle}>
-        {emoji &&
-          <Text size={'extra-large'}>
-            {emoji}
-          </Text>}
-        {heroImg &&
-          <Image marginBottom="1.5rem" alt="" src={heroImg} width={heroImgSize.width} height={heroImgSize.height} />}
-        {title &&
+        {emoji && <Text size={'extra-large'}>{emoji}</Text>}
+        {heroImg && (
+          <Image
+            marginBottom="1.5rem"
+            alt=""
+            src={heroImg}
+            width={heroImgSize.width}
+            height={heroImgSize.height}
+          />
+        )}
+        {title && (
           <div style={headerStyle}>
             <Text size="large" weight="bold">
               {title}
             </Text>
-          </div>}
-        {subtitle &&
+          </div>
+        )}
+        {subtitle && (
           <div style={subtitleStyle}>
-            <Text>
-              {subtitle}
-            </Text>
-          </div>}
+            <Text>{subtitle}</Text>
+          </div>
+        )}
       </div>
     </div>
   );

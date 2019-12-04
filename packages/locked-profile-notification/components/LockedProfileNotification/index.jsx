@@ -28,34 +28,30 @@ const renderParagraph = ({ type, profileLimit }, paragraph) => {
 
   switch (type) {
     case 'teamMember':
-      paragraphText = isFirstParagraph ?
-      'Sorry, it looks like the owner of this social account has downgraded from a higher plan.' :
-      'We’re keeping this account safe and sound until they’re ready to return!';
+      paragraphText = isFirstParagraph
+        ? 'Sorry, it looks like the owner of this social account has downgraded from a higher plan.'
+        : 'We’re keeping this account safe and sound until they’re ready to return!';
       break;
     case 'free':
-      paragraphText = isFirstParagraph ?
-      `This social account is locked because you’re over your plan limit on the Free Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.` :
-      'To unlock your social accounts and manage up to 8 accounts, please consider upgrading to our Pro Plan.';
+      paragraphText = isFirstParagraph
+        ? `This social account is locked because you’re over your plan limit on the Free Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.`
+        : 'To unlock your social accounts and manage up to 8 accounts, please consider upgrading to our Pro Plan.';
       break;
     case 'pro':
-      paragraphText = isFirstParagraph ?
-      `This social account is locked because you’re over your plan limit on the Pro Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.` :
-      'To unlock your social accounts and manage up to 150 accounts, please consider upgrading to one of our Business Plans.';
+      paragraphText = isFirstParagraph
+        ? `This social account is locked because you’re over your plan limit on the Pro Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.`
+        : 'To unlock your social accounts and manage up to 150 accounts, please consider upgrading to one of our Business Plans.';
       break;
     case 'business':
-      paragraphText = isFirstParagraph ?
-      `This social account is locked because you’re over your plan limit on your Business Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.` :
-      'To unlock your social accounts, please consider upgrading to a higher Plan.';
+      paragraphText = isFirstParagraph
+        ? `This social account is locked because you’re over your plan limit on your Business Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.`
+        : 'To unlock your social accounts, please consider upgrading to a higher Plan.';
       break;
     default:
       return;
   }
 
-  return (
-    <Text type="p">
-      {paragraphText}
-    </Text>
-  );
+  return <Text type="p">{paragraphText}</Text>;
 };
 
 const renderButton = ({ type, onClickUpgrade }) => {
@@ -80,7 +76,7 @@ const renderButton = ({ type, onClickUpgrade }) => {
   return (
     <Button
       type="primary"
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault();
         onClickUpgrade(type);
       }}
@@ -116,17 +112,11 @@ const LockedProfileNotification = ({
         <span style={iconStyle}>
           <WarningIcon />
         </span>
-        <Text
-          type="h3"
-        >
-          Whoops, this social account is locked
-        </Text>
+        <Text type="h3">Whoops, this social account is locked</Text>
       </div>
-      { renderParagraph({ type, profileLimit }, 'firstParagraph')}
-      { renderParagraph({ type }, 'secondParagraph') }
-      <form style={formStyle}>
-        { renderButton({ type, onClickUpgrade }) }
-      </form>
+      {renderParagraph({ type, profileLimit }, 'firstParagraph')}
+      {renderParagraph({ type }, 'secondParagraph')}
+      <form style={formStyle}>{renderButton({ type, onClickUpgrade })}</form>
     </Card>
   );
 };

@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  LinkifiedText,
-  Text,
-} from '@bufferapp/components';
+import { LinkifiedText, Text } from '@bufferapp/components';
 import Draft from '../Draft';
 
 const postContentStyle = {
@@ -44,23 +41,13 @@ const TextDraft = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic
-          ? (
-            <Text size="mini">
-              {text}
-            </Text>
-          )
-          : (
-            <LinkifiedText
-              links={links}
-              size="mini"
-              newTab
-              unstyled
-            >
-              {text}
-            </LinkifiedText>
-          )
-        }
+        {basic ? (
+          <Text size="mini">{text}</Text>
+        ) : (
+          <LinkifiedText links={links} size="mini" newTab unstyled>
+            {text}
+          </LinkifiedText>
+        )}
       </span>
     </div>
   );
@@ -105,7 +92,7 @@ TextDraft.propTypes = {
       displayString: PropTypes.string,
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
-    }),
+    })
   ).isRequired,
   retweetCommentLinks: PropTypes.arrayOf(
     PropTypes.shape({
@@ -113,7 +100,7 @@ TextDraft.propTypes = {
       displayString: PropTypes.string,
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
-    }),
+    })
   ),
   text: PropTypes.string.isRequired,
 };

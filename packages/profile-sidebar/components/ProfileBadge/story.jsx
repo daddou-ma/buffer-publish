@@ -10,5 +10,7 @@ const avatarUrl =
 const stories = storiesOf('ProfileBadge', module).addDecorator(withA11y);
 
 SERVICE_NAMES.forEach(service =>
-  stories.add(`${service}`, () => <ProfileBadge avatarUrl={avatarUrl} type={service} />),
+  stories.add(`${service}`, () => (
+    <ProfileBadge avatarUrl={avatarUrl} type={service} />
+  ))
 );

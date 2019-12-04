@@ -25,7 +25,11 @@ const addPrepopulatedMention = (editorState, contentBlock, indices) => {
     focusOffset: indices[1],
   });
 
-  let newContentState = Modifier.applyEntity(contentState, targetRange, entityKey);
+  let newContentState = Modifier.applyEntity(
+    contentState,
+    targetRange,
+    entityKey
+  );
 
   /**
    * Set selectionBefore/After back to what they were before they were changed

@@ -9,7 +9,7 @@
 import React from 'react';
 import CircularIndicator from './CircularIndicator';
 
-const CircularUploadIndicator = (props) => (
+const CircularUploadIndicator = props => (
   <CircularIndicator initialProgress={5} {...props} />
 );
 

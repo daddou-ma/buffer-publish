@@ -135,10 +135,7 @@ const renderPost = ({
 
   if (draggable) {
     return (
-      <div
-        style={calculateStyles(defaultStyle, hiddenStyle)}
-        key={post.id}
-      >
+      <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
         <PostDragWrapper
           id={post.id}
           index={index}
@@ -151,10 +148,7 @@ const renderPost = ({
   }
 
   return (
-    <div
-      style={calculateStyles(defaultStyle, hiddenStyle)}
-      key={post.id}
-    >
+    <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
       <PostComponent {...postWithEventHandlers} basic={basic} />
     </div>
   );
@@ -210,33 +204,29 @@ const renderDraft = ({
   };
 
   return (
-    <div
-      style={calculateStyles(defaultStyle, hiddenStyle)}
-      key={draft.id}
-    >
-      <ErrorBoundary fallbackComponent={() => <DraftComponent {...draftWithEventHandlers} basic />}>
+    <div style={calculateStyles(defaultStyle, hiddenStyle)} key={draft.id}>
+      <ErrorBoundary
+        fallbackComponent={() => (
+          <DraftComponent {...draftWithEventHandlers} basic />
+        )}
+      >
         <DraftComponent {...draftWithEventHandlers} />
       </ErrorBoundary>
     </div>
   );
 };
 
-const renderHeader = ({
-  text,
-  id,
-  dayOfWeek,
-  date,
-}) => (
+const renderHeader = ({ text, id, dayOfWeek, date }) => (
   <div style={listHeaderStyle} key={id}>
     <div style={headerTextStyle}>
-      {(dayOfWeek && date)
-        ? (
-          <React.Fragment>
-            <span style={headerTextDayOfWeekStyle}>{dayOfWeek}</span>
-            <span style={headerTextDateStyle}>{date}</span>
-          </React.Fragment>
-        ) : <span style={headerTextDayOfWeekStyle}>{text}</span>
-      }
+      {dayOfWeek && date ? (
+        <React.Fragment>
+          <span style={headerTextDayOfWeekStyle}>{dayOfWeek}</span>
+          <span style={headerTextDateStyle}>{date}</span>
+        </React.Fragment>
+      ) : (
+        <span style={headerTextDayOfWeekStyle}>{text}</span>
+      )}
     </div>
   </div>
 );
@@ -246,18 +236,20 @@ const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
     key={id}
     time="Add to Story"
     service="isStoryGroup"
-    onClick={() => onEmptySlotClick({
-      dueTime: slot.label,
-      profile_service: profileService,
-      scheduledAt: slot.timestamp,
-      due_at: slot.timestamp,
-    })}
+    onClick={() =>
+      onEmptySlotClick({
+        dueTime: slot.label,
+        profile_service: profileService,
+        scheduledAt: slot.timestamp,
+        due_at: slot.timestamp,
+      })
+    }
   />
 );
 
 /* eslint-enable react/prop-types */
 
-const QueueItems = (props) => {
+const QueueItems = props => {
   const { items, type, onEmptySlotClick, ...propsForPosts } = props;
   const itemList = items.map((item, index) => {
     const { queueItemType, ...rest } = item;
@@ -266,7 +258,12 @@ const QueueItems = (props) => {
         case 'drafts':
           return renderDraft({ draft: rest, ...propsForPosts });
         case 'stories':
-          return renderPost({ post: rest, index, isStory: true, ...propsForPosts });
+          return renderPost({
+            post: rest,
+            index,
+            isStory: true,
+            ...propsForPosts,
+          });
         default:
           return renderPost({ post: rest, index, ...propsForPosts });
       }
@@ -279,18 +276,14 @@ const QueueItems = (props) => {
     }
     return null;
   });
-  return (
-    <div>
-      {itemList}
-    </div>
-  );
+  return <div>{itemList}</div>;
 };
 
 QueueItems.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
-    }),
+    })
   ),
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,

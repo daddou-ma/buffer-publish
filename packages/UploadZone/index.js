@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import UploadZone from './components/UploadZone';
 
 // default export = container
-export default connect(
-  state => ({
-    translations: state.i18n.translations['upload-zone'],
-  }),
-)(UploadZone);
+export default connect(state => ({
+  translations: state.i18n.translations['upload-zone'],
+}))(UploadZone);

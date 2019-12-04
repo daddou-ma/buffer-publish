@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { Provider } from 'react-redux';
@@ -18,22 +16,29 @@ const store = storeFake({
   productFeatures: {
     planName: 'free',
     features: {},
-  }
+  },
 });
 
-const links = [{
-  rawString: 'http://buff.ly/1LTbUqv',
-  displayString: 'http://buff.ly/1LTbUqv',
-  url: 'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
-  indices: [74, 96],
-}];
-const multilineLinks = [{
-  ...links[0],
-  indices: [78, 100],
-}];
+const links = [
+  {
+    rawString: 'http://buff.ly/1LTbUqv',
+    displayString: 'http://buff.ly/1LTbUqv',
+    url:
+      'https://austinstartups.com/what-is-a-product-designer-who-cares-eb38fc7afa7b#.i3r34a75x',
+    indices: [74, 96],
+  },
+];
+const multilineLinks = [
+  {
+    ...links[0],
+    indices: [78, 100],
+  },
+];
 
-const text = 'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
-const multilineText = 'What is a Product Designer? \n\nAn awesome story by @jgadapee over on Medium! \n\nhttp://buff.ly/1LTbUqv';
+const text =
+  'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
+const multilineText =
+  'What is a Product Designer? \n\nAn awesome story by @jgadapee over on Medium! \n\nhttp://buff.ly/1LTbUqv';
 
 const postDetails = {
   isRetweet: false,
@@ -59,21 +64,19 @@ const postDetailsError = {
 const retweetProfile = {
   name: 'Joel Gascoigne',
   handle: '@joelgascoigne',
-  avatarUrl: 'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f00002e/f49c2ff693f1c307af5e1b3d84e581ca.png',
+  avatarUrl:
+    'https://buffer-uploads.s3.amazonaws.com/503a5c8ffc99f72a7f00002e/f49c2ff693f1c307af5e1b3d84e581ca.png',
 };
 
-const imageSrc = 'https://cdn-images-1.medium.com/max/2000/1*1Kua7bNJfvLlTxWqgxVKfw.jpeg';
+const imageSrc =
+  'https://cdn-images-1.medium.com/max/2000/1*1Kua7bNJfvLlTxWqgxVKfw.jpeg';
 const squareImage = 'http://via.placeholder.com/400x400';
 const tallImage = 'http://via.placeholder.com/400x900';
 const wideImage = 'http://via.placeholder.com/900x400';
 
 storiesOf('Cards|Posts/ImagePost', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
-    <Provider store={store}>
-      {getStory()}
-    </Provider>,
-  )
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('queued image post', () => (
     <ImagePost
       imageSrc={imageSrc}

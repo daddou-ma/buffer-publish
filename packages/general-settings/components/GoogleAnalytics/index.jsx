@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Toggle, Input, Card,
-} from '@bufferapp/components';
+import { Toggle, Input, Card } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
 import { Field, reduxForm } from 'redux-form';
 
@@ -81,116 +79,116 @@ const GoogleAnalytics = ({
   isManager,
   isBusinessAccount,
   features,
-
-  }) => (
-    <div style={googleAnalyticsWrapperStyle}>
-      <div style={headerTextWrapperStyle}>
-        <Text type="h3">
-          Google Analytics Campaign Tracking
+}) => (
+  <div style={googleAnalyticsWrapperStyle}>
+    <div style={headerTextWrapperStyle}>
+      <Text type="h3">Google Analytics Campaign Tracking</Text>
+    </div>
+    <div style={generalWrapperStyle}>
+      <div style={textStyle}>
+        <Text type="p">
+          With campaign tracking enabled in Buffer, you will be able to see how
+          much traffic you receive from social media posts directly inside your
+          Google Analytics dashboard. You can disable this below if you&rsquo;d
+          like.
         </Text>
       </div>
-      <div style={generalWrapperStyle}>
-        <div style={textStyle}>
+      <div style={rightContainerStyle} />
+    </div>
+    <div style={enableCampaignWrapperStyle}>
+      <div style={textStyle}>
+        <div style={headerTextWrapperStyle}>
           <Text type="p">
-            With campaign tracking enabled in Buffer, you will be able to see how much traffic
-            you receive from social media posts directly inside your Google Analytics dashboard. You
-            can disable this below if you&rsquo;d like.
+            <strong>Enable Campaign Tracking</strong>
           </Text>
         </div>
-        <div style={rightContainerStyle} />
-      </div>
-      <div style={enableCampaignWrapperStyle}>
-        <div style={textStyle}>
-          <div style={headerTextWrapperStyle}>
+        <div style={enableGoogleAnalyticsStyle}>
+          <Text type="p">
+            This enables Google Analytics Tracking via UTM parameters added to
+            links you share.
+          </Text>
+          <div>
             <Text type="p">
-              <strong>Enable Campaign Tracking</strong>
+              (This will override any existing UTM parameters)
             </Text>
           </div>
-          <div style={enableGoogleAnalyticsStyle}>
-            <Text type="p">
-              This enables Google Analytics Tracking via UTM parameters added to links you share.
-            </Text>
-            <div>
-              <Text type="p">
-                (This will override any existing UTM parameters)
-              </Text>
+        </div>
+      </div>
+      <div style={switchStyle}>
+        <Toggle
+          disabled={!isManager}
+          onText={'Enabled'}
+          offText={'Disabled'}
+          on={googleAnalyticsIsEnabled}
+          size={'small'}
+          onClick={() =>
+            onToggleGoogleAnalyticsClick(!googleAnalyticsIsEnabled)
+          }
+        />
+      </div>
+    </div>
+    {showGACustomizationForm && googleAnalyticsIsEnabled && (
+      <div>
+        <Card noBorder noPadding>
+          <form style={formWrapperStyle}>
+            <div style={inputStyle}>
+              <Text type="label">Campaign Name</Text>
+              <Field
+                name={'utmCampaign'}
+                component={Input}
+                type={'text'}
+                placeholder={'buffer'}
+                input={{
+                  value: utmCampaign,
+                  onChange: onChangeUtmCampaign,
+                }}
+              />
             </div>
-          </div>
-        </div>
-        <div style={switchStyle}>
-          <Toggle
-            disabled={!isManager}
-            onText={'Enabled'}
-            offText={'Disabled'}
-            on={googleAnalyticsIsEnabled}
-            size={'small'}
-            onClick={() => onToggleGoogleAnalyticsClick(!googleAnalyticsIsEnabled)}
-          />
-        </div>
+            <div style={inputStyle}>
+              <Text type="label">Campaign Source</Text>
+              <Input
+                type="text"
+                input={{
+                  value: utmSource,
+                  onChange: onChangeUtmSource,
+                }}
+                name={'utmSource'}
+                placeholder={'bufferapp.com'}
+              />
+            </div>
+            <div style={inputStyle}>
+              <Text type="label">Campaign Medium</Text>
+              <Input
+                type="text"
+                input={{
+                  value: utmMedium,
+                  onChange: onChangeUtmMedium,
+                }}
+                name={'utmMedium'}
+                placeholder={'social'}
+              />
+            </div>
+            <div style={saveChangesStyle}>
+              <Button
+                type="primary"
+                label="Update tracking"
+                onClick={e => {
+                  e.preventDefault();
+                  onSaveGATrackingSettingsClick(
+                    utmCampaign,
+                    utmSource,
+                    utmMedium
+                  );
+                }}
+              />
+            </div>
+          </form>
+        </Card>
       </div>
-      {showGACustomizationForm && googleAnalyticsIsEnabled &&
-        <div>
-          <Card noBorder noPadding>
-            <form style={formWrapperStyle}>
-              <div style={inputStyle}>
-                <Text type="label">
-                  Campaign Name
-                </Text>
-                <Field
-                  name={'utmCampaign'}
-                  component={Input}
-                  type={'text'}
-                  placeholder={'buffer'}
-                  input={{
-                    value: utmCampaign,
-                    onChange: onChangeUtmCampaign,
-                  }}
-                />
-              </div>
-              <div style={inputStyle}>
-                <Text type="label">
-                  Campaign Source
-                </Text>
-                <Input
-                  type="text"
-                  input={{
-                    value: utmSource,
-                    onChange: onChangeUtmSource,
-                  }}
-                  name={'utmSource'}
-                  placeholder={'bufferapp.com'}
-                />
-              </div>
-              <div style={inputStyle}>
-                <Text type="label">
-                  Campaign Medium
-                </Text>
-                <Input
-                  type="text"
-                  input={{
-                    value: utmMedium,
-                    onChange: onChangeUtmMedium,
-                  }}
-                  name={'utmMedium'}
-                  placeholder={'social'}
-                />
-              </div>
-              <div style={saveChangesStyle}>
-                <Button
-                  type="primary"
-                  label="Update tracking"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onSaveGATrackingSettingsClick(utmCampaign, utmSource, utmMedium);
-                  }}
-                />
-              </div>
-            </form>
-          </Card>
-        </div>
-      }
-      {!showGACustomizationForm && googleAnalyticsIsEnabled &&
-      (!features.isFreeUser() || (isBusinessAccount && isManager)) &&
+    )}
+    {!showGACustomizationForm &&
+      googleAnalyticsIsEnabled &&
+      (!features.isFreeUser() || (isBusinessAccount && isManager)) && (
         <div style={customizeButtonStyle}>
           <Button
             type="secondary"
@@ -198,8 +196,8 @@ const GoogleAnalytics = ({
             onClick={onShowGACustomizationFormClick}
           />
         </div>
-      }
-    </div>
+      )}
+  </div>
 );
 
 GoogleAnalytics.defaultProps = {

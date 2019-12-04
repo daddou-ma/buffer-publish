@@ -24,14 +24,9 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const EditNote = ({
-  onSaveNoteClick,
-  onCancelClick,
-  story,
-  translations,
-}) => {
+const EditNote = ({ onSaveNoteClick, onCancelClick, story, translations }) => {
   const [note, setNote] = useState(story.note || '');
-  const setNoteValue = (event) => {
+  const setNoteValue = event => {
     const { value } = event.target;
     setNote(value);
   };

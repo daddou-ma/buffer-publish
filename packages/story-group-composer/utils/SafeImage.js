@@ -2,11 +2,11 @@ import { ImageDimensions } from '@bufferapp/publish-constants';
 
 export const getSafeimageUrl = (url, width, height, fitImage = false) => {
   let safeImageUrl = 'https://safeimage.buffer.com/';
-  safeImageUrl += (`${width}x${height}`);
+  safeImageUrl += `${width}x${height}`;
   if (fitImage) {
     safeImageUrl += ',fit';
   }
-  safeImageUrl += (`/${url}`);
+  safeImageUrl += `/${url}`;
   return safeImageUrl;
 };
 

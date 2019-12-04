@@ -3,12 +3,7 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Button } from '@bufferapp/ui';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
-import CTABanner, {
-  reducer,
-  actions,
-  actionTypes,
-  middleware,
-} from './index';
+import CTABanner, { reducer, actions, actionTypes, middleware } from './index';
 import BillingUpdateCTABanner from './components/BillingUpgradeCTABanner';
 
 describe('CtaBanner', () => {
@@ -37,7 +32,8 @@ describe('CtaBanner', () => {
         },
         i18n: {
           translations: {
-            'billing-upgrade-cta-banner': translations['billing-upgrade-cta-banner'],
+            'billing-upgrade-cta-banner':
+              translations['billing-upgrade-cta-banner'],
           },
         },
         productFeatures: {
@@ -51,10 +47,9 @@ describe('CtaBanner', () => {
       const wrapper = mount(
         <Provider store={store}>
           <CTABanner />
-        </Provider>,
+        </Provider>
       );
-      expect(wrapper.find(BillingUpdateCTABanner).length)
-        .toBe(1);
+      expect(wrapper.find(BillingUpdateCTABanner).length).toBe(1);
       wrapper.unmount();
     });
 
@@ -62,35 +57,36 @@ describe('CtaBanner', () => {
       const wrapper = mount(
         <Provider store={store}>
           <CTABanner />
-        </Provider>,
+        </Provider>
       );
 
       // User clicks to start subscription in the trial banner
-      wrapper.find(BillingUpdateCTABanner).find(Button).at(0)
+      wrapper
+        .find(BillingUpdateCTABanner)
+        .find(Button)
+        .at(0)
         .simulate('click');
 
-      expect(store.dispatch).toHaveBeenCalledWith(actions.handleStartSubscription());
+      expect(store.dispatch).toHaveBeenCalledWith(
+        actions.handleStartSubscription()
+      );
       wrapper.unmount();
     });
   });
 
   it('exports reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('exports actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('exports actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 
   it('exports middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

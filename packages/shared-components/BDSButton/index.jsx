@@ -50,13 +50,13 @@ const getBdsButtonStyle = ({ state, props }) => {
     style = { ...style, ...bdsButtonStyle.focus };
   }
   if (props.type) {
-    props.type.split(' ').forEach((type) => {
+    props.type.split(' ').forEach(type => {
       style = { ...style, ...bdsButtonStyle[type] };
     });
   }
   if (state.hover) {
     style = { ...style, ...bdsButtonStyle.hover };
-    props.type.split(' ').forEach((type) => {
+    props.type.split(' ').forEach(type => {
       if (bdsButtonStyle[type] && bdsButtonStyle[`${type}_hover`]) {
         style = { ...style, ...bdsButtonStyle[`${type}_hover`] };
       }

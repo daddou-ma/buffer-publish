@@ -5,9 +5,12 @@ import { Text } from '@bufferapp/components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { ProfileBadgeIcon } from '../ProfileBadge';
 
-const handleProfileLimitReached = (features, showSwitchPlanModal, goToConnectSocialAccount) => (
-  features.isFreeUser() ? showSwitchPlanModal() : goToConnectSocialAccount()
-);
+const handleProfileLimitReached = (
+  features,
+  showSwitchPlanModal,
+  goToConnectSocialAccount
+) =>
+  features.isFreeUser() ? showSwitchPlanModal() : goToConnectSocialAccount();
 
 const handleClick = (
   network,
@@ -16,20 +19,24 @@ const handleClick = (
   profileLimit,
   features,
   showSwitchPlanModal,
-  goToConnectSocialAccount,
+  goToConnectSocialAccount
 ) => {
   if (profiles.length >= profileLimit) {
-    handleProfileLimitReached(features, showSwitchPlanModal, goToConnectSocialAccount);
+    handleProfileLimitReached(
+      features,
+      showSwitchPlanModal,
+      goToConnectSocialAccount
+    );
     return;
   }
   const goConnectProfile = () => {
     if (network === 'instagram') {
       /**
-      * This silly looking code loads an 'img' with the
-      * Instagram logout URL, which ensures the user is
-      * logged out of Instagram before we send them to
-      * reconnect.
-      */
+       * This silly looking code loads an 'img' with the
+       * Instagram logout URL, which ensures the user is
+       * logged out of Instagram before we send them to
+       * reconnect.
+       */
       const img = new Image();
       img.onerror = () => {
         window.location.assign(url);
@@ -40,13 +47,16 @@ const handleClick = (
       window.location.assign(url);
     }
   };
-  trackAction({
-    location: 'profile_sidebar',
-    action: `connect_${network}`,
-  }, {
-    success: goConnectProfile(),
-    error: goConnectProfile(),
-  });
+  trackAction(
+    {
+      location: 'profile_sidebar',
+      action: `connect_${network}`,
+    },
+    {
+      success: goConnectProfile(),
+      error: goConnectProfile(),
+    }
+  );
 };
 
 const getStyle = hovered => ({
@@ -90,19 +100,23 @@ class ProfileConnectShortcut extends React.Component {
         href="#"
         key={`${network}-connect`}
         notifications=""
-        onClick={() => handleClick(
-          network,
-          url,
-          profiles,
-          profileLimit,
-          features,
-          showSwitchPlanModal,
-          goToConnectSocialAccount,
-        )}
+        onClick={() =>
+          handleClick(
+            network,
+            url,
+            profiles,
+            profileLimit,
+            features,
+            showSwitchPlanModal,
+            goToConnectSocialAccount
+          )
+        }
       >
         <ProfileBadgeIcon type={network} />
         <span style={{ marginLeft: '8px' }}>
-          <Text size="small" color="shuttleGray" weight="bold">{label}</Text>
+          <Text size="small" color="shuttleGray" weight="bold">
+            {label}
+          </Text>
         </span>
       </a>
     );
@@ -116,7 +130,7 @@ ProfileConnectShortcut.propTypes = {
   profiles: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
-    }),
+    })
   ).isRequired,
   profileLimit: PropTypes.number.isRequired,
   features: PropTypes.object.isRequired, // eslint-disable-line

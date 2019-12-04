@@ -14,8 +14,8 @@ module.exports = method(
         needs_approval: needsApproval,
       },
     })
-    .then(result => JSON.parse(result))
-    .catch((err) => {
-      throw createError({ message: err.message });
-    }),
+      .then(result => JSON.parse(result))
+      .catch(err => {
+        throw createError({ message: err.message });
+      })
 );

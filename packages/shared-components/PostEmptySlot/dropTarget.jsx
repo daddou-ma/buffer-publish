@@ -5,7 +5,10 @@ import PostEmptySlot from './index';
 
 const slotTarget = {
   drop(props, monitor) {
-    const { postProps: { id: postId }, onDropPost } = monitor.getItem();
+    const {
+      postProps: { id: postId },
+      onDropPost,
+    } = monitor.getItem();
     onDropPost(postId, props.timestamp, props.day);
   },
 };
@@ -17,7 +20,9 @@ const slotTarget = {
  */
 function Slot({ connectDropTarget, isOver, ...rest }) {
   return connectDropTarget(
-    <div><PostEmptySlot focus={isOver} {...rest} /></div>,
+    <div>
+      <PostEmptySlot focus={isOver} {...rest} />
+    </div>
   );
 }
 
