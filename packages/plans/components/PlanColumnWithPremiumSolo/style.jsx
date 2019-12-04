@@ -16,7 +16,7 @@ export const ColumnStyle = styled.div`
   flex-direction: column;
   margin-bottom: 25px;
   background: white;
-  margin-top: ${props => (props.isAwesomeUser ? '90px' : '')};
+  margin-top: ${props => (props.isAwesomePromoUser ? '90px' : '')};
 `;
 
 export const ButtonWrapperStyle = styled.div`

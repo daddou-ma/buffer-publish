@@ -126,7 +126,7 @@ const PlanColumnWithPremiumSolo = ({
   const isSelected = () => selectedPremiumPlan === 1;
   const isPremium = plan === 'premium_business';
   return (
-    <ColumnStyle isAwesomeUser={isAwesomePromoUser}>
+    <ColumnStyle isAwesomePromoUser={isAwesomePromoUser}>
       <TopContentStyle>
         <Text type="h3">{title}</Text>
         <ImageWrapperStyle isPremium={isPremium}>
@@ -135,7 +135,7 @@ const PlanColumnWithPremiumSolo = ({
         {!isPremium && (
           <React.Fragment>
             <UserIcon Icon={<Person />} text="1 user" isSelected />
-            <PromoCostLine isNonprofit={isNonprofit} />
+            {isAwesomePromoUser && <PromoCostLine isNonprofit={isNonprofit} />}
             <PriceStyle>
               {!isAwesomePromoUser && (
                 <TextStyle type="h1">

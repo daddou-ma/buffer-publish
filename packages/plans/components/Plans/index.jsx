@@ -60,8 +60,8 @@ const PromoHeaderLine = styled.div`
 
 const ContainerStyle = styled.div`
   overflow-y: auto;
-  background: ${props => (props.isAwesomeUser ? '#121e66' : 'white')};
-  display: ${props => (props.isAwesomeUser ? 'flex' : '')};
+  background: ${props => (props.isAwesomePromoUser ? '#121e66' : 'white')};
+  display: ${props => (props.isAwesomePromoUser ? 'flex' : '')};
 `;
 
 const Plans = ({
@@ -77,7 +77,7 @@ const Plans = ({
   isAwesomePromoUser,
   shouldSeeSoloPlanOption,
 }) => (
-  <ContainerStyle isAwesomeUser={isAwesomePromoUser}>
+  <ContainerStyle isAwesomePromoUser={isAwesomePromoUser}>
     <ButtonStyle>
       <Button
         type="secondary"
@@ -87,7 +87,7 @@ const Plans = ({
         onClick={() => onBackToDashboardClick({
           selectedProfileId,
           profiles,
-          isAwesomeUser,
+          isAwesomePromoUser,
         })
         }
       />

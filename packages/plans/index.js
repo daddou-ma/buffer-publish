@@ -22,7 +22,9 @@ export default connect(
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
-    isAwesomePromoUser: state.appSidebar.user.isAwesomePromoUser,
+    isAwesomePromoUser:
+      state.appSidebar.user.isAwesomePromoUser &&
+      state.appSidebar.user.isOnAwesomePlan,
     shouldSeeSoloPlanOption: state.appSidebar.user.plan === 'pro',
   }),
   dispatch => ({
@@ -35,7 +37,11 @@ export default connect(
       }
       dispatch(modalsActions.showSwitchPlanModal({ source, plan, isPromo }));
     },
-    onBackToDashboardClick: ({ selectedProfileId, profiles, isAwesomeUser }) => {
+    onBackToDashboardClick: ({
+      selectedProfileId,
+      profiles,
+      isAwesomeUser,
+    }) => {
       if (isAwesomeUser) {
         window.location.replace(getClassicBufferURL());
         return;
