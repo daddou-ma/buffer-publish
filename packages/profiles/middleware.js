@@ -1,4 +1,5 @@
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actionTypes } from '@bufferapp/publish-profile-sidebar';
 
 export default ({ dispatch }) => next => action => {
   next(action);
@@ -30,6 +31,16 @@ export default ({ dispatch }) => next => action => {
           })
         );
       }
+      break;
+    case 'SINGLE_PROFILE_INIT':
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'singleProfile',
+          args: {
+            profileId: action.profileId,
+          },
+        })
+      );
       break;
     default:
       break;
