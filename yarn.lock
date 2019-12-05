@@ -1427,12 +1427,12 @@
     "@bufferapp/nav-sidebar" "^1.11.0"
     numeral "2.0.6"
 
-"@bufferapp/ui@5.18.0":
-  version "5.18.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.18.0.tgz#932784b9805c4b62af3fa702e2019c8e489e7c3a"
-  integrity sha512-I3c7lt5Ls7gv4Bx2gGPC050Aop6THdj6Df2KcrWAnYIt0UCgI+bx92F4VyKoJ7roIFYRjoEOeOfSg7rlLqsLDw==
+"@bufferapp/ui@5.18.1-beta.bd7ed5d":
+  version "5.18.1-beta.bd7ed5d"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.18.1-beta.bd7ed5d.tgz#6abe202290f7f9e05315280aa52e1877d8a4e1eb"
+  integrity sha512-LObR7NfgD7aGpKvH3HQt9xd5PnG23l581hcLfQFxD2IfOR/xhqcDFi020KagDPEMJV8WPYko2JUd2EGdFNlKuQ==
   dependencies:
-    "@reach/tooltip" "0.2.2"
+    "@reach/tooltip" "0.6.2"
     immutability-helper "^2.9.0"
     react "16.8.6"
     react-dom "16.8.6"
@@ -1834,10 +1834,22 @@
   resolved "https://registry.yarnpkg.com/@reach/auto-id/-/auto-id-0.2.0.tgz#97f9e48fe736aa5c6f4f32cf73c1f19d005f8550"
   integrity sha512-lVK/svL2HuQdp7jgvlrLkFsUx50Az9chAhxpiPwBqcS83I2pVWvXp98FOcSCCJCV++l115QmzHhFd+ycw1zLBg==
 
+"@reach/auto-id@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@reach/auto-id/-/auto-id-0.6.1.tgz#af30c153787a335cfb258289537d5ea355688821"
+  integrity sha512-t3uhdZwalO3Mph+CUdFIvMcYsMtRZoBHE5rw/+3UvQxV+AeQGNqmtlOix9mq3rOpxi0KEaf1q4CjWx4myFXkRQ==
+
 "@reach/component-component@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.3.tgz#5d156319572dc38995b246f81878bc2577c517e5"
   integrity sha512-a1USH7L3bEfDdPN4iNZGvMEFuBfkdG+QNybeyDv8RloVFgZYRoM+KGXyy2KOfEnTUM8QWDRSROwaL3+ts5Angg==
+
+"@reach/component-component@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.6.2.tgz#83b367b6476ef928f101319d37416bc15bd01e2f"
+  integrity sha512-Sb0p8qgzaAzFLNeOXGMz24LLmZuLzzNA5w04FfZJ+2BsMOHv/yw6P+orzeVYSclTriLurWJjb8gbdvxho+2usw==
+  dependencies:
+    prop-types "^15.7.2"
 
 "@reach/observe-rect@^1.0.3":
   version "1.0.3"
@@ -1851,6 +1863,13 @@
   dependencies:
     "@reach/component-component" "^0.1.3"
 
+"@reach/portal@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.6.2.tgz#5d57d092c204e69630313152c8f0507a9ca81229"
+  integrity sha512-dJAKnsMEbmL0fmShJd1jm4y1RpNP5cpIMpmyK1+2MfBpKoXxYvf3eauf2+vTgM7/JlVM2eDEfYnFdyw/7aIsyw==
+  dependencies:
+    "@reach/component-component" "^0.6.2"
+
 "@reach/rect@^0.2.1":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@reach/rect/-/rect-0.2.1.tgz#7343020174c90e2290b844d17c03fd9c78e6b601"
@@ -1858,6 +1877,14 @@
   dependencies:
     "@reach/component-component" "^0.1.3"
     "@reach/observe-rect" "^1.0.3"
+
+"@reach/rect@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@reach/rect/-/rect-0.6.2.tgz#b2d43da207d48b84583d915059500f1b2deec3d6"
+  integrity sha512-2jCG6NNeLjQIsxxSmxxkJNM7zhfzWyl2jX78QAoHYYmolQfliUg5e0DIFN2QRUXVtMP3pu8SUVri+hdOnx+fiw==
+  dependencies:
+    "@reach/observe-rect" "^1.0.3"
+    prop-types "^15.7.2"
 
 "@reach/router@^1.2.1":
   version "1.2.1"
@@ -1882,15 +1909,37 @@
     "@reach/visually-hidden" "^0.1.4"
     prop-types "^15.7.2"
 
+"@reach/tooltip@0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@reach/tooltip/-/tooltip-0.6.2.tgz#16fdb5bc5dfb449105c81c7bf41649b3e12dfa6c"
+  integrity sha512-utYnabu12SJcNHRoxbliE3mPvSo3wETI5uT4YE0p/uiIATYP0VwOSSnIyZNPZFLmf/hzkwiInirNXdbtpKBeiw==
+  dependencies:
+    "@reach/auto-id" "^0.6.1"
+    "@reach/portal" "^0.6.2"
+    "@reach/rect" "^0.6.2"
+    "@reach/utils" "^0.6.1"
+    "@reach/visually-hidden" "^0.6.2"
+    prop-types "^15.7.2"
+
 "@reach/utils@^0.2.3":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@reach/utils/-/utils-0.2.3.tgz#820f6a6af4301b4c5065cfc04bb89e6a3d1d723f"
   integrity sha512-zM9rA8jDchr05giMhL95dPeYkK67cBQnIhCVrOKKqgWGsv+2GE/HZqeptvU4zqs0BvIqsThwov+YxVNVh5csTQ==
 
+"@reach/utils@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@reach/utils/-/utils-0.6.1.tgz#7345dcd624f92779fb4a0fc4a28ab16d69b53476"
+  integrity sha512-SMGDydSjmvOz3Q4faGGJikdeqHumHmxB1YfYR7XTWrDQxJMod+J7mSkaS12NY4o/uPQ4xOwwL6cXWN+KpFjOQg==
+
 "@reach/visually-hidden@^0.1.4":
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/@reach/visually-hidden/-/visually-hidden-0.1.4.tgz#0dc4ecedf523004337214187db70a46183bd945b"
   integrity sha512-QHbzXjflSlCvDd6vJwdwx16mSB+vUCCQMiU/wK/CgVNPibtpEiIbisyxkpZc55DyDFNUIqP91rSUsNae+ogGDQ==
+
+"@reach/visually-hidden@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@reach/visually-hidden/-/visually-hidden-0.6.2.tgz#36744201d0464bcaedc6163b379844612341a1dc"
+  integrity sha512-YI2IMink8kn3vcugOKjFcQgF+GUd1p3kMWtLVxvEr1oj8iOyNASBP4j9ouYR9ZqIEO8SZhk9O+IHdXQhs0csxg==
 
 "@storybook/addon-a11y@5.1.11":
   version "5.1.11"
