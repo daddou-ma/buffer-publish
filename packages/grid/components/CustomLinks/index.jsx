@@ -22,6 +22,7 @@ const CustomLinks = ({
   maxCustomLinks,
   onToggleEditMode,
   onSwapCustomLinks,
+  onCancelCustomLinkEdit,
 }) => {
   const [colorButtons, setColorButton] = useState(
     customLinksDetails.buttonColor || DEFAULT_COLOR
@@ -65,7 +66,7 @@ const CustomLinks = ({
                     onUpdateCustomLinks={onUpdateCustomLinks}
                     onUpdateLinkText={onUpdateLinkText}
                     onUpdateLinkUrl={onUpdateLinkUrl}
-                    onToggleEditMode={onToggleEditMode}
+                    onCancelCustomLinkEdit={onCancelCustomLinkEdit}
                   />
                 )}
               </React.Fragment>
@@ -85,6 +86,7 @@ CustomLinks.propTypes = {
   onDeleteCustomLink: PropTypes.func,
   onUpdateCustomLinks: PropTypes.func,
   onSwapCustomLinks: PropTypes.func,
+  onCancelCustomLinkEdit: PropTypes.func,
   onUpdateCustomLinksColor: PropTypes.func,
   customLinksDetails: PropTypes.shape({
     customLinks: PropTypes.array,
@@ -103,6 +105,7 @@ CustomLinks.defaultProps = {
   onDeleteCustomLink: () => {},
   onUpdateCustomLinks: () => {},
   onSwapCustomLinks: () => {},
+  onCancelCustomLinkEdit: () => {},
   onUpdateCustomLinksColor: () => {},
   customLinksDetails: {
     customLinks: [],
