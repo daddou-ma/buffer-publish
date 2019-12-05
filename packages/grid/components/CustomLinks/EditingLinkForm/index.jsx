@@ -13,7 +13,7 @@ const EditingLinkForm = ({
   onToggleEditMode,
 }) => {
   return (
-    <>
+    <React.Fragment>
       <EditingMyLinksItem>
         <LinkInput>
           <Input
@@ -52,7 +52,7 @@ const EditingLinkForm = ({
           }
         />
       </ActionsWrapper>
-    </>
+    </React.Fragment>
   );
 };
 

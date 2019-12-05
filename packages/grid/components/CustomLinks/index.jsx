@@ -46,7 +46,7 @@ const CustomLinks = ({
         {customLinksDetails.customLinks &&
           customLinksDetails.customLinks.map(item => {
             return (
-              <>
+              <React.Fragment>
                 {!item.editing && (
                   <LinkDragWrapper
                     item={item}
@@ -68,7 +68,7 @@ const CustomLinks = ({
                     onToggleEditMode={onToggleEditMode}
                   />
                 )}
-              </>
+              </React.Fragment>
             );
           })}
       </MyLinksBody>

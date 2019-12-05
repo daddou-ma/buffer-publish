@@ -6,6 +6,7 @@ export const DEFAULT_COLOR = '#000000';
 export const DEFAULT_CONTRAST_COLOR = '#FFFFFF';
 
 export const MyLinksSection = styled.div`
+  width: 100%;
   border: 1px solid ${grayLight};
   border-radius: ${borderRadius};
   margin-bottom: 22px;
@@ -49,6 +50,7 @@ export const LinkPreviewRow = styled.div`
   padding: 15px;
   font-size: 14px;
   color: #636363;
+  min-width: 0;
 `;
 
 export const MyLinksBody = styled.div``;
@@ -67,6 +69,9 @@ export const LinkInput = styled.div`
 export const UrlPreview = styled.div`
   margin-left: 14px;
   flex-basis: 402px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ActionsWrapper = styled.div`
