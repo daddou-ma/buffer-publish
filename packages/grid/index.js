@@ -187,6 +187,14 @@ export default connect(
         })
       );
     },
+    onCancelCustomLinkEdit: ({ item }) => {
+      dispatch(
+        actions.handleOnCancelCustomLinkEdit({
+          profileId: ownProps.profileId,
+          item,
+        })
+      );
+    },
     onSwapCustomLinks: ({ customLinkSource, customLinkTarget }) => {
       dispatch(
         actions.handleSwapCustomLinks({

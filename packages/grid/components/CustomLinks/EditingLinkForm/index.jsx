@@ -10,7 +10,7 @@ const EditingLinkForm = ({
   onUpdateCustomLinks,
   onUpdateLinkText,
   onUpdateLinkUrl,
-  onToggleEditMode,
+  onCancelCustomLinkEdit,
 }) => {
   return (
     <React.Fragment>
@@ -39,8 +39,8 @@ const EditingLinkForm = ({
       <ActionsWrapper>
         <Button
           label="Cancel"
-          type="gray"
-          onClick={() => onToggleEditMode({ item, editing: false })}
+          type="text"
+          onClick={() => onCancelCustomLinkEdit({ item })}
         />
         <Button
           label="Save Link"
@@ -57,7 +57,7 @@ const EditingLinkForm = ({
 };
 
 EditingLinkForm.propTypes = {
-  onToggleEditMode: PropTypes.func,
+  onCancelCustomLinkEdit: PropTypes.func,
   onUpdateCustomLinks: PropTypes.func,
   onUpdateLinkText: PropTypes.func,
   onUpdateLinkUrl: PropTypes.func,
@@ -71,7 +71,7 @@ EditingLinkForm.propTypes = {
 };
 
 EditingLinkForm.defaultProps = {
-  onToggleEditMode: () => {},
+  onCancelCustomLinkEdit: () => {},
   onUpdateCustomLinks: () => {},
   onUpdateLinkText: () => {},
   onUpdateLinkUrl: () => {},
