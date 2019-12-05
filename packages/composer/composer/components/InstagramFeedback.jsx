@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import WarningIcon from '@bufferapp/ui/Icon/Icons/Warning';
+import { Text } from '@bufferapp/ui';
 import styles from './css/InstagramFeedback.css';
-import InstagramReminderIcon from './InstagramReminderIcon';
 
 const getLinkUrl = feedback => {
   if (feedback.some(f => f.code === 'ASPECT_RATIO')) {
@@ -13,15 +14,20 @@ const getLinkUrl = feedback => {
 const InstagramFeedback = ({ feedback }) => (
   <div className={styles.container}>
     <div className={styles.iconContainer}>
-      <InstagramReminderIcon size={{ width: '24px', height: '24px' }} />
+      <WarningIcon size="medium" />
     </div>
-    <div className={styles.feedbackContainer}>
+    <div>
       {feedback.map(item => (
-        <p key={item.code} className={styles.item}>
+        <Text key={item.code} className={styles.item}>
           {item.message}{' '}
-        </p>
+        </Text>
       ))}
-      <a className={styles.link} target="_blank" href={getLinkUrl(feedback)}>
+      <a
+        className={styles.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        href={getLinkUrl(feedback)}
+      >
         Learn more
       </a>
     </div>
