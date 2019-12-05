@@ -4,7 +4,7 @@ import { ColorPicker } from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
 import styled from 'styled-components';
 import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
-import { IconArrowPopover } from '@bufferapp/components';
+import Tooltip from '@bufferapp/ui/Tooltip';
 import { gray, grayDarker } from '@bufferapp/ui/style/colors';
 import { fontFamily, fontWeightBold } from '@bufferapp/ui/style/fonts';
 
@@ -19,10 +19,6 @@ const MyLinksHeader = styled.div`
 const MyLinksTitle = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const PopoverTextContainer = styled.div`
-  padding: 0.5rem 0.25rem;
 `;
 
 const MyLinksIcon = styled.span`
@@ -75,8 +71,7 @@ const LinksHeader = ({
   customLinksDetails,
   maxCustomLinks,
   title = 'Top Links',
-  label = 'Top Links',
-  popupText = 'Add upto 3 custom links to the top of your Shop grid page.',
+  popupText = 'Add up to 3 custom links to the top of your Shop grid page.',
   onAddLinkClick = () => {},
   buttonText = 'Add Link',
   pickerText = 'Link Color',
@@ -91,19 +86,9 @@ const LinksHeader = ({
       <MyLinksTitle>
         <MyLinksTitleText>{title}</MyLinksTitleText>
         <MyLinksIcon>
-          <IconArrowPopover
-            icon={<InfoIcon color={gray} />}
-            position="below"
-            shadow
-            oneLine={false}
-            width="320px"
-            label={label}
-          >
-            <PopoverTextContainer>
-              {/* eslint-disable max-len */}
-              {popupText}
-            </PopoverTextContainer>
-          </IconArrowPopover>
+          <Tooltip label={popupText} position="right">
+            <InfoIcon color={gray} />
+          </Tooltip>
         </MyLinksIcon>
       </MyLinksTitle>
       <AddLinkSection>
@@ -113,7 +98,7 @@ const LinksHeader = ({
             defaultColor={colorButtons}
             setColorButton={setColorButton}
             setTextColor={setTextColor}
-            onBlur={e =>
+            onBlur={() =>
               onUpdateCustomLinksColor({
                 customLinkColor: colorButtons,
                 customLinkContrastColor: textColor,
