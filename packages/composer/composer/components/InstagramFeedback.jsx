@@ -22,7 +22,12 @@ const InstagramFeedback = ({ feedback }) => (
           {item.message}{' '}
         </Text>
       ))}
-      <a className={styles.link} target="_blank" href={getLinkUrl(feedback)}>
+      <a
+        className={styles.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        href={getLinkUrl(feedback)}
+      >
         Learn more
       </a>
     </div>
