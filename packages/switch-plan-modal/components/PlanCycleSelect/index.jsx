@@ -79,23 +79,33 @@ const getMonthlyPlan = (isNonprofit, { nonprofitMonthlyPrice, planMonthlyPrice }
   isNonprofit ? nonprofitMonthlyPrice : planMonthlyPrice
 );
 
-const PlanCycleSelect = ({ translations, cycle, selectCycle, isNonprofit }) => (
+const getMonthlyPromoPlan = (isNonprofit, { nonprofitPromoMonthlyPrice, planPromoMonthlyPrice }) => (
+  isNonprofit ? nonprofitPromoMonthlyPrice : planPromoMonthlyPrice
+);
+
+const PlanCycleSelect = ({ translations, cycle, selectCycle, isNonprofit, isPromo }) => (
   <div style={{ display: 'flex' }}>
     <PlanCycleButton
       first
-      label={getMonthlyPlan(isNonprofit, translations)}
+      label={
+        isPromo
+          ? getMonthlyPromoPlan(isNonprofit, translations)
+          : getMonthlyPlan(isNonprofit, translations)
+      }
       description={translations.planMonthlyDescription}
       cycle={'month'}
       selectedCycle={cycle}
       selectCycle={selectCycle}
     />
-    <PlanCycleButton
-      label={getYearlyPlan(isNonprofit, translations)}
-      description={translations.planYearlyDescription}
-      cycle={'year'}
-      selectedCycle={cycle}
-      selectCycle={selectCycle}
-    />
+    {!isPromo && (
+      <PlanCycleButton
+        label={getYearlyPlan(isNonprofit, translations)}
+        description={translations.planYearlyDescription}
+        cycle={'year'}
+        selectedCycle={cycle}
+        selectCycle={selectCycle}
+      />
+    )}
   </div>
 );
 

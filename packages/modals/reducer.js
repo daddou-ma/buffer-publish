@@ -174,10 +174,11 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  showSwitchPlanModal: ({ plan, source }) => ({
+  showSwitchPlanModal: ({ plan, source, isPromo }) => ({
     type: actionTypes.SHOW_SWITCH_PLAN_MODAL,
     plan,
     source,
+    isPromo,
   }),
   hideUpgradeModal: () => ({
     type: actionTypes.HIDE_SWITCH_PLAN_MODAL,
