@@ -1,6 +1,5 @@
 export AutoSelectText from './AutoSelectText';
 export BufferLoading from './BufferLoading';
-export QueueBanner from './QueueBanner';
 export EmptyState from './EmptyState';
 export Example from './Example';
 export ImagePost from './ImagePost';
@@ -33,3 +32,4 @@ export Arrow from './Arrow';
 export ComposerSidepanel from './ComposerSidepanel';
 export BannerAdvancedAnalytics from './BannerAdvancedAnalytics';
 export ColorPicker from './ColorPicker';
+export QueueBanner from './QueueBanner';
