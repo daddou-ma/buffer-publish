@@ -29,6 +29,7 @@ const mockUser = {
   profileCount: 3,
   is_business_user: true,
   helpScoutConfig: '{ "param1": true, "param2": 24 }',
+  tags: [],
 };
 
 const mockFreeUser = {
@@ -145,7 +146,7 @@ describe('middleware', () => {
     expect(global.Appcues.on).not.toHaveBeenCalled();
   });
 
-  it('marks Appcues as loaded and identifies a B4B user with Appcues', () => {
+  it('marks Appcues as loaded and identifies a B4B / Pro user with Appcues', () => {
     const action = {
       type: actionTypes.APPCUES,
       result: mockUser,
@@ -165,6 +166,7 @@ describe('middleware', () => {
       trialTimeRemaining: mockUser.trial.trialTimeRemaining,
       orgUserCount: mockUser.orgUserCount,
       profileCount: mockUser.profileCount,
+      upgradedFromLegacyAwesomeToProPromotion: false,
     });
 
     expect(global.Appcues.on.mock.calls).toEqual([
@@ -173,6 +175,26 @@ describe('middleware', () => {
       ['flow_skipped', expect.any(Function)],
       ['flow_aborted', expect.any(Function)],
     ]);
+  });
+
+  it('tells AppCues when the user has upgraded from legacy awesome to Pro', () => {
+    const action = {
+      type: actionTypes.APPCUES,
+      result: { ...mockUser, tags: ['upgraded-to-pro-from-legacy-awesome'] },
+    };
+    middleware(store)(next)(action);
+    expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
+      name: mockUser.id,
+      createdAt: mockUser.createdAt,
+      plan: mockUser.plan,
+      planCode: mockUser.planCode,
+      onTrial: mockUser.trial.onTrial,
+      trialLength: mockUser.trial.trialLength,
+      trialTimeRemaining: mockUser.trial.trialTimeRemaining,
+      orgUserCount: mockUser.orgUserCount,
+      profileCount: mockUser.profileCount,
+      upgradedFromLegacyAwesomeToProPromotion: true,
+    });
   });
 
   it('marks HelpScout as loaded and identifies the user with HelpScout', () => {
