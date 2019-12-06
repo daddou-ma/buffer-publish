@@ -2,9 +2,7 @@ const Bugsnag = require('@bugsnag/js');
 const fs = require('fs');
 const { join } = require('path');
 
-const BUGSNAG_KEY = process.env.BUGSNAG_KEY;
-const HOSTNAME = process.env.HOSTNAME;
-const RELEASE_STAGE = process.env.RELEASE_STAGE;
+const { BUGSNAG_KEY, HOSTNAME, RELEASE_STAGE } = process.env;
 
 const APP_TYPE_SERVER = 'express-server';
 const APP_TYPE_FRONTEND = 'frontend';
