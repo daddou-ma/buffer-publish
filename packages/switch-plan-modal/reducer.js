@@ -45,6 +45,7 @@ export default (state = initialState, action) => {
         ...state,
         source: action.source || 'unknown',
         plan: action.plan || 'pro',
+        cycle: action.isPromo && action.plan === 'pro' ? 'month' : 'year',
         isPromo: action.isPromo || false,
       };
     case modalsActionTypes.HIDE_SWITCH_PLAN_MODAL:
