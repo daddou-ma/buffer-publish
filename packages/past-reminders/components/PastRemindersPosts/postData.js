@@ -61,7 +61,8 @@ export const postLists = [
         sent: true,
         text: 'Image post test',
         type: 'image',
-        imageSrc: 'https://cdn-images-1.medium.com/max/2000/1*1Kua7bNJfvLlTxWqgxVKfw.jpeg',
+        imageSrc:
+          'https://cdn-images-1.medium.com/max/2000/1*1Kua7bNJfvLlTxWqgxVKfw.jpeg',
         day: 'Tuesday 12th February',
         dueTime: '9:02 am',
       },
@@ -108,4 +109,5 @@ export const postLists = [
 ];
 
 export const header = 'Recent past reminders';
-export const subHeader = 'Here you can manage posts that may still require posting from your mobile';
+export const subHeader =
+  'Here you can manage posts that may still require posting from your mobile';

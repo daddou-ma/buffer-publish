@@ -26,7 +26,7 @@ export default connect(
         dispatch(actions.handleSaveNoteComposer({ order, note }));
       }
     },
-  }),
+  })
 )(PreviewPopover);
 
 export reducer, { actions, actionTypes } from './reducer';

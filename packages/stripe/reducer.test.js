@@ -10,9 +10,12 @@ describe('reducer', () => {
     });
 
     it('has no error', () => expect(state.error).toBeNull());
-    it('is not creating a setup intent', () => expect(state.validating).toBe(false));
-    it('has no setup intent client secret', () => expect(state.setupIntentClientSecret).toBe(''));
-    it('is not validating card setup', () => expect(state.validating).toBe(false));
+    it('is not creating a setup intent', () =>
+      expect(state.validating).toBe(false));
+    it('has no setup intent client secret', () =>
+      expect(state.setupIntentClientSecret).toBe(''));
+    it('is not validating card setup', () =>
+      expect(state.validating).toBe(false));
   });
 
   describe('creating a setup intent', () => {

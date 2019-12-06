@@ -17,13 +17,16 @@ const storyGroups = [
         note: '',
         type: 'image',
         order: 1,
-        asset_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d83647c869bb300116fc12a/d14d93b05119af69fd9d68fafe839157.original.jpg',
-        thumbnail_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d83647c869bb300116fc12a/d14d93b05119af69fd9d68fafe839157.original.jpg',
+        asset_url:
+          'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d83647c869bb300116fc12a/d14d93b05119af69fd9d68fafe839157.original.jpg',
+        thumbnail_url:
+          'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d83647c869bb300116fc12a/d14d93b05119af69fd9d68fafe839157.original.jpg',
       },
     ],
     twentyfour_hour_time: false,
     updated_at: 1568892034,
-    user_avatar: 'https://secure.gravatar.com/avatar/03cd143dc214b358e032de8a136a6027?s=40&d=mm',
+    user_avatar:
+      'https://secure.gravatar.com/avatar/03cd143dc214b358e032de8a136a6027?s=40&d=mm',
     user_id: '5b8e886dbee2c512007b23c6',
     user_name: 'mayita.uribe',
   },
@@ -44,8 +47,10 @@ const storyGroups = [
         note: 'Puchi happy',
         type: 'image',
         order: 1,
-        asset_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9477869bb3305737a3f2/dd3a25447a6e5c305ae40e08388e5bc2.original.jpg',
-        thumbnail_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9477869bb3305737a3f2/dd3a25447a6e5c305ae40e08388e5bc2.original.jpg'
+        asset_url:
+          'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9477869bb3305737a3f2/dd3a25447a6e5c305ae40e08388e5bc2.original.jpg',
+        thumbnail_url:
+          'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9477869bb3305737a3f2/dd3a25447a6e5c305ae40e08388e5bc2.original.jpg',
       },
       {
         _id: '5d83653d8943cc4bc52d94ce',
@@ -53,8 +58,10 @@ const storyGroups = [
         note: 'Note',
         type: 'image',
         order: 2,
-        asset_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com\/5b8e886dbee2c512007b23c6/5d5f9c64869bb331a32f5552/7f6dd5f725507d760a782527adacb055.original.jpg',
-        thumbnail_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com\/5b8e886dbee2c512007b23c6/5d5f9c64869bb331a32f5552/7f6dd5f725507d760a782527adacb055.original.jpg',
+        asset_url:
+          'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9c64869bb331a32f5552/7f6dd5f725507d760a782527adacb055.original.jpg',
+        thumbnail_url:
+          'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d5f9c64869bb331a32f5552/7f6dd5f725507d760a782527adacb055.original.jpg',
       },
       {
         _id: '5d8365528943cc4bc52d94cf',
@@ -62,12 +69,15 @@ const storyGroups = [
         note: 'Puchi note',
         type: 'image',
         order: 3,
-        asset_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d4982176826f315ed1e79ba/f458295a6daad1c702af20c0b013defd.original.jpg',
-        thumbnail_url: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d4982176826f315ed1e79ba/f458295a6daad1c702af20c0b013defd.original.jpg',
+        asset_url:
+          'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d4982176826f315ed1e79ba/f458295a6daad1c702af20c0b013defd.original.jpg',
+        thumbnail_url:
+          'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5d4982176826f315ed1e79ba/f458295a6daad1c702af20c0b013defd.original.jpg',
       },
     ],
     twentyfour_hour_time: false,
-    user_avatar: 'https://secure.gravatar.com/avatar/03cd143dc214b358e032de8a136a6027?s=40&d=mm',
+    user_avatar:
+      'https://secure.gravatar.com/avatar/03cd143dc214b358e032de8a136a6027?s=40&d=mm',
     user_name: 'mayita.uribe',
     user_id: '5b8e886dbee2c512007b23c6',
   },

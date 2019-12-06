@@ -4,9 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import GridList from './index';
-import {
-  gridPosts,
-} from './postData';
+import { gridPosts } from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -21,7 +19,8 @@ const profile = {
   business: true,
   service: 'instagram',
   timezone: 'Europe/London',
-  avatar_https: 'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5c829d3838da0900d16ee5e4/3a9dd6c260165524ba20b2fd174a0873.original.jpg',
+  avatar_https:
+    'https://buffer-media-uploads-dev.s3.amazonaws.com/5b8e886dbee2c512007b23c6/5c829d3838da0900d16ee5e4/3a9dd6c260165524ba20b2fd174a0873.original.jpg',
 };
 
 const store = storeFake({
@@ -41,9 +40,7 @@ const store = storeFake({
 });
 
 const UpgradeModalDecorator = storyFn => (
-  <Provider store={store}>
-    {storyFn()}
-  </Provider>
+  <Provider store={store}>{storyFn()}</Provider>
 );
 
 storiesOf('GridLists', module)

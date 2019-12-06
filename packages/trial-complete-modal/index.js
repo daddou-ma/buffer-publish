@@ -13,7 +13,7 @@ export default connect(
   dispatch => ({
     cancelTrial: () => dispatch(actions.cancelTrial()),
     completeAndUpgrade: () => dispatch(actions.completeAndUpgrade()),
-  }),
+  })
 )(TrialCompleteModal);
 
 export reducer, { actions, actionTypes } from './reducer';

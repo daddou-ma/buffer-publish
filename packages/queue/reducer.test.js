@@ -10,8 +10,7 @@ describe('reducer', () => {
       type: 'INIT',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle queuedPosts_FETCH_START action type', () => {
@@ -36,8 +35,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle queuedPosts_FETCH_SUCCESS action type', () => {
@@ -67,8 +65,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle queuedPosts_FETCH_FAIL action type', () => {
@@ -90,8 +87,7 @@ describe('reducer', () => {
       type: 'queuedPosts_FETCH_FAIL',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle POST_CREATED action type', () => {
@@ -115,8 +111,7 @@ describe('reducer', () => {
       post: postCreated,
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle POST_UPDATED action type', () => {
@@ -162,8 +157,7 @@ describe('reducer', () => {
       post: postEdited,
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle POSTS_SWAPPED action type', () => {
@@ -177,7 +171,8 @@ describe('reducer', () => {
         scheduledAt: 1552044000,
         postDetails: {
           isCustomScheduled: true,
-          postAction: 'This post is custom scheduled for March 8th at 11:20 AM (UTC).',
+          postAction:
+            'This post is custom scheduled for March 8th at 11:20 AM (UTC).',
         },
       },
     };
@@ -191,7 +186,8 @@ describe('reducer', () => {
         scheduledAt: 1552003980,
         postDetails: {
           isCustomScheduled: false,
-          postAction: 'This post is custom scheduled for March 8th at 12:13 AM (UTC).',
+          postAction:
+            'This post is custom scheduled for March 8th at 12:13 AM (UTC).',
         },
       },
     };
@@ -202,14 +198,16 @@ describe('reducer', () => {
       id: '12345',
       postDetails: {
         isCustomScheduled: false,
-        postAction: 'This post is custom scheduled for March 8th at 12:13 AM (UTC).',
+        postAction:
+          'This post is custom scheduled for March 8th at 12:13 AM (UTC).',
       },
       postProps: {
         day: 'Tomorrow',
         due_at: 1552044000,
         postDetails: {
           isCustomScheduled: true,
-          postAction: 'This post is custom scheduled for March 8th at 11:20 AM (UTC).',
+          postAction:
+            'This post is custom scheduled for March 8th at 11:20 AM (UTC).',
         },
         scheduledAt: 1552044000,
         scheduled_at: 1552044000,
@@ -226,14 +224,16 @@ describe('reducer', () => {
       id: '12346',
       postDetails: {
         isCustomScheduled: true,
-        postAction: 'This post is custom scheduled for March 8th at 11:20 AM (UTC).',
+        postAction:
+          'This post is custom scheduled for March 8th at 11:20 AM (UTC).',
       },
       postProps: {
         day: 'Today',
         due_at: 1552003980,
         postDetails: {
           isCustomScheduled: false,
-          postAction: 'This post is custom scheduled for March 8th at 12:13 AM (UTC).',
+          postAction:
+            'This post is custom scheduled for March 8th at 12:13 AM (UTC).',
         },
         scheduledAt: 1552003980,
         scheduled_at: 1552003980,
@@ -286,13 +286,17 @@ describe('reducer', () => {
       postTarget,
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // POST_CONFIRMED_DELETE
   it('should handle POST_CONFIRMED_DELETE action type', () => {
-    const post = { id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: false };
+    const post = {
+      id: '12345',
+      text: 'i heart buffer',
+      isConfirmingDelete: true,
+      isDeleting: false,
+    };
     const postAfter = { ...post, isConfirmingDelete: false, isDeleting: true };
     const stateBefore = {
       byProfileId: {
@@ -324,14 +328,16 @@ describe('reducer', () => {
       post: postAfter,
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   // POST_DELETED
   it('should handle POST_DELETED action type', () => {
     const post = {
-      id: '12345', text: 'i heart buffer', isConfirmingDelete: true, isDeleting: true,
+      id: '12345',
+      text: 'i heart buffer',
+      isConfirmingDelete: true,
+      isDeleting: true,
     };
     const stateBefore = {
       byProfileId: {
@@ -352,7 +358,7 @@ describe('reducer', () => {
           loadingMore: false,
           moreToLoad: false,
           page: 1,
-          posts: { },
+          posts: {},
           total: 1, // still 1 because counts are updated separately
         },
       },
@@ -363,7 +369,6 @@ describe('reducer', () => {
       post,
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 });

@@ -26,12 +26,12 @@ const createUnshortenedLinkPlugin = () => {
       {
         strategy: unshortenedLinkStrategy,
         component: decorateComponentWithProps(UnshortenedLink, {
-          onMouseOver: (unshortenedLinkData) => {
+          onMouseOver: unshortenedLinkData => {
             if (callbacks.onUnshortenedLinkMouseOver) {
               callbacks.onUnshortenedLinkMouseOver(unshortenedLinkData);
             }
           },
-          onMouseOut: (unshortenedLinkData) => {
+          onMouseOut: unshortenedLinkData => {
             if (callbacks.onUnshortenedLinkMouseOut) {
               callbacks.onUnshortenedLinkMouseOut(unshortenedLinkData);
             }
@@ -45,7 +45,7 @@ const createUnshortenedLinkPlugin = () => {
       store.setEditorState = setEditorState;
     },
 
-    onChange: (editorState) => {
+    onChange: editorState => {
       if (callbacks.onEditorStateChange) callbacks.onEditorStateChange();
       return editorState;
     },

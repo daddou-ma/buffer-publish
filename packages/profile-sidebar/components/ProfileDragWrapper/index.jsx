@@ -39,8 +39,7 @@ const profileTarget = {
     const hoverBoundingRect = node.getBoundingClientRect();
 
     // Get vertical middle
-    const hoverMiddleY =
-    (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
     // Determine mouse position
     const clientOffset = monitor.getClientOffset();
@@ -71,11 +70,7 @@ const profileTarget = {
 };
 
 const ProfileDragWrapper = React.forwardRef(
-  ({
-    connectDragSource,
-    connectDropTarget,
-    ...profileProps
-  }, ref) => {
+  ({ connectDragSource, connectDropTarget, ...profileProps }, ref) => {
     const elementRef = useRef(null);
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
@@ -93,7 +88,7 @@ const ProfileDragWrapper = React.forwardRef(
         <ProfileListItem {...profileProps} />
       </div>
     );
-  },
+  }
 );
 
 ProfileDragWrapper.propTypes = {
@@ -102,18 +97,10 @@ ProfileDragWrapper.propTypes = {
   id: PropTypes.string.isRequired, // eslint-disable-line
 };
 
-export default DropTarget(
-  'profile',
-  profileTarget,
-  connect => ({
-    connectDropTarget: connect.dropTarget(),
-  }),
-)(
-  DragSource(
-    'profile',
-    profileSource,
-    connect => ({
-      connectDragSource: connect.dragSource(),
-    }),
-  )(ProfileDragWrapper),
+export default DropTarget('profile', profileTarget, connect => ({
+  connectDropTarget: connect.dropTarget(),
+}))(
+  DragSource('profile', profileSource, connect => ({
+    connectDragSource: connect.dragSource(),
+  }))(ProfileDragWrapper)
 );

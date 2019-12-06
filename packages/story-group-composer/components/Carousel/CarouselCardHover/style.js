@@ -32,7 +32,11 @@ export const TextWrapper = styled.div`
 
 export const TrashIconWrapper = styled.div`
   margin-left: auto;
-  background: linear-gradient(180deg, rgba(61, 61, 61, 0) 1.56%, #3D3D3D 73.96%);
+  background: linear-gradient(
+    180deg,
+    rgba(61, 61, 61, 0) 1.56%,
+    #3d3d3d 73.96%
+  );
   -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
@@ -40,7 +44,11 @@ export const TrashIconWrapper = styled.div`
 `;
 
 export const EditNoteWrapper = styled.div`
-  background: linear-gradient(180deg, rgba(61, 61, 61, 0) 1.56%, #3D3D3D 73.96%);
+  background: linear-gradient(
+    180deg,
+    rgba(61, 61, 61, 0) 1.56%,
+    #3d3d3d 73.96%
+  );
   width: 100%;
   display: flex;
 `;

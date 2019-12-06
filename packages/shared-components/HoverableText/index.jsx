@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-} from '@bufferapp/components';
+import { Text } from '@bufferapp/components';
 
 const HoverableText = ({
   color,
@@ -12,18 +10,13 @@ const HoverableText = ({
   size,
   onMouseEnter,
   onMouseLeave,
-}) =>
-  <span
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-  >
-    <Text
-      color={hovered ? hoverColor : color}
-      size={size}
-    >
+}) => (
+  <span onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <Text color={hovered ? hoverColor : color} size={size}>
       {children}
     </Text>
-  </span>;
+  </span>
+);
 
 HoverableText.propTypes = {
   ...Text.propTypes,

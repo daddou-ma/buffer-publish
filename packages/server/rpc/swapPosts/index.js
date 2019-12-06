@@ -4,14 +4,17 @@ const rp = require('request-promise');
 module.exports = method(
   'swapPosts',
   'handles changing posts time when swapped',
-  ({
-     updateSourceId,
-     sourcePinned,
-     sourceDueAt,
-     updateTargetId,
-     targetPinned,
-     targetDueAt,
-   }, { session }) =>
+  (
+    {
+      updateSourceId,
+      sourcePinned,
+      sourceDueAt,
+      updateTargetId,
+      targetPinned,
+      targetDueAt,
+    },
+    { session }
+  ) =>
     rp({
       uri: `${process.env.API_ADDR}/1/updates/${updateSourceId}/swap_posts.json`,
       method: 'POST',
@@ -26,7 +29,7 @@ module.exports = method(
       },
     })
       .then(() => 'OK')
-      .catch((err) => {
+      .catch(err => {
         throw createError({ message: err.message });
-      }),
+      })
 );

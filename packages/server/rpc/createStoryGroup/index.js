@@ -5,12 +5,7 @@ const { storyGroupParser } = require('./../../parsers/src');
 module.exports = method(
   'createStoryGroup',
   'create a new story group',
-  ({
-    profileId,
-    scheduledAt,
-    stories,
-    shareNow,
-  }, { session }) =>
+  ({ profileId, scheduledAt, stories, shareNow }, { session }) =>
     rp({
       uri: `${process.env.API_ADDR}/1/story_groups/create.json`,
       method: 'POST',
@@ -26,16 +21,16 @@ module.exports = method(
       },
     })
       .then(result => JSON.parse(result))
-      .then((parsedResult) => {
+      .then(parsedResult => {
         const storyGroup = storyGroupParser(parsedResult.data);
         return {
           storyGroup,
         };
       })
-      .catch((err) => {
+      .catch(err => {
         if (err) {
           const error = JSON.parse(err);
           throw createError({ message: error.message });
         }
-      }),
+      })
 );

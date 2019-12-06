@@ -9,12 +9,13 @@ export default connect(
   }),
   dispatch => ({
     onReturnToClassicClick() {
-      dispatch(appSwitcherActions.displayFeedbackModal({
-        source: 'publish_sidebar',
-      }));
+      dispatch(
+        appSwitcherActions.displayFeedbackModal({
+          source: 'publish_sidebar',
+        })
+      );
     },
-  }),
-
+  })
 )(Sidebar);
 
 export reducer, { actions, actionTypes } from './reducer';

@@ -24,7 +24,8 @@ describe('StoryPreview', () => {
           note: 'Note 1',
           type: 'image',
           order: 1,
-          asset_url: 'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+          asset_url:
+            'https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
           thumbnail_url: '',
         },
       ];
@@ -55,82 +56,106 @@ describe('StoryPreview', () => {
       const wrapper = mount(
         <Provider store={store}>
           <StoryPreview />
-        </Provider>,
+        </Provider>
       );
-      expect(wrapper.find(PreviewPopover).length)
-        .toBe(1);
+      expect(wrapper.find(PreviewPopover).length).toBe(1);
       wrapper.unmount();
     });
 
     it('dispatches a handleSaveNoteClick action when click on Save Note in the Preview opened through the queue', () => {
       const wrapper = mount(
         <Provider store={store}>
-          <StoryPreview
-            view="queue"
-          />
-        </Provider>,
+          <StoryPreview view="queue" />
+        </Provider>
       );
 
       // User is in SEE_NOTE mode and clicks to edit note
-      wrapper.find(ViewNote).at(0).find(Button).at(0)
+      wrapper
+        .find(ViewNote)
+        .at(0)
+        .find(Button)
+        .at(0)
         .simulate('click');
 
       // User changes the note in the textarea
-      wrapper.find(EditNote).at(0).find('textarea').at(0)
+      wrapper
+        .find(EditNote)
+        .at(0)
+        .find('textarea')
+        .at(0)
         .simulate('change', { target: { value: 'Note Queue' } });
 
       // User clicks on save note button
-      wrapper.find(EditNote).at(0).find(Button).at(1)
+      wrapper
+        .find(EditNote)
+        .at(0)
+        .find(Button)
+        .at(1)
         .simulate('click');
 
-      expect(store.dispatch).toHaveBeenCalledWith(actions.handleSaveNoteClick({ order: 1, note: 'Note Queue' }));
+      expect(store.dispatch).toHaveBeenCalledWith(
+        actions.handleSaveNoteClick({ order: 1, note: 'Note Queue' })
+      );
       wrapper.unmount();
     });
 
     it('dispatches a handleSaveNoteComposer action when click on Save Note in the Preview opened through the composer', () => {
       const wrapper = mount(
         <Provider store={store}>
-          <StoryPreview
-            view="composer"
-          />
-        </Provider>,
+          <StoryPreview view="composer" />
+        </Provider>
       );
 
       // User is in SEE_NOTE mode and clicks to edit note
-      wrapper.find(ViewNote).at(0).find(Button).at(0)
+      wrapper
+        .find(ViewNote)
+        .at(0)
+        .find(Button)
+        .at(0)
         .simulate('click');
 
       // User changes the note in the textarea
-      wrapper.find(EditNote).at(0).find('textarea').at(0)
+      wrapper
+        .find(EditNote)
+        .at(0)
+        .find('textarea')
+        .at(0)
         .simulate('change', { target: { value: 'Note Composer' } });
 
       // User clicks on save note button
-      wrapper.find(EditNote).at(0).find(Button).at(1)
+      wrapper
+        .find(EditNote)
+        .at(0)
+        .find(Button)
+        .at(1)
         .simulate('click');
 
-      expect(store.dispatch).toHaveBeenCalledWith(actions.handleSaveNoteComposer({ order: 1, note: 'Note Composer' }));
-      expect(store.dispatch).toHaveBeenCalledWith(storyGroupActions.handleSaveStoryNote({ order: 1, note: 'Note Composer' }));
+      expect(store.dispatch).toHaveBeenCalledWith(
+        actions.handleSaveNoteComposer({ order: 1, note: 'Note Composer' })
+      );
+      expect(store.dispatch).toHaveBeenCalledWith(
+        storyGroupActions.handleSaveStoryNote({
+          order: 1,
+          note: 'Note Composer',
+        })
+      );
       wrapper.unmount();
     });
   });
 
   it('exports reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('exports actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('exports actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 
   it('exports middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

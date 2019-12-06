@@ -25,12 +25,7 @@ class Confirm extends React.Component {
     this.setState({ code: event.target.value });
   }
   render() {
-    const {
-      transition,
-      updateMethod,
-      loading,
-      error,
-    } = this.props;
+    const { transition, updateMethod, loading, error } = this.props;
     return (
       <Fragment>
         <Text type="h3">Enter confirmation code</Text>
@@ -38,18 +33,21 @@ class Confirm extends React.Component {
           <Text type="p">
             Awesome! Now we just need to confirm everything.{' '}
           </Text>
-          {updateMethod === 'app' &&
+          {updateMethod === 'app' && (
             <Text type="p">
               Open your authenticator app and input the generated code.
             </Text>
-          }
-          {updateMethod === 'sms' &&
-            <Text type="p">
-              Please input the code that we just texted you.
-            </Text>
-          }
+          )}
+          {updateMethod === 'sms' && (
+            <Text type="p">Please input the code that we just texted you.</Text>
+          )}
         </div>
-        <div style={{ padding: '0 0 24px' }} ref={(el) => { this.inputContainer = el; }}>
+        <div
+          style={{ padding: '0 0 24px' }}
+          ref={el => {
+            this.inputContainer = el;
+          }}
+        >
           <div style={{ paddingBottom: '4px' }}>
             <Text type="label">Code</Text>
           </div>
@@ -67,11 +65,7 @@ class Confirm extends React.Component {
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button
-            type="text"
-            label="Back"
-            onClick={() => transition('BACK')}
-          />
+          <Button type="text" label="Back" onClick={() => transition('BACK')} />
           <Button
             type="primary"
             label={loading ? 'Please wait…' : 'Next'}

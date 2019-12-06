@@ -1,10 +1,7 @@
-import {
-  middleware,
-} from './index';
+import { middleware } from './index';
 
 describe('Pusher Sync', () => {
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

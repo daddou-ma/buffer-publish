@@ -9,13 +9,18 @@ const SetupApp = ({ transition, qrCode }) => (
     <Text type="h3">Set up your authenticator app</Text>
     <div>
       <Text type="p">
-        Scan the QR code below in your authenticator app and you&apos;re all set!{' '}
+        Scan the QR code below in your authenticator app and you&apos;re all
+        set!{' '}
       </Text>
       <Text type="p">
         (If you have not installed an authenticator app yet,{' '}
-        <Link newTab href="https://faq.buffer.com/article/443-what-is-2-step-login">
+        <Link
+          newTab
+          href="https://faq.buffer.com/article/443-what-is-2-step-login"
+        >
           read here for more information.
-        </Link>)
+        </Link>
+        )
       </Text>
     </div>
     <div style={{ textAlign: 'center' }}>
@@ -23,16 +28,8 @@ const SetupApp = ({ transition, qrCode }) => (
     </div>
 
     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Button
-        type="text"
-        label="Back"
-        onClick={() => transition('BACK')}
-      />
-      <Button
-        type="primary"
-        label="Next"
-        onClick={() => transition('NEXT')}
-      />
+      <Button type="text" label="Back" onClick={() => transition('BACK')} />
+      <Button type="primary" label="Next" onClick={() => transition('NEXT')} />
     </div>
   </Fragment>
 );

@@ -33,9 +33,7 @@ const NoteSection = ({ note, setNote, translations }) => (
         autoFocus
       />
       <SubtextWrapper>
-        <Text>
-          {translations.noteSubText}
-        </Text>
+        <Text>{translations.noteSubText}</Text>
       </SubtextWrapper>
     </NoteWrapper>
   </Fragment>

@@ -9,7 +9,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch, getState }) => next => (action) => {
+export default ({ dispatch, getState }) => next => action => {
   next(action);
   let message = null;
   switch (action.type) {
@@ -20,41 +20,49 @@ export default ({ dispatch, getState }) => next => (action) => {
       window.location = getURL.getDisconnectBitlyURL(action.profileId);
       break;
     case profileActionTypes.SELECT_PROFILE:
-      dispatch(dataFetchActions.fetch({
-        name: 'getLinkShortener',
-        args: {
-          profileId: action.profile.id,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getLinkShortener',
+          args: {
+            profileId: action.profile.id,
+          },
+        })
+      );
       break;
     case actionTypes.CHANGE_SELECTED_LINK_SHORTENER:
-      dispatch(asyncDataFetch.fetch({
-        name: 'changeLinkShortener',
-        args: {
-          profileId: action.profileId,
-          domain: action.domain,
-        },
-      }));
+      dispatch(
+        asyncDataFetch.fetch({
+          name: 'changeLinkShortener',
+          args: {
+            profileId: action.profileId,
+            domain: action.domain,
+          },
+        })
+      );
       break;
     case actionTypes.TOGGLE_GOOGLE_ANALYTICS:
-      dispatch(asyncDataFetch.fetch({
-        name: 'toggleGoogleAnalytics',
-        args: {
-          profileId: action.profileId,
-          utmTrackingChoice: action.utmTrackingChoice,
-        },
-      }));
+      dispatch(
+        asyncDataFetch.fetch({
+          name: 'toggleGoogleAnalytics',
+          args: {
+            profileId: action.profileId,
+            utmTrackingChoice: action.utmTrackingChoice,
+          },
+        })
+      );
       break;
     case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_SUCCESS}`:
       refreshProfile(dispatch, action.args.profileId);
       break;
     case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
-      dispatch(asyncDataFetch.fetch({
-        name: 'getGATrackingSettings',
-        args: {
-          profileId: action.profileId,
-        },
-      }));
+      dispatch(
+        asyncDataFetch.fetch({
+          name: 'getGATrackingSettings',
+          args: {
+            profileId: action.profileId,
+          },
+        })
+      );
       break;
     case `saveGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.result.showNotification) {
@@ -63,43 +71,52 @@ export default ({ dispatch, getState }) => next => (action) => {
       refreshProfile(dispatch, action.args.profileId, message);
       break;
     case actionTypes.SAVE_GA_CUSTOM_FORM:
-      dispatch(asyncDataFetch.fetch({
-        name: 'saveGATrackingSettings',
-        args: {
-          profileId: action.profileId,
-          utmCampaign: action.utmCampaign,
-          utmSource: action.utmSource,
-          utmMedium: action.utmMedium,
-        },
-      }));
+      dispatch(
+        asyncDataFetch.fetch({
+          name: 'saveGATrackingSettings',
+          args: {
+            profileId: action.profileId,
+            utmCampaign: action.utmCampaign,
+            utmSource: action.utmSource,
+            utmMedium: action.utmMedium,
+          },
+        })
+      );
       break;
     case actionTypes.TOGGLE_INSTAGRAM_REMINDERS:
-      dispatch(dataFetchActions.fetch({
-        name: 'toggleInstagramReminders',
-        args: {
-          profileId: action.profileId,
-          allowReminders: action.allowReminders,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'toggleInstagramReminders',
+          args: {
+            profileId: action.profileId,
+            allowReminders: action.allowReminders,
+          },
+        })
+      );
       break;
     case actionTypes.CONFIRM_SHUFFLE_QUEUE: {
       const state = getState();
       const queueObj = state.queue.byProfileId[action.profileId];
       const count = Object.keys(queueObj.posts).length;
-      dispatch(dataFetchActions.fetch({
-        name: 'shuffleQueue',
-        args: {
-          profileId: action.profileId,
-          count,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'shuffleQueue',
+          args: {
+            profileId: action.profileId,
+            count,
+          },
+        })
+      );
       break;
     }
     case `shuffleQueue_${dataFetchActionTypes.FETCH_FAIL}`: {
-      dispatch(notificationActions.createNotification({
-        notificationType: 'fail',
-        message: 'Sorry! Something went wrong while shuffling your queue. Would you be up for trying again?',
-      }));
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'fail',
+          message:
+            'Sorry! Something went wrong while shuffling your queue. Would you be up for trying again?',
+        })
+      );
       break;
     }
     case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`: {

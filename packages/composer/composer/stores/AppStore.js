@@ -58,7 +58,6 @@ const getInitialState = () => ({
 
 let state = getInitialState();
 
-
 // Register with Redux DevTools (uncomment to enable)
 // registerStore('app', state);
 
@@ -106,8 +105,7 @@ const softResetState = () => {
   };
 };
 
-
-const getNewProfile = (data) => ({
+const getNewProfile = data => ({
   id: data.id,
   service: {
     name: data.serviceName,
@@ -130,7 +128,8 @@ const getNewProfile = (data) => ({
   isContributor: data.isContributor,
   isManager: data.isManager,
   subprofilesOrignatedFromAPI: null,
-  instagramDirectEnabled: data.instagramDirectEnabled && data.serviceName === 'instagram',
+  instagramDirectEnabled:
+    data.instagramDirectEnabled && data.serviceName === 'instagram',
   canPostComment: data.canPostComment,
   profileHasPostingSchedule: data.profileHasPostingSchedule,
   // Profile-specific app state
@@ -139,10 +138,13 @@ const getNewProfile = (data) => ({
   },
 });
 
-const getNewProfileGroup = ({ id, name, profileIds }) =>
-  ({ id, name, profileIds });
+const getNewProfileGroup = ({ id, name, profileIds }) => ({
+  id,
+  name,
+  profileIds,
+});
 
-const getNewUserData = (data) => ({
+const getNewUserData = data => ({
   id: data.id,
   s3UploadSignature: data.s3UploadSignature,
   uses24hTime: data.uses24hTime,
@@ -163,21 +165,32 @@ const getNewUserData = (data) => ({
   hasAccessToUserTag: data.hasAccessToUserTag,
 });
 
-const getNewSubprofile = ({ avatar, id, name, isShared }) =>
-  ({ avatar, id, name, isShared });
+const getNewSubprofile = ({ avatar, id, name, isShared }) => ({
+  avatar,
+  id,
+  name,
+  isShared,
+});
 
-const getNewPreventsSavingObj = ({ message, composerId = null, code = undefined }) =>
-  ({ message, composerId, code });
+const getNewPreventsSavingObj = ({
+  message,
+  composerId = null,
+  code = undefined,
+}) => ({ message, composerId, code });
 
-const getNewTwitterAutocompleteBootstrapData = ({ friends, profilesIds }) =>
-  ({ friends, profilesIds });
+const getNewTwitterAutocompleteBootstrapData = ({ friends, profilesIds }) => ({
+  friends,
+  profilesIds,
+});
 
 const AppStore = Object.assign({}, EventEmitter.prototype, {
   emitChange: () => AppStore.emit(CHANGE_EVENT),
-  addChangeListener: (callback) => AppStore.on(CHANGE_EVENT, callback),
-  removeChangeListener: (callback) => AppStore.removeListener(CHANGE_EVENT, callback),
+  addChangeListener: callback => AppStore.on(CHANGE_EVENT, callback),
+  removeChangeListener: callback =>
+    AppStore.removeListener(CHANGE_EVENT, callback),
 
-  isExtension: () => state.metaData.appEnvironment !== AppEnvironments.WEB_DASHBOARD,
+  isExtension: () =>
+    state.metaData.appEnvironment !== AppEnvironments.WEB_DASHBOARD,
   getAppState: () => state.appState,
   getUserData: () => state.userData,
   getMetaData: () => state.metaData,
@@ -193,64 +206,76 @@ const AppStore = Object.assign({}, EventEmitter.prototype, {
       profiles = state.profiles;
     } else {
       profiles = state.profiles
-        .filter((profile) => ids.includes(profile.id))
-        .sort((profileA, profileB) => (ids.indexOf(profileA.id) < ids.indexOf(profileB.id) ? -1 : 1));
+        .filter(profile => ids.includes(profile.id))
+        .sort((profileA, profileB) =>
+          ids.indexOf(profileA.id) < ids.indexOf(profileB.id) ? -1 : 1
+        );
     }
 
     return profiles;
   },
 
-  getProfileIds: () => AppStore.getProfiles().map((profile) => profile.id),
+  getProfileIds: () => AppStore.getProfiles().map(profile => profile.id),
 
-  getProfilesForService: (serviceName) =>
-    AppStore.getProfiles().filter((profile) => profile.service.name === serviceName),
+  getProfilesForService: serviceName =>
+    AppStore.getProfiles().filter(
+      profile => profile.service.name === serviceName
+    ),
 
-  getSelectedProfiles: () => state.profiles.filter((profile) => profile.isSelected),
+  getSelectedProfiles: () =>
+    state.profiles.filter(profile => profile.isSelected),
 
-  hasProfilesSelected: () => state.profiles.some((profile) => profile.isSelected),
+  hasProfilesSelected: () => state.profiles.some(profile => profile.isSelected),
 
   hasFBDraftWithNoText: () => {
-    const emptyFacebookDrafts =
-      ComposerStore.getEnabledDrafts().filter((draft) =>
+    const emptyFacebookDrafts = ComposerStore.getEnabledDrafts().filter(
+      draft =>
         draft.id === 'facebook' &&
         draft.editorState.getCurrentContent().getPlainText().length < 1
-      );
+    );
     return emptyFacebookDrafts.length > 0;
   },
 
-  getSelectedProfilesForService: (serviceName) =>
-    AppStore.getSelectedProfiles().filter((profile) => profile.service.name === serviceName),
+  getSelectedProfilesForService: serviceName =>
+    AppStore.getSelectedProfiles().filter(
+      profile => profile.service.name === serviceName
+    ),
 
-  getProfile: (id) => state.profiles.find((profile) => profile.id === id),
+  getProfile: id => state.profiles.find(profile => profile.id === id),
 
-  getProfileGroup: (id) => state.userData.profileGroups.find((group) => group.id === id),
+  getProfileGroup: id =>
+    state.userData.profileGroups.find(group => group.id === id),
 
   getServicesWithSelectedProfiles: () => {
-    const selectedProfilesServicesNames =
-      AppStore.getSelectedProfiles().map((profile) => profile.service.name);
+    const selectedProfilesServicesNames = AppStore.getSelectedProfiles().map(
+      profile => profile.service.name
+    );
 
     const dedupedServicesNames = [...new Set(selectedProfilesServicesNames)];
-    const selectedServices = dedupedServicesNames.map((serviceName) => Services.get(serviceName));
+    const selectedServices = dedupedServicesNames.map(serviceName =>
+      Services.get(serviceName)
+    );
 
     return selectedServices;
   },
 
-  isTwitterAutocompleBootstrapDataLoaded: () => (
-    state.appState.twitterAutocompleBootstrapData !== null
-  ),
+  isTwitterAutocompleBootstrapDataLoaded: () =>
+    state.appState.twitterAutocompleBootstrapData !== null,
 
-  getMatchingTwitterAutocompleteBootstrapData: (search) => {
+  getMatchingTwitterAutocompleteBootstrapData: search => {
     const regExpCompatSearch = escapeRegExp(search);
     const searchRegex = new RegExp(regExpCompatSearch, 'i');
 
-    return state.appState.twitterAutocompleBootstrapData.friends
-      .filter((user) => user.screenName.startsWith(search) || searchRegex.test(user.fullName));
+    return state.appState.twitterAutocompleBootstrapData.friends.filter(
+      user =>
+        user.screenName.startsWith(search) || searchRegex.test(user.fullName)
+    );
   },
 
-  getTwitterAutocompleteBootstrapDataProfilesIds: () => (
-    state.appState.twitterAutocompleBootstrapData !== null ?
-      state.appState.twitterAutocompleBootstrapData.profilesIds : []
-  ),
+  getTwitterAutocompleteBootstrapDataProfilesIds: () =>
+    state.appState.twitterAutocompleBootstrapData !== null
+      ? state.appState.twitterAutocompleBootstrapData.profilesIds
+      : [],
 
   /**
    * Returns:
@@ -258,7 +283,7 @@ const AppStore = Object.assign({}, EventEmitter.prototype, {
    * - undefined if slots data for that day isn't available (yet)
    * - an array of slots for that day (empty if no slots)
    */
-  getAvailableSchedulesSlotsForDay: (timestamp) => {
+  getAvailableSchedulesSlotsForDay: timestamp => {
     const selectedProfiles = AppStore.getSelectedProfiles();
     const isSlotPickingAvailable = selectedProfiles.length === 1;
     if (!isSlotPickingAvailable) return false;
@@ -273,20 +298,23 @@ const AppStore = Object.assign({}, EventEmitter.prototype, {
 });
 
 // Checks whether a profile already exists, to prevent duplication
-const isProfileUnique = (profileData) =>
-  state.profiles.every((profile) => profile.id !== profileData.id);
+const isProfileUnique = profileData =>
+  state.profiles.every(profile => profile.id !== profileData.id);
 
-const createProfiles = (profilesData) => {
-  profilesData.forEach((profileData) => {
-    if (isProfileUnique(profileData)) state.profiles.push(getNewProfile(profileData));
+const createProfiles = profilesData => {
+  profilesData.forEach(profileData => {
+    if (isProfileUnique(profileData))
+      state.profiles.push(getNewProfile(profileData));
   });
 };
 
-const createProfileGroup = (groupData) =>
+const createProfileGroup = groupData =>
   state.userData.profileGroups.push(getNewProfileGroup(groupData));
 
 const updateProfileGroup = ({ id, name, profileIds }) => {
-  const groupToUpdate = state.userData.profileGroups.find((group) => group.id === id);
+  const groupToUpdate = state.userData.profileGroups.find(
+    group => group.id === id
+  );
 
   Object.assign(groupToUpdate, {
     name,
@@ -295,11 +323,16 @@ const updateProfileGroup = ({ id, name, profileIds }) => {
 };
 
 const deleteProfileGroup = ({ id }) => {
-  const index = state.userData.profileGroups.findIndex((group) => group.id === id);
+  const index = state.userData.profileGroups.findIndex(
+    group => group.id === id
+  );
   state.userData.profileGroups.splice(index, 1);
 };
 
-const setDraftsSavingState = (savingState, queueingType = QueueingTypes.QUEUE) => {
+const setDraftsSavingState = (
+  savingState,
+  queueingType = QueueingTypes.QUEUE
+) => {
   switch (savingState) {
     case AsyncOperationStates.PENDING:
       state.appState.isDraftsSavePending = true;
@@ -334,13 +367,12 @@ const refreshTwitterAutocompleteBootstrapData = debounce(() => {
   const firstTwo = selectedProfiles.slice(0, 2);
   if (firstTwo.length === 0) return;
 
-  const firstTwoIds = firstTwo.map((profile) => profile.id);
+  const firstTwoIds = firstTwo.map(profile => profile.id);
   const currentBootstrapDataProfilesIds = AppStore.getTwitterAutocompleteBootstrapDataProfilesIds();
 
-  const shouldRefreshBootstrapData = (
+  const shouldRefreshBootstrapData =
     currentBootstrapDataProfilesIds.length > firstTwoIds.length ||
-    firstTwoIds.some((id) => !currentBootstrapDataProfilesIds.includes(id))
-  );
+    firstTwoIds.some(id => !currentBootstrapDataProfilesIds.includes(id));
 
   if (shouldRefreshBootstrapData) {
     AppActionCreators.refreshTwitterAutocompleteBootstrapData(firstTwoIds);
@@ -356,9 +388,12 @@ const refreshFacebookDomainOwnershipData = () => {
   if (!ComposerStore.isDraftEnabled('facebook')) return;
   if (!ComposerStore.doesDraftHaveLinkAttachmentEnabled('facebook')) return;
 
-  const selectedFacebookProfiles = AppStore.getSelectedProfilesForService('facebook');
-  const selectedFacebookPages =
-    selectedFacebookProfiles.filter((profile) => profile.serviceType === 'page');
+  const selectedFacebookProfiles = AppStore.getSelectedProfilesForService(
+    'facebook'
+  );
+  const selectedFacebookPages = selectedFacebookProfiles.filter(
+    profile => profile.serviceType === 'page'
+  );
   if (selectedFacebookPages.length > maxPagesToCheckCount) return;
 
   const selectedPages = selectedFacebookPages.slice(0, maxPagesToCheckCount);
@@ -369,12 +404,14 @@ const refreshFacebookDomainOwnershipData = () => {
   const domainOwnershipPerProfile =
     state.appState.domainsOwnedByFacebookPages.get(linkUrl) || new Map();
 
-  const pendingRequestsCountForDomain =
-    Array.from(domainOwnershipPerProfile.values()).filter((isOwner) => isOwner === null).length;
+  const pendingRequestsCountForDomain = Array.from(
+    domainOwnershipPerProfile.values()
+  ).filter(isOwner => isOwner === null).length;
   if (pendingRequestsCountForDomain >= maxPagesToCheckCount) return;
 
-  const selectedProfilesToQueryFacebookForOwnership =
-    selectedPages.filter(({ id }) => domainOwnershipPerProfile.get(id) === undefined);
+  const selectedProfilesToQueryFacebookForOwnership = selectedPages.filter(
+    ({ id }) => domainOwnershipPerProfile.get(id) === undefined
+  );
 
   selectedProfilesToQueryFacebookForOwnership.forEach(({ id }) => {
     // eslint-disable-next-line no-use-before-define
@@ -395,22 +432,34 @@ const selectProfilesOnBehalfOfUser = (
 ) => {
   const profilesToSelect = AppStore.getProfiles(ids);
 
-  const [profilesWithSubprofiles, profilesWithoutSubprofiles] =
-    partition(profilesToSelect, (profile) => profile.subprofiles.length > 0);
+  const [profilesWithSubprofiles, profilesWithoutSubprofiles] = partition(
+    profilesToSelect,
+    profile => profile.subprofiles.length > 0
+  );
 
   const hasProfilesWithoutSubprofiles = profilesWithoutSubprofiles.length > 0;
   const hasProfilesWithSubprofiles = profilesWithSubprofiles.length > 0;
 
   if (hasProfilesWithoutSubprofiles) {
-    const profilesIdsWithoutSubprofiles = profilesWithoutSubprofiles.map((profile) => profile.id);
-    AppActionCreators.selectProfiles(profilesIdsWithoutSubprofiles, markAppAsLoadedWhenDone, originatedFromGroupSelection);
+    const profilesIdsWithoutSubprofiles = profilesWithoutSubprofiles.map(
+      profile => profile.id
+    );
+    AppActionCreators.selectProfiles(
+      profilesIdsWithoutSubprofiles,
+      markAppAsLoadedWhenDone,
+      originatedFromGroupSelection
+    );
   } else if (markAppAsLoadedWhenDone) {
     AppActionCreators.markAppAsLoaded();
   }
 
   if (hasProfilesWithSubprofiles) {
-    const profilesIdsWithSubprofiles = profilesWithSubprofiles.map((profile) => profile.id);
-    AppActionCreators.queueProfileSubprofilesDropdownsIdsToExpand(profilesIdsWithSubprofiles);
+    const profilesIdsWithSubprofiles = profilesWithSubprofiles.map(
+      profile => profile.id
+    );
+    AppActionCreators.queueProfileSubprofilesDropdownsIdsToExpand(
+      profilesIdsWithSubprofiles
+    );
   }
 };
 
@@ -436,7 +485,9 @@ const selectProfile = (
 
   // Enable composer if the selected profile is the first selected for that service
   const serviceName = profile.service.name;
-  const selectedProfilesForService = AppStore.getSelectedProfilesForService(serviceName);
+  const selectedProfilesForService = AppStore.getSelectedProfilesForService(
+    serviceName
+  );
 
   if (selectedProfilesForService.length === 1) {
     const composerId = serviceName;
@@ -449,15 +500,15 @@ const selectProfile = (
   // Unselect previously selected profile if we're dealing with Twitter
   if (enableTwitterChanges) {
     if (serviceName === 'twitter' && selectedProfilesForService.length === 2) {
-      const previousProfile = selectedProfilesForService.find((p) => p.id !== id);
+      const previousProfile = selectedProfilesForService.find(p => p.id !== id);
       previousProfile.isSelected = false;
 
       // Show max once per session
       if (!state.appState.wasTwitterMaxOneProfileSelectedNotifClosedOnce) {
         const notifScope = NotificationScopes.TWITTER_MAX_ONE_PROFILE_SELECTED;
-        const notifMessage = originatedFromGroupSelection ?
-          `Due to <a href="https://faq.buffer.com/article/937-publish-composer-one-twitter-account" target="_blank">recent changes with Twitter</a>, you're only able to post to one Twitter profile at a time. <b>So we've only selected ${profile.service.formattedUsername} Twitter profile from your group. <a href="/app/edit_groups" target="_blank">Click here to edit your group.</a></b>` :
-          `Due to recent changes with Twitter, you're only able to post to one Twitter profile at a time, so <b>you are only posting to ${profile.service.formattedUsername}</b>. <a href="https://faq.buffer.com/article/937-publish-composer-one-twitter-account" target="_blank">Learn more about the changes</a>.`;
+        const notifMessage = originatedFromGroupSelection
+          ? `Due to <a href="https://faq.buffer.com/article/937-publish-composer-one-twitter-account" target="_blank">recent changes with Twitter</a>, you're only able to post to one Twitter profile at a time. <b>So we've only selected ${profile.service.formattedUsername} Twitter profile from your group. <a href="/app/edit_groups" target="_blank">Click here to edit your group.</a></b>`
+          : `Due to recent changes with Twitter, you're only able to post to one Twitter profile at a time, so <b>you are only posting to ${profile.service.formattedUsername}</b>. <a href="https://faq.buffer.com/article/937-publish-composer-one-twitter-account" target="_blank">Learn more about the changes</a>.`;
 
         NotificationActionCreators.removeAllNotificationsByScope(notifScope);
         NotificationActionCreators.queueInfo({
@@ -472,10 +523,11 @@ const selectProfile = (
 
   if (serviceName === 'twitter') refreshTwitterAutocompleteBootstrapData();
   if (serviceName === 'facebook') refreshFacebookDomainOwnershipData();
-  if (serviceName === 'instagram') ComposerActionCreators.updateInstagramState();
+  if (serviceName === 'instagram')
+    ComposerActionCreators.updateInstagramState();
 };
 
-const unselectProfile = (id) => {
+const unselectProfile = id => {
   const profile = AppStore.getProfile(id);
   if (!profile.isSelected) return;
 
@@ -489,8 +541,9 @@ const unselectProfile = (id) => {
 
   // Disable composer if the unselected profile was the last selected for that service
   const serviceName = profile.service.name;
-  const selectedProfilesCountForService =
-    AppStore.getSelectedProfilesForService(serviceName).length;
+  const selectedProfilesCountForService = AppStore.getSelectedProfilesForService(
+    serviceName
+  ).length;
 
   if (selectedProfilesCountForService === 0) {
     const composerId = serviceName;
@@ -508,7 +561,8 @@ const unselectProfile = (id) => {
 
   if (serviceName === 'twitter') refreshTwitterAutocompleteBootstrapData();
   if (serviceName === 'facebook') refreshFacebookDomainOwnershipData();
-  if (serviceName === 'instagram') ComposerActionCreators.updateInstagramState();
+  if (serviceName === 'instagram')
+    ComposerActionCreators.updateInstagramState();
 };
 
 const selectSubprofile = (profileId, subprofileId) => {
@@ -531,7 +585,7 @@ const selectSubprofiles = (idsMap, markAppAsLoadedWhenDone = false) => {
   AppActionCreators.selectProfiles(profileIds, markAppAsLoadedWhenDone);
 };
 
-const unselectSubprofile = (profileId) => {
+const unselectSubprofile = profileId => {
   const profile = AppStore.getProfile(profileId);
   profile.selectedSubprofileId = null;
 
@@ -547,9 +601,11 @@ const checkIfSavingPossible = () => {
   if (!AppStore.hasProfilesSelected()) {
     return {
       isSavingPossible: false,
-      whatPreventsSaving: [{
-        message: 'At least one profile should be selected',
-      }],
+      whatPreventsSaving: [
+        {
+          message: 'At least one profile should be selected',
+        },
+      ],
     };
   }
 
@@ -563,9 +619,11 @@ const checkIfSavingPossible = () => {
   if (state.appState.isThumbnailLoading) {
     return {
       isSavingPossible: false,
-      whatPreventsSaving: [{
-        message: 'Waiting for thumbnail to save..',
-      }],
+      whatPreventsSaving: [
+        {
+          message: 'Waiting for thumbnail to save..',
+        },
+      ],
     };
   }
 
@@ -573,9 +631,11 @@ const checkIfSavingPossible = () => {
   if (ComposerStore.areAllDraftsSaved()) {
     return {
       isSavingPossible: false,
-      whatPreventsSaving: [{
-        message: 'No more updates to be saved',
-      }],
+      whatPreventsSaving: [
+        {
+          message: 'No more updates to be saved',
+        },
+      ],
     };
   }
 
@@ -585,8 +645,9 @@ const checkIfSavingPossible = () => {
 
   // Enabled drafts shouldn't be above the optional character limit
   const enabledDrafts = ComposerStore.getEnabledDrafts();
-  const enabledDraftsAboveCharLimit = enabledDrafts.filter(draft =>
-    draft.characterCount > draft.service.charLimit);
+  const enabledDraftsAboveCharLimit = enabledDrafts.filter(
+    draft => draft.characterCount > draft.service.charLimit
+  );
   const hasEnabledDraftsAboveCharLimit = enabledDraftsAboveCharLimit.length > 0;
 
   if (hasInvalidEnabledDrafts || hasEnabledDraftsAboveCharLimit) {
@@ -598,12 +659,12 @@ const checkIfSavingPossible = () => {
           composerId: draft.id,
           code: 1,
         })),
-        ...invalidEnabledDraftsInfo.map(({ draft, messages }) => (
+        ...invalidEnabledDraftsInfo.map(({ draft, messages }) =>
           messages.map(message => ({
             message,
             composerId: draft.id,
           }))
-        )),
+        )
       ),
     };
   }
@@ -615,9 +676,11 @@ const checkIfSavingPossible = () => {
   if (scheduledAt !== null && scheduledAt <= currentTimestampSeconds) {
     return {
       isSavingPossible: false,
-      whatPreventsSaving: [{
-        message: 'The scheduled time seems to be in the past',
-      }],
+      whatPreventsSaving: [
+        {
+          message: 'The scheduled time seems to be in the past',
+        },
+      ],
     };
   }
 
@@ -628,25 +691,29 @@ const updateIsSavingPossible = () => {
   const { isSavingPossible, whatPreventsSaving = [] } = checkIfSavingPossible();
 
   state.appState.isSavingPossible = isSavingPossible;
-  state.appState.whatPreventsSaving =
-    whatPreventsSaving.map(what => getNewPreventsSavingObj(what));
+  state.appState.whatPreventsSaving = whatPreventsSaving.map(what =>
+    getNewPreventsSavingObj(what)
+  );
 };
 
 const getExpandedComposerId = () => state.appState.expandedComposerId;
 
-const setExpandedComposerId = (id) => {
+const setExpandedComposerId = id => {
   if (id !== null && typeof id !== 'undefined') {
     if (ComposerStore.isDraftLocked(id)) return;
   }
   state.appState.expandedComposerId = id;
 };
 
-const setComposersHaveBeenExpanded = () => (state.appState.composersHaveBeenExpanded = true);
+const setComposersHaveBeenExpanded = () =>
+  (state.appState.composersHaveBeenExpanded = true);
 
-const expandProfileSubprofileDropdown = (id) => {
+const expandProfileSubprofileDropdown = id => {
   state.appState.expandedProfileSubprofileDropdownId = id;
 
-  const idIndex = state.appState.profileSubprofileDropdownsIdsToExpand.indexOf(id);
+  const idIndex = state.appState.profileSubprofileDropdownsIdsToExpand.indexOf(
+    id
+  );
   const wasDropdownWaitingForExpansion = idIndex !== -1;
 
   if (wasDropdownWaitingForExpansion) {
@@ -654,15 +721,17 @@ const expandProfileSubprofileDropdown = (id) => {
   }
 };
 
-const setThumbnailLoading = (isLoading) => {
+const setThumbnailLoading = isLoading => {
   state.appState.isThumbnailLoading = isLoading;
 };
 
-const collapseProfileSubprofileDropdown = (id) => {
-  const isDropdownCurrentlyExpanded = state.appState.expandedProfileSubprofileDropdownId === id;
+const collapseProfileSubprofileDropdown = id => {
+  const isDropdownCurrentlyExpanded =
+    state.appState.expandedProfileSubprofileDropdownId === id;
   if (!isDropdownCurrentlyExpanded) return;
 
-  const dropdownIdsToExpand = state.appState.profileSubprofileDropdownsIdsToExpand;
+  const dropdownIdsToExpand =
+    state.appState.profileSubprofileDropdownsIdsToExpand;
   const shouldExpandOtherDropdowns = dropdownIdsToExpand.length > 0;
 
   if (shouldExpandOtherDropdowns) {
@@ -673,14 +742,16 @@ const collapseProfileSubprofileDropdown = (id) => {
   }
 };
 
-const queueProfileSubprofilesDropdownsIdsToExpand = (ids) => {
-  const unselectedProfileIds = ids.filter((id) => {
+const queueProfileSubprofilesDropdownsIdsToExpand = ids => {
+  const unselectedProfileIds = ids.filter(id => {
     const profile = AppStore.getProfile(id);
     return !profile.isSelected && !profile.isDisabled;
   });
   if (unselectedProfileIds.length === 0) return;
 
-  state.appState.profileSubprofileDropdownsIdsToExpand.push(...unselectedProfileIds);
+  state.appState.profileSubprofileDropdownsIdsToExpand.push(
+    ...unselectedProfileIds
+  );
 
   // Automatically expand first queued profile's subprofiles dropdown
   const firstUnselectedProfileId = unselectedProfileIds[0];
@@ -691,15 +762,16 @@ const emptyProfileSubprofilesDropdownsIdsToExpand = () => {
   state.appState.profileSubprofileDropdownsIdsToExpand = [];
 };
 
-const setUserData = (userData) => (state.userData = getNewUserData(userData));
-const setImageDimensionsKey = (key) => (state.imageDimensionsKey = key);
-const setMetaData = (metaData) => (state.metaData = metaData);
-const setOptions = (options) => (state.options = options);
-const setCsrfToken = (csrfToken) => (state.csrfToken = csrfToken);
+const setUserData = userData => (state.userData = getNewUserData(userData));
+const setImageDimensionsKey = key => (state.imageDimensionsKey = key);
+const setMetaData = metaData => (state.metaData = metaData);
+const setOptions = options => (state.options = options);
+const setCsrfToken = csrfToken => (state.csrfToken = csrfToken);
 
 const setTwitterAutocompleteBootstrapData = (friends, profilesIds) => {
-  state.appState.twitterAutocompleBootstrapData =
-    getNewTwitterAutocompleteBootstrapData({ friends, profilesIds });
+  state.appState.twitterAutocompleBootstrapData = getNewTwitterAutocompleteBootstrapData(
+    { friends, profilesIds }
+  );
 };
 
 const createNewSubprofile = (profileId, id, avatar, name, isShared) => {
@@ -714,7 +786,9 @@ const refreshSubprofileData = (subprofiles, profileId) => {
   if (profile.subprofiles.length < subprofiles.length) {
     profile.subprofilesOrignatedFromAPI = true;
   }
-  profile.subprofiles = subprofiles.map((subprofile) => getNewSubprofile(subprofile));
+  profile.subprofiles = subprofiles.map(subprofile =>
+    getNewSubprofile(subprofile)
+  );
 };
 
 const setProfileSubprofileCreationState = (profileId, creationState) => {
@@ -734,10 +808,14 @@ const setProfileSubprofileCreationState = (profileId, creationState) => {
   }
 };
 
-const selectGroupProfiles = (id) => {
+const selectGroupProfiles = id => {
   const { profileIds: profilesIdsToSelect } = AppStore.getProfileGroup(id);
   // TODO: refactor the call below to an object wiht optional props rather than mult. params
-  AppActionCreators.selectProfilesOnBehalfOfUser(profilesIdsToSelect, undefined, true);
+  AppActionCreators.selectProfilesOnBehalfOfUser(
+    profilesIdsToSelect,
+    undefined,
+    true
+  );
 };
 
 const unselectGroupProfiles = (id, selectedProfileGroupsIds) => {
@@ -747,36 +825,42 @@ const unselectGroupProfiles = (id, selectedProfileGroupsIds) => {
   selectedProfileGroupsIds.splice(unselectedGroupIndex, 1);
 
   // Get all the profile ids from unique groups
-  const selectedProfileIdsFromUniqueGroups =
-    selectedProfileGroupsIds.reduce((reducedUniqueGroupsProfileIds, selectedGroupId) => {
+  const selectedProfileIdsFromUniqueGroups = selectedProfileGroupsIds.reduce(
+    (reducedUniqueGroupsProfileIds, selectedGroupId) => {
       const selectedGroup = AppStore.getProfileGroup(selectedGroupId);
       reducedUniqueGroupsProfileIds =
         selectedGroup.profileIds.length === group.profileIds.length &&
-        selectedGroup.profileIds.every((item) => group.profileIds.includes(item)) ?
-        reducedUniqueGroupsProfileIds :
-        reducedUniqueGroupsProfileIds.concat(selectedGroup.profileIds);
+        selectedGroup.profileIds.every(item => group.profileIds.includes(item))
+          ? reducedUniqueGroupsProfileIds
+          : reducedUniqueGroupsProfileIds.concat(selectedGroup.profileIds);
       return reducedUniqueGroupsProfileIds;
-    }, []);
+    },
+    []
+  );
 
   // Unselect this group's profiles that aren't selected as part of another group,
-  const profilesIdsToUnselect =
-    group.profileIds.reduce((reducedProfilesIdsToUnselect, profileIdToUnselect) =>
-      (selectedProfileIdsFromUniqueGroups.includes(profileIdToUnselect) ?
-      reducedProfilesIdsToUnselect : reducedProfilesIdsToUnselect.concat(profileIdToUnselect)),
-    []);
+  const profilesIdsToUnselect = group.profileIds.reduce(
+    (reducedProfilesIdsToUnselect, profileIdToUnselect) =>
+      selectedProfileIdsFromUniqueGroups.includes(profileIdToUnselect)
+        ? reducedProfilesIdsToUnselect
+        : reducedProfilesIdsToUnselect.concat(profileIdToUnselect),
+    []
+  );
   AppActionCreators.unselectProfiles(profilesIdsToUnselect);
 };
 
 const toggleAllProfiles = () => {
   const profiles = AppStore.getProfiles();
 
-  const [selectedProfiles, unselectedProfiles] =
-    partition(profiles, (profile) => profile.isSelected);
+  const [selectedProfiles, unselectedProfiles] = partition(
+    profiles,
+    profile => profile.isSelected
+  );
 
   const hasSelectedProfiles = selectedProfiles.length > 0;
 
   if (hasSelectedProfiles) {
-    const selectedProfilesIds = selectedProfiles.map((profile) => profile.id);
+    const selectedProfilesIds = selectedProfiles.map(profile => profile.id);
     AppActionCreators.unselectProfiles(selectedProfilesIds);
     AppActionCreators.emptyProfileSubprofilesDropdownsIdsToExpand();
   } else {
@@ -784,8 +868,10 @@ const toggleAllProfiles = () => {
     // the first profiles to be selected (and thus its composer the first to be enabled)
     const { lastInteractedWithComposerId } = ComposerStore.getMeta();
     const unselectedProfilesIds = unselectedProfiles
-      .sort((profile) => (profile.service.name === lastInteractedWithComposerId ? -1 : 1))
-      .map((profile) => profile.id);
+      .sort(profile =>
+        profile.service.name === lastInteractedWithComposerId ? -1 : 1
+      )
+      .map(profile => profile.id);
     AppActionCreators.selectProfilesOnBehalfOfUser(unselectedProfilesIds);
   }
 };
@@ -821,19 +907,19 @@ const markAppAsNotLoaded = () => {
 
 // There's a CORS error when trying to reset the s3UploadSignature. Leaving signature
 // as is until refresh
-const resetUserData = (userData) => {
-  Object.keys(userData).forEach((key) => {
+const resetUserData = userData => {
+  Object.keys(userData).forEach(key => {
     if (key !== 's3UploadSignature' || key !== 's3_upload_signature') {
       state.userData[key] = userData[key];
     }
   });
 };
 
-const updateOmniboxState = (isEnabled) => {
+const updateOmniboxState = isEnabled => {
   state.appState.isOmniboxEnabled = isEnabled;
 };
 
-const updatePartiallySavedDraftsProfilesIds = (partiallySavedDrafts) => {
+const updatePartiallySavedDraftsProfilesIds = partiallySavedDrafts => {
   const { partiallySavedDraftsProfilesIds } = state.appState;
 
   // Merge each draft's previous profiles ids with new ones
@@ -870,7 +956,9 @@ const getProfileSlotsForDay = (profileId, localDateMoment) => {
  * data available for a limited number of days. Whenever we might need more
  * slot data (scheduledAt or profile changed), make sure we have it!
  */
-const ensureProfileSchedulesSlotsDataIsAvailableForDate = (timestamp = null) => {
+const ensureProfileSchedulesSlotsDataIsAvailableForDate = (
+  timestamp = null
+) => {
   const selectedProfiles = AppStore.getSelectedProfiles();
   let isSlotPickingAvailable = selectedProfiles.length === 1;
   if (!isSlotPickingAvailable) return;
@@ -887,8 +975,14 @@ const ensureProfileSchedulesSlotsDataIsAvailableForDate = (timestamp = null) => 
 
   const firstDayOfMonthMoment = localDateMoment.clone().startOf('month');
   const lastDayOfMonthMoment = localDateMoment.clone().endOf('month');
-  const profileSlotsForFirstDayOfMonth = getProfileSlotsForDay(profileId, firstDayOfMonthMoment);
-  const profileSlotsForLastDayOfMonth = getProfileSlotsForDay(profileId, lastDayOfMonthMoment);
+  const profileSlotsForFirstDayOfMonth = getProfileSlotsForDay(
+    profileId,
+    firstDayOfMonthMoment
+  );
+  const profileSlotsForLastDayOfMonth = getProfileSlotsForDay(
+    profileId,
+    lastDayOfMonthMoment
+  );
 
   const isSlotDataForMonthMissing =
     typeof profileSlotsForFirstDayOfMonth === 'undefined' ||
@@ -903,11 +997,12 @@ const ensureProfileSchedulesSlotsDataIsAvailableForDate = (timestamp = null) => 
 const updateProfileSchedulesSlots = (id, slots = {}) => {
   const { profilesSchedulesSlots } = state.userData;
   if (profilesSchedulesSlots) {
-    if (!profilesSchedulesSlots.hasOwnProperty(id)) profilesSchedulesSlots[id] = {};
+    if (!profilesSchedulesSlots.hasOwnProperty(id))
+      profilesSchedulesSlots[id] = {};
     const profileSchedulesSlots = profilesSchedulesSlots[id];
 
-    const addDaySlotsToProfileSchedulesSlots = (dayString) => {
-      (profileSchedulesSlots[dayString] = slots[dayString]);
+    const addDaySlotsToProfileSchedulesSlots = dayString => {
+      profileSchedulesSlots[dayString] = slots[dayString];
     };
 
     Object.keys(slots).forEach(addDaySlotsToProfileSchedulesSlots);
@@ -925,18 +1020,25 @@ const updateFacebookDomainOwnershipForPage = (id, url, isOwner) => {
   domainData.set(id, isOwner);
 };
 
-const resetProfilesData = (profilesData) => {
+const resetProfilesData = profilesData => {
   AppActionCreators.updateOmniboxState(null);
-  AppActionCreators.unselectProfiles(AppStore.getSelectedProfiles().map(({ id }) => id));
-  const profilesToSelect = profilesData.filter((profile) => profile.shouldBeAutoSelected);
+  AppActionCreators.unselectProfiles(
+    AppStore.getSelectedProfiles().map(({ id }) => id)
+  );
+  const profilesToSelect = profilesData.filter(
+    profile => profile.shouldBeAutoSelected
+  );
   state.appState.composersWhichHaveBeenCollapsed = new Set();
 
   if (profilesToSelect) {
-    AppActionCreators.selectProfilesOnBehalfOfUser(profilesToSelect.map(profile => profile.id), true);
+    AppActionCreators.selectProfilesOnBehalfOfUser(
+      profilesToSelect.map(profile => profile.id),
+      true
+    );
   }
 };
 
-const onDispatchedPayload = (payload) => {
+const onDispatchedPayload = payload => {
   const action = payload.action;
   let isPayloadInteresting = true;
 
@@ -946,7 +1048,10 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_SAVE_DRAFTS:
-      setDraftsSavingState(AsyncOperationStates.PENDING, action.data.queueingType);
+      setDraftsSavingState(
+        AsyncOperationStates.PENDING,
+        action.data.queueingType
+      );
       break;
 
     case ActionTypes.APP_SELECT_SUBPROFILE:
@@ -979,7 +1084,11 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_SELECT_PROFILES_ON_BEHALF_OF_USER:
-      selectProfilesOnBehalfOfUser(action.ids, action.markAppAsLoadedWhenDone, action.originatedFromGroupSelection);
+      selectProfilesOnBehalfOfUser(
+        action.ids,
+        action.markAppAsLoadedWhenDone,
+        action.originatedFromGroupSelection
+      );
       break;
 
     case ActionTypes.COMPOSER_SELECT_PROFILE:
@@ -990,8 +1099,13 @@ const onDispatchedPayload = (payload) => {
 
     case ActionTypes.COMPOSER_SELECT_PROFILES:
       action.ids.forEach((id, i) => {
-        const markAppAsLoadedWhenDone = action.markAppAsLoadedWhenDone && i === 0;
-        selectProfile(id, markAppAsLoadedWhenDone, action.originatedFromGroupSelection);
+        const markAppAsLoadedWhenDone =
+          action.markAppAsLoadedWhenDone && i === 0;
+        selectProfile(
+          id,
+          markAppAsLoadedWhenDone,
+          action.originatedFromGroupSelection
+        );
       });
       maybeAutoExpandComposer();
       ensureProfileSchedulesSlotsDataIsAvailableForDate();
@@ -1070,7 +1184,10 @@ const onDispatchedPayload = (payload) => {
         action.name,
         action.isShared
       );
-      setProfileSubprofileCreationState(action.profileId, AsyncOperationStates.DONE);
+      setProfileSubprofileCreationState(
+        action.profileId,
+        AsyncOperationStates.DONE
+      );
       break;
 
     case ActionTypes.APP_REFRESH_SUBPROFILE_DATA:
@@ -1078,11 +1195,17 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_CREATE_NEW_SUBPROFILE_FAILED:
-      setProfileSubprofileCreationState(action.profileId, AsyncOperationStates.DONE);
+      setProfileSubprofileCreationState(
+        action.profileId,
+        AsyncOperationStates.DONE
+      );
       break;
 
     case ActionTypes.COMPOSER_CREATE_NEW_SUBPROFILE_PENDING:
-      setProfileSubprofileCreationState(action.profileId, AsyncOperationStates.PENDING);
+      setProfileSubprofileCreationState(
+        action.profileId,
+        AsyncOperationStates.PENDING
+      );
       break;
 
     case ActionTypes.APP_SELECT_GROUP_PROFILES:
@@ -1142,7 +1265,11 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.APP_RECEIVE_FACEBOOK_DOMAIN_OWNERSHIP_DATA:
-      updateFacebookDomainOwnershipForPage(action.profileId, action.url, action.isOwner);
+      updateFacebookDomainOwnershipForPage(
+        action.profileId,
+        action.url,
+        action.isOwner
+      );
       break;
 
     case ActionTypes.COMPOSER_ENABLE:

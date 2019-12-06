@@ -66,7 +66,13 @@ ProfileBadgeIcon.propTypes = {
 
 const ProfileBadge = ({ avatarUrl, type }) => (
   <div style={profileBadgeStyle}>
-    <Image border={'circle'} src={avatarUrl} height={'100%'} width={'100%'} verticalAlignBottom />
+    <Image
+      border={'circle'}
+      src={avatarUrl}
+      height={'100%'}
+      width={'100%'}
+      verticalAlignBottom
+    />
     <div style={profileBadgeIconStyle}>
       <ProfileBadgeIcon type={type} />
     </div>

@@ -18,28 +18,12 @@ const Content = styled.div`
 
 storiesOf('Arrow', module)
   .addDecorator(withA11y)
-  .add('should show left arrow', () => (
-    <Arrow
-      isLeft
-    />
-  ))
+  .add('should show left arrow', () => <Arrow isLeft />)
   .add('should show left and right arrows', () => (
     <ContentWrapper>
-      <Arrow
-        isLeft
-        onClick={() => {}}
-      />
-      <Content>
-        Content here
-      </Content>
-      <Arrow
-        isLeft={false}
-        onClick={() => {}}
-      />
+      <Arrow isLeft onClick={() => {}} />
+      <Content>Content here</Content>
+      <Arrow isLeft={false} onClick={() => {}} />
     </ContentWrapper>
   ))
-  .add('should show right arrow', () => (
-    <Arrow
-      isLeft={false}
-    />
-  ));
+  .add('should show right arrow', () => <Arrow isLeft={false} />);

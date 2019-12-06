@@ -11,7 +11,10 @@ import MediaAttachmentThumbnail from '../components/MediaAttachmentThumbnail';
 import MediaAttachmentEditor from '../components/MediaAttachmentEditor';
 import UploadZone from '@bufferapp/publish-upload-zone';
 import CircularUploadIndicator from '../components/progress-indicators/CircularUploadIndicator';
-import Dropdown, { DropdownTrigger, DropdownContent } from '../components/Dropdown';
+import Dropdown, {
+  DropdownTrigger,
+  DropdownContent,
+} from '../components/Dropdown';
 import styles from './css/MediaAttachment.css';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
 import FileUploader from '../file-uploads/FileUploader';
@@ -43,60 +46,89 @@ class MediaAttachment extends React.Component {
   hasGifAttached = () => this.props.gif !== null;
 
   collapseAttachedMediaEditor = () => {
-    ComposerActionCreators.updateDraftAttachedMediaEditingPayload(this.props.draftId, null);
-  }
+    ComposerActionCreators.updateDraftAttachedMediaEditingPayload(
+      this.props.draftId,
+      null
+    );
+  };
 
   expandAttachedMediaEditor = () => {
-    ComposerActionCreators.updateDraftAttachedMediaEditingPayload(this.props.draftId, this.props.video);
-  }
+    ComposerActionCreators.updateDraftAttachedMediaEditingPayload(
+      this.props.draftId,
+      this.props.video
+    );
+  };
 
   onVideoEditButtonClick = () => {
-    const isAlreadyEditingMedia = this.props.draft.attachedMediaEditingPayload !== null;
+    const isAlreadyEditingMedia =
+      this.props.draft.attachedMediaEditingPayload !== null;
     const payload = isAlreadyEditingMedia ? null : this.props.video;
-    ComposerActionCreators.updateDraftAttachedMediaEditingPayload(this.props.draftId, payload);
+    ComposerActionCreators.updateDraftAttachedMediaEditingPayload(
+      this.props.draftId,
+      payload
+    );
   };
 
   render() {
     const {
-      images, video, gif, tempImage, draftId, maxAttachableImagesCount, filesUploadProgress,
-      service, className, usesImageFirstLayout, composerPosition, draft, canAddUserTag,
+      images,
+      video,
+      gif,
+      tempImage,
+      draftId,
+      maxAttachableImagesCount,
+      filesUploadProgress,
+      service,
+      className,
+      usesImageFirstLayout,
+      composerPosition,
+      draft,
+      canAddUserTag,
     } = this.props;
 
-    const shouldDisplayUploadNewButton = (
+    const shouldDisplayUploadNewButton =
       maxAttachableImagesCount > images.length &&
       video === null &&
-      gif === null
-    );
+      gif === null;
 
     const areUploadsInProgress = filesUploadProgress.size > 0;
-    const totalUploadsProgress = areUploadsInProgress &&
-      Array.from(filesUploadProgress.values()).reduce((a, b) => a + b) / filesUploadProgress.size;
+    const totalUploadsProgress =
+      areUploadsInProgress &&
+      Array.from(filesUploadProgress.values()).reduce((a, b) => a + b) /
+        filesUploadProgress.size;
 
     const uploadNewButtonTooltipCopy = 'Upload image or video';
 
     const uploadNewButtonUIClassName = [
-      areUploadsInProgress ? styles.uploadNewButtonUIIsUploading :
-      tempImage ? styles.uploadNewButtonUIWithTempImage : styles.uploadNewButtonUI,
+      areUploadsInProgress
+        ? styles.uploadNewButtonUIIsUploading
+        : tempImage
+        ? styles.uploadNewButtonUIWithTempImage
+        : styles.uploadNewButtonUI,
       usesImageFirstLayout ? styles.imageFirstUploadButtonUI : '',
       'bi bi-add-media',
     ].join(' ');
 
     const uploadFormatsConfig = new Map(FileUploadFormatsConfigs.MEDIA); // Clone config
 
-    service.unavailableMediaAttachmentTypes.forEach((mediaType) => {
+    service.unavailableMediaAttachmentTypes.forEach(mediaType => {
       uploadFormatsConfig.delete(mediaType);
     });
 
-    const thumbnailClassName = usesImageFirstLayout ? styles.imageFirstThumbnail : styles.thumbnail;
+    const thumbnailClassName = usesImageFirstLayout
+      ? styles.imageFirstThumbnail
+      : styles.thumbnail;
 
-    const mediaAttachmentClassNames = [
-      styles.mediaAttachment,
-      className,
-    ].join(' ');
+    const mediaAttachmentClassNames = [styles.mediaAttachment, className].join(
+      ' '
+    );
 
     const uploadZoneClassNames = {
       uploadZone: styles.uploadZone,
-      uploadZoneActive: [styles.uploadButtonUIActiveDrop, 'bi bi-add-media'].join(' '),
+      uploadZoneActive: [
+        styles.uploadButtonUIActiveDrop,
+        'bi bi-add-media',
+      ].join(' '),
       uploadZoneDisabled: styles.uploadButtonUIDisabled,
     };
 
@@ -107,7 +139,7 @@ class MediaAttachment extends React.Component {
     return (
       <div className={mediaAttachmentClassNames}>
         {this.hasImagesAttached() &&
-          images.map((image) => (
+          images.map(image => (
             <MediaAttachmentThumbnail
               draftId={draftId}
               className={thumbnailClassName}
@@ -133,13 +165,17 @@ class MediaAttachment extends React.Component {
               aria-label="Click to edit video details"
             />
             <DropdownContent className={styles.editDropdownContent}>
-              {draft.attachedMediaEditingPayload !== null &&
-                <MediaAttachmentEditor draft={draft} onSubmit={this.collapseAttachedMediaEditor} />}
+              {draft.attachedMediaEditingPayload !== null && (
+                <MediaAttachmentEditor
+                  draft={draft}
+                  onSubmit={this.collapseAttachedMediaEditor}
+                />
+              )}
             </DropdownContent>
           </Dropdown>
         )}
 
-        {this.hasVideoAttached() &&
+        {this.hasVideoAttached() && (
           <MediaAttachmentThumbnail
             draftId={draftId}
             className={thumbnailClassName}
@@ -148,9 +184,10 @@ class MediaAttachment extends React.Component {
             showTwitterImageDescription={showTwitterImageDescription}
             composerPosition={composerPosition}
             canEditVideoAttachment={draft.service.canEditVideoAttachment}
-          />}
+          />
+        )}
 
-        {this.hasGifAttached() &&
+        {this.hasGifAttached() && (
           <MediaAttachmentThumbnail
             draftId={draftId}
             className={thumbnailClassName}
@@ -158,28 +195,38 @@ class MediaAttachment extends React.Component {
             media={gif}
             showTwitterImageDescription={showTwitterImageDescription}
             composerPosition={composerPosition}
-          />}
+          />
+        )}
 
-        {shouldDisplayUploadNewButton &&
+        {shouldDisplayUploadNewButton && (
           <div
             className={uploadNewButtonUIClassName}
             data-tip={uploadNewButtonTooltipCopy}
             data-tip-disable={areUploadsInProgress}
           >
-            {tempImage && !areUploadsInProgress &&
+            {tempImage && !areUploadsInProgress && (
               <div className={styles.tempImageContainer}>
                 <img alt="" src={tempImage} className={styles.tempImage} />
-              </div>}
+              </div>
+            )}
 
             <UploadZone
-              mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
+              mixedMediaUnsupportedCallback={
+                FileUploader.throwMixedMediaTypesError
+              }
               notifiers={ComposerActionCreators.notifiers}
               uploadDraftFile={ComposerActionCreators.uploadDraftFile}
-              removeAllNotifications={() => NotificationActionCreators.removeAllNotificationsByScope(NotificationScopes.FILE_UPLOAD)}
-              queueError={({message}) => NotificationActionCreators.queueError({
-                scope: NotificationScopes.FILE_UPLOAD,
-                message
-              })}
+              removeAllNotifications={() =>
+                NotificationActionCreators.removeAllNotificationsByScope(
+                  NotificationScopes.FILE_UPLOAD
+                )
+              }
+              queueError={({ message }) =>
+                NotificationActionCreators.queueError({
+                  scope: NotificationScopes.FILE_UPLOAD,
+                  message,
+                })
+              }
               classNames={uploadZoneClassNames}
               draftId={draftId}
               uploadFormatsConfig={uploadFormatsConfig}
@@ -190,14 +237,22 @@ class MediaAttachment extends React.Component {
               disabled={areUploadsInProgress}
             />
 
-            {areUploadsInProgress &&
-              <CircularUploadIndicator size={54} progress={totalUploadsProgress} showText />}
+            {areUploadsInProgress && (
+              <CircularUploadIndicator
+                size={54}
+                progress={totalUploadsProgress}
+                showText
+              />
+            )}
 
-            {areUploadsInProgress && filesUploadProgress.size > 1 &&
-              <span className={styles.activeUploadsCount}>{filesUploadProgress.size}</span>}
-          </div>}
+            {areUploadsInProgress && filesUploadProgress.size > 1 && (
+              <span className={styles.activeUploadsCount}>
+                {filesUploadProgress.size}
+              </span>
+            )}
+          </div>
+        )}
       </div>
-
     );
   }
 }

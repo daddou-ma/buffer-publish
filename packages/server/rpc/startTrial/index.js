@@ -26,11 +26,11 @@ module.exports = method(
         cta: getCtaFromSource(source),
       },
     })
-    .then(result => JSON.parse(result))
-    .catch((err) => {
-      if (err.error) {
-        const { error } = JSON.parse(err.error);
-        throw createError({ message: error });
-      }
-    }),
-  );
+      .then(result => JSON.parse(result))
+      .catch(err => {
+        if (err.error) {
+          const { error } = JSON.parse(err.error);
+          throw createError({ message: error });
+        }
+      })
+);

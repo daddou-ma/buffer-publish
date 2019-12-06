@@ -40,7 +40,7 @@ class ProfileSearch extends React.Component {
 
   getCustomProfiles(profiles) {
     const items = [];
-    profiles.forEach((profile) => {
+    profiles.forEach(profile => {
       const itemProfile = {
         ...profile,
         title: profile.handle,
@@ -62,12 +62,8 @@ class ProfileSearch extends React.Component {
     return items;
   }
 
-  render () {
-    const {
-      profiles,
-      handleSubmit,
-      isSearchPopupVisible,
-    } = this.props;
+  render() {
+    const { profiles, handleSubmit, isSearchPopupVisible } = this.props;
 
     return (
       <div style={wrapperStyle}>
@@ -77,7 +73,7 @@ class ProfileSearch extends React.Component {
               <SearchIcon />
               <Search
                 onClick={onButtonClick}
-                onChange={(searchValue) => {
+                onChange={searchValue => {
                   this.onChange(onSearchChange, searchValue);
                 }}
                 height="small"
@@ -110,10 +106,12 @@ ProfileSearch.defaultProps = {
 };
 
 ProfileSearch.propTypes = {
-  profiles: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    handle: PropTypes.string.isRequired,
-  })),
+  profiles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      handle: PropTypes.string.isRequired,
+    })
+  ),
   handleSubmit: PropTypes.func,
   onSearchProfileChange: PropTypes.func,
   isSearchPopupVisible: PropTypes.bool,

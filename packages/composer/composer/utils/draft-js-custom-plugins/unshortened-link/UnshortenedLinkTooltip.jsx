@@ -19,7 +19,10 @@ const getNewTooltipPosition = ({ top, left }) => ({
 });
 
 const findEntityRangeForKey = (contentBlock, entityKey, callback) => {
-  contentBlock.findEntityRanges((character) => (character.getEntity() === entityKey), callback);
+  contentBlock.findEntityRanges(
+    character => character.getEntity() === entityKey,
+    callback
+  );
 };
 
 class UnshortenedLinkTooltip extends React.Component {
@@ -55,14 +58,16 @@ class UnshortenedLinkTooltip extends React.Component {
     this.props.callbacks.onEditorStateChange = null;
   }
 
-  onUnshortenedLinkMouseOver = (shortLinkData) => {
+  onUnshortenedLinkMouseOver = shortLinkData => {
     clearTimeout(this.hideTooltipTimeoutId);
     this.showTooltip(shortLinkData);
   };
 
   onTooltipMouseOver = () => clearTimeout(this.hideTooltipTimeoutId);
-  onUnshortenedLinkMouseOut = () => (this.hideTooltipTimeoutId = setTimeout(this.hideTooltip, 20));
-  onTooltipMouseOut = () => (this.hideTooltipTimeoutId = setTimeout(this.hideTooltip, 20));
+  onUnshortenedLinkMouseOut = () =>
+    (this.hideTooltipTimeoutId = setTimeout(this.hideTooltip, 20));
+  onTooltipMouseOut = () =>
+    (this.hideTooltipTimeoutId = setTimeout(this.hideTooltip, 20));
   onTooltipMouseDown = () => (this.isClickOnTooltipInProgress = true);
   onTooltipMouseUp = () => (this.isClickOnTooltipInProgress = false);
 
@@ -81,16 +86,24 @@ class UnshortenedLinkTooltip extends React.Component {
     const contentState = editorState.getCurrentContent();
     let newEditorState;
 
-    contentState.getBlockMap().forEach((contentBlock) => {
+    contentState.getBlockMap().forEach(contentBlock => {
       findEntityRangeForKey(contentBlock, entityKey, (start, end) => {
-        newEditorState = addShortLink(editorState, contentBlock, {
-          shortLink,
-          link: unshortenedLink,
-          indices: [start, end],
-        }, { isUserAction: true });
+        newEditorState = addShortLink(
+          editorState,
+          contentBlock,
+          {
+            shortLink,
+            link: unshortenedLink,
+            indices: [start, end],
+          },
+          { isUserAction: true }
+        );
 
         // Re-focus composer
-        newEditorState = EditorState.forceSelection(newEditorState, newEditorState.getSelection());
+        newEditorState = EditorState.forceSelection(
+          newEditorState,
+          newEditorState.getSelection()
+        );
 
         wasLinkShortened = true;
       });
@@ -104,7 +117,12 @@ class UnshortenedLinkTooltip extends React.Component {
 
   isTooltipVisible = () => this.state.position !== null;
 
-  showTooltip = ({ entityKey, unshortenedLink, shortLink, relativePosition }) => {
+  showTooltip = ({
+    entityKey,
+    unshortenedLink,
+    shortLink,
+    relativePosition,
+  }) => {
     const { width, height } = relativePosition;
     let { top, left } = relativePosition;
     top = top + height;
@@ -129,14 +147,20 @@ class UnshortenedLinkTooltip extends React.Component {
 
     const tooltipClassName = [
       this.isTooltipVisible() ? styles.visibleTooltip : styles.hiddenTooltip,
-      this.isTooltipVisible() ? this.props.classNames.visible : this.props.classNames.hidden,
+      this.isTooltipVisible()
+        ? this.props.classNames.visible
+        : this.props.classNames.hidden,
     ].join(' ');
 
     return (
       <span
-        className={tooltipClassName} style={position} ref="tooltip"
-        onMouseOver={this.onTooltipMouseOver} onMouseOut={this.onTooltipMouseOut}
-        onMouseDown={this.onTooltipMouseDown} onMouseUp={this.onTooltipMouseUp}
+        className={tooltipClassName}
+        style={position}
+        ref="tooltip"
+        onMouseOver={this.onTooltipMouseOver}
+        onMouseOut={this.onTooltipMouseOut}
+        onMouseDown={this.onTooltipMouseDown}
+        onMouseUp={this.onTooltipMouseUp}
         aria-hidden={!this.isTooltipVisible()}
       >
         <span className={styles.tooltipContent}>

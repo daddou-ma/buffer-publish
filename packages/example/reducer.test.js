@@ -11,8 +11,7 @@ describe('reducer', () => {
       type: 'INIT',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle LOGIN_SUCCESS action type', () => {
@@ -23,8 +22,7 @@ describe('reducer', () => {
       type: `login_${asyncDataFetchActions.FETCH_SUCCESS}`,
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle `logout_FETCH_START` actionType', () => {
@@ -39,8 +37,7 @@ describe('reducer', () => {
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle login_FETCH_FAIL actionType', () => {
@@ -55,7 +52,6 @@ describe('reducer', () => {
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 });

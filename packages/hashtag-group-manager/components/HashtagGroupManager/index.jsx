@@ -38,7 +38,7 @@ const HashtagGroupManager = ({
       <Text type="h3">Hashtag Manager</Text>
       <Text type="p">Create, save, and organize hashtags for Instagram. </Text>
     </div>
-    {hashtagGroups.length === 0 &&
+    {hashtagGroups.length === 0 && (
       <div style={emptyContentStyle}>
         <div style={emptyHeaderStyle}>
           <Text>No hashtag groups yet!</Text>
@@ -50,14 +50,14 @@ const HashtagGroupManager = ({
           </Text>
         </div>
       </div>
-    }
-    {hashtagGroups.length > 0 &&
+    )}
+    {hashtagGroups.length > 0 && (
       <HashtagGroupList
         hashtagGroups={hashtagGroups}
         onInsertHashtagGroupClick={onInsertHashtagGroupClick}
         onDeleteHashtagGroupClick={onDeleteHashtagGroupClick}
       />
-    }
+    )}
     <div style={wrapperStyle}>
       <Button
         type="secondary"
@@ -76,7 +76,7 @@ HashtagGroupManager.propTypes = {
       name: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       id: PropTypes.string,
-    }),
+    })
   ).isRequired,
   onInsertHashtagGroupClick: PropTypes.func.isRequired,
   onDeleteHashtagGroupClick: PropTypes.func.isRequired,
@@ -85,6 +85,5 @@ HashtagGroupManager.propTypes = {
 HashtagGroupManager.defaultProps = {
   hashtagGroups: [],
 };
-
 
 export default HashtagGroupManager;

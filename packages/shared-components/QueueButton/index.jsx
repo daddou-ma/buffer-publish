@@ -7,13 +7,11 @@ const getBorderRadius = (index, total) => {
   return '0px';
 };
 
-const getBorderRight = (index, selectedIndex) => (
-  index === selectedIndex - 1 ? { borderRight: 'none' } : ''
-);
+const getBorderRight = (index, selectedIndex) =>
+  index === selectedIndex - 1 ? { borderRight: 'none' } : '';
 
-const getBorderLeft = (isSelected, index) => (
-  !isSelected && index !== 0 ? { borderLeft: 'none' } : ''
-);
+const getBorderLeft = (isSelected, index) =>
+  !isSelected && index !== 0 ? { borderLeft: 'none' } : '';
 
 const lightBorder = '1px solid #C4C4C4';
 const darkBorder = '1px solid #636363';
@@ -64,14 +62,7 @@ class QueueButton extends Component {
   }
 
   render() {
-    const {
-      onClick,
-      total,
-      index,
-      text,
-      disabled,
-      selectedIndex,
-    } = this.props;
+    const { onClick, total, index, text, disabled, selectedIndex } = this.props;
     const { isHovering } = this.state;
 
     return (
@@ -87,7 +78,7 @@ class QueueButton extends Component {
         })}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
-        onClick={(e) => {
+        onClick={e => {
           e.preventDefault();
           onClick();
         }}

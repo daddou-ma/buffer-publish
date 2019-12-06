@@ -11,7 +11,8 @@ class ShopgridComposerBar extends React.Component {
     super(props);
     this.state = {
       shopgridLink: props.shopgridLink || '',
-      helpUrl: 'https://faq.buffer.com/article/1164-publish-instagram-shop-grid'
+      helpUrl:
+        'https://faq.buffer.com/article/1164-publish-instagram-shop-grid',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -22,7 +23,10 @@ class ShopgridComposerBar extends React.Component {
 
   onChange(event) {
     this.setState({ shopgridLink: event.target.value || '' });
-    ComposerActionCreators.updateDraftShopgridLink(this.props.draftId, event.target.value);
+    ComposerActionCreators.updateDraftShopgridLink(
+      this.props.draftId,
+      event.target.value
+    );
   }
 
   onBlur(event) {
@@ -33,7 +37,10 @@ class ShopgridComposerBar extends React.Component {
       }
     }
     this.setState({ shopgridLink });
-    ComposerActionCreators.updateDraftShopgridLink(this.props.draftId, shopgridLink);
+    ComposerActionCreators.updateDraftShopgridLink(
+      this.props.draftId,
+      shopgridLink
+    );
   }
 
   shouldShowShopgridBar() {
@@ -44,11 +51,14 @@ class ShopgridComposerBar extends React.Component {
       isBusinessUser,
     } = this.props;
 
-    const hasInstagramSelected = selectedInstagramProfiles
-      && selectedInstagramProfiles.length >= 1
-      && selectedInstagramProfiles.some(profile => profile.instagramDirectEnabled);
+    const hasInstagramSelected =
+      selectedInstagramProfiles &&
+      selectedInstagramProfiles.length >= 1 &&
+      selectedInstagramProfiles.some(profile => profile.instagramDirectEnabled);
 
-    return hasInstagramSelected && isInstagram && hasShopgridFlip && isBusinessUser;
+    return (
+      hasInstagramSelected && isInstagram && hasShopgridFlip && isBusinessUser
+    );
   }
 
   openHelp(e) {
@@ -56,38 +66,37 @@ class ShopgridComposerBar extends React.Component {
     window.open(this.state.helpUrl, '_blank');
   }
 
-  render () {
+  render() {
     return (
-      this.shouldShowShopgridBar() &&
-      <div className={styles.shopgridComposerBar}>
-        <div className={styles.shopgridFieldContainer}>
-          <span className={styles.shopgridFieldLabel}>
-            Shop Grid Link
-          </span>
-          <span className={styles.shopgridHelpIcon}>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.questionIcon}
-              title="Learn more about Shop Grid"
-              href={this.state.helpUrl}
-              onClick={this.openHelp}
-            >
-              <QuestionIcon />
-            </a>
-          </span>
-          <span className={styles.shopgridAutocompleteContainer}>
-            <input
-              className={styles.shopgridFieldInput}
-              onChange={this.onChange}
-              onBlur={this.onBlur}
-              name="shopgridLink"
-              placeholder="Website or Product URL"
-              value={this.state.shopgridLink}
-            />
-          </span>
+      this.shouldShowShopgridBar() && (
+        <div className={styles.shopgridComposerBar}>
+          <div className={styles.shopgridFieldContainer}>
+            <span className={styles.shopgridFieldLabel}>Shop Grid Link</span>
+            <span className={styles.shopgridHelpIcon}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.questionIcon}
+                title="Learn more about Shop Grid"
+                href={this.state.helpUrl}
+                onClick={this.openHelp}
+              >
+                <QuestionIcon />
+              </a>
+            </span>
+            <span className={styles.shopgridAutocompleteContainer}>
+              <input
+                className={styles.shopgridFieldInput}
+                onChange={this.onChange}
+                onBlur={this.onBlur}
+                name="shopgridLink"
+                placeholder="Website or Product URL"
+                value={this.state.shopgridLink}
+              />
+            </span>
+          </div>
         </div>
-      </div>
+      )
     );
   }
 }
@@ -97,15 +106,16 @@ ShopgridComposerBar.propTypes = {
   shopgridLink: PropTypes.string,
   hasShopgridFlip: PropTypes.bool.isRequired,
   isInstagram: PropTypes.bool.isRequired,
-  selectedInstagramProfiles: PropTypes.arrayOf(PropTypes.shape({
-    instagramDirectEnabled: PropTypes.bool,
-  })).isRequired,
+  selectedInstagramProfiles: PropTypes.arrayOf(
+    PropTypes.shape({
+      instagramDirectEnabled: PropTypes.bool,
+    })
+  ).isRequired,
   isBusinessUser: PropTypes.bool.isRequired,
 };
 
 ShopgridComposerBar.defaultProps = {
   shopgridLink: null,
 };
-
 
 export default ShopgridComposerBar;

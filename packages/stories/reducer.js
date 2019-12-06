@@ -35,23 +35,37 @@ export const profileInitialState = {
   total: 0,
 };
 
-const getProfileId = (action) => {
-  if (action.profileId) { return action.profileId; }
-  if (action.args) { return action.args.profileId; }
-  if (action.profile) { return action.profile.id; }
+const getProfileId = action => {
+  if (action.profileId) {
+    return action.profileId;
+  }
+  if (action.args) {
+    return action.args.profileId;
+  }
+  if (action.profile) {
+    return action.profile.id;
+  }
 };
 
-const getStoryGroupId = (action) => {
-  if (action.post) { return action.post.id; }
-  if (action.storyGroupId) { return action.storyGroupId; }
-  if (action.storyGroup) { return action.storyGroup.id; }
-  if (action.args) { return action.args.updateId; }
+const getStoryGroupId = action => {
+  if (action.post) {
+    return action.post.id;
+  }
+  if (action.storyGroupId) {
+    return action.storyGroupId;
+  }
+  if (action.storyGroup) {
+    return action.storyGroup.id;
+  }
+  if (action.args) {
+    return action.args.updateId;
+  }
 };
 
 const determineIfMoreToLoad = (action, currentPosts) => {
   const currentPostCount = Object.keys(currentPosts).length;
   const resultUpdatesCount = Object.keys(action.result.updates).length;
-  return (action.result.total > (currentPostCount + resultUpdatesCount));
+  return action.result.total > currentPostCount + resultUpdatesCount;
 };
 
 const storyPostReducer = (state, action) => {
@@ -103,7 +117,10 @@ const storyPostsReducer = (state = {}, action) => {
     case `shareStoryGroupNow_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
-        [getStoryGroupId(action)]: storyPostReducer(state[getStoryGroupId(action)], action),
+        [getStoryGroupId(action)]: storyPostReducer(
+          state[getStoryGroupId(action)],
+          action
+        ),
       };
     case actionTypes.STORY_CREATED:
     case actionTypes.STORY_UPDATED: {

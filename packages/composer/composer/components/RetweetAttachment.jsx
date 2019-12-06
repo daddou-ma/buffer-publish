@@ -14,7 +14,10 @@ class RetweetAttachment extends React.Component {
   };
 
   onCloseButtonClick = () => {
-    ComposerActionCreators.toggleAttachment(this.props.draftId, AttachmentTypes.RETWEET);
+    ComposerActionCreators.toggleAttachment(
+      this.props.draftId,
+      AttachmentTypes.RETWEET
+    );
 
     AppActionCreators.trackUserAction(['composer', 'attachment', 'disabled'], {
       attachment_type: AttachmentTypes.RETWEET,
@@ -25,14 +28,17 @@ class RetweetAttachment extends React.Component {
   render() {
     const { text, userName, userDisplayName, avatarUrl } = this.props.retweet;
 
-    const retweetIconClassName = [
-      styles.retweetIcon,
-      'bi bi-retweet',
-    ].join(' ');
+    const retweetIconClassName = [styles.retweetIcon, 'bi bi-retweet'].join(
+      ' '
+    );
 
     return (
       <div className={styles.retweetAttachment}>
-        <img src={avatarUrl} alt="Retweeted user's avatar" className={styles.avatar} />
+        <img
+          src={avatarUrl}
+          alt="Retweeted user's avatar"
+          className={styles.avatar}
+        />
 
         <span className={styles.retweetLabel}>
           <i className={retweetIconClassName} /> Retweeted by you
@@ -43,7 +49,8 @@ class RetweetAttachment extends React.Component {
         <p className={styles.text}>{text}</p>
 
         <CloseButton
-          className={styles.closeButton} onClick={this.onCloseButtonClick}
+          className={styles.closeButton}
+          onClick={this.onCloseButtonClick}
           data-tip="Disable Native Retweet Mode"
         />
       </div>

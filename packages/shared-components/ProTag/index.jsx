@@ -19,8 +19,6 @@ const proTagSpanStyle = {
 
 export default () => (
   <div style={proTagStyle}>
-    <span style={proTagSpanStyle}>
-      PRO
-    </span>
+    <span style={proTagSpanStyle}>PRO</span>
   </div>
 );

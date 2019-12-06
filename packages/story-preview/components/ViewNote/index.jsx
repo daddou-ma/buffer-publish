@@ -27,26 +27,18 @@ const Note = styled(Text)`
   margin-top: 8px;
 `;
 
-const ViewNote = ({
-  onEditNoteClick,
-  story,
-  translations,
-}) => {
+const ViewNote = ({ onEditNoteClick, story, translations }) => {
   const hasNoNote = !story.note || story.note.length < 0;
   return (
     <ContentWrapper>
       <Title type="p">{translations.noteTitle}</Title>
       <NoteWrapper>
-        {hasNoNote
-          && (
-            <Note type="p" color="gray">{translations.noteExplanation}</Note>
-          )
-        }
-        {!hasNoNote
-          && (
-            <Note type="p">{story.note}</Note>
-          )
-        }
+        {hasNoNote && (
+          <Note type="p" color="gray">
+            {translations.noteExplanation}
+          </Note>
+        )}
+        {!hasNoNote && <Note type="p">{story.note}</Note>}
       </NoteWrapper>
       <Button
         type="secondary"

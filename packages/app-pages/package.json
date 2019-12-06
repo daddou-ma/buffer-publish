@@ -1,0 +1,18 @@
+{
+  "name": "@bufferapp/publish-app-pages",
+  "version": "2.0.0",
+  "description": "Handles Routes and renders Pages",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "ana@buffer.com",
+  "dependencies": {
+    "@bufferapp/async-data-fetch": "1.9.4"
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

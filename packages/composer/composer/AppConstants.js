@@ -34,8 +34,21 @@ const ErrorTypes = keyMirror({
 });
 
 const FloatingErrorCodes = [
-  401, 403, 404, 405, 429, 1000, 1001, 1002,
-  1003, 1005, 1006, 1007, 1042, 1050, 1051,
+  401,
+  403,
+  404,
+  405,
+  429,
+  1000,
+  1001,
+  1002,
+  1003,
+  1005,
+  1006,
+  1007,
+  1042,
+  1050,
+  1051,
 ];
 
 const UpgradeErrorCodes = {
@@ -43,10 +56,7 @@ const UpgradeErrorCodes = {
 };
 
 const ComposerInitiators = {
-  ImageBufferButtons: [
-    'hover_button_image',
-    'menu-image',
-  ],
+  ImageBufferButtons: ['hover_button_image', 'menu-image'],
 };
 
 const Services = (() => {
@@ -87,12 +97,15 @@ const Services = (() => {
       Object.assign(this, defaultConfig, config);
     }
 
-    canHaveAttachmentType = (type) => !this.unavailableAttachmentTypes.includes(type);
-    canHaveSomeAttachmentType = (types) => types.some((type) => this.canHaveAttachmentType(type));
+    canHaveAttachmentType = type =>
+      !this.unavailableAttachmentTypes.includes(type);
+    canHaveSomeAttachmentType = types =>
+      types.some(type => this.canHaveAttachmentType(type));
 
-    canHaveMediaAttachmentType = (type) => !this.unavailableMediaAttachmentTypes.includes(type);
-    canHaveSomeMediaAttachmentTypes = (types) =>
-      types.some((type) => this.canHaveMediaAttachmentType(type));
+    canHaveMediaAttachmentType = type =>
+      !this.unavailableMediaAttachmentTypes.includes(type);
+    canHaveSomeMediaAttachmentTypes = types =>
+      types.some(type => this.canHaveMediaAttachmentType(type));
   };
 
   const ProfileTypes = {
@@ -147,7 +160,10 @@ const Services = (() => {
       charLimit: 2200,
       commentCharLimit: 2200,
       formattedName: 'Instagram',
-      unavailableAttachmentTypes: [AttachmentTypes.LINK, AttachmentTypes.RETWEET],
+      unavailableAttachmentTypes: [
+        AttachmentTypes.LINK,
+        AttachmentTypes.RETWEET,
+      ],
       maxAttachableImagesCount: 4,
       requiredAttachmentType: AttachmentTypes.MEDIA,
       videoMaxSize: 100 * 1024 * 1024, // 100MB
@@ -179,7 +195,10 @@ const Services = (() => {
     new Service({
       name: 'pinterest',
       formattedName: 'Pinterest',
-      unavailableAttachmentTypes: [AttachmentTypes.LINK, AttachmentTypes.RETWEET],
+      unavailableAttachmentTypes: [
+        AttachmentTypes.LINK,
+        AttachmentTypes.RETWEET,
+      ],
       requiredAttachmentType: AttachmentTypes.MEDIA,
       profileType: ProfileTypes.ACCOUNT,
       hasSubprofiles: true,
@@ -204,7 +223,8 @@ const Services = (() => {
     }),
   ];
 
-  ServicesList.get = (serviceName) => ServicesList.find((service) => service.name === serviceName);
+  ServicesList.get = serviceName =>
+    ServicesList.find(service => service.name === serviceName);
 
   return ServicesList;
 })();
@@ -448,8 +468,9 @@ const FileUploadFormatsConfigs = (() => {
 
   contentTypeGroups.forEach((contentTypes, groupName) => {
     const groupConfig = new Map();
-    contentTypes.forEach((contentType) =>
-      groupConfig.set(contentType, contentTypeConfigs[contentType]));
+    contentTypes.forEach(contentType =>
+      groupConfig.set(contentType, contentTypeConfigs[contentType])
+    );
     FileUploadFormatsConfigsMap[groupName] = groupConfig;
   });
 
@@ -463,8 +484,12 @@ const MediaUploadConfig = {
 const bufferOriginRegex = /https?:\/\/(?:[^.]+\.)?buffer(?:app)?\.com/;
 const bufferOrigins = new Map([
   ['local', 'https://local.buffer.com'],
-  ['production',
-    bufferOriginRegex.test(window.location.origin) ? window.location.origin : 'https://buffer.com'],
+  [
+    'production',
+    bufferOriginRegex.test(window.location.origin)
+      ? window.location.origin
+      : 'https://buffer.com',
+  ],
 ]);
 
 const InstagramAspectRatioLimits = {
@@ -475,9 +500,26 @@ const InstagramAspectRatioLimits = {
 const InstagramThumbnailMaxSize = 500;
 
 export {
-  Services, AttachmentTypes, QueueingTypes, ActionTypes, AsyncOperationStates,
-  NotificationTypes, NotificationScopes, FileUploadFormatsConfigs, MediaUploadConfig, ComposerInitiators, LinkAttachmentTextFieldTypes,
-  FloatingErrorCodes, UpgradeErrorCodes, ErrorTypes, SaveButtonTypes, InlineSaveButtonTypes, ButtonsQueuingTypesMap,
-  DataImportEnvironments, bufferOrigins, bufferOriginRegex,
-  InstagramAspectRatioLimits, InstagramThumbnailMaxSize,
+  Services,
+  AttachmentTypes,
+  QueueingTypes,
+  ActionTypes,
+  AsyncOperationStates,
+  NotificationTypes,
+  NotificationScopes,
+  FileUploadFormatsConfigs,
+  MediaUploadConfig,
+  ComposerInitiators,
+  LinkAttachmentTextFieldTypes,
+  FloatingErrorCodes,
+  UpgradeErrorCodes,
+  ErrorTypes,
+  SaveButtonTypes,
+  InlineSaveButtonTypes,
+  ButtonsQueuingTypesMap,
+  DataImportEnvironments,
+  bufferOrigins,
+  bufferOriginRegex,
+  InstagramAspectRatioLimits,
+  InstagramThumbnailMaxSize,
 };

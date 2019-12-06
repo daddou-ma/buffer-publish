@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Divider, Toggle,
-} from '@bufferapp/components';
+import { Divider, Toggle } from '@bufferapp/components';
 import { Text } from '@bufferapp/ui';
 
 const instagramRemindersStyle = {
@@ -42,15 +40,13 @@ const InstagramReminders = ({
     <div style={instagramRemindersStyle}>
       <div style={textStyle}>
         <div style={textWrapperStyle}>
-          <Text type="h3">
-            Instagram Reminders
-          </Text>
+          <Text type="h3">Instagram Reminders</Text>
         </div>
         <div style={textWrapperStyle}>
           <Text type="p">
-            You can ensure all your Instagram posts will be sent
-            out as a Reminder in the settings below. This means that
-            Buffer will not post directly to Instagram for you.
+            You can ensure all your Instagram posts will be sent out as a
+            Reminder in the settings below. This means that Buffer will not post
+            directly to Instagram for you.
           </Text>
         </div>
       </div>
@@ -62,7 +58,8 @@ const InstagramReminders = ({
             </Text>
           </div>
           <Text type="p">
-            All your posts will be sent as Reminders (not posted directly) if this is turned on.
+            All your posts will be sent as Reminders (not posted directly) if
+            this is turned on.
           </Text>
         </div>
         <div style={switchStyle}>

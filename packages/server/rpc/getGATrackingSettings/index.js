@@ -27,5 +27,5 @@ module.exports = method(
       throw err;
     }
     return request;
-  },
+  }
 );

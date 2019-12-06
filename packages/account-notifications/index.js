@@ -15,13 +15,15 @@ export default connect(
   }),
   dispatch => ({
     onToggleClick: (newToggleValue, type) => {
-      dispatch(actions.handleToggleClick({
-        notifications: {
-          [type]: newToggleValue,
-        },
-      }));
+      dispatch(
+        actions.handleToggleClick({
+          notifications: {
+            [type]: newToggleValue,
+          },
+        })
+      );
     },
-  }),
+  })
 )(Notifications);
 
 export reducer, { actions, actionTypes } from './reducer';

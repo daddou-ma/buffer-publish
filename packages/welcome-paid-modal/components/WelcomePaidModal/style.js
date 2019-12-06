@@ -34,7 +34,7 @@ export const MainDiv2Style = styled.div`
 `;
 
 export const DivGifHolderStyle = styled.div`
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
   text-align: center;
   padding-top: 16px;
   padding-bottom: 16px;
@@ -42,7 +42,7 @@ export const DivGifHolderStyle = styled.div`
 `;
 
 export const DivImageHolderStyle = styled.div`
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
   text-align: center;
   line-height: 0;
 `;

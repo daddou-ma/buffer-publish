@@ -18,9 +18,7 @@ const AvatarNameWrapper = styled.div`
   padding-left: 16px;
 `;
 
-const HeaderBar = ({
-  selectedProfile,
-}) => (
+const HeaderBar = ({ selectedProfile }) => (
   <Fragment>
     <AvatarContainer>
       <Avatar
@@ -33,9 +31,7 @@ const HeaderBar = ({
       />
       <AvatarNameWrapper>
         <SensitiveData>
-          <Text type="p">
-            {selectedProfile.handle}
-          </Text>
+          <Text type="p">{selectedProfile.handle}</Text>
         </SensitiveData>
       </AvatarNameWrapper>
     </AvatarContainer>

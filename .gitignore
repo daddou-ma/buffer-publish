@@ -14,3 +14,4 @@ vendor*.js
 vendor.css
 *.map
 *.vscode
+dist

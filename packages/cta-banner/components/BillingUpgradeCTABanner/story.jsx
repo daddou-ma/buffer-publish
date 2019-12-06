@@ -5,14 +5,13 @@ import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { Provider } from 'react-redux';
 
-
 import BillingUpgradeCTABanner from './index';
 
 const storeFake = state => ({
   default: () => {},
   subscribe: () => {},
   dispatch: () => {},
-  getState: () => ({...state}),
+  getState: () => ({ ...state }),
 });
 
 const userWithoutTrial = {
@@ -42,7 +41,6 @@ const userOnTrialWithBilling = {
   trialTimeRemaining: '10 days',
 };
 
-
 const fakeUser = {
   loading: false,
   id: '1234',
@@ -53,7 +51,7 @@ const fakeUser = {
   trial: userOnTrial,
 };
 
-function createMockStore (business, onTrial) {
+function createMockStore(business, onTrial) {
   return storeFake({
     productFeatures: {
       planName: business ? 'business' : 'pro',
@@ -67,8 +65,8 @@ function createMockStore (business, onTrial) {
     appSidebar: {
       user: {
         ...fakeUser,
-        ...{ trial: onTrial ? userOnTrial : {} }
-      }
+        ...{ trial: onTrial ? userOnTrial : {} },
+      },
     },
     environment: {
       environment: 'production',
@@ -98,7 +96,6 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickStartSubscription={action('startSubscription')}
         trial={userOnTrial}
         profileCount={1}
-
       />
     </Provider>
   ))
@@ -122,16 +119,19 @@ storiesOf('BillingUpgradeCTABanner', module)
       />
     </Provider>
   ))
-  .add('pro user on business trial no billing info and no profiles connected', () => (
-    <Provider store={storeBusiness}>
-      <BillingUpgradeCTABanner
-        translations={translations['billing-upgrade-cta-banner']}
-        onClickStartSubscription={action('startSubscription')}
-        trial={userOnTrial}
-        profileCount={0}
-      />
-    </Provider>
-  ))
+  .add(
+    'pro user on business trial no billing info and no profiles connected',
+    () => (
+      <Provider store={storeBusiness}>
+        <BillingUpgradeCTABanner
+          translations={translations['billing-upgrade-cta-banner']}
+          onClickStartSubscription={action('startSubscription')}
+          trial={userOnTrial}
+          profileCount={0}
+        />
+      </Provider>
+    )
+  )
   .add('pro user on business trial with billing info', () => (
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner

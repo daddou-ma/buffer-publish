@@ -1,8 +1,8 @@
-
 .iconContainer {
-  margin-right: 12px;
+  margin-right: 10px;
+  top: 2px;
   position: relative;
-  left: 3px;
+  color: #662d12;
 }
 
 .item {
@@ -10,16 +10,16 @@
 }
 
 .container {
-  background-color: #F4F7F9;
-  color: #333;
-  padding: 5px 8px 5px 5px;
+  background-color: rgb(255, 198, 171, 0.5);
+  font-size: 14px;
+  line-height: 20px;
+  color: #662d12;
+  padding: 8px 14px 8px 14px;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
   display: flex;
-  align-items: center;
-  border-top: 1px solid #ced7df;
 }
 
 .link {
-  color: #333;
+  color: #662d12;
 }

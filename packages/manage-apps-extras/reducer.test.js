@@ -14,8 +14,7 @@ describe('reducer', () => {
       type: 'INIT',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(initialState);
+    expect(reducer(undefined, action)).toEqual(initialState);
   });
 
   it('REQUEST_OPEN_MODAL sets the app ID and app name for the modal', () => {
@@ -30,8 +29,7 @@ describe('reducer', () => {
       appName: 'App One',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('REQUEST_CLOSE_MODAL removes app ID and app name set for the modal', () => {
@@ -39,8 +37,7 @@ describe('reducer', () => {
       type: actionTypes.REQUEST_CLOSE_MODAL,
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(initialState);
+    expect(reducer(undefined, action)).toEqual(initialState);
   });
 
   it('REQUEST_REVOKE_APP removes the app from connected apps and the selected app ID and name', () => {
@@ -67,8 +64,7 @@ describe('reducer', () => {
       appId: 'app1',
     };
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('connectedApps_FETCH_SUCCESS adds the connected app', () => {
@@ -88,8 +84,7 @@ describe('reducer', () => {
     };
 
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('revokeConnectedApp_FETCH_START sets submitting to true', () => {
@@ -103,8 +98,7 @@ describe('reducer', () => {
     };
 
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('revokeConnectedApp_FETCH_FAIL sets submitting to false', () => {
@@ -118,8 +112,7 @@ describe('reducer', () => {
     };
 
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(initialState);
+    expect(reducer(stateBefore, action)).toEqual(initialState);
   });
 
   it('revokeConnectedApp_FETCH_SUCCESS sets submitting to false', () => {
@@ -133,8 +126,7 @@ describe('reducer', () => {
     };
 
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(initialState);
+    expect(reducer(stateBefore, action)).toEqual(initialState);
   });
 });
 
@@ -161,4 +153,3 @@ describe('actions', () => {
     });
   });
 });
-

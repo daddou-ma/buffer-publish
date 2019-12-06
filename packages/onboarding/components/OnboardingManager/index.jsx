@@ -12,24 +12,20 @@ const OnboardingManager = ({
   translations,
 }) => (
   <React.Fragment>
-    {canSeeOnboardingPage
-      && (
-        <OnboardingPage
-          onConnectSocialAccountClick={onConnectSocialAccountOnboardingClick}
-          onSkipStep={onSkipStep}
-          translations={translations}
-        />
-      )
-    }
-    {!canSeeOnboardingPage
-      && (
-        <DisabledQueue
-          translations={translations}
-          onManageSocialAccountClick={onManageSocialAccountClick}
-          goToConnectSocialAccount={onConnectSocialAccountSidebarClick}
-        />
-      )
-    }
+    {canSeeOnboardingPage && (
+      <OnboardingPage
+        onConnectSocialAccountClick={onConnectSocialAccountOnboardingClick}
+        onSkipStep={onSkipStep}
+        translations={translations}
+      />
+    )}
+    {!canSeeOnboardingPage && (
+      <DisabledQueue
+        translations={translations}
+        onManageSocialAccountClick={onManageSocialAccountClick}
+        goToConnectSocialAccount={onConnectSocialAccountSidebarClick}
+      />
+    )}
   </React.Fragment>
 );
 

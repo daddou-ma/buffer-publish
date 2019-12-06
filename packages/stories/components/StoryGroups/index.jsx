@@ -59,7 +59,11 @@ const StyledWarningIcon = styled(WarningIcon)`
   fill: #e0364f;
 `;
 
-const getReminderMessage = ({ reminderText1, reminderLinkText2, reminderText3 }) => (
+const getReminderMessage = ({
+  reminderText1,
+  reminderLinkText2,
+  reminderText3,
+}) => (
   <span>
     {reminderText1}
     <StyledLink
@@ -74,10 +78,8 @@ const getReminderMessage = ({ reminderText1, reminderLinkText2, reminderText3 })
 
 const renderNotification = ({ IconComponent, message }) => (
   <ReminderTextWrapper>
-    { IconComponent }
-    <ReminderTextStyle type="p">
-      { message }
-    </ReminderTextStyle>
+    {IconComponent}
+    <ReminderTextStyle type="p">{message}</ReminderTextStyle>
   </ReminderTextWrapper>
 );
 
@@ -102,9 +104,9 @@ const StoryGroups = ({
   serviceId,
   translations,
 }) => {
-  const hasStoriesMobileVersion = (
-    userData.tags ? userData.tags.includes('has_instagram_stories_mobile') : false
-  );
+  const hasStoriesMobileVersion = userData.tags
+    ? userData.tags.includes('has_instagram_stories_mobile')
+    : false;
 
   if (loading) {
     return (
@@ -121,10 +123,7 @@ const StoryGroups = ({
   return (
     <ErrorBoundary>
       {showStoryPreview && (
-        <PreviewPopover
-          onCloseClick={onClosePreviewClick}
-          view="queue"
-        />
+        <PreviewPopover onCloseClick={onClosePreviewClick} view="queue" />
       )}
       <ContainerStyle>
         <TopBarContainerStyle>
@@ -147,14 +146,13 @@ const StoryGroups = ({
         )}
         {hasStoriesMobileVersion
           ? renderNotification({
-            IconComponent: <CircleInstReminderIcon color="instagram" />,
-            message: getReminderMessage(translations),
-          })
+              IconComponent: <CircleInstReminderIcon color="instagram" />,
+              message: getReminderMessage(translations),
+            })
           : renderNotification({
-            IconComponent: <StyledWarningIcon />,
-            message: translations.mobileTagText,
-          })
-        }
+              IconComponent: <StyledWarningIcon />,
+              message: translations.mobileTagText,
+            })}
         <QueueItems
           items={storyGroups}
           onCalendarClick={onCalendarClick}
@@ -181,7 +179,7 @@ StoryGroups.propTypes = {
   storyGroups: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
-    }),
+    })
   ),
   showStoriesComposer: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,

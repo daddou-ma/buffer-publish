@@ -46,7 +46,9 @@ describe('AppStore', () => {
     AppDispatcher.dispatch(actionAddProfiles);
     AppDispatcher.dispatch(actionSelectFirstProfile);
     AppDispatcher.dispatch(actionSelectSecondProfile);
-    const selectedTwitterProfiles = AppStore.default.getSelectedProfilesForService('twitter');
+    const selectedTwitterProfiles = AppStore.default.getSelectedProfilesForService(
+      'twitter'
+    );
     expect(selectedTwitterProfiles.length).toEqual(1);
   });
 

@@ -18,12 +18,12 @@ module.exports = method(
       },
     })
       .then(result => JSON.parse(result))
-      .then((parsedResult) => {
+      .then(parsedResult => {
         const updates = parsedResult.notifications.map(postParser);
         const mappedUpdates = buildPostMap(updates);
         return {
           total: parsedResult.total,
           updates: mappedUpdates,
         };
-      }),
+      })
 );

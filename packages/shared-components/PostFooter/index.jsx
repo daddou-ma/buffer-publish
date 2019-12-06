@@ -1,19 +1,30 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ClockIcon,
-  CircleInstReminderIcon,
-} from '@bufferapp/components';
+import { ClockIcon, CircleInstReminderIcon } from '@bufferapp/components';
 import { grayDark } from '@bufferapp/ui/style/colors';
 import CardFooter from '../CardFooter';
 
-const renderIcon = (hasError, isSent, isCustomScheduled, isInstagramReminder, isPastReminder) => {
-  if ((!hasError && !isCustomScheduled && !isInstagramReminder) || isPastReminder) return;
+const renderIcon = (
+  hasError,
+  isSent,
+  isCustomScheduled,
+  isInstagramReminder,
+  isPastReminder
+) => {
+  if (
+    (!hasError && !isCustomScheduled && !isInstagramReminder) ||
+    isPastReminder
+  )
+    return;
 
   return (
     <Fragment>
-      {isInstagramReminder && !hasError ? <CircleInstReminderIcon color="instagram" /> : null}
-      {isCustomScheduled && !hasError && !isInstagramReminder ? <ClockIcon color={isSent ? 'shuttleGray' : 'outerSpace'} /> : null}
+      {isInstagramReminder && !hasError ? (
+        <CircleInstReminderIcon color="instagram" />
+      ) : null}
+      {isCustomScheduled && !hasError && !isInstagramReminder ? (
+        <ClockIcon color={isSent ? 'shuttleGray' : 'outerSpace'} />
+      ) : null}
     </Fragment>
   );
 };
@@ -50,9 +61,15 @@ const PostFooter = ({
   return (
     <CardFooter
       hideButtons={hideButtons}
-      icon={renderIcon(hasError, isSent, isCustomScheduled, isInstagramReminder, isPastReminder)}
+      icon={renderIcon(
+        hasError,
+        isSent,
+        isCustomScheduled,
+        isInstagramReminder,
+        isPastReminder
+      )}
       preMessage={isPastReminder ? dueTime : ''}
-      message={isPastReminder ? day : (hasError ? '' : postDetails.postAction)}
+      message={isPastReminder ? day : hasError ? '' : postDetails.postAction}
       messageColor={isSent ? grayDark : ''}
       messageLink={serviceLink}
       onDeleteClick={onDeleteConfirmClick}

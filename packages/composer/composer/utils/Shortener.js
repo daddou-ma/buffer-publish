@@ -30,7 +30,8 @@ class Shortener {
     const reqSettings = { credentials: 'same-origin' }; // Send cookies
 
     // If the result is cached, return it right away
-    if (this.cache.has(cacheKey)) return Promise.resolve(this.cache.get(cacheKey));
+    if (this.cache.has(cacheKey))
+      return Promise.resolve(this.cache.get(cacheKey));
 
     // If a request with the same params is already running, return a
     // Promise that'll resolve with that request's data
@@ -53,15 +54,17 @@ class Shortener {
         args: params,
       });
     } else {
-      request = Request.get(Shortener.url, params, reqSettings)
-        .then((response) => response.json())
+      request = Request.get(Shortener.url, params, reqSettings).then(response =>
+        response.json()
+      );
     }
 
-    request = request.then((result) => {
+    request = request.then(result => {
       const shortLink = result.url;
 
       this.cache.set(cacheKey, shortLink);
-      if (shortLink !== url) this.cache.set(hashCacheKey(profileId, shortLink), shortLink);
+      if (shortLink !== url)
+        this.cache.set(hashCacheKey(profileId, shortLink), shortLink);
 
       this.pendingRequests.delete(cacheKey);
 

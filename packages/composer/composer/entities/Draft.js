@@ -22,9 +22,10 @@ class Draft {
     this.isEnabled = false;
     this.filesUploadProgress = new Map(); // Map of uploaderInstance <> integer(0-100)
     this.enabledAttachmentType =
-      (service.canHaveAttachmentType(AttachmentTypes.MEDIA) &&
-        !service.canHaveAttachmentType(AttachmentTypes.LINK)) ?
-        AttachmentTypes.MEDIA : null;
+      service.canHaveAttachmentType(AttachmentTypes.MEDIA) &&
+      !service.canHaveAttachmentType(AttachmentTypes.LINK)
+        ? AttachmentTypes.MEDIA
+        : null;
     this.sourceLink = null; // Source url and page metadata; data structure in getNewSourceLink()
     this.isSaved = false;
     this.hasSavingError = false;
@@ -37,25 +38,32 @@ class Draft {
   }
 
   isEmpty() {
-    return (this.isTextEmpty() &&
-      (this.enabledAttachmentType !== AttachmentTypes.LINK || this.link === null) &&
+    return (
+      this.isTextEmpty() &&
+      (this.enabledAttachmentType !== AttachmentTypes.LINK ||
+        this.link === null) &&
       (this.canHaveMedia() || this.images.length === 0) &&
       (this.canHaveMedia() || this.video === null) &&
       (this.canHaveMedia() || this.gif === null) &&
-      (this.enabledAttachmentType !== AttachmentTypes.RETWEET || this.retweet === null) &&
-      this.sourceLink === null);
+      (this.enabledAttachmentType !== AttachmentTypes.RETWEET ||
+        this.retweet === null) &&
+      this.sourceLink === null
+    );
   }
 
   isTextEmpty() {
-    return (this.editorState.getCurrentContent().getPlainText().length === 0);
+    return this.editorState.getCurrentContent().getPlainText().length === 0;
   }
 
   canHaveMedia() {
-    return (this.enabledAttachmentType !== AttachmentTypes.MEDIA);
+    return this.enabledAttachmentType !== AttachmentTypes.MEDIA;
   }
 
   hasVideoAttached() {
-    return (this.enabledAttachmentType === AttachmentTypes.MEDIA && this.video !== null);
+    return (
+      this.enabledAttachmentType === AttachmentTypes.MEDIA &&
+      this.video !== null
+    );
   }
 
   getNumberOfMentionsInText() {
@@ -72,7 +80,9 @@ class Draft {
   }
 
   getNumberOfMentions() {
-    return this.getNumberOfMentionsInText() + this.getNumberOfMentionsInComment();
+    return (
+      this.getNumberOfMentionsInText() + this.getNumberOfMentionsInComment()
+    );
   }
 
   getNumberOfHashtagsInText() {
@@ -86,7 +96,9 @@ class Draft {
   }
 
   getNumberOfHashtags() {
-    return this.getNumberOfHashtagsInText() + this.getNumberOfHashtagsInComment();
+    return (
+      this.getNumberOfHashtagsInText() + this.getNumberOfHashtagsInComment()
+    );
   }
 }
 

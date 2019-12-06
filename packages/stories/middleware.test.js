@@ -15,8 +15,7 @@ describe('middleware', () => {
   const dispatch = jest.fn();
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('should fetch getStoryGroups', () => {
@@ -27,15 +26,15 @@ describe('middleware', () => {
       },
     };
     middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'getStoryGroups',
         args: {
           profileId: action.profile.id,
           isFetchingMore: false,
         },
-      }));
+      })
+    );
   });
 });

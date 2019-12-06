@@ -21,10 +21,10 @@ var Dispatcher = require('flux').Dispatcher;
 var AppDispatcher = new Dispatcher();
 
 var METHODS = {
-  'handleViewAction': 'VIEW_ACTION',
-  'handleRouterAction': 'ROUTER_ACTION',
-  'handleApiAction': 'API_ACTION',
-  'handlePusherAction': 'PUSHER_ACTION',
+  handleViewAction: 'VIEW_ACTION',
+  handleRouterAction: 'ROUTER_ACTION',
+  handleApiAction: 'API_ACTION',
+  handlePusherAction: 'PUSHER_ACTION',
 };
 
 var createHandler = function(source) {
@@ -33,13 +33,13 @@ var createHandler = function(source) {
     var isDispatching = AppDispatcher.isDispatching();
     var dispatchOptions = {
       source: source,
-      action: action
+      action: action,
     };
 
     // If the dispatcher is currently dispatching
     // then add the next dispatch into the event queue
     if (isDispatching) {
-      setTimeout(function(){
+      setTimeout(function() {
         _this.dispatch(dispatchOptions);
       }, 0);
     } else {

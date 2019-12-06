@@ -13,8 +13,9 @@ class BoundaryFallback extends React.Component {
       <div style={style.errorBoundary}>
         <Text type="h2">Well this is embarrassing...</Text>
         <div style={style.errorBoundaryMessage}>
-          Something’s gone wrong. I’ve notified my
-          human<br />creators who will fix this up shortly.
+          Something’s gone wrong. I’ve notified my human
+          <br />
+          creators who will fix this up shortly.
         </div>
         <Button
           type="secondary"

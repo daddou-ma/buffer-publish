@@ -9,7 +9,7 @@ import { blue } from '@bufferapp/ui/style/colors';
 const NewDisconnectedIcon = ({ showProfilesDisconnectedModal, selected }) => (
   <Link
     unstyled
-    onClick={(e) => {
+    onClick={e => {
       e.stopPropagation();
       showProfilesDisconnectedModal();
     }}
@@ -110,7 +110,7 @@ const ProfileListItem = ({
           },
           {
             selected,
-          },
+          }
         )}
       >
         <div style={profileBadgeWrapperStyle} title={location}>
@@ -140,7 +140,10 @@ const ProfileListItem = ({
             selected={selected}
           />
         ) : (
-          <PendingCountNotification pendingCount={pendingCount} selected={selected} />
+          <PendingCountNotification
+            pendingCount={pendingCount}
+            selected={selected}
+          />
         )}
       </div>
     </div>

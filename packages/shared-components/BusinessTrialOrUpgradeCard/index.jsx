@@ -19,10 +19,12 @@ const upgradeCardStyle = {
 
 const cardBgStyle = {
   circles: {
-    background: 'url(https://s3.amazonaws.com/buffer-publish/images/circles-cta-background.svg) no-repeat right center',
+    background:
+      'url(https://s3.amazonaws.com/buffer-publish/images/circles-cta-background.svg) no-repeat right center',
   },
   squares: {
-    background: 'url(https://s3.amazonaws.com/buffer-publish/images/squares-cta-background.svg) no-repeat right center',
+    background:
+      'url(https://s3.amazonaws.com/buffer-publish/images/squares-cta-background.svg) no-repeat right center',
   },
 };
 
@@ -52,7 +54,13 @@ const bodyStyle = {
 
 const combinedCardStyle = { ...cardStyle, ...upgradeCardStyle };
 
-const BusinessTrialOrUpgradeCard = ({ heading, body, cta, onCtaClick, backgroundImage }) => (
+const BusinessTrialOrUpgradeCard = ({
+  heading,
+  body,
+  cta,
+  onCtaClick,
+  backgroundImage,
+}) => (
   <div style={{ ...combinedCardStyle, ...cardBgStyle[backgroundImage] }}>
     <div style={innerContentStyle}>
       <h3 style={headingStyle}>{heading}</h3>

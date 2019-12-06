@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import clamp from 'lodash.clamp';
 import Arrow from '@bufferapp/publish-shared-components/Arrow';
 import { ImageDimensions } from '@bufferapp/publish-constants';
-import {
-  ArrowWrapper,
-  CarouselContainer,
-  SliderCarousel,
-} from './style';
+import { ArrowWrapper, CarouselContainer, SliderCarousel } from './style';
 
 export const getCardSizes = (
   largeCards,
@@ -46,7 +42,9 @@ const NavArrow = ({
       <Arrow
         isLeft={prev}
         onClick={() => {
-          setSelectedItem(clamp(selectedItem + incrementBy, lowerBounds, upperBounds));
+          setSelectedItem(
+            clamp(selectedItem + incrementBy, lowerBounds, upperBounds)
+          );
         }}
       />
     </ArrowWrapper>
@@ -74,7 +72,7 @@ const shouldHideRightArrow = ({
 };
 
 class Carousel extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -82,29 +80,32 @@ class Carousel extends React.Component {
     };
   }
 
-  setSelectedItem = (item) => {
+  setSelectedItem = item => {
     this.setState({
       selectedItem: item,
     });
   };
 
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     const { totalStories, children } = this.props;
-    const { totalStories: nextTotalStories, children: nextChildren } = nextProps;
+    const {
+      totalStories: nextTotalStories,
+      children: nextChildren,
+    } = nextProps;
     const { selectedItem } = this.state;
     const { selectedItem: nextSelectedItem } = nextState;
 
     if (
-      totalStories !== nextTotalStories
-      || selectedItem !== nextSelectedItem
-      || children !== nextChildren
+      totalStories !== nextTotalStories ||
+      selectedItem !== nextSelectedItem ||
+      children !== nextChildren
     ) {
       return true;
     }
     return false;
   }
 
-  render () {
+  render() {
     const {
       totalCardsToShow,
       totalStories,
@@ -119,14 +120,18 @@ class Carousel extends React.Component {
     const maxCardsToDisplay = maxItemsPerPage || maxPerPage;
 
     const canUploadMore = largeCards && totalStories < totalCardsToShow;
-    const incrementBy = canUploadMore && (totalStories - selectedItem === maxCardsToDisplay) ? 2 : 1;
-    const decrementBy = canUploadMore && (totalStories - selectedItem < maxCardsToDisplay) ? -2 : -1;
+    const incrementBy =
+      canUploadMore && totalStories - selectedItem === maxCardsToDisplay
+        ? 2
+        : 1;
+    const decrementBy =
+      canUploadMore && totalStories - selectedItem < maxCardsToDisplay
+        ? -2
+        : -1;
 
     return (
       <React.Fragment>
-        <SliderCarousel
-          largeCards={largeCards}
-        >
+        <SliderCarousel largeCards={largeCards}>
           <CarouselContainer
             selectedItem={selectedItem}
             totalCardsToShow={totalCardsToShow}
@@ -134,7 +139,7 @@ class Carousel extends React.Component {
             cardHeight={cardHeight}
             largeCards={largeCards}
           >
-            { children }
+            {children}
           </CarouselContainer>
           <NavArrow
             prev
@@ -182,6 +187,4 @@ Carousel.defaultProps = {
 };
 
 export default Carousel;
-export {
-  CarouselCard,
-} from './style';
+export { CarouselCard } from './style';

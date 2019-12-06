@@ -25,15 +25,15 @@ class TimePicker extends React.Component {
     time: moment(),
   };
 
-  onHourSelectChange = (e) => {
+  onHourSelectChange = e => {
     this.onChange({ hour: e.target.value });
   };
 
-  onMinSelectChange = (e) => {
+  onMinSelectChange = e => {
     this.onChange({ min: e.target.value });
   };
 
-  onPeriodSelectChange = (e) => {
+  onPeriodSelectChange = e => {
     this.onChange({ dayPeriod: e.target.value });
   };
 
@@ -41,35 +41,42 @@ class TimePicker extends React.Component {
    * Moment exposes methods to update a time's hours and minutes, but not day period,
    * so we're using the string parsing method instead
    */
-  onChange = (newTimeUnits) => {
+  onChange = newTimeUnits => {
     const timeFormats = this.getTimeFormats();
     const timeUnits = this.getTimeUnits();
 
     const dateFormat = 'YYYY M D';
     const formattedDate = this.props.time.format(dateFormat);
 
-    const hour = typeof newTimeUnits.hour !== 'undefined' ? newTimeUnits.hour : timeUnits.hour;
-    const min = typeof newTimeUnits.min !== 'undefined' ? newTimeUnits.min : timeUnits.min;
+    const hour =
+      typeof newTimeUnits.hour !== 'undefined'
+        ? newTimeUnits.hour
+        : timeUnits.hour;
+    const min =
+      typeof newTimeUnits.min !== 'undefined'
+        ? newTimeUnits.min
+        : timeUnits.min;
     const dayPeriod =
-      typeof newTimeUnits.dayPeriod !== 'undefined' ? newTimeUnits.dayPeriod : timeUnits.dayPeriod;
+      typeof newTimeUnits.dayPeriod !== 'undefined'
+        ? newTimeUnits.dayPeriod
+        : timeUnits.dayPeriod;
 
     const momentParams = [
       `${formattedDate} ${hour} ${min} ${dayPeriod}`,
       `${dateFormat} ${timeFormats.hour} ${timeFormats.min} ${timeFormats.dayPeriod}`,
     ];
 
-    const time = this.props.timezone ?
-               moment.tz(...momentParams, this.props.timezone) :
-               moment(...momentParams);
+    const time = this.props.timezone
+      ? moment.tz(...momentParams, this.props.timezone)
+      : moment(...momentParams);
 
     this.props.onChange(time);
   };
 
-  getHoursInDay = () => (
-    this.props.shouldUse24hTime ?
-      [...Array(24).keys()] : // [0..23]
-      [...Array(12 + 1).keys()].slice(1) // [1..12]
-  );
+  getHoursInDay = () =>
+    this.props.shouldUse24hTime
+      ? [...Array(24).keys()] // [0..23]
+      : [...Array(12 + 1).keys()].slice(1); // [1..12]
 
   getMinutesInHour = () => [...Array(60).keys()]; // [0..59]
 
@@ -89,7 +96,7 @@ class TimePicker extends React.Component {
     };
   };
 
-  leftPadTimeUnit = (timeUnit) => (timeUnit < 10 ? `0${timeUnit}` : timeUnit);
+  leftPadTimeUnit = timeUnit => (timeUnit < 10 ? `0${timeUnit}` : timeUnit);
 
   render() {
     const { shouldUse24hTime } = this.props;
@@ -101,21 +108,40 @@ class TimePicker extends React.Component {
 
     return (
       <div className={timePickerClassName}>
-        <Select onChange={this.onHourSelectChange} value={hour} className={styles.select}>
-          {this.getHoursInDay().map((h) =>
-            <option value={h} key={h}>{this.leftPadTimeUnit(h)}</option>)}
+        <Select
+          onChange={this.onHourSelectChange}
+          value={hour}
+          className={styles.select}
+        >
+          {this.getHoursInDay().map(h => (
+            <option value={h} key={h}>
+              {this.leftPadTimeUnit(h)}
+            </option>
+          ))}
         </Select>
 
-        <Select onChange={this.onMinSelectChange} value={min} className={styles.select}>
-          {this.getMinutesInHour().map((m) =>
-            <option value={m} key={m}>{this.leftPadTimeUnit(m)}</option>)}
+        <Select
+          onChange={this.onMinSelectChange}
+          value={min}
+          className={styles.select}
+        >
+          {this.getMinutesInHour().map(m => (
+            <option value={m} key={m}>
+              {this.leftPadTimeUnit(m)}
+            </option>
+          ))}
         </Select>
 
-        {shouldDisplayPeriodSelect &&
-          <Select onChange={this.onPeriodSelectChange} value={dayPeriod} className={styles.select}>
+        {shouldDisplayPeriodSelect && (
+          <Select
+            onChange={this.onPeriodSelectChange}
+            value={dayPeriod}
+            className={styles.select}
+          >
             <option value="am">AM</option>
             <option value="pm">PM</option>
-          </Select>}
+          </Select>
+        )}
       </div>
     );
   }

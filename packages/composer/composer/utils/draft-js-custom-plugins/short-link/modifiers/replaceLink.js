@@ -4,7 +4,11 @@
 
 import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
 
-const replaceLink = (editorState, contentBlock, { indices, oldLink, newLink }) => {
+const replaceLink = (
+  editorState,
+  contentBlock,
+  { indices, oldLink, newLink }
+) => {
   const blockKey = contentBlock.getKey();
   let contentState = editorState.getCurrentContent();
   const originalSelectionBefore = contentState.getSelectionBefore();

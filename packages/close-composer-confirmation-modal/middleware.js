@@ -6,7 +6,7 @@ import { actions as remindersActions } from '@bufferapp/publish-past-reminders/r
 import { actions as storyGroupComposerActions } from '@bufferapp/publish-story-group-composer/reducer';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch, getState }) => next => (action) => {
+export default ({ dispatch, getState }) => next => action => {
   next(action);
   const { tabId } = getState().tabs;
 

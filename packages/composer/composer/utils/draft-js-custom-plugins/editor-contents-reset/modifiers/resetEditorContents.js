@@ -3,7 +3,7 @@
  */
 import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
 
-const resetEditorContents = (editorState) => {
+const resetEditorContents = editorState => {
   let contentState = editorState.getCurrentContent();
   const contentBlock = contentState.getFirstBlock();
   const contentBlockKey = contentBlock.getKey();
@@ -17,7 +17,11 @@ const resetEditorContents = (editorState) => {
   });
 
   contentState = Modifier.removeRange(contentState, allSelected, 'backward');
-  let newEditorState = EditorState.push(editorState, contentState, 'remove-range');
+  let newEditorState = EditorState.push(
+    editorState,
+    contentState,
+    'remove-range'
+  );
   newEditorState = EditorState.acceptSelection(
     newEditorState,
     SelectionState.createEmpty(contentBlockKey)

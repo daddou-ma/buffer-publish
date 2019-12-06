@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import styles from './ImportedMention.css';
 
-const ImportedMention = (props) => (
-  <span className={styles.mention} spellCheck={false}>{props.children}</span>
+const ImportedMention = props => (
+  <span className={styles.mention} spellCheck={false}>
+    {props.children}
+  </span>
 );
 
 ImportedMention.propTypes = {

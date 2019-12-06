@@ -39,22 +39,34 @@ const profileInitialState = {
   total: 0,
 };
 
-const getProfileId = (action) => {
-  if (action.profileId) { return action.profileId; }
-  if (action.args) { return action.args.profileId; }
-  if (action.profile) { return action.profile.id; }
+const getProfileId = action => {
+  if (action.profileId) {
+    return action.profileId;
+  }
+  if (action.args) {
+    return action.args.profileId;
+  }
+  if (action.profile) {
+    return action.profile.id;
+  }
 };
 
-const getDraftUpdateId = (action) => {
-  if (action.updateId) { return action.updateId; }
-  if (action.args) { return action.args.updateId; }
-  if (action.draft) { return action.draft.id; }
+const getDraftUpdateId = action => {
+  if (action.updateId) {
+    return action.updateId;
+  }
+  if (action.args) {
+    return action.args.updateId;
+  }
+  if (action.draft) {
+    return action.draft.id;
+  }
 };
 
 const determineIfMoreToLoad = (action, currentPosts) => {
   const currentPostCount = Object.keys(currentPosts).length;
   const resultUpdatesCount = Object.keys(action.result.drafts).length;
-  return (action.result.total > (currentPostCount + resultUpdatesCount));
+  return action.result.total > currentPostCount + resultUpdatesCount;
 };
 
 const draftReducer = (state, action) => {
@@ -107,7 +119,10 @@ const draftsReducer = (state = {}, action) => {
   switch (action.type) {
     case `draftPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { drafts } = action.result;
-      if (action.args.isFetchingMore || Object.keys(state).length > Object.keys(drafts).length) {
+      if (
+        action.args.isFetchingMore ||
+        Object.keys(state).length > Object.keys(drafts).length
+      ) {
         return { ...state, ...drafts };
       }
       return drafts;
@@ -134,7 +149,10 @@ const draftsReducer = (state = {}, action) => {
     case actionTypes.DRAFT_NEEDS_APPROVAL:
       return {
         ...state,
-        [getDraftUpdateId(action)]: draftReducer(state[getDraftUpdateId(action)], action),
+        [getDraftUpdateId(action)]: draftReducer(
+          state[getDraftUpdateId(action)],
+          action
+        ),
       };
     default:
       return state;

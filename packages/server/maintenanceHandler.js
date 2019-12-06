@@ -2,7 +2,8 @@ const fs = require('fs');
 const { join } = require('path');
 const rp = require('request-promise');
 
-const getMaintenanceHtml = () => fs.readFileSync(join(__dirname, 'maintenance.html'), 'utf8');
+const getMaintenanceHtml = () =>
+  fs.readFileSync(join(__dirname, 'maintenance.html'), 'utf8');
 
 module.exports = (req, res, next) => {
   rp({
@@ -14,8 +15,12 @@ module.exports = (req, res, next) => {
       // we're out of maintenance mode, redirect to app
       res.redirect(302, '/');
     })
-    .catch((error) => {
-      if (error.error.includes('Buffer is under maintenance, please, try again soon')) {
+    .catch(error => {
+      if (
+        error.error.includes(
+          'Buffer is under maintenance, please, try again soon'
+        )
+      ) {
         res.send(getMaintenanceHtml());
       } else {
         next(error);

@@ -16,7 +16,10 @@ const IconWrapper = styled.div`
 
 export const PlayIcon = ({ large }) => (
   <IconWrapper>
-    <CirclePlayIcon color={grayLighter} size={{ width: large ? '60px' : '40px' }} />
+    <CirclePlayIcon
+      color={grayLighter}
+      size={{ width: large ? '60px' : '40px' }}
+    />
   </IconWrapper>
 );
 

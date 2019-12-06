@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { borderWidth } from '@bufferapp/components/style/border';
-import {
-  mystic,
-  geyser,
-} from '@bufferapp/components/style/color';
+import { mystic, geyser } from '@bufferapp/components/style/color';
 import ScheduleTableHeader from '../ScheduleTableHeader';
 import ScheduleTableCell from '../ScheduleTableCell';
 
@@ -42,7 +39,7 @@ const ScheduleTableColumn = ({
   onUpdateTime,
   onPauseToggleClick,
 }) => (
-  <div style={(times.length === 0) ? columnNoTimesStyle : columnStyle}>
+  <div style={times.length === 0 ? columnNoTimesStyle : columnStyle}>
     <ScheduleTableHeader
       disabled={disabled}
       dayName={dayName}
@@ -51,24 +48,22 @@ const ScheduleTableColumn = ({
       onPauseToggleClick={onPauseToggleClick}
     />
     <div style={columnWrapperStyle}>
-      {
-        times.map((time, index) =>
-          <ScheduleTableCell
-            disabled={disabled}
-            key={index}
-            select24Hours={select24Hours}
-            time={time}
-            onRemoveTimeClick={onRemoveTimeClick}
-            onUpdateTime={onUpdateTime}
-            dayName={dayName}
-            timeIndex={index}
-            paused={paused}
-          />,
-        )
-      }
+      {times.map((time, index) => (
+        <ScheduleTableCell
+          disabled={disabled}
+          key={index}
+          select24Hours={select24Hours}
+          time={time}
+          onRemoveTimeClick={onRemoveTimeClick}
+          onUpdateTime={onUpdateTime}
+          dayName={dayName}
+          timeIndex={index}
+          paused={paused}
+        />
+      ))}
     </div>
   </div>
-  );
+);
 
 ScheduleTableColumn.defaultProps = {
   disabled: false,
@@ -89,7 +84,7 @@ ScheduleTableColumn.propTypes = {
         }),
         PropTypes.string,
       ]),
-    }).isRequired,
+    }).isRequired
   ).isRequired,
   onRemoveTimeClick: PropTypes.func.isRequired,
   onUpdateTime: PropTypes.func.isRequired,

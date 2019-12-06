@@ -12,10 +12,10 @@ const stories = {
   instagramMultipleImages: 'Instagram (multiple images)',
 };
 
-Object.keys(stories).forEach((useCase) => {
+Object.keys(stories).forEach(useCase => {
   storiesOf('Composer').add(stories[useCase], () => (
     <div>
       <Composer {...useCases[useCase]} />
     </div>
-    ));
+  ));
 });

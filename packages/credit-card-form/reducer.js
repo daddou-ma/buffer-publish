@@ -1,4 +1,7 @@
-export default (state = { stripePublishableKey: null, stripe: null }, action) => {
+export default (
+  state = { stripePublishableKey: null, stripe: null },
+  action
+) => {
   switch (action.type) {
     case 'APP_INIT':
       return {

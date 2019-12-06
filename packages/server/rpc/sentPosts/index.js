@@ -22,7 +22,7 @@ module.exports = method(
       },
     })
       .then(result => JSON.parse(result))
-      .then((parsedResult) => {
+      .then(parsedResult => {
         const updates = parsedResult.updates.map(postParser);
         const mappedUpdates = buildPostMap(updates);
         return {
@@ -30,5 +30,5 @@ module.exports = method(
           updates: mappedUpdates,
         };
       });
-  },
+  }
 );

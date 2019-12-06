@@ -17,18 +17,24 @@ class LinkAttachmentTextEditor extends React.Component {
     canBeEdited: PropTypes.bool.isRequired,
   };
 
-  onLinkFieldKeyDown = (e) => {
+  onLinkFieldKeyDown = e => {
     // Prevent inserting line breaks in link title
     if (this.props.type === LinkAttachmentTextFieldTypes.TITLE) {
       if (e.key === 'Enter') e.preventDefault();
     }
   };
 
-  onLinkFieldChange = (e) => {
+  onLinkFieldChange = e => {
     if (this.props.type === LinkAttachmentTextFieldTypes.TITLE) {
-      ComposerActionCreators.updateDraftLinkTitle(this.props.draftId, e.target.value);
+      ComposerActionCreators.updateDraftLinkTitle(
+        this.props.draftId,
+        e.target.value
+      );
     } else if (this.props.type === LinkAttachmentTextFieldTypes.DESCRIPTION) {
-      ComposerActionCreators.updateDraftLinkDescription(this.props.draftId, e.target.value);
+      ComposerActionCreators.updateDraftLinkDescription(
+        this.props.draftId,
+        e.target.value
+      );
     }
   };
 
@@ -43,23 +49,29 @@ class LinkAttachmentTextEditor extends React.Component {
     }
 
     const textFieldClassName =
-      type === LinkAttachmentTextFieldTypes.TITLE ?
-        (canBeEdited ? styles.editableTitle : styles.title) :
-      type === LinkAttachmentTextFieldTypes.DESCRIPTION ?
-        (canBeEdited ? styles.editableDescription : styles.description) :
-      null;
+      type === LinkAttachmentTextFieldTypes.TITLE
+        ? canBeEdited
+          ? styles.editableTitle
+          : styles.title
+        : type === LinkAttachmentTextFieldTypes.DESCRIPTION
+        ? canBeEdited
+          ? styles.editableDescription
+          : styles.description
+        : null;
 
     return (
       <div>
-        {canBeEdited ?
+        {canBeEdited ? (
           <Textarea
             className={textFieldClassName}
             onKeyDown={this.onLinkFieldKeyDown}
             onChange={this.onLinkFieldChange}
             value={value}
             placeholder={placeholder}
-          /> :
-          <p className={textFieldClassName}>{value}</p>}
+          />
+        ) : (
+          <p className={textFieldClassName}>{value}</p>
+        )}
       </div>
     );
   }

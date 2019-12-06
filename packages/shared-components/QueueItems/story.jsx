@@ -1,15 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import QueueItems from './index';
-import {
-  postLists,
-  postListsNoHeaders,
-} from './postData';
+import { postLists, postListsNoHeaders } from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -27,11 +22,7 @@ const store = storeFake({
 
 storiesOf('QueueItems', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
-    <Provider store={store}>
-      {getStory()}
-    </Provider>,
-  )
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('default queue', () => (
     <QueueItems
       items={postLists}

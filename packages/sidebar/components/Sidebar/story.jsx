@@ -9,7 +9,7 @@ const storeFake = state => ({
   default: () => {},
   subscribe: () => {},
   dispatch: () => {},
-  getState: () => ({...state}),
+  getState: () => ({ ...state }),
 });
 
 const fakeUser = {
@@ -21,7 +21,7 @@ const fakeUser = {
   features: ['paid_users_in_new_publish'],
 };
 
-function createMockStore (free) {
+function createMockStore(free) {
   return storeFake({
     productFeatures: {
       planName: free ? 'free' : 'pro',

@@ -20,6 +20,9 @@ yarn run bugsnag:release
 # Build the bundle and it's assets (CSS, chunks, source maps)
 yarn run build
 
+echo "WEBPACK ASSETS:"
+cat ./webpackAssets.json
+
 # Upload the static assets to S3
 UPLOADER="https://github.com/bufferapp/buffer-static-upload/releases/download/0.3.0/buffer-static-upload-`uname -s`"
 curl -L $UPLOADER > ./buffer-static-upload

@@ -1,12 +1,18 @@
 import React from 'react';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import ScheduleTable from './index';
 
-const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const daysOfWeek = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
 
 const times = [
   {
@@ -37,7 +43,7 @@ const days = [];
 const daysSingleTime = [];
 const daysNoTimes = [];
 
-daysOfWeek.forEach((dayName) => {
+daysOfWeek.forEach(dayName => {
   days.push({
     dayName,
     postingTimesTotal: times.length,

@@ -5,6 +5,4 @@ import ExtrasLinks from './index';
 
 storiesOf('ExtrasLinks', module)
   .addDecorator(withA11y)
-  .add('should show text and links', () => (
-    <ExtrasLinks />
-  ));
+  .add('should show text and links', () => <ExtrasLinks />);

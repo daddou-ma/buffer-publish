@@ -18,7 +18,8 @@ describe('Pathname Utils', () => {
       expect(pageName).toEqual('queue');
     });
     it('returns analytics with sub page name', () => {
-      const pathname = '/profile/5d48a8bde5fbe90008026905/tab/analytics/overview';
+      const pathname =
+        '/profile/5d48a8bde5fbe90008026905/tab/analytics/overview';
       const pageName = getPageNameFromPath(pathname);
       expect(pageName).toEqual('analytics overview');
     });

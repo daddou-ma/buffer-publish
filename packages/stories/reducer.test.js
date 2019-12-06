@@ -10,8 +10,7 @@ describe('reducer', () => {
       type: 'INIT',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle getStoryGroups_FETCH_START action type', () => {
@@ -36,8 +35,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle getStoryGroups_FETCH_SUCCESS action type', () => {
@@ -67,8 +65,7 @@ describe('reducer', () => {
       },
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle getStoryGroups_FETCH_FAIL action type', () => {
@@ -90,8 +87,7 @@ describe('reducer', () => {
       type: 'getStoryGroups_FETCH_FAIL',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle STORY_DELETED action type', () => {
@@ -128,8 +124,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle STORY_CREATED action type', () => {
@@ -167,8 +162,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle STORY_UPDATED action type', () => {
@@ -207,8 +201,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle updateStoryGroup_FETCH_SUCCESS action type', () => {
@@ -246,8 +239,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle createStoryGroup_FETCH_SUCCESS action type', () => {
@@ -286,8 +278,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle STORY_GROUP_SHARE_NOW action type', () => {
@@ -324,8 +315,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle shareStoryGroupNow_FETCH_SUCCESS action type', () => {
@@ -362,8 +352,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle shareStoryGroupNow_FETCH_FAIL action type', () => {
@@ -400,8 +389,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle OPEN_STORIES_COMPOSER action type', () => {
@@ -433,8 +421,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle HIDE_STORIES_COMPOSER action type', () => {
@@ -461,8 +448,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle OPEN_PREVIEW action type', () => {
@@ -481,8 +467,7 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('should handle CLOSE_PREVIEW action type', () => {
@@ -501,7 +486,6 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
 
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 });

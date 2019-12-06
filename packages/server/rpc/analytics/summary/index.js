@@ -34,11 +34,19 @@ const LABELS = {
   },
 };
 
-const requestTotals = (profileId, profileService, dateRange, accessToken, analyzeApiAddr) =>
+const requestTotals = (
+  profileId,
+  profileService,
+  dateRange,
+  accessToken,
+  analyzeApiAddr
+) =>
   rp({
     uri: `${analyzeApiAddr}/metrics/totals`,
     method: 'POST',
-    strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
+    strictSSL: !(
+      process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+    ),
     qs: {
       access_token: accessToken,
       start_date: dateRange.start,
@@ -75,19 +83,18 @@ module.exports = method(
       profileService,
       dateRange,
       req.session.publish.accessToken,
-      req.app.get('analyzeApiAddr'),
+      req.app.get('analyzeApiAddr')
     );
     const previousPeriod = requestTotals(
       profileId,
       profileService,
       previousDateRange,
       req.session.publish.accessToken,
-      req.app.get('analyzeApiAddr'),
+      req.app.get('analyzeApiAddr')
     );
 
-    return Promise
-      .all([currentPeriod, previousPeriod])
-      .then((response) => {
+    return Promise.all([currentPeriod, previousPeriod])
+      .then(response => {
         const currentPeriodResult = response[0].response;
         const pastPeriodResult = response[1].response;
         return Object.keys(LABELS[profileService])
@@ -96,13 +103,11 @@ module.exports = method(
               metricKey,
               currentPeriodResult,
               pastPeriodResult,
-              profileService,
-            ),
+              profileService
+            )
           )
-          .filter(metric =>
-            metric.label !== undefined,
-          );
+          .filter(metric => metric.label !== undefined);
       })
       .catch(() => []);
-  },
+  }
 );

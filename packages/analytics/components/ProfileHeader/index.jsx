@@ -28,7 +28,9 @@ const ProfileHeader = ({ profile }) => {
           network={profile.service}
         />
       </div>
-      <Text color="outerSpace" size="small">{profile.username}</Text>
+      <Text color="outerSpace" size="small">
+        {profile.username}
+      </Text>
     </div>
   );
 };

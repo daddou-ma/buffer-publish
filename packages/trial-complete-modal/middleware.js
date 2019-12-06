@@ -4,7 +4,8 @@ import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { actionTypes } from './reducer';
 
-export default ({ getState, dispatch }) => next => (action) => { // eslint-disable-line
+export default ({ getState, dispatch }) => next => action => {
+  // eslint-disable-line
   next(action);
 
   switch (action.type) {
@@ -15,7 +16,9 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
     }
     case actionTypes.COMPLETE_UPGRADE_TRIAL: {
       const {
-        hasExpiredProTrial, hasExpiredBusinessTrial, isPremiumBusiness,
+        hasExpiredProTrial,
+        hasExpiredBusinessTrial,
+        isPremiumBusiness,
       } = getState().trialCompleteModal;
       const ctaName = () => {
         if (hasExpiredProTrial) return SEGMENT_NAMES.EXPIRED_TRIAL_PRO_UPGRADE;
@@ -27,9 +30,11 @@ export default ({ getState, dispatch }) => next => (action) => { // eslint-disab
         }
       };
 
-      window.location.assign(`${getURL.getBillingURL({
-        cta: ctaName(),
-      })}`);
+      window.location.assign(
+        `${getURL.getBillingURL({
+          cta: ctaName(),
+        })}`
+      );
       break;
     }
     default:

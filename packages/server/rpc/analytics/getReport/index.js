@@ -15,8 +15,14 @@ const RPC_ENDPOINTS = {
 
 function calculateDateRange(range, timezone) {
   moment.tz.setDefault(timezone);
-  const startDate = moment().startOf('day').subtract(range, 'days').format('MM/DD/YYYY');
-  const endDate = moment().startOf('day').subtract(1, 'days').format('MM/DD/YYYY');
+  const startDate = moment()
+    .startOf('day')
+    .subtract(range, 'days')
+    .format('MM/DD/YYYY');
+  const endDate = moment()
+    .startOf('day')
+    .subtract(1, 'days')
+    .format('MM/DD/YYYY');
   moment.tz.setDefault();
 
   return { startDate, endDate };
@@ -35,16 +41,22 @@ function getDateRangeFromDates(start, end, timezone) {
   return { startDate, endDate };
 }
 
-function requestChartData (chart, dateRange, req) {
+function requestChartData(chart, dateRange, req) {
   if (RPC_ENDPOINTS[chart.chart_id] === undefined) return;
   const { startDate, endDate } = dateRange;
 
-  return RPC_ENDPOINTS[chart.chart_id].fn(Object.assign({
-    profileId: chart.profile_id,
-    profileService: chart.service,
-    startDate,
-    endDate,
-  }, chart.state), req);
+  return RPC_ENDPOINTS[chart.chart_id].fn(
+    Object.assign(
+      {
+        profileId: chart.profile_id,
+        profileService: chart.service,
+        startDate,
+        endDate,
+      },
+      chart.state
+    ),
+    req
+  );
 }
 
 module.exports = method(
@@ -54,12 +66,15 @@ module.exports = method(
     rp({
       uri: `${req.app.get('analyzeApiAddr')}/get_report`,
       method: 'POST',
-      strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
+      strictSSL: !(
+        process.env.NODE_ENV === 'development' ||
+        process.env.NODE_ENV === 'test'
+      ),
       body: {
         id: _id,
       },
       json: true,
-    }).then((report) => {
+    }).then(report => {
       let dateRange;
       if (report.date_range.range) {
         dateRange = calculateDateRange(report.date_range.range, timezone);
@@ -67,30 +82,31 @@ module.exports = method(
         dateRange = getDateRangeFromDates(
           report.date_range.start,
           report.date_range.end,
-          timezone,
+          timezone
         );
       }
 
-      return Promise
-        .all(report.charts.map(chart => requestChartData(chart, dateRange, req)))
-        .then(chartMetrics =>
-          Object.assign(report, {
-            date_range: {
-              startDate: dateRange.startDate,
-              endDate: dateRange.endDate,
-              range: report.date_range.range,
-            },
-            charts: report.charts
-              .map((chart, index) => {
-                chart.profile = profileParser(chart.profile);
-                if (!Array.isArray(chartMetrics[index])) {
-                  return Object.assign(chart, chart.state, chartMetrics[index]);
-                }
-                return Object.assign(chart, {
-                  metrics: chartMetrics[index],
-                });
-              })
-              .filter(chart => RPC_ENDPOINTS[chart.chart_id] !== undefined),
-          }));
-    }),
+      return Promise.all(
+        report.charts.map(chart => requestChartData(chart, dateRange, req))
+      ).then(chartMetrics =>
+        Object.assign(report, {
+          date_range: {
+            startDate: dateRange.startDate,
+            endDate: dateRange.endDate,
+            range: report.date_range.range,
+          },
+          charts: report.charts
+            .map((chart, index) => {
+              chart.profile = profileParser(chart.profile);
+              if (!Array.isArray(chartMetrics[index])) {
+                return Object.assign(chart, chart.state, chartMetrics[index]);
+              }
+              return Object.assign(chart, {
+                metrics: chartMetrics[index],
+              });
+            })
+            .filter(chart => RPC_ENDPOINTS[chart.chart_id] !== undefined),
+        })
+      );
+    })
 );

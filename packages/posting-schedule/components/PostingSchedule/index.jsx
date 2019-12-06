@@ -8,10 +8,7 @@ import {
   Popover,
 } from '@bufferapp/components';
 
-import {
-  Text,
-  Button,
-} from '@bufferapp/ui';
+import { Text, Button } from '@bufferapp/ui';
 
 import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 
@@ -129,12 +126,11 @@ const PostingSchedule = ({
       </div>
     );
   }
-  const emptySchedule = days.filter(day => day.postingTimesTotal > 0).length < 1;
+  const emptySchedule =
+    days.filter(day => day.postingTimesTotal > 0).length < 1;
   // TODO: is this the right place?
   if (items.length > 0) {
-    items.forEach(item =>
-      item.label = item.city,
-    );
+    items.forEach(item => (item.label = item.city));
   }
 
   const debouncedOnChange = debounce(onGetTimezones, 500);
@@ -150,7 +146,9 @@ const PostingSchedule = ({
         <div style={timezoneAndPauseContainerStyle}>
           <div style={timezoneStyle}>
             <TimezoneInputForm
-              handleSubmit={({ city, timezone }) => onUpdateTimezone({ city, timezone })}
+              handleSubmit={({ city, timezone }) =>
+                onUpdateTimezone({ city, timezone })
+              }
               items={items}
               onTimezoneChange={debouncedOnChange}
               onTimezoneInputFocus={onTimezoneInputFocus}
@@ -158,13 +156,16 @@ const PostingSchedule = ({
               disabled={!isManager}
             />
           </div>
-          {isManager &&
+          {isManager && (
             <div style={pauseQueueContainerStyle}>
               <Text>
                 {paused
-                ? 'Your queue has been paused! '
-                : 'Stop all posts from being sent on this Social Account? '}
-                <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
+                  ? 'Your queue has been paused! '
+                  : 'Stop all posts from being sent on this Social Account? '}
+                <Link
+                  newTab
+                  href="https://faq.buffer.com/article/681-how-to-pause-your-queue"
+                >
                   Learn more
                 </Link>
               </Text>
@@ -177,9 +178,9 @@ const PostingSchedule = ({
                 />
               </div>
             </div>
-          }
+          )}
         </div>
-        {isManager &&
+        {isManager && (
           <span>
             <Divider />
             <div style={sectionStyle}>
@@ -192,7 +193,8 @@ const PostingSchedule = ({
                   minutes = minutes || 0;
 
                   hours = parseInt(hours, 10) < 10 ? `0${hours}` : hours;
-                  minutes = parseInt(minutes, 10) < 10 ? `0${minutes}` : minutes;
+                  minutes =
+                    parseInt(minutes, 10) < 10 ? `0${minutes}` : minutes;
 
                   onAddPostingTime({
                     day,
@@ -203,60 +205,80 @@ const PostingSchedule = ({
               />
             </div>
           </span>
-        }
+        )}
         <Divider />
         <div style={postingTimesSection}>
           <div style={postingTimesStyle}>
             <Text type="h3">
               Posting times
               {/* Need to move the tooltip a bit for visual accuracy! */}
-              <div style={{ display: 'inline-block', position: 'relative', top: '2px', left: '5px' }}>
-                <IconArrowPopover icon={<InfoIcon />} position="below" shadow oneLine={false} width="320px" label="Posting Times">
+              <div
+                style={{
+                  display: 'inline-block',
+                  position: 'relative',
+                  top: '2px',
+                  left: '5px',
+                }}
+              >
+                <IconArrowPopover
+                  icon={<InfoIcon />}
+                  position="below"
+                  shadow
+                  oneLine={false}
+                  width="320px"
+                  label="Posting Times"
+                >
                   <div style={{ padding: '.5rem .25rem' }}>
                     {/* eslint-disable max-len */}
-                    Your posting schedule tells Buffer when to send out posts in your Queue. <br /><br />
-                    For example, the next 10 posts you add to your Queue will go out in the next 10 upcoming time/date slots you
-                    decide below. You can change this schedule at any time!
+                    Your posting schedule tells Buffer when to send out posts in
+                    your Queue. <br />
+                    <br />
+                    For example, the next 10 posts you add to your Queue will go
+                    out in the next 10 upcoming time/date slots you decide
+                    below. You can change this schedule at any time!
                   </div>
                 </IconArrowPopover>
               </div>
             </Text>
           </div>
-          {!emptySchedule && isManager &&
+          {!emptySchedule && isManager && (
             <Button
               type="secondary"
               label="Clear all Posting Times"
               onClick={onClearAllClick}
-            />}
-          {showClearAllModal && <Popover
-            onOverlayClick={closePopover}
-          >
-            <ConfirmModal
-              onConfirmClick={onConfirmClearClick}
-              profileName={profileName}
-              profileService={profileService}
-              onCloseModal={closePopover}
-              avatar={avatar}
-              heading={'Are you sure?'}
-              body={`Would you like us to remove all your posting times for <span style="font-weight: bold">${profileName}</span>?`}
-              btnText={'I\'m Sure, Empty It'}
             />
-          </Popover>}
+          )}
+          {showClearAllModal && (
+            <Popover onOverlayClick={closePopover}>
+              <ConfirmModal
+                onConfirmClick={onConfirmClearClick}
+                profileName={profileName}
+                profileService={profileService}
+                onCloseModal={closePopover}
+                avatar={avatar}
+                heading={'Are you sure?'}
+                body={`Would you like us to remove all your posting times for <span style="font-weight: bold">${profileName}</span>?`}
+                btnText={"I'm Sure, Empty It"}
+              />
+            </Popover>
+          )}
           <div style={tableStyle}>
             <Divider color="white" />
-            {scheduleLoading &&
+            {scheduleLoading && (
               <div style={scheduleLoadingContainerStyle}>
                 <LoadingAnimation />
-              </div>}
-            {!scheduleLoading && emptySchedule &&
+              </div>
+            )}
+            {!scheduleLoading && emptySchedule && (
               <EmptyState
                 title="Looks like you don't have any posting times set!"
                 subtitle="Add a new posting time to start publishing posts from your queue."
                 heroImg="https://s3.amazonaws.com/buffer-publish/images/clock2x.png"
                 heroImgSize={{ width: '40px', height: '40px' }}
                 height={'30vh'}
-              />}
-            {!emptySchedule &&
+              />
+            )}
+            {!emptySchedule && (
               <ScheduleTable
                 disabled={!isManager}
                 days={days}
@@ -264,7 +286,8 @@ const PostingSchedule = ({
                 onRemoveTimeClick={onRemoveTimeClick}
                 onUpdateTime={onUpdateTime}
                 onPauseToggleClick={onPauseToggleClick}
-              />}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -286,14 +309,16 @@ PostingSchedule.propTypes = {
             }),
             PropTypes.string,
           ]),
-        }).isRequired,
+        }).isRequired
       ).isRequired,
-    }),
+    })
   ).isRequired,
   hasTwentyFourHourTimeFormat: PropTypes.bool.isRequired,
-  items: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-  })).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   loading: PropTypes.bool.isRequired,
   scheduleLoading: PropTypes.bool.isRequired,
   postingScheduleHeader: PropTypes.string.isRequired,

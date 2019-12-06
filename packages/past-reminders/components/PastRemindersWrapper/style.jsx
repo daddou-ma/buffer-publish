@@ -1,11 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  LoadingAnimation,
-} from '@bufferapp/components';
-import {
-  EmptyState,
-} from '@bufferapp/publish-shared-components';
+import { LoadingAnimation } from '@bufferapp/components';
+import { EmptyState } from '@bufferapp/publish-shared-components';
 
 export const LoadingContainer = styled.div`
   width: 100%;

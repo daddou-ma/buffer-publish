@@ -72,7 +72,11 @@ module.exports = {
     }),
   ],
   optimization: {
+    runtimeChunk: {
+      name: 'runtime',
+    },
     splitChunks: {
+      name: false, // don't use dynamic names which could invalidate cache when they change
       cacheGroups: {
         vendors: false, // Disable the default vendors cache group for finer control
         vendor: {

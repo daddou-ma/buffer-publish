@@ -15,9 +15,9 @@ module.exports = method(
         url,
       },
     })
-    .then(result => JSON.parse(result))
-    .then(parsedResult => ({
-      shortUrl: parsedResult.url,
-      longUrl: parsedResult.long_url,
-    })),
+      .then(result => JSON.parse(result))
+      .then(parsedResult => ({
+        shortUrl: parsedResult.url,
+        longUrl: parsedResult.long_url,
+      }))
 );

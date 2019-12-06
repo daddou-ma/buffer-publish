@@ -1,15 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Card,
-  Link,
-} from '@bufferapp/components';
+import { Card, Link } from '@bufferapp/components';
 
-import {
-  Text,
-  Button,
-} from '@bufferapp/ui';
+import { Text, Button } from '@bufferapp/ui';
 
 const pausedBarInnerStyle = {
   display: 'flex',
@@ -22,43 +16,45 @@ const pausedTextContainer = {
 };
 
 const QueuePausedBar = ({ handleClickUnpause, isManager }) => (
-  <Card
-    noPadding
-    color="off-white"
-  >
+  <Card noPadding color="off-white">
     <div style={pausedBarInnerStyle}>
       <div>
         <div style={pausedTextContainer}>
-          <Text type="h3">
-            Your queue is currently paused.
-          </Text>
+          <Text type="h3">Your queue is currently paused.</Text>
         </div>
         <div>
-          {isManager &&
+          {isManager && (
             <Text type="p">
-              None of your posts will go out, and you can&apos;t re-order posts in your queue.&nbsp;
-              <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
+              None of your posts will go out, and you can&apos;t re-order posts
+              in your queue.&nbsp;
+              <Link
+                newTab
+                href="https://faq.buffer.com/article/681-how-to-pause-your-queue"
+              >
                 Learn more
               </Link>
             </Text>
-          }
-          {!isManager &&
+          )}
+          {!isManager && (
             <Text size="p">
               Unfortunately you don&apos;t have permission to unpause it.&nbsp;
-              <Link newTab href="https://faq.buffer.com/article/681-how-to-pause-your-queue">
+              <Link
+                newTab
+                href="https://faq.buffer.com/article/681-how-to-pause-your-queue"
+              >
                 Learn more
               </Link>
             </Text>
-          }
+          )}
         </div>
-        {isManager &&
+        {isManager && (
           <Button
             type="primary"
             size="small"
             onClick={handleClickUnpause}
             label="Resume Queue"
           />
-        }
+        )}
       </div>
     </div>
   </Card>

@@ -1,7 +1,5 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
-import {
-  actions as dataFetchActions,
-} from '@bufferapp/async-data-fetch';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 import middleware from './middleware';
 
@@ -16,8 +14,7 @@ describe('middleware', () => {
   const dispatch = jest.fn();
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('should fetch mobileReminder', () => {
@@ -26,13 +23,13 @@ describe('middleware', () => {
       updateId: 1234,
     };
     middleware({ dispatch, getState: getStateWithSelectedUser })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'mobileReminder',
         args: { updateId: 1234 },
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if mobile reminder is successfully sent', () => {
@@ -41,13 +38,14 @@ describe('middleware', () => {
       name: RPC_NAME,
     });
     middleware({ dispatch, getState: getStateWithSelectedUser })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
-        message: 'A push notification to your connected mobile devices has been sent so you can post to Instagram!',
-      }));
+        message:
+          'A push notification to your connected mobile devices has been sent so you can post to Instagram!',
+      })
+    );
   });
 });

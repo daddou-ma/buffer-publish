@@ -1,7 +1,5 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
-import {
-  actions as dataFetchActions,
-} from '@bufferapp/async-data-fetch';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 import middleware from './middleware';
 
@@ -10,8 +8,7 @@ describe('middleware', () => {
   const dispatch = jest.fn();
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('should fetch setNotifications', () => {
@@ -20,13 +17,13 @@ describe('middleware', () => {
       notifications: {},
     };
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'setNotifications',
         args: {},
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if change in notification is successfully approved', () => {
@@ -34,17 +31,17 @@ describe('middleware', () => {
     const action = dataFetchActions.fetchSuccess({
       name: RPC_NAME,
       result: {
-        notice_message: 'We\'ve changed your email preferences',
+        notice_message: "We've changed your email preferences",
       },
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'success',
-        message: 'We\'ve changed your email preferences',
-      }));
+        message: "We've changed your email preferences",
+      })
+    );
   });
 });

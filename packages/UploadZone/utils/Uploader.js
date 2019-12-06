@@ -13,7 +13,14 @@ import WebAPIUtils from '@bufferapp/publish-composer/composer/utils/WebAPIUtils'
 import WebSocket from './WebSocket';
 
 class Uploader {
-  constructor ({errorNotifier, userId, s3UploadSignature, csrf_token, notifiers, imageDimensionsKey}) {
+  constructor({
+    errorNotifier,
+    userId,
+    s3UploadSignature,
+    csrf_token,
+    notifiers,
+    imageDimensionsKey,
+  }) {
     this._xhr = null;
     this._uploadProgressSub = () => {};
     this.errorNotifier = errorNotifier;
@@ -21,25 +28,29 @@ class Uploader {
     this.s3UploadSignature = s3UploadSignature;
     this.csrf_token = csrf_token;
     this.notifiers = notifiers;
-    this.imageDimensionsKey = imageDimensionsKey
+    this.imageDimensionsKey = imageDimensionsKey;
   }
 
-  upload (file) {
+  upload(file) {
     return this.uploadToS3(file)
-      .then((uploadKey) => this.uploadToBuffer(uploadKey))
-      .then((response) => this.attachDimensions(response, {
-        key: this.imageDimensionsKey,
-        userId: this.userId,
-      }))
-      .then((response) => this.listenToProcessingEventsForVideos(response))
-      .then((response) => this.formatResponse(response));
+      .then(uploadKey => this.uploadToBuffer(uploadKey))
+      .then(response =>
+        this.attachDimensions(response, {
+          key: this.imageDimensionsKey,
+          userId: this.userId,
+        })
+      )
+      .then(response => this.listenToProcessingEventsForVideos(response))
+      .then(response => this.formatResponse(response));
   }
 
-  getProgressIterator () {
-    const progressGenerator = function * () {
+  getProgressIterator() {
+    const progressGenerator = function*() {
       while (this.isUploading()) {
         // eslint-disable-next-line no-loop-func
-        yield new Promise((resolve) => { this._uploadProgressSub = resolve; });
+        yield new Promise(resolve => {
+          this._uploadProgressSub = resolve;
+        });
       }
     };
 
@@ -48,7 +59,7 @@ class Uploader {
 
   isUploading = () => this._xhr !== null;
 
-  uploadToS3 (file) {
+  uploadToS3(file) {
     const formData = new FormData();
 
     const userId = this.userId;
@@ -77,14 +88,18 @@ class Uploader {
 
     data.forEach(([key, val]) => formData.append(key, val));
 
-    const promise = new Promise((resolve) => {
+    const promise = new Promise(resolve => {
       this._xhr.open('POST', url, true);
 
       this._xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
       this._xhr.addEventListener('readystatechange', () => {
-        if (this._xhr.readyState === 4 && (this._xhr.status === 200 || this._xhr.status === 201)) {
-          const uploadKey = this._xhr.responseXML.getElementsByTagName('Key')[0].textContent;
+        if (
+          this._xhr.readyState === 4 &&
+          (this._xhr.status === 200 || this._xhr.status === 201)
+        ) {
+          const uploadKey = this._xhr.responseXML.getElementsByTagName('Key')[0]
+            .textContent;
           resolve(uploadKey);
 
           this._xhr = null;
@@ -94,13 +109,14 @@ class Uploader {
 
       this._xhr.addEventListener('error', () => {
         this.errorNotifier({
-          message: 'Uh oh! It looks like we had trouble connecting to our servers, mind trying again?',
+          message:
+            'Uh oh! It looks like we had trouble connecting to our servers, mind trying again?',
         });
       });
 
-      this._xhr.upload.addEventListener('progress', (e) => {
+      this._xhr.upload.addEventListener('progress', e => {
         if (e.lengthComputable) {
-          const progress = e.loaded / e.total * 100;
+          const progress = (e.loaded / e.total) * 100;
           this._uploadProgressSub(progress);
         }
       });
@@ -111,11 +127,11 @@ class Uploader {
     return promise;
   }
 
-  getMediaType (mediaString) {
+  getMediaType(mediaString) {
     return mediaString.match(/[^/]+(jpg|jpeg|png|gif)$/i) ? 'photo' : 'video';
   }
 
-  uploadToBuffer (uploadKey) {
+  uploadToBuffer(uploadKey) {
     const data = {
       key: uploadKey,
       csrf_token: this.csrf_token,
@@ -128,35 +144,41 @@ class Uploader {
 
     const type = this.getMediaType(uploadKey);
 
-    return rpc.call('composerApiProxy', {
-      url: `/i/upload_${type === 'photo' ? 'image' : 'video'}.json`,
-      args: data,
-    })
-      .then((response) => {
-        response = {...response, type};
+    return rpc
+      .call('composerApiProxy', {
+        url: `/i/upload_${type === 'photo' ? 'image' : 'video'}.json`,
+        args: data,
+      })
+      .then(response => {
+        response = { ...response, type };
         return response;
       })
-      .then((response) => {
+      .then(response => {
         if (response.success === false) {
           this.errorNotifier({
-            message: 'Uh oh! It looks like we had trouble connecting to our servers, mind trying again?',
+            message:
+              'Uh oh! It looks like we had trouble connecting to our servers, mind trying again?',
           });
         }
         return response;
       });
   }
 
-  attachDimensions (response, { key, userId }) {
+  attachDimensions(response, { key, userId }) {
     if (response.type !== 'photo') {
       return response;
     }
 
-    return WebAPIUtils.getImageDimensions({ url: response.fullsize, key, user_id: userId })
-      .then(({width, height}) => ({...response, width, height}))
+    return WebAPIUtils.getImageDimensions({
+      url: response.fullsize,
+      key,
+      user_id: userId,
+    })
+      .then(({ width, height }) => ({ ...response, width, height }))
       .catch(() => response);
   }
 
-  listenToProcessingEventsForVideos (response) {
+  listenToProcessingEventsForVideos(response) {
     if (response.type === 'video') {
       WebSocket.init({
         userId: this.userId,
@@ -167,7 +189,7 @@ class Uploader {
     return response;
   }
 
-  formatResponse (response) {
+  formatResponse(response) {
     let formattedResponse;
     switch (response.type) {
       case 'photo':
@@ -229,9 +251,8 @@ Uploader.propTypes = {
     videoProcessed: PropTypes.func,
     profileGroupCreated: PropTypes.func,
     profileGroupUpdated: PropTypes.func,
-    profileGroupDeleted: PropTypes.func
+    profileGroupDeleted: PropTypes.func,
   }).isRequired,
 };
-
 
 export default Uploader;

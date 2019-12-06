@@ -8,77 +8,93 @@ import { actions as generalSettingsActions } from '@bufferapp/publish-general-se
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes, actions } from './reducer';
 
-export default ({ dispatch, getState }) => next => (action) => {
+export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(dataFetchActions.fetch({
-        name: 'enabledApplicationModes',
-        args: {
-          comprehensive: true,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'enabledApplicationModes',
+          args: {
+            comprehensive: true,
+          },
+        })
+      );
       break;
     case profileActionTypes.SELECT_PROFILE:
-      dispatch(dataFetchActions.fetch({
-        name: 'queuedPosts',
-        args: {
-          profileId: action.profile.id,
-          isFetchingMore: false,
-          count: 300,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'queuedPosts',
+          args: {
+            profileId: action.profile.id,
+            isFetchingMore: false,
+            count: 300,
+          },
+        })
+      );
       break;
     case `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `updatePausedSchedules_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(dataFetchActions.fetch({
-        name: 'queuedPosts',
-        args: {
-          profileId: action.args.profileId,
-          isFetchingMore: false,
-          count: 300,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'queuedPosts',
+          args: {
+            profileId: action.args.profileId,
+            isFetchingMore: false,
+            count: 300,
+          },
+        })
+      );
       break;
     case 'COMPOSER_EVENT':
       if (action.eventType === 'saved-drafts') {
-        dispatch(notificationActions.createNotification({
-          notificationType: 'success',
-          message: action.data.message,
-        }));
+        dispatch(
+          notificationActions.createNotification({
+            notificationType: 'success',
+            message: action.data.message,
+          })
+        );
       }
       break;
     case `requeuePost_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(dataFetchActions.fetch({
-        name: 'queuedPosts',
-        args: {
-          profileId: action.args.profileId,
-          isFetchingMore: false,
-          isReordering: true,
-          count: 300,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'queuedPosts',
+          args: {
+            profileId: action.args.profileId,
+            isFetchingMore: false,
+            isReordering: true,
+            count: 300,
+          },
+        })
+      );
       break;
     case `queuedPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.args.isReordering) {
-        dispatch(notificationActions.createNotification({
-          notificationType: 'success',
-          message: 'We\'ve re-added this post to your queue!',
-        }));
+        dispatch(
+          notificationActions.createNotification({
+            notificationType: 'success',
+            message: "We've re-added this post to your queue!",
+          })
+        );
       }
       break;
     case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.args.recheck) {
         if (action.result.is_business) {
-          dispatch(generalSettingsActions.handleSetUpDirectPostingClick({
-            profileId: action.args.profileId,
-          }));
+          dispatch(
+            generalSettingsActions.handleSetUpDirectPostingClick({
+              profileId: action.args.profileId,
+            })
+          );
         } else {
-          dispatch(notificationActions.createNotification({
-            notificationType: 'error',
-            message: 'It seems you still don\'t have a Business Profile',
-          }));
+          dispatch(
+            notificationActions.createNotification({
+              notificationType: 'error',
+              message: "It seems you still don't have a Business Profile",
+            })
+          );
         }
       }
 
@@ -87,86 +103,104 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       break;
     case `deletePost_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(notificationActions.createNotification({
-        notificationType: 'success',
-        message: 'Okay, we\'ve deleted that post!',
-      }));
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'success',
+          message: "Okay, we've deleted that post!",
+        })
+      );
       /**
        * We also re-fetch the queue when a post is deleted
        * as this may have caused posts to change schedule
        */
-      dispatch(dataFetchActions.fetch({
-        name: 'queuedPosts',
-        args: {
-          profileId: action.args.profileId,
-          isFetchingMore: false,
-          hideLoading: true,
-          count: 300,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'queuedPosts',
+          args: {
+            profileId: action.args.profileId,
+            isFetchingMore: false,
+            hideLoading: true,
+            count: 300,
+          },
+        })
+      );
       break;
     case actionTypes.POST_CONFIRMED_DELETE:
-      dispatch(dataFetchActions.fetch({
-        name: 'deletePost',
-        args: {
-          updateId: action.updateId,
-          profileId: action.profileId,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'deletePost',
+          args: {
+            updateId: action.updateId,
+            profileId: action.profileId,
+          },
+        })
+      );
       break;
     case actionTypes.POST_SHARE_NOW:
-      dispatch(dataFetchActions.fetch({
-        name: 'sharePostNow',
-        args: {
-          updateId: action.post.id,
-          profileId: action.profileId,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'sharePostNow',
+          args: {
+            updateId: action.post.id,
+            profileId: action.profileId,
+          },
+        })
+      );
       break;
     case actionTypes.POST_REQUEUE:
-      dispatch(dataFetchActions.fetch({
-        name: 'requeuePost',
-        args: {
-          updateId: action.post.id,
-          profileId: action.profileId,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'requeuePost',
+          args: {
+            updateId: action.post.id,
+            profileId: action.profileId,
+          },
+        })
+      );
       break;
     case `sharePostNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(notificationActions.createNotification({
-        notificationType: 'success',
-        message: 'Yay, your post has been shared! 🎉',
-      }));
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'success',
+          message: 'Yay, your post has been shared! 🎉',
+        })
+      );
       break;
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(notificationActions.createNotification({
-        notificationType: 'error',
-        message: action.error,
-      }));
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'error',
+          message: action.error,
+        })
+      );
       break;
     case actionTypes.POST_DROPPED: {
-      dispatch(dataFetchActions.fetch({
-        name: 'dropPost',
-        args: {
-          updateId: action.updateId,
-          timestamp: action.timestamp,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'dropPost',
+          args: {
+            updateId: action.updateId,
+            timestamp: action.timestamp,
+          },
+        })
+      );
       break;
     }
     case actionTypes.POSTS_SWAPPED: {
-      dispatch(dataFetchActions.fetch({
-        name: 'swapPosts',
-        args: {
-          updateSourceId: action.postSource.id,
-          sourcePinned: action.postTarget.postProps.pinned,
-          sourceDueAt: action.postTarget.postProps.due_at,
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'swapPosts',
+          args: {
+            updateSourceId: action.postSource.id,
+            sourcePinned: action.postTarget.postProps.pinned,
+            sourceDueAt: action.postTarget.postProps.due_at,
 
-          updateTargetId: action.postTarget.id,
-          targetPinned: action.postSource.postProps.pinned,
-          targetDueAt: action.postSource.postProps.due_at,
-        },
-      }));
+            updateTargetId: action.postTarget.id,
+            targetPinned: action.postSource.postProps.pinned,
+            targetDueAt: action.postSource.postProps.due_at,
+          },
+        })
+      );
       break;
     }
 
@@ -196,15 +230,17 @@ export default ({ dispatch, getState }) => next => (action) => {
       /**
        * We also re-fetch the queue
        */
-      dispatch(dataFetchActions.fetch({
-        name: 'queuedPosts',
-        args: {
-          profileId,
-          isFetchingMore: false,
-          hideLoading: true,
-          count: 300,
-        },
-      }));
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'queuedPosts',
+          args: {
+            profileId,
+            isFetchingMore: false,
+            hideLoading: true,
+            count: 300,
+          },
+        })
+      );
       break;
     }
 

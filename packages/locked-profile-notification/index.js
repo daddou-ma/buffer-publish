@@ -8,19 +8,22 @@ import { actions } from './reducer';
 export default connect(
   state => ({
     profileLimit: state.appSidebar.user.profile_limit,
-    isOwner: state.appSidebar.user.id === state.profileSidebar.selectedProfile.ownerId,
+    isOwner:
+      state.appSidebar.user.id === state.profileSidebar.selectedProfile.ownerId,
   }),
   dispatch => ({
-    onClickUpgrade: (plan) => {
+    onClickUpgrade: plan => {
       if (plan === 'free') {
         dispatch(actions.upgrade(plan));
       } else {
-        window.location.assign(`${getURL.getBillingURL({
-          cta: SEGMENT_NAMES.LOCKED_PROFILE_BUSINESS_UPGRADE,
-        })}`);
+        window.location.assign(
+          `${getURL.getBillingURL({
+            cta: SEGMENT_NAMES.LOCKED_PROFILE_BUSINESS_UPGRADE,
+          })}`
+        );
       }
     },
-  }),
+  })
 )(LockedProfileNotification);
 
 export reducer, { actions, actionTypes } from './reducer';

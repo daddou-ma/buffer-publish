@@ -7,10 +7,7 @@ import {
   lineHeight,
 } from '@bufferapp/ui/style/fonts';
 import { white } from '@bufferapp/ui/style/colors';
-import {
-  Button,
-  Text,
-} from '@bufferapp/ui';
+import { Button, Text } from '@bufferapp/ui';
 
 export const mobileThreshold = '1250px';
 
@@ -21,11 +18,11 @@ export const Wrapper = styled.div`
 `;
 
 export const LeftColumn = styled.div`
-  width: calc(100%*2/3);
+  width: calc(100% * 2 / 3);
   flex-direction: column;
   justify-content: space-between;
   display: flex;
-  
+
   @media only screen and (max-width: ${mobileThreshold}) {
     width: 100%;
   }
@@ -75,13 +72,13 @@ export const ProgressBarWrapper = styled.div`
 `;
 
 export const RightColumn = styled.div`
-  width: calc(100%/3);
+  width: calc(100% / 3);
   background: url(https://s3.amazonaws.com/static.buffer.com/login/public/img/signup-bkg-publish.png);
   background-position: left center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  
+
   @media only screen and (max-width: ${mobileThreshold}) {
     display: none;
   }

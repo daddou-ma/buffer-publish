@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  LinkifiedText,
-  Text,
-} from '@bufferapp/components';
+import { LinkifiedText, Text } from '@bufferapp/components';
 
 import Card from '../Card';
 import CardHeader from '../CardHeader';
@@ -20,7 +17,6 @@ const RetweetCard = styled(Card)`
 const RetweetCardContent = styled.span`
   padding: 1rem;
 `;
-
 
 const postContentStyle = {
   padding: '1rem',
@@ -41,27 +37,21 @@ const renderRetweetComment = ({
   basic,
 }) => (
   <div style={commentStyle}>
-    {basic
-      ? (
-        <Text
-          color="black"
-          size="mini"
-        >
-          {retweetComment}
-        </Text>
-      )
-      : (
-        <LinkifiedText
-          links={retweetCommentLinks}
-          newTab
-          size="mini"
-          unstyled
-          color="black"
-        >
-          {retweetComment}
-        </LinkifiedText>
-      )
-    }
+    {basic ? (
+      <Text color="black" size="mini">
+        {retweetComment}
+      </Text>
+    ) : (
+      <LinkifiedText
+        links={retweetCommentLinks}
+        newTab
+        size="mini"
+        unstyled
+        color="black"
+      >
+        {retweetComment}
+      </LinkifiedText>
+    )}
   </div>
 );
 
@@ -75,24 +65,22 @@ const renderContent = ({
   if (retweetProfile) {
     return (
       <div style={postContentStyle}>
-        { retweetComment ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic }) : '' }
+        {retweetComment
+          ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic })
+          : ''}
         <RetweetCard>
           <RetweetCardContent>
             <div style={retweetProfileWrapperStyle}>
               <RetweetPanel {...retweetProfile} />
             </div>
-            { children }
+            {children}
           </RetweetCardContent>
         </RetweetCard>
       </div>
     );
   }
 
-  return (
-    <div style={postContentStyle}>
-      { children }
-    </div>
-  );
+  return <div style={postContentStyle}>{children}</div>;
 };
 
 /* eslint-enable react/prop-types */
@@ -195,7 +183,7 @@ Draft.propTypes = {
       displayString: PropTypes.string,
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
-    }),
+    })
   ),
   hasFirstCommentFlip: PropTypes.bool,
   view: PropTypes.string.isRequired,

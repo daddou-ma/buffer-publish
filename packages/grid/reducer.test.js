@@ -21,6 +21,12 @@ describe('reducer', () => {
           loading: true,
           total: 0,
           copySuccess: false,
+          customLinksDetails: {
+            buttonColor: null,
+            buttonType: null,
+            customLinks: [],
+          },
+          maxCustomLinks: 3,
           gridPosts: [],
         },
       },
@@ -41,6 +47,12 @@ describe('reducer', () => {
         [profileId]: {
           loading: false,
           copySuccess: false,
+          customLinksDetails: {
+            buttonColor: null,
+            buttonType: null,
+            customLinks: [],
+          },
+          maxCustomLinks: 3,
           gridPosts: [post],
           total: 1,
         },
@@ -65,6 +77,12 @@ describe('reducer', () => {
         [profileId]: {
           loading: false,
           copySuccess: false,
+          customLinksDetails: {
+            buttonColor: null,
+            buttonType: null,
+            customLinks: [],
+          },
+          maxCustomLinks: 3,
           gridPosts: [],
           total: 0,
         },

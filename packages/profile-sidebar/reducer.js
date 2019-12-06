@@ -39,8 +39,11 @@ const moveProfileInArray = (arr, from, to) => {
   const toIndex = to > from ? to : from;
 
   // Generate the new array
-  Array.prototype.splice.call(clone, toIndex, 0,
-    Array.prototype.splice.call(clone, fromIndex, 1)[0],
+  Array.prototype.splice.call(
+    clone,
+    toIndex,
+    0,
+    Array.prototype.splice.call(clone, fromIndex, 1)[0]
   );
   return clone;
 };
@@ -60,7 +63,10 @@ const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
       /* If the user is not the owner it can't be unlocked,
       the same happens for pinterest accounts if the user is on a free plan:
       it goes to the blockedProfiles array. */
-      if (cur.ownerId !== userId || (cur.service === 'pinterest' && isFreeUser)) {
+      if (
+        cur.ownerId !== userId ||
+        (cur.service === 'pinterest' && isFreeUser)
+      ) {
         return { ...acc, blockedProfiles: [...acc.blockedProfiles, cur] };
       }
 
@@ -70,22 +76,18 @@ const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
       If not, then the profile belongs in the enabledProfiles. */
       return acc.enabledProfiles.length >= profileLimit
         ? {
-          ...acc,
-          lockedProfiles: [
-            ...acc.lockedProfiles,
-            { ...cur, disabled: true },
-          ],
-        }
+            ...acc,
+            lockedProfiles: [...acc.lockedProfiles, { ...cur, disabled: true }],
+          }
         : {
-          ...acc,
-          enabledProfiles: [
-            ...acc.enabledProfiles,
-            { ...cur, disabled: false },
-          ],
-        };
+            ...acc,
+            enabledProfiles: [
+              ...acc.enabledProfiles,
+              { ...cur, disabled: false },
+            ],
+          };
     },
-    { enabledProfiles: [], lockedProfiles: [], blockedProfiles: [] },
-
+    { enabledProfiles: [], lockedProfiles: [], blockedProfiles: [] }
   );
 
   // Final list of profiles
@@ -101,39 +103,37 @@ const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
 const profilesReducer = (state = [], action) => {
   switch (action.type) {
     case actionTypes.SELECT_PROFILE:
-      return state
-        .map(profile => ({
-          ...profile,
-          open: profile.id === action.profileId,
-        }));
+      return state.map(profile => ({
+        ...profile,
+        open: profile.id === action.profileId,
+      }));
     case queueActionTypes.POST_COUNT_UPDATED:
-      return state
-        .map(profile => ({
-          ...profile,
-          pendingCount: profile.id === action.profileId
+      return state.map(profile => ({
+        ...profile,
+        pendingCount:
+          profile.id === action.profileId
             ? action.counts.pending
             : profile.pendingCount,
-          sentCount: profile.id === action.profileId
+        sentCount:
+          profile.id === action.profileId
             ? action.counts.sent
             : profile.sentCount,
-        }));
+      }));
     case actionTypes.PROFILE_PAUSED:
     case actionTypes.PROFILE_UNPAUSED:
-      return state
-        .map(profile => ({
-          ...profile,
-          paused: profile.id === action.profileId
+      return state.map(profile => ({
+        ...profile,
+        paused:
+          profile.id === action.profileId
             ? action.type === actionTypes.PROFILE_PAUSED
             : profile.paused,
-        }));
+      }));
     case actionTypes.PUSHER_PROFILE_PAUSED_STATE:
-      return state
-        .map(profile => ({
-          ...profile,
-          paused: profile.id === action.profileId
-            ? action.paused
-            : profile.paused,
-        }));
+      return state.map(profile => ({
+        ...profile,
+        paused:
+          profile.id === action.profileId ? action.paused : profile.paused,
+      }));
     default:
       return state;
   }
@@ -182,17 +182,14 @@ export default (state = initialState, action) => {
         isSearchPopupVisible,
       };
     case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      let {
-        selectedProfile,
-        profiles,
-      } = state;
+      let { selectedProfile, profiles } = state;
 
       if (selectedProfile.id === action.result.id) {
         selectedProfile = action.result;
       }
 
       if (profiles.some(p => p.id === action.result.id)) {
-        profiles = profiles.map((profile) => {
+        profiles = profiles.map(profile => {
           if (profile.id === action.result.id) {
             return action.result;
           }
@@ -212,7 +209,12 @@ export default (state = initialState, action) => {
       if (!action.commit) {
         return {
           ...state,
-          profiles: handleProfileDropped(state.profiles, action, state.userId, state.isFreeUser),
+          profiles: handleProfileDropped(
+            state.profiles,
+            action,
+            state.userId,
+            state.isFreeUser
+          ),
         };
       }
       return state;
@@ -259,12 +261,7 @@ export const actions = {
   handleConnectSocialAccount: () => ({
     type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
   }),
-  onDropProfile: ({
-    commit,
-    dragIndex,
-    hoverIndex,
-    profileLimit,
-  }) => ({
+  onDropProfile: ({ commit, dragIndex, hoverIndex, profileLimit }) => ({
     type: actionTypes.PROFILE_DROPPED,
     commit,
     dragIndex,
@@ -275,7 +272,7 @@ export const actions = {
     type: actionTypes.HANDLE_SEARCH_PROFILE_CHANGE,
     value,
   }),
-  handleProfileRouteLoaded : ({ selectedProfile, tabId }) => ({ 
+  handleProfileRouteLoaded: ({ selectedProfile, tabId }) => ({
     type: actionTypes.PROFILE_ROUTE_LOADED,
     selectedProfile,
     tabId,

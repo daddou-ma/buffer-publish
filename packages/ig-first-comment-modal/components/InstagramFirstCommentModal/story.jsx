@@ -6,7 +6,12 @@ import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import IGFirstCommentModal from './index';
 
-const profile = { id: 'abc', canPostComment: false, service: 'instagram', should_post_direct: true, };
+const profile = {
+  id: 'abc',
+  canPostComment: false,
+  service: 'instagram',
+  should_post_direct: true,
+};
 
 storiesOf('IGFirstCommentModal', module)
   .addDecorator(withA11y)

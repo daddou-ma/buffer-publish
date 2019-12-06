@@ -22,15 +22,13 @@ describe('ig first comment pro trial modal middleware', () => {
       };
       middleware({ dispatch })(next)(action);
 
-      expect(next)
-        .toBeCalledWith(action);
+      expect(next).toBeCalledWith(action);
 
-      expect(trackAction)
-        .toBeCalledWith({
-          location: 'MODALS',
-          action: 'show_start_pro_trial',
-          metadata: { source: 'ig_first_comment_toggle' },
-        });
+      expect(trackAction).toBeCalledWith({
+        location: 'MODALS',
+        action: 'show_start_pro_trial',
+        metadata: { source: 'ig_first_comment_toggle' },
+      });
     });
 
     test('when the modal closes', () => {
@@ -39,15 +37,13 @@ describe('ig first comment pro trial modal middleware', () => {
       };
       middleware({ dispatch })(next)(action);
 
-      expect(next)
-        .toBeCalledWith(action);
+      expect(next).toBeCalledWith(action);
 
-      expect(trackAction)
-        .toBeCalledWith({
-          location: 'MODALS',
-          action: 'hide_start_pro_trial',
-          metadata: { source: 'ig_first_comment_toggle' },
-        });
+      expect(trackAction).toBeCalledWith({
+        location: 'MODALS',
+        action: 'hide_start_pro_trial',
+        metadata: { source: 'ig_first_comment_toggle' },
+      });
     });
 
     test('when start pro trial button is clicked', () => {
@@ -57,15 +53,13 @@ describe('ig first comment pro trial modal middleware', () => {
       };
       middleware({ dispatch })(next)(action);
 
-      expect(next)
-        .toBeCalledWith(action);
+      expect(next).toBeCalledWith(action);
 
-      expect(trackAction)
-        .toBeCalledWith({
-          location: 'MODALS',
-          action: 'start_pro_trial',
-          metadata: { source: 'ig_first_comment_toggle' },
-        });
+      expect(trackAction).toBeCalledWith({
+        location: 'MODALS',
+        action: 'start_pro_trial',
+        metadata: { source: 'ig_first_comment_toggle' },
+      });
     });
   });
 });

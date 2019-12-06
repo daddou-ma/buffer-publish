@@ -77,7 +77,8 @@ class PostDragWrapper extends Component {
 
   componentDidMount() {
     const img = new Image();
-    img.src = 'https://s3.amazonaws.com/buffer-publish/images/drag-placeholder.png';
+    img.src =
+      'https://s3.amazonaws.com/buffer-publish/images/drag-placeholder.png';
     img.onload = () => this.props.connectDragPreview(img);
   }
 
@@ -134,19 +135,22 @@ class PostDragWrapper extends Component {
 
     const { isHovering } = this.state;
 
-    return compose(connectDragSource, connectDropTarget)(
+    return compose(
+      connectDragSource,
+      connectDropTarget
+    )(
       <div
         aria-dropeffect="move"
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
-        ref={(node) => {
+        ref={node => {
           this.containerNode = node;
         }}
         draggable
         tabIndex={0}
         style={this.getStyle(isHovering, isOver, isDragging)}
       >
-        {(!isHovering && !isDragging && isOver) && this.renderSwapIcon()}
+        {!isHovering && !isDragging && isOver && this.renderSwapIcon()}
         <PostComponent
           {...postProps}
           draggable={!postProps.postDetails.error}
@@ -156,7 +160,7 @@ class PostDragWrapper extends Component {
           fixed={postProps.isFixed}
           basic={basic}
         />
-      </div>,
+      </div>
     );
   }
 }
@@ -178,12 +182,10 @@ PostDragWrapper.propTypes = {
 export default DropTarget('post', postTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
-}),
-)(
+}))(
   DragSource('post', postSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging(),
-  }),
-  )(PostDragWrapper),
+  }))(PostDragWrapper)
 );

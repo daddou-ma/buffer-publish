@@ -32,33 +32,40 @@ describe('rpc/average', () => {
       },
     },
     app: {
-      get() { return 'analyze-api'; },
+      get() {
+        return 'analyze-api';
+      },
     },
   };
 
   it('should have the expected name', () => {
-    expect(average.name)
-      .toBe('average');
+    expect(average.name).toBe('average');
   });
 
   it('should have the expected docs', () => {
-    expect(average.docs)
-      .toBe('fetch analytics average for profiles and pages');
+    expect(average.docs).toBe('fetch analytics average for profiles and pages');
   });
 
   it('should request metrics to Analyze Api for Instagram', () => {
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    average.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService: 'instagram',
-    }, mockedRequest);
+    average.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService: 'instagram',
+      },
+      mockedRequest
+    );
 
-    expect(rp.mock.calls[0])
-      .toEqual([{
+    expect(rp.mock.calls[0]).toEqual([
+      {
         uri: 'analyze-api/metrics/totals',
         method: 'POST',
         strictSSL: false,
@@ -69,10 +76,11 @@ describe('rpc/average', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
 
-    expect(rp.mock.calls[2])
-      .toEqual([{
+    expect(rp.mock.calls[2]).toEqual([
+      {
         uri: 'analyze-api/metrics/daily_totals',
         method: 'POST',
         strictSSL: false,
@@ -83,23 +91,31 @@ describe('rpc/average', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
   it('should request for the past week', () => {
     rp.mockClear();
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    average.fn({
-      startDate: start,
-      endDate: end,
-      profileId,
-      profileService,
-    }, mockedRequest);
+    average.fn(
+      {
+        startDate: start,
+        endDate: end,
+        profileId,
+        profileService,
+      },
+      mockedRequest
+    );
 
-    expect(rp.mock.calls[0])
-      .toEqual([{
+    expect(rp.mock.calls[0]).toEqual([
+      {
         uri: 'analyze-api/metrics/totals',
         method: 'POST',
         strictSSL: false,
@@ -110,25 +126,37 @@ describe('rpc/average', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
   it('should request for the week before that', () => {
-    const end = moment().subtract(1, 'days').format('MM/DD/YYYY');
-    const start = moment().subtract(7, 'days').format('MM/DD/YYYY');
+    const end = moment()
+      .subtract(1, 'days')
+      .format('MM/DD/YYYY');
+    const start = moment()
+      .subtract(7, 'days')
+      .format('MM/DD/YYYY');
 
-    average.fn({
-      start,
-      end,
-      profileId,
-      profileService,
-    }, mockedRequest);
+    average.fn(
+      {
+        start,
+        end,
+        profileId,
+        profileService,
+      },
+      mockedRequest
+    );
 
-    const expectedEnd = moment().subtract(8, 'days').format('MM/DD/YYYY');
-    const expectedStart = moment().subtract(14, 'days').format('MM/DD/YYYY');
+    const expectedEnd = moment()
+      .subtract(8, 'days')
+      .format('MM/DD/YYYY');
+    const expectedStart = moment()
+      .subtract(14, 'days')
+      .format('MM/DD/YYYY');
 
-    expect(rp.mock.calls[1])
-      .toEqual([{
+    expect(rp.mock.calls[1]).toEqual([
+      {
         uri: 'analyze-api/metrics/totals',
         method: 'POST',
         strictSSL: false,
@@ -139,10 +167,11 @@ describe('rpc/average', () => {
           profile_id: profileId,
         },
         json: true,
-      }]);
+      },
+    ]);
   });
 
-  it('it should return both total and daily averages', async() => {
+  it('it should return both total and daily averages', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
@@ -154,7 +183,7 @@ describe('rpc/average', () => {
     expect(data.totals).toBeDefined();
   });
 
-  it('should return only the average metrics', async() => {
+  it('should return only the average metrics', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
@@ -165,7 +194,7 @@ describe('rpc/average', () => {
     expect(data.totals.length).toEqual(3);
   });
 
-  it('should return the metrics value and diff, averaged by number of days', async() => {
+  it('should return the metrics value and diff, averaged by number of days', async () => {
     // the numnber of days is 7
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_TOTALS_RESPONSE));
@@ -195,14 +224,23 @@ describe('rpc/average', () => {
     ]);
   });
 
-  it('should return the metrics value and diff, averaged by total updates sent in the period', async() => {
+  it('should return the metrics value and diff, averaged by total updates sent in the period', async () => {
     // twitter mock response
-    rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_TOTALS_RESPONSE_TWITTER));
-    rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_TOTALS_RESPONSE_TWITTER));
-    rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE_TWITTER));
+    rp.mockReturnValueOnce(
+      Promise.resolve(CURRENT_PERIOD_TOTALS_RESPONSE_TWITTER)
+    );
+    rp.mockReturnValueOnce(
+      Promise.resolve(PAST_PERIOD_TOTALS_RESPONSE_TWITTER)
+    );
+    rp.mockReturnValueOnce(
+      Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE_TWITTER)
+    );
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_DAILY_RESPONSE_TWITTER));
 
-    const data = await average.fn({ profileId, profileService: 'twitter' }, mockedRequest);
+    const data = await average.fn(
+      { profileId, profileService: 'twitter' },
+      mockedRequest
+    );
 
     expect(data.totals).toEqual([
       {
@@ -226,15 +264,26 @@ describe('rpc/average', () => {
     ]);
   });
 
-  it('should return the metrics value and diff, impressions should be averaged by the number of days', async() => {
+  it('should return the metrics value and diff, impressions should be averaged by the number of days', async () => {
     // instagram mock response
-    rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_TOTALS_RESPONSE_INSTAGRAM));
-    rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_TOTALS_RESPONSE_INSTAGRAM));
+    rp.mockReturnValueOnce(
+      Promise.resolve(CURRENT_PERIOD_TOTALS_RESPONSE_INSTAGRAM)
+    );
+    rp.mockReturnValueOnce(
+      Promise.resolve(PAST_PERIOD_TOTALS_RESPONSE_INSTAGRAM)
+    );
     // we don't care about the daily metrics in this test
-    rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE_INSTAGRAM));
-    rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_DAILY_RESPONSE_INSTAGRAM));
+    rp.mockReturnValueOnce(
+      Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE_INSTAGRAM)
+    );
+    rp.mockReturnValueOnce(
+      Promise.resolve(PAST_PERIOD_DAILY_RESPONSE_INSTAGRAM)
+    );
 
-    const data = await average.fn({ profileId, profileService: 'instagram' }, mockedRequest);
+    const data = await average.fn(
+      { profileId, profileService: 'instagram' },
+      mockedRequest
+    );
 
     expect(data.totals).toEqual([
       {
@@ -258,7 +307,7 @@ describe('rpc/average', () => {
     ]);
   });
 
-  it('should return a valid response if all data is 0', async() => {
+  it('should return a valid response if all data is 0', async () => {
     rp.mockReturnValueOnce(Promise.resolve(EMPTY_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(EMPTY_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
@@ -288,7 +337,7 @@ describe('rpc/average', () => {
     ]);
   });
 
-  it('should return a valid response if previous data is 0', async() => {
+  it('should return a valid response if previous data is 0', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(EMPTY_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
@@ -318,7 +367,7 @@ describe('rpc/average', () => {
     ]);
   });
 
-  it('should return the daily averages', async() => {
+  it('should return the daily averages', async () => {
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(PAST_PERIOD_TOTALS_RESPONSE));
     rp.mockReturnValueOnce(Promise.resolve(CURRENT_PERIOD_DAILY_RESPONSE));
@@ -330,9 +379,24 @@ describe('rpc/average', () => {
     expect(data.daily[0]).toEqual({
       day: '1504051200000',
       metrics: [
-        { diff: 869, label: 'Daily average engagements', value: 3119, metricKey: 'engagements' },
-        { diff: 74, label: 'Daily average impressions', value: 78966, metricKey: 'impressions' },
-        { diff: 47, label: 'Daily average clicks', value: 2656, metricKey: 'clicks' },
+        {
+          diff: 869,
+          label: 'Daily average engagements',
+          value: 3119,
+          metricKey: 'engagements',
+        },
+        {
+          diff: 74,
+          label: 'Daily average impressions',
+          value: 78966,
+          metricKey: 'impressions',
+        },
+        {
+          diff: 47,
+          label: 'Daily average clicks',
+          value: 2656,
+          metricKey: 'clicks',
+        },
       ],
     });
   });

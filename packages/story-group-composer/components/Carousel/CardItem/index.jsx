@@ -6,23 +6,17 @@ import { Button } from '@bufferapp/ui';
 import PlusIcon from '@bufferapp/ui/Icon/Icons/Plus';
 import FileUploader from '@bufferapp/publish-composer/composer/file-uploads/FileUploader';
 import { UploadTypes } from '@bufferapp/publish-constants';
-import CircularUploadIndicator
-  from '@bufferapp/publish-composer/composer/components/progress-indicators/CircularUploadIndicator';
+import CircularUploadIndicator from '@bufferapp/publish-composer/composer/components/progress-indicators/CircularUploadIndicator';
 import { getLargeSafeImageUrl } from '@bufferapp/publish-story-group-composer/utils/SafeImage';
 import PropTypes from 'prop-types';
 import CarouselCardHover from '../CarouselCardHover';
 import { carouselCardPropTypes } from '../../../utils/commonPropTypes';
 import styles from './styles.css';
 
-import {
-  CoverImage,
-  UploadingVideo,
-  StoryWrapper,
-  PlayIcon,
-} from './styles';
+import { CoverImage, UploadingVideo, StoryWrapper, PlayIcon } from './styles';
 
 class CardItem extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -30,25 +24,29 @@ class CardItem extends React.Component {
     };
   }
 
-  setIsHovering = (isHovering) => {
+  setIsHovering = isHovering => {
     this.setState({ isHovering });
   };
 
-  shouldComponentUpdate (nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
     const { card, isOver, isDragging } = this.props;
-    const { card: cardNext, isOver: isOverNext, isDragging: isDraggingNext } = nextProps;
+    const {
+      card: cardNext,
+      isOver: isOverNext,
+      isDragging: isDraggingNext,
+    } = nextProps;
 
     const { isHovering } = this.state;
     const { isHovering: isHoveringNext } = nextState;
 
     if (
-      card.empty !== cardNext.empty
-      || card.thumbnail_url !== cardNext.thumbnail_url
-      || card.progress !== cardNext.progress
-      || card.uploading !== cardNext.uploading
-      || isHovering !== isHoveringNext
-      || isOver !== isOverNext
-      || isDragging !== isDraggingNext
+      card.empty !== cardNext.empty ||
+      card.thumbnail_url !== cardNext.thumbnail_url ||
+      card.progress !== cardNext.progress ||
+      card.uploading !== cardNext.uploading ||
+      isHovering !== isHoveringNext ||
+      isOver !== isOverNext ||
+      isDragging !== isDraggingNext
     ) {
       return true;
     }
@@ -83,9 +81,12 @@ class CardItem extends React.Component {
     const notifiers = {
       uploadStarted: props => createNewFile(props),
       uploadedLinkThumbnail: props => createImageThumbnail(props),
-      uploadedDraftImage: props => uploadImageComplete({ ...props, contentType: 'image' }),
-      uploadedDraftVideo: props => videoProcessingStarted({ ...props, contentType: 'video' }),
-      draftGifUploaded: props => uploadImageComplete({ ...props, contentType: 'gif' }),
+      uploadedDraftImage: props =>
+        uploadImageComplete({ ...props, contentType: 'image' }),
+      uploadedDraftVideo: props =>
+        videoProcessingStarted({ ...props, contentType: 'video' }),
+      draftGifUploaded: props =>
+        uploadImageComplete({ ...props, contentType: 'gif' }),
       queueError: props => notifyError(props),
       monitorFileUploadProgress: monitorUpdateProgress(updateUploadProgress),
     };
@@ -115,8 +116,13 @@ class CardItem extends React.Component {
               )}
               classNames={styles}
               supportsMixedMediaTypes
-              mixedMediaUnsupportedCallback={FileUploader.throwMixedMediaTypesError}
-              uploadDraftFile={uploadDraftFile({ userData, videoProcessingComplete })}
+              mixedMediaUnsupportedCallback={
+                FileUploader.throwMixedMediaTypesError
+              }
+              uploadDraftFile={uploadDraftFile({
+                userData,
+                videoProcessingComplete,
+              })}
               notifiers={notifiers}
               removeAllNotifications={removeNotifications}
               queueError={notifyError}
@@ -190,35 +196,63 @@ CardItem.defaultProps = {
   card: {},
   removeNotifications: () => console.log('removeAllNotifications', true),
   notifyError: ({ message }) => console.log('queueError', { message }),
-  createNewFile: ({
-    id,
-    uploaderInstance,
-    file,
-  }) => console.log('uploadStarted - File Created', {
-    id,
-    uploaderInstance,
-    file,
-  }),
-  createImageThumbnail: ({
-    id, uploaderInstance, url, width, height, file,
-  }) => console.log('uploadedLinkThumbnail - Create Image Thumbnail', {
-    id, uploaderInstance, url, width, height, file,
-  }),
-  updateUploadProgress: ({
-    id, uploaderInstance, progress, file, complete,
-  }) => console.log('monitorFileUploadProgress - Update Upload Progress', {
-    id, uploaderInstance, progress, file, complete,
-  }),
+  createNewFile: ({ id, uploaderInstance, file }) =>
+    console.log('uploadStarted - File Created', {
+      id,
+      uploaderInstance,
+      file,
+    }),
+  createImageThumbnail: ({ id, uploaderInstance, url, width, height, file }) =>
+    console.log('uploadedLinkThumbnail - Create Image Thumbnail', {
+      id,
+      uploaderInstance,
+      url,
+      width,
+      height,
+      file,
+    }),
+  updateUploadProgress: ({ id, uploaderInstance, progress, file, complete }) =>
+    console.log('monitorFileUploadProgress - Update Upload Progress', {
+      id,
+      uploaderInstance,
+      progress,
+      file,
+      complete,
+    }),
   uploadImageComplete: ({
-    id, uploaderInstance, url, location = null, width, height, file, stillGifUrl = null,
-  }) => console.log('uploadedDraftImage - Image Upload Created', {
-    id, uploaderInstance, url, location, width, height, file, stillGifUrl,
-  }),
+    id,
+    uploaderInstance,
+    url,
+    location = null,
+    width,
+    height,
+    file,
+    stillGifUrl = null,
+  }) =>
+    console.log('uploadedDraftImage - Image Upload Created', {
+      id,
+      uploaderInstance,
+      url,
+      location,
+      width,
+      height,
+      file,
+      stillGifUrl,
+    }),
   videoProcessingStarted: ({
-    id, uploaderInstance, uploadId, fileExtension, file,
-  }) => console.log('uploadedDraftVideo - Video Processing Started', {
-    id, uploaderInstance, uploadId, fileExtension, file,
-  }),
+    id,
+    uploaderInstance,
+    uploadId,
+    fileExtension,
+    file,
+  }) =>
+    console.log('uploadedDraftVideo - Video Processing Started', {
+      id,
+      uploaderInstance,
+      uploadId,
+      fileExtension,
+      file,
+    }),
   videoProcessingComplete: ({
     id,
     uploadId,
@@ -232,24 +266,26 @@ CardItem.defaultProps = {
     originalUrl,
     thumbnail,
     availableThumbnails,
-  }) => console.log('videoProcessed - Video Processing Complete', {
-    id,
-    uploadId,
-    name,
-    duration,
-    durationMs,
-    size,
-    width,
-    height,
-    url,
-    originalUrl,
-    thumbnail,
-    availableThumbnails,
-  }),
-  uploadDraftFile: ({ userData, videoProcessingComplete }) => console.log('uploadDraftFile', {
-    userData,
-    videoProcessingComplete,
-  }),
+  }) =>
+    console.log('videoProcessed - Video Processing Complete', {
+      id,
+      uploadId,
+      name,
+      duration,
+      durationMs,
+      size,
+      width,
+      height,
+      url,
+      originalUrl,
+      thumbnail,
+      availableThumbnails,
+    }),
+  uploadDraftFile: ({ userData, videoProcessingComplete }) =>
+    console.log('uploadDraftFile', {
+      userData,
+      videoProcessingComplete,
+    }),
   monitorUpdateProgress: () => console.log('monitorUploadProgress'),
 };
 

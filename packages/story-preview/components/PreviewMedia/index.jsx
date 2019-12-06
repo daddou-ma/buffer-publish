@@ -44,15 +44,9 @@ const Video = styled.video`
   object-fit: cover;
 `;
 
-const PreviewMedia = ({
-  story,
-  user,
-  numberOfStories,
-}) => {
+const PreviewMedia = ({ story, user, numberOfStories }) => {
   const { avatarUrl, handle } = user;
-  const {
-    type, asset_url, thumbnail_url, order,
-  } = story;
+  const { type, asset_url, thumbnail_url, order } = story;
 
   return (
     <ContentWrapper>
@@ -62,36 +56,30 @@ const PreviewMedia = ({
           numberOfBarsFilled={parseInt(order, 10)}
         />
         <AvatarContainer>
-          <Avatar
-            src={avatarUrl}
-            alt={handle}
-            size="small"
-          />
-          <Text type="p" color="white">{handle}</Text>
+          <Avatar src={avatarUrl} alt={handle} size="small" />
+          <Text type="p" color="white">
+            {handle}
+          </Text>
         </AvatarContainer>
       </Header>
-      {(type === 'image' || type === 'gif')
-        && (
-          <Image
-            height={IMAGE_HEIGHT}
-            width={IMAGE_WIDTH}
-            src={getLargeSafeImageUrl(asset_url)}
-          />
-        )
-      }
-      {type === 'video'
-        && (
-          <Video
-            src={asset_url}
-            height={IMAGE_HEIGHT}
-            width={IMAGE_WIDTH}
-            poster={thumbnail_url}
-            autoPlay
-            loop
-            muted
-          />
-        )
-      }
+      {(type === 'image' || type === 'gif') && (
+        <Image
+          height={IMAGE_HEIGHT}
+          width={IMAGE_WIDTH}
+          src={getLargeSafeImageUrl(asset_url)}
+        />
+      )}
+      {type === 'video' && (
+        <Video
+          src={asset_url}
+          height={IMAGE_HEIGHT}
+          width={IMAGE_WIDTH}
+          poster={thumbnail_url}
+          autoPlay
+          loop
+          muted
+        />
+      )}
     </ContentWrapper>
   );
 };

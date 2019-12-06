@@ -13,8 +13,8 @@ module.exports = method(
         access_token: session.publish.accessToken,
       },
     })
-    .then(() => 'OK')
-    .catch((err) => {
-      throw createError({ message: err.message });
-    }),
+      .then(() => 'OK')
+      .catch(err => {
+        throw createError({ message: err.message });
+      })
 );

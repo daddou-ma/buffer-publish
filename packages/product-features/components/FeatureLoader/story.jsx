@@ -16,7 +16,7 @@ const fakeFeatures = {
 const defaultStyles = {
   margin: '20px',
 };
-const Fallback = <Text size={'large'} >Fallback</Text>;
+const Fallback = <Text size={'large'}>Fallback</Text>;
 
 storiesOf('FeatureLoader', module)
   .addDecorator(withA11y)
@@ -27,11 +27,8 @@ storiesOf('FeatureLoader', module)
         supportedPlans={'free'}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
-
     </div>
   ))
   .add('should show fallback on pro plan', () => (
@@ -41,27 +38,24 @@ storiesOf('FeatureLoader', module)
         supportedPlans={'pro'}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
-
     </div>
   ))
-  .add('should show child when multiple plans specified and its in one of them', () => (
-    <div style={defaultStyles}>
-      <FeatureLoader
-        productFeatures={fakeFeatures}
-        supportedPlans={['free', 'dont_exist']}
-        fallback={Fallback}
-      >
-        <Text size={'large'} >
-          Pro
-        </Text>
-      </FeatureLoader>
-
-    </div>
-  ))
+  .add(
+    'should show child when multiple plans specified and its in one of them',
+    () => (
+      <div style={defaultStyles}>
+        <FeatureLoader
+          productFeatures={fakeFeatures}
+          supportedPlans={['free', 'dont_exist']}
+          fallback={Fallback}
+        >
+          <Text size={'large'}>Pro</Text>
+        </FeatureLoader>
+      </div>
+    )
+  )
   .add('should show child when plan name mismatches on case', () => (
     <div style={defaultStyles}>
       <FeatureLoader
@@ -72,27 +66,24 @@ storiesOf('FeatureLoader', module)
         supportedPlans={['FREE', 'dont_exist']}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
-
     </div>
   ))
-  .add('should show fallback when multiple plans specified and its not in any of them', () => (
-    <div style={defaultStyles}>
-      <FeatureLoader
-        productFeatures={fakeFeatures}
-        supportedPlans={['pro', 'dont_exist']}
-        fallback={Fallback}
-      >
-        <Text size={'large'} >
-          Pro
-        </Text>
-      </FeatureLoader>
-
-    </div>
-  ))
+  .add(
+    'should show fallback when multiple plans specified and its not in any of them',
+    () => (
+      <div style={defaultStyles}>
+        <FeatureLoader
+          productFeatures={fakeFeatures}
+          supportedPlans={['pro', 'dont_exist']}
+          fallback={Fallback}
+        >
+          <Text size={'large'}>Pro</Text>
+        </FeatureLoader>
+      </div>
+    )
+  )
   .add('should show child when supporting show_stuff feature', () => (
     <div style={defaultStyles}>
       <FeatureLoader
@@ -100,30 +91,27 @@ storiesOf('FeatureLoader', module)
         supportedFeatures={'show_stuff'}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
-
     </div>
   ))
-  .add('should show child when supporting show_stuff feature with case mismatch comparison', () => (
-    <div style={defaultStyles}>
-      <FeatureLoader
-        productFeatures={{
-          ...fakeFeatures,
-          features: { SHOW_STUFF: true },
-        }}
-        supportedFeatures={'Show_stuff'}
-        fallback={Fallback}
-      >
-        <Text size={'large'} >
-          Pro
-        </Text>
-      </FeatureLoader>
-
-    </div>
-  ))
+  .add(
+    'should show child when supporting show_stuff feature with case mismatch comparison',
+    () => (
+      <div style={defaultStyles}>
+        <FeatureLoader
+          productFeatures={{
+            ...fakeFeatures,
+            features: { SHOW_STUFF: true },
+          }}
+          supportedFeatures={'Show_stuff'}
+          fallback={Fallback}
+        >
+          <Text size={'large'}>Pro</Text>
+        </FeatureLoader>
+      </div>
+    )
+  )
   .add('should show child when supporting multiple features', () => (
     <div style={defaultStyles}>
       <FeatureLoader
@@ -131,11 +119,8 @@ storiesOf('FeatureLoader', module)
         supportedFeatures={['hedgehog', 'show_stuff']}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
-
     </div>
   ))
   .add('should show fallback when feature is disabled', () => (
@@ -145,9 +130,7 @@ storiesOf('FeatureLoader', module)
         supportedFeatures={'not_here'}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
     </div>
   ))
@@ -158,9 +141,7 @@ storiesOf('FeatureLoader', module)
         supportedFeatures={['doesnt_exist']}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
     </div>
   ))
@@ -172,9 +153,7 @@ storiesOf('FeatureLoader', module)
         supportedPlans={['free']}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
     </div>
   ))
@@ -186,9 +165,7 @@ storiesOf('FeatureLoader', module)
         supportedPlans={['pro']}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
     </div>
   ))
@@ -200,9 +177,7 @@ storiesOf('FeatureLoader', module)
         supportedPlans={['pro']}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
     </div>
   ))
@@ -214,29 +189,28 @@ storiesOf('FeatureLoader', module)
         supportedPlans={['free']}
         fallback={Fallback}
       >
-        <Text size={'large'} >
-          Pro
-        </Text>
+        <Text size={'large'}>Pro</Text>
       </FeatureLoader>
     </div>
   ))
-  .add('should not show component if no fallback is provided and feature non existant', () => (
-    <div style={defaultStyles}>
-      <FeatureLoader
-        productFeatures={fakeFeatures}
-        supportedFeatures={['not_here']}
-        supportedPlans={['free']}
-      >
-        <Text size={'large'} >
-          Pro
-        </Text>
-      </FeatureLoader>
-    </div>
-  ))
+  .add(
+    'should not show component if no fallback is provided and feature non existant',
+    () => (
+      <div style={defaultStyles}>
+        <FeatureLoader
+          productFeatures={fakeFeatures}
+          supportedFeatures={['not_here']}
+          supportedPlans={['free']}
+        >
+          <Text size={'large'}>Pro</Text>
+        </FeatureLoader>
+      </div>
+    )
+  )
   .add('load Feature Component ', () => {
     const TextComponent = ({ features, ...other }) => {
       if (features.isFreeUser()) {
-        return (<Text {...other}>Free User</Text>);
+        return <Text {...other}>Free User</Text>;
       }
       return null;
     };
@@ -248,8 +222,10 @@ storiesOf('FeatureLoader', module)
 
     return (
       <div style={defaultStyles}>
-        <TestComponentWithFeatureLoader size={'large'} productFeatures={fakeFeatures} />
+        <TestComponentWithFeatureLoader
+          size={'large'}
+          productFeatures={fakeFeatures}
+        />
       </div>
     );
   });
-

@@ -11,7 +11,8 @@ function getPageName({ page, subPage }) {
       // pages have default views even if sub-route name isnt present
       pageName = subPage ? `${page} ${subPage}` : `${page} ${defaultSubPage}`;
       break;
-    default: pageName = page;
+    default:
+      pageName = page;
       break;
   }
   return pageName;
@@ -55,7 +56,7 @@ function getChannelFromPath(path, channels) {
   return null;
 }
 
-const getPageNameFromPath = (path) => {
+const getPageNameFromPath = path => {
   const name = getElementFromPath(path, 'pageName');
   if (name) {
     return name;

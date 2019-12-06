@@ -3,12 +3,7 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Button } from '@bufferapp/ui';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
-import Modal, {
-  reducer,
-  actions,
-  actionTypes,
-  middleware,
-} from './index';
+import Modal, { reducer, actions, actionTypes, middleware } from './index';
 import TrialCompleteModal from './components/TrialCompleteModal';
 
 describe('TrialCompleteModal', () => {
@@ -41,10 +36,9 @@ describe('TrialCompleteModal', () => {
       const wrapper = mount(
         <Provider store={store}>
           <Modal />
-        </Provider>,
+        </Provider>
       );
-      expect(wrapper.find(TrialCompleteModal).length)
-        .toBe(1);
+      expect(wrapper.find(TrialCompleteModal).length).toBe(1);
       wrapper.unmount();
     });
 
@@ -52,11 +46,14 @@ describe('TrialCompleteModal', () => {
       const wrapper = mount(
         <Provider store={store}>
           <Modal />
-        </Provider>,
+        </Provider>
       );
 
       // User clicks on Cancel Button
-      wrapper.find(TrialCompleteModal).find(Button).at(0)
+      wrapper
+        .find(TrialCompleteModal)
+        .find(Button)
+        .at(0)
         .simulate('click');
 
       expect(store.dispatch).toHaveBeenCalledWith(actions.cancelTrial());
@@ -67,11 +64,14 @@ describe('TrialCompleteModal', () => {
       const wrapper = mount(
         <Provider store={store}>
           <Modal />
-        </Provider>,
+        </Provider>
       );
 
       // User clicks on Complete Button
-      wrapper.find(TrialCompleteModal).find(Button).at(1)
+      wrapper
+        .find(TrialCompleteModal)
+        .find(Button)
+        .at(1)
         .simulate('click');
 
       expect(store.dispatch).toHaveBeenCalledWith(actions.completeAndUpgrade());
@@ -80,22 +80,18 @@ describe('TrialCompleteModal', () => {
   });
 
   it('exports reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('exports actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('exports actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 
   it('exports middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

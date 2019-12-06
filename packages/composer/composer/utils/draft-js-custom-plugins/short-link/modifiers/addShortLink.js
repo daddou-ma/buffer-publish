@@ -11,17 +11,21 @@
 
 import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
 
-const addShortLink = (editorState, contentBlock, linkData, { isUserAction = false } = {}) => {
+const addShortLink = (
+  editorState,
+  contentBlock,
+  linkData,
+  { isUserAction = false } = {}
+) => {
   const blockKey = contentBlock.getKey();
   let contentState = editorState.getCurrentContent();
   const originalSelectionBefore = contentState.getSelectionBefore();
   const originalSelection = editorState.getSelection();
   const currentEntityKey = contentBlock.getEntityAt(linkData.indices[0]);
 
-  const isAlreadyShortEntity = (
+  const isAlreadyShortEntity =
     currentEntityKey !== null &&
-    contentState.getEntity(currentEntityKey).getType() === 'SHORT_LINK'
-  );
+    contentState.getEntity(currentEntityKey).getType() === 'SHORT_LINK';
 
   if (isAlreadyShortEntity) return editorState;
 
@@ -41,8 +45,13 @@ const addShortLink = (editorState, contentBlock, linkData, { isUserAction = fals
     focusOffset: linkData.indices[1],
   });
 
-  contentState =
-    Modifier.replaceText(contentState, targetRange, linkData.shortLink, null, entityKey);
+  contentState = Modifier.replaceText(
+    contentState,
+    targetRange,
+    linkData.shortLink,
+    null,
+    entityKey
+  );
 
   /**
    * If current selection is after the replaced range of text, offset it
@@ -77,7 +86,11 @@ const addShortLink = (editorState, contentBlock, linkData, { isUserAction = fals
   let newEditorState;
 
   if (isUserAction) {
-    newEditorState = EditorState.push(editorState, contentState, 'apply-entity');
+    newEditorState = EditorState.push(
+      editorState,
+      contentState,
+      'apply-entity'
+    );
 
     newEditorState = EditorState.set(newEditorState, {
       selection: newSelection,

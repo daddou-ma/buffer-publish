@@ -24,30 +24,38 @@ class BoardSelector extends React.Component {
     searchQuery: '',
   };
 
-  componentDidUpdate = (prevProps) => {
-    if (prevProps.subprofilesCount < this.props.subprofilesCount &&
-        !this.props.profile.subprofilesOrignatedFromAPI) {
+  componentDidUpdate = prevProps => {
+    if (
+      prevProps.subprofilesCount < this.props.subprofilesCount &&
+      !this.props.profile.subprofilesOrignatedFromAPI
+    ) {
       this.refs.subprofilesContainer.scrollTop = this.refs.subprofilesContainer.scrollHeight;
     }
   };
 
-  onClick = (e) => {
+  onClick = e => {
     e.stopPropagation();
   };
 
-  onSearchChange = (e) => {
+  onSearchChange = e => {
     this.setState({
       searchQuery: e.target.value,
     });
   };
 
   render() {
-    const { profile, subprofiles, canUnselectSubprofiles, onChange, visibleNotifications } =
-      this.props;
+    const {
+      profile,
+      subprofiles,
+      canUnselectSubprofiles,
+      onChange,
+      visibleNotifications,
+    } = this.props;
 
     const searchQuery = this.state.searchQuery.toLowerCase();
-    const boards = subprofiles.filter((board) =>
-      board.name && board.name.toLowerCase().includes(searchQuery));
+    const boards = subprofiles.filter(
+      board => board.name && board.name.toLowerCase().includes(searchQuery)
+    );
 
     const searchBoardIconClassName = [
       styles.searchBoardIcon,
@@ -72,22 +80,30 @@ class BoardSelector extends React.Component {
           />
         </div>
         <div className={styles.subprofilesContainer} ref="subprofilesContainer">
-          {[...boards].map((board) =>
+          {[...boards].map(board => (
             <BoardSelectorBoardItem
-              profile={profile} board={board} onChange={onChange}
-              canUnselectSubprofiles={canUnselectSubprofiles} key={board.id}
-            />)}
+              profile={profile}
+              board={board}
+              onChange={onChange}
+              canUnselectSubprofiles={canUnselectSubprofiles}
+              key={board.id}
+            />
+          ))}
         </div>
 
-        {!hasBoardsDisplayed &&
+        {!hasBoardsDisplayed && (
           <div className={styles.emptySearchResults}>
-           {profileHasBoards ?
-             'Sorry, no boards matched your search!' :
-             `Looks like this profile doesn't have any boards yet.
+            {profileHasBoards
+              ? 'Sorry, no boards matched your search!'
+              : `Looks like this profile doesn't have any boards yet.
               No worries, you can create one below! :)`}
-          </div>}
+          </div>
+        )}
 
-        <BoardCreator profile={profile} visibleNotifications={visibleNotifications} />
+        <BoardCreator
+          profile={profile}
+          visibleNotifications={visibleNotifications}
+        />
       </div>
     );
   }

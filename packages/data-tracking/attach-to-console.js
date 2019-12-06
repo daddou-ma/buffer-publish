@@ -10,9 +10,11 @@ const attachToConsole = () => {
       window._showTracking = !window._showTracking;
       // eslint-disable-next-line
       console.log(
-        `%c[buffermetrics] %cTracking log ${window._showTracking ? 'enabled' : 'disabled'}`,
+        `%c[buffermetrics] %cTracking log ${
+          window._showTracking ? 'enabled' : 'disabled'
+        }`,
         'color: gray',
-        'color: inherit',
+        'color: inherit'
       );
       return '';
     };

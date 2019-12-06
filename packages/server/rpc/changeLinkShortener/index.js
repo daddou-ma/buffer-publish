@@ -16,10 +16,10 @@ module.exports = method(
           domain,
         },
       })
-      .then(result => JSON.parse(result))
-      .then(result => ({
-        linkShorteners: result,
-      }));
+        .then(result => JSON.parse(result))
+        .then(result => ({
+          linkShorteners: result,
+        }));
     } catch (err) {
       if (err.error) {
         const { message } = JSON.parse(err.error);
@@ -28,5 +28,5 @@ module.exports = method(
       throw err;
     }
     return request;
-  },
+  }
 );

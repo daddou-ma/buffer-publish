@@ -1,6 +1,6 @@
 const rp = require('request-promise');
 
-function redirect (res, url) {
+function redirect(res, url) {
   res.redirect(307, url);
 }
 
@@ -9,9 +9,11 @@ function isRequestingApp(req) {
 }
 
 function shouldCheckToken(req) {
-  return !req.query.skipTokenCheck
-    || req.query.skipTokenCheck === 'true'
-    || parseInt(req.query.skipTokenCheck, 10) <= 3;
+  return (
+    !req.query.skipTokenCheck ||
+    req.query.skipTokenCheck === 'true' ||
+    parseInt(req.query.skipTokenCheck, 10) <= 3
+  );
 }
 
 function isAccessTokenValid(req) {
@@ -22,7 +24,9 @@ function isAccessTokenValid(req) {
   return rp({
     uri: `${process.env.API_ADDR}/1/user.json`,
     method: 'GET',
-    strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
+    strictSSL: !(
+      process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+    ),
     qs: {
       client_id: process.env.CLIENT_ID,
       client_secret: process.env.CLIENT_SECRET,
@@ -40,11 +44,13 @@ module.exports = async (req, res, next) => {
   if (isRequestingApp(req) && shouldCheckToken(req)) {
     const isValid = await isAccessTokenValid(req);
     if (!isValid) {
-      const loginServiceUrl = process.env.NODE_ENV !== 'production'
-        ? 'https://login.local.buffer.com'
-        : 'https://login.buffer.com';
+      const loginServiceUrl =
+        process.env.NODE_ENV !== 'production'
+          ? 'https://login.local.buffer.com'
+          : 'https://login.buffer.com';
       let skipTokenCheck;
-      if (req.query.skipTokenCheck === 'true') { // Unblock people with skipTokenCheck=true
+      if (req.query.skipTokenCheck === 'true') {
+        // Unblock people with skipTokenCheck=true
         skipTokenCheck = 2;
       } else if (req.query.skipTokenCheck) {
         skipTokenCheck = parseInt(req.query.skipTokenCheck, 10) + 1;
@@ -54,7 +60,7 @@ module.exports = async (req, res, next) => {
       }
       return redirect(
         res,
-        `${loginServiceUrl}/login?skipImpersonation=true&redirect=https%3A%2F%2Fpublish.buffer.com%3FskipTokenCheck%3D${skipTokenCheck}`,
+        `${loginServiceUrl}/login?skipImpersonation=true&redirect=https%3A%2F%2Fpublish.buffer.com%3FskipTokenCheck%3D${skipTokenCheck}`
       );
     }
   }

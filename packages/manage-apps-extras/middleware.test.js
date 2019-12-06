@@ -1,4 +1,7 @@
-import { actions as fetchActions, actionTypes as fetchActionTypes } from '@bufferapp/async-data-fetch';
+import {
+  actions as fetchActions,
+  actionTypes as fetchActionTypes,
+} from '@bufferapp/async-data-fetch';
 import { constants as tabsNames } from '@bufferapp/publish-preferences';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as notificationActions } from '@bufferapp/notifications';
@@ -20,9 +23,11 @@ describe('middleware', () => {
       },
     };
     middleware(store)(next)(action);
-    expect(dispatch).toHaveBeenCalledWith(fetchActions.fetch({
-      name: 'connectedApps',
-    }));
+    expect(dispatch).toHaveBeenCalledWith(
+      fetchActions.fetch({
+        name: 'connectedApps',
+      })
+    );
   });
 
   it('should call revokeConnectedApp when the action requestRevokeApp is received', () => {
@@ -35,12 +40,14 @@ describe('middleware', () => {
       appId: 'app1',
     };
     middleware(store)(next)(action);
-    expect(dispatch).toHaveBeenCalledWith(fetchActions.fetch({
-      name: 'revokeConnectedApp',
-      args: {
-        appId: 'app1',
-      },
-    }));
+    expect(dispatch).toHaveBeenCalledWith(
+      fetchActions.fetch({
+        name: 'revokeConnectedApp',
+        args: {
+          appId: 'app1',
+        },
+      })
+    );
   });
 
   it('should call createNotification when the action revokeConnectedApps_FETCH_SUCCESS is received', () => {
@@ -60,8 +67,8 @@ describe('middleware', () => {
       notificationActions.createNotification(
         expect.objectContaining({
           notificationType: 'success',
-        }),
-      ),
+        })
+      )
     );
   });
 
@@ -77,9 +84,11 @@ describe('middleware', () => {
       },
     };
     middleware(store)(next)(action);
-    expect(dispatch).not.toHaveBeenCalledWith(fetchActions.fetch({
-      name: 'connectedApps',
-    }));
+    expect(dispatch).not.toHaveBeenCalledWith(
+      fetchActions.fetch({
+        name: 'connectedApps',
+      })
+    );
   });
 
   it('always propagates the action', () => {

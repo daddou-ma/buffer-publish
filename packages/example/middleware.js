@@ -1,4 +1,5 @@
-export default store => next => (action) => { // eslint-disable-line no-unused-vars
+export default store => next => action => {
+  // eslint-disable-line no-unused-vars
   /* eslint-disable no-console */
   console.group();
   console.log('action', action);

@@ -8,10 +8,12 @@ module.exports = method(
     rp({
       uri: `${process.env.API_ADDR}/1/user/apps.json`,
       method: 'GET',
-      strictSSL: !(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'),
+      strictSSL: !(
+        process.env.NODE_ENV === 'development' ||
+        process.env.NODE_ENV === 'test'
+      ),
       qs: {
         access_token: session.publish.accessToken,
       },
-    })
-    .then(result => JSON.parse(result)),
+    }).then(result => JSON.parse(result))
 );

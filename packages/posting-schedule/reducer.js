@@ -3,10 +3,7 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import cloneDeep from 'lodash.clonedeep';
 import keyWrapper from '@bufferapp/keywrapper';
 
-import {
-  transformSchedules,
-  mergeSchedules,
-} from './utils/transformSchedule';
+import { transformSchedules, mergeSchedules } from './utils/transformSchedule';
 import {
   deleteTimeFromPausedSchedulesForApi,
   updatePausedSchedulesForApi,
@@ -17,7 +14,8 @@ import {
   deleteTimeFromSchedule,
   addTimeToSchedulesForApi,
   updateScheduleTimeForApi,
-  deleteAllTimesFromSchedule } from './utils/scheduleUtils';
+  deleteAllTimesFromSchedule,
+} from './utils/scheduleUtils';
 
 export const actionTypes = keyWrapper('POSTING_SCHEDULE', {
   REMOVE_SCHEDULE_TIME: 0,
@@ -66,12 +64,17 @@ export default (state = initialState, action) => {
   let newSchedules = {};
   switch (action.type) {
     case profileActionTypes.SELECT_PROFILE:
-      mergedSchedules = mergeSchedules(action.profile.schedules, action.profile.pausedSchedules);
+      mergedSchedules = mergeSchedules(
+        action.profile.schedules,
+        action.profile.pausedSchedules
+      );
       return {
         ...state,
         loading: false,
-        days:
-          transformSchedules(cloneDeep(mergedSchedules), cloneDeep(action.profile.pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(mergedSchedules),
+          cloneDeep(action.profile.pausedSchedules)
+        ),
         scheduleLoading: false,
         schedules: action.profile.schedules,
         pausedSchedules: action.profile.pausedSchedules,
@@ -116,44 +119,74 @@ export default (state = initialState, action) => {
         hasTwentyFourHourTimeFormat: action.result.hasTwentyFourHourTimeFormat,
       };
     case `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      mergedSchedules = mergeSchedules(action.result.schedules, state.pausedSchedules);
+      mergedSchedules = mergeSchedules(
+        action.result.schedules,
+        state.pausedSchedules
+      );
       return {
         ...state,
-        days: transformSchedules(cloneDeep(mergedSchedules), cloneDeep(state.pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(mergedSchedules),
+          cloneDeep(state.pausedSchedules)
+        ),
         schedules: action.result.schedules,
       };
     case actionTypes.PAUSE_DAY:
-      schedules = removePausedDaysFromScheduleForApi([action.dayName], state.schedules);
-      pausedSchedules =
-        addDayToPausedSchedulesForApi(action.dayName, state.mergedSchedules, state.days);
+      schedules = removePausedDaysFromScheduleForApi(
+        [action.dayName],
+        state.schedules
+      );
+      pausedSchedules = addDayToPausedSchedulesForApi(
+        action.dayName,
+        state.mergedSchedules,
+        state.days
+      );
       mergedSchedules = mergeSchedules(schedules, pausedSchedules);
       return {
         ...state,
-        days: transformSchedules(cloneDeep(mergedSchedules), cloneDeep(pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(mergedSchedules),
+          cloneDeep(pausedSchedules)
+        ),
         schedules,
         pausedSchedules,
         mergedSchedules,
       };
     case actionTypes.UNPAUSE_DAY:
-      pausedSchedules =
-        removeDayFromPausedSchedulesForApi(action.dayName, state.pausedSchedules, state.days);
-      schedules =
-        addPausedDayBackToScheduleForApi(action.dayName, state.schedules, state.mergedSchedules);
+      pausedSchedules = removeDayFromPausedSchedulesForApi(
+        action.dayName,
+        state.pausedSchedules,
+        state.days
+      );
+      schedules = addPausedDayBackToScheduleForApi(
+        action.dayName,
+        state.schedules,
+        state.mergedSchedules
+      );
       mergedSchedules = mergeSchedules(schedules, pausedSchedules);
       return {
         ...state,
-        days: transformSchedules(cloneDeep(mergedSchedules), cloneDeep(pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(mergedSchedules),
+          cloneDeep(pausedSchedules)
+        ),
         schedules,
         pausedSchedules,
         mergedSchedules,
       };
     case actionTypes.REMOVE_PAUSED_TIME:
-      pausedSchedules =
-        deleteTimeFromPausedSchedulesForApi(state.mergedSchedules, state.days, action);
+      pausedSchedules = deleteTimeFromPausedSchedulesForApi(
+        state.mergedSchedules,
+        state.days,
+        action
+      );
       mergedSchedules = mergeSchedules(state.schedules, pausedSchedules);
       return {
         ...state,
-        days: transformSchedules(cloneDeep(mergedSchedules), cloneDeep(pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(mergedSchedules),
+          cloneDeep(pausedSchedules)
+        ),
         schedules: state.schedules,
         pausedSchedules,
         mergedSchedules,
@@ -163,18 +196,28 @@ export default (state = initialState, action) => {
       schedules = deleteAllTimesFromSchedule(state.schedules);
       return {
         ...state,
-        days: transformSchedules(cloneDeep(schedules), cloneDeep(pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(schedules),
+          cloneDeep(pausedSchedules)
+        ),
         schedules,
         pausedSchedules,
         mergedSchedules: schedules,
         showClearAllModal: false,
       };
     case actionTypes.UPDATE_PAUSED_SCHEDULE:
-      pausedSchedules = updatePausedSchedulesForApi(state.mergedSchedules, state.days, action);
+      pausedSchedules = updatePausedSchedulesForApi(
+        state.mergedSchedules,
+        state.days,
+        action
+      );
       mergedSchedules = mergeSchedules(state.schedules, pausedSchedules);
       return {
         ...state,
-        days: transformSchedules(cloneDeep(mergedSchedules), cloneDeep(pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(mergedSchedules),
+          cloneDeep(pausedSchedules)
+        ),
         schedules: state.schedules,
         pausedSchedules,
         mergedSchedules,
@@ -215,7 +258,10 @@ export default (state = initialState, action) => {
       mergedSchedules = mergeSchedules(schedules, state.pausedSchedules);
       return {
         ...state,
-        days: transformSchedules(cloneDeep(mergedSchedules), cloneDeep(state.pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(mergedSchedules),
+          cloneDeep(state.pausedSchedules)
+        ),
         schedules,
         pausedSchedules: state.pausedSchedules,
         mergedSchedules,
@@ -224,12 +270,18 @@ export default (state = initialState, action) => {
       newSchedules = addTimeToSchedulesForApi(
         action,
         state.mergedSchedules,
-        state.pausedSchedules,
+        state.pausedSchedules
       );
-      mergedSchedules = mergeSchedules(newSchedules.schedules, newSchedules.pausedSchedules);
+      mergedSchedules = mergeSchedules(
+        newSchedules.schedules,
+        newSchedules.pausedSchedules
+      );
       return {
         ...state,
-        days: transformSchedules(cloneDeep(mergedSchedules), cloneDeep(state.pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(mergedSchedules),
+          cloneDeep(state.pausedSchedules)
+        ),
         schedules: newSchedules.schedules,
         pausedSchedules: newSchedules.pausedSchedules,
         mergedSchedules,
@@ -239,7 +291,10 @@ export default (state = initialState, action) => {
       mergedSchedules = mergeSchedules(schedules, state.pausedSchedules);
       return {
         ...state,
-        days: transformSchedules(cloneDeep(mergedSchedules), cloneDeep(state.pausedSchedules)),
+        days: transformSchedules(
+          cloneDeep(mergedSchedules),
+          cloneDeep(state.pausedSchedules)
+        ),
         schedules,
         pausedSchedules: state.pausedSchedules,
         mergedSchedules,
@@ -250,8 +305,17 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  handleRemoveTimeClick: ({ hours, minutes, dayName, profileId, timeIndex, paused }) => ({
-    type: paused ? actionTypes.REMOVE_PAUSED_TIME : actionTypes.REMOVE_SCHEDULE_TIME,
+  handleRemoveTimeClick: ({
+    hours,
+    minutes,
+    dayName,
+    profileId,
+    timeIndex,
+    paused,
+  }) => ({
+    type: paused
+      ? actionTypes.REMOVE_PAUSED_TIME
+      : actionTypes.REMOVE_SCHEDULE_TIME,
     hours,
     minutes,
     timeIndex,
@@ -259,8 +323,17 @@ export const actions = {
     profileId,
     paused,
   }),
-  handleUpdateTime: ({ hours, minutes, dayName, profileId, timeIndex, paused }) => ({
-    type: paused ? actionTypes.UPDATE_PAUSED_SCHEDULE : actionTypes.UPDATE_SCHEDULE_TIME,
+  handleUpdateTime: ({
+    hours,
+    minutes,
+    dayName,
+    profileId,
+    timeIndex,
+    paused,
+  }) => ({
+    type: paused
+      ? actionTypes.UPDATE_PAUSED_SCHEDULE
+      : actionTypes.UPDATE_SCHEDULE_TIME,
     hours,
     minutes,
     timeIndex,

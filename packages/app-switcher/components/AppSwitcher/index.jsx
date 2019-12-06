@@ -2,12 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import {
-  Text,
-  Card,
-  Popover,
-  Input,
-} from '@bufferapp/components';
+import { Text, Card, Popover, Input } from '@bufferapp/components';
 
 import { Button } from '@bufferapp/ui';
 
@@ -40,9 +35,8 @@ const buttonContainerStyle = {
   marginTop: '10px',
 };
 
-
 class AppSwitcher extends React.Component {
-  constructor () {
+  constructor() {
     super();
 
     this.state = {
@@ -54,9 +48,9 @@ class AppSwitcher extends React.Component {
     this.onFeedbackChange = this.onFeedbackChange.bind(this);
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.showFeedbackModal !== prevProps.showFeedbackModal) {
-      const node = ReactDOM.findDOMNode(this);  // eslint-disable-line
+      const node = ReactDOM.findDOMNode(this); // eslint-disable-line
       if (node) {
         const input = node.querySelector('input');
         if (input) {
@@ -66,17 +60,17 @@ class AppSwitcher extends React.Component {
     }
   }
 
-  onFeedbackChange (event) {
+  onFeedbackChange(event) {
     this.setState({ feedbackBody: event.target.value });
   }
 
-  handleSubmit (event) {
+  handleSubmit(event) {
     event.preventDefault();
     const { source } = this.props;
     this.props.sendFeedback({ feedback: this.state.feedbackBody, source });
   }
 
-  renderFeedbackModal () {
+  renderFeedbackModal() {
     const { feedbackBody } = this.state;
     const { submittingFeedback, closeFeedbackModal, translations } = this.props;
     const noTextEntered = feedbackBody === '';
@@ -85,26 +79,36 @@ class AppSwitcher extends React.Component {
       <React.Fragment>
         <Popover onOverlayClick={closeFeedbackModal}>
           <div className={styles.card}>
-            <div className={styles.mainDivBackground} >
+            <div className={styles.mainDivBackground}>
               <div style={{ paddingLeft: '25px', paddingTop: '25px' }}>
-                <Text color="white" size="large" weight="medium">{translations.headline1}</Text>
+                <Text color="white" size="large" weight="medium">
+                  {translations.headline1}
+                </Text>
                 <div>
                   <Text color="white">{translations.tagline}</Text>
                 </div>
               </div>
             </div>
             <div className={styles.barBottomStyle}>
-              <form onSubmit={(e) => this.handleSubmit(e)}>
-                <Text size="mini" color="black">{translations.question}</Text>
-                <div style={{ padding: '5px 0' }} className={styles.disableResize}>
+              <form onSubmit={e => this.handleSubmit(e)}>
+                <Text size="mini" color="black">
+                  {translations.question}
+                </Text>
+                <div
+                  style={{ padding: '5px 0' }}
+                  className={styles.disableResize}
+                >
                   <Input
                     type="textarea"
                     meta={{ submitting: submittingFeedback }}
-                    input={{ value: feedbackBody, onChange: this.onFeedbackChange }}
+                    input={{
+                      value: feedbackBody,
+                      onChange: this.onFeedbackChange,
+                    }}
                   />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-                  <span style={{ margin: '0 5px' }} >
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <span style={{ margin: '0 5px' }}>
                     <Button
                       type="secondary"
                       label={translations.cancel}
@@ -114,7 +118,11 @@ class AppSwitcher extends React.Component {
                   </span>
                   <Button
                     type="primary"
-                    label={submittingFeedback ? translations.pleaseWait : translations.continue}
+                    label={
+                      submittingFeedback
+                        ? translations.pleaseWait
+                        : translations.continue
+                    }
                     disabled={buttonDisabled}
                     onClick={this.handleSubmit}
                   />
@@ -127,7 +135,7 @@ class AppSwitcher extends React.Component {
     );
   }
 
-  render () {
+  render() {
     const {
       showGoBackToClassic,
       showFeedbackModal,
@@ -149,12 +157,14 @@ class AppSwitcher extends React.Component {
                   type="text"
                   hasIconOnly
                   icon={<CloseIcon />}
-                  onClick={() => { this.setState({ hidden: true }); }}
+                  onClick={() => {
+                    this.setState({ hidden: true });
+                  }}
                 />
               </div>
               <Text size="small">
-                Thanks for using our beta!
-                You can switch back and forth at any time.
+                Thanks for using our beta! You can switch back and forth at any
+                time.
               </Text>
               <div style={buttonContainerStyle}>
                 <Button

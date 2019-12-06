@@ -5,7 +5,11 @@ import { Slider } from '@bufferapp/publish-shared-components';
 import { Popover } from '@bufferapp/components';
 import NoteWrapper from '../NoteWrapper';
 import PreviewMedia from '../PreviewMedia';
-import { storyPropTypes, userPropTypes, translationsPropTypes } from '../../utils/commonPropTypes';
+import {
+  storyPropTypes,
+  userPropTypes,
+  translationsPropTypes,
+} from '../../utils/commonPropTypes';
 
 const SliderContainer = styled.div`
   height: 592px;
@@ -52,9 +56,9 @@ const PreviewPopover = ({
   const storyToDisplay = stories[currentStoryIndex];
 
   const showLeftArrow = currentStoryIndex > 0;
-  const showRightArrow = currentStoryIndex < (stories.length - 1);
+  const showRightArrow = currentStoryIndex < stories.length - 1;
 
-  const onArrowClick = (type) => {
+  const onArrowClick = type => {
     if (type === 'left' && showLeftArrow) {
       setCurrentStoryIndex(currentStoryIndex - 1);
     } else if (type === 'right' && showRightArrow) {
@@ -63,10 +67,7 @@ const PreviewPopover = ({
   };
 
   return (
-    <Popover
-      width="100%"
-      top="5rem"
-    >
+    <Popover width="100%" top="5rem">
       <SliderContainer>
         <Slider
           onCloseClick={onCloseClick}

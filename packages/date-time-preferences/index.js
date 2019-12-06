@@ -7,7 +7,9 @@ export default connect(
   state => ({
     initialValues: {
       format: state.appSidebar.user.hasTwentyFourHourTimeFormat ? '24' : '12',
-      dayToStartTheWeek: state.appSidebar.user.week_starts_monday ? 'Monday' : 'Sunday',
+      dayToStartTheWeek: state.appSidebar.user.week_starts_monday
+        ? 'Monday'
+        : 'Sunday',
     },
   }),
   dispatch => ({
@@ -15,7 +17,7 @@ export default connect(
       dispatch(actions.changeTwentyFourHourFormat(Number(format) === 24)),
     changeStartOfWeek: ({ dayToStartTheWeek }) =>
       dispatch(actions.changeStartOfWeek(dayToStartTheWeek === 'Monday')),
-  }),
+  })
 )(DateTimePreferences);
 
 export middleware from './middleware';

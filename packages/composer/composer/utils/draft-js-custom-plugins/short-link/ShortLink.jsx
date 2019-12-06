@@ -14,7 +14,9 @@ class ShortLink extends React.Component {
 
   onMouseOver = () => {
     const { contentState, entityKey } = this.props;
-    const { unshortenedLink, shortLink } = contentState.getEntity(entityKey).getData();
+    const { unshortenedLink, shortLink } = contentState
+      .getEntity(entityKey)
+      .getData();
     const el = this.refs.shortLink;
 
     const relativePosition = {
@@ -24,15 +26,22 @@ class ShortLink extends React.Component {
       height: el.offsetHeight,
     };
 
-    this.props.onMouseOver({ entityKey, unshortenedLink, shortLink, relativePosition });
+    this.props.onMouseOver({
+      entityKey,
+      unshortenedLink,
+      shortLink,
+      relativePosition,
+    });
   };
 
   onMouseOut = () => this.props.onMouseOut();
 
   render = () => (
     <span
-      onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}
-      className={styles.link} ref="shortLink"
+      onMouseOver={this.onMouseOver}
+      onMouseOut={this.onMouseOut}
+      className={styles.link}
+      ref="shortLink"
     >
       {this.props.children}
     </span>

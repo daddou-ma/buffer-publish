@@ -34,11 +34,7 @@ const renderBars = (numberOfBarsFilled, totalNumberOfBars) => {
     }
   }
 
-  return (
-    <Fragment>
-      {bars}
-    </Fragment>
-  );
+  return <Fragment>{bars}</Fragment>;
 };
 
 const DiscountinuousProgressBar = ({

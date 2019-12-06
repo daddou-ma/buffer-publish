@@ -16,7 +16,6 @@ import {
 } from './style';
 
 class WelcomePaidModal extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = { step: 1 };
@@ -39,45 +38,54 @@ class WelcomePaidModal extends React.Component {
 
     const { step } = this.state;
     return (
-      <div style={{
-        position: 'fixed',
-        zIndex: '3000',
-        borderRadius: '4px',
-        boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)',
-      }}
+      <div
+        style={{
+          position: 'fixed',
+          zIndex: '3000',
+          borderRadius: '4px',
+          boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.16)',
+        }}
       >
         <Popover>
-          { step === 1 && (
-          <CardStyle>
-            <MainDivBackgroundStyle>
-              <div style={{ padding: '32px 24px' }}>
-                <Text size="large" weight="medium" color="white">{translations.step1.headline}</Text>
-                <div color="white" style={{ margin: '8px 0 24px' }}>
-                  <Text color="white">
-                    {translations.step1.body1}
-                    <b>{translations.step1.body2}</b>
+          {step === 1 && (
+            <CardStyle>
+              <MainDivBackgroundStyle>
+                <div style={{ padding: '32px 24px' }}>
+                  <Text size="large" weight="medium" color="white">
+                    {translations.step1.headline}
                   </Text>
+                  <div color="white" style={{ margin: '8px 0 24px' }}>
+                    <Text color="white">
+                      {translations.step1.body1}
+                      <b>{translations.step1.body2}</b>
+                    </Text>
+                  </div>
                 </div>
-              </div>
-            </MainDivBackgroundStyle>
-            <BarBottomStyle>
-              <DotsNavigation currentStep={step} onClickCallback={this.onClickStep} nSteps={this.N_STEPS} />
-              <DivButtonStyle>
-                <Button
-                  type="primary"
-                  label={translations.step1.cta}
-                  onClick={this.onClickContinue}
+              </MainDivBackgroundStyle>
+              <BarBottomStyle>
+                <DotsNavigation
+                  currentStep={step}
+                  onClickCallback={this.onClickStep}
+                  nSteps={this.N_STEPS}
                 />
-              </DivButtonStyle>
-            </BarBottomStyle>
-          </CardStyle>
+                <DivButtonStyle>
+                  <Button
+                    type="primary"
+                    label={translations.step1.cta}
+                    onClick={this.onClickContinue}
+                  />
+                </DivButtonStyle>
+              </BarBottomStyle>
+            </CardStyle>
           )}
 
           {step === 2 && (
             <CardStyle>
               <MainDiv2Style>
                 <DivTextStyle>
-                  <Text color="black" size="large" weight="medium">{translations.step2.headline}</Text>
+                  <Text color="black" size="large" weight="medium">
+                    {translations.step2.headline}
+                  </Text>
                   <div style={{ paddingTop: '5px' }}>
                     <Text>{translations.step2.body}</Text>
                   </div>
@@ -91,7 +99,11 @@ class WelcomePaidModal extends React.Component {
                 />
               </DivImageHolderStyle>
               <BarBottomStyle>
-                <DotsNavigation currentStep={step} onClickCallback={this.onClickStep} nSteps={this.N_STEPS} />
+                <DotsNavigation
+                  currentStep={step}
+                  onClickCallback={this.onClickStep}
+                  nSteps={this.N_STEPS}
+                />
                 <DivButtonStyle>
                   <Button
                     type="primary"
@@ -107,7 +119,9 @@ class WelcomePaidModal extends React.Component {
             <CardStyle>
               <MainDiv2Style>
                 <DivTextStyle>
-                  <Text color="black" size="large" weight="medium">{translations.step3.headline}</Text>
+                  <Text color="black" size="large" weight="medium">
+                    {translations.step3.headline}
+                  </Text>
                   <div style={{ paddingTop: '5px' }}>
                     <Text>{translations.step3.body}</Text>
                   </div>
@@ -121,7 +135,11 @@ class WelcomePaidModal extends React.Component {
                 />
               </DivImageHolderStyle>
               <BarBottomStyle>
-                <DotsNavigation currentStep={step} onClickCallback={this.onClickStep} nSteps={this.N_STEPS} />
+                <DotsNavigation
+                  currentStep={step}
+                  onClickCallback={this.onClickStep}
+                  nSteps={this.N_STEPS}
+                />
                 <DivButtonStyle>
                   <Button
                     type="primary"
@@ -137,7 +155,9 @@ class WelcomePaidModal extends React.Component {
             <CardStyle>
               <MainDiv2Style>
                 <div style={{ paddingLeft: '25px', paddingTop: '25px' }}>
-                  <Text color="black" size="large" weight="medium">{translations.step4.headline}</Text>
+                  <Text color="black" size="large" weight="medium">
+                    {translations.step4.headline}
+                  </Text>
                   <div style={{ lineHeight: '2.5' }}>
                     <Text>{translations.step4.body}</Text>
                   </div>
@@ -150,7 +170,11 @@ class WelcomePaidModal extends React.Component {
                 />
               </DivGifHolderStyle>
               <BarBottomStyle>
-                <DotsNavigation currentStep={step} onClickCallback={this.onClickStep} nSteps={this.N_STEPS} />
+                <DotsNavigation
+                  currentStep={step}
+                  onClickCallback={this.onClickStep}
+                  nSteps={this.N_STEPS}
+                />
                 <DivButtonStyle>
                   <Button
                     type="primary"

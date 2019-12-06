@@ -27,5 +27,5 @@ module.exports = method(
     result = JSON.parse(result);
     result.newTimezone = city;
     return Promise.resolve(result);
-  },
+  }
 );

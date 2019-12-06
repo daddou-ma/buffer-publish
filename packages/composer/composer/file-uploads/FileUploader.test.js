@@ -37,7 +37,8 @@ describe('FileUploader', () => {
         FileUploader.throwMixedMediaTypesError(multipleImagesService);
         expect(NotificationActionCreators.queueError).toHaveBeenCalledWith({
           scope: NotificationScopes.FILE_UPLOAD,
-          message: 'We can only attach one type of file at the same time: either images, or a gif, or a video.<br/>Could you try with only one of those?',
+          message:
+            'We can only attach one type of file at the same time: either images, or a gif, or a video.<br/>Could you try with only one of those?',
         });
       });
       it('trigger a message not mentioning gifs if the service does not admit them', () => {
@@ -45,7 +46,8 @@ describe('FileUploader', () => {
         FileUploader.throwMixedMediaTypesError(multipleImagesService);
         expect(NotificationActionCreators.queueError).toHaveBeenCalledWith({
           scope: NotificationScopes.FILE_UPLOAD,
-          message: 'We can only attach one type of file at the same time: either images or a video.<br/>Could you try with only one of those?',
+          message:
+            'We can only attach one type of file at the same time: either images or a video.<br/>Could you try with only one of those?',
         });
       });
     });
@@ -54,7 +56,8 @@ describe('FileUploader', () => {
         FileUploader.throwMixedMediaTypesError(singleImageService);
         expect(NotificationActionCreators.queueError).toHaveBeenCalledWith({
           scope: NotificationScopes.FILE_UPLOAD,
-          message: 'We can only attach one type of file at the same time: either an image, or a gif, or a video.<br/>Could you try with only one of those?',
+          message:
+            'We can only attach one type of file at the same time: either an image, or a gif, or a video.<br/>Could you try with only one of those?',
         });
       });
       it('trigger a message not mentioning gifs if the service does not admit them', () => {
@@ -62,7 +65,8 @@ describe('FileUploader', () => {
         FileUploader.throwMixedMediaTypesError(singleImageService);
         expect(NotificationActionCreators.queueError).toHaveBeenCalledWith({
           scope: NotificationScopes.FILE_UPLOAD,
-          message: 'We can only attach one type of file at the same time: either an image or a video.<br/>Could you try with only one of those?',
+          message:
+            'We can only attach one type of file at the same time: either an image or a video.<br/>Could you try with only one of those?',
         });
       });
     });

@@ -40,29 +40,24 @@ describe('AppsAndExtras', () => {
     const wrapper = mount(
       <Provider store={store}>
         <AppsAndExtras />
-      </Provider>,
+      </Provider>
     );
-    expect(wrapper.find(AppsAndExtras).length)
-      .toBe(1);
+    expect(wrapper.find(AppsAndExtras).length).toBe(1);
   });
 
   it('should export reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('should export actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('should export actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

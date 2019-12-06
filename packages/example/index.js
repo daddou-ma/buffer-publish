@@ -4,12 +4,10 @@ import { connect } from 'react-redux';
 import LoggedIn from './components/LoggedIn';
 
 // default export = container
-export default connect(
-  state => ({
-    loggedIn: state.example.loggedIn,
-    translations: state.i18n.translations.example, // all package translations
-  }),
-)(LoggedIn);
+export default connect(state => ({
+  loggedIn: state.example.loggedIn,
+  translations: state.i18n.translations.example, // all package translations
+}))(LoggedIn);
 
 // export reducer, actions and action types
 export reducer, { actions, actionTypes } from './reducer';

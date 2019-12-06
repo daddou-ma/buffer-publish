@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  LinkifiedText,
-  Text,
-} from '@bufferapp/components';
+import { LinkifiedText, Text } from '@bufferapp/components';
 import Post from '../Post';
 
 const postContentStyle = {
@@ -58,30 +55,23 @@ const TextPost = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic
-          ? (
-            <Text
-              size="mini"
-              whitespace="pre-wrap"
-              color="black"
-            >
-              {text}
-            </Text>
-          )
-          : (
-            <LinkifiedText
-              color="black"
-              links={links}
-              size="mini"
-              whitespace="pre-wrap"
-              newTab
-              unstyled
-              basic={basic}
-            >
-              {text}
-            </LinkifiedText>
-          )
-        }
+        {basic ? (
+          <Text size="mini" whitespace="pre-wrap" color="black">
+            {text}
+          </Text>
+        ) : (
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            whitespace="pre-wrap"
+            newTab
+            unstyled
+            basic={basic}
+          >
+            {text}
+          </LinkifiedText>
+        )}
       </span>
     </div>
   );
@@ -140,7 +130,7 @@ TextPost.propTypes = {
       displayString: PropTypes.string,
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
-    }),
+    })
   ).isRequired,
   retweetCommentLinks: PropTypes.arrayOf(
     PropTypes.shape({
@@ -148,7 +138,7 @@ TextPost.propTypes = {
       displayString: PropTypes.string,
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
-    }),
+    })
   ),
   text: PropTypes.string.isRequired,
   isSent: PropTypes.bool,

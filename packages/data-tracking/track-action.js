@@ -13,12 +13,15 @@ const trackAction = ({ location, action, metadata }, callbacks) => {
   const composedMetadata = { userId, ...metadata };
   logActionToConsole(false, location, action, composedMetadata);
 
-  buffermetrics.trackAction({
-    application,
-    location,
-    action,
-    metadata: composedMetadata,
-  }, callbacks);
+  buffermetrics.trackAction(
+    {
+      application,
+      location,
+      action,
+      metadata: composedMetadata,
+    },
+    callbacks
+  );
 };
 
 export default trackAction;

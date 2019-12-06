@@ -14,6 +14,5 @@ module.exports = method(
         subprofiles: true,
         locked: true,
       },
-    })
-    .then(result => JSON.parse(result)),
+    }).then(result => JSON.parse(result))
 );

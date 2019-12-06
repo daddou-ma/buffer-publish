@@ -22,9 +22,9 @@ const Recovery = ({
     </Text>
     <div>
       <Text type="p">
-        With Two Factor Authentication, if you lose your phone there&apos;s a possibility
-        you could get locked out of your account. Save this code in a safe place to use if
-        you can&apos;t log in with your phone.
+        With Two Factor Authentication, if you lose your phone there&apos;s a
+        possibility you could get locked out of your account. Save this code in
+        a safe place to use if you can&apos;t log in with your phone.
       </Text>
     </div>
     <AutoSelectText onSelect={handleRecoveryCodeSelect} copyToClipboard>
@@ -32,11 +32,7 @@ const Recovery = ({
     </AutoSelectText>
 
     <div style={{ alignSelf: 'flex-end', marginTop: '16px' }}>
-      <Button
-        type="primary"
-        label="Done"
-        onClick={() => transition('CLOSE')}
-      />
+      <Button type="primary" label="Done" onClick={() => transition('CLOSE')} />
     </div>
   </div>
 );

@@ -4,9 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import {
-  reducer as form,
-} from 'redux-form';
+import { reducer as form } from 'redux-form';
 
 import TimezoneInputForm from './index';
 
@@ -25,11 +23,7 @@ const items = [
 
 storiesOf('TimezoneInputForm', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory =>
-    <Provider store={store}>
-      {getStory()}
-    </Provider>,
-  )
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('default', () => (
     <TimezoneInputForm
       handleSubmit={action('on-submit-action')}

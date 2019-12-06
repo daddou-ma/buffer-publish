@@ -11,7 +11,7 @@ export default connect(
   }),
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideStealProfileModal()),
-  }),
+  })
 )(StealProfileModal);
 
 // export reducer, actions and action types

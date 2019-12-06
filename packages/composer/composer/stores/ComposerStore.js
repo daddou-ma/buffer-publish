@@ -18,41 +18,59 @@ import {
 import AppStore from './AppStore';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import { addShortLink as addEditorShortLink, replaceLink as replaceEditorLink }
-  from '../utils/draft-js-custom-plugins/short-link';
+import {
+  addShortLink as addEditorShortLink,
+  replaceLink as replaceEditorLink,
+} from '../utils/draft-js-custom-plugins/short-link';
 import NotificationStore from './NotificationStore';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
-import { prepopulatedMentionStrategy, addPrepopulatedMention as addEditorPrepopulatedMention }
-  from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-mention';
-import { prepopulatedHashtagStrategy, addPrepopulatedHashtag as addEditorPrepopulatedHashtag }
-  from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-hashtag';
-import { addImportedMention as addEditorImportedFacebookMention }
-  from '../utils/draft-js-custom-plugins/imported-facebook-mention-entities';
-import removeFacebookAutocompleteEntities
-  from '../utils/draft-js-custom-plugins/autocomplete/utils/removeFacebookAutocompleteEntities';
+import {
+  prepopulatedMentionStrategy,
+  addPrepopulatedMention as addEditorPrepopulatedMention,
+} from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-mention';
+import {
+  prepopulatedHashtagStrategy,
+  addPrepopulatedHashtag as addEditorPrepopulatedHashtag,
+} from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-hashtag';
+import { addImportedMention as addEditorImportedFacebookMention } from '../utils/draft-js-custom-plugins/imported-facebook-mention-entities';
+import removeFacebookAutocompleteEntities from '../utils/draft-js-custom-plugins/autocomplete/utils/removeFacebookAutocompleteEntities';
 import { resetEditorContents } from '../utils/draft-js-custom-plugins/editor-contents-reset';
 import events from '../utils/Events';
 
 import ValidationSuccess from '../lib/validation/ValidationSuccess';
-import { validateDraft, validateVideoForInstagram } from '../lib/validation/ValidateDraft';
+import {
+  validateDraft,
+  validateVideoForInstagram,
+} from '../lib/validation/ValidateDraft';
 import Draft from '../entities/Draft';
 
 // import { registerStore, sendToMonitor } from '../utils/devtools';
 
 const CHANGE_EVENT = 'change';
 
-const getNewDraft = service => (
-  new Draft(service, EditorState.createEmpty())
-);
+const getNewDraft = service => new Draft(service, EditorState.createEmpty());
 
 // Link Attachment factory
-const getNewLink =
-  ({ url, title = null, description = null, thumbnail = null, thumbnailHttps = null,
-    availableThumbnails = null, wasEdited = false }) =>
-  ({ url, title, description, thumbnail, thumbnailHttps, availableThumbnails, wasEdited });
+const getNewLink = ({
+  url,
+  title = null,
+  description = null,
+  thumbnail = null,
+  thumbnailHttps = null,
+  availableThumbnails = null,
+  wasEdited = false,
+}) => ({
+  url,
+  title,
+  description,
+  thumbnail,
+  thumbnailHttps,
+  availableThumbnails,
+  wasEdited,
+});
 
 // SourceLink Attachment factory (source url and its available images)
-const getNewSourceLink = (url) => ({
+const getNewSourceLink = url => ({
   url,
   availableImages: [],
 });
@@ -85,18 +103,60 @@ const getNewGif = (gifUrl, gifStillUrl, width = null, height = null) => ({
 });
 
 // Video factory
-const getNewVideo =
-  ({ uploadId = null, name, duration, durationMs, size, width, height, url, originalUrl,
-    thumbnail, availableThumbnails, thumbOffset }) =>
-  ({ uploadId, name, duration, durationMs, size, width, height, url, originalUrl,
-    thumbnail, availableThumbnails, thumbOffset, mediaType: MediaTypes.VIDEO, wasEdited: false });
+const getNewVideo = ({
+  uploadId = null,
+  name,
+  duration,
+  durationMs,
+  size,
+  width,
+  height,
+  url,
+  originalUrl,
+  thumbnail,
+  availableThumbnails,
+  thumbOffset,
+}) => ({
+  uploadId,
+  name,
+  duration,
+  durationMs,
+  size,
+  width,
+  height,
+  url,
+  originalUrl,
+  thumbnail,
+  availableThumbnails,
+  thumbOffset,
+  mediaType: MediaTypes.VIDEO,
+  wasEdited: false,
+});
 
 // Retweet factory
-const getNewRetweet = ({ text, tweetId, userId, userName, userDisplayName, tweetUrl, avatarUrl }) =>
-  ({ text, tweetId, userId, userName, userDisplayName, tweetUrl, avatarUrl });
+const getNewRetweet = ({
+  text,
+  tweetId,
+  userId,
+  userName,
+  userDisplayName,
+  tweetUrl,
+  avatarUrl,
+}) => ({
+  text,
+  tweetId,
+  userId,
+  userName,
+  userDisplayName,
+  tweetUrl,
+  avatarUrl,
+});
 
-const getNewInstagramFeedbackObj = ({ message, composerId = 'instagram', code = undefined }) =>
-  ({ message, composerId, code });
+const getNewInstagramFeedbackObj = ({
+  message,
+  composerId = 'instagram',
+  code = undefined,
+}) => ({ message, composerId, code });
 
 const getInitialState = () => ({
   drafts: Services.map(service => getNewDraft(service)),
@@ -121,8 +181,10 @@ const softResetState = () => {
   const newState = getInitialState();
 
   // The only data to preserve is the enabled state of each draft
-  newState.drafts = newState.drafts.map((newDraft) => {
-    const { isEnabled, editorState } = state.drafts.find(({ id }) => id === newDraft.id);
+  newState.drafts = newState.drafts.map(newDraft => {
+    const { isEnabled, editorState } = state.drafts.find(
+      ({ id }) => id === newDraft.id
+    );
     newDraft.isEnabled = isEnabled;
     newDraft.editorState = resetEditorContents(editorState);
     return newDraft;
@@ -133,162 +195,191 @@ const softResetState = () => {
 
 const eventShowSwitchPlanModal = () => {
   events.trigger('show-switch-plan-modal');
-}
+};
 
 const ComposerStore = Object.assign({}, EventEmitter.prototype, {
   emitChange: () => ComposerStore.emit(CHANGE_EVENT),
-  addChangeListener: (callback) => ComposerStore.on(CHANGE_EVENT, callback),
-  removeChangeListener: (callback) => ComposerStore.removeListener(CHANGE_EVENT, callback),
+  addChangeListener: callback => ComposerStore.on(CHANGE_EVENT, callback),
+  removeChangeListener: callback =>
+    ComposerStore.removeListener(CHANGE_EVENT, callback),
 
-  getEnabledDrafts: () => state.drafts.filter((draft) => draft.isEnabled),
+  getEnabledDrafts: () => state.drafts.filter(draft => draft.isEnabled),
   getDrafts: () => state.drafts,
 
   getInvalidEnabledDraftsFeedback: () => {
     const { hasIGDirectVideoFlip } = AppStore.getUserData();
-    const selectedIgProfiles = AppStore.getSelectedProfilesForService('instagram');
+    const selectedIgProfiles = AppStore.getSelectedProfilesForService(
+      'instagram'
+    );
     const hasSomeIGDirectProfilesSelected =
-      selectedIgProfiles.filter((profile) => profile.instagramDirectEnabled).length > 0;
-    return ComposerStore.getEnabledDrafts().reduce((invalidDraftsFeedback, draft) => {
-      const contentState = draft.editorState.getCurrentContent();
-      const hasText = contentState.hasText();
-      const hasLinkAttached =
-        draft.enabledAttachmentType === AttachmentTypes.LINK && draft.link !== null;
-      const hasRetweetAttached =
-        draft.enabledAttachmentType === AttachmentTypes.RETWEET && draft.retweet !== null;
-      const hasMediaAttached =
-        draft.enabledAttachmentType === AttachmentTypes.MEDIA &&
-        (draft.images.length > 0 || draft.video !== null || draft.gif !== null);
-      const hasAnyAttachment = hasLinkAttached || hasRetweetAttached || hasMediaAttached;
+      selectedIgProfiles.filter(profile => profile.instagramDirectEnabled)
+        .length > 0;
+    return ComposerStore.getEnabledDrafts().reduce(
+      (invalidDraftsFeedback, draft) => {
+        const contentState = draft.editorState.getCurrentContent();
+        const hasText = contentState.hasText();
+        const hasLinkAttached =
+          draft.enabledAttachmentType === AttachmentTypes.LINK &&
+          draft.link !== null;
+        const hasRetweetAttached =
+          draft.enabledAttachmentType === AttachmentTypes.RETWEET &&
+          draft.retweet !== null;
+        const hasMediaAttached =
+          draft.enabledAttachmentType === AttachmentTypes.MEDIA &&
+          (draft.images.length > 0 ||
+            draft.video !== null ||
+            draft.gif !== null);
+        const hasAnyAttachment =
+          hasLinkAttached || hasRetweetAttached || hasMediaAttached;
 
-      const hasRequiredAttachmentAttached =
-        draft.service.requiredAttachmentType === null ||
-        (draft.service.requiredAttachmentType === AttachmentTypes.LINK && hasLinkAttached) ||
-        (draft.service.requiredAttachmentType === AttachmentTypes.RETWEET && hasRetweetAttached) ||
-        (draft.service.requiredAttachmentType === AttachmentTypes.MEDIA && hasMediaAttached);
+        const hasRequiredAttachmentAttached =
+          draft.service.requiredAttachmentType === null ||
+          (draft.service.requiredAttachmentType === AttachmentTypes.LINK &&
+            hasLinkAttached) ||
+          (draft.service.requiredAttachmentType === AttachmentTypes.RETWEET &&
+            hasRetweetAttached) ||
+          (draft.service.requiredAttachmentType === AttachmentTypes.MEDIA &&
+            hasMediaAttached);
 
-      const isSourceUrlUnrequiredOrValid =
-        !draft.service.canHaveSourceUrl ||
-        draft.sourceLink === null ||
-        twitterText.isValidUrl(draft.sourceLink.url, true, false);
+        const isSourceUrlUnrequiredOrValid =
+          !draft.service.canHaveSourceUrl ||
+          draft.sourceLink === null ||
+          twitterText.isValidUrl(draft.sourceLink.url, true, false);
 
-      const hasRequiredText =
-        !draft.service.requiresText || hasText;
+        const hasRequiredText = !draft.service.requiresText || hasText;
 
+        let validationResultVideo = new ValidationSuccess();
 
-      let validationResultVideo = new ValidationSuccess();
+        // Only validate videos if they have the IG Direct Video feature
+        // and there is at least one IG business profile selected
+        const shouldValidateVideoForInstagram =
+          draft.service.name === 'instagram' &&
+          hasIGDirectVideoFlip &&
+          hasSomeIGDirectProfilesSelected;
 
-      // Only validate videos if they have the IG Direct Video feature
-      // and there is at least one IG business profile selected
-      const shouldValidateVideoForInstagram = (
-        draft.service.name === 'instagram' &&
-        hasIGDirectVideoFlip &&
-        hasSomeIGDirectProfilesSelected);
-
-      if (shouldValidateVideoForInstagram) {
-        validationResultVideo = validateVideoForInstagram(draft.video);
-      }
-
-      const validationResults = validateDraft(draft);
-
-      const isIGDraft = draft.service.name === 'instagram';
-
-      const isInvalid =
-        (!hasText && !hasAnyAttachment) ||
-        !hasRequiredAttachmentAttached ||
-        !hasRequiredText ||
-        !isSourceUrlUnrequiredOrValid ||
-        validationResultVideo.isInvalid() ||
-        validationResults.isInvalid();
-
-      if (isInvalid) {
-        let messages = [];
-        let requiredAttachmentCopy;
-        let canHaveImageOrGifAttachment;
-        let canHaveVideoAttachment;
-        switch (draft.service.requiredAttachmentType) {
-          case AttachmentTypes.LINK:
-            requiredAttachmentCopy = 'a link preview';
-            break;
-
-          case AttachmentTypes.RETWEET:
-            requiredAttachmentCopy = 'a retweet';
-            break;
-
-          case AttachmentTypes.MEDIA:
-            canHaveImageOrGifAttachment =
-              draft.service.canHaveSomeMediaAttachmentTypes([MediaTypes.IMAGE, MediaTypes.GIF]);
-            canHaveVideoAttachment = draft.service.canHaveMediaAttachmentType(MediaTypes.VIDEO);
-
-            if (canHaveImageOrGifAttachment && canHaveVideoAttachment) {
-              requiredAttachmentCopy = 'an image or video';
-            } else if (canHaveImageOrGifAttachment) {
-              requiredAttachmentCopy = 'an image';
-            } else if (canHaveVideoAttachment) {
-              requiredAttachmentCopy = 'a video';
-            }
-            break;
-          default:
-            break;
+        if (shouldValidateVideoForInstagram) {
+          validationResultVideo = validateVideoForInstagram(draft.video);
         }
 
-        if (!hasRequiredAttachmentAttached && !hasRequiredText) {
-          messages.push(`Please include ${requiredAttachmentCopy} and some text`);
-        } else if (!hasRequiredAttachmentAttached) {
-          messages.push(`Please include ${requiredAttachmentCopy}`);
-        } else if (!hasRequiredText) {
-          messages.push('Please include some text');
-        } else if (!hasText && !hasAnyAttachment) {
-          messages.push('Please include at least some text or an attachment');
+        const validationResults = validateDraft(draft);
+
+        const isIGDraft = draft.service.name === 'instagram';
+
+        const isInvalid =
+          (!hasText && !hasAnyAttachment) ||
+          !hasRequiredAttachmentAttached ||
+          !hasRequiredText ||
+          !isSourceUrlUnrequiredOrValid ||
+          validationResultVideo.isInvalid() ||
+          validationResults.isInvalid();
+
+        if (isInvalid) {
+          let messages = [];
+          let requiredAttachmentCopy;
+          let canHaveImageOrGifAttachment;
+          let canHaveVideoAttachment;
+          switch (draft.service.requiredAttachmentType) {
+            case AttachmentTypes.LINK:
+              requiredAttachmentCopy = 'a link preview';
+              break;
+
+            case AttachmentTypes.RETWEET:
+              requiredAttachmentCopy = 'a retweet';
+              break;
+
+            case AttachmentTypes.MEDIA:
+              canHaveImageOrGifAttachment = draft.service.canHaveSomeMediaAttachmentTypes(
+                [MediaTypes.IMAGE, MediaTypes.GIF]
+              );
+              canHaveVideoAttachment = draft.service.canHaveMediaAttachmentType(
+                MediaTypes.VIDEO
+              );
+
+              if (canHaveImageOrGifAttachment && canHaveVideoAttachment) {
+                requiredAttachmentCopy = 'an image or video';
+              } else if (canHaveImageOrGifAttachment) {
+                requiredAttachmentCopy = 'an image';
+              } else if (canHaveVideoAttachment) {
+                requiredAttachmentCopy = 'a video';
+              }
+              break;
+            default:
+              break;
+          }
+
+          if (!hasRequiredAttachmentAttached && !hasRequiredText) {
+            messages.push(
+              `Please include ${requiredAttachmentCopy} and some text`
+            );
+          } else if (!hasRequiredAttachmentAttached) {
+            messages.push(`Please include ${requiredAttachmentCopy}`);
+          } else if (!hasRequiredText) {
+            messages.push('Please include some text');
+          } else if (!hasText && !hasAnyAttachment) {
+            messages.push('Please include at least some text or an attachment');
+          }
+
+          if (!isSourceUrlUnrequiredOrValid) {
+            messages.push(
+              'Please include a valid source url or leave the source url blank'
+            );
+          }
+
+          if (validationResultVideo.isInvalid()) {
+            messages.push(validationResultVideo.message);
+          }
+
+          if (validationResults.isInvalid()) {
+            messages = messages.concat(validationResults.getErrorMessages());
+          }
+
+          invalidDraftsFeedback.push({ draft, messages });
         }
 
-        if (!isSourceUrlUnrequiredOrValid) {
-          messages.push('Please include a valid source url or leave the source url blank');
-        }
-
-        if (validationResultVideo.isInvalid()) {
-          messages.push(validationResultVideo.message);
-        }
-
-        if (validationResults.isInvalid()) {
-          messages = messages.concat(validationResults.getErrorMessages());
-        }
-
-        invalidDraftsFeedback.push({ draft, messages });
-      }
-
-      return invalidDraftsFeedback;
-    }, []);
+        return invalidDraftsFeedback;
+      },
+      []
+    );
   },
 
-  getDraft: (id) => state.drafts.find((draft) => draft.id === id),
-  getDraftText: (id) => ComposerStore.getDraft(id).editorState.getCurrentContent().getPlainText(),
+  getDraft: id => state.drafts.find(draft => draft.id === id),
+  getDraftText: id =>
+    ComposerStore.getDraft(id)
+      .editorState.getCurrentContent()
+      .getPlainText(),
 
-  getDraftLinkUrl: (id) => {
+  getDraftLinkUrl: id => {
     const link = ComposerStore.getDraft(id).link;
     return link ? link.url : null;
   },
 
-  doesDraftHaveLinkAttachment: (id) => ComposerStore.getDraft(id).link !== null,
-  doesDraftHaveRetweetAttachment: (id) => ComposerStore.getDraft(id).retweet !== null,
-  doesDraftHaveAttachmentEnabled: (id) => ComposerStore.getDraft(id).enabledAttachmentType !== null,
-  doesDraftHaveLinkAttachmentEnabled: (id) =>
+  doesDraftHaveLinkAttachment: id => ComposerStore.getDraft(id).link !== null,
+  doesDraftHaveRetweetAttachment: id =>
+    ComposerStore.getDraft(id).retweet !== null,
+  doesDraftHaveAttachmentEnabled: id =>
+    ComposerStore.getDraft(id).enabledAttachmentType !== null,
+  doesDraftHaveLinkAttachmentEnabled: id =>
     ComposerStore.getDraft(id).enabledAttachmentType === AttachmentTypes.LINK,
-  doesDraftHaveSourceLink: (id) => ComposerStore.getDraft(id).sourceLink !== null,
-  doesDraftHaveLocation: (id) => ComposerStore.getDraft(id).locationId !== null,
+  doesDraftHaveSourceLink: id => ComposerStore.getDraft(id).sourceLink !== null,
+  doesDraftHaveLocation: id => ComposerStore.getDraft(id).locationId !== null,
 
-  isDraftEnabled: (id) => ComposerStore.getDraft(id).isEnabled,
-  isDraftLocked: (id) => ComposerStore.getDraft(id).isSaved,
+  isDraftEnabled: id => ComposerStore.getDraft(id).isEnabled,
+  isDraftLocked: id => ComposerStore.getDraft(id).isSaved,
 
   getDraftsSharedData: () => state.draftsSharedData,
 
   areAllDraftsSaved: () => {
     const enabledDrafts = ComposerStore.getEnabledDrafts();
-    return enabledDrafts.length > 0 && enabledDrafts.every((draft) => draft.isSaved);
+    return (
+      enabledDrafts.length > 0 && enabledDrafts.every(draft => draft.isSaved)
+    );
   },
 
   // Retrieve long link from shortLinkLongLinkMap (if url is long link already, return url)
-  getCanonicalUrl: (url) => {
-    const matchingDraft = state.drafts.find((draft) => draft.shortLinkLongLinkMap.has(url));
+  getCanonicalUrl: url => {
+    const matchingDraft = state.drafts.find(draft =>
+      draft.shortLinkLongLinkMap.has(url)
+    );
     if (matchingDraft) return matchingDraft.shortLinkLongLinkMap.get(url);
 
     return url;
@@ -315,8 +406,11 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
 // Should be used for composition with functions that are passed a draft id as first argument.
 // It would have been awesome to compose this as a decorator on top of non-class methods,
 // alas this isn't part of the spec yet.
-const monitorComposerLastInteractedWith = (fn) => (draftId, ...restArgs) => {
-  if (draftId === 'omni' || draftId === AppStore.getAppState().expandedComposerId) {
+const monitorComposerLastInteractedWith = fn => (draftId, ...restArgs) => {
+  if (
+    draftId === 'omni' ||
+    draftId === AppStore.getAppState().expandedComposerId
+  ) {
     state.meta.lastInteractedWithComposerId = draftId;
   }
 
@@ -327,12 +421,16 @@ const updateDraftHasSavingError = (id, hasSavingError) => {
   ComposerStore.getDraft(id).hasSavingError = hasSavingError;
 };
 
-const clearDraftInlineErrors = (id) => {
-  const notifications = NotificationStore.getVisibleNotifications().filter((notif) =>
-    notif.scope === `${NotificationScopes.UPDATE_SAVING}-${ErrorTypes.INLINE}-${id}` ||
-    notif.scope === `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${id}`
+const clearDraftInlineErrors = id => {
+  const notifications = NotificationStore.getVisibleNotifications().filter(
+    notif =>
+      notif.scope ===
+        `${NotificationScopes.UPDATE_SAVING}-${ErrorTypes.INLINE}-${id}` ||
+      notif.scope === `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${id}`
   );
-  notifications.forEach((notif) => NotificationActionCreators.removeNotification(notif.id));
+  notifications.forEach(notif =>
+    NotificationActionCreators.removeNotification(notif.id)
+  );
 };
 
 const enableDraft = monitorComposerLastInteractedWith(
@@ -365,7 +463,9 @@ const enableDraft = monitorComposerLastInteractedWith(
           shouldPreventRerender = true;
         } else if (enabledDrafts.length >= 1) {
           copyDraftContents({
-            draftFrom: ComposerStore.getDraft(state.meta.lastInteractedWithComposerId),
+            draftFrom: ComposerStore.getDraft(
+              state.meta.lastInteractedWithComposerId
+            ),
             draftsTo: [ComposerStore.getDraft(id)],
           });
         }
@@ -380,7 +480,7 @@ const enableDraft = monitorComposerLastInteractedWith(
   }
 );
 
-const disableDraft = (id) => {
+const disableDraft = id => {
   let shouldPreventRerender = false;
 
   if (ComposerStore.isDraftLocked(id)) return !shouldPreventRerender;
@@ -402,37 +502,42 @@ const disableDraft = (id) => {
   return !shouldPreventRerender;
 };
 
-const getFirstNonNullOrUndefined = (...values) => (
-  values.find((v) => typeof v !== 'undefined' && v !== null)
-);
+const getFirstNonNullOrUndefined = (...values) =>
+  values.find(v => typeof v !== 'undefined' && v !== null);
 
 const handleDraftInitialTextMentions = (editorState, contentState) => {
-  contentState.getBlockMap().forEach((contentBlock) => {
-    prepopulatedMentionStrategy(
-      contentBlock,
-      (...indices) => {
-        editorState = addEditorPrepopulatedMention(editorState, contentBlock, indices);
-      }
-    );
+  contentState.getBlockMap().forEach(contentBlock => {
+    prepopulatedMentionStrategy(contentBlock, (...indices) => {
+      editorState = addEditorPrepopulatedMention(
+        editorState,
+        contentBlock,
+        indices
+      );
+    });
   });
 
   return editorState;
 };
 
 const handleDraftInitialTextHashtags = (editorState, contentState) => {
-  contentState.getBlockMap().forEach((contentBlock) => {
-    prepopulatedHashtagStrategy(
-      contentBlock,
-      (...indices) => {
-        editorState = addEditorPrepopulatedHashtag(editorState, contentBlock, indices);
-      }
-    );
+  contentState.getBlockMap().forEach(contentBlock => {
+    prepopulatedHashtagStrategy(contentBlock, (...indices) => {
+      editorState = addEditorPrepopulatedHashtag(
+        editorState,
+        contentBlock,
+        indices
+      );
+    });
   });
 
   return editorState;
 };
 
-const handleDraftInitialFacebookMentions = (editorState, contentState, entities) => {
+const handleDraftInitialFacebookMentions = (
+  editorState,
+  contentState,
+  entities
+) => {
   entities.forEach(({ indices, ...entityData }) => {
     // Use a Map for entity data in order to expose a similar API as
     // draft-js-mention-plugin, which uses ImmutableJS
@@ -468,17 +573,18 @@ const setDraftInitialText = ({
     }
   }
 
-  const shouldAppendUrl = (
+  const shouldAppendUrl =
     draft.service.name !== 'pinterest' &&
     (draft.service.name !== 'instagram' ||
-     !ComposerInitiators.ImageBufferButtons.includes(composerInitiator))
-  );
+      !ComposerInitiators.ImageBufferButtons.includes(composerInitiator));
 
   const initialText = [
     text,
     shouldAppendUrl ? url : null,
     via ? `via @${via}` : null,
-  ].filter((val) => val).join(' ');
+  ]
+    .filter(val => val)
+    .join(' ');
 
   /**
    * willGetOverridenByOmnibox is a patch that serves to prevent the Facebook
@@ -504,8 +610,7 @@ const setDraftInitialText = ({
   ) {
     NotificationActionCreators.queueInfo({
       scope: `${NotificationScopes.COMPOSER_NOTICE_NOT_PREFILLED}-${draft.service.name}`,
-      message: `<a href="https://faq.buffer.com/article/589-why-the-browser-extension-${''
-                }doesnt-pull-in-text-for-facebook" className={styles.composerInfoMessageLink}
+      message: `<a href="https://faq.buffer.com/article/589-why-the-browser-extension-${''}doesnt-pull-in-text-for-facebook" className={styles.composerInfoMessageLink}
                 target="_blank" rel="noopener noreferrer">Why is it necessary to manually
                 enter a message for Facebook?</a>`,
       onlyCloseOnce: true,
@@ -531,25 +636,37 @@ const setDraftInitialText = ({
   // Ensure only a single content block gets created by createFromText() by
   // splitting initialText with a regex that matches nothing
   const zeroMatchDelimiter = /$./;
-  const contentState = ContentState.createFromText(initialText, zeroMatchDelimiter);
+  const contentState = ContentState.createFromText(
+    initialText,
+    zeroMatchDelimiter
+  );
 
   let editorState = EditorState.createWithContent(contentState);
   editorState = EditorState.moveSelectionToEnd(editorState);
 
-  const shouldEnableTwitterMentionAutocomplete = draft.service.name === 'twitter';
+  const shouldEnableTwitterMentionAutocomplete =
+    draft.service.name === 'twitter';
   if (shouldEnableTwitterMentionAutocomplete) {
     editorState = handleDraftInitialTextMentions(editorState, contentState);
   }
 
-  const shouldEnableTwitterHashtagAutocomplete = draft.service.name === 'twitter';
+  const shouldEnableTwitterHashtagAutocomplete =
+    draft.service.name === 'twitter';
   if (shouldEnableTwitterHashtagAutocomplete) {
     editorState = handleDraftInitialTextHashtags(editorState, contentState);
   }
 
-  const shouldEnableFacebookMentionAutocomplete = draft.service.name === 'facebook';
-  if (shouldEnableFacebookMentionAutocomplete && facebookMentionEntities !== null) {
-    editorState =
-      handleDraftInitialFacebookMentions(editorState, contentState, facebookMentionEntities);
+  const shouldEnableFacebookMentionAutocomplete =
+    draft.service.name === 'facebook';
+  if (
+    shouldEnableFacebookMentionAutocomplete &&
+    facebookMentionEntities !== null
+  ) {
+    editorState = handleDraftInitialFacebookMentions(
+      editorState,
+      contentState,
+      facebookMentionEntities
+    );
   }
 
   draft.editorState = editorState;
@@ -571,7 +688,7 @@ const setDraftsInitialText = ({
   isPrefillingExistingUpdate,
   isEditing,
 }) => {
-  state.drafts.forEach((draft) =>
+  state.drafts.forEach(draft =>
     setDraftInitialText({
       id: draft.id,
       text,
@@ -593,7 +710,7 @@ const setDraftEditorState = monitorComposerLastInteractedWith(
   }
 );
 
-const updateDraftIsSaved = (id) => {
+const updateDraftIsSaved = id => {
   ComposerStore.getDraft(id).isSaved = true;
 };
 
@@ -601,21 +718,19 @@ const debouncedUpdateDraftSourceLinkDataActionCreator = debounce((id, url) => {
   ComposerActionCreators.updateDraftSourceLinkData(id, url);
 }, 250);
 
-const updateDraftSourceLink = monitorComposerLastInteractedWith(
-  (id, url) => {
-    const draft = ComposerStore.getDraft(id);
-    if (!draft.service.canHaveSourceUrl) return;
+const updateDraftSourceLink = monitorComposerLastInteractedWith((id, url) => {
+  const draft = ComposerStore.getDraft(id);
+  if (!draft.service.canHaveSourceUrl) return;
 
-    if (url === '' || url === null) {
-      draft.sourceLink = null;
-    } else {
-      draft.sourceLink = getNewSourceLink(url);
+  if (url === '' || url === null) {
+    draft.sourceLink = null;
+  } else {
+    draft.sourceLink = getNewSourceLink(url);
 
-      const isValidUrl = twitterText.isValidUrl(url, true, false);
-      if (isValidUrl) debouncedUpdateDraftSourceLinkDataActionCreator(id, url);
-    }
+    const isValidUrl = twitterText.isValidUrl(url, true, false);
+    if (isValidUrl) debouncedUpdateDraftSourceLinkDataActionCreator(id, url);
   }
-);
+});
 
 const updateDraftSourceLinkData = (id, { url, images = [] }) => {
   if (!ComposerStore.doesDraftHaveSourceLink(id)) return;
@@ -624,11 +739,13 @@ const updateDraftSourceLinkData = (id, { url, images = [] }) => {
 
   Object.assign(draftSourceLink, {
     url,
-    availableImages: images.map((image) => getNewImage({
-      url: image.url,
-      width: image.width,
-      height: image.height,
-    })),
+    availableImages: images.map(image =>
+      getNewImage({
+        url: image.url,
+        width: image.width,
+        height: image.height,
+      })
+    ),
   });
 };
 
@@ -640,7 +757,11 @@ const updateDraftLocation = monitorComposerLastInteractedWith(
 
     const previousLocationIsEmpty = draft.locationName === null;
     if (previousLocationIsEmpty) {
-      AppActionCreators.trackUserAction(['composer', 'location', 'started_adding_location']);
+      AppActionCreators.trackUserAction([
+        'composer',
+        'location',
+        'started_adding_location',
+      ]);
     }
 
     draft.locationId = locationId;
@@ -690,7 +811,8 @@ const getDraftCharacterCount = (id, text) => {
       if (draft.video !== null) {
         const willVideoBeNativeOnTwitter =
           draft.video.size < draft.service.nativeVideoSizeLimit &&
-          draft.video.durationMs < draft.service.nativeVideoDurationLimit * 1000;
+          draft.video.durationMs <
+            draft.service.nativeVideoDurationLimit * 1000;
         const willVideoLinkBeAddedToText = !willVideoBeNativeOnTwitter;
 
         if (willVideoLinkBeAddedToText) text += mockAttachmentText;
@@ -712,7 +834,10 @@ const getDraftCharacterCount = (id, text) => {
 
   if (draft.service.name === 'pinterest') {
     let charCount = text.length;
-    if (draft.enabledAttachmentType === AttachmentTypes.MEDIA && draft.video !== null) {
+    if (
+      draft.enabledAttachmentType === AttachmentTypes.MEDIA &&
+      draft.video !== null
+    ) {
       charCount += 52;
     }
     return charCount;
@@ -723,7 +848,8 @@ const getDraftCharacterCount = (id, text) => {
 
     const urls = twitterText.extractUrls(text);
     const hasLinkAttached =
-      draft.enabledAttachmentType === AttachmentTypes.LINK && draft.link !== null;
+      draft.enabledAttachmentType === AttachmentTypes.LINK &&
+      draft.link !== null;
 
     // Add 24 chars for images and videos
     if (draft.enabledAttachmentType === AttachmentTypes.MEDIA) {
@@ -741,7 +867,8 @@ const getDraftCharacterCount = (id, text) => {
       let totalUrlLength = 0;
 
       // Don't count url if it's the link url
-      const isAttachedLinkInText = hasLinkAttached && urls.includes(draft.link.url);
+      const isAttachedLinkInText =
+        hasLinkAttached && urls.includes(draft.link.url);
       if (isAttachedLinkInText) accountedForUrlsCount--;
 
       for (const url of urls) {
@@ -798,11 +925,11 @@ const updateToggleSidebarVisibility = monitorComposerLastInteractedWith(
     } else {
       const enabledDrafts = ComposerStore.getEnabledDrafts();
 
-      enabledDrafts.forEach((enabledDraft) => {
+      enabledDrafts.forEach(enabledDraft => {
         enabledDraft.composerSidebarVisible = composerSidebarVisible;
       });
     }
-  },
+  }
 );
 
 const updateDraftComment = monitorComposerLastInteractedWith(
@@ -822,13 +949,15 @@ const updateDraftComment = monitorComposerLastInteractedWith(
     } else {
       const enabledDrafts = ComposerStore.getEnabledDrafts();
 
-      enabledDrafts.forEach((enabledDraft) => {
-        const currentText = enabledDraft.commentText ? `${enabledDraft.commentText} ` : '';
+      enabledDrafts.forEach(enabledDraft => {
+        const currentText = enabledDraft.commentText
+          ? `${enabledDraft.commentText} `
+          : '';
         const comment = `${currentText}${commentText}`;
         enabledDraft.commentText = comment;
       });
     }
-  },
+  }
 );
 
 const updateShopgridLink = monitorComposerLastInteractedWith(
@@ -838,7 +967,7 @@ const updateShopgridLink = monitorComposerLastInteractedWith(
     draft.shopgridLink = shopgridLink;
 
     if (!didEditorStateChange) draft.forceDecoratorsRerender = true;
-  },
+  }
 );
 
 const updateDraftCommentCharacterCount = monitorComposerLastInteractedWith(
@@ -849,7 +978,10 @@ const updateDraftCommentCharacterCount = monitorComposerLastInteractedWith(
       if (draft.service.name !== 'instagram') return;
       if (draft.service.commentCharLimit === null) return;
 
-      draft.characterCommentCount = getDraftCharacterCount(id, draft.commentText);
+      draft.characterCommentCount = getDraftCharacterCount(
+        id,
+        draft.commentText
+      );
 
       // If the character count was updated as a result of a change that didn't
       // originate from the editor itself, we need to give the editor an opportunity
@@ -860,15 +992,17 @@ const updateDraftCommentCharacterCount = monitorComposerLastInteractedWith(
     } else {
       const enabledDrafts = ComposerStore.getEnabledDrafts();
 
-      enabledDrafts.forEach((enabledDraft) => {
+      enabledDrafts.forEach(enabledDraft => {
         if (enabledDraft.service.commentCharLimit === null) return;
-        enabledDraft.characterCommentCount =
-          getDraftCharacterCount(enabledDraft.id, enabledDraft.commentText);
+        enabledDraft.characterCommentCount = getDraftCharacterCount(
+          enabledDraft.id,
+          enabledDraft.commentText
+        );
 
         if (!didEditorStateChange) enabledDraft.forceDecoratorsRerender = true;
       });
     }
-  },
+  }
 );
 
 const mapShortLinkWithLongLink = (id, shortLink, longLink) => {
@@ -885,27 +1019,31 @@ const unmapShortLinkWithLongLink = (id, link) => {
  * Loop over each block of text in the editor, and update the list of all urls
  * within the composer + detect new and removed ones
  */
-const parseDraftTextLinks = (id) => {
+const parseDraftTextLinks = id => {
   const draft = ComposerStore.getDraft(id);
   const contentState = draft.editorState.getCurrentContent();
   const parsedUrls = [];
 
-  contentState.getBlockMap().forEach((contentBlock) => {
+  contentState.getBlockMap().forEach(contentBlock => {
     const text = contentBlock.getText();
     const parsedUrlsWithIndices = twitterText.extractUrlsWithIndices(text);
 
-    parsedUrls.push(...parsedUrlsWithIndices.map((urlWithIndices) => urlWithIndices.url));
+    parsedUrls.push(
+      ...parsedUrlsWithIndices.map(urlWithIndices => urlWithIndices.url)
+    );
   });
 
-  const newUrls = parsedUrls.filter((url) => !draft.urls.includes(url));
-  const removedUrls = draft.urls.filter((url) => !parsedUrls.includes(url));
+  const newUrls = parsedUrls.filter(url => !draft.urls.includes(url));
+  const removedUrls = draft.urls.filter(url => !parsedUrls.includes(url));
 
   draft.urls = parsedUrls;
 
   if (newUrls.length) ComposerActionCreators.handleNewDraftLinks(id, newUrls);
-  if (removedUrls.length) ComposerActionCreators.handleRemovedDraftLinks(id, removedUrls);
+  if (removedUrls.length)
+    ComposerActionCreators.handleRemovedDraftLinks(id, removedUrls);
 
-  if (newUrls.length || removedUrls.length) ComposerActionCreators.updateDraftCharacterCount(id);
+  if (newUrls.length || removedUrls.length)
+    ComposerActionCreators.updateDraftCharacterCount(id);
 };
 
 const handleNewDraftLinks = (id, newUrls) => {
@@ -922,26 +1060,30 @@ const handleNewDraftLinks = (id, newUrls) => {
   }
 
   // Shorten newly-added links if not unshortened before
-  newUrls.forEach((newUrl) => {
+  newUrls.forEach(newUrl => {
     const wasUnshortenedBefore = draft.unshortenedUrls.includes(newUrl);
-    if (!wasUnshortenedBefore) ComposerActionCreators.shortenDraftLink(id, newUrl);
+    if (!wasUnshortenedBefore)
+      ComposerActionCreators.shortenDraftLink(id, newUrl);
   });
 
   // Add images scraped from new links to list of available images
-  newUrls.forEach((newUrl) => ComposerActionCreators.updateDraftLinkAvailableImages(id, newUrl));
+  newUrls.forEach(newUrl =>
+    ComposerActionCreators.updateDraftLinkAvailableImages(id, newUrl)
+  );
 };
 
 const handleRemovedDraftLinks = (id, removedUrls) => {
   const draft = ComposerStore.getDraft(id);
 
-  removedUrls.forEach((removedUrl) => {
+  removedUrls.forEach(removedUrl => {
     // Remove from available images those whose source link has been removed
     ComposerActionCreators.removeDraftLinkAvailableImages(id, removedUrl);
 
     // Forget this link was possibly unshortened before to allow shortening it
     // again if re-added
     const unshortenedUrlIndex = draft.unshortenedUrls.indexOf(removedUrl);
-    if (unshortenedUrlIndex !== -1) draft.unshortenedUrls.splice(unshortenedUrlIndex, 1);
+    if (unshortenedUrlIndex !== -1)
+      draft.unshortenedUrls.splice(unshortenedUrlIndex, 1);
 
     unmapShortLinkWithLongLink(id, removedUrl);
   });
@@ -999,25 +1141,34 @@ const updateDraftLinkData = monitorComposerLastInteractedWith(
     const draft = ComposerStore.getDraft(id);
 
     const {
-      url = null, title = null, description = null, thumbnail = null,
+      url = null,
+      title = null,
+      description = null,
+      thumbnail = null,
       availableThumbnails = null,
     } = linkData;
 
     if (!draft.service.canHaveAttachmentType(AttachmentTypes.LINK)) return;
 
     const hasLinkAttachment = draft.link !== null;
-    const hasAvailableThumbnails = availableThumbnails !== null && availableThumbnails.length > 0;
-    const fallBackToLinkAttachmentData = !isNewLinkAttachment && hasLinkAttachment;
-    const prioritizeLinkAttachmentData = fallBackToLinkAttachmentData && !comesFromDirectUserAction;
+    const hasAvailableThumbnails =
+      availableThumbnails !== null && availableThumbnails.length > 0;
+    const fallBackToLinkAttachmentData =
+      !isNewLinkAttachment && hasLinkAttachment;
+    const prioritizeLinkAttachmentData =
+      fallBackToLinkAttachmentData && !comesFromDirectUserAction;
 
     // In some situations (e.g. editing an update that has a custom thumbnail in the dashboard),
     // an attached thumbnail won't be found among the scraped availableThumbnails: this flag is used
     // to know when to insert such an attached thumbnail into the collection of availableThumbnails
     // so that navigating between available thumbnails doesn't lose this initial thumbnail.
-    const hasUnavailableThumbnailAttached = (
-      draft.link !== null && draft.link.thumbnail !== null && availableThumbnails !== null &&
-      !availableThumbnails.some((thumb) => thumb.url === draft.link.thumbnail.url)
-    );
+    const hasUnavailableThumbnailAttached =
+      draft.link !== null &&
+      draft.link.thumbnail !== null &&
+      availableThumbnails !== null &&
+      !availableThumbnails.some(
+        thumb => thumb.url === draft.link.thumbnail.url
+      );
 
     draft.link = getNewLink({
       url: getFirstNonNullOrUndefined(
@@ -1037,36 +1188,47 @@ const updateDraftLinkData = monitorComposerLastInteractedWith(
       thumbnail: getFirstNonNullOrUndefined(
         thumbnail !== null ? getNewImage({ url: thumbnail }) : null,
         fallBackToLinkAttachmentData ? draft.link.thumbnail : null,
-        (hasAvailableThumbnails ?
-          getNewImage({
-            url: availableThumbnails[0].url,
-            width: availableThumbnails[0].width,
-            height: availableThumbnails[0].height,
-          }) :
-          null)
+        hasAvailableThumbnails
+          ? getNewImage({
+              url: availableThumbnails[0].url,
+              width: availableThumbnails[0].width,
+              height: availableThumbnails[0].height,
+            })
+          : null
       ),
       thumbnailHttps: null,
       availableThumbnails: getFirstNonNullOrUndefined(
-        (availableThumbnails !== null ?
-          [
-            ...(hasUnavailableThumbnailAttached ? [draft.link.thumbnail] : []),
-            ...availableThumbnails.map((thumb) => getNewImage({ url: thumb.url, width: thumb.width, height: thumb.height })),
-          ] :
-          null),
+        availableThumbnails !== null
+          ? [
+              ...(hasUnavailableThumbnailAttached
+                ? [draft.link.thumbnail]
+                : []),
+              ...availableThumbnails.map(thumb =>
+                getNewImage({
+                  url: thumb.url,
+                  width: thumb.width,
+                  height: thumb.height,
+                })
+              ),
+            ]
+          : null,
         fallBackToLinkAttachmentData ? draft.link.availableThumbnails : null
       ),
-      wasEdited:
-        (isNewLinkAttachment ?
-          false :
-          comesFromDirectUserAction || !!(draft.link && draft.link.wasEdited)),
+      wasEdited: isNewLinkAttachment
+        ? false
+        : comesFromDirectUserAction || !!(draft.link && draft.link.wasEdited),
     });
 
     // If the link is missing some data that we could retrieve by scraping it, do so
     const scrapableProps = ['title', 'description', 'availableThumbnails'];
-    const isAnyScrapablePropMissing = scrapableProps.some((prop) => draft.link[prop] === null);
-    if (isAnyScrapablePropMissing) ComposerActionCreators.scrapeDraftLinkData(id, url);
+    const isAnyScrapablePropMissing = scrapableProps.some(
+      prop => draft.link[prop] === null
+    );
+    if (isAnyScrapablePropMissing)
+      ComposerActionCreators.scrapeDraftLinkData(id, url);
 
-    if (isNewLinkAttachment) AppActionCreators.refreshFacebookDomainOwnershipData();
+    if (isNewLinkAttachment)
+      AppActionCreators.refreshFacebookDomainOwnershipData();
   }
 );
 
@@ -1077,33 +1239,37 @@ const updateDraftFileUploadProgress = (id, uploaderInstance, progress) => {
   else filesUploadProgress.delete(uploaderInstance);
 };
 
-const addDraftImage = monitorComposerLastInteractedWith(
-  (id, image) => {
-    const draft = ComposerStore.getDraft(id);
-    const hasAttachedVideo = draft.video !== null;
-    const hasAttachedGif = draft.gif != null;
+const addDraftImage = monitorComposerLastInteractedWith((id, image) => {
+  const draft = ComposerStore.getDraft(id);
+  const hasAttachedVideo = draft.video !== null;
+  const hasAttachedGif = draft.gif != null;
 
-    const currentlyUploadingImagesCount = draft.filesUploadProgress.size;
-    // + 1 to ensure we take into account current image we're adding
-    const newImagesOverflow =
-      draft.images.length + currentlyUploadingImagesCount - draft.service.maxAttachableImagesCount + 1;
-    const needsToMakeRoomForNewImages = newImagesOverflow > 0;
+  const currentlyUploadingImagesCount = draft.filesUploadProgress.size;
+  // + 1 to ensure we take into account current image we're adding
+  const newImagesOverflow =
+    draft.images.length +
+    currentlyUploadingImagesCount -
+    draft.service.maxAttachableImagesCount +
+    1;
+  const needsToMakeRoomForNewImages = newImagesOverflow > 0;
 
-    if (!draft.service.canHaveAttachmentType(AttachmentTypes.MEDIA)) return;
-    if (!draft.service.canHaveMediaAttachmentType(MediaTypes.IMAGE)) return;
+  if (!draft.service.canHaveAttachmentType(AttachmentTypes.MEDIA)) return;
+  if (!draft.service.canHaveMediaAttachmentType(MediaTypes.IMAGE)) return;
 
-    if (needsToMakeRoomForNewImages) draft.images.splice(-newImagesOverflow, newImagesOverflow);
-    if (hasAttachedVideo) draft.video = null; // Override video
-    if (hasAttachedGif) draft.gif = null; // Override gif
-    updateDraftAttachedMediaEditingPayload(id, null);
+  if (needsToMakeRoomForNewImages)
+    draft.images.splice(-newImagesOverflow, newImagesOverflow);
+  if (hasAttachedVideo) draft.video = null; // Override video
+  if (hasAttachedGif) draft.gif = null; // Override gif
+  updateDraftAttachedMediaEditingPayload(id, null);
 
-    draft.images.push(image);
+  draft.images.push(image);
 
-    ComposerActionCreators.draftImageAdded(id, image.url);
-    ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
-    if (draft.id === 'instagram') ComposerActionCreators.updateInstagramState();
-  }
-);
+  ComposerActionCreators.draftImageAdded(id, image.url);
+  ComposerActionCreators.updateDraftCharacterCount(id, {
+    didEditorStateChange: false,
+  });
+  if (draft.id === 'instagram') ComposerActionCreators.updateInstagramState();
+});
 
 const updateDraftVideoThumbnail = monitorComposerLastInteractedWith(
   (id, thumbnail) => {
@@ -1115,15 +1281,13 @@ const updateDraftVideoThumbnail = monitorComposerLastInteractedWith(
   }
 );
 
-const updateDraftVideoTitle = monitorComposerLastInteractedWith(
-  (id, title) => {
-    const draft = ComposerStore.getDraft(id);
-    if (!draft.service.canEditVideoAttachment) return;
+const updateDraftVideoTitle = monitorComposerLastInteractedWith((id, title) => {
+  const draft = ComposerStore.getDraft(id);
+  if (!draft.service.canEditVideoAttachment) return;
 
-    draft.video.name = title;
-    draft.video.wasEdited = true;
-  }
-);
+  draft.video.name = title;
+  draft.video.wasEdited = true;
+});
 
 const updateDraftLinkThumbnail = monitorComposerLastInteractedWith(
   (id, thumbnail) => {
@@ -1136,30 +1300,30 @@ const updateDraftLinkThumbnail = monitorComposerLastInteractedWith(
   }
 );
 
-const selectNextLinkThumbnail = monitorComposerLastInteractedWith(
-  (draftId) => {
-    const draft = ComposerStore.getDraft(draftId);
-    const availableThumbnails = draft.link.availableThumbnails;
-    const currThumbnailIndex = findLastIndexOf(availableThumbnails, (thumbnail) =>
-      thumbnail.url === draft.link.thumbnail.url);
-    let nextThumbnail;
+const selectNextLinkThumbnail = monitorComposerLastInteractedWith(draftId => {
+  const draft = ComposerStore.getDraft(draftId);
+  const availableThumbnails = draft.link.availableThumbnails;
+  const currThumbnailIndex = findLastIndexOf(
+    availableThumbnails,
+    thumbnail => thumbnail.url === draft.link.thumbnail.url
+  );
+  let nextThumbnail;
 
-    if (currThumbnailIndex === availableThumbnails.length - 1) {
-      nextThumbnail = availableThumbnails[0];
-    } else {
-      nextThumbnail = availableThumbnails[currThumbnailIndex + 1];
-    }
-
-    ComposerActionCreators.updateDraftLinkThumbnail(draftId, nextThumbnail);
+  if (currThumbnailIndex === availableThumbnails.length - 1) {
+    nextThumbnail = availableThumbnails[0];
+  } else {
+    nextThumbnail = availableThumbnails[currThumbnailIndex + 1];
   }
-);
+
+  ComposerActionCreators.updateDraftLinkThumbnail(draftId, nextThumbnail);
+});
 
 const selectPreviousLinkThumbnail = monitorComposerLastInteractedWith(
-  (draftId) => {
+  draftId => {
     const draft = ComposerStore.getDraft(draftId);
     const availableThumbnails = draft.link.availableThumbnails;
-    const currThumbnailIndex = availableThumbnails.findIndex((thumbnail) =>
-      thumbnail.url === draft.link.thumbnail.url
+    const currThumbnailIndex = availableThumbnails.findIndex(
+      thumbnail => thumbnail.url === draft.link.thumbnail.url
     );
     let prevThumbnail;
 
@@ -1175,7 +1339,8 @@ const selectPreviousLinkThumbnail = monitorComposerLastInteractedWith(
 
 const addDraftLinkAvailableThumbnail = (id, thumbnail) => {
   const draft = ComposerStore.getDraft(id);
-  if (draft.link.availableThumbnails === null) draft.link.availableThumbnails = [];
+  if (draft.link.availableThumbnails === null)
+    draft.link.availableThumbnails = [];
   draft.link.availableThumbnails.unshift(thumbnail);
 };
 
@@ -1225,20 +1390,20 @@ const addAutoUploadedImage = (url, altText) => {
    * be much more solid.
    */
   draftsSharedData.uploadedImages.push(formattedImage);
-  state.drafts.forEach((draft) => addDraftImage(draft.id, formattedImage));
+  state.drafts.forEach(draft => addDraftImage(draft.id, formattedImage));
 };
 
-const removeDraftImage = monitorComposerLastInteractedWith(
-  (id, image) => {
-    const draft = ComposerStore.getDraft(id);
-    const imageIndex = draft.images.indexOf(image);
+const removeDraftImage = monitorComposerLastInteractedWith((id, image) => {
+  const draft = ComposerStore.getDraft(id);
+  const imageIndex = draft.images.indexOf(image);
 
-    draft.images.splice(imageIndex, 1);
+  draft.images.splice(imageIndex, 1);
 
-    ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
-    if (draft.id === 'instagram') ComposerActionCreators.updateInstagramState();
-  }
-);
+  ComposerActionCreators.updateDraftCharacterCount(id, {
+    didEditorStateChange: false,
+  });
+  if (draft.id === 'instagram') ComposerActionCreators.updateInstagramState();
+});
 
 // TODO: Refactor to not rely on reference mutations
 const updateImageAltText = (image, altText) => {
@@ -1254,12 +1419,16 @@ const updateImageAltText = (image, altText) => {
  */
 const updateUploadedImageDimensions = (url, width, height) => {
   const draftsSharedData = ComposerStore.getDraftsSharedData();
-  const collections = [draftsSharedData.uploadedImages, draftsSharedData.uploadedGifs];
+  const collections = [
+    draftsSharedData.uploadedImages,
+    draftsSharedData.uploadedGifs,
+  ];
   let image;
 
-  collections.some((imageCollection) => (
-    image = imageCollection.find((uploadedImage) => uploadedImage.url === url)
-  ));
+  collections.some(
+    imageCollection =>
+      (image = imageCollection.find(uploadedImage => uploadedImage.url === url))
+  );
 
   if (image) {
     image.width = width;
@@ -1273,35 +1442,35 @@ const updateUploadedImageDimensions = (url, width, height) => {
  * equivalent video object, since those references are compared in different places
  * using === to establish if we're looking at the same video or not.
  */
-const addDraftVideo = monitorComposerLastInteractedWith(
-  (id, video) => {
-    const draft = ComposerStore.getDraft(id);
-    const hasAttachedImages = draft.images.length > 0;
-    const hasAttachedVideo = draft.video !== null;
-    const hasAttachedGif = draft.gif !== null;
+const addDraftVideo = monitorComposerLastInteractedWith((id, video) => {
+  const draft = ComposerStore.getDraft(id);
+  const hasAttachedImages = draft.images.length > 0;
+  const hasAttachedVideo = draft.video !== null;
+  const hasAttachedGif = draft.gif !== null;
 
-    if (!draft.service.canHaveAttachmentType(AttachmentTypes.MEDIA)) return;
-    if (!draft.service.canHaveMediaAttachmentType(MediaTypes.VIDEO)) return;
+  if (!draft.service.canHaveAttachmentType(AttachmentTypes.MEDIA)) return;
+  if (!draft.service.canHaveMediaAttachmentType(MediaTypes.VIDEO)) return;
 
-    if (hasAttachedImages) draft.images.splice(0); // Override images
-    if (hasAttachedVideo) draft.video = null; // Override video
-    if (hasAttachedGif) draft.gif = null;
-    updateDraftAttachedMediaEditingPayload(id, null);
+  if (hasAttachedImages) draft.images.splice(0); // Override images
+  if (hasAttachedVideo) draft.video = null; // Override video
+  if (hasAttachedGif) draft.gif = null;
+  updateDraftAttachedMediaEditingPayload(id, null);
 
-    draft.video = cloneDeep(video);
+  draft.video = cloneDeep(video);
 
-    ComposerActionCreators.draftVideoAdded(id, video);
-    ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
-    if (draft.id === 'instagram') ComposerActionCreators.updateInstagramState();
-  }
-);
+  ComposerActionCreators.draftVideoAdded(id, video);
+  ComposerActionCreators.updateDraftCharacterCount(id, {
+    didEditorStateChange: false,
+  });
+  if (draft.id === 'instagram') ComposerActionCreators.updateInstagramState();
+});
 
-const addSharedUploadedVideo = (videoData) => {
+const addSharedUploadedVideo = videoData => {
   const draftsSharedData = ComposerStore.getDraftsSharedData();
   draftsSharedData.uploadedVideos.push(videoData);
 };
 
-const finishAddingProcessedVideo = (videoData) => {
+const finishAddingProcessedVideo = videoData => {
   const processingVideos = state.draftsSharedData.processingVideos;
 
   if (!processingVideos.has(videoData.uploadId)) return;
@@ -1314,33 +1483,33 @@ const finishAddingProcessedVideo = (videoData) => {
   updateDraftFileUploadProgress(draftId, uploaderInstance, null);
 };
 
-const removeDraftVideo = monitorComposerLastInteractedWith(
-  (id) => {
-    ComposerStore.getDraft(id).video = null;
-    updateDraftAttachedMediaEditingPayload(id, null);
-    ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
-    if (id === 'instagram') ComposerActionCreators.updateInstagramState();
-  }
-);
+const removeDraftVideo = monitorComposerLastInteractedWith(id => {
+  ComposerStore.getDraft(id).video = null;
+  updateDraftAttachedMediaEditingPayload(id, null);
+  ComposerActionCreators.updateDraftCharacterCount(id, {
+    didEditorStateChange: false,
+  });
+  if (id === 'instagram') ComposerActionCreators.updateInstagramState();
+});
 
-const addDraftGif = monitorComposerLastInteractedWith(
-  (id, gif) => {
-    const draft = ComposerStore.getDraft(id);
-    const hasAttachedImages = draft.images.length > 0;
-    const hasAttachedVideo = draft.video !== null;
+const addDraftGif = monitorComposerLastInteractedWith((id, gif) => {
+  const draft = ComposerStore.getDraft(id);
+  const hasAttachedImages = draft.images.length > 0;
+  const hasAttachedVideo = draft.video !== null;
 
-    if (!draft.service.canHaveAttachmentType(AttachmentTypes.MEDIA)) return;
-    if (!draft.service.canHaveMediaAttachmentType(MediaTypes.GIF)) return;
+  if (!draft.service.canHaveAttachmentType(AttachmentTypes.MEDIA)) return;
+  if (!draft.service.canHaveMediaAttachmentType(MediaTypes.GIF)) return;
 
-    if (hasAttachedImages) draft.images.splice(0); // Override images
-    if (hasAttachedVideo) draft.video = null; // Override video
-    updateDraftAttachedMediaEditingPayload(id, null);
-    draft.gif = gif;
+  if (hasAttachedImages) draft.images.splice(0); // Override images
+  if (hasAttachedVideo) draft.video = null; // Override video
+  updateDraftAttachedMediaEditingPayload(id, null);
+  draft.gif = gif;
 
-    ComposerActionCreators.draftGifAdded(id, gif.url);
-    ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
-  }
-);
+  ComposerActionCreators.draftGifAdded(id, gif.url);
+  ComposerActionCreators.updateDraftCharacterCount(id, {
+    didEditorStateChange: false,
+  });
+});
 
 const addDraftUploadedGif = (draftId, url, stillGifUrl, width, height) => {
   const draftsSharedData = ComposerStore.getDraftsSharedData();
@@ -1371,19 +1540,22 @@ const addAutoUploadedGif = (url, stillGifUrl) => {
    * be much more solid.
    */
   draftsSharedData.uploadedGifs.push(formattedGif);
-  state.drafts.forEach((draft) => addDraftGif(draft.id, formattedGif));
+  state.drafts.forEach(draft => addDraftGif(draft.id, formattedGif));
 };
 
-const removeDraftGif = monitorComposerLastInteractedWith(
-  (id) => {
-    ComposerStore.getDraft(id).gif = null;
-    updateDraftAttachedMediaEditingPayload(id, null);
-    ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
-  }
-);
+const removeDraftGif = monitorComposerLastInteractedWith(id => {
+  ComposerStore.getDraft(id).gif = null;
+  updateDraftAttachedMediaEditingPayload(id, null);
+  ComposerActionCreators.updateDraftCharacterCount(id, {
+    didEditorStateChange: false,
+  });
+});
 
 const addDraftProcessingVideo = (draftId, uploaderInstance, uploadId) => {
-  state.draftsSharedData.processingVideos.set(uploadId, [draftId, uploaderInstance]);
+  state.draftsSharedData.processingVideos.set(uploadId, [
+    draftId,
+    uploaderInstance,
+  ]);
 };
 
 // This method can be called very often (onMouseMove), so make sure the store
@@ -1419,15 +1591,19 @@ const addDraftRetweet = (id, retweetData) => {
   const retweet = getNewRetweet(retweetData);
   draft.retweet = retweet;
 
-  ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
+  ComposerActionCreators.updateDraftCharacterCount(id, {
+    didEditorStateChange: false,
+  });
 };
 
-const disableDraftAttachment = (id) => {
+const disableDraftAttachment = id => {
   const draft = ComposerStore.getDraft(id);
   draft.enabledAttachmentType = null;
 
   ComposerActionCreators.attachmentToggled(id);
-  ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
+  ComposerActionCreators.updateDraftCharacterCount(id, {
+    didEditorStateChange: false,
+  });
 };
 
 const enableDraftAttachment = (id, attachmentType) => {
@@ -1436,27 +1612,35 @@ const enableDraftAttachment = (id, attachmentType) => {
   if (!draft.service.canHaveAttachmentType(attachmentType)) return;
 
   // Link Attachment doesn't have a suggestion mode: don't enable it if no link attached
-  if (attachmentType === AttachmentTypes.LINK && !ComposerStore.doesDraftHaveLinkAttachment(id)) {
+  if (
+    attachmentType === AttachmentTypes.LINK &&
+    !ComposerStore.doesDraftHaveLinkAttachment(id)
+  ) {
     return;
   }
 
   // Retweet Attachment doesn't have a suggestion mode: don't enable it if no retweet attached
-  if (attachmentType === AttachmentTypes.RETWEET &&
-    !ComposerStore.doesDraftHaveRetweetAttachment(id)) {
+  if (
+    attachmentType === AttachmentTypes.RETWEET &&
+    !ComposerStore.doesDraftHaveRetweetAttachment(id)
+  ) {
     return;
   }
 
   draft.enabledAttachmentType = attachmentType;
 
   ComposerActionCreators.attachmentToggled(id);
-  ComposerActionCreators.updateDraftCharacterCount(id, { didEditorStateChange: false });
+  ComposerActionCreators.updateDraftCharacterCount(id, {
+    didEditorStateChange: false,
+  });
   if (id === 'instagram') ComposerActionCreators.updateInstagramState();
 };
 
 const toggleDraftAttachment = monitorComposerLastInteractedWith(
   (id, attachmentType) => {
     const draft = ComposerStore.getDraft(id);
-    const shouldDisableAttachment = (draft.enabledAttachmentType === attachmentType);
+    const shouldDisableAttachment =
+      draft.enabledAttachmentType === attachmentType;
 
     if (shouldDisableAttachment) {
       disableDraftAttachment(id);
@@ -1473,11 +1657,12 @@ const replaceDraftLinkWithShortlink = (id, link, shortLink) => {
   let editorState = draft.editorState;
   const contentState = editorState.getCurrentContent();
 
-  contentState.getBlockMap().forEach((contentBlock) => {
+  contentState.getBlockMap().forEach(contentBlock => {
     const text = contentBlock.getText();
     const parsedUrlsWithIndices = twitterText.extractUrlsWithIndices(text);
-    const parsedUrl =
-      parsedUrlsWithIndices.find((urlWithIndices) => urlWithIndices.url === link);
+    const parsedUrl = parsedUrlsWithIndices.find(
+      urlWithIndices => urlWithIndices.url === link
+    );
 
     if (!parsedUrl) return;
 
@@ -1507,7 +1692,6 @@ const replaceDraftLinkWithShortlink = (id, link, shortLink) => {
   ComposerActionCreators.parseDraftTextLinks(id);
 };
 
-
 const addDraftUnshortenedLink = (id, unshortenedLink) => {
   const draft = ComposerStore.getDraft(id);
   draft.unshortenedUrls.push(unshortenedLink);
@@ -1516,7 +1700,7 @@ const addDraftUnshortenedLink = (id, unshortenedLink) => {
 const addDraftAvailableImages = (id, images, sourceLink) => {
   const draft = ComposerStore.getDraft(id);
 
-  const newAvailableImages = images.map((image) => {
+  const newAvailableImages = images.map(image => {
     const formattedImage = getNewImage({
       url: image.url,
       width: image.width,
@@ -1532,8 +1716,9 @@ const addDraftAvailableImages = (id, images, sourceLink) => {
 const removeDraftAvailableImages = (id, sourceLink) => {
   const draft = ComposerStore.getDraft(id);
 
-  draft.availableImages = draft.availableImages.filter((availableImage) =>
-    availableImage.sourceLink !== sourceLink);
+  draft.availableImages = draft.availableImages.filter(
+    availableImage => availableImage.sourceLink !== sourceLink
+  );
 };
 
 const addOmniNotice = (message, draftId) => {
@@ -1545,7 +1730,7 @@ const addOmniNotice = (message, draftId) => {
   });
 };
 
-const getEditedImagesMessage = (service) => {
+const getEditedImagesMessage = service => {
   let message;
   if (service.maxAttachableImagesCount === 1) {
     message = `${service.formattedName} only allows one image, so we used your first image :)`;
@@ -1557,14 +1742,20 @@ const getEditedImagesMessage = (service) => {
 };
 
 const copyDraftMedia = (draftFrom, draftTo) => {
-  if (draftFrom.images.length > 0 && draftTo.service.canHaveMediaAttachmentType(MediaTypes.IMAGE)) {
+  if (
+    draftFrom.images.length > 0 &&
+    draftTo.service.canHaveMediaAttachmentType(MediaTypes.IMAGE)
+  ) {
     let imagesToAttach = draftFrom.images;
     if (draftFrom.images.length > draftTo.service.maxAttachableImagesCount) {
-      imagesToAttach = draftFrom.images.slice(0, draftTo.service.maxAttachableImagesCount);
+      imagesToAttach = draftFrom.images.slice(
+        0,
+        draftTo.service.maxAttachableImagesCount
+      );
       const message = getEditedImagesMessage(draftTo.service);
       addOmniNotice(message, draftTo.id);
     }
-    imagesToAttach.forEach((image) => addDraftImage(draftTo.id, image));
+    imagesToAttach.forEach(image => addDraftImage(draftTo.id, image));
     enableDraftAttachment(draftTo.id, AttachmentTypes.MEDIA);
   } else if (draftFrom.gif !== null) {
     if (!draftTo.service.canHaveMediaAttachmentType(MediaTypes.GIF)) {
@@ -1587,8 +1778,9 @@ const copyDraftMedia = (draftFrom, draftTo) => {
 
 const copyDraftTextData = (draftFrom, draftTo) => {
   const editorState =
-    draftFrom.service.name === 'facebook' && draftTo.service.name !== 'facebook' ?
-    removeFacebookAutocompleteEntities(draftFrom.editorState) : draftFrom.editorState;
+    draftFrom.service.name === 'facebook' && draftTo.service.name !== 'facebook'
+      ? removeFacebookAutocompleteEntities(draftFrom.editorState)
+      : draftFrom.editorState;
 
   setDraftEditorState(draftTo.id, editorState);
 
@@ -1601,7 +1793,7 @@ const copyDraftContents = ({
   draftFrom = ComposerStore.getDraft('omni'),
   draftsTo = state.drafts,
 } = {}) => {
-  draftsTo.forEach((draft) => {
+  draftsTo.forEach(draft => {
     const service = draft.service;
     if (service.isOmni || draft === draftFrom) return;
 
@@ -1631,14 +1823,19 @@ const copyDraftContents = ({
           }
 
           if (draftFrom.link !== null) {
-            const linkDataToReuse = service.canEditLinkAttachment ? {
-              url: draftFrom.link.url,
-              title: draftFrom.link.title,
-              description: draftFrom.link.description,
-              thumbnail: draftFrom.link.thumbnail !== null ? draftFrom.link.thumbnail.url : null,
-            } : {
-              url: draftFrom.link.url,
-            };
+            const linkDataToReuse = service.canEditLinkAttachment
+              ? {
+                  url: draftFrom.link.url,
+                  title: draftFrom.link.title,
+                  description: draftFrom.link.description,
+                  thumbnail:
+                    draftFrom.link.thumbnail !== null
+                      ? draftFrom.link.thumbnail.url
+                      : null,
+                }
+              : {
+                  url: draftFrom.link.url,
+                };
 
             updateDraftLinkData(draft.id, linkDataToReuse, {
               isNewLinkAttachment: true,
@@ -1665,7 +1862,8 @@ const copyDraftContents = ({
             !service.canEditVideoAttachment &&
             isFreeUser
           ) {
-            const message = '​​Please upgrade to our Pro plan to select a custom video thumbnail for Instagram.';
+            const message =
+              '​​Please upgrade to our Pro plan to select a custom video thumbnail for Instagram.';
             addOmniNotice(message, draft.id);
           }
 
@@ -1676,7 +1874,8 @@ const copyDraftContents = ({
             !isFreeUser
           ) {
             // Confirmed that Instagram is currently the only service that can't edit video attachment
-            const message = 'To select a custom thumbnail for Instagram, please click to open the Instagram composer.';
+            const message =
+              'To select a custom thumbnail for Instagram, please click to open the Instagram composer.';
             addOmniNotice(message, draft.id);
           }
 
@@ -1717,7 +1916,7 @@ const clearDraft = (id, { preserveEnabledState = false } = {}) => {
   Object.assign(draft, emptyDraft);
 };
 
-const clearOmniboxDraftWhenEnabling = (willBeEnabled) => {
+const clearOmniboxDraftWhenEnabling = willBeEnabled => {
   if (willBeEnabled) clearDraft('omni');
 };
 
@@ -1726,89 +1925,117 @@ const parseDraftsTextLinks = () => {
   enabledDrafts.forEach(draft => parseDraftTextLinks(draft.id));
 };
 
-const passesImageAspectRatioTest = (image) => {
+const passesImageAspectRatioTest = image => {
   if (!image.width || !image.height) return true;
   const ratio = image.width / image.height;
-  return ((ratio >= InstagramAspectRatioLimits.min) && (ratio <= InstagramAspectRatioLimits.max));
+  return (
+    ratio >= InstagramAspectRatioLimits.min &&
+    ratio <= InstagramAspectRatioLimits.max
+  );
 };
 
 const passesVideoAspectRatioTest = ({ video, service }) => {
   const aspectRatio = video.width / video.height;
-  return ((aspectRatio >= service.videoMinAspectRatio) &&
-    (aspectRatio <= service.videoMaxAspectRatio));
+  return (
+    aspectRatio >= service.videoMinAspectRatio &&
+    aspectRatio <= service.videoMaxAspectRatio
+  );
 };
 
 const updateInstagramDraftsFeedback = () => {
   const { hasIGDirectVideoFlip } = AppStore.getUserData();
-  const instagramDraft =
-    ComposerStore.getEnabledDrafts().filter((draft) => draft.id === 'instagram')[0];
+  const instagramDraft = ComposerStore.getEnabledDrafts().filter(
+    draft => draft.id === 'instagram'
+  )[0];
   if (!instagramDraft) return;
   instagramDraft.instagramFeedback = [];
 
-  const selectedIgProfiles = AppStore.getSelectedProfilesForService('instagram');
+  const selectedIgProfiles = AppStore.getSelectedProfilesForService(
+    'instagram'
+  );
   const hasSomeEnabledProfiles =
-    selectedIgProfiles.filter((profile) => profile.instagramDirectEnabled).length > 0;
+    selectedIgProfiles.filter(profile => profile.instagramDirectEnabled)
+      .length > 0;
   const hasSomeDisabledProfiles =
-    selectedIgProfiles.filter((profile) => !profile.instagramDirectEnabled).length > 0;
-  if (hasSomeEnabledProfiles &&
-      instagramDraft.enabledAttachmentType === AttachmentTypes.MEDIA &&
-      instagramDraft.images.length > 0) {
+    selectedIgProfiles.filter(profile => !profile.instagramDirectEnabled)
+      .length > 0;
+  if (
+    hasSomeEnabledProfiles &&
+    instagramDraft.enabledAttachmentType === AttachmentTypes.MEDIA &&
+    instagramDraft.images.length > 0
+  ) {
     if (passesImageAspectRatioTest(instagramDraft.images[0]) === false) {
-      instagramDraft.instagramFeedback.push(getNewInstagramFeedbackObj({
-        message: `Due to Instagram limitations, we can't post images directly to Instagram with aspect
+      instagramDraft.instagramFeedback.push(
+        getNewInstagramFeedbackObj({
+          message: `Due to Instagram limitations, we can't post images directly to Instagram with aspect
         ratios outside the range 4:5 to 1.91:1. You will receive a Reminder to post manually when the time comes!`,
-        composerId: 'instagram',
-        code: 'ASPECT_RATIO',
-      }));
+          composerId: 'instagram',
+          code: 'ASPECT_RATIO',
+        })
+      );
       return;
     } else if (instagramDraft.images.length > 1) {
-      instagramDraft.instagramFeedback.push(getNewInstagramFeedbackObj({
-        message: 'Due to Instagram limitations, we can\'t post galleries on your behalf. You will receive a Reminder to post manually when the time comes!',
-        composerId: 'instagram',
-        code: 'GALLERY',
-      }));
+      instagramDraft.instagramFeedback.push(
+        getNewInstagramFeedbackObj({
+          message:
+            "Due to Instagram limitations, we can't post galleries on your behalf. You will receive a Reminder to post manually when the time comes!",
+          composerId: 'instagram',
+          code: 'GALLERY',
+        })
+      );
       return;
     }
-  } else if (hasSomeEnabledProfiles && hasIGDirectVideoFlip &&
+  } else if (
+    hasSomeEnabledProfiles &&
+    hasIGDirectVideoFlip &&
     instagramDraft.enabledAttachmentType === AttachmentTypes.MEDIA &&
-    instagramDraft.video) {
+    instagramDraft.video
+  ) {
     if (passesVideoAspectRatioTest(instagramDraft) === false) {
-      instagramDraft.instagramFeedback.push(getNewInstagramFeedbackObj({
-        message: `Due to Instagram limitations, we can't post videos directly to Instagram with aspect
+      instagramDraft.instagramFeedback.push(
+        getNewInstagramFeedbackObj({
+          message: `Due to Instagram limitations, we can't post videos directly to Instagram with aspect
         ratios outside the range 4:5 to 16:9. You will receive a Reminder to post manually when the time comes!`,
-        composerId: 'instagram',
-        code: 'ASPECT_RATIO',
-      }));
+          composerId: 'instagram',
+          code: 'ASPECT_RATIO',
+        })
+      );
       return;
     }
   }
 
   if (!hasIGDirectVideoFlip) {
-    if (hasSomeEnabledProfiles &&
-        instagramDraft.enabledAttachmentType === AttachmentTypes.MEDIA &&
-        instagramDraft.video !== null) {
-      instagramDraft.instagramFeedback.push(getNewInstagramFeedbackObj({
-        message: `Due to Instagram limitations, we can't post videos on your behalf.
+    if (
+      hasSomeEnabledProfiles &&
+      instagramDraft.enabledAttachmentType === AttachmentTypes.MEDIA &&
+      instagramDraft.video !== null
+    ) {
+      instagramDraft.instagramFeedback.push(
+        getNewInstagramFeedbackObj({
+          message: `Due to Instagram limitations, we can't post videos on your behalf.
         You will receive a Reminder to post manually when the time comes!`,
-        composerId: 'instagram',
-        code: 'VIDEO',
-      }));
+          composerId: 'instagram',
+          code: 'VIDEO',
+        })
+      );
       return;
     }
   }
 
   if (hasSomeEnabledProfiles && hasSomeDisabledProfiles) {
-    instagramDraft.instagramFeedback.push(getNewInstagramFeedbackObj({
-      message: `Some of your accounts aren't enabled for Direct Scheduling,
+    instagramDraft.instagramFeedback.push(
+      getNewInstagramFeedbackObj({
+        message: `Some of your accounts aren't enabled for Direct Scheduling,
                 we'll send out Reminders for those accounts. Not all features
                 are supported for reminders.`,
-      composerId: 'instagram',
-      code: 'NOT_ENABLED',
-    }));
+        composerId: 'instagram',
+        code: 'NOT_ENABLED',
+      })
+    );
   }
 };
 
-const onDispatchedPayload = (payload) => {
+const onDispatchedPayload = payload => {
   const action = payload.action;
   let shouldEmitChange = true;
   let video;
@@ -1839,11 +2066,15 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_SHOPGRID_LINK:
-      state.drafts.forEach(draft => updateShopgridLink(draft.id, action.shopgridLink));
+      state.drafts.forEach(draft =>
+        updateShopgridLink(draft.id, action.shopgridLink)
+      );
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_COMMENT:
-      state.drafts.forEach(draft => updateDraftComment(draft.id, action.commentText));
+      state.drafts.forEach(draft =>
+        updateDraftComment(draft.id, action.commentText)
+      );
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_IMAGE_USER_TAGS:
@@ -1860,7 +2091,9 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_TOGGLE_SIDEBAR:
-      state.drafts.forEach(draft => updateToggleSidebarVisibility(draft.id, action.composerSidebarVisible));
+      state.drafts.forEach(draft =>
+        updateToggleSidebarVisibility(draft.id, action.composerSidebarVisible)
+      );
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_COMMENT_CHARACTER_COUNT:
@@ -1884,8 +2117,12 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_SCHEDULED_AT:
-      state.drafts.forEach((draft) => {
-        updateDraftScheduledAt(draft.id, action.scheduledAt, action.isPinnedToSlot);
+      state.drafts.forEach(draft => {
+        updateDraftScheduledAt(
+          draft.id,
+          action.scheduledAt,
+          action.isPinnedToSlot
+        );
       });
       break;
 
@@ -1894,8 +2131,9 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_LINK_DATA:
-      state.drafts.forEach((draft) =>
-        updateDraftLinkData(draft.id, action.linkData, action.meta));
+      state.drafts.forEach(draft =>
+        updateDraftLinkData(draft.id, action.linkData, action.meta)
+      );
       break;
 
     case ActionTypes.COMPOSER_ADD_DRAFT_IMAGE:
@@ -1915,11 +2153,11 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_ADD_DRAFTS_IMAGE:
-      state.drafts.forEach((draft) => addDraftImage(draft.id, action.image));
+      state.drafts.forEach(draft => addDraftImage(draft.id, action.image));
       break;
 
     case ActionTypes.COMPOSER_ADD_DRAFTS_GIF:
-      state.drafts.forEach((draft) => addDraftGif(draft.id, action.gif));
+      state.drafts.forEach(draft => addDraftGif(draft.id, action.gif));
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK:
@@ -1927,7 +2165,9 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_SOURCE_LINK:
-      state.drafts.forEach((draft) => updateDraftSourceLink(draft.id, action.url));
+      state.drafts.forEach(draft =>
+        updateDraftSourceLink(draft.id, action.url)
+      );
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK_DATA:
@@ -1939,7 +2179,9 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_LOCATION:
-      state.drafts.forEach((draft) => updateDraftLocation(draft.id, action.locationId, action.locationName));
+      state.drafts.forEach(draft =>
+        updateDraftLocation(draft.id, action.locationId, action.locationName)
+      );
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_LIST_PLACES:
@@ -1947,7 +2189,11 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_INSTAGRAM_DRAFT_THUMBNAIL:
-      updateInstagramDraftThumbnail(action.id, action.thumbOffset, action.thumbnail);
+      updateInstagramDraftThumbnail(
+        action.id,
+        action.thumbOffset,
+        action.thumbnail
+      );
       break;
 
     case ActionTypes.COMPOSER_DRAFT_IMAGE_ADDED:
@@ -1999,7 +2245,9 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_ADD_DRAFTS_RETWEET:
-      state.drafts.forEach((draft) => addDraftRetweet(draft.id, action.retweetData));
+      state.drafts.forEach(draft =>
+        addDraftRetweet(draft.id, action.retweetData)
+      );
       break;
 
     case ActionTypes.COMPOSER_TOGGLE_DRAFT_ATTACHMENT:
@@ -2007,7 +2255,9 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_ENABLE_DRAFTS_ATTACHMENT:
-      state.drafts.forEach((draft) => enableDraftAttachment(draft.id, action.type));
+      state.drafts.forEach(draft =>
+        enableDraftAttachment(draft.id, action.type)
+      );
       break;
 
     case ActionTypes.COMPOSER_ENABLE:
@@ -2063,7 +2313,11 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_DRAFT_FILE_UPLOAD_PROGRESS:
-      updateDraftFileUploadProgress(action.id, action.uploaderInstance, action.progress);
+      updateDraftFileUploadProgress(
+        action.id,
+        action.uploaderInstance,
+        action.progress
+      );
       break;
 
     case ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_IMAGE:
@@ -2073,16 +2327,31 @@ const onDispatchedPayload = (payload) => {
       break;
 
     case ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_LINK_THUMBNAIL:
-      addDraftUploadedLinkThumbnail(action.id, action.url, action.width, action.height);
+      addDraftUploadedLinkThumbnail(
+        action.id,
+        action.url,
+        action.width,
+        action.height
+      );
       updateDraftFileUploadProgress(action.id, action.uploaderInstance, null);
       break;
 
     case ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_VIDEO:
-      addDraftProcessingVideo(action.id, action.uploaderInstance, action.uploadId);
+      addDraftProcessingVideo(
+        action.id,
+        action.uploaderInstance,
+        action.uploadId
+      );
       break;
 
     case ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_GIF:
-      addDraftUploadedGif(action.id, action.url, action.stillGifUrl, action.width, action.height);
+      addDraftUploadedGif(
+        action.id,
+        action.url,
+        action.stillGifUrl,
+        action.width,
+        action.height
+      );
       updateDraftFileUploadProgress(action.id, action.uploaderInstance, null);
       break;
 
@@ -2127,11 +2396,13 @@ const onDispatchedPayload = (payload) => {
     case ActionTypes.COMPOSER_ADD_DRAFTS_AUTO_UPLOADED_VIDEO:
       video = getNewVideo(action.video);
       addSharedUploadedVideo(video);
-      state.drafts.forEach((draft) => addDraftVideo(draft.id, video));
+      state.drafts.forEach(draft => addDraftVideo(draft.id, video));
       break;
 
     case ActionTypes.COMPOSER_DRAFTS_PREVENT_AUTO_ATTACHING_URLS:
-      state.drafts.forEach((draft) => { draft.urls = action.urls; });
+      state.drafts.forEach(draft => {
+        draft.urls = action.urls;
+      });
       break;
 
     case ActionTypes.COMPOSER_FORCE_FOCUS:

@@ -43,8 +43,12 @@ import storyPreviewReducer from '@bufferapp/publish-story-preview/reducer';
 import storyGroupComposerReducer from '@bufferapp/publish-story-group-composer/reducer';
 import plansReducer from '@bufferapp/publish-plans/reducer';
 import creditCardFormReducer from '@bufferapp/publish-credit-card-form/reducer';
+import userReducer from '@bufferapp/publish-data-user/reducer';
+import profilesReducer from '@bufferapp/publish-data-profiles/reducer';
 
 export default {
+  user: userReducer,
+  publishProfiles: profilesReducer,
   form: formReducer,
   queue: queueReducer,
   sent: sentReducer,

@@ -7,10 +7,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './css/CharacterCount.css';
 
-const CharacterCount = (props) => {
+const CharacterCount = props => {
   const left = props.maxCount - props.count;
   const isAboveMax = left < 0;
-  const ariaLabel = props.type === 'hashtag' ? `${left} Hashtags left` : `${left} Characters left`;
+  const ariaLabel =
+    props.type === 'hashtag'
+      ? `${left} Hashtags left`
+      : `${left} Characters left`;
 
   const className = [
     isAboveMax ? styles.aboveMaxCharacterCount : null,
@@ -19,10 +22,7 @@ const CharacterCount = (props) => {
 
   return (
     <div>
-      <span
-        className={className}
-        aria-label={ariaLabel}
-      >
+      <span className={className} aria-label={ariaLabel}>
         {props.type === 'hashtag' ? `# Remaining: ${left}` : left}
       </span>
     </div>

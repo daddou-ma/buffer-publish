@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-} from '@bufferapp/ui';
+import { Button } from '@bufferapp/ui';
 import { EmptyState } from '@bufferapp/publish-shared-components';
 
 const pageStyle = {
@@ -22,10 +20,7 @@ const buttonStyle = {
   justifyContent: 'center',
 };
 
-const DefaultPage = ({
-  onConnectSocialAccountClick,
-  translations,
-}) => (
+const DefaultPage = ({ onConnectSocialAccountClick, translations }) => (
   <div style={pageStyle}>
     <div style={defaultPageStyle}>
       <EmptyState
@@ -36,7 +31,9 @@ const DefaultPage = ({
       />
       <div style={buttonStyle}>
         <Button
-          onClick={() => { onConnectSocialAccountClick(); }}
+          onClick={() => {
+            onConnectSocialAccountClick();
+          }}
           type="primary"
           label={translations.connectButton}
         />

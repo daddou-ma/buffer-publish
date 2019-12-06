@@ -3,7 +3,7 @@
   Returns stories array updated.
 */
 const updateStoryNote = ({ stories = [], order, note }) => {
-  const updatedStories = stories.map((story) => {
+  const updatedStories = stories.map(story => {
     if (story.order === order) {
       story.note = note;
     }

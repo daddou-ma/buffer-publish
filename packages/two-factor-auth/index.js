@@ -17,13 +17,14 @@ export default connect(
     updatePhoneNumber: state.twoFactorAuth.updatePhoneNumber,
   }),
   dispatch => ({
-    transition: (action, params) => dispatch(actions.transition(action, params)),
+    transition: (action, params) =>
+      dispatch(actions.transition(action, params)),
     setPhoneNumber: value => dispatch(actions.setPhoneNumber(value)),
     submitPhoneNumber: () => dispatch(actions.submitPhoneNumber()),
     setupApp: () => dispatch(actions.setupApp()),
     submitCode: code => dispatch(actions.submitCode(code)),
     handleRecoveryCodeSelect: () => dispatch(actions.recoveryCodeSelected()),
-  }),
+  })
 )(TwoFactorAuth);
 
 // export reducer, actions and action types

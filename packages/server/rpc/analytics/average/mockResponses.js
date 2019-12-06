@@ -417,7 +417,6 @@ export const PAST_PERIOD_DAILY_RESPONSE_TWITTER = {
   success: true,
 };
 
-
 // INSTAGRAM
 export const CURRENT_PERIOD_TOTALS_RESPONSE_INSTAGRAM = {
   response: {

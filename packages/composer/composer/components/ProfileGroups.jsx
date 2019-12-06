@@ -10,15 +10,18 @@ const onGroupButtonClick = () => {
   AppActionCreators.listenToChangeEventsForGroups();
 };
 
-const ProfileGroups = (props) => {
+const ProfileGroups = props => {
   const { groups, selectedProfilesIds, onNewPublish } = props;
 
   const hasGroups = groups.length > 0;
 
-  const profileGroupsWithAllProfilesSelected = groups.filter((group) =>
-    group.profileIds.every((profileId) => selectedProfilesIds.includes(profileId)));
+  const profileGroupsWithAllProfilesSelected = groups.filter(group =>
+    group.profileIds.every(profileId => selectedProfilesIds.includes(profileId))
+  );
 
-  const selectedProfileGroupsIds = profileGroupsWithAllProfilesSelected.map((group) => group.id);
+  const selectedProfileGroupsIds = profileGroupsWithAllProfilesSelected.map(
+    group => group.id
+  );
 
   const createEditGroupButtonClassName = [
     styles.createEditGroupButton,
@@ -28,17 +31,20 @@ const ProfileGroups = (props) => {
   const getGroupLink = () => {
     const groupPage = hasGroups ? '/app/edit_groups' : '/app/create_group';
 
-    return onNewPublish ? `${getBaseUrl()}${groupPage}?content_only=true` : groupPage;
+    return onNewPublish
+      ? `${getBaseUrl()}${groupPage}?content_only=true`
+      : groupPage;
   };
 
   return (
     <div className={styles.profileGroups}>
-      {groups.map((group) =>
+      {groups.map(group => (
         <ProfileGroupItem
           group={group}
           selectedProfileGroupsIds={selectedProfileGroupsIds}
           key={group.id}
-        />)}
+        />
+      ))}
       <A
         href={getGroupLink()}
         onClick={onGroupButtonClick}
@@ -62,6 +68,6 @@ ProfileGroups.propTypes = {
 
 ProfileGroups.defaultProps = {
   onNewPublish: false,
-}
+};
 
 export default ProfileGroups;

@@ -10,8 +10,7 @@ const getContainerStyle = hidden => ({
 });
 
 class TemporaryDashboardBanner extends React.Component {
-
-  constructor () {
+  constructor() {
     super();
 
     this.state = {
@@ -19,11 +18,11 @@ class TemporaryDashboardBanner extends React.Component {
     };
   }
 
-  getEnabledApplicationMode (tag, enabledApplicationModes) {
+  getEnabledApplicationMode(tag, enabledApplicationModes) {
     return enabledApplicationModes.filter(mode => mode.tag === tag)[0];
   }
 
-  render () {
+  render() {
     const { hidden } = this.state;
     const { enabledApplicationModes } = this.props;
 
@@ -31,8 +30,10 @@ class TemporaryDashboardBanner extends React.Component {
       return null;
     }
 
-    const temporaryDashboard =
-      this.getEnabledApplicationMode(dashboardBanner, enabledApplicationModes);
+    const temporaryDashboard = this.getEnabledApplicationMode(
+      dashboardBanner,
+      enabledApplicationModes
+    );
 
     if (!temporaryDashboard) {
       return null;
@@ -52,9 +53,7 @@ class TemporaryDashboardBanner extends React.Component {
 
 TemporaryDashboardBanner.propTypes = {
   enabledApplicationModes: PropTypes.arrayOf(
-    PropTypes.objectOf(
-      PropTypes.string,
-    ),
+    PropTypes.objectOf(PropTypes.string)
   ),
 };
 

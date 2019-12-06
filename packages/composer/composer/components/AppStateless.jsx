@@ -15,14 +15,22 @@ import { isOnExtension } from '../utils/extension';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 
 class AppStateless extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.selectedProfiles = this.selectedProfiles.bind(this);
-    this.shouldShowInlineSubprofileDropdown = this.shouldShowInlineSubprofileDropdown.bind(this);
-    this.firstSelectedProfileTimezone = this.firstSelectedProfileTimezone.bind(this);
+    this.shouldShowInlineSubprofileDropdown = this.shouldShowInlineSubprofileDropdown.bind(
+      this
+    );
+    this.firstSelectedProfileTimezone = this.firstSelectedProfileTimezone.bind(
+      this
+    );
     this.isSlotPickingAvailable = this.isSlotPickingAvailable.bind(this);
-    this.moreThanOneProfileSelected = this.moreThanOneProfileSelected.bind(this);
-    this.notificationContainerDynamicStyles = this.notificationContainerDynamicStyles.bind(this);
+    this.moreThanOneProfileSelected = this.moreThanOneProfileSelected.bind(
+      this
+    );
+    this.notificationContainerDynamicStyles = this.notificationContainerDynamicStyles.bind(
+      this
+    );
   }
 
   onCloseSidepanel() {
@@ -47,16 +55,17 @@ class AppStateless extends React.Component {
       container = styles.floatingNotificationsContainerOnExtension;
     }
 
-    return ({
+    return {
       container,
       notification: styles.floatingNotification,
-    });
+    };
   }
 
   appDynamicStyles(position) {
     const dynamicStyles = {};
     if (position !== null) {
-      const shouldOverrideVerticalPositioningOnly = typeof position.left === 'undefined';
+      const shouldOverrideVerticalPositioningOnly =
+        typeof position.left === 'undefined';
 
       if (shouldOverrideVerticalPositioningOnly) {
         dynamicStyles.margin = '0 auto';
@@ -86,22 +95,32 @@ class AppStateless extends React.Component {
     isComposerSidebarVisible,
     allSelectedProfiles,
   }) {
-    const otherNetworkSelected = omniboxEnabled && allSelectedProfiles.some(profile => profile.service.name !== 'instagram');
-    const shouldShowSidebar = !(otherNetworkSelected || expandedComposerId !== 'instagram');
+    const otherNetworkSelected =
+      omniboxEnabled &&
+      allSelectedProfiles.some(profile => profile.service.name !== 'instagram');
+    const shouldShowSidebar = !(
+      otherNetworkSelected || expandedComposerId !== 'instagram'
+    );
 
     return shouldShowSidebar ? isComposerSidebarVisible : false;
   }
 
   composerSidebarVisible({ appState, omniboxEnabled }) {
-    return appState.composerSidebarVisible && !omniboxEnabled && appState.expandedComposerId === 'instagram';
+    return (
+      appState.composerSidebarVisible &&
+      !omniboxEnabled &&
+      appState.expandedComposerId === 'instagram'
+    );
   }
 
   notificationContainerDynamicStyles({ metaData, onNewPublish, position }) {
     let dynamicStyles = {};
     const { appEnvironment } = metaData;
-    const isOnLegacyWeb = appEnvironment === AppEnvironments.WEB_DASHBOARD && !onNewPublish;
+    const isOnLegacyWeb =
+      appEnvironment === AppEnvironments.WEB_DASHBOARD && !onNewPublish;
     if (isOnLegacyWeb && position !== null) {
-      const shouldOverrideVerticalPositioningOnly = typeof position.left === 'undefined';
+      const shouldOverrideVerticalPositioningOnly =
+        typeof position.left === 'undefined';
 
       dynamicStyles = {
         ...this.appDynamicStyles(position),
@@ -119,7 +138,7 @@ class AppStateless extends React.Component {
     return !canSelectProfiles && this.selectedProfiles(profiles).length === 1;
   }
 
-  firstSelectedProfileTimezone (profiles) {
+  firstSelectedProfileTimezone(profiles) {
     const selected = this.selectedProfiles(profiles);
     const firstSelectedProfile = selected[0];
     return firstSelectedProfile ? firstSelectedProfile.timezone : null;
@@ -133,7 +152,7 @@ class AppStateless extends React.Component {
     return this.selectedProfiles(profiles).length > 1;
   }
 
-  render () {
+  render() {
     const {
       onAppWrapperClick,
       onAppClick,
@@ -167,7 +186,10 @@ class AppStateless extends React.Component {
       allSelectedProfiles,
     });
 
-    const sidebarVisible = this.composerSidebarVisible({ appState, omniboxEnabled });
+    const sidebarVisible = this.composerSidebarVisible({
+      appState,
+      omniboxEnabled,
+    });
 
     return (
       <div
@@ -211,30 +233,33 @@ class AppStateless extends React.Component {
             metadata={metaData}
           />
 
-          {canSelectProfiles
-            ? (
-              <ProfileSection
-                appState={appState}
-                profiles={profiles}
-                userData={userData}
-                visibleNotifications={visibleNotifications}
-              />
-            ) : null}
+          {canSelectProfiles ? (
+            <ProfileSection
+              appState={appState}
+              profiles={profiles}
+              userData={userData}
+              visibleNotifications={visibleNotifications}
+            />
+          ) : null}
 
           <ComposerSection
             isOmniboxEnabled={omniboxEnabled}
             appState={appState}
             profiles={profiles}
-            shouldShowInlineSubprofileDropdown={
-              this.shouldShowInlineSubprofileDropdown({ canSelectProfiles, profiles })
-            }
+            shouldShowInlineSubprofileDropdown={this.shouldShowInlineSubprofileDropdown(
+              { canSelectProfiles, profiles }
+            )}
             visibleNotifications={visibleNotifications}
             areAllDraftsSaved={areAllDraftsSaved}
             selectedProfiles={allSelectedProfiles}
-            shouldEnableFacebookAutocomplete={metaData.shouldEnableFacebookAutocomplete}
+            shouldEnableFacebookAutocomplete={
+              metaData.shouldEnableFacebookAutocomplete
+            }
             composerPosition={position}
             hasIGDirectFlip={userData.hasIGDirectFlip || false}
-            hasIGLocationTaggingFeature={userData.hasIGLocationTaggingFeature || false}
+            hasIGLocationTaggingFeature={
+              userData.hasIGLocationTaggingFeature || false
+            }
             hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
             hasAccessToUserTag={userData.hasAccessToUserTag || false}
             hasShopgridFlip={userData.hasShopgridFlip || false}
@@ -256,7 +281,9 @@ class AppStateless extends React.Component {
             isPinnedToSlot={isPinnedToSlot}
             availableSchedulesSlotsForDay={availableSchedulesSlotsForDay}
             visibleNotifications={visibleNotifications}
-            moreThanOneProfileSelected={this.moreThanOneProfileSelected(profiles)}
+            moreThanOneProfileSelected={this.moreThanOneProfileSelected(
+              profiles
+            )}
             areAllDraftsSaved={areAllDraftsSaved}
             whatPreventsSavingMessages={appState.whatPreventsSaving}
             isOmniboxEnabled={omniboxEnabled}
@@ -265,13 +292,15 @@ class AppStateless extends React.Component {
           />
           <ReactTooltip class={styles.tooltip} effect="solid" place="top" />
         </div>
-        <ComposerSidepanel isVisible={isSidepanelVisible} onClose={this.onCloseSidepanel}>
-          {isSidepanelVisible
-          && (
-          <HashtagGroupWrapper
-            viewMode="manageHashtag"
-            onInsertHashtagGroupClick={this.onInsertHashtagGroupClick}
-          />
+        <ComposerSidepanel
+          isVisible={isSidepanelVisible}
+          onClose={this.onCloseSidepanel}
+        >
+          {isSidepanelVisible && (
+            <HashtagGroupWrapper
+              viewMode="manageHashtag"
+              onInsertHashtagGroupClick={this.onInsertHashtagGroupClick}
+            />
           )}
         </ComposerSidepanel>
       </div>

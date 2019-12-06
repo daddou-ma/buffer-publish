@@ -11,8 +11,7 @@ describe('reducer', () => {
       type: 'INIT',
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle SHOW_STEAL_PROFILE_MODAL action type', () => {
@@ -23,8 +22,7 @@ describe('reducer', () => {
       type: modalsActionTypes.SHOW_STEAL_PROFILE_MODAL,
     };
     deepFreeze(action);
-    expect(reducer(undefined, action))
-      .toEqual(stateAfter);
+    expect(reducer(undefined, action)).toEqual(stateAfter);
   });
 
   it('should handle HIDE_STEAL_PROFILE_MODAL actionType', () => {
@@ -39,7 +37,6 @@ describe('reducer', () => {
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
-    expect(reducer(stateBefore, action))
-      .toEqual(stateAfter);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 });

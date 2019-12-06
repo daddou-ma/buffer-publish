@@ -19,12 +19,12 @@ module.exports = method(
       },
     })
       .then(result => JSON.parse(result))
-      .then((parsedResult) => {
+      .then(parsedResult => {
         const updates = parsedResult.data.map(storyGroupParser);
         const mappedUpdates = buildPostMap(updates);
         return {
           total: parsedResult.total,
           updates: mappedUpdates,
         };
-      }),
+      })
 );

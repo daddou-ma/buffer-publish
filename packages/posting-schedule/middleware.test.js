@@ -1,7 +1,5 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
-import {
-  actions as dataFetchActions,
-} from '@bufferapp/async-data-fetch';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 import middleware from './middleware';
 
@@ -10,8 +8,7 @@ describe('middleware', () => {
   const dispatch = jest.fn();
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('should trigger a notification if update schedule is successfully sent', () => {
@@ -23,16 +20,16 @@ describe('middleware', () => {
       },
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: 'FETCH',
         args: {
           profileId: 'abc',
           message: 'Awesome! Your schedule has been successfully saved.',
         },
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if update schedule fails', () => {
@@ -42,14 +39,14 @@ describe('middleware', () => {
       error: 'Update Schedule Failed',
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'error',
         message: 'Update Schedule Failed',
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if update timezone is successfully sent', () => {
@@ -61,16 +58,16 @@ describe('middleware', () => {
       },
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: 'FETCH',
         args: {
           profileId: 'abc',
           message: 'Awesome! Your schedule has been successfully saved.',
         },
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if update timezone fails', () => {
@@ -80,14 +77,14 @@ describe('middleware', () => {
       error: 'Update Timezone Failed',
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: notificationActionTypes.CREATE_NOTIFICATION,
         notificationType: 'error',
         message: 'Update Timezone Failed',
-      }));
+      })
+    );
   });
 
   it('should trigger a notification if update paused schedules is successfully sent', () => {
@@ -99,15 +96,15 @@ describe('middleware', () => {
       },
     });
     middleware({ dispatch })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(expect.objectContaining({
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      expect.objectContaining({
         type: 'FETCH',
         args: {
           profileId: 'abc',
           message: 'Awesome! Your schedule has been successfully saved.',
         },
-      }));
+      })
+    );
   });
 });

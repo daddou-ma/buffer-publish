@@ -1,7 +1,7 @@
 module.exports = posts => {
-  const postMap = {}
+  const postMap = {};
   posts.forEach(post => {
-    postMap[post.id] = post
-  })
-  return postMap
-}
+    postMap[post.id] = post;
+  });
+  return postMap;
+};

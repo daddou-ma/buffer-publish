@@ -15,9 +15,7 @@ const ProfilesDisconnectedModal = ({
     <Popover onOverlayClick={hideModal}>
       <Card>
         <div style={{ maxWidth: '470px', margin: '0 16px' }}>
-          <Text type="h3">
-            {translations.headline}
-          </Text>
+          <Text type="h3">{translations.headline}</Text>
           <Text type="p">{translations.body1}</Text>
           <Text type="p">{translations.body2}</Text>
           {disconnectedProfiles.map(p => (
@@ -50,7 +48,9 @@ const ProfilesDisconnectedModal = ({
                 onClick={() => reconnectProfile(p.id, p.service)}
                 size="small"
                 type="primary"
-                label={p.reconnecting ? translations.reconnecting : translations.cta}
+                label={
+                  p.reconnecting ? translations.reconnecting : translations.cta
+                }
               />
             </div>
           ))}
@@ -65,7 +65,7 @@ ProfilesDisconnectedModal.propTypes = {
   disconnectedProfiles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
   reconnectProfile: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,

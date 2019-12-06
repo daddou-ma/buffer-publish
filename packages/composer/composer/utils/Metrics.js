@@ -3,8 +3,9 @@
  */
 
 import { AppEnvironments } from '@bufferapp/publish-constants';
-import BufferMetrics, { AppEnvironments as BufferMetricsAppEnvironments }
-  from '@bufferapp/buffer-js-metrics';
+import BufferMetrics, {
+  AppEnvironments as BufferMetricsAppEnvironments,
+} from '@bufferapp/buffer-js-metrics';
 
 class Metrics extends BufferMetrics {
   static trackAction(scope, extraData, { appEnvironment, disableTelemetry }) {
@@ -15,7 +16,10 @@ class Metrics extends BufferMetrics {
     // Map app env constants with BufferMetrics's internal app env constants
     const appEnvironmentsMap = new Map([
       [AppEnvironments.EXTENSION, BufferMetricsAppEnvironments.EXTENSION],
-      [AppEnvironments.WEB_DASHBOARD, BufferMetricsAppEnvironments.WEB_DASHBOARD],
+      [
+        AppEnvironments.WEB_DASHBOARD,
+        BufferMetricsAppEnvironments.WEB_DASHBOARD,
+      ],
       [AppEnvironments.ONBOARDING, BufferMetricsAppEnvironments.ONBOARDING],
     ]);
 

@@ -2,7 +2,6 @@ import AppDispatcher from '../dispatcher';
 import { ActionTypes, NotificationTypes } from '../AppConstants';
 
 const NotificationActionCreators = {
-
   queueError: ({
     scope,
     errorCode,
@@ -75,7 +74,7 @@ const NotificationActionCreators = {
     });
   },
 
-  removeNotificationCookie: (id) => {
+  removeNotificationCookie: id => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.REMOVE_NOTIFICATION_COOKIE,
       id,
@@ -90,13 +89,12 @@ const NotificationActionCreators = {
     });
   },
 
-  removeComposerOmniboxNotices: (draftId) => {
+  removeComposerOmniboxNotices: draftId => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.REMOVE_COMPOSER_NOTICES,
       draftId,
     });
   },
-
 };
 
 export default NotificationActionCreators;

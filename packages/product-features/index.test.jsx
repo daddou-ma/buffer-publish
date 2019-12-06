@@ -1,11 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import FeatureLoader, {
-  reducer,
-  middleware,
-  WithFeatureLoader,
-} from './index';
+import FeatureLoader, { reducer, middleware, WithFeatureLoader } from './index';
 
 const storeFake = state => ({
   default: () => {},
@@ -31,22 +27,18 @@ describe('ProductFeatureComponent', () => {
         <FeatureLoader>
           <div>Hello</div>
         </FeatureLoader>
-      </Provider>,
+      </Provider>
     );
-    expect(wrapper.find(FeatureLoader).length)
-      .toBe(1);
+    expect(wrapper.find(FeatureLoader).length).toBe(1);
   });
 
   it('should export reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
   it('should export withFeatureLoader', () => {
-    expect(WithFeatureLoader)
-      .toBeDefined();
+    expect(WithFeatureLoader).toBeDefined();
   });
 });

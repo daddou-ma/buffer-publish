@@ -15,10 +15,7 @@ const ArrowButton = styled(Button)`
   }
 `;
 
-const Arrow = ({
-  isLeft,
-  onClick,
-}) => (
+const Arrow = ({ isLeft, onClick }) => (
   <ArrowButton
     type="secondary"
     icon={isLeft ? <ArrowLeft /> : <ArrowRight />}

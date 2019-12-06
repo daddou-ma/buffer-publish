@@ -8,25 +8,35 @@
  * stack, nor does it change the editor's SelectionState.
  */
 import { EditorState, Modifier, SelectionState } from '@bufferapp/draft-js';
-import { getUnicodeAwareLength, makeUnicodeAwareIndexUnaware } from '../../../../utils/StringUtils';
+import {
+  getUnicodeAwareLength,
+  makeUnicodeAwareIndexUnaware,
+} from '../../../../utils/StringUtils';
 
 const addImportedMention = (editorState, unicodeAwareIndices, mentionData) => {
   let contentState = editorState.getCurrentContent();
   const originalSelectionBefore = contentState.getSelectionBefore();
   const originalSelection = editorState.getSelection();
 
-  contentState = contentState.createEntity('IMPORTED_MENTION', 'IMMUTABLE', mentionData);
+  contentState = contentState.createEntity(
+    'IMPORTED_MENTION',
+    'IMMUTABLE',
+    mentionData
+  );
   const entityKey = contentState.getLastCreatedEntityKey();
 
   let entitiesBlockUnicodeAwareOffset = 0;
   let blockKey;
   const unicodeUnawareIndices = [];
 
-  const foundBlockForIndices = contentState.getBlockMap().some((contentBlock) => {
+  const foundBlockForIndices = contentState.getBlockMap().some(contentBlock => {
     const blockText = contentBlock.getText();
     const unicodeAwareBlockLength = getUnicodeAwareLength(blockText);
 
-    if (entitiesBlockUnicodeAwareOffset + unicodeAwareBlockLength < unicodeAwareIndices[0]) {
+    if (
+      entitiesBlockUnicodeAwareOffset + unicodeAwareBlockLength <
+      unicodeAwareIndices[0]
+    ) {
       entitiesBlockUnicodeAwareOffset += unicodeAwareBlockLength + 1;
       return false;
     }
@@ -34,8 +44,10 @@ const addImportedMention = (editorState, unicodeAwareIndices, mentionData) => {
     blockKey = contentBlock.getKey();
 
     unicodeUnawareIndices.push(
-      makeUnicodeAwareIndexUnaware(blockText, unicodeAwareIndices[0]) - entitiesBlockUnicodeAwareOffset,
-      makeUnicodeAwareIndexUnaware(blockText, unicodeAwareIndices[1]) - entitiesBlockUnicodeAwareOffset
+      makeUnicodeAwareIndexUnaware(blockText, unicodeAwareIndices[0]) -
+        entitiesBlockUnicodeAwareOffset,
+      makeUnicodeAwareIndexUnaware(blockText, unicodeAwareIndices[1]) -
+        entitiesBlockUnicodeAwareOffset
     );
 
     return true;
@@ -51,7 +63,11 @@ const addImportedMention = (editorState, unicodeAwareIndices, mentionData) => {
     focusOffset: unicodeUnawareIndices[1],
   });
 
-  let newContentState = Modifier.applyEntity(contentState, targetRange, entityKey);
+  let newContentState = Modifier.applyEntity(
+    contentState,
+    targetRange,
+    entityKey
+  );
 
   /**
    * Set selectionBefore/After back to what they were before they were changed

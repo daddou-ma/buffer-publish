@@ -1,4 +1,8 @@
-import { storyPropTypes, userPropTypes, translationsPropTypes } from './commonPropTypes';
+import {
+  storyPropTypes,
+  userPropTypes,
+  translationsPropTypes,
+} from './commonPropTypes';
 
 describe('commonPropTypes', () => {
   it('has storyPropTypes', () => {

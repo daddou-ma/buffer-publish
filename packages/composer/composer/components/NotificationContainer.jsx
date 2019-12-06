@@ -60,28 +60,40 @@ class NotificationContainer extends React.Component {
 
   render() {
     const {
-      scope, notScopes, type, notTypes, className, classNames,
-      showCloseIcon, children,
+      scope,
+      notScopes,
+      type,
+      notTypes,
+      className,
+      classNames,
+      showCloseIcon,
+      children,
     } = this.props;
 
     let { visibleNotifications: notificationsToDisplay } = this.props;
 
     if (scope !== null) {
-      notificationsToDisplay = notificationsToDisplay.filter((notif) => notif.scope === scope);
+      notificationsToDisplay = notificationsToDisplay.filter(
+        notif => notif.scope === scope
+      );
     }
 
     if (notScopes.length > 0) {
-      notificationsToDisplay =
-        notificationsToDisplay.filter((notif) => !notScopes.includes(notif.scope));
+      notificationsToDisplay = notificationsToDisplay.filter(
+        notif => !notScopes.includes(notif.scope)
+      );
     }
 
     if (type !== null) {
-      notificationsToDisplay = notificationsToDisplay.filter((notif) => notif.type === type);
+      notificationsToDisplay = notificationsToDisplay.filter(
+        notif => notif.type === type
+      );
     }
 
     if (notTypes.length > 0) {
-      notificationsToDisplay =
-        notificationsToDisplay.filter((notif) => !notTypes.includes(notif.type));
+      notificationsToDisplay = notificationsToDisplay.filter(
+        notif => !notTypes.includes(notif.type)
+      );
     }
 
     if (notificationsToDisplay.length === 0) return null;
@@ -109,8 +121,12 @@ class NotificationContainer extends React.Component {
     };
 
     return (
-      <div className={containerStyles} onClick={this.props.onClick} style={this.props.style}>
-        {notificationsToDisplay.map((notif) => (
+      <div
+        className={containerStyles}
+        onClick={this.props.onClick}
+        style={this.props.style}
+      >
+        {notificationsToDisplay.map(notif => (
           <Notification
             id={notif.id}
             type={notif.type}

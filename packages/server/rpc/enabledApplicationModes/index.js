@@ -6,8 +6,10 @@ const getEnabledApplicationModes = (result, comprehensive) => {
   if (!applicationModes) return [];
 
   const enabledApplicationModes = [];
-  Object.keys(applicationModes).forEach((mode) => {
-    const state = comprehensive ? applicationModes[mode].state : applicationModes[mode];
+  Object.keys(applicationModes).forEach(mode => {
+    const state = comprehensive
+      ? applicationModes[mode].state
+      : applicationModes[mode];
     if (state === 'enabled') {
       const modeObj = comprehensive ? applicationModes[mode] : mode;
       enabledApplicationModes.push(modeObj);
@@ -29,8 +31,11 @@ module.exports = method(
         comprehensive,
       },
     })
-    .then(result => JSON.parse(result))
-    .then(parsedResult => ({
-      enabledApplicationModes: getEnabledApplicationModes(parsedResult, comprehensive),
-    })),
+      .then(result => JSON.parse(result))
+      .then(parsedResult => ({
+        enabledApplicationModes: getEnabledApplicationModes(
+          parsedResult,
+          comprehensive
+        ),
+      }))
 );

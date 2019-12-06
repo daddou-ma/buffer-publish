@@ -125,7 +125,7 @@ const PostList = ({
   <React.Fragment>
     <Header listHeader={listHeader} isFirstItem={index === 0} />
     <List
-      items={posts.map((post) => (
+      items={posts.map(post => (
         <React.Fragment>
           <PostStyle
             id={`update-${post.id}`}

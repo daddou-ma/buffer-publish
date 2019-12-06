@@ -53,18 +53,16 @@ const GeneralSettings = ({
   return (
     <ErrorBoundary>
       <div>
-        {isInstagramProfile && !isInstagramBusiness &&
-          <InstagramDirectPosting
-            onDirectPostingClick={onDirectPostingClick}
-          />
-        }
-        {isInstagramProfile && isInstagramBusiness &&
+        {isInstagramProfile && !isInstagramBusiness && (
+          <InstagramDirectPosting onDirectPostingClick={onDirectPostingClick} />
+        )}
+        {isInstagramProfile && isInstagramBusiness && (
           <InstagramReminders
             remindersAreEnabled={remindersAreEnabled}
             onToggleRemindersClick={onToggleRemindersClick}
             isManager={isManager}
           />
-        }
+        )}
         <LinkShortening
           isManager={isManager}
           onConnectBitlyURLClick={onConnectBitlyURLClick}
@@ -93,7 +91,7 @@ const GeneralSettings = ({
           onChangeUtmMedium={onChangeUtmMedium}
           onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
         />
-        {isManager &&
+        {isManager && (
           <ShuffleQueue
             onShuffleQueueClick={onShuffleQueueClick}
             onConfirmShuffleQueueClick={onConfirmShuffleQueueClick}
@@ -104,7 +102,7 @@ const GeneralSettings = ({
             avatarUrl={avatarUrl}
             loading={loadingShuffle}
           />
-        }
+        )}
       </div>
     </ErrorBoundary>
   );
@@ -144,7 +142,7 @@ GeneralSettings.propTypes = {
       selected: PropTypes.bool,
       tracking: PropTypes.bool,
       login: PropTypes.string,
-    }),
+    })
   ),
   onLinkShortenerOptionSelect: PropTypes.func,
   loadingLinkShorteners: PropTypes.bool,

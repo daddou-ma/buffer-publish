@@ -34,7 +34,7 @@ const trackingShareTypeMap = new Map([
   [QueueingTypes.CUSTOM_DRAFT, 'draft_custom'],
 ]);
 
-const formatShareDate = (shareDate) => {
+const formatShareDate = shareDate => {
   if (shareDate) {
     const jsDate = new Date(shareDate * 1000);
     return jsDate ? jsDate.toISOString() : null;

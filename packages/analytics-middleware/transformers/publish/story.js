@@ -13,13 +13,13 @@ const notify = (...params) => {
  * @param props {Object} Data you want to filter down to not null properties
  * @returns {Object} mapped object with null props filtered out
  */
-const removeNullObjectKeys = (data) => {
+const removeNullObjectKeys = data => {
   const segmentData = {};
 
   if (data) {
     Object.keys(data)
       .filter(key => data[key] != null)
-      .forEach((key) => {
+      .forEach(key => {
         segmentData[key] = data[key];
       });
   }
@@ -113,7 +113,9 @@ export const nonConfirmingImageUploaded = ({
   imageAspectRatio = null,
 }) => {
   if (clientId === null && clientName === null) {
-    notify('StoryNonConfirmingImageUploaded - clientName or clientId must be supplied');
+    notify(
+      'StoryNonConfirmingImageUploaded - clientName or clientId must be supplied'
+    );
   }
   const nonConformingImageSegment = {
     storyGroupId,

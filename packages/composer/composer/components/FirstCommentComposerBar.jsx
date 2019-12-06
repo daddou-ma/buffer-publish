@@ -11,7 +11,7 @@ import CharacterCount from './CharacterCount';
 
 const CommentCharacterCount = styled(CharacterCount)`
   display: inline-block;
-  background-color: #E6EBEF;
+  background-color: #e6ebef;
   border-radius: 3px;
   padding: 3px 3px;
   line-height: 12px;

@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text, Link, CircleInstagramIcon,
-} from '@bufferapp/components';
+import { Text, Link, CircleInstagramIcon } from '@bufferapp/components';
 
-import {
-  borderRadius,
-  borderWidth,
-} from '@bufferapp/components/style/border';
+import { borderRadius, borderWidth } from '@bufferapp/components/style/border';
 
 import {
   curiousBlueUltraLight,
@@ -33,10 +28,8 @@ const bannerWrapper = {
   alignItems: 'center',
 };
 
-const InstagramDirectPostingBanner = ({
-  onDirectPostingClick,
-}) =>
-  (<div style={bannerWrapper}>
+const InstagramDirectPostingBanner = ({ onDirectPostingClick }) => (
+  <div style={bannerWrapper}>
     <CircleInstagramIcon color={'instagram'} />
     <span style={textWrapperStyle}>
       <Text color={'black'} size={'small'}>
@@ -48,7 +41,8 @@ const InstagramDirectPostingBanner = ({
         </span>
       </Text>
     </span>
-  </div>);
+  </div>
+);
 
 InstagramDirectPostingBanner.propTypes = {
   onDirectPostingClick: PropTypes.func.isRequired,

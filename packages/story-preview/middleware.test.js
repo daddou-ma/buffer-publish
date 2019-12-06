@@ -6,8 +6,7 @@ describe('middleware', () => {
   const next = jest.fn();
 
   it('exports middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 
   it('fetches updateStoryGroup when SAVE_NOTE', () => {
@@ -21,10 +20,9 @@ describe('middleware', () => {
       note: 'Note1',
     };
     middleware(store)(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(store.dispatch)
-      .toBeCalledWith(dataFetchActions.fetch({
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
         name: 'updateStoryGroup',
         args: {
           profileId: null,
@@ -32,6 +30,7 @@ describe('middleware', () => {
           scheduledAt: null,
           stories: [],
         },
-      }));
+      })
+    );
   });
 });

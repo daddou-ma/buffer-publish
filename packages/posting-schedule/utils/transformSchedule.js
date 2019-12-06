@@ -12,7 +12,7 @@ const transformForTable = (derivedSchedule, pausedDays) => {
   const scheduleTable = [];
   const orderOfDays = Object.keys(derivedSchedule);
 
-  orderOfDays.forEach((key) => {
+  orderOfDays.forEach(key => {
     const splitTimes = [];
 
     // check derivedSchedule key name and provide full day name instead
@@ -20,7 +20,7 @@ const transformForTable = (derivedSchedule, pausedDays) => {
 
     for (let i = 0; i < derivedSchedule[key].length; i += 1) {
       const splitHourAndMinutes = derivedSchedule[key][i].split(':');
-      const removeZero = (number) => {
+      const removeZero = number => {
         if (number < 10) {
           return number.substring(1);
         }
@@ -49,7 +49,7 @@ const mergeSchedules = (profileSchedules, pausedSchedules) => {
   const mergedSchedules = [];
   profileSchedules.forEach((schedule, index) => {
     mergedSchedules.push({ ...schedule });
-    pausedSchedules.forEach((pausedSchedule) => {
+    pausedSchedules.forEach(pausedSchedule => {
       if (pausedSchedule.days[0] === schedule.days[0]) {
         mergedSchedules[index].times = pausedSchedule.times;
       }
@@ -129,7 +129,9 @@ const transformSchedules = (profileSchedules, pausedSchedules = []) => {
   for (let x = 0; x < allScheduleTimesOnSun.length; x += 1) {
     schedule.sun.push(...allScheduleTimesOnSun[x]);
   }
-  const pausedDays = pausedSchedules.map(pausedSchedule => pausedSchedule.days[0]);
+  const pausedDays = pausedSchedules.map(
+    pausedSchedule => pausedSchedule.days[0]
+  );
   return transformForTable(schedule, pausedDays);
 };
 

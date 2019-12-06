@@ -1,7 +1,7 @@
 /* globals Bugsnag */
 
 const getElRefOffset = (el, dir = 'top', ref = document.body) => {
-  const offsetPosMethodName = (dir !== 'left') ? 'offsetTop' : 'offsetLeft';
+  const offsetPosMethodName = dir !== 'left' ? 'offsetTop' : 'offsetLeft';
   let offset = el[offsetPosMethodName];
 
   // eslint-disable-next-line no-cond-assign
@@ -12,29 +12,29 @@ const getElRefOffset = (el, dir = 'top', ref = document.body) => {
   return offset;
 };
 
-const getStillDataUriFromGif = (gifUrl) => new Promise((resolve, reject) => {
-  const image = new Image();
+const getStillDataUriFromGif = gifUrl =>
+  new Promise((resolve, reject) => {
+    const image = new Image();
 
+    const getStillDataUri = () => {
+      const canvas = document.createElement('canvas');
 
-  const getStillDataUri = () => {
-    const canvas = document.createElement('canvas');
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      canvas.getContext('2d').drawImage(image, 0, 0);
 
-    canvas.width = image.naturalWidth;
-    canvas.height = image.naturalHeight;
-    canvas.getContext('2d').drawImage(image, 0, 0);
+      const stillDataUri = canvas.toDataURL('image/png');
+      resolve(stillDataUri);
+    };
 
-    const stillDataUri = canvas.toDataURL('image/png');
-    resolve(stillDataUri);
-  };
-
-  image.addEventListener('load', getStillDataUri);
-  image.addEventListener('error', () => {
-    // TODO: Monitor still gif creation error events in Datadog
-    reject();
+    image.addEventListener('load', getStillDataUri);
+    image.addEventListener('error', () => {
+      // TODO: Monitor still gif creation error events in Datadog
+      reject();
+    });
+    image.crossOrigin = 'anonymous';
+    image.src = gifUrl;
   });
-  image.crossOrigin = 'anonymous';
-  image.src = gifUrl;
-});
 
 /**
  * Note: reused from other project, will be good the refactor the logic and make it clearer
@@ -56,8 +56,8 @@ const getStillDataUriFromGif = (gifUrl) => new Promise((resolve, reject) => {
  */
 const scrollIntoView = (() => {
   const scrollElIntoView = function(ref, axis, elOffsets, elSize, padding) {
-    const scrollPosPropName = (axis === 'vertical') ? 'scrollTop' : 'scrollLeft';
-    const refSize = (axis === 'vertical') ? ref.offsetHeight : ref.offsetWidth;
+    const scrollPosPropName = axis === 'vertical' ? 'scrollTop' : 'scrollLeft';
+    const refSize = axis === 'vertical' ? ref.offsetHeight : ref.offsetWidth;
     const elOuterSize = elSize + padding * 2;
 
     // Too large to fit in the ref? Position it so as to fill the ref
@@ -84,22 +84,34 @@ const scrollIntoView = (() => {
 
   return function(param) {
     param.padding = param.padding || 0;
-    param.axis = (param.axis === 'horizontal') ? 'horizontal' : 'vertical';
+    param.axis = param.axis === 'horizontal' ? 'horizontal' : 'vertical';
 
     let firstOffset;
 
     if (param.el) {
-      param.elSize = (param.axis === 'vertical') ? param.el.offsetHeight : param.el.offsetWidth;
+      param.elSize =
+        param.axis === 'vertical'
+          ? param.el.offsetHeight
+          : param.el.offsetWidth;
 
-      firstOffset = getElRefOffset(param.el, (param.axis === 'vertical')
-                    ? 'top' : 'left', param.ref);
+      firstOffset = getElRefOffset(
+        param.el,
+        param.axis === 'vertical' ? 'top' : 'left',
+        param.ref
+      );
       param.elOffsets = [firstOffset, firstOffset + param.elSize];
     } else {
       // If param.el not set, param.elOffsets shoud be set instead
       param.elSize = param.elOffsets[1] - param.elOffsets[0];
     }
 
-    scrollElIntoView(param.ref, param.axis, param.elOffsets, param.elSize, param.padding);
+    scrollElIntoView(
+      param.ref,
+      param.axis,
+      param.elOffsets,
+      param.elSize,
+      param.padding
+    );
   };
 })();
 
@@ -126,10 +138,10 @@ const addBlobIfNeeded = () => {
 const resizeImageIfNeeded = (maxSize, sizeObj) => {
   let { width, height } = sizeObj;
   if (maxSize) {
-    if ((width > height) && (width > maxSize)) {
+    if (width > height && width > maxSize) {
       height *= maxSize / width;
       width = maxSize;
-    } else if ((height > width) && (height > maxSize)) {
+    } else if (height > width && height > maxSize) {
       width *= maxSize / height;
       height = maxSize;
     }
@@ -137,18 +149,13 @@ const resizeImageIfNeeded = (maxSize, sizeObj) => {
   return { width, height };
 };
 
-const isSafari = () => (
-  /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
-);
+const isSafari = () =>
+  /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-const isEdge = () => (
-  window.navigator.userAgent.indexOf('Edge') > -1
-);
+const isEdge = () => window.navigator.userAgent.indexOf('Edge') > -1;
 
 // Internet Explorer 6-11
-const isIE = () => (
-  /*@cc_on!@*/false || !!document.documentMode
-);
+const isIE = () => /*@cc_on!@*/ false || !!document.documentMode;
 
 export {
   scrollIntoView,

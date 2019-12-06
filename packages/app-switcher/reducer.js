@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         // User is not in phased rollout - so they can switch
-        showGoBackToClassic: !action.result.hasNewPublish,
+        showGoBackToClassic: false,
         user: {
           ...action.result,
           loading: false,
@@ -72,5 +72,8 @@ export const actions = {
     source,
   }),
   sendFeedback: ({ feedback, source }) =>
-    dataFetchActions.fetch({ name: 'sendFeedback', args: { body: feedback, source } }),
+    dataFetchActions.fetch({
+      name: 'sendFeedback',
+      args: { body: feedback, source },
+    }),
 };

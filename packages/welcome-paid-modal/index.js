@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
-
 import WelcomePaidModal from './components/WelcomePaidModal';
-
 
 export default connect(
   state => ({
@@ -11,5 +9,5 @@ export default connect(
   }),
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideWelcomePaidModal()),
-  }),
+  })
 )(WelcomePaidModal);

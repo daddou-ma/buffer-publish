@@ -43,27 +43,26 @@ const store = storeFake({
 });
 
 const UpgradeModalDecorator = storyFn => (
-  <Provider store={store}>
-    {storyFn()}
-  </Provider>
+  <Provider store={store}>{storyFn()}</Provider>
 );
 
 /* eslint-disable react/prop-types */
-class _TestContextContainer extends Component { // eslint-disable-line
+class _TestContextContainer extends Component {
+  // eslint-disable-line
   render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
+    return <div>{this.props.children}</div>;
   }
 }
-const TestContextContainer = DragDropContext(TestBackend)(_TestContextContainer);
+const TestContextContainer = DragDropContext(TestBackend)(
+  _TestContextContainer
+);
 
 storiesOf('QueuedPosts', module)
   .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
-  .addDecorator(getStory => <TestContextContainer>{getStory()}</TestContextContainer>)
+  .addDecorator(getStory => (
+    <TestContextContainer>{getStory()}</TestContextContainer>
+  ))
   .add('default', () => (
     <QueuedPosts
       total={10}

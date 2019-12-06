@@ -5,9 +5,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './css/TooltipList.css';
 
-const TooltipList = (props) => {
-  const tooltipListClassName = props.messages.length === 1 ?
-    styles.tooltipSingleItemList : styles.tooltipList;
+const TooltipList = props => {
+  const tooltipListClassName =
+    props.messages.length === 1
+      ? styles.tooltipSingleItemList
+      : styles.tooltipList;
 
   return (
     <ul className={tooltipListClassName}>

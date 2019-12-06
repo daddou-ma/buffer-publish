@@ -26,14 +26,18 @@ import styles from './css/DateTimeSlotPicker.css';
 class DateTimeSlotPicker extends React.Component {
   getState() {
     const { timezone, initialDateTime } = this.props;
-    const todayDate = (new Date()).setSeconds(0); // Seconds must be 0 for precise scheduling
+    const todayDate = new Date().setSeconds(0); // Seconds must be 0 for precise scheduling
     const isTimezoneSet = !!timezone;
 
     // Determine initial date and time for the picker
-    const today = isTimezoneSet ? moment.tz(todayDate, timezone) : moment(todayDate);
+    const today = isTimezoneSet
+      ? moment.tz(todayDate, timezone)
+      : moment(todayDate);
     const selectedDateTime = initialDateTime || today.clone().add(3, 'hours');
-    const shouldDisplaySlotPicker =
-      this.shouldDisplaySlotPickerOnInit(selectedDateTime, this.props);
+    const shouldDisplaySlotPicker = this.shouldDisplaySlotPickerOnInit(
+      selectedDateTime,
+      this.props
+    );
 
     return {
       today,
@@ -49,11 +53,13 @@ class DateTimeSlotPicker extends React.Component {
     const hasAvailableSchedulesSlotsInfoForDay =
       typeof availableSchedulesSlotsForDay !== 'undefined';
 
-    if (!isSlotPickingAvailable || !hasAvailableSchedulesSlotsInfoForDay) return undefined;
+    if (!isSlotPickingAvailable || !hasAvailableSchedulesSlotsInfoForDay)
+      return undefined;
 
     const selectedTimestamp = selectedDateTime.unix();
-    const isAnySlotSelected =
-      availableSchedulesSlotsForDay.some((slot) => slot.timestamp === selectedTimestamp);
+    const isAnySlotSelected = availableSchedulesSlotsForDay.some(
+      slot => slot.timestamp === selectedTimestamp
+    );
 
     return isAnySlotSelected && props.isPinnedToSlot;
   };
@@ -69,10 +75,12 @@ class DateTimeSlotPicker extends React.Component {
     weekStartsMonday: PropTypes.bool.isRequired,
     availableSchedulesSlotsForDay: PropTypes.oneOfType([
       PropTypes.bool,
-      PropTypes.arrayOf(PropTypes.shape({
-        isSlotFree: PropTypes.bool.isRequired,
-        timestamp: PropTypes.number.isRequired,
-      })),
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          isSlotFree: PropTypes.bool.isRequired,
+          timestamp: PropTypes.number.isRequired,
+        })
+      ),
     ]),
     isPinnedToSlot: PropTypes.bool,
     metaData: PropTypes.object,
@@ -95,11 +103,14 @@ class DateTimeSlotPicker extends React.Component {
 
   state = this.getState();
 
-  updateDate = (date) => {
+  updateDate = date => {
     const year = date.getFullYear();
     const month = date.getMonth();
     const day = date.getDate();
-    const newSelectedDateTime = this.state.selectedDateTime.year(year).month(month).date(day);
+    const newSelectedDateTime = this.state.selectedDateTime
+      .year(year)
+      .month(month)
+      .date(day);
     const isPinnedToSlot = this.state.shouldDisplaySlotPicker;
 
     this.setState({
@@ -109,10 +120,12 @@ class DateTimeSlotPicker extends React.Component {
     this.props.onChange(newSelectedDateTime, isPinnedToSlot);
   };
 
-  updateTime = (time) => {
+  updateTime = time => {
     const hours = time.hours();
     const minutes = time.minutes();
-    const newSelectedDateTime = this.state.selectedDateTime.hour(hours).minute(minutes);
+    const newSelectedDateTime = this.state.selectedDateTime
+      .hour(hours)
+      .minute(minutes);
     const isPinnedToSlot = this.state.shouldDisplaySlotPicker;
 
     this.setState({
@@ -123,16 +136,20 @@ class DateTimeSlotPicker extends React.Component {
   };
 
   // Set to UTC, then negate the original offset
-  stripOffsetFromMoment = (m) => m.clone().utc().add(m.utcOffset(), 'm');
+  stripOffsetFromMoment = m =>
+    m
+      .clone()
+      .utc()
+      .add(m.utcOffset(), 'm');
 
   onClick = this.props.onClick; // eslint-disable-line react/sort-comp
 
-  onDayClick = (day) => {
+  onDayClick = day => {
     this.updateDate(day);
   };
 
   onTimePickerChange = this.updateTime;
-  onSlotPickerChange = (time) => {
+  onSlotPickerChange = time => {
     this.updateTime(time);
     this.setState({ emptyByDefault: false });
   };
@@ -143,16 +160,21 @@ class DateTimeSlotPicker extends React.Component {
 
     // If a slot is available for the current date time, update store to
     // transition from custom time to pinned update mode
-    const { isSlotPickingAvailable, availableSchedulesSlotsForDay } = this.props;
+    const {
+      isSlotPickingAvailable,
+      availableSchedulesSlotsForDay,
+    } = this.props;
 
     const hasAvailableSchedulesSlotsInfoForDay =
       typeof availableSchedulesSlotsForDay !== 'undefined';
 
-    if (!isSlotPickingAvailable || !hasAvailableSchedulesSlotsInfoForDay) return;
+    if (!isSlotPickingAvailable || !hasAvailableSchedulesSlotsInfoForDay)
+      return;
 
     const selectedTimestamp = this.state.selectedDateTime.unix();
-    const hasSlotAvailableForSelectedDateTime =
-      availableSchedulesSlotsForDay.some((slot) => slot.timestamp === selectedTimestamp);
+    const hasSlotAvailableForSelectedDateTime = availableSchedulesSlotsForDay.some(
+      slot => slot.timestamp === selectedTimestamp
+    );
 
     const isPinnedToSlot = hasSlotAvailableForSelectedDateTime;
     this.props.onChange(this.state.selectedDateTime, isPinnedToSlot);
@@ -178,7 +200,10 @@ class DateTimeSlotPicker extends React.Component {
     const { today, selectedDateTime, shouldDisplaySlotPicker } = this.state;
 
     // Update selectedDateTime with the new timezone if it changes
-    if (this.props.timezone !== nextProps.timezone && nextProps.timezone !== null) {
+    if (
+      this.props.timezone !== nextProps.timezone &&
+      nextProps.timezone !== null
+    ) {
       this.setState({
         today: today.tz(nextProps.timezone),
         selectedDateTime: selectedDateTime.tz(nextProps.timezone),
@@ -196,18 +221,21 @@ class DateTimeSlotPicker extends React.Component {
       typeof this.props.availableSchedulesSlotsForDay !== 'undefined';
     const willHaveAvailableSchedulesSlotsInfoForDay =
       typeof nextProps.availableSchedulesSlotsForDay !== 'undefined';
-    const didInitSlotPickerDisplayState = typeof shouldDisplaySlotPicker !== 'undefined';
+    const didInitSlotPickerDisplayState =
+      typeof shouldDisplaySlotPicker !== 'undefined';
 
-    const shouldInitSlotPickerDisplayInfo = (
+    const shouldInitSlotPickerDisplayInfo =
       willSlotPickingBeAvailable &&
       !hasAvailableSchedulesSlotsInfoForDay &&
       willHaveAvailableSchedulesSlotsInfoForDay &&
-      !didInitSlotPickerDisplayState
-    );
+      !didInitSlotPickerDisplayState;
 
     if (shouldInitSlotPickerDisplayInfo) {
       this.setState({
-        shouldDisplaySlotPicker: this.shouldDisplaySlotPickerOnInit(selectedDateTime, nextProps),
+        shouldDisplaySlotPicker: this.shouldDisplaySlotPickerOnInit(
+          selectedDateTime,
+          nextProps
+        ),
       });
     }
 
@@ -220,10 +248,20 @@ class DateTimeSlotPicker extends React.Component {
   }
 
   render() {
-    const { today, selectedDateTime, shouldDisplaySlotPicker, emptyByDefault } = this.state;
     const {
-      metaData, timezone, shouldUse24hTime, submitButtonCopy, isSlotPickingAvailable,
-      availableSchedulesSlotsForDay, doSelectedProfilesHaveSlots,
+      today,
+      selectedDateTime,
+      shouldDisplaySlotPicker,
+      emptyByDefault,
+    } = this.state;
+    const {
+      metaData,
+      timezone,
+      shouldUse24hTime,
+      submitButtonCopy,
+      isSlotPickingAvailable,
+      availableSchedulesSlotsForDay,
+      doSelectedProfilesHaveSlots,
     } = this.props;
 
     const hasAvailableSchedulesSlotsInfoForDay =
@@ -231,8 +269,10 @@ class DateTimeSlotPicker extends React.Component {
     const shouldDisplayTimePicker = !shouldDisplaySlotPicker;
 
     const selectedDays = {
-      selected: (day) => {
-        const selectedDateTimeNoOffset = this.stripOffsetFromMoment(selectedDateTime);
+      selected: day => {
+        const selectedDateTimeNoOffset = this.stripOffsetFromMoment(
+          selectedDateTime
+        );
         const dayNoOffset = this.stripOffsetFromMoment(moment(day));
         return selectedDateTimeNoOffset.isSame(dayNoOffset, 'day');
       },
@@ -240,13 +280,13 @@ class DateTimeSlotPicker extends React.Component {
 
     const shouldDisplayTimezone = timezone !== null;
     const isTimeInFuture = selectedDateTime.isAfter();
-    const formattedTimezone =
-      shouldDisplayTimezone ? timezone.replace('/', ': ').replace('_', ' ') : null;
+    const formattedTimezone = shouldDisplayTimezone
+      ? timezone.replace('/', ': ').replace('_', ' ')
+      : null;
     const firstDayOfWeek = this.props.weekStartsMonday ? 1 : 0;
 
     return (
       <div onClick={this.onClick} className={styles.dateTimePicker}>
-
         <InputDate
           initialMonth={new Date()}
           onDayClick={this.onDayClick}
@@ -254,7 +294,7 @@ class DateTimeSlotPicker extends React.Component {
           firstDayOfWeek={firstDayOfWeek}
         />
 
-        {shouldDisplayTimePicker &&
+        {shouldDisplayTimePicker && (
           <TimePicker
             shouldUse24hTime={shouldUse24hTime}
             time={selectedDateTime}
@@ -262,36 +302,40 @@ class DateTimeSlotPicker extends React.Component {
             onChange={this.onTimePickerChange}
             className={styles.timePicker}
           />
-        }
+        )}
 
-        {shouldDisplayTimePicker && isSlotPickingAvailable && doSelectedProfilesHaveSlots &&
-          <Button
-            type="secondary"
-            size="small"
-            label="Switch to schedule slots"
-            className={styles.pickerSwitchButton}
-            onClick={this.onSwitchToSlotPickerClick}
-          />
-        }
+        {shouldDisplayTimePicker &&
+          isSlotPickingAvailable &&
+          doSelectedProfilesHaveSlots && (
+            <Button
+              type="secondary"
+              size="small"
+              label="Switch to schedule slots"
+              className={styles.pickerSwitchButton}
+              onClick={this.onSwitchToSlotPickerClick}
+            />
+          )}
 
-        {shouldDisplaySlotPicker && isSlotPickingAvailable &&
-        (hasAvailableSchedulesSlotsInfoForDay ?
-          <SlotPicker
-            metaData={metaData}
-            shouldUse24hTime={shouldUse24hTime}
-            timezone={timezone}
-            slots={availableSchedulesSlotsForDay}
-            slot={selectedDateTime}
-            onChange={this.onSlotPickerChange}
-            className={styles.slotPicker}
-            emptyByDefault={emptyByDefault}
-          /> :
-          <Select disabled className={styles.slotPicker} value="">
-            <option value="">Loading slots…</option>
-          </Select>)
-        }
+        {shouldDisplaySlotPicker &&
+          isSlotPickingAvailable &&
+          (hasAvailableSchedulesSlotsInfoForDay ? (
+            <SlotPicker
+              metaData={metaData}
+              shouldUse24hTime={shouldUse24hTime}
+              timezone={timezone}
+              slots={availableSchedulesSlotsForDay}
+              slot={selectedDateTime}
+              onChange={this.onSlotPickerChange}
+              className={styles.slotPicker}
+              emptyByDefault={emptyByDefault}
+            />
+          ) : (
+            <Select disabled className={styles.slotPicker} value="">
+              <option value="">Loading slots…</option>
+            </Select>
+          ))}
 
-        {shouldDisplaySlotPicker && isSlotPickingAvailable &&
+        {shouldDisplaySlotPicker && isSlotPickingAvailable && (
           <Button
             type="secondary"
             size="small"
@@ -299,7 +343,7 @@ class DateTimeSlotPicker extends React.Component {
             className={styles.pickerSwitchButton}
             onClick={this.onSwitchToTimePickerClick}
           />
-        }
+        )}
 
         <Button
           type="primary"
@@ -310,9 +354,9 @@ class DateTimeSlotPicker extends React.Component {
           disabled={!isTimeInFuture}
         />
 
-        {shouldDisplayTimezone &&
+        {shouldDisplayTimezone && (
           <div className={styles.timezone}>{formattedTimezone}</div>
-        }
+        )}
       </div>
     );
   }

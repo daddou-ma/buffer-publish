@@ -1,12 +1,31 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = (function() {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ('value' in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function(Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+})();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError('Cannot call a class as a function');
+  }
+}
 
 /**
  * Small utility to drag elements around.
@@ -19,13 +38,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @param {function} options.onDragEnd
  */
 
-var DragMe = function () {
+var DragMe = (function() {
   function DragMe(el, options) {
     var _this = this;
 
     _classCallCheck(this, DragMe);
 
-    this.onMousedown = function (e) {
+    this.onMousedown = function(e) {
       if (_this.options.cancel && _this.shouldCancel(e.target)) {
         return;
       }
@@ -46,7 +65,7 @@ var DragMe = function () {
       if (_this.options.onDragStart) _this.didExecuteOnDragStart = false;
     };
 
-    this.onMove = function (e) {
+    this.onMove = function(e) {
       var x = _this.origX - _this.dragStartX + e.pageX;
       var y = _this.origY - _this.dragStartY + e.pageY;
 
@@ -59,20 +78,21 @@ var DragMe = function () {
       }
     };
 
-    this.release = function () {
+    this.release = function() {
       _this.el.classList.remove('ui-dragging');
 
       _this.body.removeEventListener('mousemove', _this.onMove);
       _this.body.removeEventListener('mouseup', _this.release);
       _this.body.removeEventListener('mouseleave', _this.release);
 
-      if (_this.options.onDragEnd && _this.didExecuteOnDragStart) _this.options.onDragEnd();
+      if (_this.options.onDragEnd && _this.didExecuteOnDragStart)
+        _this.options.onDragEnd();
     };
 
     var defaults = {
       cancel: null,
       onDragStart: null,
-      onDragEnd: null
+      onDragEnd: null,
     };
 
     options = options || {};
@@ -84,33 +104,43 @@ var DragMe = function () {
 
     this.setup();
 
-    ['mozTransform', 'msTransform', 'oTransform', 'webkitTransform', 'transform'].forEach(function (prop) {
+    [
+      'mozTransform',
+      'msTransform',
+      'oTransform',
+      'webkitTransform',
+      'transform',
+    ].forEach(function(prop) {
       if (prop in document.documentElement.style) {
         _this.transform = prop;
       }
     });
   }
 
-  _createClass(DragMe, [{
-    key: 'shouldCancel',
-    value: function shouldCancel(target) {
-      return target.closest(this.options.cancel);
-    }
-  }, {
-    key: 'setup',
-    value: function setup() {
-      this.el.classList.add('ui-draggable');
-      this.el.addEventListener('mousedown', this.onMousedown);
-    }
-  }, {
-    key: 'cleanup',
-    value: function cleanup() {
-      this.el.classList.remove('ui-draggable');
-      this.el.removeEventListener('mousedown', this.onMousedown);
-    }
-  }]);
+  _createClass(DragMe, [
+    {
+      key: 'shouldCancel',
+      value: function shouldCancel(target) {
+        return target.closest(this.options.cancel);
+      },
+    },
+    {
+      key: 'setup',
+      value: function setup() {
+        this.el.classList.add('ui-draggable');
+        this.el.addEventListener('mousedown', this.onMousedown);
+      },
+    },
+    {
+      key: 'cleanup',
+      value: function cleanup() {
+        this.el.classList.remove('ui-draggable');
+        this.el.removeEventListener('mousedown', this.onMousedown);
+      },
+    },
+  ]);
 
   return DragMe;
-}();
+})();
 
 exports.default = DragMe;

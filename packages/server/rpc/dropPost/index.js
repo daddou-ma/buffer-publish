@@ -14,8 +14,8 @@ module.exports = method(
         timestamp,
       },
     })
-    .then(() => 'OK')
-    .catch((err) => {
-      throw createError({ message: err.message });
-    }),
+      .then(() => 'OK')
+      .catch(err => {
+        throw createError({ message: err.message });
+      })
 );

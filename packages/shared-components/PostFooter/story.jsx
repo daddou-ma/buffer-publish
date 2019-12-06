@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  storiesOf,
-} from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 import { withA11y } from '@storybook/addon-a11y';
@@ -26,7 +24,8 @@ const postDetailsCustomScheduledSent = {
 };
 
 const postDetailsInstagramReminder = {
-  postAction: 'You will receive a reminder at 9:21 (GMT) when it is time to post',
+  postAction:
+    'You will receive a reminder at 9:21 (GMT) when it is time to post',
   isCustomScheduled: true,
   isInstagramReminder: true,
 };
@@ -70,18 +69,9 @@ storiesOf('Cards|Posts/PostFooter', module)
     />
   ))
   .add('post if contributor', () => (
-    <PostFooter
-      postDetails={postDetails}
-      isSent={false}
-      isManager={false}
-    />
+    <PostFooter postDetails={postDetails} isSent={false} isManager={false} />
   ))
-  .add('sent post', () => (
-    <PostFooter
-      postDetails={postDetailsSent}
-      isSent
-    />
-  ))
+  .add('sent post', () => <PostFooter postDetails={postDetailsSent} isSent />)
   .add('sent post if link', () => (
     <PostFooter
       postDetails={postDetailsSent}
@@ -99,22 +89,13 @@ storiesOf('Cards|Posts/PostFooter', module)
     />
   ))
   .add('custom scheduled post', () => (
-    <PostFooter
-      postDetails={postDetailsCustomScheduled}
-      isSent={false}
-    />
+    <PostFooter postDetails={postDetailsCustomScheduled} isSent={false} />
   ))
   .add('sent custom scheduled post', () => (
-    <PostFooter
-      postDetails={postDetailsCustomScheduledSent}
-      isSent
-    />
+    <PostFooter postDetails={postDetailsCustomScheduledSent} isSent />
   ))
   .add('instagram reminder post', () => (
-    <PostFooter
-      postDetails={postDetailsInstagramReminder}
-      isSent={false}
-    />
+    <PostFooter postDetails={postDetailsInstagramReminder} isSent={false} />
   ))
   .add('post with error', () => (
     <PostFooter

@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Lightbox from 'react-images';
-import {
-  IdTag,
-  Image,
-  LinkifiedText,
-  Text,
-} from '@bufferapp/components';
+import { IdTag, Image, LinkifiedText, Text } from '@bufferapp/components';
 import Post from '../Post';
 
 const postContentStyle = {
@@ -40,7 +35,7 @@ const imageTagStyle = {
   left: '0.7rem',
 };
 
-const renderTag = (tag) => {
+const renderTag = tag => {
   if (!tag) return;
   return (
     <span style={imageTagStyle}>
@@ -96,29 +91,22 @@ const ImagePost = ({
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
-        {basic
-          ? (
-            <Text
-              color="black"
-              size="mini"
-              whitespace="pre-wrap"
-            >
-              {text}
-            </Text>
-          )
-          : (
-            <LinkifiedText
-              color="black"
-              links={links}
-              size="mini"
-              whitespace="pre-wrap"
-              newTab
-              unstyled
-            >
-              {text}
-            </LinkifiedText>
-          )
-        }
+        {basic ? (
+          <Text color="black" size="mini" whitespace="pre-wrap">
+            {text}
+          </Text>
+        ) : (
+          <LinkifiedText
+            color="black"
+            links={links}
+            size="mini"
+            whitespace="pre-wrap"
+            newTab
+            unstyled
+          >
+            {text}
+          </LinkifiedText>
+        )}
       </span>
       <div style={imageWrapperStyle} onClick={onImageClick}>
         <div style={thumbnailWrapperStyle}>
@@ -142,9 +130,8 @@ const ImagePost = ({
           backdropClosesModal
           showImageCount={false}
         />
-        { renderTag(tag) }
+        {renderTag(tag)}
       </div>
-
     </div>
   );
 
@@ -201,7 +188,7 @@ ImagePost.propTypes = {
       displayString: PropTypes.string,
       expandedUrl: PropTypes.string,
       indices: PropTypes.arrayOf(PropTypes.number),
-    }),
+    })
   ).isRequired,
   text: PropTypes.string.isRequired,
   tag: PropTypes.string,

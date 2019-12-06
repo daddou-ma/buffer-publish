@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  PostLists,
-} from '@bufferapp/publish-shared-components';
+import { PostLists } from '@bufferapp/publish-shared-components';
 import PreviewPopover from '@bufferapp/publish-story-preview';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
@@ -18,20 +16,11 @@ const ErrorBoundary = getErrorBoundary(true);
 
 const Composer = ({ showComposer, showStoriesComposer, onSave }) => {
   if (showComposer) {
-    return (
-      <ComposerPopover
-        onSave={onSave}
-        type="pastReminders"
-      />
-    );
+    return <ComposerPopover onSave={onSave} type="pastReminders" />;
   }
 
   if (showStoriesComposer) {
-    return (
-      <StoryGroupPopover
-        type="pastReminders"
-      />
-    );
+    return <StoryGroupPopover type="pastReminders" />;
   }
 };
 
@@ -42,26 +31,24 @@ const ComposerWrapper = ({
   onComposerCreateSuccess,
 }) => (
   <React.Fragment>
-    {(showComposer || showStoriesComposer) && !editMode
-      && (
-        <TopBarContainerStyle>
-          <ComposerStyle>
-            <Composer
-              showComposer={showComposer}
-              showStoriesComposer={showStoriesComposer}
-              onSave={onComposerCreateSuccess}
-            />
-          </ComposerStyle>
-        </TopBarContainerStyle>
-      )}
-    {(showComposer || showStoriesComposer) && editMode
-      && (
-        <Composer
-          showComposer={showComposer}
-          showStoriesComposer={showStoriesComposer}
-          onSave={onComposerCreateSuccess}
-        />
-      )}
+    {(showComposer || showStoriesComposer) && !editMode && (
+      <TopBarContainerStyle>
+        <ComposerStyle>
+          <Composer
+            showComposer={showComposer}
+            showStoriesComposer={showStoriesComposer}
+            onSave={onComposerCreateSuccess}
+          />
+        </ComposerStyle>
+      </TopBarContainerStyle>
+    )}
+    {(showComposer || showStoriesComposer) && editMode && (
+      <Composer
+        showComposer={showComposer}
+        showStoriesComposer={showStoriesComposer}
+        onSave={onComposerCreateSuccess}
+      />
+    )}
   </React.Fragment>
 );
 
@@ -103,24 +90,17 @@ const PastRemindersPosts = ({
   onClosePreviewClick,
 }) => {
   if (loading) {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 
   if (total < 1) {
-    return (
-      <EmptyStateStyled />
-    );
+    return <EmptyStateStyled />;
   }
 
   return (
     <ErrorBoundary>
       {showStoryPreview && (
-        <PreviewPopover
-          onCloseClick={onClosePreviewClick}
-          view="queue"
-        />
+        <PreviewPopover onCloseClick={onClosePreviewClick} view="queue" />
       )}
       <React.Fragment>
         <ComposerWrapper
@@ -161,9 +141,9 @@ PastRemindersPosts.propTypes = {
       posts: PropTypes.arrayOf(
         PropTypes.shape({
           text: PropTypes.string,
-        }),
+        })
       ),
-    }),
+    })
   ),
   total: PropTypes.number,
   showComposer: PropTypes.bool,

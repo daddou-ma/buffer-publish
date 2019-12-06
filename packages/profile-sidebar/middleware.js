@@ -24,17 +24,6 @@ export const refreshProfile = (dispatch, profileId, message) => {
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'profiles',
-          args: {
-            id: action.result.id,
-          },
-        })
-      );
-      break;
-    }
     case actionTypes.SINGLE_PROFILE:
       dispatch(
         dataFetchActions.fetch({

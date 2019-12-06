@@ -14,7 +14,12 @@ storiesOf('ProfilesDisconnectedModal', module)
       hideModal={action('hide-modal')}
       reconnectProfile={action('reconnect-profile')}
       disconnectedProfiles={[
-        { id: '1', avatar_https: '', service: 'twitter', formatted_username: '@hamstu' },
+        {
+          id: '1',
+          avatar_https: '',
+          service: 'twitter',
+          formatted_username: '@hamstu',
+        },
       ]}
     />
   ));

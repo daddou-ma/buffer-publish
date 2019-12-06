@@ -12,7 +12,9 @@ export default connect(
   (state, ownProps) => {
     const { profileId } = ownProps;
     const currentProfile = state.stories.byProfileId[profileId];
-    const profileData = state.profileSidebar.profiles.find(p => p.id === ownProps.profileId);
+    const profileData = state.profileSidebar.profiles.find(
+      p => p.id === ownProps.profileId
+    );
 
     if (currentProfile) {
       return {
@@ -28,7 +30,8 @@ export default connect(
           profileTimezone: profileData.timezone,
           weekStartsOnMonday: state.appSidebar.user.week_starts_monday,
           weeksToShow: currentProfile.page + 1,
-          hasTwentyFourHourTimeFormat: state.appSidebar.user.hasTwentyFourHourTimeFormat,
+          hasTwentyFourHourTimeFormat:
+            state.appSidebar.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
           orderBy: 'scheduledAt',
         }),
@@ -44,31 +47,37 @@ export default connect(
     return {};
   },
   (dispatch, ownProps) => ({
-    onEmptySlotClick: (storyGroup) => {
-      dispatch(actions.handleEmptySlotClick({
-        emptySlotData: storyGroup,
-        profileId: ownProps.profileId,
-      }));
+    onEmptySlotClick: storyGroup => {
+      dispatch(
+        actions.handleEmptySlotClick({
+          emptySlotData: storyGroup,
+          profileId: ownProps.profileId,
+        })
+      );
     },
     onComposerPlaceholderClick: () => {
       dispatch(actions.handleComposerPlaceholderClick());
     },
-    onEditClick: (storyGroup) => {
-      dispatch(actions.handleEditStoryGroupClick({
-        storyGroup: storyGroup.post,
-        profileId: ownProps.profileId,
-      }));
+    onEditClick: storyGroup => {
+      dispatch(
+        actions.handleEditStoryGroupClick({
+          storyGroup: storyGroup.post,
+          profileId: ownProps.profileId,
+        })
+      );
     },
     handleCloseStoriesComposer: () => {
       dispatch(actions.handleCloseStoriesComposer());
     },
-    onPreviewClick: ({
-      stories, profileId, id, scheduledAt, serviceId,
-    }) => {
-      const ctaProperties = getCtaProperties(SEGMENT_NAMES.STORIES_PREVIEW_QUEUE);
+    onPreviewClick: ({ stories, profileId, id, scheduledAt, serviceId }) => {
+      const ctaProperties = getCtaProperties(
+        SEGMENT_NAMES.STORIES_PREVIEW_QUEUE
+      );
       const imageCount = stories.filter(story => story.type === 'image').length;
       const videoCount = stories.filter(story => story.type === 'video').length;
-      const noteCount = stories.filter(story => story.note && story.note.length > 0).length;
+      const noteCount = stories.filter(
+        story => story.note && story.note.length > 0
+      ).length;
       const metadata = {
         storyGroupId: id,
         channel: 'instagram',
@@ -82,27 +91,36 @@ export default connect(
         ...ctaProperties,
       };
       dispatch(analyticsActions.trackEvent('Story Group Previewed', metadata));
-      dispatch(previewActions.handlePreviewClick({
-        stories, profileId, id, scheduledAt,
-      }));
+      dispatch(
+        previewActions.handlePreviewClick({
+          stories,
+          profileId,
+          id,
+          scheduledAt,
+        })
+      );
       dispatch(actions.handlePreviewClick());
     },
     onClosePreviewClick: () => {
       dispatch(actions.handleClosePreviewClick());
     },
-    onDeleteConfirmClick: (storyGroup) => {
-      dispatch(actions.handleDeleteStoryGroup({
-        storyGroup,
-        profileId: ownProps.profileId,
-      }));
+    onDeleteConfirmClick: storyGroup => {
+      dispatch(
+        actions.handleDeleteStoryGroup({
+          storyGroup,
+          profileId: ownProps.profileId,
+        })
+      );
     },
-    onShareNowClick: (storyGroup) => {
-      dispatch(actions.handleShareNowClick({
-        storyGroup: storyGroup.post,
-        profileId: ownProps.profileId,
-      }));
+    onShareNowClick: storyGroup => {
+      dispatch(
+        actions.handleShareNowClick({
+          storyGroup: storyGroup.post,
+          profileId: ownProps.profileId,
+        })
+      );
     },
-  }),
+  })
 )(StoryGroups);
 
 export reducer, { actions, actionTypes } from './reducer';

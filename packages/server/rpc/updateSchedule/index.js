@@ -26,5 +26,5 @@ module.exports = method(
     result = JSON.parse(result);
     result.schedules = schedules;
     return Promise.resolve(result);
-  },
+  }
 );

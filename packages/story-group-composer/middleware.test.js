@@ -14,7 +14,8 @@ describe('middleware', () => {
     const getState = jest.fn(() => ({
       profileSidebar: {
         selectedProfile: {
-          type: 'instagram', serviceId: '123',
+          type: 'instagram',
+          serviceId: '123',
         },
       },
       storyGroupComposer: {
@@ -42,11 +43,12 @@ describe('middleware', () => {
 
       middleware({ dispatch, getState })(next)(action);
 
-      expect(next)
-        .toBeCalledWith(action);
+      expect(next).toBeCalledWith(action);
 
-      expect(analyticsActions.trackEvent)
-        .toBeCalledWith('Story Group Created', expectedObj);
+      expect(analyticsActions.trackEvent).toBeCalledWith(
+        'Story Group Created',
+        expectedObj
+      );
     });
     it('should send tracking data when story group is updated', () => {
       const action = {
@@ -61,11 +63,12 @@ describe('middleware', () => {
 
       middleware({ dispatch, getState })(next)(action);
 
-      expect(next)
-        .toBeCalledWith(action);
+      expect(next).toBeCalledWith(action);
 
-      expect(analyticsActions.trackEvent)
-        .toBeCalledWith('Story Group Updated', expectedObj);
+      expect(analyticsActions.trackEvent).toBeCalledWith(
+        'Story Group Updated',
+        expectedObj
+      );
     });
     it('should send tracking data when note is added', () => {
       const action = {
@@ -83,11 +86,12 @@ describe('middleware', () => {
 
       middleware({ dispatch, getState })(next)(action);
 
-      expect(next)
-        .toBeCalledWith(action);
+      expect(next).toBeCalledWith(action);
 
-      expect(analyticsActions.trackEvent)
-        .toBeCalledWith('Story Note Added', expectedObj);
+      expect(analyticsActions.trackEvent).toBeCalledWith(
+        'Story Note Added',
+        expectedObj
+      );
     });
   });
 });

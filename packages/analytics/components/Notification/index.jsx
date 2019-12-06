@@ -18,22 +18,28 @@ const getNotificationCopy = (service, isInstagramBusiness) => {
   if (service === 'instagram' && !isInstagramBusiness) {
     return (
       <div>
-        Please convert your Instagram profile from a personal to
-        Business account to get advanced analytics.&nbsp;
-        <Link href={'https://faq.buffer.com/article/959-publish-instagram-set-up#direct-scheduling'} unstyled newTab>
+        Please convert your Instagram profile from a personal to Business
+        account to get advanced analytics.&nbsp;
+        <Link
+          href={
+            'https://faq.buffer.com/article/959-publish-instagram-set-up#direct-scheduling'
+          }
+          unstyled
+          newTab
+        >
           Please check our FAQ here for help on how to do this.
         </Link>
       </div>
     );
   }
-  return ('We only support Facebook, Instagram, & Twitter profiles in our analytics right now.');
+  return 'We only support Facebook, Instagram, & Twitter profiles in our analytics right now.';
 };
 
 const getTitleCopy = (service, isInstagramBusiness) => {
   if (service === 'instagram' && !isInstagramBusiness) {
-    return ('Instagram advanced analytics are only available on Instagram Business profiles');
+    return 'Instagram advanced analytics are only available on Instagram Business profiles';
   }
-  return ('Sorry we don\'t support this network in our Analytics');
+  return "Sorry we don't support this network in our Analytics";
 };
 
 const Notification = ({ isInstagramBusiness, service }) => (
@@ -42,15 +48,9 @@ const Notification = ({ isInstagramBusiness, service }) => (
       <span style={iconStyle}>
         <WarningIcon />
       </span>
-      <Text
-        type="h3"
-      >
-        {getTitleCopy(service, isInstagramBusiness)}
-      </Text>
+      <Text type="h3">{getTitleCopy(service, isInstagramBusiness)}</Text>
     </div>
-    <Text type="p">
-      {getNotificationCopy(service, isInstagramBusiness)}
-    </Text>
+    <Text type="p">{getNotificationCopy(service, isInstagramBusiness)}</Text>
   </Card>
 );
 
