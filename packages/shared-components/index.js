@@ -1,5 +1,6 @@
 export AutoSelectText from './AutoSelectText';
 export BufferLoading from './BufferLoading';
+export QueueBanner from './QueueBanner';
 export EmptyState from './EmptyState';
 export Example from './Example';
 export ImagePost from './ImagePost';
