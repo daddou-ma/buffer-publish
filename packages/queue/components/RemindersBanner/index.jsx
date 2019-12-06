@@ -10,9 +10,7 @@ const TextWithStyles = styled(Text)`
   margin: 0;
 `;
 
-const TextLink = styled(Text)`
-  display: inline-block;
-  margin: 0;
+const TextLink = styled.span`
   color: ${blue};
 `;
 
@@ -27,7 +25,7 @@ const content = (
       newTab
       unstyled
     >
-      <TextLink type="p">Learn more here.</TextLink>
+      <TextLink>Learn more here.</TextLink>
     </Link>
   </TextWithStyles>
 );

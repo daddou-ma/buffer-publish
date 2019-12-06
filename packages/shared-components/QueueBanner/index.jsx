@@ -14,6 +14,8 @@ const QueueBannerCard = styled.div`
   box-sizing: border-box;
   border-radius: 2px;
   text-align: center;
+  margin-bottom: 24px;
+  position: relative;
 `;
 
 const Triangle = styled.div`
