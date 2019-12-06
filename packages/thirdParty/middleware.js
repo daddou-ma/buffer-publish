@@ -110,6 +110,7 @@ export default ({ dispatch, getState }) => next => action => {
             orgUserCount,
             profileCount,
             is_business_user: isBusinessUser,
+            tags,
           } = action.result;
           if (isBusinessUser || plan === 'pro') {
             dispatch({
@@ -127,6 +128,9 @@ export default ({ dispatch, getState }) => next => action => {
               trialTimeRemaining: trial.trialTimeRemaining,
               orgUserCount, // Number of users (including the account owner)
               profileCount, // Number of profiles _owned_ by the user
+              upgradedFromLegacyAwesomeToProPromotion: tags.includes(
+                'upgraded-to-pro-from-legacy-awesome'
+              ),
             });
 
             const dispatchAppcuesStarted = () => {
