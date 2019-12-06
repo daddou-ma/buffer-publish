@@ -41,6 +41,7 @@ const mockFreeUser = {
   profileCount: 3,
   is_free_user: true,
   helpScoutConfig: '{ "param1": true, "param2": 24 }',
+  tags: [],
 };
 
 const mockIntercomUser = {
