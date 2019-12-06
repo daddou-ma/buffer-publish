@@ -3,13 +3,14 @@ import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
-import { getPageNameFromPath, getChannelIfNeeded } from '@bufferapp/publish-analytics-middleware/utils/Pathname';
+import {
+  getPageNameFromPath,
+  getChannelIfNeeded,
+} from '@bufferapp/publish-analytics-middleware/utils/Pathname';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes } from './reducer';
 
-import {
-  HELPSCOUT_ID,
-} from './constants';
+import { HELPSCOUT_ID } from './constants';
 
 const checkExtensionInstalled = () => {
   /**
@@ -21,7 +22,7 @@ const checkExtensionInstalled = () => {
   return !!version;
 };
 
-export default ({ dispatch, getState }) => next => (action) => {
+export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
     case 'APP_INIT':
@@ -108,7 +109,6 @@ export default ({ dispatch, getState }) => next => (action) => {
             trial,
             orgUserCount,
             profileCount,
-            awesomeUserVisitedPayday,
             is_business_user: isBusinessUser,
           } = action.result;
           if (isBusinessUser || plan === 'pro') {
@@ -127,19 +127,7 @@ export default ({ dispatch, getState }) => next => (action) => {
               trialTimeRemaining: trial.trialTimeRemaining,
               orgUserCount, // Number of users (including the account owner)
               profileCount, // Number of profiles _owned_ by the user
-              previousPlanId: awesomeUserVisitedPayday ? 'awesome' : '',
             });
-
-            if (awesomeUserVisitedPayday) {
-              dispatch(
-                dataFetchActions.fetch({
-                  name: 'deleteUserTag',
-                  args: {
-                    tag: 'awesome_user_visited_payday',
-                  },
-                })
-              );
-            }
 
             const dispatchAppcuesStarted = () => {
               dispatch({
@@ -171,11 +159,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     case actionTypes.HELPSCOUT_BEACON:
       if (window && window.Beacon) {
-        const {
-          name,
-          email,
-          helpScoutConfig,
-        } = action.result;
+        const { name, email, helpScoutConfig } = action.result;
 
         window.Beacon('init', HELPSCOUT_ID);
         window.Beacon('identify', {
@@ -219,7 +203,12 @@ export default ({ dispatch, getState }) => next => (action) => {
 
       if (appCuesLoaded && window && window.Appcues) {
         const { profiles } = getState().profileSidebar;
-        if (profiles.find(profile => (profile.service === 'instagram' && profile.isInstagramBusiness))) {
+        if (
+          profiles.find(
+            profile =>
+              profile.service === 'instagram' && profile.isInstagramBusiness
+          )
+        ) {
           window.Appcues.track('Has Instagram Business profile');
         }
       }

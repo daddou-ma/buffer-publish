@@ -54,7 +54,10 @@ describe('middleware', () => {
   const next = jest.fn();
   const store = {
     dispatch: jest.fn(),
-    getState: () => ({ productFeatures: { planName: 'business' }, thirdparty: { appCues: { loaded: true } } }),
+    getState: () => ({
+      productFeatures: { planName: 'business' },
+      thirdparty: { appCues: { loaded: true } },
+    }),
   };
   it('always calls next()', () => {
     const action = {
@@ -74,7 +77,9 @@ describe('middleware', () => {
   it('identifies the user with Intercom', () => {
     /** We need to return a fake DOM element to fool the extension check code... */
     const getFakeMarkerEl = () => ({ getAttribute: () => true });
-    Object.defineProperty(global.document, 'querySelector', { value: getFakeMarkerEl });
+    Object.defineProperty(global.document, 'querySelector', {
+      value: getFakeMarkerEl,
+    });
 
     const action = {
       type: `intercom_${dataFetchActionTypes.FETCH_SUCCESS}`,
@@ -159,7 +164,6 @@ describe('middleware', () => {
       trialTimeRemaining: mockUser.trial.trialTimeRemaining,
       orgUserCount: mockUser.orgUserCount,
       profileCount: mockUser.profileCount,
-      previousPlanId: '',
     });
 
     expect(global.Appcues.on.mock.calls).toEqual([
@@ -186,10 +190,16 @@ describe('middleware', () => {
     expect(global.Beacon.mock.calls[0]).toEqual(['init', HELPSCOUT_ID]);
 
     // The second one to identify the user
-    expect(global.Beacon.mock.calls[1]).toEqual(['identify', { name: mockUser.name, email: mockUser.email } ]);
+    expect(global.Beacon.mock.calls[1]).toEqual([
+      'identify',
+      { name: mockUser.name, email: mockUser.email },
+    ]);
 
     // The third one with the params obtained from the API
-    expect(global.Beacon.mock.calls[2]).toEqual(['config', JSON.parse(mockUser.helpScoutConfig) ]);
+    expect(global.Beacon.mock.calls[2]).toEqual([
+      'config',
+      JSON.parse(mockUser.helpScoutConfig),
+    ]);
   });
   it('sends event to appcues when user adds a post in the composer', () => {
     const action = {
