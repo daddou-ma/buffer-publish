@@ -13,7 +13,7 @@ const DEFAULT_COLOR = '#000000';
 const MyLinksHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  padding-top: 16px;
 `;
 
 const MyLinksTitle = styled.div`

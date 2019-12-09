@@ -45,11 +45,13 @@ const CustomLinks = ({
       />
       <MyLinksBody>
         {customLinksDetails.customLinks &&
-          customLinksDetails.customLinks.map(item => {
+          customLinksDetails.customLinks.map((item, index) => {
             return (
               <React.Fragment>
                 {!item.editing && (
                   <LinkDragWrapper
+                    totalLinks={customLinksDetails.customLinks.length}
+                    index={index}
                     item={item}
                     textColor={textColor}
                     bgColor={colorButtons}

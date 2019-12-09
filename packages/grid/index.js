@@ -160,7 +160,7 @@ export default connect(
         })
       );
     },
-    onSaveCustomLinkText: ({ item, value }) => {
+    onSaveCustomLinkText: ({ item }) => {
       dispatch(
         actions.handleSaveCustomLink({
           profileId: ownProps.profileId,

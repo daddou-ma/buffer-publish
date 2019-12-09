@@ -40,11 +40,13 @@ const EditingLinkForm = ({
         <Button
           label="Cancel"
           type="text"
+          size="small"
           onClick={() => onCancelCustomLinkEdit({ item })}
         />
         <Button
           label="Save Link"
           type="primary"
+          size="small"
           onClick={() =>
             onUpdateCustomLinks({
               customLinks: customLinksDetails.customLinks,

@@ -47,6 +47,8 @@ const UrlWrapper = styled.div`
 `;
 
 const LinkPreview = ({
+  index,
+  totalLinks,
   item,
   bgColor,
   textColor,
@@ -57,7 +59,7 @@ const LinkPreview = ({
   const [isConfirmingDelete, setConfirmingDelete] = useState(false);
 
   return (
-    <PreviewWrapper isTarget={isTarget}>
+    <PreviewWrapper isTarget={isTarget} totalLinks={totalLinks} index={index}>
       <LinkPreviewRow>
         <LinkPreviewButton bgColor={bgColor} textColor={textColor}>
           {item.text}
@@ -85,6 +87,7 @@ const LinkPreview = ({
                 <Button
                   label="Delete"
                   type="gray"
+                  size="small"
                   onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
                 />
               </React.Fragment>
@@ -94,6 +97,7 @@ const LinkPreview = ({
         <Button
           label="Edit"
           type="secondary"
+          size="small"
           onClick={() => onToggleEditMode({ item, editing: true })}
         />
       </LinkPreviewRow>
@@ -102,6 +106,8 @@ const LinkPreview = ({
 };
 
 LinkPreview.propTypes = {
+  index: PropTypes.number,
+  totalLinks: PropTypes.number,
   isTarget: PropTypes.bool,
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
@@ -116,6 +122,8 @@ LinkPreview.propTypes = {
 };
 
 LinkPreview.defaultProps = {
+  index: 0,
+  totalLinks: 0,
   isTarget: false,
   bgColor: DEFAULT_COLOR,
   textColor: '#FFFFFF',
