@@ -233,6 +233,7 @@ const profileReducer = (state = profileInitialState, action) => {
       const { item = {} } = action;
       const { customLinks = [] } = customLinksDetails;
       const editedCustomLinks = cloneDeep(customLinks);
+      let customLinksResult = [];
 
       if (item && item._id) {
         editedCustomLinks.map(link => {
@@ -243,13 +244,20 @@ const profileReducer = (state = profileInitialState, action) => {
           }
           return link;
         });
+        customLinksResult = editedCustomLinks;
+      }
+
+      if (!item._id) {
+        customLinksResult = editedCustomLinks.filter(
+          link => link._id !== undefined
+        );
       }
 
       return {
         ...state,
         customLinksDetails: {
           ...customLinksDetails,
-          customLinks: editedCustomLinks,
+          customLinks: customLinksResult,
         },
       };
     }
@@ -370,6 +378,7 @@ export default (state = initialState, action) => {
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `updateCustomLinks_${dataFetchActionTypes.FETCH_FAIL}`:
     case actionTypes.SAVE_POST_URL:
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
