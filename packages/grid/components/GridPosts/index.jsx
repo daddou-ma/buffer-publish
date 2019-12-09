@@ -142,6 +142,8 @@ const GridPosts = ({
   maxCustomLinks,
   onToggleEditMode,
   onSwapCustomLinks,
+  onSaveNewLinkClick,
+  isValidItem,
 }) => {
   if (loading) {
     return (
@@ -240,6 +242,8 @@ const GridPosts = ({
             maxCustomLinks={maxCustomLinks}
             onToggleEditMode={onToggleEditMode}
             onSwapCustomLinks={onSwapCustomLinks}
+            onSaveNewLinkClick={onSaveNewLinkClick}
+            isValidItem={isValidItem}
           />
         )}
         <GridList
@@ -290,6 +294,7 @@ GridPosts.propTypes = {
     maxCustomLinks: PropTypes.number,
     buttonColor: PropTypes.string,
   }),
+  isValidItem: PropTypes.func,
 };
 
 GridPosts.defaultProps = {
@@ -307,6 +312,7 @@ GridPosts.defaultProps = {
   handleCopyToClipboard: () => {},
   profile: {},
   onAddLinkClick: () => {},
+  isValidItem: () => {},
   customLinksDetails: {
     customLinks: [],
     maxCustomLinks: 0,
