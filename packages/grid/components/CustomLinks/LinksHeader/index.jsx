@@ -5,7 +5,7 @@ import { Button } from '@bufferapp/ui';
 import styled from 'styled-components';
 import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 import Tooltip from '@bufferapp/ui/Tooltip';
-import { gray, grayDarker } from '@bufferapp/ui/style/colors';
+import { gray, grayDark } from '@bufferapp/ui/style/colors';
 import { fontFamily, fontWeightBold } from '@bufferapp/ui/style/fonts';
 
 const DEFAULT_COLOR = '#000000';
@@ -26,7 +26,7 @@ const MyLinksIcon = styled.span`
 `;
 
 const MyLinksTitleText = styled.span`
-  color: ${grayDarker};
+  color: ${grayDark};
   font-family: ${fontFamily};
   font-size: 18px;
   font-weight: ${fontWeightBold};
