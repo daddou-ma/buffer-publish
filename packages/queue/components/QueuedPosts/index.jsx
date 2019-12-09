@@ -70,6 +70,7 @@ const QueuedPosts = ({
   hasPushNotifications,
   hasAtLeastOneReminderPost,
   onComposerOverlayClick,
+  onSetRemindersClick,
 }) => {
   if (loading) {
     return (
@@ -96,7 +97,9 @@ const QueuedPosts = ({
       <div>
         {!hasPushNotifications &&
           isInstagramProfile &&
-          hasAtLeastOneReminderPost && <RemindersBanner />}
+          hasAtLeastOneReminderPost && (
+            <RemindersBanner onSetRemindersClick={onSetRemindersClick} />
+          )}
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
             {showComposer && !editMode && (
@@ -195,6 +198,7 @@ QueuedPosts.propTypes = {
   onImageClose: PropTypes.func.isRequired,
   onDropPost: PropTypes.func.isRequired,
   onSwapPosts: PropTypes.func.isRequired,
+  onSetRemindersClick: PropTypes.func.isRequired,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
   paused: PropTypes.bool,
