@@ -54,7 +54,7 @@ const SetRemindersModal = ({
       <img
         width="100%"
         alt="push_notifications_snippet"
-        src="https://buffer-publish.s3.amazonaws.com/images/stories-promo-modal.png"
+        src="https://buffer-publish.s3.amazonaws.com/images/ig-reminders-modal.png"
       />
       <Tag type="p" color="white">
         {translations.tag}
