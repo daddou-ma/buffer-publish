@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { grayLight, blue, grayLighter } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
+import { Button } from '@bufferapp/ui';
 
 export const DEFAULT_COLOR = '#000000';
 export const DEFAULT_CONTRAST_COLOR = '#FFFFFF';
@@ -84,4 +85,10 @@ export const ActionsWrapper = styled.div`
   justify-content: flex-end;
   padding: 0 15px 15px;
   background-color: ${grayLighter};
+`;
+
+export const StyledButton = styled(Button)`
+  :focus {
+    box-shadow: none;
+  }
 `;

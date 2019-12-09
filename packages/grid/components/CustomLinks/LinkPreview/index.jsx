@@ -9,6 +9,7 @@ import {
   PreviewWrapper,
   UrlPreview,
   LinkPreviewRow,
+  StyledButton,
 } from '../styles';
 
 export const LinkPreviewButton = styled.div.attrs(props => ({
@@ -70,7 +71,7 @@ const LinkPreview = ({
         {onDeleteCustomLink && (
           <React.Fragment>
             {!isConfirmingDelete ? (
-              <Button
+              <StyledButton
                 type="text"
                 label="Delete"
                 size="small"
@@ -78,7 +79,7 @@ const LinkPreview = ({
               />
             ) : (
               <React.Fragment>
-                <Button
+                <StyledButton
                   type="text"
                   label="Cancel"
                   size="small"
