@@ -39,7 +39,7 @@ const ButtonWrapper = styled.div`
 const Tag = styled(Text)`
   position: absolute;
   left: 16px;
-  top: 150px;
+  top: 135px;
   font-size: 12px;
   width: 90px;
 `;
