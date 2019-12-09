@@ -21,6 +21,14 @@ export default connect(
     );
     const isLockedProfile = state.profileSidebar.isLockedProfile;
 
+    const queuePostsArray = Object.keys(profileQueuePosts.posts).map(key => {
+      return profileQueuePosts.posts[key];
+    });
+
+    const hasAtLeastOneReminderPost = queuePostsArray.some(
+      post => post.postDetails && post.postDetails.isInstagramReminder
+    );
+
     if (isLockedProfile) {
       return {
         loading: false,
@@ -61,6 +69,8 @@ export default connect(
         paused: profileData.paused,
         isManager: profileData.isManager,
         isBusinessAccount: profileData.business,
+        hasPushNotifications: profileData.hasPushNotifications,
+        hasAtLeastOneReminderPost,
         showInstagramDirectPostingModal:
           state.modals.showInstagramDirectPostingModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,

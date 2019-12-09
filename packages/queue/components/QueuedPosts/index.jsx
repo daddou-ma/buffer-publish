@@ -14,6 +14,7 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
+import RemindersBanner from '../RemindersBanner';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -66,6 +67,8 @@ const QueuedPosts = ({
   isManager,
   hasFirstCommentFlip,
   isBusinessAccount,
+  hasPushNotifications,
+  hasAtLeastOneReminderPost,
   onComposerOverlayClick,
 }) => {
   if (loading) {
@@ -91,6 +94,9 @@ const QueuedPosts = ({
   return (
     <ErrorBoundary>
       <div>
+        {!hasPushNotifications &&
+          isInstagramProfile &&
+          hasAtLeastOneReminderPost && <RemindersBanner />}
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
             {showComposer && !editMode && (
@@ -197,6 +203,8 @@ QueuedPosts.propTypes = {
   isManager: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
+  hasPushNotifications: PropTypes.bool,
+  hasAtLeastOneReminderPost: PropTypes.bool,
   showInstagramDirectPostingModal: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,
   isInstagramLoading: PropTypes.bool,
@@ -207,7 +215,6 @@ QueuedPosts.propTypes = {
 };
 
 QueuedPosts.defaultProps = {
-  postLists: [],
   loading: true,
   moreToLoad: false,
   page: 1,
@@ -218,6 +225,8 @@ QueuedPosts.defaultProps = {
   subprofiles: [],
   isInstagramProfile: false,
   isInstagramBusiness: false,
+  hasPushNotifications: true,
+  hasAtLeastOneReminderPost: false,
   showInstagramDirectPostingModal: false,
   isInstagramLoading: false,
   isLockedProfile: false,
