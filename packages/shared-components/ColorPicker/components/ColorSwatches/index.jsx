@@ -10,12 +10,15 @@ import {
   colorSwatches,
 } from '../../styles';
 
+import { getColorContrast } from '../../utils/HexValidations';
+
 const ColorSwatches = ({ colorSelected, onColorChange, onChange }) => (
   <ColorSwatchesContainer>
     {Object.keys(colorSwatches).map(key => (
       <CircleColorWrapper key={key.toString()}>
         <CircleColor
           color={colorSwatches[key]}
+          colorContrast={getColorContrast(colorSwatches[key])}
           onClick={() => onColorChange(colorSwatches[key], onChange)}
           selectable
         >

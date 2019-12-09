@@ -68,11 +68,8 @@ export const CircleColor = styled.div`
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background-color: ${props => (props.color ? props.color : DEFAULT_COLOR)};
-  color: ${props =>
-    props.color === colorSwatches.white
-      ? colorSwatches.black
-      : colorSwatches.white};
+  background-color: ${props => props.color || DEFAULT_COLOR};
+  color: ${props => props.colorContrast || colorSwatches.white};
   border: ${props =>
     props.color === colorSwatches.white
       ? '1px solid #000000'
