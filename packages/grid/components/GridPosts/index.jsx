@@ -6,8 +6,9 @@ import {
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { Button } from '@bufferapp/ui';
+import { Button, Text, Tooltip } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
+import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import Avatar from '@bufferapp/ui/Avatar';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
@@ -15,7 +16,7 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
 import styled from 'styled-components';
-import { grayLight, grayDark } from '@bufferapp/ui/style/colors';
+import { grayLight, grayDark, gray } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
 import { openPreviewPage } from '../../util';
@@ -90,6 +91,20 @@ const StyledCopyLinkIcon = styled.div`
 
 const StyledCopyLinkText = styled.div`
   padding: 0.25rem 0.1rem;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Title = styled(Text)`
+  color: ${grayDark};
+  margin: 16px 0;
+`;
+
+const TooltipWrapper = styled.div`
+  padding: 6px 0 0 6px;
 `;
 
 const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
@@ -244,6 +259,19 @@ const GridPosts = ({
             onCancelCustomLinkEdit={onCancelCustomLinkEdit}
           />
         )}
+        <TitleWrapper>
+          <Title type="h3" color="grayDark">
+            Posts
+          </Title>
+          <TooltipWrapper>
+            <Tooltip
+              label="Only posts with links will appear on your public Shop Grid page."
+              position="right"
+            >
+              <InfoIcon color={gray} />
+            </Tooltip>
+          </TooltipWrapper>
+        </TitleWrapper>
         <GridList
           gridPosts={gridPosts}
           onChangePostUrl={onChangePostUrl}
