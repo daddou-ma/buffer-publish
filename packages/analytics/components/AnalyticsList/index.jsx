@@ -20,11 +20,15 @@ const AnalyticsList = ({
 }) => {
   useEffect(() => {
     // We need to re-fetch profiles to get them into the analyze stores
-    // (the stores are lazy-loaded and dindn't exist for the initial profile fetch)
+    // (the stores are lazy-loaded and didn't exist for the initial profile fetch)
     fetchProfiles();
-    // Now select the profile
-    selectProfile(profile);
   }, []);
+
+  useEffect(() => {
+    // Set selected profile
+    selectProfile(profile);
+  }, [selectProfile, profile]);
+
   return (
     <div id="analytics">
       <Toolbar profile={profile} />
