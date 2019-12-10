@@ -135,7 +135,6 @@ const GridPosts = ({
   onUpdateCustomLinksColor,
   onUpdateCustomLinksButtonType,
   onDeleteCustomLink,
-  onAddLinkClick,
   onUpdateLinkText,
   onUpdateLinkUrl,
   hasCustomLinksFlip,
@@ -236,7 +235,6 @@ const GridPosts = ({
             onUpdateCustomLinksColor={onUpdateCustomLinksColor}
             onUpdateCustomLinksButtonType={onUpdateCustomLinksButtonType}
             onDeleteCustomLink={onDeleteCustomLink}
-            onAddLinkClick={onAddLinkClick}
             onUpdateLinkText={onUpdateLinkText}
             onUpdateLinkUrl={onUpdateLinkUrl}
             maxCustomLinks={maxCustomLinks}
@@ -288,7 +286,6 @@ GridPosts.propTypes = {
     avatar_https: PropTypes.string,
     timezone: PropTypes.string,
   }),
-  onAddLinkClick: PropTypes.func,
   customLinksDetails: PropTypes.shape({
     customLinks: PropTypes.array,
     maxCustomLinks: PropTypes.number,
@@ -311,7 +308,6 @@ GridPosts.defaultProps = {
   onImageClose: () => {},
   handleCopyToClipboard: () => {},
   profile: {},
-  onAddLinkClick: () => {},
   isValidItem: () => {},
   customLinksDetails: {
     customLinks: [],

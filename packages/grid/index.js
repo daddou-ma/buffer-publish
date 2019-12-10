@@ -47,13 +47,6 @@ export default connect(
     return {};
   },
   (dispatch, ownProps) => ({
-    onAddLinkClick: () => {
-      dispatch(
-        actions.handleAddGridLink({
-          profileId: ownProps.profileId,
-        })
-      );
-    },
     onSaveNewLinkClick: ({ item }) => {
       dispatch(
         actions.handleAddNewGridLink({

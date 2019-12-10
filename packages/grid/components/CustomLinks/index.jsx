@@ -16,7 +16,6 @@ const CustomLinks = ({
   onUpdateCustomLinks,
   onUpdateCustomLinksColor,
   onDeleteCustomLink,
-  onAddLinkClick,
   onUpdateLinkText,
   onUpdateLinkUrl,
   maxCustomLinks,
@@ -56,21 +55,23 @@ const CustomLinks = ({
       customLinksDetails.customLinks.length) ||
       0);
 
+  const onAddLinkClick = () => {
+    addNewLink([
+      ...newLinks,
+      {
+        text: '',
+        url: '',
+        order: Math.max(0, ...newLinks.map(l => l.order)) + 1,
+      },
+    ]);
+  };
+
   return (
     <MyLinksSection>
       <LinksHeader
         customLinksDetails={customLinksDetails}
         maxCustomLinks={maxCustomLinks}
-        onAddLinkClick={() => {
-          addNewLink([
-            ...newLinks,
-            {
-              text: '',
-              url: '',
-              order: Math.max(0, ...newLinks.map(l => l.order)) + 1,
-            },
-          ]);
-        }}
+        onAddLinkClick={onAddLinkClick}
         setColorButton={setColorButton}
         setTextColor={setTextColor}
         colorButtons={colorButtons}
@@ -143,7 +144,6 @@ const CustomLinks = ({
 
 CustomLinks.propTypes = {
   maxCustomLinks: PropTypes.number,
-  onAddLinkClick: PropTypes.func,
   onUpdateLinkUrl: PropTypes.func,
   onUpdateLinkText: PropTypes.func,
   onToggleEditMode: PropTypes.func,
@@ -163,7 +163,6 @@ CustomLinks.propTypes = {
 
 CustomLinks.defaultProps = {
   maxCustomLinks: 3,
-  onAddLinkClick: () => {},
   onUpdateLinkUrl: () => {},
   onUpdateLinkText: () => {},
   onToggleEditMode: () => {},

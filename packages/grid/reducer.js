@@ -13,7 +13,6 @@ export const actionTypes = keyWrapper('GRID', {
   GET_CUSTOM_LINKS: 0,
   UPDATE_CUSTOM_LINKS: 0,
   DELETE_CUSTOM_LINK: 0,
-  ADD_CUSTOM_LINK: 0,
   ADD_NEW_CUSTOM_LINK: 0,
   EDIT_CUSTOM_LINK_TEXT: 0,
   CANCEL_EDIT_CUSTOM_LINK_TEXT: 0,
@@ -183,25 +182,6 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         gridPosts: postsReducer(state.gridPosts, action),
       };
-    case actionTypes.ADD_CUSTOM_LINK: {
-      const { customLinksDetails } = state;
-      const { customLinks = [] } = customLinksDetails;
-      return {
-        ...state,
-        customLinksDetails: {
-          ...customLinksDetails,
-          customLinks: [
-            ...customLinks,
-            {
-              editing: true,
-              text: '',
-              url: '',
-              order: customLinks.length,
-            },
-          ],
-        },
-      };
-    }
     case actionTypes.ADD_NEW_CUSTOM_LINK: {
       const { customLinksDetails } = state;
       const { customLinks = [] } = customLinksDetails;
@@ -368,7 +348,6 @@ export default (state = initialState, action) => {
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.ADD_CUSTOM_LINK:
     case actionTypes.ADD_NEW_CUSTOM_LINK:
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:
     case actionTypes.EDIT_CUSTOM_LINK_URL:
@@ -453,10 +432,6 @@ export const actions = {
     type: actionTypes.DELETE_CUSTOM_LINK,
     profileId,
     customLinkId,
-  }),
-  handleAddGridLink: ({ profileId }) => ({
-    type: actionTypes.ADD_CUSTOM_LINK,
-    profileId,
   }),
   handleAddNewGridLink: ({ profileId, item }) => ({
     type: actionTypes.ADD_NEW_CUSTOM_LINK,
