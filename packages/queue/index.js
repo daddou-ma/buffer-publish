@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import { actions } from './reducer';
@@ -20,6 +22,14 @@ export default connect(
       p => p.id === ownProps.profileId
     );
     const isLockedProfile = state.profileSidebar.isLockedProfile;
+
+    const queuePostsArray = Object.keys(profileQueuePosts.posts).map(key => {
+      return profileQueuePosts.posts[key];
+    });
+
+    const hasAtLeastOneReminderPost = queuePostsArray.some(
+      post => post.postDetails && post.postDetails.isInstagramReminder
+    );
 
     if (isLockedProfile) {
       return {
@@ -61,6 +71,8 @@ export default connect(
         paused: profileData.paused,
         isManager: profileData.isManager,
         isBusinessAccount: profileData.business,
+        hasPushNotifications: profileData.hasPushNotifications,
+        hasAtLeastOneReminderPost,
         showInstagramDirectPostingModal:
           state.modals.showInstagramDirectPostingModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
@@ -192,6 +204,13 @@ export default connect(
     },
     onHideInstagramModal: () => {
       dispatch(actions.handleHideInstagramModal());
+    },
+    onSetRemindersClick: () => {
+      window.location.assign(
+        `${getURL.getRemindersURL({
+          cta: SEGMENT_NAMES.REMINDERS_BANNER,
+        })}`
+      );
     },
     onCalendarClick: (weekOrMonth, trackingAction) => {
       const openAfterTrack = () => {

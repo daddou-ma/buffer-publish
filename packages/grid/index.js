@@ -161,7 +161,7 @@ export default connect(
         })
       );
     },
-    onSaveCustomLinkText: ({ item, value }) => {
+    onSaveCustomLinkText: ({ item }) => {
       dispatch(
         actions.handleSaveCustomLink({
           profileId: ownProps.profileId,
@@ -185,6 +185,14 @@ export default connect(
           profileId: ownProps.profileId,
           item,
           editing,
+        })
+      );
+    },
+    onCancelCustomLinkEdit: ({ item }) => {
+      dispatch(
+        actions.handleOnCancelCustomLinkEdit({
+          profileId: ownProps.profileId,
+          item,
         })
       );
     },

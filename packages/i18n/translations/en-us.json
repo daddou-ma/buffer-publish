@@ -69,6 +69,13 @@
     "planTrial": "You're on the {plan} trial. ",
     "startSubscription": "Start Subscription"
   },
+  "set-reminders-modal": {
+    "tag": "Available on Android and iOS",
+    "title": "Set up Reminders to complete your Instagram post.",
+    "description": "Due to Instagram limitations, we can't auto-publish some of your queued posts. Set up Reminders now to make sure all your content gets published on time.",
+    "dismiss": "Dismiss",
+    "setReminders": "Set Up Reminders"
+  },
   "switch-plan-modal": {
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
     "proTrialistUpgradeHeader": "Complete your trial and upgrade to the Pro Plan!",
@@ -111,7 +118,9 @@
       "nonprofitYearlyPrice": "$72 per year",
       "planYearlyPrice": "$144 per year",
       "nonprofitMonthlyPrice": "$7.50 per month",
+      "nonprofitPromoMonthlyPrice": "$5.00 per month",
       "planMonthlyPrice": "$15 per month",
+      "planPromoMonthlyPrice": "$10 per month",
       "planMonthlyDescription": "Cancel and get a refund any time",
       "planYearlyDescription": "Save 20% vs paying monthly",
       "buttonText": "Subscribe to Pro Plan"
@@ -296,6 +305,8 @@
   "plans-page": {
     "buttonDashboardText": "Back to Dashboard",
     "headerText": "Choose your Buffer Publish plan",
+    "promoHeader": "Get more with the new Buffer Publish",
+    "promoDescription": "For a limited time, upgrade to the Pro plan and keep your current pricing for 3 months.",
     "pro": {
       "title": "Pro",
       "cost": "$15",
@@ -333,12 +344,15 @@
     "proExperiment": {
       "title": "Pro",
       "cost": "$15",
+      "promoCost": "$10",
+      "promoNonProfitCost": "$5",
+      "promoDiscount": "Discount applies for first 3 months",
       "nonProfitCost": "$7.50",
       "subtitle": "Commit to a social strategy",
       "plan": "pro",
-      "features": ["8 social accounts", "Instagram first comment"],
-      "featureTooltips": ["", "Include first comment when you schedule Instagram posts"],
-      "buttonText": "Choose Plan",
+      "features": ["8 social accounts", "Instagram first comment", "Instagram user tagging"],
+      "featureTooltips": ["", "Include first comment when you schedule Instagram posts", "Tag Instagram users when you schedule Instagram posts"],
+      "buttonText": "Upgrade to Pro",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly",
       "monthly": "/mo"
@@ -349,14 +363,15 @@
       "nonProfitCost": "$32.50",
       "subtitle": "Unlock advanced IG features",
       "plan": "premium_business",
-      "features": ["8 social accounts", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "features": ["8 social accounts", "Instagram first comment", "Instagram user tagging", "Hashtag Manager", "Shop Grid", "Instagram Stories"],
       "featureTooltips": ["",
-                          "Plan, preview, and schedule Instagram Stories on web and mobile.",
                           "Include the first comment when you schedule Instagram posts",
+                          "Tag Instagram users when you schedule Instagram posts",
                           "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
-                          "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+                          "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
+                          "Plan, preview, and schedule Instagram Stories on web and mobile."
                           ],
-      "buttonText": "Choose Plan",
+      "buttonText": "Upgrade to Premium",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly",
       "soloCost": "$35",

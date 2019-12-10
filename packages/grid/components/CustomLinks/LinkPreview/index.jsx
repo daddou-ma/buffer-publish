@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '@bufferapp/ui';
@@ -9,6 +9,7 @@ import {
   PreviewWrapper,
   UrlPreview,
   LinkPreviewRow,
+  StyledButton,
 } from '../styles';
 
 export const LinkPreviewButton = styled.div.attrs(props => ({
@@ -35,9 +36,20 @@ export const LinkPreviewButton = styled.div.attrs(props => ({
   cursor: default;
   font-size: 14px;
   line-height: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const UrlWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  min-width: 0;
 `;
 
 const LinkPreview = ({
+  index,
+  totalLinks,
   item,
   bgColor,
   textColor,
@@ -45,21 +57,48 @@ const LinkPreview = ({
   onToggleEditMode,
   isTarget,
 }) => {
+  const [isConfirmingDelete, setConfirmingDelete] = useState(false);
+
   return (
-    <PreviewWrapper isTarget={isTarget}>
+    <PreviewWrapper isTarget={isTarget} totalLinks={totalLinks} index={index}>
       <LinkPreviewRow>
         <LinkPreviewButton bgColor={bgColor} textColor={textColor}>
           {item.text}
         </LinkPreviewButton>
-        <UrlPreview>{item.url}</UrlPreview>
-        <Button
-          label="Delete"
-          type="gray"
-          onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
-        />
+        <UrlWrapper>
+          <UrlPreview>{item.url}</UrlPreview>
+        </UrlWrapper>
+        {onDeleteCustomLink && (
+          <React.Fragment>
+            {!isConfirmingDelete ? (
+              <StyledButton
+                type="text"
+                label="Delete"
+                size="small"
+                onClick={() => setConfirmingDelete(true)}
+              />
+            ) : (
+              <React.Fragment>
+                <StyledButton
+                  type="text"
+                  label="Cancel"
+                  size="small"
+                  onClick={() => setConfirmingDelete(false)}
+                />
+                <Button
+                  label="Delete"
+                  type="gray"
+                  size="small"
+                  onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
+                />
+              </React.Fragment>
+            )}
+          </React.Fragment>
+        )}
         <Button
           label="Edit"
           type="secondary"
+          size="small"
           onClick={() => onToggleEditMode({ item, editing: true })}
         />
       </LinkPreviewRow>
@@ -68,6 +107,8 @@ const LinkPreview = ({
 };
 
 LinkPreview.propTypes = {
+  index: PropTypes.number,
+  totalLinks: PropTypes.number,
   isTarget: PropTypes.bool,
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
@@ -82,6 +123,8 @@ LinkPreview.propTypes = {
 };
 
 LinkPreview.defaultProps = {
+  index: 0,
+  totalLinks: 0,
   isTarget: false,
   bgColor: DEFAULT_COLOR,
   textColor: '#FFFFFF',

@@ -98,7 +98,7 @@ const LinkDragWrapper = React.forwardRef(
     const { isOver, isDragging } = customLinkProps;
 
     return (
-      <>
+      <React.Fragment>
         <DragPreviewImage
           src="https://buffer-publish.s3.amazonaws.com/images/drag-link-placeholder.png"
           connect={connectDragPreview}
@@ -113,7 +113,7 @@ const LinkDragWrapper = React.forwardRef(
           {!isDragging && isOver && <SwapIconStyled />}
           <LinkPreview isTarget={isOver} {...customLinkProps} />
         </DragWrapper>
-      </>
+      </React.Fragment>
     );
   }
 );

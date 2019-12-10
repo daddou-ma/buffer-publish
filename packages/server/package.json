@@ -30,7 +30,7 @@
     "pusher": "1.5.1",
     "request": "2.81.0",
     "request-promise": "4.2.1",
-    "serialize-javascript": "^1.5.0",
+    "serialize-javascript": "^2.1.1",
     "twitter-text": "3.0.0"
   },
   "devDependencies": {

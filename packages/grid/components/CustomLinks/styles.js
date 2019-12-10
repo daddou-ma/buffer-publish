@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { grayLight, blue } from '@bufferapp/ui/style/colors';
+import { grayLight, blue, grayLighter } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
+import { Button } from '@bufferapp/ui';
 
 export const DEFAULT_COLOR = '#000000';
 export const DEFAULT_CONTRAST_COLOR = '#FFFFFF';
 
 export const MyLinksSection = styled.div`
-  border: 1px solid ${grayLight};
+  width: 100%;
   border-radius: ${borderRadius};
   margin-bottom: 22px;
   display: flex;
@@ -17,7 +18,9 @@ export const MyLinksSection = styled.div`
 export const PreviewWrapper = styled.div`
   display: flex;
   position: relative;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid ${grayLight};
+  border-bottom: ${props =>
+    props.index === props.totalLinks - 1 ? 'none' : `1px solid ${grayLight}`};
   transition: all 0.3s ease-in-out;
   box-shadow: ${props => (props.isTarget ? `0px 0px 4px 4px ${blue}` : 'none')};
 
@@ -49,14 +52,18 @@ export const LinkPreviewRow = styled.div`
   padding: 15px;
   font-size: 14px;
   color: #636363;
+  min-width: 0;
 `;
 
-export const MyLinksBody = styled.div``;
+export const MyLinksBody = styled.div`
+  border: 1px solid ${grayLight};
+  margin-top: 15px;
+`;
 
 export const EditingMyLinksItem = styled.div`
   display: flex;
   padding: 8px;
-  border-top: 1px solid ${grayLight};
+  background-color: ${grayLighter};
 `;
 
 export const LinkInput = styled.div`
@@ -67,6 +74,9 @@ export const LinkInput = styled.div`
 export const UrlPreview = styled.div`
   margin-left: 14px;
   flex-basis: 402px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ActionsWrapper = styled.div`
@@ -74,4 +84,11 @@ export const ActionsWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   padding: 0 15px 15px;
+  background-color: ${grayLighter};
+`;
+
+export const StyledButton = styled(Button)`
+  :focus {
+    box-shadow: none;
+  }
 `;

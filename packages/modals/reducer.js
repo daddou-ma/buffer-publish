@@ -12,6 +12,7 @@ export const initialState = {
   showWelcomeB4BTrialModal: false,
   showInstagramFirstCommentModal: false,
   showTrialCompleteModal: false,
+  showSetRemindersModal: false,
   showInstagramFirstCommentProTrialModal: false,
   showCloseComposerConfirmationModal: false,
   modalToShowLater: null,
@@ -34,6 +35,8 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_WELCOME_B4B_TRIAL_MODAL: 0,
   SHOW_TRIAL_COMPLETE_MODAL: 0,
   HIDE_TRIAL_COMPLETE_MODAL: 0,
+  SHOW_SET_REMINDERS_MODAL: 0,
+  HIDE_SET_REMINDERS_MODAL: 0,
   SHOW_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
   HIDE_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
   SHOW_INSTAGRAM_FIRST_COMMENT_PRO_TRIAL_MODAL: 0,
@@ -138,6 +141,16 @@ export default (state = initialState, action) => {
           params: action.params,
         },
       };
+    case actionTypes.SHOW_SET_REMINDERS_MODAL:
+      return {
+        ...state,
+        showSetRemindersModal: true,
+      };
+    case actionTypes.HIDE_SET_REMINDERS_MODAL:
+      return {
+        ...state,
+        showSetRemindersModal: false,
+      };
     case actionTypes.SHOW_WELCOME_B4B_TRIAL_MODAL:
       return {
         ...state,
@@ -174,10 +187,11 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  showSwitchPlanModal: ({ plan, source }) => ({
+  showSwitchPlanModal: ({ plan, source, isPromo }) => ({
     type: actionTypes.SHOW_SWITCH_PLAN_MODAL,
     plan,
     source,
+    isPromo,
   }),
   hideUpgradeModal: () => ({
     type: actionTypes.HIDE_SWITCH_PLAN_MODAL,
@@ -239,6 +253,12 @@ export const actions = {
     params: {
       profileId,
     },
+  }),
+  showSetRemindersModal: () => ({
+    type: actionTypes.SHOW_SET_REMINDERS_MODAL,
+  }),
+  hideSetRemindersModal: () => ({
+    type: actionTypes.HIDE_SET_REMINDERS_MODAL,
   }),
   showWelcomeB4BTrialModal: () => ({
     type: actionTypes.SHOW_WELCOME_B4B_TRIAL_MODAL,

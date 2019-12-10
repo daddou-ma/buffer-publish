@@ -23,6 +23,7 @@ const CustomLinks = ({
   onSwapCustomLinks,
   onSaveNewLinkClick,
   isValidItem,
+  onCancelCustomLinkEdit,
 }) => {
   const [colorButtons, setColorButton] = useState(
     customLinksDetails.buttonColor || DEFAULT_COLOR
@@ -81,12 +82,14 @@ const CustomLinks = ({
       />
       <MyLinksBody>
         {customLinksDetails.customLinks &&
-          customLinksDetails.customLinks.map(customLinkItem => {
+          customLinksDetails.customLinks.map((customLinkItem, index) => {
             return (
               <React.Fragment>
                 {!customLinkItem.editing && (
                   <LinkDragWrapper
                     item={customLinkItem}
+                    totalLinks={customLinksDetails.customLinks.length}
+                    index={index}
                     textColor={textColor}
                     bgColor={colorButtons}
                     onSwapCustomLinks={onSwapCustomLinks}
@@ -102,7 +105,7 @@ const CustomLinks = ({
                     onUpdateLinkText={onUpdateLinkText}
                     onUpdateLinkUrl={onUpdateLinkUrl}
                     onCancelClick={({ item }) => {
-                      onToggleEditMode({ item, editing: false });
+                      onCancelCustomLinkEdit({ item });
                     }}
                     onSaveClick={() =>
                       onUpdateCustomLinks({
@@ -150,6 +153,7 @@ CustomLinks.propTypes = {
   onDeleteCustomLink: PropTypes.func,
   onUpdateCustomLinks: PropTypes.func,
   onSwapCustomLinks: PropTypes.func,
+  onCancelCustomLinkEdit: PropTypes.func,
   onUpdateCustomLinksColor: PropTypes.func,
   onSaveNewLinkClick: PropTypes.func,
   isValidItem: PropTypes.func,
@@ -169,6 +173,7 @@ CustomLinks.defaultProps = {
   onDeleteCustomLink: () => {},
   onUpdateCustomLinks: () => {},
   onSwapCustomLinks: () => {},
+  onCancelCustomLinkEdit: () => {},
   onSaveNewLinkClick: () => {},
   onUpdateCustomLinksColor: () => {},
   isValidItem: () => {},

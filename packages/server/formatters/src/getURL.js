@@ -81,6 +81,14 @@ module.exports = {
     }
     return `https://buffer.com/app/account/receipts?content_only=true${ctaParam}`;
   },
+  getRemindersURL: ({ cta }) => {
+    const ctaParam = cta ? `&cta=${cta}` : '';
+    // Temporary link, to be updated soon
+    if (window.location.hostname === 'publish.local.buffer.com') {
+      return `https://local.buffer.com/${ctaParam}`;
+    }
+    return `https://buffer.com/${ctaParam}`;
+  },
   getPublishUrl: () => {
     if (window.location.hostname === 'publish.local.buffer.com') {
       return 'https://publish.local.buffer.com';

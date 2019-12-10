@@ -12,28 +12,6 @@ describe('reducer', () => {
       expect(reducer(undefined, action)).toEqual(initialState);
     });
 
-    it('sets showGoBackToClassic to true when the user is on new publish beta', () => {
-      const features = ['new_publish_beta', 'new_publish_beta_redirect'];
-      const stateAfter = {
-        ...initialState,
-        showGoBackToClassic: true,
-        user: {
-          loading: false,
-          features,
-        },
-      };
-
-      const action = {
-        type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
-        result: {
-          features,
-        },
-      };
-
-      deepFreeze(action);
-      expect(reducer(undefined, action)).toEqual(stateAfter);
-    });
-
     it('sets submittingFeedback to true on FETCH_START', () => {
       const stateAfter = {
         ...initialState,

@@ -22,22 +22,24 @@ export default connect(
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
-    isAwesomeUser: state.appSidebar.user.isOnAwesomePlan,
-    shouldSeeSoloPlanOption:
-      state.appSidebar.user.plan === 'pro' ||
-      state.appSidebar.user.isOnAwesomePlan,
+    isAwesomePromoUser: state.appSidebar.user.isAwesomePromoUser,
+    shouldSeeSoloPlanOption: state.appSidebar.user.plan === 'pro',
   }),
   dispatch => ({
     onPremiumPlanClick: ({ selectedPlan }) => {
       dispatch(actions.setSelectedPlan({ selectedPlan }));
     },
-    onChoosePlanClick: ({ source, plan, soloPlanSelected }) => {
+    onChoosePlanClick: ({ source, plan, soloPlanSelected, isPromo }) => {
       if (plan === 'premium_business' && soloPlanSelected) {
         plan = 'solo_premium_business';
       }
-      dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
+      dispatch(modalsActions.showSwitchPlanModal({ source, plan, isPromo }));
     },
-    onBackToDashboardClick: ({ selectedProfileId, profiles, isAwesomeUser }) => {
+    onBackToDashboardClick: ({
+      selectedProfileId,
+      profiles,
+      isAwesomeUser,
+    }) => {
       if (isAwesomeUser) {
         window.location.replace(getClassicBufferURL());
         return;

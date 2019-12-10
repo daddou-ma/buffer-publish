@@ -83,6 +83,7 @@ class SwitchPlanModal extends React.Component {
       selectCycle,
       isNonprofit,
       dismissible,
+      isPromo,
     } = this.props;
 
     return (
@@ -106,6 +107,7 @@ class SwitchPlanModal extends React.Component {
                 cycle={cycle}
                 selectCycle={selectCycle}
                 isNonprofit={isNonprofit}
+                isPromo={isPromo}
               />
             )}
 

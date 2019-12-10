@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Button } from '@bufferapp/ui';
 
-import { EditingMyLinksItem, ActionsWrapper, LinkInput } from '../styles';
+import { EditingMyLinksItem, ActionsWrapper, LinkInput, StyledButton } from '../styles';
 
 const EditingLinkForm = ({
   item,
@@ -37,14 +37,16 @@ const EditingLinkForm = ({
         </LinkInput>
       </EditingMyLinksItem>
       <ActionsWrapper>
-        <Button
+        <StyledButton
           label="Cancel"
           type="text"
+          size="small"
           onClick={() => onCancelClick({ item })}
         />
         <Button
           label="Save Link"
           type="primary"
+          size="small"
           disabled={!isValidItem({ item })}
           onClick={() => onSaveClick({ item })}
         />
@@ -54,7 +56,6 @@ const EditingLinkForm = ({
 };
 
 EditingLinkForm.propTypes = {
-  onToggleEditMode: PropTypes.func,
   onUpdateCustomLinks: PropTypes.func,
   onUpdateLinkText: PropTypes.func,
   onUpdateLinkUrl: PropTypes.func,
@@ -71,7 +72,6 @@ EditingLinkForm.propTypes = {
 };
 
 EditingLinkForm.defaultProps = {
-  onToggleEditMode: () => {},
   onUpdateCustomLinks: () => {},
   onUpdateLinkText: () => {},
   onUpdateLinkUrl: () => {},

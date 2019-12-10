@@ -4,8 +4,8 @@ import { ColorPicker } from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
 import styled from 'styled-components';
 import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
-import { IconArrowPopover } from '@bufferapp/components';
-import { gray, grayDarker } from '@bufferapp/ui/style/colors';
+import Tooltip from '@bufferapp/ui/Tooltip';
+import { gray, grayDark } from '@bufferapp/ui/style/colors';
 import { fontFamily, fontWeightBold } from '@bufferapp/ui/style/fonts';
 
 const DEFAULT_COLOR = '#000000';
@@ -13,7 +13,7 @@ const DEFAULT_COLOR = '#000000';
 const MyLinksHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  padding-top: 16px;
 `;
 
 const MyLinksTitle = styled.div`
@@ -21,16 +21,12 @@ const MyLinksTitle = styled.div`
   align-items: center;
 `;
 
-const PopoverTextContainer = styled.div`
-  padding: 0.5rem 0.25rem;
-`;
-
 const MyLinksIcon = styled.span`
   padding: 6px 0 0 6px;
 `;
 
 const MyLinksTitleText = styled.span`
-  color: ${grayDarker};
+  color: ${grayDark};
   font-family: ${fontFamily};
   font-size: 18px;
   font-weight: ${fontWeightBold};
@@ -75,8 +71,7 @@ const LinksHeader = ({
   customLinksDetails,
   maxCustomLinks,
   title = 'Top Links',
-  label = 'Top Links',
-  popupText = 'Add upto 3 custom links to the top of your Shop grid page.',
+  popupText = 'Add up to 3 custom links to the top of your Shop grid page.',
   onAddLinkClick = () => {},
   buttonText = 'Add Link',
   pickerText = 'Link Color',
@@ -92,19 +87,9 @@ const LinksHeader = ({
       <MyLinksTitle>
         <MyLinksTitleText>{title}</MyLinksTitleText>
         <MyLinksIcon>
-          <IconArrowPopover
-            icon={<InfoIcon color={gray} />}
-            position="below"
-            shadow
-            oneLine={false}
-            width="320px"
-            label={label}
-          >
-            <PopoverTextContainer>
-              {/* eslint-disable max-len */}
-              {popupText}
-            </PopoverTextContainer>
-          </IconArrowPopover>
+          <Tooltip label={popupText} position="right">
+            <InfoIcon color={gray} />
+          </Tooltip>
         </MyLinksIcon>
       </MyLinksTitle>
       <AddLinkSection>
@@ -114,7 +99,7 @@ const LinksHeader = ({
             defaultColor={colorButtons}
             setColorButton={setColorButton}
             setTextColor={setTextColor}
-            onBlur={e =>
+            onBlur={() =>
               onUpdateCustomLinksColor({
                 customLinkColor: colorButtons,
                 customLinkContrastColor: textColor,

@@ -14,6 +14,7 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
+import RemindersBanner from '../RemindersBanner';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -66,7 +67,10 @@ const QueuedPosts = ({
   isManager,
   hasFirstCommentFlip,
   isBusinessAccount,
+  hasPushNotifications,
+  hasAtLeastOneReminderPost,
   onComposerOverlayClick,
+  onSetRemindersClick,
 }) => {
   if (loading) {
     return (
@@ -91,6 +95,11 @@ const QueuedPosts = ({
   return (
     <ErrorBoundary>
       <div>
+        {!hasPushNotifications &&
+          isInstagramProfile &&
+          hasAtLeastOneReminderPost && (
+            <RemindersBanner onSetRemindersClick={onSetRemindersClick} />
+          )}
         <div style={topBarContainerStyle}>
           <div style={composerStyle}>
             {showComposer && !editMode && (
@@ -189,6 +198,7 @@ QueuedPosts.propTypes = {
   onImageClose: PropTypes.func.isRequired,
   onDropPost: PropTypes.func.isRequired,
   onSwapPosts: PropTypes.func.isRequired,
+  onSetRemindersClick: PropTypes.func.isRequired,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
   paused: PropTypes.bool,
@@ -197,6 +207,8 @@ QueuedPosts.propTypes = {
   isManager: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
+  hasPushNotifications: PropTypes.bool,
+  hasAtLeastOneReminderPost: PropTypes.bool,
   showInstagramDirectPostingModal: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,
   isInstagramLoading: PropTypes.bool,
@@ -207,7 +219,6 @@ QueuedPosts.propTypes = {
 };
 
 QueuedPosts.defaultProps = {
-  postLists: [],
   loading: true,
   moreToLoad: false,
   page: 1,
@@ -218,6 +229,8 @@ QueuedPosts.defaultProps = {
   subprofiles: [],
   isInstagramProfile: false,
   isInstagramBusiness: false,
+  hasPushNotifications: true,
+  hasAtLeastOneReminderPost: false,
   showInstagramDirectPostingModal: false,
   isInstagramLoading: false,
   isLockedProfile: false,

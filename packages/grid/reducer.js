@@ -19,6 +19,7 @@ export const actionTypes = keyWrapper('GRID', {
   EDIT_CUSTOM_LINK_URL: 0,
   SAVE_CUSTOM_LINK: 0,
   TOGGLE_CUSTOM_LINK_EDIT_MODE: 0,
+  ON_CANCEL_CUSTOM_LINK_EDIT: 0,
   SWAP_CUSTOM_LINKS: 0,
 });
 
@@ -227,6 +228,39 @@ const profileReducer = (state = profileInitialState, action) => {
         },
       };
     }
+    case actionTypes.ON_CANCEL_CUSTOM_LINK_EDIT: {
+      const { customLinksDetails } = state;
+      const { item = {} } = action;
+      const { customLinks = [] } = customLinksDetails;
+      const editedCustomLinks = cloneDeep(customLinks);
+      let customLinksResult = [];
+
+      if (item && item._id) {
+        editedCustomLinks.map(link => {
+          if (link._id === item._id) {
+            link.text = link.old_text || link.text;
+            link.url = link.old_url || link.url;
+            link.editing = false;
+          }
+          return link;
+        });
+        customLinksResult = editedCustomLinks;
+      }
+
+      if (!item._id) {
+        customLinksResult = editedCustomLinks.filter(
+          link => link._id !== undefined
+        );
+      }
+
+      return {
+        ...state,
+        customLinksDetails: {
+          ...customLinksDetails,
+          customLinks: customLinksResult,
+        },
+      };
+    }
     case actionTypes.UPDATE_CUSTOM_LINKS: {
       const { customLinksDetails } = state;
       const { customLinks = [] } = customLinksDetails;
@@ -344,6 +378,7 @@ export default (state = initialState, action) => {
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `updateCustomLinks_${dataFetchActionTypes.FETCH_FAIL}`:
     case actionTypes.SAVE_POST_URL:
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
@@ -352,6 +387,7 @@ export default (state = initialState, action) => {
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:
     case actionTypes.EDIT_CUSTOM_LINK_URL:
     case actionTypes.TOGGLE_CUSTOM_LINK_EDIT_MODE:
+    case actionTypes.ON_CANCEL_CUSTOM_LINK_EDIT:
     case actionTypes.UPDATE_CUSTOM_LINKS:
     case actionTypes.DELETE_CUSTOM_LINK:
     case actionTypes.SWAP_CUSTOM_LINKS:
@@ -467,6 +503,11 @@ export const actions = {
     profileId,
     item,
     editing,
+  }),
+  handleOnCancelCustomLinkEdit: ({ profileId, item }) => ({
+    type: actionTypes.ON_CANCEL_CUSTOM_LINK_EDIT,
+    profileId,
+    item,
   }),
   handleSwapCustomLinks: ({
     profileId,

@@ -4,29 +4,37 @@ const getSource = ({ newPlan, currentPlan }) => {
   let source = null;
   switch (newPlan) {
     case 'pro':
-      source = currentPlan === 'free'
-        ? 'plans_pro_upgrade'
-        : 'plans_pro_downgrade';
+      source =
+        currentPlan === 'free' || currentPlan === 'awesome'
+          ? 'plans_pro_upgrade'
+          : 'plans_pro_downgrade';
       break;
     case 'solo_premium_business':
-      source = currentPlan === 'free' || currentPlan === 'pro'
-        ? 'plans_solo_premium_upgrade'
-        : 'plans_solo_premium_downgrade';
+      source =
+        currentPlan === 'free' ||
+        currentPlan === 'pro' ||
+        currentPlan === 'awesome'
+          ? 'plans_solo_premium_upgrade'
+          : 'plans_solo_premium_downgrade';
       break;
     case 'premium_business':
-      source = currentPlan === 'free'
-      || currentPlan === 'pro'
-      || currentPlan === 'solo_premium_business'
-        ? 'plans_premium_upgrade'
-        : 'plans_premium_downgrade';
+      source =
+        currentPlan === 'free' ||
+        currentPlan === 'awesome' ||
+        currentPlan === 'pro' ||
+        currentPlan === 'solo_premium_business'
+          ? 'plans_premium_upgrade'
+          : 'plans_premium_downgrade';
       break;
     case 'small':
-      source = currentPlan === 'free'
-      || currentPlan === 'pro'
-      || currentPlan === 'solo_premium_business'
-      || currentPlan === 'premium_business'
-        ? 'plans_small_upgrade'
-        : 'plans_small_downgrade';
+      source =
+        currentPlan === 'free' ||
+        currentPlan === 'awesome' ||
+        currentPlan === 'pro' ||
+        currentPlan === 'solo_premium_business' ||
+        currentPlan === 'premium_business'
+          ? 'plans_small_upgrade'
+          : 'plans_small_downgrade';
       break;
     default:
       break;
