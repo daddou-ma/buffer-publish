@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Button } from '@bufferapp/ui';
 
-import { EditingMyLinksItem, ActionsWrapper, LinkInput } from '../styles';
+import { EditingMyLinksItem, ActionsWrapper, LinkInput, StyledButton } from '../styles';
 
 const EditingLinkForm = ({
   item,
@@ -37,7 +37,7 @@ const EditingLinkForm = ({
         </LinkInput>
       </EditingMyLinksItem>
       <ActionsWrapper>
-        <Button
+        <StyledButton
           label="Cancel"
           type="text"
           size="small"
