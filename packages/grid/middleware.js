@@ -180,6 +180,24 @@ export default ({ getState, dispatch }) => next => action => {
       );
       break;
     }
+    case gridActionTypes.ADD_NEW_CUSTOM_LINK: {
+      const profile = getState().grid.byProfileId[action.profileId];
+      const linkDetails = profile.customLinksDetails;
+
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'updateCustomLinks',
+          args: {
+            profileId: action.profileId,
+            customLinks: linkDetails.customLinks || [],
+            customLinkColor: action.customLinkColor,
+            customLinkContrastColor: action.customLinkContrastColor,
+            customLinkButtonType: action.customLinkButtonType,
+          },
+        })
+      );
+      break;
+    }
 
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({

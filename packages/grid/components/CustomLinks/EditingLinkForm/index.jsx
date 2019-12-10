@@ -6,11 +6,11 @@ import { EditingMyLinksItem, ActionsWrapper, LinkInput, StyledButton } from '../
 
 const EditingLinkForm = ({
   item,
-  customLinksDetails,
-  onUpdateCustomLinks,
   onUpdateLinkText,
   onUpdateLinkUrl,
-  onCancelCustomLinkEdit,
+  onCancelClick,
+  onSaveClick,
+  isValidItem,
 }) => {
   return (
     <React.Fragment>
@@ -41,17 +41,14 @@ const EditingLinkForm = ({
           label="Cancel"
           type="text"
           size="small"
-          onClick={() => onCancelCustomLinkEdit({ item })}
+          onClick={() => onCancelClick({ item })}
         />
         <Button
           label="Save Link"
           type="primary"
           size="small"
-          onClick={() =>
-            onUpdateCustomLinks({
-              customLinks: customLinksDetails.customLinks,
-            })
-          }
+          disabled={!isValidItem({ item })}
+          onClick={() => onSaveClick({ item })}
         />
       </ActionsWrapper>
     </React.Fragment>
@@ -59,10 +56,12 @@ const EditingLinkForm = ({
 };
 
 EditingLinkForm.propTypes = {
-  onCancelCustomLinkEdit: PropTypes.func,
   onUpdateCustomLinks: PropTypes.func,
   onUpdateLinkText: PropTypes.func,
   onUpdateLinkUrl: PropTypes.func,
+  onCancelClick: PropTypes.func,
+  onSaveClick: PropTypes.func,
+  isValidItem: PropTypes.func,
   item: PropTypes.shape({
     text: PropTypes.string,
     url: PropTypes.string,
@@ -73,10 +72,12 @@ EditingLinkForm.propTypes = {
 };
 
 EditingLinkForm.defaultProps = {
-  onCancelCustomLinkEdit: () => {},
   onUpdateCustomLinks: () => {},
   onUpdateLinkText: () => {},
   onUpdateLinkUrl: () => {},
+  onCancelClick: () => {},
+  onSaveClick: () => {},
+  isValidItem: () => {},
   item: {
     text: null,
     url: null,

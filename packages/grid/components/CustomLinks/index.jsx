@@ -17,12 +17,13 @@ const CustomLinks = ({
   onUpdateCustomLinks,
   onUpdateCustomLinksColor,
   onDeleteCustomLink,
-  onAddLinkClick,
   onUpdateLinkText,
   onUpdateLinkUrl,
   maxCustomLinks,
   onToggleEditMode,
   onSwapCustomLinks,
+  onSaveNewLinkClick,
+  isValidItem,
   onCancelCustomLinkEdit,
 }) => {
   const [colorButtons, setColorButton] = useState(
@@ -31,6 +32,41 @@ const CustomLinks = ({
   const [textColor, setTextColor] = useState(
     customLinksDetails.buttonContrastColor || DEFAULT_CONTRAST_COLOR
   );
+  const [newLinks, addNewLink] = useState([]);
+
+  const onCancelClick = ({ item }) => {
+    addNewLink(
+      newLinks.filter(currentItem => currentItem.order !== item.order)
+    );
+  };
+
+  const onUpdateNewLinkValue = ({ item, value, type }) => {
+    addNewLink(
+      newLinks.map(currentItem => {
+        if (currentItem.order === item.order) {
+          item[type] = value;
+        }
+        return currentItem;
+      })
+    );
+  };
+
+  const totalLinks =
+    newLinks.length +
+    ((customLinksDetails.customLinks &&
+      customLinksDetails.customLinks.length) ||
+      0);
+
+  const onAddLinkClick = () => {
+    addNewLink([
+      ...newLinks,
+      {
+        text: '',
+        url: '',
+        order: Math.max(0, ...newLinks.map(l => l.order)) + 1,
+      },
+    ]);
+  };
   const { customLinks = [] } = customLinksDetails;
 
   return (
@@ -44,18 +80,19 @@ const CustomLinks = ({
         colorButtons={colorButtons}
         textColor={textColor}
         onUpdateCustomLinksColor={onUpdateCustomLinksColor}
+        addLinkDisabled={totalLinks >= maxCustomLinks}
       />
       {customLinks.length === 0 && <Separator />}
       <MyLinksBody total={customLinks.length}>
         {customLinksDetails.customLinks &&
-          customLinksDetails.customLinks.map((item, index) => {
+          customLinksDetails.customLinks.map((customLinkItem, index) => {
             return (
-              <React.Fragment key={`link_${item._id}`}>
-                {!item.editing && (
+              <React.Fragment key={`link_${customLinkItem._id}`}>
+                {!customLinkItem.editing && (
                   <LinkDragWrapper
+                    item={customLinkItem}
                     totalLinks={customLinksDetails.customLinks.length}
                     index={index}
-                    item={item}
                     textColor={textColor}
                     bgColor={colorButtons}
                     onSwapCustomLinks={onSwapCustomLinks}
@@ -63,20 +100,49 @@ const CustomLinks = ({
                     onDeleteCustomLink={onDeleteCustomLink}
                   />
                 )}
-                {item.editing && (
+                {customLinkItem.editing && (
                   <EditingLinkForm
-                    key={item.order}
-                    item={item}
+                    key={customLinkItem.order}
+                    item={customLinkItem}
                     customLinksDetails={customLinksDetails}
-                    onUpdateCustomLinks={onUpdateCustomLinks}
                     onUpdateLinkText={onUpdateLinkText}
                     onUpdateLinkUrl={onUpdateLinkUrl}
-                    onCancelCustomLinkEdit={onCancelCustomLinkEdit}
+                    onCancelClick={({ item }) => {
+                      onCancelCustomLinkEdit({ item });
+                    }}
+                    onSaveClick={() =>
+                      onUpdateCustomLinks({
+                        customLinks: customLinksDetails.customLinks,
+                      })
+                    }
+                    isValidItem={isValidItem}
                   />
                 )}
               </React.Fragment>
             );
           })}
+
+        {newLinks.map(newLinkItem => {
+          return (
+            <EditingLinkForm
+              key={newLinkItem.order}
+              item={newLinkItem}
+              customLinksDetails={customLinksDetails}
+              onUpdateLinkText={({ item, value }) => {
+                onUpdateNewLinkValue({ item, value, type: 'text' });
+              }}
+              onUpdateLinkUrl={({ item, value }) => {
+                onUpdateNewLinkValue({ item, value, type: 'url' });
+              }}
+              onSaveClick={({ item }) => {
+                onSaveNewLinkClick({ item });
+                onCancelClick({ item });
+              }}
+              onCancelClick={onCancelClick}
+              isValidItem={isValidItem}
+            />
+          );
+        })}
       </MyLinksBody>
     </MyLinksSection>
   );
@@ -84,7 +150,6 @@ const CustomLinks = ({
 
 CustomLinks.propTypes = {
   maxCustomLinks: PropTypes.number,
-  onAddLinkClick: PropTypes.func,
   onUpdateLinkUrl: PropTypes.func,
   onUpdateLinkText: PropTypes.func,
   onToggleEditMode: PropTypes.func,
@@ -93,6 +158,8 @@ CustomLinks.propTypes = {
   onSwapCustomLinks: PropTypes.func,
   onCancelCustomLinkEdit: PropTypes.func,
   onUpdateCustomLinksColor: PropTypes.func,
+  onSaveNewLinkClick: PropTypes.func,
+  isValidItem: PropTypes.func,
   customLinksDetails: PropTypes.shape({
     customLinks: PropTypes.array,
     maxCustomLinks: PropTypes.number,
@@ -103,7 +170,6 @@ CustomLinks.propTypes = {
 
 CustomLinks.defaultProps = {
   maxCustomLinks: 3,
-  onAddLinkClick: () => {},
   onUpdateLinkUrl: () => {},
   onUpdateLinkText: () => {},
   onToggleEditMode: () => {},
@@ -111,7 +177,9 @@ CustomLinks.defaultProps = {
   onUpdateCustomLinks: () => {},
   onSwapCustomLinks: () => {},
   onCancelCustomLinkEdit: () => {},
+  onSaveNewLinkClick: () => {},
   onUpdateCustomLinksColor: () => {},
+  isValidItem: () => {},
   customLinksDetails: {
     customLinks: [],
     maxCustomLinks: 0,

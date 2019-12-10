@@ -150,7 +150,6 @@ const GridPosts = ({
   onUpdateCustomLinksColor,
   onUpdateCustomLinksButtonType,
   onDeleteCustomLink,
-  onAddLinkClick,
   onUpdateLinkText,
   onUpdateLinkUrl,
   hasCustomLinksFlip,
@@ -158,6 +157,8 @@ const GridPosts = ({
   onToggleEditMode,
   onSwapCustomLinks,
   onCancelCustomLinkEdit,
+  onSaveNewLinkClick,
+  isValidItem,
 }) => {
   if (loading) {
     return (
@@ -250,13 +251,14 @@ const GridPosts = ({
             onUpdateCustomLinksColor={onUpdateCustomLinksColor}
             onUpdateCustomLinksButtonType={onUpdateCustomLinksButtonType}
             onDeleteCustomLink={onDeleteCustomLink}
-            onAddLinkClick={onAddLinkClick}
             onUpdateLinkText={onUpdateLinkText}
             onUpdateLinkUrl={onUpdateLinkUrl}
             maxCustomLinks={maxCustomLinks}
             onToggleEditMode={onToggleEditMode}
             onSwapCustomLinks={onSwapCustomLinks}
             onCancelCustomLinkEdit={onCancelCustomLinkEdit}
+            onSaveNewLinkClick={onSaveNewLinkClick}
+            isValidItem={isValidItem}
           />
         )}
         <TitleWrapper>
@@ -314,12 +316,12 @@ GridPosts.propTypes = {
     avatar_https: PropTypes.string,
     timezone: PropTypes.string,
   }),
-  onAddLinkClick: PropTypes.func,
   customLinksDetails: PropTypes.shape({
     customLinks: PropTypes.array,
     maxCustomLinks: PropTypes.number,
     buttonColor: PropTypes.string,
   }),
+  isValidItem: PropTypes.func,
 };
 
 GridPosts.defaultProps = {
@@ -336,7 +338,7 @@ GridPosts.defaultProps = {
   onImageClose: () => {},
   handleCopyToClipboard: () => {},
   profile: {},
-  onAddLinkClick: () => {},
+  isValidItem: () => {},
   customLinksDetails: {
     customLinks: [],
     maxCustomLinks: 0,

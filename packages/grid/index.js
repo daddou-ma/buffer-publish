@@ -4,7 +4,7 @@ import { actions as analyticsActions } from '@bufferapp/publish-analytics-middle
 // load the presentational component
 import { actions } from './reducer';
 import GridPosts from './components/GridPosts';
-import { getChannelProperties } from './util';
+import { getChannelProperties, isValidURL, urlHasProtocol } from './util';
 
 const orderPostLists = posts => {
   const postLists = [];
@@ -47,10 +47,11 @@ export default connect(
     return {};
   },
   (dispatch, ownProps) => ({
-    onAddLinkClick: () => {
+    onSaveNewLinkClick: ({ item }) => {
       dispatch(
-        actions.handleAddGridLink({
+        actions.handleAddNewGridLink({
           profileId: ownProps.profileId,
+          item,
         })
       );
     },
@@ -202,6 +203,14 @@ export default connect(
           customLinkSource,
           customLinkTarget,
         })
+      );
+    },
+    isValidItem: ({ item }) => {
+      const itemText = (item && item.text) || '';
+      const itemUrl = (item && item.url) || '';
+      const cleanItemText = itemText.replace(/ /g, '');
+      return (
+        cleanItemText !== '' && isValidURL(itemUrl) && urlHasProtocol(itemUrl)
       );
     },
   })

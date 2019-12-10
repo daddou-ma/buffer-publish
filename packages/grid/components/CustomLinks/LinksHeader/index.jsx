@@ -96,6 +96,7 @@ const LinksHeader = ({
   colorButtons,
   textColor,
   onUpdateCustomLinksColor,
+  addLinkDisabled = false,
 }) => {
   return (
     <MyLinksHeader>
@@ -126,10 +127,7 @@ const LinksHeader = ({
           label={buttonText}
           type="primary"
           onClick={onAddLinkClick}
-          disabled={
-            customLinksDetails.customLinks &&
-            customLinksDetails.customLinks.length >= maxCustomLinks
-          }
+          disabled={addLinkDisabled}
         />
       </AddLinkSection>
     </MyLinksHeader>
@@ -154,6 +152,7 @@ LinksHeader.propTypes = {
   setColorButton: PropTypes.func,
   setTextColor: PropTypes.func,
   onUpdateCustomLinksColor: PropTypes.func,
+  addLinkDisabled: PropTypes.bool,
 };
 
 LinksHeader.defaultProps = {

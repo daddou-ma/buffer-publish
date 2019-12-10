@@ -13,7 +13,7 @@ export const actionTypes = keyWrapper('GRID', {
   GET_CUSTOM_LINKS: 0,
   UPDATE_CUSTOM_LINKS: 0,
   DELETE_CUSTOM_LINK: 0,
-  ADD_CUSTOM_LINK: 0,
+  ADD_NEW_CUSTOM_LINK: 0,
   EDIT_CUSTOM_LINK_TEXT: 0,
   CANCEL_EDIT_CUSTOM_LINK_TEXT: 0,
   EDIT_CUSTOM_LINK_URL: 0,
@@ -183,7 +183,7 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         gridPosts: postsReducer(state.gridPosts, action),
       };
-    case actionTypes.ADD_CUSTOM_LINK: {
+    case actionTypes.ADD_NEW_CUSTOM_LINK: {
       const { customLinksDetails } = state;
       const { customLinks = [] } = customLinksDetails;
       return {
@@ -193,9 +193,9 @@ const profileReducer = (state = profileInitialState, action) => {
           customLinks: [
             ...customLinks,
             {
-              editing: true,
-              text: '',
-              url: '',
+              editing: false,
+              text: action.item.text,
+              url: action.item.url,
               order: customLinks.length,
             },
           ],
@@ -383,7 +383,7 @@ export default (state = initialState, action) => {
     case actionTypes.UPDATE_POST_URL:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.ADD_CUSTOM_LINK:
+    case actionTypes.ADD_NEW_CUSTOM_LINK:
     case actionTypes.EDIT_CUSTOM_LINK_TEXT:
     case actionTypes.EDIT_CUSTOM_LINK_URL:
     case actionTypes.TOGGLE_CUSTOM_LINK_EDIT_MODE:
@@ -469,9 +469,10 @@ export const actions = {
     profileId,
     customLinkId,
   }),
-  handleAddGridLink: ({ profileId }) => ({
-    type: actionTypes.ADD_CUSTOM_LINK,
+  handleAddNewGridLink: ({ profileId, item }) => ({
+    type: actionTypes.ADD_NEW_CUSTOM_LINK,
     profileId,
+    item,
   }),
   handleCancelEditCustomLinkText: ({ profileId, item }) => ({
     type: actionTypes.CANCEL_EDIT_CUSTOM_LINK_TEXT,
