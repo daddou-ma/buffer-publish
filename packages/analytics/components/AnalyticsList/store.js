@@ -4,7 +4,7 @@ import { addMiddleware } from 'redux-dynamic-middlewares';
 // Analyze Middleware
 import averageMiddleware from '@bufferapp/average-table/middleware';
 import compareChartMiddleware from '@bufferapp/compare-chart/middleware';
-import datePickerMiddleware from '@bufferapp/analyze-date-picker/middleware';
+import datePickerMiddleware from '@bufferapp/publish-analyze-date-picker/middleware';
 import exportPickerMiddleware from '@bufferapp/analyze-export-picker/middleware';
 import exportToCSVMiddleware from '@bufferapp/analyze-csv-export/middleware';
 import exportToPNGMiddleware from '@bufferapp/analyze-png-export/middleware';
@@ -16,7 +16,7 @@ import summaryTableMiddleware from '@bufferapp/summary-table/middleware';
 // Analyze Reducers
 import averageReducer from '@bufferapp/average-table/reducer';
 import compareChartReducer from '@bufferapp/compare-chart/reducer';
-import datePickerReducer from '@bufferapp/analyze-date-picker/reducer';
+import datePickerReducer from '@bufferapp/publish-analyze-date-picker/reducer';
 import exportPickerReducer from '@bufferapp/analyze-export-picker/reducer';
 import exportToCSVReducer from '@bufferapp/analyze-csv-export/reducer';
 import exportToPNGReducer from '@bufferapp/analyze-png-export/reducer';
