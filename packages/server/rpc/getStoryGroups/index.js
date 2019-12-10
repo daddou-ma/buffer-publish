@@ -16,6 +16,7 @@ module.exports = method(
         since,
         before,
         utc,
+        count: 100,
       },
     })
       .then(result => JSON.parse(result))
