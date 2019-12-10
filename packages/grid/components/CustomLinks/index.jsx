@@ -9,6 +9,7 @@ import {
   DEFAULT_CONTRAST_COLOR,
   MyLinksSection,
   MyLinksBody,
+  Separator,
 } from './styles';
 
 const CustomLinks = ({
@@ -66,6 +67,7 @@ const CustomLinks = ({
       },
     ]);
   };
+  const { customLinks = [] } = customLinksDetails;
 
   return (
     <MyLinksSection>
@@ -80,11 +82,12 @@ const CustomLinks = ({
         onUpdateCustomLinksColor={onUpdateCustomLinksColor}
         addLinkDisabled={totalLinks >= maxCustomLinks}
       />
-      <MyLinksBody>
+      {customLinks.length === 0 && <Separator />}
+      <MyLinksBody total={customLinks.length}>
         {customLinksDetails.customLinks &&
           customLinksDetails.customLinks.map((customLinkItem, index) => {
             return (
-              <React.Fragment>
+              <React.Fragment key={`link_${customLinkItem._id}`}>
                 {!customLinkItem.editing && (
                   <LinkDragWrapper
                     item={customLinkItem}

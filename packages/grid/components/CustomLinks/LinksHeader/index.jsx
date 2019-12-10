@@ -67,6 +67,22 @@ const ColorPickerSection = ({
   );
 };
 
+ColorPickerSection.propTypes = {
+  label: PropTypes.string,
+  defaultColor: PropTypes.string,
+  setColorButton: PropTypes.func,
+  setTextColor: PropTypes.func,
+  onBlur: PropTypes.func,
+};
+
+ColorPickerSection.defaultProps = {
+  label: '',
+  defaultColor: '',
+  setColorButton: () => {},
+  setTextColor: () => {},
+  onBlur: () => {},
+};
+
 const LinksHeader = ({
   customLinksDetails,
   maxCustomLinks,
@@ -82,7 +98,7 @@ const LinksHeader = ({
   onUpdateCustomLinksColor,
   addLinkDisabled = false,
 }) => {
-  return [
+  return (
     <MyLinksHeader>
       <MyLinksTitle>
         <MyLinksTitleText>{title}</MyLinksTitleText>
@@ -114,19 +130,49 @@ const LinksHeader = ({
           disabled={addLinkDisabled}
         />
       </AddLinkSection>
-    </MyLinksHeader>,
-  ];
+    </MyLinksHeader>
+  );
 };
 
-LinksHeader.proptypes = {
-  customLinksDetails: PropTypes.object,
+LinksHeader.propTypes = {
+  customLinksDetails: PropTypes.shape({
+    customLinks: PropTypes.array,
+    maxCustomLinks: PropTypes.number,
+    buttonColor: PropTypes.string,
+    buttonContrastColor: PropTypes.string,
+  }),
   title: PropTypes.string,
-  label: PropTypes.string,
   popupText: PropTypes.string,
-  onAddLinkClick: PropTypes.func,
+  colorButtons: PropTypes.string,
   buttonText: PropTypes.string,
   pickerText: PropTypes.string,
+  textColor: PropTypes.string,
+  maxCustomLinks: PropTypes.number,
+  onAddLinkClick: PropTypes.func,
+  setColorButton: PropTypes.func,
+  setTextColor: PropTypes.func,
+  onUpdateCustomLinksColor: PropTypes.func,
   addLinkDisabled: PropTypes.bool,
+};
+
+LinksHeader.defaultProps = {
+  customLinksDetails: {
+    customLinks: [],
+    maxCustomLinks: 0,
+    buttonColor: null,
+    buttonContrastColor: null,
+  },
+  title: 'Top Links',
+  popupText: 'Add up to 3 custom links to the top of your Shop grid page.',
+  buttonText: 'Add Link',
+  pickerText: 'Link Color',
+  colorButtons: '',
+  textColor: '',
+  maxCustomLinks: 3,
+  onAddLinkClick: () => {},
+  setColorButton: () => {},
+  setTextColor: () => {},
+  onUpdateCustomLinksColor: () => {},
 };
 
 export default LinksHeader;

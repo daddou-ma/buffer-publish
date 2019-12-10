@@ -87,7 +87,7 @@ const LinkPreview = ({
                 />
                 <Button
                   label="Delete"
-                  type="gray"
+                  type="text"
                   size="small"
                   onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
                 />
