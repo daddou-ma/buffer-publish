@@ -9,7 +9,6 @@ export const DEFAULT_CONTRAST_COLOR = '#FFFFFF';
 export const MyLinksSection = styled.div`
   width: 100%;
   border-radius: ${borderRadius};
-  margin-bottom: 22px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -56,7 +55,12 @@ export const LinkPreviewRow = styled.div`
 `;
 
 export const MyLinksBody = styled.div`
-  border: 1px solid ${grayLight};
+  border: ${props => (props.total === 0 ? 'none' : `1px solid ${grayLight}`)};
+  margin-top: 15px;
+`;
+
+export const Separator = styled.div`
+  border-top: 1px solid ${grayLight};
   margin-top: 15px;
 `;
 
