@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DatePicker from '@bufferapp/analyze-date-picker';
+import DatePicker from '@bufferapp/publish-analyze-date-picker';
 import ExportPicker from '@bufferapp/analyze-export-picker';
 import ProfileHeader from '../ProfileHeader';
 

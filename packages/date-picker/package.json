@@ -1,0 +1,20 @@
+{
+  "name": "@bufferapp/publish-analyze-date-picker",
+  "version": "2.0.0",
+  "description": "HOTFIX: Copied from analyze to fix bug in Publish",
+  "main": "index.js",
+  "scripts": {
+    "start": "start-storybook -p 9001"
+  },
+  "author": "mike@msanroman.io",
+  "dependencies": {
+    "@bufferapp/analyze-profile-selector": "1.11.0",
+    "@bufferapp/async-data-fetch": "1.9.4",
+    "@bufferapp/components": "3.2.1",
+    "moment": "2.22.2",
+    "react-tooltip": "^3.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
