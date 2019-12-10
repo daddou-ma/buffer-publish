@@ -13,8 +13,7 @@
     "@bufferapp/publish-i18n": "2.0.0",
     "@bufferapp/publish-modals": "2.0.0",
     "@bufferapp/publish-shared-components": "2.0.0",
-    "@bufferapp/stripe": "2.0.0",
-    "@bufferapp/publish-data-tracking": "2.0.0"
+    "@bufferapp/stripe": "2.0.0"
   },
   "devDependencies": {
   },

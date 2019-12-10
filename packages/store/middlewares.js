@@ -2,11 +2,6 @@ import { applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import reduxDynamicMiddlewares from 'redux-dynamic-middlewares';
 
-import {
-  logTrackingMiddleware,
-  bufferMetricsMiddleware,
-} from '@bufferapp/publish-data-tracking';
-
 import queueMiddleware from '@bufferapp/publish-queue/middleware';
 import sentMiddleware from '@bufferapp/publish-sent/middleware';
 import gridMiddleware from '@bufferapp/publish-grid/middleware';
@@ -69,8 +64,6 @@ const composedMiddlewares = history =>
       routerMiddleware(history),
       actionsOnlyForAnalyzeMiddleware('hide'),
       asyncDataFetchMiddleware,
-      logTrackingMiddleware,
-      bufferMetricsMiddleware,
       i18nMiddleware,
       profileSidebarMiddleware,
       clientAccessMiddleware,
