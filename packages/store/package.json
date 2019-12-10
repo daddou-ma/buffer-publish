@@ -24,7 +24,6 @@
     "@bufferapp/notifications": "1.9.4",
     "@bufferapp/posts-table": "1.11.0",
     "@bufferapp/profile-loader": "1.9.0",
-    "@bufferapp/publish-app-switcher": "2.0.0",
     "@bufferapp/publish-initial-loading": "2.0.0",
     "@bufferapp/publish-drafts": "2.0.0",
     "@bufferapp/publish-data-tracking": "2.0.0",

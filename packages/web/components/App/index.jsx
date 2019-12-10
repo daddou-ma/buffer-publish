@@ -7,7 +7,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import AppPages from '@bufferapp/publish-app-pages';
 import AppShell from '@bufferapp/publish-app-shell';
 import Notifications from '@bufferapp/notifications';
-import AppSwitcher from '@bufferapp/publish-app-switcher';
 import InitialLoading from '@bufferapp/publish-initial-loading';
 import AppModals from '@bufferapp/publish-modals';
 import CTABanner from '@bufferapp/publish-cta-banner';
@@ -32,8 +31,8 @@ const contentStyle = {
 
 // Can't use stateless function for App since then
 // the `DragDropContext` doesn't work.
+// eslint-disable-next-line
 class App extends Component {
-  // eslint-disable-line
   render() {
     return (
       <div style={appStyle}>
@@ -46,9 +45,7 @@ class App extends Component {
             </InitialLoading>
           </div>
         </AppShell>
-
         <Notifications />
-        <AppSwitcher />
         <AppModals />
         <ThirdPartyWithRouter />
       </div>

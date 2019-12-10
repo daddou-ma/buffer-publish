@@ -27,7 +27,6 @@ import pusherSyncMiddleware from '@bufferapp/publish-pusher-sync/middleware';
 import notificationsMiddleware from '@bufferapp/notifications/lib/middleware';
 import environmentMiddleware from '@bufferapp/environment/lib/middleware';
 import unauthorizedRedirectMiddleware from '@bufferapp/unauthorized-redirect/middleware';
-import appSwitcherMiddleware from '@bufferapp/publish-app-switcher/middleware';
 import initialLoadingMiddleware from '@bufferapp/publish-initial-loading/middleware';
 import switchPlanModalMiddleware from '@bufferapp/publish-switch-plan-modal/middleware';
 import stripeMiddleware from '@bufferapp/stripe/middleware';

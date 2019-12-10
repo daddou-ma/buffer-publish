@@ -24,7 +24,6 @@ const {
   setRequestSessionMiddleware,
   validateSessionMiddleware,
 } = require('@bufferapp/session-manager');
-const bufferMetricsMiddleware = require('@bufferapp/buffermetrics/middleware');
 const { errorMiddleware } = require('@bufferapp/buffer-rpc');
 const serialize = require('serialize-javascript');
 const multer = require('multer');
@@ -293,14 +292,6 @@ app.use('*', (req, res, next) => {
 });
 
 app.use(bodyParser.json());
-
-app.use(
-  bufferMetricsMiddleware({
-    name: 'Buffer-Publish',
-    debug: !isProduction,
-    trackVisits: true,
-  })
-);
 
 app.use(
   setRequestSessionMiddleware({

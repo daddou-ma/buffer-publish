@@ -13,7 +13,6 @@ import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import Avatar from '@bufferapp/ui/Avatar';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 import { IconArrowPopover } from '@bufferapp/components';
 import styled from 'styled-components';
 import { grayLight, grayDark, gray } from '@bufferapp/ui/style/colors';
@@ -125,7 +124,6 @@ const onCopyToClipboard = ({ publicGridUrl, handleCopyToClipboard }) => {
 };
 
 const onPreviewClick = publicGridUrl => {
-  trackAction({ location: 'grid', action: 'click_preview_url' });
   openPreviewPage(publicGridUrl);
 };
 

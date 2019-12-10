@@ -4,7 +4,6 @@ import {
   plansPageRoute,
 } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import TabNavigation from './components/TabNavigation';
 import { actions } from './reducer';
@@ -48,11 +47,6 @@ export default connect(
   (dispatch, ownProps) => ({
     onTabClick: tabId => {
       const { profileId } = ownProps;
-      trackAction({
-        location: 'tabs',
-        action: `click_tab_${tabId}`,
-        metadata: { profileId },
-      });
       dispatch(
         actions.selectTab({
           tabId,
@@ -65,11 +59,6 @@ export default connect(
     },
     onChildTabClick: childTabId => {
       const { tabId, profileId } = ownProps;
-      trackAction({
-        location: 'tabs',
-        action: `click_tab_${tabId}_${childTabId}`,
-        metadata: { profileId },
-      });
       dispatch(
         push(
           generateChildTabRoute({
