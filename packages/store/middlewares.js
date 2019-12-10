@@ -81,7 +81,6 @@ const composedMiddlewares = history =>
       notificationsMiddleware,
       environmentMiddleware,
       unauthorizedRedirectMiddleware,
-      appSwitcherMiddleware,
       initialLoadingMiddleware,
       switchPlanModalMiddleware,
       manageAppsMiddleware,

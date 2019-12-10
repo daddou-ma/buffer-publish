@@ -62,7 +62,6 @@ export default {
   asyncDataFetch: asyncDataFetchReducer,
   notifications: notificationsReducer,
   environment: environmentReducer,
-  appSwitcher: appSwitcherReducer,
   initialLoading: initialLoadingReducer,
   switchPlanModal: switchPlanModalReducer,
   stripe: stripeReducer,
