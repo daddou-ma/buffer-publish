@@ -395,5 +395,7 @@ app.get('*', (req, res) => {
 app.use(apiError);
 
 server.listen(80, () => console.log('listening on port 80')); // eslint-disable-line
+server.keepAliveTimeout = 61 * 1000;
+server.headersTimeout = 65 * 1000;
 
 shutdownHelper.init({ server });
