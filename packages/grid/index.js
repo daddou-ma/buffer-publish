@@ -51,7 +51,10 @@ export default connect(
       dispatch(
         actions.handleAddNewGridLink({
           profileId: ownProps.profileId,
-          item,
+          item: {
+            ...item,
+            url: urlHasProtocol(item.url) ? item.url : `https://${item.url}`,
+          },
         })
       );
     },
@@ -209,9 +212,7 @@ export default connect(
       const itemText = (item && item.text) || '';
       const itemUrl = (item && item.url) || '';
       const cleanItemText = itemText.replace(/ /g, '');
-      return (
-        cleanItemText !== '' && isValidURL(itemUrl) && urlHasProtocol(itemUrl)
-      );
+      return cleanItemText !== '' && isValidURL(itemUrl);
     },
   })
 )(GridPosts);
