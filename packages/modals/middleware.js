@@ -68,6 +68,44 @@ export default ({ dispatch, getState }) => next => (action) => {
         dispatch(actions.showProfilesDisconnectedModal());
       }
 
+      const {
+        isBusinessTeamMember,
+        plan,
+        messages,
+      } = getState().appSidebar.user;
+
+      // Make sure the Shop Grid Promo Modal doesn't open on top of the disconnect modal
+      if (
+        plan === 'free' &&
+        !isBusinessTeamMember &&
+        !messages.includes('user_saw_shopgrid_promo')
+      ) {
+        if (
+          action.result &&
+          action.result.some(profile => profile.isDisconnected)
+        ) {
+          dispatch(
+            actions.saveModalToShowLater({
+              modalId: actionTypes.SHOW_SHOP_GRID_PROMO_MODAL,
+            })
+          );
+        } else {
+          dispatch(actions.showShopGridPromoModal());
+        }
+      }
+      break;
+    }
+
+    case actionTypes.HIDE_PROFILES_DISCONNECTED_MODAL: {
+      const modalToShow = getState().modals.modalToShowLater;
+      if (!modalToShow) {
+        return;
+      }
+
+      if (modalToShow.id === actionTypes.SHOW_SHOP_GRID_PROMO_MODAL) {
+        dispatch(actions.showShopGridPromoModal());
+      }
+
       break;
     }
 
