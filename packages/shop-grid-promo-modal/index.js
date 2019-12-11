@@ -1,4 +1,6 @@
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
+import { plansPageRoute } from '@bufferapp/publish-routes';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -27,7 +29,7 @@ export default connect(
           },
         })
       );
-      window.location.assign(getURL.getPlansUrl());
+      dispatch(push(plansPageRoute));
     },
   })
 )(ShopGridPromoModal);

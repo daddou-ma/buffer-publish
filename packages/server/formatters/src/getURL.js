@@ -95,10 +95,4 @@ module.exports = {
     }
     return 'https://publish.buffer.com';
   },
-  getPlansUrl: () => {
-    if (window.location.hostname === 'publish.local.buffer.com') {
-      return 'https://publish.local.buffer.com/plans';
-    }
-    return 'https://publish.buffer.com/plans';
-  },
 };
