@@ -5,10 +5,6 @@ import { Link } from '@bufferapp/components';
 import { Button, Text } from '@bufferapp/ui';
 import StepCard from '../StepCard';
 
-const Grid = styled.div`
-  margin-bottom: 32px;
-`;
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,10 +16,14 @@ const Title = styled(Text)`
   text-align: center;
 `;
 
+const RemindersButton = styled(Button)`
+  margin: 32px 0 6px;
+`;
+
 const StoriesExplanation = ({ translations, onSetRemindersClick }) => (
   <Container>
     <Title type="h2">{translations.start.title}</Title>
-    <Grid>
+    <div>
       <StepCard
         imageUrl="https://buffer-publish.s3.amazonaws.com/images/reminders-step1.jpg"
         number={1}
@@ -42,9 +42,10 @@ const StoriesExplanation = ({ translations, onSetRemindersClick }) => (
         title={translations.start.step3Title}
         description={translations.start.step3Description}
       />
-    </Grid>
-    <Button
+    </div>
+    <RemindersButton
       type="primary"
+      size="large"
       label={translations.start.setReminders}
       onClick={onSetRemindersClick}
     />
