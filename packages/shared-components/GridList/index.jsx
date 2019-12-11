@@ -74,6 +74,9 @@ const GridListPost = ({
   onImageClose,
   timezone,
 }) => {
+  const isValidLink =
+    typeof post.oldLink !== 'undefined' && post.oldLink !== post.link;
+
   return (
     <div style={itemStyle(index)}>
       <Link onClick={() => onImageClick({ post })}>
@@ -101,15 +104,12 @@ const GridListPost = ({
             onChangePostUrl(post, e.target.value);
           }}
           onBlur={e => {
-            if (
-              typeof post.oldLink !== 'undefined' &&
-              post.oldLink !== post.link
-            ) {
+            if (isValidLink) {
               onSavePostUrl(post, e.target.value);
             }
           }}
           onKeyUp={e => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && isValidLink) {
               onSavePostUrl(post, e.target.value)
             }
           }}
