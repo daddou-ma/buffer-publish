@@ -15,6 +15,7 @@ import {
 import { CircleInstReminderIcon } from '@bufferapp/components';
 import WarningIcon from '@bufferapp/ui/Icon/Icons/Warning';
 import { Text } from '@bufferapp/ui';
+import StoriesExplanation from '../StoriesExplanation';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -101,12 +102,17 @@ const StoryGroups = ({
   onClosePreviewClick,
   showStoryPreview,
   userData,
+  hasPushNotifications,
   serviceId,
   translations,
 }) => {
   const hasStoriesMobileVersion = userData.tags
     ? userData.tags.includes('has_instagram_stories_mobile')
     : false;
+
+  if (!hasPushNotifications) {
+    return <StoriesExplanation translations={translations} />;
+  }
 
   if (loading) {
     return (
@@ -182,6 +188,7 @@ StoryGroups.propTypes = {
     })
   ),
   showStoriesComposer: PropTypes.bool,
+  hasPushNotifications: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   onEmptySlotClick: PropTypes.func.isRequired,
@@ -210,6 +217,7 @@ StoryGroups.propTypes = {
 StoryGroups.defaultProps = {
   loading: true,
   editMode: false,
+  hasPushNotifications: true,
   isLockedProfile: false,
   showStoriesComposer: false,
   hasFirstCommentFlip: false,
