@@ -68,6 +68,7 @@ const shareStoryGroupNowMethod = require('./shareStoryGroupNow');
 const getShopGridPostsMethod = require('./shopGrid/getPosts');
 const updateShopGridPostLink = require('./shopGrid/updatePostLink');
 const updateCustomLinksMethod = require('./shopGrid/customLinks/update');
+const updateSingleCustomLinkMethod = require('./shopGrid/customLinks/update/single');
 const deleteCustomLinkMethod = require('./shopGrid/customLinks/delete');
 const addUserTag = require('./addUserTag');
 const removeUserTag = require('./removeUserTag');
@@ -155,5 +156,6 @@ module.exports = rpc(
   getShopGridPostsMethod,
   updateShopGridPostLink,
   updateCustomLinksMethod,
+  updateSingleCustomLinkMethod,
   deleteCustomLinkMethod
 );

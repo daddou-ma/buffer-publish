@@ -107,6 +107,15 @@ export default connect(
         analyticsActions.trackEvent('Shop Grid Page Previewed', metadata)
       );
     },
+    onUpdateSingleCustomLink: ({ item }) => {
+      dispatch(
+        actions.handleUpdateSingleCustomLink({
+          profileId: ownProps.profileId,
+          linkId: item._id,
+          item,
+        })
+      );
+    },
     onUpdateCustomLinks: ({ customLinks, linkText, linkUrl, item }) => {
       dispatch(
         actions.handleUpdateCustomLinks({

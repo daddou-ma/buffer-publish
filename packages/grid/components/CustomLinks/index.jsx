@@ -12,6 +12,60 @@ import {
   Separator,
 } from './styles';
 
+const EditingLinkItem = ({
+  customLinkItem,
+  onUpdateCustomLinks,
+  onCancelCustomLinkEdit,
+  isValidItem,
+}) => {
+  const [linkItem, updateLinkItem] = useState(customLinkItem);
+
+  return (
+    <EditingLinkForm
+      item={linkItem}
+      onUpdateLinkText={({ item, value }) => {
+        updateLinkItem({ ...item, text: value });
+      }}
+      onUpdateLinkUrl={({ item, value }) => {
+        updateLinkItem({ ...item, url: value });
+      }}
+      onCancelClick={onCancelCustomLinkEdit}
+      onSaveClick={() => {
+        return onUpdateCustomLinks({
+          item: linkItem,
+        });
+      }}
+      isValidItem={isValidItem}
+    />
+  );
+};
+
+EditingLinkItem.propTypes = {
+  customLinkItem: PropTypes.any,
+  customLinksDetails: PropTypes.shape({
+    customLinks: PropTypes.array,
+    maxCustomLinks: PropTypes.number,
+    buttonColor: PropTypes.string,
+    buttonContrastColor: PropTypes.string,
+  }),
+  onUpdateCustomLinks: PropTypes.func,
+  onCancelCustomLinkEdit: PropTypes.func,
+  isValidItem: PropTypes.func,
+};
+
+EditingLinkItem.defaultProps = {
+  customLinkItem: {},
+  onUpdateCustomLinks: () => {},
+  onCancelCustomLinkEdit: () => {},
+  isValidItem: () => {},
+  customLinksDetails: {
+    customLinks: [],
+    maxCustomLinks: 0,
+    buttonColor: null,
+    buttonContrastColor: null,
+  },
+};
+
 const CustomLinks = ({
   customLinksDetails,
   onUpdateCustomLinks,
@@ -25,6 +79,7 @@ const CustomLinks = ({
   onSaveNewLinkClick,
   isValidItem,
   onCancelCustomLinkEdit,
+  onUpdateSingleCustomLink,
 }) => {
   const [colorButtons, setColorButton] = useState(
     customLinksDetails.buttonColor || DEFAULT_COLOR
@@ -101,20 +156,12 @@ const CustomLinks = ({
                   />
                 )}
                 {customLinkItem.editing && (
-                  <EditingLinkForm
+                  <EditingLinkItem
                     key={customLinkItem.order}
-                    item={customLinkItem}
+                    customLinkItem={customLinkItem}
                     customLinksDetails={customLinksDetails}
-                    onUpdateLinkText={onUpdateLinkText}
-                    onUpdateLinkUrl={onUpdateLinkUrl}
-                    onCancelClick={({ item }) => {
-                      onCancelCustomLinkEdit({ item });
-                    }}
-                    onSaveClick={() =>
-                      onUpdateCustomLinks({
-                        customLinks: customLinksDetails.customLinks,
-                      })
-                    }
+                    onUpdateCustomLinks={onUpdateSingleCustomLink}
+                    onCancelCustomLinkEdit={onToggleEditMode}
                     isValidItem={isValidItem}
                   />
                 )}

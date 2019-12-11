@@ -158,6 +158,7 @@ const GridPosts = ({
   onSwapCustomLinks,
   onCancelCustomLinkEdit,
   onSaveNewLinkClick,
+  onUpdateSingleCustomLink,
   isValidItem,
 }) => {
   if (loading) {
@@ -258,6 +259,7 @@ const GridPosts = ({
             onSwapCustomLinks={onSwapCustomLinks}
             onCancelCustomLinkEdit={onCancelCustomLinkEdit}
             onSaveNewLinkClick={onSaveNewLinkClick}
+            onUpdateSingleCustomLink={onUpdateSingleCustomLink}
             isValidItem={isValidItem}
           />
         )}

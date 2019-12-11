@@ -162,6 +162,19 @@ export default ({ getState, dispatch }) => next => action => {
       break;
     }
 
+    case gridActionTypes.UPDATE_SINGLE_CUSTOM_LINK: {
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'updateSingleCustomLink',
+          args: {
+            profileId: action.profileId,
+            linkId: action.linkId,
+            customLink: action.item,
+          },
+        })
+      );
+      break;
+    }
     case gridActionTypes.UPDATE_CUSTOM_LINKS: {
       const profile = getState().grid.byProfileId[action.profileId];
       const linkDetails = profile.customLinksDetails;
@@ -199,6 +212,7 @@ export default ({ getState, dispatch }) => next => action => {
       break;
     }
 
+    case `updateSingleCustomLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({
         type: 'SINGLE_PROFILE_INIT',

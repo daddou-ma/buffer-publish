@@ -11,6 +11,7 @@ export const actionTypes = keyWrapper('GRID', {
   SAVE_POST_URL: 0,
   COPY_TO_CLIPBOARD_RESULT: 0,
   GET_CUSTOM_LINKS: 0,
+  UPDATE_SINGLE_CUSTOM_LINK: 0,
   UPDATE_CUSTOM_LINKS: 0,
   DELETE_CUSTOM_LINK: 0,
   ADD_NEW_CUSTOM_LINK: 0,
@@ -137,7 +138,56 @@ const profileReducer = (state = profileInitialState, action) => {
         };
       }
       return profileInitialState;
-    case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `updateSingleCustomLink_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { customLinksDetails } = state;
+      const { customLinks = [] } = customLinksDetails;
+
+      const resolvedLinks = (action.result.customLinks || []).map(
+        resolvedLink => {
+          const matchingCustomLink = customLinks.find(customLink => {
+            return (
+              customLink.text === resolvedLink.text &&
+              customLink.url === resolvedLink.url &&
+              customLink.order === resolvedLink.order
+            );
+          });
+
+          if (matchingCustomLink) {
+            resolvedLink.editing = matchingCustomLink.editing;
+          }
+          return resolvedLink;
+        }
+      );
+
+      return {
+        ...state,
+        customLinksDetails: {
+          ...state.customLinksDetails,
+          customLinks: resolvedLinks,
+        },
+      };
+    }
+    case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { customLinksDetails } = state;
+      const { customLinks = [] } = customLinksDetails;
+
+      const resolvedLinks = (action.result.profile.custom_links || []).map(
+        resolvedLink => {
+          const matchingCustomLink = customLinks.find(customLink => {
+            return (
+              customLink.text === resolvedLink.text &&
+              customLink.url === resolvedLink.url &&
+              customLink.order === resolvedLink.order
+            );
+          });
+
+          if (matchingCustomLink) {
+            resolvedLink.editing = matchingCustomLink.editing;
+          }
+          return resolvedLink;
+        }
+      );
+
       return {
         ...state,
         customLinksDetails: {
@@ -145,9 +195,10 @@ const profileReducer = (state = profileInitialState, action) => {
           buttonColor: action.result.profile.custom_links_color,
           buttonContrastColor:
             action.result.profile.custom_links_contrast_color,
-          customLinks: action.result.profile.custom_links,
+          customLinks: resolvedLinks,
         },
       };
+    }
     case `shortenUrl_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
@@ -261,10 +312,34 @@ const profileReducer = (state = profileInitialState, action) => {
         },
       };
     }
+    case actionTypes.UPDATE_SINGLE_CUSTOM_LINK: {
+      const { customLinksDetails } = state;
+      const { customLinks = [] } = customLinksDetails;
+      const editedCustomLinks = cloneDeep(customLinks).map(item => {
+        if (action.item !== null) {
+          if (item.order === action.item.order) {
+            item.editing = false;
+            item.text = action.item.text;
+            item.url = action.item.url;
+          }
+        }
+        if (!action.item) {
+          item.editing = false;
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        customLinksDetails: {
+          ...customLinksDetails,
+          customLinks: editedCustomLinks,
+        },
+      };
+    }
     case actionTypes.UPDATE_CUSTOM_LINKS: {
       const { customLinksDetails } = state;
       const { customLinks = [] } = customLinksDetails;
-
       const editedCustomLinks = cloneDeep(customLinks).map(item => {
         if (
           action.item !== null &&
@@ -377,6 +452,8 @@ export default (state = initialState, action) => {
     case `gridPosts_${dataFetchActionTypes.FETCH_START}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `updateSingleCustomLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `updateSingleCustomLink_${dataFetchActionTypes.FETCH_FAIL}`:
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_FAIL}`:
     case actionTypes.SAVE_POST_URL:
@@ -388,6 +465,7 @@ export default (state = initialState, action) => {
     case actionTypes.EDIT_CUSTOM_LINK_URL:
     case actionTypes.TOGGLE_CUSTOM_LINK_EDIT_MODE:
     case actionTypes.ON_CANCEL_CUSTOM_LINK_EDIT:
+    case actionTypes.UPDATE_SINGLE_CUSTOM_LINK:
     case actionTypes.UPDATE_CUSTOM_LINKS:
     case actionTypes.DELETE_CUSTOM_LINK:
     case actionTypes.SWAP_CUSTOM_LINKS:
@@ -462,6 +540,16 @@ export const actions = {
     customLinkButtonType,
     linkText,
     linkUrl,
+    item,
+  }),
+  handleUpdateSingleCustomLink: ({
+    profileId,
+    linkId = null,
+    item = null,
+  }) => ({
+    type: actionTypes.UPDATE_SINGLE_CUSTOM_LINK,
+    profileId,
+    linkId,
     item,
   }),
   handleDeleteCustomLink: ({ profileId, customLinkId }) => ({
