@@ -7,13 +7,17 @@ import { Text } from '@bufferapp/ui';
 
 const StepWrapper = styled.div`
   font-size: 0;
+  width: calc(100% / 3);
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding: 0 2%;
 `;
 
 const StepImage = styled.img`
   border-radius: ${borderRadius};
-  background-color: blue;
-  height: 100%;
   width: 100%;
+  object-fit: contain;
 `;
 
 const StepTitleWrapper = styled.div`
@@ -23,6 +27,7 @@ const StepTitleWrapper = styled.div`
 
 const StepTitle = styled(Text)`
   margin: 18px 0;
+  flex: 1;
 `;
 
 const StepNumber = styled(Text)`

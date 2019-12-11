@@ -103,6 +103,7 @@ const StoryGroups = ({
   showStoryPreview,
   userData,
   hasPushNotifications,
+  onSetRemindersClick,
   serviceId,
   translations,
 }) => {
@@ -111,7 +112,12 @@ const StoryGroups = ({
     : false;
 
   if (!hasPushNotifications) {
-    return <StoriesExplanation translations={translations} />;
+    return (
+      <StoriesExplanation
+        translations={translations}
+        onSetRemindersClick={onSetRemindersClick}
+      />
+    );
   }
 
   if (loading) {
@@ -189,6 +195,7 @@ StoryGroups.propTypes = {
   ),
   showStoriesComposer: PropTypes.bool,
   hasPushNotifications: PropTypes.bool,
+  onSetRemindersClick: PropTypes.func.isRequired,
   hasFirstCommentFlip: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   onEmptySlotClick: PropTypes.func.isRequired,
