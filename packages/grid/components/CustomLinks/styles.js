@@ -77,7 +77,7 @@ export const LinkUrlInput = styled.div`
 
 export const LinkTextInput = styled.div`
   margin: 8px;
-  width: 205px;
+  width: 230px;
 `;
 
 export const UrlPreview = styled.div`
