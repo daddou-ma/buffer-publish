@@ -4,12 +4,12 @@ import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
-import StartStories from './index';
+import StoriesExplanation from './index';
 
-storiesOf('StartStories', module)
+storiesOf('Stories|StoriesExplanation', module)
   .addDecorator(withA11y)
   .add('default', () => (
-    <StartStories
+    <StoriesExplanation
       translations={translations['story-group-queue']}
       onCloseModalClick={action('close-modal')}
       onSetRemindersClick={action('set-reminders')}
