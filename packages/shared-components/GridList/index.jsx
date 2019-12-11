@@ -108,6 +108,11 @@ const GridListPost = ({
               onSavePostUrl(post, e.target.value);
             }
           }}
+          onKeyUp={e => {
+            if (e.key === 'Enter') {
+              onSavePostUrl(post, e.target.value)
+            }
+          }}
           size="small"
           name="postUrl"
           placeholder="Website or Product URL"
