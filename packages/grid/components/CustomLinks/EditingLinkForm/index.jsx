@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Button } from '@bufferapp/ui';
 
-import { EditingMyLinksItem, ActionsWrapper, LinkInput, StyledButton } from '../styles';
+import {
+  EditingMyLinksItem,
+  ActionsWrapper,
+  LinkUrlInput,
+  LinkTextInput,
+  StyledButton,
+} from '../styles';
 
 const EditingLinkForm = ({
   item,
@@ -15,7 +21,7 @@ const EditingLinkForm = ({
   return (
     <React.Fragment>
       <EditingMyLinksItem>
-        <LinkInput>
+        <LinkTextInput>
           <Input
             label="Link Text"
             type="text"
@@ -23,9 +29,10 @@ const EditingLinkForm = ({
             name="text"
             value={item.text}
             placeholder="Describe link (e.g. “Shop Sale”)"
+            maxLength="35"
           />
-        </LinkInput>
-        <LinkInput>
+        </LinkTextInput>
+        <LinkUrlInput>
           <Input
             label="Link URL"
             type="text"
@@ -34,7 +41,7 @@ const EditingLinkForm = ({
             value={item.url}
             placeholder="Your website or URL"
           />
-        </LinkInput>
+        </LinkUrlInput>
       </EditingMyLinksItem>
       <ActionsWrapper>
         <StyledButton
