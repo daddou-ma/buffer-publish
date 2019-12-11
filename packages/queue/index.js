@@ -4,7 +4,6 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import { actions } from './reducer';
 import {
@@ -212,19 +211,10 @@ export default connect(
         })}`
       );
     },
-    onCalendarClick: (weekOrMonth, trackingAction) => {
-      const openAfterTrack = () => {
-        if (weekOrMonth === 'week' || weekOrMonth === 'month') {
-          openCalendarWindow(ownProps.profileId, weekOrMonth);
-        }
-      };
-      trackAction(
-        { location: 'queue', action: trackingAction },
-        {
-          success: openAfterTrack,
-          error: openAfterTrack,
-        }
-      );
+    onCalendarClick: weekOrMonth => {
+      if (weekOrMonth === 'week' || weekOrMonth === 'month') {
+        openCalendarWindow(ownProps.profileId, weekOrMonth);
+      }
     },
   })
 )(QueuedPosts);

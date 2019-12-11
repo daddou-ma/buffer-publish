@@ -219,9 +219,7 @@ const renderHeader = (
       <div style={{ marginLeft: 'auto' }}>
         <QueueButtonGroup
           buttons={calendarBtns}
-          onClick={type =>
-            onCalendarClick(type, `daily_view_type_buttons_click_${type}`)
-          }
+          onClick={type => onCalendarClick(type)}
         />
       </div>
     )}
@@ -286,9 +284,7 @@ const QueueItems = props => {
             <Button
               type="primary"
               label="View Your Calendar"
-              onClick={() =>
-                onCalendarClick('month', 'daily_view_show_more_view_calendar')
-              }
+              onClick={() => onCalendarClick('month')}
             />
           </div>
         </div>

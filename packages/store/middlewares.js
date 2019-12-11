@@ -2,11 +2,6 @@ import { applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import reduxDynamicMiddlewares from 'redux-dynamic-middlewares';
 
-import {
-  logTrackingMiddleware,
-  bufferMetricsMiddleware,
-} from '@bufferapp/publish-data-tracking';
-
 import queueMiddleware from '@bufferapp/publish-queue/middleware';
 import sentMiddleware from '@bufferapp/publish-sent/middleware';
 import gridMiddleware from '@bufferapp/publish-grid/middleware';
@@ -27,7 +22,6 @@ import pusherSyncMiddleware from '@bufferapp/publish-pusher-sync/middleware';
 import notificationsMiddleware from '@bufferapp/notifications/lib/middleware';
 import environmentMiddleware from '@bufferapp/environment/lib/middleware';
 import unauthorizedRedirectMiddleware from '@bufferapp/unauthorized-redirect/middleware';
-import appSwitcherMiddleware from '@bufferapp/publish-app-switcher/middleware';
 import initialLoadingMiddleware from '@bufferapp/publish-initial-loading/middleware';
 import switchPlanModalMiddleware from '@bufferapp/publish-switch-plan-modal/middleware';
 import stripeMiddleware from '@bufferapp/stripe/middleware';
@@ -70,8 +64,6 @@ const composedMiddlewares = history =>
       routerMiddleware(history),
       actionsOnlyForAnalyzeMiddleware('hide'),
       asyncDataFetchMiddleware,
-      logTrackingMiddleware,
-      bufferMetricsMiddleware,
       i18nMiddleware,
       profileSidebarMiddleware,
       clientAccessMiddleware,
@@ -89,7 +81,6 @@ const composedMiddlewares = history =>
       notificationsMiddleware,
       environmentMiddleware,
       unauthorizedRedirectMiddleware,
-      appSwitcherMiddleware,
       initialLoadingMiddleware,
       switchPlanModalMiddleware,
       manageAppsMiddleware,

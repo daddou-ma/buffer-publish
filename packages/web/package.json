@@ -9,7 +9,6 @@
   "dependencies": {
     "@bufferapp/notifications": "1.9.4",
     "@bufferapp/profile-page": "2.0.0",
-    "@bufferapp/publish-app-switcher": "2.0.0",
     "@bufferapp/publish-initial-loading": "2.0.0",
     "@bufferapp/publish-example": "2.0.0",
     "@bufferapp/publish-modals": "2.0.0",

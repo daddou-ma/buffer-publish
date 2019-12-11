@@ -1,4 +1,3 @@
-import { actions as appSwitcherActions } from '@bufferapp/publish-app-switcher';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import {
@@ -6,8 +5,8 @@ import {
   newBusinessTrialistsRoute,
 } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions } from './reducer';
-
 import AppShell from './components/AppShell';
 
 export default connect(
@@ -36,11 +35,7 @@ export default connect(
       );
     },
     returnToClassic() {
-      dispatch(
-        appSwitcherActions.displayFeedbackModal({
-          source: 'app_shell',
-        })
-      );
+      window.location = getURL.getBackToClassicNewPublishBufferURL();
     },
     switchPlan() {
       dispatch(

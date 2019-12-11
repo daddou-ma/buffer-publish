@@ -4,9 +4,6 @@ import {
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import middleware from './middleware';
-import { actionTypes } from './reducer';
-
-jest.mock('@bufferapp/publish-data-tracking');
 
 describe('trial middleware', () => {
   it('should fetch userData if startTrial is successful', () => {
@@ -22,18 +19,6 @@ describe('trial middleware', () => {
         type: 'USER_INIT',
       })
     );
-  });
-  describe('should send tracking data', () => {
-    it('when start pro trial button is clicked', () => {
-      const next = jest.fn();
-      const dispatch = jest.fn();
-      const action = {
-        type: actionTypes.START_PRO_TRIAL,
-      };
-      middleware({ dispatch })(next)(action);
-
-      expect(next).toBeCalledWith(action);
-    });
   });
   describe('should trigger notification', () => {
     it('when a pro trial is succesfully started', () => {

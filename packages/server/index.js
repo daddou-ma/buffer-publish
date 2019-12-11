@@ -24,7 +24,6 @@ const {
   setRequestSessionMiddleware,
   validateSessionMiddleware,
 } = require('@bufferapp/session-manager');
-const bufferMetricsMiddleware = require('@bufferapp/buffermetrics/middleware');
 const { errorMiddleware } = require('@bufferapp/buffer-rpc');
 const serialize = require('serialize-javascript');
 const multer = require('multer');
@@ -295,14 +294,6 @@ app.use('*', (req, res, next) => {
 app.use(bodyParser.json());
 
 app.use(
-  bufferMetricsMiddleware({
-    name: 'Buffer-Publish',
-    debug: !isProduction,
-    trackVisits: true,
-  })
-);
-
-app.use(
   setRequestSessionMiddleware({
     production: isProduction,
     sessionKeys: ['publish', 'global'],
@@ -395,5 +386,7 @@ app.get('*', (req, res) => {
 app.use(apiError);
 
 server.listen(80, () => console.log('listening on port 80')); // eslint-disable-line
+server.keepAliveTimeout = 61 * 1000;
+server.headersTimeout = 65 * 1000;
 
 shutdownHelper.init({ server });

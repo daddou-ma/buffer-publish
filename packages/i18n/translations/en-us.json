@@ -11,14 +11,6 @@
     "invalidFormatCantSingleFile": "We can't quite use that type of file. Could you try one of the following instead: {acceptedFilesText}?",
     "invalidFileSize": "We can't upload \"{fileName}\" because it's too large: we can only handle files of that type up to {formattedMaxSize}. Could you try a smaller file?"
   },
-  "app-switcher": {
-    "headline1": "Switch Back to Classic Buffer",
-    "tagline": "Thanks for trying out our refreshed experience",
-    "question": "What's the primary reason you're switching?",
-    "cancel": "Cancel",
-    "continue": "Continue to classic Buffer",
-    "pleaseWait": "Please wait..."
-  },
   "profile-sidebar": {
     "connectButton": "Manage Social Accounts"
   },
