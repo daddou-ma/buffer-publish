@@ -51,7 +51,10 @@ export default connect(
       dispatch(
         actions.handleAddNewGridLink({
           profileId: ownProps.profileId,
-          item,
+          item: {
+            ...item,
+            url: urlHasProtocol(item.url) ? item.url : `https://${item.url}`,
+          },
         })
       );
     },
@@ -102,6 +105,15 @@ export default connect(
       const metadata = getChannelProperties(channel);
       dispatch(
         analyticsActions.trackEvent('Shop Grid Page Previewed', metadata)
+      );
+    },
+    onUpdateSingleCustomLink: ({ item }) => {
+      dispatch(
+        actions.handleUpdateSingleCustomLink({
+          profileId: ownProps.profileId,
+          linkId: item._id,
+          item,
+        })
       );
     },
     onUpdateCustomLinks: ({ customLinks, linkText, linkUrl, item }) => {
@@ -209,9 +221,7 @@ export default connect(
       const itemText = (item && item.text) || '';
       const itemUrl = (item && item.url) || '';
       const cleanItemText = itemText.replace(/ /g, '');
-      return (
-        cleanItemText !== '' && isValidURL(itemUrl) && urlHasProtocol(itemUrl)
-      );
+      return cleanItemText !== '' && isValidURL(itemUrl);
     },
   })
 )(GridPosts);
