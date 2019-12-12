@@ -21,6 +21,7 @@ const ColorSwatches = ({ colorSelected, onColorChange, onChange }) => (
           colorContrast={getColorContrast(colorSwatches[key])}
           onClick={() => onColorChange(colorSwatches[key], onChange)}
           selectable
+          aria-label={`link color ${key}`}
         >
           {colorSelected === colorSwatches[key] && (
             <CheckmarkWrapper>
