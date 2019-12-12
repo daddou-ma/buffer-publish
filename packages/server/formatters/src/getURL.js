@@ -81,13 +81,15 @@ module.exports = {
     }
     return `https://buffer.com/app/account/receipts?content_only=true${ctaParam}`;
   },
-  getRemindersURL: ({ cta }) => {
-    const ctaParam = cta ? `&cta=${cta}` : '';
-    // Temporary link, to be updated soon
+  getRemindersURL: ({ profileId, cta, nextUrl }) => {
+    const ctaParam = cta ? `cta=${cta}` : '';
+    const encodedUrl = nextUrl && encodeURI(nextUrl);
+    const nextParam = encodedUrl ? `&next=${encodedUrl}` : '';
+
     if (window.location.hostname === 'publish.local.buffer.com') {
-      return `https://local.buffer.com/${ctaParam}`;
+      return `https://local.buffer.com/oauth/instagram/setup_reminders/${profileId}?${ctaParam}${nextParam}`;
     }
-    return `https://buffer.com/${ctaParam}`;
+    return `https://buffer.com/oauth/instagram/setup_reminders/${profileId}?${ctaParam}${nextParam}`;
   },
   getPublishUrl: () => {
     if (window.location.hostname === 'publish.local.buffer.com') {

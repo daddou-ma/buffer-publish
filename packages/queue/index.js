@@ -207,7 +207,9 @@ export default connect(
     onSetRemindersClick: () => {
       window.location.assign(
         `${getURL.getRemindersURL({
+          profileId: ownProps.profileId,
           cta: SEGMENT_NAMES.REMINDERS_BANNER,
+          nextUrl: `profile/${ownProps.profileId}/tab/queue`,
         })}`
       );
     },

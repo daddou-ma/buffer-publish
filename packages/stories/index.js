@@ -71,7 +71,9 @@ export default connect(
     onSetRemindersClick: () => {
       window.location.assign(
         `${getURL.getRemindersURL({
+          profileId: ownProps.profileId,
           cta: SEGMENT_NAMES.REMINDERS_STORIES,
+          nextUrl: `profile/${ownProps.profileId}/tab/stories`,
         })}`
       );
     },
