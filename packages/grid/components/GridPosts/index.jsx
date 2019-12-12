@@ -150,7 +150,6 @@ const GridPosts = ({
   onDeleteCustomLink,
   onUpdateLinkText,
   onUpdateLinkUrl,
-  hasCustomLinksFlip,
   maxCustomLinks,
   onToggleEditMode,
   onSwapCustomLinks,
@@ -243,24 +242,22 @@ const GridPosts = ({
             />
           </StyledButtonWrapper>
         </StyledHeader>
-        {hasCustomLinksFlip && (
-          <CustomLinks
-            customLinksDetails={customLinksDetails}
-            onUpdateCustomLinks={onUpdateCustomLinks}
-            onUpdateCustomLinksColor={onUpdateCustomLinksColor}
-            onUpdateCustomLinksButtonType={onUpdateCustomLinksButtonType}
-            onDeleteCustomLink={onDeleteCustomLink}
-            onUpdateLinkText={onUpdateLinkText}
-            onUpdateLinkUrl={onUpdateLinkUrl}
-            maxCustomLinks={maxCustomLinks}
-            onToggleEditMode={onToggleEditMode}
-            onSwapCustomLinks={onSwapCustomLinks}
-            onCancelCustomLinkEdit={onCancelCustomLinkEdit}
-            onSaveNewLinkClick={onSaveNewLinkClick}
-            onUpdateSingleCustomLink={onUpdateSingleCustomLink}
-            isValidItem={isValidItem}
-          />
-        )}
+        <CustomLinks
+          customLinksDetails={customLinksDetails}
+          onUpdateCustomLinks={onUpdateCustomLinks}
+          onUpdateCustomLinksColor={onUpdateCustomLinksColor}
+          onUpdateCustomLinksButtonType={onUpdateCustomLinksButtonType}
+          onDeleteCustomLink={onDeleteCustomLink}
+          onUpdateLinkText={onUpdateLinkText}
+          onUpdateLinkUrl={onUpdateLinkUrl}
+          maxCustomLinks={maxCustomLinks}
+          onToggleEditMode={onToggleEditMode}
+          onSwapCustomLinks={onSwapCustomLinks}
+          onCancelCustomLinkEdit={onCancelCustomLinkEdit}
+          onSaveNewLinkClick={onSaveNewLinkClick}
+          onUpdateSingleCustomLink={onUpdateSingleCustomLink}
+          isValidItem={isValidItem}
+        />
         <TitleWrapper>
           <Title type="h3" color="grayDark">
             Posts

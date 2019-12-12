@@ -48,9 +48,6 @@ export default connect(
         customLinksDetails: currentProfile.customLinksDetails,
         maxCustomLinks: currentProfile.maxCustomLinks,
         publicGridUrl: `https://shopgr.id/${profile.serviceUsername}`,
-        hasCustomLinksFlip: state.appSidebar.user.features
-          ? state.appSidebar.user.features.includes('shopgrid_links')
-          : false,
       };
     }
     return {};
