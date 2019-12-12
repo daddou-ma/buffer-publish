@@ -28,6 +28,7 @@ export default connect(
           },
         })
       );
+      dispatch(modalsActions.hideShopGridPromoModal());
       dispatch(push(plansPageRoute));
     },
   })
