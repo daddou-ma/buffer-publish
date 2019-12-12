@@ -230,7 +230,7 @@ const Post = ({
           {hasReminderError && (
             <PostErrorBanner
               dragging={dragging}
-              errorLabel="Set up Reminders"
+              errorLabel="Set Up Reminders"
               error="Shoot, looks like we can't publish this until you set up Reminders. Would you be up for setting them now?"
               errorAction={onSetRemindersClick}
             />
