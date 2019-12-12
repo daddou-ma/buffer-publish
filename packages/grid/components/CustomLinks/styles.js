@@ -70,9 +70,14 @@ export const EditingMyLinksItem = styled.div`
   background-color: ${grayLighter};
 `;
 
-export const LinkInput = styled.div`
+export const LinkUrlInput = styled.div`
   margin: 8px;
-  width: 50%;
+  flex: 1;
+`;
+
+export const LinkTextInput = styled.div`
+  margin: 8px;
+  width: 230px;
 `;
 
 export const UrlPreview = styled.div`
