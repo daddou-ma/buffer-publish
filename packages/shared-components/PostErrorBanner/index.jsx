@@ -78,7 +78,7 @@ PostErrorBanner.defaultProps = {
   error: null,
   errorLink: null,
   errorLabel: 'Learn More',
-  errorAction: () => {},
+  errorAction: null,
 };
 
 export default PostErrorBanner;
