@@ -1942,6 +1942,154 @@ const passesVideoAspectRatioTest = ({ video, service }) => {
   );
 };
 
+const getReminderMessage = (selectedIgProfiles, mediaType) => {
+  const hasSomeProfilesWithoutPushNotifications = selectedIgProfiles.some(
+    profile => !profile.hasPushNotifications
+  );
+  const hasSomeProfilesWithPushNotifications = selectedIgProfiles.some(
+    profile => profile.hasPushNotifications
+  );
+
+  // Only IG profiles with Push Notifications enabled
+  const hasAllProfilesWithPushNotifications =
+    hasSomeProfilesWithPushNotifications &&
+    !hasSomeProfilesWithoutPushNotifications;
+
+  // Only IG profiles with Push Notifications disabled
+  const hasAllProfilesWithoutPushNotifications =
+    hasSomeProfilesWithoutPushNotifications &&
+    !hasSomeProfilesWithPushNotifications;
+
+  // Has both IG Profiles with and without Push Notifications enabled
+  const hasProfilesWithAndWithoutPushNotifications =
+    hasSomeProfilesWithPushNotifications &&
+    hasSomeProfilesWithoutPushNotifications;
+
+  const messageMap = {
+    imageRatio: {
+      onlyWith: {
+        message: `Due to Instagram limitations, we can't post images directly to Instagram with aspect
+          ratios outside the range 4:5 to 1.91:1. You will receive a Reminder to post manually when the time comes!`,
+        composerId: 'instagram',
+        code: 'ASPECT_RATIO',
+      },
+      onlyWithout: {
+        message: `To post images to Instagram with aspect ratio outside the 4:5 to 1:91:1 range, you’ll need
+          to set up Reminders. Finish scheduling your post, then we’ll help you get set up!`,
+        composerId: 'instagram',
+        code: 'ASPECT_RATIO',
+      },
+      mixed: {
+        message: `Due to Instagram limitations, we can't post images directly to Instagram with aspect
+          ratios outside the range 4:5 to 1.91:1. You will receive a Reminder to post manually when the time comes!
+          Note that you haven't set up Reminders in some of your profiles.`,
+        composerId: 'instagram',
+        code: 'ASPECT_RATIO',
+      },
+    },
+    videoRatio: {
+      onlyWith: {
+        message: `Due to Instagram limitations, we can't post videos directly to Instagram with aspect
+        ratios outside the range 4:5 to 16:9. You will receive a Reminder to post manually when the time comes!`,
+        composerId: 'instagram',
+        code: 'ASPECT_RATIO',
+      },
+      onlyWithout: {
+        message: `To post videos to Instagram with aspect ratio outside the 4:5 to 16:9 range, you’ll need
+          to set up Reminders. Finish scheduling your post, then we’ll help you get set up!`,
+        composerId: 'instagram',
+        code: 'ASPECT_RATIO',
+      },
+      mixed: {
+        message: `Due to Instagram limitations, we can't post videos directly to Instagram with aspect
+        ratios outside the range 4:5 to 16:9. You will receive a Reminder to post manually when the time comes!
+          Note that you haven't set up Reminders in some of your profiles.`,
+        composerId: 'instagram',
+        code: 'ASPECT_RATIO',
+      },
+    },
+    gallery: {
+      onlyWith: {
+        message:
+          "Due to Instagram limitations, we can't post galleries on your behalf. You will receive a Reminder to post manually when the time comes!",
+        composerId: 'instagram',
+        code: 'GALLERY',
+      },
+      onlyWithout: {
+        message:
+          "To post a gallery to Instagram, you'll need to set up Reminders. Finish scheduling your post, then we'll help you get set up!",
+        composerId: 'instagram',
+        code: 'GALLERY',
+      },
+      mixed: {
+        message: `Due to Instagram limitations, we can't post galleries on your behalf. You will receive a Reminder
+        to post manually when the time comes! Note that you haven't set up Reminders in some of your profiles.`,
+        composerId: 'instagram',
+        code: 'GALLERY',
+      },
+    },
+    videoPosting: {
+      onlyWith: {
+        message: `Due to Instagram limitations, we can't post videos on your behalf.
+          You will receive a Reminder to post manually when the time comes!`,
+        composerId: 'instagram',
+        code: 'VIDEO',
+      },
+      onlyWithout: {
+        message: `To post a video to Instagram, you'll need to set up Reminders. Finish scheduling your post,
+          then we'll help you get set up!`,
+        composerId: 'instagram',
+        code: 'VIDEO',
+      },
+      mixed: {
+        message: `Due to Instagram limitations, we can't post videos on your behalf.
+          You will receive a Reminder to post manually when the time comes! Note that you haven't set up 
+          Reminders in some of your profiles.`,
+        composerId: 'instagram',
+        code: 'VIDEO',
+      },
+    },
+    mixScheduling: {
+      onlyWith: {
+        message: `Some of your accounts aren't enabled for Direct Scheduling, we'll send out Reminders
+          for those accounts. Not all features are supported for reminders.`,
+        composerId: 'instagram',
+        code: 'NOT_ENABLED',
+      },
+      onlyWithout: {
+        message: `Some of your accounts aren't enabled for Direct Scheduling, you'll need to set up
+          Reminders for those accounts. Finish scheduling your post, then we'll help you get set up!`,
+        composerId: 'instagram',
+        code: 'NOT_ENABLED',
+      },
+      mixed: {
+        message: `Some of your accounts aren't enabled for Direct Scheduling, we'll send out Reminders
+          for those accounts. Note that you haven't set up Reminders in some of those accounts.`,
+        composerId: 'instagram',
+        code: 'NOT_ENABLED',
+      },
+    },
+  };
+  const messagesByMediaType = messageMap[mediaType] || {};
+  let feedbackMessage;
+
+  if (hasAllProfilesWithPushNotifications) {
+    feedbackMessage = messagesByMediaType.onlyWith;
+  }
+
+  if (hasAllProfilesWithoutPushNotifications) {
+    feedbackMessage = messagesByMediaType.onlyWithout;
+  }
+
+  if (hasProfilesWithAndWithoutPushNotifications) {
+    feedbackMessage = messagesByMediaType.mixed;
+  }
+
+  if (feedbackMessage) {
+    return getNewInstagramFeedbackObj(feedbackMessage);
+  }
+};
+
 const updateInstagramDraftsFeedback = () => {
   const { hasIGDirectVideoFlip } = AppStore.getUserData();
   const instagramDraft = ComposerStore.getEnabledDrafts().filter(
@@ -1953,85 +2101,49 @@ const updateInstagramDraftsFeedback = () => {
   const selectedIgProfiles = AppStore.getSelectedProfilesForService(
     'instagram'
   );
-  const hasSomeEnabledProfiles =
-    selectedIgProfiles.filter(profile => profile.instagramDirectEnabled)
-      .length > 0;
-  const hasSomeDisabledProfiles =
-    selectedIgProfiles.filter(profile => !profile.instagramDirectEnabled)
-      .length > 0;
-  if (
+  const hasSomeEnabledProfiles = selectedIgProfiles.some(
+    profile => profile.instagramDirectEnabled
+  );
+  const hasSomeDisabledProfiles = selectedIgProfiles.some(
+    profile => !profile.instagramDirectEnabled
+  );
+
+  const isMediaError =
     hasSomeEnabledProfiles &&
-    instagramDraft.enabledAttachmentType === AttachmentTypes.MEDIA &&
-    instagramDraft.images.length > 0
-  ) {
-    if (passesImageAspectRatioTest(instagramDraft.images[0]) === false) {
-      instagramDraft.instagramFeedback.push(
-        getNewInstagramFeedbackObj({
-          message: `Due to Instagram limitations, we can't post images directly to Instagram with aspect
-        ratios outside the range 4:5 to 1.91:1. You will receive a Reminder to post manually when the time comes!`,
-          composerId: 'instagram',
-          code: 'ASPECT_RATIO',
-        })
-      );
-      return;
-    } else if (instagramDraft.images.length > 1) {
-      instagramDraft.instagramFeedback.push(
-        getNewInstagramFeedbackObj({
-          message:
-            "Due to Instagram limitations, we can't post galleries on your behalf. You will receive a Reminder to post manually when the time comes!",
-          composerId: 'instagram',
-          code: 'GALLERY',
-        })
-      );
-      return;
-    }
-  } else if (
-    hasSomeEnabledProfiles &&
+    instagramDraft.enabledAttachmentType === AttachmentTypes.MEDIA;
+  const isImageOrGalleryError =
+    isMediaError && instagramDraft.images.length > 0;
+  const isImageRatioError =
+    isImageOrGalleryError &&
+    passesImageAspectRatioTest(instagramDraft.images[0]) === false;
+  const isGalleryError =
+    isImageOrGalleryError && instagramDraft.images.length > 1;
+  const isVideoRatioError =
+    isMediaError &&
     hasIGDirectVideoFlip &&
-    instagramDraft.enabledAttachmentType === AttachmentTypes.MEDIA &&
-    instagramDraft.video
-  ) {
-    if (passesVideoAspectRatioTest(instagramDraft) === false) {
-      instagramDraft.instagramFeedback.push(
-        getNewInstagramFeedbackObj({
-          message: `Due to Instagram limitations, we can't post videos directly to Instagram with aspect
-        ratios outside the range 4:5 to 16:9. You will receive a Reminder to post manually when the time comes!`,
-          composerId: 'instagram',
-          code: 'ASPECT_RATIO',
-        })
-      );
-      return;
-    }
+    instagramDraft.video &&
+    passesVideoAspectRatioTest(instagramDraft) === false;
+  const isVideoDirectSchedulingError =
+    isMediaError && !hasIGDirectVideoFlip && instagramDraft.video !== null;
+  const hasMixSchedulingError =
+    hasSomeEnabledProfiles && hasSomeDisabledProfiles;
+
+  let feedbackObject;
+
+  if (isImageRatioError) {
+    feedbackObject = getReminderMessage(selectedIgProfiles, 'imageRatio');
+  } else if (isGalleryError) {
+    feedbackObject = getReminderMessage(selectedIgProfiles, 'gallery');
+  } else if (isVideoRatioError) {
+    feedbackObject = getReminderMessage(selectedIgProfiles, 'videoRatio');
+  } else if (isVideoDirectSchedulingError) {
+    feedbackObject = getReminderMessage(selectedIgProfiles, 'videoPosting');
+  } else if (hasMixSchedulingError) {
+    feedbackObject = getReminderMessage(selectedIgProfiles, 'mixScheduling');
   }
 
-  if (!hasIGDirectVideoFlip) {
-    if (
-      hasSomeEnabledProfiles &&
-      instagramDraft.enabledAttachmentType === AttachmentTypes.MEDIA &&
-      instagramDraft.video !== null
-    ) {
-      instagramDraft.instagramFeedback.push(
-        getNewInstagramFeedbackObj({
-          message: `Due to Instagram limitations, we can't post videos on your behalf.
-        You will receive a Reminder to post manually when the time comes!`,
-          composerId: 'instagram',
-          code: 'VIDEO',
-        })
-      );
-      return;
-    }
-  }
-
-  if (hasSomeEnabledProfiles && hasSomeDisabledProfiles) {
-    instagramDraft.instagramFeedback.push(
-      getNewInstagramFeedbackObj({
-        message: `Some of your accounts aren't enabled for Direct Scheduling,
-                we'll send out Reminders for those accounts. Not all features
-                are supported for reminders.`,
-        composerId: 'instagram',
-        code: 'NOT_ENABLED',
-      })
-    );
+  if (feedbackObject) {
+    instagramDraft.instagramFeedback.push(feedbackObject);
   }
 };
 
