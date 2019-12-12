@@ -146,6 +146,7 @@ const DataImportUtils = {
           importedProfile.isManager || importedProfile.organization_role === 1,
         instagramDirectEnabled: importedProfile.should_post_direct,
         subprofiles,
+        hasPushNotifications: importedProfile.hasPushNotifications || true,
         canPostComment: importedProfile.canPostComment,
         profileHasPostingSchedule: importedProfile.schedules.some(
           item => item.times.length > 0

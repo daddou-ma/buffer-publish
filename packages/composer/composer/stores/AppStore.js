@@ -131,6 +131,7 @@ const getNewProfile = data => ({
   instagramDirectEnabled:
     data.instagramDirectEnabled && data.serviceName === 'instagram',
   canPostComment: data.canPostComment,
+  hasPushNotifications: data.hasPushNotifications,
   profileHasPostingSchedule: data.profileHasPostingSchedule,
   // Profile-specific app state
   appState: {
