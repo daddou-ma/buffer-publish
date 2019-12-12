@@ -207,11 +207,18 @@ export default connect(
     onHideInstagramModal: () => {
       dispatch(actions.handleHideInstagramModal());
     },
-    onSetRemindersClick: () => {
+    onSetRemindersClick: ({ type }) => {
+      let cta = '';
+      if (type === 'banner') {
+        cta = SEGMENT_NAMES.REMINDERS_BANNER;
+      }
+      if (type === 'post') {
+        cta = SEGMENT_NAMES.REMINDERS_POST;
+      }
       window.location.assign(
         `${getURL.getRemindersURL({
           profileId: ownProps.profileId,
-          cta: SEGMENT_NAMES.REMINDERS_BANNER,
+          cta,
           nextUrl: `profile/${ownProps.profileId}/tab/queue`,
         })}`
       );

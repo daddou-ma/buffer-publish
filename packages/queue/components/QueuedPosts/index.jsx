@@ -166,6 +166,7 @@ const QueuedPosts = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
           hasPushNotifications={hasPushNotifications}
           hasRemindersFlip={hasRemindersFlip}
+          onSetRemindersClick={onSetRemindersClick}
           isBusinessAccount={isBusinessAccount}
         />
       </div>

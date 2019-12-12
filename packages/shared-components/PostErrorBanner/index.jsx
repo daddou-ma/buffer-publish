@@ -33,31 +33,52 @@ const errorButtonStyle = {
 };
 
 // using new design system styles, replace btn when system gets rolled out
-const renderButton = link => (
+const renderLinkButton = ({ errorLink, errorLabel, errorAction }) => (
   <div style={errorButtonStyle}>
-    <Link newTab unstyled href={link}>
-      <Text size={'mini'} weight={'medium'} color={'white'}>
-        Learn More
+    <Link
+      newTab
+      unstyled
+      href={errorLink}
+      onClick={() => errorAction({ type: 'post' })}
+    >
+      <Text size="mini" weight="medium" color="white">
+        {errorLabel}
       </Text>
     </Link>
   </div>
 );
 
-const PostErrorBanner = ({ dragging, error, errorLink }) => (
+const PostErrorBanner = ({
+  dragging,
+  error,
+  errorLink,
+  errorLabel,
+  errorAction,
+}) => (
   <div style={errorWrapperStyle(dragging)}>
     <div style={errorMessageStyle(errorLink)}>
-      <Text size={'mini'} weight={'medium'} color={'white'}>
+      <Text size="mini" weight="medium" color="white">
         {error}
       </Text>
     </div>
-    {errorLink && renderButton(errorLink)}
+    {(errorLink || errorAction) &&
+      renderLinkButton({ errorLink, errorLabel, errorAction })}
   </div>
 );
 
 PostErrorBanner.propTypes = {
   error: PropTypes.string,
   errorLink: PropTypes.string,
+  errorLabel: PropTypes.string,
+  errorAction: PropTypes.func,
   dragging: PropTypes.bool,
+};
+
+PostErrorBanner.defaultProps = {
+  error: null,
+  errorLink: null,
+  errorLabel: 'Learn More',
+  errorAction: () => {},
 };
 
 export default PostErrorBanner;
