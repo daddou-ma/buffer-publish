@@ -20,6 +20,15 @@ const orderPostLists = posts => {
   return postLists;
 };
 
+const modifyItem = item => {
+  return item
+    ? {
+        ...item,
+        url: urlHasProtocol(item.url) ? item.url : `https://${item.url}`,
+      }
+    : item;
+};
+
 export default connect(
   (state, ownProps) => {
     const { profileId } = ownProps;
@@ -51,10 +60,7 @@ export default connect(
       dispatch(
         actions.handleAddNewGridLink({
           profileId: ownProps.profileId,
-          item: {
-            ...item,
-            url: urlHasProtocol(item.url) ? item.url : `https://${item.url}`,
-          },
+          item: modifyItem(item),
         })
       );
     },
@@ -112,7 +118,7 @@ export default connect(
         actions.handleUpdateSingleCustomLink({
           profileId: ownProps.profileId,
           linkId: item._id,
-          item,
+          item: modifyItem(item),
         })
       );
     },
@@ -125,8 +131,11 @@ export default connect(
           customLinkContrastColor: null,
           customLinkButtonType: null,
           linkText,
-          linkUrl,
-          item,
+          linkUrl:
+            urlHasProtocol(linkUrl) || !linkUrl
+              ? linkUrl
+              : `https://${linkUrl}`,
+          item: modifyItem(item),
         })
       );
     },
