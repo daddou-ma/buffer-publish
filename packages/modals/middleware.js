@@ -78,7 +78,7 @@ export default ({ dispatch, getState }) => next => (action) => {
       if (
         plan === 'free' &&
         !isBusinessTeamMember &&
-        !messages.includes('user_saw_shopgrid_promo')
+        !messages.includes('user_saw_shopgrid_2_promo')
       ) {
         if (
           action.result &&

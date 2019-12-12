@@ -3,7 +3,6 @@ import { push } from 'connected-react-router';
 import { plansPageRoute } from '@bufferapp/publish-routes';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 import ShopGridPromoModal from './components/ShopGridPromoModal';
 
 export default connect(
@@ -15,7 +14,7 @@ export default connect(
         dataFetchActions.fetch({
           name: 'readMessage',
           args: {
-            message: 'user_saw_shopgrid_promo',
+            message: 'user_saw_shopgrid_2_promo',
           },
         })
       );
@@ -25,7 +24,7 @@ export default connect(
         dataFetchActions.fetch({
           name: 'readMessage',
           args: {
-            message: 'user_saw_shopgrid_promo',
+            message: 'user_saw_shopgrid_2_promo',
           },
         })
       );
