@@ -47,9 +47,9 @@ const ColorSelectorPopup = ({
     onBlur();
   });
 
-  const onColorSelectionChange = colorSelected => {
-    onColorChange(colorSelected, onChange);
-    setLastValidColor(colorSelected);
+  const onColorSelectionChange = newColor => {
+    onColorChange(newColor, onChange);
+    setLastValidColor(newColor);
   };
 
   return (
