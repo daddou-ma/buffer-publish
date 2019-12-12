@@ -44,7 +44,7 @@ const UpgradeModalDecorator = storyFn => (
   <Provider store={store}>{storyFn()}</Provider>
 );
 
-storiesOf('StoryGroups', module)
+storiesOf('Stories|StoryGroups', module)
   .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
   .add('should show stories storyPosts', () => (
