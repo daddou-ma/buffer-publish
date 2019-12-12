@@ -43,6 +43,9 @@ export default connect(
         serviceId: profileData.serviceId,
         userData: state.appSidebar.user,
         hasPushNotifications: profileData.hasPushNotifications,
+        hasRemindersFlip: state.appSidebar.user.features
+          ? state.appSidebar.user.features.includes('reminders_flow')
+          : false,
         translations: state.i18n.translations['story-group-queue'],
       };
     }

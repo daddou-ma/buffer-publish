@@ -71,6 +71,9 @@ export default connect(
         isManager: profileData.isManager,
         isBusinessAccount: profileData.business,
         hasPushNotifications: profileData.hasPushNotifications,
+        hasRemindersFlip: state.appSidebar.user.features
+          ? state.appSidebar.user.features.includes('reminders_flow')
+          : false,
         hasAtLeastOneReminderPost,
         showInstagramDirectPostingModal:
           state.modals.showInstagramDirectPostingModal,
