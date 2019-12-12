@@ -162,7 +162,7 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         loading: true,
       };
-    case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const gridPosts = action.result.updates;
       return {
         ...state,
@@ -170,6 +170,7 @@ const profileReducer = (state = profileInitialState, action) => {
         gridPosts,
         total: gridPosts.length,
       };
+    }
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
