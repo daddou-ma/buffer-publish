@@ -5,6 +5,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
 import { actionTypes as gridActionTypes } from './reducer';
 import {
   isValidURL,
@@ -266,6 +267,35 @@ export default ({ getState, dispatch }) => next => action => {
         })
       );
       break;
+
+    /**
+     * Watch for Pusher events to reload the grid as necessary
+     * - when posts are created, deleted, or edited (they could
+     * have changed the image).
+     *
+     * In the future it might be nicer to just update the post in
+     * place rather than refetching all gridPosts.
+     */
+    case queueActionTypes.POST_CREATED:
+    case queueActionTypes.POST_DELETED:
+    case queueActionTypes.POST_UPDATED: {
+      const { profileId } = action;
+      const {
+        profileSidebar: { profiles },
+      } = getState();
+      const profile = profiles.find(p => p.id === profileId);
+      if (profile && profile.type === 'instagram') {
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'gridPosts',
+            args: {
+              profileId,
+            },
+          })
+        );
+      }
+      break;
+    }
 
     default:
       break;
