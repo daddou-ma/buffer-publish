@@ -71,6 +71,9 @@ export default connect(
         isManager: profileData.isManager,
         isBusinessAccount: profileData.business,
         hasPushNotifications: profileData.hasPushNotifications,
+        hasRemindersFlip: state.appSidebar.user.features
+          ? state.appSidebar.user.features.includes('reminders_flow')
+          : false,
         hasAtLeastOneReminderPost,
         showInstagramDirectPostingModal:
           state.modals.showInstagramDirectPostingModal,
@@ -204,10 +207,19 @@ export default connect(
     onHideInstagramModal: () => {
       dispatch(actions.handleHideInstagramModal());
     },
-    onSetRemindersClick: () => {
+    onSetRemindersClick: ({ type }) => {
+      let cta = '';
+      if (type === 'banner') {
+        cta = SEGMENT_NAMES.REMINDERS_BANNER;
+      }
+      if (type === 'post') {
+        cta = SEGMENT_NAMES.REMINDERS_POST;
+      }
       window.location.assign(
         `${getURL.getRemindersURL({
-          cta: SEGMENT_NAMES.REMINDERS_BANNER,
+          profileId: ownProps.profileId,
+          cta,
+          nextUrl: `profile/${ownProps.profileId}/tab/queue`,
         })}`
       );
     },

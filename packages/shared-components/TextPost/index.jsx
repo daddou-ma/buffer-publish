@@ -50,6 +50,9 @@ const TextPost = ({
   commentText,
   hasCommentEnabled,
   hasFirstCommentFlip,
+  hasPushNotifications,
+  hasRemindersFlip,
+  onSetRemindersClick,
   basic,
 }) => {
   const children = (
@@ -115,6 +118,9 @@ const TextPost = ({
       commentText={commentText}
       hasCommentEnabled={hasCommentEnabled}
       hasFirstCommentFlip={hasFirstCommentFlip}
+      hasPushNotifications={hasPushNotifications}
+      hasRemindersFlip={hasRemindersFlip}
+      onSetRemindersClick={onSetRemindersClick}
       basic={basic}
     >
       {children}
