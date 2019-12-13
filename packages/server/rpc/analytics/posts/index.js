@@ -17,7 +17,7 @@ function mapSortBy(sortBy) {
 }
 
 function normalizeDate(posts) {
-  return posts.map(post => ({ ...post, date: post.date * 1000 }));
+  return posts ? posts.map(post => ({ ...post, date: post.date * 1000 })) : [];
 }
 
 module.exports = method(

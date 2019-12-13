@@ -79,6 +79,7 @@ const compare = require('./analytics/compare');
 const getReport = require('./analytics/getReport');
 const posts = require('./analytics/posts');
 const summaryMethod = require('./analytics/summary');
+const analyticsStartDate = require('./analytics/analyticsStartDate');
 
 module.exports = rpc(
   profilesMethod,
@@ -120,11 +121,6 @@ module.exports = rpc(
   toggleGoogleAnalytics,
   saveGATrackingSettings,
   getGATrackingSettings,
-  average,
-  compare,
-  getReport,
-  posts,
-  summaryMethod,
   checkInstagramBusinessMethod,
   toggleInstagramReminders,
   mobileReminder,
@@ -157,5 +153,13 @@ module.exports = rpc(
   updateShopGridPostLink,
   updateCustomLinksMethod,
   updateSingleCustomLinkMethod,
-  deleteCustomLinkMethod
+  deleteCustomLinkMethod,
+
+  // Analyze RPC
+  average,
+  compare,
+  getReport,
+  posts,
+  summaryMethod,
+  analyticsStartDate,
 );
