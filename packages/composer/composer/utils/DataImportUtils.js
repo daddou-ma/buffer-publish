@@ -146,7 +146,7 @@ const DataImportUtils = {
           importedProfile.isManager || importedProfile.organization_role === 1,
         instagramDirectEnabled: importedProfile.should_post_direct,
         subprofiles,
-        hasPushNotifications: importedProfile.hasPushNotifications || true,
+        hasPushNotifications: importedProfile.hasPushNotifications,
         canPostComment: importedProfile.canPostComment,
         profileHasPostingSchedule: importedProfile.schedules.some(
           item => item.times.length > 0
@@ -187,6 +187,7 @@ const DataImportUtils = {
           hasSimplifiedFreePlanUX: userData.has_simplified_free_plan_ux,
           hasIGLocationTaggingFeature: userData.hasIGLocationTaggingFeature,
           isOnProTrial: userData.isOnProTrial,
+          hasRemindersFlip: hasFeature(userData.features, 'reminders_flow'),
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
           hasAccessToUserTag: userData.hasAccessToUserTag,
