@@ -12,7 +12,12 @@ const actionsOnlyForAnalyzeMiddleware = middlewareType => () => next => action =
   const placeholderType = '@@ANALYZE_ACTION';
 
   // intercept and 'hide' the action
-  if (middlewareType === 'hide' && action.args && action.args.forAnalyze) {
+  if (
+    middlewareType === 'hide' &&
+    action.type === 'profiles_FETCH_SUCCESS' &&
+    action.args &&
+    action.args.forAnalyze === true
+  ) {
     return next({
       ...action,
       type: placeholderType,
