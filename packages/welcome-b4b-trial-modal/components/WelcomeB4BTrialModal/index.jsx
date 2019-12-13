@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { Popover, Divider } from '@bufferapp/components';
 import { Button, Text } from '@bufferapp/ui';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 
 const modalStyle = {
   // border: '1px solid #B8B8B8',
@@ -40,33 +39,13 @@ const trialLabelStyle = {
 };
 
 const showGettingStarted = () => {
-  const openGuide = () =>
-    window.location.assign(
-      'https://faq.buffer.com/article/770-getting-started-with-buffer-publish?utm_source=faq&utm_medium=welcome-modal&utm_campaign=welcome'
-    );
-  trackAction(
-    {
-      location: 'modals',
-      action: 'welcome_b4b_trial_modal_getting_started_click',
-    },
-    {
-      success: openGuide,
-      error: openGuide,
-    }
+  window.location.assign(
+    'https://faq.buffer.com/article/770-getting-started-with-buffer-publish?utm_source=faq&utm_medium=welcome-modal&utm_campaign=welcome'
   );
 };
 
 const maybeLater = ({ hideModal }) => {
-  trackAction(
-    {
-      location: 'modals',
-      action: 'welcome_b4b_trial_modal_maybe_later_click',
-    },
-    {
-      success: hideModal,
-      error: hideModal,
-    }
-  );
+  hideModal();
 };
 
 const WelcomeB4BTrialModal = ({ translations, hideModal }) => (

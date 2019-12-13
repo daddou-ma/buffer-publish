@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { BusinessTrialOrUpgradeCard } from '@bufferapp/publish-shared-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -49,31 +48,13 @@ const AnalyticsList = ({
           cta: SEGMENT_NAMES.ANALYTICS_OVERVIEW_BUSINESS_UPGRADE,
         })}`
       );
-    const trackAndGo = ({ location, action, afterTracked }) => {
-      trackAction(
-        {
-          location,
-          action,
-        },
-        {
-          success: afterTracked,
-          error: afterTracked,
-        }
-      );
-    };
     if (canStartBusinessTrial) {
       return (
         <BusinessTrialOrUpgradeCard
           heading="Unlock Great Insights"
           body="Gain a deeper understanding of how you are performing on social media with advanced analytics."
           cta="Start a Free 14-Day Trial of the Business Plan"
-          onCtaClick={() => {
-            trackAndGo({
-              location: 'analytics',
-              action: 'unlock_insights_b4b_trial_start_click',
-              afterTracked: startTrial,
-            });
-          }}
+          onCtaClick={startTrial}
           backgroundImage="circles"
         />
       );
@@ -83,13 +64,7 @@ const AnalyticsList = ({
         heading="Unlock Great Insights"
         body="Gain a deeper understanding of how you are performing on social media with advanced analytics."
         cta="Upgrade to Buffer for Business"
-        onCtaClick={() => {
-          trackAndGo({
-            location: 'analytics',
-            action: 'unlock_insights_b4b_upgrade_click',
-            afterTracked: goToBilling,
-          });
-        }}
+        onCtaClick={goToBilling}
         backgroundImage="circles"
       />
     );

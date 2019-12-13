@@ -60,13 +60,14 @@ export const StyledButton = styled(Button)`
   justify-content: space-between;
 `;
 
-export const CircleColor = styled.div`
+export const CircleColor = styled.button`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 22px;
   height: 22px;
+  padding: 0px;
   border-radius: 50%;
   background-color: ${props => props.color || DEFAULT_COLOR};
   color: ${props => props.colorContrast || colorSwatches.white};
@@ -81,7 +82,7 @@ export const CircleColor = styled.div`
       display: ${props => (props.selectable ? 'block' : 'none')};
       content: '';
       width: 30px;
-      height: 30px;
+      height: 28px;
       border: 1px solid #4307ff;
       border-radius: 50%;
       margin: -5px -5px;

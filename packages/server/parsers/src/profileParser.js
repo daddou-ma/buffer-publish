@@ -34,7 +34,7 @@ module.exports = profile => ({
   directPostingEnabled: profile.direct_posting_enabled,
   isInstagramBusiness: profile.is_instagram_business,
   googleAnalyticsEnabled: profile.preferences.utm_tracking,
-  hasPushNotifications: true, // Set temporarily to true while we work on the backend
+  hasPushNotifications: profile.has_push_notifications,
   isContributor: profile.is_contributor,
   isDisconnected: profile.oauth_broken,
   location: profile.location,

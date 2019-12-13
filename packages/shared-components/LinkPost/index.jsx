@@ -69,6 +69,9 @@ const LinkPost = ({
   commentText,
   hasCommentEnabled,
   hasFirstCommentFlip,
+  hasPushNotifications,
+  hasRemindersFlip,
+  onSetRemindersClick,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -159,6 +162,9 @@ const LinkPost = ({
       commentText={commentText}
       hasCommentEnabled={hasCommentEnabled}
       hasFirstCommentFlip={hasFirstCommentFlip}
+      hasPushNotifications={hasPushNotifications}
+      hasRemindersFlip={hasRemindersFlip}
+      onSetRemindersClick={onSetRemindersClick}
       basic={basic}
     >
       {children}

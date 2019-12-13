@@ -4,7 +4,6 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import { actions } from './reducer';
 import {
@@ -72,6 +71,9 @@ export default connect(
         isManager: profileData.isManager,
         isBusinessAccount: profileData.business,
         hasPushNotifications: profileData.hasPushNotifications,
+        hasRemindersFlip: state.appSidebar.user.features
+          ? state.appSidebar.user.features.includes('reminders_flow')
+          : false,
         hasAtLeastOneReminderPost,
         showInstagramDirectPostingModal:
           state.modals.showInstagramDirectPostingModal,
@@ -205,26 +207,26 @@ export default connect(
     onHideInstagramModal: () => {
       dispatch(actions.handleHideInstagramModal());
     },
-    onSetRemindersClick: () => {
+    onSetRemindersClick: ({ type }) => {
+      let cta = '';
+      if (type === 'banner') {
+        cta = SEGMENT_NAMES.REMINDERS_BANNER;
+      }
+      if (type === 'post') {
+        cta = SEGMENT_NAMES.REMINDERS_POST;
+      }
       window.location.assign(
         `${getURL.getRemindersURL({
-          cta: SEGMENT_NAMES.REMINDERS_BANNER,
+          profileId: ownProps.profileId,
+          cta,
+          nextUrl: `profile/${ownProps.profileId}/tab/queue`,
         })}`
       );
     },
-    onCalendarClick: (weekOrMonth, trackingAction) => {
-      const openAfterTrack = () => {
-        if (weekOrMonth === 'week' || weekOrMonth === 'month') {
-          openCalendarWindow(ownProps.profileId, weekOrMonth);
-        }
-      };
-      trackAction(
-        { location: 'queue', action: trackingAction },
-        {
-          success: openAfterTrack,
-          error: openAfterTrack,
-        }
-      );
+    onCalendarClick: weekOrMonth => {
+      if (weekOrMonth === 'week' || weekOrMonth === 'month') {
+        openCalendarWindow(ownProps.profileId, weekOrMonth);
+      }
     },
   })
 )(QueuedPosts);

@@ -9,7 +9,6 @@
   "author": "hharnisc@gmail.com",
   "dependencies": {
     "@bufferapp/buffer-rpc": "0.0.4",
-    "@bufferapp/buffermetrics": "0.9.0",
     "@bufferapp/logger": "0.7.0",
     "@bufferapp/micro-rpc": "0.1.7",
     "@bufferapp/session-manager": "0.7.1",

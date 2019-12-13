@@ -20,6 +20,15 @@ const orderPostLists = posts => {
   return postLists;
 };
 
+const modifyItem = item => {
+  return item
+    ? {
+        ...item,
+        url: urlHasProtocol(item.url) ? item.url : `https://${item.url}`,
+      }
+    : item;
+};
+
 export default connect(
   (state, ownProps) => {
     const { profileId } = ownProps;
@@ -39,9 +48,6 @@ export default connect(
         customLinksDetails: currentProfile.customLinksDetails,
         maxCustomLinks: currentProfile.maxCustomLinks,
         publicGridUrl: `https://shopgr.id/${profile.serviceUsername}`,
-        hasCustomLinksFlip: state.appSidebar.user.features
-          ? state.appSidebar.user.features.includes('shopgrid_links')
-          : false,
       };
     }
     return {};
@@ -51,7 +57,7 @@ export default connect(
       dispatch(
         actions.handleAddNewGridLink({
           profileId: ownProps.profileId,
-          item,
+          item: modifyItem(item),
         })
       );
     },
@@ -104,6 +110,15 @@ export default connect(
         analyticsActions.trackEvent('Shop Grid Page Previewed', metadata)
       );
     },
+    onUpdateSingleCustomLink: ({ item }) => {
+      dispatch(
+        actions.handleUpdateSingleCustomLink({
+          profileId: ownProps.profileId,
+          linkId: item._id,
+          item: modifyItem(item),
+        })
+      );
+    },
     onUpdateCustomLinks: ({ customLinks, linkText, linkUrl, item }) => {
       dispatch(
         actions.handleUpdateCustomLinks({
@@ -113,8 +128,11 @@ export default connect(
           customLinkContrastColor: null,
           customLinkButtonType: null,
           linkText,
-          linkUrl,
-          item,
+          linkUrl:
+            urlHasProtocol(linkUrl) || !linkUrl
+              ? linkUrl
+              : `https://${linkUrl}`,
+          item: modifyItem(item),
         })
       );
     },
@@ -209,9 +227,7 @@ export default connect(
       const itemText = (item && item.text) || '';
       const itemUrl = (item && item.url) || '';
       const cleanItemText = itemText.replace(/ /g, '');
-      return (
-        cleanItemText !== '' && isValidURL(itemUrl) && urlHasProtocol(itemUrl)
-      );
+      return cleanItemText !== '' && isValidURL(itemUrl);
     },
   })
 )(GridPosts);

@@ -2,7 +2,6 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
@@ -87,12 +86,6 @@ export default ({ getState, dispatch }) => next => action => {
       refreshHashtagGroups(dispatch, organizationId);
       break;
     case actionTypes.INSERT_HASHTAG_GROUP:
-      trackAction({
-        location: 'hashtagManager',
-        action: 'hashtag_inserted',
-        metadata: { organizationId },
-      });
-
       dispatch(
         analyticsActions.trackEvent(
           'Hashtag Group Inserted',
@@ -101,12 +94,6 @@ export default ({ getState, dispatch }) => next => action => {
       );
       break;
     case `createHashtagGroup_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      trackAction({
-        location: 'hashtagManager',
-        action: 'hashtag_created',
-        metadata: { organizationId },
-      });
-
       dispatch(
         analyticsActions.trackEvent(
           'Hashtag Group Created',

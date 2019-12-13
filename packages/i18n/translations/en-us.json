@@ -11,14 +11,6 @@
     "invalidFormatCantSingleFile": "We can't quite use that type of file. Could you try one of the following instead: {acceptedFilesText}?",
     "invalidFileSize": "We can't upload \"{fileName}\" because it's too large: we can only handle files of that type up to {formattedMaxSize}. Could you try a smaller file?"
   },
-  "app-switcher": {
-    "headline1": "Switch Back to Classic Buffer",
-    "tagline": "Thanks for trying out our refreshed experience",
-    "question": "What's the primary reason you're switching?",
-    "cancel": "Cancel",
-    "continue": "Continue to classic Buffer",
-    "pleaseWait": "Please wait..."
-  },
   "profile-sidebar": {
     "connectButton": "Manage Social Accounts"
   },
@@ -411,7 +403,18 @@
     "reminderLinkText2": "Reminder ",
     "reminderText3": "to your mobile device.",
     "mobileTagText": "Uh-oh! Looks like you might not have the latest version of the Buffer mobile app. Download it now to start using Stories!",
-    "bannerMobileTagText": "Hmm...looks like you might not have the latest version of the Buffer mobile app. Download it now so that you can share this Story!"
+    "bannerMobileTagText": "Hmm...looks like you might not have the latest version of the Buffer mobile app. Download it now so that you can share this Story!",
+    "start" : {
+      "title": "Get Started with Instagram Stories",
+      "step1Title": "Set Up Reminders",
+      "step1Description": "Due to Instagram limitations, Stories can't be directly scheduled. A Reminder is a notification from the Buffer Publish app.",
+      "step2Title": "Compose Your Story",
+      "step2Description": "Storyboard your content and create draft captions. Then, choose the date and time you'd like to share with your audience.",
+      "step3Title": "Share Your Story",
+      "step3Description": "When your scheduled time arrives, Buffer will send you a Reminder. Preview on mobile, then tap to open in Instagram.",
+      "setReminders": "Set Up Reminders to Get Started",
+      "learnMore": "Learn More"
+    }
   },
   "user-tags": {
     "rightHeader": "Tag Users",

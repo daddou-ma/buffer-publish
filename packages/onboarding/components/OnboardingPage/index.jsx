@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 import { Text, ProgressBar, SocialButton } from '@bufferapp/ui';
 
 import {
@@ -29,35 +28,23 @@ const handleConnectSocialAccountClick = (
   url,
   onConnectSocialAccountClick
 ) => {
-  const goConnectProfile = () => {
-    if (channel === 'instagram') {
-      /**
-       * This silly looking code loads an 'img' with the
-       * Instagram logout URL, which ensures the user is
-       * logged out of Instagram before we send them to
-       * reconnect.
-       */
-      const img = new Image();
-      img.onerror = () => {
-        window.location.assign(url);
-      };
-      img.src = 'https://www.instagram.com/accounts/logoutin';
-      document.getElementsByTagName('head')[0].appendChild(img);
-    } else {
+  if (channel === 'instagram') {
+    /**
+     * This silly looking code loads an 'img' with the
+     * Instagram logout URL, which ensures the user is
+     * logged out of Instagram before we send them to
+     * reconnect.
+     */
+    const img = new Image();
+    img.onerror = () => {
       window.location.assign(url);
-    }
-    onConnectSocialAccountClick();
-  };
-  trackAction(
-    {
-      location: 'onboarding_page',
-      action: `connect_${channel}`,
-    },
-    {
-      success: goConnectProfile(),
-      error: goConnectProfile(),
-    }
-  );
+    };
+    img.src = 'https://www.instagram.com/accounts/logoutin';
+    document.getElementsByTagName('head')[0].appendChild(img);
+  } else {
+    window.location.assign(url);
+  }
+  onConnectSocialAccountClick();
 };
 
 const OnboardingPage = ({

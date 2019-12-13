@@ -8,7 +8,6 @@ import {
   newConnectionRoute,
 } from '@bufferapp/publish-routes';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 
 import Preferences from './components/Preferences';
 
@@ -26,10 +25,6 @@ export default connect(
   },
   dispatch => ({
     onTabClick: preferenceId => {
-      trackAction({
-        location: 'preferences',
-        action: `click_tab_${preferenceId}`,
-      });
       dispatch(
         push(
           generatePreferencePageRoute({
@@ -53,7 +48,6 @@ export default connect(
       profiles,
       isOnBusinessTrial,
     }) => {
-      trackAction({ location: 'preferences', action: 'return_to_dashboard' });
       if (profiles.length > 0) {
         const profileId = selectedProfileId || profiles[0].id;
         const profile = profiles.find(p => p.id === profileId);

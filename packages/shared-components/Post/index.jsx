@@ -201,83 +201,105 @@ const Post = ({
   commentText,
   hasCommentEnabled,
   hasFirstCommentFlip,
+  hasPushNotifications,
+  hasRemindersFlip,
+  onSetRemindersClick,
   features,
   basic,
   hasUserTags,
-}) => (
-  <div style={getPostContainerStyle({ dragging, hovering, isOver })}>
-    <div style={postStyle}>
-      <BDSCard
-        faded={isDeleting}
-        noPadding
-        draggingPlaceholder={dragging}
-        dragging={dragging}
-        isOver={isOver}
-      >
-        {postDetails && postDetails.error && postDetails.error.length > 0 && (
-          <PostErrorBanner
-            dragging={dragging}
-            error={postDetails.error}
-            errorLink={postDetails.errorLink}
-          />
-        )}
-        {renderContent({
-          children,
-          retweetProfile,
-          retweetComment,
-          retweetCommentLinks,
-          draggable,
-          dragging,
-          basic,
-        })}
-        <RenderPostMetaBar
-          profileService={profileService}
+}) => {
+  const hasError =
+    postDetails && postDetails.error && postDetails.error.length > 0;
+  const hasReminderError =
+    !hasError &&
+    !hasPushNotifications &&
+    hasRemindersFlip &&
+    postDetails.isInstagramReminder &&
+    !isPastReminder;
+
+  return (
+    <div style={getPostContainerStyle({ dragging, hovering, isOver })}>
+      <div style={postStyle}>
+        <BDSCard
+          faded={isDeleting}
+          noPadding
+          draggingPlaceholder={dragging}
           dragging={dragging}
-          locationName={locationName}
-          sourceUrl={sourceUrl}
-          subprofileID={subprofileID}
-          subprofiles={subprofiles}
-          isSent={isSent}
-          isPastReminder={isPastReminder}
-        />
-        <PostFooter
-          isManager={isManager}
-          isDeleting={isDeleting}
-          isConfirmingDelete={isConfirmingDelete}
-          isWorking={isWorking}
-          onDeleteConfirmClick={onDeleteConfirmClick}
-          onEditClick={onEditClick}
-          onShareNowClick={onShareNowClick}
-          postDetails={postDetails}
-          dragging={dragging}
-          onRequeueClick={onRequeueClick}
-          serviceLink={serviceLink}
-          isSent={isSent}
-          isPastReminder={isPastReminder}
-          day={day}
-          dueTime={dueTime}
-          sharedBy={sharedBy}
-          commentEnabled={commentEnabled}
-          commentText={commentText}
-          hasCommentEnabled={hasCommentEnabled}
-          hasFirstCommentFlip={hasFirstCommentFlip}
-          hasUserTags={hasUserTags}
-        />
-        {(isBusinessAccount || !features.isFreeUser()) &&
-          isSent &&
-          !postDetails.isRetweet && (
-            <PostStats
-              showTwitterMentions={
-                !features.isFreeUser() && !features.isProUser()
-              }
-              statistics={statistics}
-              profileService={profileService}
+          isOver={isOver}
+        >
+          {hasReminderError && (
+            <PostErrorBanner
+              dragging={dragging}
+              errorLabel="Set Up Reminders"
+              error="Shoot, looks like we can't publish this until you set up Reminders. Would you be up for setting them now?"
+              errorAction={onSetRemindersClick}
             />
           )}
-      </BDSCard>
+          {hasError && (
+            <PostErrorBanner
+              dragging={dragging}
+              error={postDetails.error}
+              errorLink={postDetails.errorLink}
+            />
+          )}
+          {renderContent({
+            children,
+            retweetProfile,
+            retweetComment,
+            retweetCommentLinks,
+            draggable,
+            dragging,
+            basic,
+          })}
+          <RenderPostMetaBar
+            profileService={profileService}
+            dragging={dragging}
+            locationName={locationName}
+            sourceUrl={sourceUrl}
+            subprofileID={subprofileID}
+            subprofiles={subprofiles}
+            isSent={isSent}
+            isPastReminder={isPastReminder}
+          />
+          <PostFooter
+            isManager={isManager}
+            isDeleting={isDeleting}
+            isConfirmingDelete={isConfirmingDelete}
+            isWorking={isWorking}
+            onDeleteConfirmClick={onDeleteConfirmClick}
+            onEditClick={onEditClick}
+            onShareNowClick={onShareNowClick}
+            postDetails={postDetails}
+            dragging={dragging}
+            onRequeueClick={onRequeueClick}
+            serviceLink={serviceLink}
+            isSent={isSent}
+            isPastReminder={isPastReminder}
+            day={day}
+            dueTime={dueTime}
+            sharedBy={sharedBy}
+            commentEnabled={commentEnabled}
+            commentText={commentText}
+            hasCommentEnabled={hasCommentEnabled}
+            hasFirstCommentFlip={hasFirstCommentFlip}
+            hasUserTags={hasUserTags}
+          />
+          {(isBusinessAccount || !features.isFreeUser()) &&
+            isSent &&
+            !postDetails.isRetweet && (
+              <PostStats
+                showTwitterMentions={
+                  !features.isFreeUser() && !features.isProUser()
+                }
+                statistics={statistics}
+                profileService={profileService}
+              />
+            )}
+        </BDSCard>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Post.commonPropTypes = {
   isConfirmingDelete: PropTypes.bool,

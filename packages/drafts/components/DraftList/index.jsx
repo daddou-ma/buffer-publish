@@ -8,7 +8,6 @@ import {
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { trackAction } from '@bufferapp/publish-data-tracking';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -78,31 +77,13 @@ const DraftList = ({
           cta: SEGMENT_NAMES.DRAFTS_BUSINESS_UPGRADE,
         })}`
       );
-    const trackAndGo = ({ location, action, afterTracked }) => {
-      trackAction(
-        {
-          location,
-          action,
-        },
-        {
-          success: afterTracked,
-          error: afterTracked,
-        }
-      );
-    };
     if (canStartBusinessTrial) {
       return (
         <BusinessTrialOrUpgradeCard
           heading="Collaborate With Your Team"
           body="Add your team to your Buffer account so you can collaborate and save even more time."
           cta="Start a Free 14-Day Trial of the Business Plan"
-          onCtaClick={() => {
-            trackAndGo({
-              location: 'drafts',
-              action: 'collaborate_with_team_b4b_trial_start_click',
-              afterTracked: startTrial,
-            });
-          }}
+          onCtaClick={startTrial}
           backgroundImage="squares"
         />
       );
@@ -112,13 +93,7 @@ const DraftList = ({
         heading="Collaborate With Your Team"
         body="Add your team to your Buffer account so you can collaborate and save even more time."
         cta="Upgrade to Buffer for Business"
-        onCtaClick={() => {
-          trackAndGo({
-            location: 'analytics',
-            action: 'collaborate_with_team_b4b_upgrade_click',
-            afterTracked: goToBilling,
-          });
-        }}
+        onCtaClick={goToBilling}
         backgroundImage="squares"
       />
     );

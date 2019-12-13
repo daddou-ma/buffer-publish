@@ -34,7 +34,7 @@ const RemindersBanner = ({ onSetRemindersClick }) => (
   <QueueBanner
     title="Uh-oh! Some of your content can't be published."
     content={content}
-    onClick={onSetRemindersClick}
+    onClick={() => onSetRemindersClick({ type: 'banner' })}
     actionLabel="Set Up Reminders"
   />
 );

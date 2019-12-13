@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 
@@ -41,6 +42,10 @@ export default connect(
         isBusinessAccount: profileData.business,
         serviceId: profileData.serviceId,
         userData: state.appSidebar.user,
+        hasPushNotifications: profileData.hasPushNotifications,
+        hasRemindersFlip: state.appSidebar.user.features
+          ? state.appSidebar.user.features.includes('reminders_flow')
+          : false,
         translations: state.i18n.translations['story-group-queue'],
       };
     }
@@ -64,6 +69,15 @@ export default connect(
           storyGroup: storyGroup.post,
           profileId: ownProps.profileId,
         })
+      );
+    },
+    onSetRemindersClick: () => {
+      window.location.assign(
+        `${getURL.getRemindersURL({
+          profileId: ownProps.profileId,
+          cta: SEGMENT_NAMES.REMINDERS_STORIES,
+          nextUrl: `profile/${ownProps.profileId}/tab/stories`,
+        })}`
       );
     },
     handleCloseStoriesComposer: () => {
