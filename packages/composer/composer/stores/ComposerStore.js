@@ -1992,13 +1992,15 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
       },
       onlyWithout: {
         message: `To post images to Instagram with aspect ratio outside the 4:5 to 1:91:1 range, you’ll need
-          to set up Reminders. Finish scheduling your post, then we’ll help you get set up!`,
+          to set up Reminders. Reminders aren’t set up for ${usernameList}. Finish scheduling your post, then
+          visit the queue for ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'ASPECT_RATIO',
       },
       mixed: {
         message: `Reminders aren’t set up for ${usernameList}. To post an image outside the range 4:5 to 1.91:1
-          to Instagram, you’ll need to set up Reminders. Finish scheduling your post, then visit the profile and we’ll get you set up Reminders!`,
+          to Instagram, you’ll need to set up Reminders. Finish scheduling your post, then visit the queue for 
+          ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'ASPECT_RATIO',
       },
@@ -2012,13 +2014,14 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
       },
       onlyWithout: {
         message: `To post videos to Instagram with aspect ratio outside the 4:5 to 16:9 range, you’ll need
-          to set up Reminders. Finish scheduling your post, then we’ll help you get set up!`,
+          to set up Reminders. Reminders aren’t set up for ${usernameList}. Finish scheduling your post,
+          then visit the queue for ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'ASPECT_RATIO',
       },
       mixed: {
         message: `Reminders aren’t set up for ${usernameList}. To post a video outside the range 4:5 to 16:9 to Instagram,
-          you’ll need to set up Reminders. Finish scheduling your post, then visit the profile and we’ll get you set up Reminders!`,
+          you’ll need to set up Reminders. Finish scheduling your post, then visit the queue for ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'ASPECT_RATIO',
       },
@@ -2031,14 +2034,14 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
         code: 'GALLERY',
       },
       onlyWithout: {
-        message:
-          "To post a gallery to Instagram, you'll need to set up Reminders. Finish scheduling your post, then we'll help you get set up!",
+        message: `To post a gallery to Instagram, you'll need to set up Reminders. Reminders aren’t set up for ${usernameList}.
+           Finish scheduling your post, then visit the queue for ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'GALLERY',
       },
       mixed: {
         message: `Reminders aren’t set up for ${usernameList}. To post a gallery to Instagram, you’ll need to set up Reminders.
-          Finish scheduling your post, then visit the profile and we’ll get you set up Reminders!`,
+           Finish scheduling your post, then visit the queue for ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'GALLERY',
       },
@@ -2051,14 +2054,14 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
         code: 'VIDEO',
       },
       onlyWithout: {
-        message: `To post a video to Instagram, you'll need to set up Reminders. Finish scheduling your post,
-          then we'll help you get set up!`,
+        message: `To post a video to Instagram, you'll need to set up Reminders. Reminders aren’t set up for ${usernameList}.
+           Finish scheduling your post, then visit the queue for ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'VIDEO',
       },
       mixed: {
         message: `Reminders aren’t set up for ${usernameList}. To post a video to Instagram, you’ll need to set up Reminders.
-          Finish scheduling your post, then visit the profile and we’ll get you set up Reminders!`,
+           Finish scheduling your post, then visit the queue for ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'VIDEO',
       },
@@ -2072,13 +2075,14 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
       },
       onlyWithout: {
         message: `Some of your accounts aren't enabled for Direct Scheduling, you'll need to set up
-          Reminders for those accounts. Finish scheduling your post, then we'll help you get set up!`,
+          Reminders for those accounts. Reminders aren’t set up for ${usernameList}. Finish scheduling your post,
+          then visit the queue for ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'NOT_ENABLED',
       },
       mixed: {
         message: `Some of your accounts aren't enabled for Direct Scheduling, we'll send out Reminders for those accounts.
-          Reminders aren’t set up for ${usernameList}. Finish scheduling your post, then visit the profile and we’ll get you set up Reminders!`,
+          Reminders aren’t set up for ${usernameList}. Finish scheduling your post, then visit the queue for ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'NOT_ENABLED',
       },
