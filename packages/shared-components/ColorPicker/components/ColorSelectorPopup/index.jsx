@@ -93,6 +93,19 @@ const ColorSelectorPopup = ({
                 setIsValidHex(true);
               }
             }}
+            onKeyUp={e => {
+              // handle return key
+              if (e.keyCode === 13) {
+                e.preventDefault();
+                const isValidColor = isHexValid(e.target.value);
+                const selectedHex = !isValidColor
+                  ? getValidHex(e.target.value, lastValidColor)
+                  : e.target.value;
+                onColorSelectionChange(selectedHex);
+                setIsValidHex(true);
+                onBlur();
+              }
+            }}
             maxLength="6"
           />
         </InputWrapper>
