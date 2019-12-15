@@ -78,9 +78,10 @@ const ColorSelectorPopup = ({
             type="input"
             prefix={{ text: '#', paddingLeft: '18px' }}
             onChange={e => {
-              const isValidColor = isHexValid(e.target.value);
+              const color = `#${e.target.value}`;
+              const isValidColor = isHexValid(color);
               setIsValidHex(isValidColor);
-              onColorChange(e.target.value, onChange);
+              onColorChange(color, onChange);
             }}
             value={colorSelected.replace('#', '')}
             name="colorInput"
@@ -97,13 +98,11 @@ const ColorSelectorPopup = ({
               // handle return key
               if (e.keyCode === 13) {
                 e.preventDefault();
-                const isValidColor = isHexValid(e.target.value);
-                const selectedHex = !isValidColor
-                  ? getValidHex(e.target.value, lastValidColor)
-                  : e.target.value;
-                onColorSelectionChange(selectedHex);
-                setIsValidHex(true);
-                onBlur();
+                const color = `#${e.target.value}`;
+                const isValidColor = isHexValid(color);
+                if (isValidColor) {
+                  onBlur();
+                }
               }
             }}
             maxLength="6"

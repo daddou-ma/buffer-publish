@@ -68,17 +68,13 @@ EditingLinkItem.defaultProps = {
 
 const CustomLinks = ({
   customLinksDetails,
-  onUpdateCustomLinks,
   onUpdateCustomLinksColor,
   onDeleteCustomLink,
-  onUpdateLinkText,
-  onUpdateLinkUrl,
   maxCustomLinks,
   onToggleEditMode,
   onSwapCustomLinks,
   onSaveNewLinkClick,
   isValidItem,
-  onCancelCustomLinkEdit,
   onUpdateSingleCustomLink,
 }) => {
   const [colorButtons, setColorButton] = useState(
@@ -205,6 +201,7 @@ CustomLinks.propTypes = {
   onSwapCustomLinks: PropTypes.func,
   onCancelCustomLinkEdit: PropTypes.func,
   onUpdateCustomLinksColor: PropTypes.func,
+  onUpdateSingleCustomLink: PropTypes.func,
   onSaveNewLinkClick: PropTypes.func,
   isValidItem: PropTypes.func,
   customLinksDetails: PropTypes.shape({

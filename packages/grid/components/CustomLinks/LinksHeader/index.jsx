@@ -43,49 +43,7 @@ const AddLinkSection = styled.div`
   margin: 0 0 0 8px;
 `;
 
-const ColorPickerSection = ({
-  label,
-  defaultColor,
-  setColorButton,
-  setTextColor,
-  onBlur,
-}) => {
-  return (
-    <ColorPicker
-      label={label}
-      defaultColor={defaultColor || DEFAULT_COLOR}
-      onChange={(color, contrastColor) => {
-        setColorButton(color);
-        setTextColor(contrastColor);
-      }}
-      onBlur={(color, contrastColor) => {
-        setColorButton(color);
-        setTextColor(contrastColor);
-        onBlur();
-      }}
-    />
-  );
-};
-
-ColorPickerSection.propTypes = {
-  label: PropTypes.string,
-  defaultColor: PropTypes.string,
-  setColorButton: PropTypes.func,
-  setTextColor: PropTypes.func,
-  onBlur: PropTypes.func,
-};
-
-ColorPickerSection.defaultProps = {
-  label: '',
-  defaultColor: '',
-  setColorButton: () => {},
-  setTextColor: () => {},
-  onBlur: () => {},
-};
-
 const LinksHeader = ({
-  customLinksDetails,
-  maxCustomLinks,
   title = 'Top Links',
   popupText = 'Add up to 3 custom links to the top of your Shop grid page.',
   onAddLinkClick = () => {},
@@ -110,17 +68,23 @@ const LinksHeader = ({
       </MyLinksTitle>
       <AddLinkSection>
         <LinkColorSection>
-          <ColorPickerSection
+          <ColorPicker
             label={pickerText}
-            defaultColor={colorButtons}
+            defaultColor={colorButtons || DEFAULT_COLOR}
             setColorButton={setColorButton}
             setTextColor={setTextColor}
-            onBlur={() =>
+            onChange={(color, contrastColor) => {
+              setColorButton(color);
+              setTextColor(contrastColor);
+            }}
+            onBlur={(color, contrastColor) => {
+              setColorButton(color);
+              setTextColor(contrastColor);
               onUpdateCustomLinksColor({
                 customLinkColor: colorButtons,
                 customLinkContrastColor: textColor,
-              })
-            }
+              });
+            }}
           />
         </LinkColorSection>
         <Button
