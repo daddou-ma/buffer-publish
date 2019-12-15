@@ -117,6 +117,7 @@ const getNewProfile = data => ({
   },
   timezone: data.timezone,
   shouldBeAutoSelected: data.shouldBeAutoSelected,
+  shouldShowGridPreview: data.shouldShowGridPreview,
   isSelected: false,
   isDisabled: data.isDisabled,
   disabledMessage: data.disabledMessage,

@@ -51,6 +51,7 @@ class App extends React.Component {
         imagesAvatar: PropTypes.string.isRequired,
         timezone: PropTypes.string.isRequired,
         shouldBeAutoSelected: PropTypes.bool.isRequired,
+        shouldShowGridPreview: PropTypes.bool.isRequired,
         isDisabled: PropTypes.bool.isRequired,
         disabledMessage: PropTypes.string,
         serviceType: PropTypes.string.isRequired,
