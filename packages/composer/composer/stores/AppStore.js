@@ -131,6 +131,7 @@ const getNewProfile = data => ({
   instagramDirectEnabled:
     data.instagramDirectEnabled && data.serviceName === 'instagram',
   canPostComment: data.canPostComment,
+  hasPushNotifications: data.hasPushNotifications,
   profileHasPostingSchedule: data.profileHasPostingSchedule,
   // Profile-specific app state
   appState: {
@@ -160,6 +161,7 @@ const getNewUserData = data => ({
   hasIGLocationTaggingFeature: data.hasIGLocationTaggingFeature,
   hasIGDirectVideoFlip: data.hasIGDirectVideoFlip,
   canStartProTrial: data.canStartProTrial,
+  hasRemindersFlip: data.hasRemindersFlip,
   isOnProTrial: data.isOnProTrial,
   hasShopgridFlip: data.hasShopgridFlip,
   hasAccessToUserTag: data.hasAccessToUserTag,

@@ -58,6 +58,7 @@ class App extends React.Component {
         isBusinessProfile: PropTypes.bool.isRequired,
         isContributor: PropTypes.bool,
         isManager: PropTypes.bool.isRequired,
+        hasPushNotifications: PropTypes.bool.isRequired,
         profileHasPostingSchedule: PropTypes.bool,
         subprofiles: PropTypes.arrayOf(
           PropTypes.shape({
