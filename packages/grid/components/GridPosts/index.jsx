@@ -178,9 +178,8 @@ const GridPosts = ({
     return (
       <Fragment>
         <EmptyState
-          title="You haven’t published any posts with this account in the past 30 days!"
-          subtitle="Once a post has gone live via Buffer,
-          you can track its performance here to learn what works best with your audience!"
+          title="You haven’t published any posts to this Instagram account yet."
+          subtitle="Once you’ve posted to your Instagram feed, use Shop Grid as your link in bio tool to drive traffic from Instagram to anywhere you’d like — your online store, articles, events, and more!"
           heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
           heroImgSize={{ width: '270px', height: '150px' }}
         />
