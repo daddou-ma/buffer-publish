@@ -29,9 +29,11 @@ export default connect(
         return profileQueuePosts.posts[key];
       });
 
-    const hasAtLeastOneReminderPost = queuePostsArray.some(
-      post => post.postDetails && post.postDetails.isInstagramReminder
-    );
+    const hasAtLeastOneReminderPost =
+      queuePostsArray &&
+      queuePostsArray.some(
+        post => post.postDetails && post.postDetails.isInstagramReminder
+      );
 
     if (isLockedProfile) {
       return {
