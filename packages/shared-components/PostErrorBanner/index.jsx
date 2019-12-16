@@ -39,7 +39,7 @@ const renderLinkButton = ({ errorLink, errorLabel, errorAction }) => (
       newTab
       unstyled
       href={errorLink}
-      onClick={() => errorAction({ type: 'post' })}
+      onClick={errorAction ? () => errorAction({ type: 'post' }) : null}
     >
       <Text size="mini" weight="medium" color="white">
         {errorLabel}
