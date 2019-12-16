@@ -22,9 +22,12 @@ export default connect(
     );
     const isLockedProfile = state.profileSidebar.isLockedProfile;
 
-    const queuePostsArray = Object.keys(profileQueuePosts.posts).map(key => {
-      return profileQueuePosts.posts[key];
-    });
+    const queuePostsArray =
+      profileQueuePosts &&
+      profileQueuePosts.posts &&
+      Object.keys(profileQueuePosts.posts).map(key => {
+        return profileQueuePosts.posts[key];
+      });
 
     const hasAtLeastOneReminderPost = queuePostsArray.some(
       post => post.postDetails && post.postDetails.isInstagramReminder
