@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { plansPageRoute } from '@bufferapp/publish-routes';
+import { generatePlansPageRoute } from '@bufferapp/publish-routes';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import ShopGridPromoModal from './components/ShopGridPromoModal';
@@ -29,7 +29,15 @@ export default connect(
         })
       );
       dispatch(modalsActions.hideShopGridPromoModal());
-      dispatch(push(plansPageRoute));
+      dispatch(
+        push(
+          generatePlansPageRoute({
+            utmlSource: 'publish',
+            utmMedium: 'appcues',
+            utmCampaign: 'shop-grid-v2',
+          })
+        )
+      );
     },
   })
 )(ShopGridPromoModal);
