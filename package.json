@@ -43,7 +43,6 @@
     "@babel/register": "7.6.0",
     "@babel/runtime-corejs3": "7.6.2",
     "@bufferapp/buffer-js-api": "0.3.0",
-    "@bufferapp/buffer-js-metrics": "0.2.0",
     "@bufferapp/buffer-js-request": "0.2.0",
     "@bufferapp/components": "3.2.1",
     "@bufferapp/draft-js": "0.10.1-fork.5",

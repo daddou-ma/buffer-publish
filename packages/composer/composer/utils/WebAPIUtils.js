@@ -225,35 +225,6 @@ const WebAPIUtils = {
           [QueueingTypes.NEXT_DRAFT, ['add-draft', 'next']],
           [QueueingTypes.CUSTOM_DRAFT, ['schedule-draft']],
         ]);
-
-        AppActionCreators.trackUserAction(
-          [
-            'composer',
-            'updates',
-            'shared',
-            ...trackingQueueingTypeMap.get(queueingType),
-          ],
-          {
-            updates_ids: extractSavedUpdatesIdsFromResponses(
-              successfulResponses
-            ),
-          }
-        );
-      }
-
-      if (unsuccessfulResponses.length > 0) {
-        AppActionCreators.trackUserAction(
-          ['composer', 'updates', 'error_sharing'],
-          {
-            error_codes: unsuccessfulResponses.reduce(
-              (reducedCodes, { code }) =>
-                typeof code !== 'undefined'
-                  ? reducedCodes.concat(code)
-                  : reducedCodes,
-              []
-            ),
-          }
-        );
       }
 
       return {

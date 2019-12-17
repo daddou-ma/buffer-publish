@@ -23,7 +23,6 @@ class BoardSelectorBoardItem extends React.Component {
         this.props.profile.id,
         this.props.board.id
       );
-      AppActionCreators.trackUserAction(['composer', 'deselected_profile']);
       this.props.onChange();
     }
   };
@@ -33,7 +32,6 @@ class BoardSelectorBoardItem extends React.Component {
       this.props.profile.id,
       this.props.board.id
     );
-    AppActionCreators.trackUserAction(['composer', 'selected_profile']);
     this.props.onChange();
   };
 

@@ -755,15 +755,6 @@ const updateDraftLocation = monitorComposerLastInteractedWith(
 
     if (!draft.service.canHaveLocation) return;
 
-    const previousLocationIsEmpty = draft.locationName === null;
-    if (previousLocationIsEmpty) {
-      AppActionCreators.trackUserAction([
-        'composer',
-        'location',
-        'started_adding_location',
-      ]);
-    }
-
     draft.locationId = locationId;
     draft.locationName = locationName;
   }

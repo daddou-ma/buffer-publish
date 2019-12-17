@@ -148,10 +148,6 @@ const ComposerActionCreators = {
       id,
       composerSidebarVisible,
     });
-
-    // @todo: add tracking option here
-    // const toggleAction = composerSidebarVisible ? 'enabled' : 'disabled';
-    // AppActionCreators.trackUserAction(['composer', 'toggle_hashtag_group', toggleAction]);
   },
 
   parseDraftTextLinks: id => {
@@ -187,8 +183,6 @@ const ComposerActionCreators = {
         comesFromDirectUserAction: false,
       },
     });
-
-    AppActionCreators.trackUserAction(['composer', 'media', 'added_link']);
   },
 
   updateDraftLinkTitle: (id, title) => {
@@ -536,12 +530,6 @@ const ComposerActionCreators = {
         width,
         height,
       });
-      AppActionCreators.trackUserAction(
-        ['composer', 'thumbnail', 'uploaded_file'],
-        {
-          extension: getFileTypeFromPath(url),
-        }
-      );
     },
     uploadedDraftImage: ({
       id,
@@ -560,16 +548,6 @@ const ComposerActionCreators = {
         width,
         height,
       });
-      AppActionCreators.trackUserAction(
-        ['composer', 'media', 'uploaded', 'photo'],
-        {
-          extension: getFileTypeFromPath(url),
-        }
-      );
-      AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
-        addedFrom: 'upload',
-        isGif: false,
-      });
     },
     uploadedDraftVideo: ({ id, uploaderInstance, uploadId, fileExtension }) => {
       AppDispatcher.handleViewAction({
@@ -578,12 +556,6 @@ const ComposerActionCreators = {
         uploaderInstance,
         uploadId,
       });
-      AppActionCreators.trackUserAction(
-        ['composer', 'media', 'uploaded', 'video'],
-        {
-          extension: fileExtension,
-        }
-      );
     },
     draftGifUploaded: ({
       id,
@@ -601,16 +573,6 @@ const ComposerActionCreators = {
         stillGifUrl,
         width,
         height,
-      });
-      AppActionCreators.trackUserAction(
-        ['composer', 'media', 'uploaded', 'photo'],
-        {
-          extension: getFileTypeFromPath(url),
-        }
-      );
-      AppActionCreators.trackUserAction(['composer', 'media', 'added_photo'], {
-        addedFrom: 'upload',
-        isGif: true,
       });
     },
     queueError: ({ message }) => {

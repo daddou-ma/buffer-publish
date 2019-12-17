@@ -890,8 +890,6 @@ const collapseComposer = () => {
 
   markPreviouslyExpandedComposerAsCollapsed();
   setExpandedComposerId(null);
-
-  AppActionCreators.trackUserAction(['composer', 'collapse']);
 };
 
 const markAppAsLoaded = () => {

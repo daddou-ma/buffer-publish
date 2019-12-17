@@ -252,24 +252,12 @@ class App extends React.Component {
        every time composer opens */
     if (!this.isInitialized) this.init();
     else AppInitActionCreators.loadInitialMetaData(this.props.metaData);
-
-    AppActionCreators.trackUserAction(['viewed'], {
-      timeToRender: new Date() - window.pageStartTime,
-    });
     observeStore(AppStore, store => store.getAppState().isLoaded).then(() => {
       if (this.state.metaData.appEnvironment === AppEnvironments.EXTENSION) {
         this.dragMe = new DragMe(
           document.querySelector('.js-enable-dragging'),
           {
             cancel: '.js-disable-dragging',
-            onDragStart: target => {
-              AppActionCreators.trackUserAction(['composer', 'dragged'], {
-                draggingTarget:
-                  target === this.draggingAnchor
-                    ? 'dragging-anchor'
-                    : 'app-window',
-              });
-            },
           }
         );
       }

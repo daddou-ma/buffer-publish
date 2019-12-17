@@ -31,11 +31,6 @@ class LinkAttachment extends React.Component {
       this.props.draftId,
       AttachmentTypes.LINK
     );
-
-    AppActionCreators.trackUserAction(['composer', 'attachment', 'disabled'], {
-      attachment_type: AttachmentTypes.LINK,
-      button_clicked: 'close_button',
-    });
   };
 
   // Facebook has specific logic to allow editing of link attachments, not everyone

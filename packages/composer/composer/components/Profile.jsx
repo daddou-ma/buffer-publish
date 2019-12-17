@@ -77,11 +77,9 @@ class Profile extends React.Component {
       // prevent dropdown from being expanded
       if (this.hasSubprofiles()) e.stopPropagation();
       AppActionCreators.unselectProfile(profile.id);
-      AppActionCreators.trackUserAction(['composer', 'deselected_profile']);
     } else {
       if (this.hasSubprofiles()) return;
       AppActionCreators.selectProfile(profile.id);
-      AppActionCreators.trackUserAction(['composer', 'selected_profile']);
     }
 
     e.preventDefault();

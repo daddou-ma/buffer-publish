@@ -13,35 +13,17 @@ class EmptyTextAlert extends React.Component {
 
   onClickCancel = () => {
     ModalActionCreators.closeModal();
-    AppActionCreators.trackUserAction([
-      'composer',
-      'empty_text_alert',
-      'button_click',
-      'cancel',
-    ]);
   };
 
   onClickSendAndRemember = () => {
     ModalActionCreators.closeModal();
     AppActionCreators.rememberModalView('remember_confirm_saving_modal');
     AppActionCreators.saveDrafts(this.props.queueingType);
-    AppActionCreators.trackUserAction([
-      'composer',
-      'empty_text_alert',
-      'button_click',
-      'confirm_and_remember',
-    ]);
   };
 
   onClickSend = () => {
     ModalActionCreators.closeModal();
     AppActionCreators.saveDrafts(this.props.queueingType);
-    AppActionCreators.trackUserAction([
-      'composer',
-      'empty_text_alert',
-      'button_click',
-      'confirm',
-    ]);
   };
 
   render() {

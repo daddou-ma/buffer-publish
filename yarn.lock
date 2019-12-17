@@ -1163,13 +1163,6 @@
   dependencies:
     "@bufferapp/buffer-js-request" "0.2.0"
 
-"@bufferapp/buffer-js-metrics@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/buffer-js-metrics/-/buffer-js-metrics-0.2.0.tgz#3271ceb533d229bb43c9af28900f972d00153ed8"
-  integrity sha1-MnHOtTPSKbtDya8okA+XLQAVPtg=
-  dependencies:
-    "@bufferapp/buffer-js-request" "0.2.0"
-
 "@bufferapp/buffer-js-request@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/buffer-js-request/-/buffer-js-request-0.2.0.tgz#b7492f538da364a664e46e6d49c679dfa37dbe3e"

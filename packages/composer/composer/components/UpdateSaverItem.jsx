@@ -66,24 +66,6 @@ class UpdateSaverItem extends React.Component {
     });
   };
 
-  onMouseEnter = () => {
-    if (!this.props.appState.isSavingPossible) {
-      AppActionCreators.trackUserAction([
-        'composer',
-        'hovered_over_disabled_add_to_queue',
-      ]);
-    }
-  };
-
-  onMouseDown = () => {
-    if (!this.props.appState.isSavingPossible) {
-      AppActionCreators.trackUserAction([
-        'composer',
-        'clicked_on_disabled_add_to_queue',
-      ]);
-    }
-  };
-
   render() {
     const {
       type,
@@ -141,8 +123,6 @@ class UpdateSaverItem extends React.Component {
             className={buttonClassName}
             disabled={disabled}
             onClick={this.onButtonClick}
-            onMouseEnter={this.onMouseEnter}
-            onMouseDown={this.onMouseDown}
           >
             {children}
           </Button>

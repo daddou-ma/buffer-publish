@@ -94,32 +94,14 @@ class MediaAttachmentThumbnail extends React.Component {
     switch (media.mediaType) {
       case MediaTypes.IMAGE:
         ComposerActionCreators.removeDraftImage(draftId, media);
-        AppActionCreators.trackUserAction(
-          ['composer', 'media', 'removed', 'photo'],
-          {
-            isGif: false,
-          }
-        );
         break;
 
       case MediaTypes.VIDEO:
         ComposerActionCreators.removeDraftVideo(draftId);
-        AppActionCreators.trackUserAction([
-          'composer',
-          'media',
-          'removed',
-          'video',
-        ]);
         break;
 
       case MediaTypes.GIF:
         ComposerActionCreators.removeDraftGif(draftId);
-        AppActionCreators.trackUserAction(
-          ['composer', 'media', 'removed', 'photo'],
-          {
-            isGif: true,
-          }
-        );
         break;
 
       default:
