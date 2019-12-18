@@ -11,16 +11,6 @@ import { actionTypes, actions } from './reducer';
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'enabledApplicationModes',
-          args: {
-            comprehensive: true,
-          },
-        })
-      );
-      break;
     case profileActionTypes.SELECT_PROFILE:
       dispatch(
         dataFetchActions.fetch({

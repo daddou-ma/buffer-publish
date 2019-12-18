@@ -64,7 +64,6 @@ export default connect(
         ),
         draggingEnabled: !profileData.paused,
         showEmptyQueueMessage: false, // @todo: Show this if they have no slots?
-        enabledApplicationModes: state.queue.enabledApplicationModes,
         showComposer: state.queue.showComposer,
         environment: state.environment.environment,
         editMode: state.queue.editMode,

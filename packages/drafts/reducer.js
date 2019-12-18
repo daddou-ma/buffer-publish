@@ -22,7 +22,6 @@ export const actionTypes = keyWrapper('DRAFTS', {
 export const initialState = {
   byProfileId: {},
   showComposer: false,
-  enabledApplicationModes: [],
   environment: 'production',
   editMode: false,
   editingPostId: '',

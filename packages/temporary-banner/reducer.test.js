@@ -12,12 +12,15 @@ describe('reducer', () => {
   });
 
   it('stores enabledApplicationModes data when enabledApplicationModes rpc request is successful', () => {
-    const stateAfter = [
-      {
-        state: 'enabled',
-        tag: 'ios-in-app-subscriptions-enabled',
-      },
-    ];
+    const stateAfter = {
+      ...initialState,
+      enabledApplicationModes: [
+        {
+          state: 'enabled',
+          tag: 'ios-in-app-subscriptions-enabled',
+        },
+      ],
+    };
     const action = {
       type: 'enabledApplicationModes_FETCH_SUCCESS',
       result: {
