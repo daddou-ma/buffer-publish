@@ -32,4 +32,19 @@ describe('reducer', () => {
     deepFreeze(action);
     expect(reducer(initialState, action)).toEqual(stateAfter);
   });
+
+  it('stores remindersStatusByProfile data when checkRemindersStatus rpc request is successful', () => {
+    const stateAfter = {
+      ...initialState,
+      remindersStatusByProfile: [{ id: 'id1', hasPushNotifications: false }],
+    };
+    const action = {
+      type: 'checkRemindersStatus_FETCH_SUCCESS',
+      result: {
+        profiles: [{ id: 'id1', hasPushNotifications: false }],
+      },
+    };
+    deepFreeze(action);
+    expect(reducer(initialState, action)).toEqual(stateAfter);
+  });
 });
