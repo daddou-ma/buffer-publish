@@ -30,4 +30,44 @@ describe('middleware', () => {
       })
     );
   });
+
+  it('fetches checkRemindersStatus when profile request is successful and user has IG profiles', () => {
+    const store = {
+      dispatch: jest.fn(),
+      getState: () => ({ temporaryBanner: initialState }),
+    };
+
+    const action = dataFetchActions.fetchSuccess({
+      name: 'profiles',
+      result: [{ type: 'instagram' }, { type: 'twitter' }],
+    });
+
+    middleware(store)(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'checkRemindersStatus',
+      })
+    );
+  });
+
+  it('does not fetch checkRemindersStatus when profile request is successful but user has no IG profiles', () => {
+    const store = {
+      dispatch: jest.fn(),
+      getState: () => ({ temporaryBanner: initialState }),
+    };
+
+    const action = dataFetchActions.fetchSuccess({
+      name: 'profiles',
+      result: [{ type: 'twitter' }, { type: 'twitter' }],
+    });
+
+    middleware(store)(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).not.toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'checkRemindersStatus',
+      })
+    );
+  });
 });
