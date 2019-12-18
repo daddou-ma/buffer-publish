@@ -48,6 +48,7 @@ import segmentTrackingMiddleware from '@bufferapp/publish-analytics-middleware/m
 import onboardingMiddleware from '@bufferapp/publish-onboarding/middleware';
 import globalAccountMiddleware from '@bufferapp/global-account/middleware';
 import closeComposerModalMiddleware from '@bufferapp/publish-close-composer-confirmation-modal/middleware';
+import temporaryBannerMiddleware from '@bufferapp/publish-temporary-banner/middleware';
 import storyPreviewMiddleware from '@bufferapp/publish-story-preview/middleware';
 import storyGroupComposerMiddleware from '@bufferapp/publish-story-group-composer/middleware';
 
@@ -109,6 +110,7 @@ const composedMiddlewares = history =>
       globalAccountMiddleware,
       closeComposerModalMiddleware,
       storiesMiddleware,
+      temporaryBannerMiddleware,
       storyPreviewMiddleware,
       storyGroupComposerMiddleware,
 
