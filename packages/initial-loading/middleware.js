@@ -21,22 +21,9 @@ export default ({ getState, dispatch }) => next => action => {
         hasPublishBeta,
         hasPublishBetaRedirect,
         hasNewPublish,
-        onPaydayPage,
-        isOnAwesomePlan,
       } = getState().initialLoading;
-      if (isOnAwesomePlan && onPaydayPage) {
-        dispatch(
-          dataFetchActions.fetch({
-            name: 'addUserTag',
-            args: {
-              tag: 'awesome_user_visited_payday',
-              name: 'Awesome User visited Payday page',
-            },
-          })
-        );
-      }
       if (!hasPublishBeta) {
-        if (!hasNewPublish && !onPaydayPage) {
+        if (!hasNewPublish) {
           window.location.replace(getClassicBufferURL());
         }
       } else if (!hasPublishBetaRedirect) {

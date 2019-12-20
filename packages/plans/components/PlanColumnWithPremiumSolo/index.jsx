@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { grayLighter, orange } from '@bufferapp/ui/style/colors';
+import { grayLighter } from '@bufferapp/ui/style/colors';
 import { Image } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
 import { People, Person } from '@bufferapp/ui/Icon';
@@ -24,8 +24,6 @@ import {
   BillingTextStyle,
   EmptySpan,
   LeftBillingText,
-  PromoTextStyle,
-  DiscountTextStyle,
 } from './style';
 
 const UserIcon = ({ Icon, text, isSelected }) => (
@@ -92,23 +90,12 @@ const LeftButton = styled(RightButton)`
   padding: ${props => (props.isNonprofit ? '4% 2%' : '')};
 `;
 
-const PromoCostLine = styled.div`
-  position: relative;
-  border: 1px solid ${orange};
-  width: ${props => (props.isNonprofit ? '90px' : '67px')};
-  top: 30px;
-  left: ${props => (props.isNonprofit ? '30px' : '35px')};
-`;
-
 const PlanColumnWithPremiumSolo = ({
   title,
   cost,
   nonProfitCost,
   soloCost,
   soloNonProfitCost,
-  promoCost,
-  promoNonProfitCost,
-  promoDiscount,
   isNonprofit,
   imageSrc,
   plan,
@@ -121,12 +108,11 @@ const PlanColumnWithPremiumSolo = ({
   billingText,
   onPremiumPlanClick,
   selectedPremiumPlan,
-  isAwesomePromoUser,
 }) => {
   const isSelected = () => selectedPremiumPlan === 1;
   const isPremium = plan === 'premium_business';
   return (
-    <ColumnStyle isAwesomePromoUser={isAwesomePromoUser}>
+    <ColumnStyle>
       <TopContentStyle>
         <Text type="h3">{title}</Text>
         <ImageWrapperStyle isPremium={isPremium}>
@@ -135,28 +121,13 @@ const PlanColumnWithPremiumSolo = ({
         {!isPremium && (
           <React.Fragment>
             <UserIcon Icon={<Person />} text="1 user" isSelected />
-            {isAwesomePromoUser && <PromoCostLine isNonprofit={isNonprofit} />}
             <PriceStyle>
-              {!isAwesomePromoUser && (
-                <TextStyle type="h1">
-                  {isNonprofit ? nonProfitCost : cost}
-                  <MonthlyText>{monthly}</MonthlyText>
-                </TextStyle>
-              )}
-              {isAwesomePromoUser && (
-                <TextStyle type="h1">
-                  <PromoTextStyle>
-                    {isNonprofit ? nonProfitCost : cost}
-                  </PromoTextStyle>
-                  {isNonprofit ? promoNonProfitCost : promoCost}
-                  <MonthlyText>{monthly}</MonthlyText>
-                </TextStyle>
-              )}
+              <TextStyle type="h1">
+                {isNonprofit ? nonProfitCost : cost}
+                <MonthlyText>{monthly}</MonthlyText>
+              </TextStyle>
             </PriceStyle>
             <LeftBillingText type="p">{billingText}</LeftBillingText>
-            {isAwesomePromoUser && (
-              <DiscountTextStyle type="p">{promoDiscount}</DiscountTextStyle>
-            )}
           </React.Fragment>
         )}
         {isPremium && (
@@ -222,7 +193,6 @@ const PlanColumnWithPremiumSolo = ({
                 source,
                 plan,
                 soloPlanSelected: selectedPremiumPlan === 1,
-                isPromo: isAwesomePromoUser,
               })
             }
           />
