@@ -7,13 +7,6 @@ import Plans from './components/Plans';
 
 import { actions } from './reducer';
 
-const getClassicBufferURL = () => {
-  if (window.location.hostname === 'publish.local.buffer.com') {
-    return 'https://local.buffer.com/app';
-  }
-  return 'https://buffer.com/app';
-};
-
 export default connect(
   state => ({
     currentPlan: state.appSidebar.user.plan,
@@ -22,37 +15,34 @@ export default connect(
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.appSidebar.user.isNonprofit,
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
-    isAwesomePromoUser: state.appSidebar.user.isAwesomePromoUser,
     shouldSeeSoloPlanOption: state.appSidebar.user.plan === 'pro',
   }),
   dispatch => ({
     onPremiumPlanClick: ({ selectedPlan }) => {
       dispatch(actions.setSelectedPlan({ selectedPlan }));
     },
-    onChoosePlanClick: ({ source, plan, soloPlanSelected, isPromo }) => {
+    onChoosePlanClick: ({ source, plan, soloPlanSelected }) => {
       if (plan === 'premium_business' && soloPlanSelected) {
         plan = 'solo_premium_business';
       }
-      dispatch(modalsActions.showSwitchPlanModal({ source, plan, isPromo }));
+      dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
     },
-    onBackToDashboardClick: ({
-      selectedProfileId,
-      profiles,
-      isAwesomeUser,
-    }) => {
-      if (isAwesomeUser) {
-        window.location.replace(getClassicBufferURL());
-        return;
-      }
+    onBackToDashboardClick: ({ selectedProfileId, profiles }) => {
       if (profiles.length > 0) {
         const profileId = selectedProfileId || profiles[0].id;
         const profile = profiles.find(p => p.id === profileId);
-        dispatch(profileSidebarActions.selectProfile({
-          profile,
-        }));
-        dispatch(push(generateProfilePageRoute({
-          profileId,
-        })));
+        dispatch(
+          profileSidebarActions.selectProfile({
+            profile,
+          })
+        );
+        dispatch(
+          push(
+            generateProfilePageRoute({
+              profileId,
+            })
+          )
+        );
       } else {
         dispatch(push('/'));
       }

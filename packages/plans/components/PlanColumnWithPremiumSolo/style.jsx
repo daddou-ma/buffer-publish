@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import {
-  blue,
-  gray,
-  grayDark,
-  orangeLighter,
-} from '@bufferapp/ui/style/colors';
+import { blue, grayDark } from '@bufferapp/ui/style/colors';
 import { Text } from '@bufferapp/ui';
 
 export const ColumnStyle = styled.div`
@@ -16,7 +11,6 @@ export const ColumnStyle = styled.div`
   flex-direction: column;
   margin-bottom: 25px;
   background: white;
-  margin-top: ${props => (props.isAwesomePromoUser ? '90px' : '')};
 `;
 
 export const ButtonWrapperStyle = styled.div`
@@ -84,16 +78,6 @@ export const LeftBillingText = styled(Text)`
 export const MonthlyText = styled.span`
   font-family: Poppins;
   font-size: 13px;
-`;
-
-export const PromoTextStyle = styled.span`
-  color: ${orangeLighter};
-  padding-right: 16px;
-`;
-
-export const DiscountTextStyle = styled(Text)`
-  color: ${gray};
-  font-style: italic;
 `;
 
 export const PlanStyle = styled.div`

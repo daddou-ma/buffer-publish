@@ -58,11 +58,7 @@ function generateUserMenuItems({
   switchPlan,
   openPreferences,
   showManageTeam,
-  hideMenuItems,
 }) {
-  if (hideMenuItems) {
-    return [];
-  }
   const userMenuItems = {
     top: [
       {
@@ -134,7 +130,6 @@ const AppShell = ({
   onCloseBanner,
   bannerKey,
   hideAppShell,
-  hideMenuItems,
 }) => {
   if (hideAppShell) {
     return children;
@@ -154,7 +149,6 @@ const AppShell = ({
           returnToClassic,
           switchPlan,
           openPreferences,
-          hideMenuItems,
         }),
       }}
       helpMenuItems={helpMenuItems}

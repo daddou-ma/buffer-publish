@@ -37,7 +37,6 @@ export default (state = initialState, action) => {
         sawOnboardingPage:
           action.result.messages &&
           action.result.messages.includes('user_saw_onboarding_page'),
-        hideMenuItems: action.result.isOnAwesomePlan,
       };
     case actionTypes.SET_BANNER_OPTIONS:
       return {
