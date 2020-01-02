@@ -142,6 +142,7 @@ class Composer extends React.Component {
       PropTypes.shape({
         id: PropTypes.string,
         instagramDirectEnabled: PropTypes.bool,
+        shouldShowGridPreview: PropTypes.bool,
         service: PropTypes.shape({
           canHaveMediaAttachmentType: PropTypes.func,
           canHaveSomeAttachmentType: PropTypes.func,
