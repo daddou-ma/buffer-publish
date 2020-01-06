@@ -10,15 +10,15 @@ export default connect(state => {
   const remindersStatus = state.temporaryBanner.remindersStatusByProfile;
   const displayRemindersBanner =
     (remindersStatus &&
-      hasAtLeastOneProfileWithRemindersAndNoPushNotifications([
-        ...remindersStatus,
-      ])) ||
+      hasAtLeastOneProfileWithRemindersAndNoPushNotifications(
+        remindersStatus
+      )) ||
     false;
   let usernamesList = '';
   if (displayRemindersBanner) {
-    usernamesList = getUsernamesOfProfilesWithRemindersAndNoPushNotifications([
-      ...remindersStatus,
-    ]);
+    usernamesList = getUsernamesOfProfilesWithRemindersAndNoPushNotifications(
+      remindersStatus
+    );
   }
   return {
     enabledApplicationModes: state.temporaryBanner.enabledApplicationModes,
