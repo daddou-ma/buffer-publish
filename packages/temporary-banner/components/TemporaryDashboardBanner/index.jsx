@@ -29,11 +29,10 @@ const TemporaryDashboardBanner = ({
 }) => {
   const [hidden, hideBanner] = useState(false);
 
-  const onCloseClick = () => {
+  const onCloseBannerClick = () => {
     hideBanner(!hidden);
   };
 
-  let remindersBannerMessage = '';
   const getEnabledApplicationMode = tag =>
     enabledApplicationModes.filter(mode => mode.tag === tag)[0];
 
@@ -41,42 +40,30 @@ const TemporaryDashboardBanner = ({
     return null;
   }
 
-  if (displayRemindersBanner && usernamesRemindersList) {
-    remindersBannerMessage = `Check out your queue for Instagram accounts ${usernamesRemindersList} to set up Reminders and complete your post.`;
-  }
-
-  if (enabledApplicationModes) {
-    const temporaryDashboard = getEnabledApplicationMode(dashboardBanner);
-
-    if (!temporaryDashboard) {
-      if (
-        displayRemindersBanner &&
-        usernamesRemindersList &&
-        hasRemindersFlip
-      ) {
-        return TopBanner({
-          status: hidden,
-          content: remindersBannerMessage,
-          onCloseBanner: onCloseClick,
-        });
-      }
-      return null;
-    }
-
+  // Displays Temporary Banner With Admin Message.
+  if (enabledApplicationModes && getEnabledApplicationMode(dashboardBanner)) {
+    const { content } = getEnabledApplicationMode(dashboardBanner);
     return TopBanner({
       status: hidden,
-      content: temporaryDashboard.content,
-      onCloseBanner: onCloseClick,
+      content,
+      onCloseBanner: onCloseBannerClick,
     });
+  }
+
+  // Displays Temporary Banner With Reminders Message.
+  let remindersBannerMessage = '';
+  if (displayRemindersBanner && usernamesRemindersList) {
+    remindersBannerMessage = `Check out your queue for Instagram accounts ${usernamesRemindersList} to set up Reminders and complete your post.`;
   }
 
   if (displayRemindersBanner && usernamesRemindersList && hasRemindersFlip) {
     return TopBanner({
       status: hidden,
       content: remindersBannerMessage,
-      onCloseBanner: onCloseClick,
+      onCloseBanner: onCloseBannerClick,
     });
   }
+  return null;
 };
 
 TemporaryDashboardBanner.propTypes = {
