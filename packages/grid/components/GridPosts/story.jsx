@@ -69,7 +69,7 @@ storiesOf('GridPosts', module)
       hasWriteAccess
     />
   ))
-  .add('should show read only of grid posts', () => (
+  .add('should show grid posts with read only', () => (
     <GridPosts
       total={2}
       loading={false}

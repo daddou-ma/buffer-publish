@@ -80,7 +80,7 @@ const LinkPreview = ({
               <Fragment>
                 <StyledButton
                   type="text"
-                  label={isConfirmingDelete ? "Cancel" : 'Delete'}
+                  label={isConfirmingDelete ? "Cancel" : "Delete"}
                   size="small"
                   onClick={() => setConfirmingDelete(isConfirmingDelete ? false : true)}
                 />
