@@ -55,4 +55,5 @@ module.exports = profile => ({
     buttonType: profile.custom_links_button_type,
     customLinks: profile.custom_links,
   },
+  permissions: profile.permissions,
 });

@@ -48,6 +48,7 @@ export default connect(
         customLinksDetails: currentProfile.customLinksDetails,
         maxCustomLinks: currentProfile.maxCustomLinks,
         publicGridUrl: `https://shopgr.id/${profile.serviceUsername}`,
+        hasApproval: profile.permissions.includes('buffer_write'),
       };
     }
     return {};

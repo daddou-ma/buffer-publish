@@ -56,19 +56,25 @@ const LinkPreview = ({
   onDeleteCustomLink,
   onToggleEditMode,
   isTarget,
+  hasWriteAccess,
 }) => {
   const [isConfirmingDelete, setConfirmingDelete] = useState(false);
 
   return (
-    <PreviewWrapper isTarget={isTarget} totalLinks={totalLinks} index={index}>
+    <PreviewWrapper 
+      isTarget={isTarget} 
+      totalLinks={totalLinks} 
+      index={index} 
+      hasWriteAccess={hasWriteAccess}
+    >
       <LinkPreviewRow>
         <LinkPreviewButton bgColor={bgColor} textColor={textColor}>
           {item.text}
         </LinkPreviewButton>
         <UrlWrapper>
           <UrlPreview>{item.url}</UrlPreview>
-        </UrlWrapper>
-        {onDeleteCustomLink && (
+        </UrlWrapper> 
+        {hasWriteAccess && onDeleteCustomLink && (
           <React.Fragment>
             {!isConfirmingDelete ? (
               <StyledButton
@@ -95,12 +101,14 @@ const LinkPreview = ({
             )}
           </React.Fragment>
         )}
-        <Button
-          label="Edit"
-          type="secondary"
-          size="small"
-          onClick={() => onToggleEditMode({ item, editing: true })}
-        />
+        {hasWriteAccess &&
+          <Button
+            label="Edit"
+            type="secondary"
+            size="small"
+            onClick={() => onToggleEditMode({ item, editing: true })}
+          />
+        }
       </LinkPreviewRow>
     </PreviewWrapper>
   );

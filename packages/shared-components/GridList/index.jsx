@@ -6,6 +6,8 @@ import { Link } from '@bufferapp/components';
 import Input from '@bufferapp/ui/Input';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 import moment from 'moment-timezone';
+import { Text } from '@bufferapp/ui';
+import styled from 'styled-components';
 
 const gridContainer = {
   display: 'flex',
@@ -14,9 +16,14 @@ const gridContainer = {
   position: 'relative',
 };
 
-const urlWrapperStyle = {
-  padding: '15px 13px',
-};
+const UrlInputWrapper = styled.div`
+  padding: 15px 13px;
+`;
+
+const UrlTextWrapper = styled.div`
+  padding: 0px 13px;
+  min-height: 48px;
+`;
 
 const itemStyle = index => ({
   display: 'flex',
@@ -73,6 +80,7 @@ const GridListPost = ({
   onImageClick,
   onImageClose,
   timezone,
+  hasWriteAccess,
 }) => {
   const isValidLink =
     typeof post.oldLink !== 'undefined' && post.oldLink !== post.link;
@@ -98,27 +106,33 @@ const GridListPost = ({
         backdropClosesModal
         showImageCount={false}
       />
-      <div style={urlWrapperStyle}>
-        <Input
-          onChange={e => {
-            onChangePostUrl(post, e.target.value);
-          }}
-          onBlur={e => {
-            if (isValidLink) {
-              onSavePostUrl(post, e.target.value);
-            }
-          }}
-          onKeyUp={e => {
-            if (e.key === 'Enter' && isValidLink) {
-              onSavePostUrl(post, e.target.value)
-            }
-          }}
-          size="small"
-          name="postUrl"
-          placeholder="Website or Product URL"
-          value={post.link}
-        />
-      </div>
+      {hasWriteAccess ? (
+        <UrlInputWrapper>
+          <Input
+            onChange={e => {
+              onChangePostUrl(post, e.target.value);
+            }}
+            onBlur={e => {
+              if (isValidLink) {
+                onSavePostUrl(post, e.target.value);
+              }
+            }}
+            onKeyUp={e => {
+              if (e.key === 'Enter' && isValidLink) {
+                onSavePostUrl(post, e.target.value);
+              }
+            }}
+            size="small"
+            name="postUrl"
+            placeholder="Website or Product URL"
+            value={post.link}
+          />
+        </UrlInputWrapper>
+      ) : (
+        <UrlTextWrapper>
+          <Text type="p">{post.link}</Text>
+        </UrlTextWrapper>
+    )}
     </div>
   );
 };
@@ -130,6 +144,7 @@ const GridList = ({
   onImageClick,
   onImageClose,
   timezone,
+  hasWriteAccess,
 }) => {
   return (
     <div style={gridContainer}>
@@ -140,6 +155,7 @@ const GridList = ({
             index={index}
             post={post}
             timezone={timezone}
+            hasWriteAccess={hasWriteAccess}
             onChangePostUrl={onChangePostUrl}
             onSavePostUrl={onSavePostUrl}
             onImageClick={onImageClick}
@@ -157,6 +173,7 @@ GridList.propTypes = {
   onImageClose: PropTypes.func,
   onChangePostUrl: PropTypes.func,
   onSavePostUrl: PropTypes.func,
+  hasWriteAccess: PropTypes.bool,
   gridPosts: PropTypes.arrayOf(
     PropTypes.shape({
       posts: PropTypes.arrayOf(
@@ -178,6 +195,7 @@ GridListPost.propTypes = {
   post: PropTypes.shape({
     text: PropTypes.string,
   }),
+  hasWriteAccess: PropTypes.bool,
 };
 
 GridList.defaultProps = {

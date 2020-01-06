@@ -95,7 +95,7 @@ const LinkDragWrapper = React.forwardRef(
     useImperativeHandle(ref, () => ({
       getNode: () => elementRef.current,
     }));
-    const { isOver, isDragging } = customLinkProps;
+    const { isOver, isDragging, hasWriteAccess } = customLinkProps;
 
     return (
       <React.Fragment>
@@ -109,6 +109,12 @@ const LinkDragWrapper = React.forwardRef(
           draggable
           tabIndex={0}
           style={wrapperStyle({ isOver, isDragging })}
+          onDragStart={e => {
+            if (!hasWriteAccess) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          }} 
         >
           {!isDragging && isOver && <SwapIconStyled />}
           <LinkPreview isTarget={isOver} {...customLinkProps} />
