@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Banner from '@bufferapp/ui/Banner';
@@ -9,52 +9,69 @@ const getContainerStyle = hidden => ({
   display: hidden ? 'none' : 'flex',
 });
 
-class TemporaryDashboardBanner extends React.Component {
-  constructor() {
-    super();
+/* eslint-disable react/prop-types */
+const TopBanner = ({ status, content, onCloseBanner }) => (
+  <div style={getContainerStyle(status)}>
+    <Banner
+      themeColor="orange"
+      customHTML={{ __html: content }}
+      onCloseBanner={onCloseBanner}
+    />
+  </div>
+);
+/* eslint-enable react/prop-types */
 
-    this.state = {
-      hidden: false,
-    };
+const TemporaryDashboardBanner = ({
+  enabledApplicationModes,
+  displayRemindersBanner,
+  usernamesRemindersList,
+  hasRemindersFlip,
+}) => {
+  const [hidden, hideBanner] = useState(false);
+
+  const onCloseBannerClick = () => {
+    hideBanner(!hidden);
+  };
+
+  const getEnabledApplicationMode = tag =>
+    enabledApplicationModes.filter(mode => mode.tag === tag)[0];
+
+  if (!enabledApplicationModes && !displayRemindersBanner) {
+    return null;
   }
 
-  getEnabledApplicationMode(tag, enabledApplicationModes) {
-    return enabledApplicationModes.filter(mode => mode.tag === tag)[0];
+  // Displays Temporary Banner With Admin Message.
+  if (enabledApplicationModes && getEnabledApplicationMode(dashboardBanner)) {
+    const { content } = getEnabledApplicationMode(dashboardBanner);
+    return TopBanner({
+      status: hidden,
+      content,
+      onCloseBanner: onCloseBannerClick,
+    });
   }
 
-  render() {
-    const { hidden } = this.state;
-    const { enabledApplicationModes } = this.props;
-
-    if (!enabledApplicationModes) {
-      return null;
-    }
-
-    const temporaryDashboard = this.getEnabledApplicationMode(
-      dashboardBanner,
-      enabledApplicationModes
-    );
-
-    if (!temporaryDashboard) {
-      return null;
-    }
-
-    return (
-      <div style={getContainerStyle(hidden)}>
-        <Banner
-          themeColor="orange"
-          customHTML={{ __html: temporaryDashboard.content }}
-          onCloseBanner={() => this.setState({ hidden: true })}
-        />
-      </div>
-    );
+  // Displays Temporary Banner With Reminders Message.
+  let remindersBannerMessage = '';
+  if (displayRemindersBanner && usernamesRemindersList) {
+    remindersBannerMessage = `Check out your queue for Instagram accounts ${usernamesRemindersList} to set up Reminders and complete your post.`;
   }
-}
+
+  if (displayRemindersBanner && usernamesRemindersList && hasRemindersFlip) {
+    return TopBanner({
+      status: hidden,
+      content: remindersBannerMessage,
+      onCloseBanner: onCloseBannerClick,
+    });
+  }
+  return null;
+};
 
 TemporaryDashboardBanner.propTypes = {
   enabledApplicationModes: PropTypes.arrayOf(
     PropTypes.objectOf(PropTypes.string)
   ),
+  displayRemindersBanner: PropTypes.bool,
+  usernamesRemindersList: PropTypes.string,
 };
 
 TemporaryDashboardBanner.defaultProps = {

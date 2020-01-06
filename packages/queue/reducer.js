@@ -28,7 +28,6 @@ export const actionTypes = keyWrapper('QUEUE', {
 export const initialState = {
   byProfileId: {},
   showComposer: false,
-  enabledApplicationModes: [],
   environment: 'production',
   editMode: false,
   emptySlotMode: false,
@@ -402,11 +401,6 @@ export default (state = initialState, action) => {
       }
       return state;
     }
-    case `enabledApplicationModes_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        enabledApplicationModes: action.result.enabledApplicationModes,
-      };
     case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,

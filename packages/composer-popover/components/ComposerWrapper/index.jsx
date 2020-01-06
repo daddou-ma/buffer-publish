@@ -69,7 +69,7 @@ export default connect(
       return {
         userData: state.appSidebar.user,
         profiles: state.profileSidebar.profiles,
-        enabledApplicationModes: state.enabledApplicationModes,
+        enabledApplicationModes: state.temporaryBanner.enabledApplicationModes,
         environment: state.environment.environment,
         editMode: false,
         draftMode: null,

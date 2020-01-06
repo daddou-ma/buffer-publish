@@ -70,6 +70,7 @@ const updateShopGridPostLink = require('./shopGrid/updatePostLink');
 const updateCustomLinksMethod = require('./shopGrid/customLinks/update');
 const updateSingleCustomLinkMethod = require('./shopGrid/customLinks/update/single');
 const deleteCustomLinkMethod = require('./shopGrid/customLinks/delete');
+const checkRemindersStatus = require('./checkRemindersStatus');
 const addUserTag = require('./addUserTag');
 const removeUserTag = require('./removeUserTag');
 
@@ -147,6 +148,7 @@ module.exports = rpc(
   updateStoryGroupMethod,
   deleteStoryGroupMethod,
   shareStoryGroupNowMethod,
+  checkRemindersStatus,
   addUserTag,
   removeUserTag,
   getShopGridPostsMethod,
@@ -161,5 +163,5 @@ module.exports = rpc(
   getReport,
   posts,
   summaryMethod,
-  analyticsStartDate,
+  analyticsStartDate
 );

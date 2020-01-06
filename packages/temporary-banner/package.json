@@ -1,7 +1,7 @@
 {
   "name": "@bufferapp/publish-temporary-banner",
   "version": "2.0.0",
-  "description": "Banner displayed at the top of the publish dashboard with custom messages from admin.",
+  "description": "Banner displayed at the top of the publish dashboard with custom messages.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ignore-pattern coverage node_modules"

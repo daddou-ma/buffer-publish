@@ -23,23 +23,6 @@ describe('middleware', () => {
     expect(middleware).toBeDefined();
   });
 
-  it('should fetch enabledApplicationModes ', () => {
-    const RPC_NAME = 'user';
-    const action = dataFetchActions.fetchSuccess({
-      name: RPC_NAME,
-    });
-    middleware({ dispatch })(next)(action);
-    expect(next).toBeCalledWith(action);
-    expect(dispatch).toBeCalledWith(
-      dataFetchActions.fetch({
-        name: 'enabledApplicationModes',
-        args: {
-          comprehensive: true,
-        },
-      })
-    );
-  });
-
   it('should fetch queuedPosts', () => {
     const action = {
       type: profileActionTypes.SELECT_PROFILE,
