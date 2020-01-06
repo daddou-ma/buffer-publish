@@ -120,7 +120,7 @@ LinksHeader.propTypes = {
   setTextColor: PropTypes.func,
   onUpdateCustomLinksColor: PropTypes.func,
   addLinkDisabled: PropTypes.bool,
-  hasWriteAccess: PropTypes.bool,
+  hasWriteAccess: PropTypes.bool.isRequired,
 };
 
 LinksHeader.defaultProps = {

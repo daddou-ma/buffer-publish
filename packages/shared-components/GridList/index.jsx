@@ -195,7 +195,7 @@ GridListPost.propTypes = {
   post: PropTypes.shape({
     text: PropTypes.string,
   }),
-  hasWriteAccess: PropTypes.bool,
+  hasWriteAccess: PropTypes.bool.isRequired,
 };
 
 GridList.defaultProps = {

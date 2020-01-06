@@ -339,6 +339,7 @@ GridPosts.defaultProps = {
   handleCopyToClipboard: () => {},
   profile: {},
   isValidItem: () => {},
+  hasWriteAccess: false,
   customLinksDetails: {
     customLinks: [],
     maxCustomLinks: 0,
