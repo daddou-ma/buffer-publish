@@ -24,5 +24,8 @@ export default connect(state => {
     enabledApplicationModes: state.temporaryBanner.enabledApplicationModes,
     displayRemindersBanner,
     usernamesRemindersList: usernamesList,
+    hasRemindersFlip: state.appSidebar.user.features
+      ? state.appSidebar.user.features.includes('reminders_flow')
+      : false,
   };
 })(TemporaryDashboardBanner);

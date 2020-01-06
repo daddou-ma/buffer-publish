@@ -25,6 +25,7 @@ const TemporaryDashboardBanner = ({
   enabledApplicationModes,
   displayRemindersBanner,
   usernamesRemindersList,
+  hasRemindersFlip,
 }) => {
   const [hidden, hideBanner] = useState(false);
 
@@ -48,7 +49,11 @@ const TemporaryDashboardBanner = ({
     const temporaryDashboard = getEnabledApplicationMode(dashboardBanner);
 
     if (!temporaryDashboard) {
-      if (displayRemindersBanner && usernamesRemindersList) {
+      if (
+        displayRemindersBanner &&
+        usernamesRemindersList &&
+        hasRemindersFlip
+      ) {
         return TopBanner({
           status: hidden,
           content: remindersBannerMessage,
@@ -65,7 +70,7 @@ const TemporaryDashboardBanner = ({
     });
   }
 
-  if (displayRemindersBanner && usernamesRemindersList) {
+  if (displayRemindersBanner && usernamesRemindersList && hasRemindersFlip) {
     return TopBanner({
       status: hidden,
       content: remindersBannerMessage,
