@@ -32,4 +32,3 @@ export Arrow from './Arrow';
 export ComposerSidepanel from './ComposerSidepanel';
 export BannerAdvancedAnalytics from './BannerAdvancedAnalytics';
 export ColorPicker from './ColorPicker';
-export QueueBanner from './QueueBanner';
