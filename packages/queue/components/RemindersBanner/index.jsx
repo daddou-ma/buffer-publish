@@ -7,9 +7,6 @@ import { blue, gray } from '@bufferapp/ui/style/colors';
 
 const QueueBannerCard = styled.div`
   display: flex;
-  border: 1px solid ${gray};
-  border-radius: 4px;
-  box-sizing: border-box;
   margin-bottom: 24px;
   position: relative;
 `;
@@ -17,6 +14,11 @@ const QueueBannerCard = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  border: 1px solid ${gray};
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  box-sizing: border-box;
+  border-right: 0;
   padding: 24px 32px;
   align-items: end;
 `;
