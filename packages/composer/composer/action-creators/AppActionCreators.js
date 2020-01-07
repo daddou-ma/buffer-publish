@@ -18,7 +18,6 @@ import ComposerStore from '../stores/ComposerStore';
 import ComposerActionCreators from './ComposerActionCreators';
 import AppStore from '../stores/AppStore';
 import AppHooks from '../utils/LifecycleHooks';
-import Metrics from '../utils/Metrics';
 import WebSocket from '@bufferapp/publish-upload-zone/utils/WebSocket';
 import ModalActionCreators from '../shared-components/modal/actionCreators';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
@@ -504,14 +503,6 @@ const AppActionCreators = {
   })(),
 
   closeComposer: () => AppHooks.closeComposer(),
-
-  trackUserAction: (scope, extraData) => {
-    // Auto-insert 'multiple-composers' as second scope for all tracking
-    scope.splice(1, 0, 'multiple-composers');
-
-    const { appEnvironment, disableTelemetry } = AppStore.getMetaData();
-    Metrics.trackAction(scope, extraData, { appEnvironment, disableTelemetry });
-  },
 
   toggleAllProfiles: () => {
     AppDispatcher.handleViewAction({

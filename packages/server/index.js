@@ -42,8 +42,6 @@ const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
 
 const app = express();
 const server = http.createServer(app);
-const multiBodyParser = multer();
-const composerAjaxBuffemetrics = require('./lib/composerAjaxBuffermetrics');
 const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
 let segmentKey = 'qsP2UfgODyoJB3px9SDkGX5I6wDtdQ6a';
@@ -301,18 +299,6 @@ app.use(
 );
 
 app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
-
-/**
- * The composer expects this URL to exist and accept
- * metrics data. It does on buffer-web, but not here
- * in publish, so we create it here.
- */
-app.post(
-  '/ajax/buffermetrics',
-  // needed to parse the multipart FormData
-  multiBodyParser.fields([]),
-  composerAjaxBuffemetrics
-);
 
 app.get('/health-check', controller.healthCheck);
 

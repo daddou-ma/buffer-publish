@@ -48,13 +48,6 @@ class SuggestedMediaBox extends React.Component {
     switch (media.mediaType) {
       case MediaTypes.IMAGE:
         ComposerActionCreators.addDraftImage(this.props.draftId, media);
-        AppActionCreators.trackUserAction(
-          ['composer', 'media', 'added_photo'],
-          {
-            addedFrom: 'suggested_media',
-            isGif: false,
-          }
-        );
         break;
 
       case MediaTypes.VIDEO:
@@ -63,13 +56,6 @@ class SuggestedMediaBox extends React.Component {
 
       case MediaTypes.GIF:
         ComposerActionCreators.addDraftGif(this.props.draftId, media);
-        AppActionCreators.trackUserAction(
-          ['composer', 'media', 'added_photo'],
-          {
-            addedFrom: 'suggested_media',
-            isGif: true,
-          }
-        );
         break;
 
       default:

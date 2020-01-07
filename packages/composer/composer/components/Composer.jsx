@@ -245,12 +245,6 @@ class Composer extends React.Component {
   };
 
   onLinkAttachmentSwitchClick = () => {
-    AppActionCreators.trackUserAction(['composer', 'attachment', 'enabled'], {
-      attachment_type: AttachmentTypes.LINK,
-      button_clicked: 'CTA_replace_with_link_attachment',
-      attachment_replaced: AttachmentTypes.Media,
-    });
-
     ComposerActionCreators.toggleAttachment(
       this.props.draft.id,
       AttachmentTypes.LINK
@@ -258,12 +252,6 @@ class Composer extends React.Component {
   };
 
   onRetweetAttachmentSwitchClick = () => {
-    AppActionCreators.trackUserAction(['composer', 'attachment', 'enabled'], {
-      attachment_type: AttachmentTypes.RETWEET,
-      button_clicked: 'CTA_replace_with_retweet_attachment',
-      attachment_replaced: AttachmentTypes.Media,
-    });
-
     ComposerActionCreators.toggleAttachment(
       this.props.draft.id,
       AttachmentTypes.RETWEET
@@ -285,12 +273,6 @@ class Composer extends React.Component {
         : this.isRetweetAttachmentEnabled() && this.hasRetweetAttachment()
         ? AttachmentTypes.RETWEET
         : 'no_previous_attachment';
-
-    AppActionCreators.trackUserAction(['composer', 'attachment', 'enabled'], {
-      attachment_type: AttachmentTypes.MEDIA,
-      button_clicked: 'CTA_replace_with_media_attachment',
-      attachment_replaced: replacedAttachment,
-    });
 
     ComposerActionCreators.toggleAttachment(
       this.props.draft.id,
@@ -565,7 +547,6 @@ class Composer extends React.Component {
     if (this.isExpanded()) return;
 
     ComposerActionCreators.expand(this.props.draft.id);
-    AppActionCreators.trackUserAction(['composer', 'expand']);
   };
 
   collapse = () => {

@@ -18,11 +18,6 @@ class RetweetAttachment extends React.Component {
       this.props.draftId,
       AttachmentTypes.RETWEET
     );
-
-    AppActionCreators.trackUserAction(['composer', 'attachment', 'disabled'], {
-      attachment_type: AttachmentTypes.RETWEET,
-      button_clicked: 'close_button',
-    });
   };
 
   render() {

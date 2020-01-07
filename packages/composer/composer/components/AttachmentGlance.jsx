@@ -20,7 +20,6 @@ class AttachmentGlance extends React.Component {
   onClick = e => {
     e.preventDefault();
     ComposerActionCreators.expand(this.props.draft.id);
-    AppActionCreators.trackUserAction(['composer', 'expand']);
   };
 
   render() {
