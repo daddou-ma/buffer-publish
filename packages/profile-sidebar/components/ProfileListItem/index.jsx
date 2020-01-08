@@ -16,6 +16,22 @@ const ListItemContainer = styled.div`
       : transparent};
 `;
 
+const getCount = ({ pendingCount }) => {
+  if (pendingCount < 0 || pendingCount === 0) {
+    return '0';
+  }
+  if (pendingCount) {
+    return pendingCount.toString();
+  }
+};
+
+const handleClick = ({ onClick }) => {
+  onClick();
+  /* move focus to tabs after selecting profile */
+  const queueTab = document.querySelector('#tabs a');
+  if (queueTab) queueTab.focus();
+};
+
 const ProfileListItem = ({
   avatarUrl,
   type,
@@ -28,13 +44,6 @@ const ProfileListItem = ({
   showProfilesDisconnectedModal,
   location,
 }) => {
-  const handleClick = () => {
-    onClick();
-    /* move focus to tabs after selecting profile */
-    const queueTab = document.querySelector('#tabs a');
-    if (queueTab) queueTab.focus();
-  };
-
   const user = {
     id: '',
     name: handle,
@@ -49,8 +58,8 @@ const ProfileListItem = ({
     <ListItemContainer locked={locked} disconnected={disconnected}>
       <SidebarListItem
         title={title}
-        onItemClick={() => handleClick()}
-        badges={pendingCount < 0 ? 0 : pendingCount}
+        onItemClick={() => handleClick({ onClick })}
+        badges={getCount({ pendingCount })}
         badgeIcon={locked ? <Locked /> : disconnected ? <Warning /> : null}
         user={user}
         selected={selected}
