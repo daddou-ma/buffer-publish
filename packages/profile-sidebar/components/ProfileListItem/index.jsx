@@ -8,12 +8,7 @@ import { grayLight, transparent } from '@bufferapp/ui/style/colors';
 const ListItemContainer = styled.div`
   margin: 0 0 8px;
   border-radius: 4px;
-  background-color: ${props =>
-    props.locked
-      ? grayLight
-      : props.disconnected
-      ? 'rgba(224, 54, 79, 0.15)'
-      : transparent};
+  background-color: ${props => (props.locked ? grayLight : transparent)};
 `;
 
 const getCount = ({ pendingCount }) => {
@@ -51,10 +46,10 @@ const ProfileListItem = ({
     network: type,
   };
 
-  const title = location ? `${handle}, ${location} ` : `${handle}`;
+  const title = location ? `${handle} ${location} ` : `${handle}`;
 
   return (
-    <ListItemContainer locked={locked} disconnected={disconnected}>
+    <ListItemContainer locked={locked}>
       <SidebarListItem
         title={title}
         onItemClick={() => handleClick({ onClick })}
