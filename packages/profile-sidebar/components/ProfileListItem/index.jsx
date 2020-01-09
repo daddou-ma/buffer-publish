@@ -113,7 +113,10 @@ const ProfileListItem = ({
           }
         )}
       >
-        <div style={profileBadgeWrapperStyle} title={location}>
+        <div
+          style={profileBadgeWrapperStyle}
+          title={location ? `${handle} ${location}` : `${handle}`}
+        >
           <div style={{ marginRight: '16px' }}>
             <Avatar
               src={avatarUrl}
