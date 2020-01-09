@@ -26,7 +26,6 @@ const {
 } = require('@bufferapp/session-manager');
 const { errorMiddleware } = require('@bufferapp/buffer-rpc');
 const serialize = require('serialize-javascript');
-const multer = require('multer');
 const helmet = require('helmet');
 
 const { apiError } = require('./middleware');
