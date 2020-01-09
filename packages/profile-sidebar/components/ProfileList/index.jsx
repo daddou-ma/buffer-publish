@@ -9,7 +9,6 @@ const ProfileList = ({
   selectedProfileId,
   onProfileClick,
   onDropProfile,
-  showProfilesDisconnectedModal,
   profileLimit,
 }) => (
   <List
@@ -25,7 +24,6 @@ const ProfileList = ({
         onClick={() => onProfileClick(profile)}
         profileLimit={profileLimit}
         onDropProfile={onDropProfile}
-        showProfilesDisconnectedModal={showProfilesDisconnectedModal}
         id={profile.id}
         index={index}
         location={profile.location}
@@ -39,7 +37,6 @@ ProfileList.propTypes = {
   onDropProfile: PropTypes.func.isRequired,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
   selectedProfileId: PropTypes.string,
-  showProfilesDisconnectedModal: PropTypes.func.isRequired,
   profileLimit: PropTypes.number.isRequired,
 };
 

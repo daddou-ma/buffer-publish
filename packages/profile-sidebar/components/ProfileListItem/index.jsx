@@ -41,7 +41,6 @@ const ProfileListItem = ({
   disconnected,
   selected,
   onClick,
-  showProfilesDisconnectedModal,
   location,
 }) => {
   const user = {
