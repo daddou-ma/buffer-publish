@@ -55,5 +55,6 @@ storiesOf('GridLists', module)
       onSavePostUrl={action('onSavePostUrl')}
       onImageClick={action('onImageClick')}
       onImageClose={action('onImageClose')}
+      hasWriteAccess
     />
   ));

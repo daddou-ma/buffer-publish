@@ -55,6 +55,7 @@ const LinksHeader = ({
   textColor,
   onUpdateCustomLinksColor,
   addLinkDisabled = false,
+  hasWriteAccess,
 }) => {
   return (
     <MyLinksHeader>
@@ -66,34 +67,36 @@ const LinksHeader = ({
           </Tooltip>
         </MyLinksIcon>
       </MyLinksTitle>
-      <AddLinkSection>
-        <LinkColorSection>
-          <ColorPicker
-            label={pickerText}
-            defaultColor={colorButtons || DEFAULT_COLOR}
-            setColorButton={setColorButton}
-            setTextColor={setTextColor}
-            onChange={(color, contrastColor) => {
-              setColorButton(color);
-              setTextColor(contrastColor);
-            }}
-            onBlur={(color, contrastColor) => {
-              setColorButton(color);
-              setTextColor(contrastColor);
-              onUpdateCustomLinksColor({
-                customLinkColor: colorButtons,
-                customLinkContrastColor: textColor,
-              });
-            }}
-          />
-        </LinkColorSection>
-        <Button
-          label={buttonText}
-          type="primary"
-          onClick={onAddLinkClick}
-          disabled={addLinkDisabled}
-        />
-      </AddLinkSection>
+      {hasWriteAccess &&
+        <AddLinkSection>
+          <LinkColorSection>
+            <ColorPicker
+              label={pickerText}
+              defaultColor={colorButtons || DEFAULT_COLOR}
+              setColorButton={setColorButton}
+              setTextColor={setTextColor}
+              onChange={(color, contrastColor) => {
+                setColorButton(color);
+                setTextColor(contrastColor);
+              }}
+              onBlur={(color, contrastColor) => {
+                setColorButton(color);
+                setTextColor(contrastColor);
+                onUpdateCustomLinksColor({
+                  customLinkColor: colorButtons,
+                  customLinkContrastColor: textColor,
+                });
+              }}
+            />
+          </LinkColorSection>
+            <Button
+              label={buttonText}
+              type="primary"
+              onClick={onAddLinkClick}
+              disabled={addLinkDisabled}
+            />
+        </AddLinkSection>
+      }
     </MyLinksHeader>
   );
 };
@@ -117,6 +120,7 @@ LinksHeader.propTypes = {
   setTextColor: PropTypes.func,
   onUpdateCustomLinksColor: PropTypes.func,
   addLinkDisabled: PropTypes.bool,
+  hasWriteAccess: PropTypes.bool.isRequired,
 };
 
 LinksHeader.defaultProps = {

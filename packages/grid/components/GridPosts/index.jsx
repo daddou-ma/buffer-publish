@@ -157,6 +157,7 @@ const GridPosts = ({
   onSaveNewLinkClick,
   onUpdateSingleCustomLink,
   isValidItem,
+  hasWriteAccess,
 }) => {
   if (loading) {
     return (
@@ -256,6 +257,7 @@ const GridPosts = ({
           onSaveNewLinkClick={onSaveNewLinkClick}
           onUpdateSingleCustomLink={onUpdateSingleCustomLink}
           isValidItem={isValidItem}
+          hasWriteAccess={hasWriteAccess}
         />
         <TitleWrapper>
           <Title type="h3" color="grayDark">
@@ -277,6 +279,7 @@ const GridPosts = ({
           onImageClick={onImageClick}
           onImageClose={onImageClose}
           timezone={profile.timezone}
+          hasWriteAccess={hasWriteAccess}
         />
       </div>
     </ErrorBoundary>
@@ -318,6 +321,7 @@ GridPosts.propTypes = {
     buttonColor: PropTypes.string,
   }),
   isValidItem: PropTypes.func,
+  hasWriteAccess: PropTypes.bool,
 };
 
 GridPosts.defaultProps = {
@@ -335,6 +339,7 @@ GridPosts.defaultProps = {
   handleCopyToClipboard: () => {},
   profile: {},
   isValidItem: () => {},
+  hasWriteAccess: false,
   customLinksDetails: {
     customLinks: [],
     maxCustomLinks: 0,

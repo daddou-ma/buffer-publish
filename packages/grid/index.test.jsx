@@ -36,6 +36,7 @@ describe('Grid', () => {
       profileSidebar: {
         selectedProfile: {
           isManager: true,
+          permissions: ['buffer_write'],
         },
       },
     });
