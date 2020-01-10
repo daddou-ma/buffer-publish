@@ -54,7 +54,7 @@ const ProfileListItem = ({
         title={title}
         onItemClick={() => handleClick({ onClick })}
         badges={getCount({ pendingCount })}
-        badgeIcon={locked ? <Locked /> : disconnected ? <Warning /> : null}
+        badgeIcon={locked ? <Locked /> : disconnected ? <Warning /> : null} // eslint-disable-line no-nested-ternary
         user={user}
         selected={selected}
       />
@@ -87,6 +87,7 @@ ProfileListItem.defaultProps = {
   pendingCount: null,
   selected: false,
   location: null,
+  onClick: () => {},
 };
 
 export default ProfileListItem;
