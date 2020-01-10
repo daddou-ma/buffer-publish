@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { SidebarListItem } from '@bufferapp/ui';
 import { Warning, Locked } from '@bufferapp/ui/Icon';
-import { grayLight, transparent } from '@bufferapp/ui/style/colors';
+import { grayLight, grayDarker, transparent } from '@bufferapp/ui/style/colors';
+import { borderRadius } from '@bufferapp/ui/style/borders';
 
 const ListItemContainer = styled.div`
   margin: 0 0 8px;
-  border-radius: 4px;
+  border-radius: ${borderRadius};
   background-color: ${props => (props.locked ? grayLight : transparent)};
 `;
 
@@ -41,20 +42,27 @@ const ProfileListItem = ({
   const user = {
     id: '',
     name: handle,
-    profileImageUrl:
-      avatarUrl || 'https://s3.amazonaws.com/buffer-ui/Default+Avatar.png',
+    profileImageUrl: avatarUrl,
+    fallbackUrl: 'https://s3.amazonaws.com/buffer-ui/Default+Avatar.png',
     network: type,
   };
 
   const title = location ? `${handle} ${location} ` : `${handle}`;
-
   return (
     <ListItemContainer locked={locked}>
       <SidebarListItem
         title={title}
         onItemClick={() => handleClick({ onClick })}
         badges={getCount({ pendingCount })}
-        badgeIcon={locked ? <Locked /> : disconnected ? <Warning /> : null} // eslint-disable-line no-nested-ternary
+        /* eslint-disable no-nested-ternary */
+        badgeIcon={
+          locked ? (
+            <Locked color={grayDarker} />
+          ) : disconnected ? (
+            <Warning color="#E0364F" />
+          ) : null
+        }
+        /* eslint-enable no-nested-ternary */
         user={user}
         selected={selected}
       />
