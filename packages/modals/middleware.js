@@ -10,7 +10,6 @@ import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/re
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import getCtaFromSource from '@bufferapp/publish-switch-plan-modal/utils/tracking';
 import { getPlanId } from '@bufferapp/publish-plans/utils/plans';
-import moment from 'moment';
 import { actions, actionTypes } from './reducer';
 import {
   shouldShowSwitchPlanModal,
@@ -23,15 +22,6 @@ import {
   resetShowModalKey,
   shouldShowInstagramFirstCommentModal,
 } from './util/showModal';
-
-const daysSinceDate = date => {
-  const today = new Date().setSeconds(0);
-  const todayAsMoment = moment(today);
-  const inputDateAsMoment = moment.unix(date);
-  const days = todayAsMoment.diff(inputDateAsMoment, 'days');
-
-  return days;
-};
 
 export default ({ dispatch, getState }) => next => (action) => {
   next(action);
@@ -78,35 +68,6 @@ export default ({ dispatch, getState }) => next => (action) => {
       }
       if (action.result && action.result.some(profile => profile.isDisconnected)) {
         dispatch(actions.showProfilesDisconnectedModal());
-      }
-
-      const {
-        isBusinessTeamMember,
-        plan,
-        messages,
-        createdAt,
-      } = getState().appSidebar.user;
-      const daysSinceSignup = daysSinceDate(createdAt);
-
-      // Make sure the Shop Grid Promo Modal doesn't open on top of the disconnect modal
-      if (
-        plan === 'free' &&
-        !isBusinessTeamMember &&
-        !messages.includes('user_saw_shopgrid_2_promo') &&
-        daysSinceSignup > 2
-      ) {
-        if (
-          action.result &&
-          action.result.some(profile => profile.isDisconnected)
-        ) {
-          dispatch(
-            actions.saveModalToShowLater({
-              modalId: actionTypes.SHOW_SHOP_GRID_PROMO_MODAL,
-            })
-          );
-        } else {
-          dispatch(actions.showShopGridPromoModal());
-        }
       }
       break;
     }
