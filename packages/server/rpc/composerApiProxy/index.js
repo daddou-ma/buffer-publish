@@ -4,7 +4,7 @@ const rp = require('request-promise');
 module.exports = method(
   'composerApiProxy',
   'communicate with buffer api',
-  async ({ url, args, HTTPMethod = 'POST' }, { session }) => {
+  async ({ url, args, HTTPMethod = 'POST' }, { session, connection: { remoteAddress = undefined } }) => {
     let result;
     try {
       const fieldName = HTTPMethod === 'POST' ? 'form' : 'qs';
@@ -12,6 +12,9 @@ module.exports = method(
         uri: `${process.env.API_ADDR}${url}`,
         method: HTTPMethod,
         strictSSL: process.env.NODE_ENV !== 'development',
+        headers: {
+          'X-bufferproxy-forwarded-for': remoteAddress,
+        },
       };
       requestParams[fieldName] = Object.assign(args, {
         access_token: session.publish.accessToken,
