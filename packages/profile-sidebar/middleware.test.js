@@ -1,10 +1,9 @@
 import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 import middleware from './middleware';
 
 describe('middleware', () => {
-  const next = jest.fn();
-  const dispatch = jest.fn();
   const state = {
     profileSidebar: {
       loading: false,
@@ -35,6 +34,8 @@ describe('middleware', () => {
   });
 
   it('should select a profile and a tab when PROFILE_ROUTE_LOADED', () => {
+    const next = jest.fn();
+    const dispatch = jest.fn();
     const action = {
       type: actionTypes.PROFILE_ROUTE_LOADED,
       selectedProfile: {
@@ -61,5 +62,25 @@ describe('middleware', () => {
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(selectProfileAction);
     expect(dispatch).toBeCalledWith(selectTabAction);
+  });
+
+  it('reorders profiles when PROFILE_DROPPED', () => {
+    const next = jest.fn();
+    const dispatch = jest.fn();
+    const action = {
+      type: actionTypes.PROFILE_DROPPED,
+      commit: true,
+    };
+
+    middleware({ dispatch, getState })(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'reorderProfiles',
+        args: {
+          order: ['1234', '12345'],
+        },
+      })
+    );
   });
 });
