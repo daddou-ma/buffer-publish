@@ -9,6 +9,7 @@ import {
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
@@ -64,6 +65,7 @@ const QueuedPosts = ({
   onDirectPostingClick,
   isInstagramLoading,
   isLockedProfile,
+  isDisconnectedProfile,
   isManager,
   hasFirstCommentFlip,
   isBusinessAccount,
@@ -96,7 +98,9 @@ const QueuedPosts = ({
   return (
     <ErrorBoundary>
       <div>
+        {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
         {hasRemindersFlip &&
+          !isDisconnectedProfile &&
           !hasPushNotifications &&
           isInstagramProfile &&
           hasAtLeastOneReminderPost && (
@@ -219,6 +223,7 @@ QueuedPosts.propTypes = {
   onDirectPostingClick: PropTypes.func.isRequired,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
+  isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   onCalendarClick: PropTypes.func.isRequired,
   isBusinessAccount: PropTypes.bool,
@@ -240,6 +245,7 @@ QueuedPosts.defaultProps = {
   showInstagramDirectPostingModal: false,
   isInstagramLoading: false,
   isLockedProfile: false,
+  isDisconnectedProfile: false,
   hasFirstCommentFlip: false,
   draggingEnabled: false,
   isManager: false,

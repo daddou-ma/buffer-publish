@@ -33,11 +33,10 @@ const reducer = (state = initialState, action) => {
 };
 
 export const actions = {
-  reconnectProfile: (id, service, isIGBusiness) => ({
+  reconnectProfile: ({ id, service }) => ({
     type: actionTypes.RECONNECT_PROFILE,
     id,
     service,
-    isIGBusiness,
   }),
 };
 
