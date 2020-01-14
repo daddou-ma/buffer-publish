@@ -9,7 +9,7 @@ const ErrorBannerCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 80px;
+  padding: 24px 150px;
   border: 1px solid ${gray};
   box-sizing: border-box;
   border-radius: 2px;
