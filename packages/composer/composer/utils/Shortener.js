@@ -12,14 +12,12 @@ import AppStore from '../stores/AppStore';
 import RPCClient from './RPCClient';
 
 class Shortener {
-  static url = '/update/shorten';
-
-  static pendingRequests = new Map(); // Stores pending shortener promises
-  static cache = new Map(); // Stores results
+  // Stores pending shortener promises
+  static pendingRequests = new Map();
+  // Stores results
+  static cache = new Map();
 
   static shorten(profileId, url) {
-    const { onNewPublish } = AppStore.getUserData();
-
     const params = {
       profile_id: profileId,
       url,
@@ -27,7 +25,6 @@ class Shortener {
     };
 
     const cacheKey = hashCacheKey(profileId, url);
-    const reqSettings = { credentials: 'same-origin' }; // Send cookies
 
     // If the result is cached, return it right away
     if (this.cache.has(cacheKey))
@@ -39,27 +36,10 @@ class Shortener {
       return Promise.resolve(this.pendingRequests.get(cacheKey));
     }
 
-    let request;
-
-    /**
-     * The new publish dashboard uses an RPC client to
-     * make authenticated requests to the Buffer API.
-     * Since the composer is separate from Publish and depends
-     * on the normal Buffer API we create another RPC client
-     * to allow the composer to make proxied requests.
-     */
-    if (onNewPublish) {
-      request = RPCClient.call('composerApiProxy', {
-        url: '/1/links/shorten.json',
-        args: params,
-      });
-    } else {
-      request = Request.get(Shortener.url, params, reqSettings).then(response =>
-        response.json()
-      );
-    }
-
-    request = request.then(result => {
+    const request = RPCClient.call('composerApiProxy', {
+      url: '/1/links/shorten.json',
+      args: params,
+    }).then(result => {
       const shortLink = result.url;
 
       this.cache.set(cacheKey, shortLink);

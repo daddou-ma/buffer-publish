@@ -46,7 +46,6 @@ const setNotifications = require('./setNotifications');
 const readMessage = require('./readMessage');
 const updateRecheck = require('./bookmarklets/updateRecheck');
 const profileQuickAnalytics = require('./bookmarklets/profileQuickAnalytics');
-const shortenUrl = require('./shortenUrl');
 const dropPost = require('./dropPost');
 const swapPosts = require('./swapPosts');
 const cancelTrial = require('./cancelTrial');
@@ -129,7 +128,6 @@ module.exports = rpc(
   readMessage,
   updateRecheck,
   profileQuickAnalytics,
-  shortenUrl,
   dropPost,
   swapPosts,
   cancelTrial,
