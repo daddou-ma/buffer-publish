@@ -16,7 +16,6 @@ export const initialState = {
   },
   bannerKey: null,
   bannerOptions: undefined,
-  sawOnboardingPage: true,
 };
 
 export default (state = initialState, action) => {
@@ -34,9 +33,6 @@ export default (state = initialState, action) => {
         showManageTeam: !action.result.is_free_user,
         showStartProTrial:
           action.result.canStartProTrial && !action.result.isBusinessTeamMember,
-        sawOnboardingPage:
-          action.result.messages &&
-          action.result.messages.includes('user_saw_onboarding_page'),
       };
     case actionTypes.SET_BANNER_OPTIONS:
       return {

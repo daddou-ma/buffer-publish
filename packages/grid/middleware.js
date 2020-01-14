@@ -31,18 +31,6 @@ export default ({ getState, dispatch }) => next => action => {
       }
       break;
 
-    case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'shortenUrl',
-          args: {
-            profileId: action.args.profileId,
-            url: `${getBaseURL()}/p/${action.args.profileId}`,
-          },
-        })
-      );
-      break;
-
     case gridActionTypes.COPY_TO_CLIPBOARD_RESULT:
       if (action.copySuccess) {
         const channel = getState().profileSidebar.selectedProfile;

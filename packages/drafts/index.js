@@ -25,7 +25,8 @@ const getPostActionString = ({
       isPastDue ? 'was' : 'will be'
     }
       scheduled for ${dateString}${isPastDue ? '' : ' on approval'}.`;
-  } else if (draft.sharedNext) {
+  }
+  if (draft.sharedNext) {
     return `This ${
       isDraftsView ? 'draft' : 'post'
     } will be added to the top of the queue on approval.`;

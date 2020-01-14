@@ -76,6 +76,7 @@ const CustomLinks = ({
   onSaveNewLinkClick,
   isValidItem,
   onUpdateSingleCustomLink,
+  hasWriteAccess,
 }) => {
   const [colorButtons, setColorButton] = useState(
     customLinksDetails.buttonColor || DEFAULT_COLOR
@@ -132,6 +133,7 @@ const CustomLinks = ({
         textColor={textColor}
         onUpdateCustomLinksColor={onUpdateCustomLinksColor}
         addLinkDisabled={totalLinks >= maxCustomLinks}
+        hasWriteAccess={hasWriteAccess}
       />
       {customLinks.length === 0 && <Separator />}
       <MyLinksBody total={customLinks.length}>
@@ -149,6 +151,7 @@ const CustomLinks = ({
                     onSwapCustomLinks={onSwapCustomLinks}
                     onToggleEditMode={onToggleEditMode}
                     onDeleteCustomLink={onDeleteCustomLink}
+                    hasWriteAccess={hasWriteAccess}
                   />
                 )}
                 {customLinkItem.editing && (

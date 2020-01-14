@@ -35,13 +35,15 @@ export const PreviewWrapper = styled.div`
     transition: opacity 0.3s ease-in-out;
   }
 
-  :hover {
-    cursor: move;
-    transform: scale(1, 1);
-    ::after {
-      opacity: 1;
+  ${({ hasWriteAccess }) => hasWriteAccess && `
+    :hover {
+      cursor: move;
+      transform: scale(1, 1);
+      ::after {
+        opacity: 1;
+      }
     }
-  }
+  `}
 `;
 
 export const LinkPreviewRow = styled.div`

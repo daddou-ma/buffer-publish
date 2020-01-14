@@ -111,7 +111,7 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     case actionTypes.PROFILE_DROPPED: {
       if (action.commit) {
-        const { profileSidebar: profiles } = getState();
+        const { profiles } = getState().profileSidebar;
         const orderedIds = profiles.map(profile => profile.id);
         dispatch(
           dataFetchActions.fetch({

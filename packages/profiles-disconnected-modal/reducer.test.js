@@ -27,7 +27,7 @@ describe('reducer', () => {
   });
 
   describe('actions creators', () => {
-    expect(actions.reconnectProfile('id', 'service')).toEqual({
+    expect(actions.reconnectProfile({ id: 'id', service: 'service' })).toEqual({
       type: actionTypes.RECONNECT_PROFILE,
       id: 'id',
       service: 'service',

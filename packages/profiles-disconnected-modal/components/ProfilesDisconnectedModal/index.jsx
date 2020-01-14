@@ -45,7 +45,9 @@ const ProfilesDisconnectedModal = ({
               </div>
               <Button
                 disabled={p.reconnecting}
-                onClick={() => reconnectProfile(p.id, p.service)}
+                onClick={() =>
+                  reconnectProfile({ id: p.id, service: p.service })
+                }
                 size="small"
                 type="primary"
                 label={

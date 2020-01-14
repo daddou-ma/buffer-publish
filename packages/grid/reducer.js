@@ -199,15 +199,6 @@ const profileReducer = (state = profileInitialState, action) => {
         },
       };
     }
-    case `shortenUrl_${dataFetchActionTypes.FETCH_START}`:
-      return {
-        ...state,
-      };
-    case `shortenUrl_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        shortUrl: action.result.shortUrl,
-      };
     case `gridPosts_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
@@ -447,9 +438,6 @@ export default (state = initialState, action) => {
     case `updatePostLink_${dataFetchActionTypes.FETCH_START}`:
     case `updatePostLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `updatePostLink_${dataFetchActionTypes.FETCH_FAIL}`:
-    case `shortenUrl_${dataFetchActionTypes.FETCH_START}`:
-    case `shortenUrl_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `shortenUrl_${dataFetchActionTypes.FETCH_FAIL}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_START}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `gridPosts_${dataFetchActionTypes.FETCH_FAIL}`:

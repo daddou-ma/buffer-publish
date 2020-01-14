@@ -51,7 +51,7 @@ const UpgradeModalDecorator = storyFn => (
 storiesOf('GridPosts', module)
   .addDecorator(withA11y)
   .addDecorator(UpgradeModalDecorator)
-  .add('should show grid posts', () => (
+  .add('should show grid posts with write access', () => (
     <GridPosts
       total={2}
       loading={false}
@@ -66,5 +66,24 @@ storiesOf('GridPosts', module)
       onSavePostUrl={action('onSavePostUrl')}
       publicGridUrl="https://shopgr.id/my-brand"
       features={features}
+      hasWriteAccess
+    />
+  ))
+  .add('should show grid posts with read only', () => (
+    <GridPosts
+      total={2}
+      loading={false}
+      gridPosts={gridPosts}
+      isLockedProfile={false}
+      isManager
+      isBusinessAccount
+      profile={profile}
+      onImageClick={action('onImageClick')}
+      onImageClose={action('onImageClose')}
+      onChangePostUrl={action('onChangePostUrl')}
+      onSavePostUrl={action('onSavePostUrl')}
+      publicGridUrl="https://shopgr.id/my-brand"
+      features={features}
+      hasWriteAccess={false}
     />
   ));

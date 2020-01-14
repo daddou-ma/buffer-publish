@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '@bufferapp/ui';
@@ -56,11 +56,17 @@ const LinkPreview = ({
   onDeleteCustomLink,
   onToggleEditMode,
   isTarget,
+  hasWriteAccess,
 }) => {
   const [isConfirmingDelete, setConfirmingDelete] = useState(false);
 
   return (
-    <PreviewWrapper isTarget={isTarget} totalLinks={totalLinks} index={index}>
+    <PreviewWrapper 
+      isTarget={isTarget} 
+      totalLinks={totalLinks} 
+      index={index} 
+      hasWriteAccess={hasWriteAccess}
+    >
       <LinkPreviewRow>
         <LinkPreviewButton bgColor={bgColor} textColor={textColor}>
           {item.text}
@@ -68,39 +74,34 @@ const LinkPreview = ({
         <UrlWrapper>
           <UrlPreview>{item.url}</UrlPreview>
         </UrlWrapper>
-        {onDeleteCustomLink && (
-          <React.Fragment>
-            {!isConfirmingDelete ? (
-              <StyledButton
-                type="text"
-                label="Delete"
-                size="small"
-                onClick={() => setConfirmingDelete(true)}
-              />
-            ) : (
-              <React.Fragment>
+        {hasWriteAccess &&
+          <Fragment>
+            {onDeleteCustomLink &&
+              <Fragment>
                 <StyledButton
                   type="text"
-                  label="Cancel"
+                  label={isConfirmingDelete ? "Cancel" : "Delete"}
                   size="small"
-                  onClick={() => setConfirmingDelete(false)}
+                  onClick={() => setConfirmingDelete(isConfirmingDelete ? false : true)}
                 />
-                <Button
-                  label="Delete"
-                  type="text"
-                  size="small"
-                  onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
-                />
-              </React.Fragment>
-            )}
-          </React.Fragment>
-        )}
-        <Button
-          label="Edit"
-          type="secondary"
-          size="small"
-          onClick={() => onToggleEditMode({ item, editing: true })}
-        />
+                {isConfirmingDelete &&
+                  <Button
+                    label="Delete"
+                    type="text"
+                    size="small"
+                    onClick={() => onDeleteCustomLink({ customLinkId: item._id })}
+                  />
+                }
+              </Fragment>
+            }
+            <Button
+              label="Edit"
+              type="secondary"
+              size="small"
+              onClick={() => onToggleEditMode({ item, editing: true })}
+            />
+          </Fragment> 
+        }
       </LinkPreviewRow>
     </PreviewWrapper>
   );

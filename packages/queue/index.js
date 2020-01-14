@@ -15,12 +15,12 @@ import QueuedPosts from './components/QueuedPosts';
 
 export default connect(
   (state, ownProps) => {
-    const profileId = ownProps.profileId;
+    const { profileId } = ownProps;
     const profileQueuePosts = state.queue.byProfileId[profileId];
     const profileData = state.profileSidebar.profiles.find(
       p => p.id === ownProps.profileId
     );
-    const isLockedProfile = state.profileSidebar.isLockedProfile;
+    const { isLockedProfile } = state.profileSidebar;
 
     const queuePostsArray =
       profileQueuePosts &&
@@ -83,6 +83,8 @@ export default connect(
           state.modals.showInstagramDirectPostingModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
         isInstagramLoading: state.queue.isInstagramLoading,
+        isDisconnectedProfile:
+          state.profileSidebar.selectedProfile.isDisconnected,
         hasFirstCommentFlip: state.appSidebar.user.features
           ? state.appSidebar.user.features.includes('first_comment')
           : false,

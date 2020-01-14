@@ -16,7 +16,6 @@ export const initialState = {
   showInstagramFirstCommentProTrialModal: false,
   showCloseComposerConfirmationModal: false,
   modalToShowLater: null,
-  showShopGridPromoModal: false,
 };
 
 export const actionTypes = keyWrapper('MODALS', {
@@ -45,8 +44,6 @@ export const actionTypes = keyWrapper('MODALS', {
   SAVE_MODAL_TO_SHOW_LATER: 0,
   HIDE_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
   SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
-  SHOW_SHOP_GRID_PROMO_MODAL: 0,
-  HIDE_SHOP_GRID_PROMO_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -184,16 +181,6 @@ export default (state = initialState, action) => {
         ...state,
         showCloseComposerConfirmationModal: true,
       };
-    case actionTypes.SHOW_SHOP_GRID_PROMO_MODAL:
-      return {
-        ...state,
-        showShopGridPromoModal: true,
-      };
-    case actionTypes.HIDE_SHOP_GRID_PROMO_MODAL:
-      return {
-        ...state,
-        showShopGridPromoModal: false,
-      };
     default:
       return state;
   }
@@ -284,11 +271,5 @@ export const actions = {
   }),
   showCloseComposerConfirmationModal: () => ({
     type: actionTypes.SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL,
-  }),
-  showShopGridPromoModal: () => ({
-    type: actionTypes.SHOW_SHOP_GRID_PROMO_MODAL,
-  }),
-  hideShopGridPromoModal: () => ({
-    type: actionTypes.HIDE_SHOP_GRID_PROMO_MODAL,
   }),
 };
