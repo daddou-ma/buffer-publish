@@ -266,7 +266,7 @@
   },
   "profiles-disconnected-banner": {
     "headline": "Uh-oh, we've lost access to this account! Let's reconnect.",
-    "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!.",
+    "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
     "cta": "Reconnect Account"
   },
   "instagram-direct-posting-modal": {
