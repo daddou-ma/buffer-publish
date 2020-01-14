@@ -4,7 +4,7 @@ import ProfilesDisconnectedBanner from './components/ProfilesDisconnectedBanner'
 
 export default connect(
   state => ({
-    id: state.profileSidebar.selectedProfileId,
+    profileId: state.profileSidebar.selectedProfileId,
     service:
       state.profileSidebar.selectedProfile &&
       state.profileSidebar.selectedProfile.service,

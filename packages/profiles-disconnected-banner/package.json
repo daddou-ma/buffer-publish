@@ -8,8 +8,8 @@
   },
   "author": "ana@buffer.com",
   "dependencies": {
-    "@bufferapp/product-features": "2.0.0",
-    "@bufferapp/publish-tabs": "2.0.0"
+    "@bufferapp/publish-profiles-disconnected-modal": "2.0.0",
+    "@bufferapp/publish-shared-components": "2.0.0"
   },
   "devDependencies": {
   },

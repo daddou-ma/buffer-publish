@@ -9,7 +9,7 @@ const TextWithStyles = styled(Text)`
 `;
 
 const ProfilesDisconnectedBanner = ({
-  id,
+  profileId,
   service,
   translations,
   onReconnectProfileClick,
@@ -17,13 +17,13 @@ const ProfilesDisconnectedBanner = ({
   <ErrorBanner
     title={translations.headline}
     content={<TextWithStyles type="p">{translations.body}</TextWithStyles>}
-    onClick={() => onReconnectProfileClick({ id, service })}
+    onClick={() => onReconnectProfileClick({ id: profileId, service })}
     actionLabel={translations.cta}
   />
 );
 
 ProfilesDisconnectedBanner.propTypes = {
-  id: PropTypes.string.isRequired,
+  profileId: PropTypes.string.isRequired,
   service: PropTypes.string.isRequired,
   translations: PropTypes.shape({
     headline: PropTypes.string,
