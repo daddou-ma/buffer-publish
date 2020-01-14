@@ -25,7 +25,8 @@ const getPostActionString = ({
       isPastDue ? 'was' : 'will be'
     }
       scheduled for ${dateString}${isPastDue ? '' : ' on approval'}.`;
-  } else if (draft.sharedNext) {
+  }
+  if (draft.sharedNext) {
     return `This ${
       isDraftsView ? 'draft' : 'post'
     } will be added to the top of the queue on approval.`;
@@ -139,6 +140,8 @@ export default connect(
         editMode: state.drafts.editMode,
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        isDisconnectedProfile:
+          state.profileSidebar.selectedProfile.isDisconnected,
         canStartBusinessTrial: state.drafts.canStartBusinessTrial,
         hasFirstCommentFlip: state.appSidebar.user.features
           ? state.appSidebar.user.features.includes('first_comment')
