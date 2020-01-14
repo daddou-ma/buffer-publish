@@ -9,11 +9,12 @@ const InitialLoading = ({
   loading,
   hasPublishBeta,
   hasNewPublish,
+  onPaydayPage,
 }) => {
-  if (loading || (!hasPublishBeta && !hasNewPublish)) {
+  if (loading || (!hasPublishBeta && !hasNewPublish && !onPaydayPage)) {
     return <BufferLoading fullscreen />;
   }
-  if (hasPublishBeta || hasNewPublish) {
+  if (hasPublishBeta || hasNewPublish || onPaydayPage) {
     return children;
   }
 };

@@ -27,6 +27,7 @@ export default (state = initialState, action) => {
           email: action.result.email,
           name: action.result.name,
         },
+        hideMenuItems: action.result.canSeePaydayPage,
         showReturnToClassic: action.result.showReturnToClassic,
         showSwitchPlanModal:
           action.result.is_free_user && !action.result.isBusinessTeamMember,
