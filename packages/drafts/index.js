@@ -140,8 +140,6 @@ export default connect(
         editMode: state.drafts.editMode,
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        isDisconnectedProfile:
-          state.profileSidebar.selectedProfile.isDisconnected,
         canStartBusinessTrial: state.drafts.canStartBusinessTrial,
         hasFirstCommentFlip: state.appSidebar.user.features
           ? state.appSidebar.user.features.includes('first_comment')
