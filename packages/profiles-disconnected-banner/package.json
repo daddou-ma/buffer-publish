@@ -1,0 +1,19 @@
+{
+  "name": "@bufferapp/publish-profiles-disconnected-banner",
+  "version": "2.0.0",
+  "description": "Banner for disconnected profiles",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "ana@buffer.com",
+  "dependencies": {
+    "@bufferapp/product-features": "2.0.0",
+    "@bufferapp/publish-tabs": "2.0.0"
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
