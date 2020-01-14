@@ -21,9 +21,12 @@ export default ({ getState, dispatch }) => next => action => {
         hasPublishBeta,
         hasPublishBetaRedirect,
         hasNewPublish,
+        onPaydayPage,
+        isTargetedAwesomeUser,
       } = getState().initialLoading;
+      const targetedUserOnPaydayPage = onPaydayPage && isTargetedAwesomeUser;
       if (!hasPublishBeta) {
-        if (!hasNewPublish) {
+        if (!hasNewPublish && !targetedUserOnPaydayPage) {
           window.location.replace(getClassicBufferURL());
         }
       } else if (!hasPublishBetaRedirect) {
