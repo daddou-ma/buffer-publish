@@ -19,7 +19,7 @@ export default connect(
     showManageTeam: state.appShell.showManageTeam,
     showStartProTrial: state.appShell.showStartProTrial,
     hideAppShell:
-      !state.appShell.sawOnboardingPage &&
+      state.onboarding.canSeeOnboardingPage &&
       state.router.location.pathname === newBusinessTrialistsRoute,
   }),
 
