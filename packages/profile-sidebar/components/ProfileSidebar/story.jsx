@@ -44,7 +44,6 @@ storiesOf('ProfileSidebar', module)
       profileLimit={3}
       loading={false}
       showSwitchPlanModal={action('showSwitchPlanModal')}
-      showProfilesDisconnectedModal={action('showProfilesDisconnectedModal')}
       onDropProfile={action('onDropProfile')}
       hasInstagram={false}
       hasFacebook={false}
@@ -62,7 +61,6 @@ storiesOf('ProfileSidebar', module)
       profileLimit={3}
       loading={false}
       showSwitchPlanModal={action('showSwitchPlanModal')}
-      showProfilesDisconnectedModal={action('showProfilesDisconnectedModal')}
       onDropProfile={action('onDropProfile')}
       hasInstagram={false}
       hasFacebook={false}

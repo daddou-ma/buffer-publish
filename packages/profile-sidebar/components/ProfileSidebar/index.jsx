@@ -72,12 +72,10 @@ const ProfileSidebar = ({
   onDropProfile,
   onManageSocialAccountClick,
   profileLimit,
-  showProfilesDisconnectedModal,
   showSwitchPlanModal,
   goToConnectSocialAccount,
   onSearchProfileChange,
   isSearchPopupVisible,
-
   // Flags for showing connection shortcut buttons
   hasInstagram,
   hasFacebook,
@@ -102,7 +100,6 @@ const ProfileSidebar = ({
           profiles={profiles}
           onProfileClick={onProfileClick}
           onDropProfile={onDropProfile}
-          showProfilesDisconnectedModal={showProfilesDisconnectedModal}
           profileLimit={profileLimit}
           translations={translations}
         />
@@ -174,7 +171,6 @@ ProfileSidebar.propTypes = {
   }),
   profileLimit: PropTypes.number,
   onDropProfile: PropTypes.func,
-  showProfilesDisconnectedModal: PropTypes.func,
   hasInstagram: PropTypes.bool.isRequired,
   hasFacebook: PropTypes.bool.isRequired,
   hasTwitter: PropTypes.bool.isRequired,

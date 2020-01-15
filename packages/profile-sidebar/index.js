@@ -52,9 +52,6 @@ export default hot(
       onManageSocialAccountClick: () => {
         dispatch(actions.handleManageSocialAccountClick());
       },
-      showProfilesDisconnectedModal: () => {
-        dispatch(modalActions.showProfilesDisconnectedModal());
-      },
       showSwitchPlanModal: () => {
         dispatch(
           modalActions.showSwitchPlanModal({
