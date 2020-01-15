@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Divider } from '@bufferapp/components';
-import {
-  Text,
-  Modal,
-} from '@bufferapp/ui';
+import { Text, Modal } from '@bufferapp/ui';
 
 import LockedIcon from '@bufferapp/ui/Icon/Icons/Locked';
 import StripeCreditCardForm from '@bufferapp/publish-credit-card-form';
@@ -56,17 +53,11 @@ const getButtonText = ({ plan, translations }) => {
 class SwitchPlanModal extends React.Component {
   constructor() {
     super();
-
     this.onSecondaryAction = this.onSecondaryAction.bind(this);
   }
 
   onSecondaryAction() {
-    const {
-      hideModal,
-      cancelTrial,
-      hasExpiredProTrial,
-    } = this.props;
-
+    const { hideModal, cancelTrial, hasExpiredProTrial } = this.props;
     if (hasExpiredProTrial) {
       cancelTrial();
     } else {
@@ -87,16 +78,21 @@ class SwitchPlanModal extends React.Component {
     } = this.props;
 
     return (
-      <Modal
-        wide
-        dismissible={dismissible}
-      >
+      <Modal wide dismissible={dismissible}>
         <div style={{ height: 'auto' }}>
           <div style={{ width: '600px', padding: '0px 20px 25px' }}>
-            {isPro(plan) && <PlanDescriptors {...translations.proDescriptors} />}
-            {isPremium(plan) && <PlanDescriptors {...translations.premiumDescriptors} />}
-            {isSoloPremium(plan) && <PlanDescriptors {...translations.soloPremiumDescriptors} />}
-            {isSmallBusiness(plan) && <PlanDescriptors {...translations.businessDescriptors} />}
+            {isPro(plan) && (
+              <PlanDescriptors {...translations.proDescriptors} />
+            )}
+            {isPremium(plan) && (
+              <PlanDescriptors {...translations.premiumDescriptors} />
+            )}
+            {isSoloPremium(plan) && (
+              <PlanDescriptors {...translations.soloPremiumDescriptors} />
+            )}
+            {isSmallBusiness(plan) && (
+              <PlanDescriptors {...translations.businessDescriptors} />
+            )}
 
             <Divider marginTop="" marginBottom="1.5rem" />
 
@@ -148,7 +144,9 @@ class SwitchPlanModal extends React.Component {
             </div>
             <StripeCreditCardForm
               buttonLabel={
-                validating ? translations.validating : getButtonText({ plan, translations })
+                validating
+                  ? translations.validating
+                  : getButtonText({ plan, translations })
               }
               closeButtonLabel={translations.close}
               closeAction={this.onSecondaryAction}
@@ -165,6 +163,7 @@ SwitchPlanModal.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   cycle: PropTypes.string.isRequired,
   plan: PropTypes.string,
+  isPromo: PropTypes.bool,
   storeValue: PropTypes.func.isRequired,
   validating: PropTypes.bool.isRequired,
   selectCycle: PropTypes.func.isRequired,
@@ -181,6 +180,7 @@ SwitchPlanModal.defaultProps = {
   hasExpiredProTrial: false,
   dismissible: false,
   plan: 'pro',
+  isPromo: false,
 };
 
 export default SwitchPlanModal;

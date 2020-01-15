@@ -30,11 +30,27 @@ export default ({ getState, dispatch }) => next => action => {
         }
       };
 
-      window.location.assign(
-        `${getURL.getBillingURL({
-          cta: ctaName(),
-        })}`
-      );
+      /** For business trials send them to the billing page */
+      if (hasExpiredBusinessTrial) {
+        window.location.assign(
+          `${getURL.getBillingURL({
+            cta: ctaName(),
+          })}`
+        );
+        return;
+      }
+
+      /** For pro trials show the upgrade/switch plan modal */
+      if (hasExpiredProTrial) {
+        dispatch(modalActions.hideTrialCompleteModal());
+        dispatch(
+          modalActions.showSwitchPlanModal({
+            plan: 'pro',
+            source: ctaName(),
+            isPromo: false,
+          })
+        );
+      }
       break;
     }
     default:
