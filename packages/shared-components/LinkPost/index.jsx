@@ -70,7 +70,6 @@ const LinkPost = ({
   hasCommentEnabled,
   hasFirstCommentFlip,
   hasPushNotifications,
-  hasRemindersFlip,
   onSetRemindersClick,
 }) => {
   const children = (
@@ -163,7 +162,6 @@ const LinkPost = ({
       hasCommentEnabled={hasCommentEnabled}
       hasFirstCommentFlip={hasFirstCommentFlip}
       hasPushNotifications={hasPushNotifications}
-      hasRemindersFlip={hasRemindersFlip}
       onSetRemindersClick={onSetRemindersClick}
       basic={basic}
     >

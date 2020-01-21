@@ -87,7 +87,6 @@ const ImagePost = ({
   hasCommentEnabled,
   hasFirstCommentFlip,
   hasPushNotifications,
-  hasRemindersFlip,
   onSetRemindersClick,
   service_user_tags: userTags,
 }) => {
@@ -176,7 +175,6 @@ const ImagePost = ({
       hasCommentEnabled={hasCommentEnabled}
       hasFirstCommentFlip={hasFirstCommentFlip}
       hasPushNotifications={hasPushNotifications}
-      hasRemindersFlip={hasRemindersFlip}
       onSetRemindersClick={onSetRemindersClick}
       hasUserTags={userTags}
     >

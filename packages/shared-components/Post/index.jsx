@@ -202,7 +202,6 @@ const Post = ({
   hasCommentEnabled,
   hasFirstCommentFlip,
   hasPushNotifications,
-  hasRemindersFlip,
   onSetRemindersClick,
   features,
   basic,
@@ -213,7 +212,6 @@ const Post = ({
   const hasReminderError =
     !hasError &&
     !hasPushNotifications &&
-    hasRemindersFlip &&
     postDetails.isInstagramReminder &&
     !isPastReminder;
 

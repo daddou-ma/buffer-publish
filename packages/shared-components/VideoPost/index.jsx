@@ -44,7 +44,6 @@ const VideoPost = ({
   hasCommentEnabled,
   hasFirstCommentFlip,
   hasPushNotifications,
-  hasRemindersFlip,
   onSetRemindersClick,
 }) => (
   <ImagePost
@@ -90,7 +89,6 @@ const VideoPost = ({
     hasCommentEnabled={hasCommentEnabled}
     hasFirstCommentFlip={hasFirstCommentFlip}
     hasPushNotifications={hasPushNotifications}
-    hasRemindersFlip={hasRemindersFlip}
     onSetRemindersClick={onSetRemindersClick}
   />
 );
