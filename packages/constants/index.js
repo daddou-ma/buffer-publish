@@ -48,7 +48,6 @@ const QUEUE_LIMIT_PRO_UPGRADE =
   'publish-composer-queueLimitNotification-proUpgrade-1';
 const PINTEREST_PRO_UPGRADE =
   'publish-orgAdminConnect-upgradeToConnectPinterest-proUpgrade-1';
-const REMINDERS_MODAL = 'publish-app-setRemindersModal-setReminders-1';
 const REMINDERS_BANNER = 'publish-queue-remindersBanner-setReminders-1';
 const REMINDERS_POST = 'publish-queue-remindersPost-setReminders-1';
 const REMINDERS_STORIES = 'publish-stories-remindersButton-setReminders-1';
@@ -157,7 +156,6 @@ module.exports = {
     LOCKED_PROFILE_PRO_UPGRADE,
     LOCKED_PROFILE_BUSINESS_UPGRADE,
     PINTEREST_PRO_UPGRADE,
-    REMINDERS_MODAL,
     REMINDERS_BANNER,
     REMINDERS_POST,
     REMINDERS_STORIES,

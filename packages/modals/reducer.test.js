@@ -179,20 +179,6 @@ describe('reducer', () => {
         })
       );
     });
-    it('should show set reminders modal', () => {
-      expect(reducer(initialState, actions.showSetRemindersModal())).toEqual(
-        Object.assign(initialState, {
-          showSetRemindersModal: true,
-        })
-      );
-    });
-    it('should hide set reminders modal', () => {
-      expect(reducer(initialState, actions.hideSetRemindersModal())).toEqual(
-        Object.assign(initialState, {
-          showSetRemindersModal: false,
-        })
-      );
-    });
     it('should show instagram first comment modal', () => {
       expect(
         reducer(
