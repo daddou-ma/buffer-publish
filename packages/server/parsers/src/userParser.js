@@ -27,11 +27,13 @@ module.exports = userData => ({
   imageDimensionsKey: userData.imagedimensions_key,
   plan: getPlan(
     userData.plan,
-    userData.features.includes('awesome_pro_forced_upgrade_batch_1')
+    userData.features.includes('awesome_pro_forced_upgrade_batch_1') ||
+      userData.features.includes('test_awesome_pro_forced_upgrade_batch_1')
   ),
   planCode: getPlanCode(
     userData.plan_code,
-    userData.features.includes('awesome_pro_forced_upgrade_batch_1')
+    userData.features.includes('awesome_pro_forced_upgrade_batch_1') ||
+      userData.features.includes('test_awesome_pro_forced_upgrade_batch_1')
   ),
   is_business_user: userData.plan_code >= 8 && userData.plan_code <= 19,
   is_free_user: userData.plan === 'free',
