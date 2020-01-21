@@ -61,13 +61,6 @@
     "planTrial": "You're on the {plan} trial. ",
     "startSubscription": "Start Subscription"
   },
-  "set-reminders-modal": {
-    "tag": "Available on Android and iOS",
-    "title": "Set up Reminders to complete your Instagram post.",
-    "description": "Due to Instagram limitations, we can't auto-publish some of your queued posts. Set up Reminders now to make sure all your content gets published on time.",
-    "dismiss": "Dismiss",
-    "setReminders": "Set Up Reminders"
-  },
   "switch-plan-modal": {
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
     "proTrialistUpgradeHeader": "Complete your trial and upgrade to the Pro Plan!",
