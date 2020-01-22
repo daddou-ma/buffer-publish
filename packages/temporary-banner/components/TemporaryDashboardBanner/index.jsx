@@ -25,7 +25,6 @@ const TemporaryDashboardBanner = ({
   enabledApplicationModes,
   displayRemindersBanner,
   usernamesRemindersList,
-  hasRemindersFlip,
 }) => {
   const [hidden, hideBanner] = useState(false);
 
@@ -56,7 +55,7 @@ const TemporaryDashboardBanner = ({
     remindersBannerMessage = `Check out your queue for Instagram accounts ${usernamesRemindersList} to set up Reminders and complete your post.`;
   }
 
-  if (displayRemindersBanner && usernamesRemindersList && hasRemindersFlip) {
+  if (displayRemindersBanner && usernamesRemindersList) {
     return TopBanner({
       status: hidden,
       content: remindersBannerMessage,

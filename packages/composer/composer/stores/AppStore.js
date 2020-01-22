@@ -162,7 +162,6 @@ const getNewUserData = data => ({
   hasIGLocationTaggingFeature: data.hasIGLocationTaggingFeature,
   hasIGDirectVideoFlip: data.hasIGDirectVideoFlip,
   canStartProTrial: data.canStartProTrial,
-  hasRemindersFlip: data.hasRemindersFlip,
   isOnProTrial: data.isOnProTrial,
   hasShopgridFlip: data.hasShopgridFlip,
   hasAccessToUserTag: data.hasAccessToUserTag,

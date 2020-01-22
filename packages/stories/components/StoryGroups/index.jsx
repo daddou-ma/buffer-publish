@@ -103,7 +103,6 @@ const StoryGroups = ({
   showStoryPreview,
   userData,
   hasPushNotifications,
-  hasRemindersFlip,
   onSetRemindersClick,
   serviceId,
   translations,
@@ -112,7 +111,7 @@ const StoryGroups = ({
     ? userData.tags.includes('has_instagram_stories_mobile')
     : false;
 
-  if (hasRemindersFlip && !hasPushNotifications) {
+  if (!hasPushNotifications) {
     return (
       <StoriesExplanation
         translations={translations}
@@ -196,7 +195,6 @@ StoryGroups.propTypes = {
   ),
   showStoriesComposer: PropTypes.bool,
   hasPushNotifications: PropTypes.bool,
-  hasRemindersFlip: PropTypes.bool.isRequired,
   onSetRemindersClick: PropTypes.func.isRequired,
   hasFirstCommentFlip: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,

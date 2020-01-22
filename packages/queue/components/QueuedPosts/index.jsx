@@ -70,7 +70,6 @@ const QueuedPosts = ({
   hasFirstCommentFlip,
   isBusinessAccount,
   hasPushNotifications,
-  hasRemindersFlip,
   hasAtLeastOneReminderPost,
   onComposerOverlayClick,
   onSetRemindersClick,
@@ -99,8 +98,7 @@ const QueuedPosts = ({
     <ErrorBoundary>
       <div>
         {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
-        {hasRemindersFlip &&
-          !isDisconnectedProfile &&
+        {!isDisconnectedProfile &&
           !hasPushNotifications &&
           isInstagramProfile &&
           hasAtLeastOneReminderPost && (
@@ -169,7 +167,6 @@ const QueuedPosts = ({
           draggable={draggingEnabled}
           hasFirstCommentFlip={hasFirstCommentFlip}
           hasPushNotifications={hasPushNotifications}
-          hasRemindersFlip={hasRemindersFlip}
           onSetRemindersClick={onSetRemindersClick}
           isBusinessAccount={isBusinessAccount}
         />
@@ -217,7 +214,6 @@ QueuedPosts.propTypes = {
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
   hasPushNotifications: PropTypes.bool,
-  hasRemindersFlip: PropTypes.bool.isRequired,
   hasAtLeastOneReminderPost: PropTypes.bool,
   showInstagramDirectPostingModal: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,

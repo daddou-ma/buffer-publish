@@ -93,6 +93,7 @@ export const rawProfilesData = [
     isBusinessProfile: true,
     isDisabled: false,
     serviceFormattedUsername: 'emplumeria',
+    hasPushNotifications: true,
     serviceName: 'instagram',
     serviceType: 'profile',
     serviceUsername: 'emplumeria',

@@ -89,7 +89,6 @@ const renderPost = ({
   draggable,
   hasFirstCommentFlip,
   hasPushNotifications,
-  hasRemindersFlip,
   onSetRemindersClick,
 }) => {
   const postWithEventHandlers = {
@@ -110,7 +109,6 @@ const renderPost = ({
     onSwapPosts,
     hasFirstCommentFlip,
     hasPushNotifications,
-    hasRemindersFlip,
     onSetRemindersClick,
   };
   let PostComponent = postTypeComponentMap.get(post.type);

@@ -51,7 +51,6 @@ const TextPost = ({
   hasCommentEnabled,
   hasFirstCommentFlip,
   hasPushNotifications,
-  hasRemindersFlip,
   onSetRemindersClick,
   basic,
 }) => {
@@ -119,7 +118,6 @@ const TextPost = ({
       hasCommentEnabled={hasCommentEnabled}
       hasFirstCommentFlip={hasFirstCommentFlip}
       hasPushNotifications={hasPushNotifications}
-      hasRemindersFlip={hasRemindersFlip}
       onSetRemindersClick={onSetRemindersClick}
       basic={basic}
     >

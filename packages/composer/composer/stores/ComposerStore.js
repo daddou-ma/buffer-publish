@@ -1944,7 +1944,6 @@ const getUsernamesOfProfilesWithoutPushNotifications = ({
 };
 
 const getReminderMessage = (selectedIgProfiles, mediaType) => {
-  const { hasRemindersFlip } = AppStore.getUserData();
   const draftsMode = AppStore.getMetaData().tabId === 'drafts';
 
   const hasSomeProfilesWithoutPushNotifications = selectedIgProfiles.some(
@@ -2086,21 +2085,13 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
     feedbackMessage = messagesByMediaType.onlyWith;
   }
 
-  if (
-    hasAllProfilesWithoutPushNotifications &&
-    hasRemindersFlip &&
-    !draftsMode
-  ) {
+  if (hasAllProfilesWithoutPushNotifications && !draftsMode) {
     feedbackMessage = messagesByMediaType.onlyWithout;
   } else if (hasAllProfilesWithoutPushNotifications) {
     feedbackMessage = messagesByMediaType.onlyWith;
   }
 
-  if (
-    hasProfilesWithAndWithoutPushNotifications &&
-    hasRemindersFlip &&
-    !draftsMode
-  ) {
+  if (hasProfilesWithAndWithoutPushNotifications && !draftsMode) {
     feedbackMessage = messagesByMediaType.mixed;
   } else if (hasProfilesWithAndWithoutPushNotifications) {
     feedbackMessage = messagesByMediaType.onlyWith;
