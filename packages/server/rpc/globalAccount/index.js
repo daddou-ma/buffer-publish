@@ -1,17 +1,20 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const authenticationService = require('../../services/authenticationService');
 
-const getGlobalUser = accountId =>
-  authenticationService.getAccount({ accountId });
-//
 module.exports = method(
   'globalAccount',
   'fetch global account data',
   async (_, req) => {
-    const user = await getGlobalUser(req.session.global.accountId);
+    // Get the global account based on the publish session data
+    // because that's the only session key updated during impersonation
+    const publishId = req.session.publish.foreignKey;
+    const user = await authenticationService.getAccountForPublishId({
+      publishId,
+    });
+
     try {
       const organization = await authenticationService.getOrganization({
-        adminAccountId: req.session.global.accountId,
+        adminAccountId: user._id,
       });
       if (organization) {
         user.isAnalyzePublishBundle =
@@ -20,6 +23,7 @@ module.exports = method(
     } catch (e) {
       console.log(e); // eslint-disable-line no-console
     }
+
     return user;
   }
 );
