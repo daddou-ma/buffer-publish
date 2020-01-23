@@ -63,6 +63,8 @@ export default connect(
         isManager: state.profileSidebar.selectedProfile.isManager,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        isDisconnectedProfile:
+          state.profileSidebar.selectedProfile.isDisconnected,
         userData: state.appSidebar.user,
         showStoryPreview: state.pastReminders.showStoryPreview,
       };

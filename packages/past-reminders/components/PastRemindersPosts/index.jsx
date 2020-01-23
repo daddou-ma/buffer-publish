@@ -1,16 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PostLists } from '@bufferapp/publish-shared-components';
+import styled from 'styled-components';
+import { PostLists, EmptyState } from '@bufferapp/publish-shared-components';
 import PreviewPopover from '@bufferapp/publish-story-preview';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
-import {
-  Loading,
-  ComposerStyle,
-  EmptyStateStyled,
-  TopBarContainerStyle,
-} from '../PastRemindersWrapper/style';
+import { LoadingAnimation } from '@bufferapp/components';
+
+const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 5rem;
+`;
+
+const TopBarContainerStyle = styled.div`
+  display: flex;
+`;
+
+const ComposerStyle = styled.div`
+  flex-grow: 1;
+`;
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -87,14 +98,26 @@ const PastRemindersPosts = ({
   onPreviewClick,
   showStoryPreview,
   showStoriesComposer,
+  isDisconnectedProfile,
   onClosePreviewClick,
 }) => {
   if (loading) {
-    return <Loading />;
+    return (
+      <LoadingContainer>
+        <LoadingAnimation />
+      </LoadingContainer>
+    );
   }
 
-  if (total < 1) {
-    return <EmptyStateStyled />;
+  if (!isDisconnectedProfile && total < 1) {
+    return (
+      <EmptyState
+        title="You haven’t published any posts with this account in the past 30 days!"
+        subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
+        heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
+        heroImgSize={{ width: '270px', height: '150px' }}
+      />
+    );
   }
 
   return (
@@ -163,6 +186,7 @@ PastRemindersPosts.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   showStoryPreview: PropTypes.bool,
+  isDisconnectedProfile: PropTypes.bool,
   userData: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string),
   }),
@@ -180,6 +204,7 @@ PastRemindersPosts.defaultProps = {
   isManager: true,
   isBusinessAccount: false,
   showStoryPreview: false,
+  isDisconnectedProfile: false,
   viewType: 'posts',
   userData: {},
   onEditClick: () => {},
