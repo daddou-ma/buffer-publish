@@ -11,6 +11,7 @@ import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -54,6 +55,7 @@ const SentPosts = ({
   editMode,
   isManager,
   isLockedProfile,
+  isDisconnectedProfile,
   isBusinessAccount,
   features,
   hasFirstCommentFlip,
@@ -82,7 +84,7 @@ const SentPosts = ({
     return <LockedProfileNotification />;
   }
 
-  if (total < 1) {
+  if (!isDisconnectedProfile && total < 1) {
     const title =
       isBusinessAccount || !features.isFreeUser()
         ? 'You haven’t published any posts with this account!'
@@ -109,22 +111,23 @@ const SentPosts = ({
       : 'Your sent posts for the last 30 days';
   return (
     <ErrorBoundary>
+      {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
       <div>
         <div style={headerStyle}>
           <div className="js-page-header">
-            <Text color={'black'}>{header}</Text>
+            <Text color="black">{header}</Text>
           </div>
           <Divider />
         </div>
         <div style={topBarContainerStyle}>
           {showComposer && !editMode && (
             <div style={composerStyle}>
-              <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
+              <ComposerPopover onSave={onComposerCreateSuccess} type="sent" />
             </div>
           )}
         </div>
         {showComposer && editMode && (
-          <ComposerPopover onSave={onComposerCreateSuccess} type={'sent'} />
+          <ComposerPopover onSave={onComposerCreateSuccess} type="sent" />
         )}
         <PostLists
           postLists={postLists}
@@ -173,7 +176,7 @@ SentPosts.propTypes = {
   isAnalyzeCustomer: PropTypes.bool,
   editMode: PropTypes.bool,
   onComposerCreateSuccess: PropTypes.func.isRequired,
-  onEditClick: PropTypes.func.isRequired,
+  onEditClick: PropTypes.func,
   onShareAgainClick: PropTypes.func,
   onImageClick: PropTypes.func,
   onImageClickNext: PropTypes.func,
@@ -182,6 +185,7 @@ SentPosts.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
+  isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
 };
 
@@ -199,6 +203,7 @@ SentPosts.defaultProps = {
   isBusinessAccount: false,
   hasFirstCommentFlip: false,
   isLockedProfile: false,
+  isDisconnectedProfile: false,
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onImageClick: () => {},

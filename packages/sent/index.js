@@ -33,7 +33,7 @@ const formatPostLists = posts => {
 // default export = container
 export default connect(
   (state, ownProps) => {
-    const profileId = ownProps.profileId;
+    const { profileId } = ownProps;
     const currentProfile = state.sent.byProfileId[profileId];
     if (currentProfile) {
       return {
@@ -51,6 +51,8 @@ export default connect(
         showAnalyzeBannerAfterFirstPost:
           state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        isDisconnectedProfile:
+          state.profileSidebar.selectedProfile.isDisconnected,
         isAnalyzeCustomer: state.appSidebar.user.isAnalyzeCustomer,
         hasFirstCommentFlip: state.appSidebar.user.features
           ? state.appSidebar.user.features.includes('first_comment')
