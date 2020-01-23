@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
@@ -45,6 +46,7 @@ const GeneralSettings = ({
   onCloseModal,
   showModal,
   isLockedProfile,
+  isDisconnectedProfile,
   isBusinessAccount,
 }) => {
   if (isLockedProfile) {
@@ -52,6 +54,7 @@ const GeneralSettings = ({
   }
   return (
     <ErrorBoundary>
+      {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
       <div>
         {isInstagramProfile && !isInstagramBusiness && (
           <InstagramDirectPosting onDirectPostingClick={onDirectPostingClick} />
@@ -126,6 +129,7 @@ GeneralSettings.defaultProps = {
   utmMedium: null,
   remindersAreEnabled: false,
   isLockedProfile: false,
+  isDisconnectedProfile: false,
   loadingShuffle: false,
 };
 
@@ -133,7 +137,7 @@ GeneralSettings.propTypes = {
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
-  isInstagramBusiness: PropTypes.bool.isRequired,
+  isInstagramBusiness: PropTypes.bool,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
   onDisconnectBitlyURLClick: PropTypes.func.isRequired,
   linkShorteners: PropTypes.arrayOf(
@@ -149,7 +153,7 @@ GeneralSettings.propTypes = {
   profileService: PropTypes.string,
   selectedShortener: PropTypes.string,
   onShowGACustomizationFormClick: PropTypes.func.isRequired,
-  showGACustomizationForm: PropTypes.bool.isRequired,
+  showGACustomizationForm: PropTypes.bool,
   googleAnalyticsIsEnabled: PropTypes.bool,
   onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
   onSaveGATrackingSettingsClick: PropTypes.func.isRequired,
@@ -166,6 +170,7 @@ GeneralSettings.propTypes = {
   remindersAreEnabled: PropTypes.bool,
   onToggleRemindersClick: PropTypes.func.isRequired,
   isLockedProfile: PropTypes.bool,
+  isDisconnectedProfile: PropTypes.bool,
   onShuffleQueueClick: PropTypes.func.isRequired,
   onConfirmShuffleQueueClick: PropTypes.func.isRequired,
   onCloseModal: PropTypes.func.isRequired,
