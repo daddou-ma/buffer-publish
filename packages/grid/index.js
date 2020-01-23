@@ -45,6 +45,7 @@ export default connect(
         profile,
         isBusinessAccount: profile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
+        isDisconnectedProfile: profile.isDisconnected,
         customLinksDetails: currentProfile.customLinksDetails,
         maxCustomLinks: currentProfile.maxCustomLinks,
         publicGridUrl: `https://shopgr.id/${profile.serviceUsername}`,
