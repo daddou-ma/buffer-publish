@@ -15,6 +15,7 @@ import {
 import { CircleInstReminderIcon } from '@bufferapp/components';
 import WarningIcon from '@bufferapp/ui/Icon/Icons/Warning';
 import { Text } from '@bufferapp/ui';
+import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 import StoriesExplanation from '../StoriesExplanation';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -89,6 +90,7 @@ const StoryGroups = ({
   editMode,
   storyGroups,
   isLockedProfile,
+  isDisconnectedProfile,
   showStoriesComposer,
   onEmptySlotClick,
   onEditClick,
@@ -111,15 +113,6 @@ const StoryGroups = ({
     ? userData.tags.includes('has_instagram_stories_mobile')
     : false;
 
-  if (!hasPushNotifications) {
-    return (
-      <StoriesExplanation
-        translations={translations}
-        onSetRemindersClick={onSetRemindersClick}
-      />
-    );
-  }
-
   if (loading) {
     return (
       <LoadingContainerStyle>
@@ -132,8 +125,18 @@ const StoryGroups = ({
     return <LockedProfileNotification />;
   }
 
+  if (!hasPushNotifications) {
+    return (
+      <StoriesExplanation
+        translations={translations}
+        onSetRemindersClick={onSetRemindersClick}
+      />
+    );
+  }
+
   return (
     <ErrorBoundary>
+      {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
       {showStoryPreview && (
         <PreviewPopover onCloseClick={onClosePreviewClick} view="queue" />
       )}
@@ -188,6 +191,7 @@ StoryGroups.propTypes = {
   loading: PropTypes.bool,
   editMode: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
+  isDisconnectedProfile: PropTypes.bool,
   storyGroups: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
@@ -226,6 +230,7 @@ StoryGroups.defaultProps = {
   editMode: false,
   hasPushNotifications: true,
   isLockedProfile: false,
+  isDisconnectedProfile: false,
   showStoriesComposer: false,
   hasFirstCommentFlip: false,
   isBusinessAccount: false,

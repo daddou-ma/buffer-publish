@@ -18,6 +18,7 @@ import styled from 'styled-components';
 import { grayLight, grayDark, gray } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
+import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 import { openPreviewPage } from '../../util';
 import CustomLinks from '../CustomLinks';
 
@@ -138,6 +139,7 @@ const GridPosts = ({
   trackPagePreviewed,
   isManager,
   isLockedProfile,
+  isDisconnectedProfile,
   isBusinessAccount,
   profile,
   handleCopyToClipboard,
@@ -175,7 +177,7 @@ const GridPosts = ({
     return <div />;
   }
 
-  if (total < 1) {
+  if (!isDisconnectedProfile && total < 1) {
     return (
       <Fragment>
         <EmptyState
@@ -190,6 +192,7 @@ const GridPosts = ({
 
   return (
     <ErrorBoundary>
+      {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
       <div>
         <StyledHeader>
           <StyledProfileHeader>
@@ -310,6 +313,7 @@ GridPosts.propTypes = {
   isBusinessAccount: PropTypes.bool,
   publicGridUrl: PropTypes.string,
   isLockedProfile: PropTypes.bool,
+  isDisconnectedProfile: PropTypes.bool,
   profile: PropTypes.shape({
     service: PropTypes.string,
     avatar_https: PropTypes.string,
@@ -332,6 +336,7 @@ GridPosts.defaultProps = {
   isManager: false,
   isBusinessAccount: false,
   isLockedProfile: false,
+  isDisconnectedProfile: false,
   onChangePostUrl: () => {},
   onSavePostUrl: () => {},
   onImageClick: () => {},

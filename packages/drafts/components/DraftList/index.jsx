@@ -12,6 +12,7 @@ import LockedProfileNotification from '@bufferapp/publish-locked-profile-notific
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 
 import Empty from '../Empty';
 
@@ -54,6 +55,7 @@ const DraftList = ({
   editMode,
   tabId,
   isLockedProfile,
+  isDisconnectedProfile,
   canStartBusinessTrial,
   hasFirstCommentFlip,
   onImageClick,
@@ -113,6 +115,7 @@ const DraftList = ({
 
   return (
     <ErrorBoundary>
+      {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
       <div className={containerStyle}>
         <div style={topBarContainerStyle}>
           {tabId === 'drafts' && (
@@ -159,7 +162,7 @@ const DraftList = ({
             hasFirstCommentFlip={hasFirstCommentFlip}
           />
         ) : (
-          <Empty isManager={manager} view={tabId} />
+          !isDisconnectedProfile && <Empty isManager={manager} view={tabId} />
         )}
       </div>
     </ErrorBoundary>
@@ -188,6 +191,7 @@ DraftList.propTypes = {
   editMode: PropTypes.bool,
   tabId: PropTypes.oneOf(['awaitingApproval', 'pendingApproval', 'drafts']),
   isLockedProfile: PropTypes.bool,
+  isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   onImageClick: PropTypes.func.isRequired,
   onImageClose: PropTypes.func.isRequired,
@@ -203,6 +207,7 @@ DraftList.defaultProps = {
   editMode: false,
   tabId: null,
   isLockedProfile: false,
+  isDisconnectedProfile: false,
   hasFirstCommentFlip: false,
 };
 

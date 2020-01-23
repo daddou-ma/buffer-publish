@@ -40,6 +40,8 @@ export default connect(
         showStoryPreview: state.stories.showStoryPreview,
         editMode: state.stories.editMode,
         isBusinessAccount: profileData.business,
+        isLockedProfile: currentProfile.isLockedProfile,
+        isDisconnectedProfile: profileData.isDisconnected,
         serviceId: profileData.serviceId,
         userData: state.appSidebar.user,
         hasPushNotifications: profileData.hasPushNotifications,

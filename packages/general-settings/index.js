@@ -32,6 +32,7 @@ export default connect(
     utmMedium: state.generalSettings.utmMedium,
     remindersAreEnabled: state.generalSettings.remindersAreEnabled,
     isLockedProfile: state.profileSidebar.isLockedProfile,
+    isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
     showModal: state.generalSettings.showModal,
     loadingShuffle: state.generalSettings.loadingShuffle,
   }),

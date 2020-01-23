@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { QueueButtonGroup } from '@bufferapp/publish-shared-components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
+import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 import PastRemindersPosts from '../PastRemindersPosts';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -51,7 +52,13 @@ Header.defaultProps = {
 };
 
 const PastRemindersWrapper = props => {
-  const { isLockedProfile, viewType, onToggleViewType, profileId } = props;
+  const {
+    isLockedProfile,
+    isDisconnectedProfile,
+    viewType,
+    onToggleViewType,
+    profileId,
+  } = props;
 
   useEffect(() => {
     onToggleViewType('posts');
@@ -63,6 +70,7 @@ const PastRemindersWrapper = props => {
 
   return (
     <ErrorBoundary>
+      {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
       <Header {...props} />
       <ButtonRelativeContainer>
         <ButtonWrapper>
@@ -83,6 +91,7 @@ PastRemindersWrapper.propTypes = {
   viewType: PropTypes.string,
   total: PropTypes.number,
   isLockedProfile: PropTypes.bool,
+  isDisconnectedProfile: PropTypes.bool,
   onToggleViewType: PropTypes.func,
   profileId: PropTypes.string.isRequired,
 };
@@ -91,6 +100,7 @@ PastRemindersWrapper.defaultProps = {
   viewType: 'posts',
   total: 0,
   isLockedProfile: false,
+  isDisconnectedProfile: false,
   onToggleViewType: () => {},
 };
 
