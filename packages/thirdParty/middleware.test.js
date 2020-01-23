@@ -52,6 +52,10 @@ const mockIntercomUser = {
   email: 'hello@buffer.com',
 };
 
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 describe('middleware', () => {
   const next = jest.fn();
   const store = {
@@ -167,6 +171,8 @@ describe('middleware', () => {
       orgUserCount: mockUser.orgUserCount,
       profileCount: mockUser.profileCount,
       upgradedFromLegacyAwesomeToProPromotion: false,
+      migratedFromAwesomeToPro_Batch1: false,
+      migratedFromAwesomeToPro_teamMember_Batch1: false,
     });
 
     expect(global.Appcues.on.mock.calls).toEqual([
@@ -194,6 +200,55 @@ describe('middleware', () => {
       orgUserCount: mockUser.orgUserCount,
       profileCount: mockUser.profileCount,
       upgradedFromLegacyAwesomeToProPromotion: true,
+      migratedFromAwesomeToPro_Batch1: false,
+      migratedFromAwesomeToPro_teamMember_Batch1: false,
+    });
+  });
+
+  it('tells AppCues when the user has been migrated from legacy awesome to Pro', () => {
+    const action = {
+      type: actionTypes.APPCUES,
+      result: { ...mockUser, tags: ['awesome-pro-forced-migration'] },
+    };
+    middleware(store)(next)(action);
+    expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
+      name: mockUser.id,
+      createdAt: mockUser.createdAt,
+      plan: mockUser.plan,
+      planCode: mockUser.planCode,
+      onTrial: mockUser.trial.onTrial,
+      trialLength: mockUser.trial.trialLength,
+      trialTimeRemaining: mockUser.trial.trialTimeRemaining,
+      orgUserCount: mockUser.orgUserCount,
+      profileCount: mockUser.profileCount,
+      upgradedFromLegacyAwesomeToProPromotion: false,
+      migratedFromAwesomeToPro_Batch1: true,
+      migratedFromAwesomeToPro_teamMember_Batch1: false,
+    });
+  });
+
+  it('tells AppCues when a users team member has been migrated from legacy awesome to Pro', () => {
+    const action = {
+      type: actionTypes.APPCUES,
+      result: {
+        ...mockUser,
+        tags: ['awesome-pro-forced-migration-team-member'],
+      },
+    };
+    middleware(store)(next)(action);
+    expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
+      name: mockUser.id,
+      createdAt: mockUser.createdAt,
+      plan: mockUser.plan,
+      planCode: mockUser.planCode,
+      onTrial: mockUser.trial.onTrial,
+      trialLength: mockUser.trial.trialLength,
+      trialTimeRemaining: mockUser.trial.trialTimeRemaining,
+      orgUserCount: mockUser.orgUserCount,
+      profileCount: mockUser.profileCount,
+      upgradedFromLegacyAwesomeToProPromotion: false,
+      migratedFromAwesomeToPro_Batch1: false,
+      migratedFromAwesomeToPro_teamMember_Batch1: true,
     });
   });
 
