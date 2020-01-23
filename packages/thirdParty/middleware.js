@@ -22,6 +22,18 @@ const checkExtensionInstalled = () => {
   return !!version;
 };
 
+const shouldIdentifyWithAppcues = ({ isBusinessUser, plan, tags }) => {
+  // We identify with Appcues for all Business and Pro users
+  if (isBusinessUser || plan === 'pro') {
+    return true;
+  }
+  // We also identify with any team members of migrated Awesome users
+  if (tags.includes('awesome-pro-forced-migration-team-member')) {
+    return true;
+  }
+  return false;
+};
+
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
@@ -112,7 +124,7 @@ export default ({ dispatch, getState }) => next => action => {
             is_business_user: isBusinessUser,
             tags,
           } = action.result;
-          if (isBusinessUser || plan === 'pro') {
+          if (shouldIdentifyWithAppcues({ isBusinessUser, plan, tags })) {
             dispatch({
               type: actionTypes.APPCUES_LOADED,
               loaded: true,
@@ -130,6 +142,12 @@ export default ({ dispatch, getState }) => next => action => {
               profileCount, // Number of profiles _owned_ by the user
               upgradedFromLegacyAwesomeToProPromotion: tags.includes(
                 'upgraded-to-pro-from-legacy-awesome'
+              ),
+              migratedFromAwesomeToPro_Batch1: tags.includes(
+                'awesome-pro-forced-migration'
+              ),
+              migratedFromAwesomeToPro_teamMember_Batch1: tags.includes(
+                'awesome-pro-forced-migration-team-member'
               ),
             });
 
