@@ -35,6 +35,7 @@ export default connect(
       state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
+    isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
     isInstagramProfile: state.generalSettings.isInstagramProfile,
     selectedProfile: state.profileSidebar.selectedProfile,
     canStartProTrial: state.appSidebar.user.canStartProTrial,

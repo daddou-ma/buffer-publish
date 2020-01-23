@@ -77,6 +77,7 @@ class TabNavigation extends React.Component {
       shouldHideAdvancedAnalytics,
       onUpgradeButtonClick,
       isLockedProfile,
+      isDisconnectedProfile,
       draftsNeedApprovalCount,
       draftsCount,
     } = this.props;
@@ -158,18 +159,21 @@ class TabNavigation extends React.Component {
           >
             <Tab tabId="general-settings">General</Tab>
             <Tab tabId="posting-schedule">Posting Schedule</Tab>
-            <div style={{ display: 'inline-block' }}>
-              <Button
-                type="secondary"
-                size="small"
-                label={loading ? 'Reconnecting…' : 'Reconnect'}
-                onClick={e => {
-                  e.preventDefault();
-                  this.setState({ loading: true });
-                  window.location.assign(`${getURL.getManageURL()}`);
-                }}
-              />
-            </div>
+            {/* Hidding reconnect  button when profile is disconnected, as we have a banner in settings content for that */}
+            {!isDisconnectedProfile && (
+              <div style={{ display: 'inline-block' }}>
+                <Button
+                  type="secondary"
+                  size="small"
+                  label={loading ? 'Reconnecting…' : 'Reconnect'}
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({ loading: true });
+                    window.location.assign(`${getURL.getManageURL()}`);
+                  }}
+                />
+              </div>
+            )}
           </Tabs>
         )}
       </div>
@@ -184,6 +188,7 @@ TabNavigation.defaultProps = {
   shouldShowUpgradeButton: false,
   selectedChildTabId: null,
   isLockedProfile: false,
+  isDisconnectedProfile: false,
   isInstagramProfile: false,
   isBusinessAccount: false,
   isManager: false,
@@ -205,6 +210,7 @@ TabNavigation.propTypes = {
   shouldShowNestedAnalyticsTab: PropTypes.bool,
   shouldHideAdvancedAnalytics: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
+  isDisconnectedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
   shouldShowUpgradeButton: PropTypes.bool,
   hasStoriesFlip: PropTypes.bool,
