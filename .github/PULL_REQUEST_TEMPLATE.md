@@ -23,6 +23,7 @@
 -   [ ] I have performed a self-review of my own code.
 -   [ ] I have tested my changes/additions in the latest Chrome, Firefox, and Safari.
 -   [ ] I have commented my code, particularly in hard-to-understand areas.
+-   [ ] I kept accessibility in mind by following the [a11y checklist.](https://www.notion.so/buffer/Workflow-Checklist-e64d86eb795140bcbfdc16d1c72e573f)
 
 #### Staging Deployment
 
