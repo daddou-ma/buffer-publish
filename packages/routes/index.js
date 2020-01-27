@@ -34,13 +34,6 @@ export const childTabRoute = generateChildTabRoute({
 export const generatePreferencePageRoute = ({ preferenceId }) =>
   `/preferences/${preferenceId}`;
 
-export const generatePlansPageRoute = ({
-  utmlSource,
-  utmMedium,
-  utmCampaign,
-}) =>
-  `/plans?utm_source=${utmlSource}&utm_medium=${utmMedium}&utm_campaign=${utmCampaign}`;
-
 export const plansPageRoute = '/plans';
 
 export const newBusinessTrialistsRoute = '/new-business-trialists';
@@ -60,11 +53,4 @@ export const getPreferencePageParams = ({ path }) => {
   return {
     preferenceId: match[1],
   };
-};
-// TO-DO: Refactor with regex
-export const getPlansPageParams = ({ path }) => {
-  if (path === plansPageRoute) {
-    return true;
-  }
-  return false;
 };

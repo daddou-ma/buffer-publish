@@ -17,6 +17,10 @@ const getClassicBufferURL = () => {
 export default connect(
   state => ({
     currentPlan: state.appSidebar.user.plan,
+    onProTrial:
+      state.appSidebar.user.trial &&
+      state.appSidebar.user.trial.onTrial &&
+      !state.profileSidebar.selectedProfile.business,
     profiles: state.profileSidebar.profiles,
     selectedProfileId: state.profileSidebar.selectedProfileId,
     translations: state.i18n.translations['plans-page'],

@@ -108,9 +108,13 @@ const PlanColumnWithPremiumSolo = ({
   billingText,
   onPremiumPlanClick,
   selectedPremiumPlan,
+  currentPlan,
+  buttonTextDisabled,
+  onProTrial = false,
 }) => {
   const isSelected = () => selectedPremiumPlan === 1;
   const isPremium = plan === 'premium_business';
+  const isOnPro = !onProTrial && plan === 'pro' && currentPlan === 'pro';
   return (
     <ColumnStyle>
       <TopContentStyle>
@@ -185,9 +189,9 @@ const PlanColumnWithPremiumSolo = ({
         <ButtonWrapperStyle>
           <Button
             type="primary"
-            label={buttonText}
+            label={isOnPro ? buttonTextDisabled : buttonText}
             fullWidth
-            disabled={false}
+            disabled={isOnPro}
             onClick={() =>
               onChoosePlanClick({
                 source,
