@@ -45,7 +45,7 @@ const helpMenuItems = [
     id: '4',
     title: 'Wishlist',
     onItemClick: () => {
-      window.location.assign('https://buffersurvey.typeform.com/to/ZEiVmL');
+      window.location.assign('https://buffer.com/feature-request');
     },
   },
 ];
