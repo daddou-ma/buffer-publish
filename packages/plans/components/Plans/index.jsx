@@ -38,6 +38,7 @@ const Plans = ({
   selectedPremiumPlan,
   shouldSeeSoloPlanOption,
   isAwesomeUser,
+  onProTrial = false,
 }) => (
   <ContainerStyle>
     <ButtonStyle>
@@ -94,6 +95,7 @@ const Plans = ({
             onChoosePlanClick={onChoosePlanClick}
             source={getSource({ newPlan: 'pro', currentPlan })}
             isNonprofit={isNonprofit}
+            onProTrial={onProTrial}
           />
           <PlanColumnWithPremiumSolo
             {...translations.premiumExperiment}
@@ -110,6 +112,7 @@ const Plans = ({
             isNonprofit={isNonprofit}
             onPremiumPlanClick={onPremiumPlanClick}
             selectedPremiumPlan={selectedPremiumPlan}
+            onProTrial={onProTrial}
           />
         </ColumnContainerStyle>
       )}

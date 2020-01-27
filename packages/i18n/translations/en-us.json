@@ -343,6 +343,7 @@
       "features": ["8 social accounts", "Instagram first comment", "Instagram user tagging"],
       "featureTooltips": ["", "Include first comment when you schedule Instagram posts", "Tag Instagram users when you schedule Instagram posts"],
       "buttonText": "Upgrade to Pro",
+      "buttonTextDisabled": "Current Plan",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly",
       "monthly": "/mo"
