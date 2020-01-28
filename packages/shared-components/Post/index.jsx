@@ -210,6 +210,7 @@ const Post = ({
   const hasError =
     postDetails && postDetails.error && postDetails.error.length > 0;
   const hasReminderError =
+    !isSent &&
     !hasError &&
     !hasPushNotifications &&
     postDetails.isInstagramReminder &&
