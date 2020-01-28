@@ -34,6 +34,30 @@ const shouldIdentifyWithAppcues = ({ isBusinessUser, plan, tags }) => {
   return false;
 };
 
+const getModalsShowing = ({ modals }) => {
+  // @todo Would be great to refactor the modals reducer/package
+  // so that it's a lot easier to know when _any_ modal is showing
+  // instead of having to check every modal key here.
+  // e.g., use an activeModal key?
+  if (!modals) {
+    return false;
+  }
+  return (
+    modals.showProfilesDisconnectedModal ||
+    modals.showSwitchPlanModal ||
+    modals.showWelcomeModal ||
+    modals.showInstagramFirstCommentModal ||
+    modals.showWelcomePaidModal ||
+    modals.showWelcomeB4BTrialModal ||
+    modals.showInstagramDirectPostingModal ||
+    modals.showStealProfileModal ||
+    modals.showTrialCompleteModal ||
+    modals.showInstagramFirstCommentProTrialModal ||
+    modals.showCloseComposerConfirmationModal ||
+    false
+  );
+};
+
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
@@ -123,14 +147,16 @@ export default ({ dispatch, getState }) => next => action => {
             profileCount,
             is_business_user: isBusinessUser,
             tags,
-          } = action.result;
+          } = action.result; // user
           if (shouldIdentifyWithAppcues({ isBusinessUser, plan, tags })) {
             dispatch({
               type: actionTypes.APPCUES_LOADED,
               loaded: true,
             });
 
+            const modalsShowing = getModalsShowing(getState());
             window.Appcues.identify(id, {
+              modalsShowing,
               name: id, // current user's name
               createdAt, // Unix timestamp of user signup date
               plan, // Current user’s plan type
