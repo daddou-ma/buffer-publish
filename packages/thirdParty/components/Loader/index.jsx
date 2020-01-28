@@ -3,21 +3,12 @@ import PropTypes from 'prop-types';
 
 import RouteMonitor from '../RouteMonitor';
 
-const Loader = ({
-  appCues,
-  intercom,
-  helpScoutBeacon,
-  location,
-  modalsShowing,
-  userId,
-}) => (
+const Loader = ({ appCues, intercom, helpScoutBeacon, location }) => (
   <RouteMonitor
     appCues={appCues}
     intercom={intercom}
     helpScoutBeacon={helpScoutBeacon}
     pathname={location.pathname}
-    modalsShowing={modalsShowing}
-    userId={userId}
   />
 );
 
@@ -35,13 +26,9 @@ Loader.propTypes = {
   helpScoutBeacon: PropTypes.shape({
     loaded: PropTypes.bool,
   }).isRequired,
-  modalsShowing: PropTypes.bool,
-  userId: PropTypes.string,
 };
 Loader.defaultProps = {
   location: {},
-  modalsShowing: false,
-  userId: '',
 };
 
 export default Loader;

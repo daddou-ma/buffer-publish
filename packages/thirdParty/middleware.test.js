@@ -63,6 +63,7 @@ describe('middleware', () => {
     getState: () => ({
       productFeatures: { planName: 'business' },
       thirdparty: { appCues: { loaded: true } },
+      modals: {},
     }),
   };
   it('always calls next()', () => {
@@ -162,6 +163,7 @@ describe('middleware', () => {
     });
     expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
       name: mockUser.id,
+      modalsShowing: false,
       createdAt: mockUser.createdAt,
       plan: mockUser.plan,
       planCode: mockUser.planCode,
@@ -191,6 +193,7 @@ describe('middleware', () => {
     middleware(store)(next)(action);
     expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
       name: mockUser.id,
+      modalsShowing: false,
       createdAt: mockUser.createdAt,
       plan: mockUser.plan,
       planCode: mockUser.planCode,
@@ -213,6 +216,7 @@ describe('middleware', () => {
     middleware(store)(next)(action);
     expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
       name: mockUser.id,
+      modalsShowing: false,
       createdAt: mockUser.createdAt,
       plan: mockUser.plan,
       planCode: mockUser.planCode,
@@ -238,6 +242,7 @@ describe('middleware', () => {
     middleware(store)(next)(action);
     expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
       name: mockUser.id,
+      modalsShowing: false,
       createdAt: mockUser.createdAt,
       plan: mockUser.plan,
       planCode: mockUser.planCode,
