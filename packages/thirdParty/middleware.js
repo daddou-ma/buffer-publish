@@ -8,6 +8,7 @@ import {
   getChannelIfNeeded,
 } from '@bufferapp/publish-analytics-middleware/utils/Pathname';
 import { LOCATION_CHANGE } from 'connected-react-router';
+import { actions as modalReducers } from '@bufferapp/publish-modals/reducer';
 import { actionTypes } from './reducer';
 
 import { HELPSCOUT_ID } from './constants';
@@ -130,12 +131,17 @@ export default ({ dispatch, getState }) => next => action => {
               loaded: true,
             });
 
+            const { modals } = getState();
+
+            const modalsShowing = modalReducers.isShowingModals({ modals });
+
             window.Appcues.identify(id, {
               name: id, // current user's name
               createdAt, // Unix timestamp of user signup date
               plan, // Current user’s plan type
               planCode, // Current user’s plan tier
               onTrial: trial.onTrial,
+              modalsShowing,
               trialLength: trial.trialLength,
               trialTimeRemaining: trial.trialTimeRemaining,
               orgUserCount, // Number of users (including the account owner)

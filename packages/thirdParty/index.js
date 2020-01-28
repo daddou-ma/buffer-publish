@@ -1,23 +1,13 @@
 import { connect } from 'react-redux';
+import { actions as modalReducers } from '@bufferapp/publish-modals/reducer';
 
 import ThirdParty from './components/Loader';
 
 export default connect(state => {
   const { modals } = state;
 
-  const modalsShowing =
-    modals &&
-    (modals.showProfilesDisconnectedModal ||
-      modals.showSwitchPlanModal ||
-      modals.showWelcomeModal ||
-      modals.showInstagramFirstCommentModal ||
-      modals.showWelcomePaidModal ||
-      modals.showWelcomeB4BTrialModal ||
-      modals.showInstagramDirectPostingModal ||
-      modals.showStealProfileModal ||
-      modals.showTrialCompleteModal ||
-      modals.showInstagramFirstCommentProTrialModal ||
-      modals.showCloseComposerConfirmationModal);
+  const modalsShowing = modalReducers.isShowingModals({ modals });
+
   return {
     appCues: state.thirdparty.appCues,
     intercom: state.thirdparty.intercom,
