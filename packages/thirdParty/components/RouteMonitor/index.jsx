@@ -2,19 +2,7 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getProfilePageParams } from '@bufferapp/publish-routes';
 
-function RouteMonitor({
-  pathname,
-  appCues,
-  intercom,
-  helpScoutBeacon,
-  modalsShowing,
-  userId,
-}) {
-  if (appCues && appCues.loaded && window && window.Appcues && userId) {
-    window.Appcues.identify(userId, {
-      modalsShowing,
-    });
-  }
+function RouteMonitor({ pathname, appCues, intercom, helpScoutBeacon }) {
   useEffect(() => {
     // Appcues triggers the display of content on page load.
     // Calling the Appcues.page() method will notify Appcues that
@@ -57,8 +45,6 @@ RouteMonitor.propTypes = {
   helpScoutBeacon: PropTypes.shape({
     loaded: PropTypes.bool,
   }),
-  modalsShowing: PropTypes.bool,
-  userId: PropTypes.string,
 };
 
 RouteMonitor.defaultProps = {
@@ -73,8 +59,6 @@ RouteMonitor.defaultProps = {
   helpScoutBeacon: {
     loaded: false,
   },
-  modalsShowing: false,
-  userId: '',
 };
 
 export default RouteMonitor;

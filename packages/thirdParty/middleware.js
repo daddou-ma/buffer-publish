@@ -124,24 +124,21 @@ export default ({ dispatch, getState }) => next => action => {
             profileCount,
             is_business_user: isBusinessUser,
             tags,
-          } = action.result;
+          } = action.result; // user
           if (shouldIdentifyWithAppcues({ isBusinessUser, plan, tags })) {
             dispatch({
               type: actionTypes.APPCUES_LOADED,
               loaded: true,
             });
 
-            const { modals } = getState();
-
-            const modalsShowing = modalReducers.isShowingModals({ modals });
-
+            const modalsShowing = modalReducers.isShowingModals(getState());
             window.Appcues.identify(id, {
+              modalsShowing,
               name: id, // current user's name
               createdAt, // Unix timestamp of user signup date
               plan, // Current user’s plan type
               planCode, // Current user’s plan tier
               onTrial: trial.onTrial,
-              modalsShowing,
               trialLength: trial.trialLength,
               trialTimeRemaining: trial.trialTimeRemaining,
               orgUserCount, // Number of users (including the account owner)

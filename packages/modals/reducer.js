@@ -266,7 +266,8 @@ export const actions = {
         modals.showStealProfileModal ||
         modals.showTrialCompleteModal ||
         modals.showInstagramFirstCommentProTrialModal ||
-        modals.showCloseComposerConfirmationModal)
+        modals.showCloseComposerConfirmationModal ||
+        false)
     );
   },
 };
