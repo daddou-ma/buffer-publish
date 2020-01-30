@@ -9,7 +9,6 @@ module.exports = function(api) {
       '@babel/plugin-proposal-class-properties',
       '@babel/plugin-proposal-function-bind',
       '@babel/plugin-proposal-async-generator-functions',
-      '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-transform-modules-commonjs',
       '@babel/plugin-proposal-export-default-from',
       [
@@ -26,7 +25,7 @@ module.exports = function(api) {
     ],
     env: {
       test: {
-        plugins: ['require-context-hook', 'babel-plugin-dynamic-import-node'],
+        plugins: ['require-context-hook'],
       },
     },
   };
