@@ -8,6 +8,7 @@ import {
   getChannelIfNeeded,
 } from '@bufferapp/publish-analytics-middleware/utils/Pathname';
 import { LOCATION_CHANGE } from 'connected-react-router';
+import { actions as modalReducers } from '@bufferapp/publish-modals/reducer';
 import { actionTypes } from './reducer';
 
 import { HELPSCOUT_ID } from './constants';
@@ -32,30 +33,6 @@ const shouldIdentifyWithAppcues = ({ isBusinessUser, plan, tags }) => {
     return true;
   }
   return false;
-};
-
-const getModalsShowing = ({ modals }) => {
-  // @todo Would be great to refactor the modals reducer/package
-  // so that it's a lot easier to know when _any_ modal is showing
-  // instead of having to check every modal key here.
-  // e.g., use an activeModal key?
-  if (!modals) {
-    return false;
-  }
-  return (
-    modals.showProfilesDisconnectedModal ||
-    modals.showSwitchPlanModal ||
-    modals.showWelcomeModal ||
-    modals.showInstagramFirstCommentModal ||
-    modals.showWelcomePaidModal ||
-    modals.showWelcomeB4BTrialModal ||
-    modals.showInstagramDirectPostingModal ||
-    modals.showStealProfileModal ||
-    modals.showTrialCompleteModal ||
-    modals.showInstagramFirstCommentProTrialModal ||
-    modals.showCloseComposerConfirmationModal ||
-    false
-  );
 };
 
 export default ({ dispatch, getState }) => next => action => {
@@ -154,7 +131,7 @@ export default ({ dispatch, getState }) => next => action => {
               loaded: true,
             });
 
-            const modalsShowing = getModalsShowing(getState());
+            const modalsShowing = modalReducers.isShowingModals(getState());
             window.Appcues.identify(id, {
               modalsShowing,
               name: id, // current user's name

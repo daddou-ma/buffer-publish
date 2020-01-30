@@ -253,4 +253,21 @@ export const actions = {
   showCloseComposerConfirmationModal: () => ({
     type: actionTypes.SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL,
   }),
+  isShowingModals: ({ modals }) => {
+    return (
+      modals &&
+      (modals.showProfilesDisconnectedModal ||
+        modals.showSwitchPlanModal ||
+        modals.showWelcomeModal ||
+        modals.showInstagramFirstCommentModal ||
+        modals.showWelcomePaidModal ||
+        modals.showWelcomeB4BTrialModal ||
+        modals.showInstagramDirectPostingModal ||
+        modals.showStealProfileModal ||
+        modals.showTrialCompleteModal ||
+        modals.showInstagramFirstCommentProTrialModal ||
+        modals.showCloseComposerConfirmationModal ||
+        false)
+    );
+  },
 };
