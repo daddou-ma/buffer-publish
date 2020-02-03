@@ -72,6 +72,7 @@ const deleteCustomLinkMethod = require('./shopGrid/customLinks/delete');
 const checkRemindersStatus = require('./checkRemindersStatus');
 const addUserTag = require('./addUserTag');
 const removeUserTag = require('./removeUserTag');
+const awesomeToProUpgradeDetails = require('./awesomeToProUpgradeDetails');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const average = require('./analytics/average');
@@ -134,6 +135,7 @@ module.exports = rpc(
   startTrial,
   intercom,
   v1ToV2UpgradeDetails,
+  awesomeToProUpgradeDetails,
   globalAccount,
   getCounts,
   createHashtagGroup,

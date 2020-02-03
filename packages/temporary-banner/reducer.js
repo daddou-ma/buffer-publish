@@ -17,7 +17,27 @@ export default (state = initialState, action) => {
         ...state,
         remindersStatusByProfile: action.result && action.result.profiles,
       };
+
+    case `awesomeToProUpgradeDetails${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        awesomeToProUpgradeDetails:
+          action.result &&
+          action.result.success &&
+          action.result.details.shouldShow &&
+          action.result.details.noticeHtml,
+      };
+
     default:
       return state;
   }
+};
+
+export const actions = {
+  userReadMessage: ({ message }) => ({
+    type: dateFetchActionTypes.SELECT_PREMIUM_PLAN,
+    args: {
+      selectedPremiumPlan: selectedPlan,
+    },
+  }),
 };

@@ -15,6 +15,13 @@ export default ({ dispatch }) => next => action => {
           },
         })
       );
+      if (action.result.features.includes('awesome_pro_forced_upgrade_batch_1')) {// TODO: update to correct feature name
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'awesomeToProUpgradeDetails',
+          })
+        );
+      }
       break;
 
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {

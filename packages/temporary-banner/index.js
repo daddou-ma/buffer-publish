@@ -24,5 +24,7 @@ export default connect(state => {
     enabledApplicationModes: state.temporaryBanner.enabledApplicationModes,
     displayRemindersBanner,
     usernamesRemindersList: usernamesList,
+    awesomeToProUpgradeDetails:
+      state.temporaryBanner.awesomeToProUpgradeDetails,
   };
 })(TemporaryDashboardBanner);
