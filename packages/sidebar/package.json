@@ -8,7 +8,7 @@
   },
   "author": "karel@buffer.com",
   "dependencies": {
-    "@bufferapp/app-sidebar": "1.11.4",
+    "@bufferapp/app-sidebar": "1.11.5",
     "@bufferapp/async-data-fetch": "1.9.4"
   },
   "devDependencies": {

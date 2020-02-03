@@ -1831,10 +1831,10 @@
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
 
-"@bufferapp/app-sidebar@1.11.4":
-  version "1.11.4"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.11.4.tgz#c77bf668d4f9385e8659be2e9ad8d8b033e2e041"
-  integrity sha512-tJ2FDUw87ruoGzOUr6ETBxSAxkqeMRyWOk8ZlE5TMkGit9yPrvAmYhX7Fw7bNRS3+08miZN4B1HBOrIJWppo9g==
+"@bufferapp/app-sidebar@1.11.5":
+  version "1.11.5"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.11.5.tgz#f2ee078c01e4b543b2936d22815e6996d10cc55c"
+  integrity sha512-8ame2YFq+WvcLN0WJhqRKpCdVhWNVdPhYuP4Jzip/EWheN5weKomiNT+RbufXAG0iocn++XFHD+uO35ocFk3ZA==
   dependencies:
     "@bufferapp/async-data-fetch" "1.9.4"
     "@bufferapp/keywrapper" "0.2.0"
