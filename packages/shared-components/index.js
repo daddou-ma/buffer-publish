@@ -33,3 +33,4 @@ export ComposerSidepanel from './ComposerSidepanel';
 export BannerAdvancedAnalytics from './BannerAdvancedAnalytics';
 export ColorPicker from './ColorPicker';
 export ErrorBanner from './ErrorBanner';
+export StepNumber from './StepNumber';
