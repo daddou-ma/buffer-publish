@@ -18,6 +18,16 @@
     "connectButton": "Connect Your Social Accounts",
     "defaultTitle": "Let's get your account set up!"
   },
+  "campaigns": {
+    "emptyState": {
+      "title": "Execute your social strategy from one easy-to-manage campaign space.",
+      "step1": "Execute on your social strategy from one easy-to-manage campaign space.",
+      "step2": "View related posts across profiles.",
+      "step3": "Optimize performance with data insights in Analyze.",
+      "createCampaign": "Create a Campaign",
+      "learnMore": "Learn More"
+    }
+  },
   "onboarding-page": {
     "title": "Your account has been set up!",
     "description": "Connect a social account, so you can schedule your first post",
