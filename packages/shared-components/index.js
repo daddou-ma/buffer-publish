@@ -34,3 +34,4 @@ export BannerAdvancedAnalytics from './BannerAdvancedAnalytics';
 export ColorPicker from './ColorPicker';
 export ErrorBanner from './ErrorBanner';
 export StepNumber from './StepNumber';
+export StepList from './StepList';
