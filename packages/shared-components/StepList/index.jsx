@@ -7,7 +7,7 @@ import { StepNumber } from '@bufferapp/publish-shared-components';
 
 const StepText = styled(Text)`
   flex: 1;
-  margin-left: 8px;
+  margin: 0 0 0 8px;
 `;
 
 const StepContainer = styled.li`
@@ -16,15 +16,20 @@ const StepContainer = styled.li`
   align-items: baseline;
 `;
 
+const StepsContainer = styled.ul`
+  margin: 0;
+  padding: 0;
+`;
+
 const StepList = ({ steps }) => (
-  <ul>
+  <StepsContainer>
     {steps.map((item, index) => (
       <StepContainer key={uuid()}>
         <StepNumber number={index + 1} />
         <StepText type="p">{item}</StepText>
       </StepContainer>
     ))}
-  </ul>
+  </StepsContainer>
 );
 
 StepList.propTypes = {
