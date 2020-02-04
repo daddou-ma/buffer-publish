@@ -26,10 +26,15 @@ const TemporaryDashboardBanner = ({
   displayRemindersBanner,
   usernamesRemindersList,
   awesomeToProUpgradeDetails,
+  awesomeToProMessageKey,
+  userReadMessage,
 }) => {
   const [hidden, hideBanner] = useState(false);
 
-  const onCloseBannerClick = () => {
+  const onCloseBannerClick = (message = null) => {
+    if (message) {
+      userReadMessage(message);
+    }
     hideBanner(!hidden);
   };
 
@@ -59,7 +64,7 @@ const TemporaryDashboardBanner = ({
     return TopBanner({
       status: hidden,
       content: awesomeToProUpgradeDetails,
-      onCloseBanner: onCloseBannerClick,
+      onCloseBanner: onCloseBannerClick(awesomeToProMessageKey),
     });
   }
 

@@ -1,9 +1,16 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
+import keyWrapper from '@bufferapp/keywrapper';
+
 export const initialState = {
   enabledApplicationModes: [],
   remindersStatusByProfile: [],
+  awesomeToProUpgradeDetails: [],
 };
+
+export const actionTypes = keyWrapper('TEMPORARY_BANNER', {
+  USER_READ_MESSAGE: 0,
+});
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -26,6 +33,10 @@ export default (state = initialState, action) => {
           action.result.success &&
           action.result.details.shouldShow &&
           action.result.details.noticeHtml,
+        awesomeToProMessageKey:
+          action.result &&
+          action.result.success &&
+          action.result.bannerMessageKey,
       };
 
     default:
@@ -35,9 +46,9 @@ export default (state = initialState, action) => {
 
 export const actions = {
   userReadMessage: ({ message }) => ({
-    type: dateFetchActionTypes.SELECT_PREMIUM_PLAN,
+    type: actionTypes.USER_READ_MESSAGE,
     args: {
-      selectedPremiumPlan: selectedPlan,
+      message,
     },
   }),
 };
