@@ -31,9 +31,9 @@ const TemporaryDashboardBanner = ({
 }) => {
   const [hidden, hideBanner] = useState(false);
 
-  const onCloseBannerClick = (message = null) => {
-    if (message) {
-      userReadMessage(message);
+  const onCloseBannerClick = () => {
+    if (awesomeToProMessageKey) {
+      userReadMessage({ message: awesomeToProMessageKey });
     }
     hideBanner(!hidden);
   };
@@ -64,7 +64,7 @@ const TemporaryDashboardBanner = ({
     return TopBanner({
       status: hidden,
       content: awesomeToProUpgradeDetails,
-      onCloseBanner: onCloseBannerClick(awesomeToProMessageKey),
+      onCloseBanner: onCloseBannerClick,
     });
   }
 

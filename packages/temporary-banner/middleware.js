@@ -46,7 +46,7 @@ export default ({ dispatch }) => next => action => {
     }
 
     case actionTypes.USER_READ_MESSAGE: {
-      const { message } = action.result;
+      const { message } = action.args.message;
       dispatch(
         dataFetchActions.fetch({
           name: 'readMessage',

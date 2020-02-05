@@ -5,7 +5,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const initialState = {
   enabledApplicationModes: [],
   remindersStatusByProfile: [],
-  awesomeToProUpgradeDetails: [],
+  awesomeToProUpgradeDetails: '',
 };
 
 export const actionTypes = keyWrapper('TEMPORARY_BANNER', {
@@ -19,13 +19,7 @@ export default (state = initialState, action) => {
         ...state,
         enabledApplicationModes: action.result.enabledApplicationModes,
       };
-    case `checkRemindersStatus_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        remindersStatusByProfile: action.result && action.result.profiles,
-      };
-
-    case `awesomeToProUpgradeDetails${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `awesomeToProUpgradeDetails_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
         awesomeToProUpgradeDetails:
@@ -36,7 +30,12 @@ export default (state = initialState, action) => {
         awesomeToProMessageKey:
           action.result &&
           action.result.success &&
-          action.result.bannerMessageKey,
+          action.result.details.bannerMessageKey,
+      };
+    case `checkRemindersStatus_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        remindersStatusByProfile: action.result && action.result.profiles,
       };
 
     default:
@@ -45,7 +44,7 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  userReadMessage: ({ message }) => ({
+  userReadMessage: message => ({
     type: actionTypes.USER_READ_MESSAGE,
     args: {
       message,
