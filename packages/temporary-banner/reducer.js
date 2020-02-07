@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         awesomeToProUpgradeDetails:
           action.result &&
-          action.result.success &&
+          action.result.details &&
           action.result.details.shouldShow &&
           action.result.details.noticeHtml,
         awesomeToProMessageKey:
