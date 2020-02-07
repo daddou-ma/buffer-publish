@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
 import { offWhite, mystic } from '@bufferapp/components/style/color';
+import { blue } from '@bufferapp/ui/style/colors';
 import { borderWidth } from '@bufferapp/components/style/border';
+import styled from 'styled-components';
 
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
@@ -11,56 +13,88 @@ import ProfileList from '../ProfileList';
 import ProfileConnectShortcut from '../ProfileConnectShortcut';
 import ProfileSearch from '../ProfileSearch';
 
-const profileSidebarStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '1rem',
-  boxSizing: 'border-box',
-  background: offWhite,
-  borderRight: `${borderWidth} solid ${mystic}`,
-  height: '100%',
-  justifyContent: 'flex-start',
-};
+const ProfileSidebarStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+  background: ${offWhite};
+  border-right: ${borderWidth} solid ${mystic};
+  height: 100%;
+  justify-content: flex-start;
+`;
 
-const profileListStyle = {
-  overflowY: 'scroll',
-};
+const ProfileListStyle = styled.div`
+  overflow-y: scroll;
+`;
 
-const manageSocialAccountsStyle = {
-  display: 'flex',
-  flexGrow: 1,
-  flexShrink: 0,
-  flexFlow: 'column nowrap',
-  position: 'sticky',
-  bottom: '15px',
-  backgroundColor: '#fcfcfc',
-};
+const ManageSocialAccountsStyle = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-flow: column nowrap;
+  position: sticky;
+  bottom: 15px;
+  background-color: #fcfcfc;
+`;
 
-const socialButtonsWrapperStyle = {
-  display: 'flex',
-  flex: 1,
-  flexFlow: 'column nowrap',
-  marginTop: 'auto',
-};
+const SocialButtonsWrapperStyle = styled.div`
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  margin-top: auto;
+`;
 
-const buttonDividerStyle = {
-  marginBottom: '0.5rem',
-};
+const ButtonDividerStyle = styled.div`
+  margin-bottom: 0.5rem;
+`;
 
-const bottomSectionStyle = {
-  marginTop: 'auto',
-  display: 'flex',
-  flexFlow: 'column nowrap',
-};
+const BottomSectionStyle = styled.div`
+  margin-top: auto;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const ProfileListTitleStyle = styled.div`
+  font-weight: bold;
+  color: #3d3d3d;
+  font-size: 14px;
+  line-height: 16px;
+`;
+
+const CampaignButton = styled.div`
+  background-color: transparent;
+  color: #3d3d3d;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 16px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0px; // 8px
+  padding-right: 8px;
+  margin-bottom: 1rem;
+  height: 32px;
+  cursor: pointer;
+  :hover {
+    background-color: ${blue};
+    color: #ffffff;
+    padding-left: 8px;
+  }
+`;
+
+const Wrapper = styled.div``;
 
 const renderLoadingProfiles = () => (
-  <div>
+  <Wrapper>
     <LoadingProfileListItem />
     <LoadingProfileListItem offset="100ms" />
     <LoadingProfileListItem offset="200ms" />
     <LoadingProfileListItem offset="300ms" />
     <LoadingProfileListItem offset="400ms" />
-  </div>
+  </Wrapper>
 );
 
 const ProfileSidebar = ({
@@ -80,11 +114,19 @@ const ProfileSidebar = ({
   hasInstagram,
   hasFacebook,
   hasTwitter,
+  hasCampaignsFlip,
 }) => (
-  <div style={profileSidebarStyle}>
+  <ProfileSidebarStyle>
     {loading && renderLoadingProfiles()}
     {profiles.length > 0 && (
-      <div style={profileListStyle} data-hide-scrollbar>
+      <ProfileListStyle data-hide-scrollbar>
+        {hasCampaignsFlip && (
+          <CampaignButton onClick={() => {}}>Campaigns</CampaignButton>
+        )}
+        <ProfileListTitleStyle>Social accounts</ProfileListTitleStyle>
+        <ButtonDividerStyle>
+          <Divider marginTop="8px" />
+        </ButtonDividerStyle>
         {profiles.length > 9 && (
           <ProfileSearch
             profiles={profiles}
@@ -103,10 +145,10 @@ const ProfileSidebar = ({
           profileLimit={profileLimit}
           translations={translations}
         />
-      </div>
+      </ProfileListStyle>
     )}
-    <div style={manageSocialAccountsStyle}>
-      <div style={socialButtonsWrapperStyle}>
+    <ManageSocialAccountsStyle>
+      <SocialButtonsWrapperStyle>
         {!hasInstagram && (
           <ProfileConnectShortcut
             label="Connect Instagram"
@@ -140,10 +182,10 @@ const ProfileSidebar = ({
             goToConnectSocialAccount={goToConnectSocialAccount}
           />
         )}
-        <div style={bottomSectionStyle}>
-          <div style={buttonDividerStyle}>
+        <BottomSectionStyle>
+          <ButtonDividerStyle>
             <Divider marginTop="1rem" />
-          </div>
+          </ButtonDividerStyle>
           <Button
             label={translations.connectButton}
             type="secondary"
@@ -152,10 +194,10 @@ const ProfileSidebar = ({
               onManageSocialAccountClick();
             }}
           />
-        </div>
-      </div>
-    </div>
-  </div>
+        </BottomSectionStyle>
+      </SocialButtonsWrapperStyle>
+    </ManageSocialAccountsStyle>
+  </ProfileSidebarStyle>
 );
 
 ProfileSidebar.propTypes = {
@@ -176,6 +218,7 @@ ProfileSidebar.propTypes = {
   hasTwitter: PropTypes.bool.isRequired,
   onSearchProfileChange: () => {},
   isSearchPopupVisible: PropTypes.bool,
+  hasCampaignsFlip: PropTypes.bool,
 };
 
 ProfileSidebar.defaultProps = {
@@ -184,6 +227,11 @@ ProfileSidebar.defaultProps = {
   profiles: [],
   onSearchProfileChange: PropTypes.func,
   isSearchPopupVisible: false,
+  translations: {},
+  showSwitchPlanModal: () => {},
+  onDropProfile: () => {},
+  profileLimit: 0,
+  hasCampaignsFlip: false,
 };
 
 export default ProfileSidebar;

@@ -22,6 +22,9 @@ export default hot(
       hasFacebook: state.profileSidebar.hasFacebook,
       hasTwitter: state.profileSidebar.hasTwitter,
       isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
+      hasCampaignsFlip: state.appSidebar.user.features
+        ? state.appSidebar.user.features.includes('campaigns')
+        : false,
     }),
     (dispatch, ownProps) => ({
       onProfileClick: profile => {
