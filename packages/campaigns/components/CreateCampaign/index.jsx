@@ -88,17 +88,27 @@ const CreateCampaign = ({
   onCreateCampaignClick,
   onCancelClick,
 }) => {
-  // campaignName state, set by the name input
+  // State
   const [campaignName, setName] = useState('');
+  const [colorSelected, setColor] = useState(purple);
+  const [isSubmitButtonDisabled, disableSubmit] = useState(true);
+
+  const disableCampaignSubmitButton = ({ name, color }) => {
+    const isSaveButtonDisabled = !name.trim() || !color.trim();
+    disableSubmit(isSaveButtonDisabled);
+  };
+
+  // campaignName state, set by the name input
   const setCampaignName = event => {
     const { value } = event.target;
     setName(value);
+    disableCampaignSubmitButton({ name: value, color: colorSelected });
   };
   // colorSelected state, set by the color picker
-  const [colorSelected, setColor] = useState(purple);
   const setCampaignColor = event => {
     const { value } = event.target;
     setColor(value);
+    disableCampaignSubmitButton({ name: campaignName, color: value });
   };
 
   return (
@@ -146,6 +156,7 @@ const CreateCampaign = ({
           size="large"
           label={translations.saveCampaign}
           onClick={() => onCreateCampaignClick({ colorSelected, campaignName })}
+          disabled={isSubmitButtonDisabled}
           fullWidth
         />
         <Button
