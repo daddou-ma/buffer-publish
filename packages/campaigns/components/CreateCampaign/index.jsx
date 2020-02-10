@@ -96,6 +96,10 @@ const CreateCampaign = ({
   };
   // colorSelected state, set by the color picker
   const [colorSelected, setColor] = useState(orange);
+  const setCampaignColor = event => {
+    const { value } = event.target;
+    setColor(value);
+  };
 
   return (
     <Wrapper>
@@ -111,6 +115,7 @@ const CreateCampaign = ({
             name={translations.name}
             label={translations.name}
             placeholder={translations.placeholder}
+            aria-required="true"
           />
           <Text htmlFor="colorPicker" type="label">
             {translations.color}
@@ -119,7 +124,7 @@ const CreateCampaign = ({
             id="colorPicker"
             colors={colors}
             colorSelected={colorSelected}
-            onColorClick={color => setColor(color)}
+            onColorClick={setCampaignColor}
           />
         </Card>
         <NoticeCard>

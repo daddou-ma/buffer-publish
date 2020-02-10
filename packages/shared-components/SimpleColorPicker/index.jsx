@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import uuid from 'uuid/v4';
 import styled from 'styled-components';
 import { SimpleColorSwatch } from '@bufferapp/publish-shared-components';
 
@@ -19,11 +18,11 @@ const SimpleColorPicker = ({ colors, colorSelected, onColorClick }) => (
       const isColorSelected = colorSelected === item.color;
       return (
         <SimpleColorSwatch
-          key={uuid()}
+          key={item.color}
           color={item.color}
           colorName={item.colorName}
           selected={isColorSelected}
-          onColorClick={() => onColorClick(item.color)}
+          onColorClick={onColorClick}
         />
       );
     })}
