@@ -25,6 +25,7 @@ export default ({ dispatch, getState }) => next => action => {
       );
       break;
     }
+    // Complete once changes to the backend endpoint are made:
     case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const metadata = {
         campaignId: '',

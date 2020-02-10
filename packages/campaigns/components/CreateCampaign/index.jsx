@@ -93,22 +93,22 @@ const CreateCampaign = ({
   const [colorSelected, setColor] = useState(purple);
   const [isSubmitButtonDisabled, disableSubmit] = useState(true);
 
+  // State modifiers
   const disableCampaignSubmitButton = ({ name, color }) => {
     const isSaveButtonDisabled = !name.trim() || !color.trim();
     disableSubmit(isSaveButtonDisabled);
   };
 
-  // campaignName state, set by the name input
   const setCampaignName = event => {
     const { value } = event.target;
-    setName(value);
     disableCampaignSubmitButton({ name: value, color: colorSelected });
+    setName(value);
   };
-  // colorSelected state, set by the color picker
+
   const setCampaignColor = event => {
     const { value } = event.target;
-    setColor(value);
     disableCampaignSubmitButton({ name: campaignName, color: value });
+    setColor(value);
   };
 
   return (
