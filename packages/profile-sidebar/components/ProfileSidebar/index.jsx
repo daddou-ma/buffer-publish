@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
-import { Button } from '@bufferapp/ui';
+import { Button, SidebarListItem } from '@bufferapp/ui';
 import { offWhite, mystic } from '@bufferapp/components/style/color';
-import { blue } from '@bufferapp/ui/style/colors';
 import { borderWidth } from '@bufferapp/components/style/border';
 import styled from 'styled-components';
 
@@ -55,34 +54,19 @@ const BottomSectionStyle = styled.div`
   flex-flow: column nowrap;
 `;
 
-const ProfileListTitleStyle = styled.div`
-  font-weight: bold;
-  color: #3d3d3d;
-  font-size: 14px;
-  line-height: 16px;
-`;
-
-const CampaignButton = styled.div`
-  background-color: transparent;
-  color: #3d3d3d;
+const ProfileListTitle = styled.div`
   display: flex;
   align-items: center;
-  font-weight: bold;
-  border-radius: 4px;
+  height: 32px;
+  font-weight: 500;
+  color: #3d3d3d;
   font-size: 14px;
   line-height: 16px;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 0px; // 8px
-  padding-right: 8px;
-  margin-bottom: 1rem;
-  height: 32px;
-  cursor: pointer;
-  :hover {
-    background-color: ${blue};
-    color: #ffffff;
-    padding-left: 8px;
-  }
+  padding-left: 8px;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-bottom: 5px;
 `;
 
 const Wrapper = styled.div``;
@@ -121,12 +105,19 @@ const ProfileSidebar = ({
     {profiles.length > 0 && (
       <ProfileListStyle data-hide-scrollbar>
         {hasCampaignsFlip && (
-          <CampaignButton onClick={() => {}}>Campaigns</CampaignButton>
+          <React.Fragment>
+            <ButtonWrapper>
+              <SidebarListItem
+                id="campaigns"
+                title="Campaigns"
+                onItemClick={() => {}}
+                selected={false}
+              />
+            </ButtonWrapper>
+            <ProfileListTitle>Social accounts</ProfileListTitle>
+            <Divider marginTop="0" />
+          </React.Fragment>
         )}
-        <ProfileListTitleStyle>Social accounts</ProfileListTitleStyle>
-        <ButtonDividerStyle>
-          <Divider marginTop="8px" />
-        </ButtonDividerStyle>
         {profiles.length > 9 && (
           <ProfileSearch
             profiles={profiles}
