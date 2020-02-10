@@ -42,8 +42,7 @@ const ColorInput = styled.input`
   margin: 0;
   display: block;
   &:focus ~ ${Circle} {
-    outline: 1px dotted ${blue};
-    outline: 5px auto ${blue};
+    outline: 5px auto -webkit-focus-ring-color;
   }
 `;
 

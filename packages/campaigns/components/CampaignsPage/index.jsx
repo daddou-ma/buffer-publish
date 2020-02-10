@@ -8,19 +8,20 @@ const CREATE_CAMPAIGN = 'createCampaign';
 const VIEW_CAMPAIGNS = 'viewCampaigns';
 
 /* Component */
-const CampaignsPage = ({ translations, onCreateCampaignClick }) => {
+const CampaignsPage = ({ translations, campaigns, onCreateCampaignClick }) => {
   const [viewMode, setViewMode] = useState(VIEW_CAMPAIGNS);
   return (
     <React.Fragment>
-      {viewMode === VIEW_CAMPAIGNS && (
+      {viewMode === VIEW_CAMPAIGNS && campaigns.length === 0 && (
         <EmptyState
           translations={translations.emptyState}
-          onCreateCampaignClick={onCreateCampaignClick}
+          onOpenCreateCampaignClick={() => setViewMode(CREATE_CAMPAIGN)}
         />
       )}
       {viewMode === CREATE_CAMPAIGN && (
         <CreateCampaign
           translations={translations.createCampaign}
+          onCreateCampaignClick={onCreateCampaignClick}
           onCancelClick={() => setViewMode(VIEW_CAMPAIGNS)}
         />
       )}
@@ -30,6 +31,7 @@ const CampaignsPage = ({ translations, onCreateCampaignClick }) => {
 
 CampaignsPage.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
+  campaigns: PropTypes.array, // eslint-disable-line
   onCreateCampaignClick: PropTypes.func.isRequired,
 };
 

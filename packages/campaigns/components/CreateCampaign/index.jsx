@@ -85,7 +85,7 @@ const colors = [
 /* Component */
 const CreateCampaign = ({
   translations,
-  onSaveCampaignClick,
+  onCreateCampaignClick,
   onCancelClick,
 }) => {
   // campaignName state, set by the name input
@@ -95,7 +95,7 @@ const CreateCampaign = ({
     setName(value);
   };
   // colorSelected state, set by the color picker
-  const [colorSelected, setColor] = useState(orange);
+  const [colorSelected, setColor] = useState(purple);
   const setCampaignColor = event => {
     const { value } = event.target;
     setColor(value);
@@ -145,7 +145,7 @@ const CreateCampaign = ({
           type="primary"
           size="large"
           label={translations.saveCampaign}
-          onClick={() => onSaveCampaignClick({ colorSelected, campaignName })}
+          onClick={() => onCreateCampaignClick({ colorSelected, campaignName })}
           fullWidth
         />
         <Button
@@ -174,7 +174,7 @@ CreateCampaign.propTypes = {
     saveCampaign: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
   }).isRequired,
-  onSaveCampaignClick: PropTypes.func.isRequired,
+  onCreateCampaignClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
 };
 

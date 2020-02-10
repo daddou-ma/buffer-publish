@@ -18,7 +18,7 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const EmptyState = ({ translations, onCreateCampaignClick }) => {
+const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
   const {
     step1,
     step2,
@@ -40,7 +40,7 @@ const EmptyState = ({ translations, onCreateCampaignClick }) => {
             type="primary"
             size="large"
             label={createCampaign}
-            onClick={onCreateCampaignClick}
+            onClick={onOpenCreateCampaignClick}
           />
           {/* To be replaced by BDS Link, when we create one that's an anchor and not a button */}
           <Button
@@ -72,7 +72,7 @@ EmptyState.propTypes = {
     learnMore: PropTypes.string.isRequired,
     imageTag: PropTypes.string.isRequired,
   }).isRequired,
-  onCreateCampaignClick: PropTypes.func.isRequired,
+  onOpenCreateCampaignClick: PropTypes.func.isRequired,
 };
 
 export default EmptyState;
