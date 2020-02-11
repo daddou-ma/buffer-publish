@@ -109,7 +109,12 @@ module.exports = userData => ({
   showReturnToClassic: userData.has_np_app_switcher,
   helpScoutConfig: userData.helpscout_beacon_params,
   isBusinessTeamMember: userData.is_business_team_member,
-  isOnAwesomePlan: userData.plan === 'awesome',
+  isOnAwesomePlan:
+    userData.plan === 'awesome' &&
+    !(
+      userData.features.includes('awesome_pro_forced_upgrade_batch_1') ||
+      userData.features.includes('test_awesome_pro_forced_upgrade_batch_1')
+    ),
   isAwesomePromoUser:
     userData.features.includes('legacy_awesome_monthly_promotion') &&
     userData.plan === 'awesome',
