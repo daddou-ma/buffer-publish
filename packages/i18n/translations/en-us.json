@@ -27,6 +27,19 @@
       "createCampaign": "Create a Campaign",
       "learnMore": "Learn More",
       "imageTag": "Example of campaign with multiple posts scheduled."
+    },
+    "createCampaign": {
+      "title": "Create Campaign",
+      "subtitle": "Campaign Details",
+      "name": "Name",
+      "placeholder": "Add campaign name",
+      "color": "Color",
+      "notice1": "Campaigns are visible to everyone in your organization,",
+      "notice2": " however, team members will only see content for the social accounts that they have access to. You can ",
+      "notice3": "read more",
+      "notice4": " in our FAQ.",
+      "saveCampaign": "Save Campaign",
+      "cancel": "Cancel"
     }
   },
   "onboarding-page": {
