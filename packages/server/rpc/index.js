@@ -72,6 +72,7 @@ const deleteCustomLinkMethod = require('./shopGrid/customLinks/delete');
 const checkRemindersStatus = require('./checkRemindersStatus');
 const addUserTag = require('./addUserTag');
 const removeUserTag = require('./removeUserTag');
+const awesomeToProUpgradeDetails = require('./awesomeToProUpgradeDetails');
 const createCampaign = require('./campaigns/create');
 const updateCampaign = require('./campaigns/update');
 
@@ -136,6 +137,7 @@ module.exports = rpc(
   startTrial,
   intercom,
   v1ToV2UpgradeDetails,
+  awesomeToProUpgradeDetails,
   globalAccount,
   getCounts,
   createHashtagGroup,
