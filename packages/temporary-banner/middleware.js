@@ -17,7 +17,10 @@ export default ({ dispatch }) => next => action => {
         })
       );
       if (
-        action.result.features.includes('awesome_pro_forced_upgrade_batch_1')
+        action.result.features.includes('awesome_pro_forced_upgrade_batch_1') ||
+        action.result.features.includes(
+          'test_awesome_pro_forced_upgrade_batch_1'
+        )
       ) {
         dispatch(
           dataFetchActions.fetch({
