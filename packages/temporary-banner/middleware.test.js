@@ -43,7 +43,7 @@ describe('middleware', () => {
     const action = dataFetchActions.fetchSuccess({
       name: 'user',
       result: {
-        features: ['awesome_pro_forced_upgrade_batch_2'],
+        features: ['awesome_pro_forced_upgrade_batch_1'],
       },
     });
 

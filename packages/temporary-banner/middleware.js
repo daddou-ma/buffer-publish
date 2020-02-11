@@ -17,7 +17,7 @@ export default ({ dispatch }) => next => action => {
         })
       );
       if (
-        action.result.features.includes('awesome_pro_forced_upgrade_batch_2') // TODO: update to correct feature name
+        action.result.features.includes('awesome_pro_forced_upgrade_batch_1')
       ) {
         dispatch(
           dataFetchActions.fetch({
