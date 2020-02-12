@@ -175,6 +175,7 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       retweetProfile={retweetProfile}
       isSent={false}
+      basic={false}
     >
       {children}
     </Post>

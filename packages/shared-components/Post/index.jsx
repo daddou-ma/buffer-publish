@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, LinkifiedText, Text } from '@bufferapp/components';
-
 import { transitionAnimationType } from '@bufferapp/components/style/animation';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
-import UserDetails from '../UserDetails';
 import RenderPostMetaBar from './RenderPostMetaBar';
 import PostErrorBanner from '../PostErrorBanner';
+import RetweetPanel from '../RetweetPanel';
 
 const getPostContainerStyle = ({ dragging, hovering }) => ({
   display: 'flex',
@@ -42,69 +39,7 @@ const getPostContentStyle = ({ draggable, dragging }) => ({
   opacity: dragging ? 0 : 1,
 });
 
-const retweetProfileWrapperStyle = {
-  marginBottom: '1rem',
-};
-
-const commentStyle = {
-  marginBottom: '1rem',
-};
-
 /* eslint-disable react/prop-types */
-
-const renderRetweetComment = ({
-  retweetComment,
-  retweetCommentLinks,
-  basic,
-}) => (
-  <div style={commentStyle}>
-    {basic ? (
-      <Text color="black" size="mini">
-        {retweetComment}
-      </Text>
-    ) : (
-      <LinkifiedText
-        color="black"
-        links={retweetCommentLinks}
-        newTab
-        size="mini"
-        unstyled
-      >
-        {retweetComment}
-      </LinkifiedText>
-    )}
-  </div>
-);
-
-const renderContent = ({
-  children,
-  retweetComment,
-  retweetCommentLinks,
-  retweetProfile,
-  draggable,
-  dragging,
-  basic,
-}) => {
-  if (retweetProfile) {
-    return (
-      <div style={getPostContentStyle({ draggable, dragging })}>
-        {retweetComment
-          ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic })
-          : ''}
-        <Card color="off-white" reducedPadding>
-          <div style={retweetProfileWrapperStyle}>
-            <UserDetails {...retweetProfile} />
-          </div>
-          {children}
-        </Card>
-      </div>
-    );
-  }
-
-  return (
-    <div style={getPostContentStyle({ draggable, dragging })}>{children}</div>
-  );
-};
 
 const getBorderStyle = ({
   draggingPlaceholder,
@@ -241,15 +176,21 @@ const Post = ({
               errorLink={postDetails.errorLink}
             />
           )}
-          {renderContent({
-            children,
-            retweetProfile,
-            retweetComment,
-            retweetCommentLinks,
-            draggable,
-            dragging,
-            basic,
-          })}
+          {/* Post Content */}
+          <div style={getPostContentStyle({ draggable, dragging })}>
+            {retweetProfile ? (
+              <RetweetPanel
+                retweetProfile={retweetProfile}
+                retweetComment={retweetComment}
+                retweetCommentLinks={retweetCommentLinks}
+                basic={basic}
+              >
+                {children}
+              </RetweetPanel>
+            ) : (
+              children
+            )}
+          </div>
           <RenderPostMetaBar
             profileService={profileService}
             dragging={dragging}

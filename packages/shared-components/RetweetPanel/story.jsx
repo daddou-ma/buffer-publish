@@ -23,7 +23,11 @@ const retweetProfile = {
   name: 'Joel Gascoigne',
 };
 
-const children = <Text color="black" size="mini">Rubber baby buggy bumpers.</Text>;
+const children = (
+  <Text color="black" size="mini">
+    Rubber baby buggy bumpers.
+  </Text>
+);
 
 storiesOf('Cards|Shared Elements/RetweetPanel', module)
   .addDecorator(withA11y)
