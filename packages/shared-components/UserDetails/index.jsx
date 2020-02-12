@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Image, Text } from '@bufferapp/components';
 
-const retweetPanelContainerStyle = {
+const UserDetailsContainerStyle = {
   display: 'flex',
   alignItems: 'center',
 };
@@ -13,25 +13,20 @@ const retweetHandleContainer = {
   marginLeft: '1rem',
 };
 
-const RetweetPanel = ({ name, handle, avatarUrl }) => (
-  <div style={retweetPanelContainerStyle}>
-    <Image
-      src={avatarUrl}
-      border={'circle'}
-      height={'2.25rem'}
-      width={'2.25rem'}
-    />
+const UserDetails = ({ name, handle, avatarUrl }) => (
+  <div style={UserDetailsContainerStyle}>
+    <Image src={avatarUrl} border="circle" height="2.25rem" width="2.25rem" />
     <div style={retweetHandleContainer}>
-      <Text size={'mini'}>{name}</Text>
-      <Text size={'small'}>{handle}</Text>
+      <Text size="mini">{name}</Text>
+      <Text size="small">{handle}</Text>
     </div>
   </div>
 );
 
-RetweetPanel.propTypes = {
+UserDetails.propTypes = {
   name: PropTypes.string.isRequired,
   handle: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string.isRequired,
 };
 
-export default RetweetPanel;
+export default UserDetails;
