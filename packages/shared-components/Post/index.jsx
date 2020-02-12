@@ -7,7 +7,7 @@ import { WithFeatureLoader } from '@bufferapp/product-features';
 
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
-import RetweetPanel from '../RetweetPanel';
+import UserDetails from '../UserDetails';
 import RenderPostMetaBar from './RenderPostMetaBar';
 import PostErrorBanner from '../PostErrorBanner';
 
@@ -93,7 +93,7 @@ const renderContent = ({
           : ''}
         <Card color="off-white" reducedPadding>
           <div style={retweetProfileWrapperStyle}>
-            <RetweetPanel {...retweetProfile} />
+            <UserDetails {...retweetProfile} />
           </div>
           {children}
         </Card>

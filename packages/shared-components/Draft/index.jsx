@@ -6,7 +6,7 @@ import { LinkifiedText, Text } from '@bufferapp/components';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import DraftFooter from '../DraftFooter';
-import RetweetPanel from '../RetweetPanel';
+import UserDetails from '../UserDetails';
 
 import RenderPostMetaBar from '../Post/RenderPostMetaBar';
 
@@ -71,7 +71,7 @@ const renderContent = ({
         <RetweetCard>
           <RetweetCardContent>
             <div style={retweetProfileWrapperStyle}>
-              <RetweetPanel {...retweetProfile} />
+              <UserDetails {...retweetProfile} />
             </div>
             {children}
           </RetweetCardContent>
