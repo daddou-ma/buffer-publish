@@ -4,6 +4,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as profileActions } from '@bufferapp/publish-profile-sidebar';
 import { actions as campaignsActions } from '@bufferapp/publish-campaigns';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import {
   getProfilePageParams,
@@ -69,12 +70,18 @@ export default ({ getState, dispatch }) => next => action => {
         path,
       });
       if (campaignParams && campaignParams.campaigns) {
-        dispatch(
-          campaignsActions.handleCampaignRouteLoaded({
-            campaignId: campaignParams.campaignId,
-          })
-        );
+        const { hasCampaignsFlip } = getState().initialLoading;
+        if (hasCampaignsFlip) {
+          dispatch(
+            campaignsActions.handleCampaignRouteLoaded({
+              campaignId: campaignParams.campaignId,
+            })
+          );
+        } else {
+          window.location = getURL.getPublishUrl();
+        }
       }
+
       break;
     }
 
