@@ -1,26 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, Text } from '@bufferapp/components';
+import styled from 'styled-components';
+import { Avatar, Text } from '@bufferapp/ui';
+import { grayDark } from '@bufferapp/ui/style/colors';
 
-const UserDetailsContainerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-};
+const UserDetailsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-const retweetHandleContainer = {
-  display: 'flex',
-  flexDirection: 'column',
-  marginLeft: '1rem',
-};
+const RetweetHandleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  color: ${grayDark};
+`;
+
+const Handle = styled(Text)`
+  margin: 0;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.2px;
+`;
 
 const UserDetails = ({ name, handle, avatarUrl }) => (
-  <div style={UserDetailsContainerStyle}>
-    <Image src={avatarUrl} border="circle" height="2.25rem" width="2.25rem" />
-    <div style={retweetHandleContainer}>
-      <Text size="mini">{name}</Text>
-      <Text size="small">{handle}</Text>
-    </div>
-  </div>
+  <UserDetailsContainer>
+    <Avatar src={avatarUrl} size="medium" alt={`avatar image of ${name}`} />
+    <RetweetHandleContainer>
+      <Text type="label" color="">
+        {name}
+      </Text>
+      <Handle type="p">{handle}</Handle>
+    </RetweetHandleContainer>
+  </UserDetailsContainer>
 );
 
 UserDetails.propTypes = {
