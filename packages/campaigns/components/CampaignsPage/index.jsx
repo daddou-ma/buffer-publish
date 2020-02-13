@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import EmptyState from '../EmptyState';
+import CreateCampaign from '../CreateCampaign';
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,22 +29,40 @@ const ContentStyle = styled.div`
   min-height: 100%;
 `;
 
-const CampaignsPage = ({ translations, onCreateCampaignClick }) => (
-  <Wrapper>
-    <ProfileSidebarStyle>
-      <ProfileSidebar />
-    </ProfileSidebarStyle>
-    <ContentStyle>
-      <EmptyState
-        translations={translations.emptyState}
-        onCreateCampaignClick={onCreateCampaignClick}
-      />
-    </ContentStyle>
-  </Wrapper>
-);
+/* List of views available to be rendered */
+const CREATE_CAMPAIGN = 'createCampaign';
+const VIEW_CAMPAIGNS = 'viewCampaigns';
+
+/* Component */
+const CampaignsPage = ({ translations, campaigns, onCreateCampaignClick }) => {
+  const [viewMode, setViewMode] = useState(VIEW_CAMPAIGNS);
+  return (
+    <Wrapper>
+      <ProfileSidebarStyle>
+        <ProfileSidebar />
+      </ProfileSidebarStyle>
+      <ContentStyle>
+        {viewMode === VIEW_CAMPAIGNS && campaigns.length === 0 && (
+          <EmptyState
+            translations={translations.emptyState}
+            onOpenCreateCampaignClick={() => setViewMode(CREATE_CAMPAIGN)}
+          />
+        )}
+        {viewMode === CREATE_CAMPAIGN && (
+          <CreateCampaign
+            translations={translations.createCampaign}
+            onCreateCampaignClick={onCreateCampaignClick}
+            onCancelClick={() => setViewMode(VIEW_CAMPAIGNS)}
+          />
+        )}
+      </ContentStyle>
+    </Wrapper>
+  );
+};
 
 CampaignsPage.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
+  campaigns: PropTypes.array, // eslint-disable-line
   onCreateCampaignClick: PropTypes.func.isRequired,
 };
 
