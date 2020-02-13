@@ -2103,6 +2103,15 @@
     micro-rpc-client "0.1.2"
     object-path "0.11.4"
 
+"@bufferapp/session-manager@0.7.5":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@bufferapp/session-manager/-/session-manager-0.7.5.tgz#0a64da408a6eb658db3acaeb60a95d66862d14c9"
+  integrity sha512-5IXKafm2pXKIA3q34TGAxXCIX7eZG7UP6MG15rCjsT60kxUgp4SJqQxx2FzJFkesl6eLvjyDziBoDqsDT9tbRw==
+  dependencies:
+    jsonwebtoken "8.2.2"
+    micro-rpc-client "0.1.2"
+    object-path "0.11.4"
+
 "@bufferapp/shutdown-helper@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/shutdown-helper/-/shutdown-helper-0.2.0.tgz#d43bbba845e30e411dda76a7b7629e11160e5395"
