@@ -44,6 +44,15 @@ export const preferencePageRoute = generatePreferencePageRoute({
   preferenceId: ':preferenceId',
 });
 
+export const campaignsPageRoute = '/campaigns';
+
+export const generateCampaignPageRoute = ({ campaignId }) =>
+  `/campaigns/${campaignId}`;
+
+export const campaignRoute = generateCampaignPageRoute({
+  campaignId: ':campaignId',
+});
+
 const preferenceRouteRegex = /preferences\/(\w+)/;
 export const getPreferencePageParams = ({ path }) => {
   const match = preferenceRouteRegex.exec(path);

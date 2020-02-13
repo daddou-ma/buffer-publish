@@ -99,6 +99,8 @@ const ProfileSidebar = ({
   hasFacebook,
   hasTwitter,
   hasCampaignsFlip,
+  onCampaignsButtonClick,
+  isCampaignsSelected,
 }) => (
   <ProfileSidebarStyle>
     {loading && renderLoadingProfiles()}
@@ -110,12 +112,12 @@ const ProfileSidebar = ({
               <SidebarListItem
                 id="campaigns"
                 title="Campaigns"
-                onItemClick={() => {}}
-                selected={false}
+                onItemClick={onCampaignsButtonClick}
+                selected={isCampaignsSelected}
               />
             </ButtonWrapper>
             <ProfileListTitle>Social accounts</ProfileListTitle>
-            <Divider marginTop="0" />
+            <Divider marginTop="0" marginBottom="1rem" />
           </React.Fragment>
         )}
         {profiles.length > 9 && (
@@ -210,6 +212,8 @@ ProfileSidebar.propTypes = {
   onSearchProfileChange: () => {},
   isSearchPopupVisible: PropTypes.bool,
   hasCampaignsFlip: PropTypes.bool,
+  isCampaignsSelected: PropTypes.bool,
+  onCampaignsButtonClick: PropTypes.func,
 };
 
 ProfileSidebar.defaultProps = {
@@ -221,8 +225,10 @@ ProfileSidebar.defaultProps = {
   translations: {},
   showSwitchPlanModal: () => {},
   onDropProfile: () => {},
+  onCampaignsButtonClick: () => {},
   profileLimit: 0,
   hasCampaignsFlip: false,
+  isCampaignsSelected: false,
 };
 
 export default ProfileSidebar;
