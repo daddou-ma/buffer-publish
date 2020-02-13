@@ -1,4 +1,5 @@
 const { method } = require('@bufferapp/buffer-rpc');
+const { isImpersonation } = require('@bufferapp/session-manager');
 const authenticationService = require('../../services/authenticationService');
 
 module.exports = method(
@@ -23,6 +24,8 @@ module.exports = method(
     } catch (e) {
       console.log(e); // eslint-disable-line no-console
     }
+
+    user.isImpersonation = isImpersonation(req.session);
 
     return user;
   }
