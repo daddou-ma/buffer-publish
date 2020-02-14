@@ -12,14 +12,15 @@ export default ({ dispatch, getState }) => next => action => {
   switch (action.type) {
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
-      const { id } = getState().user;
+      const { mainOrganization } = getState().user;
+      const organizationId = mainOrganization?._id;
       dispatch(
         dataFetchActions.fetch({
           name: 'createCampaign',
           args: {
             name,
             color,
-            id,
+            organizationId,
           },
         })
       );

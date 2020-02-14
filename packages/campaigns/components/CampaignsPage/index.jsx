@@ -8,7 +8,12 @@ const CREATE_CAMPAIGN = 'createCampaign';
 const VIEW_CAMPAIGNS = 'viewCampaigns';
 
 /* Component */
-const CampaignsPage = ({ translations, campaigns, onCreateCampaignClick }) => {
+const CampaignsPage = ({
+  translations,
+  campaigns,
+  onCreateCampaignClick,
+  isSaving,
+}) => {
   const [viewMode, setViewMode] = useState(VIEW_CAMPAIGNS);
   return (
     <React.Fragment>
@@ -20,6 +25,7 @@ const CampaignsPage = ({ translations, campaigns, onCreateCampaignClick }) => {
       )}
       {viewMode === CREATE_CAMPAIGN && (
         <CreateCampaign
+          isSaving={isSaving}
           translations={translations.createCampaign}
           onCreateCampaignClick={onCreateCampaignClick}
           onCancelClick={() => setViewMode(VIEW_CAMPAIGNS)}
@@ -33,6 +39,7 @@ CampaignsPage.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   campaigns: PropTypes.array, // eslint-disable-line
   onCreateCampaignClick: PropTypes.func.isRequired,
+  isSaving: PropTypes.bool.isRequired,
 };
 
 export default CampaignsPage;

@@ -6,6 +6,11 @@ const isOnBusinessPlan = trialPlan =>
     plan => plan === trialPlan
   );
 
+const getMainOrganization = mainOrg => {
+  if (mainOrg) return mainOrg;
+  return null;
+};
+
 // The following two methods are being used for Awesome customers
 // who are being migrated to Pro. These customers will technically
 // still have their plan set to Awesome but will receive all of
@@ -121,4 +126,6 @@ module.exports = userData => ({
   hasAccessToUserTag: userData.is_pro_and_up_org_user, // this includes team members
   isAnalyzeCustomer: userData.is_analyze_customer,
   canSeePaydayPage: userData.features.includes('awesome_user_can_visit_payday'),
+  organizations: userData.organizations,
+  mainOrganization: getMainOrganization(userData.main_organization),
 });

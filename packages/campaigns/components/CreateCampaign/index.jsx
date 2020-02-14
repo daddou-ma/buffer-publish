@@ -87,6 +87,7 @@ const CreateCampaign = ({
   translations,
   onCreateCampaignClick,
   onCancelClick,
+  isSaving,
 }) => {
   // State
   const [campaignName, setName] = useState('');
@@ -156,7 +157,7 @@ const CreateCampaign = ({
           size="large"
           label={translations.saveCampaign}
           onClick={() => onCreateCampaignClick({ colorSelected, campaignName })}
-          disabled={isSubmitButtonDisabled}
+          disabled={isSubmitButtonDisabled || isSaving}
           fullWidth
         />
         <Button
@@ -187,6 +188,7 @@ CreateCampaign.propTypes = {
   }).isRequired,
   onCreateCampaignClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
+  isSaving: PropTypes.bool.isRequired,
 };
 
 export default CreateCampaign;
