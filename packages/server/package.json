@@ -11,7 +11,7 @@
     "@bufferapp/buffer-rpc": "0.0.4",
     "@bufferapp/logger": "0.7.0",
     "@bufferapp/micro-rpc": "0.1.7",
-    "@bufferapp/session-manager": "0.7.1",
+    "@bufferapp/session-manager": "0.7.5",
     "@bufferapp/shutdown-helper": "0.2.0",
     "@bugsnag/js": "^5.0.1",
     "body-parser": "1.17.2",

@@ -17,6 +17,9 @@ describe('middleware', () => {
 
     const action = dataFetchActions.fetchSuccess({
       name: 'user',
+      result: {
+        features: [],
+      },
     });
 
     middleware(store)(next)(action);
@@ -27,6 +30,50 @@ describe('middleware', () => {
         args: {
           comprehensive: true,
         },
+      })
+    );
+  });
+
+  it('fetches Awesome to Pro upgrade details when user request is successful and user has feature flip', () => {
+    const store = {
+      dispatch: jest.fn(),
+      getState: () => ({ temporaryBanner: initialState }),
+    };
+
+    const action = dataFetchActions.fetchSuccess({
+      name: 'user',
+      result: {
+        features: ['awesome_pro_forced_upgrade_batch_1'],
+      },
+    });
+
+    middleware(store)(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'awesomeToProUpgradeDetails',
+      })
+    );
+  });
+
+  it('does not fetch Awesome to Pro upgrade details when user request is successful but user does not have the feature flip', () => {
+    const store = {
+      dispatch: jest.fn(),
+      getState: () => ({ temporaryBanner: initialState }),
+    };
+
+    const action = dataFetchActions.fetchSuccess({
+      name: 'user',
+      result: {
+        features: [],
+      },
+    });
+
+    middleware(store)(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).not.toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'awesomeToProUpgradeDetails',
       })
     );
   });

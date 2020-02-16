@@ -1,89 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { LinkifiedText, Text } from '@bufferapp/components';
-
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import DraftFooter from '../DraftFooter';
 import RetweetPanel from '../RetweetPanel';
-
 import RenderPostMetaBar from '../Post/RenderPostMetaBar';
-
-const RetweetCard = styled(Card)`
-  padding: 1rem;
-`;
-
-const RetweetCardContent = styled.span`
-  padding: 1rem;
-`;
 
 const postContentStyle = {
   padding: '1rem',
 };
 
-const retweetProfileWrapperStyle = {
-  marginBottom: '1rem',
-};
-
-const commentStyle = {
-  marginBottom: '1rem',
-};
-
-/* eslint-disable react/prop-types */
-const renderRetweetComment = ({
-  retweetComment,
-  retweetCommentLinks,
-  basic,
-}) => (
-  <div style={commentStyle}>
-    {basic ? (
-      <Text color="black" size="mini">
-        {retweetComment}
-      </Text>
-    ) : (
-      <LinkifiedText
-        links={retweetCommentLinks}
-        newTab
-        size="mini"
-        unstyled
-        color="black"
-      >
-        {retweetComment}
-      </LinkifiedText>
-    )}
-  </div>
-);
-
-const renderContent = ({
-  children,
-  retweetComment,
-  retweetCommentLinks,
-  retweetProfile,
-  basic,
-}) => {
-  if (retweetProfile) {
-    return (
-      <div style={postContentStyle}>
-        {retweetComment
-          ? renderRetweetComment({ retweetComment, retweetCommentLinks, basic })
-          : ''}
-        <RetweetCard>
-          <RetweetCardContent>
-            <div style={retweetProfileWrapperStyle}>
-              <RetweetPanel {...retweetProfile} />
-            </div>
-            {children}
-          </RetweetCardContent>
-        </RetweetCard>
-      </div>
-    );
-  }
-
-  return <div style={postContentStyle}>{children}</div>;
-};
-
-/* eslint-enable react/prop-types */
 const Draft = ({
   children,
   hasPermission,
@@ -116,13 +42,21 @@ const Draft = ({
       avatarUrl={draftDetails.avatarUrl}
       createdAt={draftDetails.createdAt}
     />
-    {renderContent({
-      children,
-      retweetProfile,
-      retweetComment,
-      retweetCommentLinks,
-      basic,
-    })}
+    {/* Draft Content */}
+    <div style={postContentStyle}>
+      {retweetProfile ? (
+        <RetweetPanel
+          retweetProfile={retweetProfile}
+          retweetComment={retweetComment}
+          retweetCommentLinks={retweetCommentLinks}
+          basic={basic}
+        >
+          {children}
+        </RetweetPanel>
+      ) : (
+        children
+      )}
+    </div>
     <RenderPostMetaBar
       profileService={profileService}
       locationName={geolocationName}
