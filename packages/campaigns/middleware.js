@@ -16,22 +16,29 @@ export default ({ dispatch, getState }) => next => action => {
         getState().appSidebar.user.features?.includes('campaigns') || false;
 
       if (hasCampaignsFlip) {
-        console.log('FETCHING MAIN ORG ', hasCampaignsFlip);
-        /*
         dispatch(
           dataFetchActions.fetch({
-            name: 'getUserMainOrganization',
+            name: 'getMainOrganization',
             args: {},
           })
-          );
-        */
+        );
       }
       break;
     }
+
+    case `getMainOrganization_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'error',
+          message: action.error,
+        })
+      );
+      break;
+
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
-      const { mainOrganization } = getState().user;
-      // const { mainOrganization } = getState().campaigns;
+      const { mainOrganization } = getState().campaigns;
+
       const organizationId = mainOrganization?._id;
       dispatch(
         dataFetchActions.fetch({
@@ -72,6 +79,7 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       break;
+
     case actionTypes.HANDLE_CAMPAIGN_ROUTED: {
       // const { campaignId } = action;
       dispatch(profileSidebarActions.handleCampaignsClick());

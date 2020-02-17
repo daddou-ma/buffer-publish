@@ -24,17 +24,12 @@ export default (state = initialState, action) => {
         ...state,
         isSaving: false,
       };
-    case `getUserMainOrganization_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      console.log('Main org is', action);
-      /*
-      const { mainOrganization } = action.result;
+    case `getMainOrganization_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const mainOrganization = action.result;
+
       return {
         ...state,
         mainOrganization,
-      };
-      */
-      return {
-        ...state,
       };
     }
     default:
