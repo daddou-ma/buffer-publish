@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import { actions } from './reducer';
-
 import CampaignsPage from './components/CampaignsPage';
 
 export default connect(
   state => ({
     campaigns: [],
     translations: state.i18n.translations.campaigns,
+    isOwner:
+      state.appSidebar.user.id === state.profileSidebar.selectedProfile.ownerId,
   }),
   dispatch => ({
     onCreateCampaignClick: ({ colorSelected, name }) => {

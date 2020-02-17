@@ -119,25 +119,44 @@ const Header = ({
     </CampaignDetails>
     <ButtonWrapper>
       <Button
-        onSelectClick={() => true}
-        onClick={() => true}
+        onClick={onCreatePostClick}
         type="secondary"
         isSplit
-        items={[
-          { id: '1', title: 'Creat Post' },
-          { id: '2', title: 'Edit Campaign' },
-          { id: '3', title: 'Delete Campaign' },
-        ]}
         label={translations.createPost}
+        onSelectClick={selectedItem => {
+          if (typeof selectedItem.selectedItemClick !== 'undefined') {
+            selectedItem.selectedItemClick();
+          }
+          return false;
+        }}
+        items={[
+          {
+            id: '1',
+            title: translations.createPost,
+            selectedItemClick: onCreatePostClick,
+          },
+          {
+            id: '2',
+            title: translations.editCampaign,
+            selectedItemClick: onEditCampaignClick,
+          },
+          {
+            id: '3',
+            title: translations.deleteCampaign,
+            selectedItemClick: onDeleteCampaignClick,
+          },
+        ]}
       />
-      <Button
-        type="secondary"
-        icon={<ArrowRightIcon />}
-        iconEnd
-        onClick={() => {}}
-        disabled={!hasPosts}
-        label={translations.viewReport}
-      />
+      {isOwner && (
+        <Button
+          type="secondary"
+          icon={<ArrowRightIcon />}
+          iconEnd
+          onClick={() => {}}
+          disabled={!hasPosts}
+          label={translations.viewReport}
+        />
+      )}
     </ButtonWrapper>
   </Container>
 );
