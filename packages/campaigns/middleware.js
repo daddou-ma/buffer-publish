@@ -11,9 +11,27 @@ import { actionTypes } from './reducer';
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const hasCampaignsFlip =
+        getState().appSidebar.user.features?.includes('campaigns') || false;
+
+      if (hasCampaignsFlip) {
+        console.log('FETCHING MAIN ORG ', hasCampaignsFlip);
+        /*
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'getUserMainOrganization',
+            args: {},
+          })
+          );
+        */
+      }
+      break;
+    }
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
       const { mainOrganization } = getState().user;
+      // const { mainOrganization } = getState().campaigns;
       const organizationId = mainOrganization?._id;
       dispatch(
         dataFetchActions.fetch({

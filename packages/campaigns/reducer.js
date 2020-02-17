@@ -8,6 +8,7 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
 
 export const initialState = {
   isSaving: false,
+  mainOrganization: {},
 };
 
 export default (state = initialState, action) => {
@@ -23,6 +24,19 @@ export default (state = initialState, action) => {
         ...state,
         isSaving: false,
       };
+    case `getUserMainOrganization_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      console.log('Main org is', action);
+      /*
+      const { mainOrganization } = action.result;
+      return {
+        ...state,
+        mainOrganization,
+      };
+      */
+      return {
+        ...state,
+      };
+    }
     default:
       return state;
   }
