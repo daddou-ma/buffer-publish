@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { BufferLoading } from '@bufferapp/publish-shared-components';
 import EmptyState from '../EmptyState';
+import CampaignsWrapper from '../CampaignsWrapper';
 import CreateCampaign from '../CreateCampaign';
 
 /* List of views available to be rendered */
@@ -13,10 +15,16 @@ const CampaignsPage = ({
   campaigns,
   onCreateCampaignClick,
   isSaving,
+  hasCampaignsFlip,
 }) => {
   const [viewMode, setViewMode] = useState(VIEW_CAMPAIGNS);
+
+  if (!hasCampaignsFlip) {
+    return <BufferLoading fullscreen />;
+  }
+
   return (
-    <React.Fragment>
+    <CampaignsWrapper>
       {viewMode === VIEW_CAMPAIGNS && campaigns.length === 0 && (
         <EmptyState
           translations={translations.emptyState}
@@ -31,7 +39,7 @@ const CampaignsPage = ({
           onCancelClick={() => setViewMode(VIEW_CAMPAIGNS)}
         />
       )}
-    </React.Fragment>
+    </CampaignsWrapper>
   );
 };
 
@@ -40,6 +48,11 @@ CampaignsPage.propTypes = {
   campaigns: PropTypes.array, // eslint-disable-line
   onCreateCampaignClick: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
+  hasCampaignsFlip: PropTypes.bool,
+};
+
+CampaignsPage.defaultProps = {
+  hasCampaignsFlip: false,
 };
 
 export default CampaignsPage;

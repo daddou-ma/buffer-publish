@@ -8,6 +8,9 @@ export default connect(
     campaigns: [],
     translations: state.i18n.translations.campaigns,
     isSaving: state.campaigns.isSaving,
+    hasCampaignsFlip: state.appSidebar.user.features
+      ? state.appSidebar.user.features.includes('campaigns')
+      : false,
   }),
   dispatch => ({
     onCreateCampaignClick: ({ colorSelected, campaignName }) => {

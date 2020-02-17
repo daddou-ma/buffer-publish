@@ -3,6 +3,7 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 
 export const actionTypes = keyWrapper('CAMPAIGNS', {
   CREATE_CAMPAIGN: 0,
+  HANDLE_CAMPAIGN_ROUTED: 0,
 });
 
 export const initialState = {
@@ -32,5 +33,9 @@ export const actions = {
     type: actionTypes.CREATE_CAMPAIGN,
     name,
     color,
+  }),
+  handleCampaignRouteLoaded: ({ campaignId }) => ({
+    type: actionTypes.HANDLE_CAMPAIGN_ROUTED,
+    campaignId,
   }),
 };

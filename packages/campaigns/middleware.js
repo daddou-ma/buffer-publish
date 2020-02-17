@@ -4,6 +4,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { actionTypes } from './reducer';
 
@@ -53,6 +54,11 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       break;
+    case actionTypes.HANDLE_CAMPAIGN_ROUTED: {
+      // const { campaignId } = action;
+      dispatch(profileSidebarActions.handleCampaignsClick());
+      break;
+    }
     default:
       break;
   }

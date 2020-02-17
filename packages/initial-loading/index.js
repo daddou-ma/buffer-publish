@@ -7,6 +7,7 @@ export default connect(state => ({
   hasNewPublish: state.initialLoading.hasNewPublish,
   loading: state.initialLoading.loading,
   onPaydayPage: state.initialLoading.onPaydayPage,
+  hasCampaignsFlip: state.initialLoading.hasCampaignsFlip,
 }))(InitialLoading);
 
 export reducer, { actions, actionTypes } from './reducer';
