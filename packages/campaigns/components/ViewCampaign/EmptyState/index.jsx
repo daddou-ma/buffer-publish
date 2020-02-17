@@ -53,17 +53,14 @@ const EmptyState = ({
       }}
       items={[
         {
-          id: '1',
           title: translations.createPost,
           selectedItemClick: onCreatePostClick,
         },
         {
-          id: '2',
           title: translations.editCampaign,
           selectedItemClick: onEditCampaignClick,
         },
         {
-          id: '3',
           title: translations.deleteCampaign,
           selectedItemClick: onDeleteCampaignClick,
         },
