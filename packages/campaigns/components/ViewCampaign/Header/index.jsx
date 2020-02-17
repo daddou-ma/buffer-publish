@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
@@ -18,6 +19,9 @@ import {
   SubText,
   Title,
 } from './style';
+
+const goToAnalyzeReport = () =>
+  window.location.assign(`${getURL.getAnalyzeReport()}`);
 
 const Header = ({
   translations,
@@ -94,7 +98,9 @@ const Header = ({
           type="secondary"
           icon={<ArrowRightIcon />}
           iconEnd
-          onClick={() => {}}
+          onClick={() => {
+            goToAnalyzeReport();
+          }}
           disabled={!hasPosts}
           label={translations.viewReport}
         />
