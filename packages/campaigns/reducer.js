@@ -5,6 +5,7 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
   CREATE_CAMPAIGN: 0,
   DELETE_CAMPAIGN: 0,
   EDIT_CAMPAIGN: 0,
+  HANDLE_CAMPAIGN_ROUTED: 0,
 });
 
 export const initialState = {};
@@ -32,6 +33,10 @@ export const actions = {
   }),
   handleEditCampaignClick: campaignId => ({
     type: actionTypes.EDIT_CAMPAIGN,
+    campaignId,
+  }),
+  handleCampaignRouteLoaded: ({ campaignId }) => ({
+    type: actionTypes.HANDLE_CAMPAIGN_ROUTED,
     campaignId,
   }),
 };

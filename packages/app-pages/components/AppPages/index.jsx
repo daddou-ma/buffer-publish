@@ -9,12 +9,14 @@ import {
   newBusinessTrialistsRoute,
   newConnectionRoute,
   generateProfilePageRoute,
+  campaignsPageRoute,
 } from '@bufferapp/publish-routes';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
+import Campaigns from '@bufferapp/publish-campaigns';
 
 const AppPages = ({ profiles, isOnBusinessTrial }) => {
   const hasProfiles = profiles && profiles.length > 0;
@@ -28,6 +30,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
     <Switch>
       <Route path={preferencePageRoute} component={Preferences} />
       <Route path={plansPageRoute} component={Plans} />
+      <Route path={campaignsPageRoute} component={Campaigns} />
 
       {!hasProfiles && (
         <Route path={newBusinessTrialistsRoute} component={OnboardingManager} />

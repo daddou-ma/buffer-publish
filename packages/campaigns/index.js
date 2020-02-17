@@ -8,6 +8,9 @@ export default connect(
     translations: state.i18n.translations.campaigns,
     isOwner:
       state.appSidebar.user.id === state.profileSidebar.selectedProfile.ownerId,
+    hasCampaignsFlip: state.appSidebar.user.features
+      ? state.appSidebar.user.features.includes('campaigns')
+      : false,
   }),
   dispatch => ({
     onCreateCampaignClick: ({ colorSelected, name }) => {
