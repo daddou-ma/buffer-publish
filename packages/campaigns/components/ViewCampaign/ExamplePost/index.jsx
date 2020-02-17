@@ -114,6 +114,4 @@ const ExamplePost = () => {
   );
 };
 
-ExamplePost.propTypes = {};
-
 export default ExamplePost;

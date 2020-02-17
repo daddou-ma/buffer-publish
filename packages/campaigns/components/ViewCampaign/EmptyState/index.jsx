@@ -29,23 +29,45 @@ const LinkButton = styled.div`
   margin-top: 10px;
 `;
 
-const EmptyState = ({ translations }) => (
+const EmptyState = ({
+  translations,
+  onCreatePostClick,
+  onDeleteCampaignClick,
+  onEditCampaignClick,
+}) => (
   <Container>
     <Text type="h1">{translations.title}</Text>
     <SubText>
       <Text type="p">{translations.subtext}</Text>
     </SubText>
     <Button
-      onSelectClick={() => true}
-      onClick={() => true}
+      onClick={onCreatePostClick}
       type="primary"
       isSplit
-      items={[
-        { id: '1', title: `${translations.createPost}` },
-        { id: '2', title: `${translations.editCampaign}` },
-        { id: '3', title: `${translations.deleteCampaign}` },
-      ]}
       label={translations.createPosts}
+      onSelectClick={selectedItem => {
+        if (typeof selectedItem.selectedItemClick !== 'undefined') {
+          selectedItem.selectedItemClick();
+        }
+        return false;
+      }}
+      items={[
+        {
+          id: '1',
+          title: translations.createPost,
+          selectedItemClick: onCreatePostClick,
+        },
+        {
+          id: '2',
+          title: translations.editCampaign,
+          selectedItemClick: onEditCampaignClick,
+        },
+        {
+          id: '3',
+          title: translations.deleteCampaign,
+          selectedItemClick: onDeleteCampaignClick,
+        },
+      ]}
     />
     <LinkButton>
       <Button label={translations.learnMore} type="link" />
@@ -63,6 +85,9 @@ EmptyState.propTypes = {
     editCampaign: PropTypes.string,
     deleteCampaign: PropTypes.string,
   }).isRequired,
+  onCreatePostClick: PropTypes.func.isRequired,
+  onDeleteCampaignClick: PropTypes.func.isRequired,
+  onEditCampaignClick: PropTypes.func.isRequired,
 };
 
 export default EmptyState;

@@ -6,36 +6,38 @@ import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import ViewCampaign from './index';
 
-console.log('translations', translations)
+const campaignDetails = {
+  name: '#SaveOurSeasWeek',
+  color: '#9C2BFF',
+  dateRange: 'Jan 5-18, 2020',
+  scheduled: '5 Scheduled',
+  sent: '2 Sent',
+  lastUpdated: 'Last updated 3 hours ago',
+};
 
 storiesOf('Campaigns|ViewCampaign', module)
   .addDecorator(withA11y)
   .add('Campaign view with posts', () => (
     <ViewCampaign
-      campaignDetails={{
-        name: '#SaveOurSeasWeek',
-        color: 'red',
-        dateRange: 'Jan 5-18, 2020',
-        scheduled: '5 Scheduled',
-        sent: '2 Sent',
-        lastUpdated: 'Last updated 3 hours ago',
-      }}
+      campaignDetails={campaignDetails}
       translations={translations.campaigns}
+      onCreatePostClick={action('create post')}
+      onDeleteCampaignClick={action('delete campaign')}
+      onEditCampaignClick={action('edit campaign')}
       hasPosts
+      isOwner
     />
   ))
   .add('Campaign view without posts', () => (
     <ViewCampaign
-      campaignDetails={{
-        name: '#SaveOurSeasWeek',
-        color: 'red',
-        dateRange: 'Jan 5-18, 2020',
-        scheduled: '5 Scheduled',
-        sent: '2 Sent',
-        lastUpdated: 'Last updated 3 hours ago',
-      }}
+      campaignDetails={campaignDetails}
       translations={translations.campaigns}
+      onCreatePostClick={action('create post')}
+      onDeleteCampaignClick={action('delete campaign')}
+      onEditCampaignClick={action('edit campaign')}
       hasPosts={false}
+      isOwner
     />
   ));
-  
+
+export default campaignDetails;

@@ -9,23 +9,50 @@ const Container = styled.div`
   margin: 18px;
 `;
 
-const ViewCampaign = ({ campaignDetails, hasPosts, translations }) => (
+const ViewCampaign = ({
+  campaignDetails,
+  hasPosts,
+  isOwner,
+  translations,
+  onCreatePostClick,
+  onDeleteCampaignClick,
+  onEditCampaignClick,
+}) => (
   <Container>
     <Header
       campaignDetails={campaignDetails}
       hasPosts={hasPosts}
+      isOwner={isOwner}
       translations={translations.viewCampaign}
+      onCreatePostClick={onCreatePostClick}
+      onDeleteCampaignClick={onDeleteCampaignClick}
+      onEditCampaignClick={onEditCampaignClick}
     />
-    <EmptyState translations={translations.viewCampaign} />
-    <ExamplePost />
-    <ExamplePost />
+    {hasPosts ? (
+      <h1>Posts</h1> // replace with posts view
+    ) : (
+      <React.Fragment>
+        <EmptyState
+          translations={translations.viewCampaign}
+          onCreatePostClick={onCreatePostClick}
+          onDeleteCampaignClick={onDeleteCampaignClick}
+          onEditCampaignClick={onEditCampaignClick}
+        />
+        <ExamplePost />
+        <ExamplePost />
+      </React.Fragment>
+    )}
   </Container>
 );
 
 ViewCampaign.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   campaignDetails: PropTypes.object.isRequired, // eslint-disable-line
+  isOwner: PropTypes.bool.isRequired,
   hasPosts: PropTypes.string.isRequired,
+  onCreatePostClick: PropTypes.func.isRequired,
+  onDeleteCampaignClick: PropTypes.func.isRequired,
+  onEditCampaignClick: PropTypes.func.isRequired,
 };
 
 export default ViewCampaign;

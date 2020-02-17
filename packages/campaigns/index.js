@@ -14,6 +14,15 @@ export default connect(
         actions.handleCreateCampaignClick({ name, color: colorSelected })
       );
     },
+    onCreatePostClick: campaignId => {
+      dispatch(actions.handleOpenComposer(campaignId));
+    },
+    onDeleteCampaignClick: campaignId => {
+      dispatch(actions.handleDeleteCampaignClick(campaignId));
+    },
+    onEditCampaignClick: campaignId => {
+      dispatch(actions.handleEditCampaignClick(campaignId));
+    },
   })
 )(CampaignsPage);
 

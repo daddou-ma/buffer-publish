@@ -74,7 +74,15 @@ const Icon = styled.div`
   }
 `;
 
-const Header = ({ translations, campaignDetails, hasPosts }) => (
+const Header = ({
+  translations,
+  campaignDetails,
+  isOwner,
+  hasPosts,
+  onCreatePostClick,
+  onDeleteCampaignClick,
+  onEditCampaignClick,
+}) => (
   <Container>
     <CampaignDetails>
       <Title>
@@ -138,6 +146,8 @@ Header.propTypes = {
   translations: PropTypes.shape({
     viewReport: PropTypes.string,
     createPost: PropTypes.string,
+    editCampaign: PropTypes.string,
+    deleteCampaign: PropTypes.string,
   }).isRequired,
   campaignDetails: PropTypes.shape({
     name: PropTypes.string,
@@ -148,6 +158,10 @@ Header.propTypes = {
     lastUpdated: PropTypes.string,
   }).isRequired,
   hasPosts: PropTypes.string.isRequired,
+  isOwner: PropTypes.bool.isRequired,
+  onCreatePostClick: PropTypes.func.isRequired,
+  onDeleteCampaignClick: PropTypes.func.isRequired,
+  onEditCampaignClick: PropTypes.func.isRequired,
 };
 
 export default Header;
