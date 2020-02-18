@@ -11,16 +11,42 @@ import { actionTypes } from './reducer';
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const hasCampaignsFlip =
+        getState().appSidebar.user.features?.includes('campaigns') || false;
+
+      if (hasCampaignsFlip) {
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'getMainOrganization',
+            args: {},
+          })
+        );
+      }
+      break;
+    }
+
+    case `getMainOrganization_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'error',
+          message: action.error,
+        })
+      );
+      break;
+
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
-      const { id } = getState().user;
+      const { mainOrganization } = getState().campaigns;
+
+      const organizationId = mainOrganization?._id;
       dispatch(
         dataFetchActions.fetch({
           name: 'createCampaign',
           args: {
             name,
             color,
-            id,
+            organizationId,
           },
         })
       );
@@ -53,6 +79,7 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       break;
+
     case actionTypes.HANDLE_CAMPAIGN_ROUTED: {
       // const { campaignId } = action;
       dispatch(profileSidebarActions.handleCampaignsClick());
