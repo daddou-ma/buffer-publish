@@ -14,6 +14,7 @@ const CampaignsPage = ({
   translations,
   campaigns,
   onCreateCampaignClick,
+  isSaving,
   hasCampaignsFlip,
 }) => {
   const [viewMode, setViewMode] = useState(VIEW_CAMPAIGNS);
@@ -32,6 +33,7 @@ const CampaignsPage = ({
       )}
       {viewMode === CREATE_CAMPAIGN && (
         <CreateCampaign
+          isSaving={isSaving}
           translations={translations.createCampaign}
           onCreateCampaignClick={onCreateCampaignClick}
           onCancelClick={() => setViewMode(VIEW_CAMPAIGNS)}
@@ -45,6 +47,7 @@ CampaignsPage.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   campaigns: PropTypes.array, // eslint-disable-line
   onCreateCampaignClick: PropTypes.func.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool,
 };
 

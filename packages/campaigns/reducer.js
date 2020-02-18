@@ -1,5 +1,6 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('CAMPAIGNS', {
   CREATE_CAMPAIGN: 0,
@@ -8,10 +9,32 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
   HANDLE_CAMPAIGN_ROUTED: 0,
 });
 
-export const initialState = {};
+export const initialState = {
+  isSaving: false,
+  mainOrganization: {},
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.CREATE_CAMPAIGN: {
+      return {
+        ...state,
+        isSaving: true,
+      };
+    }
+    case `createCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        isSaving: false,
+      };
+    case `getMainOrganization_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { mainOrganization = {}, isOrgAdmin } = action.result || {};
+
+      return {
+        ...state,
+        mainOrganization,
+      };
+    }
     default:
       return state;
   }
