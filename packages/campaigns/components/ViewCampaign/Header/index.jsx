@@ -6,6 +6,7 @@ import { getURL } from '@bufferapp/publish-server/formatters/src';
 import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 import ListIcon from '@bufferapp/ui/Icon/Icons/List';
+import CalendarIcon from '@bufferapp/ui/Icon/Icons/Calendar';
 
 import {
   ButtonWrapper,
@@ -43,7 +44,7 @@ const Header = ({
           <Details>
             <Group>
               <Icon>
-                <ClockIcon size="medium" />
+                <CalendarIcon size="medium" />
               </Icon>
               <Text type="p">{campaignDetails.dateRange}</Text>
             </Group>
