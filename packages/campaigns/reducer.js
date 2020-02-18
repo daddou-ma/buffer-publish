@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
         isSaving: false,
       };
     case `getMainOrganization_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const mainOrganization = action.result;
+      const { mainOrganization, isOrgAdmin } = action.result;
 
       return {
         ...state,

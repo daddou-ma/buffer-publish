@@ -23,6 +23,8 @@ module.exports = method(
       throw err;
     }
     result = JSON.parse(result);
-    return Promise.resolve(result.data);
+    result.mainOrganization = result.data.main_organization;
+    result.isOrgAdmin = result.data.is_org_admin;
+    return Promise.resolve(result);
   }
 );
