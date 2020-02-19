@@ -11,7 +11,6 @@ import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
   next(action);
-  let message = null;
   switch (action.type) {
     case actionTypes.CONNECT_BITLY:
       window.location = getURL.getConnectBitlyURL(action.profileId);
@@ -64,12 +63,13 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       break;
-    case `saveGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      if (action.result.showNotification) {
-        message = action.result.message;
-      }
+    case `saveGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const message = action.result.showNotification
+        ? action.result.message
+        : null;
       refreshProfile(dispatch, action.args.profileId, message);
       break;
+    }
     case actionTypes.SAVE_GA_CUSTOM_FORM:
       dispatch(
         asyncDataFetch.fetch({

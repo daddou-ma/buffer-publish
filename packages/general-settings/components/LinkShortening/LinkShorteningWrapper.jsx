@@ -50,7 +50,7 @@ const LinkShorteningWrapper = ({
   isManager,
 }) => {
   const selectedValue =
-    selectedShortener || (linkList && linkList.filter(ll => ll.selected));
+    selectedShortener || linkList?.filter(ll => ll.selected);
 
   return (
     <div style={containerStyling}>
@@ -75,8 +75,8 @@ const LinkShorteningWrapper = ({
             <Select
               options={linkList}
               onChange={onOptionSelect}
-              value={selectedValue && selectedValue[0].value}
-              size={'small'}
+              value={selectedValue?.[0]?.value}
+              size="small"
               disabled={!isManager}
             />
           </div>
