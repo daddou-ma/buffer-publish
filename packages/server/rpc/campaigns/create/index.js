@@ -1,5 +1,6 @@
 const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
+const { campaignParser } = require('../../../parsers/src');
 
 module.exports = method(
   'createCampaign',
@@ -26,6 +27,7 @@ module.exports = method(
       throw err;
     }
     result = JSON.parse(result);
-    return Promise.resolve(result.data);
+    const campaign = campaignParser(result.data);
+    return Promise.resolve(campaign);
   }
 );

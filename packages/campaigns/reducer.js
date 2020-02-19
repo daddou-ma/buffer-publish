@@ -12,6 +12,8 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
 export const initialState = {
   isSaving: false,
   mainOrganization: {},
+  campaignId: null,
+  campaignPage: 'campaigns',
 };
 
 export default (state = initialState, action) => {
@@ -22,6 +24,19 @@ export default (state = initialState, action) => {
         isSaving: true,
       };
     }
+    case actionTypes.HANDLE_CAMPAIGN_ROUTED: {
+      const { campaignId, campaignPage = 'campaigns' } = action;
+      return {
+        ...state,
+        campaignId,
+        campaignPage,
+      };
+    }
+    case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        isSaving: false,
+      };
     case `createCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
@@ -58,8 +73,9 @@ export const actions = {
     type: actionTypes.EDIT_CAMPAIGN,
     campaignId,
   }),
-  handleCampaignRouteLoaded: ({ campaignId }) => ({
+  handleCampaignRouteLoaded: ({ campaignId, campaignPage }) => ({
     type: actionTypes.HANDLE_CAMPAIGN_ROUTED,
     campaignId,
+    campaignPage,
   }),
 };

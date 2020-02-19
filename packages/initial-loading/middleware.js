@@ -69,12 +69,13 @@ export default ({ getState, dispatch }) => next => action => {
       const campaignParams = getCampaignPageParams({
         path,
       });
-      if (campaignParams && campaignParams.campaigns) {
+      if (campaignParams?.campaigns) {
         const { hasCampaignsFlip } = getState().initialLoading;
         if (hasCampaignsFlip) {
           dispatch(
             campaignsActions.handleCampaignRouteLoaded({
               campaignId: campaignParams.campaignId,
+              campaignPage: campaignParams.campaignPage,
             })
           );
         } else {

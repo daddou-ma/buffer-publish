@@ -45,6 +45,7 @@ export const preferencePageRoute = generatePreferencePageRoute({
 });
 
 export const campaignsPageRoute = '/campaigns';
+export const campaignsCreateRoute = '/campaigns/create';
 
 export const generateCampaignPageRoute = ({ campaignId }) =>
   `/campaigns/${campaignId}`;
@@ -53,7 +54,8 @@ export const campaignRoute = generateCampaignPageRoute({
   campaignId: ':campaignId',
 });
 
-const campaignRouteRegex = /campaigns\/?(\w+)?/;
+// const campaignRouteRegex = /campaigns\/?(\w+)?/;
+const campaignRouteRegex = /\bcampaigns\b\/?(\w+)?\/?(\w+)?/;
 export const getCampaignPageParams = ({ path }) => {
   const match = campaignRouteRegex.exec(path);
   if (!match) {
@@ -62,6 +64,7 @@ export const getCampaignPageParams = ({ path }) => {
   return {
     campaigns: match[0],
     campaignId: match[1],
+    campaignPage: match[2],
   };
 };
 

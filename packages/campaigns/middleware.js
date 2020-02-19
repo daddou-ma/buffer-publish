@@ -2,10 +2,12 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
+import { push } from 'connected-react-router';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import { generateCampaignPageRoute } from '@bufferapp/publish-routes';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
@@ -54,12 +56,13 @@ export default ({ dispatch, getState }) => next => action => {
     }
     // Complete once changes to the backend endpoint are made:
     case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { id, name, color, organizationId } = action.result || {};
       const metadata = {
-        campaignId: '',
-        campaignName: '',
-        campaignColor: '',
+        campaignId: id,
+        campaignName: name,
+        campaignColor: color,
         cta: SEGMENT_NAMES.STORIES_PREVIEW_QUEUE_ADD_NOTE,
-        organizationId: '',
+        organizationId,
       };
       dispatch(analyticsActions.trackEvent('Campaign Created', metadata));
       dispatch(
@@ -68,6 +71,16 @@ export default ({ dispatch, getState }) => next => action => {
           message: 'Great! Your new  campaign was created!',
         })
       );
+
+      if (id) {
+        dispatch(
+          push(
+            generateCampaignPageRoute({
+              campaignId: id,
+            })
+          )
+        );
+      }
       break;
     }
 
