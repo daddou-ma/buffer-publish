@@ -47,11 +47,12 @@ export const preferencePageRoute = generatePreferencePageRoute({
 export const campaignsPageRoute = '/campaigns';
 export const campaignsCreateRoute = '/campaigns/new';
 
-export const generateCampaignPageRoute = ({ campaignId }) =>
-  `/campaigns/${campaignId}`;
+export const generateCampaignPageRoute = ({ campaignId, campaignPage }) =>
+  `/campaigns/${campaignId}/${campaignPage}`;
 
 export const campaignRoute = generateCampaignPageRoute({
   campaignId: ':campaignId',
+  campaignPage: ':campaignPage',
 });
 
 export const campaignPages = {

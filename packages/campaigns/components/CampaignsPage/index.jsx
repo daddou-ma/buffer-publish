@@ -18,7 +18,7 @@ const useSetCampaignPage = ({ campaignPage, setViewMode }) => {
       case campaignPages.NEW:
         setViewMode(CREATE_CAMPAIGN);
         break;
-      case campaignPages.SCHEDULED:
+      case campaignPages.VIEW:
         setViewMode(VIEW_CAMPAIGN);
         break;
       case campaignPages.CAMPAIGNS:

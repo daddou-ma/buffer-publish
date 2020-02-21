@@ -7,7 +7,10 @@ import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
-import { generateCampaignPageRoute } from '@bufferapp/publish-routes';
+import {
+  generateCampaignPageRoute,
+  campaignPages,
+} from '@bufferapp/publish-routes';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
@@ -77,6 +80,7 @@ export default ({ dispatch, getState }) => next => action => {
           push(
             generateCampaignPageRoute({
               campaignId: id,
+              campaignPage: campaignPages.VIEW,
             })
           )
         );
