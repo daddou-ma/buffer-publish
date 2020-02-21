@@ -4,13 +4,14 @@ import {
   getCampaignPageParams,
   campaignsCreateRoute,
   campaignsPageRoute,
+  campaignPages,
 } from '@bufferapp/publish-routes';
 import { actions } from './reducer';
 import CampaignsPage from './components/CampaignsPage';
 
 export default connect(
   (state, ownProps) => {
-    const { campaignId, campaignPage = 'campaigns' } =
+    const { campaignId, campaignPage = campaignPages.CAMPAIGNS } =
       getCampaignPageParams({ path: ownProps.history.location.pathname }) || {};
     return {
       campaigns: [],
