@@ -7,6 +7,7 @@ import PostStats from '../PostStats';
 import RenderPostMetaBar from './RenderPostMetaBar';
 import PostErrorBanner from '../PostErrorBanner';
 import RetweetPanel from '../RetweetPanel';
+import CampaignTag from '../../campaigns/components/CampaignTag';
 
 const getPostContainerStyle = ({ dragging, hovering }) => ({
   display: 'flex',
@@ -141,6 +142,8 @@ const Post = ({
   features,
   basic,
   hasUserTags,
+  campaignName,
+  campaignColor,
 }) => {
   const hasError =
     postDetails && postDetails.error && postDetails.error.length > 0;
@@ -191,6 +194,13 @@ const Post = ({
               children
             )}
           </div>
+
+          <CampaignTag
+            campaignName={campaignName}
+            campaignColor={campaignColor}
+            dragging={dragging}
+          />
+
           <RenderPostMetaBar
             profileService={profileService}
             dragging={dragging}
