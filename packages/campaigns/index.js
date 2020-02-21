@@ -3,14 +3,10 @@ import { push } from 'connected-react-router';
 import {
   getCampaignPageParams,
   campaignsCreateRoute,
+  campaignsPageRoute,
 } from '@bufferapp/publish-routes';
 import { actions } from './reducer';
 import CampaignsPage from './components/CampaignsPage';
-
-/*
-campaignId: state.campaigns.campaignId,
-campaignPage: state.campaigns.campaignPage,
-*/
 
 export default connect(
   (state, ownProps) => {
@@ -32,11 +28,12 @@ export default connect(
     };
   },
   dispatch => ({
-    /*
     onOpenCreateCampaignClick: () => {
       dispatch(push(campaignsCreateRoute));
     },
-    */
+    onCancelCreateCampaignClick: () => {
+      dispatch(push(campaignsPageRoute));
+    },
     onCreateCampaignClick: ({ colorSelected, campaignName }) => {
       dispatch(
         actions.handleCreateCampaignClick({

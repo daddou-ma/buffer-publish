@@ -1,6 +1,7 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { campaignPages } from '@bufferapp/publish-routes';
 
 export const actionTypes = keyWrapper('CAMPAIGNS', {
   CREATE_CAMPAIGN: 0,
@@ -25,7 +26,7 @@ export default (state = initialState, action) => {
       };
     }
     case actionTypes.HANDLE_CAMPAIGN_ROUTED: {
-      const { campaignId, campaignPage = 'campaigns' } = action;
+      const { campaignId, campaignPage = campaignPages.CAMPAIGNS } = action;
       return {
         ...state,
         campaignId,
