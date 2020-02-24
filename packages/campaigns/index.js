@@ -21,6 +21,7 @@ export default connect(
         state.profileSidebar.selectedProfile.ownerId,
       isSaving: state.campaigns.isSaving,
       campaignId,
+      campaignDetails: state.campaigns.campaignDetails,
       selectedPage,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')

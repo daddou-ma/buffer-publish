@@ -24,6 +24,7 @@ const CampaignsPage = ({
   isSaving,
   hasCampaignsFlip,
   selectedPage,
+  campaignDetails,
 }) => {
   const [viewMode, setViewMode] = useState(campaignPages.VIEW_ALL_CAMPAIGNS);
   useSetCampaignPage({ selectedPage, setViewMode });
@@ -36,7 +37,7 @@ const CampaignsPage = ({
     <CampaignsWrapper>
       {viewMode === campaignPages.VIEW_CAMPAIGN && (
         <ViewCampaign
-          campaignDetails={{ id: 1 }}
+          campaignDetails={campaignDetails}
           hasPosts={false}
           isOwner
           translations={translations}
@@ -74,10 +75,16 @@ CampaignsPage.propTypes = {
   selectedPage: PropTypes.string.isRequired,
   onOpenCreateCampaignClick: PropTypes.func.isRequired,
   onCancelCreateCampaignClick: PropTypes.func.isRequired,
+  campaignDetails: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    color: PropTypes.string,
+  }),
 };
 
 CampaignsPage.defaultProps = {
   hasCampaignsFlip: false,
+  campaignDetails: {},
 };
 
 export default CampaignsPage;

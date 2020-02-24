@@ -13,6 +13,7 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
 export const initialState = {
   isSaving: false,
   mainOrganization: {},
+  campaignDetails: {},
   campaignId: null,
   selectedPage: 'campaigns',
 };
@@ -36,11 +37,14 @@ export default (state = initialState, action) => {
         selectedPage,
       };
     }
-    case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const campaignDetails = action.result || {};
       return {
         ...state,
         isSaving: false,
+        campaignDetails,
       };
+    }
     case `createCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
