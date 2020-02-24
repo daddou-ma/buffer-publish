@@ -195,11 +195,13 @@ const Post = ({
             )}
           </div>
 
-          <CampaignTag
-            campaignName={campaignName}
-            campaignColor={campaignColor}
-            dragging={dragging}
-          />
+          {campaignName && (
+            <CampaignTag
+              campaignName={campaignName}
+              campaignColor={campaignColor}
+              dragging={dragging}
+            />
+          )}
 
           <RenderPostMetaBar
             profileService={profileService}
