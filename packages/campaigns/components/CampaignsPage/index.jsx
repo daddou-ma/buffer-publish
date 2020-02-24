@@ -1,42 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
-import EmptyState from '../EmptyState';
+import { campaignPages } from '@bufferapp/publish-routes';
 import CampaignsWrapper from '../CampaignsWrapper';
 import CreateCampaign from '../CreateCampaign';
+import ViewCampaign from '../ViewCampaign';
+import ListCampaigns from '../ListCampaigns';
 
-/* List of views available to be rendered */
-const CREATE_CAMPAIGN = 'createCampaign';
-const VIEW_CAMPAIGNS = 'viewCampaigns';
+const useSetCampaignPage = ({ selectedPage, setViewMode }) => {
+  useEffect(() => {
+    const currentPage = selectedPage || campaignPages.VIEW_ALL_CAMPAIGNS;
+    setViewMode(currentPage);
+  });
+};
 
 /* Component */
 const CampaignsPage = ({
   translations,
   campaigns,
+  onOpenCreateCampaignClick,
+  onCancelCreateCampaignClick,
   onCreateCampaignClick,
   isSaving,
   hasCampaignsFlip,
+  selectedPage,
+  campaignDetails,
 }) => {
-  const [viewMode, setViewMode] = useState(VIEW_CAMPAIGNS);
+  const [viewMode, setViewMode] = useState(campaignPages.VIEW_ALL_CAMPAIGNS);
+  useSetCampaignPage({ selectedPage, setViewMode });
 
-  if (!hasCampaignsFlip) {
+  if (!hasCampaignsFlip || isSaving) {
     return <BufferLoading fullscreen />;
   }
 
   return (
     <CampaignsWrapper>
-      {viewMode === VIEW_CAMPAIGNS && campaigns.length === 0 && (
-        <EmptyState
-          translations={translations.emptyState}
-          onOpenCreateCampaignClick={() => setViewMode(CREATE_CAMPAIGN)}
+      {viewMode === campaignPages.VIEW_CAMPAIGN && (
+        <ViewCampaign
+          campaignDetails={campaignDetails}
+          hasPosts={false}
+          isOwner
+          translations={translations}
+          onCreatePostClick={() => {}}
+          onDeleteCampaignClick={() => {}}
+          onEditCampaignClick={() => {}}
         />
       )}
-      {viewMode === CREATE_CAMPAIGN && (
+      {viewMode === campaignPages.VIEW_ALL_CAMPAIGNS && (
+        <ListCampaigns
+          campaigns={campaigns}
+          translations={translations}
+          onOpenCampaign={() => setViewMode(campaignPages.VIEW_CAMPAIGN)}
+          onOpenCreateCampaignClick={onOpenCreateCampaignClick}
+        />
+      )}
+      {viewMode === campaignPages.CREATE_CAMPAIGN && (
         <CreateCampaign
           isSaving={isSaving}
           translations={translations.createCampaign}
           onCreateCampaignClick={onCreateCampaignClick}
-          onCancelClick={() => setViewMode(VIEW_CAMPAIGNS)}
+          onCancelClick={onCancelCreateCampaignClick}
         />
       )}
     </CampaignsWrapper>
@@ -49,10 +72,19 @@ CampaignsPage.propTypes = {
   onCreateCampaignClick: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool,
+  selectedPage: PropTypes.string.isRequired,
+  onOpenCreateCampaignClick: PropTypes.func.isRequired,
+  onCancelCreateCampaignClick: PropTypes.func.isRequired,
+  campaignDetails: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    color: PropTypes.string,
+  }),
 };
 
 CampaignsPage.defaultProps = {
   hasCampaignsFlip: false,
+  campaignDetails: {},
 };
 
 export default CampaignsPage;

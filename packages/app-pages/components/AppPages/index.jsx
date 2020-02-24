@@ -9,6 +9,8 @@ import {
   newBusinessTrialistsRoute,
   newConnectionRoute,
   generateProfilePageRoute,
+  campaignRoute,
+  campaignsCreateRoute,
   campaignsPageRoute,
 } from '@bufferapp/publish-routes';
 import ProfilePage from '@bufferapp/profile-page';
@@ -30,7 +32,9 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
     <Switch>
       <Route path={preferencePageRoute} component={Preferences} />
       <Route path={plansPageRoute} component={Plans} />
+      <Route path={campaignRoute} component={Campaigns} />
       <Route path={campaignsPageRoute} component={Campaigns} />
+      <Route path={campaignsCreateRoute} component={Campaigns} />
 
       {!hasProfiles && (
         <Route path={newBusinessTrialistsRoute} component={OnboardingManager} />

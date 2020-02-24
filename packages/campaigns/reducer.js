@@ -1,6 +1,7 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { campaignPages } from '@bufferapp/publish-routes';
 
 export const actionTypes = keyWrapper('CAMPAIGNS', {
   CREATE_CAMPAIGN: 0,
@@ -12,6 +13,9 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
 export const initialState = {
   isSaving: false,
   mainOrganization: {},
+  campaignDetails: {},
+  campaignId: null,
+  selectedPage: 'campaigns',
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +24,25 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isSaving: true,
+      };
+    }
+    case actionTypes.HANDLE_CAMPAIGN_ROUTED: {
+      const {
+        campaignId,
+        selectedPage = campaignPages.VIEW_ALL_CAMPAIGNS,
+      } = action;
+      return {
+        ...state,
+        campaignId,
+        selectedPage,
+      };
+    }
+    case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const campaignDetails = action.result || {};
+      return {
+        ...state,
+        isSaving: false,
+        campaignDetails,
       };
     }
     case `createCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
@@ -58,8 +81,9 @@ export const actions = {
     type: actionTypes.EDIT_CAMPAIGN,
     campaignId,
   }),
-  handleCampaignRouteLoaded: ({ campaignId }) => ({
+  handleCampaignRouteLoaded: ({ campaignId, selectedPage }) => ({
     type: actionTypes.HANDLE_CAMPAIGN_ROUTED,
     campaignId,
+    selectedPage,
   }),
 };

@@ -45,23 +45,55 @@ export const preferencePageRoute = generatePreferencePageRoute({
 });
 
 export const campaignsPageRoute = '/campaigns';
+export const campaignsCreateRoute = '/campaigns/new';
 
-export const generateCampaignPageRoute = ({ campaignId }) =>
-  `/campaigns/${campaignId}`;
+export const generateCampaignPageRoute = ({ campaignId, selectedPage }) =>
+  `/campaigns/${campaignId}/${selectedPage}`;
 
 export const campaignRoute = generateCampaignPageRoute({
   campaignId: ':campaignId',
+  selectedPage: ':selectedPage',
 });
 
-const campaignRouteRegex = /campaigns\/?(\w+)?/;
+export const campaignPages = {
+  CREATE_CAMPAIGN: 'new',
+  EDIT_CAMPAIGN: 'edit',
+  VIEW_CAMPAIGN: 'scheduled',
+  VIEW_ALL_CAMPAIGNS: 'campaigns',
+};
+
+const isCampaignsHome = match => match === campaignPages.VIEW_ALL_CAMPAIGNS;
+const isCampaignsCreate = match => match === campaignPages.CREATE_CAMPAIGN;
+
+export const getCampaignPageFromMatch = match => {
+  const fullUrl = match[0];
+  const firstMatch = match[1];
+  const secondMatch = match[2];
+
+  if (isCampaignsHome(fullUrl)) return campaignPages.VIEW_ALL_CAMPAIGNS;
+  if (isCampaignsCreate(firstMatch)) return campaignPages.CREATE_CAMPAIGN;
+  if (!secondMatch && !isCampaignsCreate(firstMatch)) return campaignPages.VIEW_CAMPAIGN;
+
+  return secondMatch;
+};
+
+const campaignRouteRegex = /campaigns\/?(\w+)?\/?(\w+)?/;
+export const getCampaignUrlMatch = ({ path }) => campaignRouteRegex.exec(path);
+
 export const getCampaignPageParams = ({ path }) => {
-  const match = campaignRouteRegex.exec(path);
+  const match = getCampaignUrlMatch({ path });
+
   if (!match) {
     return null;
   }
+
+  const campaignPage = getCampaignPageFromMatch(match);
+  const campaignId = !isCampaignsCreate(match[1]) ? match[1] : null;
+
   return {
     campaigns: match[0],
-    campaignId: match[1],
+    campaignId,
+    selectedPage: campaignPage,
   };
 };
 
