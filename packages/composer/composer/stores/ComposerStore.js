@@ -770,6 +770,16 @@ const updateDraftImageUserTags = monitorComposerLastInteractedWith(
   }
 );
 
+const updateDraftCampaignId = monitorComposerLastInteractedWith(
+  (id, campaignId) => {
+    const draft = ComposerStore.getDraft(id);
+    if (draft) {
+      draft.campaignId = campaignId;
+    }
+  }
+);
+
+
 const updateDraftScheduledAt = monitorComposerLastInteractedWith(
   (id, timestamp, isPinnedToSlot = false) => {
     const draft = ComposerStore.getDraft(id);
@@ -2210,6 +2220,12 @@ const onDispatchedPayload = payload => {
       });
       break;
 
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_CAMPAIGN_ID:
+      state.drafts.forEach(draft =>
+        updateDraftCampaignId(draft.id, action && action.campaignId)
+      );
+      break;
+
     case ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR:
       updateToggleSidebarVisibility(action.id, action.composerSidebarVisible);
       break;
@@ -2354,6 +2370,10 @@ const onDispatchedPayload = payload => {
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_IMAGE_USER_TAGS:
       updateDraftImageUserTags(action.id, action && action.userTags);
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_DRAFT_CAMPAIGN_ID:
+      updateDraftCampaignId(action.id, action && action.campaignId);
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_TEMP_IMAGE:

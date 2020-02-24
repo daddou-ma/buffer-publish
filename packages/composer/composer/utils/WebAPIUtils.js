@@ -808,6 +808,11 @@ function getFormattedAPIData(serviceName, unformattedData) {
         userTags && userTags.length ? userTags : null;
     }
 
+    const { campaignId } = serviceDraft;
+    if (serviceDraft.service.hasCampaignsFlip) {
+      conditionalFields.campaign_id = campaignId;
+    }
+
     if (hasEnabledRetweetAttachment) {
       const retweet = serviceDraft.retweet;
 

@@ -267,6 +267,13 @@ const loadInitialMetaData = metaData => {
     });
   }
 
+  if (metaData.campaignId) {
+    AppDispatcher.handleViewAction({
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_CAMPAIGN_ID,
+      campaignId: metaData.campaignId,
+    });
+  }
+
   if (metaData.locationId && metaData.locationName) {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_LOCATION,

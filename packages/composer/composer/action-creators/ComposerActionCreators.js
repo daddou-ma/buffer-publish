@@ -390,6 +390,13 @@ const ComposerActionCreators = {
     });
   },
 
+  updateDraftCampaignId: campaignId => {
+    AppDispatcher.handleViewAction({
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_CAMPAIGN_ID,
+      campaignId,
+    });
+  },
+
   updateDraftLinkThumbnail: (id, thumbnail) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_LINK_THUMBNAIL,
