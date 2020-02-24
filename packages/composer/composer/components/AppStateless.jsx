@@ -192,6 +192,9 @@ class AppStateless extends React.Component {
       omniboxEnabled,
     });
 
+    const shouldDisplayCampaignHeader =
+      userData?.hasCampaignsFlip && userData?.isProUpOrTeamMember && !draftMode;
+
     return (
       <div
         ref={appElementRef}
@@ -228,7 +231,16 @@ class AppStateless extends React.Component {
           role="button"
           tabIndex={0}
         >
-          {userData?.hasCampaignsFlip && <CampaignHeader />}
+          {shouldDisplayCampaignHeader && (
+            <CampaignHeader
+              // dummy data
+              campaigns={[
+                { name: '#SaveOurSeasWeek', color: '#9C2BFF', id: 1 },
+                { name: 'Hello World', color: 'blue', id: 2 },
+              ]}
+            />
+          )}
+
           <ExtensionComponents
             draggingAnchorRef={draggingAnchorRef}
             onCloseButtonClick={onCloseButtonClick}
@@ -263,7 +275,7 @@ class AppStateless extends React.Component {
               userData.hasIGLocationTaggingFeature || false
             }
             hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
-            hasAccessToUserTag={userData.hasAccessToUserTag || false}
+            isProUpOrTeamMember={userData.isProUpOrTeamMember || false}
             hasShopgridFlip={userData.hasShopgridFlip || false}
             hasCampaignsFlip={userData.hasCampaignsFlip || false}
             isFreeUser={userData.isFreeUser || false}

@@ -118,7 +118,7 @@ module.exports = userData => ({
   isAwesomePromoUser:
     userData.features.includes('legacy_awesome_monthly_promotion') &&
     userData.plan === 'awesome',
-  hasAccessToUserTag: userData.is_pro_and_up_org_user, // this includes team members
+  isProUpOrTeamMember: userData.is_pro_and_up_org_user, // this includes team members
   isAnalyzeCustomer: userData.is_analyze_customer,
   canSeePaydayPage: userData.features.includes('awesome_user_can_visit_payday'),
 });

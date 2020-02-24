@@ -56,14 +56,9 @@ const getLabel = campaign => (
   </LabelWrapper>
 );
 
-const CampaignHeader = ({
-  campaigns = [
-    { name: '#SaveOurSeasWeek', color: '#9C2BFF', id: 1 },
-    { name: 'Hello World', color: 'blue', id: 2 },
-  ],
-}) => {
+const CampaignHeader = ({ campaigns = [] }) => {
   const [selected, setSelected] = useState(
-    campaigns?.length > 0 ? campaigns[0] : { name: 'No campaigns' }
+    campaigns?.length > 0 ? campaigns[0] : { name: 'None selected' }
   );
   const disabled = campaigns?.length < 1;
 
@@ -94,12 +89,10 @@ const CampaignHeader = ({
       <SelectWrapper>
         <Select
           type="secondary"
-          label={getLabel(selected)}
+          label={selected.name}
+          icon={disabled ? null : <Color color={selected.color} />}
+          component={getLabel(selected)}
           disabled={disabled}
-          keyMap={{
-            title: 'title',
-            selectedItemClick: () => {},
-          }}
           onSelectClick={selectedItem => {
             if (typeof selectedItem.selectedItemClick !== 'undefined') {
               selectedItem.selectedItemClick();
