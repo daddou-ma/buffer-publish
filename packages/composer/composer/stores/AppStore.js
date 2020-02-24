@@ -164,6 +164,7 @@ const getNewUserData = data => ({
   canStartProTrial: data.canStartProTrial,
   isOnProTrial: data.isOnProTrial,
   hasShopgridFlip: data.hasShopgridFlip,
+  hasCampaignsFlip: data.hasCampaignsFlip,
   hasAccessToUserTag: data.hasAccessToUserTag,
 });
 

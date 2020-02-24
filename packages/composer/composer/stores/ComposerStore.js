@@ -2222,7 +2222,7 @@ const onDispatchedPayload = payload => {
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_CAMPAIGN_ID:
       state.drafts.forEach(draft =>
-        updateDraftCampaignId(draft.id, action && action.campaignId)
+        updateDraftCampaignId(draft.id, action?.campaignId)
       );
       break;
 
@@ -2373,7 +2373,7 @@ const onDispatchedPayload = payload => {
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_CAMPAIGN_ID:
-      updateDraftCampaignId(action.id, action && action.campaignId);
+      updateDraftCampaignId(action.id, action?.campaignId);
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_TEMP_IMAGE:

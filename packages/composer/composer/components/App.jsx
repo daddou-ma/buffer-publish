@@ -92,6 +92,7 @@ class App extends React.Component {
       weekStartsMonday: PropTypes.bool.isRequired,
       isFreeUser: PropTypes.bool.isRequired,
       hasIGDirectFlip: PropTypes.bool.isRequired,
+      hasCampaignsFlip: PropTypes.bool.isRequired,
       hasAccessToUserTag: PropTypes.bool.isRequired,
       hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
       hasIGDirectVideoFlip: PropTypes.bool.isRequired,
@@ -220,6 +221,7 @@ class App extends React.Component {
       canStartProTrial: false,
       isOnProTrial: false,
       hasIGDirectVideoFlip: false,
+      hasCampaignsFlip: false,
       hasAccessToUserTag: false,
     },
     options: {
@@ -433,6 +435,7 @@ class App extends React.Component {
         availableSchedulesSlotsForDay={this.state.availableSchedulesSlotsForDay}
         sentPost={this.props.options.sentPost}
         draftMode={this.props.draftMode}
+        hasCampaignsFlip={this.props.hasCampaignsFlip}
       />
     );
   }

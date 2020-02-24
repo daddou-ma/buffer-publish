@@ -13,6 +13,7 @@ import styles from './css/App.css';
 import ExtensionComponents from './ExtensionComponents';
 import { isOnExtension } from '../utils/extension';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
+import CampaignHeader from './campaigns/CampaignHeader';
 
 class AppStateless extends React.Component {
   constructor(props) {
@@ -227,6 +228,7 @@ class AppStateless extends React.Component {
           role="button"
           tabIndex={0}
         >
+          {userData?.hasCampaignsFlip && <CampaignHeader />}
           <ExtensionComponents
             draggingAnchorRef={draggingAnchorRef}
             onCloseButtonClick={onCloseButtonClick}
@@ -263,6 +265,7 @@ class AppStateless extends React.Component {
             hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
             hasAccessToUserTag={userData.hasAccessToUserTag || false}
             hasShopgridFlip={userData.hasShopgridFlip || false}
+            hasCampaignsFlip={userData.hasCampaignsFlip || false}
             isFreeUser={userData.isFreeUser || false}
             isBusinessUser={userData.isBusinessUser || false}
             canStartProTrial={userData.canStartProTrial || false}
@@ -331,6 +334,7 @@ AppStateless.propTypes = {
   isPinnedToSlot: PropTypes.bool,
   sentPost: PropTypes.bool,
   draftMode: PropTypes.bool,
+  hasCampaignsFlip: PropTypes.bool,
 };
 
 AppStateless.defaultProps = {
