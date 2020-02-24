@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Button } from '@bufferapp/ui';
+import { gray } from '@bufferapp/ui/style/colors';
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border: 1px solid #b8b8b8;
+  border: 1px solid ${gray};
   border-radius: 4px;
   padding: 28px 20px;
   background-image: url('https://s3.amazonaws.com/buffer-publish/images/campaigns-yellow-background.svg'),
