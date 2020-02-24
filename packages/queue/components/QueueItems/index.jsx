@@ -91,6 +91,7 @@ const renderPost = ({
   hasPushNotifications,
   onSetRemindersClick,
 }) => {
+  // const campaignId = post.campaign_id;
   const postWithEventHandlers = {
     ...post,
     key: post.id,
@@ -105,6 +106,7 @@ const renderPost = ({
     onImageClickPrev: () => onImageClickPrev({ post }),
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
+    // onCampaignTagClick: () => onCampaignTagClick({ campaignId }),
     onDropPost,
     onSwapPosts,
     hasFirstCommentFlip,

@@ -496,6 +496,10 @@ export const actions = {
     post,
     profileId,
   }),
+  handleCampaignTagClick: ({ campaignId }) => ({
+    type: actionTypes.VIEW_CAMPAIGN_PAGE,
+    campaignId,
+  }),
   handleComposerPlaceholderClick: () => ({
     type: actionTypes.OPEN_COMPOSER,
   }),

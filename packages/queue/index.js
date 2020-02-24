@@ -123,6 +123,13 @@ export default connect(
         })
       );
     },
+    onCampaignTagClick: campaignId => {
+      dispatch(
+        actions.handleCampaignTagClick({
+          campaignId,
+        })
+      );
+    },
     onShareNowClick: post => {
       dispatch(
         actions.handleShareNowClick({
