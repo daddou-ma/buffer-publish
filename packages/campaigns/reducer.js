@@ -14,7 +14,7 @@ export const initialState = {
   isSaving: false,
   mainOrganization: {},
   campaignId: null,
-  campaignPage: 'campaigns',
+  selectedPage: 'campaigns',
 };
 
 export default (state = initialState, action) => {
@@ -26,11 +26,14 @@ export default (state = initialState, action) => {
       };
     }
     case actionTypes.HANDLE_CAMPAIGN_ROUTED: {
-      const { campaignId, campaignPage = campaignPages.CAMPAIGNS } = action;
+      const {
+        campaignId,
+        selectedPage = campaignPages.VIEW_ALL_CAMPAIGNS,
+      } = action;
       return {
         ...state,
         campaignId,
-        campaignPage,
+        selectedPage,
       };
     }
     case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
@@ -74,9 +77,9 @@ export const actions = {
     type: actionTypes.EDIT_CAMPAIGN,
     campaignId,
   }),
-  handleCampaignRouteLoaded: ({ campaignId, campaignPage }) => ({
+  handleCampaignRouteLoaded: ({ campaignId, selectedPage }) => ({
     type: actionTypes.HANDLE_CAMPAIGN_ROUTED,
     campaignId,
-    campaignPage,
+    selectedPage,
   }),
 };

@@ -80,7 +80,7 @@ export default ({ dispatch, getState }) => next => action => {
           push(
             generateCampaignPageRoute({
               campaignId: id,
-              campaignPage: campaignPages.VIEW,
+              selectedPage: campaignPages.VIEW_CAMPAIGN,
             })
           )
         );

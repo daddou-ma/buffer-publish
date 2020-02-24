@@ -136,7 +136,7 @@ describe('publish-routes', () => {
       expect(getCampaignPageParams({ path })).toEqual({
         campaigns: 'campaigns',
         campaignId: undefined,
-        campaignPage: 'campaigns',
+        selectedPage: 'campaigns',
       });
     });
 
@@ -145,7 +145,7 @@ describe('publish-routes', () => {
       expect(getCampaignPageParams({ path })).toEqual({
         campaigns: 'campaigns/new',
         campaignId: null,
-        campaignPage: 'new',
+        selectedPage: 'new',
       });
     });
 
@@ -155,7 +155,7 @@ describe('publish-routes', () => {
       expect(getCampaignPageParams({ path })).toEqual({
         campaigns: 'campaigns/123456',
         campaignId: '123456',
-        campaignPage: 'scheduled',
+        selectedPage: 'scheduled',
       });
     });
 
@@ -165,7 +165,7 @@ describe('publish-routes', () => {
       expect(getCampaignPageParams({ path })).toEqual({
         campaigns: 'campaigns/123456/scheduled',
         campaignId: '123456',
-        campaignPage: 'scheduled',
+        selectedPage: 'scheduled',
       });
     });
 
@@ -175,7 +175,7 @@ describe('publish-routes', () => {
       expect(getCampaignPageParams({ path })).toEqual({
         campaigns: 'campaigns/123456/sent',
         campaignId: '123456',
-        campaignPage: 'sent',
+        selectedPage: 'sent',
       });
     });
 
@@ -185,7 +185,7 @@ describe('publish-routes', () => {
       expect(getCampaignPageParams({ path })).toEqual({
         campaigns: 'campaigns/123456/edit',
         campaignId: '123456',
-        campaignPage: 'edit',
+        selectedPage: 'edit',
       });
     });
   });

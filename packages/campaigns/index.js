@@ -11,7 +11,7 @@ import CampaignsPage from './components/CampaignsPage';
 
 export default connect(
   (state, ownProps) => {
-    const { campaignId, campaignPage = campaignPages.CAMPAIGNS } =
+    const { campaignId, selectedPage = campaignPages.VIEW_ALL_CAMPAIGNS } =
       getCampaignPageParams({ path: ownProps.history.location.pathname }) || {};
     return {
       campaigns: [],
@@ -21,7 +21,7 @@ export default connect(
         state.profileSidebar.selectedProfile.ownerId,
       isSaving: state.campaigns.isSaving,
       campaignId,
-      campaignPage,
+      selectedPage,
       selectedCampaignId: campaignId,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')

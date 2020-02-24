@@ -47,32 +47,32 @@ export const preferencePageRoute = generatePreferencePageRoute({
 export const campaignsPageRoute = '/campaigns';
 export const campaignsCreateRoute = '/campaigns/new';
 
-export const generateCampaignPageRoute = ({ campaignId, campaignPage }) =>
-  `/campaigns/${campaignId}/${campaignPage}`;
+export const generateCampaignPageRoute = ({ campaignId, selectedPage }) =>
+  `/campaigns/${campaignId}/${selectedPage}`;
 
 export const campaignRoute = generateCampaignPageRoute({
   campaignId: ':campaignId',
-  campaignPage: ':campaignPage',
+  selectedPage: ':selectedPage',
 });
 
 export const campaignPages = {
-  NEW: 'new',
-  EDIT: 'edit',
-  VIEW: 'scheduled',
-  CAMPAIGNS: 'campaigns',
+  CREATE_CAMPAIGN: 'new',
+  EDIT_CAMPAIGN: 'edit',
+  VIEW_CAMPAIGN: 'scheduled',
+  VIEW_ALL_CAMPAIGNS: 'campaigns',
 };
 
-const isCampaignsHome = match => match === campaignPages.CAMPAIGNS;
-const isCampaignsCreate = match => match === campaignPages.NEW;
+const isCampaignsHome = match => match === campaignPages.VIEW_ALL_CAMPAIGNS;
+const isCampaignsCreate = match => match === campaignPages.CREATE_CAMPAIGN;
 
 export const getCampaignPageFromMatch = match => {
   const fullUrl = match[0];
   const firstMatch = match[1];
   const secondMatch = match[2];
 
-  if (isCampaignsHome(fullUrl)) return campaignPages.CAMPAIGNS;
-  if (isCampaignsCreate(firstMatch)) return campaignPages.NEW;
-  if (!secondMatch && !isCampaignsCreate(firstMatch)) return campaignPages.VIEW;
+  if (isCampaignsHome(fullUrl)) return campaignPages.VIEW_ALL_CAMPAIGNS;
+  if (isCampaignsCreate(firstMatch)) return campaignPages.CREATE_CAMPAIGN;
+  if (!secondMatch && !isCampaignsCreate(firstMatch)) return campaignPages.VIEW_CAMPAIGN;
 
   return secondMatch;
 };
@@ -93,7 +93,7 @@ export const getCampaignPageParams = ({ path }) => {
   return {
     campaigns: match[0],
     campaignId,
-    campaignPage,
+    selectedPage: campaignPage,
   };
 };
 

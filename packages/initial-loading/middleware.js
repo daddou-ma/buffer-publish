@@ -75,7 +75,7 @@ export default ({ getState, dispatch }) => next => action => {
           dispatch(
             campaignsActions.handleCampaignRouteLoaded({
               campaignId: campaignParams.campaignId,
-              campaignPage: campaignParams.campaignPage,
+              selectedPage: campaignParams.selectedPage,
             })
           );
         } else {

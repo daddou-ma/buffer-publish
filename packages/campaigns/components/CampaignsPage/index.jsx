@@ -7,27 +7,10 @@ import CreateCampaign from '../CreateCampaign';
 import ViewCampaign from '../ViewCampaign';
 import ListCampaigns from '../ListCampaigns';
 
-/* List of views available to be rendered */
-const CREATE_CAMPAIGN = 'createCampaign';
-const VIEW_ALL_CAMPAIGNS = 'viewAllCampaigns';
-const VIEW_CAMPAIGN = 'viewCampaign';
-
-const useSetCampaignPage = ({ campaignPage, setViewMode }) => {
+const useSetCampaignPage = ({ selectedPage, setViewMode }) => {
   useEffect(() => {
-    switch (campaignPage) {
-      case campaignPages.NEW:
-        setViewMode(CREATE_CAMPAIGN);
-        break;
-      case campaignPages.VIEW:
-        setViewMode(VIEW_CAMPAIGN);
-        break;
-      case campaignPages.CAMPAIGNS:
-        setViewMode(VIEW_ALL_CAMPAIGNS);
-        break;
-      default:
-        setViewMode(VIEW_ALL_CAMPAIGNS);
-        break;
-    }
+    const currentPage = selectedPage || campaignPages.VIEW_ALL_CAMPAIGNS;
+    setViewMode(currentPage);
   });
 };
 
@@ -40,10 +23,10 @@ const CampaignsPage = ({
   onCreateCampaignClick,
   isSaving,
   hasCampaignsFlip,
-  campaignPage,
+  selectedPage,
 }) => {
-  const [viewMode, setViewMode] = useState(VIEW_ALL_CAMPAIGNS);
-  useSetCampaignPage({ campaignPage, setViewMode });
+  const [viewMode, setViewMode] = useState(campaignPages.VIEW_ALL_CAMPAIGNS);
+  useSetCampaignPage({ selectedPage, setViewMode });
 
   if (!hasCampaignsFlip || isSaving) {
     return <BufferLoading fullscreen />;
@@ -51,7 +34,7 @@ const CampaignsPage = ({
 
   return (
     <CampaignsWrapper>
-      {viewMode === VIEW_CAMPAIGN && (
+      {viewMode === campaignPages.VIEW_CAMPAIGN && (
         <ViewCampaign
           campaignDetails={{ id: 1 }}
           hasPosts={false}
@@ -62,15 +45,15 @@ const CampaignsPage = ({
           onEditCampaignClick={() => {}}
         />
       )}
-      {viewMode === VIEW_ALL_CAMPAIGNS && (
+      {viewMode === campaignPages.VIEW_ALL_CAMPAIGNS && (
         <ListCampaigns
           campaigns={campaigns}
           translations={translations}
-          onOpenCampaign={() => setViewMode(VIEW_CAMPAIGN)}
+          onOpenCampaign={() => setViewMode(campaignPages.VIEW_CAMPAIGN)}
           onOpenCreateCampaignClick={onOpenCreateCampaignClick}
         />
       )}
-      {viewMode === CREATE_CAMPAIGN && (
+      {viewMode === campaignPages.CREATE_CAMPAIGN && (
         <CreateCampaign
           isSaving={isSaving}
           translations={translations.createCampaign}
@@ -88,7 +71,7 @@ CampaignsPage.propTypes = {
   onCreateCampaignClick: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool,
-  campaignPage: PropTypes.string.isRequired,
+  selectedPage: PropTypes.string.isRequired,
   onOpenCreateCampaignClick: PropTypes.func.isRequired,
   onCancelCreateCampaignClick: PropTypes.func.isRequired,
 };
