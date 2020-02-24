@@ -22,7 +22,6 @@ export default connect(
       isSaving: state.campaigns.isSaving,
       campaignId,
       selectedPage,
-      selectedCampaignId: campaignId,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')
         : false,
