@@ -1,14 +1,14 @@
-const rp = require('request-promise');
+const rpCall = require('./');
 
 const get = ({ uri, session, params = {} }) => {
-  return rp({
-    uri: `${process.env.API_ADDR}/${uri}`,
+  return rpCall({
+    uri,
     method: 'GET',
-    json: true,
-    strictSSL: !(process.env.NODE_ENV === 'development'),
-    qs: {
-      access_token: session.publish.accessToken,
-      ...params,
+    options: {
+      qs: {
+        access_token: session.publish.accessToken,
+        ...params,
+      },
     },
   });
 };
