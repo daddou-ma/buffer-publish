@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Link } from '@bufferapp/components';
-import { white } from '@bufferapp/components/style/color';
+import { white, red, redDark } from '@bufferapp/ui/style/colors';
 
 const errorWrapperStyle = dragging => ({
-  backgroundColor: '#E0364F', // get color name from new design system when rolled out
+  backgroundColor: red, // get color name from new design system when rolled out
   padding: '8px 16px',
   color: white,
   display: 'flex',
@@ -22,7 +22,7 @@ const errorMessageStyle = link => ({
 
 const errorButtonStyle = {
   whiteSpace: 'nowrap',
-  backgroundColor: '#9D2637',
+  backgroundColor: redDark,
   padding: '0 8px',
   height: '32px',
   display: 'flex',

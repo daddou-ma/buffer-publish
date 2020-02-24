@@ -6,7 +6,7 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import PreviewPopover from '@bufferapp/publish-story-preview';
 import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
-import { blue } from '@bufferapp/ui/style/colors';
+import { blue, red } from '@bufferapp/ui/style/colors';
 import {
   QueueItems,
   BufferLoading,
@@ -55,10 +55,8 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
-/* this color red https://bufferapp.github.io/ui/#/ui/Guides/colors isn't the same
-red as the @bufferapp/ui/style/colors */
 const StyledWarningIcon = styled(WarningIcon)`
-  fill: #e0364f;
+  fill: ${red};
 `;
 
 const getReminderMessage = ({
