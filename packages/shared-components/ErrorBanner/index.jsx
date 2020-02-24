@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Button } from '@bufferapp/ui';
-import { gray, white } from '@bufferapp/ui/style/colors';
+import { gray, white, red, transparent } from '@bufferapp/ui/style/colors';
 import { Warning } from '@bufferapp/ui/Icon';
 
 const ErrorBannerCard = styled.div`
@@ -20,8 +20,8 @@ const ErrorBannerCard = styled.div`
 
 const Triangle = styled.div`
   position: absolute;
-  border-top: 74px solid #e0364f;
-  border-right: 74px solid transparent;
+  border-top: 74px solid ${red};
+  border-right: 74px solid ${transparent};
   top: 0;
   left: 0;
 `;

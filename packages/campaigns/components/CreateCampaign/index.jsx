@@ -15,6 +15,7 @@ import {
   white,
   purple,
   pink,
+  pinkLighter,
   orange,
   yellow,
   green,
@@ -74,7 +75,7 @@ const LinkText = styled(Text)`
 const colors = [
   { color: purple, colorName: 'purple' },
   { color: pink, colorName: 'pink' },
-  { color: '#F0A8DE', colorName: 'pink lighter' }, // add to BDS
+  { color: pinkLighter, colorName: 'pink lighter' },
   { color: orange, colorName: 'orange' },
   { color: yellow, colorName: 'yellow' },
   { color: green, colorName: 'green' },

@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { SidebarListItem } from '@bufferapp/ui';
 import { Warning, Locked } from '@bufferapp/ui/Icon';
-import { grayLight, grayDarker, transparent } from '@bufferapp/ui/style/colors';
+import {
+  grayLight,
+  grayDarker,
+  transparent,
+  red,
+} from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
 const ListItemContainer = styled.div`
@@ -59,7 +64,7 @@ const ProfileListItem = ({
           locked ? (
             <Locked color={grayDarker} />
           ) : disconnected ? (
-            <Warning color="#E0364F" />
+            <Warning color={red} />
           ) : null
         }
         /* eslint-enable no-nested-ternary */
