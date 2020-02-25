@@ -63,6 +63,7 @@ const MultipleImagesPost = ({
   onSetRemindersClick,
   campaignName,
   campaignColor,
+  onCampaignTagClick,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
@@ -146,6 +147,7 @@ const MultipleImagesPost = ({
       onSetRemindersClick={onSetRemindersClick}
       campaignName={campaignName}
       campaignColor={campaignColor}
+      onCampaignTagClick={onCampaignTagClick}
     >
       {children}
     </Post>

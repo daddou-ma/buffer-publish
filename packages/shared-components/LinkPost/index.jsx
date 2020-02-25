@@ -73,6 +73,7 @@ const LinkPost = ({
   onSetRemindersClick,
   campaignName,
   campaignColor,
+  onCampaignTagClick,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -168,6 +169,7 @@ const LinkPost = ({
       basic={basic}
       campaignName={campaignName}
       campaignColor={campaignColor}
+      onCampaignTagClick={onCampaignTagClick}
     >
       {children}
     </Post>

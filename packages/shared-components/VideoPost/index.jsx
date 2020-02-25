@@ -47,6 +47,7 @@ const VideoPost = ({
   onSetRemindersClick,
   campaignName,
   campaignColor,
+  onCampaignTagClick,
 }) => (
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
@@ -94,6 +95,7 @@ const VideoPost = ({
     onSetRemindersClick={onSetRemindersClick}
     campaignName={campaignName}
     campaignColor={campaignColor}
+    onCampaignTagClick={onCampaignTagClick}
   />
 );
 

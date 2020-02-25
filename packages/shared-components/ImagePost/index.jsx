@@ -91,6 +91,7 @@ const ImagePost = ({
   service_user_tags: userTags,
   campaignName,
   campaignColor,
+  onCampaignTagClick,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -181,6 +182,7 @@ const ImagePost = ({
       hasUserTags={userTags}
       campaignName={campaignName}
       campaignColor={campaignColor}
+      onCampaignTagClick={onCampaignTagClick}
     >
       {children}
     </Post>
