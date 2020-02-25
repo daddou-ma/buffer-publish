@@ -7,7 +7,11 @@ import {
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as campaignsActions } from '@bufferapp/publish-campaigns/reducer';
-import { campaignPages } from '@bufferapp/publish-routes';
+import {
+  campaignPages,
+  generateCampaignPageRoute,
+} from '@bufferapp/publish-routes';
+import { push } from 'connected-react-router';
 import { actionTypes, actions } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
@@ -156,6 +160,14 @@ export default ({ dispatch, getState }) => next => action => {
           campaignId: action.campaignId,
           selectedPage: campaignPages.VIEW_CAMPAIGN,
         })
+      );
+      dispatch(
+        push(
+          generateCampaignPageRoute({
+            campaignId: action.campaignId,
+            selectedPage: campaignPages.VIEW_CAMPAIGN,
+          })
+        )
       );
       break;
     case `sharePostNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
