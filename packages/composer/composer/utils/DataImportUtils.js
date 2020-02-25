@@ -303,7 +303,7 @@ const DataImportUtils = {
           locationId: update.service_geolocation_id || null,
           locationName: update.service_geolocation_name || null,
           userTags: update.service_user_tags || null,
-          campaignId: update.service_campaign_id || null,
+          campaignId: update.campaignId || null,
           facebookMentionEntities: update.entities || null,
           commentEnabled: update.commentEnabled,
           commentText: update.commentText || null,

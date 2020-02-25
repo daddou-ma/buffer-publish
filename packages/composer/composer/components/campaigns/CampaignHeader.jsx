@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
 import Select from '@bufferapp/ui/Select';
@@ -56,16 +56,23 @@ const getLabel = campaign => (
   </LabelWrapper>
 );
 
-const CampaignHeader = ({ campaigns = [] }) => {
+export const getSelected = ({ campaigns, campaignId }) => {
+  const selected = campaignId
+    ? campaigns.find(campaign => campaign?.id === campaignId)
+    : campaigns[0];
+  return selected || { name: 'None selected' };
+};
+
+const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
+  const hasCampaigns = campaigns?.length > 1;
   const [selected, setSelected] = useState(
-    campaigns?.length > 0 ? campaigns[0] : { name: 'None selected' }
+    getSelected({ campaigns, campaignId })
   );
-  const disabled = campaigns?.length < 1;
 
   const updateCampaignId = campaign => {
     setSelected(campaign);
-    if (selected.id) {
-      ComposerActionCreators.updateDraftCampaignId(selected.id);
+    if (campaign.id) {
+      ComposerActionCreators.updateDraftsCampaignId(campaign.id);
     }
   };
 
@@ -77,6 +84,13 @@ const CampaignHeader = ({ campaigns = [] }) => {
       },
     }));
   };
+
+  useEffect(() => {
+    if (!campaignId && hasCampaigns) {
+      // select a campaign on default
+      updateCampaignId(selected);
+    }
+  }, []);
 
   return (
     <Container>
@@ -90,9 +104,9 @@ const CampaignHeader = ({ campaigns = [] }) => {
         <Select
           type="secondary"
           label={selected.name}
-          icon={disabled ? null : <Color color={selected.color} />}
+          icon={hasCampaigns ? <Color color={selected.color} /> : null}
           component={getLabel(selected)}
-          disabled={disabled}
+          disabled={!hasCampaigns}
           onSelectClick={selectedItem => {
             if (typeof selectedItem.selectedItemClick !== 'undefined') {
               selectedItem.selectedItemClick();
@@ -109,6 +123,8 @@ const CampaignHeader = ({ campaigns = [] }) => {
 CampaignHeader.propTypes = {
   // eslint-disable-next-line react/require-default-props
   campaigns: PropTypes.arrayOf({}),
+  // eslint-disable-next-line react/require-default-props
+  campaignId: PropTypes.string,
 };
 
 export default CampaignHeader;

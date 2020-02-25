@@ -390,9 +390,17 @@ const ComposerActionCreators = {
     });
   },
 
-  updateDraftCampaignId: campaignId => {
+  updateDraftCampaignId: (id, campaignId) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_CAMPAIGN_ID,
+      id,
+      campaignId,
+    });
+  },
+
+  updateDraftsCampaignId: campaignId => {
+    AppDispatcher.handleViewAction({
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_CAMPAIGN_ID,
       campaignId,
     });
   },

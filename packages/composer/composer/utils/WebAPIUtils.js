@@ -722,7 +722,7 @@ function getFormattedAPIData(serviceName, unformattedData) {
           },
         };
       } else if (hasVideoAttachment) {
-        const video = serviceDraft.video;
+        const { video } = serviceDraft;
 
         formattedMediaFields = {
           ...formattedMediaFields,
@@ -809,8 +809,8 @@ function getFormattedAPIData(serviceName, unformattedData) {
     }
 
     const { campaignId } = serviceDraft;
-    if (serviceDraft.service.hasCampaignsFlip) {
-      conditionalFields.campaign_id = campaignId;
+    if (campaignId) {
+      conditionalFields.campaignId = campaignId;
     }
 
     if (hasEnabledRetweetAttachment) {

@@ -235,9 +235,10 @@ class AppStateless extends React.Component {
             <CampaignHeader
               // dummy data
               campaigns={[
-                { name: '#SaveOurSeasWeek', color: '#9C2BFF', id: 1 },
-                { name: 'Hello World', color: 'blue', id: 2 },
+                { name: '#SaveOurSeasWeek', color: '#9C2BFF', id: "1" },
+                { name: 'Hello World', color: 'blue', id: "2" },
               ]}
+              campaignId={metaData.campaignId}
             />
           )}
 
