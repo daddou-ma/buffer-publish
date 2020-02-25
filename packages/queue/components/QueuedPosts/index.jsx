@@ -73,6 +73,7 @@ const QueuedPosts = ({
   hasAtLeastOneReminderPost,
   onComposerOverlayClick,
   onSetRemindersClick,
+  onCampaignTagClick,
 }) => {
   if (loading) {
     return (
@@ -169,6 +170,7 @@ const QueuedPosts = ({
           hasPushNotifications={hasPushNotifications}
           onSetRemindersClick={onSetRemindersClick}
           isBusinessAccount={isBusinessAccount}
+          onCampaignTagClick={onCampaignTagClick}
         />
       </div>
     </ErrorBoundary>

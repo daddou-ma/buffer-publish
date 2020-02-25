@@ -218,5 +218,6 @@ module.exports = post => {
     commentText: post.comment_text,
     campaignName: '#SaveOurSeas Week',
     campaignColor: '#9400D3',
+    campaign_id: '123',
   };
 };

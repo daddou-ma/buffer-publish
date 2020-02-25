@@ -23,6 +23,7 @@ export const actionTypes = keyWrapper('QUEUE', {
   POSTS_SWAPPED: 0,
   REORDERED_UPDATES: 0,
   POST_REQUEUE: 0,
+  VIEW_CAMPAIGN_PAGE: 0,
 });
 
 export const initialState = {

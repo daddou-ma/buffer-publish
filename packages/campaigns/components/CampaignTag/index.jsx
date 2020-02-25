@@ -16,11 +16,16 @@ const CampaignButton = styled(Button)`
   background-color: ${props => props.campaignColor};
 `;
 
-const CampaignTag = ({ campaignName, campaignColor, dragging }) => {
+const CampaignTag = ({
+  campaignName,
+  campaignColor,
+  dragging,
+  onCampaignTagClick,
+}) => {
   return (
     <CampaignButton
       type="primary"
-      onClick={() => {}}
+      onClick={onCampaignTagClick}
       label={campaignName}
       dragging={dragging}
       campaignColor={campaignColor}
@@ -32,6 +37,7 @@ CampaignTag.propTypes = {
   campaignName: PropTypes.string.isRequired,
   campaignColor: PropTypes.string.isRequired,
   dragging: PropTypes.bool.isRequired,
+  onCampaignTagClick: PropTypes.func.isRequired,
 };
 
 export default CampaignTag;

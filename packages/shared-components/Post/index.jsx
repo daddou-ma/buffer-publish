@@ -144,6 +144,7 @@ const Post = ({
   hasUserTags,
   campaignName,
   campaignColor,
+  onCampaignTagClick,
 }) => {
   const hasError =
     postDetails && postDetails.error && postDetails.error.length > 0;
@@ -200,6 +201,7 @@ const Post = ({
               campaignName={campaignName}
               campaignColor={campaignColor}
               dragging={dragging}
+              onCampaignTagClick={onCampaignTagClick}
             />
           )}
 

@@ -22,6 +22,7 @@ const TextPost = ({
   onEditClick,
   onShareNowClick,
   onRequeueClick,
+  onCampaignTagClick,
   postDetails,
   text,
   retweetProfile,
@@ -124,6 +125,7 @@ const TextPost = ({
       basic={basic}
       campaignName={campaignName}
       campaignColor={campaignColor}
+      onCampaignTagClick={onCampaignTagClick}
     >
       {children}
     </Post>
