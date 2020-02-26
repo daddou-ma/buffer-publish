@@ -34,6 +34,11 @@ const ModalContainer = styled.div`
   margin: 0 16px;
 `;
 
+const Container = styled.div`
+  position: fixed;
+  z-index: 3000;
+`;
+
 const ProfilesDisconnectedModal = ({
   translations,
   disconnectedProfiles,
@@ -41,9 +46,9 @@ const ProfilesDisconnectedModal = ({
   hideModal,
   extraMessage,
 }) => (
-  <div style={{ position: 'fixed', zIndex: '3000' }}>
+  <Container>
     <Popover onOverlayClick={hideModal}>
-      <Card>
+      <Card reducedPadding>
         <ModalContainer>
           <Text type="h3">{translations.headline}</Text>
           <Text type="p">{translations.body1}</Text>
@@ -84,7 +89,7 @@ const ProfilesDisconnectedModal = ({
         </ModalContainer>
       </Card>
     </Popover>
-  </div>
+  </Container>
 );
 
 ProfilesDisconnectedModal.propTypes = {

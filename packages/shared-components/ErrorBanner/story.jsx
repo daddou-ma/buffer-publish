@@ -20,16 +20,16 @@ const content = (
 storiesOf('ErrorBanner', module)
   .addDecorator(withA11y)
   .add('without button', () => (
-    <ErrorBanner
-      title="Uh-oh! Some of your content can't be published."
-      content={content}
-    />
+    <ErrorBanner title="Uh-oh! Some of your content can't be published.">
+      {content}
+    </ErrorBanner>
   ))
   .add('with button', () => (
     <ErrorBanner
       title="Uh-oh! Some of your content can't be published."
-      content={content}
       onClick={action('on-click')}
       actionLabel="Set Up Reminders"
-    />
+    >
+      {content}
+    </ErrorBanner>
   ));
