@@ -89,9 +89,9 @@ const ImagePost = ({
   hasPushNotifications,
   onSetRemindersClick,
   service_user_tags: userTags,
-  campaignName,
-  campaignColor,
+  campaignDetails,
   onCampaignTagClick,
+  hasCampaignsFeature,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -180,9 +180,9 @@ const ImagePost = ({
       hasPushNotifications={hasPushNotifications}
       onSetRemindersClick={onSetRemindersClick}
       hasUserTags={userTags}
-      campaignName={campaignName}
-      campaignColor={campaignColor}
+      campaignDetails={campaignDetails}
       onCampaignTagClick={onCampaignTagClick}
+      hasCampaignsFeature={hasCampaignsFeature}
     >
       {children}
     </Post>

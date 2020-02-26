@@ -142,9 +142,9 @@ const Post = ({
   features,
   basic,
   hasUserTags,
-  campaignName,
-  campaignColor,
+  campaignDetails,
   onCampaignTagClick,
+  hasCampaignsFeature,
 }) => {
   const hasError =
     postDetails && postDetails.error && postDetails.error.length > 0;
@@ -196,10 +196,10 @@ const Post = ({
             )}
           </div>
 
-          {campaignName && (
+          {hasCampaignsFeature && campaignDetails && (
             <CampaignTag
-              campaignName={campaignName}
-              campaignColor={campaignColor}
+              campaignName={campaignDetails.name}
+              campaignColor={campaignDetails.color}
               dragging={dragging}
               onCampaignTagClick={onCampaignTagClick}
             />

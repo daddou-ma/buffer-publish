@@ -14,6 +14,7 @@ const CampaignButton = styled(Button)`
   line-height: 16px;
   opacity: ${props => (props.dragging ? 0 : 1)};
   background-color: ${props => props.campaignColor};
+  border-color: ${props => props.campaignColor};
 `;
 
 const CampaignTag = ({

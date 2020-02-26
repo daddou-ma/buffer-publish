@@ -45,9 +45,9 @@ const VideoPost = ({
   hasFirstCommentFlip,
   hasPushNotifications,
   onSetRemindersClick,
-  campaignName,
-  campaignColor,
+  campaignDetails,
   onCampaignTagClick,
+  hasCampaignsFeature,
 }) => (
   <ImagePost
     isConfirmingDelete={isConfirmingDelete}
@@ -93,9 +93,9 @@ const VideoPost = ({
     hasFirstCommentFlip={hasFirstCommentFlip}
     hasPushNotifications={hasPushNotifications}
     onSetRemindersClick={onSetRemindersClick}
-    campaignName={campaignName}
-    campaignColor={campaignColor}
+    campaignDetails={campaignDetails}
     onCampaignTagClick={onCampaignTagClick}
+    hasCampaignsFeature={hasCampaignsFeature}
   />
 );
 

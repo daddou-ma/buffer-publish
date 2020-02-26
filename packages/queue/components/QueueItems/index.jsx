@@ -91,8 +91,9 @@ const renderPost = ({
   hasPushNotifications,
   onSetRemindersClick,
   onCampaignTagClick,
+  hasCampaignsFeature,
 }) => {
-  const campaignId = post.campaign_id;
+  const campaignId = post.campaignDetails ? post.campaignDetails.id : null;
   const postWithEventHandlers = {
     ...post,
     key: post.id,
@@ -113,6 +114,7 @@ const renderPost = ({
     hasFirstCommentFlip,
     hasPushNotifications,
     onSetRemindersClick,
+    hasCampaignsFeature,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;

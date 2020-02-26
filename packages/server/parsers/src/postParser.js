@@ -216,8 +216,6 @@ module.exports = post => {
     sharedBy: post.shared_by,
     commentEnabled: post.comment_enabled,
     commentText: post.comment_text,
-    campaignName: '#SaveOurSeas Week',
-    campaignColor: '#9400D3',
-    campaign_id: '123',
+    campaignDetails: post.campaign_details ? post.campaign_details : null,
   };
 };
