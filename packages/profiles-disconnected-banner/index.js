@@ -11,7 +11,7 @@ export default connect(
 
     if (
       selectedProfile?.service === 'instagram' &&
-      selectedProfile.service_type === 'profile'
+      selectedProfile?.service_type === 'profile'
     ) {
       extraMessage = translations?.extraMessage?.instagram;
     }
