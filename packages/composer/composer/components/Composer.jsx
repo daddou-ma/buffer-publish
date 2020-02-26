@@ -168,7 +168,7 @@ class Composer extends React.Component {
     isOnProTrial: PropTypes.bool,
     hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
-    isProUpOrTeamMember: PropTypes.bool,
+    isProAndUpOrTeamMember: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
     isBusinessUser: PropTypes.bool.isRequired,
     draftMode: PropTypes.bool,
@@ -181,7 +181,7 @@ class Composer extends React.Component {
     canStartProTrial: false,
     isOnProTrial: false,
     hasIGDirectVideoFlip: false,
-    isProUpOrTeamMember: false,
+    isProAndUpOrTeamMember: false,
     hasShopgridFlip: false,
     profiles: [],
     expandedComposerId: null,
@@ -660,7 +660,7 @@ class Composer extends React.Component {
       composerPosition,
       hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip,
-      isProUpOrTeamMember,
+      isProAndUpOrTeamMember,
       hasShopgridFlip,
       draftMode,
     } = this.props;
@@ -921,7 +921,7 @@ class Composer extends React.Component {
       draft.instagramFeedback.some(feedback => feedback.code === 'NOT_ENABLED');
 
     const canAddUserTag =
-      isProUpOrTeamMember && 
+      isProAndUpOrTeamMember && 
       this.isInstagram() &&
       selectedProfiles.some(profile => profile.instagramDirectEnabled) &&
       /* don't allow user to add tag if post is a reminder though its ok if more than one

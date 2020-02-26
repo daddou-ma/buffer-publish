@@ -193,7 +193,7 @@ class AppStateless extends React.Component {
     });
 
     const shouldDisplayCampaignHeader =
-      userData?.hasCampaignsFlip && userData?.isProUpOrTeamMember && !draftMode;
+      userData?.hasCampaignsFlip && userData?.isProAndUpOrTeamMember && !draftMode;
 
     return (
       <div
@@ -235,8 +235,18 @@ class AppStateless extends React.Component {
             <CampaignHeader
               // dummy data
               campaigns={[
-                { name: '#SaveOurSeasWeek', color: '#9C2BFF', id: "1" },
-                { name: 'Hello World', color: 'blue', id: "2" },
+                {
+                  name: '#SaveOurSeasWeek',
+                  color: '#9C2BFF',
+                  id: '1',
+                  lastUpdated: 1582599125,
+                },
+                {
+                  name: 'Hello World',
+                  color: 'blue',
+                  id: '2',
+                  lastUpdated: 1582599196,
+                },
               ]}
               campaignId={metaData.campaignId}
             />
@@ -276,7 +286,7 @@ class AppStateless extends React.Component {
               userData.hasIGLocationTaggingFeature || false
             }
             hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
-            isProUpOrTeamMember={userData.isProUpOrTeamMember || false}
+            isProAndUpOrTeamMember={userData.isProAndUpOrTeamMember || false}
             hasShopgridFlip={userData.hasShopgridFlip || false}
             hasCampaignsFlip={userData.hasCampaignsFlip || false}
             isFreeUser={userData.isFreeUser || false}

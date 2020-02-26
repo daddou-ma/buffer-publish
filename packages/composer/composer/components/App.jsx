@@ -93,7 +93,7 @@ class App extends React.Component {
       isFreeUser: PropTypes.bool.isRequired,
       hasIGDirectFlip: PropTypes.bool.isRequired,
       hasCampaignsFlip: PropTypes.bool.isRequired,
-      isProUpOrTeamMember: PropTypes.bool.isRequired,
+      isProAndUpOrTeamMember: PropTypes.bool.isRequired,
       hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
       hasIGDirectVideoFlip: PropTypes.bool.isRequired,
       isBusinessUser: PropTypes.bool.isRequired,
@@ -222,7 +222,7 @@ class App extends React.Component {
       isOnProTrial: false,
       hasIGDirectVideoFlip: false,
       hasCampaignsFlip: false,
-      isProUpOrTeamMember: false,
+      isProAndUpOrTeamMember: false,
     },
     options: {
       onSave: () => {},
