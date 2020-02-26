@@ -3,13 +3,26 @@ import { actions as profilesDisconnectedModalActions } from '@bufferapp/publish-
 import ProfilesDisconnectedBanner from './components/ProfilesDisconnectedBanner';
 
 export default connect(
-  state => ({
-    profileId: state.profileSidebar.selectedProfileId,
-    service:
-      state.profileSidebar.selectedProfile &&
-      state.profileSidebar.selectedProfile.service,
-    translations: state.i18n.translations['profiles-disconnected-banner'],
-  }),
+  state => {
+    let extraMessage = null;
+    const selectedProfile = state?.profileSidebar?.selectedProfile;
+    const translations =
+      state.i18n.translations['profiles-disconnected-banner'];
+
+    if (
+      selectedProfile?.service === 'instagram' &&
+      selectedProfile.service_type === 'profile'
+    ) {
+      extraMessage = translations?.extraMessage?.instagram;
+    }
+
+    return {
+      profileId: state.profileSidebar.selectedProfileId,
+      service: selectedProfile?.service,
+      translations,
+      extraMessage,
+    };
+  },
   dispatch => ({
     onReconnectProfileClick: ({ id, service }) => {
       dispatch(
