@@ -1,104 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { transitionAnimationType } from '@bufferapp/components/style/animation';
+import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import { white, grayShadow, blue, gray } from '@bufferapp/ui/style/colors';
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RenderPostMetaBar from './RenderPostMetaBar';
 import PostErrorBanner from '../PostErrorBanner';
 import RetweetPanel from '../RetweetPanel';
 
-const getPostContainerStyle = ({ dragging, hovering }) => ({
-  display: 'flex',
-  width: '100%',
-  // boxShadow: (hovering && !dragging) ? '0 2px 4px 0 rgba(0,0,0,0.50)' : 'none',
-  transition: `box-shadow 0.1s ${transitionAnimationType}`,
-  borderRadius: '4px',
-});
+const PostContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
 
-const postStyle = {
-  flexGrow: 1,
-  minWidth: 0,
-};
+const PostSubContainer = styled.div`
+  flex-grow: 1;
+  min-width: 0;
+`;
 
-const prefixCSSForBrowser = css => {
-  const chrome = navigator.userAgent.indexOf('Chrome') > -1;
-  if (chrome) {
-    return `-webkit-${css}`;
-  }
-  const firefox = navigator.userAgent.indexOf('Firefox') > -1;
-  if (firefox) {
-    return `-moz-${css}`;
-  }
-  return css;
-};
+const PostContent = styled.div`
+  padding: 1rem;
+  cursor: ${props => (props.draggable ? 'grab' : 'inherit')};
+  opacity: ${props => (props.dragging ? 0 : 1)};
+`;
 
-const getPostContentStyle = ({ draggable, dragging }) => ({
-  padding: '1rem',
-  cursor: draggable ? prefixCSSForBrowser('grab') : 'inherit',
-  opacity: dragging ? 0 : 1,
-});
-
-/* eslint-disable react/prop-types */
-
-const getBorderStyle = ({
-  draggingPlaceholder,
-  noBorder,
-  dragging,
-  isOver,
-}) => {
-  const lineType = draggingPlaceholder ? 'dashed' : 'solid';
-  let color = '#b8b8b8';
-
-  if (noBorder) {
-    color = 'transparent';
-  }
-
-  if (!dragging && isOver) {
-    color = '#2C4BFF';
-  }
-
-  return `1px ${lineType} ${color}`;
-};
-
-const getBDSCardStyle = ({
-  faded,
-  draggingPlaceholder,
-  noBorder,
-  dragging,
-  isOver,
-}) => ({
-  background: '#fff',
-  border: getBorderStyle({ draggingPlaceholder, noBorder, dragging, isOver }),
-  borderRadius: '4px',
-  opacity: faded ? '0.5' : '1',
-  overflow: 'hidden',
-  boxShadow:
-    !draggingPlaceholder && !noBorder && '0px 1px 4px rgba(0, 0, 0, 0.16)',
-});
-
-const BDSCard = ({
-  faded,
-  draggingPlaceholder,
-  noBorder,
-  dragging,
-  isOver,
-  children,
-}) => (
-  <div
-    style={getBDSCardStyle({
-      faded,
-      draggingPlaceholder,
-      noBorder,
-      dragging,
-      isOver,
-    })}
-  >
-    {children}
-  </div>
-);
-
-/* eslint-enable react/prop-types */
+const Card = styled.div`
+  background: ${white};
+  border-radius: ${borderRadius};
+  opacity: ${props => (props.faded ? 0.5 : 1)};
+  overflow: hidden;
+  box-shadow: ${props => (props.draggingPlaceholder ? '' : grayShadow)};
+  border-width: 1px;
+  border-style: ${props => (props.draggingPlaceholder ? 'dashed' : 'solid')};
+  border-color: ${props => (!props.dragging && props.isOver ? blue : gray)};
+`;
 
 const Post = ({
   children,
@@ -119,9 +56,7 @@ const Post = ({
   subprofiles,
   draggable,
   dragging,
-  hovering,
   isOver,
-  fixed,
   statistics,
   profileService,
   serviceLink,
@@ -152,11 +87,10 @@ const Post = ({
     !isPastReminder;
 
   return (
-    <div style={getPostContainerStyle({ dragging, hovering, isOver })}>
-      <div style={postStyle}>
-        <BDSCard
+    <PostContainer>
+      <PostSubContainer>
+        <Card
           faded={isDeleting}
-          noPadding
           draggingPlaceholder={dragging}
           dragging={dragging}
           isOver={isOver}
@@ -176,8 +110,7 @@ const Post = ({
               errorLink={postDetails.errorLink}
             />
           )}
-          {/* Post Content */}
-          <div style={getPostContentStyle({ draggable, dragging })}>
+          <PostContent draggable={draggable} dragging={dragging}>
             {retweetProfile ? (
               <RetweetPanel
                 retweetProfile={retweetProfile}
@@ -190,7 +123,7 @@ const Post = ({
             ) : (
               children
             )}
-          </div>
+          </PostContent>
           <RenderPostMetaBar
             profileService={profileService}
             dragging={dragging}
@@ -235,9 +168,9 @@ const Post = ({
                 profileService={profileService}
               />
             )}
-        </BDSCard>
-      </div>
-    </div>
+        </Card>
+      </PostSubContainer>
+    </PostContainer>
   );
 };
 
@@ -271,9 +204,7 @@ Post.commonPropTypes = {
   ),
   draggable: PropTypes.bool,
   dragging: PropTypes.bool,
-  hovering: PropTypes.bool,
   isOver: PropTypes.bool,
-  fixed: PropTypes.bool,
   onDropPost: PropTypes.func,
   serviceLink: PropTypes.string,
   isSent: PropTypes.bool,
@@ -296,7 +227,6 @@ Post.defaultProps = {
   isConfirmingDelete: false,
   isDeleting: false,
   isWorking: false,
-  fixed: false,
   isSent: false,
   isBusinessAccount: false,
   isManager: true,
