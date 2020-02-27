@@ -33,13 +33,13 @@ describe('middleware', () => {
     expect(analyticsActions.init).toHaveBeenCalledWith('foo1', {
       name: 'The Great Foo',
       email: 'foo@buffer.com',
-      multiProductBundleName: null,
+      productSolutionName: null,
     });
   });
 
   it('it should send the bundle name information if the user is on an Analyze + Publish bundle', () => {
     analyticsActions.init = jest.fn();
-    state.globalAccount.isAnalyzePublishBundle = true;
+    state.globalAccount.productSolutionName = 'foo-bar-baz';
 
     const action = {
       type: `globalAccount_${fetchActions.FETCH_SUCCESS}`,
@@ -49,7 +49,7 @@ describe('middleware', () => {
     expect(analyticsActions.init).toHaveBeenCalledWith('foo1', {
       name: 'The Great Foo',
       email: 'foo@buffer.com',
-      multiProductBundleName: 'analyze_publish_eid_19',
+      productSolutionName: state.globalAccount.productSolutionName,
     });
   });
 });

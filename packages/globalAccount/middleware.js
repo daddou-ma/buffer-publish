@@ -21,9 +21,7 @@ export default ({ dispatch, getState }) => next => action => {
         analyticsActions.init(state.globalAccount._id, {
           name: state.appSidebar.user.name,
           email: state.globalAccount.email,
-          multiProductBundleName: state.globalAccount.isAnalyzePublishBundle
-            ? 'analyze_publish_eid_19'
-            : null,
+          productSolutionName: state.globalAccount.productSolutionName || null,
         })
       );
       break;
