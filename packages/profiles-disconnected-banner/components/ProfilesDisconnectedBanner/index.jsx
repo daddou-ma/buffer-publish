@@ -25,10 +25,10 @@ const ProfilesDisconnectedBanner = ({
     onClick={() => onReconnectProfileClick({ id: profileId, service })}
     actionLabel={translations.cta}
   >
-    <TextWithStyles type="p">{translations.body}</TextWithStyles>
     {extraMessage && (
       <ExtraMessageWithStyles type="p">{extraMessage}</ExtraMessageWithStyles>
     )}
+    <TextWithStyles type="p">{translations.body}</TextWithStyles>
   </ErrorBanner>
 );
 

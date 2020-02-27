@@ -51,13 +51,13 @@ const ProfilesDisconnectedModal = ({
       <Card reducedPadding>
         <ModalContainer>
           <Text type="h3">{translations.headline}</Text>
-          <Text type="p">{translations.body1}</Text>
-          <Text type="p">{translations.body2}</Text>
           {extraMessage && (
             <ExtraMessageWithStyles type="p">
               {extraMessage}
             </ExtraMessageWithStyles>
           )}
+          <Text type="p">{translations.body1}</Text>
+          <Text type="p">{translations.body2}</Text>
           {disconnectedProfiles.map(p => (
             <DisconnectedProfile key={p.id}>
               <AvatarContainer>
