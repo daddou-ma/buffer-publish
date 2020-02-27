@@ -46,7 +46,20 @@ export default ({ dispatch, getState }) => next => action => {
       break;
 
     case actionTypes.PROFILE_ROUTE_LOADED: {
-      const profile = action.selectedProfile;
+      const { selectedProfile = {} } = action;
+      let profile = selectedProfile;
+      let profileFound = true;
+
+      // force user redirection to valid profile if none exists
+      if (!profile || !profile.id) {
+        profileFound = false;
+        const { profileSidebar = {} } = getState();
+        const { profiles } = profileSidebar;
+        if (profiles && profiles.length > 0) {
+          [profile] = profiles;
+        }
+      }
+
       dispatch(
         actions.selectProfile({
           profile,
@@ -54,7 +67,7 @@ export default ({ dispatch, getState }) => next => action => {
       );
       // When the page has just loaded or is refreshed,
       // we want to be able to update the actual selected tab
-      if (action.tabId && getState().tabs.tabId !== action.tabId) {
+      if ((action.tabId && getState().tabs.tabId !== action.tabId) || !profileFound) {
         dispatch(
           tabsActions.selectTab({
             tabId: action.tabId,
