@@ -156,12 +156,6 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     case actionTypes.VIEW_CAMPAIGN_PAGE:
       dispatch(
-        campaignsActions.handleCampaignRouteLoaded({
-          campaignId: action.campaignId,
-          selectedPage: campaignPages.VIEW_CAMPAIGN,
-        })
-      );
-      dispatch(
         push(
           generateCampaignPageRoute({
             campaignId: action.campaignId,
