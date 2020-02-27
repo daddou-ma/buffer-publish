@@ -45,7 +45,7 @@ const transformForTable = (derivedSchedule, pausedDays) => {
   return scheduleTable;
 };
 
-const mergeSchedules = (profileSchedules, pausedSchedules) => {
+const mergeSchedules = (profileSchedules = [], pausedSchedules = []) => {
   const mergedSchedules = [];
   profileSchedules.forEach((schedule, index) => {
     mergedSchedules.push({ ...schedule });
