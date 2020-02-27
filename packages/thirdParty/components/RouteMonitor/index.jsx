@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getProfilePageParams } from '@bufferapp/publish-routes';
 
-function RouteMonitor({ pathname, appCues, intercom, helpScoutBeacon }) {
+function RouteMonitor({ pathname, appCues, intercom }) {
   useEffect(() => {
     // Appcues triggers the display of content on page load.
     // Calling the Appcues.page() method will notify Appcues that
@@ -24,11 +24,6 @@ function RouteMonitor({ pathname, appCues, intercom, helpScoutBeacon }) {
     if (intercom && intercom.loaded && window && window.Intercom) {
       window.Intercom('update');
     }
-
-    // Let HelpScout Beacon know when we've changed pages
-    if (helpScoutBeacon && helpScoutBeacon.loaded && window && window.Beacon) {
-      window.Beacon('suggest');
-    }
   }, [pathname]);
   return null;
 }
@@ -42,9 +37,6 @@ RouteMonitor.propTypes = {
   intercom: PropTypes.shape({
     loaded: PropTypes.bool,
   }),
-  helpScoutBeacon: PropTypes.shape({
-    loaded: PropTypes.bool,
-  }),
 };
 
 RouteMonitor.defaultProps = {
@@ -54,9 +46,6 @@ RouteMonitor.defaultProps = {
     inProgress: false,
   },
   intercom: {
-    loaded: false,
-  },
-  helpScoutBeacon: {
     loaded: false,
   },
 };
