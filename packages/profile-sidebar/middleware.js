@@ -59,6 +59,7 @@ export default ({ dispatch, getState }) => next => action => {
           [profile] = profiles;
         }
       }
+
       dispatch(
         actions.selectProfile({
           profile,
