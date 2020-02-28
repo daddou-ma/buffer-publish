@@ -71,6 +71,9 @@ const LinkPost = ({
   hasFirstCommentFlip,
   hasPushNotifications,
   onSetRemindersClick,
+  campaignDetails,
+  onCampaignTagClick,
+  hasCampaignsFeature,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -164,6 +167,9 @@ const LinkPost = ({
       hasPushNotifications={hasPushNotifications}
       onSetRemindersClick={onSetRemindersClick}
       basic={basic}
+      campaignDetails={campaignDetails}
+      onCampaignTagClick={onCampaignTagClick}
+      hasCampaignsFeature={hasCampaignsFeature}
     >
       {children}
     </Post>

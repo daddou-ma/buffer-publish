@@ -22,6 +22,7 @@ const TextPost = ({
   onEditClick,
   onShareNowClick,
   onRequeueClick,
+  onCampaignTagClick,
   postDetails,
   text,
   retweetProfile,
@@ -53,6 +54,8 @@ const TextPost = ({
   hasPushNotifications,
   onSetRemindersClick,
   basic,
+  campaignDetails,
+  hasCampaignsFeature,
 }) => {
   const children = (
     <div style={postContentStyle}>
@@ -120,6 +123,9 @@ const TextPost = ({
       hasPushNotifications={hasPushNotifications}
       onSetRemindersClick={onSetRemindersClick}
       basic={basic}
+      campaignDetails={campaignDetails}
+      onCampaignTagClick={onCampaignTagClick}
+      hasCampaignsFeature={hasCampaignsFeature}
     >
       {children}
     </Post>
