@@ -120,4 +120,5 @@ module.exports = userData => ({
   hasAccessToUserTag: userData.is_pro_and_up_org_user, // this includes team members
   isAnalyzeCustomer: userData.is_analyze_customer,
   canSeePaydayPage: userData.features.includes('awesome_user_can_visit_payday'),
+  isUsingPublishAsTeamMember: userData.is_using_publish_as_team_member,
 });

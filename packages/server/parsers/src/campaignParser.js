@@ -4,7 +4,7 @@ module.exports = campaign => {
   return {
     _id: campaign._id,
     id: campaign._id,
-    organizationId: campaign.organization_id,
+    globalOrganizationId: campaign.global_organization_id,
     name: campaign.name,
     color: campaign.color,
     updatedAt: campaign.updated_at,

@@ -4,8 +4,8 @@ const { campaignParser } = require('../../../parsers/src');
 
 module.exports = method(
   'createCampaign',
-  'create a new campaign given an organization id',
-  async ({ name, color, organizationId }, { session }) => {
+  'create a new campaign',
+  async ({ name, color }, { session }) => {
     let result;
     try {
       result = await rp({
@@ -16,7 +16,6 @@ module.exports = method(
           access_token: session.publish.accessToken,
           name,
           color,
-          organization_id: organizationId,
         },
       });
     } catch (err) {
