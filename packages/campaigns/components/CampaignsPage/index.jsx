@@ -40,7 +40,7 @@ const CampaignsPage = ({
         <ViewCampaign
           campaignDetails={campaignDetails}
           hasPosts={false}
-          isOwner
+          isUsingPublishAsTeamMember
           translations={translations}
           onCreatePostClick={() => {}}
           onDeleteCampaignClick={() => {}}

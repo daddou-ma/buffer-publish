@@ -76,7 +76,6 @@ const awesomeToProUpgradeDetails = require('./awesomeToProUpgradeDetails');
 const createCampaign = require('./campaigns/create');
 const updateCampaign = require('./campaigns/update');
 const getCampaign = require('./campaigns/getCampaign');
-const getMainOrganization = require('./campaigns/getMainOrganization');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const average = require('./analytics/average');
@@ -163,7 +162,6 @@ module.exports = rpc(
   createCampaign,
   updateCampaign,
   getCampaign,
-  getMainOrganization,
 
   // Analyze RPC
   average,

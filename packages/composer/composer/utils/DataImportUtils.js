@@ -190,7 +190,8 @@ const DataImportUtils = {
           isOnProTrial: userData.isOnProTrial,
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
-          hasAccessToUserTag: userData.hasAccessToUserTag,
+          hasCampaignsFlip: hasFeature(userData.features, 'campaigns'),
+          isProAndUpOrTeamMember: userData.isProAndUpOrTeamMember,
           profileGroups: userData.profile_groups
             ? userData.profile_groups.map(group => ({
                 name: group.name,
@@ -231,6 +232,7 @@ const DataImportUtils = {
           locationId: null,
           locationName: null,
           userTags: null,
+          campaignId: null,
           facebookMentionEntities: null,
           should_show_rollout_tooltip: false,
           isPrefillingExistingUpdate: false,
@@ -301,6 +303,7 @@ const DataImportUtils = {
           locationId: update.service_geolocation_id || null,
           locationName: update.service_geolocation_name || null,
           userTags: update.service_user_tags || null,
+          campaignId: update.campaignId || null,
           facebookMentionEntities: update.entities || null,
           commentEnabled: update.commentEnabled,
           commentText: update.commentText || null,
@@ -384,6 +387,7 @@ const DataImportUtils = {
         locationId: meta.locationId || null,
         locationName: meta.locationName || null,
         userTags: meta.userTags || null,
+        campaignId: meta.campaignId || null,
         linkData:
           meta.linkData !== null ? getFormattedLinkData(meta.linkData) : null,
         via: meta.via || null,

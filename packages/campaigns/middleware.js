@@ -65,16 +65,13 @@ export default ({ dispatch, getState }) => next => action => {
 
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
-      const { mainOrganization } = getState().campaigns;
 
-      const organizationId = mainOrganization?._id;
       dispatch(
         dataFetchActions.fetch({
           name: 'createCampaign',
           args: {
             name,
             color,
-            organizationId,
           },
         })
       );
@@ -82,19 +79,19 @@ export default ({ dispatch, getState }) => next => action => {
     }
     // Complete once changes to the backend endpoint are made:
     case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { id, name, color, organizationId } = action.result || {};
+      const { id, name, color, globalOrganizationId } = action.result || {};
       const metadata = {
         campaignId: id,
         campaignName: name,
         campaignColor: color,
         cta: SEGMENT_NAMES.STORIES_PREVIEW_QUEUE_ADD_NOTE,
-        organizationId,
+        globalOrganizationId,
       };
       dispatch(analyticsActions.trackEvent('Campaign Created', metadata));
       dispatch(
         notificationActions.createNotification({
           notificationType: 'success',
-          message: 'Great! Your new  campaign was created!',
+          message: 'Great! Your new campaign was created!',
         })
       );
 

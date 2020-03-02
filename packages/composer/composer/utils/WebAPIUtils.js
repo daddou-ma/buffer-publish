@@ -722,7 +722,7 @@ function getFormattedAPIData(serviceName, unformattedData) {
           },
         };
       } else if (hasVideoAttachment) {
-        const video = serviceDraft.video;
+        const { video } = serviceDraft;
 
         formattedMediaFields = {
           ...formattedMediaFields,
@@ -806,6 +806,11 @@ function getFormattedAPIData(serviceName, unformattedData) {
       conditionalFields.service_user_tags =
         // Ensuring we send `null` here so it removes the tags when all are removed
         userTags && userTags.length ? userTags : null;
+    }
+
+    const { campaignId } = serviceDraft;
+    if (campaignId) {
+      conditionalFields.campaignId = campaignId;
     }
 
     if (hasEnabledRetweetAttachment) {
