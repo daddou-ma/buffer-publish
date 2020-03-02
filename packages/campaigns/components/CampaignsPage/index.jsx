@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 import { campaignPages } from '@bufferapp/publish-routes';
 import CampaignsWrapper from '../CampaignsWrapper';
-import CreateCampaign from '../CreateCampaign';
+import CampaignForm from '../CampaignForm';
 import ViewCampaign from '../ViewCampaign';
 import ListCampaigns from '../ListCampaigns';
 
@@ -55,7 +55,7 @@ const CampaignsPage = ({
         />
       )}
       {viewMode === campaignPages.CREATE_CAMPAIGN && (
-        <CreateCampaign
+        <CampaignForm
           isSaving={isSaving}
           translations={translations.createCampaign}
           onCreateCampaignClick={onCreateCampaignClick}
