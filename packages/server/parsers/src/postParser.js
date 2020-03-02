@@ -210,11 +210,13 @@ module.exports = post => {
     service_geolocation_id: post.service_geolocation_id,
     service_geolocation_name: post.service_geolocation_name,
     service_user_tags: post.service_user_tags,
+    service_campaign_id: post.campaign_id,
     user: getUser(post),
     serviceLink: post.service_link,
     dueTime: post.due_time,
     sharedBy: post.shared_by,
     commentEnabled: post.comment_enabled,
     commentText: post.comment_text,
+    campaignDetails: post.campaign_details ? post.campaign_details : null,
   };
 };

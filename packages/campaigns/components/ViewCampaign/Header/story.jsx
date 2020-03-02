@@ -17,7 +17,7 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       hasPosts
-      isOwner
+      isUsingPublishAsTeamMember
     />
   ))
   .add('Campaign view header without posts', () => (
@@ -28,7 +28,7 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       hasPosts={false}
-      isOwner
+      isUsingPublishAsTeamMember
     />
   ))
   .add('Campaign view header as team member', () => (
@@ -39,6 +39,6 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       hasPosts={false}
-      isOwner={false}
+      isUsingPublishAsTeamMember={false}
     />
   ));

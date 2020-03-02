@@ -371,9 +371,15 @@ class Editor extends React.Component {
     // we'd need to force full re-renders on each key stroke for the two reasons
     // mentioned above, which leads to all sorts of side-effects with EditorState.
     // tl;dr: soft new lines ftw!
-    this.onEditorStateChange(
-      RichUtils.insertSoftNewline(this.props.draft.editorState)
-    );
+    try {
+      this.onEditorStateChange(
+        RichUtils.insertSoftNewline(this.props.draft.editorState)
+      );
+    } catch (error) {
+      // ERROR: we are catching this as when you hit return while having a text selection
+      // selected, we can't replace the text with the return characters. So we need to
+      // handle this to prevent errors getting to users
+    }
     return 'handled';
   };
 

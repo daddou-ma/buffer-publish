@@ -22,7 +22,6 @@ const createCampaign = () => RPCEndpoint.fn(params, { session });
 const CREATE_CAMPAIGN_RESPONSE = {
   data: {
     _id: '123456',
-    organization_id: organizationId,
     name: 'Test',
     color: '#ffffff',
     created_at: '2020-02-24 13:08:33',
@@ -37,7 +36,6 @@ describe('RPC | Create campaign', () => {
   it('creates a campaign correctly', async () => {
     post.mockReturnValueOnce(Promise.resolve(CREATE_CAMPAIGN_RESPONSE));
     await createCampaign(params).then(response => {
-      expect(response.organizationId).toBe(organizationId);
       expect(response.name).toBe(params.name);
       expect(response.color).toBe(params.color);
       expect(response.lastUpdated).toBe(`Last updated ${response.updatedAt}`);

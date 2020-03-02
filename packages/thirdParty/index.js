@@ -11,7 +11,6 @@ export default connect(state => {
   return {
     appCues: state.thirdparty.appCues,
     intercom: state.thirdparty.intercom,
-    helpScoutBeacon: state.thirdparty.helpScoutBeacon,
     modalsShowing,
     userId:
       state.appSidebar && state.appSidebar.user && state.appSidebar.user.id,

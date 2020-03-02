@@ -9,8 +9,8 @@ const processResponse = response => {
 
 module.exports = method(
   'createCampaign',
-  'create a new campaign given an organization id',
-  async ({ name, color, organizationId }, { session }) => {
+  'create a new campaign',
+  async ({ name, color }, { session }) => {
     try {
       const response = await post({
         uri: '1/campaigns/create.json',
@@ -18,7 +18,6 @@ module.exports = method(
         params: {
           name,
           color,
-          organization_id: organizationId,
         },
       });
       const campaign = processResponse(response);

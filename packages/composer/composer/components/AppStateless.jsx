@@ -13,6 +13,7 @@ import styles from './css/App.css';
 import ExtensionComponents from './ExtensionComponents';
 import { isOnExtension } from '../utils/extension';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
+import CampaignHeader from './campaigns/CampaignHeader';
 
 class AppStateless extends React.Component {
   constructor(props) {
@@ -191,6 +192,9 @@ class AppStateless extends React.Component {
       omniboxEnabled,
     });
 
+    const shouldDisplayCampaignHeader =
+      userData?.hasCampaignsFlip && userData?.isProAndUpOrTeamMember && !draftMode;
+
     return (
       <div
         ref={appElementRef}
@@ -227,6 +231,27 @@ class AppStateless extends React.Component {
           role="button"
           tabIndex={0}
         >
+          {shouldDisplayCampaignHeader && (
+            <CampaignHeader
+              // dummy data
+              campaigns={[
+                {
+                  name: '#SaveOurSeasWeek',
+                  color: '#9C2BFF',
+                  id: '1',
+                  lastUpdated: 1582599125,
+                },
+                {
+                  name: 'Hello World',
+                  color: 'blue',
+                  id: '2',
+                  lastUpdated: 1582599196,
+                },
+              ]}
+              campaignId={metaData.campaignId}
+            />
+          )}
+
           <ExtensionComponents
             draggingAnchorRef={draggingAnchorRef}
             onCloseButtonClick={onCloseButtonClick}
@@ -261,8 +286,9 @@ class AppStateless extends React.Component {
               userData.hasIGLocationTaggingFeature || false
             }
             hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
-            hasAccessToUserTag={userData.hasAccessToUserTag || false}
+            isProAndUpOrTeamMember={userData.isProAndUpOrTeamMember || false}
             hasShopgridFlip={userData.hasShopgridFlip || false}
+            hasCampaignsFlip={userData.hasCampaignsFlip || false}
             isFreeUser={userData.isFreeUser || false}
             isBusinessUser={userData.isBusinessUser || false}
             canStartProTrial={userData.canStartProTrial || false}
@@ -331,6 +357,7 @@ AppStateless.propTypes = {
   isPinnedToSlot: PropTypes.bool,
   sentPost: PropTypes.bool,
   draftMode: PropTypes.bool,
+  hasCampaignsFlip: PropTypes.bool,
 };
 
 AppStateless.defaultProps = {
