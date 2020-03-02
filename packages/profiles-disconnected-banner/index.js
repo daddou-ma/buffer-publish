@@ -17,7 +17,7 @@ export default connect(
     }
 
     return {
-      profileId: state.profileSidebar.selectedProfileId,
+      profileId: selectedProfile?.id,
       service: selectedProfile?.service,
       translations,
       extraMessage,

@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { fontWeightBold } from '@bufferapp/ui/style/fonts';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import { grayLight } from '@bufferapp/ui/style/colors';
+
 
 import { Popover, Card } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
@@ -8,15 +12,15 @@ import styled from 'styled-components';
 
 const ExtraMessageWithStyles = styled(Text)`
   margin: 0;
-  font-weight: bold;
+  font-weight: ${fontWeightBold};
 `;
 
 const DisconnectedProfile = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 1px solid #e0e0e0;
+  border: 1px solid ${grayLight};
   padding: 8px;
-  border-radius: 4px;
+  border-radius: ${borderRadius};
   margin: 8px 0;
 `;
 
@@ -70,7 +74,7 @@ const ProfilesDisconnectedModal = ({
                   network={p.service}
                 />
                 <AvatarName>
-                  <Text weight="medium">{p.formatted_username}</Text>
+                  <Text>{p.formatted_username}</Text>
                 </AvatarName>
               </AvatarContainer>
               <Button
