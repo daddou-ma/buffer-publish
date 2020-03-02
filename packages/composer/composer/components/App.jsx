@@ -92,7 +92,8 @@ class App extends React.Component {
       weekStartsMonday: PropTypes.bool.isRequired,
       isFreeUser: PropTypes.bool.isRequired,
       hasIGDirectFlip: PropTypes.bool.isRequired,
-      hasAccessToUserTag: PropTypes.bool.isRequired,
+      hasCampaignsFlip: PropTypes.bool.isRequired,
+      isProAndUpOrTeamMember: PropTypes.bool.isRequired,
       hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
       hasIGDirectVideoFlip: PropTypes.bool.isRequired,
       isBusinessUser: PropTypes.bool.isRequired,
@@ -178,6 +179,7 @@ class App extends React.Component {
           y: PropTypes.number.isRequired,
         })
       ),
+      campaignId: PropTypes.string,
       locationId: PropTypes.string,
       locationName: PropTypes.string,
       commentEnabled: PropTypes.bool,
@@ -219,7 +221,8 @@ class App extends React.Component {
       canStartProTrial: false,
       isOnProTrial: false,
       hasIGDirectVideoFlip: false,
-      hasAccessToUserTag: false,
+      hasCampaignsFlip: false,
+      isProAndUpOrTeamMember: false,
     },
     options: {
       onSave: () => {},
@@ -432,6 +435,7 @@ class App extends React.Component {
         availableSchedulesSlotsForDay={this.state.availableSchedulesSlotsForDay}
         sentPost={this.props.options.sentPost}
         draftMode={this.props.draftMode}
+        hasCampaignsFlip={this.props.hasCampaignsFlip}
       />
     );
   }
