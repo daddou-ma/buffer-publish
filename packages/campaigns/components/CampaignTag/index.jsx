@@ -10,6 +10,9 @@ const CampaignButton = styled(Button)`
   opacity: ${props => (props.dragging ? 0 : 1)};
   background-color: ${props => props.campaignColor};
   border-color: ${props => props.campaignColor};
+  :hover {
+    background-color: ${props => props.campaignColor};
+  }
 `;
 
 const CampaignTag = ({
