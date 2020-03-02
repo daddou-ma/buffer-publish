@@ -12,7 +12,6 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
 
 export const initialState = {
   isSaving: false,
-  mainOrganization: {},
   campaignDetails: {},
   campaignId: null,
   selectedPage: 'campaigns',
@@ -50,14 +49,6 @@ export default (state = initialState, action) => {
         ...state,
         isSaving: false,
       };
-    case `getMainOrganization_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { mainOrganization = {}, isOrgAdmin } = action.result || {};
-
-      return {
-        ...state,
-        mainOrganization,
-      };
-    }
     default:
       return state;
   }

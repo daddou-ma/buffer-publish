@@ -27,7 +27,7 @@ const goToAnalyzeReport = () =>
 const Header = ({
   translations,
   campaignDetails,
-  isOwner,
+  isUsingPublishAsTeamMember,
   hasPosts,
   onCreatePostClick,
   onDeleteCampaignClick,
@@ -94,7 +94,7 @@ const Header = ({
           },
         ]}
       />
-      {isOwner && (
+      {!isUsingPublishAsTeamMember && (
         <Button
           type="secondary"
           icon={<ArrowRightIcon />}
@@ -126,7 +126,7 @@ Header.propTypes = {
     lastUpdated: PropTypes.string,
   }).isRequired,
   hasPosts: PropTypes.string.isRequired,
-  isOwner: PropTypes.bool.isRequired,
+  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,

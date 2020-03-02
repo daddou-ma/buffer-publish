@@ -25,7 +25,7 @@ storiesOf('Campaigns|ViewCampaign', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       hasPosts
-      isOwner
+      isUsingPublishAsTeamMember
     />
   ))
   .add('Campaign view without posts', () => (
@@ -36,7 +36,7 @@ storiesOf('Campaigns|ViewCampaign', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       hasPosts={false}
-      isOwner
+      isUsingPublishAsTeamMember
     />
   ));
 
