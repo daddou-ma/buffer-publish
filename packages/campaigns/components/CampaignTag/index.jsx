@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '@bufferapp/ui';
 
+import { getColorContrast } from '@bufferapp/publish-shared-components/ColorPicker/utils/HexValidations';
+
 const CampaignButton = styled(Button)`
   margin-left: 16px;
   margin-bottom: 16px;
@@ -12,7 +14,9 @@ const CampaignButton = styled(Button)`
   border-color: ${props => props.campaignColor};
   :hover {
     background-color: ${props => props.campaignColor};
+    color: ${props => props.textColor};
   }
+  color: ${props => props.textColor};
 `;
 
 const CampaignTag = ({
@@ -28,6 +32,7 @@ const CampaignTag = ({
       label={campaignName}
       dragging={dragging}
       campaignColor={campaignColor}
+      textColor={getColorContrast(campaignColor)}
     />
   );
 };

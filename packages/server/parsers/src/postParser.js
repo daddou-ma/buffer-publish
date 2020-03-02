@@ -216,10 +216,6 @@ module.exports = post => {
     sharedBy: post.shared_by,
     commentEnabled: post.comment_enabled,
     commentText: post.comment_text,
-    campaignDetails: {
-      id: '123',
-      name: '#Save the Seas',
-      color: '#9400D3',
-    },
+    campaignDetails: post.campaign_details ? post.campaign_details : null,
   };
 };
