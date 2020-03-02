@@ -31,6 +31,29 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
 
+    case actionTypes.HANDLE_CAMPAIGN_CLICK: {
+      const { campaignId } = action;
+      const past = false;
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getCampaign',
+          args: {
+            campaignId,
+            past,
+          },
+        })
+      );
+      break;
+    }
+
+    case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      console.log('SUCCESS', action);
+      break;
+
+    case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
+      console.log('ERROR', action);
+      break;
+
     case `getMainOrganization_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(
         notificationActions.createNotification({
