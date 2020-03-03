@@ -34,12 +34,14 @@ export default ({ dispatch, getState }) => next => action => {
     case actionTypes.HANDLE_CAMPAIGN_CLICK: {
       const { campaignId } = action;
       const past = false;
+      const basicItems = true;
       dispatch(
         dataFetchActions.fetch({
           name: 'getCampaign',
           args: {
             campaignId,
             past,
+            basicItems,
           },
         })
       );

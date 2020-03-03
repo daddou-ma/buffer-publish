@@ -10,10 +10,14 @@ const processResponse = response => {
 module.exports = method(
   'getCampaign',
   'gets a single campaign, given the id',
-  async ({ campaignId, past }, { session }) => {
+  async ({ campaignId, past, basicItems }, { session }) => {
     const uri = `/1/campaigns/${campaignId}.json`;
     try {
-      const response = await get({ uri, session, params: { past } });
+      const response = await get({
+        uri,
+        session,
+        params: { past, basic_items: basicItems },
+      });
       const result = processResponse(response);
       return Promise.resolve(result);
     } catch (err) {

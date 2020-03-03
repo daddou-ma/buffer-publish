@@ -70,7 +70,6 @@ module.exports = campaign => {
     sent: campaign.sent,
     scheduled: campaign.scheduled,
     channels: campaign.channels && parseChannels(campaign.channels),
-    sentItems: campaign.items && parseCampaignItems(campaign.items),
-    scheduledItems: campaign.items && parseCampaignItems(campaign.items),
+    items: campaign.items && parseCampaignItems(campaign.items),
   };
 };
