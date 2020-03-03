@@ -36,6 +36,7 @@ describe('RPC | Create campaign', () => {
     await createCampaign(params).then(response => {
       expect(response.name).toBe(params.name);
       expect(response.color).toBe(params.color);
+      expect(response.lastUpdated).toContain('Last updated ');
     });
   });
 

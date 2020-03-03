@@ -13,24 +13,9 @@ import {
 } from '@bufferapp/publish-routes';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch, getState }) => next => action => {
+export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const hasCampaignsFlip =
-        getState().appSidebar.user.features?.includes('campaigns') || false;
-
-      if (hasCampaignsFlip) {
-        dispatch(
-          dataFetchActions.fetch({
-            name: 'getMainOrganization',
-            args: {},
-          })
-        );
-      }
-      break;
-    }
-
     case actionTypes.HANDLE_CAMPAIGN_CLICK: {
       const { campaignId } = action;
       const past = false;
@@ -54,15 +39,6 @@ export default ({ dispatch, getState }) => next => action => {
 
     case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
       console.log('ERROR', action);
-      break;
-
-    case `getMainOrganization_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(
-        notificationActions.createNotification({
-          notificationType: 'error',
-          message: action.error,
-        })
-      );
       break;
 
     case actionTypes.CREATE_CAMPAIGN: {
