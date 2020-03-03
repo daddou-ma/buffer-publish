@@ -50,6 +50,7 @@ const SentPosts = ({
   onImageClickNext,
   onImageClickPrev,
   onImageClose,
+  onCampaignTagClick,
   onComposerCreateSuccess,
   showComposer,
   editMode,
@@ -59,6 +60,7 @@ const SentPosts = ({
   isBusinessAccount,
   features,
   hasFirstCommentFlip,
+  hasCampaignsFeature,
   moreToLoad,
   tabId,
   profileId,
@@ -137,10 +139,12 @@ const SentPosts = ({
           onImageClickNext={onImageClickNext}
           onImageClickPrev={onImageClickPrev}
           onImageClose={onImageClose}
+          onCampaignTagClick={onCampaignTagClick}
           isManager={isManager}
           isBusinessAccount={isBusinessAccount}
           isSent
           hasFirstCommentFlip={hasFirstCommentFlip}
+          hasCampaignsFeature={hasCampaignsFeature}
           showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
           isAnalyzeCustomer={isAnalyzeCustomer}
         />
@@ -182,11 +186,13 @@ SentPosts.propTypes = {
   onImageClickNext: PropTypes.func,
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
+  onCampaignTagClick: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
+  hasCampaignsFeature: PropTypes.bool,
 };
 
 SentPosts.defaultProps = {
@@ -202,6 +208,7 @@ SentPosts.defaultProps = {
   isManager: true,
   isBusinessAccount: false,
   hasFirstCommentFlip: false,
+  hasCampaignsFeature: false,
   isLockedProfile: false,
   isDisconnectedProfile: false,
   onEditClick: () => {},
@@ -210,6 +217,7 @@ SentPosts.defaultProps = {
   onImageClickNext: () => {},
   onImageClickPrev: () => {},
   onImageClose: () => {},
+  onCampaignTagClick: () => {},
 };
 
 export default WithFeatureLoader(SentPosts);
