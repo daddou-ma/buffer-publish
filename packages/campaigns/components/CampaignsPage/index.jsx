@@ -57,9 +57,19 @@ const CampaignsPage = ({
       {viewMode === campaignPages.CREATE_CAMPAIGN && (
         <CampaignForm
           isSaving={isSaving}
-          translations={translations.createCampaign}
+          translations={translations.campaignForm}
           onCreateCampaignClick={onCreateCampaignClick}
           onCancelClick={onCancelCreateCampaignClick}
+        />
+      )}
+      {viewMode === campaignPages.EDIT_CAMPAIGN && (
+        <CampaignForm
+          isSaving={isSaving}
+          translations={translations.campaignForm}
+          onCreateCampaignClick={onCreateCampaignClick}
+          onCancelClick={onCancelCreateCampaignClick}
+          inEditMode
+          campaignDetails={campaignDetails}
         />
       )}
     </CampaignsWrapper>

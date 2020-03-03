@@ -89,10 +89,14 @@ const CampaignForm = ({
   onCreateCampaignClick,
   onCancelClick,
   isSaving,
+  inEditMode,
+  campaignDetails,
 }) => {
   // State
-  const [campaignName, setName] = useState('');
-  const [colorSelected, setColor] = useState(purple);
+  const defaultName = campaignDetails?.name ?? '';
+  const defaultColor = campaignDetails?.color ?? purple;
+  const [campaignName, setName] = useState(defaultName);
+  const [colorSelected, setColor] = useState(defaultColor);
   const [isSubmitButtonDisabled, disableSubmit] = useState(true);
 
   // State modifiers
@@ -116,7 +120,9 @@ const CampaignForm = ({
   return (
     <Wrapper>
       <Content>
-        <Text type="h1">{translations.title}</Text>
+        <Text type="h1">
+          {inEditMode ? translations.editTitle : translations.createTitle}
+        </Text>
         <Card>
           <Text type="h3">{translations.subtitle}</Text>
           <Input
@@ -175,7 +181,8 @@ const CampaignForm = ({
 
 CampaignForm.propTypes = {
   translations: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    editTitle: PropTypes.string.isRequired,
+    createTitle: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
@@ -185,11 +192,23 @@ CampaignForm.propTypes = {
     notice3: PropTypes.string.isRequired,
     notice4: PropTypes.string.isRequired,
     saveCampaign: PropTypes.string.isRequired,
+    updateCampaign: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
   }).isRequired,
   onCreateCampaignClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
+  inEditMode: PropTypes.bool,
+  campaignDetails: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    color: PropTypes.string,
+  }),
+};
+
+CampaignForm.defaultProps = {
+  inEditMode: false,
+  campaignDetails: {},
 };
 
 export default CampaignForm;
