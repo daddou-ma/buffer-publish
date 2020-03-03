@@ -34,9 +34,13 @@ describe('RPC | Create campaign', () => {
   it('creates a campaign correctly', async () => {
     post.mockReturnValueOnce(Promise.resolve(CREATE_CAMPAIGN_RESPONSE));
     await createCampaign(params).then(response => {
+      expect(response.id).not.toBeUndefined();
+      expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe(params.name);
       expect(response.color).toBe(params.color);
       expect(response.lastUpdated).toContain('Last updated ');
+      expect(response.channels).toBeNull();
+      expect(response.items).toBeNull();
     });
   });
 

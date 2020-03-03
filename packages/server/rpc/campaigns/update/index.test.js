@@ -35,6 +35,8 @@ describe('RPC | Update campaign', () => {
   it('updates a campaign correctly', async () => {
     post.mockReturnValueOnce(Promise.resolve(UPDATE_CAMPAIGN_RESPONSE));
     await updateCampaign(params).then(response => {
+      expect(response.id).not.toBeUndefined();
+      expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe(params.name);
       expect(response.color).toBe(params.color);
       expect(response.lastUpdated).toContain('Last updated ');

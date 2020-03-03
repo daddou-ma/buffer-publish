@@ -89,11 +89,10 @@ describe('RPC | Get campaign', () => {
   it('gets the campaign without items correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN));
     await geCampaign().then(response => {
+      expect(response.id).not.toBeUndefined();
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
       expect(response.color).toBe('#BD3381');
-      expect(response.id).not.toBeNull();
-      expect(response.id).not.toBeUndefined();
       expect(response.lastUpdated).toContain('Last updated ');
     });
   });
@@ -101,10 +100,10 @@ describe('RPC | Get campaign', () => {
   it('gets the campaign with scheduled items correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
     await geCampaign().then(response => {
+      expect(response.id).not.toBeUndefined();
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
       expect(response.color).toBe('#BD3381');
-      expect(response.id).not.toBeUndefined();
       expect(response.dateRange).not.toBeUndefined();
       expect(response.lastUpdated).toContain('Last updated ');
       expect(response.items.length).toBe(2);

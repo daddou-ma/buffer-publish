@@ -2,8 +2,7 @@ const moment = require('moment-timezone');
 
 const parseLastUpdated = updatedAt => {
   const updatedDate = new Date(updatedAt * 1000);
-  const lastUpdated = moment(updatedDate);
-  const diff = moment(lastUpdated).fromNow(true);
+  const diff = moment(updatedDate).fromNow(true);
 
   return `Last updated ${diff} ago`;
 };
@@ -70,7 +69,7 @@ module.exports = campaign => {
     dateRange: parseDateRange(campaign.start_date, campaign.end_date), // TODO: date range formatted for Publish UI
     sent: campaign.sent,
     scheduled: campaign.scheduled,
-    channels: campaign.channels && parseChannels(campaign.channels),
-    items: campaign.items && parseCampaignItems(campaign.items),
+    channels: (campaign.channels && parseChannels(campaign.channels)) ?? null,
+    items: (campaign.items && parseCampaignItems(campaign.items)) ?? null,
   };
 };
