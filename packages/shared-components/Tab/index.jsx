@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { blue, grayDarker, grayDefault } from '@bufferapp/ui/style/colors';
-import { fontSize, fontSizeSmall } from '@bufferapp/ui/style/fonts';
+import {
+  fontSize,
+  fontSizeSmall,
+  fontWeightMedium,
+  fontWeight,
+} from '@bufferapp/ui/style/fonts';
 
 const TabItem = styled.li`
   transform: translate(0, 1px);
@@ -23,6 +28,7 @@ const TabLink = styled.a`
   text-decoration: none;
   color: ${props => (props.selected ? grayDarker : grayDefault)};
   font-size: ${props => (props.secondary ? fontSizeSmall : fontSize)};
+  font-weight: ${props => (props.selected ? fontWeightMedium : fontWeight)};
   :hover {
     color: ${grayDarker};
   }
