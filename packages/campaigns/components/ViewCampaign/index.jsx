@@ -38,13 +38,15 @@ const ViewCampaign = ({
       />
       {hasPosts ? (
         <React.Fragment>
-          <Tabs
-            selectedTabId={listView}
-            onTabClick={tabId => toggleView(tabId)}
-          >
-            <Tab tabId="scheduled">{translations.viewCampaign.scheduled}</Tab>
-            <Tab tabId="sent">{translations.viewCampaign.sent}</Tab>
-          </Tabs>
+          <nav role="navigation">
+            <Tabs
+              selectedTabId={listView}
+              onTabClick={tabId => toggleView(tabId)}
+            >
+              <Tab tabId="scheduled">{translations.viewCampaign.scheduled}</Tab>
+              <Tab tabId="sent">{translations.viewCampaign.sent}</Tab>
+            </Tabs>
+          </nav>
           <QueueItems
             items={campaignPosts}
             onDeleteConfirmClick={null}
