@@ -31,6 +31,7 @@ const parseItem = item => {
     dueAt: item.due_at,
     serviceType: item.service_type,
     serviceId: item.service_id,
+    channelType: item.channel_type,
     ...sentAt,
     ...servicePostId,
   };

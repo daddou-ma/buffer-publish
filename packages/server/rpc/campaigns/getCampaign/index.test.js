@@ -33,12 +33,54 @@ const CAMPAIGN = {
   success: true,
 };
 
-const CAMPAIGN_WITH_ITEMS = {
+const CAMPAIGN_WITH_SCHEDULED_ITEMS = {
   data: {
     ...CAMPAIGN.data,
-    scheduled: 1,
+    scheduled: 2,
+    sent: 1,
     start_date: 1583946000,
     end_date: 1583946000,
+    items: [
+      {
+        id: '123',
+        type: 'update',
+        due_at: 1583946000,
+        service_type: 'twitter',
+        service_id: 96414483,
+        channel_type: 'profile',
+      },
+      {
+        id: '124',
+        type: 'update',
+        due_at: 1583946000,
+        service_type: 'twitter',
+        service_id: 96414483,
+        channel_type: 'profile',
+      },
+    ],
+  },
+  success: true,
+};
+
+const CAMPAIGN_WITH_SENT_ITEMS = {
+  data: {
+    ...CAMPAIGN.data,
+    scheduled: 2,
+    sent: 1,
+    start_date: 1583946000,
+    end_date: 1583946000,
+    items: [
+      {
+        id: '123',
+        type: 'update',
+        due_at: 1583946000,
+        service_type: 'twitter',
+        service_id: 96414483,
+        channel_type: 'profile',
+        service_post_id: '12345',
+        sent_at: 1583946000,
+      },
+    ],
   },
   success: true,
 };
@@ -47,18 +89,52 @@ describe('RPC | Get campaign', () => {
   it('gets the campaign without items correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN));
     await geCampaign().then(response => {
+      expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
+      expect(response.color).toBe('#BD3381');
       expect(response.id).not.toBeNull();
+      expect(response.id).not.toBeUndefined();
+      expect(response.lastUpdated).toContain('Last updated ');
     });
   });
 
-  it('gets the campaign with items correctly', async () => {
-    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_ITEMS));
+  it('gets the campaign with scheduled items correctly', async () => {
+    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
     await geCampaign().then(response => {
+      expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
-      expect(response.id).not.toBeNull();
-      expect(response.startDate).not.toBeNull();
-      expect(response.endDate).not.toBeNull();
+      expect(response.color).toBe('#BD3381');
+      expect(response.id).not.toBeUndefined();
+      expect(response.dateRange).not.toBeUndefined();
+      expect(response.lastUpdated).toContain('Last updated ');
+      expect(response.items.length).toBe(2);
+      response.items.forEach(item => {
+        expect(item.dueAt).not.toBeUndefined();
+        expect(item.serviceId).not.toBeUndefined();
+        expect(item.serviceType).not.toBeUndefined();
+        expect(item.channelType).not.toBeUndefined();
+      });
+    });
+  });
+
+  it('gets the campaign with scheduled items correctly', async () => {
+    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SENT_ITEMS));
+    await geCampaign().then(response => {
+      expect(response.globalOrganizationId).toBe('000111');
+      expect(response.name).toBe('My campaign');
+      expect(response.color).toBe('#BD3381');
+      expect(response.id).not.toBeUndefined();
+      expect(response.dateRange).not.toBeUndefined();
+      expect(response.lastUpdated).toContain('Last updated ');
+      expect(response.items.length).toBe(1);
+      response.items.forEach(item => {
+        expect(item.dueAt).not.toBeUndefined();
+        expect(item.serviceId).not.toBeUndefined();
+        expect(item.serviceType).not.toBeUndefined();
+        expect(item.channelType).not.toBeUndefined();
+        expect(item.servicePostId).not.toBeUndefined();
+        expect(item.sentAt).not.toBeUndefined();
+      });
     });
   });
 
