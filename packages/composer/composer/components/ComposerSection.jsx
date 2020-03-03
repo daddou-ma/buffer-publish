@@ -40,7 +40,7 @@ const ComposerComponent = ({
   isOnProTrial,
   hasIGDirectVideoFlip,
   hasShopgridFlip,
-  hasAccessToUserTag,
+  isProAndUpOrTeamMember,
   isFreeUser,
   isBusinessUser,
   draftMode,
@@ -88,7 +88,7 @@ const ComposerComponent = ({
       isOnProTrial={isOnProTrial}
       hasIGDirectVideoFlip={hasIGDirectVideoFlip}
       hasShopgridFlip={hasShopgridFlip}
-      hasAccessToUserTag={hasAccessToUserTag}
+      isProAndUpOrTeamMember={isProAndUpOrTeamMember}
       isFreeUser={isFreeUser}
       isBusinessUser={isBusinessUser}
       draftMode={draftMode}
@@ -135,7 +135,7 @@ class ComposerSection extends React.Component {
       canStartProTrial,
       isOnProTrial,
       hasShopgridFlip,
-      hasAccessToUserTag,
+      isProAndUpOrTeamMember,
       draftMode,
     } = this.props;
 
@@ -189,7 +189,7 @@ class ComposerSection extends React.Component {
               isOnProTrial,
               hasIGDirectVideoFlip,
               hasShopgridFlip,
-              hasAccessToUserTag,
+              isProAndUpOrTeamMember,
               isFreeUser,
               isBusinessUser,
               draftMode,
@@ -223,7 +223,7 @@ class ComposerSection extends React.Component {
                 isOnProTrial,
                 hasIGDirectVideoFlip,
                 hasShopgridFlip,
-                hasAccessToUserTag,
+                isProAndUpOrTeamMember,
                 isFreeUser,
                 isBusinessUser,
                 draftMode,
@@ -252,7 +252,7 @@ ComposerSection.propTypes = {
   hasIGDirectVideoFlip: PropTypes.bool.isRequired,
   isFreeUser: PropTypes.bool.isRequired,
   hasShopgridFlip: PropTypes.bool,
-  hasAccessToUserTag: PropTypes.bool,
+  isProAndUpOrTeamMember: PropTypes.bool,
   isBusinessUser: PropTypes.bool,
   draftMode: PropTypes.bool,
 };
@@ -261,7 +261,7 @@ ComposerSection.defaultProps = {
   isOmniboxEnabled: null,
   composerPosition: null,
   hasShopgridFlip: false,
-  hasAccessToUserTag: false,
+  isProAndUpOrTeamMember: false,
   isBusinessUser: false,
   draftMode: false,
 };

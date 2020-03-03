@@ -16,7 +16,7 @@ const ViewCampaign = ({
   campaignPosts,
   campaignDetails,
   hasPosts,
-  isOwner,
+  isUsingPublishAsTeamMember,
   translations,
   onCreatePostClick,
   onDeleteCampaignClick,
@@ -30,7 +30,7 @@ const ViewCampaign = ({
       <Header
         campaignDetails={campaignDetails}
         hasPosts={hasPosts}
-        isOwner={isOwner}
+        isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
         translations={translations.viewCampaign}
         onCreatePostClick={onCreatePostClick}
         onDeleteCampaignClick={onDeleteCampaignClick}
@@ -81,7 +81,7 @@ ViewCampaign.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   campaignDetails: PropTypes.object.isRequired, // eslint-disable-line
   campaignPosts: PropTypes.array, // eslint-disable-line
-  isOwner: PropTypes.bool.isRequired,
+  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
   hasPosts: PropTypes.string.isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
