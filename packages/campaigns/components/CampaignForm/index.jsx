@@ -84,7 +84,7 @@ const colors = [
 ];
 
 /* Component */
-const CreateCampaign = ({
+const CampaignForm = ({
   translations,
   onCreateCampaignClick,
   onCancelClick,
@@ -173,7 +173,7 @@ const CreateCampaign = ({
   );
 };
 
-CreateCampaign.propTypes = {
+CampaignForm.propTypes = {
   translations: PropTypes.shape({
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
@@ -192,4 +192,4 @@ CreateCampaign.propTypes = {
   isSaving: PropTypes.bool.isRequired,
 };
 
-export default CreateCampaign;
+export default CampaignForm;
