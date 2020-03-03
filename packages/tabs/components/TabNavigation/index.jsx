@@ -85,7 +85,7 @@ class TabNavigation extends React.Component {
     return (
       /* wrapper div with "tabs" id necessary as a selector
       for a11y focus after selecting profile in sidebar */
-      <div id="tabs" style={tabsStyle}>
+      <nav id="tabs" role="navigation" style={tabsStyle}>
         <Tabs selectedTabId={selectedTabId} onTabClick={onTabClick}>
           <Tab tabId="queue">Queue</Tab>
           {/* IG, Business users or Team Members */}
@@ -176,7 +176,7 @@ class TabNavigation extends React.Component {
             )}
           </Tabs>
         )}
-      </div>
+      </nav>
     );
   }
 }
