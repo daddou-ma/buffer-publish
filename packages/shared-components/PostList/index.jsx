@@ -65,7 +65,7 @@ const renderPost = ({
   userData,
   onPreviewClick,
 }) => {
-  const campaignId = post.campaignDetails ? post.campaignDetails.id : null;
+  const campaignId = post.campaignDetails?.id ?? null;
   const postWithEventHandlers = {
     ...post,
     key: post.id,
