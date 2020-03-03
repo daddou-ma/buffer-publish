@@ -46,17 +46,16 @@ describe('RPC | Create campaign', () => {
 
   it('fails to create campaign due to missing params', async () => {
     post.mockReturnValueOnce(
-      Promise.reject(new TypeError('Missing organization id'))
+      Promise.reject(new TypeError('Missing param: name'))
     );
     try {
       await createCampaign({
-        name: 'Test',
         color: '#ffffff',
       }).then(response => {
         throw new TypeError(response);
       });
     } catch (err) {
-      expect(err.message).toEqual('Missing organization id');
+      expect(err.message).toEqual('Missing param: name');
     }
   });
 });
