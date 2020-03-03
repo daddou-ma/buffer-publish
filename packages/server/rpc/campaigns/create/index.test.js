@@ -1,6 +1,7 @@
 import RPCEndpoint from '.';
 
 const post = require('../../../requestMethods/post');
+const { campaignParser } = require('../../../parsers/src');
 
 jest.mock('../../../requestMethods/post');
 
@@ -20,12 +21,11 @@ const createCampaign = () => RPCEndpoint.fn(params, { session });
 const CREATE_CAMPAIGN_RESPONSE = {
   data: {
     _id: '123456',
+    global_organization_id: '000111',
     name: 'Test',
     color: '#ffffff',
-    created_at: '2020-02-24 13:08:33',
-    updated_at: '2020-02-24 13:08:33',
-    start_date: '',
-    end_date: '',
+    created_at: 1583166077,
+    updated_at: 1583166098,
   },
   success: true,
 };
@@ -36,7 +36,6 @@ describe('RPC | Create campaign', () => {
     await createCampaign(params).then(response => {
       expect(response.name).toBe(params.name);
       expect(response.color).toBe(params.color);
-      expect(response.lastUpdated).toBe(`Last updated ${response.updatedAt}`);
     });
   });
 

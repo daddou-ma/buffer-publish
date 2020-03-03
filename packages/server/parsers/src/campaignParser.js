@@ -69,8 +69,8 @@ module.exports = campaign => {
     dateRange: parseDateRange(campaign.start_date, campaign.end_date), // TODO: date range formatted for Publish UI
     sent: campaign.sent,
     scheduled: campaign.scheduled,
-    channels: parseChannels(campaign.channels),
-    sentItems: parseCampaignItems(campaign.items),
-    scheduledItems: parseCampaignItems(campaign.items),
+    channels: campaign.channels && parseChannels(campaign.channels),
+    sentItems: campaign.items && parseCampaignItems(campaign.items),
+    scheduledItems: campaign.items && parseCampaignItems(campaign.items),
   };
 };
