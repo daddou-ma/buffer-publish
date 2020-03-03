@@ -11,11 +11,9 @@ const session = {
   },
 };
 
-const organizationId = '98765';
 const params = {
   name: 'Test',
   color: '#ffffff',
-  organizationId,
 };
 
 const createCampaign = () => RPCEndpoint.fn(params, { session });
