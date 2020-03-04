@@ -34,7 +34,7 @@ describe('RPC | Create campaign', () => {
   it('creates a campaign correctly', async () => {
     post.mockReturnValueOnce(Promise.resolve(CREATE_CAMPAIGN_RESPONSE));
     await createCampaign(params).then(response => {
-      expect(response.id).not.toBeUndefined();
+      expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe(params.name);
       expect(response.color).toBe(params.color);

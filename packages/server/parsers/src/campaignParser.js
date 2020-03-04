@@ -7,12 +7,30 @@ const parseLastUpdated = updatedAt => {
   return `Last updated ${diff} ago`;
 };
 
+const getYear = momentDate => momentDate.format('YYYY');
+const getMonth = momentDate => momentDate.format('MM');
+
 const parseDateRange = (startDate, endDate) => {
-  // const lastUpdated = moment.tz(date, 'Europe/Madrid'); // .format('MM/DD/YYYY');
-  if (startDate && endDate) {
-    return `${startDate} - ${endDate}`;
+  if (!startDate && !endDate) return null;
+
+  const momentStart = moment(new Date(startDate * 1000));
+  const momentEnd = moment(new Date(endDate * 1000));
+
+  let start = '';
+  let end = '';
+  if (getYear(momentStart) === getYear(momentEnd)) {
+    start = momentStart.format('MMM D');
+    if (getMonth(momentStart) === getMonth(momentEnd)) {
+      end = momentEnd.format('D, YYYY'); // Jan 25-31, 2020
+    } else {
+      end = momentEnd.format('MMM D, YYYY'); // Mar 11-Apr 4, 2020
+    }
+  } else {
+    start = momentStart.format('MMM D YYYY');
+    end = momentEnd.format('MMM D YYYY'); // Dec 25 2019-Jan 5 2020
   }
-  return null;
+
+  return `${start}-${end}`;
 };
 
 const parseItem = item => {
@@ -66,7 +84,7 @@ module.exports = campaign => {
     createdAt: campaign.created_at,
     startDate: campaign.start_date,
     endDate: campaign.end_date,
-    dateRange: parseDateRange(campaign.start_date, campaign.end_date), // TODO: date range formatted for Publish UI
+    dateRange: parseDateRange(campaign.start_date, campaign.end_date),
     sent: campaign.sent,
     scheduled: campaign.scheduled,
     channels: (campaign.channels && parseChannels(campaign.channels)) ?? null,

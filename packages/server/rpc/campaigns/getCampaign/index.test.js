@@ -39,7 +39,7 @@ const CAMPAIGN_WITH_SCHEDULED_ITEMS = {
     scheduled: 2,
     sent: 1,
     start_date: 1583946000,
-    end_date: 1583946000,
+    end_date: 1585998540,
     items: [
       {
         id: '123',
@@ -52,7 +52,7 @@ const CAMPAIGN_WITH_SCHEDULED_ITEMS = {
       {
         id: '124',
         type: 'update',
-        due_at: 1583946000,
+        due_at: 1585998540,
         service_type: 'twitter',
         service_id: 96414483,
         channel_type: 'profile',
@@ -68,7 +68,7 @@ const CAMPAIGN_WITH_SENT_ITEMS = {
     scheduled: 2,
     sent: 1,
     start_date: 1583946000,
-    end_date: 1583946000,
+    end_date: 1585998540,
     items: [
       {
         id: '123',
@@ -85,22 +85,43 @@ const CAMPAIGN_WITH_SENT_ITEMS = {
   success: true,
 };
 
+const CAMPAIGN_DATE_RANGE_SAME_MONTH = {
+  data: {
+    ...CAMPAIGN.data,
+    start_date: 1583514000,
+    end_date: 1583839380,
+  },
+  success: true,
+};
+
+const CAMPAIGN_DATE_RANGE_DIFF_MONTH_YEAR = {
+  data: {
+    ...CAMPAIGN.data,
+    start_date: 1577491200,
+    end_date: 1583839380,
+  },
+  success: true,
+};
+
+const itemParams = ['dueAt', 'serviceId', 'serviceType', 'channelType'];
+
 describe('RPC | Get campaign', () => {
   it('gets the campaign without items correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN));
     await geCampaign().then(response => {
-      expect(response.id).not.toBeUndefined();
+      expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
       expect(response.color).toBe('#BD3381');
       expect(response.lastUpdated).toContain('Last updated ');
+      expect(response.dateRange).toBeNull();
     });
   });
 
   it('gets the campaign with scheduled items correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
     await geCampaign().then(response => {
-      expect(response.id).not.toBeUndefined();
+      expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
       expect(response.color).toBe('#BD3381');
@@ -108,31 +129,54 @@ describe('RPC | Get campaign', () => {
       expect(response.lastUpdated).toContain('Last updated ');
       expect(response.items.length).toBe(2);
       response.items.forEach(item => {
-        expect(item.dueAt).not.toBeUndefined();
-        expect(item.serviceId).not.toBeUndefined();
-        expect(item.serviceType).not.toBeUndefined();
-        expect(item.channelType).not.toBeUndefined();
+        itemParams.forEach(p => {
+          const itemDetail = item[p];
+          expect(itemDetail).not.toBeUndefined();
+        });
       });
+    });
+  });
+
+  it('parses date range, with same year and different month correctly', async () => {
+    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
+    await geCampaign().then(response => {
+      expect(response.items.length).toBe(2);
+      expect(response.dateRange).toBe('Mar 11-Apr 4, 2020');
+    });
+  });
+
+  it('parses date range, with same year and month correctly', async () => {
+    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_DATE_RANGE_SAME_MONTH));
+    await geCampaign().then(response => {
+      expect(response.dateRange).toBe('Mar 6-10, 2020');
+    });
+  });
+
+  it('parses date range, with different year and month correctly', async () => {
+    get.mockReturnValueOnce(
+      Promise.resolve(CAMPAIGN_DATE_RANGE_DIFF_MONTH_YEAR)
+    );
+    await geCampaign().then(response => {
+      expect(response.dateRange).toBe('Dec 28 2019-Mar 10 2020');
     });
   });
 
   it('gets the campaign with scheduled items correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SENT_ITEMS));
     await geCampaign().then(response => {
+      expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
       expect(response.color).toBe('#BD3381');
-      expect(response.id).not.toBeUndefined();
       expect(response.dateRange).not.toBeUndefined();
       expect(response.lastUpdated).toContain('Last updated ');
       expect(response.items.length).toBe(1);
       response.items.forEach(item => {
-        expect(item.dueAt).not.toBeUndefined();
-        expect(item.serviceId).not.toBeUndefined();
-        expect(item.serviceType).not.toBeUndefined();
-        expect(item.channelType).not.toBeUndefined();
-        expect(item.servicePostId).not.toBeUndefined();
-        expect(item.sentAt).not.toBeUndefined();
+        const sentItemParams = [...itemParams, 'sentAt', 'servicePostId'];
+        sentItemParams.forEach(p => {
+          const itemDetail = item[p];
+          expect(itemDetail).not.toBeUndefined();
+        });
       });
     });
   });
