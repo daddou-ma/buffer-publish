@@ -18,7 +18,8 @@ module.exports = method(
         adminAccountId: account._id,
       });
       if (organization) {
-        account.productSolutionName = organization.metadata.account.productSolutionName;
+        account.productSolutionName =
+          organization.metadata.account.productSolutionName;
       }
     } catch (e) {
       console.log(e); // eslint-disable-line no-console

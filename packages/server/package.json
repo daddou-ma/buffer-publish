@@ -14,6 +14,7 @@
     "@bufferapp/logger": "0.7.0",
     "@bufferapp/session-manager": "0.7.5",
     "@bufferapp/shutdown-helper": "0.2.0",
+    "micro-rpc-client": "^0.1.4",
     "@bugsnag/js": "^5.0.1",
     "body-parser": "1.17.2",
     "cookie-parser": "1.4.3",
