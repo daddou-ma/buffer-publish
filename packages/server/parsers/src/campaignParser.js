@@ -9,28 +9,37 @@ const parseLastUpdated = updatedAt => {
 
 const getYear = momentDate => momentDate.format('YYYY');
 const getMonth = momentDate => momentDate.format('MM');
+const getMomentDate = date => moment(new Date(date * 1000));
+const isRangeFromSameYear = (start, end) => getYear(start) === getYear(end);
+const isRangeFromSameMonth = (start, end) => getMonth(start) === getMonth(end);
+
+const formatDateRange = ({
+  momentStart,
+  startFormat,
+  momentEnd,
+  endFormat,
+}) => {
+  const start = momentStart.format(startFormat);
+  const end = momentEnd.format(endFormat);
+  return `${start}-${end}`;
+};
 
 const parseDateRange = (startDate, endDate) => {
   if (!startDate && !endDate) return null;
 
-  const momentStart = moment(new Date(startDate * 1000));
-  const momentEnd = moment(new Date(endDate * 1000));
+  const momentStart = getMomentDate(startDate);
+  const momentEnd = getMomentDate(endDate);
 
-  let start = '';
-  let end = '';
-  if (getYear(momentStart) === getYear(momentEnd)) {
-    start = momentStart.format('MMM D');
-    if (getMonth(momentStart) === getMonth(momentEnd)) {
-      end = momentEnd.format('D, YYYY'); // Jan 25-31, 2020
-    } else {
-      end = momentEnd.format('MMM D, YYYY'); // Mar 11-Apr 4, 2020
-    }
-  } else {
-    start = momentStart.format('MMM D YYYY');
-    end = momentEnd.format('MMM D YYYY'); // Dec 25 2019-Jan 5 2020
+  let startFormat = 'MMM D YYYY';
+  let endFormat = 'MMM D YYYY'; // Dec 25 2019-Jan 5 2020
+  if (isRangeFromSameYear(momentStart, momentEnd)) {
+    startFormat = 'MMM D';
+    endFormat = isRangeFromSameMonth(momentStart, momentEnd)
+      ? 'D, YYYY' // Jan 25-31, 2020
+      : 'MMM D, YYYY'; // Mar 11-Apr 4, 2020
   }
 
-  return `${start}-${end}`;
+  return formatDateRange({ momentStart, startFormat, momentEnd, endFormat });
 };
 
 const parseItem = item => {
