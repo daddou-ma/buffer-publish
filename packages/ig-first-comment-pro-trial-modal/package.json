@@ -9,7 +9,7 @@
   "author": "amylee@buffer.com",
   "dependencies": {
     "@bufferapp/publish-modals": "2.0.0",
-    "@bufferapp/async-data-fetch": "1.9.4"
+    "@bufferapp/async-data-fetch": "2.0.0"
   },
   "devDependencies": {
   },

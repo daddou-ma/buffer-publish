@@ -9,7 +9,7 @@
   "author": "mike@msanroman.io",
   "dependencies": {
     "@bufferapp/analyze-profile-selector": "1.11.0",
-    "@bufferapp/async-data-fetch": "1.9.4",
+    "@bufferapp/async-data-fetch": "2.0.0",
     "@bufferapp/components": "3.2.1",
     "moment": "2.22.2",
     "react-tooltip": "^3.3.0"
