@@ -66,12 +66,16 @@ const parseItem = item => {
 };
 
 const parseCampaignItems = items => {
+  if (!items) return null;
+
   return items.map(item => {
     return parseItem(item);
   });
 };
 
 const parseChannels = channels => {
+  if (!channels) return null;
+
   return channels.map(channel => {
     return {
       serviceId: channel.service_id,
@@ -96,7 +100,7 @@ module.exports = campaign => {
     dateRange: parseDateRange(campaign.start_date, campaign.end_date),
     sent: campaign.sent,
     scheduled: campaign.scheduled,
-    channels: (campaign.channels && parseChannels(campaign.channels)) ?? null,
-    items: (campaign.items && parseCampaignItems(campaign.items)) ?? null,
+    channels: campaign.channels && parseChannels(campaign.channels),
+    items: campaign.items && parseCampaignItems(campaign.items),
   };
 };
