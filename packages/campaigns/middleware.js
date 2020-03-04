@@ -13,9 +13,33 @@ import {
 } from '@bufferapp/publish-routes';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch, getState }) => next => action => {
+export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
+    case actionTypes.HANDLE_CAMPAIGN_CLICK: {
+      const { campaignId } = action;
+
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getCampaign',
+          args: {
+            campaignId,
+            past: false,
+            basicItems: true,
+          },
+        })
+      );
+      break;
+    }
+
+    case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      console.log('SUCCESS', action);
+      break;
+
+    case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
+      console.log('ERROR', action);
+      break;
+
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
 

@@ -8,6 +8,7 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
   DELETE_CAMPAIGN: 0,
   EDIT_CAMPAIGN: 0,
   HANDLE_CAMPAIGN_ROUTED: 0,
+  HANDLE_CAMPAIGN_CLICK: 0,
 });
 
 export const initialState = {
@@ -76,5 +77,9 @@ export const actions = {
     type: actionTypes.HANDLE_CAMPAIGN_ROUTED,
     campaignId,
     selectedPage,
+  }),
+  handleCampaignClick: campaignId => ({
+    type: actionTypes.HANDLE_CAMPAIGN_CLICK,
+    campaignId,
   }),
 };
