@@ -64,7 +64,6 @@ export const campaignPages = {
 
 const isCampaignsHome = match => match === campaignPages.VIEW_ALL_CAMPAIGNS;
 const isCampaignsCreate = match => match === campaignPages.CREATE_CAMPAIGN;
-const isCampaignsEdit = match => match === campaignPages.EDIT_CAMPAIGN;
 
 export const getCampaignPageFromMatch = match => {
   const fullUrl = match[0];
@@ -73,7 +72,6 @@ export const getCampaignPageFromMatch = match => {
 
   if (isCampaignsHome(fullUrl)) return campaignPages.VIEW_ALL_CAMPAIGNS;
   if (isCampaignsCreate(firstMatch)) return campaignPages.CREATE_CAMPAIGN;
-  if (isCampaignsEdit(firstMatch)) return campaignPages.EDIT_CAMPAIGN;
   if (!secondMatch && !isCampaignsCreate(firstMatch)) return campaignPages.VIEW_CAMPAIGN;
 
   return secondMatch;

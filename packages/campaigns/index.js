@@ -34,13 +34,27 @@ export default connect(
     onCancelCreateCampaignClick: () => {
       dispatch(push(campaignsPageRoute));
     },
-    onCreateCampaignClick: ({ colorSelected, campaignName }) => {
-      dispatch(
-        actions.handleCreateCampaignClick({
-          name: campaignName,
-          color: colorSelected,
-        })
-      );
+    onCreateOrUpdateCampaignClick: ({
+      campaignId,
+      colorSelected,
+      campaignName,
+    }) => {
+      if (campaignId) {
+        dispatch(
+          actions.handleEditCampaignClick({
+            id: campaignId,
+            name: campaignName,
+            color: colorSelected,
+          })
+        );
+      } else {
+        dispatch(
+          actions.handleCreateCampaignClick({
+            name: campaignName,
+            color: colorSelected,
+          })
+        );
+      }
     },
     onCreatePostClick: campaignId => {
       dispatch(actions.handleOpenComposer(campaignId));

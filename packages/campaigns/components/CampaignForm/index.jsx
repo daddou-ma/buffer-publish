@@ -86,7 +86,7 @@ const colors = [
 /* Component */
 const CampaignForm = ({
   translations,
-  onCreateCampaignClick,
+  onCreateOrUpdateCampaignClick,
   onCancelClick,
   isSaving,
   inEditMode,
@@ -95,6 +95,7 @@ const CampaignForm = ({
   // State
   const defaultName = campaignDetails?.name ?? '';
   const defaultColor = campaignDetails?.color ?? purple;
+  const campaignId = campaignDetails?.id ?? null;
   const [campaignName, setName] = useState(defaultName);
   const [colorSelected, setColor] = useState(defaultColor);
   const [isSubmitButtonDisabled, disableSubmit] = useState(true);
@@ -163,7 +164,13 @@ const CampaignForm = ({
           type="primary"
           size="large"
           label={translations.saveCampaign}
-          onClick={() => onCreateCampaignClick({ colorSelected, campaignName })}
+          onClick={() =>
+            onCreateOrUpdateCampaignClick({
+              campaignId,
+              colorSelected,
+              campaignName,
+            })
+          }
           disabled={isSubmitButtonDisabled || isSaving}
           fullWidth
         />
@@ -195,7 +202,7 @@ CampaignForm.propTypes = {
     updateCampaign: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
   }).isRequired,
-  onCreateCampaignClick: PropTypes.func.isRequired,
+  onCreateOrUpdateCampaignClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
   inEditMode: PropTypes.bool,

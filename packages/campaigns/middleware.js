@@ -30,6 +30,21 @@ export default ({ dispatch, getState }) => next => action => {
       );
       break;
     }
+    case actionTypes.EDIT_CAMPAIGN: {
+      const { id, name, color } = action;
+
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'updateCampaign',
+          args: {
+            campaignId: id,
+            name,
+            color,
+          },
+        })
+      );
+      break;
+    }
     // Complete once changes to the backend endpoint are made:
     case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { id, name, color, globalOrganizationId } = action.result || {};
@@ -47,6 +62,22 @@ export default ({ dispatch, getState }) => next => action => {
           message: 'Great! Your new campaign was created!',
         })
       );
+
+      if (id) {
+        dispatch(
+          push(
+            generateCampaignPageRoute({
+              campaignId: id,
+              selectedPage: campaignPages.VIEW_CAMPAIGN,
+            })
+          )
+        );
+      }
+      break;
+    }
+
+    case `editCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { id } = action.result || {};
 
       if (id) {
         dispatch(

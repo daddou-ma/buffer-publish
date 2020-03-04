@@ -17,14 +17,14 @@ storiesOf('Campaigns|CampaignForm', module)
   .add('default create', () => (
     <CampaignForm
       translations={translations.campaigns.campaignForm}
-      onSaveCampaignClick={action('saveCampaign')}
+      onCreateOrUpdateCampaignClick={action('saveCampaign')}
       onCancelClick={action('cancel')}
     />
   ))
   .add('edit form', () => (
     <CampaignForm
       translations={translations.campaigns.campaignForm}
-      onSaveCampaignClick={action('saveCampaign')}
+      onCreateOrUpdateCampaignClick={action('saveCampaign')}
       onCancelClick={action('cancel')}
       inEditMode
       campaignDetails={campaignDetails}

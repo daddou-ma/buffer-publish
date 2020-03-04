@@ -20,7 +20,7 @@ const CampaignsPage = ({
   campaigns,
   onOpenCreateCampaignClick,
   onCancelCreateCampaignClick,
-  onCreateCampaignClick,
+  onCreateOrUpdateCampaignClick,
   isSaving,
   hasCampaignsFlip,
   selectedPage,
@@ -33,6 +33,10 @@ const CampaignsPage = ({
     return <BufferLoading fullscreen />;
   }
 
+  const isEditing = viewMode === campaignPages.EDIT_CAMPAIGN;
+  const renderCampaignForm =
+    viewMode === campaignPages.CREATE_CAMPAIGN || isEditing;
+
   return (
     <CampaignsWrapper>
       {viewMode === campaignPages.VIEW_CAMPAIGN && (
@@ -43,7 +47,7 @@ const CampaignsPage = ({
           translations={translations}
           onCreatePostClick={() => {}}
           onDeleteCampaignClick={() => {}}
-          onEditCampaignClick={() => {}}
+          onEditCampaign={() => setViewMode(campaignPages.EDIT_CAMPAIGN)}
         />
       )}
       {viewMode === campaignPages.VIEW_ALL_CAMPAIGNS && (
@@ -52,23 +56,16 @@ const CampaignsPage = ({
           translations={translations}
           onOpenCampaign={() => setViewMode(campaignPages.VIEW_CAMPAIGN)}
           onOpenCreateCampaignClick={onOpenCreateCampaignClick}
+          onEditCampaign={() => setViewMode(campaignPages.EDIT_CAMPAIGN)}
         />
       )}
-      {viewMode === campaignPages.CREATE_CAMPAIGN && (
+      {renderCampaignForm && (
         <CampaignForm
           isSaving={isSaving}
           translations={translations.campaignForm}
-          onCreateCampaignClick={onCreateCampaignClick}
+          onCreateOrUpdateCampaignClick={onCreateOrUpdateCampaignClick}
           onCancelClick={onCancelCreateCampaignClick}
-        />
-      )}
-      {viewMode === campaignPages.EDIT_CAMPAIGN && (
-        <CampaignForm
-          isSaving={isSaving}
-          translations={translations.campaignForm}
-          onCreateCampaignClick={onCreateCampaignClick}
-          onCancelClick={onCancelCreateCampaignClick}
-          inEditMode
+          inEditMode={isEditing}
           campaignDetails={campaignDetails}
         />
       )}
@@ -79,7 +76,7 @@ const CampaignsPage = ({
 CampaignsPage.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   campaigns: PropTypes.array, // eslint-disable-line
-  onCreateCampaignClick: PropTypes.func.isRequired,
+  onCreateOrUpdateCampaignClick: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool,
   selectedPage: PropTypes.string.isRequired,
