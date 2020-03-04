@@ -25,6 +25,7 @@ const CampaignsPage = ({
   hasCampaignsFlip,
   selectedPage,
   campaignDetails,
+  onCampaignClick,
 }) => {
   const [viewMode, setViewMode] = useState(campaignPages.VIEW_ALL_CAMPAIGNS);
   useSetCampaignPage({ selectedPage, setViewMode });
@@ -57,6 +58,7 @@ const CampaignsPage = ({
           onOpenCampaign={() => setViewMode(campaignPages.VIEW_CAMPAIGN)}
           onOpenCreateCampaignClick={onOpenCreateCampaignClick}
           onEditCampaign={() => setViewMode(campaignPages.EDIT_CAMPAIGN)}
+          onCampaignClick={onCampaignClick}
         />
       )}
       {renderCampaignForm && (

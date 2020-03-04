@@ -42,7 +42,10 @@ const getPostActionString = ({ post }) => {
   return `This post ${post.sent_at ? 'was' : 'will be'} sent ${dateString}.`;
 };
 
-const getPostError = error => {
+const getPostError = ({error, status}) => {
+  if (status !== 'error') {
+    return null;
+  }
   const isObject = typeof error === 'object' && error !== null;
   return isObject ? error.text || '' : error || '';
 };
@@ -50,8 +53,8 @@ const getPostError = error => {
 const getPostDetails = ({ post }) => ({
   postAction: getPostActionString({ post }),
   isRetweet: post.retweet !== undefined,
-  error: getPostError(post.error),
-  errorLink: post.error && post.error.link ? post.error.link : null,
+  error: getPostError({ error: post.error, status: post.status }),
+  errorLink: post.status === 'error' && post.error && post.error.link ? post.error.link : null,
   isCustomScheduled: post.scheduled_at ? true : false,
   isInstagramReminder:
     post.profile_service === 'instagram' && !post.can_send_direct
