@@ -35,6 +35,7 @@ const renderPostList = ({
   onPreviewClick,
   showAnalyzeBannerAfterFirstPost,
   isAnalyzeCustomer,
+  profileServiceType,
 }) => (
   <div style={postListStyle}>
     <PostList
@@ -63,6 +64,7 @@ const renderPostList = ({
       onPreviewClick={onPreviewClick}
       showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
       isAnalyzeCustomer={isAnalyzeCustomer}
+      profileServiceType={profileServiceType}
     />
   </div>
 );
@@ -92,6 +94,7 @@ const PostLists = ({
   onPreviewClick,
   showAnalyzeBannerAfterFirstPost,
   isAnalyzeCustomer,
+  profileServiceType,
 }) => (
   <List
     items={postLists.map((postList, index) =>
@@ -119,6 +122,7 @@ const PostLists = ({
         onPreviewClick,
         showAnalyzeBannerAfterFirstPost,
         isAnalyzeCustomer,
+        profileServiceType,
       })
     )}
     fillContainer

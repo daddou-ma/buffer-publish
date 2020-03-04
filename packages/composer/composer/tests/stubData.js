@@ -103,7 +103,7 @@ export const rawProfilesData = [
   },
   {
     id: '59c420f583768201008b456b',
-    imagesAvatar: 'https://lorempixel.com/60/60/people/',
+    imagesAvatar: 'http://via.placeholder.com/60x60',
     instagramDirectEnabled: true,
     isBusinessProfile: true,
     isDisabled: false,

@@ -62,6 +62,7 @@ const renderPost = ({
   hasFirstCommentFlip,
   userData,
   onPreviewClick,
+  profileServiceType,
 }) => {
   const postWithEventHandlers = {
     ...post,
@@ -81,6 +82,7 @@ const renderPost = ({
     hasFirstCommentFlip,
     userData,
     onPreviewClick,
+    profileServiceType,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -121,6 +123,7 @@ const PostList = ({
   onPreviewClick,
   showAnalyzeBannerAfterFirstPost,
   isAnalyzeCustomer,
+  profileServiceType,
 }) => (
   <React.Fragment>
     <Header listHeader={listHeader} isFirstItem={index === 0} />
@@ -155,6 +158,7 @@ const PostList = ({
               hasFirstCommentFlip,
               userData,
               onPreviewClick,
+              profileServiceType,
             })}
             {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder && (
               <ShareAgainWrapper>

@@ -67,6 +67,7 @@ const SentPosts = ({
   showAnalyzeBannerAfterFirstPost,
   isAnalyzeCustomer,
   fetchSentPosts,
+  profileServiceType,
 }) => {
   useEffect(() => {
     fetchSentPosts();
@@ -143,6 +144,7 @@ const SentPosts = ({
           hasFirstCommentFlip={hasFirstCommentFlip}
           showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
           isAnalyzeCustomer={isAnalyzeCustomer}
+          profileServiceType={profileServiceType}
         />
       </div>
       {moreToLoad && (

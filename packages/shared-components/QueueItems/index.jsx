@@ -94,6 +94,7 @@ const renderPost = ({
   serviceId,
   userData,
 }) => {
+  console.log({ post });
   const postWithEventHandlers = {
     ...post,
     key: post.id,

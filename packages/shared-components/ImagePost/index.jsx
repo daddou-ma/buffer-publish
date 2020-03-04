@@ -69,6 +69,7 @@ const ImagePost = ({
   isOver,
   statistics,
   profile_service: profileService,
+  profileServiceType,
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
@@ -160,6 +161,7 @@ const ImagePost = ({
       isOver={isOver}
       statistics={statistics}
       profileService={profileService}
+      profileServiceType={profileServiceType}
       locationName={locationName}
       sourceUrl={sourceUrl}
       subprofileID={subprofileID}

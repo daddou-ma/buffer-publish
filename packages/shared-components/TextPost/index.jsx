@@ -35,6 +35,7 @@ const TextPost = ({
   fixed,
   statistics,
   subprofiles,
+  profileServiceType,
   profile_service: profileService,
   service_geolocation_name: locationName,
   source_url: sourceUrl,
@@ -104,6 +105,7 @@ const TextPost = ({
       fixed={fixed}
       statistics={statistics}
       subprofiles={subprofiles}
+      profileServiceType={profileServiceType}
       profileService={profileService}
       locationName={locationName}
       sourceUrl={sourceUrl}

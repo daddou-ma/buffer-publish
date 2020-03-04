@@ -52,6 +52,7 @@ const LinkPost = ({
   isOver,
   statistics,
   subprofiles,
+  profileServiceType,
   profile_service: profileService,
   service_geolocation_name: locationName,
   source_url: sourceUrl,
@@ -148,6 +149,7 @@ const LinkPost = ({
       onRequeueClick={onRequeueClick}
       statistics={statistics}
       profileService={profileService}
+      profileServiceType={profileServiceType}
       locationName={locationName}
       subprofiles={subprofiles}
       subprofileID={subprofileID}

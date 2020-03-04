@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { transitionAnimationType } from '@bufferapp/components/style/animation';
 import { WithFeatureLoader } from '@bufferapp/product-features';
+import { gray, blue, transparent } from '@bufferapp/ui/style/colors';
+import styled from 'styled-components';
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RenderPostMetaBar from './RenderPostMetaBar';
@@ -17,10 +19,22 @@ const getPostContainerStyle = ({ dragging, hovering }) => ({
   borderRadius: '4px',
 });
 
+const PostContainerWithStyles = styled.div`
+  display: flex;
+  width: 100%;
+  transition: box-shadow 0.1s ${transitionAnimationType};
+  border-radius: 4px;
+`;
+
 const postStyle = {
   flexGrow: 1,
   minWidth: 0,
 };
+
+const PostContentsWithStyles = styled.div`
+  flex-grow: 1;
+  min-width: 0;
+`;
 
 const prefixCSSForBrowser = css => {
   const chrome = navigator.userAgent.indexOf('Chrome') > -1;
@@ -42,62 +56,19 @@ const getPostContentStyle = ({ draggable, dragging }) => ({
 
 /* eslint-disable react/prop-types */
 
-const getBorderStyle = ({
-  draggingPlaceholder,
-  noBorder,
-  dragging,
-  isOver,
-}) => {
-  const lineType = draggingPlaceholder ? 'dashed' : 'solid';
-  let color = '#b8b8b8';
-
-  if (noBorder) {
-    color = 'transparent';
-  }
-
-  if (!dragging && isOver) {
-    color = '#2C4BFF';
-  }
-
-  return `1px ${lineType} ${color}`;
-};
-
-const getBDSCardStyle = ({
-  faded,
-  draggingPlaceholder,
-  noBorder,
-  dragging,
-  isOver,
-}) => ({
-  background: '#fff',
-  border: getBorderStyle({ draggingPlaceholder, noBorder, dragging, isOver }),
-  borderRadius: '4px',
-  opacity: faded ? '0.5' : '1',
-  overflow: 'hidden',
-  boxShadow:
-    !draggingPlaceholder && !noBorder && '0px 1px 4px rgba(0, 0, 0, 0.16)',
-});
-
-const BDSCard = ({
-  faded,
-  draggingPlaceholder,
-  noBorder,
-  dragging,
-  isOver,
-  children,
-}) => (
-  <div
-    style={getBDSCardStyle({
-      faded,
-      draggingPlaceholder,
-      noBorder,
-      dragging,
-      isOver,
-    })}
-  >
-    {children}
-  </div>
-);
+const BDDCardStyled = styled.div`
+  background: #fff;
+  border: ${({ draggingPlaceholder, noBorder, dragging, isOver }) => {
+    const color =
+      (!dragging && isOver && blue) || (noBorder && transparent) || gray;
+    return `1px ${draggingPlaceholder ? 'dashed' : 'solid'} ${color}`;
+  }};
+  border-radius: 4px;
+  opacity: ${props => (props.faded ? '0.5' : '1')};
+  overflow: hidden;
+  box-shadow: ${({ draggingPlaceholder, noBorder }) =>
+    !draggingPlaceholder && !noBorder && '0px 1px 4px rgba(0, 0, 0, 0.16)'};
+`;
 
 /* eslint-enable react/prop-types */
 
@@ -122,9 +93,9 @@ const Post = ({
   dragging,
   hovering,
   isOver,
-  fixed,
   statistics,
   profileService,
+  profileServiceType,
   serviceLink,
   isSent,
   isManager,
@@ -156,9 +127,9 @@ const Post = ({
     !isPastReminder;
 
   return (
-    <div style={getPostContainerStyle({ dragging, hovering, isOver })}>
-      <div style={postStyle}>
-        <BDSCard
+    <PostContainerWithStyles>
+      <PostContentsWithStyles>
+        <BDDCardStyled
           faded={isDeleting}
           noPadding
           draggingPlaceholder={dragging}
@@ -247,11 +218,12 @@ const Post = ({
                 }
                 statistics={statistics}
                 profileService={profileService}
+                profileServiceType={profileServiceType}
               />
             )}
-        </BDSCard>
-      </div>
-    </div>
+        </BDDCardStyled>
+      </PostContentsWithStyles>
+    </PostContainerWithStyles>
   );
 };
 
@@ -287,7 +259,6 @@ Post.commonPropTypes = {
   dragging: PropTypes.bool,
   hovering: PropTypes.bool,
   isOver: PropTypes.bool,
-  fixed: PropTypes.bool,
   onDropPost: PropTypes.func,
   serviceLink: PropTypes.string,
   isSent: PropTypes.bool,
@@ -310,7 +281,6 @@ Post.defaultProps = {
   isConfirmingDelete: false,
   isDeleting: false,
   isWorking: false,
-  fixed: false,
   isSent: false,
   isBusinessAccount: false,
   isManager: true,

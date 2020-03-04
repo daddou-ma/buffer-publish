@@ -44,6 +44,7 @@ export default connect(
         page: currentProfile.page,
         postLists: formatPostLists(currentProfile.posts),
         total: currentProfile.total,
+        profileServiceType: state?.profileSidebar?.selectedProfile?.service_type,
         showComposer: state.sent.showComposer,
         editMode: state.sent.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
