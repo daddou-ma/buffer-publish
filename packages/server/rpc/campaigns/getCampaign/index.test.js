@@ -140,7 +140,6 @@ describe('RPC | Get campaign', () => {
   it('parses date range, with same year and different month correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
     await geCampaign().then(response => {
-      expect(response.items.length).toBe(2);
       expect(response.dateRange).toBe('Mar 11-Apr 4, 2020');
     });
   });
