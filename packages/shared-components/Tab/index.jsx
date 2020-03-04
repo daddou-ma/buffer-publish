@@ -1,56 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '@bufferapp/components';
-import { curiousBlue } from '@bufferapp/components/style/color';
-import { calculateStyles } from '@bufferapp/components/lib/utils';
+import styled from 'styled-components';
+import { blue, grayDarker, grayDefault } from '@bufferapp/ui/style/colors';
+import {
+  fontSize,
+  fontSizeSmall,
+  fontWeightMedium,
+  fontWeight,
+} from '@bufferapp/ui/style/fonts';
 
-import HoverableText from '../HoverableText';
+const TabItem = styled.li`
+  transform: translate(0, 1px);
+  margin: 0 22px 0 0;
+  display: inline-block;
+  min-width: 60px;
+  text-align: center;
+  pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+  border-bottom-color: ${props => (props.selected ? blue : 'unset')};
+  border-bottom-style: ${props => (props.selected ? 'solid' : 'none')};
+  border-bottom-width: ${props => (props.secondary ? '1px' : '2px')};
+`;
+
+const TabLink = styled.a`
+  padding: ${props =>
+    props.secondary ? '12px 13px 12px 13px' : '18px 13px 17px 13px'};
+  display: block;
+  text-decoration: none;
+  color: ${props => (props.selected ? grayDarker : grayDefault)};
+  font-size: ${props => (props.secondary ? fontSizeSmall : fontSize)};
+  font-weight: ${props => (props.selected ? fontWeightMedium : fontWeight)};
+  :hover {
+    color: ${grayDarker};
+  }
+`;
 
 const Tab = ({ children, selected, tabId, onClick, secondary, disabled }) => (
-  <div
-    style={calculateStyles(
-      {
-        default: {
-          transform: 'translate(0, 1px)',
-          margin: '0 22px 0 0',
-          display: 'inline-block',
-          minWidth: '60px',
-          textAlign: 'center',
-        },
-        selected: {
-          borderBottom: secondary
-            ? `1px solid ${curiousBlue}`
-            : `2px solid ${curiousBlue}`,
-        },
-        disabled: {
-          pointerEvents: 'none',
-        },
-      },
-      {
-        selected,
-        disabled,
-      }
-    )}
-  >
-    <Link
-      padding={secondary ? '12px 13px 12px 13px' : '18px 13px 17px 13px'}
-      block
-      href={'#'}
+  <TabItem selected={selected} disabled={disabled} secondary={secondary}>
+    <TabLink
+      selected={selected}
+      secondary={secondary}
+      href="#"
       onClick={e => {
         e.preventDefault();
         onClick(tabId);
       }}
-      unstyled
     >
-      <HoverableText
-        color={selected ? 'black' : 'shuttleGray'}
-        hoverColor="black"
-        size={secondary ? 'small' : 'mini'}
-      >
-        {children}
-      </HoverableText>
-    </Link>
-  </div>
+      {children}
+    </TabLink>
+  </TabItem>
 );
 
 Tab.propTypes = {
