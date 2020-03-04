@@ -100,7 +100,7 @@ module.exports = campaign => {
     dateRange: parseDateRange(campaign.start_date, campaign.end_date),
     sent: campaign.sent,
     scheduled: campaign.scheduled,
-    channels: campaign.channels && parseChannels(campaign.channels),
-    items: campaign.items && parseCampaignItems(campaign.items),
+    channels: parseChannels(campaign.channels),
+    items: parseCampaignItems(campaign.items),
   };
 };
