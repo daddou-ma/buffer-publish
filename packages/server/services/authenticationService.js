@@ -1,4 +1,4 @@
-const RPCClient = require('micro-rpc-client');
+const RPCClient = require('@bufferapp/micro-rpc-client');
 
 const client = process.env.AUTH_SVC_ADDR
   ? new RPCClient({ url: `${process.env.AUTH_SVC_ADDR}/rpc` })

@@ -1,4 +1,4 @@
-const RPCClient = jest.genMockFromModule('micro-rpc-client');
+const RPCClient = jest.genMockFromModule('@bufferapp/micro-rpc-client');
 RPCClient.fakeResult = { fake: 'yes' };
 RPCClient.fakeError = 'there was an error';
 RPCClient.prototype.call = jest.fn((name) => {
