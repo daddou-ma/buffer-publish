@@ -28,10 +28,16 @@ ListCampaigns.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   campaigns: PropTypes.array, // eslint-disable-line
   onOpenCreateCampaignClick: PropTypes.func,
+  onEditCampaignClick: PropTypes.func,
+  onDeleteCampaignClick: PropTypes.func,
+  onViewCampaignClick: PropTypes.func,
 };
 
 ListCampaigns.defaultProps = {
   onOpenCreateCampaignClick: () => {},
+  onEditCampaignClick: () => {},
+  onDeleteCampaignClick: () => {},
+  onViewCampaignClick: () => {},
 };
 
 export default ListCampaigns;

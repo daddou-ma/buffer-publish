@@ -51,6 +51,9 @@ export default connect(
     onEditCampaignClick: campaignId => {
       dispatch(actions.handleEditCampaignClick(campaignId));
     },
+    onViewCampaignClick: campaignId => {
+      dispatch(actions.handleEditCampaignClick(campaignId));
+    },
   })
 )(CampaignsPage);
 
