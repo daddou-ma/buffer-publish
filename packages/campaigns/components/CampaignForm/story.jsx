@@ -6,7 +6,7 @@ import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import CampaignForm from './index';
 
-storiesOf('Campaigns|CreateCampaign', module)
+storiesOf('Campaigns|CampaignForm', module)
   .addDecorator(withA11y)
   .add('default', () => (
     <CampaignForm

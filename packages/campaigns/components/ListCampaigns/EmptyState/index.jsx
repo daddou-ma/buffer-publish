@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Text, Button } from '@bufferapp/ui';
+import { Text, Button, Link } from '@bufferapp/ui';
 import { StepList } from '@bufferapp/publish-shared-components';
 
 const EmptyStateContainer = styled.div`
@@ -16,6 +16,11 @@ const Content = styled.div`
 const Image = styled.img`
   object-fit: contain;
   width: 100%;
+`;
+
+const LinkWithStyles = styled(Link)`
+  display: inline-block;
+  padding: 16px;
 `;
 
 const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
@@ -42,16 +47,12 @@ const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
             label={createCampaign}
             onClick={onOpenCreateCampaignClick}
           />
-          {/* To be replaced by BDS Link, when we create one that's an anchor and not a button */}
-          <Button
-            type="link"
-            size="large"
-            label={learnMore}
-            // Update FAQ link when it's ready
-            onClick={() => {
-              window.location.assign('https://faq.buffer.com/');
-            }}
-          />
+          <LinkWithStyles
+            href="https://faq.buffer.com/" // Update FAQ link when it's ready
+            newTab
+          >
+            {learnMore}
+          </LinkWithStyles>
         </div>
       </Content>
       <Image
