@@ -70,7 +70,7 @@ const Preferences = ({
         flexDirection: 'column',
       }}
     >
-      <div id={'tabs'}>
+      <nav id="tabs">
         <Tabs selectedTabId={selectedTabId} onTabClick={onTabClick}>
           <Tab tabId={TabsNames.GENERAL}>General</Tab>
           <Tab tabId={TabsNames.SECURITY}>Security</Tab>
@@ -80,7 +80,7 @@ const Preferences = ({
             Billing
           </Tab>
         </Tabs>
-      </div>
+      </nav>
       <div style={tabStyle}>
         <div style={containerStyle}>
           <Button

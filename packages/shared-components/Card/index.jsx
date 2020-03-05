@@ -1,28 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { gray, white } from '@bufferapp/ui/style/colors';
+import { gray, white, blue, grayShadow } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background: ${white};
-  border: 1px solid ${gray};
   box-sizing: border-box;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.16);
   border-radius: ${borderRadius};
   width: 100%;
+  opacity: ${props => (props.state?.faded ? 0.5 : 1)};
+  overflow: hidden;
+  box-shadow: ${props => (props.state?.dragging ? '' : grayShadow)};
+  border-width: 1px;
+  border-style: ${props => (props.state?.dragging ? 'dashed' : 'solid')};
+  border-color: ${props =>
+    !props.state?.dragging && props.state?.isOver ? blue : gray};
 `;
 
-const Card = ({ children }) => <CardWrapper>{children}</CardWrapper>;
+const Card = ({ children, state }) => (
+  <CardWrapper state={state}>{children}</CardWrapper>
+);
 
 Card.propTypes = {
   children: PropTypes.node,
+  state: PropTypes.shape({
+    faded: PropTypes.bool,
+    dragging: PropTypes.bool,
+    isOver: PropTypes.bool,
+  }),
 };
 
 Card.defaultProps = {
   children: null,
+  state: {},
 };
 
 export default Card;

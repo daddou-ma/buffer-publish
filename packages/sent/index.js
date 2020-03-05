@@ -58,6 +58,9 @@ export default connect(
         hasFirstCommentFlip: state.appSidebar.user.features
           ? state.appSidebar.user.features.includes('first_comment')
           : false,
+        hasCampaignsFeature: state.appSidebar.user.features
+          ? state.appSidebar.user.features.includes('campaigns')
+          : false,
       };
     }
     return {};
@@ -103,6 +106,13 @@ export default connect(
         actions.handleImageClickPrev({
           post: post.post,
           profileId: ownProps.profileId,
+        })
+      );
+    },
+    onCampaignTagClick: campaignId => {
+      dispatch(
+        actions.handleCampaignTagClick({
+          campaignId,
         })
       );
     },

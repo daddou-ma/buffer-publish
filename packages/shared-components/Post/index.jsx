@@ -1,76 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { transitionAnimationType } from '@bufferapp/components/style/animation';
-import { WithFeatureLoader } from '@bufferapp/product-features';
-import { gray, blue, transparent } from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RenderPostMetaBar from './RenderPostMetaBar';
 import PostErrorBanner from '../PostErrorBanner';
 import RetweetPanel from '../RetweetPanel';
+import Card from '../Card';
 import CampaignTag from '../../campaigns/components/CampaignTag';
 
-const getPostContainerStyle = ({ dragging, hovering }) => ({
-  display: 'flex',
-  width: '100%',
-  // boxShadow: (hovering && !dragging) ? '0 2px 4px 0 rgba(0,0,0,0.50)' : 'none',
-  transition: `box-shadow 0.1s ${transitionAnimationType}`,
-  borderRadius: '4px',
-});
-
-const PostContainerWithStyles = styled.div`
+const PostContainer = styled.div`
   display: flex;
   width: 100%;
-  transition: box-shadow 0.1s ${transitionAnimationType};
-  border-radius: 4px;
 `;
 
-const postStyle = {
-  flexGrow: 1,
-  minWidth: 0,
-};
-
-const PostContentsWithStyles = styled.div`
+const PostSubContainer = styled.div`
   flex-grow: 1;
   min-width: 0;
 `;
 
-const prefixCSSForBrowser = css => {
-  const chrome = navigator.userAgent.indexOf('Chrome') > -1;
-  if (chrome) {
-    return `-webkit-${css}`;
-  }
-  const firefox = navigator.userAgent.indexOf('Firefox') > -1;
-  if (firefox) {
-    return `-moz-${css}`;
-  }
-  return css;
-};
-
-const getPostContentStyle = ({ draggable, dragging }) => ({
-  padding: '1rem',
-  cursor: draggable ? prefixCSSForBrowser('grab') : 'inherit',
-  opacity: dragging ? 0 : 1,
-});
-
-/* eslint-disable react/prop-types */
-
-const BDDCardStyled = styled.div`
-  background: #fff;
-  border: ${({ draggingPlaceholder, noBorder, dragging, isOver }) => {
-    const color =
-      (!dragging && isOver && blue) || (noBorder && transparent) || gray;
-    return `1px ${draggingPlaceholder ? 'dashed' : 'solid'} ${color}`;
-  }};
-  border-radius: 4px;
-  opacity: ${props => (props.faded ? '0.5' : '1')};
-  overflow: hidden;
-  box-shadow: ${({ draggingPlaceholder, noBorder }) =>
-    !draggingPlaceholder && !noBorder && '0px 1px 4px rgba(0, 0, 0, 0.16)'};
+const PostContent = styled.div`
+  padding: 1rem;
+  cursor: ${props => (props.draggable ? 'grab' : 'inherit')};
+  opacity: ${props => (props.dragging ? 0 : 1)};
 `;
-
-/* eslint-enable react/prop-types */
 
 const Post = ({
   children,
@@ -91,7 +45,6 @@ const Post = ({
   subprofiles,
   draggable,
   dragging,
-  hovering,
   isOver,
   statistics,
   profileService,
@@ -125,17 +78,16 @@ const Post = ({
     !hasPushNotifications &&
     postDetails.isInstagramReminder &&
     !isPastReminder;
+  const cardDetails = {
+    faded: isDeleting,
+    dragging,
+    isOver,
+  };
 
   return (
-    <PostContainerWithStyles>
-      <PostContentsWithStyles>
-        <BDDCardStyled
-          faded={isDeleting}
-          noPadding
-          draggingPlaceholder={dragging}
-          dragging={dragging}
-          isOver={isOver}
-        >
+    <PostContainer>
+      <PostSubContainer>
+        <Card state={cardDetails}>
           {hasReminderError && (
             <PostErrorBanner
               dragging={dragging}
@@ -151,8 +103,7 @@ const Post = ({
               errorLink={postDetails.errorLink}
             />
           )}
-          {/* Post Content */}
-          <div style={getPostContentStyle({ draggable, dragging })}>
+          <PostContent draggable={draggable} dragging={dragging}>
             {retweetProfile ? (
               <RetweetPanel
                 retweetProfile={retweetProfile}
@@ -165,7 +116,7 @@ const Post = ({
             ) : (
               children
             )}
-          </div>
+          </PostContent>
 
           {hasCampaignsFeature && campaignDetails && (
             <CampaignTag
@@ -221,9 +172,9 @@ const Post = ({
                 profileServiceType={profileServiceType}
               />
             )}
-        </BDDCardStyled>
-      </PostContentsWithStyles>
-    </PostContainerWithStyles>
+        </Card>
+      </PostSubContainer>
+    </PostContainer>
   );
 };
 
@@ -257,7 +208,6 @@ Post.commonPropTypes = {
   ),
   draggable: PropTypes.bool,
   dragging: PropTypes.bool,
-  hovering: PropTypes.bool,
   isOver: PropTypes.bool,
   onDropPost: PropTypes.func,
   serviceLink: PropTypes.string,

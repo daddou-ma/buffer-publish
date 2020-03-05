@@ -22,6 +22,7 @@ const renderPostList = ({
   onImageClickNext,
   onImageClickPrev,
   onImageClose,
+  onCampaignTagClick,
   onDropPost,
   onSwapPosts,
   onShareAgainClick,
@@ -31,6 +32,7 @@ const renderPostList = ({
   isPastReminder,
   isBusinessAccount,
   hasFirstCommentFlip,
+  hasCampaignsFeature,
   userData,
   onPreviewClick,
   showAnalyzeBannerAfterFirstPost,
@@ -51,6 +53,7 @@ const renderPostList = ({
       onImageClickNext={onImageClickNext}
       onImageClickPrev={onImageClickPrev}
       onImageClose={onImageClose}
+      onCampaignTagClick={onCampaignTagClick}
       onDropPost={onDropPost}
       onSwapPosts={onSwapPosts}
       onShareAgainClick={onShareAgainClick}
@@ -60,6 +63,7 @@ const renderPostList = ({
       isPastReminder={isPastReminder}
       isBusinessAccount={isBusinessAccount}
       hasFirstCommentFlip={hasFirstCommentFlip}
+      hasCampaignsFeature={hasCampaignsFeature}
       userData={userData}
       onPreviewClick={onPreviewClick}
       showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
@@ -81,6 +85,7 @@ const PostLists = ({
   onImageClickNext,
   onImageClickPrev,
   onImageClose,
+  onCampaignTagClick,
   onDropPost,
   onSwapPosts,
   onShareAgainClick,
@@ -90,6 +95,7 @@ const PostLists = ({
   isPastReminder,
   isBusinessAccount,
   hasFirstCommentFlip,
+  hasCampaignsFeature,
   userData,
   onPreviewClick,
   showAnalyzeBannerAfterFirstPost,
@@ -109,6 +115,7 @@ const PostLists = ({
         onImageClickNext,
         onImageClickPrev,
         onImageClose,
+        onCampaignTagClick,
         onDropPost,
         onSwapPosts,
         onShareAgainClick,
@@ -118,6 +125,7 @@ const PostLists = ({
         isPastReminder,
         isBusinessAccount,
         hasFirstCommentFlip,
+        hasCampaignsFeature,
         userData,
         onPreviewClick,
         showAnalyzeBannerAfterFirstPost,
@@ -148,6 +156,7 @@ PostLists.propTypes = {
   onImageClickNext: PropTypes.func,
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
+  onCampaignTagClick: PropTypes.func,
   onDropPost: PropTypes.func,
   onSwapPosts: PropTypes.func,
   onShareAgainClick: PropTypes.func,
@@ -157,6 +166,7 @@ PostLists.propTypes = {
   isPastReminder: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
+  hasCampaignsFeature: PropTypes.bool,
   showAnalyzeBannerAfterFirstPost: PropTypes.bool,
   isAnalyzeCustomer: PropTypes.bool,
 };
