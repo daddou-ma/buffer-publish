@@ -8,12 +8,13 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
   DELETE_CAMPAIGN: 0,
   EDIT_CAMPAIGN: 0,
   HANDLE_CAMPAIGN_ROUTED: 0,
-  HANDLE_CAMPAIGN_CLICK: 0,
+  FETCH_CAMPAIGN: 0,
 });
 
 export const initialState = {
+  campaigns: [],
+  currentCampaign: {},
   isSaving: false,
-  campaignDetails: {},
   campaignId: null,
   selectedPage: 'campaigns',
 };
@@ -37,12 +38,27 @@ export default (state = initialState, action) => {
         selectedPage,
       };
     }
-    case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const campaignDetails = action.result || {};
+    case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      let { campaigns, currentCampaign } = state;
+
+      currentCampaign = action.result;
+
+      if (campaigns.some(campaign => campaign.id === action.result.id)) {
+        campaigns = campaigns.map(campaign => {
+          if (campaign.id === action.result.id) {
+            return action.result;
+          }
+          return campaign;
+        });
+      } else {
+        campaigns = [...campaigns, action.result];
+      }
+
       return {
         ...state,
-        isSaving: false,
-        campaignDetails,
+        campaigns,
+        currentCampaign,
       };
     }
     case `createCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
@@ -78,8 +94,8 @@ export const actions = {
     campaignId,
     selectedPage,
   }),
-  handleCampaignClick: campaignId => ({
-    type: actionTypes.HANDLE_CAMPAIGN_CLICK,
+  fetchCampaign: campaignId => ({
+    type: actionTypes.FETCH_CAMPAIGN,
     campaignId,
   }),
 };
