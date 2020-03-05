@@ -31,9 +31,9 @@ const Card = styled.div`
   border-radius: ${borderRadius};
   opacity: ${props => (props.faded ? 0.5 : 1)};
   overflow: hidden;
-  box-shadow: ${props => (props.draggingPlaceholder ? '' : grayShadow)};
+  box-shadow: ${props => (props.dragging ? '' : grayShadow)};
   border-width: 1px;
-  border-style: ${props => (props.draggingPlaceholder ? 'dashed' : 'solid')};
+  border-style: ${props => (props.dragging ? 'dashed' : 'solid')};
   border-color: ${props => (!props.dragging && props.isOver ? blue : gray)};
 `;
 
@@ -91,7 +91,6 @@ const Post = ({
       <PostSubContainer>
         <Card
           faded={isDeleting}
-          draggingPlaceholder={dragging}
           dragging={dragging}
           isOver={isOver}
         >
