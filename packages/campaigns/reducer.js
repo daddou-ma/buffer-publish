@@ -69,9 +69,21 @@ export const actions = {
     type: actionTypes.DELETE_CAMPAIGN,
     campaignId,
   }),
-  handleEditCampaignClick: campaignId => ({
+  handleEditCampaignClick: ({
+    id,
+    name,
+    color,
+    previousName,
+    previousColor,
+    orgId,
+  }) => ({
     type: actionTypes.EDIT_CAMPAIGN,
-    campaignId,
+    id,
+    name,
+    color,
+    previousName,
+    previousColor,
+    orgId,
   }),
   handleCampaignRouteLoaded: ({ campaignId, selectedPage }) => ({
     type: actionTypes.HANDLE_CAMPAIGN_ROUTED,

@@ -89,6 +89,7 @@ const CampaignForm = ({
   const defaultName = campaignDetails?.name ?? '';
   const defaultColor = campaignDetails?.color ?? purple;
   const campaignId = campaignDetails?.id ?? null;
+  const orgId = campaignDetails?.globalOrganizationId ?? null;
   const [campaignName, setName] = useState(defaultName);
   const [colorSelected, setColor] = useState(defaultColor);
   const [isSubmitButtonDisabled, disableSubmit] = useState(true);
@@ -162,6 +163,9 @@ const CampaignForm = ({
               campaignId,
               colorSelected,
               campaignName,
+              defaultName,
+              defaultColor,
+              orgId,
             })
           }
           disabled={isSubmitButtonDisabled || isSaving}

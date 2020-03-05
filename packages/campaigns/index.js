@@ -38,6 +38,9 @@ export default connect(
       campaignId,
       colorSelected,
       campaignName,
+      previousName,
+      previousColor,
+      orgId,
     }) => {
       if (campaignId) {
         dispatch(
@@ -45,6 +48,9 @@ export default connect(
             id: campaignId,
             name: campaignName,
             color: colorSelected,
+            previousName,
+            previousColor,
+            orgId,
           })
         );
       } else {
@@ -61,9 +67,6 @@ export default connect(
     },
     onDeleteCampaignClick: campaignId => {
       dispatch(actions.handleDeleteCampaignClick(campaignId));
-    },
-    onEditCampaignClick: campaignId => {
-      dispatch(actions.handleEditCampaignClick(campaignId));
     },
     onCampaignClick: campaignId => {
       dispatch(actions.handleCampaignClick(campaignId));
