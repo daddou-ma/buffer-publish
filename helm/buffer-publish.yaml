@@ -58,7 +58,7 @@ env:
   - name: API_ADDR
     value: http://publish-api.buffer:443
   - name: ANALYZE_API_ADDR
-    value: http://analytics-analyze-api.analyze:443
+    value: http://analyze-api.analyze:443
   - name: CLIENT_ID
     valueFrom:
       secretKeyRef:

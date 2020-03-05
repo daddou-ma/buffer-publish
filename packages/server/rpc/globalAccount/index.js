@@ -18,8 +18,7 @@ module.exports = method(
         adminAccountId: account._id,
       });
       if (organization) {
-        account.isAnalyzePublishBundle =
-          organization.metadata.account.isAnalyzePublishBundle;
+        account.productSolutionName = organization.metadata.account.productSolutionName;
       }
     } catch (e) {
       console.log(e); // eslint-disable-line no-console

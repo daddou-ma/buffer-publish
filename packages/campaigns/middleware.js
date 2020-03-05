@@ -13,45 +13,42 @@ import {
 } from '@bufferapp/publish-routes';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch, getState }) => next => action => {
+export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const hasCampaignsFlip =
-        getState().appSidebar.user.features?.includes('campaigns') || false;
+    case actionTypes.HANDLE_CAMPAIGN_CLICK: {
+      const { campaignId } = action;
 
-      if (hasCampaignsFlip) {
-        dispatch(
-          dataFetchActions.fetch({
-            name: 'getMainOrganization',
-            args: {},
-          })
-        );
-      }
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getCampaign',
+          args: {
+            campaignId,
+            past: false,
+            basicItems: true,
+          },
+        })
+      );
       break;
     }
 
-    case `getMainOrganization_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(
-        notificationActions.createNotification({
-          notificationType: 'error',
-          message: action.error,
-        })
-      );
+    case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      console.log('SUCCESS', action);
+      break;
+
+    case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
+      console.log('ERROR', action);
       break;
 
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
-      const { mainOrganization } = getState().campaigns;
 
-      const organizationId = mainOrganization?._id;
       dispatch(
         dataFetchActions.fetch({
           name: 'createCampaign',
           args: {
             name,
             color,
-            organizationId,
           },
         })
       );
@@ -59,19 +56,19 @@ export default ({ dispatch, getState }) => next => action => {
     }
     // Complete once changes to the backend endpoint are made:
     case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { id, name, color, organizationId } = action.result || {};
+      const { id, name, color, globalOrganizationId } = action.result || {};
       const metadata = {
         campaignId: id,
         campaignName: name,
         campaignColor: color,
         cta: SEGMENT_NAMES.STORIES_PREVIEW_QUEUE_ADD_NOTE,
-        organizationId,
+        globalOrganizationId,
       };
       dispatch(analyticsActions.trackEvent('Campaign Created', metadata));
       dispatch(
         notificationActions.createNotification({
           notificationType: 'success',
-          message: 'Great! Your new  campaign was created!',
+          message: 'Great! Your new campaign was created!',
         })
       );
 

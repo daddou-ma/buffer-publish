@@ -8,11 +8,11 @@ export const actionTypes = keyWrapper('CAMPAIGNS', {
   DELETE_CAMPAIGN: 0,
   EDIT_CAMPAIGN: 0,
   HANDLE_CAMPAIGN_ROUTED: 0,
+  HANDLE_CAMPAIGN_CLICK: 0,
 });
 
 export const initialState = {
   isSaving: false,
-  mainOrganization: {},
   campaignDetails: {},
   campaignId: null,
   selectedPage: 'campaigns',
@@ -50,14 +50,6 @@ export default (state = initialState, action) => {
         ...state,
         isSaving: false,
       };
-    case `getMainOrganization_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { mainOrganization = {}, isOrgAdmin } = action.result || {};
-
-      return {
-        ...state,
-        mainOrganization,
-      };
-    }
     default:
       return state;
   }
@@ -85,5 +77,9 @@ export const actions = {
     type: actionTypes.HANDLE_CAMPAIGN_ROUTED,
     campaignId,
     selectedPage,
+  }),
+  handleCampaignClick: campaignId => ({
+    type: actionTypes.HANDLE_CAMPAIGN_CLICK,
+    campaignId,
   }),
 };

@@ -61,6 +61,9 @@ const MultipleImagesPost = ({
   hasFirstCommentFlip,
   hasPushNotifications,
   onSetRemindersClick,
+  campaignDetails,
+  onCampaignTagClick,
+  hasCampaignsFeature,
 }) => {
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
@@ -142,6 +145,9 @@ const MultipleImagesPost = ({
       hasFirstCommentFlip={hasFirstCommentFlip}
       hasPushNotifications={hasPushNotifications}
       onSetRemindersClick={onSetRemindersClick}
+      campaignDetails={campaignDetails}
+      onCampaignTagClick={onCampaignTagClick}
+      hasCampaignsFeature={hasCampaignsFeature}
     >
       {children}
     </Post>

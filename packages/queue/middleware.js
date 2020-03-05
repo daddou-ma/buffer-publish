@@ -6,6 +6,12 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { actions as campaignsActions } from '@bufferapp/publish-campaigns/reducer';
+import {
+  campaignPages,
+  generateCampaignPageRoute,
+} from '@bufferapp/publish-routes';
+import { push } from 'connected-react-router';
 import { actionTypes, actions } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
@@ -146,6 +152,16 @@ export default ({ dispatch, getState }) => next => action => {
             profileId: action.profileId,
           },
         })
+      );
+      break;
+    case actionTypes.VIEW_CAMPAIGN_PAGE:
+      dispatch(
+        push(
+          generateCampaignPageRoute({
+            campaignId: action.campaignId,
+            selectedPage: campaignPages.VIEW_CAMPAIGN,
+          })
+        )
       );
       break;
     case `sharePostNow_${dataFetchActionTypes.FETCH_SUCCESS}`:

@@ -107,7 +107,6 @@ module.exports = userData => ({
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,
   showReturnToClassic: userData.has_np_app_switcher,
-  helpScoutConfig: userData.helpscout_beacon_params,
   isBusinessTeamMember: userData.is_business_team_member,
   isOnAwesomePlan:
     userData.plan === 'awesome' &&
@@ -118,7 +117,8 @@ module.exports = userData => ({
   isAwesomePromoUser:
     userData.features.includes('legacy_awesome_monthly_promotion') &&
     userData.plan === 'awesome',
-  hasAccessToUserTag: userData.is_pro_and_up_org_user, // this includes team members
+  isProAndUpOrTeamMember: userData.is_pro_and_up_org_user, // this includes team members
   isAnalyzeCustomer: userData.is_analyze_customer,
   canSeePaydayPage: userData.features.includes('awesome_user_can_visit_payday'),
+  isUsingPublishAsTeamMember: userData.is_using_publish_as_team_member,
 });

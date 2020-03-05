@@ -75,7 +75,7 @@ const removeUserTag = require('./removeUserTag');
 const awesomeToProUpgradeDetails = require('./awesomeToProUpgradeDetails');
 const createCampaign = require('./campaigns/create');
 const updateCampaign = require('./campaigns/update');
-const getMainOrganization = require('./campaigns/getMainOrganization');
+const getCampaign = require('./campaigns/getCampaign');
 
 // Analytics from Analyze -- Delete when we switch to Analyze
 const average = require('./analytics/average');
@@ -161,7 +161,7 @@ module.exports = rpc(
   deleteCustomLinkMethod,
   createCampaign,
   updateCampaign,
-  getMainOrganization,
+  getCampaign,
 
   // Analyze RPC
   average,

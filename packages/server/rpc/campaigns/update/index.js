@@ -1,31 +1,30 @@
-const { method, createError } = require('@bufferapp/buffer-rpc');
-const rp = require('request-promise');
+const { method } = require('@bufferapp/buffer-rpc');
+const { campaignParser } = require('../../../parsers/src');
+const post = require('../../../requestMethods/post');
+const { handleError } = require('../../../utils');
+
+const processResponse = response => {
+  return campaignParser(response.data);
+};
 
 module.exports = method(
   'updateCampaign',
   'updates a campaign given the id',
   async ({ campaignId, name, color }, { session }) => {
-    let result;
     try {
-      result = await rp({
-        uri: `${process.env.API_ADDR}/1/campaigns/update.json`,
-        method: 'POST',
-        strictSSL: !(process.env.NODE_ENV === 'development'),
-        form: {
-          access_token: session.publish.accessToken,
+      const response = await post({
+        uri: '1/campaigns/update.json',
+        session,
+        params: {
           campaign_id: campaignId,
           name,
           color,
         },
       });
+      const campaign = processResponse(response);
+      return Promise.resolve(campaign);
     } catch (err) {
-      if (err.error) {
-        const { message } = JSON.parse(err.error);
-        throw createError({ message });
-      }
-      throw err;
+      handleError(err);
     }
-    result = JSON.parse(result);
-    return Promise.resolve(result.data);
   }
 );
