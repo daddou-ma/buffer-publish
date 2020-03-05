@@ -2178,35 +2178,34 @@
     "@bufferapp/async-data-fetch" "1.9.3"
     "@bufferapp/session-manager" "0.7.1"
 
-"@bugsnag/browser@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@bugsnag/browser/-/browser-5.2.0.tgz#69ff77c8d310eccbdecd545744a22ea6030703f1"
-  integrity sha512-QImSbwVjcEbaUjCxNRVOELUahdHmRfkZ9o0UJpMDsfYNqpMpYzI7DdyH0BUnXv/yI4ymGpAQbFSEqVMTqSa9WA==
+"@bugsnag/browser@^6.5.2":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@bugsnag/browser/-/browser-6.5.2.tgz#3f8f911dd739d2ace056fd5a38d5d25283ca4bfc"
+  integrity sha512-XFKKorJc92ivLnlHHhLiPvkP03tZ5y7n0Z2xO6lOU7t+jWF5YapgwqQAda/TWvyYO38B/baWdnOpWMB3QmjhkA==
 
-"@bugsnag/js@^5.0.1":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@bugsnag/js/-/js-5.2.0.tgz#3ef8c63cfac7fc8764459461ad33a31fe44cad36"
-  integrity sha512-tL+Jr4DnQbCH+nLR6Kb9m5QbstIbmFbL9yKId2W3z0MvPxTg9vhRSlu35+99+04CRHrQu0VdY2n9RzDbD5kpgg==
+"@bugsnag/js@^6.5.2":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@bugsnag/js/-/js-6.5.2.tgz#810383aa7a2246639041bb9031ab316432959527"
+  integrity sha512-4ibw624fM5+Y/WSuo3T/MsJVtslsPV8X0MxFuRxdvpKVUXX216d8hN8E/bG4hr7aipqQOGhBYDqSzeL2wgmh0Q==
   dependencies:
-    "@bugsnag/browser" "^5.2.0"
-    "@bugsnag/node" "^5.2.0"
+    "@bugsnag/browser" "^6.5.2"
+    "@bugsnag/node" "^6.5.2"
 
-"@bugsnag/node@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@bugsnag/node/-/node-5.2.0.tgz#b1c193161d2a006fabf8ce2c22484c297d57f4ad"
-  integrity sha512-2KqUcZ/uTkNP9G4aGW+sKhdce3Z68pg9I+LnjUDvpMEQ82O/zxy+NLkGTSz9hveNBdznJ1YoqjfoBdRnHkyRSw==
+"@bugsnag/node@^6.5.2":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@bugsnag/node/-/node-6.5.2.tgz#7bc2d0d1c7a682784be388404ab728a80b7ae2b9"
+  integrity sha512-KQ1twKoOttMCYsHv7OXUVsommVcrk6RGQ5YoZGlTbREhccbzsvjbiXPKiY31Qc7OXKvaJwSXhnOKrQTpRleFUg==
   dependencies:
     byline "^5.0.0"
     error-stack-parser "^2.0.2"
     iserror "^0.0.2"
     pump "^3.0.0"
-    request "^2.87.0"
     stack-generator "^2.0.3"
 
-"@bugsnag/plugin-react@^5.0.1":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@bugsnag/plugin-react/-/plugin-react-5.2.0.tgz#1619800803d3aa6acc3dde7bc672892a0a03e74f"
-  integrity sha512-4qP3TMuNgqd85/G3+EjN55vae6+e7Y2JU1RZSL3Tzu/ZmEv0jW1xTtwV1fIn5UB4vQHiW2iYBUxYzTtg02VpMw==
+"@bugsnag/plugin-react@^6.5.0":
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/@bugsnag/plugin-react/-/plugin-react-6.5.0.tgz#93eec6bd167dab007ca588e69daa544124c3107a"
+  integrity sha512-kbyFSnQ4QLGjN04t9MbuD5KLWI2qQpjrgKrJvJNKM8xyeVIJYpkjx//TsDzG4ujNFVkwaP3bT48j85rf4EJNqA==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
@@ -6020,15 +6019,6 @@ bugsnag-build-reporter@^1.0.0:
     once "^1.4.0"
     pino "^4.10.3"
     run-parallel "^1.1.6"
-
-bugsnag@1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/bugsnag/-/bugsnag-1.11.0.tgz#6f9c05b1b060d18e151c9f922ef366f1f5a32ac4"
-  integrity sha512-BAVhOaahEb5IpIsc8meKoiV1UOkkhRXnjgmsVPMLZaM94zP07X6W0yqBySQoHfAeVz6LtSOC1QsdpSG4EZITGQ==
-  dependencies:
-    promise "7.x"
-    request "2.x"
-    stack-trace "0.0.9"
 
 builtin-status-codes@^3.0.0:
   version "3.0.0"
@@ -14550,7 +14540,7 @@ promise.prototype.finally@^3.1.0:
     es-abstract "^1.13.0"
     function-bind "^1.1.1"
 
-promise@7.x, promise@^7.0.3, promise@^7.1.1:
+promise@^7.0.3, promise@^7.1.1:
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
   integrity sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==
@@ -16077,7 +16067,7 @@ request@2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
-request@2.x, request@^2.81.0, request@^2.83.0, request@^2.87.0:
+request@^2.81.0, request@^2.83.0, request@^2.87.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
@@ -16985,11 +16975,6 @@ stack-generator@^2.0.3:
   integrity sha512-ha1gosTNcgxwzo9uKTQ8zZ49aUp5FIUW58YHFxCqaAHtE0XqBg0chGFYA1MfmW//x1KWq3F4G7Ug7bJh4RiRtg==
   dependencies:
     stackframe "^1.1.0"
-
-stack-trace@0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.9.tgz#a8f6eaeca90674c333e7c43953f275b451510695"
-  integrity sha1-qPbq7KkGdMMz58Q5U/J1tFFRBpU=
 
 stack-utils@^1.0.1:
   version "1.0.2"
