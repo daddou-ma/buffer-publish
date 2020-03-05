@@ -5,6 +5,7 @@ import {
   campaignsCreateRoute,
   campaignsPageRoute,
   campaignPages,
+  generateCampaignPageRoute,
 } from '@bufferapp/publish-routes';
 import { actions } from './reducer';
 import CampaignsPage from './components/CampaignsPage';
@@ -49,10 +50,29 @@ export default connect(
       dispatch(actions.handleDeleteCampaignClick(campaignId));
     },
     onEditCampaignClick: campaignId => {
-      dispatch(actions.handleEditCampaignClick(campaignId));
+      if (campaignId) {
+        dispatch(
+          push(
+            generateCampaignPageRoute({
+              campaignId,
+              selectedPage: campaignPages.EDIT_CAMPAIGN,
+            })
+          )
+        );
+      }
     },
     onViewCampaignClick: campaignId => {
-      dispatch(actions.handleEditCampaignClick(campaignId));
+      if (campaignId) {
+        dispatch(
+          push(
+            generateCampaignPageRoute({
+              campaignId,
+              selectedPage: campaignPages.VIEW_CAMPAIGN,
+            })
+          )
+        );
+      }
+    },
     onCampaignClick: campaignId => {
       dispatch(actions.handleCampaignClick(campaignId));
     },

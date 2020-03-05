@@ -93,95 +93,121 @@ const ListItem = ({
   onEditCampaignClick,
   isUsingPublishAsTeamMember,
   hasPosts,
-}) => (
-  <Container>
-    <LeftWrapper>
-      <Color color={campaign.color} />
-      <Title>
-        <Text type="h3">{campaign.name}</Text>
-        <Text type="p">
-          <LastUpdated>{campaign.lastUpdated}</LastUpdated>
-        </Text>
-      </Title>
-    </LeftWrapper>
-    <SubText>
+  isEvenItem,
+}) => {
+  const { campaignId } = campaign;
+  const selectItems = [
+    {
+      title: translations.editCampaign,
+      selectedItemClick: () => {
+        onEditCampaignClick(campaignId);
+      },
+    },
+    {
+      title: translations.deleteCampaign,
+      selectedItemClick: () => {
+        onDeleteCampaignClick(campaignId);
+      },
+    },
+  ];
+
+  if (!isUsingPublishAsTeamMember) {
+    selectItems.unshift({
+      title: translations.viewCampaign,
+      selectedItemClick: () => {
+        onViewCampaignClick(campaignId);
+      },
+    });
+  }
+
+  return (
+    <Container isEvenItem={isEvenItem}>
+      <LeftWrapper>
+        <Color color={campaign.color} />
+        <Title>
+          <Text type="h3">{campaign.name}</Text>
+          <Text type="p">
+            <LastUpdated>{campaign.lastUpdated}</LastUpdated>
+          </Text>
+        </Title>
+      </LeftWrapper>
       {hasPosts && (
-        <Details>
+        <td>
           <Group>
             <Icon>
               <CalendarIcon size="medium" />
             </Icon>
             <Text type="p">{campaign.dateRange}</Text>
           </Group>
-          <Group>
-            <Icon>
-              <ClockIcon size="medium" />
-            </Icon>
-            <Text type="p">{campaign.scheduled}</Text>
-          </Group>
-          <Group>
-            <Icon>
-              <ListIcon size="medium" />
-            </Icon>
-            <Text type="p">{campaign.sent}</Text>
-          </Group>
-        </Details>
+        </td>
       )}
-    </SubText>
-    <Button
-      onClick={onViewCampaignClick}
-      type="secondary"
-      isSplit
-      label={translations.viewReport}
-      onSelectClick={selectedItem => {
-        if (typeof selectedItem.selectedItemClick !== 'undefined') {
-          selectedItem.selectedItemClick();
-        }
-        return false;
-      }}
-      items={[
-        {
-          title: translations.viewCampaign,
-          selectedItemClick: onViewCampaignClick,
-        },
-        {
-          title: translations.editCampaign,
-          selectedItemClick: onEditCampaignClick,
-        },
-        {
-          title: translations.deleteCampaign,
-          selectedItemClick: onDeleteCampaignClick,
-        },
-      ]}
-    />
-    {!isUsingPublishAsTeamMember && (
-      <Button
-        type="secondary"
-        icon={<ArrowRightIcon />}
-        iconEnd
-        onClick={() => {
-          goToAnalyzeReport();
-        }}
-        disabled={!hasPosts}
-        label={translations.viewReport}
-      />
-    )}
-  </Container>
-);
+      <td>
+        <Group>
+          <Icon>
+            <ClockIcon size="medium" />
+          </Icon>
+          <Text type="p">{campaign.scheduled}</Text>
+        </Group>
+      </td>
+      <td>
+        <Group>
+          <Icon>
+            <ListIcon size="medium" />
+          </Icon>
+          <Text type="p">{campaign.sent}</Text>
+        </Group>
+      </td>
+      <td>
+        <Button
+          onClick={
+            isUsingPublishAsTeamMember
+              ? () => {
+                  onViewCampaignClick(campaignId);
+                }
+              : goToAnalyzeReport
+          }
+          type="secondary"
+          isSplit
+          label={
+            isUsingPublishAsTeamMember
+              ? translations.viewCampaign
+              : translations.viewReport
+          }
+          onSelectClick={selectedItem => {
+            if (typeof selectedItem.selectedItemClick !== 'undefined') {
+              selectedItem.selectedItemClick();
+            }
+            return false;
+          }}
+          items={selectItems}
+        />
+      </td>
+    </Container>
+  );
+};
 
 ListItem.propTypes = {
   translations: PropTypes.shape({
-    learnMore: PropTypes.string,
-    createPosts: PropTypes.string,
-    createPost: PropTypes.string,
-    subtext: PropTypes.string,
-    title: PropTypes.string,
+    viewReport: PropTypes.string,
+    viewCampaign: PropTypes.string,
     editCampaign: PropTypes.string,
     deleteCampaign: PropTypes.string,
+  }).isRequired,
+  campaign: PropTypes.shape({
+    color: PropTypes.string,
+    name: PropTypes.string,
+    sent: PropTypes.string,
+    scheduled: PropTypes.number,
+    lastUpdated: PropTypes.string,
+    dateRange: PropTypes.string,
+    campaignId: PropTypes.string,
   }).isRequired,
   onViewCampaignClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
+  hasPosts: PropTypes.bool.isRequired,
+  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
+  isEvenItem: PropTypes.bool.isRequired,
 };
 
 export default ListItem;

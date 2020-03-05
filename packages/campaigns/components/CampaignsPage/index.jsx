@@ -26,6 +26,10 @@ const CampaignsPage = ({
   selectedPage,
   campaignDetails,
   onCampaignClick,
+  onViewCampaignClick,
+  onDeleteCampaignClick,
+  onEditCampaignClick,
+  isUsingPublishAsTeamMember,
 }) => {
   const [viewMode, setViewMode] = useState(campaignPages.VIEW_ALL_CAMPAIGNS);
   useSetCampaignPage({ selectedPage, setViewMode });
@@ -54,6 +58,10 @@ const CampaignsPage = ({
           onOpenCampaign={() => setViewMode(campaignPages.VIEW_CAMPAIGN)}
           onOpenCreateCampaignClick={onOpenCreateCampaignClick}
           onCampaignClick={onCampaignClick}
+          onViewCampaignClick={onViewCampaignClick}
+          onDeleteCampaignClick={onDeleteCampaignClick}
+          onEditCampaignClick={onEditCampaignClick}
+          isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
         />
       )}
       {viewMode === campaignPages.CREATE_CAMPAIGN && (

@@ -19,7 +19,19 @@ const ListCampaigns = ({
 
   return (
     <React.Fragment>
-      <h1>List Campaigns</h1>
+      <Header>
+        <Text type="h1">Campaigns</Text> 
+        <Button label="Create Campaign" />
+      </Header>
+      <List
+        campaigns={campaigns}
+        onEditCampaignClick={onEditCampaignClick}
+        onDeleteCampaignClick={onDeleteCampaignClick}
+        onViewCampaignClick={onViewCampaignClick}
+        translations={translations.viewCampaign}
+        hasCampaignPosts={hasCampaignPosts}
+        isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
+      />
     </React.Fragment>
   );
 };
@@ -31,6 +43,8 @@ ListCampaigns.propTypes = {
   onEditCampaignClick: PropTypes.func,
   onDeleteCampaignClick: PropTypes.func,
   onViewCampaignClick: PropTypes.func,
+  hasCampaignPosts: PropTypes.bool,
+  isUsingPublishAsTeamMember: PropTypes.bool,
 };
 
 ListCampaigns.defaultProps = {

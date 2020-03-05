@@ -15,8 +15,9 @@ const List = ({
   onDeleteCampaignClick,
   onEditCampaignClick,
   isUsingPublishAsTeamMember,
+  hasCampaignPosts,
 }) => {
-  const listItems = campaigns.map(campaign => (
+  const listItems = campaigns.map((campaign, index) => (
     <ListItem
       translations={translations}
       campaign={campaign}
@@ -24,19 +25,21 @@ const List = ({
       onDeleteCampaignClick={onDeleteCampaignClick}
       onEditCampaignClick={onEditCampaignClick}
       isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
-      hasPosts
+      hasCampaignPosts={hasCampaignPosts}
+      isEvenItem={index % 2 === 0}
     />
   ));
   return <StyledList>{listItems}</StyledList>;
 };
 
 List.propTypes = {
-  translations: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    createCampaign: PropTypes.string.isRequired,
-    learnMore: PropTypes.string.isRequired,
-    imageTag: PropTypes.string.isRequired,
-  }).isRequired,
+  translations: PropTypes.object.isRequired, // eslint-disable-line
+  campaigns: PropTypes.array, // eslint-disable-line
+  onEditCampaignClick: PropTypes.func.isRequired,
+  onDeleteCampaignClick: PropTypes.func.isRequired,
+  onViewCampaignClick: PropTypes.func.isRequired,
+  hasCampaignPosts: PropTypes.bool.isRequired,
+  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
 };
 
 export default List;

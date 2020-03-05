@@ -14,6 +14,7 @@ const campaigns = [
     scheduled: '7 Scheduled',
     sent: '1 Sent',
     lastUpdated: 'Last updated 3 hours ago',
+    campaignId: '1',
   },
   {
     name: 'A Longer Campaign Name',
@@ -22,6 +23,7 @@ const campaigns = [
     scheduled: '8 Scheduled',
     sent: '0 Sent',
     lastUpdated: 'Last updated 2 days ago',
+    campaignId: '2',
   },
   {
     name: 'Hello World',
@@ -30,6 +32,7 @@ const campaigns = [
     scheduled: '11 Scheduled',
     sent: '25 Sent',
     lastUpdated: 'Last updated yesterday',
+    campaignId: '3',
   },
 ];
 
