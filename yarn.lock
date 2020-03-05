@@ -2134,10 +2134,10 @@
     "@bufferapp/nav-sidebar" "^1.11.0"
     numeral "2.0.6"
 
-"@bufferapp/ui@5.26.0":
-  version "5.26.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.26.0.tgz#7d3812b8077ed0be6003ef16390a3c4923045dec"
-  integrity sha512-CDE8Auv/lFXhNsyR1cAFZ1Hqnj3K3dPLdwss6TkaQ8UqCGdY//9n1LoB+hb1q4VeSCeUYsLzSgKm4hAX+etZlQ==
+"@bufferapp/ui@5.27.0":
+  version "5.27.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.27.0.tgz#790e166dc14dc0ade6901a955aafd71d265e0768"
+  integrity sha512-Ybpqt3jU6+6Vq6lAhGyDKjP2fy65CXDBQBvodwGJLkg0VtpHFM6qwiudM5dO44G7ELsENz2mk36QeVU+jRM/fA==
   dependencies:
     "@reach/tooltip" "0.6.2"
     immutability-helper "^2.9.0"
