@@ -10,6 +10,7 @@ const campaignDetails = {
   id: '123',
   name: '#SaveOurSeasWeek',
   color: '#00C8CF',
+  globalOrganizationId: '123456',
 };
 
 storiesOf('Campaigns|CampaignForm', module)
