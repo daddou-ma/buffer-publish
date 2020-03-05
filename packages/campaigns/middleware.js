@@ -101,7 +101,13 @@ export default ({ dispatch }) => next => action => {
     }
 
     case `editCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { id } = action.result || {};
+      const { id, name, color, globalOrganizationId } = action.result || {};
+      const metadata = {
+        campaignId: id,
+        campaignName: name,
+        organizationId: globalOrganizationId,
+      };
+      dispatch(analyticsActions.trackEvent('Campaign Edited', metadata));
 
       if (id) {
         dispatch(
