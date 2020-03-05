@@ -68,7 +68,7 @@ const ImagePost = ({
   hovering,
   isOver,
   statistics,
-  profile_service: profileService,
+  profileService,
   profileServiceType,
   service_geolocation_name: locationName,
   source_url: sourceUrl,

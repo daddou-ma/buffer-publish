@@ -1,11 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Link } from '@bufferapp/components';
+import { Tooltip } from '@bufferapp/ui';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { mystic } from '@bufferapp/components/style/color';
 import { SERVICE_NAMES } from '@bufferapp/publish-constants';
 import { abbreviateNumber } from '@bufferapp/publish-server/formatters/src';
 import styled from 'styled-components';
+import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
+import { gray, grayDark } from '@bufferapp/ui/style/colors';
+import Button from '@bufferapp/analyze-shared-components/Button';
+
+const StatsTitle = styled(Text)`
+  color: ${grayDark};
+`;
 
 const StatsContainer = styled.div`
   display: flex;
@@ -24,96 +32,80 @@ const StatsContainerStyled = styled.div`
   flex-direction: column;
 `;
 
-const LinkedInStatsLink = ({ typeStats, profileService }) => {
-  if (!(typeStats === 'clicks' && profileService === 'linkedin')) {
-    return null;
-  }
-  return (
-    <Link
-      href="https://faq.buffer.com/article/181-why-does-linkedin-sometimes-show-a-different-number-for-clicks"
-      unstyled
-    >
+const TooltipWrapper = styled.div`
+  display: inline-block;
+  padding: 0 4px;
+  bottom: -4px;
+  position: relative;
+`;
+
+const TooltipMessage = ({ label }) => {
+  return label ? (
+    <TooltipWrapper>
+      <Tooltip label={label} position="right">
+        <InfoIcon color={gray} />
+      </Tooltip>
+    </TooltipWrapper>
+  ) : null;
+};
+
+const ExternalLink = ({ link }) => {
+  return link ? (
+    <Link href={link} unstyled>
       *
     </Link>
-  );
+  ) : null;
 };
 
-LinkedInStatsLink.propTypes = {
-  typeStats: PropTypes.string,
-  profileService: PropTypes.oneOf(SERVICE_NAMES),
+ExternalLink.propTypes = {
+  link: PropTypes.string,
 };
 
-LinkedInStatsLink.defaultProps = {
-  profileService: null,
-  typeStats: null,
+ExternalLink.defaultProps = {
+  link: null,
 };
 
-const StatisticElement = ({
-  typeStats,
-  profileService,
-  profileServiceType = null,
-  showTwitterMentions,
-  statistics,
-  titles,
-}) => {
-  if (profileService === 'twitter') {
-    if (
-      typeStats === 'reach' ||
-      (!showTwitterMentions && typeStats === 'mentions')
-    ) {
-      return null;
-    }
-  }
-  let value = statistics[typeStats];
-  let title = titles[typeStats];
-  if (typeStats === 'reach_twitter' && profileService === 'twitter') {
-    value = statistics.impressions;
-  }
-  const nonPluralTitles = ['reach', 'plusOne', 'reach_twitter'];
-  if (value !== 1 && nonPluralTitles.indexOf(typeStats) < 0) {
-    title += 's';
-  }
-  if (typeof value === 'undefined') {
+const StatisticElement = ({ key, value, title, tooltip, link }) => {
+  if (typeof value === 'undefined' || value === null) {
     return null;
   }
-  //
-  // if (profileService === 'instagram' && profileServiceType === 'profile') {
-  //   console.log('HEEEEEEEEERE');
-  // }
 
   return (
-    <StatsContainerStyled key={typeStats}>
+    <StatsContainerStyled key={key}>
       <Text size="large" color="black">
         {abbreviateNumber(value, 1)}
       </Text>
-      <span>
+      <StatsTitle>
         <Text size="mini">{title}</Text>
-        <LinkedInStatsLink {...{ typeStats, profileService }} />
-      </span>
+        <TooltipMessage label={tooltip} />
+        <ExternalLink link={link} />
+      </StatsTitle>
     </StatsContainerStyled>
   );
 };
 
 StatisticElement.propTypes = {
-  profileService: PropTypes.oneOf(SERVICE_NAMES),
-  statistics: PropTypes.shape({
-    impressions: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
-  }).isRequired,
-  showTwitterMentions: PropTypes.bool,
-  typeStats: PropTypes.string,
-  titles: PropTypes.shape({}),
-  profileServiceType: PropTypes.string,
+  key: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  title: PropTypes.string,
+  tooltip: PropTypes.string,
+  link: PropTypes.string,
 };
 
 StatisticElement.defaultProps = {
-  profileService: null,
-  profileServiceType: null,
-  showTwitterMentions: false,
-  titles: {},
-  typeStats: null,
+  key: null,
+  value: null,
+  title: null,
+  tooltip: null,
+  link: null,
 };
 
-const PostStats = ({ statistics, profileService, showTwitterMentions, profileServiceType = null }) => {
+const PostStats = ({
+  statistics,
+  profileService,
+  showTwitterMentions,
+  profileServiceType = null,
+}) => {
   const titles = {
     retweets: 'Retweet',
     comments: 'Comment',
@@ -131,26 +123,69 @@ const PostStats = ({ statistics, profileService, showTwitterMentions, profileSer
 
   return (
     <StatsContainer>
-      {Object.keys(titles).map(typeStats => (
-        <StatisticElement
-          {...{
-            titles,
-            typeStats,
-            statistics,
-            profileService,
-            profileServiceType,
-            showTwitterMentions,
-          }}
-        />
-      ))}
+      {Object.keys(titles).map(typeStats => {
+        if (profileService === 'twitter') {
+          if (
+            typeStats === 'reach' ||
+            (!showTwitterMentions && typeStats === 'mentions')
+          ) {
+            return null;
+          }
+        }
+        let value = statistics[typeStats];
+        let title = titles[typeStats];
+        if (typeStats === 'reach_twitter' && profileService === 'twitter') {
+          value = statistics.impressions;
+        }
+        const nonPluralTitles = ['reach', 'plusOne', 'reach_twitter'];
+        if (value !== 1 && nonPluralTitles.indexOf(typeStats) < 0) {
+          title += 's';
+        }
+        if (typeof value === 'undefined') {
+          return null;
+        }
+
+        const stat = {
+          key: typeStats,
+          value,
+          title,
+          tooltip:
+            profileService === 'instagram' && profileServiceType === 'profile'
+              ? `Instagram has deprecated statistics for non business accounts. Set up direct posting to start seeing these statistics from Instagram Business.`
+              : null,
+          link: !(typeStats === 'clicks' && profileService === 'linkedin')
+            ? null
+            : 'https://faq.buffer.com/article/181-why-does-linkedin-sometimes-show-a-different-number-for-clicks',
+        };
+
+        return (
+          <StatisticElement
+            key={stat.key}
+            value={stat.value}
+            title={stat.title}
+            tooltip={stat.tooltip}
+            link={stat.link}
+            stat={stat}
+          />
+        );
+      })}
     </StatsContainer>
   );
 };
 
+const stats = [
+  {
+    value: 1,
+    title: 'string',
+    tooltip: 'string',
+    link: 'url',
+  },
+];
+
 PostStats.propTypes = {
   profileService: PropTypes.oneOf(SERVICE_NAMES),
   statistics: PropTypes.shape({
-    impressions: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+    impressions: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }).isRequired,
   showTwitterMentions: PropTypes.bool,
   profileServiceType: PropTypes.string,

@@ -70,6 +70,7 @@ const SentPosts = ({
   isAnalyzeCustomer,
   fetchSentPosts,
   profileServiceType,
+  profileService,
 }) => {
   useEffect(() => {
     fetchSentPosts();
@@ -149,6 +150,7 @@ const SentPosts = ({
           showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
           isAnalyzeCustomer={isAnalyzeCustomer}
           profileServiceType={profileServiceType}
+          profileService={profileService}
         />
       </div>
       {moreToLoad && (

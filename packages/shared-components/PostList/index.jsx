@@ -64,6 +64,7 @@ const renderPost = ({
   hasCampaignsFeature,
   userData,
   onPreviewClick,
+  profileService,
   profileServiceType,
 }) => {
   const campaignId = post.campaignDetails?.id ?? null;
@@ -87,6 +88,7 @@ const renderPost = ({
     hasCampaignsFeature,
     userData,
     onPreviewClick,
+    profileService,
     profileServiceType,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
@@ -130,6 +132,7 @@ const PostList = ({
   onPreviewClick,
   showAnalyzeBannerAfterFirstPost,
   isAnalyzeCustomer,
+  profileService,
   profileServiceType,
 }) => (
   <React.Fragment>
@@ -167,6 +170,7 @@ const PostList = ({
               hasCampaignsFeature,
               userData,
               onPreviewClick,
+              profileService,
               profileServiceType,
             })}
             {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder && (

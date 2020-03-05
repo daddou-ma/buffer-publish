@@ -26,7 +26,8 @@ const VideoPost = ({
   isOver,
   statistics,
   subprofiles,
-  profile_service: profileService,
+  profileService,
+  profileServiceType,
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
@@ -75,6 +76,7 @@ const VideoPost = ({
     statistics={statistics}
     subprofiles={subprofiles}
     profileService={profileService}
+    profileServiceType={profileServiceType}
     service_geolocation_name={locationName}
     source_url={sourceUrl}
     subprofile_id={subprofileID}

@@ -53,7 +53,7 @@ const LinkPost = ({
   statistics,
   subprofiles,
   profileServiceType,
-  profile_service: profileService,
+  profileService,
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
