@@ -22,13 +22,11 @@ const updateCampaign = () => RPCEndpoint.fn(params, { session });
 const UPDATE_CAMPAIGN_RESPONSE = {
   data: {
     _id: '123456',
-    organization_id: '98765',
+    global_organization_id: '000111',
     name: 'Test',
     color: '#bebebe',
-    created_at: '2020-02-24 13:08:33',
-    updated_at: '2020-02-24 13:08:33',
-    start_date: '',
-    end_date: '',
+    created_at: 1583166077,
+    updated_at: 1583166098,
   },
   success: true,
 };
@@ -37,9 +35,11 @@ describe('RPC | Update campaign', () => {
   it('updates a campaign correctly', async () => {
     post.mockReturnValueOnce(Promise.resolve(UPDATE_CAMPAIGN_RESPONSE));
     await updateCampaign(params).then(response => {
+      expect(response.id).toBe('123456');
+      expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe(params.name);
       expect(response.color).toBe(params.color);
-      expect(response.lastUpdated).toBe(`Last updated ${response.updatedAt}`);
+      expect(response.lastUpdated).toContain('Last updated ');
     });
   });
 
