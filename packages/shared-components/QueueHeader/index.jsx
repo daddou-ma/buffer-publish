@@ -20,20 +20,24 @@ const QueueHeaderDate = styled(Text)`
   line-height: 14px;
 `;
 
-const QueueHeader = ({ text, id, dayOfWeek, date }) => (
-  <QueueHeaderWrapper key={id}>
-    {dayOfWeek && date ? (
-      <React.Fragment>
-        <QueueHeaderDayOfWeek type="h3">{dayOfWeek}</QueueHeaderDayOfWeek>
-        <QueueHeaderDate type="p" color="grayDark">
-          {date}
-        </QueueHeaderDate>
-      </React.Fragment>
-    ) : (
-      <QueueHeaderDayOfWeek type="h3">{text}</QueueHeaderDayOfWeek>
-    )}
-  </QueueHeaderWrapper>
-);
+const QueueHeader = ({ text, id, dayOfWeek, date }) => {
+  const dateFormat = dayOfWeek && date;
+  if (!text && !dateFormat) return null;
+  return (
+    <QueueHeaderWrapper key={id}>
+      {dateFormat ? (
+        <React.Fragment>
+          <QueueHeaderDayOfWeek type="h3">{dayOfWeek}</QueueHeaderDayOfWeek>
+          <QueueHeaderDate type="p" color="grayDark">
+            {date}
+          </QueueHeaderDate>
+        </React.Fragment>
+      ) : (
+        <QueueHeaderDayOfWeek type="h3">{text}</QueueHeaderDayOfWeek>
+      )}
+    </QueueHeaderWrapper>
+  );
+};
 
 QueueHeader.propTypes = {
   text: PropTypes.string,
