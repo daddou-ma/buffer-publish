@@ -15,7 +15,7 @@
     "@bufferapp/analyze-png-export": "1.9.0",
     "@bufferapp/analyze-profile-selector": "1.11.0",
     "@bufferapp/app-sidebar": "1.11.5",
-    "@bufferapp/async-data-fetch": "1.9.4",
+    "@bufferapp/async-data-fetch": "2.0.0",
     "@bufferapp/average-table": "1.11.0",
     "@bufferapp/compare-chart": "1.11.0",
     "@bufferapp/environment": "1.9.4",

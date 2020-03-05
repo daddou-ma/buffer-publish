@@ -5,7 +5,7 @@
  * image's url and its thumbnail url as well.
  */
 
-import RPCClient from 'micro-rpc-client';
+import RPCClient from '@bufferapp/micro-rpc-client';
 import PropTypes from 'prop-types';
 import { MediaTypes } from '@bufferapp/publish-constants';
 import { getFileTypeFromPath } from '@bufferapp/publish-composer/composer/utils/StringUtils';

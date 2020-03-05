@@ -1,4 +1,4 @@
-import RPCClient from 'micro-rpc-client';
+import RPCClient from '@bufferapp/micro-rpc-client';
 
 const rpc = new RPCClient({
   url: '/rpc',
