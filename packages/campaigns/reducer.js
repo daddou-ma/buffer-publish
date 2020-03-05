@@ -40,9 +40,10 @@ export default (state = initialState, action) => {
     }
     case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      let { campaigns, currentCampaign } = state;
+      let { campaigns, currentCampaign, campaignId } = state;
 
       currentCampaign = action.result;
+      campaignId = action.result.id;
 
       if (campaigns.some(campaign => campaign.id === action.result.id)) {
         campaigns = campaigns.map(campaign => {
@@ -59,6 +60,8 @@ export default (state = initialState, action) => {
         ...state,
         campaigns,
         currentCampaign,
+        campaignId,
+        isSaving: false,
       };
     }
     case `createCampaign_${dataFetchActionTypes.FETCH_FAIL}`:

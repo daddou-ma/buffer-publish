@@ -92,7 +92,7 @@ ViewCampaign.propTypes = {
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
   fetchCampaign: PropTypes.func.isRequired,
-  campaignId: PropTypes.string.isRequired,
+  campaignId: PropTypes.string,
 };
 
 export default ViewCampaign;
