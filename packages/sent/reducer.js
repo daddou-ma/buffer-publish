@@ -11,6 +11,7 @@ export const actionTypes = keyWrapper('SENT', {
   POST_IMAGE_CLICKED_PREV: 0,
   POST_IMAGE_CLOSED: 0,
   FETCH_SENT_POSTS: 0,
+  VIEW_CAMPAIGN_PAGE: 0,
 });
 
 export const initialState = {
@@ -219,6 +220,10 @@ export const actions = {
       profileId,
     };
   },
+  handleCampaignTagClick: ({ campaignId }) => ({
+    type: queueActionTypes.VIEW_CAMPAIGN_PAGE,
+    campaignId,
+  }),
   handleComposerCreateSuccess: () => ({
     type: actionTypes.HIDE_COMPOSER,
   }),

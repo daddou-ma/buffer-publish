@@ -108,7 +108,7 @@ const renderPost = ({
     onImageClickPrev: () => onImageClickPrev({ post }),
     onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
-    onCampaignTagClick: () => onCampaignTagClick({ campaignId }),
+    onCampaignTagClick: () => onCampaignTagClick(campaignId),
     onDropPost,
     onSwapPosts,
     hasFirstCommentFlip,
