@@ -1,12 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Text, Button } from '@bufferapp/ui';
 import ListItem from '../ListItem';
 
-const StyledList = styled.ul`
+const StyledList = styled.table`
   padding-left: 0px;
+  width: 100%;
+  border-collapse: collapse;
 `;
+
+// const ColSpan = styled.div`
+//   grid-column-start: 2;
+//   grid-column-end: 4;
+// `;
+
+// const Grid = styled.div`
+//   display: grid;
+//   grid-template-columns: auto 1fr;
+// `;
 
 const List = ({
   translations,

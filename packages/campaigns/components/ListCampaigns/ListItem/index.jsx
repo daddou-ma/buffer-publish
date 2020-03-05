@@ -4,20 +4,12 @@ import styled from 'styled-components';
 import { Text, Button } from '@bufferapp/ui';
 import { grayDark } from '@bufferapp/ui/style/colors';
 
-import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 import ListIcon from '@bufferapp/ui/Icon/Icons/List';
 import CalendarIcon from '@bufferapp/ui/Icon/Icons/Calendar';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 
-export const Container = styled.li`
-  display: flex;
-  margin: 14px 0px 30px;
-  align-items: center;
-  width: 100%;
-`;
-
-export const Color = styled.div`
+const Color = styled.div`
   height: 12px;
   width: 12px;
   border-radius: 50%;
@@ -26,57 +18,39 @@ export const Color = styled.div`
   margin-top: 7px;
 `;
 
-export const LastUpdated = styled.span`
+const Container = styled.tr`
+  background-color: ${props => (props.isEvenItem ? 'auto' : '#F5F5F5')};
+`;
+
+const LastUpdated = styled.span`
   color: ${grayDark};
 `;
 
-export const SubText = styled.div`
-  justify-content: flex-end;
-  display: flex;
-  margin-top: 8px;
-  width: 100%;
-  p {
-    margin: 0px;
-  }
-`;
-
-export const Title = styled.div`
-  display: flex;
-  flex-direction: column;
+const Title = styled.div`
   h3 {
     margin: 0px;
   }
 `;
 
-export const CampaignDetails = styled.div`
+const Group = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-`;
-
-export const Group = styled.div`
-  display: flex;
-  margin-right: 60px;
   p {
     font-weight: 500;
-  } 
+  }
 `;
 
-export const Details = styled.div`
-  display: flex;
-`;
-
-export const Icon = styled.div`
+const Icon = styled.span`
   margin-right: 7px;
   svg {
     vertical-align: middle;
   }
 `;
 
-const LeftWrapper = styled.div`
+const LeftWrapper = styled.td`
   display: flex;
   flex-direction: row;
-  width: 100%;
   p {
     margin-top: 0px;
   }
