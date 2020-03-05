@@ -24,7 +24,7 @@ const helpMenuItems = [
     id: '1',
     title: 'FAQ',
     onItemClick: () => {
-      window.location.assign('https://faq.buffer.com/');
+      window.location.assign('https://support.buffer.com/hc/en-us');
     },
   },
   {
