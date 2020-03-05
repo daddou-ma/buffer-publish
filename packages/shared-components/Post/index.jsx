@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { borderRadius } from '@bufferapp/ui/style/borders';
-import { white, grayShadow, blue, gray } from '@bufferapp/ui/style/colors';
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RenderPostMetaBar from './RenderPostMetaBar';
 import PostErrorBanner from '../PostErrorBanner';
 import RetweetPanel from '../RetweetPanel';
+import Card from '../Card';
 
 const PostContainer = styled.div`
   display: flex;
@@ -24,17 +23,6 @@ const PostContent = styled.div`
   padding: 1rem;
   cursor: ${props => (props.draggable ? 'grab' : 'inherit')};
   opacity: ${props => (props.dragging ? 0 : 1)};
-`;
-
-const Card = styled.div`
-  background: ${white};
-  border-radius: ${borderRadius};
-  opacity: ${props => (props.faded ? 0.5 : 1)};
-  overflow: hidden;
-  box-shadow: ${props => (props.dragging ? '' : grayShadow)};
-  border-width: 1px;
-  border-style: ${props => (props.dragging ? 'dashed' : 'solid')};
-  border-color: ${props => (!props.dragging && props.isOver ? blue : gray)};
 `;
 
 const Post = ({
@@ -85,15 +73,16 @@ const Post = ({
     !hasPushNotifications &&
     postDetails.isInstagramReminder &&
     !isPastReminder;
+  const cardDetails = {
+    faded: isDeleting,
+    dragging,
+    isOver,
+  };
 
   return (
     <PostContainer>
       <PostSubContainer>
-        <Card
-          faded={isDeleting}
-          dragging={dragging}
-          isOver={isOver}
-        >
+        <Card state={cardDetails}>
           {hasReminderError && (
             <PostErrorBanner
               dragging={dragging}
