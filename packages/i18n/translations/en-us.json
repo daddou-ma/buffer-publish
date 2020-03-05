@@ -49,7 +49,9 @@
       "subtext": "Plan and schedule content across multiple social accounts all in one place. Get started by creating your posts for the campaign.",
       "title": "Build your Campaign",
       "editCampaign": "Edit Campaign",
-      "deleteCampaign": "Delete Campaign"
+      "deleteCampaign": "Delete Campaign",
+      "scheduled": "Scheduled",
+      "sent": "Sent"
     }
   },
   "onboarding-page": {

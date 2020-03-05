@@ -1,8 +1,10 @@
 export const postLists = [
   {
     queueItemType: 'header',
-    test: 'Today',
+    text: 'Today',
     id: 'header-1',
+    dayOfWeek: 'Today',
+    date: 'May 2',
   },
   {
     queueItemType: 'post',
@@ -44,8 +46,10 @@ export const postLists = [
   },
   {
     queueItemType: 'header',
-    test: 'Tuesday May 3rd',
+    text: 'Tuesday May 3rd',
     id: 'header-2',
+    dayOfWeek: 'Tuesday',
+    date: 'May 3',
   },
   {
     queueItemType: 'post',

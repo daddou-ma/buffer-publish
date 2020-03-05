@@ -16,9 +16,8 @@ export default connect(
     return {
       campaigns: [],
       translations: state.i18n.translations.campaigns,
-      isOwner:
-        state.appSidebar.user.id ===
-        state.profileSidebar.selectedProfile.ownerId,
+      isUsingPublishAsTeamMember:
+        state.appSidebar.user.isUsingPublishAsTeamMember,
       isSaving: state.campaigns.isSaving,
       campaignId,
       campaignDetails: state.campaigns.campaignDetails,
@@ -51,6 +50,9 @@ export default connect(
     },
     onEditCampaignClick: campaignId => {
       dispatch(actions.handleEditCampaignClick(campaignId));
+    },
+    onCampaignClick: campaignId => {
+      dispatch(actions.handleCampaignClick(campaignId));
     },
   })
 )(CampaignsPage);

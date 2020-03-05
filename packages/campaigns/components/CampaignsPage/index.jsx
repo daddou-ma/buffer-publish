@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 import { campaignPages } from '@bufferapp/publish-routes';
 import CampaignsWrapper from '../CampaignsWrapper';
-import CreateCampaign from '../CreateCampaign';
+import CampaignForm from '../CampaignForm';
 import ViewCampaign from '../ViewCampaign';
 import ListCampaigns from '../ListCampaigns';
 
@@ -25,6 +25,7 @@ const CampaignsPage = ({
   hasCampaignsFlip,
   selectedPage,
   campaignDetails,
+  onCampaignClick,
 }) => {
   const [viewMode, setViewMode] = useState(campaignPages.VIEW_ALL_CAMPAIGNS);
   useSetCampaignPage({ selectedPage, setViewMode });
@@ -39,7 +40,7 @@ const CampaignsPage = ({
         <ViewCampaign
           campaignDetails={campaignDetails}
           hasPosts={false}
-          isOwner
+          isUsingPublishAsTeamMember
           translations={translations}
           onCreatePostClick={() => {}}
           onDeleteCampaignClick={() => {}}
@@ -52,10 +53,11 @@ const CampaignsPage = ({
           translations={translations}
           onOpenCampaign={() => setViewMode(campaignPages.VIEW_CAMPAIGN)}
           onOpenCreateCampaignClick={onOpenCreateCampaignClick}
+          onCampaignClick={onCampaignClick}
         />
       )}
       {viewMode === campaignPages.CREATE_CAMPAIGN && (
-        <CreateCampaign
+        <CampaignForm
           isSaving={isSaving}
           translations={translations.createCampaign}
           onCreateCampaignClick={onCreateCampaignClick}

@@ -11,8 +11,6 @@ import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as modalReducers } from '@bufferapp/publish-modals/reducer';
 import { actionTypes } from './reducer';
 
-import { HELPSCOUT_ID } from './constants';
-
 const checkExtensionInstalled = () => {
   /**
    * We place this marker in the DOM (server/index.html) and the Buffer Extension
@@ -45,10 +43,6 @@ export default ({ dispatch, getState }) => next => action => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({ type: actionTypes.FULLSTORY, result: action.result });
       dispatch({ type: actionTypes.APPCUES, result: action.result });
-      if (!action.result.isOnAwesomePlan) {
-        // Context: https://buffer.atlassian.net/browse/PUB-2004
-        dispatch({ type: actionTypes.HELPSCOUT_BEACON, result: action.result });
-      }
       dispatch({ type: actionTypes.ITERATE, result: action.result });
       break;
 
@@ -173,30 +167,6 @@ export default ({ dispatch, getState }) => next => action => {
             window.Appcues.on('flow_aborted', dispatchAppcuesFinished);
           }
         }
-      }
-      break;
-    case actionTypes.APPCUES_STARTED:
-      const beaconDiv = document.querySelector('beacon-container');
-      beaconDiv.style.display = 'none';
-      break;
-    case actionTypes.APPCUES_FINISHED:
-      beaconDiv.style.display = '';
-      break;
-    case actionTypes.HELPSCOUT_BEACON:
-      if (window && window.Beacon) {
-        const { name, email, helpScoutConfig } = action.result;
-
-        window.Beacon('init', HELPSCOUT_ID);
-        window.Beacon('identify', {
-          name, // current user's name
-          email, // current user's email
-        });
-        // Pass config parameters from the user object in the API.
-        window.Beacon('config', JSON.parse(helpScoutConfig));
-        dispatch({
-          type: actionTypes.HELPSCOUT_BEACON_LOADED,
-          loaded: true,
-        });
       }
       break;
     case 'COMPOSER_EVENT': {

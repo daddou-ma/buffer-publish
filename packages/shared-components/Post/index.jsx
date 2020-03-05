@@ -8,6 +8,7 @@ import RenderPostMetaBar from './RenderPostMetaBar';
 import PostErrorBanner from '../PostErrorBanner';
 import RetweetPanel from '../RetweetPanel';
 import Card from '../Card';
+import CampaignTag from '../../campaigns/components/CampaignTag';
 
 const PostContainer = styled.div`
   display: flex;
@@ -64,6 +65,9 @@ const Post = ({
   features,
   basic,
   hasUserTags,
+  campaignDetails,
+  onCampaignTagClick,
+  hasCampaignsFeature,
 }) => {
   const hasError =
     postDetails && postDetails.error && postDetails.error.length > 0;
@@ -112,6 +116,16 @@ const Post = ({
               children
             )}
           </PostContent>
+
+          {hasCampaignsFeature && campaignDetails && (
+            <CampaignTag
+              campaignName={campaignDetails.name}
+              campaignColor={campaignDetails.color}
+              dragging={dragging}
+              onCampaignTagClick={onCampaignTagClick}
+            />
+          )}
+
           <RenderPostMetaBar
             profileService={profileService}
             dragging={dragging}
