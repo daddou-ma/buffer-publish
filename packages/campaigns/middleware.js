@@ -25,7 +25,7 @@ export default ({ dispatch }) => next => action => {
           args: {
             campaignId,
             past: false,
-            basicItems: true,
+            fullItems: false,
           },
         })
       );

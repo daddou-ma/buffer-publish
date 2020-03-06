@@ -11,12 +11,16 @@ const session = {
   },
 };
 
-const params = {
-  campaignId: '123456',
-  past: true,
+const params = ({ past = false, fullItems = false }) => {
+  return {
+    campaignId: '123456',
+    past,
+    fullItems,
+  };
 };
 
-const geCampaign = () => RPCEndpoint.fn(params, { session });
+const geCampaign = ({ past, fullItems }) =>
+  RPCEndpoint.fn(params({ past, fullItems }), { session });
 
 const CAMPAIGN = {
   data: {
@@ -108,19 +112,36 @@ const itemParams = ['dueAt', 'serviceId', 'serviceType', 'channelType'];
 describe('RPC | Get campaign', () => {
   it('gets the campaign without items correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN));
-    await geCampaign().then(response => {
+    await geCampaign({ past: false }).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
       expect(response.color).toBe('#BD3381');
       expect(response.lastUpdated).toContain('Last updated ');
       expect(response.dateRange).toBeNull();
+      expect(response.items).toBeNull();
+    });
+  });
+
+  it('gets the campaign with items with full items correctly', async () => {
+    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
+    await geCampaign({ fullItems: true }).then(response => {
+      expect(response.id).toBe('123456');
+      expect(response.globalOrganizationId).toBe('000111');
+      expect(response.name).toBe('My campaign');
+      expect(response.color).toBe('#BD3381');
+      expect(response.lastUpdated).toContain('Last updated ');
+      expect(response.dateRange).not.toBeUndefined();
+      expect(response.items).not.toBeNull();
+      response.items.forEach(item => {
+        expect(item.campaign_item_type).not.toBeNull();
+      });
     });
   });
 
   it('gets the campaign with scheduled items correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
-    await geCampaign().then(response => {
+    await geCampaign({ past: false }).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
@@ -139,14 +160,14 @@ describe('RPC | Get campaign', () => {
 
   it('parses date range, with same year and different month correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
-    await geCampaign().then(response => {
+    await geCampaign({ past: false }).then(response => {
       expect(response.dateRange).toBe('Mar 11-Apr 4, 2020');
     });
   });
 
   it('parses date range, with same year and month correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_DATE_RANGE_SAME_MONTH));
-    await geCampaign().then(response => {
+    await geCampaign({ past: false }).then(response => {
       expect(response.dateRange).toBe('Mar 6-10, 2020');
     });
   });
@@ -155,14 +176,14 @@ describe('RPC | Get campaign', () => {
     get.mockReturnValueOnce(
       Promise.resolve(CAMPAIGN_DATE_RANGE_DIFF_MONTH_YEAR)
     );
-    await geCampaign().then(response => {
+    await geCampaign({ past: false }).then(response => {
       expect(response.dateRange).toBe('Dec 28 2019-Mar 10 2020');
     });
   });
 
   it('gets the campaign with scheduled items correctly', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SENT_ITEMS));
-    await geCampaign().then(response => {
+    await geCampaign({ past: false }).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');
@@ -183,7 +204,7 @@ describe('RPC | Get campaign', () => {
   it('fails to get campaign', async () => {
     get.mockReturnValueOnce(Promise.reject(new TypeError('Error ocurred')));
     try {
-      await geCampaign().then(response => {
+      await geCampaign({ past: false }).then(response => {
         throw new TypeError(response);
       });
     } catch (err) {
