@@ -44,9 +44,12 @@ const parseDateRange = (startDate, endDate) => {
 };
 
 const parseItem = item => {
-  let updateFields = null;
-  if (item.campaign_item_type === 'update') {
-    updateFields = postParser(item);
+  const itemContent = {};
+  if (item.content) {
+    // We'd need to add the other parsers here (storyGroups)
+    if (item.type === 'update') {
+      itemContent.content = postParser(item.content);
+    }
   }
 
   let sentAt = null;
@@ -60,13 +63,16 @@ const parseItem = item => {
   }
 
   const result = {
+    id: item.id,
+    _id: item.id,
     dueAt: item.due_at,
+    type: item.type,
     serviceType: item.service_type,
     serviceId: item.service_id,
     channelType: item.channel_type,
     ...sentAt,
     ...servicePostId,
-    ...updateFields,
+    ...itemContent,
   };
 
   return result;
