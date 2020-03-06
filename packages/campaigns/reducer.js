@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { campaigns } = state;
 
-      const newCampaigns1 = campaigns.some(
+      const newCampaigns = campaigns.some(
         campaign => campaign.id === action.result.id
       )
         ? campaigns.map(campaign => {
@@ -55,7 +55,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        campaigns: newCampaigns1,
+        campaigns: newCampaigns,
         currentCampaign: action.result,
         campaignId: action.result.id,
         isSaving: false,
