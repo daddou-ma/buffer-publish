@@ -15,6 +15,7 @@ const campaigns = [
     sent: '1 Sent',
     lastUpdated: 'Last updated 3 hours ago',
     campaignId: '1',
+    hasPosts: true
   },
   {
     name: 'A Longer Campaign Name',
@@ -24,6 +25,7 @@ const campaigns = [
     sent: '0 Sent',
     lastUpdated: 'Last updated 2 days ago',
     campaignId: '2',
+    hasPosts: false
   },
   {
     name: 'Hello World',
@@ -33,6 +35,7 @@ const campaigns = [
     sent: '25 Sent',
     lastUpdated: 'Last updated yesterday',
     campaignId: '3',
+    hasPosts: true
   },
 ];
 

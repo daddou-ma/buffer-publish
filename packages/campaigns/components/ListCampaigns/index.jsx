@@ -7,6 +7,16 @@ import styled from 'styled-components';
 
 const Header = styled.div`
   display: flex;
+  align-items: center;
+  button {
+    margin-left: auto;
+  }
+`;
+
+const Container = styled.div`
+  max-width: 864px;
+  height: 100%;
+  margin: 13px;
 `;
 
 const ListCampaigns = ({
@@ -58,10 +68,14 @@ const ListCampaigns = ({
   }
 
   return (
-    <React.Fragment>
+    <Container>
       <Header>
-        <Text type="h1">Campaigns</Text> 
-        <Button label="Create Campaign" />
+        <Text type="h2">Campaigns</Text>
+        <Button
+          type="primary"
+          label="Create Campaign"
+          onClick={onOpenCreateCampaignClick}
+        />
       </Header>
       <List
         campaigns={campaigns}
@@ -72,7 +86,7 @@ const ListCampaigns = ({
         hasCampaignPosts={hasCampaignPosts}
         isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
       />
-    </React.Fragment>
+    </Container>
   );
 };
 

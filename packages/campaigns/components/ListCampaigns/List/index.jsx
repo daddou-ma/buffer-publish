@@ -3,21 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ListItem from '../ListItem';
 
-const StyledList = styled.table`
+const StyledList = styled.ul`
   padding-left: 0px;
   width: 100%;
-  border-collapse: collapse;
+  margin-top: 0px;
 `;
-
-// const ColSpan = styled.div`
-//   grid-column-start: 2;
-//   grid-column-end: 4;
-// `;
-
-// const Grid = styled.div`
-//   display: grid;
-//   grid-template-columns: auto 1fr;
-// `;
 
 const List = ({
   translations,
@@ -26,7 +16,7 @@ const List = ({
   onDeleteCampaignClick,
   onEditCampaignClick,
   isUsingPublishAsTeamMember,
-  hasCampaignPosts,
+  hasPosts,
 }) => {
   const listItems = campaigns.map((campaign, index) => (
     <ListItem
@@ -36,7 +26,7 @@ const List = ({
       onDeleteCampaignClick={onDeleteCampaignClick}
       onEditCampaignClick={onEditCampaignClick}
       isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
-      hasCampaignPosts={hasCampaignPosts}
+      hasPosts={hasPosts}
       isEvenItem={index % 2 === 0}
     />
   ));
@@ -49,7 +39,7 @@ List.propTypes = {
   onEditCampaignClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onViewCampaignClick: PropTypes.func.isRequired,
-  hasCampaignPosts: PropTypes.bool.isRequired,
+  hasPosts: PropTypes.bool.isRequired,
   isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
 };
 

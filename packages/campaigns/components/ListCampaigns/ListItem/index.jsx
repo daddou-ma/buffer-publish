@@ -18,8 +18,13 @@ const Color = styled.div`
   margin-top: 7px;
 `;
 
-const Container = styled.tr`
+const Container = styled.li`
   background-color: ${props => (props.isEvenItem ? 'auto' : '#F5F5F5')};
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr .8fr 1fr;
+  grid-column-gap: 20px;
+  padding: 16px;
+  border-radius: 4px;
 `;
 
 const LastUpdated = styled.span`
@@ -27,7 +32,8 @@ const LastUpdated = styled.span`
 `;
 
 const Title = styled.div`
-  h3 {
+  h3,
+  p {
     margin: 0px;
   }
 `;
@@ -48,12 +54,17 @@ const Icon = styled.span`
   }
 `;
 
-const LeftWrapper = styled.td`
+const LeftWrapper = styled.div`
   display: flex;
   flex-direction: row;
   p {
     margin-top: 0px;
   }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const goToAnalyzeReport = () =>
@@ -66,7 +77,6 @@ const ListItem = ({
   onDeleteCampaignClick,
   onEditCampaignClick,
   isUsingPublishAsTeamMember,
-  hasPosts,
   isEvenItem,
 }) => {
   const { campaignId } = campaign;
@@ -105,33 +115,31 @@ const ListItem = ({
           </Text>
         </Title>
       </LeftWrapper>
-      {hasPosts && (
-        <td>
-          <Group>
+      <Group>
+        {campaign.hasPosts ? (
+          <React.Fragment>
             <Icon>
               <CalendarIcon size="medium" />
             </Icon>
             <Text type="p">{campaign.dateRange}</Text>
-          </Group>
-        </td>
-      )}
-      <td>
-        <Group>
-          <Icon>
-            <ClockIcon size="medium" />
-          </Icon>
-          <Text type="p">{campaign.scheduled}</Text>
-        </Group>
-      </td>
-      <td>
-        <Group>
-          <Icon>
-            <ListIcon size="medium" />
-          </Icon>
-          <Text type="p">{campaign.sent}</Text>
-        </Group>
-      </td>
-      <td>
+          </React.Fragment>
+        ) : (
+          ''
+        )}
+      </Group>
+      <Group>
+        <Icon>
+          <ClockIcon size="medium" />
+        </Icon>
+        <Text type="p">{campaign.scheduled}</Text>
+      </Group>
+      <Group>
+        <Icon>
+          <ListIcon size="medium" />
+        </Icon>
+        <Text type="p">{campaign.sent}</Text>
+      </Group>
+      <ButtonWrapper>
         <Button
           onClick={
             isUsingPublishAsTeamMember
@@ -155,7 +163,7 @@ const ListItem = ({
           }}
           items={selectItems}
         />
-      </td>
+      </ButtonWrapper>
     </Container>
   );
 };
