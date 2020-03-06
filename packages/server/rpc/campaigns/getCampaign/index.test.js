@@ -66,6 +66,39 @@ const CAMPAIGN_WITH_SCHEDULED_ITEMS = {
   success: true,
 };
 
+const CAMPAIGN_WITH_SCHEDULED_ITEMS_FULL = {
+  data: {
+    ...CAMPAIGN.data,
+    scheduled: 2,
+    sent: 1,
+    start_date: 1583946000,
+    end_date: 1585998540,
+    items: [
+      {
+        id: '123',
+        type: 'update',
+        due_at: 1583946000,
+        service_type: 'twitter',
+        service_id: 96414483,
+        channel_type: 'profile',
+        campaign_item_type: 'update',
+        text: 'My Update 1',
+      },
+      {
+        id: '124',
+        type: 'update',
+        due_at: 1585998540,
+        service_type: 'twitter',
+        service_id: 96414483,
+        channel_type: 'profile',
+        campaign_item_type: 'update',
+        text: 'My Update 2',
+      },
+    ],
+  },
+  success: true,
+};
+
 const CAMPAIGN_WITH_SENT_ITEMS = {
   data: {
     ...CAMPAIGN.data,
@@ -124,8 +157,10 @@ describe('RPC | Get campaign', () => {
   });
 
   it('gets the campaign with items with full items correctly', async () => {
-    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
-    await geCampaign({ fullItems: true }).then(response => {
+    get.mockReturnValueOnce(
+      Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS_FULL)
+    );
+    await geCampaign({ past: false, fullItems: true }).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
       expect(response.name).toBe('My campaign');

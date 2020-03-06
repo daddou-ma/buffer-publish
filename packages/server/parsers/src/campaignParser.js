@@ -1,4 +1,5 @@
 const moment = require('moment-timezone');
+const postParser = require('./postParser');
 
 const parseLastUpdated = updatedAt => {
   const updatedDate = new Date(updatedAt * 1000);
@@ -43,6 +44,11 @@ const parseDateRange = (startDate, endDate) => {
 };
 
 const parseItem = item => {
+  let updateFields = null;
+  if (item.campaign_item_type === 'update') {
+    updateFields = postParser(item);
+  }
+
   let sentAt = null;
   if (item.sent_at) {
     sentAt = { sentAt: item.sent_at };
@@ -60,6 +66,7 @@ const parseItem = item => {
     channelType: item.channel_type,
     ...sentAt,
     ...servicePostId,
+    ...updateFields,
   };
 
   return result;
