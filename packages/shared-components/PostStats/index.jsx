@@ -65,13 +65,13 @@ ExternalLink.defaultProps = {
   link: null,
 };
 
-const StatisticElement = ({ key, value, title, tooltip, link }) => {
+const StatisticElement = ({ value, title, tooltip, link }) => {
   if (typeof value === 'undefined' || value === null) {
     return null;
   }
 
   return (
-    <StatsContainerStyled key={key}>
+    <StatsContainerStyled>
       <Text size="large" color="black">
         {abbreviateNumber(value, 1)}
       </Text>
@@ -85,7 +85,6 @@ const StatisticElement = ({ key, value, title, tooltip, link }) => {
 };
 
 StatisticElement.propTypes = {
-  key: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string,
   tooltip: PropTypes.string,
@@ -93,7 +92,6 @@ StatisticElement.propTypes = {
 };
 
 StatisticElement.defaultProps = {
-  key: null,
   value: null,
   title: null,
   tooltip: null,
@@ -123,64 +121,64 @@ const PostStats = ({
 
   return (
     <StatsContainer>
-      {Object.keys(titles).map(typeStats => {
-        if (profileService === 'twitter') {
-          if (
-            typeStats === 'reach' ||
-            (!showTwitterMentions && typeStats === 'mentions')
-          ) {
+      {Object.keys(titles)
+        .map(typeStat => {
+          return [typeStat, titles[typeStat]];
+        })
+        .map(([typeStat, title]) => {
+          if (profileService === 'twitter') {
+            if (
+              typeStat === 'reach' ||
+              (!showTwitterMentions && typeStat === 'mentions')
+            ) {
+              return null;
+            }
+          }
+          let value = statistics[typeStat];
+          if (typeStat === 'reach_twitter' && profileService === 'twitter') {
+            value = statistics.impressions;
+          }
+          const nonPluralTitles = ['reach', 'plusOne', 'reach_twitter'];
+          if (value !== 1 && nonPluralTitles.indexOf(typeStat) < 0) {
+            title += 's';
+          }
+          if (typeof value === 'undefined') {
             return null;
           }
-        }
-        let value = statistics[typeStats];
-        let title = titles[typeStats];
-        if (typeStats === 'reach_twitter' && profileService === 'twitter') {
-          value = statistics.impressions;
-        }
-        const nonPluralTitles = ['reach', 'plusOne', 'reach_twitter'];
-        if (value !== 1 && nonPluralTitles.indexOf(typeStats) < 0) {
-          title += 's';
-        }
-        if (typeof value === 'undefined') {
-          return null;
-        }
 
-        const stat = {
-          key: typeStats,
-          value,
-          title,
-          tooltip:
-            profileService === 'instagram' && profileServiceType === 'profile'
-              ? `Instagram has deprecated statistics for non business accounts. Set up direct posting to start seeing these statistics from Instagram Business.`
-              : null,
-          link: !(typeStats === 'clicks' && profileService === 'linkedin')
-            ? null
-            : 'https://faq.buffer.com/article/181-why-does-linkedin-sometimes-show-a-different-number-for-clicks',
-        };
+          const stat = {
+            key: typeStat,
+            value,
+            title,
+            tooltip:
+              profileService === 'instagram' && profileServiceType === 'profile'
+                ? `Instagram has deprecated statistics for non business accounts. Set up direct scheduling to start seeing these statistics from Instagram Business.`
+                : null,
+            link: !(typeStat === 'clicks' && profileService === 'linkedin')
+              ? null
+              : 'https://faq.buffer.com/article/181-why-does-linkedin-sometimes-show-a-different-number-for-clicks',
+          };
 
-        return (
-          <StatisticElement
-            key={stat.key}
-            value={stat.value}
-            title={stat.title}
-            tooltip={stat.tooltip}
-            link={stat.link}
-            stat={stat}
-          />
-        );
-      })}
+          return stat;
+        })
+        .map(stat => {
+          if (stat === null) {
+            return null;
+          }
+          return (
+            <StatisticElement
+              key={stat.key}
+              value={stat.value}
+              title={stat.title}
+              tooltip={stat.tooltip}
+              link={stat.link}
+              stat={stat}
+            />
+          );
+        })}
     </StatsContainer>
   );
 };
-
-const stats = [
-  {
-    value: 1,
-    title: 'string',
-    tooltip: 'string',
-    link: 'url',
-  },
-];
 
 PostStats.propTypes = {
   profileService: PropTypes.oneOf(SERVICE_NAMES),
