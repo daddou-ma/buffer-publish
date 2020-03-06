@@ -1,4 +1,3 @@
-/* globals Bugsnag */
 /**
  * Scrape urls to retrieve information about them.
  *
@@ -44,9 +43,17 @@ class Scraper {
     const request = Request.get(Scraper.urls.get(environment), { url: encoded })
       .then(response => {
         if (response.status >= 500 && environment === 'production') {
-          Bugsnag.notify('ScraperError', 'Scraper returned 5xx error code', {
-            url: encoded,
-          });
+          window.bugsnagClient.notify(
+            new Error('Scraper returned 5xx error code'),
+            {
+              metaData: {
+                Scraper: {
+                  url: encoded,
+                  responseCode: response.status,
+                },
+              },
+            }
+          );
         }
         return response;
       })
