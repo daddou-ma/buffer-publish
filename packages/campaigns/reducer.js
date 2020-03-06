@@ -40,30 +40,28 @@ export default (state = initialState, action) => {
     }
     case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      let { campaigns, currentCampaign, campaignId } = state;
+      const { campaigns } = state;
 
-      currentCampaign = action.result;
-      campaignId = action.result.id;
-
-      if (campaigns.some(campaign => campaign.id === action.result.id)) {
-        campaigns = campaigns.map(campaign => {
-          if (campaign.id === action.result.id) {
-            return action.result;
-          }
-          return campaign;
-        });
-      } else {
-        campaigns = [...campaigns, action.result];
-      }
+      const newCampaigns1 = campaigns.some(
+        campaign => campaign.id === action.result.id
+      )
+        ? campaigns.map(campaign => {
+            if (campaign.id === action.result.id) {
+              return action.result;
+            }
+            return campaign;
+          })
+        : [...campaigns, action.result];
 
       return {
         ...state,
-        campaigns,
-        currentCampaign,
-        campaignId,
+        campaigns: newCampaigns1,
+        currentCampaign: action.result,
+        campaignId: action.result.id,
         isSaving: false,
       };
     }
+
     case `createCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
