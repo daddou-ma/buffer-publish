@@ -1,4 +1,3 @@
-/* globals Bugsnag */
 /**
  * Scrape urls to retrieve information about them.
  *
