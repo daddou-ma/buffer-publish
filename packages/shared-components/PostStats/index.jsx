@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Link } from '@bufferapp/components';
 import { Tooltip } from '@bufferapp/ui';
+import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 import { borderWidth } from '@bufferapp/components/style/border';
-import { mystic } from '@bufferapp/components/style/color';
 import { SERVICE_NAMES } from '@bufferapp/publish-constants';
 import { abbreviateNumber } from '@bufferapp/publish-server/formatters/src';
 import styled from 'styled-components';
-import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
-import { gray, grayDark } from '@bufferapp/ui/style/colors';
-import Button from '@bufferapp/analyze-shared-components/Button';
+import { gray, grayDark, grayLight } from '@bufferapp/ui/style/colors';
 
 const StatsTitle = styled(Text)`
   color: ${grayDark};
@@ -25,9 +23,9 @@ const StatsContainerStyled = styled.div`
   flex-grow: 1;
   flex-basis: 0;
   display: flex;
-  border-top: ${borderWidth} solid ${mystic};
+  border-top: ${borderWidth} solid ${grayLight};
   padding: 8px;
-  border-right: ${borderWidth} solid ${mystic};
+  border-right: ${borderWidth} solid ${grayLight};
   align-items: center;
   flex-direction: column;
 `;
@@ -47,6 +45,14 @@ const TooltipMessage = ({ label }) => {
       </Tooltip>
     </TooltipWrapper>
   ) : null;
+};
+
+TooltipMessage.prototype = {
+  label: PropTypes.string,
+};
+
+TooltipMessage.defaultProps = {
+  label: null,
 };
 
 const ExternalLink = ({ link }) => {
@@ -146,7 +152,7 @@ const PostStats = ({
             return null;
           }
 
-          const stat = {
+          return {
             key: typeStat,
             value,
             title,
@@ -158,8 +164,6 @@ const PostStats = ({
               ? null
               : 'https://faq.buffer.com/article/181-why-does-linkedin-sometimes-show-a-different-number-for-clicks',
           };
-
-          return stat;
         })
         .map(stat => {
           if (stat === null) {
