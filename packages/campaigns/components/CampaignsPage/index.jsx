@@ -18,14 +18,15 @@ const useSetCampaignPage = ({ selectedPage, setViewMode }) => {
 const CampaignsPage = ({
   translations,
   campaigns,
+  currentCampaign,
+  campaignId,
   onOpenCreateCampaignClick,
   onCancelCreateCampaignClick,
   onCreateOrUpdateCampaignClick,
   isSaving,
   hasCampaignsFlip,
   selectedPage,
-  campaignDetails,
-  onCampaignClick,
+  fetchCampaign,
 }) => {
   const [viewMode, setViewMode] = useState(campaignPages.VIEW_ALL_CAMPAIGNS);
   useSetCampaignPage({ selectedPage, setViewMode });
@@ -42,13 +43,14 @@ const CampaignsPage = ({
     <CampaignsWrapper>
       {viewMode === campaignPages.VIEW_CAMPAIGN && (
         <ViewCampaign
-          campaignDetails={campaignDetails}
-          hasPosts={false}
+          currentCampaign={currentCampaign}
+          campaignId={campaignId}
           isUsingPublishAsTeamMember
           translations={translations}
           onCreatePostClick={() => {}}
           onDeleteCampaignClick={() => {}}
-          onEditCampaign={() => setViewMode(campaignPages.EDIT_CAMPAIGN)}
+          onEditCampaignClick={() => setViewMode(campaignPages.EDIT_CAMPAIGN)}
+          fetchCampaign={fetchCampaign}
         />
       )}
       {viewMode === campaignPages.VIEW_ALL_CAMPAIGNS && (
@@ -79,21 +81,19 @@ CampaignsPage.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   campaigns: PropTypes.array, // eslint-disable-line
   onCreateOrUpdateCampaignClick: PropTypes.func.isRequired,
+  currentCampaign: PropTypes.object, // eslint-disable-line
+  campaignId: PropTypes.string,
   isSaving: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool,
   selectedPage: PropTypes.string.isRequired,
   onOpenCreateCampaignClick: PropTypes.func.isRequired,
   onCancelCreateCampaignClick: PropTypes.func.isRequired,
-  campaignDetails: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    color: PropTypes.string,
-  }),
+  fetchCampaign: PropTypes.func.isRequired,
 };
 
 CampaignsPage.defaultProps = {
   hasCampaignsFlip: false,
-  campaignDetails: {},
+  campaignId: null,
 };
 
 export default CampaignsPage;
