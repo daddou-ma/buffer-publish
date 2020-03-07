@@ -86,10 +86,12 @@ const CampaignForm = ({
   campaignDetails,
 }) => {
   // State
-  const defaultName = campaignDetails?.name ?? '';
-  const defaultColor = campaignDetails?.color ?? purple;
-  const campaignId = campaignDetails?.id ?? null;
-  const orgId = campaignDetails?.globalOrganizationId ?? null;
+  const {
+    id: campaignId = null,
+    globalOrganizationId: orgId = null,
+    name: defaultName = '',
+    color: defaultColor = purple,
+  } = campaignDetails ?? {};
   const [campaignName, setName] = useState(defaultName);
   const [colorSelected, setColor] = useState(defaultColor);
   const [isSubmitButtonDisabled, disableSubmit] = useState(true);
