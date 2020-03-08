@@ -51,26 +51,20 @@ export default connect(
     },
     onEditCampaignClick: campaignId => {
       if (campaignId) {
-        dispatch(
-          push(
-            generateCampaignPageRoute({
-              campaignId,
-              selectedPage: campaignPages.EDIT_CAMPAIGN,
-            })
-          )
-        );
+        const routeObj = {
+          campaignId,
+          selectedPage: campaignPages.EDIT_CAMPAIGN,
+        };
+        dispatch(push(generateCampaignPageRoute(routeObj)));
       }
     },
     onViewCampaignClick: campaignId => {
       if (campaignId) {
-        dispatch(
-          push(
-            generateCampaignPageRoute({
-              campaignId,
-              selectedPage: campaignPages.VIEW_CAMPAIGN,
-            })
-          )
-        );
+        const routeObj = {
+          campaignId,
+          selectedPage: campaignPages.VIEW_CAMPAIGN,
+        };
+        dispatch(push(generateCampaignPageRoute(routeObj)));
       }
     },
     onCampaignClick: campaignId => {
