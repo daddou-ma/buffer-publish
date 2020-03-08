@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EmptyState from './EmptyState';
-import List from './List';
 import { Text, Button } from '@bufferapp/ui';
 import styled from 'styled-components';
+import EmptyState from './EmptyState';
+import List from './List';
 
-const Header = styled.div`
+const Header = styled.header`
   display: flex;
   align-items: center;
   button {
@@ -15,7 +15,6 @@ const Header = styled.div`
 
 const Container = styled.div`
   max-width: 864px;
-  height: 100%;
   margin: 13px;
 `;
 
