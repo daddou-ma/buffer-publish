@@ -22,7 +22,7 @@ import {
 } from './style';
 
 const goToAnalyzeReport = () =>
-  window.location.assign(`${getURL.getAnalyzeReport()}`);
+  window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
 
 const Header = ({
   translations,

@@ -16,7 +16,6 @@ const List = ({
   onDeleteCampaignClick,
   onEditCampaignClick,
   isUsingPublishAsTeamMember,
-  hasPosts,
 }) => {
   const listItems = campaigns.map((campaign, index) => (
     <ListItem
@@ -26,7 +25,6 @@ const List = ({
       onDeleteCampaignClick={onDeleteCampaignClick}
       onEditCampaignClick={onEditCampaignClick}
       isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
-      hasPosts={hasPosts}
       isEvenItem={index % 2 === 0}
     />
   ));
@@ -39,7 +37,6 @@ List.propTypes = {
   onEditCampaignClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onViewCampaignClick: PropTypes.func.isRequired,
-  hasPosts: PropTypes.bool.isRequired,
   isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
 };
 
