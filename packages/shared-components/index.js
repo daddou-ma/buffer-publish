@@ -39,3 +39,4 @@ export SimpleColorSwatch from './SimpleColorSwatch';
 export SimpleColorPicker from './SimpleColorPicker';
 export Card from './Card';
 export UserDetails from './UserDetails';
+export QueueHeader from './QueueHeader';

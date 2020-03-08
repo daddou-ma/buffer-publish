@@ -1,7 +1,7 @@
 /* eslint-disable import/first */
 import moment from 'moment-timezone';
 
-jest.mock('micro-rpc-client');
+jest.mock('@bufferapp/micro-rpc-client');
 jest.mock('request-promise');
 import rp from 'request-promise';
 

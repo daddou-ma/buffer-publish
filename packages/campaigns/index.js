@@ -15,13 +15,13 @@ export default connect(
     const { campaignId, selectedPage = campaignPages.VIEW_ALL_CAMPAIGNS } =
       getCampaignPageParams({ path: ownProps.history.location.pathname }) || {};
     return {
-      campaigns: [],
+      campaigns: state.campaigns.campaigns,
+      currentCampaign: state.campaigns.currentCampaign,
       translations: state.i18n.translations.campaigns,
       isUsingPublishAsTeamMember:
         state.appSidebar.user.isUsingPublishAsTeamMember,
       isSaving: state.campaigns.isSaving,
       campaignId,
-      campaignDetails: state.campaigns.campaignDetails,
       selectedPage,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')
@@ -67,8 +67,8 @@ export default connect(
         dispatch(push(generateCampaignPageRoute(routeObj)));
       }
     },
-    onCampaignClick: campaignId => {
-      dispatch(actions.handleCampaignClick(campaignId));
+    fetchCampaign: campaignId => {
+      dispatch(actions.fetchCampaign(campaignId));
     },
   })
 )(CampaignsPage);

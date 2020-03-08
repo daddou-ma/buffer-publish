@@ -20,38 +20,9 @@ import ImageDraft from '../ImageDraft';
 import MultipleImagesDraft from '../MultipleImagesDraft';
 import LinkDraft from '../LinkDraft';
 import VideoDraft from '../VideoDraft';
+import QueueHeader from '../QueueHeader';
 
 const ErrorBoundary = getErrorBoundary(true);
-const listHeaderStyle = {
-  marginBottom: '1rem',
-  marginTop: '1rem',
-  marginLeft: '0.5rem',
-};
-
-const headerTextStyle = {
-  display: 'flex',
-  alignItems: 'baseline',
-};
-
-const headerTextDayOfWeekStyle = {
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  lineHeight: 'normal',
-  fontSize: '18px',
-  color: '#3D3D3D',
-};
-
-const headerTextDateStyle = {
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: 'normal',
-  lineHeight: 'normal',
-  fontSize: '14px',
-  textTransform: 'uppercase',
-  color: '#636363',
-  marginLeft: '8px',
-};
 
 const postTypeComponentMap = new Map([
   ['text', TextPost],
@@ -216,43 +187,12 @@ const renderDraft = ({
   );
 };
 
-const renderHeader = ({ text, id, dayOfWeek, date }) => (
-  <div style={listHeaderStyle} key={id}>
-    <div style={headerTextStyle}>
-      {dayOfWeek && date ? (
-        <React.Fragment>
-          <span style={headerTextDayOfWeekStyle}>{dayOfWeek}</span>
-          <span style={headerTextDateStyle}>{date}</span>
-        </React.Fragment>
-      ) : (
-        <span style={headerTextDayOfWeekStyle}>{text}</span>
-      )}
-    </div>
-  </div>
-);
-
-const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
-  <PostEmptySlot
-    key={id}
-    time="Add to Story"
-    service="isStoryGroup"
-    onClick={() =>
-      onEmptySlotClick({
-        dueTime: slot.label,
-        profile_service: profileService,
-        scheduledAt: slot.timestamp,
-        due_at: slot.timestamp,
-      })
-    }
-  />
-);
-
 /* eslint-enable react/prop-types */
 
 const QueueItems = props => {
   const { items, type, onEmptySlotClick, ...propsForPosts } = props;
   const itemList = items.map((item, index) => {
-    const { queueItemType, ...rest } = item;
+    const { queueItemType, slot, ...rest } = item;
     if (queueItemType === 'post') {
       switch (type) {
         case 'drafts':
@@ -269,10 +209,31 @@ const QueueItems = props => {
       }
     }
     if (queueItemType === 'header') {
-      return renderHeader(rest);
+      return (
+        <QueueHeader
+          text={item.text}
+          id={item.id}
+          dayOfWeek={item.dayOfWeek}
+          date={item.date}
+        />
+      );
     }
     if (type === 'stories' && queueItemType === 'slot') {
-      return renderSlot(rest, onEmptySlotClick);
+      return (
+        <PostEmptySlot
+          key={item.id}
+          time="Add to Story"
+          service="isStoryGroup"
+          onClick={() =>
+            onEmptySlotClick({
+              dueTime: slot.label,
+              profile_service: item.profileService,
+              scheduledAt: slot.timestamp,
+              due_at: slot.timestamp,
+            })
+          }
+        />
+      );
     }
     return null;
   });

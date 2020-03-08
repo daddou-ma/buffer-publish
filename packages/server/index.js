@@ -4,8 +4,8 @@
 const isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
   // This line must come before importing any instrumented module.
+  // eslint-disable-next-line
   require('dd-trace').init({
-    // eslint-disable-line
     env: 'production',
     hostname: process.env.DD_AGENT_HOST,
     port: 8126,
@@ -273,16 +273,16 @@ app.use(helmet.frameguard({ action: 'sameorigin' }));
 
 app.all('/maintenance', maintenanceHandler);
 
-// All routes after this have access to the user session
 app.use('*', (req, res, next) => {
   const analyzeApiAddr =
-    req.get('ANALYZE-API-ADDR') || process.env.ANALYZE_API_ADDR;
+  req.get('ANALYZE-API-ADDR') || process.env.ANALYZE_API_ADDR;
   app.set('analyzeApiAddr', analyzeApiAddr);
   next();
 });
 
 app.use(bodyParser.json());
 
+// All routes after this have access to the user session
 app.use(
   setRequestSessionMiddleware({
     production: isProduction,
@@ -290,7 +290,8 @@ app.use(
   })
 );
 
-app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
+// Setup our RPC handler
+app.post('/rpc/:method?', checkToken, rpcHandler, errorMiddleware);
 
 app.get('/health-check', controller.healthCheck);
 
