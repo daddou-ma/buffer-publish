@@ -1,4 +1,5 @@
 import RPCEndpoint from '.';
+import parsers from '../../../parsers/src';
 
 const session = {
   publish: {
@@ -15,7 +16,7 @@ const params = {
 
 const PublishAPI = { post: jest.fn() };
 const updateCampaign = () =>
-  RPCEndpoint.fn(params, { session }, null, { PublishAPI });
+  RPCEndpoint.fn(params, { session }, null, { PublishAPI, parsers });
 
 const UPDATE_CAMPAIGN_RESPONSE = {
   data: {

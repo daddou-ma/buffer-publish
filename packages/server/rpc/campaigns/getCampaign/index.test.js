@@ -1,4 +1,5 @@
 import RPCEndpoint from '.';
+import parsers from '../../../parsers/src';
 
 const session = {
   publish: {
@@ -18,6 +19,7 @@ const PublishAPI = { get: jest.fn() };
 const getCampaign = ({ past, fullItems }) =>
   RPCEndpoint.fn(params({ past, fullItems }), { session }, null, {
     PublishAPI,
+    parsers,
   });
 
 const CAMPAIGN = {

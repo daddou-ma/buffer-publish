@@ -1,3 +1,4 @@
+import parsers from '../../../parsers/src';
 import RPCEndpoint from '.';
 
 const session = {
@@ -31,6 +32,7 @@ const PublishAPI = {
 const createCampaign = () =>
   RPCEndpoint.fn(params, { session }, null, {
     PublishAPI,
+    parsers,
   });
 
 describe('RPC | Create campaign', () => {
