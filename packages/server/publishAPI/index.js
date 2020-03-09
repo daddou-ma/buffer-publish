@@ -1,13 +1,7 @@
-const rp = require('request-promise');
+const get = require('./get');
+const post = require('./post');
 
-const rpCall = ({ uri, method, options = {} }) => {
-  return rp({
-    uri: `${process.env.API_ADDR}/${uri}`,
-    method,
-    json: true,
-    strictSSL: !(process.env.NODE_ENV === 'development'),
-    ...options,
-  });
+module.exports = {
+  get,
+  post,
 };
-
-module.exports = rpCall;

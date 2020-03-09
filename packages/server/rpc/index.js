@@ -1,6 +1,8 @@
 const { rpc } = require('@bufferapp/buffer-rpc');
 const recursiveReadDir = require('recursive-readdir');
 
+const PublishAPI = require('../publishAPI');
+
 async function loadMethods() {
   const methodModules = [];
   // Recursively grab all the `index.js` files for our methods
@@ -23,7 +25,7 @@ async function loadMethods() {
 
 async function makeRPCHandler() {
   const methods = await loadMethods();
-  return rpc(...methods);
+  return rpc([methods], { PublishAPI });
 }
 
 module.exports = makeRPCHandler;

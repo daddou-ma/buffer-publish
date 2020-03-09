@@ -1,4 +1,4 @@
-const rpCall = require('./');
+const rpCall = require('./rp');
 
 const get = ({ uri, session, params = {} }) => {
   return rpCall({
