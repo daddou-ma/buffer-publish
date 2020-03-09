@@ -75,10 +75,11 @@ export const CAMPAIGNS_LIST = {
   ],
 };
 
-describe('RPC | Get campaign list', () => {
+describe('RPC | Get campaigns list', () => {
   it('gets the campaigns list successfully', async () => {
     get.mockReturnValueOnce(Promise.resolve(CAMPAIGNS_LIST));
     await geCampaignsList().then(response => {
+      expect(response.length).toEqual(4);
       response.forEach(campaign => {
         expect(campaign.globalOrganizationId).toBe('123');
         expect(campaign.dateRange).not.toBeUndefined();
