@@ -1,13 +1,8 @@
 import RPCEndpoint from '.';
 
-const post = require('../../../publishAPI/post');
-
-jest.mock('../../../publishAPI/post');
-
-const accessToken = 'AN ACCESS TOKEN';
 const session = {
   publish: {
-    accessToken,
+    accessToken: '',
   },
 };
 
@@ -18,7 +13,10 @@ const params = {
   color: '#bebebe',
 };
 
-const updateCampaign = () => RPCEndpoint.fn(params, { session });
+const PublishAPI = { post: jest.fn() };
+const updateCampaign = () =>
+  RPCEndpoint.fn(params, { session }, null, { PublishAPI });
+
 const UPDATE_CAMPAIGN_RESPONSE = {
   data: {
     _id: '123456',
@@ -33,7 +31,7 @@ const UPDATE_CAMPAIGN_RESPONSE = {
 
 describe('RPC | Update campaign', () => {
   it('updates a campaign correctly', async () => {
-    post.mockReturnValueOnce(Promise.resolve(UPDATE_CAMPAIGN_RESPONSE));
+    PublishAPI.post.mockResolvedValueOnce(UPDATE_CAMPAIGN_RESPONSE);
     await updateCampaign(params).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
@@ -44,9 +42,7 @@ describe('RPC | Update campaign', () => {
   });
 
   it('fails to update a campaign due to missing params', async () => {
-    post.mockReturnValueOnce(
-      Promise.reject(new TypeError('Missing campaign id'))
-    );
+    PublishAPI.post.mockRejectedValueOnce(new TypeError('Missing campaign id'));
     try {
       await updateCampaign({
         name: 'Test',

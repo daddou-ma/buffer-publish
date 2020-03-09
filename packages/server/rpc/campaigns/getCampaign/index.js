@@ -1,7 +1,6 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const { campaignParser } = require('../../../parsers/src');
 const { handleError } = require('../../../utils');
-const get = require('../../../publishAPI/get');
 
 const processResponse = response => {
   return campaignParser(response.data);
@@ -10,11 +9,15 @@ const processResponse = response => {
 module.exports = method(
   'getCampaign',
   'gets a single campaign, given the id',
-  async ({ campaignId, past, basicItems }, { session }) => {
-    const uri = `/1/campaigns/${campaignId}.json`;
+  async (
+    { campaignId, past, basicItems },
+    { session },
+    res,
+    { PublishAPI }
+  ) => {
     try {
-      const response = await get({
-        uri,
+      const response = await PublishAPI.get({
+        uri: `/1/campaigns/${campaignId}.json`,
         session,
         params: { past, basic_items: basicItems },
       });

@@ -1,6 +1,5 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const { campaignParser } = require('../../../parsers/src');
-const post = require('../../../publishAPI/post');
 const { handleError } = require('../../../utils');
 
 const processResponse = response => {
@@ -10,9 +9,9 @@ const processResponse = response => {
 module.exports = method(
   'updateCampaign',
   'updates a campaign given the id',
-  async ({ campaignId, name, color }, { session }) => {
+  async ({ campaignId, name, color }, { session }, res, { PublishAPI }) => {
     try {
-      const response = await post({
+      const response = await PublishAPI.post({
         uri: '1/campaigns/update.json',
         session,
         params: {
