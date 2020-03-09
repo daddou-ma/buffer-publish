@@ -30,7 +30,7 @@ const helmet = require('helmet');
 
 const { apiError } = require('./middleware');
 const controller = require('./lib/controller');
-const rpcHandler = require('./rpc');
+const makeRPCHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
 const userMethod = require('./rpc/user/index');
 const profilesMethod = require('./rpc/profiles/index');
@@ -291,7 +291,10 @@ app.use(
 );
 
 // Setup our RPC handler
-app.post('/rpc/:method?', checkToken, rpcHandler, errorMiddleware);
+(async () => {
+  const rpcHandler = await makeRPCHandler();
+  app.post('/rpc/:method?', checkToken, rpcHandler, errorMiddleware);
+})();
 
 app.get('/health-check', controller.healthCheck);
 
