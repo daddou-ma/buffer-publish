@@ -1,4 +1,4 @@
-import { createError } from '@bufferapp/buffer-rpc';
+const { createError } = require('@bufferapp/buffer-rpc');
 
 /**
  * This method is designed to parse out an error response
@@ -6,20 +6,23 @@ import { createError } from '@bufferapp/buffer-rpc';
  *
  *   { error: "Some error message", code: 400 }
  *
- * If no message/code is found in the error response the original
+ * If no recognized error is found in the error response the original
  * exception is re-thrown.
  */
-module.exports = error => {
-  const { body: apiErrorResponse } = error.response;
-  let parsedError;
-  try {
-    parsedError = JSON.parse(apiErrorResponse);
-  } catch (e) {
-    // Throw original error
-    throw error;
+module.exports = response => {
+  if (response.error) {
+    // Some Publish API endpoints return a message
+    if (response.error.message) {
+      throw createError({
+        message: response.error.message,
+        code: response.statusCode,
+      });
+    }
+    // Otherwise we expect an 'error' and possible 'code' fields
+    throw createError({
+      message: response.error.error,
+      code: response.error.code || response.statusCode,
+    });
   }
-  throw createError({
-    message: parsedError.error,
-    code: parsedError.code,
-  });
+  throw response;
 };
