@@ -9,17 +9,12 @@ const processResponse = response => {
 module.exports = method(
   'getCampaign',
   'gets a single campaign, given the id',
-  async (
-    { campaignId, past, basicItems },
-    { session },
-    res,
-    { PublishAPI }
-  ) => {
+  async ({ campaignId, past, fullItems }, { session }, res, { PublishAPI }) => {
     try {
       const response = await PublishAPI.get({
         uri: `/1/campaigns/${campaignId}.json`,
         session,
-        params: { past, basic_items: basicItems },
+        params: { past, full_items: fullItems },
       });
       const result = processResponse(response);
       return Promise.resolve(result);
