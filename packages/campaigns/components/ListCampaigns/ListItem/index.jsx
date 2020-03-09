@@ -8,27 +8,27 @@ import CalendarIcon from '@bufferapp/ui/Icon/Icons/Calendar';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import {
-  Container,
-  LeftWrapper,
+  ButtonWrapper,
   Color,
-  Icon,
-  LastUpdated,
+  Container,
   Title,
   Group,
-  ButtonWrapper,
+  Icon,
+  LeftWrapper,
+  LastUpdated,
 } from './style';
 
 const goToAnalyzeReport = () =>
   window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
 
 const ListItem = ({
-  translations,
   campaign,
-  onViewCampaignClick,
-  onDeleteCampaignClick,
-  onEditCampaignClick,
-  isUsingPublishAsTeamMember,
   isEvenItem,
+  isUsingPublishAsTeamMember,
+  onEditCampaignClick,
+  onDeleteCampaignClick,
+  onViewCampaignClick,
+  translations,
 }) => {
   const { campaignId } = campaign;
   const selectItems = [
@@ -56,13 +56,13 @@ const ListItem = ({
   return (
     <Container isEvenItem={isEvenItem}>
       <LeftWrapper>
-        <Color color={campaign.color} />
         <Title>
+          <Color color={campaign.color} />
           <Text type="h3">{campaign.name}</Text>
-          <Text type="p">
-            <LastUpdated>{campaign.lastUpdated}</LastUpdated>
-          </Text>
         </Title>
+        <Text type="p">
+          <LastUpdated>{campaign.lastUpdated}</LastUpdated>
+        </Text>
       </LeftWrapper>
       <Group>
         {campaign.dateRange ? (
