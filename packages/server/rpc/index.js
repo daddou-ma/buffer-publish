@@ -26,7 +26,7 @@ async function loadMethods() {
 
 async function makeRPCHandler() {
   const methods = await loadMethods();
-  return rpc([methods], { PublishAPI, parsers });
+  return rpc(methods, { PublishAPI, parsers });
 }
 
 module.exports = makeRPCHandler;

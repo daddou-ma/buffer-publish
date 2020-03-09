@@ -5,14 +5,13 @@ module.exports = method(
   'fetch user data',
   (_, { session }, res, { PublishAPI, parsers }) =>
     PublishAPI.get({
-      uri: `${process.env.API_ADDR}/1/user.json`,
+      uri: `1/user.json`,
       session,
       params: {
         access_token: session.publish.accessToken,
         includes: 'avatar',
       },
-    }).then(result => {
-      const userData = JSON.parse(result);
-      return parsers.userParser(userData);
+    }).then(user => {
+      return parsers.userParser(user);
     })
 );

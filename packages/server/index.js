@@ -32,6 +32,7 @@ const { apiError } = require('./middleware');
 const controller = require('./lib/controller');
 const makeRPCHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
+const PublishAPI = require('./publishAPI');
 const userMethod = require('./rpc/user/index');
 const profilesMethod = require('./rpc/profiles/index');
 const pusher = require('./lib/pusher');
@@ -267,7 +268,7 @@ const getHtml = ({
     .replace('{{{bufferData}}}', getBufferData({ user, profiles }));
 };
 
-app.use(logMiddleware({ name: 'BufferPublish' }));
+// app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());
 app.use(helmet.frameguard({ action: 'sameorigin' }));
 
@@ -342,7 +343,7 @@ app.get('*', (req, res) => {
   const modalValue = req.query.mv ? req.query.mv : null;
 
   Promise.all([
-    userMethod.fn(null, req, res).catch(() => {
+    userMethod.fn(null, req, res, { PublishAPI }).catch(() => {
       // added catch incase we don't have any data in the object
       return undefined;
     }),
