@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { grayDark, grayLighter } from '@bufferapp/ui/style/colors';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
- 
+
 export const Color = styled.div`
   height: 12px;
   max-width: 12px;

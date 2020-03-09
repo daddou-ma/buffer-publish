@@ -54,6 +54,6 @@ storiesOf('Campaigns|ListCampaigns', module)
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
-      isUsingPublishAsTeamMember
+      isUsingPublishAsTeamMember={false}
     />
   ));
