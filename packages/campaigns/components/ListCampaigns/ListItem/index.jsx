@@ -77,13 +77,17 @@ const ListItem = ({
         <Icon>
           <ClockIcon size="medium" />
         </Icon>
-        <Text type="p">{campaign.scheduled} Scheduled</Text>
+        <Text type="p">
+          {campaign.scheduled} {translations.scheduled}
+        </Text>
       </Group>
       <Group>
         <Icon>
           <ListIcon size="medium" />
         </Icon>
-        <Text type="p">{campaign.sent} Sent</Text>
+        <Text type="p">
+          {campaign.sent} {translations.sent}
+        </Text>
       </Group>
       <ButtonWrapper>
         <Button
@@ -122,6 +126,8 @@ ListItem.propTypes = {
     viewCampaign: PropTypes.string,
     editCampaign: PropTypes.string,
     deleteCampaign: PropTypes.string,
+    sent: PropTypes.string,
+    scheduled: PropTypes.string,
   }).isRequired,
   campaign: PropTypes.shape({
     color: PropTypes.string,

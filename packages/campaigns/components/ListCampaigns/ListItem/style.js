@@ -9,8 +9,7 @@ export const Color = styled.div`
   width: 100%;
   border-radius: 50%;
   background-color: ${props => props.color};
-  margin-right: 10px;
-  margin-top: 7px;
+  margin: 7px 10px 0px 0px;
 `;
 
 // using grid layout to align the campaign list details
