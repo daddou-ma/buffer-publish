@@ -275,7 +275,7 @@ app.all('/maintenance', maintenanceHandler);
 
 app.use('*', (req, res, next) => {
   const analyzeApiAddr =
-  req.get('ANALYZE-API-ADDR') || process.env.ANALYZE_API_ADDR;
+    req.get('ANALYZE-API-ADDR') || process.env.ANALYZE_API_ADDR;
   app.set('analyzeApiAddr', analyzeApiAddr);
   next();
 });
