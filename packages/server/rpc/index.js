@@ -2,6 +2,7 @@ const { rpc } = require('@bufferapp/buffer-rpc');
 const recursiveReadDir = require('recursive-readdir');
 
 const PublishAPI = require('../publishAPI');
+const parsers = require('../parsers/src');
 
 async function loadMethods() {
   const methodModules = [];
@@ -25,7 +26,7 @@ async function loadMethods() {
 
 async function makeRPCHandler() {
   const methods = await loadMethods();
-  return rpc([methods], { PublishAPI });
+  return rpc([methods], { PublishAPI, parsers });
 }
 
 module.exports = makeRPCHandler;
