@@ -8,10 +8,9 @@ module.exports = method(
       uri: `1/user.json`,
       session,
       params: {
-        access_token: session.publish.accessToken,
         includes: 'avatar',
       },
-    }).then(user => {
-      return parsers.userParser(user);
     })
+      .then(user => parsers.userParser(user))
+      .catch(PublishAPI.errorHandler)
 );
