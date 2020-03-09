@@ -1,8 +1,8 @@
 import RPCEndpoint from '.';
 
-const post = require('../../../requestMethods/post');
+const post = require('../../../publishAPI/post');
 
-jest.mock('../../../requestMethods/post');
+jest.mock('../../../publishAPI/post');
 
 const accessToken = 'AN ACCESS TOKEN';
 const session = {

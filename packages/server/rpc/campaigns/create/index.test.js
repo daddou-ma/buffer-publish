@@ -1,14 +1,8 @@
 import RPCEndpoint from '.';
 
-const post = require('../../../requestMethods/post');
-const { campaignParser } = require('../../../parsers/src');
-
-jest.mock('../../../requestMethods/post');
-
-const accessToken = 'AN ACCESS TOKEN';
 const session = {
   publish: {
-    accessToken,
+    accessToken: '',
   },
 };
 
@@ -17,7 +11,6 @@ const params = {
   color: '#ffffff',
 };
 
-const createCampaign = () => RPCEndpoint.fn(params, { session });
 const CREATE_CAMPAIGN_RESPONSE = {
   data: {
     _id: '123456',
@@ -30,9 +23,19 @@ const CREATE_CAMPAIGN_RESPONSE = {
   success: true,
 };
 
+const PublishAPI = {
+  post: jest.fn(),
+  get: jest.fn(),
+};
+
+const createCampaign = () =>
+  RPCEndpoint.fn(params, { session }, null, {
+    PublishAPI,
+  });
+
 describe('RPC | Create campaign', () => {
   it('creates a campaign correctly', async () => {
-    post.mockReturnValueOnce(Promise.resolve(CREATE_CAMPAIGN_RESPONSE));
+    PublishAPI.post.mockResolvedValueOnce(CREATE_CAMPAIGN_RESPONSE);
     await createCampaign(params).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
@@ -42,12 +45,11 @@ describe('RPC | Create campaign', () => {
       expect(response.channels).toBeNull();
       expect(response.items).toBeNull();
     });
+    expect(PublishAPI.post).toBeCalled();
   });
 
   it('fails to create campaign due to missing params', async () => {
-    post.mockReturnValueOnce(
-      Promise.reject(new TypeError('Missing param: name'))
-    );
+    PublishAPI.post.mockRejectedValueOnce(new TypeError('Missing param: name'));
     try {
       await createCampaign({
         color: '#ffffff',
@@ -57,5 +59,6 @@ describe('RPC | Create campaign', () => {
     } catch (err) {
       expect(err.message).toEqual('Missing param: name');
     }
+    expect(PublishAPI.post).toBeCalled();
   });
 });

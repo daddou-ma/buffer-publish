@@ -18,11 +18,19 @@ module.exports = method(
         name,
       },
     })
-      .then(result => JSON.parse(result))
-      .catch(err => {
-        if (err.error) {
-          const error = JSON.parse(err.error);
-          throw createError({ message: error.message });
+      .then(result => result.json())
+      .catch(error => {
+        const { body: apiErrorResponse } = error.response;
+        let parsedError;
+        try {
+          parsedError = JSON.parse(apiErrorResponse);
+        } catch (e) {
+          // Throw original error
+          throw error;
         }
+        throw createError({
+          message: parsedError.error,
+          code: parsedError.code,
+        });
       })
 );

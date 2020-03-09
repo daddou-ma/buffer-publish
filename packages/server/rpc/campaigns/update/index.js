@@ -1,6 +1,6 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const { campaignParser } = require('../../../parsers/src');
-const post = require('../../../requestMethods/post');
+const post = require('../../../publishAPI/post');
 const { handleError } = require('../../../utils');
 
 const processResponse = response => {
