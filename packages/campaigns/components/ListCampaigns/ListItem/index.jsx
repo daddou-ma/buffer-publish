@@ -5,7 +5,6 @@ import { Text, Button } from '@bufferapp/ui';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 import ListIcon from '@bufferapp/ui/Icon/Icons/List';
 import CalendarIcon from '@bufferapp/ui/Icon/Icons/Calendar';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import {
   ButtonWrapper,
@@ -18,9 +17,6 @@ import {
   LastUpdated,
 } from './style';
 
-const goToAnalyzeReport = () =>
-  window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
-
 const ListItem = ({
   campaign,
   isEvenItem,
@@ -28,6 +24,7 @@ const ListItem = ({
   onEditCampaignClick,
   onDeleteCampaignClick,
   onViewCampaignClick,
+  goToAnalyzeReport,
   translations,
 }) => {
   const { campaignId } = campaign;
@@ -138,6 +135,7 @@ ListItem.propTypes = {
   onViewCampaignClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
+  goToAnalyzeReport: PropTypes.func.isRequired,
   isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
   isEvenItem: PropTypes.bool.isRequired,
 };

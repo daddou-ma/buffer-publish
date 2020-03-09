@@ -31,6 +31,7 @@ const CampaignsPage = ({
   onDeleteCampaignClick,
   onEditCampaignClick,
   isUsingPublishAsTeamMember,
+  goToAnalyzeReport,
 }) => {
   const [viewMode, setViewMode] = useState(campaignPages.VIEW_ALL_CAMPAIGNS);
   useSetCampaignPage({ selectedPage, setViewMode });
@@ -51,6 +52,7 @@ const CampaignsPage = ({
           onDeleteCampaignClick={() => {}}
           onEditCampaignClick={() => {}}
           fetchCampaign={fetchCampaign}
+          goToAnalyzeReport={goToAnalyzeReport}
         />
       )}
       {viewMode === campaignPages.VIEW_ALL_CAMPAIGNS && (
@@ -62,6 +64,7 @@ const CampaignsPage = ({
           onEditCampaignClick={onEditCampaignClick}
           onDeleteCampaignClick={onDeleteCampaignClick}
           onViewCampaignClick={onViewCampaignClick}
+          goToAnalyzeReport={goToAnalyzeReport}
           translations={translations}
         />
       )}
@@ -88,6 +91,7 @@ CampaignsPage.propTypes = {
   selectedPage: PropTypes.string.isRequired,
   onOpenCreateCampaignClick: PropTypes.func.isRequired,
   onCancelCreateCampaignClick: PropTypes.func.isRequired,
+  goToAnalyzeReport: PropTypes.func.isRequired,
   fetchCampaign: PropTypes.func.isRequired,
   onViewCampaignClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,

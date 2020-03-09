@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import {
   getCampaignPageParams,
   campaignsCreateRoute,
@@ -48,6 +49,9 @@ export default connect(
     },
     onDeleteCampaignClick: campaignId => {
       dispatch(actions.handleDeleteCampaignClick(campaignId));
+    },
+    goToAnalyzeReport: () => {
+      window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
     },
     onEditCampaignClick: campaignId => {
       if (campaignId) {

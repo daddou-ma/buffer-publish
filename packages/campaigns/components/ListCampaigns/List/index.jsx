@@ -13,6 +13,7 @@ const List = ({
   translations,
   campaigns,
   onViewCampaignClick,
+  goToAnalyzeReport,
   onDeleteCampaignClick,
   onEditCampaignClick,
   isUsingPublishAsTeamMember,
@@ -24,6 +25,7 @@ const List = ({
       onViewCampaignClick={onViewCampaignClick}
       onDeleteCampaignClick={onDeleteCampaignClick}
       onEditCampaignClick={onEditCampaignClick}
+      goToAnalyzeReport={goToAnalyzeReport}
       isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
       isEvenItem={index % 2 === 0}
     />
@@ -37,6 +39,7 @@ List.propTypes = {
   onEditCampaignClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onViewCampaignClick: PropTypes.func.isRequired,
+  goToAnalyzeReport: PropTypes.func.isRequired,
   isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
 };
 

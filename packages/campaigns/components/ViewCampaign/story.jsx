@@ -45,6 +45,7 @@ storiesOf('Campaigns|ViewCampaign', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       fetchCampaign={action('fetch campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
       campaignId="id"
       isUsingPublishAsTeamMember
     />
@@ -57,6 +58,7 @@ storiesOf('Campaigns|ViewCampaign', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       fetchCampaign={action('fetch campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
       campaignId="id"
       isUsingPublishAsTeamMember
     />

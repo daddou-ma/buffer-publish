@@ -36,6 +36,7 @@ storiesOf('Campaigns|ListItem', module)
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
       isUsingPublishAsTeamMember={false}
     />
   ))
@@ -47,6 +48,7 @@ storiesOf('Campaigns|ListItem', module)
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
       isUsingPublishAsTeamMember
     />
   ))
@@ -58,6 +60,7 @@ storiesOf('Campaigns|ListItem', module)
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
       isUsingPublishAsTeamMember={false}
     />
   ))
@@ -69,6 +72,7 @@ storiesOf('Campaigns|ListItem', module)
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
       isUsingPublishAsTeamMember={false}
     />
   ));

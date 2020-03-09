@@ -21,10 +21,10 @@ const Container = styled.div`
 const ListCampaigns = ({
   translations,
   campaigns,
-  hasCampaignPosts,
   onEditCampaignClick,
   onDeleteCampaignClick,
   onViewCampaignClick,
+  goToAnalyzeReport,
   onOpenCreateCampaignClick,
   isUsingPublishAsTeamMember,
 }) => {
@@ -52,8 +52,8 @@ const ListCampaigns = ({
         onEditCampaignClick={onEditCampaignClick}
         onDeleteCampaignClick={onDeleteCampaignClick}
         onViewCampaignClick={onViewCampaignClick}
+        goToAnalyzeReport={goToAnalyzeReport}
         translations={translations.viewCampaign}
-        hasCampaignPosts={hasCampaignPosts}
         isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
       />
     </Container>
@@ -67,8 +67,8 @@ ListCampaigns.propTypes = {
   onEditCampaignClick: PropTypes.func,
   onDeleteCampaignClick: PropTypes.func,
   onViewCampaignClick: PropTypes.func,
-  hasCampaignPosts: PropTypes.bool,
-  isUsingPublishAsTeamMember: PropTypes.bool,
+  goToAnalyzeReport: PropTypes.func,
+  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
 };
 
 ListCampaigns.defaultProps = {
@@ -76,6 +76,7 @@ ListCampaigns.defaultProps = {
   onEditCampaignClick: () => {},
   onDeleteCampaignClick: () => {},
   onViewCampaignClick: () => {},
+  goToAnalyzeReport: () => {},
 };
 
 export default ListCampaigns;
