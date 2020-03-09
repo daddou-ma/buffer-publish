@@ -33,16 +33,17 @@ describe('RPC | Delete campaign', () => {
   it("fails to deletes campaign because user can't manage it", async () => {
     post.mockReturnValueOnce(
       Promise.reject(
-        new TypeError(
+        new Error(
           "User does not have access to campaign or it doesn't exist"
         )
       )
     );
     try {
       await deleteCampaign(params).then(response => {
-        throw new TypeError(response);
+        throw new Error(response);
       });
     } catch (err) {
+	  expect(err.error).toBeUndefined();
       expect(err.message).toEqual(
         "User does not have access to campaign or it doesn't exist"
       );
