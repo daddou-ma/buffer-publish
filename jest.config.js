@@ -15,7 +15,9 @@ const publishPackages = [
   'app-sidebar',
 ];
 
-const publishPackagesWhitelist = publishPackages.map(imp => `(?!/@bufferapp/${imp})`).join('');
+const publishPackagesWhitelist = publishPackages
+  .map(imp => `(?!/@bufferapp/${imp})`)
+  .join('');
 
 module.exports = {
   verbose: true,
@@ -31,12 +33,11 @@ module.exports = {
     '<rootDir>/.jest/jest-raf-shim.js',
     '<rootDir>/.jest/require-context.js',
   ],
+  globalSetup: '<rootDir>/.jest/set-default-tz.js',
   setupFilesAfterEnv: ['<rootDir>/setupTest.js'],
   globals: {
     __PACKAGES__: '../packages',
   },
-  testPathIgnorePatterns: [
-    'package/sidebar/node_modules',
-  ],
+  testPathIgnorePatterns: ['package/sidebar/node_modules'],
   testURL: 'https://publish.local.buffer.com',
 };
