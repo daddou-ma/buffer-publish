@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Input, Button, Link } from '@bufferapp/ui';
@@ -78,20 +78,27 @@ const colors = [
 
 /* Component */
 const CampaignForm = ({
+  campaignId,
   translations,
   onCreateOrUpdateCampaignClick,
   onCancelClick,
   isSaving,
   inEditMode,
-  campaignDetails,
+  currentCampaign,
+  fetchCampaign,
 }) => {
+  // Fetch data
+  if (inEditMode) {
+    useEffect(() => {
+      fetchCampaign(campaignId);
+    }, [campaignId]);
+  }
   // State
   const {
-    id: campaignId = null,
     globalOrganizationId: orgId = null,
     name: defaultName = '',
     color: defaultColor = purple,
-  } = campaignDetails ?? {};
+  } = currentCampaign ?? {};
   const [campaignName, setName] = useState(defaultName);
   const [colorSelected, setColor] = useState(defaultColor);
   const [isSubmitButtonDisabled, disableSubmit] = useState(true);
@@ -198,7 +205,6 @@ CampaignForm.propTypes = {
     notice3: PropTypes.string.isRequired,
     notice4: PropTypes.string.isRequired,
     saveCampaign: PropTypes.string.isRequired,
-    updateCampaign: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
   }).isRequired,
   onCreateOrUpdateCampaignClick: PropTypes.func.isRequired,
@@ -209,6 +215,7 @@ CampaignForm.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
     color: PropTypes.string,
+    globalOrganizationId: PropTypes.string,
   }),
 };
 

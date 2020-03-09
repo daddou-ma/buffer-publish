@@ -70,6 +70,7 @@ export default connect(
     },
     onCampaignClick: campaignId => {
       dispatch(actions.handleCampaignClick(campaignId));
+    },
     onEditCampaignClick: campaignId => {
       dispatch(actions.handleEditCampaignClick(campaignId));
     },
