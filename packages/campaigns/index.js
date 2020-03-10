@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import {
   getCampaignPageParams,
   campaignsCreateRoute,
   campaignsPageRoute,
   campaignPages,
+  generateCampaignPageRoute,
 } from '@bufferapp/publish-routes';
 import { actions } from './reducer';
 import CampaignsPage from './components/CampaignsPage';
@@ -48,8 +50,26 @@ export default connect(
     onDeleteCampaignClick: campaignId => {
       dispatch(actions.handleDeleteCampaignClick(campaignId));
     },
+    goToAnalyzeReport: () => {
+      window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
+    },
     onEditCampaignClick: campaignId => {
-      dispatch(actions.handleEditCampaignClick(campaignId));
+      if (campaignId) {
+        const routeObj = {
+          campaignId,
+          selectedPage: campaignPages.EDIT_CAMPAIGN,
+        };
+        dispatch(push(generateCampaignPageRoute(routeObj)));
+      }
+    },
+    onViewCampaignClick: campaignId => {
+      if (campaignId) {
+        const routeObj = {
+          campaignId,
+          selectedPage: campaignPages.VIEW_CAMPAIGN,
+        };
+        dispatch(push(generateCampaignPageRoute(routeObj)));
+      }
     },
     fetchCampaign: campaignId => {
       dispatch(actions.fetchCampaign(campaignId));

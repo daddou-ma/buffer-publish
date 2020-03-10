@@ -16,6 +16,7 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onCreatePostClick={action('create post')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
       hasPosts
       isUsingPublishAsTeamMember
     />
@@ -27,6 +28,7 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onCreatePostClick={action('create post')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
       hasPosts={false}
       isUsingPublishAsTeamMember
     />
@@ -38,6 +40,7 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onCreatePostClick={action('create post')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
       hasPosts={false}
       isUsingPublishAsTeamMember={false}
     />

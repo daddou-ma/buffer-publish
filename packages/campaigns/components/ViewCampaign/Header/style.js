@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { grayDark } from '@bufferapp/ui/style/colors';
 
-export const Container = styled.div`
+export const Container = styled.header`
   display: flex;
   margin: 14px 0px 30px;
 `;

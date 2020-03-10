@@ -1894,10 +1894,10 @@
   dependencies:
     whatwg-fetch "0.11.1"
 
-"@bufferapp/buffer-rpc@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@bufferapp/buffer-rpc/-/buffer-rpc-1.0.0.tgz#a783203d517b30e2541093aa0b87e7462427fc8f"
-  integrity sha512-DUBGL/z3QyNK+9rDfIxzFXG3eqVjAS21LInv3W8xReIW/AT385NIlwgQkp9HXCl5pTJvnjdSF0UFxCOxfrx8BQ==
+"@bufferapp/buffer-rpc@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/buffer-rpc/-/buffer-rpc-1.1.0.tgz#90b9e55dabdeb889df30dda85d8c39b3e6156b2d"
+  integrity sha512-SxGlfXs5TKmibPKtC3s7blNBX9te+WnGLMoCx+tCr4OlyjBUo0VyV4JVQnRf82Z5AT+Ku/Mylcr1Ks6kZa3Jtw==
 
 "@bufferapp/compare-chart@1.11.0":
   version "1.11.0"
