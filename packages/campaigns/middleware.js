@@ -38,6 +38,13 @@ export default ({ dispatch }) => next => action => {
 
     case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
       console.log('ERROR', action);
+      dispatch(
+        push(
+          generateCampaignPageRoute({
+            selectedPage: campaignPages.VIEW_ALL_CAMPAIGNS,
+          })
+        )
+      );
       break;
 
     case actionTypes.CREATE_CAMPAIGN: {
