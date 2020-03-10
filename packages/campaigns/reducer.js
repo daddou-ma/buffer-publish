@@ -6,7 +6,6 @@ import { campaignPages } from '@bufferapp/publish-routes';
 export const actionTypes = keyWrapper('CAMPAIGNS', {
   CREATE_CAMPAIGN: 0,
   DELETE_CAMPAIGN: 0,
-  EDIT_CAMPAIGN: 0,
   HANDLE_CAMPAIGN_ROUTED: 0,
   FETCH_CAMPAIGN: 0,
 });

@@ -1,7 +1,6 @@
 import RPCEndpoint from '.';
 
 const post = require('../../../requestMethods/post');
-const { campaignParser } = require('../../../parsers/src');
 
 jest.mock('../../../requestMethods/post');
 
