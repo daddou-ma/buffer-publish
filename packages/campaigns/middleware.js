@@ -25,7 +25,7 @@ export default ({ dispatch }) => next => action => {
           args: {
             campaignId,
             past: false,
-            fullItems: false,
+            basicItems: true,
           },
         })
       );
@@ -55,14 +55,7 @@ export default ({ dispatch }) => next => action => {
       break;
     }
     case actionTypes.EDIT_CAMPAIGN: {
-      const { id, name, color, orgId } = action;
-      const metadata = {
-        campaignId: id,
-        campaignName: name,
-        campaignColor: color,
-        organizationId: orgId,
-      };
-      dispatch(analyticsActions.trackEvent('Campaign Edited', metadata));
+      const { id, name, color } = action;
 
       dispatch(
         dataFetchActions.fetch({
@@ -108,7 +101,14 @@ export default ({ dispatch }) => next => action => {
     }
 
     case `editCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { id } = action.result || {};
+      const { id, name, color, organizationId } = action.result || {};
+      const metadata = {
+        campaignId: id,
+        campaignName: name,
+        campaignColor: color,
+        organizationId,
+      };
+      dispatch(analyticsActions.trackEvent('Campaign Edited', metadata));
 
       if (id) {
         dispatch(

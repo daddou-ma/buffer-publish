@@ -29,5 +29,6 @@ storiesOf('Campaigns|CampaignForm', module)
       onCancelClick={action('cancel')}
       inEditMode
       campaignDetails={campaignDetails}
+      fetchCampaign={action('fetch campaign')}
     />
   ));
