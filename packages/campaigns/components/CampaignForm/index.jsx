@@ -10,7 +10,6 @@ import {
   grayLight,
   grayLighter,
   grayDark,
-  blue,
   white,
   purple,
   pink,
@@ -87,21 +86,22 @@ const CampaignForm = ({
   currentCampaign,
   fetchCampaign,
 }) => {
-  // Fetch data
-  if (inEditMode) {
-    useEffect(() => {
+  // Fetch Data
+  useEffect(() => {
+    if (inEditMode) {
       fetchCampaign(campaignId);
-    }, [campaignId]);
-  }
+    }
+  }, [campaignId]);
+
   // State
-  const {
-    globalOrganizationId: orgId = null,
-    name: defaultName = '',
-    color: defaultColor = purple,
-  } = currentCampaign ?? {};
-  const [campaignName, setName] = useState(defaultName);
-  const [colorSelected, setColor] = useState(defaultColor);
+  const [campaignName, setName] = useState('');
+  const [colorSelected, setColor] = useState(purple);
   const [isSubmitButtonDisabled, disableSubmit] = useState(true);
+
+  useEffect(() => {
+    setName(currentCampaign?.name);
+    setColor(currentCampaign?.color);
+  }, [currentCampaign]);
 
   // State modifiers
   const disableCampaignSubmitButton = ({ name, color }) => {
@@ -172,9 +172,7 @@ const CampaignForm = ({
               campaignId,
               colorSelected,
               campaignName,
-              defaultName,
-              defaultColor,
-              orgId,
+              orgId: currentCampaign.globalOrganizationId,
             })
           }
           disabled={isSubmitButtonDisabled || isSaving}
@@ -207,11 +205,13 @@ CampaignForm.propTypes = {
     saveCampaign: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
   }).isRequired,
+  campaignId: PropTypes.string,
+  fetchCampaign: PropTypes.func.isRequired,
   onCreateOrUpdateCampaignClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
   inEditMode: PropTypes.bool,
-  campaignDetails: PropTypes.shape({
+  currentCampaign: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
     color: PropTypes.string,
@@ -220,8 +220,9 @@ CampaignForm.propTypes = {
 };
 
 CampaignForm.defaultProps = {
+  campaignId: '',
   inEditMode: false,
-  campaignDetails: {},
+  currentCampaign: {},
 };
 
 export default CampaignForm;
