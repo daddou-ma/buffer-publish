@@ -1,0 +1,15 @@
+name: Cypress
+
+on: [status]
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Dump GitHub Event
+      env:
+        EVENT: ${{ toJson(github.event) }}
+      run: echo "$EVENT"
