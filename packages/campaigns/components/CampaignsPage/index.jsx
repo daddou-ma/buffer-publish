@@ -27,6 +27,11 @@ const CampaignsPage = ({
   hasCampaignsFlip,
   selectedPage,
   fetchCampaign,
+  onViewCampaignClick,
+  onDeleteCampaignClick,
+  onEditCampaignClick,
+  isUsingPublishAsTeamMember,
+  goToAnalyzeReport,
 }) => {
   const [viewMode, setViewMode] = useState(campaignPages.VIEW_ALL_CAMPAIGNS);
   useSetCampaignPage({ selectedPage, setViewMode });
@@ -47,14 +52,20 @@ const CampaignsPage = ({
           onDeleteCampaignClick={() => {}}
           onEditCampaignClick={() => {}}
           fetchCampaign={fetchCampaign}
+          goToAnalyzeReport={goToAnalyzeReport}
         />
       )}
       {viewMode === campaignPages.VIEW_ALL_CAMPAIGNS && (
         <ListCampaigns
           campaigns={campaigns}
-          translations={translations}
+          isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
           onOpenCampaign={() => setViewMode(campaignPages.VIEW_CAMPAIGN)}
           onOpenCreateCampaignClick={onOpenCreateCampaignClick}
+          onEditCampaignClick={onEditCampaignClick}
+          onDeleteCampaignClick={onDeleteCampaignClick}
+          onViewCampaignClick={onViewCampaignClick}
+          goToAnalyzeReport={goToAnalyzeReport}
+          translations={translations}
         />
       )}
       {viewMode === campaignPages.CREATE_CAMPAIGN && (
@@ -80,7 +91,12 @@ CampaignsPage.propTypes = {
   selectedPage: PropTypes.string.isRequired,
   onOpenCreateCampaignClick: PropTypes.func.isRequired,
   onCancelCreateCampaignClick: PropTypes.func.isRequired,
+  goToAnalyzeReport: PropTypes.func.isRequired,
   fetchCampaign: PropTypes.func.isRequired,
+  onViewCampaignClick: PropTypes.func.isRequired,
+  onDeleteCampaignClick: PropTypes.func.isRequired,
+  onEditCampaignClick: PropTypes.func.isRequired,
+  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
 };
 
 CampaignsPage.defaultProps = {

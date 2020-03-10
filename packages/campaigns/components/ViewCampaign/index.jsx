@@ -21,6 +21,7 @@ const ViewCampaign = ({
   onEditCampaignClick,
   campaignId,
   fetchCampaign,
+  goToAnalyzeReport,
 }) => {
   // Fetch Data
   useEffect(() => {
@@ -41,6 +42,7 @@ const ViewCampaign = ({
         onCreatePostClick={onCreatePostClick}
         onDeleteCampaignClick={onDeleteCampaignClick}
         onEditCampaignClick={onEditCampaignClick}
+        goToAnalyzeReport={goToAnalyzeReport}
       />
       {campaignHasPosts ? (
         <React.Fragment>
@@ -92,6 +94,7 @@ ViewCampaign.propTypes = {
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
   fetchCampaign: PropTypes.func.isRequired,
+  goToAnalyzeReport: PropTypes.func.isRequired,
   campaignId: PropTypes.string,
 };
 
