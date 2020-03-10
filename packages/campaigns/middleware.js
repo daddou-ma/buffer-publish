@@ -100,7 +100,7 @@ export default ({ dispatch }) => next => action => {
       break;
     }
 
-    case `editCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+    case `updateCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { id, name, color, organizationId } = action.result || {};
       const metadata = {
         campaignId: id,
