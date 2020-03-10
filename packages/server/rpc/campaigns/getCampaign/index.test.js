@@ -1,13 +1,9 @@
 import RPCEndpoint from '.';
+import parsers from '../../../parsers/src';
 
-const get = require('../../../requestMethods/get');
-
-jest.mock('../../../requestMethods/get');
-
-const accessToken = 'AN ACCESS TOKEN';
 const session = {
   publish: {
-    accessToken,
+    accessToken: '',
   },
 };
 
@@ -19,8 +15,12 @@ const params = ({ past = false, fullItems = false }) => {
   };
 };
 
+const PublishAPI = { get: jest.fn() };
 const getCampaign = ({ past, fullItems }) =>
-  RPCEndpoint.fn(params({ past, fullItems }), { session });
+  RPCEndpoint.fn(params({ past, fullItems }), { session }, null, {
+    PublishAPI,
+    parsers,
+  });
 
 const CAMPAIGN = {
   data: {
@@ -148,7 +148,7 @@ const itemParams = ['dueAt', 'serviceId', 'serviceType', 'channelType'];
 
 describe('RPC | Get campaign', () => {
   it('gets the campaign without items correctly', async () => {
-    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN));
+    PublishAPI.get.mockResolvedValueOnce(CAMPAIGN);
     await getCampaign({ past: false }).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
@@ -161,9 +161,7 @@ describe('RPC | Get campaign', () => {
   });
 
   it('gets the campaign with items with full items correctly', async () => {
-    get.mockReturnValueOnce(
-      Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS_FULL)
-    );
+    PublishAPI.get.mockResolvedValueOnce(CAMPAIGN_WITH_SCHEDULED_ITEMS_FULL);
     await getCampaign({ past: false, fullItems: true }).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
@@ -180,7 +178,7 @@ describe('RPC | Get campaign', () => {
   });
 
   it('gets the campaign with scheduled items correctly', async () => {
-    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
+    PublishAPI.get.mockResolvedValueOnce(CAMPAIGN_WITH_SCHEDULED_ITEMS);
     await getCampaign({ past: false }).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
@@ -200,30 +198,28 @@ describe('RPC | Get campaign', () => {
   });
 
   it('parses date range, with same year and different month correctly', async () => {
-    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SCHEDULED_ITEMS));
+    PublishAPI.get.mockResolvedValueOnce(CAMPAIGN_WITH_SCHEDULED_ITEMS);
     await getCampaign({ past: false }).then(response => {
       expect(response.dateRange).toBe('Mar 11-Apr 4, 2020');
     });
   });
 
   it('parses date range, with same year and month correctly', async () => {
-    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_DATE_RANGE_SAME_MONTH));
+    PublishAPI.get.mockResolvedValueOnce(CAMPAIGN_DATE_RANGE_SAME_MONTH);
     await getCampaign({ past: false }).then(response => {
       expect(response.dateRange).toBe('Mar 6-10, 2020');
     });
   });
 
   it('parses date range, with different year and month correctly', async () => {
-    get.mockReturnValueOnce(
-      Promise.resolve(CAMPAIGN_DATE_RANGE_DIFF_MONTH_YEAR)
-    );
+    PublishAPI.get.mockResolvedValueOnce(CAMPAIGN_DATE_RANGE_DIFF_MONTH_YEAR);
     await getCampaign({ past: false }).then(response => {
       expect(response.dateRange).toBe('Dec 28 2019-Mar 10 2020');
     });
   });
 
   it('gets the campaign with scheduled items correctly', async () => {
-    get.mockReturnValueOnce(Promise.resolve(CAMPAIGN_WITH_SENT_ITEMS));
+    PublishAPI.get.mockResolvedValueOnce(CAMPAIGN_WITH_SENT_ITEMS);
     await getCampaign({ past: false }).then(response => {
       expect(response.id).toBe('123456');
       expect(response.globalOrganizationId).toBe('000111');
@@ -244,7 +240,7 @@ describe('RPC | Get campaign', () => {
   });
 
   it('fails to get campaign', async () => {
-    get.mockReturnValueOnce(Promise.reject(new Error('Error ocurred')));
+    PublishAPI.get.mockRejectedValueOnce(new Error('Error ocurred'));
     try {
       await getCampaign({ past: false }).then(response => {
         throw new Error(response);

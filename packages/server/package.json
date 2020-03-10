@@ -8,7 +8,7 @@
   },
   "author": "hharnisc@gmail.com",
   "dependencies": {
-    "@bufferapp/buffer-rpc": "1.0.0",
+    "@bufferapp/buffer-rpc": "1.1.0",
     "@bufferapp/micro-rpc-client": "1.0.0",
     "@bufferapp/micro-rpc": "0.1.7",
     "@bufferapp/logger": "0.7.0",
@@ -30,7 +30,8 @@
     "request": "2.81.0",
     "request-promise": "4.2.1",
     "serialize-javascript": "^2.1.1",
-    "twitter-text": "3.0.0"
+    "twitter-text": "3.0.0",
+    "recursive-readdir": "2.2.2"
   },
   "devDependencies": {
   },
