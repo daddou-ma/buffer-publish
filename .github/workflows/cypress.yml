@@ -5,10 +5,11 @@ on: [status]
 jobs:
   cypress:
     runs-on: ubuntu-latest
+    container: 
+      image: cypress/included:4.1.0
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      
+    - uses: actions/checkout@v2
+    
     - name: Get Staging URL
       uses: actions/github-script@0.8.0
       id: stagingUrl
@@ -26,4 +27,14 @@ jobs:
     
     - name: Log staging URL
       run: echo ${{ steps.stagingUrl.outputs.result }}
+
+    - name: Run Cypress
+      if: steps.stagingUrl.outputs.result !== 'false'
+      run: cypress run --record --key c1211d21-f665-467c-b42f-f671f88e25a9
+      env:
+        CYPRESS_GITHUB_ACTIONS: "true"
+        CYPRESS_BASE_URL: ${{ steps.stagingUrl.outputs.result }}
+        CYPRESS_PUBLISH_LOGIN_EMAIL: ${{ secrets.PUBLISH_LOGIN_EMAIL }}
+        CYPRESS_PUBLISH_LOGIN_PASSWORD: ${{ secrets.PUBLISH_LOGIN_PASSWORD }}
+
         
