@@ -55,13 +55,11 @@ export default ({ dispatch }) => next => action => {
       break;
     }
     case actionTypes.EDIT_CAMPAIGN: {
-      const { id, name, color, previousName, previousColor, orgId } = action;
+      const { id, name, color, orgId } = action;
       const metadata = {
         campaignId: id,
         campaignName: name,
         campaignColor: color,
-        previousCampaignName: previousName,
-        previousCampaignColor: previousColor,
         organizationId: orgId,
       };
       dispatch(analyticsActions.trackEvent('Campaign Edited', metadata));
