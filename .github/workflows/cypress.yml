@@ -14,9 +14,9 @@ jobs:
       id: stagingUrl
       with:
         script: |
-          const { context, description, state, target_url } = context.payload;
+          const { context: statusContext, description, state, target_url } = context.payload;
           if (
-            context.startsWith("bufferbotbrains/cicd") &&
+            statusContext.startsWith("bufferbotbrains/cicd") &&
             state === "success" &&
             description.match(/Build successfully deployed/)
           ) {
