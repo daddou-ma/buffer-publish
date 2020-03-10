@@ -9,7 +9,21 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       
-    - name: Dump GitHub Event
-      env:
-        EVENT: ${{ toJson(github.event) }}
-      run: echo "$EVENT"
+    - name: Get Staging URL
+      uses: actions/github-script@0.8.0
+      id: stagingUrl
+      with:
+        script: |
+          const { context, description, state, target_url } = context.payload;
+          if (
+            context.startsWith("bufferbotbrains/cicd") &&
+            state === "success" &&
+            description.match(/Build successfully deployed/)
+          ) {
+            return target_url;
+          }
+          return false;
+    
+    - name: Log staging URL
+      run: echo ${{ steps.stagingUrl.outputs.result }}
+        
