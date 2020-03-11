@@ -90,16 +90,4 @@ describe('RPC | Get list of campaigns', () => {
       });
     });
   });
-
-  it('fails to get list of campaigns', async () => {
-    PublishAPI.get.mockRejectedValueOnce(new Error('Error ocurred'));
-    try {
-      await geCampaignsList({ globalOrganizationId: '123' }).then(response => {
-        throw new Error(response);
-      });
-    } catch (err) {
-      expect(err.error).toBeUndefined();
-      expect(err.message).toEqual('Error ocurred');
-    }
-  });
 });
