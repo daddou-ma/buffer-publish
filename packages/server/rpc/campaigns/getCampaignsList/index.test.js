@@ -1,21 +1,24 @@
 import RPCEndpoint from '.';
+import parsers from '../../../parsers/src';
 
-const get = require('../../../requestMethods/get');
-
-jest.mock('../../../requestMethods/get');
-
-const accessToken = 'AN ACCESS TOKEN';
 const session = {
   publish: {
-    accessToken,
+    accessToken: '',
   },
 };
 
-const params = {
-  globalOrganizationId: '123',
+const params = ({ globalOrganizationId }) => {
+  return {
+    globalOrganizationId,
+  };
 };
 
-const geCampaignsList = () => RPCEndpoint.fn(params, { session });
+const PublishAPI = { get: jest.fn() };
+const geCampaignsList = ({ globalOrganizationId }) =>
+  RPCEndpoint.fn(params({ globalOrganizationId }), { session }, null, {
+    PublishAPI,
+    parsers,
+  });
 
 // eslint-disable-next-line import/prefer-default-export
 export const CAMPAIGNS_LIST = {
@@ -75,10 +78,10 @@ export const CAMPAIGNS_LIST = {
   ],
 };
 
-describe('RPC | Get campaigns list', () => {
+describe('RPC | Get list of campaigns', () => {
   it('gets the campaigns list successfully', async () => {
-    get.mockReturnValueOnce(Promise.resolve(CAMPAIGNS_LIST));
-    await geCampaignsList().then(response => {
+    PublishAPI.get.mockResolvedValueOnce(CAMPAIGNS_LIST);
+    await geCampaignsList({ globalOrganizationId: '123' }).then(response => {
       expect(response.length).toEqual(4);
       response.forEach(campaign => {
         expect(campaign.globalOrganizationId).toBe('123');
@@ -86,5 +89,17 @@ describe('RPC | Get campaigns list', () => {
         expect(campaign.lastUpdated).toContain('Last updated ');
       });
     });
+  });
+
+  it('fails to get list of campaigns', async () => {
+    PublishAPI.get.mockRejectedValueOnce(new Error('Error ocurred'));
+    try {
+      await geCampaignsList({ globalOrganizationId: '123' }).then(response => {
+        throw new Error(response);
+      });
+    } catch (err) {
+      expect(err.error).toBeUndefined();
+      expect(err.message).toEqual('Error ocurred');
+    }
   });
 });
