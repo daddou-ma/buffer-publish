@@ -4,36 +4,44 @@ on: [status]
 
 jobs:
   cypress:
+    name: "Cypress"
     runs-on: ubuntu-latest
-    container: 
-      image: cypress/included:4.1.0
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Get Staging URL
+    steps:    
+    - name: Get Data
       uses: actions/github-script@0.8.0
-      id: stagingUrl
+      id: data
       with:
         script: |
-          const { context: statusContext, description, state, target_url } = context.payload;
+          const { branches, context: statusContext, description, state, target_url } = context.payload;
           if (
             statusContext.startsWith("bufferbotbrains/cicd") &&
             state === "success" &&
             description.match(/Build successfully deployed/)
           ) {
-            return target_url;
+            return { stagingUrl: target_url, branch: branches[0].name };
           }
           return false;
     
-    - name: Log staging URL
-      run: echo ${{ steps.stagingUrl.outputs.result }}
+    - name: Log Results
+      run: echo ${{ toJson(steps.data.outputs.result) }}
+      
+    - name: Bail out if not deployed status
+      if: steps.data.outputs.result == 'false'
+      run: exit 1
+    
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ steps.data.outputs.result.branch }}
 
     - name: Run Cypress
-      if: steps.stagingUrl.outputs.result && steps.stagingUrl.outputs.result != 'false'
-      run: cypress run --record --key c1211d21-f665-467c-b42f-f671f88e25a9
+      uses: cypress-io/github-action@v1
+        with:
+          working-directory: e2e
+          record: true
       env:
         CYPRESS_GITHUB_ACTIONS: "true"
-        CYPRESS_BASE_URL: ${{ steps.stagingUrl.outputs.result }}
+        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        CYPRESS_BASE_URL: ${{ steps.data.outputs.result.stagingUrl }}
         CYPRESS_PUBLISH_LOGIN_EMAIL: ${{ secrets.PUBLISH_LOGIN_EMAIL }}
         CYPRESS_PUBLISH_LOGIN_PASSWORD: ${{ secrets.PUBLISH_LOGIN_PASSWORD }}
 
