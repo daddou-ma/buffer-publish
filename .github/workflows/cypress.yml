@@ -30,8 +30,7 @@ jobs:
       run: exit 1
     
     - uses: actions/checkout@v2
-      with:
-        ref: ${{ steps.data.outputs.result.branch }}
+    - run: git fetch && git checkout ${{ steps.data.outputs.result.branch }} origin/${{ steps.data.outputs.result.branch }}
 
     - name: Run Cypress
       uses: cypress-io/github-action@v1
