@@ -35,9 +35,9 @@ jobs:
 
     - name: Run Cypress
       uses: cypress-io/github-action@v1
-        with:
-          working-directory: e2e
-          record: true
+      with:
+        working-directory: e2e
+        record: "true"
       env:
         CYPRESS_GITHUB_ACTIONS: "true"
         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
