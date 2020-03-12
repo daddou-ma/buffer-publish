@@ -22,7 +22,7 @@ const getNotificationCopy = (service, isInstagramBusiness) => {
         account to get advanced analytics.&nbsp;
         <Link
           href={
-            'https://faq.buffer.com/article/959-publish-instagram-set-up#direct-scheduling'
+            'https://support.buffer.com/hc/en-us/articles/360038534274-Connecting-your-Instagram-account-and-enabling-up-Direct-Scheduling'
           }
           unstyled
           newTab

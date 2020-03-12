@@ -25,7 +25,7 @@ const TwoFactorPreferencesRow = ({
       sent to your mobile phone via text or a free mobile app.{' '}
       <Link
         newTab
-        href="https://faq.buffer.com/article/443-what-is-2-step-login"
+        href="https://support.buffer.com/hc/en-us/articles/360038349434-Enabling-two-factor-authentication"
       >
         Learn more
       </Link>

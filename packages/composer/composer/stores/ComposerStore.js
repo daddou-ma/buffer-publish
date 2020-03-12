@@ -610,7 +610,7 @@ const setDraftInitialText = ({
   ) {
     NotificationActionCreators.queueInfo({
       scope: `${NotificationScopes.COMPOSER_NOTICE_NOT_PREFILLED}-${draft.service.name}`,
-      message: `<a href="https://faq.buffer.com/article/589-why-the-browser-extension-${''}doesnt-pull-in-text-for-facebook" className={styles.composerInfoMessageLink}
+      message: `<a href="https://support.buffer.com/hc/en-us/articles/360038455374-Why-is-it-necessary-to-manually-enter-a-message-for-Facebook-in-certain-places-" className={styles.composerInfoMessageLink}
                 target="_blank" rel="noopener noreferrer">Why is it necessary to manually
                 enter a message for Facebook?</a>`,
       onlyCloseOnce: true,
@@ -628,7 +628,7 @@ const setDraftInitialText = ({
   ) {
     NotificationActionCreators.queueInfo({
       scope: NotificationScopes.TWITTER_DUPLICATE_CONTENT_WARNING,
-      message: `Twitter does not allow posting multiple tweets that are “substantially similar”. Please make sure to modify your tweet before scheduling to avoid risking account suspension! <a href="https://faq.buffer.com/article/937-publish-twitter-limitations" className={styles.composerInfoMessageLink}
+      message: `Twitter does not allow posting multiple tweets that are “substantially similar”. Please make sure to modify your tweet before scheduling to avoid risking account suspension! <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" className={styles.composerInfoMessageLink}
                 target="_blank" rel="noopener noreferrer">Learn more</a>`,
     });
   }
