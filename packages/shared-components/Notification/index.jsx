@@ -28,7 +28,11 @@ const ContentContainer = styled.div`
 `;
 
 const TitleText = styled(Text)`
-  margin: 8px 0;
+  margin: 0.5rem 0;
+`;
+
+const BodyText = styled(Text)`
+  margin: 0.7rem 0;
 `;
 
 const NotificationButton = ({ button }) => {
@@ -83,9 +87,9 @@ const Notification = ({ title, body, button, type = null }) => {
           {Array.isArray(body) ? (
             body
               .filter(text => text !== null)
-              .map(text => <Text type="p">{text}</Text>)
+              .map(text => <BodyText type="p">{text}</BodyText>)
           ) : (
-            <Text type="p">{body}</Text>
+            <BodyText type="p">{body}</BodyText>
           )}
           <NotificationButton button={button} />
         </ContentContainer>
