@@ -250,6 +250,29 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
 
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const hasCampaignsFeature =
+        getState().appSidebar.user.features?.includes('campaigns') ?? false;
+
+      if (hasCampaignsFeature) {
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'getCampaignsList',
+            args: {},
+          })
+        );
+      }
+      break;
+    }
+
+    case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      console.log('SUCCESS', action);
+      break;
+
+    case `getCampaignsList_${dataFetchActionTypes.FETCH_FAIL}`:
+      console.log('SUCCESS', action);
+      break;
+
     default:
       break;
   }
