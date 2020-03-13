@@ -60,6 +60,9 @@ export default connect(
         hasCampaignsFeature: state.appSidebar.user.features
           ? state.appSidebar.user.features.includes('campaigns')
           : false,
+        linkShortening: state.generalSettings.linkShortening,
+        hasBitlyPosts: currentProfile.hasBitlyPosts,
+        shouldDisplayBitly: !state?.productFeatures?.isFreeUser,
       };
     }
     return {};

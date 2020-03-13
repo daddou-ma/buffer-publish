@@ -3,16 +3,23 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 
 import Analytics from './components/Analytics';
 
-const mapStateToProps = state => ({
-  profile: state.profileSidebar.selectedProfile,
-  isLockedProfile: state.profileSidebar.isLockedProfile,
-  isBusinessAccount: state.profileSidebar.selectedProfile.business,
-  isInstagramBusiness: state.profileSidebar.selectedProfile.isInstagramBusiness,
-  isAnalyticsSupported:
-    state.profileSidebar.selectedProfile.isAnalyticsSupported,
-  //  TODO: Refactor so we're not pulling this state from drafts
-  canStartBusinessTrial: state.drafts.canStartBusinessTrial,
-});
+const mapStateToProps = state => {
+  return {
+    profile: state.profileSidebar.selectedProfile,
+    isLockedProfile: state.profileSidebar.isLockedProfile,
+    isBusinessAccount: state.profileSidebar.selectedProfile.business,
+    isInstagramBusiness:
+      state.profileSidebar.selectedProfile.isInstagramBusiness,
+    isAnalyticsSupported:
+      state.profileSidebar.selectedProfile.isAnalyticsSupported,
+    //  TODO: Refactor so we're not pulling this state from drafts
+    canStartBusinessTrial: state.drafts.canStartBusinessTrial,
+    linkShortening: state.generalSettings.linkShortening,
+    hasBitlyPosts: !!state.sent.byProfileId[
+      state.profileSidebar.selectedProfile.id
+    ].hasBitlyPosts,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   /**

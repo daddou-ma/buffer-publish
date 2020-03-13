@@ -126,6 +126,13 @@ const postsReducer = (state, action) => {
   }
 };
 
+const hasBitlyPosts = posts => Object.values(posts).some(
+  post =>
+    post.text.indexOf('https://buff.ly') >= 0 ||
+    post.text.indexOf('https://bit.ly') >= 0 ||
+    post.text.indexOf('https://j.mp') >= 0
+);
+
 const profileReducer = (state = profileInitialState, action) => {
   switch (action.type) {
     case profileSidebarActionTypes.SELECT_PROFILE:
@@ -136,16 +143,20 @@ const profileReducer = (state = profileInitialState, action) => {
         loading: !action.args.isFetchingMore,
         loadingMore: action.args.isFetchingMore,
       };
-    case `sentPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `sentPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const posts = handlePosts(action, state.posts);
+
       return {
         ...state,
         loading: false,
         loadingMore: false,
         moreToLoad: determineIfMoreToLoad(action, state.posts),
         page: increasePageCount(state.page),
-        posts: handlePosts(action, state.posts),
+        posts,
         total: action.result.total,
+        hasBitlyPosts: hasBitlyPosts(posts),
       };
+    }
     case `sentPosts_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,

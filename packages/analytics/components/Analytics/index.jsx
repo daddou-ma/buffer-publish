@@ -31,6 +31,8 @@ const AnalyticsList = ({
   isInstagramBusiness,
   fetchProfiles,
   selectProfile,
+  linkShortening,
+  hasBitlyPosts,
 }) => {
   // user is either a free or pro and is not a team member
   if (!isBusinessAccount && (features.isProUser() || features.isFreeUser())) {
@@ -83,6 +85,9 @@ const AnalyticsList = ({
             isInstagramBusiness={isInstagramBusiness}
             fetchProfiles={fetchProfiles}
             selectProfile={selectProfile}
+            features={features}
+            linkShortening={linkShortening}
+            hasBitlyPosts={hasBitlyPosts}
           />
         </Suspense>
       </ErrorBoundary>
@@ -107,6 +112,10 @@ AnalyticsList.propTypes = {
   isInstagramBusiness: PropTypes.bool.isRequired,
   fetchProfiles: PropTypes.func.isRequired,
   selectProfile: PropTypes.func.isRequired,
+  linkShortening: PropTypes.shape({
+    isBitlyConnected: PropTypes.bool,
+  }).isRequired,
+  hasBitlyPosts: PropTypes.bool.isRequired,
 };
 
 AnalyticsList.defaultProps = {

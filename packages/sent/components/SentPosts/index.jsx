@@ -4,6 +4,7 @@ import {
   PostLists,
   EmptyState,
   BufferLoading,
+  BitlyClickNotification,
 } from '@bufferapp/publish-shared-components';
 import { Divider, Text } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
@@ -40,6 +41,39 @@ const loadMoreButtonStyle = {
   paddingBottom: '3rem',
 };
 
+const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
+  if (typeof total === 'undefined' || total > 0) {
+    return null;
+  }
+  return (
+    <Fragment>
+      <EmptyState
+        height="initial"
+        title={
+          isBusinessAccount || !features.isFreeUser()
+            ? 'You haven’t published any posts with this account!'
+            : 'You haven’t published any posts with this account in the past 30 days!'
+        }
+        subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
+        heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
+        heroImgSize={{ width: '270px', height: '150px' }}
+      />
+    </Fragment>
+  );
+};
+
+NoPostsPublished.propTypes = {
+  total: PropTypes.number,
+  isBusinessAccount: PropTypes.bool,
+  features: PropTypes.shape({ isFreeUser: PropTypes.func }),
+};
+
+NoPostsPublished.defaultProps = {
+  total: undefined,
+  isBusinessAccount: false,
+  features: {},
+};
+
 const SentPosts = ({
   total,
   loading,
@@ -69,6 +103,8 @@ const SentPosts = ({
   showAnalyzeBannerAfterFirstPost,
   isAnalyzeCustomer,
   fetchSentPosts,
+  linkShortening,
+  hasBitlyPosts,
 }) => {
   useEffect(() => {
     fetchSentPosts();
@@ -86,23 +122,6 @@ const SentPosts = ({
     return <LockedProfileNotification />;
   }
 
-  if (!isDisconnectedProfile && total < 1) {
-    const title =
-      isBusinessAccount || !features.isFreeUser()
-        ? 'You haven’t published any posts with this account!'
-        : 'You haven’t published any posts with this account in the past 30 days!';
-    return (
-      <Fragment>
-        <EmptyState
-          title={title}
-          subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
-          heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
-          heroImgSize={{ width: '270px', height: '150px' }}
-        />
-      </Fragment>
-    );
-  }
-
   const loadMorePosts = () => {
     loadMore({ profileId, page, tabId });
   };
@@ -114,46 +133,68 @@ const SentPosts = ({
   return (
     <ErrorBoundary>
       {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
-      <div>
-        <div style={headerStyle}>
-          <div className="js-page-header">
-            <Text color="black">{header}</Text>
-          </div>
-          <Divider />
-        </div>
-        <div style={topBarContainerStyle}>
-          {showComposer && !editMode && (
-            <div style={composerStyle}>
+      <NoPostsPublished
+        features={features}
+        isBusinessAccount={isBusinessAccount}
+        total={total}
+      />
+
+      {total > 0 ? (
+        <Fragment>
+          <div>
+            <div style={headerStyle}>
+              <div className="js-page-header">
+                <Text color="black">{header}</Text>
+              </div>
+              <Divider />
+            </div>
+            <BitlyClickNotification
+              hasBitlyPosts={hasBitlyPosts}
+              isBitlyConnected={!!linkShortening.isBitlyConnected}
+              isFreeUser={features.isFreeUser}
+            />
+            <div style={topBarContainerStyle}>
+              {showComposer && !editMode && (
+                <div style={composerStyle}>
+                  <ComposerPopover
+                    onSave={onComposerCreateSuccess}
+                    type="sent"
+                  />
+                </div>
+              )}
+            </div>
+            {showComposer && editMode && (
               <ComposerPopover onSave={onComposerCreateSuccess} type="sent" />
+            )}
+            <PostLists
+              postLists={postLists}
+              onEditClick={onEditClick}
+              onShareAgainClick={onShareAgainClick}
+              onImageClick={onImageClick}
+              onImageClickNext={onImageClickNext}
+              onImageClickPrev={onImageClickPrev}
+              onImageClose={onImageClose}
+              onCampaignTagClick={onCampaignTagClick}
+              isManager={isManager}
+              isBusinessAccount={isBusinessAccount}
+              isSent
+              hasFirstCommentFlip={hasFirstCommentFlip}
+              hasCampaignsFeature={hasCampaignsFeature}
+              showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
+              isAnalyzeCustomer={isAnalyzeCustomer}
+            />
+          </div>
+          {moreToLoad && (
+            <div style={loadMoreButtonStyle}>
+              <Button
+                type="primary"
+                label="Load More"
+                onClick={loadMorePosts}
+              />
             </div>
           )}
-        </div>
-        {showComposer && editMode && (
-          <ComposerPopover onSave={onComposerCreateSuccess} type="sent" />
-        )}
-        <PostLists
-          postLists={postLists}
-          onEditClick={onEditClick}
-          onShareAgainClick={onShareAgainClick}
-          onImageClick={onImageClick}
-          onImageClickNext={onImageClickNext}
-          onImageClickPrev={onImageClickPrev}
-          onImageClose={onImageClose}
-          onCampaignTagClick={onCampaignTagClick}
-          isManager={isManager}
-          isBusinessAccount={isBusinessAccount}
-          isSent
-          hasFirstCommentFlip={hasFirstCommentFlip}
-          hasCampaignsFeature={hasCampaignsFeature}
-          showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
-          isAnalyzeCustomer={isAnalyzeCustomer}
-        />
-      </div>
-      {moreToLoad && (
-        <div style={loadMoreButtonStyle}>
-          <Button type="primary" label="Load More" onClick={loadMorePosts} />
-        </div>
-      )}
+        </Fragment>
+      ) : null}
     </ErrorBoundary>
   );
 };
@@ -193,6 +234,10 @@ SentPosts.propTypes = {
   isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   hasCampaignsFeature: PropTypes.bool,
+  linkShortening: PropTypes.shape({
+    isBitlyConnected: PropTypes.bool,
+  }),
+  hasBitlyPosts: PropTypes.bool,
 };
 
 SentPosts.defaultProps = {

@@ -15,14 +15,11 @@ const ErrorBoundary = getErrorBoundary(true);
 const GeneralSettings = ({
   isInstagramProfile,
   isInstagramBusiness,
-  linkShorteners,
   profileService,
   profileName,
   avatarUrl,
-  loadingLinkShorteners,
   loadingShuffle,
   onLinkShortenerOptionSelect,
-  selectedShortener,
   onShowGACustomizationFormClick,
   showGACustomizationForm,
   googleAnalyticsIsEnabled,
@@ -48,6 +45,7 @@ const GeneralSettings = ({
   isLockedProfile,
   isDisconnectedProfile,
   isBusinessAccount,
+  linkShortening,
 }) => {
   if (isLockedProfile) {
     return <LockedProfileNotification />;
@@ -67,14 +65,15 @@ const GeneralSettings = ({
           />
         )}
         <LinkShortening
-          isManager={isManager}
+          isBitlyConnected={linkShortening.isBitlyConnected}
+          isManager={linkShortening.isManager}
           onConnectBitlyURLClick={onConnectBitlyURLClick}
           onDisconnectBitlyURLClick={onDisconnectBitlyURLClick}
-          loading={loadingLinkShorteners}
-          profileService={profileService}
-          linkShorteners={linkShorteners}
+          loading={linkShortening.loading}
+          profileService={linkShortening.profileService}
+          linkShorteners={linkShortening.linkShorteners}
           onOptionSelect={onLinkShortenerOptionSelect}
-          selectedShortener={selectedShortener}
+          selectedShortener={linkShortening.selectedShortener}
           features={features}
         />
         <Divider />
@@ -131,6 +130,7 @@ GeneralSettings.defaultProps = {
   isLockedProfile: false,
   isDisconnectedProfile: false,
   loadingShuffle: false,
+  linkShortening: {},
 };
 
 GeneralSettings.propTypes = {
@@ -140,18 +140,23 @@ GeneralSettings.propTypes = {
   isInstagramBusiness: PropTypes.bool,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
   onDisconnectBitlyURLClick: PropTypes.func.isRequired,
-  linkShorteners: PropTypes.arrayOf(
-    PropTypes.shape({
-      domain: PropTypes.string,
-      selected: PropTypes.bool,
-      tracking: PropTypes.bool,
-      login: PropTypes.string,
-    })
-  ),
+  linkShortening: PropTypes.shape({
+    isBitlyConnected: PropTypes.bool,
+    isManager: PropTypes.bool,
+    loading: PropTypes.bool,
+    profileService: PropTypes.string,
+    selectedShortener: PropTypes.string,
+    linkShorteners: PropTypes.arrayOf(
+      PropTypes.shape({
+        domain: PropTypes.string,
+        selected: PropTypes.bool,
+        tracking: PropTypes.bool,
+        login: PropTypes.string,
+      })
+    ),
+  }),
   onLinkShortenerOptionSelect: PropTypes.func,
-  loadingLinkShorteners: PropTypes.bool,
   profileService: PropTypes.string,
-  selectedShortener: PropTypes.string,
   onShowGACustomizationFormClick: PropTypes.func.isRequired,
   showGACustomizationForm: PropTypes.bool,
   googleAnalyticsIsEnabled: PropTypes.bool,

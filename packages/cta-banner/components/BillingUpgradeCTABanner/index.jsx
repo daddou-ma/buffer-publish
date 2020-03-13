@@ -30,7 +30,7 @@ const BillingUpgradeCTABanner = ({
   if (!trial || (trial && !trial.onTrial) || profileCount === 0) {
     return null;
   }
-  // removed feature loader because user data wasn't getting updated on fetch
+
   const currentPlan = styles => (
     <Text {...styles}>
       <FeatureLoader supportedPlans="free">Free</FeatureLoader>
