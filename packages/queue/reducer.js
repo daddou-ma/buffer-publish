@@ -436,6 +436,17 @@ export default (state = initialState, action) => {
         editMode: false,
         emptySlotMode: false,
       };
+
+    case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+      };
+
+    case `getCampaignsList_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }

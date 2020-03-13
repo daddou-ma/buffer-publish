@@ -265,14 +265,6 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
 
-    case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      console.log('SUCCESS', action);
-      break;
-
-    case `getCampaignsList_${dataFetchActionTypes.FETCH_FAIL}`:
-      console.log('SUCCESS', action);
-      break;
-
     default:
       break;
   }
