@@ -7,12 +7,17 @@ const SpacedNotification = styled.div`
   margin-bottom: 0.75rem;
 `;
 
-const BitlyNotification = ({ marginAfter }) => {
+const BitlyNotification = ({ marginAfter, onConnectBitlyURLClick }) => {
   const notificationMessage = (
     <Notification
       type="info"
       title="Known Issue With Reported Clicks"
       body="We’re aware of an issue regarding reported clicks from shortened links and are actively working to resolve the situation. In the meantime, connecting your own bit.ly account will fix your reporting. Our sincere apologies for this inconvenience!"
+      button={{
+        type: 'primary',
+        action: onConnectBitlyURLClick,
+        text: 'Connect Your Bit.ly Account',
+      }}
     />
   );
   return marginAfter ? (
@@ -24,6 +29,7 @@ const BitlyNotification = ({ marginAfter }) => {
 
 BitlyNotification.propTypes = {
   marginAfter: PropTypes.bool.isRequired,
+  onConnectBitlyURLClick: PropTypes.func.isRequired,
 };
 
 const BitlyClickNotification = ({
@@ -31,9 +37,10 @@ const BitlyClickNotification = ({
   isBitlyConnected,
   hasBitlyPosts,
   marginAfter = false,
+  onConnectBitlyURLClick,
 }) => {
   return hasBitlyPosts && !isFreeUser() && !isBitlyConnected ? (
-    <BitlyNotification marginAfter={marginAfter} />
+    <BitlyNotification marginAfter={marginAfter} onConnectBitlyURLClick={onConnectBitlyURLClick}/>
   ) : null;
 };
 
@@ -42,6 +49,7 @@ BitlyClickNotification.propTypes = {
   isBitlyConnected: PropTypes.bool.isRequired,
   hasBitlyPosts: PropTypes.bool.isRequired,
   marginAfter: PropTypes.bool,
+  onConnectBitlyURLClick: PropTypes.func.isRequired,
 };
 
 BitlyClickNotification.defaultProps = {

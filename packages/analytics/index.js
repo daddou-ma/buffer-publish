@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 
 import Analytics from './components/Analytics';
+import { actions as settingsAction } from '@bufferapp/publish-general-settings';
 
 const mapStateToProps = state => {
   return {
@@ -21,7 +22,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   /**
    * We pass down these methods so that when the lazy-loaded `AnalyticsList`
    * is mounted it can setup its stores / trigger fetches / etc.
@@ -50,6 +51,13 @@ const mapDispatchToProps = dispatch => ({
         organizationId,
       },
     });
+  },
+  onConnectBitlyURLClick: () => {
+    dispatch(
+      settingsAction.handleConnectBitlyURLClick({
+        profileId: ownProps.profileId,
+      })
+    );
   },
 });
 

@@ -39,7 +39,7 @@ const NotificationButton = ({ button }) => {
   return button ? (
     <Button
       type={button.type ? button.type : "primary"}
-      onclick={e => {
+      onClick={e => {
         button.action(e, button);
       }}
       label={button.text}
