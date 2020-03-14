@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
-
 import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 import ListIcon from '@bufferapp/ui/Icon/Icons/List';

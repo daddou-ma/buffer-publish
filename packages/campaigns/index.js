@@ -8,6 +8,8 @@ import {
   campaignPages,
   generateCampaignPageRoute,
 } from '@bufferapp/publish-routes';
+import { actions as modalActions } from '@bufferapp/publish-modals/reducer';
+import { actions as deleteCampaignModalActions } from '@bufferapp/publish-delete-campaign-modal/reducer';
 import { actions } from './reducer';
 import CampaignsPage from './components/CampaignsPage';
 
@@ -73,6 +75,17 @@ export default connect(
     },
     fetchCampaign: campaignId => {
       dispatch(actions.fetchCampaign(campaignId));
+    },
+    onCloseDeleteCampaignModal: () => {
+      dispatch(actions.hideDeleteCampaignModal());
+    },
+    onDeleteCampaignClick: campaignId => {
+      dispatch(deleteCampaignModalActions.setCampaignId(campaignId));
+      dispatch(modalActions.showDeleteCampaignModal());
+    },
+    onConfirmDeleteCampaignClick: campaignId => {
+      console.log('delete!');
+      // dispatch(actions.deleteCampaign(campaignId));
     },
   })
 )(CampaignsPage);

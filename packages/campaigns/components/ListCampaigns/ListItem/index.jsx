@@ -132,7 +132,7 @@ ListItem.propTypes = {
   campaign: PropTypes.shape({
     color: PropTypes.string,
     name: PropTypes.string,
-    sent: PropTypes.string,
+    sent: PropTypes.number,
     scheduled: PropTypes.number,
     lastUpdated: PropTypes.string,
     dateRange: PropTypes.string,

@@ -53,6 +53,14 @@
       "title": "Build your Campaign",
       "scheduled": "Scheduled",
       "sent": "Sent"
+    },
+    "deleteCampaignModal": {
+      "title": "Are you sure you want to delete your campaign,",
+      "boldSubtext": "We won't be able to save or analyze any of your campaign data.",
+      "subtext": "If you also wish to stop the posts from within this campaign from publishing, please delete each one individually.",
+      "cancel": "Cancel",
+      "delete": "Yes, Delete Campaign",
+      "loading": "Deleting..."
     }
   },
   "onboarding-page": {
