@@ -12,6 +12,7 @@ import WelcomeB4BTrialModal from '@bufferapp/publish-welcome-b4b-trial-modal';
 import TrialCompleteModal from '@bufferapp/publish-trial-complete-modal';
 import InstagramFirstCommentProTrialModal from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 import CloseComposerConfirmationModal from '@bufferapp/publish-close-composer-confirmation-modal';
+import DeleteCampaignModal from '@bufferapp/publish-delete-campaign-modal';
 
 const AppModals = ({
   showSwitchPlanModal,
@@ -25,6 +26,7 @@ const AppModals = ({
   showTrialCompleteModal,
   showInstagramFirstCommentProTrialModal,
   showCloseComposerConfirmationModal,
+  showDeleteCampaignModal,
 }) => (
   <React.Fragment>
     {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
@@ -40,6 +42,7 @@ const AppModals = ({
       <InstagramFirstCommentProTrialModal />
     )}
     {showCloseComposerConfirmationModal && <CloseComposerConfirmationModal />}
+    {showDeleteCampaignModal && <DeleteCampaignModal />}
   </React.Fragment>
 );
 
@@ -55,6 +58,7 @@ AppModals.propTypes = {
   showTrialCompleteModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentProTrialModal: PropTypes.bool.isRequired,
   showCloseComposerConfirmationModal: PropTypes.bool.isRequired,
+  showDeleteCampaignModal: PropTypes.bool.isRequired,
 };
 
 export default AppModals;
