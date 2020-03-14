@@ -34,8 +34,15 @@ export default ({ dispatch, getState }) => next => action => {
           message: 'Your campaign has been deleted!',
         })
       );
+      const metadata = {
+        campaignId,
+        campaignName: name,
+        campaignColor: color,
+        organizationId,
+      };
+      dispatch(analyticsActions.trackEvent('Campaign Deleted', metadata));
       break;
-
+    }
     case `deleteCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(modalActions.hideDeleteCampaignModal());
       dispatch(
