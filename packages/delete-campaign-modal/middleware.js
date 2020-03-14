@@ -2,27 +2,31 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as modalActions } from '@bufferapp/publish-modals/reducer';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
   next(action);
+  const state = getState();
   switch (action.type) {
     case actionTypes.DELETE_CAMPAIGN: {
-      const { campaignId } = getState().deleteCampaignModal;
+      const { campaign } = state.deleteCampaignModal;
 
       dispatch(
         dataFetchActions.fetch({
           name: 'deleteCampaign',
           args: {
-            campaignId,
+            campaignId: campaign.campaignId,
           },
         })
       );
       break;
     }
-    case `deleteCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `deleteCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { campaignId, name, color } = state.deleteCampaignModal.campaign;
+      const { organizationId } = getState().profileSidebar.selectedProfile;
       dispatch(modalActions.hideDeleteCampaignModal());
       dispatch(
         notificationActions.createNotification({

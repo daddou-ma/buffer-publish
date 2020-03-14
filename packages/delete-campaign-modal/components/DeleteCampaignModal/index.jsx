@@ -3,19 +3,18 @@ import PropTypes from 'prop-types';
 import { Modal, Text } from '@bufferapp/ui';
 import styled from 'styled-components';
 import { grayDark } from '@bufferapp/ui/style/colors';
-import { fontWeightMedium } from '@bufferapp/components/style/font';
+import { fontWeightSemiBold } from '@bufferapp/components/style/font';
 
 const Container = styled.div`
   margin: 0 16px;
   p {
     color: ${grayDark};
+    display: inline;
   }
 `;
 
-const Bold = styled.span`
-  p {
-    font-weight: ${fontWeightMedium};
-  }
+const BoldText = styled(Text)`
+  font-weight: ${fontWeightSemiBold};
 `;
 
 const DeleteCampaignModal = ({
@@ -23,7 +22,6 @@ const DeleteCampaignModal = ({
   deleteCampaign,
   hideModal,
   username,
-  campaignId,
   loading,
 }) => (
   <Modal
@@ -31,7 +29,7 @@ const DeleteCampaignModal = ({
       label: loading ? translations.loading : translations.delete,
       disabled: false,
       callback: () => {
-        deleteCampaign(campaignId);
+        deleteCampaign();
       },
     }}
     secondaryAction={{
@@ -43,17 +41,9 @@ const DeleteCampaignModal = ({
     dismissable
   >
     <Container>
-      <Text type="h2">{`${translations.title} ${username}?`}</Text>
-      <div>
-        <Bold>
-          <Text type="p" color={grayDark}>
-            {translations.boldSubtext}
-          </Text>
-        </Bold>
-        <Text type="p" color={grayDark}>
-          {translations.subtext}
-        </Text>
-      </div>
+      <Text type="h2">{`${translations.title} "${username}"?`}</Text>
+      <BoldText type="p">{translations.boldSubtext}</BoldText>
+      <Text type="p">{translations.subtext}</Text>
     </Container>
   </Modal>
 );
@@ -63,7 +53,6 @@ DeleteCampaignModal.propTypes = {
   deleteCampaign: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
-  campaignId: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 

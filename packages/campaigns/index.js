@@ -49,9 +49,6 @@ export default connect(
     onCreatePostClick: campaignId => {
       dispatch(actions.handleOpenComposer(campaignId));
     },
-    onDeleteCampaignClick: campaignId => {
-      dispatch(actions.handleDeleteCampaignClick(campaignId));
-    },
     goToAnalyzeReport: () => {
       window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
     },
@@ -76,16 +73,9 @@ export default connect(
     fetchCampaign: campaignId => {
       dispatch(actions.fetchCampaign(campaignId));
     },
-    onCloseDeleteCampaignModal: () => {
-      dispatch(actions.hideDeleteCampaignModal());
-    },
-    onDeleteCampaignClick: campaignId => {
-      dispatch(deleteCampaignModalActions.setCampaignId(campaignId));
+    onDeleteCampaignClick: campaign => {
+      dispatch(deleteCampaignModalActions.setCampaign(campaign));
       dispatch(modalActions.showDeleteCampaignModal());
-    },
-    onConfirmDeleteCampaignClick: campaignId => {
-      console.log('delete!');
-      // dispatch(actions.deleteCampaign(campaignId));
     },
   })
 )(CampaignsPage);

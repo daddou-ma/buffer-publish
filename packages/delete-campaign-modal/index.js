@@ -7,7 +7,7 @@ export default connect(
   state => ({
     translations: state.i18n.translations.campaigns.deleteCampaignModal,
     loading: state.deleteCampaignModal.loading,
-    campaignId: state.deleteCampaignModal.campaignId,
+    campaign: state.deleteCampaignModal.campaign,
     username: state.appSidebar.user.name,
   }),
   dispatch => ({

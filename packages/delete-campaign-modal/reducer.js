@@ -5,7 +5,7 @@ export const actionTypes = keyWrapper('DELETE_CAMPAIGN_MODAL', {
   DELETE_CAMPAIGN: 0,
   SHOW_DELETE_CAMPAIGN_MODAL: 0,
   HIDE_DELETE_CAMPAIGN_MODAL: 0,
-  SET_CAMPAIGN_ID: 0,
+  SET_CAMPAIGN: 0,
 });
 
 export const initialState = {
@@ -26,10 +26,10 @@ export default (state = initialState, action) => {
         ...state,
         loading: true,
       };
-    case actionTypes.SET_CAMPAIGN_ID:
+    case actionTypes.SET_CAMPAIGN:
       return {
         ...state,
-        campaignId: action.campaignId,
+        campaign: action.campaign,
       };
     default:
       return state;
@@ -37,12 +37,11 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  deleteCampaign: campaignId => ({
+  deleteCampaign: () => ({
     type: actionTypes.DELETE_CAMPAIGN,
-    campaignId,
   }),
-  setCampaignId: campaignId => ({
-    type: actionTypes.SET_CAMPAIGN_ID,
-    campaignId,
+  setCampaign: campaign => ({
+    type: actionTypes.SET_CAMPAIGN,
+    campaign,
   }),
 };
