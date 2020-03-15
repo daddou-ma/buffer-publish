@@ -1,0 +1,18 @@
+{
+  "name": "@bufferapp/publish-campaign-view",
+  "version": "2.0.0",
+  "description": "View Campaign",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "ana@buffer.com",
+  "dependencies": {
+    "@bufferapp/publish-shared-components": "2.0.0"
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
