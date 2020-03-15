@@ -10,6 +10,7 @@ import {
   newConnectionRoute,
   generateProfilePageRoute,
   campaignScheduledRoute,
+  campaignsPageRoute,
 } from '@bufferapp/publish-routes';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
@@ -17,6 +18,7 @@ import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
 import ViewCampaign from '@bufferapp/publish-campaign-view';
+import ListCampaigns from '@bufferapp/publish-campaigns-list';
 
 const AppPages = ({ profiles, isOnBusinessTrial }) => {
   const hasProfiles = profiles && profiles.length > 0;
@@ -44,6 +46,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       {!hasProfiles && <Redirect to={newConnectionRoute} />}
 
       <Route path={campaignScheduledRoute} component={ViewCampaign} />
+      <Route path={campaignsPageRoute} component={ListCampaigns} />
 
       <Route path={childTabRoute} component={ProfilePage} />
       <Route path={profilePageRoute} component={ProfilePage} />
