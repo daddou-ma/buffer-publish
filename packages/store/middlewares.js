@@ -39,6 +39,7 @@ import publishCTABannerMiddleware from '@bufferapp/publish-cta-banner/middleware
 import thirdpartyMiddleware from '@bufferapp/publish-thirdparty/middleware';
 import campaignsMiddleware from '@bufferapp/publish-campaigns/middleware';
 import campaignViewMiddleware from '@bufferapp/publish-campaign-view/middleware';
+import campaignsListMiddleware from '@bufferapp/publish-campaigns-list/middleware';
 import bookmarkletsMiddleware from '@bufferapp/publish-bookmarklets/middleware';
 import trialCompleteModalMiddleware from '@bufferapp/publish-trial-complete-modal/middleware';
 import tabsMiddleware from '@bufferapp/publish-tabs/middleware';
@@ -103,6 +104,7 @@ const composedMiddlewares = history =>
       thirdpartyMiddleware,
       campaignsMiddleware,
       campaignViewMiddleware,
+      campaignsListMiddleware,
       trialCompleteModalMiddleware,
       tabsMiddleware,
       appShellMiddleware,
