@@ -74,7 +74,7 @@ export default connect(
       dispatch(actions.fetchCampaign(campaignId));
     },
     onDeleteCampaignClick: campaign => {
-      dispatch(deleteCampaignModalActions.setCampaign(campaign));
+      dispatch(deleteCampaignModalActions.handleDeleteClick(campaign));
       dispatch(modalActions.showDeleteCampaignModal());
     },
   })

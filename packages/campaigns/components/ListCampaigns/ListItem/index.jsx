@@ -38,7 +38,7 @@ const ListItem = ({
     {
       title: translations.deleteCampaign,
       selectedItemClick: () => {
-        onDeleteCampaignClick(campaignId);
+        onDeleteCampaignClick(campaign);
       },
     },
   ];

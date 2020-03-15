@@ -13,20 +13,19 @@ export default ({ dispatch, getState }) => next => action => {
   switch (action.type) {
     case actionTypes.DELETE_CAMPAIGN: {
       const { campaign } = state.deleteCampaignModal;
-
       dispatch(
         dataFetchActions.fetch({
           name: 'deleteCampaign',
           args: {
-            campaignId: campaign.campaignId,
+            campaignId: campaign.id,
           },
         })
       );
       break;
     }
     case `deleteCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { campaignId, name, color } = state.deleteCampaignModal.campaign;
-      const { organizationId } = getState().profileSidebar.selectedProfile;
+      const { id, name, color } = state.deleteCampaignModal.campaign;
+      const { organizationId } = state.profileSidebar.selectedProfile;
       dispatch(modalActions.hideDeleteCampaignModal());
       dispatch(
         notificationActions.createNotification({
@@ -35,7 +34,7 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       const metadata = {
-        campaignId,
+        campaignId: id,
         campaignName: name,
         campaignColor: color,
         organizationId,

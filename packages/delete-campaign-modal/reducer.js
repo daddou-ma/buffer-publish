@@ -5,12 +5,12 @@ export const actionTypes = keyWrapper('DELETE_CAMPAIGN_MODAL', {
   DELETE_CAMPAIGN: 0,
   SHOW_DELETE_CAMPAIGN_MODAL: 0,
   HIDE_DELETE_CAMPAIGN_MODAL: 0,
-  SET_CAMPAIGN: 0,
+  OPEN_MODAL: 0,
 });
 
 export const initialState = {
   loading: false,
-  campaignId: null,
+  campaign: {},
 };
 
 export default (state = initialState, action) => {
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: true,
       };
-    case actionTypes.SET_CAMPAIGN:
+    case actionTypes.OPEN_MODAL:
       return {
         ...state,
         campaign: action.campaign,
@@ -40,8 +40,8 @@ export const actions = {
   deleteCampaign: () => ({
     type: actionTypes.DELETE_CAMPAIGN,
   }),
-  setCampaign: campaign => ({
-    type: actionTypes.SET_CAMPAIGN,
+  handleDeleteClick: campaign => ({
+    type: actionTypes.OPEN_MODAL,
     campaign,
   }),
 };
