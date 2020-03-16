@@ -128,9 +128,9 @@ const postsReducer = (state, action) => {
 
 const hasBitlyPosts = posts => Object.values(posts).some(
   post =>
-    post.text.indexOf('https://buff.ly') >= 0 ||
-    post.text.indexOf('https://bit.ly') >= 0 ||
-    post.text.indexOf('https://j.mp') >= 0
+    post.text.indexOf('https://buff.ly/') >= 0 ||
+    post.text.indexOf('https://bit.ly/') >= 0 ||
+    post.text.indexOf('https://j.mp/') >= 0
 );
 
 const profileReducer = (state = profileInitialState, action) => {
