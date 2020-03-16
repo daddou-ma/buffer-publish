@@ -10,21 +10,23 @@ jest.mock('@bufferapp/publish-modals/reducer');
 
 describe('middleware', () => {
   const next = jest.fn();
-  const dispatch = jest.fn();
-  const getState = jest.fn(() => ({
-    deleteCampaignModal: {
-      campaign: {
-        id: '1234',
-        name: 'Awareness Day',
-        color: 'blue',
+  const store = {
+    dispatch: jest.fn(),
+    getState: () => ({
+      deleteCampaignModal: {
+        campaign: {
+          id: '1234',
+          name: 'Awareness Day',
+          color: 'blue',
+        },
       },
-    },
-    profileSidebar: {
-      selectedProfile: {
-        organizationId: '123',
+      profileSidebar: {
+        selectedProfile: {
+          organizationId: '123',
+        },
       },
-    },
-  }));
+    }),
+  };
   it('should handle deleteCampaign_FETCH_SUCCESS', () => {
     const action = {
       type: `deleteCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`,
@@ -37,7 +39,7 @@ describe('middleware', () => {
       organizationId: '123',
     };
 
-    middleware({ dispatch, getState })(next)(action);
+    middleware(store)(next)(action);
 
     expect(next).toBeCalledWith(action);
 
@@ -57,7 +59,7 @@ describe('middleware', () => {
       error: 'Something went wrong',
     };
 
-    middleware({ dispatch, getState })(next)(action);
+    middleware(store)(next)(action);
 
     expect(next).toBeCalledWith(action);
     expect(modalActions.hideDeleteCampaignModal).toHaveBeenCalled();
