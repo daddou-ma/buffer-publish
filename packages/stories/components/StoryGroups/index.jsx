@@ -67,7 +67,7 @@ const getReminderMessage = ({
   <span>
     {reminderText1}
     <StyledLink
-      href="https://faq.buffer.com/article/1106-publish-instagram-stories-scheduling"
+      href="https://support.buffer.com/hc/en-us/articles/360038456274-Scheduling-Instagram-Stories"
       target="_blank"
     >
       {reminderLinkText2}

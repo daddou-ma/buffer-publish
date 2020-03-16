@@ -263,11 +263,15 @@ AddStoryFooter.propTypes = {
   storyGroup: storyGroupPropTypes, // eslint-disable-line react/require-default-props,
   selectedProfile: selectedProfilePropTypes, // eslint-disable-line react/require-default-props,
   isPastDue: PropTypes.bool,
+  emptySlotData: PropTypes.shape({
+    scheduledAt: PropTypes.string,
+  }),
 };
 
 AddStoryFooter.defaultProps = {
   storyGroup: {},
   isPastDue: false,
+  emptySlotData: {},
 };
 
 export default AddStoryFooter;

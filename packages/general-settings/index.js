@@ -19,9 +19,6 @@ export default connect(
     profileService: state.generalSettings.profileService,
     profileName: state.generalSettings.profileName,
     avatarUrl: state.generalSettings.avatarUrl,
-    linkShorteners: state.generalSettings.linkShorteners,
-    loadingLinkShorteners: state.generalSettings.loadingLinkShorteners,
-    selectedShortener: state.generalSettings.selectedShortener,
     isManager: state.profileSidebar.selectedProfile.isManager,
     isBusinessAccount: state.profileSidebar.selectedProfile.business,
     showGACustomizationForm: state.generalSettings.showGACustomizationForm,
@@ -35,6 +32,7 @@ export default connect(
     isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
     showModal: state.generalSettings.showModal,
     loadingShuffle: state.generalSettings.loadingShuffle,
+    linkShortening: state.generalSettings.linkShortening,
   }),
   (dispatch, ownProps) => ({
     onDirectPostingClick: () => {

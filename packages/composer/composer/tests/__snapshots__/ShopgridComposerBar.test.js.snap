@@ -21,7 +21,7 @@ exports[`Whole component renders default state 1`] = `
     >
       <a
         className="questionIcon"
-        href="https://faq.buffer.com/article/1164-publish-instagram-shop-grid"
+        href="https://support.buffer.com/hc/en-us/articles/360038654273-Instagram-Shop-Grid"
         onClick={[Function]}
         rel="noopener noreferrer"
         target="_blank"
@@ -88,7 +88,7 @@ exports[`Whole component renders with shopgrid link when set 1`] = `
     >
       <a
         className="questionIcon"
-        href="https://faq.buffer.com/article/1164-publish-instagram-shop-grid"
+        href="https://support.buffer.com/hc/en-us/articles/360038654273-Instagram-Shop-Grid"
         onClick={[Function]}
         rel="noopener noreferrer"
         target="_blank"

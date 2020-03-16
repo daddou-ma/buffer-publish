@@ -22,6 +22,7 @@ const LinkShortening = ({
   onDisconnectBitlyURLClick,
   onConnectBitlyURLClick,
   isManager,
+  isBitlyConnected,
 }) => {
   const linkList =
     linkShorteners &&
@@ -30,10 +31,6 @@ const LinkShortening = ({
       name: `${ls.domain} ${ls.login ? `- ${ls.login}` : ''}`,
       selected: ls.selected,
     }));
-  const hasShortenersWithLogins =
-    (linkShorteners && linkShorteners.filter(shortener => shortener.login)) ||
-    [];
-  const isBitlyConnected = hasShortenersWithLogins.length > 0;
 
   if (profileService === 'pinterest') {
     return (
@@ -101,10 +98,12 @@ LinkShortening.defaultProps = {
   profileService: null,
   selectedShortener: null,
   isManager: true,
+  isBitlyConnected: false,
 };
 
 LinkShortening.propTypes = {
   isManager: PropTypes.bool,
+  isBitlyConnected: PropTypes.bool,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
   onDisconnectBitlyURLClick: PropTypes.func.isRequired,
   profileService: PropTypes.string,

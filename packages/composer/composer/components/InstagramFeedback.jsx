@@ -6,9 +6,9 @@ import styles from './css/InstagramFeedback.css';
 
 const getLinkUrl = feedback => {
   if (feedback.some(f => f.code === 'ASPECT_RATIO')) {
-    return 'https://faq.buffer.com/article/951-publish-image-aspect-ratios-for-instagram-direct-scheduling';
+    return 'https://support.buffer.com/hc/en-us/articles/360037965494-Instagram-s-accepted-aspect-ratio-ranges';
   }
-  return 'https://faq.buffer.com/article/950-publish-how-buffer-works-with-instagram';
+  return 'https://support.buffer.com/hc/en-us/articles/360037766294-How-Instagram-works-with-Buffer-Publish';
 };
 
 const InstagramFeedback = ({ feedback }) => (

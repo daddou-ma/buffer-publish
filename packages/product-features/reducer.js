@@ -1,4 +1,5 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { isSupportedPlan } from './utils';
 
 export const actionTypes = {};
 
@@ -22,6 +23,9 @@ export default (state = initialState, action) => {
         loading: false,
         features: action.result.features,
         planName: action.result.planName,
+        isFreeUser: isSupportedPlan('free', action.result.planName),
+        isProUser: isSupportedPlan('pro', action.result.planName),
+        isBusinessUser: isSupportedPlan('business', action.result.planName),
       };
     default:
       return state;

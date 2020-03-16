@@ -144,7 +144,7 @@ const TabContent = ({
     case 'analytics':
       switch (childTabId) {
         case 'overview':
-          return <Analytics />;
+          return <Analytics profileId={profileId} />;
         case 'posts':
         default:
           return (
