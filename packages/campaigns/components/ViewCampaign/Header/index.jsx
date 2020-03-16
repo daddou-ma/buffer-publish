@@ -21,9 +21,6 @@ import {
   Title,
 } from './style';
 
-const goToAnalyzeReport = () =>
-  window.location.assign(`${getURL.getAnalyzeReport()}`);
-
 const Header = ({
   translations,
   campaignDetails,
@@ -32,6 +29,7 @@ const Header = ({
   onCreatePostClick,
   onDeleteCampaignClick,
   onEditCampaignClick,
+  goToAnalyzeReport,
 }) => (
   <Container>
     <CampaignDetails>
@@ -121,15 +119,16 @@ Header.propTypes = {
     name: PropTypes.string,
     color: PropTypes.string,
     dateRange: PropTypes.string,
-    scheduled: PropTypes.string,
-    sent: PropTypes.string,
+    scheduled: PropTypes.number,
+    sent: PropTypes.number,
     lastUpdated: PropTypes.string,
   }).isRequired,
-  hasPosts: PropTypes.string.isRequired,
+  hasPosts: PropTypes.bool.isRequired,
   isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
+  goToAnalyzeReport: PropTypes.func.isRequired,
 };
 
 export default Header;

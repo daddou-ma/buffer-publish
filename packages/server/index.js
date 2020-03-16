@@ -4,8 +4,8 @@
 const isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
   // This line must come before importing any instrumented module.
+  // eslint-disable-next-line
   require('dd-trace').init({
-    // eslint-disable-line
     env: 'production',
     hostname: process.env.DD_AGENT_HOST,
     port: 8126,
@@ -30,8 +30,9 @@ const helmet = require('helmet');
 
 const { apiError } = require('./middleware');
 const controller = require('./lib/controller');
-const rpcHandler = require('./rpc');
+const makeRPCHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
+const PublishAPI = require('./publishAPI');
 const userMethod = require('./rpc/user/index');
 const profilesMethod = require('./rpc/profiles/index');
 const pusher = require('./lib/pusher');
@@ -267,13 +268,12 @@ const getHtml = ({
     .replace('{{{bufferData}}}', getBufferData({ user, profiles }));
 };
 
-app.use(logMiddleware({ name: 'BufferPublish' }));
+// app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());
 app.use(helmet.frameguard({ action: 'sameorigin' }));
 
 app.all('/maintenance', maintenanceHandler);
 
-// All routes after this have access to the user session
 app.use('*', (req, res, next) => {
   const analyzeApiAddr =
     req.get('ANALYZE-API-ADDR') || process.env.ANALYZE_API_ADDR;
@@ -283,6 +283,7 @@ app.use('*', (req, res, next) => {
 
 app.use(bodyParser.json());
 
+// All routes after this have access to the user session
 app.use(
   setRequestSessionMiddleware({
     production: isProduction,
@@ -290,7 +291,11 @@ app.use(
   })
 );
 
-app.post('/rpc', checkToken, rpcHandler, errorMiddleware);
+// Setup our RPC handler
+(async () => {
+  const rpcHandler = await makeRPCHandler();
+  app.post('/rpc/:method?', checkToken, rpcHandler, errorMiddleware);
+})();
 
 app.get('/health-check', controller.healthCheck);
 
@@ -338,7 +343,7 @@ app.get('*', (req, res) => {
   const modalValue = req.query.mv ? req.query.mv : null;
 
   Promise.all([
-    userMethod.fn(null, req, res).catch(() => {
+    userMethod.fn(null, req, res, { PublishAPI }).catch(() => {
       // added catch incase we don't have any data in the object
       return undefined;
     }),

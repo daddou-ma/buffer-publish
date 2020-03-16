@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import {
   getCampaignPageParams,
   campaignsCreateRoute,
   campaignsPageRoute,
   campaignPages,
+  generateCampaignPageRoute,
 } from '@bufferapp/publish-routes';
 import { actions } from './reducer';
 import CampaignsPage from './components/CampaignsPage';
@@ -14,13 +16,13 @@ export default connect(
     const { campaignId, selectedPage = campaignPages.VIEW_ALL_CAMPAIGNS } =
       getCampaignPageParams({ path: ownProps.history.location.pathname }) || {};
     return {
-      campaigns: [],
+      campaigns: state.campaigns.campaigns,
+      currentCampaign: state.campaigns.currentCampaign,
       translations: state.i18n.translations.campaigns,
       isUsingPublishAsTeamMember:
         state.appSidebar.user.isUsingPublishAsTeamMember,
       isSaving: state.campaigns.isSaving,
       campaignId,
-      campaignDetails: state.campaigns.campaignDetails,
       selectedPage,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')
@@ -48,11 +50,29 @@ export default connect(
     onDeleteCampaignClick: campaignId => {
       dispatch(actions.handleDeleteCampaignClick(campaignId));
     },
-    onEditCampaignClick: campaignId => {
-      dispatch(actions.handleEditCampaignClick(campaignId));
+    goToAnalyzeReport: () => {
+      window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
     },
-    onCampaignClick: campaignId => {
-      dispatch(actions.handleCampaignClick(campaignId));
+    onEditCampaignClick: campaignId => {
+      if (campaignId) {
+        const routeObj = {
+          campaignId,
+          selectedPage: campaignPages.EDIT_CAMPAIGN,
+        };
+        dispatch(push(generateCampaignPageRoute(routeObj)));
+      }
+    },
+    onViewCampaignClick: campaignId => {
+      if (campaignId) {
+        const routeObj = {
+          campaignId,
+          selectedPage: campaignPages.VIEW_CAMPAIGN,
+        };
+        dispatch(push(generateCampaignPageRoute(routeObj)));
+      }
+    },
+    fetchCampaign: campaignId => {
+      dispatch(actions.fetchCampaign(campaignId));
     },
   })
 )(CampaignsPage);

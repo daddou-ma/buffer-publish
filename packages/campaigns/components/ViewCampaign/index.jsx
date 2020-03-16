@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { QueueItems, Tabs, Tab } from '@bufferapp/publish-shared-components';
@@ -13,30 +13,38 @@ const Container = styled.div`
 
 /* Component */
 const ViewCampaign = ({
-  campaignPosts,
-  campaignDetails,
-  hasPosts,
+  currentCampaign,
   isUsingPublishAsTeamMember,
   translations,
   onCreatePostClick,
   onDeleteCampaignClick,
   onEditCampaignClick,
+  campaignId,
+  fetchCampaign,
+  goToAnalyzeReport,
 }) => {
+  // Fetch Data
+  useEffect(() => {
+    fetchCampaign(campaignId);
+  }, [campaignId]);
   // State
   const [listView, toggleView] = useState('scheduled');
+
+  const campaignHasPosts = currentCampaign?.items?.length > 0;
 
   return (
     <Container>
       <Header
-        campaignDetails={campaignDetails}
-        hasPosts={hasPosts}
+        campaignDetails={currentCampaign}
+        hasPosts={campaignHasPosts}
         isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
         translations={translations.viewCampaign}
         onCreatePostClick={onCreatePostClick}
         onDeleteCampaignClick={onDeleteCampaignClick}
         onEditCampaignClick={onEditCampaignClick}
+        goToAnalyzeReport={goToAnalyzeReport}
       />
-      {hasPosts ? (
+      {campaignHasPosts ? (
         <React.Fragment>
           <nav role="navigation">
             <Tabs
@@ -48,7 +56,7 @@ const ViewCampaign = ({
             </Tabs>
           </nav>
           <QueueItems
-            items={campaignPosts}
+            items={currentCampaign.items}
             onDeleteConfirmClick={null}
             onEditClick={null}
             onShareNowClick={null}
@@ -79,13 +87,15 @@ const ViewCampaign = ({
 
 ViewCampaign.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
-  campaignDetails: PropTypes.object.isRequired, // eslint-disable-line
+  currentCampaign: PropTypes.object.isRequired, // eslint-disable-line
   campaignPosts: PropTypes.array, // eslint-disable-line
   isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
-  hasPosts: PropTypes.string.isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
+  fetchCampaign: PropTypes.func.isRequired,
+  goToAnalyzeReport: PropTypes.func.isRequired,
+  campaignId: PropTypes.string,
 };
 
 export default ViewCampaign;

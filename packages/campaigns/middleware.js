@@ -16,7 +16,7 @@ import { actionTypes } from './reducer';
 export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
-    case actionTypes.HANDLE_CAMPAIGN_CLICK: {
+    case actionTypes.FETCH_CAMPAIGN: {
       const { campaignId } = action;
 
       dispatch(
@@ -25,7 +25,7 @@ export default ({ dispatch }) => next => action => {
           args: {
             campaignId,
             past: false,
-            basicItems: true,
+            fullItems: false,
           },
         })
       );

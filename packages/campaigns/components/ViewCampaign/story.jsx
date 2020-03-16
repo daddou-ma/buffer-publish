@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
-import { postLists } from '@bufferapp/publish-shared-components/QueueItems/postData';
 
 import ViewCampaign from './index';
 
@@ -30,8 +29,8 @@ const campaignDetails = {
   name: '#SaveOurSeasWeek',
   color: '#9C2BFF',
   dateRange: 'Jan 5-18, 2020',
-  scheduled: '5 Scheduled',
-  sent: '2 Sent',
+  scheduled: 5,
+  sent: 2,
   lastUpdated: 'Last updated 3 hours ago',
 };
 
@@ -40,24 +39,27 @@ storiesOf('Campaigns|ViewCampaign', module)
   .addDecorator(UpgradeModalDecorator)
   .add('Campaign view with posts', () => (
     <ViewCampaign
-      campaignPosts={postLists}
-      campaignDetails={campaignDetails}
+      currentCampaign={campaignDetails}
       translations={translations.campaigns}
       onCreatePostClick={action('create post')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
-      hasPosts
+      fetchCampaign={action('fetch campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
+      campaignId="id"
       isUsingPublishAsTeamMember
     />
   ))
   .add('Campaign view without posts', () => (
     <ViewCampaign
-      campaignDetails={campaignDetails}
+      currentCampaign={campaignDetails}
       translations={translations.campaigns}
       onCreatePostClick={action('create post')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
-      hasPosts={false}
+      fetchCampaign={action('fetch campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
+      campaignId="id"
       isUsingPublishAsTeamMember
     />
   ));
