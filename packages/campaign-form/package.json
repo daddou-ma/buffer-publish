@@ -1,0 +1,18 @@
+{
+  "name": "@bufferapp/publish-campaign-form",
+  "version": "2.0.0",
+  "description": "Campaign Form",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "ana@buffer.com",
+  "dependencies": {
+    "@bufferapp/publish-shared-components": "2.0.0"
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
