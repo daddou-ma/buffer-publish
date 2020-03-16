@@ -19,6 +19,7 @@ describe('middleware', () => {
       type: actionTypes.FETCH_CAMPAIGN,
       campaignId: 'id1',
       past: null,
+      fullItems: true,
     };
     middleware(store)(next)(action);
     expect(next).toBeCalledWith(action);

@@ -39,28 +39,38 @@ storiesOf('Campaigns|ViewCampaign', module)
   .addDecorator(UpgradeModalDecorator)
   .add('Campaign view with posts', () => (
     <ViewCampaign
-      currentCampaign={campaignDetails}
-      translations={translations.campaigns}
+      campaign={campaignDetails}
+      translations={translations.campaigns.viewCampaign}
       onCreatePostClick={action('create post')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       fetchCampaign={action('fetch campaign')}
       goToAnalyzeReport={action('go to analyze report')}
+      onComposerCreateSuccess={action('composer create success')}
+      onComposerOverlayClick={action('composer overlay')}
       campaignId="id"
       isUsingPublishAsTeamMember
+      hasCampaignsFlip
+      isLoading={false}
+      showComposer={false}
     />
   ))
   .add('Campaign view without posts', () => (
     <ViewCampaign
-      currentCampaign={campaignDetails}
-      translations={translations.campaigns}
+      campaign={{}}
+      translations={translations.campaigns.viewCampaign}
       onCreatePostClick={action('create post')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       fetchCampaign={action('fetch campaign')}
       goToAnalyzeReport={action('go to analyze report')}
+      onComposerCreateSuccess={action('composer create success')}
+      onComposerOverlayClick={action('composer overlay')}
       campaignId="id"
       isUsingPublishAsTeamMember
+      hasCampaignsFlip
+      isLoading={false}
+      showComposer={false}
     />
   ));
 

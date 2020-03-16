@@ -11,6 +11,6 @@ storiesOf('Campaigns|EmptyState', module)
   .add('default', () => (
     <EmptyState
       translations={translations.campaigns.emptyState}
-      onCreateCampaignClick={action('createCampaign')}
+      onOpenCreateCampaignClick={action('createCampaign')}
     />
   ));

@@ -20,6 +20,7 @@ const List = ({
 }) => {
   const listItems = campaigns.map((campaign, index) => (
     <ListItem
+      key={campaign.id}
       translations={translations}
       campaign={campaign}
       onViewCampaignClick={onViewCampaignClick}

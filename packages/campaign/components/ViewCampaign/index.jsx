@@ -46,7 +46,8 @@ const ViewCampaign = ({
   // State
   const [listView, toggleView] = useState('scheduled');
 
-  const campaignHasPosts = campaign?.items?.length > 0;
+  const campaignHasPosts =
+    Object.keys(campaign).length > 0 && campaign.constructor === Object;
 
   if (isLoading) {
     return <BufferLoading fullscreen />;

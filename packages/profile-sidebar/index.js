@@ -28,7 +28,7 @@ export default hot(
           ? state.appSidebar.user.features.includes('campaigns')
           : false,
         isCampaignsSelected: isCampaignsRoute({
-          path: state.router.location.pathname,
+          path: state.router?.location?.pathname,
         }),
       };
     },
