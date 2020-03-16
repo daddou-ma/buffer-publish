@@ -54,65 +54,63 @@ const ViewCampaign = ({
   }
 
   return (
-    <PageWrapper>
-      <Container>
-        <Header
-          campaignDetails={campaign}
-          hasPosts={campaignHasPosts}
-          isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
-          translations={translations}
-          onCreatePostClick={onCreatePostClick}
-          onDeleteCampaignClick={onDeleteCampaignClick}
-          onEditCampaignClick={onEditCampaignClick}
-          goToAnalyzeReport={goToAnalyzeReport}
+    <Container>
+      <Header
+        campaignDetails={campaign}
+        hasPosts={campaignHasPosts}
+        isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
+        translations={translations}
+        onCreatePostClick={onCreatePostClick}
+        onDeleteCampaignClick={onDeleteCampaignClick}
+        onEditCampaignClick={onEditCampaignClick}
+        goToAnalyzeReport={goToAnalyzeReport}
+      />
+      {showComposer && (
+        <ComposerPopover
+          onSave={onComposerCreateSuccess}
+          type="queue"
+          onComposerOverlayClick={onComposerOverlayClick}
+          editMode={false}
         />
-        {showComposer && (
-          <ComposerPopover
-            onSave={onComposerCreateSuccess}
-            type="queue"
-            onComposerOverlayClick={onComposerOverlayClick}
-            editMode={false}
+      )}
+      {campaignHasPosts ? (
+        <React.Fragment>
+          <nav role="navigation">
+            <Tabs
+              selectedTabId={listView}
+              onTabClick={tabId => toggleView(tabId)}
+            >
+              <Tab tabId="scheduled">{translations.scheduled}</Tab>
+              <Tab tabId="sent">{translations.sent}</Tab>
+            </Tabs>
+          </nav>
+          <QueueItems
+            items={campaign.items}
+            onDeleteConfirmClick={null}
+            onEditClick={null}
+            onShareNowClick={null}
+            draggable={false}
+            type="post"
+            hasFirstCommentFlip={null}
+            isBusinessAccount={null}
+            onPreviewClick={null}
+            serviceId={null}
+            userData={null}
           />
-        )}
-        {campaignHasPosts ? (
-          <React.Fragment>
-            <nav role="navigation">
-              <Tabs
-                selectedTabId={listView}
-                onTabClick={tabId => toggleView(tabId)}
-              >
-                <Tab tabId="scheduled">{translations.scheduled}</Tab>
-                <Tab tabId="sent">{translations.sent}</Tab>
-              </Tabs>
-            </nav>
-            <QueueItems
-              items={campaign.items}
-              onDeleteConfirmClick={null}
-              onEditClick={null}
-              onShareNowClick={null}
-              draggable={false}
-              type="post"
-              hasFirstCommentFlip={null}
-              isBusinessAccount={null}
-              onPreviewClick={null}
-              serviceId={null}
-              userData={null}
-            />
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <EmptyState
-              translations={translations}
-              onCreatePostClick={onCreatePostClick}
-              onDeleteCampaignClick={onDeleteCampaignClick}
-              onEditCampaignClick={onEditCampaignClick}
-            />
-            <ExamplePost />
-            <ExamplePost />
-          </React.Fragment>
-        )}
-      </Container>
-    </PageWrapper>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <EmptyState
+            translations={translations}
+            onCreatePostClick={onCreatePostClick}
+            onDeleteCampaignClick={onDeleteCampaignClick}
+            onEditCampaignClick={onEditCampaignClick}
+          />
+          <ExamplePost />
+          <ExamplePost />
+        </React.Fragment>
+      )}
+    </Container>
   );
 };
 

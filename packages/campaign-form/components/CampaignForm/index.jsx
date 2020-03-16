@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Input, Button, Link } from '@bufferapp/ui';
-import PageWrapper from '@bufferapp/publish-app-pages/components/PageWrapper';
 import { SimpleColorPicker } from '@bufferapp/publish-shared-components';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { View } from '@bufferapp/ui/Icon';
@@ -108,66 +107,62 @@ const CampaignForm = ({
   };
 
   return (
-    <PageWrapper>
-      <Wrapper>
-        <Content>
-          <Text type="h1">{translations.title}</Text>
-          <Card>
-            <Text type="h3">{translations.subtitle}</Text>
-            <Input
-              type="input"
-              value={campaignName}
-              onChange={setCampaignName}
-              required
-              name={translations.name}
-              label={translations.name}
-              placeholder={translations.placeholder}
-              aria-required="true"
-            />
-            <Text htmlFor="colorPicker" type="label">
-              {translations.color}
-            </Text>
-            <SimpleColorPicker
-              id="colorPicker"
-              colors={colors}
-              colorSelected={colorSelected}
-              onColorClick={setCampaignColor}
-            />
-          </Card>
-          <NoticeCard>
-            <View color={grayDark} />
-            <Notice>
-              <NoticeText type="p" color={grayDark}>
-                <b>{translations.notice1}</b>
-                {translations.notice2}
-                {/* FAQ link has to be replaced */}
-                <Link href="https://faq.buffer.com/" newTab>
-                  {translations.notice3}
-                </Link>
-                {translations.notice4}
-              </NoticeText>
-            </Notice>
-          </NoticeCard>
-          <Button
-            type="primary"
-            size="large"
-            label={translations.saveCampaign}
-            onClick={() =>
-              onCreateCampaignClick({ colorSelected, campaignName })
-            }
-            disabled={isSubmitButtonDisabled || isSaving}
-            fullWidth
+    <Wrapper>
+      <Content>
+        <Text type="h1">{translations.title}</Text>
+        <Card>
+          <Text type="h3">{translations.subtitle}</Text>
+          <Input
+            type="input"
+            value={campaignName}
+            onChange={setCampaignName}
+            required
+            name={translations.name}
+            label={translations.name}
+            placeholder={translations.placeholder}
+            aria-required="true"
           />
-          <Button
-            type="text"
-            size="large"
-            label={translations.cancel}
-            onClick={onCancelClick}
-            fullWidth
+          <Text htmlFor="colorPicker" type="label">
+            {translations.color}
+          </Text>
+          <SimpleColorPicker
+            id="colorPicker"
+            colors={colors}
+            colorSelected={colorSelected}
+            onColorClick={setCampaignColor}
           />
-        </Content>
-      </Wrapper>
-    </PageWrapper>
+        </Card>
+        <NoticeCard>
+          <View color={grayDark} />
+          <Notice>
+            <NoticeText type="p" color={grayDark}>
+              <b>{translations.notice1}</b>
+              {translations.notice2}
+              {/* FAQ link has to be replaced */}
+              <Link href="https://faq.buffer.com/" newTab>
+                {translations.notice3}
+              </Link>
+              {translations.notice4}
+            </NoticeText>
+          </Notice>
+        </NoticeCard>
+        <Button
+          type="primary"
+          size="large"
+          label={translations.saveCampaign}
+          onClick={() => onCreateCampaignClick({ colorSelected, campaignName })}
+          disabled={isSubmitButtonDisabled || isSaving}
+          fullWidth
+        />
+        <Button
+          type="text"
+          size="large"
+          label={translations.cancel}
+          onClick={onCancelClick}
+          fullWidth
+        />
+      </Content>
+    </Wrapper>
   );
 };
 

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import PageWrapper from '@bufferapp/publish-app-pages/components/PageWrapper';
 import styled from 'styled-components';
 import EmptyState from './EmptyState';
 import List from './List';
@@ -43,37 +42,33 @@ const ListCampaigns = ({
 
   if (campaigns.length === 0) {
     return (
-      <PageWrapper>
-        <EmptyState
-          translations={translations.emptyState}
-          onOpenCreateCampaignClick={onOpenCreateCampaignClick}
-        />
-      </PageWrapper>
+      <EmptyState
+        translations={translations.emptyState}
+        onOpenCreateCampaignClick={onOpenCreateCampaignClick}
+      />
     );
   }
 
   return (
-    <PageWrapper>
-      <Container>
-        <Header>
-          <Text type="h2">Campaigns</Text>
-          <Button
-            type="primary"
-            label="Create Campaign"
-            onClick={onOpenCreateCampaignClick}
-          />
-        </Header>
-        <List
-          campaigns={campaigns}
-          onEditCampaignClick={onEditCampaignClick}
-          onDeleteCampaignClick={onDeleteCampaignClick}
-          onViewCampaignClick={onViewCampaignClick}
-          goToAnalyzeReport={goToAnalyzeReport}
-          translations={translations.viewCampaign}
-          isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
+    <Container>
+      <Header>
+        <Text type="h2">Campaigns</Text>
+        <Button
+          type="primary"
+          label="Create Campaign"
+          onClick={onOpenCreateCampaignClick}
         />
-      </Container>
-    </PageWrapper>
+      </Header>
+      <List
+        campaigns={campaigns}
+        onEditCampaignClick={onEditCampaignClick}
+        onDeleteCampaignClick={onDeleteCampaignClick}
+        onViewCampaignClick={onViewCampaignClick}
+        goToAnalyzeReport={goToAnalyzeReport}
+        translations={translations.viewCampaign}
+        isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
+      />
+    </Container>
   );
 };
 

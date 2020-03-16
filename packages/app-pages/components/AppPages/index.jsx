@@ -14,6 +14,7 @@ import {
   campaignCreateRoute,
   campaignEditRoute,
 } from '@bufferapp/publish-routes';
+import PageWrapper from '@bufferapp/publish-app-pages/components/PageWrapper';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
@@ -48,13 +49,38 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       )}
       {!hasProfiles && <Redirect to={newConnectionRoute} />}
 
-      <Route path={campaignCreateRoute} component={CampaignForm} />
+      <Route
+        path={campaignCreateRoute}
+        render={() => (
+          <PageWrapper>
+            <CampaignForm />
+          </PageWrapper>
+        )}
+      />
       <Route
         path={campaignEditRoute}
-        render={() => <CampaignForm editMode />}
+        render={props => (
+          <PageWrapper>
+            <CampaignForm {...props} editMode />
+          </PageWrapper>
+        )}
       />
-      <Route path={campaignScheduledRoute} component={ViewCampaign} />
-      <Route path={campaignsPageRoute} component={ListCampaigns} />
+      <Route
+        path={campaignScheduledRoute}
+        render={props => (
+          <PageWrapper>
+            <ViewCampaign {...props} />
+          </PageWrapper>
+        )}
+      />
+      <Route
+        path={campaignsPageRoute}
+        render={() => (
+          <PageWrapper>
+            <ListCampaigns />
+          </PageWrapper>
+        )}
+      />
 
       <Route path={childTabRoute} component={ProfilePage} />
       <Route path={profilePageRoute} component={ProfilePage} />
