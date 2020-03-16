@@ -15,16 +15,9 @@ const InvertedReturnIcon = () => (
 const helpMenuItems = [
   {
     id: '1',
-    title: 'Support',
+    title: 'Help Center',
     onItemClick: () => {
-      window.location.assign(`https://${getURL.getBaseURL()}/support`);
-    },
-  },
-  {
-    id: '1',
-    title: 'FAQ',
-    onItemClick: () => {
-      window.location.assign('https://faq.buffer.com/');
+      window.location.assign('https://support.buffer.com/hc/en-us');
     },
   },
   {

@@ -1,11 +1,11 @@
-const rpCall = require('./');
+const rpCall = require('./rp');
 
-const get = ({ uri, session, params = {} }) => {
+const post = ({ uri, session, params = {} }) => {
   return rpCall({
     uri,
-    method: 'GET',
+    method: 'POST',
     options: {
-      qs: {
+      form: {
         access_token: session.publish.accessToken,
         ...params,
       },
@@ -13,4 +13,4 @@ const get = ({ uri, session, params = {} }) => {
   });
 };
 
-module.exports = get;
+module.exports = post;

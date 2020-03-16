@@ -6,14 +6,14 @@ import { campaignPages } from '@bufferapp/publish-routes';
 export const actionTypes = keyWrapper('CAMPAIGNS', {
   CREATE_CAMPAIGN: 0,
   DELETE_CAMPAIGN: 0,
-  EDIT_CAMPAIGN: 0,
   HANDLE_CAMPAIGN_ROUTED: 0,
-  HANDLE_CAMPAIGN_CLICK: 0,
+  FETCH_CAMPAIGN: 0,
 });
 
 export const initialState = {
+  campaigns: [],
+  currentCampaign: {},
   isSaving: false,
-  campaignDetails: {},
   campaignId: null,
   selectedPage: 'campaigns',
 };
@@ -37,14 +37,30 @@ export default (state = initialState, action) => {
         selectedPage,
       };
     }
-    case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const campaignDetails = action.result || {};
+    case `createCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { campaigns } = state;
+
+      const newCampaigns = campaigns.some(
+        campaign => campaign.id === action.result.id
+      )
+        ? campaigns.map(campaign => {
+            if (campaign.id === action.result.id) {
+              return action.result;
+            }
+            return campaign;
+          })
+        : [...campaigns, action.result];
+
       return {
         ...state,
+        campaigns: newCampaigns,
+        currentCampaign: action.result,
+        campaignId: action.result.id,
         isSaving: false,
-        campaignDetails,
       };
     }
+
     case `createCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
@@ -69,17 +85,13 @@ export const actions = {
     type: actionTypes.DELETE_CAMPAIGN,
     campaignId,
   }),
-  handleEditCampaignClick: campaignId => ({
-    type: actionTypes.EDIT_CAMPAIGN,
-    campaignId,
-  }),
   handleCampaignRouteLoaded: ({ campaignId, selectedPage }) => ({
     type: actionTypes.HANDLE_CAMPAIGN_ROUTED,
     campaignId,
     selectedPage,
   }),
-  handleCampaignClick: campaignId => ({
-    type: actionTypes.HANDLE_CAMPAIGN_CLICK,
+  fetchCampaign: campaignId => ({
+    type: actionTypes.FETCH_CAMPAIGN,
     campaignId,
   }),
 };

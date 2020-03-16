@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Text, Button } from '@bufferapp/ui';
+import { Text, Button, Link } from '@bufferapp/ui';
 import { gray } from '@bufferapp/ui/style/colors';
 
 const Container = styled.div`
@@ -26,8 +26,9 @@ const SubText = styled.div`
   }
 `;
 
-const LinkButton = styled.div`
-  margin-top: 10px;
+const LinkWithStyles = styled(Link)`
+  display: inline-block;
+  padding: 16px;
 `;
 
 const EmptyState = ({
@@ -67,9 +68,12 @@ const EmptyState = ({
         },
       ]}
     />
-    <LinkButton>
-      <Button label={translations.learnMore} type="link" />
-    </LinkButton>
+    <LinkWithStyles
+      href="https://faq.buffer.com/" // Update FAQ link when it's ready
+      newTab
+    >
+      {translations.learnMore}
+    </LinkWithStyles>
   </Container>
 );
 

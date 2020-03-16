@@ -20,7 +20,7 @@ const store = storeFake({
   },
 });
 
-storiesOf('QueueItems', module)
+storiesOf('Queue|QueueItems', module)
   .addDecorator(withA11y)
   .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('default queue', () => (

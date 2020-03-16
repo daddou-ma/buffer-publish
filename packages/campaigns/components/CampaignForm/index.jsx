@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from '@bufferapp/components';
-import { Text, Input, Button } from '@bufferapp/ui';
+import { Text, Input, Button, Link } from '@bufferapp/ui';
 import { SimpleColorPicker } from '@bufferapp/publish-shared-components';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { View } from '@bufferapp/ui/Icon';
@@ -63,12 +62,6 @@ const Notice = styled.div`
 const NoticeText = styled(Text)`
   margin: 0 0 0 8px;
   color: ${grayDark};
-`;
-
-const LinkText = styled(Text)`
-  color: ${blue};
-  margin: 0;
-  display: inline-block;
 `;
 
 /* List of colors for the color picker */
@@ -145,9 +138,9 @@ const CampaignForm = ({
             <NoticeText type="p" color={grayDark}>
               <b>{translations.notice1}</b>
               {translations.notice2}
-              {/* To be replaced by BDS Link, when we create one that's an anchor. FAQ link also has to be replaced */}
-              <Link href="https://faq.buffer.com/" unstyled newTab>
-                <LinkText type="p">{translations.notice3}</LinkText>
+              {/* FAQ link has to be replaced */}
+              <Link href="https://faq.buffer.com/" newTab>
+                {translations.notice3}
               </Link>
               {translations.notice4}
             </NoticeText>
