@@ -11,31 +11,6 @@ import { actionTypes } from './reducer';
 export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
-    case actionTypes.FETCH_CAMPAIGN: {
-      const { campaignId } = action;
-
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'getCampaign',
-          args: {
-            campaignId,
-            past: false,
-            fullItems: false,
-          },
-        })
-      );
-      break;
-    }
-
-    case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(
-        notificationActions.createNotification({
-          notificationType: 'error',
-          message: 'There was an error getting the campaign!',
-        })
-      );
-      break;
-
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
 

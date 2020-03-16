@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import { actions as campaignActions } from '@bufferapp/publish-campaign';
 import { actions } from './reducer';
 import CampaignForm from './components/CampaignForm';
 
@@ -29,8 +30,8 @@ export default connect(
         })
       );
     },
-    fetchCampaign: campaignId => {
-      dispatch(actions.fetchCampaign(campaignId));
+    fetchCampaign: ({ campaignId }) => {
+      dispatch(campaignActions.fetchCampaign({ campaignId }));
     },
   })
 )(CampaignForm);

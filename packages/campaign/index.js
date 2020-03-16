@@ -42,7 +42,7 @@ export default connect(
       }
     },
     fetchCampaign: ({ campaignId, past }) => {
-      dispatch(actions.fetchCampaign({ campaignId, past }));
+      dispatch(actions.fetchCampaign({ campaignId, past, fullItems: true }));
     },
   })
 )(ViewCampaign);

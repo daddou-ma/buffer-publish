@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { actions as campaignActions } from '@bufferapp/publish-campaign';
 import { actions } from './reducer';
 import ListCampaigns from './components/ListCampaigns';
 
@@ -27,7 +28,7 @@ export default connect(
       dispatch(push(`/campaigns/new`));
     },
     onDeleteCampaignClick: campaignId => {
-      dispatch(actions.handleDeleteCampaignClick(campaignId));
+      dispatch(campaignActions.handleDeleteCampaignClick(campaignId));
     },
     goToAnalyzeReport: () => {
       window.location.assign(`${getURL.getAnalyzeReportUrl()}`);

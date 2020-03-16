@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import reducer, { actions, initialState, actionTypes } from './reducer';
+import reducer, { initialState } from './reducer';
 
 describe('reducer', () => {
   // Tests the default case in the reducer switch statement
@@ -56,17 +56,5 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
-  // Test action creators:
-  describe('action creators', () => {
-    it('creates a FETCH_CAMPAIGN action', () => {
-      const campaignId = 'id2';
-      const expectedAction = {
-        type: actionTypes.FETCH_CAMPAIGN,
-        campaignId: 'id2',
-      };
-      expect(actions.fetchCampaign(campaignId)).toEqual(expectedAction);
-    });
   });
 });

@@ -1,3 +1,4 @@
+import { push } from 'connected-react-router';
 import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
@@ -9,7 +10,7 @@ export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
     case actionTypes.FETCH_CAMPAIGN: {
-      const { campaignId, past } = action;
+      const { campaignId, past, fullItems } = action;
 
       dispatch(
         dataFetchActions.fetch({
@@ -17,7 +18,7 @@ export default ({ dispatch }) => next => action => {
           args: {
             campaignId,
             past: past || false,
-            fullItems: true,
+            fullItems: fullItems || false,
           },
         })
       );
@@ -28,9 +29,10 @@ export default ({ dispatch }) => next => action => {
       dispatch(
         notificationActions.createNotification({
           notificationType: 'error',
-          message: 'There was an error getting the campaign!',
+          message: action.error,
         })
       );
+      dispatch(push(`/campaigns`));
       break;
 
     default:

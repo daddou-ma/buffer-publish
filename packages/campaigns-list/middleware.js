@@ -22,7 +22,7 @@ export default ({ dispatch }) => next => action => {
       dispatch(
         notificationActions.createNotification({
           notificationType: 'error',
-          message: 'There was an error getting the campaigns!',
+          message: action.error,
         })
       );
       break;

@@ -41,6 +41,7 @@ describe('middleware', () => {
     const RPC_NAME = 'getCampaign';
     const action = dataFetchActions.fetchFail({
       name: RPC_NAME,
+      error: 'There was an error getting the campaign!',
     });
     middleware(store)(next)(action);
     expect(next).toBeCalledWith(action);

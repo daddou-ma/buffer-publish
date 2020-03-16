@@ -2,7 +2,6 @@ import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('CAMPAIGNS_LIST', {
-  DELETE_CAMPAIGN: 0,
   FETCH_CAMPAIGNS: 0,
 });
 
@@ -39,10 +38,6 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  handleDeleteCampaignClick: campaignId => ({
-    type: actionTypes.DELETE_CAMPAIGN,
-    campaignId,
-  }),
   fetchCampaigns: () => ({
     type: actionTypes.FETCH_CAMPAIGNS,
   }),
