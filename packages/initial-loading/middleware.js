@@ -3,13 +3,7 @@ import {
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
 import { actions as profileActions } from '@bufferapp/publish-profile-sidebar';
-import { actions as campaignsActions } from '@bufferapp/publish-campaigns';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
-
-import {
-  getProfilePageParams,
-  getCampaignPageParams,
-} from '@bufferapp/publish-routes';
+import { getProfilePageParams } from '@bufferapp/publish-routes';
 
 const getClassicBufferURL = () => {
   if (window.location.hostname === 'publish.local.buffer.com') {
@@ -65,24 +59,6 @@ export default ({ getState, dispatch }) => next => action => {
           })
         );
       }
-
-      const campaignParams = getCampaignPageParams({
-        path,
-      });
-      if (campaignParams?.campaigns) {
-        const { hasCampaignsFlip } = getState().initialLoading;
-        if (hasCampaignsFlip) {
-          dispatch(
-            campaignsActions.handleCampaignRouteLoaded({
-              campaignId: campaignParams.campaignId,
-              selectedPage: campaignParams.selectedPage,
-            })
-          );
-        } else {
-          window.location = getURL.getPublishUrl();
-        }
-      }
-
       break;
     }
 

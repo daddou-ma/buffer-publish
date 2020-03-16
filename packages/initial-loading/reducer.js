@@ -8,7 +8,6 @@ const initialState = {
   hasNewPublish: false,
   loading: true,
   onPaydayPage: false,
-  hasCampaignsFlip: false,
 };
 
 export default (state = initialState, action) => {
@@ -21,7 +20,6 @@ export default (state = initialState, action) => {
         loading: false,
         hasPublishBeta: features.includes('new_publish_beta'),
         hasPublishBetaRedirect: features.includes('new_publish_beta_redirect'),
-        hasCampaignsFlip: features.includes('campaigns'),
         hasNewPublish,
         onPaydayPage: window.location.pathname.endsWith('plans'),
         isTargetedAwesomeUser: features.includes(

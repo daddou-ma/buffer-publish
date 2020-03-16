@@ -14,7 +14,6 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   SINGLE_PROFILE: 0,
   HANDLE_SEARCH_PROFILE_CHANGE: 0,
   PROFILE_ROUTE_LOADED: 0,
-  HANDLE_CAMPAIGNS_BTN_CLICK: 0,
 });
 
 export const initialState = {
@@ -30,7 +29,6 @@ export const initialState = {
   isSearchPopupVisible: false,
   searchText: null,
   userId: null,
-  isCampaignsSelected: false,
 };
 
 const moveProfileInArray = (arr, from, to) => {
@@ -172,7 +170,6 @@ export default (state = initialState, action) => {
         selectedProfile: action.profile,
         isLockedProfile: action.profile ? action.profile.disabled : false,
         isSearchPopupVisible: false,
-        isCampaignsSelected: false,
       };
     }
     case actionTypes.HANDLE_SEARCH_PROFILE_CHANGE:
@@ -239,11 +236,6 @@ export default (state = initialState, action) => {
         isFreeUser: action.result.is_free_user,
       };
     }
-    case actionTypes.HANDLE_CAMPAIGNS_BTN_CLICK:
-      return {
-        ...state,
-        isCampaignsSelected: true,
-      };
     default:
       return state;
   }
@@ -284,8 +276,5 @@ export const actions = {
     type: actionTypes.PROFILE_ROUTE_LOADED,
     selectedProfile,
     tabId,
-  }),
-  handleCampaignsClick: () => ({
-    type: actionTypes.HANDLE_CAMPAIGNS_BTN_CLICK,
   }),
 };
