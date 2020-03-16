@@ -50,7 +50,7 @@ const StoriesExplanation = ({ translations, onSetRemindersClick }) => (
       onClick={onSetRemindersClick}
     />
     <Link
-      href="https://faq.buffer.com/article/950-publish-how-instagram-works"
+      href="https://support.buffer.com/hc/en-us/articles/360037766294-How-Instagram-works-with-Buffer-Publish"
       unstyled
       newTab
     >

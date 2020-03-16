@@ -164,7 +164,7 @@ const PostingSchedule = ({
                   : 'Stop all posts from being sent on this Social Account? '}
                 <Link
                   newTab
-                  href="https://faq.buffer.com/article/681-how-to-pause-your-queue"
+                  href="https://support.buffer.com/hc/en-us/articles/360037966374-Pausing-your-Queue"
                 >
                   Learn more
                 </Link>
