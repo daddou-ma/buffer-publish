@@ -42,9 +42,9 @@ const retweetProfile = {
 
 const imageSrc =
   'https://cdn-images-1.medium.com/max/2000/1*1Kua7bNJfvLlTxWqgxVKfw.jpeg';
-const squareImage = 'http://lorempixel.com/400/400/cats/';
-const tallImage = 'http://lorempixel.com/400/900/cats/';
-const wideImage = 'http://lorempixel.com/900/400/cats/';
+const squareImage = 'http://via.placeholder.com/400x400';
+const tallImage = 'http://via.placeholder.com/400x900';
+const wideImage = 'http://via.placeholder.com/900x400';
 const view = 'approval';
 
 storiesOf('Cards|Drafts/VideoDraft', module)

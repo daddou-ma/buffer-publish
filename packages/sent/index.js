@@ -36,6 +36,10 @@ export default connect(
     const { profileId } = ownProps;
     const currentProfile = state.sent.byProfileId[profileId];
     if (currentProfile) {
+      const profileData = state.profileSidebar.profiles.find(
+        p => p.id === profileId
+      );
+
       return {
         header: currentProfile.header,
         loading: currentProfile.loading,
@@ -44,6 +48,8 @@ export default connect(
         page: currentProfile.page,
         postLists: formatPostLists(currentProfile.posts),
         total: currentProfile.total,
+        profileServiceType: profileData.service_type,
+        profileService: profileData.service,
         showComposer: state.sent.showComposer,
         editMode: state.sent.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
