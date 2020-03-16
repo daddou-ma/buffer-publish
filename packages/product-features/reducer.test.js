@@ -32,6 +32,9 @@ describe('reducer', () => {
     const stateAfter = {
       ...features,
       loading: false,
+      isBusinessUser: false,
+      isFreeUser: false,
+      isProUser: true,
     };
     deepFreeze(action);
     expect(reducer(undefined, action)).toEqual(stateAfter);
