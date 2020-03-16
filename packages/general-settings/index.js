@@ -12,36 +12,28 @@ export const GeneralSettingsWithFeatureLoader = WithFeatureLoader(
 );
 
 export default connect(
-  state => {
-    const { isManager } = state.profileSidebar.selectedProfile;
-    const {
-      linkShortening,
-    } = state.generalSettings;
-
-    return {
-      isInstagramProfile: state.generalSettings.isInstagramProfile,
-      isInstagramBusiness: state.generalSettings.isInstagramBusiness,
-      profileId: state.generalSettings.profileId,
-      profileService: state.generalSettings.profileService,
-      profileName: state.generalSettings.profileName,
-      avatarUrl: state.generalSettings.avatarUrl,
-      isManager,
-      isBusinessAccount: state.profileSidebar.selectedProfile.business,
-      showGACustomizationForm: state.generalSettings.showGACustomizationForm,
-      googleAnalyticsIsEnabled:
-        state.generalSettings.googleAnalyticsEnabled === 'enabled',
-      utmCampaign: state.generalSettings.utmCampaign,
-      utmSource: state.generalSettings.utmSource,
-      utmMedium: state.generalSettings.utmMedium,
-      remindersAreEnabled: state.generalSettings.remindersAreEnabled,
-      isLockedProfile: state.profileSidebar.isLockedProfile,
-      isDisconnectedProfile:
-        state.profileSidebar.selectedProfile.isDisconnected,
-      showModal: state.generalSettings.showModal,
-      loadingShuffle: state.generalSettings.loadingShuffle,
-      linkShortening,
-    };
-  },
+  state => ({
+    isInstagramProfile: state.generalSettings.isInstagramProfile,
+    isInstagramBusiness: state.generalSettings.isInstagramBusiness,
+    profileId: state.generalSettings.profileId,
+    profileService: state.generalSettings.profileService,
+    profileName: state.generalSettings.profileName,
+    avatarUrl: state.generalSettings.avatarUrl,
+    isManager: state.profileSidebar.selectedProfile.isManager,
+    isBusinessAccount: state.profileSidebar.selectedProfile.business,
+    showGACustomizationForm: state.generalSettings.showGACustomizationForm,
+    googleAnalyticsIsEnabled:
+      state.generalSettings.googleAnalyticsEnabled === 'enabled',
+    utmCampaign: state.generalSettings.utmCampaign,
+    utmSource: state.generalSettings.utmSource,
+    utmMedium: state.generalSettings.utmMedium,
+    remindersAreEnabled: state.generalSettings.remindersAreEnabled,
+    isLockedProfile: state.profileSidebar.isLockedProfile,
+    isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
+    showModal: state.generalSettings.showModal,
+    loadingShuffle: state.generalSettings.loadingShuffle,
+    linkShortening: state.generalSettings.linkShortening,
+  }),
   (dispatch, ownProps) => ({
     onDirectPostingClick: () => {
       dispatch(
