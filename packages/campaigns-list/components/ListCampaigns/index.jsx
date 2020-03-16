@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
+import { BufferLoading } from '@bufferapp/publish-shared-components';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import styled from 'styled-components';
 import EmptyState from './EmptyState';
@@ -30,6 +31,7 @@ const ListCampaigns = ({
   isUsingPublishAsTeamMember,
   hasCampaignsFlip,
   fetchCampaigns,
+  isLoading,
 }) => {
   if (!hasCampaignsFlip) {
     window.location = getURL.getPublishUrl();
@@ -38,7 +40,11 @@ const ListCampaigns = ({
   // Fetch Data
   useEffect(() => {
     fetchCampaigns();
-  }, [campaigns]);
+  }, []);
+
+  if (isLoading) {
+    return <BufferLoading fullscreen />;
+  }
 
   if (campaigns.length === 0) {
     return (
@@ -83,6 +89,7 @@ ListCampaigns.propTypes = {
   isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
   fetchCampaigns: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 ListCampaigns.defaultProps = {

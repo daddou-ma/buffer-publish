@@ -22,8 +22,6 @@ const ContentStyle = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 0.5rem;
-  margin-right: 1rem;
   min-height: 100%;
 `;
 
