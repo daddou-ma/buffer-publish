@@ -1,3 +1,5 @@
+import { push } from 'connected-react-router';
+
 const profileRouteRegex = /profile\/(\w+)\/tab\/(\w+)(?:\/(\w+))?/;
 export const getProfilePageParams = ({ path }) => {
   const match = profileRouteRegex.exec(path);
@@ -55,9 +57,28 @@ export const getPreferencePageParams = ({ path }) => {
   };
 };
 
-export const campaignsPageRoute = '/campaigns';
-export const campaignCreateRoute = '/campaigns/new';
-export const campaignEditRoute = '/campaigns/:id/edit/';
-export const campaignScheduledRoute = '/campaigns/:id/scheduled/';
-export const campaignSentRoute = '/campaigns/:id/sent/';
+export const campaignsPage = {
+  route: '/campaigns',
+  goTo: () => push('/campaigns'),
+};
+
+export const campaignCreate = {
+  route: '/campaigns/new',
+  goTo: () => push('/campaigns/new'),
+};
+
+export const campaignEdit = {
+  route: '/campaigns/:id/edit/',
+  goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/edit`),
+};
+
+export const campaignScheduled = {
+  route: '/campaigns/:id/scheduled/',
+  goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/scheduled`),
+};
+
+export const campaignSent = {
+  route: '/campaigns/:id/sent/',
+  goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/sent`),
+};
 export const isCampaignsRoute = ({ path }) => path?.includes('/campaign');

@@ -1,9 +1,9 @@
-import { push } from 'connected-react-router';
 import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { campaignsPage } from '@bufferapp/publish-routes';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch }) => next => action => {
@@ -32,7 +32,7 @@ export default ({ dispatch }) => next => action => {
           message: action.error,
         })
       );
-      dispatch(push(`/campaigns`));
+      dispatch(campaignsPage.goTo());
       break;
 
     default:

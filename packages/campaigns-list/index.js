@@ -1,7 +1,11 @@
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions as campaignActions } from '@bufferapp/publish-campaign';
+import {
+  campaignEdit,
+  campaignCreate,
+  campaignScheduled,
+} from '@bufferapp/publish-routes';
 import { actions } from './reducer';
 import ListCampaigns from './components/ListCampaigns';
 
@@ -21,11 +25,11 @@ export default connect(
   dispatch => ({
     onViewCampaignClick: campaignId => {
       if (campaignId) {
-        dispatch(push(`/campaigns/${campaignId}/scheduled`));
+        dispatch(campaignScheduled.goTo({ campaignId }));
       }
     },
     onOpenCreateCampaignClick: () => {
-      dispatch(push(`/campaigns/new`));
+      dispatch(campaignCreate.goTo());
     },
     onDeleteCampaignClick: campaignId => {
       dispatch(campaignActions.handleDeleteCampaignClick(campaignId));
@@ -35,7 +39,7 @@ export default connect(
     },
     onEditCampaignClick: campaignId => {
       if (campaignId) {
-        dispatch(push(`/campaigns/${campaignId}/edit`));
+        dispatch(campaignEdit.goTo({ campaignId }));
       }
     },
     fetchCampaigns: () => {

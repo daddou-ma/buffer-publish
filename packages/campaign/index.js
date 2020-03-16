@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
+import { campaignEdit } from '@bufferapp/publish-routes';
 import { actions } from './reducer';
 import ViewCampaign from './components/ViewCampaign';
 
@@ -38,7 +38,7 @@ export default connect(
     },
     onEditCampaignClick: campaignId => {
       if (campaignId) {
-        dispatch(push(`/campaigns/${campaignId}/edit`));
+        dispatch(campaignEdit.goTo({ campaignId }));
       }
     },
     fetchCampaign: ({ campaignId, past }) => {

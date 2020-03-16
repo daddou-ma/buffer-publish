@@ -1,9 +1,8 @@
-import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { actions as tabsActions } from '@bufferapp/publish-tabs';
-import { isCampaignsRoute } from '@bufferapp/publish-routes';
+import { isCampaignsRoute, campaignsPage } from '@bufferapp/publish-routes';
 import ProfileSidebar from './components/ProfileSidebar';
 import { actions } from './reducer';
 
@@ -77,7 +76,7 @@ export default hot(
         dispatch(actions.handleSearchProfileChange({ value }));
       },
       onCampaignsButtonClick: () => {
-        dispatch(push('/campaigns'));
+        dispatch(campaignsPage.goTo());
       },
     })
   )(ProfileSidebar)

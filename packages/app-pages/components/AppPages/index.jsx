@@ -9,10 +9,10 @@ import {
   newBusinessTrialistsRoute,
   newConnectionRoute,
   generateProfilePageRoute,
-  campaignScheduledRoute,
-  campaignsPageRoute,
-  campaignCreateRoute,
-  campaignEditRoute,
+  campaignScheduled,
+  campaignsPage,
+  campaignCreate,
+  campaignEdit,
 } from '@bufferapp/publish-routes';
 import PageWrapper from '@bufferapp/publish-app-pages/components/PageWrapper';
 import ProfilePage from '@bufferapp/profile-page';
@@ -50,7 +50,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       {!hasProfiles && <Redirect to={newConnectionRoute} />}
 
       <Route
-        path={campaignCreateRoute}
+        path={campaignCreate.route}
         render={() => (
           <PageWrapper>
             <CampaignForm />
@@ -58,7 +58,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
         )}
       />
       <Route
-        path={campaignEditRoute}
+        path={campaignEdit.route}
         render={props => (
           <PageWrapper>
             <CampaignForm {...props} editMode />
@@ -66,7 +66,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
         )}
       />
       <Route
-        path={campaignScheduledRoute}
+        path={campaignScheduled.route}
         render={props => (
           <PageWrapper>
             <ViewCampaign {...props} />
@@ -74,7 +74,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
         )}
       />
       <Route
-        path={campaignsPageRoute}
+        path={campaignsPage.route}
         render={() => (
           <PageWrapper>
             <ListCampaigns />

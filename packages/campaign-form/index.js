@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
 import { actions as campaignActions } from '@bufferapp/publish-campaign';
+import { campaignsPage } from '@bufferapp/publish-routes';
 import { actions } from './reducer';
 import CampaignForm from './components/CampaignForm';
 
@@ -20,7 +20,7 @@ export default connect(
   },
   dispatch => ({
     onCancelCreateCampaignClick: () => {
-      dispatch(push('/campaigns'));
+      dispatch(campaignsPage.goTo());
     },
     onCreateCampaignClick: ({ colorSelected, campaignName }) => {
       dispatch(
