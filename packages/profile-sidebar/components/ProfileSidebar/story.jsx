@@ -35,7 +35,7 @@ storiesOf('ProfileSidebar', module)
   ))
   .add('should display a list of profiles', () => (
     <ProfileSidebar
-      selectedProfileId={'1234'}
+      selectedProfileId="1234"
       profiles={profiles}
       translations={translations}
       onProfileClick={action('profile click')}

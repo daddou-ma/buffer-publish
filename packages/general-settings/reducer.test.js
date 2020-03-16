@@ -23,12 +23,18 @@ describe('reducer', () => {
 
   it('should handle SELECT_PROFILE action type', () => {
     const stateAfter = {
+      googleAnalyticsEnabled: undefined,
       isInstagramProfile: false,
       isInstagramBusiness: false,
       profileId: '123',
       profileService: 'twitter',
-      loadingLinkShorteners: true,
-      selectedShortener: null,
+      linkShortening: {
+        isBitlyConnected: false,
+        linkShorteners: null,
+        loading: true,
+        profileService: 'twitter',
+        selectedShortener: null,
+      },
       googleAnalyticsIsEnabled: false,
       showGACustomizationForm: false,
       remindersAreEnabled: false,
@@ -37,6 +43,7 @@ describe('reducer', () => {
       avatarUrl:
         'https://pbs.twimg.com/profile_images/901516345476603904/e2F5vE32_normal.jpg',
       loadingShuffle: false,
+      trackingSettings: undefined,
     };
     const action = {
       type: profileActionTypes.SELECT_PROFILE,

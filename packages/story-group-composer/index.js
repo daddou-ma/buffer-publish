@@ -11,7 +11,7 @@ import StoryGroupPopover from './components/StoryGroupPopover';
 
 export default connect(
   (state, ownProps) => {
-    const { emptySlotData } = state.stories;
+    const { emptySlotData = {} } = state.stories;
     const { type } = ownProps;
     const { editingPostId } = state[type];
     let options = {};
