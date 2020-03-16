@@ -34,7 +34,7 @@ export default connect(
     },
     onEditCampaignClick: campaignId => {
       if (campaignId) {
-        dispatch(push(`/campaignId/${campaignId}/edit`));
+        dispatch(push(`/campaigns/${campaignId}/edit`));
       }
     },
     fetchCampaigns: () => {

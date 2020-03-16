@@ -7,7 +7,6 @@ import {
   Tab,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
-import PageWrapper from '@bufferapp/publish-app-pages/components/PageWrapper';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import Header from './Header';

@@ -21,25 +21,25 @@ export default connect(
         : false,
     };
   },
-  (dispatch, ownProps) => ({
+  dispatch => ({
     onComposerCreateSuccess: () => {
       dispatch(actions.handleCloseComposer());
     },
     onComposerOverlayClick: () => {
       dispatch(modalsActions.showCloseComposerConfirmationModal());
     },
-    onCreatePostClick: () => {
-      dispatch(actions.handleOpenComposer(ownProps?.match?.params?.id));
+    onCreatePostClick: campaignId => {
+      dispatch(actions.handleOpenComposer(campaignId));
     },
-    onDeleteCampaignClick: () => {
-      dispatch(actions.handleDeleteCampaignClick(ownProps?.match?.params?.id));
+    onDeleteCampaignClick: campaignId => {
+      dispatch(actions.handleDeleteCampaignClick(campaignId));
     },
     goToAnalyzeReport: () => {
       window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
     },
-    onEditCampaignClick: () => {
-      if (ownProps?.match?.params?.id) {
-        dispatch(push(`/campaignId/${ownProps?.match?.params?.id}/edit`));
+    onEditCampaignClick: campaignId => {
+      if (campaignId) {
+        dispatch(push(`/campaigns/${campaignId}/edit`));
       }
     },
     fetchCampaign: ({ campaignId, past }) => {
