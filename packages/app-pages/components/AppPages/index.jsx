@@ -11,12 +11,15 @@ import {
   generateProfilePageRoute,
   campaignScheduledRoute,
   campaignsPageRoute,
+  campaignCreateRoute,
+  campaignEditRoute,
 } from '@bufferapp/publish-routes';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
+import CampaignForm from '@bufferapp/publish-campaign-form';
 import ViewCampaign from '@bufferapp/publish-campaign-view';
 import ListCampaigns from '@bufferapp/publish-campaigns-list';
 
@@ -45,6 +48,11 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       )}
       {!hasProfiles && <Redirect to={newConnectionRoute} />}
 
+      <Route path={campaignCreateRoute} component={CampaignForm} />
+      <Route
+        path={campaignEditRoute}
+        render={() => <CampaignForm editMode />}
+      />
       <Route path={campaignScheduledRoute} component={ViewCampaign} />
       <Route path={campaignsPageRoute} component={ListCampaigns} />
 
