@@ -38,7 +38,7 @@ import accountNotificationsMiddleware from '@bufferapp/publish-account-notificat
 import publishCTABannerMiddleware from '@bufferapp/publish-cta-banner/middleware';
 import thirdpartyMiddleware from '@bufferapp/publish-thirdparty/middleware';
 import campaignFormMiddleware from '@bufferapp/publish-campaign-form/middleware';
-import campaignViewMiddleware from '@bufferapp/publish-campaign-view/middleware';
+import campaignMiddleware from '@bufferapp/publish-campaign/middleware';
 import campaignsListMiddleware from '@bufferapp/publish-campaigns-list/middleware';
 import bookmarkletsMiddleware from '@bufferapp/publish-bookmarklets/middleware';
 import trialCompleteModalMiddleware from '@bufferapp/publish-trial-complete-modal/middleware';
@@ -103,7 +103,7 @@ const composedMiddlewares = history =>
       bookmarkletsMiddleware,
       thirdpartyMiddleware,
       campaignFormMiddleware,
-      campaignViewMiddleware,
+      campaignMiddleware,
       campaignsListMiddleware,
       trialCompleteModalMiddleware,
       tabsMiddleware,

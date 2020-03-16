@@ -33,7 +33,7 @@ import trialCompleteModalReducer from '@bufferapp/publish-trial-complete-modal/r
 import appShellReducer from '@bufferapp/publish-app-shell/reducer';
 import ctaBannerReducer from '@bufferapp/publish-cta-banner/reducer';
 import campaignFormReducer from '@bufferapp/publish-campaign-form/reducer';
-import campaignViewReducer from '@bufferapp/publish-campaign-view/reducer';
+import campaignReducer from '@bufferapp/publish-campaign/reducer';
 import campaignsListReducer from '@bufferapp/publish-campaigns-list/reducer';
 import igFirstCommentProTrialModalReducer from '@bufferapp/publish-ig-first-comment-pro-trial-modal/reducer';
 import trialReducer from '@bufferapp/publish-trial/reducer';
@@ -86,7 +86,7 @@ export default {
   appShell: appShellReducer,
   ctaBanner: ctaBannerReducer,
   campaignForm: campaignFormReducer,
-  campaignView: campaignViewReducer,
+  campaign: campaignReducer,
   campaignsList: campaignsListReducer,
   igFirstCommentProTrialModal: igFirstCommentProTrialModalReducer,
   trial: trialReducer,

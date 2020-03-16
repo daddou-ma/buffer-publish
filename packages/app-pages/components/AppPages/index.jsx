@@ -21,7 +21,7 @@ import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
 import CampaignForm from '@bufferapp/publish-campaign-form';
-import ViewCampaign from '@bufferapp/publish-campaign-view';
+import ViewCampaign from '@bufferapp/publish-campaign';
 import ListCampaigns from '@bufferapp/publish-campaigns-list';
 
 const AppPages = ({ profiles, isOnBusinessTrial }) => {

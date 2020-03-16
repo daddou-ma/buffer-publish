@@ -1,7 +1,7 @@
 {
-  "name": "@bufferapp/publish-campaign-view",
+  "name": "@bufferapp/publish-campaign",
   "version": "2.0.0",
-  "description": "View Campaign",
+  "description": "Single Campaign view",
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ignore-pattern coverage node_modules"
