@@ -11,7 +11,7 @@ const BitlyNotification = ({ marginAfter, onConnectBitlyURLClick }) => {
   const notificationMessage = (
     <Notification
       type="info"
-      title="Known Issue With Reported Clicks"
+      title="Issue Reporting Clicks"
       body="We’re aware of an issue regarding reported clicks from shortened links and are actively working to resolve the situation. In the meantime, connecting your own bit.ly account will fix your reporting. Our sincere apologies for this inconvenience!"
       button={{
         type: 'primary',

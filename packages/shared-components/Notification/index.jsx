@@ -16,7 +16,7 @@ const IconContainer = styled.div`
   display: flex;
   align-items: flex-start;
   padding-right: 0.5rem;
-  padding-top: 0.8rem;
+  padding-top: 0.3rem;
 `;
 
 const ContentContainer = styled.div`
@@ -28,11 +28,11 @@ const ContentContainer = styled.div`
 `;
 
 const TitleText = styled(Text)`
-  margin: 0.5rem 0;
+  margin: 0;
 `;
 
 const BodyText = styled(Text)`
-  margin: 0.7rem 0;
+  margin: 0.7rem 0 1rem 0;
 `;
 
 const NotificationButton = ({ button }) => {
