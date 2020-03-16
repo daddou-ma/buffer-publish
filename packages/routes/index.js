@@ -81,4 +81,4 @@ export const campaignSent = {
   route: '/campaigns/:id/sent/',
   goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/sent`),
 };
-export const isCampaignsRoute = ({ path }) => path?.includes('/campaign');
+export const isCampaignsRoute = ({ path }) => path === campaignsPage.route;

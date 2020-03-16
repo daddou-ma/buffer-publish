@@ -57,7 +57,7 @@ storiesOf('Campaigns|ViewCampaign', module)
   ))
   .add('Campaign view without posts', () => (
     <ViewCampaign
-      campaign={{}}
+      campaign={campaignDetails}
       translations={translations.campaigns.viewCampaign}
       onCreatePostClick={action('create post')}
       onDeleteCampaignClick={action('delete campaign')}
