@@ -60,15 +60,4 @@ export const campaignCreateRoute = '/campaigns/new';
 export const campaignEditRoute = '/campaigns/:id/edit/';
 export const campaignScheduledRoute = '/campaigns/:id/scheduled/';
 export const campaignSentRoute = '/campaigns/:id/sent/';
-export const isCampaignsRoute = ({ path }) => {
-  if (
-    path === campaignsPageRoute ||
-    path === campaignCreateRoute ||
-    path === campaignEditRoute ||
-    path === campaignScheduledRoute ||
-    path === campaignSentRoute
-  ) {
-    return true;
-  }
-  return false;
-};
+export const isCampaignsRoute = ({ path }) => path?.includes('/campaign');
