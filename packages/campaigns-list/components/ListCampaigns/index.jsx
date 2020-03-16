@@ -16,7 +16,6 @@ const Header = styled.header`
 `;
 
 const Container = styled.div`
-  max-width: 864px;
   margin: 13px;
 `;
 

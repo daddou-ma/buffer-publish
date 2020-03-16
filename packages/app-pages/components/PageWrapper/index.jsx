@@ -19,26 +19,27 @@ const ProfileSidebarStyle = styled.div`
 `;
 
 const ContentStyle = styled.div`
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  flex-grow: 1;
+  max-width: ${props => (props.fullSize ? '100%' : '864px')};
 `;
 
-const PageWrapper = ({ children }) => {
+const PageWrapper = ({ children, fullSize }) => {
   return (
     <Wrapper>
       <ProfileSidebarStyle>
         <ProfileSidebar />
       </ProfileSidebarStyle>
 
-      <ContentStyle>{children}</ContentStyle>
+      <ContentStyle fullSize={fullSize}>{children}</ContentStyle>
     </Wrapper>
   );
 };
 
 PageWrapper.propTypes = {
   children: PropTypes.object.isRequired, // eslint-disable-line
+  fullSize: PropTypes.bool,
 };
 
 export default PageWrapper;

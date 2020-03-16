@@ -52,7 +52,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       <Route
         path={campaignCreate.route}
         render={() => (
-          <PageWrapper>
+          <PageWrapper fullSize>
             <CampaignForm />
           </PageWrapper>
         )}
@@ -60,7 +60,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       <Route
         path={campaignEdit.route}
         render={props => (
-          <PageWrapper>
+          <PageWrapper fullSize>
             <CampaignForm {...props} editMode />
           </PageWrapper>
         )}
