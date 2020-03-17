@@ -269,8 +269,9 @@ export const actions = {
   hideDeleteCampaignModal: () => ({
     type: actionTypes.HIDE_DELETE_CAMPAIGN_MODAL,
   }),
-  showDeleteCampaignModal: () => ({
+  showDeleteCampaignModal: campaign => ({
     type: actionTypes.SHOW_DELETE_CAMPAIGN_MODAL,
+    campaign,
   }),
   isShowingModals: ({ modals }) => {
     return (

@@ -29,7 +29,6 @@ const List = ({
       goToAnalyzeReport={goToAnalyzeReport}
       isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
       isEvenItem={index % 2 === 0}
-      key={campaign.id}
     />
   ));
   return <StyledList>{listItems}</StyledList>;
