@@ -35,6 +35,7 @@ import ctaBannerReducer from '@bufferapp/publish-cta-banner/reducer';
 import campaignFormReducer from '@bufferapp/publish-campaign-form/reducer';
 import campaignReducer from '@bufferapp/publish-campaign/reducer';
 import campaignsListReducer from '@bufferapp/publish-campaigns-list/reducer';
+import deleteCampaignModalReducer from '@bufferapp/publish-delete-campaign-modal/reducer';
 import igFirstCommentProTrialModalReducer from '@bufferapp/publish-ig-first-comment-pro-trial-modal/reducer';
 import trialReducer from '@bufferapp/publish-trial/reducer';
 import hashtagGroupsReducer from '@bufferapp/publish-hashtag-group-manager/reducer';
@@ -88,6 +89,7 @@ export default {
   campaignForm: campaignFormReducer,
   campaign: campaignReducer,
   campaignsList: campaignsListReducer,
+  deleteCampaignModal: deleteCampaignModalReducer,
   igFirstCommentProTrialModal: igFirstCommentProTrialModalReducer,
   trial: trialReducer,
   onboarding: onboardingReducer,

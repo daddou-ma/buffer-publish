@@ -10,7 +10,6 @@ import {
   grayLight,
   grayLighter,
   grayDark,
-  blue,
   white,
   purple,
   pink,

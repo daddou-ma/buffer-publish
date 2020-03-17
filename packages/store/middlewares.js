@@ -40,6 +40,7 @@ import thirdpartyMiddleware from '@bufferapp/publish-thirdparty/middleware';
 import campaignFormMiddleware from '@bufferapp/publish-campaign-form/middleware';
 import campaignMiddleware from '@bufferapp/publish-campaign/middleware';
 import campaignsListMiddleware from '@bufferapp/publish-campaigns-list/middleware';
+import deleteCampaignModalMiddleware from '@bufferapp/publish-delete-campaign-modal/middleware';
 import bookmarkletsMiddleware from '@bufferapp/publish-bookmarklets/middleware';
 import trialCompleteModalMiddleware from '@bufferapp/publish-trial-complete-modal/middleware';
 import tabsMiddleware from '@bufferapp/publish-tabs/middleware';
@@ -105,6 +106,7 @@ const composedMiddlewares = history =>
       campaignFormMiddleware,
       campaignMiddleware,
       campaignsListMiddleware,
+      deleteCampaignModalMiddleware,
       trialCompleteModalMiddleware,
       tabsMiddleware,
       appShellMiddleware,
