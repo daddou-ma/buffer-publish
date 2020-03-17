@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
+import CampaignTag from '@bufferapp/publish-composer/composer/components/CampaignTag';
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RenderPostMetaBar from './RenderPostMetaBar';
 import PostErrorBanner from '../PostErrorBanner';
 import RetweetPanel from '../RetweetPanel';
 import Card from '../Card';
-import CampaignTag from '../../campaigns/components/CampaignTag';
 
 const PostContainer = styled.div`
   display: flex;

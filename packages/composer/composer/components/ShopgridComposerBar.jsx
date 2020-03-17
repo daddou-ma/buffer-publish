@@ -12,7 +12,7 @@ class ShopgridComposerBar extends React.Component {
     this.state = {
       shopgridLink: props.shopgridLink || '',
       helpUrl:
-        'https://faq.buffer.com/article/1164-publish-instagram-shop-grid',
+        'https://support.buffer.com/hc/en-us/articles/360038654273-Instagram-Shop-Grid',
     };
 
     this.onChange = this.onChange.bind(this);

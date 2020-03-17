@@ -24,7 +24,6 @@ describe('reducer', () => {
       hasTwitter: true,
       isSearchPopupVisible: false,
       searchText: null,
-      isCampaignsSelected: false,
     };
     const action = {
       type: 'INIT',

@@ -6,7 +6,6 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
-import { actions as campaignsActions } from '@bufferapp/publish-campaigns/reducer';
 import {
   campaignPages,
   generateCampaignPageRoute,
@@ -247,6 +246,21 @@ export default ({ dispatch, getState }) => next => action => {
           },
         })
       );
+      break;
+    }
+
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const hasCampaignsFeature =
+        action.result?.features?.includes('campaigns') ?? false;
+
+      if (hasCampaignsFeature) {
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'getCampaignsList',
+            args: {},
+          })
+        );
+      }
       break;
     }
 

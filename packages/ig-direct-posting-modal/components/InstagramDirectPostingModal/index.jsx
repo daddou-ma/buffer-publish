@@ -43,7 +43,7 @@ const InstagramDirectPostingModal = ({
                 {translations.instructions}
                 <Link
                   newTab
-                  href="https://faq.buffer.com/article/959-publish-instagram-set-up"
+                  href="https://support.buffer.com/hc/en-us/articles/360038534274-Connecting-your-Instagram-account-and-enabling-up-Direct-Scheduling"
                 >
                   {translations.learnMore}
                 </Link>

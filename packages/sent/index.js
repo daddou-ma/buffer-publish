@@ -1,5 +1,6 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
+import { actions as settingsAction } from '@bufferapp/publish-general-settings';
 // load the presentational component
 import { actions } from './reducer';
 import SentPosts from './components/SentPosts';
@@ -66,6 +67,9 @@ export default connect(
         hasCampaignsFeature: state.appSidebar.user.features
           ? state.appSidebar.user.features.includes('campaigns')
           : false,
+        linkShortening: state.generalSettings.linkShortening,
+        hasBitlyPosts: currentProfile.hasBitlyPosts,
+        shouldDisplayBitly: !state?.productFeatures?.isFreeUser,
       };
     }
     return {};
@@ -124,6 +128,13 @@ export default connect(
     fetchSentPosts: () => {
       dispatch(
         actions.fetchSentPosts({
+          profileId: ownProps.profileId,
+        })
+      );
+    },
+    onConnectBitlyURLClick: () => {
+      dispatch(
+        settingsAction.handleConnectBitlyURLClick({
           profileId: ownProps.profileId,
         })
       );

@@ -29,7 +29,7 @@ const QueuePausedBar = ({ handleClickUnpause, isManager }) => (
               in your queue.&nbsp;
               <Link
                 newTab
-                href="https://faq.buffer.com/article/681-how-to-pause-your-queue"
+                href="https://support.buffer.com/hc/en-us/articles/360037966374-Pausing-your-Queue"
               >
                 Learn more
               </Link>
@@ -40,7 +40,7 @@ const QueuePausedBar = ({ handleClickUnpause, isManager }) => (
               Unfortunately you don&apos;t have permission to unpause it.&nbsp;
               <Link
                 newTab
-                href="https://faq.buffer.com/article/681-how-to-pause-your-queue"
+                href="https://support.buffer.com/hc/en-us/articles/360037966374-Pausing-your-Queue"
               >
                 Learn more
               </Link>

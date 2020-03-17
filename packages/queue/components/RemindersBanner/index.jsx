@@ -48,7 +48,7 @@ const RemindersBanner = ({ onSetRemindersClick }) => (
         queued posts. Set up Reminders to make sure all your content gets
         published on time.&nbsp;
         <Link
-          href="https://faq.buffer.com/article/950-publish-how-instagram-works"
+          href="https://support.buffer.com/hc/en-us/articles/360037766294-How-Instagram-works-with-Buffer-Publish"
           newTab
           unstyled
         >
