@@ -64,6 +64,8 @@ const renderPost = ({
   hasCampaignsFeature,
   userData,
   onPreviewClick,
+  profileService,
+  profileServiceType,
 }) => {
   const campaignId = post.campaignDetails?.id ?? null;
   const postWithEventHandlers = {
@@ -86,6 +88,8 @@ const renderPost = ({
     hasCampaignsFeature,
     userData,
     onPreviewClick,
+    profileService,
+    profileServiceType,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -128,6 +132,8 @@ const PostList = ({
   onPreviewClick,
   showAnalyzeBannerAfterFirstPost,
   isAnalyzeCustomer,
+  profileService,
+  profileServiceType,
 }) => (
   <React.Fragment>
     <Header listHeader={listHeader} isFirstItem={index === 0} />
@@ -164,6 +170,8 @@ const PostList = ({
               hasCampaignsFeature,
               userData,
               onPreviewClick,
+              profileService,
+              profileServiceType,
             })}
             {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder && (
               <ShareAgainWrapper>

@@ -106,6 +106,8 @@ const SentPosts = ({
   linkShortening,
   hasBitlyPosts,
   onConnectBitlyURLClick,
+  profileServiceType,
+  profileService,
 }) => {
   useEffect(() => {
     fetchSentPosts();
@@ -184,6 +186,8 @@ const SentPosts = ({
               hasCampaignsFeature={hasCampaignsFeature}
               showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
               isAnalyzeCustomer={isAnalyzeCustomer}
+              profileServiceType={profileServiceType}
+              profileService={profileService}
             />
           </div>
           {moreToLoad && (

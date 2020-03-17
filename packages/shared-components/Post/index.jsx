@@ -48,6 +48,7 @@ const Post = ({
   isOver,
   statistics,
   profileService,
+  profileServiceType,
   serviceLink,
   isSent,
   isManager,
@@ -168,6 +169,7 @@ const Post = ({
                 }
                 statistics={statistics}
                 profileService={profileService}
+                profileServiceType={profileServiceType}
               />
             )}
         </Card>
