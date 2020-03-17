@@ -27,10 +27,6 @@ export default ({ dispatch }) => next => action => {
       break;
     }
 
-    case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(campaignsPage.goTo());
-      break;
-
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
 
