@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -75,6 +75,7 @@ const QueuedPosts = ({
   onSetRemindersClick,
   onCampaignTagClick,
   hasCampaignsFeature,
+  fetchCampaigns,
 }) => {
   if (loading) {
     return (
@@ -94,6 +95,12 @@ const QueuedPosts = ({
 
   if (isLockedProfile) {
     return <LockedProfileNotification />;
+  }
+
+  if (hasCampaignsFeature) {
+    useEffect(() => {
+      fetchCampaigns();
+    }, []);
   }
 
   return (
@@ -227,6 +234,8 @@ QueuedPosts.propTypes = {
   hasFirstCommentFlip: PropTypes.bool,
   onCalendarClick: PropTypes.func.isRequired,
   isBusinessAccount: PropTypes.bool,
+  hasCampaignsFeature: PropTypes.bool.isRequired,
+  fetchCampaigns: PropTypes.func.isRequired,
 };
 
 QueuedPosts.defaultProps = {

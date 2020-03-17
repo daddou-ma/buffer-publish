@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { PostLists, EmptyState } from '@bufferapp/publish-shared-components';
@@ -100,6 +100,8 @@ const PastRemindersPosts = ({
   showStoriesComposer,
   isDisconnectedProfile,
   onClosePreviewClick,
+  hasCampaignsFeature,
+  fetchCampaigns,
 }) => {
   if (loading) {
     return (
@@ -118,6 +120,12 @@ const PastRemindersPosts = ({
         heroImgSize={{ width: '270px', height: '150px' }}
       />
     );
+  }
+
+  if (hasCampaignsFeature) {
+    useEffect(() => {
+      fetchCampaigns();
+    }, []);
   }
 
   return (
@@ -190,6 +198,8 @@ PastRemindersPosts.propTypes = {
   userData: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string),
   }),
+  hasCampaignsFeature: PropTypes.bool.isRequired,
+  fetchCampaigns: PropTypes.func.isRequired,
 };
 
 PastRemindersPosts.defaultProps = {

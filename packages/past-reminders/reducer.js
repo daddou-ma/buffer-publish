@@ -255,6 +255,10 @@ export default (state = initialState, action) => {
         ...state,
         showStoryPreview: false,
       };
+    case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+      };
     default:
       return state;
   }
