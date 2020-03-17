@@ -39,13 +39,5 @@ describe('reducer', () => {
       };
       expect(actions.deleteCampaign()).toEqual(expectedAction);
     });
-    it('should create a OPEN_MODAL action', () => {
-      const campaign = { color: 'blue', id: '123', name: 'Awareness Day' };
-      const expectedAction = {
-        type: actionTypes.OPEN_MODAL,
-        campaign,
-      };
-      expect(actions.handleDeleteClick(campaign)).toEqual(expectedAction);
-    });
   });
 });

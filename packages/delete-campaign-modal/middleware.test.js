@@ -1,7 +1,11 @@
-import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import {
+  actionTypes as dataFetchActionTypes,
+  actions as dataFetchActions,
+} from '@bufferapp/async-data-fetch';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as modalActions } from '@bufferapp/publish-modals/reducer';
+import { actionTypes } from './reducer';
 import middleware from './middleware';
 
 jest.mock('@bufferapp/publish-analytics-middleware');
@@ -67,5 +71,19 @@ describe('middleware', () => {
       notificationType: 'error',
       message: action.error,
     });
+  });
+  it('fetches deleteCampaign when DELETE_CAMPAIGN', () => {
+    const action = {
+      type: actionTypes.DELETE_CAMPAIGN,
+    };
+    const campaignId = store.getState().deleteCampaignModal.campaign.id;
+    middleware(store)(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'deleteCampaign',
+        args: { campaignId },
+      })
+    );
   });
 });
