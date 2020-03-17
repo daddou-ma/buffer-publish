@@ -179,7 +179,11 @@ class App extends React.Component {
           y: PropTypes.number.isRequired,
         })
       ),
-      campaignId: PropTypes.string,
+      campaignDetails: PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        color: PropTypes.string,
+      }),
       locationId: PropTypes.string,
       locationName: PropTypes.string,
       commentEnabled: PropTypes.bool,

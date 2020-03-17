@@ -267,10 +267,10 @@ const loadInitialMetaData = metaData => {
     });
   }
 
-  if (metaData.campaignId) {
+  if (metaData.campaignDetails) {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_CAMPAIGN_ID,
-      campaignId: metaData.campaignId,
+      campaignId: metaData.campaignDetails.id,
     });
   }
 

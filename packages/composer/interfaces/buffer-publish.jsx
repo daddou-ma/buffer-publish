@@ -32,6 +32,7 @@ const ComposerWrapper = ({
   emptySlotMode,
   selectedProfileId,
   tabId,
+  campaigns,
 }) => {
   const getSaveButtons = () => {
     if (editMode) return ['SAVE'];
@@ -102,6 +103,8 @@ const ComposerWrapper = ({
     tabId,
     emptySlotMode,
     draftMode,
+    campaignDetails: post?.campaignDetails ?? undefined,
+    campaigns: campaigns ?? undefined,
   };
   const formattedData = DataImportUtils.formatInputData({
     env: metaData.application,
