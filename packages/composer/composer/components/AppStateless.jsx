@@ -234,10 +234,7 @@ class AppStateless extends React.Component {
           tabIndex={0}
         >
           {shouldDisplayCampaignHeader && (
-            <CampaignHeader
-              campaigns={campaigns}
-              campaignId={campaignId}
-            />
+            <CampaignHeader campaigns={campaigns} campaignId={campaignId} />
           )}
 
           <ExtensionComponents

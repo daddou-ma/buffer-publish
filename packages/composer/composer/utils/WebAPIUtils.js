@@ -810,7 +810,7 @@ function getFormattedAPIData(serviceName, unformattedData) {
 
     const { campaignId } = serviceDraft;
     if (campaignId) {
-      conditionalFields.campaignId = campaignId;
+      conditionalFields.campaign_id = campaignId;
     }
 
     if (hasEnabledRetweetAttachment) {
