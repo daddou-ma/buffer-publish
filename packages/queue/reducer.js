@@ -442,11 +442,6 @@ export default (state = initialState, action) => {
         ...state,
       };
 
-    case `getCampaignsList_${dataFetchActionTypes.FETCH_FAIL}`:
-      return {
-        ...state,
-      };
-
     default:
       return state;
   }
