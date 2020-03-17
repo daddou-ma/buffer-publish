@@ -42,7 +42,10 @@ const PageWithSidebar = () => {
       <ContentStyle>
         <Switch>
           <Route path={campaignCreate.route} component={CampaignForm} />
-          <Route path={campaignEdit.route} component={CampaignForm} editMode />
+          <Route
+            path={campaignEdit.route}
+            render={props => <CampaignForm {...props} editMode />}
+          />
           <Route path={campaignScheduled.route} component={ViewCampaign} />
           <Route path={campaignsPage.route} component={ListCampaigns} />
         </Switch>
