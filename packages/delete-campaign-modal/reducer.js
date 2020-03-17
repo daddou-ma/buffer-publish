@@ -1,11 +1,9 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actionTypes as modalActionTypes } from '@bufferapp/publish-modals';
 
 export const actionTypes = keyWrapper('DELETE_CAMPAIGN_MODAL', {
   DELETE_CAMPAIGN: 0,
-  SHOW_DELETE_CAMPAIGN_MODAL: 0,
-  HIDE_DELETE_CAMPAIGN_MODAL: 0,
-  OPEN_MODAL: 0,
 });
 
 export const initialState = {
@@ -26,7 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: true,
       };
-    case actionTypes.OPEN_MODAL:
+    case modalActionTypes.SHOW_DELETE_CAMPAIGN_MODAL:
       return {
         ...state,
         campaign: action.campaign,
@@ -39,9 +37,5 @@ export default (state = initialState, action) => {
 export const actions = {
   deleteCampaign: () => ({
     type: actionTypes.DELETE_CAMPAIGN,
-  }),
-  handleDeleteClick: campaign => ({
-    type: actionTypes.OPEN_MODAL,
-    campaign,
   }),
 };

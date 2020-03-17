@@ -27,7 +27,7 @@ describe('middleware', () => {
       },
     }),
   };
-  it('should handle deleteCampaign_FETCH_SUCCESS', () => {
+  it('should hide modal, create success notification and track event if fetch succeeds', () => {
     const action = {
       type: `deleteCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`,
       result: { id: '1234' },
@@ -53,7 +53,7 @@ describe('middleware', () => {
       message: 'Your campaign has been deleted!',
     });
   });
-  it('should handle deleteCampaign_FETCH_FAIL', () => {
+  it('should hide modal and display error if fetch fails', () => {
     const action = {
       type: `deleteCampaign_${dataFetchActionTypes.FETCH_FAIL}`,
       error: 'Something went wrong',
