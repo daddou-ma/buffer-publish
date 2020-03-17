@@ -5,7 +5,6 @@ import {
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as modalActions } from '@bufferapp/publish-modals/reducer';
-import { campaignsPage } from '@bufferapp/publish-routes';
 import { actionTypes } from './reducer';
 import middleware from './middleware';
 
@@ -28,6 +27,11 @@ describe('middleware', () => {
       profileSidebar: {
         selectedProfile: {
           organizationId: '123',
+        },
+      },
+      router: {
+        location: {
+          pathname: '/campaigns',
         },
       },
     }),
