@@ -97,11 +97,11 @@ const QueuedPosts = ({
     return <LockedProfileNotification />;
   }
 
-  if (hasCampaignsFeature) {
-    useEffect(() => {
+  useEffect(() => {
+    if (hasCampaignsFeature) {
       fetchCampaigns();
-    }, []);
-  }
+    }
+  }, []);
 
   return (
     <ErrorBoundary>

@@ -122,11 +122,11 @@ const PastRemindersPosts = ({
     );
   }
 
-  if (hasCampaignsFeature) {
-    useEffect(() => {
+  useEffect(() => {
+    if (hasCampaignsFeature) {
       fetchCampaigns();
-    }, []);
-  }
+    }
+  }, []);
 
   return (
     <ErrorBoundary>
