@@ -16,7 +16,7 @@ const SetupApp = ({ transition, qrCode }) => (
         (If you have not installed an authenticator app yet,{' '}
         <Link
           newTab
-          href="https://faq.buffer.com/article/443-what-is-2-step-login"
+          href="https://support.buffer.com/hc/en-us/articles/360038349434-Enabling-two-factor-authentication"
         >
           read here for more information.
         </Link>

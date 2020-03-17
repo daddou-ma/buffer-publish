@@ -1,28 +1,15 @@
-const { method, createError } = require('@bufferapp/buffer-rpc');
-const rp = require('request-promise');
+const { method } = require('@bufferapp/buffer-rpc');
 
 module.exports = method(
   'addUserTag',
   'add tag to user',
-  ({ tag, name }, { session }) =>
-    rp({
-      uri: `${process.env.API_ADDR}/1/user/add_tag.json`,
-      method: 'POST',
-      strictSSL: !(
-        process.env.NODE_ENV === 'development' ||
-        process.env.NODE_ENV === 'test'
-      ),
-      qs: {
-        access_token: session.publish.accessToken,
+  ({ tag, name }, { session }, res, { PublishAPI }) =>
+    PublishAPI.post({
+      uri: `1/user/add_tag.json`,
+      session,
+      params: {
         tag,
         name,
       },
-    })
-      .then(result => JSON.parse(result))
-      .catch(err => {
-        if (err.error) {
-          const error = JSON.parse(err.error);
-          throw createError({ message: error.message });
-        }
-      })
+    }).catch(PublishAPI.errorHandler)
 );

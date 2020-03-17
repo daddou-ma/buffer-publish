@@ -40,31 +40,56 @@ export default (state = initialState, action) => {
         profileService: action.profile.service,
         avatarUrl: action.profile.avatarUrl,
         profileName: action.profile.serviceUsername,
-        loadingLinkShorteners: true,
         loadingShuffle: false,
-        selectedShortener: null,
+        linkShortening: {
+          selectedShortener: null,
+          profileService: action.profile.service,
+          linkShorteners: null,
+          isBitlyConnected: false,
+          loading: true,
+        },
         trackingSettings: action.trackingSettings,
         remindersAreEnabled: !action.profile.directPostingEnabled,
       };
     case `changeLinkShortener_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
-        selectedShortener: action.args.domain,
+        linkShortening: {
+          ...(state.linkShortening || {}),
+          selectedShortener: action.args.domain,
+        },
       };
     case `getLinkShortener_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
-        linkShorteners: null,
-        loadingLinkShorteners: true,
+        linkShortening: {
+          selectedShortener: null,
+          profileService: state.profileService,
+          linkShorteners: null,
+          isBitlyConnected: false,
+          loading: true,
+        },
       };
     case `getLinkShortener_${dataFetchActionTypes.FETCH_SUCCESS}`:
-    case `changeLinkShortener_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `changeLinkShortener_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { linkShorteners } = action.result;
+      const hasShortenersWithLogins =
+        (linkShorteners && linkShorteners.filter(shortener => shortener.login)) ||
+        [];
+      const isBitlyConnected = hasShortenersWithLogins.length > 0;
+
       return {
         ...state,
-        linkShorteners: action.result.linkShorteners,
-        loadingLinkShorteners: false,
-        selectedShortener: null,
+        isBitlyConnected,
+        linkShortening: {
+          loading: false,
+          selectedShortener: null,
+          profileService: state.profileService,
+          linkShorteners,
+          isBitlyConnected,
+        },
       };
+    }
     case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
       return {
         ...state,

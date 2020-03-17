@@ -168,7 +168,7 @@ class LinkAttachment extends React.Component {
             may look different once published on Facebook. You can read more
             about{' '}
             <A
-              href="https://faq.buffer.com/article/255-can-i-customize-images-for-my-link-attachments"
+              href="https://support.buffer.com/hc/en-us/articles/360038455554-Types-of-media-attachments-you-can-include-in-posts"
               target="_blank"
             >
               Facebook's current link editing policies here

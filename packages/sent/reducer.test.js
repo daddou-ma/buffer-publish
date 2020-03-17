@@ -4,7 +4,6 @@ import reducer, {
   profileInitialState,
   actionTypes,
 } from './reducer';
-import { header } from './components/SentPosts/postData';
 
 const profileId = '123456';
 
@@ -22,7 +21,6 @@ describe('reducer', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
-          header,
           loading: true,
           loadingMore: false,
           moreToLoad: false,
@@ -48,7 +46,7 @@ describe('reducer', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
-          header,
+          hasBitlyPosts: false,
           loading: false,
           loadingMore: false,
           moreToLoad: false,
@@ -77,7 +75,6 @@ describe('reducer', () => {
     const stateAfter = {
       byProfileId: {
         [profileId]: {
-          header,
           loading: false,
           loadingMore: false,
           moreToLoad: false,

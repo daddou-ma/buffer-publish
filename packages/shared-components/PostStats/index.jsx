@@ -76,7 +76,7 @@ const PostStats = ({ statistics, profileService, showTwitterMentions }) => {
           {isLinkedinClicks && (
             <Link
               href={
-                'https://faq.buffer.com/article/181-why-does-linkedin-sometimes-show-a-different-number-for-clicks'
+                'https://support.buffer.com/hc/en-us/articles/360037901594-Insights-on-shared-posts#h_9575ebf2-62d6-4f13-9f82-d4ccaa6f880d'
               }
               unstyled
             >
