@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import CampaignTag from '@bufferapp/publish-composer/composer/components/CampaignTag';
+import PostTag from '../PostTag';
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RenderPostMetaBar from './RenderPostMetaBar';
@@ -118,11 +118,11 @@ const Post = ({
           </PostContent>
 
           {hasCampaignsFeature && campaignDetails && (
-            <CampaignTag
-              campaignName={campaignDetails.name}
-              campaignColor={campaignDetails.color}
+            <PostTag
+              name={campaignDetails.name}
+              color={campaignDetails.color}
               dragging={dragging}
-              onCampaignTagClick={onCampaignTagClick}
+              onPostTagClick={onCampaignTagClick}
             />
           )}
 

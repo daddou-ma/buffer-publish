@@ -241,6 +241,14 @@ export default connect(
         openCalendarWindow(ownProps.profileId, weekOrMonth);
       }
     },
+    fetchCampaigns: () => {
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getCampaignsList',
+          args: {},
+        })
+      );
+    },
   })
 )(QueuedPosts);
 
