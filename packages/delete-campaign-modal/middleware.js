@@ -41,7 +41,7 @@ export default ({ dispatch, getState }) => next => action => {
         organizationId,
       };
       dispatch(analyticsActions.trackEvent('Campaign Deleted', metadata));
-      if (isCampaignsRoute({ path: state.router.location.pathname })) {
+      if (!isCampaignsRoute({ path: state.router.location.pathname })) {
         dispatch(campaignsPage.goTo());
       }
       break;
