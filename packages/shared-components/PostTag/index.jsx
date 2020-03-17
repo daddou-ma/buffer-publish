@@ -5,7 +5,7 @@ import { Button } from '@bufferapp/ui';
 
 import { getColorContrast } from '@bufferapp/publish-shared-components/ColorPicker/utils/HexValidations';
 
-const CampaignButton = styled(Button)`
+const TagButton = styled(Button)`
   margin-left: 16px;
   margin-bottom: 16px;
   padding: 8px;
@@ -21,7 +21,7 @@ const CampaignButton = styled(Button)`
 
 const PostTag = ({ name, color, dragging, onPostTagClick }) => (
   <div>
-    <CampaignButton
+    <TagButton
       type="primary"
       onClick={onPostTagClick}
       label={name}
