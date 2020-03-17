@@ -249,6 +249,21 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
 
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const hasCampaignsFeature =
+        action.result?.features?.includes('campaigns') ?? false;
+
+      if (hasCampaignsFeature) {
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'getCampaignsList',
+            args: {},
+          })
+        );
+      }
+      break;
+    }
+
     default:
       break;
   }
