@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ErrorBanner } from '@bufferapp/publish-shared-components';
 import { Text } from '@bufferapp/ui';
+import { fontWeightBold } from '@bufferapp/ui/style/fonts';
 
 const TextWithStyles = styled(Text)`
   margin: 0;
@@ -10,7 +11,7 @@ const TextWithStyles = styled(Text)`
 
 const ExtraMessageWithStyles = styled(Text)`
   margin: 0;
-  font-weight: bold;
+  font-weight: ${fontWeightBold};
 `;
 
 const ProfilesDisconnectedBanner = ({
