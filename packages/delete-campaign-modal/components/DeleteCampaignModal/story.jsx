@@ -6,6 +6,12 @@ import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import DeleteCampaignModal from './index';
 
+const campaign = {
+  name: 'Awareness Week',
+  color: 'blue',
+  id: '1',
+};
+
 storiesOf('Campaigns|DeleteCampaignModal', module)
   .addDecorator(withA11y)
   .add('default', () => (
@@ -13,6 +19,6 @@ storiesOf('Campaigns|DeleteCampaignModal', module)
       translations={translations.campaigns.deleteCampaignModal}
       onDeleteCampaign={action('delete campaign')}
       onCloseModal={action('close modal')}
-      username="Amyleeanne"
+      campaign={campaign}
     />
   ));

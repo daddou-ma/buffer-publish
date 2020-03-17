@@ -8,7 +8,6 @@ export default connect(
     translations: state.i18n.translations.campaigns.deleteCampaignModal,
     loading: state.deleteCampaignModal.loading,
     campaign: state.deleteCampaignModal.campaign,
-    username: state.appSidebar.user.name,
   }),
   dispatch => ({
     hideModal: () => dispatch(modalActions.hideDeleteCampaignModal()),

@@ -17,12 +17,16 @@ const BoldText = styled(Text)`
   font-weight: ${fontWeightSemiBold};
 `;
 
+const Title = styled(Text)`
+  margin-top: 0px;
+`;
+
 const DeleteCampaignModal = ({
   translations,
   deleteCampaign,
   hideModal,
-  username,
   loading,
+  campaign,
 }) => (
   <Modal
     action={{
@@ -41,7 +45,7 @@ const DeleteCampaignModal = ({
     dismissable
   >
     <Container>
-      <Text type="h2">{`${translations.title} "${username}"?`}</Text>
+      <Title type="h2">{`${translations.title} "${campaign.name}"?`}</Title>
       <BoldText type="p">{translations.boldSubtext}</BoldText>
       <Text type="p">{translations.subtext}</Text>
     </Container>
@@ -52,8 +56,12 @@ DeleteCampaignModal.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   deleteCampaign: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
+  campaign: PropTypes.shape({
+    name: PropTypes.string,
+    color: PropTypes.string,
+    id: PropTypes.string,
+  }).isRequired,
 };
 
 export default DeleteCampaignModal;
