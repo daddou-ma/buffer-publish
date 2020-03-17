@@ -8,7 +8,7 @@ export default connect(
     const translations = state.i18n.translations['profiles-disconnected-modal'];
     let extraMessage = null;
     const disconnectedProfiles =
-      state?.profilesDisconnectedModal?.disconnectedProfiles;
+      state.profilesDisconnectedModal?.disconnectedProfiles;
     const instagramPersonalProfiles = disconnectedProfiles.filter(
       profile =>
         profile?.service === 'instagram' && profile?.service_type === 'profile'

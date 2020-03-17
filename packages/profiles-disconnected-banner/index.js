@@ -5,7 +5,7 @@ import ProfilesDisconnectedBanner from './components/ProfilesDisconnectedBanner'
 export default connect(
   state => {
     let extraMessage = null;
-    const selectedProfile = state?.profileSidebar?.selectedProfile;
+    const selectedProfile = state.profileSidebar?.selectedProfile;
     const translations =
       state.i18n.translations['profiles-disconnected-banner'];
 
