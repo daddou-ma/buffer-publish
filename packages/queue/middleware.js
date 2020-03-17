@@ -252,7 +252,7 @@ export default ({ dispatch, getState }) => next => action => {
 
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const hasCampaignsFeature =
-        getState().appSidebar.user.features?.includes('campaigns') ?? false;
+        action.result?.features?.includes('campaigns') ?? false;
 
       if (hasCampaignsFeature) {
         dispatch(
