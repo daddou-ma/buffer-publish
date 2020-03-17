@@ -16,6 +16,7 @@ import ExamplePost from './ExamplePost';
 /* Styles */
 const Container = styled.div`
   margin: 18px;
+  max-width: 864px;
 `;
 
 /* Component */
@@ -49,7 +50,7 @@ const ViewCampaign = ({
   const campaignHasPosts = campaign?.items?.length > 0;
 
   if (isLoading) {
-    return <BufferLoading fullscreen />;
+    return <BufferLoading />;
   }
 
   return (

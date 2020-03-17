@@ -17,6 +17,7 @@ const Header = styled.header`
 
 const Container = styled.div`
   margin: 13px;
+  max-width: 864px;
 `;
 
 const ListCampaigns = ({
@@ -42,7 +43,7 @@ const ListCampaigns = ({
   }, []);
 
   if (isLoading) {
-    return <BufferLoading fullscreen />;
+    return <BufferLoading />;
   }
 
   if (campaigns.length === 0) {
