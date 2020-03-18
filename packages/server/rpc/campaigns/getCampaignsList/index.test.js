@@ -8,15 +8,9 @@ const session = {
   },
 };
 
-const params = ({ globalOrganizationId }) => {
-  return {
-    globalOrganizationId,
-  };
-};
-
 const PublishAPI = { get: jest.fn() };
-const geCampaignsList = ({ globalOrganizationId }) =>
-  RPCEndpoint.fn(params({ globalOrganizationId }), { session }, null, {
+const geCampaignsList = () =>
+  RPCEndpoint.fn(null, { session }, null, {
     PublishAPI,
     parsers,
   });
@@ -24,7 +18,7 @@ const geCampaignsList = ({ globalOrganizationId }) =>
 describe('RPC | Get list of campaigns', () => {
   it('gets the campaigns list successfully', async () => {
     PublishAPI.get.mockResolvedValueOnce(CAMPAIGNS_LIST);
-    await geCampaignsList({ globalOrganizationId: '123' }).then(response => {
+    await geCampaignsList().then(response => {
       expect(response.length).toEqual(4);
       response.forEach(campaign => {
         expect(campaign.globalOrganizationId).toBe('123');
@@ -32,5 +26,17 @@ describe('RPC | Get list of campaigns', () => {
         expect(campaign.lastUpdated).toContain('Last updated ');
       });
     });
+  });
+
+  it('fails to get list of campaigns', async () => {
+    PublishAPI.get.mockRejectedValueOnce(new Error('Error ocurred'));
+    try {
+      await geCampaignsList().then(response => {
+        throw new Error(response);
+      });
+    } catch (err) {
+      expect(err.error).toBeUndefined();
+      expect(err.message).toEqual('Error ocurred');
+    }
   });
 });

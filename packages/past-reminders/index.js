@@ -1,6 +1,7 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 // load the presentational component
 import { actions } from './reducer';
 import PastRemindersWrapper from './components/PastRemindersWrapper';
@@ -67,6 +68,9 @@ export default connect(
           state.profileSidebar.selectedProfile.isDisconnected,
         userData: state.appSidebar.user,
         showStoryPreview: state.pastReminders.showStoryPreview,
+        hasCampaignsFeature: state.appSidebar.user.features
+          ? state.appSidebar.user.features.includes('campaigns')
+          : false,
       };
     }
     return {};
@@ -164,6 +168,14 @@ export default connect(
     },
     onClosePreviewClick: () => {
       dispatch(actions.handleClosePreviewClick());
+    },
+    fetchCampaigns: () => {
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getCampaignsList',
+          args: {},
+        })
+      );
     },
   })
 )(PastRemindersWrapper);

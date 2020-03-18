@@ -234,6 +234,7 @@ export const actions = {
   handleCampaignTagClick: ({ campaignId }) => ({
     type: queueActionTypes.VIEW_CAMPAIGN_PAGE,
     campaignId,
+    isSent: true,
   }),
   handleComposerCreateSuccess: () => ({
     type: actionTypes.HIDE_COMPOSER,

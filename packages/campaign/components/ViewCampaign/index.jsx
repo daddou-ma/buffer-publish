@@ -102,8 +102,6 @@ const ViewCampaign = ({
           <EmptyState
             translations={translations}
             onCreatePostClick={onCreatePostClick}
-            onDeleteCampaignClick={onDeleteCampaignClick}
-            onEditCampaignClick={onEditCampaignClick}
           />
           <ExamplePost />
           <ExamplePost />

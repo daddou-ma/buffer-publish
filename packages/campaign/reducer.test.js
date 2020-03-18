@@ -142,15 +142,5 @@ describe('reducer', () => {
       };
       expect(actions.handleCloseComposer()).toEqual(expectedAction);
     });
-    it('creates a DELETE_CAMPAIGN action', () => {
-      const campaignId = 'id2';
-      const expectedAction = {
-        type: actionTypes.DELETE_CAMPAIGN,
-        campaignId: 'id2',
-      };
-      expect(actions.handleDeleteCampaignClick(campaignId)).toEqual(
-        expectedAction
-      );
-    });
   });
 });

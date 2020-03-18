@@ -436,6 +436,13 @@ export default (state = initialState, action) => {
         editMode: false,
         emptySlotMode: false,
       };
+
+    case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      // This is a WIP to save campaigns and fetch thos in the composer
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }

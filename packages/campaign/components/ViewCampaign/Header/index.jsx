@@ -86,7 +86,9 @@ const Header = ({
           },
           {
             title: translations.deleteCampaign,
-            selectedItemClick: onDeleteCampaignClick,
+            selectedItemClick: () => {
+              onDeleteCampaignClick(campaignDetails);
+            },
           },
         ]}
       />

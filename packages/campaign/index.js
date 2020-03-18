@@ -30,8 +30,8 @@ export default connect(
     onCreatePostClick: campaignId => {
       dispatch(actions.handleOpenComposer(campaignId));
     },
-    onDeleteCampaignClick: campaignId => {
-      dispatch(actions.handleDeleteCampaignClick(campaignId));
+    onDeleteCampaignClick: campaign => {
+      dispatch(modalsActions.showDeleteCampaignModal(campaign));
     },
     goToAnalyzeReport: () => {
       window.location.assign(`${getURL.getAnalyzeReportUrl()}`);

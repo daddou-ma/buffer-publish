@@ -6,11 +6,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
-import {
-  campaignPages,
-  generateCampaignPageRoute,
-} from '@bufferapp/publish-routes';
-import { push } from 'connected-react-router';
+import { campaignScheduled, campaignSent } from '@bufferapp/publish-routes';
 import { actionTypes, actions } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
@@ -153,16 +149,15 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       break;
-    case actionTypes.VIEW_CAMPAIGN_PAGE:
-      dispatch(
-        push(
-          generateCampaignPageRoute({
-            campaignId: action.campaignId,
-            selectedPage: campaignPages.VIEW_CAMPAIGN,
-          })
-        )
-      );
+    case actionTypes.VIEW_CAMPAIGN_PAGE: {
+      const { campaignId, isSent } = action;
+      if (isSent) {
+        dispatch(campaignSent.goTo({ campaignId }));
+      } else {
+        dispatch(campaignScheduled.goTo({ campaignId }));
+      }
       break;
+    }
     case `sharePostNow_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(
         notificationActions.createNotification({

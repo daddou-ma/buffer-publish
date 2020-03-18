@@ -2,7 +2,6 @@ import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
-  DELETE_CAMPAIGN: 0,
   FETCH_CAMPAIGN: 0,
   OPEN_COMPOSER: 0,
   CLOSE_COMPOSER: 0,
@@ -61,10 +60,6 @@ export const actions = {
   }),
   handleCloseComposer: () => ({
     type: actionTypes.CLOSE_COMPOSER,
-  }),
-  handleDeleteCampaignClick: campaignId => ({
-    type: actionTypes.DELETE_CAMPAIGN,
-    campaignId,
   }),
   fetchCampaign: ({ campaignId, past }) => ({
     type: actionTypes.FETCH_CAMPAIGN,

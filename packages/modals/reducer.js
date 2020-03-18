@@ -15,6 +15,7 @@ export const initialState = {
   showInstagramFirstCommentProTrialModal: false,
   showCloseComposerConfirmationModal: false,
   modalToShowLater: null,
+  showDeleteCampaignModal: false,
 };
 
 export const actionTypes = keyWrapper('MODALS', {
@@ -41,6 +42,8 @@ export const actionTypes = keyWrapper('MODALS', {
   SAVE_MODAL_TO_SHOW_LATER: 0,
   HIDE_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
   SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
+  SHOW_DELETE_CAMPAIGN_MODAL: 0,
+  HIDE_DELETE_CAMPAIGN_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -168,6 +171,16 @@ export default (state = initialState, action) => {
         ...state,
         showCloseComposerConfirmationModal: true,
       };
+    case actionTypes.HIDE_DELETE_CAMPAIGN_MODAL:
+      return {
+        ...state,
+        showDeleteCampaignModal: false,
+      };
+    case actionTypes.SHOW_DELETE_CAMPAIGN_MODAL:
+      return {
+        ...state,
+        showDeleteCampaignModal: true,
+      };
     default:
       return state;
   }
@@ -252,6 +265,13 @@ export const actions = {
   }),
   showCloseComposerConfirmationModal: () => ({
     type: actionTypes.SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL,
+  }),
+  hideDeleteCampaignModal: () => ({
+    type: actionTypes.HIDE_DELETE_CAMPAIGN_MODAL,
+  }),
+  showDeleteCampaignModal: campaign => ({
+    type: actionTypes.SHOW_DELETE_CAMPAIGN_MODAL,
+    campaign,
   }),
   isShowingModals: ({ modals }) => {
     return (
