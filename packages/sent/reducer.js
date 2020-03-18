@@ -20,6 +20,7 @@ export const initialState = {
   editMode: false,
   editingPostId: '',
   environment: 'production',
+  campaigns: [],
 };
 
 export const profileInitialState = {
@@ -216,6 +217,11 @@ export default (state = initialState, action) => {
         ...state,
         showComposer: false,
         editMode: false,
+      };
+    case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        campaigns: action.result,
       };
     default:
       return state;

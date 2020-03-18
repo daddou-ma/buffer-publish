@@ -75,7 +75,7 @@ export default connect(
         draftMode: null,
         selectedProfileId,
         tabId: state.tabs.tabId,
-        campaigns: state.queue.campaigns,
+        campaigns: state[type].campaigns ?? [],
         ...options,
       };
     }

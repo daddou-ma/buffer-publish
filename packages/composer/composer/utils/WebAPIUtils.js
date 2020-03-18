@@ -809,12 +809,13 @@ function getFormattedAPIData(serviceName, unformattedData) {
     }
 
     const { campaignId } = serviceDraft;
-    if (campaignId) {
+    const { hasCampaignsFlip } = AppStore.getUserData();
+    if (hasCampaignsFlip) {
       conditionalFields.campaign_id = campaignId;
     }
 
     if (hasEnabledRetweetAttachment) {
-      const retweet = serviceDraft.retweet;
+      const { retweet } = serviceDraft;
 
       conditionalFields = Object.assign(conditionalFields, {
         is_native_retweet: true,
