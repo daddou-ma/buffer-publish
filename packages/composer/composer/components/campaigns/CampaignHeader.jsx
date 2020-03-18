@@ -111,6 +111,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
       </Tooltip>
       <SelectWrapper>
         <Select
+          hideSearch
           type="secondary"
           label={selected.name}
           icon={
