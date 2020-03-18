@@ -49,13 +49,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       },
     });
   },
-  onConnectBitlyURLClick: () => {
-    dispatch(
-      settingsAction.handleConnectBitlyURLClick({
-        profileId: ownProps.profileId,
-      })
-    );
-  },
 });
 
 export default connect(

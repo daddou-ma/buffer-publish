@@ -132,13 +132,6 @@ export default connect(
         })
       );
     },
-    onConnectBitlyURLClick: () => {
-      dispatch(
-        settingsAction.handleConnectBitlyURLClick({
-          profileId: ownProps.profileId,
-        })
-      );
-    },
   })
 )(SentPosts);
 
