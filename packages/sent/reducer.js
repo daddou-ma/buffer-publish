@@ -198,6 +198,7 @@ export default (state = initialState, action) => {
       profileId = getProfileId(action);
       if (profileId) {
         return {
+          ...state,
           byProfileId: {
             ...state.byProfileId,
             [profileId]: profileReducer(state.byProfileId[profileId], action),
