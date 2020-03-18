@@ -20,7 +20,7 @@ export default ({ dispatch }) => next => action => {
           args: {
             campaignId,
             past: false,
-            basicItems: true,
+            fullItems: false,
           },
         })
       );
@@ -97,6 +97,7 @@ export default ({ dispatch }) => next => action => {
     }
 
     case `createCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `updateCampaign_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(
         notificationActions.createNotification({
           notificationType: 'error',
