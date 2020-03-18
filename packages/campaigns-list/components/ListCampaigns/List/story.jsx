@@ -14,7 +14,7 @@ const campaigns = [
     scheduled: 8,
     sent: 0,
     lastUpdated: 'Last updated 12 days ago',
-    campaignId: '2',
+    id: '2',
   },
   {
     name: 'Awareness Day',
@@ -23,7 +23,7 @@ const campaigns = [
     scheduled: 11,
     sent: 25,
     lastUpdated: 'Last updated yesterday',
-    campaignId: '3',
+    id: '3',
   },
   {
     name: '#SaveOurSeasWeek',
@@ -32,7 +32,7 @@ const campaigns = [
     scheduled: 7,
     sent: 1,
     lastUpdated: 'Last updated 3 hours ago',
-    campaignId: '1',
+    id: '1',
   },
   {
     name: 'New Year, New You',
@@ -41,7 +41,7 @@ const campaigns = [
     scheduled: 7,
     sent: 1,
     lastUpdated: 'Last updated 3 hours ago',
-    campaignId: '1',
+    id: '1',
   },
 ];
 

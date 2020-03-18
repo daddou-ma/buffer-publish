@@ -9,7 +9,7 @@ const ErrorBannerCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px 150px;
+  padding: 24px 40px 24px 40px;
   border: 1px solid ${gray};
   box-sizing: border-box;
   border-radius: 2px;
@@ -41,12 +41,12 @@ const ButtonWithStyles = styled(Button)`
   margin-top: 16px;
 `;
 
-const ErrorBanner = ({ title, content, onClick, actionLabel }) => (
+const ErrorBanner = ({ title, children, onClick, actionLabel }) => (
   <ErrorBannerCard>
     <Triangle />
     <WarningIcon />
     <Title type="h3">{title}</Title>
-    {content}
+    {children}
     {onClick && actionLabel && (
       <ButtonWithStyles type="primary" onClick={onClick} label={actionLabel} />
     )}
@@ -55,7 +55,7 @@ const ErrorBanner = ({ title, content, onClick, actionLabel }) => (
 
 ErrorBanner.propTypes = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
   actionLabel: PropTypes.string,
 };

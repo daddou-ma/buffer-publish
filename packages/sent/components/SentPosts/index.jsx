@@ -105,9 +105,10 @@ const SentPosts = ({
   fetchSentPosts,
   linkShortening,
   hasBitlyPosts,
-  onConnectBitlyURLClick,
   campaigns,
   fetchCampaigns,
+  profileServiceType,
+  profileService,
 }) => {
   useEffect(() => {
     fetchSentPosts();
@@ -161,7 +162,6 @@ const SentPosts = ({
               hasBitlyPosts={hasBitlyPosts}
               isBitlyConnected={!!linkShortening.isBitlyConnected}
               isFreeUser={features.isFreeUser}
-              onConnectBitlyURLClick={onConnectBitlyURLClick}
             />
             <div style={topBarContainerStyle}>
               {showComposer && !editMode && (
@@ -192,6 +192,8 @@ const SentPosts = ({
               hasCampaignsFeature={hasCampaignsFeature}
               showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
               isAnalyzeCustomer={isAnalyzeCustomer}
+              profileServiceType={profileServiceType}
+              profileService={profileService}
             />
           </div>
           {moreToLoad && (

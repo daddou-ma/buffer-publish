@@ -53,6 +53,14 @@
       "title": "Build your Campaign",
       "scheduled": "Scheduled",
       "sent": "Sent"
+    },
+    "deleteCampaignModal": {
+      "title": "Are you sure you want to delete your campaign,",
+      "boldSubtext": "We won't be able to save or analyze any of your campaign data.",
+      "subtext": " If you also wish to stop the posts from within this campaign from publishing, please delete each one individually.",
+      "cancel": "Cancel",
+      "delete": "Yes, Delete Campaign",
+      "loading": "Deleting..."
     }
   },
   "onboarding-page": {
@@ -292,12 +300,14 @@
     "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these accounts you will need to reconnect them.",
     "body2": "Note: You’ll need to be logged in to the same account on the network to successfully reconnect your social account.",
     "cta": "Reconnect",
-    "reconnecting": "Please wait..."
+    "reconnecting": "Please wait...",
+    "extraMessage": {"instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."}
   },
   "profiles-disconnected-banner": {
     "headline": "Uh-oh, we've lost access to this account! Let's reconnect.",
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
-    "cta": "Reconnect Account"
+    "cta": "Reconnect Account",
+    "extraMessage": {"instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."}
   },
   "instagram-direct-posting-modal": {
     "headline": "Would you like to set up Direct Scheduling for Instagram?",

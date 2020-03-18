@@ -33,7 +33,6 @@ const AnalyticsList = ({
   selectProfile,
   linkShortening,
   hasBitlyPosts,
-  onConnectBitlyURLClick,
 }) => {
   // user is either a free or pro and is not a team member
   if (!isBusinessAccount && (features.isProUser() || features.isFreeUser())) {
@@ -89,7 +88,6 @@ const AnalyticsList = ({
             features={features}
             linkShortening={linkShortening}
             hasBitlyPosts={hasBitlyPosts}
-            onConnectBitlyURLClick={onConnectBitlyURLClick}
           />
         </Suspense>
       </ErrorBoundary>
@@ -118,7 +116,6 @@ AnalyticsList.propTypes = {
     isBitlyConnected: PropTypes.bool,
   }).isRequired,
   hasBitlyPosts: PropTypes.bool.isRequired,
-  onConnectBitlyURLClick: PropTypes.func.isRequired,
 };
 
 AnalyticsList.defaultProps = {
