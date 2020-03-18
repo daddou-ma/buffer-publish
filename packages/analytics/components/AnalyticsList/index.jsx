@@ -21,7 +21,6 @@ const AnalyticsList = ({
   features,
   linkShortening,
   hasBitlyPosts,
-  onConnectBitlyURLClick,
 }) => {
   useEffect(() => {
     // We need to re-fetch profiles to get them into the analyze stores
@@ -42,7 +41,6 @@ const AnalyticsList = ({
         isBitlyConnected={!!linkShortening.isBitlyConnected}
         isFreeUser={features.isFreeUser}
         marginAfter
-        onConnectBitlyURLClick={onConnectBitlyURLClick}
       />
       {!isInstagramBusiness && <SummaryTable />}
       <CompareChart />
@@ -68,7 +66,6 @@ AnalyticsList.propTypes = {
     isBitlyConnected: PropTypes.bool,
   }).isRequired,
   hasBitlyPosts: PropTypes.bool.isRequired,
-  onConnectBitlyURLClick: PropTypes.func.isRequired,
 };
 
 export default AnalyticsList;

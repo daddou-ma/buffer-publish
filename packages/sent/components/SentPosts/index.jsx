@@ -105,7 +105,6 @@ const SentPosts = ({
   fetchSentPosts,
   linkShortening,
   hasBitlyPosts,
-  onConnectBitlyURLClick,
   profileServiceType,
   profileService,
 }) => {
@@ -155,7 +154,6 @@ const SentPosts = ({
               hasBitlyPosts={hasBitlyPosts}
               isBitlyConnected={!!linkShortening.isBitlyConnected}
               isFreeUser={features.isFreeUser}
-              onConnectBitlyURLClick={onConnectBitlyURLClick}
             />
             <div style={topBarContainerStyle}>
               {showComposer && !editMode && (
