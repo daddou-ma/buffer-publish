@@ -1,14 +1,14 @@
 import { getSelected } from './CampaignHeader';
 
-describe('getSelected', () => {
+describe('Campaigns | getSelected', () => {
   const campaigns = [
     { name: '#SaveOurSeasWeek', color: '#9C2BFF', id: '1' },
     { name: 'Hello World', color: 'blue', id: '2' },
   ];
-  const noneSelected = { name: 'None selected' };
-  it('should return first campaign in array', () => {
+  const noneSelected = { id: null, name: 'No Campaign' };
+  it('should return none selected if campaignId is null', () => {
     const selected = getSelected({ campaigns, campaignId: null });
-    expect(selected).toEqual(campaigns[0]);
+    expect(selected).toEqual(noneSelected);
   });
   it('should return campaign associated with campaignId', () => {
     const selected = getSelected({ campaigns, campaignId: '2' });
