@@ -37,6 +37,8 @@ export default connect(
       window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
     },
     onEditCampaignClick: campaignId => {
+      console.log('clicked on edit campaign');
+      console.log('campaign id: ', campaignId);
       if (campaignId) {
         dispatch(campaignEdit.goTo({ campaignId }));
       }

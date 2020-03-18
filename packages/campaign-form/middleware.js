@@ -4,7 +4,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { campaignsPage, campaignScheduled } from '@bufferapp/publish-routes';
+import { campaignScheduled } from '@bufferapp/publish-routes';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { actionTypes } from './reducer';
 
