@@ -105,7 +105,6 @@ const SentPosts = ({
   fetchSentPosts,
   linkShortening,
   hasBitlyPosts,
-  campaigns,
   fetchCampaigns,
   profileServiceType,
   profileService,
@@ -118,7 +117,7 @@ const SentPosts = ({
     if (hasCampaignsFeature) {
       fetchCampaigns();
     }
-  }, [campaigns]);
+  }, []);
 
   if (loading) {
     return (

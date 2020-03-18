@@ -54,7 +54,6 @@ export default connect(
         profileService: profileData.service,
         showComposer: state.sent.showComposer,
         editMode: state.sent.editMode,
-        campaigns: state.sent.campaigns,
         isManager: state.profileSidebar.selectedProfile.isManager,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
         showAnalyzeBannerAfterFirstPost:
