@@ -11,22 +11,6 @@ import { actionTypes } from './reducer';
 export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
-    case actionTypes.FETCH_CAMPAIGN: {
-      const { campaignId } = action;
-
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'getCampaign',
-          args: {
-            campaignId,
-            past: false,
-            fullItems: false,
-          },
-        })
-      );
-      break;
-    }
-
     case actionTypes.CREATE_CAMPAIGN: {
       const { name, color } = action;
 
