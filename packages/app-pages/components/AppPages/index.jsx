@@ -43,7 +43,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       )}
       {!hasProfiles && <Redirect to={newConnectionRoute} />}
 
-      <Route path={campaignsPage} component={PageWithSidebar} />
+      <Route path={campaignsPage.route} component={PageWithSidebar} />
       <Route path={childTabRoute} component={ProfilePage} />
       <Route path={profilePageRoute} component={ProfilePage} />
 
