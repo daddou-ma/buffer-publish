@@ -1,7 +1,7 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
-export const actionTypes = keyWrapper('CAMPAIGNS', {
+export const actionTypes = keyWrapper('CAMPAIGN_FORM', {
   CREATE_CAMPAIGN: 0,
   EDIT_CAMPAIGN: 0,
 });
