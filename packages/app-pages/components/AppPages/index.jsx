@@ -11,7 +11,7 @@ import {
   generateProfilePageRoute,
   campaignsPage,
 } from '@bufferapp/publish-routes';
-import PageWithSidebar from '@bufferapp/publish-app-pages/components/PageWithSidebar';
+import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
@@ -43,7 +43,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       )}
       {!hasProfiles && <Redirect to={newConnectionRoute} />}
 
-      <Route path={campaignsPage.route} component={PageWithSidebar} />
+      <Route path={campaignsPage.route} component={PagesWithSidebar} />
       <Route path={childTabRoute} component={ProfilePage} />
       <Route path={profilePageRoute} component={ProfilePage} />
 
