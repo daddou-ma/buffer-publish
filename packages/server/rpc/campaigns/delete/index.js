@@ -8,7 +8,7 @@ module.exports = method(
       uri: '1/campaigns/delete.json',
       session,
       params: {
-        campaignId,
+        campaign_id: campaignId,
       },
     }).catch(PublishAPI.errorHandler)
 );
