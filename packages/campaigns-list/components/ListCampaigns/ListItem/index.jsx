@@ -27,12 +27,12 @@ const ListItem = ({
   goToAnalyzeReport,
   translations,
 }) => {
-  const { campaignId } = campaign;
+  const campaignId = campaign.id;
   const selectItems = [
     {
       title: translations.editCampaign,
       selectedItemClick: () => {
-        onEditCampaignClick(campaignId);
+        onEditCampaignClick({ campaignId });
       },
     },
     {
@@ -46,7 +46,7 @@ const ListItem = ({
   const viewCampaignSelectItem = {
     title: translations.viewCampaign,
     selectedItemClick: () => {
-      onViewCampaignClick(campaignId);
+      onViewCampaignClick({ campaignId });
     },
   };
 
@@ -131,12 +131,12 @@ ListItem.propTypes = {
   }).isRequired,
   campaign: PropTypes.shape({
     color: PropTypes.string,
+    id: PropTypes.string,
     name: PropTypes.string,
     sent: PropTypes.number,
     scheduled: PropTypes.number,
     lastUpdated: PropTypes.string,
     dateRange: PropTypes.string,
-    campaignId: PropTypes.string,
   }).isRequired,
   onViewCampaignClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,

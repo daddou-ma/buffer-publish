@@ -12,7 +12,6 @@ import DraftList from '@bufferapp/publish-drafts';
 import PostingSchedule from '@bufferapp/publish-posting-schedule';
 import GeneralSettings from '@bufferapp/publish-general-settings';
 import TabNavigation from '@bufferapp/publish-tabs';
-import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 import Analytics from '@bufferapp/publish-analytics';
 import {
   ScrollableContainer,
@@ -21,32 +20,9 @@ import {
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getValidTab } from '@bufferapp/publish-tabs/utils';
+import PageWithSidebarWrapper from '@bufferapp/publish-app-pages/components/PageWithSidebarWrapper';
 
 const ErrorBoundary = getErrorBoundary(true);
-
-const profilePageStyle = {
-  display: 'flex',
-  flexGrow: 1,
-};
-
-const profileSideBarStyle = {
-  flexBasis: '16rem',
-  width: '16rem',
-  minWidth: '16rem',
-  position: 'sticky',
-  bottom: 0,
-  top: 0,
-  maxHeight: '100vh',
-};
-
-const contentStyle = {
-  flexGrow: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  marginLeft: '0.5rem',
-  marginRight: '1rem',
-  minHeight: '100%',
-};
 
 const loadingAnimationStyle = {
   textAlign: 'center',
@@ -235,45 +211,40 @@ function ProfilePage({
   };
 
   return (
-    <div style={profilePageStyle}>
-      <div style={profileSideBarStyle}>
-        <ProfileSidebar profileId={profileId} tabId={tabId} />
-      </div>
-      <div style={contentStyle}>
-        <TabNavigation
-          profileId={profileId}
-          tabId={tabId}
-          childTabId={childTabId}
-        />
-        <ScrollableContainer
-          profileId={profileId}
-          tabId={tabId}
-          growthSpace={1}
-          loadingMore={loadingMore}
-          moreToLoad={moreToLoad}
-          onReachBottom={onReachBottom}
-        >
-          <div style={tabContentStyle}>
-            <TabContent
-              tabId={tabId}
-              profileId={profileId}
-              childTabId={childTabId}
-              loadMore={onLoadMore}
-              selectedProfile={selectedProfile}
-              features={features}
-              onChangeTab={onChangeTab}
-              hasStoriesFlip={hasStoriesFlip}
-              shouldHideAdvancedAnalytics={shouldHideAdvancedAnalytics}
-            />
-            {loadingMore && (
-              <div style={loadingAnimationStyle}>
-                <BufferLoading size={32} />
-              </div>
-            )}
-          </div>
-        </ScrollableContainer>
-      </div>
-    </div>
+    <PageWithSidebarWrapper profileId={profileId} tabId={tabId}>
+      <TabNavigation
+        profileId={profileId}
+        tabId={tabId}
+        childTabId={childTabId}
+      />
+      <ScrollableContainer
+        profileId={profileId}
+        tabId={tabId}
+        growthSpace={1}
+        loadingMore={loadingMore}
+        moreToLoad={moreToLoad}
+        onReachBottom={onReachBottom}
+      >
+        <div style={tabContentStyle}>
+          <TabContent
+            tabId={tabId}
+            profileId={profileId}
+            childTabId={childTabId}
+            loadMore={onLoadMore}
+            selectedProfile={selectedProfile}
+            features={features}
+            onChangeTab={onChangeTab}
+            hasStoriesFlip={hasStoriesFlip}
+            shouldHideAdvancedAnalytics={shouldHideAdvancedAnalytics}
+          />
+          {loadingMore && (
+            <div style={loadingAnimationStyle}>
+              <BufferLoading size={32} />
+            </div>
+          )}
+        </div>
+      </ScrollableContainer>
+    </PageWithSidebarWrapper>
   );
 }
 

@@ -14,7 +14,7 @@ export default connect(
       isUsingPublishAsTeamMember:
         state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
-      campaignId: state.campaign?.campaignId || ownProps.match?.params?.id,
+      campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')
         : false,

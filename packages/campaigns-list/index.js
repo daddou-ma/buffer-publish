@@ -23,7 +23,7 @@ export default connect(
     };
   },
   dispatch => ({
-    onViewCampaignClick: campaignId => {
+    onViewCampaignClick: ({ campaignId }) => {
       if (campaignId) {
         dispatch(campaignScheduled.goTo({ campaignId }));
       }
@@ -37,7 +37,7 @@ export default connect(
     goToAnalyzeReport: () => {
       window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
     },
-    onEditCampaignClick: campaignId => {
+    onEditCampaignClick: ({ campaignId }) => {
       if (campaignId) {
         dispatch(campaignEdit.goTo({ campaignId }));
       }

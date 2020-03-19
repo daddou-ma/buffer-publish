@@ -17,6 +17,14 @@ const Header = styled.header`
 
 const Container = styled.div`
   margin: 13px;
+  max-width: 864px;
+`;
+
+const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 5rem;
 `;
 
 const ListCampaigns = ({
@@ -42,7 +50,13 @@ const ListCampaigns = ({
   }, []);
 
   if (isLoading) {
-    return <BufferLoading fullscreen />;
+    return (
+      <Container>
+        <LoadingContainer>
+          <BufferLoading size={64} />
+        </LoadingContainer>
+      </Container>
+    );
   }
 
   if (campaigns.length === 0) {

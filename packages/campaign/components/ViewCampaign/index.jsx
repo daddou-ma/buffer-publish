@@ -16,6 +16,14 @@ import ExamplePost from './ExamplePost';
 /* Styles */
 const Container = styled.div`
   margin: 18px;
+  max-width: 864px;
+`;
+
+const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 5rem;
 `;
 
 /* Component */
@@ -49,7 +57,13 @@ const ViewCampaign = ({
   const campaignHasPosts = campaign?.items?.length > 0;
 
   if (isLoading) {
-    return <BufferLoading fullscreen />;
+    return (
+      <Container>
+        <LoadingContainer>
+          <BufferLoading size={64} />
+        </LoadingContainer>
+      </Container>
+    );
   }
 
   return (

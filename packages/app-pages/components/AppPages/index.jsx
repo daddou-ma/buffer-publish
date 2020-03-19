@@ -9,20 +9,14 @@ import {
   newBusinessTrialistsRoute,
   newConnectionRoute,
   generateProfilePageRoute,
-  campaignScheduled,
   campaignsPage,
-  campaignCreate,
-  campaignEdit,
 } from '@bufferapp/publish-routes';
-import PageWrapper from '@bufferapp/publish-app-pages/components/PageWrapper';
+import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePage from '@bufferapp/profile-page';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
-import CampaignForm from '@bufferapp/publish-campaign-form';
-import ViewCampaign from '@bufferapp/publish-campaign';
-import ListCampaigns from '@bufferapp/publish-campaigns-list';
 
 const AppPages = ({ profiles, isOnBusinessTrial }) => {
   const hasProfiles = profiles && profiles.length > 0;
@@ -49,39 +43,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       )}
       {!hasProfiles && <Redirect to={newConnectionRoute} />}
 
-      <Route
-        path={campaignCreate.route}
-        render={() => (
-          <PageWrapper fullSize>
-            <CampaignForm />
-          </PageWrapper>
-        )}
-      />
-      <Route
-        path={campaignEdit.route}
-        render={props => (
-          <PageWrapper fullSize>
-            <CampaignForm {...props} editMode />
-          </PageWrapper>
-        )}
-      />
-      <Route
-        path={campaignScheduled.route}
-        render={props => (
-          <PageWrapper>
-            <ViewCampaign {...props} />
-          </PageWrapper>
-        )}
-      />
-      <Route
-        path={campaignsPage.route}
-        render={() => (
-          <PageWrapper>
-            <ListCampaigns />
-          </PageWrapper>
-        )}
-      />
-
+      <Route path={campaignsPage.route} component={PagesWithSidebar} />
       <Route path={childTabRoute} component={ProfilePage} />
       <Route path={profilePageRoute} component={ProfilePage} />
 
