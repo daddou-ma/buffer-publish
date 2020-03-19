@@ -35,6 +35,7 @@ export const initialState = {
   editingPostId: '',
   isBusinessOnInstagram: null,
   isInstagramLoading: false,
+  campaigns: [],
 };
 
 const profileInitialState = {
@@ -438,9 +439,9 @@ export default (state = initialState, action) => {
       };
 
     case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      // This is a WIP to save campaigns and fetch thos in the composer
       return {
         ...state,
+        campaigns: action.result,
       };
 
     default:

@@ -303,7 +303,7 @@ const DataImportUtils = {
           locationId: update.service_geolocation_id || null,
           locationName: update.service_geolocation_name || null,
           userTags: update.service_user_tags || null,
-          campaignId: update.campaignId || null,
+          campaignDetails: update.campaignDetails || null,
           facebookMentionEntities: update.entities || null,
           commentEnabled: update.commentEnabled,
           commentText: update.commentText || null,
@@ -387,7 +387,8 @@ const DataImportUtils = {
         locationId: meta.locationId || null,
         locationName: meta.locationName || null,
         userTags: meta.userTags || null,
-        campaignId: meta.campaignId || null,
+        campaignDetails: meta.campaignDetails || null,
+        campaigns: meta.campaigns || null,
         linkData:
           meta.linkData !== null ? getFormattedLinkData(meta.linkData) : null,
         via: meta.via || null,

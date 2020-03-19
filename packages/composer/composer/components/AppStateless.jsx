@@ -194,6 +194,8 @@ class AppStateless extends React.Component {
 
     const shouldDisplayCampaignHeader =
       userData?.hasCampaignsFlip && userData?.isProAndUpOrTeamMember && !draftMode;
+    const campaignId = metaData.campaignDetails?.id ?? null;
+    const campaigns = metaData.campaigns ?? [];
 
     return (
       <div
@@ -232,24 +234,7 @@ class AppStateless extends React.Component {
           tabIndex={0}
         >
           {shouldDisplayCampaignHeader && (
-            <CampaignHeader
-              // dummy data
-              campaigns={[
-                {
-                  name: '#SaveOurSeasWeek',
-                  color: '#9C2BFF',
-                  id: '1',
-                  lastUpdated: 1582599125,
-                },
-                {
-                  name: 'Hello World',
-                  color: 'blue',
-                  id: '2',
-                  lastUpdated: 1582599196,
-                },
-              ]}
-              campaignId={metaData.campaignId}
-            />
+            <CampaignHeader campaigns={campaigns} campaignId={campaignId} />
           )}
 
           <ExtensionComponents

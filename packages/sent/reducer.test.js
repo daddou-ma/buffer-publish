@@ -7,7 +7,7 @@ import reducer, {
 
 const profileId = '123456';
 
-describe('reducer', () => {
+describe('Sent | reducer', () => {
   it('should initialize default state', () => {
     const stateAfter = initialState;
     const action = {
@@ -19,6 +19,7 @@ describe('reducer', () => {
 
   it('should handle sentPosts_FETCH_START action type', () => {
     const stateAfter = {
+      ...initialState,
       byProfileId: {
         [profileId]: {
           loading: true,
@@ -44,6 +45,7 @@ describe('reducer', () => {
   it('should handle sentPosts_FETCH_SUCCESS action type', () => {
     const post = { id: 'foo', text: 'i love buffer' };
     const stateAfter = {
+      ...initialState,
       byProfileId: {
         [profileId]: {
           hasBitlyPosts: false,
@@ -73,6 +75,7 @@ describe('reducer', () => {
 
   it('should handle sentPosts_FETCH_FAIL action type', () => {
     const stateAfter = {
+      ...initialState,
       byProfileId: {
         [profileId]: {
           loading: false,

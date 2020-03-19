@@ -56,11 +56,13 @@ const getLabel = campaign => (
   </LabelWrapper>
 );
 
+const noCampaign = { id: null, name: 'No Campaign' };
+
 export const getSelected = ({ campaigns, campaignId }) => {
   const selected = campaignId
     ? campaigns.find(campaign => campaign?.id === campaignId)
-    : campaigns[0];
-  return selected || { name: 'None selected' };
+    : noCampaign;
+  return selected || noCampaign;
 };
 
 const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
@@ -71,9 +73,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
 
   const updateCampaignId = campaign => {
     setSelected(campaign);
-    if (campaign.id) {
-      ComposerActionCreators.updateDraftsCampaignId(campaign.id);
-    }
+    ComposerActionCreators.updateDraftsCampaignId(campaign.id);
   };
 
   const getCampaignItems = () => {
@@ -85,10 +85,19 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
     }));
   };
 
+  const noCampaignItem = () => {
+    return {
+      title: getLabel(noCampaign),
+      selectedItemClick: () => {
+        updateCampaignId(noCampaign);
+      },
+    };
+  };
+
   useEffect(() => {
     if (!campaignId && hasCampaigns) {
       // select a campaign on default
-      updateCampaignId(selected);
+      updateCampaignId(noCampaign);
     }
   }, []);
 
@@ -102,9 +111,12 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
       </Tooltip>
       <SelectWrapper>
         <Select
+          hideSearch
           type="secondary"
           label={selected.name}
-          icon={hasCampaigns ? <Color color={selected.color} /> : null}
+          icon={
+            hasCampaigns && selected.color && <Color color={selected.color} />
+          }
           component={getLabel(selected)}
           disabled={!hasCampaigns}
           onSelectClick={selectedItem => {
@@ -113,7 +125,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
             }
             return false;
           }}
-          items={[...getCampaignItems()]}
+          items={[noCampaignItem(), ...getCampaignItems()]}
         />
       </SelectWrapper>
     </Container>

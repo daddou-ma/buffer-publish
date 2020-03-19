@@ -105,12 +105,19 @@ const SentPosts = ({
   fetchSentPosts,
   linkShortening,
   hasBitlyPosts,
+  fetchCampaigns,
   profileServiceType,
   profileService,
 }) => {
   useEffect(() => {
     fetchSentPosts();
   }, [profileId]);
+
+  useEffect(() => {
+    if (hasCampaignsFeature) {
+      fetchCampaigns();
+    }
+  }, []);
 
   if (loading) {
     return (
@@ -242,6 +249,8 @@ SentPosts.propTypes = {
     isBitlyConnected: PropTypes.bool,
   }),
   hasBitlyPosts: PropTypes.bool,
+  onConnectBitlyURLClick: PropTypes.func.isRequired,
+  fetchCampaigns: PropTypes.func.isRequired,
 };
 
 SentPosts.defaultProps = {
