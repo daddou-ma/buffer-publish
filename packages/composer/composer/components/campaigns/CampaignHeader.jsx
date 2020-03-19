@@ -66,7 +66,7 @@ export const getSelected = ({ campaigns, campaignId }) => {
 };
 
 const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
-  const hasCampaigns = campaigns?.length > 1;
+  const hasCampaigns = campaigns?.length > 0;
   const [selected, setSelected] = useState(
     getSelected({ campaigns, campaignId })
   );
