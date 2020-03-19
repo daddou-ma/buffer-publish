@@ -11,7 +11,7 @@ const details = {
   createdAt: 'March 2nd at 12:45pm (GMT)',
 };
 
-const profile = {
+const channel = {
   avatarUrl: '',
   handle: 'lunasneakers',
   type: 'instagram',
@@ -34,11 +34,11 @@ storiesOf('Cards|Basic Elements/CardHeader', module)
       onPreviewClick={action('preview-click')}
     />
   ))
-  .add('with profile details', () => (
+  .add('with channel details', () => (
     <CardHeader
       creatorName={details.creatorName}
       avatarUrl={details.avatarUrl}
       createdAt={details.createdAt}
-      profile={profile}
+      channel={channel}
     />
   ));

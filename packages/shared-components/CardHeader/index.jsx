@@ -22,12 +22,12 @@ const ContentWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const ProfileWrapper = styled.span`
+const ChannelWrapper = styled.span`
   display: flex;
   align-items: center;
 `;
 
-const ProfileHandle = styled(Text)`
+const ChannelHandle = styled(Text)`
   margin-left: 16px;
 `;
 
@@ -50,7 +50,7 @@ const getCreatedText = creatorName =>
   creatorName ? `${creatorName} created this ` : 'Created ';
 
 const CardHeader = ({
-  profile,
+  channel,
   creatorName,
   avatarUrl,
   createdAt,
@@ -59,28 +59,28 @@ const CardHeader = ({
   const WrapperComponent = onPreviewClick
     ? CardHeaderWrapperWithButton
     : CardHeaderWrapper;
-  const hasProfileDetails = profile?.handle && profile?.type;
+  const hasChannelDetails = channel?.handle && channel?.type;
 
   return (
     <WrapperComponent>
       <ContentWrapper>
-        {hasProfileDetails && (
-          <ProfileWrapper>
+        {hasChannelDetails && (
+          <ChannelWrapper>
             <Avatar
-              src={profile.avatarUrl}
+              src={channel.avatarUrl}
               fallbackUrl="https://s3.amazonaws.com/buffer-ui/Default+Avatar.png"
-              alt={profile.handle}
+              alt={channel.handle}
               size="small"
               type="social"
-              network={profile.type}
+              network={channel.type}
             />
-            <ProfileHandle type="label" color="grayDark">
-              {profile.handle}
-            </ProfileHandle>
-          </ProfileWrapper>
+            <ChannelHandle type="label" color="grayDark">
+              {channel.handle}
+            </ChannelHandle>
+          </ChannelWrapper>
         )}
         <CreatorWrapper>
-          {creatorName && !hasProfileDetails && (
+          {creatorName && !hasChannelDetails && (
             <AvatarWrapper>
               <Image
                 src={avatarUrl}
@@ -113,7 +113,7 @@ CardHeader.propTypes = {
   avatarUrl: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   onPreviewClick: PropTypes.func,
-  profile: PropTypes.shape({
+  channel: PropTypes.shape({
     avatarUrl: PropTypes.string,
     handle: PropTypes.string,
     type: PropTypes.string,
@@ -123,7 +123,7 @@ CardHeader.propTypes = {
 CardHeader.defaultProps = {
   onPreviewClick: null,
   creatorName: null,
-  profile: null,
+  channel: null,
 };
 
 export default CardHeader;
