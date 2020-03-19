@@ -268,7 +268,7 @@ const getHtml = ({
     .replace('{{{bufferData}}}', getBufferData({ user, profiles }));
 };
 
-// app.use(logMiddleware({ name: 'BufferPublish' }));
+app.use(logMiddleware({ name: 'BufferPublish' }));
 app.use(cookieParser());
 app.use(helmet.frameguard({ action: 'sameorigin' }));
 
