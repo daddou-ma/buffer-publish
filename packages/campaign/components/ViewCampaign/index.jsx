@@ -19,6 +19,13 @@ const Container = styled.div`
   max-width: 864px;
 `;
 
+const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 5rem;
+`;
+
 /* Component */
 const ViewCampaign = ({
   campaign,
@@ -50,7 +57,13 @@ const ViewCampaign = ({
   const campaignHasPosts = campaign?.items?.length > 0;
 
   if (isLoading) {
-    return <BufferLoading />;
+    return (
+      <Container>
+        <LoadingContainer>
+          <BufferLoading size={64} />
+        </LoadingContainer>
+      </Container>
+    );
   }
 
   return (

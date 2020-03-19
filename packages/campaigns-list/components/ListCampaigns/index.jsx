@@ -20,6 +20,13 @@ const Container = styled.div`
   max-width: 864px;
 `;
 
+const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 5rem;
+`;
+
 const ListCampaigns = ({
   translations,
   campaigns,
@@ -43,7 +50,13 @@ const ListCampaigns = ({
   }, []);
 
   if (isLoading) {
-    return <BufferLoading />;
+    return (
+      <Container>
+        <LoadingContainer>
+          <BufferLoading size={64} />
+        </LoadingContainer>
+      </Container>
+    );
   }
 
   if (campaigns.length === 0) {
