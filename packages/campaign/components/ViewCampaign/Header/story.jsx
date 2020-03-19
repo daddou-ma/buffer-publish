@@ -18,7 +18,7 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onEditCampaignClick={action('edit campaign')}
       goToAnalyzeReport={action('go to analyze report')}
       hasPosts
-      isUsingPublishAsTeamMember
+      hideAnalyzeReport
     />
   ))
   .add('Campaign view header without posts', () => (
@@ -30,7 +30,7 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onEditCampaignClick={action('edit campaign')}
       goToAnalyzeReport={action('go to analyze report')}
       hasPosts={false}
-      isUsingPublishAsTeamMember
+      hideAnalyzeReport
     />
   ))
   .add('Campaign view header as team member', () => (
@@ -42,6 +42,6 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onEditCampaignClick={action('edit campaign')}
       goToAnalyzeReport={action('go to analyze report')}
       hasPosts={false}
-      isUsingPublishAsTeamMember={false}
+      hideAnalyzeReport={false}
     />
   ));

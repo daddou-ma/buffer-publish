@@ -27,7 +27,7 @@ const ListCampaigns = ({
   onViewCampaignClick,
   goToAnalyzeReport,
   onOpenCreateCampaignClick,
-  isUsingPublishAsTeamMember,
+  hideAnalyzeReport,
   hasCampaignsFlip,
   fetchCampaigns,
   isLoading,
@@ -71,7 +71,7 @@ const ListCampaigns = ({
         onViewCampaignClick={onViewCampaignClick}
         goToAnalyzeReport={goToAnalyzeReport}
         translations={translations.viewCampaign}
-        isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
+        hideAnalyzeReport={hideAnalyzeReport}
       />
     </Container>
   );
@@ -85,7 +85,7 @@ ListCampaigns.propTypes = {
   onDeleteCampaignClick: PropTypes.func,
   onViewCampaignClick: PropTypes.func,
   goToAnalyzeReport: PropTypes.func,
-  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
+  hideAnalyzeReport: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
   fetchCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,

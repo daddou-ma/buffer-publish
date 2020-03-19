@@ -23,7 +23,7 @@ const ViewCampaign = ({
   campaign,
   showComposer,
   isLoading,
-  isUsingPublishAsTeamMember,
+  hideAnalyzeReport,
   translations,
   onCreatePostClick,
   onDeleteCampaignClick,
@@ -57,7 +57,7 @@ const ViewCampaign = ({
       <Header
         campaignDetails={campaign}
         hasPosts={campaignHasPosts}
-        isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
+        hideAnalyzeReport={hideAnalyzeReport}
         translations={translations}
         onCreatePostClick={onCreatePostClick}
         onDeleteCampaignClick={onDeleteCampaignClick}
@@ -115,7 +115,7 @@ ViewCampaign.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line
   campaign: PropTypes.object.isRequired, // eslint-disable-line
   campaignPosts: PropTypes.array, // eslint-disable-line
-  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
+  hideAnalyzeReport: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,

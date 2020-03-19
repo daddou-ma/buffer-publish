@@ -11,8 +11,7 @@ export default connect(
       campaign: state.campaign.campaign,
       showComposer: state.campaign.showComposer,
       translations: state.i18n.translations.campaigns.viewCampaign,
-      isUsingPublishAsTeamMember:
-        state.appSidebar.user.isUsingPublishAsTeamMember,
+      hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
       campaignId: state.campaign?.campaignId || ownProps.match?.params?.id,
       hasCampaignsFlip: state.appSidebar.user.features
