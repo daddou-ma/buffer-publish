@@ -1,7 +1,10 @@
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import middleware from './middleware';
 import { actionTypes, initialState } from './reducer';
+
+jest.mock('@bufferapp/publish-analytics-middleware');
 
 describe('middleware', () => {
   const next = jest.fn();

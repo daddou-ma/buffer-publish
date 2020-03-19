@@ -5,6 +5,7 @@ export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   FETCH_CAMPAIGN: 0,
   OPEN_COMPOSER: 0,
   CLOSE_COMPOSER: 0,
+  GO_TO_ANALYZE_REPORT: 0,
 });
 
 export const initialState = {
@@ -65,5 +66,9 @@ export const actions = {
     type: actionTypes.FETCH_CAMPAIGN,
     campaignId,
     past,
+  }),
+  goToAnalyzeReport: campaign => ({
+    type: actionTypes.GO_TO_ANALYZE_REPORT,
+    campaign,
   }),
 };

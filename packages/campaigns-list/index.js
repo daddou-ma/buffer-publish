@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
+import { actions as campaignActions } from '@bufferapp/publish-campaign/reducer';
 import {
   campaignEdit,
   campaignCreate,
@@ -33,8 +33,8 @@ export default connect(
     onDeleteCampaignClick: campaign => {
       dispatch(modalsActions.showDeleteCampaignModal(campaign));
     },
-    goToAnalyzeReport: () => {
-      window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
+    goToAnalyzeReport: campaign => {
+      dispatch(campaignActions.goToAnalyzeReport(campaign));
     },
     onEditCampaignClick: campaignId => {
       if (campaignId) {
