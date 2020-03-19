@@ -56,7 +56,6 @@ const ViewCampaign = ({
     <Container>
       <Header
         campaignDetails={campaign}
-        hasPosts={campaignHasPosts}
         hideAnalyzeReport={hideAnalyzeReport}
         translations={translations}
         onCreatePostClick={onCreatePostClick}
