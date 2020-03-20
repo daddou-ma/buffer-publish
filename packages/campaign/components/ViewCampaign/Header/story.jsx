@@ -23,7 +23,7 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       goToAnalyzeReport={action('go to analyze report')}
-      hideAnalyzeReport
+      hideAnalyzeReport={false}
     />
   ))
   .add('Campaign view header without a date range', () => (
@@ -34,7 +34,7 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       goToAnalyzeReport={action('go to analyze report')}
-      hideAnalyzeReport
+      hideAnalyzeReport={false}
     />
   ))
   .add('Campaign view header as team member', () => (
@@ -45,6 +45,6 @@ storiesOf('Campaigns|ViewCampaignHeader', module)
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
       goToAnalyzeReport={action('go to analyze report')}
-      hideAnalyzeReport={false}
+      hideAnalyzeReport
     />
   ));

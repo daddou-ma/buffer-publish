@@ -95,7 +95,7 @@ const Header = ({
           },
         ]}
       />
-      {hideAnalyzeReport && (
+      {!hideAnalyzeReport && (
         <Button
           type="secondary"
           icon={<ArrowRightIcon />}
