@@ -101,7 +101,7 @@ const CustomLabel = ({ campaign, onClick }) => (
 );
 
 CustomLabel.propTypes = {
-  campaign: PropTypes.shapeOf({
+  campaign: PropTypes.shape({
     color: PropTypes.string,
     name: PropTypes.string.isRequired,
   }).isRequired,
