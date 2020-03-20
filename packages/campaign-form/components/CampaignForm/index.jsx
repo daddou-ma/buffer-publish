@@ -23,12 +23,12 @@ import {
 
 /* Styles */
 const Wrapper = styled.div`
-  background-color: ${grayLighter};
+  background-color: ${white};
   height: 100%;
-  text-align: center;
 `;
 
 const Content = styled.div`
+  background-color: ${white};
   width: 362px;
   margin: 53px 0 0 283px;
 `;
@@ -36,13 +36,16 @@ const Content = styled.div`
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${white};
-  border: 1px solid ${gray};
+  background: ${grayLighter};
+  border: 1px solid ${grayLight};
   box-sizing: border-box;
   border-radius: ${borderRadius};
   width: 100%;
   padding: 0 16px;
-  text-align: left;
+`;
+
+const HeadlineContainer = styled.div`
+  text-align: center;
 `;
 
 const NoticeCard = styled(Card)`
@@ -50,7 +53,7 @@ const NoticeCard = styled(Card)`
   border: 1px solid ${grayLight};
   background: none;
   margin: 16px 0 24px;
-  padding: 24px 16px;
+  padding: 16px;
 `;
 
 const Notice = styled.div`
@@ -126,11 +129,12 @@ const CampaignForm = ({
   return (
     <Wrapper>
       <Content>
-        <Text type="h1">
-          {editMode ? translations.editTitle : translations.createTitle}
-        </Text>
         <Card>
-          <Text type="h3">{translations.subtitle}</Text>
+          <HeadlineContainer>
+            <Text type="h2">
+              {editMode ? translations.editTitle : translations.createTitle}
+            </Text>
+          </HeadlineContainer>
           <Input
             type="input"
             value={campaignName}
@@ -150,21 +154,6 @@ const CampaignForm = ({
             colorSelected={colorSelected}
             onColorClick={setCampaignColor}
           />
-        </Card>
-        <NoticeCard>
-          <View color={grayDark} />
-          <Notice>
-            <NoticeText type="p" color={grayDark}>
-              <b>{translations.notice1}</b>
-              {translations.notice2}
-              {/* FAQ link has to be replaced */}
-              <Link href="https://faq.buffer.com/" newTab>
-                {translations.notice3}
-              </Link>
-              {translations.notice4}
-            </NoticeText>
-          </Notice>
-        </NoticeCard>
         <Button
           type="primary"
           size="large"
@@ -187,6 +176,20 @@ const CampaignForm = ({
           onClick={onCancelClick}
           fullWidth
         />
+        </Card>
+        <NoticeCard>
+          <View color={grayDark} />
+          <Notice>
+            <NoticeText type="p" color={grayDark}>
+              {translations.notice1}
+              {/* FAQ link has to be replaced */}
+              <Link href="https://faq.buffer.com/" newTab>
+                {translations.notice2}
+              </Link>
+              {translations.notice3}
+            </NoticeText>
+          </Notice>
+        </NoticeCard>
       </Content>
     </Wrapper>
   );

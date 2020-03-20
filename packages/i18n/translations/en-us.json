@@ -31,14 +31,12 @@
     "campaignForm": {
       "createTitle": "Create Campaign",
       "editTitle": "Edit Campaign",
-      "subtitle": "Campaign Details",
       "name": "Name",
       "placeholder": "Add campaign name",
       "color": "Color",
-      "notice1": "Campaigns are visible to everyone in your organization,",
-      "notice2": " however, team members will only see content for the social accounts that they have access to. You can ",
-      "notice3": "read more",
-      "notice4": " in our FAQ.",
+      "notice1": "Campaign content is visible to everyone in your organization. ",
+      "notice2": "Find out more",
+      "notice3": " in our FAQ.",
       "saveCampaign": "Save Campaign",
       "cancel": "Cancel"
     },
