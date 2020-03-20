@@ -82,7 +82,7 @@ const Header = ({
           },
           {
             title: translations.editCampaign,
-            selectedItemClick: onEditCampaignClick,
+            selectedItemClick: () => onEditCampaignClick(campaignDetails.id),
           },
           {
             title: translations.deleteCampaign,
@@ -116,6 +116,7 @@ Header.propTypes = {
     deleteCampaign: PropTypes.string,
   }).isRequired,
   campaignDetails: PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
     color: PropTypes.string,
     dateRange: PropTypes.string,

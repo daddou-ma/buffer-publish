@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Input, Button, Link } from '@bufferapp/ui';
@@ -77,15 +77,33 @@ const colors = [
 
 /* Component */
 const CampaignForm = ({
+  campaignId,
   translations,
-  onCreateCampaignClick,
+  onCreateOrUpdateCampaignClick,
   onCancelClick,
-  isSaving,
+  isLoading,
+  editMode,
+  campaign,
+  fetchCampaign,
 }) => {
+  // Fetch Data
+  useEffect(() => {
+    if (editMode) {
+      fetchCampaign({ campaignId });
+    }
+  }, [campaignId]);
+
   // State
   const [campaignName, setName] = useState('');
   const [colorSelected, setColor] = useState(purple);
   const [isSubmitButtonDisabled, disableSubmit] = useState(true);
+
+  useEffect(() => {
+    if (editMode) {
+      setName(campaign?.name);
+      setColor(campaign?.color);
+    }
+  }, [campaign]);
 
   // State modifiers
   const disableCampaignSubmitButton = ({ name, color }) => {
@@ -108,7 +126,9 @@ const CampaignForm = ({
   return (
     <Wrapper>
       <Content>
-        <Text type="h1">{translations.title}</Text>
+        <Text type="h1">
+          {editMode ? translations.editTitle : translations.createTitle}
+        </Text>
         <Card>
           <Text type="h3">{translations.subtitle}</Text>
           <Input
@@ -149,8 +169,15 @@ const CampaignForm = ({
           type="primary"
           size="large"
           label={translations.saveCampaign}
-          onClick={() => onCreateCampaignClick({ colorSelected, campaignName })}
-          disabled={isSubmitButtonDisabled || isSaving}
+          onClick={() =>
+            onCreateOrUpdateCampaignClick({
+              campaignId,
+              colorSelected,
+              campaignName,
+              orgId: campaign?.globalOrganizationId,
+            })
+          }
+          disabled={isSubmitButtonDisabled || isLoading}
           fullWidth
         />
         <Button
@@ -167,7 +194,8 @@ const CampaignForm = ({
 
 CampaignForm.propTypes = {
   translations: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    editTitle: PropTypes.string.isRequired,
+    createTitle: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
@@ -179,9 +207,24 @@ CampaignForm.propTypes = {
     saveCampaign: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
   }).isRequired,
-  onCreateCampaignClick: PropTypes.func.isRequired,
+  campaignId: PropTypes.string,
+  fetchCampaign: PropTypes.func.isRequired,
+  onCreateOrUpdateCampaignClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
-  isSaving: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  editMode: PropTypes.bool,
+  campaign: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    color: PropTypes.string,
+    globalOrganizationId: PropTypes.string,
+  }),
+};
+
+CampaignForm.defaultProps = {
+  campaignId: '',
+  editMode: false,
+  campaign: {},
 };
 
 export default CampaignForm;
