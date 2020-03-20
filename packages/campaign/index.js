@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { campaignEdit } from '@bufferapp/publish-routes';
 import { actions } from './reducer';
@@ -11,8 +10,7 @@ export default connect(
       campaign: state.campaign.campaign,
       showComposer: state.campaign.showComposer,
       translations: state.i18n.translations.campaigns.viewCampaign,
-      isUsingPublishAsTeamMember:
-        state.appSidebar.user.isUsingPublishAsTeamMember,
+      hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
       hasCampaignsFlip: state.appSidebar.user.features
@@ -33,8 +31,8 @@ export default connect(
     onDeleteCampaignClick: campaign => {
       dispatch(modalsActions.showDeleteCampaignModal(campaign));
     },
-    goToAnalyzeReport: () => {
-      window.location.assign(`${getURL.getAnalyzeReportUrl()}`);
+    goToAnalyzeReport: campaign => {
+      dispatch(actions.goToAnalyzeReport(campaign));
     },
     onEditCampaignClick: campaignId => {
       if (campaignId) {
