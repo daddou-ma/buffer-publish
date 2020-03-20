@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
 import Select from '@bufferapp/ui/Select';
 import Tooltip from '@bufferapp/ui/Tooltip';
+import { gray, white, grayLighter } from '@bufferapp/ui/style/colors';
+import ChevronDownIcon from '@bufferapp/ui/Icon/Icons/ChevronDown';
 import styled from 'styled-components';
 import ComposerActionCreators from '../../action-creators/ComposerActionCreators';
 import QuestionIcon from '../QuestionIcon';
 
 const SelectWrapper = styled.div`
   display: flex;
+  min-width: 275px;
+  justify-content: center;
   margin-left: auto;
   p {
     margin-left: 0px !important;
@@ -49,6 +53,61 @@ const Icon = styled.div`
   margin-left: 9px;
 `;
 
+const Separator = styled.div`
+  border-top: 1px solid ${grayLighter};
+  margin-top: 15px;
+  margin-bottom: 15px;
+`;
+
+const CustomButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 0 0 auto;
+  font-family: 'Roboto', sans-serif;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 16px;
+  padding-left: 16px;
+  height: 40px;
+  background-color: ${white};
+  border: 1px solid ${gray};
+  justify-content: space-between;
+`;
+
+const CustomLabel = ({ campaign, onClick }) => (
+  <CustomButton onClick={onClick}>
+    <LabelWrapper>
+      {campaign.color && <Color color={campaign.color} />}
+      <Text color="grayDarker" type="label">
+        {campaign.name}
+      </Text>
+    </LabelWrapper>
+    <ChevronDownIcon />
+  </CustomButton>
+);
+
+CustomLabel.propTypes = {
+  campaign: PropTypes.shapeOf({
+    color: PropTypes.string,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
 const getLabel = campaign => (
   <LabelWrapper>
     {campaign.color && <Color color={campaign.color} />}
@@ -76,8 +135,9 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
     ComposerActionCreators.updateDraftsCampaignId(campaign.id);
   };
 
-  const getCampaignItems = () => {
+  const getCampaignItems = selectedCampaignId => {
     return campaigns.map(campaign => ({
+      selected: campaign.id === selectedCampaignId,
       title: getLabel(campaign),
       selectedItemClick: () => {
         updateCampaignId(campaign);
@@ -85,8 +145,9 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
     }));
   };
 
-  const noCampaignItem = () => {
+  const noCampaignItem = selectedCampaignId => {
     return {
+      selected: noCampaign.id === selectedCampaignId,
       title: getLabel(noCampaign),
       selectedItemClick: () => {
         updateCampaignId(noCampaign);
@@ -102,33 +163,39 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
   }, []);
 
   return (
-    <Container>
-      <Text>Include in Campaign</Text>
-      <Tooltip label="Manage related content across social accounts with a campaign.">
-        <Icon>
-          <QuestionIcon />
-        </Icon>
-      </Tooltip>
-      <SelectWrapper>
-        <Select
-          hideSearch
-          type="secondary"
-          label={selected.name}
-          icon={
-            hasCampaigns && selected.color && <Color color={selected.color} />
-          }
-          component={getLabel(selected)}
-          disabled={!hasCampaigns}
-          onSelectClick={selectedItem => {
-            if (typeof selectedItem.selectedItemClick !== 'undefined') {
-              selectedItem.selectedItemClick();
-            }
-            return false;
-          }}
-          items={[noCampaignItem(), ...getCampaignItems()]}
-        />
-      </SelectWrapper>
-    </Container>
+    <React.Fragment>
+      <Container>
+        <Text>Include in Campaign</Text>
+        <Tooltip label="Manage related content across social accounts with a campaign.">
+          <Icon>
+            <QuestionIcon />
+          </Icon>
+        </Tooltip>
+        <SelectWrapper>
+          <Select
+            hideSearch
+            fullWidth
+            type="secondary"
+            label={selected.name}
+            customButton={onClick => (
+              <CustomLabel campaign={selected} onClick={onClick} />
+            )}
+            disabled={!hasCampaigns}
+            onSelectClick={selectedItem => {
+              if (typeof selectedItem.selectedItemClick !== 'undefined') {
+                selectedItem.selectedItemClick();
+              }
+              return false;
+            }}
+            items={[
+              noCampaignItem(selected.id),
+              ...getCampaignItems(selected.id),
+            ]}
+          />
+        </SelectWrapper>
+      </Container>
+      <Separator />
+    </React.Fragment>
   );
 };
 
