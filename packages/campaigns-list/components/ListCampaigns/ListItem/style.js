@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { grayDark, grayLighter, blue } from '@bufferapp/ui/style/colors';
+import { grayDark, grayLight, grayLighter } from '@bufferapp/ui/style/colors';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
@@ -18,7 +18,7 @@ export const Container = styled.li`
   grid-template-columns: 1.5fr 1.2fr 1fr 0.7fr 1fr;
   grid-column-gap: 20px;
   padding: 16px;
-  border-top: 1px solid ${grayLighter};
+  border-top: 1px solid ${grayLight};
   align-items: center;
   transition: background-color 250ms ease-in-out;
   :hover {
