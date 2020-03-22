@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import EmptyState from './EmptyState';
 import List from './List';
 import { borderRadius } from '@bufferapp/ui/style/borders';
-import { gray, white } from '@bufferapp/ui/style/colors';
+import { grayLighter, gray, white } from '@bufferapp/ui/style/colors';
 
 /* Styles */
 const Wrapper = styled.div`
