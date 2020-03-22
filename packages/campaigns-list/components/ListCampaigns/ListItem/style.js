@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { grayDark, grayLighter } from '@bufferapp/ui/style/colors';
+import { grayDark, grayLighter, blue } from '@bufferapp/ui/style/colors';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
@@ -20,6 +20,10 @@ export const Container = styled.li`
   padding: 16px;
   border-top: 1px solid ${grayLighter};
   align-items: center;
+  transition: background-color 250ms ease-in-out;
+  :hover {
+    background-color: ${grayLighter};
+  }
 `;
 
 export const LastUpdated = styled.span`
