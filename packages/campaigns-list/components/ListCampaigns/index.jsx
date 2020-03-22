@@ -49,7 +49,7 @@ const ListCampaigns = ({
   onViewCampaignClick,
   goToAnalyzeReport,
   onOpenCreateCampaignClick,
-  isUsingPublishAsTeamMember,
+  hideAnalyzeReport,
   hasCampaignsFlip,
   fetchCampaigns,
   isLoading,
@@ -94,14 +94,14 @@ const ListCampaigns = ({
           />
         </Header>
         <List
-          campaigns={campaigns}
-          onEditCampaignClick={onEditCampaignClick}
-          onDeleteCampaignClick={onDeleteCampaignClick}
-          onViewCampaignClick={onViewCampaignClick}
-          goToAnalyzeReport={goToAnalyzeReport}
-          translations={translations.viewCampaign}
-          isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
-        />
+        campaigns={campaigns}
+        onEditCampaignClick={onEditCampaignClick}
+        onDeleteCampaignClick={onDeleteCampaignClick}
+        onViewCampaignClick={onViewCampaignClick}
+        goToAnalyzeReport={goToAnalyzeReport}
+        translations={translations.viewCampaign}
+        hideAnalyzeReport={hideAnalyzeReport}
+      />
       </Container>
     </Wrapper>
   );
@@ -115,7 +115,7 @@ ListCampaigns.propTypes = {
   onDeleteCampaignClick: PropTypes.func,
   onViewCampaignClick: PropTypes.func,
   goToAnalyzeReport: PropTypes.func,
-  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
+  hideAnalyzeReport: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
   fetchCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
