@@ -6,10 +6,19 @@ import { getURL } from '@bufferapp/publish-server/formatters/src';
 import styled from 'styled-components';
 import EmptyState from './EmptyState';
 import List from './List';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import { gray, white } from '@bufferapp/ui/style/colors';
+
+/* Styles */
+const Wrapper = styled.div`
+  background-color: ${grayLighter};
+  height: 100%;
+`;
 
 const Header = styled.header`
   display: flex;
   align-items: center;
+  padding: 0 16px;
   button {
     margin-left: auto;
   }
@@ -17,7 +26,12 @@ const Header = styled.header`
 
 const Container = styled.div`
   margin: 13px;
-  max-width: 864px;
+  min-width: 800px;
+  max-width: 1100px;
+  border-radius: ${borderRadius};
+  border: 1px solid ${gray};
+  background-color: ${white};
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
 `;
 
 const LoadingContainer = styled.div`
@@ -69,25 +83,27 @@ const ListCampaigns = ({
   }
 
   return (
-    <Container>
-      <Header>
-        <Text type="h2">Campaigns</Text>
-        <Button
-          type="primary"
-          label="Create Campaign"
-          onClick={onOpenCreateCampaignClick}
+    <Wrapper>
+      <Container>
+        <Header>
+          <Text type="h2">Campaigns</Text>
+          <Button
+            type="primary"
+            label="Create Campaign"
+            onClick={onOpenCreateCampaignClick}
+          />
+        </Header>
+        <List
+          campaigns={campaigns}
+          onEditCampaignClick={onEditCampaignClick}
+          onDeleteCampaignClick={onDeleteCampaignClick}
+          onViewCampaignClick={onViewCampaignClick}
+          goToAnalyzeReport={goToAnalyzeReport}
+          translations={translations.viewCampaign}
+          isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
         />
-      </Header>
-      <List
-        campaigns={campaigns}
-        onEditCampaignClick={onEditCampaignClick}
-        onDeleteCampaignClick={onDeleteCampaignClick}
-        onViewCampaignClick={onViewCampaignClick}
-        goToAnalyzeReport={goToAnalyzeReport}
-        translations={translations.viewCampaign}
-        isUsingPublishAsTeamMember={isUsingPublishAsTeamMember}
-      />
-    </Container>
+      </Container>
+    </Wrapper>
   );
 };
 
