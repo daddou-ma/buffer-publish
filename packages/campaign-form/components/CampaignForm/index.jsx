@@ -23,12 +23,12 @@ import {
 
 /* Styles */
 const Wrapper = styled.div`
-  background-color: ${white};
+  background-color: ${grayLighter};
   height: 100%;
 `;
 
 const Content = styled.div`
-  background-color: ${white};
+  background-color: none;
   width: 362px;
   margin: 53px 0 0 283px;
 `;
@@ -36,10 +36,11 @@ const Content = styled.div`
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${grayLighter};
+  background: ${white};
   border: 1px solid ${grayLight};
   box-sizing: border-box;
   border-radius: ${borderRadius};
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
   width: 100%;
   padding: 0 16px;
 `;
@@ -52,6 +53,7 @@ const NoticeCard = styled(Card)`
   flex-direction: row;
   border: 1px solid ${grayLight};
   background: none;
+  box-shadow: none;
   margin: 16px 0 24px;
   padding: 16px;
 `;
