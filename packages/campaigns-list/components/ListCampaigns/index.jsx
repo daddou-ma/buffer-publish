@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import {
+  grayLighter,
+  gray,
+  white,
+  grayShadow,
+} from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
 import EmptyState from './EmptyState';
 import List from './List';
-import { borderRadius } from '@bufferapp/ui/style/borders';
-import { grayLighter, gray, white, grayShadow } from '@bufferapp/ui/style/colors';
 
 /* Styles */
 const Wrapper = styled.div`
@@ -94,14 +99,14 @@ const ListCampaigns = ({
           />
         </Header>
         <List
-        campaigns={campaigns}
-        onEditCampaignClick={onEditCampaignClick}
-        onDeleteCampaignClick={onDeleteCampaignClick}
-        onViewCampaignClick={onViewCampaignClick}
-        goToAnalyzeReport={goToAnalyzeReport}
-        translations={translations.viewCampaign}
-        hideAnalyzeReport={hideAnalyzeReport}
-      />
+          campaigns={campaigns}
+          onEditCampaignClick={onEditCampaignClick}
+          onDeleteCampaignClick={onDeleteCampaignClick}
+          onViewCampaignClick={onViewCampaignClick}
+          goToAnalyzeReport={goToAnalyzeReport}
+          translations={translations.viewCampaign}
+          hideAnalyzeReport={hideAnalyzeReport}
+        />
       </Container>
     </Wrapper>
   );
