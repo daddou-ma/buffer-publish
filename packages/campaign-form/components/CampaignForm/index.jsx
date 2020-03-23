@@ -6,7 +6,6 @@ import { SimpleColorPicker } from '@bufferapp/publish-shared-components';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { View } from '@bufferapp/ui/Icon';
 import {
-  gray,
   grayLight,
   grayLighter,
   grayDark,
@@ -45,7 +44,7 @@ const Card = styled.div`
   padding: 0 16px;
 `;
 
-const HeadlineContainer = styled.div`
+const HeadlineContainer = styled(Text)`
   text-align: center;
 `;
 
@@ -132,10 +131,8 @@ const CampaignForm = ({
     <Wrapper>
       <Content>
         <Card>
-          <HeadlineContainer>
-            <Text type="h2">
-              {editMode ? translations.editTitle : translations.createTitle}
-            </Text>
+          <HeadlineContainer type="h2">
+            {editMode ? translations.editTitle : translations.createTitle}
           </HeadlineContainer>
           <Input
             type="input"
@@ -156,28 +153,28 @@ const CampaignForm = ({
             colorSelected={colorSelected}
             onColorClick={setCampaignColor}
           />
-        <Button
-          type="primary"
-          size="large"
-          label={translations.saveCampaign}
-          onClick={() =>
-            onCreateOrUpdateCampaignClick({
-              campaignId,
-              colorSelected,
-              campaignName,
-              orgId: campaign?.globalOrganizationId,
-            })
-          }
-          disabled={isSubmitButtonDisabled || isLoading}
-          fullWidth
-        />
-        <Button
-          type="text"
-          size="large"
-          label={translations.cancel}
-          onClick={onCancelClick}
-          fullWidth
-        />
+          <Button
+            type="primary"
+            size="large"
+            label={translations.saveCampaign}
+            onClick={() =>
+              onCreateOrUpdateCampaignClick({
+                campaignId,
+                colorSelected,
+                campaignName,
+                orgId: campaign?.globalOrganizationId,
+              })
+            }
+            disabled={isSubmitButtonDisabled || isLoading}
+            fullWidth
+          />
+          <Button
+            type="text"
+            size="large"
+            label={translations.cancel}
+            onClick={onCancelClick}
+            fullWidth
+          />
         </Card>
         <NoticeCard>
           <View color={grayDark} />
@@ -208,7 +205,6 @@ CampaignForm.propTypes = {
     notice1: PropTypes.string.isRequired,
     notice2: PropTypes.string.isRequired,
     notice3: PropTypes.string.isRequired,
-    notice4: PropTypes.string.isRequired,
     saveCampaign: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
   }).isRequired,
