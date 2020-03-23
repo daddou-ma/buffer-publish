@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
 import Select from '@bufferapp/ui/Select';
 import Tooltip from '@bufferapp/ui/Tooltip';
-import { gray, white, grayLighter } from '@bufferapp/ui/style/colors';
+import CheckmarkIcon from '@bufferapp/ui/Icon/Icons/Checkmark';
+import { gray, white, grayLight } from '@bufferapp/ui/style/colors';
 import ChevronDownIcon from '@bufferapp/ui/Icon/Icons/ChevronDown';
 import styled from 'styled-components';
 import ComposerActionCreators from '../../action-creators/ComposerActionCreators';
@@ -37,16 +38,6 @@ const Color = styled.div`
   margin-right: 10px;
 `;
 
-const LabelWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  p {
-    margin-left: 0px;
-  }
-`;
-
 const Icon = styled.div`
   display: flex;
   align-items: center;
@@ -54,9 +45,8 @@ const Icon = styled.div`
 `;
 
 const Separator = styled.div`
-  border-top: 1px solid ${grayLighter};
-  margin-top: 15px;
-  margin-bottom: 15px;
+  border-top: 1px solid ${grayLight};
+  margin: 15px -20px;
 `;
 
 const CustomButton = styled.div`
@@ -88,6 +78,20 @@ const CustomButton = styled.div`
   justify-content: space-between;
 `;
 
+const Checkmark = styled(CheckmarkIcon)`
+  margin-right: 8px;
+`;
+
+const LabelWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  p {
+    margin-left: 0px;
+  }
+`;
+
 const CustomLabel = ({ campaign, onClick }) => (
   <CustomButton onClick={onClick}>
     <LabelWrapper>
@@ -108,10 +112,27 @@ CustomLabel.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-const getLabel = campaign => (
+const IconWrapper = styled.div`
+  display: flex;
+  min-width: 24px;
+`;
+const ColorWrapper = styled.div`
+  min-width: 18px;
+`;
+const TextWrapper = styled.div`
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+
+const getLabel = (campaign, isSelected) => (
   <LabelWrapper>
-    {campaign.color && <Color color={campaign.color} />}
-    <Text>{campaign.name}</Text>
+    <IconWrapper>{isSelected && <Checkmark />}</IconWrapper>
+    <ColorWrapper>
+      {campaign.color && <Color color={campaign.color} />}
+    </ColorWrapper>
+    <TextWrapper>
+      <Text>{campaign.name}</Text>
+    </TextWrapper>
   </LabelWrapper>
 );
 
@@ -137,8 +158,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
 
   const getCampaignItems = selectedCampaignId => {
     return campaigns.map(campaign => ({
-      selected: campaign.id === selectedCampaignId,
-      title: getLabel(campaign),
+      title: getLabel(campaign, campaign.id === selectedCampaignId),
       selectedItemClick: () => {
         updateCampaignId(campaign);
       },
@@ -146,9 +166,9 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
   };
 
   const noCampaignItem = selectedCampaignId => {
+    const isSelected = noCampaign.id === selectedCampaignId;
     return {
-      selected: noCampaign.id === selectedCampaignId,
-      title: getLabel(noCampaign),
+      title: getLabel(noCampaign, isSelected),
       selectedItemClick: () => {
         updateCampaignId(noCampaign);
       },
