@@ -29,6 +29,7 @@ const LoadingContainer = styled.div`
 /* Component */
 const ViewCampaign = ({
   campaign,
+  campaignPosts,
   showComposer,
   isLoading,
   isUsingPublishAsTeamMember,
@@ -98,12 +99,12 @@ const ViewCampaign = ({
             </Tabs>
           </nav>
           <QueueItems
-            items={campaign.items}
+            items={campaignPosts}
             onDeleteConfirmClick={null}
             onEditClick={null}
             onShareNowClick={null}
             draggable={false}
-            type="post"
+            type="campaigns"
             hasFirstCommentFlip={null}
             isBusinessAccount={null}
             onPreviewClick={null}
