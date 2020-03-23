@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import EmptyState from './EmptyState';
 import List from './List';
 import { borderRadius } from '@bufferapp/ui/style/borders';
-import { grayLighter, gray, white } from '@bufferapp/ui/style/colors';
+import { grayLighter, gray, white, grayShadow } from '@bufferapp/ui/style/colors';
 
 /* Styles */
 const Wrapper = styled.div`
@@ -31,7 +31,7 @@ const Container = styled.div`
   border-radius: ${borderRadius};
   border: 1px solid ${gray};
   background-color: ${white};
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: ${grayShadow};
 `;
 
 const LoadingContainer = styled.div`
