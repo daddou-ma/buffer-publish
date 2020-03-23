@@ -131,7 +131,7 @@ const handlePostsReordered = (posts, { order: newOrder }) => {
   return newPostsMap;
 };
 
-const sortCampaignsByUpdatedAt = campaigns =>
+export const sortCampaignsByUpdatedAt = campaigns =>
   campaigns?.sort((first, second) => second.updatedAt - first.updatedAt);
 
 /**

@@ -1,6 +1,9 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
-import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
+import {
+  actionTypes as queueActionTypes,
+  sortCampaignsByUpdatedAt,
+} from '@bufferapp/publish-queue/reducer';
 import keyWrapper from '@bufferapp/keywrapper';
 import { header, subHeader } from './components/PastRemindersPosts/postData';
 
@@ -85,9 +88,6 @@ const getPostUpdateId = action => {
     return action.post.id;
   }
 };
-
-const sortCampaignsByUpdatedAt = campaigns =>
-  campaigns?.sort((first, second) => second.updatedAt - first.updatedAt);
 
 const postReducer = (state, action) => {
   switch (action.type) {
