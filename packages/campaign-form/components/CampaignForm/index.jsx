@@ -27,7 +27,6 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  background-color: none;
   width: 362px;
   margin: 53px 0 0 283px;
 `;
