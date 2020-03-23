@@ -6,7 +6,6 @@ import { SimpleColorPicker } from '@bufferapp/publish-shared-components';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { View } from '@bufferapp/ui/Icon';
 import {
-  gray,
   grayLight,
   grayLighter,
   grayDark,
@@ -19,13 +18,13 @@ import {
   green,
   teal,
   blueDark,
+  grayShadow
 } from '@bufferapp/ui/style/colors';
 
 /* Styles */
 const Wrapper = styled.div`
   background-color: ${grayLighter};
   height: 100%;
-  text-align: center;
 `;
 
 const Content = styled.div`
@@ -37,20 +36,25 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   background: ${white};
-  border: 1px solid ${gray};
+  border: 1px solid ${grayLight};
   box-sizing: border-box;
   border-radius: ${borderRadius};
+  box-shadow: ${grayShadow};
   width: 100%;
   padding: 0 16px;
-  text-align: left;
+`;
+
+const Headline = styled(Text)`
+  text-align: center;
 `;
 
 const NoticeCard = styled(Card)`
   flex-direction: row;
   border: 1px solid ${grayLight};
   background: none;
+  box-shadow: none;
   margin: 16px 0 24px;
-  padding: 24px 16px;
+  padding: 16px;
 `;
 
 const Notice = styled.div`
@@ -126,11 +130,10 @@ const CampaignForm = ({
   return (
     <Wrapper>
       <Content>
-        <Text type="h1">
-          {editMode ? translations.editTitle : translations.createTitle}
-        </Text>
         <Card>
-          <Text type="h3">{translations.subtitle}</Text>
+          <Headline type="h2">
+            {editMode ? translations.editTitle : translations.createTitle}
+          </Headline>
           <Input
             type="input"
             value={campaignName}
@@ -150,43 +153,42 @@ const CampaignForm = ({
             colorSelected={colorSelected}
             onColorClick={setCampaignColor}
           />
+          <Button
+            type="primary"
+            size="large"
+            label={translations.saveCampaign}
+            onClick={() =>
+              onCreateOrUpdateCampaignClick({
+                campaignId,
+                colorSelected,
+                campaignName,
+                orgId: campaign?.globalOrganizationId,
+              })
+            }
+            disabled={isSubmitButtonDisabled || isLoading}
+            fullWidth
+          />
+          <Button
+            type="text"
+            size="large"
+            label={translations.cancel}
+            onClick={onCancelClick}
+            fullWidth
+          />
         </Card>
         <NoticeCard>
           <View color={grayDark} />
           <Notice>
             <NoticeText type="p" color={grayDark}>
-              <b>{translations.notice1}</b>
-              {translations.notice2}
+              {translations.notice1}
               {/* FAQ link has to be replaced */}
               <Link href="https://faq.buffer.com/" newTab>
-                {translations.notice3}
+                {translations.notice2}
               </Link>
-              {translations.notice4}
+              {translations.notice3}
             </NoticeText>
           </Notice>
         </NoticeCard>
-        <Button
-          type="primary"
-          size="large"
-          label={translations.saveCampaign}
-          onClick={() =>
-            onCreateOrUpdateCampaignClick({
-              campaignId,
-              colorSelected,
-              campaignName,
-              orgId: campaign?.globalOrganizationId,
-            })
-          }
-          disabled={isSubmitButtonDisabled || isLoading}
-          fullWidth
-        />
-        <Button
-          type="text"
-          size="large"
-          label={translations.cancel}
-          onClick={onCancelClick}
-          fullWidth
-        />
       </Content>
     </Wrapper>
   );
@@ -203,7 +205,6 @@ CampaignForm.propTypes = {
     notice1: PropTypes.string.isRequired,
     notice2: PropTypes.string.isRequired,
     notice3: PropTypes.string.isRequired,
-    notice4: PropTypes.string.isRequired,
     saveCampaign: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
   }).isRequired,
