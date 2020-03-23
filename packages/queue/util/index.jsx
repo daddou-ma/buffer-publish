@@ -508,12 +508,20 @@ export const formatPostLists = ({
    */
   let lastHeader = null;
   return orderedPosts.reduce((finalList, post, index) => {
+    if (post.content) post = post.content;
     const hasCommentEnabled = postHasCommentEnabled(post);
     if (lastHeader !== post.day) {
+      const dayElementsInArray = post?.day?.split(' ');
+      const date =
+        dayElementsInArray?.length === 3
+          ? `${dayElementsInArray[1]} ${dayElementsInArray[2]}`
+          : undefined;
       lastHeader = post.day;
       finalList.push({
         queueItemType: 'header',
         text: post.day,
+        dayOfWeek: dayElementsInArray[0],
+        date,
         id: `header-${index}`,
         hasCommentEnabled,
       });
