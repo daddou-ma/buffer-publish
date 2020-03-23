@@ -116,16 +116,18 @@ const IconWrapper = styled.div`
   display: flex;
   min-width: 24px;
 `;
+
 const ColorWrapper = styled.div`
   min-width: 18px;
 `;
+
 const TextWrapper = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
 `;
 
 const getLabel = (campaign, isSelected) => (
-  <LabelWrapper>
+  <LabelWrapper title={campaign.name}>
     <IconWrapper>{isSelected && <Checkmark />}</IconWrapper>
     <ColorWrapper>
       {campaign.color && <Color color={campaign.color} />}
@@ -166,9 +168,8 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
   };
 
   const noCampaignItem = selectedCampaignId => {
-    const isSelected = noCampaign.id === selectedCampaignId;
     return {
-      title: getLabel(noCampaign, isSelected),
+      title: getLabel(noCampaign, noCampaign.id === selectedCampaignId),
       selectedItemClick: () => {
         updateCampaignId(noCampaign);
       },
