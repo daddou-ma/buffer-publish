@@ -75,6 +75,9 @@ const getPostUpdateId = action => {
   }
 };
 
+const sortCampaignsByUpdatedAt = campaigns =>
+  campaigns?.sort((first, second) => second.updatedAt - first.updatedAt);
+
 const postReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.POST_IMAGE_CLICKED:
@@ -222,7 +225,7 @@ export default (state = initialState, action) => {
     case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
       return {
         ...state,
-        campaigns: action.result,
+        campaigns: sortCampaignsByUpdatedAt(action.result),
       };
     default:
       return state;
