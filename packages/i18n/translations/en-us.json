@@ -48,10 +48,10 @@
       "editCampaign": "Edit Campaign",
       "deleteCampaign": "Delete Campaign",
       "createPost": "Create Post",
-      "createPosts": "Create Posts For Campaign",
+      "createPosts": "Create Posts",
       "learnMore": "Learn More",
-      "subtext": "Plan and schedule content across multiple social accounts all in one place. Get started by creating your posts for the campaign.",
-      "title": "Build your Campaign",
+      "subtext": "Create posts for this Campaign and they’ll be grouped together so that you can keep better track of them in one place.",
+      "title": "Build Your Campaign",
       "scheduled": "Scheduled",
       "sent": "Sent"
     },
