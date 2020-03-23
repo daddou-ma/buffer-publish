@@ -43,9 +43,7 @@ CustomLabel.propTypes = {
 const getLabel = (campaign, isSelected) => (
   <LabelWrapper title={campaign.name}>
     <IconWrapper>{isSelected && <Checkmark />}</IconWrapper>
-    <ColorWrapper>
-      {campaign.color && <Color color={campaign.color} />}
-    </ColorWrapper>
+    {campaign.color && <Color color={campaign.color} />}
     <TextWrapper>
       <Text>{campaign.name}</Text>
     </TextWrapper>
@@ -100,7 +98,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
   return (
     <React.Fragment>
       <Container>
-        <Text>Include in Campaign</Text>
+        <Text type="label">Campaign</Text>
         <Tooltip label="Manage related content across social accounts with a campaign.">
           <Icon>
             <QuestionIcon />

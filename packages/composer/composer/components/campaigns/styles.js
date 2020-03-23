@@ -28,6 +28,8 @@ export const Color = styled.div`
   border-radius: 50%;
   background-color: ${props => props.color};
   margin-right: 10px;
+  display: flex;
+  flex-shrink: 0;
 `;
 
 export const Icon = styled.div`
@@ -87,10 +89,6 @@ export const LabelWrapper = styled.div`
 export const IconWrapper = styled.div`
   display: flex;
   min-width: 24px;
-`;
-
-export const ColorWrapper = styled.div`
-  min-width: 18px;
 `;
 
 export const TextWrapper = styled.div`
