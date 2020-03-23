@@ -26,8 +26,8 @@ const Header = styled.header`
 
 const Container = styled.div`
   margin: 13px;
-  min-width: 800px;
-  max-width: 1100px;
+  min-width: 750px;
+  max-width: 1008px;
   border-radius: ${borderRadius};
   border: 1px solid ${gray};
   background-color: ${white};
