@@ -18,6 +18,7 @@ import {
   green,
   teal,
   blueDark,
+  grayShadow
 } from '@bufferapp/ui/style/colors';
 
 /* Styles */
@@ -27,7 +28,6 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  background-color: none;
   width: 362px;
   margin: 53px 0 0 283px;
 `;
@@ -39,12 +39,12 @@ const Card = styled.div`
   border: 1px solid ${grayLight};
   box-sizing: border-box;
   border-radius: ${borderRadius};
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: ${grayShadow};
   width: 100%;
   padding: 0 16px;
 `;
 
-const HeadlineContainer = styled(Text)`
+const Headline = styled(Text)`
   text-align: center;
 `;
 
@@ -131,9 +131,9 @@ const CampaignForm = ({
     <Wrapper>
       <Content>
         <Card>
-          <HeadlineContainer type="h2">
+          <Headline type="h2">
             {editMode ? translations.editTitle : translations.createTitle}
-          </HeadlineContainer>
+          </Headline>
           <Input
             type="input"
             value={campaignName}
