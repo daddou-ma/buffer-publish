@@ -69,8 +69,8 @@ const parseItem = item => {
           handle: item.service_username,
           type: profile_service,
         },
-        creatorName: user.name,
-        avatarUrl: user.avatar,
+        creatorName: user && user.name,
+        avatarUrl: user && user.avatar,
         createdAt: createdAtString,
       };
     }
