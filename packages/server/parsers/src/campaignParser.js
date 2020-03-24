@@ -56,13 +56,14 @@ const parseItem = item => {
         profile_service,
         user,
       } = itemContent.content;
-      // String with update creation date
+      // String with the date of the update creation
       const createdAtString =
         createdAt &&
         getDateString(createdAt, profileTimezone, {
           createdAt,
           twentyFourHourTime: false,
         });
+      // Header details to be used in the CardHeader
       itemContent.content.headerDetails = {
         channel: {
           avatarUrl: item.service_avatar,

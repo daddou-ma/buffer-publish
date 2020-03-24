@@ -48,7 +48,6 @@ const renderPost = ({
   post,
   index,
   isStory,
-  isCampaign,
   onRequeueClick,
   onDeleteConfirmClick,
   onEditClick,
@@ -85,7 +84,6 @@ const renderPost = ({
     hasFirstCommentFlip,
     serviceId,
     userData,
-    isCampaign,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
   PostComponent = PostComponent || TextPost;
@@ -204,13 +202,6 @@ const QueueItems = props => {
             post: rest,
             index,
             isStory: true,
-            ...propsForPosts,
-          });
-        case 'campaigns':
-          return renderPost({
-            post: rest,
-            index,
-            isCampaign: true,
             ...propsForPosts,
           });
         default:

@@ -511,6 +511,8 @@ export const formatPostLists = ({
     if (post.content) post = post.content;
     const hasCommentEnabled = postHasCommentEnabled(post);
     if (lastHeader !== post.day) {
+      // post.day is coming as a string of dayOfWeek, day and Month (e.g Tomorrow 3rd March)
+      // we want to separate the dayOfWeek from the rest of the date
       const dayElementsInArray = post?.day?.split(' ');
       const date =
         dayElementsInArray?.length === 3
@@ -520,7 +522,7 @@ export const formatPostLists = ({
       finalList.push({
         queueItemType: 'header',
         text: post.day,
-        dayOfWeek: dayElementsInArray[0],
+        dayOfWeek: dayElementsInArray && dayElementsInArray[0],
         date,
         id: `header-${index}`,
         hasCommentEnabled,
