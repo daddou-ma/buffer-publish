@@ -102,13 +102,7 @@ const ViewCampaign = ({
             onDeleteConfirmClick={null}
             onEditClick={null}
             onShareNowClick={null}
-            draggable={false}
             type="post"
-            hasFirstCommentFlip={null}
-            isBusinessAccount={null}
-            onPreviewClick={null}
-            serviceId={null}
-            userData={null}
           />
         </React.Fragment>
       ) : (
