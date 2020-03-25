@@ -44,10 +44,8 @@ const Container = styled.div`
 `;
 
 const LoadingContainer = styled.div`
-  width: 100%;
-  height: 100%;
   text-align: center;
-  padding-top: 5rem;
+  padding: 5rem 0px;
 `;
 
 const ListCampaigns = ({
@@ -74,9 +72,11 @@ const ListCampaigns = ({
 
   if (isLoading) {
     return (
-      <LoadingContainer>
-        <BufferLoading size={64} />
-      </LoadingContainer>
+      <Container>
+        <LoadingContainer>
+          <BufferLoading size={64} />
+        </LoadingContainer>
+      </Container>
     );
   }
 
