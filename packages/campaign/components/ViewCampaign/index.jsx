@@ -29,6 +29,7 @@ const LoadingContainer = styled.div`
 /* Component */
 const ViewCampaign = ({
   campaign,
+  campaignPosts,
   showComposer,
   isLoading,
   hideAnalyzeReport,
@@ -97,7 +98,7 @@ const ViewCampaign = ({
             </Tabs>
           </nav>
           <QueueItems
-            items={campaign.items}
+            items={campaignPosts}
             onDeleteConfirmClick={null}
             onEditClick={null}
             onShareNowClick={null}

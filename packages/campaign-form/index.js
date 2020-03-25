@@ -12,7 +12,7 @@ export default connect(
       isLoading: state.campaignForm.isLoading,
       editMode: ownProps.editMode,
       campaignId:
-        state?.campaignForm?.campaignId || ownProps?.match?.params?.id,
+        ownProps?.match?.params?.id || state?.campaignForm?.campaignId,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')
         : false,

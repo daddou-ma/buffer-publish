@@ -62,10 +62,11 @@ export const actions = {
   handleCloseComposer: () => ({
     type: actionTypes.CLOSE_COMPOSER,
   }),
-  fetchCampaign: ({ campaignId, past }) => ({
+  fetchCampaign: ({ campaignId, past, fullItems }) => ({
     type: actionTypes.FETCH_CAMPAIGN,
     campaignId,
     past,
+    fullItems,
   }),
   goToAnalyzeReport: campaign => ({
     type: actionTypes.GO_TO_ANALYZE_REPORT,
