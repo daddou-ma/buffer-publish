@@ -11,7 +11,7 @@ export default connect(
     let campaignPosts = [];
     if (state.campaign.campaign.items) {
       campaignPosts = formatPostLists({
-        isManager: true,
+        isManager: true, // temporary value
         posts: state.campaign.campaign.items,
         orderBy: 'dueAt',
       });
