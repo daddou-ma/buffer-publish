@@ -16,8 +16,12 @@ import List from './List';
 
 /* Styles */
 const Wrapper = styled.div`
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 1px;
   background-color: ${grayLighter};
-  height: 100%;
 `;
 
 const Header = styled.header`
@@ -70,11 +74,9 @@ const ListCampaigns = ({
 
   if (isLoading) {
     return (
-      <Container>
-        <LoadingContainer>
-          <BufferLoading size={64} />
-        </LoadingContainer>
-      </Container>
+      <LoadingContainer>
+        <BufferLoading size={64} />
+      </LoadingContainer>
     );
   }
 
