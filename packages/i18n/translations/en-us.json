@@ -20,11 +20,11 @@
   },
   "campaigns": {
     "emptyState": {
-      "title": "Execute your social strategy from one easy-to-manage campaign space.",
-      "step1": "Execute on your social strategy from one easy-to-manage campaign space.",
-      "step2": "View related posts across profiles.",
-      "step3": "Optimize performance with data insights in Analyze.",
-      "createCampaign": "Create a Campaign",
+      "title": "With Campaigns you can organize your social media posts into themes or topics and track their success.",
+      "step1": "Create a healthy mix of content.",
+      "step2": "Keep your content organized across social channels.",
+      "step3": "Understand how different content types resonate with your audience.",
+      "createCampaign": "Categorize your content using Campaigns",
       "learnMore": "Learn More",
       "imageTag": "Example of campaign with multiple posts scheduled."
     },
