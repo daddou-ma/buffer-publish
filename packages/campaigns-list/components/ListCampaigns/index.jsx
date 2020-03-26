@@ -16,11 +16,6 @@ import List from './List';
 
 /* Styles */
 const Wrapper = styled.div`
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  height: 1px;
   background-color: ${grayLighter};
 `;
 
