@@ -16,13 +16,17 @@ const Content = styled.div`
 
 const Image = styled.img`
   object-fit: contain;
-  max-width: 753px;
+  max-width: 1200px;
   width: 100%;
 `;
 
 const LinkWithStyles = styled(Link)`
   display: inline-block;
   padding: 16px;
+`;
+
+const ImageWrapper = styled.span`
+  margin-left: 40px;
 `;
 
 const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
@@ -59,12 +63,12 @@ const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
           </LinkWithStyles>
         </div>
       </Content>
-      <span>
+      <ImageWrapper>
         <Image
           src="https://buffer-publish.s3.amazonaws.com/images/campaigns-emptystate-screenshot.png"
           alt={imageTag}
         />
-      </span>
+      </ImageWrapper>
     </EmptyStateContainer>
   );
 };
