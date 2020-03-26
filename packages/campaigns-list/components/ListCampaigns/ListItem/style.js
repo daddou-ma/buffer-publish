@@ -14,7 +14,7 @@ export const Color = styled.div`
 // using grid layout to align the campaign list details
 export const Container = styled.li`
   display: grid;
-  grid-template-columns: 1.5fr 1.2fr 1fr 0.7fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 0.7fr 1fr;
   grid-column-gap: 20px;
   padding: 16px;
   border-top: 1px solid ${grayLight};
