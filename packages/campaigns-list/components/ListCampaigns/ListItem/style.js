@@ -14,7 +14,7 @@ export const Color = styled.div`
 // using grid layout to align the campaign list details
 export const Container = styled.li`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 0.7fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 24px;
   padding: 16px;
   border-top: 1px solid ${grayLight};
@@ -56,7 +56,7 @@ export const Icon = styled.span`
 
 export const LeftWrapper = styled.div`
   p {
-    margin: 6px 0px 0px 20px;
+    margin: 4px 0px 0px 22px;
   }
 `;
 
