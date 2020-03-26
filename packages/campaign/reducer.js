@@ -13,6 +13,8 @@ export const initialState = {
   isLoading: false,
   campaignId: null,
   showComposer: false,
+  editMode: false,
+  editingPostId: '',
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +43,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showComposer: true,
+        editMode: action.editMode,
+        editingPostId: action.updateId,
       };
     }
     case actionTypes.CLOSE_COMPOSER: {
@@ -55,6 +59,13 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
+  handleEditClick: ({ post, profileId }) => ({
+    type: actionTypes.OPEN_COMPOSER,
+    updateId: post.id,
+    editMode: true,
+    post,
+    profileId,
+  }),
   handleOpenComposer: campaignId => ({
     type: actionTypes.OPEN_COMPOSER,
     campaignId,
