@@ -6,6 +6,7 @@ import { Checklist } from '@bufferapp/publish-shared-components';
 
 const EmptyStateContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-left: 48px;
 `;
 
@@ -58,10 +59,12 @@ const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
           </LinkWithStyles>
         </div>
       </Content>
-      <Image
-        src="https://buffer-publish.s3.amazonaws.com/images/campaigns-emptystate-screenshot.png"
-        alt={imageTag}
-      />
+      <span>
+        <Image
+          src="https://buffer-publish.s3.amazonaws.com/images/campaigns-emptystate-screenshot.png"
+          alt={imageTag}
+        />
+      </span>
     </EmptyStateContainer>
   );
 };
