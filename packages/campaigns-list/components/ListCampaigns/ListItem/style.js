@@ -46,7 +46,7 @@ export const Group = styled.div`
 `;
 
 export const Icon = styled.span`
-  margin-right: 7px;
+  margin-right: 8px;
   svg {
     align-items: center;
     display: flex;
