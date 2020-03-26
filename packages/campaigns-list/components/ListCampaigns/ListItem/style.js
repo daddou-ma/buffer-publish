@@ -15,7 +15,7 @@ export const Color = styled.div`
 export const Container = styled.li`
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 0.7fr 1fr;
-  grid-column-gap: 20px;
+  grid-column-gap: 24px;
   padding: 16px;
   border-top: 1px solid ${grayLight};
   align-items: center;
