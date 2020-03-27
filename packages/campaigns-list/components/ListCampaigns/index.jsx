@@ -16,7 +16,7 @@ import List from './List';
 
 /* Styles */
 const Wrapper = styled.div`
-  background-color: ${grayLighter};
+  padding: 0px 24px;
   height: 100%;
 `;
 
@@ -30,8 +30,9 @@ const Header = styled.header`
 `;
 
 const Container = styled.div`
-  margin: 13px;
-  min-width: 750px;
+  margin: 16px auto;
+  width: 75vw;
+  min-width: 800px;
   max-width: 1800px;
   border-radius: ${borderRadius};
   border: 1px solid ${gray};
