@@ -29,6 +29,31 @@ export default connect(
 
   dispatch => ({
     actions: {
+      onComposerCreateSuccess: () => {
+        dispatch(actions.handleCloseComposer());
+      },
+      onComposerOverlayClick: () => {
+        dispatch(modalsActions.showCloseComposerConfirmationModal());
+      },
+      onCreatePostClick: campaignId => {
+        dispatch(actions.handleOpenComposer(campaignId));
+      },
+      onDeleteCampaignClick: campaign => {
+        dispatch(modalsActions.showDeleteCampaignModal(campaign));
+      },
+      goToAnalyzeReport: campaign => {
+        dispatch(actions.goToAnalyzeReport(campaign));
+      },
+      onEditCampaignClick: campaignId => {
+        if (campaignId) {
+          dispatch(campaignEdit.goTo({ campaignId }));
+        }
+      },
+      fetchCampaign: ({ campaignId, past }) => {
+        dispatch(actions.fetchCampaign({ campaignId, past, fullItems: true }));
+      },
+    },
+    postActions: {
       onEditClick: post => {
         dispatch(
           actions.handleEditClick({
@@ -62,28 +87,37 @@ export default connect(
         );
       },
 
-      onComposerCreateSuccess: () => {
-        dispatch(actions.handleCloseComposer());
+      onImageClick: post => {
+        dispatch(
+          actions.handleImageClick({
+            post: post.post,
+            profileId: post.post.profileId,
+          })
+        );
       },
-      onComposerOverlayClick: () => {
-        dispatch(modalsActions.showCloseComposerConfirmationModal());
+      onImageClose: post => {
+        dispatch(
+          actions.handleImageClose({
+            post: post.post,
+            profileId: post.post.profileId,
+          })
+        );
       },
-      onCreatePostClick: campaignId => {
-        dispatch(actions.handleOpenComposer(campaignId));
+      onImageClickNext: post => {
+        dispatch(
+          actions.handleImageClickNext({
+            post: post.post,
+            profileId: post.post.profileId,
+          })
+        );
       },
-      onDeleteCampaignClick: campaign => {
-        dispatch(modalsActions.showDeleteCampaignModal(campaign));
-      },
-      goToAnalyzeReport: campaign => {
-        dispatch(actions.goToAnalyzeReport(campaign));
-      },
-      onEditCampaignClick: campaignId => {
-        if (campaignId) {
-          dispatch(campaignEdit.goTo({ campaignId }));
-        }
-      },
-      fetchCampaign: ({ campaignId, past }) => {
-        dispatch(actions.fetchCampaign({ campaignId, past, fullItems: true }));
+      onImageClickPrev: post => {
+        dispatch(
+          actions.handleImageClickPrev({
+            post: post.post,
+            profileId: post.post.profileId,
+          })
+        );
       },
     },
   })

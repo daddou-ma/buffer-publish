@@ -38,6 +38,7 @@ const ViewCampaign = ({
   showComposer,
   editMode,
   actions,
+  postActions,
 }) => {
   if (!hasCampaignsFlip) {
     window.location = getURL.getPublishUrl();
@@ -94,10 +95,14 @@ const ViewCampaign = ({
           </nav>
           <QueueItems
             items={campaignPosts}
-            onDeleteConfirmClick={actions.onDeleteConfirmClick}
-            onEditClick={actions.onEditClick}
-            onShareNowClick={actions.onShareNowClick}
-            onRequeueClick={actions.onRequeueClick}
+            onDeleteConfirmClick={postActions.onDeleteConfirmClick}
+            onEditClick={postActions.onEditClick}
+            onShareNowClick={postActions.onShareNowClick}
+            onRequeueClick={postActions.onRequeueClick}
+            onImageClick={postActions.onImageClick}
+            onImageClickNext={postActions.onImageClickNext}
+            onImageClickPrev={postActions.onImageClickPrev}
+            onImageClose={postActions.onImageClose}
             type="post"
           />
         </React.Fragment>
@@ -126,10 +131,6 @@ ViewCampaign.propTypes = {
   editMode: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
-    onEditClick: PropTypes.func.isRequired,
-    onDeleteConfirmClick: PropTypes.func.isRequired,
-    onShareNowClick: PropTypes.func.isRequired,
-    onRequeueClick: PropTypes.func.isRequired,
     onCreatePostClick: PropTypes.func.isRequired,
     onDeleteCampaignClick: PropTypes.func.isRequired,
     onEditCampaignClick: PropTypes.func.isRequired,
@@ -137,6 +138,16 @@ ViewCampaign.propTypes = {
     goToAnalyzeReport: PropTypes.func.isRequired,
     onComposerCreateSuccess: PropTypes.func.isRequired,
     onComposerOverlayClick: PropTypes.func.isRequired,
+  }).isRequired,
+  postActions: PropTypes.shape({
+    onEditClick: PropTypes.func.isRequired,
+    onDeleteConfirmClick: PropTypes.func.isRequired,
+    onShareNowClick: PropTypes.func.isRequired,
+    onRequeueClick: PropTypes.func.isRequired,
+    onImageClick: PropTypes.func.isRequired,
+    onImageClose: PropTypes.func.isRequired,
+    onImageClickPrev: PropTypes.func.isRequired,
+    onImageClickNext: PropTypes.func.isRequired,
   }).isRequired,
 };
 
