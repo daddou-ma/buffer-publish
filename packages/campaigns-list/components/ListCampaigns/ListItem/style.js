@@ -38,6 +38,7 @@ export const Title = styled.div`
   h3 {
     margin: 0px;
     :hover {
+      transition: color 150ms ease-in;
       color: ${blue};
     }
   }
