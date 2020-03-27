@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 import { campaignEdit } from '@bufferapp/publish-routes';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions } from './reducer';
 import ViewCampaign from './components/ViewCampaign';
 
@@ -52,6 +53,22 @@ export default connect(
     },
     fetchCampaign: ({ campaignId, past }) => {
       dispatch(actions.fetchCampaign({ campaignId, past, fullItems: true }));
+    },
+    fetchCampaigns: () => {
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getCampaignsList',
+          args: {},
+        })
+      );
+    },
+    onEditClick: post => {
+      dispatch(
+        actions.handleEditClick({
+          post: post.post,
+          profileId: post.post.profileId,
+        })
+      );
     },
   })
 )(ViewCampaign);

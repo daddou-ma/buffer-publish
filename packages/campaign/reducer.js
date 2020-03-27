@@ -1,5 +1,6 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { sortCampaignsByUpdatedAt } from '@bufferapp/publish-queue/reducer';
 
 export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   FETCH_CAMPAIGN: 0,
@@ -10,9 +11,13 @@ export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
 
 export const initialState = {
   campaign: {},
+  campaignPosts: [],
   isLoading: false,
   campaignId: null,
   showComposer: false,
+  editMode: false,
+  editingPostId: '',
+  campaigns: [],
 };
 
 export default (state = initialState, action) => {
@@ -41,14 +46,22 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showComposer: true,
+        editMode: action.editMode || false,
+        editingPostId: action.updateId || '',
       };
     }
     case actionTypes.CLOSE_COMPOSER: {
       return {
         ...state,
         showComposer: false,
+        editMode: false,
       };
     }
+    case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      return {
+        ...state,
+        campaigns: sortCampaignsByUpdatedAt(action.result),
+      };
     default:
       return state;
   }
@@ -71,5 +84,12 @@ export const actions = {
   goToAnalyzeReport: campaign => ({
     type: actionTypes.GO_TO_ANALYZE_REPORT,
     campaign,
+  }),
+  handleEditClick: ({ post, profileId }) => ({
+    type: actionTypes.OPEN_COMPOSER,
+    updateId: post.id,
+    editMode: true,
+    post,
+    profileId,
   }),
 };

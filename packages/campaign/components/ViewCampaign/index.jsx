@@ -43,6 +43,9 @@ const ViewCampaign = ({
   onComposerCreateSuccess,
   onComposerOverlayClick,
   hasCampaignsFlip,
+  editMode,
+  onEditClick,
+  fetchCampaigns,
 }) => {
   if (!hasCampaignsFlip) {
     window.location = getURL.getPublishUrl();
@@ -52,6 +55,10 @@ const ViewCampaign = ({
   useEffect(() => {
     fetchCampaign({ campaignId });
   }, [campaignId]);
+
+  useEffect(() => {
+    fetchCampaigns();
+  }, []);
   // State
   const [listView, toggleView] = useState('scheduled');
 
@@ -81,9 +88,9 @@ const ViewCampaign = ({
       {showComposer && (
         <ComposerPopover
           onSave={onComposerCreateSuccess}
-          type="queue"
+          type="campaign"
           onComposerOverlayClick={onComposerOverlayClick}
-          editMode={false}
+          editMode={editMode}
         />
       )}
       {campaignHasPosts ? (
@@ -100,7 +107,7 @@ const ViewCampaign = ({
           <QueueItems
             items={campaignPosts}
             onDeleteConfirmClick={null}
-            onEditClick={null}
+            onEditClick={onEditClick}
             onShareNowClick={null}
             draggable={false}
             type="post"
@@ -140,7 +147,10 @@ ViewCampaign.propTypes = {
   showComposer: PropTypes.bool.isRequired,
   onComposerCreateSuccess: PropTypes.func.isRequired,
   onComposerOverlayClick: PropTypes.func.isRequired,
+  onEditClick: PropTypes.func.isRequired,
+  fetchCampaigns: PropTypes.func.isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
+  editMode: PropTypes.bool.isRequired,
 };
 
 export default ViewCampaign;

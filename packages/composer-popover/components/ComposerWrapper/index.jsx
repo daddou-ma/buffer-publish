@@ -45,6 +45,15 @@ export default connect(
               : state.queue.byProfileId[selectedProfileId].posts[postId],
           };
           break;
+        case 'campaign': {
+          const posts = state.campaign.campaign.items;
+          const post = posts.find(p => p.id === postId);
+          options = {
+            editMode: state.campaign.editMode,
+            post: post?.content || {},
+          };
+          break;
+        }
         case 'sent':
           options = {
             editMode: state.sent.editMode,
