@@ -8,17 +8,12 @@ import ViewCampaign from './components/ViewCampaign';
 
 export default connect(
   (state, ownProps) => {
-    let campaignPosts = [];
-    if (state.campaign.campaign.items) {
-      campaignPosts = formatPostLists({
-        isManager: true, // temporary value
-        posts: state.campaign.campaign.items,
-        orderBy: 'dueAt',
-      });
-    }
     return {
       campaign: state.campaign.campaign,
-      campaignPosts,
+      campaignPosts: formatPostLists({
+        posts: state.campaign.campaignPosts,
+        orderBy: 'dueAt',
+      }),
       showComposer: state.campaign.showComposer,
       editMode: state.campaign.editMode,
       editingPostId: state.campaign.editingPostId,

@@ -10,6 +10,7 @@ export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
 
 export const initialState = {
   campaign: {},
+  campaignPosts: [],
   isLoading: false,
   campaignId: null,
   showComposer: false,
@@ -32,10 +33,12 @@ export default (state = initialState, action) => {
       };
     }
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { items, ...campaign } = action.result;
       return {
         ...state,
-        campaign: action.result,
-        campaignId: action.result.id,
+        campaign,
+        campaignId: campaign.id,
+        campaignPosts: items,
         isLoading: false,
       };
     }

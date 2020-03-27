@@ -50,7 +50,7 @@ const ViewCampaign = ({
   // State
   const [listView, toggleView] = useState('scheduled');
 
-  const campaignHasPosts = campaign?.items?.length > 0;
+  const campaignHasPosts = campaignPosts?.length > 0;
 
   if (isLoading) {
     return (
