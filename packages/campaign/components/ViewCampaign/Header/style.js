@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 import { grayDark } from '@bufferapp/ui/style/colors';
+import { Text } from '@bufferapp/ui';
 
 export const Container = styled.header`
   display: flex;
+  align-items: baseline;
   margin: 14px 0px 30px;
+`;
+
+export const Name = styled(Text)`
+  flex: 1;
+  margin: 0;
 `;
 
 export const Color = styled.div`
@@ -37,12 +44,9 @@ export const ButtonWrapper = styled.div`
 
 export const Title = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   flex-direction: row;
-  h1 {
-    margin: 0px;
-  }
 `;
 
 export const CampaignDetails = styled.div`
