@@ -16,7 +16,7 @@ import List from './List';
 
 /* Styles */
 const Wrapper = styled.div`
-  padding: 0px 24px;
+  padding: 16px 24px;
   height: 100%;
 `;
 
@@ -30,14 +30,16 @@ const Header = styled.header`
 `;
 
 const Container = styled.div`
-  margin: 16px auto;
-  width: 75vw;
+  margin: 0px auto;
   min-width: 800px;
   max-width: 1800px;
   border-radius: ${borderRadius};
   border: 1px solid ${gray};
   background-color: ${white};
   box-shadow: ${grayShadow};
+  @media (min-width: 1500px) {
+    width: 75vw;
+  }
 `;
 
 const LoadingContainer = styled.div`
