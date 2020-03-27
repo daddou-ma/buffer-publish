@@ -6,6 +6,10 @@ export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   OPEN_COMPOSER: 0,
   CLOSE_COMPOSER: 0,
   GO_TO_ANALYZE_REPORT: 0,
+  POST_IMAGE_CLICKED: 0,
+  POST_IMAGE_CLICKED_NEXT: 0,
+  POST_IMAGE_CLICKED_PREV: 0,
+  POST_IMAGE_CLOSED: 0,
 });
 
 export const initialState = {
@@ -16,6 +20,22 @@ export const initialState = {
   showComposer: false,
   editMode: false,
   editingPostId: '',
+};
+
+const postReducer = ({ campaignPosts, action, newState }) => {
+  return campaignPosts.map(campaign => {
+    if (campaign.id === action.updateId) {
+      const { content, ...rest } = campaign;
+      return {
+        ...rest,
+        content: {
+          ...content,
+          ...newState,
+        },
+      };
+    }
+    return campaign;
+  });
 };
 
 export default (state = initialState, action) => {
@@ -56,6 +76,45 @@ export default (state = initialState, action) => {
         showComposer: false,
       };
     }
+    case actionTypes.POST_IMAGE_CLICKED:
+    case actionTypes.POST_IMAGE_CLOSED:
+    case actionTypes.POST_IMAGE_CLICKED_NEXT:
+    case actionTypes.POST_IMAGE_CLICKED_PREV: {
+      let newState = {};
+      switch (action.type) {
+        case actionTypes.POST_IMAGE_CLICKED:
+          newState = {
+            isLightboxOpen: true,
+            currentImage: 0,
+          };
+          break;
+        case actionTypes.POST_IMAGE_CLOSED:
+          newState = {
+            isLightboxOpen: false,
+          };
+          break;
+        case actionTypes.POST_IMAGE_CLICKED_NEXT:
+          newState = {
+            currentImage: action.post.currentImage + 1,
+          };
+          break;
+        case actionTypes.POST_IMAGE_CLICKED_PREV:
+          newState = {
+            currentImage: action.post.currentImage - 1,
+          };
+          break;
+        default:
+      }
+
+      return {
+        ...state,
+        campaignPosts: postReducer({
+          campaignPosts: state.campaignPosts,
+          action,
+          newState,
+        }),
+      };
+    }
     default:
       return state;
   }
@@ -85,5 +144,29 @@ export const actions = {
   goToAnalyzeReport: campaign => ({
     type: actionTypes.GO_TO_ANALYZE_REPORT,
     campaign,
+  }),
+  handleImageClick: ({ post, profileId }) => ({
+    type: actionTypes.POST_IMAGE_CLICKED,
+    updateId: post.id,
+    post,
+    profileId,
+  }),
+  handleImageClickNext: ({ post, profileId }) => ({
+    type: actionTypes.POST_IMAGE_CLICKED_NEXT,
+    updateId: post.id,
+    post,
+    profileId,
+  }),
+  handleImageClickPrev: ({ post, profileId }) => ({
+    type: actionTypes.POST_IMAGE_CLICKED_PREV,
+    updateId: post.id,
+    post,
+    profileId,
+  }),
+  handleImageClose: ({ post, profileId }) => ({
+    type: actionTypes.POST_IMAGE_CLOSED,
+    updateId: post.id,
+    post,
+    profileId,
   }),
 };
