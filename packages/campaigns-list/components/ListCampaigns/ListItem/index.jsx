@@ -5,6 +5,8 @@ import { Text, Button } from '@bufferapp/ui';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 import ListIcon from '@bufferapp/ui/Icon/Icons/List';
 import CalendarIcon from '@bufferapp/ui/Icon/Icons/Calendar';
+import Link from '@bufferapp/ui/Link';
+import { campaignScheduled } from '@bufferapp/publish-routes';
 
 import {
   ButtonWrapper,
@@ -50,12 +52,18 @@ const ListItem = ({
     },
   };
 
+  const campaignRoute = campaignScheduled.getRoute({
+    campaignId: campaign.id,
+  });
+
   return (
     <Container isEvenItem={isEvenItem}>
       <LeftWrapper>
         <Title>
           <Color color={campaign.color} />
-          <Text type="h3">{campaign.name}</Text>
+          <Link href={campaignRoute}>
+            <Text type="h3">{campaign.name}</Text>
+          </Link>
         </Title>
         <Text type="p">
           <LastUpdated>{campaign.lastUpdated}</LastUpdated>

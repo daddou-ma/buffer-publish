@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { grayDark, grayLight, grayLighter } from '@bufferapp/ui/style/colors';
+import {
+  grayDark,
+  grayLight,
+  grayLighter,
+  blue,
+} from '@bufferapp/ui/style/colors';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
 
 export const Color = styled.div`
@@ -32,6 +37,9 @@ export const LastUpdated = styled.span`
 export const Title = styled.div`
   h3 {
     margin: 0px;
+    :hover {
+      color: ${blue};
+    }
   }
   display: flex;
 `;
