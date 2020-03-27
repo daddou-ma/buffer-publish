@@ -10,6 +10,7 @@ export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   POST_IMAGE_CLICKED_NEXT: 0,
   POST_IMAGE_CLICKED_PREV: 0,
   POST_IMAGE_CLOSED: 0,
+  POST_CONFIRMED_DELETE: 0,
 });
 
 export const initialState = {
@@ -79,7 +80,8 @@ export default (state = initialState, action) => {
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV: {
+    case actionTypes.POST_IMAGE_CLICKED_PREV:
+    case actionTypes.POST_CONFIRMED_DELETE: {
       let newState = {};
       switch (action.type) {
         case actionTypes.POST_IMAGE_CLICKED:
@@ -101,6 +103,12 @@ export default (state = initialState, action) => {
         case actionTypes.POST_IMAGE_CLICKED_PREV:
           newState = {
             currentImage: action.post.currentImage - 1,
+          };
+          break;
+        case actionTypes.POST_CONFIRMED_DELETE:
+          newState = {
+            isConfirmingDelete: false,
+            isDeleting: true,
           };
           break;
         default:
@@ -144,6 +152,10 @@ export const actions = {
   goToAnalyzeReport: campaign => ({
     type: actionTypes.GO_TO_ANALYZE_REPORT,
     campaign,
+  }),
+  handleDeleteConfirmClick: ({ post }) => ({
+    type: actionTypes.POST_CONFIRMED_DELETE,
+    updateId: post.id,
   }),
   handleImageClick: ({ post, profileId }) => ({
     type: actionTypes.POST_IMAGE_CLICKED,

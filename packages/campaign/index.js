@@ -69,6 +69,11 @@ export default connect(
             profileId: post.post.profileId,
           })
         );
+        dispatch(
+          actions.handleDeleteConfirmClick({
+            post: post.post,
+          })
+        );
       },
       onRequeueClick: post => {
         dispatch(
