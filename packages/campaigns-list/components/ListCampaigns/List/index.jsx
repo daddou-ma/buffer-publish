@@ -2,15 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ListItem from '../ListItem';
-import { white, grayShadow } from '@bufferapp/ui/style/colors';
 
 const StyledList = styled.ul`
   padding-left: 0px;
   width: 100%;
   margin-top: 0px;
   margin-bottom: 0px;
-  background-color: ${white};
-  box-shadow: ${grayShadow};
 `;
 
 const List = ({

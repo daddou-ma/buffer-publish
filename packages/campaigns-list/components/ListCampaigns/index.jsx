@@ -4,7 +4,7 @@ import { Text, Button } from '@bufferapp/ui';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { borderRadius } from '@bufferapp/ui/style/borders';
-import { gray } from '@bufferapp/ui/style/colors';
+import { gray, white, grayShadow } from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
 import EmptyState from './EmptyState';
 import List from './List';
@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 const Header = styled.header`
   display: flex;
   align-items: center;
+  padding: 0px 16px;
   button {
     margin-left: auto;
   }
@@ -29,6 +30,8 @@ const Container = styled.div`
   max-width: 1800px;
   border-radius: ${borderRadius};
   border: 1px solid ${gray};
+  background-color: ${white};
+  box-shadow: ${grayShadow};
   
   @media (min-width: 1500px) {
     width: 75vw;
@@ -87,7 +90,7 @@ const ListCampaigns = ({
     <Wrapper>
       <Container>
         <Header>
-          <Text type="h1">Campaigns</Text>
+          <Text type="h2">Campaigns</Text>
           <Button
             type="primary"
             label="Create Campaign"
