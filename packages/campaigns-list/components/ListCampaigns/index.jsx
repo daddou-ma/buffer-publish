@@ -4,9 +4,7 @@ import { Text, Button } from '@bufferapp/ui';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { borderRadius } from '@bufferapp/ui/style/borders';
-import {
-  gray,
-} from '@bufferapp/ui/style/colors';
+import { gray } from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
 import EmptyState from './EmptyState';
 import List from './List';

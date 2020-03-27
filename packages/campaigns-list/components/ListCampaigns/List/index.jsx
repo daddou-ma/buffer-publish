@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ListItem from '../ListItem';
+import { white } from '@bufferapp/ui/style/colors';
 
 const StyledList = styled.ul`
   padding-left: 0px;
