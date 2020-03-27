@@ -8,6 +8,8 @@ const StyledList = styled.ul`
   width: 100%;
   margin-top: 0px;
   margin-bottom: 0px;
+  background-color: ${white};
+  box-shadow: ${grayShadow};
 `;
 
 const List = ({

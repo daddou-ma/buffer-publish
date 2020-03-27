@@ -23,7 +23,6 @@ const Wrapper = styled.div`
 const Header = styled.header`
   display: flex;
   align-items: center;
-  padding: 0 16px;
   button {
     margin-left: auto;
   }
@@ -35,8 +34,7 @@ const Container = styled.div`
   max-width: 1800px;
   border-radius: ${borderRadius};
   border: 1px solid ${gray};
-  background-color: ${white};
-  box-shadow: ${grayShadow};
+  
   @media (min-width: 1500px) {
     width: 75vw;
   }
@@ -94,7 +92,7 @@ const ListCampaigns = ({
     <Wrapper>
       <Container>
         <Header>
-          <Text type="h2">Campaigns</Text>
+          <Text type="h1">Campaigns</Text>
           <Button
             type="primary"
             label="Create Campaign"
