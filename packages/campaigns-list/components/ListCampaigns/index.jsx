@@ -5,10 +5,7 @@ import { BufferLoading } from '@bufferapp/publish-shared-components';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import {
-  grayLighter,
   gray,
-  white,
-  grayShadow,
 } from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
 import EmptyState from './EmptyState';
