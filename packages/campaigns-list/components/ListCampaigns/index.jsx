@@ -32,7 +32,7 @@ const Header = styled.header`
 const Container = styled.div`
   margin: 13px;
   min-width: 750px;
-  max-width: 1008px;
+  max-width: 1800px;
   border-radius: ${borderRadius};
   border: 1px solid ${gray};
   background-color: ${white};
