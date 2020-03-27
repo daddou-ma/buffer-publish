@@ -17,6 +17,7 @@ import List from './List';
 /* Styles */
 const Wrapper = styled.div`
   background-color: ${grayLighter};
+  height: 100%;
 `;
 
 const Header = styled.header`
