@@ -10,10 +10,12 @@ export default connect(
   (state, ownProps) => {
     return {
       campaign: state.campaign.campaign,
-      campaignPosts: formatPostLists({
-        posts: state.campaign.campaignPosts,
-        orderBy: 'dueAt',
-      }),
+      campaignPosts: state.campaign.campaignPosts
+        ? formatPostLists({
+            posts: state.campaign.campaignPosts,
+            orderBy: 'dueAt',
+          })
+        : [],
       showComposer: state.campaign.showComposer,
       editMode: state.campaign.editMode,
       editingPostId: state.campaign.editingPostId,
@@ -88,6 +90,11 @@ export default connect(
           queueActions.handleShareNowClick({
             post: post.post,
             profileId: post.post.profileId,
+          })
+        );
+        dispatch(
+          actions.handleShareNowClick({
+            post: post.post,
           })
         );
       },

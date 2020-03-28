@@ -11,6 +11,7 @@ export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   POST_IMAGE_CLICKED_PREV: 0,
   POST_IMAGE_CLOSED: 0,
   POST_CONFIRMED_DELETE: 0,
+  POST_SHARE_NOW: 0,
 });
 
 export const initialState = {
@@ -20,7 +21,7 @@ export const initialState = {
   campaignId: null,
   showComposer: false,
   editMode: false,
-  editingPostId: '',
+  editingPostId: null,
 };
 
 const postReducer = ({ campaignPosts, action, newState }) => {
@@ -59,7 +60,7 @@ export default (state = initialState, action) => {
         ...state,
         campaign,
         campaignId: campaign.id,
-        campaignPosts: items,
+        campaignPosts: items || [],
         isLoading: false,
       };
     }
@@ -67,8 +68,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showComposer: true,
-        editMode: action.editMode,
-        editingPostId: action.updateId,
+        editMode: action.editMode || false,
+        editingPostId: action.updateId || null,
       };
     }
     case actionTypes.CLOSE_COMPOSER: {
@@ -81,7 +82,10 @@ export default (state = initialState, action) => {
     case actionTypes.POST_IMAGE_CLOSED:
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
     case actionTypes.POST_IMAGE_CLICKED_PREV:
-    case actionTypes.POST_CONFIRMED_DELETE: {
+    case actionTypes.POST_CONFIRMED_DELETE:
+    case actionTypes.POST_SHARE_NOW:
+    case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
+    case `deletePost_${dataFetchActionTypes.FETCH_FAIL}`: {
       let newState = {};
       switch (action.type) {
         case actionTypes.POST_IMAGE_CLICKED:
@@ -109,6 +113,21 @@ export default (state = initialState, action) => {
           newState = {
             isConfirmingDelete: false,
             isDeleting: true,
+          };
+          break;
+        case `deletePost_${dataFetchActionTypes.FETCH_FAIL}`:
+          newState = {
+            isDeleting: false,
+          };
+          break;
+        case actionTypes.POST_SHARE_NOW:
+          newState = {
+            isWorking: true,
+          };
+          break;
+        case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
+          newState = {
+            isWorking: false,
           };
           break;
         default:
@@ -155,6 +174,10 @@ export const actions = {
   }),
   handleDeleteConfirmClick: ({ post }) => ({
     type: actionTypes.POST_CONFIRMED_DELETE,
+    updateId: post.id,
+  }),
+  handleShareNowClick: ({ post }) => ({
+    type: actionTypes.POST_SHARE_NOW,
     updateId: post.id,
   }),
   handleImageClick: ({ post, profileId }) => ({
