@@ -8,6 +8,7 @@ import {
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
+import TabTag from '@bufferapp/publish-tabs/components/TabTag';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import Header from './Header';
 import EmptyState from './EmptyState';
@@ -90,7 +91,10 @@ const ViewCampaign = ({
               onTabClick={tabId => toggleView(tabId)}
             >
               <Tab tabId="scheduled">{translations.scheduled}</Tab>
-              <Tab tabId="sent">{translations.sent}</Tab>
+              <Tab tabId="sent">
+                {translations.sent}
+                <TabTag type="new" labelName="Coming Soon" />
+              </Tab>
             </Tabs>
           </nav>
           <QueueItems
