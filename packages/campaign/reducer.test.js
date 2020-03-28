@@ -1,4 +1,5 @@
 import deepFreeze from 'deep-freeze';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import reducer, { actions, initialState, actionTypes } from './reducer';
 
 describe('reducer', () => {
@@ -112,6 +113,156 @@ describe('reducer', () => {
     };
     const action = {
       type: actionTypes.CLOSE_COMPOSER,
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_IMAGE_CLICKED action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: {} }],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaignPosts: [
+        { id: 'id1', content: { isLightboxOpen: true, currentImage: 0 } },
+      ],
+    };
+    const action = {
+      type: actionTypes.POST_IMAGE_CLICKED,
+      updateId: 'id1',
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_IMAGE_CLOSED action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: {} }],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: { isLightboxOpen: false } }],
+    };
+    const action = {
+      type: actionTypes.POST_IMAGE_CLOSED,
+      updateId: 'id1',
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_IMAGE_CLICKED_NEXT action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: {} }],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: { currentImage: 2 } }],
+    };
+    const action = {
+      type: actionTypes.POST_IMAGE_CLICKED_NEXT,
+      updateId: 'id1',
+      post: { currentImage: 1 },
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_IMAGE_CLICKED_PREV action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: {} }],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: { currentImage: 1 } }],
+    };
+    const action = {
+      type: actionTypes.POST_IMAGE_CLICKED_PREV,
+      updateId: 'id1',
+      post: { currentImage: 2 },
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_CONFIRMED_DELETE action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: {} }],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaignPosts: [
+        { id: 'id1', content: { isConfirmingDelete: false, isDeleting: true } },
+      ],
+    };
+    const action = {
+      type: actionTypes.POST_CONFIRMED_DELETE,
+      updateId: 'id1',
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles deletePost failed action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: {} }],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: { isDeleting: false } }],
+    };
+    const action = {
+      type: `deletePost_${dataFetchActionTypes.FETCH_FAIL}`,
+      updateId: 'id1',
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_SHARE_NOW action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: {} }],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: { isWorking: true } }],
+    };
+    const action = {
+      type: actionTypes.POST_SHARE_NOW,
+      updateId: 'id1',
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles sharePostNow failed action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: {} }],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaignPosts: [{ id: 'id1', content: { isWorking: false } }],
+    };
+    const action = {
+      type: `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`,
+      updateId: 'id1',
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
