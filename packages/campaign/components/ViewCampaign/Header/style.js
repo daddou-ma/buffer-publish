@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { grayDark } from '@bufferapp/ui/style/colors';
 import { Text } from '@bufferapp/ui';
+import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
 
 export const Container = styled.header`
   display: flex;
@@ -58,6 +59,9 @@ export const CampaignDetails = styled.div`
 export const Group = styled.div`
   display: flex;
   margin-right: 16px;
+  p {
+    font-weight: ${fontWeightMedium};
+  }
 `;
 
 export const Details = styled.div`
