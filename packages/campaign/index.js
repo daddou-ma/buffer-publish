@@ -38,7 +38,7 @@ export default connect(
         dispatch(modalsActions.showCloseComposerConfirmationModal());
       },
       onCreatePostClick: campaignId => {
-        dispatch(actions.handleOpenComposer(campaignId));
+        dispatch(actions.handleOpenComposer({ campaignId, editMode: false }));
       },
       onDeleteCampaignClick: campaign => {
         dispatch(modalsActions.showDeleteCampaignModal(campaign));
@@ -58,9 +58,10 @@ export default connect(
     postActions: {
       onEditClick: post => {
         dispatch(
-          actions.handleEditClick({
+          actions.handleOpenComposer({
             post: post.post,
             profileId: post.post.profileId,
+            editMode: true,
           })
         );
       },

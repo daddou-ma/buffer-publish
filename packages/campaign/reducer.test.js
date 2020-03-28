@@ -125,16 +125,26 @@ describe('reducer', () => {
       const expectedAction = {
         type: actionTypes.FETCH_CAMPAIGN,
         campaignId: 'id2',
+        past: false,
+        fullItems: false,
       };
-      expect(actions.fetchCampaign({ campaignId })).toEqual(expectedAction);
+      expect(
+        actions.fetchCampaign({ campaignId, past: false, fullItems: false })
+      ).toEqual(expectedAction);
     });
     it('creates a OPEN_COMPOSER action', () => {
-      const campaignId = 'id2';
+      const post = { id: 'id1' };
+      const profileId = 'id2';
       const expectedAction = {
         type: actionTypes.OPEN_COMPOSER,
-        campaignId: 'id2',
+        post,
+        profileId,
+        editMode: true,
+        updateId: 'id1',
       };
-      expect(actions.handleOpenComposer(campaignId)).toEqual(expectedAction);
+      expect(
+        actions.handleOpenComposer({ post, profileId, editMode: true })
+      ).toEqual(expectedAction);
     });
     it('creates a CLOSE_COMPOSER action', () => {
       const expectedAction = {
@@ -149,6 +159,76 @@ describe('reducer', () => {
         campaign,
       };
       expect(actions.goToAnalyzeReport(campaign)).toEqual(expectedAction);
+    });
+    it('creates a POST_CONFIRMED_DELETE action', () => {
+      const post = { id: 'id1' };
+      const expectedAction = {
+        type: actionTypes.POST_CONFIRMED_DELETE,
+        updateId: 'id1',
+      };
+      expect(actions.handleDeleteConfirmClick({ post })).toEqual(
+        expectedAction
+      );
+    });
+    it('creates a POST_SHARE_NOW action', () => {
+      const post = { id: 'id1' };
+      const expectedAction = {
+        type: actionTypes.POST_SHARE_NOW,
+        updateId: 'id1',
+      };
+      expect(actions.handleShareNowClick({ post })).toEqual(expectedAction);
+    });
+    it('creates a POST_IMAGE_CLICKED action', () => {
+      const post = { id: 'id1' };
+      const profileId = 'id2';
+      const expectedAction = {
+        type: actionTypes.POST_IMAGE_CLICKED,
+        updateId: 'id1',
+        post,
+        profileId,
+      };
+      expect(actions.handleImageClick({ post, profileId })).toEqual(
+        expectedAction
+      );
+    });
+    it('creates a POST_IMAGE_CLICKED_NEXT action', () => {
+      const post = { id: 'id1' };
+      const profileId = 'id2';
+      const expectedAction = {
+        type: actionTypes.POST_IMAGE_CLICKED_NEXT,
+        updateId: 'id1',
+        post,
+        profileId,
+      };
+      expect(actions.handleImageClickNext({ post, profileId })).toEqual(
+        expectedAction
+      );
+    });
+    it('creates a POST_IMAGE_CLICKED_PREV action', () => {
+      const post = { id: 'id1' };
+      const profileId = 'id2';
+      const expectedAction = {
+        type: actionTypes.POST_IMAGE_CLICKED_PREV,
+        updateId: 'id1',
+        post,
+        profileId,
+      };
+      expect(actions.handleImageClickPrev({ post, profileId })).toEqual(
+        expectedAction
+      );
+    });
+    it('creates a POST_IMAGE_CLOSED action', () => {
+      const post = { id: 'id1' };
+      const profileId = 'id2';
+      const expectedAction = {
+        type: actionTypes.POST_IMAGE_CLOSED,
+        updateId: 'id1',
+        post,
+        profileId,
+      };
+      expect(actions.handleImageClose({ post, profileId })).toEqual(
+        expectedAction
+      );
     });
   });
 });

@@ -148,15 +148,12 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  handleEditClick: ({ post, profileId }) => ({
+  handleOpenComposer: ({ post, profileId, campaignId, editMode }) => ({
     type: actionTypes.OPEN_COMPOSER,
     updateId: post.id,
-    editMode: true,
+    editMode,
     post,
     profileId,
-  }),
-  handleOpenComposer: campaignId => ({
-    type: actionTypes.OPEN_COMPOSER,
     campaignId,
   }),
   handleCloseComposer: () => ({
