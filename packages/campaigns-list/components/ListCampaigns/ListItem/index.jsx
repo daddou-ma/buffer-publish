@@ -17,11 +17,11 @@ import {
   Icon,
   LeftWrapper,
   LastUpdated,
+  StyledLink,
 } from './style';
 
 const ListItem = ({
   campaign,
-  isEvenItem,
   hideAnalyzeReport,
   onEditCampaignClick,
   onDeleteCampaignClick,
@@ -57,13 +57,13 @@ const ListItem = ({
   });
 
   return (
-    <Container isEvenItem={isEvenItem}>
+    <Container>
       <LeftWrapper>
         <Title>
           <Color color={campaign.color} />
-          <Link href={campaignRoute}>
-            <Text type="h3">{campaign.name}</Text>
-          </Link>
+          <Text type="h3">
+            <StyledLink href={campaignRoute}>{campaign.name}</StyledLink>
+          </Text>
         </Title>
         <Text type="p">
           <LastUpdated>{campaign.lastUpdated}</LastUpdated>
@@ -153,7 +153,6 @@ ListItem.propTypes = {
   onEditCampaignClick: PropTypes.func.isRequired,
   goToAnalyzeReport: PropTypes.func.isRequired,
   hideAnalyzeReport: PropTypes.bool.isRequired,
-  isEvenItem: PropTypes.bool.isRequired,
 };
 
 export default ListItem;

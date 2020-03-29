@@ -29,7 +29,6 @@ const List = ({
       onEditCampaignClick={onEditCampaignClick}
       goToAnalyzeReport={goToAnalyzeReport}
       hideAnalyzeReport={hideAnalyzeReport}
-      isEvenItem={index % 2 === 0}
     />
   ));
   return <StyledList>{listItems}</StyledList>;
