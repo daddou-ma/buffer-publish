@@ -1,6 +1,7 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
+import { parseItem } from '@bufferapp/publish-server/parsers/src/campaignParser';
 
 export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   FETCH_CAMPAIGN: 0,
@@ -80,10 +81,49 @@ export default (state = initialState, action) => {
       };
     }
     // Pusher events
+    case queueActionTypes.POST_UPDATED: {
+      const { id } = action?.post?.campaignDetails;
+      if (id === state.campaign?.id) {
+        const newCampaignPosts = state.campaignPosts.map(post => {
+          if (post.id === action.post.id) {
+            const campaignPost = {
+              ...post,
+              dueAt: action.post.due_at || post.dueAt,
+              type: action.post.type || post.type,
+              content: action.post,
+            };
+            return campaignPost;
+          }
+          return post;
+        });
+        return {
+          ...state,
+          campaignPosts: newCampaignPosts,
+        };
+      }
+      return state;
+    }
+    case queueActionTypes.POST_CREATED: {
+      const { id } = action?.post?.campaignDetails;
+      if (id === state.campaign?.id) {
+        const campaignPost = {
+          _id: action.post.id,
+          id: action.post.id,
+          dueAt: action.post.due_at,
+          type: action.post.type,
+          content: action.post,
+        };
+        return {
+          ...state,
+          campaignPosts: [...state.campaignPosts, campaignPost],
+        };
+      }
+      return state;
+    }
     case queueActionTypes.POST_SENT:
     case queueActionTypes.POST_DELETED: {
       const { id } = action?.post?.campaignDetails;
-      if (id === state.campaign.id) {
+      if (id === state.campaign?.id) {
         const newCampaignPosts = state.campaignPosts.filter(
           post => post.id !== action.post.id
         );

@@ -270,6 +270,95 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
+  it('handles POST_CREATED action if post created belongs to the current campaign', () => {
+    const stateBefore = {
+      ...initialState,
+      campaign: { id: 'campaignId' },
+      campaignPosts: [
+        { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
+      ],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaign: { id: 'campaignId' },
+      campaignPosts: [
+        { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
+        {
+          id: 'id2',
+          _id: 'id2',
+          dueAt: undefined,
+          type: undefined,
+          content: { id: 'id2', campaignDetails: { id: 'campaignId' } },
+        },
+      ],
+    };
+    const action = {
+      type: queueActionTypes.POST_CREATED,
+      post: { id: 'id2', campaignDetails: { id: 'campaignId' } },
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_CREATED action if post created does not belong to the current campaign', () => {
+    const stateBefore = {
+      ...initialState,
+      campaign: { id: 'campaignId' },
+      campaignPosts: [
+        { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
+      ],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaign: { id: 'campaignId' },
+      campaignPosts: [
+        { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
+      ],
+    };
+    const action = {
+      type: queueActionTypes.POST_CREATED,
+      post: { id: 'id2', campaignDetails: { id: 'campaignId2' } },
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_UPDATED action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaign: { id: 'campaignId' },
+      campaignPosts: [
+        {
+          id: 'id1',
+          content: { text: 'Old Post', campaignDetails: { id: 'campaignId' } },
+        },
+      ],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaign: { id: 'campaignId' },
+      campaignPosts: [
+        {
+          id: 'id1',
+          content: {
+            id: 'id1',
+            text: 'Post',
+            campaignDetails: { id: 'campaignId' },
+          },
+        },
+      ],
+    };
+    const action = {
+      type: queueActionTypes.POST_UPDATED,
+      post: { id: 'id1', text: 'Post', campaignDetails: { id: 'campaignId' } },
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
   it('handles POST_DELETED action', () => {
     const stateBefore = {
       ...initialState,
