@@ -1,5 +1,6 @@
 import deepFreeze from 'deep-freeze';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import reducer, { actions, initialState, actionTypes } from './reducer';
 
 describe('reducer', () => {
@@ -263,6 +264,29 @@ describe('reducer', () => {
     const action = {
       type: `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`,
       updateId: 'id1',
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_DELETED action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaign: { id: 'campaignId' },
+      campaignPosts: [
+        { id: 'id1', campaignDetails: { id: 'campaignId' } },
+        { id: 'id2', campaignDetails: { id: 'campaignId' } },
+      ],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaign: { id: 'campaignId' },
+      campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
+    };
+    const action = {
+      type: queueActionTypes.POST_DELETED,
+      post: { id: 'id2', campaignDetails: { id: 'campaignId' } },
     };
     deepFreeze(stateBefore);
     deepFreeze(action);

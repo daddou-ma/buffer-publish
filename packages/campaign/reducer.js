@@ -1,5 +1,6 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 
 export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   FETCH_CAMPAIGN: 0,
@@ -78,6 +79,22 @@ export default (state = initialState, action) => {
         showComposer: false,
       };
     }
+    // Pusher events
+    case queueActionTypes.POST_SENT:
+    case queueActionTypes.POST_DELETED: {
+      const { id } = action?.post?.campaignDetails;
+      if (id === state.campaign.id) {
+        const newCampaignPosts = state.campaignPosts.filter(
+          post => post.id !== action.post.id
+        );
+        return {
+          ...state,
+          campaignPosts: newCampaignPosts,
+        };
+      }
+      return state;
+    }
+    // Post events
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
