@@ -5,7 +5,6 @@ import { Text, Button } from '@bufferapp/ui';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 import ListIcon from '@bufferapp/ui/Icon/Icons/List';
 import CalendarIcon from '@bufferapp/ui/Icon/Icons/Calendar';
-import Link from '@bufferapp/ui/Link';
 import { campaignScheduled } from '@bufferapp/publish-routes';
 
 import {

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import {
   grayDark,
+  grayDarker,
   grayLight,
   grayLighter,
   blue,
 } from '@bufferapp/ui/style/colors';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
+import Link from '@bufferapp/ui/Link';
 
 export const Color = styled.div`
   height: 12px;
@@ -37,12 +39,17 @@ export const LastUpdated = styled.span`
 export const Title = styled.div`
   h3 {
     margin: 0px;
-    :hover {
-      transition: color 150ms ease-in;
-      color: ${blue};
-    }
   }
   display: flex;
+`;
+
+export const StyledLink = styled(Link)`
+  color: ${grayDarker};
+  font-size: 18px;
+  :hover {
+    transition: color 150ms ease-in;
+    color: ${blue};
+  }
 `;
 
 export const Group = styled.div`
