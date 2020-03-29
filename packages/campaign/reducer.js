@@ -18,7 +18,7 @@ export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
 export const initialState = {
   campaign: {},
   campaignPosts: [],
-  isLoading: false,
+  isLoading: true,
   campaignId: null,
   showComposer: false,
   editMode: false,
@@ -206,7 +206,7 @@ export default (state = initialState, action) => {
 export const actions = {
   handleOpenComposer: ({ post, profileId, campaignId, editMode }) => ({
     type: actionTypes.OPEN_COMPOSER,
-    updateId: post.id,
+    updateId: post?.id,
     editMode,
     post,
     profileId,
