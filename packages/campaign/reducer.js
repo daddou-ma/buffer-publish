@@ -81,8 +81,8 @@ export default (state = initialState, action) => {
     }
     // Pusher events
     case queueActionTypes.POST_UPDATED: {
-      const { id } = action?.post?.campaignDetails;
-      if (id === state.campaign?.id) {
+      const postCampaignId = action?.post?.campaignDetails?.id;
+      if (postCampaignId === state.campaign?.id) {
         const newCampaignPosts = state.campaignPosts.map(post => {
           if (post.id === action.post.id) {
             const campaignPost = {
@@ -103,8 +103,8 @@ export default (state = initialState, action) => {
       return state;
     }
     case queueActionTypes.POST_CREATED: {
-      const { id } = action?.post?.campaignDetails;
-      if (id === state.campaign?.id) {
+      const postCampaignId = action?.post?.campaignDetails?.id;
+      if (postCampaignId === state.campaign?.id) {
         const campaignPost = {
           _id: action.post.id,
           id: action.post.id,
@@ -121,8 +121,8 @@ export default (state = initialState, action) => {
     }
     case queueActionTypes.POST_SENT:
     case queueActionTypes.POST_DELETED: {
-      const { id } = action?.post?.campaignDetails;
-      if (id === state.campaign?.id) {
+      const postCampaignId = action?.post?.campaignDetails?.id;
+      if (postCampaignId === state.campaign?.id) {
         const newCampaignPosts = state.campaignPosts.filter(
           post => post.id !== action.post.id
         );
