@@ -12,12 +12,22 @@ const EmptyStateContainer = styled.div`
 
 const Content = styled.div`
   margin-top: 43px;
+  flex: 1;
 `;
 
+// object-fit: contain;
+// width: 100%;
 const Image = styled.img`
-  object-fit: contain;
-  max-width: 1200px;
-  width: 100%;
+  max-width: 100%;
+  max-height: 93vh;
+  object-fit: cover;
+  object-position: 0 0;
+  flex: 2;
+  margin-left: 50px;
+`;
+
+const ImageBox = styled.div`
+
 `;
 
 const LinkWithStyles = styled(Link)`
@@ -64,12 +74,10 @@ const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
           </LinkWithStyles>
         </div>
       </Content>
-      <ImageWrapper>
         <Image
-          src="https://buffer-publish.s3.amazonaws.com/images/campaigns-emptystate-screenshot.png"
+          src="https://buffer-publish.s3.amazonaws.com/images/campaigns-empty-state-screenshot.png"
           alt={imageTag}
         />
-      </ImageWrapper>
     </EmptyStateContainer>
   );
 };
