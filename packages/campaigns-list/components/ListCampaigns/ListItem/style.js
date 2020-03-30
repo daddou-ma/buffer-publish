@@ -14,6 +14,7 @@ export const Color = styled.div`
   max-width: 12px;
   width: 100%;
   border-radius: 50%;
+  position: fixed;
   background-color: ${props => props.color};
   margin: 7px 10px 0px 0px;
 `;
@@ -37,7 +38,7 @@ export const LastUpdated = styled.span`
 `;
 
 export const StyledLink = styled(Link)`
-  display: flex;
+  display: inline-flex;
   text-decoration: none;
   color: ${grayDarker};
   :hover {
@@ -46,7 +47,7 @@ export const StyledLink = styled(Link)`
   }
   h3 {
     color: inherit;
-    margin: 0px;
+    margin: 0px 0px 0px 20px;
   }
 `;
 
