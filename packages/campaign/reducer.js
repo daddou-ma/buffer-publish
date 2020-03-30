@@ -120,12 +120,15 @@ export default (state = initialState, action) => {
         };
         return {
           ...state,
+          campaign: {
+            ...state.campaign,
+            scheduled: state.campaign.scheduled + 1,
+          },
           campaignPosts: [...state.campaignPosts, campaignPost],
         };
       }
       return state;
     }
-    case queueActionTypes.POST_SENT:
     case queueActionTypes.POST_DELETED: {
       const postCampaignId = action?.post?.campaignDetails?.id;
       if (
@@ -137,6 +140,31 @@ export default (state = initialState, action) => {
         );
         return {
           ...state,
+          campaign: {
+            ...state.campaign,
+            scheduled: state.campaign.scheduled - 1,
+          },
+          campaignPosts: newCampaignPosts,
+        };
+      }
+      return state;
+    }
+    case queueActionTypes.POST_SENT: {
+      const postCampaignId = action?.post?.campaignDetails?.id;
+      if (
+        postCampaignId === state.campaign?.id &&
+        typeof postCampaignId === 'string'
+      ) {
+        const newCampaignPosts = state.campaignPosts.filter(
+          post => post.id !== action.post.id
+        );
+        return {
+          ...state,
+          campaign: {
+            ...state.campaign,
+            scheduled: state.campaign.scheduled - 1,
+            sent: state.campaign.sent + 1,
+          },
           campaignPosts: newCampaignPosts,
         };
       }

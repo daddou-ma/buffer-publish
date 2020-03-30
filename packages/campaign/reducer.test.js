@@ -273,14 +273,14 @@ describe('reducer', () => {
   it('handles POST_CREATED action if post created belongs to the current campaign', () => {
     const stateBefore = {
       ...initialState,
-      campaign: { id: 'campaignId' },
+      campaign: { id: 'campaignId', scheduled: 0, sent: 0 },
       campaignPosts: [
         { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
       ],
     };
     const stateAfter = {
       ...initialState,
-      campaign: { id: 'campaignId' },
+      campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
       campaignPosts: [
         { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
         {
@@ -304,14 +304,14 @@ describe('reducer', () => {
   it('handles POST_CREATED action if post created does not belong to the current campaign', () => {
     const stateBefore = {
       ...initialState,
-      campaign: { id: 'campaignId' },
+      campaign: { id: 'campaignId', scheduled: 0, sent: 0 },
       campaignPosts: [
         { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
       ],
     };
     const stateAfter = {
       ...initialState,
-      campaign: { id: 'campaignId' },
+      campaign: { id: 'campaignId', scheduled: 0, sent: 0 },
       campaignPosts: [
         { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
       ],
@@ -362,7 +362,7 @@ describe('reducer', () => {
   it('handles POST_DELETED action', () => {
     const stateBefore = {
       ...initialState,
-      campaign: { id: 'campaignId' },
+      campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
       campaignPosts: [
         { id: 'id1', campaignDetails: { id: 'campaignId' } },
         { id: 'id2', campaignDetails: { id: 'campaignId' } },
@@ -370,11 +370,34 @@ describe('reducer', () => {
     };
     const stateAfter = {
       ...initialState,
-      campaign: { id: 'campaignId' },
+      campaign: { id: 'campaignId', scheduled: 0, sent: 0 },
       campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
     };
     const action = {
       type: queueActionTypes.POST_DELETED,
+      post: { id: 'id2', campaignDetails: { id: 'campaignId' } },
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_SENT action', () => {
+    const stateBefore = {
+      ...initialState,
+      campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
+      campaignPosts: [
+        { id: 'id1', campaignDetails: { id: 'campaignId' } },
+        { id: 'id2', campaignDetails: { id: 'campaignId' } },
+      ],
+    };
+    const stateAfter = {
+      ...initialState,
+      campaign: { id: 'campaignId', scheduled: 0, sent: 1 },
+      campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
+    };
+    const action = {
+      type: queueActionTypes.POST_SENT,
       post: { id: 'id2', campaignDetails: { id: 'campaignId' } },
     };
     deepFreeze(stateBefore);
