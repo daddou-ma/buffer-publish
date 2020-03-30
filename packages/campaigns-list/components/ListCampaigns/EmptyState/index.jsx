@@ -27,6 +27,7 @@ const LinkWithStyles = styled(Link)`
 
 const ImageWrapper = styled.span`
   margin-left: 40px;
+  margin-top: 14px;
 `;
 
 const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
