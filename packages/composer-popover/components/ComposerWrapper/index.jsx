@@ -46,7 +46,7 @@ export default connect(
           };
           break;
         case 'campaign': {
-          const posts = state.campaign.campaign.items;
+          const posts = state.campaign.campaignPosts;
           const post = posts.find(p => p.id === postId);
           options = {
             editMode: state.campaign.editMode,
