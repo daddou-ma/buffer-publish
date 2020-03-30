@@ -11,7 +11,6 @@ import {
   ButtonWrapper,
   Color,
   Container,
-  Title,
   Group,
   Icon,
   LeftWrapper,
@@ -58,12 +57,10 @@ const ListItem = ({
   return (
     <Container>
       <LeftWrapper>
-        <Title>
+        <StyledLink to={campaignRoute}>
           <Color color={campaign.color} />
-          <Text type="h3">
-            <StyledLink href={campaignRoute}>{campaign.name}</StyledLink>
-          </Text>
-        </Title>
+          <Text type="h3">{campaign.name}</Text>
+        </StyledLink>
         <Text type="p">
           <LastUpdated>{campaign.lastUpdated}</LastUpdated>
         </Text>

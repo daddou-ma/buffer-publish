@@ -19,7 +19,7 @@ const List = ({
   onEditCampaignClick,
   hideAnalyzeReport,
 }) => {
-  const listItems = campaigns.map((campaign, index) => (
+  const listItems = campaigns.map(campaign => (
     <ListItem
       key={campaign.id}
       translations={translations}

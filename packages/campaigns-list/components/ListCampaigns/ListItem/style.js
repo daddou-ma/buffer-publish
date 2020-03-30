@@ -7,7 +7,7 @@ import {
   blue,
 } from '@bufferapp/ui/style/colors';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
-import Link from '@bufferapp/ui/Link';
+import { Link } from 'react-router-dom';
 
 export const Color = styled.div`
   height: 12px;
@@ -36,19 +36,17 @@ export const LastUpdated = styled.span`
   color: ${grayDark};
 `;
 
-export const Title = styled.div`
-  h3 {
-    margin: 0px;
-  }
-  display: flex;
-`;
-
 export const StyledLink = styled(Link)`
+  display: flex;
+  text-decoration: none;
   color: ${grayDarker};
-  font-size: 18px;
   :hover {
     transition: color 150ms ease-in;
     color: ${blue};
+  }
+  h3 {
+    color: inherit;
+    margin: 0px;
   }
 `;
 
