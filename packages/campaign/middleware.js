@@ -4,6 +4,7 @@ import {
 } from '@bufferapp/async-data-fetch';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { campaignsPage } from '@bufferapp/publish-routes';
 import { actionTypes } from './reducer';
@@ -50,6 +51,19 @@ export default ({ dispatch, getState }) => next => action => {
       );
       dispatch(campaignsPage.goTo());
       break;
+
+    case actionTypes.SELECT_PROFILE: {
+      const { profiles } = getState().profileSidebar;
+      const { profileId } = action;
+      const profile = profiles.find(p => p.id === profileId);
+
+      dispatch(
+        profileSidebarActions.selectProfile({
+          profile,
+        })
+      );
+      break;
+    }
 
     default:
       break;

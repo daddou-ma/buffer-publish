@@ -16,6 +16,7 @@ export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   POST_IMAGE_CLOSED: 0,
   POST_CONFIRMED_DELETE: 0,
   POST_SHARE_NOW: 0,
+  SELECT_PROFILE: 0,
 });
 
 export const initialState = {
@@ -302,6 +303,10 @@ export const actions = {
     type: actionTypes.POST_IMAGE_CLOSED,
     updateId: post.id,
     post,
+    profileId,
+  }),
+  handleSelectProfile: ({ profileId }) => ({
+    type: actionTypes.SELECT_PROFILE,
     profileId,
   }),
 };
