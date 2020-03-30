@@ -14,7 +14,7 @@ const campaign = {
   scheduled: 8,
   sent: 0,
   lastUpdated: 'Last updated 12 days ago',
-  campaignId: '2',
+  id: '2',
 };
 
 const campaignWithoutPosts = {
@@ -24,7 +24,7 @@ const campaignWithoutPosts = {
   scheduled: 0,
   sent: 0,
   lastUpdated: 'Last updated yesterday',
-  campaignId: '3',
+  id: '3',
 };
 
 storiesOf('Campaigns|ListItem', module)
