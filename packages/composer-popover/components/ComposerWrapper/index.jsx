@@ -51,6 +51,7 @@ export default connect(
           options = {
             editMode: state.campaign.editMode,
             post: post?.content || {},
+            initialCampaignId: state.campaign.campaign?.id || null,
           };
           break;
         }
