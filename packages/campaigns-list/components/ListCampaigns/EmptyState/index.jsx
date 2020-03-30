@@ -15,8 +15,6 @@ const Content = styled.div`
   flex: 1;
 `;
 
-// object-fit: contain;
-// width: 100%;
 const Image = styled.img`
   max-width: 100%;
   max-height: 93vh;
@@ -26,18 +24,9 @@ const Image = styled.img`
   margin-left: 50px;
 `;
 
-const ImageBox = styled.div`
-
-`;
-
 const LinkWithStyles = styled(Link)`
   display: inline-block;
   padding: 16px;
-`;
-
-const ImageWrapper = styled.span`
-  margin-left: 40px;
-  margin-top: 14px;
 `;
 
 const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
@@ -74,10 +63,10 @@ const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
           </LinkWithStyles>
         </div>
       </Content>
-        <Image
-          src="https://buffer-publish.s3.amazonaws.com/images/campaigns-empty-state-screenshot.png"
-          alt={imageTag}
-        />
+      <Image
+        src="https://buffer-publish.s3.amazonaws.com/images/campaigns-empty-state-screenshot.png"
+        alt={imageTag}
+      />
     </EmptyStateContainer>
   );
 };

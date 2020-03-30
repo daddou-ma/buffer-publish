@@ -4,35 +4,30 @@ import { Text, Button } from '@bufferapp/ui';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { borderRadius } from '@bufferapp/ui/style/borders';
-import {
-  grayLighter,
-  gray,
-  white,
-  grayShadow,
-} from '@bufferapp/ui/style/colors';
+import { gray, white, grayShadow } from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
 import EmptyState from './EmptyState';
 import List from './List';
 
 /* Styles */
 const Wrapper = styled.div`
-  background-color: ${grayLighter};
+  padding: 16px 24px;
   height: 100%;
 `;
 
 const Header = styled.header`
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0px 16px;
   button {
     margin-left: auto;
   }
 `;
 
 const Container = styled.div`
-  margin: 13px;
-  min-width: 750px;
-  max-width: 1008px;
+  margin: 0px auto;
+  min-width: 800px;
+  max-width: 1800px;
   border-radius: ${borderRadius};
   border: 1px solid ${gray};
   background-color: ${white};
@@ -82,7 +77,7 @@ const ListCampaigns = ({
     );
   }
 
-  if (true) {
+  if (campaigns.length === 0) {
     return (
       <EmptyState
         translations={translations.emptyState}
