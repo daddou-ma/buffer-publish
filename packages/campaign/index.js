@@ -36,7 +36,11 @@ export default connect(
         dispatch(actions.handleCloseComposer());
       },
       onComposerOverlayClick: () => {
-        dispatch(modalsActions.showCloseComposerConfirmationModal());
+        dispatch(
+          modalsActions.showCloseComposerConfirmationModal({
+            page: 'campaigns',
+          })
+        );
       },
       onCreatePostClick: campaignId => {
         dispatch(actions.handleOpenComposer({ campaignId, editMode: false }));
