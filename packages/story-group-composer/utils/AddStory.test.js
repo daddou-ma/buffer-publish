@@ -4,8 +4,8 @@ import { getReadableDateFormat, getMomentTime } from './AddStory';
 describe('Add Story Utils', () => {
   // Keep a fixed date
   beforeAll(() => {
-    const unixSpy = jest.spyOn(moment, 'unix');
-    unixSpy.mockReturnValue('+052207-02-16T12:57:35.000');
+    const dateSpy = jest.spyOn(moment, 'unix');
+    dateSpy.mockReturnValue('+052207-02-16T12:57:35.000');
   });
   describe('getReadableDateFormat', () => {
     it('returns readable date with UTC timezone', () => {
