@@ -22,6 +22,7 @@ const Image = styled.img`
   object-position: 0 0;
   flex: 2;
   margin-left: 50px;
+  overflow: hidden;
 `;
 
 const LinkWithStyles = styled(Link)`
