@@ -6,7 +6,7 @@ const parseLastUpdated = updatedAt => {
   const updatedDate = new Date(updatedAt * 1000);
   const diff = moment(updatedDate).fromNow(true);
 
-  return `Last updated ${diff} ago`;
+  return `Updated ${diff} ago`;
 };
 
 const getYear = momentDate => momentDate.format('YYYY');
@@ -63,6 +63,8 @@ const parseItem = item => {
           createdAt,
           twentyFourHourTime: false,
         });
+      // Add isManager to each element
+      itemContent.content.isManager = item.is_manager;
       // Header details to be used in the CardHeader
       itemContent.content.headerDetails = {
         channel: {

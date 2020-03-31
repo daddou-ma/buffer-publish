@@ -41,6 +41,13 @@ describe('Add Story Utils', () => {
       const unixDate = moment.unix(objToSend.scheduledAt);
       expect(format).toEqual(unixDate);
     });
+  });
+  describe('getMomentTime when empty', () => {
+    // Keep a fixed date
+    beforeAll(() => {
+      const dateSpy = jest.spyOn(moment, 'unix');
+      dateSpy.mockReturnValue('+052207-02-16T12:57:35.000');
+    });
     it('returns today unix date when scheduledAt is undefined', () => {
       const format = getMomentTime({
         scheduledAt: undefined,

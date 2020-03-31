@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
+import { MemoryRouter } from 'react-router-dom';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import List from './index';
@@ -13,7 +14,7 @@ const campaigns = [
     dateRange: 'Oct 19-39, 2020',
     scheduled: 8,
     sent: 0,
-    lastUpdated: 'Last updated 12 days ago',
+    lastUpdated: 'Updated 12 days ago',
     id: '2',
   },
   {
@@ -22,7 +23,7 @@ const campaigns = [
     dateRange: 'March 23-April 4, 2020',
     scheduled: 11,
     sent: 25,
-    lastUpdated: 'Last updated yesterday',
+    lastUpdated: 'Updated yesterday',
     id: '3',
   },
   {
@@ -31,7 +32,7 @@ const campaigns = [
     dateRange: 'Jan 5-18, 2020',
     scheduled: 7,
     sent: 1,
-    lastUpdated: 'Last updated 3 hours ago',
+    lastUpdated: 'Updated 3 hours ago',
     id: '1',
   },
   {
@@ -40,12 +41,13 @@ const campaigns = [
     dateRange: 'Dec 27, 2019-Jan 7,2020',
     scheduled: 7,
     sent: 1,
-    lastUpdated: 'Last updated 3 hours ago',
+    lastUpdated: 'Updated 3 hours ago',
     id: '1',
   },
 ];
 
 storiesOf('Campaigns|ListCampaigns', module)
+  .addDecorator(getStory => <MemoryRouter>{getStory()}</MemoryRouter>)
   .addDecorator(withA11y)
   .add('List of campaigns', () => (
     <List
