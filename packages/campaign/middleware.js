@@ -52,19 +52,6 @@ export default ({ dispatch, getState }) => next => action => {
       dispatch(campaignsPage.goTo());
       break;
 
-    case actionTypes.SELECT_PROFILE: {
-      const { profiles } = getState().profileSidebar;
-      const { profileId } = action;
-      const profile = profiles.find(p => p.id === profileId);
-
-      dispatch(
-        profileSidebarActions.selectProfile({
-          profile,
-        })
-      );
-      break;
-    }
-
     default:
       break;
   }

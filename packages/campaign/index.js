@@ -66,17 +66,10 @@ export default connect(
     },
     postActions: {
       onEditClick: post => {
-        const { profileId } = post.post;
-
-        dispatch(
-          actions.handleSelectProfile({
-            profileId,
-          })
-        );
         dispatch(
           actions.handleOpenComposer({
             post: post.post,
-            profileId,
+            profileId: post.post.profileId,
             editMode: true,
           })
         );
