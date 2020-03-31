@@ -61,12 +61,13 @@ export default (state = initialState, action) => {
       };
     }
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const { fullItems } = action.args;
       const { items, ...campaign } = action.result;
       return {
         ...state,
         campaign,
         campaignId: campaign.id,
-        campaignPosts: items || [],
+        campaignPosts: (fullItems && items) || [],
         isLoading: false,
       };
     }
