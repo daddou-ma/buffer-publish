@@ -7,6 +7,7 @@ import {
   campaignScheduled,
   campaignSent,
 } from '@bufferapp/publish-routes';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions } from './reducer';
 import ViewCampaign from './components/ViewCampaign';
 
@@ -66,6 +67,14 @@ export default connect(
       },
       fetchCampaign: ({ campaignId, past }) => {
         dispatch(actions.fetchCampaign({ campaignId, past, fullItems: true }));
+      },
+      fetchCampaigns: () => {
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'getCampaignsList',
+            args: {},
+          })
+        );
       },
     },
     postActions: {

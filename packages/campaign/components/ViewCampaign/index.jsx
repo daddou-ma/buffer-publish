@@ -51,8 +51,12 @@ const ViewCampaign = ({
     const params = sentView ? { campaignId, past: true } : { campaignId };
     actions.fetchCampaign(params);
   }, [campaignId, sentView]);
-  // State
 
+  useEffect(() => {
+    actions.fetchCampaigns();
+  }, []);
+  
+  // Conditions
   const selectedtTabId = sentView ? 'sent' : 'scheduled';
   const campaignHasPosts = campaign?.scheduled > 0 || campaign?.sent > 0;
   const allPostsSent = campaign?.scheduled === 0 && campaign?.sent > 0;
@@ -82,7 +86,7 @@ const ViewCampaign = ({
       {showComposer && (
         <ComposerPopover
           onSave={actions.onComposerCreateSuccess}
-          type="queue"
+          type="campaign"
           onComposerOverlayClick={actions.onComposerOverlayClick}
           editMode={editMode}
         />
@@ -156,6 +160,7 @@ ViewCampaign.propTypes = {
     goToAnalyzeReport: PropTypes.func.isRequired,
     onComposerCreateSuccess: PropTypes.func.isRequired,
     onComposerOverlayClick: PropTypes.func.isRequired,
+    fetchCampaigns: PropTypes.func.isRequired,
   }).isRequired,
   postActions: PropTypes.shape({
     onEditClick: PropTypes.func.isRequired,
