@@ -49,6 +49,10 @@ const ViewCampaign = ({
   useEffect(() => {
     actions.fetchCampaign({ campaignId });
   }, [campaignId]);
+
+  useEffect(() => {
+    actions.fetchCampaigns();
+  }, []);
   // State
   const [listView, toggleView] = useState('scheduled');
 
@@ -78,7 +82,7 @@ const ViewCampaign = ({
       {showComposer && (
         <ComposerPopover
           onSave={actions.onComposerCreateSuccess}
-          type="queue"
+          type="campaign"
           onComposerOverlayClick={actions.onComposerOverlayClick}
           editMode={editMode}
         />
@@ -142,6 +146,7 @@ ViewCampaign.propTypes = {
     goToAnalyzeReport: PropTypes.func.isRequired,
     onComposerCreateSuccess: PropTypes.func.isRequired,
     onComposerOverlayClick: PropTypes.func.isRequired,
+    fetchCampaigns: PropTypes.func.isRequired,
   }).isRequired,
   postActions: PropTypes.shape({
     onEditClick: PropTypes.func.isRequired,
