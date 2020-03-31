@@ -47,10 +47,6 @@ describe('Add Story Utils', () => {
       expect(format).toEqual(unixDate);
     });
     it('returns today unix date when scheduledAt is undefined', () => {
-      moment.unix = function() {
-        return '+052207-02-16T12:57:35.000';
-      };
-
       const format = getMomentTime({
         scheduledAt: undefined,
       });
@@ -58,10 +54,6 @@ describe('Add Story Utils', () => {
       expect(format).toEqual(unixDate);
     });
     it('returns today unix date when scheduledAt is null', () => {
-      moment.unix = function() {
-        return '+052207-02-16T12:57:35.000';
-      };
-
       const format = getMomentTime({
         scheduledAt: null,
       });
