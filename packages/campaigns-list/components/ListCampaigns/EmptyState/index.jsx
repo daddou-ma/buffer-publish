@@ -25,6 +25,10 @@ const Image = styled.img`
   overflow: hidden;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.12);
   margin-top: 34px;
+
+  @media (min-width: 1500px) {
+    flex: 1.5;
+  }
 `;
 
 const LinkWithStyles = styled(Link)`
