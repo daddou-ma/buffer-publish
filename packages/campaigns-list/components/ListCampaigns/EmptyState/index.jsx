@@ -17,12 +17,14 @@ const Content = styled.div`
 
 const Image = styled.img`
   max-width: 100%;
-  max-height: 93vh;
+  max-height: 89.5vh;
   object-fit: cover;
   object-position: 0 0;
   flex: 2;
   margin-left: 50px;
   overflow: hidden;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.12);
+  margin-top: 34px;
 `;
 
 const LinkWithStyles = styled(Link)`
