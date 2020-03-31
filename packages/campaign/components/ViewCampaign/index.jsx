@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
@@ -40,6 +40,7 @@ const ViewCampaign = ({
   editMode,
   actions,
   postActions,
+  sentView,
 }) => {
   if (!hasCampaignsFlip) {
     window.location = getURL.getPublishUrl();
@@ -47,16 +48,19 @@ const ViewCampaign = ({
   }
   // Fetch Data
   useEffect(() => {
-    actions.fetchCampaign({ campaignId });
-  }, [campaignId]);
+    const params = sentView ? { campaignId, past: true } : { campaignId };
+    actions.fetchCampaign(params);
+  }, [campaignId, sentView]);
 
   useEffect(() => {
     actions.fetchCampaigns();
   }, []);
-  // State
-  const [listView, toggleView] = useState('scheduled');
-
-  const campaignHasPosts = campaignPosts?.length > 0;
+  
+  // Conditions
+  const selectedtTabId = sentView ? 'sent' : 'scheduled';
+  const campaignHasPosts = campaign?.scheduled > 0 || campaign?.sent > 0;
+  const allPostsSent = campaign?.scheduled === 0 && campaign?.sent > 0;
+  const noPostsSent = campaign?.scheduled > 0 && campaign?.sent === 0;
 
   if (isLoading) {
     return (
@@ -91,8 +95,8 @@ const ViewCampaign = ({
         <React.Fragment>
           <nav role="navigation">
             <Tabs
-              selectedTabId={listView}
-              onTabClick={tabId => toggleView(tabId)}
+              selectedTabId={selectedtTabId}
+              onTabClick={tabId => actions.onTabClick({ tabId, campaignId })}
             >
               <Tab tabId="scheduled">{translations.scheduled}</Tab>
               <Tab tabId="sent">
@@ -101,6 +105,14 @@ const ViewCampaign = ({
               </Tab>
             </Tabs>
           </nav>
+          {
+            allPostsSent
+            // Coming soon, empty state
+          }
+          {
+            noPostsSent
+            // Coming soon, empty state
+          }
           <QueueItems
             items={campaignPosts}
             onDeleteConfirmClick={postActions.onDeleteConfirmClick}
@@ -137,11 +149,13 @@ ViewCampaign.propTypes = {
   campaignId: PropTypes.string.isRequired,
   showComposer: PropTypes.bool.isRequired,
   editMode: PropTypes.bool.isRequired,
+  sentView: PropTypes.bool,
   hasCampaignsFlip: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
     onCreatePostClick: PropTypes.func.isRequired,
     onDeleteCampaignClick: PropTypes.func.isRequired,
     onEditCampaignClick: PropTypes.func.isRequired,
+    onTabClick: PropTypes.func.isRequired,
     fetchCampaign: PropTypes.func.isRequired,
     goToAnalyzeReport: PropTypes.func.isRequired,
     onComposerCreateSuccess: PropTypes.func.isRequired,
@@ -158,6 +172,10 @@ ViewCampaign.propTypes = {
     onImageClickPrev: PropTypes.func.isRequired,
     onImageClickNext: PropTypes.func.isRequired,
   }).isRequired,
+};
+
+ViewCampaign.defaultProps = {
+  sentView: false,
 };
 
 export default ViewCampaign;
