@@ -17,7 +17,7 @@ Welcome to the Buffer Publish monorepo.
 - [The Publish Server](#the-publish-server)
 - [Yarn Workspaces](#yarn-workspaces)
 - [Publishing Packages](#publishing-packages)
-- [Contributing](#contributing)
+- [Contributing](#contributing-🚀)
 - [Package Scripts](#package-scripts)
 - [Adding New Dependencies](#adding-new-dependencies)
 - [How Packages Communicate](#how-packages-communicate)
