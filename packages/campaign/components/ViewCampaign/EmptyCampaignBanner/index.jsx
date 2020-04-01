@@ -31,7 +31,7 @@ const LinkWithStyles = styled(Link)`
   padding: 16px;
 `;
 
-const EmptyState = ({ translations, onCreatePostClick }) => (
+const EmptyCampaignBanner = ({ translations, onCreatePostClick }) => (
   <Container>
     <Text type="h1">{translations.title}</Text>
     <SubText>
@@ -51,7 +51,7 @@ const EmptyState = ({ translations, onCreatePostClick }) => (
   </Container>
 );
 
-EmptyState.propTypes = {
+EmptyCampaignBanner.propTypes = {
   translations: PropTypes.shape({
     learnMore: PropTypes.string,
     createPosts: PropTypes.string,
@@ -64,4 +64,4 @@ EmptyState.propTypes = {
   onCreatePostClick: PropTypes.func.isRequired,
 };
 
-export default EmptyState;
+export default EmptyCampaignBanner;
