@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { EmptyState } from '@bufferapp/publish-shared-components';
 import EmptyCampaignBanner from '../EmptyCampaignBanner';
 import ExamplePost from '../ExamplePost';
+
+const EmptyCampaignWrapper = styled.div`
+  margin-top: 16px;
+`;
 
 const EmptyStateCampaign = ({
   translations,
@@ -28,14 +33,14 @@ const EmptyStateCampaign = ({
   return (
     <React.Fragment>
       {displayEmptyCampaign && (
-        <React.Fragment>
+        <EmptyCampaignWrapper>
           <EmptyCampaignBanner
             translations={translations}
             onCreatePostClick={actions.onCreatePostClick}
           />
           <ExamplePost />
           <ExamplePost />
-        </React.Fragment>
+        </EmptyCampaignWrapper>
       )}
       {displayEmptySentPosts && (
         <EmptyState
