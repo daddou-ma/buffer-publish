@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { EmptyState } from '@bufferapp/publish-shared-components';
+import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import EmptyCampaignBanner from '../EmptyCampaignBanner';
 import ExamplePost from '../ExamplePost';
 
@@ -28,6 +29,8 @@ const EmptyStateCampaign = ({
   const teamMemberPrimaryAction = {
     label: 'View Report',
     onClick: actions.goToAnalyzeReport,
+    icon: <ArrowRightIcon />,
+    iconEnd: true,
   };
 
   return (
