@@ -22,11 +22,11 @@ const EmptyStateCampaign = ({
   const displayEmptySentPosts = sentView && campaign?.sent === 0;
   const displayAllPostsSent = campaign?.scheduled === 0 && campaign?.sent > 0;
 
-  const ownerPrimaryAction = {
+  const teamMemberPrimaryAction = {
     label: 'Create New Campaign',
     onClick: actions.onCreateCampaignClick,
   };
-  const teamMemberPrimaryAction = {
+  const ownerPrimaryAction = {
     label: 'View Report',
     onClick: actions.goToAnalyzeReport,
     icon: <ArrowRightIcon />,

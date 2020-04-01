@@ -44,7 +44,7 @@ storiesOf('Campaigns|ViewCampaign/EmptyState', module)
       actions={actions}
     />
   ))
-  .add('Campaign with no sent posts, team member', () => (
+  .add('Campaign with no scheduled posts, team member', () => (
     <EmptyState
       campaign={campaignAllPostsSent}
       translations={translations.campaigns.viewCampaign}
