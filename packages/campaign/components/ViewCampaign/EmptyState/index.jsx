@@ -23,11 +23,11 @@ const EmptyStateCampaign = ({
   const displayAllPostsSent = campaign?.scheduled === 0 && campaign?.sent > 0;
 
   const teamMemberPrimaryAction = {
-    label: 'Create New Campaign',
+    label: translations.allPostsSent.createCampaign,
     onClick: actions.onCreateCampaignClick,
   };
   const ownerPrimaryAction = {
-    label: 'View Report',
+    label: translations.allPostsSent.viewReport,
     onClick: actions.goToAnalyzeReport,
     icon: <ArrowRightIcon />,
     iconEnd: true,
@@ -48,19 +48,19 @@ const EmptyStateCampaign = ({
       {displayEmptySentPosts && (
         <EmptyState
           height="100%"
-          title="Standing by for sent posts..."
-          subtitle="Once your scheduled posts are published, you’ll see them here with some basic post analytics."
+          title={translations.emptySentPosts.title}
+          subtitle={translations.emptySentPosts.subtitle}
           heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-not-sent.png"
         />
       )}
       {displayAllPostsSent && (
         <EmptyState
           height="100%"
-          title="Woohoo — everything sent!"
-          subtitle="All the content scheduled for this Campaign has been sent."
+          title={translations.allPostsSent.title}
+          subtitle={translations.allPostsSent.subtitle}
           heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-sent-1.png"
           secondaryAction={{
-            label: 'Create Post',
+            label: translations.allPostsSent.createPost,
             onClick: actions.onCreatePostClick,
           }}
           primaryAction={
@@ -74,13 +74,17 @@ const EmptyStateCampaign = ({
 
 EmptyStateCampaign.propTypes = {
   translations: PropTypes.shape({
-    learnMore: PropTypes.string,
-    createPosts: PropTypes.string,
-    createPost: PropTypes.string,
-    subtext: PropTypes.string,
-    title: PropTypes.string,
-    editCampaign: PropTypes.string,
-    deleteCampaign: PropTypes.string,
+    emptySentPosts: PropTypes.shape({
+      title: PropTypes.string,
+      subtitle: PropTypes.string,
+    }),
+    allPostsSent: PropTypes.shape({
+      title: PropTypes.string,
+      subtitle: PropTypes.string,
+      createPost: PropTypes.string,
+      createCampaign: PropTypes.string,
+      viewReport: PropTypes.string,
+    }),
   }).isRequired,
   sentView: PropTypes.bool.isRequired,
   actions: PropTypes.shape({

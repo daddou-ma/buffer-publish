@@ -33,33 +33,32 @@ const LinkWithStyles = styled(Link)`
 
 const EmptyCampaignBanner = ({ translations, onCreatePostClick }) => (
   <Container>
-    <Text type="h1">{translations.title}</Text>
+    <Text type="h1">{translations.emptyCampaignBanner.title}</Text>
     <SubText>
-      <Text type="p">{translations.subtext}</Text>
+      <Text type="p">{translations.emptyCampaignBanner.subtext}</Text>
     </SubText>
     <Button
       onClick={onCreatePostClick}
       type="primary"
-      label={translations.createPosts}
+      label={translations.emptyCampaignBanner.createPosts}
     />
     <LinkWithStyles
       href="https://faq.buffer.com/" // Update FAQ link when it's ready
       newTab
     >
-      {translations.learnMore}
+      {translations.emptyCampaignBanner.learnMore}
     </LinkWithStyles>
   </Container>
 );
 
 EmptyCampaignBanner.propTypes = {
   translations: PropTypes.shape({
-    learnMore: PropTypes.string,
-    createPosts: PropTypes.string,
-    createPost: PropTypes.string,
-    subtext: PropTypes.string,
-    title: PropTypes.string,
-    editCampaign: PropTypes.string,
-    deleteCampaign: PropTypes.string,
+    emptyCampaignBanner: PropTypes.shape({
+      learnMore: PropTypes.string,
+      createPosts: PropTypes.string,
+      subtext: PropTypes.string,
+      title: PropTypes.string,
+    }),
   }).isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
 };
