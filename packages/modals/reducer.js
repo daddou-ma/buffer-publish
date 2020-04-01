@@ -265,7 +265,7 @@ export const actions = {
   hideCloseComposerConfirmationModal: () => ({
     type: actionTypes.HIDE_CLOSE_COMPOSER_CONFIRMATION_MODAL,
   }),
-  showCloseComposerConfirmationModal: ({ page = 'queue' }) => ({
+  showCloseComposerConfirmationModal: ({ page }) => ({
     type: actionTypes.SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL,
     page,
   }),
