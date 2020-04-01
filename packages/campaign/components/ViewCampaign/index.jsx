@@ -57,7 +57,8 @@ const ViewCampaign = ({
 
   // Conditions
   const selectedtTabId = sentView ? 'sent' : 'scheduled';
-  const campaignHasPosts = campaign?.scheduled > 0 || campaign?.sent > 0;
+  const campaignHasPosts =
+    (!sentView && campaign?.scheduled > 0) || (sentView && campaign?.sent > 0);
 
   if (isLoading) {
     return (
@@ -71,6 +72,7 @@ const ViewCampaign = ({
 
   return (
     <Container>
+      {/* Header */}
       <Header
         campaignDetails={campaign}
         hideAnalyzeReport={hideAnalyzeReport}
@@ -80,6 +82,42 @@ const ViewCampaign = ({
         onEditCampaignClick={actions.onEditCampaignClick}
         goToAnalyzeReport={actions.goToAnalyzeReport}
       />
+      {/* Navigation */}
+      <nav role="navigation">
+        <Tabs
+          selectedTabId={selectedtTabId}
+          onTabClick={tabId => actions.onTabClick({ tabId, campaignId })}
+        >
+          <Tab tabId="scheduled">{translations.scheduled}</Tab>
+          <Tab tabId="sent">
+            {translations.sent}
+            <TabTag type="new" labelName="Coming Soon" />
+          </Tab>
+        </Tabs>
+      </nav>
+      {/* Content */}
+      <EmptyStateCampaign
+        hideAnalyzeReport={hideAnalyzeReport}
+        translations={translations}
+        campaign={campaign}
+        actions={actions}
+        sentView={sentView}
+      />
+      {campaignHasPosts && (
+        <QueueItems
+          items={campaignPosts}
+          onDeleteConfirmClick={postActions.onDeleteConfirmClick}
+          onEditClick={postActions.onEditClick}
+          onShareNowClick={postActions.onShareNowClick}
+          onRequeueClick={postActions.onRequeueClick}
+          onImageClick={postActions.onImageClick}
+          onImageClickNext={postActions.onImageClickNext}
+          onImageClickPrev={postActions.onImageClickPrev}
+          onImageClose={postActions.onImageClose}
+          type="post"
+        />
+      )}
+      {/* Composer */}
       {showComposer && (
         <ComposerPopover
           onSave={actions.onComposerCreateSuccess}
@@ -88,41 +126,6 @@ const ViewCampaign = ({
           editMode={editMode}
         />
       )}
-      <React.Fragment>
-        <nav role="navigation">
-          <Tabs
-            selectedTabId={selectedtTabId}
-            onTabClick={tabId => actions.onTabClick({ tabId, campaignId })}
-          >
-            <Tab tabId="scheduled">{translations.scheduled}</Tab>
-            <Tab tabId="sent">
-              {translations.sent}
-              <TabTag type="new" labelName="Coming Soon" />
-            </Tab>
-          </Tabs>
-        </nav>
-        <EmptyStateCampaign
-          hideAnalyzeReport={hideAnalyzeReport}
-          translations={translations}
-          campaign={campaign}
-          actions={actions}
-          sentView={sentView}
-        />
-        {campaignHasPosts && (
-          <QueueItems
-            items={campaignPosts}
-            onDeleteConfirmClick={postActions.onDeleteConfirmClick}
-            onEditClick={postActions.onEditClick}
-            onShareNowClick={postActions.onShareNowClick}
-            onRequeueClick={postActions.onRequeueClick}
-            onImageClick={postActions.onImageClick}
-            onImageClickNext={postActions.onImageClickNext}
-            onImageClickPrev={postActions.onImageClickPrev}
-            onImageClose={postActions.onImageClose}
-            type="post"
-          />
-        )}
-      </React.Fragment>
     </Container>
   );
 };
