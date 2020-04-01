@@ -96,7 +96,18 @@ The name of the folder is up to you, what's more important is the name of packag
     * Do this when you're customizing your package, and  whenever you change the dependencies in your package or another.
 
 ## Styling Styleguide 💅
-For our styling we use [styled-components](https://styled-components.com/).
+For our styling we use [styled-components](https://styled-components.com/), an example for a styled component:
+
+```js
+const Title = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-direction: row;
+`;
+
+<Title>Example</Title>
+```
 
 ## Working on RPCs
 Refer to this [Notion](https://threads.com/34376693228) for more details on how to use the newest technique when working on RPCs.
