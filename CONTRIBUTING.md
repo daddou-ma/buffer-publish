@@ -15,9 +15,21 @@ Here are some guidelines to make it as easy and clear as possible.
 Please follow the steps for your contribution:
 1. Fork the repo and create your branch from `master`.
 2. Follow the [coding styleguide](#coding-style)
-2. If you've added code that should be tested, add tests.
-3. Ensure the test suite passes.
-4. After submitting your pull request, verify that all status checks are passing.
+3. If you've added code that should be tested, add tests.
+4. Ensure the test suite passes.
+    <details>
+    <summary>What if the status checks are failing?</summary>
+    <p>
+
+    If `continuous-integration/travis-ci/push` is failing, you can try updating the snapshots file by running the following command and committing the resulting snapshot file:
+    ```bash
+    # from buffer-publish
+    $ yarn run test-update
+    ```
+    If it's still failing and you unsure on how to fix it, please leave a comment on the pull request indicating it.
+    </p>
+    </details>
+5. After submitting your pull request, verify that all status checks are passing.
 
 ## Coding Styleguide 💻
 
