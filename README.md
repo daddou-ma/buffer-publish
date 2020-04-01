@@ -17,7 +17,7 @@ Welcome to the Buffer Publish monorepo.
 - [The Publish Server](#the-publish-server)
 - [Yarn Workspaces](#yarn-workspaces)
 - [Publishing Packages](#publishing-packages)
-- [Adding new Packages](#adding-new-packages)
+- [Contributing](#contributing)
 - [Package Scripts](#package-scripts)
 - [Adding New Dependencies](#adding-new-dependencies)
 - [How Packages Communicate](#how-packages-communicate)
@@ -119,38 +119,8 @@ Buffer Publish is a _monorepo_. That means it's composed of several separate par
 
 No need to publish local packages anymore for deployments 🎉
 
-## Adding new Packages
-
-🎬 See this video http://hi.buffer.com/5be7a08fc7fc
-
-In a nutshell:
-
-1. **Copy the `packages/example` folder.**
-```bash
-# from buffer-publish
-$ cp packages/example packages/your-new-package
-```
-The name of the folder is up to you, what's more important is the name of package (in it's `package.json`).
-
-2. **Update `package.json`**
-    * Change the name, author, version (always `2.0.0` for local packages), and description.
-    * You can remove all the `"dependencies"` for now, and add them as you need them.
-
-3. **Update `README.md`**
-    * Delete all the text here and just have a heading with your package name and a short description. This is also a great place to document how your package works, and how it can be used/consumed.
-
-4. **Cleanup:** 
-    * Delete the `node_modules` and `coverage` folders that came from copying `/example`.
-
-5. Not all packages have to export a component (see for example the `maintenance-redirect` package.)
-    * This is where you'll start to make changes and add things based on the needs of your package.
-    * Look at other packages for examples!
-
-6. **Connect reducer and/or middleware**
-    * If you have a reducer and/or middleware - don't forget to link those up in `packages/store/index.js` and `packages/store/reducers.js`.
-
-7. **Run `yarn`**
-    * Do this when you're customizing your package, and  whenever you change the dependencies in your package or another.
+## Contributing 🚀
+For usage instructions and how to add, update, and work with the components, see our [CONTRIBUTING.md](/CONTRIBUTING.md) doc!
 
 ## Package Scripts
 
