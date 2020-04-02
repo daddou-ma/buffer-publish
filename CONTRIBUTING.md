@@ -96,6 +96,9 @@ The name of the folder is up to you, what's more important is the name of packag
 7. **Run `yarn`**
     * Do this when you're customizing your package, and  whenever you change the dependencies in your package or another.
 
+**PropTypes and DefaultProps**
+Avoid using defaultProps for anything that's a required prop.
+
 ## Styling Styleguide 💅
 For our styling we use [styled-components](https://styled-components.com/), an example for a styled component:
 
