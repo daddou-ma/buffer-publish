@@ -188,7 +188,6 @@ yarn add -DE jest
 
 At a high level each package communicates using the [Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern) through the Redux store. This means that each package receives all events and decides whether to modify their own state or ignore the event. An event (or action) flows from the originator to all other packages (including itself):
 
-
 ```
 Package-A ---action--->Redux Store--->Package-B
   ^                             |
@@ -212,36 +211,6 @@ export default (state, action) => {
   }
 };
 ```
-## Testing
-
-### Testing in Publish
-
-1. You can trigger a test in watch mode if you are working on a specific file or package:
-
-```bash
-$ yarn run test-package <path-to-package>
-
-# testing a specific file in watch mode
-$ yarn run test-package ./packages/modals/reducer.test.js
-```
-
-2. You can also test with `jest` directly:
-
-```bash
-$ yarn run jest <path-to-package>
-
-# testing a specific file
-$ yarn run jest ./packages/modals/reducer.test.js
-```
-
-### Debugging
-
-To use the `yarn test:debug` script, follow these instructions:
-1. Add a `debugger` statement near the failing line in your test.
-2. Type `chrome://inspect` in your chrome browser address bar.
-3. Click on "Open dedicated DevTools for Node".
-4. In your terminal run `yarn test:debug <path to test>`
-5. Visit the inspector you opened up, you should see that the debugger has been triggered and the app has paused near the line that is failing.
 
 ## External Packages
 

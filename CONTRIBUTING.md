@@ -8,7 +8,8 @@ Here are some guidelines to make it as easy and clear as possible.
   - [Prettier 💁‍♀️](#prettier-💁‍♀️)
   - [Components Styleguide 📦](#components-styleguide-📦)
 - [Styling Styleguide 💅](#styling-styleguide-💅)
-- [Working on RPCs ](#working-on-rpcs)
+- [Working on RPCs](#working-on-rpcs)
+- [Testing 🧪](#testing-🧪)
 - [Reporting bugs 🐛](#reporting-bugs-🐛)
 
 ## Pull Requests
@@ -111,6 +112,37 @@ const Title = styled.div`
 
 ## Working with RPCs
 Refer to this [Notion](https://threads.com/34376693228) for more details on how to use the newest technique when working on RPCs.
+
+## Testing 🧪
+
+### Testing in Publish
+
+1. You can trigger a test in watch mode if you are working on a specific file or package:
+
+```bash
+$ yarn run test-package <path-to-package>
+
+# testing a specific file in watch mode
+$ yarn run test-package ./packages/modals/reducer.test.js
+```
+
+2. You can also test with `jest` directly:
+
+```bash
+$ yarn run jest <path-to-package>
+
+# testing a specific file
+$ yarn run jest ./packages/modals/reducer.test.js
+```
+
+### Debugging
+
+To use the `yarn test:debug` script, follow these instructions:
+1. Add a `debugger` statement near the failing line in your test.
+2. Type `chrome://inspect` in your chrome browser address bar.
+3. Click on "Open dedicated DevTools for Node".
+4. In your terminal run `yarn test:debug <path to test>`
+5. Visit the inspector you opened up, you should see that the debugger has been triggered and the app has paused near the line that is failing.
 
 ## Reporting bugs 🐛
 To report bugs, please feel free to add them in [JIRA](https://buffer.atlassian.net/secure/RapidBoard.jspa?projectKey=PUB)
