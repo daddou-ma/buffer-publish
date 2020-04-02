@@ -34,10 +34,14 @@ export default hot(
     },
     (dispatch, ownProps) => ({
       onProfileClick: profile => {
-        if (profile && profile.id !== ownProps.profileId) {
+        if (
+          profile &&
+          (profile.id !== ownProps.profileId || ownProps.profileId === null)
+        ) {
+          const tabId = ownProps.tabId ?? 'queue';
           dispatch(
             tabsActions.selectTab({
-              tabId: ownProps.tabId,
+              tabId,
               profileId: profile.id,
             })
           );
