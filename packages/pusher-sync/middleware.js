@@ -3,6 +3,8 @@ import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-pro
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+
 import {
   postParser,
   storyGroupParser,
@@ -130,6 +132,13 @@ const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
   });
 };
 
+const bindUserEvents = (userChannel, dispatch) => {
+  userChannel.bind('create_campaign', data =>
+    console.log('create_campaign', data)
+    // TODO, handle changes by dispatching actions
+  );
+};
+
 export default ({ dispatch }) => {
   const pusher = new Pusher(PUSHER_APP_KEY, { authEndpoint: '/pusher/auth' });
   window.__pusher = pusher;
@@ -137,6 +146,21 @@ export default ({ dispatch }) => {
 
   return next => action => {
     next(action);
+
+    /**
+     * Listen for user-level Pusher events
+     */
+    if (action.type === `user_${dataFetchActionTypes.FETCH_SUCCESS}`) {
+      const { id: userId } = action.result;
+      const channelName = `private-updates-${userId}`;
+      console.log('subbing to ', channelName);
+      const userChannel = pusher.subscribe(channelName);
+      bindUserEvents(userChannel, dispatch);
+    }
+
+    /**
+     * Listen for profile level Pusher events
+     */
     if (action.type === profileSidebarActionTypes.SELECT_PROFILE) {
       const { profileId } = action;
       const { service } = action.profile;
