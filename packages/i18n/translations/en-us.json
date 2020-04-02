@@ -39,7 +39,8 @@
       "notice2": "Find out more",
       "notice3": " in our FAQ.",
       "saveCampaign": "Save Campaign",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "ariaLabel": "Name input for campaign form"
     },
     "viewCampaign": {
       "viewCampaign": "View Campaign",

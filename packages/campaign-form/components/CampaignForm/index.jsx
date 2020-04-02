@@ -152,6 +152,7 @@ const CampaignForm = ({
             label={translations.name}
             placeholder={translations.placeholder}
             aria-required="true"
+            aria-label={translations.ariaLabel}
             ref={inputElement}
           />
           <Text htmlFor="colorPicker" type="label">
@@ -218,6 +219,7 @@ CampaignForm.propTypes = {
     notice3: PropTypes.string.isRequired,
     saveCampaign: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
+    ariaLabel: PropTypes.string.isRequired,
   }).isRequired,
   campaignId: PropTypes.string,
   fetchCampaign: PropTypes.func.isRequired,
