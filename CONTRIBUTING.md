@@ -2,19 +2,19 @@
 🎉 Thank you for your contribution! 🎉
 Here are some guidelines to make it as easy and clear as possible.
 
-# Table of contents
+## Table of contents
 - [Pull Requests ](#pull-requests)
 - [Coding Styleguide 💻](#coding-styleguide-💻)
   - [Prettier 💁‍♀️](#prettier-💁‍♀️)
-  - [Components Styleguide 📦](#components-styleguide-📦)
+  - [Components Styleguide](#components-styleguide)
 - [Adding New Dependencies](#adding-new-dependencies)
-- [How Packages Communicate](#how-packages-communicate)
+- [How Packages Communicate 📦](#how-packages-communicate-📦)
 - [Styling Styleguide 💅](#styling-styleguide-💅)
 - [Working on RPCs](#working-on-rpcs)
 - [Testing 🧪](#testing-🧪)
 - [Reporting bugs 🐛](#reporting-bugs-🐛)
 
-# Pull Requests
+## Pull Requests
 Please follow the steps for your contribution:
 1. Fork the repo and create your branch from `master`.
 2. Follow the [coding styleguide](#coding-style)
@@ -34,9 +34,9 @@ Please follow the steps for your contribution:
     </details>
 5. After submitting your pull request, verify that all status checks are passing.
 
-# Coding Styleguide 💻
+## Coding Styleguide 💻
 
-## Prettier 💁‍♀️
+### Prettier 💁‍♀️
 We use Prettier for our code styling, and the easiest way to work with it is by installing Prettier as a plugin in the IDE of your choice, however, you can also make sure your coding format is in place with the following commands:
 
 ```bash
@@ -47,7 +47,7 @@ $ prettier --check "packages/your-package/**/*.+(jsx|js)"
 $ prettier --write "packages/your-package/**/*.+(jsx|js)"
 ```
 
-## Components Styleguide 📦
+### Components Styleguide
 
 **Creating a Component**
 
@@ -64,6 +64,8 @@ class Welcome extends React.Component {
   }
 }
 ```
+
+---
 
 **How to create a new component**
 
@@ -101,11 +103,11 @@ The name of the folder is up to you, what's more important is the name of packag
 **Component PropTypes and DefaultProps**
 Avoid using defaultProps for anything that's a required prop.
 
-# Adding New Dependencies
+## Adding New Dependencies
 
 Adding packages to a monorepo is slightly different than adding to a standard node package. Common `devDependencies` can be added to the top level `package.json` file.
 
-## Adding A Common Dependencies
+### Adding A Common Dependencies
 
 This is the most likely scenario you'll face.
 
@@ -117,7 +119,7 @@ in the root directory (`buffer-publish/`) run the follwing commands:
   ```
   Now `some-cool-package` is available to all packages.
 
-## Creating A Dependency To Another Local Package
+### Creating A Dependency To Another Local Package
 
 |⚠️  &nbsp;**Important**|
 |--|
@@ -141,7 +143,7 @@ In the `example` package add the following entry in the `packages/example/packag
 |The version number must be **exact** to link local packages, otherwise it will (try to) fetch the package from npm.|
 
 
-## Add A Dependency That Runs A Binary
+### Add A Dependency That Runs A Binary
 
 An example of this would be `eslint` or `jest`. These should be added to the individual package:
 
@@ -150,7 +152,7 @@ cd packages/example/
 yarn add -DE jest
 ```
 
-# How Packages Communicate
+## How Packages Communicate 📦
 
 At a high level each package communicates using the [Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern) through the Redux store. This means that each package receives all events and decides whether to modify their own state or ignore the event. An event (or action) flows from the originator to all other packages (including itself):
 
@@ -178,7 +180,7 @@ export default (state, action) => {
 };
 ```
 
-# Styling Styleguide 💅
+## Styling Styleguide 💅
 For our styling we use [styled-components](https://styled-components.com/), an example for a styled component:
 
 ```js
@@ -192,12 +194,12 @@ const Title = styled.div`
 <Title>Example</Title>
 ```
 
-# Working with RPCs
+## Working with RPCs
 Refer to this [Notion](https://threads.com/34376693228) for more details on how to use the newest technique when working on RPCs.
 
-# Testing 🧪
+## Testing 🧪
 
-## Testing in Publish
+### Testing in Publish
 
 1. You can trigger a test in watch mode if you are working on a specific file or package:
 
@@ -217,7 +219,7 @@ $ yarn run jest <path-to-package>
 $ yarn run jest ./packages/modals/reducer.test.js
 ```
 
-## Debugging
+### Debugging
 
 To use the `yarn test:debug` script, follow these instructions:
 1. Add a `debugger` statement near the failing line in your test.
@@ -226,6 +228,6 @@ To use the `yarn test:debug` script, follow these instructions:
 4. In your terminal run `yarn test:debug <path to test>`
 5. Visit the inspector you opened up, you should see that the debugger has been triggered and the app has paused near the line that is failing.
 
-# Reporting bugs 🐛
+## Reporting bugs 🐛
 To report bugs, please feel free to add them in [JIRA](https://buffer.atlassian.net/secure/RapidBoard.jspa?projectKey=PUB)
 
