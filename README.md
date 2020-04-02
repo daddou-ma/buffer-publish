@@ -19,8 +19,6 @@ Welcome to the Buffer Publish monorepo.
 - [Publishing Packages](#publishing-packages)
 - [Contributing](#contributing-🚀)
 - [Package Scripts](#package-scripts)
-- [Adding New Dependencies](#adding-new-dependencies)
-- [How Packages Communicate](#how-packages-communicate)
 - [External Packages](#external-packages)
 
 ## What is Buffer Publish?
@@ -134,83 +132,6 @@ We have a few helpful commands defined in this project's `package.json`.
 | 🆕 `yarn run test-package <path-to-package>`  | Start watching tests in coverage for a specific package directory. [Learn more](https://github.com/bufferapp/buffer-publish/pull/624). |
 `yarn test:debug <path to test>` | Runs `"node --inspect node_modules/.bin/jest --runInBand"` with the test you specify.
 | `yarn run start`  | Starts up the Publish Express server, [as explained above](#the-publish-server), and is run automatically when you start Publish with `./dev up`. (So in most cases you won't be running this command.) |
-
-## Adding New Dependencies
-
-Adding packages to a monorepo is slightly different than adding to a standard node package. Common `devDependencies` can be added to the top level `package.json` file.
-
-### Adding A Common Dependencies
-
-This is the most likely scenario you'll face.
-
-in the root directory (`buffer-publish/`) run the follwing commands:
-
-  ```bash
-  $ yarn add -DE some-cool-package
-  $ yarn
-  ```
-  Now `some-cool-package` is available to all packages.
-
-### Creating A Dependency To Another Local Package
-
-|⚠️  &nbsp;**Important**|
-|--|
-|Please use 2.0.0 for local package versions moving forward. Using a different version will not break anything (as long as the versions match), but it will be easier to spot local packages in dependencies.|
-
-To create a dependency to the login package from the example package:
-
-In the `example` package add the following entry in the `packages/example/package.json` file under the dependencies key:
-
-```js
-{
-  //...other stuff...
-  dependencies:{
-    //...other dependencies...
-    "@bufferapp/login": "2.0.0", // this version must be exact otherwise it fetches from npm!
-  }
-}
-```
-|⚠️  &nbsp;**Important**|
-|--|
-|The version number must be **exact** to link local packages, otherwise it will (try to) fetch the package from npm.|
-
-
-### Add A Dependency That Runs A Binary
-
-An example of this would be `eslint` or `jest`. These should be added to the individual package:
-
-```sh
-cd packages/example/
-yarn add -DE jest
-```
-
-## How Packages Communicate
-
-At a high level each package communicates using the [Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern) through the Redux store. This means that each package receives all events and decides whether to modify their own state or ignore the event. An event (or action) flows from the originator to all other packages (including itself):
-
-```
-Package-A ---action--->Redux Store--->Package-B
-  ^                             |
-  |-----------------------------|---->Package-C
-```
-
-If you need to listen to another packages events, import the actionTypes into the package you're building:
-
-
-```js
-// handle app initialized
-export default (state, action) => {
-  switch (action.type) {
-    case 'APP_INIT':
-      return {
-        ...state,
-        initialized: true,
-      };
-    default:
-      return state;
-  }
-};
-```
 
 ## External Packages
 
