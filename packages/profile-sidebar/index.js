@@ -38,10 +38,9 @@ export default hot(
           profile &&
           (profile.id !== ownProps.profileId || ownProps.profileId === null)
         ) {
-          const tabId = ownProps.tabId ?? 'queue';
           dispatch(
             tabsActions.selectTab({
-              tabId,
+              tabId: ownProps.tabId ?? 'queue',
               profileId: profile.id,
             })
           );
