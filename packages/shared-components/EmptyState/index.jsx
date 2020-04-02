@@ -75,6 +75,8 @@ const EmptyState = ({
         {primaryAction && (
           <Button
             type="primary"
+            icon={primaryAction.icon ?? null}
+            iconEnd={primaryAction.iconEnd ?? null}
             size="large"
             onClick={primaryAction.onClick}
             label={primaryAction.label}
@@ -98,6 +100,8 @@ EmptyState.propTypes = {
   primaryAction: PropTypes.shape({
     onClick: PropTypes.func,
     label: PropTypes.string,
+    icon: PropTypes.node,
+    iconEnd: PropTypes.bool,
   }),
   secondaryAction: PropTypes.shape({
     onClick: PropTypes.func,
