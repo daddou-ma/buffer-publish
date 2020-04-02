@@ -12,11 +12,11 @@ module.exports = method(
       },
     })
       .then(user => {
-        console.log(user);
+        console.log({ user });
         return parsers.userParser(user);
       })
       .catch(err => {
-        console.log(err.error);
+        console.log({ err });
         PublishAPI.errorHandler(err);
       })
 );
