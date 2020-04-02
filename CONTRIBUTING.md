@@ -26,7 +26,7 @@ Please follow the steps for your contribution:
     # from buffer-publish
     $ yarn run test-update
     ```
-    If it's still failing and you unsure on how to fix it, please leave a comment on the pull request indicating it.
+    If it's still failing and you are unsure on how to fix it, please leave a comment on the pull request indicating it.
     </p>
     </details>
 5. After submitting your pull request, verify that all status checks are passing.
@@ -34,7 +34,7 @@ Please follow the steps for your contribution:
 ## Coding Styleguide 💻
 
 ### Prettier 💁‍♀️
-We use Prettier for our code styling, and the easiest way to work with it is by installing Prettier as a plugin in the IDE of your choice, however, you can also make sure your format is in place with the following commands:
+We use Prettier for our code styling, and the easiest way to work with it is by installing Prettier as a plugin in the IDE of your choice, however, you can also make sure your coding format is in place with the following commands:
 
 ```bash
 # To check the format
@@ -109,7 +109,7 @@ const Title = styled.div`
 <Title>Example</Title>
 ```
 
-## Working on RPCs
+## Working with RPCs
 Refer to this [Notion](https://threads.com/34376693228) for more details on how to use the newest technique when working on RPCs.
 
 ## Reporting bugs 🐛
