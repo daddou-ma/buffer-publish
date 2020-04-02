@@ -11,6 +11,12 @@ module.exports = method(
         includes: 'avatar',
       },
     })
-      .then(user => parsers.userParser(user))
-      .catch(PublishAPI.errorHandler)
+      .then(user => {
+        console.log(user);
+        return parsers.userParser(user);
+      })
+      .catch(err => {
+        console.log(err.error);
+        PublishAPI.errorHandler(err);
+      })
 );
