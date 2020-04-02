@@ -31,6 +31,9 @@ export const Container = styled.li`
   :hover {
     background-color: ${grayLighter};
   }
+  :last-of-type {
+    border-radius: 0 0 4px 4px;
+  }
 `;
 
 export const LastUpdated = styled.span`
