@@ -219,7 +219,7 @@ $ yarn run jest <path-to-package>
 $ yarn run jest ./packages/modals/reducer.test.js
 ```
 
-### Debugging
+### Debugging 🕵️‍♂️
 
 To use the `yarn test:debug` script, follow these instructions:
 1. Add a `debugger` statement near the failing line in your test.
