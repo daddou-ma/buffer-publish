@@ -36,7 +36,7 @@ export default connect(
     };
   },
 
-  dispatch => ({
+  (dispatch, ownProps) => ({
     actions: {
       onComposerCreateSuccess: () => {
         dispatch(actions.handleCloseComposer());
@@ -62,7 +62,12 @@ export default connect(
       },
       onEditCampaignClick: campaignId => {
         if (campaignId) {
-          dispatch(campaignEdit.goTo({ campaignId }));
+          dispatch(
+            campaignEdit.goTo({
+              campaignId,
+              from: ownProps.history.location.pathname,
+            })
+          );
         }
       },
       onTabClick: ({ tabId, campaignId }) => {

@@ -7,8 +7,6 @@ import {
   childTabRoute,
   generatePreferencePageRoute,
   getPreferencePageParams,
-  getCampaignPageParams,
-  getCampaignUrlMatch,
 } from './index';
 
 describe('publish-routes', () => {

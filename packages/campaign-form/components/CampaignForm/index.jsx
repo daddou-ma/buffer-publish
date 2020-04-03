@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import { Text, Input, Button, Link } from '@bufferapp/ui';
 import { SimpleColorPicker } from '@bufferapp/publish-shared-components';
 import { borderRadius } from '@bufferapp/ui/style/borders';
@@ -89,6 +88,7 @@ const CampaignForm = ({
   editMode,
   campaign,
   fetchCampaign,
+  onCancelClick,
 }) => {
   // Fetch Data
   useEffect(() => {
@@ -126,8 +126,6 @@ const CampaignForm = ({
     disableCampaignSubmitButton({ name: campaignName, color: value });
     setColor(value);
   };
-
-  const history = useHistory();
 
   return (
     <Wrapper>
@@ -175,7 +173,7 @@ const CampaignForm = ({
             type="text"
             size="large"
             label={translations.cancel}
-            onClick={() => history.goBack()}
+            onClick={onCancelClick}
             fullWidth
           />
         </Card>

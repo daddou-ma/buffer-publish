@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { actions as campaignActions } from '@bufferapp/publish-campaign';
+import { campaignsPage, goTo } from '@bufferapp/publish-routes';
 import { actions } from './reducer';
 import CampaignForm from './components/CampaignForm';
 
@@ -17,7 +18,15 @@ export default connect(
         : false,
     };
   },
-  dispatch => ({
+  (dispatch, ownProps) => ({
+    onCancelClick: () => {
+      const fromPath = ownProps.history.location?.state?.from;
+      if (fromPath) {
+        dispatch(goTo(fromPath));
+      } else {
+        dispatch(campaignsPage.goTo());
+      }
+    },
     onCreateOrUpdateCampaignClick: ({
       campaignId,
       colorSelected,

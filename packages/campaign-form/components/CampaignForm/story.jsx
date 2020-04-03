@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { useHistory, MemoryRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
@@ -15,7 +14,6 @@ const campaignDetails = {
 };
 
 storiesOf('Campaigns|CampaignForm', module)
-  .addDecorator(getStory => <MemoryRouter>{getStory()}</MemoryRouter>)
   .addDecorator(withA11y)
   .add('create form', () => (
     <CampaignForm
