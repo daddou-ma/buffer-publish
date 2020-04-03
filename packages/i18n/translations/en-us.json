@@ -228,13 +228,6 @@
     "body2": "We've kept all your posts and content just as it was but with a cleaner and faster experience.",
     "cta": "Let's Go!"
   },
-  "welcome-b4b-trial-modal": {
-    "trialLabel": "14-day Free trial",
-    "header": "Welcome to Buffer for Business",
-    "subHeader": "Get the most out of Buffer for Business with our getting started guide.",
-    "cta": "Go to Our Getting Started Guide",
-    "cancelCta": "Maybe Later"
-  },
   "welcome-paid-modal": {
     "step1": {
       "headline": "A Better Buffer Experience",
