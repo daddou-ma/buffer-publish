@@ -1,4 +1,5 @@
 import { push } from 'connected-react-router';
+import { matchPath } from 'react-router-dom';
 
 const profileRouteRegex = /profile\/(\w+)\/tab\/(\w+)(?:\/(\w+))?/;
 export const getProfilePageParams = ({ path }) => {
@@ -55,6 +56,13 @@ export const getPreferencePageParams = ({ path }) => {
   return {
     preferenceId: match[1],
   };
+};
+
+export const getParams = ({ pathname, route }) => {
+  const matchProfile = matchPath(pathname, {
+    path: route,
+  });
+  return (matchProfile && matchProfile.params) || null;
 };
 
 export const campaignsPage = {

@@ -29,13 +29,12 @@ export default connect(
       hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
-      sentView: ownProps.sentView,
+      page: state.campaign.page,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')
         : false,
     };
   },
-
   dispatch => ({
     actions: {
       onComposerCreateSuccess: () => {
