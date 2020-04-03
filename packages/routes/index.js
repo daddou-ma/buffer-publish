@@ -58,11 +58,14 @@ export const getPreferencePageParams = ({ path }) => {
   };
 };
 
-export const getParams = ({ pathname, route }) => {
-  const matchProfile = matchPath(pathname, {
+export const getMatch = ({ pathname, route }) =>
+  matchPath(pathname, {
     path: route,
   });
-  return (matchProfile && matchProfile.params) || null;
+
+export const getParams = ({ pathname, route }) => {
+  const match = getMatch({ pathname, route });
+  return match?.params || null;
 };
 
 export const campaignsPage = {
@@ -90,4 +93,3 @@ export const campaignSent = {
   route: '/campaigns/:id/sent/',
   goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/sent`),
 };
-export const isCampaignsRoute = ({ path }) => path === campaignsPage.route;
