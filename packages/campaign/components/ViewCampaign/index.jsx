@@ -51,7 +51,7 @@ const ViewCampaign = ({
   useEffect(() => {
     const params = sentView ? { campaignId, past: true } : { campaignId };
     actions.fetchCampaign(params);
-  }, [campaignId, sentView]);
+  }, [campaignId, page]);
 
   useEffect(() => {
     actions.fetchCampaigns();
