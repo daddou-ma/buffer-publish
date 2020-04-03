@@ -4,6 +4,7 @@ import { actions as modalActions } from '@bufferapp/publish-modals';
 import { actions as tabsActions } from '@bufferapp/publish-tabs';
 import { isCampaignsRoute, campaignsPage } from '@bufferapp/publish-routes';
 import ProfileSidebar from './components/ProfileSidebar';
+import { shouldGoToProfile } from './utils';
 import { actions } from './reducer';
 
 const reorderProfilesByUnlocked = profiles =>
@@ -34,10 +35,10 @@ export default hot(
     },
     (dispatch, ownProps) => ({
       onProfileClick: profile => {
-        if (profile && profile.id !== ownProps.profileId) {
+        if (shouldGoToProfile(profile, ownProps)) {
           dispatch(
             tabsActions.selectTab({
-              tabId: ownProps.tabId,
+              tabId: ownProps.tabId ?? 'queue',
               profileId: profile.id,
             })
           );
