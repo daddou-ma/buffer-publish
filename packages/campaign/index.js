@@ -9,6 +9,7 @@ import {
   campaignCreate,
 } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions } from './reducer';
 import ViewCampaign from './components/ViewCampaign';
 
@@ -86,6 +87,16 @@ export default connect(
       },
     },
     postActions: {
+      onSetRemindersClick: ({ post }) => {
+        const nextUrl = campaignScheduled.getRoute({
+          campaignId: post.campaignDetails.id,
+        });
+        const reminderUrl = getURL.getRemindersURL({
+          profileId: post.profileId,
+          nextUrl,
+        });
+        window.location.assign(`${reminderUrl}`);
+      },
       onEditClick: post => {
         dispatch(
           actions.handleOpenComposer({
