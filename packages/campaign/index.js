@@ -97,79 +97,79 @@ export default connect(
         });
         window.location.assign(`${reminderUrl}`);
       },
-      onEditClick: post => {
+      onEditClick: ({ post }) => {
         dispatch(
           actions.handleOpenComposer({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
             editMode: true,
           })
         );
       },
-      onDeleteConfirmClick: post => {
+      onDeleteConfirmClick: ({ post }) => {
         dispatch(
           queueActions.handleDeleteConfirmClick({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
         dispatch(
           actions.handleDeleteConfirmClick({
-            post: post.post,
+            post,
           })
         );
       },
-      onRequeueClick: post => {
+      onRequeueClick: ({ post }) => {
         dispatch(
           queueActions.handleRequeue({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },
-      onShareNowClick: post => {
+      onShareNowClick: ({ post }) => {
         dispatch(
           queueActions.handleShareNowClick({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
         dispatch(
           actions.handleShareNowClick({
-            post: post.post,
+            post,
           })
         );
       },
 
-      onImageClick: post => {
+      onImageClick: ({ post }) => {
         dispatch(
           actions.handleImageClick({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },
-      onImageClose: post => {
+      onImageClose: ({ post }) => {
         dispatch(
           actions.handleImageClose({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },
-      onImageClickNext: post => {
+      onImageClickNext: ({ post }) => {
         dispatch(
           actions.handleImageClickNext({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },
-      onImageClickPrev: post => {
+      onImageClickPrev: ({ post }) => {
         dispatch(
           actions.handleImageClickPrev({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },
