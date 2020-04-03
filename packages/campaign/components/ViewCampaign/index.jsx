@@ -39,12 +39,14 @@ const ViewCampaign = ({
   editMode,
   actions,
   postActions,
-  sentView,
+  page,
 }) => {
+  const sentView = page === 'sent';
   if (!hasCampaignsFlip) {
     window.location = getURL.getPublishUrl();
     return null;
   }
+
   // Fetch Data
   useEffect(() => {
     const params = sentView ? { campaignId, past: true } : { campaignId };
@@ -56,7 +58,6 @@ const ViewCampaign = ({
   }, []);
 
   // Conditions
-  const selectedtTabId = sentView ? 'sent' : 'scheduled';
   const campaignHasPosts =
     (!sentView && campaign?.scheduled > 0) || (sentView && campaign?.sent > 0);
 
@@ -85,7 +86,7 @@ const ViewCampaign = ({
       {/* Navigation */}
       <nav role="navigation">
         <Tabs
-          selectedTabId={selectedtTabId}
+          selectedTabId={page}
           onTabClick={tabId => actions.onTabClick({ tabId, campaignId })}
         >
           <Tab tabId="scheduled">{translations.scheduled}</Tab>
@@ -139,7 +140,7 @@ ViewCampaign.propTypes = {
   campaignId: PropTypes.string.isRequired,
   showComposer: PropTypes.bool.isRequired,
   editMode: PropTypes.bool.isRequired,
-  sentView: PropTypes.bool,
+  page: PropTypes.oneOf(['scheduled', 'sent', 'null']).isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
     onCreatePostClick: PropTypes.func.isRequired,
@@ -162,10 +163,6 @@ ViewCampaign.propTypes = {
     onImageClickPrev: PropTypes.func.isRequired,
     onImageClickNext: PropTypes.func.isRequired,
   }).isRequired,
-};
-
-ViewCampaign.defaultProps = {
-  sentView: false,
 };
 
 export default ViewCampaign;
