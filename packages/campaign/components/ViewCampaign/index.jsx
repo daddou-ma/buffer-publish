@@ -140,7 +140,7 @@ ViewCampaign.propTypes = {
   campaignId: PropTypes.string.isRequired,
   showComposer: PropTypes.bool.isRequired,
   editMode: PropTypes.bool.isRequired,
-  page: PropTypes.oneOf(['scheduled', 'sent', 'null']).isRequired,
+  page: PropTypes.oneOf(['scheduled', 'sent', null]).isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
     onCreatePostClick: PropTypes.func.isRequired,
