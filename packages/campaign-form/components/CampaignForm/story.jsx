@@ -27,9 +27,9 @@ storiesOf('Campaigns|CampaignForm', module)
       campaignId={campaignDetails.id}
       translations={translations.campaigns.campaignForm}
       onCreateOrUpdateCampaignClick={action('saveCampaign')}
+      onCancelClick={action('cancel')}
       editMode
       campaign={campaignDetails}
       fetchCampaign={action('fetch campaign')}
-      onCancelClick={action('cancel')}
     />
   ));
