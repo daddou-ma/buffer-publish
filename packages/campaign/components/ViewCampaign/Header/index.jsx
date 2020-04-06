@@ -102,7 +102,7 @@ const Header = ({
           icon={<ArrowRightIcon />}
           iconEnd
           onClick={() => {
-            goToAnalyzeReport();
+            goToAnalyzeReport(campaignDetails);
           }}
           disabled={!campaignDetails.dateRange}
           label={translations.viewReport}
