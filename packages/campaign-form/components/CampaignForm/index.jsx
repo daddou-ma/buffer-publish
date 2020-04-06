@@ -90,7 +90,7 @@ const CampaignForm = ({
   campaign,
   fetchCampaign,
 }) => {
-  // Fetch Data
+  // Fetch the Data
   useEffect(() => {
     if (editMode) {
       fetchCampaign({ campaignId });
