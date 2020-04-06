@@ -62,7 +62,9 @@ const ListCampaigns = ({
   }
   // Fetch Data
   useEffect(() => {
-    fetchCampaigns();
+    if (!campaigns || campaigns.length < 1) {
+      fetchCampaigns();
+    }
   }, []);
 
   if (isLoading) {

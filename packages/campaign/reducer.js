@@ -1,5 +1,6 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actionTypes as campaignsListActionTypes } from '@bufferapp/publish-campaigns-list';
 import {
   sortCampaignsByUpdatedAt,
   actionTypes as queueActionTypes,
@@ -61,6 +62,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+      };
+    }
+    case campaignsListActionTypes.CAMPAIGN_UPDATED: {
+      const { campaign } = state;
+      const updatedCampaign = action.campaign;
+      return {
+        ...state,
+        campaign:
+          updatedCampaign.id === campaign.id ? updatedCampaign : campaign,
       };
     }
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
