@@ -43,7 +43,7 @@ const Header = ({
           displaySkeleton={isLoading}
         />
         <Name type="h2" aria-label="Loading" displaySkeleton={isLoading}>
-          {campaignDetails.name}
+          {campaignDetails.name || '________________________________________'}
         </Name>
       </Title>
       {isLoading && (
@@ -156,7 +156,7 @@ Header.propTypes = {
     scheduled: PropTypes.number,
     sent: PropTypes.number,
     lastUpdated: PropTypes.string,
-  }),
+  }).isRequired,
   hideAnalyzeReport: PropTypes.bool.isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
@@ -167,9 +167,6 @@ Header.propTypes = {
 
 Header.defaultProps = {
   isLoading: false,
-  campaignDetails: {
-    name: '________________________________________',
-  },
 };
 
 export default Header;
