@@ -110,6 +110,7 @@ const ViewCampaign = ({
         <QueueItems
           items={campaignPosts}
           onDeleteConfirmClick={postActions.onDeleteConfirmClick}
+          onSetRemindersClick={postActions.onSetRemindersClick}
           onEditClick={postActions.onEditClick}
           onShareNowClick={postActions.onShareNowClick}
           onRequeueClick={postActions.onRequeueClick}
@@ -158,6 +159,7 @@ ViewCampaign.propTypes = {
   postActions: PropTypes.shape({
     onEditClick: PropTypes.func.isRequired,
     onDeleteConfirmClick: PropTypes.func.isRequired,
+    onSetRemindersClick: PropTypes.func.isRequired,
     onShareNowClick: PropTypes.func.isRequired,
     onRequeueClick: PropTypes.func.isRequired,
     onImageClick: PropTypes.func.isRequired,
