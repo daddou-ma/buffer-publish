@@ -36,6 +36,9 @@ export const skeletonStyles = css`
   );
   animation: ${animation};
   user-select: none;
+  *:before {
+    background-color: ${transparent};
+  }
 `;
 
 export const ButtonWithSkeleton = styled(Button)`
