@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { actions as tabsActions } from '@bufferapp/publish-tabs';
-import { isCampaignsRoute, campaignsPage } from '@bufferapp/publish-routes';
+import { getMatch, campaignsPage } from '@bufferapp/publish-routes';
 import ProfileSidebar from './components/ProfileSidebar';
 import { shouldGoToProfile } from './utils';
 import { actions } from './reducer';
@@ -28,8 +28,9 @@ export default hot(
         hasCampaignsFlip: state.appSidebar.user.features
           ? state.appSidebar.user.features.includes('campaigns')
           : false,
-        isCampaignsSelected: isCampaignsRoute({
-          path: state.router?.location?.pathname,
+        isCampaignsSelected: !!getMatch({
+          pathname: state.router?.location?.pathname,
+          route: campaignsPage.route,
         }),
       };
     },

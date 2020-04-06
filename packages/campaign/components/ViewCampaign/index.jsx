@@ -49,8 +49,10 @@ const ViewCampaign = ({
 
   // Fetch Data
   useEffect(() => {
-    const params = sentView ? { campaignId, past: true } : { campaignId };
-    actions.fetchCampaign(params);
+    if (page) {
+      const params = sentView ? { campaignId, past: true } : { campaignId };
+      actions.fetchCampaign(params);
+    }
   }, [campaignId, page]);
 
   useEffect(() => {
