@@ -80,7 +80,8 @@ export const campaignCreate = {
 
 export const campaignEdit = {
   route: '/campaigns/:id/edit/',
-  goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/edit`),
+  goTo: ({ campaignId, from }) =>
+    push(`/campaigns/${campaignId}/edit`, { from }),
 };
 
 export const campaignScheduled = {
@@ -93,3 +94,5 @@ export const campaignSent = {
   route: '/campaigns/:id/sent/',
   goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/sent`),
 };
+
+export const goTo = path => push(path);
