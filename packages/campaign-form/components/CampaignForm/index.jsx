@@ -84,11 +84,11 @@ const CampaignForm = ({
   campaignId,
   translations,
   onCreateOrUpdateCampaignClick,
+  onCancelClick,
   isLoading,
   editMode,
   campaign,
   fetchCampaign,
-  onCancelClick,
 }) => {
   // Fetch Data
   useEffect(() => {

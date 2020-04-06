@@ -19,6 +19,7 @@ storiesOf('Campaigns|CampaignForm', module)
     <CampaignForm
       translations={translations.campaigns.campaignForm}
       onCreateOrUpdateCampaignClick={action('saveCampaign')}
+      onCancelClick={action('cancel')}
     />
   ))
   .add('edit form', () => (
