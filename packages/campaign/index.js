@@ -95,7 +95,7 @@ export default connect(
           profileId: post.profileId,
           nextUrl,
         });
-        window.location.assign(`${reminderUrl}`);
+        window.location.assign(reminderUrl);
       },
       onEditClick: ({ post }) => {
         dispatch(
