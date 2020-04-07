@@ -34,22 +34,30 @@ const Header = ({
   goToAnalyzeReport,
   isLoading,
 }) => (
-  <Container>
+  <Container aria-label="Campaign Details">
     <CampaignDetails>
       <Title>
         <Color color={campaignDetails.color} displaySkeleton={isLoading} />
-        <Name type="h2" aria-label="Loading" displaySkeleton={isLoading}>
-          {campaignDetails.name || '________________________________________'}
+        <Name
+          type="h2"
+          displaySkeleton={isLoading}
+          aria-label={isLoading ? 'Loading' : null}
+          aria-live="polite"
+          aria-busy={isLoading}
+        >
+          {campaignDetails.name || translations.loadingCampaignName}
         </Name>
       </Title>
       <SubText>
         {isLoading && (
           <TextWithSkeleton
             type="p"
-            aria-label={isLoading ? 'Loading' : null}
             displaySkeleton={isLoading}
+            aria-label={isLoading ? 'Loading' : null}
+            aria-live="polite"
+            aria-busy={isLoading}
           >
-            {'_____________________________________________________________'}
+            {translations.loadingCampaignDetails}
           </TextWithSkeleton>
         )}
         {!isLoading && (
@@ -94,7 +102,6 @@ const Header = ({
         isSplit
         label={translations.createPost}
         disabled={isLoading}
-        aria-label={isLoading ? 'Loading' : null}
         displaySkeleton={isLoading}
         onSelectClick={selectedItem => {
           if (typeof selectedItem.selectedItemClick !== 'undefined') {
@@ -127,7 +134,6 @@ const Header = ({
           onClick={() => {
             goToAnalyzeReport();
           }}
-          aria-label={isLoading ? 'Loading' : null}
           displaySkeleton={isLoading}
           disabled={!campaignDetails.dateRange || isLoading}
           label={translations.viewReport}
@@ -145,6 +151,8 @@ Header.propTypes = {
     deleteCampaign: PropTypes.string,
     sent: PropTypes.string,
     scheduled: PropTypes.string,
+    loadingCampaignName: PropTypes.string,
+    loadingCampaignDetails: PropTypes.string,
   }).isRequired,
   campaignDetails: PropTypes.shape({
     id: PropTypes.string,
