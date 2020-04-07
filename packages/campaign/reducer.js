@@ -9,8 +9,8 @@ import { campaignParser } from '@bufferapp/publish-server/parsers/src';
 export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   FETCH_CAMPAIGN: 0,
   CAMPAIGN_CREATED: 0,
-  CAMPAIGN_UPDATED: 0,
   CAMPAIGN_DELETED: 0,
+  CAMPAIGN_UPDATED: 0,
   OPEN_COMPOSER: 0,
   CLOSE_COMPOSER: 0,
   GO_TO_ANALYZE_REPORT: 0,

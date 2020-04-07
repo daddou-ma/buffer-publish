@@ -9,7 +9,7 @@ export const actionTypes = keyWrapper('CAMPAIGNS_LIST', {
 });
 
 export const initialState = {
-  campaigns: [],
+  campaigns: null,
   isLoading: false,
 };
 
@@ -44,9 +44,11 @@ export default (state = initialState, action) => {
     }
     case campaignActionTypes.CAMPAIGN_UPDATED: {
       const parsedCampaign = campaignParser(action.campaign);
-      const index = state.campaigns.findIndex(i => i.id === parsedCampaign.id);
-      const updatedCampaigns = state.campaigns.map((item, index2) =>
-        index2 === index ? parsedCampaign : item
+      const updatedIndex = state.campaigns.findIndex(
+        i => i.id === parsedCampaign.id
+      );
+      const updatedCampaigns = state.campaigns.map((item, index) =>
+        index === updatedIndex ? parsedCampaign : item
       );
       return {
         ...state,
@@ -55,9 +57,11 @@ export default (state = initialState, action) => {
     }
     case campaignActionTypes.CAMPAIGN_DELETED: {
       const { campaignId } = action;
-      const index = state.campaigns.findIndex(i => i.id === campaignId);
+      const deletedIndex = state.campaigns.findIndex(
+        item => item.id === campaignId
+      );
       const updatedCampaigns = state.campaigns.filter(
-        (_item, index2) => index2 !== index
+        (_item, index) => index !== deletedIndex
       );
       return {
         ...state,

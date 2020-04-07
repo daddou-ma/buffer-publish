@@ -62,7 +62,7 @@ const ListCampaigns = ({
   }
   // Fetch Data
   useEffect(() => {
-    if (!campaigns || campaigns.length < 1) {
+    if (!campaigns) {
       fetchCampaigns();
     }
   }, []);
@@ -77,7 +77,7 @@ const ListCampaigns = ({
     );
   }
 
-  if (campaigns.length === 0) {
+  if (!campaigns || campaigns.length === 0) {
     return (
       <EmptyState
         translations={translations.emptyState}
