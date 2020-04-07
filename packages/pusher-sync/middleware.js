@@ -4,7 +4,7 @@ import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reduce
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actionTypes as campaignListActionTypes } from '@bufferapp/publish-campaigns-list/reducer';
+import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign/reducer';
 
 import {
   postParser,
@@ -137,21 +137,21 @@ const bindUserEvents = (userChannel, dispatch) => {
   userChannel.bind('create_campaign', data => {
     console.log('create_campaign', data);
     dispatch({
-      type: campaignListActionTypes.CAMPAIGN_CREATED,
+      type: campaignActionTypes.CAMPAIGN_CREATED,
       campaign: data,
     })
   });
   userChannel.bind('update_campaign', data => {
     console.log('update_campaign', data);
     dispatch({
-      type: campaignListActionTypes.CAMPAIGN_UPDATED,
+      type: campaignActionTypes.CAMPAIGN_UPDATED,
       campaign: data,
     });
   });
   userChannel.bind('delete_campaign', data => {
     console.log('delete_campaign', data);
     dispatch({
-      type: campaignListActionTypes.CAMPAIGN_DELETED,
+      type: campaignActionTypes.CAMPAIGN_DELETED,
       campaignId: data.id,
     });
   });

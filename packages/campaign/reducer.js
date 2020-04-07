@@ -1,13 +1,16 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import { actionTypes as campaignsListActionTypes } from '@bufferapp/publish-campaigns-list';
 import {
   sortCampaignsByUpdatedAt,
   actionTypes as queueActionTypes,
 } from '@bufferapp/publish-queue/reducer';
+import { campaignParser } from '@bufferapp/publish-server/parsers/src';
 
 export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   FETCH_CAMPAIGN: 0,
+  CAMPAIGN_CREATED: 0,
+  CAMPAIGN_UPDATED: 0,
+  CAMPAIGN_DELETED: 0,
   OPEN_COMPOSER: 0,
   CLOSE_COMPOSER: 0,
   GO_TO_ANALYZE_REPORT: 0,
@@ -64,9 +67,9 @@ export default (state = initialState, action) => {
         isLoading: false,
       };
     }
-    case campaignsListActionTypes.CAMPAIGN_UPDATED: {
+    case actionTypes.CAMPAIGN_UPDATED: {
       const { campaign } = state;
-      const updatedCampaign = action.campaign;
+      const updatedCampaign = campaignParser(action.campaign);
       return {
         ...state,
         campaign:

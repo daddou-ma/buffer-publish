@@ -1,12 +1,11 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign';
 import { sortCampaignsByUpdatedAt } from '@bufferapp/publish-queue/reducer';
+import { campaignParser } from '@bufferapp/publish-server/parsers/src';
 
 export const actionTypes = keyWrapper('CAMPAIGNS_LIST', {
   FETCH_CAMPAIGNS: 0,
-  CAMPAIGN_CREATED: 0,
-  CAMPAIGN_UPDATED: 0,
-  CAMPAIGN_DELETED: 0,
 });
 
 export const initialState = {
@@ -35,26 +34,26 @@ export default (state = initialState, action) => {
         isLoading: false,
       };
     }
-    case actionTypes.CAMPAIGN_CREATED: {
-      const { campaign } = action;
-      const updatedCampaigns = [...state.campaigns, campaign];
+    case campaignActionTypes.CAMPAIGN_CREATED: {
+      const parsedCampaign = campaignParser(action.campaign);
+      const updatedCampaigns = [...state.campaigns, parsedCampaign];
       return {
         ...state,
         campaigns: sortCampaignsByUpdatedAt(updatedCampaigns),
       };
     }
-    case actionTypes.CAMPAIGN_UPDATED: {
-      const { campaign } = action;
-      const index = state.campaigns.findIndex(i => i.id === campaign.id);
+    case campaignActionTypes.CAMPAIGN_UPDATED: {
+      const parsedCampaign = campaignParser(action.campaign);
+      const index = state.campaigns.findIndex(i => i.id === parsedCampaign.id);
       const updatedCampaigns = state.campaigns.map((item, index2) =>
-        index2 === index ? campaign : item
+        index2 === index ? parsedCampaign : item
       );
       return {
         ...state,
         campaigns: sortCampaignsByUpdatedAt(updatedCampaigns),
       };
     }
-    case actionTypes.CAMPAIGN_DELETED: {
+    case campaignActionTypes.CAMPAIGN_DELETED: {
       const { campaignId } = action;
       const index = state.campaigns.findIndex(i => i.id === campaignId);
       const updatedCampaigns = state.campaigns.filter(
