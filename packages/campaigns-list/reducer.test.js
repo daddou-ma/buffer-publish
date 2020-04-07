@@ -1,4 +1,6 @@
 import deepFreeze from 'deep-freeze';
+import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign';
+import { campaignParser } from '@bufferapp/publish-server/parsers/src';
 import reducer, { actions, initialState, actionTypes } from './reducer';
 
 describe('reducer', () => {
@@ -69,6 +71,105 @@ describe('reducer', () => {
     deepFreeze(stateBefore);
     deepFreeze(action);
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  describe('campaign pusher events', () => {
+    const campaign = campaignParser({
+      _id: '123',
+      color: 'yellow',
+      name: 'Test',
+      global_organization_id: '321',
+      updated_at: 1586224276,
+    });
+    const recentlyUpdatedCampaign = {
+      _id: '1234',
+      color: 'blue',
+      name: 'A campaign recently updated',
+      global_organization_id: '654',
+      updated_at: 1586269886,
+    };
+
+    it('handles CAMPAIGN_CREATED action', () => {
+      const stateBefore = {
+        ...initialState,
+        isLoading: false,
+        campaigns: [],
+      };
+      const stateAfter = {
+        ...initialState,
+        isLoading: false,
+        campaigns: [campaignParser(recentlyUpdatedCampaign)],
+      };
+      const action = {
+        type: campaignActionTypes.CAMPAIGN_CREATED,
+        campaign: recentlyUpdatedCampaign,
+      };
+      deepFreeze(stateBefore);
+      deepFreeze(action);
+      expect(reducer(stateBefore, action)).toEqual(stateAfter);
+    });
+
+    it('sorts campaigns by updatedAt in CAMPAIGN_CREATED action', () => {
+      const stateBefore = {
+        ...initialState,
+        isLoading: false,
+        campaigns: [campaign],
+      };
+      const stateAfter = {
+        ...initialState,
+        isLoading: false,
+        campaigns: [campaignParser(recentlyUpdatedCampaign), campaign],
+      };
+      const action = {
+        type: campaignActionTypes.CAMPAIGN_CREATED,
+        campaign: recentlyUpdatedCampaign,
+      };
+      deepFreeze(stateBefore);
+      deepFreeze(action);
+      expect(reducer(stateBefore, action)).toEqual(stateAfter);
+    });
+
+    it('handles CAMPAIGN_UPDATED action', () => {
+      const stateBefore = {
+        ...initialState,
+        isLoading: false,
+        campaigns: [campaignParser(recentlyUpdatedCampaign)],
+      };
+      const stateAfter = {
+        ...initialState,
+        isLoading: false,
+        campaigns: [
+          campaignParser({ ...recentlyUpdatedCampaign, color: 'green' }),
+        ],
+      };
+      const action = {
+        type: campaignActionTypes.CAMPAIGN_UPDATED,
+        campaign: { ...recentlyUpdatedCampaign, color: 'green' },
+      };
+      deepFreeze(stateBefore);
+      deepFreeze(action);
+      expect(reducer(stateBefore, action)).toEqual(stateAfter);
+    });
+
+    it('handles CAMPAIGN_DELETED action', () => {
+      const stateBefore = {
+        ...initialState,
+        isLoading: false,
+        campaigns: [campaign, campaignParser(recentlyUpdatedCampaign)],
+      };
+      const stateAfter = {
+        ...initialState,
+        isLoading: false,
+        campaigns: [campaign],
+      };
+      const action = {
+        type: campaignActionTypes.CAMPAIGN_DELETED,
+        campaignId: '1234',
+      };
+      deepFreeze(stateBefore);
+      deepFreeze(action);
+      expect(reducer(stateBefore, action)).toEqual(stateAfter);
+    });
   });
 
   // Test action creators:
