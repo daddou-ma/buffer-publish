@@ -37,11 +37,7 @@ const Header = ({
   <Container>
     <CampaignDetails>
       <Title>
-        <Color
-          color={campaignDetails.color}
-          aria-label="Loading"
-          displaySkeleton={isLoading}
-        />
+        <Color color={campaignDetails.color} displaySkeleton={isLoading} />
         <Name type="h2" aria-label="Loading" displaySkeleton={isLoading}>
           {campaignDetails.name || '________________________________________'}
         </Name>
@@ -50,7 +46,7 @@ const Header = ({
         {isLoading && (
           <TextWithSkeleton
             type="p"
-            aria-label="Loading"
+            aria-label={isLoading ? 'Loading' : null}
             displaySkeleton={isLoading}
           >
             {'_____________________________________________________________'}
@@ -98,7 +94,7 @@ const Header = ({
         isSplit
         label={translations.createPost}
         disabled={isLoading}
-        aria-label="Loading"
+        aria-label={isLoading ? 'Loading' : null}
         displaySkeleton={isLoading}
         onSelectClick={selectedItem => {
           if (typeof selectedItem.selectedItemClick !== 'undefined') {
@@ -131,7 +127,7 @@ const Header = ({
           onClick={() => {
             goToAnalyzeReport();
           }}
-          aria-label="Loading"
+          aria-label={isLoading ? 'Loading' : null}
           displaySkeleton={isLoading}
           disabled={!campaignDetails.dateRange || isLoading}
           label={translations.viewReport}
