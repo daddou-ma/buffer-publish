@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/ui';
 import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
@@ -46,48 +46,50 @@ const Header = ({
           {campaignDetails.name || '________________________________________'}
         </Name>
       </Title>
-      {isLoading && (
-        <TextWithSkeleton
-          type="p"
-          aria-label="Loading"
-          displaySkeleton={isLoading}
-        >
-          {'_____________________________________________________________'}
-        </TextWithSkeleton>
-      )}
-      {!isLoading && (
-        <SubText>
-          <Details>
-            {campaignDetails.dateRange && (
+      <SubText>
+        {isLoading && (
+          <TextWithSkeleton
+            type="p"
+            aria-label="Loading"
+            displaySkeleton={isLoading}
+          >
+            {'_____________________________________________________________'}
+          </TextWithSkeleton>
+        )}
+        {!isLoading && (
+          <Fragment>
+            <Details>
+              {campaignDetails.dateRange && (
+                <Group>
+                  <Icon>
+                    <CalendarIcon size="medium" />
+                  </Icon>
+                  <Text type="p">{campaignDetails.dateRange}</Text>
+                </Group>
+              )}
               <Group>
                 <Icon>
-                  <CalendarIcon size="medium" />
+                  <ClockIcon size="medium" />
                 </Icon>
-                <Text type="p">{campaignDetails.dateRange}</Text>
+                <Text type="p">
+                  {campaignDetails.scheduled} {translations.scheduled}
+                </Text>
               </Group>
-            )}
-            <Group>
-              <Icon>
-                <ClockIcon size="medium" />
-              </Icon>
-              <Text type="p">
-                {campaignDetails.scheduled} {translations.scheduled}
-              </Text>
-            </Group>
-            <Group>
-              <Icon>
-                <ListIcon size="medium" />
-              </Icon>
-              <Text type="p">
-                {campaignDetails.sent} {translations.sent}
-              </Text>
-            </Group>
-          </Details>
-          <Text type="p">
-            <LastUpdated>{campaignDetails.lastUpdated}</LastUpdated>
-          </Text>
-        </SubText>
-      )}
+              <Group>
+                <Icon>
+                  <ListIcon size="medium" />
+                </Icon>
+                <Text type="p">
+                  {campaignDetails.sent} {translations.sent}
+                </Text>
+              </Group>
+            </Details>
+            <Text type="p">
+              <LastUpdated>{campaignDetails.lastUpdated}</LastUpdated>
+            </Text>
+          </Fragment>
+        )}
+      </SubText>
     </CampaignDetails>
     <ButtonWrapper>
       <ButtonWithSkeleton

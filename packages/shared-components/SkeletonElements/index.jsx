@@ -24,10 +24,14 @@ const animation = () =>
   `;
 
 export const skeletonStyles = css`
-  border: 1px solid ${transparent};
+  border: ${transparent};
+  fill: ${transparent};
+  *:before {
+    background-color: ${transparent};
+  }
+  border-color: ${transparent};
   background-color: ${transparent};
   color: ${transparent};
-  fill: ${transparent};
   cursor: auto;
   background-image: linear-gradient(
     270deg,
@@ -36,15 +40,22 @@ export const skeletonStyles = css`
   );
   animation: ${animation};
   user-select: none;
-  *:before {
-    background-color: ${transparent};
-  }
 `;
 
 export const ButtonWithSkeleton = styled(Button)`
   ${props => props.displaySkeleton && skeletonStyles}
+  ${props =>
+    props.displaySkeleton &&
+    css`
+      border: 1px solid ${transparent};
+    `}
 `;
 
 export const TextWithSkeleton = styled(Text)`
   ${props => props.displaySkeleton && skeletonStyles}
+  ${props =>
+    props.displaySkeleton &&
+    css`
+      border-radius: 4px;
+    `}
 `;
