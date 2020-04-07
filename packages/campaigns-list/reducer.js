@@ -1,8 +1,8 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign';
-import { sortCampaignsByUpdatedAt } from '@bufferapp/publish-queue/reducer';
 import { campaignParser } from '@bufferapp/publish-server/parsers/src';
+import { sortCampaignsByUpdatedAt } from '@bufferapp/publish-queue/reducer';
 
 export const actionTypes = keyWrapper('CAMPAIGNS_LIST', {
   FETCH_CAMPAIGNS: 0,
@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
     }
     case campaignActionTypes.CAMPAIGN_UPDATED: {
       const parsedCampaign = campaignParser(action.campaign);
-      const updatedIndex = state.campaigns.findIndex(
+      const updatedIndex = state.campaigns?.findIndex(
         i => i.id === parsedCampaign.id
       );
       const updatedCampaigns = state.campaigns.map((item, index) =>
@@ -57,10 +57,10 @@ export default (state = initialState, action) => {
     }
     case campaignActionTypes.CAMPAIGN_DELETED: {
       const { campaignId } = action;
-      const deletedIndex = state.campaigns.findIndex(
+      const deletedIndex = state.campaigns?.findIndex(
         item => item.id === campaignId
       );
-      const updatedCampaigns = state.campaigns.filter(
+      const updatedCampaigns = state.campaigns?.filter(
         (_item, index) => index !== deletedIndex
       );
       return {

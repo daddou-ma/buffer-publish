@@ -135,21 +135,18 @@ const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
 
 const bindUserEvents = (userChannel, dispatch) => {
   userChannel.bind('create_campaign', data => {
-    console.log('create_campaign', data);
     dispatch({
       type: campaignActionTypes.CAMPAIGN_CREATED,
       campaign: data,
     })
   });
   userChannel.bind('update_campaign', data => {
-    console.log('update_campaign', data);
     dispatch({
       type: campaignActionTypes.CAMPAIGN_UPDATED,
       campaign: data,
     });
   });
   userChannel.bind('delete_campaign', data => {
-    console.log('delete_campaign', data);
     dispatch({
       type: campaignActionTypes.CAMPAIGN_DELETED,
       campaignId: data.id,
@@ -171,7 +168,6 @@ export default ({ dispatch }) => {
     if (action.type === `user_${dataFetchActionTypes.FETCH_SUCCESS}`) {
       const { id: userId } = action.result;
       const channelName = `private-updates-${userId}`;
-      console.log('subbing to ', channelName);
       const userChannel = pusher.subscribe(channelName);
       bindUserEvents(userChannel, dispatch);
     }
