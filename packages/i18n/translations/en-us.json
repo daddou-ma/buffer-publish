@@ -39,7 +39,8 @@
       "notice2": "Find out more",
       "notice3": " in our FAQ.",
       "saveCampaign": "Save Campaign",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "ariaLabel": "Name input for campaign form"
     },
     "viewCampaign": {
       "viewCampaign": "View Campaign",
@@ -47,12 +48,27 @@
       "editCampaign": "Edit Campaign",
       "deleteCampaign": "Delete Campaign",
       "createPost": "Create Post",
-      "createPosts": "Create Posts",
-      "learnMore": "Learn More",
-      "subtext": "Create posts for this Campaign and they’ll be grouped together, so that you can keep better track of them in one place.",
-      "title": "Let’s build your Campaign!",
       "scheduled": "Scheduled",
-      "sent": "Sent"
+      "sent": "Sent",
+      "loadingCampaignName": "Loading campaign name, please hold on",
+      "loadingCampaignDetails": "Loading campaign details such as date and counters, please hold on",
+      "emptySentPosts": {
+        "title": "Standing by for sent posts...",
+        "subtitle": "Once your scheduled posts are published, you’ll see them here with some basic post analytics."
+      },
+      "allPostsSent": {
+        "title": "Woohoo — everything sent!",
+        "subtitle": "All the content scheduled for this Campaign has been sent.",
+        "createPost": "Create Post",
+        "createCampaign": "Create New Campaign",
+        "viewReport": "View Report"
+      },
+      "emptyCampaignBanner": {
+        "createPosts": "Create Posts",
+        "learnMore": "Learn More",
+        "subtext": "Create posts for this Campaign and they’ll be grouped together, so that you can keep better track of them in one place.",
+        "title": "Let’s build your Campaign!"
+      }
     },
     "deleteCampaignModal": {
       "title": "Are you sure you want to delete your campaign,",
@@ -228,13 +244,6 @@
     "body2": "We've kept all your posts and content just as it was but with a cleaner and faster experience.",
     "cta": "Let's Go!"
   },
-  "welcome-b4b-trial-modal": {
-    "trialLabel": "14-day Free trial",
-    "header": "Welcome to Buffer for Business",
-    "subHeader": "Get the most out of Buffer for Business with our getting started guide.",
-    "cta": "Go to Our Getting Started Guide",
-    "cancelCta": "Maybe Later"
-  },
   "welcome-paid-modal": {
     "step1": {
       "headline": "A Better Buffer Experience",
@@ -301,13 +310,17 @@
     "body2": "Note: You’ll need to be logged in to the same account on the network to successfully reconnect your social account.",
     "cta": "Reconnect",
     "reconnecting": "Please wait...",
-    "extraMessage": {"instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."}
+    "extraMessage": {
+      "instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."
+    }
   },
   "profiles-disconnected-banner": {
     "headline": "Uh-oh, we've lost access to this account! Let's reconnect.",
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
     "cta": "Reconnect Account",
-    "extraMessage": {"instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."}
+    "extraMessage": {
+      "instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."
+    }
   },
   "instagram-direct-posting-modal": {
     "headline": "Would you like to set up Direct Scheduling for Instagram?",
@@ -351,7 +364,11 @@
       "subtitle": "Commit to a social strategy",
       "plan": "pro",
       "features": ["8 social accounts", "1 user", "Instagram first comment"],
-      "featureTooltips": ["", "", "Include first comment when you schedule Instagram posts"],
+      "featureTooltips": [
+        "",
+        "",
+        "Include first comment when you schedule Instagram posts"
+      ],
       "buttonText": "Choose Plan",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly",
@@ -363,14 +380,22 @@
       "nonProfitCost": "$32.50",
       "subtitle": "Unlock advanced IG features",
       "plan": "premium_business",
-      "features": ["8 social accounts", "2 users", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
-      "featureTooltips": ["",
-                          "",
-                          "Plan, preview, and schedule Instagram Stories on web and mobile.",
-                          "Include the first comment when you schedule Instagram posts",
-                          "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
-                          "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
-                          ],
+      "features": [
+        "8 social accounts",
+        "2 users",
+        "Instagram Stories",
+        "Instagram first comment",
+        "Hashtag Manager",
+        "Shop Grid"
+      ],
+      "featureTooltips": [
+        "",
+        "",
+        "Plan, preview, and schedule Instagram Stories on web and mobile.",
+        "Include the first comment when you schedule Instagram posts",
+        "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+      ],
       "buttonText": "Choose Plan",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly",
@@ -387,8 +412,16 @@
       "nonProfitCost": "$7.50",
       "subtitle": "Commit to a social strategy",
       "plan": "pro",
-      "features": ["8 social accounts", "Instagram first comment", "Instagram user tagging"],
-      "featureTooltips": ["", "Include first comment when you schedule Instagram posts", "Tag Instagram users when you schedule Instagram posts"],
+      "features": [
+        "8 social accounts",
+        "Instagram first comment",
+        "Instagram user tagging"
+      ],
+      "featureTooltips": [
+        "",
+        "Include first comment when you schedule Instagram posts",
+        "Tag Instagram users when you schedule Instagram posts"
+      ],
       "buttonText": "Upgrade to Pro",
       "buttonTextDisabled": "Current Plan",
       "buttonCurrentPlanText": "Current Plan",
@@ -401,14 +434,22 @@
       "nonProfitCost": "$32.50",
       "subtitle": "Unlock advanced IG features",
       "plan": "premium_business",
-      "features": ["8 social accounts", "Instagram first comment", "Instagram user tagging", "Hashtag Manager", "Shop Grid", "Instagram Stories"],
-      "featureTooltips": ["",
-                          "Include the first comment when you schedule Instagram posts",
-                          "Tag Instagram users when you schedule Instagram posts",
-                          "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
-                          "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
-                          "Plan, preview, and schedule Instagram Stories on web and mobile."
-                          ],
+      "features": [
+        "8 social accounts",
+        "Instagram first comment",
+        "Instagram user tagging",
+        "Hashtag Manager",
+        "Shop Grid",
+        "Instagram Stories"
+      ],
+      "featureTooltips": [
+        "",
+        "Include the first comment when you schedule Instagram posts",
+        "Tag Instagram users when you schedule Instagram posts",
+        "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
+        "Plan, preview, and schedule Instagram Stories on web and mobile."
+      ],
       "buttonText": "Upgrade to Premium",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly",
@@ -422,7 +463,14 @@
       "nonProfitCost": "$49.50",
       "subtitle": "Built for teams building brands",
       "plan": "small",
-      "features": ["25 social accounts", "6 users", "Instagram Stories", "Instagram first comment", "Hashtag Manager", "Shop Grid"],
+      "features": [
+        "25 social accounts",
+        "6 users",
+        "Instagram Stories",
+        "Instagram first comment",
+        "Hashtag Manager",
+        "Shop Grid"
+      ],
       "buttonText": "Choose Plan",
       "buttonCurrentPlanText": "Current Plan",
       "billingText": "Billed Monthly",
@@ -450,7 +498,7 @@
     "reminderText3": "to your mobile device.",
     "mobileTagText": "Uh-oh! Looks like you might not have the latest version of the Buffer mobile app. Download it now to start using Stories!",
     "bannerMobileTagText": "Hmm...looks like you might not have the latest version of the Buffer mobile app. Download it now so that you can share this Story!",
-    "start" : {
+    "start": {
       "title": "Get Started with Instagram Stories",
       "step1Title": "Set Up Reminders",
       "step1Description": "Due to Instagram limitations, Stories can't be directly scheduled. A Reminder is a notification from the Buffer Publish app.",

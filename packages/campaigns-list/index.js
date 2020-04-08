@@ -21,7 +21,7 @@ export default connect(
         : false,
     };
   },
-  dispatch => ({
+  (dispatch, ownProps) => ({
     onViewCampaignClick: ({ campaignId }) => {
       if (campaignId) {
         dispatch(campaignScheduled.goTo({ campaignId }));
@@ -38,7 +38,12 @@ export default connect(
     },
     onEditCampaignClick: ({ campaignId }) => {
       if (campaignId) {
-        dispatch(campaignEdit.goTo({ campaignId }));
+        dispatch(
+          campaignEdit.goTo({
+            campaignId,
+            from: ownProps.history.location.pathname,
+          })
+        );
       }
     },
     fetchCampaigns: () => {
