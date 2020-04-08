@@ -48,7 +48,7 @@ describe('reducer', () => {
       ...initialState,
       page: null,
       isLoading: false,
-      notLoadingHeader: false,
+      hideSkeletonHeader: false,
       campaign: {
         id: 'id1',
       },
@@ -61,7 +61,7 @@ describe('reducer', () => {
         id: 'id1',
       },
       isLoading: true,
-      notLoadingHeader: true,
+      hideSkeletonHeader: true,
     };
     const action = {
       type: LOCATION_CHANGE,

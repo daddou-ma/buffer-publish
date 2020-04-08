@@ -28,7 +28,7 @@ export const initialState = {
   campaign: {},
   campaignPosts: [],
   isLoading: true,
-  notLoadingHeader: false,
+  hideSkeletonHeader: false,
   campaignId: null,
   showComposer: false,
   editMode: false,
@@ -77,14 +77,14 @@ export default (state = initialState, action) => {
         campaignId,
         page: currentSingleCampaignPage(),
         isLoading: true,
-        notLoadingHeader: !isFirstTimeLoading,
+        hideSkeletonHeader: !isFirstTimeLoading,
       };
     }
     case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`: {
       return {
         ...state,
         isLoading: false,
-        notLoadingHeader: false,
+        hideSkeletonHeader: false,
       };
     }
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
@@ -96,7 +96,7 @@ export default (state = initialState, action) => {
         campaignId: campaign.id,
         campaignPosts: (fullItems && items) || [],
         isLoading: false,
-        notLoadingHeader: false,
+        hideSkeletonHeader: false,
       };
     }
     case actionTypes.OPEN_COMPOSER: {
