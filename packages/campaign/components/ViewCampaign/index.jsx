@@ -53,9 +53,10 @@ const ViewCampaign = ({
   }, [campaignId, sentView]);
 
   useEffect(() => {
-    actions.fetchCampaigns();
+    // only fetch campaigns if not in global state (if user going to url directly)
+    actions.fetchCampaignsIfNeeded();
   }, []);
-  
+
   // Conditions
   const selectedtTabId = sentView ? 'sent' : 'scheduled';
   const campaignHasPosts = campaign?.scheduled > 0 || campaign?.sent > 0;
@@ -160,7 +161,7 @@ ViewCampaign.propTypes = {
     goToAnalyzeReport: PropTypes.func.isRequired,
     onComposerCreateSuccess: PropTypes.func.isRequired,
     onComposerOverlayClick: PropTypes.func.isRequired,
-    fetchCampaigns: PropTypes.func.isRequired,
+    fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   }).isRequired,
   postActions: PropTypes.shape({
     onEditClick: PropTypes.func.isRequired,

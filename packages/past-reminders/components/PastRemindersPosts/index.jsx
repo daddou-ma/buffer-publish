@@ -100,8 +100,7 @@ const PastRemindersPosts = ({
   showStoriesComposer,
   isDisconnectedProfile,
   onClosePreviewClick,
-  hasCampaignsFeature,
-  fetchCampaigns,
+  fetchCampaignsIfNeeded,
 }) => {
   if (loading) {
     return (
@@ -123,9 +122,8 @@ const PastRemindersPosts = ({
   }
 
   useEffect(() => {
-    if (hasCampaignsFeature) {
-      fetchCampaigns();
-    }
+    // only fetch campaigns if not in global state (if user going to url directly)
+    fetchCampaignsIfNeeded();
   }, []);
 
   return (
@@ -198,8 +196,7 @@ PastRemindersPosts.propTypes = {
   userData: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string),
   }),
-  hasCampaignsFeature: PropTypes.bool.isRequired,
-  fetchCampaigns: PropTypes.func.isRequired,
+  fetchCampaignsIfNeeded: PropTypes.func.isRequired,
 };
 
 PastRemindersPosts.defaultProps = {

@@ -5,7 +5,7 @@ import { campaignParser } from '@bufferapp/publish-server/parsers/src';
 import { sortCampaignsByUpdatedAt } from '@bufferapp/publish-queue/reducer';
 
 export const actionTypes = keyWrapper('CAMPAIGNS_LIST', {
-  FETCH_CAMPAIGNS: 0,
+  FETCH_CAMPAIGNS_IF_NEEDED: 0,
 });
 
 export const initialState = {
@@ -75,7 +75,7 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  fetchCampaigns: () => ({
-    type: actionTypes.FETCH_CAMPAIGNS,
+  fetchCampaignsIfNeeded: () => ({
+    type: actionTypes.FETCH_CAMPAIGNS_IF_NEEDED,
   }),
 };

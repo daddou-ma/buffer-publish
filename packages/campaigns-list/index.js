@@ -41,8 +41,8 @@ export default connect(
         dispatch(campaignEdit.goTo({ campaignId }));
       }
     },
-    fetchCampaigns: () => {
-      dispatch(actions.fetchCampaigns());
+    fetchCampaignsIfNeeded: () => {
+      dispatch(actions.fetchCampaignsIfNeeded());
     },
   })
 )(ListCampaigns);

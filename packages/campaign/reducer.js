@@ -1,9 +1,6 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import {
-  sortCampaignsByUpdatedAt,
-  actionTypes as queueActionTypes,
-} from '@bufferapp/publish-queue/reducer';
+import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { campaignParser } from '@bufferapp/publish-server/parsers/src';
 
 export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
@@ -31,7 +28,6 @@ export const initialState = {
   editMode: false,
   editingPostId: null,
   selectedProfileId: null,
-  campaigns: [],
 };
 
 const postReducer = ({ campaignPosts, action, newState }) => {
@@ -103,11 +99,6 @@ export default (state = initialState, action) => {
         editMode: false,
       };
     }
-    case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        campaigns: sortCampaignsByUpdatedAt(action.result),
-      };
     // Pusher events
     case queueActionTypes.POST_UPDATED: {
       const postCampaignId = action?.post?.campaignDetails?.id;
