@@ -136,19 +136,19 @@ const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
 const bindUserEvents = (userChannel, dispatch) => {
   userChannel.bind('create_campaign', data => {
     dispatch({
-      type: campaignActionTypes.CAMPAIGN_CREATED,
+      type: campaignActionTypes.PUSHER_CAMPAIGN_CREATED,
       campaign: data,
     })
   });
   userChannel.bind('update_campaign', data => {
     dispatch({
-      type: campaignActionTypes.CAMPAIGN_UPDATED,
+      type: campaignActionTypes.PUSHER_CAMPAIGN_UPDATED,
       campaign: data,
     });
   });
   userChannel.bind('delete_campaign', data => {
     dispatch({
-      type: campaignActionTypes.CAMPAIGN_DELETED,
+      type: campaignActionTypes.PUSHER_CAMPAIGN_DELETED,
       campaignId: data.id,
     });
   });

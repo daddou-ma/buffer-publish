@@ -89,7 +89,7 @@ describe('reducer', () => {
       updated_at: 1586269886,
     };
 
-    it('handles CAMPAIGN_CREATED action', () => {
+    it('handles PUSHER_CAMPAIGN_CREATED action', () => {
       const stateBefore = {
         ...initialState,
         isLoading: false,
@@ -101,7 +101,7 @@ describe('reducer', () => {
         campaigns: [campaignParser(recentlyUpdatedCampaign)],
       };
       const action = {
-        type: campaignActionTypes.CAMPAIGN_CREATED,
+        type: campaignActionTypes.PUSHER_CAMPAIGN_CREATED,
         campaign: recentlyUpdatedCampaign,
       };
       deepFreeze(stateBefore);
@@ -109,7 +109,7 @@ describe('reducer', () => {
       expect(reducer(stateBefore, action)).toEqual(stateAfter);
     });
 
-    it('sorts campaigns by updatedAt in CAMPAIGN_CREATED action', () => {
+    it('sorts campaigns by updatedAt in PUSHER_CAMPAIGN_CREATED action', () => {
       const stateBefore = {
         ...initialState,
         isLoading: false,
@@ -121,7 +121,7 @@ describe('reducer', () => {
         campaigns: [campaignParser(recentlyUpdatedCampaign), campaign],
       };
       const action = {
-        type: campaignActionTypes.CAMPAIGN_CREATED,
+        type: campaignActionTypes.PUSHER_CAMPAIGN_CREATED,
         campaign: recentlyUpdatedCampaign,
       };
       deepFreeze(stateBefore);
@@ -129,7 +129,7 @@ describe('reducer', () => {
       expect(reducer(stateBefore, action)).toEqual(stateAfter);
     });
 
-    it('handles CAMPAIGN_UPDATED action', () => {
+    it('handles PUSHER_CAMPAIGN_UPDATED action', () => {
       const stateBefore = {
         ...initialState,
         isLoading: false,
@@ -143,7 +143,7 @@ describe('reducer', () => {
         ],
       };
       const action = {
-        type: campaignActionTypes.CAMPAIGN_UPDATED,
+        type: campaignActionTypes.PUSHER_CAMPAIGN_UPDATED,
         campaign: { ...recentlyUpdatedCampaign, color: 'green' },
       };
       deepFreeze(stateBefore);
@@ -151,7 +151,7 @@ describe('reducer', () => {
       expect(reducer(stateBefore, action)).toEqual(stateAfter);
     });
 
-    it('handles CAMPAIGN_DELETED action', () => {
+    it('handles PUSHER_CAMPAIGN_DELETED action', () => {
       const stateBefore = {
         ...initialState,
         isLoading: false,
@@ -163,7 +163,7 @@ describe('reducer', () => {
         campaigns: [campaign],
       };
       const action = {
-        type: campaignActionTypes.CAMPAIGN_DELETED,
+        type: campaignActionTypes.PUSHER_CAMPAIGN_DELETED,
         campaignId: '1234',
       };
       deepFreeze(stateBefore);

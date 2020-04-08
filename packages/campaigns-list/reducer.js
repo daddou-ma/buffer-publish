@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
         isLoading: false,
       };
     }
-    case campaignActionTypes.CAMPAIGN_CREATED: {
+    case campaignActionTypes.PUSHER_CAMPAIGN_CREATED: {
       const parsedCampaign = campaignParser(action.campaign);
       const updatedCampaigns = [...state.campaigns, parsedCampaign];
       return {
@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
         campaigns: sortCampaignsByUpdatedAt(updatedCampaigns),
       };
     }
-    case campaignActionTypes.CAMPAIGN_UPDATED: {
+    case campaignActionTypes.PUSHER_CAMPAIGN_UPDATED: {
       const parsedCampaign = campaignParser(action.campaign);
       const updatedIndex = state.campaigns?.findIndex(
         i => i.id === parsedCampaign.id
@@ -55,7 +55,7 @@ export default (state = initialState, action) => {
         campaigns: sortCampaignsByUpdatedAt(updatedCampaigns),
       };
     }
-    case campaignActionTypes.CAMPAIGN_DELETED: {
+    case campaignActionTypes.PUSHER_CAMPAIGN_DELETED: {
       const { campaignId } = action;
       const deletedIndex = state.campaigns?.findIndex(
         item => item.id === campaignId

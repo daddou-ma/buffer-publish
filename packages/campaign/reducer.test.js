@@ -109,7 +109,7 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('handles pusher CAMPAIGN_UPDATED action', () => {
+  it('handles pusher PUSHER_CAMPAIGN_UPDATED action', () => {
     const campaign = {
       _id: 'id1',
       color: 'yellow',
@@ -128,7 +128,7 @@ describe('reducer', () => {
     };
 
     const action = {
-      type: actionTypes.CAMPAIGN_UPDATED,
+      type: actionTypes.PUSHER_CAMPAIGN_UPDATED,
       campaign: { ...campaign, color: 'green' },
     };
     deepFreeze(stateBefore);
