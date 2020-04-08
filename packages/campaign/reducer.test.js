@@ -22,11 +22,13 @@ describe('reducer', () => {
     const stateBefore = {
       ...initialState,
       page: null,
+      isLoading: false,
     };
     const stateAfter = {
       ...initialState,
       page: 'scheduled',
       campaignId: 'id1',
+      isLoading: true,
     };
     const action = {
       type: LOCATION_CHANGE,
@@ -45,11 +47,21 @@ describe('reducer', () => {
     const stateBefore = {
       ...initialState,
       page: null,
+      isLoading: false,
+      notLoadingHeader: false,
+      campaign: {
+        id: 'id1',
+      },
     };
     const stateAfter = {
       ...initialState,
       page: 'sent',
       campaignId: 'id1',
+      campaign: {
+        id: 'id1',
+      },
+      isLoading: true,
+      notLoadingHeader: true,
     };
     const action = {
       type: LOCATION_CHANGE,
@@ -57,48 +69,6 @@ describe('reducer', () => {
         location: {
           pathname: '/campaigns/id1/sent',
         },
-      },
-    };
-    deepFreeze(stateBefore);
-    deepFreeze(action);
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
-  it('handles getCampaign_FETCH_START action', () => {
-    const stateBefore = {
-      ...initialState,
-      isLoading: false,
-    };
-    const stateAfter = {
-      ...initialState,
-      isLoading: true,
-    };
-    const action = {
-      type: 'getCampaign_FETCH_START',
-      args: {
-        campaignId: 'id1',
-      },
-    };
-    deepFreeze(stateBefore);
-    deepFreeze(action);
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
-  it('handles getCampaign_FETCH_START action when not first time loading', () => {
-    const stateBefore = {
-      ...initialState,
-      isLoading: false,
-      campaign: {
-        id: 'id1',
-      },
-    };
-    const stateAfter = {
-      ...stateBefore,
-    };
-    const action = {
-      type: 'getCampaign_FETCH_START',
-      args: {
-        campaignId: 'id1',
       },
     };
     deepFreeze(stateBefore);

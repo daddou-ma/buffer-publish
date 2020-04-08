@@ -28,6 +28,7 @@ export const initialState = {
   campaign: {},
   campaignPosts: [],
   isLoading: true,
+  notLoadingHeader: false,
   campaignId: null,
   showComposer: false,
   editMode: false,
@@ -67,25 +68,23 @@ export default (state = initialState, action) => {
         if (sentParams) return 'sent';
         return null;
       };
-      return {
-        ...state,
-        campaignId: scheduledParams?.id || sentParams?.id,
-        page: currentSingleCampaignPage(),
-      };
-    }
-    case `getCampaign_${dataFetchActionTypes.FETCH_START}`: {
+      const campaignId = scheduledParams?.id || sentParams?.id;
       const { id } = state.campaign;
-      // Not showing a loader when the campaign stored in the state is the same.
-      const isFirstTimeLoading = id !== action.args?.campaignId;
+      // Not showing a header loader when the campaign stored in the state is the same.
+      const isFirstTimeLoading = id !== campaignId;
       return {
         ...state,
-        isLoading: isFirstTimeLoading,
+        campaignId,
+        page: currentSingleCampaignPage(),
+        isLoading: true,
+        notLoadingHeader: !isFirstTimeLoading,
       };
     }
     case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`: {
       return {
         ...state,
         isLoading: false,
+        notLoadingHeader: false,
       };
     }
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
@@ -97,6 +96,7 @@ export default (state = initialState, action) => {
         campaignId: campaign.id,
         campaignPosts: (fullItems && items) || [],
         isLoading: false,
+        notLoadingHeader: false,
       };
     }
     case actionTypes.OPEN_COMPOSER: {

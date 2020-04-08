@@ -20,6 +20,7 @@ const ViewCampaign = ({
   campaign,
   campaignPosts,
   isLoading,
+  notLoadingHeader,
   hideAnalyzeReport,
   translations,
   campaignId,
@@ -63,7 +64,7 @@ const ViewCampaign = ({
         onDeleteCampaignClick={actions.onDeleteCampaignClick}
         onEditCampaignClick={actions.onEditCampaignClick}
         goToAnalyzeReport={actions.goToAnalyzeReport}
-        isLoading={isLoading}
+        isLoading={isLoading && !notLoadingHeader}
       />
       {/* Navigation */}
       <nav role="navigation">
@@ -123,6 +124,7 @@ ViewCampaign.propTypes = {
   campaignPosts: PropTypes.array, // eslint-disable-line
   hideAnalyzeReport: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  notLoadingHeader: PropTypes.bool.isRequired,
   campaignId: PropTypes.string.isRequired,
   showComposer: PropTypes.bool.isRequired,
   editMode: PropTypes.bool.isRequired,
