@@ -140,7 +140,7 @@ const WebAPIUtils = {
                     message: {
                       action: 'SEGMENT_TRACKING',
                       eventName: 'Campaign Item Added',
-                      campaignMetadata,
+                      metadata: campaignMetadata,
                     },
                   });
                 }
