@@ -29,6 +29,7 @@ export default connect(
       translations: state.i18n.translations.campaigns.viewCampaign,
       hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
+      hideSkeletonHeader: state.campaign.hideSkeletonHeader,
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
       page: state.campaign.page,
       hasCampaignsFlip: state.appSidebar.user.features

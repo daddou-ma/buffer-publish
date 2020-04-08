@@ -6,6 +6,7 @@ import ComposerPopover from '@bufferapp/publish-composer-popover';
 import TabTag from '@bufferapp/publish-tabs/components/TabTag';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import Header from './Header';
+import SkeletonPosts from './SkeletonPosts';
 import EmptyStateCampaign from './EmptyState';
 
 /* Styles */
@@ -19,6 +20,7 @@ const ViewCampaign = ({
   campaign,
   campaignPosts,
   isLoading,
+  hideSkeletonHeader,
   hideAnalyzeReport,
   translations,
   campaignId,
@@ -62,7 +64,7 @@ const ViewCampaign = ({
         onDeleteCampaignClick={actions.onDeleteCampaignClick}
         onEditCampaignClick={actions.onEditCampaignClick}
         goToAnalyzeReport={actions.goToAnalyzeReport}
-        isLoading={isLoading}
+        isLoading={isLoading && !hideSkeletonHeader}
       />
       {/* Navigation */}
       <nav role="navigation">
@@ -78,14 +80,17 @@ const ViewCampaign = ({
         </Tabs>
       </nav>
       {/* Content */}
-      <EmptyStateCampaign
-        hideAnalyzeReport={hideAnalyzeReport}
-        translations={translations}
-        campaign={campaign}
-        actions={actions}
-        sentView={sentView}
-      />
-      {campaignHasPosts && (
+      {isLoading && <SkeletonPosts />}
+      {!isLoading && (
+        <EmptyStateCampaign
+          hideAnalyzeReport={hideAnalyzeReport}
+          translations={translations}
+          campaign={campaign}
+          actions={actions}
+          sentView={sentView}
+        />
+      )}
+      {!isLoading && campaignHasPosts && (
         <QueueItems
           items={campaignPosts}
           onDeleteConfirmClick={postActions.onDeleteConfirmClick}
@@ -119,6 +124,7 @@ ViewCampaign.propTypes = {
   campaignPosts: PropTypes.array, // eslint-disable-line
   hideAnalyzeReport: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  hideSkeletonHeader: PropTypes.bool.isRequired,
   campaignId: PropTypes.string.isRequired,
   showComposer: PropTypes.bool.isRequired,
   editMode: PropTypes.bool.isRequired,
