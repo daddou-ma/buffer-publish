@@ -9,7 +9,7 @@ import AppStore from '../stores/AppStore';
 import API from './API';
 import { observeStore } from '../utils/StoreUtils';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
-import { getComposerSource, getSegmentMetadata } from '../utils/TrackingUtils';
+import { getComposerSource, getSegmentMetadata, getSegmentCampaignMetadata } from '../utils/TrackingUtils';
 
 import getFacebookAutocompleteEntities from '../utils/draft-js-custom-plugins/autocomplete/utils/getFacebookAutocompleteEntities';
 
@@ -130,6 +130,20 @@ const WebAPIUtils = {
                     metadata,
                   },
                 });
+                if (post.campaign_details) {
+                  const campaignMetadata = getSegmentCampaignMetadata({
+                    post,
+                    profile,
+                    composerSource,
+                  });
+                  AppActionCreators.triggerInteraction({
+                    message: {
+                      action: 'SEGMENT_TRACKING',
+                      eventName: 'Campaign Item Added',
+                      campaignMetadata,
+                    },
+                  });
+                }
               }
             }
             return Object.assign(response, { serviceName });

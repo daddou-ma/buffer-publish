@@ -51,26 +51,42 @@ const getSegmentMetadata = ({
   formattedData = {},
   composerSource,
   queueingType,
-}) => {
-  const channel = post.profile_service;
-  const channelId = post.profile_id;
-  const channelType = profile.serviceType;
+}) => ({
+  channel: post.profile_service || null,
+  channelId: post.profile_id || null,
+  channelServiceId: profile.serviceId || null,
+  channelType: profile.serviceType || null,
+  client: post.client ? post.client.name : null,
+  composerSource: composerSource || null,
+  hasFirstComment: !!formattedData.comment_text,
+  hasLocation: !!formattedData.service_geolocation_id,
+  hasShopGridLink: !!formattedData.link,
+  isDraft: !!post.draft,
+  mediaType: post.type || null,
+  postId: post.id || null,
+  shareDate: formatShareDate(post.due_at),
+  shareType: trackingShareTypeMap.get(queueingType) || null,
+});
 
-  return {
-    channel: post.profile_service || null,
-    channelId: post.profile_id || null,
-    channelServiceId: profile.serviceId || null,
-    channelType: profile.serviceType || null,
-    client: post.client ? post.client.name : null,
-    composerSource: composerSource || null,
-    hasFirstComment: !!formattedData.comment_text,
-    hasLocation: !!formattedData.service_geolocation_id,
-    hasShopGridLink: !!formattedData.link,
-    isDraft: !!post.draft,
-    mediaType: post.type || null,
-    postId: post.id || null,
-    shareDate: formatShareDate(post.due_at),
-    shareType: trackingShareTypeMap.get(queueingType) || null,
-  };
+const getSegmentCampaignMetadata = ({
+  post = {},
+  profile = {},
+  composerSource,
+}) => ({
+  itemType: 'post',
+  itemId: post.id || null,
+  campaignId: post.campaign_details.id || null,
+  campaignName: post.campaign_details.name || null,
+  channel: post.profile_service || null,
+  channelId: post.profile_id || null,
+  channelType: profile.serviceType || null,
+  addedFrom: composerSource || null,
+  organizationId: post.organization_id || null,
+});
+
+export {
+  getComposerSource,
+  getSegmentMetadata,
+  formatShareDate,
+  getSegmentCampaignMetadata,
 };
-export { getComposerSource, getSegmentMetadata, formatShareDate };
