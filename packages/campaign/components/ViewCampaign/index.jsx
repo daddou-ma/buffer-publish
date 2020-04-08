@@ -46,7 +46,7 @@ const ViewCampaign = ({
   }, [campaignId, page]);
 
   useEffect(() => {
-    actions.fetchCampaigns();
+    actions.fetchCampaignsIfNeeded();
   }, []);
 
   // Conditions
@@ -139,7 +139,7 @@ ViewCampaign.propTypes = {
     goToAnalyzeReport: PropTypes.func.isRequired,
     onComposerCreateSuccess: PropTypes.func.isRequired,
     onComposerOverlayClick: PropTypes.func.isRequired,
-    fetchCampaigns: PropTypes.func.isRequired,
+    fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   }).isRequired,
   postActions: PropTypes.shape({
     onEditClick: PropTypes.func.isRequired,
