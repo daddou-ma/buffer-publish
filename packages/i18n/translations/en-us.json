@@ -58,7 +58,7 @@
       },
       "allPostsSent": {
         "title": "Woohoo — everything sent!",
-        "subtitle": "All the content scheduled for this Campaign has been sent.",
+        "subtitle": "All the content scheduled for this campaign has been sent.",
         "createPost": "Create Post",
         "createCampaign": "Create New Campaign",
         "viewReport": "View Report"
@@ -66,8 +66,8 @@
       "emptyCampaignBanner": {
         "createPosts": "Create Posts",
         "learnMore": "Learn More",
-        "subtext": "Create posts for this Campaign and they’ll be grouped together, so that you can keep better track of them in one place.",
-        "title": "Let’s build your Campaign!"
+        "subtext": "Create posts for this campaign and they’ll be grouped together, so that you can keep better track of them in one place.",
+        "title": "Let’s build your campaign!"
       }
     },
     "deleteCampaignModal": {
