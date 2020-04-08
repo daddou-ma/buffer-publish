@@ -3,8 +3,11 @@ import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-pro
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
-import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-
+import {
+  actionTypes as dataFetchActionTypes,
+  actions as dataFetchActions,
+} from '@bufferapp/async-data-fetch';
+import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign/reducer';
 import {
   postParser,
   storyGroupParser,
@@ -132,67 +135,94 @@ const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
   });
 };
 
-const bindUserEvents = (userChannel, dispatch) => {
-  userChannel.bind('create_campaign', data =>
-    console.log('create_campaign', data)
-    // TODO, handle changes by dispatching actions
-  );
+const channelsByProfileId = {};
+const setupProfilePusherEvents = (
+  { profileId, profile: { service } },
+  pusher,
+  dispatch
+) => {
+  // const { profileId } = action;
+  // const { service } = action.profile;
+  if (profileId) {
+    // If the profile is not subscribed to any channels, subscribes to private-updates channel:
+    const newProfileChannels = channelsByProfileId[profileId] || {
+      updates: pusher.subscribe(`private-updates-${profileId}`),
+    };
+    // If instagram profile and profile is not subscribed to story-groups channel, subscribes to private-story-groups channel:
+    if (
+      service === 'instagram' &&
+      newProfileChannels.storyGroups === undefined
+    ) {
+      newProfileChannels.storyGroups = pusher.subscribe(
+        `private-story-groups-${profileId}`
+      );
+    }
+    channelsByProfileId[profileId] = newProfileChannels;
+
+    bindProfileUpdateEvents(
+      channelsByProfileId[profileId].updates,
+      profileId,
+      dispatch
+    );
+    if (channelsByProfileId[profileId].storyGroups) {
+      bindProfileStoryGroupEvents(
+        channelsByProfileId[profileId].storyGroups,
+        profileId,
+        dispatch
+      );
+    }
+  }
 };
 
+const bindOrganizationEvents = (orgChannel, dispatch) => {
+  orgChannel.bind('create_campaign', data => {
+    dispatch({
+      type: campaignActionTypes.PUSHER_CAMPAIGN_CREATED,
+      campaign: data,
+    });
+  });
+  orgChannel.bind('update_campaign', data => {
+    dispatch({
+      type: campaignActionTypes.PUSHER_CAMPAIGN_UPDATED,
+      campaign: data,
+    });
+  });
+  orgChannel.bind('delete_campaign', data => {
+    dispatch({
+      type: campaignActionTypes.PUSHER_CAMPAIGN_DELETED,
+      campaignId: data.id,
+    });
+  });
+};
+
+/**
+ * Middleware
+ */
 export default ({ dispatch }) => {
   const pusher = new Pusher(PUSHER_APP_KEY, { authEndpoint: '/pusher/auth' });
   window.__pusher = pusher;
-  const channelsByProfileId = {};
 
   return next => action => {
     next(action);
 
-    /**
-     * Listen for user-level Pusher events
-     */
-    if (action.type === `user_${dataFetchActionTypes.FETCH_SUCCESS}`) {
-      const { id: userId } = action.result;
-      const channelName = `private-updates-${userId}`;
-      console.log('subbing to ', channelName);
-      const userChannel = pusher.subscribe(channelName);
-      bindUserEvents(userChannel, dispatch);
-    }
-
-    /**
-     * Listen for profile level Pusher events
-     */
-    if (action.type === profileSidebarActionTypes.SELECT_PROFILE) {
-      const { profileId } = action;
-      const { service } = action.profile;
-      if (profileId) {
-        // If the profile is not subscribed to any channels, subscribes to private-updates channel:
-        const newProfileChannels = channelsByProfileId[profileId] || {
-          updates: pusher.subscribe(`private-updates-${profileId}`),
-        };
-        // If instagram profile and profile is not subscribed to story-groups channel, subscribes to private-story-groups channel:
-        if (
-          service === 'instagram' &&
-          newProfileChannels.storyGroups === undefined
-        ) {
-          newProfileChannels.storyGroups = pusher.subscribe(
-            `private-story-groups-${profileId}`
-          );
+    switch (action.type) {
+      case 'APP_INIT':
+        dispatch(dataFetchActions.fetch({ name: 'getGlobalOrganizationId' }));
+        break;
+      case profileSidebarActionTypes.SELECT_PROFILE:
+        setupProfilePusherEvents(action, pusher, dispatch);
+        break;
+      case `getGlobalOrganizationId_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+        const { globalOrganizationId } = action.result;
+        if (globalOrganizationId) {
+          const channelName = `private-updates-org-${globalOrganizationId}`;
+          const orgChannel = pusher.subscribe(channelName);
+          bindOrganizationEvents(orgChannel, dispatch);
         }
-        channelsByProfileId[profileId] = newProfileChannels;
-
-        bindProfileUpdateEvents(
-          channelsByProfileId[profileId].updates,
-          profileId,
-          dispatch
-        );
-        if (channelsByProfileId[profileId].storyGroups) {
-          bindProfileStoryGroupEvents(
-            channelsByProfileId[profileId].storyGroups,
-            profileId,
-            dispatch
-          );
-        }
+        break;
       }
+      default:
+        break;
     }
   };
 };
