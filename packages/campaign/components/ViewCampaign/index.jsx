@@ -6,6 +6,7 @@ import ComposerPopover from '@bufferapp/publish-composer-popover';
 import TabTag from '@bufferapp/publish-tabs/components/TabTag';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import Header from './Header';
+import SkeletonPosts from './SkeletonPosts';
 import EmptyStateCampaign from './EmptyState';
 
 /* Styles */
@@ -78,14 +79,17 @@ const ViewCampaign = ({
         </Tabs>
       </nav>
       {/* Content */}
-      <EmptyStateCampaign
-        hideAnalyzeReport={hideAnalyzeReport}
-        translations={translations}
-        campaign={campaign}
-        actions={actions}
-        sentView={sentView}
-      />
-      {campaignHasPosts && (
+      {isLoading && <SkeletonPosts />}
+      {!isLoading && (
+        <EmptyStateCampaign
+          hideAnalyzeReport={hideAnalyzeReport}
+          translations={translations}
+          campaign={campaign}
+          actions={actions}
+          sentView={sentView}
+        />
+      )}
+      {!isLoading && campaignHasPosts && (
         <QueueItems
           items={campaignPosts}
           onDeleteConfirmClick={postActions.onDeleteConfirmClick}
