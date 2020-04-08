@@ -17,6 +17,9 @@ const getComposerSource = ({ tabId, emptySlotMode }) => {
     case 'analytics':
       sourceName = 'share_again';
       break;
+    case 'campaigns':
+      sourceName = 'campaigns';
+      break;
     default:
       sourceName = tabId;
       break;
@@ -48,21 +51,26 @@ const getSegmentMetadata = ({
   formattedData = {},
   composerSource,
   queueingType,
-}) => ({
-  channel: post.profile_service || null,
-  channelId: post.profile_id || null,
-  channelServiceId: profile.serviceId || null,
-  channelType: profile.serviceType || null,
-  client: post.client ? post.client.name : null,
-  composerSource: composerSource || null,
-  hasFirstComment: !!formattedData.comment_text,
-  hasLocation: !!formattedData.service_geolocation_id,
-  hasShopGridLink: !!formattedData.link,
-  isDraft: !!post.draft,
-  mediaType: post.type || null,
-  postId: post.id || null,
-  shareDate: formatShareDate(post.due_at),
-  shareType: trackingShareTypeMap.get(queueingType) || null,
-});
+}) => {
+  const channel = post.profile_service;
+  const channelId = post.profile_id;
+  const channelType = profile.serviceType;
 
+  return {
+    channel: post.profile_service || null,
+    channelId: post.profile_id || null,
+    channelServiceId: profile.serviceId || null,
+    channelType: profile.serviceType || null,
+    client: post.client ? post.client.name : null,
+    composerSource: composerSource || null,
+    hasFirstComment: !!formattedData.comment_text,
+    hasLocation: !!formattedData.service_geolocation_id,
+    hasShopGridLink: !!formattedData.link,
+    isDraft: !!post.draft,
+    mediaType: post.type || null,
+    postId: post.id || null,
+    shareDate: formatShareDate(post.due_at),
+    shareType: trackingShareTypeMap.get(queueingType) || null,
+  };
+};
 export { getComposerSource, getSegmentMetadata, formatShareDate };
