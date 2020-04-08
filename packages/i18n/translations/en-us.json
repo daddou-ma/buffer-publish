@@ -50,6 +50,8 @@
       "createPost": "Create Post",
       "scheduled": "Scheduled",
       "sent": "Sent",
+      "loadingCampaignName": "Loading campaign name, please hold on",
+      "loadingCampaignDetails": "Loading campaign details such as date and counters, please hold on",
       "emptySentPosts": {
         "title": "Standing by for sent posts...",
         "subtitle": "Once your scheduled posts are published, you’ll see them here with some basic post analytics."
