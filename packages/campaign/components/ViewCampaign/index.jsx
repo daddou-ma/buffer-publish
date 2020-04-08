@@ -53,7 +53,6 @@ const ViewCampaign = ({
   }, [campaignId, sentView]);
 
   useEffect(() => {
-    // only fetch campaigns if not in global state (if user going to url directly)
     actions.fetchCampaignsIfNeeded();
   }, []);
 

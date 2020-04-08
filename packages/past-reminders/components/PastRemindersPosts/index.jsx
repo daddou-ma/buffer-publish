@@ -122,7 +122,6 @@ const PastRemindersPosts = ({
   }
 
   useEffect(() => {
-    // only fetch campaigns if not in global state (if user going to url directly)
     fetchCampaignsIfNeeded();
   }, []);
 

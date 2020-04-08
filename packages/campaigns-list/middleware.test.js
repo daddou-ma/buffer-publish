@@ -31,7 +31,7 @@ describe('middleware', () => {
     );
   });
 
-  it('does not fetch campaigns if user doesnt have campaign feature', () => {
+  it('does not fetch campaigns if user has no campaign feature', () => {
     const store = {
       dispatch: jest.fn(),
       getState: () => ({
