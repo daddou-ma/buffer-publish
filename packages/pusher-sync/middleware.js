@@ -141,8 +141,6 @@ const setupProfilePusherEvents = (
   pusher,
   dispatch
 ) => {
-  // const { profileId } = action;
-  // const { service } = action.profile;
   if (profileId) {
     // If the profile is not subscribed to any channels, subscribes to private-updates channel:
     const newProfileChannels = channelsByProfileId[profileId] || {
