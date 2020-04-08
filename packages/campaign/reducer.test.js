@@ -1,4 +1,5 @@
 import deepFreeze from 'deep-freeze';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { campaignParser } from '@bufferapp/publish-server/parsers/src';
@@ -18,19 +19,24 @@ describe('reducer', () => {
     expect(reducer(undefined, action)).toEqual(initialState);
   });
 
-  it('handles getCampaign_FETCH_START action', () => {
+  it('handles LOCATION_CHANGE action when navigates to scheduled campaigns page', () => {
     const stateBefore = {
       ...initialState,
+      page: null,
       isLoading: false,
     };
     const stateAfter = {
       ...initialState,
+      page: 'scheduled',
+      campaignId: 'id1',
       isLoading: true,
     };
     const action = {
-      type: 'getCampaign_FETCH_START',
-      args: {
-        campaignId: 'id1',
+      type: LOCATION_CHANGE,
+      payload: {
+        location: {
+          pathname: '/campaigns/id1/scheduled',
+        },
       },
     };
     deepFreeze(stateBefore);
@@ -38,21 +44,32 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('handles getCampaign_FETCH_START action when not first time loading', () => {
+  it('handles LOCATION_CHANGE action when navigates to sent campaigns page', () => {
     const stateBefore = {
       ...initialState,
+      page: null,
       isLoading: false,
+      hideSkeletonHeader: false,
       campaign: {
         id: 'id1',
       },
     };
     const stateAfter = {
-      ...stateBefore,
+      ...initialState,
+      page: 'sent',
+      campaignId: 'id1',
+      campaign: {
+        id: 'id1',
+      },
+      isLoading: true,
+      hideSkeletonHeader: true,
     };
     const action = {
-      type: 'getCampaign_FETCH_START',
-      args: {
-        campaignId: 'id1',
+      type: LOCATION_CHANGE,
+      payload: {
+        location: {
+          pathname: '/campaigns/id1/sent',
+        },
       },
     };
     deepFreeze(stateBefore);
@@ -330,6 +347,7 @@ describe('reducer', () => {
       campaignPosts: [
         { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
       ],
+      page: 'scheduled',
     };
     const stateAfter = {
       ...initialState,
@@ -344,6 +362,7 @@ describe('reducer', () => {
           content: { id: 'id2', campaignDetails: { id: 'campaignId' } },
         },
       ],
+      page: 'scheduled',
     };
     const action = {
       type: queueActionTypes.POST_CREATED,
@@ -361,6 +380,7 @@ describe('reducer', () => {
       campaignPosts: [
         { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
       ],
+      page: 'scheduled',
     };
     const stateAfter = {
       ...initialState,
@@ -368,6 +388,7 @@ describe('reducer', () => {
       campaignPosts: [
         { id: 'id1', content: { campaignDetails: { id: 'campaignId' } } },
       ],
+      page: 'scheduled',
     };
     const action = {
       type: queueActionTypes.POST_CREATED,
@@ -378,7 +399,7 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('handles POST_UPDATED action', () => {
+  it('handles POST_UPDATED action if on scheduled tab', () => {
     const stateBefore = {
       ...initialState,
       campaign: { id: 'campaignId' },
@@ -388,6 +409,7 @@ describe('reducer', () => {
           content: { text: 'Old Post', campaignDetails: { id: 'campaignId' } },
         },
       ],
+      page: 'scheduled',
     };
     const stateAfter = {
       ...initialState,
@@ -402,6 +424,7 @@ describe('reducer', () => {
           },
         },
       ],
+      page: 'scheduled',
     };
     const action = {
       type: queueActionTypes.POST_UPDATED,
@@ -412,7 +435,7 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('handles POST_DELETED action', () => {
+  it('handles POST_DELETED action if on scheduled tab', () => {
     const stateBefore = {
       ...initialState,
       campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
@@ -420,11 +443,13 @@ describe('reducer', () => {
         { id: 'id1', campaignDetails: { id: 'campaignId' } },
         { id: 'id2', campaignDetails: { id: 'campaignId' } },
       ],
+      page: 'scheduled',
     };
     const stateAfter = {
       ...initialState,
       campaign: { id: 'campaignId', scheduled: 0, sent: 0 },
       campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
+      page: 'scheduled',
     };
     const action = {
       type: queueActionTypes.POST_DELETED,
@@ -435,7 +460,7 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('handles POST_SENT action', () => {
+  it('handles POST_SENT action if on scheduled tab', () => {
     const stateBefore = {
       ...initialState,
       campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
@@ -443,11 +468,44 @@ describe('reducer', () => {
         { id: 'id1', campaignDetails: { id: 'campaignId' } },
         { id: 'id2', campaignDetails: { id: 'campaignId' } },
       ],
+      page: 'scheduled',
     };
     const stateAfter = {
       ...initialState,
       campaign: { id: 'campaignId', scheduled: 0, sent: 1 },
       campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
+      page: 'scheduled',
+    };
+    const action = {
+      type: queueActionTypes.POST_SENT,
+      post: { id: 'id2', campaignDetails: { id: 'campaignId' } },
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles POST_SENT action if on sent tab', () => {
+    const stateBefore = {
+      ...initialState,
+      campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
+      campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
+      page: 'sent',
+    };
+    const stateAfter = {
+      ...initialState,
+      campaign: { id: 'campaignId', scheduled: 0, sent: 1 },
+      campaignPosts: [
+        { id: 'id1', campaignDetails: { id: 'campaignId' } },
+        {
+          id: 'id2',
+          _id: 'id2',
+          dueAt: undefined,
+          type: undefined,
+          content: { id: 'id2', campaignDetails: { id: 'campaignId' } },
+        },
+      ],
+      page: 'sent',
     };
     const action = {
       type: queueActionTypes.POST_SENT,

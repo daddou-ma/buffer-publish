@@ -6,8 +6,10 @@ import {
   campaignEdit,
   campaignScheduled,
   campaignSent,
+  campaignCreate,
 } from '@bufferapp/publish-routes';
 import { actions as campaignListActions } from '@bufferapp/publish-campaigns-list';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions } from './reducer';
 import ViewCampaign from './components/ViewCampaign';
 
@@ -27,15 +29,16 @@ export default connect(
       translations: state.i18n.translations.campaigns.viewCampaign,
       hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
+      hideSkeletonHeader: state.campaign.hideSkeletonHeader,
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
-      sentView: ownProps.sentView,
+      page: state.campaign.page,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')
         : false,
     };
   },
 
-  dispatch => ({
+  (dispatch, ownProps) => ({
     actions: {
       onComposerCreateSuccess: () => {
         dispatch(actions.handleCloseComposer());
@@ -46,6 +49,9 @@ export default connect(
             page: 'campaigns',
           })
         );
+      },
+      onCreateCampaignClick: () => {
+        dispatch(campaignCreate.goTo());
       },
       onCreatePostClick: campaignId => {
         dispatch(actions.handleOpenComposer({ campaignId, editMode: false }));
@@ -58,7 +64,12 @@ export default connect(
       },
       onEditCampaignClick: campaignId => {
         if (campaignId) {
-          dispatch(campaignEdit.goTo({ campaignId }));
+          dispatch(
+            campaignEdit.goTo({
+              campaignId,
+              from: ownProps.history.location.pathname,
+            })
+          );
         }
       },
       onTabClick: ({ tabId, campaignId }) => {
@@ -77,79 +88,89 @@ export default connect(
       },
     },
     postActions: {
-      onEditClick: post => {
+      onSetRemindersClick: ({ post }) => {
+        const nextUrl = campaignScheduled.getRoute({
+          campaignId: post.campaignDetails.id,
+        });
+        const reminderUrl = getURL.getRemindersURL({
+          profileId: post.profileId,
+          nextUrl,
+        });
+        window.location.assign(reminderUrl);
+      },
+      onEditClick: ({ post }) => {
         dispatch(
           actions.handleOpenComposer({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
             editMode: true,
           })
         );
       },
-      onDeleteConfirmClick: post => {
+      onDeleteConfirmClick: ({ post }) => {
         dispatch(
           queueActions.handleDeleteConfirmClick({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
         dispatch(
           actions.handleDeleteConfirmClick({
-            post: post.post,
+            post,
           })
         );
       },
-      onRequeueClick: post => {
+      onRequeueClick: ({ post }) => {
         dispatch(
           queueActions.handleRequeue({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },
-      onShareNowClick: post => {
+      onShareNowClick: ({ post }) => {
         dispatch(
           queueActions.handleShareNowClick({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
         dispatch(
           actions.handleShareNowClick({
-            post: post.post,
+            post,
           })
         );
       },
 
-      onImageClick: post => {
+      onImageClick: ({ post }) => {
         dispatch(
           actions.handleImageClick({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },
-      onImageClose: post => {
+      onImageClose: ({ post }) => {
         dispatch(
           actions.handleImageClose({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },
-      onImageClickNext: post => {
+      onImageClickNext: ({ post }) => {
         dispatch(
           actions.handleImageClickNext({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },
-      onImageClickPrev: post => {
+      onImageClickPrev: ({ post }) => {
         dispatch(
           actions.handleImageClickPrev({
-            post: post.post,
-            profileId: post.post.profileId,
+            post,
+            profileId: post.profileId,
           })
         );
       },

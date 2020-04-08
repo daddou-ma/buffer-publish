@@ -1,7 +1,13 @@
 import keyWrapper from '@bufferapp/keywrapper';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 import { campaignParser } from '@bufferapp/publish-server/parsers/src';
+import {
+  getParams,
+  campaignScheduled,
+  campaignSent,
+} from '@bufferapp/publish-routes';
 
 export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   FETCH_CAMPAIGN: 0,
@@ -23,11 +29,13 @@ export const initialState = {
   campaign: {},
   campaignPosts: [],
   isLoading: true,
+  hideSkeletonHeader: false,
   campaignId: null,
   showComposer: false,
   editMode: false,
   editingPostId: null,
   selectedProfileId: null,
+  page: null,
 };
 
 const postReducer = ({ campaignPosts, action, newState }) => {
@@ -48,19 +56,35 @@ const postReducer = ({ campaignPosts, action, newState }) => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `getCampaign_${dataFetchActionTypes.FETCH_START}`: {
+    case LOCATION_CHANGE: {
+      const { pathname } = action.payload.location;
+      const scheduledParams = getParams({
+        pathname,
+        route: campaignScheduled.route,
+      });
+      const sentParams = getParams({ pathname, route: campaignSent.route });
+      const currentSingleCampaignPage = () => {
+        if (scheduledParams) return 'scheduled';
+        if (sentParams) return 'sent';
+        return null;
+      };
+      const campaignId = scheduledParams?.id || sentParams?.id;
       const { id } = state.campaign;
-      // Not showing a loader when the campaign stored in the state is the same.
-      const isFirstTimeLoading = id !== action.args?.campaignId;
+      // Not showing a header loader when the campaign stored in the state is the same.
+      const isFirstTimeLoading = id !== campaignId;
       return {
         ...state,
-        isLoading: isFirstTimeLoading,
+        campaignId,
+        page: currentSingleCampaignPage(),
+        isLoading: true,
+        hideSkeletonHeader: !isFirstTimeLoading,
       };
     }
     case `getCampaign_${dataFetchActionTypes.FETCH_FAIL}`: {
       return {
         ...state,
         isLoading: false,
+        hideSkeletonHeader: false,
       };
     }
     case actionTypes.PUSHER_CAMPAIGN_UPDATED: {
@@ -81,6 +105,7 @@ export default (state = initialState, action) => {
         campaignId: campaign.id,
         campaignPosts: (fullItems && items) || [],
         isLoading: false,
+        hideSkeletonHeader: false,
       };
     }
     case actionTypes.OPEN_COMPOSER: {
@@ -101,10 +126,12 @@ export default (state = initialState, action) => {
     }
     // Pusher events
     case queueActionTypes.POST_UPDATED: {
+      const inScheduledPage = state.page === 'scheduled';
       const postCampaignId = action?.post?.campaignDetails?.id;
       if (
         postCampaignId === state.campaign?.id &&
-        typeof postCampaignId === 'string'
+        typeof postCampaignId === 'string' &&
+        inScheduledPage
       ) {
         const newCampaignPosts = state.campaignPosts.map(post => {
           if (post.id === action.post.id) {
@@ -126,10 +153,12 @@ export default (state = initialState, action) => {
       return state;
     }
     case queueActionTypes.POST_CREATED: {
+      const inScheduledPage = state.page === 'scheduled';
       const postCampaignId = action?.post?.campaignDetails?.id;
       if (
         postCampaignId === state.campaign?.id &&
-        typeof postCampaignId === 'string'
+        typeof postCampaignId === 'string' &&
+        inScheduledPage
       ) {
         const campaignPost = {
           _id: action.post.id,
@@ -150,10 +179,12 @@ export default (state = initialState, action) => {
       return state;
     }
     case queueActionTypes.POST_DELETED: {
+      const inScheduledPage = state.page === 'scheduled';
       const postCampaignId = action?.post?.campaignDetails?.id;
       if (
         postCampaignId === state.campaign?.id &&
-        typeof postCampaignId === 'string'
+        typeof postCampaignId === 'string' &&
+        inScheduledPage
       ) {
         const newCampaignPosts = state.campaignPosts.filter(
           post => post.id !== action.post.id
@@ -170,14 +201,28 @@ export default (state = initialState, action) => {
       return state;
     }
     case queueActionTypes.POST_SENT: {
+      const inScheduledPage = state.page === 'scheduled';
+      const inSentPage = state.page === 'sent';
       const postCampaignId = action?.post?.campaignDetails?.id;
       if (
         postCampaignId === state.campaign?.id &&
-        typeof postCampaignId === 'string'
+        typeof postCampaignId === 'string' &&
+        (inScheduledPage || inSentPage)
       ) {
-        const newCampaignPosts = state.campaignPosts.filter(
+        const campaignPostsFiltered = state.campaignPosts.filter(
           post => post.id !== action.post.id
         );
+        const campaignPost = {
+          _id: action.post.id,
+          id: action.post.id,
+          dueAt: action.post.due_at,
+          type: action.post.type,
+          content: action.post,
+        };
+        const newCampaignPosts = () => {
+          if (inScheduledPage) return campaignPostsFiltered;
+          if (inSentPage) return [...state.campaignPosts, campaignPost];
+        };
         return {
           ...state,
           campaign: {
@@ -185,7 +230,7 @@ export default (state = initialState, action) => {
             scheduled: state.campaign.scheduled - 1,
             sent: state.campaign.sent + 1,
           },
-          campaignPosts: newCampaignPosts,
+          campaignPosts: newCampaignPosts(),
         };
       }
       return state;
