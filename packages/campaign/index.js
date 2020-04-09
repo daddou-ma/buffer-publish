@@ -28,6 +28,8 @@ export default connect(
           ...post.content,
           isBusinessAccount: filteredProfile[0].business,
           hasPushNotifications: filteredProfile[0].hasPushNotifications,
+          profileService: filteredProfile[0].service,
+          profileServiceType: filteredProfile[0].service_type,
         },
       };
     });
