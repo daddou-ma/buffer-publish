@@ -75,6 +75,7 @@ const parseItem = item => {
         creatorName: user && user.name,
         avatarUrl: user && user.avatar,
         createdAt: createdAtString,
+        hideCreatorDetails: item.isSent,
       };
     }
   }
