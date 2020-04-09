@@ -59,34 +59,30 @@ describe('middleware', () => {
 
   it('should subscribe to update events', () => {
     middleware(store)(next)(selectProfileAction);
-    expect(Pusher.bind.mock.calls[0][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[0][1]).toEqual('sent_update');
-    expect(Pusher.bind.mock.calls[1][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[1][1]).toEqual('updated_update');
-    expect(Pusher.bind.mock.calls[2][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[2][1]).toEqual('added_update');
-    expect(Pusher.bind.mock.calls[3][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[3][1]).toEqual('deleted_update');
-    expect(Pusher.bind.mock.calls[4][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[4][1]).toEqual(
-      'collaboration_draft_approved'
-    );
-    expect(Pusher.bind.mock.calls[5][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[5][1]).toEqual('collaboration_draft_updated');
-    expect(Pusher.bind.mock.calls[6][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[6][1]).toEqual('collaboration_draft_moved');
-    expect(Pusher.bind.mock.calls[7][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[7][1]).toEqual('reordered_updates');
-    expect(Pusher.bind.mock.calls[8][0]).toEqual('private-updates-12345');
-    expect(Pusher.bind.mock.calls[8][1]).toEqual('queue_paused');
-    expect(Pusher.bind.mock.calls[9][0]).toEqual('private-story-groups-12345');
-    expect(Pusher.bind.mock.calls[9][1]).toEqual('sent_story_group');
-    expect(Pusher.bind.mock.calls[10][0]).toEqual('private-story-groups-12345');
-    expect(Pusher.bind.mock.calls[10][1]).toEqual('story_group_created');
-    expect(Pusher.bind.mock.calls[11][0]).toEqual('private-story-groups-12345');
-    expect(Pusher.bind.mock.calls[11][1]).toEqual('story_group_updated');
-    expect(Pusher.bind.mock.calls[12][0]).toEqual('private-story-groups-12345');
-    expect(Pusher.bind.mock.calls[12][1]).toEqual('story_group_deleted');
+    Pusher.bind.mock.calls.forEach(call => {
+      if (call[0] === 'private-updates-12345') {
+        const updates = [
+          'sent_update',
+          'updated_update',
+          'added_update',
+          'deleted_update',
+          'collaboration_draft_approved',
+          'collaboration_draft_updated',
+          'collaboration_draft_moved',
+          'reordered_updates',
+          'queue_paused',
+        ];
+        expect(updates.indexOf(call[1]) >= 0).toEqual(true);
+      } else {
+        const storyGroups = [
+          'sent_story_group',
+          'story_group_created',
+          'story_group_updated',
+          'story_group_deleted',
+        ]
+        expect(storyGroups.indexOf(call[1]) >= 0).toEqual(true);
+      }
+    });
     expect(Pusher.bind).toHaveBeenCalledTimes(13);
   });
 

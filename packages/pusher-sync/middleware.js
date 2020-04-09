@@ -8,125 +8,126 @@ import {
   storyGroupParser,
 } from '@bufferapp/publish-server/parsers/src';
 
+const {
+  POST_SENT,
+  POST_UPDATED,
+  POST_CREATED,
+  POST_DELETED,
+  REORDERED_UPDATES,
+} = queueActionTypes;
+const {
+  DRAFT_APPROVED,
+  DRAFT_UPDATED,
+  DRAFT_CREATED,
+  DRAFT_DELETED,
+  DRAFT_MOVED,
+} = draftActionTypes;
+const {
+  PUSHER_PROFILE_PAUSED_STATE,
+  SELECT_PROFILE,
+} = profileSidebarActionTypes;
+const {
+  STORY_DELETED,
+  STORY_SENT,
+  STORY_CREATED,
+  STORY_UPDATED,
+} = storiesActionTypes;
+
 const PUSHER_APP_KEY = 'bd9ba9324ece3341976e';
 
-const profileEventActionMap = {
-  sent_update: queueActionTypes.POST_SENT,
-  updated_update: queueActionTypes.POST_UPDATED,
-};
+function updatePostAction(dispatch, pusherEvent, profileId, type) {
+  return data => {
+    dispatch({
+      type,
+      profileId,
+      post: postParser(data.update),
+    });
+  };
+}
 
-const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
-  // Bind post related events
-  Object.entries(profileEventActionMap).forEach(([pusherEvent, actionType]) => {
-    channel.bind(pusherEvent, data => {
-      dispatch({
-        type: actionType,
-        profileId,
-        post: postParser(data.update),
-      });
+function updateDraftAction(dispatch, pusherEvent, profileId, type) {
+  return data => {
+    dispatch({
+      type,
+      profileId,
+      draft: postParser(data.draft),
     });
-  });
-  // Bind added update events, both for posts and drafts
-  channel.bind('added_update', data => {
+  };
+}
+
+function updateOrDraftAction(dispatch, pusherEvent, profileId, draft, post) {
+  const draftFn = updateDraftAction(dispatch, pusherEvent, profileId, draft);
+  const postFn = updatePostAction(dispatch, pusherEvent, profileId, post);
+  return data => {
     if (data.update.draft) {
-      dispatch({
-        type: draftActionTypes.DRAFT_CREATED,
-        profileId,
-        draft: postParser(data.update),
-      });
+      draftFn({ draft: data.update });
     } else {
-      dispatch({
-        type: queueActionTypes.POST_CREATED,
-        profileId,
-        post: postParser(data.update),
-      });
+      postFn(data);
     }
-  });
-  // Bind deleted update events, both for posts and drafts
-  channel.bind('deleted_update', data => {
-    if (data.update.draft) {
-      dispatch({
-        type: draftActionTypes.DRAFT_DELETED,
-        profileId,
-        draft: postParser(data.update),
-      });
-    } else {
-      dispatch({
-        type: queueActionTypes.POST_DELETED,
-        profileId,
-        post: postParser(data.update),
-      });
-    }
-  });
-  // Bind approved drafts event
-  channel.bind('collaboration_draft_approved', data => {
+  };
+}
+
+function reorderUpdates(dispatch, pusherEvent, profileId, type) {
+  return order => {
     dispatch({
-      type: draftActionTypes.DRAFT_APPROVED,
-      profileId,
-      draft: postParser(data.draft),
-    });
-  });
-  // Bind updated drafts event
-  channel.bind('collaboration_draft_updated', data => {
-    dispatch({
-      type: draftActionTypes.DRAFT_UPDATED,
-      profileId,
-      draft: postParser(data.draft),
-    });
-  });
-  // Bind moved drafts event
-  channel.bind('collaboration_draft_moved', data => {
-    dispatch({
-      type: draftActionTypes.DRAFT_MOVED,
-      profileId,
-      draft: postParser(data.draft),
-    });
-  });
-  // Bind other events
-  channel.bind('reordered_updates', order => {
-    dispatch({
-      type: queueActionTypes.REORDERED_UPDATES,
+      type,
       profileId,
       order,
     });
-  });
-  channel.bind('queue_paused', paused => {
+  };
+}
+function pauseQueue(dispatch, pusherEvent, profileId, type) {
+  return paused => {
     dispatch({
-      type: profileSidebarActionTypes.PUSHER_PROFILE_PAUSED_STATE,
+      type,
       paused,
       profileId,
     });
-  });
-};
+  };
+}
 
-const bindProfileStoryGroupEvents = (channel, profileId, dispatch) => {
-  channel.bind('sent_story_group', data => {
+function sentStoryGroupUpdate(dispatch, pusherEvent, profileId, type) {
+  return data => {
     dispatch({
-      type: storiesActionTypes.STORY_SENT,
+      type,
       profileId,
       storyGroup: storyGroupParser(data.story_group),
     });
-  });
-  channel.bind('story_group_created', data => {
+  };
+}
+
+function deleteStoryGroupUpdate(dispatch, pusherEvent, profileId, type) {
+  return data => {
     dispatch({
-      type: storiesActionTypes.STORY_CREATED,
-      profileId,
-      storyGroup: storyGroupParser(data.story_group),
-    });
-  });
-  channel.bind('story_group_updated', data => {
-    dispatch({
-      type: storiesActionTypes.STORY_UPDATED,
-      profileId,
-      storyGroup: storyGroupParser(data.story_group),
-    });
-  });
-  channel.bind('story_group_deleted', data => {
-    dispatch({
-      type: storiesActionTypes.STORY_DELETED,
+      type,
       profileId,
       storyGroupId: data.story_group_id,
     });
+  };
+}
+
+const storyGroupActionMap = [
+  [sentStoryGroupUpdate, 'sent_story_group', STORY_SENT],
+  [sentStoryGroupUpdate, 'story_group_created', STORY_CREATED],
+  [sentStoryGroupUpdate, 'story_group_updated', STORY_UPDATED],
+  [deleteStoryGroupUpdate, 'story_group_deleted', STORY_DELETED],
+];
+
+const profileEventActionMap = [
+  [updatePostAction, 'sent_update', POST_SENT],
+  [updatePostAction, 'updated_update', POST_UPDATED],
+  [updateOrDraftAction, 'added_update', DRAFT_CREATED, POST_CREATED],
+  [updateOrDraftAction, 'deleted_update', DRAFT_DELETED, POST_DELETED],
+  [updateDraftAction, 'collaboration_draft_approved', DRAFT_APPROVED],
+  [updateDraftAction, 'collaboration_draft_updated', DRAFT_UPDATED],
+  [updateDraftAction, 'collaboration_draft_moved', DRAFT_MOVED],
+  [reorderUpdates, 'reordered_updates', REORDERED_UPDATES],
+  [pauseQueue, 'queue_paused', PUSHER_PROFILE_PAUSED_STATE],
+];
+
+const bindPusherEvents = (events, channel, profileId, dispatch) => {
+  events.forEach(([fn, pusherEvent, ...types]) => {
+    channel.bind(pusherEvent, fn(dispatch, pusherEvent, profileId, ...types));
   });
 };
 
@@ -137,36 +138,41 @@ export default ({ dispatch }) => {
 
   return next => action => {
     next(action);
-    if (action.type === profileSidebarActionTypes.SELECT_PROFILE) {
+    if (action.type === SELECT_PROFILE) {
       const { profileId } = action;
       const { service } = action.profile;
       if (profileId) {
         // If the profile is not subscribed to any channels, subscribes to private-updates channel:
-        const newProfileChannels = channelsByProfileId[profileId] || {
-          updates: pusher.subscribe(`private-updates-${profileId}`),
-        };
-        // If instagram profile and profile is not subscribed to story-groups channel, subscribes to private-story-groups channel:
-        if (
-          service === 'instagram' &&
-          newProfileChannels.storyGroups === undefined
-        ) {
-          newProfileChannels.storyGroups = pusher.subscribe(
-            `private-story-groups-${profileId}`
-          );
-        }
-        channelsByProfileId[profileId] = newProfileChannels;
+        if (typeof channelsByProfileId[profileId] === 'undefined') {
+          const newProfileChannels = {
+            updates: pusher.subscribe(`private-updates-${profileId}`),
+          };
+          // If instagram profile and profile is not subscribed to story-groups channel, subscribes to private-story-groups channel:
+          if (
+            service === 'instagram' &&
+            newProfileChannels.storyGroups === undefined
+          ) {
+            newProfileChannels.storyGroups = pusher.subscribe(
+              `private-story-groups-${profileId}`
+            );
+          }
+          channelsByProfileId[profileId] = newProfileChannels;
 
-        bindProfileUpdateEvents(
-          channelsByProfileId[profileId].updates,
-          profileId,
-          dispatch
-        );
-        if (channelsByProfileId[profileId].storyGroups) {
-          bindProfileStoryGroupEvents(
-            channelsByProfileId[profileId].storyGroups,
+          bindPusherEvents(
+            profileEventActionMap,
+            channelsByProfileId[profileId].updates,
             profileId,
             dispatch
           );
+
+          if (channelsByProfileId[profileId].storyGroups) {
+            bindPusherEvents(
+              storyGroupActionMap,
+              channelsByProfileId[profileId].storyGroups,
+              profileId,
+              dispatch
+            );
+          }
         }
       }
     }
