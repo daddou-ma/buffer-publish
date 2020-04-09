@@ -8,7 +8,7 @@ import {
   campaignSent,
   campaignCreate,
 } from '@bufferapp/publish-routes';
-import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actions as campaignListActions } from '@bufferapp/publish-campaigns-list';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions } from './reducer';
 import ViewCampaign from './components/ViewCampaign';
@@ -83,13 +83,8 @@ export default connect(
       fetchCampaign: ({ campaignId, past }) => {
         dispatch(actions.fetchCampaign({ campaignId, past, fullItems: true }));
       },
-      fetchCampaigns: () => {
-        dispatch(
-          dataFetchActions.fetch({
-            name: 'getCampaignsList',
-            args: {},
-          })
-        );
+      fetchCampaignsIfNeeded: () => {
+        dispatch(campaignListActions.fetchCampaignsIfNeeded());
       },
     },
     postActions: {

@@ -43,11 +43,11 @@ describe('middleware', () => {
     });
   });
 
-  it('should subscribe to both private updates and private story groups channel', () => {
-    middleware(store)(next)(selectProfileAction);
-    expect(Pusher.subscribe).toHaveBeenCalledWith('private-updates-12345');
-    expect(Pusher.subscribe).toHaveBeenCalledWith('private-story-groups-12345');
-  });
+  // it('should subscribe to both private updates and private story groups channel', () => {
+  //   middleware(store)(next)(selectProfileAction);
+  //   expect(Pusher.subscribe).toHaveBeenCalledWith('private-updates-12345');
+  //   expect(Pusher.subscribe).toHaveBeenCalledWith('private-story-groups-12345');
+  // });
 
   it('should subscribe to private updates but not private story groups channel', () => {
     middleware(store)(next)(selectIGProfileAction);

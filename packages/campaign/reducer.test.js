@@ -2,6 +2,7 @@ import deepFreeze from 'deep-freeze';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
+import { campaignParser } from '@bufferapp/publish-server/parsers/src';
 import reducer, { actions, initialState, actionTypes } from './reducer';
 
 describe('reducer', () => {
@@ -119,6 +120,33 @@ describe('reducer', () => {
         name: 'campaignA',
         color: '#fff',
       },
+    };
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles pusher PUSHER_CAMPAIGN_UPDATED action', () => {
+    const campaign = {
+      _id: 'id1',
+      color: 'yellow',
+      name: 'Test',
+      updated_at: 1586224276,
+    };
+    const stateBefore = {
+      ...initialState,
+      isLoading: false,
+      campaign: campaignParser(campaign),
+    };
+    const stateAfter = {
+      ...initialState,
+      isLoading: false,
+      campaign: { ...campaignParser(campaign), color: 'green' },
+    };
+
+    const action = {
+      type: actionTypes.PUSHER_CAMPAIGN_UPDATED,
+      campaign: { ...campaign, color: 'green' },
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
