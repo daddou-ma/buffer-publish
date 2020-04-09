@@ -17,9 +17,6 @@ const getComposerSource = ({ tabId, emptySlotMode }) => {
     case 'analytics':
       sourceName = 'share_again';
       break;
-    case 'campaigns':
-      sourceName = 'campaigns';
-      break;
     default:
       sourceName = tabId;
       break;

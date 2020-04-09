@@ -112,7 +112,7 @@ const WebAPIUtils = {
                 const profile = profiles.find(
                   profileItem => profileItem.id === post.profile_id
                 );
-                const composerSource = getComposerSource({
+                let composerSource = getComposerSource({
                   tabId,
                   emptySlotMode,
                 });
@@ -131,6 +131,9 @@ const WebAPIUtils = {
                   },
                 });
                 if (post.campaign_details) {
+                  if (window.location.pathname.includes('campaigns')) {
+                    composerSource = 'campaigns';
+                  }
                   const campaignMetadata = getSegmentCampaignMetadata({
                     post,
                     profile,
