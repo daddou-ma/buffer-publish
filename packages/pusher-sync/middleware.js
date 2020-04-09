@@ -60,7 +60,7 @@ function updateOrDraftAction(dispatch, pusherEvent, profileId, draft, post) {
   const postFn = updatePostAction(dispatch, pusherEvent, profileId, post);
   return data => {
     if (data.update.draft) {
-      draftFn({ draft: data.update });
+      draftFn({ ...data, draft: data.update });
     } else {
       postFn(data);
     }
@@ -107,26 +107,26 @@ function deleteStoryGroupUpdate(dispatch, pusherEvent, profileId, type) {
 }
 
 const storyGroupActionMap = [
-  [sentStoryGroupUpdate, 'sent_story_group', STORY_SENT],
-  [sentStoryGroupUpdate, 'story_group_created', STORY_CREATED],
-  [sentStoryGroupUpdate, 'story_group_updated', STORY_UPDATED],
-  [deleteStoryGroupUpdate, 'story_group_deleted', STORY_DELETED],
+  ['sent_story_group', sentStoryGroupUpdate, STORY_SENT],
+  ['story_group_created', sentStoryGroupUpdate, STORY_CREATED],
+  ['story_group_updated', sentStoryGroupUpdate, STORY_UPDATED],
+  ['story_group_deleted', deleteStoryGroupUpdate, STORY_DELETED],
 ];
 
 const profileEventActionMap = [
-  [updatePostAction, 'sent_update', POST_SENT],
-  [updatePostAction, 'updated_update', POST_UPDATED],
-  [updateOrDraftAction, 'added_update', DRAFT_CREATED, POST_CREATED],
-  [updateOrDraftAction, 'deleted_update', DRAFT_DELETED, POST_DELETED],
-  [updateDraftAction, 'collaboration_draft_approved', DRAFT_APPROVED],
-  [updateDraftAction, 'collaboration_draft_updated', DRAFT_UPDATED],
-  [updateDraftAction, 'collaboration_draft_moved', DRAFT_MOVED],
-  [reorderUpdates, 'reordered_updates', REORDERED_UPDATES],
-  [pauseQueue, 'queue_paused', PUSHER_PROFILE_PAUSED_STATE],
+  ['sent_update', updatePostAction, POST_SENT],
+  ['updated_update', updatePostAction, POST_UPDATED],
+  ['added_update', updateOrDraftAction, DRAFT_CREATED, POST_CREATED],
+  ['deleted_update', updateOrDraftAction, DRAFT_DELETED, POST_DELETED],
+  ['collaboration_draft_approved', updateDraftAction, DRAFT_APPROVED],
+  ['collaboration_draft_updated', updateDraftAction, DRAFT_UPDATED],
+  ['collaboration_draft_moved', updateDraftAction, DRAFT_MOVED],
+  ['reordered_updates', reorderUpdates, REORDERED_UPDATES],
+  ['queue_paused', pauseQueue, PUSHER_PROFILE_PAUSED_STATE],
 ];
 
 const bindPusherEvents = (events, channel, profileId, dispatch) => {
-  events.forEach(([fn, pusherEvent, ...types]) => {
+  events.forEach(([pusherEvent, fn, ...types]) => {
     channel.bind(pusherEvent, fn(dispatch, pusherEvent, profileId, ...types));
   });
 };

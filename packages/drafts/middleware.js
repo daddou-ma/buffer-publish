@@ -50,6 +50,7 @@ export default ({ dispatch, getState }) => next => action => {
         dataFetchActions.fetch({
           name: 'deletePost',
           args: {
+            profileId: action.profileId,
             updateId: action.updateId,
           },
         })
