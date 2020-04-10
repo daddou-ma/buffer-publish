@@ -1,10 +1,8 @@
 import keyWrapper from '@bufferapp/keywrapper';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
-import {
-  sortCampaignsByUpdatedAt,
-  actionTypes as queueActionTypes,
-} from '@bufferapp/publish-queue/reducer';
+import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
+import { campaignParser } from '@bufferapp/publish-server/parsers/src';
 import {
   getParams,
   campaignScheduled,
@@ -13,6 +11,9 @@ import {
 
 export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   FETCH_CAMPAIGN: 0,
+  PUSHER_CAMPAIGN_CREATED: 0,
+  PUSHER_CAMPAIGN_DELETED: 0,
+  PUSHER_CAMPAIGN_UPDATED: 0,
   OPEN_COMPOSER: 0,
   CLOSE_COMPOSER: 0,
   GO_TO_ANALYZE_REPORT: 0,
@@ -34,7 +35,6 @@ export const initialState = {
   editMode: false,
   editingPostId: null,
   selectedProfileId: null,
-  campaigns: [],
   page: null,
 };
 
@@ -87,6 +87,15 @@ export default (state = initialState, action) => {
         hideSkeletonHeader: false,
       };
     }
+    case actionTypes.PUSHER_CAMPAIGN_UPDATED: {
+      const { campaign } = state;
+      const updatedCampaign = campaignParser(action.campaign);
+      return {
+        ...state,
+        campaign:
+          updatedCampaign.id === campaign.id ? updatedCampaign : campaign,
+      };
+    }
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { fullItems } = action.args;
       const { items, ...campaign } = action.result;
@@ -115,11 +124,6 @@ export default (state = initialState, action) => {
         editMode: false,
       };
     }
-    case `getCampaignsList_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        campaigns: sortCampaignsByUpdatedAt(action.result),
-      };
     // Pusher events
     case queueActionTypes.POST_UPDATED: {
       const inScheduledPage = state.page === 'scheduled';

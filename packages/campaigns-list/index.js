@@ -46,8 +46,8 @@ export default connect(
         );
       }
     },
-    fetchCampaigns: () => {
-      dispatch(actions.fetchCampaigns());
+    fetchCampaignsIfNeeded: () => {
+      dispatch(actions.fetchCampaignsIfNeeded());
     },
   })
 )(ListCampaigns);
