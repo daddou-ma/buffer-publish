@@ -45,67 +45,51 @@ const parseDateRange = (startDate, endDate) => {
 };
 
 const campaignItemParser = (item, alreadyParsed) => {
-  const itemContent = {};
-  if (item.content) {
-    // We'd need to add the other parsers here (storyGroups)
-    if (item.type === 'update') {
-      if (alreadyParsed) {
-        itemContent.content = item.content;
-      } else {
-        itemContent.content = postParser(item.content);
-      }
-      const {
+  let itemContent = null;
+  let headerDetails = null;
+  if (item.content && item.type === 'update') {
+    itemContent = alreadyParsed ? item.content : postParser(item.content);
+    const {
+      createdAt,
+      profileTimezone,
+      profile_service,
+      user,
+      isSent,
+    } = itemContent;
+    // String with the date of the update creation
+    const createdAtString =
+      createdAt &&
+      getDateString(createdAt, profileTimezone, {
         createdAt,
-        profileTimezone,
-        profile_service,
-        user,
-        isSent,
-      } = itemContent.content;
-      // String with the date of the update creation
-      const createdAtString =
-        createdAt &&
-        getDateString(createdAt, profileTimezone, {
-          createdAt,
-          twentyFourHourTime: false,
-        });
-      // Add isManager to each element
-      itemContent.content.isManager = item.is_manager;
-      // Header details to be used in the CardHeader
-      itemContent.content.headerDetails = {
-        channel: {
-          avatarUrl: item.service_avatar,
-          handle: item.service_username,
-          type: profile_service,
-        },
-        creatorName: user && user.name,
-        avatarUrl: user && user.avatar,
-        createdAt: createdAtString,
-        hideCreatorDetails: isSent,
-      };
-    }
-  }
-
-  let sentAt = null;
-  if (item.sent_at) {
-    sentAt = { sentAt: item.sent_at };
-  }
-
-  let servicePostId = null;
-  if (item.service_post_id) {
-    servicePostId = { servicePostId: item.service_post_id };
+        twentyFourHourTime: false,
+      });
+    // Header details to be used in the CardHeader
+    headerDetails = {
+      channel: {
+        avatarUrl: item.service_avatar,
+        handle: item.service_username,
+        type: profile_service,
+      },
+      creatorName: user && user.name,
+      avatarUrl: user && user.avatar,
+      createdAt: createdAtString,
+      hideCreatorDetails: isSent,
+    };
   }
 
   const result = {
     id: item.id,
-    _id: item.id,
     dueAt: item.due_at,
     type: item.type,
     serviceType: item.service_type,
     serviceId: item.service_id,
+    servicePostId: item.service_post_id || null,
+    sentAt: item.sent_at || null,
     channelType: item.channel_type,
-    ...sentAt,
-    ...servicePostId,
-    ...itemContent,
+    content: {
+      ...itemContent,
+      ...headerDetails,
+    },
   };
 
   return result;

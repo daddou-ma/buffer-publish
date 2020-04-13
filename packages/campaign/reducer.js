@@ -138,16 +138,17 @@ export default (state = initialState, action) => {
       ) {
         const newCampaignPosts = state.campaignPosts.map(post => {
           if (post.id === action.post.id) {
+            const parsedItem = campaignItemParser(
+              {
+                content: action.post,
+                type: post.type || 'update',
+              },
+              true
+            );
             const campaignPost = {
               ...post,
               dueAt: action.post.due_at || post.dueAt,
-              content: campaignItemParser(
-                {
-                  content: action.post,
-                  type: post.type || 'update',
-                },
-                true
-              ),
+              content: parsedItem.content,
             };
             return campaignPost;
           }

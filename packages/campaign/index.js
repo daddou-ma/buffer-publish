@@ -30,6 +30,7 @@ export default connect(
           hasPushNotifications: filteredProfile[0].hasPushNotifications,
           profileService: filteredProfile[0].service,
           profileServiceType: filteredProfile[0].service_type,
+          isManager: filteredProfile[0].isManager,
         },
       };
     });
