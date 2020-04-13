@@ -88,7 +88,7 @@ const campaignItemParser = (item, alreadyParsed) => {
     channelType: item.channel_type,
     content: {
       ...itemContent,
-      ...headerDetails,
+      headerDetails,
     },
   };
 
