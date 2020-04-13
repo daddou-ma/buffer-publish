@@ -45,6 +45,7 @@ const parseDateRange = (startDate, endDate) => {
 };
 
 const campaignItemParser = item => {
+  console.log(item, 'item');
   const itemContent = {};
   if (item.content) {
     // We'd need to add the other parsers here (storyGroups)
@@ -103,6 +104,7 @@ const campaignItemParser = item => {
     ...servicePostId,
     ...itemContent,
   };
+  console.log(result, 'result');
 
   return result;
 };
