@@ -44,7 +44,7 @@ const parseDateRange = (startDate, endDate) => {
   return formatDateRange({ momentStart, startFormat, momentEnd, endFormat });
 };
 
-const parseItem = item => {
+const campaignItemParser = item => {
   const itemContent = {};
   if (item.content) {
     // We'd need to add the other parsers here (storyGroups)
@@ -111,7 +111,7 @@ const parseCampaignItems = items => {
   if (!items) return null;
 
   return items.map(item => {
-    return parseItem(item);
+    return campaignItemParser(item);
   });
 };
 
@@ -127,7 +127,7 @@ const parseChannels = channels => {
   });
 };
 
-module.exports = campaign => {
+const campaignParser = campaign => {
   return {
     _id: campaign._id,
     id: campaign._id,
@@ -146,3 +146,5 @@ module.exports = campaign => {
     items: parseCampaignItems(campaign.items),
   };
 };
+
+module.exports = { campaignParser, campaignItemParser };
