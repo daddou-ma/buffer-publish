@@ -2,7 +2,10 @@ import keyWrapper from '@bufferapp/keywrapper';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
-import { campaignParser } from '@bufferapp/publish-server/parsers/src';
+import {
+  campaignParser,
+  campaignItemParser,
+} from '@bufferapp/publish-server/parsers/src';
 import {
   getParams,
   campaignScheduled,
@@ -138,8 +141,8 @@ export default (state = initialState, action) => {
             const campaignPost = {
               ...post,
               dueAt: action.post.due_at || post.dueAt,
-              type: action.post.type || post.type,
-              content: action.post,
+              type: post.type || 'update',
+              content: campaignItemParser({ content: action.post }),
             };
             return campaignPost;
           }
