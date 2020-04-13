@@ -15,14 +15,33 @@ import ViewCampaign from './components/ViewCampaign';
 
 export default connect(
   (state, ownProps) => {
+    const { profiles } = state.profileSidebar;
+    const { campaignPosts } = state.campaign;
+    const campaignPostsWithProfileData = campaignPosts.map(post => {
+      const filteredProfile = profiles.filter(
+        profile => profile.id === post.content.profileId
+      );
+
+      return {
+        ...post,
+        content: {
+          ...post.content,
+          isBusinessAccount: filteredProfile[0].business,
+          hasPushNotifications: filteredProfile[0].hasPushNotifications,
+          profileService: filteredProfile[0].service,
+          profileServiceType: filteredProfile[0].service_type,
+        },
+      };
+    });
     return {
       campaign: state.campaign.campaign,
-      campaignPosts: state.campaign.campaignPosts
-        ? formatPostLists({
-            posts: state.campaign.campaignPosts,
-            orderBy: 'dueAt',
-          })
-        : [],
+      campaignPosts:
+        campaignPostsWithProfileData.length > 0
+          ? formatPostLists({
+              posts: campaignPostsWithProfileData,
+              orderBy: 'dueAt',
+            })
+          : [],
       showComposer: state.campaign.showComposer,
       editMode: state.campaign.editMode,
       editingPostId: state.campaign.editingPostId,
