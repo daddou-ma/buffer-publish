@@ -141,10 +141,13 @@ export default (state = initialState, action) => {
             const campaignPost = {
               ...post,
               dueAt: action.post.due_at || post.dueAt,
-              content: campaignItemParser({
-                content: action.post,
-                type: post.type || 'update',
-              }),
+              content: campaignItemParser(
+                {
+                  content: action.post,
+                  type: post.type || 'update',
+                },
+                true
+              ),
             };
             return campaignPost;
           }

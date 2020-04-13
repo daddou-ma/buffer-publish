@@ -44,13 +44,16 @@ const parseDateRange = (startDate, endDate) => {
   return formatDateRange({ momentStart, startFormat, momentEnd, endFormat });
 };
 
-const campaignItemParser = item => {
-  console.log(item, 'item');
+const campaignItemParser = (item, alreadyParsed) => {
   const itemContent = {};
   if (item.content) {
     // We'd need to add the other parsers here (storyGroups)
     if (item.type === 'update') {
-      itemContent.content = postParser(item.content);
+      if (alreadyParsed) {
+        itemContent.content = item.content;
+      } else {
+        itemContent.content = postParser(item.content);
+      }
       const {
         createdAt,
         profileTimezone,
@@ -104,7 +107,6 @@ const campaignItemParser = item => {
     ...servicePostId,
     ...itemContent,
   };
-  console.log(result, 'result');
 
   return result;
 };
