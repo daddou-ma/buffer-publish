@@ -15,62 +15,12 @@ import {
 
 const PUSHER_APP_KEY = 'bd9ba9324ece3341976e';
 
-const profileEventActionMap = {
+const updateEventActionMap = {
   sent_update: queueActionTypes.POST_SENT,
   updated_update: queueActionTypes.POST_UPDATED,
 };
 
 const bindProfileUpdateEvents = (channel, profileId, dispatch) => {
-  // Bind post related events
-  Object.entries(profileEventActionMap).forEach(([pusherEvent, actionType]) => {
-    channel.bind(pusherEvent, data => {
-      dispatch({
-        type: actionType,
-        profileId,
-        post: postParser(data.update),
-      });
-    });
-  });
-  // Bind added update events, both for posts and drafts
-  channel.bind('added_update', data => {
-    if (data.update.draft) {
-      dispatch({
-        type: draftActionTypes.DRAFT_CREATED,
-        profileId,
-        draft: postParser(data.update),
-      });
-    } else {
-      dispatch({
-        type: queueActionTypes.POST_CREATED,
-        profileId,
-        post: postParser(data.update),
-      });
-    }
-  });
-  // Bind deleted update events, both for posts and drafts
-  channel.bind('deleted_update', data => {
-    if (data.update.draft) {
-      dispatch({
-        type: draftActionTypes.DRAFT_DELETED,
-        profileId,
-        draft: postParser(data.update),
-      });
-    } else {
-      dispatch({
-        type: queueActionTypes.POST_DELETED,
-        profileId,
-        post: postParser(data.update),
-      });
-    }
-  });
-  // Bind approved drafts event
-  channel.bind('collaboration_draft_approved', data => {
-    dispatch({
-      type: draftActionTypes.DRAFT_APPROVED,
-      profileId,
-      draft: postParser(data.draft),
-    });
-  });
   // Bind updated drafts event
   channel.bind('collaboration_draft_updated', data => {
     dispatch({
@@ -173,6 +123,7 @@ const setupProfilePusherEvents = (
 };
 
 const bindOrganizationEvents = (orgChannel, dispatch) => {
+  // Campaigns
   orgChannel.bind('create_campaign', data => {
     dispatch({
       type: campaignActionTypes.PUSHER_CAMPAIGN_CREATED,
@@ -189,6 +140,53 @@ const bindOrganizationEvents = (orgChannel, dispatch) => {
     dispatch({
       type: campaignActionTypes.PUSHER_CAMPAIGN_DELETED,
       campaignId: data.id,
+    });
+  });
+  // Posts and Drafts
+  orgChannel.bind('added_update', data => {
+    if (data.update.draft) {
+      dispatch({
+        type: draftActionTypes.DRAFT_CREATED,
+        profileId: data.update.profileId,
+        draft: postParser(data.update),
+      });
+    } else {
+      dispatch({
+        type: queueActionTypes.POST_CREATED,
+        profileId: data.update.profileId,
+        post: postParser(data.update),
+      });
+    }
+  });
+  orgChannel.bind('deleted_update', data => {
+    if (data.update.draft) {
+      dispatch({
+        type: draftActionTypes.DRAFT_DELETED,
+        profileId: data.update.profileId,
+        draft: postParser(data.update),
+      });
+    } else {
+      dispatch({
+        type: queueActionTypes.POST_DELETED,
+        profileId: data.update.profileId,
+        post: postParser(data.update),
+      });
+    }
+  });
+  orgChannel.bind('collaboration_draft_approved', data => {
+    dispatch({
+      type: draftActionTypes.DRAFT_APPROVED,
+      profileId: data.update.profileId,
+      draft: postParser(data.draft),
+    });
+  });
+  Object.entries(updateEventActionMap).forEach(([pusherEvent, actionType]) => {
+    orgChannel.bind(pusherEvent, data => {
+      dispatch({
+        type: actionType,
+        profileId: data.update.profileId,
+        post: postParser(data.update),
+      });
     });
   });
 };
