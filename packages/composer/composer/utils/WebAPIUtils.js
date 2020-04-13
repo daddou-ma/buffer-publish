@@ -131,7 +131,10 @@ const WebAPIUtils = {
                   },
                 });
                 if (post.campaign_details) {
-                  if (window.location.pathname.includes('campaigns')) {
+                  const onCampaignsPage = window.location.pathname.includes(
+                    'campaigns'
+                  );
+                  if (onCampaignsPage) {
                     composerSource = 'campaigns';
                   }
                   const campaignMetadata = getSegmentCampaignMetadata({
