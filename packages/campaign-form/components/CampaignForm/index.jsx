@@ -193,8 +193,10 @@ const CampaignForm = ({
           <Notice>
             <NoticeText type="p" color={grayDark}>
               {translations.notice1}
-              {/* FAQ link has to be replaced */}
-              <Link href="https://faq.buffer.com/" newTab>
+              <Link
+                href="https://support.buffer.com/hc/en-us/articles/360046266313-creating-and-managing-campaigns"
+                newTab
+              >
                 {translations.notice2}
               </Link>
               {translations.notice3}
