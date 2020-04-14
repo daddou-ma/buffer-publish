@@ -19,19 +19,16 @@ export default connect(
     const { campaignPosts } = state.campaign;
     const campaignPostsWithProfileData = campaignPosts.map(post => {
       const filteredProfile = profiles.filter(
-        profile => profile.id === post.content.profileId
+        profile => profile.id === post.profileId
       );
 
       return {
         ...post,
-        content: {
-          ...post.content,
-          isBusinessAccount: filteredProfile[0].business,
-          hasPushNotifications: filteredProfile[0].hasPushNotifications,
-          profileService: filteredProfile[0].service,
-          profileServiceType: filteredProfile[0].service_type,
-          isManager: filteredProfile[0].isManager,
-        },
+        isBusinessAccount: filteredProfile[0].business,
+        hasPushNotifications: filteredProfile[0].hasPushNotifications,
+        profileService: filteredProfile[0].service,
+        profileServiceType: filteredProfile[0].service_type,
+        isManager: filteredProfile[0].isManager,
       };
     });
     return {

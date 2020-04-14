@@ -44,13 +44,9 @@ export const initialState = {
 const postReducer = ({ campaignPosts, action, newState }) => {
   return campaignPosts.map(campaign => {
     if (campaign.id === action.updateId) {
-      const { content, ...rest } = campaign;
       return {
-        ...rest,
-        content: {
-          ...content,
-          ...newState,
-        },
+        ...campaign,
+        ...newState,
       };
     }
     return campaign;
@@ -141,16 +137,11 @@ export default (state = initialState, action) => {
             const parsedItem = campaignItemParser(
               {
                 content: action.post,
-                type: post.type || 'update',
+                type: 'update',
               },
               true
             );
-            const campaignPost = {
-              ...post,
-              dueAt: action.post.due_at || post.dueAt,
-              content: parsedItem.content,
-            };
-            return campaignPost;
+            return parsedItem;
           }
           return post;
         });
@@ -169,20 +160,20 @@ export default (state = initialState, action) => {
         typeof postCampaignId === 'string' &&
         inScheduledPage
       ) {
-        const campaignPost = {
-          _id: action.post.id,
-          id: action.post.id,
-          dueAt: action.post.due_at,
-          type: action.post.type,
-          content: action.post,
-        };
+        const parsedItem = campaignItemParser(
+          {
+            content: action.post,
+            type: 'update',
+          },
+          true
+        );
         return {
           ...state,
           campaign: {
             ...state.campaign,
             scheduled: state.campaign.scheduled + 1,
           },
-          campaignPosts: [...state.campaignPosts, campaignPost],
+          campaignPosts: [...state.campaignPosts, parsedItem],
         };
       }
       return state;
@@ -221,16 +212,16 @@ export default (state = initialState, action) => {
         const campaignPostsFiltered = state.campaignPosts.filter(
           post => post.id !== action.post.id
         );
-        const campaignPost = {
-          _id: action.post.id,
-          id: action.post.id,
-          dueAt: action.post.due_at,
-          type: action.post.type,
-          content: action.post,
-        };
+        const parsedItem = campaignItemParser(
+          {
+            content: action.post,
+            type: 'update',
+          },
+          true
+        );
         const newCampaignPosts = () => {
           if (inScheduledPage) return campaignPostsFiltered;
-          if (inSentPage) return [...state.campaignPosts, campaignPost];
+          if (inSentPage) return [...state.campaignPosts, parsedItem];
         };
         return {
           ...state,

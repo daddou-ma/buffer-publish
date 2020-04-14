@@ -49,6 +49,7 @@ const campaignItemParser = (item, alreadyParsed) => {
   let headerDetails = null;
   if (item.content && item.type === 'update') {
     itemContent = alreadyParsed ? item.content : postParser(item.content);
+    itemContent.dueAt = item.content.due_at;
     const {
       createdAt,
       profileTimezone,
@@ -78,18 +79,8 @@ const campaignItemParser = (item, alreadyParsed) => {
   }
 
   const result = {
-    id: item.id,
-    dueAt: item.due_at,
-    type: item.type,
-    serviceType: item.service_type,
-    serviceId: item.service_id,
-    servicePostId: item.service_post_id || null,
-    sentAt: item.sent_at || null,
-    channelType: item.channel_type,
-    content: {
-      ...itemContent,
-      headerDetails,
-    },
+    ...itemContent,
+    headerDetails,
   };
 
   return result;
