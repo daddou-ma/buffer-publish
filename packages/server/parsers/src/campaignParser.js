@@ -49,13 +49,7 @@ const campaignItemParser = (item, alreadyParsed) => {
   let headerDetails = null;
   if (item.content && item.type === 'update') {
     itemContent = alreadyParsed ? item.content : postParser(item.content);
-    const {
-      createdAt,
-      profileTimezone,
-      profile_service,
-      user,
-      isSent,
-    } = itemContent;
+    const { createdAt, profileTimezone, user, isSent } = itemContent;
     // String with the date of the update creation
     const createdAtString =
       createdAt &&
@@ -65,11 +59,6 @@ const campaignItemParser = (item, alreadyParsed) => {
       });
     // Header details to be used in the CardHeader
     headerDetails = {
-      channel: {
-        avatarUrl: item.service_avatar,
-        handle: item.service_username,
-        type: profile_service,
-      },
       creatorName: user && user.name,
       avatarUrl: user && user.avatar,
       createdAt: createdAtString,

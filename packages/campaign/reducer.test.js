@@ -356,11 +356,6 @@ describe('reducer', () => {
           campaignDetails: { id: 'campaignId' },
           headerDetails: {
             avatarUrl: undefined,
-            channel: {
-              avatarUrl: undefined,
-              handle: undefined,
-              type: undefined,
-            },
             createdAt: undefined,
             creatorName: undefined,
             hideCreatorDetails: undefined,
@@ -424,11 +419,6 @@ describe('reducer', () => {
           campaignDetails: { id: 'campaignId' },
           headerDetails: {
             avatarUrl: undefined,
-            channel: {
-              avatarUrl: undefined,
-              handle: undefined,
-              type: undefined,
-            },
             createdAt: undefined,
             creatorName: undefined,
             hideCreatorDetails: undefined,
@@ -514,11 +504,6 @@ describe('reducer', () => {
           campaignDetails: { id: 'campaignId' },
           headerDetails: {
             avatarUrl: undefined,
-            channel: {
-              avatarUrl: undefined,
-              handle: undefined,
-              type: undefined,
-            },
             createdAt: undefined,
             creatorName: undefined,
             hideCreatorDetails: undefined,

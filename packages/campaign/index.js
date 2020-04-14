@@ -29,6 +29,14 @@ export default connect(
         profileService: filteredProfile[0].service,
         profileServiceType: filteredProfile[0].service_type,
         isManager: filteredProfile[0].isManager,
+        headerDetails: {
+          ...post.headerDetails,
+          channel: {
+            avatarUrl: filteredProfile[0].avatarUrl,
+            handle: filteredProfile[0].handle,
+            type: filteredProfile[0].service,
+          },
+        },
       };
     });
     return {
