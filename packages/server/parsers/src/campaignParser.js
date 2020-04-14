@@ -68,7 +68,7 @@ const campaignItemParser = (item, alreadyParsed) => {
 
   const result = {
     ...itemContent,
-    dueAt: itemContent?.due_at,
+    dueAt: itemContent ? itemContent.due_at : null,
     headerDetails,
   };
 
