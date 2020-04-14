@@ -17,28 +17,32 @@ export default connect(
   (state, ownProps) => {
     const { profiles } = state.profileSidebar;
     const { campaignPosts } = state.campaign;
-    const campaignPostsWithProfileData = campaignPosts.map(post => {
-      const filteredProfile = profiles.filter(
-        profile => profile.id === post.profileId
-      )[0];
+    let campaignPostsWithProfileData = [];
+    if (profiles) {
+      campaignPostsWithProfileData = campaignPosts.map(post => {
+        const filteredProfile = profiles.filter(
+          profile => profile.id === post.profileId
+        )[0];
 
-      return {
-        ...post,
-        isBusinessAccount: filteredProfile.business,
-        hasPushNotifications: filteredProfile.hasPushNotifications,
-        profileService: filteredProfile.service,
-        profileServiceType: filteredProfile.service_type,
-        isManager: filteredProfile.isManager,
-        headerDetails: {
-          ...post.headerDetails,
-          channel: {
-            avatarUrl: filteredProfile.avatarUrl,
-            handle: filteredProfile.handle,
-            type: filteredProfile.service,
+        return {
+          ...post,
+          isBusinessAccount: filteredProfile.business,
+          hasPushNotifications: filteredProfile.hasPushNotifications,
+          profileService: filteredProfile.service,
+          profileServiceType: filteredProfile.service_type,
+          isManager: filteredProfile.isManager,
+          headerDetails: {
+            ...post.headerDetails,
+            channel: {
+              avatarUrl: filteredProfile.avatarUrl,
+              handle: filteredProfile.handle,
+              type: filteredProfile.service,
+            },
           },
-        },
-      };
-    });
+        };
+      });
+    }
+
     return {
       campaign: state.campaign.campaign,
       campaignPosts:
