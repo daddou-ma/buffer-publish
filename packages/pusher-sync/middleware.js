@@ -144,6 +144,7 @@ const bindOrganizationEvents = (orgChannel, dispatch) => {
   });
   // Posts and Drafts
   orgChannel.bind('added_update', data => {
+    debugger;
     if (data.update.draft) {
       dispatch({
         type: draftActionTypes.DRAFT_CREATED,
