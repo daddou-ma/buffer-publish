@@ -20,21 +20,21 @@ export default connect(
     const campaignPostsWithProfileData = campaignPosts.map(post => {
       const filteredProfile = profiles.filter(
         profile => profile.id === post.profileId
-      );
+      )[0];
 
       return {
         ...post,
-        isBusinessAccount: filteredProfile[0].business,
-        hasPushNotifications: filteredProfile[0].hasPushNotifications,
-        profileService: filteredProfile[0].service,
-        profileServiceType: filteredProfile[0].service_type,
-        isManager: filteredProfile[0].isManager,
+        isBusinessAccount: filteredProfile.business,
+        hasPushNotifications: filteredProfile.hasPushNotifications,
+        profileService: filteredProfile.service,
+        profileServiceType: filteredProfile.service_type,
+        isManager: filteredProfile.isManager,
         headerDetails: {
           ...post.headerDetails,
           channel: {
-            avatarUrl: filteredProfile[0].avatarUrl,
-            handle: filteredProfile[0].handle,
-            type: filteredProfile[0].service,
+            avatarUrl: filteredProfile.avatarUrl,
+            handle: filteredProfile.handle,
+            type: filteredProfile.service,
           },
         },
       };
