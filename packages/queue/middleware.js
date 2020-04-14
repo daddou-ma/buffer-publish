@@ -213,8 +213,8 @@ export default ({ dispatch, getState }) => next => action => {
       const state = getState();
       const { profileId } = action;
       const currentCounts = {
-        pending: state.queue.byProfileId[profileId].total,
-        sent: state.sent.byProfileId[profileId].total,
+        pending: state.queue.byProfileId[profileId]?.total || 0,
+        sent: state.sent.byProfileId[profileId]?.total || 0,
       };
       const changeMap = {
         [actionTypes.POST_CREATED]: { pending: 1, sent: 0 },
