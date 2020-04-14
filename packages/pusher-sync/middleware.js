@@ -144,17 +144,16 @@ const bindOrganizationEvents = (orgChannel, dispatch) => {
   });
   // Posts and Drafts
   orgChannel.bind('added_update', data => {
-    debugger;
     if (data.update.draft) {
       dispatch({
         type: draftActionTypes.DRAFT_CREATED,
-        profileId: data.update.profileId,
+        profileId: data.profile_id,
         draft: postParser(data.update),
       });
     } else {
       dispatch({
         type: queueActionTypes.POST_CREATED,
-        profileId: data.update.profileId,
+        profileId: data.profile_id,
         post: postParser(data.update),
       });
     }
@@ -163,13 +162,13 @@ const bindOrganizationEvents = (orgChannel, dispatch) => {
     if (data.update.draft) {
       dispatch({
         type: draftActionTypes.DRAFT_DELETED,
-        profileId: data.update.profileId,
+        profileId: data.profile_id,
         draft: postParser(data.update),
       });
     } else {
       dispatch({
         type: queueActionTypes.POST_DELETED,
-        profileId: data.update.profileId,
+        profileId: data.profile_id,
         post: postParser(data.update),
       });
     }
@@ -177,7 +176,7 @@ const bindOrganizationEvents = (orgChannel, dispatch) => {
   orgChannel.bind('collaboration_draft_approved', data => {
     dispatch({
       type: draftActionTypes.DRAFT_APPROVED,
-      profileId: data.update.profileId,
+      profileId: data.profile_id,
       draft: postParser(data.draft),
     });
   });
@@ -185,7 +184,7 @@ const bindOrganizationEvents = (orgChannel, dispatch) => {
     orgChannel.bind(pusherEvent, data => {
       dispatch({
         type: actionType,
-        profileId: data.update.profileId,
+        profileId: data.profile_id,
         post: postParser(data.update),
       });
     });
