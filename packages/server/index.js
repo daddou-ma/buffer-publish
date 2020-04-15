@@ -15,7 +15,7 @@ if (isProduction) {
 
 const http = require('http');
 const express = require('express');
-const logMiddleware = require('@bufferapp/logger/middleware');
+const bufflog = require('@bufferapp/bufflog');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const fs = require('fs');
@@ -270,7 +270,7 @@ const getHtml = ({
     .replace('{{{bufferData}}}', getBufferData({ user, profiles }));
 };
 
-app.use(logMiddleware({ name: 'BufferPublish' }));
+app.use(bufflog.middleware());
 app.use(cookieParser());
 app.use(helmet.frameguard({ action: 'sameorigin' }));
 
