@@ -341,32 +341,57 @@ describe('reducer', () => {
   it('handles POST_CREATED action if post created belongs to the current campaign', () => {
     const stateBefore = {
       ...initialState,
-      campaign: { id: 'campaignId', scheduled: 0, sent: 0 },
+      campaign: {
+        id: 'campaignId',
+        scheduled: 0,
+        sent: 0,
+        channels: [{ channelId: 'profileId1', isManager: true }],
+      },
       campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
       page: 'scheduled',
     };
     const stateAfter = {
       ...initialState,
-      campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
+      campaign: {
+        id: 'campaignId',
+        scheduled: 1,
+        sent: 0,
+        channels: [{ channelId: 'profileId1', isManager: true }],
+      },
       campaignPosts: [
         { id: 'id1', campaignDetails: { id: 'campaignId' } },
         {
           id: 'id2',
           dueAt: undefined,
           campaignDetails: { id: 'campaignId' },
+          profileId: 'profileId1',
           headerDetails: {
+            channel: {
+              avatarUrl: undefined,
+              handle: undefined,
+              type: undefined,
+            },
             avatarUrl: undefined,
             createdAt: undefined,
             creatorName: undefined,
             hideCreatorDetails: undefined,
           },
+          isBusinessAccount: undefined,
+          isManager: true,
+          profileService: undefined,
+          profileServiceType: undefined,
+          hasPushNotifications: undefined,
         },
       ],
       page: 'scheduled',
     };
     const action = {
       type: queueActionTypes.POST_CREATED,
-      post: { id: 'id2', campaignDetails: { id: 'campaignId' } },
+      post: {
+        id: 'id2',
+        campaignDetails: { id: 'campaignId' },
+        profileId: 'profileId1',
+      },
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
@@ -398,7 +423,10 @@ describe('reducer', () => {
   it('handles POST_UPDATED action if on scheduled tab', () => {
     const stateBefore = {
       ...initialState,
-      campaign: { id: 'campaignId' },
+      campaign: {
+        id: 'campaignId',
+        channels: [{ channelId: 'profileId1', isManager: true }],
+      },
       campaignPosts: [
         {
           id: 'id1',
@@ -410,26 +438,45 @@ describe('reducer', () => {
     };
     const stateAfter = {
       ...initialState,
-      campaign: { id: 'campaignId' },
+      campaign: {
+        id: 'campaignId',
+        channels: [{ channelId: 'profileId1', isManager: true }],
+      },
       campaignPosts: [
         {
           id: 'id1',
           text: 'Post',
           dueAt: undefined,
           campaignDetails: { id: 'campaignId' },
+          profileId: 'profileId1',
           headerDetails: {
+            channel: {
+              avatarUrl: undefined,
+              handle: undefined,
+              type: undefined,
+            },
             avatarUrl: undefined,
             createdAt: undefined,
             creatorName: undefined,
             hideCreatorDetails: undefined,
           },
+          isBusinessAccount: undefined,
+          isManager: true,
+          profileService: undefined,
+          profileServiceType: undefined,
+          hasPushNotifications: undefined,
         },
       ],
       page: 'scheduled',
     };
     const action = {
       type: queueActionTypes.POST_UPDATED,
-      post: { id: 'id1', text: 'Post', campaignDetails: { id: 'campaignId' } },
+      post: {
+        id: 'id1',
+        text: 'Post',
+        campaignDetails: { id: 'campaignId' },
+        profileId: 'profileId1',
+      },
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
@@ -489,32 +536,57 @@ describe('reducer', () => {
   it('handles POST_SENT action if on sent tab', () => {
     const stateBefore = {
       ...initialState,
-      campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
+      campaign: {
+        id: 'campaignId',
+        scheduled: 1,
+        sent: 0,
+        channels: [{ channelId: 'profileId1', isManager: true }],
+      },
       campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
       page: 'sent',
     };
     const stateAfter = {
       ...initialState,
-      campaign: { id: 'campaignId', scheduled: 0, sent: 1 },
+      campaign: {
+        id: 'campaignId',
+        scheduled: 0,
+        sent: 1,
+        channels: [{ channelId: 'profileId1', isManager: true }],
+      },
       campaignPosts: [
         { id: 'id1', campaignDetails: { id: 'campaignId' } },
         {
           id: 'id2',
           dueAt: undefined,
           campaignDetails: { id: 'campaignId' },
+          profileId: 'profileId1',
           headerDetails: {
+            channel: {
+              avatarUrl: undefined,
+              handle: undefined,
+              type: undefined,
+            },
             avatarUrl: undefined,
             createdAt: undefined,
             creatorName: undefined,
             hideCreatorDetails: undefined,
           },
+          isBusinessAccount: undefined,
+          isManager: true,
+          profileService: undefined,
+          profileServiceType: undefined,
+          hasPushNotifications: undefined,
         },
       ],
       page: 'sent',
     };
     const action = {
       type: queueActionTypes.POST_SENT,
-      post: { id: 'id2', campaignDetails: { id: 'campaignId' } },
+      post: {
+        id: 'id2',
+        campaignDetails: { id: 'campaignId' },
+        profileId: 'profileId1',
+      },
     };
     deepFreeze(stateBefore);
     deepFreeze(action);
