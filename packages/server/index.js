@@ -10,6 +10,7 @@ if (isProduction) {
     hostname: process.env.DD_AGENT_HOST,
     service: process.env.DD_SERVICE_NAME,
     port: 8126,
+    logInjection: true,
   });
 }
 
