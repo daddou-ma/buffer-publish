@@ -54,6 +54,36 @@ const ListItem = ({
     campaignId: campaign.id,
   });
 
+  let campaignActionsButton;
+
+  if (hideAnalyzeReport) {
+    campaignActionsButton = (
+      <Button
+        onClick={viewCampaignSelectItem.selectedItemClick}
+        type="secondary"
+        label={translations.viewCampaign}
+      />
+    );
+  } else {
+    campaignActionsButton = (
+      <Button
+        onClick={() => {
+          goToAnalyzeReport(campaign);
+        }}
+        type="secondary"
+        isSplit
+        label={translations.viewReport}
+        onSelectClick={selectedItem => {
+          if (typeof selectedItem.selectedItemClick !== 'undefined') {
+            selectedItem.selectedItemClick();
+          }
+          return false;
+        }}
+        items={[viewCampaignSelectItem, ...selectItems]}
+      />
+    );
+  }
+
   return (
     <Container>
       <LeftWrapper>
@@ -93,35 +123,7 @@ const ListItem = ({
           {campaign.sent} {translations.sent}
         </Text>
       </Group>
-      <ButtonWrapper>
-        <Button
-          onClick={
-            hideAnalyzeReport
-              ? viewCampaignSelectItem.selectedItemClick
-              : () => {
-                  goToAnalyzeReport(campaign);
-                }
-          }
-          type="secondary"
-          isSplit
-          label={
-            hideAnalyzeReport
-              ? translations.viewCampaign
-              : translations.viewReport
-          }
-          onSelectClick={selectedItem => {
-            if (typeof selectedItem.selectedItemClick !== 'undefined') {
-              selectedItem.selectedItemClick();
-            }
-            return false;
-          }}
-          items={
-            hideAnalyzeReport
-              ? selectItems
-              : [viewCampaignSelectItem, ...selectItems]
-          }
-        />
-      </ButtonWrapper>
+      <ButtonWrapper>{campaignActionsButton}</ButtonWrapper>
     </Container>
   );
 };

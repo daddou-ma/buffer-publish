@@ -89,11 +89,13 @@ const ListCampaigns = ({
       <Container>
         <Header>
           <Text type="h2">Campaigns</Text>
-          <Button
-            type="primary"
-            label="Create Campaign"
-            onClick={onOpenCreateCampaignClick}
-          />
+          {!hideAnalyzeReport && (
+            <Button
+              type="primary"
+              label="Create Campaign"
+              onClick={onOpenCreateCampaignClick}
+            />
+          )}
         </Header>
         <List
           campaigns={campaigns}
