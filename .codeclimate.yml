@@ -7,3 +7,5 @@ checks:
     enabled: true
     config:
       threshold: 80
+exclude_patterns:
+  - "*.story.jsx"
