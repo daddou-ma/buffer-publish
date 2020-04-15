@@ -46,8 +46,7 @@ export default connect(
       editMode: state.campaign.editMode,
       editingPostId: state.campaign.editingPostId,
       translations: state.i18n.translations.campaigns.viewCampaign,
-      isUsingPublishAsTeamMember:
-        state.appSidebar.user.isUsingPublishAsTeamMember,
+      hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
       hideSkeletonHeader: state.campaign.hideSkeletonHeader,
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,

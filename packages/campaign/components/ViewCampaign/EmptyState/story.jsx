@@ -50,7 +50,7 @@ storiesOf('Campaigns|ViewCampaign/EmptyState', module)
       translations={translations.campaigns.viewCampaign}
       sentView={false}
       actions={actions}
-      isUsingPublishAsTeamMember
+      hideAnalyzeReport
     />
   ))
   .add('Campaign with no scheduled posts, owner', () => (
@@ -59,6 +59,6 @@ storiesOf('Campaigns|ViewCampaign/EmptyState', module)
       translations={translations.campaigns.viewCampaign}
       sentView={false}
       actions={actions}
-      isUsingPublishAsTeamMember={false}
+      hideAnalyzeReport={false}
     />
   ));

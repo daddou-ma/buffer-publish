@@ -14,8 +14,7 @@ export default connect(
     return {
       campaigns: state.campaignsList.campaigns,
       translations: state.i18n.translations.campaigns,
-      isUsingPublishAsTeamMember:
-        state.appSidebar.user.isUsingPublishAsTeamMember,
+      hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaignsList.isLoading,
       hasCampaignsFlip: state.appSidebar.user.features
         ? state.appSidebar.user.features.includes('campaigns')
