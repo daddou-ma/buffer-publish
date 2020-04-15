@@ -20,7 +20,7 @@ import {
 
 const ListItem = ({
   campaign,
-  hideAnalyzeReport,
+  showCampaignActions,
   onEditCampaignClick,
   onDeleteCampaignClick,
   onViewCampaignClick,
@@ -56,15 +56,7 @@ const ListItem = ({
 
   let campaignActionsButton;
 
-  if (hideAnalyzeReport) {
-    campaignActionsButton = (
-      <Button
-        onClick={viewCampaignSelectItem.selectedItemClick}
-        type="secondary"
-        label={translations.viewCampaign}
-      />
-    );
-  } else {
+  if (showCampaignActions) {
     campaignActionsButton = (
       <Button
         onClick={() => {
@@ -80,6 +72,14 @@ const ListItem = ({
           return false;
         }}
         items={[viewCampaignSelectItem, ...selectItems]}
+      />
+    );
+  } else {
+    campaignActionsButton = (
+      <Button
+        onClick={viewCampaignSelectItem.selectedItemClick}
+        type="secondary"
+        label={translations.viewCampaign}
       />
     );
   }
@@ -150,7 +150,7 @@ ListItem.propTypes = {
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
   goToAnalyzeReport: PropTypes.func.isRequired,
-  hideAnalyzeReport: PropTypes.bool.isRequired,
+  showCampaignActions: PropTypes.bool.isRequired,
 };
 
 export default ListItem;

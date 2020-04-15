@@ -51,7 +51,7 @@ const ListCampaigns = ({
   onViewCampaignClick,
   goToAnalyzeReport,
   onOpenCreateCampaignClick,
-  hideAnalyzeReport,
+  showCampaignActions,
   hasCampaignsFlip,
   fetchCampaignsIfNeeded,
   isLoading,
@@ -89,7 +89,7 @@ const ListCampaigns = ({
       <Container>
         <Header>
           <Text type="h2">Campaigns</Text>
-          {!hideAnalyzeReport && (
+          {showCampaignActions && (
             <Button
               type="primary"
               label="Create Campaign"
@@ -104,7 +104,7 @@ const ListCampaigns = ({
           onViewCampaignClick={onViewCampaignClick}
           goToAnalyzeReport={goToAnalyzeReport}
           translations={translations.viewCampaign}
-          hideAnalyzeReport={hideAnalyzeReport}
+          showCampaignActions={showCampaignActions}
         />
       </Container>
     </Wrapper>
@@ -119,7 +119,7 @@ ListCampaigns.propTypes = {
   onDeleteCampaignClick: PropTypes.func,
   onViewCampaignClick: PropTypes.func,
   goToAnalyzeReport: PropTypes.func,
-  hideAnalyzeReport: PropTypes.bool.isRequired,
+  showCampaignActions: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
