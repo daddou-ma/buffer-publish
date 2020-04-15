@@ -105,7 +105,8 @@ const Header = ({
         displaySkeleton={isLoading}
         onSelectClick={selectedItem => {
           if (typeof selectedItem.selectedItemClick !== 'undefined') {
-            selectedItem.selectedItemClick();
+            // need to pass campaign directly into select methods for state to update correctly
+            selectedItem.selectedItemClick(campaignDetails);
           }
           return false;
         }}
@@ -116,13 +117,11 @@ const Header = ({
           },
           {
             title: translations.editCampaign,
-            selectedItemClick: () => onEditCampaignClick(campaignDetails.id),
+            selectedItemClick: campaign => onEditCampaignClick(campaign.id),
           },
           {
             title: translations.deleteCampaign,
-            selectedItemClick: () => {
-              onDeleteCampaignClick(campaignDetails);
-            },
+            selectedItemClick: campaign => onDeleteCampaignClick(campaign),
           },
         ]}
       />
