@@ -103,13 +103,9 @@ const Header = ({
         label={translations.createPost}
         disabled={isLoading}
         displaySkeleton={isLoading}
-        onSelectClick={selectedItem => {
-          if (typeof selectedItem.selectedItemClick !== 'undefined') {
-            // need to pass campaign directly into select methods for state to update correctly
-            selectedItem.selectedItemClick(campaignDetails);
-          }
-          return false;
-        }}
+        onSelectClick={selectedItem =>
+          selectedItem.selectedItemClick(campaignDetails)
+        }
         items={[
           {
             title: translations.createPost,
