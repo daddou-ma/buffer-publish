@@ -10,4 +10,4 @@ checks:
     config:
       threshold: 80
 exclude_patterns:
-  - "*.story.jsx"
+  - "**/*.story.jsx"
