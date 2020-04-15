@@ -44,11 +44,21 @@ const parseDateRange = (startDate, endDate) => {
   return formatDateRange({ momentStart, startFormat, momentEnd, endFormat });
 };
 
-const campaignItemParser = (item, alreadyParsed) => {
+const campaignItemParser = (item, channels, alreadyParsed) => {
   let itemContent = null;
   let headerDetails = null;
+  let filteredChannel = null;
+
   if (item.content && item.type === 'update') {
     itemContent = alreadyParsed ? item.content : postParser(item.content);
+    // Get channel for item
+    filteredChannel =
+      channels &&
+      itemContent &&
+      channels.filter(
+        channel => channel.channelId === itemContent.profileId
+      )[0];
+
     const { createdAt, profileTimezone, user, isSent } = itemContent;
     // String with the date of the update creation
     const createdAtString =
@@ -59,6 +69,11 @@ const campaignItemParser = (item, alreadyParsed) => {
       });
     // Header details to be used in the CardHeader
     headerDetails = {
+      channel: {
+        avatarUrl: filteredChannel && filteredChannel.serviceAvatar,
+        handle: filteredChannel && filteredChannel.serviceUsername,
+        type: filteredChannel && filteredChannel.serviceType,
+      },
       creatorName: user && user.name,
       avatarUrl: user && user.avatar,
       createdAt: createdAtString,
@@ -68,18 +83,24 @@ const campaignItemParser = (item, alreadyParsed) => {
 
   const result = {
     ...itemContent,
-    dueAt: itemContent ? itemContent.due_at : null,
+    isBusinessAccount: filteredChannel && filteredChannel.business,
+    hasPushNotifications:
+      filteredChannel && filteredChannel.hasPushNotifications,
+    profileService: filteredChannel && filteredChannel.serviceType,
+    profileServiceType: filteredChannel && filteredChannel.channelType,
+    isManager: filteredChannel && filteredChannel.isManager,
+    dueAt: itemContent && itemContent.due_at,
     headerDetails,
   };
 
   return result;
 };
 
-const parseCampaignItems = items => {
+const parseCampaignItems = (items, channels) => {
   if (!items) return null;
 
   return items.map(item => {
-    return campaignItemParser(item);
+    return campaignItemParser(item, channels);
   });
 };
 
@@ -91,11 +112,18 @@ const parseChannels = channels => {
       serviceId: channel.service_id,
       serviceType: channel.service_type,
       channelType: channel.channel_type,
+      channelId: channel.channel_id,
+      serviceAvatar: channel.service_avatar,
+      serviceUsername: channel.service_username,
+      isManager: channel.is_manager,
+      business: channel.business,
+      hasPushNotifications: channel.has_push_notifications,
     };
   });
 };
 
 const campaignParser = campaign => {
+  const parsedChannels = parseChannels(campaign.channels);
   return {
     _id: campaign._id,
     id: campaign._id,
@@ -110,8 +138,8 @@ const campaignParser = campaign => {
     dateRange: parseDateRange(campaign.start_date, campaign.end_date),
     sent: campaign.sent,
     scheduled: campaign.scheduled,
-    channels: parseChannels(campaign.channels),
-    items: parseCampaignItems(campaign.items),
+    channels: parsedChannels,
+    items: parseCampaignItems(campaign.items, parsedChannels),
   };
 };
 

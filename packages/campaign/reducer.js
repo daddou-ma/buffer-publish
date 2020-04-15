@@ -2,6 +2,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
+import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import {
   campaignParser,
   campaignItemParser,
@@ -139,6 +140,7 @@ export default (state = initialState, action) => {
                 content: action.post,
                 type: 'update',
               },
+              state.campaign.channels,
               true
             );
             return parsedItem;
@@ -152,7 +154,8 @@ export default (state = initialState, action) => {
       }
       return state;
     }
-    case queueActionTypes.POST_CREATED: {
+    case queueActionTypes.POST_CREATED:
+    case draftActionTypes.DRAFT_APPROVED: {
       const inScheduledPage = state.page === 'scheduled';
       const postCampaignId = action?.post?.campaignDetails?.id;
       if (
@@ -162,9 +165,10 @@ export default (state = initialState, action) => {
       ) {
         const parsedItem = campaignItemParser(
           {
-            content: action.post,
+            content: action.post || action.draft,
             type: 'update',
           },
+          state.campaign.channels,
           true
         );
         return {
@@ -217,6 +221,7 @@ export default (state = initialState, action) => {
             content: action.post,
             type: 'update',
           },
+          state.campaign.channels,
           true
         );
         const newCampaignPosts = () => {
