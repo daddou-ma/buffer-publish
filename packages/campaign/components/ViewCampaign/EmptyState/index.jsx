@@ -15,7 +15,7 @@ const EmptyStateCampaign = ({
   actions,
   sentView,
   campaign,
-  hideAnalyzeReport,
+  isUsingPublishAsTeamMember,
 }) => {
   const displayEmptyCampaign =
     !sentView && campaign?.scheduled === 0 && campaign?.sent === 0;
@@ -64,7 +64,7 @@ const EmptyStateCampaign = ({
             onClick: actions.onCreatePostClick,
           }}
           primaryAction={
-            hideAnalyzeReport ? teamMemberPrimaryAction : ownerPrimaryAction
+            isUsingPublishAsTeamMember ? teamMemberPrimaryAction : ownerPrimaryAction
           }
         />
       )}
@@ -96,11 +96,11 @@ EmptyStateCampaign.propTypes = {
     scheduled: PropTypes.number.isRequired,
     sent: PropTypes.number.isRequired,
   }).isRequired,
-  hideAnalyzeReport: PropTypes.bool,
+  isUsingPublishAsTeamMember: PropTypes.bool,
 };
 
 EmptyStateCampaign.defaultProps = {
-  hideAnalyzeReport: false,
+  isUsingPublishAsTeamMember: false,
 };
 
 export default EmptyStateCampaign;

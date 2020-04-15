@@ -27,7 +27,7 @@ import {
 const Header = ({
   translations,
   campaignDetails,
-  hideAnalyzeReport,
+  isUsingPublishAsTeamMember,
   onCreatePostClick,
   onDeleteCampaignClick,
   onEditCampaignClick,
@@ -126,7 +126,7 @@ const Header = ({
           },
         ]}
       />
-      {!hideAnalyzeReport && (
+      {!isUsingPublishAsTeamMember && (
         <ButtonWithSkeleton
           type="primary"
           icon={<ArrowRightIcon />}
@@ -163,7 +163,7 @@ Header.propTypes = {
     sent: PropTypes.number,
     lastUpdated: PropTypes.string,
   }).isRequired,
-  hideAnalyzeReport: PropTypes.bool.isRequired,
+  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,

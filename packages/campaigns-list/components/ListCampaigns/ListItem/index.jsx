@@ -20,7 +20,7 @@ import {
 
 const ListItem = ({
   campaign,
-  hideAnalyzeReport,
+  isUsingPublishAsTeamMember,
   onEditCampaignClick,
   onDeleteCampaignClick,
   onViewCampaignClick,
@@ -56,7 +56,7 @@ const ListItem = ({
 
   let campaignActionsButton;
 
-  if (hideAnalyzeReport) {
+  if (isUsingPublishAsTeamMember) {
     campaignActionsButton = (
       <Button
         onClick={viewCampaignSelectItem.selectedItemClick}
@@ -150,7 +150,7 @@ ListItem.propTypes = {
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
   goToAnalyzeReport: PropTypes.func.isRequired,
-  hideAnalyzeReport: PropTypes.bool.isRequired,
+  isUsingPublishAsTeamMember: PropTypes.bool.isRequired,
 };
 
 export default ListItem;

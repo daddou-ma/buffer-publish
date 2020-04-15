@@ -130,7 +130,7 @@ storiesOf('Campaigns|ViewCampaign', module)
       campaign={campaignDetails}
       campaignPosts={campaignPosts}
       isLoading={false}
-      hideAnalyzeReport={false}
+      isUsingPublishAsTeamMember={false}
       translations={translations.campaigns.viewCampaign}
       campaignId="id"
       hasCampaignsFlip
@@ -145,7 +145,7 @@ storiesOf('Campaigns|ViewCampaign', module)
       campaign={campaignDetails}
       campaignPosts={[]}
       isLoading={false}
-      hideAnalyzeReport={false}
+      isUsingPublishAsTeamMember={false}
       translations={translations.campaigns.viewCampaign}
       campaignId="id"
       hasCampaignsFlip
