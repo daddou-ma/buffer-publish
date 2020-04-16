@@ -65,12 +65,7 @@ const ListItem = ({
         type="secondary"
         isSplit
         label={translations.viewReport}
-        onSelectClick={selectedItem => {
-          if (typeof selectedItem.selectedItemClick !== 'undefined') {
-            selectedItem.selectedItemClick();
-          }
-          return false;
-        }}
+        onSelectClick={selectedItem => selectedItem.selectedItemClick()}
         items={[viewCampaignSelectItem, ...selectItems]}
       />
     );
@@ -123,6 +118,7 @@ const ListItem = ({
           {campaign.sent} {translations.sent}
         </Text>
       </Group>
+
       <ButtonWrapper>{campaignActionsButton}</ButtonWrapper>
     </Container>
   );

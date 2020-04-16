@@ -46,12 +46,9 @@ const Header = ({
         label={translations.createPost}
         disabled={isLoading}
         displaySkeleton={isLoading}
-        onSelectClick={selectedItem => {
-          if (typeof selectedItem.selectedItemClick !== 'undefined') {
-            selectedItem.selectedItemClick();
-          }
-          return false;
-        }}
+        onSelectClick={selectedItem =>
+          selectedItem.selectedItemClick(campaignDetails)
+        }
         items={[
           {
             title: translations.createPost,
@@ -59,13 +56,11 @@ const Header = ({
           },
           {
             title: translations.editCampaign,
-            selectedItemClick: () => onEditCampaignClick(campaignDetails.id),
+            selectedItemClick: campaign => onEditCampaignClick(campaign.id),
           },
           {
             title: translations.deleteCampaign,
-            selectedItemClick: () => {
-              onDeleteCampaignClick(campaignDetails);
-            },
+            selectedItemClick: campaign => onDeleteCampaignClick(campaign),
           },
         ]}
       />
