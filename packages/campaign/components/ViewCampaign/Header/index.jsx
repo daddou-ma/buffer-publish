@@ -34,15 +34,73 @@ const Header = ({
   onEditCampaignClick,
   goToAnalyzeReport,
   isLoading,
-}) => {
-  let buttonActionCampaigns;
-
-  if (showCampaignActions) {
-    buttonActionCampaigns = (
+}) => (
+  <Container aria-label="Campaign Details">
+    <CampaignDetails>
+      <Title>
+        <Color color={campaignDetails.color} displaySkeleton={isLoading} />
+        <Name
+          type="h2"
+          displaySkeleton={isLoading}
+          aria-label={isLoading ? 'Loading' : null}
+          aria-live="polite"
+          aria-busy={isLoading}
+        >
+          {campaignDetails.name || translations.loadingCampaignName}
+        </Name>
+      </Title>
+      <SubText>
+        {isLoading && (
+          <TextWithSkeleton
+            type="p"
+            displaySkeleton={isLoading}
+            aria-label={isLoading ? 'Loading' : null}
+            aria-live="polite"
+            aria-busy={isLoading}
+          >
+            {translations.loadingCampaignDetails}
+          </TextWithSkeleton>
+        )}
+        {!isLoading && (
+          <Fragment>
+            <Details>
+              {campaignDetails.dateRange && (
+                <Group>
+                  <Icon>
+                    <CalendarIcon size="medium" />
+                  </Icon>
+                  <Text type="p">{campaignDetails.dateRange}</Text>
+                </Group>
+              )}
+              <Group>
+                <Icon>
+                  <ClockIcon size="medium" />
+                </Icon>
+                <Text type="p">
+                  {campaignDetails.scheduled} {translations.scheduled}
+                </Text>
+              </Group>
+              <Group>
+                <Icon>
+                  <ListIcon size="medium" />
+                </Icon>
+                <Text type="p">
+                  {campaignDetails.sent} {translations.sent}
+                </Text>
+              </Group>
+            </Details>
+            <Text type="p">
+              <LastUpdated>{campaignDetails.lastUpdated}</LastUpdated>
+            </Text>
+          </Fragment>
+        )}
+      </SubText>
+    </CampaignDetails>
+    <ButtonWrapper>
       <ButtonWithSkeleton
         onClick={onCreatePostClick}
         type="secondary"
-        isSplit
+        isSplit={showCampaignActions}
         label={translations.createPost}
         disabled={isLoading}
         displaySkeleton={isLoading}
@@ -64,100 +122,22 @@ const Header = ({
           },
         ]}
       />
-    );
-  } else {
-    buttonActionCampaigns = (
-      <ButtonWithSkeleton
-        onClick={onCreatePostClick}
-        type="secondary"
-        label={translations.createPost}
-        disabled={isLoading}
-        displaySkeleton={isLoading}
-      />
-    );
-  }
-
-  return (
-    <Container aria-label="Campaign Details">
-      <CampaignDetails>
-        <Title>
-          <Color color={campaignDetails.color} displaySkeleton={isLoading} />
-          <Name
-            type="h2"
-            displaySkeleton={isLoading}
-            aria-label={isLoading ? 'Loading' : null}
-            aria-live="polite"
-            aria-busy={isLoading}
-          >
-            {campaignDetails.name || translations.loadingCampaignName}
-          </Name>
-        </Title>
-        <SubText>
-          {isLoading && (
-            <TextWithSkeleton
-              type="p"
-              displaySkeleton={isLoading}
-              aria-label={isLoading ? 'Loading' : null}
-              aria-live="polite"
-              aria-busy={isLoading}
-            >
-              {translations.loadingCampaignDetails}
-            </TextWithSkeleton>
-          )}
-          {!isLoading && (
-            <Fragment>
-              <Details>
-                {campaignDetails.dateRange && (
-                  <Group>
-                    <Icon>
-                      <CalendarIcon size="medium" />
-                    </Icon>
-                    <Text type="p">{campaignDetails.dateRange}</Text>
-                  </Group>
-                )}
-                <Group>
-                  <Icon>
-                    <ClockIcon size="medium" />
-                  </Icon>
-                  <Text type="p">
-                    {campaignDetails.scheduled} {translations.scheduled}
-                  </Text>
-                </Group>
-                <Group>
-                  <Icon>
-                    <ListIcon size="medium" />
-                  </Icon>
-                  <Text type="p">
-                    {campaignDetails.sent} {translations.sent}
-                  </Text>
-                </Group>
-              </Details>
-              <Text type="p">
-                <LastUpdated>{campaignDetails.lastUpdated}</LastUpdated>
-              </Text>
-            </Fragment>
-          )}
-        </SubText>
-      </CampaignDetails>
-      <ButtonWrapper>
-        {buttonActionCampaigns}
-        {!hideAnalyzeReport && (
-          <ButtonWithSkeleton
-            type="primary"
-            icon={<ArrowRightIcon />}
-            iconEnd
-            onClick={() => {
-              goToAnalyzeReport(campaignDetails);
-            }}
-            displaySkeleton={isLoading}
-            disabled={!campaignDetails.dateRange || isLoading}
-            label={translations.viewReport}
-          />
-        )}
-      </ButtonWrapper>
-    </Container>
-  );
-};
+      {!hideAnalyzeReport && (
+        <ButtonWithSkeleton
+          type="primary"
+          icon={<ArrowRightIcon />}
+          iconEnd
+          onClick={() => {
+            goToAnalyzeReport(campaignDetails);
+          }}
+          displaySkeleton={isLoading}
+          disabled={!campaignDetails.dateRange || isLoading}
+          label={translations.viewReport}
+        />
+      )}
+    </ButtonWrapper>
+  </Container>
+);
 
 Header.propTypes = {
   translations: PropTypes.shape({
