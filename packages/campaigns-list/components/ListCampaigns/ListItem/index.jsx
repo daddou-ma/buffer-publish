@@ -54,10 +54,10 @@ const ListItem = ({
     campaignId: campaign.id,
   });
 
-  let campaignActionsButton;
+  let CampaignActionsButton;
 
   if (showCampaignActions) {
-    campaignActionsButton = (
+    CampaignActionsButton = (
       <Button
         onClick={() => {
           goToAnalyzeReport(campaign);
@@ -70,7 +70,7 @@ const ListItem = ({
       />
     );
   } else {
-    campaignActionsButton = (
+    CampaignActionsButton = (
       <Button
         onClick={viewCampaignSelectItem.selectedItemClick}
         type="secondary"
@@ -119,7 +119,7 @@ const ListItem = ({
         </Text>
       </Group>
 
-      <ButtonWrapper>{campaignActionsButton}</ButtonWrapper>
+      <ButtonWrapper>{CampaignActionsButton}</ButtonWrapper>
     </Container>
   );
 };
