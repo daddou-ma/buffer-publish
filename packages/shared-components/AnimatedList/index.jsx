@@ -21,10 +21,10 @@ const animation = ({ numberItems }) =>
 
 const createCSS = ({ numberItems }) => {
   let styles = '';
-  for (let i = 1; i < numberItems + 1; i += 1) {
+  for (let i = 0; i < numberItems + 1; i += 1) {
     styles += `
      > :nth-child(${i}){
-        animation-delay: ${0.5 * (i - 1)}s  ; 
+        animation-delay: ${0.5 * i}s  ; 
      }
    `;
   }

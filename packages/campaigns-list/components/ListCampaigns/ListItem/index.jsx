@@ -101,7 +101,8 @@ const ListItem = ({
           <ClockIcon size="medium" />
         </Icon>
         <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
-          {campaign.scheduled} {translations.scheduled}
+          {campaign.scheduled}
+          {displaySkeleton ? 'loading' : ` ${translations.scheduled}`}
         </TextWithSkeleton>
       </Group>
       <Group>
@@ -109,7 +110,8 @@ const ListItem = ({
           <ListIcon size="medium" />
         </Icon>
         <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
-          {campaign.sent} {translations.sent}
+          {campaign.sent}
+          {displaySkeleton ? 'loading' : ` ${translations.sent}`}
         </TextWithSkeleton>
       </Group>
       <ButtonWrapper>
