@@ -33,7 +33,7 @@ const SkeletonList = ({ translations, hideAnalyzeReport }) => {
       displaySkeleton
     />
   ));
-  return <StyledList numberItems={numberItems.length}>{listItems}</StyledList>;
+  return <StyledList>{listItems}</StyledList>;
 };
 
 SkeletonList.propTypes = {

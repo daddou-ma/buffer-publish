@@ -4,7 +4,7 @@ import ExamplePost from '../ExamplePost';
 
 const SkeletonPosts = () => {
   return (
-    <AnimatedList numberItems={2}>
+    <AnimatedList>
       <ExamplePost displaySkeleton />
       <ExamplePost displaySkeleton />
     </AnimatedList>

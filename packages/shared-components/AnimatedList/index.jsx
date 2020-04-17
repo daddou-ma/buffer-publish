@@ -42,12 +42,12 @@ const StyledList = styled.span`
   ${createCSS}
 `;
 
-const AnimatedList = ({ numberItems, children }) => (
-  <StyledList numberItems={numberItems}>{children}</StyledList>
-);
+const AnimatedList = ({ children }) => {
+  const numberItems = React.Children.count(children);
+  return <StyledList numberItems={numberItems}>{children}</StyledList>;
+};
 
 AnimatedList.propTypes = {
-  numberItems: PropTypes.number.isRequired,
   children: PropTypes.node.isRequired,
 };
 

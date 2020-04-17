@@ -6,13 +6,13 @@ import AnimatedList from './index';
 storiesOf('Animated List', module)
   .addDecorator(withA11y)
   .add('with 2 elements', () => (
-    <AnimatedList numberItems={2}>
+    <AnimatedList>
       <p>List item 1</p>
       <p>List item 2</p>
     </AnimatedList>
   ))
   .add('with 4 elements', () => (
-    <AnimatedList numberItems={4}>
+    <AnimatedList>
       <p>List item 1</p>
       <p>List item 2</p>
       <p>List item 3</p>
