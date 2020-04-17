@@ -20,7 +20,7 @@ import {
 
 const ListItem = ({
   campaign,
-  hideAnalyzeReport,
+  showCampaignActions,
   onEditCampaignClick,
   onDeleteCampaignClick,
   onViewCampaignClick,
@@ -53,6 +53,31 @@ const ListItem = ({
   const campaignRoute = campaignScheduled.getRoute({
     campaignId: campaign.id,
   });
+
+  let CampaignActionsButton;
+
+  if (showCampaignActions) {
+    CampaignActionsButton = (
+      <Button
+        onClick={() => {
+          goToAnalyzeReport(campaign);
+        }}
+        type="secondary"
+        isSplit
+        label={translations.viewReport}
+        onSelectClick={selectedItem => selectedItem.selectedItemClick()}
+        items={[viewCampaignSelectItem, ...selectItems]}
+      />
+    );
+  } else {
+    CampaignActionsButton = (
+      <Button
+        onClick={viewCampaignSelectItem.selectedItemClick}
+        type="secondary"
+        label={translations.viewCampaign}
+      />
+    );
+  }
 
   return (
     <Container>
@@ -93,30 +118,8 @@ const ListItem = ({
           {campaign.sent} {translations.sent}
         </Text>
       </Group>
-      <ButtonWrapper>
-        <Button
-          onClick={
-            hideAnalyzeReport
-              ? viewCampaignSelectItem.selectedItemClick
-              : () => {
-                  goToAnalyzeReport(campaign);
-                }
-          }
-          type="secondary"
-          isSplit
-          label={
-            hideAnalyzeReport
-              ? translations.viewCampaign
-              : translations.viewReport
-          }
-          onSelectClick={selectedItem => selectedItem.selectedItemClick()}
-          items={
-            hideAnalyzeReport
-              ? selectItems
-              : [viewCampaignSelectItem, ...selectItems]
-          }
-        />
-      </ButtonWrapper>
+
+      <ButtonWrapper>{CampaignActionsButton}</ButtonWrapper>
     </Container>
   );
 };
@@ -143,7 +146,7 @@ ListItem.propTypes = {
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
   goToAnalyzeReport: PropTypes.func.isRequired,
-  hideAnalyzeReport: PropTypes.bool.isRequired,
+  showCampaignActions: PropTypes.bool.isRequired,
 };
 
 export default ListItem;
