@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { QueueItems, Tabs, Tab } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import TabTag from '@bufferapp/publish-tabs/components/TabTag';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import Header from './Header';
 import SkeletonPosts from './SkeletonPosts';
@@ -22,6 +21,7 @@ const ViewCampaign = ({
   isLoading,
   hideSkeletonHeader,
   hideAnalyzeReport,
+  showCampaignActions,
   translations,
   campaignId,
   hasCampaignsFlip,
@@ -59,6 +59,7 @@ const ViewCampaign = ({
       <Header
         campaignDetails={campaign}
         hideAnalyzeReport={hideAnalyzeReport}
+        showCampaignActions={showCampaignActions}
         translations={translations}
         onCreatePostClick={actions.onCreatePostClick}
         onDeleteCampaignClick={actions.onDeleteCampaignClick}
@@ -75,7 +76,6 @@ const ViewCampaign = ({
           <Tab tabId="scheduled">{translations.scheduled}</Tab>
           <Tab tabId="sent">
             {translations.sent}
-            <TabTag type="new" labelName="Coming Soon" />
           </Tab>
         </Tabs>
       </nav>
@@ -123,6 +123,7 @@ ViewCampaign.propTypes = {
   campaign: PropTypes.object.isRequired, // eslint-disable-line
   campaignPosts: PropTypes.array, // eslint-disable-line
   hideAnalyzeReport: PropTypes.bool.isRequired,
+  showCampaignActions: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   hideSkeletonHeader: PropTypes.bool.isRequired,
   campaignId: PropTypes.string.isRequired,

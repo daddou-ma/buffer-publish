@@ -28,6 +28,7 @@ const Header = ({
   translations,
   campaignDetails,
   hideAnalyzeReport,
+  showCampaignActions,
   onCreatePostClick,
   onDeleteCampaignClick,
   onEditCampaignClick,
@@ -99,16 +100,13 @@ const Header = ({
       <ButtonWithSkeleton
         onClick={onCreatePostClick}
         type="secondary"
-        isSplit
+        isSplit={showCampaignActions}
         label={translations.createPost}
         disabled={isLoading}
         displaySkeleton={isLoading}
-        onSelectClick={selectedItem => {
-          if (typeof selectedItem.selectedItemClick !== 'undefined') {
-            selectedItem.selectedItemClick();
-          }
-          return false;
-        }}
+        onSelectClick={selectedItem =>
+          selectedItem.selectedItemClick(campaignDetails)
+        }
         items={[
           {
             title: translations.createPost,
@@ -116,13 +114,11 @@ const Header = ({
           },
           {
             title: translations.editCampaign,
-            selectedItemClick: () => onEditCampaignClick(campaignDetails.id),
+            selectedItemClick: campaign => onEditCampaignClick(campaign.id),
           },
           {
             title: translations.deleteCampaign,
-            selectedItemClick: () => {
-              onDeleteCampaignClick(campaignDetails);
-            },
+            selectedItemClick: campaign => onDeleteCampaignClick(campaign),
           },
         ]}
       />
@@ -164,6 +160,7 @@ Header.propTypes = {
     lastUpdated: PropTypes.string,
   }).isRequired,
   hideAnalyzeReport: PropTypes.bool.isRequired,
+  showCampaignActions: PropTypes.bool.isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,
   onEditCampaignClick: PropTypes.func.isRequired,
