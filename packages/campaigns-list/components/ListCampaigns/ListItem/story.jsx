@@ -77,4 +77,17 @@ storiesOf('Campaigns|ListItem', module)
       goToAnalyzeReport={action('go to analyze report')}
       hideAnalyzeReport={false}
     />
+  ))
+  .add('Campaign list item skeleton', () => (
+    <ListItem
+      campaign={campaign}
+      isEvenItem={false}
+      translations={translations.campaigns.viewCampaign}
+      onViewCampaignClick={action('view campaign')}
+      onDeleteCampaignClick={action('delete campaign')}
+      onEditCampaignClick={action('edit campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
+      hideAnalyzeReport={false}
+      displaySkeleton
+    />
   ));
