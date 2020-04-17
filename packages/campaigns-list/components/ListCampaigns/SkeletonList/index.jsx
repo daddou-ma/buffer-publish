@@ -21,31 +21,20 @@ const skeletonCampaign = {
   dateRange: null,
 };
 
-const SkeletonList = ({ translations, hideAnalyzeReport }) => (
-  <StyledList numberItems={3}>
+const numberItems = [1, 2, 3, 4, 5];
+
+const SkeletonList = ({ translations, hideAnalyzeReport }) => {
+  const listItems = numberItems.map(number => (
     <ListItem
-      key="1"
+      key={`skeleton-${number}`}
       translations={translations}
       campaign={skeletonCampaign}
       hideAnalyzeReport={hideAnalyzeReport}
       displaySkeleton
     />
-    <ListItem
-      key="2"
-      translations={translations}
-      campaign={skeletonCampaign}
-      hideAnalyzeReport={hideAnalyzeReport}
-      displaySkeleton
-    />
-    <ListItem
-      key="3"
-      translations={translations}
-      campaign={skeletonCampaign}
-      hideAnalyzeReport={hideAnalyzeReport}
-      displaySkeleton
-    />
-  </StyledList>
-);
+  ));
+  return <StyledList numberItems={numberItems.length}>{listItems}</StyledList>;
+};
 
 SkeletonList.propTypes = {
   translations: PropTypes.object.isRequired, // eslint-disable-line

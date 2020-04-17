@@ -161,15 +161,19 @@ ListItem.propTypes = {
     dateRange: PropTypes.string,
   }).isRequired,
   displaySkeleton: PropTypes.bool,
-  onViewCampaignClick: PropTypes.func.isRequired,
-  onDeleteCampaignClick: PropTypes.func.isRequired,
-  onEditCampaignClick: PropTypes.func.isRequired,
-  goToAnalyzeReport: PropTypes.func.isRequired,
+  onViewCampaignClick: PropTypes.func,
+  onDeleteCampaignClick: PropTypes.func,
+  onEditCampaignClick: PropTypes.func,
+  goToAnalyzeReport: PropTypes.func,
   hideAnalyzeReport: PropTypes.bool.isRequired,
 };
 
 ListItem.defaultProps = {
   displaySkeleton: false,
+  onViewCampaignClick: () => {},
+  onDeleteCampaignClick: () => {},
+  onEditCampaignClick: () => {},
+  goToAnalyzeReport: () => {},
 };
 
 export default ListItem;
