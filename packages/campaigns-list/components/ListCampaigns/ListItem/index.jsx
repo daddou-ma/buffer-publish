@@ -22,7 +22,7 @@ import {
 
 const ListItem = ({
   campaign,
-  hideAnalyzeReport,
+  showCampaignActions,
   onEditCampaignClick,
   onDeleteCampaignClick,
   onViewCampaignClick,
@@ -58,6 +58,34 @@ const ListItem = ({
   });
 
   const NameWrapper = displaySkeleton ? NameContainer : StyledLink;
+  let CampaignActionsButton;
+
+  if (showCampaignActions) {
+    CampaignActionsButton = (
+      <ButtonWithSkeleton
+        onClick={() => {
+          goToAnalyzeReport(campaign);
+        }}
+        type="secondary"
+        isSplit
+        label={translations.viewReport}
+        onSelectClick={selectedItem => selectedItem.selectedItemClick()}
+        items={[viewCampaignSelectItem, ...selectItems]}
+        disabled={displaySkeleton}
+        displaySkeleton={displaySkeleton}
+      />
+    );
+  } else {
+    CampaignActionsButton = (
+      <ButtonWithSkeleton
+        onClick={viewCampaignSelectItem.selectedItemClick}
+        type="secondary"
+        label={translations.viewCampaign}
+        disabled={displaySkeleton}
+        displaySkeleton={displaySkeleton}
+      />
+    );
+  }
 
   return (
     <Container>
@@ -114,32 +142,7 @@ const ListItem = ({
           {displaySkeleton ? 'loading' : ` ${translations.sent}`}
         </TextWithSkeleton>
       </Group>
-      <ButtonWrapper>
-        <ButtonWithSkeleton
-          onClick={
-            hideAnalyzeReport
-              ? viewCampaignSelectItem.selectedItemClick
-              : () => {
-                  goToAnalyzeReport(campaign);
-                }
-          }
-          type="secondary"
-          isSplit
-          label={
-            hideAnalyzeReport
-              ? translations.viewCampaign
-              : translations.viewReport
-          }
-          onSelectClick={selectedItem => selectedItem.selectedItemClick()}
-          items={
-            hideAnalyzeReport
-              ? selectItems
-              : [viewCampaignSelectItem, ...selectItems]
-          }
-          disabled={displaySkeleton}
-          displaySkeleton={displaySkeleton}
-        />
-      </ButtonWrapper>
+      <ButtonWrapper>{CampaignActionsButton}</ButtonWrapper>
     </Container>
   );
 };
@@ -167,7 +170,7 @@ ListItem.propTypes = {
   onDeleteCampaignClick: PropTypes.func,
   onEditCampaignClick: PropTypes.func,
   goToAnalyzeReport: PropTypes.func,
-  hideAnalyzeReport: PropTypes.bool.isRequired,
+  showCampaignActions: PropTypes.bool.isRequired,
 };
 
 ListItem.defaultProps = {

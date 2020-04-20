@@ -49,7 +49,7 @@ const ListCampaigns = ({
   onViewCampaignClick,
   goToAnalyzeReport,
   onOpenCreateCampaignClick,
-  hideAnalyzeReport,
+  showCampaignActions,
   hasCampaignsFlip,
   fetchCampaignsIfNeeded,
   isLoading,
@@ -83,13 +83,15 @@ const ListCampaigns = ({
           >
             Campaigns
           </TextWithSkeleton>
-          <ButtonWithSkeleton
-            type="primary"
-            label="Create Campaign"
-            onClick={onOpenCreateCampaignClick}
-            disabled={isLoading}
-            displaySkeleton={isLoading}
-          />
+          {showCampaignActions && (
+            <ButtonWithSkeleton
+              type="primary"
+              label="Create Campaign"
+              onClick={onOpenCreateCampaignClick}
+              disabled={isLoading}
+              displaySkeleton={isLoading}
+            />
+          )}
         </Header>
         {!isLoading && (
           <List
@@ -99,13 +101,13 @@ const ListCampaigns = ({
             onViewCampaignClick={onViewCampaignClick}
             goToAnalyzeReport={goToAnalyzeReport}
             translations={translations.viewCampaign}
-            hideAnalyzeReport={hideAnalyzeReport}
+            showCampaignActions={showCampaignActions}
           />
         )}
         {isLoading && (
           <SkeletonList
             translations={translations.viewCampaign}
-            hideAnalyzeReport={hideAnalyzeReport}
+            showCampaignActions={showCampaignActions}
           />
         )}
       </Container>
@@ -121,7 +123,7 @@ ListCampaigns.propTypes = {
   onDeleteCampaignClick: PropTypes.func,
   onViewCampaignClick: PropTypes.func,
   goToAnalyzeReport: PropTypes.func,
-  hideAnalyzeReport: PropTypes.bool.isRequired,
+  showCampaignActions: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,

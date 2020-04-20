@@ -10,6 +10,6 @@ storiesOf('Campaigns|ListCampaigns/SkeletonList', module)
   .add('Skeleton list of campaigns', () => (
     <SkeletonList
       translations={translations.campaigns.viewCampaign}
-      hideAnalyzeReport={false}
+      showCampaignActions
     />
   ));
