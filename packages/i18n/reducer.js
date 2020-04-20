@@ -29,15 +29,11 @@ export default (state = initialState, action) => {
 };
 
 export const actions = {
-  setLocale: ({
-    locale,
-  }) => ({
+  setLocale: ({ locale }) => ({
     type: actionTypes.SET_LOCALE,
     locale,
   }),
-  setTranslations: ({
-    translations,
-  }) => ({
+  setTranslations: ({ translations }) => ({
     type: actionTypes.SET_TRANSLATIONS,
     translations,
   }),

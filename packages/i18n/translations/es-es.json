@@ -1,7 +1,7 @@
 {
   "example": {
-    "loggedIn": "Logged In...",
-    "loggedOut": "Logged Out..."
+    "loggedIn": "Conectado...",
+    "loggedOut": "Desconectado..."
   },
   "upload-zone": {
     "buttonTitle": "Upload media",
@@ -12,16 +12,16 @@
     "invalidFileSize": "We can't upload \"{fileName}\" because it's too large: we can only handle files of that type up to {formattedMaxSize}. Could you try a smaller file?"
   },
   "profile-sidebar": {
-    "connectButton": "Manage Social Accounts"
+    "connectButton": "Manejar Redes Sociales"
   },
   "default-page": {
-    "connectButton": "Connect Your Social Accounts",
+    "connectButton": "Conecta tu Red Social",
     "defaultTitle": "Let's get your account set up!"
   },
   "campaigns": {
-    "title": "Campaigns",
+    "title": "Campañas",
     "emptyState": {
-      "title": "Categorize your content using Campaigns",
+      "title": "Catgoriza tu contenido usango Campañas",
       "subtext": "With Campaigns you can organize your social media posts into themes or topics and track their success.",
       "item1": "Create a healthy mix of content.",
       "item2": "Keep your content organized across social channels.",
@@ -31,28 +31,28 @@
       "imageTag": "Example of campaign with multiple posts scheduled."
     },
     "campaignForm": {
-      "createTitle": "Create Campaign",
-      "editTitle": "Edit Campaign",
-      "name": "Name",
-      "placeholder": "Add campaign name",
+      "createTitle": "Crear Campaña",
+      "editTitle": "Editar Campaña",
+      "name": "Nombre",
+      "placeholder": "Nombre de la campaña",
       "color": "Color",
       "notice1": "Campaign content is visible to everyone in your organization. ",
       "notice2": "Find out more",
       "notice3": " in our FAQ.",
-      "saveCampaign": "Save Campaign",
-      "cancel": "Cancel",
-      "ariaLabel": "Name input for campaign form"
+      "saveCampaign": "Guardar Campaña",
+      "cancel": "Cancelar",
+      "ariaLabel": "Campo nombre para el formulario de campaña"
     },
     "viewCampaign": {
-      "viewCampaign": "View Campaign",
-      "viewReport": "View Report",
-      "editCampaign": "Edit Campaign",
-      "deleteCampaign": "Delete Campaign",
-      "createPost": "Create Post",
-      "scheduled": "Scheduled",
-      "sent": "Sent",
-      "loadingCampaignName": "Loading campaign name, please hold on",
-      "loadingCampaignDetails": "Loading campaign details such as date and counters, please hold on",
+      "viewCampaign": "Ver Campaña",
+      "viewReport": "Ver Reporte",
+      "editCampaign": "Editar Campaña",
+      "deleteCampaign": "Eliminar Campaña",
+      "createPost": "Crear Post",
+      "scheduled": "Agendado",
+      "sent": "Enviado",
+      "loadingCampaignName": "Cargando nombre de la campaña, por favor espere",
+      "loadingCampaignDetails": "Cargando detalles de la campaña, como fechas y contadores, por favor espere",
       "emptySentPosts": {
         "title": "Standing by for sent posts...",
         "subtitle": "Once your scheduled posts are published, you’ll see them here with some basic post analytics."
