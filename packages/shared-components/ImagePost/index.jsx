@@ -116,6 +116,7 @@ const ImagePost = ({
       locationName={locationName}
       sourceUrl={sourceUrl}
       subprofileID={subprofileID}
+      userTags={userTags}
     >
       {children}
     </Post>
