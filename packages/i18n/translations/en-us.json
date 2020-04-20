@@ -3,6 +3,15 @@
     "loggedIn": "Logged In...",
     "loggedOut": "Logged Out..."
   },
+  "preferences": {
+    "menu": {
+      "general": "General",
+      "security": "Security",
+      "notifications": "Notifications",
+      "appsAndExtras": "Apps & Extras",
+      "billing": "Billing"
+    }
+  },
   "upload-zone": {
     "buttonTitle": "Upload media",
     "invalidFormatCantUseAnyFiles": "We can't quite use any of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",

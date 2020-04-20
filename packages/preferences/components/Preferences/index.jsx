@@ -54,6 +54,7 @@ const Preferences = ({
   selectedProfileId,
   profiles,
   isOnBusinessTrial,
+  translations,
 }) => (
   <div
     style={{
@@ -72,12 +73,16 @@ const Preferences = ({
     >
       <nav id="tabs">
         <Tabs selectedTabId={selectedTabId} onTabClick={onTabClick}>
-          <Tab tabId={TabsNames.GENERAL}>General</Tab>
-          <Tab tabId={TabsNames.SECURITY}>Security</Tab>
-          <Tab tabId={TabsNames.NOTIFICATIONS}>Notifications</Tab>
-          <Tab tabId={TabsNames.APPS_EXTRAS}>Apps & Extras</Tab>
+          <Tab tabId={TabsNames.GENERAL}>{translations.menu.general}</Tab>
+          <Tab tabId={TabsNames.SECURITY}>{translations.menu.security}</Tab>
+          <Tab tabId={TabsNames.NOTIFICATIONS}>
+            {translations.menu.notifications}
+          </Tab>
+          <Tab tabId={TabsNames.APPS_EXTRAS}>
+            {translations.menu.appsAndExtras}
+          </Tab>
           <Tab tabId={TabsNames.BILLING} onClick={() => openBillingWindow()}>
-            Billing
+            {translations.menu.billing}
           </Tab>
         </Tabs>
       </nav>
@@ -114,11 +119,11 @@ Preferences.propTypes = {
   selectedProfileId: ProfileSidebarComponent.propTypes.selectedProfileId,
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
   isOnBusinessTrial: PropTypes.bool.isRequired,
+  translations: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 Preferences.defaultProps = {
   selectedProfileId: undefined,
-  profiles: [],
 };
 
 export default Preferences;

@@ -21,6 +21,7 @@ export default connect(
       selectedTabId: preferenceId,
       selectedProfileId: state.profileSidebar.selectedProfileId,
       isOnBusinessTrial: state.profileSidebar.isOnBusinessTrial,
+      translations: state.i18n.translations.preferences,
     };
   },
   dispatch => ({
