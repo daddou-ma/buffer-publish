@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import createHistory from 'history/createHashHistory';
 import store from '@bufferapp/publish-store';
+import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import Preferences from './index';
 
 const history = createHistory();
@@ -19,7 +20,8 @@ storiesOf('Preferences', module)
   ))
   .add('default', () => (
     <Preferences
-      selectedTabId={'general'}
+      translations={translations.preferences}
+      selectedTabId="general"
       onTabClick={action('onTabClick')}
       onBackToDashboardClick={e => {
         e.preventDefault();
@@ -30,7 +32,8 @@ storiesOf('Preferences', module)
   ))
   .add('with tab selected', () => (
     <Preferences
-      selectedTabId={'security'}
+      translations={translations.preferences}
+      selectedTabId="security"
       onTabClick={action('onTabClick')}
       onBackToDashboardClick={e => {
         e.preventDefault();
@@ -41,7 +44,8 @@ storiesOf('Preferences', module)
   ))
   .add('with unknown tab', () => (
     <Preferences
-      selectedTabId={'generalz'}
+      translations={translations.preferences}
+      selectedTabId="generalz"
       onTabClick={action('onTabClick')}
       onBackToDashboardClick={e => {
         e.preventDefault();
