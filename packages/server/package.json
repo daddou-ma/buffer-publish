@@ -11,6 +11,7 @@
     "@bufferapp/buffer-rpc": "1.1.0",
     "@bufferapp/micro-rpc-client": "1.0.0",
     "@bufferapp/micro-rpc": "0.1.7",
+    "@bufferapp/bufflog": "0.0.6",
     "@bufferapp/logger": "0.7.0",
     "@bufferapp/session-manager": "0.7.5",
     "@bufferapp/shutdown-helper": "0.2.0",
