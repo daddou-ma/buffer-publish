@@ -45,56 +45,24 @@ const renderTag = tag => {
 };
 
 const ImagePost = ({
-  isConfirmingDelete,
-  isDeleting,
-  isWorking,
-  imageSrc,
-  links,
-  onDeleteConfirmClick,
-  onEditClick,
-  onShareNowClick,
-  onRequeueClick,
-  postDetails,
-  text,
-  tag,
-  retweetProfile,
-  isLightboxOpen,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
-  draggable,
-  dragging,
-  hovering,
-  isOver,
-  statistics,
-  profileService,
-  profileServiceType,
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
-  subprofiles,
-  serviceLink,
-  isSent,
-  isManager,
-  isBusinessAccount,
-  isPastReminder,
-  day,
-  dueTime,
-  sharedBy,
-  basic,
-  commentEnabled,
-  commentText,
-  hasCommentEnabled,
-  hasFirstCommentFlip,
-  hasPushNotifications,
-  onSetRemindersClick,
   service_user_tags: userTags,
-  campaignDetails,
-  onCampaignTagClick,
-  hasCampaignsFeature,
   ...props
 }) => {
+  const {
+    basic,
+    text,
+    links,
+    onImageClick,
+    imageSrc,
+    isLightboxOpen,
+    onImageClickPrev,
+    onImageClickNext,
+    onImageClose,
+    tag,
+  } = props;
   const children = (
     <div style={postContentStyle}>
       <span style={postContentTextStyle}>
@@ -145,48 +113,9 @@ const ImagePost = ({
   return (
     <Post
       {...props}
-      isConfirmingDelete={isConfirmingDelete}
-      isDeleting={isDeleting}
-      isWorking={isWorking}
-      imageSrc={imageSrc}
-      links={links}
-      onDeleteConfirmClick={onDeleteConfirmClick}
-      onEditClick={onEditClick}
-      onShareNowClick={onShareNowClick}
-      onRequeueClick={onRequeueClick}
-      postDetails={postDetails}
-      text={text}
-      retweetProfile={retweetProfile}
-      draggable={draggable}
-      dragging={dragging}
-      hovering={hovering}
-      isOver={isOver}
-      statistics={statistics}
-      profileService={profileService}
-      profileServiceType={profileServiceType}
       locationName={locationName}
       sourceUrl={sourceUrl}
       subprofileID={subprofileID}
-      subprofiles={subprofiles}
-      serviceLink={serviceLink}
-      isSent={isSent}
-      isManager={isManager}
-      isBusinessAccount={isBusinessAccount}
-      isPastReminder={isPastReminder}
-      day={day}
-      dueTime={dueTime}
-      sharedBy={sharedBy}
-      basic={basic}
-      commentEnabled={commentEnabled}
-      commentText={commentText}
-      hasCommentEnabled={hasCommentEnabled}
-      hasFirstCommentFlip={hasFirstCommentFlip}
-      hasPushNotifications={hasPushNotifications}
-      onSetRemindersClick={onSetRemindersClick}
-      hasUserTags={userTags}
-      campaignDetails={campaignDetails}
-      onCampaignTagClick={onCampaignTagClick}
-      hasCampaignsFeature={hasCampaignsFeature}
     >
       {children}
     </Post>
@@ -211,9 +140,6 @@ ImagePost.propTypes = {
   onImageClickNext: PropTypes.func,
   onImageClickPrev: PropTypes.func,
   onImageClose: PropTypes.func,
-  isSent: PropTypes.bool,
-  isManager: PropTypes.bool,
-  isPastReminder: PropTypes.bool,
 };
 
 ImagePost.defaultProps = ImagePost.defaultProps;
