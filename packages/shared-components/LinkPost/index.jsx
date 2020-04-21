@@ -34,49 +34,12 @@ const linkUrlStyle = {
 };
 
 const LinkPost = ({
-  isConfirmingDelete,
-  isDeleting,
-  isWorking,
-  links,
-  linkAttachment,
-  onDeleteConfirmClick,
-  onEditClick,
-  onShareNowClick,
-  onRequeueClick,
-  postDetails,
-  scheduledAt,
-  text,
-  draggable,
-  dragging,
-  hovering,
-  isOver,
-  statistics,
-  subprofiles,
-  profileServiceType,
-  profileService,
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
-  serviceLink,
-  isSent,
-  isManager,
-  isBusinessAccount,
-  isPastReminder,
-  day,
-  dueTime,
-  sharedBy,
-  basic,
-  commentEnabled,
-  commentText,
-  hasCommentEnabled,
-  hasFirstCommentFlip,
-  hasPushNotifications,
-  onSetRemindersClick,
-  campaignDetails,
-  onCampaignTagClick,
-  hasCampaignsFeature,
   ...props
 }) => {
+  const { basic, links, linkAttachment, text } = props;
   const children = (
     <div style={postContentStyle}>
       <div style={postContentTextStyle}>
@@ -133,47 +96,9 @@ const LinkPost = ({
   return (
     <Post
       {...props}
-      isConfirmingDelete={isConfirmingDelete}
-      isDeleting={isDeleting}
-      isWorking={isWorking}
-      links={links}
-      linkAttachment={linkAttachment}
-      onDeleteConfirmClick={onDeleteConfirmClick}
-      onEditClick={onEditClick}
-      onShareNowClick={onShareNowClick}
-      postDetails={postDetails}
-      scheduledAt={scheduledAt}
-      text={text}
-      draggable={draggable}
-      dragging={dragging}
-      hovering={hovering}
-      isOver={isOver}
-      onRequeueClick={onRequeueClick}
-      statistics={statistics}
-      profileService={profileService}
-      profileServiceType={profileServiceType}
       locationName={locationName}
-      subprofiles={subprofiles}
-      subprofileID={subprofileID}
       sourceUrl={sourceUrl}
-      serviceLink={serviceLink}
-      isSent={isSent}
-      isManager={isManager}
-      isBusinessAccount={isBusinessAccount}
-      isPastReminder={isPastReminder}
-      day={day}
-      dueTime={dueTime}
-      sharedBy={sharedBy}
-      commentEnabled={commentEnabled}
-      commentText={commentText}
-      hasCommentEnabled={hasCommentEnabled}
-      hasFirstCommentFlip={hasFirstCommentFlip}
-      hasPushNotifications={hasPushNotifications}
-      onSetRemindersClick={onSetRemindersClick}
-      basic={basic}
-      campaignDetails={campaignDetails}
-      onCampaignTagClick={onCampaignTagClick}
-      hasCampaignsFeature={hasCampaignsFeature}
+      subprofileID={subprofileID}
     >
       {children}
     </Post>
@@ -197,9 +122,6 @@ LinkPost.propTypes = {
     thumbnailUrl: PropTypes.string,
   }).isRequired,
   text: PropTypes.string.isRequired,
-  isSent: PropTypes.bool,
-  isManager: PropTypes.bool,
-  isPastReminder: PropTypes.bool,
 };
 
 LinkPost.defaultProps = Post.defaultProps;
