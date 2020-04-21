@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, TextArea } from '@bufferapp/ui';
-import { gray } from '@bufferapp/ui/style/colors';
+import { grayDark } from '@bufferapp/ui/style/colors';
 import { fontSize } from '@bufferapp/ui/style/fonts';
 import { translationsPropTypes } from '../../utils/commonPropTypes';
 
@@ -14,7 +14,7 @@ const NoteWrapper = styled.div`
 `;
 
 const SubtextWrapper = styled.span`
-  color: ${gray};
+  color: ${grayDark};
   margin: 8px 0px;
   font-size: ${fontSize};
 `;

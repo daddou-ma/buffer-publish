@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Button } from '@bufferapp/ui';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
+import { grayDark } from '@bufferapp/ui/style/colors';
 import { storyPropTypes } from '../../utils/commonPropTypes';
 
 const ContentWrapper = styled.div`
@@ -25,6 +26,7 @@ const Title = styled(Text)`
 
 const Note = styled(Text)`
   margin-top: 8px;
+  color: ${grayDark};
 `;
 
 const ViewNote = ({ onEditNoteClick, story, translations }) => {
@@ -33,11 +35,7 @@ const ViewNote = ({ onEditNoteClick, story, translations }) => {
     <ContentWrapper>
       <Title type="p">{translations.noteTitle}</Title>
       <NoteWrapper>
-        {hasNoNote && (
-          <Note type="p" color="gray">
-            {translations.noteExplanation}
-          </Note>
-        )}
+        {hasNoNote && <Note type="p">{translations.noteExplanation}</Note>}
         {!hasNoNote && <Note type="p">{story.note}</Note>}
       </NoteWrapper>
       <Button
