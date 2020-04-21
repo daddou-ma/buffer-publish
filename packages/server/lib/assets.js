@@ -35,6 +35,22 @@ function getStaticAssets({ isProduction }) {
   }
 }
 
+/**
+ * Webpack runtime script, inline into the HTML in prod, locally just include the script:
+ * https://survivejs.com/webpack/optimizing/separating-manifest/
+ */
+const getRuntimeScript = ({ isProduction, staticAssets }) => {
+  if (isProduction) {
+    const runtimeFilename = staticAssets['runtime.js'].split('/').pop();
+    return `<script>${fs.readFileSync(
+      join(__dirname, runtimeFilename),
+      'utf8'
+    )}</script>`;
+  }
+  return `<script crossorigin src="${staticAssets['runtime.js']}"></script>`;
+};
+
 module.exports = {
   getStaticAssets,
+  getRuntimeScript,
 };

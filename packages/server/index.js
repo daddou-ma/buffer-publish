@@ -20,15 +20,12 @@ const express = require('express');
 const bufflog = require('@bufferapp/bufflog');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const { join } = require('path');
 const shutdownHelper = require('@bufferapp/shutdown-helper');
 const {
   setRequestSessionMiddleware,
   validateSessionMiddleware,
 } = require('@bufferapp/session-manager');
 const { errorMiddleware } = require('@bufferapp/buffer-rpc');
-const serialize = require('serialize-javascript');
 const helmet = require('helmet');
 
 const { apiError } = require('./middleware');
@@ -41,14 +38,14 @@ const userMethod = require('./rpc/user/index');
 const profilesMethod = require('./rpc/profiles/index');
 const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
-const { getFaviconCode, setupFaviconRoutes } = require('./lib/favicon');
-const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
 const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
-const getSegmentScript = require('./lib/embeds/segment');
-const getStripeScript = require('./lib/embeds/stripe');
-const getUserScript = require('./lib/embeds/user');
-const getStaticAssets = require('./lib/assets');
+const { setupFaviconRoutes } = require('./lib/favicon');
+const { getBugsnagClient } = require('./lib/bugsnag');
+const { getStaticAssets } = require('./lib/assets');
+const getHtml = require('./lib/generateIndexHtml');
+
+const staticAssets = getStaticAssets({ isProduction });
 
 const app = express();
 const server = http.createServer(app);
@@ -59,178 +56,8 @@ app.set('isProduction', isProduction);
 setupFaviconRoutes(app, isProduction);
 
 if (isProduction) {
-  /**
-   * Add Bugsnag to app (see `middleware.js` for where this is used)
-   */
   app.set('bugsnag', getBugsnagClient());
 }
-
-const notificationScript = notification => {
-  if (!notification) {
-    return '';
-  }
-
-  let variable = '';
-
-  if (notification.variable) {
-    variable = `variable: ${serialize(notification.variable, {
-      isJSON: true,
-    })}`;
-  }
-
-  return `
-    <script type="text/javascript">
-        window._notification = {
-          type: ${serialize(notification.type, { isJSON: true })},
-          key: ${serialize(notification.key, { isJSON: true })},
-          ${variable}
-        };
-    </script>
-  `;
-};
-
-const showModalScript = (key, val) => {
-  if (!key) {
-    return '';
-  }
-
-  let value = '';
-
-  if (val) {
-    value = `value: ${serialize(val, { isJSON: true })}`;
-  }
-
-  return `
-    <script type="text/javascript">
-        window._showModal = {
-          key: ${serialize(key, { isJSON: true })},
-          ${value}
-        };
-    </script>
-  `;
-};
-
-const appcuesScript =
-  '<script id="appcues-js" src="//fast.appcues.com/49463.js" async></script>';
-
-const fullStoryScript = `<script>
-window['_fs_debug'] = false;
-window['_fs_host'] = 'fullstory.com';
-window['_fs_org'] = '9F6GW';
-window['_fs_namespace'] = 'FS';
-(function(m,n,e,t,l,o,g,y){
-  if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
-  g=m[e]=function(a,b){g.q?g.q.push([a,b]):g._api(a,b);};g.q=[];
-  o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
-  y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
-  g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){g(l,v)};
-  g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
-  g.clearUserCookie=function(c,d,i){if(!c || document.cookie.match('fs_uid=[\`;\`]*\`[\`;\`]*\`[\`;\`]*\`')){
-  d=n.domain;while(1){n.cookie='fs_uid=;domain='+d+
-  ';path=/;expires='+new Date(0).toUTCString();i=d.indexOf('.');if(i<0)break;d=d.slice(i+1)}}};
-})(window,document,window['_fs_namespace'],'script','user');
-</script>`;
-
-const intercomScript = `
-<script>
-(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/${
-  isProduction ? 'jv1br1uf' : 'yfr605bq'
-}';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-</script>
-`;
-
-const iterateScript = `<script>
-    window.iterateSettings = {
-        apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55X2lkIjoiNWQ1ZjIxMzUxMzU5ZDMwMDAxMDE3N2IxIiwiaWF0IjoxNTY2NTE1NTA5fQ.UPeBAlcqV4aZQ_rJxRIkYWpNC1nDS24O1MG4WIEuuUg'
-    };
-    (function(i,t,e,r,a){if(t.getElementById(r))
-    {return}
-    i.IterateObjectName=a;var z=function()
-    {z.c(arguments)};
-    z.q=[];z.c=function(args){z.q.push(args)};i[a]=z;var js,fjs=t.getElementsByTagName(e)[0];
-    function l() {js=t.createElement(e);js.id=r;js.async=1;js.src="https://platform.iteratehq.com/loader.js";fjs.parentNode.insertBefore(js,fjs)}; if(t.readyState==="complete") {l();} else
-    if(i.attachEvent) {i.attachEvent('onload', l);} else{i.addEventListener('load', l, false);}}(window, document,'script','iterate-js','Iterate'));
-  </script>`;
-
-const getBufferData = ({ user, profiles }) => {
-  if (typeof user === 'undefined' && typeof profiles === 'undefined') {
-    return '';
-  }
-
-  const bufferData = {};
-
-  if (typeof user !== 'undefined') {
-    bufferData.user = user;
-  }
-  if (typeof profiles !== 'undefined') {
-    bufferData.profiles = profiles;
-  }
-
-  return `
-<script>
-  try {
-    window.bufferData = ${JSON.stringify(bufferData)};
-  } catch(e) {}
-</script>`;
-};
-
-const getFullstory = ({ includeFullstory }) => {
-  const includedFullstoryScript = includeFullstory ? fullStoryScript : '';
-  return isProduction ? includedFullstoryScript : '';
-};
-
-const getBugsnag = ({ userId }) => {
-  return isProduction ? getBugsnagScript(userId) : '';
-};
-
-// We are hard coding the planCode check to 1 for free users, but if we need more we should import constants instead
-const canIncludeFullstory = user => (user ? user.planCode !== 1 : true);
-
-const staticAssets = getStaticAssets({ isProduction });
-
-/**
- * Webpack runtime script, inline into the HTML in prod, locally just include the script:
- * https://survivejs.com/webpack/optimizing/separating-manifest/
- */
-const getRuntimeScript = () => {
-  if (isProduction) {
-    const runtimeFilename = staticAssets['runtime.js'].split('/').pop();
-    return `<script>${fs.readFileSync(
-      join(__dirname, runtimeFilename),
-      'utf8'
-    )}</script>`;
-  }
-  return `<script crossorigin src="${staticAssets['runtime.js']}"></script>`;
-};
-
-const getHtml = ({
-  notification,
-  userId,
-  modalKey,
-  modalValue,
-  user,
-  profiles,
-  includeFullstory = true,
-}) => {
-  return fs
-    .readFileSync(join(__dirname, 'index.html'), 'utf8')
-    .replace('{{{runtime}}}', getRuntimeScript())
-    .replace('{{{vendor}}}', staticAssets['vendor.js'])
-    .replace('{{{bundle}}}', staticAssets['bundle.js'])
-    .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
-    .replace('{{{stripeScript}}}', getStripeScript())
-    .replace('{{{fullStoryScript}}}', getFullstory({ includeFullstory }))
-    .replace('{{{bugsnagScript}}}', getBugsnag({ userId }))
-    .replace('{{{notificationScript}}}', notificationScript(notification))
-    .replace('{{{showModalScript}}}', showModalScript(modalKey, modalValue))
-    .replace('{{{appcues}}}', isProduction ? appcuesScript : '')
-    .replace('{{{intercomScript}}}', intercomScript)
-    .replace('{{{iterateScript}}}', isProduction ? iterateScript : '')
-    .replace('{{{userScript}}}', getUserScript({ id: userId }))
-    .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
-    .replace('{{{segmentScript}}}', getSegmentScript({ isProduction }))
-    .replace('{{{bufferData}}}', getBufferData({ user, profiles }));
-};
 
 app.use(bufflog.middleware());
 app.use(cookieParser());
@@ -320,13 +147,14 @@ app.get('*', (req, res) => {
   ]).then(([user, profiles]) => {
     res.send(
       getHtml({
+        isProduction,
+        staticAssets,
         notification,
         userId,
         modalKey,
         modalValue,
         user,
         profiles,
-        includeFullstory: canIncludeFullstory(user),
       })
     );
   });
