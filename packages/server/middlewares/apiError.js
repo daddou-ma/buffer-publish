@@ -1,6 +1,6 @@
 const bufflog = require('@bufferapp/bufflog');
 
-module.exports.apiError = (err, req, res) => {
+module.exports = (err, req, res) => {
   // eslint-disable-line no-unused-vars
   bufflog.error(`Publish API error: ${err.message}`, err);
   if (err.httpCode) {

@@ -28,7 +28,7 @@ const {
 const { errorMiddleware } = require('@bufferapp/buffer-rpc');
 const helmet = require('helmet');
 
-const { apiError } = require('./middleware');
+const apiError = require('./middlewares/apiError');
 const controller = require('./lib/controller');
 const makeRPCHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
@@ -36,8 +36,8 @@ const PublishAPI = require('./publishAPI');
 const userParser = require('./parsers/src/userParser');
 const userMethod = require('./rpc/user/index');
 const profilesMethod = require('./rpc/profiles/index');
-const pusher = require('./lib/pusher');
-const maintenanceHandler = require('./maintenanceHandler');
+const pusherAuth = require('./lib/pusher');
+const maintenanceHandler = require('./lib/maintenanceHandler');
 const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
 const { setupFaviconRoutes } = require('./lib/favicon');
@@ -45,15 +45,10 @@ const { getBugsnagClient } = require('./lib/bugsnag');
 const { getStaticAssets } = require('./lib/assets');
 const getHtml = require('./lib/generateIndexHtml');
 
-const staticAssets = getStaticAssets({ isProduction });
-
 const app = express();
 const server = http.createServer(app);
 
 app.set('isProduction', isProduction);
-
-// Favicon
-setupFaviconRoutes(app, isProduction);
 
 if (isProduction) {
   app.set('bugsnag', getBugsnagClient());
@@ -61,9 +56,11 @@ if (isProduction) {
 
 app.use(bufflog.middleware());
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(helmet.frameguard({ action: 'sameorigin' }));
 
 app.all('/maintenance', maintenanceHandler);
+app.get('/health-check', controller.healthCheck);
 
 app.use('*', (req, res, next) => {
   const analyzeApiAddr =
@@ -72,7 +69,8 @@ app.use('*', (req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
+// Favicon
+setupFaviconRoutes(app, isProduction);
 
 // All routes after this have access to the user session
 app.use(
@@ -86,9 +84,8 @@ app.use(
 (async () => {
   const rpcHandler = await makeRPCHandler();
   app.post('/rpc/:method?', checkToken, rpcHandler, errorMiddleware);
+  app.use(apiError);
 })();
-
-app.get('/health-check', controller.healthCheck);
 
 // make sure we have a valid session
 app.use(
@@ -97,7 +94,6 @@ app.use(
     requiredSessionKeys: ['publish.accessToken', 'publish.foreignKey'],
   })
 );
-
 app.use(verifyAccessToken);
 
 // Pusher Auth
@@ -105,12 +101,7 @@ app.post(
   '/pusher/auth',
   bodyParser.json(),
   bodyParser.urlencoded({ extended: false }),
-  (req, res) => {
-    const socketId = req.body.socket_id;
-    const channel = req.body.channel_name;
-    const auth = pusher.authenticate(socketId, channel);
-    res.send(auth);
-  }
+  pusherAuth
 );
 
 const getNotificationFromQuery = query => {
@@ -127,6 +118,13 @@ const getNotificationFromQuery = query => {
   return notification;
 };
 
+const staticAssets = getStaticAssets({ isProduction });
+
+/**
+ * Primary Route
+ *
+ * Loads the web app, preloaded with some embedded scripts and userdata.
+ */
 app.get('*', (req, res) => {
   const notification = getNotificationFromQuery(req.query);
   const userId = req.session.publish.foreignKey;
@@ -159,8 +157,6 @@ app.get('*', (req, res) => {
     );
   });
 });
-
-app.use(apiError);
 
 server.listen(80, () => console.log('listening on port 80')); // eslint-disable-line
 server.keepAliveTimeout = 61 * 1000;
