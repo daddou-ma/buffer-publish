@@ -197,6 +197,7 @@ module.exports = post => {
     retweetCommentLinks,
     retweetProfile: getRetweetProfileInfo(post),
     isSent: post.status === 'sent',
+    isPastReminder: post.status === 'notified',
     source_url: post.source_url,
     text,
     type: getPostType({ post }),
