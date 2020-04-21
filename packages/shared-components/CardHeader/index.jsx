@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Image } from '@bufferapp/components';
-import { grayLight } from '@bufferapp/ui/style/colors';
+import { grayDark } from '@bufferapp/ui/style/colors';
 import { Text, Button, Avatar } from '@bufferapp/ui';
 
 const CardHeaderWrapper = styled.div`
   display: flex;
-  border-bottom: 1px solid ${grayLight};
+  border-bottom: 1px solid ${grayDark};
   padding: 12px 16px;
 `;
 
