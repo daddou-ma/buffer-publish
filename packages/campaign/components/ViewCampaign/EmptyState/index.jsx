@@ -29,7 +29,7 @@ const EmptyStateCampaign = ({
   };
   const ownerPrimaryAction = {
     label: translations.allPostsSent.viewReport,
-    onClick: actions.goToAnalyzeReport,
+    onClick: () => actions.goToAnalyzeReport(campaign),
     icon: <ArrowRightIcon />,
     iconEnd: true,
   };
