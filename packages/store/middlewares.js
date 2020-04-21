@@ -10,6 +10,7 @@ import draftsMiddleware from '@bufferapp/publish-drafts/middleware';
 import storiesMiddleware from '@bufferapp/publish-stories/middleware';
 import postingScheduleSettingsMiddleware from '@bufferapp/publish-posting-schedule/middleware';
 import generalSettingsMiddleware from '@bufferapp/publish-general-settings/middleware';
+import languageSettingsMiddleware from '@bufferapp/language-preferences/middleware';
 import profileSidebarMiddleware from '@bufferapp/publish-profile-sidebar/middleware';
 import clientAccessMiddleware from '@bufferapp/client-access/middleware';
 import bootstrapMiddleware from '@bufferapp/publish-bootstrap/middleware';
@@ -82,6 +83,7 @@ const composedMiddlewares = history =>
       pastRemindersMiddleware,
       postingScheduleSettingsMiddleware,
       generalSettingsMiddleware,
+      languageSettingsMiddleware,
       pusherSyncMiddleware,
       notificationsMiddleware,
       environmentMiddleware,

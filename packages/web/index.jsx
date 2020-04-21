@@ -18,7 +18,9 @@ render(
   <ErrorBoundary>
     <Provider store={store}>
       <Router history={history}>
-        <App />
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <App />
+        </React.Suspense>
       </Router>
     </Provider>
   </ErrorBoundary>,

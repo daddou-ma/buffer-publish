@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Text, Select } from '@bufferapp/ui';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import languageLabel from '../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -10,16 +11,14 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const languageLabel = locale =>
-  ({
-    'en-US': 'English',
-    'es-ES': 'Español',
-    default: 'English',
-  }[locale]);
-
-const LanguagePreferences = () => {
+const LanguagePreferences = ({ onSelectLanguage }) => {
   const { t, i18n } = useTranslation();
-  const { language } = i18n || 'en-US';
+  const { language = 'en-US' } = i18n;
+
+  const changeLanguage = locale => {
+    i18n.changeLanguage(locale);
+    onSelectLanguage(locale);
+  };
 
   return (
     <Wrapper>
@@ -30,14 +29,14 @@ const LanguagePreferences = () => {
         onSelectClick={selectedItem => selectedItem.onItemClick()}
         items={[
           {
-            title: 'English',
+            title: languageLabel('en-US'),
             selected: language === 'en-US',
-            onItemClick: () => i18n.changeLanguage('en-US'),
+            onItemClick: () => changeLanguage('en-US'),
           },
           {
-            title: 'Español',
+            title: languageLabel('es-ES'),
             selected: language === 'es-ES',
-            onItemClick: () => i18n.changeLanguage('es-ES'),
+            onItemClick: () => changeLanguage('es-ES'),
           },
         ]}
       />
@@ -46,10 +45,7 @@ const LanguagePreferences = () => {
 };
 
 LanguagePreferences.propTypes = {
-  initialValues: PropTypes.shape({
-    locale: PropTypes.string,
-    language: PropTypes.string,
-  }).isRequired,
+  onSelectLanguage: PropTypes.func.isRequired,
 };
 
 export default LanguagePreferences;

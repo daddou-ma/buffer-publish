@@ -1,24 +1,18 @@
 import { connect } from 'react-redux';
-import { actions as translationActions } from '@bufferapp/publish-i18n/reducer';
 import LanguagePreferences from './components/LanguagePreferences';
-
-const language = locale =>
-  ({
-    'en-US': 'English',
-    'es-ES': 'Español',
-    default: 'English',
-  }[locale]);
+import { actions } from './reducer';
+import languageLabel from './utils';
 
 export default connect(
   state => ({
     initialValues: {
       locale: state.i18n.locale,
-      language: language(state.i18n.locale) || language('en-US'),
+      language: languageLabel(state.i18n.locale) || languageLabel('en-US'),
     },
   }),
   dispatch => ({
-    onSelectLanguage: locale => {
-      dispatch(translationActions.setLocale({ locale }));
+    onSelectLanguage: language => {
+      dispatch(actions.setUserLanguage({ language }));
     },
   })
 )(LanguagePreferences);
