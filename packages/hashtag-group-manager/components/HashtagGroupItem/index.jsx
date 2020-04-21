@@ -1,21 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Text, Button, Tooltip } from '@bufferapp/ui';
 import Select from '@bufferapp/ui/Select';
 import MoreIcon from '@bufferapp/ui/Icon/Icons/More';
 import TrashIcon from '@bufferapp/ui/Icon/Icons/Trash';
-import { grayDarker, gray } from '@bufferapp/ui/style/colors';
+import { grayDark, grayDarker } from '@bufferapp/ui/style/colors';
 import { Divider } from '@bufferapp/components';
 
-const getHashtagsStyles = hover => ({
-  fontSize: '12px',
-  lineHeight: '21px',
-  color: hover ? grayDarker : gray,
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  transition: 'color 0.3s',
-});
+const HashtagText = styled(Text)`
+  font-size: 12px;
+  line-height: 21px;
+  color: ${props => (props.hover ? grayDarker : grayDark)};
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: color 0.3s;
+`;
 
 const nameWrapperStyles = {
   paddingRight: '8px',
@@ -24,9 +25,11 @@ const nameWrapperStyles = {
   whiteSpace: 'nowrap',
   overflow: 'hidden',
 };
-const counterWrapperStyles = {
-  flex: '0 1 auto',
-};
+
+const CounterText = styled(Text)`
+  color: ${props => (props.hover ? grayDarker : grayDark)};
+  flex: 0 1 auto;
+`;
 
 const cardStyle = {
   padding: '16px',
@@ -83,15 +86,11 @@ class HashtagGroupItem extends Component {
                 <span style={nameWrapperStyles}>
                   <Text type="label">{name}</Text>
                 </span>
-                <span style={counterWrapperStyles}>
-                  <Text type="label" color="gray">
-                    {numberOfHashtags}
-                  </Text>
-                </span>
+                <CounterText type="label" hover>
+                  {numberOfHashtags}
+                </CounterText>
               </div>
-              <div style={getHashtagsStyles(hover)}>
-                <Text>{hashtags}</Text>
-              </div>
+              <HashtagText hover>{hashtags}</HashtagText>
             </Tooltip>
           </div>
           {hover && (
