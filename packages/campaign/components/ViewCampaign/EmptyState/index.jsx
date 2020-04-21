@@ -20,7 +20,8 @@ const EmptyStateCampaign = ({
   const displayEmptyCampaign =
     !sentView && campaign?.scheduled === 0 && campaign?.sent === 0;
   const displayEmptySentPosts = sentView && campaign?.sent === 0;
-  const displayAllPostsSent = campaign?.scheduled === 0 && campaign?.sent > 0;
+  const displayAllPostsSent =
+    !sentView && campaign?.scheduled === 0 && campaign?.sent > 0;
 
   const teamMemberPrimaryAction = {
     label: translations.allPostsSent.createCampaign,
