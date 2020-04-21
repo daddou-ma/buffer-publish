@@ -134,12 +134,12 @@ app.get('*', (req, res) => {
   Promise.all([
     userMethod
       .fn(null, req, res, { PublishAPI, parsers: { userParser } })
-      .catch(() => {
-        // added catch incase we don't have any data in the object
+      .catch(err => {
+        bufflog.error(`Error prefetching user: ${err.message}`, err);
         return undefined;
       }),
-    profilesMethod.fn(null, req, res).catch(() => {
-      // added catch incase we don't have any data in the object
+    profilesMethod.fn(null, req, res).catch(err => {
+      bufflog.error(`Error prefetching profiles: ${err.message}`, err);
       return undefined;
     }),
   ]).then(([user, profiles]) => {
