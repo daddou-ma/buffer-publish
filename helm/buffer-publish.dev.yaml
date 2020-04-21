@@ -18,6 +18,8 @@ env:
         fieldPath: status.hostIP
   - name: DD_SERVICE_NAME
     value: "publish-server"
+  - name: LOG_LEVEL
+    value: NOTICE
   - name: ANALYZE_API_ADDR
     value: http://analyze-api-dev.dev:443
   - name: BUGSNAG_KEY

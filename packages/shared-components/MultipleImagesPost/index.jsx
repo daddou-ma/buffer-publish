@@ -18,55 +18,23 @@ const imagesWrapperStyle = {
 };
 
 const MultipleImagesPost = ({
-  postDetails,
-  imageUrls,
-  isConfirmingDelete,
-  isDeleting,
-  isWorking,
-  links,
-  onDeleteConfirmClick,
-  onEditClick,
-  onShareNowClick,
-  onRequeueClick,
-  retweetProfile,
-  text,
-  isLightboxOpen,
-  onImageClickPrev,
-  onImageClickNext,
-  onImageClose,
-  onImageClick,
-  currentImage,
-  draggable,
-  dragging,
-  hovering,
-  isOver,
-  statistics,
-  subprofiles,
-  profileServiceType,
-  profileService,
   service_geolocation_name: locationName,
   source_url: sourceUrl,
   subprofile_id: subprofileID,
-  serviceLink,
-  isSent,
-  isManager,
-  isBusinessAccount,
-  isPastReminder,
-  day,
-  dueTime,
-  sharedBy,
-  basic,
-  commentEnabled,
-  commentText,
-  hasCommentEnabled,
-  hasFirstCommentFlip,
-  hasPushNotifications,
-  onSetRemindersClick,
-  campaignDetails,
-  onCampaignTagClick,
-  hasCampaignsFeature,
   ...props
 }) => {
+  const {
+    imageUrls,
+    basic,
+    text,
+    links,
+    onImageClick,
+    isLightboxOpen,
+    onImageClickPrev,
+    onImageClickNext,
+    onImageClose,
+    currentImage,
+  } = props;
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
     <div style={postContentStyle}>
@@ -112,46 +80,9 @@ const MultipleImagesPost = ({
   return (
     <Post
       {...props}
-      postDetails={postDetails}
-      isConfirmingDelete={isConfirmingDelete}
-      isDeleting={isDeleting}
-      isWorking={isWorking}
-      links={links}
-      onDeleteConfirmClick={onDeleteConfirmClick}
-      onEditClick={onEditClick}
-      onShareNowClick={onShareNowClick}
-      onRequeueClick={onRequeueClick}
-      retweetProfile={retweetProfile}
-      text={text}
-      draggable={draggable}
-      dragging={dragging}
-      hovering={hovering}
-      isOver={isOver}
-      statistics={statistics}
-      subprofiles={subprofiles}
-      profileService={profileService}
-      profileServiceType={profileServiceType}
       locationName={locationName}
       sourceUrl={sourceUrl}
       subprofileID={subprofileID}
-      serviceLink={serviceLink}
-      isSent={isSent}
-      isManager={isManager}
-      isBusinessAccount={isBusinessAccount}
-      isPastReminder={isPastReminder}
-      day={day}
-      dueTime={dueTime}
-      sharedBy={sharedBy}
-      basic={basic}
-      commentEnabled={commentEnabled}
-      commentText={commentText}
-      hasCommentEnabled={hasCommentEnabled}
-      hasFirstCommentFlip={hasFirstCommentFlip}
-      hasPushNotifications={hasPushNotifications}
-      onSetRemindersClick={onSetRemindersClick}
-      campaignDetails={campaignDetails}
-      onCampaignTagClick={onCampaignTagClick}
-      hasCampaignsFeature={hasCampaignsFeature}
     >
       {children}
     </Post>
@@ -176,9 +107,6 @@ MultipleImagesPost.propTypes = {
   onImageClose: PropTypes.func,
   onImageClick: PropTypes.func,
   currentImage: PropTypes.number,
-  isSent: PropTypes.bool,
-  isManager: PropTypes.bool,
-  isPastReminder: PropTypes.bool,
 };
 
 MultipleImagesPost.defaultProps = Post.defaultProps;
