@@ -1,9 +1,10 @@
+const isProduction = process.env.NODE_ENV === 'production';
+
 /**
  * Add Datadog APM in production
+ * This must come before importing any instrumented module.
  */
-const isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
-  // This line must come before importing any instrumented module.
   // eslint-disable-next-line
   require('dd-trace').init({
     env: 'production',
@@ -42,10 +43,11 @@ const pusher = require('./lib/pusher');
 const maintenanceHandler = require('./maintenanceHandler');
 const { getFaviconCode, setupFaviconRoutes } = require('./lib/favicon');
 const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
+const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
 const app = express();
 const server = http.createServer(app);
-const verifyAccessToken = require('./middlewares/verifyAccessToken');
+
 
 let segmentKey = 'qsP2UfgODyoJB3px9SDkGX5I6wDtdQ6a';
 // Favicon
