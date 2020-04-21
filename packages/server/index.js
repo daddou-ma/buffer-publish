@@ -46,34 +46,17 @@ const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
 const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
 const getSegmentScript = require('./lib/embeds/segment');
+const getStaticAssets = require('./lib/assets');
 
 const app = express();
 const server = http.createServer(app);
 
+app.set('isProduction', isProduction);
+
 // Favicon
 setupFaviconRoutes(app, isProduction);
 
-let staticAssets = {
-  'runtime.js': 'https://local.buffer.com:8080/static/runtime.js', // webpack runtime
-  'bundle.js': 'https://local.buffer.com:8080/static/bundle.js',
-  'bundle.css': 'https://local.buffer.com:8080/static/bundle.css',
-  'vendor.js': 'https://local.buffer.com:8080/static/vendor.js',
-};
-
-app.set('isProduction', isProduction);
-
 if (isProduction) {
-  staticAssets = JSON.parse(
-    // Load the `webpackAssets.json` file instead of `staticAssets.json` that the buffer-static-uploader
-    // generates because the former keeps simple key names like 'bundle.js' that don't include the hash.
-    fs.readFileSync(join(__dirname, 'webpackAssets.json'), 'utf8')
-  );
-
-  // Ensure that static assets is not empty
-  if (Object.keys(staticAssets).length === 0) {
-    console.log('Failed loading static assets manifest file - File is empty'); // eslint-disable-line
-    process.exit(1);
-  }
   /**
    * Add Bugsnag to app (see `middleware.js` for where this is used)
    */
@@ -220,6 +203,8 @@ const getBugsnag = ({ userId }) => {
 
 // We are hard coding the planCode check to 1 for free users, but if we need more we should import constants instead
 const canIncludeFullstory = user => (user ? user.planCode !== 1 : true);
+
+const staticAssets = getStaticAssets({ isProduction });
 
 /**
  * Webpack runtime script, inline into the HTML in prod, locally just include the script:
