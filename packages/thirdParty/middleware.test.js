@@ -1,4 +1,4 @@
-// /* global FS, Appcues, Intercom */
+// /* global FS, Appcues */
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 
@@ -13,8 +13,6 @@ global.Appcues = {
   track: jest.fn(),
   on: jest.fn(),
 };
-
-global.Intercom = jest.fn();
 
 const mockUser = {
   id: 'foo',
@@ -40,13 +38,6 @@ const mockFreeUser = {
   tags: [],
 };
 
-const mockIntercomUser = {
-  app_id: '1234',
-  id: 'foo',
-  createdAt: 'date',
-  email: 'hello@buffer.com',
-};
-
 beforeEach(() => {
   jest.clearAllMocks();
 });
@@ -67,35 +58,6 @@ describe('middleware', () => {
     };
     middleware(store)(next)(action);
     expect(next).toHaveBeenCalledWith(action);
-  });
-  it('triggers fetch for intercom when app loads', () => {
-    const action = { type: 'APP_INIT' };
-    middleware(store)(next)(action);
-    expect(store.dispatch).toHaveBeenCalledWith({
-      type: dataFetchActionTypes.FETCH,
-      name: 'intercom',
-    });
-  });
-  it('identifies the user with Intercom', () => {
-    /** We need to return a fake DOM element to fool the extension check code... */
-    const getFakeMarkerEl = () => ({ getAttribute: () => true });
-    Object.defineProperty(global.document, 'querySelector', {
-      value: getFakeMarkerEl,
-    });
-
-    const action = {
-      type: `intercom_${dataFetchActionTypes.FETCH_SUCCESS}`,
-      result: mockIntercomUser,
-    };
-    middleware(store)(next)(action);
-    expect(store.dispatch).toHaveBeenCalledWith({
-      type: actionTypes.INTERCOM_LOADED,
-      loaded: true,
-    });
-    expect(global.Intercom).toHaveBeenCalledWith('boot', {
-      ...mockIntercomUser,
-      extension_installed: true,
-    });
   });
   it('triggers dispatches for third party integrations when the user loads', () => {
     const action = {
