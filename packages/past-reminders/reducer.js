@@ -170,7 +170,9 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.POST_IMAGE_CLOSED:
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
     case actionTypes.POST_IMAGE_CLICKED_PREV: {
-      const updateTotal = action.type === queueActionTypes.POST_SENT;
+      const { type, post } = action;
+      const updateTotal =
+        type === queueActionTypes.POST_SENT && post?.isPastReminder;
       return {
         ...state,
         total: updateTotal ? state.total + 1 : state.total,
