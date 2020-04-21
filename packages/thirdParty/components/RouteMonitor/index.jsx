@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getProfilePageParams } from '@bufferapp/publish-routes';
 
-function RouteMonitor({ pathname, appCues, intercom }) {
+function RouteMonitor({ pathname, appCues }) {
   useEffect(() => {
     // Appcues triggers the display of content on page load.
     // Calling the Appcues.page() method will notify Appcues that
@@ -19,11 +19,6 @@ function RouteMonitor({ pathname, appCues, intercom }) {
         window.Appcues.track('Viewed Shop Grid Tab');
       }
     }
-
-    // Let Intercom know when we've changed pages
-    if (intercom && intercom.loaded && window && window.Intercom) {
-      window.Intercom('update');
-    }
   }, [pathname]);
   return null;
 }
@@ -34,9 +29,6 @@ RouteMonitor.propTypes = {
     loaded: PropTypes.bool,
     inProgress: PropTypes.bool,
   }),
-  intercom: PropTypes.shape({
-    loaded: PropTypes.bool,
-  }),
 };
 
 RouteMonitor.defaultProps = {
@@ -44,9 +36,6 @@ RouteMonitor.defaultProps = {
   appCues: {
     loaded: false,
     inProgress: false,
-  },
-  intercom: {
-    loaded: false,
   },
 };
 
