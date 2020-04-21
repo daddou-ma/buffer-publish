@@ -44,7 +44,7 @@ const getRuntimeScript = ({ isProduction, staticAssets }) => {
   if (isProduction) {
     const runtimeFilename = staticAssets['runtime.js'].split('/').pop();
     return `<script>${fs.readFileSync(
-      join(__dirname, runtimeFilename),
+      join(__dirname, '..', runtimeFilename),
       'utf8'
     )}</script>`;
   }
