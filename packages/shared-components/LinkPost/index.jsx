@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Image, Link, LinkifiedText, Text } from '@bufferapp/components';
+import { Card, Image, Link, Text } from '@bufferapp/components';
 import Post from '../Post';
+import UpdateTextContent from '../UpdateTextContent';
 
 const postContentStyle = {
   display: 'flex',
   flexDirection: 'column',
 };
 
-const postContentTextStyle = {
-  paddingBottom: '1rem',
+const linkStyle = {
+  paddingTop: '1rem',
 };
 
 const linkAttachmentContentStyle = {
@@ -42,25 +43,8 @@ const LinkPost = ({
   const { basic, links, linkAttachment, text } = props;
   const children = (
     <div style={postContentStyle}>
-      <div style={postContentTextStyle}>
-        {basic ? (
-          <Text color="black" size="mini" whitespace="pre-wrap">
-            {text}
-          </Text>
-        ) : (
-          <LinkifiedText
-            color="black"
-            links={links}
-            size="mini"
-            whitespace="pre-wrap"
-            newTab
-            unstyled
-          >
-            {text}
-          </LinkifiedText>
-        )}
-      </div>
-      <div>
+      <UpdateTextContent basic={basic} links={links} text={text} />
+      <div style={linkStyle}>
         <Link href={linkAttachment.url} unstyled newTab>
           <Card noPadding>
             <div style={linkAttachmentContentStyle}>
