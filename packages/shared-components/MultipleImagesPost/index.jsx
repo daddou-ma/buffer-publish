@@ -1,16 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Lightbox from 'react-images';
-import { LinkifiedText, MultipleImages, Text } from '@bufferapp/components';
+import { MultipleImages } from '@bufferapp/components';
 import Post from '../Post';
+import UpdateTextContent from '../UpdateTextContent';
 
 const postContentStyle = {
   display: 'flex',
-};
-
-const postContentTextStyle = {
-  paddingRight: '1rem',
-  flexGrow: 1,
 };
 
 const imagesWrapperStyle = {
@@ -38,24 +34,7 @@ const MultipleImagesPost = ({
   const images = imageUrls.map(url => ({ src: `${url}` }));
   const children = (
     <div style={postContentStyle}>
-      <span style={postContentTextStyle}>
-        {basic ? (
-          <Text color="black" size="mini" whitespace="pre-wrap">
-            {text}
-          </Text>
-        ) : (
-          <LinkifiedText
-            color="black"
-            links={links}
-            size="mini"
-            whitespace="pre-wrap"
-            newTab
-            unstyled
-          >
-            {text}
-          </LinkifiedText>
-        )}
-      </span>
+      <UpdateTextContent basic={basic} links={links} text={text} />
       <div style={imagesWrapperStyle} onClick={onImageClick}>
         <MultipleImages
           border="rounded"
