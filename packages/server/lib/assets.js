@@ -29,10 +29,11 @@ function getStaticAssets({ isProduction }) {
       );
       process.exit(1);
     }
-  } else {
-    // Assume we're in local
-    return wdsStaticAssets;
+
+    return staticAssets;
   }
+  // Assume we're in local
+  return wdsStaticAssets;
 }
 
 /**
