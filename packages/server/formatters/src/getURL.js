@@ -98,6 +98,10 @@ module.exports = {
     return 'https://publish.buffer.com';
   },
   getAnalyzeReportUrl: campaignId => {
+    if (!campaignId) {
+      // Send user to reports route if campaignId isn't valid
+      return 'https://analyze.buffer.com/reports';
+    }
     if (window.location.hostname === 'publish.local.buffer.com') {
       return `https://analyze.local.buffer.com/campaigns/${campaignId}`;
     }
