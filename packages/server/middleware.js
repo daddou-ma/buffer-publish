@@ -1,11 +1,11 @@
 const bufflog = require('@bufferapp/bufflog');
 
-module.exports.apiError = (err, req, res, next) => {
+module.exports.apiError = (err, req, res) => {
   // eslint-disable-line no-unused-vars
   bufflog.error(`Publish API error: ${err.message}`, err);
   if (err.httpCode) {
     const filteredError = Object.assign({}, err);
-    const httpCode = err.httpCode;
+    const { httpCode } = err;
     delete filteredError.httpCode;
     res.status(httpCode).send(filteredError);
   } else if (req.app.get('isProduction')) {
