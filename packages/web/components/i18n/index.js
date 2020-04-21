@@ -4,7 +4,6 @@ import enTranslation from '@bufferapp/publish-i18n/translations/en-us.json';
 import esTranslation from '@bufferapp/publish-i18n/translations/es-es.json';
 
 // the translations
-// (tip move them in a JSON file and import them)
 const resources = {
   'en-US': {
     translation: enTranslation,
@@ -19,7 +18,7 @@ i18n
   .init({
     resources,
     lng: 'en-US',
-    fallbackLng: 'en-US', // use en if detected lng is not available
+    fallbackLng: 'en-US', // use en-US if detected lng is not available
     debug: process.env.NODE_ENV !== 'production',
 
     interpolation: {
