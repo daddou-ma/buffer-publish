@@ -8,6 +8,7 @@ import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { gray, white, grayShadow } from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import EmptyState from './EmptyState';
 import List from './List';
 import SkeletonList from './SkeletonList';
@@ -63,6 +64,8 @@ const ListCampaigns = ({
     fetchCampaignsIfNeeded();
   }, []);
 
+  const { t, i18n } = useTranslation();
+
   if (!isLoading && (!campaigns || campaigns.length === 0)) {
     return (
       <EmptyState
@@ -81,7 +84,7 @@ const ListCampaigns = ({
             displaySkeleton={isLoading}
             aria-label={isLoading ? 'Loading' : null}
           >
-            Campaigns
+            {t('campaigns.title')}
           </TextWithSkeleton>
           {showCampaignActions && (
             <ButtonWithSkeleton
