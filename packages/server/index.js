@@ -47,6 +47,7 @@ const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
 const getSegmentScript = require('./lib/embeds/segment');
 const getStripeScript = require('./lib/embeds/stripe');
+const getUserScript = require('./lib/embeds/user');
 const getStaticAssets = require('./lib/assets');
 
 const app = express();
@@ -63,17 +64,6 @@ if (isProduction) {
    */
   app.set('bugsnag', getBugsnagClient());
 }
-
-/**
- * Generate a script to pass basic user info to our React app
- *
- * @param {String} user
- */
-const getUserScript = user => `
-<script type="text/javascript">
-  window._user = ${JSON.stringify(user)};
-</script>
-`;
 
 const notificationScript = notification => {
   if (!notification) {
