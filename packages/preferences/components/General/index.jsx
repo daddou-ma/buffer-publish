@@ -10,7 +10,6 @@ const General = () => (
     <Text type="p">Change your general preferences.</Text>
     <Divider />
     <DateTimePreferences />
-    <Divider />
     <LanguagePreferences />
   </Fragment>
 );

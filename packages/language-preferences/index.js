@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
 import LanguagePreferences from './components/LanguagePreferences';
 import { actions } from './reducer';
-import languageLabel from './utils';
 
 export default connect(
   state => ({
-    initialValues: {
-      locale: state.i18n.locale,
-      language: languageLabel(state.i18n.locale) || languageLabel('en-US'),
-    },
+    hasTranslationsFlip: state.appSidebar.user.features
+      ? state.appSidebar.user.features.includes('publish-translations')
+      : false,
   }),
   dispatch => ({
     onSelectLanguage: language => {

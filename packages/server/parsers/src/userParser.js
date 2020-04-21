@@ -20,6 +20,7 @@ module.exports = userData => ({
   id: userData.id,
   email: userData.email,
   name: userData.name,
+  language: userData.language || 'en-US',
   createdAt: userData.created_at,
   features: userData.features,
   tags: userData.tags,
