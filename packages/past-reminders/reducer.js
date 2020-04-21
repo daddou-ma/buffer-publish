@@ -165,20 +165,18 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         loading: false,
       };
-    case queueActionTypes.POST_COUNT_UPDATED:
-      return {
-        ...state,
-        total: action.counts.sent,
-      };
     case queueActionTypes.POST_SENT:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
+    case actionTypes.POST_IMAGE_CLICKED_PREV: {
+      const updateTotal = action.type === queueActionTypes.POST_SENT;
       return {
         ...state,
+        total: updateTotal ? state.total + 1 : state.total,
         posts: postsReducer(state.posts, action),
       };
+    }
     default:
       return state;
   }
@@ -195,7 +193,6 @@ export default (state = initialState, action) => {
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `pastRemindersPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case queueActionTypes.POST_SENT:
-    case queueActionTypes.POST_COUNT_UPDATED:
     case actionTypes.POST_IMAGE_CLICKED:
     case actionTypes.POST_IMAGE_CLOSED:
     case actionTypes.POST_IMAGE_CLICKED_NEXT:
