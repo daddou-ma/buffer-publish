@@ -46,6 +46,7 @@ const { getBugsnagClient, getBugsnagScript } = require('./lib/bugsnag');
 const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
 const getSegmentScript = require('./lib/embeds/segment');
+const getStripeScript = require('./lib/embeds/stripe');
 const getStaticAssets = require('./lib/assets');
 
 const app = express();
@@ -62,8 +63,6 @@ if (isProduction) {
    */
   app.set('bugsnag', getBugsnagClient());
 }
-
-const stripePublishableKey = process.env.STRIPE_PUBLISHABLE;
 
 /**
  * Generate a script to pass basic user info to our React app
@@ -120,13 +119,6 @@ const showModalScript = (key, val) => {
     </script>
   `;
 };
-
-const stripeScript = `
-  <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
-  <script type="text/javascript">
-    window.STRIPE_PUBLISHABLE_KEY = '${stripePublishableKey}';
-  </script>
-`;
 
 const appcuesScript =
   '<script id="appcues-js" src="//fast.appcues.com/49463.js" async></script>';
@@ -236,7 +228,7 @@ const getHtml = ({
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
     .replace('{{{bundle}}}', staticAssets['bundle.js'])
     .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
-    .replace('{{{stripeScript}}}', stripeScript)
+    .replace('{{{stripeScript}}}', getStripeScript())
     .replace('{{{fullStoryScript}}}', getFullstory({ includeFullstory }))
     .replace('{{{bugsnagScript}}}', getBugsnag({ userId }))
     .replace('{{{notificationScript}}}', notificationScript(notification))
