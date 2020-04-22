@@ -74,7 +74,7 @@ const UpdateMediaContent = ({
         onClickPrev={onImageClickPrev}
         onClickNext={onImageClickNext}
         onClose={onImageClose}
-        currentImage={isMultipleImage ? currentImage : null}
+        currentImage={isMultipleImage ? currentImage : 0}
         backdropClosesModal
         showImageCount={false}
       />
