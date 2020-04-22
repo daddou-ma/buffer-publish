@@ -283,7 +283,8 @@
       "general": "General",
       "notifications": "Notifications",
       "security": "Security"
-    }
+    },
+    "backToDashboard": "Back to Dashboard"
   },
   "profile-sidebar": {
     "connectButton": "Manage Social Accounts"

@@ -64,7 +64,7 @@ const ListCampaigns = ({
     fetchCampaignsIfNeeded();
   }, []);
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   if (!isLoading && (!campaigns || campaigns.length === 0)) {
     return (

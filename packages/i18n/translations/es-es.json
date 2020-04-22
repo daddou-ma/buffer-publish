@@ -283,7 +283,8 @@
       "general": "General",
       "notifications": "Notificaciones",
       "security": "Seguridad"
-    }
+    },
+    "backToDashboard": "Volver al Tablero"
   },
   "profile-sidebar": {
     "connectButton": "Manejar Redes Sociales"
