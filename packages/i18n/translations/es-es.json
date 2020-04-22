@@ -361,59 +361,59 @@
     "saveNote": "Guardar Nota"
   },
   "stripe": {
-    "invalidZipError": "Whoops, looks like that zip code doesn't match what your bank has on record - up for trying again?",
-    "noNameError": "Uh oh, please fill out the cardholder name :)",
-    "noZipError": "For extra security, please add the zip code associated with this card"
+    "invalidZipError": "Ups, parece que ese código postal no concuerda con lo que tu banco tiene en su registro - podrías intentarlo otra vez?",
+    "noNameError": "Oh, por favor, rellena el nombre en la tarjeta :)",
+    "noZipError": "Para más seguridad, por favor añade el código postal asociado con esta tarjeta"
   },
   "switch-plan-modal": {
     "businessDescriptors": {
-      "buttonText": "Subscribe to Small Business Plan",
+      "buttonText": "Suscríbete al plan de Small Business",
       "left": {
-        "businessConnect": "Connect 25 redes sociales",
-        "businessPosts": "Schedule 2,000 posts",
-        "businessUsers": "Collaborate with 6 users"
+        "businessConnect": "Conecta 25 redes sociales",
+        "businessPosts": "Programa 2,000 publicaciones",
+        "businessUsers": "Colabora con 6 usuarios"
       },
-      "nonprofitMonthlyPrice": "$49.50 per month",
-      "nonprofitYearlyPrice": "$505 per year",
-      "plan": "Subscribe to the Small Business plan!",
-      "planMonthlyDescription": "Cancel and get a refund any time",
-      "planMonthlyPrice": "$99 per month",
-      "planYearlyDescription": "Save 15% vs paying monthly",
-      "planYearlyPrice": "$1,010 per year",
+      "nonprofitMonthlyPrice": "$49.50 al mes",
+      "nonprofitYearlyPrice": "$505 al año",
+      "plan": "Suscríbete al plan de Small Business",
+      "planMonthlyDescription": "Cancela y obtén un reembolso en cualquier momento",
+      "planMonthlyPrice": "$99 al mes",
+      "planYearlyDescription": "Ahorra 15% respecto a pagar mensualmente",
+      "planYearlyPrice": "$1,010 al año",
       "right": {
-        "hashtags": "Use Hashtag Manager to optimize reach",
-        "insta": "Schedule a first comment on Instagram",
-        "shopgrid": "Drive sales through Shop Grid"
+        "hashtags": "Utiliza el Hashtag Manager para optimizar tu alcance",
+        "insta": "Programa un primer comentario en Instagram",
+        "shopgrid": "Obtén ventas a través de Instagram"
       }
     },
-    "cardNumber": "Card number",
-    "close": "Close",
-    "enterPaymentDetails": "Enter your payment details securely",
-    "expirationMonth": "Expiration month",
-    "expirationYear": "Expiration year",
-    "freeConnect": "Connect up to three redes sociales",
-    "freePlan": "Free Plan",
-    "freePostHistory": "No post history",
-    "freeSchedule": "Schedule up to 10 posts per account",
-    "nameOnCard": "Name on card",
+    "cardNumber": "Número de tarjeta",
+    "close": "Cerrar",
+    "enterPaymentDetails": "Introduce tus datos de pago de manera segura",
+    "expirationMonth": "Caducidad: mes",
+    "expirationYear": "Caducidad: año",
+    "freeConnect": "Conecta hasta 3 redes sociales",
+    "freePlan": "Plan Gratuito",
+    "freePostHistory": "Sin historial de publicaciones",
+    "freeSchedule": "Programa hasta 10 publicaciones por red social",
+    "nameOnCard": "Nombre en la tarjeta",
     "premiumDescriptors": {
-      "buttonText": "Subscribe to Premium Plan",
+      "buttonText": "Suscríbete al Plan Premium",
       "left": {
-        "connect": "Connect 8 redes sociales",
-        "posts": "Schedule 2,000 posts",
-        "users": "Collaborate with 2 users"
+        "connect": "Conecta 8 redes sociales",
+        "posts": "Programa 2,000 publicaciones",
+        "users": "Colabora con 2 usuarios"
       },
-      "nonprofitMonthlyPrice": "$32.50 per month",
-      "nonprofitYearlyPrice": "$331.50 per year",
-      "plan": "Subscribe to the Premium plan!",
-      "planMonthlyDescription": "Cancel and get a refund any time",
-      "planMonthlyPrice": "$65 per month",
-      "planYearlyDescription": "Save 15% vs paying monthly",
-      "planYearlyPrice": "$663 per year",
+      "nonprofitMonthlyPrice": "$32.50 al mes",
+      "nonprofitYearlyPrice": "$331.50 al año",
+      "plan": "¡Suscríbete al plan Premium!",
+      "planMonthlyDescription": "Cancelar y obtén un reembolso en cualquier momento",
+      "planMonthlyPrice": "$65 al mes",
+      "planYearlyDescription": "Ahorra 15% respecto a pagar mensualmente",
+      "planYearlyPrice": "$663 al año",
       "right": {
-        "hashtags": "Use Hashtag Manager to optimize reach",
-        "insta": "Schedule a first comment on Instagram",
-        "shopgrid": "Drive sales through Shop Grid"
+        "hashtags": "Utiliza el Hashtag Manager para optimizar tu alcance",
+        "insta": "Programa un primer comentario en Instagram",
+        "shopgrid": "Obtén ventas a través de Instagram"
       }
     },
     "premiumSwitchHeader": "Switch to the Premium Plan!",
