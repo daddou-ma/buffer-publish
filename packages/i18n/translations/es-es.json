@@ -1,10 +1,10 @@
 {
   "billing-upgrade-cta-banner": {
-    "billedTrialEnd": "You'll be billed {billedAmount} at the end of your trial. ",
-    "completeBilling": "Add your billing details now to start your subscription.",
-    "planTrial": "You're on the {plan} trial. ",
-    "remainingTrial": "You have {remaining} on your {plan} plan trial. ",
-    "startSubscription": "Start Subscription"
+    "billedTrialEnd": "Se te cargará {billedAmount} al final de la prueba. ",
+    "completeBilling": "Añade tus datos de pago para empezar tu suscripción.",
+    "planTrial": "Estás en la prueba de {plan}. ",
+    "remainingTrial": "Te faltan {remaining} para seguir probando {plan}. ",
+    "startSubscription": "Empezar suscripción"
   },
   "campaigns": {
     "campaignForm": {
@@ -21,57 +21,57 @@
       "saveCampaign": "Guardar Campaña"
     },
     "deleteCampaignModal": {
-      "boldSubtext": "We won't be able to save or analyze any of your campaign data.",
-      "cancel": "Cancel",
-      "delete": "Yes, Delete Campaign",
-      "loading": "Deleting...",
-      "subtext": " If you also wish to stop the posts from within this campaign from publishing, please delete each one individually.",
-      "title": "Are you sure you want to delete your campaign,"
+      "boldSubtext": "No podremos guardar o analizar ninguno de los datos de tu campaña.",
+      "cancel": "Cancelar",
+      "delete": "Sí, borrar campaña",
+      "loading": "Borrando...",
+      "subtext": " Si también quieres parar de enviar las publicaciones de tu campaña, por favor, borra cada una individualmente.",
+      "title": "Estás seguro de querer borrar tu campaña,"
     },
     "emptyState": {
       "createCampaign": "Crear una Campaña",
-      "imageTag": "Ejemplo de campaña con múltiples publicaciones agendadas.",
-      "item1": "Crea una combinación saludable de contenido.",
-      "item2": "Mantén tu contenido organizado a través de las redes sociales.",
+      "imageTag": "Ejemplo de campaña con múltiples publicaciones programadas.",
+      "item1": "Añade contenido.",
+      "item2": "Mantenlo organizado a través de las redes sociales.",
       "item3": "Entiende cómo diferentes tipos de contenido resuenan con tu audiencia.",
       "learnMore": "Aprende Más",
-      "subtext": "Con Campañas, puedes organizar el contenido de tus redes sociales en temas o tópicos y hacer seguimiento de su éxito.",
-      "title": "Catgoriza tu contenido usando Campañas"
+      "subtext": "Con Campañas, puedes organizar el contenido de tus redes sociales en áreas o temas y hacer seguimiento de su éxito.",
+      "title": "Categoriza tu contenido usando Campañas"
     },
     "title": "Campañas",
     "viewCampaign": {
       "allPostsSent": {
-        "createCampaign": "Create New Campaign",
-        "createPost": "Create Post",
-        "subtitle": "All the content scheduled for this campaign has been sent.",
-        "title": "Woohoo — everything sent!",
-        "viewReport": "View Report"
+        "createCampaign": "Crear Nueva Campaña",
+        "createPost": "Crear Publicación",
+        "subtitle": "Todo el contenido programado para esta campaña ha sido publicado.",
+        "title": "¡Bien, todo enviado!",
+        "viewReport": "Ver Análisis"
       },
       "createPost": "Crear Publicación",
       "deleteCampaign": "Eliminar Campaña",
       "editCampaign": "Editar Campaña",
       "emptyCampaignBanner": {
-        "createPosts": "Create Posts",
-        "learnMore": "Learn More",
-        "subtext": "Eep, this campaign is empty! Create some posts and they’ll be organized here for you to review.",
-        "title": "Let’s build your campaign"
+        "createPosts": "Crear Publicaciones",
+        "learnMore": "Saber más",
+        "subtext": "Vaya, esta campaña está vacía. Crea algunas publicaciones y estarán aquí organizadas para que las revises.",
+        "title": "Empecemos tu campaña"
       },
       "emptySentPosts": {
-        "subtitle": "Once your scheduled posts are published, you’ll see them here with some basic post analytics.",
-        "title": "Standing by for sent posts..."
+        "subtitle": "Una vez que tus publicaciones programadas sean publicadas, las verás aquí con algunos datos básicos de cómo han ido.",
+        "title": "Esperando a publicaciones enviadas..."
       },
-      "loadingCampaignDetails": "Cargando detalles de la campaña, como fechas y contadores, por favor espere",
-      "loadingCampaignName": "Cargando nombre de la campaña, por favor espere",
-      "scheduled": "Agendado",
+      "loadingCampaignDetails": "Cargando detalles de la campaña, como fechas y contadores, por favor espera",
+      "loadingCampaignName": "Cargando nombre de la campaña, por favor espera",
+      "scheduled": "Programado",
       "sent": "Enviado",
       "viewCampaign": "Ver Campaña",
       "viewReport": "Ver Reporte"
     }
   },
   "close-composer-confirmation-modal": {
-    "cancel": "Cancel",
-    "sure": "Yes, Close Composer",
-    "text": "Are you sure you want to close the composer? You will lose any unsaved changes."
+    "cancel": "Cancelar",
+    "sure": "Sí, Cerrar Área de Creación",
+    "text": "¿Quieres cerrar el área de creación? Perderás todo lo que no has guardado."
   },
   "default-page": {
     "connectButton": "Conecta tu Red Social",
@@ -82,106 +82,106 @@
     "loggedOut": "Desconectado..."
   },
   "instagram-direct-posting-modal": {
-    "cta1": "Yes! Let's do it!",
-    "cta2": "I've Converted It to Business",
-    "description": "Direct Scheduling allows you to post images and videos to Instagram directly from Buffer, just as you can with any other network.",
-    "dismiss": "No thanks, I might do it later",
-    "headline": "Would you like to set up Direct Scheduling for Instagram?",
-    "instructions": "In order to set up Direct Scheduling you need to have an Instagram Business Profile. You can convert any account to a Business Profile through the Instagram mobile app. ",
-    "learnMore": "You can find the Instagram set up guide here."
+    "cta1": "¡Sí, vamos!",
+    "cta2": "Lo he convertido a business",
+    "description": "\"Direct Scheduling\" te permite enviar imágenes y videos directamente a Instagram desde Buffer, como con cualquier otra red social.",
+    "dismiss": "No gracias, más adelante",
+    "headline": "¿Te gustaría activar \"Direct Scheduling\" para Instagram?",
+    "instructions": "Para activar \"Direct Scheduling, tienes que tener un perfil Business en Instagram. Puedes convertir cualquier cuenta en business a través de la aplicación de Instagram. ",
+    "learnMore": "Puedes encontrar la guía de Instagram aquí."
   },
   "instagram-first-comment-modal": {
-    "body": "We’ll walk you through this now – It will just take a moment.",
-    "canRequestMorePermission": "We'll open up a window for you to grant us that permission now.",
-    "cancel": "Cancel",
-    "continue": "Continue",
-    "headline": "It looks like we’ll need permission to post an Instagram comment on your behalf. ",
-    "postOnYourBehalf": "You’ll need to allow Buffer to automatically post Instagram comments on your behalf. ",
-    "signout": "please sign out of your facebook account",
-    "userNeedsLogoutSignin": "To do this, {signout}, and log into the account which corresponds with {profileName}. Then we can open up a window for you to grant us that permission by clicking continue."
+    "body": "Te guiaremos ahora, sólo será un momento.",
+    "canRequestMorePermission": "Vamos a abrir una venta para que nos des permiso ahora.",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "headline": "Parece que necesitaremos permiso para publicar un comentario en Instagram con tu cuenta. ",
+    "postOnYourBehalf": "Necesitaríamos que nos des permiso para publicar comentarios en Instagram con tu cuenta. ",
+    "signout": "por favor sal de tu cuenta de Facebook",
+    "userNeedsLogoutSignin": "Para hacer esto, {signout}, y haz login con la cuenta que corresponde con {profileName}. Entonces podemos abrir una ventana para que nos des el permiso que necesitamos haciendo click en continuar."
   },
   "instagram-first-comment-pro-trial-modal": {
-    "body": "Prefer to keep hashtags out of your Instagram captions? Save time by scheduling them as a first comment instead.",
-    "buttonCopy": "Start a Free 7-Day Pro Trial",
-    "buttonLoadingCopy": "Starting a Free 7-Day Pro Trial...",
-    "buttonSubCopy": "NO CREDIT CARD REQUIRED",
-    "heading": "Go Pro to include a first comment on scheduled Instagram posts.",
-    "heading2": "Access all Pro features right now with a free 7-day trial.",
-    "imageAlt": "Publish your first comment directly to Instagram",
+    "body": "¿Prefieres mantener los hashtags fuera de tus pies de foto en Instagram? Ahorra tiempo programándolos como primer comentario.",
+    "buttonCopy": "Empieza una prueba Pro de 7 días",
+    "buttonLoadingCopy": "Empezando la prueba Pro de días...",
+    "buttonSubCopy": "NO HACE FALTA MÉTODO DE PAGO",
+    "heading": "Actualiza a Pro para incluir un primer comentario en tus publicaciones de Instagram programadas.",
+    "heading2": "Accede a todas la funcionalidades Pro ahora mismo con una prueba de 7 días.",
+    "imageAlt": "Publica tu primer comentario directamente a Instagram",
     "proTrialFeatures": {
-      "connectAccounts": "Connect up to",
-      "connectAccountsBold": " 8 social accounts",
-      "firstComment": "Schedule first comments on Instagram posts",
-      "integrations": "Utilize",
-      "integrations2": " to connect with Zapier, IFTTT, Quuu, Pocket, Feedly, and more.",
-      "integrationsBold": " 60+ third-party integrations",
-      "report": "Optimize your content with a",
-      "reportBold": " 30-day posting report",
-      "schedulePosts": "Schedule up to",
-      "schedulePosts2": " per social account",
-      "schedulePostsBold": " 100 posts",
-      "support": "Access fast, helpful email and social media",
-      "supportBold": " support"
+      "connectAccounts": "Conecta hasta",
+      "connectAccountsBold": " 8 redes sociales",
+      "firstComment": "Programa primeros comentarios en publicaciones de Instagram",
+      "integrations": "Utiliza",
+      "integrations2": " para conectar con Zapier, IFTTT, Quuu, Pocket, Feedly, y más.",
+      "integrationsBold": " más de 60 integraciones",
+      "report": "Optimiza el contenido con un",
+      "reportBold": " informe de 30 días",
+      "schedulePosts": "Programa hasta",
+      "schedulePosts2": " por red social",
+      "schedulePostsBold": " 100 publicaciones",
+      "support": "Accede rápido a través de email y redes sociales",
+      "supportBold": " a ayuda"
     }
   },
   "language": "Idioma",
   "onboarding-page": {
-    "analyticsTab": "Analytics",
-    "awaitingTab": "Awaiting Approval",
-    "company": "Foster Coffee Company",
-    "composerInput": "What would you like to share?",
-    "connectButton": "Manage Social Accounts",
-    "cta1": "You can also connect your",
-    "cta2": "and",
-    "cta3": "accounts.",
+    "analyticsTab": "Analíticas",
+    "awaitingTab": "Esperando aprobación",
+    "company": "Empresa Foster Coffee",
+    "composerInput": "¿Qué te gustaría compartir?",
+    "connectButton": "Gestiona las Redes Sociales",
+    "cta1": "También puedes conectar tus",
+    "cta2": "y",
+    "cta3": "redes sociales.",
     "ctaChannel1": "Linkedin",
     "ctaChannel2": "Pinterest",
-    "currentDay": "Today",
-    "description": "Connect a social account, so you can schedule your first post",
-    "draftsTab": "Drafts",
-    "name": "Justin Ozanich",
-    "queueTab": "Queue",
-    "role": "Marketing Manager",
-    "settingsTab": "Settings",
-    "skipStep": "Or skip this step",
-    "testemonial": "Publish helps us build a better model of content that generates more engagement.",
-    "title": "Your account has been set up!"
+    "currentDay": "Hoy",
+    "description": "Conecta tu red social para programar tu primera publicación",
+    "draftsTab": "Borradores",
+    "name": "Miriam González",
+    "queueTab": "Cola",
+    "role": "Directora de Márketing",
+    "settingsTab": "Preferencias",
+    "skipStep": "O sáltate este paso",
+    "testemonial": "Publish nos ayuda a mejorar el contenido que genera más interacciones.",
+    "title": "¡Tu cuenta ya está lista!"
   },
   "plans-page": {
-    "buttonDashboardText": "Back to Dashboard",
-    "headerText": "Choose your Buffer Publish plan",
+    "buttonDashboardText": "Volver al Dashboard",
+    "headerText": "Elige tu plan de Buffer Publish",
     "premium": {
-      "billingText": "Billed Monthly",
-      "buttonCurrentPlanText": "Current Plan",
-      "buttonText": "Choose Plan",
+      "billingText": "Facturado Mensualmente",
+      "buttonCurrentPlanText": "Plan Actual",
+      "buttonText": "Elige Plan",
       "cost": "$65",
       "featureTooltips": {
         "0": "",
         "1": "",
-        "2": "Plan, preview, and schedule Instagram Stories on web and mobile.",
-        "3": "Include the first comment when you schedule Instagram posts",
-        "4": "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
-        "5": "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+        "2": "Planifica, revisa y programa stories de Instagram Stories en web y móvil.",
+        "3": "Incluye un primer comentario cuando publiques tus posts de Instagram programados",
+        "4": "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza el alcance.",
+        "5": "Añade enlaces únicos a publicaciones de Instagram, cambiando tu perfil a una tienda online con un enlace en tu bio."
       },
       "features": {
-        "0": "8 social accounts",
-        "1": "2 users",
-        "2": "Instagram Stories",
-        "3": "Instagram first comment",
+        "0": "8 redes sociales",
+        "1": "2 usuarios",
+        "2": "Stories de Instagram",
+        "3": "Primer comentario en Instagram",
         "4": "Hashtag Manager",
-        "5": "Shop Grid"
+        "5": "Tienda en Instagram"
       },
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
       "soloCost": "$35",
       "soloNonProfitCost": "$17.50",
-      "subtitle": "Unlock advanced IG features",
+      "subtitle": "Desbloquea funcionalidades avanzadas de IG",
       "title": "Premium"
     },
     "premiumExperiment": {
-      "billingText": "Billed Monthly",
-      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Facturado Mensualmente",
+      "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Upgrade to Premium",
       "cost": "$65",
       "featureTooltips": {
@@ -209,9 +209,9 @@
       "title": "Premium"
     },
     "pro": {
-      "billingText": "Billed Monthly",
-      "buttonCurrentPlanText": "Current Plan",
-      "buttonText": "Choose Plan",
+      "billingText": "Facturado Mensualmente",
+      "buttonCurrentPlanText": "Plan Actual",
+      "buttonText": "Elige Plan",
       "cost": "$15",
       "featureTooltips": {
         "0": "",
@@ -230,10 +230,10 @@
       "title": "Pro"
     },
     "proExperiment": {
-      "billingText": "Billed Monthly",
-      "buttonCurrentPlanText": "Current Plan",
+      "billingText": "Facturado Mensualmente",
+      "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Upgrade to Pro",
-      "buttonTextDisabled": "Current Plan",
+      "buttonTextDisabled": "Plan Actual",
       "cost": "$15",
       "featureTooltips": {
         "0": "",
@@ -257,9 +257,9 @@
     "promoDescription": "For a limited time, upgrade to the Pro plan and keep your current pricing for 3 months.",
     "promoHeader": "Get more with the new Buffer Publish",
     "small": {
-      "billingText": "Billed Monthly",
-      "buttonCurrentPlanText": "Current Plan",
-      "buttonText": "Choose Plan",
+      "billingText": "Facturado Mensualmente",
+      "buttonCurrentPlanText": "Plan Actual",
+      "buttonText": "Elige Plan",
       "cost": "$99",
       "features": {
         "0": "25 social accounts",
