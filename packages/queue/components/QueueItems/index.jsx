@@ -9,11 +9,7 @@ import {
   transitionAnimationType,
 } from '@bufferapp/components/style/animation';
 import {
-  TextPost,
-  ImagePost,
-  MultipleImagesPost,
-  LinkPost,
-  VideoPost,
+  Post,
   PostDragWrapper,
   QueueButtonGroup,
 } from '@bufferapp/publish-shared-components';
@@ -62,14 +58,6 @@ const headerTextDateStyle = {
   marginLeft: '8px',
 };
 
-const postTypeComponentMap = new Map([
-  ['text', TextPost],
-  ['image', ImagePost],
-  ['multipleImage', MultipleImagesPost],
-  ['link', LinkPost],
-  ['video', VideoPost],
-]);
-
 /* eslint-disable react/prop-types */
 
 const renderPost = ({
@@ -96,6 +84,10 @@ const renderPost = ({
   const campaignId = post.campaignDetails ? post.campaignDetails.id : null;
   const postWithEventHandlers = {
     ...post,
+    service_geolocation_name: post.locationName,
+    source_url: post.sourceUrl,
+    subprofile_id: post.subprofileID,
+    service_user_tags: post.userTags,
     key: post.id,
     index,
     postDetails: post.postDetails,
@@ -116,8 +108,7 @@ const renderPost = ({
     onSetRemindersClick,
     hasCampaignsFeature,
   };
-  let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || TextPost;
+  const PostComponent = Post;
 
   const defaultStyle = {
     default: {
