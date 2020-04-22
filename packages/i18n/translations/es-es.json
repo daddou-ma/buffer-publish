@@ -272,7 +272,7 @@
       "monthly": "/mo",
       "nonProfitCost": "$49.50",
       "plan": "small",
-      "subtitle": "Built for teams building brands",
+      "subtitle": "Pensado para equipos creando marca",
       "title": "Business"
     }
   },
@@ -287,78 +287,78 @@
     "backToDashboard": "Volver al Dashboard"
   },
   "profile-sidebar": {
-    "connectButton": "Manejar Redes Sociales"
+    "connectButton": "Gestionar Redes Sociales"
   },
   "profiles-disconnected-banner": {
-    "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
-    "cta": "Reconnect Account",
+    "body": "Por favor, asegúrate de que estás logueado/a en esta cuenta en la misma red social y solucionaremos esto en un momento.",
+    "cta": "Reconectar Cuenta",
     "extraMessage": {
-      "instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."
+      "instagram": "Debido a cambios recientes en la API de Instagram, tus perfiles personales de Instagram necesitan ser reconectados."
     },
-    "headline": "Uh-oh, we've lost access to this account! Let's reconnect."
+    "headline": "Ups, hemos perdido acceso a esta cuenta. ¡Vamos a reconectarla!"
   },
   "profiles-disconnected-modal": {
-    "body1": "We’ve lost access to the following redes sociales, in order for us to resume posting to these accounts you will need to reconnect them.",
-    "body2": "Note: You’ll need to be logged in to the same account on the network to successfully reconnect your social account.",
-    "cta": "Reconnect",
+    "body1": " Hemos perdido accesso a las siguientes redes sociales, para volver a publicar en ellas, encestamos que las reconectes.",
+    "body2": "Importante: necesitas estar logueado/a en la misma cuenta de la red social para reconectarla correctamente.",
+    "cta": "Reconectar",
     "extraMessage": {
-      "instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."
+      "instagram": "Debido a cambios recientes en la API de Instagram, tus perfiles personales de Instagram necesitan ser reconectados."
     },
-    "headline": "We’ve lost access to some of your redes sociales",
-    "reconnecting": "Please wait..."
+    "headline": "Hemos perdido el acceso a algunas de tus redes sociales",
+    "reconnecting": "Por favor, espera..."
   },
   "steal-profile-modal": {
-    "body1": "Each social account can be tied to one Buffer account for security reasons. This Buffer account may be under a different email address that belongs to your organisation.",
-    "body2": "For us to connect",
-    "body3": "to your",
-    "body4": "Buffer account, it needs to be removed from the other account first.",
-    "getInTouch": "Get in touch",
-    "headline1": "Whoops, ",
-    "headline2": "is already connected to another Buffer account.",
-    "notSureWhere": "Not sure where your social account has been added already?",
-    "takeMeBack": "Take Me Back to Buffer"
+    "body1": "Cada red social puede ser enlazada con una cuenta de Buffer por razones de seguridad. Esta cuenta de Buffer podría estar asociada con una dirección de email diferente que pertenece a tu organización.",
+    "body2": "Para conectar",
+    "body3": "a tu",
+    "body4": "cuenta de Buffer, necesita que la eliminemos de la otra primero.",
+    "getInTouch": "Contáctanos",
+    "headline1": "Ups, ",
+    "headline2": "está conectada con otra cuenta de Buffer.",
+    "notSureWhere": "¿No estás seguro/a de dónde se ha añadido ya?",
+    "takeMeBack": "Volvamos a Buffer"
   },
   "story-group-composer": {
-    "addMedia": "Add Media",
-    "addNote": "Add Note",
-    "cancelNoteButton": "Back",
-    "noteImageAlt": "Instagram story media",
-    "notePlaceholder": "Add your caption or a note to self",
-    "noteSubText": "When it comes time to post, you'll be able to copy and paste your note into Instagram.",
-    "previewButton": "Preview",
-    "processingVideo": "Processing video",
-    "saveNoteButton": "Save Note",
-    "scheduleButton": "Schedule Story",
-    "scheduleLoadingButton": "Scheduling Story...",
-    "shareNowButton": "Share Now"
+    "addMedia": "Añadir Archivos",
+    "addNote": "Añadir Nota",
+    "cancelNoteButton": "Atrás",
+    "noteImageAlt": "Archivos de la story de Instagram",
+    "notePlaceholder": "Añade tu pie de foto o nota para ti",
+    "noteSubText": "Cuando sea el momento de publicar, podrás copiar y pegar tu nota en Instagram.",
+    "previewButton": "Previsualizar",
+    "processingVideo": "Procesando video",
+    "saveNoteButton": "Guardar Nota",
+    "scheduleButton": "Programar Story",
+    "scheduleLoadingButton": "Programando Story...",
+    "shareNowButton": "Publicar Ahora"
   },
   "story-group-queue": {
-    "bannerMobileTagText": "Hmm...looks like you might not have the latest version of the Buffer mobile app. Download it now so that you can share this Story!",
-    "inputPlaceholder": "What would you like to add to your Story?",
-    "mobileTagText": "Uh-oh! Looks like you might not have the latest version of the Buffer mobile app. Download it now to start using Stories!",
-    "reminderLinkText2": "Reminder ",
-    "reminderText1": "When it’s time to post your Story, we’ll send a ",
-    "reminderText3": "to your mobile device.",
+    "bannerMobileTagText": "Vaya...parece que no tienes la última versión de la aplicación móvil de Buffer. Descárgatela ahora para que puedas compartir esta story!",
+    "inputPlaceholder": "¿Qué te gustaría añadir a tu Story?",
+    "mobileTagText": "Oh! parece que no tienes la última versión de la aplicación móvil de Buffer.  Descárgatela ahora para empezar a usar Stories",
+    "reminderLinkText2": "Recordatorio ",
+    "reminderText1": "Cuando sea el momento de publicar tu Story, te enviaremos un ",
+    "reminderText3": "a tu móvil.",
     "start": {
-      "learnMore": "Learn More",
-      "setReminders": "Set Up Reminders to Get Started",
-      "step1Description": "Due to Instagram limitations, Stories can't be directly scheduled. A Reminder is a notification from the Buffer Publish app.",
-      "step1Title": "Set Up Reminders",
-      "step2Description": "Storyboard your content and create draft captions. Then, choose the date and time you'd like to share with your audience.",
-      "step2Title": "Compose Your Story",
-      "step3Description": "When your scheduled time arrives, Buffer will send you a Reminder. Preview on mobile, then tap to open in Instagram.",
-      "step3Title": "Share Your Story",
-      "title": "Get Started with Instagram Stories"
+      "learnMore": "Saber Más",
+      "setReminders": "Configura Recordatorios Para Empezar",
+      "step1Description": "Debido a las limitaciones de Instagram, las Stories no pueden ser publicadas directamente. Un Recordatorio es una notificación de la aplicación móvil de Buffer.",
+      "step1Title": "Configura Recordatorios",
+      "step2Description": "Planifica tu contenido y crea borradores para los textos. Después, elige la fecha y hora en la que te gustaría compartirlo con tus seguidores.",
+      "step2Title": "Crea Tu Story",
+      "step3Description": "Cuando llegue el momento programado, Buffer te mandará un Recordatorio. Previsualízalo en el móvil y toca para abrirlo en Instagram.",
+      "step3Title": "Comparte tu Story",
+      "title": "Empieza con Stories para Instagram"
     }
   },
   "story-preview": {
-    "addNote": "Add Note",
-    "cancel": "Cancel",
-    "editNote": "Edit Note",
-    "noteExplanation": "When it comes time to post, you'll be able to copy and paste your note into Instagram.",
-    "notePlaceholder": "Add your caption or a note-to-self",
-    "noteTitle": "Note",
-    "saveNote": "Save Note"
+    "addNote": "Añadir Nota",
+    "cancel": "Cancelar",
+    "editNote": "Editar Nota",
+    "noteExplanation": "Cuando llegue el momento de publicar, podrás copiar y pegar tu nota en Instagram.",
+    "notePlaceholder": "Añade tu pie de foto o nota para tí",
+    "noteTitle": "Nota",
+    "saveNote": "Guardar Nota"
   },
   "stripe": {
     "invalidZipError": "Whoops, looks like that zip code doesn't match what your bank has on record - up for trying again?",
