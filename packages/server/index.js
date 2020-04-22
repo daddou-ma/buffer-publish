@@ -1,5 +1,13 @@
 const isProduction = process.env.NODE_ENV === 'production';
+
+/**
+ * In standalone mode, load env vars right away
+ */
 const isStandalone = process.env.STANDALONE === 'true';
+const standalone = require('./standalone'); // eslint-disable-line
+if (isStandalone) {
+  standalone.loadEnv();
+}
 
 /**
  * Add Datadog APM in production
@@ -45,14 +53,9 @@ const { setupFaviconRoutes } = require('./lib/favicon');
 const { getBugsnagClient } = require('./lib/bugsnag');
 const { getStaticAssets } = require('./lib/assets');
 const getHtml = require('./lib/generateIndexHtml');
-const standalone = require('./standalone');
 
 // No nginx reverseproxy in standalone mode, so we need to do SSL
 const PORT = isStandalone ? 443 : 80;
-
-if (isStandalone) {
-  standalone.loadEnv();
-}
 
 const app = express();
 const server = isStandalone
