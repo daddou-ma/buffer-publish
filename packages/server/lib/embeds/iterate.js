@@ -11,4 +11,5 @@ const iterateScript = `<script>
     if(i.attachEvent) {i.attachEvent('onload', l);} else{i.addEventListener('load', l, false);}}(window, document,'script','iterate-js','Iterate'));
   </script>`;
 
-module.exports = ({ isProduction }) => (isProduction ? iterateScript : '');
+module.exports = ({ isProduction, isStandalone }) =>
+  isProduction && !isStandalone ? iterateScript : '';

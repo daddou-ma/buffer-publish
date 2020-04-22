@@ -21,8 +21,8 @@ const PLAN_CODE_FREE = 1;
 const canIncludeFullstory = user =>
   user.planCode && user.planCode !== PLAN_CODE_FREE;
 
-function getFullstoryScript({ user, isProduction }) {
-  if (canIncludeFullstory(user) && isProduction) {
+function getFullstoryScript({ user, isProduction, isStandalone }) {
+  if (canIncludeFullstory(user) && isProduction && !isStandalone) {
     return fullStoryScript;
   }
   return '';

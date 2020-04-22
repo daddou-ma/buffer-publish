@@ -19,6 +19,7 @@ Welcome to the Buffer Publish monorepo.
 - [Publishing Packages](#publishing-packages)
 - [Contributing](#contributing-🚀)
 - [Package Scripts](#package-scripts)
+- [Standalone Mode](#standalone-mode) ⭐️ **NEW**
 - [External Packages](#external-packages)
 
 ## What is Buffer Publish?
@@ -43,7 +44,7 @@ To get started on local development and testing:
 2. **Install the latest version of `yarn`**
   → [Installing Yarn](https://yarnpkg.com/en/docs/install)
 
-3. **Make sure you have node with version <= 9 (Node v10 is not compatible)**
+3. **Make sure you have node with version <= 12**
     ```
     $ node -v
     ```
@@ -81,32 +82,21 @@ To get started on local development and testing:
 
 ### Troubleshooting Dev Environment Issues
 
-1. **Fixing gRPC error on Dev Environment** 
-  
-  If after running the `./dev up` command you get an error specifying Publish was not able to start, it might be due to gRPC, to confirm, first:
-  
-   ```bash
-   # in ~/buffer-dev
-   $ ./dev doctor
-   ```
-   
-   That will generate a doctor.txt file in your `~/buffer-dev` directory, you can send the generated file in **#eng-local-dev** channel, or if you see is a gRPC related error in the output file, then run the following:
-   
-   ```bash
-   # in ~/buffer-dev
-   $ docker-compose -p bufferdev run --rm publish npm rebuild --update-binary
-   ```
- 
-And finally run `./dev up` again 🎉
+If after running the `./dev up` command you get an error specifying Publish was not able to start, try running the `doctor` tool:
+
+```bash
+# in ~/buffer-dev
+$ ./dev doctor
+```
+
+That will generate a doctor.txt file in your `~/buffer-dev` directory, you can send the generated file in **#eng-local-dev** Slack channel to ask for help!
 
 ## The Publish Server
 
 When you run the `./dev up` command from the [quick start](#quick-start) it spins up a number of containers on which Publish depends. It also spins up the `publish` container itself, which is [an Express server](/packages/server/index.js) with two purposes:
 
 1. **Serve [`index.html`](/packages/server/index.html) for all requests to https://publish.local.buffer.com**
-3. **Provide an `/rpc` endpoint/proxy** for making API calls in the front-end
-
-In the past the publish container's Express server also ran webpack and bundled the front-end code, **we decoupled this however when we started seeing instability and broken file watching within the container**. Webpack bundling now happens **on the host system**; which is why you run `yarn run watch` as a final step.
+3. **Provide an `/rpc/**` endpoint/proxy** for making API calls in the front-end
 
 ## Yarn Workspaces
 
@@ -132,6 +122,67 @@ We have a few helpful commands defined in this project's `package.json`.
 | 🆕 `yarn run test-package <path-to-package>`  | Start watching tests in coverage for a specific package directory. [Learn more](https://github.com/bufferapp/buffer-publish/pull/624). |
 `yarn test:debug <path to test>` | Runs `"node --inspect node_modules/.bin/jest --runInBand"` with the test you specify.
 | `yarn run start`  | Starts up the Publish Express server, [as explained above](#the-publish-server), and is run automatically when you start Publish with `./dev up`. (So in most cases you won't be running this command.) |
+
+## Standalone Mode
+
+In standalone mode Publish runs directly on your machine, no `buffer-dev` or Docker containers required. 
+User authentication is bypassed (see below) and all requests are sent directly to the production dev API (`dev-api`).
+
+Some caveats:
+
+  * `buffer-dev` services cannot be running at the same time.
+  * Only Publish is started; so for example the only way to connect a new social account is by going to production and doing it.
+  * In the same vein; you can't visit Classic or other services / APIs (i.e., Account, Login, Analyze, etc.)
+  * This depends on a correct Node setup locally, but since we already bundle outside the container, this shouldn't be a problem.
+
+### Why would I use this?
+
+Right now the primary purpose is to support easy end-to-end testing in CI (Continuous Integration), like GitHub Actions. When we can run the entire Publish app without other development / local dependencies then it makes simple end-to-end testing really simple.
+
+That said, because of how quick this is to boot up it's also a great way to quickly fix or work on a Publish-only task, or as a way to debug an issue occuring with production services while keeping the front-end code local for a fast feedback loop while making changes.
+
+### Configuration
+
+#### Step 1: Create a session JSON file
+
+When running in standalone mode Publish requires a `standalone-session.json` file to be present in the `packages/server/standalone` 
+directory. This file is a static representation of your logged in user/session.
+
+To generate this file for your own user (or for another user) visit the Buffer Admin and look for the _"Download Standalone Session JSON"_ link.
+
+### Step 2: Start Standalone Mode
+
+Once you have created your configuration file, you're ready to start standalone mode. 
+
+First ensure you have stopped `buffer-dev`, if it's running.
+
+```bash
+# in buffer-dev
+./dev stop
+```
+
+Now, start the standalone Publish server.
+
+```bash
+# in buffer-publish
+yarn run start:standalone
+```
+
+You should also ensure that you are watching/bundling the React app, as usual:
+
+```bash
+# in buffer-publish
+yarn run watch
+```
+
+Now visit https://publish.local.buffer.com – Publish should load. ✨
+
+Don't forget this is the production database you're interacting with now – but the cool part is you can still edit and work on the React app same as you do normally! 💪
+
+#### Note on Environment Variables
+
+The standalone server will automatically pull the environment vars from the [buffer-dev publish config](https://github.com/bufferapp/buffer-dev-config/blob/655827f8f9098a212e25bd91dded209aa9d6ae4c/config.yaml#L413). You can override any of those or add new ones by modifying the [`standalone.env` file in `packages/server/standalone`](/packages/server/standalone/standalone.env). 
+Right now the `standalone.env` is used to point to the Publish `dev-api`.
 
 ## External Packages
 
