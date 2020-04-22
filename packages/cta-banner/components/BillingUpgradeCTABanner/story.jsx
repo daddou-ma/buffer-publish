@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { Provider } from 'react-redux';
-import '@bufferapp/publish-web/components/i18n';
+import i18n from '@bufferapp/publish-web/components/i18n';
 
 import BillingUpgradeCTABanner from './index';
 
@@ -49,7 +49,7 @@ const fakeUser = {
   avatar: '',
   features: ['paid_users_in_new_publish'],
   trial: userOnTrial,
-  language: 'es-ES',
+  language: 'en-US',
 };
 
 function createMockStore(business, onTrial) {
@@ -72,6 +72,8 @@ function createMockStore(business, onTrial) {
 
 const storeBusiness = createMockStore(true, false);
 const storePro = createMockStore(false, true);
+
+i18n.changeLanguage(fakeUser.language);
 
 storiesOf('BillingUpgradeCTABanner', module)
   .addDecorator(withA11y)
