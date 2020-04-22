@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Popover, Card, Link } from '@bufferapp/components';
+import { grayDark } from '@bufferapp/ui/style/colors';
 
 import { Text, Button } from '@bufferapp/ui';
 
@@ -20,6 +22,10 @@ const buttonWrapperStyle = {
   justifyContent: 'space-between',
   width: '100%',
 };
+
+const DismissButton = styled(Button)`
+  color: ${grayDark};
+`;
 
 const InstagramDirectPostingModal = ({
   translations,
@@ -51,7 +57,7 @@ const InstagramDirectPostingModal = ({
             </div>
           )}
           <div style={buttonWrapperStyle}>
-            <Button
+            <DismissButton
               onClick={onHideInstagramModal}
               type="text"
               label={translations.dismiss}

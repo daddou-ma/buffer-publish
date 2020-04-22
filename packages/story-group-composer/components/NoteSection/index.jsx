@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, TextArea } from '@bufferapp/ui';
-import { grayDark } from '@bufferapp/ui/style/colors';
+import { grayDarker } from '@bufferapp/ui/style/colors';
 import { fontSize } from '@bufferapp/ui/style/fonts';
 import { translationsPropTypes } from '../../utils/commonPropTypes';
 
@@ -13,8 +13,8 @@ const NoteWrapper = styled.div`
   margin-left: 16px;
 `;
 
-const SubtextWrapper = styled.span`
-  color: ${grayDark};
+const SubtextText = styled(Text)`
+  color: ${grayDarker};
   margin: 8px 0px;
   font-size: ${fontSize};
 `;
@@ -32,9 +32,7 @@ const NoteSection = ({ note, setNote, translations }) => (
         fullHeight
         autoFocus
       />
-      <SubtextWrapper>
-        <Text>{translations.noteSubText}</Text>
-      </SubtextWrapper>
+      <SubtextText>{translations.noteSubText}</SubtextText>
     </NoteWrapper>
   </Fragment>
 );

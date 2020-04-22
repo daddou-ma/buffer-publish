@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, TextArea } from '@bufferapp/ui';
 import { storyPropTypes } from '../../utils/commonPropTypes';
+import { grayDark } from '@bufferapp/ui/style/colors';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -22,6 +23,10 @@ const ButtonWrapper = styled.div`
   button:last-of-type {
     margin-left: 10px;
   }
+`;
+
+const CancelButton = styled(Button)`
+  color: ${grayDark};
 `;
 
 const EditNote = ({ onSaveNoteClick, onCancelClick, story, translations }) => {
@@ -45,7 +50,7 @@ const EditNote = ({ onSaveNoteClick, onCancelClick, story, translations }) => {
         />
       </NoteWrapper>
       <ButtonWrapper>
-        <Button
+        <CancelButton
           type="text"
           label={translations.cancel}
           onClick={onCancelClick}
