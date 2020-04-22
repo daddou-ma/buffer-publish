@@ -1,0 +1,15 @@
+{
+  "name": "@bufferapp/language-preferences",
+  "version": "2.0.0",
+  "description": "Package to allow the user to edit their language preferences",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "maria.u@buffer.com",
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

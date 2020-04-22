@@ -19,7 +19,7 @@ storiesOf('Preferences', module)
   ))
   .add('default', () => (
     <Preferences
-      selectedTabId={'general'}
+      selectedTabId="general"
       onTabClick={action('onTabClick')}
       onBackToDashboardClick={e => {
         e.preventDefault();
@@ -30,7 +30,7 @@ storiesOf('Preferences', module)
   ))
   .add('with tab selected', () => (
     <Preferences
-      selectedTabId={'security'}
+      selectedTabId="security"
       onTabClick={action('onTabClick')}
       onBackToDashboardClick={e => {
         e.preventDefault();
@@ -41,7 +41,7 @@ storiesOf('Preferences', module)
   ))
   .add('with unknown tab', () => (
     <Preferences
-      selectedTabId={'generalz'}
+      selectedTabId="generalz"
       onTabClick={action('onTabClick')}
       onBackToDashboardClick={e => {
         e.preventDefault();

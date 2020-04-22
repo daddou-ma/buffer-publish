@@ -8,12 +8,8 @@ import {
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { PostEmptySlot } from '@bufferapp/publish-shared-components';
 
-import TextPost from '../TextPost';
-import ImagePost from '../ImagePost';
-import MultipleImagesPost from '../MultipleImagesPost';
 import Story from '../Story';
-import LinkPost from '../LinkPost';
-import VideoPost from '../VideoPost';
+import Post from '../Post';
 import PostDragWrapper from '../PostDragWrapper';
 import TextDraft from '../TextDraft';
 import ImageDraft from '../ImageDraft';
@@ -25,11 +21,11 @@ import QueueHeader from '../QueueHeader';
 const ErrorBoundary = getErrorBoundary(true);
 
 const postTypeComponentMap = new Map([
-  ['text', TextPost],
-  ['image', ImagePost],
-  ['multipleImage', MultipleImagesPost],
-  ['link', LinkPost],
-  ['video', VideoPost],
+  ['text', Post],
+  ['image', Post],
+  ['multipleImage', Post],
+  ['link', Post],
+  ['video', Post],
   ['storyGroup', Story],
 ]);
 
@@ -68,6 +64,10 @@ const renderPost = ({
 }) => {
   const postWithEventHandlers = {
     ...post,
+    service_geolocation_name: post.locationName,
+    source_url: post.sourceUrl,
+    subprofile_id: post.subprofileID,
+    service_user_tags: post.userTags,
     key: post.id,
     index,
     postDetails: post.postDetails,
@@ -88,7 +88,7 @@ const renderPost = ({
     userData,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || TextPost;
+  PostComponent = PostComponent || Post;
 
   const defaultStyle = {
     default: {

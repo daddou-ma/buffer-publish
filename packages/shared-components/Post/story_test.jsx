@@ -84,12 +84,6 @@ const subprofiles = [
   },
 ];
 
-const children = (
-  <Text size="mini" color="black">
-    {'Rubber baby buggy bumpers.'}
-  </Text>
-);
-
 storiesOf('Cards|Posts/Post', module)
   .addDecorator(withA11y)
   .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
@@ -100,9 +94,9 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       onEditClick={action('edit-click')}
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('sent', () => (
     <Post
@@ -112,9 +106,9 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       isSent
       statistics={statistics}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('error', () => (
     <Post
@@ -125,9 +119,9 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetailsError}
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('isConfirmingDelete', () => (
     <Post
@@ -137,9 +131,9 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('isDeleting', () => (
     <Post
@@ -149,9 +143,9 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('isWorking', () => (
     <Post
@@ -161,9 +155,9 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('retweet', () => (
     <Post
@@ -176,9 +170,9 @@ storiesOf('Cards|Posts/Post', module)
       retweetProfile={retweetProfile}
       isSent={false}
       basic={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('retweet with comment', () => (
     <Post
@@ -192,9 +186,9 @@ storiesOf('Cards|Posts/Post', module)
       retweetProfile={retweetProfile}
       retweetComment={retweetComment}
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('Instragram post with Location', () => (
     <Post
@@ -205,9 +199,9 @@ storiesOf('Cards|Posts/Post', module)
       locationName="Buffer, Earth"
       profileService="instagram"
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('Instragram post without Location', () => (
     <Post
@@ -217,9 +211,9 @@ storiesOf('Cards|Posts/Post', module)
       onEditClick={action('edit-click')}
       profileService="instagram"
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('Pinterest post with board and source URL', () => (
     <Post
@@ -232,9 +226,9 @@ storiesOf('Cards|Posts/Post', module)
       subprofileID="5bbca83e94803d000e7dca35"
       sourceUrl="http://google.com"
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ))
   .add('Pinterest post with board only', () => (
     <Post
@@ -246,7 +240,7 @@ storiesOf('Cards|Posts/Post', module)
       subprofiles={subprofiles}
       subprofileID="5bbca83e94803d000e7dca34"
       isSent={false}
-    >
-      {children}
-    </Post>
+      type="text"
+      text="Rubber baby buggy bumpers."
+    />
   ));

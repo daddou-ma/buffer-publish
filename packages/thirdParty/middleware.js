@@ -36,10 +36,6 @@ const shouldIdentifyWithAppcues = ({ isBusinessUser, plan, tags }) => {
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
-    case 'APP_INIT':
-      dispatch(dataFetchActions.fetch({ name: 'intercom' }));
-      break;
-
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({ type: actionTypes.FULLSTORY, result: action.result });
       dispatch({ type: actionTypes.APPCUES, result: action.result });
@@ -65,21 +61,6 @@ export default ({ dispatch, getState }) => next => action => {
       }
       break;
 
-    case `intercom_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const intercomUser = action.result;
-      if (window && window.Intercom) {
-        dispatch({
-          type: actionTypes.INTERCOM_LOADED,
-          loaded: true,
-        });
-        const extensionInstalled = checkExtensionInstalled();
-        window.Intercom('boot', {
-          ...intercomUser,
-          extension_installed: extensionInstalled,
-        });
-      }
-      break;
-    }
     case actionTypes.FULLSTORY:
       if (!action.result.is_free_user) {
         if (window) {
@@ -97,6 +78,7 @@ export default ({ dispatch, getState }) => next => action => {
         }
       }
       break;
+
     case actionTypes.APPCUES:
       if (window) {
         if (!window.Appcues) {
@@ -169,6 +151,7 @@ export default ({ dispatch, getState }) => next => action => {
         }
       }
       break;
+
     case 'COMPOSER_EVENT': {
       const {
         thirdparty: {
@@ -210,6 +193,7 @@ export default ({ dispatch, getState }) => next => action => {
 
       break;
     }
+
     case LOCATION_CHANGE: {
       const path = action.payload.location.pathname;
       /* when a user first hits publish.buffer.com, we select a profile for them and the routes changes

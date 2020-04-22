@@ -9774,7 +9774,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   color: #FFFFFF;
 }
 
-.c7 {
+.c9 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -9782,7 +9782,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9799,7 +9799,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9821,7 +9821,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   border-right: 1px solid #E0E0E0;
 }
 
-.c6 {
+.c8 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
@@ -9840,6 +9840,9 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -9876,18 +9879,27 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
+        <div
+          className="c4"
         >
-          Rubber baby buggy bumpers.
-        </span>
+          <span
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
       </div>
       <div
         style={
@@ -9947,21 +9959,21 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
         </span>
       </div>
       <div
-        className="c4"
+        className="c6"
       >
         <div
-          className="c5"
+          className="c7"
         >
           
           <p
-            className="c6 c7"
+            className="c8 c9"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <span
-          className="c8"
+          className="c10"
         >
           <button
             className="c9 c10"
@@ -10260,7 +10272,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   color: #FFFFFF;
 }
 
-.c7 {
+.c9 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -10268,7 +10280,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10285,7 +10297,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10307,7 +10319,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   border-right: 1px solid #E0E0E0;
 }
 
-.c6 {
+.c8 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
@@ -10326,6 +10338,9 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -10362,35 +10377,44 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
+        <div
+          className="c4"
         >
-          Rubber baby buggy bumpers.
-        </span>
+          <span
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
       </div>
       <div
-        className="c4"
+        className="c6"
       >
         <div
-          className="c5"
+          className="c7"
         >
           
           <p
-            className="c6 c7"
+            className="c8 c9"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <span
-          className="c8"
+          className="c10"
         >
           <button
             className="c9 c10"
@@ -10689,7 +10713,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   color: #FFFFFF;
 }
 
-.c7 {
+.c9 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -10697,7 +10721,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10714,7 +10738,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   border-top: 1px solid #E0E0E0;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10736,7 +10760,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   border-right: 1px solid #E0E0E0;
 }
 
-.c6 {
+.c8 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
@@ -10755,6 +10779,9 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -10791,18 +10818,27 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
+        <div
+          className="c4"
         >
-          Rubber baby buggy bumpers.
-        </span>
+          <span
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
       </div>
       <div
         style={
@@ -10896,21 +10932,21 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
         </span>
       </div>
       <div
-        className="c4"
+        className="c6"
       >
         <div
-          className="c5"
+          className="c7"
         >
           
           <p
-            className="c6 c7"
+            className="c8 c9"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <span
-          className="c8"
+          className="c10"
         >
           <button
             className="c9 c10"
@@ -11209,7 +11245,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   color: #FFFFFF;
 }
 
-.c7 {
+.c9 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -11217,7 +11253,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11234,7 +11270,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11256,7 +11292,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   border-right: 1px solid #E0E0E0;
 }
 
-.c6 {
+.c8 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
@@ -11275,6 +11311,24 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -11311,18 +11365,27 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
+        <div
+          className="c4"
         >
-          Rubber baby buggy bumpers.
-        </span>
+          <span
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
       </div>
       <div
         style={
@@ -11400,21 +11463,21 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
         </span>
       </div>
       <div
-        className="c4"
+        className="c6"
       >
         <div
-          className="c5"
+          className="c7"
         >
           
           <p
-            className="c6 c7"
+            className="c8 c9"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <span
-          className="c8"
+          className="c10"
         >
           <button
             className="c9 c10"
@@ -11713,7 +11776,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   color: #FFFFFF;
 }
 
-.c8 {
+.c10 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -11721,7 +11784,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11738,7 +11801,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11760,7 +11823,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   border-right: 1px solid #E0E0E0;
 }
 
-.c6 {
+.c8 {
   margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -11772,7 +11835,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   align-items: center;
 }
 
-.c7 {
+.c9 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
@@ -11791,6 +11854,24 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -11864,38 +11945,47 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
-        >
-          Rubber baby buggy bumpers.
-        </span>
-      </div>
-      <div
-        className="c4"
-      >
         <div
-          className="c5"
+          className="c4"
         >
           <span
-            className="c6"
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        className="c6"
+      >
+        <div
+          className="c7"
+        >
+          <span
+            className="c8"
           />
           
           <p
-            className="c7 c8"
+            className="c9 c10"
             color="grayDarker"
           >
             
           </p>
         </div>
         <span
-          className="c9"
+          className="c11"
         >
           <button
             className="c10 c11"
@@ -11967,7 +12057,7 @@ exports[`Storyshots Cards|Posts/Post isConfirmingDelete 1`] = `
   border-color: #B8B8B8;
 }
 
-.c7 {
+.c9 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -11975,7 +12065,7 @@ exports[`Storyshots Cards|Posts/Post isConfirmingDelete 1`] = `
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11992,7 +12082,7 @@ exports[`Storyshots Cards|Posts/Post isConfirmingDelete 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12007,15 +12097,33 @@ exports[`Storyshots Cards|Posts/Post isConfirmingDelete 1`] = `
   align-items: center;
 }
 
-.c6 {
+.c8 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c8 {
+.c10 {
   font-size: 12px;
   margin: 0;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -12052,35 +12160,44 @@ exports[`Storyshots Cards|Posts/Post isConfirmingDelete 1`] = `
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
+        <div
+          className="c4"
         >
-          Rubber baby buggy bumpers.
-        </span>
+          <span
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
       </div>
       <div
-        className="c4"
+        className="c6"
       >
         <div
-          className="c5"
+          className="c7"
         >
           
           <p
-            className="c6 c7"
+            className="c8 c9"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <p
-          className="c8 c7"
+          className="c10 c9"
           color="grayDarker"
         >
           Deleting...
@@ -12112,7 +12229,7 @@ exports[`Storyshots Cards|Posts/Post isDeleting 1`] = `
   border-color: #B8B8B8;
 }
 
-.c7 {
+.c9 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -12120,7 +12237,7 @@ exports[`Storyshots Cards|Posts/Post isDeleting 1`] = `
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12137,7 +12254,7 @@ exports[`Storyshots Cards|Posts/Post isDeleting 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12152,15 +12269,33 @@ exports[`Storyshots Cards|Posts/Post isDeleting 1`] = `
   align-items: center;
 }
 
-.c6 {
+.c8 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c8 {
+.c10 {
   font-size: 12px;
   margin: 0;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -12197,35 +12332,44 @@ exports[`Storyshots Cards|Posts/Post isDeleting 1`] = `
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
+        <div
+          className="c4"
         >
-          Rubber baby buggy bumpers.
-        </span>
+          <span
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
       </div>
       <div
-        className="c4"
+        className="c6"
       >
         <div
-          className="c5"
+          className="c7"
         >
           
           <p
-            className="c6 c7"
+            className="c8 c9"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <p
-          className="c8 c7"
+          className="c10 c9"
           color="grayDarker"
         >
           Deleting...
@@ -12257,7 +12401,7 @@ exports[`Storyshots Cards|Posts/Post isWorking 1`] = `
   border-color: #B8B8B8;
 }
 
-.c7 {
+.c9 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -12265,7 +12409,7 @@ exports[`Storyshots Cards|Posts/Post isWorking 1`] = `
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12282,7 +12426,7 @@ exports[`Storyshots Cards|Posts/Post isWorking 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12297,15 +12441,33 @@ exports[`Storyshots Cards|Posts/Post isWorking 1`] = `
   align-items: center;
 }
 
-.c6 {
+.c8 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c8 {
+.c10 {
   font-size: 12px;
   margin: 0;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -12342,35 +12504,44 @@ exports[`Storyshots Cards|Posts/Post isWorking 1`] = `
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
+        <div
+          className="c4"
         >
-          Rubber baby buggy bumpers.
-        </span>
+          <span
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
       </div>
       <div
-        className="c4"
+        className="c6"
       >
         <div
-          className="c5"
+          className="c7"
         >
           
           <p
-            className="c6 c7"
+            className="c8 c9"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <p
-          className="c8 c7"
+          className="c10 c9"
           color="grayDarker"
         >
           Sharing...
@@ -12629,7 +12800,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   color: #FFFFFF;
 }
 
-.c7 {
+.c9 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -12637,7 +12808,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12654,7 +12825,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12676,7 +12847,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   border-right: 1px solid #E0E0E0;
 }
 
-.c6 {
+.c8 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
@@ -12695,6 +12866,9 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -12731,35 +12905,44 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
+        <div
+          className="c4"
         >
-          Rubber baby buggy bumpers.
-        </span>
+          <span
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
       </div>
       <div
-        className="c4"
+        className="c6"
       >
         <div
-          className="c5"
+          className="c7"
         >
           
           <p
-            className="c6 c7"
+            className="c8 c9"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <span
-          className="c8"
+          className="c10"
         >
           <button
             className="c9 c10"
@@ -13092,7 +13275,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   cursor: inherit;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13109,7 +13292,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c13 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13131,7 +13314,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   border-right: 1px solid #E0E0E0;
 }
 
-.c14 {
+.c16 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
@@ -13187,6 +13370,24 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
 
 .c4 {
   margin-bottom: 1rem;
+}
+
+.c13 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -13272,36 +13473,45 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
               </div>
             </div>
           </div>
-          <span
-            style={
-              Object {
-                "color": "#000",
-                "fontFamily": "\\"Roboto\\", sans-serif",
-                "fontSize": "0.875rem",
-                "fontWeight": 400,
-              }
-            }
+          <div
+            className="c12"
           >
-            Rubber baby buggy bumpers.
-          </span>
+            <span
+              className="c13"
+            >
+              <span
+                style={
+                  Object {
+                    "color": "#000",
+                    "fontFamily": "\\"Roboto\\", sans-serif",
+                    "fontSize": "0.875rem",
+                    "fontWeight": 400,
+                    "whiteSpace": "pre-wrap",
+                  }
+                }
+              >
+                Rubber baby buggy bumpers.
+              </span>
+            </span>
+          </div>
         </div>
       </div>
       <div
-        className="c12"
+        className="c14"
       >
         <div
-          className="c13"
+          className="c15"
         >
           
           <p
-            className="c14 c11"
+            className="c16 c11"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <span
-          className="c15"
+          className="c17"
         >
           <button
             className="c16 c17"
@@ -13634,7 +13844,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   cursor: inherit;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13651,7 +13861,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c13 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13673,7 +13883,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   border-right: 1px solid #E0E0E0;
 }
 
-.c14 {
+.c16 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
@@ -13729,6 +13939,24 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
 
 .c4 {
   margin-bottom: 1rem;
+}
+
+.c13 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -13849,36 +14077,45 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
               </div>
             </div>
           </div>
-          <span
-            style={
-              Object {
-                "color": "#000",
-                "fontFamily": "\\"Roboto\\", sans-serif",
-                "fontSize": "0.875rem",
-                "fontWeight": 400,
-              }
-            }
+          <div
+            className="c12"
           >
-            Rubber baby buggy bumpers.
-          </span>
+            <span
+              className="c13"
+            >
+              <span
+                style={
+                  Object {
+                    "color": "#000",
+                    "fontFamily": "\\"Roboto\\", sans-serif",
+                    "fontSize": "0.875rem",
+                    "fontWeight": 400,
+                    "whiteSpace": "pre-wrap",
+                  }
+                }
+              >
+                Rubber baby buggy bumpers.
+              </span>
+            </span>
+          </div>
         </div>
       </div>
       <div
-        className="c12"
+        className="c14"
       >
         <div
-          className="c13"
+          className="c15"
         >
           
           <p
-            className="c14 c11"
+            className="c16 c11"
             color="grayDarker"
           >
             This post will be sent at 9:21 (GMT)
           </p>
         </div>
         <span
-          className="c15"
+          className="c17"
         >
           <button
             className="c16 c17"
@@ -13950,7 +14187,7 @@ exports[`Storyshots Cards|Posts/Post sent 1`] = `
   border-color: #B8B8B8;
 }
 
-.c7 {
+.c9 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -13958,7 +14195,7 @@ exports[`Storyshots Cards|Posts/Post sent 1`] = `
   line-height: 20px;
 }
 
-.c4 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13972,7 +14209,7 @@ exports[`Storyshots Cards|Posts/Post sent 1`] = `
   border-radius: 0 0 4px 4px;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13987,10 +14224,28 @@ exports[`Storyshots Cards|Posts/Post sent 1`] = `
   align-items: center;
 }
 
-.c6 {
+.c8 {
   font-size: 12px;
   margin: 0;
   color: #636363;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .c0 {
@@ -14027,28 +14282,37 @@ exports[`Storyshots Cards|Posts/Post sent 1`] = `
       <div
         className="c3"
       >
-        <span
-          style={
-            Object {
-              "color": "#000",
-              "fontFamily": "\\"Roboto\\", sans-serif",
-              "fontSize": "0.875rem",
-              "fontWeight": 400,
-            }
-          }
+        <div
+          className="c4"
         >
-          Rubber baby buggy bumpers.
-        </span>
+          <span
+            className="c5"
+          >
+            <span
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "\\"Roboto\\", sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "whiteSpace": "pre-wrap",
+                }
+              }
+            >
+              Rubber baby buggy bumpers.
+            </span>
+          </span>
+        </div>
       </div>
       <div
-        className="c4"
+        className="c6"
       >
         <div
-          className="c5"
+          className="c7"
         >
           
           <p
-            className="c6 c7"
+            className="c8 c9"
             color="grayDarker"
           >
             This post was sent June 20th at 9:21 (GMT)

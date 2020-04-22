@@ -2,7 +2,7 @@
 jest.mock('@bufferapp/micro-rpc-client');
 jest.mock('request-promise');
 import rp from 'request-promise';
-import changeDateTimePreferences from './';
+import changeDateTimePreferences from '.';
 
 const accessToken = 'AN ACCESS TOKEN';
 const session = {

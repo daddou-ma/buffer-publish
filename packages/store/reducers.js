@@ -9,6 +9,7 @@ import pastRemindersReducer from '@bufferapp/publish-past-reminders/reducer';
 import draftsReducer from '@bufferapp/publish-drafts/reducer';
 import postingScheduleReducer from '@bufferapp/publish-posting-schedule/reducer';
 import generalSettingsReducer from '@bufferapp/publish-general-settings/reducer';
+import languageSettingsReducer from '@bufferapp/language-preferences/reducer';
 import i18nReducer from '@bufferapp/publish-i18n/reducer';
 import profileSidebarReducer from '@bufferapp/publish-profile-sidebar/reducer';
 import clientAccessReducer from '@bufferapp/client-access/reducer';
@@ -76,6 +77,7 @@ export default {
   productFeatures: productFeaturesReducer,
   drafts: draftsReducer,
   generalSettings: generalSettingsReducer,
+  languageSettings: languageSettingsReducer,
   postingSchedule: postingScheduleReducer,
   profilesDisconnectedModal: profilesDisconnectedModalReducer,
   instagramDirectPostingModal: instagramDirectPostingModalReducer,
