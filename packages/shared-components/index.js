@@ -21,6 +21,7 @@ export ImagePost from './ImagePost';
 export LinkPost from './LinkPost';
 export MultipleImagesPost from './MultipleImagesPost';
 export Notification from './Notification';
+export Post from './Post';
 export PostDragWrapper from './PostDragWrapper';
 export PostEmptySlot from './PostEmptySlot';
 export PostList from './PostList';
