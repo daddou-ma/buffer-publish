@@ -1,6 +1,6 @@
 {
   "billing-upgrade-cta-banner": {
-    "billedTrialEnd": "Se te cargará {billedAmount} al final de la prueba. ",
+    "billedTrialEnd": "Se te cobrará {billedAmount} al final de la prueba. ",
     "completeBilling": "Añade tus datos de pago para empezar tu suscripción.",
     "planTrial": "Estás en la prueba de {plan}. ",
     "remainingTrial": "Te faltan {remaining} para seguir probando {plan}. ",
@@ -378,7 +378,7 @@
       "plan": "Suscríbete al plan de Small Business",
       "planMonthlyDescription": "Cancela y obtén un reembolso en cualquier momento",
       "planMonthlyPrice": "$99 al mes",
-      "planYearlyDescription": "Ahorra 15% respecto a pagar mensualmente",
+      "planYearlyDescription": "Ahorra un 15% respecto a pagar mensualmente",
       "planYearlyPrice": "$1,010 al año",
       "right": {
         "hashtags": "Utiliza el Hashtag Manager para optimizar tu alcance",
@@ -406,9 +406,9 @@
       "nonprofitMonthlyPrice": "$32.50 al mes",
       "nonprofitYearlyPrice": "$331.50 al año",
       "plan": "¡Suscríbete al plan Premium!",
-      "planMonthlyDescription": "Cancelar y obtén un reembolso en cualquier momento",
+      "planMonthlyDescription": "Cancela y obtén un reembolso en cualquier momento",
       "planMonthlyPrice": "$65 al mes",
-      "planYearlyDescription": "Ahorra 15% respecto a pagar mensualmente",
+      "planYearlyDescription": "Ahorra un 15% respecto a pagar mensualmente",
       "planYearlyPrice": "$663 al año",
       "right": {
         "hashtags": "Utiliza el Hashtag Manager para optimizar tu alcance",
@@ -416,75 +416,75 @@
         "shopgrid": "Obtén ventas a través de Instagram"
       }
     },
-    "premiumSwitchHeader": "Switch to the Premium Plan!",
-    "proCalendarView": "Get a calendar view of your publishing schedule",
-    "proConnect": "Connect up to eight redes sociales including Pinterest",
+    "premiumSwitchHeader": "Cámbiate al plan Premium",
+    "proCalendarView": "Obtén un calendario con tu programación de publicaciones",
+    "proConnect": "Conecta hasta 8 redes sociales incluyendo Pinterest",
     "proDescriptors": {
-      "buttonText": "Subscribe to Pro Plan",
+      "buttonText": "Suscríbete al Plan Pro",
       "left": {
-        "calendar": "Get a calendar view of your publishing schedule",
-        "connect": "Connect 8 redes sociales",
-        "users": "1 user"
+        "calendar": "Obtén un calendario con tu programación de publicaciones",
+        "connect": "Conecta 8 redes sociales",
+        "users": "1 usuario"
       },
-      "nonprofitMonthlyPrice": "$7.50 per month",
-      "nonprofitPromoMonthlyPrice": "$5.00 per month",
-      "nonprofitYearlyPrice": "$72 per year",
-      "plan": "Subscribe to the Pro plan!",
-      "planMonthlyDescription": "Cancel and get a refund any time",
-      "planMonthlyPrice": "$15 per month",
-      "planPromoMonthlyPrice": "$10 per month",
-      "planYearlyDescription": "Save 20% vs paying monthly",
-      "planYearlyPrice": "$144 per year",
+      "nonprofitMonthlyPrice": "$7.50 al mes",
+      "nonprofitPromoMonthlyPrice": "$5.00 al mes",
+      "nonprofitYearlyPrice": "$72 al año",
+      "plan": "Suscríbete al Plan Pro",
+      "planMonthlyDescription": "Cancela y obtén un reembolso en cualquier momento",
+      "planMonthlyPrice": "$15 al mes",
+      "planPromoMonthlyPrice": "$10 al mes",
+      "planYearlyDescription": "Ahorra un 20% respecto a pagar mensualmente",
+      "planYearlyPrice": "$144 al año",
       "right": {
-        "history": "Review a 30-day history of your posts",
-        "insta": "Schedule a first comment on Instagram",
-        "posts": "Schedule 100 posts"
+        "history": "Historial de 30 días con tus publicaciones",
+        "insta": "Programa un primer comentario en Instagram",
+        "posts": "Programa 100 publicaciones"
       }
     },
-    "proIGFirstComment": "Schedule first comment to Instagram",
-    "proPlan": "Pro Plan",
-    "proPlanMonthlyDescription": "Cancel and get a refund any time",
-    "proPlanMonthlyPrice": "$15 per month",
-    "proPlanNonprofitMonthlyPrice": "$7.50 per month",
-    "proPlanNonprofitYearlyPrice": "$72 per year",
-    "proPlanScheduling": "Schedule 100 posts per social account",
-    "proPlanYearlyDescription": "Save 20% vs paying monthly",
-    "proPlanYearlyPrice": "$144 per year",
-    "proReviewHistory": "Review a 30-day history of your posts",
-    "proSchedule": "Schedule up to 100 posts per account",
-    "proTrialistSubCopy": "The Pro plan includes up to 8 redes sociales, custom thumbnails for Instagram videos, Instagram first comment and more.",
-    "proTrialistUpgradeHeader": "Complete your trial and upgrade to the Pro Plan!",
-    "proUpgradeHeader": "Upgrade to the Pro Plan!",
-    "securityCode": "Security code",
+    "proIGFirstComment": "Programa un primer comentario en Instagram",
+    "proPlan": "Plan Pro",
+    "proPlanMonthlyDescription": "Cancela y obtén un reembolso en cualquier momento",
+    "proPlanMonthlyPrice": "$15 al mes",
+    "proPlanNonprofitMonthlyPrice": "$7.50 al mes",
+    "proPlanNonprofitYearlyPrice": "$72 al año",
+    "proPlanScheduling": "Programa 100 publicaciones por red social",
+    "proPlanYearlyDescription": "Ahorra un 20% respecto a pagar mensualmente",
+    "proPlanYearlyPrice": "$144 al año",
+    "proReviewHistory": "Historial de 30 días con tus publicaciones",
+    "proSchedule": "Programa hasta 100 publicaciones por red social",
+    "proTrialistSubCopy": "El plan Pro incluye hasta 8 redes sociales, thumbnails propios para videos en Instagram, primeros comentarios en Instagram y más.",
+    "proTrialistUpgradeHeader": "Completa tu prueba y actualiza al plan Pro!",
+    "proUpgradeHeader": "Actualiza al Plan Pro!",
+    "securityCode": "Código de Seguridad",
     "soloPremiumDescriptors": {
-      "buttonText": "Subscribe to Premium Plan",
+      "buttonText": "Suscríbete al Plan Premium",
       "left": {
-        "connect": "Connect 8 redes sociales",
-        "posts": "Schedule 2,000 posts",
-        "users": "1 user"
+        "connect": "Conecta 8 redes sociales",
+        "posts": "Programa 2,000 publicaciones",
+        "users": "1 usuario"
       },
-      "nonprofitMonthlyPrice": "$17.50 per month",
-      "nonprofitYearlyPrice": "$168 per year",
-      "plan": "Subscribe to the Premium plan!",
-      "planMonthlyDescription": "Cancel and get a refund any time",
-      "planMonthlyPrice": "$35 per month",
-      "planYearlyDescription": "Save 20% vs paying monthly",
-      "planYearlyPrice": "$336 per year",
+      "nonprofitMonthlyPrice": "$17.50 al mes",
+      "nonprofitYearlyPrice": "$168 al año",
+      "plan": "Suscríbete al plan Premium!",
+      "planMonthlyDescription": "Cancela y obtén un reembolso en cualquier momento",
+      "planMonthlyPrice": "$35 al mes",
+      "planYearlyDescription": "Ahorra un 20% respecto a pagar mensualmente",
+      "planYearlyPrice": "$336 al año",
       "right": {
-        "hashtags": "Use Hashtag Manager to optimize reach",
-        "insta": "Schedule a first comment on Instagram",
-        "shopgrid": "Drive sales through Shop Grid"
+        "hashtags": "Utiliza el Hashtag Manager para optimizar tu alcance",
+        "insta": "Programa un primer comentario en Instagram",
+        "shopgrid": "Obtén ventas a través de Instagram"
       }
     },
-    "switchCta": "Switch your plan",
-    "validating": "One moment...",
-    "zipCode": "Zip code",
-    "zipLeaveBlank": "Leave blank for non-US cards"
+    "switchCta": "Cambia tu plan",
+    "validating": "Un momento...",
+    "zipCode": "Código postal",
+    "zipLeaveBlank": "Dejar en blanco para tarjetas fuera de USA"
   },
   "trial-complete-modal": {
-    "cancelTrial": "Cancel Trial",
-    "completeAndUpgrade": "Complete and Upgrade",
-    "header": "Your Buffer {plan} trial is complete!"
+    "cancelTrial": "Cancelar Prueba",
+    "completeAndUpgrade": "Completar y Mejorar Plan",
+    "header": "¡Tu prueba del plan {plan} ha terminado!"
   },
   "upload-zone": {
     "buttonTitle": "Subir archivo multimedia",
@@ -495,51 +495,51 @@
     "invalidFormatCantUseSomeFiles": "No podemos usar algunos de los tipos de archivos seleccionados. ¿Podrías intentar con algunos de los siguientes?: {acceptedFilesText}"
   },
   "user-tags": {
-    "btnCancel": "Cancel",
-    "btnSave": "Save",
-    "footerText": "Instagram API limitations prevent searching for usernames and tagging private users.",
-    "imgAltText": "Image to tag users",
-    "inputBtnAddTag": "Add Tag",
-    "inputBtnCancel": "Cancel",
-    "inputBtnLabel": "Add Tag",
-    "inputLabel": "Instagram User",
-    "maxLimitText": "Reached the 20 tag limit.",
-    "placeholder": "username",
-    "rightHeader": "Tag Users",
-    "rightHeaderSubtext": "Click anywhere on the photo to tag a public user.",
-    "tooltip": "View profile",
-    "usernameError": "Oops! User already tagged"
+    "btnCancel": "Cancelar",
+    "btnSave": "Guardar",
+    "footerText": "Las limitaciones en Instagram no nos dejan buscar por nombres de usuario y etiquetar usuarios privados.",
+    "imgAltText": "Imagen para etiquetar usuarios",
+    "inputBtnAddTag": "Añadir Etiqueta",
+    "inputBtnCancel": "Cancelar",
+    "inputBtnLabel": "Añadir Etiqueta",
+    "inputLabel": "Usuario en Instagram",
+    "maxLimitText": "Límite de 20 etiquetas alcanzado.",
+    "placeholder": "nombre de usuario",
+    "rightHeader": "Etiqueta Usuarios",
+    "rightHeaderSubtext": "Haz click donde quieras en la imagen para etiquetar un usuario público.",
+    "tooltip": "Ver perfil",
+    "usernameError": "Ups! Ya has etiquetado a ese usuario"
   },
   "welcome-modal": {
-    "body1": "We've tidied up the look of your Buffer dashboard!",
-    "body2": "We've kept all your posts and content just as it was but with a cleaner and faster experience.",
-    "cta": "Let's Go!",
-    "headline": "We've refreshed the look of Buffer"
+    "body1": "¡Hemos mejorado el aspecto del dashboard de Buffer!",
+    "body2": "Con todas tus publicaciones y contenido pero con una experiencia de uso más rápida y sencilla.",
+    "cta": "¡Vamos!",
+    "headline": "Hemos mejorado el aspecto de Buffer"
   },
   "welcome-paid-modal": {
     "step1": {
-      "body1": "It's the same Buffer you’ve come to love – now simpler and faster, with ",
-      "body2": "advanced Instagram features to help you grow your reach.",
-      "cta": "Learn More",
-      "headline": "A Better Buffer Experience"
+      "body1": "Es el mismo Buffer Publish que te gusta – ahora más sencillo y rápido, con ",
+      "body2": "funcionalidades avanzadas de Instagram para ayudarte a crecer.",
+      "cta": "Saber Más",
+      "headline": "Un mejor Buffer Publish"
     },
     "step2": {
-      "altText": "Instagram Grid Shop with custom URLs",
-      "body": "Seamlessly transition your Instagram audience to your online store by linking your profile to a shoppable page, powered by your Instagram grid.",
-      "cta": "Continue",
-      "headline": "Turn Instagram Posts Into Sales"
+      "altText": "Tienda en Instagram con URL propia",
+      "body": "LLeva a tu audiencia e nInstagram a tu tienda online enlazando en tu perfil una página donde pueden comprar, con tus publicaciones ya hechas.",
+      "cta": "Continuar",
+      "headline": "De Publicaciones de Intagram a Ventas"
     },
     "step3": {
-      "altText": "Hashtag Manager for Instagram",
-      "body": "Optimize your reach by including a first comment on Instagram posts. Insert custom saved hashtag groups with Hashtag Manager.",
+      "altText": "Manager de Hashtags para Instagram",
       "cta": "Continue",
-      "headline": "Include a First Comment with Saved Hashtags"
+      "body": "Optimiza tus publicaciones incluyendo un primer comentario en publicaciones de Instagram. Inserta grupos de hashtags previamente guardados cone el Hashtag Manager.",
+      "headline": "Incluye un primer comentario con hashtags guardados"
     },
     "step4": {
-      "altText": "You can go back to classic Buffer from the top menu",
-      "body": "Feeling nostalgic? Switch back to classic Buffer at any time.",
-      "cta": "Sounds Good",
-      "headline": "Switch Back at Any Time"
+      "altText": "Puedes volver al Buffer clásico desde el menú de arriba",
+      "body": "¿Lo echas de menos? Puedes volver al Buffer clásico en cualquier momento.",
+      "cta": "Suena Bien",
+      "headline": "Vuelve en cualquier momento"
     }
   }
 }
