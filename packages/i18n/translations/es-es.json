@@ -1,24 +1,24 @@
 {
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "You'll be billed {billedAmount} at the end of your trial. ",
-    "completeBilling": "Add your billing details now to start your subscription. ",
+    "completeBilling": "Add your billing details now to start your subscription.",
     "planTrial": "You're on the {plan} trial. ",
     "remainingTrial": "You have {remaining} on your {plan} plan trial. ",
     "startSubscription": "Start Subscription"
   },
   "campaigns": {
     "campaignForm": {
-      "ariaLabel": "Name input for campaign form",
-      "cancel": "Cancel",
+      "ariaLabel": "Campo nombre para el formulario de campaña",
+      "cancel": "Cancelar",
       "color": "Color",
-      "createTitle": "Create Campaign",
-      "editTitle": "Edit Campaign",
-      "name": "Name",
-      "notice1": "Campaign content is visible to everyone in your organization. ",
-      "notice2": "Find out more",
-      "notice3": " in our FAQ.",
-      "placeholder": "Add campaign name",
-      "saveCampaign": "Save Campaign"
+      "createTitle": "Crear Campaña",
+      "editTitle": "Editar Campaña",
+      "name": "Nombre",
+      "notice1": "El contenido de la campaña es visible para todos los miembros tu organización.",
+      "notice2": "Descubre más",
+      "notice3": " en nuestro FAQ.",
+      "placeholder": "Nombre de la campaña",
+      "saveCampaign": "Guardar Campaña"
     },
     "deleteCampaignModal": {
       "boldSubtext": "We won't be able to save or analyze any of your campaign data.",
@@ -29,16 +29,16 @@
       "title": "Are you sure you want to delete your campaign,"
     },
     "emptyState": {
-      "createCampaign": "Create a Campaign",
-      "imageTag": "Example of campaign with multiple posts scheduled.",
-      "item1": "Create a healthy mix of content.",
-      "item2": "Keep your content organized across social channels.",
-      "item3": "Understand how different content types resonate with your audience.",
-      "learnMore": "Learn More",
-      "subtext": "With Campaigns you can organize your social media posts into themes or topics and track their success.",
-      "title": "Categorize your content using Campaigns"
+      "createCampaign": "Crear una Campaña",
+      "imageTag": "Ejemplo de campaña con múltiples publicaciones agendadas.",
+      "item1": "Crea una combinación saludable de contenido.",
+      "item2": "Mantén tu contenido organizado a través de las redes sociales.",
+      "item3": "Entiende cómo diferentes tipos de contenido resuenan con tu audiencia.",
+      "learnMore": "Aprende Más",
+      "subtext": "Con Campañas, puedes organizar el contenido de tus redes sociales en temas o tópicos y hacer seguimiento de su éxito.",
+      "title": "Catgoriza tu contenido usando Campañas"
     },
-    "title": "Campaigns",
+    "title": "Campañas",
     "viewCampaign": {
       "allPostsSent": {
         "createCampaign": "Create New Campaign",
@@ -47,9 +47,9 @@
         "title": "Woohoo — everything sent!",
         "viewReport": "View Report"
       },
-      "createPost": "Create Post",
-      "deleteCampaign": "Delete Campaign",
-      "editCampaign": "Edit Campaign",
+      "createPost": "Crear Publicación",
+      "deleteCampaign": "Eliminar Campaña",
+      "editCampaign": "Editar Campaña",
       "emptyCampaignBanner": {
         "createPosts": "Create Posts",
         "learnMore": "Learn More",
@@ -60,12 +60,12 @@
         "subtitle": "Once your scheduled posts are published, you’ll see them here with some basic post analytics.",
         "title": "Standing by for sent posts..."
       },
-      "loadingCampaignDetails": "Loading campaign details such as date and counters, please hold on",
-      "loadingCampaignName": "Loading campaign name, please hold on",
-      "scheduled": "Scheduled",
-      "sent": "Sent",
-      "viewCampaign": "View Campaign",
-      "viewReport": "View Report"
+      "loadingCampaignDetails": "Cargando detalles de la campaña, como fechas y contadores, por favor espere",
+      "loadingCampaignName": "Cargando nombre de la campaña, por favor espere",
+      "scheduled": "Agendado",
+      "sent": "Enviado",
+      "viewCampaign": "Ver Campaña",
+      "viewReport": "Ver Reporte"
     }
   },
   "close-composer-confirmation-modal": {
@@ -74,12 +74,12 @@
     "text": "Are you sure you want to close the composer? You will lose any unsaved changes."
   },
   "default-page": {
-    "connectButton": "Connect Your Social Accounts",
-    "defaultTitle": "Let's get your account set up!"
+    "connectButton": "Conecta tu Red Social",
+    "defaultTitle": "Conectemos tu cuenta!"
   },
   "example": {
-    "loggedIn": "Logged In...",
-    "loggedOut": "Logged Out..."
+    "loggedIn": "Conectado...",
+    "loggedOut": "Desconectado..."
   },
   "instagram-direct-posting-modal": {
     "cta1": "Yes! Let's do it!",
@@ -124,7 +124,7 @@
       "supportBold": " support"
     }
   },
-  "language": "Language",
+  "language": "Idioma",
   "onboarding-page": {
     "analyticsTab": "Analytics",
     "awaitingTab": "Awaiting Approval",
@@ -278,16 +278,16 @@
   },
   "preferences": {
     "menu": {
-      "appsAndExtras": "Apps & Extras",
-      "billing": "Billing",
+      "appsAndExtras": "Aplicaciones & Extras",
+      "billing": "Facturación",
       "general": "General",
-      "notifications": "Notifications",
-      "security": "Security"
+      "notifications": "Notificaciones",
+      "security": "Seguridad"
     },
-    "backToDashboard": "Back to Dashboard"
+    "backToDashboard": "Volver al Dashboard"
   },
   "profile-sidebar": {
-    "connectButton": "Manage Social Accounts"
+    "connectButton": "Manejar Redes Sociales"
   },
   "profiles-disconnected-banner": {
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
@@ -487,12 +487,12 @@
     "header": "Your Buffer {plan} trial is complete!"
   },
   "upload-zone": {
-    "buttonTitle": "Upload media",
-    "invalidFileSize": "We can't upload \"{fileName}\" because it's too large: we can only handle files of that type up to {formattedMaxSize}. Could you try a smaller file?",
-    "invalidFormatCantOneOfFiles": "We can't quite use some of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
-    "invalidFormatCantSingleFile": "We can't quite use that type of file. Could you try one of the following instead: {acceptedFilesText}?",
-    "invalidFormatCantUseAnyFiles": "We can't quite use any of the selected types of files. Could you try one of the following instead: {acceptedFilesText}",
-    "invalidFormatCantUseSomeFiles": "We can't quite use some of the selected types of files. Could you try one of the following instead: {acceptedFilesText}"
+    "buttonTitle": "Subir archivo multimedia",
+    "invalidFileSize": "No podemos subir \"{fileName}\" porque es muy grande: sólo podemos manejar archivos de ese tipo de hasta {formattedMaxSize}. ¿Podrías intentar con un archivo más pequeño?",
+    "invalidFormatCantOneOfFiles": "No podemos usar uno de los tipos de archivos seleccionados. ¿Podrías intentar con algunos de los siguientes?: {acceptedFilesText}",
+    "invalidFormatCantSingleFile": "No podemos usar ese tipo de archivo. ¿Podrías intentar con algunos de los siguientes?: {acceptedFilesText}?",
+    "invalidFormatCantUseAnyFiles": "No podemos usar ninguno de los archivos seleccionados. ¿Podrías intentar con algunos de los siguientes?: {acceptedFilesText}",
+    "invalidFormatCantUseSomeFiles": "No podemos usar algunos de los tipos de archivos seleccionados. ¿Podrías intentar con algunos de los siguientes?: {acceptedFilesText}"
   },
   "user-tags": {
     "btnCancel": "Cancel",

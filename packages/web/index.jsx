@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter as Router } from 'connected-react-router';
 
 import store, { history } from '@bufferapp/publish-store';
+import './components/i18n';
 import App from './components/App';
 import getErrorBoundary from './components/ErrorBoundary';
 
@@ -17,7 +18,9 @@ render(
   <ErrorBoundary>
     <Provider store={store}>
       <Router history={history}>
-        <App />
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <App />
+        </React.Suspense>
       </Router>
     </Provider>
   </ErrorBoundary>,
