@@ -9547,12 +9547,12 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   border-color: #B8B8B8;
 }
 
-.c11 {
+.c13 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9600,7 +9600,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   background-color: transparent;
 }
 
-.c10:hover {
+.c12:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -9609,20 +9609,20 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c10:active {
+.c12:active {
   top: 1px;
 }
 
-.c10:focus {
+.c12:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c10:hover {
+.c12:hover {
   color: #3D3D3D;
 }
 
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9672,7 +9672,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c14:hover {
+.c16:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -9681,26 +9681,26 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c14:active {
+.c16:active {
   top: 1px;
 }
 
-.c14:focus {
+.c16:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c14:hover {
+.c16:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c14:focus {
+.c16:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9750,7 +9750,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c15:hover {
+.c17:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -9759,16 +9759,16 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c15:active {
+.c17:active {
   top: 1px;
 }
 
-.c15:focus {
+.c17:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c15:hover {
+.c17:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -9814,7 +9814,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   align-items: center;
 }
 
-.c12 {
+.c14 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -9827,15 +9827,30 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   color: #3D3D3D;
 }
 
-.c13 {
+.c15 {
   margin-right: 8px;
 }
 
-.c9 {
+.c11 {
   color: #636363;
 }
 
-.c8 {
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9976,43 +9991,43 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
           className="c10"
         >
           <button
-            className="c9 c10"
+            className="c11 c12"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="text"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Delete
             </div>
           </button>
           <span
-            className="c12"
+            className="c14"
           />
           <button
-            className="c13 c14"
+            className="c15 c16"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="secondary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Edit
             </div>
           </button>
           <button
-            className="c15"
+            className="c17"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="primary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Share Now
             </div>
@@ -10045,12 +10060,12 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   border-color: #B8B8B8;
 }
 
-.c11 {
+.c13 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10098,7 +10113,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   background-color: transparent;
 }
 
-.c10:hover {
+.c12:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -10107,20 +10122,20 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c10:active {
+.c12:active {
   top: 1px;
 }
 
-.c10:focus {
+.c12:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c10:hover {
+.c12:hover {
   color: #3D3D3D;
 }
 
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10170,7 +10185,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c14:hover {
+.c16:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -10179,26 +10194,26 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c14:active {
+.c16:active {
   top: 1px;
 }
 
-.c14:focus {
+.c16:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c14:hover {
+.c16:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c14:focus {
+.c16:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10248,7 +10263,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c15:hover {
+.c17:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -10257,16 +10272,16 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c15:active {
+.c17:active {
   top: 1px;
 }
 
-.c15:focus {
+.c17:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c15:hover {
+.c17:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -10312,7 +10327,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   align-items: center;
 }
 
-.c12 {
+.c14 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -10325,15 +10340,30 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   color: #3D3D3D;
 }
 
-.c13 {
+.c15 {
   margin-right: 8px;
 }
 
-.c9 {
+.c11 {
   color: #636363;
 }
 
-.c8 {
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10417,43 +10447,43 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
           className="c10"
         >
           <button
-            className="c9 c10"
+            className="c11 c12"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="text"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Delete
             </div>
           </button>
           <span
-            className="c12"
+            className="c14"
           />
           <button
-            className="c13 c14"
+            className="c15 c16"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="secondary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Edit
             </div>
           </button>
           <button
-            className="c15"
+            className="c17"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="primary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Share Now
             </div>
@@ -10486,12 +10516,12 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   border-color: #B8B8B8;
 }
 
-.c11 {
+.c13 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10539,7 +10569,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   background-color: transparent;
 }
 
-.c10:hover {
+.c12:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -10548,20 +10578,20 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   transition-timing-function: ease-in;
 }
 
-.c10:active {
+.c12:active {
   top: 1px;
 }
 
-.c10:focus {
+.c12:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c10:hover {
+.c12:hover {
   color: #3D3D3D;
 }
 
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10611,7 +10641,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   border: 1px solid #B8B8B8;
 }
 
-.c14:hover {
+.c16:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -10620,26 +10650,26 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   transition-timing-function: ease-in;
 }
 
-.c14:active {
+.c16:active {
   top: 1px;
 }
 
-.c14:focus {
+.c16:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c14:hover {
+.c16:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c14:focus {
+.c16:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10689,7 +10719,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   border: 1px solid #2c4bff;
 }
 
-.c15:hover {
+.c17:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -10698,16 +10728,16 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   transition-timing-function: ease-in;
 }
 
-.c15:active {
+.c17:active {
   top: 1px;
 }
 
-.c15:focus {
+.c17:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c15:hover {
+.c17:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -10753,7 +10783,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   align-items: center;
 }
 
-.c12 {
+.c14 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -10766,15 +10796,30 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   color: #3D3D3D;
 }
 
-.c13 {
+.c15 {
   margin-right: 8px;
 }
 
-.c9 {
+.c11 {
   color: #636363;
 }
 
-.c8 {
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10949,43 +10994,43 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
           className="c10"
         >
           <button
-            className="c9 c10"
+            className="c11 c12"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="text"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Delete
             </div>
           </button>
           <span
-            className="c12"
+            className="c14"
           />
           <button
-            className="c13 c14"
+            className="c15 c16"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="secondary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Edit
             </div>
           </button>
           <button
-            className="c15"
+            className="c17"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="primary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Share Now
             </div>
@@ -11018,12 +11063,12 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   border-color: #B8B8B8;
 }
 
-.c11 {
+.c13 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11071,7 +11116,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   background-color: transparent;
 }
 
-.c10:hover {
+.c12:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -11080,20 +11125,20 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c10:active {
+.c12:active {
   top: 1px;
 }
 
-.c10:focus {
+.c12:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c10:hover {
+.c12:hover {
   color: #3D3D3D;
 }
 
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11143,7 +11188,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c14:hover {
+.c16:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -11152,26 +11197,26 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c14:active {
+.c16:active {
   top: 1px;
 }
 
-.c14:focus {
+.c16:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c14:hover {
+.c16:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c14:focus {
+.c16:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11221,7 +11266,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c15:hover {
+.c17:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -11230,16 +11275,16 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c15:active {
+.c17:active {
   top: 1px;
 }
 
-.c15:focus {
+.c17:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c15:hover {
+.c17:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -11285,7 +11330,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   align-items: center;
 }
 
-.c12 {
+.c14 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -11298,15 +11343,15 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   color: #3D3D3D;
 }
 
-.c13 {
+.c15 {
   margin-right: 8px;
 }
 
-.c9 {
+.c11 {
   color: #636363;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11480,43 +11525,43 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
           className="c10"
         >
           <button
-            className="c9 c10"
+            className="c11 c12"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="text"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Delete
             </div>
           </button>
           <span
-            className="c12"
+            className="c14"
           />
           <button
-            className="c13 c14"
+            className="c15 c16"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="secondary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Edit
             </div>
           </button>
           <button
-            className="c15"
+            className="c17"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="primary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Share Now
             </div>
@@ -11549,12 +11594,12 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   border-color: #B8B8B8;
 }
 
-.c12 {
+.c14 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11602,7 +11647,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   background-color: transparent;
 }
 
-.c11:hover {
+.c13:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -11611,20 +11656,20 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c11:active {
+.c13:active {
   top: 1px;
 }
 
-.c11:focus {
+.c13:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c11:hover {
+.c13:hover {
   color: #3D3D3D;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11674,7 +11719,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c15:hover {
+.c17:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -11683,26 +11728,26 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c15:active {
+.c17:active {
   top: 1px;
 }
 
-.c15:focus {
+.c17:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c15:hover {
+.c17:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c15:focus {
+.c17:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c16 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11752,7 +11797,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c16:hover {
+.c18:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -11761,16 +11806,16 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c16:active {
+.c18:active {
   top: 1px;
 }
 
-.c16:focus {
+.c18:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c16:hover {
+.c18:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -11816,7 +11861,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   align-items: center;
 }
 
-.c13 {
+.c15 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -11841,15 +11886,15 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   color: #3D3D3D;
 }
 
-.c14 {
+.c16 {
   margin-right: 8px;
 }
 
-.c10 {
+.c12 {
   color: #636363;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11988,43 +12033,43 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
           className="c11"
         >
           <button
-            className="c10 c11"
+            className="c12 c13"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="text"
           >
             <div
-              className="c12"
+              className="c14"
             >
               Delete
             </div>
           </button>
           <span
-            className="c13"
+            className="c15"
           />
           <button
-            className="c14 c15"
+            className="c16 c17"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="secondary"
           >
             <div
-              className="c12"
+              className="c14"
             >
               Edit
             </div>
           </button>
           <button
-            className="c16"
+            className="c18"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="primary"
           >
             <div
-              className="c12"
+              className="c14"
             >
               Retry Now
             </div>
@@ -12573,12 +12618,12 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   border-color: #B8B8B8;
 }
 
-.c11 {
+.c13 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12626,7 +12671,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   background-color: transparent;
 }
 
-.c10:hover {
+.c12:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -12635,20 +12680,20 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c10:active {
+.c12:active {
   top: 1px;
 }
 
-.c10:focus {
+.c12:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c10:hover {
+.c12:hover {
   color: #3D3D3D;
 }
 
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12698,7 +12743,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c14:hover {
+.c16:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -12707,26 +12752,26 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c14:active {
+.c16:active {
   top: 1px;
 }
 
-.c14:focus {
+.c16:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c14:hover {
+.c16:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c14:focus {
+.c16:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12776,7 +12821,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c15:hover {
+.c17:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -12785,16 +12830,16 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c15:active {
+.c17:active {
   top: 1px;
 }
 
-.c15:focus {
+.c17:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c15:hover {
+.c17:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -12840,7 +12885,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   align-items: center;
 }
 
-.c12 {
+.c14 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -12853,15 +12898,30 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   color: #3D3D3D;
 }
 
-.c13 {
+.c15 {
   margin-right: 8px;
 }
 
-.c9 {
+.c11 {
   color: #636363;
 }
 
-.c8 {
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12945,43 +13005,43 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
           className="c10"
         >
           <button
-            className="c9 c10"
+            className="c11 c12"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="text"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Delete
             </div>
           </button>
           <span
-            className="c12"
+            className="c14"
           />
           <button
-            className="c13 c14"
+            className="c15 c16"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="secondary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Edit
             </div>
           </button>
           <button
-            className="c15"
+            className="c17"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="primary"
           >
             <div
-              className="c11"
+              className="c13"
             >
               Share Now
             </div>
@@ -13014,12 +13074,12 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   border-color: #B8B8B8;
 }
 
-.c18 {
+.c20 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c17 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13067,7 +13127,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   background-color: transparent;
 }
 
-.c17:hover {
+.c19:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -13076,20 +13136,20 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c17:active {
+.c19:active {
   top: 1px;
 }
 
-.c17:focus {
+.c19:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c17:hover {
+.c19:hover {
   color: #3D3D3D;
 }
 
-.c21 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13139,7 +13199,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c21:hover {
+.c23:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -13148,26 +13208,26 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c21:active {
+.c23:active {
   top: 1px;
 }
 
-.c21:focus {
+.c23:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c21:hover {
+.c23:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c21:focus {
+.c23:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c22 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13217,7 +13277,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c22:hover {
+.c24:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -13226,16 +13286,16 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c22:active {
+.c24:active {
   top: 1px;
 }
 
-.c22:focus {
+.c24:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c22:hover {
+.c24:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -13307,7 +13367,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   align-items: center;
 }
 
-.c19 {
+.c21 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -13320,15 +13380,15 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   color: #3D3D3D;
 }
 
-.c20 {
+.c22 {
   margin-right: 8px;
 }
 
-.c16 {
+.c18 {
   color: #636363;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13514,43 +13574,43 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
           className="c17"
         >
           <button
-            className="c16 c17"
+            className="c18 c19"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="text"
           >
             <div
-              className="c18"
+              className="c20"
             >
               Delete
             </div>
           </button>
           <span
-            className="c19"
+            className="c21"
           />
           <button
-            className="c20 c21"
+            className="c22 c23"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="secondary"
           >
             <div
-              className="c18"
+              className="c20"
             >
               Edit
             </div>
           </button>
           <button
-            className="c22"
+            className="c24"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="primary"
           >
             <div
-              className="c18"
+              className="c20"
             >
               Share Now
             </div>
@@ -13583,12 +13643,12 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   border-color: #B8B8B8;
 }
 
-.c18 {
+.c20 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c17 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13636,7 +13696,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   background-color: transparent;
 }
 
-.c17:hover {
+.c19:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -13645,20 +13705,20 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c17:active {
+.c19:active {
   top: 1px;
 }
 
-.c17:focus {
+.c19:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c17:hover {
+.c19:hover {
   color: #3D3D3D;
 }
 
-.c21 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13708,7 +13768,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c21:hover {
+.c23:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -13717,26 +13777,26 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c21:active {
+.c23:active {
   top: 1px;
 }
 
-.c21:focus {
+.c23:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c21:hover {
+.c23:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c21:focus {
+.c23:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c22 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -13786,7 +13846,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c22:hover {
+.c24:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -13795,16 +13855,16 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c22:active {
+.c24:active {
   top: 1px;
 }
 
-.c22:focus {
+.c24:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c22:hover {
+.c24:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -13876,7 +13936,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   align-items: center;
 }
 
-.c19 {
+.c21 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -13889,15 +13949,15 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   color: #3D3D3D;
 }
 
-.c20 {
+.c22 {
   margin-right: 8px;
 }
 
-.c16 {
+.c18 {
   color: #636363;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -14118,43 +14178,43 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
           className="c17"
         >
           <button
-            className="c16 c17"
+            className="c18 c19"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="text"
           >
             <div
-              className="c18"
+              className="c20"
             >
               Delete
             </div>
           </button>
           <span
-            className="c19"
+            className="c21"
           />
           <button
-            className="c20 c21"
+            className="c22 c23"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="secondary"
           >
             <div
-              className="c18"
+              className="c20"
             >
               Edit
             </div>
           </button>
           <button
-            className="c22"
+            className="c24"
             disabled={false}
             onClick={[Function]}
             size="small"
             type="primary"
           >
             <div
-              className="c18"
+              className="c20"
             >
               Share Now
             </div>
