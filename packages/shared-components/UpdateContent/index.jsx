@@ -12,16 +12,15 @@ const ContentWrapper = styled.div`
 
 const UpdateContent = ({ ...props }) => {
   const { type, linkAttachment, basic, links, text } = props;
-  const media =
+  const isMedia =
     type === 'image' || type === 'video' || type === 'multipleImage';
   const isLink = type === 'link';
+
   return (
     <ContentWrapper isLink={isLink}>
       <UpdateTextContent basic={basic} links={links} text={text} />
-      {type === 'link' && (
-        <UpdateAttachmentContent linkAttachment={linkAttachment} />
-      )}
-      {media && <UpdateMediaContent {...props} />}
+      {isLink && <UpdateAttachmentContent linkAttachment={linkAttachment} />}
+      {isMedia && <UpdateMediaContent {...props} />}
     </ContentWrapper>
   );
 };
@@ -35,10 +34,23 @@ UpdateContent.propTypes = {
     url: PropTypes.string,
     thumbnailUrl: PropTypes.string,
   }),
+  basic: PropTypes.bool,
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      displayString: PropTypes.string,
+      expandedUrl: PropTypes.string,
+      indices: PropTypes.arrayOf(PropTypes.number),
+      rawString: PropTypes.string,
+    })
+  ),
+  text: PropTypes.string,
 };
 
 UpdateContent.defaultProps = {
   linkAttachment: {},
+  basic: false,
+  links: [],
+  text: '',
 };
 
 export default UpdateContent;

@@ -15,6 +15,9 @@ const post = {
       indices: [74, 96],
     },
   ],
+};
+
+const link = {
   type: 'link',
   linkAttachment: {
     title: 'What is a Product Designer?',
@@ -26,6 +29,15 @@ const post = {
       'https://cdn-images-1.medium.com/max/2000/1*1Kua7bNJfvLlTxWqgxVKfw.jpeg',
   },
 };
+
+const image = {
+  type: 'image',
+  imageSrc:
+    'https://cdn-images-1.medium.com/max/2000/1*1Kua7bNJfvLlTxWqgxVKfw.jpeg',
+};
+
 storiesOf('Cards|Updates/Content', module)
   .addDecorator(withA11y)
-  .add('default', () => <UpdateContent {...post} />);
+  .add('text', () => <UpdateContent {...post} />)
+  .add('with attachment', () => <UpdateContent {...post} {...link} />)
+  .add('with media', () => <UpdateContent {...post} {...image} />);
