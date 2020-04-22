@@ -15,6 +15,7 @@ const resources = {
 };
 
 const lng = store.getState()?.user?.language || 'en-US';
+console.log('languageee', store.getState());
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -29,6 +30,7 @@ i18n
     },
     react: {
       wait: true,
+      transSupportBasicHtmlNodes: true, // allow <br/> and simple html elements in translations
     },
   });
 
