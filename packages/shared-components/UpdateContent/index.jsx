@@ -1,21 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import UpdateMediaContent from '../UpdateMediaContent';
 import UpdateAttachmentContent from '../UpdateAttachmentContent';
 import UpdateTextContent from '../UpdateTextContent';
 
-const UpdateContent = ({ type, ...props }) => {
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: ${props => (props.isLink ? 'column' : 'row')};
+`;
+
+const UpdateContent = ({ ...props }) => {
+  const { type, linkAttachment, basic, links, text } = props;
   const media =
     type === 'image' || type === 'video' || type === 'multipleImage';
-  const { linkAttachment, basic, links, text } = props;
+  const isLink = type === 'link';
   return (
-    <React.Fragment>
+    <ContentWrapper isLink={isLink}>
       <UpdateTextContent basic={basic} links={links} text={text} />
       {type === 'link' && (
         <UpdateAttachmentContent linkAttachment={linkAttachment} />
       )}
       {media && <UpdateMediaContent {...props} />}
-    </React.Fragment>
+    </ContentWrapper>
   );
 };
 
