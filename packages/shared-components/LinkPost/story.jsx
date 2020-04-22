@@ -80,6 +80,7 @@ storiesOf('Cards|Posts/LinkPost', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
       isSent={false}
+      type="link"
     />
   ))
   .add('queued link post with multiline text', () => (
@@ -92,6 +93,7 @@ storiesOf('Cards|Posts/LinkPost', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
       isSent={false}
+      type="link"
     />
   ))
   .add('sent', () => (
@@ -104,6 +106,7 @@ storiesOf('Cards|Posts/LinkPost', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
       isSent
+      type="link"
     />
   ))
   .add('square image', () => (
@@ -116,6 +119,7 @@ storiesOf('Cards|Posts/LinkPost', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
       isSent={false}
+      type="link"
     />
   ))
   .add('tall image', () => (
@@ -128,6 +132,7 @@ storiesOf('Cards|Posts/LinkPost', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
       isSent={false}
+      type="link"
     />
   ))
   .add('wide image', () => (
@@ -140,6 +145,7 @@ storiesOf('Cards|Posts/LinkPost', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
       isSent={false}
+      type="link"
     />
   ))
   .add('error', () => (
@@ -152,5 +158,6 @@ storiesOf('Cards|Posts/LinkPost', module)
       onEditClick={action('edit-click')}
       onShareNowClick={action('share-now-click')}
       isSent={false}
+      type="link"
     />
   ));
