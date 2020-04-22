@@ -56,7 +56,10 @@ const getHtml = ({
       '{{{fullStoryScript}}}',
       getFullstoryScript({ user, isProduction, isStandalone })
     )
-    .replace('{{{bundleReminder}}}', getBundleReminderHtml());
+    .replace(
+      '{{{bundleReminder}}}',
+      getBundleReminderHtml({ isProduction, isStandalone })
+    );
 };
 
 module.exports = getHtml;
