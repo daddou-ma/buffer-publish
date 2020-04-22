@@ -78,6 +78,7 @@ storiesOf('Cards|Posts/MultipleImagesPost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       currentImage={0}
+      type="multipleImage"
     />
   ))
   .add('queued multiple image post with multi-line text', () => (
@@ -95,6 +96,7 @@ storiesOf('Cards|Posts/MultipleImagesPost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       currentImage={0}
+      type="multipleImage"
     />
   ))
   .add('sent multiple image post', () => (
@@ -112,6 +114,7 @@ storiesOf('Cards|Posts/MultipleImagesPost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       currentImage={0}
+      type="multipleImage"
     />
   ))
   .add('error', () => (
@@ -129,5 +132,6 @@ storiesOf('Cards|Posts/MultipleImagesPost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       currentImage={0}
+      type="multipleImage"
     />
   ));

@@ -92,6 +92,7 @@ storiesOf('Cards|Posts/ImagePost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
+      type="image"
     />
   ))
   .add('queued image post with multi-line text', () => (
@@ -109,6 +110,7 @@ storiesOf('Cards|Posts/ImagePost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
+      type="image"
     />
   ))
   .add('sent image post', () => (
@@ -126,6 +128,7 @@ storiesOf('Cards|Posts/ImagePost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
+      type="image"
     />
   ))
   .add('square image', () => (
@@ -143,6 +146,7 @@ storiesOf('Cards|Posts/ImagePost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
+      type="image"
     />
   ))
   .add('tall image', () => (
@@ -160,6 +164,7 @@ storiesOf('Cards|Posts/ImagePost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
+      type="image"
     />
   ))
   .add('wide image', () => (
@@ -177,6 +182,7 @@ storiesOf('Cards|Posts/ImagePost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
+      type="image"
     />
   ))
   .add('retweet', () => (
@@ -195,6 +201,7 @@ storiesOf('Cards|Posts/ImagePost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
+      type="image"
     />
   ))
   .add('error', () => (
@@ -212,6 +219,7 @@ storiesOf('Cards|Posts/ImagePost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
+      type="image"
     />
   ))
   .add('tag', () => (
@@ -230,5 +238,6 @@ storiesOf('Cards|Posts/ImagePost', module)
       onImageClickPrev={action('image-click-prev')}
       onImageClose={action('image-close')}
       isLightboxOpen={false}
+      type="image"
     />
   ));

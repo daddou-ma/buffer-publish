@@ -10,6 +10,7 @@ import PostErrorBanner from '../PostErrorBanner';
 import RetweetPanel from '../RetweetPanel';
 import CardHeader from '../CardHeader';
 import Card from '../Card';
+import UpdateContent from '../UpdateContent';
 
 const PostContainer = styled.div`
   display: flex;
@@ -71,6 +72,7 @@ const Post = ({
   onCampaignTagClick,
   hasCampaignsFeature,
   headerDetails,
+  ...props
 }) => {
   const hasError =
     postDetails && postDetails.error && postDetails.error.length > 0;
@@ -114,10 +116,10 @@ const Post = ({
                 retweetCommentLinks={retweetCommentLinks}
                 basic={basic}
               >
-                {children}
+                <UpdateContent {...props} basic={basic} />
               </RetweetPanel>
             ) : (
-              children
+              <UpdateContent {...props} basic={basic} />
             )}
           </PostContent>
 
