@@ -4,11 +4,7 @@ import { List, Text } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
 import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import TextPost from '../TextPost';
-import ImagePost from '../ImagePost';
-import MultipleImagesPost from '../MultipleImagesPost';
-import LinkPost from '../LinkPost';
-import VideoPost from '../VideoPost';
+import Post from '../Post';
 import Story from '../Story';
 import BannerAdvancedAnalytics from '../BannerAdvancedAnalytics';
 
@@ -35,11 +31,11 @@ const HeaderStyle = styled.div`
 `;
 
 const postTypeComponentMap = new Map([
-  ['text', TextPost],
-  ['image', ImagePost],
-  ['multipleImage', MultipleImagesPost],
-  ['link', LinkPost],
-  ['video', VideoPost],
+  ['text', Post],
+  ['image', Post],
+  ['multipleImage', Post],
+  ['link', Post],
+  ['video', Post],
   ['storyGroup', Story],
 ]);
 
@@ -70,6 +66,10 @@ const renderPost = ({
   const campaignId = post.campaignDetails?.id ?? null;
   const postWithEventHandlers = {
     ...post,
+    service_geolocation_name: post.locationName,
+    source_url: post.sourceUrl,
+    subprofile_id: post.subprofileID,
+    service_user_tags: post.userTags,
     key: post.id,
     onDeleteConfirmClick: () => onDeleteConfirmClick({ post }),
     onEditClick: () => onEditClick({ post }),
@@ -92,7 +92,7 @@ const renderPost = ({
     profileServiceType,
   };
   let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || TextPost;
+  PostComponent = PostComponent || Post;
 
   return <PostComponent {...postWithEventHandlers} />;
 };
