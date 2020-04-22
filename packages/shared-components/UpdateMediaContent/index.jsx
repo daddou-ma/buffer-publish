@@ -42,9 +42,8 @@ const UpdateMediaContent = ({
 }) => {
   const isMultipleImage = type === 'multipleImage';
   const isSingleImage = type === 'image' || type === 'video';
-  const images = isMultipleImage
-    ? imageUrls?.map(url => ({ src: `${url}` }))
-    : [{ src: `${imageSrc}` }];
+  const imageArray = isMultipleImage ? imageUrls : [imageSrc];
+  const images = imageArray?.map(url => ({ src: `${url}` }));
   return (
     <MediaWrapper onClick={onImageClick}>
       {isMultipleImage && (
