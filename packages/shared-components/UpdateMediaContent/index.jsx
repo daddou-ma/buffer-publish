@@ -40,13 +40,14 @@ const UpdateMediaContent = ({
   tag,
   type,
 }) => {
-  const images =
-    type === 'multipleImage'
-      ? imageUrls?.map(url => ({ src: `${url}` }))
-      : [{ src: `${imageSrc}` }];
+  const isMultipleImage = type === 'multipleImage';
+  const isSingleImage = type === 'image' || type === 'video';
+  const images = isMultipleImage
+    ? imageUrls?.map(url => ({ src: `${url}` }))
+    : [{ src: `${imageSrc}` }];
   return (
     <MediaWrapper onClick={onImageClick}>
-      {type === 'multipleImage' && (
+      {isMultipleImage && (
         <MultipleImages
           border="rounded"
           height="9rem"
@@ -54,7 +55,7 @@ const UpdateMediaContent = ({
           width="9rem"
         />
       )}
-      {(type === 'image' || type === 'video') && (
+      {isSingleImage && (
         <ImageWrapper>
           <Image
             src={imageSrc}
@@ -74,11 +75,11 @@ const UpdateMediaContent = ({
         onClickPrev={onImageClickPrev}
         onClickNext={onImageClickNext}
         onClose={onImageClose}
-        currentImage={type === 'multipleImage' ? currentImage : null}
+        currentImage={isMultipleImage ? currentImage : null}
         backdropClosesModal
         showImageCount={false}
       />
-      {(type === 'image' || type === 'video') && tag && (
+      {isSingleImage && tag && (
         <ThumbnailTag>
           <IdTag>{tag}</IdTag>
         </ThumbnailTag>
