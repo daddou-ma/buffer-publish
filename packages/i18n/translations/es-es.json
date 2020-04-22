@@ -158,10 +158,10 @@
       "featureTooltips": {
         "0": "",
         "1": "",
-        "2": "Planifica, revisa y programa stories de Instagram Stories en web y móvil.",
+        "2": "Planifica, revisa y programa stories de Instagram en web y móvil.",
         "3": "Incluye un primer comentario cuando publiques tus posts de Instagram programados",
-        "4": "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza el alcance.",
-        "5": "Añade enlaces únicos a publicaciones de Instagram, cambiando tu perfil a una tienda online con un enlace en tu bio."
+        "4": "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
+        "5": "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio."
       },
       "features": {
         "0": "8 redes sociales",
@@ -182,30 +182,30 @@
     "premiumExperiment": {
       "billingText": "Facturado Mensualmente",
       "buttonCurrentPlanText": "Plan Actual",
-      "buttonText": "Upgrade to Premium",
+      "buttonText": "Actualiza a Premium",
       "cost": "$65",
       "featureTooltips": {
         "0": "",
-        "1": "Include the first comment when you schedule Instagram posts",
-        "2": "Tag Instagram users when you schedule Instagram posts",
-        "3": "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
-        "4": "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
-        "5": "Plan, preview, and schedule Instagram Stories on web and mobile."
+        "1": "Incluye un primer comentario cuando programes tus publicaciones de Instagram",
+        "2": "Etiqueta usuarios de Instagram cuando programes publicaciones de Instagram",
+        "3": "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
+        "4": "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio.",
+        "5": "Planifica, revisa y programa stories de Instagram en web y móvil."
       },
       "features": {
-        "0": "8 social accounts",
-        "1": "Instagram first comment",
-        "2": "Instagram user tagging",
+        "0": "8 redes sociales",
+        "1": "Primer comentario en Instagram",
+        "2": "Etiquetar usuarios en Instagram",
         "3": "Hashtag Manager",
-        "4": "Shop Grid",
-        "5": "Instagram Stories"
+        "4": "Tienda en Instagram",
+        "5": "Stories de Instagram"
       },
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
       "soloCost": "$35",
       "soloNonProfitCost": "$17.50",
-      "subtitle": "Unlock advanced IG features",
+      "subtitle": "Desbloquea funcionalidades avanzadas de IG",
       "title": "Premium"
     },
     "pro": {
@@ -216,58 +216,58 @@
       "featureTooltips": {
         "0": "",
         "1": "",
-        "2": "Include first comment when you schedule Instagram posts"
+        "2": "Incluye un primer comentario cuando programes publicaciones de Instagram"
       },
       "features": {
-        "0": "8 social accounts",
-        "1": "1 user",
-        "2": "Instagram first comment"
+        "0": "8 redes sociales",
+        "1": "1 usuario",
+        "2": "Primer comentario en Instagram"
       },
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
-      "subtitle": "Commit to a social strategy",
+      "subtitle": "Empieza una estrategia en social media",
       "title": "Pro"
     },
     "proExperiment": {
       "billingText": "Facturado Mensualmente",
       "buttonCurrentPlanText": "Plan Actual",
-      "buttonText": "Upgrade to Pro",
+      "buttonText": "Actualiza a Pro",
       "buttonTextDisabled": "Plan Actual",
       "cost": "$15",
       "featureTooltips": {
         "0": "",
-        "1": "Include first comment when you schedule Instagram posts",
-        "2": "Tag Instagram users when you schedule Instagram posts"
+        "1": "Incluye un primer comentario cuando programes publicaciones de Instagram",
+        "2": "Etiqueta usuarios de Instagram cuando programes publicaciones para Instagram"
       },
       "features": {
-        "0": "8 social accounts",
-        "1": "Instagram first comment",
-        "2": "Instagram user tagging"
+        "0": "8 redes sociales",
+        "1": "Primer comentario en Instagram",
+        "2": "Etiquetar usuarios en Instagram"
       },
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
       "promoCost": "$10",
-      "promoDiscount": "Discount applies for first 3 months",
+      "promoDiscount": "El descuento se aplica los primeros 3 meses",
       "promoNonProfitCost": "$5",
-      "subtitle": "Commit to a social strategy",
+      "subtitle": "Empieza una estrategia en social media",
       "title": "Pro"
     },
-    "promoDescription": "For a limited time, upgrade to the Pro plan and keep your current pricing for 3 months.",
-    "promoHeader": "Get more with the new Buffer Publish",
+    "promoDescription": "Por un tiempo limitado, actualiza al plan Pro y mantén tu precio actual durante 3 meses.",
+    "promoHeader": "Consigue más con el nuevo Buffer Publish",
     "small": {
       "billingText": "Facturado Mensualmente",
       "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Elige Plan",
       "cost": "$99",
       "features": {
-        "0": "25 social accounts",
-        "1": "6 users",
-        "2": "Instagram Stories",
-        "3": "Instagram first comment",
+        "0": "25 redes sociales",
+        "1": "6 usuarios",
+        "2": "Stories de Instagram",
+        "3": "Primer comentario en Instagram",
         "4": "Hashtag Manager",
-        "5": "Shop Grid"
+        "5": "Tienda en Instagram"
       },
       "monthly": "/mo",
       "nonProfitCost": "$49.50",
@@ -298,13 +298,13 @@
     "headline": "Uh-oh, we've lost access to this account! Let's reconnect."
   },
   "profiles-disconnected-modal": {
-    "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these accounts you will need to reconnect them.",
+    "body1": "We’ve lost access to the following redes sociales, in order for us to resume posting to these accounts you will need to reconnect them.",
     "body2": "Note: You’ll need to be logged in to the same account on the network to successfully reconnect your social account.",
     "cta": "Reconnect",
     "extraMessage": {
       "instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."
     },
-    "headline": "We’ve lost access to some of your social accounts",
+    "headline": "We’ve lost access to some of your redes sociales",
     "reconnecting": "Please wait..."
   },
   "steal-profile-modal": {
@@ -369,7 +369,7 @@
     "businessDescriptors": {
       "buttonText": "Subscribe to Small Business Plan",
       "left": {
-        "businessConnect": "Connect 25 social accounts",
+        "businessConnect": "Connect 25 redes sociales",
         "businessPosts": "Schedule 2,000 posts",
         "businessUsers": "Collaborate with 6 users"
       },
@@ -391,7 +391,7 @@
     "enterPaymentDetails": "Enter your payment details securely",
     "expirationMonth": "Expiration month",
     "expirationYear": "Expiration year",
-    "freeConnect": "Connect up to three social accounts",
+    "freeConnect": "Connect up to three redes sociales",
     "freePlan": "Free Plan",
     "freePostHistory": "No post history",
     "freeSchedule": "Schedule up to 10 posts per account",
@@ -399,7 +399,7 @@
     "premiumDescriptors": {
       "buttonText": "Subscribe to Premium Plan",
       "left": {
-        "connect": "Connect 8 social accounts",
+        "connect": "Connect 8 redes sociales",
         "posts": "Schedule 2,000 posts",
         "users": "Collaborate with 2 users"
       },
@@ -418,12 +418,12 @@
     },
     "premiumSwitchHeader": "Switch to the Premium Plan!",
     "proCalendarView": "Get a calendar view of your publishing schedule",
-    "proConnect": "Connect up to eight social accounts including Pinterest",
+    "proConnect": "Connect up to eight redes sociales including Pinterest",
     "proDescriptors": {
       "buttonText": "Subscribe to Pro Plan",
       "left": {
         "calendar": "Get a calendar view of your publishing schedule",
-        "connect": "Connect 8 social accounts",
+        "connect": "Connect 8 redes sociales",
         "users": "1 user"
       },
       "nonprofitMonthlyPrice": "$7.50 per month",
@@ -452,14 +452,14 @@
     "proPlanYearlyPrice": "$144 per year",
     "proReviewHistory": "Review a 30-day history of your posts",
     "proSchedule": "Schedule up to 100 posts per account",
-    "proTrialistSubCopy": "The Pro plan includes up to 8 social accounts, custom thumbnails for Instagram videos, Instagram first comment and more.",
+    "proTrialistSubCopy": "The Pro plan includes up to 8 redes sociales, custom thumbnails for Instagram videos, Instagram first comment and more.",
     "proTrialistUpgradeHeader": "Complete your trial and upgrade to the Pro Plan!",
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
     "securityCode": "Security code",
     "soloPremiumDescriptors": {
       "buttonText": "Subscribe to Premium Plan",
       "left": {
-        "connect": "Connect 8 social accounts",
+        "connect": "Connect 8 redes sociales",
         "posts": "Schedule 2,000 posts",
         "users": "1 user"
       },
