@@ -13,7 +13,6 @@ export default connect(
   state => {
     return {
       campaigns: state.campaignsList.campaigns,
-      translations: state.i18n.translations.campaigns,
       showCampaignActions: !state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaignsList.isLoading,
       hasCampaignsFlip: state.appSidebar.user.features

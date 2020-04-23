@@ -8,7 +8,6 @@ export default connect(
   (state, ownProps) => {
     return {
       campaign: state.campaignForm.campaign,
-      translations: state.i18n.translations.campaigns.campaignForm,
       isLoading: state.campaignForm.isLoading,
       editMode: ownProps.editMode,
       campaignId:

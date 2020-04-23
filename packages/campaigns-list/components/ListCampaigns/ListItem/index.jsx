@@ -8,6 +8,7 @@ import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 import ListIcon from '@bufferapp/ui/Icon/Icons/List';
 import CalendarIcon from '@bufferapp/ui/Icon/Icons/Calendar';
 import { campaignScheduled } from '@bufferapp/publish-routes';
+import { useTranslation } from 'react-i18next';
 
 import {
   ButtonWrapper,
@@ -27,19 +28,19 @@ const ListItem = ({
   onDeleteCampaignClick,
   onViewCampaignClick,
   goToAnalyzeReport,
-  translations,
   displaySkeleton,
 }) => {
+  const { t } = useTranslation();
   const campaignId = campaign.id;
   const selectItems = [
     {
-      title: translations.editCampaign,
+      title: t('campaigns.viewCampaign.editCampaign'),
       selectedItemClick: () => {
         onEditCampaignClick({ campaignId });
       },
     },
     {
-      title: translations.deleteCampaign,
+      title: t('campaigns.viewCampaign.deleteCampaign'),
       selectedItemClick: () => {
         onDeleteCampaignClick(campaign);
       },
@@ -47,7 +48,7 @@ const ListItem = ({
   ];
 
   const viewCampaignSelectItem = {
-    title: translations.viewCampaign,
+    title: t('campaigns.viewCampaign.viewCampaign'),
     selectedItemClick: () => {
       onViewCampaignClick({ campaignId });
     },
@@ -68,7 +69,7 @@ const ListItem = ({
         }}
         type="secondary"
         isSplit
-        label={translations.viewReport}
+        label={t('campaigns.viewCampaign.viewReport')}
         onSelectClick={selectedItem => selectedItem.selectedItemClick()}
         items={[viewCampaignSelectItem, ...selectItems]}
         disabled={displaySkeleton}
@@ -80,7 +81,7 @@ const ListItem = ({
       <ButtonWithSkeleton
         onClick={viewCampaignSelectItem.selectedItemClick}
         type="secondary"
-        label={translations.viewCampaign}
+        label={t('campaigns.viewCampaign.viewCampaign')}
         disabled={displaySkeleton}
         displaySkeleton={displaySkeleton}
       />
@@ -95,7 +96,7 @@ const ListItem = ({
           <TextWithSkeleton
             type="h3"
             displaySkeleton={displaySkeleton}
-            aria-label={displaySkeleton ? 'Loading' : null}
+            aria-label={displaySkeleton ? t('common.loading') : null}
             color="grayDarker"
           >
             {campaign.name}
@@ -104,7 +105,7 @@ const ListItem = ({
         <TextWithSkeleton
           type="p"
           displaySkeleton={displaySkeleton}
-          aria-label={displaySkeleton ? 'Loading' : null}
+          aria-label={displaySkeleton ? t('common.loading') : null}
           color="grayDark"
         >
           {campaign.lastUpdated}
@@ -130,7 +131,9 @@ const ListItem = ({
         </Icon>
         <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
           {campaign.scheduled}
-          {displaySkeleton ? 'loading' : ` ${translations.scheduled}`}
+          {displaySkeleton
+            ? 'loading'
+            : ` ${t('campaigns.viewCampaign.scheduled')}`}
         </TextWithSkeleton>
       </Group>
       <Group>
@@ -139,7 +142,7 @@ const ListItem = ({
         </Icon>
         <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
           {campaign.sent}
-          {displaySkeleton ? 'loading' : ` ${translations.sent}`}
+          {displaySkeleton ? 'loading' : ` ${t('campaigns.viewCampaign.sent')}`}
         </TextWithSkeleton>
       </Group>
       <ButtonWrapper>{CampaignActionsButton}</ButtonWrapper>
@@ -148,14 +151,6 @@ const ListItem = ({
 };
 
 ListItem.propTypes = {
-  translations: PropTypes.shape({
-    viewReport: PropTypes.string,
-    viewCampaign: PropTypes.string,
-    editCampaign: PropTypes.string,
-    deleteCampaign: PropTypes.string,
-    sent: PropTypes.string,
-    scheduled: PropTypes.string,
-  }).isRequired,
   campaign: PropTypes.shape({
     color: PropTypes.string,
     id: PropTypes.string,

@@ -1,4 +1,7 @@
 {
+  "common": {
+    "loading": "Cargando"
+  },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "Se te cobrará <1>{{billedAmount}}</1> al final de la prueba. ",
     "completeBilling": "Añade tus datos de pago para empezar tu suscripción.",
@@ -7,6 +10,10 @@
     "startSubscription": "Empezar suscripción"
   },
   "campaigns": {
+    "common": {
+      "title": "Campañas",
+      "createCampaign": "Crear Campaña"
+    },
     "campaignForm": {
       "ariaLabel": "Campo nombre para el formulario de campaña",
       "cancel": "Cancelar",
@@ -14,7 +21,7 @@
       "createTitle": "Crear Campaña",
       "editTitle": "Editar Campaña",
       "name": "Nombre",
-      "notice1": "El contenido de la campaña es visible para todos los miembros tu organización.",
+      "notice1": "El contenido de la campaña es visible para todos los miembros de tu organización. ",
       "notice2": "Descubre más",
       "notice3": " en nuestro FAQ.",
       "placeholder": "Nombre de la campaña",
@@ -38,7 +45,6 @@
       "subtext": "Haz seguimiento de las campañas multicanal y crea una combinación saludable de contenido en las redes sociales",
       "title": "Obtén una imagen más clara de tu estrategia en redes sociales"
     },
-    "title": "Campañas",
     "viewCampaign": {
       "allPostsSent": {
         "createCampaign": "Crear Nueva Campaña",
@@ -62,8 +68,10 @@
       },
       "loadingCampaignDetails": "Cargando detalles de la campaña, como fechas y contadores, por favor espera",
       "loadingCampaignName": "Cargando nombre de la campaña, por favor espera",
-      "scheduled": "Programado",
-      "sent": "Enviado",
+      "scheduled": "Programados",
+      "scheduledTitle": "Programado",
+      "sent": "Enviados",
+      "sentTitle": "Enviado",
       "viewCampaign": "Ver Campaña",
       "viewReport": "Ver Reporte"
     }
@@ -287,7 +295,13 @@
     "backToDashboard": "Volver al Dashboard"
   },
   "profile-sidebar": {
-    "connectButton": "Gestionar Redes Sociales"
+    "connectButton": "Gestionar Redes Sociales",
+    "socialAccounts": "Redes sociales",
+    "connectInstagram": "Conectar Instagram",
+    "connectFacebook": "Conectar Facebook",
+    "connectTwitter": "Conectar Twitter",
+    "searchProfiles": "Buscar Perfiles",
+    "noProfilesFound": "No se encontraron perfiles"
   },
   "profiles-disconnected-banner": {
     "body": "Por favor, asegúrate de que estás logueado/a en esta cuenta en la misma red social y solucionaremos esto en un momento.",
@@ -480,6 +494,9 @@
     "validating": "Un momento...",
     "zipCode": "Código postal",
     "zipLeaveBlank": "Dejar en blanco para tarjetas fuera de USA"
+  },
+  "tag-badge": {
+    "new": "Nuevo"
   },
   "trial-complete-modal": {
     "cancelTrial": "Cancelar Prueba",
