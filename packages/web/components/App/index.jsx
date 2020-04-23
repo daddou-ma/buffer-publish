@@ -12,6 +12,8 @@ import AppModals from '@bufferapp/publish-modals';
 import CTABanner from '@bufferapp/publish-cta-banner';
 import TemporaryBanner from '@bufferapp/publish-temporary-banner';
 import ThirdParty from '@bufferapp/publish-thirdparty';
+import SkipToComposer from '@bufferapp/publish-skip-to-composer';
+import store from '@bufferapp/publish-store';
 
 const ThirdPartyWithRouter = withRouter(ThirdParty);
 
@@ -29,26 +31,34 @@ const contentStyle = {
   height: '100%',
 };
 
+const tabId = store.getState()?.tabs?.tabId;
+const shouldDisplaySkipBtn = tabId === 'queue';
+
+console.log('tabId', tabId);
+
 // Can't use stateless function for App since then
 // the `DragDropContext` doesn't work.
 // eslint-disable-next-line
 class App extends Component {
   render() {
     return (
-      <div style={appStyle} className="notranslate">
-        <AppShell>
-          <div style={contentStyle}>
-            <CTABanner />
-            <TemporaryBanner />
-            <InitialLoading>
-              <AppPages />
-            </InitialLoading>
-          </div>
-        </AppShell>
-        <Notifications />
-        <AppModals />
-        <ThirdPartyWithRouter />
-      </div>
+      <React.Fragment>
+        {shouldDisplaySkipBtn && <SkipToComposer />}
+        <div style={appStyle} className="notranslate">
+          <AppShell>
+            <div style={contentStyle}>
+              <CTABanner />
+              <TemporaryBanner />
+              <InitialLoading>
+                <AppPages />
+              </InitialLoading>
+            </div>
+          </AppShell>
+          <Notifications />
+          <AppModals />
+          <ThirdPartyWithRouter />
+        </div>
+      </React.Fragment>
     );
   }
 }
