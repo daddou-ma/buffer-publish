@@ -3,10 +3,10 @@
     "loading": "Cargando"
   },
   "billing-upgrade-cta-banner": {
-    "billedTrialEnd": "Se te cobrará {billedAmount} al final de la prueba. ",
+    "billedTrialEnd": "Se te cobrará <1>{{billedAmount}}</1> al final de la prueba. ",
     "completeBilling": "Añade tus datos de pago para empezar tu suscripción.",
-    "planTrial": "Estás en la prueba de {plan}. ",
-    "remainingTrial": "Te faltan {remaining} para seguir probando {plan}. ",
+    "planTrial": "Estás en la prueba de {{plan}}. ",
+    "remainingTrial": "Te faltan <1>{{remaining}}</1> para seguir probando el plan {{plan}}. ",
     "startSubscription": "Empezar suscripción"
   },
   "campaigns": {

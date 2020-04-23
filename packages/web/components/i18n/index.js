@@ -29,6 +29,7 @@ i18n
     },
     react: {
       wait: true,
+      transSupportBasicHtmlNodes: true, // allow <br/> and simple html elements in translations
     },
   });
 

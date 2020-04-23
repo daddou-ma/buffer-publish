@@ -3,10 +3,10 @@
     "loading": "Loading"
   },
   "billing-upgrade-cta-banner": {
-    "billedTrialEnd": "You'll be billed {billedAmount} at the end of your trial. ",
+    "billedTrialEnd": "You'll be billed <1>{{billedAmount}}</1> at the end of your trial. ",
     "completeBilling": "Add your billing details now to start your subscription. ",
-    "planTrial": "You're on the {plan} trial. ",
-    "remainingTrial": "You have {remaining} on your {plan} plan trial. ",
+    "planTrial": "You're on the {{plan}} trial. ",
+    "remainingTrial": "You have <1>{{remaining}} remaining</1> on your {{plan}} plan trial. ",
     "startSubscription": "Start Subscription"
   },
   "campaigns": {
