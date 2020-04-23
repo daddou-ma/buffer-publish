@@ -163,22 +163,22 @@
       "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Elige Plan",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Planifica, revisa y programa stories de Instagram en web y móvil.",
-        "3": "Incluye un primer comentario cuando publiques tus posts de Instagram programados",
-        "4": "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
-        "5": "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio."
-      },
-      "features": {
-        "0": "8 redes sociales",
-        "1": "2 usuarios",
-        "2": "Stories de Instagram",
-        "3": "Primer comentario en Instagram",
-        "4": "Hashtag Manager",
-        "5": "Tienda en Instagram"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Planifica, revisa y programa stories de Instagram en web y móvil.",
+        "Incluye un primer comentario cuando publiques tus posts de Instagram programados",
+        "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
+        "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio."
+      ],
+      "features": [
+        "8 redes sociales",
+        "2 usuarios",
+        "Stories de Instagram",
+        "Primer comentario en Instagram",
+        "Hashtag Manager",
+        "Tienda en Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -192,22 +192,22 @@
       "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Actualiza a Premium",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "Incluye un primer comentario cuando programes tus publicaciones de Instagram",
-        "2": "Etiqueta usuarios de Instagram cuando programes publicaciones de Instagram",
-        "3": "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
-        "4": "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio.",
-        "5": "Planifica, revisa y programa stories de Instagram en web y móvil."
-      },
-      "features": {
-        "0": "8 redes sociales",
-        "1": "Primer comentario en Instagram",
-        "2": "Etiquetar usuarios en Instagram",
-        "3": "Hashtag Manager",
-        "4": "Tienda en Instagram",
-        "5": "Stories de Instagram"
-      },
+      "featureTooltips": [
+        "",
+        "Incluye un primer comentario cuando programes tus publicaciones de Instagram",
+        "Etiqueta usuarios de Instagram cuando programes publicaciones de Instagram",
+        "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
+        "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio.",
+        "Planifica, revisa y programa stories de Instagram en web y móvil."
+      ],
+      "features": [
+        "8 redes sociales",
+        "Primer comentario en Instagram",
+        "Etiquetar usuarios en Instagram",
+        "Hashtag Manager",
+        "Tienda en Instagram",
+        "Stories de Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -221,16 +221,16 @@
       "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Elige Plan",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Incluye un primer comentario cuando programes publicaciones de Instagram"
-      },
-      "features": {
-        "0": "8 redes sociales",
-        "1": "1 usuario",
-        "2": "Primer comentario en Instagram"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Incluye un primer comentario cuando programes publicaciones de Instagram"
+      ],
+      "features": [
+        "8 redes sociales",
+        "1 usuario",
+        "Primer comentario en Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -243,16 +243,16 @@
       "buttonText": "Actualiza a Pro",
       "buttonTextDisabled": "Plan Actual",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "Incluye un primer comentario cuando programes publicaciones de Instagram",
-        "2": "Etiqueta usuarios de Instagram cuando programes publicaciones para Instagram"
-      },
-      "features": {
-        "0": "8 redes sociales",
-        "1": "Primer comentario en Instagram",
-        "2": "Etiquetar usuarios en Instagram"
-      },
+      "featureTooltips": [
+        "",
+        "Incluye un primer comentario cuando programes publicaciones de Instagram",
+        "Etiqueta usuarios de Instagram cuando programes publicaciones para Instagram"
+      ],
+      "features": [
+        "8 redes sociales",
+        "Primer comentario en Instagram",
+        "Etiquetar usuarios en Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -269,14 +269,14 @@
       "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Elige Plan",
       "cost": "$99",
-      "features": {
-        "0": "25 redes sociales",
-        "1": "6 usuarios",
-        "2": "Stories de Instagram",
-        "3": "Primer comentario en Instagram",
-        "4": "Hashtag Manager",
-        "5": "Tienda en Instagram"
-      },
+      "features": [
+        "25 redes sociales",
+        "6 usuarios",
+        "Stories de Instagram",
+        "Primer comentario en Instagram",
+        "Hashtag Manager",
+        "Tienda en Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$49.50",
       "plan": "small",
