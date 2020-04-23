@@ -28,7 +28,6 @@ const ListItem = ({
   onDeleteCampaignClick,
   onViewCampaignClick,
   goToAnalyzeReport,
-  translations,
   displaySkeleton,
 }) => {
   const { t } = useTranslation();
@@ -132,7 +131,9 @@ const ListItem = ({
         </Icon>
         <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
           {campaign.scheduled}
-          {displaySkeleton ? 'loading' : ` ${translations.scheduled}`}
+          {displaySkeleton
+            ? 'loading'
+            : ` ${t('campaigns.viewCampaign.scheduled')}`}
         </TextWithSkeleton>
       </Group>
       <Group>
@@ -141,7 +142,7 @@ const ListItem = ({
         </Icon>
         <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
           {campaign.sent}
-          {displaySkeleton ? 'loading' : ` ${translations.sent}`}
+          {displaySkeleton ? 'loading' : ` ${t('campaigns.viewCampaign.sent')}`}
         </TextWithSkeleton>
       </Group>
       <ButtonWrapper>{CampaignActionsButton}</ButtonWrapper>
@@ -150,14 +151,6 @@ const ListItem = ({
 };
 
 ListItem.propTypes = {
-  translations: PropTypes.shape({
-    viewReport: PropTypes.string,
-    viewCampaign: PropTypes.string,
-    editCampaign: PropTypes.string,
-    deleteCampaign: PropTypes.string,
-    sent: PropTypes.string,
-    scheduled: PropTypes.string,
-  }).isRequired,
   campaign: PropTypes.shape({
     color: PropTypes.string,
     id: PropTypes.string,

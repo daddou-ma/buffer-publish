@@ -63,7 +63,7 @@ class ProfileSearch extends React.Component {
   }
 
   render() {
-    const { profiles, handleSubmit, isSearchPopupVisible } = this.props;
+    const { profiles, handleSubmit, isSearchPopupVisible, t } = this.props;
 
     return (
       <div style={wrapperStyle}>
@@ -77,7 +77,7 @@ class ProfileSearch extends React.Component {
                   this.onChange(onSearchChange, searchValue);
                 }}
                 height="small"
-                placeholder="Search Profiles"
+                placeholder={t('profile-sidebar.searchProfiles')}
                 isOpen
               />
             </div>

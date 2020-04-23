@@ -43,7 +43,6 @@ const Container = styled.div`
 `;
 
 const ListCampaigns = ({
-  translations,
   campaigns,
   onEditCampaignClick,
   onDeleteCampaignClick,
@@ -98,15 +97,11 @@ const ListCampaigns = ({
             onDeleteCampaignClick={onDeleteCampaignClick}
             onViewCampaignClick={onViewCampaignClick}
             goToAnalyzeReport={goToAnalyzeReport}
-            translations={translations.viewCampaign}
             showCampaignActions={showCampaignActions}
           />
         )}
         {isLoading && (
-          <SkeletonList
-            translations={translations.viewCampaign}
-            showCampaignActions={showCampaignActions}
-          />
+          <SkeletonList showCampaignActions={showCampaignActions} />
         )}
       </Container>
     </Wrapper>
@@ -114,7 +109,6 @@ const ListCampaigns = ({
 };
 
 ListCampaigns.propTypes = {
-  translations: PropTypes.object.isRequired, // eslint-disable-line
   campaigns: PropTypes.array, // eslint-disable-line
   onOpenCreateCampaignClick: PropTypes.func,
   onEditCampaignClick: PropTypes.func,

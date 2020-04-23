@@ -68,8 +68,10 @@
       },
       "loadingCampaignDetails": "Cargando detalles de la campaña, como fechas y contadores, por favor espera",
       "loadingCampaignName": "Cargando nombre de la campaña, por favor espera",
-      "scheduled": "Programado",
-      "sent": "Enviado",
+      "scheduled": "Programados",
+      "scheduledTitle": "Programado",
+      "sent": "Enviados",
+      "sentTitle": "Enviado",
       "viewCampaign": "Ver Campaña",
       "viewReport": "Ver Reporte"
     }
@@ -297,7 +299,8 @@
     "socialAccounts": "Redes sociales",
     "connectInstagram": "Conectar Instagram",
     "connectFacebook": "Conectar Facebook",
-    "connectTwitter": "Conectar Twitter"
+    "connectTwitter": "Conectar Twitter",
+    "searchProfiles": "Buscar Perfiles"
   },
   "profiles-disconnected-banner": {
     "body": "Por favor, asegúrate de que estás logueado/a en esta cuenta en la misma red social y solucionaremos esto en un momento.",

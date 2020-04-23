@@ -23,11 +23,10 @@ const skeletonCampaign = {
 
 const numberItems = [1, 2, 3, 4, 5];
 
-const SkeletonList = ({ translations, showCampaignActions }) => {
+const SkeletonList = ({ showCampaignActions }) => {
   const listItems = numberItems.map(number => (
     <ListItem
       key={`skeleton-${number}`}
-      translations={translations}
       campaign={skeletonCampaign}
       showCampaignActions={showCampaignActions}
       displaySkeleton
@@ -37,7 +36,6 @@ const SkeletonList = ({ translations, showCampaignActions }) => {
 };
 
 SkeletonList.propTypes = {
-  translations: PropTypes.object.isRequired, // eslint-disable-line
   showCampaignActions: PropTypes.bool.isRequired,
 };
 

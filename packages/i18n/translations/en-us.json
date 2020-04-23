@@ -69,7 +69,9 @@
       "loadingCampaignDetails": "Loading campaign details such as date and counters, please hold on",
       "loadingCampaignName": "Loading campaign name, please hold on",
       "scheduled": "Scheduled",
+      "scheduledTitle": "Scheduled",
       "sent": "Sent",
+      "sentTitle": "Sent",
       "viewCampaign": "View Campaign",
       "viewReport": "View Report"
     }
@@ -297,7 +299,8 @@
     "socialAccounts": "Social accounts",
     "connectInstagram": "Connect Instagram",
     "connectFacebook": "Connect Facebook",
-    "connectTwitter": "Connect Twitter"
+    "connectTwitter": "Connect Twitter",
+    "searchProfiles": "Search Profiles"
   },
   "profiles-disconnected-banner": {
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",

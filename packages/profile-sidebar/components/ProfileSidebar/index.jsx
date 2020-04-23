@@ -129,6 +129,7 @@ const ProfileSidebar = ({
           )}
           {profiles.length > 9 && (
             <ProfileSearch
+              t={t}
               profiles={profiles}
               onSearchProfileChange={onSearchProfileChange}
               isSearchPopupVisible={isSearchPopupVisible}
