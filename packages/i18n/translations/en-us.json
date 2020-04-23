@@ -163,22 +163,22 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Choose Plan",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Plan, preview, and schedule Instagram Stories on web and mobile.",
-        "3": "Include the first comment when you schedule Instagram posts",
-        "4": "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
-        "5": "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "2 users",
-        "2": "Instagram Stories",
-        "3": "Instagram first comment",
-        "4": "Hashtag Manager",
-        "5": "Shop Grid"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Plan, preview, and schedule Instagram Stories on web and mobile.",
+        "Include the first comment when you schedule Instagram posts",
+        "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+      ],
+      "features": [
+        "8 social accounts",
+        "2 users",
+        "Instagram Stories",
+        "Instagram first comment",
+        "Hashtag Manager",
+        "Shop Grid"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -192,22 +192,22 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Upgrade to Premium",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "Include the first comment when you schedule Instagram posts",
-        "2": "Tag Instagram users when you schedule Instagram posts",
-        "3": "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
-        "4": "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
-        "5": "Plan, preview, and schedule Instagram Stories on web and mobile."
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "Instagram first comment",
-        "2": "Instagram user tagging",
-        "3": "Hashtag Manager",
-        "4": "Shop Grid",
-        "5": "Instagram Stories"
-      },
+      "featureTooltips": [
+        "",
+        "Include the first comment when you schedule Instagram posts",
+        "Tag Instagram users when you schedule Instagram posts",
+        "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
+        "Plan, preview, and schedule Instagram Stories on web and mobile."
+      ],
+      "features": [
+        "8 social accounts",
+        "Instagram first comment",
+        "Instagram user tagging",
+        "Hashtag Manager",
+        "Shop Grid",
+        "Instagram Stories"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -221,16 +221,16 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Choose Plan",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Include first comment when you schedule Instagram posts"
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "1 user",
-        "2": "Instagram first comment"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Include first comment when you schedule Instagram posts"
+      ],
+      "features": [
+        "8 social accounts",
+        "1 user",
+        "Instagram first comment"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -243,16 +243,16 @@
       "buttonText": "Upgrade to Pro",
       "buttonTextDisabled": "Current Plan",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "Include first comment when you schedule Instagram posts",
-        "2": "Tag Instagram users when you schedule Instagram posts"
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "Instagram first comment",
-        "2": "Instagram user tagging"
-      },
+      "featureTooltips": [
+        "",
+        "Include first comment when you schedule Instagram posts",
+        "Tag Instagram users when you schedule Instagram posts"
+      ],
+      "features": [
+        "8 social accounts",
+        "Instagram first comment",
+        "Instagram user tagging"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -269,14 +269,14 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Choose Plan",
       "cost": "$99",
-      "features": {
-        "0": "25 social accounts",
-        "1": "6 users",
-        "2": "Instagram Stories",
-        "3": "Instagram first comment",
-        "4": "Hashtag Manager",
-        "5": "Shop Grid"
-      },
+      "features": [
+        "25 social accounts",
+        "6 users",
+        "Instagram Stories",
+        "Instagram first comment",
+        "Hashtag Manager",
+        "Shop Grid"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$49.50",
       "plan": "small",
