@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import ViewCampaign from './index';
 
@@ -131,7 +130,6 @@ storiesOf('Campaigns|ViewCampaign', module)
       campaignPosts={campaignPosts}
       isLoading={false}
       hideAnalyzeReport={false}
-      translations={translations.campaigns.viewCampaign}
       campaignId="id"
       hasCampaignsFlip
       showComposer={false}
@@ -146,7 +144,6 @@ storiesOf('Campaigns|ViewCampaign', module)
       campaignPosts={[]}
       isLoading={false}
       hideAnalyzeReport={false}
-      translations={translations.campaigns.viewCampaign}
       campaignId="id"
       hasCampaignsFlip
       showComposer={false}
