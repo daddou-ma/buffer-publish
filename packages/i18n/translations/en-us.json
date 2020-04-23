@@ -31,12 +31,12 @@
     "emptyState": {
       "createCampaign": "Create a Campaign",
       "imageTag": "Example of campaign with multiple posts scheduled.",
-      "item1": "Create a healthy mix of content.",
-      "item2": "Keep your content organized across social channels.",
-      "item3": "Understand how different content types resonate with your audience.",
+      "item1": "Build entire campaigns across social channels.",
+      "item2": "See how they fit together in your schedule.",
+      "item3": "Review campaign performance and hit your goals.",
       "learnMore": "Learn More",
-      "subtext": "With Campaigns you can organize your social media posts into themes or topics and track their success.",
-      "title": "Categorize your content using Campaigns"
+      "subtext": "Keep track of multichannel campaigns and create a healthy mix of content on social media.",
+      "title": "Get a clearer picture of your social media strategy"
     },
     "title": "Campaigns",
     "viewCampaign": {
