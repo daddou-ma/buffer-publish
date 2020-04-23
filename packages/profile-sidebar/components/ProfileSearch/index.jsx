@@ -6,6 +6,7 @@ import Select from '@bufferapp/ui/Select';
 import Avatar from '@bufferapp/ui/Avatar';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+
 import styles from './styles.css';
 
 const Wrapper = styled.div`
