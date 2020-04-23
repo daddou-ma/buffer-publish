@@ -1,158 +1,124 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@bufferapp/ui';
-import { Text } from '@bufferapp/components';
-import { TranslationReplacer } from '@bufferapp/publish-i18n';
-import FeatureLoader from '@bufferapp/product-features';
+import { Button, Text } from '@bufferapp/ui';
+import { white } from '@bufferapp/ui/style/colors';
+import styled from 'styled-components';
+import { WithFeatureLoader } from '@bufferapp/product-features';
+import { Trans, useTranslation } from 'react-i18next';
 
-const textColor = 'white';
+const Wrapper = styled.div`
+  background-color: #121e66;
+  color: ${white};
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-const styling = {
-  backgroundColor: '#121E66',
-  color: textColor,
-  padding: '5px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
+const TextWrapper = styled.div`
+  margin-right: 10px;
+`;
 
-const textStyle = {
-  marginRight: '10px',
+const TextWithStyles = styled(Text)`
+  margin: 0;
+  display: inline;
+`;
+
+const BannerText = ({ t, trial, plan }) => (
+  <TextWrapper>
+    {!trial.hasCardDetails ? (
+      <React.Fragment>
+        <Text type="label" color={white}>
+          {t('billing-upgrade-cta-banner.planTrial', {
+            plan,
+          })}
+        </Text>
+        <TextWithStyles type="p" color={white}>
+          {t('billing-upgrade-cta-banner.completeBilling')}
+        </TextWithStyles>
+      </React.Fragment>
+    ) : (
+      <React.Fragment>
+        <TextWithStyles type="p" color={white}>
+          <Trans i18nKey="billing-upgrade-cta-banner.remainingTrial">
+            You have
+            <strong>{{ remaining: trial.trialTimeRemaining }}</strong>
+            on your {{ plan }} plan trial.
+          </Trans>
+        </TextWithStyles>
+        <TextWithStyles type="p" color={white}>
+          <Trans i18nKey="billing-upgrade-cta-banner.billedTrialEnd">
+            You&apos;ll be billed
+            <strong>{{ billedAmount: trial.postTrialCost || '' }}</strong>
+            at the end of your trial.
+          </Trans>
+        </TextWithStyles>
+      </React.Fragment>
+    )}
+  </TextWrapper>
+);
+
+BannerText.propTypes = {
+  trial: PropTypes.shape({
+    hasCardDetails: PropTypes.bool,
+    postTrialCost: PropTypes.string,
+    trialTimeRemaining: PropTypes.string,
+  }).isRequired,
+  t: PropTypes.func.isRequired,
+  plan: PropTypes.string.isRequired,
 };
 
 const BillingUpgradeCTABanner = ({
-  translations,
   trial,
   isPremiumBusinessPlan,
   onClickStartSubscription,
   profileCount,
+  features,
 }) => {
   if (!trial || (trial && !trial.onTrial) || profileCount === 0) {
     return null;
   }
 
-  const currentPlan = styles => (
-    <Text {...styles}>
-      <FeatureLoader supportedPlans="free">Free</FeatureLoader>
-      <FeatureLoader supportedPlans="pro">Pro</FeatureLoader>
-      <FeatureLoader supportedPlans="business">
-        {isPremiumBusinessPlan ? 'Premium' : 'Business'}
-      </FeatureLoader>
-    </Text>
-  );
+  const { t } = useTranslation();
 
-  const timeRemaining = (
-    <Text weight="bold" color={textColor} size="mini">
-      {trial.trialTimeRemaining} remaining
-    </Text>
-  );
-  const postTrialCost = (
-    <Text weight="bold" color={textColor} size="mini">
-      {trial.postTrialCost}
-    </Text>
-  );
+  const getCurrentPlan = () => {
+    if (features.isSupportedPlan('free')) return 'Free';
+    if (features.isSupportedPlan('pro')) return 'Pro';
+    if (features.isSupportedPlan('business'))
+      return isPremiumBusinessPlan ? 'Premium' : 'Business';
 
-  const trialRemaining = [
-    { replaceString: '{remaining}', replaceWith: timeRemaining },
-    {
-      replaceString: '{plan}',
-      replaceWith: currentPlan({ color: textColor, size: 'mini' }),
-    },
-  ];
-
-  const billedAmountEnd = [
-    { replaceString: '{billedAmount}', replaceWith: postTrialCost },
-  ];
-
-  let BannerText;
-  if (!trial.hasCardDetails) {
-    const planTrial = [
-      {
-        replaceString: '{plan}',
-        replaceWith: currentPlan({
-          color: textColor,
-          weight: 'bold',
-          size: 'mini',
-        }),
-      },
-    ];
-    BannerText = (
-      <Fragment>
-        <Text weight="bold" color={textColor} size="mini">
-          <TranslationReplacer
-            translation={translations.planTrial}
-            replacementStrings={planTrial}
-          />
-        </Text>
-        <Text color={textColor} size="mini">
-          {translations.completeBilling}
-        </Text>
-      </Fragment>
-    );
-  } else {
-    BannerText = (
-      <Fragment>
-        <Text color={textColor} size="mini">
-          <TranslationReplacer
-            translation={translations.remainingTrial}
-            replacementStrings={trialRemaining}
-          />
-        </Text>
-        <Text color={textColor} size="mini">
-          <TranslationReplacer
-            translation={translations.billedTrialEnd}
-            replacementStrings={billedAmountEnd}
-          />
-        </Text>
-      </Fragment>
-    );
-  }
+    return 'Free';
+  };
 
   return (
-    <div style={styling}>
-      <div style={textStyle}>{BannerText}</div>
+    <Wrapper>
+      <BannerText t={t} trial={trial} plan={getCurrentPlan()} />
       <Button
         type="primary"
         size="small"
         onClick={() => onClickStartSubscription()}
-        label={translations.startSubscription}
+        label={t('billing-upgrade-cta-banner.startSubscription')}
       />
-    </div>
+    </Wrapper>
   );
 };
 
 BillingUpgradeCTABanner.propTypes = {
-  translations: PropTypes.shape({
-    remainingTrial: PropTypes.string,
-    billedTrialEnd: PropTypes.string,
-    completeBilling: PropTypes.string,
-    planTrial: PropTypes.string,
-    startSubscription: PropTypes.string,
-  }).isRequired, // eslint-disable-line
   trial: PropTypes.shape({
     hasCardDetails: PropTypes.bool,
-    hasTrialExtended: PropTypes.bool,
     onTrial: PropTypes.bool,
     postTrialCost: PropTypes.string,
     trialLength: PropTypes.number,
     trialTimeRemaining: PropTypes.string,
-  }),
+  }).isRequired,
   onClickStartSubscription: PropTypes.func.isRequired,
-  isPremiumBusinessPlan: PropTypes.bool,
+  isPremiumBusinessPlan: PropTypes.bool.isRequired,
   profileCount: PropTypes.number,
+  features: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 BillingUpgradeCTABanner.defaultProps = {
   profileCount: 0,
-  isPremiumBusinessPlan: false,
-  trial: {
-    hasCardDetails: false,
-    hasTrialExtended: false,
-    onTrial: false,
-    postTrialCost: '',
-    trialLength: 0,
-    trialTimeRemaining: '',
-  },
 };
 
-export default BillingUpgradeCTABanner;
+export default WithFeatureLoader(BillingUpgradeCTABanner);
