@@ -1,4 +1,7 @@
 {
+  "common": {
+    "loading": "Cargando"
+  },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "Se te cobrará {billedAmount} al final de la prueba. ",
     "completeBilling": "Añade tus datos de pago para empezar tu suscripción.",
@@ -7,6 +10,10 @@
     "startSubscription": "Empezar suscripción"
   },
   "campaigns": {
+    "common": {
+      "title": "Campañas",
+      "createCampaign": "Crear Campaña"
+    },
     "campaignForm": {
       "ariaLabel": "Campo nombre para el formulario de campaña",
       "cancel": "Cancelar",
@@ -38,7 +45,6 @@
       "subtext": "Con Campañas, puedes organizar el contenido de tus redes sociales en áreas o temas y hacer seguimiento de su éxito.",
       "title": "Categoriza tu contenido usando Campañas"
     },
-    "title": "Campañas",
     "viewCampaign": {
       "allPostsSent": {
         "createCampaign": "Crear Nueva Campaña",
@@ -287,7 +293,11 @@
     "backToDashboard": "Volver al Dashboard"
   },
   "profile-sidebar": {
-    "connectButton": "Gestionar Redes Sociales"
+    "connectButton": "Gestionar Redes Sociales",
+    "socialAccounts": "Redes sociales",
+    "connectInstagram": "Conectar Instagram",
+    "connectFacebook": "Conectar Facebook",
+    "connectTwitter": "Conectar Twitter"
   },
   "profiles-disconnected-banner": {
     "body": "Por favor, asegúrate de que estás logueado/a en esta cuenta en la misma red social y solucionaremos esto en un momento.",
@@ -480,6 +490,9 @@
     "validating": "Un momento...",
     "zipCode": "Código postal",
     "zipLeaveBlank": "Dejar en blanco para tarjetas fuera de USA"
+  },
+  "tag-badge": {
+    "new": "Nuevo"
   },
   "trial-complete-modal": {
     "cancelTrial": "Cancelar Prueba",
