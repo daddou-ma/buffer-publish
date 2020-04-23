@@ -89,7 +89,7 @@ const Post = ({
   };
 
   return (
-    <PostContainer>
+    <PostContainer data-cy="post">
       <PostSubContainer>
         <Card state={cardDetails}>
           {hasReminderError && (

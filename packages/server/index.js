@@ -1,12 +1,11 @@
 const isProduction = process.env.NODE_ENV === 'production';
-
-/**
- * In standalone mode, load env vars right away
- */
 const isStandalone = process.env.STANDALONE === 'true';
+const usePrecompiledBundles = process.env.USE_PRECOMPILED_BUNDLES === 'true';
+
 const standalone = require('./standalone'); // eslint-disable-line
 if (isStandalone) {
   standalone.loadEnv();
+  standalone.serveStaticAssets();
 }
 
 /**
@@ -77,7 +76,11 @@ if (!isStandalone) {
 }
 
 // Load our static assets manifest
-const staticAssets = getStaticAssets({ isProduction, isStandalone });
+const staticAssets = getStaticAssets({
+  isProduction,
+  isStandalone,
+  usePrecompiledBundles,
+});
 
 app.use(cookieParser());
 app.use(bodyParser.json());

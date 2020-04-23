@@ -16,3 +16,4 @@ vendor.css
 *.vscode
 dist
 standalone-session.json
+cypress/videos

@@ -6,7 +6,19 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 const common = require('./webpack.config.common.js');
 
-const publicPath = 'https://static.buffer.com/publish/';
+/**
+ * When we build and run the app in CI / GitHub Actions for testing
+ * we will load the bundled JS and other assets from a simple local
+ * server and NOT from the S3 CDN. So we change `publicPath` to ensure
+ * that is outputted correctly in the output from the
+ * `ManifestPlugin` later.
+ *
+ * See `server/lib/assets.js` for more details.
+ */
+const publicPath =
+  process.env.USE_PRECOMPILED_BUNDLES === 'true'
+    ? 'https://local.buffer.com:8080/static/'
+    : 'https://static.buffer.com/publish/';
 
 const plugins = [
   new MiniCssExtractPlugin({

@@ -1,6 +1,8 @@
 const fs = require('fs');
 const { join } = require('path');
+const express = require('express');
 const https = require('https');
+const cors = require('cors');
 
 const basePath = join(__dirname, '..');
 
@@ -18,6 +20,8 @@ const paths = {
   certKeyGHActions: join(basePath, 'local.buffer.com-wildcard.key'),
   certCrtGHActions: join(basePath, 'local.buffer.com-wildcard.crt'),
   standaloneSession: join(basePath, 'standalone', 'standalone-session.json'),
+  webpackAssets: join(basePath, '..', '..', 'dist'),
+  webpackAssetsJson: join(basePath, '..', '..', 'dist', 'webpackAssets.json'),
 };
 
 function getBufferDevConfig() {
@@ -127,6 +131,19 @@ function setStandaloneSessionMiddleware(req, res, next) {
   return next();
 }
 
+function serveStaticAssets() {
+  const app = express();
+  app.use(cors());
+  app.use('/static', express.static(paths.webpackAssets));
+  const staticAssetServer = createServer(app);
+  staticAssetServer.listen(8080, () => {
+    console.log(`
+📦  Precompiled asset mode enabled. 
+    Serving static assets from:
+    → https://local.buffer.com:8080/static/`);
+  });
+}
+
 const dim = '\033[2m';
 const reset = '\033[0m';
 const bootMessage = `
@@ -138,5 +155,6 @@ module.exports = {
   loadEnv,
   createServer,
   setStandaloneSessionMiddleware,
+  serveStaticAssets,
   bootMessage,
 };

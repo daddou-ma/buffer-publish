@@ -714,6 +714,7 @@ class Editor extends React.Component {
             handlePastedText={this.handlePastedText}
             handleBeforeInput={this.handleBeforeInput}
             ref="textZone"
+            data-cy="composer-text-zone"
           />
           <EmojiSuggestions
             onOpen={this.onEmojiSuggestionsOpen}
