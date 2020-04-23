@@ -13,7 +13,7 @@ const NoteWrapper = styled.div`
   margin-left: 16px;
 `;
 
-const SubText = styled(Text)`
+const Subtext = styled(Text)`
   color: ${grayDarker};
   margin: 8px 0px;
   font-size: ${fontSize};
@@ -32,7 +32,7 @@ const NoteSection = ({ note, setNote, translations }) => (
         fullHeight
         autoFocus
       />
-      <SubText>{translations.noteSubText}</SubText>
+      <Subtext>{translations.noteSubText}</Subtext>
     </NoteWrapper>
   </Fragment>
 );
