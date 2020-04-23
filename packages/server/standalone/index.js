@@ -1,3 +1,5 @@
+/* eslint no-console: "off" */
+
 const fs = require('fs');
 const { join } = require('path');
 const express = require('express');
@@ -112,7 +114,6 @@ function getStandaloneSessionData() {
   try {
     return JSON.parse(fs.readFileSync(paths.standaloneSession));
   } catch (error) {
-    // eslint-disable-next-line
     console.log(
       `
 -------------------------------------------------------------------------------------------------------
@@ -151,17 +152,18 @@ function serveStaticAssets() {
 }
 
 function onBoot({ usePrecompiledBundles }) {
-  const dim = '\033[2m';
-  const reset = '\033[0m';
-  
-  const bootMessage = `
-🚀  Publish is now running in Standalone Mode 
-   → https://publish.local.buffer.com
-   ${dim}- Don't forget: \`yarn run watch\` in another terminal tab.${reset}`;
+  const dim = '\x1b[2m';
+  const reset = '\x1b[0m';
+  const u = '\x1b[4m';
 
-   const precompiledBundlesMessage = `
-   📦  Using precompiled assets in ./dist – serving from:
-      → https://local.buffer.com:${STATIC_ASSETS_SERVER_PORT}/static`;
+  const bootMessage = `
+🚀  Publish is now running in Standalone Mode${dim} 
+   → ${u}https://publish.local.buffer.com${reset}${dim}
+   - Don't forget: \`yarn run watch\` in another terminal tab.${reset}`;
+
+  const precompiledBundlesMessage = `
+📦  Using precompiled assets and serving from:${dim} 
+   → https://local.buffer.com:${STATIC_ASSETS_SERVER_PORT}/static${reset}`;
 
   // Ensure we have a valid session
   if (getStandaloneSessionData()) {
