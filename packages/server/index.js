@@ -192,7 +192,7 @@ app.get('*', (req, res) => {
 
 server.listen(PORT, () => {
   if (isStandalone) {
-    console.log(standalone.bootMessage); // eslint-disable-line
+    standalone.onBoot({ usePrecompiledBundles });
   } else {
     console.log(`listening on port ${PORT}`); // eslint-disable-line
   }

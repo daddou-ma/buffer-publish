@@ -4,8 +4,10 @@ const express = require('express');
 const https = require('https');
 const cors = require('cors');
 
-const basePath = join(__dirname, '..');
+// Port on which to server static assets for running in CI
+const STATIC_ASSETS_SERVER_PORT = 8080;
 
+const basePath = join(__dirname, '..');
 const paths = {
   standaloneEnv: join(basePath, 'standalone', 'standalone.env'),
   tempEnv: '/tmp/buffer-publish-standalone.env',
@@ -104,6 +106,27 @@ function createServer(app) {
 }
 
 /**
+ * Get the standalone session data from the local JSON file
+ */
+function getStandaloneSessionData() {
+  try {
+    return JSON.parse(fs.readFileSync(paths.standaloneSession));
+  } catch (error) {
+    // eslint-disable-next-line
+    console.log(
+      `
+-------------------------------------------------------------------------------------------------------
+🚧  Please ensure you have created a \`standalone-session.json\` file in the packages/server/standalone directory.
+   For more details see the "Standalone Mode" section of the README.md.
+-------------------------------------------------------------------------------------------------------
+
+`,
+      error.message
+    );
+  }
+}
+
+/**
  * Middleware that adds our static user session data to the server.
  *
  * @param {Request} req
@@ -111,20 +134,8 @@ function createServer(app) {
  * @param {Function} next
  */
 function setStandaloneSessionMiddleware(req, res, next) {
-  let standaloneSessionData;
-  try {
-    standaloneSessionData = JSON.parse(
-      fs.readFileSync(paths.standaloneSession)
-    );
-  } catch (error) {
-    // eslint-disable-next-line
-    console.log(
-      `
-🚧 Please ensure you have created a \`standalone-session.json\` file in the packages/server directory.
-   For more details see the "Standalone Mode" section of the README.md.
-`,
-      error
-    );
+  const standaloneSessionData = getStandaloneSessionData();
+  if (!standaloneSessionData) {
     process.exit();
   }
   req.session = standaloneSessionData;
@@ -136,25 +147,35 @@ function serveStaticAssets() {
   app.use(cors());
   app.use('/static', express.static(paths.webpackAssets));
   const staticAssetServer = createServer(app);
-  staticAssetServer.listen(8080, () => {
-    console.log(`
-📦  Precompiled asset mode enabled. 
-    Serving static assets from:
-    → https://local.buffer.com:8080/static/`);
-  });
+  staticAssetServer.listen(STATIC_ASSETS_SERVER_PORT);
 }
 
-const dim = '\033[2m';
-const reset = '\033[0m';
-const bootMessage = `
+function onBoot({ usePrecompiledBundles }) {
+  const dim = '\033[2m';
+  const reset = '\033[0m';
+  
+  const bootMessage = `
 🚀  Publish is now running in Standalone Mode 
    → https://publish.local.buffer.com
    ${dim}- Don't forget: \`yarn run watch\` in another terminal tab.${reset}`;
+
+   const precompiledBundlesMessage = `
+   📦  Using precompiled assets in ./dist – serving from:
+      → https://local.buffer.com:${STATIC_ASSETS_SERVER_PORT}/static`;
+
+  // Ensure we have a valid session
+  if (getStandaloneSessionData()) {
+    console.log(bootMessage);
+    if (usePrecompiledBundles) {
+      console.log(precompiledBundlesMessage);
+    }
+  }
+}
 
 module.exports = {
   loadEnv,
   createServer,
   setStandaloneSessionMiddleware,
   serveStaticAssets,
-  bootMessage,
+  onBoot,
 };
