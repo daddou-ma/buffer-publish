@@ -26,7 +26,6 @@ const Title = styled(Text)`
 
 const Note = styled(Text)`
   margin-top: 8px;
-  color: ${grayDark};
 `;
 
 const ViewNote = ({ onEditNoteClick, story, translations }) => {
@@ -35,7 +34,11 @@ const ViewNote = ({ onEditNoteClick, story, translations }) => {
     <ContentWrapper>
       <Title type="p">{translations.noteTitle}</Title>
       <NoteWrapper>
-        {hasNoNote && <Note type="p">{translations.noteExplanation}</Note>}
+        {hasNoNote && (
+          <Note type="p" color={grayDark}>
+            {translations.noteExplanation}
+          </Note>
+        )}
         {!hasNoNote && <Note type="p">{story.note}</Note>}
       </NoteWrapper>
       <Button
