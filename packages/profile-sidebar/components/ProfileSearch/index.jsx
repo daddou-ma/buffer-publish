@@ -133,7 +133,7 @@ ProfileSearch.defaultProps = {
 ProfileSearch.propTypes = {
   profiles: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       handle: PropTypes.string.isRequired,
     })
   ),
