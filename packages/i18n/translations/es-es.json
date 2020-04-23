@@ -300,7 +300,8 @@
     "connectInstagram": "Conectar Instagram",
     "connectFacebook": "Conectar Facebook",
     "connectTwitter": "Conectar Twitter",
-    "searchProfiles": "Buscar Perfiles"
+    "searchProfiles": "Buscar Perfiles",
+    "noProfilesFound": "No se encontraron perfiles"
   },
   "profiles-disconnected-banner": {
     "body": "Por favor, asegúrate de que estás logueado/a en esta cuenta en la misma red social y solucionaremos esto en un momento.",

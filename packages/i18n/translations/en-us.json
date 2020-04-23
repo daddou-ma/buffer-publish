@@ -300,7 +300,8 @@
     "connectInstagram": "Connect Instagram",
     "connectFacebook": "Connect Facebook",
     "connectTwitter": "Connect Twitter",
-    "searchProfiles": "Search Profiles"
+    "searchProfiles": "Search Profiles",
+    "noProfilesFound": "No Profiles Found"
   },
   "profiles-disconnected-banner": {
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
