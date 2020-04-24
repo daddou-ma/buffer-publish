@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { getProfilePageParams } from '@bufferapp/publish-routes';
+import { getMainContentId } from '@bufferapp/publish-skip-nav-link';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions } from '@bufferapp/publish-tabs';
 import ProfilePage from './components/ProfilePage';
@@ -58,6 +59,7 @@ export default hot(
           shouldHideAdvancedAnalytics: state.profileSidebar.selectedProfile
             ? state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics
             : false,
+          mainContentId: getMainContentId(state.router?.location?.pathname),
         };
       }
       return {};

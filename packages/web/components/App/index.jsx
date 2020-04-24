@@ -43,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        {shouldDisplaySkipBtn && <SkipToComposer />}
+        <SkipToComposer />
         <div style={appStyle} className="notranslate">
           <AppShell>
             <div style={contentStyle}>

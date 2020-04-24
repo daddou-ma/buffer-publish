@@ -81,30 +81,32 @@ const ViewCampaign = ({
       </nav>
       {/* Content */}
       {isLoading && <SkeletonPosts />}
-      {!isLoading && (
-        <EmptyStateCampaign
-          hideAnalyzeReport={hideAnalyzeReport}
-          translations={translations}
-          campaign={campaign}
-          actions={actions}
-          sentView={sentView}
-        />
-      )}
-      {!isLoading && campaignHasPosts && (
-        <QueueItems
-          items={campaignPosts}
-          onDeleteConfirmClick={postActions.onDeleteConfirmClick}
-          onSetRemindersClick={postActions.onSetRemindersClick}
-          onEditClick={postActions.onEditClick}
-          onShareNowClick={postActions.onShareNowClick}
-          onRequeueClick={postActions.onRequeueClick}
-          onImageClick={postActions.onImageClick}
-          onImageClickNext={postActions.onImageClickNext}
-          onImageClickPrev={postActions.onImageClickPrev}
-          onImageClose={postActions.onImageClose}
-          type="post"
-        />
-      )}
+      <main>
+        {!isLoading && (
+          <EmptyStateCampaign
+            hideAnalyzeReport={hideAnalyzeReport}
+            translations={translations}
+            campaign={campaign}
+            actions={actions}
+            sentView={sentView}
+          />
+        )}
+        {!isLoading && campaignHasPosts && (
+          <QueueItems
+            items={campaignPosts}
+            onDeleteConfirmClick={postActions.onDeleteConfirmClick}
+            onSetRemindersClick={postActions.onSetRemindersClick}
+            onEditClick={postActions.onEditClick}
+            onShareNowClick={postActions.onShareNowClick}
+            onRequeueClick={postActions.onRequeueClick}
+            onImageClick={postActions.onImageClick}
+            onImageClickNext={postActions.onImageClickNext}
+            onImageClickPrev={postActions.onImageClickPrev}
+            onImageClose={postActions.onImageClose}
+            type="post"
+          />
+        )}
+      </main>
       {/* Composer */}
       {showComposer && (
         <ComposerPopover

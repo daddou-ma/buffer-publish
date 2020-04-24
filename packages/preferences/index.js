@@ -9,6 +9,7 @@ import {
 } from '@bufferapp/publish-routes';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
 
+import { getMainContentId } from '@bufferapp/publish-skip-nav-link';
 import Preferences from './components/Preferences';
 
 export default connect(
@@ -21,6 +22,7 @@ export default connect(
       selectedTabId: preferenceId,
       selectedProfileId: state.profileSidebar.selectedProfileId,
       isOnBusinessTrial: state.profileSidebar.isOnBusinessTrial,
+      mainContentId: getMainContentId(state.router?.location?.pathname),
     };
   },
   dispatch => ({

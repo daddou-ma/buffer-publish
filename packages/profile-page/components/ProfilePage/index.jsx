@@ -188,6 +188,7 @@ function ProfilePage({
   onChangeTab,
   hasStoriesFlip,
   shouldHideAdvancedAnalytics,
+  mainContentId,
 }) {
   const isQueueTab = tabId === 'queue' || tabId === 'stories';
   const isOtherPostsTab =
@@ -226,7 +227,7 @@ function ProfilePage({
         moreToLoad={moreToLoad}
         onReachBottom={onReachBottom}
       >
-        <StyledMainContent>
+        <StyledMainContent id={mainContentId}>
           <TabContent
             tabId={tabId}
             profileId={profileId}

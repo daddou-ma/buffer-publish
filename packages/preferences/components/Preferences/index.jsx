@@ -71,6 +71,7 @@ const Preferences = ({
   selectedProfileId,
   profiles,
   isOnBusinessTrial,
+  mainContentId,
 }) => {
   const { t } = useTranslation();
 
@@ -109,10 +110,12 @@ const Preferences = ({
                 })
               }
             />
-            <PreferenceContent
-              tabId={selectedTabId}
-              onUnknownTab={onUnknownTab}
-            />
+            <main id={mainContentId}>
+              <PreferenceContent
+                tabId={selectedTabId}
+                onUnknownTab={onUnknownTab}
+              />
+            </main>
           </ContainerStyle>
         </TabStyle>
       </PreferencesWrapper>

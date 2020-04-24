@@ -1,5 +1,5 @@
 {
-  "name": "@bufferapp/publish-skip-to-composer",
+  "name": "@bufferapp/publish-skip-nav-link",
   "version": "2.0.0",
   "description": "A nav skip button for users using screen readers",
   "main": "index.js",
