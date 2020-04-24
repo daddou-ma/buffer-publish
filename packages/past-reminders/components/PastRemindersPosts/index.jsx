@@ -204,10 +204,6 @@ PastRemindersPosts.defaultProps = {
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onMobileClick: () => {},
-  onImageClick: () => {},
-  onImageClickNext: () => {},
-  onImageClickPrev: () => {},
-  onImageClose: () => {},
   onPreviewClick: () => {},
   onClosePreviewClick: () => {},
 };
