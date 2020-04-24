@@ -80,10 +80,6 @@ const SentPosts = ({
   postLists,
   onEditClick,
   onShareAgainClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onCampaignTagClick,
   onComposerCreateSuccess,
   showComposer,
@@ -177,10 +173,6 @@ const SentPosts = ({
               postLists={postLists}
               onEditClick={onEditClick}
               onShareAgainClick={onShareAgainClick}
-              onImageClick={onImageClick}
-              onImageClickNext={onImageClickNext}
-              onImageClickPrev={onImageClickPrev}
-              onImageClose={onImageClose}
               onCampaignTagClick={onCampaignTagClick}
               isManager={isManager}
               isBusinessAccount={isBusinessAccount}
@@ -232,10 +224,6 @@ SentPosts.propTypes = {
   onComposerCreateSuccess: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
   onShareAgainClick: PropTypes.func,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
   onCampaignTagClick: PropTypes.func,
   isManager: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
@@ -269,10 +257,6 @@ SentPosts.defaultProps = {
   isDisconnectedProfile: false,
   onEditClick: () => {},
   onShareAgainClick: () => {},
-  onImageClick: () => {},
-  onImageClickNext: () => {},
-  onImageClickPrev: () => {},
-  onImageClose: () => {},
   onCampaignTagClick: () => {},
 };
 
