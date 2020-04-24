@@ -12,6 +12,7 @@ export ColorPicker from './ColorPicker';
 export ComposerInput from './ComposerInput';
 export ComposerSidepanel from './ComposerSidepanel';
 export ConfirmModal from './ConfirmModal';
+export Draft from './Draft';
 export DiscontinuousProgressBar from './DiscontinuousProgressBar';
 export EmptyState from './EmptyState';
 export ErrorBanner from './ErrorBanner';
