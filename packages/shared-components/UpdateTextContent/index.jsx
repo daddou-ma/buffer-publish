@@ -11,12 +11,12 @@ const ContentTextWrapper = styled.span`
 const UpdateTextContent = ({ basic, text, links }) => (
   <ContentTextWrapper>
     {basic ? (
-      <Text color="black" size="mini" whitespace="pre-wrap">
+      <Text color="shuttleGray" size="mini" whitespace="pre-wrap">
         {text}
       </Text>
     ) : (
       <LinkifiedText
-        color="black"
+        color="shuttleGray"
         links={links}
         size="mini"
         whitespace="pre-wrap"

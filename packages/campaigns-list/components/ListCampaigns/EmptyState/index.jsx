@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Button, Link } from '@bufferapp/ui';
 import { Checklist } from '@bufferapp/publish-shared-components';
+import { useTranslation } from 'react-i18next';
 
 const EmptyStateContainer = styled.div`
   display: flex;
@@ -36,59 +37,45 @@ const LinkWithStyles = styled(Link)`
   padding: 16px;
 `;
 
-const EmptyState = ({ translations, onOpenCreateCampaignClick }) => {
-  const {
-    item1,
-    item2,
-    item3,
-    createCampaign,
-    title,
-    subtext,
-    learnMore,
-    imageTag,
-  } = translations;
-  const itemsArray = [item1, item2, item3];
+const EmptyState = ({ onOpenCreateCampaignClick }) => {
+  const { t } = useTranslation();
 
   return (
     <EmptyStateContainer>
       <Content>
-        <Text type="h1">{title}</Text>
-        <Text type="p">{subtext}</Text>
-        <Checklist items={itemsArray} />
+        <Text type="h1">{t('campaigns.emptyState.title')}</Text>
+        <Text type="p">{t('campaigns.emptyState.subtext')}</Text>
+        <Checklist
+          items={[
+            t('campaigns.emptyState.item1'),
+            t('campaigns.emptyState.item2'),
+            t('campaigns.emptyState.item3'),
+          ]}
+        />
         <div style={{ alignSelf: 'flex-end', paddingTop: '30px' }}>
           <Button
             type="primary"
             size="large"
-            label={createCampaign}
+            label={t('campaigns.common.createCampaign')}
             onClick={onOpenCreateCampaignClick}
           />
           <LinkWithStyles
             href="https://support.buffer.com/hc/en-us/articles/360046266313-creating-and-managing-campaigns"
             newTab
           >
-            {learnMore}
+            {t('campaigns.emptyState.learnMore')}
           </LinkWithStyles>
         </div>
       </Content>
       <Image
         src="https://buffer-publish.s3.amazonaws.com/images/campaigns-empty-state-screenshot.png"
-        alt={imageTag}
+        alt={t('campaigns.emptyState.imageTag')}
       />
     </EmptyStateContainer>
   );
 };
 
 EmptyState.propTypes = {
-  translations: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    item1: PropTypes.string.isRequired,
-    item2: PropTypes.string.isRequired,
-    item3: PropTypes.string.isRequired,
-    createCampaign: PropTypes.string.isRequired,
-    learnMore: PropTypes.string.isRequired,
-    imageTag: PropTypes.string.isRequired,
-    subtext: PropTypes.string.isRequired,
-  }).isRequired,
   onOpenCreateCampaignClick: PropTypes.func.isRequired,
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import translations from '@bufferapp/publish-i18n/translations/en-us.json';
+import '@bufferapp/publish-web/components/i18n';
 
 import CampaignForm from './index';
 
@@ -17,7 +17,6 @@ storiesOf('Campaigns|CampaignForm', module)
   .addDecorator(withA11y)
   .add('create form', () => (
     <CampaignForm
-      translations={translations.campaigns.campaignForm}
       onCreateOrUpdateCampaignClick={action('saveCampaign')}
       onCancelClick={action('cancel')}
     />
@@ -25,7 +24,6 @@ storiesOf('Campaigns|CampaignForm', module)
   .add('edit form', () => (
     <CampaignForm
       campaignId={campaignDetails.id}
-      translations={translations.campaigns.campaignForm}
       onCreateOrUpdateCampaignClick={action('saveCampaign')}
       onCancelClick={action('cancel')}
       editMode

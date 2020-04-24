@@ -74,9 +74,7 @@ const ViewCampaign = ({
           onTabClick={tabId => actions.onTabClick({ tabId, campaignId })}
         >
           <Tab tabId="scheduled">{translations.scheduled}</Tab>
-          <Tab tabId="sent">
-            {translations.sent}
-          </Tab>
+          <Tab tabId="sent">{translations.sent}</Tab>
         </Tabs>
       </nav>
       {/* Content */}
