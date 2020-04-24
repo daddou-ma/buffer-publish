@@ -77,7 +77,7 @@ const ViewCampaign = ({
           <Tab tabId="scheduled">
             {t('campaigns.viewCampaign.scheduledTitle')}
           </Tab>
-          <Tab tabId="sent">{t('campaigns.viewCampaign.sent')}</Tab>
+          <Tab tabId="sent">{t('campaigns.viewCampaign.sentTitle')}</Tab>
         </Tabs>
       </nav>
       {/* Content */}
