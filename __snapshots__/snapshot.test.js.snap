@@ -264,20 +264,12 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   border-color: #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c14 {
-=======
-.c15 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c16 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-<<<<<<< HEAD
-.c13 {
-=======
-.c14 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -325,11 +317,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   background-color: transparent;
 }
 
-<<<<<<< HEAD
-.c13:hover {
-=======
-.c14:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c15:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -338,36 +326,20 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c13:active {
+.c15:active {
   top: 1px;
 }
 
-.c13:focus {
-=======
-.c14:active {
-  top: 1px;
-}
-
-.c14:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c15:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c13:hover {
+.c15:hover {
   color: #3D3D3D;
 }
 
-.c17 {
-=======
-.c14:hover {
-  color: #3D3D3D;
-}
-
-.c18 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -417,11 +389,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c17:hover {
-=======
-.c18:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -430,46 +398,26 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c17:active {
+.c19:active {
   top: 1px;
 }
 
-.c17:focus {
-=======
-.c18:active {
-  top: 1px;
-}
-
-.c18:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c17:hover {
-=======
-.c18:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-<<<<<<< HEAD
-.c17:focus {
-=======
-.c18:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c19 {
-=======
-.c20 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -519,11 +467,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   border: 1px solid #2c4bff;
 }
 
-<<<<<<< HEAD
-.c19:hover {
-=======
-.c20:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -532,28 +476,16 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c19:active {
+.c21:active {
   top: 1px;
 }
 
-.c19:focus {
-=======
-.c20:active {
-  top: 1px;
-}
-
-.c20:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c19:hover {
-=======
-.c20:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -656,11 +588,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   align-items: center;
 }
 
-<<<<<<< HEAD
-.c15 {
-=======
-.c16 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c17 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -673,31 +601,19 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c16 {
+.c18 {
   margin-right: 8px;
 }
 
-.c18 {
+.c20 {
   margin-left: 8px;
 }
 
-.c12 {
+.c14 {
   color: #636363;
 }
 
-.c11 {
-=======
-.c17 {
-  margin-right: 8px;
-}
-
-.c19 {
-  margin-left: 8px;
-}
-
 .c13 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -812,70 +728,43 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
       className="c13"
     >
       <button
-<<<<<<< HEAD
-        className="c12 c13"
-=======
-        className="c14"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c14 c15"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-<<<<<<< HEAD
-          className="c14"
-=======
-          className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c16"
         >
           Delete
         </div>
       </button>
       <span
-<<<<<<< HEAD
-        className="c15"
+        className="c17"
       />
       <button
-        className="c16 c17"
-=======
-        className="c16"
-      />
-      <button
-        className="c17 c18"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c18 c19"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-<<<<<<< HEAD
-          className="c14"
-=======
-          className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c16"
         >
           Edit
         </div>
       </button>
       <button
-<<<<<<< HEAD
-        className="c18 c19"
-=======
-        className="c19 c20"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c20 c21"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-<<<<<<< HEAD
-          className="c14"
-=======
-          className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c16"
         >
           Add to Queue
         </div>
@@ -1878,20 +1767,12 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   border-color: #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c14 {
-=======
-.c15 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c16 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-<<<<<<< HEAD
-.c13 {
-=======
-.c14 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1939,11 +1820,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   background-color: transparent;
 }
 
-<<<<<<< HEAD
-.c13:hover {
-=======
-.c14:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c15:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -1952,36 +1829,20 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c13:active {
+.c15:active {
   top: 1px;
 }
 
-.c13:focus {
-=======
-.c14:active {
-  top: 1px;
-}
-
-.c14:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c15:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c13:hover {
+.c15:hover {
   color: #3D3D3D;
 }
 
-.c17 {
-=======
-.c14:hover {
-  color: #3D3D3D;
-}
-
-.c18 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2031,11 +1892,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c17:hover {
-=======
-.c18:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -2044,46 +1901,26 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c17:active {
+.c19:active {
   top: 1px;
 }
 
-.c17:focus {
-=======
-.c18:active {
-  top: 1px;
-}
-
-.c18:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c17:hover {
-=======
-.c18:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-<<<<<<< HEAD
-.c17:focus {
-=======
-.c18:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c19 {
-=======
-.c20 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2133,11 +1970,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   border: 1px solid #2c4bff;
 }
 
-<<<<<<< HEAD
-.c19:hover {
-=======
-.c20:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -2146,28 +1979,16 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c19:active {
+.c21:active {
   top: 1px;
 }
 
-.c19:focus {
-=======
-.c20:active {
-  top: 1px;
-}
-
-.c20:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c19:hover {
-=======
-.c20:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -2270,11 +2091,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   align-items: center;
 }
 
-<<<<<<< HEAD
-.c15 {
-=======
-.c16 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c17 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -2287,31 +2104,19 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c16 {
+.c18 {
   margin-right: 8px;
 }
 
-.c18 {
+.c20 {
   margin-left: 8px;
 }
 
-.c12 {
+.c14 {
   color: #636363;
 }
 
-.c11 {
-=======
-.c17 {
-  margin-right: 8px;
-}
-
-.c19 {
-  margin-left: 8px;
-}
-
 .c13 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2426,70 +2231,43 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
       className="c13"
     >
       <button
-<<<<<<< HEAD
-        className="c12 c13"
-=======
-        className="c14"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c14 c15"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-<<<<<<< HEAD
-          className="c14"
-=======
-          className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c16"
         >
           Delete
         </div>
       </button>
       <span
-<<<<<<< HEAD
-        className="c15"
+        className="c17"
       />
       <button
-        className="c16 c17"
-=======
-        className="c16"
-      />
-      <button
-        className="c17 c18"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c18 c19"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-<<<<<<< HEAD
-          className="c14"
-=======
-          className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c16"
         >
           Edit
         </div>
       </button>
       <button
-<<<<<<< HEAD
-        className="c18 c19"
-=======
-        className="c19 c20"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c20 c21"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-<<<<<<< HEAD
-          className="c14"
-=======
-          className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c16"
         >
           Add to Queue
         </div>
@@ -2752,20 +2530,12 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   border-color: #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c15 {
-=======
-.c16 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c17 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-<<<<<<< HEAD
-.c14 {
-=======
-.c15 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2813,11 +2583,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   background-color: transparent;
 }
 
-<<<<<<< HEAD
-.c14:hover {
-=======
-.c15:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c16:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -2826,36 +2592,20 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c14:active {
+.c16:active {
   top: 1px;
 }
 
-.c14:focus {
-=======
-.c15:active {
-  top: 1px;
-}
-
-.c15:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c16:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c14:hover {
+.c16:hover {
   color: #3D3D3D;
 }
 
-.c18 {
-=======
-.c15:hover {
-  color: #3D3D3D;
-}
-
-.c19 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2905,11 +2655,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c18:hover {
-=======
-.c19:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -2918,46 +2664,26 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c18:active {
+.c20:active {
   top: 1px;
 }
 
-.c18:focus {
-=======
-.c19:active {
-  top: 1px;
-}
-
-.c19:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c18:hover {
-=======
-.c19:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-<<<<<<< HEAD
-.c18:focus {
-=======
-.c19:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c20 {
-=======
-.c21 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3007,11 +2733,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   border: 1px solid #2c4bff;
 }
 
-<<<<<<< HEAD
-.c20:hover {
-=======
-.c21:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -3020,28 +2742,16 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c20:active {
+.c22:active {
   top: 1px;
 }
 
-.c20:focus {
-=======
-.c21:active {
-  top: 1px;
-}
-
-.c21:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c20:hover {
-=======
-.c21:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -3144,11 +2854,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   align-items: center;
 }
 
-<<<<<<< HEAD
-.c16 {
-=======
-.c17 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c18 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -3173,27 +2879,16 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   color: #E0364F;
 }
 
-<<<<<<< HEAD
-.c17 {
-  margin-right: 8px;
-}
-
 .c19 {
-  margin-left: 8px;
-}
-
-.c13 {
-  color: #636363;
-}
-
-.c12 {
-=======
-.c18 {
   margin-right: 8px;
 }
 
-.c20 {
+.c21 {
   margin-left: 8px;
+}
+
+.c15 {
+  color: #636363;
 }
 
 .c14 {
@@ -3212,7 +2907,6 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
 }
 
 .c7 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3339,70 +3033,43 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
       className="c14"
     >
       <button
-<<<<<<< HEAD
-        className="c13 c14"
-=======
-        className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c15 c16"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-<<<<<<< HEAD
-          className="c15"
-=======
-          className="c16"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c17"
         >
           Delete
         </div>
       </button>
       <span
-<<<<<<< HEAD
-        className="c16"
+        className="c18"
       />
       <button
-        className="c17 c18"
-=======
-        className="c17"
-      />
-      <button
-        className="c18 c19"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c19 c20"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-<<<<<<< HEAD
-          className="c15"
-=======
-          className="c16"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c17"
         >
           Edit
         </div>
       </button>
       <button
-<<<<<<< HEAD
-        className="c19 c20"
-=======
-        className="c20 c21"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c21 c22"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-<<<<<<< HEAD
-          className="c15"
-=======
-          className="c16"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c17"
         >
           Reschedule
         </div>
@@ -3704,20 +3371,12 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   border-color: #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c14 {
-=======
-.c15 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c16 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-<<<<<<< HEAD
-.c13 {
-=======
-.c14 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3765,11 +3424,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   background-color: transparent;
 }
 
-<<<<<<< HEAD
-.c13:hover {
-=======
-.c14:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c15:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -3778,36 +3433,20 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c13:active {
+.c15:active {
   top: 1px;
 }
 
-.c13:focus {
-=======
-.c14:active {
-  top: 1px;
-}
-
-.c14:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c15:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c13:hover {
+.c15:hover {
   color: #3D3D3D;
 }
 
-.c17 {
-=======
-.c14:hover {
-  color: #3D3D3D;
-}
-
-.c18 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3857,11 +3496,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c17:hover {
-=======
-.c18:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -3870,46 +3505,26 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c17:active {
+.c19:active {
   top: 1px;
 }
 
-.c17:focus {
-=======
-.c18:active {
-  top: 1px;
-}
-
-.c18:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c17:hover {
-=======
-.c18:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-<<<<<<< HEAD
-.c17:focus {
-=======
-.c18:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c19:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c19 {
-=======
-.c20 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3959,11 +3574,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   border: 1px solid #2c4bff;
 }
 
-<<<<<<< HEAD
-.c19:hover {
-=======
-.c20:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -3972,28 +3583,16 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c19:active {
+.c21:active {
   top: 1px;
 }
 
-.c19:focus {
-=======
-.c20:active {
-  top: 1px;
-}
-
-.c20:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c19:hover {
-=======
-.c20:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c21:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -4096,11 +3695,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   align-items: center;
 }
 
-<<<<<<< HEAD
-.c15 {
-=======
-.c16 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c17 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -4113,27 +3708,16 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c16 {
-  margin-right: 8px;
-}
-
 .c18 {
-  margin-left: 8px;
-}
-
-.c12 {
-  color: #636363;
-}
-
-.c11 {
-=======
-.c17 {
   margin-right: 8px;
 }
 
-.c19 {
+.c20 {
   margin-left: 8px;
+}
+
+.c14 {
+  color: #636363;
 }
 
 .c13 {
@@ -4152,7 +3736,6 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
 }
 
 .c7 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4254,70 +3837,43 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
       className="c13"
     >
       <button
-<<<<<<< HEAD
-        className="c12 c13"
-=======
-        className="c14"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c14 c15"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-<<<<<<< HEAD
-          className="c14"
-=======
-          className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c16"
         >
           Delete
         </div>
       </button>
       <span
-<<<<<<< HEAD
-        className="c15"
+        className="c17"
       />
       <button
-        className="c16 c17"
-=======
-        className="c16"
-      />
-      <button
-        className="c17 c18"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c18 c19"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-<<<<<<< HEAD
-          className="c14"
-=======
-          className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c16"
         >
           Edit
         </div>
       </button>
       <button
-<<<<<<< HEAD
-        className="c18 c19"
-=======
-        className="c19 c20"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c20 c21"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-<<<<<<< HEAD
-          className="c14"
-=======
-          className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c16"
         >
           Add to Queue
         </div>
@@ -4348,20 +3904,12 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   border-color: #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c21 {
-=======
-.c22 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c23 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-<<<<<<< HEAD
-.c20 {
-=======
-.c21 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4409,11 +3957,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   background-color: transparent;
 }
 
-<<<<<<< HEAD
-.c20:hover {
-=======
-.c21:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -4422,36 +3966,20 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c20:active {
+.c22:active {
   top: 1px;
 }
 
-.c20:focus {
-=======
-.c21:active {
-  top: 1px;
-}
-
-.c21:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c20:hover {
+.c22:hover {
   color: #3D3D3D;
 }
 
-.c24 {
-=======
-.c21:hover {
-  color: #3D3D3D;
-}
-
-.c25 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4501,11 +4029,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c24:hover {
-=======
-.c25:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -4514,46 +4038,26 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c24:active {
+.c26:active {
   top: 1px;
 }
 
-.c24:focus {
-=======
-.c25:active {
-  top: 1px;
-}
-
-.c25:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c24:hover {
-=======
-.c25:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-<<<<<<< HEAD
-.c24:focus {
-=======
-.c25:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c26 {
-=======
-.c27 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4603,11 +4107,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   border: 1px solid #2c4bff;
 }
 
-<<<<<<< HEAD
-.c26:hover {
-=======
-.c27:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c28:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -4616,28 +4116,16 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c26:active {
+.c28:active {
   top: 1px;
 }
 
-.c26:focus {
-=======
-.c27:active {
-  top: 1px;
-}
-
-.c27:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c28:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c26:hover {
-=======
-.c27:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c28:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -4766,11 +4254,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   align-items: center;
 }
 
-<<<<<<< HEAD
-.c22 {
-=======
-.c23 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c24 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -4783,31 +4267,19 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c23 {
+.c25 {
   margin-right: 8px;
 }
 
-.c25 {
+.c27 {
   margin-left: 8px;
 }
 
-.c19 {
+.c21 {
   color: #636363;
 }
 
-.c18 {
-=======
-.c24 {
-  margin-right: 8px;
-}
-
-.c26 {
-  margin-left: 8px;
-}
-
 .c20 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5009,70 +4481,43 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
       className="c20"
     >
       <button
-<<<<<<< HEAD
-        className="c19 c20"
-=======
-        className="c21"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c21 c22"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-<<<<<<< HEAD
-          className="c21"
-=======
-          className="c22"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c23"
         >
           Delete
         </div>
       </button>
       <span
-<<<<<<< HEAD
-        className="c22"
+        className="c24"
       />
       <button
-        className="c23 c24"
-=======
-        className="c23"
-      />
-      <button
-        className="c24 c25"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c25 c26"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-<<<<<<< HEAD
-          className="c21"
-=======
-          className="c22"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c23"
         >
           Edit
         </div>
       </button>
       <button
-<<<<<<< HEAD
-        className="c25 c26"
-=======
-        className="c26 c27"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c27 c28"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-<<<<<<< HEAD
-          className="c21"
-=======
-          className="c22"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c23"
         >
           Add to Queue
         </div>
@@ -5103,20 +4548,12 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   border-color: #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c21 {
-=======
-.c22 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c23 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-<<<<<<< HEAD
-.c20 {
-=======
-.c21 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5164,11 +4601,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   background-color: transparent;
 }
 
-<<<<<<< HEAD
-.c20:hover {
-=======
-.c21:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -5177,36 +4610,20 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c20:active {
+.c22:active {
   top: 1px;
 }
 
-.c20:focus {
-=======
-.c21:active {
-  top: 1px;
-}
-
-.c21:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c20:hover {
+.c22:hover {
   color: #3D3D3D;
 }
 
-.c24 {
-=======
-.c21:hover {
-  color: #3D3D3D;
-}
-
-.c25 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5256,11 +4673,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c24:hover {
-=======
-.c25:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -5269,46 +4682,26 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c24:active {
+.c26:active {
   top: 1px;
 }
 
-.c24:focus {
-=======
-.c25:active {
-  top: 1px;
-}
-
-.c25:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c24:hover {
-=======
-.c25:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-<<<<<<< HEAD
-.c24:focus {
-=======
-.c25:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c26:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c26 {
-=======
-.c27 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5358,11 +4751,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   border: 1px solid #2c4bff;
 }
 
-<<<<<<< HEAD
-.c26:hover {
-=======
-.c27:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c28:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -5371,28 +4760,16 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c26:active {
+.c28:active {
   top: 1px;
 }
 
-.c26:focus {
-=======
-.c27:active {
-  top: 1px;
-}
-
-.c27:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c28:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c26:hover {
-=======
-.c27:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c28:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -5521,11 +4898,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   align-items: center;
 }
 
-<<<<<<< HEAD
-.c22 {
-=======
-.c23 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c24 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -5538,31 +4911,19 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c23 {
+.c25 {
   margin-right: 8px;
 }
 
-.c25 {
+.c27 {
   margin-left: 8px;
 }
 
-.c19 {
+.c21 {
   color: #636363;
 }
 
-.c18 {
-=======
-.c24 {
-  margin-right: 8px;
-}
-
-.c26 {
-  margin-left: 8px;
-}
-
 .c20 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5799,70 +5160,43 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
       className="c20"
     >
       <button
-<<<<<<< HEAD
-        className="c19 c20"
-=======
-        className="c21"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c21 c22"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-<<<<<<< HEAD
-          className="c21"
-=======
-          className="c22"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c23"
         >
           Delete
         </div>
       </button>
       <span
-<<<<<<< HEAD
-        className="c22"
+        className="c24"
       />
       <button
-        className="c23 c24"
-=======
-        className="c23"
-      />
-      <button
-        className="c24 c25"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c25 c26"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-<<<<<<< HEAD
-          className="c21"
-=======
-          className="c22"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c23"
         >
           Edit
         </div>
       </button>
       <button
-<<<<<<< HEAD
-        className="c25 c26"
-=======
-        className="c26 c27"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c27 c28"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-<<<<<<< HEAD
-          className="c21"
-=======
-          className="c22"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c23"
         >
           Add to Queue
         </div>
@@ -5893,20 +5227,12 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   border-color: #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c15 {
-=======
-.c16 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c17 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-<<<<<<< HEAD
-.c14 {
-=======
-.c15 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5954,11 +5280,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   background-color: transparent;
 }
 
-<<<<<<< HEAD
-.c14:hover {
-=======
-.c15:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c16:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -5967,36 +5289,20 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c14:active {
+.c16:active {
   top: 1px;
 }
 
-.c14:focus {
-=======
-.c15:active {
-  top: 1px;
-}
-
-.c15:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c16:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c14:hover {
+.c16:hover {
   color: #3D3D3D;
 }
 
-.c18 {
-=======
-.c15:hover {
-  color: #3D3D3D;
-}
-
-.c19 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6046,11 +5352,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-<<<<<<< HEAD
-.c18:hover {
-=======
-.c19:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -6059,46 +5361,26 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c18:active {
+.c20:active {
   top: 1px;
 }
 
-.c18:focus {
-=======
-.c19:active {
-  top: 1px;
-}
-
-.c19:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c18:hover {
-=======
-.c19:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-<<<<<<< HEAD
-.c18:focus {
-=======
-.c19:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c20:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c20 {
-=======
-.c21 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6148,11 +5430,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   border: 1px solid #2c4bff;
 }
 
-<<<<<<< HEAD
-.c20:hover {
-=======
-.c21:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -6161,28 +5439,16 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   transition-timing-function: ease-in;
 }
 
-<<<<<<< HEAD
-.c20:active {
+.c22:active {
   top: 1px;
 }
 
-.c20:focus {
-=======
-.c21:active {
-  top: 1px;
-}
-
-.c21:focus {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-<<<<<<< HEAD
-.c20:hover {
-=======
-.c21:hover {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c22:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -6285,11 +5551,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   align-items: center;
 }
 
-<<<<<<< HEAD
-.c16 {
-=======
-.c17 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+.c18 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
@@ -6314,27 +5576,16 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   color: #3D3D3D;
 }
 
-<<<<<<< HEAD
-.c17 {
-  margin-right: 8px;
-}
-
 .c19 {
-  margin-left: 8px;
-}
-
-.c13 {
-  color: #636363;
-}
-
-.c12 {
-=======
-.c18 {
   margin-right: 8px;
 }
 
-.c20 {
+.c21 {
   margin-left: 8px;
+}
+
+.c15 {
+  color: #636363;
 }
 
 .c14 {
@@ -6353,7 +5604,6 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
 }
 
 .c7 {
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6495,70 +5745,43 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
       className="c14"
     >
       <button
-<<<<<<< HEAD
-        className="c13 c14"
-=======
-        className="c15"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c15 c16"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-<<<<<<< HEAD
-          className="c15"
-=======
-          className="c16"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c17"
         >
           Delete
         </div>
       </button>
       <span
-<<<<<<< HEAD
-        className="c16"
+        className="c18"
       />
       <button
-        className="c17 c18"
-=======
-        className="c17"
-      />
-      <button
-        className="c18 c19"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c19 c20"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-<<<<<<< HEAD
-          className="c15"
-=======
-          className="c16"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c17"
         >
           Edit
         </div>
       </button>
       <button
-<<<<<<< HEAD
-        className="c19 c20"
-=======
-        className="c20 c21"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+        className="c21 c22"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-<<<<<<< HEAD
-          className="c15"
-=======
-          className="c16"
->>>>>>> 86c9a98ce2511c7d9bde26d54fb787f6e8b36521
+          className="c17"
         >
           Add to Queue
         </div>
