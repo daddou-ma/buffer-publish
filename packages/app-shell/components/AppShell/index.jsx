@@ -5,6 +5,7 @@ import { AppShell as BDSAppShell } from '@bufferapp/ui';
 import { Gear, Return, Plus, People } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
+import { useTranslation } from 'react-i18next';
 
 const InvertedReturnIcon = () => (
   <span style={{ transform: 'scaleX(-1)', height: '16px' }}>
@@ -12,62 +13,65 @@ const InvertedReturnIcon = () => (
   </span>
 );
 
-const helpMenuItems = [
-  {
-    id: '1',
-    title: 'Help Center',
-    onItemClick: () => {
-      window.location.assign('https://support.buffer.com/hc/en-us');
+const helpMenuItems = t => {
+  return [
+    {
+      id: '1',
+      title: t('app-shell.helpCenter'),
+      onItemClick: () => {
+        window.location.assign('https://support.buffer.com/hc/en-us');
+      },
     },
-  },
-  {
-    id: '2',
-    title: 'Status',
-    onItemClick: () => {
-      window.location.assign('https://status.buffer.com/');
+    {
+      id: '2',
+      title: t('app-shell.status'),
+      onItemClick: () => {
+        window.location.assign('https://status.buffer.com/');
+      },
     },
-  },
-  {
-    id: '3',
-    title: 'Pricing & Plans',
-    onItemClick: () => {
-      window.location.assign(`https://${getURL.getBaseURL()}/pricing`);
+    {
+      id: '3',
+      title: t('app-shell.pricingAndPlans'),
+      onItemClick: () => {
+        window.location.assign(`https://${getURL.getBaseURL()}/pricing`);
+      },
     },
-  },
-  {
-    id: '4',
-    title: 'Wishlist',
-    onItemClick: () => {
-      window.location.assign('https://buffer.com/feature-request');
+    {
+      id: '4',
+      title: t('app-shell.wishlist'),
+      onItemClick: () => {
+        window.location.assign('https://buffer.com/feature-request');
+      },
     },
-  },
-];
+  ];
+};
 
 function generateUserMenuItems({
   showReturnToClassic,
   showSwitchPlan,
-  showStartProTrial,
   returnToClassic,
   switchPlan,
   openPreferences,
   showManageTeam,
   hideMenuItems,
+  t,
 }) {
   if (hideMenuItems) {
     return [];
   }
+
   const userMenuItems = {
     top: [
       {
         id: 'preferences',
-        title: 'Preferences',
+        title: t('app-shell.preferences'),
         icon: <Gear color={gray} />,
         onItemClick: openPreferences,
       },
     ],
     manageTeam: {
       id: 'openTeam',
-      title: 'Team',
+      title: t('app-shell.team'),
       icon: <People color={gray} />,
       onItemClick: () => {
         window.location.assign(`${getURL.getManageTeamURL()}`);
@@ -75,14 +79,14 @@ function generateUserMenuItems({
     },
     returnToClassic: {
       id: 'returnToClassic',
-      title: 'Return to Classic',
+      title: t('app-shell.returnToClassic'),
       icon: <InvertedReturnIcon />,
       hasDivider: true,
       onItemClick: returnToClassic,
     },
     startProTrial: {
       id: 'startProTrial',
-      title: 'Start Pro Trial',
+      title: t('app-shell.startProTrial'),
       icon: <Plus color={gray} />,
       onItemClick: () => {
         window.location.assign(
@@ -95,7 +99,7 @@ function generateUserMenuItems({
     },
     switchPlan: {
       id: 'switchPlan',
-      title: 'Upgrade to Pro',
+      title: t('app-shell.upgradetoPro'),
       icon: <Plus color={gray} />,
       onItemClick: switchPlan,
     },
@@ -128,11 +132,13 @@ const AppShell = ({
   bannerKey,
   hideAppShell,
   hideMenuItems,
-  featureFlips
+  featureFlips,
 }) => {
   if (hideAppShell) {
     return children;
   }
+
+  const { t } = useTranslation();
 
   return (
     <BDSAppShell
@@ -150,9 +156,10 @@ const AppShell = ({
           switchPlan,
           openPreferences,
           hideMenuItems,
+          t,
         }),
       }}
-      helpMenuItems={helpMenuItems}
+      helpMenuItems={helpMenuItems(t)}
       bannerOptions={
         bannerOptions
           ? {
@@ -180,7 +187,7 @@ AppShell.propTypes = {
     avatar: PropTypes.string,
   }).isRequired,
   bannerKey: PropTypes.string,
-  onCloseBanner: PropTypes.func,
+  onCloseBanner: PropTypes.func.isRequired,
   bannerOptions: PropTypes.shape({
     themeColor: PropTypes.string,
     customHTML: PropTypes.shape({
@@ -188,20 +195,17 @@ AppShell.propTypes = {
     }),
   }),
   hideAppShell: PropTypes.bool.isRequired,
-  featureFlips: PropTypes.arrayOf(PropTypes.string)
+  hideMenuItems: PropTypes.bool.isRequired,
+  featureFlips: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 AppShell.defaultProps = {
-  user: {
-    name: '...',
-    email: null,
-    avatar: null,
-  },
   showReturnToClassic: false,
   showSwitchPlan: false,
   showManageTeam: false,
   bannerOptions: null,
-  showStartProTrial: false
+  bannerKey: null,
+  showStartProTrial: false,
 };
 
 export default AppShell;

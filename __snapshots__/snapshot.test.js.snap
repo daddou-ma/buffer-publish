@@ -29,7 +29,7 @@ exports[`Storyshots Cards|Drafts/Draft approval view: isMoving 1`] = `
   line-height: 20px;
 }
 
-.c10 {
+.c12 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -86,7 +86,7 @@ exports[`Storyshots Cards|Drafts/Draft approval view: isMoving 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -103,7 +103,7 @@ exports[`Storyshots Cards|Drafts/Draft approval view: isMoving 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -118,15 +118,33 @@ exports[`Storyshots Cards|Drafts/Draft approval view: isMoving 1`] = `
   align-items: center;
 }
 
-.c9 {
+.c11 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c11 {
+.c13 {
   font-size: 12px;
   margin: 0;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -180,34 +198,43 @@ exports[`Storyshots Cards|Drafts/Draft approval view: isMoving 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
+    <div
+      className="c7"
     >
-      I am a text-only test post.
-    </span>
+      <span
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
   </div>
   <div
-    className="c7"
+    className="c9"
   >
     <div
-      className="c8"
+      className="c10"
     >
       <p
-        className="c9 c10"
+        className="c11 c12"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <p
-      className="c11 c10"
+      className="c13 c12"
       color="grayDarker"
     >
       Moving...
@@ -237,12 +264,12 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   border-color: #B8B8B8;
 }
 
-.c13 {
+.c15 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -290,7 +317,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   background-color: transparent;
 }
 
-.c12:hover {
+.c14:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -299,20 +326,20 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c12:active {
+.c14:active {
   top: 1px;
 }
 
-.c12:focus {
+.c14:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c12:hover {
+.c14:hover {
   color: #3D3D3D;
 }
 
-.c16 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -362,7 +389,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c16:hover {
+.c18:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -371,26 +398,26 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c16:active {
+.c18:active {
   top: 1px;
 }
 
-.c16:focus {
+.c18:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c16:hover {
+.c18:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c16:focus {
+.c18:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c18 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -440,7 +467,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c18:hover {
+.c20:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -449,16 +476,16 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c18:active {
+.c20:active {
   top: 1px;
 }
 
-.c18:focus {
+.c20:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c18:hover {
+.c20:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -472,7 +499,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   line-height: 20px;
 }
 
-.c10 {
+.c12 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -529,7 +556,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -546,7 +573,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -561,32 +588,50 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   align-items: center;
 }
 
-.c14 {
+.c16 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
 }
 
-.c9 {
+.c11 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c15 {
+.c17 {
   margin-right: 8px;
 }
 
-.c17 {
+.c19 {
   margin-left: 8px;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -640,73 +685,82 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
+    <div
+      className="c7"
     >
-      I am a text-only test post.
-    </span>
+      <span
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
   </div>
   <div
-    className="c7"
+    className="c9"
   >
     <div
-      className="c8"
+      className="c10"
     >
       <p
-        className="c9 c10"
+        className="c11 c12"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <span
-      className="c11"
+      className="c13"
     >
       <button
-        className="c12"
+        className="c14"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-          className="c13"
+          className="c15"
         >
           Delete
         </div>
       </button>
       <span
-        className="c14"
+        className="c16"
       />
       <button
-        className="c15 c16"
+        className="c17 c18"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-          className="c13"
+          className="c15"
         >
           Edit
         </div>
       </button>
       <button
-        className="c17 c18"
+        className="c19 c20"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-          className="c13"
+          className="c15"
         >
           Add to Queue
         </div>
@@ -745,7 +799,7 @@ exports[`Storyshots Cards|Drafts/Draft isConfirmingDelete 1`] = `
   line-height: 20px;
 }
 
-.c10 {
+.c12 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -802,7 +856,7 @@ exports[`Storyshots Cards|Drafts/Draft isConfirmingDelete 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -819,7 +873,7 @@ exports[`Storyshots Cards|Drafts/Draft isConfirmingDelete 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -834,15 +888,33 @@ exports[`Storyshots Cards|Drafts/Draft isConfirmingDelete 1`] = `
   align-items: center;
 }
 
-.c9 {
+.c11 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c11 {
+.c13 {
   font-size: 12px;
   margin: 0;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -896,34 +968,43 @@ exports[`Storyshots Cards|Drafts/Draft isConfirmingDelete 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
+    <div
+      className="c7"
     >
-      I am a text-only test post.
-    </span>
+      <span
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
   </div>
   <div
-    className="c7"
+    className="c9"
   >
     <div
-      className="c8"
+      className="c10"
     >
       <p
-        className="c9 c10"
+        className="c11 c12"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <p
-      className="c11 c10"
+      className="c13 c12"
       color="grayDarker"
     >
       Deleting...
@@ -961,7 +1042,7 @@ exports[`Storyshots Cards|Drafts/Draft isDeleting 1`] = `
   line-height: 20px;
 }
 
-.c10 {
+.c12 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -1018,7 +1099,7 @@ exports[`Storyshots Cards|Drafts/Draft isDeleting 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1035,7 +1116,7 @@ exports[`Storyshots Cards|Drafts/Draft isDeleting 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1050,15 +1131,33 @@ exports[`Storyshots Cards|Drafts/Draft isDeleting 1`] = `
   align-items: center;
 }
 
-.c9 {
+.c11 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c11 {
+.c13 {
   font-size: 12px;
   margin: 0;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -1112,34 +1211,43 @@ exports[`Storyshots Cards|Drafts/Draft isDeleting 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
+    <div
+      className="c7"
     >
-      I am a text-only test post.
-    </span>
+      <span
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
   </div>
   <div
-    className="c7"
+    className="c9"
   >
     <div
-      className="c8"
+      className="c10"
     >
       <p
-        className="c9 c10"
+        className="c11 c12"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <p
-      className="c11 c10"
+      className="c13 c12"
       color="grayDarker"
     >
       Deleting...
@@ -1177,7 +1285,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorking 1`] = `
   line-height: 20px;
 }
 
-.c10 {
+.c12 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -1234,7 +1342,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorking 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1251,7 +1359,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorking 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1266,15 +1374,33 @@ exports[`Storyshots Cards|Drafts/Draft isWorking 1`] = `
   align-items: center;
 }
 
-.c9 {
+.c11 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c11 {
+.c13 {
   font-size: 12px;
   margin: 0;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -1328,34 +1454,43 @@ exports[`Storyshots Cards|Drafts/Draft isWorking 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
+    <div
+      className="c7"
     >
-      I am a text-only test post.
-    </span>
+      <span
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
   </div>
   <div
-    className="c7"
+    className="c9"
   >
     <div
-      className="c8"
+      className="c10"
     >
       <p
-        className="c9 c10"
+        className="c11 c12"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <p
-      className="c11 c10"
+      className="c13 c12"
       color="grayDarker"
     >
       Adding...
@@ -1393,7 +1528,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorkingManager 1`] = `
   line-height: 20px;
 }
 
-.c10 {
+.c12 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -1450,7 +1585,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorkingManager 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1467,7 +1602,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorkingManager 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1482,15 +1617,33 @@ exports[`Storyshots Cards|Drafts/Draft isWorkingManager 1`] = `
   align-items: center;
 }
 
-.c9 {
+.c11 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c11 {
+.c13 {
   font-size: 12px;
   margin: 0;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -1544,34 +1697,43 @@ exports[`Storyshots Cards|Drafts/Draft isWorkingManager 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
+    <div
+      className="c7"
     >
-      I am a text-only test post.
-    </span>
+      <span
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
   </div>
   <div
-    className="c7"
+    className="c9"
   >
     <div
-      className="c8"
+      className="c10"
     >
       <p
-        className="c9 c10"
+        className="c11 c12"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <p
-      className="c11 c10"
+      className="c13 c12"
       color="grayDarker"
     >
       Adding...
@@ -1601,12 +1763,12 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   border-color: #B8B8B8;
 }
 
-.c13 {
+.c15 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1654,7 +1816,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   background-color: transparent;
 }
 
-.c12:hover {
+.c14:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -1663,20 +1825,20 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c12:active {
+.c14:active {
   top: 1px;
 }
 
-.c12:focus {
+.c14:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c12:hover {
+.c14:hover {
   color: #3D3D3D;
 }
 
-.c16 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1726,7 +1888,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c16:hover {
+.c18:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -1735,26 +1897,26 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c16:active {
+.c18:active {
   top: 1px;
 }
 
-.c16:focus {
+.c18:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c16:hover {
+.c18:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c16:focus {
+.c18:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c18 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1804,7 +1966,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c18:hover {
+.c20:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -1813,16 +1975,16 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c18:active {
+.c20:active {
   top: 1px;
 }
 
-.c18:focus {
+.c20:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c18:hover {
+.c20:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -1836,7 +1998,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   line-height: 20px;
 }
 
-.c10 {
+.c12 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -1893,7 +2055,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1910,7 +2072,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1925,32 +2087,50 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   align-items: center;
 }
 
-.c14 {
+.c16 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
 }
 
-.c9 {
+.c11 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c15 {
+.c17 {
   margin-right: 8px;
 }
 
-.c17 {
+.c19 {
   margin-left: 8px;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -2004,73 +2184,82 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
+    <div
+      className="c7"
     >
-      I am a text-only test post.
-    </span>
+      <span
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
   </div>
   <div
-    className="c7"
+    className="c9"
   >
     <div
-      className="c8"
+      className="c10"
     >
       <p
-        className="c9 c10"
+        className="c11 c12"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <span
-      className="c11"
+      className="c13"
     >
       <button
-        className="c12"
+        className="c14"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-          className="c13"
+          className="c15"
         >
           Delete
         </div>
       </button>
       <span
-        className="c14"
+        className="c16"
       />
       <button
-        className="c15 c16"
+        className="c17 c18"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-          className="c13"
+          className="c15"
         >
           Edit
         </div>
       </button>
       <button
-        className="c17 c18"
+        className="c19 c20"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-          className="c13"
+          className="c15"
         >
           Add to Queue
         </div>
@@ -2109,7 +2298,7 @@ exports[`Storyshots Cards|Drafts/Draft no permission 1`] = `
   line-height: 20px;
 }
 
-.c10 {
+.c12 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -2166,7 +2355,7 @@ exports[`Storyshots Cards|Drafts/Draft no permission 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2183,7 +2372,7 @@ exports[`Storyshots Cards|Drafts/Draft no permission 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2198,10 +2387,28 @@ exports[`Storyshots Cards|Drafts/Draft no permission 1`] = `
   align-items: center;
 }
 
-.c9 {
+.c11 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -2255,27 +2462,36 @@ exports[`Storyshots Cards|Drafts/Draft no permission 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
+    <div
+      className="c7"
     >
-      I am a text-only test post.
-    </span>
+      <span
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
   </div>
   <div
-    className="c7"
+    className="c9"
   >
     <div
-      className="c8"
+      className="c10"
     >
       <p
-        className="c9 c10"
+        className="c11 c12"
         color="grayDarker"
       >
         This post will be added to the queue
@@ -2306,12 +2522,12 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   border-color: #B8B8B8;
 }
 
-.c14 {
+.c16 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c13 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2359,7 +2575,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   background-color: transparent;
 }
 
-.c13:hover {
+.c15:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -2368,20 +2584,20 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c13:active {
+.c15:active {
   top: 1px;
 }
 
-.c13:focus {
+.c15:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c13:hover {
+.c15:hover {
   color: #3D3D3D;
 }
 
-.c17 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2431,7 +2647,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c17:hover {
+.c19:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -2440,26 +2656,26 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c17:active {
+.c19:active {
   top: 1px;
 }
 
-.c17:focus {
+.c19:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c17:hover {
+.c19:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c17:focus {
+.c19:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c19 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2509,7 +2725,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c19:hover {
+.c21:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -2518,16 +2734,16 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c19:active {
+.c21:active {
   top: 1px;
 }
 
-.c19:focus {
+.c21:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c19:hover {
+.c21:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -2541,7 +2757,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   line-height: 20px;
 }
 
-.c11 {
+.c13 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -2598,7 +2814,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2615,7 +2831,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2630,14 +2846,14 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   align-items: center;
 }
 
-.c15 {
+.c17 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
 }
 
-.c9 {
+.c11 {
   margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2649,25 +2865,43 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   align-items: center;
 }
 
-.c10 {
+.c12 {
   font-size: 12px;
   margin: 0;
   color: #E0364F;
 }
 
-.c16 {
+.c18 {
   margin-right: 8px;
 }
 
-.c18 {
+.c20 {
   margin-left: 8px;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -2721,27 +2955,36 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
-    >
-      I am a text-only test post.
-    </span>
-  </div>
-  <div
-    className="c7"
-  >
     <div
-      className="c8"
+      className="c7"
     >
       <span
-        className="c9"
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    className="c9"
+  >
+    <div
+      className="c10"
+    >
+      <span
+        className="c11"
       >
         <svg
           height="100%"
@@ -2768,53 +3011,53 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
         </svg>
       </span>
       <p
-        className="c10 c11"
+        className="c12 c13"
         color="grayDarker"
       >
         This draft was scheduled for June 21st
       </p>
     </div>
     <span
-      className="c12"
+      className="c14"
     >
       <button
-        className="c13"
+        className="c15"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-          className="c14"
+          className="c16"
         >
           Delete
         </div>
       </button>
       <span
-        className="c15"
+        className="c17"
       />
       <button
-        className="c16 c17"
+        className="c18 c19"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-          className="c14"
+          className="c16"
         >
           Edit
         </div>
       </button>
       <button
-        className="c18 c19"
+        className="c20 c21"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-          className="c14"
+          className="c16"
         >
           Reschedule
         </div>
@@ -2853,7 +3096,7 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
   line-height: 20px;
 }
 
-.c11 {
+.c13 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -2910,7 +3153,7 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2927,7 +3170,7 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2942,7 +3185,7 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
   align-items: center;
 }
 
-.c9 {
+.c11 {
   margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2954,10 +3197,28 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
   align-items: center;
 }
 
-.c10 {
+.c12 {
   font-size: 12px;
   margin: 0;
   color: #E0364F;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -3011,27 +3272,36 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
-    >
-      I am a text-only test post.
-    </span>
-  </div>
-  <div
-    className="c7"
-  >
     <div
-      className="c8"
+      className="c7"
     >
       <span
-        className="c9"
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    className="c9"
+  >
+    <div
+      className="c10"
+    >
+      <span
+        className="c11"
       >
         <svg
           height="100%"
@@ -3058,7 +3328,7 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
         </svg>
       </span>
       <p
-        className="c10 c11"
+        className="c12 c13"
         color="grayDarker"
       >
         This draft was scheduled for June 21st
@@ -3089,12 +3359,12 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   border-color: #B8B8B8;
 }
 
-.c13 {
+.c15 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3142,7 +3412,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   background-color: transparent;
 }
 
-.c12:hover {
+.c14:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -3151,20 +3421,20 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c12:active {
+.c14:active {
   top: 1px;
 }
 
-.c12:focus {
+.c14:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c12:hover {
+.c14:hover {
   color: #3D3D3D;
 }
 
-.c16 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3214,7 +3484,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c16:hover {
+.c18:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -3223,26 +3493,26 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c16:active {
+.c18:active {
   top: 1px;
 }
 
-.c16:focus {
+.c18:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c16:hover {
+.c18:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c16:focus {
+.c18:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c18 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3292,7 +3562,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c18:hover {
+.c20:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -3301,16 +3571,16 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c18:active {
+.c20:active {
   top: 1px;
 }
 
-.c18:focus {
+.c20:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c18:hover {
+.c20:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -3324,7 +3594,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   line-height: 20px;
 }
 
-.c10 {
+.c12 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -3381,7 +3651,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3398,7 +3668,7 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3413,32 +3683,50 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
   align-items: center;
 }
 
-.c14 {
+.c16 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
 }
 
-.c9 {
+.c11 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c15 {
+.c17 {
   margin-right: 8px;
 }
 
-.c17 {
+.c19 {
   margin-left: 8px;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -3492,75 +3780,84 @@ exports[`Storyshots Cards|Drafts/Draft post text with line breaks 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
+    <div
+      className="c7"
     >
-      I am a text-only 
+      <span
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only 
  test post 
  with line breaks.
-    </span>
+        </span>
+      </span>
+    </div>
   </div>
   <div
-    className="c7"
+    className="c9"
   >
     <div
-      className="c8"
+      className="c10"
     >
       <p
-        className="c9 c10"
+        className="c11 c12"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <span
-      className="c11"
+      className="c13"
     >
       <button
-        className="c12"
+        className="c14"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-          className="c13"
+          className="c15"
         >
           Delete
         </div>
       </button>
       <span
-        className="c14"
+        className="c16"
       />
       <button
-        className="c15 c16"
+        className="c17 c18"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-          className="c13"
+          className="c15"
         >
           Edit
         </div>
       </button>
       <button
-        className="c17 c18"
+        className="c19 c20"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-          className="c13"
+          className="c15"
         >
           Add to Queue
         </div>
@@ -3591,12 +3888,12 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   border-color: #B8B8B8;
 }
 
-.c20 {
+.c22 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c19 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3644,7 +3941,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   background-color: transparent;
 }
 
-.c19:hover {
+.c21:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -3653,94 +3950,16 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c19:active {
+.c21:active {
   top: 1px;
 }
 
-.c19:focus {
+.c21:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c19:hover {
-  color: #3D3D3D;
-}
-
-.c23 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: 500;
-  border-radius: 4px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 0;
-  -webkit-appearance: none;
-  position: relative;
-  -webkit-transition-property: background-color,border-color,color;
-  transition-property: background-color,border-color,color;
-  -webkit-transition-duration: 0.1s;
-  transition-duration: 0.1s;
-  -webkit-transition-timing-function: ease-in;
-  transition-timing-function: ease-in;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  min-width: 0;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  font-family: "Roboto",sans-serif;
-  background-color: #FFFFFF;
-  color: #77797a;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 8px;
-  padding-right: 8px;
-  height: 32px;
-  background-color: #FFFFFF;
-  color: #636363;
-  border: 1px solid #B8B8B8;
-}
-
-.c23:hover {
-  -webkit-transition-property: background-color,border-color,color;
-  transition-property: background-color,border-color,color;
-  -webkit-transition-duration: 0.1s;
-  transition-duration: 0.1s;
-  -webkit-transition-timing-function: ease-in;
-  transition-timing-function: ease-in;
-}
-
-.c23:active {
-  top: 1px;
-}
-
-.c23:focus {
-  box-shadow: 0 0 0 3px #ABB7FF;
-  outline: 0;
-}
-
-.c23:hover {
-  color: #3D3D3D;
-  border-color: #636363;
-}
-
-.c23:focus {
-  border-color: #2c4bff;
+.c21:hover {
   color: #3D3D3D;
 }
 
@@ -3789,9 +4008,9 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   padding-left: 8px;
   padding-right: 8px;
   height: 32px;
-  background-color: #2c4bff;
-  color: #FFFFFF;
-  border: 1px solid #2c4bff;
+  background-color: #FFFFFF;
+  color: #636363;
+  border: 1px solid #B8B8B8;
 }
 
 .c25:hover {
@@ -3813,6 +4032,84 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
 }
 
 .c25:hover {
+  color: #3D3D3D;
+  border-color: #636363;
+}
+
+.c25:focus {
+  border-color: #2c4bff;
+  color: #3D3D3D;
+}
+
+.c27 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 0;
+  -webkit-appearance: none;
+  position: relative;
+  -webkit-transition-property: background-color,border-color,color;
+  transition-property: background-color,border-color,color;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-family: "Roboto",sans-serif;
+  background-color: #FFFFFF;
+  color: #77797a;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 32px;
+  background-color: #2c4bff;
+  color: #FFFFFF;
+  border: 1px solid #2c4bff;
+}
+
+.c27:hover {
+  -webkit-transition-property: background-color,border-color,color;
+  transition-property: background-color,border-color,color;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+}
+
+.c27:active {
+  top: 1px;
+}
+
+.c27:focus {
+  box-shadow: 0 0 0 3px #ABB7FF;
+  outline: 0;
+}
+
+.c27:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -3909,7 +4206,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   margin: 0;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3926,7 +4223,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c16 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3941,28 +4238,28 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   align-items: center;
 }
 
-.c21 {
+.c23 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
 }
 
-.c17 {
+.c19 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c22 {
+.c24 {
   margin-right: 8px;
 }
 
-.c24 {
+.c26 {
   margin-left: 8px;
 }
 
-.c18 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4004,6 +4301,24 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
 
 .c7 {
   margin-bottom: 1rem;
+}
+
+.c16 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -4106,74 +4421,83 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
           </div>
         </div>
       </div>
-      <span
-        style={
-          Object {
-            "color": "#59626a",
-            "fontFamily": "\\"Roboto\\", sans-serif",
-            "fontSize": "0.875rem",
-            "fontWeight": 400,
-          }
-        }
+      <div
+        className="c15"
       >
-        I am a text-only test post.
-      </span>
+        <span
+          className="c16"
+        >
+          <span
+            style={
+              Object {
+                "color": "#59626a",
+                "fontFamily": "\\"Roboto\\", sans-serif",
+                "fontSize": "0.875rem",
+                "fontWeight": 400,
+                "whiteSpace": "pre-wrap",
+              }
+            }
+          >
+            I am a text-only test post.
+          </span>
+        </span>
+      </div>
     </div>
   </div>
   <div
-    className="c15"
+    className="c17"
   >
     <div
-      className="c16"
+      className="c18"
     >
       <p
-        className="c17 c14"
+        className="c19 c14"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <span
-      className="c18"
+      className="c20"
     >
       <button
-        className="c19"
+        className="c21"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-          className="c20"
+          className="c22"
         >
           Delete
         </div>
       </button>
       <span
-        className="c21"
+        className="c23"
       />
       <button
-        className="c22 c23"
+        className="c24 c25"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-          className="c20"
+          className="c22"
         >
           Edit
         </div>
       </button>
       <button
-        className="c24 c25"
+        className="c26 c27"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-          className="c20"
+          className="c22"
         >
           Add to Queue
         </div>
@@ -4204,12 +4528,12 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   border-color: #B8B8B8;
 }
 
-.c20 {
+.c22 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c19 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4257,7 +4581,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   background-color: transparent;
 }
 
-.c19:hover {
+.c21:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -4266,20 +4590,20 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c19:active {
+.c21:active {
   top: 1px;
 }
 
-.c19:focus {
+.c21:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c19:hover {
+.c21:hover {
   color: #3D3D3D;
 }
 
-.c23 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4329,7 +4653,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c23:hover {
+.c25:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -4338,26 +4662,26 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c23:active {
+.c25:active {
   top: 1px;
 }
 
-.c23:focus {
+.c25:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c23:hover {
+.c25:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c23:focus {
+.c25:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c25 {
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4407,7 +4731,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c25:hover {
+.c27:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -4416,16 +4740,16 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c25:active {
+.c27:active {
   top: 1px;
 }
 
-.c25:focus {
+.c27:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c25:hover {
+.c27:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -4522,7 +4846,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   margin: 0;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4539,7 +4863,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c16 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4554,28 +4878,28 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   align-items: center;
 }
 
-.c21 {
+.c23 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
 }
 
-.c17 {
+.c19 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c22 {
+.c24 {
   margin-right: 8px;
 }
 
-.c24 {
+.c26 {
   margin-left: 8px;
 }
 
-.c18 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4617,6 +4941,24 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
 
 .c7 {
   margin-bottom: 1rem;
+}
+
+.c16 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -4754,74 +5096,83 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
           </div>
         </div>
       </div>
-      <span
-        style={
-          Object {
-            "color": "#59626a",
-            "fontFamily": "\\"Roboto\\", sans-serif",
-            "fontSize": "0.875rem",
-            "fontWeight": 400,
-          }
-        }
+      <div
+        className="c15"
       >
-        I am a text-only test post.
-      </span>
+        <span
+          className="c16"
+        >
+          <span
+            style={
+              Object {
+                "color": "#59626a",
+                "fontFamily": "\\"Roboto\\", sans-serif",
+                "fontSize": "0.875rem",
+                "fontWeight": 400,
+                "whiteSpace": "pre-wrap",
+              }
+            }
+          >
+            I am a text-only test post.
+          </span>
+        </span>
+      </div>
     </div>
   </div>
   <div
-    className="c15"
+    className="c17"
   >
     <div
-      className="c16"
+      className="c18"
     >
       <p
-        className="c17 c14"
+        className="c19 c14"
         color="grayDarker"
       >
         This post will be added to the queue
       </p>
     </div>
     <span
-      className="c18"
+      className="c20"
     >
       <button
-        className="c19"
+        className="c21"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-          className="c20"
+          className="c22"
         >
           Delete
         </div>
       </button>
       <span
-        className="c21"
+        className="c23"
       />
       <button
-        className="c22 c23"
+        className="c24 c25"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-          className="c20"
+          className="c22"
         >
           Edit
         </div>
       </button>
       <button
-        className="c24 c25"
+        className="c26 c27"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-          className="c20"
+          className="c22"
         >
           Add to Queue
         </div>
@@ -4852,12 +5203,12 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   border-color: #B8B8B8;
 }
 
-.c14 {
+.c16 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.c13 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4905,7 +5256,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   background-color: transparent;
 }
 
-.c13:hover {
+.c15:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -4914,20 +5265,20 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c13:active {
+.c15:active {
   top: 1px;
 }
 
-.c13:focus {
+.c15:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c13:hover {
+.c15:hover {
   color: #3D3D3D;
 }
 
-.c17 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4977,7 +5328,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   border: 1px solid #B8B8B8;
 }
 
-.c17:hover {
+.c19:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -4986,26 +5337,26 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c17:active {
+.c19:active {
   top: 1px;
 }
 
-.c17:focus {
+.c19:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c17:hover {
+.c19:hover {
   color: #3D3D3D;
   border-color: #636363;
 }
 
-.c17:focus {
+.c19:focus {
   border-color: #2c4bff;
   color: #3D3D3D;
 }
 
-.c19 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5055,7 +5406,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   border: 1px solid #2c4bff;
 }
 
-.c19:hover {
+.c21:hover {
   -webkit-transition-property: background-color,border-color,color;
   transition-property: background-color,border-color,color;
   -webkit-transition-duration: 0.1s;
@@ -5064,16 +5415,16 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   transition-timing-function: ease-in;
 }
 
-.c19:active {
+.c21:active {
   top: 1px;
 }
 
-.c19:focus {
+.c21:focus {
   box-shadow: 0 0 0 3px #ABB7FF;
   outline: 0;
 }
 
-.c19:hover {
+.c21:hover {
   background-color: #1F35B3;
   border-color: #1F35B3;
   color: #FFFFFF;
@@ -5087,7 +5438,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   line-height: 20px;
 }
 
-.c11 {
+.c13 {
   color: #3D3D3D;
   font-family: "Roboto",sans-serif;
   font-size: 14px;
@@ -5144,7 +5495,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   margin: 0;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5161,7 +5512,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   border-top: 1px solid #E0E0E0;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5176,14 +5527,14 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   align-items: center;
 }
 
-.c15 {
+.c17 {
   margin: 0 20px 0 12px;
   height: 32px;
   border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
 }
 
-.c9 {
+.c11 {
   margin-right: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -5195,25 +5546,43 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   align-items: center;
 }
 
-.c10 {
+.c12 {
   font-size: 12px;
   margin: 0;
   color: #3D3D3D;
 }
 
-.c16 {
+.c18 {
   margin-right: 8px;
 }
 
-.c18 {
+.c20 {
   margin-left: 8px;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.c8 {
+  padding-right: 1rem;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 <div
@@ -5267,27 +5636,36 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
       }
     }
   >
-    <span
-      style={
-        Object {
-          "color": "#59626a",
-          "fontFamily": "\\"Roboto\\", sans-serif",
-          "fontSize": "0.875rem",
-          "fontWeight": 400,
-        }
-      }
-    >
-      I am a text-only test post.
-    </span>
-  </div>
-  <div
-    className="c7"
-  >
     <div
-      className="c8"
+      className="c7"
     >
       <span
-        className="c9"
+        className="c8"
+      >
+        <span
+          style={
+            Object {
+              "color": "#59626a",
+              "fontFamily": "\\"Roboto\\", sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        >
+          I am a text-only test post.
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    className="c9"
+  >
+    <div
+      className="c10"
+    >
+      <span
+        className="c11"
       >
         <svg
           height="100%"
@@ -5329,53 +5707,53 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
         </svg>
       </span>
       <p
-        className="c10 c11"
+        className="c12 c13"
         color="grayDarker"
       >
         This post is scheduled for 9:42pm (GMT)
       </p>
     </div>
     <span
-      className="c12"
+      className="c14"
     >
       <button
-        className="c13"
+        className="c15"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="text"
       >
         <div
-          className="c14"
+          className="c16"
         >
           Delete
         </div>
       </button>
       <span
-        className="c15"
+        className="c17"
       />
       <button
-        className="c16 c17"
+        className="c18 c19"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="secondary"
       >
         <div
-          className="c14"
+          className="c16"
         >
           Edit
         </div>
       </button>
       <button
-        className="c18 c19"
+        className="c20 c21"
         disabled={false}
         onClick={[Function]}
         size="small"
         type="primary"
       >
         <div
-          className="c14"
+          className="c16"
         >
           Add to Queue
         </div>
@@ -9836,7 +10214,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,
@@ -10346,7 +10724,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,
@@ -10799,7 +11177,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,
@@ -11343,7 +11721,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,
@@ -11920,7 +12298,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,
@@ -12136,7 +12514,7 @@ exports[`Storyshots Cards|Posts/Post isConfirmingDelete 1`] = `
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,
@@ -12309,7 +12687,7 @@ exports[`Storyshots Cards|Posts/Post isDeleting 1`] = `
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,
@@ -12482,7 +12860,7 @@ exports[`Storyshots Cards|Posts/Post isWorking 1`] = `
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,
@@ -12895,7 +13273,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,
@@ -13460,7 +13838,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
               <span
                 style={
                   Object {
-                    "color": "#000",
+                    "color": "#59626a",
                     "fontFamily": "\\"Roboto\\", sans-serif",
                     "fontSize": "0.875rem",
                     "fontWeight": 400,
@@ -14061,7 +14439,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
               <span
                 style={
                   Object {
-                    "color": "#000",
+                    "color": "#59626a",
                     "fontFamily": "\\"Roboto\\", sans-serif",
                     "fontSize": "0.875rem",
                     "fontWeight": 400,
@@ -14267,7 +14645,7 @@ exports[`Storyshots Cards|Posts/Post sent 1`] = `
             <span
               style={
                 Object {
-                  "color": "#000",
+                  "color": "#59626a",
                   "fontFamily": "\\"Roboto\\", sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 400,

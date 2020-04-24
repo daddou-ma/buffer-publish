@@ -5,13 +5,13 @@ import CardHeader from '../CardHeader';
 import DraftFooter from '../DraftFooter';
 import RetweetPanel from '../RetweetPanel';
 import RenderPostMetaBar from '../Post/RenderPostMetaBar';
+import UpdateContent from '../UpdateContent';
 
 const postContentStyle = {
   padding: '1rem',
 };
 
 const Draft = ({
-  children,
   hasPermission,
   isConfirmingDelete,
   isDeleting,
@@ -35,6 +35,7 @@ const Draft = ({
   hasFirstCommentFlip,
   profileService,
   geolocationName,
+  ...props
 }) => (
   <Card>
     <CardHeader
@@ -53,10 +54,10 @@ const Draft = ({
           retweetCommentLinks={retweetCommentLinks}
           basic={basic}
         >
-          {children}
+          <UpdateContent {...props} basic={basic} />
         </RetweetPanel>
       ) : (
-        children
+        <UpdateContent {...props} basic={basic} />
       )}
     </div>
     <RenderPostMetaBar
@@ -123,7 +124,6 @@ Draft.propTypes = {
   ),
   hasFirstCommentFlip: PropTypes.bool,
   view: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
 Draft.defaultProps = {
