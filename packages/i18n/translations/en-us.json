@@ -369,6 +369,17 @@
       "movedBackToDraftsEmail": "Send me emails when my draft is moved from Pending Approval back to Drafts.",
       "celebrations": "Celebrations",
       "celebrationsEmail": "Send me emails celebrating my posting achievements."
+    },
+    "appsAndExtras": {
+      "title": "Buffer Apps & Extras",
+      "description": "Get the most out of Buffer with our mobile apps and browser extension.",
+      "browserExtension": "Browser Extension",
+      "extensionDescription": "Our browser extension lets you share content as you browse the web.",
+      "installExtension": "Install the Browser extension",
+      "mobileApps": "Mobile Apps",
+      "mobileAppsDescription": "Share content and manage your Buffer account on the go with our mobile apps.",
+      "viewOnAppleStore": "View on Apple Store",
+      "viewOnGooglePlay": "View on Google Play"
     }
   },
   "profile-sidebar": {

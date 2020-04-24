@@ -369,6 +369,17 @@
       "movedBackToDraftsEmail": "Enviarme correos electrónicos cuando mi borrador se mueva de Aprobación pendiente a Borradores.",
       "celebrations": "Celebraciones",
       "celebrationsEmail": "Enviarme correos electrónicos celebrando mis logros de publicación."
+    },
+    "appsAndExtras": {
+      "title": "Buffer Applicaciones & Extras",
+      "description": "Get the most out of Buffer with our mobile apps and browser extension.",
+      "browserExtension": "Extensión del Navegador",
+      "extensionDescription": "Nuestra extensión de navegador te permite compartir contenido mientras navegas por la web",
+      "installExtension": "Instalar extension",
+      "mobileApps": "Aplicaciones móviles",
+      "mobileAppsDescription": "Comparte contenido y administra tu cuenta de Buffer sobre la marcha con nuestra aplicación móvil.",
+      "viewOnAppleStore": "Ver en la Apple Store",
+      "viewOnGooglePlay": "Ver en Google Play"
     }
   },
   "profile-sidebar": {

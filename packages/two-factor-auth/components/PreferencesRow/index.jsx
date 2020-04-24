@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next';
 
 const formattedMethod = t => ({
   '': t('common.disabled'),
-  sms: t('common.sms'),
-  app: t('common.authenticatorApp'),
+  sms: t('preferences.security.sms'),
+  app: t('preferences.security.authenticatorApp'),
 });
 
 const TwoFactorPreferencesRow = ({
@@ -57,7 +57,7 @@ const TwoFactorPreferencesRow = ({
           )}
           <div style={{ margin: '8px 0 0 0' }}>
             <Text type="p">
-              {t('common.recoveryCode')}:{' '}
+              {t('preferences.security.recoveryCode')}:{' '}
               <Link href="#" onClick={() => transition('SHOW_RECOVERY')}>
                 {t('common.view')}
               </Link>
