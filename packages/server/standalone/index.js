@@ -5,6 +5,7 @@ const { join } = require('path');
 const express = require('express');
 const https = require('https');
 const cors = require('cors');
+const PublishAPI = require('../publishAPI');
 
 // Port on which to server static assets for running in CI
 const STATIC_ASSETS_SERVER_PORT = 8080;
@@ -151,23 +152,31 @@ function serveStaticAssets() {
   staticAssetServer.listen(STATIC_ASSETS_SERVER_PORT);
 }
 
-function onBoot({ usePrecompiledBundles }) {
+async function onBoot({ usePrecompiledBundles }) {
   const dim = '\x1b[2m';
   const reset = '\x1b[0m';
   const u = '\x1b[4m';
-
-  const bootMessage = `
-🚀  Publish is now running in Standalone Mode${dim} 
-   → ${u}https://publish.local.buffer.com${reset}${dim}
-   - Don't forget: \`yarn run watch\` in another terminal tab.${reset}`;
+  const blue = '\x1b[33m';
 
   const precompiledBundlesMessage = `
-📦  Using precompiled assets and serving from:${dim} 
+📦  Serving precompiled assets${dim} 
    → https://local.buffer.com:${STATIC_ASSETS_SERVER_PORT}/static${reset}`;
 
   // Ensure we have a valid session
-  if (getStandaloneSessionData()) {
-    console.log(bootMessage);
+  const session = getStandaloneSessionData();
+  if (session) {
+    const user = await PublishAPI.get({
+      uri: `1/user.json`,
+      session,
+    });
+    console.log(`
+🚀  Publish is now running in Standalone Mode → ${u}https://publish.local.buffer.com${reset}${dim}
+    • User ${blue}${user.email}${reset}${dim} (https://buffer.com/admin/${user._id})${reset}`);
+    if (!usePrecompiledBundles) {
+      console.log(
+        `    ${dim}• Don't forget: ${blue}yarn run watch${reset}${dim} in another terminal.${reset}`
+      );
+    }
     if (usePrecompiledBundles) {
       console.log(precompiledBundlesMessage);
     }
