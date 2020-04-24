@@ -12,12 +12,7 @@ const formattedMethod = t => ({
   app: t('preferences.security.authenticatorApp'),
 });
 
-const TwoFactorPreferencesRow = ({
-  // machineState,
-  transition,
-  method,
-  phoneNumber,
-}) => {
+const TwoFactorPreferencesRow = ({ transition, method, phoneNumber }) => {
   const { t } = useTranslation();
 
   return (

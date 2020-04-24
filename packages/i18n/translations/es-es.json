@@ -5,7 +5,8 @@
     "disabled": "Deshabilitado",
     "learnMore": "Aprende Más",
     "edit": "Editar",
-    "view": "Ver"
+    "view": "Ver",
+    "pleaseWait": "Por favor espera..."
   },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "Se te cobrará <1>{{billedAmount}}</1> al final de la prueba. ",
@@ -348,7 +349,11 @@
       "phoneNumber": "Número de teléfono",
       "recoveryCode": "Código de recuperación",
       "sms": "Mensaje de Texto",
-      "authenticatorApp": "Aplicación de autenticación"
+      "authenticatorApp": "Aplicación de autenticación",
+      "enableTwoFactor": "Habilitar autenticación de dos factores",
+      "changeTwoFactor": "Cambiar la autenticación de dos factores",
+      "sendSecutiryCodes": "¿Cómo te gustaría que te enviemos tus códigos de seguridad?",
+      "textMessage": "Mensaje de Texto"
     },
     "notifications": {
       "title": "Notificaciones de Correo",

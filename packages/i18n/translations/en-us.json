@@ -5,7 +5,8 @@
     "disabled": "Disabled",
     "learnMore": "Learn more",
     "edit": "Edit",
-    "view": "View"
+    "view": "View",
+    "pleaseWait": "Please wait..."
   },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "You'll be billed <1>{{billedAmount}}</1> at the end of your trial. ",
@@ -348,7 +349,11 @@
       "phoneNumber": "Phone number",
       "recoveryCode": "Recovery code",
       "sms": "SMS",
-      "authenticatorApp": "Authenticator App"
+      "authenticatorApp": "Authenticator App",
+      "enableTwoFactor": "Enable Two Factor Authentication",
+      "changeTwoFactor": "Change Two Factor Authentication",
+      "sendSecutiryCodes": "How would you like us to send your security codes?",
+      "textMessage": "Text Message"
     },
     "notifications": {
       "title": "Email Notifications",

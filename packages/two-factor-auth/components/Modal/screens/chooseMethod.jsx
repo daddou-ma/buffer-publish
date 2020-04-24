@@ -1,43 +1,46 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
+import { useTranslation } from 'react-i18next';
 
-const ChooseMethod = ({ transition, setupApp, loading, editMode }) => (
-  <Fragment>
-    {loading && <Text size="large">Please wait...</Text>}
-    <div style={{ display: loading ? 'none' : 'block' }}>
-      <div style={{ textAlign: 'center' }}>
-        <Text type="h3">
-          {!editMode && 'Enable Two Factor Authentication'}
-          {editMode && 'Change Two Factor Authentication'}
-        </Text>
-        <div style={{ margin: '12px 0' }}>
-          <Text type="p">
-            How would you like us to send your security codes?
+const ChooseMethod = ({ transition, setupApp, loading, editMode }) => {
+  const { t } = useTranslation();
+
+  return (
+    <React.Fragment>
+      {loading && <Text size="large">{t('common.pleaseWait')}</Text>}
+      <div style={{ display: loading ? 'none' : 'block' }}>
+        <div style={{ textAlign: 'center' }}>
+          <Text type="h3">
+            {!editMode && t('preferences.security.enableTwoFactor')}
+            {editMode && t('preferences.security.changeTwoFactor')}
           </Text>
+          <div style={{ margin: '12px 0' }}>
+            <Text type="p">{t('preferences.security.sendSecutiryCodes')}</Text>
+          </div>
+        </div>
+        <div style={{ display: 'flex' }}>
+          <div style={{ flex: 1, padding: '8px' }}>
+            <Button
+              type="secondary"
+              fullWidth
+              label={t('preferences.security.textMessage')}
+              onClick={() => transition('CHOOSE_SMS')}
+            />
+          </div>
+          <div style={{ flex: 1, padding: '8px' }}>
+            <Button
+              type="secondary"
+              fullWidth
+              label={t('preferences.security.authenticatorApp')}
+              onClick={setupApp}
+            />
+          </div>
         </div>
       </div>
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: 1, padding: '8px' }}>
-          <Button
-            type="secondary"
-            fullWidth
-            label="Text Message"
-            onClick={() => transition('CHOOSE_SMS')}
-          />
-        </div>
-        <div style={{ flex: 1, padding: '8px' }}>
-          <Button
-            type="secondary"
-            fullWidth
-            label="Authenticator App"
-            onClick={setupApp}
-          />
-        </div>
-      </div>
-    </div>
-  </Fragment>
-);
+    </React.Fragment>
+  );
+};
 
 ChooseMethod.propTypes = {
   transition: PropTypes.func.isRequired,
