@@ -61,6 +61,7 @@ const getBugsnagScript = ({ userId, isProduction, isStandalone }) => {
     </script>
     `;
   }
+  return '';
 };
 
 /**
