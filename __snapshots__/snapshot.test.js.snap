@@ -9816,6 +9816,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -10325,6 +10326,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -10777,6 +10779,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -11320,6 +11323,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -11859,6 +11863,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -12111,6 +12116,7 @@ exports[`Storyshots Cards|Posts/Post isConfirmingDelete 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -12283,6 +12289,7 @@ exports[`Storyshots Cards|Posts/Post isDeleting 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -12455,6 +12462,7 @@ exports[`Storyshots Cards|Posts/Post isWorking 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -12867,6 +12875,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -13382,6 +13391,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -13947,6 +13957,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
@@ -14236,6 +14247,7 @@ exports[`Storyshots Cards|Posts/Post sent 1`] = `
 
 <div
   className="c0"
+  data-cy="post"
 >
   <div
     className="c1"
