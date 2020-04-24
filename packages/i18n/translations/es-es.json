@@ -2,7 +2,10 @@
   "common": {
     "loading": "Cargando",
     "enabled": "Habilitado",
-    "disabled": "Deshabilitado"
+    "disabled": "Deshabilitado",
+    "learnMore": "Aprende Más",
+    "edit": "Editar",
+    "view": "Ver"
   },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "Se te cobrará <1>{{billedAmount}}</1> al final de la prueba. ",
@@ -341,7 +344,11 @@
       "changeYourPassword": "Cambiar contraseña",
       "twoFactorAuthentication": "Autenticación de dos factores",
       "tfaExplanation": "La autenticación de dos factores agrega una capa adicional de seguridad para tu cuenta de Buffer. Cada vez que inicies sesión en tu cuenta, después de ingresar tu nombre de usuario y contraseña, se te pedirá un segundo código de autenticación que se enviará a tu teléfono móvil por mensaje de texto o a una aplicación móvil gratuita. ",
-      "learnMore": "Aprende más"
+      "method": "Método",
+      "phoneNumber": "Número de teléfono",
+      "recoveryCode": "Código de recuperación",
+      "sms": "Mensaje de Texto",
+      "authenticatorApp": "Aplicación de autenticación"
     },
     "notifications": {
       "title": "Notificaciones de Correo",

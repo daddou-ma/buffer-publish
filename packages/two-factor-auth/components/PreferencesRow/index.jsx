@@ -6,11 +6,11 @@ import { Text } from '@bufferapp/ui';
 import { SensitiveData } from '@bufferapp/publish-shared-components';
 import { useTranslation } from 'react-i18next';
 
-const formattedMethod = {
-  '': 'Disabled',
-  sms: 'SMS',
-  app: 'Authenticator App',
-};
+const formattedMethod = t => ({
+  '': t('common.disabled'),
+  sms: t('common.sms'),
+  app: t('common.authenticatorApp'),
+});
 
 const TwoFactorPreferencesRow = ({
   // machineState,
@@ -28,37 +28,38 @@ const TwoFactorPreferencesRow = ({
           newTab
           href="https://support.buffer.com/hc/en-us/articles/360038349434-Enabling-two-factor-authentication"
         >
-          Learn more
+          {t('common.learnMore')}
         </Link>
       </Text>
       {method && (
         <Fragment>
           <div style={{ margin: '16px 0 0 0' }}>
             <Text type="p">
-              Method: <b>{formattedMethod[method]}</b>{' '}
+              {t('preferences.security.method')}:{' '}
+              <b>{formattedMethod(t)[method]}</b>{' '}
               <Link href="#" onClick={() => transition('CHANGE_METHOD')}>
-                Edit
+                {t('common.edit')}
               </Link>
             </Text>
           </div>
           {method === 'sms' && (
             <div style={{ margin: '8px 0 0 0' }}>
               <Text type="p">
-                Phone number:{' '}
+                {t('common.phoneNumber')}:{' '}
                 <SensitiveData>
                   <b>{phoneNumber}</b>
                 </SensitiveData>{' '}
                 <Link href="#" onClick={() => transition('CHANGE_SMS')}>
-                  Edit
+                  {t('common.edit')}
                 </Link>
               </Text>
             </div>
           )}
           <div style={{ margin: '8px 0 0 0' }}>
             <Text type="p">
-              Recovery code:{' '}
+              {t('common.recoveryCode')}:{' '}
               <Link href="#" onClick={() => transition('SHOW_RECOVERY')}>
-                View
+                {t('common.view')}
               </Link>
             </Text>
           </div>
@@ -66,10 +67,9 @@ const TwoFactorPreferencesRow = ({
       )}
     </Fragment>
   );
-}
- 
+};
+
 TwoFactorPreferencesRow.propTypes = {
-  // machineState: PropTypes.string.isRequired,
   transition: PropTypes.func.isRequired,
   method: PropTypes.string.isRequired,
   phoneNumber: PropTypes.string.isRequired,
