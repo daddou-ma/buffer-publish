@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import uuid from 'uuid/v4';
+import Lightbox from 'react-images';
 import { IdTag, Image, MultipleImages } from '@bufferapp/components';
 import { grayLighter, gray } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
-import { Carousel, Modal } from '@bufferapp/ui';
 
 const MediaWrapper = styled.div`
   position: relative;
@@ -31,74 +30,65 @@ const ThumbnailTag = styled.span`
 
 const UpdateMediaContent = ({ imageSrc, imageUrls, tag, type }) => {
   // State
-  const [carouselOpen, openCarousel] = useState(false);
+  const [isLightboxOpen, openLightbox] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
 
   const isMultipleImage = type === 'multipleImage';
   const isSingleImage = type === 'image' || type === 'video';
   const imageArray = isMultipleImage ? imageUrls : [imageSrc];
+  const images = imageArray?.map(url => ({ src: `${url}` }));
 
   return (
-    <React.Fragment>
-      <MediaWrapper
-        onClick={() => {
-          openCarousel(true);
-        }}
-      >
-        {isMultipleImage && (
-          <MultipleImages
-            border="rounded"
-            height="9rem"
-            urls={imageUrls}
-            width="9rem"
-          />
-        )}
-        {isSingleImage && (
-          <ImageWrapper>
-            <Image
-              src={imageSrc}
-              width="auto"
-              height="auto"
-              maxWidth="9rem"
-              maxHeight="9rem"
-              minHeight="7rem"
-              minWidth="7rem"
-              objectFit="cover"
-            />
-          </ImageWrapper>
-        )}
-        {isSingleImage && tag && (
-          <ThumbnailTag>
-            <IdTag>{tag}</IdTag>
-          </ThumbnailTag>
-        )}
-      </MediaWrapper>
-
-      {/* Image Carousel */}
-      {carouselOpen && (
-        <Modal
-          closeButton={{
-            callback: () => {
-              openCarousel(false);
-            },
-          }}
-          noBackground
-          dismissible
-        >
-          <div>
-            <Carousel width="400px">
-              {imageArray.map((url, index) => (
-                <img
-                  src={url}
-                  alt={`slide ${index}`}
-                  width="400"
-                  key={uuid()}
-                />
-              ))}
-            </Carousel>
-          </div>
-        </Modal>
+    <MediaWrapper
+      onClick={() => {
+        openLightbox(true);
+        setCurrentImage(0);
+      }}
+    >
+      {isMultipleImage && (
+        <MultipleImages
+          border="rounded"
+          height="9rem"
+          urls={imageUrls}
+          width="9rem"
+        />
       )}
-    </React.Fragment>
+      {isSingleImage && (
+        <ImageWrapper>
+          <Image
+            src={imageSrc}
+            width="auto"
+            height="auto"
+            maxWidth="9rem"
+            maxHeight="9rem"
+            minHeight="7rem"
+            minWidth="7rem"
+            objectFit="cover"
+          />
+        </ImageWrapper>
+      )}
+      <Lightbox
+        images={images}
+        isOpen={isLightboxOpen}
+        onClickPrev={() => {
+          setCurrentImage(currentImage - 1);
+        }}
+        onClickNext={() => {
+          setCurrentImage(currentImage + 1);
+        }}
+        onClose={() => {
+          openLightbox(false);
+        }}
+        currentImage={currentImage}
+        backdropClosesModal
+        showImageCount={false}
+      />
+      {isSingleImage && tag && (
+        <ThumbnailTag>
+          <IdTag>{tag}</IdTag>
+        </ThumbnailTag>
+      )}
+    </MediaWrapper>
   );
 };
 
