@@ -144,39 +144,6 @@ export default connect(
           })
         );
       },
-
-      onImageClick: ({ post }) => {
-        dispatch(
-          actions.handleImageClick({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
-      onImageClose: ({ post }) => {
-        dispatch(
-          actions.handleImageClose({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
-      onImageClickNext: ({ post }) => {
-        dispatch(
-          actions.handleImageClickNext({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
-      onImageClickPrev: ({ post }) => {
-        dispatch(
-          actions.handleImageClickPrev({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
     },
   })
 )(ViewCampaign);
