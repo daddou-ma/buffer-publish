@@ -379,7 +379,11 @@
       "mobileApps": "Aplicaciones móviles",
       "mobileAppsDescription": "Comparte contenido y administra tu cuenta de Buffer sobre la marcha con nuestra aplicación móvil.",
       "viewOnAppleStore": "Ver en la Apple Store",
-      "viewOnGooglePlay": "Ver en Google Play"
+      "viewOnGooglePlay": "Ver en Google Play",
+      "connectedApps": "Applicaciones Conectadas ",
+      "connectedAppsDesc": "¡Aprovecha al máximo Buffer y comparte desde tu móvil, lector de noticias, blog o en cualquier lugar! ",
+      "getMoreApps": "Obtén más aplicaciones",
+      "revokeAccess": "Revocar Acceso"
     }
   },
   "profile-sidebar": {

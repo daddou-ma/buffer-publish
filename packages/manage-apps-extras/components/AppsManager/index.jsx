@@ -28,12 +28,12 @@ const AppsManager = ({
   return (
     <section style={rowBlockStyle}>
       <div>
-        <Text type="h2">Connected Apps</Text>
+        <Text type="h2">{t('preferences.appsAndExtras.connectedApps')}</Text>
         <Text type="p">
-          Get the most out of Buffer and share from your mobile, news reader, blog
-          or anywhere!{' '}
+          {t('preferences.appsAndExtras.connectedApps')}
+          {t('preferences.appsAndExtras.connectedAppsDesc')}
           <Link newTab href="https://buffer.com/extras">
-            Get More Apps →
+            {t('preferences.appsAndExtras.getMoreApps')} →
           </Link>
         </Text>
         <Divider />
@@ -43,7 +43,7 @@ const AppsManager = ({
               <Text type="h3">{app.name}</Text>
               <Button
                 type="secondary"
-                label="Revoke Access"
+                label={t('preferences.appsAndExtras.revokeAccess')}
                 onClick={() =>
                   onRequestOpenModal({ appId: app.id, appName: app.name })
                 }

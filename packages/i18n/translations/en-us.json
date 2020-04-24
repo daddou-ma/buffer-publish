@@ -379,7 +379,11 @@
       "mobileApps": "Mobile Apps",
       "mobileAppsDescription": "Share content and manage your Buffer account on the go with our mobile apps.",
       "viewOnAppleStore": "View on Apple Store",
-      "viewOnGooglePlay": "View on Google Play"
+      "viewOnGooglePlay": "View on Google Play",
+      "connectedApps": "Connected Apps ",
+      "connectedAppsDesc": "Get the most out of Buffer and share from your mobile, news reader, blog or anywhere! ",
+      "getMoreApps": "Get More Apps",
+      "revokeAccess": "Revoke Access"
     }
   },
   "profile-sidebar": {
