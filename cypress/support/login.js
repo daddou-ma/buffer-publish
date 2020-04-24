@@ -18,8 +18,8 @@ Cypress.Commands.add('loginWithCSRF', csrfToken => {
 });
 
 Cypress.Commands.add('login', () => {
+  /** Skip logging if Publish is running in standalone mode (i.e., already has a preloaded session) */
   if (Cypress.env('STANDALONE') === true) {
-    /** Skip logging if Publish is running in standalone mode (i.e., already has a preloaded session) */
     return true;
   }
   cy.request(LOCAL_LOGIN_URL)

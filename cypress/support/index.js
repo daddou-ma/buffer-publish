@@ -1,7 +1,7 @@
 /**
  * Import our custom Cypress commands
  */
-import './login'
+import './login';
 
 /**
  * Install package that adds console messages to the Cypress output
