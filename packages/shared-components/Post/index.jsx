@@ -29,7 +29,6 @@ const PostContent = styled.div`
 `;
 
 const Post = ({
-  children,
   isConfirmingDelete,
   isDeleting,
   isWorking,
@@ -229,7 +228,6 @@ Post.commonPropTypes = {
 
 Post.propTypes = {
   ...Post.commonPropTypes,
-  children: PropTypes.node.isRequired,
 };
 
 Post.defaultProps = {

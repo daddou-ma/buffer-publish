@@ -1,4 +1,7 @@
 {
+  "common": {
+    "loading": "Loading"
+  },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "You'll be billed <1>{{billedAmount}}</1> at the end of your trial. ",
     "completeBilling": "Add your billing details now to start your subscription. ",
@@ -7,6 +10,10 @@
     "startSubscription": "Start Subscription"
   },
   "campaigns": {
+    "common": {
+      "title": "Campaigns",
+      "createCampaign": "Create a Campaign"
+    },
     "campaignForm": {
       "ariaLabel": "Name input for campaign form",
       "cancel": "Cancel",
@@ -38,7 +45,6 @@
       "subtext": "Keep track of multichannel campaigns and create a healthy mix of content on social media.",
       "title": "Get a clearer picture of your social media strategy"
     },
-    "title": "Campaigns",
     "viewCampaign": {
       "allPostsSent": {
         "createCampaign": "Create New Campaign",
@@ -63,7 +69,9 @@
       "loadingCampaignDetails": "Loading campaign details such as date and counters, please hold on",
       "loadingCampaignName": "Loading campaign name, please hold on",
       "scheduled": "Scheduled",
+      "scheduledTitle": "Scheduled",
       "sent": "Sent",
+      "sentTitle": "Sent",
       "viewCampaign": "View Campaign",
       "viewReport": "View Report"
     }
@@ -155,22 +163,22 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Choose Plan",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Plan, preview, and schedule Instagram Stories on web and mobile.",
-        "3": "Include the first comment when you schedule Instagram posts",
-        "4": "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
-        "5": "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "2 users",
-        "2": "Instagram Stories",
-        "3": "Instagram first comment",
-        "4": "Hashtag Manager",
-        "5": "Shop Grid"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Plan, preview, and schedule Instagram Stories on web and mobile.",
+        "Include the first comment when you schedule Instagram posts",
+        "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+      ],
+      "features": [
+        "8 social accounts",
+        "2 users",
+        "Instagram Stories",
+        "Instagram first comment",
+        "Hashtag Manager",
+        "Shop Grid"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -184,22 +192,22 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Upgrade to Premium",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "Include the first comment when you schedule Instagram posts",
-        "2": "Tag Instagram users when you schedule Instagram posts",
-        "3": "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
-        "4": "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
-        "5": "Plan, preview, and schedule Instagram Stories on web and mobile."
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "Instagram first comment",
-        "2": "Instagram user tagging",
-        "3": "Hashtag Manager",
-        "4": "Shop Grid",
-        "5": "Instagram Stories"
-      },
+      "featureTooltips": [
+        "",
+        "Include the first comment when you schedule Instagram posts",
+        "Tag Instagram users when you schedule Instagram posts",
+        "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
+        "Plan, preview, and schedule Instagram Stories on web and mobile."
+      ],
+      "features": [
+        "8 social accounts",
+        "Instagram first comment",
+        "Instagram user tagging",
+        "Hashtag Manager",
+        "Shop Grid",
+        "Instagram Stories"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -213,16 +221,16 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Choose Plan",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Include first comment when you schedule Instagram posts"
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "1 user",
-        "2": "Instagram first comment"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Include first comment when you schedule Instagram posts"
+      ],
+      "features": [
+        "8 social accounts",
+        "1 user",
+        "Instagram first comment"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -235,16 +243,16 @@
       "buttonText": "Upgrade to Pro",
       "buttonTextDisabled": "Current Plan",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "Include first comment when you schedule Instagram posts",
-        "2": "Tag Instagram users when you schedule Instagram posts"
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "Instagram first comment",
-        "2": "Instagram user tagging"
-      },
+      "featureTooltips": [
+        "",
+        "Include first comment when you schedule Instagram posts",
+        "Tag Instagram users when you schedule Instagram posts"
+      ],
+      "features": [
+        "8 social accounts",
+        "Instagram first comment",
+        "Instagram user tagging"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -261,20 +269,49 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Choose Plan",
       "cost": "$99",
-      "features": {
-        "0": "25 social accounts",
-        "1": "6 users",
-        "2": "Instagram Stories",
-        "3": "Instagram first comment",
-        "4": "Hashtag Manager",
-        "5": "Shop Grid"
-      },
+      "features": [
+        "25 social accounts",
+        "6 users",
+        "Instagram Stories",
+        "Instagram first comment",
+        "Hashtag Manager",
+        "Shop Grid"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$49.50",
       "plan": "small",
       "subtitle": "Built for teams building brands",
       "title": "Business"
     }
+  },
+  "tabs": {
+    "queue": "Queue",
+    "stories": "Stories",
+    "pastReminders": "Past Reminders",
+    "analytics": "Analytics",
+    "awaitingApproval": "Awaiting Approval",
+    "pendingApproval": "Pending Approval",
+    "drafts": "Drafts",
+    "shopGrid": "Shop Grid",
+    "settings": "Settings",
+    "upgrade": "Upgrade",
+    "posts": "Posts",
+    "overview": "Overview",
+    "general": "General",
+    "postingSchedule": "Posting Schedule",
+    "reconnecting": "Reconnecting...",
+    "reconnect": "Reconnect"
+  },
+  "app-shell": {
+    "preferences": "Preferences",
+    "team": "Team",
+    "returnToClassic": "Return to Classic",
+    "startProTrial": "Start Pro Trial",
+    "upgradetoPro": "Upgrade to Pro",
+    "helpCenter": "Help Center",
+    "status": "Status",
+    "pricingAndPlans": "Pricing & Plans",
+    "wishlist": "Wishlist"
   },
   "preferences": {
     "menu": {
@@ -287,7 +324,13 @@
     "backToDashboard": "Back to Dashboard"
   },
   "profile-sidebar": {
-    "connectButton": "Manage Social Accounts"
+    "connectButton": "Manage Social Accounts",
+    "socialAccounts": "Social accounts",
+    "connectInstagram": "Connect Instagram",
+    "connectFacebook": "Connect Facebook",
+    "connectTwitter": "Connect Twitter",
+    "searchProfiles": "Search Profiles",
+    "noProfilesFound": "No Profiles Found"
   },
   "profiles-disconnected-banner": {
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
@@ -480,6 +523,9 @@
     "validating": "One moment...",
     "zipCode": "Zip code",
     "zipLeaveBlank": "Leave blank for non-US cards"
+  },
+  "tag-badge": {
+    "new": "New"
   },
   "trial-complete-modal": {
     "cancelTrial": "Cancel Trial",

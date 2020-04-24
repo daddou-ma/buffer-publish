@@ -6,6 +6,7 @@ import TabTag from '@bufferapp/publish-tabs/components/TabTag';
 import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
@@ -86,7 +87,6 @@ const ProfileSidebar = ({
   loading,
   selectedProfileId,
   profiles,
-  translations,
   onProfileClick,
   onDropProfile,
   onManageSocialAccountClick,
@@ -102,98 +102,103 @@ const ProfileSidebar = ({
   hasCampaignsFlip,
   onCampaignsButtonClick,
   isCampaignsSelected,
-}) => (
-  <ProfileSidebarStyle>
-    {loading && renderLoadingProfiles()}
-    {profiles.length > 0 && (
-      <ProfileListStyle data-hide-scrollbar>
-        {hasCampaignsFlip && (
-          <React.Fragment>
-            <ButtonWrapper>
-              <SidebarListItem
-                id="campaigns"
-                title="Campaigns"
-                onItemClick={onCampaignsButtonClick}
-                selected={isCampaignsSelected}
-                badges={<TabTag type="new" labelName="New" />}
-              />
-            </ButtonWrapper>
-            <ProfileListTitle>Social accounts</ProfileListTitle>
-            <Divider marginTop="0" marginBottom="1rem" />
-          </React.Fragment>
-        )}
-        {profiles.length > 9 && (
-          <ProfileSearch
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <ProfileSidebarStyle>
+      {loading && renderLoadingProfiles()}
+      {profiles.length > 0 && (
+        <ProfileListStyle data-hide-scrollbar>
+          {hasCampaignsFlip && (
+            <React.Fragment>
+              <ButtonWrapper>
+                <SidebarListItem
+                  id="campaigns"
+                  title={t('campaigns.common.title')}
+                  onItemClick={onCampaignsButtonClick}
+                  selected={isCampaignsSelected}
+                  badges={<TabTag type="new" labelName={t('tag-badge.new')} />}
+                />
+              </ButtonWrapper>
+              <ProfileListTitle>
+                {t('profile-sidebar.socialAccounts')}
+              </ProfileListTitle>
+              <Divider marginTop="0" marginBottom="1rem" />
+            </React.Fragment>
+          )}
+          {profiles.length > 9 && (
+            <ProfileSearch
+              profiles={profiles}
+              onSearchProfileChange={onSearchProfileChange}
+              isSearchPopupVisible={isSearchPopupVisible}
+              handleSubmit={({ selectedProfile }) =>
+                onProfileClick(selectedProfile)
+              }
+            />
+          )}
+          <ProfileList
+            selectedProfileId={selectedProfileId}
             profiles={profiles}
-            onSearchProfileChange={onSearchProfileChange}
-            isSearchPopupVisible={isSearchPopupVisible}
-            handleSubmit={({ selectedProfile }) =>
-              onProfileClick(selectedProfile)
-            }
-          />
-        )}
-        <ProfileList
-          selectedProfileId={selectedProfileId}
-          profiles={profiles}
-          onProfileClick={onProfileClick}
-          onDropProfile={onDropProfile}
-          profileLimit={profileLimit}
-          translations={translations}
-        />
-      </ProfileListStyle>
-    )}
-    <ManageSocialAccountsStyle>
-      <SocialButtonsWrapperStyle>
-        {!hasInstagram && (
-          <ProfileConnectShortcut
-            label="Connect Instagram"
-            network="instagram"
-            url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
+            onProfileClick={onProfileClick}
+            onDropProfile={onDropProfile}
             profileLimit={profileLimit}
-            profiles={profiles}
-            showSwitchPlanModal={showSwitchPlanModal}
-            goToConnectSocialAccount={goToConnectSocialAccount}
           />
-        )}
-        {!hasFacebook && (
-          <ProfileConnectShortcut
-            label="Connect Facebook"
-            network="facebook"
-            url="https://buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1"
-            profileLimit={profileLimit}
-            profiles={profiles}
-            showSwitchPlanModal={showSwitchPlanModal}
-            goToConnectSocialAccount={goToConnectSocialAccount}
-          />
-        )}
-        {!hasTwitter && (
-          <ProfileConnectShortcut
-            label="Connect Twitter"
-            network="twitter"
-            url="https://buffer.com/oauth/twitter?cta=publish-app-sidebar-addProfile-1"
-            profileLimit={profileLimit}
-            profiles={profiles}
-            showSwitchPlanModal={showSwitchPlanModal}
-            goToConnectSocialAccount={goToConnectSocialAccount}
-          />
-        )}
-        <BottomSectionStyle>
-          <ButtonDividerStyle>
-            <Divider marginTop="1rem" />
-          </ButtonDividerStyle>
-          <Button
-            label={translations.connectButton}
-            type="secondary"
-            fullWidth
-            onClick={() => {
-              onManageSocialAccountClick();
-            }}
-          />
-        </BottomSectionStyle>
-      </SocialButtonsWrapperStyle>
-    </ManageSocialAccountsStyle>
-  </ProfileSidebarStyle>
-);
+        </ProfileListStyle>
+      )}
+      <ManageSocialAccountsStyle>
+        <SocialButtonsWrapperStyle>
+          {!hasInstagram && (
+            <ProfileConnectShortcut
+              label={t('profile-sidebar.connectInstagram')}
+              network="instagram"
+              url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
+              profileLimit={profileLimit}
+              profiles={profiles}
+              showSwitchPlanModal={showSwitchPlanModal}
+              goToConnectSocialAccount={goToConnectSocialAccount}
+            />
+          )}
+          {!hasFacebook && (
+            <ProfileConnectShortcut
+              label={t('profile-sidebar.connectFacebook')}
+              network="facebook"
+              url="https://buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1"
+              profileLimit={profileLimit}
+              profiles={profiles}
+              showSwitchPlanModal={showSwitchPlanModal}
+              goToConnectSocialAccount={goToConnectSocialAccount}
+            />
+          )}
+          {!hasTwitter && (
+            <ProfileConnectShortcut
+              label={t('profile-sidebar.connectTwitter')}
+              network="twitter"
+              url="https://buffer.com/oauth/twitter?cta=publish-app-sidebar-addProfile-1"
+              profileLimit={profileLimit}
+              profiles={profiles}
+              showSwitchPlanModal={showSwitchPlanModal}
+              goToConnectSocialAccount={goToConnectSocialAccount}
+            />
+          )}
+          <BottomSectionStyle>
+            <ButtonDividerStyle>
+              <Divider marginTop="1rem" />
+            </ButtonDividerStyle>
+            <Button
+              label={t('profile-sidebar.connectButton')}
+              type="secondary"
+              fullWidth
+              onClick={() => {
+                onManageSocialAccountClick();
+              }}
+            />
+          </BottomSectionStyle>
+        </SocialButtonsWrapperStyle>
+      </ManageSocialAccountsStyle>
+    </ProfileSidebarStyle>
+  );
+};
 
 ProfileSidebar.propTypes = {
   loading: PropTypes.bool.isRequired,
@@ -203,9 +208,6 @@ ProfileSidebar.propTypes = {
   showSwitchPlanModal: PropTypes.func,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
-  translations: PropTypes.shape({
-    connectButton: PropTypes.string,
-  }),
   profileLimit: PropTypes.number,
   onDropProfile: PropTypes.func,
   hasInstagram: PropTypes.bool.isRequired,
@@ -224,7 +226,6 @@ ProfileSidebar.defaultProps = {
   profiles: [],
   onSearchProfileChange: PropTypes.func,
   isSearchPopupVisible: false,
-  translations: {},
   showSwitchPlanModal: () => {},
   onDropProfile: () => {},
   onCampaignsButtonClick: () => {},
