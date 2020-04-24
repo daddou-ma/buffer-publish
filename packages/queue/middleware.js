@@ -24,7 +24,6 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
 
-
       if (getState().appSidebar.user.plan !== 'awesome') {
         const sidebar = getState().profileSidebar;
         const profileId = sidebar.selectedProfileId;
