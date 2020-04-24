@@ -1,6 +1,8 @@
 {
   "common": {
-    "loading": "Loading"
+    "loading": "Loading",
+    "enabled": "Enabled",
+    "disabled": "Disabled"
   },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "You'll be billed <1>{{billedAmount}}</1> at the end of your trial. ",
@@ -314,6 +316,7 @@
     "wishlist": "Wishlist"
   },
   "preferences": {
+    "backToDashboard": "Back to Dashboard",
     "menu": {
       "appsAndExtras": "Apps & Extras",
       "billing": "Billing",
@@ -321,7 +324,45 @@
       "notifications": "Notifications",
       "security": "Security"
     },
-    "backToDashboard": "Back to Dashboard"
+    "general": {
+      "title": "General",
+      "changePreferences": "Change your general preferences.",
+      "timeFormat": "Time Format",
+      "hour": "hour",
+      "dayToStartWeek": "Day to start the week",
+      "sunday": "Sunday",
+      "monday": "Monday"
+    },
+    "security": {
+      "title": "Security",
+      "addSecurity": "Add an extra layer of security to your account.",
+      "password": "Password",
+      "passwordDescription": "Use your password to sign in to Buffer on the web and mobile apps. Make it nice and secure!",
+      "changeYourPassword": "Change Your Password",
+      "twoFactorAuthentication": "Two Factor Authentication",
+      "tfaExplanation": "Two factor authentication adds an extra layer of security for your Buffer account. Whenever you log in to your account, after entering your username and password, you will be asked for a second authentication code that was sent to your mobile phone via text or a free mobile app. ",
+      "learnMore": "Learn more"
+    },
+    "notifications": {
+      "title": "Email Notifications",
+      "description": "We can remind you when one of your Buffer is looking a little empty.",
+      "emptyBuffer": "Empty Buffer",
+      "emptyBufferEmail": "Send me an email when one of my Buffers becomes empty.",
+      "newsletter": "Newsletter",
+      "newsletterEmail": "Send me occasional emails with new Buffer features and tips.",
+      "updateFailures": "Update Failures",
+      "updateFailuresEmail": "Send me emails when an update fails to post.",
+      "updateSuccesses": "Update Successes",
+      "updateSuccessesEmail": "Send me emails when an update successfully posts.",
+      "weeklyDigests": "Weekly Digests",
+      "weeklyDigestsEmail": "Send me weekly emails summarizing my posting activity.",
+      "awaitingApproval": "Awaiting Approval",
+      "awaitingApprovalEmail": "Send me emails when there is a new draft awaiting approval.",
+      "movedBackToDrafts": "Post moved back to drafts",
+      "movedBackToDraftsEmail": "Send me emails when my draft is moved from Pending Approval back to Drafts.",
+      "celebrations": "Celebrations",
+      "celebrationsEmail": "Send me emails celebrating my posting achievements."
+    }
   },
   "profile-sidebar": {
     "connectButton": "Manage Social Accounts",
