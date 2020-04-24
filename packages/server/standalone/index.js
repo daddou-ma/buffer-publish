@@ -22,8 +22,16 @@ const paths = {
     basePath,
     '../../../reverseproxy/certs/local.buffer.com-wildcard.crt'
   ),
-  certKeyGHActions: join(basePath, 'local.buffer.com-wildcard.key'),
-  certCrtGHActions: join(basePath, 'local.buffer.com-wildcard.crt'),
+  certKeyGHActions: join(
+    basePath,
+    'standalone',
+    'local.buffer.com-wildcard.key'
+  ),
+  certCrtGHActions: join(
+    basePath,
+    'standalone',
+    'local.buffer.com-wildcard.crt'
+  ),
   standaloneSession: join(basePath, 'standalone', 'standalone-session.json'),
   webpackAssets: join(basePath, '..', '..', 'dist'),
   webpackAssetsJson: join(basePath, '..', '..', 'dist', 'webpackAssets.json'),
