@@ -1,9 +1,0 @@
-{
-  "projectId": "6c7ssj",
-  "baseUrl": "https://publish.local.buffer.com",
-  "env": {
-    "STANDALONE": "false",
-    "PUBLISH_LOGIN_EMAIL": "admin@bufferapp.com",
-    "PUBLISH_LOGIN_PASSWORD": "password"
-  }
-}

@@ -701,6 +701,7 @@ class Editor extends React.Component {
           onDrop={this.onDrop}
           onClick={this.onClick}
           onFocus={this.onFocus}
+          data-cy="composer-text-zone"
         >
           <DraftjsEditor
             editorState={draft.editorState}
@@ -714,7 +715,6 @@ class Editor extends React.Component {
             handlePastedText={this.handlePastedText}
             handleBeforeInput={this.handleBeforeInput}
             ref="textZone"
-            data-cy="composer-text-zone"
           />
           <EmojiSuggestions
             onOpen={this.onEmojiSuggestionsOpen}
