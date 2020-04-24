@@ -19,7 +19,6 @@ const AppModals = ({
   showWelcomePaidModal,
   showProfilesDisconnectedModal,
   showStealProfileModal,
-  showInstagramDirectPostingModal,
   showInstagramFirstCommentModal,
   showTrialCompleteModal,
   showInstagramFirstCommentProTrialModal,
@@ -32,7 +31,6 @@ const AppModals = ({
     {showWelcomeModal && <WelcomeModal />}
     {showInstagramFirstCommentModal && <InstagramFirstCommentModal />}
     {showWelcomePaidModal && <WelcomePaidModal />}
-    {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
     {showStealProfileModal && <StealProfileModal />}
     {showTrialCompleteModal && <TrialCompleteModal />}
     {showInstagramFirstCommentProTrialModal && (
