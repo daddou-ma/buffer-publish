@@ -1,12 +1,19 @@
 {
+  "common": {
+    "loading": "Cargando"
+  },
   "billing-upgrade-cta-banner": {
-    "billedTrialEnd": "Se te cobrará {billedAmount} al final de la prueba. ",
+    "billedTrialEnd": "Se te cobrará <1>{{billedAmount}}</1> al final de la prueba. ",
     "completeBilling": "Añade tus datos de pago para empezar tu suscripción.",
-    "planTrial": "Estás en la prueba de {plan}. ",
-    "remainingTrial": "Te faltan {remaining} para seguir probando {plan}. ",
+    "planTrial": "Estás en la prueba de {{plan}}. ",
+    "remainingTrial": "Te faltan <1>{{remaining}}</1> para seguir probando el plan {{plan}}. ",
     "startSubscription": "Empezar suscripción"
   },
   "campaigns": {
+    "common": {
+      "title": "Campañas",
+      "createCampaign": "Crear Campaña"
+    },
     "campaignForm": {
       "ariaLabel": "Campo nombre para el formulario de campaña",
       "cancel": "Cancelar",
@@ -14,7 +21,7 @@
       "createTitle": "Crear Campaña",
       "editTitle": "Editar Campaña",
       "name": "Nombre",
-      "notice1": "El contenido de la campaña es visible para todos los miembros tu organización.",
+      "notice1": "El contenido de la campaña es visible para todos los miembros de tu organización. ",
       "notice2": "Descubre más",
       "notice3": " en nuestro FAQ.",
       "placeholder": "Nombre de la campaña",
@@ -31,14 +38,13 @@
     "emptyState": {
       "createCampaign": "Crear una Campaña",
       "imageTag": "Ejemplo de campaña con múltiples publicaciones programadas.",
-      "item1": "Añade contenido.",
-      "item2": "Mantenlo organizado a través de las redes sociales.",
-      "item3": "Entiende cómo diferentes tipos de contenido resuenan con tu audiencia.",
+      "item1": "Contruye campañas a través de las redes sociales.",
+      "item2": "Observa cómo funcionan entre sí en tu programación.",
+      "item3": "Revisa el rendimiento de la campaña y alcanza tus objetivos.",
       "learnMore": "Aprende Más",
-      "subtext": "Con Campañas, puedes organizar el contenido de tus redes sociales en áreas o temas y hacer seguimiento de su éxito.",
-      "title": "Categoriza tu contenido usando Campañas"
+      "subtext": "Haz seguimiento de las campañas multicanal y crea una combinación saludable de contenido en las redes sociales",
+      "title": "Obtén una imagen más clara de tu estrategia en redes sociales"
     },
-    "title": "Campañas",
     "viewCampaign": {
       "allPostsSent": {
         "createCampaign": "Crear Nueva Campaña",
@@ -62,8 +68,10 @@
       },
       "loadingCampaignDetails": "Cargando detalles de la campaña, como fechas y contadores, por favor espera",
       "loadingCampaignName": "Cargando nombre de la campaña, por favor espera",
-      "scheduled": "Programado",
-      "sent": "Enviado",
+      "scheduled": "Programados",
+      "scheduledTitle": "Programado",
+      "sent": "Enviados",
+      "sentTitle": "Enviado",
       "viewCampaign": "Ver Campaña",
       "viewReport": "Ver Reporte"
     }
@@ -155,22 +163,22 @@
       "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Elige Plan",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Planifica, revisa y programa stories de Instagram en web y móvil.",
-        "3": "Incluye un primer comentario cuando publiques tus posts de Instagram programados",
-        "4": "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
-        "5": "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio."
-      },
-      "features": {
-        "0": "8 redes sociales",
-        "1": "2 usuarios",
-        "2": "Stories de Instagram",
-        "3": "Primer comentario en Instagram",
-        "4": "Hashtag Manager",
-        "5": "Tienda en Instagram"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Planifica, revisa y programa stories de Instagram en web y móvil.",
+        "Incluye un primer comentario cuando publiques tus posts de Instagram programados",
+        "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
+        "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio."
+      ],
+      "features": [
+        "8 redes sociales",
+        "2 usuarios",
+        "Stories de Instagram",
+        "Primer comentario en Instagram",
+        "Hashtag Manager",
+        "Tienda en Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -184,22 +192,22 @@
       "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Actualiza a Premium",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "Incluye un primer comentario cuando programes tus publicaciones de Instagram",
-        "2": "Etiqueta usuarios de Instagram cuando programes publicaciones de Instagram",
-        "3": "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
-        "4": "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio.",
-        "5": "Planifica, revisa y programa stories de Instagram en web y móvil."
-      },
-      "features": {
-        "0": "8 redes sociales",
-        "1": "Primer comentario en Instagram",
-        "2": "Etiquetar usuarios en Instagram",
-        "3": "Hashtag Manager",
-        "4": "Tienda en Instagram",
-        "5": "Stories de Instagram"
-      },
+      "featureTooltips": [
+        "",
+        "Incluye un primer comentario cuando programes tus publicaciones de Instagram",
+        "Etiqueta usuarios de Instagram cuando programes publicaciones de Instagram",
+        "Guarda una colección de hashtags para usar en tus primeros comentarios de Instagram. Reutiliza los que mejor funcionen y optimiza tu alcance.",
+        "Añade enlaces únicos a publicaciones de Instagram, transformando tu perfil en una tienda online con un enlace en tu bio.",
+        "Planifica, revisa y programa stories de Instagram en web y móvil."
+      ],
+      "features": [
+        "8 redes sociales",
+        "Primer comentario en Instagram",
+        "Etiquetar usuarios en Instagram",
+        "Hashtag Manager",
+        "Tienda en Instagram",
+        "Stories de Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -213,16 +221,16 @@
       "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Elige Plan",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Incluye un primer comentario cuando programes publicaciones de Instagram"
-      },
-      "features": {
-        "0": "8 redes sociales",
-        "1": "1 usuario",
-        "2": "Primer comentario en Instagram"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Incluye un primer comentario cuando programes publicaciones de Instagram"
+      ],
+      "features": [
+        "8 redes sociales",
+        "1 usuario",
+        "Primer comentario en Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -235,16 +243,16 @@
       "buttonText": "Actualiza a Pro",
       "buttonTextDisabled": "Plan Actual",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "Incluye un primer comentario cuando programes publicaciones de Instagram",
-        "2": "Etiqueta usuarios de Instagram cuando programes publicaciones para Instagram"
-      },
-      "features": {
-        "0": "8 redes sociales",
-        "1": "Primer comentario en Instagram",
-        "2": "Etiquetar usuarios en Instagram"
-      },
+      "featureTooltips": [
+        "",
+        "Incluye un primer comentario cuando programes publicaciones de Instagram",
+        "Etiqueta usuarios de Instagram cuando programes publicaciones para Instagram"
+      ],
+      "features": [
+        "8 redes sociales",
+        "Primer comentario en Instagram",
+        "Etiquetar usuarios en Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -261,14 +269,14 @@
       "buttonCurrentPlanText": "Plan Actual",
       "buttonText": "Elige Plan",
       "cost": "$99",
-      "features": {
-        "0": "25 redes sociales",
-        "1": "6 usuarios",
-        "2": "Stories de Instagram",
-        "3": "Primer comentario en Instagram",
-        "4": "Hashtag Manager",
-        "5": "Tienda en Instagram"
-      },
+      "features": [
+        "25 redes sociales",
+        "6 usuarios",
+        "Stories de Instagram",
+        "Primer comentario en Instagram",
+        "Hashtag Manager",
+        "Tienda en Instagram"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$49.50",
       "plan": "small",
@@ -287,7 +295,13 @@
     "backToDashboard": "Volver al Dashboard"
   },
   "profile-sidebar": {
-    "connectButton": "Gestionar Redes Sociales"
+    "connectButton": "Gestionar Redes Sociales",
+    "socialAccounts": "Redes sociales",
+    "connectInstagram": "Conectar Instagram",
+    "connectFacebook": "Conectar Facebook",
+    "connectTwitter": "Conectar Twitter",
+    "searchProfiles": "Buscar Perfiles",
+    "noProfilesFound": "No se encontraron perfiles"
   },
   "profiles-disconnected-banner": {
     "body": "Por favor, asegúrate de que estás logueado/a en esta cuenta en la misma red social y solucionaremos esto en un momento.",
@@ -480,6 +494,9 @@
     "validating": "Un momento...",
     "zipCode": "Código postal",
     "zipLeaveBlank": "Dejar en blanco para tarjetas fuera de USA"
+  },
+  "tag-badge": {
+    "new": "Nuevo"
   },
   "trial-complete-modal": {
     "cancelTrial": "Cancelar Prueba",
