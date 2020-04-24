@@ -10,7 +10,7 @@
   "dependencies": {
     "@bufferapp/publish-constants": "2.0.0",
     "@bufferapp/publish-server": "2.0.0",
-    "react-images": "0.5.5"
+    "react-images": "0.5.19"
   },
   "devDependencies": {
   },
