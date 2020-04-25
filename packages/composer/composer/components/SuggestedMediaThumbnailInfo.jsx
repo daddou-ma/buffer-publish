@@ -2,6 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+
+const ThumbnailInfoText = styled.div`
+  opacity: 0;
+  transition: opacity 0.4s;
+  position: relative;
+  background: #323b43;
+  padding: 2px 5px 2px 2px;
+  border-radius: 3px;
+`;
+
 const ImgDataContainer = styled.span`
   position: absolute;
   left: 0;
@@ -12,16 +22,7 @@ const ImgDataContainer = styled.span`
   :hover {
     z-index: 2;
   }
-`;
-
-const ThumbnailInfoText = styled.div`
-  opacity: 0;
-  transition: opacity 0.4s;
-  position: relative;
-  background: #323b43;
-  padding: 2px 5px 2px 2px;
-  border-radius: 3px;
-  ${ImgDataContainer}:hover {
+  :hover ${ThumbnailInfoText} {
     opacity: 1;
   }
 `;

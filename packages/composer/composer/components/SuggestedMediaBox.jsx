@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import throttle from 'lodash.throttle';
 import { MediaTypes } from '@bufferapp/publish-constants';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import Button from '../components/styled/Button';
+import Button from './styled/Button';
 import SuggestedMediaThumbnailInfo from './SuggestedMediaThumbnailInfo';
 import styles from './css/SuggestedMediaBox.css';
 import videoAttachmentThumbnailStyles from './css/VideoAttachmentThumbnail.css';
