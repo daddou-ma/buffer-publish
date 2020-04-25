@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import A from '../components/A';
+import A from '../components/styled/A';
 import styles from './css/PowerSchedulerButton.css';
 
 const PowerSchedulerButton = props => {

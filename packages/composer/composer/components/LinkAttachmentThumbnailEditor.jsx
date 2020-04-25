@@ -11,7 +11,7 @@ import styles from './css/LinkAttachmentThumbnailEditor.css';
 import { FileUploadFormatsConfigs, NotificationScopes } from '../AppConstants';
 import { escapeParens } from '../utils/StringUtils';
 import UploadZone from '@bufferapp/publish-upload-zone';
-import Button from '../components/Button';
+import Button from '../components/styled/Button';
 import CircularUploadIndicator from '../components/progress-indicators/CircularUploadIndicator';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
 import FileUploader from '../file-uploads/FileUploader';

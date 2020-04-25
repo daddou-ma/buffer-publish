@@ -1,4 +1,5 @@
 import partition from 'lodash.partition';
+import WebSocket from '@bufferapp/publish-upload-zone/utils/WebSocket';
 import AppDispatcher from '../dispatcher';
 import {
   ActionTypes,
@@ -11,18 +12,16 @@ import {
   UpgradeErrorCodes,
   bufferOrigins,
 } from '../AppConstants';
-import NotificationActionCreators from '../action-creators/NotificationActionCreators';
-import ServerActionCreators from '../action-creators/ServerActionCreators';
+import NotificationActionCreators from './NotificationActionCreators';
+import ServerActionCreators from './ServerActionCreators';
 import WebAPIUtils from '../utils/WebAPIUtils';
 import ComposerStore from '../stores/ComposerStore';
 import ComposerActionCreators from './ComposerActionCreators';
 import AppStore from '../stores/AppStore';
 import AppHooks from '../utils/LifecycleHooks';
-import WebSocket from '@bufferapp/publish-upload-zone/utils/WebSocket';
 import ModalActionCreators from '../shared-components/modal/actionCreators';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
 import { removeLinkFromErrorMessageText } from '../utils/StringUtils';
-import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 const getDefaultQueueingType = () => {
   const { saveButtons } = AppStore.getOptions();

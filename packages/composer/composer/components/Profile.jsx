@@ -9,7 +9,7 @@ import { Services } from '../AppConstants';
 import { escapeParens } from '../utils/StringUtils';
 import styles from './css/Profile.css';
 import BoardSelector from '../components/BoardSelector';
-import Button from '../components/Button';
+import Button from '../components/styled/Button';
 import Dropdown, {
   DropdownTrigger,
   DropdownContent,

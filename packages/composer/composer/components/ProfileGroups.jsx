@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import ProfileGroupItem from '../components/ProfileGroupItem';
-import A from '../components/A';
+import A from '../components/styled/A';
 import styles from './css/ProfileGroups.css';
 import { getBaseUrl } from '../utils/StringUtils';
 

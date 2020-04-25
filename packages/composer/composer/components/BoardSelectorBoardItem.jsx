@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppActionCreators from '../action-creators/AppActionCreators';
-import Button from '../components/Button';
+import Button from '../components/styled/Button';
 import styles from './css/BoardSelectorBoardItem.css';
 
 class BoardSelectorBoardItem extends React.Component {

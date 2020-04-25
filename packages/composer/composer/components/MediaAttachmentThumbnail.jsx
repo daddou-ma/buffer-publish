@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import CloseButton from './CloseButton';
-import Button from './Button';
+import Button from './styled/Button';
 import { escapeParens } from '../utils/StringUtils';
 import styles from './css/MediaAttachmentThumbnail.css';
 import ModalActionCreators from '../shared-components/modal/actionCreators';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImagesLoadEvents from '@bufferapp/react-images-loaded';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import MediaAttachmentAvailableThumbnailButton from '../components/MediaAttachmentAvailableThumbnailButton';
-import Button from '../components/Button';
+import Button from '../components/styled/Button';
 import Input from '../components/Input';
 import { scrollIntoView } from '../utils/DOMUtils';
 import styles from './css/MediaAttachmentEditor.css';

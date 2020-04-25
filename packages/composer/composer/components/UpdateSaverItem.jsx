@@ -7,7 +7,7 @@ import Dropdown, {
   DropdownContent,
 } from '../components/Dropdown';
 import DateTimeSlotPicker from '../components/DateTimeSlotPicker';
-import Button from '../components/Button';
+import Button from '../components/styled/Button';
 
 import styles from './css/UpdateSaver.css';
 

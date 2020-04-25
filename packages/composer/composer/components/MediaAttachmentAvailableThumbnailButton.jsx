@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import Button from '../components/Button';
+import Button from '../components/styled/Button';
 import styles from './css/MediaAttachmentEditor.css';
 
 class MediaAttachmentAvailableThumbnailButton extends React.Component {

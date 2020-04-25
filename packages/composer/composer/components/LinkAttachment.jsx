@@ -10,7 +10,7 @@ import LinkAttachmentTextEditor from '../components/LinkAttachmentTextEditor';
 import LinkAttachmentThumbnailEditor from '../components/LinkAttachmentThumbnailEditor';
 import LinkAttachmentThumbnail from '../components/LinkAttachmentThumbnail';
 import CloseButton from '../components/CloseButton';
-import A from '../components/A';
+import A from '../components/styled/A';
 import { AttachmentTypes, LinkAttachmentTextFieldTypes } from '../AppConstants';
 import styles from './css/LinkAttachment.css';
 import { getAbsoluteUrl, getDomainFromUrl } from '../utils/StringUtils';

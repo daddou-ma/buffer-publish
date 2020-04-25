@@ -1,14 +1,12 @@
-import { UploadTypes, MediaTypes } from '@bufferapp/publish-constants';
+import Uploader from '@bufferapp/publish-upload-zone/utils/Uploader';
 import AppDispatcher from '../dispatcher';
 import { ActionTypes, NotificationScopes } from '../AppConstants';
 import AppStore from '../stores/AppStore';
 import ComposerStore from '../stores/ComposerStore';
 import Scraper from '../utils/Scraper';
 import Shortener from '../utils/Shortener';
-import Uploader from '@bufferapp/publish-upload-zone/utils/Uploader';
 import NotificationActionCreators from './NotificationActionCreators';
 import AppActionCreators from './AppActionCreators';
-import { getFileTypeFromPath } from '../utils/StringUtils';
 import ModalActionCreators from '../shared-components/modal/actionCreators';
 import ServerActionCreators from './ServerActionCreators';
 

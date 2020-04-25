@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EditorState } from '@bufferapp/draft-js';
 import addShortLink from '../short-link/modifiers/addShortLink';
-import Button from '../../../components/Button';
+import Button from '../../../components/styled/Button';
 
 import styles from '../short-link/ShortLinkTooltip.css';
 

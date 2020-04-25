@@ -160,7 +160,7 @@ class UpdateSaver extends React.Component {
     if (saveButtons.length === 0) return null;
 
     const isDisabled = !isSavingPossible;
-    const weekStartsMonday = userData.weekStartsMonday;
+    const { weekStartsMonday } = userData;
 
     const dropdownTriggerClassName = [
       styles.dropdownTrigger,
