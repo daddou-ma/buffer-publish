@@ -21,30 +21,4 @@ const Button = styled.button`
   }
 `;
 
-const CloseButton = styled(Button)`
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
-  font-size: 16px;
-  text-align: center;
-  color: #343e47;
-  background: #fff;
-  border-radius: 50%;
-  text-decoration: none;
-  border: none;
-  padding: 0;
-  box-sizing: content-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  :before {
-    vertical-align: baseline;
-  }
-  :hover {
-    transform: scale(1.15);
-  }
-`;
-
-export { CloseButton };
-
 export default Button;
