@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import styled from 'styled-components';
-import Select  from './styled/Select';
+import Select from './styled/Select';
 
 const TimeSelect = styled(Select)`
   display: inline-block;
