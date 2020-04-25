@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Svg from '../../components/Svg';
+import styled from 'styled-components';
 import styles from '../css/progress-indicators/CircularIndicator.css';
+
+const Svg = styled.svg`
+  :not(:root) {
+    overflow: hidden;
+  }
+`;
+
 
 const CircularIndicator = props => {
   const {
