@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import CloseButton from './CloseButton';
+import CloseButton from './styled/CloseButton';
 import styles from './css/App.css';
 import { isOnExtension } from '../utils/extension';
 
