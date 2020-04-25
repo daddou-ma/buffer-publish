@@ -3,22 +3,33 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './css/TooltipList.css';
+import styled, { css } from 'styled-components';
 
-const TooltipList = props => {
-  const tooltipListClassName =
+const ListStyled = styled.ul`
+  margin: 0 0 -7px 0;
+  padding-left: 10px;
+
+  ${props =>
     props.messages.length === 1
-      ? styles.tooltipSingleItemList
-      : styles.tooltipList;
+      ? css`
+          list-style-type: none;
+          padding-left: 0;
+        `
+      : ''}
+`;
 
+const ListItemStyled = styled.li`
+  margin-bottom: 7px;
+  line-height: 19px;
+`;
+
+const TooltipList = ({ messages = [] }) => {
   return (
-    <ul className={tooltipListClassName}>
-      {props.messages.map(message => (
-        <li className={styles.tooltipListItem} key={message}>
-          {message}
-        </li>
+    <ListStyled messages={messages}>
+      {messages.map(message => (
+        <ListItemStyled key={message}>{message}</ListItemStyled>
       ))}
-    </ul>
+    </ListStyled>
   );
 };
 
