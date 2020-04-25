@@ -21,7 +21,7 @@ import DateTimeSlotPicker from './DateTimeSlotPicker';
 import UpdateSaverItem from './UpdateSaverItem';
 import OmniboxButtons from './OmniboxButtons';
 import NotificationContainer from './NotificationContainer';
-import TooltipList from './TooltipList';
+import TooltipList from './styled/TooltipList';
 import styles from './css/UpdateSaver.css';
 
 const getUpdateSaverState = () => ({
