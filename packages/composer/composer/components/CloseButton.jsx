@@ -1,42 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../components/styled/Button';
-import styles from './css/CloseButton.css';
+import { CloseButton as Button } from './styled/Button';
 
-class closeButton extends React.Component {
-  static propTypes = {
-    onClick: PropTypes.func.isRequired,
-    label: PropTypes.string,
-    title: PropTypes.string,
-    className: PropTypes.string,
-  };
+const CloseButton = ({
+  onClick,
+  title = null,
+  label = 'Click to close',
+  className = '',
+}) => (
+  <Button
+    className={['bi bi-circle-x', className, 'js-disable-dragging'].join(' ')}
+    onClick={e => {
+      e.preventDefault();
+      onClick(e);
+    }}
+    data-tip={title}
+    aria-label={label}
+  />
+);
 
-  static defaultProps = {
-    label: 'Click to close',
-  };
+CloseButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  label: PropTypes.string,
+  title: PropTypes.string,
+  className: PropTypes.string,
+};
 
-  onClick = e => {
-    e.preventDefault();
-    this.props.onClick(e);
-  };
-
-  render() {
-    const closeButtonClassName = [
-      'bi bi-circle-x',
-      styles.closeButton,
-      this.props.className,
-      'js-disable-dragging',
-    ].join(' ');
-
-    return (
-      <Button
-        className={closeButtonClassName}
-        onClick={this.onClick}
-        data-tip={this.props.title}
-        aria-label={this.props.label}
-      />
-    );
-  }
-}
-
-export default closeButton;
+export default CloseButton;
