@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Button, Link } from '@bufferapp/ui';
 import { gray } from '@bufferapp/ui/style/colors';
+import { useTranslation } from 'react-i18next';
 
 const Container = styled.div`
   display: flex;
@@ -31,35 +32,35 @@ const LinkWithStyles = styled(Link)`
   padding: 16px;
 `;
 
-const EmptyCampaignBanner = ({ translations, onCreatePostClick }) => (
-  <Container>
-    <Text type="h1">{translations.emptyCampaignBanner.title}</Text>
-    <SubText>
-      <Text type="p">{translations.emptyCampaignBanner.subtext}</Text>
-    </SubText>
-    <Button
-      onClick={onCreatePostClick}
-      type="primary"
-      label={translations.emptyCampaignBanner.createPosts}
-    />
-    <LinkWithStyles
-      href="https://support.buffer.com/hc/en-us/articles/360046266313-creating-and-managing-campaigns"
-      newTab
-    >
-      {translations.emptyCampaignBanner.learnMore}
-    </LinkWithStyles>
-  </Container>
-);
+const EmptyCampaignBanner = ({ onCreatePostClick }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Container>
+      <Text type="h1">
+        {t('campaigns.viewCampaign.emptyCampaignBanner.title')}
+      </Text>
+      <SubText>
+        <Text type="p">
+          {t('campaigns.viewCampaign.emptyCampaignBanner.subtext')}
+        </Text>
+      </SubText>
+      <Button
+        onClick={onCreatePostClick}
+        type="primary"
+        label={t('campaigns.viewCampaign.emptyCampaignBanner.createPosts')}
+      />
+      <LinkWithStyles
+        href="https://support.buffer.com/hc/en-us/articles/360046266313-creating-and-managing-campaigns"
+        newTab
+      >
+        {t('campaigns.viewCampaign.emptyCampaignBanner.learnMore')}
+      </LinkWithStyles>
+    </Container>
+  );
+};
 
 EmptyCampaignBanner.propTypes = {
-  translations: PropTypes.shape({
-    emptyCampaignBanner: PropTypes.shape({
-      learnMore: PropTypes.string,
-      createPosts: PropTypes.string,
-      subtext: PropTypes.string,
-      title: PropTypes.string,
-    }),
-  }).isRequired,
   onCreatePostClick: PropTypes.func.isRequired,
 };
 
