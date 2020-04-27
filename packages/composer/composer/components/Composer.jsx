@@ -24,8 +24,8 @@ import PinterestComposerBar from './PinterestComposerBar';
 import LocationComposerBar from './LocationComposerBar';
 import ShopgridComposerBar from './ShopgridComposerBar';
 import FirstCommentComposerBar from './FirstCommentComposerBar';
-import TooltipList from './styled/TooltipList';
-import Button from './styled/Button';
+import TooltipList from './shared/TooltipList';
+import Button from './shared/Button';
 import {
   AttachmentTypes,
   NotificationScopes,

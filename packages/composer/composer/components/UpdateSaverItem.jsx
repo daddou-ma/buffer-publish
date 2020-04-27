@@ -4,7 +4,7 @@ import AppActionCreators from '../action-creators/AppActionCreators';
 import { SaveButtonTypes, ButtonsQueuingTypesMap } from '../AppConstants';
 import Dropdown, { DropdownTrigger, DropdownContent } from './Dropdown';
 import DateTimeSlotPicker from './DateTimeSlotPicker';
-import Button from './styled/Button';
+import Button from './shared/Button';
 
 import styles from './css/UpdateSaver.css';
 

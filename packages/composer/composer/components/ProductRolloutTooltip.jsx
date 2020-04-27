@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NotificationContainer from '../components/NotificationContainer';
 import { NotificationScopes } from '../AppConstants';
-import A from '../components/styled/A';
-import Button from '../components/styled/Button';
+import A from '../components/shared/A';
+import Button from '../components/shared/Button';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
 import styles from './css/ProductRolloutTooltip.css';
 

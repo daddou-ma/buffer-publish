@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import styled from 'styled-components';
-import Select from './styled/Select';
+import Select from './shared/Select';
 
 const TimeSelect = styled(Select)`
   display: inline-block;
@@ -19,6 +19,29 @@ const TimeSelect = styled(Select)`
 const SlotTimePicker = styled.div`
   margin-top: 16px;
 `;
+
+const TimeDigitSelector = ({
+  onChange,
+  getOptions,
+  currentOption,
+  formatter,
+}) => (
+  <TimeSelect onChange={onChange} value={currentOption}>
+    {getOptions().map(d => (
+      <option value={d} key={d}>
+        {formatter(d)}
+      </option>
+    ))}
+  </TimeSelect>
+);
+
+TimeDigitSelector.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  getOptions: PropTypes.func.isRequired,
+  currentOption: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  formatter: PropTypes.func.isRequired,
+};
 
 class TimePicker extends React.Component {
   onHourSelectChange = e => {
@@ -102,27 +125,25 @@ class TimePicker extends React.Component {
 
     return (
       <SlotTimePicker>
-        <TimeSelect onChange={this.onHourSelectChange} value={hour}>
-          {this.getHoursInDay().map(h => (
-            <option value={h} key={h}>
-              {this.leftPadTimeUnit(h)}
-            </option>
-          ))}
-        </TimeSelect>
-
-        <TimeSelect onChange={this.onMinSelectChange} value={min}>
-          {this.getMinutesInHour().map(m => (
-            <option value={m} key={m}>
-              {this.leftPadTimeUnit(m)}
-            </option>
-          ))}
-        </TimeSelect>
-
+        <TimeDigitSelector
+          onChange={this.onHourSelectChange}
+          currentOption={hour}
+          getOptions={this.getHoursInDay}
+          formatter={this.leftPadTimeUnit}
+        />
+        <TimeDigitSelector
+          onChange={this.onMinSelectChange}
+          currentOption={min}
+          getOptions={this.getMinutesInHour}
+          formatter={this.leftPadTimeUnit}
+        />
         {shouldDisplayPeriodSelect && (
-          <TimeSelect onChange={this.onPeriodSelectChange} value={dayPeriod}>
-            <option value="am">AM</option>
-            <option value="pm">PM</option>
-          </TimeSelect>
+          <TimeDigitSelector
+            onChange={this.onPeriodSelectChange}
+            currentOption={dayPeriod}
+            getOptions={() => ['am', 'pm']}
+            formatter={v => v.toUpperCase()}
+          />
         )}
       </SlotTimePicker>
     );

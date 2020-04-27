@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EditorState } from '@bufferapp/draft-js';
 import addShortLink from '../short-link/modifiers/addShortLink';
-import Button from '../../../components/styled/Button';
+import Button from '../../../components/shared/Button';
 
 import styles from '../short-link/ShortLinkTooltip.css';
 
@@ -64,11 +64,15 @@ class UnshortenedLinkTooltip extends React.Component {
   };
 
   onTooltipMouseOver = () => clearTimeout(this.hideTooltipTimeoutId);
+
   onUnshortenedLinkMouseOut = () =>
     (this.hideTooltipTimeoutId = setTimeout(this.hideTooltip, 20));
+
   onTooltipMouseOut = () =>
     (this.hideTooltipTimeoutId = setTimeout(this.hideTooltip, 20));
+
   onTooltipMouseDown = () => (this.isClickOnTooltipInProgress = true);
+
   onTooltipMouseUp = () => (this.isClickOnTooltipInProgress = false);
 
   onEditorStateChange = () => {
@@ -125,8 +129,8 @@ class UnshortenedLinkTooltip extends React.Component {
   }) => {
     const { width, height } = relativePosition;
     let { top, left } = relativePosition;
-    top = top + height;
-    left = left + width / 2;
+    top += height;
+    left += width / 2;
 
     this.setState({
       entityKey,

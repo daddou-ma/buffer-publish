@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@bufferapp/ui';
 import { NotificationTypes } from '../AppConstants';
-import CloseButton from './styled/CloseButton';
+import CloseButton from './shared/CloseButton';
 import styles from './css/Notification.css';
 import NotificationActionCreators from '../action-creators/NotificationActionCreators';
 
