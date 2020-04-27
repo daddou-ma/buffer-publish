@@ -53,10 +53,10 @@ $ prettier --write "packages/your-package/**/*.+(jsx|js)"
 
 For new components, for most cases default to [Functional Components](https://reactjs.org/docs/components-and-props.html) over [Class Components](https://reactjs.org/docs/react-component.html)
 
-For most cases it makes sense to work with functional components, however there are situations in which makes sense to go with class component.
+For most cases it makes sense to work with functional components, however there are situations in which makes sense to go with class components.
 
 #### Some examples to take into account when building a component:
-**1. Preferable way with functional component**
+**1. Preferable way, with functional component**
 
 ```js
 import React, { Fragment, useState } from "react";
@@ -81,7 +81,7 @@ function ImageUploader() {
 export default ImageUploader;
 ```
 
-**2. Accepted way with class component**
+**2. Accepted way, with class component**
 
 ```js
 class ImageUploader extends React.Component {
