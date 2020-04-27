@@ -284,6 +284,35 @@
       "title": "Business"
     }
   },
+  "tabs": {
+    "queue": "Queue",
+    "stories": "Stories",
+    "pastReminders": "Past Reminders",
+    "analytics": "Analytics",
+    "awaitingApproval": "Awaiting Approval",
+    "pendingApproval": "Pending Approval",
+    "drafts": "Drafts",
+    "shopGrid": "Shop Grid",
+    "settings": "Settings",
+    "upgrade": "Upgrade",
+    "posts": "Posts",
+    "overview": "Overview",
+    "general": "General",
+    "postingSchedule": "Posting Schedule",
+    "reconnecting": "Reconnecting...",
+    "reconnect": "Reconnect"
+  },
+  "app-shell": {
+    "preferences": "Preferences",
+    "team": "Team",
+    "returnToClassic": "Return to Classic",
+    "startProTrial": "Start Pro Trial",
+    "upgradetoPro": "Upgrade to Pro",
+    "helpCenter": "Help Center",
+    "status": "Status",
+    "pricingAndPlans": "Pricing & Plans",
+    "wishlist": "Wishlist"
+  },
   "preferences": {
     "menu": {
       "appsAndExtras": "Apps & Extras",

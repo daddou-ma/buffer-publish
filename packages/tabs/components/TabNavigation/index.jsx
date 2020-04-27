@@ -5,6 +5,7 @@ import { Button } from '@bufferapp/ui';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import styled from 'styled-components';
+import { withTranslation } from 'react-i18next';
 import { getValidTab } from '../../utils';
 import TabTag from '../TabTag';
 
@@ -80,6 +81,7 @@ class TabNavigation extends React.Component {
       isDisconnectedProfile,
       draftsNeedApprovalCount,
       draftsCount,
+      t,
     } = this.props;
 
     return (
@@ -87,47 +89,45 @@ class TabNavigation extends React.Component {
       for a11y focus after selecting profile in sidebar */
       <nav id="tabs" role="navigation" style={tabsStyle}>
         <Tabs selectedTabId={selectedTabId} onTabClick={onTabClick}>
-          <Tab tabId="queue">Queue</Tab>
+          <Tab tabId="queue">{t('tabs.queue')}</Tab>
           {/* IG, Business users or Team Members */}
-          {this.isValidTab('stories') && (
-            <Tab tabId="stories">
-              Stories
-            </Tab>
-          )}
+          {this.isValidTab('stories') && <Tab tabId="stories">Stories</Tab>}
           {this.isValidTab('pastReminders') && (
-            <Tab tabId="pastReminders">Past Reminders</Tab>
+            <Tab tabId="pastReminders">{t('tabs.pastReminders')}</Tab>
           )}
-          <Tab tabId="analytics">Analytics</Tab>
+          <Tab tabId="analytics">{t('tabs.analytics')}</Tab>
           {/* Team Members who are Managers */}
           {this.isValidTab('awaitingApproval') && (
             <Tab tabId="awaitingApproval">
-              Awaiting Approval
+              {t('tabs.awaitingApproval')}
               <TabCounterTag labelName={draftsNeedApprovalCount} />
             </Tab>
           )}
           {/* Team Members who are Contributors */}
           {this.isValidTab('pendingApproval') && (
             <Tab tabId="pendingApproval">
-              Pending Approval
+              {t('tabs.pendingApproval')}
               <TabCounterTag labelName={draftsNeedApprovalCount} />
             </Tab>
           )}
           {/* Pro and up users or Team Members */}
           {this.isValidTab('drafts') && (
             <Tab tabId="drafts">
-              Drafts
+              {t('tabs.drafts')}
               <TabCounterTag labelName={draftsCount} />
             </Tab>
           )}
           {/* IG, Business users or Team Members */}
-          {this.isValidTab('grid') && <Tab tabId="grid">Shop Grid</Tab>}
-          <Tab tabId="settings">Settings</Tab>
+          {this.isValidTab('grid') && (
+            <Tab tabId="grid">{t('tabs.shopGrid')}</Tab>
+          )}
+          <Tab tabId="settings">{t('tabs.settings')}</Tab>
         </Tabs>
         {shouldShowUpgradeButton && (
           <UpgradeCtaStyle>
             <ButtonWrapper>
               <Button
-                label="Upgrade"
+                label={t('tabs.upgrade')}
                 type="secondary"
                 size="small"
                 onClick={e => {
@@ -144,9 +144,9 @@ class TabNavigation extends React.Component {
             onTabClick={onChildTabClick}
             secondary
           >
-            <Tab tabId="posts">Posts</Tab>
+            <Tab tabId="posts">{t('tabs.posts')}</Tab>
             {!shouldHideAdvancedAnalytics && (
-              <Tab tabId="overview">Overview</Tab>
+              <Tab tabId="overview">{t('tabs.overview')}</Tab>
             )}
           </Tabs>
         )}
@@ -156,15 +156,15 @@ class TabNavigation extends React.Component {
             onTabClick={onChildTabClick}
             secondary
           >
-            <Tab tabId="general-settings">General</Tab>
-            <Tab tabId="posting-schedule">Posting Schedule</Tab>
+            <Tab tabId="general-settings">{t('tabs.general')}</Tab>
+            <Tab tabId="posting-schedule">{t('tabs.postingSchedule')}</Tab>
             {/* Hidding reconnect  button when profile is disconnected, as we have a banner in settings content for that */}
             {!isDisconnectedProfile && (
               <div style={{ display: 'inline-block' }}>
                 <Button
                   type="secondary"
                   size="small"
-                  label={loading ? 'Reconnecting…' : 'Reconnect'}
+                  label={loading ? t('tabs.reconnecting') : t('tabs.reconnect')}
                   onClick={e => {
                     e.preventDefault();
                     this.setState({ loading: true });
@@ -201,6 +201,7 @@ TabNavigation.propTypes = {
   isBusinessAccount: PropTypes.bool,
   isManager: PropTypes.bool,
   selectedTabId: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
   onTabClick: PropTypes.func.isRequired,
   onUpgradeButtonClick: PropTypes.func.isRequired,
   onChildTabClick: PropTypes.func.isRequired,
@@ -217,4 +218,4 @@ TabNavigation.propTypes = {
   draftsCount: PropTypes.number,
 };
 
-export default WithFeatureLoader(TabNavigation);
+export default withTranslation()(WithFeatureLoader(TabNavigation));

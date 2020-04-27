@@ -284,6 +284,35 @@
       "title": "Business"
     }
   },
+  "tabs": {
+    "queue": "Cola",
+    "stories": "Stories",
+    "pastReminders": "Recordatorios Pasados",
+    "analytics": "Analíticas",
+    "awaitingApproval": "Esperando Aprobación",
+    "pendingApproval": "Aprobación Pendiente",
+    "drafts": "Borradores",
+    "shopGrid": "Shop Grid",
+    "settings": "Opciones",
+    "upgrade": "Actualizar Plan",
+    "posts": "Publicaciones",
+    "overview": "Visión General",
+    "general": "General",
+    "postingSchedule": "Calendario de Publicación",
+    "reconnecting": "Reconectando...",
+    "reconnect": "Reconectar"
+  },
+  "app-shell": {
+    "preferences": "Preferencias",
+    "team": "Equipo",
+    "returnToClassic": "Volver a Clásico",
+    "startProTrial": "Empezar prueba Pro",
+    "upgradetoPro": "Subscribir al plan Pro",
+    "helpCenter": "Centro de Ayuda",
+    "status": "Estatus",
+    "pricingAndPlans": "Precios & Planes",
+    "wishlist": "Lista de Deseos"
+  },
   "preferences": {
     "menu": {
       "appsAndExtras": "Aplicaciones & Extras",

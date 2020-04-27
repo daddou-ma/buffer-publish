@@ -1,5 +1,5 @@
 const { getBugsnagScript } = require('../bugsnag');
 
-module.exports = ({ isProduction, userId }) => {
-  return isProduction ? getBugsnagScript(userId) : '';
+module.exports = ({ isProduction, userId, isStandalone }) => {
+  return isProduction ? getBugsnagScript({ userId, isProduction, isStandalone}) : '';
 };

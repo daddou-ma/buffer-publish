@@ -11,11 +11,7 @@ import { PostEmptySlot } from '@bufferapp/publish-shared-components';
 import Story from '../Story';
 import Post from '../Post';
 import PostDragWrapper from '../PostDragWrapper';
-import TextDraft from '../TextDraft';
-import ImageDraft from '../ImageDraft';
-import MultipleImagesDraft from '../MultipleImagesDraft';
-import LinkDraft from '../LinkDraft';
-import VideoDraft from '../VideoDraft';
+import Draft from '../Draft';
 import QueueHeader from '../QueueHeader';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -30,11 +26,11 @@ const postTypeComponentMap = new Map([
 ]);
 
 const draftTypeComponentMap = new Map([
-  ['text', TextDraft],
-  ['image', ImageDraft],
-  ['multipleImage', MultipleImagesDraft],
-  ['link', LinkDraft],
-  ['video', VideoDraft],
+  ['text', Draft],
+  ['image', Draft],
+  ['multipleImage', Draft],
+  ['link', Draft],
+  ['video', Draft],
   ['storyGroup', Story],
 ]);
 
@@ -143,6 +139,8 @@ const renderDraft = ({
 }) => {
   const draftWithEventHandlers = {
     ...draft,
+    profileService: draft.profile_service,
+    geolocationName: draft.service_geolocation_name,
     key: draft.id,
     draftDetails: draft.draftDetails,
     onDeleteConfirmClick: () => onDeleteConfirmClick({ draft }),
@@ -158,7 +156,7 @@ const renderDraft = ({
     hasFirstCommentFlip,
   };
   let DraftComponent = draftTypeComponentMap.get(draft.type);
-  DraftComponent = DraftComponent || TextDraft;
+  DraftComponent = DraftComponent || Draft;
 
   const defaultStyle = {
     default: {
