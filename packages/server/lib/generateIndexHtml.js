@@ -11,6 +11,7 @@ const getIterateScript = require('./embeds/iterate');
 const getBugsnagScript = require('./embeds/bugsnag');
 const getUserScript = require('./embeds/user');
 const getBufferDataScript = require('./embeds/bufferData');
+const getBundleReminderHtml = require('./embeds/bundleReminder');
 
 const { getFaviconCode } = require('./favicon');
 const { getRuntimeScript } = require('./assets');
@@ -54,6 +55,10 @@ const getHtml = ({
     .replace(
       '{{{fullStoryScript}}}',
       getFullstoryScript({ user, isProduction, isStandalone })
+    )
+    .replace(
+      '{{{bundleReminder}}}',
+      getBundleReminderHtml({ isProduction, isStandalone })
     );
 };
 

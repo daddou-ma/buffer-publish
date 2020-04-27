@@ -21,10 +21,6 @@ export const actionTypes = keyWrapper('CAMPAIGN_VIEW', {
   OPEN_COMPOSER: 0,
   CLOSE_COMPOSER: 0,
   GO_TO_ANALYZE_REPORT: 0,
-  POST_IMAGE_CLICKED: 0,
-  POST_IMAGE_CLICKED_NEXT: 0,
-  POST_IMAGE_CLICKED_PREV: 0,
-  POST_IMAGE_CLOSED: 0,
   POST_CONFIRMED_DELETE: 0,
   POST_SHARE_NOW: 0,
 });
@@ -241,37 +237,12 @@ export default (state = initialState, action) => {
       return state;
     }
     // Post events
-    case actionTypes.POST_IMAGE_CLICKED:
-    case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
     case actionTypes.POST_CONFIRMED_DELETE:
     case actionTypes.POST_SHARE_NOW:
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
     case `deletePost_${dataFetchActionTypes.FETCH_FAIL}`: {
       let newState = {};
       switch (action.type) {
-        case actionTypes.POST_IMAGE_CLICKED:
-          newState = {
-            isLightboxOpen: true,
-            currentImage: 0,
-          };
-          break;
-        case actionTypes.POST_IMAGE_CLOSED:
-          newState = {
-            isLightboxOpen: false,
-          };
-          break;
-        case actionTypes.POST_IMAGE_CLICKED_NEXT:
-          newState = {
-            currentImage: action.post.currentImage + 1,
-          };
-          break;
-        case actionTypes.POST_IMAGE_CLICKED_PREV:
-          newState = {
-            currentImage: action.post.currentImage - 1,
-          };
-          break;
         case actionTypes.POST_CONFIRMED_DELETE:
           newState = {
             isConfirmingDelete: false,
@@ -339,29 +310,5 @@ export const actions = {
   handleShareNowClick: ({ post }) => ({
     type: actionTypes.POST_SHARE_NOW,
     updateId: post.id,
-  }),
-  handleImageClick: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClickNext: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED_NEXT,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClickPrev: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED_PREV,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClose: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLOSED,
-    updateId: post.id,
-    post,
-    profileId,
   }),
 };

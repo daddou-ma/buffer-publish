@@ -176,53 +176,6 @@ describe('middleware', () => {
       .toBeCalledWith(actions.showTrialCompleteModal());
   });
 
-  it('should show instagram direct posting modal when key is present', () => {
-    window._showModal = {
-      key: 'ig-direct-post-modal',
-    };
-    const next = jest.fn();
-    const dispatch = jest.fn();
-    const getState = () => ({
-      profileSidebar: {
-        selectedProfileId: 'id1',
-        selectedProfile: {
-          service_type: 'profile',
-        },
-      },
-      thirdparty: {
-        appCues: {
-          inProgress: false,
-        },
-      },
-      appSidebar: {
-        user: {
-          plan: 'pro',
-        },
-      },
-    });
-    const action = {
-      type: profileActionTypes.SELECT_PROFILE,
-      profile: {
-        id: 'id1',
-      },
-    };
-    const nextAction = {
-      name: 'checkInstagramBusiness',
-      type: 'FETCH',
-      args: {
-        profileId: 'id1',
-        callbackAction: actions.showInstagramDirectPostingModal({
-          profileId: 'id1',
-        }),
-      },
-    };
-    middleware({ dispatch, getState })(next)(action);
-    expect(next)
-      .toBeCalledWith(action);
-    expect(dispatch)
-      .toBeCalledWith(nextAction);
-  });
-
   it('should hide instagram direct posting modal if AppCues tour starts', () => {
     window._showModal = {
       key: 'ig-direct-post-modal',

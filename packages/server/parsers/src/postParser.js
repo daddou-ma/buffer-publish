@@ -221,5 +221,21 @@ module.exports = post => {
     commentEnabled: post.comment_enabled,
     commentText: post.comment_text,
     campaignDetails: post.campaign_details ? post.campaign_details : null,
+    postContent: {
+      imageSrc: isVideo ? media.thumbnail : media.picture,
+      imageUrls: getImageUrls(post),
+      linkAttachment: {
+        title: media.title,
+        url: media.expanded_link,
+        description: media.description,
+        thumbnailUrl: media.preview,
+      },
+      links: canHaveLinks ? links : [],
+      retweetComment,
+      retweetCommentLinks,
+      retweetProfile: getRetweetProfileInfo(post),
+      text,
+      type: getPostType({ post }),
+    },
   };
 };
