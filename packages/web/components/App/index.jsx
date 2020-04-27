@@ -35,22 +35,20 @@ const contentStyle = {
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
-        <div style={appStyle} className="notranslate">
-          <AppShell>
-            <div style={contentStyle}>
-              <CTABanner />
-              <TemporaryBanner />
-              <InitialLoading>
-                <AppPages />
-              </InitialLoading>
-            </div>
-          </AppShell>
-          <Notifications />
-          <AppModals />
-          <ThirdPartyWithRouter />
-        </div>
-      </React.Fragment>
+      <div style={appStyle} className="notranslate">
+        <AppShell>
+          <div style={contentStyle}>
+            <CTABanner />
+            <TemporaryBanner />
+            <InitialLoading>
+              <AppPages />
+            </InitialLoading>
+          </div>
+        </AppShell>
+        <Notifications />
+        <AppModals />
+        <ThirdPartyWithRouter />
+      </div>
     );
   }
 }
