@@ -89,10 +89,6 @@ const RequeueButton = styled(Button)`
   margin-left: 8px;
 `;
 
-const DeleteButton = styled(Button)`
-  color: ${grayDark};
-`;
-
 const ButtonWrapper = styled.span`
   display: flex;
 `;
@@ -174,7 +170,7 @@ const CardFooter = ({
           {onDeleteClick && (
             <Fragment>
               {!isConfirmingDelete ? (
-                <DeleteButton
+                <Button
                   type="text"
                   label="Delete"
                   size="small"

@@ -86,11 +86,11 @@ class HashtagGroupItem extends Component {
                 <span style={nameWrapperStyles}>
                   <Text type="label">{name}</Text>
                 </span>
-                <CounterText type="label" hover>
+                <CounterText type="label" hover={hover}>
                   {numberOfHashtags}
                 </CounterText>
               </div>
-              <HashtagText hover>{hashtags}</HashtagText>
+              <HashtagText hover={hover}>{hashtags}</HashtagText>
             </Tooltip>
           </div>
           {hover && (
