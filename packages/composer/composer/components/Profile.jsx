@@ -190,7 +190,7 @@ class Profile extends React.Component {
       : profileTooltipBaseContents;
 
     return (
-      <div className={profileContainerClassName} ref="profileContainer">
+      <li className={profileContainerClassName} ref="profileContainer">
         {hasSubprofiles && (
           <Dropdown
             isDropdownExpanded={this.isSubprofileDropdownExpanded()}
@@ -252,7 +252,7 @@ class Profile extends React.Component {
             </Button>
           </div>
         )}
-      </div>
+      </li>
     );
   }
 }

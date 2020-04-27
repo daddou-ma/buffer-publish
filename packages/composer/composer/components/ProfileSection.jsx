@@ -58,7 +58,7 @@ class ProfileSection extends React.Component {
     ].join(' ');
 
     return (
-      <div className={styles.profileSection}>
+      <section className={styles.profileSection}>
         {shouldBeConsideredBusinessUser && hasEnoughProfiles && (
           <Button
             className={profilesTogglerClassName}
@@ -79,7 +79,7 @@ class ProfileSection extends React.Component {
         )}
 
         <div className={styles.profilesContainer}>
-          <div
+          <ul
             onScroll={this.onScroll}
             className={styles.profilesScrollContainer}
             ref="profilesScrollContainer"
@@ -97,9 +97,9 @@ class ProfileSection extends React.Component {
                 key={profile.id}
               />
             ))}
-          </div>
+          </ul>
         </div>
-      </div>
+      </section>
     );
   }
 }
