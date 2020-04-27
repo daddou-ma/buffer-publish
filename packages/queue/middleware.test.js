@@ -13,6 +13,12 @@ const getStateWithPaidUser = () => ({
       is_free_user: false,
     },
   },
+  profileSidebar: {
+    selectedProfileId: 'id1',
+    selectedProfile: {
+      service_type: 'profile',
+    },
+  },
 });
 
 describe('middleware', () => {
