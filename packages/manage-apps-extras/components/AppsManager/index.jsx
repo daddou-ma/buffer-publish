@@ -33,7 +33,7 @@ const AppsManager = ({
           {t('preferences.appsAndExtras.connectedApps')}
           {t('preferences.appsAndExtras.connectedAppsDesc')}
           <Link newTab href="https://buffer.com/extras">
-            {t('preferences.appsAndExtras.getMoreApps')} →
+            {t('preferences.appsAndExtras.getMoreApps')}
           </Link>
         </Text>
         <Divider />
