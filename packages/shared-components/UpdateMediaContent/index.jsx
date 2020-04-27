@@ -28,13 +28,14 @@ const ThumbnailTag = styled.span`
   left: 0.7rem;
 `;
 
-const UpdateMediaContent = ({ imageSrc, imageUrls, tag, type }) => {
+const UpdateMediaContent = ({ imageSrc, imageUrls, type }) => {
   // State
   const [isLightboxOpen, openLightbox] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
 
+  const isVideo = type === 'video';
   const isMultipleImage = type === 'multipleImage';
-  const isSingleImage = type === 'image' || type === 'video';
+  const isSingleImage = type === 'image' || isVideo;
   const imageArray = isMultipleImage ? imageUrls : [imageSrc];
   const images = imageArray?.map(url => ({ src: `${url}` }));
 
@@ -83,9 +84,9 @@ const UpdateMediaContent = ({ imageSrc, imageUrls, tag, type }) => {
         backdropClosesModal
         showImageCount={false}
       />
-      {isSingleImage && tag && (
+      {isVideo && (
         <ThumbnailTag>
-          <IdTag>{tag}</IdTag>
+          <IdTag>VIDEO</IdTag>
         </ThumbnailTag>
       )}
     </MediaWrapper>
@@ -96,13 +97,11 @@ UpdateMediaContent.propTypes = {
   type: PropTypes.oneOf(['text', 'image', 'multipleImage', 'link', 'video'])
     .isRequired,
   imageSrc: PropTypes.string,
-  tag: PropTypes.string,
   imageUrls: PropTypes.arrayOf(PropTypes.string),
 };
 
 UpdateMediaContent.defaultProps = {
   imageSrc: '',
-  tag: '',
   imageUrls: [],
 };
 
