@@ -16,24 +16,6 @@ import QueueHeader from '../QueueHeader';
 
 const ErrorBoundary = getErrorBoundary(true);
 
-const postTypeComponentMap = new Map([
-  ['text', Post],
-  ['image', Post],
-  ['multipleImage', Post],
-  ['link', Post],
-  ['video', Post],
-  ['storyGroup', Story],
-]);
-
-const draftTypeComponentMap = new Map([
-  ['text', Draft],
-  ['image', Draft],
-  ['multipleImage', Draft],
-  ['link', Draft],
-  ['video', Draft],
-  ['storyGroup', Story],
-]);
-
 /* eslint-disable react/prop-types */
 
 const renderPost = ({
@@ -75,8 +57,7 @@ const renderPost = ({
     serviceId,
     userData,
   };
-  let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || Post;
+  const PostComponent = post.type === 'storyGroup' ? Story : Post;
 
   const defaultStyle = {
     default: {
@@ -139,8 +120,8 @@ const renderDraft = ({
     onRescheduleClick: () => onRescheduleClick({ draft }),
     hasFirstCommentFlip,
   };
-  let DraftComponent = draftTypeComponentMap.get(draft.type);
-  DraftComponent = DraftComponent || Draft;
+
+  const DraftComponent = draft.type === 'storyGroup' ? Story : Draft;
 
   const defaultStyle = {
     default: {

@@ -30,15 +30,6 @@ const HeaderStyle = styled.div`
   margin-left: 0.5rem;
 `;
 
-const postTypeComponentMap = new Map([
-  ['text', Post],
-  ['image', Post],
-  ['multipleImage', Post],
-  ['link', Post],
-  ['video', Post],
-  ['storyGroup', Story],
-]);
-
 /* eslint-disable react/prop-types */
 
 const renderPost = ({
@@ -83,8 +74,7 @@ const renderPost = ({
     profileService,
     profileServiceType,
   };
-  let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || Post;
+  const PostComponent = post.type === 'storyGroup' ? Story : Post;
 
   return <PostComponent {...postWithEventHandlers} />;
 };
