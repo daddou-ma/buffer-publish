@@ -110,6 +110,7 @@ import React, { Fragment, useState } from "react";
 
 function ImageUploader() {
   const [image, setImage] = useState(null);
+  // PLEASE DON'T ADD A FUNCTION INLINE LIKE THIS
   const getBinaryImageData = function(event) {
     return "foo";
   };
@@ -300,4 +301,3 @@ To use the `yarn test:debug` script, follow these instructions:
 
 ## Reporting bugs 🐛
 To report bugs, please feel free to add them in [JIRA](https://buffer.atlassian.net/secure/RapidBoard.jspa?projectKey=PUB)
-
