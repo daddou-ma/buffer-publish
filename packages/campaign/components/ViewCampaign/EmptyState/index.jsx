@@ -35,7 +35,7 @@ const EmptyStateCampaign = ({
   };
 
   return (
-    <React.Fragment>
+    <main id="main">
       {displayEmptyCampaign && (
         <EmptyCampaignWrapper>
           <EmptyCampaignBanner
@@ -69,7 +69,7 @@ const EmptyStateCampaign = ({
           }
         />
       )}
-    </React.Fragment>
+    </main>
   );
 };
 

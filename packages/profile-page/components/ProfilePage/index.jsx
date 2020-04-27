@@ -30,8 +30,8 @@ const loadingAnimationStyle = {
   margin: '1rem 0',
 };
 
-const StyledMainContent = styled.main`
-  maxWidth: '864px',
+const Main = styled.main`
+  max-width: '864px',
   height: '100%',
 `;
 
@@ -188,7 +188,6 @@ function ProfilePage({
   onChangeTab,
   hasStoriesFlip,
   shouldHideAdvancedAnalytics,
-  mainContentId,
 }) {
   const isQueueTab = tabId === 'queue' || tabId === 'stories';
   const isOtherPostsTab =
@@ -227,7 +226,7 @@ function ProfilePage({
         moreToLoad={moreToLoad}
         onReachBottom={onReachBottom}
       >
-        <StyledMainContent id={mainContentId}>
+        <Main id="main">
           <TabContent
             tabId={tabId}
             profileId={profileId}
@@ -244,7 +243,7 @@ function ProfilePage({
               <BufferLoading size={32} />
             </div>
           )}
-        </StyledMainContent>
+        </Main>
       </ScrollableContainer>
     </PageWithSidebarWrapper>
   );

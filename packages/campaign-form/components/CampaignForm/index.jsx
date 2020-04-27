@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const Content = styled.div`
+const Main = styled.main`
   width: 362px;
   margin: 53px 0 0 283px;
 `;
@@ -138,7 +138,7 @@ const CampaignForm = ({
 
   return (
     <Wrapper>
-      <Content>
+      <Main id="main">
         <Card>
           <Headline type="h2">
             {editMode ? translations.editTitle : translations.createTitle}
@@ -203,7 +203,7 @@ const CampaignForm = ({
             </NoticeText>
           </Notice>
         </NoticeCard>
-      </Content>
+      </Main>
     </Wrapper>
   );
 };
