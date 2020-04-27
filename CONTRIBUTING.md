@@ -89,13 +89,15 @@ class ImageUploader extends React.Component {
     this.state.image = this.getBinaryImageData(event);
   }
   render() {
-    if(this.state.image) {
-      return (<React.Fragment>
-        <input type="file" onchange={this.onChange} />
-        <img src={this.state.image} />
-      </React.Fragment>)
+    if (this.state.image) {
+      return (
+        <React.Fragment>
+          <input type="file" onchange={this.onChange} />
+          <img src={this.state.image} />
+        </React.Fragment>
+      );
     }
-    return (<input type="file" onchange={this.onChange} />);
+    return <input type="file" onchange={this.onChange} />;
   }
 }
 ```
