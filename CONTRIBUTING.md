@@ -180,6 +180,11 @@ const Welcome = ({ name = 'John Smith' }) =>
 ### Strings and i18n
 For i18n, at the moment we have an internal package called `@bufferapp/publish-i18n`, however we are migrating all our String handling to `React.i18n`, so whenever you are working on a component, please defaut to [`React.i18n`](https://react.i18next.com/).
 
+**Adding strings to the translations JSON files:**
+- When adding a new string to the translations/*.json files, make sure to always add them in both files: `en-us.json` and `es-es.json` file, is completely fine if the text is in english for the Spanish json, José, Karël or Maya will make sure to translate it eventually 🙂, but this is mainly to keep consistency among all translation files.
+
+**Some Examples on how to work with React.i18n**
+
 - **Example with Hooks:** Since most of our components are functional components, the more often way to work with translations is with the Hook `useTranslation`:
 
 ```js
