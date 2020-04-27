@@ -14,18 +14,18 @@ Object.keys(machine).forEach(machineState => {
       machineState={machineState}
       isEnabled={machineState === 'enabled'}
       transition={transitionAction}
-      method={'sms'}
+      method="sms"
       phoneNumber="+15142345566"
       updatePhoneNumber=""
       editMode={false}
-      recoveryCode={'ABCD-EFG-HIJK-LKM'}
+      recoveryCode="ABCD-EFG-HIJK-LKM"
       setPhoneNumber={action('setPhoneNumber')}
       submitPhoneNumber={action('submitPhoneNumber')}
       loading={false}
       error=""
       setupApp={action('setupApp')}
-      qrCode={'dasd'}
-      updateMethod={'sms'}
+      qrCode="dasd"
+      updateMethod="sms"
       submitCode={action('submitCode')}
       handleRecoveryCodeSelect={action('handleRecoveryCodeSelect')}
     />
