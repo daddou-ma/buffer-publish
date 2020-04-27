@@ -98,10 +98,6 @@ const ViewCampaign = ({
           onEditClick={postActions.onEditClick}
           onShareNowClick={postActions.onShareNowClick}
           onRequeueClick={postActions.onRequeueClick}
-          onImageClick={postActions.onImageClick}
-          onImageClickNext={postActions.onImageClickNext}
-          onImageClickPrev={postActions.onImageClickPrev}
-          onImageClose={postActions.onImageClose}
           type="post"
         />
       )}
@@ -147,10 +143,6 @@ ViewCampaign.propTypes = {
     onSetRemindersClick: PropTypes.func.isRequired,
     onShareNowClick: PropTypes.func.isRequired,
     onRequeueClick: PropTypes.func.isRequired,
-    onImageClick: PropTypes.func.isRequired,
-    onImageClose: PropTypes.func.isRequired,
-    onImageClickPrev: PropTypes.func.isRequired,
-    onImageClickNext: PropTypes.func.isRequired,
   }).isRequired,
 };
 

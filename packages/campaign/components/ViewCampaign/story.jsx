@@ -115,10 +115,6 @@ const postActions = {
   onDeleteConfirmClick: action('delete post'),
   onShareNowClick: action('share now'),
   onRequeueClick: action('requeue'),
-  onImageClick: action('image gallery open'),
-  onImageClose: action('image gallery close'),
-  onImageClickPrev: action('previous image'),
-  onImageClickNext: action('next image'),
 };
 
 storiesOf('Campaigns|ViewCampaign', module)
