@@ -51,18 +51,83 @@ $ prettier --write "packages/your-package/**/*.+(jsx|js)"
 
 **Creating a Component**
 
-For new components, use [Functional Components](https://reactjs.org/docs/components-and-props.html) over [Class Components](https://reactjs.org/docs/react-component.html)
+For new components, for most cases default to [Functional Components](https://reactjs.org/docs/components-and-props.html) over [Class Components](https://reactjs.org/docs/react-component.html)
+
+For most cases it makes sense to work with functional components, however there are situations in which makes sense to go with class components.
+
+#### Some examples to take into account when building a component:
+**1. Preferable way, with functional component**
 
 ```js
-// Functional component
-const Welcome = ({name}) => <h1>Hello, {name}</h1>
+import React, { useState } from "react";
 
-// Class component
-class Welcome extends React.Component {
+function getBinaryImageData(event) {
+  return "foo";
+}
+
+function ImageUploader() {
+  const [image, setImage] = useState(null);
+  if (image) {
+    return (
+      <React.Fragment>
+        <input type="file" onchange={e => setImage(getBinaryImageData(e))} />
+        <img src={image} alt="Example" />
+      </React.Fragment>
+    );
+  }
+  return <input type="file" onchange={e => setImage(getBinaryImageData(e))} />;
+}
+
+export default ImageUploader;
+```
+
+**2. Accepted way, with class component**
+
+```js
+class ImageUploader extends React.Component {
+  onChange(event) {
+    this.state.image = this.getBinaryImageData(event);
+  }
   render() {
-    return <h1>Hello, {this.props.name}</h1>;
+    if (this.state.image) {
+      return (
+        <React.Fragment>
+          <input type="file" onchange={this.onChange} />
+          <img src={this.state.image} />
+        </React.Fragment>
+      );
+    }
+    return <input type="file" onchange={this.onChange} />;
   }
 }
+```
+
+**3. Bad way / mistakes to avoid**
+Avoid adding logic in the render method, in the example below all the function declarations and logic is hard coded into the body of the functional component, we are creating the getBinaryImageData function on every re-render of the component.
+
+This adds the potential to add more complexity into the body of the functional component with every piece of additional logic we include, we want to avoid this kind of thing at all costs.
+
+```js
+import React, { useState } from "react";
+
+function ImageUploader() {
+  const [image, setImage] = useState(null);
+  // PLEASE DON'T ADD A FUNCTION INLINE LIKE THIS
+  const getBinaryImageData = function(event) {
+    return "foo";
+  };
+  if (image) {
+    return (
+      <React.Fragment>
+        <input type="file" onchange={e => setImage(getBinaryImageData(e))} />
+        <img src={image} alt="Example" />
+      </React.Fragment>
+    );
+  }
+  return <input type="file" onchange={e => setImage(getBinaryImageData(e))} />;
+}
+
+export default ImageUploader;
 ```
 
 ---
@@ -101,7 +166,15 @@ The name of the folder is up to you, what's more important is the name of packag
     * Do this when you're customizing your package, and  whenever you change the dependencies in your package or another.
 
 **Component PropTypes and DefaultProps**
+
 Avoid using defaultProps for anything that's a required prop.
+
+A good way to have default values in our components is via the spread operator in the definition instead, an example of this:
+
+```js
+const Welcome = ({ name = 'John Smith' }) =>
+   <h1>Hello, {name}</h1>;
+```
 
 ## Adding New Dependencies
 
@@ -111,13 +184,13 @@ Adding packages to a monorepo is slightly different than adding to a standard no
 
 This is the most likely scenario you'll face.
 
-in the root directory (`buffer-publish/`) run the follwing commands:
+in the root directory (`buffer-publish/`) run the following commands:
 
   ```bash
   $ yarn add -DE some-cool-package
   $ yarn
   ```
-  Now `some-cool-package` is available to all packages.
+  Now `@bufferapp/publish-cool-package` is available to all packages.
 
 ### Creating A Dependency To Another Local Package
 
@@ -230,4 +303,3 @@ To use the `yarn test:debug` script, follow these instructions:
 
 ## Reporting bugs 🐛
 To report bugs, please feel free to add them in [JIRA](https://buffer.atlassian.net/secure/RapidBoard.jspa?projectKey=PUB)
-
