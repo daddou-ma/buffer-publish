@@ -6,7 +6,8 @@
     "learnMore": "Learn more",
     "edit": "Edit",
     "view": "View",
-    "pleaseWait": "Please wait..."
+    "pleaseWait": "Please wait...",
+    "done": "Done"
   },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "You'll be billed <1>{{billedAmount}}</1> at the end of your trial. ",
@@ -353,7 +354,10 @@
       "enableTwoFactor": "Enable Two Factor Authentication",
       "changeTwoFactor": "Change Two Factor Authentication",
       "sendSecutiryCodes": "How would you like us to send your security codes?",
-      "textMessage": "Text Message"
+      "textMessage": "Text Message",
+      "yourRecoveryCode": "Your Recovery Code",
+      "saveOneTimeCode": "Save this one-time recovery code",
+      "recoveryCodeDescription": "With Two Factor Authentication, if you lose your phone there&apos;s a possibility you could get locked out of your account. Save this code in a safe place to use if you can&apos;t log in with your phone."
     },
     "notifications": {
       "title": "Email Notifications",

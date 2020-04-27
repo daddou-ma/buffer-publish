@@ -6,7 +6,8 @@
     "learnMore": "Aprende Más",
     "edit": "Editar",
     "view": "Ver",
-    "pleaseWait": "Por favor espera..."
+    "pleaseWait": "Por favor espera...",
+    "done": "Listo"
   },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "Se te cobrará <1>{{billedAmount}}</1> al final de la prueba. ",
@@ -353,7 +354,10 @@
       "enableTwoFactor": "Habilitar autenticación de dos factores",
       "changeTwoFactor": "Cambiar la autenticación de dos factores",
       "sendSecutiryCodes": "¿Cómo te gustaría que te enviemos tus códigos de seguridad?",
-      "textMessage": "Mensaje de Texto"
+      "textMessage": "Mensaje de Texto",
+      "yourRecoveryCode": "Tu Código de Recuperación",
+      "saveOneTimeCode": "Guarda este código de recuperación único",
+      "recoveryCodeDescription": "Con la autenticación de dos factores, si pierdes tu teléfono, existe la posibilidad que se bloquee tu cuenta. Guarda este código en un lugar seguro para usar si no puedes iniciar sesión con tu teléfono."
     },
     "notifications": {
       "title": "Notificaciones de Correo",
