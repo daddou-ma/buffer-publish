@@ -3,8 +3,6 @@ import { withRouter } from 'react-router-dom';
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { Link } from '@bufferapp/ui';
-import styled from 'styled-components';
 
 import AppPages from '@bufferapp/publish-app-pages';
 import AppShell from '@bufferapp/publish-app-shell';
