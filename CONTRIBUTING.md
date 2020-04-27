@@ -59,7 +59,7 @@ For most cases it makes sense to work with functional components, however there 
 **1. Preferable way, with functional component**
 
 ```js
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 
 function getBinaryImageData(event) {
   return "foo";
@@ -69,10 +69,10 @@ function ImageUploader() {
   const [image, setImage] = useState(null);
   if (image) {
     return (
-      <Fragment>
+      <React.Fragment>
         <input type="file" onchange={e => setImage(getBinaryImageData(e))} />
         <img src={image} alt="Example" />
-      </Fragment>
+      </React.Fragment>
     );
   }
   return <input type="file" onchange={e => setImage(getBinaryImageData(e))} />;
@@ -106,7 +106,7 @@ Avoid adding logic in the render method, in the example below all the function d
 This adds the potential to add more complexity into the body of the functional component with every piece of additional logic we include, we want to avoid this kind of thing at all costs.
 
 ```js
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 
 function ImageUploader() {
   const [image, setImage] = useState(null);
@@ -116,10 +116,10 @@ function ImageUploader() {
   };
   if (image) {
     return (
-      <Fragment>
+      <React.Fragment>
         <input type="file" onchange={e => setImage(getBinaryImageData(e))} />
         <img src={image} alt="Example" />
-      </Fragment>
+      </React.Fragment>
     );
   }
   return <input type="file" onchange={e => setImage(getBinaryImageData(e))} />;
