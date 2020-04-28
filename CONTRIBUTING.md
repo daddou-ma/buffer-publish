@@ -205,7 +205,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 
 function MyComponent({ t, i18n }) {
-  return <p>{t('my translated text')}</p>
+  return <p>{t('common.pleaseWait')}</p>
 }
 
 export default withTranslation()(MyComponent);
