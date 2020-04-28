@@ -34,7 +34,7 @@ const ViewNote = ({ onEditNoteClick, story, translations }) => {
       <Title type="p">{translations.noteTitle}</Title>
       <NoteWrapper>
         {hasNoNote && (
-          <Note type="p" color="gray">
+          <Note type="p" color="grayDark">
             {translations.noteExplanation}
           </Note>
         )}

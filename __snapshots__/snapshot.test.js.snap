@@ -42,7 +42,7 @@ exports[`Storyshots Cards|Drafts/Draft approval view: isMoving 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -512,7 +512,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -812,7 +812,7 @@ exports[`Storyshots Cards|Drafts/Draft isConfirmingDelete 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -1055,7 +1055,7 @@ exports[`Storyshots Cards|Drafts/Draft isDeleting 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -1298,7 +1298,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorking 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -1541,7 +1541,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorkingManager 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -2011,7 +2011,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -2311,7 +2311,7 @@ exports[`Storyshots Cards|Drafts/Draft no permission 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -2770,7 +2770,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -3109,7 +3109,7 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -3633,7 +3633,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -4273,7 +4273,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -4903,7 +4903,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
 }
 
@@ -16656,7 +16656,7 @@ exports[`Storyshots Cards|Stories/Story default 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
   padding: 8px 16px;
 }
@@ -17208,7 +17208,7 @@ exports[`Storyshots Cards|Stories/Story story with banner error message 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
   padding: 8px 16px;
 }
@@ -17746,7 +17746,7 @@ exports[`Storyshots Cards|Stories/Story story with banner message to download mo
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #636363;
   padding: 12px 16px;
   padding: 8px 16px;
 }
