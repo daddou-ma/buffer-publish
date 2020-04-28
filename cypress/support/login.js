@@ -41,6 +41,14 @@ const getRandomText = () => {
 };
 
 Cypress.Commands.add('createTestUser', () => {
+  /**
+   * Skip creating a test user if we're not running in standalone mode.
+   * This means we're probably running Cypress locally and will login with a local user.
+   * (See commands above.)
+   */
+  if (Cypress.env('STANDALONE') !== true) {
+    return true;
+  }
   cy.task('getAccessToken').then(accessToken => {
     const at = Cypress.env('API_AT') || accessToken; // use env specified token if present
     cy.fixture('pro-user').then(proUser => {

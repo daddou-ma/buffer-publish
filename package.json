@@ -19,7 +19,8 @@
     "build": "webpack --config ./packages/server/webpack.config.prod.js --output-path=`pwd`",
     "build:ci": "USE_PRECOMPILED_BUNDLES=true webpack --config ./packages/server/webpack.config.prod.js --output-path=dist",
     "build:analyze": "ANALYZE_BUNDLE=true webpack --config ./packages/server/webpack.config.prod.js --output-path=dist --progress",
-    "bugsnag:release": "node ./packages/server/scripts/bugsnag-release.js"
+    "bugsnag:release": "node ./packages/server/scripts/bugsnag-release.js",
+    "cypress:setup": "node scripts/setup-cypress.js" 
   },
   "repository": {
     "type": "git",

@@ -10,7 +10,7 @@ Hello - this script will set up Cypress configuration so you can run E2E tests l
 `);
 
 async function run() {
-  const { userEmail } = await inquirer.prompt([
+  const { userEmail, userPassword = 'password' } = await inquirer.prompt([
     {
       type: 'list',
       name: 'userEmail',
@@ -20,9 +20,15 @@ async function run() {
     {
       type: 'input',
       name: 'userEmail',
-      message: 'Okay, what local user email should we use?',
+      message: 'Email:',
       askAnswered: true,
       when: answers => answers.userEmail === 'Other...',
+    },
+    {
+      type: 'input',
+      name: 'userPassword',
+      message: 'Password:',
+      when: answers => answers.userEmail !== 'admin@bufferapp.com',
     },
   ]);
   let result;
@@ -38,18 +44,23 @@ async function run() {
   }
   if (result === 'not found') {
     console.log('User not found!');
+    process.exit();
   }
   const cypressEnvConfig = {
-    env: {
-      API_ADDR: 'https://local.api.buffer.com',
-      API_AT: result.publish.accessToken,
-    },
+    API_ADDR: 'https://local.api.buffer.com',
+    API_AT: result.publish.accessToken,
+    PUBLISH_LOGIN_EMAIL: userEmail,
+    PUBLISH_LOGIN_PASSWORD: userPassword,
   };
   fs.writeFileSync(
     join(__dirname, '..', 'cypress.env.json'),
     JSON.stringify(cypressEnvConfig, null, 2)
   );
-  console.log('✅  Done!');
+  console.log(`
+✅  Wrote config to cypress.env.json. Now try running: 
+
+    yarn run cypress open
+`);
 }
 
 run();
