@@ -17,6 +17,7 @@ import moment from 'moment-timezone';
 import styled from 'styled-components';
 import { InputDate } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
+import Select from './shared/Select';
 
 import TimePicker from './TimePicker';
 import SlotPicker from './SlotPicker';
@@ -35,6 +36,10 @@ const SubmitButton = styled(Button)`
 const TimezoneStyled = styled.div`
   margin-top: 8px;
   font-size: 12px;
+`;
+
+const SlotPickerSelect = styled(Select)`
+  margin-top: 16px;
 `;
 
 class DateTimeSlotPicker extends React.Component {
