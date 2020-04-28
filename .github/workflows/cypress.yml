@@ -27,7 +27,8 @@ jobs:
         uses: cypress-io/github-action@v1
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_STANDALONE: "true"
+          CYPRESS_STANDALONE: "true" # Tells Cypress we're running in standalone mode so it doesn't need to login
+          CYPRESS_API_ADDR: "https://api.bufferapp.com"
         with:
           record: "true"
           build: yarn run build:ci

@@ -1,0 +1,17 @@
+{
+  "plan": 5,
+  "cycle": "month",
+  "profiles": [
+    {
+      "name": "Twitter Profile",
+      "service": "twitter",
+      "avatar": "https://avatars.io/twitter/hamstu"
+    },
+    {
+      "name": "Instagram Profile",
+      "service": "instagram",
+      "service_type": "business",
+      "avatar": "https://avatars.io/twitter/hamstu"
+    }
+  ]
+}

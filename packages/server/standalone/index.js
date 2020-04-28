@@ -177,6 +177,7 @@ async function onBoot({ usePrecompiledBundles }) {
       uri: `1/user.json`,
       session,
     });
+
     console.log(`
 🚀  Publish is now running in Standalone Mode → ${u}https://publish.local.buffer.com${reset}${dim}
     • User ${blue}${user.email}${reset}${dim} (https://buffer.com/admin/${user._id})${reset}`);

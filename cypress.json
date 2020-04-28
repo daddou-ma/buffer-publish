@@ -3,6 +3,7 @@
   "baseUrl": "https://publish.local.buffer.com",
   "env": {
     "STANDALONE": "false",
+    "API_ADDR": "https://api.bufferapp.com",
     "PUBLISH_LOGIN_EMAIL": "admin@bufferapp.com",
     "PUBLISH_LOGIN_PASSWORD": "password"
   }

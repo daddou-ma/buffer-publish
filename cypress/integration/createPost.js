@@ -5,6 +5,9 @@ const getRandomPostText = () => {
 };
 
 describe('Publish', function() {
+  before(() => {
+    cy.createTestUser();
+  });
   it('creates a new post', function() {
     cy.login();
     cy.visit('/');
