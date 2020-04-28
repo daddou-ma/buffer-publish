@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Toggle } from '@bufferapp/components';
 import { Row } from '@bufferapp/publish-shared-components';
 import { Text } from '@bufferapp/ui';
+import { useTranslation } from 'react-i18next';
 
 const switchStyle = {
   flex: 0.3,
@@ -17,23 +18,27 @@ const Notification = ({
   onToggleClick,
   toggleisEnabled,
   type,
-}) => (
-  <Row>
-    <div>
-      <Text type="h3">{title}</Text>
-      {description && <Text type="p">{description}</Text>}
-    </div>
-    <div style={switchStyle}>
-      <Toggle
-        onText={'Enabled'}
-        offText={'Disabled'}
-        on={toggleisEnabled}
-        size={'mini'}
-        onClick={() => onToggleClick(!toggleisEnabled, type)}
-      />
-    </div>
-  </Row>
-);
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Row>
+      <div>
+        <Text type="h3">{title}</Text>
+        {description && <Text type="p">{description}</Text>}
+      </div>
+      <div style={switchStyle}>
+        <Toggle
+          onText={t('common.enabled')}
+          offText={t('common.disabled')}
+          on={toggleisEnabled}
+          size="mini"
+          onClick={() => onToggleClick(!toggleisEnabled, type)}
+        />
+      </div>
+    </Row>
+  );
+};
 
 Notification.propTypes = {
   title: PropTypes.string.isRequired,

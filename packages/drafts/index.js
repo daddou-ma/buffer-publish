@@ -207,38 +207,6 @@ export default connect(
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
     },
-    onImageClick: draft => {
-      dispatch(
-        actions.handleImageClick({
-          draft: draft.draft,
-          profileId: ownProps.profileId,
-        })
-      );
-    },
-    onImageClose: draft => {
-      dispatch(
-        actions.handleImageClose({
-          draft: draft.draft,
-          profileId: ownProps.profileId,
-        })
-      );
-    },
-    onImageClickNext: draft => {
-      dispatch(
-        actions.handleImageClickNext({
-          draft: draft.draft,
-          profileId: ownProps.profileId,
-        })
-      );
-    },
-    onImageClickPrev: draft => {
-      dispatch(
-        actions.handleImageClickPrev({
-          draft: draft.draft,
-          profileId: ownProps.profileId,
-        })
-      );
-    },
     onComposerOverlayClick: () => {
       dispatch(
         modalsActions.showCloseComposerConfirmationModal({

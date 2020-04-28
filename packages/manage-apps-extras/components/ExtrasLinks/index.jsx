@@ -1,8 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import { Row } from '@bufferapp/publish-shared-components';
 import { Button, Text } from '@bufferapp/ui';
+import { useTranslation } from 'react-i18next';
 
 const openExtensionLink = () => {
   window.open('https://buffer.com/extensions', '_blank');
@@ -22,54 +22,57 @@ const openLinkAppStore = () => {
   );
 };
 
-const ExtrasLinks = () => (
-  <div>
-    <Text type="h2">Buffer Apps & Extras</Text>
-    <Text type="p">
-      Get the most out of Buffer with our mobile apps and browser extension.
-    </Text>
-    <Divider />
-    <Row>
-      <div>
-        <Text type="h3">Browser Extension</Text>
-        <Text type="p">
-          Our browser extension lets you share content as you browse the web.
-        </Text>
-      </div>
-      <Button
-        type="secondary"
-        label="Install the Browser extension"
-        onClick={() => openExtensionLink()}
-      />
-    </Row>
-    <Divider />
+const ExtrasLinks = () => {
+  const { t } = useTranslation();
+
+  return (
     <div>
-      <Text type="h3">Mobile Apps</Text>
-      <Text type="p">
-        Share content and manage your Buffer account on the go with our mobile
-        apps.
-      </Text>
-      <div style={{ display: 'flex' }}>
-        <div
-          style={{
-            marginRight: '0.5rem',
-          }}
-        >
-          <Button
-            type="secondary"
-            label="View on Apple Store"
-            onClick={() => openLinkAppStore()}
-          />
+      <Text type="h2">{t('preferences.appsAndExtras.title')}</Text>
+      <Text type="p">{t('preferences.appsAndExtras.description')}</Text>
+      <Divider />
+      <Row>
+        <div>
+          <Text type="h3">
+            {t('preferences.appsAndExtras.browserExtension')}
+          </Text>
+          <Text type="p">
+            {t('preferences.appsAndExtras.extensionDescription')}
+          </Text>
         </div>
         <Button
           type="secondary"
-          label="View on Google Play"
-          onClick={() => openLinkGooglePlay()}
+          label={t('preferences.appsAndExtras.installExtension')}
+          onClick={() => openExtensionLink()}
         />
+      </Row>
+      <Divider />
+      <div>
+        <Text type="h3">{t('preferences.appsAndExtras.mobileApps')}</Text>
+        <Text type="p">
+          {t('preferences.appsAndExtras.mobileAppsDescription')}
+        </Text>
+        <div style={{ display: 'flex' }}>
+          <div
+            style={{
+              marginRight: '0.5rem',
+            }}
+          >
+            <Button
+              type="secondary"
+              label={t('preferences.appsAndExtras.viewOnAppleStore')}
+              onClick={() => openLinkAppStore()}
+            />
+          </div>
+          <Button
+            type="secondary"
+            label={t('preferences.appsAndExtras.viewOnGooglePlay')}
+            onClick={() => openLinkGooglePlay()}
+          />
+        </div>
       </div>
+      <Divider />
     </div>
-    <Divider />
-  </div>
-);
+  );
+};
 
 export default ExtrasLinks;

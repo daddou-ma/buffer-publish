@@ -100,6 +100,30 @@ function createServer(app) {
 }
 
 /**
+ * Get the standalone session data from the local JSON file
+ */
+function getStandaloneSessionData() {
+  try {
+    return JSON.parse(
+      fs.readFileSync(paths.standaloneSession)
+    );
+  } catch (error) {
+    // eslint-disable-next-line
+    console.log(
+      `
+-------------------------------------------------------------------------------------------------------
+🚧  Please ensure you have created a \`standalone-session.json\` file in the packages/server/standalone directory.
+   For more details see the "Standalone Mode" section of the README.md.
+-------------------------------------------------------------------------------------------------------
+
+`,
+      error.message
+    );
+  }
+}
+
+
+/**
  * Middleware that adds our static user session data to the server.
  *
  * @param {Request} req
@@ -107,20 +131,8 @@ function createServer(app) {
  * @param {Function} next
  */
 function setStandaloneSessionMiddleware(req, res, next) {
-  let standaloneSessionData;
-  try {
-    standaloneSessionData = JSON.parse(
-      fs.readFileSync(paths.standaloneSession)
-    );
-  } catch (error) {
-    // eslint-disable-next-line
-    console.log(
-      `
-🚧 Please ensure you have created a \`standalone-session.json\` file in the packages/server directory.
-   For more details see the "Standalone Mode" section of the README.md.
-`,
-      error
-    );
+  const standaloneSessionData = getStandaloneSessionData();
+  if (!standaloneSessionData) {
     process.exit();
   }
   req.session = standaloneSessionData;
@@ -134,9 +146,16 @@ const bootMessage = `
    → https://publish.local.buffer.com
    ${dim}- Don't forget: \`yarn run watch\` in another terminal tab.${reset}`;
 
+function onBoot() {
+  // Run this to check
+  if (getStandaloneSessionData()) {
+    console.log(bootMessage);
+  }
+}
+
 module.exports = {
   loadEnv,
   createServer,
   setStandaloneSessionMiddleware,
-  bootMessage,
+  onBoot,
 };

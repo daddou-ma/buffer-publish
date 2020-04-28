@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import ViewCampaign from './index';
 
@@ -116,10 +115,6 @@ const postActions = {
   onDeleteConfirmClick: action('delete post'),
   onShareNowClick: action('share now'),
   onRequeueClick: action('requeue'),
-  onImageClick: action('image gallery open'),
-  onImageClose: action('image gallery close'),
-  onImageClickPrev: action('previous image'),
-  onImageClickNext: action('next image'),
 };
 
 storiesOf('Campaigns|ViewCampaign', module)
@@ -131,7 +126,6 @@ storiesOf('Campaigns|ViewCampaign', module)
       campaignPosts={campaignPosts}
       isLoading={false}
       hideAnalyzeReport={false}
-      translations={translations.campaigns.viewCampaign}
       campaignId="id"
       hasCampaignsFlip
       showComposer={false}
@@ -146,7 +140,6 @@ storiesOf('Campaigns|ViewCampaign', module)
       campaignPosts={[]}
       isLoading={false}
       hideAnalyzeReport={false}
-      translations={translations.campaigns.viewCampaign}
       campaignId="id"
       hasCampaignsFlip
       showComposer={false}

@@ -6,10 +6,6 @@ import keyWrapper from '@bufferapp/keywrapper';
 export const actionTypes = keyWrapper('SENT', {
   OPEN_COMPOSER: 0,
   HIDE_COMPOSER: 0,
-  POST_IMAGE_CLICKED: 0,
-  POST_IMAGE_CLICKED_NEXT: 0,
-  POST_IMAGE_CLICKED_PREV: 0,
-  POST_IMAGE_CLOSED: 0,
   FETCH_SENT_POSTS: 0,
   VIEW_CAMPAIGN_PAGE: 0,
 });
@@ -74,34 +70,6 @@ const getPostUpdateId = action => {
   }
 };
 
-const postReducer = (state, action) => {
-  switch (action.type) {
-    case actionTypes.POST_IMAGE_CLICKED:
-      return {
-        ...state,
-        isLightboxOpen: true,
-        currentImage: 0,
-      };
-    case actionTypes.POST_IMAGE_CLOSED:
-      return {
-        ...state,
-        isLightboxOpen: false,
-      };
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-      return {
-        ...state,
-        currentImage: state.currentImage + 1,
-      };
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
-      return {
-        ...state,
-        currentImage: state.currentImage - 1,
-      };
-    default:
-      return state;
-  }
-};
-
 const postsReducer = (state, action) => {
   switch (action.type) {
     case queueActionTypes.POST_SENT:
@@ -109,18 +77,6 @@ const postsReducer = (state, action) => {
         ...state,
         [getPostUpdateId(action)]: action.post,
       };
-    case actionTypes.POST_IMAGE_CLICKED:
-    case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV: {
-      return {
-        ...state,
-        [getPostUpdateId(action)]: postReducer(
-          state[getPostUpdateId(action)],
-          action
-        ),
-      };
-    }
     default:
       return state;
   }
@@ -163,11 +119,7 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         loading: false,
       };
-    case queueActionTypes.POST_SENT:
-    case actionTypes.POST_IMAGE_CLICKED:
-    case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV: {
+    case queueActionTypes.POST_SENT: {
       const updateTotal = action.type === queueActionTypes.POST_SENT;
       return {
         ...state,
@@ -189,10 +141,6 @@ export default (state = initialState, action) => {
     case `sentPosts_${dataFetchActionTypes.FETCH_FAIL}`:
     case queueActionTypes.POST_SENT:
     case queueActionTypes.POST_COUNT_UPDATED:
-    case actionTypes.POST_IMAGE_CLICKED:
-    case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
       profileId = getProfileId(action);
       if (profileId) {
         return {
@@ -238,30 +186,6 @@ export const actions = {
   }),
   handleComposerCreateSuccess: () => ({
     type: actionTypes.HIDE_COMPOSER,
-  }),
-  handleImageClick: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClickNext: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED_NEXT,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClickPrev: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED_PREV,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClose: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLOSED,
-    updateId: post.id,
-    post,
-    profileId,
   }),
   fetchSentPosts: ({ profileId }) => ({
     type: actionTypes.FETCH_SENT_POSTS,

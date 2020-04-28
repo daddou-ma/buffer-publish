@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import { Text } from '@bufferapp/components';
 import Draft from './index';
 
 const draftDetails = {
@@ -52,6 +51,21 @@ const links = [
 const retweetComment =
   'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
 
+const draftContent = {
+  type: 'text',
+  text: 'I am a text-only test post.',
+};
+
+const draftContentRetweet = {
+  ...draftContent,
+  retweetProfile,
+};
+
+const draftContentRetweetWithComment = {
+  ...draftContentRetweet,
+  retweetComment,
+};
+
 const draftsView = 'drafts';
 const approvalView = 'approval';
 const scheduledAt = 123456789;
@@ -66,20 +80,7 @@ storiesOf('Cards|Drafts/Draft', module)
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
-    />
-  ))
-  .add('post text with line breaks', () => (
-    <Draft
-      hasPermission
-      draftDetails={draftDetails}
-      onApproveClick={linkTo('Draft', 'isWorking')}
-      onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
-      onEditClick={action('edit-click')}
-      view={draftsView}
-      text={'I am a text-only \n test post \n with line breaks.'}
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('scheduled', () => (
@@ -91,8 +92,7 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       scheduledAt={scheduledAt}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('manager', () => (
@@ -106,8 +106,7 @@ storiesOf('Cards|Drafts/Draft', module)
       manager
       draftDetails={draftDetails}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('isConfirmingDelete', () => (
@@ -119,8 +118,7 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('isDeleting', () => (
@@ -132,8 +130,7 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('isWorking', () => (
@@ -145,8 +142,7 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('isWorkingManager', () => (
@@ -159,8 +155,7 @@ storiesOf('Cards|Drafts/Draft', module)
       isWorking
       draftDetails={draftDetails}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('approval view: isMoving', () => (
@@ -173,8 +168,7 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       view={approvalView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('retweet', () => (
@@ -188,8 +182,7 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       retweetProfile={retweetProfile}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContentRetweet}
     />
   ))
   .add('retweet with comment', () => (
@@ -205,8 +198,7 @@ storiesOf('Cards|Drafts/Draft', module)
       retweetProfile={retweetProfile}
       retweetComment={retweetComment}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContentRetweetWithComment}
     />
   ))
   .add('past due', () => (
@@ -220,8 +212,7 @@ storiesOf('Cards|Drafts/Draft', module)
       onRescheduleClick={action('reschedule-click')}
       scheduledAt={scheduledAt}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('past due no permission', () => (
@@ -236,8 +227,7 @@ storiesOf('Cards|Drafts/Draft', module)
       onRescheduleClick={action('reschedule-click')}
       scheduledAt={scheduledAt}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ))
   .add('no permission', () => (
@@ -249,7 +239,6 @@ storiesOf('Cards|Drafts/Draft', module)
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       view={draftsView}
-      text="I am a text-only test post."
-      type="text"
+      postContent={draftContent}
     />
   ));

@@ -58,10 +58,6 @@ const DraftList = ({
   isDisconnectedProfile,
   canStartBusinessTrial,
   hasFirstCommentFlip,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onComposerOverlayClick,
 }) => {
   if (features.isProUser()) {
@@ -153,10 +149,6 @@ const DraftList = ({
             onMoveToDraftsClick={onMoveToDraftsClick}
             onRequestApprovalClick={onRequestApprovalClick}
             onRescheduleClick={onRescheduleClick}
-            onImageClick={onImageClick}
-            onImageClickNext={onImageClickNext}
-            onImageClickPrev={onImageClickPrev}
-            onImageClose={onImageClose}
             draggable={false}
             type="drafts"
             hasFirstCommentFlip={hasFirstCommentFlip}
@@ -193,10 +185,6 @@ DraftList.propTypes = {
   isLockedProfile: PropTypes.bool,
   isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
-  onImageClick: PropTypes.func.isRequired,
-  onImageClose: PropTypes.func.isRequired,
-  onImageClickNext: PropTypes.func.isRequired,
-  onImageClickPrev: PropTypes.func.isRequired,
   onComposerOverlayClick: PropTypes.func.isRequired,
 };
 

@@ -40,10 +40,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
     />
   ))
   .add('sent', () => (
@@ -53,10 +49,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       isSent
     />
   ))
@@ -67,10 +59,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       onShareAgainClick={action('onShareAgainClick')}
       isSent
       isBusinessAccount
@@ -83,10 +71,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       onMobileClick={action('onMobileClick')}
       onShareAgainClick={action('onShareAgainClick')}
       isPastReminder
@@ -100,10 +84,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       onMobileClick={action('onMobileClick')}
       onShareAgainClick={action('onShareAgainClick')}
       isPastReminder
@@ -118,10 +98,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       onMobileClick={action('onMobileClick')}
       onShareAgainClick={action('onShareAgainClick')}
       isPastReminder
@@ -136,10 +112,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
     />
   ))
   .add('link posts', () => (
@@ -149,10 +121,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
     />
   ))
   .add('image posts', () => (
@@ -162,10 +130,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
     />
   ))
   .add('multiple image posts', () => (
@@ -175,10 +139,6 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
     />
   ))
   .add('video posts', () => (
@@ -188,9 +148,5 @@ storiesOf('PostList', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
     />
   ));
