@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CloseButton from '../components/CloseButton';
-import AppActionCreators from '../action-creators/AppActionCreators';
+import CloseButton from './shared/CloseButton';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
 import { AttachmentTypes } from '../AppConstants';
 

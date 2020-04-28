@@ -24,8 +24,8 @@ import PinterestComposerBar from './PinterestComposerBar';
 import LocationComposerBar from './LocationComposerBar';
 import ShopgridComposerBar from './ShopgridComposerBar';
 import FirstCommentComposerBar from './FirstCommentComposerBar';
-import TooltipList from './TooltipList';
-import Button from './Button';
+import TooltipList from './shared/TooltipList';
+import Button from './shared/Button';
 import {
   AttachmentTypes,
   NotificationScopes,
@@ -921,7 +921,7 @@ class Composer extends React.Component {
       draft.instagramFeedback.some(feedback => feedback.code === 'NOT_ENABLED');
 
     const canAddUserTag =
-      isProAndUpOrTeamMember && 
+      isProAndUpOrTeamMember &&
       this.isInstagram() &&
       selectedProfiles.some(profile => profile.instagramDirectEnabled) &&
       /* don't allow user to add tag if post is a reminder though its ok if more than one

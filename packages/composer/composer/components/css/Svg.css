@@ -1,9 +1,0 @@
-/* Below are normalize.css rules for reliable base styles */
-
-/**
- * Correct overflow not hidden in IE 9/10/11.
- */
-
-.svg:not(:root) {
-  overflow: hidden;
-}
