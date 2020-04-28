@@ -19,6 +19,7 @@ module.exports = method(
       });
       if (organization) {
         account.productSolutionName =
+          organization.metadata &&
           organization.metadata.account &&
           organization.metadata.account.productSolutionName;
       }
