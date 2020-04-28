@@ -4,11 +4,13 @@ const getRandomPostText = () => {
     .substring(7)}`;
 };
 
-describe('Publish', function() {
-  before(() => {
-    cy.createTestUser();
+describe('Publish', () => {
+  it('loads', () => {
+    cy.login();
+    cy.visit('/');
+    cy.get('[data-cy=open-composer-button]').should('exist');
   });
-  it('creates a new post', function() {
+  it('creates a new post', () => {
     cy.login();
     cy.visit('/');
     cy.get('[data-cy=open-composer-button]').click();

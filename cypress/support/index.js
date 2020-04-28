@@ -9,3 +9,7 @@ import './login';
  * https://github.com/archfz/cypress-terminal-report
  */
 require('cypress-terminal-report').installSupport();
+
+before(() => {
+  cy.createTestUser();
+});
