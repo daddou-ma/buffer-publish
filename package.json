@@ -30,7 +30,7 @@
     "url": "https://github.com/bufferapp/project-donut/issues"
   },
   "homepage": "https://github.com/bufferapp/project-donut#readme",
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "^7.8.0",
     "@babel/plugin-proposal-async-generator-functions": "7.2.0",
     "@babel/plugin-proposal-class-properties": "7.5.5",
@@ -79,7 +79,7 @@
     "core-js": "3.2.1",
     "cors": "^2.8.5",
     "css-loader": "^0.28.11",
-    "cypress": "^4.4.1",
+    "cypress": "4.5.0",
     "cypress-terminal-report": "^1.2.1",
     "decorate-component-with-props": "1.0.2",
     "deep-freeze": "0.0.1",
@@ -169,8 +169,10 @@
     "xss": "1.0.6",
     "yaml": "^1.9.2"
   },
+  "devDependencies": {
+    "inquirer": "7.1.0"
+  },
   "workspaces": [
     "packages/*"
-  ],
-  "dependencies": {}
+  ]
 }
