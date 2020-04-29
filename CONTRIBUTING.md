@@ -181,7 +181,10 @@ const Welcome = ({ name = 'John Smith' }) =>
 For i18n, at the moment we have an internal package called `@bufferapp/publish-i18n`, however we are migrating all our String handling to `React.i18n`, so whenever you are working on a component, please defaut to [`React.i18n`](https://react.i18next.com/).
 
 **Adding strings to the translations JSON files:**
-- When adding a new string to the translations/*.json files, make sure to always add them in both files: `en-us.json` and `es-es.json` file, is completely fine if the text is in english for the Spanish json, José, Karël or Maya will make sure to translate it eventually 🙂, but this is mainly to keep consistency among all translation files.
+- When working with strings in a component (new or modified), please make sure to always add them in the `translations/en-us.json`, we are trying to move all hard coded strings for a better structure.
+
+**Note:**
+If we start to adopt i18n more widely in the project, we should make the conscious decision to also add the translations to the `es-es.json` file, for the time being, we'll only be defaulting to the `en-us` file until we make a further decision on this.
 
 **Some Examples on how to work with React.i18n**
 
