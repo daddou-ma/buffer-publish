@@ -85,14 +85,14 @@ const ListItem = ({
       </LeftWrapper>
       <Group>
         {campaign.dateRange ? (
-          <React.Fragment>
+          <>
             <Icon displaySkeleton={displaySkeleton}>
               <CalendarIcon size="medium" />
             </Icon>
             <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
               {campaign.dateRange}
             </TextWithSkeleton>
-          </React.Fragment>
+          </>
         ) : (
           ''
         )}
