@@ -86,10 +86,16 @@ export default (state = initialState, action) => {
     case actionTypes.PUSHER_CAMPAIGN_UPDATED: {
       const { campaign } = state;
       const updatedCampaign = campaignParser(action.campaign);
+      const campaignToLoad =
+        updatedCampaign.id === campaign.id ? updatedCampaign : campaign;
+      const channels = campaign.channels || state.campaign.channels;
+
       return {
         ...state,
-        campaign:
-          updatedCampaign.id === campaign.id ? updatedCampaign : campaign,
+        campaign: {
+          ...campaignToLoad,
+          channels,
+        },
       };
     }
     case `getCampaign_${dataFetchActionTypes.FETCH_SUCCESS}`: {
@@ -169,10 +175,6 @@ export default (state = initialState, action) => {
         );
         return {
           ...state,
-          campaign: {
-            ...state.campaign,
-            scheduled: state.campaign.scheduled + 1,
-          },
           campaignPosts: [...state.campaignPosts, parsedItem],
         };
       }
@@ -191,10 +193,6 @@ export default (state = initialState, action) => {
         );
         return {
           ...state,
-          campaign: {
-            ...state.campaign,
-            scheduled: state.campaign.scheduled - 1,
-          },
           campaignPosts: newCampaignPosts,
         };
       }
