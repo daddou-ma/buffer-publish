@@ -1,31 +1,29 @@
 import React, { Fragment } from 'react';
-
+import PropTypes from 'prop-types';
 import TwoFactorAuth from '@bufferapp/publish-two-factor-auth';
 import { Divider } from '@bufferapp/components';
 import { Row } from '@bufferapp/publish-shared-components';
 import { Text, Button } from '@bufferapp/ui';
+import { useTranslation } from 'react-i18next';
 
-const ChangePassword = () => (
+const ChangePassword = ({ t }) => (
   <Row>
     <div
       style={{
         marginRight: '1rem',
       }}
     >
-      <Text type="h3">Password</Text>
+      <Text type="h3">{t('preferences.security.password')}</Text>
       <div
         style={{
           marginTop: '0.5rem',
         }}
       >
-        <Text type="p">
-          Use your password to sign in to Buffer on the web and mobile apps.
-          Make it nice and secure!
-        </Text>
+        <Text type="p">{t('preferences.security.passwordDescription')}</Text>
       </div>
     </div>
     <Button
-      label="Change Your Password"
+      label={t('preferences.security.changeYourPassword')}
       type="secondary"
       onClick={() =>
         window.location.assign(
@@ -36,16 +34,24 @@ const ChangePassword = () => (
   </Row>
 );
 
-const Security = () => (
-  <Fragment>
-    <Text type="h2">Security</Text>
-    <Text type="p">Add an extra layer of security to your account.</Text>
-    <Divider />
-    <ChangePassword />
-    <Divider />
-    <TwoFactorAuth />
-    <Divider />
-  </Fragment>
-);
+ChangePassword.propTypes = {
+  t: PropTypes.func.isRequired,
+};
+
+const Security = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Fragment>
+      <Text type="h2">{t('preferences.security.title')}</Text>
+      <Text type="p">{t('preferences.security.addSecurity')}</Text>
+      <Divider />
+      <ChangePassword t={t} />
+      <Divider />
+      <TwoFactorAuth />
+      <Divider />
+    </Fragment>
+  );
+};
 
 export default Security;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Lightbox from 'react-images';
@@ -28,24 +28,24 @@ const ThumbnailTag = styled.span`
   left: 0.7rem;
 `;
 
-const UpdateMediaContent = ({
-  onImageClick,
-  imageSrc,
-  imageUrls,
-  isLightboxOpen,
-  onImageClickPrev,
-  onImageClickNext,
-  onImageClose,
-  currentImage,
-  tag,
-  type,
-}) => {
+const UpdateMediaContent = ({ imageSrc, imageUrls, type }) => {
+  // State
+  const [isLightboxOpen, openLightbox] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const isVideo = type === 'video';
   const isMultipleImage = type === 'multipleImage';
-  const isSingleImage = type === 'image' || type === 'video';
+  const isSingleImage = type === 'image' || isVideo;
   const imageArray = isMultipleImage ? imageUrls : [imageSrc];
   const images = imageArray?.map(url => ({ src: `${url}` }));
+
   return (
-    <MediaWrapper onClick={onImageClick}>
+    <MediaWrapper
+      onClick={() => {
+        openLightbox(true);
+        setCurrentImage(0);
+      }}
+    >
       {isMultipleImage && (
         <MultipleImages
           border="rounded"
@@ -71,16 +71,22 @@ const UpdateMediaContent = ({
       <Lightbox
         images={images}
         isOpen={isLightboxOpen}
-        onClickPrev={onImageClickPrev}
-        onClickNext={onImageClickNext}
-        onClose={onImageClose}
-        currentImage={isMultipleImage ? currentImage : null}
+        onClickPrev={() => {
+          setCurrentImage(currentImage - 1);
+        }}
+        onClickNext={() => {
+          setCurrentImage(currentImage + 1);
+        }}
+        onClose={() => {
+          openLightbox(false);
+        }}
+        currentImage={currentImage}
         backdropClosesModal
         showImageCount={false}
       />
-      {isSingleImage && tag && (
+      {isVideo && (
         <ThumbnailTag>
-          <IdTag>{tag}</IdTag>
+          <IdTag>VIDEO</IdTag>
         </ThumbnailTag>
       )}
     </MediaWrapper>
@@ -90,23 +96,13 @@ const UpdateMediaContent = ({
 UpdateMediaContent.propTypes = {
   type: PropTypes.oneOf(['text', 'image', 'multipleImage', 'link', 'video'])
     .isRequired,
-  onImageClick: PropTypes.func.isRequired,
-  onImageClickPrev: PropTypes.func.isRequired,
-  onImageClickNext: PropTypes.func.isRequired,
-  onImageClose: PropTypes.func.isRequired,
   imageSrc: PropTypes.string,
-  tag: PropTypes.string,
-  isLightboxOpen: PropTypes.bool,
   imageUrls: PropTypes.arrayOf(PropTypes.string),
-  currentImage: PropTypes.number,
 };
 
 UpdateMediaContent.defaultProps = {
   imageSrc: '',
-  tag: '',
-  isLightboxOpen: false,
   imageUrls: [],
-  currentImage: undefined,
 };
 
 export default UpdateMediaContent;

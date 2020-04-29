@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import { Text } from '@bufferapp/components';
 import Draft from './index';
 
 const draftDetails = {
@@ -52,17 +51,24 @@ const links = [
 const retweetComment =
   'What is a Product Designer? An awesome story by @jgadapee over on Medium! http://buff.ly/1LTbUqv';
 
+const draftContent = {
+  type: 'text',
+  text: 'I am a text-only test post.',
+};
+
+const draftContentRetweet = {
+  ...draftContent,
+  retweetProfile,
+};
+
+const draftContentRetweetWithComment = {
+  ...draftContentRetweet,
+  retweetComment,
+};
+
 const draftsView = 'drafts';
 const approvalView = 'approval';
 const scheduledAt = 123456789;
-
-const children = <Text size={'mini'}>{'I am a text-only test post.'}</Text>;
-
-const childrenLineBreaks = (
-  <Text size="mini">
-    {'I am a text-only \n test post \n with line breaks.'}
-  </Text>
-);
 
 storiesOf('Cards|Drafts/Draft', module)
   .addDecorator(withA11y)
@@ -74,21 +80,8 @@ storiesOf('Cards|Drafts/Draft', module)
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       view={draftsView}
-    >
-      {children}
-    </Draft>
-  ))
-  .add('post text with line breaks', () => (
-    <Draft
-      hasPermission
-      draftDetails={draftDetails}
-      onApproveClick={linkTo('Draft', 'isWorking')}
-      onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
-      onEditClick={action('edit-click')}
-      view={draftsView}
-    >
-      {childrenLineBreaks}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('scheduled', () => (
     <Draft
@@ -99,9 +92,8 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       scheduledAt={scheduledAt}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('manager', () => (
     <Draft
@@ -114,9 +106,8 @@ storiesOf('Cards|Drafts/Draft', module)
       manager
       draftDetails={draftDetails}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('isConfirmingDelete', () => (
     <Draft
@@ -127,9 +118,8 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('isDeleting', () => (
     <Draft
@@ -140,9 +130,8 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('isWorking', () => (
     <Draft
@@ -153,9 +142,8 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('isWorkingManager', () => (
     <Draft
@@ -167,9 +155,8 @@ storiesOf('Cards|Drafts/Draft', module)
       isWorking
       draftDetails={draftDetails}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('approval view: isMoving', () => (
     <Draft
@@ -181,9 +168,8 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       draftDetails={draftDetails}
       view={approvalView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('retweet', () => (
     <Draft
@@ -196,9 +182,8 @@ storiesOf('Cards|Drafts/Draft', module)
       onEditClick={action('edit-click')}
       retweetProfile={retweetProfile}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContentRetweet}
+    />
   ))
   .add('retweet with comment', () => (
     <Draft
@@ -213,9 +198,8 @@ storiesOf('Cards|Drafts/Draft', module)
       retweetProfile={retweetProfile}
       retweetComment={retweetComment}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContentRetweetWithComment}
+    />
   ))
   .add('past due', () => (
     <Draft
@@ -228,9 +212,8 @@ storiesOf('Cards|Drafts/Draft', module)
       onRescheduleClick={action('reschedule-click')}
       scheduledAt={scheduledAt}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('past due no permission', () => (
     <Draft
@@ -244,9 +227,8 @@ storiesOf('Cards|Drafts/Draft', module)
       onRescheduleClick={action('reschedule-click')}
       scheduledAt={scheduledAt}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ))
   .add('no permission', () => (
     <Draft
@@ -257,7 +239,6 @@ storiesOf('Cards|Drafts/Draft', module)
       onDeleteConfirmClick={linkTo('Draft', 'isDeleting')}
       onEditClick={action('edit-click')}
       view={draftsView}
-    >
-      {children}
-    </Draft>
+      postContent={draftContent}
+    />
   ));

@@ -12,7 +12,7 @@ import { actionTypes, actions } from './reducer';
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
-    case profileActionTypes.SELECT_PROFILE:
+    case profileActionTypes.SELECT_PROFILE: {
       dispatch(
         dataFetchActions.fetch({
           name: 'queuedPosts',
@@ -23,7 +23,24 @@ export default ({ dispatch, getState }) => next => action => {
           },
         })
       );
+
+      if (getState().appSidebar.user.plan !== 'awesome') {
+        const sidebar = getState().profileSidebar;
+        const profileId = sidebar.selectedProfileId;
+        const isIGBusiness = sidebar.selectedProfile.service_type === 'business';
+        if (!isIGBusiness) {
+          dispatch(
+            dataFetchActions.fetch({
+              name: 'checkInstagramBusiness',
+              args: {
+                profileId,
+              },
+            })
+          );
+        }
+      }
       break;
+    }
     case `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `updatePausedSchedules_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_SUCCESS}`:

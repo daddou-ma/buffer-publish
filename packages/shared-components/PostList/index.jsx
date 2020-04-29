@@ -4,11 +4,7 @@ import { List, Text } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
 import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import TextPost from '../TextPost';
-import ImagePost from '../ImagePost';
-import MultipleImagesPost from '../MultipleImagesPost';
-import LinkPost from '../LinkPost';
-import VideoPost from '../VideoPost';
+import Post from '../Post';
 import Story from '../Story';
 import BannerAdvancedAnalytics from '../BannerAdvancedAnalytics';
 
@@ -34,15 +30,6 @@ const HeaderStyle = styled.div`
   margin-left: 0.5rem;
 `;
 
-const postTypeComponentMap = new Map([
-  ['text', TextPost],
-  ['image', ImagePost],
-  ['multipleImage', MultipleImagesPost],
-  ['link', LinkPost],
-  ['video', VideoPost],
-  ['storyGroup', Story],
-]);
-
 /* eslint-disable react/prop-types */
 
 const renderPost = ({
@@ -50,10 +37,6 @@ const renderPost = ({
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onCampaignTagClick,
   onDropPost,
   onSwapPosts,
@@ -70,14 +53,14 @@ const renderPost = ({
   const campaignId = post.campaignDetails?.id ?? null;
   const postWithEventHandlers = {
     ...post,
+    service_geolocation_name: post.locationName,
+    source_url: post.sourceUrl,
+    subprofile_id: post.subprofileID,
+    service_user_tags: post.userTags,
     key: post.id,
     onDeleteConfirmClick: () => onDeleteConfirmClick({ post }),
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
-    onImageClick: () => onImageClick({ post }),
-    onImageClickNext: () => onImageClickNext({ post }),
-    onImageClickPrev: () => onImageClickPrev({ post }),
-    onImageClose: () => onImageClose({ post }),
     onCampaignTagClick: () => onCampaignTagClick(campaignId),
     onDropPost,
     onSwapPosts,
@@ -91,8 +74,7 @@ const renderPost = ({
     profileService,
     profileServiceType,
   };
-  let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || TextPost;
+  const PostComponent = post.type === 'storyGroup' ? Story : Post;
 
   return <PostComponent {...postWithEventHandlers} />;
 };
@@ -111,10 +93,6 @@ const PostList = ({
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onCampaignTagClick,
   onDropPost,
   onSwapPosts,
@@ -155,10 +133,6 @@ const PostList = ({
               onDeleteConfirmClick,
               onEditClick,
               onShareNowClick,
-              onImageClick,
-              onImageClickNext,
-              onImageClickPrev,
-              onImageClose,
               onCampaignTagClick,
               onDropPost,
               onSwapPosts,
@@ -233,10 +207,6 @@ PostList.propTypes = {
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
   onCampaignTagClick: PropTypes.func,
   onDropPost: PropTypes.func,
   onSwapPosts: PropTypes.func,

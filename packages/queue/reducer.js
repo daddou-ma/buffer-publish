@@ -12,10 +12,6 @@ export const actionTypes = keyWrapper('QUEUE', {
   POST_CONFIRMED_DELETE: 0,
   POST_ERROR: 0,
   POST_SHARE_NOW: 0,
-  POST_IMAGE_CLICKED: 0,
-  POST_IMAGE_CLICKED_NEXT: 0,
-  POST_IMAGE_CLICKED_PREV: 0,
-  POST_IMAGE_CLOSED: 0,
   OPEN_COMPOSER: 0,
   HIDE_COMPOSER: 0,
   POST_COUNT_UPDATED: 0,
@@ -157,27 +153,6 @@ const postReducer = (state, action) => {
         ...state,
         isWorking: true,
       };
-    case actionTypes.POST_IMAGE_CLICKED:
-      return {
-        ...state,
-        isLightboxOpen: true,
-        currentImage: 0,
-      };
-    case actionTypes.POST_IMAGE_CLOSED:
-      return {
-        ...state,
-        isLightboxOpen: false,
-      };
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-      return {
-        ...state,
-        currentImage: state.currentImage + 1,
-      };
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
-      return {
-        ...state,
-        currentImage: state.currentImage - 1,
-      };
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
@@ -271,10 +246,6 @@ const postsReducer = (state = {}, action) => {
     case actionTypes.POST_UPDATED:
     case actionTypes.POST_CONFIRMED_DELETE:
     case actionTypes.POST_SHARE_NOW:
-    case actionTypes.POST_IMAGE_CLICKED:
-    case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
     case actionTypes.POST_ERROR:
     case actionTypes.POST_DROPPED:
     case `sharePostNow_${dataFetchActionTypes.FETCH_FAIL}`:
@@ -350,10 +321,6 @@ const profileReducer = (state = profileInitialState, action) => {
     case actionTypes.POST_UPDATED:
     case actionTypes.POST_CONFIRMED_DELETE:
     case actionTypes.POST_DELETED:
-    case actionTypes.POST_IMAGE_CLICKED:
-    case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
     case actionTypes.POST_SHARE_NOW:
     case actionTypes.POST_SENT:
     case draftActionTypes.DRAFT_APPROVED:
@@ -385,10 +352,6 @@ export default (state = initialState, action) => {
     case actionTypes.POST_CONFIRMED_DELETE:
     case actionTypes.POST_DELETED:
     case actionTypes.POST_ERROR:
-    case actionTypes.POST_IMAGE_CLICKED:
-    case actionTypes.POST_IMAGE_CLOSED:
-    case actionTypes.POST_IMAGE_CLICKED_NEXT:
-    case actionTypes.POST_IMAGE_CLICKED_PREV:
     case actionTypes.POST_SHARE_NOW:
     case actionTypes.POST_SENT:
     case actionTypes.POST_COUNT_UPDATED:
@@ -466,30 +429,6 @@ export const actions = {
   }),
   handleShareNowClick: ({ post, profileId }) => ({
     type: actionTypes.POST_SHARE_NOW,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClick: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClickNext: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED_NEXT,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClickPrev: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLICKED_PREV,
-    updateId: post.id,
-    post,
-    profileId,
-  }),
-  handleImageClose: ({ post, profileId }) => ({
-    type: actionTypes.POST_IMAGE_CLOSED,
     updateId: post.id,
     post,
     profileId,

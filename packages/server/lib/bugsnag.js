@@ -49,18 +49,20 @@ const getBugsnagConfig = (appType, userId) => ({
 });
 
 /**
- * Generate a script to pass Bugsnag config to our React app
- * (see `web/index.jsx` for implementation on the front-end)
- *
- * @param {String} userId  The Buffer user ID
+ * Generate a script tag for passing Bugsnag config to our React app.
  */
-const getBugsnagScript = userId => `
-<script type="text/javascript">
-  window._bugsnagConfig = ${JSON.stringify(
-    getBugsnagConfig(APP_TYPE_FRONTEND, userId)
-  )};
-</script>
-`;
+const getBugsnagScript = ({ userId, isProduction, isStandalone }) => {
+  if (isProduction && !isStandalone) {
+    return `
+    <script type="text/javascript">
+      window._bugsnagConfig = ${JSON.stringify(
+        getBugsnagConfig(APP_TYPE_FRONTEND, userId)
+      )};
+    </script>
+    `;
+  }
+  return '';
+};
 
 /**
  * Create a Bugsnag client for our Node/express server

@@ -1,9 +1,9 @@
-import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { Provider } from 'react-redux';
+import i18n from '@bufferapp/publish-web/components/i18n';
 
 import BillingUpgradeCTABanner from './index';
 
@@ -49,6 +49,7 @@ const fakeUser = {
   avatar: '',
   features: ['paid_users_in_new_publish'],
   trial: userOnTrial,
+  language: 'en-US',
 };
 
 function createMockStore(business, onTrial) {
@@ -56,11 +57,6 @@ function createMockStore(business, onTrial) {
     productFeatures: {
       planName: business ? 'business' : 'pro',
       features: {},
-    },
-    i18n: {
-      translations: {
-        example: {},
-      },
     },
     appSidebar: {
       user: {
@@ -77,12 +73,13 @@ function createMockStore(business, onTrial) {
 const storeBusiness = createMockStore(true, false);
 const storePro = createMockStore(false, true);
 
+i18n.changeLanguage(fakeUser.language);
+
 storiesOf('BillingUpgradeCTABanner', module)
   .addDecorator(withA11y)
   .add('default', () => (
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner
-        translations={translations['billing-upgrade-cta-banner']}
         onClickStartSubscription={action('startSubscription')}
         trial={userWithoutTrial}
         profileCount={1}
@@ -92,7 +89,6 @@ storiesOf('BillingUpgradeCTABanner', module)
   .add('free user on pro trial no billing info', () => (
     <Provider store={storePro}>
       <BillingUpgradeCTABanner
-        translations={translations['billing-upgrade-cta-banner']}
         onClickStartSubscription={action('startSubscription')}
         trial={userOnTrial}
         profileCount={1}
@@ -102,7 +98,6 @@ storiesOf('BillingUpgradeCTABanner', module)
   .add('free user on pro trial with billing info', () => (
     <Provider store={storePro}>
       <BillingUpgradeCTABanner
-        translations={translations['billing-upgrade-cta-banner']}
         onClickStartSubscription={action('startSubscription')}
         trial={userOnTrialWithBilling}
         profileCount={1}
@@ -112,7 +107,6 @@ storiesOf('BillingUpgradeCTABanner', module)
   .add('pro user on business trial no billing info', () => (
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner
-        translations={translations['billing-upgrade-cta-banner']}
         onClickStartSubscription={action('startSubscription')}
         trial={userOnTrial}
         profileCount={1}
@@ -124,7 +118,6 @@ storiesOf('BillingUpgradeCTABanner', module)
     () => (
       <Provider store={storeBusiness}>
         <BillingUpgradeCTABanner
-          translations={translations['billing-upgrade-cta-banner']}
           onClickStartSubscription={action('startSubscription')}
           trial={userOnTrial}
           profileCount={0}
@@ -135,7 +128,6 @@ storiesOf('BillingUpgradeCTABanner', module)
   .add('pro user on business trial with billing info', () => (
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner
-        translations={translations['billing-upgrade-cta-banner']}
         onClickStartSubscription={action('startSubscription')}
         trial={userOnTrialWithBilling}
         profileCount={1}

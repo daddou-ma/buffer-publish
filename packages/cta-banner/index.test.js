@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Button } from '@bufferapp/ui';
-import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import CTABanner, { reducer, actions, actionTypes, middleware } from './index';
 import BillingUpdateCTABanner from './components/BillingUpgradeCTABanner';
 
@@ -29,12 +28,6 @@ describe('CtaBanner', () => {
         },
         ctaBanner: {
           profileCount: 1,
-        },
-        i18n: {
-          translations: {
-            'billing-upgrade-cta-banner':
-              translations['billing-upgrade-cta-banner'],
-          },
         },
         productFeatures: {
           planName: 'business',

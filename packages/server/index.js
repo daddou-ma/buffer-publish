@@ -1,10 +1,19 @@
 const isProduction = process.env.NODE_ENV === 'production';
 
 /**
+ * In standalone mode, load env vars right away
+ */
+const isStandalone = process.env.STANDALONE === 'true';
+const standalone = require('./standalone'); // eslint-disable-line
+if (isStandalone) {
+  standalone.loadEnv();
+}
+
+/**
  * Add Datadog APM in production
  * This must come before importing any instrumented module.
  */
-if (isProduction) {
+if (isProduction && !isStandalone) {
   // eslint-disable-next-line
   require('dd-trace').init({
     env: 'production',
@@ -45,16 +54,31 @@ const { getBugsnagClient } = require('./lib/bugsnag');
 const { getStaticAssets } = require('./lib/assets');
 const getHtml = require('./lib/generateIndexHtml');
 
+// No nginx reverseproxy in standalone mode, so we need to do SSL
+const PORT = isStandalone ? 443 : 80;
+
 const app = express();
-const server = http.createServer(app);
+const server = isStandalone
+  ? standalone.createServer(app)
+  : http.createServer(app);
 
 app.set('isProduction', isProduction);
 
-if (isProduction) {
+if (isProduction && !isStandalone) {
   app.set('bugsnag', getBugsnagClient());
 }
 
-app.use(bufflog.middleware());
+/**
+ * Don't use logging middleware in standalone mode –
+ * Keeps the terminal cleaner and reduces noise.
+ */
+if (!isStandalone) {
+  app.use(bufflog.middleware());
+}
+
+// Load our static assets manifest
+const staticAssets = getStaticAssets({ isProduction, isStandalone });
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(helmet.frameguard({ action: 'sameorigin' }));
@@ -72,13 +96,18 @@ app.use('*', (req, res, next) => {
 // Favicon
 setupFaviconRoutes(app, isProduction);
 
-// All routes after this have access to the user session
-app.use(
-  setRequestSessionMiddleware({
-    production: isProduction,
-    sessionKeys: ['publish', 'global'],
-  })
-);
+if (isStandalone) {
+  // Use a static session
+  app.use(standalone.setStandaloneSessionMiddleware);
+} else {
+  // All routes after this have access to the user session
+  app.use(
+    setRequestSessionMiddleware({
+      production: isProduction,
+      sessionKeys: ['publish', 'global'],
+    })
+  );
+}
 
 // Setup our RPC handler
 (async () => {
@@ -88,13 +117,15 @@ app.use(
 })();
 
 // make sure we have a valid session
-app.use(
-  validateSessionMiddleware({
-    production: isProduction,
-    requiredSessionKeys: ['publish.accessToken', 'publish.foreignKey'],
-  })
-);
-app.use(verifyAccessToken);
+if (!isStandalone) {
+  app.use(
+    validateSessionMiddleware({
+      production: isProduction,
+      requiredSessionKeys: ['publish.accessToken', 'publish.foreignKey'],
+    })
+  );
+  app.use(verifyAccessToken);
+}
 
 // Pusher Auth
 app.post(
@@ -118,12 +149,9 @@ const getNotificationFromQuery = query => {
   return notification;
 };
 
-const staticAssets = getStaticAssets({ isProduction });
-
 /**
  * Primary Route
- *
- * Loads the web app, preloaded with some embedded scripts and userdata.
+ * - Loads the web app, preloaded with some embedded scripts and userdata.
  */
 app.get('*', (req, res) => {
   const notification = getNotificationFromQuery(req.query);
@@ -146,6 +174,7 @@ app.get('*', (req, res) => {
     res.send(
       getHtml({
         isProduction,
+        isStandalone,
         staticAssets,
         notification,
         userId,
@@ -158,7 +187,15 @@ app.get('*', (req, res) => {
   });
 });
 
-server.listen(80, () => console.log('listening on port 80')); // eslint-disable-line
+server.listen(PORT, () => {
+  if (isStandalone) {
+    standalone.onBoot();
+  } else {
+    console.log(`listening on port ${PORT}`); // eslint-disable-line
+  }
+});
+
+// These help prevent issues running Node 12 in production
 server.keepAliveTimeout = 61 * 1000;
 server.headersTimeout = 65 * 1000;
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from '../shared-components/modal/modal';
 import ModalActionCreators from '../shared-components/modal/actionCreators.js';
 import AppActionCreators from '../action-creators/AppActionCreators';
-import Button from '../components/Button';
+import Button from '../components/shared/Button';
 import styles from './css/EmptyTextAlert.css';
 
 class EmptyTextAlert extends React.Component {

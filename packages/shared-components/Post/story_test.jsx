@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import { Text } from '@bufferapp/components';
 import Post from './index';
 
 const storeFake = state => ({
@@ -84,6 +83,21 @@ const subprofiles = [
   },
 ];
 
+const postContent = {
+  type: 'text',
+  text: 'Rubber baby buggy bumpers.',
+};
+
+const postContentRetweet = {
+  ...postContent,
+  retweetProfile,
+};
+
+const postContentRetweetWithComment = {
+  ...postContentRetweet,
+  retweetComment,
+};
+
 storiesOf('Cards|Posts/Post', module)
   .addDecorator(withA11y)
   .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
@@ -94,8 +108,7 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       onEditClick={action('edit-click')}
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ))
   .add('sent', () => (
@@ -106,8 +119,7 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       isSent
       statistics={statistics}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ))
   .add('error', () => (
@@ -119,8 +131,7 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetailsError}
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ))
   .add('isConfirmingDelete', () => (
@@ -131,8 +142,7 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ))
   .add('isDeleting', () => (
@@ -143,8 +153,7 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ))
   .add('isWorking', () => (
@@ -155,8 +164,7 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ))
   .add('retweet', () => (
@@ -170,8 +178,7 @@ storiesOf('Cards|Posts/Post', module)
       retweetProfile={retweetProfile}
       isSent={false}
       basic={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContentRetweet}
     />
   ))
   .add('retweet with comment', () => (
@@ -186,8 +193,7 @@ storiesOf('Cards|Posts/Post', module)
       retweetProfile={retweetProfile}
       retweetComment={retweetComment}
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContentRetweetWithComment}
     />
   ))
   .add('Instragram post with Location', () => (
@@ -199,8 +205,7 @@ storiesOf('Cards|Posts/Post', module)
       locationName="Buffer, Earth"
       profileService="instagram"
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ))
   .add('Instragram post without Location', () => (
@@ -211,8 +216,7 @@ storiesOf('Cards|Posts/Post', module)
       onEditClick={action('edit-click')}
       profileService="instagram"
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ))
   .add('Pinterest post with board and source URL', () => (
@@ -226,8 +230,7 @@ storiesOf('Cards|Posts/Post', module)
       subprofileID="5bbca83e94803d000e7dca35"
       sourceUrl="http://google.com"
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ))
   .add('Pinterest post with board only', () => (
@@ -240,7 +243,6 @@ storiesOf('Cards|Posts/Post', module)
       subprofiles={subprofiles}
       subprofileID="5bbca83e94803d000e7dca34"
       isSent={false}
-      type="text"
-      text="Rubber baby buggy bumpers."
+      postContent={postContent}
     />
   ));

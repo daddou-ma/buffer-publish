@@ -10,6 +10,7 @@ import {
   ButtonWithSkeleton,
   TextWithSkeleton,
 } from '@bufferapp/publish-shared-components';
+import { useTranslation } from 'react-i18next';
 
 import {
   ButtonWrapper,
@@ -30,7 +31,6 @@ const ButtonWithSkeletonStyled = styled(ButtonWithSkeleton)`
 `;
 
 const Header = ({
-  translations,
   campaignDetails,
   hideAnalyzeReport,
   showCampaignActions,
@@ -39,122 +39,118 @@ const Header = ({
   onEditCampaignClick,
   goToAnalyzeReport,
   isLoading,
-}) => (
-  <Container aria-label="Campaign Details">
-    <CampaignDetails>
-      <Title>
-        <Color color={campaignDetails.color} displaySkeleton={isLoading} />
-        <Name
-          type="h2"
-          displaySkeleton={isLoading}
-          aria-label={isLoading ? 'Loading' : null}
-          aria-live="polite"
-          aria-busy={isLoading}
-        >
-          {campaignDetails.name || translations.loadingCampaignName}
-        </Name>
-      </Title>
-      <SubText>
-        {isLoading && (
-          <TextWithSkeleton
-            type="p"
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Container aria-label="Campaign Details">
+      <CampaignDetails>
+        <Title>
+          <Color color={campaignDetails.color} displaySkeleton={isLoading} />
+          <Name
+            type="h2"
             displaySkeleton={isLoading}
             aria-label={isLoading ? 'Loading' : null}
             aria-live="polite"
             aria-busy={isLoading}
           >
-            {translations.loadingCampaignDetails}
-          </TextWithSkeleton>
-        )}
-        {!isLoading && (
-          <Fragment>
-            <Details>
-              {campaignDetails.dateRange && (
+            {campaignDetails.name ||
+              t('campaigns.viewCampaign.loadingCampaignName')}
+          </Name>
+        </Title>
+        <SubText>
+          {isLoading && (
+            <TextWithSkeleton
+              type="p"
+              displaySkeleton={isLoading}
+              aria-label={isLoading ? 'Loading' : null}
+              aria-live="polite"
+              aria-busy={isLoading}
+            >
+              {t('campaigns.viewCampaign.loadingCampaignDetails')}
+            </TextWithSkeleton>
+          )}
+          {!isLoading && (
+            <Fragment>
+              <Details>
+                {campaignDetails.dateRange && (
+                  <Group>
+                    <Icon>
+                      <CalendarIcon size="medium" />
+                    </Icon>
+                    <Text type="p">{campaignDetails.dateRange}</Text>
+                  </Group>
+                )}
                 <Group>
                   <Icon>
-                    <CalendarIcon size="medium" />
+                    <ClockIcon size="medium" />
                   </Icon>
-                  <Text type="p">{campaignDetails.dateRange}</Text>
+                  <Text type="p">
+                    {campaignDetails.scheduled}{' '}
+                    {t('campaigns.viewCampaign.scheduled')}
+                  </Text>
                 </Group>
-              )}
-              <Group>
-                <Icon>
-                  <ClockIcon size="medium" />
-                </Icon>
-                <Text type="p">
-                  {campaignDetails.scheduled} {translations.scheduled}
-                </Text>
-              </Group>
-              <Group>
-                <Icon>
-                  <ListIcon size="medium" />
-                </Icon>
-                <Text type="p">
-                  {campaignDetails.sent} {translations.sent}
-                </Text>
-              </Group>
-            </Details>
-            <Text type="p">
-              <LastUpdated>{campaignDetails.lastUpdated}</LastUpdated>
-            </Text>
-          </Fragment>
-        )}
-      </SubText>
-    </CampaignDetails>
-    <ButtonWrapper>
-      <ButtonWithSkeletonStyled
-        onClick={onCreatePostClick}
-        type="secondary"
-        isSplit={showCampaignActions}
-        label={translations.createPost}
-        disabled={isLoading}
-        displaySkeleton={isLoading}
-        onSelectClick={selectedItem =>
-          selectedItem.selectedItemClick(campaignDetails)
-        }
-        items={[
-          {
-            title: translations.createPost,
-            selectedItemClick: onCreatePostClick,
-          },
-          {
-            title: translations.editCampaign,
-            selectedItemClick: campaign => onEditCampaignClick(campaign.id),
-          },
-          {
-            title: translations.deleteCampaign,
-            selectedItemClick: campaign => onDeleteCampaignClick(campaign),
-          },
-        ]}
-      />
-      {!hideAnalyzeReport && (
+                <Group>
+                  <Icon>
+                    <ListIcon size="medium" />
+                  </Icon>
+                  <Text type="p">
+                    {campaignDetails.sent} {t('campaigns.viewCampaign.sent')}
+                  </Text>
+                </Group>
+              </Details>
+              <Text type="p">
+                <LastUpdated>{campaignDetails.lastUpdated}</LastUpdated>
+              </Text>
+            </Fragment>
+          )}
+        </SubText>
+      </CampaignDetails>
+      <ButtonWrapper>
         <ButtonWithSkeletonStyled
-          type="primary"
-          icon={<ArrowRightIcon />}
-          iconEnd
-          onClick={() => {
-            goToAnalyzeReport(campaignDetails);
-          }}
+          onClick={onCreatePostClick}
+          type="secondary"
+          isSplit={showCampaignActions}
+          label={t('campaigns.viewCampaign.createPost')}
+          disabled={isLoading}
           displaySkeleton={isLoading}
-          disabled={!campaignDetails.dateRange || isLoading}
-          label={translations.viewReport}
+          onSelectClick={selectedItem =>
+            selectedItem.selectedItemClick(campaignDetails)
+          }
+          items={[
+            {
+              title: t('campaigns.viewCampaign.createPost'),
+              selectedItemClick: onCreatePostClick,
+            },
+            {
+              title: t('campaigns.viewCampaign.editCampaign'),
+              selectedItemClick: campaign => onEditCampaignClick(campaign.id),
+            },
+            {
+              title: t('campaigns.viewCampaign.deleteCampaign'),
+              selectedItemClick: campaign => onDeleteCampaignClick(campaign),
+            },
+          ]}
         />
-      )}
-    </ButtonWrapper>
-  </Container>
-);
+        {!hideAnalyzeReport && (
+          <ButtonWithSkeletonStyled
+            type="primary"
+            icon={<ArrowRightIcon />}
+            iconEnd
+            onClick={() => {
+              goToAnalyzeReport(campaignDetails);
+            }}
+            displaySkeleton={isLoading}
+            disabled={!campaignDetails.dateRange || isLoading}
+            label={t('campaigns.viewCampaign.viewReport')}
+          />
+        )}
+      </ButtonWrapper>
+    </Container>
+  );
+};
 
 Header.propTypes = {
-  translations: PropTypes.shape({
-    viewReport: PropTypes.string,
-    createPost: PropTypes.string,
-    editCampaign: PropTypes.string,
-    deleteCampaign: PropTypes.string,
-    sent: PropTypes.string,
-    scheduled: PropTypes.string,
-    loadingCampaignName: PropTypes.string,
-    loadingCampaignDetails: PropTypes.string,
-  }).isRequired,
   campaignDetails: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,

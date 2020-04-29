@@ -9,11 +9,7 @@ import {
   transitionAnimationType,
 } from '@bufferapp/components/style/animation';
 import {
-  TextPost,
-  ImagePost,
-  MultipleImagesPost,
-  LinkPost,
-  VideoPost,
+  Post,
   PostDragWrapper,
   QueueButtonGroup,
 } from '@bufferapp/publish-shared-components';
@@ -62,14 +58,6 @@ const headerTextDateStyle = {
   marginLeft: '8px',
 };
 
-const postTypeComponentMap = new Map([
-  ['text', TextPost],
-  ['image', ImagePost],
-  ['multipleImage', MultipleImagesPost],
-  ['link', LinkPost],
-  ['video', VideoPost],
-]);
-
 /* eslint-disable react/prop-types */
 
 const renderPost = ({
@@ -80,10 +68,6 @@ const renderPost = ({
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onDropPost,
   onSwapPosts,
   draggable,
@@ -96,6 +80,10 @@ const renderPost = ({
   const campaignId = post.campaignDetails ? post.campaignDetails.id : null;
   const postWithEventHandlers = {
     ...post,
+    service_geolocation_name: post.locationName,
+    source_url: post.sourceUrl,
+    subprofile_id: post.subprofileID,
+    service_user_tags: post.userTags,
     key: post.id,
     index,
     postDetails: post.postDetails,
@@ -103,10 +91,6 @@ const renderPost = ({
     onDeleteConfirmClick: () => onDeleteConfirmClick({ post }),
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
-    onImageClick: () => onImageClick({ post }),
-    onImageClickNext: () => onImageClickNext({ post }),
-    onImageClickPrev: () => onImageClickPrev({ post }),
-    onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
     onCampaignTagClick: () => onCampaignTagClick(campaignId),
     onDropPost,
@@ -116,8 +100,7 @@ const renderPost = ({
     onSetRemindersClick,
     hasCampaignsFeature,
   };
-  let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || TextPost;
+  const PostComponent = Post;
 
   const defaultStyle = {
     default: {
@@ -321,10 +304,6 @@ QueueItems.propTypes = {
   onEmptySlotClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onRequeueClick: PropTypes.func,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
   onSwapPosts: PropTypes.func,
   draggable: PropTypes.bool,

@@ -395,12 +395,6 @@
   vertical-align: baseline;
 }
 
-.doneButton {
-  composes: button from './Button.css';
-  float: right;
-  margin: var(--footer-elements-margin);
-}
-
 .characterCount {
   padding: 3px;
   margin: 0 10px 10px 0;

@@ -8,39 +8,13 @@ import {
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { PostEmptySlot } from '@bufferapp/publish-shared-components';
 
-import TextPost from '../TextPost';
-import ImagePost from '../ImagePost';
-import MultipleImagesPost from '../MultipleImagesPost';
 import Story from '../Story';
-import LinkPost from '../LinkPost';
-import VideoPost from '../VideoPost';
+import Post from '../Post';
 import PostDragWrapper from '../PostDragWrapper';
-import TextDraft from '../TextDraft';
-import ImageDraft from '../ImageDraft';
-import MultipleImagesDraft from '../MultipleImagesDraft';
-import LinkDraft from '../LinkDraft';
-import VideoDraft from '../VideoDraft';
+import Draft from '../Draft';
 import QueueHeader from '../QueueHeader';
 
 const ErrorBoundary = getErrorBoundary(true);
-
-const postTypeComponentMap = new Map([
-  ['text', TextPost],
-  ['image', ImagePost],
-  ['multipleImage', MultipleImagesPost],
-  ['link', LinkPost],
-  ['video', VideoPost],
-  ['storyGroup', Story],
-]);
-
-const draftTypeComponentMap = new Map([
-  ['text', TextDraft],
-  ['image', ImageDraft],
-  ['multipleImage', MultipleImagesDraft],
-  ['link', LinkDraft],
-  ['video', VideoDraft],
-  ['storyGroup', Story],
-]);
 
 /* eslint-disable react/prop-types */
 
@@ -53,10 +27,6 @@ const renderPost = ({
   onSetRemindersClick,
   onEditClick,
   onShareNowClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onDropPost,
   onSwapPosts,
   draggable,
@@ -68,6 +38,10 @@ const renderPost = ({
 }) => {
   const postWithEventHandlers = {
     ...post,
+    service_geolocation_name: post.locationName,
+    source_url: post.sourceUrl,
+    subprofile_id: post.subprofileID,
+    service_user_tags: post.userTags,
     key: post.id,
     index,
     postDetails: post.postDetails,
@@ -75,10 +49,6 @@ const renderPost = ({
     onSetRemindersClick: ({ type }) => onSetRemindersClick({ type, post }),
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
-    onImageClick: () => onImageClick({ post }),
-    onImageClickNext: () => onImageClickNext({ post }),
-    onImageClickPrev: () => onImageClickPrev({ post }),
-    onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
     onPreviewClick,
     onDropPost,
@@ -87,8 +57,7 @@ const renderPost = ({
     serviceId,
     userData,
   };
-  let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || TextPost;
+  const PostComponent = post.type === 'storyGroup' ? Story : Post;
 
   const defaultStyle = {
     default: {
@@ -135,14 +104,12 @@ const renderDraft = ({
   onMoveToDraftsClick,
   onRequestApprovalClick,
   onRescheduleClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   hasFirstCommentFlip,
 }) => {
   const draftWithEventHandlers = {
     ...draft,
+    profileService: draft.profile_service,
+    geolocationName: draft.service_geolocation_name,
     key: draft.id,
     draftDetails: draft.draftDetails,
     onDeleteConfirmClick: () => onDeleteConfirmClick({ draft }),
@@ -151,14 +118,10 @@ const renderDraft = ({
     onMoveToDraftsClick: () => onMoveToDraftsClick({ draft }),
     onRequestApprovalClick: () => onRequestApprovalClick({ draft }),
     onRescheduleClick: () => onRescheduleClick({ draft }),
-    onImageClick: () => onImageClick({ draft }),
-    onImageClickNext: () => onImageClickNext({ draft }),
-    onImageClickPrev: () => onImageClickPrev({ draft }),
-    onImageClose: () => onImageClose({ draft }),
     hasFirstCommentFlip,
   };
-  let DraftComponent = draftTypeComponentMap.get(draft.type);
-  DraftComponent = DraftComponent || TextDraft;
+
+  const DraftComponent = draft.type === 'storyGroup' ? Story : Draft;
 
   const defaultStyle = {
     default: {
@@ -252,10 +215,6 @@ QueueItems.propTypes = {
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onRequeueClick: PropTypes.func,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
   onSwapPosts: PropTypes.func,
   draggable: PropTypes.bool,

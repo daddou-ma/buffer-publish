@@ -8,23 +8,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
-import Select from '../components/Select';
+import styled from 'styled-components';
+import Select from './shared/Select';
 
-import styles from './css/TimePicker.css';
+const TimeSelect = styled(Select)`
+  display: inline-block;
+  margin: 0 2px;
+`;
+
+const SlotTimePicker = styled.div`
+  margin-top: 16px;
+`;
+
+const TimeDigitSelector = ({
+  onChange,
+  getOptions,
+  currentOption,
+  formatter,
+}) => (
+  <TimeSelect onChange={onChange} value={currentOption}>
+    {getOptions().map(d => (
+      <option value={d} key={d}>
+        {formatter(d)}
+      </option>
+    ))}
+  </TimeSelect>
+);
+
+TimeDigitSelector.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  getOptions: PropTypes.func.isRequired,
+  currentOption: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  formatter: PropTypes.func.isRequired,
+};
 
 class TimePicker extends React.Component {
-  static propTypes = {
-    shouldUse24hTime: PropTypes.bool.isRequired,
-    onChange: PropTypes.func.isRequired,
-    time: PropTypes.instanceOf(moment),
-    timezone: PropTypes.string,
-    className: PropTypes.string,
-  };
-
-  static defaultProps = {
-    time: moment(),
-  };
-
   onHourSelectChange = e => {
     this.onChange({ hour: e.target.value });
   };
@@ -104,47 +123,42 @@ class TimePicker extends React.Component {
 
     const { hour, min, dayPeriod } = this.getTimeUnits();
 
-    const timePickerClassName = this.props.className;
-
     return (
-      <div className={timePickerClassName}>
-        <Select
+      <SlotTimePicker>
+        <TimeDigitSelector
           onChange={this.onHourSelectChange}
-          value={hour}
-          className={styles.select}
-        >
-          {this.getHoursInDay().map(h => (
-            <option value={h} key={h}>
-              {this.leftPadTimeUnit(h)}
-            </option>
-          ))}
-        </Select>
-
-        <Select
+          currentOption={hour}
+          getOptions={this.getHoursInDay}
+          formatter={this.leftPadTimeUnit}
+        />
+        <TimeDigitSelector
           onChange={this.onMinSelectChange}
-          value={min}
-          className={styles.select}
-        >
-          {this.getMinutesInHour().map(m => (
-            <option value={m} key={m}>
-              {this.leftPadTimeUnit(m)}
-            </option>
-          ))}
-        </Select>
-
+          currentOption={min}
+          getOptions={this.getMinutesInHour}
+          formatter={this.leftPadTimeUnit}
+        />
         {shouldDisplayPeriodSelect && (
-          <Select
+          <TimeDigitSelector
             onChange={this.onPeriodSelectChange}
-            value={dayPeriod}
-            className={styles.select}
-          >
-            <option value="am">AM</option>
-            <option value="pm">PM</option>
-          </Select>
+            currentOption={dayPeriod}
+            getOptions={() => ['am', 'pm']}
+            formatter={v => v.toUpperCase()}
+          />
         )}
-      </div>
+      </SlotTimePicker>
     );
   }
 }
+
+TimePicker.propTypes = {
+  shouldUse24hTime: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  time: PropTypes.instanceOf(moment),
+  timezone: PropTypes.string,
+};
+
+TimePicker.defaultProps = {
+  time: moment(),
+};
 
 export default TimePicker;

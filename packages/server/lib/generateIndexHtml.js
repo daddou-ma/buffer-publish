@@ -11,6 +11,7 @@ const getIterateScript = require('./embeds/iterate');
 const getBugsnagScript = require('./embeds/bugsnag');
 const getUserScript = require('./embeds/user');
 const getBufferDataScript = require('./embeds/bufferData');
+const getBundleReminderHtml = require('./embeds/bundleReminder');
 
 const { getFaviconCode } = require('./favicon');
 const { getRuntimeScript } = require('./assets');
@@ -18,6 +19,7 @@ const { getRuntimeScript } = require('./assets');
 const getHtml = ({
   staticAssets,
   isProduction,
+  isStandalone,
   notification,
   userId,
   modalKey,
@@ -27,23 +29,36 @@ const getHtml = ({
 }) => {
   return fs
     .readFileSync(join(__dirname, '..', 'index.html'), 'utf8')
-    .replace('{{{runtime}}}', getRuntimeScript({ isProduction, staticAssets }))
+    .replace(
+      '{{{runtime}}}',
+      getRuntimeScript({ staticAssets, isProduction, isStandalone })
+    )
     .replace('{{{vendor}}}', staticAssets['vendor.js'])
     .replace('{{{bundle}}}', staticAssets['bundle.js'])
     .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
     .replace('{{{stripeScript}}}', getStripeScript())
-    .replace('{{{bugsnagScript}}}', getBugsnagScript({ isProduction, userId }))
     .replace('{{{notificationScript}}}', getNotificationScript(notification))
     .replace('{{{showModalScript}}}', getModalScript(modalKey, modalValue))
-    .replace('{{{appcues}}}', getAppcuesScript({ isProduction }))
-    .replace('{{{iterateScript}}}', getIterateScript({ isProduction }))
+    .replace('{{{appcues}}}', getAppcuesScript({ isProduction, isStandalone }))
+    .replace(
+      '{{{iterateScript}}}',
+      getIterateScript({ isProduction, isStandalone })
+    )
     .replace('{{{userScript}}}', getUserScript({ id: userId }))
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
     .replace('{{{segmentScript}}}', getSegmentScript({ isProduction }))
     .replace('{{{bufferData}}}', getBufferDataScript({ user, profiles }))
     .replace(
+      '{{{bugsnagScript}}}',
+      getBugsnagScript({ userId, isProduction, isStandalone })
+    )
+    .replace(
       '{{{fullStoryScript}}}',
-      getFullstoryScript({ user, isProduction })
+      getFullstoryScript({ user, isProduction, isStandalone })
+    )
+    .replace(
+      '{{{bundleReminder}}}',
+      getBundleReminderHtml({ isProduction, isStandalone })
     );
 };
 

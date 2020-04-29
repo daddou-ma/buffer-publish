@@ -13,10 +13,6 @@ export const actionTypes = keyWrapper('DRAFTS', {
   DRAFT_CONFIRMED_DELETE: 0,
   OPEN_COMPOSER: 0,
   HIDE_COMPOSER: 0,
-  DRAFT_IMAGE_CLICKED: 0,
-  DRAFT_IMAGE_CLOSED: 0,
-  DRAFT_IMAGE_CLICKED_NEXT: 0,
-  DRAFT_IMAGE_CLICKED_PREV: 0,
 });
 
 export const initialState = {
@@ -88,27 +84,6 @@ const draftReducer = (state, action) => {
         ...state,
         isMoving: true,
       };
-    case actionTypes.DRAFT_IMAGE_CLICKED:
-      return {
-        ...state,
-        isLightboxOpen: true,
-        currentImage: 0,
-      };
-    case actionTypes.DRAFT_IMAGE_CLOSED:
-      return {
-        ...state,
-        isLightboxOpen: false,
-      };
-    case actionTypes.DRAFT_IMAGE_CLICKED_NEXT:
-      return {
-        ...state,
-        currentImage: state.currentImage + 1,
-      };
-    case actionTypes.DRAFT_IMAGE_CLICKED_PREV:
-      return {
-        ...state,
-        currentImage: state.currentImage - 1,
-      };
     default:
       return state;
   }
@@ -139,10 +114,6 @@ const draftsReducer = (state = {}, action) => {
     case actionTypes.DRAFT_CREATED: {
       return { ...state, [getDraftUpdateId(action)]: action.draft };
     }
-    case actionTypes.DRAFT_IMAGE_CLICKED:
-    case actionTypes.DRAFT_IMAGE_CLOSED:
-    case actionTypes.DRAFT_IMAGE_CLICKED_NEXT:
-    case actionTypes.DRAFT_IMAGE_CLICKED_PREV:
     case actionTypes.DRAFT_CONFIRMED_DELETE:
     case actionTypes.DRAFT_APPROVE:
     case actionTypes.DRAFT_NEEDS_APPROVAL:
@@ -191,10 +162,6 @@ const profileReducer = (state = profileInitialState, action) => {
         ...state,
         loading: false,
       };
-    case actionTypes.DRAFT_IMAGE_CLICKED:
-    case actionTypes.DRAFT_IMAGE_CLOSED:
-    case actionTypes.DRAFT_IMAGE_CLICKED_NEXT:
-    case actionTypes.DRAFT_IMAGE_CLICKED_PREV:
     case actionTypes.DRAFT_CREATED:
     case actionTypes.DRAFT_UPDATED:
     case actionTypes.DRAFT_MOVED:
@@ -221,10 +188,6 @@ export default (state = initialState, action) => {
         canStartBusinessTrial: action.result.canStartBusinessTrial,
       };
     }
-    case actionTypes.DRAFT_IMAGE_CLICKED:
-    case actionTypes.DRAFT_IMAGE_CLOSED:
-    case actionTypes.DRAFT_IMAGE_CLICKED_NEXT:
-    case actionTypes.DRAFT_IMAGE_CLICKED_PREV:
     case profileSidebarActionTypes.SELECT_PROFILE:
     case `draftPosts_${dataFetchActionTypes.FETCH_START}`:
     case `draftPosts_${dataFetchActionTypes.FETCH_SUCCESS}`:
@@ -305,29 +268,5 @@ export const actions = {
   // TODO: rename to more representative name
   handleComposerCreateSuccess: () => ({
     type: actionTypes.HIDE_COMPOSER,
-  }),
-  handleImageClick: ({ draft, profileId }) => ({
-    type: actionTypes.DRAFT_IMAGE_CLICKED,
-    updateId: draft.id,
-    draft,
-    profileId,
-  }),
-  handleImageClose: ({ draft, profileId }) => ({
-    type: actionTypes.DRAFT_IMAGE_CLOSED,
-    updateId: draft.id,
-    draft,
-    profileId,
-  }),
-  handleImageClickNext: ({ draft, profileId }) => ({
-    type: actionTypes.DRAFT_IMAGE_CLICKED_NEXT,
-    updateId: draft.id,
-    draft,
-    profileId,
-  }),
-  handleImageClickPrev: ({ draft, profileId }) => ({
-    type: actionTypes.DRAFT_IMAGE_CLICKED_PREV,
-    updateId: draft.id,
-    draft,
-    profileId,
   }),
 };

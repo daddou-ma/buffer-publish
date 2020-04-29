@@ -11,7 +11,6 @@ const StyledList = styled.ul`
 `;
 
 const List = ({
-  translations,
   campaigns,
   onViewCampaignClick,
   goToAnalyzeReport,
@@ -22,7 +21,6 @@ const List = ({
   const listItems = campaigns.map(campaign => (
     <ListItem
       key={campaign.id}
-      translations={translations}
       campaign={campaign}
       onViewCampaignClick={onViewCampaignClick}
       onDeleteCampaignClick={onDeleteCampaignClick}
@@ -35,7 +33,6 @@ const List = ({
 };
 
 List.propTypes = {
-  translations: PropTypes.object.isRequired, // eslint-disable-line
   campaigns: PropTypes.array, // eslint-disable-line
   onEditCampaignClick: PropTypes.func.isRequired,
   onDeleteCampaignClick: PropTypes.func.isRequired,

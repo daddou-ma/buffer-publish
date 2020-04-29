@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { MemoryRouter } from 'react-router-dom';
-import translations from '@bufferapp/publish-i18n/translations/en-us.json';
+import '@bufferapp/publish-web/components/i18n';
 
 import ListItem from './index';
 
@@ -34,7 +34,6 @@ storiesOf('Campaigns|ListItem', module)
     <ListItem
       campaign={campaign}
       isEvenItem
-      translations={translations.campaigns.viewCampaign}
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
@@ -46,7 +45,6 @@ storiesOf('Campaigns|ListItem', module)
     <ListItem
       campaign={campaign}
       isEvenItem
-      translations={translations.campaigns.viewCampaign}
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
@@ -58,7 +56,6 @@ storiesOf('Campaigns|ListItem', module)
     <ListItem
       campaign={campaign}
       isEvenItem={false}
-      translations={translations.campaigns.viewCampaign}
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
@@ -70,7 +67,6 @@ storiesOf('Campaigns|ListItem', module)
     <ListItem
       campaign={campaignWithoutPosts}
       isEvenItem={false}
-      translations={translations.campaigns.viewCampaign}
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
@@ -82,7 +78,6 @@ storiesOf('Campaigns|ListItem', module)
     <ListItem
       campaign={campaign}
       isEvenItem={false}
-      translations={translations.campaigns.viewCampaign}
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}
