@@ -88,7 +88,7 @@ export default (state = initialState, action) => {
       const updatedCampaign = campaignParser(action.campaign);
       const campaignToLoad =
         updatedCampaign.id === campaign.id ? updatedCampaign : campaign;
-      const channels = campaign.channels || state.campaign.channels;
+      const channels = updatedCampaign.channels || campaign.channels;
 
       return {
         ...state,
