@@ -34,6 +34,13 @@ const ListItem = ({
   const campaignId = campaign.id;
   const selectItems = [
     {
+      title: t('campaigns.viewCampaign.viewReport'),
+      selectedItemClick: () => {
+        goToAnalyzeReport(campaign);
+      },
+      disabled: !campaign.dateRange,
+    },
+    {
       title: t('campaigns.viewCampaign.editCampaign'),
       selectedItemClick: () => {
         onEditCampaignClick({ campaignId });
@@ -47,46 +54,11 @@ const ListItem = ({
     },
   ];
 
-  const viewCampaignSelectItem = {
-    title: t('campaigns.viewCampaign.viewCampaign'),
-    selectedItemClick: () => {
-      onViewCampaignClick({ campaignId });
-    },
-  };
-
   const campaignRoute = campaignScheduled.getRoute({
     campaignId: campaign.id,
   });
 
   const NameWrapper = displaySkeleton ? NameContainer : StyledLink;
-  let CampaignActionsButton;
-
-  if (showCampaignActions) {
-    CampaignActionsButton = (
-      <ButtonWithSkeleton
-        onClick={() => {
-          goToAnalyzeReport(campaign);
-        }}
-        type="secondary"
-        isSplit
-        label={t('campaigns.viewCampaign.viewReport')}
-        onSelectClick={selectedItem => selectedItem.selectedItemClick()}
-        items={[viewCampaignSelectItem, ...selectItems]}
-        disabled={displaySkeleton}
-        displaySkeleton={displaySkeleton}
-      />
-    );
-  } else {
-    CampaignActionsButton = (
-      <ButtonWithSkeleton
-        onClick={viewCampaignSelectItem.selectedItemClick}
-        type="secondary"
-        label={t('campaigns.viewCampaign.viewCampaign')}
-        disabled={displaySkeleton}
-        displaySkeleton={displaySkeleton}
-      />
-    );
-  }
 
   return (
     <Container>
@@ -145,7 +117,20 @@ const ListItem = ({
           {displaySkeleton ? 'loading' : ` ${t('campaigns.viewCampaign.sent')}`}
         </TextWithSkeleton>
       </Group>
-      <ButtonWrapper>{CampaignActionsButton}</ButtonWrapper>
+      <ButtonWrapper>
+        <ButtonWithSkeleton
+          onClick={() => {
+            onViewCampaignClick({ campaignId });
+          }}
+          type="secondary"
+          label={t('campaigns.viewCampaign.viewCampaign')}
+          disabled={displaySkeleton}
+          displaySkeleton={displaySkeleton}
+          onSelectClick={selectedItem => selectedItem.selectedItemClick()}
+          isSplit={showCampaignActions}
+          items={selectItems}
+        />
+      </ButtonWrapper>
     </Container>
   );
 };
