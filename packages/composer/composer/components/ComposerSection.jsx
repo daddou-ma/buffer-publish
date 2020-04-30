@@ -149,7 +149,7 @@ class ComposerSection extends React.Component {
     };
 
     return (
-      <div className={styles.composerSection}>
+      <section className={styles.composerSection}>
         {!hasEnabledDrafts && (
           <div className={styles.emptyState}>
             {composersHaveBeenExpanded
@@ -230,7 +230,7 @@ class ComposerSection extends React.Component {
               }}
             />
           ))}
-      </div>
+      </section>
     );
   }
 }

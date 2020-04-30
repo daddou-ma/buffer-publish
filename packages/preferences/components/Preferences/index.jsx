@@ -109,10 +109,12 @@ const Preferences = ({
                 })
               }
             />
-            <PreferenceContent
-              tabId={selectedTabId}
-              onUnknownTab={onUnknownTab}
-            />
+            <main id="main">
+              <PreferenceContent
+                tabId={selectedTabId}
+                onUnknownTab={onUnknownTab}
+              />
+            </main>
           </ContainerStyle>
         </TabStyle>
       </PreferencesWrapper>
