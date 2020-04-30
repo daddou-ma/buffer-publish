@@ -30,7 +30,7 @@ describe('middleware', () => {
       },
     });
     const action = {
-      type: 'APP_INIT',
+      type: 'INIT_MODALS',
     };
     middleware({ dispatch, getState })(next)(action);
     expect(next)
@@ -52,7 +52,7 @@ describe('middleware', () => {
       },
     });
     const action = {
-      type: 'APP_INIT',
+      type: 'INIT_MODALS',
     };
     middleware({ dispatch, getState })(next)(action);
     expect(next)
@@ -74,7 +74,7 @@ describe('middleware', () => {
       },
     });
     const action = {
-      type: 'APP_INIT',
+      type: 'INIT_MODALS',
     };
     middleware({ dispatch, getState })(next)(action);
     expect(next)
@@ -110,7 +110,7 @@ describe('middleware', () => {
       },
     });
     const action = {
-      type: 'APP_INIT',
+      type: 'INIT_MODALS',
     };
     middleware({ dispatch, getState })(next)(action);
     expect(next)
@@ -132,7 +132,7 @@ describe('middleware', () => {
       },
     });
     const action = {
-      type: 'APP_INIT',
+      type: 'INIT_MODALS',
     };
     middleware({ dispatch, getState })(next)(action);
     expect(next)

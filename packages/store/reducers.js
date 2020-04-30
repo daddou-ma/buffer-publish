@@ -49,10 +49,12 @@ import plansReducer from '@bufferapp/publish-plans/reducer';
 import temporaryBannerReducer from '@bufferapp/publish-temporary-banner/reducer';
 import creditCardFormReducer from '@bufferapp/publish-credit-card-form/reducer';
 import userReducer from '@bufferapp/publish-data-user/reducer';
+import orgReducer from '@bufferapp/publish-data-organization/reducer';
 import profilesReducer from '@bufferapp/publish-data-profiles/reducer';
 
 export default {
   user: userReducer,
+  organization: orgReducer,
   publishProfiles: profilesReducer,
   form: formReducer,
   queue: queueReducer,

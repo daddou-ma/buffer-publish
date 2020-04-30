@@ -3,6 +3,7 @@ const profileParser = require('./profileParser');
 const featureParser = require('./featureParser');
 const userParser = require('./userParser');
 const linkParsing = require('./linkParsing');
+const orgParser = require('./orgParser');
 const storyGroupParser = require('./storyGroupParser');
 const { campaignParser, campaignItemParser } = require('./campaignParser');
 
@@ -12,6 +13,7 @@ module.exports = {
   featureParser,
   userParser,
   linkParsing,
+  orgParser,
   storyGroupParser,
   campaignParser,
   campaignItemParser,

@@ -31,7 +31,7 @@ export default ({ dispatch, getState }) => next => (action) => {
         dispatch(actions.showSwitchPlanModal({ source: 'locked_profile', plan: 'pro' }));
       }
       break;
-    case 'APP_INIT': {
+    case 'INIT_MODALS': {
       if (getState().appSidebar.user.plan === 'awesome') {
         // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;

@@ -15,6 +15,7 @@ import profileSidebarMiddleware from '@bufferapp/publish-profile-sidebar/middlew
 import clientAccessMiddleware from '@bufferapp/client-access/middleware';
 import bootstrapMiddleware from '@bufferapp/publish-bootstrap/middleware';
 import userMiddleware from '@bufferapp/publish-data-user/middleware';
+import orgMiddleware from '@bufferapp/publish-data-organization/middleware';
 import profilesMiddleware from '@bufferapp/publish-data-profiles/middleware';
 import productFeatureMiddleware from '@bufferapp/product-features/middleware';
 import i18nMiddleware from '@bufferapp/publish-i18n/middleware';
@@ -75,6 +76,7 @@ const composedMiddlewares = history =>
       clientAccessMiddleware,
       bootstrapMiddleware,
       userMiddleware,
+      orgMiddleware,
       profilesMiddleware,
       productFeatureMiddleware,
       queueMiddleware,

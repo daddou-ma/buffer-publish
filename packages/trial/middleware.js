@@ -27,8 +27,8 @@ export default ({ dispatch, getState }) => next => action => {
           message: 'Awesome! You’re now starting your free 7-day Pro trial',
         })
       );
-      dispatch({ type: 'USER_INIT' });
-      dispatch({ type: 'PROFILES_INIT' });
+      dispatch({ type: 'INIT_USER' });
+      dispatch({ type: 'INIT_PROFILES' });
       dispatch(dataFetchActions.fetch({ name: 'features' }));
 
       if (action.source === 'ig_first_comment') {
