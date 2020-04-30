@@ -8,6 +8,7 @@ import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
 import ListIcon from '@bufferapp/ui/Icon/Icons/List';
 import CalendarIcon from '@bufferapp/ui/Icon/Icons/Calendar';
 import { campaignScheduled } from '@bufferapp/publish-routes';
+import { useTranslation } from 'react-i18next';
 
 import {
   ButtonWrapper,
@@ -27,65 +28,37 @@ const ListItem = ({
   onDeleteCampaignClick,
   onViewCampaignClick,
   goToAnalyzeReport,
-  translations,
   displaySkeleton,
 }) => {
+  const { t } = useTranslation();
   const campaignId = campaign.id;
   const selectItems = [
     {
-      title: translations.editCampaign,
+      title: t('campaigns.viewCampaign.viewReport'),
+      selectedItemClick: () => {
+        goToAnalyzeReport(campaign);
+      },
+      disabled: !campaign.dateRange,
+    },
+    {
+      title: t('campaigns.viewCampaign.editCampaign'),
       selectedItemClick: () => {
         onEditCampaignClick({ campaignId });
       },
     },
     {
-      title: translations.deleteCampaign,
+      title: t('campaigns.viewCampaign.deleteCampaign'),
       selectedItemClick: () => {
         onDeleteCampaignClick(campaign);
       },
     },
   ];
 
-  const viewCampaignSelectItem = {
-    title: translations.viewCampaign,
-    selectedItemClick: () => {
-      onViewCampaignClick({ campaignId });
-    },
-  };
-
   const campaignRoute = campaignScheduled.getRoute({
     campaignId: campaign.id,
   });
 
   const NameWrapper = displaySkeleton ? NameContainer : StyledLink;
-  let CampaignActionsButton;
-
-  if (showCampaignActions) {
-    CampaignActionsButton = (
-      <ButtonWithSkeleton
-        onClick={() => {
-          goToAnalyzeReport(campaign);
-        }}
-        type="secondary"
-        isSplit
-        label={translations.viewReport}
-        onSelectClick={selectedItem => selectedItem.selectedItemClick()}
-        items={[viewCampaignSelectItem, ...selectItems]}
-        disabled={displaySkeleton}
-        displaySkeleton={displaySkeleton}
-      />
-    );
-  } else {
-    CampaignActionsButton = (
-      <ButtonWithSkeleton
-        onClick={viewCampaignSelectItem.selectedItemClick}
-        type="secondary"
-        label={translations.viewCampaign}
-        disabled={displaySkeleton}
-        displaySkeleton={displaySkeleton}
-      />
-    );
-  }
 
   return (
     <Container>
@@ -95,7 +68,7 @@ const ListItem = ({
           <TextWithSkeleton
             type="h3"
             displaySkeleton={displaySkeleton}
-            aria-label={displaySkeleton ? 'Loading' : null}
+            aria-label={displaySkeleton ? t('common.loading') : null}
             color="grayDarker"
           >
             {campaign.name}
@@ -104,7 +77,7 @@ const ListItem = ({
         <TextWithSkeleton
           type="p"
           displaySkeleton={displaySkeleton}
-          aria-label={displaySkeleton ? 'Loading' : null}
+          aria-label={displaySkeleton ? t('common.loading') : null}
           color="grayDark"
         >
           {campaign.lastUpdated}
@@ -112,14 +85,14 @@ const ListItem = ({
       </LeftWrapper>
       <Group>
         {campaign.dateRange ? (
-          <React.Fragment>
+          <>
             <Icon displaySkeleton={displaySkeleton}>
               <CalendarIcon size="medium" />
             </Icon>
             <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
               {campaign.dateRange}
             </TextWithSkeleton>
-          </React.Fragment>
+          </>
         ) : (
           ''
         )}
@@ -130,7 +103,9 @@ const ListItem = ({
         </Icon>
         <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
           {campaign.scheduled}
-          {displaySkeleton ? 'loading' : ` ${translations.scheduled}`}
+          {displaySkeleton
+            ? 'loading'
+            : ` ${t('campaigns.viewCampaign.scheduled')}`}
         </TextWithSkeleton>
       </Group>
       <Group>
@@ -139,23 +114,28 @@ const ListItem = ({
         </Icon>
         <TextWithSkeleton type="p" displaySkeleton={displaySkeleton}>
           {campaign.sent}
-          {displaySkeleton ? 'loading' : ` ${translations.sent}`}
+          {displaySkeleton ? 'loading' : ` ${t('campaigns.viewCampaign.sent')}`}
         </TextWithSkeleton>
       </Group>
-      <ButtonWrapper>{CampaignActionsButton}</ButtonWrapper>
+      <ButtonWrapper>
+        <ButtonWithSkeleton
+          onClick={() => {
+            onViewCampaignClick({ campaignId });
+          }}
+          type="secondary"
+          label={t('campaigns.viewCampaign.viewCampaign')}
+          disabled={displaySkeleton}
+          displaySkeleton={displaySkeleton}
+          onSelectClick={selectedItem => selectedItem.selectedItemClick()}
+          isSplit={showCampaignActions}
+          items={selectItems}
+        />
+      </ButtonWrapper>
     </Container>
   );
 };
 
 ListItem.propTypes = {
-  translations: PropTypes.shape({
-    viewReport: PropTypes.string,
-    viewCampaign: PropTypes.string,
-    editCampaign: PropTypes.string,
-    deleteCampaign: PropTypes.string,
-    sent: PropTypes.string,
-    scheduled: PropTypes.string,
-  }).isRequired,
   campaign: PropTypes.shape({
     color: PropTypes.string,
     id: PropTypes.string,

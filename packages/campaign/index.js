@@ -28,7 +28,6 @@ export default connect(
       showComposer: state.campaign.showComposer,
       editMode: state.campaign.editMode,
       editingPostId: state.campaign.editingPostId,
-      translations: state.i18n.translations.campaigns.viewCampaign,
       hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
       showCampaignActions: !state.appSidebar.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
@@ -141,39 +140,6 @@ export default connect(
         dispatch(
           actions.handleShareNowClick({
             post,
-          })
-        );
-      },
-
-      onImageClick: ({ post }) => {
-        dispatch(
-          actions.handleImageClick({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
-      onImageClose: ({ post }) => {
-        dispatch(
-          actions.handleImageClose({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
-      onImageClickNext: ({ post }) => {
-        dispatch(
-          actions.handleImageClickNext({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
-      onImageClickPrev: ({ post }) => {
-        dispatch(
-          actions.handleImageClickPrev({
-            post,
-            profileId: post.profileId,
           })
         );
       },

@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 import Card from '../Card';
 import CardHeader from '../CardHeader';
 import DraftFooter from '../DraftFooter';
-import RetweetPanel from '../RetweetPanel';
 import RenderPostMetaBar from '../Post/RenderPostMetaBar';
+import UpdateContent from '../UpdateContent';
 
 const postContentStyle = {
   padding: '1rem',
 };
 
 const Draft = ({
-  children,
   hasPermission,
   isConfirmingDelete,
   isDeleting,
@@ -26,15 +25,13 @@ const Draft = ({
   onRequestApprovalClick,
   onRescheduleClick,
   draftDetails,
-  retweetComment,
-  retweetCommentLinks,
-  retweetProfile,
   scheduledAt,
   view,
   basic,
   hasFirstCommentFlip,
   profileService,
   geolocationName,
+  postContent,
 }) => (
   <Card>
     <CardHeader
@@ -46,18 +43,7 @@ const Draft = ({
     />
     {/* Draft Content */}
     <div style={postContentStyle}>
-      {retweetProfile ? (
-        <RetweetPanel
-          retweetProfile={retweetProfile}
-          retweetComment={retweetComment}
-          retweetCommentLinks={retweetCommentLinks}
-          basic={basic}
-        >
-          {children}
-        </RetweetPanel>
-      ) : (
-        children
-      )}
+      <UpdateContent {...postContent} basic={basic} />
     </div>
     <RenderPostMetaBar
       profileService={profileService}
@@ -107,23 +93,8 @@ Draft.propTypes = {
     avatarUrl: PropTypes.string,
     createdAt: PropTypes.string,
   }).isRequired,
-  retweetProfile: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    handle: PropTypes.string,
-    name: PropTypes.string,
-  }),
-  retweetComment: PropTypes.string,
-  retweetCommentLinks: PropTypes.arrayOf(
-    PropTypes.shape({
-      rawString: PropTypes.string,
-      displayString: PropTypes.string,
-      expandedUrl: PropTypes.string,
-      indices: PropTypes.arrayOf(PropTypes.number),
-    })
-  ),
   hasFirstCommentFlip: PropTypes.bool,
   view: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
 Draft.defaultProps = {

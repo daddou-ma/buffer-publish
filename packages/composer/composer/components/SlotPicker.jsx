@@ -8,31 +8,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
-import Select from '../components/Select';
+import styled from 'styled-components';
+import Select from './shared/Select';
+
+const SlotTimePicker = styled.div`
+  margin-top: 16px;
+`;
 
 class SlotPicker extends React.Component {
-  static propTypes = {
-    metaData: PropTypes.object,
-    shouldUse24hTime: PropTypes.bool.isRequired,
-    onChange: PropTypes.func.isRequired,
-    slots: PropTypes.arrayOf(
-      PropTypes.shape({
-        isSlotFree: PropTypes.bool.isRequired,
-        timestamp: PropTypes.number.isRequired,
-      })
-    ).isRequired,
-    metaData: PropTypes.object,
-    slot: PropTypes.instanceOf(moment),
-    timezone: PropTypes.string,
-    className: PropTypes.string,
-    emptyByDefault: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    metaData: undefined,
-    emptyByDefault: false,
-  };
-
   onSlotChange = e => {
     const { timezone } = this.props;
 
@@ -108,7 +91,7 @@ class SlotPicker extends React.Component {
     );
 
     return (
-      <div className={className}>
+      <SlotTimePicker>
         {hasSlots && (
           <Select value={selectedSlot} onChange={this.onSlotChange}>
             <option disabled value={EMPTY_OPTION_VALUE}>
@@ -131,9 +114,29 @@ class SlotPicker extends React.Component {
             <option value="">No slots this day</option>
           </Select>
         )}
-      </div>
+      </SlotTimePicker>
     );
   }
 }
+
+SlotPicker.propTypes = {
+  metaData: PropTypes.object,
+  shouldUse24hTime: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  slots: PropTypes.arrayOf(
+    PropTypes.shape({
+      isSlotFree: PropTypes.bool.isRequired,
+      timestamp: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  slot: PropTypes.instanceOf(moment),
+  timezone: PropTypes.string,
+  emptyByDefault: PropTypes.bool,
+};
+
+SlotPicker.defaultProps = {
+  metaData: undefined,
+  emptyByDefault: false,
+};
 
 export default SlotPicker;

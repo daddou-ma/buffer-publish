@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import { Text } from '@bufferapp/components';
 import Post from './index';
 
 const storeFake = state => ({
@@ -84,11 +83,20 @@ const subprofiles = [
   },
 ];
 
-const children = (
-  <Text size="mini" color="black">
-    {'Rubber baby buggy bumpers.'}
-  </Text>
-);
+const postContent = {
+  type: 'text',
+  text: 'Rubber baby buggy bumpers.',
+};
+
+const postContentRetweet = {
+  ...postContent,
+  retweetProfile,
+};
+
+const postContentRetweetWithComment = {
+  ...postContentRetweet,
+  retweetComment,
+};
 
 storiesOf('Cards|Posts/Post', module)
   .addDecorator(withA11y)
@@ -100,9 +108,8 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       onEditClick={action('edit-click')}
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ))
   .add('sent', () => (
     <Post
@@ -112,9 +119,8 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       isSent
       statistics={statistics}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ))
   .add('error', () => (
     <Post
@@ -125,9 +131,8 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetailsError}
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ))
   .add('isConfirmingDelete', () => (
     <Post
@@ -137,9 +142,8 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ))
   .add('isDeleting', () => (
     <Post
@@ -149,9 +153,8 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ))
   .add('isWorking', () => (
     <Post
@@ -161,9 +164,8 @@ storiesOf('Cards|Posts/Post', module)
       onShareNowClick={linkTo('Post', 'isWorking')}
       postDetails={postDetails}
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ))
   .add('retweet', () => (
     <Post
@@ -176,9 +178,8 @@ storiesOf('Cards|Posts/Post', module)
       retweetProfile={retweetProfile}
       isSent={false}
       basic={false}
-    >
-      {children}
-    </Post>
+      postContent={postContentRetweet}
+    />
   ))
   .add('retweet with comment', () => (
     <Post
@@ -192,9 +193,8 @@ storiesOf('Cards|Posts/Post', module)
       retweetProfile={retweetProfile}
       retweetComment={retweetComment}
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContentRetweetWithComment}
+    />
   ))
   .add('Instragram post with Location', () => (
     <Post
@@ -205,9 +205,8 @@ storiesOf('Cards|Posts/Post', module)
       locationName="Buffer, Earth"
       profileService="instagram"
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ))
   .add('Instragram post without Location', () => (
     <Post
@@ -217,9 +216,8 @@ storiesOf('Cards|Posts/Post', module)
       onEditClick={action('edit-click')}
       profileService="instagram"
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ))
   .add('Pinterest post with board and source URL', () => (
     <Post
@@ -232,9 +230,8 @@ storiesOf('Cards|Posts/Post', module)
       subprofileID="5bbca83e94803d000e7dca35"
       sourceUrl="http://google.com"
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ))
   .add('Pinterest post with board only', () => (
     <Post
@@ -246,7 +243,6 @@ storiesOf('Cards|Posts/Post', module)
       subprofiles={subprofiles}
       subprofileID="5bbca83e94803d000e7dca34"
       isSent={false}
-    >
-      {children}
-    </Post>
+      postContent={postContent}
+    />
   ));

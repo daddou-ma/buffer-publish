@@ -14,8 +14,11 @@ const wdsStaticAssets = {
   'bundle.css': `${WEBPACK_DEV_SERVER_URI}/bundle.css`,
 };
 
-function getStaticAssets({ isProduction }) {
-  if (isProduction) {
+function getStaticAssets({ isProduction, isStandalone }) {
+  /**
+   * We only use the webpack manifest file if we're local or NOT running in standalone mode.
+   */
+  if (isProduction && !isStandalone) {
     const staticAssets = JSON.parse(
       // Load the `webpackAssets.json` produced by our webpack config's `ManifestPlugin`
       fs.readFileSync(join(__dirname, '..', 'webpackAssets.json'), 'utf8')
@@ -40,8 +43,8 @@ function getStaticAssets({ isProduction }) {
  * Webpack runtime script, inline into the HTML in prod, locally just include the script:
  * https://survivejs.com/webpack/optimizing/separating-manifest/
  */
-const getRuntimeScript = ({ isProduction, staticAssets }) => {
-  if (isProduction) {
+const getRuntimeScript = ({ staticAssets, isProduction, isStandalone }) => {
+  if (isProduction && !isStandalone) {
     const runtimeFilename = staticAssets['runtime.js'].split('/').pop();
     return `<script>${fs.readFileSync(
       join(__dirname, '..', runtimeFilename),

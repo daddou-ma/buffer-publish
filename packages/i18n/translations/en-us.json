@@ -1,12 +1,26 @@
 {
+  "common": {
+    "loading": "Loading",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "learnMore": "Learn more",
+    "edit": "Edit",
+    "view": "View",
+    "pleaseWait": "Please wait...",
+    "done": "Done"
+  },
   "billing-upgrade-cta-banner": {
-    "billedTrialEnd": "You'll be billed {billedAmount} at the end of your trial. ",
+    "billedTrialEnd": "You'll be billed <1>{{billedAmount}}</1> at the end of your trial. ",
     "completeBilling": "Add your billing details now to start your subscription. ",
-    "planTrial": "You're on the {plan} trial. ",
-    "remainingTrial": "You have {remaining} on your {plan} plan trial. ",
+    "planTrial": "You're on the {{plan}} trial. ",
+    "remainingTrial": "You have <1>{{remaining}} remaining</1> on your {{plan}} plan trial. ",
     "startSubscription": "Start Subscription"
   },
   "campaigns": {
+    "common": {
+      "title": "Campaigns",
+      "createCampaign": "Create a Campaign"
+    },
     "campaignForm": {
       "ariaLabel": "Name input for campaign form",
       "cancel": "Cancel",
@@ -31,14 +45,13 @@
     "emptyState": {
       "createCampaign": "Create a Campaign",
       "imageTag": "Example of campaign with multiple posts scheduled.",
-      "item1": "Create a healthy mix of content.",
-      "item2": "Keep your content organized across social channels.",
-      "item3": "Understand how different content types resonate with your audience.",
+      "item1": "Build entire campaigns across social channels.",
+      "item2": "See how they fit together in your schedule.",
+      "item3": "Review campaign performance and hit your goals.",
       "learnMore": "Learn More",
-      "subtext": "With Campaigns you can organize your social media posts into themes or topics and track their success.",
-      "title": "Categorize your content using Campaigns"
+      "subtext": "Keep track of multichannel campaigns and create a healthy mix of content on social media.",
+      "title": "Get a clearer picture of your social media strategy"
     },
-    "title": "Campaigns",
     "viewCampaign": {
       "allPostsSent": {
         "createCampaign": "Create New Campaign",
@@ -63,7 +76,9 @@
       "loadingCampaignDetails": "Loading campaign details such as date and counters, please hold on",
       "loadingCampaignName": "Loading campaign name, please hold on",
       "scheduled": "Scheduled",
+      "scheduledTitle": "Scheduled",
       "sent": "Sent",
+      "sentTitle": "Sent",
       "viewCampaign": "View Campaign",
       "viewReport": "View Report"
     }
@@ -155,22 +170,22 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Choose Plan",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Plan, preview, and schedule Instagram Stories on web and mobile.",
-        "3": "Include the first comment when you schedule Instagram posts",
-        "4": "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
-        "5": "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "2 users",
-        "2": "Instagram Stories",
-        "3": "Instagram first comment",
-        "4": "Hashtag Manager",
-        "5": "Shop Grid"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Plan, preview, and schedule Instagram Stories on web and mobile.",
+        "Include the first comment when you schedule Instagram posts",
+        "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+      ],
+      "features": [
+        "8 social accounts",
+        "2 users",
+        "Instagram Stories",
+        "Instagram first comment",
+        "Hashtag Manager",
+        "Shop Grid"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -184,22 +199,22 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Upgrade to Premium",
       "cost": "$65",
-      "featureTooltips": {
-        "0": "",
-        "1": "Include the first comment when you schedule Instagram posts",
-        "2": "Tag Instagram users when you schedule Instagram posts",
-        "3": "Build a library of hashtag groups to use in Instagram frst comments. Reuse top performers and optimize your reach.",
-        "4": "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
-        "5": "Plan, preview, and schedule Instagram Stories on web and mobile."
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "Instagram first comment",
-        "2": "Instagram user tagging",
-        "3": "Hashtag Manager",
-        "4": "Shop Grid",
-        "5": "Instagram Stories"
-      },
+      "featureTooltips": [
+        "",
+        "Include the first comment when you schedule Instagram posts",
+        "Tag Instagram users when you schedule Instagram posts",
+        "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
+        "Plan, preview, and schedule Instagram Stories on web and mobile."
+      ],
+      "features": [
+        "8 social accounts",
+        "Instagram first comment",
+        "Instagram user tagging",
+        "Hashtag Manager",
+        "Shop Grid",
+        "Instagram Stories"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
       "plan": "premium_business",
@@ -213,16 +228,16 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Choose Plan",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "",
-        "2": "Include first comment when you schedule Instagram posts"
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "1 user",
-        "2": "Instagram first comment"
-      },
+      "featureTooltips": [
+        "",
+        "",
+        "Include first comment when you schedule Instagram posts"
+      ],
+      "features": [
+        "8 social accounts",
+        "1 user",
+        "Instagram first comment"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -235,16 +250,16 @@
       "buttonText": "Upgrade to Pro",
       "buttonTextDisabled": "Current Plan",
       "cost": "$15",
-      "featureTooltips": {
-        "0": "",
-        "1": "Include first comment when you schedule Instagram posts",
-        "2": "Tag Instagram users when you schedule Instagram posts"
-      },
-      "features": {
-        "0": "8 social accounts",
-        "1": "Instagram first comment",
-        "2": "Instagram user tagging"
-      },
+      "featureTooltips": [
+        "",
+        "Include first comment when you schedule Instagram posts",
+        "Tag Instagram users when you schedule Instagram posts"
+      ],
+      "features": [
+        "8 social accounts",
+        "Instagram first comment",
+        "Instagram user tagging"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -261,14 +276,14 @@
       "buttonCurrentPlanText": "Current Plan",
       "buttonText": "Choose Plan",
       "cost": "$99",
-      "features": {
-        "0": "25 social accounts",
-        "1": "6 users",
-        "2": "Instagram Stories",
-        "3": "Instagram first comment",
-        "4": "Hashtag Manager",
-        "5": "Shop Grid"
-      },
+      "features": [
+        "25 social accounts",
+        "6 users",
+        "Instagram Stories",
+        "Instagram first comment",
+        "Hashtag Manager",
+        "Shop Grid"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$49.50",
       "plan": "small",
@@ -276,7 +291,37 @@
       "title": "Business"
     }
   },
+  "tabs": {
+    "queue": "Queue",
+    "stories": "Stories",
+    "pastReminders": "Past Reminders",
+    "analytics": "Analytics",
+    "awaitingApproval": "Awaiting Approval",
+    "pendingApproval": "Pending Approval",
+    "drafts": "Drafts",
+    "shopGrid": "Shop Grid",
+    "settings": "Settings",
+    "upgrade": "Upgrade",
+    "posts": "Posts",
+    "overview": "Overview",
+    "general": "General",
+    "postingSchedule": "Posting Schedule",
+    "reconnecting": "Reconnecting...",
+    "reconnect": "Reconnect"
+  },
+  "app-shell": {
+    "preferences": "Preferences",
+    "team": "Team",
+    "returnToClassic": "Return to Classic",
+    "startProTrial": "Start Pro Trial",
+    "upgradetoPro": "Upgrade to Pro",
+    "helpCenter": "Help Center",
+    "status": "Status",
+    "pricingAndPlans": "Pricing & Plans",
+    "wishlist": "Wishlist"
+  },
   "preferences": {
+    "backToDashboard": "Back to Dashboard",
     "menu": {
       "appsAndExtras": "Apps & Extras",
       "billing": "Billing",
@@ -284,10 +329,80 @@
       "notifications": "Notifications",
       "security": "Security"
     },
-    "backToDashboard": "Back to Dashboard"
+    "general": {
+      "title": "General",
+      "changePreferences": "Change your general preferences.",
+      "timeFormat": "Time Format",
+      "hour": "hour",
+      "dayToStartWeek": "Day to start the week",
+      "sunday": "Sunday",
+      "monday": "Monday"
+    },
+    "security": {
+      "title": "Security",
+      "addSecurity": "Add an extra layer of security to your account.",
+      "password": "Password",
+      "passwordDescription": "Use your password to sign in to Buffer on the web and mobile apps. Make it nice and secure!",
+      "changeYourPassword": "Change Your Password",
+      "twoFactorAuthentication": "Two Factor Authentication",
+      "tfaExplanation": "Two factor authentication adds an extra layer of security for your Buffer account. Whenever you log in to your account, after entering your username and password, you will be asked for a second authentication code that was sent to your mobile phone via text or a free mobile app. ",
+      "method": "Method",
+      "phoneNumber": "Phone number",
+      "recoveryCode": "Recovery code",
+      "sms": "SMS",
+      "authenticatorApp": "Authenticator App",
+      "enableTwoFactor": "Enable Two Factor Authentication",
+      "changeTwoFactor": "Change Two Factor Authentication",
+      "sendSecutiryCodes": "How would you like us to send your security codes?",
+      "textMessage": "Text Message",
+      "yourRecoveryCode": "Your Recovery Code",
+      "saveOneTimeCode": "Save this one-time recovery code",
+      "recoveryCodeDescription": "With Two Factor Authentication, if you lose your phone there&apos;s a possibility you could get locked out of your account. Save this code in a safe place to use if you can&apos;t log in with your phone."
+    },
+    "notifications": {
+      "title": "Email Notifications",
+      "description": "We can remind you when one of your Buffer is looking a little empty.",
+      "emptyBuffer": "Empty Buffer",
+      "emptyBufferEmail": "Send me an email when one of my Buffers becomes empty.",
+      "newsletter": "Newsletter",
+      "newsletterEmail": "Send me occasional emails with new Buffer features and tips.",
+      "updateFailures": "Update Failures",
+      "updateFailuresEmail": "Send me emails when an update fails to post.",
+      "updateSuccesses": "Update Successes",
+      "updateSuccessesEmail": "Send me emails when an update successfully posts.",
+      "weeklyDigests": "Weekly Digests",
+      "weeklyDigestsEmail": "Send me weekly emails summarizing my posting activity.",
+      "awaitingApproval": "Awaiting Approval",
+      "awaitingApprovalEmail": "Send me emails when there is a new draft awaiting approval.",
+      "movedBackToDrafts": "Post moved back to drafts",
+      "movedBackToDraftsEmail": "Send me emails when my draft is moved from Pending Approval back to Drafts.",
+      "celebrations": "Celebrations",
+      "celebrationsEmail": "Send me emails celebrating my posting achievements."
+    },
+    "appsAndExtras": {
+      "title": "Buffer Apps & Extras",
+      "description": "Get the most out of Buffer with our mobile apps and browser extension.",
+      "browserExtension": "Browser Extension",
+      "extensionDescription": "Our browser extension lets you share content as you browse the web.",
+      "installExtension": "Install the Browser extension",
+      "mobileApps": "Mobile Apps",
+      "mobileAppsDescription": "Share content and manage your Buffer account on the go with our mobile apps.",
+      "viewOnAppleStore": "View on Apple Store",
+      "viewOnGooglePlay": "View on Google Play",
+      "connectedApps": "Connected Apps ",
+      "connectedAppsDesc": "Get the most out of Buffer and share from your mobile, news reader, blog or anywhere! ",
+      "getMoreApps": "Get More Apps →",
+      "revokeAccess": "Revoke Access"
+    }
   },
   "profile-sidebar": {
-    "connectButton": "Manage Social Accounts"
+    "connectButton": "Manage Social Accounts",
+    "socialAccounts": "Social accounts",
+    "connectInstagram": "Connect Instagram",
+    "connectFacebook": "Connect Facebook",
+    "connectTwitter": "Connect Twitter",
+    "searchProfiles": "Search Profiles",
+    "noProfilesFound": "No Profiles Found"
   },
   "profiles-disconnected-banner": {
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
@@ -480,6 +595,9 @@
     "validating": "One moment...",
     "zipCode": "Zip code",
     "zipLeaveBlank": "Leave blank for non-US cards"
+  },
+  "tag-badge": {
+    "new": "New"
   },
   "trial-complete-modal": {
     "cancelTrial": "Cancel Trial",

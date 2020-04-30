@@ -86,10 +86,6 @@ const PastRemindersPosts = ({
   onEditClick,
   onShareAgainClick,
   onMobileClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onComposerCreateSuccess,
   showComposer,
   editMode,
@@ -143,10 +139,6 @@ const PastRemindersPosts = ({
           onEditClick={onEditClick}
           onShareAgainClick={post => onShareAgainClick(post, viewType)}
           onMobileClick={post => onMobileClick(post, viewType)}
-          onImageClick={onImageClick}
-          onImageClickNext={onImageClickNext}
-          onImageClickPrev={onImageClickPrev}
-          onImageClose={onImageClose}
           isManager={isManager}
           isBusinessAccount={isBusinessAccount}
           isSent={false}
@@ -181,10 +173,6 @@ PastRemindersPosts.propTypes = {
   onEditClick: PropTypes.func,
   onShareAgainClick: PropTypes.func,
   onMobileClick: PropTypes.func,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
   onPreviewClick: PropTypes.func,
   onClosePreviewClick: PropTypes.func,
   viewType: PropTypes.string,
@@ -216,10 +204,6 @@ PastRemindersPosts.defaultProps = {
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onMobileClick: () => {},
-  onImageClick: () => {},
-  onImageClickNext: () => {},
-  onImageClickPrev: () => {},
-  onImageClose: () => {},
   onPreviewClick: () => {},
   onClosePreviewClick: () => {},
 };

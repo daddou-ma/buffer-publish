@@ -271,33 +271,6 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('should handle POST_IMAGE_CLICKED action type', () => {
-    const post = { id: '12345', text: 'i heart buffer' };
-    const postAfter = { ...post, isLightboxOpen: true, currentImage: 0 };
-    const stateBefore = {
-      byProfileId: {
-        [profileId]: Object.assign(profileInitialState, {
-          posts: { 12345: post },
-        }),
-      },
-    };
-    const stateAfter = {
-      byProfileId: {
-        [profileId]: Object.assign(profileInitialState, {
-          posts: { 12345: postAfter },
-        }),
-      },
-    };
-    const action = {
-      type: actionTypes.POST_IMAGE_CLICKED,
-      profileId,
-      post: postAfter,
-      updateId: postAfter.id,
-    };
-    deepFreeze(action);
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
   it('should handle TOGGLE_VIEW_TYPE action type', () => {
     const stateBefore = {
       ...initialState,
@@ -358,33 +331,6 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('should handle POST_IMAGE_CLOSED action type', () => {
-    const post = { id: '12345', text: 'i heart buffer' };
-    const postAfter = { ...post, isLightboxOpen: false };
-    const stateBefore = {
-      byProfileId: {
-        [profileId]: Object.assign(profileInitialState, {
-          posts: { 12345: post },
-        }),
-      },
-    };
-    const stateAfter = {
-      byProfileId: {
-        [profileId]: Object.assign(profileInitialState, {
-          posts: { 12345: postAfter },
-        }),
-      },
-    };
-    const action = {
-      type: actionTypes.POST_IMAGE_CLOSED,
-      profileId,
-      post: postAfter,
-      updateId: postAfter.id,
-    };
-    deepFreeze(action);
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
   describe('actions', () => {
     it('handleMobileClick triggers a POST_MOBILE_REMINDER action', () => {
       const post = { id: 'id1' };
@@ -400,46 +346,6 @@ describe('reducer', () => {
         type: actionTypes.STORY_GROUP_MOBILE_REMINDER,
         updateId: post.id,
         storyGroup: post,
-        profileId,
-      });
-    });
-
-    it('handleImageClick triggers a POST_IMAGE_CLICKED action', () => {
-      const post = { id: 'id1' };
-      expect(actions.handleImageClick({ post, profileId })).toEqual({
-        type: actionTypes.POST_IMAGE_CLICKED,
-        updateId: post.id,
-        post,
-        profileId,
-      });
-    });
-
-    it('handleImageClickNext triggers a POST_IMAGE_CLICKED_NEXT action', () => {
-      const post = { id: 'id1' };
-      expect(actions.handleImageClickNext({ post, profileId })).toEqual({
-        type: actionTypes.POST_IMAGE_CLICKED_NEXT,
-        updateId: post.id,
-        post,
-        profileId,
-      });
-    });
-
-    it('handleImageClickPrev triggers a POST_IMAGE_CLICKED_PREV action', () => {
-      const post = { id: 'id1' };
-      expect(actions.handleImageClickPrev({ post, profileId })).toEqual({
-        type: actionTypes.POST_IMAGE_CLICKED_PREV,
-        updateId: post.id,
-        post,
-        profileId,
-      });
-    });
-
-    it('handleImageClose triggers a POST_IMAGE_CLOSED action', () => {
-      const post = { id: 'id1' };
-      expect(actions.handleImageClose({ post, profileId })).toEqual({
-        type: actionTypes.POST_IMAGE_CLOSED,
-        updateId: post.id,
-        post,
         profileId,
       });
     });

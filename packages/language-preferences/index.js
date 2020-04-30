@@ -14,3 +14,7 @@ export default connect(
     },
   })
 )(LanguagePreferences);
+
+// export reducer
+export reducer, { actions, actionTypes } from './reducer';
+export middleware from './middleware';

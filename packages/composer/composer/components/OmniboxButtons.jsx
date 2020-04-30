@@ -1,6 +1,6 @@
 import React from 'react';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import Button from '../components/Button';
+import Button from '../components/shared/Button';
 import styles from './css/OmniboxButtons.css';
 
 class OmniboxButtons extends React.Component {

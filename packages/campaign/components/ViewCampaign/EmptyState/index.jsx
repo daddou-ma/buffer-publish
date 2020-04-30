@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { EmptyState } from '@bufferapp/publish-shared-components';
 import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
+import { useTranslation } from 'react-i18next';
 import EmptyCampaignBanner from '../EmptyCampaignBanner';
 import ExamplePost from '../ExamplePost';
 
@@ -11,7 +12,6 @@ const EmptyCampaignWrapper = styled.div`
 `;
 
 const EmptyStateCampaign = ({
-  translations,
   actions,
   sentView,
   campaign,
@@ -23,12 +23,14 @@ const EmptyStateCampaign = ({
   const displayAllPostsSent =
     !sentView && campaign?.scheduled === 0 && campaign?.sent > 0;
 
+  const { t } = useTranslation();
+
   const teamMemberPrimaryAction = {
-    label: translations.allPostsSent.createCampaign,
+    label: t('campaigns.viewCampaign.allPostsSent.createCampaign'),
     onClick: actions.onCreateCampaignClick,
   };
   const ownerPrimaryAction = {
-    label: translations.allPostsSent.viewReport,
+    label: t('campaigns.viewCampaign.allPostsSent.viewReport'),
     onClick: () => actions.goToAnalyzeReport(campaign),
     icon: <ArrowRightIcon />,
     iconEnd: true,
@@ -38,10 +40,7 @@ const EmptyStateCampaign = ({
     <main id="main">
       {displayEmptyCampaign && (
         <EmptyCampaignWrapper>
-          <EmptyCampaignBanner
-            translations={translations}
-            onCreatePostClick={actions.onCreatePostClick}
-          />
+          <EmptyCampaignBanner onCreatePostClick={actions.onCreatePostClick} />
           <ExamplePost />
           <ExamplePost />
         </EmptyCampaignWrapper>
@@ -49,19 +48,19 @@ const EmptyStateCampaign = ({
       {displayEmptySentPosts && (
         <EmptyState
           height="100%"
-          title={translations.emptySentPosts.title}
-          subtitle={translations.emptySentPosts.subtitle}
+          title={t('campaigns.viewCampaign.emptySentPosts.title')}
+          subtitle={t('campaigns.viewCampaign.emptySentPosts.subtitle')}
           heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-not-sent.png"
         />
       )}
       {displayAllPostsSent && (
         <EmptyState
           height="100%"
-          title={translations.allPostsSent.title}
-          subtitle={translations.allPostsSent.subtitle}
+          title={t('campaigns.viewCampaign.allPostsSent.title')}
+          subtitle={t('campaigns.viewCampaign.allPostsSent.subtitle')}
           heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-sent-1.png"
           secondaryAction={{
-            label: translations.allPostsSent.createPost,
+            label: t('campaigns.viewCampaign.allPostsSent.createPost'),
             onClick: actions.onCreatePostClick,
           }}
           primaryAction={
@@ -74,19 +73,6 @@ const EmptyStateCampaign = ({
 };
 
 EmptyStateCampaign.propTypes = {
-  translations: PropTypes.shape({
-    emptySentPosts: PropTypes.shape({
-      title: PropTypes.string,
-      subtitle: PropTypes.string,
-    }),
-    allPostsSent: PropTypes.shape({
-      title: PropTypes.string,
-      subtitle: PropTypes.string,
-      createPost: PropTypes.string,
-      createCampaign: PropTypes.string,
-      viewReport: PropTypes.string,
-    }),
-  }).isRequired,
   sentView: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
     onCreatePostClick: PropTypes.func.isRequired,

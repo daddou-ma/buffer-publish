@@ -5,6 +5,7 @@ import { Text, Input, Button, Link } from '@bufferapp/ui';
 import { SimpleColorPicker } from '@bufferapp/publish-shared-components';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { View } from '@bufferapp/ui/Icon';
+import { useTranslation } from 'react-i18next';
 import {
   grayLight,
   grayLighter,
@@ -82,7 +83,6 @@ const colors = [
 /* Component */
 const CampaignForm = ({
   campaignId,
-  translations,
   onCreateOrUpdateCampaignClick,
   onCancelClick,
   isLoading,
@@ -118,6 +118,8 @@ const CampaignForm = ({
     }
   }, []);
 
+  const { t } = useTranslation();
+
   // State modifiers
   const disableCampaignSubmitButton = ({ name, color }) => {
     const isSaveButtonDisabled = !name.trim() || !color.trim();
@@ -141,22 +143,24 @@ const CampaignForm = ({
       <Main id="main">
         <Card>
           <Headline type="h2">
-            {editMode ? translations.editTitle : translations.createTitle}
+            {editMode
+              ? t('campaigns.campaignForm.editTitle')
+              : t('campaigns.campaignForm.createTitle')}
           </Headline>
           <Input
             type="text"
             value={campaignName}
             onChange={setCampaignName}
             required
-            name={translations.name}
-            label={translations.name}
-            placeholder={translations.placeholder}
+            name={t('campaigns.campaignForm.name')}
+            label={t('campaigns.campaignForm.name')}
+            placeholder={t('campaigns.campaignForm.placeholder')}
             aria-required="true"
-            aria-label={translations.ariaLabel}
+            aria-label={t('campaigns.campaignForm.ariaLabel')}
             ref={inputElement}
           />
           <Text htmlFor="colorPicker" type="label">
-            {translations.color}
+            {t('campaigns.campaignForm.color')}
           </Text>
           <SimpleColorPicker
             id="colorPicker"
@@ -167,7 +171,7 @@ const CampaignForm = ({
           <Button
             type="primary"
             size="large"
-            label={translations.saveCampaign}
+            label={t('campaigns.campaignForm.saveCampaign')}
             onClick={() =>
               onCreateOrUpdateCampaignClick({
                 campaignId,
@@ -183,7 +187,7 @@ const CampaignForm = ({
           <Button
             type="text"
             size="large"
-            label={translations.cancel}
+            label={t('campaigns.campaignForm.cancel')}
             onClick={onCancelClick}
             fullWidth
           />
@@ -192,14 +196,14 @@ const CampaignForm = ({
           <View color={grayDark} />
           <Notice>
             <NoticeText type="p" color={grayDark}>
-              {translations.notice1}
+              {t('campaigns.campaignForm.notice1')}
               <Link
                 href="https://support.buffer.com/hc/en-us/articles/360046266313-creating-and-managing-campaigns"
                 newTab
               >
-                {translations.notice2}
+                {t('campaigns.campaignForm.notice2')}
               </Link>
-              {translations.notice3}
+              {t('campaigns.campaignForm.notice3')}
             </NoticeText>
           </Notice>
         </NoticeCard>
@@ -209,20 +213,6 @@ const CampaignForm = ({
 };
 
 CampaignForm.propTypes = {
-  translations: PropTypes.shape({
-    editTitle: PropTypes.string.isRequired,
-    createTitle: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    notice1: PropTypes.string.isRequired,
-    notice2: PropTypes.string.isRequired,
-    notice3: PropTypes.string.isRequired,
-    saveCampaign: PropTypes.string.isRequired,
-    cancel: PropTypes.string.isRequired,
-    ariaLabel: PropTypes.string.isRequired,
-  }).isRequired,
   campaignId: PropTypes.string,
   fetchCampaign: PropTypes.func.isRequired,
   onCreateOrUpdateCampaignClick: PropTypes.func.isRequired,

@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Profile from '../components/Profile';
 import ProfileGroups from '../components/ProfileGroups';
-import Button from '../components/Button';
+import Button from '../components/shared/Button';
 import styles from './css/ProfileSection.css';
 import AppActionCreators from '../action-creators/AppActionCreators';
 

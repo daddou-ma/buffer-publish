@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { MemoryRouter } from 'react-router-dom';
-import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 
 import List from './index';
 
@@ -52,7 +51,6 @@ storiesOf('Campaigns|ListCampaigns', module)
   .add('List of campaigns', () => (
     <List
       campaigns={campaigns}
-      translations={translations.campaigns.viewCampaign}
       onViewCampaignClick={action('view campaign')}
       onDeleteCampaignClick={action('delete campaign')}
       onEditCampaignClick={action('edit campaign')}

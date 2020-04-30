@@ -130,44 +130,6 @@ export default ({ dispatch, getState }) => next => (action) => {
       break;
     }
 
-    case profileActionTypes.SELECT_PROFILE: {
-      const profileId = getState().profileSidebar.selectedProfileId;
-      const isIGBusiness = getState().profileSidebar.selectedProfile.service_type === 'business';
-      const tourInProgress = getState().thirdparty.appCues.inProgress;
-
-      if (getState().appSidebar.user.plan === 'awesome') {
-        // Context: https://buffer.atlassian.net/browse/PUB-2004
-        return;
-      }
-
-      if (shouldShowInstagramDirectPostingModal() && !isIGBusiness) {
-        if (tourInProgress) {
-          dispatch(dataFetchActions.fetch({
-            name: 'checkInstagramBusiness',
-            args: {
-              profileId,
-              callbackAction: actions.saveModalToShowLater({
-                modalId: actionTypes.SHOW_IG_DIRECT_POSTING_MODAL,
-                profileId,
-              }),
-            },
-          }));
-        } else {
-          dispatch(dataFetchActions.fetch({
-            name: 'checkInstagramBusiness',
-            args: {
-              profileId,
-              callbackAction: actions.showInstagramDirectPostingModal({
-                profileId,
-              }),
-            },
-          }));
-        }
-
-        resetShowModalKey();
-      }
-      break;
-    }
     case storiesActionTypes.STORY_SENT: {
       // the composer closes after pusher sent event, so close the confirmation modal too
       const { showCloseComposerConfirmationModal } = getState().modals;

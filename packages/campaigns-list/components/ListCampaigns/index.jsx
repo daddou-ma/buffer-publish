@@ -43,7 +43,6 @@ const Main = styled.main`
 `;
 
 const ListCampaigns = ({
-  translations,
   campaigns,
   onEditCampaignClick,
   onDeleteCampaignClick,
@@ -67,12 +66,7 @@ const ListCampaigns = ({
   const { t } = useTranslation();
 
   if (!isLoading && (!campaigns || campaigns.length === 0)) {
-    return (
-      <EmptyState
-        translations={translations.emptyState}
-        onOpenCreateCampaignClick={onOpenCreateCampaignClick}
-      />
-    );
+    return <EmptyState onOpenCreateCampaignClick={onOpenCreateCampaignClick} />;
   }
 
   return (
@@ -82,14 +76,14 @@ const ListCampaigns = ({
           <TextWithSkeleton
             type="h2"
             displaySkeleton={isLoading}
-            aria-label={isLoading ? 'Loading' : null}
+            aria-label={isLoading ? t('common.loading') : null}
           >
-            {t('campaigns.title')}
+            {t('campaigns.common.title')}
           </TextWithSkeleton>
           {showCampaignActions && (
             <ButtonWithSkeleton
               type="primary"
-              label="Create Campaign"
+              label={t('campaigns.common.createCampaign')}
               onClick={onOpenCreateCampaignClick}
               disabled={isLoading}
               displaySkeleton={isLoading}
@@ -103,15 +97,11 @@ const ListCampaigns = ({
             onDeleteCampaignClick={onDeleteCampaignClick}
             onViewCampaignClick={onViewCampaignClick}
             goToAnalyzeReport={goToAnalyzeReport}
-            translations={translations.viewCampaign}
             showCampaignActions={showCampaignActions}
           />
         )}
         {isLoading && (
-          <SkeletonList
-            translations={translations.viewCampaign}
-            showCampaignActions={showCampaignActions}
-          />
+          <SkeletonList showCampaignActions={showCampaignActions} />
         )}
       </Main>
     </Wrapper>
@@ -119,7 +109,6 @@ const ListCampaigns = ({
 };
 
 ListCampaigns.propTypes = {
-  translations: PropTypes.object.isRequired, // eslint-disable-line
   campaigns: PropTypes.array, // eslint-disable-line
   onOpenCreateCampaignClick: PropTypes.func,
   onEditCampaignClick: PropTypes.func,

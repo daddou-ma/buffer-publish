@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { AutoSelectText } from '@bufferapp/publish-shared-components';
+import { useTranslation } from 'react-i18next';
 
 const wrapperStyle = {
   display: 'flex',
@@ -14,28 +15,34 @@ const Recovery = ({
   editMode,
   recoveryCode,
   handleRecoveryCodeSelect,
-}) => (
-  <div style={wrapperStyle}>
-    <Text type="h3">
-      {editMode && 'Your Recovery Code'}
-      {!editMode && 'Save this one-time recovery code'}
-    </Text>
-    <div>
-      <Text type="p">
-        With Two Factor Authentication, if you lose your phone there&apos;s a
-        possibility you could get locked out of your account. Save this code in
-        a safe place to use if you can&apos;t log in with your phone.
-      </Text>
-    </div>
-    <AutoSelectText onSelect={handleRecoveryCodeSelect} copyToClipboard>
-      {loading ? 'Please wait...' : recoveryCode}
-    </AutoSelectText>
+}) => {
+  const { t } = useTranslation();
 
-    <div style={{ alignSelf: 'flex-end', marginTop: '16px' }}>
-      <Button type="primary" label="Done" onClick={() => transition('CLOSE')} />
+  return (
+    <div style={wrapperStyle}>
+      <Text type="h3">
+        {editMode && t('preferences.security.yourRecoveryCode')}
+        {!editMode && t('preferences.security.saveOneTimeCode')}
+      </Text>
+      <div>
+        <Text type="p">
+          {t('preferences.security.recoveryCodeDescription')}
+        </Text>
+      </div>
+      <AutoSelectText onSelect={handleRecoveryCodeSelect} copyToClipboard>
+        {loading ? t('common.pleaseWait') : recoveryCode}
+      </AutoSelectText>
+
+      <div style={{ alignSelf: 'flex-end', marginTop: '16px' }}>
+        <Button
+          type="primary"
+          label={t('common.done')}
+          onClick={() => transition('CLOSE')}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Recovery.propTypes = {
   transition: PropTypes.func.isRequired,
