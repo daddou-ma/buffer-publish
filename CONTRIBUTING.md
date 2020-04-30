@@ -7,6 +7,7 @@ Here are some guidelines to make it as easy and clear as possible.
 - [Coding Styleguide 💻](#coding-styleguide-💻)
   - [Prettier 💁‍♀️](#prettier-💁‍♀️)
   - [Components Styleguide](#components-styleguide)
+  - [Strings and i18n](#strings-and-i18n)
 - [Adding New Dependencies](#adding-new-dependencies)
 - [How Packages Communicate 📦](#how-packages-communicate-📦)
 - [Styling Styleguide 💅](#styling-styleguide-💅)
@@ -174,6 +175,56 @@ A good way to have default values in our components is via the spread operator i
 ```js
 const Welcome = ({ name = 'John Smith' }) =>
    <h1>Hello, {name}</h1>;
+```
+
+### Strings and i18n
+For i18n, at the moment we have an internal package called `@bufferapp/publish-i18n`, however we are migrating all our String handling to `React.i18n`, so whenever you are working on a component, please defaut to [`React.i18n`](https://react.i18next.com/).
+
+**Adding strings to the translations JSON files:**
+- When working with strings in a component (new or modified), please make sure to always add them in the `translations/en-us.json`, we are trying to move all hard coded strings for a better structure.
+
+**Note:**
+If we start to adopt i18n more widely in the project, we should make the conscious decision to also add the translations to the `es-es.json` file, for the time being, we'll only be defaulting to the `en-us` file until we make a further decision on this.
+
+**Some Examples on how to work with React.i18n**
+
+- **Example with Hooks:** Since most of our components are functional components, the more often way to work with translations is with the Hook `useTranslation`:
+
+```js
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+export function MyComponent() {
+  const { t, i18n } = useTranslation();
+
+  return <p>{t('common.pleaseWait')}</p>
+}
+```
+
+- **Example with HOC:** We also have some class components, for which you'd want to go with the HOC approach:
+
+```js
+import React from 'react';
+import { withTranslation } from 'react-i18next';
+
+function MyComponent({ t, i18n }) {
+  return <p>{t('common.pleaseWait')}</p>
+}
+
+export default withTranslation()(MyComponent);
+```
+
+- **Example with Trans:** For more complex translations, use Trans: While the Trans components gives you a lot of power by letting you interpolate or translate complex react elements - the truth is - in most cases you won't need it.
+
+```js
+import React from 'react';
+import { Trans } from 'react-i18next';
+
+export function MyComponent() {
+  <Trans i18nKey="billing-upgrade-cta-banner.remainingTrial">
+    You have <strong>{{ remaining: trial.trialTimeRemaining }}</strong> on your {{ plan }} plan trial.
+  </Trans>
+};
 ```
 
 ## Adding New Dependencies
