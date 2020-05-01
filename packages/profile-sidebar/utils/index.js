@@ -8,3 +8,7 @@ export const shouldGoToProfile = (profile, prevProps) => {
     (isADifferentProfile(profile, prevProps) || prevProps.profileId === null)
   );
 };
+
+export const filterProfilesByOrg = (profiles, org) => {
+  return profiles?.filter(profile => profile.organizationId === org.id);
+};

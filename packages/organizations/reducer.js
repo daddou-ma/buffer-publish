@@ -1,4 +1,5 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { getSelectedOrganization, mapSelectedOrganization } from './utils';
 
 const orgData =
   typeof window !== 'undefined' &&
@@ -8,8 +9,21 @@ const orgData =
 
 module.exports = (state = orgData || {}, action) => {
   switch (action.type) {
-    case `organizations_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return [...action.result];
+    case `organizations_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const orgs = action.result;
+      const selected = getSelectedOrganization(orgs);
+      return {
+        list: orgs,
+        selected,
+      };
+    }
+    case `ORGANIZATION_SELECTED`: {
+      return {
+        ...state,
+        list: action.orgs,
+        selected: action.selected,
+      };
+    }
     default:
       return state;
   }

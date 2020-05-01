@@ -2,6 +2,8 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 
 import keyWrapper from '@bufferapp/keywrapper';
+import { getSelectedOrganization } from '@bufferapp/publish-data-organizations/utils';
+import { filterProfilesByOrg } from './utils';
 
 export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   SELECT_PROFILE: 0,
@@ -143,6 +145,36 @@ export default (state = initialState, action) => {
   let isSearchPopupVisible = false;
   let searchText = null;
   switch (action.type) {
+    case `ORGANIZATION_SELECTED`: {
+      const selectedOrg = action.selected;
+      let { profiles } = state;
+
+      if (profiles) {
+        const { profileList } = state;
+        profiles = filterProfilesByOrg(profileList, selectedOrg);
+      }
+
+      return {
+        ...state,
+        org: selectedOrg,
+        profiles,
+      };
+    }
+    case `organizations_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const selectedOrg = getSelectedOrganization(action.result);
+      let { profiles } = state;
+
+      if (profiles) {
+        const { profileList } = state;
+        profiles = filterProfilesByOrg(profileList, selectedOrg);
+      }
+
+      return {
+        ...state,
+        org: selectedOrg,
+        profiles,
+      };
+    }
     case `profiles_${dataFetchActionTypes.FETCH_START}`:
       // Ignore analyze specific actions so as not to flash loading state
       if (action.args && action.args.forAnalyze) {
@@ -156,7 +188,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        profiles: action.result,
+        profileList: action.result,
+        profiles: filterProfilesByOrg(action.result, state.org),
         hasInstagram: action.result.some(p => p.service === 'instagram'),
         hasFacebook: action.result.some(p => p.service === 'facebook'),
         hasTwitter: action.result.some(p => p.service === 'twitter'),
@@ -182,7 +215,7 @@ export default (state = initialState, action) => {
         isSearchPopupVisible,
       };
     case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      let { selectedProfile, profiles } = state;
+      let { selectedProfile, profiles, org } = state;
 
       if (selectedProfile.id === action.result.id) {
         selectedProfile = action.result;

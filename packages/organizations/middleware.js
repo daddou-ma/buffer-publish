@@ -1,6 +1,7 @@
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { getSelectedOrganization, mapSelectedOrganization } from './utils';
 
-export default ({ dispatch }) => next => action => {
+export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
     case 'INIT_ORGANIZATIONS':
@@ -26,6 +27,20 @@ export default ({ dispatch }) => next => action => {
         );
       }
       break;
+    case `SELECT_ORGANIZATION`: {
+      const list = mapSelectedOrganization({
+        id: action.id,
+        orgs: getState().organizations.list,
+      });
+      const selected = getSelectedOrganization(list);
+
+      dispatch({
+        type: 'ORGANIZATION_SELECTED',
+        orgs: list,
+        selected,
+      });
+      break;
+    }
     default:
       break;
   }
