@@ -1,8 +1,9 @@
 module.exports = orgData => ({
   id: orgData.id,
-  plan: orgData.plan,
-  planCode: orgData.plan_code,
+  locked: orgData.locked,
   name: orgData.name,
   ownerId: orgData.owner_id,
-  locked: orgData.locked,
+  ownerEmail: orgData.owner_email,
+  plan: orgData.plan,
+  planCode: orgData.plan_code,
 });

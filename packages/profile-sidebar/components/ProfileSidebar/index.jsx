@@ -127,7 +127,7 @@ const ProfileSidebar = ({
               <Divider marginTop="0" marginBottom="1rem" />
             </React.Fragment>
           )}
-          {profiles.length > 2 && (
+          {profiles.length > 9 && (
             <ProfileSearch
               profiles={profiles}
               onSearchProfileChange={onSearchProfileChange}
