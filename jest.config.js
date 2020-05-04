@@ -25,6 +25,12 @@ module.exports = {
     `/node_modules${publishPackagesWhitelist}${analyzePackagesWhitelist}`,
   ],
   collectCoverage: true,
+  collectCoverageFrom: [
+    '**/packages/**/*.{js,jsx}',
+    '!**/packages/**/story.jsx',
+    '!**/packages/**/store/*.js',
+    '!**/packages/**/i18n/index.js',
+  ],
   moduleNameMapper: {
     '\\.(css|less)$': 'identity-obj-proxy',
   },
@@ -40,4 +46,8 @@ module.exports = {
   },
   testPathIgnorePatterns: ['package/sidebar/node_modules'],
   testURL: 'https://publish.local.buffer.com',
+  watchPlugins: [
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
+  ],
 };
