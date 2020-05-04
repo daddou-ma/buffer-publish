@@ -142,6 +142,7 @@ const AppShell = ({
 
   return (
     <BDSAppShell
+      displaySkipLink
       content={children}
       featureFlips={featureFlips}
       activeProduct="publish"
