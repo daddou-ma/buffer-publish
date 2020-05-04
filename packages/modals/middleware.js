@@ -1,6 +1,5 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification/reducer';
-import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
@@ -104,23 +103,6 @@ export default ({ dispatch, getState }) => next => action => {
       ) {
         dispatch(actions.showTrialCompleteModal());
       }
-      break;
-    }
-
-    case thirdPartyActionTypes.APPCUES_FINISHED: {
-      const modalToShow = getState().modals.modalToShowLater;
-      if (!modalToShow) {
-        return;
-      }
-
-      if (modalToShow.id === actionTypes.SHOW_IG_DIRECT_POSTING_MODAL) {
-        dispatch(
-          actions.showInstagramDirectPostingModal({
-            profileId: modalToShow.params.profileId,
-          })
-        );
-      }
-
       break;
     }
 
