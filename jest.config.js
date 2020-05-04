@@ -46,8 +46,4 @@ module.exports = {
   },
   testPathIgnorePatterns: ['package/sidebar/node_modules'],
   testURL: 'https://publish.local.buffer.com',
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
-  ],
 };
