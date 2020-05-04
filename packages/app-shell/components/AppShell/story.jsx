@@ -19,6 +19,7 @@ storiesOf('AppShell', module)
       openAccount={action('open-account')}
       openPreferences={action('open-preferences')}
       openLogout={action('open-logout')}
+      displaySkipLink
     >
       This is my content
     </AppShell>
@@ -54,6 +55,25 @@ storiesOf('AppShell', module)
       openAccount={action('open-account')}
       openPreferences={action('open-preferences')}
       openLogout={action('open-logout')}
+    >
+      This is my content
+    </AppShell>
+  ))
+  .add('with a skip to main content link for screen readers', () => (
+    <AppShell
+      showStartProTrial
+      showSwitchPlan
+      user={{
+        name: 'Tom Redman',
+        email: 'tom.redman@buffer.com',
+        avatar:
+          'https://pbs.twimg.com/profile_images/988599738315423745/epPuqmx4_400x400.jpg',
+      }}
+      returnToClassic={action('return-to-classic')}
+      openAccount={action('open-account')}
+      openPreferences={action('open-preferences')}
+      openLogout={action('open-logout')}
+      displaySkipLink
     >
       This is my content
     </AppShell>
