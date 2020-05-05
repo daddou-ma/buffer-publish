@@ -156,8 +156,6 @@ const CampaignForm = ({
             name={t('campaigns.campaignForm.name')}
             label={t('campaigns.campaignForm.name')}
             placeholder={t('campaigns.campaignForm.placeholder')}
-            aria-required="true"
-            aria-label={t('campaigns.campaignForm.ariaLabel')}
             ref={inputElement}
           />
           <Text htmlFor="colorPicker" type="label">
