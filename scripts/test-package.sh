@@ -15,5 +15,5 @@ yarn run jest \
   --verbose=false \
   --testPathPattern $path \
   --coverage \
-  --collectCoverageFrom='["'"$path"'/**/*.jsx", "'"$path"'/**/*.js"]' \
+  --collectCoverageFrom='["'"$path"'/**/*.jsx", "'"$path"'/**/*.js", "!'"$path"'/**/story.jsx"]' \
   -u
