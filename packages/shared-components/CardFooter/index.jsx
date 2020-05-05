@@ -11,6 +11,7 @@ import {
   grayDarker,
   red,
   grayDark,
+  gray,
 } from '@bufferapp/ui/style/colors';
 import { fontWeightBold } from '@bufferapp/ui/style/fonts';
 
@@ -47,7 +48,7 @@ const CardFooterWrapper = styled.div`
 const CardFooterWrapperWithBorder = styled(CardFooterWrapper)`
   padding: 8px 16px;
   background-color: ${offWhite};
-  border-top: 1px solid ${grayLight};
+  border-top: 1px solid ${gray};
 `;
 
 const CardFooterContent = styled.div`
