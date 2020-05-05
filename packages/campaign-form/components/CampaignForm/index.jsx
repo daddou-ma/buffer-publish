@@ -148,6 +148,7 @@ const CampaignForm = ({
               : t('campaigns.campaignForm.createTitle')}
           </Headline>
           <Input
+            id="campaignName"
             type="text"
             value={campaignName}
             onChange={setCampaignName}
