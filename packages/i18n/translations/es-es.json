@@ -22,7 +22,6 @@
       "createCampaign": "Crear Campaña"
     },
     "campaignForm": {
-      "ariaLabel": "Campo nombre para el formulario de campaña",
       "cancel": "Cancelar",
       "color": "Color",
       "createTitle": "Crear Campaña",

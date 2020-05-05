@@ -148,6 +148,7 @@ const CampaignForm = ({
               : t('campaigns.campaignForm.createTitle')}
           </Headline>
           <Input
+            id="campaignName"
             type="text"
             value={campaignName}
             onChange={setCampaignName}
@@ -155,8 +156,6 @@ const CampaignForm = ({
             name={t('campaigns.campaignForm.name')}
             label={t('campaigns.campaignForm.name')}
             placeholder={t('campaigns.campaignForm.placeholder')}
-            aria-required="true"
-            aria-label={t('campaigns.campaignForm.ariaLabel')}
             ref={inputElement}
           />
           <Text htmlFor="colorPicker" type="label">
