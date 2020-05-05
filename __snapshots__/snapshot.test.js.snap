@@ -42,7 +42,7 @@ exports[`Storyshots Cards|Drafts/Draft approval view: isMoving 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -100,7 +100,7 @@ exports[`Storyshots Cards|Drafts/Draft approval view: isMoving 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -512,7 +512,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -570,7 +570,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -812,7 +812,7 @@ exports[`Storyshots Cards|Drafts/Draft isConfirmingDelete 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -870,7 +870,7 @@ exports[`Storyshots Cards|Drafts/Draft isConfirmingDelete 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -1055,7 +1055,7 @@ exports[`Storyshots Cards|Drafts/Draft isDeleting 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -1113,7 +1113,7 @@ exports[`Storyshots Cards|Drafts/Draft isDeleting 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -1298,7 +1298,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorking 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -1356,7 +1356,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorking 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -1541,7 +1541,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorkingManager 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -1599,7 +1599,7 @@ exports[`Storyshots Cards|Drafts/Draft isWorkingManager 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -2011,7 +2011,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -2069,7 +2069,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -2311,7 +2311,7 @@ exports[`Storyshots Cards|Drafts/Draft no permission 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -2369,7 +2369,7 @@ exports[`Storyshots Cards|Drafts/Draft no permission 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -2770,7 +2770,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -2828,7 +2828,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -3109,7 +3109,7 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -3167,7 +3167,7 @@ exports[`Storyshots Cards|Drafts/Draft past due no permission 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -3633,7 +3633,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -3691,7 +3691,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c18 {
@@ -4273,7 +4273,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -4331,7 +4331,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c18 {
@@ -4903,7 +4903,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
 }
 
@@ -4961,7 +4961,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c10 {
@@ -5465,7 +5465,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -5609,7 +5609,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager moving to dr
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -5910,7 +5910,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager past due 1`]
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -6080,7 +6080,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: managerIsApproving 1
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -6303,7 +6303,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not a manager 1`] = 
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -6640,7 +6640,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not a manager past d
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -6806,7 +6806,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not manager moving t
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -6880,7 +6880,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not manager, no perm
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -6943,7 +6943,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: isMoving 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -7244,7 +7244,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager - scheduled po
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -7656,7 +7656,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -8014,7 +8014,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager past due 1`] =
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -8184,7 +8184,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: managerIsApproving 1`]
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -8485,7 +8485,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -8843,7 +8843,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager past due 1
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -9013,7 +9013,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager past due, 
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -9115,7 +9115,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager, no permis
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -9178,7 +9178,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter isDeleting 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -9252,7 +9252,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter no permission 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -9562,7 +9562,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c7 {
@@ -10071,7 +10071,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c7 {
@@ -10523,7 +10523,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c7 {
@@ -11066,7 +11066,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c7 {
@@ -11593,7 +11593,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c7 {
@@ -11870,7 +11870,7 @@ exports[`Storyshots Cards|Posts/Post isConfirmingDelete 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c7 {
@@ -12042,7 +12042,7 @@ exports[`Storyshots Cards|Posts/Post isDeleting 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c7 {
@@ -12214,7 +12214,7 @@ exports[`Storyshots Cards|Posts/Post isWorking 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c7 {
@@ -12613,7 +12613,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c7 {
@@ -13091,7 +13091,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c15 {
@@ -13656,7 +13656,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c15 {
@@ -14122,7 +14122,7 @@ exports[`Storyshots Cards|Posts/PostFooter custom scheduled post 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -14477,7 +14477,7 @@ exports[`Storyshots Cards|Posts/PostFooter dragging post 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -14854,7 +14854,7 @@ exports[`Storyshots Cards|Posts/PostFooter has instagram comment 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -14998,7 +14998,7 @@ exports[`Storyshots Cards|Posts/PostFooter instagram reminder post 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -15124,7 +15124,7 @@ exports[`Storyshots Cards|Posts/PostFooter isDeleting 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -15199,7 +15199,7 @@ exports[`Storyshots Cards|Posts/PostFooter isWorking 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -15274,7 +15274,7 @@ exports[`Storyshots Cards|Posts/PostFooter past reminder 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -15350,7 +15350,7 @@ exports[`Storyshots Cards|Posts/PostFooter post if contributor 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -15641,7 +15641,7 @@ exports[`Storyshots Cards|Posts/PostFooter post with error 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -16028,7 +16028,7 @@ exports[`Storyshots Cards|Posts/PostFooter queued post 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c1 {
@@ -16656,7 +16656,7 @@ exports[`Storyshots Cards|Stories/Story default 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
   padding: 8px 16px;
 }
@@ -16711,7 +16711,7 @@ exports[`Storyshots Cards|Stories/Story default 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c12 {
@@ -17208,7 +17208,7 @@ exports[`Storyshots Cards|Stories/Story story with banner error message 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
   padding: 8px 16px;
 }
@@ -17263,7 +17263,7 @@ exports[`Storyshots Cards|Stories/Story story with banner error message 1`] = `
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c12 {
@@ -17746,7 +17746,7 @@ exports[`Storyshots Cards|Stories/Story story with banner message to download mo
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #636363;
+  border-bottom: 1px solid #B8B8B8;
   padding: 12px 16px;
   padding: 8px 16px;
 }
@@ -17801,7 +17801,7 @@ exports[`Storyshots Cards|Stories/Story story with banner message to download mo
   border-radius: 0 0 4px 4px;
   padding: 8px 16px;
   background-color: #fcfcfc;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #B8B8B8;
 }
 
 .c12 {
