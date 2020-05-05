@@ -31,8 +31,8 @@ const loadingAnimationStyle = {
 };
 
 const Main = styled.main`
-  max-width: '864px',
-  height: '100%',
+  max-width: 864px;
+  height: 100%;
 `;
 
 /**
