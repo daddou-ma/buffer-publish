@@ -116,20 +116,6 @@ const WebAPIUtils = {
                   tabId,
                   emptySlotMode,
                 });
-                const metadata = getSegmentMetadata({
-                  post,
-                  profile,
-                  formattedData,
-                  composerSource,
-                  queueingType,
-                });
-                AppActionCreators.triggerInteraction({
-                  message: {
-                    action: 'SEGMENT_TRACKING',
-                    eventName: 'Post Created',
-                    metadata,
-                  },
-                });
                 if (post.campaign_details) {
                   const onCampaignsPage = window.location.pathname.includes(
                     'campaigns'
