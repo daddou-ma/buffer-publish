@@ -9,7 +9,7 @@ import AppStore from '../stores/AppStore';
 import API from './API';
 import { observeStore } from '../utils/StoreUtils';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
-import { getComposerSource, getSegmentMetadata, getSegmentCampaignMetadata } from '../utils/TrackingUtils';
+import { getComposerSource, getSegmentCampaignMetadata } from '../utils/TrackingUtils';
 
 import getFacebookAutocompleteEntities from '../utils/draft-js-custom-plugins/autocomplete/utils/getFacebookAutocompleteEntities';
 
