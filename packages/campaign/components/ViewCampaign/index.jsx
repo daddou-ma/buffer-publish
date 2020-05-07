@@ -82,25 +82,27 @@ const ViewCampaign = ({
       </nav>
       {/* Content */}
       {isLoading && <SkeletonPosts />}
-      {!isLoading && (
-        <EmptyStateCampaign
-          hideAnalyzeReport={hideAnalyzeReport}
-          campaign={campaign}
-          actions={actions}
-          sentView={sentView}
-        />
-      )}
-      {!isLoading && campaignHasPosts && (
-        <QueueItems
-          items={campaignPosts}
-          onDeleteConfirmClick={postActions.onDeleteConfirmClick}
-          onSetRemindersClick={postActions.onSetRemindersClick}
-          onEditClick={postActions.onEditClick}
-          onShareNowClick={postActions.onShareNowClick}
-          onRequeueClick={postActions.onRequeueClick}
-          type="post"
-        />
-      )}
+      <main id="main">
+        {!isLoading && (
+          <EmptyStateCampaign
+            hideAnalyzeReport={hideAnalyzeReport}
+            campaign={campaign}
+            actions={actions}
+            sentView={sentView}
+          />
+        )}
+        {!isLoading && campaignHasPosts && (
+          <QueueItems
+            items={campaignPosts}
+            onDeleteConfirmClick={postActions.onDeleteConfirmClick}
+            onSetRemindersClick={postActions.onSetRemindersClick}
+            onEditClick={postActions.onEditClick}
+            onShareNowClick={postActions.onShareNowClick}
+            onRequeueClick={postActions.onRequeueClick}
+            type="post"
+          />
+        )}
+      </main>
       {/* Composer */}
       {showComposer && (
         <ComposerPopover

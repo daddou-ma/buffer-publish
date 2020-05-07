@@ -2173,10 +2173,10 @@
     "@bufferapp/nav-sidebar" "^1.11.0"
     numeral "2.0.6"
 
-"@bufferapp/ui@5.34.5-beta.c5190f1":
-  version "5.34.5-beta.c5190f1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.34.5-beta.c5190f1.tgz#4fc38b03034f42a563afa80f8fb862955a2abe6c"
-  integrity sha512-XT0MS6reldV0yjHWUel+mAQpFZBov0iujNhj+gozQcg6YHyCyOV9DX50fH+pBIN0+zJ2iGItC7TgeI7hNZvs1A==
+"@bufferapp/ui@5.36.0":
+  version "5.36.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.36.0.tgz#084826dd9106362f90bec1b435ba7cb4a40f12ec"
+  integrity sha512-vFlV3SMllPQALrU9BxajnthCvN2vy/JWgbZyt1j1jSOGXoTWyibAWD3VkgEDUxM5Y9XQao1l4za5jTuo3gNCyQ==
   dependencies:
     "@reach/tooltip" "0.6.2"
     immutability-helper "^2.9.0"

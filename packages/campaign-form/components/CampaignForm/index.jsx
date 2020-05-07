@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const Content = styled.div`
+const Main = styled.main`
   width: 362px;
   margin: 53px 0 0 283px;
 `;
@@ -140,7 +140,7 @@ const CampaignForm = ({
 
   return (
     <Wrapper>
-      <Content>
+      <Main id="main">
         <Card>
           <Headline type="h2">
             {editMode
@@ -148,6 +148,7 @@ const CampaignForm = ({
               : t('campaigns.campaignForm.createTitle')}
           </Headline>
           <Input
+            id="campaignName"
             type="text"
             value={campaignName}
             onChange={setCampaignName}
@@ -155,8 +156,6 @@ const CampaignForm = ({
             name={t('campaigns.campaignForm.name')}
             label={t('campaigns.campaignForm.name')}
             placeholder={t('campaigns.campaignForm.placeholder')}
-            aria-required="true"
-            aria-label={t('campaigns.campaignForm.ariaLabel')}
             ref={inputElement}
           />
           <Text htmlFor="colorPicker" type="label">
@@ -207,7 +206,7 @@ const CampaignForm = ({
             </NoticeText>
           </Notice>
         </NoticeCard>
-      </Content>
+      </Main>
     </Wrapper>
   );
 };

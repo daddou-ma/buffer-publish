@@ -280,7 +280,7 @@ describe('reducer', () => {
       ...initialState,
       campaign: {
         id: 'campaignId',
-        scheduled: 1,
+        scheduled: 0,
         sent: 0,
         channels: [{ channelId: 'profileId1', isManager: true }],
       },
@@ -421,7 +421,7 @@ describe('reducer', () => {
     };
     const stateAfter = {
       ...initialState,
-      campaign: { id: 'campaignId', scheduled: 0, sent: 0 },
+      campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
       campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
       page: 'scheduled',
     };

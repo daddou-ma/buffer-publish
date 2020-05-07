@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 
 import QueuedPosts from '@bufferapp/publish-queue';
 import SentPosts from '@bufferapp/publish-sent';
@@ -29,10 +30,10 @@ const loadingAnimationStyle = {
   margin: '1rem 0',
 };
 
-const tabContentStyle = {
-  maxWidth: '864px',
-  height: '100%',
-};
+const Main = styled.main`
+  max-width: 864px;
+  height: 100%;
+`;
 
 /**
  * Verifies if the user can access to the current tabId
@@ -225,7 +226,7 @@ function ProfilePage({
         moreToLoad={moreToLoad}
         onReachBottom={onReachBottom}
       >
-        <div style={tabContentStyle}>
+        <Main id="main">
           <TabContent
             tabId={tabId}
             profileId={profileId}
@@ -242,7 +243,7 @@ function ProfilePage({
               <BufferLoading size={32} />
             </div>
           )}
-        </div>
+        </Main>
       </ScrollableContainer>
     </PageWithSidebarWrapper>
   );

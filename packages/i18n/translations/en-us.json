@@ -22,7 +22,6 @@
       "createCampaign": "Create a Campaign"
     },
     "campaignForm": {
-      "ariaLabel": "Name input for campaign form",
       "cancel": "Cancel",
       "color": "Color",
       "createTitle": "Create Campaign",

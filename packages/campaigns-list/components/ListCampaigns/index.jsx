@@ -25,7 +25,7 @@ const Header = styled.header`
   padding: 0px 16px;
 `;
 
-const Container = styled.div`
+const Main = styled.main`
   margin: 0px auto;
   min-width: 800px;
   max-width: 1800px;
@@ -72,7 +72,7 @@ const ListCampaigns = ({
 
   return (
     <Wrapper>
-      <Container>
+      <Main id="main">
         <Header>
           <TextWithSkeletonStyled
             type="h2"
@@ -104,7 +104,7 @@ const ListCampaigns = ({
         {isLoading && (
           <SkeletonList showCampaignActions={showCampaignActions} />
         )}
-      </Container>
+      </Main>
     </Wrapper>
   );
 };

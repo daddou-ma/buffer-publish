@@ -42,29 +42,6 @@ const formatShareDate = shareDate => {
   return null;
 };
 
-const getSegmentMetadata = ({
-  post = {},
-  profile = {},
-  formattedData = {},
-  composerSource,
-  queueingType,
-}) => ({
-  channel: post.profile_service || null,
-  channelId: post.profile_id || null,
-  channelServiceId: profile.serviceId || null,
-  channelType: profile.serviceType || null,
-  client: post.client ? post.client.name : null,
-  composerSource: composerSource || null,
-  hasFirstComment: !!formattedData.comment_text,
-  hasLocation: !!formattedData.service_geolocation_id,
-  hasShopGridLink: !!formattedData.link,
-  isDraft: !!post.draft,
-  mediaType: post.type || null,
-  postId: post.id || null,
-  shareDate: formatShareDate(post.due_at),
-  shareType: trackingShareTypeMap.get(queueingType) || null,
-});
-
 const getSegmentCampaignMetadata = ({
   post = {},
   profile = {},
@@ -83,7 +60,6 @@ const getSegmentCampaignMetadata = ({
 
 export {
   getComposerSource,
-  getSegmentMetadata,
   formatShareDate,
   getSegmentCampaignMetadata,
 };

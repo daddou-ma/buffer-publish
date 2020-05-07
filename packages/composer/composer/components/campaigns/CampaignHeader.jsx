@@ -8,7 +8,7 @@ import ComposerActionCreators from '../../action-creators/ComposerActionCreators
 import QuestionIcon from '../QuestionIcon';
 import {
   SelectWrapper,
-  Container,
+  Section,
   Color,
   Icon,
   Separator,
@@ -16,7 +16,6 @@ import {
   Checkmark,
   LabelWrapper,
   IconWrapper,
-  ColorWrapper,
   TextWrapper,
 } from './styles';
 
@@ -97,7 +96,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
 
   return (
     <React.Fragment>
-      <Container>
+      <Section>
         <Text type="label">Campaign</Text>
         <Tooltip label="Categorize your content by themes or topics.">
           <Icon>
@@ -126,7 +125,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
             ]}
           />
         </SelectWrapper>
-      </Container>
+      </Section>
       <Separator />
     </React.Fragment>
   );
