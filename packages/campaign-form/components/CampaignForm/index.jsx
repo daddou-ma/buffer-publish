@@ -150,7 +150,7 @@ const CampaignForm = ({
           <Input
             id="campaignName"
             type="text"
-            value={campaignName}
+            value={campaignName || ''}
             onChange={setCampaignName}
             required
             name={t('campaigns.campaignForm.name')}
