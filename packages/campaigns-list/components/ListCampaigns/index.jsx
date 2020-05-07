@@ -23,9 +23,6 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   padding: 0px 16px;
-  button {
-    margin-left: auto;
-  }
 `;
 
 const Main = styled.main`
@@ -40,6 +37,10 @@ const Main = styled.main`
   @media (min-width: 1500px) {
     width: 75vw;
   }
+`;
+
+const TextWithSkeletonStyled = styled(TextWithSkeleton)`
+  flex-grow: 1;
 `;
 
 const ListCampaigns = ({
@@ -73,13 +74,13 @@ const ListCampaigns = ({
     <Wrapper>
       <Main id="main">
         <Header>
-          <TextWithSkeleton
+          <TextWithSkeletonStyled
             type="h2"
             displaySkeleton={isLoading}
             aria-label={isLoading ? t('common.loading') : null}
           >
             {t('campaigns.common.title')}
-          </TextWithSkeleton>
+          </TextWithSkeletonStyled>
           {showCampaignActions && (
             <ButtonWithSkeleton
               type="primary"
