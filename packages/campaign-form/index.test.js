@@ -38,27 +38,27 @@ describe('CampaignForm | user interaction', () => {
       initialState,
     });
 
-    // preparing the form
     const { input, purpleColor, greenColor, saveButton } = campaignForm();
 
-    // asserting initial values
     expect(purpleColor).toBeChecked();
     expect(saveButton).toBeDisabled();
 
-    // user types in a campaign name
     await userEvent.type(input, 'Campaign Test');
     expect(input).toHaveValue('Campaign Test');
 
-    // user clicks on a different color
     userEvent.click(greenColor);
 
-    // asserting form changes after user input
     expect(purpleColor).not.toBeChecked();
     expect(greenColor).toBeChecked();
     expect(saveButton).not.toBeDisabled();
 
-    // user clicks on save
     userEvent.click(saveButton);
+
+    expect(RPCClient.prototype.call).toHaveBeenCalledWith('createCampaign', {
+      color: green,
+      name: 'Campaign Test',
+    });
+    expect(RPCClient.prototype.call).toHaveBeenCalledTimes(1);
   });
 
   test('entering values in update form enables save option', async () => {
@@ -72,7 +72,6 @@ describe('CampaignForm | user interaction', () => {
       channels: [],
     };
 
-    // Mock API
     RPCClient.prototype.call = jest.fn(() => {
       return Promise.resolve({ ...campaign });
     });
@@ -91,22 +90,18 @@ describe('CampaignForm | user interaction', () => {
     });
     expect(RPCClient.prototype.call).toHaveBeenCalledTimes(1);
 
-    // preparing the form
     const { input, purpleColor, greenColor, saveButton } = campaignForm();
     await waitFor(() => expect(input).toHaveValue('Test Campaign'));
     await waitFor(() => expect(greenColor).toBeChecked());
 
-    // user clicks on a different color
     userEvent.click(purpleColor);
     expect(purpleColor).toBeChecked();
 
-    // user types in an updated campaign name
     userEvent.clear(input);
     await userEvent.type(input, 'Campaign updated');
     expect(input).toHaveValue('Campaign updated');
     expect(saveButton).not.toBeDisabled();
 
-    // user clicks on save
     userEvent.click(saveButton);
 
     expect(RPCClient.prototype.call).toHaveBeenCalledWith('updateCampaign', {
@@ -122,10 +117,8 @@ describe('CampaignForm | user interaction', () => {
       initialState,
     });
 
-    // preparing the form
     const { purpleColor, saveButton } = campaignForm();
 
-    // asserting form changes after user input
     expect(purpleColor).toBeChecked();
     expect(saveButton).toBeDisabled();
   });
