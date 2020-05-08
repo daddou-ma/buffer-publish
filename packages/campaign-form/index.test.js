@@ -28,9 +28,15 @@ const campaignForm = () => {
   };
 };
 
+const initialState = {
+  appSidebar: { user: { features: ['campaigns'] } },
+};
+
 describe('CampaignForm | user interaction', () => {
   test('entering values in create form enables save option', async () => {
-    render(<CampaignForm />);
+    render(<CampaignForm />, {
+      initialState,
+    });
 
     // preparing the form
     const { input, purpleColor, greenColor, saveButton } = campaignForm();
@@ -73,6 +79,7 @@ describe('CampaignForm | user interaction', () => {
 
     render(<CampaignForm editMode />, {
       initialState: {
+        ...initialState,
         campaignForm: { campaignId, isLoading: false },
       },
     });
@@ -111,7 +118,9 @@ describe('CampaignForm | user interaction', () => {
   });
 
   test('not entering all values in the form disables save button', () => {
-    render(<CampaignForm />);
+    render(<CampaignForm />, {
+      initialState,
+    });
 
     // preparing the form
     const { purpleColor, saveButton } = campaignForm();
@@ -119,6 +128,24 @@ describe('CampaignForm | user interaction', () => {
     // asserting form changes after user input
     expect(purpleColor).toBeChecked();
     expect(saveButton).toBeDisabled();
+  });
+
+  test('user should access create form when having the feature flip', () => {
+    render(<CampaignForm />, {
+      initialState,
+    });
+
+    expect(screen.getByRole('heading')).toHaveTextContent(/create campaign/i);
+  });
+
+  test.skip('user should not be able to access campaigns without having the feature flip', async () => {
+    render(<CampaignForm />, {
+      initialState: {
+        appSidebar: { user: { features: [''] } },
+      },
+    });
+
+    expect(screen.queryByRole('heading')).toBeNull();
   });
 
   test('a11y | campaign form is accessible', async () => {
