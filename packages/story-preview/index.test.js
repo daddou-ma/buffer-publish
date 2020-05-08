@@ -75,6 +75,8 @@ describe('StoryPreview', () => {
         .at(0)
         .find(Button)
         .at(0)
+        .find('button')
+        .at(0)
         .simulate('click');
 
       // User changes the note in the textarea
@@ -91,6 +93,8 @@ describe('StoryPreview', () => {
         .at(0)
         .find(Button)
         .at(1)
+        .find('button')
+        .at(0)
         .simulate('click');
 
       expect(store.dispatch).toHaveBeenCalledWith(
@@ -112,6 +116,8 @@ describe('StoryPreview', () => {
         .at(0)
         .find(Button)
         .at(0)
+        .find('button')
+        .at(0)
         .simulate('click');
 
       // User changes the note in the textarea
@@ -128,6 +134,8 @@ describe('StoryPreview', () => {
         .at(0)
         .find(Button)
         .at(1)
+        .find('button')
+        .at(0)
         .simulate('click');
 
       expect(store.dispatch).toHaveBeenCalledWith(

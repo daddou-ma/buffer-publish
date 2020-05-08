@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Text } from '@bufferapp/ui';
 import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
@@ -24,6 +25,10 @@ import {
   Title,
   Name,
 } from './style';
+
+const ButtonWithSkeletonStyled = styled(ButtonWithSkeleton)`
+  margin-left: 10px;
+`;
 
 const Header = ({
   campaignDetails,
@@ -102,7 +107,7 @@ const Header = ({
         </SubText>
       </CampaignDetails>
       <ButtonWrapper>
-        <ButtonWithSkeleton
+        <ButtonWithSkeletonStyled
           onClick={onCreatePostClick}
           type="secondary"
           isSplit={showCampaignActions}
@@ -128,7 +133,7 @@ const Header = ({
           ]}
         />
         {!hideAnalyzeReport && (
-          <ButtonWithSkeleton
+          <ButtonWithSkeletonStyled
             type="primary"
             icon={<ArrowRightIcon />}
             iconEnd

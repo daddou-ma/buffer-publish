@@ -54,6 +54,8 @@ describe('TrialCompleteModal', () => {
         .find(TrialCompleteModal)
         .find(Button)
         .at(0)
+        .find('button')
+        .at(0)
         .simulate('click');
 
       expect(store.dispatch).toHaveBeenCalledWith(actions.cancelTrial());
@@ -72,6 +74,8 @@ describe('TrialCompleteModal', () => {
         .find(TrialCompleteModal)
         .find(Button)
         .at(1)
+        .find('button')
+        .at(0)
         .simulate('click');
 
       expect(store.dispatch).toHaveBeenCalledWith(actions.completeAndUpgrade());

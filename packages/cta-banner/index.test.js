@@ -58,6 +58,8 @@ describe('CtaBanner', () => {
         .find(BillingUpdateCTABanner)
         .find(Button)
         .at(0)
+        .find('button')
+        .at(0)
         .simulate('click');
 
       expect(store.dispatch).toHaveBeenCalledWith(
