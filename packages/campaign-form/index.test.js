@@ -9,6 +9,7 @@ import {
 } from '@bufferapp/publish-test-utils/test-utils';
 import '@bufferapp/publish-web/components/i18n';
 import RPCClient from '@bufferapp/micro-rpc-client';
+import { createMemoryHistory } from 'history';
 
 import CampaignForm from './index';
 
@@ -145,5 +146,19 @@ describe('CampaignForm | user interaction', () => {
     const { container } = render(<CampaignForm />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
+  });
+
+  test('renders campaign form and navigates to from path on cancel', async () => {
+    const initiaHistory = createMemoryHistory();
+    initiaHistory.push('/', { from: '/campaigns' });
+
+    const { history } = render(<CampaignForm history={initiaHistory} />);
+
+    expect(screen.getByRole('heading')).toHaveTextContent(/create campaign/i);
+
+    const { cancelButton } = campaignForm();
+    userEvent.click(cancelButton);
+
+    expect(history.location.pathname).toBe('/campaigns');
   });
 });

@@ -10,7 +10,7 @@ import composedMiddlewares from './middlewares';
 export const history = createHistory();
 
 // This method combines all our reducers together.
-export const createReducer = (asyncReducers = {}) =>
+const createReducer = (asyncReducers = {}) =>
   combineReducers({
     router: connectRouter(history),
     ...reducers,
