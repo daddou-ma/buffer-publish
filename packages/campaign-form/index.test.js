@@ -6,7 +6,7 @@ import {
   render,
   screen,
   waitFor,
-} from '@bufferapp/publish-test-utils/test-utils';
+} from '@bufferapp/publish-test/utils/custom-render';
 import '@bufferapp/publish-web/components/i18n';
 import RPCClient from '@bufferapp/micro-rpc-client';
 import { createMemoryHistory } from 'history';

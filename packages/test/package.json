@@ -1,7 +1,7 @@
 {
-  "name": "@bufferapp/publish-test-utils",
+  "name": "@bufferapp/publish-test",
   "version": "2.0.0",
-  "description": "Utilitarian package",
+  "description": "Utilitarian package for tests",
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ignore-pattern coverage node_modules"
