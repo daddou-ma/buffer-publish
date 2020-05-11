@@ -3,19 +3,19 @@
 Here are some guidelines to make it as easy and clear as possible.
 
 ## Table of contents
-- [Pull Requests ](##pull-requests)
-- [Coding Styleguide 💻](##coding-styleguide-💻)
-  - [Prettier 💁‍♀️](###prettier-💁‍♀️)
-  - [Components Styleguide](###components-styleguide)
-  - [Buffer Design System](###buffer-design-system)
-  - [Strings and i18n](###strings-and-i18n)
-- [Adding New Dependencies](##adding-new-dependencies)
-- [How Packages Communicate 📦](##how-packages-communicate-📦)
-- [Styling Styleguide 💅](##styling-styleguide-💅)
-- [Working on RPCs](##working-on-rpcs)
-- [Testing 🧪](##testing-🧪)
-- [Storybook](##storybook)
-- [Reporting bugs 🐛](##reporting-bugs-🐛)
+- [Pull Requests ](#pull-requests)
+- [Coding Styleguide 💻](#coding-styleguide-)
+  - [Prettier 💁‍♀️](#prettier-)
+  - [Components Styleguide](#components-styleguide)
+  - [Buffer Design System](#buffer-design-system)
+  - [Strings and i18n](#strings-and-i18n)
+- [Adding New Dependencies](#adding-new-dependencies)
+- [How Packages Communicate 📦](#how-packages-communicate-)
+- [Styling Styleguide 💅](#styling-styleguide-)
+- [Working on RPCs](#working-on-rpcs)
+- [Testing 🧪](#testing-)
+- [Storybook](#storybook)
+- [Reporting bugs 🐛](#reporting-bugs-)
 
 ## Pull Requests
 Please follow the steps for your contribution:
