@@ -181,28 +181,24 @@ const Welcome = ({ name = 'John Smith' }) =>
 
 ### Buffer Design System
 
-- Buffer has a common UI library called `@bufferapp/ui`, hosting the components used by all Buffer applications.
-
-[Code](https://github.com/bufferapp/ui)
-[Styleguide](https://bufferapp.github.io/ui/)
+- **Buffer has a common UI library** called `@bufferapp/ui`, hosting the components used by all Buffer applications. [Code](https://github.com/bufferapp/ui) [Styleguide](https://bufferapp.github.io/ui/)
 
 
-- There are parts of the codebase using the old UI library, called `@bufferapp/buffer-components`.
-[Code](https://github.com/bufferapp/buffer-components)
+- There are parts of the codebase using the old UI library, called `@bufferapp/buffer-components`. [Code](https://github.com/bufferapp/buffer-components)
 
 **The goal is to completely move away from the old buffer-components library and only use the ui library.**
 
 **Use cases:**
 
-1. Adding colors, fonts or borders: 
+1. **Adding colors, fonts or borders:** 
   Whenever possible, import the variables from [bufferapp/ui](https://github.com/bufferapp/ui/tree/master/src/components/style). Do not import the variables from buffer-components.
 
-2. Adding a component:
+2. **Adding a component:**
     Follow the decision diagram: https://share.buffer.com/yAu2Jl98.
 
-3. Updating code
-    a) Changes in component from bufferapp/ui library: Default to implement the changes in bufferapp/ui instead of overriding styles or functionality in Publish.
-    b) Changes in component from buffer-components library: Ask yourself if it's worth the time. If there's already a similar bufferapp/ui component, default to replacing it.
+3. **Updating code:**
+    ...**Changes in component from bufferapp/ui library:** Default to implement the changes in bufferapp/ui instead of overriding styles or functionality in Publish.
+    ...**Changes in component from buffer-components library:** Ask yourself if it's worth the time. If there's already a similar bufferapp/ui component, default to replacing it.
 
 In case of doubt, ask another engineer or the designer for feedback regarding the best approach. 
 
