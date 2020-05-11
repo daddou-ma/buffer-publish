@@ -34,6 +34,20 @@ const initialState = {
 };
 
 describe('CampaignForm | user interaction', () => {
+  const rpcCall = RPCClient.prototype.call;
+
+  beforeAll(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    console.error.mockRestore();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('entering values in create form enables save option', async () => {
     render(<CampaignForm />, {
       initialState,
@@ -55,11 +69,11 @@ describe('CampaignForm | user interaction', () => {
 
     userEvent.click(saveButton);
 
-    expect(RPCClient.prototype.call).toHaveBeenCalledWith('createCampaign', {
+    expect(rpcCall).toHaveBeenCalledWith('createCampaign', {
       color: green,
       name: 'Campaign Test',
     });
-    expect(RPCClient.prototype.call).toHaveBeenCalledTimes(1);
+    expect(rpcCall).toHaveBeenCalledTimes(1);
   });
 
   test('entering values in update form enables save option', async () => {
@@ -73,9 +87,9 @@ describe('CampaignForm | user interaction', () => {
       channels: [],
     };
 
-    RPCClient.prototype.call = jest.fn(() => {
-      return Promise.resolve({ ...campaign });
-    });
+    jest
+      .spyOn(RPCClient.prototype, 'call')
+      .mockResolvedValueOnce({ ...campaign });
 
     render(<CampaignForm editMode />, {
       initialState: {
@@ -84,12 +98,12 @@ describe('CampaignForm | user interaction', () => {
       },
     });
 
-    expect(RPCClient.prototype.call).toHaveBeenCalledWith('getCampaign', {
+    expect(rpcCall).toHaveBeenCalledWith('getCampaign', {
       campaignId,
       fullItems: false,
       past: false,
     });
-    expect(RPCClient.prototype.call).toHaveBeenCalledTimes(1);
+    expect(rpcCall).toHaveBeenCalledTimes(1);
 
     const { input, purpleColor, greenColor, saveButton } = campaignForm();
     await waitFor(() => expect(input).toHaveValue('Test Campaign'));
@@ -105,12 +119,12 @@ describe('CampaignForm | user interaction', () => {
 
     userEvent.click(saveButton);
 
-    expect(RPCClient.prototype.call).toHaveBeenCalledWith('updateCampaign', {
+    expect(rpcCall).toHaveBeenCalledWith('updateCampaign', {
       campaignId,
       color: purple,
       name: 'Campaign updated',
     });
-    expect(RPCClient.prototype.call).toHaveBeenCalledTimes(2);
+    expect(rpcCall).toHaveBeenCalledTimes(2);
   });
 
   test('not entering all values in the form disables save button', () => {
