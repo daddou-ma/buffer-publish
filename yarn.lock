@@ -1951,6 +1951,17 @@
     react-autocomplete "1.7.2"
     react-day-picker "7.2.3"
 
+"@bufferapp/components@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/components/-/components-3.3.0.tgz#64a11f6f0d23e097fea3866d5d6f949c26c2358f"
+  integrity sha512-/QUHRwwtWJ31xhWp3aVeUOtq831MrCPn+C6f74T5mH14MyAFaHoMzQyfdiiaW8jUbE103tTZtBhNPWJ1GTKWYQ==
+  dependencies:
+    "@bufferapp/react-keyframes" "0.2.5"
+    moment "^2.22.2"
+    raf "3.4.0"
+    react-autocomplete "1.7.2"
+    react-day-picker "7.2.3"
+
 "@bufferapp/draft-js-emoji-plugin@2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@bufferapp/draft-js-emoji-plugin/-/draft-js-emoji-plugin-2.0.2.tgz#a9dcf735ebff6c2e5d63a07032c01291377111d2"
