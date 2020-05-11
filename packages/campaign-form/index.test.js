@@ -127,6 +127,28 @@ describe('CampaignForm | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledTimes(2);
   });
 
+  test(`update campaign redirects to campaigns view if there's an error fetching the campaign`, async () => {
+    const campaignId = '18027';
+    const errorResponse = new Error('Campaign not found');
+    jest
+      .spyOn(RPCClient.prototype, 'call')
+      .mockRejectedValueOnce(errorResponse);
+
+    const { history } = render(<CampaignForm editMode />, {
+      initialState: {
+        ...initialState,
+        campaignForm: { campaignId, isLoading: false },
+      },
+    });
+
+    expect(rpcCall).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(console.error).toHaveBeenCalledTimes(1));
+    await waitFor(() =>
+      expect(console.error).toHaveBeenCalledWith(errorResponse)
+    );
+    await waitFor(() => expect(history.location.pathname).toBe('/campaigns'));
+  });
+
   test('not entering all values in the form disables save button', () => {
     render(<CampaignForm />, {
       initialState,
