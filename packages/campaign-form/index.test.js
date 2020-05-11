@@ -138,6 +138,30 @@ describe('CampaignForm | user interaction', () => {
     expect(saveButton).toBeDisabled();
   });
 
+  test('creating a campaign with error from api should fail', async () => {
+    const errorResponse = new Error('An error occurred');
+    jest
+      .spyOn(RPCClient.prototype, 'call')
+      .mockRejectedValueOnce(errorResponse);
+
+    render(<CampaignForm />, {
+      initialState,
+    });
+
+    const { input, saveButton } = campaignForm();
+
+    userEvent.clear(input);
+    await userEvent.type(input, 'New Campaign');
+
+    userEvent.click(saveButton);
+
+    expect(rpcCall).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(console.error).toHaveBeenCalledTimes(1));
+    await waitFor(() =>
+      expect(console.error).toHaveBeenCalledWith(errorResponse)
+    );
+  });
+
   test('user should access create form when having the feature flip', () => {
     render(<CampaignForm />, {
       initialState,
