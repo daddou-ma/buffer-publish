@@ -194,11 +194,11 @@ const Welcome = ({ name = 'John Smith' }) =>
   Whenever possible, import the variables from [bufferapp/ui](https://github.com/bufferapp/ui/tree/master/src/components/style). Do not import the variables from buffer-components.
 
 2. **Adding a component:**
-    Follow the decision diagram: https://share.buffer.com/yAu2Jl98.
+    Follow the decision diagram: [https://share.buffer.com/yAu2Jl98](https://share.buffer.com/yAu2Jl98).
 
-3. **Updating code:**
-    ...**Changes in component from bufferapp/ui library:** Default to implement the changes in bufferapp/ui instead of overriding styles or functionality in Publish.
-    ...**Changes in component from buffer-components library:** Ask yourself if it's worth the time. If there's already a similar bufferapp/ui component, default to replacing it.
+3. **Updating code, changes in component from bufferapp/ui library:** Default to implement the changes in bufferapp/ui instead of overriding styles or functionality in Publish.  
+
+4. **Updating code, changes in component from buffer-components library:** Ask yourself if it's worth the time. If there's already a similar bufferapp/ui component, default to replacing it.
 
 In case of doubt, ask another engineer or the designer for feedback regarding the best approach. 
 
