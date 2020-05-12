@@ -128,10 +128,10 @@ export default ({ dispatch, getState }) => next => action => {
               migratedFromAwesomeToPro_teamMember_Batch1: tags.includes(
                 'awesome-pro-forced-migration-team-member'
               ),
-              migratedFromAwesomeToPro_Batch2: tags.include(
+              migratedFromAwesomeToPro_Batch2: tags.includes(
                 'upgraded-awesome-to-pro-batch-2'
               ),
-              migratedFromAwesomeToSBP: tags.include(
+              migratedFromAwesomeToSBP: tags.includes(
                 'upgraded-awesome-to-small-business'
               ),
             });

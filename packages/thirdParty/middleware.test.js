@@ -128,6 +128,8 @@ describe('middleware', () => {
       upgradedFromLegacyAwesomeToProPromotion: false,
       migratedFromAwesomeToPro_Batch1: false,
       migratedFromAwesomeToPro_teamMember_Batch1: false,
+      migratedFromAwesomeToPro_Batch2: false,
+      migratedFromAwesomeToSBP: false,
     });
 
     expect(global.Appcues.on.mock.calls).toEqual([
@@ -158,6 +160,8 @@ describe('middleware', () => {
       upgradedFromLegacyAwesomeToProPromotion: true,
       migratedFromAwesomeToPro_Batch1: false,
       migratedFromAwesomeToPro_teamMember_Batch1: false,
+      migratedFromAwesomeToPro_Batch2: false,
+      migratedFromAwesomeToSBP: false,
     });
   });
 
@@ -181,6 +185,8 @@ describe('middleware', () => {
       upgradedFromLegacyAwesomeToProPromotion: false,
       migratedFromAwesomeToPro_Batch1: true,
       migratedFromAwesomeToPro_teamMember_Batch1: false,
+      migratedFromAwesomeToPro_Batch2: false,
+      migratedFromAwesomeToSBP: false,
     });
   });
 
@@ -207,6 +213,8 @@ describe('middleware', () => {
       upgradedFromLegacyAwesomeToProPromotion: false,
       migratedFromAwesomeToPro_Batch1: false,
       migratedFromAwesomeToPro_teamMember_Batch1: true,
+      migratedFromAwesomeToPro_Batch2: false,
+      migratedFromAwesomeToSBP: false,
     });
   });
 
