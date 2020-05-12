@@ -210,6 +210,62 @@ describe('middleware', () => {
     });
   });
 
+  it('tells AppCues when a user has been migrated from legacy awesome to Pro batch 2', () => {
+    const action = {
+      type: actionTypes.APPCUES,
+      result: {
+        ...mockUser,
+        tags: ['upgraded-awesome-to-pro-batch-2'],
+      },
+    };
+    middleware(store)(next)(action);
+    expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
+      name: mockUser.id,
+      modalsShowing: false,
+      createdAt: mockUser.createdAt,
+      plan: mockUser.plan,
+      planCode: mockUser.planCode,
+      onTrial: mockUser.trial.onTrial,
+      trialLength: mockUser.trial.trialLength,
+      trialTimeRemaining: mockUser.trial.trialTimeRemaining,
+      orgUserCount: mockUser.orgUserCount,
+      profileCount: mockUser.profileCount,
+      upgradedFromLegacyAwesomeToProPromotion: false,
+      migratedFromAwesomeToPro_Batch1: false,
+      migratedFromAwesomeToPro_teamMember_Batch1: false,
+      migratedFromAwesomeToPro_Batch2: true,
+      migratedFromAwesomeToSBP: false,
+    });
+  });
+
+  it('tells AppCues when a user has been migrated from legacy awesome to SBP', () => {
+    const action = {
+      type: actionTypes.APPCUES,
+      result: {
+        ...mockUser,
+        tags: ['upgraded-awesome-to-small-business'],
+      },
+    };
+    middleware(store)(next)(action);
+    expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
+      name: mockUser.id,
+      modalsShowing: false,
+      createdAt: mockUser.createdAt,
+      plan: mockUser.plan,
+      planCode: mockUser.planCode,
+      onTrial: mockUser.trial.onTrial,
+      trialLength: mockUser.trial.trialLength,
+      trialTimeRemaining: mockUser.trial.trialTimeRemaining,
+      orgUserCount: mockUser.orgUserCount,
+      profileCount: mockUser.profileCount,
+      upgradedFromLegacyAwesomeToProPromotion: false,
+      migratedFromAwesomeToPro_Batch1: false,
+      migratedFromAwesomeToPro_teamMember_Batch1: false,
+      migratedFromAwesomeToPro_Batch2: false,
+      migratedFromAwesomeToSBP: true,
+    });
+  });
+
   it('sends event to appcues when user adds a post in the composer', () => {
     const action = {
       type: 'COMPOSER_EVENT',
