@@ -4,16 +4,18 @@ Here are some guidelines to make it as easy and clear as possible.
 
 ## Table of contents
 - [Pull Requests ](#pull-requests)
-- [Coding Styleguide 💻](#coding-styleguide-💻)
-  - [Prettier 💁‍♀️](#prettier-💁‍♀️)
+- [Coding Styleguide 💻](#coding-styleguide-)
+  - [Prettier 💁‍♀️](#prettier-)
   - [Components Styleguide](#components-styleguide)
+  - [Buffer Design System](#buffer-design-system)
   - [Strings and i18n](#strings-and-i18n)
 - [Adding New Dependencies](#adding-new-dependencies)
-- [How Packages Communicate 📦](#how-packages-communicate-📦)
-- [Styling Styleguide 💅](#styling-styleguide-💅)
+- [How Packages Communicate 📦](#how-packages-communicate-)
+- [Styling Styleguide 💅](#styling-styleguide-)
 - [Working on RPCs](#working-on-rpcs)
-- [Testing 🧪](#testing-🧪)
-- [Reporting bugs 🐛](#reporting-bugs-🐛)
+- [Testing 🧪](#testing-)
+- [Storybook](#storybook)
+- [Reporting bugs 🐛](#reporting-bugs-)
 
 ## Pull Requests
 Please follow the steps for your contribution:
@@ -176,6 +178,29 @@ A good way to have default values in our components is via the spread operator i
 const Welcome = ({ name = 'John Smith' }) =>
    <h1>Hello, {name}</h1>;
 ```
+
+### Buffer Design System
+
+- **Buffer has a common UI library** called `@bufferapp/ui`, hosting the components used by all Buffer applications. [Code](https://github.com/bufferapp/ui) [Styleguide](https://bufferapp.github.io/ui/)
+
+
+- There are parts of the codebase using the old UI library, called `@bufferapp/buffer-components`. [Code](https://github.com/bufferapp/buffer-components)
+
+**The goal is to completely move away from the old buffer-components library and only use the ui library.**
+
+**Use cases:**
+
+1. **Adding colors, fonts or borders:** 
+  Whenever possible, import the variables from [bufferapp/ui](https://github.com/bufferapp/ui/tree/master/src/components/style). Do not import the variables from buffer-components.
+
+2. **Adding a component:**
+    Follow the decision diagram: [https://share.buffer.com/yAu2Jl98](https://share.buffer.com/yAu2Jl98).
+
+3. **Updating code, changes in component from bufferapp/ui library:** Default to implement the changes in bufferapp/ui instead of overriding styles or functionality in Publish.  
+
+4. **Updating code, changes in component from buffer-components library:** Ask yourself if it's worth the time. If there's already a similar bufferapp/ui component, default to replacing it.
+
+In case of doubt, ask another engineer or the designer for feedback regarding the best approach. 
 
 ### Strings and i18n
 For i18n, at the moment we have an internal package called `@bufferapp/publish-i18n`, however we are migrating all our String handling to `React.i18n`, so whenever you are working on a component, please defaut to [`React.i18n`](https://react.i18next.com/).
@@ -351,6 +376,9 @@ To use the `yarn test:debug` script, follow these instructions:
 3. Click on "Open dedicated DevTools for Node".
 4. In your terminal run `yarn test:debug <path to test>`
 5. Visit the inspector you opened up, you should see that the debugger has been triggered and the app has paused near the line that is failing.
+
+## Storybook
+*Info coming soon*
 
 ## Reporting bugs 🐛
 To report bugs, please feel free to add them in [JIRA](https://buffer.atlassian.net/secure/RapidBoard.jspa?projectKey=PUB)
