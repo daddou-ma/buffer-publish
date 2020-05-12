@@ -55,6 +55,7 @@ describe('CampaignForm | user interaction', () => {
 
     const { input, purpleColor, greenColor, saveButton } = campaignForm();
 
+    expect(screen.getByRole('heading')).toHaveTextContent(/create campaign/i);
     expect(purpleColor).toBeChecked();
     expect(saveButton).toBeDisabled();
 
@@ -153,9 +154,7 @@ describe('CampaignForm | user interaction', () => {
       initialState,
     });
 
-    const { purpleColor, saveButton } = campaignForm();
-
-    expect(purpleColor).toBeChecked();
+    const { saveButton } = campaignForm();
     expect(saveButton).toBeDisabled();
   });
 
@@ -183,14 +182,6 @@ describe('CampaignForm | user interaction', () => {
     );
   });
 
-  test('user should access create form when having the feature flip', () => {
-    render(<CampaignForm />, {
-      initialState,
-    });
-
-    expect(screen.getByRole('heading')).toHaveTextContent(/create campaign/i);
-  });
-
   test.skip('user should not be able to access campaigns without having the feature flip', async () => {
     render(<CampaignForm />, {
       initialState: {
@@ -212,12 +203,9 @@ describe('CampaignForm | user interaction', () => {
     initiaHistory.push('/', { from: '/campaigns' });
 
     const { history } = render(<CampaignForm history={initiaHistory} />);
-
-    expect(screen.getByRole('heading')).toHaveTextContent(/create campaign/i);
-
     const { cancelButton } = campaignForm();
-    userEvent.click(cancelButton);
 
+    userEvent.click(cancelButton);
     expect(history.location.pathname).toBe('/campaigns');
   });
 });
