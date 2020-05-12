@@ -80,7 +80,6 @@ describe('CampaignForm | user interaction', () => {
     const campaignId = '18027';
     const campaign = {
       id: campaignId,
-      _id: campaignId,
       name: 'Test Campaign',
       color: green,
       globalOrganizationId: '1',
@@ -208,7 +207,7 @@ describe('CampaignForm | user interaction', () => {
     expect(results).toHaveNoViolations();
   });
 
-  test('renders campaign form and navigates to from path on cancel', async () => {
+  test('returns to campaigns when click cancel inside the form', async () => {
     const initiaHistory = createMemoryHistory();
     initiaHistory.push('/', { from: '/campaigns' });
 
