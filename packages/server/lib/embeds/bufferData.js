@@ -3,9 +3,6 @@ const getBufferData = ({ user, profiles }) => {
     return '';
   }
 
-  // mitigation for cache attack via cloudflare - https://buffer.atlassian.net/browse/PUB-2743
-  user = undefined;
-
   const bufferData = {};
 
   if (typeof user !== 'undefined') {
