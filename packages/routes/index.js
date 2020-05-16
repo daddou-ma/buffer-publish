@@ -43,10 +43,6 @@ export const newBusinessTrialistsRoute = '/new-business-trialists';
 
 export const newConnectionRoute = '/new-connection';
 
-export const preferencePageRoute = generatePreferencePageRoute({
-  preferenceId: ':preferenceId',
-});
-
 const preferenceRouteRegex = /preferences\/(\w+)/;
 export const getPreferencePageParams = ({ path }) => {
   const match = preferenceRouteRegex.exec(path);
@@ -66,6 +62,11 @@ export const getMatch = ({ pathname, route }) =>
 export const getParams = ({ pathname, route }) => {
   const match = getMatch({ pathname, route });
   return match?.params || null;
+};
+
+export const preferencesPage = {
+  route: '/preferences',
+  goTo: () => push('/preferences'),
 };
 
 export const campaignsPage = {
