@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Tabs, Tab } from '@bufferapp/publish-shared-components';
+import { Nav, NavLink } from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
 import { ArrowLeft } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
@@ -16,7 +16,6 @@ import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
 import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
 import styled from 'styled-components';
-import TabsNames from '../../constants';
 import Security from '../Security';
 import General from '../General';
 import { openBillingWindow } from '../../../tabs/utils';
@@ -34,8 +33,6 @@ const PreferencesWrapper = styled.div`
   flex-direction: column;
 `;
 
-const Nav = styled.nav``;
-
 const TabStyle = styled.div`
   overflow-y: auto;
   height: calc(100vh - 113px); /* 56px appshell + 57px tabs*/
@@ -48,8 +45,6 @@ const ContainerStyle = styled.div`
 `;
 
 const Preferences = ({
-  selectedTabId,
-  onTabClick,
   onBackToDashboardClick,
   selectedProfileId,
   profiles,
@@ -60,22 +55,22 @@ const Preferences = ({
   return (
     <Wrapper>
       <PreferencesWrapper>
-        <Nav id="tabs">
-          <Tabs selectedTabId={selectedTabId} onTabClick={onTabClick}>
-            <Tab tabId={TabsNames.GENERAL}>{t('preferences.menu.general')}</Tab>
-            <Tab tabId={TabsNames.SECURITY}>
-              {t('preferences.menu.security')}
-            </Tab>
-            <Tab tabId={TabsNames.NOTIFICATIONS}>
-              {t('preferences.menu.notifications')}
-            </Tab>
-            <Tab tabId={TabsNames.APPS_EXTRAS}>
-              {t('preferences.menu.appsAndExtras')}
-            </Tab>
-            <Tab tabId={TabsNames.BILLING} onClick={() => openBillingWindow()}>
-              {t('preferences.menu.billing')}
-            </Tab>
-          </Tabs>
+        <Nav>
+          <NavLink to={preferencesGeneral.route} activeOnlyWhenExact>
+            {t('preferences.menu.general')}
+          </NavLink>
+          <NavLink to={preferencesSecurity.route} activeOnlyWhenExact>
+            {t('preferences.menu.security')}
+          </NavLink>
+          <NavLink to={preferencesNotifications.route} activeOnlyWhenExact>
+            {t('preferences.menu.notifications')}
+          </NavLink>
+          <NavLink to={preferencesAppsExtras.route} activeOnlyWhenExact>
+            {t('preferences.menu.appsAndExtras')}
+          </NavLink>
+          <span onClick={() => openBillingWindow()}>
+            <NavLink activeOnlyWhenExact>{t('preferences.menu.billing')}</NavLink>
+          </span>
         </Nav>
         <TabStyle>
           <ContainerStyle>
@@ -115,8 +110,6 @@ const Preferences = ({
 };
 
 Preferences.propTypes = {
-  selectedTabId: PropTypes.string.isRequired,
-  onTabClick: PropTypes.func.isRequired,
   onBackToDashboardClick: PropTypes.func.isRequired,
   selectedProfileId: ProfileSidebarComponent.propTypes.selectedProfileId,
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
