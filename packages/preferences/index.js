@@ -33,15 +33,6 @@ export default connect(
         )
       );
     },
-    // send to general when there is an unknown tab
-    onUnknownTab: () =>
-      dispatch(
-        push(
-          generatePreferencePageRoute({
-            preferenceId: 'general',
-          })
-        )
-      ),
     // go back to the last selected profile
     onBackToDashboardClick: ({
       selectedProfileId,
