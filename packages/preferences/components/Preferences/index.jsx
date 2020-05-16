@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Tabs, Tab } from '@bufferapp/publish-shared-components';
-import { Text } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
 import { ArrowLeft } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
+import {
+  preferencesAppsExtras,
+  preferencesSecurity,
+  preferencesNotifications,
+  preferencesGeneral,
+} from '@bufferapp/publish-routes';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
 import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
@@ -14,28 +20,6 @@ import TabsNames from '../../constants';
 import Security from '../Security';
 import General from '../General';
 import { openBillingWindow } from '../../../tabs/utils';
-
-const PreferenceContent = ({ tabId, onUnknownTab }) => {
-  switch (tabId) {
-    case TabsNames.BILLING:
-    case TabsNames.GENERAL:
-      return <General />;
-    case TabsNames.SECURITY:
-      return <Security />;
-    case TabsNames.APPS_EXTRAS:
-      return <ManageAppsAndExtras />;
-    case TabsNames.NOTIFICATIONS:
-      return <Notifications />;
-    default:
-      onUnknownTab();
-      return <Text>Redirecting...</Text>;
-  }
-};
-
-PreferenceContent.propTypes = {
-  tabId: PropTypes.string.isRequired,
-  onUnknownTab: PropTypes.func.isRequired,
-};
 
 const Wrapper = styled.div`
   display: flex;
@@ -110,10 +94,19 @@ const Preferences = ({
               }
             />
             <main id="main">
-              <PreferenceContent
-                tabId={selectedTabId}
-                onUnknownTab={onUnknownTab}
-              />
+              <Switch>
+                <Route
+                  path={preferencesAppsExtras.route}
+                  component={ManageAppsAndExtras}
+                />
+                <Route path={preferencesSecurity.route} component={Security} />
+                <Route
+                  path={preferencesNotifications.route}
+                  component={Notifications}
+                />
+                <Route path={preferencesGeneral.route} component={General} />
+                <Redirect to={preferencesGeneral.route} />
+              </Switch>
             </main>
           </ContainerStyle>
         </TabStyle>
