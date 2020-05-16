@@ -54,6 +54,7 @@ export const getPreferencePageParams = ({ path }) => {
   };
 };
 
+// Routes utils
 export const getMatch = ({ pathname, route }) =>
   matchPath(pathname, {
     path: route,
@@ -64,11 +65,35 @@ export const getParams = ({ pathname, route }) => {
   return match?.params || null;
 };
 
+export const goTo = path => push(path);
+
+// Preferences routes
 export const preferencesPage = {
   route: '/preferences',
   goTo: () => push('/preferences'),
 };
 
+export const preferencesAppsExtras = {
+  route: '/preferences/appsandextras',
+  goTo: () => push('/preferences/appsandextras'),
+};
+
+export const preferencesSecurity = {
+  route: '/preferences/security',
+  goTo: () => push('/preferences/security'),
+};
+
+export const preferencesGeneral = {
+  route: '/preferences/general',
+  goTo: () => push('/preferences/general'),
+};
+
+export const preferencesNotifications = {
+  route: '/preferences/notifications',
+  goTo: () => push('/preferences/notifications'),
+};
+
+// Campaigns routes
 export const campaignsPage = {
   route: '/campaigns',
   goTo: () => push('/campaigns'),
@@ -95,5 +120,3 @@ export const campaignSent = {
   route: '/campaigns/:id/sent/',
   goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/sent`),
 };
-
-export const goTo = path => push(path);
