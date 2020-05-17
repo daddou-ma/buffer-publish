@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import {
-  getPreferencePageParams,
-  generatePreferencePageRoute,
   generateProfilePageRoute,
   newBusinessTrialistsRoute,
   newConnectionRoute,
@@ -12,27 +10,12 @@ import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sid
 import Preferences from './components/Preferences';
 
 export default connect(
-  (state, ownProps) => {
-    const { preferenceId } =
-      getPreferencePageParams({ path: ownProps.history.location.pathname }) ||
-      {};
-    return {
-      profiles: state.profileSidebar.profiles,
-      selectedTabId: preferenceId,
-      selectedProfileId: state.profileSidebar.selectedProfileId,
-      isOnBusinessTrial: state.profileSidebar.isOnBusinessTrial,
-    };
-  },
+  state => ({
+    profiles: state.profileSidebar.profiles,
+    selectedProfileId: state.profileSidebar.selectedProfileId,
+    isOnBusinessTrial: state.profileSidebar.isOnBusinessTrial,
+  }),
   dispatch => ({
-    onTabClick: preferenceId => {
-      dispatch(
-        push(
-          generatePreferencePageRoute({
-            preferenceId,
-          })
-        )
-      );
-    },
     // go back to the last selected profile
     onBackToDashboardClick: ({
       selectedProfileId,
