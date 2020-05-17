@@ -36,7 +36,7 @@ const PreferencesWrapper = styled.div`
 
 const TabStyle = styled.div`
   overflow-y: auto;
-  height: calc(100vh - 113px); /* 56px appshell + 57px tabs*/
+  height: calc(100vh - 161px); /* 56px appshell + 57px tabs + 48px banner*/
 `;
 
 const ContainerStyle = styled.div`

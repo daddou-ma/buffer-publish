@@ -65,6 +65,7 @@ const NavLink = ({
         disabled={disabled}
         secondary={secondary}
         to={to}
+        href={href}
       >
         {children}
       </NavItem>
