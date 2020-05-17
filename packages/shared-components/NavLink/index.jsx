@@ -23,12 +23,12 @@ const NavItemWrapper = styled.li`
 
 const navItemStyles = css`
   padding: ${props =>
-    props.secondary ? '12px 13px 12px 13px' : '18px 13px 17px 13px'};
+    props.$secondary ? '12px 13px 12px 13px' : '18px 13px 17px 13px'};
   display: block;
   text-decoration: none;
   pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
   color: ${props => (props.selected ? grayDarker : grayDefault)};
-  font-size: ${props => (props.secondary ? fontSizeSmall : fontSize)};
+  font-size: ${props => (props.$secondary ? fontSizeSmall : fontSize)};
   font-weight: ${props => (props.selected ? fontWeightMedium : fontWeight)};
   :hover {
     color: ${grayDarker};
@@ -63,7 +63,7 @@ const NavLink = ({
       <NavItem
         selected={match}
         disabled={disabled}
-        secondary={secondary}
+        $secondary={secondary}
         to={to}
         href={href}
       >
