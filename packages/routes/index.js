@@ -34,25 +34,11 @@ export const childTabRoute = generateChildTabRoute({
   childTabId: ':childTabId',
 });
 
-export const generatePreferencePageRoute = ({ preferenceId }) =>
-  `/preferences/${preferenceId}`;
-
 export const plansPageRoute = '/plans';
 
 export const newBusinessTrialistsRoute = '/new-business-trialists';
 
 export const newConnectionRoute = '/new-connection';
-
-const preferenceRouteRegex = /preferences\/(\w+)/;
-export const getPreferencePageParams = ({ path }) => {
-  const match = preferenceRouteRegex.exec(path);
-  if (!match) {
-    return null;
-  }
-  return {
-    preferenceId: match[1],
-  };
-};
 
 // Routes utils
 export const getMatch = ({ pathname, route }) =>

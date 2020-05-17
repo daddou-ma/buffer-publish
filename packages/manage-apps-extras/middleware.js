@@ -1,15 +1,18 @@
-import tabsNames from '@bufferapp/publish-preferences/constants';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { getMatch, preferencesAppsExtras } from '@bufferapp/publish-routes';
 
 import { actionTypes } from './reducer';
 
 const isAppsAndExtrasTab = path =>
-  path === `/preferences/${tabsNames.APPS_EXTRAS}`;
+  getMatch({
+    pathname: path,
+    route: preferencesAppsExtras.route,
+  })?.isExact === true;
 
 export default ({ dispatch }) => next => action => {
   next(action);
