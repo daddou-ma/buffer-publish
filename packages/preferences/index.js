@@ -45,5 +45,3 @@ export default connect(
     },
   })
 )(Preferences);
-
-export constants from './constants';
