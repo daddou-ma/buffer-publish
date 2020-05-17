@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useRouteMatch } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { blue, grayDarker, grayDefault } from '@bufferapp/ui/style/colors';
 import {
   fontSize,
@@ -21,7 +21,7 @@ const NavItemWrapper = styled.li`
   border-bottom-width: ${props => (props.secondary ? '1px' : '2px')};
 `;
 
-const NavItem = styled(Link)`
+const navItemStyles = css`
   padding: ${props =>
     props.secondary ? '12px 13px 12px 13px' : '18px 13px 17px 13px'};
   display: block;
@@ -35,17 +35,28 @@ const NavItem = styled(Link)`
   }
 `;
 
+const NavRouteItem = styled(Link)`
+  ${navItemStyles}
+`;
+
+const NavExternalItem = styled.a`
+  ${navItemStyles}
+`;
+
 const NavLink = ({
   children,
   to,
   activeOnlyWhenExact,
   disabled,
   secondary,
+  href,
 }) => {
   const match = useRouteMatch({
     path: to,
     exact: activeOnlyWhenExact,
   });
+
+  const NavItem = href && !to ? NavExternalItem : NavRouteItem;
 
   return (
     <NavItemWrapper selected={match}>
@@ -67,10 +78,12 @@ NavLink.propTypes = {
   activeOnlyWhenExact: PropTypes.bool,
   disabled: PropTypes.bool,
   secondary: PropTypes.bool,
+  href: PropTypes.string,
 };
 
 NavLink.defaultProps = {
   to: '',
+  href: '',
   activeOnlyWhenExact: true,
   disabled: false,
   secondary: false,

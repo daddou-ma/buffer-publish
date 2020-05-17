@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Nav, NavLink } from '@bufferapp/publish-shared-components';
@@ -12,13 +13,13 @@ import {
   preferencesNotifications,
   preferencesGeneral,
 } from '@bufferapp/publish-routes';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
 import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
-import styled from 'styled-components';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import Security from '../Security';
 import General from '../General';
-import { openBillingWindow } from '../../../tabs/utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -68,9 +69,13 @@ const Preferences = ({
           <NavLink to={preferencesAppsExtras.route} activeOnlyWhenExact>
             {t('preferences.menu.appsAndExtras')}
           </NavLink>
-          <span onClick={() => openBillingWindow()}>
-            <NavLink activeOnlyWhenExact>{t('preferences.menu.billing')}</NavLink>
-          </span>
+          <NavLink
+            href={getURL.getBillingURL({
+              cta: SEGMENT_NAMES.PREFERENCES_TAB_BILLING,
+            })}
+          >
+            {t('preferences.menu.billing')}
+          </NavLink>
         </Nav>
         <TabStyle>
           <ContainerStyle>
