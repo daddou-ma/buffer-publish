@@ -111,6 +111,7 @@ const ComposerWrapper = ({
     draftMode,
     campaignDetails: post?.campaignDetails || initialCampaignDetails,
     campaigns: campaigns ?? undefined,
+    editMode,
   };
   const formattedData = DataImportUtils.formatInputData({
     env: metaData.application,
