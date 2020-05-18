@@ -782,7 +782,7 @@ function getFormattedAPIData(serviceName, unformattedData) {
 
     if (serviceDraft.service.hasSubprofiles) {
       if (isEditingUpdate && appMetaData.editMode) {
-        // The API expects subprofile_id (a single id) when editing updates.
+        // The API expects subprofile_id (a single id) when editing updates
         conditionalFields.subprofile_id = serviceSelectedSubprofiles[0];
       } else {
         conditionalFields.subprofile_ids = serviceSelectedSubprofiles;
