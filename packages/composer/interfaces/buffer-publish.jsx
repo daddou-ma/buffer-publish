@@ -96,6 +96,7 @@ const ComposerWrapper = ({
     isOnProTrial: userData.isOnProTrial,
     should_use_new_twitter_autocomplete: true,
     updateId: post ? post.id : undefined,
+    serviceUpdateId: post ? post.serviceUpdateId : undefined,
     update: { ...post, images: post.imageUrls },
     subprofileId,
     due_at: post ? post.due_at : undefined,

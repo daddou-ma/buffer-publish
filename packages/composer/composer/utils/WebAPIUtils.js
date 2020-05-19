@@ -789,6 +789,10 @@ function getFormattedAPIData(serviceName, unformattedData) {
       }
     }
 
+    if (appMetaData.serviceUpdateId) {
+      conditionalFields.service_update_id = appMetaData.serviceUpdateId;
+    }
+
     if (serviceDraft.service.canHaveSourceUrl) {
       const { sourceLink } = serviceDraft;
 
