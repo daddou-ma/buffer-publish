@@ -27,7 +27,9 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '**/packages/**/*.{js,jsx}',
+    '!**/packages/test/**',
     '!**/packages/**/story.jsx',
+    '!**/packages/**/story_test.jsx',
     '!**/packages/**/store/*.js',
     '!**/packages/**/i18n/index.js',
   ],
