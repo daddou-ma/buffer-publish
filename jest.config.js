@@ -21,6 +21,7 @@ const publishPackagesWhitelist = publishPackages
 
 module.exports = {
   verbose: true,
+  testEnvironment: 'jest-environment-jsdom-sixteen',
   transformIgnorePatterns: [
     `/node_modules${publishPackagesWhitelist}${analyzePackagesWhitelist}`,
   ],

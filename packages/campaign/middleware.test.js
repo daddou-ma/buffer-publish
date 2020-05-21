@@ -8,6 +8,16 @@ jest.mock('@bufferapp/publish-analytics-middleware');
 
 describe('middleware', () => {
   const next = jest.fn();
+  const { location } = window;
+
+  beforeAll(() => {
+    delete window.location;
+    window.location = { assign: jest.fn() };
+  });
+
+  afterAll(() => {
+    window.location = location;
+  });
 
   it('exports middleware', () => {
     expect(middleware).toBeDefined();
@@ -65,7 +75,6 @@ describe('middleware', () => {
       organizationId: '123',
     };
     const url = `https://analyze.local.buffer.com/campaigns/${expectedObj.campaignId}`;
-    window.location.assign = jest.fn();
     window.location.hostname = hostname;
 
     const store = {
@@ -93,6 +102,5 @@ describe('middleware', () => {
       expectedObj
     );
     expect(window.location.assign).toHaveBeenCalledWith(url);
-    window.location.assign.mockRestore();
   });
 });

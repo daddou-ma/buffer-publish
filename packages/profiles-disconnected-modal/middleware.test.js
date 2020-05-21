@@ -7,7 +7,17 @@ describe('middleware', () => {
     getState: () => ({}),
   };
   const next = jest.fn();
-  window.location.assign = jest.fn();
+  const { location } = window;
+
+  beforeAll(() => {
+    delete window.location;
+    window.location = { assign: jest.fn() };
+    window.location.hostname = 'publish.local.buffer.com';
+  });
+
+  afterAll(() => {
+    window.location = location;
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();
