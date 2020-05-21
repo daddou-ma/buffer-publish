@@ -1,41 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Tabs, Tab } from '@bufferapp/publish-shared-components';
-import { Text } from '@bufferapp/components';
+import { Nav, NavLink } from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
 import { ArrowLeft } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
+import {
+  preferencesAppsExtras,
+  preferencesSecurity,
+  preferencesNotifications,
+  preferencesGeneral,
+} from '@bufferapp/publish-routes';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
 import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';
-import styled from 'styled-components';
-import TabsNames from '../../constants';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import Security from '../Security';
 import General from '../General';
-import { openBillingWindow } from '../../../tabs/utils';
-
-const PreferenceContent = ({ tabId, onUnknownTab }) => {
-  switch (tabId) {
-    case TabsNames.BILLING:
-    case TabsNames.GENERAL:
-      return <General />;
-    case TabsNames.SECURITY:
-      return <Security />;
-    case TabsNames.APPS_EXTRAS:
-      return <ManageAppsAndExtras />;
-    case TabsNames.NOTIFICATIONS:
-      return <Notifications />;
-    default:
-      onUnknownTab();
-      return <Text>Redirecting...</Text>;
-  }
-};
-
-PreferenceContent.propTypes = {
-  tabId: PropTypes.string.isRequired,
-  onUnknownTab: PropTypes.func.isRequired,
-};
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,11 +34,9 @@ const PreferencesWrapper = styled.div`
   flex-direction: column;
 `;
 
-const Nav = styled.nav``;
-
 const TabStyle = styled.div`
   overflow-y: auto;
-  height: calc(100vh - 113px); /* 56px appshell + 57px tabs*/
+  height: calc(100vh - 161px); /* 56px appshell + 57px tabs + 48px banner*/
 `;
 
 const ContainerStyle = styled.div`
@@ -64,10 +46,7 @@ const ContainerStyle = styled.div`
 `;
 
 const Preferences = ({
-  selectedTabId,
-  onTabClick,
   onBackToDashboardClick,
-  onUnknownTab,
   selectedProfileId,
   profiles,
   isOnBusinessTrial,
@@ -77,22 +56,26 @@ const Preferences = ({
   return (
     <Wrapper>
       <PreferencesWrapper>
-        <Nav id="tabs">
-          <Tabs selectedTabId={selectedTabId} onTabClick={onTabClick}>
-            <Tab tabId={TabsNames.GENERAL}>{t('preferences.menu.general')}</Tab>
-            <Tab tabId={TabsNames.SECURITY}>
-              {t('preferences.menu.security')}
-            </Tab>
-            <Tab tabId={TabsNames.NOTIFICATIONS}>
-              {t('preferences.menu.notifications')}
-            </Tab>
-            <Tab tabId={TabsNames.APPS_EXTRAS}>
-              {t('preferences.menu.appsAndExtras')}
-            </Tab>
-            <Tab tabId={TabsNames.BILLING} onClick={() => openBillingWindow()}>
-              {t('preferences.menu.billing')}
-            </Tab>
-          </Tabs>
+        <Nav>
+          <NavLink to={preferencesGeneral.route} activeOnlyWhenExact>
+            {t('preferences.menu.general')}
+          </NavLink>
+          <NavLink to={preferencesSecurity.route} activeOnlyWhenExact>
+            {t('preferences.menu.security')}
+          </NavLink>
+          <NavLink to={preferencesNotifications.route} activeOnlyWhenExact>
+            {t('preferences.menu.notifications')}
+          </NavLink>
+          <NavLink to={preferencesAppsExtras.route} activeOnlyWhenExact>
+            {t('preferences.menu.appsAndExtras')}
+          </NavLink>
+          <NavLink
+            href={getURL.getBillingURL({
+              cta: SEGMENT_NAMES.PREFERENCES_TAB_BILLING,
+            })}
+          >
+            {t('preferences.menu.billing')}
+          </NavLink>
         </Nav>
         <TabStyle>
           <ContainerStyle>
@@ -110,10 +93,19 @@ const Preferences = ({
               }
             />
             <main id="main">
-              <PreferenceContent
-                tabId={selectedTabId}
-                onUnknownTab={onUnknownTab}
-              />
+              <Switch>
+                <Route
+                  path={preferencesAppsExtras.route}
+                  component={ManageAppsAndExtras}
+                />
+                <Route path={preferencesSecurity.route} component={Security} />
+                <Route
+                  path={preferencesNotifications.route}
+                  component={Notifications}
+                />
+                <Route path={preferencesGeneral.route} component={General} />
+                <Redirect to={preferencesGeneral.route} />
+              </Switch>
             </main>
           </ContainerStyle>
         </TabStyle>
@@ -123,10 +115,7 @@ const Preferences = ({
 };
 
 Preferences.propTypes = {
-  selectedTabId: PropTypes.string.isRequired,
-  onTabClick: PropTypes.func.isRequired,
   onBackToDashboardClick: PropTypes.func.isRequired,
-  onUnknownTab: PropTypes.func.isRequired,
   selectedProfileId: ProfileSidebarComponent.propTypes.selectedProfileId,
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
   isOnBusinessTrial: PropTypes.bool.isRequired,

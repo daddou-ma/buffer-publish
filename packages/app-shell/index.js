@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
 import {
-  generatePreferencePageRoute,
   newBusinessTrialistsRoute,
+  preferencesGeneral,
 } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -22,18 +21,12 @@ export default connect(
       state.onboarding.canSeeOnboardingPage &&
       state.router.location.pathname === newBusinessTrialistsRoute,
     hideMenuItems: state.appShell.hideMenuItems,
-    featureFlips: state.appShell.featureFlips
+    featureFlips: state.appShell.featureFlips,
   }),
 
   dispatch => ({
     openPreferences() {
-      dispatch(
-        push(
-          generatePreferencePageRoute({
-            preferenceId: 'general',
-          })
-        )
-      );
+      dispatch(preferencesGeneral.goTo());
     },
     returnToClassic() {
       window.location = getURL.getBackToClassicNewPublishBufferURL();
