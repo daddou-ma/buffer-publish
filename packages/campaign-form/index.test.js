@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { green, purple } from '@bufferapp/ui/style/colors';
+import { green } from '@bufferapp/ui/style/colors';
 import {
   render,
   screen,
@@ -105,12 +105,9 @@ describe('CampaignForm | user interaction', () => {
     });
     expect(rpcCall).toHaveBeenCalledTimes(1);
 
-    const { input, purpleColor, greenColor, saveButton } = campaignForm();
+    const { input, greenColor, saveButton } = campaignForm();
     await waitFor(() => expect(input).toHaveValue('Test Campaign'));
     await waitFor(() => expect(greenColor).toBeChecked());
-
-    userEvent.click(purpleColor);
-    expect(purpleColor).toBeChecked();
 
     userEvent.clear(input);
     await userEvent.type(input, 'Campaign updated');
@@ -121,7 +118,7 @@ describe('CampaignForm | user interaction', () => {
 
     expect(rpcCall).toHaveBeenCalledWith('updateCampaign', {
       campaignId,
-      color: purple,
+      color: green,
       name: 'Campaign updated',
     });
     expect(rpcCall).toHaveBeenCalledTimes(2);
@@ -149,15 +146,6 @@ describe('CampaignForm | user interaction', () => {
     await waitFor(() => expect(history.location.pathname).toBe('/campaigns'));
   });
 
-  test('not entering all values in the form disables save button', () => {
-    render(<CampaignForm />, {
-      initialState,
-    });
-
-    const { saveButton } = campaignForm();
-    expect(saveButton).toBeDisabled();
-  });
-
   test('creating a campaign with error from api should fail', async () => {
     const errorResponse = new Error('An error occurred');
     jest
@@ -170,9 +158,7 @@ describe('CampaignForm | user interaction', () => {
 
     const { input, saveButton } = campaignForm();
 
-    userEvent.clear(input);
     await userEvent.type(input, 'New Campaign');
-
     userEvent.click(saveButton);
 
     expect(rpcCall).toHaveBeenCalledTimes(1);
@@ -182,7 +168,7 @@ describe('CampaignForm | user interaction', () => {
     );
   });
 
-  test.skip('user should not be able to access campaigns without having the feature flip', async () => {
+  test('user should not be able to access campaigns without having the feature flip', () => {
     render(<CampaignForm />, {
       initialState: {
         appSidebar: { user: { features: [''] } },
@@ -198,11 +184,13 @@ describe('CampaignForm | user interaction', () => {
     expect(results).toHaveNoViolations();
   });
 
-  test('returns to campaigns when click cancel inside the form', async () => {
+  test('returns to campaigns when click cancel inside the form', () => {
     const initiaHistory = createMemoryHistory();
     initiaHistory.push('/', { from: '/campaigns' });
 
-    const { history } = render(<CampaignForm history={initiaHistory} />);
+    const { history } = render(<CampaignForm history={initiaHistory} />, {
+      initialState,
+    });
     const { cancelButton } = campaignForm();
 
     userEvent.click(cancelButton);
