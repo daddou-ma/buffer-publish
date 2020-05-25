@@ -5,6 +5,7 @@ import { Text, Input, Button, Link } from '@bufferapp/ui';
 import { SimpleColorPicker } from '@bufferapp/publish-shared-components';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { View } from '@bufferapp/ui/Icon';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { useTranslation } from 'react-i18next';
 import {
   grayLight,
@@ -89,7 +90,12 @@ const CampaignForm = ({
   editMode,
   campaign,
   fetchCampaign,
+  hasCampaignsFlip,
 }) => {
+  if (!hasCampaignsFlip) {
+    window.location = getURL.getPublishUrl();
+    return null;
+  }
   // Fetch the Data
   useEffect(() => {
     if (editMode) {
@@ -217,6 +223,7 @@ CampaignForm.propTypes = {
   onCreateOrUpdateCampaignClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  hasCampaignsFlip: PropTypes.bool.isRequired,
   editMode: PropTypes.bool,
   campaign: PropTypes.shape({
     id: PropTypes.string,
