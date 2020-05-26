@@ -56,7 +56,7 @@ describe('middleware', () => {
       dispatch: jest.fn(),
       getState: () => ({
         campaignsList: { ...initialState, campaigns: [] },
-        appSidebar: { user: { features: ['campaigns'] } },
+        user: { features: ['campaigns'] },
       }),
     };
     const action = {
