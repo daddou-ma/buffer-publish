@@ -68,6 +68,7 @@ const Post = ({
   hasCampaignsFeature,
   headerDetails,
   postContent,
+  shouldShowEditButton,
 }) => {
   const hasError =
     postDetails && postDetails.error && postDetails.error.length > 0;
@@ -148,6 +149,7 @@ const Post = ({
             hasCommentEnabled={hasCommentEnabled}
             hasFirstCommentFlip={hasFirstCommentFlip}
             hasUserTags={hasUserTags}
+            shouldShowEditButton={shouldShowEditButton}
           />
           {(isBusinessAccount || !features.isFreeUser()) &&
             isSent &&
@@ -195,6 +197,7 @@ Post.commonPropTypes = {
     email: PropTypes.string,
   }),
   basic: PropTypes.bool,
+  shouldShowEditButton: PropTypes.bool,
 };
 
 Post.propTypes = {
@@ -213,6 +216,7 @@ Post.defaultProps = {
   dueTime: null,
   sharedBy: null,
   basic: false,
+  shouldShowEditButton: true,
 };
 
 export default WithFeatureLoader(Post);

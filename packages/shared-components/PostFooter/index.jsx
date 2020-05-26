@@ -49,6 +49,7 @@ const PostFooter = ({
   commentText,
   hasCommentEnabled,
   hasUserTags,
+  shouldShowEditButton,
 }) => {
   const hasError = postDetails.error && postDetails.error.length > 0;
   const { isCustomScheduled, isInstagramReminder } = postDetails;
@@ -84,6 +85,7 @@ const PostFooter = ({
       isDragging={dragging}
       disableBorder={isSent}
       hasUserTags={hasUserTags}
+      shouldShowEditButton={shouldShowEditButton}
     />
   );
 };
@@ -113,6 +115,7 @@ PostFooter.propTypes = {
   commentEnabled: PropTypes.bool,
   commentText: PropTypes.string,
   hasUserTags: PropTypes.bool,
+  shouldShowEditButton: PropTypes.bool,
 };
 
 PostFooter.defaultProps = {
@@ -123,6 +126,7 @@ PostFooter.defaultProps = {
   isSent: false,
   isPastReminder: false,
   hasCommentEnabled: false,
+  shouldShowEditButton: true,
 };
 
 export default PostFooter;

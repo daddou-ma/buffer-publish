@@ -116,6 +116,7 @@ const CardFooter = ({
   isDragging,
   disableBorder,
   hasUserTags,
+  shouldShowEditButton,
 }) => {
   const hideAllButtons = hideButtons || isPerformingAction || messageLink;
   const [isConfirmingDelete, setConfirmingDelete] = useState(false);
@@ -196,7 +197,7 @@ const CardFooter = ({
               <VerticalDivider />
             </Fragment>
           )}
-          {onEditClick && (
+          {shouldShowEditButton && onEditClick && (
             <EditButton
               type="secondary"
               label="Edit"
@@ -271,6 +272,7 @@ CardFooter.propTypes = {
   isDragging: PropTypes.bool,
   disableBorder: PropTypes.bool,
   hasUserTags: PropTypes.bool,
+  shouldShowEditButton: PropTypes.bool,
 };
 
 CardFooter.defaultProps = {
@@ -294,6 +296,7 @@ CardFooter.defaultProps = {
   isDragging: false,
   disableBorder: false,
   hasUserTags: false,
+  shouldShowEditButton: true,
 };
 
 export default CardFooter;
