@@ -7,7 +7,7 @@ export default connect(
   state => ({
     translations: state.i18n.translations['steal-profile-modal'],
     stealProfileUsername: state.modals.stealProfileUsername,
-    email: state.appSidebar.user.email,
+    email: state.user.email,
   }),
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideStealProfileModal()),

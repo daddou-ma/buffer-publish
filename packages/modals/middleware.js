@@ -27,7 +27,7 @@ export default ({ dispatch, getState }) => next => action => {
       }
       break;
     case 'APP_INIT': {
-      if (getState().appSidebar.user.plan === 'awesome') {
+      if (getState().user.plan === 'awesome') {
         // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;
       }
@@ -61,7 +61,7 @@ export default ({ dispatch, getState }) => next => action => {
     }
 
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      if (getState().appSidebar.user.plan === 'awesome') {
+      if (getState().user.plan === 'awesome') {
         // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;
       }

@@ -6,10 +6,8 @@ import actions from './actions';
 export default connect(
   state => ({
     initialValues: {
-      format: state.appSidebar.user.hasTwentyFourHourTimeFormat ? '24' : '12',
-      dayToStartTheWeek: state.appSidebar.user.week_starts_monday
-        ? 'Monday'
-        : 'Sunday',
+      format: state.user.hasTwentyFourHourTimeFormat ? '24' : '12',
+      dayToStartTheWeek: state.user.week_starts_monday ? 'Monday' : 'Sunday',
     },
   }),
   dispatch => ({

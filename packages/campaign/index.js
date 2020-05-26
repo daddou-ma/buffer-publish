@@ -28,14 +28,14 @@ export default connect(
       showComposer: state.campaign.showComposer,
       editMode: state.campaign.editMode,
       editingPostId: state.campaign.editingPostId,
-      hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
-      showCampaignActions: !state.appSidebar.user.isUsingPublishAsTeamMember,
+      hideAnalyzeReport: state.user.isUsingPublishAsTeamMember,
+      showCampaignActions: !state.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
       hideSkeletonHeader: state.campaign.hideSkeletonHeader,
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
       page: state.campaign.page,
-      hasCampaignsFlip: state.appSidebar.user.features
-        ? state.appSidebar.user.features.includes('campaigns')
+      hasCampaignsFlip: state.user.features
+        ? state.user.features.includes('campaigns')
         : false,
     };
   },

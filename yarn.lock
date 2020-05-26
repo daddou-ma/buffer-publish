@@ -1914,15 +1914,6 @@
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
 
-"@bufferapp/app-sidebar@1.11.5":
-  version "1.11.5"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-sidebar/-/app-sidebar-1.11.5.tgz#f2ee078c01e4b543b2936d22815e6996d10cc55c"
-  integrity sha512-8ame2YFq+WvcLN0WJhqRKpCdVhWNVdPhYuP4Jzip/EWheN5weKomiNT+RbufXAG0iocn++XFHD+uO35ocFk3ZA==
-  dependencies:
-    "@bufferapp/async-data-fetch" "1.9.4"
-    "@bufferapp/keywrapper" "0.2.0"
-    "@bufferapp/session-manager" "0.7.1"
-
 "@bufferapp/async-data-fetch@0.5.36-beta01":
   version "0.5.36-beta01"
   resolved "https://registry.yarnpkg.com/@bufferapp/async-data-fetch/-/async-data-fetch-0.5.36-beta01.tgz#684504ddc303577c42b0ba350d854990d6bd1ad1"

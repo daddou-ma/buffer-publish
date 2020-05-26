@@ -12,7 +12,6 @@ const publishPackages = [
   'notifications',
   'web-components',
   'unauthorized-redirect',
-  'app-sidebar',
 ];
 
 const publishPackagesWhitelist = publishPackages

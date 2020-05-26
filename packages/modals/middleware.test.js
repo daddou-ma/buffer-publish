@@ -12,10 +12,8 @@ describe('middleware', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const getState = () => ({
-      appSidebar: {
-        user: {
-          plan: 'pro',
-        },
+      user: {
+        plan: 'pro',
       },
     });
     const action = {
@@ -32,10 +30,8 @@ describe('middleware', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const getState = () => ({
-      appSidebar: {
-        user: {
-          plan: 'pro',
-        },
+      user: {
+        plan: 'pro',
       },
     });
     const action = {
@@ -54,10 +50,8 @@ describe('middleware', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const getState = () => ({
-      appSidebar: {
-        user: {
-          plan: 'pro',
-        },
+      user: {
+        plan: 'pro',
       },
     });
     const action = {
@@ -90,10 +84,8 @@ describe('middleware', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const getState = () => ({
-      appSidebar: {
-        user: {
-          plan: 'pro',
-        },
+      user: {
+        plan: 'pro',
       },
     });
     const action = {
@@ -112,10 +104,8 @@ describe('middleware', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const getState = () => ({
-      appSidebar: {
-        user: {
-          plan: 'pro',
-        },
+      user: {
+        plan: 'pro',
       },
     });
     const action = {
@@ -130,10 +120,8 @@ describe('middleware', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const getState = () => ({
-      appSidebar: {
-        user: {
-          plan: 'pro',
-        },
+      user: {
+        plan: 'pro',
       },
     });
     const action = {
