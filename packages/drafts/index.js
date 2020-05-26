@@ -143,9 +143,7 @@ export default connect(
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
         canStartBusinessTrial: state.drafts.canStartBusinessTrial,
-        hasFirstCommentFlip: state.user.features
-          ? state.user.features.includes('first_comment')
-          : false,
+        hasFirstCommentFlip: state.user.features?.includes('first_comment') ?? false,
       };
     }
     return {};

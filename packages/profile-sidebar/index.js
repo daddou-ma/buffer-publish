@@ -25,9 +25,7 @@ export default hot(
         hasFacebook: state.profileSidebar.hasFacebook,
         hasTwitter: state.profileSidebar.hasTwitter,
         isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
-        hasCampaignsFlip: state.user.features
-          ? state.user.features.includes('campaigns')
-          : false,
+        hasCampaignsFlip: state.user.features?.includes('campaigns') ?? false,
         isCampaignsSelected: !!getMatch({
           pathname: state.router?.location?.pathname,
           route: campaignsPage.route,

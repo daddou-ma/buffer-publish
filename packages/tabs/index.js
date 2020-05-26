@@ -39,9 +39,7 @@ export default connect(
     isInstagramProfile: state.generalSettings.isInstagramProfile,
     selectedProfile: state.profileSidebar.selectedProfile,
     canStartProTrial: state.user.canStartProTrial,
-    hasStoriesFlip: state.user.features
-      ? state.user.features.includes('stories_groups')
-      : false,
+    hasStoriesFlip: state.user.features?.includes('stories_groups') ?? false,
     draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
     draftsCount: state.tabs.draftsCount,
   }),
