@@ -30,6 +30,9 @@
     "url": "https://github.com/bufferapp/project-donut/issues"
   },
   "homepage": "https://github.com/bufferapp/project-donut#readme",
+  "resolutions": {
+    "@babel/preset-env": "^7.8.7"
+  },
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/plugin-proposal-async-generator-functions": "7.2.0",
@@ -40,7 +43,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.7.4",
     "@babel/plugin-transform-modules-commonjs": "7.2.0",
     "@babel/plugin-transform-runtime": "7.6.0",
-    "@babel/preset-env": "7.8.3",
+    "@babel/preset-env": "7.8.7",
     "@babel/preset-react": "7.8.3",
     "@babel/register": "7.6.0",
     "@babel/runtime-corejs3": "7.6.2",
