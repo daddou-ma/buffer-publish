@@ -16,12 +16,10 @@ export default connect(
     selectedTabId: ownProps.tabId,
     selectedChildTabId: ownProps.childTabId,
     onProTrial:
-      state.user.trial &&
-      state.user.trial.onTrial &&
+      state.user.trial?.onTrial &&
       !state.profileSidebar.selectedProfile.business,
     shouldShowUpgradeCta:
-      state.user.is_free_user &&
-      !state.user.isBusinessTeamMember,
+      state.user.is_free_user && !state.user.isBusinessTeamMember,
     shouldShowUpgradeButton:
       state.user.plan === 'free' ||
       state.user.plan === 'pro' ||
