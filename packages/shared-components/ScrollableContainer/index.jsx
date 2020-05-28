@@ -17,6 +17,7 @@ function ScrollableContainer({
   tabId,
   profileId,
   loadingMore,
+  page,
   moreToLoad,
   children,
   growthSpace,
@@ -45,7 +46,7 @@ function ScrollableContainer({
       container.addEventListener('scroll', handleScroll);
       return () => container.removeEventListener('scroll', handleScroll);
     }
-  }, [profileId, tabId, moreToLoad, loadingMore]);
+  }, [profileId, tabId, moreToLoad, loadingMore, page]);
 
   return (
     <div
@@ -60,6 +61,7 @@ function ScrollableContainer({
 ScrollableContainer.propTypes = {
   profileId: PropTypes.string.isRequired,
   tabId: PropTypes.string.isRequired,
+  page: PropTypes.number,
   children: PropTypes.node.isRequired,
   growthSpace: PropTypes.number,
   moreToLoad: PropTypes.bool,
