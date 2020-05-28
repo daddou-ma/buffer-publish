@@ -224,6 +224,7 @@ function ProfilePage({
         growthSpace={1}
         loadingMore={loadingMore}
         moreToLoad={moreToLoad}
+        page={page}
         onReachBottom={onReachBottom}
       >
         <Main id="main">
