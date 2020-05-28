@@ -29,10 +29,8 @@ describe('StealProfileModal', () => {
       modals: {
         stealProfileUsername: 'username',
       },
-      appSidebar: {
-        user: {
-          email: 'username@mail.com',
-        },
+      user: {
+        email: 'username@mail.com',
       },
     });
     const wrapper = mount(

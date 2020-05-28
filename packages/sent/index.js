@@ -60,13 +60,11 @@ export default connect(
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
-        isAnalyzeCustomer: state.appSidebar.user.isAnalyzeCustomer,
-        hasFirstCommentFlip: state.appSidebar.user.features
-          ? state.appSidebar.user.features.includes('first_comment')
-          : false,
-        hasCampaignsFeature: state.appSidebar.user.features
-          ? state.appSidebar.user.features.includes('campaigns')
-          : false,
+        isAnalyzeCustomer: state.user.isAnalyzeCustomer,
+        hasFirstCommentFlip:
+          state.user.features?.includes('first_comment') ?? false,
+        hasCampaignsFeature:
+          state.user.features?.includes('campaigns') ?? false,
         linkShortening: state.generalSettings.linkShortening,
         hasBitlyPosts: currentProfile.hasBitlyPosts,
         shouldDisplayBitly: !state?.productFeatures?.isFreeUser,

@@ -7,9 +7,8 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
-    profileLimit: state.appSidebar.user.profile_limit,
-    isOwner:
-      state.appSidebar.user.id === state.profileSidebar.selectedProfile.ownerId,
+    profileLimit: state.user.profile_limit,
+    isOwner: state.user.id === state.profileSidebar.selectedProfile.ownerId,
   }),
   dispatch => ({
     onClickUpgrade: plan => {

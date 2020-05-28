@@ -66,7 +66,7 @@ export default connect(
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
-        userData: state.appSidebar.user,
+        userData: state.user,
         showStoryPreview: state.pastReminders.showStoryPreview,
       };
     }

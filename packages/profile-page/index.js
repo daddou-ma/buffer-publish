@@ -54,9 +54,8 @@ export default hot(
           view: currentProfile.tabId || null,
           isBusinessAccount: state.profileSidebar.selectedProfile.business,
           selectedProfile: state.profileSidebar.selectedProfile,
-          hasStoriesFlip: state.appSidebar.user.features
-            ? state.appSidebar.user.features.includes('stories_groups')
-            : false,
+          hasStoriesFlip:
+            state.user.features?.includes('stories_groups') ?? false,
           shouldHideAdvancedAnalytics: state.profileSidebar.selectedProfile
             ? state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics
             : false,

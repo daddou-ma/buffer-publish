@@ -3,10 +3,8 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import middleware from './middleware';
 
 const getStateWithPaidUser = () => ({
-  appSidebar: {
-    user: {
-      is_free_user: false,
-    },
+  user: {
+    is_free_user: false,
   },
 });
 

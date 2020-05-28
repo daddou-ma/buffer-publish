@@ -58,9 +58,9 @@ export default ({ dispatch, getState }) => next => action => {
       const state = getState();
       // only reset composer userData if the user just started a trial
       if (state.trial.startedTrial) {
-        const userData = state.appSidebar.user;
+        const { user } = state;
         AppHooks.handleStartTrial({
-          message: userData,
+          message: user,
           removeScope: state.trial.scope,
         });
       }

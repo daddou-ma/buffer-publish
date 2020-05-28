@@ -30,7 +30,7 @@ const campaignForm = () => {
 };
 
 const initialState = {
-  appSidebar: { user: { features: ['campaigns'] } },
+  user: { features: ['campaigns'] },
 };
 
 describe('CampaignForm | user interaction', () => {
@@ -171,7 +171,7 @@ describe('CampaignForm | user interaction', () => {
   test('user should not be able to access campaigns without having the feature flip', () => {
     render(<CampaignForm />, {
       initialState: {
-        appSidebar: { user: { features: [''] } },
+        user: { features: [''] },
       },
     });
 

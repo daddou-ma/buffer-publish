@@ -195,12 +195,6 @@ https://github.com/bufferapp/buffer-js-notifications
 
 Notification display system
 
-### App Sidebar
-
-https://github.com/bufferapp/buffer-js-app-sidebar
-
-Sidebar to navigate between applications
-
 ### Publish Parsers
 
 https://github.com/bufferapp/buffer-js-publish-parsers

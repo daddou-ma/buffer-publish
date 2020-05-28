@@ -16,17 +16,16 @@ const getClassicBufferURL = () => {
 
 export default connect(
   state => ({
-    currentPlan: state.appSidebar.user.plan,
+    currentPlan: state.user.plan,
     onProTrial:
-      state.appSidebar.user.trial &&
-      state.appSidebar.user.trial.onTrial &&
+      state.user.trial?.onTrial &&
       !state.profileSidebar.selectedProfile.business,
     profiles: state.profileSidebar.profiles,
     selectedProfileId: state.profileSidebar.selectedProfileId,
     translations: state.i18n.translations['plans-page'],
-    isNonprofit: state.appSidebar.user.isNonprofit,
+    isNonprofit: state.user.isNonprofit,
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
-    shouldSeeSoloPlanOption: state.appSidebar.user.plan === 'pro',
+    shouldSeeSoloPlanOption: state.user.plan === 'pro',
   }),
   dispatch => ({
     onPremiumPlanClick: ({ selectedPlan }) => {

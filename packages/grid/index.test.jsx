@@ -28,10 +28,8 @@ describe('Grid', () => {
           },
         },
       },
-      appSidebar: {
-        user: {
-          is_business_user: false,
-        },
+      user: {
+        is_business_user: false,
       },
       profileSidebar: {
         selectedProfile: {

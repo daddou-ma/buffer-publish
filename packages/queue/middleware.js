@@ -24,7 +24,7 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
 
-      if (getState().appSidebar.user.plan !== 'awesome') {
+      if (getState().user.plan !== 'awesome') {
         const sidebar = getState().profileSidebar;
         const profileId = sidebar.selectedProfileId;
         const isIGBusiness = sidebar.selectedProfile.service_type === 'business';
