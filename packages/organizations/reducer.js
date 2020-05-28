@@ -10,10 +10,10 @@ const orgData =
 module.exports = (state = orgData || {}, action) => {
   switch (action.type) {
     case `organizations_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const orgs = action.result;
-      const selected = getSelectedOrganization(orgs);
+      const organizations = action.result;
+      const selected = getSelectedOrganization(organizations);
       return {
-        list: orgs,
+        list: organizations,
         selected,
       };
     }

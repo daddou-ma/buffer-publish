@@ -14,7 +14,7 @@ export default ({ dispatch, getState }) => next => action => {
         dispatch(
           dataFetchActions.fetchSuccess({
             name: 'organizations',
-            result: [ ...window.bufferData.organizations ],
+            result: [...window.bufferData.organizations],
           })
         );
         // make sure we only bootstrap this data once
