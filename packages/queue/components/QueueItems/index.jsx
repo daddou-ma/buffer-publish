@@ -99,7 +99,9 @@ const renderPost = ({
     hasPushNotifications,
     onSetRemindersClick,
     hasCampaignsFeature,
+    shouldShowEditButton: post.retweet && !!post.retweetComment,
   };
+
   const PostComponent = Post;
 
   const defaultStyle = {

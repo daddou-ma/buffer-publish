@@ -418,6 +418,8 @@ const DataImportUtils = {
         shopgridLink: meta.shopgridLink || null,
         tabId: meta.tabId || null,
         emptySlotMode: meta.emptySlotMode || false,
+        editMode: meta.editMode || false,
+        serviceUpdateId: meta.serviceUpdateId,
       };
     }
 
