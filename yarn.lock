@@ -1025,14 +1025,14 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bufferapp/add-report@^1.11.0", "@bufferapp/add-report@^1.35.3":
-  version "1.35.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/add-report/-/add-report-1.35.3.tgz#282307ff09f7e385fca0bc6246ae0f27c22deb93"
-  integrity sha512-LVtZ+naOPDI016nIlEfAq4TnAH+bosMw9uAQk1hmoqbpPqePnqcpag9nbUNPGrjfHB6e5ksNP2R466FySpUhMA==
+"@bufferapp/add-report@1.11.0", "@bufferapp/add-report@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/add-report/-/add-report-1.11.0.tgz#f2ee248ba1a9c80477843ed77092eac865a91151"
+  integrity sha512-LqfmxrORBRzgEXmKz1zVWBHOHBd3It6DVLgjNlPfhYmuR9EY+TIBJDqYMHbtdnARlbVrRLFsZE80i9jODioM/A==
   dependencies:
-    "@bufferapp/analyze-shared-components" "^1.35.3"
+    "@bufferapp/analyze-shared-components" "^1.11.0"
     "@bufferapp/components" "3.2.1"
-    "@bufferapp/report-list" "^1.35.3"
+    "@bufferapp/report-list" "^1.11.0"
 
 "@bufferapp/analytics-middleware@1.1.0":
   version "1.1.0"
@@ -1055,7 +1055,7 @@
     jszip "^3.1.4"
     moment-timezone "^0.5.25"
 
-"@bufferapp/analyze-csv-export@^1.33.0", "@bufferapp/analyze-csv-export@^1.9.0":
+"@bufferapp/analyze-csv-export@^1.9.0":
   version "1.33.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-csv-export/-/analyze-csv-export-1.33.0.tgz#ec4fec71ef11d8170f20ca669a87d574bfed0b3e"
   integrity sha512-nN3m5I+uC7sjFB/fa2JEiSJX86DPHcNthZN67H4OpW2ezOOA10CEmGbC7ZooXKfztH310lpQewyvnUUTMyVefQ==
@@ -1066,7 +1066,7 @@
     jszip "^3.1.4"
     moment-timezone "^0.5.27"
 
-"@bufferapp/analyze-date-picker@1.11.0":
+"@bufferapp/analyze-date-picker@1.11.0", "@bufferapp/analyze-date-picker@^1.11.0":
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-date-picker/-/analyze-date-picker-1.11.0.tgz#88925f4a3e32f8d676151e336e480d445629269f"
   integrity sha512-Di1Pl5JTpR8ibx5L5xC9MlvMH0HmhcGaBO3gsyZalwZXY8cqa9wWi2t/ld/F/TUJm8IYkIWwf7ajiZ80ooiZXw==
@@ -1077,17 +1077,7 @@
     moment-timezone "^0.5.25"
     react-tooltip "^3.3.0"
 
-"@bufferapp/analyze-date-picker@^1.11.0", "@bufferapp/analyze-date-picker@^1.35.3":
-  version "1.35.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-date-picker/-/analyze-date-picker-1.35.3.tgz#3ad34a078c90957c5a0f0810da7f40e00853f55d"
-  integrity sha512-7EZX/O41hX1b3rDiQF0NPB90pJ8k51y2J3Th6n5GJkgkAWPoTcZTeSsgiiKHmvLyriVXYeiIrAqDqBylsZRJcg==
-  dependencies:
-    "@bufferapp/analyze-profile-selector" "^1.35.3"
-    "@bufferapp/components" "3.2.1"
-    moment-timezone "^0.5.27"
-    react-tooltip "^3.3.0"
-
-"@bufferapp/analyze-decorators@^1.33.0", "@bufferapp/analyze-decorators@^1.9.0":
+"@bufferapp/analyze-decorators@^1.9.0":
   version "1.33.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-decorators/-/analyze-decorators-1.33.0.tgz#cb5f9cc654bf9ade618b2f668d2fbd8224225b66"
   integrity sha512-GvdAxNSNjxhpMaLAEbuNPanRWRY8aKfM5/0176J5Ti+2lpLvNyEB9vr0oK45JIWO93RAt0KfEcYM40Ptks8iUQ==
@@ -1112,7 +1102,7 @@
     jszip "^3.1.4"
     moment-timezone "^0.5.25"
 
-"@bufferapp/analyze-png-export@^1.33.0", "@bufferapp/analyze-png-export@^1.9.0":
+"@bufferapp/analyze-png-export@^1.9.0":
   version "1.33.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-png-export/-/analyze-png-export-1.33.0.tgz#5b5610f7b15395c76c5e2d9e659d795649cb1536"
   integrity sha512-iCCwYUc6mGL7VG//Kcx/qsEN+E54yF8yxGTwlfOosTHRCBcwwsQaU9GsQp6iWzlLEIOV8a2ixtD3oty1czasTA==
@@ -1123,7 +1113,7 @@
     jszip "^3.1.4"
     moment-timezone "^0.5.27"
 
-"@bufferapp/analyze-profile-selector@1.11.0":
+"@bufferapp/analyze-profile-selector@1.11.0", "@bufferapp/analyze-profile-selector@^1.11.0":
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-profile-selector/-/analyze-profile-selector-1.11.0.tgz#9cd1175ad788503422aee9fe01c63648ed1559f9"
   integrity sha512-8bhYYVxkI2gNVsGyNbXgDZKm8q/yGbzsT3qNxLoOQyw6NSV8wEEb2qtHK6gfr3dwaqnvr5jQvYgnkMeNEG++ew==
@@ -1133,17 +1123,7 @@
     "@bufferapp/react-simple-dropdown" "3.2.5"
     moment-timezone "^0.5.25"
 
-"@bufferapp/analyze-profile-selector@^1.11.0", "@bufferapp/analyze-profile-selector@^1.35.3":
-  version "1.35.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-profile-selector/-/analyze-profile-selector-1.35.3.tgz#bd5b061c49b5e00777cc679590981b41312c13b8"
-  integrity sha512-IcHGJhBN1rIg1TyIz8SJEOvedWyjCLr8PyfszCf0aTRqq9oc/hfdvoSwJAQnLn9cRw+Yds98743qVeWAxO5y/w==
-  dependencies:
-    "@bufferapp/analyze-shared-components" "^1.35.3"
-    "@bufferapp/components" "3.2.1"
-    "@bufferapp/react-simple-dropdown" "3.2.5"
-    moment-timezone "^0.5.27"
-
-"@bufferapp/analyze-shared-components@1.11.0":
+"@bufferapp/analyze-shared-components@1.11.0", "@bufferapp/analyze-shared-components@^1.11.0":
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/analyze-shared-components/-/analyze-shared-components-1.11.0.tgz#e51130771aabf783fd85811a2f72379f3b45e529"
   integrity sha512-i9z1s2uWDz4ROgfxhsIGoRHiIF5AMBdUMBSmnU9AtuSXiXi/XVFIEDyqgFSWg8Xal53yWb4H8srYeY7ZF/vxqQ==
@@ -1153,17 +1133,6 @@
     immutability-helper "^2.9.0"
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
-
-"@bufferapp/analyze-shared-components@^1.11.0", "@bufferapp/analyze-shared-components@^1.35.3":
-  version "1.35.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/analyze-shared-components/-/analyze-shared-components-1.35.3.tgz#8a919940dabc9a52ab115b9f6588b90804c6c310"
-  integrity sha512-nIHzkrZPe4YiHYPgvUDGKnz2TKpkZvtnUlKaCSRtW3fFULLbNocZRAOcTF0SDY8btD0FLOZNN+W/bVcYR2dtbw==
-  dependencies:
-    "@bufferapp/components" "3.2.1"
-    currency-symbol-map "^4.0.4"
-    immutability-helper "^2.9.0"
-    moment-timezone "^0.5.27"
-    react-highcharts "^16.1.0"
 
 "@bufferapp/async-data-fetch@0.5.36-beta01":
   version "0.5.36-beta01"
@@ -1370,14 +1339,15 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/micro-rpc/-/micro-rpc-0.1.7.tgz#a97782dc88cf476278911287728bef538adb25b9"
   integrity sha1-qXeC3IjPR2J4kRKHcovvU4rbJbk=
 
-"@bufferapp/nav-sidebar@^1.11.0", "@bufferapp/nav-sidebar@^1.35.3":
-  version "1.35.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/nav-sidebar/-/nav-sidebar-1.35.3.tgz#c161e4e1aa254fba21291becf901fc68bc224f9f"
-  integrity sha512-tWf0G5tu6dQ5erbIia16vP2Uwl4F9D1YvU1ohx2VUUdZxjzt2L0qttkUFk8nuxM3wZrX7s+ly3fnfoF5BweECQ==
+"@bufferapp/nav-sidebar@1.11.0", "@bufferapp/nav-sidebar@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/nav-sidebar/-/nav-sidebar-1.11.0.tgz#263d2ff084ed416d209194a3823250b50998f454"
+  integrity sha512-k61n2H16aaLoSIPEJ6P6MDedwLVQ0X7BmNkntLx8FTT6mfgSA73s0o7i1zUBlfFCGryvU408RtvQ9NuCqx7BlA==
   dependencies:
-    "@bufferapp/analyze-profile-selector" "^1.35.3"
+    "@bufferapp/analyze-profile-selector" "^1.11.0"
+    "@bufferapp/async-data-fetch" "0.5.36-beta01"
     "@bufferapp/components" "3.2.1"
-    "@bufferapp/report-list" "^1.35.3"
+    "@bufferapp/report-list" "^1.11.0"
 
 "@bufferapp/notifications@1.9.4":
   version "1.9.4"
@@ -1446,19 +1416,12 @@
     classnames "^2.1.2"
     prop-types "^15.5.8"
 
-"@bufferapp/report-list@1.11.0":
+"@bufferapp/report-list@1.11.0", "@bufferapp/report-list@^1.11.0":
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/report-list/-/report-list-1.11.0.tgz#426c05f0fcfc524c60cbdb4467818c6d5cf99b20"
   integrity sha512-KePBd9gUlde9y7hG57QtKIxFFv+ZILRFFO2LYCVTRj39g9fmkNZ9wPMGrvsHvfLy7lCn65f2h3KPS9+aVVMBJw==
   dependencies:
     "@bufferapp/analyze-shared-components" "^1.11.0"
-
-"@bufferapp/report-list@^1.35.3":
-  version "1.35.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/report-list/-/report-list-1.35.3.tgz#329f0f952129fd3c4680389160f5d3bcb283521c"
-  integrity sha512-EqWbk0a/FrPjs3B4y3CZN4pzwd0GCiNIGCW/cXIG61NN9UHzsi8ZCdJTv9kQ9sZYpMWSzSgw4W+JoxPyyqmLIw==
-  dependencies:
-    "@bufferapp/analyze-shared-components" "^1.35.3"
 
 "@bufferapp/session-manager@0.7.1":
   version "0.7.1"
@@ -1483,7 +1446,7 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/shutdown-helper/-/shutdown-helper-0.2.0.tgz#d43bbba845e30e411dda76a7b7629e11160e5395"
   integrity sha1-1Du7qEXjDkEd2nant2KeERYOU5U=
 
-"@bufferapp/summary-table@1.11.0":
+"@bufferapp/summary-table@1.11.0", "@bufferapp/summary-table@^1.11.0":
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/summary-table/-/summary-table-1.11.0.tgz#fad4d00d251f8ef7b8a6b73aaf61738913348699"
   integrity sha512-ErvkMuDxqDCDFui5reNJbsYgxYodoyx5nFq74Cb0xJQdyDq/dviSfIiYYB4lHippgoF09COw7ZKO1d0eOdW03g==
@@ -1498,22 +1461,6 @@
     "@bufferapp/async-data-fetch" "0.5.36-beta01"
     "@bufferapp/components" "3.2.1"
     "@bufferapp/nav-sidebar" "^1.11.0"
-    numeral "2.0.6"
-
-"@bufferapp/summary-table@^1.11.0":
-  version "1.35.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/summary-table/-/summary-table-1.35.3.tgz#6e228e4d953f31abf87252f76da98e11601d4d21"
-  integrity sha512-QhUAUxRvqjM4bJ2zRFXCJt7fUdn/xrj5864AITA4pYgQQdoyfJDlVAts2w84Upgmb8/eM3nX0xg254lUn7p0Fw==
-  dependencies:
-    "@bufferapp/add-report" "^1.35.3"
-    "@bufferapp/analyze-csv-export" "^1.33.0"
-    "@bufferapp/analyze-date-picker" "^1.35.3"
-    "@bufferapp/analyze-decorators" "^1.33.0"
-    "@bufferapp/analyze-png-export" "^1.33.0"
-    "@bufferapp/analyze-profile-selector" "^1.35.3"
-    "@bufferapp/analyze-shared-components" "^1.35.3"
-    "@bufferapp/components" "3.2.1"
-    "@bufferapp/nav-sidebar" "^1.35.3"
     numeral "2.0.6"
 
 "@bufferapp/ui@5.37.1":
@@ -7309,11 +7256,6 @@ csstype@^2.2.0, csstype@^2.5.7:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.10.tgz#e63af50e66d7c266edb6b32909cfd0aabe03928b"
   integrity sha512-D34BqZU4cIlMCY93rZHbrq9pjTAQJ3U8S8rfBqjwHxkGPThWFjzZDQpgMJY0QViLxth6ZKYiwFBo14RdN44U/w==
-
-currency-symbol-map@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/currency-symbol-map/-/currency-symbol-map-4.0.4.tgz#3cfba625974dd3f86822d327ecbd10248695e95e"
-  integrity sha512-hkSCCopJXVsvIZIiumJc6FoNXR5LQ646c3ufzF0yfv3155PYygysHw24JuzPSg4j86EFpvtgeX+vEhzRtcJ5Ag==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -15714,7 +15656,7 @@ react-helmet-async@^1.0.2:
     react-fast-compare "^3.0.1"
     shallowequal "^1.1.0"
 
-react-highcharts@^16.0.2, react-highcharts@^16.1.0:
+react-highcharts@^16.0.2:
   version "16.1.0"
   resolved "https://registry.yarnpkg.com/react-highcharts/-/react-highcharts-16.1.0.tgz#aa2d451171197462e07fa8652a42bac43da6068a"
   integrity sha512-CHpCSMN96lXKeTIpx8UJPsUgeNeJqh81NN6cbzraiHQBiQz2mzXa5aaIWYbMEQ2NHhAEWU5uj5DPhZY1f1Rq+A==
