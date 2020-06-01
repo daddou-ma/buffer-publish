@@ -160,8 +160,8 @@ export default (state = initialState, action) => {
         profiles,
       };
     }
-    case `organizations_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const selectedOrganization = getSelectedOrganization(action.result);
+    case `ORGANIZATIONS_INITIALIZED`: {
+      const { selectedOrganization } = action;
       let { profiles } = state;
 
       if (profiles) {
