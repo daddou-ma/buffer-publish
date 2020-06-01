@@ -32,7 +32,7 @@ const getProfiles = (state, selectedProfileId) => {
 
 export default connect(
   (state, ownProps) => {
-    if (state.appSidebar && state.profileSidebar) {
+    if (state.user && state.profileSidebar) {
       const { type } = ownProps;
       let {
         profileSidebar: { selectedProfileId },
@@ -97,7 +97,7 @@ export default connect(
           return;
       }
       return {
-        userData: state.appSidebar.user,
+        userData: state.user,
         profiles: getProfiles(state, selectedProfileId),
         enabledApplicationModes: state.temporaryBanner.enabledApplicationModes,
         environment: state.environment.environment,

@@ -11,6 +11,7 @@ import {
   grayDarker,
   red,
   grayDark,
+  gray,
 } from '@bufferapp/ui/style/colors';
 import { fontWeightBold } from '@bufferapp/ui/style/fonts';
 
@@ -47,7 +48,7 @@ const CardFooterWrapper = styled.div`
 const CardFooterWrapperWithBorder = styled(CardFooterWrapper)`
   padding: 8px 16px;
   background-color: ${offWhite};
-  border-top: 1px solid ${grayLight};
+  border-top: 1px solid ${gray};
 `;
 
 const CardFooterContent = styled.div`
@@ -115,6 +116,7 @@ const CardFooter = ({
   isDragging,
   disableBorder,
   hasUserTags,
+  shouldShowEditButton,
 }) => {
   const hideAllButtons = hideButtons || isPerformingAction || messageLink;
   const [isConfirmingDelete, setConfirmingDelete] = useState(false);
@@ -195,7 +197,7 @@ const CardFooter = ({
               <VerticalDivider />
             </Fragment>
           )}
-          {onEditClick && (
+          {shouldShowEditButton && onEditClick && (
             <EditButton
               type="secondary"
               label="Edit"
@@ -270,6 +272,7 @@ CardFooter.propTypes = {
   isDragging: PropTypes.bool,
   disableBorder: PropTypes.bool,
   hasUserTags: PropTypes.bool,
+  shouldShowEditButton: PropTypes.bool,
 };
 
 CardFooter.defaultProps = {
@@ -293,6 +296,7 @@ CardFooter.defaultProps = {
   isDragging: false,
   disableBorder: false,
   hasUserTags: false,
+  shouldShowEditButton: true,
 };
 
 export default CardFooter;

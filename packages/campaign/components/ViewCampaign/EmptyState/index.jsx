@@ -37,7 +37,7 @@ const EmptyStateCampaign = ({
   };
 
   return (
-    <React.Fragment>
+    <main id="main">
       {displayEmptyCampaign && (
         <EmptyCampaignWrapper>
           <EmptyCampaignBanner onCreatePostClick={actions.onCreatePostClick} />
@@ -68,7 +68,7 @@ const EmptyStateCampaign = ({
           }
         />
       )}
-    </React.Fragment>
+    </main>
   );
 };
 

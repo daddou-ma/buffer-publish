@@ -216,6 +216,7 @@ module.exports = post => {
     service_user_tags: post.service_user_tags,
     user: getUser(post),
     serviceLink: post.service_link,
+    serviceUpdateId: post.service_update_id,
     dueTime: post.due_time,
     sharedBy: post.shared_by,
     commentEnabled: post.comment_enabled,

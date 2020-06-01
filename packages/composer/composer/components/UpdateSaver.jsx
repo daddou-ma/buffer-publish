@@ -290,7 +290,7 @@ class UpdateSaver extends React.Component {
       isEditPost && !doSelectedProfilesHaveSlots && !isDraft;
 
     return (
-      <div className={styles.section}>
+      <section className={styles.section}>
         {isOmniboxEnabled && <OmniboxButtons />}
 
         {!isOmniboxEnabled &&
@@ -421,7 +421,7 @@ class UpdateSaver extends React.Component {
             classNames={notificationContainerClassNames}
           />
         )}
-      </div>
+      </section>
     );
   }
 }

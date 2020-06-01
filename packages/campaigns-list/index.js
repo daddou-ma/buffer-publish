@@ -13,11 +13,9 @@ export default connect(
   state => {
     return {
       campaigns: state.campaignsList.campaigns,
-      showCampaignActions: !state.appSidebar.user.isUsingPublishAsTeamMember,
+      showCampaignActions: !state.user.isUsingPublishAsTeamMember,
       isLoading: state.campaignsList.isLoading,
-      hasCampaignsFlip: state.appSidebar.user.features
-        ? state.appSidebar.user.features.includes('campaigns')
-        : false,
+      hasCampaignsFlip: state.user.features?.includes('campaigns') ?? false,
     };
   },
   (dispatch, ownProps) => ({

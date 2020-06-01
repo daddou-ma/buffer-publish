@@ -2,7 +2,7 @@ import {
   actions as fetchActions,
   actionTypes as fetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { constants as tabsNames } from '@bufferapp/publish-preferences';
+import { preferencesAppsExtras } from '@bufferapp/publish-routes';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as notificationActions } from '@bufferapp/notifications';
 
@@ -19,7 +19,7 @@ describe('middleware', () => {
     const action = {
       type: LOCATION_CHANGE,
       payload: {
-        location: { pathname: `/preferences/${tabsNames.APPS_EXTRAS}` },
+        location: { pathname: preferencesAppsExtras.route },
       },
     };
     middleware(store)(next)(action);

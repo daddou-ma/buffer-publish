@@ -23,12 +23,9 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   padding: 0px 16px;
-  button {
-    margin-left: auto;
-  }
 `;
 
-const Container = styled.div`
+const Main = styled.main`
   margin: 0px auto;
   min-width: 800px;
   max-width: 1800px;
@@ -40,6 +37,10 @@ const Container = styled.div`
   @media (min-width: 1500px) {
     width: 75vw;
   }
+`;
+
+const TextWithSkeletonStyled = styled(TextWithSkeleton)`
+  flex-grow: 1;
 `;
 
 const ListCampaigns = ({
@@ -71,15 +72,15 @@ const ListCampaigns = ({
 
   return (
     <Wrapper>
-      <Container>
+      <Main id="main">
         <Header>
-          <TextWithSkeleton
+          <TextWithSkeletonStyled
             type="h2"
             displaySkeleton={isLoading}
             aria-label={isLoading ? t('common.loading') : null}
           >
             {t('campaigns.common.title')}
-          </TextWithSkeleton>
+          </TextWithSkeletonStyled>
           {showCampaignActions && (
             <ButtonWithSkeleton
               type="primary"
@@ -103,7 +104,7 @@ const ListCampaigns = ({
         {isLoading && (
           <SkeletonList showCampaignActions={showCampaignActions} />
         )}
-      </Container>
+      </Main>
     </Wrapper>
   );
 };

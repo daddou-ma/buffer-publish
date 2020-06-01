@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   profilePageRoute,
-  preferencePageRoute,
+  preferencesPage,
   childTabRoute,
   plansPageRoute,
   newBusinessTrialistsRoute,
@@ -28,7 +28,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
   };
   return (
     <Switch>
-      <Route path={preferencePageRoute} component={Preferences} />
+      <Route path={preferencesPage.route} component={Preferences} />
       <Route path={plansPageRoute} component={Plans} />
 
       {!hasProfiles && (

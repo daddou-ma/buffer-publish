@@ -13,7 +13,6 @@ import languageSettingsReducer from '@bufferapp/language-preferences/reducer';
 import i18nReducer from '@bufferapp/publish-i18n/reducer';
 import profileSidebarReducer from '@bufferapp/publish-profile-sidebar/reducer';
 import clientAccessReducer from '@bufferapp/client-access/reducer';
-import appSidebarReducer from '@bufferapp/app-sidebar/lib/reducer';
 import productFeaturesReducer from '@bufferapp/product-features/reducer';
 import asyncDataFetchReducer from '@bufferapp/async-data-fetch/lib/reducer';
 import notificationsReducer from '@bufferapp/notifications/lib/reducer';
@@ -66,7 +65,6 @@ export default {
   tabs: tabsReducer,
   profileSidebar: profileSidebarReducer,
   clientAccess: clientAccessReducer,
-  appSidebar: appSidebarReducer,
   asyncDataFetch: asyncDataFetchReducer,
   notifications: notificationsReducer,
   environment: environmentReducer,

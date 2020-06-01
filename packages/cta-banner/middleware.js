@@ -4,7 +4,7 @@ import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => action => {
   // eslint-disable-line
-  const { user } = getState().appSidebar;
+  const { user } = getState();
   next(action);
 
   switch (action.type) {

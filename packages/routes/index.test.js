@@ -2,11 +2,8 @@ import {
   getProfilePageParams,
   generateProfilePageRoute,
   generateChildTabRoute,
-  preferencePageRoute,
   profilePageRoute,
   childTabRoute,
-  generatePreferencePageRoute,
-  getPreferencePageParams,
   getParams,
   getMatch,
 } from './index';
@@ -68,33 +65,6 @@ describe('publish-routes', () => {
   describe('childTabRoute', () => {
     it('should return child tab page route template', () => {
       expect(childTabRoute).toBe('/profile/:profileId/tab/:tabId/:childTabId');
-    });
-  });
-
-  describe('preferencePageRoute', () => {
-    it('should return a preferences page route template', () => {
-      expect(preferencePageRoute).toBe('/preferences/:preferenceId');
-    });
-  });
-
-  describe('generatePreferencePageRoute', () => {
-    it('should generate preference page route', () => {
-      const preferenceId = '1234adf';
-      expect(
-        generatePreferencePageRoute({
-          preferenceId,
-        })
-      ).toBe(`/preferences/${preferenceId}`);
-    });
-  });
-
-  describe('getPreferencePageParams', () => {
-    it('should get params from path', () => {
-      const preferenceId = '1234adf';
-      const path = `/preferences/${preferenceId}`;
-      expect(getPreferencePageParams({ path })).toEqual({
-        preferenceId,
-      });
     });
   });
 

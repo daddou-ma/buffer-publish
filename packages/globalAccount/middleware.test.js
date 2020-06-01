@@ -9,10 +9,8 @@ describe('middleware', () => {
       _id: 'foo1',
       email: 'foo@buffer.com',
     },
-    appSidebar: {
-      user: {
-        name: 'The Great Foo',
-      },
+    user: {
+      name: 'The Great Foo',
     },
   };
 

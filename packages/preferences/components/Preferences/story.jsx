@@ -19,34 +19,17 @@ storiesOf('Preferences', module)
   ))
   .add('default', () => (
     <Preferences
-      selectedTabId="general"
-      onTabClick={action('onTabClick')}
       onBackToDashboardClick={e => {
         e.preventDefault();
         action('onBackToDashboardClick')(e);
       }}
-      onUnknownTab={action('onUnknownTab')}
     />
   ))
   .add('with tab selected', () => (
     <Preferences
-      selectedTabId="security"
-      onTabClick={action('onTabClick')}
       onBackToDashboardClick={e => {
         e.preventDefault();
         action('onBackToDashboardClick')(e);
       }}
-      onUnknownTab={action('onUnknownTab')}
-    />
-  ))
-  .add('with unknown tab', () => (
-    <Preferences
-      selectedTabId="generalz"
-      onTabClick={action('onTabClick')}
-      onBackToDashboardClick={e => {
-        e.preventDefault();
-        action('onBackToDashboardClick')(e);
-      }}
-      onUnknownTab={action('onUnknownTab')}
     />
   ));

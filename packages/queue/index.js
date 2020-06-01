@@ -54,10 +54,9 @@ export default connect(
           scheduleSlotsEnabled: true,
           schedules: profileData.schedules,
           profileTimezone: profileData.timezone,
-          weekStartsOnMonday: state.appSidebar.user.week_starts_monday,
+          weekStartsOnMonday: state.user.week_starts_monday,
           weeksToShow: profileQueuePosts.page + 1,
-          hasTwentyFourHourTimeFormat:
-            state.appSidebar.user.hasTwentyFourHourTimeFormat,
+          hasTwentyFourHourTimeFormat: state.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
         }),
         scheduleSlotsIsAvailable: isScheduleSlotsAvailable(
@@ -83,12 +82,10 @@ export default connect(
         isInstagramLoading: state.queue.isInstagramLoading,
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
-        hasFirstCommentFlip: state.appSidebar.user.features
-          ? state.appSidebar.user.features.includes('first_comment')
-          : false,
-        hasCampaignsFeature: state.appSidebar.user.features
-          ? state.appSidebar.user.features.includes('campaigns')
-          : false,
+        hasFirstCommentFlip:
+          state.user.features?.includes('first_comment') ?? false,
+        hasCampaignsFeature:
+          state.user.features?.includes('campaigns') ?? false,
       };
     }
     return {};

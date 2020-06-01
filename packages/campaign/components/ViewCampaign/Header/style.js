@@ -42,9 +42,6 @@ export const ButtonWrapper = styled.div`
   display: flex;
   margin-left: auto;
   margin-top: 10px;
-  button {
-    margin-left: 10px;
-  }
 `;
 
 export const Title = styled.div`

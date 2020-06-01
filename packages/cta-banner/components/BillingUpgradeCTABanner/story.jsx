@@ -58,11 +58,9 @@ function createMockStore(business, onTrial) {
       planName: business ? 'business' : 'pro',
       features: {},
     },
-    appSidebar: {
-      user: {
-        ...fakeUser,
-        ...{ trial: onTrial ? userOnTrial : {} },
-      },
+    user: {
+      ...fakeUser,
+      ...{ trial: onTrial ? userOnTrial : {} },
     },
     environment: {
       environment: 'production',

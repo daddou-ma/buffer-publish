@@ -4,9 +4,8 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
-    hasTranslationsFlip: state.appSidebar.user.features
-      ? state.appSidebar.user.features.includes('publish-translations')
-      : false,
+    hasTranslationsFlip:
+      state.user.features?.includes('publish-translations') ?? false,
   }),
   dispatch => ({
     onSelectLanguage: language => {

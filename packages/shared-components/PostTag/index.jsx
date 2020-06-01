@@ -8,7 +8,6 @@ import { getColorContrast } from '@bufferapp/publish-shared-components/ColorPick
 const TagButton = styled(Button)`
   margin-left: 16px;
   margin-bottom: 16px;
-  padding: 8px;
   height: initial;
   opacity: ${props => (props.dragging ? 0 : 1)};
   background-color: ${props => props.color};
@@ -25,6 +24,7 @@ const TagButton = styled(Button)`
 const PostTag = ({ name, color, dragging, onPostTagClick }) => (
   <div>
     <TagButton
+      size="small"
       type="primary"
       onClick={onPostTagClick}
       label={name}

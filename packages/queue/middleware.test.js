@@ -8,10 +8,8 @@ import { actionTypes, actions } from './reducer';
 import middleware from './middleware';
 
 const getStateWithPaidUser = () => ({
-  appSidebar: {
-    user: {
-      is_free_user: false,
-    },
+  user: {
+    is_free_user: false,
   },
   profileSidebar: {
     selectedProfileId: 'id1',

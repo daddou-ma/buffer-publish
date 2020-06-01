@@ -15,7 +15,7 @@ export const SelectWrapper = styled.div`
   }
 `;
 
-export const Container = styled.div`
+export const Section = styled.section`
   display: flex;
   margin-bottom: 10px;
   align-items: center;

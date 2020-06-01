@@ -18,13 +18,11 @@ describe('CtaBanner', () => {
       });
 
       store = storeFake({
-        appSidebar: {
-          user: {
-            trial: {
-              onTrial: true, // user has to be on a trial for the Banner to be displayed
-            },
-            plan: 'premium_business',
+        user: {
+          trial: {
+            onTrial: true, // user has to be on a trial for the Banner to be displayed
           },
+          plan: 'premium_business',
         },
         ctaBanner: {
           profileCount: 1,
@@ -57,6 +55,8 @@ describe('CtaBanner', () => {
       wrapper
         .find(BillingUpdateCTABanner)
         .find(Button)
+        .at(0)
+        .find('button')
         .at(0)
         .simulate('click');
 

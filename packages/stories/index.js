@@ -29,10 +29,9 @@ export default connect(
           scheduleSlotsEnabled: true,
           isSingleSlot: true,
           profileTimezone: profileData.timezone,
-          weekStartsOnMonday: state.appSidebar.user.week_starts_monday,
+          weekStartsOnMonday: state.user.week_starts_monday,
           weeksToShow: currentProfile.page + 1,
-          hasTwentyFourHourTimeFormat:
-            state.appSidebar.user.hasTwentyFourHourTimeFormat,
+          hasTwentyFourHourTimeFormat: state.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
           orderBy: 'scheduledAt',
         }),
@@ -43,7 +42,7 @@ export default connect(
         isLockedProfile: currentProfile.isLockedProfile,
         isDisconnectedProfile: profileData.isDisconnected,
         serviceId: profileData.serviceId,
-        userData: state.appSidebar.user,
+        userData: state.user,
         hasPushNotifications: profileData.hasPushNotifications,
         translations: state.i18n.translations['story-group-queue'],
       };

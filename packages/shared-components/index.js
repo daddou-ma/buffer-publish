@@ -18,6 +18,8 @@ export EmptyState from './EmptyState';
 export ErrorBanner from './ErrorBanner';
 export Example from './Example';
 export GridList from './GridList';
+export Nav from './Nav';
+export NavLink from './NavLink';
 export Notification from './Notification';
 export Post from './Post';
 export PostDragWrapper from './PostDragWrapper';

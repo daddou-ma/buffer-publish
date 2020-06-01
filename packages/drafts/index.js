@@ -127,7 +127,7 @@ export default connect(
         postLists: formatPostLists(
           state.profileSidebar.selectedProfile,
           currentProfile.drafts,
-          state.appSidebar.user,
+          state.user,
           tabId
         ),
         loading: currentProfile.loading,
@@ -143,9 +143,7 @@ export default connect(
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
         canStartBusinessTrial: state.drafts.canStartBusinessTrial,
-        hasFirstCommentFlip: state.appSidebar.user.features
-          ? state.appSidebar.user.features.includes('first_comment')
-          : false,
+        hasFirstCommentFlip: state.user.features?.includes('first_comment') ?? false,
       };
     }
     return {};

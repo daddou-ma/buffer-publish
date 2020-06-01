@@ -14,6 +14,8 @@
     "@bufferapp/average-table": "1.11.0",
     "@bufferapp/compare-chart": "1.11.0",
     "@bufferapp/posts-table": "1.11.0",
+    "@bufferapp/analyze-account": "^1.11.0",
+    "@bufferapp/upgrade-to-pro": "^1.11.0",
     "@bufferapp/summary-table": "1.11.0",
     "@bufferapp/product-features": "2.0.0",
     "@bufferapp/publish-locked-profile-notification": "2.0.0",

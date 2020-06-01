@@ -9,7 +9,7 @@ import AppStore from '../stores/AppStore';
 import API from './API';
 import { observeStore } from '../utils/StoreUtils';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
-import { getComposerSource, getSegmentMetadata, getSegmentCampaignMetadata } from '../utils/TrackingUtils';
+import { getComposerSource, getSegmentCampaignMetadata } from '../utils/TrackingUtils';
 
 import getFacebookAutocompleteEntities from '../utils/draft-js-custom-plugins/autocomplete/utils/getFacebookAutocompleteEntities';
 
@@ -115,20 +115,6 @@ const WebAPIUtils = {
                 let composerSource = getComposerSource({
                   tabId,
                   emptySlotMode,
-                });
-                const metadata = getSegmentMetadata({
-                  post,
-                  profile,
-                  formattedData,
-                  composerSource,
-                  queueingType,
-                });
-                AppActionCreators.triggerInteraction({
-                  message: {
-                    action: 'SEGMENT_TRACKING',
-                    eventName: 'Post Created',
-                    metadata,
-                  },
                 });
                 if (post.campaign_details) {
                   const onCampaignsPage = window.location.pathname.includes(
@@ -795,12 +781,16 @@ function getFormattedAPIData(serviceName, unformattedData) {
     }
 
     if (serviceDraft.service.hasSubprofiles) {
-      // The API expects subprofile_id (a single id) when editing updates
-      if (isEditingUpdate) {
+      if (isEditingUpdate && appMetaData.editMode) {
+        // The API expects subprofile_id (a single id) when editing updates
         conditionalFields.subprofile_id = serviceSelectedSubprofiles[0];
       } else {
         conditionalFields.subprofile_ids = serviceSelectedSubprofiles;
       }
+    }
+
+    if (appMetaData.serviceUpdateId) {
+      conditionalFields.service_update_id = appMetaData.serviceUpdateId;
     }
 
     if (serviceDraft.service.canHaveSourceUrl) {

@@ -192,6 +192,7 @@ class App extends React.Component {
       composerSidebarVisible: PropTypes.bool,
       tabId: PropTypes.string,
       emptySlotMode: PropTypes.bool,
+      editMode: PropTypes.bool,
     }).isRequired,
 
     csrfToken: PropTypes.string.isRequired,
