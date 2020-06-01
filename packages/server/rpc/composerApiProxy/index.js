@@ -1,6 +1,6 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { sanitizeApiUrl, sanitizeUrlParam } = require('./utils/sanitize');
+const { sanitizeApiUrl, sanitizePath } = require('./utils/sanitize');
 
 module.exports = method(
   'composerApiProxy',
@@ -12,10 +12,10 @@ module.exports = method(
     let result;
     try {
       const fieldName = HTTPMethod === 'POST' ? 'form' : 'qs';
-      const sanitizedUrl = sanitizeUrlParam(url);
+      const sanitizedPath = sanitizePath(url);
       const sanitizedApiUrl = sanitizeApiUrl(process.env.API_ADDR);
       const requestParams = {
-        uri: `${sanitizedApiUrl}${sanitizedUrl}`,
+        uri: `${sanitizedApiUrl}${sanitizedPath}`,
         method: HTTPMethod,
         strictSSL: process.env.NODE_ENV !== 'development',
         headers: {

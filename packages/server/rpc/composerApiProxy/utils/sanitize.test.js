@@ -1,15 +1,15 @@
-const { sanitizeApiUrl, sanitizeUrlParam } = require('./sanitize');
+const { sanitizeApiUrl, sanitizePath } = require('./sanitize');
 
-describe('utils/sanitize url param', () => {
+describe('utils/sanitize param path', () => {
   it('should not start with a slash', () => {
-    const url = '/1/updates/create.json';
-    const sanitizedUrl = sanitizeUrlParam(url);
-    expect(sanitizedUrl).toBe('1/updates/create.json');
+    const path = '/1/updates/create.json';
+    const sanitizedPath = sanitizePath(path);
+    expect(sanitizedPath).toBe('1/updates/create.json');
   });
-  it('should return url if doesnt start with slash', () => {
-    const url = '1/updates/create.json';
-    const sanitizedUrl = sanitizeUrlParam(url);
-    expect(sanitizedUrl).toBe(url);
+  it('should return path if doesnt start with slash', () => {
+    const path = '1/updates/create.json';
+    const sanitizedPath = sanitizePath(path);
+    expect(sanitizedPath).toBe(path);
   });
 });
 

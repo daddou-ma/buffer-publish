@@ -1,11 +1,11 @@
 // prevent ssrf attacks
 
 // ensure it doesn't start with a slash
-const sanitizeUrlParam = url => {
-  if (url && url.charAt(0) === '/') {
-    return url.substring(1);
+const sanitizePath = path => {
+  if (path && path.charAt(0) === '/') {
+    return path.substring(1);
   }
-  return url;
+  return path;
 };
 
 // ensure it ends with a slash
@@ -17,6 +17,6 @@ const sanitizeApiUrl = apiUrl => {
 };
 
 module.exports = {
-  sanitizeUrlParam,
+  sanitizePath,
   sanitizeApiUrl,
 };
