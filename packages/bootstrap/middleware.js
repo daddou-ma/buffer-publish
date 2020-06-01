@@ -18,9 +18,9 @@ export default ({ dispatch }) => next => action => {
       // setTimeout(() => {
       //   dispatch({
       //     type: 'SELECT_ORGANIZATION',
-      //     id: '5ea2cd0b7c56ed183a3c3e22',
-      //   })
-      // }, 5000)
+      //     id: '5e96e4a4bab7b824f655e7d4',
+      //   });
+      // }, 5000);
       break;
     }
     default:

@@ -30,13 +30,13 @@ export default ({ dispatch, getState }) => next => action => {
     case `SELECT_ORGANIZATION`: {
       const list = mapSelectedOrganization({
         id: action.id,
-        orgs: getState().organizations.list,
+        organizations: getState().organizations.list,
       });
       const selected = getSelectedOrganization(list);
 
       dispatch({
         type: 'ORGANIZATION_SELECTED',
-        orgs: list,
+        organizations: list,
         selected,
       });
       break;

@@ -9,6 +9,8 @@ export const shouldGoToProfile = (profile, prevProps) => {
   );
 };
 
-export const filterProfilesByOrg = (profiles, org) => {
-  return profiles?.filter(profile => profile.organizationId === org.id);
+export const filterProfilesByOrg = (profiles, organization) => {
+  return profiles?.filter(
+    profile => profile.organizationId === organization.id
+  );
 };

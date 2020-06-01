@@ -146,32 +146,32 @@ export default (state = initialState, action) => {
   let searchText = null;
   switch (action.type) {
     case `ORGANIZATION_SELECTED`: {
-      const selectedOrg = action.selected;
+      const selectedOrganization = action.selected;
       let { profiles } = state;
 
       if (profiles) {
         const { profileList } = state;
-        profiles = filterProfilesByOrg(profileList, selectedOrg);
+        profiles = filterProfilesByOrg(profileList, selectedOrganization);
       }
 
       return {
         ...state,
-        org: selectedOrg,
+        organization: selectedOrganization,
         profiles,
       };
     }
     case `organizations_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const selectedOrg = getSelectedOrganization(action.result);
+      const selectedOrganization = getSelectedOrganization(action.result);
       let { profiles } = state;
 
       if (profiles) {
         const { profileList } = state;
-        profiles = filterProfilesByOrg(profileList, selectedOrg);
+        profiles = filterProfilesByOrg(profileList, selectedOrganization);
       }
 
       return {
         ...state,
-        org: selectedOrg,
+        organization: selectedOrganization,
         profiles,
       };
     }
@@ -189,7 +189,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         profileList: action.result,
-        profiles: filterProfilesByOrg(action.result, state.org),
+        profiles: filterProfilesByOrg(action.result, state.organization),
         hasInstagram: action.result.some(p => p.service === 'instagram'),
         hasFacebook: action.result.some(p => p.service === 'facebook'),
         hasTwitter: action.result.some(p => p.service === 'twitter'),
@@ -215,7 +215,7 @@ export default (state = initialState, action) => {
         isSearchPopupVisible,
       };
     case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      let { selectedProfile, profiles, org } = state;
+      let { selectedProfile, profiles, organization } = state;
 
       if (selectedProfile.id === action.result.id) {
         selectedProfile = action.result;
