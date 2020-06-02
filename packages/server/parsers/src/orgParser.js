@@ -6,4 +6,5 @@ module.exports = orgData => ({
   ownerEmail: orgData.owner_email,
   plan: orgData.plan,
   planCode: orgData.plan_code,
+  isAdmin: orgData.is_admin,
 });
