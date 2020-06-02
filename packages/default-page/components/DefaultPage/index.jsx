@@ -1,46 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@bufferapp/ui';
+import styled from 'styled-components';
 import { EmptyState } from '@bufferapp/publish-shared-components';
+import { useTranslation } from 'react-i18next';
 
-const pageStyle = {
-  display: 'flex',
-  flexGrow: 1,
-  height: '100%',
-};
+const Container = styled.div`
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+`;
 
-const defaultPageStyle = {
-  padding: '1rem',
-  textAlign: 'center',
-  flex: '1',
-  marginTop: '10vh',
-};
-const buttonStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-};
+const EmptyStateWrapper = styled.div`
+  padding: 1rem;
+  text-align: center;
+  flex: 1;
+  margin-top: 10vh;
+`;
 
-const DefaultPage = ({ onConnectSocialAccountClick, translations }) => (
-  <div style={pageStyle}>
-    <div style={defaultPageStyle}>
-      <EmptyState
-        heroImg="https://s3.amazonaws.com/buffer-publish/images/no-profiles-hero-img.svg"
-        title={translations.defaultTitle}
-        heroImgSize={{ width: '560', height: '284' }}
-        height="auto"
-      />
-      <div style={buttonStyle}>
-        <Button
-          onClick={() => {
-            onConnectSocialAccountClick();
+const DefaultPage = ({ onConnectSocialAccountClick, translations }) => {
+  const { t } = useTranslation();
+  return (
+    <Container>
+      <EmptyStateWrapper>
+        <EmptyState
+          heroImg="https://s3.amazonaws.com/buffer-publish/images/no-profiles-hero-img.svg"
+          title={translations.defaultTitle}
+          heroImgSize={{ width: '560', height: '284' }}
+          height="auto"
+          primaryAction={{
+            label: t('default-page.connectButton'),
+            onClick: onConnectSocialAccountClick,
           }}
-          type="primary"
-          label={translations.connectButton}
         />
-      </div>
-    </div>
-  </div>
-);
+      </EmptyStateWrapper>
+    </Container>
+  );
+};
 
 DefaultPage.propTypes = {
   onConnectSocialAccountClick: PropTypes.func.isRequired,
