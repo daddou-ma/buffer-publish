@@ -26,7 +26,7 @@ export default ({ dispatch, getState }) => next => action => {
         );
       }
       break;
-    case 'APP_INIT': {
+    case 'INIT_MODALS': {
       if (getState().user.plan === 'awesome') {
         // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;

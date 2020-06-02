@@ -3,7 +3,7 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
-    case 'PROFILES_INIT':
+    case 'INIT_PROFILES':
       if (
         typeof window !== 'undefined' &&
         typeof window.bufferData !== 'undefined' &&
@@ -31,7 +31,7 @@ export default ({ dispatch }) => next => action => {
         );
       }
       break;
-    case 'SINGLE_PROFILE_INIT':
+    case 'INIT_SINGLE_PROFILE':
       dispatch(
         dataFetchActions.fetch({
           name: 'singleProfile',

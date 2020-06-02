@@ -21,7 +21,7 @@ const getId = () => {
 export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
-    case 'APP_INIT':
+    case 'INIT_CHECK_BOOKMARKLET': {
       const id = getId();
       const isRecheck = getUrlParameter('recheck');
       const isQuickAnalytics = getUrlParameter('quick_analytics');
@@ -51,6 +51,7 @@ export default ({ dispatch }) => next => action => {
       }
 
       break;
+    }
     case `updateRecheck_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(
         notificationActions.createNotification({

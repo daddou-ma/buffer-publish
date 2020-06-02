@@ -44,6 +44,8 @@ const checkToken = require('./rpc/checkToken');
 const PublishAPI = require('./publishAPI');
 const userParser = require('./parsers/src/userParser');
 const userMethod = require('./rpc/user/index');
+const orgParser = require('./parsers/src/orgParser');
+const orgsMethod = require('./rpc/organizations/index');
 const profilesMethod = require('./rpc/profiles/index');
 const pusherAuth = require('./lib/pusher');
 const maintenanceHandler = require('./lib/maintenanceHandler');
@@ -170,7 +172,13 @@ app.get('*', (req, res) => {
       bufflog.error(`Error prefetching profiles: ${err.message}`, err);
       return undefined;
     }),
-  ]).then(([user, profiles]) => {
+    orgsMethod
+      .fn(null, req, res, { PublishAPI, parsers: { orgParser } })
+      .catch(err => {
+        bufflog.error(`Error prefetching organizations: ${err.message}`, err);
+        return undefined;
+      }),
+  ]).then(([user, profiles, organizations]) => {
     res.send(
       getHtml({
         isProduction,
@@ -182,6 +190,7 @@ app.get('*', (req, res) => {
         modalValue,
         user,
         profiles,
+        organizations,
       })
     );
   });

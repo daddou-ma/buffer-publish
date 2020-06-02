@@ -14,6 +14,7 @@ import TemporaryBanner from '@bufferapp/publish-temporary-banner';
 import ThirdParty from '@bufferapp/publish-thirdparty';
 
 const ThirdPartyWithRouter = withRouter(ThirdParty);
+const AppPagesWithRouter = withRouter(AppPages);
 
 const appStyle = {
   display: 'flex',
@@ -41,7 +42,7 @@ class App extends Component {
             <CTABanner />
             <TemporaryBanner />
             <InitialLoading>
-              <AppPages />
+              <AppPagesWithRouter />
             </InitialLoading>
           </div>
         </AppShell>

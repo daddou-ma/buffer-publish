@@ -202,7 +202,7 @@ export default ({ dispatch }) => {
     next(action);
 
     switch (action.type) {
-      case 'APP_INIT':
+      case 'INIT_PUSHER':
         dispatch(dataFetchActions.fetch({ name: 'getGlobalOrganizationId' }));
         break;
       case profileSidebarActionTypes.SELECT_PROFILE:
