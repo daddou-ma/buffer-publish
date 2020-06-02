@@ -54,8 +54,10 @@ const RightPlanButton = ({
 );
 
 const RightButton = styled(Button)`
-  height: unset;
-  padding: ${props => (props.isNonprofit ? '4% 3%' : '20px 30px 15px 30px')};
+  button {
+    height: unset;
+  }
+  padding: ${props => (props.isNonprofit ? '4% 3%' : '20px 15px 15px 15px')};
   border-radius: 0 25px 25px 0;
   background-color: ${props =>
     props.type === 'primary' ? '#EEF1FF' : 'white'};
@@ -123,7 +125,7 @@ const PlanColumnWithPremiumSolo = ({
           <Image src={imageSrc} width="auto" height="130px" />
         </ImageWrapperStyle>
         {!isPremium && (
-          <React.Fragment>
+          <>
             <UserIcon Icon={<Person />} text="1 user" isSelected />
             <PriceStyle>
               <TextStyle type="h1">
@@ -132,10 +134,10 @@ const PlanColumnWithPremiumSolo = ({
               </TextStyle>
             </PriceStyle>
             <LeftBillingText type="p">{billingText}</LeftBillingText>
-          </React.Fragment>
+          </>
         )}
         {isPremium && (
-          <React.Fragment>
+          <>
             <PlanStyle>
               <LeftButton
                 type={isSelected() ? 'primary' : 'secondary'}
@@ -173,7 +175,7 @@ const PlanColumnWithPremiumSolo = ({
               />
             </PlanStyle>
             <EmptySpan />
-          </React.Fragment>
+          </>
         )}
       </TopContentStyle>
       <FeatureListStyle>

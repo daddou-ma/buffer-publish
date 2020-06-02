@@ -9,19 +9,14 @@ import { withTranslation } from 'react-i18next';
 import { getValidTab } from '../../utils';
 import TabTag from '../TabTag';
 
-const UpgradeCtaStyle = styled.div`
+const UpgradeButton = styled(Button)`
   transform: translate(0, 1px);
-  margin: 12px 0;
+  margin: 10px;
   display: inline-block;
   text-align: center;
   position: absolute;
   top: 0;
   right: 0;
-`;
-
-const ButtonWrapper = styled.div`
-  margin-left: 8px;
-  display: inline-block;
 `;
 
 const tabsStyle = {
@@ -124,19 +119,15 @@ class TabNavigation extends React.Component {
           <Tab tabId="settings">{t('tabs.settings')}</Tab>
         </Tabs>
         {shouldShowUpgradeButton && (
-          <UpgradeCtaStyle>
-            <ButtonWrapper>
-              <Button
-                label={t('tabs.upgrade')}
-                type="secondary"
-                size="small"
-                onClick={e => {
-                  e.preventDefault();
-                  onUpgradeButtonClick();
-                }}
-              />
-            </ButtonWrapper>
-          </UpgradeCtaStyle>
+          <UpgradeButton
+            label={t('tabs.upgrade')}
+            type="secondary"
+            size="small"
+            onClick={e => {
+              e.preventDefault();
+              onUpgradeButtonClick();
+            }}
+          />
         )}
         {shouldShowNestedAnalyticsTab && !isLockedProfile && (
           <Tabs
