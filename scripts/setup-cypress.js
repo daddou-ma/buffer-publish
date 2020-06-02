@@ -63,4 +63,9 @@ async function run() {
 `);
 }
 
-run();
+run().catch(e =>
+  console.log(
+    'Something went wrong! Do you have the Publish API (web) running locally?\n\n',
+    e
+  )
+);

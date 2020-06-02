@@ -1,6 +1,8 @@
 {
   "projectId": "6c7ssj",
   "baseUrl": "https://publish.local.buffer.com",
+  "viewportWidth": 1440,
+  "viewportHeight": 900,
   "env": {
     "STANDALONE": "false",
     "API_ADDR": "https://api.bufferapp.com"

@@ -1,3 +1,5 @@
+/* eslint no-console: "off" */
+
 const email = Cypress.env('PUBLISH_LOGIN_EMAIL') || 'admin@bufferapp.com';
 const password = Cypress.env('PUBLISH_LOGIN_PASSWORD') || 'password';
 

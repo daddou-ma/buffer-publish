@@ -5,11 +5,6 @@ const getRandomPostText = () => {
 };
 
 describe('Publish', () => {
-  it('loads', () => {
-    cy.login();
-    cy.visit('/');
-    cy.get('[data-cy=open-composer-button]').should('exist');
-  });
   it('creates a new post', () => {
     cy.login();
     cy.visit('/');
