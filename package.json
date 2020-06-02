@@ -145,6 +145,7 @@
     "twitter-text": "1.14.7",
     "uuid": "3.0.1",
     "webpack": "4.40.2",
+    "webpack-cli": "3.3.8",
     "webpack-bundle-analyzer": "3.6.0",
     "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "4.2.2",
@@ -191,7 +192,6 @@
     "pusher-js-mock": "0.2.0",
     "test-listen": "1.0.2",
     "timezone-mock": "0.0.7",
-    "webpack-cli": "3.3.8",
     "webpack-dev-middleware": "3.7.1",
     "webpack-dev-server": "3.8.0",
     "yaml": "1.9.2"
