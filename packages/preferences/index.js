@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 import {
   generateProfilePageRoute,
   newBusinessTrialistsRoute,
-  newConnectionRoute,
+  newConnection,
 } from '@bufferapp/publish-routes';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
 
@@ -40,7 +40,7 @@ export default connect(
       } else if (isOnBusinessTrial) {
         dispatch(push(newBusinessTrialistsRoute));
       } else {
-        dispatch(push(newConnectionRoute));
+        dispatch(newConnection.goTo());
       }
     },
   })
