@@ -13,7 +13,7 @@ export default ({ dispatch }) => next => action => {
       dispatch({ type: 'INIT_CHECK_BOOKMARKLET' });
       dispatch({ type: 'INIT_STRIPE_DETAILS' });
       break;
-    case `organizations_${dataFetchActions.FETCH_SUCCESS}`: {
+    case 'ORGANIZATIONS_INITIALIZED': {
       dispatch({ type: 'INIT_PROFILES' });
       // setTimeout(() => {
       //   dispatch({
