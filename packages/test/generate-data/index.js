@@ -34,6 +34,8 @@ const schedules = [
 const buildUser = build('User', {
   fields: {
     id: sequence(s => `user${s}`),
+    name: fake(f => f.lorem.words()),
+    email: fake(f => f.internet.email()),
     plan: 'business',
     planCode: 11,
     is_business_user: true,
@@ -116,6 +118,7 @@ const buildPost = build('Post', {
     isPastReminder: false,
     isSent: false,
     pinned: true,
+    links: [],
     postDetails: {
       error: null,
       errorLink: null,
