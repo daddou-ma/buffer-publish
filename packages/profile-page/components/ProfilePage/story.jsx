@@ -75,12 +75,10 @@ function createMockStore(profileList) {
       hasTwitter: true,
       hasFacebook: true,
     },
-    appSidebar: {
-      user: {
-        canStartProTrial: true,
-        trial: {
-          onTrial: false,
-        },
+    user: {
+      canStartProTrial: true,
+      trial: {
+        onTrial: false,
       },
     },
     generalSettings: {

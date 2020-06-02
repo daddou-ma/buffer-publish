@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../components/Button';
+import Button from '../../components/shared/Button';
 import styles from './css/modal.css';
 import ActionCreators from './actionCreators';
 import Store from './store';

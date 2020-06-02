@@ -7,8 +7,8 @@ import {
   NotificationScopes,
 } from '../AppConstants';
 import AppHooks from '../utils/LifecycleHooks';
-import AppActionCreators from '../action-creators/AppActionCreators';
-import NotificationActionCreators from '../action-creators/NotificationActionCreators';
+import AppActionCreators from './AppActionCreators';
+import NotificationActionCreators from './NotificationActionCreators';
 import { getFileTypeFromPath } from '../utils/StringUtils';
 import { getStillDataUriFromGif } from '../utils/DOMUtils';
 import AppStore from '../stores/AppStore';

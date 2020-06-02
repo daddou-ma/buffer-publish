@@ -1,8 +1,5 @@
 import { push } from 'connected-react-router';
-import {
-  generateChildTabRoute,
-  plansPageRoute,
-} from '@bufferapp/publish-routes';
+import { generateChildTabRoute, plansPage } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 
 import TabNavigation from './components/TabNavigation';
@@ -16,17 +13,15 @@ export default connect(
     selectedTabId: ownProps.tabId,
     selectedChildTabId: ownProps.childTabId,
     onProTrial:
-      state.appSidebar.user.trial &&
-      state.appSidebar.user.trial.onTrial &&
+      state.user.trial?.onTrial &&
       !state.profileSidebar.selectedProfile.business,
     shouldShowUpgradeCta:
-      state.appSidebar.user.is_free_user &&
-      !state.appSidebar.user.isBusinessTeamMember,
+      state.user.is_free_user && !state.user.isBusinessTeamMember,
     shouldShowUpgradeButton:
-      state.appSidebar.user.plan === 'free' ||
-      state.appSidebar.user.plan === 'pro' ||
-      state.appSidebar.user.plan === 'solo_premium_business' ||
-      state.appSidebar.user.plan === 'premium_business',
+      state.user.plan === 'free' ||
+      state.user.plan === 'pro' ||
+      state.user.plan === 'solo_premium_business' ||
+      state.user.plan === 'premium_business',
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
     shouldHideAdvancedAnalytics:
@@ -38,10 +33,8 @@ export default connect(
     isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
     isInstagramProfile: state.generalSettings.isInstagramProfile,
     selectedProfile: state.profileSidebar.selectedProfile,
-    canStartProTrial: state.appSidebar.user.canStartProTrial,
-    hasStoriesFlip: state.appSidebar.user.features
-      ? state.appSidebar.user.features.includes('stories_groups')
-      : false,
+    canStartProTrial: state.user.canStartProTrial,
+    hasStoriesFlip: state.user.features?.includes('stories_groups') ?? false,
     draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
     draftsCount: state.tabs.draftsCount,
   }),
@@ -56,7 +49,7 @@ export default connect(
       );
     },
     onUpgradeButtonClick: () => {
-      dispatch(push(plansPageRoute));
+      dispatch(plansPage.goTo());
     },
     onChildTabClick: childTabId => {
       const { tabId, profileId } = ownProps;

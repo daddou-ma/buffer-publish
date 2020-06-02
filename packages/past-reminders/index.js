@@ -66,7 +66,7 @@ export default connect(
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
-        userData: state.appSidebar.user,
+        userData: state.user,
         showStoryPreview: state.pastReminders.showStoryPreview,
       };
     }
@@ -111,38 +111,6 @@ export default connect(
           })
         );
       }
-    },
-    onImageClick: post => {
-      dispatch(
-        actions.handleImageClick({
-          post: post.post,
-          profileId: ownProps.profileId,
-        })
-      );
-    },
-    onImageClose: post => {
-      dispatch(
-        actions.handleImageClose({
-          post: post.post,
-          profileId: ownProps.profileId,
-        })
-      );
-    },
-    onImageClickNext: post => {
-      dispatch(
-        actions.handleImageClickNext({
-          post: post.post,
-          profileId: ownProps.profileId,
-        })
-      );
-    },
-    onImageClickPrev: post => {
-      dispatch(
-        actions.handleImageClickPrev({
-          post: post.post,
-          profileId: ownProps.profileId,
-        })
-      );
     },
     onToggleViewType: viewType => {
       dispatch(

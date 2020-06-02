@@ -68,10 +68,6 @@ const renderPost = ({
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onDropPost,
   onSwapPosts,
   draggable,
@@ -95,10 +91,6 @@ const renderPost = ({
     onDeleteConfirmClick: () => onDeleteConfirmClick({ post }),
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
-    onImageClick: () => onImageClick({ post }),
-    onImageClickNext: () => onImageClickNext({ post }),
-    onImageClickPrev: () => onImageClickPrev({ post }),
-    onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
     onCampaignTagClick: () => onCampaignTagClick(campaignId),
     onDropPost,
@@ -107,7 +99,9 @@ const renderPost = ({
     hasPushNotifications,
     onSetRemindersClick,
     hasCampaignsFeature,
+    shouldShowEditButton: post.retweet && !!post.retweetComment,
   };
+
   const PostComponent = Post;
 
   const defaultStyle = {
@@ -312,10 +306,6 @@ QueueItems.propTypes = {
   onEmptySlotClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onRequeueClick: PropTypes.func,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
   onSwapPosts: PropTypes.func,
   draggable: PropTypes.bool,

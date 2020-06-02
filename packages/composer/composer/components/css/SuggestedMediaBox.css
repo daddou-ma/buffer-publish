@@ -187,15 +187,6 @@
   border-radius: var(--thumbnail-border-radius);
 }
 
-.imgDataContainer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  right: 0;
-  z-index: 1;
-}
-
 .imgIcon, .gifIcon {
   display: inline-block;
   margin-left: 4px;
@@ -210,36 +201,4 @@
 .gifIcon:before {
   font-size: 14px;
   font-weight: bold;
-}
-
-.thumbnailInfo {
-  position: absolute;
-  bottom: 4px;
-  left: 0;
-  display: inline-block;
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 17px;
-  padding: 0 5px;
-  color: #fff;
-  border-radius: 3px;
-  overflow: hidden;
-}
-
- .thumbnailInfoText {
-   opacity: 0;
-   transition: opacity 0.4s;
-   position: relative;
-   background: var(--outerspace);
-   padding: 2px 5px 2px 2px;
-   border-radius: 3px;
- }
-
-.imgDataContainer:hover .thumbnailInfoText {
-  opacity: 1;
-}
-
-.imgDataContainer:hover {
-  z-index: 2;
 }

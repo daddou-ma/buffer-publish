@@ -11,8 +11,7 @@ export default connect(state => {
   return {
     appCues: state.thirdparty.appCues,
     modalsShowing,
-    userId:
-      state.appSidebar && state.appSidebar.user && state.appSidebar.user.id,
+    userId: state.user?.id,
   };
 })(ThirdParty);
 

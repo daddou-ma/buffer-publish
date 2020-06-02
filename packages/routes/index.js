@@ -34,30 +34,9 @@ export const childTabRoute = generateChildTabRoute({
   childTabId: ':childTabId',
 });
 
-export const generatePreferencePageRoute = ({ preferenceId }) =>
-  `/preferences/${preferenceId}`;
-
-export const plansPageRoute = '/plans';
-
 export const newBusinessTrialistsRoute = '/new-business-trialists';
 
-export const newConnectionRoute = '/new-connection';
-
-export const preferencePageRoute = generatePreferencePageRoute({
-  preferenceId: ':preferenceId',
-});
-
-const preferenceRouteRegex = /preferences\/(\w+)/;
-export const getPreferencePageParams = ({ path }) => {
-  const match = preferenceRouteRegex.exec(path);
-  if (!match) {
-    return null;
-  }
-  return {
-    preferenceId: match[1],
-  };
-};
-
+// Routes utils
 export const getMatch = ({ pathname, route }) =>
   matchPath(pathname, {
     path: route,
@@ -68,6 +47,46 @@ export const getParams = ({ pathname, route }) => {
   return match?.params || null;
 };
 
+export const goTo = path => push(path);
+
+// Miscellaneous routes
+export const newConnection = {
+  route: '/new-connection',
+  goTo: () => push('/new-connection'),
+};
+
+export const plansPage = {
+  route: '/plans',
+  goTo: () => push('/plans'),
+};
+
+// Preferences routes
+export const preferencesPage = {
+  route: '/preferences',
+  goTo: () => push('/preferences'),
+};
+
+export const preferencesAppsExtras = {
+  route: '/preferences/appsandextras',
+  goTo: () => push('/preferences/appsandextras'),
+};
+
+export const preferencesSecurity = {
+  route: '/preferences/security',
+  goTo: () => push('/preferences/security'),
+};
+
+export const preferencesGeneral = {
+  route: '/preferences/general',
+  goTo: () => push('/preferences/general'),
+};
+
+export const preferencesNotifications = {
+  route: '/preferences/notifications',
+  goTo: () => push('/preferences/notifications'),
+};
+
+// Campaigns routes
 export const campaignsPage = {
   route: '/campaigns',
   goTo: () => push('/campaigns'),
@@ -94,5 +113,3 @@ export const campaignSent = {
   route: '/campaigns/:id/sent/',
   goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/sent`),
 };
-
-export const goTo = path => push(path);

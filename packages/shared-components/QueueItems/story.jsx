@@ -30,10 +30,6 @@ storiesOf('Queue|QueueItems', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       onDropPost={action('onDropPost')}
       onSwapPosts={action('onSwapPosts')}
       draggable={false}
@@ -46,10 +42,6 @@ storiesOf('Queue|QueueItems', module)
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       onDropPost={action('onDropPost')}
       onSwapPosts={action('onSwapPosts')}
       draggable={false}

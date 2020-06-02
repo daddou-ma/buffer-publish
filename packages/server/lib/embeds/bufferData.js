@@ -1,5 +1,9 @@
-const getBufferData = ({ user, profiles }) => {
-  if (typeof user === 'undefined' && typeof profiles === 'undefined') {
+const getBufferData = ({ user, profiles, organizations }) => {
+  if (
+    typeof user === 'undefined' &&
+    typeof profiles === 'undefined' &&
+    typeof organizations === 'undefined'
+  ) {
     return '';
   }
 
@@ -10,6 +14,9 @@ const getBufferData = ({ user, profiles }) => {
   }
   if (typeof profiles !== 'undefined') {
     bufferData.profiles = profiles;
+  }
+  if (typeof organizations !== 'undefined') {
+    bufferData.organizations = organizations;
   }
 
   return `

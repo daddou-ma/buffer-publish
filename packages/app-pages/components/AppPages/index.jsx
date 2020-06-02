@@ -3,11 +3,11 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   profilePageRoute,
-  preferencePageRoute,
+  preferencesPage,
   childTabRoute,
-  plansPageRoute,
+  plansPage,
   newBusinessTrialistsRoute,
-  newConnectionRoute,
+  newConnection,
   generateProfilePageRoute,
   campaignsPage,
 } from '@bufferapp/publish-routes';
@@ -28,8 +28,8 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
   };
   return (
     <Switch>
-      <Route path={preferencePageRoute} component={Preferences} />
-      <Route path={plansPageRoute} component={Plans} />
+      <Route path={preferencesPage.route} component={Preferences} />
+      <Route path={plansPage.route} component={Plans} />
 
       {!hasProfiles && (
         <Route path={newBusinessTrialistsRoute} component={OnboardingManager} />
@@ -39,9 +39,9 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       )}
 
       {!hasProfiles && (
-        <Route path={newConnectionRoute} component={DefaultPage} />
+        <Route path={newConnection.route} component={DefaultPage} />
       )}
-      {!hasProfiles && <Redirect to={newConnectionRoute} />}
+      {!hasProfiles && <Redirect to={newConnection.route} />}
 
       <Route path={campaignsPage.route} component={PagesWithSidebar} />
       <Route path={childTabRoute} component={ProfilePage} />

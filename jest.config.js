@@ -12,7 +12,6 @@ const publishPackages = [
   'notifications',
   'web-components',
   'unauthorized-redirect',
-  'app-sidebar',
 ];
 
 const publishPackagesWhitelist = publishPackages
@@ -25,6 +24,14 @@ module.exports = {
     `/node_modules${publishPackagesWhitelist}${analyzePackagesWhitelist}`,
   ],
   collectCoverage: true,
+  collectCoverageFrom: [
+    '**/packages/**/*.{js,jsx}',
+    '!**/packages/test/**',
+    '!**/packages/**/story.jsx',
+    '!**/packages/**/story_test.jsx',
+    '!**/packages/**/store/*.js',
+    '!**/packages/**/i18n/index.js',
+  ],
   moduleNameMapper: {
     '\\.(css|less)$': 'identity-obj-proxy',
   },

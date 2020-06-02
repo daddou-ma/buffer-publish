@@ -216,10 +216,27 @@ module.exports = post => {
     service_user_tags: post.service_user_tags,
     user: getUser(post),
     serviceLink: post.service_link,
+    serviceUpdateId: post.service_update_id,
     dueTime: post.due_time,
     sharedBy: post.shared_by,
     commentEnabled: post.comment_enabled,
     commentText: post.comment_text,
     campaignDetails: post.campaign_details ? post.campaign_details : null,
+    postContent: {
+      imageSrc: isVideo ? media.thumbnail : media.picture,
+      imageUrls: getImageUrls(post),
+      linkAttachment: {
+        title: media.title,
+        url: media.expanded_link,
+        description: media.description,
+        thumbnailUrl: media.preview,
+      },
+      links: canHaveLinks ? links : [],
+      retweetComment,
+      retweetCommentLinks,
+      retweetProfile: getRetweetProfileInfo(post),
+      text,
+      type: getPostType({ post }),
+    },
   };
 };

@@ -1,15 +1,13 @@
 {
-  "name": "@bufferapp/publish-sidebar",
+  "name": "@bufferapp/publish-test-utils",
   "version": "2.0.0",
-  "description": "Sidebar component for use in Publish",
+  "description": "Utilitarian package for tests",
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ignore-pattern coverage node_modules"
   },
-  "author": "karel@buffer.com",
+  "author": "maria.u@buffer.com",
   "dependencies": {
-    "@bufferapp/app-sidebar": "1.11.5",
-    "@bufferapp/async-data-fetch": "2.0.0"
   },
   "devDependencies": {
   },

@@ -19,10 +19,8 @@ const store = storeFake({
     planName: 'free',
     features: {},
   },
-  appSidebar: {
-    user: {
-      id: 'id1',
-    },
+  user: {
+    id: 'id1',
   },
   profileSidebar: {
     selectedProfile: {

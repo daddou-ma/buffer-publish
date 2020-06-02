@@ -9,7 +9,7 @@ import { Services } from '../AppConstants';
 import { escapeParens } from '../utils/StringUtils';
 import styles from './css/Profile.css';
 import BoardSelector from '../components/BoardSelector';
-import Button from '../components/Button';
+import Button from '../components/shared/Button';
 import Dropdown, {
   DropdownTrigger,
   DropdownContent,
@@ -190,7 +190,7 @@ class Profile extends React.Component {
       : profileTooltipBaseContents;
 
     return (
-      <div className={profileContainerClassName} ref="profileContainer">
+      <li className={profileContainerClassName} ref="profileContainer">
         {hasSubprofiles && (
           <Dropdown
             isDropdownExpanded={this.isSubprofileDropdownExpanded()}
@@ -252,7 +252,7 @@ class Profile extends React.Component {
             </Button>
           </div>
         )}
-      </div>
+      </li>
     );
   }
 }

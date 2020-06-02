@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Profile from '../components/Profile';
 import ProfileGroups from '../components/ProfileGroups';
-import Button from '../components/Button';
+import Button from '../components/shared/Button';
 import styles from './css/ProfileSection.css';
 import AppActionCreators from '../action-creators/AppActionCreators';
 
@@ -58,7 +58,7 @@ class ProfileSection extends React.Component {
     ].join(' ');
 
     return (
-      <div className={styles.profileSection}>
+      <section className={styles.profileSection}>
         {shouldBeConsideredBusinessUser && hasEnoughProfiles && (
           <Button
             className={profilesTogglerClassName}
@@ -79,7 +79,7 @@ class ProfileSection extends React.Component {
         )}
 
         <div className={styles.profilesContainer}>
-          <div
+          <ul
             onScroll={this.onScroll}
             className={styles.profilesScrollContainer}
             ref="profilesScrollContainer"
@@ -97,9 +97,9 @@ class ProfileSection extends React.Component {
                 key={profile.id}
               />
             ))}
-          </div>
+          </ul>
         </div>
-      </div>
+      </section>
     );
   }
 }

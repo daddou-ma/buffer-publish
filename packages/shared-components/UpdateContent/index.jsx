@@ -4,53 +4,54 @@ import styled from 'styled-components';
 import UpdateMediaContent from '../UpdateMediaContent';
 import UpdateAttachmentContent from '../UpdateAttachmentContent';
 import UpdateTextContent from '../UpdateTextContent';
+import RetweetPanel from '../RetweetPanel';
 
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: ${props => (props.isLink ? 'column' : 'row')};
 `;
 
+/* eslint-disable react/prop-types */
+const Content = ({ isLink, isMedia, ...props }) => (
+  <ContentWrapper isLink={isLink}>
+    <UpdateTextContent {...props} />
+    {isLink && <UpdateAttachmentContent {...props} />}
+    {isMedia && <UpdateMediaContent {...props} />}
+  </ContentWrapper>
+);
+/* eslint-enable react/prop-types */
+
 const UpdateContent = ({ ...props }) => {
-  const { type, linkAttachment, basic, links, text } = props;
+  const { type, retweetProfile } = props;
   const isMedia =
     type === 'image' || type === 'video' || type === 'multipleImage';
   const isLink = type === 'link';
 
   return (
-    <ContentWrapper isLink={isLink}>
-      <UpdateTextContent basic={basic} links={links} text={text} />
-      {isLink && <UpdateAttachmentContent linkAttachment={linkAttachment} />}
-      {isMedia && <UpdateMediaContent {...props} />}
-    </ContentWrapper>
+    <React.Fragment>
+      {retweetProfile ? (
+        <RetweetPanel {...props}>
+          <Content {...props} isLink={isLink} isMedia={isMedia} />
+        </RetweetPanel>
+      ) : (
+        <Content {...props} isLink={isLink} isMedia={isMedia} />
+      )}
+    </React.Fragment>
   );
 };
 
 UpdateContent.propTypes = {
   type: PropTypes.oneOf(['text', 'image', 'multipleImage', 'link', 'video'])
     .isRequired,
-  linkAttachment: PropTypes.shape({
-    title: PropTypes.string,
-    description: PropTypes.string,
-    url: PropTypes.string,
-    thumbnailUrl: PropTypes.string,
+  retweetProfile: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    handle: PropTypes.string,
+    name: PropTypes.string,
   }),
-  basic: PropTypes.bool,
-  links: PropTypes.arrayOf(
-    PropTypes.shape({
-      displayString: PropTypes.string,
-      expandedUrl: PropTypes.string,
-      indices: PropTypes.arrayOf(PropTypes.number),
-      rawString: PropTypes.string,
-    })
-  ),
-  text: PropTypes.string,
 };
 
 UpdateContent.defaultProps = {
-  linkAttachment: {},
-  basic: false,
-  links: [],
-  text: '',
+  retweetProfile: undefined,
 };
 
 export default UpdateContent;

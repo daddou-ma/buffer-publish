@@ -14,14 +14,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
+import styled from 'styled-components';
 import { InputDate } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
+import Select from './shared/Select';
 
-import TimePicker from '../components/TimePicker';
-import SlotPicker from '../components/SlotPicker';
-import Select from '../components/Select';
+import TimePicker from './TimePicker';
+import SlotPicker from './SlotPicker';
 
-import styles from './css/DateTimeSlotPicker.css';
+const DateTimePicker = styled.div`
+  padding: 10px 16px;
+  text-align: center;
+`;
+
+const PickerSwitchButton = styled(Button)`
+  margin: 8px auto 0;
+`;
+const SubmitButton = styled(Button)`
+  margin: 16px auto 0;
+`;
+const TimezoneStyled = styled.div`
+  margin-top: 8px;
+  font-size: 12px;
+`;
+
+const SlotPickerSelect = styled(Select)`
+  margin-top: 16px;
+`;
 
 class DateTimeSlotPicker extends React.Component {
   getState() {
@@ -286,7 +305,7 @@ class DateTimeSlotPicker extends React.Component {
     const firstDayOfWeek = this.props.weekStartsMonday ? 1 : 0;
 
     return (
-      <div onClick={this.onClick} className={styles.dateTimePicker}>
+      <DateTimePicker onClick={this.onClick}>
         <InputDate
           initialMonth={new Date()}
           onDayClick={this.onDayClick}
@@ -300,18 +319,16 @@ class DateTimeSlotPicker extends React.Component {
             time={selectedDateTime}
             timezone={timezone}
             onChange={this.onTimePickerChange}
-            className={styles.timePicker}
           />
         )}
 
         {shouldDisplayTimePicker &&
           isSlotPickingAvailable &&
           doSelectedProfilesHaveSlots && (
-            <Button
+            <PickerSwitchButton
               type="secondary"
               size="small"
               label="Switch to schedule slots"
-              className={styles.pickerSwitchButton}
               onClick={this.onSwitchToSlotPickerClick}
             />
           )}
@@ -326,38 +343,35 @@ class DateTimeSlotPicker extends React.Component {
               slots={availableSchedulesSlotsForDay}
               slot={selectedDateTime}
               onChange={this.onSlotPickerChange}
-              className={styles.slotPicker}
               emptyByDefault={emptyByDefault}
             />
           ) : (
-            <Select disabled className={styles.slotPicker} value="">
+            <SlotPickerSelect disabled value="">
               <option value="">Loading slots…</option>
-            </Select>
+            </SlotPickerSelect>
           ))}
 
         {shouldDisplaySlotPicker && isSlotPickingAvailable && (
-          <Button
+          <PickerSwitchButton
             type="secondary"
             size="small"
             label="Switch to custom time"
-            className={styles.pickerSwitchButton}
             onClick={this.onSwitchToTimePickerClick}
           />
         )}
 
-        <Button
+        <SubmitButton
           type="primary"
           size="small"
           label={submitButtonCopy}
           onClick={this.onSubmit}
-          className={styles.submitButton}
           disabled={!isTimeInFuture}
         />
 
         {shouldDisplayTimezone && (
-          <div className={styles.timezone}>{formattedTimezone}</div>
+          <TimezoneStyled>{formattedTimezone}</TimezoneStyled>
         )}
-      </div>
+      </DateTimePicker>
     );
   }
 }

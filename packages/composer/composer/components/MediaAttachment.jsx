@@ -137,7 +137,7 @@ class MediaAttachment extends React.Component {
     const isImage = media => media.mediaType === MediaTypes.IMAGE;
 
     return (
-      <div className={mediaAttachmentClassNames}>
+      <div role="button" className={mediaAttachmentClassNames}>
         {this.hasImagesAttached() &&
           images.map(image => (
             <MediaAttachmentThumbnail
@@ -206,7 +206,11 @@ class MediaAttachment extends React.Component {
           >
             {tempImage && !areUploadsInProgress && (
               <div className={styles.tempImageContainer}>
-                <img alt="" src={tempImage} className={styles.tempImage} />
+                <img
+                  alt="Uploaded media"
+                  src={tempImage}
+                  className={styles.tempImage}
+                />
               </div>
             )}
 

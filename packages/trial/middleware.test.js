@@ -16,7 +16,7 @@ describe('trial middleware', () => {
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       expect.objectContaining({
-        type: 'USER_INIT',
+        type: 'INIT_USER',
       })
     );
   });

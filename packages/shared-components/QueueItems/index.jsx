@@ -16,24 +16,6 @@ import QueueHeader from '../QueueHeader';
 
 const ErrorBoundary = getErrorBoundary(true);
 
-const postTypeComponentMap = new Map([
-  ['text', Post],
-  ['image', Post],
-  ['multipleImage', Post],
-  ['link', Post],
-  ['video', Post],
-  ['storyGroup', Story],
-]);
-
-const draftTypeComponentMap = new Map([
-  ['text', Draft],
-  ['image', Draft],
-  ['multipleImage', Draft],
-  ['link', Draft],
-  ['video', Draft],
-  ['storyGroup', Story],
-]);
-
 /* eslint-disable react/prop-types */
 
 const renderPost = ({
@@ -45,10 +27,6 @@ const renderPost = ({
   onSetRemindersClick,
   onEditClick,
   onShareNowClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onDropPost,
   onSwapPosts,
   draggable,
@@ -71,10 +49,6 @@ const renderPost = ({
     onSetRemindersClick: ({ type }) => onSetRemindersClick({ type, post }),
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
-    onImageClick: () => onImageClick({ post }),
-    onImageClickNext: () => onImageClickNext({ post }),
-    onImageClickPrev: () => onImageClickPrev({ post }),
-    onImageClose: () => onImageClose({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
     onPreviewClick,
     onDropPost,
@@ -83,8 +57,7 @@ const renderPost = ({
     serviceId,
     userData,
   };
-  let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || Post;
+  const PostComponent = post.type === 'storyGroup' ? Story : Post;
 
   const defaultStyle = {
     default: {
@@ -131,10 +104,6 @@ const renderDraft = ({
   onMoveToDraftsClick,
   onRequestApprovalClick,
   onRescheduleClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   hasFirstCommentFlip,
 }) => {
   const draftWithEventHandlers = {
@@ -149,14 +118,10 @@ const renderDraft = ({
     onMoveToDraftsClick: () => onMoveToDraftsClick({ draft }),
     onRequestApprovalClick: () => onRequestApprovalClick({ draft }),
     onRescheduleClick: () => onRescheduleClick({ draft }),
-    onImageClick: () => onImageClick({ draft }),
-    onImageClickNext: () => onImageClickNext({ draft }),
-    onImageClickPrev: () => onImageClickPrev({ draft }),
-    onImageClose: () => onImageClose({ draft }),
     hasFirstCommentFlip,
   };
-  let DraftComponent = draftTypeComponentMap.get(draft.type);
-  DraftComponent = DraftComponent || Draft;
+
+  const DraftComponent = draft.type === 'storyGroup' ? Story : Draft;
 
   const defaultStyle = {
     default: {
@@ -250,10 +215,6 @@ QueueItems.propTypes = {
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onRequeueClick: PropTypes.func,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
   onDropPost: PropTypes.func,
   onSwapPosts: PropTypes.func,
   draggable: PropTypes.bool,

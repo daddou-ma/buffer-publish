@@ -1,6 +1,13 @@
 {
   "common": {
-    "loading": "Cargando"
+    "loading": "Cargando",
+    "enabled": "Habilitado",
+    "disabled": "Deshabilitado",
+    "learnMore": "Aprende Más",
+    "edit": "Editar",
+    "view": "Ver",
+    "pleaseWait": "Por favor espera...",
+    "done": "Listo"
   },
   "billing-upgrade-cta-banner": {
     "billedTrialEnd": "Se te cobrará <1>{{billedAmount}}</1> al final de la prueba. ",
@@ -15,7 +22,6 @@
       "createCampaign": "Crear Campaña"
     },
     "campaignForm": {
-      "ariaLabel": "Campo nombre para el formulario de campaña",
       "cancel": "Cancelar",
       "color": "Color",
       "createTitle": "Crear Campaña",
@@ -314,6 +320,7 @@
     "wishlist": "Lista de Deseos"
   },
   "preferences": {
+    "backToDashboard": "Volver al Dashboard",
     "menu": {
       "appsAndExtras": "Aplicaciones & Extras",
       "billing": "Facturación",
@@ -321,7 +328,71 @@
       "notifications": "Notificaciones",
       "security": "Seguridad"
     },
-    "backToDashboard": "Volver al Dashboard"
+    "general": {
+      "title": "General",
+      "changePreferences": "Cambia tus preferencias generales.",
+      "timeFormat": "Formato de hora",
+      "hour": "horas",
+      "dayToStartWeek": "Primer día de la semana",
+      "sunday": "Domingo",
+      "monday": "Lunes"
+    },
+    "security": {
+      "title": "Seguridad",
+      "addSecurity": "Agrega una capa adicional de seguridad a tu cuenta.",
+      "password": "Contraseña",
+      "passwordDescription": "Usa tu contraseña para iniciar sesión en Buffer web y aplicaciones móviles. ¡Hazlo agradable y seguro!",
+      "changeYourPassword": "Cambiar contraseña",
+      "twoFactorAuthentication": "Autenticación de dos factores",
+      "tfaExplanation": "La autenticación de dos factores agrega una capa adicional de seguridad para tu cuenta de Buffer. Cada vez que inicies sesión en tu cuenta, después de ingresar tu nombre de usuario y contraseña, se te pedirá un segundo código de autenticación que se enviará a tu teléfono móvil por mensaje de texto o a una aplicación móvil gratuita. ",
+      "method": "Método",
+      "phoneNumber": "Número de teléfono",
+      "recoveryCode": "Código de recuperación",
+      "sms": "Mensaje de Texto",
+      "authenticatorApp": "Aplicación de autenticación",
+      "enableTwoFactor": "Habilitar autenticación de dos factores",
+      "changeTwoFactor": "Cambiar la autenticación de dos factores",
+      "sendSecutiryCodes": "¿Cómo te gustaría que te enviemos tus códigos de seguridad?",
+      "textMessage": "Mensaje de Texto",
+      "yourRecoveryCode": "Tu Código de Recuperación",
+      "saveOneTimeCode": "Guarda este código de recuperación único",
+      "recoveryCodeDescription": "Con la autenticación de dos factores, si pierdes tu teléfono, existe la posibilidad que se bloquee tu cuenta. Guarda este código en un lugar seguro para usar si no puedes iniciar sesión con tu teléfono."
+    },
+    "notifications": {
+      "title": "Notificaciones de Correo",
+      "description": "Podemos recordarte cuando uno de tus Buffer se vea un poco vacío.",
+      "emptyBuffer": "Vaciar Buffer",
+      "emptyBufferEmail": "Enviarme un correo electrónico cuando uno de mis Buffers esté vacío.",
+      "newsletter": "Boletin informativo",
+      "newsletterEmail": "Send me occasional correos electrónicos with new Buffer features and tips.",
+      "updateFailures": "Fallas de Publicaciones",
+      "updateFailuresEmail": "Enviarme correos electrónicos ocasionales con nuevas características y consejos de Buffer.",
+      "updateSuccesses": "Publicaciones exitosas",
+      "updateSuccessesEmail": "Enviarme correos electrónicos cuando una publicación se publique correctamente.",
+      "weeklyDigests": "Resúmenes semanales",
+      "weeklyDigestsEmail": "Enviarme correos electrónicos semanales que resuman mi actividad de publicación.",
+      "awaitingApproval": "En Espera de Aprobación",
+      "awaitingApprovalEmail": "Enviarme correos electrónicos cuando haya un nuevo borrador en espera de aprobación.",
+      "movedBackToDrafts": "Aprobación pendiente a borrador",
+      "movedBackToDraftsEmail": "Enviarme correos electrónicos cuando mi borrador se mueva de Aprobación pendiente a Borradores.",
+      "celebrations": "Celebraciones",
+      "celebrationsEmail": "Enviarme correos electrónicos celebrando mis logros de publicación."
+    },
+    "appsAndExtras": {
+      "title": "Buffer Applicaciones & Extras",
+      "description": "Get the most out of Buffer with our mobile apps and browser extension.",
+      "browserExtension": "Extensión del Navegador",
+      "extensionDescription": "Nuestra extensión de navegador te permite compartir contenido mientras navegas por la web",
+      "installExtension": "Instalar extension",
+      "mobileApps": "Aplicaciones móviles",
+      "mobileAppsDescription": "Comparte contenido y administra tu cuenta de Buffer sobre la marcha con nuestra aplicación móvil.",
+      "viewOnAppleStore": "Ver en la Apple Store",
+      "viewOnGooglePlay": "Ver en Google Play",
+      "connectedApps": "Applicaciones Conectadas ",
+      "connectedAppsDesc": "¡Aprovecha al máximo Buffer y comparte desde tu móvil, lector de noticias, blog o en cualquier lugar! ",
+      "getMoreApps": "Obtén más aplicaciones →",
+      "revokeAccess": "Revocar Acceso"
+    }
   },
   "profile-sidebar": {
     "connectButton": "Gestionar Redes Sociales",

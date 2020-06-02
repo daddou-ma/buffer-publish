@@ -5,6 +5,7 @@ import { Text, Input, Button, Link } from '@bufferapp/ui';
 import { SimpleColorPicker } from '@bufferapp/publish-shared-components';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { View } from '@bufferapp/ui/Icon';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { useTranslation } from 'react-i18next';
 import {
   grayLight,
@@ -28,7 +29,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const Content = styled.div`
+const Main = styled.main`
   width: 362px;
   margin: 53px 0 0 283px;
 `;
@@ -89,7 +90,12 @@ const CampaignForm = ({
   editMode,
   campaign,
   fetchCampaign,
+  hasCampaignsFlip,
 }) => {
+  if (!hasCampaignsFlip) {
+    window.location = getURL.getPublishUrl();
+    return null;
+  }
   // Fetch the Data
   useEffect(() => {
     if (editMode) {
@@ -140,7 +146,7 @@ const CampaignForm = ({
 
   return (
     <Wrapper>
-      <Content>
+      <Main id="main">
         <Card>
           <Headline type="h2">
             {editMode
@@ -148,15 +154,14 @@ const CampaignForm = ({
               : t('campaigns.campaignForm.createTitle')}
           </Headline>
           <Input
+            id="campaignName"
             type="text"
-            value={campaignName}
+            value={campaignName || ''}
             onChange={setCampaignName}
             required
             name={t('campaigns.campaignForm.name')}
             label={t('campaigns.campaignForm.name')}
             placeholder={t('campaigns.campaignForm.placeholder')}
-            aria-required="true"
-            aria-label={t('campaigns.campaignForm.ariaLabel')}
             ref={inputElement}
           />
           <Text htmlFor="colorPicker" type="label">
@@ -207,7 +212,7 @@ const CampaignForm = ({
             </NoticeText>
           </Notice>
         </NoticeCard>
-      </Content>
+      </Main>
     </Wrapper>
   );
 };
@@ -218,6 +223,7 @@ CampaignForm.propTypes = {
   onCreateOrUpdateCampaignClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  hasCampaignsFlip: PropTypes.bool.isRequired,
   editMode: PropTypes.bool,
   campaign: PropTypes.shape({
     id: PropTypes.string,

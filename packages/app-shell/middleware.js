@@ -9,7 +9,7 @@ export default ({ dispatch }) => next => action => {
   next(action);
 
   switch (action.type) {
-    case 'APP_INIT':
+    case 'INIT_APPSHELL':
       dispatch(dataFetchActions.fetch({ name: 'v1ToV2UpgradeDetails' }));
       break;
     case `v1ToV2UpgradeDetails_${dataFetchActionTypes.FETCH_SUCCESS}`: {

@@ -23,16 +23,16 @@ export default connect(
     }
 
     return {
-      uses24hTime: state.appSidebar.user.uses_24h_time,
+      uses24hTime: state.user.uses_24h_time,
       timezone: state.profileSidebar.selectedProfile.timezone,
-      weekStartsMonday: state.appSidebar.user.week_starts_monday,
+      weekStartsMonday: state.user.week_starts_monday,
       selectedProfile: state.profileSidebar.selectedProfile,
       translations: state.i18n.translations['story-group-composer'],
       isScheduleLoading: state.storyGroupComposer.isScheduleLoading,
       storyGroup: state.storyGroupComposer.storyGroup,
       showStoryPreview: state.storyGroupComposer.showStoryPreview,
       editMode: !!editingPostId,
-      userData: state.appSidebar.user,
+      userData: state.user,
       editingPostId,
       errorMessages: state.storyGroupComposer.errors,
       emptySlotData,

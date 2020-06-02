@@ -18,10 +18,6 @@ const renderPostList = ({
   onEditClick,
   onShareNowClick,
   onRequeueClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onCampaignTagClick,
   onDropPost,
   onSwapPosts,
@@ -50,10 +46,6 @@ const renderPostList = ({
       onEditClick={onEditClick}
       onShareNowClick={onShareNowClick}
       onRequeueClick={onRequeueClick}
-      onImageClick={onImageClick}
-      onImageClickNext={onImageClickNext}
-      onImageClickPrev={onImageClickPrev}
-      onImageClose={onImageClose}
       onCampaignTagClick={onCampaignTagClick}
       onDropPost={onDropPost}
       onSwapPosts={onSwapPosts}
@@ -83,10 +75,6 @@ const PostLists = ({
   onEditClick,
   onShareNowClick,
   onRequeueClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onCampaignTagClick,
   onDropPost,
   onSwapPosts,
@@ -114,10 +102,6 @@ const PostLists = ({
         onEditClick,
         onShareNowClick,
         onRequeueClick,
-        onImageClick,
-        onImageClickNext,
-        onImageClickPrev,
-        onImageClose,
         onCampaignTagClick,
         onDropPost,
         onSwapPosts,
@@ -156,10 +140,6 @@ PostLists.propTypes = {
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
   onRequeueClick: PropTypes.func,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
   onCampaignTagClick: PropTypes.func,
   onDropPost: PropTypes.func,
   onSwapPosts: PropTypes.func,

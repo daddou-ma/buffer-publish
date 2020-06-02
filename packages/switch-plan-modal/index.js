@@ -15,8 +15,8 @@ export default connect(
     dismissible: state.switchPlanModal.dismissible,
     translations: state.i18n.translations['switch-plan-modal'],
     validating: state.stripe.validating,
-    isNonprofit: state.appSidebar.user.isNonprofit,
-    hasExpiredProTrial: state.appSidebar.user.shouldShowProTrialExpiredModal,
+    isNonprofit: state.user.isNonprofit,
+    hasExpiredProTrial: state.user.shouldShowProTrialExpiredModal,
     setupIntentClientSecret: state.stripe.setupIntentClientSecret,
   }),
   dispatch => ({

@@ -31,10 +31,11 @@ const Title = styled(Text)`
 const ButtonWrapper = styled.div`
   display: flex;
   margin-top: 24px;
+`;
 
-  button:nth-of-type(2n) {
-    margin-left: 8px;
-  }
+const ButtonStyled = styled(Button)`
+  margin-left: 4px;
+  margin-right: 4px;
 `;
 
 const EmptyState = ({
@@ -65,7 +66,7 @@ const EmptyState = ({
       </TextContainer>
       <ButtonWrapper>
         {secondaryAction && (
-          <Button
+          <ButtonStyled
             type="secondary"
             size="large"
             onClick={secondaryAction.onClick}
@@ -73,7 +74,7 @@ const EmptyState = ({
           />
         )}
         {primaryAction && (
-          <Button
+          <ButtonStyled
             type="primary"
             icon={primaryAction.icon ?? null}
             iconEnd={primaryAction.iconEnd ?? null}

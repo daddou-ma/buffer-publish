@@ -2,12 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppActionCreators from '../action-creators/AppActionCreators';
 import { SaveButtonTypes, ButtonsQueuingTypesMap } from '../AppConstants';
-import Dropdown, {
-  DropdownTrigger,
-  DropdownContent,
-} from '../components/Dropdown';
-import DateTimeSlotPicker from '../components/DateTimeSlotPicker';
-import Button from '../components/Button';
+import Dropdown, { DropdownTrigger, DropdownContent } from './Dropdown';
+import DateTimeSlotPicker from './DateTimeSlotPicker';
+import Button from './shared/Button';
 
 import styles from './css/UpdateSaver.css';
 

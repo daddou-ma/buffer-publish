@@ -190,80 +190,6 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('handles POST_IMAGE_CLICKED action', () => {
-    const stateBefore = {
-      ...initialState,
-      campaignPosts: [{ id: 'id1' }],
-    };
-    const stateAfter = {
-      ...initialState,
-      campaignPosts: [{ id: 'id1', isLightboxOpen: true, currentImage: 0 }],
-    };
-    const action = {
-      type: actionTypes.POST_IMAGE_CLICKED,
-      updateId: 'id1',
-    };
-    deepFreeze(stateBefore);
-    deepFreeze(action);
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
-  it('handles POST_IMAGE_CLOSED action', () => {
-    const stateBefore = {
-      ...initialState,
-      campaignPosts: [{ id: 'id1' }],
-    };
-    const stateAfter = {
-      ...initialState,
-      campaignPosts: [{ id: 'id1', isLightboxOpen: false }],
-    };
-    const action = {
-      type: actionTypes.POST_IMAGE_CLOSED,
-      updateId: 'id1',
-    };
-    deepFreeze(stateBefore);
-    deepFreeze(action);
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
-  it('handles POST_IMAGE_CLICKED_NEXT action', () => {
-    const stateBefore = {
-      ...initialState,
-      campaignPosts: [{ id: 'id1' }],
-    };
-    const stateAfter = {
-      ...initialState,
-      campaignPosts: [{ id: 'id1', currentImage: 2 }],
-    };
-    const action = {
-      type: actionTypes.POST_IMAGE_CLICKED_NEXT,
-      updateId: 'id1',
-      post: { currentImage: 1 },
-    };
-    deepFreeze(stateBefore);
-    deepFreeze(action);
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
-  it('handles POST_IMAGE_CLICKED_PREV action', () => {
-    const stateBefore = {
-      ...initialState,
-      campaignPosts: [{ id: 'id1' }],
-    };
-    const stateAfter = {
-      ...initialState,
-      campaignPosts: [{ id: 'id1', currentImage: 1 }],
-    };
-    const action = {
-      type: actionTypes.POST_IMAGE_CLICKED_PREV,
-      updateId: 'id1',
-      post: { currentImage: 2 },
-    };
-    deepFreeze(stateBefore);
-    deepFreeze(action);
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
   it('handles POST_CONFIRMED_DELETE action', () => {
     const stateBefore = {
       ...initialState,
@@ -354,7 +280,7 @@ describe('reducer', () => {
       ...initialState,
       campaign: {
         id: 'campaignId',
-        scheduled: 1,
+        scheduled: 0,
         sent: 0,
         channels: [{ channelId: 'profileId1', isManager: true }],
       },
@@ -495,7 +421,7 @@ describe('reducer', () => {
     };
     const stateAfter = {
       ...initialState,
-      campaign: { id: 'campaignId', scheduled: 0, sent: 0 },
+      campaign: { id: 'campaignId', scheduled: 1, sent: 0 },
       campaignPosts: [{ id: 'id1', campaignDetails: { id: 'campaignId' } }],
       page: 'scheduled',
     };
@@ -652,58 +578,6 @@ describe('reducer', () => {
         updateId: 'id1',
       };
       expect(actions.handleShareNowClick({ post })).toEqual(expectedAction);
-    });
-    it('creates a POST_IMAGE_CLICKED action', () => {
-      const post = { id: 'id1' };
-      const profileId = 'id2';
-      const expectedAction = {
-        type: actionTypes.POST_IMAGE_CLICKED,
-        updateId: 'id1',
-        post,
-        profileId,
-      };
-      expect(actions.handleImageClick({ post, profileId })).toEqual(
-        expectedAction
-      );
-    });
-    it('creates a POST_IMAGE_CLICKED_NEXT action', () => {
-      const post = { id: 'id1' };
-      const profileId = 'id2';
-      const expectedAction = {
-        type: actionTypes.POST_IMAGE_CLICKED_NEXT,
-        updateId: 'id1',
-        post,
-        profileId,
-      };
-      expect(actions.handleImageClickNext({ post, profileId })).toEqual(
-        expectedAction
-      );
-    });
-    it('creates a POST_IMAGE_CLICKED_PREV action', () => {
-      const post = { id: 'id1' };
-      const profileId = 'id2';
-      const expectedAction = {
-        type: actionTypes.POST_IMAGE_CLICKED_PREV,
-        updateId: 'id1',
-        post,
-        profileId,
-      };
-      expect(actions.handleImageClickPrev({ post, profileId })).toEqual(
-        expectedAction
-      );
-    });
-    it('creates a POST_IMAGE_CLOSED action', () => {
-      const post = { id: 'id1' };
-      const profileId = 'id2';
-      const expectedAction = {
-        type: actionTypes.POST_IMAGE_CLOSED,
-        updateId: 'id1',
-        post,
-        profileId,
-      };
-      expect(actions.handleImageClose({ post, profileId })).toEqual(
-        expectedAction
-      );
     });
   });
 });

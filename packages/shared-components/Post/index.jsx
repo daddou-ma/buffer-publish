@@ -7,7 +7,6 @@ import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
 import RenderPostMetaBar from './RenderPostMetaBar';
 import PostErrorBanner from '../PostErrorBanner';
-import RetweetPanel from '../RetweetPanel';
 import CardHeader from '../CardHeader';
 import Card from '../Card';
 import UpdateContent from '../UpdateContent';
@@ -37,9 +36,6 @@ const Post = ({
   onShareNowClick,
   onRequeueClick,
   postDetails,
-  retweetComment,
-  retweetCommentLinks,
-  retweetProfile,
   locationName,
   sourceUrl,
   subprofileID,
@@ -71,7 +67,8 @@ const Post = ({
   onCampaignTagClick,
   hasCampaignsFeature,
   headerDetails,
-  ...props
+  postContent,
+  shouldShowEditButton,
 }) => {
   const hasError =
     postDetails && postDetails.error && postDetails.error.length > 0;
@@ -108,18 +105,7 @@ const Post = ({
           )}
           {headerDetails && <CardHeader headerDetails={headerDetails} />}
           <PostContent draggable={draggable} dragging={dragging}>
-            {retweetProfile ? (
-              <RetweetPanel
-                retweetProfile={retweetProfile}
-                retweetComment={retweetComment}
-                retweetCommentLinks={retweetCommentLinks}
-                basic={basic}
-              >
-                <UpdateContent {...props} basic={basic} />
-              </RetweetPanel>
-            ) : (
-              <UpdateContent {...props} basic={basic} />
-            )}
+            <UpdateContent {...postContent} basic={basic} />
           </PostContent>
 
           {hasCampaignsFeature && campaignDetails && (
@@ -163,6 +149,7 @@ const Post = ({
             hasCommentEnabled={hasCommentEnabled}
             hasFirstCommentFlip={hasFirstCommentFlip}
             hasUserTags={hasUserTags}
+            shouldShowEditButton={shouldShowEditButton}
           />
           {(isBusinessAccount || !features.isFreeUser()) &&
             isSent &&
@@ -196,20 +183,6 @@ Post.commonPropTypes = {
     postAction: PropTypes.string,
     error: PropTypes.string,
   }).isRequired,
-  retweetProfile: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    handle: PropTypes.string,
-    name: PropTypes.string,
-  }),
-  retweetComment: PropTypes.string,
-  retweetCommentLinks: PropTypes.arrayOf(
-    PropTypes.shape({
-      rawString: PropTypes.string,
-      displayString: PropTypes.string,
-      expandedUrl: PropTypes.string,
-      indices: PropTypes.arrayOf(PropTypes.number),
-    })
-  ),
   draggable: PropTypes.bool,
   dragging: PropTypes.bool,
   isOver: PropTypes.bool,
@@ -224,6 +197,7 @@ Post.commonPropTypes = {
     email: PropTypes.string,
   }),
   basic: PropTypes.bool,
+  shouldShowEditButton: PropTypes.bool,
 };
 
 Post.propTypes = {
@@ -242,6 +216,7 @@ Post.defaultProps = {
   dueTime: null,
   sharedBy: null,
   basic: false,
+  shouldShowEditButton: true,
 };
 
 export default WithFeatureLoader(Post);

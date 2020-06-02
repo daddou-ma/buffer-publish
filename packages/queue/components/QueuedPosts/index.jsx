@@ -47,10 +47,6 @@ const QueuedPosts = ({
   onEmptySlotClick,
   onCalendarClick,
   onShareNowClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onDropPost,
   onSwapPosts,
   showComposer,
@@ -165,10 +161,6 @@ const QueuedPosts = ({
           onEditClick={onEditClick}
           onEmptySlotClick={onEmptySlotClick}
           onShareNowClick={onShareNowClick}
-          onImageClick={onImageClick}
-          onImageClickNext={onImageClickNext}
-          onImageClickPrev={onImageClickPrev}
-          onImageClose={onImageClose}
           onDropPost={onDropPost}
           onSwapPosts={onSwapPosts}
           draggable={draggingEnabled}
@@ -207,10 +199,6 @@ QueuedPosts.propTypes = {
   onEditClick: PropTypes.func.isRequired,
   onEmptySlotClick: PropTypes.func.isRequired,
   onShareNowClick: PropTypes.func.isRequired,
-  onImageClick: PropTypes.func.isRequired,
-  onImageClickNext: PropTypes.func.isRequired,
-  onImageClickPrev: PropTypes.func.isRequired,
-  onImageClose: PropTypes.func.isRequired,
   onDropPost: PropTypes.func.isRequired,
   onSwapPosts: PropTypes.func.isRequired,
   onSetRemindersClick: PropTypes.func.isRequired,

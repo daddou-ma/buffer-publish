@@ -21,7 +21,7 @@ import DateTimeSlotPicker from './DateTimeSlotPicker';
 import UpdateSaverItem from './UpdateSaverItem';
 import OmniboxButtons from './OmniboxButtons';
 import NotificationContainer from './NotificationContainer';
-import TooltipList from './TooltipList';
+import TooltipList from './shared/TooltipList';
 import styles from './css/UpdateSaver.css';
 
 const getUpdateSaverState = () => ({
@@ -160,7 +160,7 @@ class UpdateSaver extends React.Component {
     if (saveButtons.length === 0) return null;
 
     const isDisabled = !isSavingPossible;
-    const weekStartsMonday = userData.weekStartsMonday;
+    const { weekStartsMonday } = userData;
 
     const dropdownTriggerClassName = [
       styles.dropdownTrigger,
@@ -290,7 +290,7 @@ class UpdateSaver extends React.Component {
       isEditPost && !doSelectedProfilesHaveSlots && !isDraft;
 
     return (
-      <div className={styles.section}>
+      <section className={styles.section}>
         {isOmniboxEnabled && <OmniboxButtons />}
 
         {!isOmniboxEnabled &&
@@ -421,7 +421,7 @@ class UpdateSaver extends React.Component {
             classNames={notificationContainerClassNames}
           />
         )}
-      </div>
+      </section>
     );
   }
 }

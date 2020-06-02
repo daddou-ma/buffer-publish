@@ -28,16 +28,13 @@ export default connect(
       showComposer: state.campaign.showComposer,
       editMode: state.campaign.editMode,
       editingPostId: state.campaign.editingPostId,
-      translations: state.i18n.translations.campaigns.viewCampaign,
-      hideAnalyzeReport: state.appSidebar.user.isUsingPublishAsTeamMember,
-      showCampaignActions: !state.appSidebar.user.isUsingPublishAsTeamMember,
+      hideAnalyzeReport: state.user.isUsingPublishAsTeamMember,
+      showCampaignActions: !state.user.isUsingPublishAsTeamMember,
       isLoading: state.campaign.isLoading,
       hideSkeletonHeader: state.campaign.hideSkeletonHeader,
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
       page: state.campaign.page,
-      hasCampaignsFlip: state.appSidebar.user.features
-        ? state.appSidebar.user.features.includes('campaigns')
-        : false,
+      hasCampaignsFlip: state.user.features?.includes('campaigns') ?? false,
     };
   },
 
@@ -141,39 +138,6 @@ export default connect(
         dispatch(
           actions.handleShareNowClick({
             post,
-          })
-        );
-      },
-
-      onImageClick: ({ post }) => {
-        dispatch(
-          actions.handleImageClick({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
-      onImageClose: ({ post }) => {
-        dispatch(
-          actions.handleImageClose({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
-      onImageClickNext: ({ post }) => {
-        dispatch(
-          actions.handleImageClickNext({
-            post,
-            profileId: post.profileId,
-          })
-        );
-      },
-      onImageClickPrev: ({ post }) => {
-        dispatch(
-          actions.handleImageClickPrev({
-            post,
-            profileId: post.profileId,
           })
         );
       },

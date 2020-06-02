@@ -30,15 +30,6 @@ const HeaderStyle = styled.div`
   margin-left: 0.5rem;
 `;
 
-const postTypeComponentMap = new Map([
-  ['text', Post],
-  ['image', Post],
-  ['multipleImage', Post],
-  ['link', Post],
-  ['video', Post],
-  ['storyGroup', Story],
-]);
-
 /* eslint-disable react/prop-types */
 
 const renderPost = ({
@@ -46,10 +37,6 @@ const renderPost = ({
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onCampaignTagClick,
   onDropPost,
   onSwapPosts,
@@ -74,10 +61,6 @@ const renderPost = ({
     onDeleteConfirmClick: () => onDeleteConfirmClick({ post }),
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
-    onImageClick: () => onImageClick({ post }),
-    onImageClickNext: () => onImageClickNext({ post }),
-    onImageClickPrev: () => onImageClickPrev({ post }),
-    onImageClose: () => onImageClose({ post }),
     onCampaignTagClick: () => onCampaignTagClick(campaignId),
     onDropPost,
     onSwapPosts,
@@ -91,8 +74,7 @@ const renderPost = ({
     profileService,
     profileServiceType,
   };
-  let PostComponent = postTypeComponentMap.get(post.type);
-  PostComponent = PostComponent || Post;
+  const PostComponent = post.type === 'storyGroup' ? Story : Post;
 
   return <PostComponent {...postWithEventHandlers} />;
 };
@@ -111,10 +93,6 @@ const PostList = ({
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
-  onImageClick,
-  onImageClickNext,
-  onImageClickPrev,
-  onImageClose,
   onCampaignTagClick,
   onDropPost,
   onSwapPosts,
@@ -155,10 +133,6 @@ const PostList = ({
               onDeleteConfirmClick,
               onEditClick,
               onShareNowClick,
-              onImageClick,
-              onImageClickNext,
-              onImageClickPrev,
-              onImageClose,
               onCampaignTagClick,
               onDropPost,
               onSwapPosts,
@@ -233,10 +207,6 @@ PostList.propTypes = {
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
-  onImageClick: PropTypes.func,
-  onImageClickNext: PropTypes.func,
-  onImageClickPrev: PropTypes.func,
-  onImageClose: PropTypes.func,
   onCampaignTagClick: PropTypes.func,
   onDropPost: PropTypes.func,
   onSwapPosts: PropTypes.func,

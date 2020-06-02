@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CameraIcon from '@bufferapp/ui/Icon/Icons/Camera';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
+import { grayDark } from '@bufferapp/ui/style/colors';
 
 const composerInputStyle = {
   default: {
@@ -10,7 +11,7 @@ const composerInputStyle = {
     border: '1px solid #B8B8B8',
     borderRadius: '4px',
     boxShadow: '0 1px 4px rgba(0,0,0,.16)',
-    color: '#999999',
+    color: grayDark,
     cursor: 'pointer',
     display: 'flex',
     fontFamily: 'Roboto',

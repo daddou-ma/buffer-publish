@@ -1,10 +1,5 @@
-import {
-  actionTypes as dataFetchActionTypes,
-  actions as dataFetchActions,
-} from '@bufferapp/async-data-fetch';
-import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification/reducer';
-import { actionTypes as thirdPartyActionTypes } from '@bufferapp/publish-thirdparty/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
@@ -16,23 +11,23 @@ import {
   shouldShowWelcomeModal,
   getSourceFromKey,
   shouldShowStealProfileModal,
-  shouldShowInstagramDirectPostingModal,
   shouldShowWelcomeModalPaidUsers,
   getShowModalValue,
-  resetShowModalKey,
   shouldShowInstagramFirstCommentModal,
 } from './util/showModal';
 
-export default ({ dispatch, getState }) => next => (action) => {
+export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
     case lockedProfileActionTypes.UPGRADE:
       if (action.plan === 'free') {
-        dispatch(actions.showSwitchPlanModal({ source: 'locked_profile', plan: 'pro' }));
+        dispatch(
+          actions.showSwitchPlanModal({ source: 'locked_profile', plan: 'pro' })
+        );
       }
       break;
-    case 'APP_INIT': {
-      if (getState().appSidebar.user.plan === 'awesome') {
+    case 'INIT_MODALS': {
+      if (getState().user.plan === 'awesome') {
         // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;
       }
@@ -45,7 +40,11 @@ export default ({ dispatch, getState }) => next => (action) => {
         );
       }
       if (shouldShowStealProfileModal()) {
-        dispatch(actions.showStealProfileModal({ stealProfileUsername: getShowModalValue() }));
+        dispatch(
+          actions.showStealProfileModal({
+            stealProfileUsername: getShowModalValue(),
+          })
+        );
       }
       if (shouldShowWelcomeModalPaidUsers()) {
         dispatch(actions.showWelcomePaidModal());
@@ -62,11 +61,14 @@ export default ({ dispatch, getState }) => next => (action) => {
     }
 
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      if (getState().appSidebar.user.plan === 'awesome') {
+      if (getState().user.plan === 'awesome') {
         // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;
       }
-      if (action.result && action.result.some(profile => profile.isDisconnected)) {
+      if (
+        action.result &&
+        action.result.some(profile => profile.isDisconnected)
+      ) {
         dispatch(actions.showProfilesDisconnectedModal());
       }
       break;
@@ -95,79 +97,15 @@ export default ({ dispatch, getState }) => next => (action) => {
         // Context: https://buffer.atlassian.net/browse/PUB-2004
         return;
       }
-      if (shouldShowProTrialExpiredModal || shouldShowBusinessTrialExpiredModal) {
+      if (
+        shouldShowProTrialExpiredModal ||
+        shouldShowBusinessTrialExpiredModal
+      ) {
         dispatch(actions.showTrialCompleteModal());
       }
       break;
     }
 
-    case thirdPartyActionTypes.APPCUES_FINISHED: {
-      const modalToShow = getState().modals.modalToShowLater;
-      if (!modalToShow) {
-        return;
-      }
-
-      if (modalToShow.id === actionTypes.SHOW_IG_DIRECT_POSTING_MODAL) {
-        dispatch(actions.showInstagramDirectPostingModal({
-          profileId: modalToShow.params.profileId,
-        }));
-      }
-
-      break;
-    }
-
-    case thirdPartyActionTypes.APPCUES_STARTED: {
-      const tourInProgress = getState().thirdparty.appCues.inProgress;
-      const selectedProfileId = getState().profileSidebar.selectedProfileId;
-
-      if (tourInProgress) {
-        dispatch(actions.hideInstagramDirectPostingModal());
-        dispatch(actions.saveModalToShowLater({
-          modalId: actionTypes.SHOW_IG_DIRECT_POSTING_MODAL,
-          selectedProfileId,
-        }));
-      }
-      break;
-    }
-
-    case profileActionTypes.SELECT_PROFILE: {
-      const profileId = getState().profileSidebar.selectedProfileId;
-      const isIGBusiness = getState().profileSidebar.selectedProfile.service_type === 'business';
-      const tourInProgress = getState().thirdparty.appCues.inProgress;
-
-      if (getState().appSidebar.user.plan === 'awesome') {
-        // Context: https://buffer.atlassian.net/browse/PUB-2004
-        return;
-      }
-
-      if (shouldShowInstagramDirectPostingModal() && !isIGBusiness) {
-        if (tourInProgress) {
-          dispatch(dataFetchActions.fetch({
-            name: 'checkInstagramBusiness',
-            args: {
-              profileId,
-              callbackAction: actions.saveModalToShowLater({
-                modalId: actionTypes.SHOW_IG_DIRECT_POSTING_MODAL,
-                profileId,
-              }),
-            },
-          }));
-        } else {
-          dispatch(dataFetchActions.fetch({
-            name: 'checkInstagramBusiness',
-            args: {
-              profileId,
-              callbackAction: actions.showInstagramDirectPostingModal({
-                profileId,
-              }),
-            },
-          }));
-        }
-
-        resetShowModalKey();
-      }
-      break;
-    }
     case storiesActionTypes.STORY_SENT: {
       // the composer closes after pusher sent event, so close the confirmation modal too
       const { showCloseComposerConfirmationModal } = getState().modals;
@@ -178,7 +116,9 @@ export default ({ dispatch, getState }) => next => (action) => {
     }
     case 'COMPOSER_EVENT':
       if (action.eventType === 'show-switch-plan-modal') {
-        dispatch(actions.showSwitchPlanModal({ source: 'queue_limit', plan: 'pro' }));
+        dispatch(
+          actions.showSwitchPlanModal({ source: 'queue_limit', plan: 'pro' })
+        );
       }
       break;
 

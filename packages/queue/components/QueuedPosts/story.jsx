@@ -29,11 +29,9 @@ const store = storeFake({
     planName: 'free',
     features: {},
   },
-  appSidebar: {
-    user: {
-      profile_limit: 3,
-      id: 'id1',
-    },
+  user: {
+    profile_limit: 3,
+    id: 'id1',
   },
   profileSidebar: {
     selectedProfile: {
@@ -83,10 +81,6 @@ storiesOf('QueuedPosts', module)
       onDirectPostingClick={action('onDirectPostingClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
     />
   ))
@@ -110,10 +104,6 @@ storiesOf('QueuedPosts', module)
       onDirectPostingClick={action('onDirectPostingClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
     />
   ))
   .add('paused if Manager', () => (
@@ -137,10 +127,6 @@ storiesOf('QueuedPosts', module)
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
     />
   ))
@@ -164,10 +150,6 @@ storiesOf('QueuedPosts', module)
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
       fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
     />
   ))
@@ -193,9 +175,5 @@ storiesOf('QueuedPosts', module)
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
-      onImageClick={action('onImageClick')}
-      onImageClickNext={action('onImageClickNext')}
-      onImageClickPrev={action('onImageClickPrev')}
-      onImageClose={action('onImageClose')}
     />
   ));

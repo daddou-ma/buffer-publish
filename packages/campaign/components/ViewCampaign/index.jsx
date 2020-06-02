@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { QueueItems, Tabs, Tab } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { useTranslation } from 'react-i18next';
 import Header from './Header';
 import SkeletonPosts from './SkeletonPosts';
 import EmptyStateCampaign from './EmptyState';
@@ -22,7 +23,6 @@ const ViewCampaign = ({
   hideSkeletonHeader,
   hideAnalyzeReport,
   showCampaignActions,
-  translations,
   campaignId,
   hasCampaignsFlip,
   showComposer,
@@ -49,6 +49,8 @@ const ViewCampaign = ({
     actions.fetchCampaignsIfNeeded();
   }, []);
 
+  const { t } = useTranslation();
+
   // Conditions
   const campaignHasPosts =
     (!sentView && campaign?.scheduled > 0) || (sentView && campaign?.sent > 0);
@@ -60,7 +62,6 @@ const ViewCampaign = ({
         campaignDetails={campaign}
         hideAnalyzeReport={hideAnalyzeReport}
         showCampaignActions={showCampaignActions}
-        translations={translations}
         onCreatePostClick={actions.onCreatePostClick}
         onDeleteCampaignClick={actions.onDeleteCampaignClick}
         onEditCampaignClick={actions.onEditCampaignClick}
@@ -73,36 +74,35 @@ const ViewCampaign = ({
           selectedTabId={page}
           onTabClick={tabId => actions.onTabClick({ tabId, campaignId })}
         >
-          <Tab tabId="scheduled">{translations.scheduled}</Tab>
-          <Tab tabId="sent">{translations.sent}</Tab>
+          <Tab tabId="scheduled">
+            {t('campaigns.viewCampaign.scheduledTitle')}
+          </Tab>
+          <Tab tabId="sent">{t('campaigns.viewCampaign.sentTitle')}</Tab>
         </Tabs>
       </nav>
       {/* Content */}
       {isLoading && <SkeletonPosts />}
-      {!isLoading && (
-        <EmptyStateCampaign
-          hideAnalyzeReport={hideAnalyzeReport}
-          translations={translations}
-          campaign={campaign}
-          actions={actions}
-          sentView={sentView}
-        />
-      )}
-      {!isLoading && campaignHasPosts && (
-        <QueueItems
-          items={campaignPosts}
-          onDeleteConfirmClick={postActions.onDeleteConfirmClick}
-          onSetRemindersClick={postActions.onSetRemindersClick}
-          onEditClick={postActions.onEditClick}
-          onShareNowClick={postActions.onShareNowClick}
-          onRequeueClick={postActions.onRequeueClick}
-          onImageClick={postActions.onImageClick}
-          onImageClickNext={postActions.onImageClickNext}
-          onImageClickPrev={postActions.onImageClickPrev}
-          onImageClose={postActions.onImageClose}
-          type="post"
-        />
-      )}
+      <main id="main">
+        {!isLoading && (
+          <EmptyStateCampaign
+            hideAnalyzeReport={hideAnalyzeReport}
+            campaign={campaign}
+            actions={actions}
+            sentView={sentView}
+          />
+        )}
+        {!isLoading && campaignHasPosts && (
+          <QueueItems
+            items={campaignPosts}
+            onDeleteConfirmClick={postActions.onDeleteConfirmClick}
+            onSetRemindersClick={postActions.onSetRemindersClick}
+            onEditClick={postActions.onEditClick}
+            onShareNowClick={postActions.onShareNowClick}
+            onRequeueClick={postActions.onRequeueClick}
+            type="post"
+          />
+        )}
+      </main>
       {/* Composer */}
       {showComposer && (
         <ComposerPopover
@@ -117,7 +117,6 @@ const ViewCampaign = ({
 };
 
 ViewCampaign.propTypes = {
-  translations: PropTypes.object.isRequired, // eslint-disable-line
   campaign: PropTypes.object.isRequired, // eslint-disable-line
   campaignPosts: PropTypes.array, // eslint-disable-line
   hideAnalyzeReport: PropTypes.bool.isRequired,
@@ -146,10 +145,6 @@ ViewCampaign.propTypes = {
     onSetRemindersClick: PropTypes.func.isRequired,
     onShareNowClick: PropTypes.func.isRequired,
     onRequeueClick: PropTypes.func.isRequired,
-    onImageClick: PropTypes.func.isRequired,
-    onImageClose: PropTypes.func.isRequired,
-    onImageClickPrev: PropTypes.func.isRequired,
-    onImageClickNext: PropTypes.func.isRequired,
   }).isRequired,
 };
 

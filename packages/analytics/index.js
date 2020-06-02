@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
    * is mounted it can setup its stores / trigger fetches / etc.
    */
   fetchProfiles() {
-    dispatch({ type: 'PROFILES_INIT', forAnalyze: true });
+    dispatch({ type: 'INIT_PROFILES', forAnalyze: true });
   },
   selectProfile(profile) {
     const {

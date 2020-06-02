@@ -19,6 +19,11 @@ const requestName = tabId =>
     default: 'queuedPosts',
   }[tabId]);
 
+const getRequestMaxCount = tabId =>
+  ({
+    queue: 300,
+  }[tabId]);
+
 export const getRequestName = tabId =>
   requestName(tabId) || requestName('default');
 
@@ -36,25 +41,21 @@ export default hot(
           : tabId;
       if (tabId === 'awaitingApproval' || tabId === 'pendingApproval')
         reducerName = 'drafts';
-      if (
-        state[reducerName] &&
-        state[reducerName].byProfileId &&
-        state[reducerName].byProfileId[profileId]
-      ) {
+      if (state?.[reducerName]?.byProfileId?.[profileId]) {
+        const currentProfile = state[reducerName].byProfileId[profileId];
         return {
-          loading: state[reducerName].byProfileId[profileId].loading,
-          loadingMore: state[reducerName].byProfileId[profileId].loadingMore,
-          moreToLoad: state[reducerName].byProfileId[profileId].moreToLoad,
-          page: state[reducerName].byProfileId[profileId].page,
-          posts: state[reducerName].byProfileId[profileId].posts,
-          total: state[reducerName].byProfileId[profileId].total,
+          loading: currentProfile.loading,
+          loadingMore: currentProfile.loadingMore,
+          moreToLoad: currentProfile.moreToLoad,
+          page: currentProfile.page,
+          posts: currentProfile.posts,
+          total: currentProfile.total,
           translations: state.i18n.translations.example,
-          view: state[reducerName].byProfileId[profileId].tabId || null,
+          view: currentProfile.tabId || null,
           isBusinessAccount: state.profileSidebar.selectedProfile.business,
           selectedProfile: state.profileSidebar.selectedProfile,
-          hasStoriesFlip: state.appSidebar.user.features
-            ? state.appSidebar.user.features.includes('stories_groups')
-            : false,
+          hasStoriesFlip:
+            state.user.features?.includes('stories_groups') ?? false,
           shouldHideAdvancedAnalytics: state.profileSidebar.selectedProfile
             ? state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics
             : false,
@@ -72,17 +73,22 @@ export default hot(
         );
       },
       onLoadMore: ({ profileId, page, tabId }) => {
+        const args = {
+          profileId,
+          page,
+          isFetchingMore: true,
+          needsApproval: ['awaitingApproval', 'pendingApproval'].includes(
+            tabId
+          ),
+        };
+
+        if (getRequestMaxCount(tabId)) {
+          args.count = getRequestMaxCount(tabId);
+        }
         dispatch(
           dataFetchActions.fetch({
             name: getRequestName(tabId),
-            args: {
-              profileId,
-              page,
-              isFetchingMore: true,
-              needsApproval: ['awaitingApproval', 'pendingApproval'].includes(
-                tabId
-              ),
-            },
+            args,
           })
         );
       },

@@ -17,9 +17,7 @@ const storeFake = state => ({
 
 const store = storeFake({
   generalSettings: {},
-  appSidebar: {
-    user: {},
-  },
+  user: {},
   profileSidebar: {
     selectedProfile: {},
   },
