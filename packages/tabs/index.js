@@ -1,8 +1,5 @@
 import { push } from 'connected-react-router';
-import {
-  generateChildTabRoute,
-  plansPageRoute,
-} from '@bufferapp/publish-routes';
+import { generateChildTabRoute, plansPage } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 
 import TabNavigation from './components/TabNavigation';
@@ -52,7 +49,7 @@ export default connect(
       );
     },
     onUpgradeButtonClick: () => {
-      dispatch(push(plansPageRoute));
+      dispatch(plansPage.goTo());
     },
     onChildTabClick: childTabId => {
       const { tabId, profileId } = ownProps;
