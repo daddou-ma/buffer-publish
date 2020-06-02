@@ -12,7 +12,7 @@ EOF
 echo "VERSION JSON FILE:"
 cat ./version.json
 
-yarn install --non-interactive
+yarn install --frozen-lockfile --non-interactive --production
 
 # Notify Bugsnag of new release
 yarn run bugsnag:release

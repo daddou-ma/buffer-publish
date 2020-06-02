@@ -34,7 +34,10 @@
     "request-promise": "4.2.1",
     "serialize-javascript": "^2.1.1",
     "twitter-text": "3.0.0",
-    "recursive-readdir": "2.2.2"
+    "recursive-readdir": "2.2.2",
+    "cors": "2.8.5",
+    "yaml": "1.9.2",
+    "dotenv": "8.2.0"
   },
   "devDependencies": {
   },
