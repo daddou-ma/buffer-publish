@@ -14,6 +14,11 @@ const secondaryAction = {
   label: 'Click here',
 };
 
+const link = {
+  href: 'www.buffer.com',
+  label: 'Click here',
+};
+
 storiesOf('EmptyState', module)
   .addDecorator(withA11y)
   .add('default', () => (
@@ -46,5 +51,13 @@ storiesOf('EmptyState', module)
       heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-not-sent.png"
       secondaryAction={secondaryAction}
       primaryAction={primaryAction}
+    />
+  ))
+  .add('with link', () => (
+    <EmptyState
+      title="Looks like you don't have any drafts yet!"
+      subtitle="This is where drafts from your team members will appear."
+      heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-not-sent.png"
+      link={link}
     />
   ));
