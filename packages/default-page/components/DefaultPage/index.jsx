@@ -17,21 +17,38 @@ const EmptyStateWrapper = styled.div`
   margin-top: 10vh;
 `;
 
-const DefaultPage = ({ onConnectSocialAccountClick, translations }) => {
+const DefaultPage = ({
+  onConnectSocialAccountClick,
+  orgName,
+  ownerEmail,
+  isAdmin,
+}) => {
   const { t } = useTranslation();
   return (
     <Container>
       <EmptyStateWrapper>
-        <EmptyState
-          heroImg="https://s3.amazonaws.com/buffer-publish/images/no-profiles-hero-img.svg"
-          title={translations.defaultTitle}
-          heroImgSize={{ width: '560', height: '284' }}
-          height="auto"
-          primaryAction={{
-            label: t('default-page.connectButton'),
-            onClick: onConnectSocialAccountClick,
-          }}
-        />
+        {isAdmin ? (
+          <EmptyState
+            heroImg="https://buffer-publish.s3.amazonaws.com/images/chart-error.png"
+            title={t('default-page.permissionTitle', { name: orgName })}
+            subtitle={t('default-page.permissionSubtitle', {
+              email: ownerEmail,
+            })}
+            height="auto"
+            link={{ label: t('default-page.permissionCta'), href: '' }}
+          />
+        ) : (
+          <EmptyState
+            heroImg="https://s3.amazonaws.com/buffer-publish/images/no-profiles-hero-img.svg"
+            title={t('default-page.defaultTitle')}
+            heroImgSize={{ width: '560', height: '284' }}
+            height="auto"
+            primaryAction={{
+              label: t('default-page.connectButton'),
+              onClick: onConnectSocialAccountClick,
+            }}
+          />
+        )}
       </EmptyStateWrapper>
     </Container>
   );
@@ -43,6 +60,9 @@ DefaultPage.propTypes = {
     connectButton: PropTypes.string,
     defaultTitle: PropTypes.string,
   }).isRequired,
+  orgName: PropTypes.string,
+  ownerEmail: PropTypes.string,
+  isAdmin: PropTypes.bool,
 };
 
 export default DefaultPage;

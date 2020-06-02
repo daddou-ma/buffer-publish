@@ -5,7 +5,9 @@ import DefaultPage from './components/DefaultPage';
 
 export default connect(
   state => ({
-    translations: state.i18n.translations['default-page'],
+    orgName: state.organizations.selected.name,
+    ownerEmail: state.organizations.selected.ownerEmail,
+    isAdmin: false && state.organizations.selected.isAdmin, // temporary, remove in PUB-2804
   }),
   dispatch => ({
     onConnectSocialAccountClick: () => {
