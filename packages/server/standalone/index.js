@@ -1,9 +1,16 @@
+/* eslint no-console: "off" */
+
 const fs = require('fs');
 const { join } = require('path');
+const express = require('express');
 const https = require('https');
+const cors = require('cors');
+const PublishAPI = require('../publishAPI');
+
+// Port on which to server static assets for running in CI
+const STATIC_ASSETS_SERVER_PORT = 8080;
 
 const basePath = join(__dirname, '..');
-
 const paths = {
   standaloneEnv: join(basePath, 'standalone', 'standalone.env'),
   tempEnv: '/tmp/buffer-publish-standalone.env',
@@ -15,9 +22,19 @@ const paths = {
     basePath,
     '../../../reverseproxy/certs/local.buffer.com-wildcard.crt'
   ),
-  certKeyGHActions: join(basePath, 'local.buffer.com-wildcard.key'),
-  certCrtGHActions: join(basePath, 'local.buffer.com-wildcard.crt'),
+  certKeyGHActions: join(
+    basePath,
+    'standalone',
+    'local.buffer.com-wildcard.key'
+  ),
+  certCrtGHActions: join(
+    basePath,
+    'standalone',
+    'local.buffer.com-wildcard.crt'
+  ),
   standaloneSession: join(basePath, 'standalone', 'standalone-session.json'),
+  webpackAssets: join(basePath, '..', '..', 'dist'),
+  webpackAssetsJson: join(basePath, '..', '..', 'dist', 'webpackAssets.json'),
 };
 
 function getBufferDevConfig() {
@@ -104,11 +121,8 @@ function createServer(app) {
  */
 function getStandaloneSessionData() {
   try {
-    return JSON.parse(
-      fs.readFileSync(paths.standaloneSession)
-    );
+    return JSON.parse(fs.readFileSync(paths.standaloneSession));
   } catch (error) {
-    // eslint-disable-next-line
     console.log(
       `
 -------------------------------------------------------------------------------------------------------
@@ -121,7 +135,6 @@ function getStandaloneSessionData() {
     );
   }
 }
-
 
 /**
  * Middleware that adds our static user session data to the server.
@@ -139,17 +152,43 @@ function setStandaloneSessionMiddleware(req, res, next) {
   return next();
 }
 
-const dim = '\033[2m';
-const reset = '\033[0m';
-const bootMessage = `
-🚀  Publish is now running in Standalone Mode 
-   → https://publish.local.buffer.com
-   ${dim}- Don't forget: \`yarn run watch\` in another terminal tab.${reset}`;
+function serveStaticAssets() {
+  const app = express();
+  app.use(cors());
+  app.use('/static', express.static(paths.webpackAssets));
+  const staticAssetServer = createServer(app);
+  staticAssetServer.listen(STATIC_ASSETS_SERVER_PORT);
+}
 
-function onBoot() {
-  // Run this to check
-  if (getStandaloneSessionData()) {
-    console.log(bootMessage);
+async function onBoot({ usePrecompiledBundles }) {
+  const dim = '\x1b[2m';
+  const reset = '\x1b[0m';
+  const u = '\x1b[4m';
+  const blue = '\x1b[33m';
+
+  const precompiledBundlesMessage = `
+📦  Serving precompiled assets${dim} 
+   → https://local.buffer.com:${STATIC_ASSETS_SERVER_PORT}/static${reset}`;
+
+  // Ensure we have a valid session
+  const session = getStandaloneSessionData();
+  if (session) {
+    const user = await PublishAPI.get({
+      uri: `1/user.json`,
+      session,
+    });
+
+    console.log(`
+🚀  Publish is now running in Standalone Mode → ${u}https://publish.local.buffer.com${reset}${dim}
+    • User ${blue}${user.email}${reset}${dim} (https://buffer.com/admin/${user._id})${reset}`);
+    if (!usePrecompiledBundles) {
+      console.log(
+        `    ${dim}• Don't forget: ${blue}yarn run watch${reset}${dim} in another terminal.${reset}`
+      );
+    }
+    if (usePrecompiledBundles) {
+      console.log(precompiledBundlesMessage);
+    }
   }
 }
 
@@ -157,5 +196,6 @@ module.exports = {
   loadEnv,
   createServer,
   setStandaloneSessionMiddleware,
+  serveStaticAssets,
   onBoot,
 };
