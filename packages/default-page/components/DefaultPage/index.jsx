@@ -35,7 +35,11 @@ const DefaultPage = ({
               email: ownerEmail,
             })}
             height="auto"
-            link={{ label: t('default-page.permissionCta'), href: '' }}
+            link={{
+              label: t('default-page.permissionCta'),
+              href:
+                'https://support.buffer.com/hc/en-us/articles/360038396153-Inviting-users-and-setting-up-permissions',
+            }}
           />
         ) : (
           <EmptyState
