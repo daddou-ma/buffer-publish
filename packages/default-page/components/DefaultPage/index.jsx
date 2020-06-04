@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { EmptyState } from '@bufferapp/publish-shared-components';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { useTranslation } from 'react-i18next';
 
 const Container = styled.div`
@@ -17,17 +18,25 @@ const EmptyStateWrapper = styled.div`
   margin-top: 10vh;
 `;
 
-const DefaultPage = ({
-  onConnectSocialAccountClick,
-  orgName,
-  ownerEmail,
-  isAdmin,
-}) => {
+const DefaultPage = ({ orgName, ownerEmail, isAdmin }) => {
   const { t } = useTranslation();
   return (
     <Container>
       <EmptyStateWrapper>
         {isAdmin ? (
+          <EmptyState
+            heroImg="https://s3.amazonaws.com/buffer-publish/images/no-profiles-hero-img.svg"
+            title={t('default-page.defaultTitle')}
+            heroImgSize={{ width: '560', height: '284' }}
+            height="auto"
+            primaryAction={{
+              label: t('default-page.connectButton'),
+              onClick: () => {
+                window.location.assign(getURL.getConnectSocialAccountURL());
+              },
+            }}
+          />
+        ) : (
           <EmptyState
             heroImg="https://buffer-publish.s3.amazonaws.com/images/chart-error.png"
             title={t('default-page.permissionTitle', { name: orgName })}
@@ -41,17 +50,6 @@ const DefaultPage = ({
                 'https://support.buffer.com/hc/en-us/articles/360038396153-Inviting-users-and-setting-up-permissions',
             }}
           />
-        ) : (
-          <EmptyState
-            heroImg="https://s3.amazonaws.com/buffer-publish/images/no-profiles-hero-img.svg"
-            title={t('default-page.defaultTitle')}
-            heroImgSize={{ width: '560', height: '284' }}
-            height="auto"
-            primaryAction={{
-              label: t('default-page.connectButton'),
-              onClick: onConnectSocialAccountClick,
-            }}
-          />
         )}
       </EmptyStateWrapper>
     </Container>
@@ -59,14 +57,15 @@ const DefaultPage = ({
 };
 
 DefaultPage.propTypes = {
-  onConnectSocialAccountClick: PropTypes.func.isRequired,
-  translations: PropTypes.shape({
-    connectButton: PropTypes.string,
-    defaultTitle: PropTypes.string,
-  }).isRequired,
   orgName: PropTypes.string,
   ownerEmail: PropTypes.string,
   isAdmin: PropTypes.bool,
+};
+
+DefaultPage.defaultProps = {
+  orgName: '',
+  ownerEmail: '',
+  isAdmin: true,
 };
 
 export default DefaultPage;
