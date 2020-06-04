@@ -7,7 +7,6 @@ import StealProfileModal from '@bufferapp/publish-steal-profile-modal';
 import ProfilesDisconnectedModal from '@bufferapp/publish-profiles-disconnected-modal';
 import WelcomePaidModal from '@bufferapp/publish-welcome-paid-modal';
 import InstagramFirstCommentModal from '@bufferapp/publish-ig-first-comment-modal';
-import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import TrialCompleteModal from '@bufferapp/publish-trial-complete-modal';
 import InstagramFirstCommentProTrialModal from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 import CloseComposerConfirmationModal from '@bufferapp/publish-close-composer-confirmation-modal';
@@ -47,7 +46,6 @@ AppModals.propTypes = {
   showWelcomePaidModal: PropTypes.bool.isRequired,
   showProfilesDisconnectedModal: PropTypes.bool.isRequired,
   showStealProfileModal: PropTypes.bool.isRequired,
-  showInstagramDirectPostingModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentModal: PropTypes.bool.isRequired,
   showTrialCompleteModal: PropTypes.bool.isRequired,
   showInstagramFirstCommentProTrialModal: PropTypes.bool.isRequired,
