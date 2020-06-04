@@ -9,6 +9,3 @@ export default connect(state => ({
     state.user.features?.includes('org_switcher') &&
     state.organizations.selected?.isAdmin,
 }))(DefaultPage);
-
-export { actions, actionTypes } from './reducer';
-export middleware from './middleware';
