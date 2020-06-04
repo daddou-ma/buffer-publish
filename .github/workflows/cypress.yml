@@ -24,7 +24,7 @@ jobs:
         run: |
           printf '%s\n' '127.0.0.1 publish.local.buffer.com' '127.0.0.1 local.buffer.com' | sudo tee -a /etc/hosts
       - name: run cypress
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@master
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_STANDALONE: "true" # Tells Cypress we're running in standalone mode so it doesn't need to login
