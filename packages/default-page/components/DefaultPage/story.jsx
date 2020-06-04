@@ -5,10 +5,12 @@ import DefaultPage from './index';
 
 storiesOf('DefaultPage', module)
   .addDecorator(withA11y)
-  .add('admin user', () => <DefaultPage isAdmin />)
-  .add('non admin user', () => (
+  .add('Empty state, for admin user', () => (
+    <DefaultPage showPermissionsEmptyPage={false} />
+  ))
+  .add('Permissions empty state, for non admin user', () => (
     <DefaultPage
-      isAdmin={false}
+      showPermissionsEmptyPage
       ownerEmail="ana@buffer.com"
       orgName="Cool Org"
     />

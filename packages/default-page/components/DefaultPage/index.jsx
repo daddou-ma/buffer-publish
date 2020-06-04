@@ -18,25 +18,12 @@ const EmptyStateWrapper = styled.div`
   margin-top: 10vh;
 `;
 
-const DefaultPage = ({ orgName, ownerEmail, isAdmin }) => {
+const DefaultPage = ({ orgName, ownerEmail, showPermissionsEmptyPage }) => {
   const { t } = useTranslation();
   return (
     <Container>
       <EmptyStateWrapper>
-        {isAdmin ? (
-          <EmptyState
-            heroImg="https://s3.amazonaws.com/buffer-publish/images/no-profiles-hero-img.svg"
-            title={t('default-page.defaultTitle')}
-            heroImgSize={{ width: '560', height: '284' }}
-            height="auto"
-            primaryAction={{
-              label: t('default-page.connectButton'),
-              onClick: () => {
-                window.location.assign(getURL.getConnectSocialAccountURL());
-              },
-            }}
-          />
-        ) : (
+        {showPermissionsEmptyPage ? (
           <EmptyState
             heroImg="https://buffer-publish.s3.amazonaws.com/images/chart-error.png"
             title={t('default-page.permissionTitle', { name: orgName })}
@@ -50,6 +37,19 @@ const DefaultPage = ({ orgName, ownerEmail, isAdmin }) => {
                 'https://support.buffer.com/hc/en-us/articles/360038396153-Inviting-users-and-setting-up-permissions',
             }}
           />
+        ) : (
+          <EmptyState
+            heroImg="https://s3.amazonaws.com/buffer-publish/images/no-profiles-hero-img.svg"
+            title={t('default-page.defaultTitle')}
+            heroImgSize={{ width: '560', height: '284' }}
+            height="auto"
+            primaryAction={{
+              label: t('default-page.connectButton'),
+              onClick: () => {
+                window.location.assign(getURL.getConnectSocialAccountURL());
+              },
+            }}
+          />
         )}
       </EmptyStateWrapper>
     </Container>
@@ -59,13 +59,13 @@ const DefaultPage = ({ orgName, ownerEmail, isAdmin }) => {
 DefaultPage.propTypes = {
   orgName: PropTypes.string,
   ownerEmail: PropTypes.string,
-  isAdmin: PropTypes.bool,
+  showPermissionsEmptyPage: PropTypes.bool,
 };
 
 DefaultPage.defaultProps = {
   orgName: '',
   ownerEmail: '',
-  isAdmin: true,
+  showPermissionsEmptyPage: false,
 };
 
 export default DefaultPage;

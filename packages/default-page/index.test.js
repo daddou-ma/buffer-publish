@@ -9,7 +9,7 @@ import { axe } from 'jest-axe';
 import DefaultPage from './index';
 
 describe('DefaultPage', () => {
-  test('loads empty state for users without admin access', async () => {
+  test('loads permissions empty state for users without admin access', async () => {
     render(<DefaultPage />, {
       initialState: {
         organizations: {
@@ -23,6 +23,27 @@ describe('DefaultPage', () => {
       },
     });
     expect(screen.getByRole('heading')).toHaveTextContent(/joined Cool Org/i);
+  });
+
+  test('loads empty state for users without admin access but no feature flip', async () => {
+    render(<DefaultPage />, {
+      initialState: {
+        organizations: {
+          selected: {
+            isAdmin: false,
+            name: 'Cool Org',
+            ownerEmail: 'ana@buffer.com',
+          },
+        },
+        user: { features: [''] },
+      },
+    });
+    expect(screen.getByRole('heading')).not.toHaveTextContent(
+      /joined Cool Org/i
+    );
+    expect(screen.getByRole('heading')).toHaveTextContent(
+      "Let's get your account set up!"
+    );
   });
 
   test('loads empty state for users with admin access', async () => {
@@ -56,7 +77,11 @@ describe('DefaultPage', () => {
   });
 
   test('a11y | default page is accessible', async () => {
-    const { container } = render(<DefaultPage />);
+    const { container } = render(<DefaultPage />, {
+      initialState: {
+        organizations: { selected: { isAdmin: true } },
+      },
+    });
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
