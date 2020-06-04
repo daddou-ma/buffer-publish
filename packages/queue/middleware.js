@@ -23,22 +23,6 @@ export default ({ dispatch, getState }) => next => action => {
           },
         })
       );
-
-      if (getState().user.plan !== 'awesome') {
-        const sidebar = getState().profileSidebar;
-        const profileId = sidebar.selectedProfileId;
-        const isIGBusiness = sidebar.selectedProfile.service_type === 'business';
-        if (!isIGBusiness) {
-          dispatch(
-            dataFetchActions.fetch({
-              name: 'checkInstagramBusiness',
-              args: {
-                profileId,
-              },
-            })
-          );
-        }
-      }
       break;
     }
     case `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`:
