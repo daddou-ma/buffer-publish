@@ -627,12 +627,6 @@
     "tooltip": "View profile",
     "usernameError": "Oops! User already tagged"
   },
-  "welcome-modal": {
-    "body1": "We've tidied up the look of your Buffer dashboard!",
-    "body2": "We've kept all your posts and content just as it was but with a cleaner and faster experience.",
-    "cta": "Let's Go!",
-    "headline": "We've refreshed the look of Buffer"
-  },
   "welcome-paid-modal": {
     "step1": {
       "body1": "It's the same Buffer you’ve come to love – now simpler and faster, with ",

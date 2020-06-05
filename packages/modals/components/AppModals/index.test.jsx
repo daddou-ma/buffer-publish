@@ -40,24 +40,6 @@ describe('Modals', () => {
     );
     expect(rendered).toMatchSnapshot();
   });
-  it('renders welcome modal', () => {
-    const visibleModals = { ...initialState, showWelcomeModal: true };
-    const renderer = new ShallowRenderer();
-    const rendered = renderer.render(
-      <AppModals {...visibleModals} />,
-    );
-    expect(rendered).toMatchSnapshot();
-  });
-  it('renders a connected welcome modal', () => {
-    const visibleModals = { ...initialState, showWelcomeModal: true };
-    const renderer = new ShallowRenderer();
-    const rendered = renderer.render(
-      <Provider store={fakeStore({ modals: visibleModals })}>
-        <AppModalsConnected />
-      </Provider>,
-    );
-    expect(rendered).toMatchSnapshot();
-  });
   it('renders disconnected profiles modal', () => {
     const visibleModals = { ...initialState, showProfilesDisconnectedModal: true };
     const renderer = new ShallowRenderer();

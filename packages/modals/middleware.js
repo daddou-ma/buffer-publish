@@ -8,7 +8,6 @@ import { getPlanId } from '@bufferapp/publish-plans/utils/plans';
 import { actions, actionTypes } from './reducer';
 import {
   shouldShowSwitchPlanModal,
-  shouldShowWelcomeModal,
   getSourceFromKey,
   shouldShowStealProfileModal,
   shouldShowWelcomeModalPaidUsers,
@@ -53,9 +52,6 @@ export default ({ dispatch, getState }) => next => action => {
       }
       if (shouldShowInstagramFirstCommentModal()) {
         dispatch(actions.showInstagramFirstCommentModal());
-      }
-      if (shouldShowWelcomeModal()) {
-        dispatch(actions.showWelcomeModal());
       }
       break;
     }
