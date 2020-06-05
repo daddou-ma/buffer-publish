@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Text, Button } from '@bufferapp/ui';
+import { Text, Button, Link } from '@bufferapp/ui';
 import { Image } from '@bufferapp/components';
 
 const Wrapper = styled.div`
@@ -47,6 +47,7 @@ const EmptyState = ({
   height,
   primaryAction,
   secondaryAction,
+  link,
 }) => {
   return (
     <Wrapper height={height}>
@@ -83,6 +84,11 @@ const EmptyState = ({
             label={primaryAction.label}
           />
         )}
+        {link && (
+          <Link newTab href={link.href}>
+            {link.label}
+          </Link>
+        )}
       </ButtonWrapper>
     </Wrapper>
   );
@@ -106,6 +112,10 @@ EmptyState.propTypes = {
   }),
   secondaryAction: PropTypes.shape({
     onClick: PropTypes.func,
+    label: PropTypes.string,
+  }),
+  link: PropTypes.shape({
+    href: PropTypes.string,
     label: PropTypes.string,
   }),
 };
