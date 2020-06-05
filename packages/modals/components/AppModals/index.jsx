@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SwitchPlanModal from '@bufferapp/publish-switch-plan-modal';
-import WelcomeModal from '@bufferapp/publish-welcome-modal';
 import StealProfileModal from '@bufferapp/publish-steal-profile-modal';
 import ProfilesDisconnectedModal from '@bufferapp/publish-profiles-disconnected-modal';
 import WelcomePaidModal from '@bufferapp/publish-welcome-paid-modal';
@@ -14,7 +13,6 @@ import DeleteCampaignModal from '@bufferapp/publish-delete-campaign-modal';
 
 const AppModals = ({
   showSwitchPlanModal,
-  showWelcomeModal,
   showWelcomePaidModal,
   showProfilesDisconnectedModal,
   showStealProfileModal,
@@ -24,10 +22,9 @@ const AppModals = ({
   showCloseComposerConfirmationModal,
   showDeleteCampaignModal,
 }) => (
-  <React.Fragment>
+  <>
     {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
     {showSwitchPlanModal && <SwitchPlanModal />}
-    {showWelcomeModal && <WelcomeModal />}
     {showInstagramFirstCommentModal && <InstagramFirstCommentModal />}
     {showWelcomePaidModal && <WelcomePaidModal />}
     {showStealProfileModal && <StealProfileModal />}
@@ -37,12 +34,11 @@ const AppModals = ({
     )}
     {showCloseComposerConfirmationModal && <CloseComposerConfirmationModal />}
     {showDeleteCampaignModal && <DeleteCampaignModal />}
-  </React.Fragment>
+  </>
 );
 
 AppModals.propTypes = {
   showSwitchPlanModal: PropTypes.bool.isRequired,
-  showWelcomeModal: PropTypes.bool.isRequired,
   showWelcomePaidModal: PropTypes.bool.isRequired,
   showProfilesDisconnectedModal: PropTypes.bool.isRequired,
   showStealProfileModal: PropTypes.bool.isRequired,

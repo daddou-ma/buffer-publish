@@ -5,24 +5,6 @@ import middleware from './middleware';
 import { actions, actionTypes as modalsActionTypes } from './reducer';
 
 describe('middleware', () => {
-  it('should show welcome modal when key is present', () => {
-    window._showModal = {
-      key: 'welcome-modal-1',
-    };
-    const next = jest.fn();
-    const dispatch = jest.fn();
-    const getState = () => ({
-      user: {
-        plan: 'pro',
-      },
-    });
-    const action = {
-      type: 'INIT_MODALS',
-    };
-    middleware({ dispatch, getState })(next)(action);
-    expect(next).toBeCalledWith(action);
-    expect(dispatch).toBeCalledWith(actions.showWelcomeModal());
-  });
   it('should show and track modal when key with source is present', () => {
     window._showModal = {
       key: 'upgrade-to-pro--profile_limit',
