@@ -56,8 +56,8 @@ const RightPlanButton = ({
 const RightButton = styled(Button)`
   button {
     height: unset;
+    padding: ${props => (props.isNonprofit ? '4% 3%' : '20px 30px 15px 30px')};
   }
-  padding: ${props => (props.isNonprofit ? '4% 3%' : '20px 15px 15px 15px')};
   border-radius: 0 25px 25px 0;
   background-color: ${props =>
     props.type === 'primary' ? '#EEF1FF' : 'white'};
