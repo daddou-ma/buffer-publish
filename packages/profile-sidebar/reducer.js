@@ -50,7 +50,7 @@ const moveProfileInArray = (arr, from, to) => {
 };
 
 const isOrgSwitcherFeatureEnabled = state =>
-  state.user.features?.includes('org_switcher');
+  state.user?.features?.includes('org_switcher');
 
 const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
