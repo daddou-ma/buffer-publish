@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { Button } from '@bufferapp/ui';
-import { ButtonWrapper, InputWrapper } from './styles';
+import { ButtonWrapper, InputWrapper, StyledButton } from './styles';
 
 class CreditCardForm extends Component {
   constructor() {
@@ -55,7 +55,7 @@ class CreditCardForm extends Component {
             label={closeButtonLabel}
             onClick={closeAction}
           />
-          <Button
+          <StyledButton
             type="primary"
             onClick={this.handleSubmit}
             label={buttonLabel}
