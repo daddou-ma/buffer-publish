@@ -30,7 +30,11 @@ export const initialState = {
   isSearchPopupVisible: false,
   searchText: null,
   userId: null,
+  isOrganizationSwitcherEnabled: false,
 };
+
+const isOrgSwitcherFeatureEnabled = user =>
+  user.features?.includes('org_switcher') ?? false;
 
 const moveProfileInArray = (arr, from, to) => {
   const clone = [...arr];
@@ -48,9 +52,6 @@ const moveProfileInArray = (arr, from, to) => {
   );
   return clone;
 };
-
-const isOrgSwitcherFeatureEnabled = state =>
-  state.user?.features?.includes('org_switcher');
 
 const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
@@ -156,7 +157,7 @@ export default (state = initialState, action) => {
         profiles = filterProfilesByOrg(
           profileList,
           selectedOrganization,
-          isOrgSwitcherFeatureEnabled(state)
+          state.isOrganizationSwitcherEnabled
         );
       }
 
@@ -175,7 +176,7 @@ export default (state = initialState, action) => {
         profiles = filterProfilesByOrg(
           profileList,
           selectedOrganization,
-          isOrgSwitcherFeatureEnabled(state)
+          state.isOrganizationSwitcherEnabled
         );
       }
 
@@ -202,7 +203,7 @@ export default (state = initialState, action) => {
         profiles: filterProfilesByOrg(
           action.result,
           state.organization,
-          isOrgSwitcherFeatureEnabled(state)
+          state.isOrganizationSwitcherEnabled
         ),
         hasInstagram: action.result.some(p => p.service === 'instagram'),
         hasFacebook: action.result.some(p => p.service === 'facebook'),
@@ -281,6 +282,9 @@ export default (state = initialState, action) => {
         isOnBusinessTrial: action.result.isOnBusinessTrial,
         userId: action.result.id,
         isFreeUser: action.result.is_free_user,
+        isOrganizationSwitcherEnabled: isOrgSwitcherFeatureEnabled(
+          action.result
+        ),
       };
     }
     default:

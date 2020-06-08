@@ -1,4 +1,4 @@
-import { actionTypes as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export default ({ dispatch }) => next => action => {
   next(action);
@@ -6,12 +6,14 @@ export default ({ dispatch }) => next => action => {
     case 'APP_INIT':
       dispatch({ type: 'INIT_MODALS' });
       dispatch({ type: 'INIT_USER' });
-      dispatch({ type: 'INIT_ORGANIZATIONS' });
       dispatch({ type: 'INIT_APPSHELL' });
       dispatch({ type: 'INIT_FEATURES' });
       dispatch({ type: 'INIT_PUSHER' });
       dispatch({ type: 'INIT_CHECK_BOOKMARKLET' });
       dispatch({ type: 'INIT_STRIPE_DETAILS' });
+      break;
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      dispatch({ type: 'INIT_ORGANIZATIONS' });
       break;
     case 'ORGANIZATIONS_INITIALIZED': {
       dispatch({ type: 'INIT_PROFILES' });
