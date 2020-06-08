@@ -2,7 +2,6 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 
 import keyWrapper from '@bufferapp/keywrapper';
-import { getSelectedOrganization } from '@bufferapp/publish-data-organizations/utils';
 import { filterProfilesByOrg } from './utils';
 
 export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
@@ -49,6 +48,9 @@ const moveProfileInArray = (arr, from, to) => {
   );
   return clone;
 };
+
+const isOrgSwitcherFeatureEnabled = state =>
+  state.user.features?.includes('org_switcher');
 
 const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
@@ -151,7 +153,11 @@ export default (state = initialState, action) => {
 
       if (profiles) {
         const { profileList } = state;
-        profiles = filterProfilesByOrg(profileList, selectedOrganization);
+        profiles = filterProfilesByOrg(
+          profileList,
+          selectedOrganization,
+          isOrgSwitcherFeatureEnabled(state)
+        );
       }
 
       return {
@@ -166,7 +172,11 @@ export default (state = initialState, action) => {
 
       if (profiles) {
         const { profileList } = state;
-        profiles = filterProfilesByOrg(profileList, selectedOrganization);
+        profiles = filterProfilesByOrg(
+          profileList,
+          selectedOrganization,
+          isOrgSwitcherFeatureEnabled(state)
+        );
       }
 
       return {
@@ -189,7 +199,11 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         profileList: action.result,
-        profiles: filterProfilesByOrg(action.result, state.organization),
+        profiles: filterProfilesByOrg(
+          action.result,
+          state.organization,
+          isOrgSwitcherFeatureEnabled(state)
+        ),
         hasInstagram: action.result.some(p => p.service === 'instagram'),
         hasFacebook: action.result.some(p => p.service === 'facebook'),
         hasTwitter: action.result.some(p => p.service === 'twitter'),
