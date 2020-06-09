@@ -24,6 +24,7 @@ describe('reducer', () => {
       hasTwitter: true,
       isSearchPopupVisible: false,
       searchText: null,
+      isOrganizationSwitcherEnabled: false,
     };
     const action = {
       type: 'INIT',
@@ -166,6 +167,56 @@ describe('reducer', () => {
       );
       expect(profilesWithUpdatedPostCounts[0].pendingCount).toBe(5);
       expect(profilesWithUpdatedPostCounts[0].sentCount).toBe(2);
+    });
+
+    it("should extract properties from user when it's fetched", () => {
+      const stateBefore = profileInitialState;
+
+      const stateAfter = {
+        ...profileInitialState,
+        isOnBusinessTrial: true,
+        userId: '1234',
+        isFreeUser: false,
+        isOrganizationSwitcherEnabled: false,
+      };
+
+      const action = {
+        type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
+        result: {
+          isOnBusinessTrial: stateAfter.isOnBusinessTrial,
+          id: stateAfter.userId,
+          is_free_user: stateAfter.isFreeUser,
+          features: [],
+        },
+      };
+
+      deepFreeze(action);
+      expect(reducer(stateBefore, action)).toEqual(stateAfter);
+    });
+
+    it('should change isOrganizationSwitcherEnabled to true when feature is enabled and user fetched', () => {
+      const stateBefore = profileInitialState;
+
+      const stateAfter = {
+        ...profileInitialState,
+        isOnBusinessTrial: true,
+        userId: '1234',
+        isFreeUser: false,
+        isOrganizationSwitcherEnabled: true,
+      };
+
+      const action = {
+        type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
+        result: {
+          isOnBusinessTrial: stateAfter.isOnBusinessTrial,
+          id: stateAfter.userId,
+          is_free_user: stateAfter.isFreeUser,
+          features: ['org_switcher'],
+        },
+      };
+
+      deepFreeze(action);
+      expect(reducer(stateBefore, action)).toEqual(stateAfter);
     });
   });
 });

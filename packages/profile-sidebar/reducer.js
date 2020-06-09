@@ -2,7 +2,6 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
 
 import keyWrapper from '@bufferapp/keywrapper';
-import { getSelectedOrganization } from '@bufferapp/publish-data-organizations/utils';
 import { filterProfilesByOrg } from './utils';
 
 export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
@@ -31,6 +30,7 @@ export const initialState = {
   isSearchPopupVisible: false,
   searchText: null,
   userId: null,
+  isOrganizationSwitcherEnabled: false,
 };
 
 const moveProfileInArray = (arr, from, to) => {
@@ -151,7 +151,11 @@ export default (state = initialState, action) => {
 
       if (profiles) {
         const { profileList } = state;
-        profiles = filterProfilesByOrg(profileList, selectedOrganization);
+        profiles = filterProfilesByOrg(
+          profileList,
+          selectedOrganization,
+          state.isOrganizationSwitcherEnabled
+        );
       }
 
       return {
@@ -166,7 +170,11 @@ export default (state = initialState, action) => {
 
       if (profiles) {
         const { profileList } = state;
-        profiles = filterProfilesByOrg(profileList, selectedOrganization);
+        profiles = filterProfilesByOrg(
+          profileList,
+          selectedOrganization,
+          state.isOrganizationSwitcherEnabled
+        );
       }
 
       return {
@@ -189,7 +197,11 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         profileList: action.result,
-        profiles: filterProfilesByOrg(action.result, state.organization),
+        profiles: filterProfilesByOrg(
+          action.result,
+          state.organization,
+          state.isOrganizationSwitcherEnabled
+        ),
         hasInstagram: action.result.some(p => p.service === 'instagram'),
         hasFacebook: action.result.some(p => p.service === 'facebook'),
         hasTwitter: action.result.some(p => p.service === 'twitter'),
@@ -267,6 +279,8 @@ export default (state = initialState, action) => {
         isOnBusinessTrial: action.result.isOnBusinessTrial,
         userId: action.result.id,
         isFreeUser: action.result.is_free_user,
+        isOrganizationSwitcherEnabled:
+          action.result.features?.includes('org_switcher') ?? false,
       };
     }
     default:

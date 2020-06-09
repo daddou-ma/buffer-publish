@@ -9,9 +9,15 @@ export const shouldGoToProfile = (profile, prevProps) => {
   );
 };
 
-export const filterProfilesByOrg = (profiles, organization) => {
-  return profiles;
-  // return profiles?.filter(
-  //   profile => profile.organizationId === organization.id
-  // );
+export const filterProfilesByOrg = (
+  profiles,
+  organization,
+  isFeatureEnabled
+) => {
+  if (!isFeatureEnabled) {
+    return profiles;
+  }
+  return profiles?.filter(
+    profile => profile.organizationId === organization.id
+  );
 };
