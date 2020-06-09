@@ -29,7 +29,7 @@ describe('profile-sidebar utils', () => {
       expect(filteredProfiles).toEqual(profiles);
     });
 
-    it("returns only the organization's profiles if feature is enabled", () => {
+    it('returns only the profiles in the organization if feature is enabled', () => {
       const filteredProfiles = filterProfilesByOrg(
         profiles,
         organization,
