@@ -13,6 +13,8 @@ export default ({ dispatch }) => next => action => {
       dispatch({ type: 'INIT_STRIPE_DETAILS' });
       break;
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
+      // temporary, will be dispatched on APP_INIT once we've deleted the org_switcher flip
+      // or we extract the features from the organization instead.
       dispatch({ type: 'INIT_ORGANIZATIONS' });
       break;
     case 'ORGANIZATIONS_INITIALIZED': {
