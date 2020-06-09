@@ -33,9 +33,6 @@ export const initialState = {
   isOrganizationSwitcherEnabled: false,
 };
 
-const isOrgSwitcherFeatureEnabled = user =>
-  user.features?.includes('org_switcher') ?? false;
-
 const moveProfileInArray = (arr, from, to) => {
   const clone = [...arr];
 
@@ -282,9 +279,8 @@ export default (state = initialState, action) => {
         isOnBusinessTrial: action.result.isOnBusinessTrial,
         userId: action.result.id,
         isFreeUser: action.result.is_free_user,
-        isOrganizationSwitcherEnabled: isOrgSwitcherFeatureEnabled(
-          action.result
-        ),
+        isOrganizationSwitcherEnabled:
+          action.result.features?.includes('org_switcher') ?? false,
       };
     }
     default:
