@@ -1,4 +1,4 @@
-import { datadogRum } from '@datadog/browser-rum';
+const datadogRum = require('@datadog/browser-rum');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isStandalone = process.env.STANDALONE === 'true';

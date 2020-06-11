@@ -72,7 +72,6 @@
     "@bufferapp/ui": "5.37.1",
     "@bugsnag/js": "^6.5.2",
     "@bugsnag/plugin-react": "^6.5.0",
-    "@datadog/browser-rum": "^1.12.4",
     "@sheerun/mutationobserver-shim": "^0.3.3",
     "babel-loader": "8.0.6",
     "babel-plugin-dynamic-import-node": "^2.3.0",

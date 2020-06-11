@@ -37,7 +37,8 @@
     "recursive-readdir": "2.2.2",
     "cors": "2.8.5",
     "yaml": "1.9.2",
-    "dotenv": "8.2.0"
+    "dotenv": "8.2.0",
+    "@datadog/browser-rum": "1.12.4"
   },
   "devDependencies": {
   },
