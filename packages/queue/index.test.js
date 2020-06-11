@@ -34,9 +34,7 @@ const initialState = {
     selectedProfile: profile,
     profiles: [profile],
   },
-  appSidebar: {
-    user: buildUser(),
-  },
+  user: buildUser(),
   drafts: {
     draftMode: false,
   },
@@ -44,7 +42,6 @@ const initialState = {
     campaigns: null,
   },
   publishProfiles: [profile],
-  user: { isOnBusinessTrial: false },
 };
 
 // eslint-disable-next-line react/prop-types
