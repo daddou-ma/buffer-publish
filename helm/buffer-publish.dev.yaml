@@ -18,6 +18,16 @@ env:
         fieldPath: status.hostIP
   - name: DD_SERVICE_NAME
     value: "publish-server"
+  - name: DD_RUM_APP_ID
+    valueFrom:
+      secretKeyRef:
+        key: dd-rum-app-id
+        name: buffer-publish-keys
+  - name: DD_RUM_CLIENT_TOKEN
+    valueFrom:
+      secretKeyRef:
+        key: dd-rum-client-token
+        name: buffer-publish-keys
   - name: LOG_LEVEL
     value: NOTICE
   - name: ANALYZE_API_ADDR

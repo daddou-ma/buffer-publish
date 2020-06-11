@@ -1,3 +1,5 @@
+import { datadogRum } from '@datadog/browser-rum';
+
 const isProduction = process.env.NODE_ENV === 'production';
 const isStandalone = process.env.STANDALONE === 'true';
 const usePrecompiledBundles = process.env.USE_PRECOMPILED_BUNDLES === 'true';
@@ -20,6 +22,13 @@ if (isProduction && !isStandalone) {
     service: process.env.DD_SERVICE_NAME,
     port: 8126,
     logInjection: true,
+  });
+  // enable Datadog Real User Monitoring
+  datadogRum.init({
+    applicationId: process.env.DD_RUM_APP_ID,
+    clientToken: process.env.DD_RUM_CLIENT_TOKEN,
+    datacenter: 'us',
+    sampleRate: 100,
   });
 }
 
