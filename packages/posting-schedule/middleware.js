@@ -170,7 +170,7 @@ export default ({ dispatch, getState }) => next => action => {
         Please contact support if this persists.`,
         })
       );
-      dispatch({ type: 'PROFILES_INIT' });
+      dispatch({ type: 'INIT_PROFILES' });
       break;
     default:
       break;

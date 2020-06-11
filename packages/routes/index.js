@@ -34,11 +34,7 @@ export const childTabRoute = generateChildTabRoute({
   childTabId: ':childTabId',
 });
 
-export const plansPageRoute = '/plans';
-
 export const newBusinessTrialistsRoute = '/new-business-trialists';
-
-export const newConnectionRoute = '/new-connection';
 
 // Routes utils
 export const getMatch = ({ pathname, route }) =>
@@ -52,6 +48,17 @@ export const getParams = ({ pathname, route }) => {
 };
 
 export const goTo = path => push(path);
+
+// Miscellaneous routes
+export const newConnection = {
+  route: '/new-connection',
+  goTo: () => push('/new-connection'),
+};
+
+export const plansPage = {
+  route: '/plans',
+  goTo: () => push('/plans'),
+};
 
 // Preferences routes
 export const preferencesPage = {

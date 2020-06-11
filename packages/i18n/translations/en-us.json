@@ -89,7 +89,10 @@
   },
   "default-page": {
     "connectButton": "Connect Your Social Accounts",
-    "defaultTitle": "Let's get your account set up!"
+    "defaultTitle": "Let's get your account set up!",
+    "permissionTitle": "You’ve joined {{name}}, but something’s missing...",
+    "permissionSubtitle": "It looks like you haven’t been given access to any of your organization’s social accounts. Request access from {{email}} or any other Admin.",
+    "permissionCta": "Learn More About Permissions"
   },
   "example": {
     "loggedIn": "Logged In...",
@@ -626,12 +629,6 @@
     "rightHeaderSubtext": "Click anywhere on the photo to tag a public user.",
     "tooltip": "View profile",
     "usernameError": "Oops! User already tagged"
-  },
-  "welcome-modal": {
-    "body1": "We've tidied up the look of your Buffer dashboard!",
-    "body2": "We've kept all your posts and content just as it was but with a cleaner and faster experience.",
-    "cta": "Let's Go!",
-    "headline": "We've refreshed the look of Buffer"
   },
   "welcome-paid-modal": {
     "step1": {

@@ -204,7 +204,7 @@ export default ({ getState, dispatch }) => next => action => {
     case `updateSingleCustomLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({
-        type: 'SINGLE_PROFILE_INIT',
+        type: 'INIT_SINGLE_PROFILE',
         profileId: action.args.profileId,
       });
       dispatch(

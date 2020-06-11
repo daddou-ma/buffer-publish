@@ -40,6 +40,7 @@ const Tab = ({ children, selected, tabId, onClick, secondary, disabled }) => (
       selected={selected}
       secondary={secondary}
       href="#"
+      data-cy={`tab-${tabId}`}
       onClick={e => {
         e.preventDefault();
         onClick(tabId);

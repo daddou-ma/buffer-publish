@@ -5,8 +5,8 @@ import BillingUpdateCTABanner from './components/BillingUpgradeCTABanner';
 
 export default connect(
   state => ({
-    trial: state.appSidebar.user && state.appSidebar.user.trial,
-    isPremiumBusinessPlan: state.appSidebar.user.plan === 'premium_business',
+    trial: state.user?.trial,
+    isPremiumBusinessPlan: state.user.plan === 'premium_business',
     profileCount: state.ctaBanner.profileCount,
   }),
   dispatch => ({

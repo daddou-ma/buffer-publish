@@ -1,0 +1,11 @@
+{
+  "projectId": "6c7ssj",
+  "baseUrl": "https://publish.local.buffer.com",
+  "viewportWidth": 1440,
+  "viewportHeight": 900,
+  "integrationFolder": "cypress/e2e",
+  "env": {
+    "STANDALONE": "false",
+    "API_ADDR": "https://api.bufferapp.com"
+  }
+}

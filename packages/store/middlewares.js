@@ -15,6 +15,7 @@ import profileSidebarMiddleware from '@bufferapp/publish-profile-sidebar/middlew
 import clientAccessMiddleware from '@bufferapp/client-access/middleware';
 import bootstrapMiddleware from '@bufferapp/publish-bootstrap/middleware';
 import userMiddleware from '@bufferapp/publish-data-user/middleware';
+import orgMiddleware from '@bufferapp/publish-data-organizations/middleware';
 import profilesMiddleware from '@bufferapp/publish-data-profiles/middleware';
 import productFeatureMiddleware from '@bufferapp/product-features/middleware';
 import i18nMiddleware from '@bufferapp/publish-i18n/middleware';
@@ -31,7 +32,6 @@ import manageAppsMiddleware from '@bufferapp/manage-apps-extras/middleware';
 import twoFactorAuthMiddleware from '@bufferapp/publish-two-factor-auth/middleware';
 import dateTimePreferencesMiddleware from '@bufferapp/date-time-preferences/middleware';
 import maintenanceRedirectMiddleware from '@bufferapp/maintenance-redirect/middleware';
-import defaultPageMiddleware from '@bufferapp/default-page/middleware';
 import instagramDirectPostingModalMiddleware from '@bufferapp/publish-ig-direct-posting-modal/middleware';
 import notificationsProviderMiddleware from '@bufferapp/publish-notifications-provider/middleware';
 import profilesDisconnectedModalMiddleware from '@bufferapp/publish-profiles-disconnected-modal/middleware';
@@ -75,6 +75,7 @@ const composedMiddlewares = history =>
       clientAccessMiddleware,
       bootstrapMiddleware,
       userMiddleware,
+      orgMiddleware,
       profilesMiddleware,
       productFeatureMiddleware,
       queueMiddleware,
@@ -95,7 +96,6 @@ const composedMiddlewares = history =>
       modalsMiddleware,
       twoFactorAuthMiddleware,
       dateTimePreferencesMiddleware,
-      defaultPageMiddleware,
       instagramDirectPostingModalMiddleware,
       maintenanceRedirectMiddleware,
       draftsMiddleware,

@@ -3,7 +3,7 @@ export default (
   action
 ) => {
   switch (action.type) {
-    case 'APP_INIT':
+    case 'INIT_STRIPE_DETAILS':
       return {
         ...state,
         stripe: window._stripe,

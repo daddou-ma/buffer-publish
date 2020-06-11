@@ -13,10 +13,8 @@ describe('middleware', () => {
     const store = {
       dispatch: jest.fn(),
       getState: () => ({
-        appSidebar: {
-          user: {
-            plan: 'premium_business',
-          },
+        user: {
+          plan: 'premium_business',
         },
       }),
     };
@@ -36,10 +34,8 @@ describe('middleware', () => {
     const store = {
       dispatch: jest.fn(),
       getState: () => ({
-        appSidebar: {
-          user: {
-            plan: 'small',
-          },
+        user: {
+          plan: 'small',
         },
       }),
     };
@@ -59,10 +55,8 @@ describe('middleware', () => {
     const store = {
       dispatch: jest.fn(),
       getState: () => ({
-        appSidebar: {
-          user: {
-            plan: 'pro',
-          },
+        user: {
+          plan: 'pro',
         },
       }),
     };

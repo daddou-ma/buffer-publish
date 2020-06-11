@@ -26,12 +26,10 @@ describe('TabNavigation', () => {
       },
       isLockedProfile: false,
     },
-    appSidebar: {
-      user: {
-        canStartProTrial: true,
-        trial: {
-          onTrial: false,
-        },
+    user: {
+      canStartProTrial: true,
+      trial: {
+        onTrial: false,
       },
     },
     generalSettings: {

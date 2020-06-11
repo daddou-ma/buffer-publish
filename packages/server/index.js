@@ -1,12 +1,11 @@
 const isProduction = process.env.NODE_ENV === 'production';
-
-/**
- * In standalone mode, load env vars right away
- */
 const isStandalone = process.env.STANDALONE === 'true';
+const usePrecompiledBundles = process.env.USE_PRECOMPILED_BUNDLES === 'true';
+
 const standalone = require('./standalone'); // eslint-disable-line
 if (isStandalone) {
   standalone.loadEnv();
+  standalone.serveStaticAssets();
 }
 
 /**
@@ -44,6 +43,8 @@ const checkToken = require('./rpc/checkToken');
 const PublishAPI = require('./publishAPI');
 const userParser = require('./parsers/src/userParser');
 const userMethod = require('./rpc/user/index');
+const orgParser = require('./parsers/src/orgParser');
+const orgsMethod = require('./rpc/organizations/index');
 const profilesMethod = require('./rpc/profiles/index');
 const pusherAuth = require('./lib/pusher');
 const maintenanceHandler = require('./lib/maintenanceHandler');
@@ -77,7 +78,11 @@ if (!isStandalone) {
 }
 
 // Load our static assets manifest
-const staticAssets = getStaticAssets({ isProduction, isStandalone });
+const staticAssets = getStaticAssets({
+  isProduction,
+  isStandalone,
+  usePrecompiledBundles,
+});
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -170,7 +175,13 @@ app.get('*', (req, res) => {
       bufflog.error(`Error prefetching profiles: ${err.message}`, err);
       return undefined;
     }),
-  ]).then(([user, profiles]) => {
+    orgsMethod
+      .fn(null, req, res, { PublishAPI, parsers: { orgParser } })
+      .catch(err => {
+        bufflog.error(`Error prefetching organizations: ${err.message}`, err);
+        return undefined;
+      }),
+  ]).then(([user, profiles, organizations]) => {
     res.send(
       getHtml({
         isProduction,
@@ -182,6 +193,7 @@ app.get('*', (req, res) => {
         modalValue,
         user,
         profiles,
+        organizations,
       })
     );
   });
@@ -189,7 +201,7 @@ app.get('*', (req, res) => {
 
 server.listen(PORT, () => {
   if (isStandalone) {
-    standalone.onBoot();
+    standalone.onBoot({ usePrecompiledBundles });
   } else {
     console.log(`listening on port ${PORT}`); // eslint-disable-line
   }

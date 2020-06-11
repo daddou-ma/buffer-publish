@@ -4,8 +4,6 @@ exports[`Modals renders a connected disconnected profiles modal 1`] = `<Connect(
 
 exports[`Modals renders a connected upgrade modal 1`] = `<Connect(AppModals) />`;
 
-exports[`Modals renders a connected welcome modal 1`] = `<Connect(AppModals) />`;
-
 exports[`Modals renders disconnected profiles modal 1`] = `
 <React.Fragment>
   <Connect(ProfilesDisconnectedModal) />
@@ -17,11 +15,5 @@ exports[`Modals renders nothing when no modals are visible 1`] = `<React.Fragmen
 exports[`Modals renders upgrade modal 1`] = `
 <React.Fragment>
   <Connect(SwitchPlanModal) />
-</React.Fragment>
-`;
-
-exports[`Modals renders welcome modal 1`] = `
-<React.Fragment>
-  <Connect(WelcomeModal) />
 </React.Fragment>
 `;

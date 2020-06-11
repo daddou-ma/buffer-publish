@@ -6,7 +6,7 @@ describe('middleware', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const action = {
-      type: 'APP_INIT',
+      type: 'INIT_FEATURES',
     };
     middleware({ dispatch })(next)(action);
     expect(next).toBeCalledWith(action);

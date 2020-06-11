@@ -4,7 +4,7 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { actions as generalSettingsActions } from '@bufferapp/publish-general-settings/reducer';
+import { actions as igDirectPostingActions } from '@bufferapp/publish-ig-direct-posting-modal/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { campaignScheduled, campaignSent } from '@bufferapp/publish-routes';
 import { actionTypes, actions } from './reducer';
@@ -23,22 +23,6 @@ export default ({ dispatch, getState }) => next => action => {
           },
         })
       );
-
-      if (getState().appSidebar.user.plan !== 'awesome') {
-        const sidebar = getState().profileSidebar;
-        const profileId = sidebar.selectedProfileId;
-        const isIGBusiness = sidebar.selectedProfile.service_type === 'business';
-        if (!isIGBusiness) {
-          dispatch(
-            dataFetchActions.fetch({
-              name: 'checkInstagramBusiness',
-              args: {
-                profileId,
-              },
-            })
-          );
-        }
-      }
       break;
     }
     case `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`:
@@ -92,7 +76,7 @@ export default ({ dispatch, getState }) => next => action => {
       if (action.args.recheck) {
         if (action.result.is_business) {
           dispatch(
-            generalSettingsActions.handleSetUpDirectPostingClick({
+            igDirectPostingActions.handleSetUpDirectPostingClick({
               profileId: action.args.profileId,
             })
           );

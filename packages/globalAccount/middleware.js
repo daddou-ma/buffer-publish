@@ -19,7 +19,7 @@ export default ({ dispatch, getState }) => next => action => {
     case `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(
         analyticsActions.init(state.globalAccount._id, {
-          name: state.appSidebar.user.name,
+          name: state.user.name,
           email: state.globalAccount.email,
           productSolutionName: state.globalAccount.productSolutionName || null,
         })

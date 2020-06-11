@@ -5,9 +5,7 @@
   "main": "index.js",
   "author": "pioul06+github@gmail.com",
   "dependencies": {
-    "@bufferapp/publish-composer-user-tags": "2.0.0"
-  },
-  "devDependencies": {
+    "@bufferapp/publish-composer-user-tags": "2.0.0",
     "autoprefixer": "7.1.2",
     "autoprefixer-loader": "^3.2.0",
     "element-closest": "^2.0.2",

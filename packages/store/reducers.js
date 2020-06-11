@@ -13,7 +13,6 @@ import languageSettingsReducer from '@bufferapp/language-preferences/reducer';
 import i18nReducer from '@bufferapp/publish-i18n/reducer';
 import profileSidebarReducer from '@bufferapp/publish-profile-sidebar/reducer';
 import clientAccessReducer from '@bufferapp/client-access/reducer';
-import appSidebarReducer from '@bufferapp/app-sidebar/lib/reducer';
 import productFeaturesReducer from '@bufferapp/product-features/reducer';
 import asyncDataFetchReducer from '@bufferapp/async-data-fetch/lib/reducer';
 import notificationsReducer from '@bufferapp/notifications/lib/reducer';
@@ -49,10 +48,12 @@ import plansReducer from '@bufferapp/publish-plans/reducer';
 import temporaryBannerReducer from '@bufferapp/publish-temporary-banner/reducer';
 import creditCardFormReducer from '@bufferapp/publish-credit-card-form/reducer';
 import userReducer from '@bufferapp/publish-data-user/reducer';
+import orgReducer from '@bufferapp/publish-data-organizations/reducer';
 import profilesReducer from '@bufferapp/publish-data-profiles/reducer';
 
 export default {
   user: userReducer,
+  organizations: orgReducer,
   publishProfiles: profilesReducer,
   form: formReducer,
   queue: queueReducer,
@@ -64,7 +65,6 @@ export default {
   tabs: tabsReducer,
   profileSidebar: profileSidebarReducer,
   clientAccess: clientAccessReducer,
-  appSidebar: appSidebarReducer,
   asyncDataFetch: asyncDataFetchReducer,
   notifications: notificationsReducer,
   environment: environmentReducer,

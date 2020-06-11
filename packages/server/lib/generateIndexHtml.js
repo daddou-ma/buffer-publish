@@ -26,6 +26,7 @@ const getHtml = ({
   modalValue,
   user,
   profiles,
+  organizations,
 }) => {
   return fs
     .readFileSync(join(__dirname, '..', 'index.html'), 'utf8')
@@ -47,7 +48,14 @@ const getHtml = ({
     .replace('{{{userScript}}}', getUserScript({ id: userId }))
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
     .replace('{{{segmentScript}}}', getSegmentScript({ isProduction }))
-    .replace('{{{bufferData}}}', getBufferDataScript({ user, profiles }))
+    .replace(
+      '{{{bufferData}}}',
+      getBufferDataScript({
+        user,
+        profiles,
+        organizations,
+      })
+    )
     .replace(
       '{{{bugsnagScript}}}',
       getBugsnagScript({ userId, isProduction, isStandalone })

@@ -18,13 +18,11 @@ describe('CtaBanner', () => {
       });
 
       store = storeFake({
-        appSidebar: {
-          user: {
-            trial: {
-              onTrial: true, // user has to be on a trial for the Banner to be displayed
-            },
-            plan: 'premium_business',
+        user: {
+          trial: {
+            onTrial: true, // user has to be on a trial for the Banner to be displayed
           },
+          plan: 'premium_business',
         },
         ctaBanner: {
           profileCount: 1,

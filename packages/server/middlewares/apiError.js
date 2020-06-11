@@ -4,7 +4,7 @@ module.exports = (err, req, res) => {
   // eslint-disable-line no-unused-vars
   bufflog.error(`Publish API error: ${err.message}`, err);
   if (err.httpCode) {
-    const filteredError = Object.assign({}, err);
+    const filteredError = { ...err };
     const { httpCode } = err;
     delete filteredError.httpCode;
     res.status(httpCode).send(filteredError);
