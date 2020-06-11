@@ -30,6 +30,7 @@ export default connect(
       awesomeToProUpgradeDetails:
         state.temporaryBanner.awesomeToProUpgradeDetails,
       awesomeToProMessageKey: state.temporaryBanner.awesomeToProMessageKey,
+      displayRetiringSocialLoginBanner: state.user.hasPasswordSet === false,
     };
   },
   dispatch => ({
