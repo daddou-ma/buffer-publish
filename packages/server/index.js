@@ -1,5 +1,3 @@
-const datadogRum = require('@datadog/browser-rum');
-
 const isProduction = process.env.NODE_ENV === 'production';
 const isStandalone = process.env.STANDALONE === 'true';
 const usePrecompiledBundles = process.env.USE_PRECOMPILED_BUNDLES === 'true';
@@ -24,7 +22,9 @@ if (isProduction && !isStandalone) {
     logInjection: true,
   });
   // enable Datadog Real User Monitoring
-  datadogRum.init({
+  // eslint-disable-next-line global-require
+  const ddRum = require('@datadog/browser-rum').datadogRum;
+  ddRum.init({
     applicationId: process.env.DD_RUM_APP_ID,
     clientToken: process.env.DD_RUM_CLIENT_TOKEN,
     datacenter: 'us',
