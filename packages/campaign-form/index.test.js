@@ -6,6 +6,7 @@ import {
   render,
   screen,
   waitFor,
+  cleanup,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
 import '@bufferapp/publish-web/components/i18n';
 import RPCClient from '@bufferapp/micro-rpc-client';
@@ -182,6 +183,7 @@ describe('CampaignForm | user interaction', () => {
     const { container } = render(<CampaignForm />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
+    cleanup();
   });
 
   test('returns to campaigns when click cancel inside the form', () => {
