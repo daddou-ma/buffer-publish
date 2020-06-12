@@ -72,20 +72,28 @@ const buildUser = build('User', {
   },
 });
 
+const buildOrganization = build('Organization', {
+  fields: {
+    id: sequence(s => `organization${s}`),
+  },
+});
+
 const buildProfile = build('Profile', {
   fields: {
     id: sequence(s => `profile${s}`),
     ownerId: fake(f => f.random.uuid()),
+    organizationId: fake(f => f.random.uuid()),
     service: 'twitter',
+    type: 'twitter',
     service_type: 'profile',
-    handle: 'mayauribe',
-    serviceUsername: 'mayauribe',
+    handle: 'buffertest',
+    serviceUsername: 'buffertest',
     serviceId: '96414483',
-    service_username: 'mayauribe',
+    service_username: 'buffertest',
     isManager: true,
     business: true,
     should_post_direct: true,
-    formatted_username: '@mayauribe',
+    formatted_username: '@buffertest',
     pausedSchedules: [],
     schedules,
     subprofiles: [],
@@ -128,6 +136,7 @@ const buildPost = build('Post', {
       isRetweet: false,
       postAction: 'This post will be sent today at 11:00 AM (BST).',
     },
+    text: 'text',
     postContent: {
       text: fake(f => f.lorem.words()),
       type: 'text',
@@ -135,6 +144,13 @@ const buildPost = build('Post', {
     media: {},
     imageSrc: null,
     campaignDetails: null,
+    statistics: {
+      retweets: 10,
+      favorites: 29,
+      mentions: 0,
+      clicks: 1,
+      reach: 3,
+    },
   },
 });
 
@@ -169,4 +185,5 @@ export {
   buildCampaign,
   buildPost,
   buildPostWithImage,
+  buildOrganization,
 };
