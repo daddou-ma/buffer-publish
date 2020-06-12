@@ -386,7 +386,7 @@ Now you can run Cypress (this command opens the interative Cypress UI, which als
 yarn run cypress open
 ```
 
-Now you can write and run tests in the (`cypress/e2e`)[/cypress/e2e] folder! 💥
+Now you can write and run tests in the [`cypress/e2e`](/cypress/e2e) folder! 💥
 
 **Important note**: When Cypress runs in CI (GitHub Actions) we use [an endpoint to create temporary test-users](https://github.com/bufferapp/buffer-web/blob/058e6e6c0636378dcaf5237636d7a8a4de4ed5c1/api/controllers/E2ETestController.php#L38) - you can see that logic in the [`login.js` support file](/cypress/support/login.js#L1). However, when running locally we only run Cypress against your local `admin@bufferapp.com` user. (Unless you configured otherwise in your `cypress:setup` script.) This means that right now our test suite can only run against one type of user at a time. This is a known limitation that we'll probably want to fix, either with creating more types of test users in CI (and supporting something similar locally), or potentially mocking user responses.
 
