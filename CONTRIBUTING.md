@@ -13,7 +13,7 @@ Here are some guidelines to make it as easy and clear as possible.
 - [How Packages Communicate 📦](#how-packages-communicate-)
 - [Styling Styleguide 💅](#styling-styleguide-)
 - [Working on RPCs](#working-on-rpcs)
-- [Testing 🧪](#testing-)
+- [Running Tests 🧪](#running-tests-)
 - [Storybook](#storybook)
 - [Reporting bugs 🐛](#reporting-bugs-)
 
@@ -346,13 +346,15 @@ const Title = styled.div`
 ## Working with RPCs
 Refer to this [Notion](https://threads.com/34376693228) for more details on how to use the newest technique when working on RPCs.
 
-## Testing 🧪
+## Running Tests 🧪
 
-### Testing in Publish
+For details on how we approach testing for Publish, check out the [**🧪 Publish Testing Guide**](https://www.notion.so/buffer/Testing-Guide-0a4e06a524ec445dbb1b9bfdc667c3ba) in Notion.
+
+### Unit and Integration Tests
 
 For most of our tests in Publish we use Jest.
 
-To run the entire test suite, use `yarn test`:
+To run the entire suite of unit and integration tests, use `yarn test`:
 
 ```bash
 $ yarn run test
@@ -369,6 +371,25 @@ You can also test a specific file by calling `jest` directly:
 ```bash
 $ yarn run jest packages/trial/middleware.test.js
 ```
+
+### Cypress (E2E)
+
+Running Cypress locally requires some initial setup. First run the `cypress:setup` script which sets up the necessary configuration and access tokens to run Cypress against your local environment. (Be sure that `buffer-dev` is up and running with at least `web` before you run this command.)
+
+```bash
+$ yarn run cypress:setup
+```
+
+Now you can run Cypress (this command opens the interative Cypress UI, which also watches for file changes!)
+
+```bash
+yarn run cypress open
+```
+
+Now you can write and run tests in the (`cypress/e2e`)[/cypress/e2e] folder! 💥
+
+**Important note**: When Cypress runs in CI (GitHub Actions) we use [an endpoint to create temporary test-users](https://github.com/bufferapp/buffer-web/blob/058e6e6c0636378dcaf5237636d7a8a4de4ed5c1/api/controllers/E2ETestController.php#L38) - you can see that logic in the [`login.js` support file](/cypress/support/login.js#L1). However, when running locally we only run Cypress against your local `admin@bufferapp.com` user. (Unless you configured otherwise in your `cypress:setup` script.) This means that right now our test suite can only run against one type of user at a time. This is a known limitation that we'll probably want to fix, either with creating more types of test users in CI (and supporting something similar locally), or potentially mocking user responses.
+
 
 ### Debugging 🕵️‍♂️
 
