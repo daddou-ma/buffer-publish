@@ -44,6 +44,7 @@ const buildUser = build('User', {
       'campaigns',
       'instagram',
       'first_comment',
+      'stories_groups',
       'twitter-march-18-changes',
     ],
     hasTwentyFourHourTimeFormat: false,
@@ -101,6 +102,26 @@ const buildProfile = build('Profile', {
     avatar_https:
       'https://pbs.twimg.com/profile_images/1134013946929778693/DFqLN6GR_normal.png',
     shouldShowGridPreview: true,
+    shouldHideAdvancedAnalytics: false,
+  },
+});
+
+const igProfileFields = buildProfile({
+  overrides: {
+    service: 'instagram',
+    type: 'instagram',
+    handle: 'buffertestig',
+    serviceUsername: 'buffertestig',
+    service_username: 'buffertestig',
+    formatted_username: '@buffertestig',
+    serviceId: '96414484',
+  },
+});
+
+const buildIGProfile = build('IGProfile', {
+  fields: {
+    ...igProfileFields,
+    id: sequence(s => `profile${s}`),
   },
 });
 
@@ -176,14 +197,60 @@ const postFields = buildPost({
 });
 
 const buildPostWithImage = build('PostWithImage', {
-  fields: postFields,
+  fields: {
+    ...postFields,
+    id: sequence(s => `post${s}`),
+    postContent: {
+      text: fake(f => f.lorem.words()),
+      type: 'image',
+    },
+  },
+});
+
+const buildStoryGroup = build('StoryGroup', {
+  fields: {
+    id: sequence(s => `story${s}`),
+    profileId: fake(f => f.random.uuid()),
+    type: 'storyGroup',
+    day: 'Thursday 10th October 2019',
+    createdAt: 1570632827,
+    scheduled_at: 1570729980,
+    scheduledAt: 1570729980,
+    due_at: 1570729980,
+    profileTimezone: 'Europe/Madrid',
+    isPastDue: false,
+    storyDetails: {
+      creatorName: 'buffertestig',
+      avatarUrl: 'https://fake-image.url',
+      dueTime: '7:53 pm',
+      createdAt: 'October 9th at 4:53 PM (CEST)',
+      status: 'scheduled',
+      stories: [
+        {
+          _id: fake(f => f.random.uuid()),
+          id: fake(f => f.random.uuid()),
+          note: fake(f => f.lorem.words()),
+          type: 'image',
+          order: 1,
+          asset_url: 'https://fake-image.url',
+          thumbnail_url: 'https://fake-image.url',
+          is_video_processing: false,
+        },
+      ],
+      twentyfourHourTime: false,
+      storyAction:
+        "You will receive a reminder on October 10th when it's time to post.",
+    },
+  },
 });
 
 export {
   buildUser,
   buildProfile,
+  buildIGProfile,
   buildCampaign,
   buildPost,
   buildPostWithImage,
   buildOrganization,
+  buildStoryGroup,
 };
