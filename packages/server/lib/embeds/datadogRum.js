@@ -8,7 +8,7 @@ const clientToken = process.env.DD_RUM_CLIENT_TOKEN;
 const ddRumScript = `
 <script src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"></script>
 <script>
-  window.DD_RUM.init({
+  window.DD_RUM && window.DD_RUM.init({
     applicationId: '${applicationId}',
     clientToken: '${clientToken}',
     datacenter: 'us',
