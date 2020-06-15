@@ -125,11 +125,56 @@ const buildIGProfile = build('IGProfile', {
   },
 });
 
+const buildEmptyCampaign = build('EmptyCampaign', {
+  fields: {
+    id: sequence(s => `campaign${s}`),
+    globalOrganizationId: sequence(s => `globalorg${s}`),
+    name: fake(f => f.lorem.words()),
+    color: '#00C8CF',
+    lastUpdated: 'Updated 7 hours ago',
+    dateRange: null,
+    sent: 0,
+    scheduled: 0,
+    channels: null,
+    items: [],
+  },
+});
+
 const buildCampaign = build('Campaign', {
   fields: {
     id: sequence(s => `campaign${s}`),
+    globalOrganizationId: sequence(s => `globalorg${s}`),
     name: fake(f => f.lorem.words()),
     color: '#00C8CF',
+    updatedAt: 1592210436,
+    createdAt: 1583163158,
+    startDate: 1583582940,
+    endDate: 1590746400,
+    dateRange: 'Mar 7-7, 2020',
+    sent: 0,
+    scheduled: 1,
+    items: [
+      {
+        postContent: {
+          imageUrls: [],
+          linkAttachment: {},
+          links: [],
+          retweetCommentLinks: [],
+          text: 'Testing',
+          type: 'text',
+        },
+        postDetails: {
+          error: null,
+          errorLink: null,
+          isCustomScheduled: false,
+          isInstagramReminder: false,
+          isRetweet: false,
+          postAction: 'This post will be sent June 16th at 10:00 AM (CEST).',
+        },
+        profileId: fake(f => f.random.uuid()),
+        user: buildUser(),
+      },
+    ],
   },
 });
 
@@ -249,6 +294,7 @@ export {
   buildProfile,
   buildIGProfile,
   buildCampaign,
+  buildEmptyCampaign,
   buildPost,
   buildPostWithImage,
   buildOrganization,

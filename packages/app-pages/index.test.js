@@ -36,7 +36,7 @@ const profileIG = buildIGProfile({
   },
 });
 
-const appInitialState = {
+const initialState = {
   user: buildUser(),
   profileSidebar: {
     selectedProfileId: profileTwitter.id,
@@ -213,14 +213,12 @@ describe('AppPages | user interaction', () => {
     jest.clearAllMocks();
   });
 
-  test('non IG account should render proper tabs', () => {
+  it('should render proper tabs for non IG account', () => {
     render(
       <TestDragDropContainer>
         <AppPagesWithRouter />
       </TestDragDropContainer>,
-      {
-        initialState: appInitialState,
-      }
+      { initialState }
     );
     const {
       queueTab,
@@ -246,16 +244,14 @@ describe('AppPages | user interaction', () => {
     expect(shopGridTab).not.toBeInTheDocument();
   });
 
-  test('should navigate through queues and render posts', async () => {
+  it('should navigate through queues and render posts', async () => {
     mockApiCalls();
 
     render(
       <TestDragDropContainer>
         <AppPagesWithRouter />
       </TestDragDropContainer>,
-      {
-        initialState: appInitialState,
-      }
+      { initialState }
     );
 
     expect(screen.queryByText(/share now/i)).toBeNull();
