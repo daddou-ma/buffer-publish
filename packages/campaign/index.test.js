@@ -94,9 +94,11 @@ const mockApiCalls = () => {
 };
 
 const campaignsListFields = async () => {
+  /*
   const campaignsHeading = await screen.findByRole('heading', {
     name: /campaigns/i,
   });
+  */
   const totalScheduled = await screen.findByText(
     `${campaign.scheduled} Scheduled`
   );
@@ -109,7 +111,6 @@ const campaignsListFields = async () => {
   });
 
   return {
-    campaignsHeading,
     totalScheduled,
     totalSent,
     createCampaignBtn,
@@ -168,10 +169,10 @@ describe('ViewCampaign | user interaction', () => {
       totalSent,
       createCampaignBtn,
       viewCampaignBtn,
-      campaignsHeading,
+      // campaignsHeading,
     } = await campaignsListFields();
 
-    expect(campaignsHeading).toBeInTheDocument();
+    // expect(campaignsHeading).toBeInTheDocument();
     expect(createCampaignBtn).toBeInTheDocument();
     expect(screen.getByText(campaign.name)).toBeInTheDocument();
     expect(totalScheduled).toBeInTheDocument();
