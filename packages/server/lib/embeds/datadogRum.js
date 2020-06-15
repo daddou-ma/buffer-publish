@@ -6,7 +6,7 @@ const applicationId = process.env.DD_RUM_APP_ID;
 const clientToken = process.env.DD_RUM_CLIENT_TOKEN;
 
 const ddRumScript = `
-<script src = 'https://www.datadoghq-browser-agent.com/datadog-rum-us.js'>
+<script src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"></script>
 <script>
   window.DD_RUM.init({
     applicationId: '${applicationId}',
