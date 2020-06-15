@@ -21,15 +21,6 @@ if (isProduction && !isStandalone) {
     port: 8126,
     logInjection: true,
   });
-  // enable Datadog Real User Monitoring
-  // eslint-disable-next-line global-require
-  const ddRum = require('@datadog/browser-rum').datadogRum;
-  ddRum.init({
-    applicationId: process.env.DD_RUM_APP_ID,
-    clientToken: process.env.DD_RUM_CLIENT_TOKEN,
-    datacenter: 'us',
-    sampleRate: 100,
-  });
 }
 
 const http = require('http');

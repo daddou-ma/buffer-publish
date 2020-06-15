@@ -12,6 +12,7 @@ const getBugsnagScript = require('./embeds/bugsnag');
 const getUserScript = require('./embeds/user');
 const getBufferDataScript = require('./embeds/bufferData');
 const getBundleReminderHtml = require('./embeds/bundleReminder');
+const getDatadogRumScript = require('./embeds/datadogRum');
 
 const { getFaviconCode } = require('./favicon');
 const { getRuntimeScript } = require('./assets');
@@ -67,6 +68,10 @@ const getHtml = ({
     .replace(
       '{{{bundleReminder}}}',
       getBundleReminderHtml({ isProduction, isStandalone })
+    )
+    .replace(
+      '{{{datadogRum}}}',
+      getDatadogRumScript({ isProduction, isStandalone })
     );
 };
 
