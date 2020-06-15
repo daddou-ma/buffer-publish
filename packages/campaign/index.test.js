@@ -93,17 +93,23 @@ const mockApiCalls = () => {
   });
 };
 
-const campaignsListFields = () => {
-  const totalScheduled = screen.getByText(`${campaign.scheduled} Scheduled`);
-  const totalSent = screen.getByText(`${campaign.scheduled} Scheduled`);
-  const createCampaignBtn = screen.getByRole('button', {
+const campaignsListFields = async () => {
+  const campaignsHeading = await screen.findByRole('heading', {
+    name: /campaigns/i,
+  });
+  const totalScheduled = await screen.findByText(
+    `${campaign.scheduled} Scheduled`
+  );
+  const totalSent = await screen.findByText(`${campaign.scheduled} Scheduled`);
+  const createCampaignBtn = await screen.findByRole('button', {
     name: /create a campaign/i,
   });
-  const viewCampaignBtn = screen.getByRole('button', {
+  const viewCampaignBtn = await screen.findByRole('button', {
     name: /view campaign/i,
   });
 
   return {
+    campaignsHeading,
     totalScheduled,
     totalSent,
     createCampaignBtn,
@@ -157,19 +163,15 @@ describe('ViewCampaign | user interaction', () => {
     );
 
     /* List campaigns assertions */
-    await waitFor(() => {
-      expect(
-        screen.getByRole('heading', { name: /campaigns/i })
-      ).toBeInTheDocument();
-    });
-
     const {
       totalScheduled,
       totalSent,
       createCampaignBtn,
       viewCampaignBtn,
-    } = campaignsListFields();
+      campaignsHeading,
+    } = await campaignsListFields();
 
+    expect(campaignsHeading).toBeInTheDocument();
     expect(createCampaignBtn).toBeInTheDocument();
     expect(screen.getByText(campaign.name)).toBeInTheDocument();
     expect(totalScheduled).toBeInTheDocument();
