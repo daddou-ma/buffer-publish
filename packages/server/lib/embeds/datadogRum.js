@@ -19,7 +19,7 @@ const ddRumScript = `
 `;
 
 /**
- * Onlu embed in production, non-standalone mode
+ * Only embed in production, non-standalone mode
  */
 module.exports = ({ isProduction, isStandalone }) =>
   isProduction && !isStandalone ? ddRumScript : '';
