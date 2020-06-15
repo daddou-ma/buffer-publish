@@ -51,20 +51,19 @@ const TemporaryDashboardBanner = ({
   }
 
   // Displays Temporary Banner with retiring social login message. We will want to remove after June 30th
-  
-  // Commenting out this method for now until we find the most accurate way to tell whether a user has a password set. 
-  // if (displayRetiringSocialLoginBanner) {
-  //   const retiringSocialLoginMessage = `We are retiring social login on June 30, 2020. Please 
-  //     <a href="https://login.buffer.com/forgot-password" style="color: rgb(44, 75, 255); text-decoration: none;">
-  //       set up a password to ensure continued access.
-  //     </a>
-  //   `;
-  //   return TopBanner({
-  //     status: hidden,
-  //     content: retiringSocialLoginMessage,
-  //     onCloseBanner: onCloseBannerClick,
-  //   });
-  // }
+
+  if (displayRetiringSocialLoginBanner) {
+    const retiringSocialLoginMessage = `We are retiring social login on June 30, 2020. Please 
+      <a href="https://login.buffer.com/forgot-password" style="color: rgb(44, 75, 255); text-decoration: none;">
+        set up a password to ensure continued access.
+      </a>
+    `;
+    return TopBanner({
+      status: hidden,
+      content: retiringSocialLoginMessage,
+      onCloseBanner: onCloseBannerClick,
+    });
+  }
 
   // Displays Temporary Banner With Admin Message.
   if (enabledApplicationModes && getEnabledApplicationMode(dashboardBanner)) {
