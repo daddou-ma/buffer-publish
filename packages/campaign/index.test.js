@@ -74,13 +74,15 @@ const mockApiCalls = () => {
   });
 };
 
-const campaignDetailsFields = async () => {
+const campaignDetailsFields = async campaignDetails => {
   const totalScheduled = await screen.findByText(
-    `${campaign.scheduled} Scheduled`
+    `${campaignDetails.scheduled} Scheduled`
   );
-  const totalSent = await screen.findByText(`${campaign.scheduled} Scheduled`);
-  const dateRange = await screen.findByText(campaign.dateRange);
-  const campaignName = screen.getByText(campaign.name);
+  const totalSent = await screen.findByText(
+    `${campaignDetails.scheduled} Scheduled`
+  );
+  const dateRange = await screen.findByText(campaignDetails.dateRange);
+  const campaignName = screen.getByText(campaignDetails.name);
 
   return {
     totalScheduled,
@@ -161,7 +163,7 @@ describe('ViewCampaign | user interaction', () => {
       campaignName,
       totalScheduled,
       totalSent,
-    } = await campaignDetailsFields();
+    } = await campaignDetailsFields(campaign);
 
     expect(dateRange).toBeInTheDocument();
     expect(campaignName).toBeInTheDocument();
@@ -183,7 +185,7 @@ describe('ViewCampaign | user interaction', () => {
       dateRange: viewDateRange,
       totalScheduled: viewTotalScheduled,
       totalSent: viewTotalSent,
-    } = await campaignDetailsFields();
+    } = await campaignDetailsFields(campaign);
 
     expect(viewCampaignName).toBeInTheDocument();
     expect(viewDateRange).toBeInTheDocument();
