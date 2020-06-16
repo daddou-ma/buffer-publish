@@ -9,6 +9,7 @@ import {
   buildUser,
   buildProfile,
   buildCampaign,
+  buildCampaignItem,
   buildOrganization,
 } from '@bufferapp/publish-test-utils/generate-data';
 import TestBackend from 'react-dnd-test-backend';
@@ -37,6 +38,12 @@ const profileTwitter = buildProfile({
 
 const day = new Date('2020-01-02T11:00:00.000Z');
 const scheduledAt = getTime(day);
+const campaignItem = buildCampaignItem({
+  overrides: {
+    profileId: profileTwitter.id,
+    user,
+  },
+});
 const campaign = buildCampaign({
   overrides: {
     updatedAt: getTime(new Date()),
@@ -46,30 +53,11 @@ const campaign = buildCampaign({
     dateRange: 'Jan 2-2, 2020',
     sent: 0,
     scheduled: 1,
-    items: [
-      {
-        postContent: {
-          imageUrls: [],
-          linkAttachment: {},
-          links: [],
-          retweetCommentLinks: [],
-          text: 'Testing',
-          type: 'text',
-        },
-        postDetails: {
-          error: null,
-          errorLink: null,
-          isCustomScheduled: false,
-          isInstagramReminder: false,
-          isRetweet: false,
-          postAction: 'This post will be sent June 16th at 10:00 AM (CEST).',
-        },
-        profileId: profileTwitter.id,
-        user,
-      },
-    ],
+    items: [campaignItem],
   },
 });
+const campaigns = [campaign];
+
 const initialState = {
   user,
   profileSidebar: {
@@ -79,16 +67,14 @@ const initialState = {
   },
 };
 
-const campaigns = [campaign];
-
 const mockApiCalls = () => {
   jest.spyOn(RPCClient.prototype, 'call').mockImplementation(name => {
-    if (name === 'getCampaignsList') {
-      return Promise.resolve(campaigns);
-    }
-    if (name === 'getCampaign') {
-      return Promise.resolve(campaign);
-    }
+    const result = {
+      getCampaignsList: campaigns,
+      getCampaign: campaign,
+      default: { fake: 'yes' },
+    };
+    return Promise.resolve(result[name] || result.default);
   });
 };
 
@@ -193,21 +179,31 @@ describe('ViewCampaign | user interaction', () => {
     userEvent.click(viewCampaignBtn);
 
     const { scheduledLink, sentLink } = await campaignsQueueFields();
+    expect(scheduledLink).toBeInTheDocument();
+    expect(sentLink).toBeInTheDocument();
 
     const {
-      dateRange: viewDaterange,
+      campaignName: viewCampaignName,
+      dateRange: viewDateRange,
       totalScheduled: viewTotalScheduled,
       totalSent: viewTotalSent,
     } = await campaignDetailsFields();
 
-    expect(scheduledLink).toBeInTheDocument();
-    expect(sentLink).toBeInTheDocument();
-    expect(viewDaterange).toBeInTheDocument();
+    expect(viewCampaignName).toBeInTheDocument();
+    expect(viewDateRange).toBeInTheDocument();
     expect(viewTotalScheduled).toBeInTheDocument();
     expect(viewTotalSent).toBeInTheDocument();
+    expect(screen.getAllByText(/create post/i)).toHaveLength(2);
     expect(screen.getByText(/edit campaign/i)).toBeInTheDocument();
+    expect(screen.getByText(/delete campaign/i)).toBeInTheDocument();
     expect(screen.getByText(/view report/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/share now/i).length).toBe(1);
+    expect(screen.getByText(profileTwitter.handle)).toBeInTheDocument();
+    expect(screen.getByText(campaignItem.postContent.text)).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /^delete/i })).toHaveLength(1);
+    expect(screen.getAllByRole('button', { name: /^edit/i })).toHaveLength(1);
+    expect(screen.getAllByRole('button', { name: /^share now/i })).toHaveLength(
+      1
+    );
 
     expect(rpcCall).toHaveBeenCalledWith('getCampaign', {
       campaignId: campaign.id,

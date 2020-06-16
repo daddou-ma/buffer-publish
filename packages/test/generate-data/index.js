@@ -140,6 +140,29 @@ const buildEmptyCampaign = build('EmptyCampaign', {
   },
 });
 
+const buildCampaignItem = build('CampaignItem', {
+  fields: {
+    postContent: {
+      imageUrls: [],
+      linkAttachment: {},
+      links: [],
+      retweetCommentLinks: [],
+      text: fake(f => f.lorem.words()),
+      type: 'text',
+    },
+    postDetails: {
+      error: null,
+      errorLink: null,
+      isCustomScheduled: false,
+      isInstagramReminder: false,
+      isRetweet: false,
+      postAction: 'This post will be sent June 16th at 10:00 AM (CEST).',
+    },
+    profileId: fake(f => f.random.uuid()),
+    user: buildUser(),
+  },
+});
+
 const buildCampaign = build('Campaign', {
   fields: {
     id: sequence(s => `campaign${s}`),
@@ -153,28 +176,7 @@ const buildCampaign = build('Campaign', {
     dateRange: 'Mar 7-7, 2020',
     sent: 0,
     scheduled: 1,
-    items: [
-      {
-        postContent: {
-          imageUrls: [],
-          linkAttachment: {},
-          links: [],
-          retweetCommentLinks: [],
-          text: 'Testing',
-          type: 'text',
-        },
-        postDetails: {
-          error: null,
-          errorLink: null,
-          isCustomScheduled: false,
-          isInstagramReminder: false,
-          isRetweet: false,
-          postAction: 'This post will be sent June 16th at 10:00 AM (CEST).',
-        },
-        profileId: fake(f => f.random.uuid()),
-        user: buildUser(),
-      },
-    ],
+    items: [buildCampaignItem()],
   },
 });
 
@@ -294,6 +296,7 @@ export {
   buildProfile,
   buildIGProfile,
   buildCampaign,
+  buildCampaignItem,
   buildEmptyCampaign,
   buildPost,
   buildPostWithImage,
