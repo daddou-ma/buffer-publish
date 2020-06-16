@@ -117,6 +117,89 @@ function generateUserMenuItems({
   return [...userMenuItems.top, ...extraItems];
 }
 
+const orgSwitcher = {
+  title: 'Organizations',
+  menuItems: [
+    {
+      id: '1',
+      title: 'My Organization 1',
+      selected: false,
+      onItemClick: () => console.info('My Organization 1'),
+      subItems: [
+        {
+          id: '1',
+          title: '@lunnaflyers',
+          network: 'instagram',
+        },
+        {
+          id: '2',
+          title: '@lunnasneakers',
+          network: 'twitter',
+        },
+        {
+          id: '3',
+          title: 'Lunna Sneakers US Page',
+          network: 'facebook',
+        },
+        {
+          id: '4',
+          title: 'Lunna Sneakers',
+          network: 'pinterest',
+        },
+        {
+          id: '5',
+          title: 'Lunna Sneakers US',
+          network: 'facebook',
+        },
+        {
+          id: '6',
+          title: '@lunnastwitter',
+          network: 'twitter',
+        },
+      ],
+    },
+    {
+      id: '2',
+      title: 'My Organization Super Long',
+      selected: true,
+      onItemClick: () => console.info('My Organization 2'),
+      subItems: [
+        {
+          id: '1',
+          title: '@bufferinsta',
+          network: 'instagram',
+        },
+        {
+          id: '2',
+          title: '@buffer',
+          network: 'twitter',
+        },
+      ],
+    },
+  ],
+};
+
+const generateOrgSwitcherItems = (organizations, selectedOrganizationId) => {
+  /** @todo only show for 2+ orgs */
+
+  /** @todo i18n translation? */
+  const orgSwitcherItems = {
+    title: 'Organizations',
+    menuItems: [],
+  };
+
+  organizations.forEach(org => {
+    orgSwitcherItems.menuItems.push({
+      id: org.id,
+      title: org.name,
+      selected: selectedOrganizationId === org.id,
+      onItemClick: () => console.debug('Clicked', org),
+    });
+  });
+
+  return orgSwitcherItems;
+};
+
 const AppShell = ({
   children,
   user,
@@ -134,6 +217,8 @@ const AppShell = ({
   hideMenuItems,
   enabledProducts,
   featureFlips,
+  organizations,
+  selectedOrganizationId,
 }) => {
   if (hideAppShell) {
     return children;
@@ -163,6 +248,10 @@ const AppShell = ({
         }),
       }}
       helpMenuItems={helpMenuItems(t)}
+      orgSwitcher={generateOrgSwitcherItems(
+        organizations,
+        selectedOrganizationId
+      )}
       bannerOptions={
         bannerOptions
           ? {
@@ -201,6 +290,18 @@ AppShell.propTypes = {
   hideMenuItems: PropTypes.bool.isRequired,
   enabledProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
   featureFlips: PropTypes.arrayOf(PropTypes.string).isRequired,
+  organizations: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      locked: PropTypes.bool,
+      name: PropTypes.string,
+      ownerId: PropTypes.string,
+      ownerEmail: PropTypes.string,
+      planCode: PropTypes.number,
+      isAdmin: PropTypes.bool,
+    })
+  ).isRequired,
+  selectedOrganizationId: PropTypes.string.isRequired,
 };
 
 AppShell.defaultProps = {
