@@ -107,58 +107,24 @@ const draftPosts = [draft];
 
 const mockApiCalls = () => {
   jest.spyOn(RPCClient.prototype, 'call').mockImplementation(name => {
-    if (name === 'getCounts') {
-      return Promise.resolve({
+    const result = {
+      getCounts: {
         counts: {
           drafts_needs_approval_true: 0,
           drafts_needs_approval_false: 0,
         },
-      });
-    }
-    if (name === 'queuedPosts') {
-      return Promise.resolve({
-        total: 2,
-        updates: queuedPosts,
-      });
-    }
-    if (name === 'getStoryGroups') {
-      return Promise.resolve({
-        total: 1,
-        updates: storyGroups,
-      });
-    }
-    if (name === 'getHashtagGroups') {
-      return Promise.resolve({
-        data: {
-          snippets: [],
-        },
-      });
-    }
-    if (name === 'sentPosts') {
-      return Promise.resolve({
-        total: 1,
-        updates: sentPosts,
-      });
-    }
-    if (name === 'gridPosts') {
-      return Promise.resolve({
-        total: 0,
-        updates: [],
-      });
-    }
-    if (name === 'pastRemindersPosts') {
-      return Promise.resolve({
-        total: 1,
-        updates: pastRemindersPosts,
-      });
-    }
-    if (name === 'draftPosts') {
-      return Promise.resolve({
-        total: 1,
-        drafts: draftPosts,
-      });
-    }
-    return Promise.resolve({ fake: 'yes' });
+      },
+      pastRemindersPosts: { total: 1, updates: pastRemindersPosts },
+      queuedPosts: { total: 2, updates: queuedPosts },
+      getStoryGroups: { total: 1, updates: storyGroups },
+      getHashtagGroups: { data: { snippets: [] } },
+      sentPosts: { total: 1, updates: sentPosts },
+      gridPosts: { total: 0, updates: [] },
+      draftPosts: { total: 1, drafts: draftPosts },
+      default: { fake: 'yes' },
+    };
+
+    return Promise.resolve(result[name] || result.default);
   });
 };
 
