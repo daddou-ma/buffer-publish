@@ -42,7 +42,16 @@ export default ({ dispatch, getState }) => next => action => {
       });
       break;
     }
-    case `SELECT_ORGANIZATION`: {
+
+    case 'ORGANIZATIONS_INITIALIZED': {
+      dispatch({
+        type: 'ORGANIZATION_SELECTED',
+        organizations: action?.organizations,
+        selected: action?.selectedOrganization,
+      });
+      break;
+    }
+    case 'SELECT_ORGANIZATION': {
       const list = mapSelectedOrganization({
         id: action.id,
         organizations: getState().organizations.list,
