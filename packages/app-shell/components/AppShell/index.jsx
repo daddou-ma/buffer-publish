@@ -132,6 +132,7 @@ const AppShell = ({
   bannerKey,
   hideAppShell,
   hideMenuItems,
+  enabledProducts,
   featureFlips,
 }) => {
   if (hideAppShell) {
@@ -144,6 +145,7 @@ const AppShell = ({
     <BDSAppShell
       displaySkipLink
       content={children}
+      enabledProducts={enabledProducts}
       featureFlips={featureFlips}
       activeProduct="publish"
       user={{
@@ -197,6 +199,7 @@ AppShell.propTypes = {
   }),
   hideAppShell: PropTypes.bool.isRequired,
   hideMenuItems: PropTypes.bool.isRequired,
+  enabledProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
   featureFlips: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

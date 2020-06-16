@@ -16,6 +16,7 @@ export const initialState = {
   },
   bannerKey: null,
   bannerOptions: undefined,
+  enabledProducts: [],
   featureFlips: []
 };
 
@@ -38,14 +39,13 @@ export default (state = initialState, action) => {
           action.result.canStartProTrial && !action.result.isBusinessTeamMember,
       };
     case `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      const featureFlips = [];
-      if (hasReply(action.result.productlinks)) {
-        featureFlips.push('enableReply');
-      }
+      const productLinks = action.result.productlinks || [];
+      const enabledProducts = productLinks.map(product => product.productName);
 
       return {
         ...state,
-        featureFlips
+        enabledProducts,
+        featureFlips: action.result.featureFlips
       };
     case actionTypes.SET_BANNER_OPTIONS:
       return {
@@ -77,7 +77,3 @@ export const actions = {
     key,
   }),
 };
-
-const hasReply = (productLinks = []) => {
-  return productLinks.find(element => element.productName === 'reply');
-}

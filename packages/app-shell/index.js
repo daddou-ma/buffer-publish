@@ -21,6 +21,7 @@ export default connect(
       state.onboarding.canSeeOnboardingPage &&
       state.router.location.pathname === newBusinessTrialistsRoute,
     hideMenuItems: state.appShell.hideMenuItems,
+    enabledProducts: state.appShell.enabledProducts,
     featureFlips: state.appShell.featureFlips,
   }),
 
