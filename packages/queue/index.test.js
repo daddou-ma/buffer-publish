@@ -5,6 +5,7 @@ import {
   waitFor,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
 import userEvent from '@testing-library/user-event';
+import { getTime } from '@bufferapp/publish-utils/date';
 import {
   buildUser,
   buildProfile,
@@ -73,11 +74,6 @@ const queueComponents = () => {
     date,
     slots,
   };
-};
-
-const getTime = date => {
-  const day = date || new Date();
-  return Math.floor(day / 1000);
 };
 
 describe('QueuedPosts | user interaction', () => {
