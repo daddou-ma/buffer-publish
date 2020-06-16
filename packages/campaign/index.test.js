@@ -5,6 +5,7 @@ import {
   screen,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
 import userEvent from '@testing-library/user-event';
+import { getTime } from '@bufferapp/publish-utils/date';
 import {
   buildUser,
   buildProfile,
@@ -22,11 +23,6 @@ const AppPagesWithRouter = withRouter(AppPages);
 
 // eslint-disable-next-line react/prop-types
 const _TestContextContainer = ({ children }) => <>{children}</>;
-
-const getTime = date => {
-  const day = date || new Date();
-  return Math.floor(day / 1000);
-};
 
 const organization = buildOrganization();
 const user = buildUser();

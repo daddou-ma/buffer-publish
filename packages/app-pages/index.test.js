@@ -4,6 +4,7 @@ import {
   render,
   screen,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
+import { getTime } from '@bufferapp/publish-utils/date';
 import userEvent from '@testing-library/user-event';
 import {
   buildUser,
@@ -47,12 +48,8 @@ const initialState = {
 // eslint-disable-next-line react/prop-types
 const _TestContextContainer = ({ children }) => <>{children}</>;
 
-const getTime = date => {
-  const day = date || new Date();
-  return Math.floor(day / 1000);
-};
-
 const campaign = buildCampaign();
+
 const day1 = new Date('2020-01-01T11:00:00.000Z');
 const queuedPost1 = buildPostWithImage({
   overrides: {
@@ -69,7 +66,6 @@ const queuedPost2 = buildPostWithImage({
     scheduledAt: getTime(day2),
   },
 });
-const queuedPosts = [queuedPost1, queuedPost2];
 
 const sentPost = buildPostWithImage({
   overrides: {
@@ -77,7 +73,6 @@ const sentPost = buildPostWithImage({
     scheduledAt: getTime(new Date('2019-12-27T11:00:00.000Z')),
   },
 });
-const sentPosts = [sentPost];
 
 const storyGroup = buildStoryGroup({
   overrides: {
@@ -85,7 +80,6 @@ const storyGroup = buildStoryGroup({
     scheduledAt: getTime(new Date('2020-01-10T11:00:00.000Z')),
   },
 });
-const storyGroups = [storyGroup];
 
 const pastReminder = buildPostWithImage({
   overrides: {
@@ -93,7 +87,6 @@ const pastReminder = buildPostWithImage({
     scheduledAt: getTime(new Date('2019-12-10T11:00:00.000Z')),
   },
 });
-const pastRemindersPosts = [pastReminder];
 
 const draft = buildPostWithImage({
   overrides: {
@@ -101,7 +94,6 @@ const draft = buildPostWithImage({
     scheduledAt: getTime(new Date('2019-12-12T11:00:00.000Z')),
   },
 });
-const draftPosts = [draft];
 
 const mockApiCalls = () => {
   jest.spyOn(RPCClient.prototype, 'call').mockImplementation(name => {
@@ -112,13 +104,13 @@ const mockApiCalls = () => {
           drafts_needs_approval_false: 0,
         },
       },
-      pastRemindersPosts: { total: 1, updates: pastRemindersPosts },
-      queuedPosts: { total: 2, updates: queuedPosts },
-      getStoryGroups: { total: 1, updates: storyGroups },
+      pastRemindersPosts: { total: 1, updates: [pastReminder] },
+      queuedPosts: { total: 2, updates: [queuedPost1, queuedPost2] },
+      getStoryGroups: { total: 1, updates: [storyGroup] },
       getHashtagGroups: { data: { snippets: [] } },
-      sentPosts: { total: 1, updates: sentPosts },
+      sentPosts: { total: 1, updates: [sentPost] },
       gridPosts: { total: 0, updates: [] },
-      draftPosts: { total: 1, drafts: draftPosts },
+      draftPosts: { total: 1, drafts: [draft] },
       default: { fake: 'yes' },
     };
 

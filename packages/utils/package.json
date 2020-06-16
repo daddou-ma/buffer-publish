@@ -1,0 +1,15 @@
+{
+  "name": "@bufferapp/publish-utils",
+  "version": "2.0.0",
+  "description": "Utilitarian package",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "maria.u@buffer.com",
+  "dependencies": {},
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}
