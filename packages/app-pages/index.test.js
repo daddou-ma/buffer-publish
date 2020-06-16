@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import {
   render,
   screen,
-  waitFor,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
 import userEvent from '@testing-library/user-event';
 import {
@@ -290,11 +289,9 @@ describe('AppPages | user interaction', () => {
     expect(shopGridTab).toBeInTheDocument();
     expect(settingsTab).toBeInTheDocument();
 
-    await waitFor(() => {
-      expect(
-        screen.getByText(/what would you like to share?/i)
-      ).toBeInTheDocument();
-    });
+    expect(
+      await screen.findByText(/what would you like to share?/i)
+    ).toBeInTheDocument();
 
     const { dayButton, weekButton, monthButton } = mainQueueButtons();
     const today = screen.getByText(/today/i);
@@ -308,9 +305,8 @@ describe('AppPages | user interaction', () => {
     expect(date).toBeInTheDocument();
     expect(slots.length).toBeGreaterThan(0);
 
-    await waitFor(() => {
-      expect(screen.getAllByText(/share now/i).length).toBe(2);
-    });
+    const shareNow = await screen.findAllByText(/share now/i);
+    expect(shareNow.length).toBe(2);
     expect(screen.getByText(queuedPost1.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(queuedPost2.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(campaign.name)).toBeInTheDocument();
@@ -342,15 +338,12 @@ describe('AppPages | user interaction', () => {
     /* Stories tab asserts */
     userEvent.click(storiesTab);
 
-    await waitFor(() => {
-      expect(
-        screen.getByText(/what would you like to add to your story?/i)
-      ).toBeInTheDocument();
-    });
+    expect(
+      await screen.findByText(/what would you like to add to your story?/i)
+    ).toBeInTheDocument();
 
-    await waitFor(() => {
-      expect(screen.queryAllByText(/share now/i).length).toBe(1);
-    });
+    const shareNowStories = await screen.findAllByText(/share now/i);
+    expect(shareNowStories.length).toBe(1);
     expect(screen.getByText(/preview/i)).toBeInTheDocument();
     expect(screen.queryByText(/share again/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/send to mobile/i)).not.toBeInTheDocument();
@@ -364,11 +357,9 @@ describe('AppPages | user interaction', () => {
       screen.getByRole('button', { name: /stories/i })
     ).toBeInTheDocument();
 
-    await waitFor(() => {
-      expect(
-        screen.getByText(pastReminder.postContent.text)
-      ).toBeInTheDocument();
-    });
+    expect(
+      await screen.findByText(pastReminder.postContent.text)
+    ).toBeInTheDocument();
     expect(screen.queryByText(/share again/i)).toBeInTheDocument();
     expect(screen.queryByText(/send to mobile/i)).toBeInTheDocument();
     expect(rpcCall).toHaveBeenCalledWith('pastRemindersPosts', {
@@ -380,9 +371,7 @@ describe('AppPages | user interaction', () => {
     /* Analytics tab asserts */
     userEvent.click(analyticsTab);
 
-    await waitFor(() => {
-      expect(screen.getByText(/your sent posts/i)).toBeInTheDocument();
-    });
+    expect(await screen.findByText(/your sent posts/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /posts/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /overview/i })).toBeInTheDocument();
 
@@ -397,10 +386,8 @@ describe('AppPages | user interaction', () => {
 
     /* Drafts tab asserts */
     userEvent.click(draftsTab);
-    await waitFor(() => {
-      expect(screen.getByText(/create a new draft/i)).toBeInTheDocument();
-    });
 
+    expect(await screen.findByText(/create a new draft/i)).toBeInTheDocument();
     expect(screen.getByText(draft.postContent.text)).toBeInTheDocument();
     expect(screen.queryByText(/add to queue/i)).toBeInTheDocument();
     expect(screen.queryByText(/share again/i)).not.toBeInTheDocument();

@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import {
   render,
   screen,
-  waitFor,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
 import userEvent from '@testing-library/user-event';
 import {
@@ -93,46 +92,47 @@ const mockApiCalls = () => {
   });
 };
 
-const campaignsListFields = async () => {
-  /*
-  const campaignsHeading = await screen.findByRole('heading', {
-    name: /campaigns/i,
-  });
-  */
+const campaignDetailsFields = async () => {
   const totalScheduled = await screen.findByText(
     `${campaign.scheduled} Scheduled`
   );
   const totalSent = await screen.findByText(`${campaign.scheduled} Scheduled`);
+  const dateRange = await screen.findByText(campaign.dateRange);
+  const campaignName = screen.getByText(campaign.name);
+
+  return {
+    totalScheduled,
+    totalSent,
+    dateRange,
+    campaignName,
+  };
+};
+
+const campaignsListFields = async () => {
   const createCampaignBtn = await screen.findByRole('button', {
     name: /create a campaign/i,
   });
   const viewCampaignBtn = await screen.findByRole('button', {
     name: /view campaign/i,
   });
+  const campaignsHeading = await screen.findByRole('heading', {
+    name: /^campaigns/i,
+  });
 
   return {
-    totalScheduled,
-    totalSent,
     createCampaignBtn,
     viewCampaignBtn,
+    campaignsHeading,
   };
 };
 
 const campaignsQueueFields = async () => {
   const scheduledLink = await screen.findByRole('link', { name: /scheduled/i });
   const sentLink = await screen.findByRole('link', { name: /sent/i });
-  const dateRange = await screen.findByText(campaign.dateRange);
-  const totalScheduledLabel = await screen.findByText(
-    `${campaign.scheduled} Scheduled`
-  );
-  const totalSentLabel = await screen.findByText(`${campaign.sent} Sent`);
 
   return {
     scheduledLink,
     sentLink,
-    dateRange,
-    totalScheduledLabel,
-    totalSentLabel,
   };
 };
 
@@ -165,19 +165,26 @@ describe('ViewCampaign | user interaction', () => {
 
     /* List campaigns assertions */
     const {
-      totalScheduled,
-      totalSent,
       createCampaignBtn,
       viewCampaignBtn,
-      // campaignsHeading,
+      campaignsHeading,
     } = await campaignsListFields();
 
-    // expect(campaignsHeading).toBeInTheDocument();
     expect(createCampaignBtn).toBeInTheDocument();
-    expect(screen.getByText(campaign.name)).toBeInTheDocument();
+    expect(campaignsHeading).toBeInTheDocument();
+    expect(viewCampaignBtn).toBeInTheDocument();
+
+    const {
+      dateRange,
+      campaignName,
+      totalScheduled,
+      totalSent,
+    } = await campaignDetailsFields();
+
+    expect(dateRange).toBeInTheDocument();
+    expect(campaignName).toBeInTheDocument();
     expect(totalScheduled).toBeInTheDocument();
     expect(totalSent).toBeInTheDocument();
-    expect(viewCampaignBtn).toBeInTheDocument();
 
     expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
     expect(rpcCall).toHaveBeenCalledTimes(1);
@@ -185,19 +192,19 @@ describe('ViewCampaign | user interaction', () => {
     /* Campaign queue assertions */
     userEvent.click(viewCampaignBtn);
 
+    const { scheduledLink, sentLink } = await campaignsQueueFields();
+
     const {
-      scheduledLink,
-      sentLink,
-      dateRange,
-      totalScheduledLabel,
-      totalSentLabel,
-    } = await campaignsQueueFields();
+      dateRange: viewDaterange,
+      totalScheduled: viewTotalScheduled,
+      totalSent: viewTotalSent,
+    } = await campaignDetailsFields();
 
     expect(scheduledLink).toBeInTheDocument();
     expect(sentLink).toBeInTheDocument();
-    expect(dateRange).toBeInTheDocument();
-    expect(totalScheduledLabel).toBeInTheDocument();
-    expect(totalSentLabel).toBeInTheDocument();
+    expect(viewDaterange).toBeInTheDocument();
+    expect(viewTotalScheduled).toBeInTheDocument();
+    expect(viewTotalSent).toBeInTheDocument();
     expect(screen.getByText(/edit campaign/i)).toBeInTheDocument();
     expect(screen.getByText(/view report/i)).toBeInTheDocument();
     expect(screen.getAllByText(/share now/i).length).toBe(1);
