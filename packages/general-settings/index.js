@@ -33,6 +33,9 @@ export default connect(
     showModal: state.generalSettings.showModal,
     loadingShuffle: state.generalSettings.loadingShuffle,
     linkShortening: state.generalSettings.linkShortening,
+    linkShorteningEnabled:
+      state.generalSettings.linkShortening?.linkShorteners &&
+      state.generalSettings.linkShortening?.linkShorteners[0].selected !== true,
   }),
   (dispatch, ownProps) => ({
     onDirectPostingClick: () => {

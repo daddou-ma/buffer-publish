@@ -50,6 +50,7 @@ export default (state = initialState, action) => {
         },
         trackingSettings: action.trackingSettings,
         remindersAreEnabled: !action.profile.directPostingEnabled,
+        linkShorteningEnabled: false,
       };
     case `changeLinkShortener_${dataFetchActionTypes.FETCH_START}`:
       return {
@@ -74,9 +75,14 @@ export default (state = initialState, action) => {
     case `changeLinkShortener_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { linkShorteners } = action.result;
       const hasShortenersWithLogins =
-        (linkShorteners && linkShorteners.filter(shortener => shortener.login)) ||
+        (linkShorteners &&
+          linkShorteners.filter(shortener => shortener.login)) ||
         [];
       const isBitlyConnected = hasShortenersWithLogins.length > 0;
+
+      const noLinkShorteningDomain = linkShorteners.find(
+        ls => ls.domain === 'No Shortening'
+      );
 
       return {
         ...state,
@@ -88,6 +94,7 @@ export default (state = initialState, action) => {
           linkShorteners,
           isBitlyConnected,
         },
+        linkShorteningEnabled: !noLinkShorteningDomain.selected,
       };
     }
     case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
@@ -100,7 +107,7 @@ export default (state = initialState, action) => {
         showGACustomizationForm: false,
       };
     case `getGATrackingSettings_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const trackingSettings = action.result.trackingSettings;
+      const { trackingSettings } = action.result;
       return {
         ...state,
         showGACustomizationForm: true,
