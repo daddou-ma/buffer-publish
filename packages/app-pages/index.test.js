@@ -50,20 +50,18 @@ const _TestContextContainer = ({ children }) => <>{children}</>;
 
 const campaign = buildCampaign();
 
-const day1 = new Date('2020-01-01T11:00:00.000Z');
 const queuedPost1 = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
-    scheduledAt: getTime(day1),
+    scheduledAt: getTime(new Date('2020-01-01T11:00:00.000Z')),
     campaignDetails: campaign,
   },
 });
 
-const day2 = new Date('2020-01-02T11:00:00.000Z');
 const queuedPost2 = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
-    scheduledAt: getTime(day2),
+    scheduledAt: getTime(new Date('2020-01-02T11:00:00.000Z')),
   },
 });
 
