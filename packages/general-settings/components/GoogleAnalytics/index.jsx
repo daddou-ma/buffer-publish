@@ -64,6 +64,12 @@ const customizeButtonStyle = {
   flexBasis: '170px',
 };
 
+const onHoverGoogleAnalytics = linkShorteningEnabled => {
+  if (!linkShorteningEnabled) {
+    console.log('here i am!');
+  }
+};
+
 const GoogleAnalytics = ({
   googleAnalyticsIsEnabled,
   showGACustomizationForm,
@@ -79,6 +85,8 @@ const GoogleAnalytics = ({
   isManager,
   isBusinessAccount,
   features,
+  linkShorteningEnabled,
+  showLinkShortenerErrorMessage,
 }) => (
   <div style={googleAnalyticsWrapperStyle}>
     <div style={headerTextWrapperStyle}>
@@ -102,6 +110,14 @@ const GoogleAnalytics = ({
             <strong>Enable Campaign Tracking</strong>
           </Text>
         </div>
+        {showLinkShortenerErrorMessage && (
+          <Text type="p" color="darkRed">
+            <strong>
+              Please choose a link shortener above if you&apos;d like to enable
+              campaign tracking.
+            </strong>
+          </Text>
+        )}
         <div style={enableGoogleAnalyticsStyle}>
           <Text type="p">
             This enables Google Analytics Tracking via UTM parameters added to
@@ -122,8 +138,12 @@ const GoogleAnalytics = ({
           on={googleAnalyticsIsEnabled}
           size={'small'}
           onClick={() =>
-            onToggleGoogleAnalyticsClick(!googleAnalyticsIsEnabled)
+            onToggleGoogleAnalyticsClick(
+              !googleAnalyticsIsEnabled,
+              linkShorteningEnabled
+            )
           }
+          onHover={() => onHoverGoogleAnalytics(linkShorteningEnabled)}
         />
       </div>
     </div>
@@ -201,10 +221,11 @@ const GoogleAnalytics = ({
 );
 
 GoogleAnalytics.defaultProps = {
-  trackingSettings: null,
   utmCampaign: null,
   utmSource: null,
   utmMedium: null,
+  linkShorteningEnabled: false,
+  showLinkShortenerErrorMessage: false,
 };
 
 GoogleAnalytics.propTypes = {
@@ -222,6 +243,8 @@ GoogleAnalytics.propTypes = {
   isManager: PropTypes.bool.isRequired,
   isBusinessAccount: PropTypes.bool.isRequired,
   features: PropTypes.any.isRequired, // eslint-disable-line
+  linkShorteningEnabled: PropTypes.bool,
+  showLinkShortenerErrorMessage: PropTypes.bool,
 };
 
 export default reduxForm({

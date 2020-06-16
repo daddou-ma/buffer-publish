@@ -36,6 +36,8 @@ export default connect(
     linkShorteningEnabled:
       state.generalSettings.linkShortening?.linkShorteners &&
       state.generalSettings.linkShortening?.linkShorteners[0].selected !== true,
+    showLinkShortenerErrorMessage:
+      state.generalSettings.showLinkShortenerErrorMessage,
   }),
   (dispatch, ownProps) => ({
     onDirectPostingClick: () => {
@@ -88,13 +90,22 @@ export default connect(
         })
       );
     },
-    onToggleGoogleAnalyticsClick: googleAnalyticsIsEnabled => {
-      dispatch(
-        actions.handleGoogleAnalyticsToggle({
-          profileId: ownProps.profileId,
-          utmTrackingChoice: googleAnalyticsIsEnabled ? 'enabled' : 'disabled',
-        })
-      );
+    onToggleGoogleAnalyticsClick: (
+      googleAnalyticsIsEnabled,
+      linkShorteningEnabled
+    ) => {
+      if (linkShorteningEnabled) {
+        dispatch(
+          actions.handleGoogleAnalyticsToggle({
+            profileId: ownProps.profileId,
+            utmTrackingChoice: googleAnalyticsIsEnabled
+              ? 'enabled'
+              : 'disabled',
+          })
+        );
+      } else {
+        dispatch(actions.showLinkShortenerError());
+      }
     },
     onSaveGATrackingSettingsClick: (utmCampaign, utmSource, utmMedium) => {
       dispatch(

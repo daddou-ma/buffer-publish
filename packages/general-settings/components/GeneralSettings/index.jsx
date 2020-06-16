@@ -46,6 +46,8 @@ const GeneralSettings = ({
   isDisconnectedProfile,
   isBusinessAccount,
   linkShortening,
+  linkShorteningEnabled,
+  showLinkShortenerErrorMessage,
 }) => {
   if (isLockedProfile) {
     return <LockedProfileNotification />;
@@ -92,6 +94,8 @@ const GeneralSettings = ({
           utmMedium={utmMedium}
           onChangeUtmMedium={onChangeUtmMedium}
           onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
+          linkShorteningEnabled={linkShorteningEnabled}
+          showLinkShortenerErrorMessage={showLinkShortenerErrorMessage}
         />
         {isManager && (
           <ShuffleQueue
@@ -116,10 +120,7 @@ GeneralSettings.defaultProps = {
   profileService: null,
   profileName: null,
   avatarUrl: null,
-  linkShorteners: null,
-  loadingLinkShorteners: true,
   onLinkShortenerOptionSelect: null,
-  selectedShortener: null,
   isManager: true,
   showGACustomizationForm: false,
   googleAnalyticsIsEnabled: false,
@@ -130,7 +131,9 @@ GeneralSettings.defaultProps = {
   isLockedProfile: false,
   isDisconnectedProfile: false,
   loadingShuffle: false,
+  linkShorteningEnabled: false,
   linkShortening: {},
+  showLinkShortenerErrorMessage: false,
 };
 
 GeneralSettings.propTypes = {
@@ -140,6 +143,8 @@ GeneralSettings.propTypes = {
   isInstagramBusiness: PropTypes.bool,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
   onDisconnectBitlyURLClick: PropTypes.func.isRequired,
+  showLinkShortenerErrorMessage: PropTypes.bool,
+  linkShorteningEnabled: PropTypes.bool,
   linkShortening: PropTypes.shape({
     isBitlyConnected: PropTypes.bool,
     isManager: PropTypes.bool,

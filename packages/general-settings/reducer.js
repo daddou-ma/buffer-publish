@@ -16,6 +16,7 @@ export const actionTypes = keyWrapper('GENERAL_SETTINGS', {
   SHUFFLE_QUEUE: 0,
   CONFIRM_SHUFFLE_QUEUE: 0,
   CLOSE_MODAL: 0,
+  SHOW_LINK_SHORTENER_ERROR: 0,
 });
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   googleAnalyticsIsEnabled: false,
   remindersAreEnabled: false,
   showModal: false,
+  showLinkShortenerErrorMessage: false,
 };
 
 export default (state = initialState, action) => {
@@ -94,12 +96,18 @@ export default (state = initialState, action) => {
           linkShorteners,
           isBitlyConnected,
         },
+        showLinkShortenerErrorMessage: false,
         linkShorteningEnabled: !noLinkShorteningDomain.selected,
       };
     }
     case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
       return {
         ...state,
+      };
+    case actionTypes.SHOW_LINK_SHORTENER_ERROR:
+      return {
+        ...state,
+        showLinkShortenerErrorMessage: true,
       };
     case `getGATrackingSettings_${dataFetchActionTypes.FETCH_START}`:
       return {
@@ -253,5 +261,8 @@ export const actions = {
   }),
   handleCloseModal: () => ({
     type: actionTypes.CLOSE_MODAL,
+  }),
+  showLinkShortenerError: () => ({
+    type: actionTypes.SHOW_LINK_SHORTENER_ERROR,
   }),
 };
