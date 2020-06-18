@@ -101,8 +101,6 @@ export default connect(
               : 'disabled',
           })
         );
-      } else {
-        dispatch(actions.showLinkShortenerError());
       }
     },
     onSaveGATrackingSettingsClick: (utmCampaign, utmSource, utmMedium) => {
