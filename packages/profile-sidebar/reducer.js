@@ -160,31 +160,35 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         profileList: action.result,
-        profiles: action.result,
+        profiles: filterProfilesByOrg(
+          action.result,
+          state.organization,
+          state.isOrganizationSwitcherEnabled
+        ),
         hasInstagram: action.result.some(p => p.service === 'instagram'),
         hasFacebook: action.result.some(p => p.service === 'facebook'),
         hasTwitter: action.result.some(p => p.service === 'twitter'),
       };
     }
-    // case `ORGANIZATION_SELECTED`: {
-    //   const selectedOrganization = action.selected;
-    //   let { profiles } = state;
+    case `ORGANIZATION_SELECTED`: {
+      const selectedOrganization = action.selected;
+      let { profiles } = state;
 
-    //   if (profiles) {
-    //     const { profileList } = state;
-    //     profiles = filterProfilesByOrg(
-    //       profileList,
-    //       selectedOrganization,
-    //       state.isOrganizationSwitcherEnabled
-    //     );
-    //   }
+      if (profiles) {
+        const { profileList } = state;
+        profiles = filterProfilesByOrg(
+          profileList,
+          selectedOrganization,
+          state.isOrganizationSwitcherEnabled
+        );
+      }
 
-    //   return {
-    //     ...state,
-    //     organization: selectedOrganization,
-    //     profiles,
-    //   };
-    // }
+      return {
+        ...state,
+        organization: selectedOrganization,
+        profiles,
+      };
+    }
     case actionTypes.SELECT_PROFILE: {
       return {
         ...state,

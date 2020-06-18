@@ -41,7 +41,7 @@ export default connect(state => {
 
   const filteredProfiles = filterProfilesByOrg(
     profiles,
-    currentOrg,
+    { id: currentOrg },
     hasOrgSwitcherFeature
   );
 
