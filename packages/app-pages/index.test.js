@@ -53,6 +53,7 @@ const campaign = buildCampaign();
 const queuedPost1 = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
+    due_at: getTime(new Date('2020-01-01T11:00:00.000Z')),
     scheduledAt: getTime(new Date('2020-01-01T11:00:00.000Z')),
     campaignDetails: campaign,
   },
@@ -61,6 +62,7 @@ const queuedPost1 = buildPostWithImage({
 const queuedPost2 = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
+    due_at: getTime(new Date('2020-01-02T11:00:00.000Z')),
     scheduledAt: getTime(new Date('2020-01-02T11:00:00.000Z')),
   },
 });
@@ -79,10 +81,19 @@ const storyGroup = buildStoryGroup({
   },
 });
 
-const pastReminder = buildPostWithImage({
+const pastReminder1 = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
+    due_at: getTime(new Date('2019-12-10T11:00:00.000Z')),
     scheduledAt: getTime(new Date('2019-12-10T11:00:00.000Z')),
+  },
+});
+
+const pastReminder2 = buildPostWithImage({
+  overrides: {
+    profileId: profileIG.id,
+    due_at: getTime(new Date('2019-12-20T11:00:00.000Z')),
+    scheduledAt: getTime(new Date('2019-12-20T11:00:00.000Z')),
   },
 });
 
@@ -102,8 +113,8 @@ const mockApiCalls = () => {
           drafts_needs_approval_false: 0,
         },
       },
-      pastRemindersPosts: { total: 1, updates: [pastReminder] },
-      queuedPosts: { total: 2, updates: [queuedPost1, queuedPost2] },
+      pastRemindersPosts: { total: 1, updates: [pastReminder1, pastReminder2] },
+      queuedPosts: { total: 2, updates: [queuedPost2, queuedPost1] },
       getStoryGroups: { total: 1, updates: [storyGroup] },
       getHashtagGroups: { data: { snippets: [] } },
       sentPosts: { total: 1, updates: [sentPost] },
@@ -259,9 +270,12 @@ describe('AppPages | user interaction', () => {
     expect(date).toBeInTheDocument();
     expect(slots.length).toBeGreaterThan(0);
 
+    const posts = await screen.findAllByTestId('post');
+    expect(posts).toHaveLength(2);
+    /* Verifying the posts order in the queue */
+    expect(posts[0]).toHaveTextContent(queuedPost1.postContent.text);
+    expect(posts[1]).toHaveTextContent(queuedPost2.postContent.text);
     expect(await screen.findAllByText(/share now/i)).toHaveLength(2);
-    expect(screen.getByText(queuedPost1.postContent.text)).toBeInTheDocument();
-    expect(screen.getByText(queuedPost2.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(campaign.name)).toBeInTheDocument();
 
     expect(rpcCall).toHaveBeenCalledWith('getStoryGroups', {
@@ -307,11 +321,14 @@ describe('AppPages | user interaction', () => {
     expect(
       screen.getByRole('button', { name: /stories/i })
     ).toBeInTheDocument();
-    expect(
-      await screen.findByText(pastReminder.postContent.text)
-    ).toBeInTheDocument();
-    expect(screen.queryByText(/share again/i)).toBeInTheDocument();
-    expect(screen.queryByText(/send to mobile/i)).toBeInTheDocument();
+
+    const reminders = await screen.findAllByTestId('post');
+    expect(reminders).toHaveLength(2);
+    /* Verifying the posts order in the queue */
+    expect(reminders[0]).toHaveTextContent(pastReminder2.postContent.text);
+    expect(reminders[1]).toHaveTextContent(pastReminder1.postContent.text);
+    expect(await screen.findAllByText(/share again/i)).toHaveLength(2);
+    expect(await screen.findAllByText(/send to mobile/i)).toHaveLength(2);
     expect(rpcCall).toHaveBeenCalledWith('pastRemindersPosts', {
       profileId: profileIG.id,
       isFetchingMore: false,

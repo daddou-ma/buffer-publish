@@ -82,7 +82,7 @@ const PastRemindersPosts = ({
   loading,
   userData,
   viewType,
-  postLists,
+  items,
   onEditClick,
   onShareAgainClick,
   onMobileClick,
@@ -126,7 +126,7 @@ const PastRemindersPosts = ({
       {showStoryPreview && (
         <PreviewPopover onCloseClick={onClosePreviewClick} view="queue" />
       )}
-      <React.Fragment>
+      <>
         <ComposerWrapper
           editMode={editMode}
           showComposer={showComposer}
@@ -135,7 +135,7 @@ const PastRemindersPosts = ({
         />
 
         <PostLists
-          postLists={postLists}
+          items={items}
           onEditClick={onEditClick}
           onShareAgainClick={post => onShareAgainClick(post, viewType)}
           onMobileClick={post => onMobileClick(post, viewType)}
@@ -146,7 +146,7 @@ const PastRemindersPosts = ({
           userData={userData}
           onPreviewClick={onPreviewClick}
         />
-      </React.Fragment>
+      </>
     </ErrorBoundary>
   );
 };

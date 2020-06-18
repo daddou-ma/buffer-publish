@@ -77,7 +77,7 @@ NoPostsPublished.defaultProps = {
 const SentPosts = ({
   total,
   loading,
-  postLists,
+  items,
   onEditClick,
   onShareAgainClick,
   onCampaignTagClick,
@@ -143,7 +143,7 @@ const SentPosts = ({
       />
 
       {total > 0 ? (
-        <Fragment>
+        <>
           <div>
             <div style={headerStyle}>
               <div className="js-page-header">
@@ -170,7 +170,7 @@ const SentPosts = ({
               <ComposerPopover onSave={onComposerCreateSuccess} type="sent" />
             )}
             <PostLists
-              postLists={postLists}
+              items={items}
               onEditClick={onEditClick}
               onShareAgainClick={onShareAgainClick}
               onCampaignTagClick={onCampaignTagClick}
@@ -194,7 +194,7 @@ const SentPosts = ({
               />
             </div>
           )}
-        </Fragment>
+        </>
       ) : null}
     </ErrorBoundary>
   );

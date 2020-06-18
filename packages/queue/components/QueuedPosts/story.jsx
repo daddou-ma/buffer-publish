@@ -8,7 +8,7 @@ import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
 
 import QueuedPosts from './index';
-import postLists from './postData';
+import items from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -65,7 +65,7 @@ storiesOf('QueuedPosts', module)
     <QueuedPosts
       total={10}
       loading={false}
-      postLists={postLists}
+      items={items}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -88,7 +88,7 @@ storiesOf('QueuedPosts', module)
     <QueuedPosts
       total={0}
       loading
-      postLists={postLists}
+      items={items}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -110,7 +110,7 @@ storiesOf('QueuedPosts', module)
     <QueuedPosts
       total={10}
       loading={false}
-      postLists={postLists}
+      items={items}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -157,7 +157,7 @@ storiesOf('QueuedPosts', module)
     <QueuedPosts
       total={10}
       loading={false}
-      postLists={postLists}
+      items={items}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}

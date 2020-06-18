@@ -2,50 +2,19 @@
 import { connect } from 'react-redux';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
 import { actions as campaignListActions } from '@bufferapp/publish-campaigns-list';
+import { formatPostLists } from '@bufferapp/publish-queue/util';
 // load the presentational component
 import { actions } from './reducer';
 import PastRemindersWrapper from './components/PastRemindersWrapper';
 import { header, subHeader } from './components/PastRemindersPosts/postData';
 
-const orderPosts = posts =>
-  posts && typeof posts === 'object'
-    ? Object.values(posts).sort((a, b) => b.due_at - a.due_at)
-    : [];
-
-const preparePosts = orderedPosts => {
-  let day;
-  let newList;
-  const result = [];
-
-  orderedPosts.forEach(post => {
-    if (post.storyDetails) {
-      post.postDetails = post.storyDetails;
-    }
-
-    if (post.day !== day) {
-      day = post.day;
-      newList = { listHeader: day, posts: [post] };
-      result.push(newList);
-    } else {
-      // if same day add to posts array of current list
-      newList.posts.push(post);
-    }
-  });
-
-  return result;
-};
-
-const formatPostLists = posts => {
-  const orderedPosts = orderPosts(posts);
-  const postLists = preparePosts(orderedPosts);
-  return postLists;
-};
-
-// default export = container
 export default connect(
   (state, ownProps) => {
     const { profileId } = ownProps;
     const currentProfile = state.pastReminders.byProfileId[profileId];
+    const profileData = state.profileSidebar.profiles.find(
+      p => p.id === ownProps.profileId
+    );
 
     if (currentProfile) {
       return {
@@ -56,7 +25,16 @@ export default connect(
         loadingMore: currentProfile.loadingMore,
         moreToLoad: currentProfile.moreToLoad,
         page: currentProfile.page,
-        postLists: formatPostLists(currentProfile.posts),
+        items: formatPostLists({
+          isManager: profileData.isManager,
+          weekStartsOnMonday: state.user.week_starts_monday,
+          profileService: profileData.service,
+          profileTimezone: profileData.timezone,
+          scheduleSlotsEnabled: false,
+          posts: currentProfile.posts,
+          orderBy: 'due_at',
+          sortOrder: 'desc',
+        }),
         total: currentProfile.total,
         showComposer: state.pastReminders.showComposer,
         showStoriesComposer: state.pastReminders.showStoriesComposer,
