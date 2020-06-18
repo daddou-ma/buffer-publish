@@ -14,7 +14,7 @@ export const filterProfilesByOrg = (
   organization,
   isFeatureEnabled
 ) => {
-  if (!isFeatureEnabled) {
+  if (!isFeatureEnabled || !organization) {
     return profiles;
   }
   return profiles?.filter(

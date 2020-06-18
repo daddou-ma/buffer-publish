@@ -113,3 +113,9 @@ export const campaignSent = {
   route: '/campaigns/:id/sent/',
   goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/sent`),
 };
+
+// Organization Routes
+export const organization = {
+  route: '/org/:id/',
+  goTo: ({ orgId }) => push(`/org/${orgId}`),
+};
