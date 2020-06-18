@@ -145,6 +145,31 @@ export default (state = initialState, action) => {
   let isSearchPopupVisible = false;
   let searchText = null;
   switch (action.type) {
+    case `profiles_${dataFetchActionTypes.FETCH_START}`:
+      // Ignore analyze specific actions so as not to flash loading state
+      if (action.args && action.args.forAnalyze) {
+        return state;
+      }
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      return {
+        ...state,
+        loading: false,
+        profileList: action.result,
+        profiles: filterProfilesByOrg(
+          action.result,
+          state.organization,
+          state.isOrganizationSwitcherEnabled
+        ),
+        hasInstagram: action.result.some(p => p.service === 'instagram'),
+        hasFacebook: action.result.some(p => p.service === 'facebook'),
+        hasTwitter: action.result.some(p => p.service === 'twitter'),
+      };
+    }
     case `ORGANIZATION_SELECTED`: {
       const selectedOrganization = action.selected;
       let { profiles } = state;
@@ -162,49 +187,6 @@ export default (state = initialState, action) => {
         ...state,
         organization: selectedOrganization,
         profiles,
-      };
-    }
-    case `ORGANIZATIONS_INITIALIZED`: {
-      const { selectedOrganization } = action;
-      let { profiles } = state;
-
-      if (profiles) {
-        const { profileList } = state;
-        profiles = filterProfilesByOrg(
-          profileList,
-          selectedOrganization,
-          state.isOrganizationSwitcherEnabled
-        );
-      }
-
-      return {
-        ...state,
-        organization: selectedOrganization,
-        profiles,
-      };
-    }
-    case `profiles_${dataFetchActionTypes.FETCH_START}`:
-      // Ignore analyze specific actions so as not to flash loading state
-      if (action.args && action.args.forAnalyze) {
-        return state;
-      }
-      return {
-        ...state,
-        loading: true,
-      };
-    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      return {
-        ...state,
-        loading: false,
-        profileList: action.result,
-        profiles: filterProfilesByOrg(
-          action.result,
-          state.organization,
-          state.isOrganizationSwitcherEnabled
-        ),
-        hasInstagram: action.result.some(p => p.service === 'instagram'),
-        hasFacebook: action.result.some(p => p.service === 'facebook'),
-        hasTwitter: action.result.some(p => p.service === 'twitter'),
       };
     }
     case actionTypes.SELECT_PROFILE: {
