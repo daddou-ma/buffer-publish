@@ -36,8 +36,6 @@ export default connect(
     linkShorteningEnabled:
       state.generalSettings.linkShortening?.linkShorteners &&
       state.generalSettings.linkShortening?.linkShorteners[0].selected !== true,
-    showLinkShortenerErrorMessage:
-      state.generalSettings.showLinkShortenerErrorMessage,
   }),
   (dispatch, ownProps) => ({
     onDirectPostingClick: () => {

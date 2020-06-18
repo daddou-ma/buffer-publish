@@ -47,7 +47,6 @@ const GeneralSettings = ({
   isBusinessAccount,
   linkShortening,
   linkShorteningEnabled,
-  showLinkShortenerErrorMessage,
 }) => {
   if (isLockedProfile) {
     return <LockedProfileNotification />;
@@ -95,7 +94,6 @@ const GeneralSettings = ({
           onChangeUtmMedium={onChangeUtmMedium}
           onSaveGATrackingSettingsClick={onSaveGATrackingSettingsClick}
           linkShorteningEnabled={linkShorteningEnabled}
-          showLinkShortenerErrorMessage={showLinkShortenerErrorMessage}
         />
         {isManager && (
           <ShuffleQueue
@@ -133,7 +131,6 @@ GeneralSettings.defaultProps = {
   loadingShuffle: false,
   linkShorteningEnabled: false,
   linkShortening: {},
-  showLinkShortenerErrorMessage: false,
 };
 
 GeneralSettings.propTypes = {
@@ -143,7 +140,6 @@ GeneralSettings.propTypes = {
   isInstagramBusiness: PropTypes.bool,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
   onDisconnectBitlyURLClick: PropTypes.func.isRequired,
-  showLinkShortenerErrorMessage: PropTypes.bool,
   linkShorteningEnabled: PropTypes.bool,
   linkShortening: PropTypes.shape({
     isBitlyConnected: PropTypes.bool,

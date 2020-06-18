@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { redDark } from '@bufferapp/ui/style/colors';
 import { Toggle, Input, Card } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
 import { Field, reduxForm } from 'redux-form';
@@ -64,11 +66,14 @@ const customizeButtonStyle = {
   flexBasis: '170px',
 };
 
-const onHoverGoogleAnalytics = linkShorteningEnabled => {
-  if (!linkShorteningEnabled) {
-    console.log('here i am!');
-  }
-};
+const EnableCampaignText = styled(Text)`
+  margin-bottom: 2px;
+`;
+
+const ErrorText = styled(Text)`
+  margin-top: 0px;
+  color: ${redDark};
+`;
 
 const GoogleAnalytics = ({
   googleAnalyticsIsEnabled,
@@ -86,7 +91,6 @@ const GoogleAnalytics = ({
   isBusinessAccount,
   features,
   linkShorteningEnabled,
-  showLinkShortenerErrorMessage,
 }) => (
   <div style={googleAnalyticsWrapperStyle}>
     <div style={headerTextWrapperStyle}>
@@ -106,17 +110,17 @@ const GoogleAnalytics = ({
     <div style={enableCampaignWrapperStyle}>
       <div style={textStyle}>
         <div style={headerTextWrapperStyle}>
-          <Text type="p">
+          <EnableCampaignText type="p">
             <strong>Enable Campaign Tracking</strong>
-          </Text>
+          </EnableCampaignText>
         </div>
-        {showLinkShortenerErrorMessage && (
-          <Text type="p" color="darkRed">
+        {!linkShorteningEnabled && (
+          <ErrorText type="p">
             <strong>
               Please choose a link shortener above if you&apos;d like to enable
               campaign tracking.
             </strong>
-          </Text>
+          </ErrorText>
         )}
         <div style={enableGoogleAnalyticsStyle}>
           <Text type="p">
@@ -143,7 +147,6 @@ const GoogleAnalytics = ({
               linkShorteningEnabled
             )
           }
-          onHover={() => onHoverGoogleAnalytics(linkShorteningEnabled)}
         />
       </div>
     </div>
@@ -225,7 +228,6 @@ GoogleAnalytics.defaultProps = {
   utmSource: null,
   utmMedium: null,
   linkShorteningEnabled: false,
-  showLinkShortenerErrorMessage: false,
 };
 
 GoogleAnalytics.propTypes = {
@@ -244,7 +246,6 @@ GoogleAnalytics.propTypes = {
   isBusinessAccount: PropTypes.bool.isRequired,
   features: PropTypes.any.isRequired, // eslint-disable-line
   linkShorteningEnabled: PropTypes.bool,
-  showLinkShortenerErrorMessage: PropTypes.bool,
 };
 
 export default reduxForm({
