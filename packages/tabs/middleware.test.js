@@ -1,5 +1,4 @@
-import { push } from 'connected-react-router';
-import { generateProfilePageRoute } from '@bufferapp/publish-routes';
+import { profileTabPages } from '@bufferapp/publish-routes';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
@@ -11,7 +10,7 @@ describe('middleware', () => {
     expect(middleware).toBeDefined();
   });
 
-  it('navigates to generateProfilePageRoute when SELECT_TAB', () => {
+  it('navigates to profileTabPages when SELECT_TAB', () => {
     const fakeState = () => ({
       tabId: 'queue',
       profileId: 'id',
@@ -28,12 +27,10 @@ describe('middleware', () => {
     middleware({ dispatch, getState: fakeState })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
-      push(
-        generateProfilePageRoute({
-          profileId: 'id',
-          tabId: 'drafts',
-        })
-      )
+      profileTabPages({
+        profileId: 'id',
+        tabId: 'drafts',
+      })
     );
   });
 

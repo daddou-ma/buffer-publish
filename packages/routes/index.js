@@ -58,6 +58,11 @@ export const profileChildTabPages = {
 };
 
 // Miscellaneous routes
+export const generic = {
+  route: '/',
+  goTo: () => push('/'),
+};
+
 export const newConnection = {
   route: '/new-connection',
   goTo: () => push('/new-connection'),
