@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
 import { WithFeatureLoader } from '@bufferapp/product-features';
-import { generateProfilePageRoute } from '@bufferapp/publish-routes';
+import { profileTabPages } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
@@ -37,12 +36,7 @@ export default connect(
   (dispatch, ownProps) => ({
     onDirectPostingClick: () => {
       dispatch(
-        push(
-          generateProfilePageRoute({
-            profileId: ownProps.profileId,
-            tabId: 'queue',
-          })
-        )
+        profileTabPages.goTo({ profileId: ownProps.profileId, tabId: 'queue' })
       );
       dispatch(
         dataFetchActions.fetch({

@@ -2,28 +2,26 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
-  profilePageRoute,
   preferencesPage,
-  childTabRoute,
+  profilePages,
   plansPage,
   newBusinessTrialistsRoute,
   newConnection,
-  generateProfilePageRoute,
   campaignsPage,
 } from '@bufferapp/publish-routes';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
-import ProfilePage from '@bufferapp/profile-page';
+import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
 
-const AppPages = ({ profiles, isOnBusinessTrial }) => {
+const AppPages = ({ profiles, isOnBusinessTrial, profileRouteLoaded }) => {
   const hasProfiles = profiles && profiles.length > 0;
   const redirectToQueue = () => {
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
-    const newPath = generateProfilePageRoute({ profileId: selectedProfileId });
+    const newPath = profilePages.getRoute({ profileId: selectedProfileId });
     return <Redirect to={newPath} />;
   };
   return (
@@ -44,8 +42,16 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
       {!hasProfiles && <Redirect to={newConnection.route} />}
 
       <Route path={campaignsPage.route} component={PagesWithSidebar} />
-      <Route path={childTabRoute} component={ProfilePage} />
-      <Route path={profilePageRoute} component={ProfilePage} />
+      <Route
+        path={profilePages.route}
+        render={props => (
+          <ProfilePages
+            profiles={profiles}
+            profileRouteLoaded={profileRouteLoaded}
+            {...props}
+          />
+        )}
+      />
 
       <Route>{redirectToQueue()}</Route>
     </Switch>
@@ -55,6 +61,7 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
 AppPages.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object),
   isOnBusinessTrial: PropTypes.bool,
+  profileRouteLoaded: PropTypes.func.isRequired,
 };
 
 AppPages.defaultProps = {
