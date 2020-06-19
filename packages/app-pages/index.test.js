@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import {
   render,
   screen,
@@ -22,8 +21,6 @@ import '@bufferapp/publish-web/components/i18n';
 
 import AppPages from './index';
 
-const AppPagesWithRouter = withRouter(AppPages);
-
 const organization = buildOrganization();
 const profileTwitter = buildProfile({
   overrides: {
@@ -36,12 +33,15 @@ const profileIG = buildIGProfile({
   },
 });
 
+const profiles = [profileTwitter, profileIG];
 const initialState = {
   user: buildUser(),
+  publishProfiles: profiles,
+  organizations: { selected: { id: organization.id } },
   profileSidebar: {
     selectedProfileId: profileTwitter.id,
     selectedProfile: profileTwitter,
-    profiles: [profileTwitter, profileIG],
+    profiles,
   },
 };
 
@@ -169,7 +169,7 @@ describe('AppPages | user interaction', () => {
   it('should render proper tabs for non IG account', () => {
     render(
       <TestDragDropContainer>
-        <AppPagesWithRouter />
+        <AppPages />
       </TestDragDropContainer>,
       { initialState }
     );
@@ -203,7 +203,7 @@ describe('AppPages | user interaction', () => {
 
     render(
       <TestDragDropContainer>
-        <AppPagesWithRouter />
+        <AppPages />
       </TestDragDropContainer>,
       { initialState }
     );
