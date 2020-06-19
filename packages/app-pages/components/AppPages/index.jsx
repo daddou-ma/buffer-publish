@@ -5,7 +5,7 @@ import {
   preferencesPage,
   profilePages,
   plansPage,
-  newBusinessTrialistsRoute,
+  newBusinessTrialists,
   newConnection,
   campaignsPage,
 } from '@bufferapp/publish-routes';
@@ -30,10 +30,13 @@ const AppPages = ({ profiles, isOnBusinessTrial, profileRouteLoaded }) => {
       <Route path={plansPage.route} component={Plans} />
 
       {!hasProfiles && (
-        <Route path={newBusinessTrialistsRoute} component={OnboardingManager} />
+        <Route
+          path={newBusinessTrialists.route}
+          component={OnboardingManager}
+        />
       )}
       {!hasProfiles && isOnBusinessTrial && (
-        <Redirect to={newBusinessTrialistsRoute} />
+        <Redirect to={newBusinessTrialists.route} />
       )}
 
       {!hasProfiles && (

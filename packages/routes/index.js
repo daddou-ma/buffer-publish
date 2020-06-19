@@ -1,8 +1,6 @@
 import { push } from 'connected-react-router';
 import { matchPath } from 'react-router-dom';
 
-export const newBusinessTrialistsRoute = '/new-business-trialists';
-
 // Routes utils
 export const getMatch = ({ pathname, route }) =>
   matchPath(pathname, {
@@ -51,6 +49,10 @@ export const generic = {
 export const newConnection = {
   route: '/new-connection',
   goTo: () => push('/new-connection'),
+};
+
+export const newBusinessTrialists = {
+  route: '/new-business-trialists',
 };
 
 export const plansPage = {
