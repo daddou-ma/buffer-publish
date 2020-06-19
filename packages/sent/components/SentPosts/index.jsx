@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   PostLists,
@@ -46,7 +46,7 @@ const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
     return null;
   }
   return (
-    <Fragment>
+    <>
       <EmptyState
         height="initial"
         title={
@@ -58,7 +58,7 @@ const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
         heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
         heroImgSize={{ width: '270px', height: '150px' }}
       />
-    </Fragment>
+    </>
   );
 };
 

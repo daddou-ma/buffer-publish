@@ -209,7 +209,7 @@ describe('AppPages | user interaction', () => {
     expect(shopGridTab).not.toBeInTheDocument();
   });
 
-  it('should navigate through queues and render posts', async () => {
+  it('should render main queue and switch profiles', async () => {
     mockApiCalls();
 
     render(
@@ -226,7 +226,6 @@ describe('AppPages | user interaction', () => {
     expect(twitterProfileSidebarBtn).toBeInTheDocument();
     expect(igProfileSidebarBtn).toBeInTheDocument();
 
-    /* Main Queue tab asserts */
     userEvent.click(igProfileSidebarBtn);
 
     const {
@@ -254,6 +253,7 @@ describe('AppPages | user interaction', () => {
     expect(shopGridTab).toBeInTheDocument();
     expect(settingsTab).toBeInTheDocument();
 
+    /* Main Queue tab asserts */
     expect(
       await screen.findByText(/what would you like to share?/i)
     ).toBeInTheDocument();
@@ -270,12 +270,9 @@ describe('AppPages | user interaction', () => {
     expect(date).toBeInTheDocument();
     expect(slots.length).toBeGreaterThan(0);
 
-    const posts = await screen.findAllByTestId('post');
-    expect(posts).toHaveLength(2);
-    /* Verifying the posts order in the queue */
-    expect(posts[0]).toHaveTextContent(queuedPost1.postContent.text);
-    expect(posts[1]).toHaveTextContent(queuedPost2.postContent.text);
     expect(await screen.findAllByText(/share now/i)).toHaveLength(2);
+    expect(screen.getByText(queuedPost1.postContent.text)).toBeInTheDocument();
+    expect(screen.getByText(queuedPost2.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(campaign.name)).toBeInTheDocument();
 
     expect(rpcCall).toHaveBeenCalledWith('getStoryGroups', {
@@ -301,8 +298,22 @@ describe('AppPages | user interaction', () => {
     });
     expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
     expect(rpcCall).toHaveBeenCalledTimes(7);
+  });
+
+  it('should navigate through queues and render posts', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
 
     /* Stories tab asserts */
+    const storiesTab = screen.getByRole('link', { name: /stories/i });
     userEvent.click(storiesTab);
 
     expect(
@@ -314,6 +325,9 @@ describe('AppPages | user interaction', () => {
     expect(screen.queryByText(/send to mobile/i)).not.toBeInTheDocument();
 
     /* Past Reminders tab asserts */
+    const pastRemindersTab = screen.queryByRole('link', {
+      name: /past reminders/i,
+    });
     userEvent.click(pastRemindersTab);
 
     expect(screen.getByText(/recent past reminders/i)).toBeInTheDocument();
@@ -324,7 +338,7 @@ describe('AppPages | user interaction', () => {
 
     const reminders = await screen.findAllByTestId('post');
     expect(reminders).toHaveLength(2);
-    /* Verifying the posts order in the queue */
+    /* Verifying the posts order */
     expect(reminders[0]).toHaveTextContent(pastReminder2.postContent.text);
     expect(reminders[1]).toHaveTextContent(pastReminder1.postContent.text);
     expect(await screen.findAllByText(/share again/i)).toHaveLength(2);
@@ -336,6 +350,9 @@ describe('AppPages | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledTimes(8);
 
     /* Analytics tab asserts */
+    const analyticsTab = screen.queryByRole('link', {
+      name: /analytics/i,
+    });
     userEvent.click(analyticsTab);
 
     expect(await screen.findByText(/your sent posts/i)).toBeInTheDocument();
@@ -351,6 +368,9 @@ describe('AppPages | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledTimes(9);
 
     /* Drafts tab asserts */
+    const draftsTab = screen.queryByRole('link', {
+      name: /drafts/i,
+    });
     userEvent.click(draftsTab);
 
     expect(await screen.findByText(/create a new draft/i)).toBeInTheDocument();
@@ -365,5 +385,5 @@ describe('AppPages | user interaction', () => {
       clear: true,
     });
     expect(rpcCall).toHaveBeenCalledTimes(10);
-  });
+  }, 10000);
 });

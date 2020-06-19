@@ -27,6 +27,7 @@ const PostStyle = styled.div`
 
 const renderPost = ({
   item,
+  index,
   onDeleteConfirmClick,
   onEditClick,
   onShareNowClick,
@@ -51,6 +52,7 @@ const renderPost = ({
     subprofile_id: item.subprofileID,
     service_user_tags: item.userTags,
     key: item.id,
+    index,
     onDeleteConfirmClick: () => onDeleteConfirmClick({ item }),
     onEditClick: () => onEditClick({ item }),
     onShareNowClick: () => onShareNowClick({ item }),
@@ -76,27 +78,15 @@ const renderPost = ({
 
 const PostLists = ({
   items,
-  onDeleteConfirmClick,
-  onEditClick,
-  onShareNowClick,
-  onCampaignTagClick,
-  onDropPost,
-  onSwapPosts,
   onShareAgainClick,
   onMobileClick,
-  isSent,
   isManager,
   isPastReminder,
   isBusinessAccount,
-  hasFirstCommentFlip,
-  hasCampaignsFeature,
-  userData,
-  onPreviewClick,
   showAnalyzeBannerAfterFirstPost,
   isAnalyzeCustomer,
-  profileService,
-  profileServiceType,
   features,
+  ...propsForPosts
 }) => {
   const itemList = items.map((item, index) => {
     const { queueItemType, ...rest } = item;
@@ -114,7 +104,6 @@ const PostLists = ({
     if (queueItemType === 'post') {
       const shouldShowAnalyzeBanner =
         showAnalyzeBannerAfterFirstPost && index === 1;
-      // return renderPost({ post: rest, index, ...propsForPosts });
       return (
         <>
           <PostStyle
@@ -129,23 +118,12 @@ const PostLists = ({
             shouldShowAnalyzeBanner
           >
             {renderPost({
-              item,
-              onDeleteConfirmClick,
-              onEditClick,
-              onShareNowClick,
-              onCampaignTagClick,
-              onDropPost,
-              onSwapPosts,
+              index,
+              item: rest,
               onShareAgainClick,
-              isSent,
               isBusinessAccount,
               isPastReminder,
-              hasFirstCommentFlip,
-              hasCampaignsFeature,
-              userData,
-              onPreviewClick,
-              profileService,
-              profileServiceType,
+              ...propsForPosts,
             })}
             {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder && (
               <ShareAgainWrapper>
@@ -193,6 +171,8 @@ const PostLists = ({
         </>
       );
     }
+
+    return null;
   });
 
   return <>{itemList}</>;
@@ -209,43 +189,26 @@ PostLists.propTypes = {
       hasCommentEnabled: PropTypes.bool,
     })
   ).isRequired,
-  onDeleteConfirmClick: PropTypes.func,
-  onEditClick: PropTypes.func,
-  onShareNowClick: PropTypes.func,
-  onCampaignTagClick: PropTypes.func,
-  onDropPost: PropTypes.func,
-  onSwapPosts: PropTypes.func,
   onShareAgainClick: PropTypes.func,
   onMobileClick: PropTypes.func,
-  onPreviewClick: PropTypes.func,
-  isSent: PropTypes.bool,
   isManager: PropTypes.bool,
   isPastReminder: PropTypes.bool,
   isBusinessAccount: PropTypes.bool,
-  hasFirstCommentFlip: PropTypes.bool,
-  hasCampaignsFeature: PropTypes.bool,
   showAnalyzeBannerAfterFirstPost: PropTypes.bool,
   isAnalyzeCustomer: PropTypes.bool,
+  features: PropTypes.shape({
+    isFreeUser: () => {},
+  }).isRequired,
 };
 
 PostLists.defaultProps = {
   showAnalyzeBannerAfterFirstPost: false,
   isAnalyzeCustomer: false,
-  hasCampaignsFeature: false,
-  hasFirstCommentFlip: false,
   isPastReminder: false,
-  isSent: false,
   isManager: false,
   isBusinessAccount: false,
-  onDeleteConfirmClick: () => {},
-  onEditClick: () => {},
-  onShareNowClick: () => {},
-  onCampaignTagClick: () => {},
-  onDropPost: () => {},
-  onSwapPosts: () => {},
   onShareAgainClick: () => {},
   onMobileClick: () => {},
-  onPreviewClick: () => {},
 };
 
 export default WithFeatureLoader(PostLists);
