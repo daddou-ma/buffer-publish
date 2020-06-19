@@ -1,13 +1,13 @@
-import { getProfilePageParams, getParams, getMatch } from './index';
+import { getProfilesParams, getParams, getMatch } from './index';
 
 describe('publish-routes', () => {
-  describe('getProfilePageParams', () => {
+  describe('getProfilesParams', () => {
     it('should get params from path', () => {
       const profileId = '1234adf';
       const tabId = 'tabid123';
       const childTabId = 'childTab123';
-      const path = `/profile/${profileId}/tab/${tabId}/${childTabId}`;
-      expect(getProfilePageParams({ path })).toEqual({
+      const pathname = '/profile/1234adf/tab/tabid123/childTab123';
+      expect(getProfilesParams({ pathname })).toEqual({
         profileId,
         tabId,
         childTabId,
@@ -15,8 +15,8 @@ describe('publish-routes', () => {
     });
 
     it('should not get params from path with missing values', () => {
-      const path = '/profile/';
-      expect(getProfilePageParams({ path })).toBe(null);
+      const pathname = '/profile/';
+      expect(getProfilesParams({ pathname })).toBe(null);
     });
   });
 

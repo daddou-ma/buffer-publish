@@ -4,7 +4,7 @@ import { actions as profileActions } from '@bufferapp/publish-profile-sidebar';
 import {
   getParams,
   organization,
-  getProfilePageParams,
+  getProfilesParams,
 } from '@bufferapp/publish-routes';
 
 import { filterProfilesByOrg } from '@bufferapp/publish-profile-sidebar/utils';
@@ -24,7 +24,9 @@ export default connect(
     });
 
     // Verify if it is a profile route and get profileId param
-    const profileRouteParams = getProfilePageParams({ path: currentPath });
+    const profileRouteParams = getProfilesParams({
+      pathname: currentPath,
+    });
 
     // Get profile object matching the profileId
     const profileFromRoute =

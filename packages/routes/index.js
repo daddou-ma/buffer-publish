@@ -1,19 +1,6 @@
 import { push } from 'connected-react-router';
 import { matchPath } from 'react-router-dom';
 
-const profileRouteRegex = /profile\/(\w+)\/tab\/(\w+)(?:\/(\w+))?/;
-export const getProfilePageParams = ({ path }) => {
-  const match = profileRouteRegex.exec(path);
-  if (!match) {
-    return null;
-  }
-  return {
-    profileId: match[1],
-    tabId: match[2],
-    childTabId: match[3],
-  };
-};
-
 export const newBusinessTrialistsRoute = '/new-business-trialists';
 
 // Routes utils
@@ -46,6 +33,17 @@ export const profileChildTabPages = {
   route: '/profile/:profileId/tab/:tabId/:childTabId',
   goTo: ({ profileId, tabId, childTabId }) =>
     push(`/profile/${profileId}/tab/${tabId}/${childTabId}`),
+};
+
+export const getProfilesParams = ({ pathname }) => {
+  return getParams({
+    pathname,
+    route: [
+      profileTabPages.route,
+      profilePages.route,
+      profileChildTabPages.route,
+    ],
+  });
 };
 
 // Miscellaneous routes

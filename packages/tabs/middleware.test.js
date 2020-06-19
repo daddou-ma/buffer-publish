@@ -27,7 +27,7 @@ describe('middleware', () => {
     middleware({ dispatch, getState: fakeState })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
-      profileTabPages({
+      profileTabPages.goTo({
         profileId: 'id',
         tabId: 'drafts',
       })

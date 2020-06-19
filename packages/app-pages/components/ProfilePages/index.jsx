@@ -6,18 +6,13 @@ import {
   profilePages,
   profileTabPages,
   profileChildTabPages,
-  getParams,
+  getProfilesParams,
 } from '@bufferapp/publish-routes';
 
 const ProfilePages = ({ profiles, location, profileRouteLoaded }) => {
   const { pathname } = location;
-  const params = getParams({
+  const params = getProfilesParams({
     pathname,
-    route: [
-      profileTabPages.route,
-      profilePages.route,
-      profileChildTabPages.route,
-    ],
   });
   const { profileId, tabId } = params;
 
