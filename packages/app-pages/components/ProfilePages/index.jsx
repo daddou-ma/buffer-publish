@@ -46,7 +46,7 @@ const ProfilePages = ({ profiles, location, profileRouteLoaded }) => {
 
 ProfilePages.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
-  location: PropTypes.string.isRequired,
+  location: PropTypes.objectOf(PropTypes.string).isRequired,
   profileRouteLoaded: PropTypes.func.isRequired,
 };
 
