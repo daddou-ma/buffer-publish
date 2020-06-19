@@ -206,16 +206,16 @@ SentPosts.propTypes = {
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
   features: PropTypes.object.isRequired, // eslint-disable-line
-  postLists: PropTypes.arrayOf(
+  items: PropTypes.arrayOf(
     PropTypes.shape({
-      listHeader: PropTypes.string,
-      posts: PropTypes.arrayOf(
-        PropTypes.shape({
-          text: PropTypes.string,
-        })
-      ),
+      id: PropTypes.string,
+      text: PropTypes.string,
+      date: PropTypes.string,
+      queueItemType: PropTypes.string,
+      dayOfWeek: PropTypes.string,
+      hasCommentEnabled: PropTypes.bool,
     })
-  ),
+  ).isRequired,
   total: PropTypes.number,
   showComposer: PropTypes.bool,
   showAnalyzeBannerAfterFirstPost: PropTypes.bool,
@@ -243,7 +243,6 @@ SentPosts.defaultProps = {
   loading: true,
   moreToLoad: false,
   page: 1,
-  postLists: [],
   total: 0,
   showComposer: false,
   showAnalyzeBannerAfterFirstPost: false,
