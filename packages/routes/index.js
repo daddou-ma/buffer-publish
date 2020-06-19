@@ -23,17 +23,6 @@ export const generateChildTabRoute = ({
 export const generateProfilePageRoute = ({ profileId, tabId = 'queue' }) =>
   `/profile/${profileId}/tab/${tabId}`;
 
-export const profilePageRoute = generateProfilePageRoute({
-  profileId: ':profileId',
-  tabId: ':tabId',
-});
-
-export const childTabRoute = generateChildTabRoute({
-  profileId: ':profileId',
-  tabId: ':tabId',
-  childTabId: ':childTabId',
-});
-
 export const newBusinessTrialistsRoute = '/new-business-trialists';
 
 // Routes utils
@@ -48,6 +37,25 @@ export const getParams = ({ pathname, route }) => {
 };
 
 export const goTo = path => push(path);
+
+// Profiles routes
+export const profilePages = {
+  route: '/profile/:profileId',
+  getRoute: ({ profileId }) => `/profile/${profileId}`,
+  goTo: ({ profileId }) => push(`/profile/${profileId}`),
+};
+
+export const profileTabPages = {
+  route: '/profile/:profileId/tab/:tabId',
+  goTo: ({ profileId, tabId = 'queue' }) =>
+    push(`/profile/${profileId}/tab/${tabId}`),
+};
+
+export const profileChildTabPages = {
+  route: '/profile/:profileId/tab/:tabId/:childTabId',
+  goTo: ({ profileId, tabId, childTabId }) =>
+    push(`/profile/${profileId}/tab/${tabId}/${childTabId}`),
+};
 
 // Miscellaneous routes
 export const newConnection = {
