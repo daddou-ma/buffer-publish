@@ -2,7 +2,7 @@ import { getProfilesParams, getParams, getMatch } from './index';
 
 describe('publish-routes', () => {
   describe('getProfilesParams', () => {
-    it('should get params from path', () => {
+    it('should get 3 params from path', () => {
       const profileId = '1234adf';
       const tabId = 'tabid123';
       const childTabId = 'childTab123';
@@ -11,6 +11,24 @@ describe('publish-routes', () => {
         profileId,
         tabId,
         childTabId,
+      });
+    });
+
+    it('should get 2 params from path', () => {
+      const profileId = '1234adf';
+      const tabId = 'tabid123';
+      const pathname = '/profile/1234adf/tab/tabid123';
+      expect(getProfilesParams({ pathname })).toEqual({
+        profileId,
+        tabId,
+      });
+    });
+
+    it('should get 1 param from path', () => {
+      const profileId = '1234adf';
+      const pathname = '/profile/1234adf';
+      expect(getProfilesParams({ pathname })).toEqual({
+        profileId,
       });
     });
 

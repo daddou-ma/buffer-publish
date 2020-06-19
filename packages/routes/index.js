@@ -30,7 +30,7 @@ export const profileTabPages = {
 };
 
 export const profileChildTabPages = {
-  route: '/profile/:profileId/tab/:tabId/:childTabId',
+  route: '/profile/:profileId/tab/:tabId/:childTabId?',
   goTo: ({ profileId, tabId, childTabId }) =>
     push(`/profile/${profileId}/tab/${tabId}/${childTabId}`),
 };
@@ -38,11 +38,7 @@ export const profileChildTabPages = {
 export const getProfilesParams = ({ pathname }) => {
   return getParams({
     pathname,
-    route: [
-      profileTabPages.route,
-      profilePages.route,
-      profileChildTabPages.route,
-    ],
+    route: [profileChildTabPages.route, profilePages.route],
   });
 };
 
