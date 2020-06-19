@@ -23,6 +23,7 @@ export default connect(
     hideMenuItems: state.appShell.hideMenuItems,
     enabledProducts: state.appShell.enabledProducts,
     featureFlips: state.appShell.featureFlips,
+    isImpersonation: state.appShell.isImpersonation,
   }),
 
   dispatch => ({

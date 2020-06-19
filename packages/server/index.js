@@ -109,7 +109,7 @@ if (isStandalone) {
   app.use(
     setRequestSessionMiddleware({
       production: isProduction,
-      sessionKeys: ['publish', 'global'],
+      sessionKeys: ['*'],
     })
   );
 }
