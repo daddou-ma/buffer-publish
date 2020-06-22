@@ -2,8 +2,9 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-
+import { actions as notificationActions } from '@bufferapp/notifications';
 import { getSelectedOrganization, mapSelectedOrganization } from './utils';
+import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
   next(action);
@@ -65,6 +66,24 @@ export default ({ dispatch, getState }) => next => action => {
       });
       break;
     }
+    case actionTypes.SET_CURRENT_ORGANIZATION: {
+      const { organizationId } = action;
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'setCurrentOrganization',
+          organizationId,
+        })
+      );
+      break;
+    }
+    case `setCurrentOrganization_${dataFetchActionTypes.FETCH_FAIL}`:
+      dispatch(
+        notificationActions.createNotification({
+          notificationType: 'error',
+          message: action.error,
+        })
+      );
+      break;
     default:
       break;
   }

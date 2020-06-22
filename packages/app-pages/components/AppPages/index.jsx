@@ -18,8 +18,18 @@ import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
 
-const AppPages = ({ profiles, isOnBusinessTrial }) => {
+const AppPages = ({
+  profiles,
+  isOnBusinessTrial,
+  needsToSetCurrentOrg,
+  setCurrentOrganization,
+  currentOrgId,
+}) => {
   const hasProfiles = profiles && profiles.length > 0;
+  // If org coming from route doesn't match the last org stored, select and store the new value
+  if (needsToSetCurrentOrg) {
+    setCurrentOrganization(currentOrgId);
+  }
   const redirectToQueue = () => {
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
@@ -55,11 +65,17 @@ const AppPages = ({ profiles, isOnBusinessTrial }) => {
 AppPages.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object),
   isOnBusinessTrial: PropTypes.bool,
+  needsToSetCurrentOrg: PropTypes.bool,
+  currentOrgId: PropTypes.string,
+  setCurrentOrganization: PropTypes.func,
 };
 
 AppPages.defaultProps = {
   isOnBusinessTrial: false,
   profiles: [],
+  needsToSetCurrentOrg: false,
+  currentOrgId: null,
+  setCurrentOrganization: () => {},
 };
 
 export default AppPages;
