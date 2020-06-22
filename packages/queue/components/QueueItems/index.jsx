@@ -247,6 +247,7 @@ const QueueItems = props => {
     }
     return null;
   });
+
   return <>{itemList}</>;
 };
 
