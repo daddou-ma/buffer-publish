@@ -10,8 +10,6 @@ import Story from '../Story';
 import QueueHeader from '../QueueHeader';
 import BannerAdvancedAnalytics from '../BannerAdvancedAnalytics';
 
-const RemindersButtons = styled.div``;
-
 const ShareAgainWrapper = styled.div`
   padding-left: 1rem;
   padding-bottom: 0.5rem;
@@ -92,7 +90,7 @@ const renderPost = ({
           </ShareAgainWrapper>
         )}
         {isPastReminder && (
-          <RemindersButtons>
+          <div>
             {(!features.isFreeUser() || isBusinessAccount) && (
               <ShareAgainWrapper>
                 <Button
@@ -117,7 +115,7 @@ const renderPost = ({
                 />
               </ShareAgainWrapper>
             )}
-          </RemindersButtons>
+          </div>
         )}
       </PostStyle>
       {shouldShowAnalyzeBanner && (
