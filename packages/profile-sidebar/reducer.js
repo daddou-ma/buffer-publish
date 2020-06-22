@@ -1,5 +1,6 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 
 import keyWrapper from '@bufferapp/keywrapper';
 import { filterProfilesByOrg } from './utils';
@@ -170,7 +171,7 @@ export default (state = initialState, action) => {
         hasTwitter: action.result.some(p => p.service === 'twitter'),
       };
     }
-    case `ORGANIZATION_SELECTED`: {
+    case orgActionTypes.ORGANIZATION_SELECTED: {
       const selectedOrganization = action.selected;
       let { profiles } = state;
 

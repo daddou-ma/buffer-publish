@@ -5,6 +5,8 @@ import {
 } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { actions as orgActions } from '@bufferapp/publish-data-organizations';
+
 import { actions } from './reducer';
 import AppShell from './components/AppShell';
 
@@ -46,6 +48,9 @@ export default connect(
     },
     onCloseBanner({ key }) {
       dispatch(actions.onCloseBanner({ key }));
+    },
+    switchOrganization(organizationId) {
+      dispatch(orgActions.selectOrganization(organizationId));
     },
   })
 )(AppShell);

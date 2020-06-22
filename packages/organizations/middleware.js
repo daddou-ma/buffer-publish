@@ -3,6 +3,7 @@ import {
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 
+import { actionTypes } from './reducer';
 import { getSelectedOrganization, mapSelectedOrganization } from './utils';
 
 export default ({ dispatch, getState }) => next => action => {
@@ -37,23 +38,23 @@ export default ({ dispatch, getState }) => next => action => {
       const organizations = action.result;
 
       dispatch({
-        type: 'ORGANIZATIONS_INITIALIZED',
+        type: actionTypes.INITIALIZED,
         organizations,
         selectedOrganization: getSelectedOrganization(organizations),
       });
       break;
     }
 
-    case 'ORGANIZATIONS_INITIALIZED': {
+    case actionTypes.INITIALIZED: {
       dispatch({
-        type: 'ORGANIZATION_SELECTED',
+        type: actionTypes.ORGANIZATION_SELECTED,
         organizations: action?.organizations,
         selected: action?.selectedOrganization,
       });
       break;
     }
 
-    case 'SELECT_ORGANIZATION': {
+    case actionTypes.SELECT_ORGANIZATION: {
       const list = mapSelectedOrganization({
         id: action.id,
         organizations: getState().organizations.list,
@@ -61,7 +62,7 @@ export default ({ dispatch, getState }) => next => action => {
       const selected = getSelectedOrganization(list);
 
       dispatch({
-        type: 'ORGANIZATION_SELECTED',
+        type: actionTypes.ORGANIZATION_SELECTED,
         organizations: list,
         selected,
       });

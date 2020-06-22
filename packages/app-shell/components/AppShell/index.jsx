@@ -117,75 +117,13 @@ function generateUserMenuItems({
   return [...userMenuItems.top, ...extraItems];
 }
 
-const orgSwitcher = {
-  title: 'Organizations',
-  menuItems: [
-    {
-      id: '1',
-      title: 'My Organization 1',
-      selected: false,
-      onItemClick: () => console.info('My Organization 1'),
-      subItems: [
-        {
-          id: '1',
-          title: '@lunnaflyers',
-          network: 'instagram',
-        },
-        {
-          id: '2',
-          title: '@lunnasneakers',
-          network: 'twitter',
-        },
-        {
-          id: '3',
-          title: 'Lunna Sneakers US Page',
-          network: 'facebook',
-        },
-        {
-          id: '4',
-          title: 'Lunna Sneakers',
-          network: 'pinterest',
-        },
-        {
-          id: '5',
-          title: 'Lunna Sneakers US',
-          network: 'facebook',
-        },
-        {
-          id: '6',
-          title: '@lunnastwitter',
-          network: 'twitter',
-        },
-      ],
-    },
-    {
-      id: '2',
-      title: 'My Organization Super Long',
-      selected: true,
-      onItemClick: () => console.info('My Organization 2'),
-      subItems: [
-        {
-          id: '1',
-          title: '@bufferinsta',
-          network: 'instagram',
-        },
-        {
-          id: '2',
-          title: '@buffer',
-          network: 'twitter',
-        },
-      ],
-    },
-  ],
-};
-
 const generateOrgSwitcherItems = ({
   organizations,
   selectedOrganizationId,
   profiles,
+  switchOrganization,
 }) => {
   /** @todo only show for 2+ orgs */
-
   /** @todo i18n translation? */
   const orgSwitcherItems = {
     title: 'Organizations',
@@ -197,9 +135,9 @@ const generateOrgSwitcherItems = ({
       id: org.id,
       title: org.name,
       selected: selectedOrganizationId === org.id,
-      onItemClick: () => console.debug('Clicked', org),
+      onItemClick: () => switchOrganization(org.id),
       subItems: profiles
-        .filter(profile => profile.organizationId === selectedOrganizationId)
+        .filter(profile => profile.organizationId === org.id)
         .map(profile => ({
           id: profile.id,
           title: profile.formatted_username,
@@ -231,6 +169,7 @@ const AppShell = ({
   organizations,
   selectedOrganizationId,
   profiles,
+  switchOrganization,
 }) => {
   if (hideAppShell) {
     return children;
@@ -264,6 +203,7 @@ const AppShell = ({
         organizations,
         selectedOrganizationId,
         profiles,
+        switchOrganization,
       })}
       bannerOptions={
         bannerOptions
@@ -320,6 +260,7 @@ AppShell.propTypes = {
       id: PropTypes.string,
     })
   ).isRequired,
+  switchOrganization: PropTypes.func.isRequired,
 };
 
 AppShell.defaultProps = {
