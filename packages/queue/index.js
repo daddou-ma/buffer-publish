@@ -88,7 +88,9 @@ export default connect(
           state.user.features?.includes('campaigns') ?? false,
       };
     }
-    return {};
+    return {
+      items: [],
+    };
   },
 
   (dispatch, ownProps) => ({

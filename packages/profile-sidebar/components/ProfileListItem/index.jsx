@@ -58,7 +58,7 @@ const ProfileListItem = ({
       <SidebarListItem
         title={title}
         onItemClick={() => handleClick({ onClick })}
-        badges={getCount({ pendingCount })}
+        badges={`${getCount({ pendingCount })}`}
         /* eslint-disable no-nested-ternary */
         badgeIcon={
           locked ? (

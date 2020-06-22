@@ -23,6 +23,10 @@ export default connect(
     hideMenuItems: state.appShell.hideMenuItems,
     enabledProducts: state.appShell.enabledProducts,
     featureFlips: state.appShell.featureFlips,
+    /**
+     * Org Switcher
+     * Needs organizations and profiles.
+     */
     organizations: state.organizations.list,
     selectedOrganizationId: state.organizations.selected?.id,
   }),

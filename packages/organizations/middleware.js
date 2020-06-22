@@ -67,7 +67,7 @@ export default ({ dispatch, getState }) => next => action => {
       });
       break;
     }
-    
+
     default:
       break;
   }
