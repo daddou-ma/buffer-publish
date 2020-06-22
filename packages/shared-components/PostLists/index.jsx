@@ -17,7 +17,7 @@ const PostStyle = styled.div`
     props.shouldShowAnalyzeBanner ? '2rem' : '2.5rem'};
 `;
 
-const RenderPost = ({
+const PostContent = ({
   item,
   index,
   onDeleteConfirmClick,
@@ -110,7 +110,7 @@ const PostLists = ({ items, ...propsForPosts }) => {
       );
     }
     if (queueItemType === 'post') {
-      return <RenderPost index={index} item={rest} {...propsForPosts} />;
+      return <PostContent index={index} item={rest} {...propsForPosts} />;
     }
 
     return null;

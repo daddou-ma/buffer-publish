@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button, Text } from '@bufferapp/ui';
-import { calculateStyles } from '@bufferapp/components/lib/utils';
 import {
   transitionAnimationTime,
   transitionAnimationType,
@@ -38,9 +37,23 @@ const ViewCalendarWrapper = styled.div`
   justify-content: center;
 `;
 
+const PostWrapper = styled.div`
+  margin: 8px 0 8px;
+  max-height: 100vh;
+  transition: all ${transitionAnimationTime} ${transitionAnimationType};
+
+  ${props =>
+    props.hidden &&
+    css`
+      max-height: 0;
+      opacity: 0.5;
+      pointer-events: none;
+    `}
+`;
+
 /* eslint-disable react/prop-types */
 
-const RenderPost = ({
+const PostContent = ({
   post,
   index,
   subprofiles,
@@ -84,24 +97,9 @@ const RenderPost = ({
 
   const PostComponent = Post;
 
-  const defaultStyle = {
-    default: {
-      margin: '8px 0 8px',
-      transition: `all ${transitionAnimationTime} ${transitionAnimationType}`,
-    },
-    hidden: {
-      opacity: '0.5',
-      pointerEvents: 'none',
-    },
-  };
-
-  const hiddenStyle = {
-    hidden: post.isDeleting,
-  };
-
   if (draggable) {
     return (
-      <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
+      <PostWrapper key={post.id} hidden={post.isDeleting}>
         <ErrorBoundary
           fallbackComponent={() => (
             <ErrorBoundary
@@ -130,12 +128,12 @@ const RenderPost = ({
             postProps={postWithEventHandlers}
           />
         </ErrorBoundary>
-      </div>
+      </PostWrapper>
     );
   }
 
   return (
-    <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
+    <PostWrapper key={post.id} hidden={post.isDeleting}>
       <ErrorBoundary
         fallbackComponent={() => (
           <ErrorBoundary
@@ -149,7 +147,7 @@ const RenderPost = ({
       >
         <PostComponent {...postWithEventHandlers} />
       </ErrorBoundary>
-    </div>
+    </PostWrapper>
   );
 };
 
@@ -212,7 +210,7 @@ const QueueItems = props => {
   const itemList = items.map((item, index) => {
     const { queueItemType, ...rest } = item;
     if (queueItemType === 'post') {
-      return <RenderPost post={rest} index={index} {...propsForPosts} />;
+      return <PostContent post={rest} index={index} {...propsForPosts} />;
     }
     if (queueItemType === 'header') {
       return (
