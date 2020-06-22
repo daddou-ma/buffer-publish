@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
   linkShortening: state.generalSettings.linkShortening,
   hasBitlyPosts: !!state.sent.byProfileId[
     state.profileSidebar.selectedProfile.id
-  ].hasBitlyPosts,
+  ]?.hasBitlyPosts,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
