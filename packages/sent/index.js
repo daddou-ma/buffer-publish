@@ -1,35 +1,10 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
 import { actions as campaignListActions } from '@bufferapp/publish-campaigns-list';
+import { formatPostLists } from '@bufferapp/publish-queue/util';
 // load the presentational component
 import { actions } from './reducer';
 import SentPosts from './components/SentPosts';
-
-const servicesWithCommentFeature = ['instagram'];
-
-const formatPostLists = posts => {
-  const postLists = [];
-  let day;
-  let newList;
-  const orderedPosts =
-    posts && typeof posts === 'object'
-      ? Object.values(posts).sort((a, b) => b.due_at - a.due_at)
-      : [];
-
-  orderedPosts.forEach(post => {
-    post.hasCommentEnabled =
-      servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
-    if (post.day !== day) {
-      day = post.day;
-      newList = { listHeader: day, posts: [post] };
-      postLists.push(newList);
-    } else {
-      // if same day add to posts array of current list
-      newList.posts.push(post);
-    }
-  });
-  return postLists;
-};
 
 // default export = container
 export default connect(
@@ -47,7 +22,16 @@ export default connect(
         loadingMore: currentProfile.loadingMore,
         moreToLoad: currentProfile.moreToLoad,
         page: currentProfile.page,
-        postLists: formatPostLists(currentProfile.posts),
+        items: formatPostLists({
+          isManager: profileData.isManager,
+          weekStartsOnMonday: state.user.week_starts_monday,
+          profileService: profileData.service,
+          profileTimezone: profileData.timezone,
+          scheduleSlotsEnabled: false,
+          posts: currentProfile.posts,
+          orderBy: 'due_at',
+          sortOrder: 'desc',
+        }),
         total: currentProfile.total,
         profileServiceType: profileData.service_type,
         profileService: profileData.service,

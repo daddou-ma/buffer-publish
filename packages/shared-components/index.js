@@ -24,7 +24,6 @@ export Notification from './Notification';
 export Post from './Post';
 export PostDragWrapper from './PostDragWrapper';
 export PostEmptySlot from './PostEmptySlot';
-export PostList from './PostList';
 export PostLists from './PostLists';
 export PostMetaBar from './PostMetaBar';
 export ProTag from './ProTag';
