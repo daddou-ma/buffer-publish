@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button, Text } from '@bufferapp/ui';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
@@ -10,8 +11,8 @@ import {
 import {
   Post,
   PostDragWrapper,
-  QueueButtonGroup,
   QueueHeader,
+  CalendarButtons,
 } from '@bufferapp/publish-shared-components';
 
 import PostEmptySlot from '@bufferapp/publish-shared-components/PostEmptySlot/dropTarget';
@@ -20,21 +21,26 @@ import FailedPostComponent from '@bufferapp/publish-web/components/ErrorBoundary
 
 const ErrorBoundary = getErrorBoundary(true);
 
-const listHeaderStyle = {
-  marginBottom: '1rem',
-  marginTop: '1rem',
-  display: 'flex',
-  alignItems: 'center',
-};
+const HeaderWrapper = styled.div`
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+`;
 
-const calendarBtnWrapperStyle = {
-  textAlign: 'center',
-  margin: '24px 0px',
-};
+const ShowMorePostsWrapper = styled.div`
+  text-align: center;
+  margin: 24px 0px;
+`;
+
+const ViewCalendarWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 /* eslint-disable react/prop-types */
 
-const renderPost = ({
+const RenderPost = ({
   post,
   index,
   subprofiles,
@@ -147,46 +153,50 @@ const renderPost = ({
   );
 };
 
-const calendarBtns = ['Day', 'Week', 'Month'];
-
-const renderHeader = (
-  { text, dayOfWeek, date, id },
+const Header = ({
+  item,
+  index,
   features,
   isBusinessAccount,
   onCalendarClick,
-  showCalendarBtnGroup
-) => (
-  <div style={listHeaderStyle} key={id}>
-    <QueueHeader id={id} text={text} dayOfWeek={dayOfWeek} date={date} />
-    {showCalendarBtnGroup && (!features.isFreeUser() || isBusinessAccount) && (
-      <div style={{ marginLeft: 'auto' }}>
-        <QueueButtonGroup
-          buttons={calendarBtns}
-          onClick={type => onCalendarClick(type)}
-        />
-      </div>
-    )}
-  </div>
-);
+}) => {
+  const { text, dayOfWeek, date, id } = item;
+  const isFirstItem = index === 0;
+  const shouldRenderCalendarButtons =
+    isFirstItem && (!features.isFreeUser() || isBusinessAccount);
 
-const renderSlot = ({ id, slot, profileService }, onEmptySlotClick) => (
-  <PostEmptySlot
-    key={id}
-    time={slot.label}
-    timestamp={slot.timestamp}
-    day={slot.dayText}
-    service={profileService}
-    onClick={() =>
-      onEmptySlotClick({
-        dueTime: slot.label,
-        profile_service: profileService,
-        scheduled_at: slot.timestamp,
-        due_at: slot.timestamp,
-        pinned: true,
-      })
-    }
-  />
-);
+  return (
+    <HeaderWrapper key={id}>
+      <QueueHeader id={id} text={text} dayOfWeek={dayOfWeek} date={date} />
+      {shouldRenderCalendarButtons && (
+        <CalendarButtons onCalendarClick={onCalendarClick} />
+      )}
+    </HeaderWrapper>
+  );
+};
+
+const Slot = ({ item, onEmptySlotClick }) => {
+  const { id, slot, profileService } = item;
+
+  return (
+    <PostEmptySlot
+      key={id}
+      time={slot.label}
+      timestamp={slot.timestamp}
+      day={slot.dayText}
+      service={profileService}
+      onClick={() =>
+        onEmptySlotClick({
+          dueTime: slot.label,
+          profile_service: profileService,
+          scheduled_at: slot.timestamp,
+          due_at: slot.timestamp,
+          pinned: true,
+        })
+      }
+    />
+  );
+};
 
 /* eslint-enable react/prop-types */
 
@@ -202,35 +212,37 @@ const QueueItems = props => {
   const itemList = items.map((item, index) => {
     const { queueItemType, ...rest } = item;
     if (queueItemType === 'post') {
-      return renderPost({ post: rest, index, ...propsForPosts });
+      return <RenderPost post={rest} index={index} {...propsForPosts} />;
     }
     if (queueItemType === 'header') {
-      return renderHeader(
-        rest,
-        features,
-        isBusinessAccount,
-        onCalendarClick,
-        index === 0
+      return (
+        <Header
+          item={rest}
+          index={index}
+          features={features}
+          isBusinessAccount={isBusinessAccount}
+          onCalendarClick={onCalendarClick}
+        />
       );
     }
     if (queueItemType === 'slot') {
-      return renderSlot(rest, onEmptySlotClick);
+      return <Slot item={rest} onEmptySlotClick={onEmptySlotClick} />;
     }
     if (
       queueItemType === 'showMorePosts' &&
       (!features.isFreeUser() || isBusinessAccount)
     ) {
       return (
-        <div key={rest.id} style={calendarBtnWrapperStyle}>
+        <ShowMorePostsWrapper key={rest.id}>
           <Text type="p">Looking for your other posts?</Text>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <ViewCalendarWrapper>
             <Button
               type="primary"
               label="View Your Calendar"
               onClick={() => onCalendarClick('month')}
             />
-          </div>
-        </div>
+          </ViewCalendarWrapper>
+        </ShowMorePostsWrapper>
       );
     }
     return null;
@@ -249,6 +261,9 @@ QueueItems.propTypes = {
       type: PropTypes.string,
     })
   ),
+  features: PropTypes.shape({
+    isFreeUser: PropTypes.func,
+  }).isRequired,
   onCalendarClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
@@ -257,6 +272,7 @@ QueueItems.propTypes = {
   onRequeueClick: PropTypes.func,
   onDropPost: PropTypes.func,
   onSwapPosts: PropTypes.func,
+  isBusinessAccount: PropTypes.bool,
   draggable: PropTypes.bool,
 };
 
@@ -264,6 +280,15 @@ QueueItems.defaultProps = {
   items: [],
   subprofiles: [],
   draggable: false,
+  isBusinessAccount: false,
+  onCalendarClick: () => {},
+  onDeleteConfirmClick: () => {},
+  onEditClick: () => {},
+  onEmptySlotClick: () => {},
+  onShareNowClick: () => {},
+  onRequeueClick: () => {},
+  onDropPost: () => {},
+  onSwapPosts: () => {},
 };
 
 export default WithFeatureLoader(QueueItems);
