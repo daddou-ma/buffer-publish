@@ -1,41 +1,6 @@
 import { push } from 'connected-react-router';
 import { matchPath } from 'react-router-dom';
 
-const profileRouteRegex = /profile\/(\w+)\/tab\/(\w+)(?:\/(\w+))?/;
-export const getProfilePageParams = ({ path }) => {
-  const match = profileRouteRegex.exec(path);
-  if (!match) {
-    return null;
-  }
-  return {
-    profileId: match[1],
-    tabId: match[2],
-    childTabId: match[3],
-  };
-};
-
-export const generateChildTabRoute = ({
-  profileId,
-  tabId = 'queue',
-  childTabId = 'general-settings',
-}) => `/profile/${profileId}/tab/${tabId}/${childTabId}`;
-
-export const generateProfilePageRoute = ({ profileId, tabId = 'queue' }) =>
-  `/profile/${profileId}/tab/${tabId}`;
-
-export const profilePageRoute = generateProfilePageRoute({
-  profileId: ':profileId',
-  tabId: ':tabId',
-});
-
-export const childTabRoute = generateChildTabRoute({
-  profileId: ':profileId',
-  tabId: ':tabId',
-  childTabId: ':childTabId',
-});
-
-export const newBusinessTrialistsRoute = '/new-business-trialists';
-
 // Routes utils
 export const getMatch = ({ pathname, route }) =>
   matchPath(pathname, {
@@ -49,10 +14,46 @@ export const getParams = ({ pathname, route }) => {
 
 export const goTo = path => push(path);
 
+// Profiles routes
+export const profilePages = {
+  route: '/profile/:profileId',
+  getRoute: ({ profileId }) => `/profile/${profileId}`,
+  goTo: ({ profileId }) => push(`/profile/${profileId}`),
+};
+
+export const profileTabPages = {
+  route: '/profile/:profileId/tab/:tabId',
+  defaultRoute: '/profile/:profileId/tab/queue',
+  goTo: ({ profileId, tabId = 'queue' }) =>
+    push(`/profile/${profileId}/tab/${tabId}`),
+};
+
+export const profileChildTabPages = {
+  route: '/profile/:profileId/tab/:tabId/:childTabId?',
+  goTo: ({ profileId, tabId, childTabId }) =>
+    push(`/profile/${profileId}/tab/${tabId}/${childTabId}`),
+};
+
+export const getProfilesParams = ({ pathname }) => {
+  return getParams({
+    pathname,
+    route: [profileChildTabPages.route, profilePages.route],
+  });
+};
+
 // Miscellaneous routes
+export const generic = {
+  route: '/',
+  goTo: () => push('/'),
+};
+
 export const newConnection = {
   route: '/new-connection',
   goTo: () => push('/new-connection'),
+};
+
+export const newBusinessTrialists = {
+  route: '/new-business-trialists',
 };
 
 export const plansPage = {

@@ -1,5 +1,4 @@
-import { push } from 'connected-react-router';
-import { generateProfilePageRoute } from '@bufferapp/publish-routes';
+import { profileTabPages } from '@bufferapp/publish-routes';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
@@ -15,12 +14,10 @@ export default ({ getState, dispatch }) => next => action => {
         action.profileId !== getState().profileId
       ) {
         dispatch(
-          push(
-            generateProfilePageRoute({
-              profileId: action.profileId,
-              tabId: action.tabId,
-            })
-          )
+          profileTabPages.goTo({
+            profileId: action.profileId,
+            tabId: action.tabId,
+          })
         );
       }
       break;

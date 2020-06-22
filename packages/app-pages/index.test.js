@@ -291,7 +291,7 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
     });
     expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
-    expect(rpcCall).toHaveBeenCalledTimes(7);
+    expect(rpcCall).toHaveBeenCalledTimes(12);
   });
 
   it('navigates to Stories tab and renders stories', async () => {
@@ -317,7 +317,7 @@ describe('AppPages | user interaction', () => {
     expect(screen.getByText(/preview/i)).toBeInTheDocument();
     expect(screen.queryByText(/share again/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/send to mobile/i)).not.toBeInTheDocument();
-    expect(rpcCall).toHaveBeenCalledTimes(6);
+    expect(rpcCall).toHaveBeenCalledTimes(11);
   });
 
   it('navigates to Past Reminders tab renders reminders', async () => {
@@ -354,7 +354,7 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
       isFetchingMore: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(8);
+    expect(rpcCall).toHaveBeenCalledTimes(13);
 
     userEvent.click(storiesSubTab);
 
@@ -365,7 +365,7 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
       isFetchingMore: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(9);
+    expect(rpcCall).toHaveBeenCalledTimes(14);
   });
 
   it('navigates to Analytics tab and renders sent posts', async () => {
@@ -396,7 +396,7 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
       isFetchingMore: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(8);
+    expect(rpcCall).toHaveBeenCalledTimes(13);
   });
 
   it('navigates to Drafts tab and renders drafts posts', async () => {
@@ -428,6 +428,6 @@ describe('AppPages | user interaction', () => {
       needsApproval: false,
       clear: true,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(7);
+    expect(rpcCall).toHaveBeenCalledTimes(12);
   });
 });
