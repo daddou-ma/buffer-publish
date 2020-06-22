@@ -1,7 +1,6 @@
 import React from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { grayDark } from '@bufferapp/ui/style/colors';
 import { Toggle, Input, Card } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
@@ -60,35 +59,16 @@ const customizeButtonStyle = {
   flexBasis: '170px',
 };
 
-const fadeIn = keyframes`
-  from: {
-    opacity: 0;
-  }
-  to: {
-    opacity: 1;
-  }
+const CampaignWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1 1 0%;
 `;
-
-const fadeOut = keyframes`
-  from: {
-    opacity: 1;
-  }
-  to: {
-    opacity: 0;
-  }
-`;
-
-const enableCampaignWrapperStyle = {
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  flex: '1 1 0%',
-};
 
 const InfoText = styled(Text)`
   margin-top: 0px;
   color: ${grayDark};
-  animation: ${props => (props.shouldShow ? fadeIn : fadeOut)} 10000ms;
 `;
 
 const GoogleAnalytics = ({
@@ -124,7 +104,7 @@ const GoogleAnalytics = ({
       <div style={rightContainerStyle} />
     </div>
     {!linkShorteningEnabled && (
-      <InfoText type="p" shouldShow={!linkShorteningEnabled}>
+      <InfoText type="p" enabled={!linkShorteningEnabled}>
         <em>
           Please choose a link shortener above if you&apos;d like to enable
           campaign tracking.
@@ -132,7 +112,7 @@ const GoogleAnalytics = ({
       </InfoText>
     )}
     {linkShorteningEnabled && (
-      <div style={enableCampaignWrapperStyle}>
+      <CampaignWrapper enabled={linkShorteningEnabled}>
         <div style={textStyle}>
           <div style={headerTextWrapperStyle}>
             <Text type="p">
@@ -166,7 +146,7 @@ const GoogleAnalytics = ({
             }
           />
         </div>
-      </div>
+      </CampaignWrapper>
     )}
     {showGACustomizationForm && googleAnalyticsIsEnabled && (
       <div>
