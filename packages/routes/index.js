@@ -23,6 +23,7 @@ export const profilePages = {
 
 export const profileTabPages = {
   route: '/profile/:profileId/tab/:tabId',
+  defaultRoute: '/profile/:profileId/tab/queue',
   goTo: ({ profileId, tabId = 'queue' }) =>
     push(`/profile/${profileId}/tab/${tabId}`),
 };

@@ -7,6 +7,7 @@ import {
   profileTabPages,
   profileChildTabPages,
   getProfilesParams,
+  generic,
 } from '@bufferapp/publish-routes';
 
 const ProfilePages = ({ profiles, location, profileRouteLoaded }) => {
@@ -34,12 +35,9 @@ const ProfilePages = ({ profiles, location, profileRouteLoaded }) => {
         <Route path={profileTabPages.route} component={ProfilePage} />
       )}
       {profile && (
-        <Redirect
-          from={profilePages.route}
-          to="/profile/:profileId/tab/queue"
-        />
+        <Redirect from={profilePages.route} to={profileTabPages.defaultRoute} />
       )}
-      <Redirect to="/" />
+      <Redirect to={generic.route} />
     </Switch>
   );
 };
