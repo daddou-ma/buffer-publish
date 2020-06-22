@@ -1,5 +1,4 @@
-import { push } from 'connected-react-router';
-import { generateChildTabRoute, plansPage } from '@bufferapp/publish-routes';
+import { profileChildTabPages, plansPage } from '@bufferapp/publish-routes';
 import { connect } from 'react-redux';
 
 import TabNavigation from './components/TabNavigation';
@@ -54,13 +53,11 @@ export default connect(
     onChildTabClick: childTabId => {
       const { tabId, profileId } = ownProps;
       dispatch(
-        push(
-          generateChildTabRoute({
-            tabId,
-            childTabId,
-            profileId,
-          })
-        )
+        profileChildTabPages.goTo({
+          tabId,
+          childTabId,
+          profileId,
+        })
       );
     },
   })

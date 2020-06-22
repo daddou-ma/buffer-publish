@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   PostLists,
@@ -46,7 +46,7 @@ const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
     return null;
   }
   return (
-    <Fragment>
+    <>
       <EmptyState
         height="initial"
         title={
@@ -58,7 +58,7 @@ const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
         heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
         heroImgSize={{ width: '270px', height: '150px' }}
       />
-    </Fragment>
+    </>
   );
 };
 
@@ -77,7 +77,7 @@ NoPostsPublished.defaultProps = {
 const SentPosts = ({
   total,
   loading,
-  postLists,
+  items,
   onEditClick,
   onShareAgainClick,
   onCampaignTagClick,
@@ -143,7 +143,7 @@ const SentPosts = ({
       />
 
       {total > 0 ? (
-        <Fragment>
+        <>
           <div>
             <div style={headerStyle}>
               <div className="js-page-header">
@@ -170,7 +170,7 @@ const SentPosts = ({
               <ComposerPopover onSave={onComposerCreateSuccess} type="sent" />
             )}
             <PostLists
-              postLists={postLists}
+              items={items}
               onEditClick={onEditClick}
               onShareAgainClick={onShareAgainClick}
               onCampaignTagClick={onCampaignTagClick}
@@ -194,7 +194,7 @@ const SentPosts = ({
               />
             </div>
           )}
-        </Fragment>
+        </>
       ) : null}
     </ErrorBoundary>
   );
@@ -206,16 +206,16 @@ SentPosts.propTypes = {
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
   features: PropTypes.object.isRequired, // eslint-disable-line
-  postLists: PropTypes.arrayOf(
+  items: PropTypes.arrayOf(
     PropTypes.shape({
-      listHeader: PropTypes.string,
-      posts: PropTypes.arrayOf(
-        PropTypes.shape({
-          text: PropTypes.string,
-        })
-      ),
+      id: PropTypes.string,
+      text: PropTypes.string,
+      date: PropTypes.string,
+      queueItemType: PropTypes.string,
+      dayOfWeek: PropTypes.string,
+      hasCommentEnabled: PropTypes.bool,
     })
-  ),
+  ).isRequired,
   total: PropTypes.number,
   showComposer: PropTypes.bool,
   showAnalyzeBannerAfterFirstPost: PropTypes.bool,
@@ -243,7 +243,6 @@ SentPosts.defaultProps = {
   loading: true,
   moreToLoad: false,
   page: 1,
-  postLists: [],
   total: 0,
   showComposer: false,
   showAnalyzeBannerAfterFirstPost: false,

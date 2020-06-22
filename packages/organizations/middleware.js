@@ -32,6 +32,7 @@ export default ({ dispatch, getState }) => next => action => {
       }
       break;
     }
+
     case `organizations_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const organizations = action.result;
 
@@ -42,6 +43,16 @@ export default ({ dispatch, getState }) => next => action => {
       });
       break;
     }
+
+    case 'ORGANIZATIONS_INITIALIZED': {
+      dispatch({
+        type: 'ORGANIZATION_SELECTED',
+        organizations: action?.organizations,
+        selected: action?.selectedOrganization,
+      });
+      break;
+    }
+
     case 'SELECT_ORGANIZATION': {
       const list = mapSelectedOrganization({
         id: action.id,
@@ -56,6 +67,7 @@ export default ({ dispatch, getState }) => next => action => {
       });
       break;
     }
+    
     default:
       break;
   }

@@ -1,4 +1,3 @@
-import React from 'react';
 import moment from 'moment-timezone';
 
 export const noScheduledDate = 'No scheduled days or times';
@@ -374,6 +373,11 @@ export const getDaysToAddForPastPosts = ({ posts, profileTimezone, now }) => {
 export const postHasCommentEnabled = post =>
   servicesWithCommentFeature.indexOf(post.profile_service) !== -1;
 
+const orderPosts = (posts, orderBy, sortOrder) =>
+  Object.values(posts).sort((a, b) =>
+    sortOrder === 'asc' ? a[orderBy] - b[orderBy] : b[orderBy] - a[orderBy]
+  );
+
 /**
  * This method formats a list of posts into a list that contains day headings,
  * posts and optionally queue slots (if supported by the plan.)
@@ -390,10 +394,9 @@ export const formatPostLists = ({
   profileService,
   isSingleSlot,
   orderBy = 'due_at',
+  sortOrder = 'asc',
 }) => {
-  const orderedPosts = Object.values(posts).sort(
-    (a, b) => a[orderBy] - b[orderBy]
-  );
+  const orderedPosts = orderPosts(posts, orderBy, sortOrder);
 
   /**
    * CASE 1: Schedule Slots Enabled
@@ -509,6 +512,11 @@ export const formatPostLists = ({
   let lastHeader = null;
   return orderedPosts.reduce((finalList, post, index) => {
     const hasCommentEnabled = postHasCommentEnabled(post);
+
+    if (post.storyDetails) {
+      post.postDetails = post.storyDetails;
+    }
+
     if (lastHeader !== post.day) {
       // post.day is coming as a string of dayOfWeek, day and Month (e.g Tomorrow 3rd March)
       // we want to separate the dayOfWeek from the rest of the date

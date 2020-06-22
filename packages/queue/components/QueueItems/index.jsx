@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button, Text } from '@bufferapp/ui';
-import { Link } from '@bufferapp/components';
 import { calculateStyles } from '@bufferapp/components/lib/utils';
 import {
   transitionAnimationTime,
@@ -12,12 +11,12 @@ import {
   Post,
   PostDragWrapper,
   QueueButtonGroup,
+  QueueHeader,
 } from '@bufferapp/publish-shared-components';
 
 import PostEmptySlot from '@bufferapp/publish-shared-components/PostEmptySlot/dropTarget';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import FailedPostComponent from '@bufferapp/publish-web/components/ErrorBoundary/failedPostComponent';
-import { noScheduledDate } from '../../util';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -31,31 +30,6 @@ const listHeaderStyle = {
 const calendarBtnWrapperStyle = {
   textAlign: 'center',
   margin: '24px 0px',
-};
-
-const headerTextStyle = {
-  display: 'flex',
-  alignItems: 'baseline',
-};
-
-const headerTextDayOfWeekStyle = {
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  lineHeight: 'normal',
-  fontSize: '18px',
-  color: '#3D3D3D',
-};
-
-const headerTextDateStyle = {
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: 'normal',
-  lineHeight: 'normal',
-  fontSize: '14px',
-  textTransform: 'uppercase',
-  color: '#636363',
-  marginLeft: '8px',
 };
 
 /* eslint-disable react/prop-types */
@@ -175,22 +149,6 @@ const renderPost = ({
 
 const calendarBtns = ['Day', 'Week', 'Month'];
 
-const getText = text => {
-  if (text === noScheduledDate) {
-    return (
-      <div>
-        <span style={{ marginRight: '8px' }}>{text}</span>
-        <Link href="settings/posting-schedule" unstyled newTab>
-          <span style={{ fontSize: '14px', fontWeight: 'normal' }}>
-            (Keen to add some?)
-          </span>
-        </Link>
-      </div>
-    );
-  }
-  return text;
-};
-
 const renderHeader = (
   { text, dayOfWeek, date, id },
   features,
@@ -199,16 +157,7 @@ const renderHeader = (
   showCalendarBtnGroup
 ) => (
   <div style={listHeaderStyle} key={id}>
-    <div style={headerTextStyle}>
-      {dayOfWeek && date ? (
-        <React.Fragment>
-          <span style={headerTextDayOfWeekStyle}>{dayOfWeek}</span>
-          <span style={headerTextDateStyle}>{date}</span>
-        </React.Fragment>
-      ) : (
-        <span style={headerTextDayOfWeekStyle}>{getText(text)}</span>
-      )}
-    </div>
+    <QueueHeader id={id} text={text} dayOfWeek={dayOfWeek} date={date} />
     {showCalendarBtnGroup && (!features.isFreeUser() || isBusinessAccount) && (
       <div style={{ marginLeft: 'auto' }}>
         <QueueButtonGroup
@@ -286,7 +235,7 @@ const QueueItems = props => {
     }
     return null;
   });
-  return <Fragment>{itemList}</Fragment>;
+  return <>{itemList}</>;
 };
 
 QueueItems.propTypes = {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import {
-  newBusinessTrialistsRoute,
+  newBusinessTrialists,
   preferencesGeneral,
 } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
@@ -19,7 +19,7 @@ export default connect(
     showStartProTrial: state.appShell.showStartProTrial,
     hideAppShell:
       state.onboarding.canSeeOnboardingPage &&
-      state.router.location.pathname === newBusinessTrialistsRoute,
+      state.router.location.pathname === newBusinessTrialists.route,
     hideMenuItems: state.appShell.hideMenuItems,
     enabledProducts: state.appShell.enabledProducts,
     featureFlips: state.appShell.featureFlips,
