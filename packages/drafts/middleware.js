@@ -1,6 +1,6 @@
 import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
-import { getProfilePageParams } from '@bufferapp/publish-routes';
+import { getProfilesParams } from '@bufferapp/publish-routes';
 
 import {
   actions as dataFetchActions,
@@ -22,7 +22,7 @@ export default ({ dispatch, getState }) => next => action => {
   next(action);
   const state = getState();
   const path = getState().router.location.pathname;
-  const { tabId } = getProfilePageParams({ path }) || {};
+  const { tabId } = getProfilesParams({ pathname: path }) || {};
   const needsApproval =
     tabId === 'awaitingApproval' || tabId === 'pendingApproval';
   const isDraft =

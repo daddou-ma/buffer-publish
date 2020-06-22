@@ -41,7 +41,7 @@ const ComposerWrapper = ({
   showStoriesComposer,
   onComposerCreateSuccess,
 }) => (
-  <React.Fragment>
+  <>
     {(showComposer || showStoriesComposer) && !editMode && (
       <TopBarContainerStyle>
         <ComposerStyle>
@@ -60,7 +60,7 @@ const ComposerWrapper = ({
         onSave={onComposerCreateSuccess}
       />
     )}
-  </React.Fragment>
+  </>
 );
 
 ComposerWrapper.propTypes = {
@@ -82,7 +82,7 @@ const PastRemindersPosts = ({
   loading,
   userData,
   viewType,
-  postLists,
+  items,
   onEditClick,
   onShareAgainClick,
   onMobileClick,
@@ -126,7 +126,7 @@ const PastRemindersPosts = ({
       {showStoryPreview && (
         <PreviewPopover onCloseClick={onClosePreviewClick} view="queue" />
       )}
-      <React.Fragment>
+      <>
         <ComposerWrapper
           editMode={editMode}
           showComposer={showComposer}
@@ -135,7 +135,7 @@ const PastRemindersPosts = ({
         />
 
         <PostLists
-          postLists={postLists}
+          items={items}
           onEditClick={onEditClick}
           onShareAgainClick={post => onShareAgainClick(post, viewType)}
           onMobileClick={post => onMobileClick(post, viewType)}
@@ -146,7 +146,7 @@ const PastRemindersPosts = ({
           userData={userData}
           onPreviewClick={onPreviewClick}
         />
-      </React.Fragment>
+      </>
     </ErrorBoundary>
   );
 };
@@ -155,16 +155,16 @@ PastRemindersPosts.propTypes = {
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
-  postLists: PropTypes.arrayOf(
+  items: PropTypes.arrayOf(
     PropTypes.shape({
-      listHeader: PropTypes.string,
-      posts: PropTypes.arrayOf(
-        PropTypes.shape({
-          text: PropTypes.string,
-        })
-      ),
+      id: PropTypes.string,
+      text: PropTypes.string,
+      date: PropTypes.string,
+      queueItemType: PropTypes.string,
+      dayOfWeek: PropTypes.string,
+      hasCommentEnabled: PropTypes.bool,
     })
-  ),
+  ).isRequired,
   total: PropTypes.number,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
@@ -190,7 +190,6 @@ PastRemindersPosts.defaultProps = {
   loading: true,
   moreToLoad: false,
   page: 1,
-  postLists: [],
   total: 0,
   showComposer: false,
   showStoriesComposer: false,

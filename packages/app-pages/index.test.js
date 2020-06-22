@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import {
   render,
   screen,
@@ -22,8 +21,6 @@ import '@bufferapp/publish-web/components/i18n';
 
 import AppPages from './index';
 
-const AppPagesWithRouter = withRouter(AppPages);
-
 const organization = buildOrganization();
 const profileTwitter = buildProfile({
   overrides: {
@@ -36,12 +33,15 @@ const profileIG = buildIGProfile({
   },
 });
 
+const profiles = [profileTwitter, profileIG];
 const initialState = {
   user: buildUser(),
+  publishProfiles: profiles,
+  organizations: { selected: { id: organization.id } },
   profileSidebar: {
     selectedProfileId: profileTwitter.id,
     selectedProfile: profileTwitter,
-    profiles: [profileTwitter, profileIG],
+    profiles,
   },
 };
 
@@ -53,6 +53,7 @@ const campaign = buildCampaign();
 const queuedPost1 = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
+    due_at: getTime(new Date('2020-01-01T11:00:00.000Z')),
     scheduledAt: getTime(new Date('2020-01-01T11:00:00.000Z')),
     campaignDetails: campaign,
   },
@@ -61,6 +62,7 @@ const queuedPost1 = buildPostWithImage({
 const queuedPost2 = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
+    due_at: getTime(new Date('2020-01-02T11:00:00.000Z')),
     scheduledAt: getTime(new Date('2020-01-02T11:00:00.000Z')),
   },
 });
@@ -79,10 +81,26 @@ const storyGroup = buildStoryGroup({
   },
 });
 
-const pastReminder = buildPostWithImage({
+const pastReminder1 = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
+    due_at: getTime(new Date('2019-12-10T11:00:00.000Z')),
     scheduledAt: getTime(new Date('2019-12-10T11:00:00.000Z')),
+  },
+});
+
+const pastReminder2 = buildPostWithImage({
+  overrides: {
+    profileId: profileIG.id,
+    due_at: getTime(new Date('2019-12-20T11:00:00.000Z')),
+    scheduledAt: getTime(new Date('2019-12-20T11:00:00.000Z')),
+  },
+});
+
+const pastStoryGroup = buildStoryGroup({
+  overrides: {
+    profileId: profileIG.id,
+    scheduledAt: getTime(new Date('2020-01-18T11:00:00.000Z')),
   },
 });
 
@@ -102,8 +120,9 @@ const mockApiCalls = () => {
           drafts_needs_approval_false: 0,
         },
       },
-      pastRemindersPosts: { total: 1, updates: [pastReminder] },
-      queuedPosts: { total: 2, updates: [queuedPost1, queuedPost2] },
+      pastRemindersPosts: { total: 1, updates: [pastReminder1, pastReminder2] },
+      getPastRemindersStories: { total: 1, updates: [pastStoryGroup] },
+      queuedPosts: { total: 2, updates: [queuedPost2, queuedPost1] },
       getStoryGroups: { total: 1, updates: [storyGroup] },
       getHashtagGroups: { data: { snippets: [] } },
       sentPosts: { total: 1, updates: [sentPost] },
@@ -166,10 +185,10 @@ describe('AppPages | user interaction', () => {
     jest.clearAllMocks();
   });
 
-  it('should render proper tabs for non IG account', () => {
+  it('renders proper tabs for non IG account', () => {
     render(
       <TestDragDropContainer>
-        <AppPagesWithRouter />
+        <AppPages />
       </TestDragDropContainer>,
       { initialState }
     );
@@ -194,37 +213,27 @@ describe('AppPages | user interaction', () => {
       name: /past reminders/i,
     });
     expect(storiesTab).not.toBeInTheDocument();
-    expect(pastRemindersTab).not.toBeInTheDocument();
     expect(shopGridTab).not.toBeInTheDocument();
+    expect(pastRemindersTab).not.toBeInTheDocument();
   });
 
-  it('should navigate through queues and render posts', async () => {
+  it('renders the main queue and queued posts on profile selection', async () => {
     mockApiCalls();
 
     render(
       <TestDragDropContainer>
-        <AppPagesWithRouter />
+        <AppPages />
       </TestDragDropContainer>,
       { initialState }
     );
 
     expect(screen.queryByText(/share now/i)).toBeNull();
-
     const twitterProfileSidebarBtn = screen.getByText(profileTwitter.handle);
     const igProfileSidebarBtn = screen.getByText(profileIG.handle);
     expect(twitterProfileSidebarBtn).toBeInTheDocument();
     expect(igProfileSidebarBtn).toBeInTheDocument();
 
-    /* Main Queue tab asserts */
     userEvent.click(igProfileSidebarBtn);
-
-    const {
-      queueTab,
-      analyticsTab,
-      awaitingApprovalTab,
-      draftsTab,
-      settingsTab,
-    } = tabMenuOptions();
 
     const storiesTab = screen.getByRole('link', { name: /stories/i });
     const pastRemindersTab = screen.getByRole('link', {
@@ -234,27 +243,23 @@ describe('AppPages | user interaction', () => {
       name: /shop grid/i,
     });
 
-    expect(queueTab).toBeInTheDocument();
     expect(storiesTab).toBeInTheDocument();
     expect(pastRemindersTab).toBeInTheDocument();
-    expect(analyticsTab).toBeInTheDocument();
-    expect(awaitingApprovalTab).toBeInTheDocument();
-    expect(draftsTab).toBeInTheDocument();
     expect(shopGridTab).toBeInTheDocument();
-    expect(settingsTab).toBeInTheDocument();
 
+    /* Main Queue tab asserts */
     expect(
       await screen.findByText(/what would you like to share?/i)
     ).toBeInTheDocument();
 
     const { dayButton, weekButton, monthButton } = mainQueueButtons();
-    const today = screen.getByText(/today/i);
-    const date = screen.getByText(/january 1\b/i);
-    const slots = screen.getAllByText(/11:00 am/i);
-
     expect(dayButton).toBeInTheDocument();
     expect(weekButton).toBeInTheDocument();
     expect(monthButton).toBeInTheDocument();
+
+    const today = screen.getByText(/today/i);
+    const date = screen.getByText(/january 1\b/i);
+    const slots = screen.getAllByText(/11:00 am/i);
     expect(today).toBeInTheDocument();
     expect(date).toBeInTheDocument();
     expect(slots.length).toBeGreaterThan(0);
@@ -286,9 +291,23 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
     });
     expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
-    expect(rpcCall).toHaveBeenCalledTimes(7);
+    expect(rpcCall).toHaveBeenCalledTimes(12);
+  });
+
+  it('navigates to Stories tab and renders stories', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
 
     /* Stories tab asserts */
+    const storiesTab = screen.getByRole('link', { name: /stories/i });
     userEvent.click(storiesTab);
 
     expect(
@@ -298,27 +317,73 @@ describe('AppPages | user interaction', () => {
     expect(screen.getByText(/preview/i)).toBeInTheDocument();
     expect(screen.queryByText(/share again/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/send to mobile/i)).not.toBeInTheDocument();
+    expect(rpcCall).toHaveBeenCalledTimes(11);
+  });
+
+  it('navigates to Past Reminders tab renders reminders', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
 
     /* Past Reminders tab asserts */
+    const pastRemindersTab = screen.queryByRole('link', {
+      name: /past reminders/i,
+    });
     userEvent.click(pastRemindersTab);
 
+    const storiesSubTab = screen.getByRole('button', { name: /stories/i });
     expect(screen.getByText(/recent past reminders/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /posts/i })).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: /stories/i })
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByText(pastReminder.postContent.text)
-    ).toBeInTheDocument();
-    expect(screen.queryByText(/share again/i)).toBeInTheDocument();
-    expect(screen.queryByText(/send to mobile/i)).toBeInTheDocument();
+    expect(storiesSubTab).toBeInTheDocument();
+
+    const reminders = await screen.findAllByTestId('post');
+    expect(reminders).toHaveLength(2);
+    /* Verifying the posts order */
+    expect(reminders[0]).toHaveTextContent(pastReminder2.postContent.text);
+    expect(reminders[1]).toHaveTextContent(pastReminder1.postContent.text);
+    expect(await screen.findAllByText(/share again/i)).toHaveLength(2);
+    expect(await screen.findAllByText(/send to mobile/i)).toHaveLength(2);
     expect(rpcCall).toHaveBeenCalledWith('pastRemindersPosts', {
       profileId: profileIG.id,
       isFetchingMore: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(8);
+    expect(rpcCall).toHaveBeenCalledTimes(13);
+
+    userEvent.click(storiesSubTab);
+
+    expect(await screen.findAllByText(/share again/i)).toHaveLength(1);
+    expect(await screen.findAllByText(/send to mobile/i)).toHaveLength(1);
+    expect(screen.getByText(/preview/i)).toBeInTheDocument();
+    expect(rpcCall).toHaveBeenCalledWith('getPastRemindersStories', {
+      profileId: profileIG.id,
+      isFetchingMore: false,
+    });
+    expect(rpcCall).toHaveBeenCalledTimes(14);
+  });
+
+  it('navigates to Analytics tab and renders sent posts', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
 
     /* Analytics tab asserts */
+    const analyticsTab = screen.queryByRole('link', {
+      name: /analytics/i,
+    });
     userEvent.click(analyticsTab);
 
     expect(await screen.findByText(/your sent posts/i)).toBeInTheDocument();
@@ -331,9 +396,25 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
       isFetchingMore: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(9);
+    expect(rpcCall).toHaveBeenCalledTimes(13);
+  });
+
+  it('navigates to Drafts tab and renders drafts posts', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
 
     /* Drafts tab asserts */
+    const draftsTab = screen.queryByRole('link', {
+      name: /drafts/i,
+    });
     userEvent.click(draftsTab);
 
     expect(await screen.findByText(/create a new draft/i)).toBeInTheDocument();
@@ -347,6 +428,6 @@ describe('AppPages | user interaction', () => {
       needsApproval: false,
       clear: true,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(10);
+    expect(rpcCall).toHaveBeenCalledTimes(12);
   });
 });

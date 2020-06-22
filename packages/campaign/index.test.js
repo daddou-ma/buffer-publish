@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import {
   render,
   screen,
@@ -19,8 +18,6 @@ import RPCClient from '@bufferapp/micro-rpc-client';
 import '@bufferapp/publish-web/components/i18n';
 import AppPages from '@bufferapp/publish-app-pages';
 
-const AppPagesWithRouter = withRouter(AppPages);
-
 // eslint-disable-next-line react/prop-types
 const _TestContextContainer = ({ children }) => <>{children}</>;
 
@@ -38,6 +35,7 @@ const campaignItem = buildCampaignItem({
   overrides: {
     profileId: profileTwitter.id,
     user,
+    dueAt: scheduledAt,
   },
 });
 const campaign = buildCampaign({
@@ -54,12 +52,14 @@ const campaign = buildCampaign({
 });
 const campaigns = [campaign];
 
+const profiles = [profileTwitter];
 const initialState = {
   user,
+  publishProfiles: profiles,
   profileSidebar: {
     selectedProfileId: profileTwitter.id,
     selectedProfile: profileTwitter,
-    profiles: [profileTwitter],
+    profiles,
   },
 };
 
@@ -139,7 +139,7 @@ describe('ViewCampaign | user interaction', () => {
 
     render(
       <TestDragDropContainer>
-        <AppPagesWithRouter />
+        <AppPages />
       </TestDragDropContainer>,
       {
         route: '/campaigns',

@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import { actions as orgActions } from '@bufferapp/publish-data-organizations/reducer';
+import { actions as profileActions } from '@bufferapp/publish-profile-sidebar';
 import {
   getParams,
   organization,
-  getProfilePageParams,
+  getProfilesParams,
 } from '@bufferapp/publish-routes';
 
 import { filterProfilesByOrg } from '@bufferapp/publish-profile-sidebar/utils';
@@ -23,7 +24,9 @@ export default connect(
     });
 
     // Verify if it is a profile route and get profileId param
-    const profileRouteParams = getProfilePageParams({ path: currentPath });
+    const profileRouteParams = getProfilesParams({
+      pathname: currentPath,
+    });
 
     // Get profile object matching the profileId
     const profileFromRoute =
@@ -33,7 +36,8 @@ export default connect(
       )[0];
 
     // Get org from either org or profile route
-    const orgIdFromRoute = orgRouteParams?.id || profileFromRoute?.organizationId;
+    const orgIdFromRoute =
+      orgRouteParams?.id || profileFromRoute?.organizationId;
 
     const currentOrgId = orgIdFromRoute || selectedOrgId;
 
@@ -51,7 +55,16 @@ export default connect(
     };
   },
   dispatch => ({
-    setCurrentOrganization: currentOrg =>
-      dispatch(orgActions.setCurrentOrganization(currentOrg)),
+    setCurrentOrganization: currentOrg => {
+      dispatch(orgActions.setCurrentOrganization(currentOrg));
+    },
+    profileRouteLoaded: ({ profile, tabId }) => {
+      dispatch(
+        profileActions.handleProfileRouteLoaded({
+          selectedProfile: profile,
+          tabId,
+        })
+      );
+    },
   })
 )(AppPages);

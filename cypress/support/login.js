@@ -70,7 +70,7 @@ Cypress.Commands.add('createTestUser', () => {
       })
         .its('body')
         .then(body => {
-          // Write the standalone-session.json file so that Publish is logged in 
+          // Write the standalone-session.json file so that Publish is logged in
           // as our newly created test user.
           cy.task('writeStandaloneSession', body.standalone_session);
         });

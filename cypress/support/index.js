@@ -1,7 +1,10 @@
+import '@testing-library/cypress/add-commands';
+
 /**
  * Import our custom Cypress commands
  */
 import './login';
+import './commands';
 
 /**
  * Install package that adds console messages to the Cypress output

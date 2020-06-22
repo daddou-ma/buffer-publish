@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getProfilePageParams } from '@bufferapp/publish-routes';
+import { getProfilesParams } from '@bufferapp/publish-routes';
 
 function RouteMonitor({ pathname, appCues }) {
   useEffect(() => {
@@ -10,7 +10,7 @@ function RouteMonitor({ pathname, appCues }) {
     if (appCues && appCues.loaded && window && window.Appcues) {
       window.Appcues.page();
 
-      const profilePageParams = getProfilePageParams({ path: pathname });
+      const profilePageParams = getProfilesParams({ pathname });
       if (profilePageParams && profilePageParams.tabId === 'analytics') {
         window.Appcues.track('Viewed Analytics Tab');
       }

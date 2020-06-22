@@ -38,7 +38,7 @@ const loadingContainerStyle = {
 const QueuedPosts = ({
   showEmptyQueueMessage,
   loading,
-  postLists,
+  items,
   onComposerPlaceholderClick,
   onComposerCreateSuccess,
   onRequeueClick,
@@ -153,7 +153,7 @@ const QueuedPosts = ({
           />
         )}
         <QueueItems
-          items={postLists}
+          items={items}
           subprofiles={subprofiles}
           onCalendarClick={onCalendarClick}
           onRequeueClick={onRequeueClick}
@@ -180,7 +180,7 @@ QueuedPosts.propTypes = {
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
-  postLists: PropTypes.arrayOf(
+  items: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string,
     })
