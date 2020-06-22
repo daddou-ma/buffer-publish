@@ -97,6 +97,13 @@ const pastReminder2 = buildPostWithImage({
   },
 });
 
+const pastStoryGroup = buildStoryGroup({
+  overrides: {
+    profileId: profileIG.id,
+    scheduledAt: getTime(new Date('2020-01-18T11:00:00.000Z')),
+  },
+});
+
 const draft = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
@@ -114,6 +121,7 @@ const mockApiCalls = () => {
         },
       },
       pastRemindersPosts: { total: 1, updates: [pastReminder1, pastReminder2] },
+      getPastRemindersStories: { total: 1, updates: [pastStoryGroup] },
       queuedPosts: { total: 2, updates: [queuedPost2, queuedPost1] },
       getStoryGroups: { total: 1, updates: [storyGroup] },
       getHashtagGroups: { data: { snippets: [] } },
@@ -330,11 +338,10 @@ describe('AppPages | user interaction', () => {
     });
     userEvent.click(pastRemindersTab);
 
+    const storiesSubTab = screen.getByRole('button', { name: /stories/i });
     expect(screen.getByText(/recent past reminders/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /posts/i })).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: /stories/i })
-    ).toBeInTheDocument();
+    expect(storiesSubTab).toBeInTheDocument();
 
     const reminders = await screen.findAllByTestId('post');
     expect(reminders).toHaveLength(2);
@@ -348,6 +355,17 @@ describe('AppPages | user interaction', () => {
       isFetchingMore: false,
     });
     expect(rpcCall).toHaveBeenCalledTimes(8);
+
+    userEvent.click(storiesSubTab);
+
+    expect(await screen.findAllByText(/share again/i)).toHaveLength(1);
+    expect(await screen.findAllByText(/send to mobile/i)).toHaveLength(1);
+    expect(screen.getByText(/preview/i)).toBeInTheDocument();
+    expect(rpcCall).toHaveBeenCalledWith('getPastRemindersStories', {
+      profileId: profileIG.id,
+      isFetchingMore: false,
+    });
+    expect(rpcCall).toHaveBeenCalledTimes(9);
   });
 
   it('navigates to Analytics tab and renders sent posts', async () => {
