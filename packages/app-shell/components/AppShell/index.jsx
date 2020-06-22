@@ -123,6 +123,7 @@ const generateOrgSwitcherItems = ({
   profiles,
   switchOrganization,
 }) => {
+  /** @todo only show for users w/ flip */
   /** @todo only show for 2+ orgs */
   /** @todo i18n translation? */
   const orgSwitcherItems = {

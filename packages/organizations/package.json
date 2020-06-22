@@ -8,6 +8,7 @@
   },
   "author": "karel@buffer.com",
   "dependencies": {
+    "@bufferapp/publish-profile-sidebar": "2.0.0"
   },
   "devDependencies": {
   },
