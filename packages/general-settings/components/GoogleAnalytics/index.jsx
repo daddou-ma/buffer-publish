@@ -1,7 +1,8 @@
 import React from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { redDark } from '@bufferapp/ui/style/colors';
+import styled, { keyframes } from 'styled-components';
+import { grayDark } from '@bufferapp/ui/style/colors';
 import { Toggle, Input, Card } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
 import { Field, reduxForm } from 'redux-form';
@@ -19,13 +20,6 @@ const enableGoogleAnalyticsStyle = {
 const generalWrapperStyle = {
   display: 'flex',
   marginBottom: '0.5rem',
-};
-
-const enableCampaignWrapperStyle = {
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  flex: '1 1 0%',
 };
 
 const formWrapperStyle = {
@@ -66,13 +60,35 @@ const customizeButtonStyle = {
   flexBasis: '170px',
 };
 
-const EnableCampaignText = styled(Text)`
-  margin-bottom: 2px;
+const fadeIn = keyframes`
+  from: {
+    opacity: 0;
+  }
+  to: {
+    opacity: 1;
+  }
 `;
 
-const ErrorText = styled(Text)`
+const fadeOut = keyframes`
+  from: {
+    opacity: 1;
+  }
+  to: {
+    opacity: 0;
+  }
+`;
+
+const enableCampaignWrapperStyle = {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  flex: '1 1 0%',
+};
+
+const InfoText = styled(Text)`
   margin-top: 0px;
-  color: ${redDark};
+  color: ${grayDark};
+  animation: ${props => (props.shouldShow ? fadeIn : fadeOut)} 10000ms;
 `;
 
 const GoogleAnalytics = ({
@@ -107,49 +123,51 @@ const GoogleAnalytics = ({
       </div>
       <div style={rightContainerStyle} />
     </div>
-    <div style={enableCampaignWrapperStyle}>
-      <div style={textStyle}>
-        <div style={headerTextWrapperStyle}>
-          <EnableCampaignText type="p">
-            <strong>Enable Campaign Tracking</strong>
-          </EnableCampaignText>
-        </div>
-        {!linkShorteningEnabled && (
-          <ErrorText type="p">
-            <strong>
-              Please choose a link shortener above if you&apos;d like to enable
-              campaign tracking.
-            </strong>
-          </ErrorText>
-        )}
-        <div style={enableGoogleAnalyticsStyle}>
-          <Text type="p">
-            This enables Google Analytics Tracking via UTM parameters added to
-            links you share.
-          </Text>
-          <div>
+    {!linkShorteningEnabled && (
+      <InfoText type="p" shouldShow={!linkShorteningEnabled}>
+        <em>
+          Please choose a link shortener above if you&apos;d like to enable
+          campaign tracking.
+        </em>
+      </InfoText>
+    )}
+    {linkShorteningEnabled && (
+      <div style={enableCampaignWrapperStyle}>
+        <div style={textStyle}>
+          <div style={headerTextWrapperStyle}>
             <Text type="p">
-              (This will override any existing UTM parameters)
+              <strong>Enable Campaign Tracking</strong>
             </Text>
           </div>
+          <div style={enableGoogleAnalyticsStyle}>
+            <Text type="p">
+              This enables Google Analytics Tracking via UTM parameters added to
+              links you share.
+            </Text>
+            <div>
+              <Text type="p">
+                (This will override any existing UTM parameters)
+              </Text>
+            </div>
+          </div>
+        </div>
+        <div style={switchStyle}>
+          <Toggle
+            disabled={!isManager}
+            onText={'Enabled'}
+            offText={'Disabled'}
+            on={googleAnalyticsIsEnabled}
+            size={'small'}
+            onClick={() =>
+              onToggleGoogleAnalyticsClick(
+                !googleAnalyticsIsEnabled,
+                linkShorteningEnabled
+              )
+            }
+          />
         </div>
       </div>
-      <div style={switchStyle}>
-        <Toggle
-          disabled={!isManager}
-          onText={'Enabled'}
-          offText={'Disabled'}
-          on={googleAnalyticsIsEnabled}
-          size={'small'}
-          onClick={() =>
-            onToggleGoogleAnalyticsClick(
-              !googleAnalyticsIsEnabled,
-              linkShorteningEnabled
-            )
-          }
-        />
-      </div>
-    </div>
+    )}
     {showGACustomizationForm && googleAnalyticsIsEnabled && (
       <div>
         <Card noBorder noPadding>
