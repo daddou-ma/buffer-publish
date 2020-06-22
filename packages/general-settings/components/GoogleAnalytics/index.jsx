@@ -64,11 +64,39 @@ const CampaignWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   flex: 1 1 0%;
+  margin-top: 2px;
+  transition: 800ms all linear;
+  ${props => {
+    if (props.enabled) {
+      return `
+        height: auto;
+        opacity: 1;
+        `;
+    }
+    return `
+      height: 0;
+      opacity: 0;
+      flex: unset;
+      `;
+  }}
 `;
 
 const InfoText = styled(Text)`
   margin-top: 0px;
   color: ${grayDark};
+  transition: 800ms all linear;
+  ${props => {
+    if (props.enabled) {
+      return `
+        height: auto;
+        opacity: 1;
+        `;
+    }
+    return `
+      height: 0;
+      opacity: 0;
+      `;
+  }}
 `;
 
 const GoogleAnalytics = ({
@@ -103,51 +131,47 @@ const GoogleAnalytics = ({
       </div>
       <div style={rightContainerStyle} />
     </div>
-    {!linkShorteningEnabled && (
-      <InfoText type="p" enabled={!linkShorteningEnabled}>
-        <em>
-          Please choose a link shortener above if you&apos;d like to enable
-          campaign tracking.
-        </em>
-      </InfoText>
-    )}
-    {linkShorteningEnabled && (
-      <CampaignWrapper enabled={linkShorteningEnabled}>
-        <div style={textStyle}>
-          <div style={headerTextWrapperStyle}>
+    <InfoText type="p" enabled={!linkShorteningEnabled}>
+      <em>
+        Please choose a link shortener above if you&apos;d like to enable
+        campaign tracking.
+      </em>
+    </InfoText>
+    <CampaignWrapper enabled={linkShorteningEnabled}>
+      <div style={textStyle}>
+        <div style={headerTextWrapperStyle}>
+          <Text type="p">
+            <strong>Enable Campaign Tracking</strong>
+          </Text>
+        </div>
+        <div style={enableGoogleAnalyticsStyle}>
+          <Text type="p">
+            This enables Google Analytics Tracking via UTM parameters added to
+            links you share.
+          </Text>
+          <div>
             <Text type="p">
-              <strong>Enable Campaign Tracking</strong>
+              (This will override any existing UTM parameters)
             </Text>
           </div>
-          <div style={enableGoogleAnalyticsStyle}>
-            <Text type="p">
-              This enables Google Analytics Tracking via UTM parameters added to
-              links you share.
-            </Text>
-            <div>
-              <Text type="p">
-                (This will override any existing UTM parameters)
-              </Text>
-            </div>
-          </div>
         </div>
-        <div style={switchStyle}>
-          <Toggle
-            disabled={!isManager}
-            onText={'Enabled'}
-            offText={'Disabled'}
-            on={googleAnalyticsIsEnabled}
-            size={'small'}
-            onClick={() =>
-              onToggleGoogleAnalyticsClick(
-                !googleAnalyticsIsEnabled,
-                linkShorteningEnabled
-              )
-            }
-          />
-        </div>
-      </CampaignWrapper>
-    )}
+      </div>
+      <div style={switchStyle}>
+        <Toggle
+          disabled={!isManager}
+          onText={'Enabled'}
+          offText={'Disabled'}
+          on={googleAnalyticsIsEnabled}
+          size={'small'}
+          onClick={() =>
+            onToggleGoogleAnalyticsClick(
+              !googleAnalyticsIsEnabled,
+              linkShorteningEnabled
+            )
+          }
+        />
+      </div>
+    </CampaignWrapper>
     {showGACustomizationForm && googleAnalyticsIsEnabled && (
       <div>
         <Card noBorder noPadding>
