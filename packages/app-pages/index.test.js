@@ -177,7 +177,7 @@ describe('AppPages | user interaction', () => {
     jest.clearAllMocks();
   });
 
-  it('should render proper tabs for non IG account', () => {
+  it('renders proper tabs for non IG account', () => {
     render(
       <TestDragDropContainer>
         <AppPages />
@@ -205,11 +205,11 @@ describe('AppPages | user interaction', () => {
       name: /past reminders/i,
     });
     expect(storiesTab).not.toBeInTheDocument();
-    expect(pastRemindersTab).not.toBeInTheDocument();
     expect(shopGridTab).not.toBeInTheDocument();
+    expect(pastRemindersTab).not.toBeInTheDocument();
   });
 
-  it('should render main queue and switch profiles', async () => {
+  it('renders the main queue and queued posts on profile selection', async () => {
     mockApiCalls();
 
     render(
@@ -220,21 +220,12 @@ describe('AppPages | user interaction', () => {
     );
 
     expect(screen.queryByText(/share now/i)).toBeNull();
-
     const twitterProfileSidebarBtn = screen.getByText(profileTwitter.handle);
     const igProfileSidebarBtn = screen.getByText(profileIG.handle);
     expect(twitterProfileSidebarBtn).toBeInTheDocument();
     expect(igProfileSidebarBtn).toBeInTheDocument();
 
     userEvent.click(igProfileSidebarBtn);
-
-    const {
-      queueTab,
-      analyticsTab,
-      awaitingApprovalTab,
-      draftsTab,
-      settingsTab,
-    } = tabMenuOptions();
 
     const storiesTab = screen.getByRole('link', { name: /stories/i });
     const pastRemindersTab = screen.getByRole('link', {
@@ -244,14 +235,9 @@ describe('AppPages | user interaction', () => {
       name: /shop grid/i,
     });
 
-    expect(queueTab).toBeInTheDocument();
     expect(storiesTab).toBeInTheDocument();
     expect(pastRemindersTab).toBeInTheDocument();
-    expect(analyticsTab).toBeInTheDocument();
-    expect(awaitingApprovalTab).toBeInTheDocument();
-    expect(draftsTab).toBeInTheDocument();
     expect(shopGridTab).toBeInTheDocument();
-    expect(settingsTab).toBeInTheDocument();
 
     /* Main Queue tab asserts */
     expect(
@@ -259,13 +245,13 @@ describe('AppPages | user interaction', () => {
     ).toBeInTheDocument();
 
     const { dayButton, weekButton, monthButton } = mainQueueButtons();
-    const today = screen.getByText(/today/i);
-    const date = screen.getByText(/january 1\b/i);
-    const slots = screen.getAllByText(/11:00 am/i);
-
     expect(dayButton).toBeInTheDocument();
     expect(weekButton).toBeInTheDocument();
     expect(monthButton).toBeInTheDocument();
+
+    const today = screen.getByText(/today/i);
+    const date = screen.getByText(/january 1\b/i);
+    const slots = screen.getAllByText(/11:00 am/i);
     expect(today).toBeInTheDocument();
     expect(date).toBeInTheDocument();
     expect(slots.length).toBeGreaterThan(0);
@@ -300,7 +286,7 @@ describe('AppPages | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledTimes(7);
   });
 
-  it('should navigate through queues and render posts', async () => {
+  it('navigates to Stories tab and renders stories', async () => {
     mockApiCalls();
 
     render(
@@ -323,6 +309,20 @@ describe('AppPages | user interaction', () => {
     expect(screen.getByText(/preview/i)).toBeInTheDocument();
     expect(screen.queryByText(/share again/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/send to mobile/i)).not.toBeInTheDocument();
+    expect(rpcCall).toHaveBeenCalledTimes(6);
+  });
+
+  it('navigates to Past Reminders tab renders reminders', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
 
     /* Past Reminders tab asserts */
     const pastRemindersTab = screen.queryByRole('link', {
@@ -348,6 +348,19 @@ describe('AppPages | user interaction', () => {
       isFetchingMore: false,
     });
     expect(rpcCall).toHaveBeenCalledTimes(8);
+  });
+
+  it('navigates to Analytics tab and renders sent posts', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
 
     /* Analytics tab asserts */
     const analyticsTab = screen.queryByRole('link', {
@@ -365,7 +378,20 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
       isFetchingMore: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(9);
+    expect(rpcCall).toHaveBeenCalledTimes(8);
+  });
+
+  it('navigates to Drafts tab and renders drafts posts', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
 
     /* Drafts tab asserts */
     const draftsTab = screen.queryByRole('link', {
@@ -384,6 +410,6 @@ describe('AppPages | user interaction', () => {
       needsApproval: false,
       clear: true,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(10);
-  }, 10000);
+    expect(rpcCall).toHaveBeenCalledTimes(7);
+  });
 });
