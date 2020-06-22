@@ -6,13 +6,23 @@ const getRandomPostText = () => {
 
 describe('Publish', () => {
   it('creates a new post', () => {
+    cy.server();
+    cy.route({
+      method: 'POST',
+      url: '/rpc/queuedPosts',
+      status: 200,
+    }).as('getQueuedPosts');
+
     cy.login();
     cy.visit('/');
+    cy.wait('@getQueuedPosts');
     cy.get('[data-cy=open-composer-button]').click();
+
     const randomPostText = getRandomPostText();
-    cy.get('[data-cy=composer-text-zone]').type(
-      `${randomPostText}{cmd}{enter}`
-    );
-    cy.get('[data-cy=post]').should('contain', randomPostText);
+    cy.get('[data-cy=composer-text-zone]').type(`${randomPostText}`);
+    cy.findByText(/add to queue/i).click();
+    cy.wait('@getQueuedPosts');
+
+    cy.findByText(randomPostText).should('exist');
   });
 });
