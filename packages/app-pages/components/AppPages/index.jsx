@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -26,9 +26,12 @@ const AppPages = ({
 }) => {
   const hasProfiles = profiles && profiles.length > 0;
   // If org coming from route doesn't match the last org stored, select and store the new value
-  if (needsToSetCurrentOrg) {
-    setCurrentOrganization(currentOrgId);
-  }
+  useEffect(() => {
+    if (needsToSetCurrentOrg) {
+      setCurrentOrganization(currentOrgId);
+    }
+  }, [currentOrgId]);
+
   const redirectToQueue = () => {
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
