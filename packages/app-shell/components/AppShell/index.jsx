@@ -179,7 +179,11 @@ const orgSwitcher = {
   ],
 };
 
-const generateOrgSwitcherItems = (organizations, selectedOrganizationId) => {
+const generateOrgSwitcherItems = ({
+  organizations,
+  selectedOrganizationId,
+  profiles,
+}) => {
   /** @todo only show for 2+ orgs */
 
   /** @todo i18n translation? */
@@ -194,6 +198,13 @@ const generateOrgSwitcherItems = (organizations, selectedOrganizationId) => {
       title: org.name,
       selected: selectedOrganizationId === org.id,
       onItemClick: () => console.debug('Clicked', org),
+      subItems: profiles
+        .filter(profile => profile.organizationId === selectedOrganizationId)
+        .map(profile => ({
+          id: profile.id,
+          title: profile.formatted_username,
+          network: profile.service,
+        })),
     });
   });
 
@@ -219,6 +230,7 @@ const AppShell = ({
   featureFlips,
   organizations,
   selectedOrganizationId,
+  profiles,
 }) => {
   if (hideAppShell) {
     return children;
@@ -248,10 +260,11 @@ const AppShell = ({
         }),
       }}
       helpMenuItems={helpMenuItems(t)}
-      orgSwitcher={generateOrgSwitcherItems(
+      orgSwitcher={generateOrgSwitcherItems({
         organizations,
-        selectedOrganizationId
-      )}
+        selectedOrganizationId,
+        profiles,
+      })}
       bannerOptions={
         bannerOptions
           ? {
@@ -302,6 +315,11 @@ AppShell.propTypes = {
     })
   ).isRequired,
   selectedOrganizationId: PropTypes.string.isRequired,
+  profiles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 AppShell.defaultProps = {

@@ -29,6 +29,7 @@ export default connect(
      */
     organizations: state.organizations.list,
     selectedOrganizationId: state.organizations.selected?.id,
+    profiles: state.publishProfiles,
   }),
 
   dispatch => ({
