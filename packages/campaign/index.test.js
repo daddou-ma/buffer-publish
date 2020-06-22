@@ -35,6 +35,7 @@ const campaignItem = buildCampaignItem({
   overrides: {
     profileId: profileTwitter.id,
     user,
+    dueAt: scheduledAt,
   },
 });
 const campaign = buildCampaign({

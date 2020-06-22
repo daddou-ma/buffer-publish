@@ -140,6 +140,20 @@ const buildEmptyCampaign = build('EmptyCampaign', {
   },
 });
 
+const buildCampaignChannel = build('CampaignChannel', {
+  fields: {
+    serviceId: fake(f => f.random.uuid()),
+    serviceType: 'facebook',
+    channelType: 'page',
+    channelId: fake(f => f.random.uuid()),
+    serviceAvatar: 'https://fake-image.url',
+    serviceUsername: 'BufferFB',
+    isManager: true,
+    business: true,
+    hasPushNotifications: true,
+  },
+});
+
 const buildCampaignItem = build('CampaignItem', {
   fields: {
     postContent: {
@@ -160,6 +174,10 @@ const buildCampaignItem = build('CampaignItem', {
     },
     profileId: fake(f => f.random.uuid()),
     user: buildUser(),
+    dueAt: 1590838200,
+    isManager: true,
+    isBusinessAccount: true,
+    hasPushNotifications: true,
   },
 });
 
@@ -176,6 +194,7 @@ const buildCampaign = build('Campaign', {
     dateRange: 'Mar 7-7, 2020',
     sent: 0,
     scheduled: 1,
+    channels: [buildCampaignChannel()],
     items: [buildCampaignItem()],
   },
 });
@@ -297,6 +316,7 @@ export {
   buildIGProfile,
   buildCampaign,
   buildCampaignItem,
+  buildCampaignChannel,
   buildEmptyCampaign,
   buildPost,
   buildPostWithImage,

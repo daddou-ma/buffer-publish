@@ -1,4 +1,4 @@
-const postLists = [
+const items = [
   {
     queueItemType: 'header',
     test: 'Today',
@@ -87,4 +87,4 @@ const postLists = [
   },
 ];
 
-export default postLists;
+export default items;

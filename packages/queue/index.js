@@ -48,7 +48,7 @@ export default connect(
         loadingMore: profileQueuePosts.loadingMore,
         moreToLoad: profileQueuePosts.moreToLoad,
         page: profileQueuePosts.page,
-        postLists: formatPostLists({
+        items: formatPostLists({
           isManager: profileData.isManager,
           posts: profileQueuePosts.posts,
           scheduleSlotsEnabled: true,
