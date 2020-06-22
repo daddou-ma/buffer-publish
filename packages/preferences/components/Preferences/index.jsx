@@ -49,7 +49,6 @@ const Preferences = ({
   onBackToDashboardClick,
   selectedProfileId,
   profiles,
-  isOnBusinessTrial,
 }) => {
   const { t } = useTranslation();
 
@@ -88,7 +87,6 @@ const Preferences = ({
                 onBackToDashboardClick({
                   selectedProfileId,
                   profiles,
-                  isOnBusinessTrial,
                 })
               }
             />
@@ -118,7 +116,6 @@ Preferences.propTypes = {
   onBackToDashboardClick: PropTypes.func.isRequired,
   selectedProfileId: ProfileSidebarComponent.propTypes.selectedProfileId,
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
-  isOnBusinessTrial: PropTypes.bool.isRequired,
 };
 
 Preferences.defaultProps = {

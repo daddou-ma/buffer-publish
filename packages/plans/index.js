@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { generateProfilePageRoute } from '@bufferapp/publish-routes';
+import { profilePages } from '@bufferapp/publish-routes';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
 import Plans from './components/Plans';
 
@@ -55,15 +55,13 @@ export default connect(
           })
         );
         dispatch(
-          push(
-            generateProfilePageRoute({
-              profileId,
-            })
-          )
+          profilePages.goTo({
+            profileId,
+          })
         );
       } else {
         dispatch(push('/'));
       }
     },
-  }),
+  })
 )(Plans);
