@@ -115,15 +115,23 @@ const PostLists = ({ items, ...propsForPosts }) => {
     if (queueItemType === 'header') {
       return (
         <QueueHeader
-          text={item.text}
+          key={item.id}
           id={item.id}
+          text={item.text}
           dayOfWeek={item.dayOfWeek}
           date={item.date}
         />
       );
     }
     if (queueItemType === 'post') {
-      return <PostContent index={index} item={rest} {...propsForPosts} />;
+      return (
+        <PostContent
+          key={item.id}
+          index={index}
+          item={rest}
+          {...propsForPosts}
+        />
+      );
     }
 
     return null;
