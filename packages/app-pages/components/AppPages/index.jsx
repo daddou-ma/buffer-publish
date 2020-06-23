@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -16,8 +16,22 @@ import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
 
-const AppPages = ({ profiles, isOnBusinessTrial, profileRouteLoaded }) => {
+const AppPages = ({
+  profiles,
+  isOnBusinessTrial,
+  profileRouteLoaded,
+  needsToSetCurrentOrg,
+  setCurrentOrganization,
+  currentOrgId,
+}) => {
   const hasProfiles = profiles && profiles.length > 0;
+  // If org coming from route doesn't match the last org stored, select and store the new value
+  useEffect(() => {
+    if (needsToSetCurrentOrg) {
+      setCurrentOrganization(currentOrgId);
+    }
+  }, [currentOrgId]);
+
   const redirectToQueue = () => {
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
@@ -65,11 +79,17 @@ AppPages.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object),
   isOnBusinessTrial: PropTypes.bool,
   profileRouteLoaded: PropTypes.func.isRequired,
+  needsToSetCurrentOrg: PropTypes.bool,
+  currentOrgId: PropTypes.string,
+  setCurrentOrganization: PropTypes.func,
 };
 
 AppPages.defaultProps = {
   isOnBusinessTrial: false,
   profiles: [],
+  needsToSetCurrentOrg: false,
+  currentOrgId: null,
+  setCurrentOrganization: () => {},
 };
 
 export default AppPages;
