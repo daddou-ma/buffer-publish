@@ -52,9 +52,18 @@ export default ({ dispatch, getState }) => next => action => {
       });
       break;
     }
-    case 'SELECT_ORGANIZATION': {
+
+    case actionTypes.SET_CURRENT_ORGANIZATION: {
+      const { organizationId } = action;
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'setCurrentOrganization',
+          organizationId,
+        })
+      );
+
       const list = mapSelectedOrganization({
-        id: action.id,
+        id: organizationId,
         organizations: getState().organizations.list,
       });
       const selected = getSelectedOrganization(list);
@@ -64,16 +73,6 @@ export default ({ dispatch, getState }) => next => action => {
         organizations: list,
         selected,
       });
-      break;
-    }
-    case actionTypes.SET_CURRENT_ORGANIZATION: {
-      const { organizationId } = action;
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'setCurrentOrganization',
-          organizationId,
-        })
-      );
       break;
     }
     case `setCurrentOrganization_${dataFetchActionTypes.FETCH_FAIL}`:
