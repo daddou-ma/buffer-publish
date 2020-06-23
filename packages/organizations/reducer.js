@@ -2,7 +2,6 @@ import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('ORGS', {
   INITIALIZED: 0,
-  SELECT_ORGANIZATION: 0,
   ORGANIZATION_SELECTED: 0,
   SET_CURRENT_ORGANIZATION: 0,
 });
@@ -31,9 +30,6 @@ export default (state = orgData || {}, action) => {
 };
 
 export const actions = {
-  selectOrganization(id) {
-    return { type: actionTypes.SELECT_ORGANIZATION, id };
-  },
   setCurrentOrganization: organizationId => ({
     type: actionTypes.SET_CURRENT_ORGANIZATION,
     organizationId,

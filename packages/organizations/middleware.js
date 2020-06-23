@@ -56,24 +56,6 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
 
-    case actionTypes.SELECT_ORGANIZATION: {
-      const { organizationId } = action;
-      const list = mapSelectedOrganization({
-        id: organizationId,
-        organizations: getState().organizations.list,
-      });
-      const selected = getSelectedOrganization(list);
-
-      dispatch({
-        type: actionTypes.ORGANIZATION_SELECTED,
-        organizations: list,
-        selected,
-      });
-      // dispatch(organization.goTo({ orgId: action.id }));
-
-      break;
-    }
-
     case actionTypes.SET_CURRENT_ORGANIZATION: {
       const { organizationId } = action;
       dispatch(
@@ -84,6 +66,16 @@ export default ({ dispatch, getState }) => next => action => {
           },
         })
       );
+      const list = mapSelectedOrganization({
+        id: organizationId,
+        organizations: getState().organizations.list,
+      });
+      const selected = getSelectedOrganization(list);
+      dispatch({
+        type: actionTypes.ORGANIZATION_SELECTED,
+        organizations: list,
+        selected,
+      });
       break;
     }
 
