@@ -17,6 +17,22 @@ const PostStyle = styled.div`
     props.shouldShowAnalyzeBanner ? '2rem' : '2.5rem'};
 `;
 
+const postClassName = item => {
+  if (!item) return '';
+
+  return [
+    'update',
+    `post_${item.profile_service}`,
+    item.postDetails?.isRetweet ? 'is_retweet' : 'not_retweet',
+  ].join(' ');
+};
+
+const shouldShowShareAgainButton = ({
+  isPastPost,
+  isBusinessAccount,
+  isFreeUser,
+}) => isPastPost && (!isFreeUser || isBusinessAccount);
+
 const PostContent = ({
   item,
   index,
@@ -25,6 +41,7 @@ const PostContent = ({
   onShareNowClick,
   onCampaignTagClick,
   isBusinessAccount,
+  isSent,
   isPastReminder,
   features,
   isManager,
@@ -49,14 +66,18 @@ const PostContent = ({
     onShareNowClick: () => onShareNowClick({ item }),
     onCampaignTagClick: () => onCampaignTagClick(campaignId),
     isBusinessAccount,
+    isSent,
     isPastReminder,
   };
 
   const shouldShowAnalyzeBanner =
     showAnalyzeBannerAfterFirstPost && index === 1;
-  const shouldShowShareAgainButton =
-    !features.isFreeUser() || isBusinessAccount;
-  const shouldShowSendToMobileButton = isPastReminder && isManager;
+  const shouldShowSendToMobile = isPastReminder && isManager;
+  const shouldShowShareAgain = shouldShowShareAgainButton({
+    isPastPost: isSent || isPastReminder,
+    isBusinessAccount,
+    isFreeUser: features.isFreeUser(),
+  });
 
   const PostComponent = item.type === 'storyGroup' ? Story : Post;
 
@@ -65,19 +86,13 @@ const PostContent = ({
       <PostStyle
         key={item.id}
         id={`update-${item.id}`}
-        className={[
-          'update',
-          `post_${item.profile_service}`,
-          item.postDetails && item.postDetails.isRetweet
-            ? 'is_retweet'
-            : 'not_retweet',
-        ].join(' ')}
+        className={postClassName(item)}
         shouldShowAnalyzeBanner
       >
         <PostComponent {...postWithEventHandlers} />
         <PostActionButtons
-          shouldShowShareAgainButton={shouldShowShareAgainButton}
-          shouldShowSendToMobileButton={shouldShowSendToMobileButton}
+          shouldShowShareAgainButton={shouldShowShareAgain}
+          shouldShowSendToMobileButton={shouldShowSendToMobile}
           onShareAgainClick={() => {
             onShareAgainClick({ post: item });
           }}
