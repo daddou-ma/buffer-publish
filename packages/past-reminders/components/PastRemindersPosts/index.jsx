@@ -137,6 +137,8 @@ const PastRemindersPosts = ({
         <PostLists
           items={items}
           onEditClick={onEditClick}
+          showShareAgainButton
+          showSendToMobile
           onShareAgainClick={post => onShareAgainClick(post, viewType)}
           onMobileClick={post => onMobileClick(post, viewType)}
           isManager={isManager}

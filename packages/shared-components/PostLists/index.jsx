@@ -27,11 +27,8 @@ const postClassName = item => {
   ].join(' ');
 };
 
-const shouldShowShareAgainButton = ({
-  isPastPost,
-  isBusinessAccount,
-  isFreeUser,
-}) => isPastPost && (!isFreeUser || isBusinessAccount);
+const isPaidUser = ({ features, isBusinessAccount }) =>
+  !features.isFreeUser() || isBusinessAccount;
 
 const PostContent = ({
   item,
@@ -49,6 +46,8 @@ const PostContent = ({
   onMobileClick,
   onShareAgainClick,
   showAnalyzeBannerAfterFirstPost,
+  showSendToMobile,
+  showShareAgainButton,
   ...postProps
 }) => {
   const campaignId = item.campaignDetails?.id ?? null;
@@ -72,12 +71,11 @@ const PostContent = ({
 
   const shouldShowAnalyzeBanner =
     showAnalyzeBannerAfterFirstPost && index === 1;
-  const shouldShowSendToMobile = isPastReminder && isManager;
-  const shouldShowShareAgain = shouldShowShareAgainButton({
-    isPastPost: isSent || isPastReminder,
-    isBusinessAccount,
-    isFreeUser: features.isFreeUser(),
-  });
+  const isPastPost = isSent || isPastReminder;
+  const isUserPaid = isPaidUser({ features, isBusinessAccount });
+  const shouldShowShareAgain = showShareAgainButton && isPastPost && isUserPaid;
+  const shouldShowSendToMobile =
+    showSendToMobile && isPastReminder && isManager;
 
   const PostComponent = item.type === 'storyGroup' ? Story : Post;
 

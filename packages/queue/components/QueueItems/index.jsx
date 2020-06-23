@@ -151,22 +151,25 @@ const PostContent = ({
   );
 };
 
+const isPaidUser = ({ features, isBusinessAccount }) =>
+  !features.isFreeUser() || isBusinessAccount;
+
 const Header = ({
   item,
   index,
-  features,
-  isBusinessAccount,
+  isUserPaid,
   onCalendarClick,
+  shouldRenderCalendarButtons,
 }) => {
   const { text, dayOfWeek, date, id } = item;
   const isFirstItem = index === 0;
-  const shouldRenderCalendarButtons =
-    isFirstItem && (!features.isFreeUser() || isBusinessAccount);
+  const renderCalendarButtons =
+    shouldRenderCalendarButtons && isFirstItem && isUserPaid;
 
   return (
     <HeaderWrapper key={id}>
       <QueueHeader id={id} text={text} dayOfWeek={dayOfWeek} date={date} />
-      {shouldRenderCalendarButtons && (
+      {renderCalendarButtons && (
         <CalendarButtons onCalendarClick={onCalendarClick} />
       )}
     </HeaderWrapper>
@@ -205,6 +208,7 @@ const QueueItems = props => {
     onCalendarClick,
     features,
     isBusinessAccount,
+    shouldRenderCalendarButtons,
     ...propsForPosts
   } = props;
   const itemList = items.map((item, index) => {
@@ -217,9 +221,9 @@ const QueueItems = props => {
         <Header
           item={rest}
           index={index}
-          features={features}
-          isBusinessAccount={isBusinessAccount}
           onCalendarClick={onCalendarClick}
+          isUserPaid={isPaidUser({ features, isBusinessAccount })}
+          shouldRenderCalendarButtons={shouldRenderCalendarButtons}
         />
       );
     }
@@ -228,7 +232,7 @@ const QueueItems = props => {
     }
     if (
       queueItemType === 'showMorePosts' &&
-      (!features.isFreeUser() || isBusinessAccount)
+      isPaidUser({ features, isBusinessAccount })
     ) {
       return (
         <ShowMorePostsWrapper key={rest.id}>
@@ -273,6 +277,7 @@ QueueItems.propTypes = {
   onSwapPosts: PropTypes.func,
   isBusinessAccount: PropTypes.bool,
   draggable: PropTypes.bool,
+  shouldRenderCalendarButtons: PropTypes.bool,
 };
 
 QueueItems.defaultProps = {
@@ -280,6 +285,7 @@ QueueItems.defaultProps = {
   subprofiles: [],
   draggable: false,
   isBusinessAccount: false,
+  shouldRenderCalendarButtons: false,
   onCalendarClick: () => {},
   onDeleteConfirmClick: () => {},
   onEditClick: () => {},

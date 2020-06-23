@@ -177,6 +177,7 @@ const SentPosts = ({
               isManager={isManager}
               isBusinessAccount={isBusinessAccount}
               isSent
+              showShareAgainButton
               hasFirstCommentFlip={hasFirstCommentFlip}
               hasCampaignsFeature={hasCampaignsFeature}
               showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
