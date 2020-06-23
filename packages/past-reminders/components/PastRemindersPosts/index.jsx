@@ -137,6 +137,8 @@ const PastRemindersPosts = ({
         <PostLists
           items={items}
           onEditClick={onEditClick}
+          showShareAgainButton
+          showSendToMobile
           onShareAgainClick={post => onShareAgainClick(post, viewType)}
           onMobileClick={post => onMobileClick(post, viewType)}
           isManager={isManager}
@@ -164,7 +166,7 @@ PastRemindersPosts.propTypes = {
       dayOfWeek: PropTypes.string,
       hasCommentEnabled: PropTypes.bool,
     })
-  ).isRequired,
+  ),
   total: PropTypes.number,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
@@ -187,6 +189,7 @@ PastRemindersPosts.propTypes = {
 };
 
 PastRemindersPosts.defaultProps = {
+  items: [],
   loading: true,
   moreToLoad: false,
   page: 1,

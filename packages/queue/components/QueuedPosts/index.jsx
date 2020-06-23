@@ -170,6 +170,7 @@ const QueuedPosts = ({
           isBusinessAccount={isBusinessAccount}
           onCampaignTagClick={onCampaignTagClick}
           hasCampaignsFeature={hasCampaignsFeature}
+          shouldRenderCalendarButtons
         />
       </div>
     </ErrorBoundary>

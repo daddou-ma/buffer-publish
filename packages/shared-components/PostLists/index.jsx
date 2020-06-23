@@ -2,19 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button } from '@bufferapp/ui';
 import { WithFeatureLoader } from '@bufferapp/product-features';
 
 import Post from '../Post';
 import Story from '../Story';
 import QueueHeader from '../QueueHeader';
+import PostActionButtons from '../PostActionButtons';
 import BannerAdvancedAnalytics from '../BannerAdvancedAnalytics';
-
-const ShareAgainWrapper = styled.div`
-  padding-left: 1rem;
-  padding-bottom: 0.5rem;
-  min-width: 146px;
-`;
 
 const PostStyle = styled.div`
   display: flex;
@@ -23,7 +17,20 @@ const PostStyle = styled.div`
     props.shouldShowAnalyzeBanner ? '2rem' : '2.5rem'};
 `;
 
-const renderPost = ({
+const postClassName = item => {
+  if (!item) return '';
+
+  return [
+    'update',
+    `post_${item.profile_service}`,
+    item.postDetails?.isRetweet ? 'is_retweet' : 'not_retweet',
+  ].join(' ');
+};
+
+const isPaidUser = ({ features, isBusinessAccount }) =>
+  !features.isFreeUser() || isBusinessAccount;
+
+const PostContent = ({
   item,
   index,
   onDeleteConfirmClick,
@@ -31,6 +38,7 @@ const renderPost = ({
   onShareNowClick,
   onCampaignTagClick,
   isBusinessAccount,
+  isSent,
   isPastReminder,
   features,
   isManager,
@@ -38,6 +46,8 @@ const renderPost = ({
   onMobileClick,
   onShareAgainClick,
   showAnalyzeBannerAfterFirstPost,
+  showSendToMobile,
+  showShareAgainButton,
   ...postProps
 }) => {
   const campaignId = item.campaignDetails?.id ?? null;
@@ -55,11 +65,17 @@ const renderPost = ({
     onShareNowClick: () => onShareNowClick({ item }),
     onCampaignTagClick: () => onCampaignTagClick(campaignId),
     isBusinessAccount,
+    isSent,
     isPastReminder,
   };
 
   const shouldShowAnalyzeBanner =
     showAnalyzeBannerAfterFirstPost && index === 1;
+  const isPastPost = isSent || isPastReminder;
+  const isUserPaid = isPaidUser({ features, isBusinessAccount });
+  const shouldShowShareAgain = showShareAgainButton && isPastPost && isUserPaid;
+  const shouldShowSendToMobile =
+    showSendToMobile && isPastReminder && isManager;
 
   const PostComponent = item.type === 'storyGroup' ? Story : Post;
 
@@ -68,55 +84,20 @@ const renderPost = ({
       <PostStyle
         key={item.id}
         id={`update-${item.id}`}
-        className={[
-          'update',
-          `post_${item.profile_service}`,
-          item.postDetails && item.postDetails.isRetweet
-            ? 'is_retweet'
-            : 'not_retweet',
-        ].join(' ')}
+        className={postClassName(item)}
         shouldShowAnalyzeBanner
       >
         <PostComponent {...postWithEventHandlers} />
-        {(!features.isFreeUser() || isBusinessAccount) && !isPastReminder && (
-          <ShareAgainWrapper>
-            <Button
-              type="secondary"
-              label="Share Again"
-              onClick={() => {
-                onShareAgainClick({ post: item });
-              }}
-            />
-          </ShareAgainWrapper>
-        )}
-        {isPastReminder && (
-          <div>
-            {(!features.isFreeUser() || isBusinessAccount) && (
-              <ShareAgainWrapper>
-                <Button
-                  fullWidth
-                  type="secondary"
-                  label="Share Again"
-                  onClick={() => {
-                    onShareAgainClick({ post: item });
-                  }}
-                />
-              </ShareAgainWrapper>
-            )}
-            {isManager && (
-              <ShareAgainWrapper>
-                <Button
-                  fullWidth
-                  type="secondary"
-                  label="Send to Mobile"
-                  onClick={() => {
-                    onMobileClick({ post: item });
-                  }}
-                />
-              </ShareAgainWrapper>
-            )}
-          </div>
-        )}
+        <PostActionButtons
+          shouldShowShareAgainButton={shouldShowShareAgain}
+          shouldShowSendToMobileButton={shouldShowSendToMobile}
+          onShareAgainClick={() => {
+            onShareAgainClick({ post: item });
+          }}
+          onMobileClick={() => {
+            onMobileClick({ post: item });
+          }}
+        />
       </PostStyle>
       {shouldShowAnalyzeBanner && (
         <BannerAdvancedAnalytics isAnalyzeCustomer={isAnalyzeCustomer} />
@@ -134,15 +115,23 @@ const PostLists = ({ items, ...propsForPosts }) => {
     if (queueItemType === 'header') {
       return (
         <QueueHeader
-          text={item.text}
+          key={item.id}
           id={item.id}
+          text={item.text}
           dayOfWeek={item.dayOfWeek}
           date={item.date}
         />
       );
     }
     if (queueItemType === 'post') {
-      return renderPost({ index, item: rest, ...propsForPosts });
+      return (
+        <PostContent
+          key={item.id}
+          index={index}
+          item={rest}
+          {...propsForPosts}
+        />
+      );
     }
 
     return null;
@@ -162,14 +151,9 @@ PostLists.propTypes = {
       hasCommentEnabled: PropTypes.bool,
     })
   ).isRequired,
-  isBusinessAccount: PropTypes.bool,
   features: PropTypes.shape({
     isFreeUser: () => {},
   }).isRequired,
-};
-
-PostLists.defaultProps = {
-  isBusinessAccount: false,
 };
 
 export default WithFeatureLoader(PostLists);
