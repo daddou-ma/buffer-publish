@@ -58,7 +58,9 @@ export default ({ dispatch, getState }) => next => action => {
       dispatch(
         dataFetchActions.fetch({
           name: 'setCurrentOrganization',
-          organizationId,
+          args: {
+            organizationId,
+          },
         })
       );
 
