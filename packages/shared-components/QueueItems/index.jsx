@@ -62,10 +62,7 @@ const PostContent = ({
   onSwapPosts,
   draggable,
   basic,
-  hasFirstCommentFlip,
   onPreviewClick,
-  serviceId,
-  userData,
   features,
   onCampaignTagClick,
   isBusinessAccount,
@@ -100,9 +97,6 @@ const PostContent = ({
     onPreviewClick,
     onDropPost,
     onSwapPosts,
-    hasFirstCommentFlip,
-    serviceId,
-    userData,
     isBusinessAccount,
     isSent,
     isPastReminder,
@@ -167,10 +161,11 @@ const DraftContent = ({
   onMoveToDraftsClick,
   onRequestApprovalClick,
   onRescheduleClick,
-  hasFirstCommentFlip,
+  ...postProps
 }) => {
   const draftWithEventHandlers = {
     ...draft,
+    ...postProps,
     profileService: draft.profile_service,
     geolocationName: draft.service_geolocation_name,
     key: draft.id,
@@ -181,7 +176,6 @@ const DraftContent = ({
     onMoveToDraftsClick: () => onMoveToDraftsClick({ draft }),
     onRequestApprovalClick: () => onRequestApprovalClick({ draft }),
     onRescheduleClick: () => onRescheduleClick({ draft }),
-    hasFirstCommentFlip,
   };
 
   const DraftComponent = draft.type === 'storyGroup' ? Story : Draft;
