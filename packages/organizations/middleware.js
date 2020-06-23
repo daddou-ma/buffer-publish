@@ -2,9 +2,7 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { push } from 'connected-react-router';
-import { profilePages } from '@bufferapp/publish-routes';
-import { actions as profileActions } from '@bufferapp/publish-profile-sidebar';
+import { organization } from '@bufferapp/publish-routes';
 
 import { actionTypes } from './reducer';
 import { getSelectedOrganization, mapSelectedOrganization } from './utils';
@@ -70,18 +68,7 @@ export default ({ dispatch, getState }) => next => action => {
         selected,
       });
 
-      const { publishProfiles } = getState();
-      const profilesInOrganization = publishProfiles.filter(
-        p => p.organizationId === action.id
-      );
-      const firstProfileInOrganization = profilesInOrganization[0];
-      const newPath = profilePages.getRoute({
-        profileId: firstProfileInOrganization.id,
-      });
-      dispatch(push(newPath));
-      dispatch(
-        profileActions.selectProfile({ profile: firstProfileInOrganization })
-      );
+      dispatch(organization.goTo({ orgId: action.id }));
 
       break;
     }

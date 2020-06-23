@@ -7,11 +7,8 @@
     "lint": "eslint . --ignore-pattern coverage node_modules"
   },
   "author": "karel@buffer.com",
-  "dependencies": {
-    "@bufferapp/publish-profile-sidebar": "2.0.0"
-  },
-  "devDependencies": {
-  },
+  "dependencies": {},
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }
