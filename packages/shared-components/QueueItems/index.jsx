@@ -193,6 +193,35 @@ const DraftContent = ({
   );
 };
 
+const EmptySlot = ({
+  item,
+  pinned,
+  customLabel,
+  customHoverMessage,
+  onEmptySlotClick,
+}) => {
+  const { slot } = item;
+  const time = customLabel || slot.label;
+
+  return (
+    <PostEmptySlot
+      key={item.id}
+      time={time}
+      service={item.profileService}
+      customHoverMessage={customHoverMessage}
+      onClick={() =>
+        onEmptySlotClick({
+          dueTime: slot.label,
+          profile_service: item.profileService,
+          scheduledAt: slot.timestamp,
+          due_at: slot.timestamp,
+          pinned,
+        })
+      }
+    />
+  );
+};
+
 /* eslint-enable react/prop-types */
 
 const QueueItems = props => {
@@ -228,21 +257,18 @@ const QueueItems = props => {
         />
       );
     }
+    if (queueItemType === 'slot') {
+      const isStories = type === 'stories';
 
-    if (type === 'stories' && queueItemType === 'slot') {
       return (
-        <PostEmptySlot
+        <EmptySlot
           key={item.id}
-          time="Add to Story"
-          service="isStoryGroup"
-          onClick={() =>
-            onEmptySlotClick({
-              dueTime: slot.label,
-              profile_service: item.profileService,
-              scheduledAt: slot.timestamp,
-              due_at: slot.timestamp,
-            })
-          }
+          item={item}
+          type={type}
+          pinned={!isStories}
+          customLabel={isStories && 'Add to Story'}
+          customHoverMessage={isStories && 'Schedule a Story'}
+          onEmptySlotClick={onEmptySlotClick}
         />
       );
     }

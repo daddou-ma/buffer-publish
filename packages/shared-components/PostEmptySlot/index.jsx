@@ -59,7 +59,20 @@ const iconMap = new Map([
   [SERVICE_INSTAGRAM, { component: InstagramIcon }],
 ]);
 
-const getHoverMsg = service => {
+// eslint-disable-next-line react/prop-types
+const Message = ({ message }) => <span>{message}</span>;
+
+const getHoverMsg = ({ service, customHoverMessage }) => {
+  if (customHoverMessage) {
+    return <Message message={customHoverMessage} />;
+  }
+
+  if (service === 'noProfile') {
+    return (
+      <Message message="Connect a social account to schedule posts to your queue" />
+    );
+  }
+
   const icon = iconMap.get(service);
   if (icon) {
     const { component: IconComponent } = icon;
@@ -74,12 +87,6 @@ const getHoverMsg = service => {
         </span>
       </div>
     );
-  } else if (service === 'noProfile') {
-    return (
-      <span>Connect a social account to schedule posts to your queue</span>
-    );
-  } else if (service === 'isStoryGroup') {
-    return <span>Schedule a Story</span>;
   }
 };
 
@@ -101,17 +108,18 @@ class PostEmptySlot extends Component {
   }
 
   render() {
-    const { service, time, onClick, focus } = this.props;
+    const { service, time, onClick, focus, customHoverMessage } = this.props;
+    const { isHovering } = this.state;
     return (
       // eslint-disable-next-line
       <div
-        style={emptySlotStyle(this.state.isHovering, focus, service)}
+        style={emptySlotStyle(isHovering, focus, service)}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={onClick}
       >
         <div style={timeStyle}>
-          {this.state.isHovering ? getHoverMsg(service) : time}
+          {isHovering ? getHoverMsg({ service, customHoverMessage }) : time}
         </div>
       </div>
     );
@@ -121,6 +129,7 @@ class PostEmptySlot extends Component {
 PostEmptySlot.propTypes = {
   time: PropTypes.string,
   service: PropTypes.string,
+  customHoverMessage: PropTypes.string,
   onClick: PropTypes.func,
   focus: PropTypes.bool,
 };

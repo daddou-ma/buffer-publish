@@ -174,7 +174,7 @@ const Header = ({
   );
 };
 
-const Slot = ({ item, onEmptySlotClick }) => {
+const EmptySlot = ({ item, onEmptySlotClick }) => {
   const { id, slot, profileService } = item;
 
   return (
@@ -211,9 +211,11 @@ const QueueItems = props => {
   } = props;
   const itemList = items.map((item, index) => {
     const { queueItemType, ...rest } = item;
+
     if (queueItemType === 'post') {
       return <PostContent post={rest} index={index} {...propsForPosts} />;
     }
+
     if (queueItemType === 'header') {
       return (
         <Header
@@ -227,9 +229,11 @@ const QueueItems = props => {
         />
       );
     }
+
     if (queueItemType === 'slot') {
-      return <Slot item={rest} onEmptySlotClick={onEmptySlotClick} />;
+      return <EmptySlot item={rest} onEmptySlotClick={onEmptySlotClick} />;
     }
+
     if (
       queueItemType === 'showMorePosts' &&
       isPaidUser({ features, isBusinessAccount })
