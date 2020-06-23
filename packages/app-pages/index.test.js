@@ -53,9 +53,12 @@ const campaign = buildCampaign();
 const queuedPost1 = buildPostWithImage({
   overrides: {
     profileId: profileIG.id,
+    profile_service: 'instagram',
     due_at: getTime(new Date('2020-01-01T11:00:00.000Z')),
     scheduledAt: getTime(new Date('2020-01-01T11:00:00.000Z')),
     campaignDetails: campaign,
+    commentEnabled: true,
+    commentText: 'First comment',
   },
 });
 
@@ -186,6 +189,8 @@ describe('AppPages | user interaction', () => {
   });
 
   it('renders proper tabs for non IG account', () => {
+    mockApiCalls();
+
     render(
       <TestDragDropContainer>
         <AppPages />
@@ -265,6 +270,9 @@ describe('AppPages | user interaction', () => {
     expect(slots.length).toBeGreaterThan(0);
 
     expect(await screen.findAllByText(/share now/i)).toHaveLength(2);
+    expect(
+      await screen.findAllByTitle(/post includes a comment/i)
+    ).toHaveLength(1);
     expect(screen.getByText(queuedPost1.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(queuedPost2.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(campaign.name)).toBeInTheDocument();

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { calculateStyles } from '@bufferapp/components/lib/utils';
+import styled, { css } from 'styled-components';
 import {
   transitionAnimationTime,
   transitionAnimationType,
@@ -8,17 +8,30 @@ import {
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { PostEmptySlot } from '@bufferapp/publish-shared-components';
 
+import Draft from '../Draft';
 import Story from '../Story';
 import Post from '../Post';
 import PostDragWrapper from '../PostDragWrapper';
-import Draft from '../Draft';
 import QueueHeader from '../QueueHeader';
 
 const ErrorBoundary = getErrorBoundary(true);
 
+const PostWrapper = styled.div`
+  margin-bottom: ${props => (props.isStory ? '8px' : '2rem')};
+  max-height: 100vh;
+  transition: all ${transitionAnimationTime} ${transitionAnimationType};
+
+  ${props =>
+    props.hidden &&
+    css`
+      max-height: 0;
+      opacity: 0;
+    `}
+`;
+
 /* eslint-disable react/prop-types */
 
-const renderPost = ({
+const PostContent = ({
   post,
   index,
   isStory,
@@ -59,25 +72,9 @@ const renderPost = ({
   };
   const PostComponent = post.type === 'storyGroup' ? Story : Post;
 
-  const defaultStyle = {
-    default: {
-      marginBottom: isStory ? '8px' : '2rem',
-      maxHeight: '100vh',
-      transition: `all ${transitionAnimationTime} ${transitionAnimationType}`,
-    },
-    hidden: {
-      maxHeight: 0,
-      opacity: 0,
-    },
-  };
-
-  const hiddenStyle = {
-    hidden: post.isDeleting,
-  };
-
   if (draggable) {
     return (
-      <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
+      <PostWrapper key={post.id} hidden={post.isDeleting} isStory={isStory}>
         <PostDragWrapper
           id={post.id}
           index={index}
@@ -85,18 +82,18 @@ const renderPost = ({
           postProps={postWithEventHandlers}
           basic={basic}
         />
-      </div>
+      </PostWrapper>
     );
   }
 
   return (
-    <div style={calculateStyles(defaultStyle, hiddenStyle)} key={post.id}>
+    <PostWrapper key={post.id} hidden={post.isDeleting} isStory={isStory}>
       <PostComponent {...postWithEventHandlers} basic={basic} />
-    </div>
+    </PostWrapper>
   );
 };
 
-const renderDraft = ({
+const DraftContent = ({
   draft,
   onApproveClick,
   onDeleteConfirmClick,
@@ -123,24 +120,8 @@ const renderDraft = ({
 
   const DraftComponent = draft.type === 'storyGroup' ? Story : Draft;
 
-  const defaultStyle = {
-    default: {
-      marginBottom: '2rem',
-      maxHeight: '100vh',
-      transition: `all ${transitionAnimationTime} ${transitionAnimationType}`,
-    },
-    hidden: {
-      maxHeight: 0,
-      opacity: 0,
-    },
-  };
-
-  const hiddenStyle = {
-    hidden: draft.isDeleting,
-  };
-
   return (
-    <div style={calculateStyles(defaultStyle, hiddenStyle)} key={draft.id}>
+    <PostWrapper key={draft.id} hidden={draft.isDeleting}>
       <ErrorBoundary
         fallbackComponent={() => (
           <DraftComponent {...draftWithEventHandlers} basic />
@@ -148,7 +129,7 @@ const renderDraft = ({
       >
         <DraftComponent {...draftWithEventHandlers} />
       </ErrorBoundary>
-    </div>
+    </PostWrapper>
   );
 };
 
@@ -161,16 +142,13 @@ const QueueItems = props => {
     if (queueItemType === 'post') {
       switch (type) {
         case 'drafts':
-          return renderDraft({ draft: rest, ...propsForPosts });
+          return <DraftContent draft={rest} {...propsForPosts} />;
         case 'stories':
-          return renderPost({
-            post: rest,
-            index,
-            isStory: true,
-            ...propsForPosts,
-          });
+          return (
+            <PostContent post={rest} index={index} isStory {...propsForPosts} />
+          );
         default:
-          return renderPost({ post: rest, index, ...propsForPosts });
+          return <PostContent post={rest} index={index} {...propsForPosts} />;
       }
     }
     if (queueItemType === 'header') {
@@ -202,7 +180,8 @@ const QueueItems = props => {
     }
     return null;
   });
-  return <div>{itemList}</div>;
+
+  return <>{itemList}</>;
 };
 
 QueueItems.propTypes = {
@@ -227,6 +206,12 @@ QueueItems.defaultProps = {
   draggable: false,
   type: 'post',
   onEmptySlotClick: () => {},
+  onDeleteConfirmClick: () => {},
+  onEditClick: () => {},
+  onShareNowClick: () => {},
+  onRequeueClick: () => {},
+  onDropPost: () => {},
+  onSwapPosts: () => {},
 };
 
 export default QueueItems;
