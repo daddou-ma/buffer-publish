@@ -35,6 +35,7 @@ describe('reducer', () => {
         profileService: 'twitter',
         selectedShortener: null,
       },
+      linkShorteningEnabled: false,
       googleAnalyticsIsEnabled: false,
       showGACustomizationForm: false,
       remindersAreEnabled: false,
