@@ -84,9 +84,12 @@ export default (state = initialState, action) => {
         ls => ls.domain === 'No Shortening'
       );
 
+      const linkShorteningEnabled = !noLinkShorteningDomain.selected;
+
       return {
         ...state,
         isBitlyConnected,
+        linkShorteningEnabled,
         linkShortening: {
           loading: false,
           selectedShortener: null,
@@ -94,7 +97,9 @@ export default (state = initialState, action) => {
           linkShorteners,
           isBitlyConnected,
         },
-        linkShorteningEnabled: !noLinkShorteningDomain.selected,
+        googleAnalyticsEnabled: linkShorteningEnabled
+          ? state.googleAnalyticsEnabled
+          : false,
       };
     }
     case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:

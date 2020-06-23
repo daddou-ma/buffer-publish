@@ -65,7 +65,7 @@ const CampaignWrapper = styled.div`
   align-items: center;
   flex: 1 1 0%;
   margin-top: 2px;
-  transition: 800ms all linear;
+  transition: all 200ms linear 0s;
   ${props => {
     if (props.enabled) {
       return `
@@ -84,7 +84,7 @@ const CampaignWrapper = styled.div`
 const InfoText = styled(Text)`
   margin-top: 0px;
   color: ${grayDark};
-  transition: 800ms all linear;
+  transition: all 200ms linear 0s;
   ${props => {
     if (props.enabled) {
       return `
@@ -158,10 +158,10 @@ const GoogleAnalytics = ({
       </div>
       <div style={switchStyle}>
         <Toggle
-          disabled={!isManager}
+          disabled={!isManager || !linkShorteningEnabled}
           onText={'Enabled'}
           offText={'Disabled'}
-          on={googleAnalyticsIsEnabled}
+          on={googleAnalyticsIsEnabled && linkShorteningEnabled}
           size={'small'}
           onClick={() =>
             onToggleGoogleAnalyticsClick(
@@ -211,6 +211,7 @@ const GoogleAnalytics = ({
                 }}
                 name={'utmMedium'}
                 placeholder={'social'}
+                disabled={!googleAnalyticsIsEnabled}
               />
             </div>
             <div style={saveChangesStyle}>
@@ -236,6 +237,7 @@ const GoogleAnalytics = ({
       (!features.isFreeUser() || (isBusinessAccount && isManager)) && (
         <div style={customizeButtonStyle}>
           <Button
+            disabled={!linkShorteningEnabled}
             type="secondary"
             label="Customize Campaign Tracking"
             onClick={onShowGACustomizationFormClick}
