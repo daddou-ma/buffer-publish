@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { WithFeatureLoader } from '@bufferapp/product-features';
 import {
   transitionAnimationTime,
   transitionAnimationType,
@@ -8,15 +9,19 @@ import {
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { PostEmptySlot } from '@bufferapp/publish-shared-components';
 
+import Post from '../Post';
 import Draft from '../Draft';
 import Story from '../Story';
-import Post from '../Post';
 import PostDragWrapper from '../PostDragWrapper';
 import QueueHeader from '../QueueHeader';
+import PostActionButtons from '../PostActionButtons';
+import BannerAdvancedAnalytics from '../BannerAdvancedAnalytics';
 
 const ErrorBoundary = getErrorBoundary(true);
 
 const PostWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
   margin-bottom: ${props => (props.isStory ? '8px' : '2rem')};
   max-height: 100vh;
   transition: all ${transitionAnimationTime} ${transitionAnimationType};
@@ -28,6 +33,19 @@ const PostWrapper = styled.div`
       opacity: 0;
     `}
 `;
+
+const postClassName = item => {
+  if (!item) return '';
+
+  return [
+    'update',
+    `post_${item.profile_service}`,
+    item.postDetails?.isRetweet ? 'is_retweet' : 'not_retweet',
+  ].join(' ');
+};
+
+const isPaidUser = ({ features, isBusinessAccount }) =>
+  !features.isFreeUser() || isBusinessAccount;
 
 /* eslint-disable react/prop-types */
 
@@ -48,9 +66,24 @@ const PostContent = ({
   onPreviewClick,
   serviceId,
   userData,
+  features,
+  onCampaignTagClick,
+  isBusinessAccount,
+  isSent,
+  isPastReminder,
+  isManager,
+  isAnalyzeCustomer,
+  onMobileClick,
+  onShareAgainClick,
+  showAnalyzeBannerAfterFirstPost,
+  showSendToMobile,
+  showShareAgainButton,
+  ...postProps
 }) => {
+  const campaignId = post.campaignDetails?.id ?? null;
   const postWithEventHandlers = {
     ...post,
+    ...postProps,
     service_geolocation_name: post.locationName,
     source_url: post.sourceUrl,
     subprofile_id: post.subprofileID,
@@ -63,33 +96,66 @@ const PostContent = ({
     onEditClick: () => onEditClick({ post }),
     onShareNowClick: () => onShareNowClick({ post }),
     onRequeueClick: () => onRequeueClick({ post }),
+    onCampaignTagClick: () => onCampaignTagClick(campaignId),
     onPreviewClick,
     onDropPost,
     onSwapPosts,
     hasFirstCommentFlip,
     serviceId,
     userData,
+    isBusinessAccount,
+    isSent,
+    isPastReminder,
   };
+
+  const shouldShowAnalyzeBanner =
+    showAnalyzeBannerAfterFirstPost && index === 1;
+  const isPastPost = isSent || isPastReminder;
+  const isUserPaid = isPaidUser({ features, isBusinessAccount });
+  const shouldShowShareAgain = showShareAgainButton && isPastPost && isUserPaid;
+  const shouldShowSendToMobile =
+    showSendToMobile && isPastReminder && isManager;
+
   const PostComponent = post.type === 'storyGroup' ? Story : Post;
 
-  if (draggable) {
-    return (
-      <PostWrapper key={post.id} hidden={post.isDeleting} isStory={isStory}>
-        <PostDragWrapper
-          id={post.id}
-          index={index}
-          postComponent={PostComponent}
-          postProps={postWithEventHandlers}
-          basic={basic}
-        />
-      </PostWrapper>
-    );
-  }
+  const Content = draggable ? (
+    <PostDragWrapper
+      id={post.id}
+      index={index}
+      postComponent={PostComponent}
+      postProps={postWithEventHandlers}
+      basic={basic}
+    />
+  ) : (
+    <PostComponent {...postWithEventHandlers} basic={basic} />
+  );
 
   return (
-    <PostWrapper key={post.id} hidden={post.isDeleting} isStory={isStory}>
-      <PostComponent {...postWithEventHandlers} basic={basic} />
-    </PostWrapper>
+    <>
+      <PostWrapper
+        key={post.id}
+        id={`update-${post.id}`}
+        className={postClassName(post)}
+        shouldShowAnalyzeBanner={shouldShowAnalyzeBanner}
+        hidden={post.isDeleting}
+        isStory={isStory}
+      >
+        {Content}
+        <PostActionButtons
+          shouldShowShareAgainButton={shouldShowShareAgain}
+          shouldShowSendToMobileButton={shouldShowSendToMobile}
+          onShareAgainClick={() => {
+            onShareAgainClick({ post });
+          }}
+          onMobileClick={() => {
+            onMobileClick({ post });
+          }}
+        />
+      </PostWrapper>
+      {shouldShowAnalyzeBanner && (
+        <BannerAdvancedAnalytics isAnalyzeCustomer={isAnalyzeCustomer} />
+      )}
+    </>
   );
 };
 
@@ -137,30 +203,38 @@ const DraftContent = ({
 
 const QueueItems = props => {
   const { items, type, onEmptySlotClick, ...propsForPosts } = props;
+
   const itemList = items.map((item, index) => {
     const { queueItemType, slot, ...rest } = item;
+
     if (queueItemType === 'post') {
-      switch (type) {
-        case 'drafts':
-          return <DraftContent draft={rest} {...propsForPosts} />;
-        case 'stories':
-          return (
-            <PostContent post={rest} index={index} isStory {...propsForPosts} />
-          );
-        default:
-          return <PostContent post={rest} index={index} {...propsForPosts} />;
+      if (type === 'drafts') {
+        return <DraftContent draft={rest} {...propsForPosts} />;
       }
+
+      return (
+        <PostContent
+          key={item.id}
+          index={index}
+          post={rest}
+          isStory={type === 'stories'}
+          {...propsForPosts}
+        />
+      );
     }
+
     if (queueItemType === 'header') {
       return (
         <QueueHeader
-          text={item.text}
+          key={item.id}
           id={item.id}
+          text={item.text}
           dayOfWeek={item.dayOfWeek}
           date={item.date}
         />
       );
     }
+
     if (type === 'stories' && queueItemType === 'slot') {
       return (
         <PostEmptySlot
@@ -178,6 +252,7 @@ const QueueItems = props => {
         />
       );
     }
+
     return null;
   });
 
@@ -187,9 +262,17 @@ const QueueItems = props => {
 QueueItems.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      type: PropTypes.string,
+      id: PropTypes.string,
+      text: PropTypes.string,
+      date: PropTypes.string,
+      queueItemType: PropTypes.string,
+      dayOfWeek: PropTypes.string,
+      hasCommentEnabled: PropTypes.bool,
     })
   ),
+  features: PropTypes.shape({
+    isFreeUser: () => {},
+  }).isRequired,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onShareNowClick: PropTypes.func,
@@ -214,4 +297,4 @@ QueueItems.defaultProps = {
   onSwapPosts: () => {},
 };
 
-export default QueueItems;
+export default WithFeatureLoader(QueueItems);
