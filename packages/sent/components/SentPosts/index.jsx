@@ -177,6 +177,7 @@ const SentPosts = ({
               isManager={isManager}
               isBusinessAccount={isBusinessAccount}
               isSent
+              showShareAgainButton
               hasFirstCommentFlip={hasFirstCommentFlip}
               hasCampaignsFeature={hasCampaignsFeature}
               showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
@@ -235,7 +236,6 @@ SentPosts.propTypes = {
     isBitlyConnected: PropTypes.bool,
   }),
   hasBitlyPosts: PropTypes.bool,
-  onConnectBitlyURLClick: PropTypes.func.isRequired,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
 };
 
@@ -254,9 +254,13 @@ SentPosts.defaultProps = {
   hasCampaignsFeature: false,
   isLockedProfile: false,
   isDisconnectedProfile: false,
+  hasBitlyPosts: false,
   onEditClick: () => {},
   onShareAgainClick: () => {},
   onCampaignTagClick: () => {},
+  linkShortening: {
+    isBitlyConnected: false,
+  },
 };
 
 export default WithFeatureLoader(SentPosts);

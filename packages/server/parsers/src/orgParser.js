@@ -7,4 +7,5 @@ module.exports = orgData => ({
   plan: orgData.plan,
   planCode: orgData.plan_code,
   isAdmin: orgData.is_admin,
+  selected: orgData.selected,
 });

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
+import { actions as orgActions } from '@bufferapp/publish-data-organizations/reducer';
 import { actions as profileActions } from '@bufferapp/publish-profile-sidebar';
-
 import {
   getParams,
   organization,
@@ -12,7 +12,7 @@ import AppPages from './components/AppPages';
 
 export default connect(
   state => {
-    const selectedOrg = state.organizations?.selected?.id;
+    const selectedOrgId = state.organizations?.selected?.id;
     const currentPath = state.router.location?.pathname;
     const profiles = state.publishProfiles;
     const hasOrgSwitcherFeature = state.user.features?.includes('org_switcher');
@@ -39,26 +39,26 @@ export default connect(
     const orgIdFromRoute =
       orgRouteParams?.id || profileFromRoute?.organizationId;
 
-    const currentOrg = orgIdFromRoute || selectedOrg;
-
-    // If org coming from route doesn't match the last org stored, select and store the new value
-    if (selectedOrg !== currentOrg) {
-      // TO DO: trigger action to select org
-    }
+    const currentOrgId = orgIdFromRoute || selectedOrgId;
 
     const filteredProfiles = filterProfilesByOrg(
       profiles,
-      { id: currentOrg },
+      { id: currentOrgId },
       hasOrgSwitcherFeature
     );
 
     return {
       profiles: filteredProfiles,
       isOnBusinessTrial: state.user.isOnBusinessTrial,
+      needsToSetCurrentOrg: selectedOrgId !== currentOrgId,
+      currentOrgId,
     };
   },
   dispatch => ({
-    profileRouteLoaded({ profile, tabId }) {
+    setCurrentOrganization: currentOrg => {
+      dispatch(orgActions.setCurrentOrganization(currentOrg));
+    },
+    profileRouteLoaded: ({ profile, tabId }) => {
       dispatch(
         profileActions.handleProfileRouteLoaded({
           selectedProfile: profile,

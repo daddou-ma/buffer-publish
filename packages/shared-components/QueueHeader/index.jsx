@@ -26,12 +26,12 @@ const QueueHeader = ({ text, id, dayOfWeek, date }) => {
   return (
     <QueueHeaderWrapper key={id}>
       {dateFormat ? (
-        <React.Fragment>
+        <>
           <QueueHeaderDayOfWeek type="h3">{dayOfWeek}</QueueHeaderDayOfWeek>
           <QueueHeaderDate type="p" color="grayDark">
             {date}
           </QueueHeaderDate>
-        </React.Fragment>
+        </>
       ) : (
         <QueueHeaderDayOfWeek type="h3">{text}</QueueHeaderDayOfWeek>
       )}

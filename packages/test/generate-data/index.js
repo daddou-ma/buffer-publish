@@ -203,6 +203,7 @@ const buildPost = build('Post', {
   fields: {
     id: sequence(s => `post${s}`),
     profileId: fake(f => f.random.uuid()),
+    profile_service: 'twitter',
     createdAt: 1590503972,
     scheduledAt: 1590838200,
     due_at: 1590838200,
@@ -224,6 +225,8 @@ const buildPost = build('Post', {
       postAction: 'This post will be sent today at 11:00 AM (BST).',
     },
     text: 'text',
+    commentEnabled: false,
+    commentText: null,
     postContent: {
       text: fake(f => f.lorem.words()),
       type: 'text',

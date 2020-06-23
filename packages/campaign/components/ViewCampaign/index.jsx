@@ -100,6 +100,7 @@ const ViewCampaign = ({
             onShareNowClick={postActions.onShareNowClick}
             onRequeueClick={postActions.onRequeueClick}
             type="post"
+            isSent={sentView}
           />
         )}
       </main>
