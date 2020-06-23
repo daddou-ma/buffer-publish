@@ -157,14 +157,12 @@ const isPaidUser = ({ features, isBusinessAccount }) =>
 const Header = ({
   item,
   index,
-  isUserPaid,
   onCalendarClick,
   shouldRenderCalendarButtons,
 }) => {
   const { text, dayOfWeek, date, id } = item;
   const isFirstItem = index === 0;
-  const renderCalendarButtons =
-    shouldRenderCalendarButtons && isFirstItem && isUserPaid;
+  const renderCalendarButtons = shouldRenderCalendarButtons && isFirstItem;
 
   return (
     <HeaderWrapper key={id}>
@@ -222,8 +220,10 @@ const QueueItems = props => {
           item={rest}
           index={index}
           onCalendarClick={onCalendarClick}
-          isUserPaid={isPaidUser({ features, isBusinessAccount })}
-          shouldRenderCalendarButtons={shouldRenderCalendarButtons}
+          shouldRenderCalendarButtons={
+            shouldRenderCalendarButtons &&
+            isPaidUser({ features, isBusinessAccount })
+          }
         />
       );
     }
