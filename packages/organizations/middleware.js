@@ -64,12 +64,12 @@ export default ({ dispatch, getState }) => next => action => {
       });
       const selected = getSelectedOrganization(list);
 
-      dispatch(organization.goTo({ orgId: action.id }));
       dispatch({
         type: actionTypes.ORGANIZATION_SELECTED,
         organizations: list,
         selected,
       });
+      // dispatch(organization.goTo({ orgId: action.id }));
 
       break;
     }
