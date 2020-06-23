@@ -47,6 +47,13 @@ export default connect(
       hasOrgSwitcherFeature
     );
 
+    console.log(
+      { needsToSetCurrentOrg: selectedOrgId !== currentOrgId },
+      { currentOrgId },
+      { selectedOrgId },
+      { orgIdFromRoute }
+    );
+
     return {
       profiles: filteredProfiles,
       isOnBusinessTrial: state.user.isOnBusinessTrial,

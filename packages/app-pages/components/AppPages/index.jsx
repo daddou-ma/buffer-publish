@@ -27,8 +27,10 @@ const AppPages = ({
   const hasProfiles = profiles && profiles.length > 0;
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
+    console.log('1');
     if (needsToSetCurrentOrg) {
       setCurrentOrganization(currentOrgId);
+      console.log('2');
     }
   }, [currentOrgId]);
 
