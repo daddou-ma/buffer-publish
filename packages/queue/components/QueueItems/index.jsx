@@ -196,7 +196,14 @@ const QueueItems = props => {
     const isUserPaid = isPaidUser({ features, isBusinessAccount });
 
     if (queueItemType === 'post') {
-      return <PostContent post={rest} index={index} {...propsForPosts} />;
+      return (
+        <PostContent
+          key={item.id}
+          post={rest}
+          index={index}
+          {...propsForPosts}
+        />
+      );
     }
 
     if (queueItemType === 'header') {
@@ -214,11 +221,17 @@ const QueueItems = props => {
     }
 
     if (queueItemType === 'slot') {
-      return <EmptySlot item={rest} onEmptySlotClick={onEmptySlotClick} />;
+      return (
+        <EmptySlot
+          key={item.id}
+          item={rest}
+          onEmptySlotClick={onEmptySlotClick}
+        />
+      );
     }
 
     if (queueItemType === 'showMorePosts' && isUserPaid) {
-      return <ShowMorePosts key={rest.id} onCalendarClick={onCalendarClick} />;
+      return <ShowMorePosts key={item.id} onCalendarClick={onCalendarClick} />;
     }
 
     return null;
