@@ -9,16 +9,25 @@ const ArrowButton = styled(Button)`
   height: 32px;
   border-radius: 3px;
   justify-content: center;
-  padding: 0;
   :focus {
     box-shadow: none;
   }
 `;
 
+const ArrowLeftStyled = styled(ArrowLeft)`
+  min-width: 16px;
+  margin-left: -8px;
+`;
+
+const ArrowRightStyled = styled(ArrowRight)`
+  min-width: 16px;
+  margin-left: -8px;
+`;
+
 const Arrow = ({ isLeft, onClick }) => (
   <ArrowButton
     type="secondary"
-    icon={isLeft ? <ArrowLeft /> : <ArrowRight />}
+    icon={isLeft ? <ArrowLeftStyled /> : <ArrowRightStyled />}
     hasIconOnly
     isLeft={isLeft}
     onClick={onClick}

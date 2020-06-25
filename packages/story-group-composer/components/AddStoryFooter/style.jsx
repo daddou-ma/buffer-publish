@@ -31,3 +31,7 @@ export const StyledEditButton = styled(Button)`
   margin: auto;
   margin-left: 8px;
 `;
+
+export const StyledSelectButton = styled(Button)`
+  height: 40px;
+`;
