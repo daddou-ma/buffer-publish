@@ -7,26 +7,14 @@ import {
   transitionAnimationTime,
   transitionAnimationType,
 } from '@bufferapp/components/style/animation';
-import {
-  Post,
-  PostDragWrapper,
-  QueueHeader,
-  CalendarButtons,
-} from '@bufferapp/publish-shared-components';
+import { Post, PostDragWrapper } from '@bufferapp/publish-shared-components';
+import Header from '@bufferapp/publish-shared-components/QueueItems/Header';
 
 import PostEmptySlot from '@bufferapp/publish-shared-components/PostEmptySlot/dropTarget';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import FailedPostComponent from '@bufferapp/publish-web/components/ErrorBoundary/failedPostComponent';
 
 const ErrorBoundary = getErrorBoundary(true);
-
-const HeaderWrapper = styled.div`
-  margin-top: ${props =>
-    props.isFirstItem && !props.renderCalendarButtons ? '0.5rem' : '1rem'};
-  margin-bottom: ${props => (props.renderCalendarButtons ? '0.5rem' : '')};
-  display: flex;
-  align-items: center;
-`;
 
 const ShowMorePostsWrapper = styled.div`
   text-align: center;
@@ -155,30 +143,6 @@ const PostContent = ({
 const isPaidUser = ({ features, isBusinessAccount }) =>
   !features.isFreeUser() || isBusinessAccount;
 
-const Header = ({
-  item,
-  index,
-  onCalendarClick,
-  shouldRenderCalendarButtons,
-}) => {
-  const { text, dayOfWeek, date, id } = item;
-  const isFirstItem = index === 0;
-  const renderCalendarButtons = shouldRenderCalendarButtons && isFirstItem;
-
-  return (
-    <HeaderWrapper
-      key={id}
-      renderCalendarButtons={renderCalendarButtons}
-      isFirstItem={isFirstItem}
-    >
-      <QueueHeader id={id} text={text} dayOfWeek={dayOfWeek} date={date} />
-      {renderCalendarButtons && (
-        <CalendarButtons onCalendarClick={onCalendarClick} />
-      )}
-    </HeaderWrapper>
-  );
-};
-
 const EmptySlot = ({ item, onEmptySlotClick }) => {
   const { id, slot, profileService } = item;
 
@@ -238,8 +202,9 @@ const QueueItems = props => {
     if (queueItemType === 'header') {
       return (
         <Header
+          key={item.id}
           item={rest}
-          index={index}
+          isFirstItem={index === 0}
           onCalendarClick={onCalendarClick}
           shouldRenderCalendarButtons={
             shouldRenderCalendarButtons && isUserPaid

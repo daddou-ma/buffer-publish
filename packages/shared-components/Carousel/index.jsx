@@ -130,7 +130,7 @@ class Carousel extends React.Component {
         : -1;
 
     return (
-      <React.Fragment>
+      <>
         <SliderCarousel largeCards={largeCards}>
           <CarouselContainer
             selectedItem={selectedItem}
@@ -164,14 +164,14 @@ class Carousel extends React.Component {
             largeCards={largeCards}
           />
         </SliderCarousel>
-      </React.Fragment>
+      </>
     );
   }
 }
 
 Carousel.propTypes = {
   largeCards: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.arrayOf(PropTypes.element),
   initialSelectedItem: PropTypes.number,
   totalCardsToShow: PropTypes.number,
   totalStories: PropTypes.number,
@@ -184,6 +184,7 @@ Carousel.defaultProps = {
   totalCardsToShow: 10,
   totalStories: 0,
   maxItemsPerPage: null,
+  children: [],
 };
 
 export default Carousel;

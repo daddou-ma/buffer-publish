@@ -14,12 +14,11 @@ const HeaderWrapper = styled.div`
 
 const Header = ({
   item,
-  index,
+  isFirstItem,
   onCalendarClick,
   shouldRenderCalendarButtons,
 }) => {
   const { text, dayOfWeek, date, id } = item;
-  const isFirstItem = index === 0;
   const renderCalendarButtons = shouldRenderCalendarButtons && isFirstItem;
 
   return (
@@ -37,7 +36,7 @@ const Header = ({
 };
 
 Header.propTypes = {
-  index: PropTypes.number.isRequired,
+  isFirstItem: PropTypes.bool.isRequired,
   item: PropTypes.shape({
     id: PropTypes.string,
     text: PropTypes.string,

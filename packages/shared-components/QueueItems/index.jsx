@@ -49,7 +49,7 @@ const QueueItems = ({
           <Header
             key={item.id}
             item={rest}
-            index={index}
+            isFirstItem={index === 0}
             onCalendarClick={onCalendarClick}
             shouldRenderCalendarButtons={
               shouldRenderCalendarButtons && isUserPaid

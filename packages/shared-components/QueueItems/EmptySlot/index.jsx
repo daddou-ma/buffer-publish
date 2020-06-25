@@ -39,7 +39,7 @@ EmptySlot.propTypes = {
     slot: PropTypes.shape({
       dayText: PropTypes.string,
       label: PropTypes.string,
-      timestamp: PropTypes.string,
+      timestamp: PropTypes.number,
     }),
     id: PropTypes.string,
     profileService: PropTypes.string,

@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import PropTypes from 'prop-types';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
@@ -12,6 +13,28 @@ import BannerAdvancedAnalytics from '../../BannerAdvancedAnalytics';
 import { PostWrapper } from '../styles';
 
 const ErrorBoundary = getErrorBoundary(true);
+
+const PostContentProps = {
+  indexType: PropTypes.number.isRequired,
+  queueType: PropTypes.string,
+  postType: PropTypes.shape({
+    id: PropTypes.string,
+    type: PropTypes.string,
+    isDeleting: PropTypes.bool,
+  }).isRequired,
+  postPropsType: PropTypes.shape({
+    index: PropTypes.number,
+    basic: PropTypes.bool,
+    draggable: PropTypes.bool,
+    onDeleteConfirmClick: PropTypes.func,
+    onEditClick: PropTypes.func,
+    onShareNowClick: PropTypes.func,
+    onRequeueClick: PropTypes.func,
+    onDropPost: PropTypes.func,
+    onSwapPosts: PropTypes.func,
+  }),
+  postComponentType: PropTypes.oneOf([Post, Story, Draft]).isRequired,
+};
 
 const postClassName = item => {
   if (!item) return '';
@@ -29,8 +52,6 @@ const getPostComponent = ({ queueType, postType }) => {
 
   return Post;
 };
-
-/* eslint-disable react/prop-types */
 
 const getDraftProps = ({ draft, postProps }) => {
   return {
@@ -100,6 +121,13 @@ const DraggablePost = ({
   );
 };
 
+DraggablePost.propTypes = {
+  index: PostContentProps.indexType,
+  post: PostContentProps.postType,
+  postComponent: PostContentProps.postComponentType,
+  postProps: PostContentProps.postPropsType,
+};
+
 const NonDraggablePost = ({
   post,
   postComponent: PostComponent,
@@ -119,6 +147,12 @@ const NonDraggablePost = ({
     <PostComponent {...postProps} />
   </ErrorBoundary>
 );
+
+NonDraggablePost.propTypes = {
+  post: PostContentProps.postType,
+  postComponent: PostContentProps.postComponentType,
+  postProps: PostContentProps.postPropsType,
+};
 
 const Content = ({
   post,
@@ -161,7 +195,12 @@ const Content = ({
   );
 };
 
-/* eslint-enable react/prop-types */
+Content.propTypes = {
+  post: PostContentProps.postType,
+  postComponent: PostContentProps.postComponentType,
+  queueType: PostContentProps.queueType,
+  postProps: PostContentProps.postPropsType,
+};
 
 const PostContent = ({
   post,
@@ -215,42 +254,36 @@ const PostContent = ({
 };
 
 PostContent.propTypes = {
-  post: PropTypes.shape({
-    id: PropTypes.string,
-    type: PropTypes.string,
-    isDeleting: PropTypes.bool,
-  }).isRequired,
-  queueType: PropTypes.string,
+  post: PostContentProps.postType,
+  queueType: PostContentProps.queueType,
   isAnalyzeCustomer: PropTypes.bool,
   showShareAgainButton: PropTypes.bool,
   showSendToMobile: PropTypes.bool,
   shouldShowAnalyzeBanner: PropTypes.bool,
-  draggable: PropTypes.bool,
-  onMobileClick: PropTypes.bool,
-  onShareAgainClick: PropTypes.bool,
-  onDeleteConfirmClick: PropTypes.bool,
-  onEditClick: PropTypes.func,
-  onShareNowClick: PropTypes.func,
-  onRequeueClick: PropTypes.func,
-  onDropPost: PropTypes.func,
-  onSwapPosts: PropTypes.func,
+  onMobileClick: PropTypes.func,
+  onShareAgainClick: PropTypes.func,
+  postProps: PostContentProps.postPropsType,
 };
 
 PostContent.defaultProps = {
-  draggable: false,
   isAnalyzeCustomer: false,
   showShareAgainButton: false,
   showSendToMobile: false,
   shouldShowAnalyzeBanner: false,
   queueType: 'post',
+  post: {},
   onMobileClick: () => {},
   onShareAgainClick: () => {},
-  onDeleteConfirmClick: () => {},
-  onEditClick: () => {},
-  onShareNowClick: () => {},
-  onRequeueClick: () => {},
-  onDropPost: () => {},
-  onSwapPosts: () => {},
+  postProps: {
+    index: 0,
+    draggable: false,
+    onDeleteConfirmClick: () => {},
+    onEditClick: () => {},
+    onShareNowClick: () => {},
+    onRequeueClick: () => {},
+    onDropPost: () => {},
+    onSwapPosts: () => {},
+  },
 };
 
 export default PostContent;
