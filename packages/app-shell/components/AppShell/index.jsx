@@ -134,6 +134,7 @@ const AppShell = ({
   hideMenuItems,
   enabledProducts,
   featureFlips,
+  isImpersonation,
 }) => {
   if (hideAppShell) {
     return children;
@@ -171,6 +172,7 @@ const AppShell = ({
             }
           : null
       }
+      isImpersonation={isImpersonation}
     />
   );
 };
@@ -201,6 +203,7 @@ AppShell.propTypes = {
   hideMenuItems: PropTypes.bool.isRequired,
   enabledProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
   featureFlips: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isImpersonation: PropTypes.bool,
 };
 
 AppShell.defaultProps = {
@@ -210,6 +213,7 @@ AppShell.defaultProps = {
   bannerOptions: null,
   bannerKey: null,
   showStartProTrial: false,
+  isImpersonation: false,
 };
 
 export default AppShell;
