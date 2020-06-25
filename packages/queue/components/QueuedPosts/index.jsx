@@ -171,6 +171,7 @@ const QueuedPosts = ({
           onCampaignTagClick={onCampaignTagClick}
           hasCampaignsFeature={hasCampaignsFeature}
           shouldRenderCalendarButtons
+          isMainQueue
         />
       </div>
     </ErrorBoundary>

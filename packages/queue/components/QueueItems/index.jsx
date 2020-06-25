@@ -21,7 +21,6 @@ import FailedPostComponent from '@bufferapp/publish-web/components/ErrorBoundary
 const ErrorBoundary = getErrorBoundary(true);
 
 const HeaderWrapper = styled.div`
-  margin-bottom: 1rem;
   margin-top: 1rem;
   display: flex;
   align-items: center;
@@ -38,7 +37,7 @@ const ViewCalendarWrapper = styled.div`
 `;
 
 const PostWrapper = styled.div`
-  margin: 8px 0 8px;
+  margin: 8px 0;
   max-height: 100vh;
   transition: all ${transitionAnimationTime} ${transitionAnimationType};
 
@@ -197,6 +196,19 @@ const EmptySlot = ({ item, onEmptySlotClick }) => {
   );
 };
 
+const ShowMorePosts = ({ onCalendarClick }) => (
+  <ShowMorePostsWrapper>
+    <Text type="p">Looking for your other posts?</Text>
+    <ViewCalendarWrapper>
+      <Button
+        type="primary"
+        label="View Your Calendar"
+        onClick={() => onCalendarClick('month')}
+      />
+    </ViewCalendarWrapper>
+  </ShowMorePostsWrapper>
+);
+
 /* eslint-enable react/prop-types */
 
 const QueueItems = props => {
@@ -211,6 +223,7 @@ const QueueItems = props => {
   } = props;
   const itemList = items.map((item, index) => {
     const { queueItemType, ...rest } = item;
+    const isUserPaid = isPaidUser({ features, isBusinessAccount });
 
     if (queueItemType === 'post') {
       return <PostContent post={rest} index={index} {...propsForPosts} />;
@@ -223,8 +236,7 @@ const QueueItems = props => {
           index={index}
           onCalendarClick={onCalendarClick}
           shouldRenderCalendarButtons={
-            shouldRenderCalendarButtons &&
-            isPaidUser({ features, isBusinessAccount })
+            shouldRenderCalendarButtons && isUserPaid
           }
         />
       );
@@ -234,23 +246,10 @@ const QueueItems = props => {
       return <EmptySlot item={rest} onEmptySlotClick={onEmptySlotClick} />;
     }
 
-    if (
-      queueItemType === 'showMorePosts' &&
-      isPaidUser({ features, isBusinessAccount })
-    ) {
-      return (
-        <ShowMorePostsWrapper key={rest.id}>
-          <Text type="p">Looking for your other posts?</Text>
-          <ViewCalendarWrapper>
-            <Button
-              type="primary"
-              label="View Your Calendar"
-              onClick={() => onCalendarClick('month')}
-            />
-          </ViewCalendarWrapper>
-        </ShowMorePostsWrapper>
-      );
+    if (queueItemType === 'showMorePosts' && isUserPaid) {
+      return <ShowMorePosts key={rest.id} onCalendarClick={onCalendarClick} />;
     }
+
     return null;
   });
 

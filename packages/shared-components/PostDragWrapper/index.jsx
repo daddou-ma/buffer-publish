@@ -105,10 +105,11 @@ class PostDragWrapper extends Component {
         position: 'relative',
         borderRadius: '4px',
         transition,
+        width: '100%',
         ...hideOutline,
       };
     }
-    return { borderRadius: '4px', transition, ...hideOutline };
+    return { borderRadius: '4px', width: '100%', transition, ...hideOutline };
   }
 
   renderSwapIcon() {
