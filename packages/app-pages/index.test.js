@@ -24,11 +24,13 @@ import AppPages from './index';
 const organization = buildOrganization();
 const profileTwitter = buildProfile({
   overrides: {
+    id: 'twitterProfile',
     organizationId: organization.id,
   },
 });
 const profileIG = buildIGProfile({
   overrides: {
+    id: 'igProfile',
     organizationId: organization.id,
   },
 });
@@ -37,11 +39,15 @@ const profiles = [profileTwitter, profileIG];
 const initialState = {
   user: buildUser(),
   publishProfiles: profiles,
-  organizations: { selected: { id: organization.id } },
+  organizations: { list: [organization], selected: { id: organization.id } },
   profileSidebar: {
     selectedProfileId: profileTwitter.id,
     selectedProfile: profileTwitter,
     profiles,
+    loading: false,
+    hasInstagram: true,
+    hasFacebook: false,
+    hasTwitter: true,
   },
 };
 
@@ -115,27 +121,33 @@ const draft = buildPostWithImage({
 });
 
 const mockApiCalls = () => {
-  jest.spyOn(RPCClient.prototype, 'call').mockImplementation(name => {
-    const result = {
-      getCounts: {
-        counts: {
-          drafts_needs_approval_true: 0,
-          drafts_needs_approval_false: 0,
+  jest
+    .spyOn(RPCClient.prototype, 'call')
+    .mockImplementation((name, ...rest) => {
+      console.info('RPCClient.call', name, rest);
+      const result = {
+        getCounts: {
+          counts: {
+            drafts_needs_approval_true: 0,
+            drafts_needs_approval_false: 0,
+          },
         },
-      },
-      pastRemindersPosts: { total: 1, updates: [pastReminder1, pastReminder2] },
-      getPastRemindersStories: { total: 1, updates: [pastStoryGroup] },
-      queuedPosts: { total: 2, updates: [queuedPost2, queuedPost1] },
-      getStoryGroups: { total: 1, updates: [storyGroup] },
-      getHashtagGroups: { data: { snippets: [] } },
-      sentPosts: { total: 1, updates: [sentPost] },
-      gridPosts: { total: 0, updates: [] },
-      draftPosts: { total: 1, drafts: [draft] },
-      default: { fake: 'yes' },
-    };
+        pastRemindersPosts: {
+          total: 1,
+          updates: [pastReminder1, pastReminder2],
+        },
+        getPastRemindersStories: { total: 1, updates: [pastStoryGroup] },
+        queuedPosts: { total: 2, updates: [queuedPost2, queuedPost1] },
+        getStoryGroups: { total: 1, updates: [storyGroup] },
+        getHashtagGroups: { data: { snippets: [] } },
+        sentPosts: { total: 1, updates: [sentPost] },
+        gridPosts: { total: 0, updates: [] },
+        draftPosts: { total: 1, drafts: [draft] },
+        default: { fake: 'yes' },
+      };
 
-    return Promise.resolve(result[name] || result.default);
-  });
+      return Promise.resolve(result[name] || result.default);
+    });
 };
 
 const tabMenuOptions = () => {
@@ -222,7 +234,7 @@ describe('AppPages | user interaction', () => {
     expect(pastRemindersTab).not.toBeInTheDocument();
   });
 
-  it('renders the main queue and queued posts on profile selection', async () => {
+  it.only('renders the main queue and queued posts on profile selection', async () => {
     mockApiCalls();
 
     render(

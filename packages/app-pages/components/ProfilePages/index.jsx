@@ -24,7 +24,7 @@ const ProfilePages = ({ profiles, location, profileRouteLoaded }) => {
     if (profile) {
       profileRouteLoaded({ profile, tabId });
     }
-  }, [profile, tabId]);
+  }, []);
 
   return (
     <Switch>
