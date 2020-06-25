@@ -7,7 +7,7 @@ import {
 export const PostWrapper = styled.div`
   display: flex;
   align-items: flex-start;
-  margin: 8px 0;
+  margin-bottom: 8px;
   max-height: 100vh;
   width: 100%;
   transition: all ${transitionAnimationTime} ${transitionAnimationType};

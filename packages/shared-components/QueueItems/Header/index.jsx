@@ -5,7 +5,9 @@ import QueueHeader from '../../QueueHeader';
 import CalendarButtons from '../../CalendarButtons';
 
 const HeaderWrapper = styled.div`
-  margin-top: 1rem;
+  margin-top: ${props =>
+    props.isFirstItem && !props.renderCalendarButtons ? '0.5rem' : '1rem'};
+  margin-bottom: ${props => (props.renderCalendarButtons ? '0.5rem' : '')};
   display: flex;
   align-items: center;
 `;
@@ -21,7 +23,11 @@ const Header = ({
   const renderCalendarButtons = shouldRenderCalendarButtons && isFirstItem;
 
   return (
-    <HeaderWrapper key={id}>
+    <HeaderWrapper
+      key={id}
+      renderCalendarButtons={renderCalendarButtons}
+      isFirstItem={isFirstItem}
+    >
       <QueueHeader id={id} text={text} dayOfWeek={dayOfWeek} date={date} />
       {renderCalendarButtons && (
         <CalendarButtons onCalendarClick={onCalendarClick} />
