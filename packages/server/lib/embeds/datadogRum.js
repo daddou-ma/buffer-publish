@@ -12,8 +12,8 @@ const ddRumScript = `
     applicationId: '${applicationId}',
     clientToken: '${clientToken}',
     datacenter: 'us',
-    resourceSampleRate: 100,
-    sampleRate: 100
+    resourceSampleRate: 5,
+    sampleRate: 5
   });
 </script>
 `;
