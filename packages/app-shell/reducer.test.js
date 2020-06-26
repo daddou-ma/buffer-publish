@@ -58,4 +58,12 @@ describe('reducer', () => {
       name: 'Carlton',
     });
   });
+
+  it('should set isImpersonation to true during an impersonation session', () => {
+    const action = {
+      type: `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`,
+      result: { id: '0123456789', email: 'foo@wow.com', isImpersonation: true },
+    };
+    expect(reducer(undefined, action).isImpersonation).toBe(true);
+  });
 });

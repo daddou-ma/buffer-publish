@@ -17,7 +17,8 @@ export const initialState = {
   bannerKey: null,
   bannerOptions: undefined,
   enabledProducts: [],
-  featureFlips: []
+  featureFlips: [],
+  isImpersonation: false,
 };
 
 export default (state = initialState, action) => {
@@ -45,7 +46,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         enabledProducts,
-        featureFlips: action.result.featureFlips
+        featureFlips: action.result.featureFlips,
+        isImpersonation: action.result.isImpersonation,
       };
     case actionTypes.SET_BANNER_OPTIONS:
       return {

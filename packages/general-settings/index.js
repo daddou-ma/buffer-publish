@@ -32,6 +32,7 @@ export default connect(
     showModal: state.generalSettings.showModal,
     loadingShuffle: state.generalSettings.loadingShuffle,
     linkShortening: state.generalSettings.linkShortening,
+    linkShorteningEnabled: state.generalSettings.linkShorteningEnabled,
   }),
   (dispatch, ownProps) => ({
     onDirectPostingClick: () => {
@@ -79,13 +80,20 @@ export default connect(
         })
       );
     },
-    onToggleGoogleAnalyticsClick: googleAnalyticsIsEnabled => {
-      dispatch(
-        actions.handleGoogleAnalyticsToggle({
-          profileId: ownProps.profileId,
-          utmTrackingChoice: googleAnalyticsIsEnabled ? 'enabled' : 'disabled',
-        })
-      );
+    onToggleGoogleAnalyticsClick: (
+      googleAnalyticsIsEnabled,
+      linkShorteningEnabled
+    ) => {
+      if (linkShorteningEnabled) {
+        dispatch(
+          actions.handleGoogleAnalyticsToggle({
+            profileId: ownProps.profileId,
+            utmTrackingChoice: googleAnalyticsIsEnabled
+              ? 'enabled'
+              : 'disabled',
+          })
+        );
+      }
     },
     onSaveGATrackingSettingsClick: (utmCampaign, utmSource, utmMedium) => {
       dispatch(

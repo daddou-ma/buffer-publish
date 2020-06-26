@@ -131,6 +131,7 @@ const mockApiCalls = () => {
       sentPosts: { total: 1, updates: [sentPost] },
       gridPosts: { total: 0, updates: [] },
       draftPosts: { total: 1, drafts: [draft] },
+      getCampaign: campaign,
       default: { fake: 'yes' },
     };
 
@@ -275,7 +276,6 @@ describe('AppPages | user interaction', () => {
     ).toHaveLength(1);
     expect(screen.getByText(queuedPost1.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(queuedPost2.postContent.text)).toBeInTheDocument();
-    expect(screen.getByText(campaign.name)).toBeInTheDocument();
 
     expect(rpcCall).toHaveBeenCalledWith('getStoryGroups', {
       isFetchingMore: false,
@@ -302,6 +302,34 @@ describe('AppPages | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledTimes(12);
   });
 
+  it('navigates to a campaign on tag click from main queue', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
+    const campaignTag = await screen.findByRole('button', {
+      name: campaign.name,
+    });
+    expect(campaignTag).toBeInTheDocument();
+
+    userEvent.click(campaignTag);
+    expect(
+      await screen.findByRole('heading', { name: campaign.name })
+    ).toBeInTheDocument();
+
+    expect(rpcCall).toHaveBeenCalledWith('getCampaign', {
+      campaignId: campaign.id,
+      fullItems: true,
+      past: false,
+    });
+  });
+
   it('navigates to Stories tab and renders stories', async () => {
     mockApiCalls();
 
@@ -321,8 +349,18 @@ describe('AppPages | user interaction', () => {
     expect(
       await screen.findByText(/what would you like to add to your story?/i)
     ).toBeInTheDocument();
-    expect(await screen.findAllByText(/share now/i)).toHaveLength(1);
-    expect(screen.getByText(/preview/i)).toBeInTheDocument();
+    const storiesSlots = await screen.findAllByText(/add to story/i);
+    expect(storiesSlots.length).toBeGreaterThan(0);
+
+    expect(
+      await screen.findAllByRole('button', { name: /share now/i })
+    ).toHaveLength(1);
+    expect(
+      await screen.findAllByRole('button', { name: /preview/i })
+    ).toHaveLength(1);
+    expect(
+      await screen.findAllByRole('button', { name: /delete/i })
+    ).toHaveLength(1);
     expect(screen.queryByText(/share again/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/send to mobile/i)).not.toBeInTheDocument();
     expect(rpcCall).toHaveBeenCalledTimes(11);

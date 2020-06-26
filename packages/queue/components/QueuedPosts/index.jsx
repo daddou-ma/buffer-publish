@@ -5,6 +5,7 @@ import {
   EmptyState,
   BufferLoading,
   ComposerInput,
+  QueueItems,
 } from '@bufferapp/publish-shared-components';
 import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
@@ -13,7 +14,6 @@ import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
-import QueueItems from '../QueueItems';
 import QueuePausedBar from '../QueuePausedBar';
 import RemindersBanner from '../RemindersBanner';
 
@@ -171,6 +171,7 @@ const QueuedPosts = ({
           onCampaignTagClick={onCampaignTagClick}
           hasCampaignsFeature={hasCampaignsFeature}
           shouldRenderCalendarButtons
+          isMainQueue
         />
       </div>
     </ErrorBoundary>
@@ -200,6 +201,7 @@ QueuedPosts.propTypes = {
   onEditClick: PropTypes.func.isRequired,
   onEmptySlotClick: PropTypes.func.isRequired,
   onShareNowClick: PropTypes.func.isRequired,
+  onCampaignTagClick: PropTypes.func,
   onDropPost: PropTypes.func.isRequired,
   onSwapPosts: PropTypes.func.isRequired,
   onSetRemindersClick: PropTypes.func.isRequired,
@@ -247,6 +249,7 @@ QueuedPosts.defaultProps = {
   isManager: false,
   isBusinessAccount: false,
   hasCampaignsFeature: false,
+  onCampaignTagClick: () => {},
 };
 
 export default QueuedPosts;

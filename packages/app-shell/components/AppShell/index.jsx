@@ -171,6 +171,7 @@ const AppShell = ({
   selectedOrganizationId,
   profiles,
   switchOrganization,
+  isImpersonation,
 }) => {
   if (hideAppShell) {
     return children;
@@ -214,6 +215,7 @@ const AppShell = ({
             }
           : null
       }
+      isImpersonation={isImpersonation}
     />
   );
 };
@@ -262,6 +264,7 @@ AppShell.propTypes = {
     })
   ).isRequired,
   switchOrganization: PropTypes.func.isRequired,
+  isImpersonation: PropTypes.bool,
 };
 
 AppShell.defaultProps = {
@@ -271,6 +274,7 @@ AppShell.defaultProps = {
   bannerOptions: null,
   bannerKey: null,
   showStartProTrial: false,
+  isImpersonation: false,
 };
 
 export default AppShell;

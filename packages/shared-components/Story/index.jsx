@@ -92,6 +92,7 @@ const Story = ({
           {stories &&
             stories.map(card => (
               <CarouselCard
+                key={card.id}
                 cardHeight={cardHeight}
                 cardWidth={cardWidth}
                 largeCards={largeCards}
@@ -131,7 +132,7 @@ Story.propTypes = {
     errorLink: PropTypes.string,
     stories: PropTypes.arrayOf(
       PropTypes.shape({
-        order: PropTypes.string,
+        order: PropTypes.number,
         note: PropTypes.string,
         asset_url: PropTypes.string,
         thumbnail_url: PropTypes.string,

@@ -6,8 +6,7 @@ import AnalyzeLogo from './analyzeLogo';
 
 export const ModalWrapper = styled.div`
   clear: both;
-  margin-bottom: 20px;
-  margin-top: -10px;
+  margin: 8px 0;
   max-width: 652px;
   background-color: rgba(171, 183, 255, 0.2);
   color: ${blueDark};
