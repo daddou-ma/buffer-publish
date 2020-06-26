@@ -7,8 +7,6 @@ import {
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 
-// import { actions as orgActions } from '@bufferapp/publish-data-organizations';
-
 import { actions } from './reducer';
 import AppShell from './components/AppShell';
 
