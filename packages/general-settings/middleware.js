@@ -1,6 +1,6 @@
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
-import { actionTypes as profilesActionTypes } from '@bufferapp/publish-data-profiles/reducer';
+import { actions as profilesActions } from '@bufferapp/publish-data-profiles/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import {
   actions as asyncDataFetch,
@@ -52,7 +52,7 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(
-        profilesActionTypes.fetchSingleProfile({
+        profilesActions.fetchSingleProfile({
           profileId: action.args.profileId,
         })
       );
@@ -72,7 +72,7 @@ export default ({ dispatch, getState }) => next => action => {
         ? action.result.message
         : null;
       dispatch(
-        profilesActionTypes.fetchSingleProfile({
+        profilesActions.fetchSingleProfile({
           profileId: action.args.profileId,
           message,
         })
@@ -131,7 +131,7 @@ export default ({ dispatch, getState }) => next => action => {
     case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const message = 'Awesome! Your queue has been successfully shuffled.';
       dispatch(
-        profilesActionTypes.fetchSingleProfile({
+        profilesActions.fetchSingleProfile({
           profileId: action.args.profileId,
           message,
         })
@@ -140,7 +140,7 @@ export default ({ dispatch, getState }) => next => action => {
     }
     case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(
-        profilesActionTypes.fetchSingleProfile({
+        profilesActions.fetchSingleProfile({
           profileId: action.args.profileId,
         })
       );

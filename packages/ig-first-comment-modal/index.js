@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { actionTypes as profilesActionTypes } from '@bufferapp/publish-data-profiles/reducer';
+import { actions as profilesActions } from '@bufferapp/publish-data-profiles/reducer';
 
 import InstagramFirstCommentModal from './components/InstagramFirstCommentModal';
 
@@ -46,7 +46,7 @@ export default connect(
         if (popup.closed) {
           clearInterval(interval);
           dispatch(
-            profilesActionTypes.fetchSingleProfile({
+            profilesActions.fetchSingleProfile({
               profileId,
             })
           );

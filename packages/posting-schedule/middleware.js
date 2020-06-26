@@ -3,7 +3,7 @@ import {
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
-import { actionTypes as profilesActionTypes } from '@bufferapp/publish-data-profiles/reducer';
+import { actions as profilesActions } from '@bufferapp/publish-data-profiles/reducer';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
@@ -137,7 +137,7 @@ export default ({ dispatch, getState }) => next => action => {
     case `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`:
       message = 'Awesome! Your schedule has been successfully saved.';
       dispatch(
-        profilesActionTypes.fetchSingleProfile({
+        profilesActions.fetchSingleProfile({
           profileId: action.args.profileId,
           message,
         })
@@ -154,7 +154,7 @@ export default ({ dispatch, getState }) => next => action => {
     case `updateTimezone_${dataFetchActionTypes.FETCH_SUCCESS}`:
       message = 'Awesome! Your schedule has been successfully saved.';
       dispatch(
-        profilesActionTypes.fetchSingleProfile({
+        profilesActions.fetchSingleProfile({
           profileId: action.args.profileId,
           message,
         })
@@ -171,7 +171,7 @@ export default ({ dispatch, getState }) => next => action => {
     case `updatePausedSchedules_${dataFetchActionTypes.FETCH_SUCCESS}`:
       message = 'Awesome! Your schedule has been successfully saved.';
       dispatch(
-        profilesActionTypes.fetchSingleProfile({
+        profilesActions.fetchSingleProfile({
           profileId: action.args.profileId,
           message,
         })
