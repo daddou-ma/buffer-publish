@@ -16,6 +16,7 @@ import {
   EditTextStyle,
   EditDateStyle,
   StyledEditButton,
+  StyledSelectButton,
 } from './style';
 
 class Select extends UISelect {
@@ -196,7 +197,7 @@ const AddStoryFooter = ({
             }
           />
         </ButtonStyle>
-        <Button
+        <StyledSelectButton
           onClick={onScheduleClick}
           isSplit
           type="primary"
@@ -229,7 +230,7 @@ const AddStoryFooter = ({
             xPosition="right"
             hideSearch
           />
-        </Button>
+        </StyledSelectButton>
       </FooterBar>
       {showDatePicker && (
         <DateTimeSlotPickerWrapper

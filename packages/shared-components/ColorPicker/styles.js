@@ -47,6 +47,7 @@ export const ColorPreview = styled.div`
     props.color === colorSwatches.white
       ? '1px solid lightgrey'
       : `1px solid ${props.color}`};
+  margin-left: -26px;
 `;
 
 export const ButtonWrapper = styled.div`
