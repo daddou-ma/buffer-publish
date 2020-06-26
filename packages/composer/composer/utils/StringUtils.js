@@ -63,7 +63,7 @@ const makeUnicodeAwareIndexUnaware = (str, i) =>
  * linked using `url()` have parens acting as special characters.
  */
 const cachedParensRegex = /(\(|\))/g;
-const escapeParens = str => str.replace(cachedParensRegex, '\\$1');
+const escapeParens = str => str?.replace(cachedParensRegex, '\\$1');
 
 const getDomainFromUrl = url =>
   url.replace(/(?:(?:https?|ftp):\/\/)?(?:www\.)?/, '').split(/[/?#]/)[0];
