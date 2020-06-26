@@ -7,12 +7,7 @@ import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
 import { actionTypes as gridActionTypes } from './reducer';
-import {
-  isValidURL,
-  urlHasProtocol,
-  getBaseURL,
-  getChannelProperties,
-} from './util';
+import { isValidURL, urlHasProtocol, getChannelProperties } from './util';
 
 export default ({ getState, dispatch }) => next => action => {
   // eslint-disable-line no-unused-vars
