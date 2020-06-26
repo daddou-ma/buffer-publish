@@ -87,39 +87,54 @@ const getPostProps = ({ post, postProps }) => {
   };
 };
 
+const ErrorBoundaryWrapper = ({ post, fallbackComponent, children }) => (
+  <ErrorBoundary
+    fallbackComponent={() => (
+      <ErrorBoundary
+        fallbackComponent={() => (
+          <FailedPostComponent key={post.id} post={post} postId={post.id} />
+        )}
+      >
+        {fallbackComponent}
+      </ErrorBoundary>
+    )}
+  >
+    {children}
+  </ErrorBoundary>
+);
+
+ErrorBoundaryWrapper.propTypes = {
+  post: PostContentProps.postType,
+  fallbackComponent: PropTypes.elementType,
+  children: PropTypes.element.isRequired,
+};
+
 const DraggablePost = ({
   index,
   post,
   postComponent: PostComponent,
   postProps,
-}) => {
-  return (
-    <ErrorBoundary
-      fallbackComponent={() => (
-        <ErrorBoundary
-          fallbackComponent={() => (
-            <FailedPostComponent key={post.id} post={post} postId={post.id} />
-          )}
-        >
-          <PostDragWrapper
-            id={post.id}
-            index={index}
-            postComponent={PostComponent}
-            postProps={postProps}
-            basic
-          />
-        </ErrorBoundary>
-      )}
-    >
+}) => (
+  <ErrorBoundaryWrapper
+    post={post}
+    fallbackComponent={
       <PostDragWrapper
         id={post.id}
         index={index}
         postComponent={PostComponent}
         postProps={postProps}
+        basic
       />
-    </ErrorBoundary>
-  );
-};
+    }
+  >
+    <PostDragWrapper
+      id={post.id}
+      index={index}
+      postComponent={PostComponent}
+      postProps={postProps}
+    />
+  </ErrorBoundaryWrapper>
+);
 
 DraggablePost.propTypes = {
   index: PostContentProps.indexType,
@@ -133,19 +148,12 @@ const NonDraggablePost = ({
   postComponent: PostComponent,
   postProps,
 }) => (
-  <ErrorBoundary
-    fallbackComponent={() => (
-      <ErrorBoundary
-        fallbackComponent={() => (
-          <FailedPostComponent key={post.id} post={post} postId={post.id} />
-        )}
-      >
-        <PostComponent {...postProps} basic />
-      </ErrorBoundary>
-    )}
+  <ErrorBoundaryWrapper
+    post={post}
+    fallbackComponent={<PostComponent {...postProps} basic />}
   >
     <PostComponent {...postProps} />
-  </ErrorBoundary>
+  </ErrorBoundaryWrapper>
 );
 
 NonDraggablePost.propTypes = {
@@ -226,7 +234,6 @@ const PostContent = ({
       <PostWrapper
         id={`update-${post.id}`}
         className={postClassName(post)}
-        shouldShowAnalyzeBanner={shouldShowAnalyzeBanner}
         hidden={post.isDeleting}
       >
         <Content

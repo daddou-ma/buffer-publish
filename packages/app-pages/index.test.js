@@ -131,6 +131,7 @@ const mockApiCalls = () => {
       sentPosts: { total: 1, updates: [sentPost] },
       gridPosts: { total: 0, updates: [] },
       draftPosts: { total: 1, drafts: [draft] },
+      getCampaign: campaign,
       default: { fake: 'yes' },
     };
 
@@ -275,7 +276,6 @@ describe('AppPages | user interaction', () => {
     ).toHaveLength(1);
     expect(screen.getByText(queuedPost1.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(queuedPost2.postContent.text)).toBeInTheDocument();
-    expect(screen.getByText(campaign.name)).toBeInTheDocument();
 
     expect(rpcCall).toHaveBeenCalledWith('getStoryGroups', {
       isFetchingMore: false,
@@ -300,6 +300,34 @@ describe('AppPages | user interaction', () => {
     });
     expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
     expect(rpcCall).toHaveBeenCalledTimes(12);
+  });
+
+  it('navigates to a campaign on tag click from main queue', async () => {
+    mockApiCalls();
+
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      { initialState }
+    );
+
+    userEvent.click(screen.getByText(profileIG.handle));
+    const campaignTag = await screen.findByRole('button', {
+      name: campaign.name,
+    });
+    expect(campaignTag).toBeInTheDocument();
+
+    userEvent.click(campaignTag);
+    expect(
+      await screen.findByRole('heading', { name: campaign.name })
+    ).toBeInTheDocument();
+
+    expect(rpcCall).toHaveBeenCalledWith('getCampaign', {
+      campaignId: campaign.id,
+      fullItems: true,
+      past: false,
+    });
   });
 
   it('navigates to Stories tab and renders stories', async () => {
