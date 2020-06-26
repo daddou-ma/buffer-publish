@@ -8,18 +8,6 @@ import {
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions, actionTypes } from './reducer';
 
-export const refreshProfile = (dispatch, profileId, message) => {
-  dispatch(
-    dataFetchActions.fetch({
-      name: 'singleProfile',
-      args: {
-        profileId,
-        message,
-      },
-    })
-  );
-};
-
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {

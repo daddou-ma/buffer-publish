@@ -1,6 +1,6 @@
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
-import { refreshProfile } from '@bufferapp/publish-profile-sidebar/middleware';
+import { actionTypes as profilesActionTypes } from '@bufferapp/publish-data-profiles/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import {
   actions as asyncDataFetch,
@@ -51,7 +51,11 @@ export default ({ dispatch, getState }) => next => action => {
       );
       break;
     case `toggleGoogleAnalytics_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      refreshProfile(dispatch, action.args.profileId);
+      dispatch(
+        profilesActionTypes.fetchSingleProfile({
+          profileId: action.args.profileId,
+        })
+      );
       break;
     case actionTypes.SHOW_GA_CUSTOMIZATION_FORM:
       dispatch(
@@ -67,7 +71,12 @@ export default ({ dispatch, getState }) => next => action => {
       const message = action.result.showNotification
         ? action.result.message
         : null;
-      refreshProfile(dispatch, action.args.profileId, message);
+      dispatch(
+        profilesActionTypes.fetchSingleProfile({
+          profileId: action.args.profileId,
+          message,
+        })
+      );
       break;
     }
     case actionTypes.SAVE_GA_CUSTOM_FORM:
@@ -120,12 +129,21 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
     case `shuffleQueue_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      message = 'Awesome! Your queue has been successfully shuffled.';
-      refreshProfile(dispatch, action.args.profileId, message);
+      const message = 'Awesome! Your queue has been successfully shuffled.';
+      dispatch(
+        profilesActionTypes.fetchSingleProfile({
+          profileId: action.args.profileId,
+          message,
+        })
+      );
       break;
     }
     case `toggleInstagramReminders_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      refreshProfile(dispatch, action.args.profileId);
+      dispatch(
+        profilesActionTypes.fetchSingleProfile({
+          profileId: action.args.profileId,
+        })
+      );
       break;
     default:
       break;

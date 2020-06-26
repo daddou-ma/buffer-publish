@@ -18,8 +18,9 @@ export default (state = profilesData || [], action) => {
 };
 
 export const actions = {
-  fetchSingleProfile: ({ profileId }) => ({
+  fetchSingleProfile: ({ profileId, message }) => ({
     type: actionTypes.FETCH_SINGLE_PROFILE,
     profileId,
+    message,
   }),
 };

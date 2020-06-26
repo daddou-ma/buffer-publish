@@ -38,6 +38,7 @@ export default ({ dispatch }) => next => action => {
           name: 'singleProfile',
           args: {
             profileId: action.profileId,
+            message: action.message,
           },
         })
       );
