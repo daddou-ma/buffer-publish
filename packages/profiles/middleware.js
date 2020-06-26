@@ -1,4 +1,5 @@
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actionTypes } from './reducer';
 
 export default ({ dispatch }) => next => action => {
   next(action);
@@ -31,7 +32,7 @@ export default ({ dispatch }) => next => action => {
         );
       }
       break;
-    case 'INIT_SINGLE_PROFILE':
+    case actionTypes.FETCH_SINGLE_PROFILE:
       dispatch(
         dataFetchActions.fetch({
           name: 'singleProfile',

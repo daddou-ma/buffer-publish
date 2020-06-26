@@ -6,6 +6,7 @@ import {
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue';
+import { actionTypes as profilesActionTypes } from '@bufferapp/publish-data-profiles/reducer';
 import { actionTypes as gridActionTypes } from './reducer';
 import { isValidURL, urlHasProtocol, getChannelProperties } from './util';
 
@@ -198,10 +199,11 @@ export default ({ getState, dispatch }) => next => action => {
 
     case `updateSingleCustomLink_${dataFetchActionTypes.FETCH_SUCCESS}`:
     case `updateCustomLinks_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch({
-        type: 'INIT_SINGLE_PROFILE',
-        profileId: action.args.profileId,
-      });
+      dispatch(
+        profilesActionTypes.fetchSingleProfile({
+          profileId: action.args.profileId,
+        })
+      );
       dispatch(
         notificationActions.createNotification({
           notificationType: 'success',
