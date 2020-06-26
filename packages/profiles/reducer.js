@@ -1,4 +1,5 @@
 import keyWrapper from '@bufferapp/keywrapper';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 const profilesData =
   typeof window !== 'undefined' &&
@@ -12,6 +13,20 @@ export const actionTypes = keyWrapper('PROFILES', {
 
 export default (state = profilesData || [], action) => {
   switch (action.type) {
+    case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      let profiles = state;
+      if (profiles?.some(p => p.id === action.result.id)) {
+        profiles = profiles.map(profile => {
+          if (profile.id === action.result.id) {
+            return action.result;
+          }
+          return profile;
+        });
+      } else {
+        profiles = [...profiles, action.result];
+      }
+      return [...profiles];
+    }
     default:
       return state;
   }
