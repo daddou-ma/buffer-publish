@@ -14,6 +14,7 @@ import {
   buildOrganization,
   buildStoryGroup,
 } from '@bufferapp/publish-test-utils/generate-data';
+import setupRpcMocks from '@bufferapp/publish-test-utils/utils/setupRpcMocks';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
 import RPCClient from '@bufferapp/micro-rpc-client';
@@ -114,29 +115,25 @@ const draft = buildPostWithImage({
   },
 });
 
-const mockApiCalls = () => {
-  jest.spyOn(RPCClient.prototype, 'call').mockImplementation(name => {
-    const result = {
-      getCounts: {
-        counts: {
-          drafts_needs_approval_true: 0,
-          drafts_needs_approval_false: 0,
-        },
-      },
-      pastRemindersPosts: { total: 1, updates: [pastReminder1, pastReminder2] },
-      getPastRemindersStories: { total: 1, updates: [pastStoryGroup] },
-      queuedPosts: { total: 2, updates: [queuedPost2, queuedPost1] },
-      getStoryGroups: { total: 1, updates: [storyGroup] },
-      getHashtagGroups: { data: { snippets: [] } },
-      sentPosts: { total: 1, updates: [sentPost] },
-      gridPosts: { total: 0, updates: [] },
-      draftPosts: { total: 1, drafts: [draft] },
-      getCampaign: campaign,
-      default: { fake: 'yes' },
-    };
-
-    return Promise.resolve(result[name] || result.default);
-  });
+const mockedRpcResponses = {
+  pastRemindersPosts: { total: 1, updates: [pastReminder1, pastReminder2] },
+  getPastRemindersStories: { total: 1, updates: [pastStoryGroup] },
+  queuedPosts: { total: 2, updates: [queuedPost2, queuedPost1] },
+  getStoryGroups: { total: 1, updates: [storyGroup] },
+  getHashtagGroups: { data: { snippets: [] } },
+  sentPosts: { total: 1, updates: [sentPost] },
+  gridPosts: { total: 0, updates: [] },
+  draftPosts: { total: 1, drafts: [draft] },
+  getCampaign: campaign,
+  getLinkShortener: { foo: 'bar' },
+  getCounts: {
+    counts: {
+      drafts_needs_approval_true: 0,
+      drafts_needs_approval_false: 0,
+    },
+  },
+  getCampaignsList: { data: [campaign] },
+  default: { fake: 'yes' },
 };
 
 const tabMenuOptions = () => {
@@ -182,6 +179,7 @@ describe('AppPages | user interaction', () => {
   );
 
   beforeAll(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
     Date.now = jest.fn(() => new Date('2020-01-01T10:10:00.000Z'));
   });
 
@@ -190,7 +188,7 @@ describe('AppPages | user interaction', () => {
   });
 
   it('renders proper tabs for non IG account', () => {
-    mockApiCalls();
+    setupRpcMocks(mockedRpcResponses);
 
     render(
       <TestDragDropContainer>
@@ -224,7 +222,15 @@ describe('AppPages | user interaction', () => {
   });
 
   it('renders the main queue and queued posts on profile selection', async () => {
-    mockApiCalls();
+    const {
+      getStoryGroups,
+      getHashtagGroups,
+      getCounts,
+      getLinkShortener,
+      queuedPosts,
+      gridPosts,
+      getCampaignsList,
+    } = setupRpcMocks(mockedRpcResponses);
 
     render(
       <TestDragDropContainer>
@@ -277,33 +283,35 @@ describe('AppPages | user interaction', () => {
     expect(screen.getByText(queuedPost1.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(queuedPost2.postContent.text)).toBeInTheDocument();
 
-    expect(rpcCall).toHaveBeenCalledWith('getStoryGroups', {
+    expect(getStoryGroups).toHaveBeenCalledWith({
       isFetchingMore: false,
       profileId: profileIG.id,
     });
-    expect(rpcCall).toHaveBeenCalledWith('getHashtagGroups', {
+    expect(getHashtagGroups).toHaveBeenCalledWith({
       organizationId: profileIG.organizationId,
     });
-    expect(rpcCall).toHaveBeenCalledWith('getCounts', {
+    expect(getCounts).toHaveBeenCalledWith({
       profileId: profileIG.id,
     });
-    expect(rpcCall).toHaveBeenCalledWith('getLinkShortener', {
+    expect(getLinkShortener).toHaveBeenCalledWith({
       profileId: profileIG.id,
     });
-    expect(rpcCall).toHaveBeenCalledWith('queuedPosts', {
+    expect(queuedPosts).toHaveBeenCalledWith({
       profileId: profileIG.id,
       isFetchingMore: false,
       count: 300,
     });
-    expect(rpcCall).toHaveBeenCalledWith('gridPosts', {
-      profileId: profileIG.id,
-    });
-    expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
-    expect(rpcCall).toHaveBeenCalledTimes(12);
+    expect(gridPosts)
+      .toHaveBeenCalledWith({
+        profileId: profileIG.id,
+      })
+      .toHaveBeenCalledTimes(2);
+    expect(getCampaignsList).toHaveBeenCalledWith({});
+    // expect(rpcCall).toHaveBeenCalledTimes(12);
   });
 
   it('navigates to a campaign on tag click from main queue', async () => {
-    mockApiCalls();
+    const { getCampaign } = setupRpcMocks(mockedRpcResponses);
 
     render(
       <TestDragDropContainer>
@@ -323,15 +331,15 @@ describe('AppPages | user interaction', () => {
       await screen.findByRole('heading', { name: campaign.name })
     ).toBeInTheDocument();
 
-    expect(rpcCall).toHaveBeenCalledWith('getCampaign', {
+    expect(getCampaign).toHaveBeenCalledWith({
       campaignId: campaign.id,
       fullItems: true,
       past: false,
     });
   });
 
-  it('navigates to Stories tab and renders stories', async () => {
-    mockApiCalls();
+  it.only('navigates to Stories tab and renders stories', async () => {
+    const { getStoryGroups } = setupRpcMocks(mockedRpcResponses);
 
     render(
       <TestDragDropContainer>
@@ -363,7 +371,8 @@ describe('AppPages | user interaction', () => {
     ).toHaveLength(1);
     expect(screen.queryByText(/share again/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/send to mobile/i)).not.toBeInTheDocument();
-    expect(rpcCall).toHaveBeenCalledTimes(11);
+
+    expect(getStoryGroups).toHaveBeenCalledTimes(2);
   });
 
   it('navigates to Past Reminders tab renders reminders', async () => {
