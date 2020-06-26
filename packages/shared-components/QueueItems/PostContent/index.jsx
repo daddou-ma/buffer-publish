@@ -226,7 +226,6 @@ const PostContent = ({
       <PostWrapper
         id={`update-${post.id}`}
         className={postClassName(post)}
-        shouldShowAnalyzeBanner={shouldShowAnalyzeBanner}
         hidden={post.isDeleting}
       >
         <Content
