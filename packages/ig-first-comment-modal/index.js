@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
-import { actionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { actionTypes as profilesActionTypes } from '@bufferapp/publish-data-profiles/reducer';
 
 import InstagramFirstCommentModal from './components/InstagramFirstCommentModal';
 
@@ -45,10 +45,11 @@ export default connect(
       const interval = setInterval(() => {
         if (popup.closed) {
           clearInterval(interval);
-          dispatch({
-            type: actionTypes.SINGLE_PROFILE,
-            profileId,
-          });
+          dispatch(
+            profilesActionTypes.fetchSingleProfile({
+              profileId,
+            })
+          );
           dispatch(modalsActions.hideInstagramFirstCommentModal());
         }
       }, 150);
