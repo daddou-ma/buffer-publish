@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { PostLists, EmptyState } from '@bufferapp/publish-shared-components';
+import { QueueItems, EmptyState } from '@bufferapp/publish-shared-components';
 import PreviewPopover from '@bufferapp/publish-story-preview';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
@@ -134,7 +134,7 @@ const PastRemindersPosts = ({
           onComposerCreateSuccess={onComposerCreateSuccess}
         />
 
-        <PostLists
+        <QueueItems
           items={items}
           onEditClick={onEditClick}
           showShareAgainButton

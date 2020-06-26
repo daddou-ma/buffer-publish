@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  PostLists,
+  QueueItems,
   EmptyState,
   BufferLoading,
   BitlyClickNotification,
@@ -169,7 +169,7 @@ const SentPosts = ({
             {showComposer && editMode && (
               <ComposerPopover onSave={onComposerCreateSuccess} type="sent" />
             )}
-            <PostLists
+            <QueueItems
               items={items}
               onEditClick={onEditClick}
               onShareAgainClick={onShareAgainClick}

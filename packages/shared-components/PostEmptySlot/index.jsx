@@ -1,5 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import {
+  white,
+  grayLighter,
+  gray,
+  grayDark,
+  grayDarker,
+  boxShadow,
+} from '@bufferapp/ui/style/colors';
+import {
+  fontSize,
+  fontFamily,
+  fontWeightMedium,
+} from '@bufferapp/ui/style/fonts';
 import {
   TwitterIcon,
   FacebookIcon,
@@ -17,39 +31,45 @@ import {
 } from '@bufferapp/publish-constants';
 
 const getBgStyle = (isHovering, focus) => {
-  if (isHovering || focus) return '#FFFFFF';
-  return '#F5F5F5';
+  if (isHovering || focus) return white;
+  return grayLighter;
 };
 
-const emptySlotStyle = (isHovering, focus, service) => ({
-  background: getBgStyle(isHovering, focus),
-  cursor: service === 'noProfile' ? 'auto' : 'pointer',
-  border: isHovering ? '1px solid #B8B8B8' : '1px solid transparent',
-  borderRadius: '4px',
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: '500',
-  lineHeight: 'normal',
-  fontSize: '14px',
-  color: focus ? '#3D3D3D' : '#636363',
-  height: '48px',
-  display: 'flex',
-  justifyContent: 'center',
-  transition: 'all 0.1s ease-out',
-  marginBottom: '8px',
-  boxShadow: focus ? '0 0 0 3px #ABB7FF' : 'none',
-  position: 'relative',
-});
+const EmptySlot = styled.div`
+  background: ${props => getBgStyle(props.isHovering, props.focus)};
+  cursor: ${props => (props.service === 'noProfile' ? 'auto' : 'pointer')};
+  border: ${props =>
+    props.isHovering ? `1px solid ${gray}` : '1px solid transparent'};
+  border-radius: 4px;
+  font-family: ${fontFamily};
+  font-style: normal;
+  font-weight: ${fontWeightMedium};
+  line-height: normal;
+  font-size: ${fontSize};
+  color: ${props => (props.focus ? grayDarker : grayDark)};
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  transition: all 0.1s ease-out;
+  margin-bottom: 8px;
+  box-shadow: ${props => (props.focus ? `0 0 0 3px ${boxShadow}` : 'none')};
+  position: relative;
+`;
 
-const timeStyle = {
-  padding: '15px',
-};
+const MessageWrapper = styled.div`
+  display: flex;
+`;
 
-const iconStyle = {
-  verticalAlign: 'middle',
-  display: 'inline-block',
-  marginRight: '3px',
-};
+const LabelWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 15px;
+`;
+
+const IconWrapper = styled.span`
+  display: flex;
+  margin-right: 5px;
+`;
 
 const iconMap = new Map([
   [SERVICE_TWITTER, { component: TwitterIcon }],
@@ -59,28 +79,36 @@ const iconMap = new Map([
   [SERVICE_INSTAGRAM, { component: InstagramIcon }],
 ]);
 
-const getHoverMsg = service => {
-  const icon = iconMap.get(service);
-  if (icon) {
-    const { component: IconComponent } = icon;
-    return (
-      <div>
-        <span style={iconStyle}>
-          <IconComponent />
-        </span>
-        <span>
-          {' '}
-          {service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post'}{' '}
-        </span>
-      </div>
-    );
-  } else if (service === 'noProfile') {
-    return (
-      <span>Connect a social account to schedule posts to your queue</span>
-    );
-  } else if (service === 'isStoryGroup') {
-    return <span>Schedule a Story</span>;
+// eslint-disable-next-line react/prop-types
+const Message = ({ message }) => <span>{message}</span>;
+
+// eslint-disable-next-line react/prop-types
+const HoverMessage = ({ service, customHoverMessage }) => {
+  if (customHoverMessage) {
+    return <Message message={customHoverMessage} />;
   }
+
+  if (service === 'noProfile') {
+    return (
+      <Message message="Connect a social account to schedule posts to your queue" />
+    );
+  }
+
+  const icon = iconMap.get(service);
+  const IconComponent = icon && icon.component;
+  const message =
+    service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post';
+
+  return (
+    <MessageWrapper>
+      {icon && (
+        <IconWrapper>
+          <IconComponent />
+        </IconWrapper>
+      )}
+      <Message message={message} />
+    </MessageWrapper>
+  );
 };
 
 class PostEmptySlot extends Component {
@@ -101,19 +129,40 @@ class PostEmptySlot extends Component {
   }
 
   render() {
-    const { service, time, onClick, focus } = this.props;
+    const {
+      service,
+      time,
+      onClick,
+      focus,
+      customLabel,
+      customHoverMessage,
+    } = this.props;
+    const { isHovering } = this.state;
+    const message = customLabel || time;
+
     return (
-      // eslint-disable-next-line
-      <div
-        style={emptySlotStyle(this.state.isHovering, focus, service)}
+      <EmptySlot
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={onClick}
+        onKeyPress={onClick}
+        isHovering={isHovering}
+        focus={focus}
+        service={service}
+        role="button"
+        tabIndex="0"
       >
-        <div style={timeStyle}>
-          {this.state.isHovering ? getHoverMsg(service) : time}
-        </div>
-      </div>
+        <LabelWrapper>
+          {isHovering ? (
+            <HoverMessage
+              service={service}
+              customHoverMessage={customHoverMessage}
+            />
+          ) : (
+            <Message message={message} />
+          )}
+        </LabelWrapper>
+      </EmptySlot>
     );
   }
 }
@@ -121,8 +170,19 @@ class PostEmptySlot extends Component {
 PostEmptySlot.propTypes = {
   time: PropTypes.string,
   service: PropTypes.string,
+  customLabel: PropTypes.string,
+  customHoverMessage: PropTypes.string,
   onClick: PropTypes.func,
   focus: PropTypes.bool,
+};
+
+PostEmptySlot.defaultProps = {
+  time: null,
+  service: null,
+  customLabel: null,
+  customHoverMessage: null,
+  onClick: () => {},
+  focus: false,
 };
 
 export default PostEmptySlot;

@@ -321,8 +321,18 @@ describe('AppPages | user interaction', () => {
     expect(
       await screen.findByText(/what would you like to add to your story?/i)
     ).toBeInTheDocument();
-    expect(await screen.findAllByText(/share now/i)).toHaveLength(1);
-    expect(screen.getByText(/preview/i)).toBeInTheDocument();
+    const storiesSlots = await screen.findAllByText(/add to story/i);
+    expect(storiesSlots.length).toBeGreaterThan(0);
+
+    expect(
+      await screen.findAllByRole('button', { name: /share now/i })
+    ).toHaveLength(1);
+    expect(
+      await screen.findAllByRole('button', { name: /preview/i })
+    ).toHaveLength(1);
+    expect(
+      await screen.findAllByRole('button', { name: /delete/i })
+    ).toHaveLength(1);
     expect(screen.queryByText(/share again/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/send to mobile/i)).not.toBeInTheDocument();
     expect(rpcCall).toHaveBeenCalledTimes(11);
