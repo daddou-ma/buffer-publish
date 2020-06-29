@@ -207,7 +207,11 @@ export default (state = initialState, action) => {
         isSearchPopupVisible,
       };
     case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      let { selectedProfile, profiles, organization } = state;
+      let { selectedProfile, profiles } = state;
+      const { organization, isOrganizationSwitcherEnabled } = state;
+      const isInCurrentOrganization =
+        isOrganizationSwitcherEnabled &&
+        organization.id === action.result.organizationId;
 
       if (selectedProfile.id === action.result.id) {
         selectedProfile = action.result;
@@ -220,7 +224,7 @@ export default (state = initialState, action) => {
           }
           return profile;
         });
-      } else {
+      } else if (!isOrganizationSwitcherEnabled || isInCurrentOrganization) {
         profiles = [...profiles, action.result];
       }
 
