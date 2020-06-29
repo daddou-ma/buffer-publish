@@ -15,7 +15,10 @@ export default (state = profilesData || [], action) => {
   switch (action.type) {
     case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       let profiles = state;
-      if (profiles?.some(p => p.id === action.result.id)) {
+      if (
+        Array.isArray(profiles) &&
+        profiles.some(p => p.id === action.result.id)
+      ) {
         profiles = profiles.map(profile => {
           if (profile.id === action.result.id) {
             return action.result;
