@@ -10,15 +10,21 @@ const getContainerStyle = hidden => ({
 });
 
 /* eslint-disable react/prop-types */
-const TopBanner = ({ status, content, onCloseBanner }) => (
+const TopBanner = ({
+  status,
+  content,
+  onCloseBanner,
+  themeColor = 'orange',
+}) => (
   <div style={getContainerStyle(status)}>
     <Banner
-      themeColor="orange"
+      themeColor={themeColor}
       customHTML={{ __html: content }}
       onCloseBanner={onCloseBanner}
     />
   </div>
 );
+
 /* eslint-enable react/prop-types */
 
 const TemporaryDashboardBanner = ({
@@ -50,11 +56,11 @@ const TemporaryDashboardBanner = ({
     return null;
   }
 
-  // Displays Temporary Banner with retiring social login message. We will want to remove after June 30th
+  // Displays Temporary Banner with retiring social login message. We will want to remove after July 7
 
   if (displayRetiringSocialLoginBanner) {
-    const retiringSocialLoginMessage = `We are retiring social login on June 30, 2020. Please 
-      <a href="https://login.buffer.com/forgot-password" style="color: rgb(44, 75, 255); text-decoration: none;">
+    const retiringSocialLoginMessage = `We are retiring social login on July 7, 2020. Please
+      <a href="https://login.buffer.com/forgot-password">
         set up a password to ensure continued access.
       </a>
     `;
@@ -62,6 +68,7 @@ const TemporaryDashboardBanner = ({
       status: hidden,
       content: retiringSocialLoginMessage,
       onCloseBanner: onCloseBannerClick,
+      themeColor: 'blue',
     });
   }
 
