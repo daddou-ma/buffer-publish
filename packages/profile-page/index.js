@@ -46,23 +46,18 @@ export default hot(
       if (tabId === 'awaitingApproval' || tabId === 'pendingApproval')
         reducerName = 'drafts';
       if (state?.[reducerName]?.byProfileId?.[profileId]) {
-        const currentProfile = state[reducerName].byProfileId[profileId];
+        const currentQueue = state[reducerName].byProfileId[profileId];
+        const { selectedProfile } = state.profileSidebar;
         return {
-          loading: currentProfile.loading,
-          loadingMore: currentProfile.loadingMore,
-          moreToLoad: currentProfile.moreToLoad,
-          page: currentProfile.page,
-          posts: currentProfile.posts,
-          total: currentProfile.total,
-          translations: state.i18n.translations.example,
-          view: currentProfile.tabId || null,
-          isBusinessAccount: state.profileSidebar.selectedProfile.business,
-          selectedProfile: state.profileSidebar.selectedProfile,
+          loadingMore: currentQueue.loadingMore,
+          moreToLoad: currentQueue.moreToLoad,
+          page: currentQueue.page,
+          isBusinessAccount: selectedProfile.business,
+          selectedProfile,
           hasStoriesFlip:
             state.user.features?.includes('stories_groups') ?? false,
-          shouldHideAdvancedAnalytics: state.profileSidebar.selectedProfile
-            ? state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics
-            : false,
+          shouldHideAdvancedAnalytics:
+            selectedProfile?.shouldHideAdvancedAnalytics || false,
         };
       }
       return {};

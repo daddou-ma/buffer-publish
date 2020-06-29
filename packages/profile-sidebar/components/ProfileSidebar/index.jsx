@@ -111,7 +111,7 @@ const ProfileSidebar = ({
       {profiles.length > 0 && (
         <ProfileListStyle data-hide-scrollbar>
           {hasCampaignsFlip && (
-            <React.Fragment>
+            <>
               <ButtonWrapper>
                 <SidebarListItem
                   id="campaigns"
@@ -125,7 +125,7 @@ const ProfileSidebar = ({
                 {t('profile-sidebar.socialAccounts')}
               </ProfileListTitle>
               <Divider marginTop="0" marginBottom="1rem" />
-            </React.Fragment>
+            </>
           )}
           {profiles.length > 9 && (
             <ProfileSearch

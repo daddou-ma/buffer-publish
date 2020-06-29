@@ -17,17 +17,17 @@ import QueuedPosts from './components/QueuedPosts';
 export default connect(
   (state, ownProps) => {
     const { profileId } = ownProps;
-    const profileQueuePosts = state.queue.byProfileId[profileId];
+    const queue = state.queue.byProfileId[profileId];
     const profileData = state.profileSidebar.profiles.find(
       p => p.id === ownProps.profileId
     );
     const { isLockedProfile } = state.profileSidebar;
 
     const queuePostsArray =
-      profileQueuePosts &&
-      profileQueuePosts.posts &&
-      Object.keys(profileQueuePosts.posts).map(key => {
-        return profileQueuePosts.posts[key];
+      queue &&
+      queue.posts &&
+      Object.keys(queue.posts).map(key => {
+        return queue.posts[key];
       });
 
     const hasAtLeastOneReminderPost =
@@ -42,20 +42,20 @@ export default connect(
         isLockedProfile,
       };
     }
-    if (profileQueuePosts && profileData) {
+    if (queue && profileData) {
       return {
-        loading: profileQueuePosts.loading,
-        loadingMore: profileQueuePosts.loadingMore,
-        moreToLoad: profileQueuePosts.moreToLoad,
-        page: profileQueuePosts.page,
+        loading: queue.loading,
+        loadingMore: queue.loadingMore,
+        moreToLoad: queue.moreToLoad,
+        page: queue.page,
         items: formatPostLists({
           isManager: profileData.isManager,
-          posts: profileQueuePosts.posts,
+          posts: queue.posts,
           scheduleSlotsEnabled: true,
           schedules: profileData.schedules,
           profileTimezone: profileData.timezone,
           weekStartsOnMonday: state.user.week_starts_monday,
-          weeksToShow: profileQueuePosts.page + 1,
+          weeksToShow: queue.page + 1,
           hasTwentyFourHourTimeFormat: state.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
         }),
@@ -88,7 +88,9 @@ export default connect(
           state.user.features?.includes('campaigns') ?? false,
       };
     }
-    return {};
+    return {
+      items: [],
+    };
   },
 
   (dispatch, ownProps) => ({

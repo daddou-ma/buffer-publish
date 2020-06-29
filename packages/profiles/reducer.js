@@ -1,4 +1,4 @@
-let profilesData =
+const profilesData =
   typeof window !== 'undefined' &&
   typeof window.bufferData !== 'undefined' &&
   typeof window.bufferData.profiles !== 'undefined' &&

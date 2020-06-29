@@ -1,21 +1,23 @@
 import keyWrapper from '@bufferapp/keywrapper';
 
-const orgData = window?.bufferData?.organizations;
-
-export const actionTypes = keyWrapper('ORGANIZATIONS', {
+export const actionTypes = keyWrapper('ORGS', {
+  INITIALIZED: 0,
+  ORGANIZATION_SELECTED: 0,
   SET_CURRENT_ORGANIZATION: 0,
 });
 
+const orgData = window?.bufferData?.organizations;
+
 export default (state = orgData || {}, action) => {
   switch (action.type) {
-    case `ORGANIZATIONS_INITIALIZED`: {
+    case actionTypes.INITIALIZED: {
       const { organizations, selectedOrganization } = action;
       return {
         list: organizations,
         selected: selectedOrganization,
       };
     }
-    case `ORGANIZATION_SELECTED`: {
+    case actionTypes.ORGANIZATION_SELECTED: {
       return {
         ...state,
         list: action.organizations,

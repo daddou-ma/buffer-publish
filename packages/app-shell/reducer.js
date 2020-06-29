@@ -9,6 +9,7 @@ export const actionTypes = keyWrapper('APP_SHELL', {
 export const initialState = {
   showReturnToClassic: false,
   showSwitchPlanModal: false,
+  hasOrgSwitcherFeature: false,
   user: {
     name: '...',
     email: '',
@@ -38,8 +39,9 @@ export default (state = initialState, action) => {
         showManageTeam: !action.result.is_free_user,
         showStartProTrial:
           action.result.canStartProTrial && !action.result.isBusinessTeamMember,
+        hasOrgSwitcherFeature: action.result.hasOrgSwitcherFeature,
       };
-    case `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const productLinks = action.result.productlinks || [];
       const enabledProducts = productLinks.map(product => product.productName);
 
@@ -49,6 +51,7 @@ export default (state = initialState, action) => {
         featureFlips: action.result.featureFlips,
         isImpersonation: action.result.isImpersonation,
       };
+    }
     case actionTypes.SET_BANNER_OPTIONS:
       return {
         ...state,

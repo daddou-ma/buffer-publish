@@ -2,9 +2,11 @@ import { connect } from 'react-redux';
 import {
   newBusinessTrialists,
   preferencesGeneral,
+  organization,
 } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+
 import { actions } from './reducer';
 import AppShell from './components/AppShell';
 
@@ -23,6 +25,14 @@ export default connect(
     hideMenuItems: state.appShell.hideMenuItems,
     enabledProducts: state.appShell.enabledProducts,
     featureFlips: state.appShell.featureFlips,
+    /**
+     * Org Switcher
+     * Needs organizations and profiles.
+     */
+    hasOrgSwitcherFeature: state.appShell.hasOrgSwitcherFeature,
+    organizations: state.organizations.list,
+    selectedOrganizationId: state.organizations.selected?.id,
+    profiles: state.publishProfiles,
     isImpersonation: state.appShell.isImpersonation,
   }),
 
@@ -40,6 +50,9 @@ export default connect(
     },
     onCloseBanner({ key }) {
       dispatch(actions.onCloseBanner({ key }));
+    },
+    switchOrganization(organizationId) {
+      dispatch(organization.goTo({ orgId: organizationId }));
     },
   })
 )(AppShell);

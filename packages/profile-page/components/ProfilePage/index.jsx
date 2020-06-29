@@ -156,6 +156,7 @@ TabContent.propTypes = {
   childTabId: PropTypes.string,
   profileId: PropTypes.string.isRequired,
   onChangeTab: PropTypes.func,
+  loadMore: PropTypes.func.isRequired,
   selectedProfile: PropTypes.shape({
     service: PropTypes.string,
     business: PropTypes.bool,
@@ -277,7 +278,6 @@ ProfilePage.defaultProps = {
   loadingMore: false,
   moreToLoad: false,
   page: 1,
-  posts: [],
   onChangeTab: () => {},
   selectedProfile: null,
   hasStoriesFlip: false,
