@@ -171,7 +171,7 @@ export default (state = initialState, action) => {
     case `ORGANIZATION_SELECTED`: {
       const selectedOrganization = action.selected;
       const { profiles } = state;
-      let filteredProfiles;
+      let filteredProfiles = [];
 
       if (profiles) {
         filteredProfiles = filterProfilesByOrg(
