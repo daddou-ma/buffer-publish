@@ -15,7 +15,7 @@ const merged = merge.strategy({
   entry: {
     bundle: ['react-hot-loader/patch'],
   },
-  devtool: 'source-map',
+  devtool: false,
   output: {
     publicPath,
   },

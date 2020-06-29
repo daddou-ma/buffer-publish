@@ -118,14 +118,20 @@ function generateUserMenuItems({
 }
 
 const generateOrgSwitcherItems = ({
+  hasOrgSwitcherFeature,
   organizations,
   selectedOrganizationId,
   profiles,
   switchOrganization,
 }) => {
-  /** @todo only show for users w/ flip */
-  /** @todo only show for 2+ orgs */
-  /** @todo i18n translation? */
+  /**
+   * Only show if user has feature and 2+ organizations
+   */
+  const shouldShow = hasOrgSwitcherFeature && organizations?.length >= 2;
+  if (!shouldShow) {
+    return null;
+  }
+
   const orgSwitcherItems = {
     title: 'Organizations',
     menuItems: [],
@@ -167,6 +173,7 @@ const AppShell = ({
   hideMenuItems,
   enabledProducts,
   featureFlips,
+  hasOrgSwitcherFeature,
   organizations,
   selectedOrganizationId,
   profiles,
@@ -202,6 +209,7 @@ const AppShell = ({
       }}
       helpMenuItems={helpMenuItems(t)}
       orgSwitcher={generateOrgSwitcherItems({
+        hasOrgSwitcherFeature,
         organizations,
         selectedOrganizationId,
         profiles,
@@ -246,6 +254,7 @@ AppShell.propTypes = {
   hideMenuItems: PropTypes.bool.isRequired,
   enabledProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
   featureFlips: PropTypes.arrayOf(PropTypes.string).isRequired,
+  hasOrgSwitcherFeature: PropTypes.bool,
   organizations: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -268,6 +277,7 @@ AppShell.propTypes = {
 };
 
 AppShell.defaultProps = {
+  hasOrgSwitcherFeature: false,
   showReturnToClassic: false,
   showSwitchPlan: false,
   showManageTeam: false,
