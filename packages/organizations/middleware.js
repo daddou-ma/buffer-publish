@@ -3,6 +3,7 @@ import {
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
 import { actions as notificationActions } from '@bufferapp/notifications';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 import { actionTypes } from './reducer';
 import { getSelectedOrganization, mapSelectedOrganization } from './utils';
@@ -56,7 +57,33 @@ export default ({ dispatch, getState }) => next => action => {
     }
 
     case actionTypes.SET_CURRENT_ORGANIZATION: {
+      const {
+        organizations: { list, selected },
+      } = getState();
       const { organizationId } = action;
+      const listMapped = mapSelectedOrganization({
+        id: organizationId,
+        organizations: list,
+      });
+      const selectedOrg = getSelectedOrganization(listMapped);
+
+      // Select the org
+      dispatch({
+        type: actionTypes.ORGANIZATION_SELECTED,
+        organizations: listMapped,
+        selected: selectedOrg,
+      });
+
+      // Track the event
+      dispatch(
+        analyticsActions.trackEvent('Organization Switched', {
+          organizationId: selected.globalOrgId,
+          publishOrganizationSwitchedTo: organizationId,
+          publishOrganizationSwitchedFrom: selected.id,
+        })
+      );
+
+      // Save current org preference
       dispatch(
         dataFetchActions.fetch({
           name: 'setCurrentOrganization',
@@ -65,16 +92,6 @@ export default ({ dispatch, getState }) => next => action => {
           },
         })
       );
-      const list = mapSelectedOrganization({
-        id: organizationId,
-        organizations: getState().organizations.list,
-      });
-      const selected = getSelectedOrganization(list);
-      dispatch({
-        type: actionTypes.ORGANIZATION_SELECTED,
-        organizations: list,
-        selected,
-      });
       break;
     }
 

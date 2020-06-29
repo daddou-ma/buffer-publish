@@ -1470,10 +1470,10 @@
     "@bufferapp/nav-sidebar" "^1.11.0"
     numeral "2.0.6"
 
-"@bufferapp/ui@5.41.4":
-  version "5.41.4"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.41.4.tgz#6a0f4a3a5ea42ce54883cbf9f5135e8ce5e2a424"
-  integrity sha512-aipXY3K5neD9HzcjLuxmTuBHiZeQtbIKI35sG3vZ8VEcfzLxqJZoN2q/Qm9KAGgGneNtLn1UiXwSYA48xy+9dQ==
+"@bufferapp/ui@5.41.6":
+  version "5.41.6"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.41.6.tgz#784570e29aa8e7551b669011eabc6b56005f9054"
+  integrity sha512-B0irtw4U9bd/Jcuhvl9VtBhhAqYo+/GaFMPwiLUgP1mYk8+TC+HkVIzr4xg4SLFgMLAx9pP43eAk2t7wmM3wrg==
   dependencies:
     "@reach/tooltip" "0.6.2"
     immutability-helper "^2.9.0"

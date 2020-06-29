@@ -7,7 +7,9 @@
     "lint": "eslint . --ignore-pattern coverage node_modules"
   },
   "author": "karel@buffer.com",
-  "dependencies": {},
+  "dependencies": {
+    "@bufferapp/publish-analytics-middleware": "2.0.0"
+  },
   "devDependencies": {},
   "publishConfig": {
     "access": "public"
