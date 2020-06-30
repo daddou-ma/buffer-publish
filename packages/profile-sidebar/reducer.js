@@ -159,6 +159,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        profileList: action.result,
         profiles: filterProfilesByOrg(
           action.result,
           state.organization,
@@ -171,12 +172,12 @@ export default (state = initialState, action) => {
     }
     case orgActionTypes.ORGANIZATION_SELECTED: {
       const selectedOrganization = action.selected;
-      const { profiles } = state;
-      let filteredProfiles = [];
+      let { profiles } = state;
 
       if (profiles) {
-        filteredProfiles = filterProfilesByOrg(
-          profiles,
+        const { profileList } = state;
+        profiles = filterProfilesByOrg(
+          profileList,
           selectedOrganization,
           state.isOrganizationSwitcherEnabled
         );
@@ -185,7 +186,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         organization: selectedOrganization,
-        profiles: filteredProfiles,
+        profiles,
       };
     }
     case actionTypes.SELECT_PROFILE: {
