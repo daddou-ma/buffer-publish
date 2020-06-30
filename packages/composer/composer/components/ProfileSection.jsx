@@ -51,6 +51,7 @@ class ProfileSection extends React.Component {
       .filter(profile => profile.isSelected)
       .map(profile => profile.id);
     const hasNoProfilesSelected = selectedProfilesIds.length === 0;
+    const hasProfileGroups = profileGroups?.length > 0;
 
     const profilesTogglerClassName = [
       styles.profilesToggler,
@@ -70,13 +71,15 @@ class ProfileSection extends React.Component {
           </Button>
         )}
 
-        {shouldBeConsideredBusinessUser && hasEnoughProfiles && (
-          <ProfileGroups
-            groups={profileGroups}
-            selectedProfilesIds={selectedProfilesIds}
-            onNewPublish={onNewPublish}
-          />
-        )}
+        {shouldBeConsideredBusinessUser &&
+          hasEnoughProfiles &&
+          hasProfileGroups && (
+            <ProfileGroups
+              groups={profileGroups}
+              selectedProfilesIds={selectedProfilesIds}
+              onNewPublish={onNewPublish}
+            />
+          )}
 
         <div className={styles.profilesContainer}>
           <ul
