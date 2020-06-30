@@ -223,7 +223,7 @@ QueuedPosts.propTypes = {
   hasFirstCommentFlip: PropTypes.bool,
   onCalendarClick: PropTypes.func.isRequired,
   isBusinessAccount: PropTypes.bool,
-  hasCampaignsFeature: PropTypes.bool.isRequired,
+  hasCampaignsFeature: PropTypes.bool,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
 };
 
@@ -248,6 +248,7 @@ QueuedPosts.defaultProps = {
   draggingEnabled: false,
   isManager: false,
   isBusinessAccount: false,
+  hasCampaignsFeature: false,
   onCampaignTagClick: () => {},
 };
 

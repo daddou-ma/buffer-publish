@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { grayDark } from '@bufferapp/ui/style/colors';
 import { Toggle, Input, Card } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
 import { Field, reduxForm } from 'redux-form';
@@ -17,13 +19,6 @@ const enableGoogleAnalyticsStyle = {
 const generalWrapperStyle = {
   display: 'flex',
   marginBottom: '0.5rem',
-};
-
-const enableCampaignWrapperStyle = {
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  flex: '1 1 0%',
 };
 
 const formWrapperStyle = {
@@ -64,6 +59,46 @@ const customizeButtonStyle = {
   flexBasis: '170px',
 };
 
+const CampaignWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1 1 0%;
+  margin-top: 2px;
+  transition: all 200ms linear 0s;
+  ${props => {
+    if (props.enabled) {
+      return `
+        height: auto;
+        opacity: 1;
+        `;
+    }
+    return `
+      height: 0;
+      opacity: 0;
+      flex: unset;
+      `;
+  }}
+`;
+
+const InfoText = styled(Text)`
+  margin-top: 0px;
+  color: ${grayDark};
+  transition: all 200ms linear 0s;
+  ${props => {
+    if (props.enabled) {
+      return `
+        height: auto;
+        opacity: 1;
+        `;
+    }
+    return `
+      height: 0;
+      opacity: 0;
+      `;
+  }}
+`;
+
 const GoogleAnalytics = ({
   googleAnalyticsIsEnabled,
   showGACustomizationForm,
@@ -79,6 +114,7 @@ const GoogleAnalytics = ({
   isManager,
   isBusinessAccount,
   features,
+  linkShorteningEnabled,
 }) => (
   <div style={googleAnalyticsWrapperStyle}>
     <div style={headerTextWrapperStyle}>
@@ -95,7 +131,13 @@ const GoogleAnalytics = ({
       </div>
       <div style={rightContainerStyle} />
     </div>
-    <div style={enableCampaignWrapperStyle}>
+    <InfoText type="p" enabled={!linkShorteningEnabled}>
+      <em>
+        Please choose a link shortener above if you&apos;d like to enable
+        campaign tracking.
+      </em>
+    </InfoText>
+    <CampaignWrapper enabled={linkShorteningEnabled}>
       <div style={textStyle}>
         <div style={headerTextWrapperStyle}>
           <Text type="p">
@@ -116,17 +158,20 @@ const GoogleAnalytics = ({
       </div>
       <div style={switchStyle}>
         <Toggle
-          disabled={!isManager}
+          disabled={!isManager || !linkShorteningEnabled}
           onText={'Enabled'}
           offText={'Disabled'}
-          on={googleAnalyticsIsEnabled}
+          on={googleAnalyticsIsEnabled && linkShorteningEnabled}
           size={'small'}
           onClick={() =>
-            onToggleGoogleAnalyticsClick(!googleAnalyticsIsEnabled)
+            onToggleGoogleAnalyticsClick(
+              !googleAnalyticsIsEnabled,
+              linkShorteningEnabled
+            )
           }
         />
       </div>
-    </div>
+    </CampaignWrapper>
     {showGACustomizationForm && googleAnalyticsIsEnabled && (
       <div>
         <Card noBorder noPadding>
@@ -166,6 +211,7 @@ const GoogleAnalytics = ({
                 }}
                 name={'utmMedium'}
                 placeholder={'social'}
+                disabled={!googleAnalyticsIsEnabled}
               />
             </div>
             <div style={saveChangesStyle}>
@@ -191,6 +237,7 @@ const GoogleAnalytics = ({
       (!features.isFreeUser() || (isBusinessAccount && isManager)) && (
         <div style={customizeButtonStyle}>
           <Button
+            disabled={!linkShorteningEnabled}
             type="secondary"
             label="Customize Campaign Tracking"
             onClick={onShowGACustomizationFormClick}
@@ -201,10 +248,10 @@ const GoogleAnalytics = ({
 );
 
 GoogleAnalytics.defaultProps = {
-  trackingSettings: null,
   utmCampaign: null,
   utmSource: null,
   utmMedium: null,
+  linkShorteningEnabled: false,
 };
 
 GoogleAnalytics.propTypes = {
@@ -222,6 +269,7 @@ GoogleAnalytics.propTypes = {
   isManager: PropTypes.bool.isRequired,
   isBusinessAccount: PropTypes.bool.isRequired,
   features: PropTypes.any.isRequired, // eslint-disable-line
+  linkShorteningEnabled: PropTypes.bool,
 };
 
 export default reduxForm({

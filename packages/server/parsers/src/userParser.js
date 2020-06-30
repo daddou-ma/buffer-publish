@@ -123,4 +123,5 @@ module.exports = userData => ({
   canSeePaydayPage: userData.features.includes('awesome_user_can_visit_payday'),
   isUsingPublishAsTeamMember: userData.is_using_publish_as_team_member,
   hasPasswordSet: userData.has_password,
+  hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
 });

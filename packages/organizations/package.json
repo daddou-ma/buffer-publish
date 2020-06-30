@@ -8,9 +8,9 @@
   },
   "author": "karel@buffer.com",
   "dependencies": {
+    "@bufferapp/publish-analytics-middleware": "2.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }
