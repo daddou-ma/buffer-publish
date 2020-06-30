@@ -13,7 +13,6 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   CONNECT_SOCIAL_ACCOUNT: 0,
   MANAGE_SOCIAL_ACCOUNT: 0,
   PROFILE_DROPPED: 0,
-  SINGLE_PROFILE: 0,
   HANDLE_SEARCH_PROFILE_CHANGE: 0,
   PROFILE_ROUTE_LOADED: 0,
 });
@@ -160,7 +159,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        profileList: action.result,
         profiles: filterProfilesByOrg(
           action.result,
           state.organization,
@@ -173,12 +171,12 @@ export default (state = initialState, action) => {
     }
     case orgActionTypes.ORGANIZATION_SELECTED: {
       const selectedOrganization = action.selected;
-      let { profiles } = state;
+      const { profiles } = state;
+      let filteredProfiles = [];
 
       if (profiles) {
-        const { profileList } = state;
-        profiles = filterProfilesByOrg(
-          profileList,
+        filteredProfiles = filterProfilesByOrg(
+          profiles,
           selectedOrganization,
           state.isOrganizationSwitcherEnabled
         );
@@ -187,7 +185,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         organization: selectedOrganization,
-        profiles,
+        profiles: filteredProfiles,
       };
     }
     case actionTypes.SELECT_PROFILE: {
@@ -210,7 +208,11 @@ export default (state = initialState, action) => {
         isSearchPopupVisible,
       };
     case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      let { selectedProfile, profiles, organization } = state;
+      let { selectedProfile, profiles } = state;
+      const { organization, isOrganizationSwitcherEnabled } = state;
+      const isInCurrentOrganization =
+        isOrganizationSwitcherEnabled &&
+        organization.id === action.result.organizationId;
 
       if (selectedProfile.id === action.result.id) {
         selectedProfile = action.result;
@@ -223,7 +225,7 @@ export default (state = initialState, action) => {
           }
           return profile;
         });
-      } else {
+      } else if (!isOrganizationSwitcherEnabled || isInCurrentOrganization) {
         profiles = [...profiles, action.result];
       }
 

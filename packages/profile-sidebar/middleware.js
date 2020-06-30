@@ -5,35 +5,12 @@ import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
 } from '@bufferapp/async-data-fetch';
-
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actions, actionTypes } from './reducer';
-
-export const refreshProfile = (dispatch, profileId, message) => {
-  dispatch(
-    dataFetchActions.fetch({
-      name: 'singleProfile',
-      args: {
-        profileId,
-        message,
-      },
-    })
-  );
-};
 
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
-    case actionTypes.SINGLE_PROFILE:
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'singleProfile',
-          args: {
-            profileId: action.profileId,
-          },
-        })
-      );
-      break;
     case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`:
       if (action.args.message) {
         dispatch(
