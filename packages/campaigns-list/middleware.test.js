@@ -6,7 +6,10 @@ import { actionTypes, initialState } from './reducer';
 
 describe('middleware', () => {
   const next = jest.fn();
-
+  const orgSelectedAction = {
+    type: orgActionTypes.ORGANIZATION_SELECTED,
+    selected: { globalOrgId: '123' },
+  };
   it('exports middleware', () => {
     expect(middleware).toBeDefined();
   });
@@ -19,12 +22,8 @@ describe('middleware', () => {
         user: { features: ['campaigns', 'org_switcher'] },
       }),
     };
-    const action = {
-      type: orgActionTypes.ORGANIZATION_SELECTED,
-      selected: { globalOrgId: '123' },
-    };
-    middleware(store)(next)(action);
-    expect(next).toBeCalledWith(action);
+    middleware(store)(next)(orgSelectedAction);
+    expect(next).toBeCalledWith(orgSelectedAction);
     expect(store.dispatch).toBeCalledWith(
       dataFetchActions.fetch({
         name: 'getCampaignsList',
@@ -41,12 +40,8 @@ describe('middleware', () => {
         user: { features: ['campaigns'] },
       }),
     };
-    const action = {
-      type: orgActionTypes.ORGANIZATION_SELECTED,
-      selected: { globalOrgId: '123' },
-    };
-    middleware(store)(next)(action);
-    expect(next).toBeCalledWith(action);
+    middleware(store)(next)(orgSelectedAction);
+    expect(next).toBeCalledWith(orgSelectedAction);
     expect(store.dispatch).not.toBeCalledWith(
       dataFetchActions.fetch({
         name: 'getCampaignsList',
