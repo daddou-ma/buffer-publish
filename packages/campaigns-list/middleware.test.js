@@ -1,5 +1,6 @@
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import middleware from './middleware';
 import { actionTypes, initialState } from './reducer';
 
@@ -8,6 +9,50 @@ describe('middleware', () => {
 
   it('exports middleware', () => {
     expect(middleware).toBeDefined();
+  });
+
+  it('fetches getCampaignsList if org is selected and has org-switcher and campaign features', () => {
+    const store = {
+      dispatch: jest.fn(),
+      getState: () => ({
+        campaignsList: initialState,
+        user: { features: ['campaigns', 'org_switcher'] },
+      }),
+    };
+    const action = {
+      type: orgActionTypes.ORGANIZATION_SELECTED,
+      selected: { globalOrgId: '123' },
+    };
+    middleware(store)(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'getCampaignsList',
+        args: { globalOrgId: '123' },
+      })
+    );
+  });
+
+  it('does not fetch getCampaignsList if org is selected and does not have org-switcher feature', () => {
+    const store = {
+      dispatch: jest.fn(),
+      getState: () => ({
+        campaignsList: initialState,
+        user: { features: ['campaigns'] },
+      }),
+    };
+    const action = {
+      type: orgActionTypes.ORGANIZATION_SELECTED,
+      selected: { globalOrgId: '123' },
+    };
+    middleware(store)(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).not.toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'getCampaignsList',
+        args: { globalOrgId: '123' },
+      })
+    );
   });
 
   it('fetches getCampaignsList if campaign list state is null', () => {
