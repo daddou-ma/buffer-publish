@@ -10,7 +10,7 @@ const session = {
 
 const PublishAPI = { get: jest.fn() };
 const geCampaignsList = () =>
-  RPCEndpoint.fn(null, { session }, null, {
+  RPCEndpoint.fn({ globalOrgId: 123 }, { session }, null, {
     PublishAPI,
     parsers,
   });
