@@ -71,6 +71,26 @@ describe('middleware', () => {
       })
     );
   });
+  it('does not fetch campaigns if user has org switcher feature', () => {
+    const store = {
+      dispatch: jest.fn(),
+      getState: () => ({
+        campaignsList: { ...initialState, campaigns: [] },
+        user: { features: ['campaigns', 'org_switcher'] },
+      }),
+    };
+    const action = {
+      type: actionTypes.FETCH_CAMPAIGNS_IF_NEEDED,
+    };
+    middleware(store)(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(store.dispatch).not.toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'getCampaignsList',
+        args: {},
+      })
+    );
+  });
   it('triggers a notification if there is an error fetching campaigns', () => {
     const store = {
       dispatch: jest.fn(),
