@@ -96,6 +96,7 @@ const ProfileSidebar = ({
   onSearchProfileChange,
   isSearchPopupVisible,
   // Flags for showing connection shortcut buttons
+  hideSocialShortcuts,
   hasInstagram,
   hasFacebook,
   hasTwitter,
@@ -147,54 +148,56 @@ const ProfileSidebar = ({
         </ProfileListStyle>
       )}
       <ManageSocialAccountsStyle>
-        <SocialButtonsWrapperStyle>
-          {!hasInstagram && (
-            <ProfileConnectShortcut
-              label={t('profile-sidebar.connectInstagram')}
-              network="instagram"
-              url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
-              profileLimit={profileLimit}
-              profiles={profiles}
-              showSwitchPlanModal={showSwitchPlanModal}
-              goToConnectSocialAccount={goToConnectSocialAccount}
-            />
-          )}
-          {!hasFacebook && (
-            <ProfileConnectShortcut
-              label={t('profile-sidebar.connectFacebook')}
-              network="facebook"
-              url="https://buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1"
-              profileLimit={profileLimit}
-              profiles={profiles}
-              showSwitchPlanModal={showSwitchPlanModal}
-              goToConnectSocialAccount={goToConnectSocialAccount}
-            />
-          )}
-          {!hasTwitter && (
-            <ProfileConnectShortcut
-              label={t('profile-sidebar.connectTwitter')}
-              network="twitter"
-              url="https://buffer.com/oauth/twitter?cta=publish-app-sidebar-addProfile-1"
-              profileLimit={profileLimit}
-              profiles={profiles}
-              showSwitchPlanModal={showSwitchPlanModal}
-              goToConnectSocialAccount={goToConnectSocialAccount}
-            />
-          )}
-          <BottomSectionStyle>
-            <ButtonDividerStyle>
-              <Divider marginTop="1rem" />
-            </ButtonDividerStyle>
-            <Button
-              label={t('profile-sidebar.connectButton')}
-              type="secondary"
-              fullWidth
-              onClick={() => {
-                onManageSocialAccountClick();
-              }}
-            />
-          </BottomSectionStyle>
-        </SocialButtonsWrapperStyle>
+        {!hideSocialShortcuts && (
+          <SocialButtonsWrapperStyle>
+            {!hasInstagram && (
+              <ProfileConnectShortcut
+                label={t('profile-sidebar.connectInstagram')}
+                network="instagram"
+                url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
+                profileLimit={profileLimit}
+                profiles={profiles}
+                showSwitchPlanModal={showSwitchPlanModal}
+                goToConnectSocialAccount={goToConnectSocialAccount}
+              />
+            )}
+            {!hasFacebook && (
+              <ProfileConnectShortcut
+                label={t('profile-sidebar.connectFacebook')}
+                network="facebook"
+                url="https://buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1"
+                profileLimit={profileLimit}
+                profiles={profiles}
+                showSwitchPlanModal={showSwitchPlanModal}
+                goToConnectSocialAccount={goToConnectSocialAccount}
+              />
+            )}
+            {!hasTwitter && (
+              <ProfileConnectShortcut
+                label={t('profile-sidebar.connectTwitter')}
+                network="twitter"
+                url="https://buffer.com/oauth/twitter?cta=publish-app-sidebar-addProfile-1"
+                profileLimit={profileLimit}
+                profiles={profiles}
+                showSwitchPlanModal={showSwitchPlanModal}
+                goToConnectSocialAccount={goToConnectSocialAccount}
+              />
+            )}
+            <BottomSectionStyle>
+              <ButtonDividerStyle>
+                <Divider marginTop="1rem" />
+              </ButtonDividerStyle>
+              <Button
+                label={t('profile-sidebar.connectButton')}
+                type="secondary"
+                fullWidth
+                onClick={() => {
+                  onManageSocialAccountClick();
+                }}
+              />
+            </BottomSectionStyle>
+          </SocialButtonsWrapperStyle>
+        )}
       </ManageSocialAccountsStyle>
     </ProfileSidebarStyle>
   );
@@ -214,6 +217,7 @@ ProfileSidebar.propTypes = {
   hasFacebook: PropTypes.bool.isRequired,
   hasTwitter: PropTypes.bool.isRequired,
   onSearchProfileChange: () => {},
+  hideSocialShortcuts: PropTypes.bool,
   isSearchPopupVisible: PropTypes.bool,
   hasCampaignsFlip: PropTypes.bool,
   isCampaignsSelected: PropTypes.bool,
@@ -230,6 +234,7 @@ ProfileSidebar.defaultProps = {
   onDropProfile: () => {},
   onCampaignsButtonClick: () => {},
   profileLimit: 0,
+  hideSocialShortcuts: false,
   hasCampaignsFlip: false,
   isCampaignsSelected: false,
 };
