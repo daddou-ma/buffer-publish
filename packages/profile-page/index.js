@@ -35,7 +35,7 @@ export default hot(
         pathname: ownProps.history.location.pathname,
       });
 
-      const { tabId, profileId, childTabId } = params;
+      const { tabId, profileId, childTabId } = params || {};
 
       // With analytics, the reducer state name doesnt match the tabId
       let reducerName =
