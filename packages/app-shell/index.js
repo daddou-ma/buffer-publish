@@ -12,24 +12,28 @@ import AppShell from './components/AppShell';
 
 export default connect(
   state => ({
-    user: state.appShell.user,
+    user: {
+      email: state.user.email,
+      name: state.user.name,
+    },
     bannerOptions: state.appShell.bannerOptions,
     bannerKey: state.appShell.bannerKey,
-    showReturnToClassic: state.appShell.showReturnToClassic,
-    showSwitchPlan: state.appShell.showSwitchPlan,
-    showManageTeam: state.appShell.showManageTeam,
-    showStartProTrial: state.appShell.showStartProTrial,
+    showReturnToClassic: state.user.showReturnToClassic,
+    showSwitchPlan: state.user.is_free_user && !state.user.isBusinessTeamMember,
+    showManageTeam: state.user.is_free_user,
+    showStartProTrial:
+      state.user.canStartProTrial && !state.user.isBusinessTeamMember,
     hideAppShell:
       state.onboarding.canSeeOnboardingPage &&
       state.router.location.pathname === newBusinessTrialists.route,
-    hideMenuItems: state.appShell.hideMenuItems,
+    hideMenuItems: state.user.canSeePaydayPage && state.user.isOnAwesomePlan,
     enabledProducts: state.appShell.enabledProducts,
     featureFlips: state.appShell.featureFlips,
     /**
      * Org Switcher
      * Needs organizations and profiles.
      */
-    hasOrgSwitcherFeature: state.appShell.hasOrgSwitcherFeature,
+    hasOrgSwitcherFeature: state.user.hasOrgSwitcherFeature,
     organizations: state.organizations.list,
     selectedOrganizationId: state.organizations.selected?.id,
     profiles: state.publishProfiles,
