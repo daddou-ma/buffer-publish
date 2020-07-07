@@ -20,7 +20,7 @@ export default connect(
     bannerKey: state.appShell.bannerKey,
     showReturnToClassic: state.user.showReturnToClassic,
     showSwitchPlan: state.user.is_free_user && !state.user.isBusinessTeamMember,
-    showManageTeam: state.user.is_free_user,
+    showManageTeam: !state.user.is_free_user,
     showStartProTrial:
       state.user.canStartProTrial && !state.user.isBusinessTeamMember,
     hideAppShell:

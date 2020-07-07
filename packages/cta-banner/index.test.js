@@ -23,9 +23,7 @@ describe('CtaBanner', () => {
             onTrial: true, // user has to be on a trial for the Banner to be displayed
           },
           plan: 'premium_business',
-        },
-        ctaBanner: {
-          profileCount: 1,
+          profileCount: 3,
         },
         productFeatures: {
           planName: 'business',
