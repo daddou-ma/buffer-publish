@@ -17,7 +17,7 @@ export default connect(
     items: state.postingSchedule.items,
     profileTimezoneCity: state.postingSchedule.profileTimezoneCity,
     hasTwentyFourHourTimeFormat:
-      state.postingSchedule.hasTwentyFourHourTimeFormat,
+      state.user.hasTwentyFourHourTimeFormat,
     clearTimezoneInput: state.postingSchedule.clearTimezoneInput,
     paused: state.postingSchedule.paused,
     showClearAllModal: state.postingSchedule.showClearAllModal,
