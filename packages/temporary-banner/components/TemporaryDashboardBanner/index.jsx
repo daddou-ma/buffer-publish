@@ -10,15 +10,21 @@ const getContainerStyle = hidden => ({
 });
 
 /* eslint-disable react/prop-types */
-const TopBanner = ({ status, content, onCloseBanner }) => (
+const TopBanner = ({
+  status,
+  content,
+  onCloseBanner,
+  themeColor = 'orange',
+}) => (
   <div style={getContainerStyle(status)}>
     <Banner
-      themeColor="orange"
+      themeColor={themeColor}
       customHTML={{ __html: content }}
       onCloseBanner={onCloseBanner}
     />
   </div>
 );
+
 /* eslint-enable react/prop-types */
 
 const TemporaryDashboardBanner = ({

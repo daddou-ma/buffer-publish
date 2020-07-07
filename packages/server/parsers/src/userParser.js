@@ -122,4 +122,5 @@ module.exports = userData => ({
   isAnalyzeCustomer: userData.is_analyze_customer,
   canSeePaydayPage: userData.features.includes('awesome_user_can_visit_payday'),
   isUsingPublishAsTeamMember: userData.is_using_publish_as_team_member,
+  hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
 });

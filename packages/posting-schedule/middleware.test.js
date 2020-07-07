@@ -1,11 +1,16 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { actionTypes } from './reducer';
+import { actionTypes as profilesActionTypes } from '@bufferapp/publish-data-profiles/reducer';
 import middleware from './middleware';
 
 describe('middleware', () => {
-  const next = jest.fn();
-  const dispatch = jest.fn();
+  let next;
+  let dispatch;
+
+  beforeEach(() => {
+    next = jest.fn();
+    dispatch = jest.fn();
+  });
 
   it('should export middleware', () => {
     expect(middleware).toBeDefined();
@@ -23,11 +28,9 @@ describe('middleware', () => {
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       expect.objectContaining({
-        type: 'FETCH',
-        args: {
-          profileId: 'abc',
-          message: 'Awesome! Your schedule has been successfully saved.',
-        },
+        type: profilesActionTypes.FETCH_SINGLE_PROFILE,
+        profileId: 'abc',
+        message: 'Awesome! Your schedule has been successfully saved.',
       })
     );
   });
@@ -61,11 +64,9 @@ describe('middleware', () => {
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       expect.objectContaining({
-        type: 'FETCH',
-        args: {
-          profileId: 'abc',
-          message: 'Awesome! Your schedule has been successfully saved.',
-        },
+        type: profilesActionTypes.FETCH_SINGLE_PROFILE,
+        profileId: 'abc',
+        message: 'Awesome! Your schedule has been successfully saved.',
       })
     );
   });
@@ -99,11 +100,9 @@ describe('middleware', () => {
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       expect.objectContaining({
-        type: 'FETCH',
-        args: {
-          profileId: 'abc',
-          message: 'Awesome! Your schedule has been successfully saved.',
-        },
+        type: profilesActionTypes.FETCH_SINGLE_PROFILE,
+        profileId: 'abc',
+        message: 'Awesome! Your schedule has been successfully saved.',
       })
     );
   });

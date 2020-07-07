@@ -68,6 +68,7 @@ const QueueItems = ({
             post={rest}
             queueType={type}
             isUserPaid={isUserPaid}
+            isBusinessAccount={isBusinessAccount}
             shouldShowAnalyzeBanner={shouldShowAnalyzeBanner}
             {...propsForPosts}
           />

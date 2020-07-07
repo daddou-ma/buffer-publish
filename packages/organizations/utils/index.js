@@ -1,6 +1,5 @@
 export const getSelectedOrganization = organizations => {
-  const selected = organizations?.filter(org => org.selected);
-  return selected.length > 0 ? selected[0] : organizations[0];
+  return organizations?.find(org => org.selected) || organizations[0];
 };
 
 export const mapSelectedOrganization = ({ id, organizations }) => {

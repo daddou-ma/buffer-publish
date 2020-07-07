@@ -117,6 +117,45 @@ function generateUserMenuItems({
   return [...userMenuItems.top, ...extraItems];
 }
 
+const generateOrgSwitcherItems = ({
+  hasOrgSwitcherFeature,
+  organizations,
+  selectedOrganizationId,
+  profiles,
+  switchOrganization,
+}) => {
+  /**
+   * Only show if user has feature and 2+ organizations
+   */
+  const shouldShow = hasOrgSwitcherFeature && organizations?.length >= 2;
+  if (!shouldShow) {
+    return null;
+  }
+
+  const orgSwitcherItems = {
+    title: 'Organizations',
+    menuItems: [],
+  };
+
+  organizations.forEach(org => {
+    orgSwitcherItems.menuItems.push({
+      id: org.id,
+      title: org.name,
+      selected: selectedOrganizationId === org.id,
+      onItemClick: () => switchOrganization(org.id),
+      subItems: profiles
+        .filter(profile => profile.organizationId === org.id)
+        .map(profile => ({
+          id: profile.id,
+          title: profile.formatted_username,
+          network: profile.service,
+        })),
+    });
+  });
+
+  return orgSwitcherItems;
+};
+
 const AppShell = ({
   children,
   user,
@@ -134,6 +173,11 @@ const AppShell = ({
   hideMenuItems,
   enabledProducts,
   featureFlips,
+  hasOrgSwitcherFeature,
+  organizations,
+  selectedOrganizationId,
+  profiles,
+  switchOrganization,
   isImpersonation,
 }) => {
   if (hideAppShell) {
@@ -164,6 +208,13 @@ const AppShell = ({
         }),
       }}
       helpMenuItems={helpMenuItems(t)}
+      orgSwitcher={generateOrgSwitcherItems({
+        hasOrgSwitcherFeature,
+        organizations,
+        selectedOrganizationId,
+        profiles,
+        switchOrganization,
+      })}
       bannerOptions={
         bannerOptions
           ? {
@@ -203,10 +254,30 @@ AppShell.propTypes = {
   hideMenuItems: PropTypes.bool.isRequired,
   enabledProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
   featureFlips: PropTypes.arrayOf(PropTypes.string).isRequired,
+  hasOrgSwitcherFeature: PropTypes.bool,
+  organizations: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      locked: PropTypes.bool,
+      name: PropTypes.string,
+      ownerId: PropTypes.string,
+      ownerEmail: PropTypes.string,
+      planCode: PropTypes.number,
+      isAdmin: PropTypes.bool,
+    })
+  ).isRequired,
+  selectedOrganizationId: PropTypes.string.isRequired,
+  profiles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+    })
+  ).isRequired,
+  switchOrganization: PropTypes.func.isRequired,
   isImpersonation: PropTypes.bool,
 };
 
 AppShell.defaultProps = {
+  hasOrgSwitcherFeature: false,
   showReturnToClassic: false,
   showSwitchPlan: false,
   showManageTeam: false,
