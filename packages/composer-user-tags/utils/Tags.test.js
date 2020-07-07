@@ -1,4 +1,9 @@
-import { getClientXY, removeClientXY } from './Tags';
+import {
+  getClientXY,
+  removeClientXY,
+  getDefaultIfInfinite,
+  DEFAULT_COORDINATE,
+} from './Tags';
 
 describe('Tags Utils', () => {
   const xyObj = { x: 0.5, y: 0.2 };
@@ -17,6 +22,20 @@ describe('Tags Utils', () => {
       };
       const format = removeClientXY([{ ...objToSend }]);
       expect(format).toEqual([{ ...xyObj }]);
+    });
+  });
+  describe('getDefaultIfInfinite', () => {
+    it('returns default number if value is infinity', () => {
+      const infinityValue = getDefaultIfInfinite(Infinity);
+      expect(infinityValue).toEqual(DEFAULT_COORDINATE);
+    });
+    it('returns default number if value is string', () => {
+      const stringValue = getDefaultIfInfinite('hello');
+      expect(stringValue).toEqual(DEFAULT_COORDINATE);
+    });
+    it('returns value when number', () => {
+      const numberValue = getDefaultIfInfinite(10);
+      expect(numberValue).toEqual(10);
     });
   });
 });
