@@ -1,7 +1,4 @@
 import { connect } from 'react-redux';
-import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-
-import { actions as settingsAction } from '@bufferapp/publish-general-settings';
 import Analytics from './components/Analytics';
 
 const mapStateToProps = state => ({
@@ -11,15 +8,14 @@ const mapStateToProps = state => ({
   isInstagramBusiness: state.profileSidebar.selectedProfile.isInstagramBusiness,
   isAnalyticsSupported:
     state.profileSidebar.selectedProfile.isAnalyticsSupported,
-  //  TODO: Refactor so we're not pulling this state from drafts
-  canStartBusinessTrial: state.drafts.canStartBusinessTrial,
+  canStartBusinessTrial: state.user.canStartBusinessTrial,
   linkShortening: state.generalSettings.linkShortening,
   hasBitlyPosts: !!state.sent.byProfileId[
     state.profileSidebar.selectedProfile.id
   ]?.hasBitlyPosts,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   /**
    * We pass down these methods so that when the lazy-loaded `AnalyticsList`
    * is mounted it can setup its stores / trigger fetches / etc.
