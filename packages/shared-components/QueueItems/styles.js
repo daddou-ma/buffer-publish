@@ -8,7 +8,6 @@ export const PostWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   margin-bottom: 8px;
-  max-height: 100vh;
   width: 100%;
   transition: all ${transitionAnimationTime} ${transitionAnimationType};
 
