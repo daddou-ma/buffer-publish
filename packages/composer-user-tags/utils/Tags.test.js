@@ -1,7 +1,7 @@
 import {
   getClientXY,
   removeClientXY,
-  getDefaultIfInfinite,
+  getValidNumber,
   DEFAULT_COORDINATE,
 } from './Tags';
 
@@ -24,17 +24,17 @@ describe('Tags Utils', () => {
       expect(format).toEqual([{ ...xyObj }]);
     });
   });
-  describe('getDefaultIfInfinite', () => {
+  describe('getValidNumber', () => {
     it('returns default number if value is infinity', () => {
-      const infinityValue = getDefaultIfInfinite(Infinity);
+      const infinityValue = getValidNumber(Infinity);
       expect(infinityValue).toEqual(DEFAULT_COORDINATE);
     });
     it('returns default number if value is string', () => {
-      const stringValue = getDefaultIfInfinite('hello');
+      const stringValue = getValidNumber('hello');
       expect(stringValue).toEqual(DEFAULT_COORDINATE);
     });
     it('returns value when number', () => {
-      const numberValue = getDefaultIfInfinite(10);
+      const numberValue = getValidNumber(10);
       expect(numberValue).toEqual(10);
     });
   });

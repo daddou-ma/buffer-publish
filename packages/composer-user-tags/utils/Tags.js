@@ -16,9 +16,11 @@ export const getClientXY = userTags => {
 export const removeClientXY = tags =>
   tags.map(({ clientX, clientY, ...keepAttrs }) => keepAttrs);
 
-// set number to default if value is ever Infinite
-export const getDefaultIfInfinite = coordinate =>
-  Number.isFinite(coordinate) ? coordinate : DEFAULT_COORDINATE;
+const isNumberValid = coordinate => Number.isFinite(coordinate);
+
+// set value to default if not valid (Infinite)
+export const getValidNumber = coordinate =>
+  isNumberValid(coordinate) ? coordinate : DEFAULT_COORDINATE;
 
 export const getCoordinates = ({ e, media }) => {
   const rect = e.target.getBoundingClientRect();
@@ -28,17 +30,15 @@ export const getCoordinates = ({ e, media }) => {
     height = MAX_HEIGHT;
   }
   // final_width = max_height * start_width / start_height
-  const x = (e.clientX - rect.left) / width;
-  const y = (e.clientY - rect.top) / height;
+  const calculatedWidth = (e.clientX - rect.left) / width;
+  const calculatedHeight = (e.clientY - rect.top) / height;
 
-  const clientX = x * 100;
-  const clientY = y * 100;
+  // keep decimals fixed to 2
+  const x = getValidNumber(calculatedWidth).toFixed(2);
+  const y = getValidNumber(calculatedHeight).toFixed(2);
+  // add * to get percentage to display correctly with responsive image
+  const clientX = getValidNumber(calculatedWidth * 100);
+  const clientY = getValidNumber(calculatedHeight * 100);
 
-  return {
-    // get percentage to display correctly with responsive image
-    clientX: getDefaultIfInfinite(clientX),
-    clientY: getDefaultIfInfinite(clientY),
-    x: getDefaultIfInfinite(x).toFixed(2),
-    y: getDefaultIfInfinite(y).toFixed(2),
-  };
+  return { clientX, clientY, x, y };
 };
