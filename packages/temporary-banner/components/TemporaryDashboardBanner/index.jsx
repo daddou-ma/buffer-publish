@@ -31,27 +31,17 @@ const TemporaryDashboardBanner = ({
   enabledApplicationModes,
   displayRemindersBanner,
   usernamesRemindersList,
-  awesomeToProUpgradeDetails,
-  awesomeToProMessageKey,
-  userReadMessage,
 }) => {
   const [hidden, hideBanner] = useState(false);
 
   const onCloseBannerClick = () => {
-    if (awesomeToProMessageKey) {
-      userReadMessage({ message: awesomeToProMessageKey });
-    }
     hideBanner(!hidden);
   };
 
   const getEnabledApplicationMode = tag =>
     enabledApplicationModes.filter(mode => mode.tag === tag)[0];
 
-  if (
-    !enabledApplicationModes &&
-    !awesomeToProUpgradeDetails &&
-    !displayRemindersBanner
-  ) {
+  if (!enabledApplicationModes && !displayRemindersBanner) {
     return null;
   }
 
@@ -61,15 +51,6 @@ const TemporaryDashboardBanner = ({
     return TopBanner({
       status: hidden,
       content,
-      onCloseBanner: onCloseBannerClick,
-    });
-  }
-
-  //  Displays Temporary Banner with Awesome to Pro Upgrade Details
-  if (awesomeToProUpgradeDetails) {
-    return TopBanner({
-      status: hidden,
-      content: awesomeToProUpgradeDetails,
       onCloseBanner: onCloseBannerClick,
     });
   }

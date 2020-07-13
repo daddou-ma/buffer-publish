@@ -6,16 +6,6 @@ const isOnBusinessPlan = trialPlan =>
     plan => plan === trialPlan
   );
 
-// The following two methods are being used for Awesome customers
-// who are being migrated to Pro. These customers will technically
-// still have their plan set to Awesome but will receive all of
-// the features Pro users receive.
-const getPlan = (plan, isAwesomeMigratingUser) =>
-  isAwesomeMigratingUser ? 'pro' : plan;
-
-const getPlanCode = (planCode, isAwesomeMigratingUser) =>
-  isAwesomeMigratingUser ? 5 : planCode;
-
 module.exports = userData => ({
   id: userData.id,
   email: userData.email,
@@ -26,16 +16,8 @@ module.exports = userData => ({
   tags: userData.tags,
   hasTwentyFourHourTimeFormat: userData.twentyfour_hour_time,
   imageDimensionsKey: userData.imagedimensions_key,
-  plan: getPlan(
-    userData.plan,
-    userData.features.includes('awesome_pro_forced_upgrade_batch_1') ||
-      userData.features.includes('test_awesome_pro_forced_upgrade_batch_1')
-  ),
-  planCode: getPlanCode(
-    userData.plan_code,
-    userData.features.includes('awesome_pro_forced_upgrade_batch_1') ||
-      userData.features.includes('test_awesome_pro_forced_upgrade_batch_1')
-  ),
+  plan: userData.plan,
+  planCode: userData.plan_code,
   is_business_user: userData.plan_code >= 8 && userData.plan_code <= 19,
   is_free_user: userData.plan === 'free',
   messages: userData.messages || [],
@@ -115,9 +97,6 @@ module.exports = userData => ({
       userData.features.includes('awesome_pro_forced_upgrade_batch_1') ||
       userData.features.includes('test_awesome_pro_forced_upgrade_batch_1')
     ),
-  isAwesomePromoUser:
-    userData.features.includes('legacy_awesome_monthly_promotion') &&
-    userData.plan === 'awesome',
   isProAndUpOrTeamMember: userData.is_pro_and_up_org_user, // this includes team members
   isAnalyzeCustomer: userData.is_analyze_customer,
   canSeePaydayPage: userData.features.includes('awesome_user_can_visit_payday'),

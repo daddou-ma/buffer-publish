@@ -6,33 +6,23 @@ import {
   getUsernamesOfProfilesWithRemindersAndNoPushNotifications,
 } from './utils/getRemindersStatus';
 
-import { actions } from './reducer';
-
-export default connect(
-  state => {
-    const remindersStatus = state.temporaryBanner.remindersStatusByProfile;
-    const displayRemindersBanner =
-      (remindersStatus &&
-        hasAtLeastOneProfileWithRemindersAndNoPushNotifications(
-          remindersStatus
-        )) ||
-      false;
-    let usernamesList = '';
-    if (displayRemindersBanner) {
-      usernamesList = getUsernamesOfProfilesWithRemindersAndNoPushNotifications(
+export default connect(state => {
+  const remindersStatus = state.temporaryBanner.remindersStatusByProfile;
+  const displayRemindersBanner =
+    (remindersStatus &&
+      hasAtLeastOneProfileWithRemindersAndNoPushNotifications(
         remindersStatus
-      );
-    }
-    return {
-      enabledApplicationModes: state.temporaryBanner.enabledApplicationModes,
-      displayRemindersBanner,
-      usernamesRemindersList: usernamesList,
-      awesomeToProUpgradeDetails:
-        state.temporaryBanner.awesomeToProUpgradeDetails,
-      awesomeToProMessageKey: state.temporaryBanner.awesomeToProMessageKey,
-    };
-  },
-  dispatch => ({
-    userReadMessage: message => dispatch(actions.userReadMessage(message)),
-  })
-)(TemporaryDashboardBanner);
+      )) ||
+    false;
+  let usernamesList = '';
+  if (displayRemindersBanner) {
+    usernamesList = getUsernamesOfProfilesWithRemindersAndNoPushNotifications(
+      remindersStatus
+    );
+  }
+  return {
+    enabledApplicationModes: state.temporaryBanner.enabledApplicationModes,
+    displayRemindersBanner,
+    usernamesRemindersList: usernamesList,
+  };
+})(TemporaryDashboardBanner);
