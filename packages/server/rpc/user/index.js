@@ -23,7 +23,7 @@ module.exports = method(
         session,
       });
 
-      const currentOrgId = userData.current_publish_organization_id;
+      const currentOrgId = userData.tempCurrentPublishOrganizationId;
 
       const orgSelected =
         (orgs && orgs.data && orgs.data.find(org => org.id === currentOrgId)) ||
