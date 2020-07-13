@@ -23,8 +23,11 @@ module.exports = method(
         session,
       });
 
+      const currentOrgId = userData.current_publish_organization_id;
+
       const orgSelected =
-        (orgs && orgs.data && orgs.data.find(org => org.selected)) || orgs[0];
+        (orgs && orgs.data && orgs.data.find(org => org.id === currentOrgId)) ||
+        orgs[0];
       const { plan_code } = orgSelected;
 
       return {
