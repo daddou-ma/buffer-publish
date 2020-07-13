@@ -7,14 +7,6 @@ export const actionTypes = keyWrapper('APP_SHELL', {
 });
 
 export const initialState = {
-  showReturnToClassic: false,
-  showSwitchPlanModal: false,
-  hasOrgSwitcherFeature: false,
-  user: {
-    name: '...',
-    email: '',
-    avatar: null,
-  },
   bannerKey: null,
   bannerOptions: undefined,
   enabledProducts: [],
@@ -24,23 +16,6 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        user: {
-          email: action.result.email,
-          name: action.result.name,
-        },
-        hideMenuItems:
-          action.result.canSeePaydayPage && action.result.isOnAwesomePlan,
-        showReturnToClassic: action.result.showReturnToClassic,
-        showSwitchPlanModal:
-          action.result.is_free_user && !action.result.isBusinessTeamMember,
-        showManageTeam: !action.result.is_free_user,
-        showStartProTrial:
-          action.result.canStartProTrial && !action.result.isBusinessTeamMember,
-        hasOrgSwitcherFeature: action.result.hasOrgSwitcherFeature,
-      };
     case `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const productLinks = action.result.productlinks || [];
       const enabledProducts = productLinks.map(product => product.productName);

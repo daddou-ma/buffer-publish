@@ -3,7 +3,7 @@ import { actions as modalActions } from '@bufferapp/publish-modals/reducer';
 import { actions as trialActions } from '@bufferapp/publish-trial/reducer';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch, getState }) => next => action => {
+export default ({ dispatch }) => next => action => {
   // eslint-disable-line
   next(action);
   switch (action.type) {
@@ -16,16 +16,11 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     case `startTrial_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       dispatch(modalActions.hideInstagramFirstCommentProTrialModal());
-      break;
-    }
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      if (getState().trial.startedTrial) {
-        // focus instagram first comment text area after starting trial
-        const textareaElement = document.querySelector(
-          "[class^='Composer__expandedFirstComment']"
-        );
-        if (textareaElement) textareaElement.focus();
-      }
+      // focus instagram first comment text area after starting trial
+      const textareaElement = document.querySelector(
+        "[class^='Composer__expandedFirstComment']"
+      );
+      if (textareaElement) textareaElement.focus();
       break;
     }
     default:
