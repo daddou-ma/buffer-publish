@@ -45,7 +45,6 @@ const initialState = {
   mergedSchedules: [],
   items: [],
   profileTimezoneCity: '',
-  hasTwentyFourHourTimeFormat: false,
   clearTimezoneInput: false,
   paused: false,
   profileId: null,
@@ -113,11 +112,6 @@ export default (state = initialState, action) => {
         };
       }
       return state;
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        hasTwentyFourHourTimeFormat: action.result.hasTwentyFourHourTimeFormat,
-      };
     case `updateSchedule_${dataFetchActionTypes.FETCH_SUCCESS}`:
       mergedSchedules = mergeSchedules(
         action.result.schedules,

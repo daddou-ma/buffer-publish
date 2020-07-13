@@ -1,4 +1,4 @@
-import React, { useState, useRef, Fragment } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from '@bufferapp/ui';
 import { Person } from '@bufferapp/ui/Icon';
@@ -147,11 +147,11 @@ const UserTags = ({
               onClick={onImageClick}
             />
             {tags && (
-              <Fragment>
+              <>
                 {tags.map(tag => (
                   <ImageLabel tag={tag} showTags={showTags} key={uuid()} />
                 ))}
-              </Fragment>
+              </>
             )}
             <CoordinateMarker coordinates={coordinates} />
             {showInput && (

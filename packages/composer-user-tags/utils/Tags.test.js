@@ -1,4 +1,9 @@
-import { getClientXY, removeClientXY } from './Tags';
+import {
+  getClientXY,
+  removeClientXY,
+  getValidNumber,
+  DEFAULT_COORDINATE,
+} from './Tags';
 
 describe('Tags Utils', () => {
   const xyObj = { x: 0.5, y: 0.2 };
@@ -17,6 +22,20 @@ describe('Tags Utils', () => {
       };
       const format = removeClientXY([{ ...objToSend }]);
       expect(format).toEqual([{ ...xyObj }]);
+    });
+  });
+  describe('getValidNumber', () => {
+    it('returns default number if value is infinity', () => {
+      const infinityValue = getValidNumber(Infinity);
+      expect(infinityValue).toEqual(DEFAULT_COORDINATE);
+    });
+    it('returns default number if value is string', () => {
+      const stringValue = getValidNumber('hello');
+      expect(stringValue).toEqual(DEFAULT_COORDINATE);
+    });
+    it('returns value when number', () => {
+      const numberValue = getValidNumber(10);
+      expect(numberValue).toEqual(10);
     });
   });
 });

@@ -28,7 +28,6 @@ describe('PostingSchedule', () => {
         settingsHeader,
         days,
         profileTimezone: 'Europe/London',
-        hasTwentyFourHourTimeFormat: false,
         items: timezones,
       },
       i18n: {
@@ -38,6 +37,9 @@ describe('PostingSchedule', () => {
             loggedOut: 'Logged Out...',
           },
         },
+      },
+      user: {
+        hasTwentyFourHourTimeFormat: false,
       },
     });
     const wrapper = mount(

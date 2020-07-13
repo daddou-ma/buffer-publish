@@ -7,7 +7,7 @@ export default connect(
   state => ({
     trial: state.user?.trial,
     isPremiumBusinessPlan: state.user.plan === 'premium_business',
-    profileCount: state.ctaBanner.profileCount,
+    profileCount: state.user.profileCount,
   }),
   dispatch => ({
     onClickStartSubscription: () => {

@@ -15,28 +15,6 @@ describe('reducer', () => {
     expect(reducer(undefined, action)).toEqual(initialState);
   });
 
-  it('handles user_FETCH_SUCCESS action type and updates profileCount', () => {
-    const stateBefore = {
-      ...initialState,
-      profileCount: 0,
-    };
-    const stateAfter = {
-      ...initialState,
-      profileCount: 2,
-    };
-    const action = {
-      type: 'user_FETCH_SUCCESS',
-      result: {
-        profileCount: 2,
-      },
-    };
-
-    deepFreeze(stateBefore);
-    deepFreeze(action);
-
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
   // Test action creators:
   describe('action creators', () => {
     it('creates a START_SUBSCRIPTION action', () => {
