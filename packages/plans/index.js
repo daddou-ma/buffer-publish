@@ -7,13 +7,6 @@ import Plans from './components/Plans';
 
 import { actions } from './reducer';
 
-const getClassicBufferURL = () => {
-  if (window.location.hostname === 'publish.local.buffer.com') {
-    return 'https://local.buffer.com/app';
-  }
-  return 'https://buffer.com/app';
-};
-
 export default connect(
   state => ({
     currentPlan: state.user.plan,
@@ -37,15 +30,7 @@ export default connect(
       }
       dispatch(modalsActions.showSwitchPlanModal({ source, plan }));
     },
-    onBackToDashboardClick: ({
-      selectedProfileId,
-      profiles,
-      isAwesomeUser,
-    }) => {
-      if (isAwesomeUser) {
-        window.location.replace(getClassicBufferURL());
-        return;
-      }
+    onBackToDashboardClick: ({ selectedProfileId, profiles }) => {
       if (profiles.length > 0) {
         const profileId = selectedProfileId || profiles[0].id;
         const profile = profiles.find(p => p.id === profileId);

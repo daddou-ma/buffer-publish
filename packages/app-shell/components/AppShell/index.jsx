@@ -53,13 +53,8 @@ function generateUserMenuItems({
   switchPlan,
   openPreferences,
   showManageTeam,
-  hideMenuItems,
   t,
 }) {
-  if (hideMenuItems) {
-    return [];
-  }
-
   const userMenuItems = {
     top: [
       {
@@ -170,7 +165,6 @@ const AppShell = ({
   onCloseBanner,
   bannerKey,
   hideAppShell,
-  hideMenuItems,
   enabledProducts,
   featureFlips,
   hasOrgSwitcherFeature,
@@ -203,7 +197,6 @@ const AppShell = ({
           returnToClassic,
           switchPlan,
           openPreferences,
-          hideMenuItems,
           t,
         }),
       }}
@@ -251,7 +244,6 @@ AppShell.propTypes = {
     }),
   }),
   hideAppShell: PropTypes.bool.isRequired,
-  hideMenuItems: PropTypes.bool.isRequired,
   enabledProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
   featureFlips: PropTypes.arrayOf(PropTypes.string).isRequired,
   hasOrgSwitcherFeature: PropTypes.bool,

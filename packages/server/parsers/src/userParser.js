@@ -91,15 +91,8 @@ module.exports = userData => ({
   profileCount: userData.profile_usage,
   showReturnToClassic: userData.has_np_app_switcher,
   isBusinessTeamMember: userData.is_business_team_member,
-  isOnAwesomePlan:
-    userData.plan === 'awesome' &&
-    !(
-      userData.features.includes('awesome_pro_forced_upgrade_batch_1') ||
-      userData.features.includes('test_awesome_pro_forced_upgrade_batch_1')
-    ),
   isProAndUpOrTeamMember: userData.is_pro_and_up_org_user, // this includes team members
   isAnalyzeCustomer: userData.is_analyze_customer,
-  canSeePaydayPage: userData.features.includes('awesome_user_can_visit_payday'),
   isUsingPublishAsTeamMember: userData.is_using_publish_as_team_member,
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
 });
