@@ -33,27 +33,6 @@ describe('reducer', () => {
     expect(reducer(initialState, action)).toEqual(stateAfter);
   });
 
-  it('stores awesomeToProUpgradeDetails data when awesomeToProUpgradeDetails rpc request is successful', () => {
-    const stateAfter = {
-      ...initialState,
-      awesomeToProUpgradeDetails: 'details',
-      awesomeToProMessageKey: 'message_key',
-    };
-    const action = {
-      type: 'awesomeToProUpgradeDetails_FETCH_SUCCESS',
-      result: {
-        success: true,
-        details: {
-          shouldShow: true,
-          noticeHtml: 'details',
-          bannerMessageKey: 'message_key',
-        },
-      },
-    };
-    deepFreeze(action);
-    expect(reducer(initialState, action)).toEqual(stateAfter);
-  });
-
   it('stores remindersStatusByProfile data when checkRemindersStatus rpc request is successful', () => {
     const stateAfter = {
       ...initialState,

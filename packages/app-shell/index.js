@@ -26,7 +26,6 @@ export default connect(
     hideAppShell:
       state.onboarding.canSeeOnboardingPage &&
       state.router.location.pathname === newBusinessTrialists.route,
-    hideMenuItems: state.user.canSeePaydayPage && state.user.isOnAwesomePlan,
     enabledProducts: state.appShell.enabledProducts,
     featureFlips: state.appShell.featureFlips,
     /**

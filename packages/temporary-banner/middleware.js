@@ -2,7 +2,6 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { actionTypes } from './reducer';
 
 export default ({ dispatch }) => next => action => {
   next(action);
@@ -16,20 +15,7 @@ export default ({ dispatch }) => next => action => {
           },
         })
       );
-      if (
-        action.result.features.includes('awesome_pro_forced_upgrade_batch_1') ||
-        action.result.features.includes(
-          'test_awesome_pro_forced_upgrade_batch_1'
-        )
-      ) {
-        dispatch(
-          dataFetchActions.fetch({
-            name: 'awesomeToProUpgradeDetails',
-          })
-        );
-      }
       break;
-
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const profilesArray = action.result;
       // Only makes request to check reminders if there are instagram profiles.
@@ -49,20 +35,6 @@ export default ({ dispatch }) => next => action => {
 
       break;
     }
-
-    case actionTypes.USER_READ_MESSAGE: {
-      const { message } = action.args.message;
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'readMessage',
-          args: {
-            message,
-          },
-        })
-      );
-      break;
-    }
-
     default:
       break;
   }

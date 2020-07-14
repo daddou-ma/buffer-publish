@@ -37,7 +37,6 @@ const Plans = ({
   onPremiumPlanClick,
   selectedPremiumPlan,
   shouldSeeSoloPlanOption,
-  isAwesomeUser,
   onProTrial = false,
 }) => (
   <ContainerStyle>
@@ -51,7 +50,6 @@ const Plans = ({
           onBackToDashboardClick({
             selectedProfileId,
             profiles,
-            isAwesomeUser,
           })
         }
       />
