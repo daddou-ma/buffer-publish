@@ -229,6 +229,10 @@ function formatData(
   };
 }
 
+function getResponseData(response) {
+    return response && 'organic' in response ? response.organic : response;
+}
+
 module.exports = method(
   'average',
   'fetch analytics average for profiles and pages',
@@ -273,14 +277,14 @@ module.exports = method(
       pastPeriodDailyTotals,
     ])
       .then(response => {
-        const currentPeriodTotalsResult = response[0].response;
-        const pastPeriodTotalsResult = response[1].response;
+        const currentPeriodTotalsResult = getResponseData(response[0].response);
+        const pastPeriodTotalsResult = getResponseData(response[1].response);
         const currentPeriodTotalsPostCount =
           currentPeriodTotalsResult.posts_count;
         const pastPeriodTotalsPostCount = pastPeriodTotalsResult.posts_count;
 
-        const currentPeriodDailyTotalsResult = response[2].response;
-        const pastPeriodDailyTotalsResult = response[3].response;
+        const currentPeriodDailyTotalsResult = getResponseData(response[2].response);
+        const pastPeriodDailyTotalsResult = getResponseData(response[3].response);
 
         return formatData(
           currentPeriodTotalsResult,
