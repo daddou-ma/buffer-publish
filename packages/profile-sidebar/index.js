@@ -20,7 +20,7 @@ export default hot(
         selectedProfileId: ownProps.profileId,
         profiles: reorderProfilesByUnlocked(state.profileSidebar.profiles),
         translations: state.i18n.translations['profile-sidebar'],
-        profileLimit: state.user.profile_limit,
+        profileLimit: state.user.profileLimit,
         hasInstagram: state.profileSidebar.hasInstagram,
         hasFacebook: state.profileSidebar.hasFacebook,
         hasTwitter: state.profileSidebar.hasTwitter,

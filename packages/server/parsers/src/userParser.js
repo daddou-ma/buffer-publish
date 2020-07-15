@@ -10,6 +10,7 @@ module.exports = userData => ({
   features: userData.features,
   tags: userData.tags,
   hasTwentyFourHourTimeFormat: userData.twentyfour_hour_time,
+  uses_24h_time: userData.twentyfour_hour_time,
   imageDimensionsKey: userData.imagedimensions_key,
   plan: userData.plan,
   planCode: userData.plan_code,
@@ -21,7 +22,6 @@ module.exports = userData => ({
   ),
   profile_groups: userData.profile_groups || [],
   s3_upload_signature: userData.s3_upload_signature,
-  uses_24h_time: userData.twentyfour_hour_time,
   week_starts_monday: userData.week_starts_monday,
   has_ig_direct_flip: userData.features.includes('instagram_direct_posting'),
   twofactor: userData.twofactor,
@@ -32,7 +32,7 @@ module.exports = userData => ({
     'instagram-location-tagging'
   ),
   hasIGDirectVideoFlip: userData.features.includes('ig_direct_video_posting'),
-  profile_limit: userData.profile_limit,
+  profileLimit: userData.profile_limit,
   profiles_schedules_slots: userData.profiles_schedules_slots,
   hasNewPublish: userData.in_new_publish_rollout,
   hasEmailNotifications: {

@@ -58,7 +58,7 @@ const buildUser = build('User', {
     skip_empty_text_alert: false,
     has_simplified_free_plan_ux: false,
     hasIGLocationTaggingFeature: true,
-    profile_limit: 50,
+    profileLimit: 50,
     s3_upload_signature: {
       algorithm: '',
       base64policy: '',
