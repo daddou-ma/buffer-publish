@@ -32,7 +32,6 @@ export default connect(
     isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
     isInstagramProfile: state.generalSettings.isInstagramProfile,
     selectedProfile: state.profileSidebar.selectedProfile,
-    canStartProTrial: state.user.canStartProTrial,
     hasStoriesFlip: state.user.features?.includes('stories_groups') ?? false,
     draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
     draftsCount: state.tabs.draftsCount,

@@ -93,7 +93,6 @@ const ComposerWrapper = ({
       userData.features.includes('instagram-location-tagging'),
     // TODO: make should_use_new_twitter_autocomplete dynamic based on the
     // value of enabledApplicationModes.includes('web-twitter-typeahead-autocomplete')
-    isOnProTrial: userData.isOnProTrial,
     should_use_new_twitter_autocomplete: true,
     updateId: post ? post.id : undefined,
     serviceUpdateId: post ? post.serviceUpdateId : undefined,
@@ -142,7 +141,6 @@ const ComposerWrapper = ({
       imageDimensionsKey={formattedData.imageDimensionsKey}
       options={options}
       onNewPublish
-      hasIGDirectFlip={formattedData.userData.has_ig_direct_flip}
       isFreeUser={formattedData.userData.isFreeUser}
       csrfToken={csrfToken}
       draftMode={draftMode}
@@ -154,7 +152,7 @@ ComposerWrapper.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.string.isRequired,
     s3_upload_signature: PropTypes.shape({}).isRequired,
-    uses_24h_time: PropTypes.bool.isRequired,
+    hasTwentyFourHourTimeFormat: PropTypes.bool.isRequired,
     week_starts_monday: PropTypes.bool.isRequired,
     profile_groups: PropTypes.PropTypes.array,
     is_free_user: PropTypes.bool.isRequired,
@@ -162,7 +160,6 @@ ComposerWrapper.propTypes = {
     is_business_user: PropTypes.bool.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
     has_simplified_free_plan_ux: PropTypes.bool.isRequired,
-    has_ig_direct_flip: PropTypes.bool.isRequired,
   }).isRequired,
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
   enabledApplicationModes: PropTypes.arrayOf(PropTypes.string).isRequired,

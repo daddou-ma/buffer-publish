@@ -1,11 +1,6 @@
 const hasProTrialExpired = trials =>
   trials.some(trial => trial.is_awesome && trial.status === 'expired');
 
-const isOnBusinessPlan = trialPlan =>
-  ['business', 'agency', 'small', 'premium_business'].some(
-    plan => plan === trialPlan
-  );
-
 module.exports = userData => ({
   id: userData.id,
   email: userData.email,
@@ -26,9 +21,7 @@ module.exports = userData => ({
   ),
   profile_groups: userData.profile_groups || [],
   s3_upload_signature: userData.s3_upload_signature,
-  uses_24h_time: userData.twentyfour_hour_time,
   week_starts_monday: userData.week_starts_monday,
-  has_ig_direct_flip: userData.features.includes('instagram_direct_posting'),
   twofactor: userData.twofactor,
   has_simplified_free_plan_ux: userData.features.includes(
     'has_simplified_free_plan_ux'
@@ -37,7 +30,7 @@ module.exports = userData => ({
     'instagram-location-tagging'
   ),
   hasIGDirectVideoFlip: userData.features.includes('ig_direct_video_posting'),
-  profile_limit: userData.profile_limit,
+  profileLimit: userData.profile_limit,
   profiles_schedules_slots: userData.profiles_schedules_slots,
   hasNewPublish: userData.in_new_publish_rollout,
   hasEmailNotifications: {
@@ -56,14 +49,16 @@ module.exports = userData => ({
   },
   canStartBusinessTrial: userData.can_start_business_trial,
   canStartProTrial: userData.can_start_pro_trial,
-  isOnProTrial: userData.on_awesome_trial,
   shouldShowProTrialExpiredModal:
     hasProTrialExpired(userData.feature_trials) &&
     userData.plan === 'free' &&
     !userData.has_cancelled,
-  isOnBusinessTrial: isOnBusinessPlan(userData.trial_plan),
+  isOnBusinessTrial:
+    userData.plan_code >= 8 && userData.plan_code <= 19 && userData.on_trial,
   shouldShowBusinessTrialExpiredModal:
-    isOnBusinessPlan(userData.trial_plan) &&
+    userData.plan_code >= 8 &&
+    userData.plan_code <= 19 &&
+    userData.on_trial &&
     userData.trial_expired &&
     !userData.trial_done,
   trial: userData.on_awesome_trial

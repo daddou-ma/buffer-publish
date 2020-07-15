@@ -7,7 +7,7 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
-    profileLimit: state.user.profile_limit,
+    profileLimit: state.user.profileLimit,
     isOwner: state.user.id === state.profileSidebar.selectedProfile.ownerId,
   }),
   dispatch => ({

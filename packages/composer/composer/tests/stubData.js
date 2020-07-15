@@ -38,7 +38,6 @@ export const fakeUserData = {
   profilesSchedulesSlots: [],
   onNewPublish: false,
   hasSimplifiedFreePlanUX: true,
-  hasIGDirectFlip: true,
   hasIGLocationTaggingFeature: true,
   hasIGDirectVideoFlip: true,
 };
