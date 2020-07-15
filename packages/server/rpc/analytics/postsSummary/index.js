@@ -76,6 +76,10 @@ const summarize = (metric, currentPeriod, pastPeriod, profileService) => {
   };
 };
 
+function getResponseData(response) {
+    return response && 'organic' in response ? response.organic : response;
+}
+
 module.exports = method(
   RPC_NAME,
   'fetch analytics posts summary for profiles and pages',
@@ -99,8 +103,8 @@ module.exports = method(
     );
 
     return Promise.all([currentPeriod, previousPeriod]).then(response => {
-      const currentPeriodResult = response[0].response;
-      const pastPeriodResult = response[1].response;
+      const currentPeriodResult = getResponseData(response[0].response);
+      const pastPeriodResult = getResponseData(response[1].response);
       const metrics = Object.keys(currentPeriodResult);
       return sortMetrics(
         filterMetrics(
