@@ -50,7 +50,7 @@ const buildUser = build('User', {
     hasTwentyFourHourTimeFormat: false,
     isOnBusinessTrial: false,
     isProAndUpOrTeamMember: true,
-    uses_24h_time: false,
+    hasTwentyFourHourTimeFormat: false,
     hasIGDirectVideoFlip: true,
     canStartProTrial: true,
     week_starts_monday: true,

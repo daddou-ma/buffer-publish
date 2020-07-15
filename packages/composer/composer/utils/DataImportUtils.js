@@ -178,7 +178,7 @@ const DataImportUtils = {
             successActionStatus:
               userData.s3_upload_signature.success_action_status,
           },
-          uses24hTime: userData.uses_24h_time,
+          uses24hTime: userData.hasTwentyFourHourTimeFormat,
           weekStartsMonday: userData.week_starts_monday,
           isFreeUser: userData.is_free_user,
           isBusinessUser: userData.is_business_user,

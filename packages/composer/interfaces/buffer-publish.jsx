@@ -153,7 +153,7 @@ ComposerWrapper.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.string.isRequired,
     s3_upload_signature: PropTypes.shape({}).isRequired,
-    uses_24h_time: PropTypes.bool.isRequired,
+    hasTwentyFourHourTimeFormat: PropTypes.bool.isRequired,
     week_starts_monday: PropTypes.bool.isRequired,
     profile_groups: PropTypes.PropTypes.array,
     is_free_user: PropTypes.bool.isRequired,
