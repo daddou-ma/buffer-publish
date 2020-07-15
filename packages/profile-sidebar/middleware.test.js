@@ -17,7 +17,6 @@ describe('middleware', () => {
           username: 'profile2',
         },
       ],
-      isOnBusinessTrial: false,
       selectedProfileId: '1234',
     },
     tabs: {
