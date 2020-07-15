@@ -93,7 +93,6 @@ const ComposerWrapper = ({
       userData.features.includes('instagram-location-tagging'),
     // TODO: make should_use_new_twitter_autocomplete dynamic based on the
     // value of enabledApplicationModes.includes('web-twitter-typeahead-autocomplete')
-    isOnProTrial: userData.isOnProTrial,
     should_use_new_twitter_autocomplete: true,
     updateId: post ? post.id : undefined,
     serviceUpdateId: post ? post.serviceUpdateId : undefined,

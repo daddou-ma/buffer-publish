@@ -277,7 +277,6 @@ class AppStateless extends React.Component {
             isFreeUser={userData.isFreeUser || false}
             isBusinessUser={userData.isBusinessUser || false}
             canStartProTrial={userData.canStartProTrial || false}
-            isOnProTrial={userData.isOnProTrial || false}
             draftMode={draftMode}
           />
 

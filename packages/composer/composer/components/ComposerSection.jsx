@@ -37,7 +37,6 @@ const ComposerComponent = ({
   hasIGDirectFlip,
   hasIGLocationTaggingFeature,
   canStartProTrial,
-  isOnProTrial,
   hasIGDirectVideoFlip,
   hasShopgridFlip,
   isProAndUpOrTeamMember,
@@ -85,7 +84,6 @@ const ComposerComponent = ({
       forceEditorFocus={forceEditorInstanceFocus}
       hasIGLocationTaggingFeature={hasIGLocationTaggingFeature}
       canStartProTrial={canStartProTrial}
-      isOnProTrial={isOnProTrial}
       hasIGDirectVideoFlip={hasIGDirectVideoFlip}
       hasShopgridFlip={hasShopgridFlip}
       isProAndUpOrTeamMember={isProAndUpOrTeamMember}
@@ -133,7 +131,6 @@ class ComposerSection extends React.Component {
       isFreeUser,
       isBusinessUser,
       canStartProTrial,
-      isOnProTrial,
       hasShopgridFlip,
       isProAndUpOrTeamMember,
       draftMode,
@@ -186,7 +183,6 @@ class ComposerSection extends React.Component {
               hasIGDirectFlip,
               hasIGLocationTaggingFeature,
               canStartProTrial,
-              isOnProTrial,
               hasIGDirectVideoFlip,
               hasShopgridFlip,
               isProAndUpOrTeamMember,
@@ -220,7 +216,6 @@ class ComposerSection extends React.Component {
                 hasIGDirectFlip,
                 hasIGLocationTaggingFeature,
                 canStartProTrial,
-                isOnProTrial,
                 hasIGDirectVideoFlip,
                 hasShopgridFlip,
                 isProAndUpOrTeamMember,
@@ -248,7 +243,6 @@ ComposerSection.propTypes = {
   hasIGDirectFlip: PropTypes.bool.isRequired,
   hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
   canStartProTrial: PropTypes.bool.isRequired,
-  isOnProTrial: PropTypes.bool.isRequired,
   hasIGDirectVideoFlip: PropTypes.bool.isRequired,
   isFreeUser: PropTypes.bool.isRequired,
   hasShopgridFlip: PropTypes.bool,

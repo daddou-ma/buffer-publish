@@ -48,7 +48,6 @@ const buildUser = build('User', {
       'twitter-march-18-changes',
     ],
     hasTwentyFourHourTimeFormat: false,
-    isOnProTrial: false,
     isOnBusinessTrial: false,
     isProAndUpOrTeamMember: true,
     uses_24h_time: false,
