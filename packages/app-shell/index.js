@@ -6,6 +6,7 @@ import {
 } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getOrgsAlfabeticalOrder } from '@bufferapp/publish-data-organizations/utils/';
 
 import { actions } from './reducer';
 import AppShell from './components/AppShell';
@@ -33,7 +34,7 @@ export default connect(
      * Needs organizations and profiles.
      */
     hasOrgSwitcherFeature: state.user.hasOrgSwitcherFeature,
-    organizations: state.organizations.list,
+    organizations: getOrgsAlfabeticalOrder(state.organizations.list) || [],
     selectedOrganizationId: state.organizations.selected?.id,
     profiles: state.publishProfiles,
     isImpersonation: state.appShell.isImpersonation,
