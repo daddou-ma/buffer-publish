@@ -10,7 +10,6 @@ module.exports = userData => ({
   features: userData.features,
   tags: userData.tags,
   hasTwentyFourHourTimeFormat: userData.twentyfour_hour_time,
-  uses_24h_time: userData.twentyfour_hour_time,
   imageDimensionsKey: userData.imagedimensions_key,
   plan: userData.plan,
   planCode: userData.plan_code,
