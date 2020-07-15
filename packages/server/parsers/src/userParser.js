@@ -22,7 +22,6 @@ module.exports = userData => ({
   profile_groups: userData.profile_groups || [],
   s3_upload_signature: userData.s3_upload_signature,
   week_starts_monday: userData.week_starts_monday,
-  has_ig_direct_flip: userData.features.includes('instagram_direct_posting'),
   twofactor: userData.twofactor,
   has_simplified_free_plan_ux: userData.features.includes(
     'has_simplified_free_plan_ux'

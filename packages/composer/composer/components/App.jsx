@@ -90,7 +90,6 @@ class App extends React.Component {
       uses24hTime: PropTypes.bool.isRequired,
       weekStartsMonday: PropTypes.bool.isRequired,
       isFreeUser: PropTypes.bool.isRequired,
-      hasIGDirectFlip: PropTypes.bool.isRequired,
       hasCampaignsFlip: PropTypes.bool.isRequired,
       isProAndUpOrTeamMember: PropTypes.bool.isRequired,
       hasIGLocationTaggingFeature: PropTypes.bool.isRequired,

@@ -34,7 +34,6 @@ const ComposerComponent = ({
   shouldEnableFacebookAutocomplete,
   shouldShowInlineSubprofileDropdown,
   composerPosition,
-  hasIGDirectFlip,
   hasIGLocationTaggingFeature,
   canStartProTrial,
   hasIGDirectVideoFlip,
@@ -80,7 +79,6 @@ const ComposerComponent = ({
       shouldEnableFacebookAutocomplete={shouldEnableFacebookAutocomplete}
       shouldShowInlineSubprofileDropdown={shouldShowInlineSubprofileDropdown}
       composerPosition={composerPosition}
-      hasIGDirectFlip={hasIGDirectFlip}
       forceEditorFocus={forceEditorInstanceFocus}
       hasIGLocationTaggingFeature={hasIGLocationTaggingFeature}
       canStartProTrial={canStartProTrial}
@@ -125,7 +123,6 @@ class ComposerSection extends React.Component {
       shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled,
       composerPosition,
-      hasIGDirectFlip,
       hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip,
       isFreeUser,
@@ -180,7 +177,6 @@ class ComposerSection extends React.Component {
               shouldEnableFacebookAutocomplete,
               shouldShowInlineSubprofileDropdown,
               composerPosition,
-              hasIGDirectFlip,
               hasIGLocationTaggingFeature,
               canStartProTrial,
               hasIGDirectVideoFlip,
@@ -213,7 +209,6 @@ class ComposerSection extends React.Component {
                 shouldEnableFacebookAutocomplete,
                 shouldShowInlineSubprofileDropdown,
                 composerPosition,
-                hasIGDirectFlip,
                 hasIGLocationTaggingFeature,
                 canStartProTrial,
                 hasIGDirectVideoFlip,
@@ -240,7 +235,6 @@ ComposerSection.propTypes = {
   selectedProfiles: PropTypes.array,
   isOmniboxEnabled: PropTypes.bool,
   composerPosition: PropTypes.object,
-  hasIGDirectFlip: PropTypes.bool.isRequired,
   hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
   canStartProTrial: PropTypes.bool.isRequired,
   hasIGDirectVideoFlip: PropTypes.bool.isRequired,

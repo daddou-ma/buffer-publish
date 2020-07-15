@@ -141,7 +141,6 @@ const ComposerWrapper = ({
       imageDimensionsKey={formattedData.imageDimensionsKey}
       options={options}
       onNewPublish
-      hasIGDirectFlip={formattedData.userData.has_ig_direct_flip}
       isFreeUser={formattedData.userData.isFreeUser}
       csrfToken={csrfToken}
       draftMode={draftMode}
@@ -161,7 +160,6 @@ ComposerWrapper.propTypes = {
     is_business_user: PropTypes.bool.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
     has_simplified_free_plan_ux: PropTypes.bool.isRequired,
-    has_ig_direct_flip: PropTypes.bool.isRequired,
   }).isRequired,
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
   enabledApplicationModes: PropTypes.arrayOf(PropTypes.string).isRequired,

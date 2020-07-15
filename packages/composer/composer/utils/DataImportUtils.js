@@ -183,7 +183,6 @@ const DataImportUtils = {
           isFreeUser: userData.is_free_user,
           isBusinessUser: userData.is_business_user,
           canStartProTrial: userData.canStartProTrial,
-          hasIGDirectFlip: userData.has_ig_direct_flip,
           shouldAlwaysSkipEmptyTextAlert: userData.skip_empty_text_alert,
           hasSimplifiedFreePlanUX: userData.has_simplified_free_plan_ux,
           hasIGLocationTaggingFeature: userData.hasIGLocationTaggingFeature,
