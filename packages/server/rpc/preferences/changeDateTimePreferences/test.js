@@ -54,6 +54,6 @@ describe('rpc/changeDateTimePreferences', () => {
       },
       { session }
     );
-    expect(response.is_free_user).toBeTruthy();
+    expect(response.isFreeUser).toBeTruthy();
   });
 });

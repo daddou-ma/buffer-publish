@@ -39,7 +39,7 @@ const buildUser = build('User', {
     plan: 'business',
     planCode: 11,
     is_business_user: true,
-    is_free_user: false,
+    isFreeUser: false,
     features: [
       'campaigns',
       'instagram',

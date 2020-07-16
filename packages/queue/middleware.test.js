@@ -9,7 +9,7 @@ import middleware from './middleware';
 
 const getStateWithPaidUser = () => ({
   user: {
-    is_free_user: false,
+    isFreeUser: false,
   },
   profileSidebar: {
     selectedProfileId: 'id1',

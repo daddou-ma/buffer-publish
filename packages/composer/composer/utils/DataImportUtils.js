@@ -180,7 +180,7 @@ const DataImportUtils = {
           },
           uses24hTime: userData.hasTwentyFourHourTimeFormat,
           weekStartsMonday: userData.week_starts_monday,
-          isFreeUser: userData.is_free_user,
+          isFreeUser: userData.isFreeUser,
           isBusinessUser: userData.is_business_user,
           canStartProTrial: userData.canStartProTrial,
           shouldAlwaysSkipEmptyTextAlert: userData.skip_empty_text_alert,

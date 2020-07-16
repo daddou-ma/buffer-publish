@@ -1,7 +1,4 @@
-import {
-  actionTypes as dataFetchActionTypes,
-  actions as dataFetchActions,
-} from '@bufferapp/async-data-fetch';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
 import {
   getPageNameFromPath,
@@ -62,7 +59,7 @@ export default ({ dispatch, getState }) => next => action => {
       break;
 
     case actionTypes.FULLSTORY:
-      if (!action.result.is_free_user) {
+      if (!action.result.isFreeUser) {
         if (window) {
           if (window.FS && window.FS.identify) {
             const { id } = action.result;
