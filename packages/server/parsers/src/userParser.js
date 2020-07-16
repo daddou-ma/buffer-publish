@@ -14,7 +14,8 @@ module.exports = userData => ({
   plan: userData.plan,
   planCode: userData.plan_code,
   is_business_user: userData.plan_code >= 8 && userData.plan_code <= 19,
-  is_free_user: userData.plan === 'free',
+  is_free_user: userData.plan_code === 1,
+  isProUser: userData.plan_code === 5 || userData.plan_code === 6,
   messages: userData.messages || [],
   skip_empty_text_alert: userData.messages.includes(
     'remember_confirm_saving_modal'
