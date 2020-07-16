@@ -23,7 +23,7 @@ export default ({ getState, dispatch }) => next => action => {
             plan: 'small',
           })
         );
-      } else if (user && user.is_business_user) {
+      } else if (user && user.isBusinessUser) {
         openBillingWindow();
       } else {
         dispatch(

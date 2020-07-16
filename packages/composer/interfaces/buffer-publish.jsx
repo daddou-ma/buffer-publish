@@ -157,7 +157,7 @@ ComposerWrapper.propTypes = {
     profile_groups: PropTypes.PropTypes.array,
     isFreeUser: PropTypes.bool.isRequired,
     skip_empty_text_alert: PropTypes.bool.isRequired,
-    is_business_user: PropTypes.bool.isRequired,
+    isBusinessUser: PropTypes.bool.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
     has_simplified_free_plan_ux: PropTypes.bool.isRequired,
   }).isRequired,

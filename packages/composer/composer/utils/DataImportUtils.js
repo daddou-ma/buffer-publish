@@ -181,7 +181,7 @@ const DataImportUtils = {
           uses24hTime: userData.hasTwentyFourHourTimeFormat,
           weekStartsMonday: userData.week_starts_monday,
           isFreeUser: userData.isFreeUser,
-          isBusinessUser: userData.is_business_user,
+          isBusinessUser: userData.isBusinessUser,
           canStartProTrial: userData.canStartProTrial,
           shouldAlwaysSkipEmptyTextAlert: userData.skip_empty_text_alert,
           hasSimplifiedFreePlanUX: userData.has_simplified_free_plan_ux,

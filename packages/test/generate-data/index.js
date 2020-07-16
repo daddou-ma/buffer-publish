@@ -38,7 +38,7 @@ const buildUser = build('User', {
     email: fake(f => f.internet.email()),
     plan: 'business',
     planCode: 11,
-    is_business_user: true,
+    isBusinessUser: true,
     isFreeUser: false,
     features: [
       'campaigns',

@@ -95,7 +95,7 @@ export default ({ dispatch, getState }) => next => action => {
             trial,
             orgUserCount,
             profileCount,
-            is_business_user: isBusinessUser,
+            isBusinessUser,
             tags,
           } = action.result; // user
           if (shouldIdentifyWithAppcues({ isBusinessUser, plan, tags })) {
