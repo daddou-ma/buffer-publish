@@ -183,7 +183,7 @@ describe('reducer', () => {
         type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
         result: {
           id: stateAfter.userId,
-          is_free_user: stateAfter.isFreeUser,
+          isFreeUser: stateAfter.isFreeUser,
           features: [],
         },
       };
@@ -206,7 +206,7 @@ describe('reducer', () => {
         type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
         result: {
           id: stateAfter.userId,
-          is_free_user: stateAfter.isFreeUser,
+          isFreeUser: stateAfter.isFreeUser,
           features: ['org_switcher'],
         },
       };

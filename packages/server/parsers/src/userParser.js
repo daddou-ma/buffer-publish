@@ -11,10 +11,12 @@ module.exports = userData => ({
   tags: userData.tags,
   hasTwentyFourHourTimeFormat: userData.twentyfour_hour_time,
   imageDimensionsKey: userData.imagedimensions_key,
-  plan: userData.plan,
+  plan: userData.billing_plan_tier,
+  planBase: userData.billing_plan_base,
   planCode: userData.plan_code,
-  is_business_user: userData.plan_code >= 8 && userData.plan_code <= 19,
-  is_free_user: userData.plan === 'free',
+  isBusinessUser: userData.billing_plan_base === 'business',
+  isFreeUser: userData.billing_plan_base === 'free',
+  isProUser: userData.billing_plan_base === 'pro',
   messages: userData.messages || [],
   skip_empty_text_alert: userData.messages.includes(
     'remember_confirm_saving_modal'
@@ -51,13 +53,12 @@ module.exports = userData => ({
   canStartProTrial: userData.can_start_pro_trial,
   shouldShowProTrialExpiredModal:
     hasProTrialExpired(userData.feature_trials) &&
-    userData.plan === 'free' &&
+    userData.billing_plan_base === 'free' &&
     !userData.has_cancelled,
   isOnBusinessTrial:
-    userData.plan_code >= 8 && userData.plan_code <= 19 && userData.on_trial,
+    userData.billing_plan_base === 'business' && userData.on_trial,
   shouldShowBusinessTrialExpiredModal:
-    userData.plan_code >= 8 &&
-    userData.plan_code <= 19 &&
+    userData.billing_plan_base === 'business' &&
     userData.on_trial &&
     userData.trial_expired &&
     !userData.trial_done,
