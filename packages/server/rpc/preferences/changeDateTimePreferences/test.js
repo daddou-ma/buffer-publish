@@ -14,7 +14,7 @@ const mockUser = {
   features: [],
   experiments: [],
   messages: [],
-  plan: 'free',
+  billing_plan_base: 'free',
   email_notifications: [],
   feature_trials: [],
   tags: [],
