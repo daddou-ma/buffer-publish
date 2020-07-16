@@ -1,21 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isSupportedPlan, isSupportedFeature } from '../../utils';
+import { isSupportedPlan } from '../../utils';
 
 const FeatureLoader = ({
   productFeatures,
-  supportedFeatures,
   children,
   fallback,
   supportedPlans,
 }) => {
-  const { planName, features } = productFeatures;
+  const { planName } = productFeatures;
 
   if (!isSupportedPlan(supportedPlans, planName)) {
-    return fallback || null;
-  }
-
-  if (!isSupportedFeature(supportedFeatures, features)) {
     return fallback || null;
   }
 
@@ -23,10 +18,6 @@ const FeatureLoader = ({
 };
 
 FeatureLoader.propTypes = {
-  supportedFeatures: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
@@ -34,7 +25,6 @@ FeatureLoader.propTypes = {
   fallback: PropTypes.node,
   productFeatures: PropTypes.shape({
     planName: PropTypes.string,
-    features: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   }),
   supportedPlans: PropTypes.oneOfType([
     PropTypes.string,

@@ -3,10 +3,9 @@ import deepFreeze from 'deep-freeze';
 import reducer from './reducer';
 
 describe('reducer', () => {
-  it('should initialize default state', () => {
+  it('initializes default state', () => {
     const stateAfter = {
       loading: true,
-      features: [],
       planName: 'free',
     };
     const action = {
@@ -15,28 +14,9 @@ describe('reducer', () => {
     deepFreeze(action);
     expect(reducer(undefined, action)).toEqual(stateAfter);
   });
-  it('should save feature into state', () => {
-    const features = {
-      features: {
-        show_stuff: true,
-        not_here: false,
-      },
-    };
-    const action = {
-      type: `features_${dataFetchActionTypes.FETCH_SUCCESS}`,
-      result: features,
-    };
-    const stateAfter = {
-      ...features,
-      loading: false,
-      planName: 'free',
-    };
-    deepFreeze(action);
-    expect(reducer(undefined, action)).toEqual(stateAfter);
-  });
   it('saves user plan into state', () => {
     const stateBefore = {
-      features: ['feature1'],
+      loading: true,
     };
     const userData = {
       isFreeUser: false,
@@ -53,7 +33,7 @@ describe('reducer', () => {
       isProUser: true,
       isBusinessUser: false,
       planName: 'pro',
-      features: ['feature1'],
+      loading: false,
     };
     deepFreeze(action);
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
