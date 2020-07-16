@@ -7,5 +7,5 @@ storiesOf('BannerAdvancedAnalytics', module)
   .addDecorator(withA11y)
   .add('default', () => <BannerAdvancedAnalytics />)
   .add('existing analyze customer', () => (
-    <BannerAdvancedAnalytics isAnalyzeCustomer />
+    <BannerAdvancedAnalytics analyzeCrossSale />
   ));

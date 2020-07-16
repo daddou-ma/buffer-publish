@@ -44,7 +44,7 @@ export default connect(
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
-        isAnalyzeCustomer: state.user.isAnalyzeCustomer,
+        analyzeCrossSale: state.user.analyzeCrossSale,
         hasFirstCommentFlip:
           state.user.features?.includes('first_comment') ?? false,
         hasCampaignsFeature:
