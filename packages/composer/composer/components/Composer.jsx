@@ -620,7 +620,7 @@ class Composer extends React.Component {
       this.isExpanded() &&
       draft.service.name === 'instagram' &&
       draft.service.maxHashtags !== null &&
-      draft.service.maxHaashtags - draft.getNumberOfHashtags() <= 10;
+      draft.service.maxHashtags - draft.getNumberOfHashtags() <= 10;
 
     return (
       <div className={characterCountClassName}>
