@@ -8,7 +8,6 @@ describe('reducer', () => {
       loading: true,
       features: [],
       planName: 'free',
-      defaultPlan: 'free',
     };
     const action = {
       type: 'INIT',
@@ -22,8 +21,6 @@ describe('reducer', () => {
         show_stuff: true,
         not_here: false,
       },
-      planName: 'pro',
-      defaultPlan: 'free',
     };
     const action = {
       type: `features_${dataFetchActionTypes.FETCH_SUCCESS}`,
@@ -32,11 +29,33 @@ describe('reducer', () => {
     const stateAfter = {
       ...features,
       loading: false,
-      isBusinessUser: false,
-      isFreeUser: false,
-      isProUser: true,
+      planName: 'free',
     };
     deepFreeze(action);
     expect(reducer(undefined, action)).toEqual(stateAfter);
+  });
+  it('saves user plan into state', () => {
+    const stateBefore = {
+      features: ['feature1'],
+    };
+    const userData = {
+      isFreeUser: false,
+      isProUser: true,
+      isBusinessUser: false,
+      planBase: 'pro',
+    };
+    const action = {
+      type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
+      result: userData,
+    };
+    const stateAfter = {
+      isFreeUser: false,
+      isProUser: true,
+      isBusinessUser: false,
+      planName: 'pro',
+      features: ['feature1'],
+    };
+    deepFreeze(action);
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 });

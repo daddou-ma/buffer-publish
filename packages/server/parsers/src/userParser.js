@@ -12,6 +12,7 @@ module.exports = userData => ({
   hasTwentyFourHourTimeFormat: userData.twentyfour_hour_time,
   imageDimensionsKey: userData.imagedimensions_key,
   plan: userData.billing_plan_tier,
+  planBase: userData.billing_plan_base,
   planCode: userData.plan_code,
   isBusinessUser: userData.billing_plan_base === 'business',
   isFreeUser: userData.billing_plan_base === 'free',
