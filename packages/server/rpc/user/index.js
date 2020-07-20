@@ -19,7 +19,6 @@ module.exports = method(
         return [];
       }),
     ])
-      .catch(PublishAPI.errorHandler)
       .then(([user, { data }]) => {
         return [
           parsers.userParser(user),
@@ -38,6 +37,7 @@ module.exports = method(
           }
         }
         return user;
-      });
+      })
+      .catch(PublishAPI.errorHandler);
   }
 );
