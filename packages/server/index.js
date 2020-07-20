@@ -166,7 +166,7 @@ app.get('*', (req, res) => {
 
   Promise.all([
     userMethod
-      .fn(null, req, res, { PublishAPI, parsers: { userParser } })
+      .fn(null, req, res, { PublishAPI, parsers: { userParser, orgParser } })
       .catch(err => {
         bufflog.error(`Error prefetching user: ${err.message}`, err);
         return undefined;
