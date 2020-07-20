@@ -7,20 +7,9 @@ module.exports = userData => ({
   name: userData.name,
   language: userData.language || 'en-US',
   createdAt: userData.created_at,
-  features: userData.features,
   tags: userData.tags,
   hasTwentyFourHourTimeFormat: userData.twentyfour_hour_time,
   imageDimensionsKey: userData.imagedimensions_key,
-  plan:
-    userData.billing_plan_tier === 'pro8' ||
-    userData.billing_plan_tier === 'pro15'
-      ? 'pro'
-      : userData.billing_plan_tier, // temporary, as we transition from userData.plan. Safe to delete the conditions once we remove the plan ==='pro' checks in the codebase .
-  planBase: userData.billing_plan_base,
-  planCode: userData.plan_code,
-  isBusinessUser: userData.billing_plan_base === 'business',
-  isFreeUser: userData.billing_plan_base === 'free',
-  isProUser: userData.billing_plan_base === 'pro',
   messages: userData.messages || [],
   skip_empty_text_alert: userData.messages.includes(
     'remember_confirm_saving_modal'
@@ -36,7 +25,6 @@ module.exports = userData => ({
     'instagram-location-tagging'
   ),
   hasIGDirectVideoFlip: userData.features.includes('ig_direct_video_posting'),
-  profileLimit: userData.profile_limit,
   profiles_schedules_slots: userData.profiles_schedules_slots,
   hasNewPublish: userData.in_new_publish_rollout,
   hasEmailNotifications: {
@@ -84,9 +72,6 @@ module.exports = userData => ({
         trialTimeRemaining: userData.trial_time_remaining,
         trialPlan: userData.trial_plan,
       },
-  isNonprofit: userData.billing_status_nonprofit,
-  orgUserCount: userData.org_user_count,
-  profileCount: userData.profile_usage,
   showReturnToClassic: userData.has_np_app_switcher,
   isBusinessTeamMember: userData.is_business_team_member,
   isProAndUpOrTeamMember: userData.is_pro_and_up_org_user, // this includes team members
@@ -96,4 +81,21 @@ module.exports = userData => ({
   // Org features
   hasCampaignsFeature: userData.features.includes('campaigns'),
   hasFirstCommentFeature: userData.features.includes('first_comment'),
+  // Org data
+  plan:
+    userData.billing_plan_tier === 'pro8' ||
+    userData.billing_plan_tier === 'pro15'
+      ? 'pro'
+      : userData.billing_plan_tier, // temporary, as we transition from userData.plan. Safe to delete the conditions once we remove the plan ==='pro' checks in the codebase .
+  planBase: userData.billing_plan_base,
+  planCode: userData.plan_code,
+  isBusinessUser: userData.billing_plan_base === 'business',
+  isFreeUser: userData.billing_plan_base === 'free',
+  isProUser: userData.billing_plan_base === 'pro',
+  profileLimit: userData.profile_limit,
+  isNonprofit: userData.billing_status_nonprofit,
+  orgUserCount: userData.org_user_count,
+  profileCount: userData.profile_usage,
+  // Org owner data
+  features: userData.features,
 });

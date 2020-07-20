@@ -30,10 +30,34 @@ module.exports = method(
           user && user.features && user.features.includes('org_switcher');
         const orgSelected = (orgs && orgs.find(org => org.selected)) || orgs[0];
         if (orgSelected) {
-          const { planCode } = orgSelected;
+          const {
+            planCode,
+            planBase,
+            plan,
+            isNonProfit,
+            profileLimit,
+            profilesCount,
+            usersCount,
+            ownerFeatures,
+          } = orgSelected;
           // Temporarily injecting org plan data in users. To be removed after org switcher rollout.
           if (hasOrgSwitcher) {
-            return { ...user, planCode };
+            return {
+              ...user,
+              plan: plan === 'pro8' || plan === 'pro15' ? 'pro' : plan,
+              planCode,
+              planBase,
+              features: ownerFeatures,
+              isNonprofit: isNonProfit,
+              profileLimit,
+              profileCount: profilesCount,
+              orgUserCount: usersCount,
+              hasCampaignsFeature: planBase !== 'free',
+              hasFirstCommentFeature: planBase !== 'free',
+              isBusinessUser: planBase === 'business',
+              isFreeUser: planBase === 'free',
+              isProUser: planBase === 'pro',
+            };
           }
         }
         return user;
