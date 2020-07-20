@@ -1,25 +1,15 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
-import {
-  connect
-} from 'react-redux';
-import {
-  actions as campaignListActions
-} from '@bufferapp/publish-campaigns-list';
-import {
-  formatPostLists
-} from '@bufferapp/publish-queue/util';
+import { connect } from 'react-redux';
+import { actions as campaignListActions } from '@bufferapp/publish-campaigns-list';
+import { formatPostLists } from '@bufferapp/publish-queue/util';
 // load the presentational component
-import {
-  actions
-} from './reducer';
+import { actions } from './reducer';
 import SentPosts from './components/SentPosts';
 
 // default export = container
 export default connect(
   (state, ownProps) => {
-    const {
-      profileId
-    } = ownProps;
+    const { profileId } = ownProps;
     const currentProfile = state.sent.byProfileId[profileId];
     if (currentProfile) {
       const profileData = state.profileSidebar.profiles.find(
@@ -49,9 +39,11 @@ export default connect(
         editMode: state.sent.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
         isBusinessAccount: state.profileSidebar.selectedProfile.business,
-        showAnalyzeBannerAfterFirstPost: state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
+        showAnalyzeBannerAfterFirstPost:
+          state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
+        isDisconnectedProfile:
+          state.profileSidebar.selectedProfile.isDisconnected,
         analyzeCrossSale: state.user.analyzeCrossSale,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
         hasCampaignsFeature: state.user.hasCampaignsFeature,
@@ -63,9 +55,7 @@ export default connect(
     return {};
   },
   (dispatch, ownProps) => ({
-    onShareAgainClick: ({
-      post
-    }) => {
+    onShareAgainClick: ({ post }) => {
       dispatch(
         actions.handleShareAgainClick({
           post,
@@ -97,9 +87,5 @@ export default connect(
 )(SentPosts);
 
 // export reducer, actions and action types
-export reducer, {
-  actions,
-  actionTypes
-}
-from './reducer';
+export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';
