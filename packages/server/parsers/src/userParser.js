@@ -95,4 +95,5 @@ module.exports = userData => ({
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
   // Org features
   hasCampaignsFeature: userData.features.includes('campaigns'),
+  hasFirstCommentFeature: userData.features.includes('first_comment'),
 });
