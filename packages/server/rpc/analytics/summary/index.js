@@ -71,6 +71,10 @@ const summarize = (metricKey, currentPeriod, pastPeriod, profileService) => {
   };
 };
 
+function getResponseData(response) {
+  return response && 'organic' in response ? response.organic : response;
+}
+
 module.exports = method(
   'summary',
   'fetch analytics summary for profiles and pages',
@@ -95,8 +99,8 @@ module.exports = method(
 
     return Promise.all([currentPeriod, previousPeriod])
       .then(response => {
-        const currentPeriodResult = response[0].response;
-        const pastPeriodResult = response[1].response;
+        const currentPeriodResult = getResponseData(response[0].response);
+        const pastPeriodResult = getResponseData(response[1].response);
         return Object.keys(LABELS[profileService])
           .map(metricKey =>
             summarize(

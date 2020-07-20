@@ -17,7 +17,6 @@ import bootstrapMiddleware from '@bufferapp/publish-bootstrap/middleware';
 import userMiddleware from '@bufferapp/publish-data-user/middleware';
 import orgMiddleware from '@bufferapp/publish-data-organizations/middleware';
 import profilesMiddleware from '@bufferapp/publish-data-profiles/middleware';
-import productFeatureMiddleware from '@bufferapp/product-features/middleware';
 import i18nMiddleware from '@bufferapp/publish-i18n/middleware';
 import asyncDataFetchMiddleware from '@bufferapp/async-data-fetch/lib/middleware';
 import pusherSyncMiddleware from '@bufferapp/publish-pusher-sync/middleware';
@@ -77,7 +76,6 @@ const composedMiddlewares = history =>
       userMiddleware,
       orgMiddleware,
       profilesMiddleware,
-      productFeatureMiddleware,
       queueMiddleware,
       sentMiddleware,
       gridMiddleware,

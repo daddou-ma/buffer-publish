@@ -23,7 +23,7 @@ export default connect(
     }
 
     return {
-      uses24hTime: state.user.uses_24h_time,
+      uses24hTime: state.user.hasTwentyFourHourTimeFormat,
       timezone: state.profileSidebar.selectedProfile.timezone,
       weekStartsMonday: state.user.week_starts_monday,
       selectedProfile: state.profileSidebar.selectedProfile,

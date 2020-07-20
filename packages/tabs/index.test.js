@@ -27,7 +27,6 @@ describe('TabNavigation', () => {
       isLockedProfile: false,
     },
     user: {
-      canStartProTrial: true,
       trial: {
         onTrial: false,
       },

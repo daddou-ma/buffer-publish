@@ -6,6 +6,7 @@ import {
 } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getOrgsAlfabeticalOrder } from '@bufferapp/publish-data-organizations/utils/';
 
 import { actions } from './reducer';
 import AppShell from './components/AppShell';
@@ -19,14 +20,13 @@ export default connect(
     bannerOptions: state.appShell.bannerOptions,
     bannerKey: state.appShell.bannerKey,
     showReturnToClassic: state.user.showReturnToClassic,
-    showSwitchPlan: state.user.is_free_user && !state.user.isBusinessTeamMember,
-    showManageTeam: !state.user.is_free_user,
+    showSwitchPlan: state.user.isFreeUser && !state.user.isBusinessTeamMember,
+    showManageTeam: !state.user.isFreeUser,
     showStartProTrial:
       state.user.canStartProTrial && !state.user.isBusinessTeamMember,
     hideAppShell:
       state.onboarding.canSeeOnboardingPage &&
       state.router.location.pathname === newBusinessTrialists.route,
-    hideMenuItems: state.user.canSeePaydayPage && state.user.isOnAwesomePlan,
     enabledProducts: state.appShell.enabledProducts,
     featureFlips: state.appShell.featureFlips,
     /**
@@ -34,7 +34,7 @@ export default connect(
      * Needs organizations and profiles.
      */
     hasOrgSwitcherFeature: state.user.hasOrgSwitcherFeature,
-    organizations: state.organizations.list,
+    organizations: getOrgsAlfabeticalOrder(state.organizations.list) || [],
     selectedOrganizationId: state.organizations.selected?.id,
     profiles: state.publishProfiles,
     isImpersonation: state.appShell.isImpersonation,

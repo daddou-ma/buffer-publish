@@ -174,7 +174,6 @@ describe('reducer', () => {
 
       const stateAfter = {
         ...profileInitialState,
-        isOnBusinessTrial: true,
         userId: '1234',
         isFreeUser: false,
         isOrganizationSwitcherEnabled: false,
@@ -183,9 +182,8 @@ describe('reducer', () => {
       const action = {
         type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
         result: {
-          isOnBusinessTrial: stateAfter.isOnBusinessTrial,
           id: stateAfter.userId,
-          is_free_user: stateAfter.isFreeUser,
+          isFreeUser: stateAfter.isFreeUser,
           features: [],
         },
       };
@@ -199,7 +197,6 @@ describe('reducer', () => {
 
       const stateAfter = {
         ...profileInitialState,
-        isOnBusinessTrial: true,
         userId: '1234',
         isFreeUser: false,
         isOrganizationSwitcherEnabled: true,
@@ -208,9 +205,8 @@ describe('reducer', () => {
       const action = {
         type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
         result: {
-          isOnBusinessTrial: stateAfter.isOnBusinessTrial,
           id: stateAfter.userId,
-          is_free_user: stateAfter.isFreeUser,
+          isFreeUser: stateAfter.isFreeUser,
           features: ['org_switcher'],
         },
       };

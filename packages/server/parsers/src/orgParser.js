@@ -5,7 +5,7 @@ module.exports = orgData => ({
   name: orgData.name,
   ownerId: orgData.owner_id,
   ownerEmail: orgData.owner_email,
-  plan: orgData.plan,
+  plan: orgData.plan_name,
   planCode: orgData.plan_code,
   isAdmin: orgData.is_admin,
   selected: orgData.selected,

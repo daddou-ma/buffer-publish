@@ -14,7 +14,7 @@ const mockUser = {
   features: [],
   experiments: [],
   messages: [],
-  plan: 'free',
+  billing_plan_base: 'free',
   email_notifications: [],
   feature_trials: [],
   tags: [],
@@ -54,6 +54,6 @@ describe('rpc/changeDateTimePreferences', () => {
       },
       { session }
     );
-    expect(response.is_free_user).toBeTruthy();
+    expect(response.isFreeUser).toBeTruthy();
   });
 });

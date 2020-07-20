@@ -17,7 +17,7 @@ const storeFake = state => ({
 const store = storeFake({
   user: {
     id: 'id1',
-    profile_limit: 3,
+    profileLimit: 3,
   },
   profileSidebar: {
     selectedProfile: {

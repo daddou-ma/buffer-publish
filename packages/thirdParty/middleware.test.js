@@ -22,7 +22,7 @@ const mockUser = {
   trial: {},
   orgUserCount: 2,
   profileCount: 3,
-  is_business_user: true,
+  isBusinessUser: true,
   tags: [],
 };
 
@@ -34,7 +34,7 @@ const mockFreeUser = {
   trial: {},
   orgUserCount: 2,
   profileCount: 3,
-  is_free_user: true,
+  isFreeUser: true,
   tags: [],
 };
 

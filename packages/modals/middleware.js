@@ -87,12 +87,7 @@ export default ({ dispatch, getState }) => next => action => {
       const {
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
-        isOnAwesomePlan,
       } = action.result; // userData
-      if (isOnAwesomePlan) {
-        // Context: https://buffer.atlassian.net/browse/PUB-2004
-        return;
-      }
       if (
         shouldShowProTrialExpiredModal ||
         shouldShowBusinessTrialExpiredModal

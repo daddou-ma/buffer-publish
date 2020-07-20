@@ -1,0 +1,14 @@
+name: Cypress Cleanup
+on:
+  repository_dispatch:
+    types: cypress-cleanup
+  schedule:
+    - cron:  '0 0 * * 0'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+    - name: curl e2e cleanup endpoint on publish-api
+      run: |
+        curl "https://api.bufferapp.com/1/e2e/cleanup.json?access_token=${{ secrets.HAMSTU_GMAIL_COM_PUBLISH_AT }}"

@@ -15,7 +15,7 @@ export default connect(
       state.user.trial?.onTrial &&
       !state.profileSidebar.selectedProfile.business,
     shouldShowUpgradeCta:
-      state.user.is_free_user && !state.user.isBusinessTeamMember,
+      state.user.isFreeUser && !state.user.isBusinessTeamMember,
     shouldShowUpgradeButton:
       state.user.plan === 'free' ||
       state.user.plan === 'pro' ||
@@ -32,7 +32,6 @@ export default connect(
     isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
     isInstagramProfile: state.generalSettings.isInstagramProfile,
     selectedProfile: state.profileSidebar.selectedProfile,
-    canStartProTrial: state.user.canStartProTrial,
     hasStoriesFlip: state.user.features?.includes('stories_groups') ?? false,
     draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
     draftsCount: state.tabs.draftsCount,

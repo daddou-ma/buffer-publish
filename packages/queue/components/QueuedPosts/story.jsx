@@ -30,7 +30,7 @@ const store = storeFake({
     features: {},
   },
   user: {
-    profile_limit: 3,
+    profileLimit: 3,
     id: 'id1',
   },
   profileSidebar: {

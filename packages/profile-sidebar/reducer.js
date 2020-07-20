@@ -262,9 +262,8 @@ export default (state = initialState, action) => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       return {
         ...state,
-        isOnBusinessTrial: action.result.isOnBusinessTrial,
         userId: action.result.id,
-        isFreeUser: action.result.is_free_user,
+        isFreeUser: action.result.isFreeUser,
         isOrganizationSwitcherEnabled:
           action.result.features?.includes('org_switcher') ?? false,
       };
