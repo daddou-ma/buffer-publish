@@ -27,8 +27,7 @@ export default ({ dispatch, getState }) => next => action => {
     case actionTypes.FETCH_CAMPAIGNS_IF_NEEDED: {
       /* if a user enters a url directly, the campaign list will need to be fetched.
        campaign list should only be fetched once while in publish */
-      const { hasCampaignsFeature } = state.user;
-      const { hasOrgSwitcherFeature } = state.user;
+      const { hasCampaignsFeature, hasOrgSwitcherFeature } = state.user;
       const shouldFetchCampaigns =
         !hasOrgSwitcherFeature &&
         hasCampaignsFeature &&
