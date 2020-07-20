@@ -57,7 +57,7 @@ export default connect(
         hasCampaignsFeature: state.user.hasCampaignsFeature,
         linkShortening: state.generalSettings.linkShortening,
         hasBitlyPosts: currentProfile.hasBitlyPosts,
-        shouldDisplayBitly: !state ? .productFeatures ? .isFreeUser,
+        shouldDisplayBitly: !state?.productFeatures?.isFreeUser,
       };
     }
     return {};
