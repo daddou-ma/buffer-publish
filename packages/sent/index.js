@@ -47,8 +47,7 @@ export default connect(
         isAnalyzeCustomer: state.user.isAnalyzeCustomer,
         hasFirstCommentFlip:
           state.user.features?.includes('first_comment') ?? false,
-        hasCampaignsFeature:
-          state.user.features?.includes('campaigns') ?? false,
+        hasCampaignsFeature: state.user.hasCampaignsFeature,
         linkShortening: state.generalSettings.linkShortening,
         hasBitlyPosts: currentProfile.hasBitlyPosts,
         shouldDisplayBitly: !state?.productFeatures?.isFreeUser,

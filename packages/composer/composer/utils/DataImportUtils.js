@@ -188,7 +188,7 @@ const DataImportUtils = {
           hasIGLocationTaggingFeature: userData.hasIGLocationTaggingFeature,
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
-          hasCampaignsFlip: hasFeature(userData.features, 'campaigns'),
+          hasCampaignsFlip: userData.hasCampaignsFeature,
           isProAndUpOrTeamMember: userData.isProAndUpOrTeamMember,
           profileGroups: userData.profile_groups
             ? userData.profile_groups.map(group => ({

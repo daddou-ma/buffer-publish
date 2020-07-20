@@ -84,8 +84,7 @@ export default connect(
           state.profileSidebar.selectedProfile.isDisconnected,
         hasFirstCommentFlip:
           state.user.features?.includes('first_comment') ?? false,
-        hasCampaignsFeature:
-          state.user.features?.includes('campaigns') ?? false,
+        hasCampaignsFeature: state.user.hasCampaignsFeature,
       };
     }
     return {

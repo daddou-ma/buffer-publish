@@ -41,12 +41,12 @@ const buildUser = build('User', {
     isBusinessUser: true,
     isFreeUser: false,
     features: [
-      'campaigns',
       'instagram',
       'first_comment',
       'stories_groups',
       'twitter-march-18-changes',
     ],
+    hasCampaignsFeature: true,
     hasTwentyFourHourTimeFormat: false,
     isOnBusinessTrial: false,
     isProAndUpOrTeamMember: true,

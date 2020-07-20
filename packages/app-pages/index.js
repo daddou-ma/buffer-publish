@@ -15,7 +15,7 @@ export default connect(
     const selectedOrgId = state.organizations?.selected?.id;
     const currentPath = state.router.location?.pathname;
     const profiles = state.publishProfiles;
-    const hasOrgSwitcherFeature = state.user.features?.includes('org_switcher');
+    const { hasOrgSwitcherFeature } = state.user;
 
     // Verify if it is an org route and get id param
     const orgRouteParams = getParams({
