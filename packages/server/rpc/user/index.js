@@ -11,12 +11,15 @@ module.exports = method(
         params: {
           includes: 'avatar',
         },
-      }).catch(PublishAPI.errorHandler),
+      }),
       PublishAPI.get({
         uri: `1/user/organizations.json`,
         session,
+      }).catch(() => {
+        return [];
       }),
     ])
+      .catch(PublishAPI.errorHandler)
       .then(([user, { data }]) => {
         return [
           parsers.userParser(user),
@@ -26,8 +29,7 @@ module.exports = method(
       .then(([user, orgs]) => {
         const hasOrgSwitcher =
           user && user.features && user.features.includes('org_switcher');
-        const orgSelected =
-          (orgs && orgs.data && orgs.data.find(org => org.selected)) || orgs[0];
+        const orgSelected = (orgs && orgs.find(org => org.selected)) || orgs[0];
         if (orgSelected) {
           const { planCode } = orgSelected;
           // Temporarily injecting org plan data in users. To be removed after org switcher rollout.
