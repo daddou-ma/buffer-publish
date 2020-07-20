@@ -19,7 +19,7 @@ describe('middleware', () => {
       dispatch: jest.fn(),
       getState: () => ({
         campaignsList: initialState,
-        user: { features: ['campaigns', 'org_switcher'] },
+        user: { hasCampaignsFeature: true, hasOrgSwitcherFeature: true },
       }),
     };
     middleware(store)(next)(orgSelectedAction);
@@ -37,7 +37,7 @@ describe('middleware', () => {
       dispatch: jest.fn(),
       getState: () => ({
         campaignsList: initialState,
-        user: { features: ['campaigns'] },
+        user: { hasCampaignsFeature: true },
       }),
     };
     middleware(store)(next)(orgSelectedAction);
@@ -55,7 +55,7 @@ describe('middleware', () => {
       dispatch: jest.fn(),
       getState: () => ({
         campaignsList: initialState,
-        user: { features: ['campaigns'] },
+        user: { hasCampaignsFeature: true },
       }),
     };
     const action = {
@@ -96,7 +96,7 @@ describe('middleware', () => {
       dispatch: jest.fn(),
       getState: () => ({
         campaignsList: { ...initialState, campaigns: [] },
-        user: { features: ['campaigns'] },
+        user: { hasCampaignsFeature: true },
       }),
     };
     const action = {
@@ -116,7 +116,7 @@ describe('middleware', () => {
       dispatch: jest.fn(),
       getState: () => ({
         campaignsList: { ...initialState, campaigns: [] },
-        user: { features: ['campaigns', 'org_switcher'] },
+        user: { hasCampaignsFeature: true, hasOrgSwitcherFeature: true },
       }),
     };
     const action = {

@@ -34,7 +34,7 @@ export default connect(
       hideSkeletonHeader: state.campaign.hideSkeletonHeader,
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
       page: state.campaign.page,
-      hasCampaignsFlip: state.user.features?.includes('campaigns') ?? false,
+      hasCampaignsFlip: state.user.hasCampaignsFeature,
     };
   },
 
