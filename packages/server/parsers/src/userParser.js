@@ -18,13 +18,6 @@ module.exports = userData => ({
   s3_upload_signature: userData.s3_upload_signature,
   week_starts_monday: userData.week_starts_monday,
   twofactor: userData.twofactor,
-  has_simplified_free_plan_ux: userData.features.includes(
-    'has_simplified_free_plan_ux'
-  ),
-  hasIGLocationTaggingFeature: userData.features.includes(
-    'instagram-location-tagging'
-  ),
-  hasIGDirectVideoFlip: userData.features.includes('ig_direct_video_posting'),
   profiles_schedules_slots: userData.profiles_schedules_slots,
   hasNewPublish: userData.in_new_publish_rollout,
   hasEmailNotifications: {
@@ -78,9 +71,16 @@ module.exports = userData => ({
   analyzeCrossSale: userData.is_analyze_customer,
   isUsingPublishAsTeamMember: userData.is_using_publish_as_team_member,
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
+
+  // Deprecated features (to delete)
+  has_simplified_free_plan_ux: false,
+  hasIGLocationTaggingFeature: true,
+  hasIGDirectVideoFlip: true,
+
   // Org features
   hasCampaignsFeature: userData.features.includes('campaigns'),
   hasFirstCommentFeature: userData.features.includes('first_comment'),
+
   // Org data
   plan:
     userData.billing_plan_tier === 'pro8' ||
@@ -96,6 +96,7 @@ module.exports = userData => ({
   isNonprofit: userData.billing_status_nonprofit,
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,
+
   // Org owner data
   features: userData.features,
 });
