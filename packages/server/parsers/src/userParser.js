@@ -90,7 +90,7 @@ module.exports = userData => ({
   showReturnToClassic: userData.has_np_app_switcher,
   isBusinessTeamMember: userData.is_business_team_member,
   isProAndUpOrTeamMember: userData.is_pro_and_up_org_user, // this includes team members
-  isAnalyzeCustomer: userData.is_analyze_customer,
+  analyzeCrossSale: userData.is_analyze_customer,
   isUsingPublishAsTeamMember: userData.is_using_publish_as_team_member,
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
   // Org features

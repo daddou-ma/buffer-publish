@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { ModalWrapper, AnalyzeIcon, CTAButton } from './style';
 
-function BannerAdvancedAnalytics({ isAnalyzeCustomer }) {
+function BannerAdvancedAnalytics({ analyzeCrossSale }) {
   return (
     <ModalWrapper>
       <div>
@@ -19,23 +19,23 @@ function BannerAdvancedAnalytics({ isAnalyzeCustomer }) {
         size="small"
         onClick={() => {
           window.location.assign(
-            isAnalyzeCustomer
+            analyzeCrossSale
               ? 'https://analyze.buffer.com'
               : 'https://account.buffer.com/analyze?cta=publish-analytics-posts-analyzeTrial-1'
           );
         }}
-        label={isAnalyzeCustomer ? 'Visit Analyze' : 'Start Free Analyze Trial'}
+        label={analyzeCrossSale ? 'Visit Analyze' : 'Start Free Analyze Trial'}
       />
     </ModalWrapper>
   );
 }
 
 BannerAdvancedAnalytics.propTypes = {
-  isAnalyzeCustomer: PropTypes.bool,
+  analyzeCrossSale: PropTypes.bool,
 };
 
 BannerAdvancedAnalytics.defaultProps = {
-  isAnalyzeCustomer: false,
+  analyzeCrossSale: false,
 };
 
 export default BannerAdvancedAnalytics;

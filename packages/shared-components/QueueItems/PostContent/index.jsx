@@ -213,7 +213,7 @@ Content.propTypes = {
 const PostContent = ({
   post,
   queueType = 'post',
-  isAnalyzeCustomer,
+  analyzeCrossSale,
   onMobileClick,
   onShareAgainClick,
   showShareAgainButton,
@@ -254,7 +254,7 @@ const PostContent = ({
         />
       </PostWrapper>
       {shouldShowAnalyzeBanner && (
-        <BannerAdvancedAnalytics isAnalyzeCustomer={isAnalyzeCustomer} />
+        <BannerAdvancedAnalytics analyzeCrossSale={analyzeCrossSale} />
       )}
     </>
   );
@@ -263,7 +263,7 @@ const PostContent = ({
 PostContent.propTypes = {
   post: PostContentProps.postType,
   queueType: PostContentProps.queueType,
-  isAnalyzeCustomer: PropTypes.bool,
+  analyzeCrossSale: PropTypes.bool,
   showShareAgainButton: PropTypes.bool,
   showSendToMobile: PropTypes.bool,
   shouldShowAnalyzeBanner: PropTypes.bool,
@@ -273,7 +273,7 @@ PostContent.propTypes = {
 };
 
 PostContent.defaultProps = {
-  isAnalyzeCustomer: false,
+  analyzeCrossSale: false,
   showShareAgainButton: false,
   showSendToMobile: false,
   shouldShowAnalyzeBanner: false,

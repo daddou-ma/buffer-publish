@@ -97,7 +97,7 @@ const SentPosts = ({
   page,
   loadMore,
   showAnalyzeBannerAfterFirstPost,
-  isAnalyzeCustomer,
+  analyzeCrossSale,
   fetchSentPosts,
   linkShortening,
   hasBitlyPosts,
@@ -181,7 +181,7 @@ const SentPosts = ({
               hasFirstCommentFlip={hasFirstCommentFlip}
               hasCampaignsFeature={hasCampaignsFeature}
               showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
-              isAnalyzeCustomer={isAnalyzeCustomer}
+              analyzeCrossSale={analyzeCrossSale}
               profileServiceType={profileServiceType}
               profileService={profileService}
             />
@@ -220,7 +220,7 @@ SentPosts.propTypes = {
   total: PropTypes.number,
   showComposer: PropTypes.bool,
   showAnalyzeBannerAfterFirstPost: PropTypes.bool,
-  isAnalyzeCustomer: PropTypes.bool,
+  analyzeCrossSale: PropTypes.bool,
   editMode: PropTypes.bool,
   onComposerCreateSuccess: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
@@ -246,7 +246,7 @@ SentPosts.defaultProps = {
   total: 0,
   showComposer: false,
   showAnalyzeBannerAfterFirstPost: false,
-  isAnalyzeCustomer: false,
+  analyzeCrossSale: false,
   editMode: false,
   isManager: true,
   isBusinessAccount: false,
