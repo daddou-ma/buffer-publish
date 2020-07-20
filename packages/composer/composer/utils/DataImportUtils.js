@@ -180,15 +180,15 @@ const DataImportUtils = {
           },
           uses24hTime: userData.hasTwentyFourHourTimeFormat,
           weekStartsMonday: userData.week_starts_monday,
-          isFreeUser: userData.is_free_user,
-          isBusinessUser: userData.is_business_user,
+          isFreeUser: userData.isFreeUser,
+          isBusinessUser: userData.isBusinessUser,
           canStartProTrial: userData.canStartProTrial,
           shouldAlwaysSkipEmptyTextAlert: userData.skip_empty_text_alert,
           hasSimplifiedFreePlanUX: userData.has_simplified_free_plan_ux,
           hasIGLocationTaggingFeature: userData.hasIGLocationTaggingFeature,
           hasIGDirectVideoFlip: userData.hasIGDirectVideoFlip,
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
-          hasCampaignsFlip: hasFeature(userData.features, 'campaigns'),
+          hasCampaignsFlip: userData.hasCampaignsFeature,
           isProAndUpOrTeamMember: userData.isProAndUpOrTeamMember,
           profileGroups: userData.profile_groups
             ? userData.profile_groups.map(group => ({

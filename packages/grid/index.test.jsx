@@ -1,12 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import Grid, {
-  reducer,
-  actions,
-  actionTypes,
-  middleware,
-} from './index';
+import Grid, { reducer, actions, actionTypes, middleware } from './index';
 import GridPosts from './components/GridPosts';
 
 const storeFake = state => ({
@@ -29,7 +24,7 @@ describe('Grid', () => {
         },
       },
       user: {
-        is_business_user: false,
+        isBusinessUser: false,
       },
       profileSidebar: {
         selectedProfile: {
@@ -40,32 +35,25 @@ describe('Grid', () => {
     });
     const wrapper = mount(
       <Provider store={store}>
-        <Grid
-          profileId="abc"
-        />
-      </Provider>,
+        <Grid profileId="abc" />
+      </Provider>
     );
-    expect(wrapper.find(GridPosts).length)
-      .toBe(1);
+    expect(wrapper.find(GridPosts).length).toBe(1);
   });
 
   it('should export reducer', () => {
-    expect(reducer)
-      .toBeDefined();
+    expect(reducer).toBeDefined();
   });
 
   it('should export actions', () => {
-    expect(actions)
-      .toBeDefined();
+    expect(actions).toBeDefined();
   });
 
   it('should export actionTypes', () => {
-    expect(actionTypes)
-      .toBeDefined();
+    expect(actionTypes).toBeDefined();
   });
 
   it('should export middleware', () => {
-    expect(middleware)
-      .toBeDefined();
+    expect(middleware).toBeDefined();
   });
 });

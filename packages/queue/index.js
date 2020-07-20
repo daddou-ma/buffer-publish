@@ -82,10 +82,8 @@ export default connect(
         isInstagramLoading: state.queue.isInstagramLoading,
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
-        hasFirstCommentFlip:
-          state.user.features?.includes('first_comment') ?? false,
-        hasCampaignsFeature:
-          state.user.features?.includes('campaigns') ?? false,
+        hasFirstCommentFlip: state.user.hasFirstCommentFeature,
+        hasCampaignsFeature: state.user.hasCampaignsFeature,
       };
     }
     return {

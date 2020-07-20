@@ -31,7 +31,7 @@ const campaignForm = () => {
 };
 
 const initialState = {
-  user: { features: ['campaigns'] },
+  user: { hasCampaignsFeature: true },
 };
 
 describe('CampaignForm | user interaction', () => {

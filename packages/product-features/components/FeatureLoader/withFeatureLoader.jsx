@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isSupportedFeature, isSupportedPlan } from '../../utils';
+import { isSupportedPlan } from '../../utils';
 
 const WithFeatureLoader = WrappedComponent => {
   const FeatureLoader = ({ productFeatures, ...other }) => {
-    const { planName, features } = productFeatures;
+    const { planName } = productFeatures;
 
     const featureChecker = {
       isSupportedPlan: testPlan => isSupportedPlan(testPlan, planName),
-      isSupportedFeature: testFeature =>
-        isSupportedFeature(testFeature, features),
       isProUser: () => isSupportedPlan('pro', planName),
       isFreeUser: () => isSupportedPlan('free', planName),
     };
@@ -20,7 +18,6 @@ const WithFeatureLoader = WrappedComponent => {
   FeatureLoader.propTypes = {
     productFeatures: PropTypes.shape({
       planName: PropTypes.string,
-      features: PropTypes.any,
     }),
   };
 
