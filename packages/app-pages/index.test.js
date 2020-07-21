@@ -114,6 +114,21 @@ const draft = buildPostWithImage({
   },
 });
 
+const linkShorteners = [
+  {
+    domain: 'buff.ly',
+    login: null,
+    selected: true,
+    tracking: false,
+  },
+  {
+    domain: 'No Shortening',
+    login: null,
+    selected: false,
+    tracking: false,
+  },
+];
+
 const mockApiCalls = () => {
   jest.spyOn(RPCClient.prototype, 'call').mockImplementation(name => {
     const result = {
@@ -132,6 +147,7 @@ const mockApiCalls = () => {
       gridPosts: { total: 0, updates: [] },
       draftPosts: { total: 1, drafts: [draft] },
       getCampaign: campaign,
+      getLinkShortener: { linkShorteners },
       default: { fake: 'yes' },
     };
 
