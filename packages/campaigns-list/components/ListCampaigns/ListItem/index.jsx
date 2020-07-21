@@ -29,17 +29,11 @@ const ListItem = ({
   onViewCampaignClick,
   goToAnalyzeReport,
   displaySkeleton,
+  hideAnalyzeReport,
 }) => {
   const { t } = useTranslation();
   const campaignId = campaign.id;
-  const selectItems = [
-    {
-      title: t('campaigns.viewCampaign.viewReport'),
-      selectedItemClick: () => {
-        goToAnalyzeReport(campaign);
-      },
-      disabled: !campaign.dateRange,
-    },
+  let selectItems = [
     {
       title: t('campaigns.viewCampaign.editCampaign'),
       selectedItemClick: () => {
@@ -53,6 +47,19 @@ const ListItem = ({
       },
     },
   ];
+
+  if (!hideAnalyzeReport) {
+    selectItems = [
+      {
+        title: t('campaigns.viewCampaign.viewReport'),
+        selectedItemClick: () => {
+          goToAnalyzeReport(campaign);
+        },
+        disabled: !campaign.dateRange,
+      },
+      ...selectItems,
+    ];
+  }
 
   const campaignRoute = campaignScheduled.getRoute({
     campaignId: campaign.id,
@@ -151,6 +158,7 @@ ListItem.propTypes = {
   onEditCampaignClick: PropTypes.func,
   goToAnalyzeReport: PropTypes.func,
   showCampaignActions: PropTypes.bool.isRequired,
+  hideAnalyzeReport: PropTypes.bool.isRequired,
 };
 
 ListItem.defaultProps = {

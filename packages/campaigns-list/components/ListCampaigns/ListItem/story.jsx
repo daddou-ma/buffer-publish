@@ -41,6 +41,18 @@ storiesOf('Campaigns|ListItem', module)
       showCampaignActions
     />
   ))
+  .add('Admin view of campaign list item', () => (
+    <ListItem
+      campaign={campaign}
+      isEvenItem
+      onViewCampaignClick={action('view campaign')}
+      onDeleteCampaignClick={action('delete campaign')}
+      onEditCampaignClick={action('edit campaign')}
+      goToAnalyzeReport={action('go to analyze report')}
+      showCampaignActions
+      hideAnalyzeReport
+    />
+  ))
   .add('Team member view of campaign list item', () => (
     <ListItem
       campaign={campaign}

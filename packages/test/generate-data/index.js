@@ -52,6 +52,8 @@ const buildUser = build('User', {
     isProAndUpOrTeamMember: true,
     hasIGDirectVideoFlip: true,
     canStartProTrial: true,
+    canModifyCampaigns: true,
+    canSeeCampaignsReport: true,
     week_starts_monday: true,
     skip_empty_text_alert: false,
     has_simplified_free_plan_ux: false,

@@ -13,7 +13,8 @@ export default connect(
   state => {
     return {
       campaigns: state.campaignsList.campaigns,
-      showCampaignActions: !state.user.isUsingPublishAsTeamMember,
+      showCampaignActions: state.user.canModifyCampaigns,
+      hideAnalyzeReport: !state.user.canSeeCampaignsReport,
       isLoading: state.campaignsList.isLoading,
       hasCampaignsFlip: state.user.hasCampaignsFeature,
     };
