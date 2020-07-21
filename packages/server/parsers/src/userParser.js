@@ -69,7 +69,6 @@ module.exports = userData => ({
   isBusinessTeamMember: userData.is_business_team_member,
   isProAndUpOrTeamMember: userData.is_pro_and_up_org_user, // this includes team members
   analyzeCrossSale: userData.is_analyze_customer,
-  isUsingPublishAsTeamMember: userData.is_using_publish_as_team_member,
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
 
   // Deprecated features (to delete)
@@ -80,6 +79,10 @@ module.exports = userData => ({
   // Org features
   hasCampaignsFeature: userData.features.includes('campaigns'),
   hasFirstCommentFeature: userData.features.includes('first_comment'),
+
+  // Org roles features
+  canModifyCampaigns: !userData.is_using_publish_as_team_member,
+  canSeeCampaignsReport: !userData.is_using_publish_as_team_member,
 
   // Org data
   plan:

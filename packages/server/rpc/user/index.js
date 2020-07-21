@@ -39,6 +39,8 @@ module.exports = method(
             profilesCount,
             usersCount,
             ownerFeatures,
+            isAdmin,
+            ownerId,
           } = orgSelected;
           // Temporarily injecting org plan data in users. To be removed after org switcher rollout.
           if (hasOrgSwitcher) {
@@ -57,6 +59,8 @@ module.exports = method(
               isBusinessUser: planBase === 'business',
               isFreeUser: planBase === 'free',
               isProUser: planBase === 'pro',
+              canSeeCampaignsReport: ownerId === user.id,
+              canModifyCampaigns: isAdmin,
             };
           }
         }
