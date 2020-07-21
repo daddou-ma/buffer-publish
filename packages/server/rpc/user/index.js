@@ -62,6 +62,7 @@ module.exports = method(
               canSeeCampaignsReport: ownerId === user.id,
               canModifyCampaigns: isAdmin,
               showUpgradeToProCta: planBase === 'free' && ownerId === user.id,
+              hasShareNextFeature: planBase !== 'free',
             };
           }
         }

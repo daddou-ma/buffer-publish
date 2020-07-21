@@ -46,8 +46,8 @@ const ComposerWrapper = ({
   const saveButtons = getSaveButtons();
 
   // Add Share Next feature to all users except free.
-  const freeUser = userData.isFreeUser && !userData.isBusinessTeamMember;
-  if (!freeUser && !editMode && !draftMode && !emptySlotMode) {
+  const showShareNextFeature = userData.hasShareNextFeature;
+  if (showShareNextFeature && !editMode && !draftMode && !emptySlotMode) {
     saveButtons.splice(2, 2, 'SHARE_NEXT', 'SCHEDULE_POST');
   }
 
@@ -157,7 +157,7 @@ ComposerWrapper.propTypes = {
     profile_groups: PropTypes.PropTypes.array,
     isFreeUser: PropTypes.bool.isRequired,
     skip_empty_text_alert: PropTypes.bool.isRequired,
-    isBusinessUser: PropTypes.bool.isRequired,
+    hasShareNextFeature: PropTypes.bool.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
     has_simplified_free_plan_ux: PropTypes.bool.isRequired,
   }).isRequired,
