@@ -5,14 +5,14 @@ describe('CtaStrings Utils', () => {
   describe('returns correct cta properties', () => {
     it('returns app shell pro trial cta properties', () => {
       const expectedProperties = {
-        cta: SEGMENT_NAMES.APP_SHELL_PRO_TRIAL,
+        cta: SEGMENT_NAMES.HEADER_PRO_TRIAL,
         ctaApp: 'publish',
-        ctaView: 'appShell',
-        ctaLocation: 'menu',
+        ctaView: 'app',
+        ctaLocation: 'header',
         ctaButton: 'proTrial',
         ctaVersion: '1',
       };
-      const properties = getCtaProperties(SEGMENT_NAMES.APP_SHELL_PRO_TRIAL);
+      const properties = getCtaProperties(SEGMENT_NAMES.HEADER_PRO_TRIAL);
       expect(properties).toEqual(expectedProperties);
     });
     it('returns only cta if cta string doesnt meet validation', () => {
