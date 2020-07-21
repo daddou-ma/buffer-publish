@@ -17,6 +17,7 @@ const List = ({
   onDeleteCampaignClick,
   onEditCampaignClick,
   showCampaignActions,
+  hideAnalyzeReport,
 }) => {
   const listItems = campaigns.map(campaign => (
     <ListItem
@@ -27,6 +28,7 @@ const List = ({
       onEditCampaignClick={onEditCampaignClick}
       goToAnalyzeReport={goToAnalyzeReport}
       showCampaignActions={showCampaignActions}
+      hideAnalyzeReport={hideAnalyzeReport}
     />
   ));
   return <StyledList>{listItems}</StyledList>;
@@ -39,6 +41,7 @@ List.propTypes = {
   onViewCampaignClick: PropTypes.func.isRequired,
   goToAnalyzeReport: PropTypes.func.isRequired,
   showCampaignActions: PropTypes.bool.isRequired,
+  hideAnalyzeReport: PropTypes.bool.isRequired,
 };
 
 export default List;
