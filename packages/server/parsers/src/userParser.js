@@ -83,6 +83,8 @@ module.exports = userData => ({
   // Org roles features
   canModifyCampaigns: !userData.is_using_publish_as_team_member,
   canSeeCampaignsReport: !userData.is_using_publish_as_team_member,
+  showUpgradeToProCta:
+    userData.billing_plan_base === 'free' && !userData.is_business_team_member,
 
   // Org data
   plan:

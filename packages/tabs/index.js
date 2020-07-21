@@ -14,8 +14,7 @@ export default connect(
     onProTrial:
       state.user.trial?.onTrial &&
       !state.profileSidebar.selectedProfile.business,
-    shouldShowUpgradeCta:
-      state.user.isFreeUser && !state.user.isBusinessTeamMember,
+    shouldShowUpgradeCta: state.user.showUpgradeToProCta,
     shouldShowUpgradeButton:
       state.user.plan === 'free' ||
       state.user.plan === 'pro' ||
