@@ -18,7 +18,6 @@ const ANALYTICS_OVERVIEW_SBP_TRIAL =
   'publish-analyticsOverview-trialCard-sbpTrial-1';
 const ANALYTICS_OVERVIEW_BUSINESS_UPGRADE =
   'publish-analyticsOverview-upgradeCard-businessUpgrade-1';
-const APP_SHELL_PRO_TRIAL = 'publish-appShell-menu-proTrial-1';
 const APP_SHELL_PRO_UPGRADE = 'publish-appShell-menu-proUpgrade-1';
 const CAMPAIGNS_CREATE_CAMPAIGN =
   'publish-campaigns-createCampaignPage-createCampaign-1';

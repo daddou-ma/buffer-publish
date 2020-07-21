@@ -4,7 +4,6 @@ import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { AppShell as BDSAppShell } from '@bufferapp/ui';
 import { Gear, Return, Plus, People } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { useTranslation } from 'react-i18next';
 
 const InvertedReturnIcon = () => (
@@ -79,19 +78,6 @@ function generateUserMenuItems({
       hasDivider: true,
       onItemClick: returnToClassic,
     },
-    startProTrial: {
-      id: 'startProTrial',
-      title: t('app-shell.startProTrial'),
-      icon: <Plus color={gray} />,
-      onItemClick: () => {
-        window.location.assign(
-          `${getURL.getStartTrialURL({
-            trialType: 'pro',
-            cta: SEGMENT_NAMES.APP_SHELL_PRO_TRIAL,
-          })}`
-        );
-      },
-    },
     switchPlan: {
       id: 'switchPlan',
       title: t('app-shell.upgradetoPro'),
@@ -157,7 +143,6 @@ const AppShell = ({
   showReturnToClassic,
   showSwitchPlan,
   showManageTeam,
-  showStartProTrial,
   returnToClassic,
   switchPlan,
   openPreferences,
@@ -193,7 +178,6 @@ const AppShell = ({
           showReturnToClassic,
           showSwitchPlan,
           showManageTeam,
-          showStartProTrial,
           returnToClassic,
           switchPlan,
           openPreferences,
@@ -226,7 +210,6 @@ AppShell.propTypes = {
   showReturnToClassic: PropTypes.bool,
   showSwitchPlan: PropTypes.bool,
   showManageTeam: PropTypes.bool,
-  showStartProTrial: PropTypes.bool,
   returnToClassic: PropTypes.func.isRequired,
   switchPlan: PropTypes.func.isRequired,
   openPreferences: PropTypes.func.isRequired,
@@ -275,7 +258,6 @@ AppShell.defaultProps = {
   showManageTeam: false,
   bannerOptions: null,
   bannerKey: null,
-  showStartProTrial: false,
   isImpersonation: false,
 };
 

@@ -41,9 +41,8 @@ storiesOf('AppShell', module)
       This is my content
     </AppShell>
   ))
-  .add('with start a pro trial link', () => (
+  .add('with upgrade to pro link', () => (
     <AppShell
-      showStartProTrial
       showSwitchPlan
       user={{
         name: 'Tom Redman',
@@ -61,7 +60,6 @@ storiesOf('AppShell', module)
   ))
   .add('with a skip to main content link for screen readers', () => (
     <AppShell
-      showStartProTrial
       showSwitchPlan
       user={{
         name: 'Tom Redman',
