@@ -63,6 +63,7 @@ module.exports = method(
               canModifyCampaigns: isAdmin,
               showUpgradeToProCta: planBase === 'free' && ownerId === user.id,
               hasShareNextFeature: planBase !== 'free',
+              analyzeCrossSale: user.analyzeCrossSale && ownerId === user.id, // to do: return organization products array
             };
           }
         }

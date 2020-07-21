@@ -67,7 +67,6 @@ module.exports = userData => ({
       },
   showReturnToClassic: userData.has_np_app_switcher,
   isProAndUpOrTeamMember: userData.is_pro_and_up_org_user, // this includes team members
-  analyzeCrossSale: userData.is_analyze_customer,
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
 
   // Deprecated features (to delete)
@@ -87,6 +86,7 @@ module.exports = userData => ({
   canSeeCampaignsReport: !userData.is_using_publish_as_team_member,
   showUpgradeToProCta:
     userData.billing_plan_base === 'free' && !userData.is_business_team_member,
+  analyzeCrossSale: userData.is_analyze_customer,
 
   // Org data
   plan:
