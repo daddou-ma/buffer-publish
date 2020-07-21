@@ -38,7 +38,7 @@ const ComposerComponent = ({
   canStartProTrial,
   hasIGDirectVideoFlip,
   hasShopgridFlip,
-  isProAndUpOrTeamMember,
+  hasUserTagFeature,
   isFreeUser,
   isBusinessUser,
   draftMode,
@@ -84,7 +84,7 @@ const ComposerComponent = ({
       canStartProTrial={canStartProTrial}
       hasIGDirectVideoFlip={hasIGDirectVideoFlip}
       hasShopgridFlip={hasShopgridFlip}
-      isProAndUpOrTeamMember={isProAndUpOrTeamMember}
+      hasUserTagFeature={hasUserTagFeature}
       isFreeUser={isFreeUser}
       isBusinessUser={isBusinessUser}
       draftMode={draftMode}
@@ -129,7 +129,7 @@ class ComposerSection extends React.Component {
       isBusinessUser,
       canStartProTrial,
       hasShopgridFlip,
-      isProAndUpOrTeamMember,
+      hasUserTagFeature,
       draftMode,
     } = this.props;
 
@@ -181,7 +181,7 @@ class ComposerSection extends React.Component {
               canStartProTrial,
               hasIGDirectVideoFlip,
               hasShopgridFlip,
-              isProAndUpOrTeamMember,
+              hasUserTagFeature,
               isFreeUser,
               isBusinessUser,
               draftMode,
@@ -213,7 +213,7 @@ class ComposerSection extends React.Component {
                 canStartProTrial,
                 hasIGDirectVideoFlip,
                 hasShopgridFlip,
-                isProAndUpOrTeamMember,
+                hasUserTagFeature,
                 isFreeUser,
                 isBusinessUser,
                 draftMode,
@@ -240,7 +240,7 @@ ComposerSection.propTypes = {
   hasIGDirectVideoFlip: PropTypes.bool.isRequired,
   isFreeUser: PropTypes.bool.isRequired,
   hasShopgridFlip: PropTypes.bool,
-  isProAndUpOrTeamMember: PropTypes.bool,
+  hasUserTagFeature: PropTypes.bool,
   isBusinessUser: PropTypes.bool,
   draftMode: PropTypes.bool,
 };
@@ -249,7 +249,7 @@ ComposerSection.defaultProps = {
   isOmniboxEnabled: null,
   composerPosition: null,
   hasShopgridFlip: false,
-  isProAndUpOrTeamMember: false,
+  hasUserTagFeature: false,
   isBusinessUser: false,
   draftMode: false,
 };
