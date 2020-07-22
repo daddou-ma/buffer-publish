@@ -76,7 +76,9 @@ module.exports = userData => ({
   // Org plan features
   hasCampaignsFeature: userData.features.includes('campaigns'),
   hasFirstCommentFeature: userData.features.includes('first_comment'),
-  hasShareNextFeature: userData.is_pro_and_up_org_user,
+  hasShareNextFeature:
+    !userData.billing_plan_base === 'free' ||
+    (userData.billing_plan_base === 'free' && userData.is_business_team_member),
   hasUserTagFeature: userData.is_pro_and_up_org_user,
 
   // Org roles features
