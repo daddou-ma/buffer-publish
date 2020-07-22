@@ -91,7 +91,7 @@ class App extends React.Component {
       weekStartsMonday: PropTypes.bool.isRequired,
       isFreeUser: PropTypes.bool.isRequired,
       hasCampaignsFlip: PropTypes.bool.isRequired,
-      isProAndUpOrTeamMember: PropTypes.bool.isRequired,
+      hasUserTagFeature: PropTypes.bool.isRequired,
       hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
       hasIGDirectVideoFlip: PropTypes.bool.isRequired,
       isBusinessUser: PropTypes.bool.isRequired,
@@ -225,7 +225,7 @@ class App extends React.Component {
       canStartProTrial: false,
       hasIGDirectVideoFlip: false,
       hasCampaignsFlip: false,
-      isProAndUpOrTeamMember: false,
+      hasUserTagFeature: false,
     },
     options: {
       onSave: () => {},

@@ -82,15 +82,9 @@ const ComposerWrapper = ({
   const metaData = {
     application: 'WEB_DASHBOARD',
     environment: `${environment === 'development' ? 'local' : 'production'}`,
-    should_enable_fb_autocomplete:
-      userData.features &&
-      userData.features.includes('mc_facebook_autocomplete'),
-    enable_twitter_march_18_changes:
-      userData.features &&
-      userData.features.includes('twitter-march-18-changes'),
-    hasIGLocationTaggingFeature:
-      userData.features &&
-      userData.features.includes('instagram-location-tagging'),
+    should_enable_fb_autocomplete: true, // Deprecated features (to delete)
+    enable_twitter_march_18_changes: true, // Deprecated features (to delete)
+    hasIGLocationTaggingFeature: true, // Deprecated features (to delete)
     // TODO: make should_use_new_twitter_autocomplete dynamic based on the
     // value of enabledApplicationModes.includes('web-twitter-typeahead-autocomplete')
     should_use_new_twitter_autocomplete: true,

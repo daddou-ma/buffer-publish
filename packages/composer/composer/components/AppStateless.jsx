@@ -193,7 +193,7 @@ class AppStateless extends React.Component {
     });
 
     const shouldDisplayCampaignHeader =
-      userData?.hasCampaignsFlip && userData?.isProAndUpOrTeamMember && !draftMode;
+      userData?.hasCampaignsFlip && !draftMode;
     const campaignId = metaData.campaignDetails?.id ?? null;
     const campaigns = metaData.campaigns ?? [];
 
@@ -270,7 +270,7 @@ class AppStateless extends React.Component {
               userData.hasIGLocationTaggingFeature || false
             }
             hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
-            isProAndUpOrTeamMember={userData.isProAndUpOrTeamMember || false}
+            hasUserTagFeature={userData.hasUserTagFeature || false}
             hasShopgridFlip={userData.hasShopgridFlip || false}
             hasCampaignsFlip={userData.hasCampaignsFlip || false}
             isFreeUser={userData.isFreeUser || false}
