@@ -73,6 +73,7 @@ module.exports = userData => ({
   hasIGLocationTaggingFeature: true,
   hasIGDirectVideoFlip: true,
 
+  /* TEMPORARY. TO BE MOVED TO ORGS AFTER ORG SWITCHER ROLLOUT */
   // Org plan features
   hasCampaignsFeature: userData.features.includes('campaigns'),
   hasFirstCommentFeature: userData.features.includes('first_comment'),
