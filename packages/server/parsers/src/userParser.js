@@ -85,6 +85,8 @@ module.exports = userData => ({
   showUpgradeToProCta:
     userData.billing_plan_base === 'free' && !userData.is_business_team_member,
   analyzeCrossSale: userData.is_analyze_customer,
+  canManageSocialAccounts: true,
+  hasAccessTeamPanel: !userData.billing_plan_base === 'free',
 
   // Org data
   plan:
