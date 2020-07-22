@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 import { borderWidth, borderRadius } from '@bufferapp/components/style/border';
 import { mystic } from '@bufferapp/components/style/color';
+import { grayLighter } from '@bufferapp/ui/style/colors';
 import ScheduleTableColumn from './ScheduleTableColumn';
 
 const tableStyle = {
@@ -11,19 +13,17 @@ const tableStyle = {
   overflow: 'hidden',
 };
 
-const tableColumnWrapperStyle = {
-  display: 'flex',
-  marginRight: '-1px',
-  flexGrow: '1',
-};
+const offStyles = css`
+  background-color: ${grayLighter};
+  border-left: ${borderWidth} solid ${mystic};
+`;
 
-const pausedColumnStyle = {
-  display: 'flex',
-  marginRight: '-1px',
-  flexGrow: '1',
-  backgroundColor: '#f8f8f8',
-  borderLeft: `${borderWidth} solid ${mystic}`,
-};
+const ColumnWrapper = styled.div`
+  display: flex;
+  margin-right: -1px;
+  flex-grow: 1;
+  ${props => props.displayOff && offStyles}
+`;
 
 const ScheduleTable = ({
   days,
@@ -35,10 +35,7 @@ const ScheduleTable = ({
 }) => (
   <div style={tableStyle}>
     {days.map(({ dayName, postingTimesTotal, times, paused }) => (
-      <div
-        key={dayName}
-        style={paused ? pausedColumnStyle : tableColumnWrapperStyle}
-      >
+      <ColumnWrapper key={dayName} displayOff={paused || times?.length === 0}>
         <ScheduleTableColumn
           dayName={dayName}
           paused={paused}
@@ -50,7 +47,7 @@ const ScheduleTable = ({
           onUpdateTime={onUpdateTime}
           onPauseToggleClick={onPauseToggleClick}
         />
-      </div>
+      </ColumnWrapper>
     ))}
   </div>
 );

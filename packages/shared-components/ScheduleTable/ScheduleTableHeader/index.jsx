@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { mystic } from '@bufferapp/components/style/color';
-import { Text, Button } from '@bufferapp/ui';
+import { Text, Switch } from '@bufferapp/ui';
 
 const headerStyle = {
   paddingTop: '1rem',
@@ -23,37 +24,48 @@ const dayMap = {
   Sunday: 'sun',
 };
 
-const buttonStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-};
+const SwitchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+`;
 
 const ScheduleTableHeader = ({
   dayName,
   paused,
   onPauseToggleClick,
   disabled,
-}) => (
-  <div style={headerStyle} tabIndex="0">
-    <Text type="label">{dayName}</Text>
-    {!disabled && (
-      <div style={buttonStyle}>
-        <Button
-          type="link"
-          size="small"
-          label={`Turn ${paused ? 'on' : 'off'}`}
-          onClick={() => onPauseToggleClick(dayMap[dayName], paused)}
-        />
-      </div>
-    )}
-  </div>
-);
+  displayOn,
+}) => {
+  // We are displaying off in switch if user has no times scheduled
+  const [isOn, setIsOn] = useState(displayOn);
+  return (
+    <div style={headerStyle}>
+      <Text type="label">{dayName}</Text>
+      {!disabled && (
+        <SwitchWrapper>
+          <Switch
+            isOn={isOn}
+            handleSwitch={() => {
+              setIsOn(!isOn);
+              onPauseToggleClick(dayMap[dayName], paused);
+            }}
+            label={isOn ? 'On' : 'Off'}
+            id="posting-schedule"
+          />
+        </SwitchWrapper>
+      )}
+    </div>
+  );
+};
 
 ScheduleTableHeader.propTypes = {
   dayName: PropTypes.string.isRequired,
   paused: PropTypes.bool.isRequired,
   onPauseToggleClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
+  displayOn: PropTypes.bool.isRequired,
 };
 
 export default ScheduleTableHeader;
