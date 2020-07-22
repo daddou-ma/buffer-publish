@@ -88,7 +88,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Section>
         <Text type="label">Campaign</Text>
         <Tooltip label="Categorize your content by themes or topics.">
@@ -120,7 +120,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
         </SelectWrapper>
       </Section>
       <Separator />
-    </React.Fragment>
+    </>
   );
 };
 
