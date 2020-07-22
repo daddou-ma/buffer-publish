@@ -185,10 +185,6 @@ function formatData(currentPeriodDaily, previousPeriodDaily, profileService) {
   };
 }
 
-function getResponseData(response) {
-    return response && 'organic' in response ? response.organic : response;
-}
-
 module.exports = method(
   'compare',
   'fetch analytics compare for profiles and pages',
@@ -215,8 +211,8 @@ module.exports = method(
 
     return Promise.all([currentPeriodDailyTotals, previousPeriodDailyTotals])
       .then(response => {
-        const currentPeriodDaily = getResponseData(response[0].response);
-        const previousPeriodDaily = getResponseData(response[1].response);
+        const currentPeriodDaily = response[0].response.organic;
+        const previousPeriodDaily = response[1].response.organic;
 
         return formatData(
           currentPeriodDaily,
