@@ -65,6 +65,8 @@ module.exports = method(
               hasShareNextFeature: planBase !== 'free',
               hasUserTagFeature: planBase !== 'free',
               analyzeCrossSale: user.analyzeCrossSale && ownerId === user.id, // to do: return organization products array
+              canManageSocialAccounts: isAdmin,
+              hasAccessTeamPanel: planBase === 'business' && isAdmin,
             };
           }
         }

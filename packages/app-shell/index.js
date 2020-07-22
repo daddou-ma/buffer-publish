@@ -21,7 +21,7 @@ export default connect(
     bannerKey: state.appShell.bannerKey,
     showReturnToClassic: state.user.showReturnToClassic,
     showSwitchPlan: state.user.showUpgradeToProCta,
-    showManageTeam: !state.user.isFreeUser,
+    showManageTeam: state.user.hasAccessTeamPanel,
     hideAppShell:
       state.onboarding.canSeeOnboardingPage &&
       state.router.location.pathname === newBusinessTrialists.route,

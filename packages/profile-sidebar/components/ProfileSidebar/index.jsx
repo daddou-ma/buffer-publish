@@ -96,7 +96,7 @@ const ProfileSidebar = ({
   onSearchProfileChange,
   isSearchPopupVisible,
   // Flags for showing connection shortcut buttons
-  hideSocialShortcuts,
+  canManageSocialAccounts,
   hasInstagram,
   hasFacebook,
   hasTwitter,
@@ -148,7 +148,7 @@ const ProfileSidebar = ({
         </ProfileListStyle>
       )}
       <ManageSocialAccountsStyle>
-        {!hideSocialShortcuts && (
+        {canManageSocialAccounts && (
           <SocialButtonsWrapperStyle>
             {!hasInstagram && (
               <ProfileConnectShortcut
@@ -217,7 +217,7 @@ ProfileSidebar.propTypes = {
   hasFacebook: PropTypes.bool.isRequired,
   hasTwitter: PropTypes.bool.isRequired,
   onSearchProfileChange: () => {},
-  hideSocialShortcuts: PropTypes.bool,
+  canManageSocialAccounts: PropTypes.bool,
   isSearchPopupVisible: PropTypes.bool,
   hasCampaignsFlip: PropTypes.bool,
   isCampaignsSelected: PropTypes.bool,
@@ -234,7 +234,7 @@ ProfileSidebar.defaultProps = {
   onDropProfile: () => {},
   onCampaignsButtonClick: () => {},
   profileLimit: 0,
-  hideSocialShortcuts: false,
+  canManageSocialAccounts: true,
   hasCampaignsFlip: false,
   isCampaignsSelected: false,
 };

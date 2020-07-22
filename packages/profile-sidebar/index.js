@@ -26,9 +26,7 @@ export default hot(
         hasTwitter: state.profileSidebar.hasTwitter,
         isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
         hasCampaignsFlip: state.user.hasCampaignsFeature,
-        hideSocialShortcuts:
-          state.user.hasOrgSwitcherFeature &&
-          !state.organizations?.selected?.isAdmin,
+        canManageSocialAccounts: state.user.canManageSocialAccounts,
         isCampaignsSelected: !!getMatch({
           pathname: state.router?.location?.pathname,
           route: campaignsPage.route,
