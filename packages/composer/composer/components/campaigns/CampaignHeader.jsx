@@ -87,13 +87,6 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
     };
   };
 
-  useEffect(() => {
-    if (!campaignId && hasCampaigns) {
-      // select a campaign on default
-      updateCampaignId(noCampaign);
-    }
-  }, []);
-
   return (
     <React.Fragment>
       <Section>
