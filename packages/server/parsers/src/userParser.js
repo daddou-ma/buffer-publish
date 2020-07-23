@@ -34,8 +34,6 @@ module.exports = userData => ({
     ),
     celebrations: userData.email_notifications.includes('celebrations'),
   },
-  showBusinessTrialistsOnboarding:
-    userData.billing_plan_base === 'business' && userData.on_trial,
   showReturnToClassic: userData.has_np_app_switcher,
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
 
@@ -52,6 +50,8 @@ module.exports = userData => ({
     userData.billing_plan_base !== 'free' ||
     (userData.billing_plan_base === 'free' && userData.is_business_team_member),
   hasUserTagFeature: userData.is_pro_and_up_org_user,
+  showBusinessTrialistsOnboarding:
+    userData.billing_plan_base === 'business' && userData.on_trial,
 
   // Org roles features
   canModifyCampaigns: !userData.is_using_publish_as_team_member,

@@ -90,6 +90,8 @@ module.exports = method(
                 trial.onTrial &&
                 trial.isExpired &&
                 !trial.isDone,
+              showBusinessTrialistsOnboarding:
+                planBase === 'business' && trial && trial.onTrial,
             };
           }
         }
