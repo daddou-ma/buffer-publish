@@ -59,7 +59,8 @@ module.exports = userData => ({
   showUpgradeToProCta:
     userData.billing_plan_base === 'free' && !userData.is_business_team_member,
   analyzeCrossSale: userData.is_analyze_customer,
-  canManageSocialAccounts: true,
+  canManageSocialAccounts: true, // temporary value, the important is what's being injected in the rpc
+  canSeeBillingInfo: true, // temporary value, the important is what's being injected in the rpc
   hasAccessTeamPanel: !userData.billing_plan_base === 'free',
   canStartBusinessTrial: userData.can_start_business_trial,
   canStartProTrial: userData.can_start_pro_trial,

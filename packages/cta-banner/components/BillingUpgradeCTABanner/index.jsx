@@ -74,8 +74,14 @@ const BillingUpgradeCTABanner = ({
   onClickStartSubscription,
   profileCount,
   features,
+  canSeeBillingInfo,
 }) => {
-  if (!trial || (trial && !trial.onTrial) || profileCount === 0) {
+  if (
+    !trial ||
+    (trial && !trial.onTrial) ||
+    profileCount === 0 ||
+    !canSeeBillingInfo
+  ) {
     return null;
   }
 
@@ -115,6 +121,7 @@ BillingUpgradeCTABanner.propTypes = {
   isPremiumBusinessPlan: PropTypes.bool.isRequired,
   profileCount: PropTypes.number,
   features: PropTypes.object.isRequired, // eslint-disable-line
+  canSeeBillingInfo: PropTypes.bool.isRequired,
 };
 
 BillingUpgradeCTABanner.defaultProps = {

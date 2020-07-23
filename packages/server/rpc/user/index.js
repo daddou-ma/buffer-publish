@@ -97,6 +97,7 @@ module.exports = method(
               analyzeCrossSale: user.analyzeCrossSale && isOwner,
               canManageSocialAccounts: isAdmin,
               hasAccessTeamPanel: planBase === 'business' && isAdmin,
+              canSeeBillingInfo: isOwner,
               ...orgTrialData,
             };
           }
