@@ -8,6 +8,7 @@ export default connect(
   state => ({
     profiles: state.profileSidebar.profiles,
     selectedProfileId: state.profileSidebar.selectedProfileId,
+    canSeeBillingInfo: state.user.canSeeBillingInfo,
   }),
   dispatch => ({
     // go back to the last selected profile

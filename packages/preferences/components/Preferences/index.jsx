@@ -49,6 +49,7 @@ const Preferences = ({
   onBackToDashboardClick,
   selectedProfileId,
   profiles,
+  canSeeBillingInfo,
 }) => {
   const { t } = useTranslation();
 
@@ -68,13 +69,15 @@ const Preferences = ({
           <NavLink to={preferencesAppsExtras.route} activeOnlyWhenExact>
             {t('preferences.menu.appsAndExtras')}
           </NavLink>
-          <NavLink
-            href={getURL.getBillingURL({
-              cta: SEGMENT_NAMES.PREFERENCES_TAB_BILLING,
-            })}
-          >
-            {t('preferences.menu.billing')}
-          </NavLink>
+          {canSeeBillingInfo && (
+            <NavLink
+              href={getURL.getBillingURL({
+                cta: SEGMENT_NAMES.PREFERENCES_TAB_BILLING,
+              })}
+            >
+              {t('preferences.menu.billing')}
+            </NavLink>
+          )}
         </Nav>
         <TabStyle>
           <ContainerStyle>
@@ -116,6 +119,7 @@ Preferences.propTypes = {
   onBackToDashboardClick: PropTypes.func.isRequired,
   selectedProfileId: ProfileSidebarComponent.propTypes.selectedProfileId,
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
+  canSeeBillingInfo: PropTypes.bool.isRequired,
 };
 
 Preferences.defaultProps = {
