@@ -18,7 +18,7 @@ import OnboardingManager from '@bufferapp/publish-onboarding';
 
 const AppPages = ({
   profiles,
-  isOnBusinessTrial,
+  showBusinessTrialistsOnboarding,
   profileRouteLoaded,
   needsToSetCurrentOrg,
   setCurrentOrganization,
@@ -49,7 +49,7 @@ const AppPages = ({
           component={OnboardingManager}
         />
       )}
-      {!hasProfiles && isOnBusinessTrial && (
+      {!hasProfiles && showBusinessTrialistsOnboarding && (
         <Redirect to={newBusinessTrialists.route} />
       )}
 
@@ -77,7 +77,7 @@ const AppPages = ({
 
 AppPages.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object),
-  isOnBusinessTrial: PropTypes.bool,
+  showBusinessTrialistsOnboarding: PropTypes.bool,
   profileRouteLoaded: PropTypes.func.isRequired,
   needsToSetCurrentOrg: PropTypes.bool,
   currentOrgId: PropTypes.string,
@@ -85,7 +85,7 @@ AppPages.propTypes = {
 };
 
 AppPages.defaultProps = {
-  isOnBusinessTrial: false,
+  showBusinessTrialistsOnboarding: false,
   profiles: [],
   needsToSetCurrentOrg: false,
   currentOrgId: null,

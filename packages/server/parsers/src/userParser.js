@@ -34,7 +34,7 @@ module.exports = userData => ({
     ),
     celebrations: userData.email_notifications.includes('celebrations'),
   },
-  isOnBusinessTrial:
+  showBusinessTrialistsOnboarding:
     userData.billing_plan_base === 'business' && userData.on_trial,
   showReturnToClassic: userData.has_np_app_switcher,
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
