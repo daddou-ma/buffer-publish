@@ -16,4 +16,5 @@ module.exports = orgData => ({
   usersCount: orgData.usersCount,
   isAdmin: orgData.isAdmin,
   isOwner: orgData.isOwner,
+  trial: orgData.trial,
 });

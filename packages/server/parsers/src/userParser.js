@@ -34,37 +34,8 @@ module.exports = userData => ({
     ),
     celebrations: userData.email_notifications.includes('celebrations'),
   },
-  canStartBusinessTrial: userData.can_start_business_trial,
-  canStartProTrial: userData.can_start_pro_trial,
-  shouldShowProTrialExpiredModal:
-    hasProTrialExpired(userData.feature_trials) &&
-    userData.billing_plan_base === 'free' &&
-    !userData.has_cancelled,
   isOnBusinessTrial:
     userData.billing_plan_base === 'business' && userData.on_trial,
-  shouldShowBusinessTrialExpiredModal:
-    userData.billing_plan_base === 'business' &&
-    userData.on_trial &&
-    userData.trial_expired &&
-    !userData.trial_done,
-  trial: userData.on_awesome_trial
-    ? {
-        hasCardDetails: userData.has_card_details,
-        hasTrialExtended: userData.has_trial_extended,
-        onTrial: userData.on_awesome_trial,
-        postTrialCost: '',
-        trialLength: userData.awesome_trial_length,
-        trialTimeRemaining: userData.awesome_trial_time_remaining,
-      }
-    : {
-        hasCardDetails: userData.has_card_details,
-        hasTrialExtended: userData.has_trial_extended,
-        onTrial: userData.on_trial,
-        postTrialCost: userData.post_trial_cost,
-        trialLength: userData.trial_length,
-        trialTimeRemaining: userData.trial_time_remaining,
-        trialPlan: userData.trial_plan,
-      },
   showReturnToClassic: userData.has_np_app_switcher,
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
 
@@ -90,6 +61,14 @@ module.exports = userData => ({
   analyzeCrossSale: userData.is_analyze_customer,
   canManageSocialAccounts: true,
   hasAccessTeamPanel: !userData.billing_plan_base === 'free',
+  canStartBusinessTrial: userData.can_start_business_trial,
+  canStartProTrial: userData.can_start_pro_trial,
+  shouldShowProTrialExpiredModal:
+    hasProTrialExpired(userData.feature_trials) &&
+    userData.billing_plan_base === 'free' &&
+    !userData.has_cancelled,
+  shouldShowBusinessTrialExpiredModal:
+    userData.on_trial && userData.trial_expired && !userData.trial_done,
 
   // Org data
   plan:
@@ -106,6 +85,24 @@ module.exports = userData => ({
   isNonprofit: userData.billing_status_nonprofit,
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,
+  trial: userData.on_awesome_trial
+    ? {
+        hasCardDetails: userData.has_card_details,
+        hasTrialExtended: userData.has_trial_extended,
+        onTrial: userData.on_awesome_trial,
+        postTrialCost: '',
+        trialLength: userData.awesome_trial_length,
+        trialTimeRemaining: userData.awesome_trial_time_remaining,
+      }
+    : {
+        hasCardDetails: userData.has_card_details,
+        hasTrialExtended: userData.has_trial_extended,
+        onTrial: userData.on_trial,
+        postTrialCost: userData.post_trial_cost,
+        trialLength: userData.trial_length,
+        trialTimeRemaining: userData.trial_time_remaining,
+        trialPlan: userData.trial_plan,
+      },
 
   // Org owner data
   features: userData.features,
