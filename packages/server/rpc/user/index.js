@@ -40,7 +40,7 @@ module.exports = method(
             usersCount,
             ownerFeatures,
             isAdmin,
-            ownerId,
+            isOwner,
           } = orgSelected;
           // Temporarily injecting org plan data in users. To be removed after org switcher rollout.
           if (hasOrgSwitcher) {
@@ -59,12 +59,12 @@ module.exports = method(
               isBusinessUser: planBase === 'business',
               isFreeUser: planBase === 'free',
               isProUser: planBase === 'pro',
-              canSeeCampaignsReport: ownerId === user.id,
+              canSeeCampaignsReport: isOwner,
               canModifyCampaigns: isAdmin,
-              showUpgradeToProCta: planBase === 'free' && ownerId === user.id,
+              showUpgradeToProCta: planBase === 'free' && isOwner,
               hasShareNextFeature: planBase !== 'free',
               hasUserTagFeature: planBase !== 'free',
-              analyzeCrossSale: user.analyzeCrossSale && ownerId === user.id, // to do: return organization products array
+              analyzeCrossSale: user.analyzeCrossSale && isOwner,
               canManageSocialAccounts: isAdmin,
               hasAccessTeamPanel: planBase === 'business' && isAdmin,
             };
