@@ -98,6 +98,12 @@ module.exports = method(
               canManageSocialAccounts: isAdmin,
               hasAccessTeamPanel: planBase === 'business' && isAdmin,
               canSeeBillingInfo: isOwner,
+              shouldShowUpgradeButton:
+                isOwner &&
+                (planBase === 'free' ||
+                  planBase === 'pro' ||
+                  plan === 'solo_premium_business' ||
+                  plan === 'premium_business'),
               ...orgTrialData,
             };
           }

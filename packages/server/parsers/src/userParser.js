@@ -61,6 +61,11 @@ module.exports = userData => ({
   analyzeCrossSale: userData.is_analyze_customer,
   canManageSocialAccounts: true, // temporary value, the important is what's being injected in the rpc
   canSeeBillingInfo: true, // temporary value, the important is what's being injected in the rpc
+  shouldShowUpgradeButton:
+    userData.billing_plan_base === 'free' ||
+    userData.billing_plan_base === 'pro' ||
+    userData.billing_plan_tier === 'solo_premium_business' ||
+    userData.billing_plan_tier === 'premium_business',
   hasAccessTeamPanel: !userData.billing_plan_base === 'free',
   canStartBusinessTrial: userData.can_start_business_trial,
   canStartProTrial: userData.can_start_pro_trial,

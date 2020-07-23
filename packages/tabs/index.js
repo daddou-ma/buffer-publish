@@ -11,15 +11,7 @@ export default connect(
     isManager: state.profileSidebar.selectedProfile.isManager,
     selectedTabId: ownProps.tabId,
     selectedChildTabId: ownProps.childTabId,
-    onProTrial:
-      state.user.trial?.onTrial &&
-      !state.profileSidebar.selectedProfile.business,
-    shouldShowUpgradeCta: state.user.showUpgradeToProCta,
-    shouldShowUpgradeButton:
-      state.user.plan === 'free' ||
-      state.user.plan === 'pro' ||
-      state.user.plan === 'solo_premium_business' ||
-      state.user.plan === 'premium_business',
+    shouldShowUpgradeButton: state.user.shouldShowUpgradeButton,
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
     shouldHideAdvancedAnalytics:
