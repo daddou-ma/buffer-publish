@@ -19,6 +19,7 @@ describe('CtaBanner', () => {
 
       store = storeFake({
         user: {
+          canSeeBillingInfo: true,
           trial: {
             onTrial: true, // user has to be on a trial for the Banner to be displayed
           },

@@ -50,6 +50,7 @@ const fakeUser = {
   features: ['paid_users_in_new_publish'],
   trial: userOnTrial,
   language: 'en-US',
+  canSeeBillingInfo: true,
 };
 
 function createMockStore(business, onTrial) {

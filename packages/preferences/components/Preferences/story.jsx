@@ -23,6 +23,7 @@ storiesOf('Preferences', module)
         e.preventDefault();
         action('onBackToDashboardClick')(e);
       }}
+      canSeeBillingInfo
     />
   ))
   .add('with tab selected', () => (
@@ -31,5 +32,15 @@ storiesOf('Preferences', module)
         e.preventDefault();
         action('onBackToDashboardClick')(e);
       }}
+      canSeeBillingInfo
+    />
+  ))
+  .add('without billing tab', () => (
+    <Preferences
+      onBackToDashboardClick={e => {
+        e.preventDefault();
+        action('onBackToDashboardClick')(e);
+      }}
+      canSeeBillingInfo={false}
     />
   ));
