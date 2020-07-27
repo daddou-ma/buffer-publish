@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { mystic } from '@bufferapp/components/style/color';
 import { Text, Switch } from '@bufferapp/ui';
 
-const headerStyle = {
-  paddingTop: '1rem',
-  paddingBottom: '1rem',
-  borderBottom: `${borderWidth} solid ${mystic}`,
-  cursor: 'default',
-  outline: 'none',
-  minHeight: '40px',
-};
+const Header = styled.div`
+  padding-top: 1rem;
+  border-bottom: ${borderWidth} solid ${mystic};
+  cursor: default;
+  outline: none;
+  min-height: 40px;
+  ${props =>
+    !props.disabled &&
+    css`
+      padding-bottom: 1rem;
+    `}
+`;
 
 const dayMap = {
   Monday: 'mon',
@@ -33,7 +37,6 @@ const SwitchWrapper = styled.div`
 
 const ScheduleTableHeader = ({
   dayName,
-  paused,
   onPauseToggleClick,
   disabled,
   displayOn,
@@ -41,7 +44,7 @@ const ScheduleTableHeader = ({
   // We are displaying off in switch if user has no times scheduled
   const [isOn, setIsOn] = useState(displayOn);
   return (
-    <div style={headerStyle}>
+    <Header disabled={disabled}>
       <Text type="label">{dayName}</Text>
       {!disabled && (
         <SwitchWrapper>
@@ -49,20 +52,19 @@ const ScheduleTableHeader = ({
             isOn={isOn}
             handleSwitch={() => {
               setIsOn(!isOn);
-              onPauseToggleClick(dayMap[dayName], paused);
+              onPauseToggleClick(dayMap[dayName], !isOn);
             }}
             label={isOn ? 'On' : 'Off'}
-            id="posting-schedule"
+            id={`${dayName}-schedule`}
           />
         </SwitchWrapper>
       )}
-    </div>
+    </Header>
   );
 };
 
 ScheduleTableHeader.propTypes = {
   dayName: PropTypes.string.isRequired,
-  paused: PropTypes.bool.isRequired,
   onPauseToggleClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
   displayOn: PropTypes.bool.isRequired,

@@ -39,8 +39,7 @@ const ScheduleTableColumn = ({
       <ScheduleTableHeader
         disabled={disabled}
         dayName={dayName}
-        displayScheduleOn={!paused && hasTimes}
-        paused={paused}
+        displayOn={!paused && hasTimes}
         onPauseToggleClick={onPauseToggleClick}
       />
       <div style={columnWrapperStyle}>
