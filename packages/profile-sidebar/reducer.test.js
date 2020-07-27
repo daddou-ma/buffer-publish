@@ -184,7 +184,7 @@ describe('reducer', () => {
         result: {
           id: stateAfter.userId,
           isFreeUser: stateAfter.isFreeUser,
-          features: [],
+          hasOrgSwitcherFeature: false,
         },
       };
 
@@ -207,7 +207,7 @@ describe('reducer', () => {
         result: {
           id: stateAfter.userId,
           isFreeUser: stateAfter.isFreeUser,
-          features: ['org_switcher'],
+          hasOrgSwitcherFeature: true,
         },
       };
 
