@@ -31,9 +31,9 @@ module.exports = {
   },
   getManageSocialAccountURL: () => {
     if (window.location.hostname === 'publish.local.buffer.com') {
-      return 'https://local.buffer.com/manage/own';
+      return 'https://local.buffer.com/manage/organization';
     }
-    return 'https://buffer.com/manage/own';
+    return 'https://buffer.com/manage/organization';
   },
   getManageTeamURL: () => {
     if (window.location.hostname === 'publish.local.buffer.com') {

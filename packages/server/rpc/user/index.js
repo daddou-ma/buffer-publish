@@ -40,8 +40,38 @@ module.exports = method(
             usersCount,
             ownerFeatures,
             isAdmin,
-            ownerId,
+            isOwner,
+            trial,
           } = orgSelected;
+          let orgTrialData = {};
+          if (trial) {
+            orgTrialData = {
+              trial: {
+                hasCardDetails: trial && trial.hasCardDetails,
+                onTrial: trial.onTrial,
+                postTrialCost: trial && trial.postTrialCost,
+                trialLength: trial && trial.length,
+                trialTimeRemaining: trial && trial.timeRemaining,
+                trialPlan: trial && trial.plan,
+              },
+              canStartBusinessTrial:
+                trial && trial.canStartBusinessTrial && isOwner,
+              canStartProTrial: trial && trial.canStartProTrial && isOwner,
+              shouldShowProTrialExpiredModal:
+                trial &&
+                trial.plan === 'pro' &&
+                trial.onTrial &&
+                trial.isExpired,
+              shouldShowBusinessTrialExpiredModal:
+                trial &&
+                trial.plan !== 'pro' &&
+                trial.onTrial &&
+                trial.isExpired &&
+                !trial.isDone,
+              showBusinessTrialistsOnboarding:
+                planBase === 'business' && trial && trial.onTrial,
+            };
+          }
           // Temporarily injecting org plan data in users. To be removed after org switcher rollout.
           if (hasOrgSwitcher) {
             return {
@@ -59,14 +89,15 @@ module.exports = method(
               isBusinessUser: planBase === 'business',
               isFreeUser: planBase === 'free',
               isProUser: planBase === 'pro',
-              canSeeCampaignsReport: ownerId === user.id,
+              canSeeCampaignsReport: isOwner,
               canModifyCampaigns: isAdmin,
-              showUpgradeToProCta: planBase === 'free' && ownerId === user.id,
+              showUpgradeToProCta: planBase === 'free' && isOwner,
               hasShareNextFeature: planBase !== 'free',
               hasUserTagFeature: planBase !== 'free',
-              analyzeCrossSale: user.analyzeCrossSale && ownerId === user.id, // to do: return organization products array
+              analyzeCrossSale: user.analyzeCrossSale && isOwner,
               canManageSocialAccounts: isAdmin,
               hasAccessTeamPanel: planBase === 'business' && isAdmin,
+              ...orgTrialData,
             };
           }
         }

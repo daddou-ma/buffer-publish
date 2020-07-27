@@ -87,15 +87,8 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
     };
   };
 
-  useEffect(() => {
-    if (!campaignId && hasCampaigns) {
-      // select a campaign on default
-      updateCampaignId(noCampaign);
-    }
-  }, []);
-
   return (
-    <React.Fragment>
+    <>
       <Section>
         <Text type="label">Campaign</Text>
         <Tooltip label="Categorize your content by themes or topics.">
@@ -127,7 +120,7 @@ const CampaignHeader = ({ campaigns = [], campaignId = null }) => {
         </SelectWrapper>
       </Section>
       <Separator />
-    </React.Fragment>
+    </>
   );
 };
 

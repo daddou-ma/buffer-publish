@@ -264,8 +264,7 @@ export default (state = initialState, action) => {
         ...state,
         userId: action.result.id,
         isFreeUser: action.result.isFreeUser,
-        isOrganizationSwitcherEnabled:
-          action.result.features?.includes('org_switcher') ?? false,
+        isOrganizationSwitcherEnabled: action.result.hasOrgSwitcherFeature,
       };
     }
     default:

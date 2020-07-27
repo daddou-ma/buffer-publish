@@ -19,7 +19,7 @@ describe('DefaultPage', () => {
             ownerEmail: 'ana@buffer.com',
           },
         },
-        user: { features: ['org_switcher'] },
+        user: { hasOrgSwitcherFeature: true, features: ['org_switcher'] },
       },
     });
     expect(screen.getByRole('heading')).toHaveTextContent(/joined Cool Org/i);
