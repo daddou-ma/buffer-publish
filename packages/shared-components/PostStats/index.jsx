@@ -105,7 +105,7 @@ StatisticElement.defaultProps = {
 };
 
 const PostStats = ({
-  statistics,
+  statistics = {},
   profileService,
   showTwitterMentions,
   profileServiceType = null,
