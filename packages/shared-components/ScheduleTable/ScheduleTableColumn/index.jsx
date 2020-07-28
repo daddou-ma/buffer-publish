@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import uuid from 'uuid/v4';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { mystic, geyser } from '@bufferapp/components/style/color';
 import ScheduleTableHeader from '../ScheduleTableHeader';
@@ -7,22 +9,14 @@ import ScheduleTableCell from '../ScheduleTableCell';
 
 const columnHeight = '8rem';
 
-const columnStyle = {
-  width: 0,
-  minHeight: columnHeight,
-  textAlign: 'center',
-  borderRight: `${borderWidth} solid ${mystic}`,
-  flexGrow: 1,
-};
-
-const columnNoTimesStyle = {
-  width: 0,
-  minHeight: columnHeight,
-  color: geyser,
-  textAlign: 'center',
-  borderRight: `${borderWidth} solid ${mystic}`,
-  flexGrow: 1,
-};
+const ColumnStyles = styled.div`
+  width: 0;
+  min-height: ${columnHeight};
+  text-align: center;
+  border-right: ${borderWidth} solid ${mystic};
+  flex-grow: 1;
+  color: hasTimes ? initial : ${geyser};
+`;
 
 const columnWrapperStyle = {
   paddingTop: '0.5rem',
@@ -38,32 +32,34 @@ const ScheduleTableColumn = ({
   onRemoveTimeClick,
   onUpdateTime,
   onPauseToggleClick,
-}) => (
-  <div style={times.length === 0 ? columnNoTimesStyle : columnStyle}>
-    <ScheduleTableHeader
-      disabled={disabled}
-      dayName={dayName}
-      paused={paused}
-      times={times}
-      onPauseToggleClick={onPauseToggleClick}
-    />
-    <div style={columnWrapperStyle}>
-      {times.map((time, index) => (
-        <ScheduleTableCell
-          disabled={disabled}
-          key={index}
-          select24Hours={select24Hours}
-          time={time}
-          onRemoveTimeClick={onRemoveTimeClick}
-          onUpdateTime={onUpdateTime}
-          dayName={dayName}
-          timeIndex={index}
-          paused={paused}
-        />
-      ))}
-    </div>
-  </div>
-);
+}) => {
+  const hasTimes = times?.length > 0;
+  return (
+    <ColumnStyles hasTimes={hasTimes}>
+      <ScheduleTableHeader
+        disabled={disabled}
+        dayName={dayName}
+        displayOn={!paused && hasTimes}
+        onPauseToggleClick={onPauseToggleClick}
+      />
+      <div style={columnWrapperStyle}>
+        {times.map((time, index) => (
+          <ScheduleTableCell
+            disabled={disabled}
+            key={uuid()}
+            select24Hours={select24Hours}
+            time={time}
+            onRemoveTimeClick={onRemoveTimeClick}
+            onUpdateTime={onUpdateTime}
+            dayName={dayName}
+            timeIndex={index}
+            paused={paused}
+          />
+        ))}
+      </div>
+    </ColumnStyles>
+  );
+}
 
 ScheduleTableColumn.defaultProps = {
   disabled: false,
@@ -72,9 +68,9 @@ ScheduleTableColumn.defaultProps = {
 
 ScheduleTableColumn.propTypes = {
   dayName: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   paused: PropTypes.bool.isRequired,
-  select24Hours: PropTypes.bool.isRequired,
+  select24Hours: PropTypes.bool,
   times: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.oneOfType([
