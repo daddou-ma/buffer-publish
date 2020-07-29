@@ -454,7 +454,7 @@ describe('queue utils', () => {
       expect(slot).toEqual([expectedResult]);
     });
     it('returns slot with timestamp and label for stories queue', () => {
-      const now = moment.tz(profileTimezone);
+      const now = moment.tz(thuMarch72019Timestamp, profileTimezone);
       const slot = getSingleSlot({
         profileTimezone,
         hasTwentyFourHourTimeFormat: false,
@@ -465,8 +465,8 @@ describe('queue utils', () => {
       const expectedResult = {
         name: 'mon',
         dayText: 'day text',
-        label: '12:57 PM',
-        timestamp: '1596052631',
+        label: '10:00 AM',
+        timestamp: 1596042011,
       };
       expect(slot).toEqual([expectedResult]);
     });
