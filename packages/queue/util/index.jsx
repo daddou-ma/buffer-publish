@@ -455,7 +455,7 @@ export const formatPostLists = ({
             profileTimezone,
             hasTwentyFourHourTimeFormat,
             day,
-            shouldHaveTime: !isStoriesSlot,
+            shouldHaveTime: isStoriesSlot,
           });
           queueItemsForDay = getItemsForDay({
             daySlots,
