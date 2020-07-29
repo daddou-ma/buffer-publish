@@ -177,6 +177,7 @@ export const getSlotsWithTimestampsAndNoTimeForDay = ({
   hasTwentyFourHourTimeFormat,
   now,
   day: { text: dayText, dayIndex, dayUnixTime },
+  displayWithTime,
 }) => {
   if (now === null) {
     now = moment.tz(profileTimezone);
@@ -186,31 +187,34 @@ export const getSlotsWithTimestampsAndNoTimeForDay = ({
   }
 
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-  const slot = '10:00';
-  const dayMoment = moment.tz(new Date(dayUnixTime * 1000), profileTimezone);
-  const slotMoment = dayMoment.clone();
-  const [hour, minute] = slot.split(':');
-  slotMoment.set({ hour: parseInt(hour, 10), minute: parseInt(minute, 10) });
-
-  if (slotMoment.isBefore(now)) {
-    const anHourFromNow = getFutureTime(profileTimezone);
-    const [hourNow, minuteNow] = anHourFromNow.split(':');
-    slotMoment.set({
-      hour: parseInt(hourNow, 10),
-      minute: parseInt(minuteNow, 10),
-    });
+  let slots = {
+    name: days[dayIndex],
+    dayText,
   }
+  if (displayWithTime) {
+    const slot = '10:00';
+    const dayMoment = moment.tz(new Date(dayUnixTime * 1000), profileTimezone);
+    const slotMoment = dayMoment.clone();
+    const [hour, minute] = slot.split(':');
+    slotMoment.set({ hour: parseInt(hour, 10), minute: parseInt(minute, 10) });
 
-  return [
-    {
-      name: days[dayIndex],
+    if (slotMoment.isBefore(now)) {
+      const anHourFromNow = getFutureTime(profileTimezone);
+      const [hourNow, minuteNow] = anHourFromNow.split(':');
+      slotMoment.set({
+        hour: parseInt(hourNow, 10),
+        minute: parseInt(minuteNow, 10),
+      });
+    }
+    slots = {
+      ...slots,
       label: slotMoment.format(
         hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'
       ),
       timestamp: slotMoment.unix(),
-      dayText,
-    },
-  ];
+    };
+  }
+  return [slots];
 };
 
 /**
@@ -395,9 +399,9 @@ export const formatPostLists = ({
   isSingleSlot,
   orderBy = 'due_at',
   sortOrder = 'asc',
+  pausedDays = [],
 }) => {
   const orderedPosts = orderPosts(posts, orderBy, sortOrder);
-
   /**
    * CASE 1: Schedule Slots Enabled
    */
@@ -440,14 +444,18 @@ export const formatPostLists = ({
         let daySlots;
         let queueItemsForDay;
         const postsForDay = postsByDay[day.text] || [];
-
+        const dayPaused = pausedDays.includes(day.dayOfWeek);
+        // don't show a slot if a user has paused the day.
+        const noPostingTimes =
+          !dayPaused && dailySlots[day.dayIndex]?.length === 0;
         // For Stories tabs, we only need to load one slot per day
         // which should be visible at all times
-        if (isSingleSlot) {
+        if (isSingleSlot || noPostingTimes) {
           daySlots = getSlotsWithTimestampsAndNoTimeForDay({
             profileTimezone,
             hasTwentyFourHourTimeFormat,
             day,
+            displayWithTime: !noPostingTimes,
           });
           queueItemsForDay = getItemsForDay({
             daySlots,
