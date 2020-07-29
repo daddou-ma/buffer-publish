@@ -187,15 +187,15 @@ export const getSlotsWithTimestampsAndNoTimeForDay = ({
   }
 
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-  let slots = {
+  let slot = {
     name: days[dayIndex],
     dayText,
-  }
+  };
   if (displayWithTime) {
-    const slot = '10:00';
+    const slotTime = '10:00';
     const dayMoment = moment.tz(new Date(dayUnixTime * 1000), profileTimezone);
     const slotMoment = dayMoment.clone();
-    const [hour, minute] = slot.split(':');
+    const [hour, minute] = slotTime.split(':');
     slotMoment.set({ hour: parseInt(hour, 10), minute: parseInt(minute, 10) });
 
     if (slotMoment.isBefore(now)) {
@@ -206,15 +206,15 @@ export const getSlotsWithTimestampsAndNoTimeForDay = ({
         minute: parseInt(minuteNow, 10),
       });
     }
-    slots = {
-      ...slots,
+    slot = {
+      ...slot,
       label: slotMoment.format(
         hasTwentyFourHourTimeFormat ? 'HH:mm' : 'h:mm A'
       ),
       timestamp: slotMoment.unix(),
     };
   }
-  return [slots];
+  return [slot];
 };
 
 /**

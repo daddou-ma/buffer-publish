@@ -30,7 +30,7 @@ export default connect(
         return queue.posts[key];
       });
 
-    const { days = [] } = state.postingSchedule;
+    const days = state.postingSchedule.days ?? [];
     const pausedDays = days
       .filter(day => day.paused === true)
       .map(day => day.dayName);
