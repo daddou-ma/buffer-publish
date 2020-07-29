@@ -441,6 +441,36 @@ describe('queue utils', () => {
       ]);
     });
   });
+  describe('getSingleSlot', () => {
+    it('returns slot without timestamp or label when schedule is unpaused without times', () => {
+      const slot = getSingleSlot({
+        profileTimezone,
+        hasTwentyFourHourTimeFormat: false,
+        now: null,
+        day: { text: 'day text', dayIndex: 1 },
+        shouldHaveTime: false,
+      });
+      const expectedResult = { name: 'mon', dayText: 'day text' };
+      expect(slot).toEqual([expectedResult]);
+    });
+    it('returns slot with timestamp and label for stories queue', () => {
+      const now = moment.tz(profileTimezone);
+      const slot = getSingleSlot({
+        profileTimezone,
+        hasTwentyFourHourTimeFormat: false,
+        now,
+        day: { text: 'day text', dayIndex: 1, dayUnixTime: 1596048971 },
+        shouldHaveTime: true,
+      });
+      const expectedResult = {
+        name: 'mon',
+        dayText: 'day text',
+        label: '12:57 PM',
+        timestamp: '1596052631',
+      };
+      expect(slot).toEqual([expectedResult]);
+    });
+  });
   describe('getDayHeaderItem', () => {
     expect(getDayHeaderItem({ text: 'foo' })).toEqual({
       queueItemType: 'header',
