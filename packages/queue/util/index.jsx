@@ -172,16 +172,13 @@ const getFutureTime = timezone => {
  * Returns slots with timestamps and labels for the given day
  * This method doesn't take into account times, only days of the week
  */
-export const getSlotsWithTimestampsAndNoTimeForDay = ({
+export const getSingleSlot = ({
   profileTimezone,
   hasTwentyFourHourTimeFormat,
   now,
   day: { text: dayText, dayIndex, dayUnixTime },
-  displayWithTime,
+  shouldHaveTime,
 }) => {
-  if (now === null) {
-    now = moment.tz(profileTimezone);
-  }
   if (dayIndex === -1) {
     return [];
   }
@@ -191,7 +188,10 @@ export const getSlotsWithTimestampsAndNoTimeForDay = ({
     name: days[dayIndex],
     dayText,
   };
-  if (displayWithTime) {
+  if (shouldHaveTime) {
+    if (now === null) {
+      now = moment.tz(profileTimezone);
+    }
     const slotTime = '10:00';
     const dayMoment = moment.tz(new Date(dayUnixTime * 1000), profileTimezone);
     const slotMoment = dayMoment.clone();
@@ -315,7 +315,7 @@ export const getQueueItemsForDay = ({
 
 /**
  * Returns a list of posts by day and a single slot for a given set of `daySlots` that were
- * obtained from `getSlotsWithTimestampsAndNoTimeForDay`.
+ * obtained from `getSingleSlot`.
  */
 export const getItemsForDay = ({
   daySlots,
@@ -396,7 +396,7 @@ export const formatPostLists = ({
   weeksToShow,
   hasTwentyFourHourTimeFormat,
   profileService,
-  isSingleSlot,
+  isStoriesSlot,
   orderBy = 'due_at',
   sortOrder = 'asc',
   pausedDays = [],
@@ -450,12 +450,12 @@ export const formatPostLists = ({
           !dayPaused && dailySlots[day.dayIndex]?.length === 0;
         // For Stories tabs, we only need to load one slot per day
         // which should be visible at all times
-        if (isSingleSlot || noPostingTimes) {
-          daySlots = getSlotsWithTimestampsAndNoTimeForDay({
+        if (isStoriesSlot || noPostingTimes) {
+          daySlots = getSingleSlot({
             profileTimezone,
             hasTwentyFourHourTimeFormat,
             day,
-            displayWithTime: !noPostingTimes,
+            shouldHaveTime: !isStoriesSlot,
           });
           queueItemsForDay = getItemsForDay({
             daySlots,

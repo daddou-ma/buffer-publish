@@ -27,7 +27,7 @@ export default connect(
           isManager: profileData.isManager,
           posts: currentProfile.storyPosts,
           scheduleSlotsEnabled: true,
-          isSingleSlot: true,
+          isStoriesSlot: true,
           profileTimezone: profileData.timezone,
           weekStartsOnMonday: state.user.week_starts_monday,
           weeksToShow: currentProfile.page + 1,

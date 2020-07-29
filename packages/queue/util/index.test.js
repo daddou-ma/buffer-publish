@@ -4,6 +4,7 @@ import {
   getDailySlotsFromProfileSchedules,
   getDaysForUpcomingWeeks,
   getSlotsWithTimestampsForDay,
+  getSingleSlot,
   getDayHeaderItem,
   getQueueItemsForDay,
   getSlotOrPostItem,
