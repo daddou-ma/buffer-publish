@@ -30,7 +30,11 @@ export default connect(
         return queue.posts[key];
       });
 
-    const days = state.postingSchedule.days ?? [];
+    const { days } = state.postingSchedule;
+    const shouldDisplayEmptySlots =
+      days.length > 0 &&
+      days.every(day => day.times.length === 0 || day.paused);
+
     const pausedDays = days
       .filter(day => day.paused === true)
       .map(day => day.dayName);
@@ -63,6 +67,7 @@ export default connect(
           weeksToShow: queue.page + 1,
           hasTwentyFourHourTimeFormat: state.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
+          shouldDisplayEmptySlots,
           pausedDays,
         }),
         scheduleSlotsIsAvailable: isScheduleSlotsAvailable(

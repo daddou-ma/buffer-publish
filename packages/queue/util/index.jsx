@@ -400,6 +400,7 @@ export const formatPostLists = ({
   orderBy = 'due_at',
   sortOrder = 'asc',
   pausedDays = [],
+  shouldDisplayEmptySlots,
 }) => {
   const orderedPosts = orderPosts(posts, orderBy, sortOrder);
   /**
@@ -445,12 +446,11 @@ export const formatPostLists = ({
         let queueItemsForDay;
         const postsForDay = postsByDay[day.text] || [];
         const dayPaused = pausedDays.includes(day.dayOfWeek);
-        // don't show a slot if a user has paused the day.
-        const noPostingTimes =
-          !dayPaused && dailySlots[day.dayIndex]?.length === 0;
+        // only show empty slot if all unpaused days don't have times set
+        const isEmptyQueueSlot = shouldDisplayEmptySlots && !dayPaused;
         // For Stories tabs, we only need to load one slot per day
         // which should be visible at all times
-        if (isStoriesSlot || noPostingTimes) {
+        if (isStoriesSlot || isEmptyQueueSlot) {
           daySlots = getSingleSlot({
             profileTimezone,
             hasTwentyFourHourTimeFormat,
