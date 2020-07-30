@@ -4,7 +4,7 @@ import {
   getDailySlotsFromProfileSchedules,
   getDaysForUpcomingWeeks,
   getSlotsWithTimestampsForDay,
-  getSingleSlot,
+  getSlotsWithTimestampsAndNoTimeForDay,
   getDayHeaderItem,
   getQueueItemsForDay,
   getSlotOrPostItem,
@@ -441,21 +441,10 @@ describe('queue utils', () => {
       ]);
     });
   });
-  describe('getSingleSlot', () => {
-    it('returns slot without timestamp or label when schedule is unpaused without times', () => {
-      const slot = getSingleSlot({
-        profileTimezone,
-        hasTwentyFourHourTimeFormat: false,
-        now: null,
-        day: { text: 'day text', dayIndex: 1 },
-        shouldHaveTime: false,
-      });
-      const expectedResult = { name: 'mon', dayText: 'day text' };
-      expect(slot).toEqual([expectedResult]);
-    });
-    it('returns slot with timestamp and label for stories queue', () => {
+  describe('getSlotsWithTimestampsAndNoTimeForDay', () => {
+    it('returns slot with expected properties', () => {
       const now = moment.tz(thuMarch72019Timestamp, profileTimezone);
-      const slot = getSingleSlot({
+      const slot = getSlotsWithTimestampsAndNoTimeForDay({
         profileTimezone,
         hasTwentyFourHourTimeFormat: false,
         now,
