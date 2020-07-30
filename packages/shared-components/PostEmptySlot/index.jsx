@@ -82,9 +82,6 @@ const iconMap = new Map([
 // eslint-disable-next-line react/prop-types
 const Message = ({ message }) => <span>{message}</span>;
 
-const getMessage = service =>
-  service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post';
-
 // eslint-disable-next-line react/prop-types
 const HoverMessage = ({ service, customHoverMessage }) => {
   if (customHoverMessage) {
@@ -99,7 +96,8 @@ const HoverMessage = ({ service, customHoverMessage }) => {
 
   const icon = iconMap.get(service);
   const IconComponent = icon && icon.component;
-  const message = getMessage(service);
+  const message =
+    service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post';
 
   return (
     <MessageWrapper>
@@ -140,8 +138,7 @@ class PostEmptySlot extends Component {
       customHoverMessage,
     } = this.props;
     const { isHovering } = this.state;
-    // if no time or label, display the same message as onHover
-    const message = customLabel || time || getMessage(service);
+    const message = customLabel || time;
 
     return (
       <EmptySlot

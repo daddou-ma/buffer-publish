@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import PostEmptySlot from '../../PostEmptySlot/dropTarget';
 
+const getLabel = service =>
+  service === 'twitter' ? 'Schedule a Tweet' : 'Schedule a Post';
+
 const EmptySlot = ({
   item,
   pinned,
@@ -18,7 +21,7 @@ const EmptySlot = ({
       timestamp={slot.timestamp}
       day={slot.dayText}
       service={profileService}
-      customLabel={customLabel}
+      customLabel={customLabel || (!pinned && getLabel(profileService))} // if no posting time, display hover message
       customHoverMessage={customHoverMessage}
       onClick={() =>
         onEmptySlotClick({

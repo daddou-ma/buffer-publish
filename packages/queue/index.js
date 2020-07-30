@@ -31,7 +31,7 @@ export default connect(
       });
 
     const { days } = state.postingSchedule;
-    const shouldDisplayEmptySlots =
+    const shouldDisplaySingleSlots =
       days.length > 0 &&
       days.every(day => day.times.length === 0 || day.paused);
 
@@ -67,7 +67,7 @@ export default connect(
           weeksToShow: queue.page + 1,
           hasTwentyFourHourTimeFormat: state.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
-          shouldDisplayEmptySlots,
+          shouldDisplaySingleSlots,
           pausedDays,
         }),
         scheduleSlotsIsAvailable: isScheduleSlotsAvailable(
@@ -95,6 +95,7 @@ export default connect(
           state.profileSidebar.selectedProfile.isDisconnected,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
         hasCampaignsFeature: state.user.hasCampaignsFeature,
+        shouldDisplaySingleSlots,
       };
     }
     return {

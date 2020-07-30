@@ -29,7 +29,7 @@ const QueueItems = ({
   items,
   type,
   features,
-  isMainQueue,
+  pinned,
   isBusinessAccount,
   onEmptySlotClick,
   onCalendarClick,
@@ -81,7 +81,7 @@ const QueueItems = ({
           <EmptySlot
             key={item.id}
             item={item}
-            pinned={isMainQueue}
+            pinned={pinned}
             customLabel={isStories && 'Add to Story'}
             customHoverMessage={isStories && 'Schedule a Story'}
             onEmptySlotClick={onEmptySlotClick}
