@@ -200,7 +200,6 @@ export const getSlotsWithTimestampsAndNoTimeForDay = ({
       minute: parseInt(minuteNow, 10),
     });
   }
-
   return [
     {
       name: days[dayIndex],
@@ -392,9 +391,11 @@ export const formatPostLists = ({
   weeksToShow,
   hasTwentyFourHourTimeFormat,
   profileService,
-  isSingleSlot,
+  isStoriesSlot,
   orderBy = 'due_at',
   sortOrder = 'asc',
+  pausedDays = [],
+  shouldDisplaySingleSlots,
 }) => {
   const orderedPosts = orderPosts(posts, orderBy, sortOrder);
 
@@ -403,6 +404,15 @@ export const formatPostLists = ({
    */
   if (scheduleSlotsEnabled) {
     // Get the schedule slots for each day
+    const fullDays = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
     let dailySlots = [];
     if (schedules) {
       dailySlots = getDailySlotsFromProfileSchedules(schedules);
@@ -440,10 +450,13 @@ export const formatPostLists = ({
         let daySlots;
         let queueItemsForDay;
         const postsForDay = postsByDay[day.text] || [];
-
+        const dayOfTheWeek = fullDays[day.dayIndex];
+        const dayPaused = pausedDays.includes(dayOfTheWeek);
+        // only show slot if all unpaused days don't have times set
+        const isQueueSingleSlot = shouldDisplaySingleSlots && !dayPaused;
         // For Stories tabs, we only need to load one slot per day
         // which should be visible at all times
-        if (isSingleSlot) {
+        if (isStoriesSlot || isQueueSingleSlot) {
           daySlots = getSlotsWithTimestampsAndNoTimeForDay({
             profileTimezone,
             hasTwentyFourHourTimeFormat,

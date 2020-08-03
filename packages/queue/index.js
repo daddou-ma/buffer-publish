@@ -30,6 +30,15 @@ export default connect(
         return queue.posts[key];
       });
 
+    const { days } = state.postingSchedule;
+    const shouldDisplaySingleSlots =
+      days.length > 0 &&
+      days.every(day => day.times.length === 0 || day.paused);
+
+    const pausedDays = days
+      .filter(day => day.paused === true)
+      .map(day => day.dayName);
+
     const hasAtLeastOneReminderPost =
       queuePostsArray &&
       queuePostsArray.some(
@@ -59,6 +68,8 @@ export default connect(
           weeksToShow: queue.page + 1,
           hasTwentyFourHourTimeFormat: state.user.hasTwentyFourHourTimeFormat,
           profileService: profileData.service,
+          shouldDisplaySingleSlots,
+          pausedDays,
         }),
         scheduleSlotsIsAvailable: isScheduleSlotsAvailable(
           profileData.schedules
@@ -85,6 +96,7 @@ export default connect(
           state.profileSidebar.selectedProfile.isDisconnected,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
         hasCampaignsFeature: state.user.hasCampaignsFeature,
+        shouldDisplaySingleSlots,
       };
     }
     return {

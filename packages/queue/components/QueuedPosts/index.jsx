@@ -72,6 +72,7 @@ const QueuedPosts = ({
   onCampaignTagClick,
   hasCampaignsFeature,
   fetchCampaignsIfNeeded,
+  shouldDisplaySingleSlots,
   preserveComposerStateOnClose,
 }) => {
   if (loading) {
@@ -172,7 +173,7 @@ const QueuedPosts = ({
           onCampaignTagClick={onCampaignTagClick}
           hasCampaignsFeature={hasCampaignsFeature}
           shouldRenderCalendarButtons
-          isMainQueue
+          pinned={!shouldDisplaySingleSlots}
         />
       </div>
     </ErrorBoundary>
@@ -226,6 +227,7 @@ QueuedPosts.propTypes = {
   isBusinessAccount: PropTypes.bool,
   hasCampaignsFeature: PropTypes.bool,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
+  shouldDisplaySingleSlots: PropTypes.bool.isRequired,
   preserveComposerStateOnClose: PropTypes.bool,
 };
 

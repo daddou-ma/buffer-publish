@@ -4,6 +4,7 @@ import {
   getDailySlotsFromProfileSchedules,
   getDaysForUpcomingWeeks,
   getSlotsWithTimestampsForDay,
+  getSlotsWithTimestampsAndNoTimeForDay,
   getDayHeaderItem,
   getQueueItemsForDay,
   getSlotOrPostItem,
@@ -438,6 +439,25 @@ describe('queue utils', () => {
         { name: '12:14', label: '12:14', timestamp: 1552245293 },
         { name: '20:03', label: '20:03', timestamp: 1552273433 },
       ]);
+    });
+  });
+  describe('getSlotsWithTimestampsAndNoTimeForDay', () => {
+    it('returns slot with expected properties', () => {
+      const now = moment.tz(thuMarch72019Timestamp, profileTimezone);
+      const slot = getSlotsWithTimestampsAndNoTimeForDay({
+        profileTimezone,
+        hasTwentyFourHourTimeFormat: false,
+        now,
+        day: { text: 'day text', dayIndex: 1, dayUnixTime: 1596048971 },
+        shouldHaveTime: true,
+      });
+      const expectedResult = {
+        name: 'mon',
+        dayText: 'day text',
+        label: '10:00 AM',
+        timestamp: 1596042011,
+      };
+      expect(slot).toEqual([expectedResult]);
     });
   });
   describe('getDayHeaderItem', () => {
