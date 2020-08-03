@@ -396,7 +396,6 @@ export default (state = initialState, action) => {
     case actionTypes.OPEN_COMPOSER:
       return {
         ...state,
-        preserveComposerStateOnClose: true,
         showComposer: true,
         editMode: action.editMode,
         editingPostId: action.updateId,
@@ -406,6 +405,7 @@ export default (state = initialState, action) => {
     case actionTypes.HIDE_COMPOSER:
       return {
         ...state,
+        preserveComposerStateOnClose: true,
         showComposer: false,
         editMode: false,
         emptySlotMode: false,
