@@ -99,7 +99,7 @@ function generateUserMenuItems({
 }
 
 const generateOrgSwitcherItems = ({
-  hasOrgSwitcherFeature,
+  canSeeOrgSwitcher,
   organizations,
   selectedOrganizationId,
   profiles,
@@ -108,7 +108,7 @@ const generateOrgSwitcherItems = ({
   /**
    * Only show if user has feature and 2+ organizations
    */
-  const shouldShow = hasOrgSwitcherFeature && organizations?.length >= 2;
+  const shouldShow = canSeeOrgSwitcher;
   if (!shouldShow) {
     return null;
   }
@@ -152,7 +152,7 @@ const AppShell = ({
   hideAppShell,
   enabledProducts,
   featureFlips,
-  hasOrgSwitcherFeature,
+  canSeeOrgSwitcher,
   organizations,
   selectedOrganizationId,
   profiles,
@@ -186,7 +186,7 @@ const AppShell = ({
       }}
       helpMenuItems={helpMenuItems(t)}
       orgSwitcher={generateOrgSwitcherItems({
-        hasOrgSwitcherFeature,
+        canSeeOrgSwitcher,
         organizations,
         selectedOrganizationId,
         profiles,
@@ -229,7 +229,7 @@ AppShell.propTypes = {
   hideAppShell: PropTypes.bool.isRequired,
   enabledProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
   featureFlips: PropTypes.arrayOf(PropTypes.string).isRequired,
-  hasOrgSwitcherFeature: PropTypes.bool,
+  canSeeOrgSwitcher: PropTypes.bool,
   organizations: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -252,7 +252,7 @@ AppShell.propTypes = {
 };
 
 AppShell.defaultProps = {
-  hasOrgSwitcherFeature: false,
+  canSeeOrgSwitcher: false,
   showReturnToClassic: false,
   showSwitchPlan: false,
   showManageTeam: false,

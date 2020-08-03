@@ -75,6 +75,7 @@ module.exports = userData => ({
     !userData.has_cancelled,
   shouldShowBusinessTrialExpiredModal:
     userData.on_trial && userData.trial_expired && !userData.trial_done,
+  canSeeOrgSwitcher: false, // temporary value, the important is what's being injected in the rpc
 
   // Org data
   plan:

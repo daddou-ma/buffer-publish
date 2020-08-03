@@ -31,7 +31,7 @@ export default connect(
      * Org Switcher
      * Needs organizations and profiles.
      */
-    hasOrgSwitcherFeature: state.user.hasOrgSwitcherFeature,
+    canSeeOrgSwitcher: state.user.canSeeOrgSwitcher,
     organizations: getOrgsAlfabeticalOrder(state.organizations.list) || [],
     selectedOrganizationId: state.organizations.selected?.id,
     profiles: state.publishProfiles,
