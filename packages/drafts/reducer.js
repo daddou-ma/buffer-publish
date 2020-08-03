@@ -1,5 +1,6 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('DRAFTS', {
@@ -204,6 +205,11 @@ export default (state = initialState, action) => {
         };
       }
       return state;
+    case orgActionTypes.ORGANIZATION_SELECTED:
+      return {
+        ...state,
+        preserveComposerStateOnClose: false,
+      };
     case actionTypes.OPEN_COMPOSER:
       return {
         ...state,
@@ -214,6 +220,7 @@ export default (state = initialState, action) => {
     case actionTypes.HIDE_COMPOSER:
       return {
         ...state,
+        preserveComposerStateOnClose: true,
         showComposer: false,
         editMode: false,
       };

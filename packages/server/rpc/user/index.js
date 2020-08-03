@@ -98,6 +98,7 @@ module.exports = method(
               canManageSocialAccounts: isAdmin,
               hasAccessTeamPanel: planBase === 'business' && isAdmin,
               canSeeBillingInfo: isOwner,
+              canSeeOrgSwitcher: orgs && orgs.length >= 2,
               shouldShowUpgradeButton:
                 isOwner &&
                 (planBase === 'free' ||

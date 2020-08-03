@@ -59,6 +59,7 @@ const DraftList = ({
   canStartBusinessTrial,
   hasFirstCommentFlip,
   onComposerOverlayClick,
+  preserveComposerStateOnClose,
 }) => {
   if (features.isProUser()) {
     const startTrial = () =>
@@ -120,7 +121,7 @@ const DraftList = ({
                 <ComposerPopover
                   type="drafts"
                   onSave={onComposerCreateSuccess}
-                  preserveComposerStateOnClose
+                  preserveComposerStateOnClose={preserveComposerStateOnClose}
                   onComposerOverlayClick={onComposerOverlayClick}
                   editMode={editMode}
                 />
@@ -186,9 +187,11 @@ DraftList.propTypes = {
   isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   onComposerOverlayClick: PropTypes.func.isRequired,
+  preserveComposerStateOnClose: PropTypes.bool,
 };
 
 DraftList.defaultProps = {
+  preserveComposerStateOnClose: true,
   loading: true,
   postLists: [],
   showComposer: false,

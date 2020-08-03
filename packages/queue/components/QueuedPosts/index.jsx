@@ -73,6 +73,7 @@ const QueuedPosts = ({
   hasCampaignsFeature,
   fetchCampaignsIfNeeded,
   shouldDisplaySingleSlots,
+  preserveComposerStateOnClose,
 }) => {
   if (loading) {
     return (
@@ -113,7 +114,7 @@ const QueuedPosts = ({
             {showComposer && !editMode && (
               <ComposerPopover
                 onSave={onComposerCreateSuccess}
-                preserveComposerStateOnClose
+                preserveComposerStateOnClose={preserveComposerStateOnClose}
                 type="queue"
                 onComposerOverlayClick={onComposerOverlayClick}
                 editMode={editMode}
@@ -227,9 +228,11 @@ QueuedPosts.propTypes = {
   hasCampaignsFeature: PropTypes.bool,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   shouldDisplaySingleSlots: PropTypes.bool.isRequired,
+  preserveComposerStateOnClose: PropTypes.bool,
 };
 
 QueuedPosts.defaultProps = {
+  preserveComposerStateOnClose: true,
   loading: true,
   moreToLoad: false,
   page: 1,

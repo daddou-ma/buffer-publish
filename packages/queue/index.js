@@ -53,6 +53,7 @@ export default connect(
     }
     if (queue && profileData) {
       return {
+        preserveComposerStateOnClose: state.queue.preserveComposerStateOnClose,
         loading: queue.loading,
         loadingMore: queue.loadingMore,
         moreToLoad: queue.moreToLoad,
