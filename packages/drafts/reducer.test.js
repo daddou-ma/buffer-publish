@@ -1,4 +1,5 @@
 import deepFreeze from 'deep-freeze';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import reducer, { actions, initialState, actionTypes } from './reducer';
 
 const profileId = '123456';
@@ -415,6 +416,7 @@ describe('reducer', () => {
       },
       showComposer: true,
       editMode: true,
+      preserveComposerStateOnClose: false,
     };
     const stateAfter = {
       byProfileId: {
@@ -429,11 +431,29 @@ describe('reducer', () => {
       },
       showComposer: false,
       editMode: false,
+      preserveComposerStateOnClose: true,
     };
 
     const action = {
       type: actionTypes.HIDE_COMPOSER,
       profileId,
+    };
+
+    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('handles ORGANIZATION_SELECTED action type, sets preserveComposerStateOnClose to false to force the composer to refetch profiles on org switcher ', () => {
+    const stateBefore = {
+      ...initialState,
+      preserveComposerStateOnClose: true,
+    };
+    const stateAfter = {
+      ...initialState,
+      preserveComposerStateOnClose: false,
+    };
+
+    const action = {
+      type: orgActionTypes.ORGANIZATION_SELECTED,
     };
 
     expect(reducer(stateBefore, action)).toEqual(stateAfter);

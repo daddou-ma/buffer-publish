@@ -1,6 +1,7 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import { postParser } from '@bufferapp/publish-server/parsers/src';
 import keyWrapper from '@bufferapp/keywrapper';
 
@@ -386,6 +387,12 @@ export default (state = initialState, action) => {
         isInstagramLoading: false,
       };
 
+    case orgActionTypes.ORGANIZATION_SELECTED:
+      return {
+        ...state,
+        preserveComposerStateOnClose: false,
+      };
+
     case actionTypes.OPEN_COMPOSER:
       return {
         ...state,
@@ -398,6 +405,7 @@ export default (state = initialState, action) => {
     case actionTypes.HIDE_COMPOSER:
       return {
         ...state,
+        preserveComposerStateOnClose: true,
         showComposer: false,
         editMode: false,
         emptySlotMode: false,
