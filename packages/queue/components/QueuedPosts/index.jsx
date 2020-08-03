@@ -72,6 +72,7 @@ const QueuedPosts = ({
   onCampaignTagClick,
   hasCampaignsFeature,
   fetchCampaignsIfNeeded,
+  preserveComposerStateOnClose,
 }) => {
   if (loading) {
     return (
@@ -112,7 +113,7 @@ const QueuedPosts = ({
             {showComposer && !editMode && (
               <ComposerPopover
                 onSave={onComposerCreateSuccess}
-                preserveComposerStateOnClose
+                preserveComposerStateOnClose={preserveComposerStateOnClose}
                 type="queue"
                 onComposerOverlayClick={onComposerOverlayClick}
                 editMode={editMode}
@@ -225,9 +226,11 @@ QueuedPosts.propTypes = {
   isBusinessAccount: PropTypes.bool,
   hasCampaignsFeature: PropTypes.bool,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
+  preserveComposerStateOnClose: PropTypes.bool,
 };
 
 QueuedPosts.defaultProps = {
+  preserveComposerStateOnClose: true,
   loading: true,
   moreToLoad: false,
   page: 1,
