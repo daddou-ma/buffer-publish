@@ -54,6 +54,7 @@ export default ({ dispatch, getState }) => next => action => {
           trialTimeRemaining: result.trial.trialTimeRemaining,
           orgUserCount: result.orgUserCount,
           profileCount: result.profileCount,
+          canSeeOrgSwitcher: result.canSeeOrgSwitcher,
         });
       }
       break;
