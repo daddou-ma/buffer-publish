@@ -14,6 +14,8 @@ const EmptySlot = ({
   onEmptySlotClick,
 }) => {
   const { id, slot, profileService } = item;
+  // if no posting time (unpinned), display custom label
+  const unpinnedLabel = !pinned && getLabel(profileService);
   return (
     <PostEmptySlot
       key={id}
@@ -21,7 +23,7 @@ const EmptySlot = ({
       timestamp={slot.timestamp}
       day={slot.dayText}
       service={profileService}
-      customLabel={customLabel || (!pinned && getLabel(profileService))} // if no posting time, display hover message
+      customLabel={customLabel || unpinnedLabel}
       customHoverMessage={customHoverMessage}
       onClick={() =>
         onEmptySlotClick({
