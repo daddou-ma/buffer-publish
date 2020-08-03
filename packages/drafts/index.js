@@ -122,6 +122,7 @@ export default connect(
     const currentProfile = state.drafts.byProfileId[profileId];
     if (currentProfile) {
       return {
+        preserveComposerStateOnClose: state.drafts.preserveComposerStateOnClose,
         manager: state.profileSidebar.selectedProfile.isManager,
         drafts: currentProfile.drafts,
         postLists: formatPostLists(
