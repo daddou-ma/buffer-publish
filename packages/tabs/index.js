@@ -26,6 +26,7 @@ export default connect(
     hasStoriesFlip: state.user.features?.includes('stories_groups') ?? false,
     draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
     draftsCount: state.tabs.draftsCount,
+    canReconnectChannels: state.user.canReconnectChannels,
   }),
   (dispatch, ownProps) => ({
     onTabClick: tabId => {

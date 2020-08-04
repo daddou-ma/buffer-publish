@@ -99,6 +99,7 @@ module.exports = method(
               hasAccessTeamPanel: planBase === 'business' && isAdmin,
               canSeeBillingInfo: isOwner,
               canSeeOrgSwitcher: orgs && orgs.length >= 2,
+              canReconnectChannels: isAdmin,
               shouldShowUpgradeButton:
                 isOwner &&
                 (planBase === 'free' ||
