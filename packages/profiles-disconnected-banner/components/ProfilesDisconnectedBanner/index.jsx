@@ -34,7 +34,7 @@ const ProfilesDisconnectedBanner = ({
     >
       {displayExtraMessage && (
         <ExtraMessageWithStyles type="p">
-          {t('profiles-disconnected-banner.extraMessage?.instagram')}
+          {t('profiles-disconnected-banner.extraMessage.instagram')}
         </ExtraMessageWithStyles>
       )}
       <TextWithStyles type="p">
