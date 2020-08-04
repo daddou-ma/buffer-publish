@@ -5,28 +5,25 @@ import ProfilesDisconnectedModal from './components/ProfilesDisconnectedModal';
 
 export default connect(
   state => {
-    let displayExtraMessage = false;
     const disconnectedProfiles =
       state.profilesDisconnectedModal?.disconnectedProfiles;
     const instagramPersonalProfiles = disconnectedProfiles.filter(
       profile =>
         profile?.service === 'instagram' && profile?.service_type === 'profile'
     );
-    if (instagramPersonalProfiles.length > 0) {
-      displayExtraMessage = true;
-    }
     const organizations = state.organizations?.list;
 
-    const profiles = [];
-    disconnectedProfiles.forEach(profile => {
-      const matchingOrg = organizations.filter(
-        org => profile.organizationId === org.id
-      );
-      profile.isAdmin = matchingOrg[0].isAdmin;
-      profiles.push(profile);
-    });
+    const profiles = disconnectedProfiles.reduce((accProfiles, profile) => {
+      const matchingOrg =
+        Array.isArray(organizations) &&
+        organizations.find(org => profile.organizationId === org.id);
+
+      return matchingOrg
+        ? [...accProfiles, { ...profile, isAdmin: matchingOrg.isAdmin }]
+        : accProfiles;
+    }, []);
     return {
-      displayExtraMessage,
+      displayExtraMessage: instagramPersonalProfiles?.length > 0,
       disconnectedProfiles: profiles,
       ...state.profilesDisconnectedModal,
     };
