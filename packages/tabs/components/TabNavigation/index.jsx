@@ -159,7 +159,7 @@ class TabNavigation extends React.Component {
                   onClick={e => {
                     e.preventDefault();
                     this.setState({ loading: true });
-                    window.location.assign(`${getURL.getManageURL()}`);
+                    window.location.assign(`${getURL.getManageSocialAccountURL()}`);
                   }}
                 />
               </div>
