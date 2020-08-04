@@ -54,7 +54,6 @@ export default ({ dispatch, getState }) => next => action => {
           trialTimeRemaining: result.trial.trialTimeRemaining,
           orgUserCount: result.orgUserCount,
           profileCount: result.profileCount,
-          canSeeOrgSwitcher: result.canSeeOrgSwitcher,
         });
       }
       break;
@@ -98,6 +97,7 @@ export default ({ dispatch, getState }) => next => action => {
             profileCount,
             isBusinessUser,
             tags,
+            canSeeOrgSwitcher,
           } = action.result; // user
           if (shouldIdentifyWithAppcues({ isBusinessUser, plan, tags })) {
             dispatch({
@@ -117,6 +117,7 @@ export default ({ dispatch, getState }) => next => action => {
               trialTimeRemaining: trial.trialTimeRemaining,
               orgUserCount, // Number of users (including the account owner)
               profileCount, // Number of profiles _owned_ by the user
+              canSeeOrgSwitcher,
               upgradedFromLegacyAwesomeToProPromotion: tags.includes(
                 'upgraded-to-pro-from-legacy-awesome'
               ),
