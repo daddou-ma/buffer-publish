@@ -8,7 +8,7 @@ import ProfilesDisconnectedModal from './index';
 
 storiesOf('ProfilesDisconnectedModal', module)
   .addDecorator(withA11y)
-  .add('should show welcome modal', () => (
+  .add('default', () => (
     <ProfilesDisconnectedModal
       translations={translations['profiles-disconnected-modal']}
       hideModal={action('hide-modal')}
@@ -19,6 +19,23 @@ storiesOf('ProfilesDisconnectedModal', module)
           avatar_https: '',
           service: 'twitter',
           formatted_username: '@hamstu',
+          isAdmin: true,
+        },
+      ]}
+    />
+  ))
+  .add('with non-admin profile', () => (
+    <ProfilesDisconnectedModal
+      translations={translations['profiles-disconnected-modal']}
+      hideModal={action('hide-modal')}
+      reconnectProfile={action('reconnect-profile')}
+      disconnectedProfiles={[
+        {
+          id: '1',
+          avatar_https: '',
+          service: 'twitter',
+          formatted_username: '@hamstu',
+          isAdmin: false,
         },
       ]}
     />
