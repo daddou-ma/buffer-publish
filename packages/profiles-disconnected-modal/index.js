@@ -23,9 +23,9 @@ export default connect(
         : accProfiles;
     }, []);
     return {
+      ...state.profilesDisconnectedModal,
       displayExtraMessage: instagramPersonalProfiles?.length > 0,
       disconnectedProfiles: profiles,
-      ...state.profilesDisconnectedModal,
     };
   },
   dispatch => ({
