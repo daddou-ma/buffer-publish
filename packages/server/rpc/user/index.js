@@ -69,7 +69,7 @@ module.exports = method(
                 trial.isExpired &&
                 !trial.isDone,
               showBusinessTrialistsOnboarding:
-                planBase === 'business' && trial && trial.onTrial,
+                planBase === 'business' && trial && trial.onTrial && isAdmin,
             };
           }
           // Temporarily injecting org plan data in users. To be removed after org switcher rollout.
@@ -99,6 +99,7 @@ module.exports = method(
               hasAccessTeamPanel: planBase === 'business' && isAdmin,
               canSeeBillingInfo: isOwner,
               canSeeOrgSwitcher: orgs && orgs.length >= 2,
+              canReconnectChannels: isAdmin,
               shouldShowUpgradeButton:
                 isOwner &&
                 (planBase === 'free' ||

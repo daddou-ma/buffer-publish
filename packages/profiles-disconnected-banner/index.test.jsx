@@ -18,6 +18,10 @@ const store = storeFake({
       service: 'instagram',
     },
   },
+  user: {
+    canReconnectChannels: true,
+  },
+  organizations: {},
   i18n: {
     translations: {
       'profiles-disconnected-banner':

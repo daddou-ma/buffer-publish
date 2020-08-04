@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { ErrorBanner } from '@bufferapp/publish-shared-components';
 import { Text } from '@bufferapp/ui';
 import { fontWeightBold } from '@bufferapp/ui/style/fonts';
@@ -17,36 +18,49 @@ const ExtraMessageWithStyles = styled(Text)`
 const ProfilesDisconnectedBanner = ({
   profileId,
   service,
-  translations,
   onReconnectProfileClick,
-  extraMessage,
-}) => (
-  <ErrorBanner
-    title={translations.headline}
-    onClick={() => onReconnectProfileClick({ id: profileId, service })}
-    actionLabel={translations.cta}
-  >
-    {extraMessage && (
-      <ExtraMessageWithStyles type="p">{extraMessage}</ExtraMessageWithStyles>
-    )}
-    <TextWithStyles type="p">{translations.body}</TextWithStyles>
-  </ErrorBanner>
-);
+  displayExtraMessage,
+  canReconnectChannels,
+  ownerEmail,
+}) => {
+  const { t } = useTranslation();
+  return (
+    <ErrorBanner
+      title={t('profiles-disconnected-banner.headline')}
+      onClick={() => onReconnectProfileClick({ id: profileId, service })}
+      actionLabel={
+        canReconnectChannels ? t('profiles-disconnected-banner.cta') : null
+      }
+    >
+      {displayExtraMessage && (
+        <ExtraMessageWithStyles type="p">
+          {t('profiles-disconnected-banner.extraMessage.instagram')}
+        </ExtraMessageWithStyles>
+      )}
+      <TextWithStyles type="p">
+        {canReconnectChannels
+          ? t('profiles-disconnected-banner.body')
+          : t('profiles-disconnected-banner.permissionBody', {
+              email: ownerEmail,
+            })}
+      </TextWithStyles>
+    </ErrorBanner>
+  );
+};
 
 ProfilesDisconnectedBanner.propTypes = {
+  canReconnectChannels: PropTypes.bool,
   profileId: PropTypes.string.isRequired,
   service: PropTypes.string.isRequired,
-  extraMessage: PropTypes.string,
-  translations: PropTypes.shape({
-    headline: PropTypes.string,
-    body: PropTypes.string,
-    cta: PropTypes.string,
-  }).isRequired,
+  displayExtraMessage: PropTypes.bool,
   onReconnectProfileClick: PropTypes.func.isRequired,
+  ownerEmail: PropTypes.string,
 };
 
 ProfilesDisconnectedBanner.defaultProps = {
-  extraMessage: null,
+  displayExtraMessage: false,
+  canReconnectChannels: true,
+  ownerEmail: 'the owner',
 };
 
 export default ProfilesDisconnectedBanner;

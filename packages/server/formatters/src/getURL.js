@@ -17,12 +17,6 @@ module.exports = {
     }
     return 'https://buffer.com/back_publish';
   },
-  getManageURL: () => {
-    if (window.location.hostname === 'publish.local.buffer.com') {
-      return 'https://local.buffer.com/manage';
-    }
-    return 'https://buffer.com/manage';
-  },
   getConnectSocialAccountURL: () => {
     if (window.location.hostname === 'publish.local.buffer.com') {
       return 'https://local.buffer.com/manage/accounts/connect';

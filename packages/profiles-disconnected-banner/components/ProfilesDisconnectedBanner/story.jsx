@@ -12,4 +12,12 @@ storiesOf('ProfilesDisconnectedBanner', module)
       translations={translations['profiles-disconnected-banner']}
       onReconnectProfileClick={action('on-reconnect-click')}
     />
+  ))
+  .add('non admin user', () => (
+    <ProfilesDisconnectedBanner
+      translations={translations['profiles-disconnected-banner']}
+      onReconnectProfileClick={action('on-reconnect-click')}
+      canReconnectChannels={false}
+      ownerEmail="ana@buffer.com"
+    />
   ));

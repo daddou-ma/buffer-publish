@@ -76,6 +76,7 @@ class TabNavigation extends React.Component {
       isDisconnectedProfile,
       draftsNeedApprovalCount,
       draftsCount,
+      canReconnectChannels,
       t,
     } = this.props;
 
@@ -150,7 +151,7 @@ class TabNavigation extends React.Component {
             <Tab tabId="general-settings">{t('tabs.general')}</Tab>
             <Tab tabId="posting-schedule">{t('tabs.postingSchedule')}</Tab>
             {/* Hidding reconnect  button when profile is disconnected, as we have a banner in settings content for that */}
-            {!isDisconnectedProfile && (
+            {!isDisconnectedProfile && canReconnectChannels && (
               <div style={{ display: 'inline-block' }}>
                 <Button
                   type="secondary"
@@ -159,7 +160,9 @@ class TabNavigation extends React.Component {
                   onClick={e => {
                     e.preventDefault();
                     this.setState({ loading: true });
-                    window.location.assign(`${getURL.getManageURL()}`);
+                    window.location.assign(
+                      `${getURL.getManageSocialAccountURL()}`
+                    );
                   }}
                 />
               </div>
@@ -185,9 +188,11 @@ TabNavigation.defaultProps = {
   hasStoriesFlip: false,
   draftsNeedApprovalCount: null,
   draftsCount: null,
+  canReconnectChannels: true,
 };
 
 TabNavigation.propTypes = {
+  canReconnectChannels: PropTypes.bool,
   features: PropTypes.any.isRequired, // eslint-disable-line
   isBusinessAccount: PropTypes.bool,
   isManager: PropTypes.bool,

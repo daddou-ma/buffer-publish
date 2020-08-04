@@ -4,23 +4,22 @@ import ProfilesDisconnectedBanner from './components/ProfilesDisconnectedBanner'
 
 export default connect(
   state => {
-    let extraMessage = null;
+    let displayExtraMessage = false;
     const selectedProfile = state.profileSidebar?.selectedProfile;
-    const translations =
-      state.i18n.translations['profiles-disconnected-banner'];
 
     if (
       selectedProfile?.service === 'instagram' &&
       selectedProfile?.service_type === 'profile'
     ) {
-      extraMessage = translations?.extraMessage?.instagram;
+      displayExtraMessage = true;
     }
 
     return {
       profileId: selectedProfile?.id,
       service: selectedProfile?.service,
-      translations,
-      extraMessage,
+      displayExtraMessage,
+      canReconnectChannels: state.user.canReconnectChannels,
+      ownerEmail: state.organizations.selected?.ownerEmail,
     };
   },
   dispatch => ({
