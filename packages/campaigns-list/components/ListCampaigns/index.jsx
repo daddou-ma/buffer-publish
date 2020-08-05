@@ -55,6 +55,7 @@ const ListCampaigns = ({
   hasCampaignsFlip,
   fetchCampaignsIfNeeded,
   isLoading,
+  ownerEmail,
 }) => {
   if (!hasCampaignsFlip) {
     window.location = getURL.getPublishUrl();
@@ -68,7 +69,13 @@ const ListCampaigns = ({
   const { t } = useTranslation();
 
   if (!isLoading && (!campaigns || campaigns.length === 0)) {
-    return <EmptyState onOpenCreateCampaignClick={onOpenCreateCampaignClick} />;
+    return (
+      <EmptyState
+        onOpenCreateCampaignClick={onOpenCreateCampaignClick}
+        showCampaignActions={showCampaignActions}
+        ownerEmail={ownerEmail}
+      />
+    );
   }
 
   return (
@@ -123,6 +130,7 @@ ListCampaigns.propTypes = {
   hasCampaignsFlip: PropTypes.bool.isRequired,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  ownerEmail: PropTypes.string,
 };
 
 ListCampaigns.defaultProps = {
@@ -131,6 +139,7 @@ ListCampaigns.defaultProps = {
   onDeleteCampaignClick: () => {},
   onViewCampaignClick: () => {},
   goToAnalyzeReport: () => {},
+  ownerEmail: 'the owner',
 };
 
 export default ListCampaigns;

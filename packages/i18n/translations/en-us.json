@@ -49,7 +49,8 @@
       "item3": "Review campaign performance and hit your goals.",
       "learnMore": "Learn More",
       "subtext": "Keep track of multichannel campaigns and create a healthy mix of content on social media.",
-      "title": "Get a clearer picture of your social media strategy"
+      "title": "Get a clearer picture of your social media strategy",
+      "permission": "It looks like your organization doesn't have any campaigns yet, and only admin users can create them. Request access from {{email}} or any other Admin."
     },
     "viewCampaign": {
       "allPostsSent": {

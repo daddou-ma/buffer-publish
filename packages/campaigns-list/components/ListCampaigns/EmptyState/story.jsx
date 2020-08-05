@@ -8,5 +8,15 @@ import EmptyState from './index';
 storiesOf('Campaigns|EmptyState', module)
   .addDecorator(withA11y)
   .add('default', () => (
-    <EmptyState onOpenCreateCampaignClick={action('createCampaign')} />
+    <EmptyState
+      onOpenCreateCampaignClick={action('createCampaign')}
+      showCampaignActions
+    />
+  ))
+  .add('non-admin', () => (
+    <EmptyState
+      onOpenCreateCampaignClick={action('createCampaign')}
+      showCampaignActions={false}
+      ownerEmail="ana@buffer.com"
+    />
   ));
