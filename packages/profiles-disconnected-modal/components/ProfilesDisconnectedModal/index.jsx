@@ -82,7 +82,9 @@ const ProfilesDisconnectedModal = ({
                     <Text>{p.formatted_username}</Text>
                   </AvatarName>
                 </AvatarContainer>
-                {p.isAdmin ? (
+                {p.isAdmin && p.isAdmin === 'false' ? (
+                  <PermissionText type="p">Contact an org admin</PermissionText>
+                ) : (
                   <Button
                     disabled={p.reconnecting}
                     onClick={() =>
@@ -96,8 +98,6 @@ const ProfilesDisconnectedModal = ({
                         : t('profiles-disconnected-modal.cta')
                     }
                   />
-                ) : (
-                  <PermissionText type="p">Contact an org admin</PermissionText>
                 )}
               </DisconnectedProfile>
             ))}
