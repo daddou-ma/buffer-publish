@@ -66,7 +66,7 @@ module.exports = userData => ({
     userData.billing_plan_base === 'pro' ||
     userData.billing_plan_tier === 'solo_premium_business' ||
     userData.billing_plan_tier === 'premium_business',
-  hasAccessTeamPanel: !userData.billing_plan_base === 'free',
+  hasAccessTeamPanel: userData.billing_plan_base !== 'free',
   canStartBusinessTrial: userData.can_start_business_trial,
   canStartProTrial: userData.can_start_pro_trial,
   shouldShowProTrialExpiredModal:
