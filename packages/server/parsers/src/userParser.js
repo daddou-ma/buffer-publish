@@ -19,7 +19,6 @@ module.exports = userData => ({
   week_starts_monday: userData.week_starts_monday,
   twofactor: userData.twofactor,
   profiles_schedules_slots: userData.profiles_schedules_slots,
-  hasNewPublish: userData.in_new_publish_rollout,
   hasEmailNotifications: {
     bufferEmpty: userData.email_notifications.includes('buffer_empty'),
     bufferTips: userData.email_notifications.includes('buffer_tips'),
@@ -34,7 +33,6 @@ module.exports = userData => ({
     ),
     celebrations: userData.email_notifications.includes('celebrations'),
   },
-  showReturnToClassic: userData.has_np_app_switcher,
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
 
   // Deprecated features (to delete)

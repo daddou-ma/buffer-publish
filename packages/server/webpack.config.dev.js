@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const common = require('./webpack.config.common.js');
 
-const publicPath = 'https://local.buffer.com:8080/static/';
+const publicPath = 'https://publish.local.buffer.com:8080/static/';
 
 const merged = merge.strategy({
   plugins: 'prepend',

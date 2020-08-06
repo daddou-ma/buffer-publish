@@ -23,7 +23,6 @@
     "@bufferapp/notifications": "1.9.4",
     "@bufferapp/posts-table": "1.11.0",
     "@bufferapp/profile-loader": "1.9.0",
-    "@bufferapp/publish-initial-loading": "2.0.0",
     "@bufferapp/publish-drafts": "2.0.0",
     "@bufferapp/publish-example": "2.0.0",
     "@bufferapp/publish-general-settings": "2.0.0",
