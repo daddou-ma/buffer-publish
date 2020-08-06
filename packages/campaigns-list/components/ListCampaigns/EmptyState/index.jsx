@@ -37,35 +37,49 @@ const LinkWithStyles = styled(Link)`
   padding: 16px;
 `;
 
-const EmptyState = ({ onOpenCreateCampaignClick }) => {
+const EmptyState = ({
+  onOpenCreateCampaignClick,
+  showCampaignActions,
+  ownerEmail,
+}) => {
   const { t } = useTranslation();
 
   return (
     <EmptyStateContainer>
       <Content>
         <Text type="h1">{t('campaigns.emptyState.title')}</Text>
-        <Text type="p">{t('campaigns.emptyState.subtext')}</Text>
-        <Checklist
-          items={[
-            t('campaigns.emptyState.item1'),
-            t('campaigns.emptyState.item2'),
-            t('campaigns.emptyState.item3'),
-          ]}
-        />
-        <div style={{ alignSelf: 'flex-end', paddingTop: '30px' }}>
-          <Button
-            type="primary"
-            size="large"
-            label={t('campaigns.common.createCampaign')}
-            onClick={onOpenCreateCampaignClick}
-          />
-          <LinkWithStyles
-            href="https://support.buffer.com/hc/en-us/articles/360046266313-creating-and-managing-campaigns"
-            newTab
-          >
-            {t('campaigns.emptyState.learnMore')}
-          </LinkWithStyles>
-        </div>
+        {showCampaignActions ? (
+          <>
+            <Text type="p">{t('campaigns.emptyState.subtext')}</Text>
+            <Checklist
+              items={[
+                t('campaigns.emptyState.item1'),
+                t('campaigns.emptyState.item2'),
+                t('campaigns.emptyState.item3'),
+              ]}
+            />
+            <div style={{ alignSelf: 'flex-end', paddingTop: '30px' }}>
+              <Button
+                type="primary"
+                size="large"
+                label={t('campaigns.common.createCampaign')}
+                onClick={onOpenCreateCampaignClick}
+              />
+              <LinkWithStyles
+                href="https://support.buffer.com/hc/en-us/articles/360046266313-creating-and-managing-campaigns"
+                newTab
+              >
+                {t('campaigns.emptyState.learnMore')}
+              </LinkWithStyles>
+            </div>
+          </>
+        ) : (
+          <Text type="p">
+            {t('campaigns.emptyState.permission', {
+              email: ownerEmail,
+            })}
+          </Text>
+        )}
       </Content>
       <Image
         src="https://buffer-publish.s3.amazonaws.com/images/campaigns-empty-state-screenshot.png"
@@ -77,6 +91,12 @@ const EmptyState = ({ onOpenCreateCampaignClick }) => {
 
 EmptyState.propTypes = {
   onOpenCreateCampaignClick: PropTypes.func.isRequired,
+  showCampaignActions: PropTypes.bool.isRequired,
+  ownerEmail: PropTypes.string,
+};
+
+EmptyState.defaultProps = {
+  ownerEmail: 'the owner',
 };
 
 export default EmptyState;
