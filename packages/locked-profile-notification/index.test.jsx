@@ -19,9 +19,10 @@ const store = storeFake({
     id: 'id1',
     profileLimit: 3,
   },
-  profileSidebar: {
-    selectedProfile: {
-      ownerId: 'id2',
+  organizations: {
+    selected: {
+      isOwner: false,
+      ownerEmail: '',
     },
   },
 });
