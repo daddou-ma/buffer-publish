@@ -22,7 +22,7 @@ const formStyle = {
 };
 
 /* eslint-disable react/prop-types */
-const renderParagraph = ({ type, profileLimit }, paragraph) => {
+const renderParagraph = ({ type, profileLimit, ownerEmail }, paragraph) => {
   let paragraphText;
   const isFirstParagraph = paragraph === 'firstParagraph';
 
@@ -30,7 +30,7 @@ const renderParagraph = ({ type, profileLimit }, paragraph) => {
     case 'teamMember':
       paragraphText = isFirstParagraph
         ? 'Sorry, it looks like the owner of this social account has downgraded from a higher plan.'
-        : 'We’re keeping this account safe and sound until they’re ready to return!';
+        : `We’re keeping this account safe and sound until ${ownerEmail} is ready to return!`;
       break;
     case 'free':
       paragraphText = isFirstParagraph
@@ -103,6 +103,7 @@ const LockedProfileNotification = ({
   isOwner,
   onClickUpgrade,
   profileLimit,
+  ownerEmail,
 }) => {
   const type = selectedLockedType(isOwner, features);
 
@@ -115,7 +116,7 @@ const LockedProfileNotification = ({
         <Text type="h3">Whoops, this social account is locked</Text>
       </div>
       {renderParagraph({ type, profileLimit }, 'firstParagraph')}
-      {renderParagraph({ type }, 'secondParagraph')}
+      {renderParagraph({ type, ownerEmail }, 'secondParagraph')}
       <form style={formStyle}>{renderButton({ type, onClickUpgrade })}</form>
     </Card>
   );
@@ -126,6 +127,11 @@ LockedProfileNotification.propTypes = {
   onClickUpgrade: PropTypes.func,
   profileLimit: PropTypes.number,
   isOwner: PropTypes.bool.isRequired,
+  ownerEmail: PropTypes.string,
+};
+
+LockedProfileNotification.defaultProps = {
+  ownerEmail: 'the owner',
 };
 
 export default WithFeatureLoader(LockedProfileNotification);
