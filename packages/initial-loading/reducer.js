@@ -13,12 +13,12 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const {
-        result: { hasNewPublish, features = [] },
+        result: { hasNewPublish, hasPublishBeta, hasPublishBetaRedirect },
       } = action;
       return {
         loading: false,
-        hasPublishBeta: features.includes('new_publish_beta'),
-        hasPublishBetaRedirect: features.includes('new_publish_beta_redirect'),
+        hasPublishBeta,
+        hasPublishBetaRedirect,
         hasNewPublish,
       };
     }
