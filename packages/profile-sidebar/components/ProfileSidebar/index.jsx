@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
-import { Button, SidebarListItem } from '@bufferapp/ui';
+import { Button, SidebarListItem, Tooltip } from '@bufferapp/ui';
 import TabTag from '@bufferapp/publish-tabs/components/TabTag';
 import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
@@ -97,6 +97,7 @@ const ProfileSidebar = ({
   isSearchPopupVisible,
   // Flags for showing connection shortcut buttons
   canManageSocialAccounts,
+  ownerEmail,
   hasInstagram,
   hasFacebook,
   hasTwitter,
@@ -105,6 +106,20 @@ const ProfileSidebar = ({
   isCampaignsSelected,
 }) => {
   const { t } = useTranslation();
+
+  const ManageAccountsWrapper = ({ children }) =>
+    canManageSocialAccounts ? (
+      <>{children}</>
+    ) : (
+      <Tooltip
+        label={t('profile-sidebar.permissionSubtitle', {
+          email: ownerEmail,
+        })}
+        position="top"
+      >
+        {children}
+      </Tooltip>
+    );
 
   return (
     <ProfileSidebarStyle>
@@ -148,56 +163,61 @@ const ProfileSidebar = ({
         </ProfileListStyle>
       )}
       <ManageSocialAccountsStyle>
-        {canManageSocialAccounts && (
-          <SocialButtonsWrapperStyle>
-            {!hasInstagram && (
-              <ProfileConnectShortcut
-                label={t('profile-sidebar.connectInstagram')}
-                network="instagram"
-                url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
-                profileLimit={profileLimit}
-                profiles={profiles}
-                showSwitchPlanModal={showSwitchPlanModal}
-                goToConnectSocialAccount={goToConnectSocialAccount}
-              />
-            )}
-            {!hasFacebook && (
-              <ProfileConnectShortcut
-                label={t('profile-sidebar.connectFacebook')}
-                network="facebook"
-                url="https://buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1"
-                profileLimit={profileLimit}
-                profiles={profiles}
-                showSwitchPlanModal={showSwitchPlanModal}
-                goToConnectSocialAccount={goToConnectSocialAccount}
-              />
-            )}
-            {!hasTwitter && (
-              <ProfileConnectShortcut
-                label={t('profile-sidebar.connectTwitter')}
-                network="twitter"
-                url="https://buffer.com/oauth/twitter?cta=publish-app-sidebar-addProfile-1"
-                profileLimit={profileLimit}
-                profiles={profiles}
-                showSwitchPlanModal={showSwitchPlanModal}
-                goToConnectSocialAccount={goToConnectSocialAccount}
-              />
-            )}
-            <BottomSectionStyle>
-              <ButtonDividerStyle>
-                <Divider marginTop="1rem" />
-              </ButtonDividerStyle>
+        <SocialButtonsWrapperStyle>
+          {canManageSocialAccounts && (
+            <>
+              {!hasInstagram && (
+                <ProfileConnectShortcut
+                  label={t('profile-sidebar.connectInstagram')}
+                  network="instagram"
+                  url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
+                  profileLimit={profileLimit}
+                  profiles={profiles}
+                  showSwitchPlanModal={showSwitchPlanModal}
+                  goToConnectSocialAccount={goToConnectSocialAccount}
+                />
+              )}
+              {!hasFacebook && (
+                <ProfileConnectShortcut
+                  label={t('profile-sidebar.connectFacebook')}
+                  network="facebook"
+                  url="https://buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1"
+                  profileLimit={profileLimit}
+                  profiles={profiles}
+                  showSwitchPlanModal={showSwitchPlanModal}
+                  goToConnectSocialAccount={goToConnectSocialAccount}
+                />
+              )}
+              {!hasTwitter && (
+                <ProfileConnectShortcut
+                  label={t('profile-sidebar.connectTwitter')}
+                  network="twitter"
+                  url="https://buffer.com/oauth/twitter?cta=publish-app-sidebar-addProfile-1"
+                  profileLimit={profileLimit}
+                  profiles={profiles}
+                  showSwitchPlanModal={showSwitchPlanModal}
+                  goToConnectSocialAccount={goToConnectSocialAccount}
+                />
+              )}
+            </>
+          )}
+          <BottomSectionStyle>
+            <ButtonDividerStyle>
+              <Divider marginTop="1rem" />
+            </ButtonDividerStyle>
+            <ManageAccountsWrapper>
               <Button
                 label={t('profile-sidebar.connectButton')}
                 type="secondary"
                 fullWidth
+                disabled={!canManageSocialAccounts}
                 onClick={() => {
                   onManageSocialAccountClick();
                 }}
               />
-            </BottomSectionStyle>
-          </SocialButtonsWrapperStyle>
-        )}
+            </ManageAccountsWrapper>
+          </BottomSectionStyle>
+        </SocialButtonsWrapperStyle>
       </ManageSocialAccountsStyle>
     </ProfileSidebarStyle>
   );
@@ -222,6 +242,7 @@ ProfileSidebar.propTypes = {
   hasCampaignsFlip: PropTypes.bool,
   isCampaignsSelected: PropTypes.bool,
   onCampaignsButtonClick: PropTypes.func,
+  ownerEmail: PropTypes.string,
 };
 
 ProfileSidebar.defaultProps = {
@@ -237,6 +258,7 @@ ProfileSidebar.defaultProps = {
   canManageSocialAccounts: true,
   hasCampaignsFlip: false,
   isCampaignsSelected: false,
+  ownerEmail: 'the owner',
 };
 
 export default ProfileSidebar;
