@@ -27,6 +27,7 @@ export default hot(
         isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
         hasCampaignsFlip: state.user.hasCampaignsFeature,
         canManageSocialAccounts: state.user.canManageSocialAccounts,
+        ownerEmail: state.organizations.selected?.ownerEmail,
         isCampaignsSelected: !!getMatch({
           pathname: state.router?.location?.pathname,
           route: campaignsPage.route,
