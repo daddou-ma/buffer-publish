@@ -360,7 +360,7 @@
       "textMessage": "Text Message",
       "yourRecoveryCode": "Your Recovery Code",
       "saveOneTimeCode": "Save this one-time recovery code",
-      "recoveryCodeDescription": "With Two Factor Authentication, if you lose your phone there&apos;s a possibility you could get locked out of your account. Save this code in a safe place to use if you can&apos;t log in with your phone."
+      "recoveryCodeDescription": "With Two Factor Authentication, if you lose your phone there's a possibility you could get locked out of your account. Save this code in a safe place to use if you can't log in with your phone."
     },
     "notifications": {
       "title": "Email Notifications",
