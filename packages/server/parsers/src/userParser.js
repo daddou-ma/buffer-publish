@@ -34,6 +34,10 @@ module.exports = userData => ({
     celebrations: userData.email_notifications.includes('celebrations'),
   },
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
+  hasPublishBeta: userData.features.includes('new_publish_beta'),
+  hasPublishBetaRedirect: userData.features.includes(
+    'new_publish_beta_redirect'
+  ),
 
   // Deprecated features (to delete)
   has_simplified_free_plan_ux: false,

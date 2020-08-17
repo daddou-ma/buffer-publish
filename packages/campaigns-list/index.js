@@ -17,6 +17,7 @@ export default connect(
       hideAnalyzeReport: !state.user.canSeeCampaignsReport,
       isLoading: state.campaignsList.isLoading,
       hasCampaignsFlip: state.user.hasCampaignsFeature,
+      ownerEmail: state.organizations.selected?.ownerEmail,
     };
   },
   (dispatch, ownProps) => ({

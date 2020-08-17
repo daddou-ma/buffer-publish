@@ -49,7 +49,8 @@
       "item3": "Review campaign performance and hit your goals.",
       "learnMore": "Learn More",
       "subtext": "Keep track of multichannel campaigns and create a healthy mix of content on social media.",
-      "title": "Get a clearer picture of your social media strategy"
+      "title": "Get a clearer picture of your social media strategy",
+      "permission": "It looks like your organization doesn't have any campaigns yet, and only admin users can create them. Request access from {{email}} or any other Admin."
     },
     "viewCampaign": {
       "allPostsSent": {
@@ -359,7 +360,7 @@
       "textMessage": "Text Message",
       "yourRecoveryCode": "Your Recovery Code",
       "saveOneTimeCode": "Save this one-time recovery code",
-      "recoveryCodeDescription": "With Two Factor Authentication, if you lose your phone there&apos;s a possibility you could get locked out of your account. Save this code in a safe place to use if you can&apos;t log in with your phone."
+      "recoveryCodeDescription": "With Two Factor Authentication, if you lose your phone there's a possibility you could get locked out of your account. Save this code in a safe place to use if you can't log in with your phone."
     },
     "notifications": {
       "title": "Email Notifications",
@@ -404,7 +405,8 @@
     "connectFacebook": "Connect Facebook",
     "connectTwitter": "Connect Twitter",
     "searchProfiles": "Search Profiles",
-    "noProfilesFound": "No Profiles Found"
+    "noProfilesFound": "No Profiles Found",
+    "permissionSubtitle": "It looks like you haven’t been given permission to add/manage social accounts. Request access from {{email}} or any other Admin."
   },
   "profiles-disconnected-banner": {
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",

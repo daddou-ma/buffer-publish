@@ -57,6 +57,6 @@ storiesOf('Locked Profile Notification', module)
   ))
   .add('teamMember', () => (
     <Provider store={storeTeamMember}>
-      <LockedProfileNotification isOwner={false} />
+      <LockedProfileNotification isOwner={false} ownerEmail="ana@buffer.com" />
     </Provider>
   ));
