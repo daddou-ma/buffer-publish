@@ -20,6 +20,22 @@ const Notifications = ({
       <Text type="p">{t('preferences.notifications.description')}</Text>
       <Divider />
       <Notification
+        title={t('preferences.notifications.queue')}
+        description={t('preferences.notifications.queueEmail')}
+        onToggleClick={onToggleClick}
+        toggleisEnabled={queue}
+        type="queue_notifications"
+      />
+      <Divider />
+      <Notification
+        title={t('preferences.notifications.newsletter')}
+        description={t('preferences.notifications.newsletterEmail')}
+        onToggleClick={onToggleClick}
+        toggleisEnabled={newsletter}
+        type="newsletter_notifications"
+      />
+      <Divider />
+      <Notification
         title={t('preferences.notifications.collaboration')}
         description={t('preferences.notifications.collaborationEmail')}
         onToggleClick={onToggleClick}
@@ -28,24 +44,8 @@ const Notifications = ({
       />
       <Divider />
       <Notification
-        title={t('preferences.notifications.newsletter')}
-        description={t('preferences.notifications.newsletterEmail')}
-        onToggleClick={onToggleClick}
-        toggleisEnabled={queue}
-        type="queue_notifications"
-      />
-      <Divider />
-      <Notification
-        title={t('preferences.notifications.updateFailures')}
-        description={t('preferences.notifications.updateFailuresEmail')}
-        onToggleClick={onToggleClick}
-        toggleisEnabled={newsletter}
-        type="newsletter_notifications"
-      />
-      <Divider />
-      <Notification
-        title={t('preferences.notifications.updateSuccesses')}
-        description={t('preferences.notifications.updateSuccessesEmail')}
+        title={t('preferences.notifications.celebrations')}
+        description={t('preferences.notifications.celebrationsEmail')}
         onToggleClick={onToggleClick}
         toggleisEnabled={milestones}
         type="milestones_notifications"
