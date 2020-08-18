@@ -19,7 +19,6 @@ export default connect(
     },
     bannerOptions: state.appShell.bannerOptions,
     bannerKey: state.appShell.bannerKey,
-    showReturnToClassic: state.user.showReturnToClassic,
     showSwitchPlan: state.user.showUpgradeToProCta,
     showManageTeam: state.user.hasAccessTeamPanel,
     hideAppShell:

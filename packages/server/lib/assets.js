@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { join } = require('path');
 
-const WEBPACK_DEV_SERVER_URI = 'https://local.buffer.com:8080/static';
+const WEBPACK_DEV_SERVER_URI = 'https://publish.local.buffer.com:8080/static';
 
 /**
  * Paths to webpack dev server assets.

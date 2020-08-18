@@ -46,7 +46,6 @@ const helpMenuItems = t => {
 };
 
 function generateUserMenuItems({
-  showReturnToClassic,
   showSwitchPlan,
   returnToClassic,
   switchPlan,
@@ -88,9 +87,6 @@ function generateUserMenuItems({
   const extraItems = [];
   if (showManageTeam) {
     extraItems.push(userMenuItems.manageTeam);
-  }
-  if (showReturnToClassic) {
-    extraItems.push(userMenuItems.returnToClassic);
   }
   if (showSwitchPlan) {
     extraItems.push(userMenuItems.switchPlan);
@@ -140,7 +136,6 @@ const generateOrgSwitcherItems = ({
 const AppShell = ({
   children,
   user,
-  showReturnToClassic,
   showSwitchPlan,
   showManageTeam,
   returnToClassic,
@@ -175,7 +170,6 @@ const AppShell = ({
       user={{
         ...user,
         menuItems: generateUserMenuItems({
-          showReturnToClassic,
           showSwitchPlan,
           showManageTeam,
           returnToClassic,
@@ -207,7 +201,6 @@ const AppShell = ({
 
 AppShell.propTypes = {
   children: PropTypes.node.isRequired,
-  showReturnToClassic: PropTypes.bool,
   showSwitchPlan: PropTypes.bool,
   showManageTeam: PropTypes.bool,
   returnToClassic: PropTypes.func.isRequired,
@@ -253,7 +246,6 @@ AppShell.propTypes = {
 
 AppShell.defaultProps = {
   canSeeOrgSwitcher: false,
-  showReturnToClassic: false,
   showSwitchPlan: false,
   showManageTeam: false,
   bannerOptions: null,
