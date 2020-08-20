@@ -20,7 +20,7 @@ resources:
     memory: 256Mi
   requests:
     cpu: 150m
-    memory: 70Mi
+    memory: 80Mi
 extraMainContainerValues:
   livenessProbe:
     httpGet:
