@@ -7,7 +7,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import AppPages from '@bufferapp/publish-app-pages';
 import AppShell from '@bufferapp/publish-app-shell';
 import Notifications from '@bufferapp/notifications';
-import InitialLoading from '@bufferapp/publish-initial-loading';
 import AppModals from '@bufferapp/publish-modals';
 import CTABanner from '@bufferapp/publish-cta-banner';
 import TemporaryBanner from '@bufferapp/publish-temporary-banner';
@@ -41,9 +40,7 @@ class App extends Component {
           <div style={contentStyle}>
             <CTABanner />
             <TemporaryBanner />
-            <InitialLoading>
-              <AppPagesWithRouter />
-            </InitialLoading>
+            <AppPagesWithRouter />
           </div>
         </AppShell>
         <Notifications />

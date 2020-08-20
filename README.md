@@ -69,16 +69,7 @@ To get started on local development and testing:
    ```
      While you're waiting for the bundle to finish, head on over to https://local.buffer.com to login. (We're not quite ready to view Publish yet.)
 
-7. **Give yourself the correct feature flip**
-  In order to view Buffer Publish your user (usually admin@bufferapp.com for local dev)
- must have the _New Buffer Publish_ feature flip. Otherwise you'll just get redirected back to classic Buffer. To add the feature visit https://local.buffer.com/admin and browse to the _My Account_ page.
-
-   If you don't have the feature flip available, then you should probably pull down all the feature flips from production first:
-   ```bash
-   # in ~/buffer-dev
-   $ ./dev sync features
-   ```
-8. You should now be able to visit https://publish.local.buffer.com — party time! 🎉 🙌
+7. You should now be able to visit https://publish.local.buffer.com — party time! 🎉 🙌
 
 ### Troubleshooting Dev Environment Issues
 
