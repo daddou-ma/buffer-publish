@@ -4,23 +4,23 @@ namespace: buffer
 replicaCount: 10
 deploymentUrl: "publish.buffer.com"
 chart: "buffercharts/buffer-service"
-chartVersion: "1.1.1"
+chartVersion: "1.2.0"
 cdEnabled: true
 cdBranchEnabled: true
 dockerfile: Dockerfile
 channel: eng-proj-kuberdash
 clusterName: "kubeeast"
+latencySensitive: true
 image:
   repository: bufferapp/buffer-publish # Override with the docker image
   tag: latest # this will be overriden by the build process
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 resources:
   limits:
-    cpu: 400m
-    memory: 512Mi
+    memory: 256Mi
   requests:
-    cpu: 200m
-    memory: 50Mi
+    cpu: 150m
+    memory: 80Mi
 extraMainContainerValues:
   livenessProbe:
     httpGet:
