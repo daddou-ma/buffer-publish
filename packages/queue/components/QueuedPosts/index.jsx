@@ -16,6 +16,7 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueuePausedBar from '../QueuePausedBar';
 import RemindersBanner from '../RemindersBanner';
+import RetiringProfileBanner from '../RetiringProfileBanner';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -74,6 +75,8 @@ const QueuedPosts = ({
   fetchCampaignsIfNeeded,
   shouldDisplaySingleSlots,
   preserveComposerStateOnClose,
+  shouldDisplayRemindersBanner,
+  shouldDisplayRetiringProfileBanner,
 }) => {
   if (loading) {
     return (
@@ -101,81 +104,78 @@ const QueuedPosts = ({
 
   return (
     <ErrorBoundary>
-      <div>
-        {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
-        {!isDisconnectedProfile &&
-          !hasPushNotifications &&
-          isInstagramProfile &&
-          hasAtLeastOneReminderPost && (
-            <RemindersBanner onSetRemindersClick={onSetRemindersClick} />
-          )}
-        <div style={topBarContainerStyle}>
-          <div style={composerStyle}>
-            {showComposer && !editMode && (
-              <ComposerPopover
-                onSave={onComposerCreateSuccess}
-                preserveComposerStateOnClose={preserveComposerStateOnClose}
-                type="queue"
-                onComposerOverlayClick={onComposerOverlayClick}
-                editMode={editMode}
-              />
-            )}
-            <ComposerInput
-              onPlaceholderClick={onComposerPlaceholderClick}
-              placeholder="What would you like to share?"
+      {/* temporary banner for retiring IG personal profiles. Will remove in October */}
+      {shouldDisplayRetiringProfileBanner && <RetiringProfileBanner />}
+      {shouldDisplayDisconnectedBanner && <ProfilesDisconnectedBanner />}
+      {shouldDisplayRemindersBanner && (
+        <RemindersBanner onSetRemindersClick={onSetRemindersClick} />
+      )}
+      <div style={topBarContainerStyle}>
+        <div style={composerStyle}>
+          {showComposer && !editMode && (
+            <ComposerPopover
+              onSave={onComposerCreateSuccess}
+              preserveComposerStateOnClose={preserveComposerStateOnClose}
+              type="queue"
+              onComposerOverlayClick={onComposerOverlayClick}
+              editMode={editMode}
             />
-          </div>
+          )}
+          <ComposerInput
+            onPlaceholderClick={onComposerPlaceholderClick}
+            placeholder="What would you like to share?"
+          />
         </div>
-        {isInstagramProfile && !isInstagramBusiness && (
-          <InstagramDirectPostingBanner
-            onDirectPostingClick={onDirectPostingClick}
-          />
-        )}
-        {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
-        {!!paused && (
-          <QueuePausedBar
-            isManager={isManager}
-            handleClickUnpause={onUnpauseClick}
-          />
-        )}
-        {showEmptyQueueMessage && (
-          <EmptyState
-            title="It looks like you haven't got any posts in your queue!"
-            subtitle="Click the box above to add a post to your queue :)"
-            heroImg="https://s3.amazonaws.com/buffer-publish/images/fresh-queue%402x.png"
-            heroImgSize={{ width: '229px', height: '196px' }}
-          />
-        )}
-        {showComposer && editMode && (
-          <ComposerPopover
-            onSave={onComposerCreateSuccess}
-            type="queue"
-            onComposerOverlayClick={onComposerOverlayClick}
-            editMode={editMode}
-          />
-        )}
-        <QueueItems
-          items={items}
-          subprofiles={subprofiles}
-          onCalendarClick={onCalendarClick}
-          onRequeueClick={onRequeueClick}
-          onDeleteConfirmClick={onDeleteConfirmClick}
-          onEditClick={onEditClick}
-          onEmptySlotClick={onEmptySlotClick}
-          onShareNowClick={onShareNowClick}
-          onDropPost={onDropPost}
-          onSwapPosts={onSwapPosts}
-          draggable={draggingEnabled}
-          hasFirstCommentFlip={hasFirstCommentFlip}
-          hasPushNotifications={hasPushNotifications}
-          onSetRemindersClick={onSetRemindersClick}
-          isBusinessAccount={isBusinessAccount}
-          onCampaignTagClick={onCampaignTagClick}
-          hasCampaignsFeature={hasCampaignsFeature}
-          shouldRenderCalendarButtons
-          pinned={!shouldDisplaySingleSlots}
-        />
       </div>
+      {isInstagramProfile && !isInstagramBusiness && (
+        <InstagramDirectPostingBanner
+          onDirectPostingClick={onDirectPostingClick}
+        />
+      )}
+      {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
+      {!!paused && (
+        <QueuePausedBar
+          isManager={isManager}
+          handleClickUnpause={onUnpauseClick}
+        />
+      )}
+      {showEmptyQueueMessage && (
+        <EmptyState
+          title="It looks like you haven't got any posts in your queue!"
+          subtitle="Click the box above to add a post to your queue :)"
+          heroImg="https://s3.amazonaws.com/buffer-publish/images/fresh-queue%402x.png"
+          heroImgSize={{ width: '229px', height: '196px' }}
+        />
+      )}
+      {showComposer && editMode && (
+        <ComposerPopover
+          onSave={onComposerCreateSuccess}
+          type="queue"
+          onComposerOverlayClick={onComposerOverlayClick}
+          editMode={editMode}
+        />
+      )}
+      <QueueItems
+        items={items}
+        subprofiles={subprofiles}
+        onCalendarClick={onCalendarClick}
+        onRequeueClick={onRequeueClick}
+        onDeleteConfirmClick={onDeleteConfirmClick}
+        onEditClick={onEditClick}
+        onEmptySlotClick={onEmptySlotClick}
+        onShareNowClick={onShareNowClick}
+        onDropPost={onDropPost}
+        onSwapPosts={onSwapPosts}
+        draggable={draggingEnabled}
+        hasFirstCommentFlip={hasFirstCommentFlip}
+        hasPushNotifications={hasPushNotifications}
+        onSetRemindersClick={onSetRemindersClick}
+        isBusinessAccount={isBusinessAccount}
+        onCampaignTagClick={onCampaignTagClick}
+        hasCampaignsFeature={hasCampaignsFeature}
+        shouldRenderCalendarButtons
+        pinned={!shouldDisplaySingleSlots}
+      />
     </ErrorBoundary>
   );
 };
