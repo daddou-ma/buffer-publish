@@ -24,7 +24,7 @@ const Notifications = ({
         description={t('preferences.notifications.queueEmail')}
         onToggleClick={onToggleClick}
         toggleIsEnabled={queue}
-        type="queue_notifications"
+        type="queueNotifications"
       />
       <Divider />
       <Notification
@@ -32,7 +32,7 @@ const Notifications = ({
         description={t('preferences.notifications.newsletterEmail')}
         onToggleClick={onToggleClick}
         toggleIsEnabled={newsletter}
-        type="newsletter_notifications"
+        type="newsletterNotifications"
       />
       <Divider />
       <Notification
@@ -40,7 +40,7 @@ const Notifications = ({
         description={t('preferences.notifications.collaborationEmail')}
         onToggleClick={onToggleClick}
         toggleIsEnabled={collaboration}
-        type="collaboration_notifications"
+        type="collaborationNotifications"
       />
       <Divider />
       <Notification
@@ -48,7 +48,7 @@ const Notifications = ({
         description={t('preferences.notifications.celebrationsEmail')}
         onToggleClick={onToggleClick}
         toggleIsEnabled={milestones}
-        type="milestones_notifications"
+        type="milestonesNotifications"
       />
     </div>
   );

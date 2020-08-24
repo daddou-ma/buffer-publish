@@ -4,10 +4,10 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
-    collaboration: state.accountNotifications.collaboration,
-    queue: state.accountNotifications.queue,
-    newsletter: state.accountNotifications.newsletter,
-    milestones: state.accountNotifications.milestones,
+    collaboration: state.accountNotifications.collaborationNotifications,
+    queue: state.accountNotifications.queueNotifications,
+    newsletter: state.accountNotifications.newsletterNotifications,
+    milestones: state.accountNotifications.milestonesNotifications,
   }),
   dispatch => ({
     onToggleClick: (newToggleValue, type) => {

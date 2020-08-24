@@ -20,15 +20,17 @@ module.exports = userData => ({
   twofactor: userData.twofactor,
   profiles_schedules_slots: userData.profiles_schedules_slots,
   hasEmailNotifications: {
-    collaboration: userData.email_notifications.includes(
-      'collaboration_notifications'
+    collaborationNotifications: userData.email_notifications.includes(
+      'collaborationNotifications'
     ),
-    queue: userData.email_notifications.includes('queue_notifications'),
-    newsletter: userData.email_notifications.includes(
-      'newsletter_notifications'
+    queueNotifications: userData.email_notifications.includes(
+      'queueNotifications'
     ),
-    milestones: userData.email_notifications.includes(
-      'milestones_notifications'
+    newsletterNotifications: userData.email_notifications.includes(
+      'newsletterNotifications'
+    ),
+    milestonesNotifications: userData.email_notifications.includes(
+      'milestonesNotifications'
     ),
   },
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
