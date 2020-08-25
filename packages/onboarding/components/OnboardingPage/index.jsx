@@ -72,7 +72,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'instagram',
-                  'https://buffer.com/oauth/instagram',
+                  'https://buffer.com/oauth/instagram/choose_business?cta=publish-app-onboarding-addProfile-1',
                   onConnectSocialAccountClick
                 )
               }
@@ -82,7 +82,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'facebook',
-                  'https://buffer.com/oauth/facebook/choose',
+                  'https://buffer.com/oauth/facebook/choose?cta=publish-app-onboarding-addProfile-1',
                   onConnectSocialAccountClick
                 )
               }
@@ -92,7 +92,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'twitter',
-                  'https://buffer.com/oauth/twitter',
+                  'https://buffer.com/oauth/twitter?cta=publish-app-onboarding-addProfile-1',
                   onConnectSocialAccountClick
                 )
               }
@@ -105,7 +105,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'linkedin',
-                  'https://buffer.com/oauth/linkedin',
+                  'https://buffer.com/oauth/linkedin?cta=publish-app-onboarding-addProfile-1',
                   onConnectSocialAccountClick
                 )
               }
@@ -117,7 +117,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'pinterest',
-                  'https://buffer.com/oauth/pinterest',
+                  'https://buffer.com/oauth/pinterest?cta=publish-app-onboarding-addProfile-1',
                   onConnectSocialAccountClick
                 )
               }

@@ -170,7 +170,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectInstagram')}
                   network="instagram"
-                  url="https://buffer.com/oauth/instagram?cta=publish-app-sidebar-addProfile-1"
+                  url="https://local.buffer.com/oauth/instagram/choose_business?cta=publish-app-sidebar-addProfile-1"
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
