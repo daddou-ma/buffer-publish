@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, ProgressBar, SocialButton } from '@bufferapp/ui';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import {
   Wrapper,
@@ -72,7 +73,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'instagram',
-                  'https://buffer.com/oauth/instagram/choose_business?cta=publish-app-onboarding-addProfile-1',
+                  `https://${getURL.getBaseURL()}/oauth/instagram/choose_business?cta=publish-app-onboarding-addProfile-1`,
                   onConnectSocialAccountClick
                 )
               }
@@ -82,7 +83,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'facebook',
-                  'https://buffer.com/oauth/facebook/choose?cta=publish-app-onboarding-addProfile-1',
+                  `https://${getURL.getBaseURL()}/oauth/facebook/choose?cta=publish-app-onboarding-addProfile-1`,
                   onConnectSocialAccountClick
                 )
               }
@@ -92,7 +93,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'twitter',
-                  'https://buffer.com/oauth/twitter?cta=publish-app-onboarding-addProfile-1',
+                  `https://${getURL.getBaseURL()}/oauth/twitter?cta=publish-app-onboarding-addProfile-1`,
                   onConnectSocialAccountClick
                 )
               }
@@ -105,7 +106,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'linkedin',
-                  'https://buffer.com/oauth/linkedin?cta=publish-app-onboarding-addProfile-1',
+                  `https://${getURL.getBaseURL()}/oauth/linkedin?cta=publish-app-onboarding-addProfile-1`,
                   onConnectSocialAccountClick
                 )
               }
@@ -117,7 +118,7 @@ const OnboardingPage = ({
               onClick={() =>
                 handleConnectSocialAccountClick(
                   'pinterest',
-                  'https://buffer.com/oauth/pinterest?cta=publish-app-onboarding-addProfile-1',
+                  `https://${getURL.getBaseURL()}/oauth/pinterest?cta=publish-app-onboarding-addProfile-1`,
                   onConnectSocialAccountClick
                 )
               }
