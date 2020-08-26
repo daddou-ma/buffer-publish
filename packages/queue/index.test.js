@@ -3,8 +3,10 @@ import {
   render,
   screen,
   waitFor,
+  cleanup,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 import { getTime } from '@bufferapp/publish-utils/date';
 import {
   buildUser,
@@ -19,6 +21,7 @@ import RPCClient from '@bufferapp/micro-rpc-client';
 import '@bufferapp/publish-web/components/i18n';
 
 import QueuedPosts from './index';
+import RetiringProfileBanner from './components/RetiringProfileBanner/index';
 
 const profile = buildProfile();
 const initialState = {
@@ -183,5 +186,11 @@ describe('QueuedPosts | user interaction', () => {
       updateId: post1.id,
     });
     expect(rpcCall).toHaveBeenCalledTimes(2);
+  });
+  test('a11y | retiring IG profile banner is accessible', async () => {
+    const { container } = render(<RetiringProfileBanner />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+    cleanup();
   });
 });
