@@ -418,9 +418,9 @@
     "headline": "Uh-oh, we've lost access to this account! Let's reconnect."
   },
   "retiring-profile-banner": {
-    "body": "Please switch to a Business Account to ensure uninterrupted service.",
-    "action": "Learn how to switch to business",
-    "title": "Starting in October we'll no longer support personal Instagram profiles."
+    "title": "From October 2020 we’ll no longer be able to support your personal Instagram profile.",
+    "body": "Please convert it to a business account to keep it connected to Buffer. There’s no extra cost and it only takes a few minutes.",
+    "action": "Learn how to switch to business"
   },
   "profiles-disconnected-modal": {
     "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these accounts you will need to reconnect them.",

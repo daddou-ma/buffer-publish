@@ -1,7 +1,12 @@
 import React from 'react';
 import { Text } from '@bufferapp/ui';
 import { ErrorBanner } from '@bufferapp/publish-shared-components';
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+
+const StyledText = styled(Text)`
+  margin: 0;
+`;
 
 const RetiringProfileBanner = () => {
   const { t } = useTranslation();
@@ -13,7 +18,7 @@ const RetiringProfileBanner = () => {
       onClick={() => window.location.assign(supportURL)}
       actionLabel={t('retiring-profile-banner.action')}
     >
-      <Text>{t('retiring-profile-banner.body')}</Text>
+      <StyledText type="p">{t('retiring-profile-banner.body')}</StyledText>
     </ErrorBanner>
   );
 };
