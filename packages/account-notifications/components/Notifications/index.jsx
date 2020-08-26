@@ -28,19 +28,19 @@ const Notifications = ({
       />
       <Divider />
       <Notification
-        title={t('preferences.notifications.newsletter')}
-        description={t('preferences.notifications.newsletterEmail')}
-        onToggleClick={onToggleClick}
-        toggleIsEnabled={newsletter}
-        type="newsletterNotifications"
-      />
-      <Divider />
-      <Notification
         title={t('preferences.notifications.collaboration')}
         description={t('preferences.notifications.collaborationEmail')}
         onToggleClick={onToggleClick}
         toggleIsEnabled={collaboration}
         type="collaborationNotifications"
+      />
+      <Divider />
+      <Notification
+        title={t('preferences.notifications.newsletter')}
+        description={t('preferences.notifications.newsletterEmail')}
+        onToggleClick={onToggleClick}
+        toggleIsEnabled={newsletter}
+        type="newsletterNotifications"
       />
       <Divider />
       <Notification
