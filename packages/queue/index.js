@@ -52,6 +52,11 @@ export default connect(
       };
     }
     if (queue && profileData) {
+      const { isDisconnected } = state.profileSidebar.selectedProfile;
+      const isInstagramProfile = profileData.type === 'instagram';
+      const shouldDisplayRetiringProfileBanner =
+        isInstagramProfile && !profileData.isInstagramBusiness;
+
       return {
         preserveComposerStateOnClose: state.queue.preserveComposerStateOnClose,
         loading: queue.loading,
@@ -81,22 +86,28 @@ export default connect(
         editMode: state.queue.editMode,
         editingPostId: state.queue.editingPostId,
         subprofiles: profileData.subprofiles || [],
-        isInstagramProfile: profileData.type === 'instagram',
+        isInstagramProfile,
         isInstagramBusiness: profileData.isInstagramBusiness,
         paused: profileData.paused,
         isManager: profileData.isManager,
         isBusinessAccount: profileData.business,
         hasPushNotifications: profileData.hasPushNotifications,
-        hasAtLeastOneReminderPost,
         showInstagramDirectPostingModal:
           state.modals.showInstagramDirectPostingModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
         isInstagramLoading: state.queue.isInstagramLoading,
-        isDisconnectedProfile:
-          state.profileSidebar.selectedProfile.isDisconnected,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
         hasCampaignsFeature: state.user.hasCampaignsFeature,
         shouldDisplaySingleSlots,
+        shouldDisplayDisconnectedBanner:
+          !shouldDisplayRetiringProfileBanner && isDisconnected,
+        shouldDisplayRetiringProfileBanner,
+        shouldDisplayRemindersBanner:
+          !shouldDisplayRetiringProfileBanner &&
+          !isDisconnected &&
+          !profileData.hasPushNotifications &&
+          isInstagramProfile &&
+          hasAtLeastOneReminderPost,
       };
     }
     return {
