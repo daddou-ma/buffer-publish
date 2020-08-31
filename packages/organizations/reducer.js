@@ -6,9 +6,7 @@ export const actionTypes = keyWrapper('ORGS', {
   SET_CURRENT_ORGANIZATION: 0,
 });
 
-const orgData = window?.bufferData?.organizations;
-
-export default (state = orgData || {}, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case actionTypes.INITIALIZED: {
       const { organizations, selectedOrganization } = action;
