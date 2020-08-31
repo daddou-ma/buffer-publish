@@ -96,10 +96,10 @@ function generateUserMenuItems({
 
 const generateOrgSwitcherItems = ({
   canSeeOrgSwitcher,
-  organizations,
   selectedOrganizationId,
-  profiles,
   switchOrganization,
+  organizations = [],
+  profiles = [],
 }) => {
   /**
    * Only show if user has feature and 2+ organizations

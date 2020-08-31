@@ -21,6 +21,7 @@ export const initialState = {
   profiles: [],
   selectedProfileId: '',
   loading: false,
+  loaded: false,
   selectedProfile: {},
   isLockedProfile: false,
   isBusinessAccount: false,
@@ -159,6 +160,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        loaded: true,
         profileList: action.result,
         profiles: filterProfilesByOrg(
           action.result,

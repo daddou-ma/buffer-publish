@@ -14,8 +14,8 @@ import AppShell from './components/AppShell';
 export default connect(
   state => ({
     user: {
-      email: state.user.email,
-      name: state.user.name,
+      email: state.user.email || '...',
+      name: state.user.name || '...',
     },
     bannerOptions: state.appShell.bannerOptions,
     bannerKey: state.appShell.bannerKey,
@@ -33,7 +33,7 @@ export default connect(
     canSeeOrgSwitcher: state.user.canSeeOrgSwitcher,
     organizations: getOrgsAlfabeticalOrder(state.organizations.list) || [],
     selectedOrganizationId: state.organizations.selected?.id,
-    profiles: state.publishProfiles,
+    profiles: state.profileSidebar.profileList,
     isImpersonation: state.appShell.isImpersonation,
   }),
 

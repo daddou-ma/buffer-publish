@@ -6,13 +6,14 @@ export const actionTypes = keyWrapper('ORGS', {
   SET_CURRENT_ORGANIZATION: 0,
 });
 
-export default (state = {}, action) => {
+export default (state = { loaded: false }, action) => {
   switch (action.type) {
     case actionTypes.INITIALIZED: {
       const { organizations, selectedOrganization } = action;
       return {
         list: organizations,
         selected: selectedOrganization,
+        loaded: true,
       };
     }
     case actionTypes.ORGANIZATION_SELECTED: {
