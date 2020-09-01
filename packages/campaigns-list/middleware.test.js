@@ -8,41 +8,22 @@ describe('middleware', () => {
   const next = jest.fn();
   const orgSelectedAction = {
     type: orgActionTypes.ORGANIZATION_SELECTED,
-    selected: { globalOrgId: '123' },
+    selected: { globalOrgId: '123', hasCampaignsFeature: true },
   };
   it('exports middleware', () => {
     expect(middleware).toBeDefined();
   });
 
-  it('fetches getCampaignsList if org is selected and has org-switcher and campaign features', () => {
+  it('fetches getCampaignsList if org is selected and has campaign feature', () => {
     const store = {
       dispatch: jest.fn(),
       getState: () => ({
         campaignsList: initialState,
-        user: { hasCampaignsFeature: true, hasOrgSwitcherFeature: true },
       }),
     };
     middleware(store)(next)(orgSelectedAction);
     expect(next).toBeCalledWith(orgSelectedAction);
     expect(store.dispatch).toBeCalledWith(
-      dataFetchActions.fetch({
-        name: 'getCampaignsList',
-        args: { globalOrgId: '123' },
-      })
-    );
-  });
-
-  it('does not fetch getCampaignsList if org is selected and does not have org-switcher feature', () => {
-    const store = {
-      dispatch: jest.fn(),
-      getState: () => ({
-        campaignsList: initialState,
-        user: { hasCampaignsFeature: true },
-      }),
-    };
-    middleware(store)(next)(orgSelectedAction);
-    expect(next).toBeCalledWith(orgSelectedAction);
-    expect(store.dispatch).not.toBeCalledWith(
       dataFetchActions.fetch({
         name: 'getCampaignsList',
         args: { globalOrgId: '123' },

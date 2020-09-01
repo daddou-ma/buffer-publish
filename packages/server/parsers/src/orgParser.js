@@ -17,4 +17,7 @@ module.exports = orgData => ({
   isAdmin: orgData.isAdmin,
   isOwner: orgData.isOwner,
   trial: orgData.trial,
+
+  // Plan Features
+  hasCampaignsFeature: orgData.planBase !== 'free',
 });

@@ -11,9 +11,8 @@ export default ({ dispatch, getState }) => next => action => {
   const state = getState();
   switch (action.type) {
     case orgActionTypes.ORGANIZATION_SELECTED: {
-      const { hasCampaignsFeature, hasOrgSwitcherFeature } = state.user;
-      if (hasOrgSwitcherFeature && hasCampaignsFeature) {
-        const { globalOrgId } = action.selected;
+      const { globalOrgId, hasCampaignsFeature } = action.selected;
+      if (hasCampaignsFeature) {
         dispatch(
           dataFetchActions.fetch({
             name: 'getCampaignsList',
