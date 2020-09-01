@@ -50,7 +50,6 @@ const buildUser = build('User', {
     hasTwentyFourHourTimeFormat: false,
     showBusinessTrialistsOnboarding: false,
     hasUserTagFeature: true,
-    hasIGDirectVideoFlip: true,
     canStartProTrial: true,
     canModifyCampaigns: true,
     canSeeCampaignsReport: true,

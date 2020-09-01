@@ -158,7 +158,6 @@ const getNewUserData = data => ({
   profilesSchedulesSlots: data.profilesSchedulesSlots,
   onNewPublish: data.onNewPublish,
   hasSimplifiedFreePlanUX: data.hasSimplifiedFreePlanUX,
-  hasIGDirectVideoFlip: data.hasIGDirectVideoFlip,
   canStartProTrial: data.canStartProTrial,
   hasShopgridFlip: data.hasShopgridFlip,
   hasCampaignsFlip: data.hasCampaignsFlip,

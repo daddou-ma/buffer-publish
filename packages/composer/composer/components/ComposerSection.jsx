@@ -35,7 +35,6 @@ const ComposerComponent = ({
   shouldShowInlineSubprofileDropdown,
   composerPosition,
   canStartProTrial,
-  hasIGDirectVideoFlip,
   hasShopgridFlip,
   hasUserTagFeature,
   isFreeUser,
@@ -80,7 +79,6 @@ const ComposerComponent = ({
       composerPosition={composerPosition}
       forceEditorFocus={forceEditorInstanceFocus}
       canStartProTrial={canStartProTrial}
-      hasIGDirectVideoFlip={hasIGDirectVideoFlip}
       hasShopgridFlip={hasShopgridFlip}
       hasUserTagFeature={hasUserTagFeature}
       isFreeUser={isFreeUser}
@@ -121,7 +119,6 @@ class ComposerSection extends React.Component {
       shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled,
       composerPosition,
-      hasIGDirectVideoFlip,
       isFreeUser,
       isBusinessUser,
       canStartProTrial,
@@ -175,7 +172,6 @@ class ComposerSection extends React.Component {
               shouldShowInlineSubprofileDropdown,
               composerPosition,
               canStartProTrial,
-              hasIGDirectVideoFlip,
               hasShopgridFlip,
               hasUserTagFeature,
               isFreeUser,
@@ -206,7 +202,6 @@ class ComposerSection extends React.Component {
                 shouldShowInlineSubprofileDropdown,
                 composerPosition,
                 canStartProTrial,
-                hasIGDirectVideoFlip,
                 hasShopgridFlip,
                 hasUserTagFeature,
                 isFreeUser,
@@ -231,7 +226,6 @@ ComposerSection.propTypes = {
   isOmniboxEnabled: PropTypes.bool,
   composerPosition: PropTypes.object,
   canStartProTrial: PropTypes.bool.isRequired,
-  hasIGDirectVideoFlip: PropTypes.bool.isRequired,
   isFreeUser: PropTypes.bool.isRequired,
   hasShopgridFlip: PropTypes.bool,
   hasUserTagFeature: PropTypes.bool,
