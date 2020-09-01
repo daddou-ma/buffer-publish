@@ -92,7 +92,6 @@ class App extends React.Component {
       isFreeUser: PropTypes.bool.isRequired,
       hasCampaignsFlip: PropTypes.bool.isRequired,
       hasUserTagFeature: PropTypes.bool.isRequired,
-      hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
       hasIGDirectVideoFlip: PropTypes.bool.isRequired,
       isBusinessUser: PropTypes.bool.isRequired,
       shouldAlwaysSkipEmptyTextAlert: PropTypes.bool.isRequired,
@@ -221,7 +220,6 @@ class App extends React.Component {
     userData: {
       profileSchedulesSlots: undefined,
       onNewPublish: false,
-      hasIGLocationTaggingFeature: false,
       canStartProTrial: false,
       hasIGDirectVideoFlip: false,
       hasCampaignsFlip: false,

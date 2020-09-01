@@ -57,7 +57,6 @@ const buildUser = build('User', {
     week_starts_monday: true,
     skip_empty_text_alert: false,
     has_simplified_free_plan_ux: false,
-    hasIGLocationTaggingFeature: true,
     profileLimit: 50,
     s3_upload_signature: {
       algorithm: '',

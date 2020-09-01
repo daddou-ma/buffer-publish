@@ -163,7 +163,6 @@ class Composer extends React.Component {
       left: PropTypes.number,
       right: PropTypes.number,
     }),
-    hasIGLocationTaggingFeature: PropTypes.bool,
     canStartProTrial: PropTypes.bool,
     hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
@@ -176,7 +175,6 @@ class Composer extends React.Component {
   static defaultProps = {
     children: null,
     composerPosition: null,
-    hasIGLocationTaggingFeature: false,
     canStartProTrial: false,
     hasIGDirectVideoFlip: false,
     hasUserTagFeature: false,
@@ -656,7 +654,6 @@ class Composer extends React.Component {
       children,
       shouldShowInlineSubprofileDropdown,
       composerPosition,
-      hasIGLocationTaggingFeature,
       hasIGDirectVideoFlip,
       hasUserTagFeature,
       hasShopgridFlip,
@@ -1220,7 +1217,6 @@ class Composer extends React.Component {
                 withMediaAttachment={!usesImageFirstLayout}
                 selectedProfiles={selectedProfiles}
                 isInstagram={this.isInstagram()}
-                hasIGLocationTaggingFeature={hasIGLocationTaggingFeature}
                 hasIGDirectVideoFlip={hasIGDirectVideoFlip}
                 hasVideo={this.hasVideo()}
                 draftId={draft.id}

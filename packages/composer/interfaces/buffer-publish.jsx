@@ -84,7 +84,6 @@ const ComposerWrapper = ({
     environment: `${environment === 'development' ? 'local' : 'production'}`,
     should_enable_fb_autocomplete: true, // Deprecated features (to delete)
     enable_twitter_march_18_changes: true, // Deprecated features (to delete)
-    hasIGLocationTaggingFeature: true, // Deprecated features (to delete)
     // TODO: make should_use_new_twitter_autocomplete dynamic based on the
     // value of enabledApplicationModes.includes('web-twitter-typeahead-autocomplete')
     should_use_new_twitter_autocomplete: true,

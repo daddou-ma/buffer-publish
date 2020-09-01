@@ -41,7 +41,6 @@ module.exports = userData => ({
 
   // Deprecated features (to delete)
   has_simplified_free_plan_ux: false,
-  hasIGLocationTaggingFeature: true,
   hasIGDirectVideoFlip: true,
 
   /* TEMPORARY. TO BE MOVED TO ORGS AFTER ORG SWITCHER ROLLOUT */

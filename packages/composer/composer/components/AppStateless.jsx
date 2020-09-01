@@ -266,9 +266,6 @@ class AppStateless extends React.Component {
               metaData.shouldEnableFacebookAutocomplete
             }
             composerPosition={position}
-            hasIGLocationTaggingFeature={
-              userData.hasIGLocationTaggingFeature || false
-            }
             hasIGDirectVideoFlip={userData.hasIGDirectVideoFlip || false}
             hasUserTagFeature={userData.hasUserTagFeature || false}
             hasShopgridFlip={userData.hasShopgridFlip || false}
