@@ -39,9 +39,6 @@ module.exports = userData => ({
     'new_publish_beta_redirect'
   ),
 
-  // Deprecated features (to delete)
-  has_simplified_free_plan_ux: false,
-
   /* TEMPORARY. TO BE MOVED TO ORGS AFTER ORG SWITCHER ROLLOUT */
   // Org plan features
   hasCampaignsFeature: userData.features.includes('campaigns'),

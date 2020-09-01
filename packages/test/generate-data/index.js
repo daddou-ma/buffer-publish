@@ -55,7 +55,6 @@ const buildUser = build('User', {
     canSeeCampaignsReport: true,
     week_starts_monday: true,
     skip_empty_text_alert: false,
-    has_simplified_free_plan_ux: false,
     profileLimit: 50,
     s3_upload_signature: {
       algorithm: '',

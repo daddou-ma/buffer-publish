@@ -37,7 +37,6 @@ export const fakeUserData = {
   shouldAlwaysSkipEmptyTextAlert: false,
   profilesSchedulesSlots: [],
   onNewPublish: false,
-  hasSimplifiedFreePlanUX: true,
 };
 
 export const fakeImageData = {

@@ -147,12 +147,11 @@ ComposerWrapper.propTypes = {
     s3_upload_signature: PropTypes.shape({}).isRequired,
     hasTwentyFourHourTimeFormat: PropTypes.bool.isRequired,
     week_starts_monday: PropTypes.bool.isRequired,
-    profile_groups: PropTypes.PropTypes.array,
+    profile_groups: PropTypes.array,
     isFreeUser: PropTypes.bool.isRequired,
     skip_empty_text_alert: PropTypes.bool.isRequired,
     hasShareNextFeature: PropTypes.bool.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
-    has_simplified_free_plan_ux: PropTypes.bool.isRequired,
   }).isRequired,
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
   enabledApplicationModes: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -172,9 +171,6 @@ ComposerWrapper.propTypes = {
 };
 
 ComposerWrapper.defaultProps = {
-  userData: {
-    has_simplified_free_plan_ux: false,
-  },
   onEvent: null,
   profiles: [],
   enabledApplicationModes: [],

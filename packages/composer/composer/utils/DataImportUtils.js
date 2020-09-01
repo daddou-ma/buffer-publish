@@ -60,9 +60,12 @@ const DataImportUtils = {
     const dataImportEnv = DataImportUtils.formatDataImportEnv(env);
     const userData = DataImportUtils.formatUserData(dataImportEnv, data);
 
-    const defaultSaveButtons = userData.hasSimplifiedFreePlanUX
-      ? ['ADD_TO_QUEUE', 'SHARE_NOW', 'SCHEDULE_POST']
-      : ['ADD_TO_QUEUE', 'SHARE_NEXT', 'SHARE_NOW', 'SCHEDULE_POST'];
+    const defaultSaveButtons = [
+      'ADD_TO_QUEUE',
+      'SHARE_NEXT',
+      'SHARE_NOW',
+      'SCHEDULE_POST',
+    ];
 
     if (saveButtons === undefined) saveButtons = defaultSaveButtons;
 
@@ -184,7 +187,6 @@ const DataImportUtils = {
           isBusinessUser: userData.isBusinessUser,
           canStartProTrial: userData.canStartProTrial,
           shouldAlwaysSkipEmptyTextAlert: userData.skip_empty_text_alert,
-          hasSimplifiedFreePlanUX: userData.has_simplified_free_plan_ux,
           hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
           hasCampaignsFlip: userData.hasCampaignsFeature,
           hasUserTagFeature: userData.hasUserTagFeature,

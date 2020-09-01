@@ -157,7 +157,6 @@ const getNewUserData = data => ({
   shouldAlwaysSkipEmptyTextAlert: data.shouldAlwaysSkipEmptyTextAlert,
   profilesSchedulesSlots: data.profilesSchedulesSlots,
   onNewPublish: data.onNewPublish,
-  hasSimplifiedFreePlanUX: data.hasSimplifiedFreePlanUX,
   canStartProTrial: data.canStartProTrial,
   hasShopgridFlip: data.hasShopgridFlip,
   hasCampaignsFlip: data.hasCampaignsFlip,
