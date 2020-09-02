@@ -268,6 +268,11 @@ export default (state = initialState, action) => {
         userId: action.result.id,
         isFreeUser: action.result.isFreeUser,
         isOrganizationSwitcherEnabled: action.result.hasOrgSwitcherFeature,
+        profiles: filterProfilesByOrg(
+          state.profileList,
+          state.organization,
+          action.result.hasOrgSwitcherFeature
+        ),
       };
     }
     default:
