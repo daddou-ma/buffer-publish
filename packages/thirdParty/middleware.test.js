@@ -1,12 +1,11 @@
 // /* global FS, Appcues */
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import * as FS from '@fullstory/browser';
 import { actionTypes } from './reducer';
 
 import middleware from './middleware';
 
-global.FS = {
-  identify: jest.fn(),
-};
+jest.mock('@fullstory/browser');
 
 global.Appcues = {
   identify: jest.fn(),
@@ -80,7 +79,7 @@ describe('middleware', () => {
       result: mockFreeUser,
     };
     middleware(store)(next)(action);
-    expect(global.FS.identify).not.toHaveBeenCalled();
+    expect(FS.identify).not.toHaveBeenCalled();
   });
   it('identifies the user with Fullstory', () => {
     const action = {
@@ -88,7 +87,7 @@ describe('middleware', () => {
       result: mockUser,
     };
     middleware(store)(next)(action);
-    expect(global.FS.identify).toHaveBeenCalledWith(mockUser.id, {
+    expect(FS.identify).toHaveBeenCalledWith(mockUser.id, {
       pricingPlan_str: 'business',
     });
   });
