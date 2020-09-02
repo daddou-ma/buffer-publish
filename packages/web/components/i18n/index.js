@@ -22,7 +22,7 @@ i18n
     resources,
     lng,
     fallbackLng: 'en-US', // use en-US if detected lng is not available
-    debug: process.env.NODE_ENV !== 'production',
+    debug: false,
 
     interpolation: {
       escapeValue: false, // react already safes from xss

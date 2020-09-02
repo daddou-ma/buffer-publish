@@ -234,7 +234,7 @@ AppShell.propTypes = {
       isAdmin: PropTypes.bool,
     })
   ).isRequired,
-  selectedOrganizationId: PropTypes.string.isRequired,
+  selectedOrganizationId: PropTypes.string,
   profiles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -251,6 +251,7 @@ AppShell.defaultProps = {
   bannerOptions: null,
   bannerKey: null,
   isImpersonation: false,
+  selectedOrganizationId: null,
 };
 
 export default AppShell;

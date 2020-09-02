@@ -15,7 +15,7 @@ const EmptySlot = ({
 }) => {
   const { id, slot, profileService } = item;
   // if no posting time (unpinned), display custom label
-  const unpinnedLabel = !pinned && getLabel(profileService);
+  const unpinnedLabel = !pinned ? getLabel(profileService) : null;
   return (
     <PostEmptySlot
       key={id}

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const LoadingGate = ({ ready, children }) => (ready ? children : null);
 
 LoadingGate.propTypes = {
-  ready: PropTypes.bool.isRequired,
+  ready: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 

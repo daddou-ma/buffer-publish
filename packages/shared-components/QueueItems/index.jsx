@@ -82,8 +82,8 @@ const QueueItems = ({
             key={item.id}
             item={item}
             pinned={pinned}
-            customLabel={isStories && 'Add to Story'}
-            customHoverMessage={isStories && 'Schedule a Story'}
+            customLabel={isStories ? 'Add to Story' : null}
+            customHoverMessage={isStories ? 'Schedule a Story' : null}
             onEmptySlotClick={onEmptySlotClick}
           />
         );

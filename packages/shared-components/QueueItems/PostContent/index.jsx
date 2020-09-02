@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/require-default-props */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -117,7 +118,7 @@ const DraggablePost = ({
 }) => (
   <ErrorBoundaryWrapper
     post={post}
-    fallbackComponent={
+    fallbackComponent={() => (
       <PostDragWrapper
         id={post.id}
         index={index}
@@ -125,7 +126,7 @@ const DraggablePost = ({
         postProps={postProps}
         basic
       />
-    }
+    )}
   >
     <PostDragWrapper
       id={post.id}
@@ -150,7 +151,7 @@ const NonDraggablePost = ({
 }) => (
   <ErrorBoundaryWrapper
     post={post}
-    fallbackComponent={<PostComponent {...postProps} basic />}
+    fallbackComponent={() => <PostComponent {...postProps} basic />}
   >
     <PostComponent {...postProps} />
   </ErrorBoundaryWrapper>
