@@ -45,7 +45,6 @@ const initialState = {
   campaignsList: {
     campaigns: null,
   },
-  publishProfiles: [profile],
 };
 
 // eslint-disable-next-line react/prop-types

@@ -227,7 +227,7 @@ QueuedPosts.propTypes = {
   isBusinessAccount: PropTypes.bool,
   hasCampaignsFeature: PropTypes.bool,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
-  shouldDisplaySingleSlots: PropTypes.bool.isRequired,
+  shouldDisplaySingleSlots: PropTypes.bool,
   preserveComposerStateOnClose: PropTypes.bool,
 };
 
@@ -255,6 +255,7 @@ QueuedPosts.defaultProps = {
   isManager: false,
   isBusinessAccount: false,
   hasCampaignsFeature: false,
+  shouldDisplaySingleSlots: false,
   onCampaignTagClick: () => {},
 };
 

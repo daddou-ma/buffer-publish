@@ -46,6 +46,7 @@ const buildUser = build('User', {
       'stories_groups',
       'twitter-march-18-changes',
     ],
+    loaded: true,
     hasCampaignsFeature: true,
     hasTwentyFourHourTimeFormat: false,
     showBusinessTrialistsOnboarding: false,

@@ -19,8 +19,10 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
 
 export const initialState = {
   profiles: [],
+  profileList: [],
   selectedProfileId: '',
   loading: false,
+  loaded: false,
   selectedProfile: {},
   isLockedProfile: false,
   isBusinessAccount: false,
@@ -159,6 +161,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        loaded: true,
         profileList: action.result,
         profiles: filterProfilesByOrg(
           action.result,
@@ -265,6 +268,11 @@ export default (state = initialState, action) => {
         userId: action.result.id,
         isFreeUser: action.result.isFreeUser,
         isOrganizationSwitcherEnabled: action.result.hasOrgSwitcherFeature,
+        profiles: filterProfilesByOrg(
+          state.profileList,
+          state.organization,
+          action.result.hasOrgSwitcherFeature
+        ),
       };
     }
     default:

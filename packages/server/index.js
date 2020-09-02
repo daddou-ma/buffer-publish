@@ -164,39 +164,17 @@ app.get('*', (req, res) => {
   const modalKey = req.query.mk ? req.query.mk : null;
   const modalValue = req.query.mv ? req.query.mv : null;
 
-  Promise.all([
-    userMethod
-      .fn(null, req, res, { PublishAPI, parsers: { userParser, orgParser } })
-      .catch(err => {
-        bufflog.error(`Error prefetching user: ${err.message}`, err);
-        return undefined;
-      }),
-    profilesMethod.fn(null, req, res).catch(err => {
-      bufflog.error(`Error prefetching profiles: ${err.message}`, err);
-      return undefined;
-    }),
-    orgsMethod
-      .fn(null, req, res, { PublishAPI, parsers: { orgParser } })
-      .catch(err => {
-        bufflog.error(`Error prefetching organizations: ${err.message}`, err);
-        return undefined;
-      }),
-  ]).then(([user, profiles, organizations]) => {
-    res.send(
-      getHtml({
-        isProduction,
-        isStandalone,
-        staticAssets,
-        notification,
-        userId,
-        modalKey,
-        modalValue,
-        user,
-        profiles,
-        organizations,
-      })
-    );
-  });
+  res.send(
+    getHtml({
+      isProduction,
+      isStandalone,
+      staticAssets,
+      notification,
+      userId,
+      modalKey,
+      modalValue,
+    })
+  );
 });
 
 server.listen(PORT, () => {

@@ -9,8 +9,6 @@ const getAppcuesScript = require('./embeds/appcues');
 const getFullstoryScript = require('./embeds/fullstory');
 const getIterateScript = require('./embeds/iterate');
 const getBugsnagScript = require('./embeds/bugsnag');
-const getUserScript = require('./embeds/user');
-const getBufferDataScript = require('./embeds/bufferData');
 const getBundleReminderHtml = require('./embeds/bundleReminder');
 const getDatadogRumScript = require('./embeds/datadogRum');
 
@@ -26,8 +24,6 @@ const getHtml = ({
   modalKey,
   modalValue,
   user,
-  profiles,
-  organizations,
 }) => {
   return fs
     .readFileSync(join(__dirname, '..', 'index.html'), 'utf8')
@@ -46,17 +42,8 @@ const getHtml = ({
       '{{{iterateScript}}}',
       getIterateScript({ isProduction, isStandalone })
     )
-    .replace('{{{userScript}}}', getUserScript({ id: userId }))
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
     .replace('{{{segmentScript}}}', getSegmentScript({ isProduction }))
-    .replace(
-      '{{{bufferData}}}',
-      getBufferDataScript({
-        user,
-        profiles,
-        organizations,
-      })
-    )
     .replace(
       '{{{bugsnagScript}}}',
       getBugsnagScript({ userId, isProduction, isStandalone })

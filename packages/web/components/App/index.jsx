@@ -11,6 +11,7 @@ import AppModals from '@bufferapp/publish-modals';
 import CTABanner from '@bufferapp/publish-cta-banner';
 import TemporaryBanner from '@bufferapp/publish-temporary-banner';
 import ThirdParty from '@bufferapp/publish-thirdparty';
+import LoadingGate from '../LoadingGate';
 
 const ThirdPartyWithRouter = withRouter(ThirdParty);
 const AppPagesWithRouter = withRouter(AppPages);
@@ -38,9 +39,11 @@ class App extends Component {
       <div style={appStyle} className="notranslate">
         <AppShell>
           <div style={contentStyle}>
-            <CTABanner />
-            <TemporaryBanner />
-            <AppPagesWithRouter />
+            <LoadingGate>
+              <CTABanner />
+              <TemporaryBanner />
+              <AppPagesWithRouter />
+            </LoadingGate>
           </div>
         </AppShell>
         <Notifications />
