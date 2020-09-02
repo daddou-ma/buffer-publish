@@ -37,9 +37,6 @@ export const fakeUserData = {
   shouldAlwaysSkipEmptyTextAlert: false,
   profilesSchedulesSlots: [],
   onNewPublish: false,
-  hasSimplifiedFreePlanUX: true,
-  hasIGLocationTaggingFeature: true,
-  hasIGDirectVideoFlip: true,
 };
 
 export const fakeImageData = {

@@ -207,7 +207,6 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
   getDrafts: () => state.drafts,
 
   getInvalidEnabledDraftsFeedback: () => {
-    const { hasIGDirectVideoFlip } = AppStore.getUserData();
     const selectedIgProfiles = AppStore.getSelectedProfilesForService(
       'instagram'
     );
@@ -250,12 +249,10 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
 
         let validationResultVideo = new ValidationSuccess();
 
-        // Only validate videos if they have the IG Direct Video feature
-        // and there is at least one IG business profile selected
+        // Only validate videos if there is at least one IG business profile selected
         const shouldValidateVideoForInstagram =
-          draft.service.name === 'instagram' &&
-          hasIGDirectVideoFlip &&
-          hasSomeIGDirectProfilesSelected;
+          draft.service.name === 'instagram' 
+          && hasSomeIGDirectProfilesSelected;
 
         if (shouldValidateVideoForInstagram) {
           validationResultVideo = validateVideoForInstagram(draft.video);
@@ -2046,26 +2043,6 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
         code: 'GALLERY',
       },
     },
-    videoPosting: {
-      onlyWith: {
-        message: `Due to Instagram limitations, we can't post videos on your behalf.
-          You will receive a Reminder to post manually when the time comes!`,
-        composerId: 'instagram',
-        code: 'VIDEO',
-      },
-      onlyWithout: {
-        message: `To post a video to Instagram, you'll need to set up Reminders. Reminders aren’t set up for ${usernameList}.
-           Finish scheduling your post, then visit the queue for ${usernameList} to set up Reminders!`,
-        composerId: 'instagram',
-        code: 'VIDEO',
-      },
-      mixed: {
-        message: `Reminders aren’t set up for ${usernameList}. To post a video to Instagram, you’ll need to set up Reminders.
-           Finish scheduling your post, then visit the queue for ${usernameList} to set up Reminders!`,
-        composerId: 'instagram',
-        code: 'VIDEO',
-      },
-    },
     mixScheduling: {
       onlyWith: {
         message: `Some of your accounts aren't enabled for Direct Scheduling, we'll send out Reminders
@@ -2113,7 +2090,6 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
 };
 
 const updateInstagramDraftsFeedback = () => {
-  const { hasIGDirectVideoFlip } = AppStore.getUserData();
   const instagramDraft = ComposerStore.getEnabledDrafts().filter(
     draft => draft.id === 'instagram'
   )[0];
@@ -2142,11 +2118,8 @@ const updateInstagramDraftsFeedback = () => {
     isImageOrGalleryError && instagramDraft.images.length > 1;
   const isVideoRatioError =
     isMediaError &&
-    hasIGDirectVideoFlip &&
     instagramDraft.video &&
     passesVideoAspectRatioTest(instagramDraft) === false;
-  const isVideoDirectSchedulingError =
-    isMediaError && !hasIGDirectVideoFlip && instagramDraft.video !== null;
   const hasMixSchedulingError =
     hasSomeEnabledProfiles && hasSomeDisabledProfiles;
 
@@ -2158,8 +2131,6 @@ const updateInstagramDraftsFeedback = () => {
     feedbackObject = getReminderMessage(selectedIgProfiles, 'gallery');
   } else if (isVideoRatioError) {
     feedbackObject = getReminderMessage(selectedIgProfiles, 'videoRatio');
-  } else if (isVideoDirectSchedulingError) {
-    feedbackObject = getReminderMessage(selectedIgProfiles, 'videoPosting');
   } else if (hasMixSchedulingError) {
     feedbackObject = getReminderMessage(selectedIgProfiles, 'mixScheduling');
   }

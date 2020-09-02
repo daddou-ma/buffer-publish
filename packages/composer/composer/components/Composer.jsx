@@ -163,9 +163,7 @@ class Composer extends React.Component {
       left: PropTypes.number,
       right: PropTypes.number,
     }),
-    hasIGLocationTaggingFeature: PropTypes.bool,
     canStartProTrial: PropTypes.bool,
-    hasIGDirectVideoFlip: PropTypes.bool,
     hasShopgridFlip: PropTypes.bool,
     hasUserTagFeature: PropTypes.bool,
     isFreeUser: PropTypes.bool.isRequired,
@@ -176,9 +174,7 @@ class Composer extends React.Component {
   static defaultProps = {
     children: null,
     composerPosition: null,
-    hasIGLocationTaggingFeature: false,
     canStartProTrial: false,
-    hasIGDirectVideoFlip: false,
     hasUserTagFeature: false,
     hasShopgridFlip: false,
     profiles: [],
@@ -656,8 +652,6 @@ class Composer extends React.Component {
       children,
       shouldShowInlineSubprofileDropdown,
       composerPosition,
-      hasIGLocationTaggingFeature,
-      hasIGDirectVideoFlip,
       hasUserTagFeature,
       hasShopgridFlip,
       draftMode,
@@ -832,7 +826,6 @@ class Composer extends React.Component {
       this.hasVideo() &&
       this.isExpanded() &&
       this.hasIGDirectPostingEnabled() &&
-      hasIGDirectVideoFlip &&
       profileIsProOrBusiness &&
       composerFeedbackMessages.length < 1 && // don't allow user to edit thumbnail if can't add to queue
       draft.instagramFeedback.length < 1 && // don't allow user to edit thumbnail if post is reminder
@@ -1220,8 +1213,6 @@ class Composer extends React.Component {
                 withMediaAttachment={!usesImageFirstLayout}
                 selectedProfiles={selectedProfiles}
                 isInstagram={this.isInstagram()}
-                hasIGLocationTaggingFeature={hasIGLocationTaggingFeature}
-                hasIGDirectVideoFlip={hasIGDirectVideoFlip}
                 hasVideo={this.hasVideo()}
                 draftId={draft.id}
                 locationName={locationName}

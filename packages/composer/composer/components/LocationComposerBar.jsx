@@ -21,8 +21,6 @@ class LocationComposerBar extends React.Component {
       })
     ).isRequired,
     isInstagram: PropTypes.bool.isRequired,
-    hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
-    hasIGDirectVideoFlip: PropTypes.bool.isRequired,
     hasVideo: PropTypes.bool.isRequired,
     withMediaAttachment: PropTypes.bool,
   };
@@ -33,22 +31,6 @@ class LocationComposerBar extends React.Component {
     instagramProfileId: null,
     places: [],
     withMediaAttachment: false,
-  };
-
-  shouldShowLocationBar = () => {
-    const {
-      selectedProfiles,
-      isInstagram,
-      hasIGLocationTaggingFeature,
-      hasIGDirectVideoFlip,
-      hasVideo,
-    } = this.props;
-    return (
-      isInstagram &&
-      selectedProfiles.some(profile => profile.instagramDirectEnabled) &&
-      hasIGLocationTaggingFeature &&
-      ((hasVideo && hasIGDirectVideoFlip) || !hasVideo)
-    );
   };
 
   onChange = (event, value) => {
@@ -81,6 +63,14 @@ class LocationComposerBar extends React.Component {
         ComposerActionCreators.updateDraftListPlaces(this.props.draftId, []);
       });
   }, 450);
+
+  shouldShowLocationBar = () => {
+    const { selectedProfiles, isInstagram } = this.props;
+    return (
+      isInstagram &&
+      selectedProfiles.some(profile => profile.instagramDirectEnabled)
+    );
+  };
 
   saveLocation = newPlace => {
     ComposerActionCreators.updateDraftLocation(
