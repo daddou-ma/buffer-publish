@@ -19,6 +19,7 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
 
 export const initialState = {
   profiles: [],
+  profileList: [],
   selectedProfileId: '',
   loading: false,
   loaded: false,

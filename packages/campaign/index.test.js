@@ -55,10 +55,10 @@ const campaigns = [campaign];
 const profiles = [profileTwitter];
 const initialState = {
   user,
-  publishProfiles: profiles,
   profileSidebar: {
     selectedProfileId: profileTwitter.id,
     selectedProfile: profileTwitter,
+    profileList: profiles,
     profiles,
   },
 };

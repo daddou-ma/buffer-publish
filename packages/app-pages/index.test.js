@@ -36,12 +36,13 @@ const profileIG = buildIGProfile({
 const profiles = [profileTwitter, profileIG];
 const initialState = {
   user: buildUser(),
-  publishProfiles: profiles,
-  organizations: { selected: { id: organization.id } },
+  organizations: { selected: { id: organization.id }, loaded: true },
   profileSidebar: {
     selectedProfileId: profileTwitter.id,
     selectedProfile: profileTwitter,
+    profileList: profiles,
     profiles,
+    loaded: true,
   },
 };
 

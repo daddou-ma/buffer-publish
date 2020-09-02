@@ -25,6 +25,8 @@ describe('reducer', () => {
       isSearchPopupVisible: false,
       searchText: null,
       isOrganizationSwitcherEnabled: false,
+      loaded: false,
+      profileList: [],
     };
     const action = {
       type: 'INIT',

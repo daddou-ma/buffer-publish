@@ -48,12 +48,10 @@ import temporaryBannerReducer from '@bufferapp/publish-temporary-banner/reducer'
 import creditCardFormReducer from '@bufferapp/publish-credit-card-form/reducer';
 import userReducer from '@bufferapp/publish-data-user/reducer';
 import orgReducer from '@bufferapp/publish-data-organizations/reducer';
-import profilesReducer from '@bufferapp/publish-data-profiles/reducer';
 
 export default {
   user: userReducer,
   organizations: orgReducer,
-  publishProfiles: profilesReducer,
   form: formReducer,
   queue: queueReducer,
   sent: sentReducer,
